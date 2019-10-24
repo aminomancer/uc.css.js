@@ -1,0 +1,358 @@
+/* context menus */
+#toolbar-context-menu,
+#tabContextMenu,
+#contentAreaContextMenu,
+#back-button>menupopup,
+#forward-button>menupopup,
+#backForwardMenu,
+#placesContext,
+#viewButton>menupopup,
+#pageActionContextMenu,
+.urlbar-input-box .textbox-contextmenu,
+#widget-overflow #customizationPanelItemContextMenu,
+.search-one-offs-context-menu,
+#SyncedTabsSidebarContext,
+.textbox-contextmenu,
+#customizationPanelItemContextMenu,
+#customizationPaletteItemContextMenu,
+#customization-toolbar-menu,
+#main-menubar menupopup,
+#toolbar-context-menu menupopup,
+#tabContextMenu menupopup,
+#contentAreaContextMenu menupopup,
+#back-button>menupopup menupopup,
+#forward-button>menupopup menupopup,
+#backForwardMenu menupopup,
+#toolbar-context-menu menupopup,
+#placesContext menupopup,
+#viewButton>menupopup menupopup,
+#pageActionContextMenu menupopup,
+.urlbar-input-box .textbox-contextmenu menupopup,
+#widget-overflow #customizationPanelItemContextMenu menupopup,
+.search-one-offs-context-menu menupopup,
+#SyncedTabsSidebarContext menupopup,
+.textbox-contextmenu menupopup,
+#customizationPanelItemContextMenu menupopup,
+#customizationPaletteItemContextMenu menupopup,
+#customization-toolbar-menu menupopup {
+    -moz-appearance: none !important;
+    background: #171928 !important;
+    border: none !important;
+    border-radius: 3px !important;
+    margin: 0px 0 0 0 !important;
+    overflow: hidden !important;
+}
+
+.panel-arrowcontent {
+    border-radius: 5px !important;
+    overflow: hidden !important;
+}
+
+#toolbar-context-menu menuseparator,
+#tabContextMenu menuseparator,
+#contentAreaContextMenu menuseparator,
+#back-button>menupopup menuseparator,
+#forward-button>menupopup menuseparator,
+#backForwardMenu menuseparator,
+#toolbar-context-menu menuseparator,
+#placesContext menuseparator,
+#viewButton>menupopup menuseparator,
+#pageActionContextMenu menuseparator,
+.urlbar-input-box .textbox-contextmenu menuseparator,
+#widget-overflow #customizationPanelItemContextMenu menuseparator,
+.search-one-offs-context-menu menuseparator,
+#SyncedTabsSidebarContext menuseparator,
+.textbox-contextmenu menuseparator,
+#customizationPanelItemContextMenu menuseparator,
+#customizationPaletteItemContextMenu menuseparator,
+#customization-toolbar-menu menuseparator,
+#main-menubar menupopup menuseparator {
+    visibility: hidden !important;
+    display: none !important;
+}
+
+#toolbar-context-menu :-moz-any(menuitem, menu),
+#tabContextMenu :-moz-any(menuitem, menu),
+#contentAreaContextMenu :-moz-any(menuitem, menu),
+#back-button>menupopup :-moz-any(menuitem, menu),
+#forward-button>menupopup :-moz-any(menuitem, menu),
+#backForwardMenu :-moz-any(menuitem, menu),
+#toolbar-context-menu :-moz-any(menuitem, menu),
+#placesContext :-moz-any(menuitem, menu),
+#viewButton>menupopup :-moz-any(menuitem, menu),
+#pageActionContextMenu :-moz-any(menuitem, menu),
+.urlbar-input-box .textbox-contextmenu :-moz-any(menuitem, menu),
+#widget-overflow #customizationPanelItemContextMenu :-moz-any(menuitem, menu),
+.search-one-offs-context-menu :-moz-any(menuitem, menu),
+#SyncedTabsSidebarContext :-moz-any(menuitem, menu),
+.textbox-contextmenu :-moz-any(menuitem, menu),
+#customizationPanelItemContextMenu :-moz-any(menuitem, menu),
+#customizationPaletteItemContextMenu :-moz-any(menuitem, menu),
+#customization-toolbar-menu :-moz-any(menuitem, menu),
+#main-menubar menupopup :-moz-any(menuitem, menu) {
+    -moz-appearance: none !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+    padding: 0 0 0 0 !important;
+    min-height: 25px !important;
+}
+
+#toolbar-context-menu :-moz-any(menuitem, menu)[disabled="true"],
+#tabContextMenu :-moz-any(menuitem, menu)[disabled="true"],
+#contentAreaContextMenu :-moz-any(menuitem, menu)[disabled="true"],
+#back-button>menupopup :-moz-any(menuitem, menu)[disabled="true"],
+#forward-button>menupopup :-moz-any(menuitem, menu)[disabled="true"],
+#backForwardMenu :-moz-any(menuitem, menu)[disabled="true"],
+#toolbar-context-menu :-moz-any(menuitem, menu)[disabled="true"],
+#placesContext :-moz-any(menuitem, menu)[disabled="true"],
+#viewButton>menupopup :-moz-any(menuitem, menu)[disabled="true"],
+#pageActionContextMenu :-moz-any(menuitem, menu)[disabled="true"],
+.urlbar-input-box .textbox-contextmenu :-moz-any(menuitem, menu)[disabled="true"],
+#widget-overflow #customizationPanelItemContextMenu :-moz-any(menuitem, menu)[disabled="true"],
+.search-one-offs-context-menu :-moz-any(menuitem, menu)[disabled="true"],
+#SyncedTabsSidebarContext :-moz-any(menuitem, menu)[disabled="true"],
+.textbox-contextmenu :-moz-any(menuitem, menu)[disabled="true"],
+#customizationPanelItemContextMenu :-moz-any(menuitem, menu)[disabled="true"],
+#customizationPaletteItemContextMenu :-moz-any(menuitem, menu)[disabled="true"],
+#customization-toolbar-menu :-moz-any(menuitem, menu)[disabled="true"],
+#main-menubar menupopup :-moz-any(menuitem, menu)[disabled="true"] {
+    -moz-appearance: none !important;
+    color: rgba(255, 255, 255, 0.45) !important;
+    background-color: initial !important;
+}
+
+#toolbar-context-menu menuseparator:not(:first-of-type):not([hidden="true"])+ :-moz-any(menu, menuitem),
+#tabContextMenu menuseparator:not(:first-of-type):not([hidden="true"])+ :-moz-any(menu, menuitem),
+#contentAreaContextMenu menuseparator:not(:first-of-type):not([hidden="true"])+ :-moz-any(menu, menuitem),
+#back-button>menupopup menuseparator:not(:first-of-type):not([hidden="true"])+ :-moz-any(menu, menuitem),
+#forward-button>menupopup menuseparator:not(:first-of-type):not([hidden="true"])+ :-moz-any(menu, menuitem),
+#backForwardMenu menuseparator:not(:first-of-type):not([hidden="true"])+ :-moz-any(menu, menuitem),
+#toolbar-context-menu menuseparator:not(:first-of-type):not([hidden="true"])+ :-moz-any(menu, menuitem),
+#placesContext menuseparator:not(:first-of-type):not([hidden="true"])+ :-moz-any(menu, menuitem),
+#viewButton>menupopup menuseparator:not(:first-of-type):not([hidden="true"])+ :-moz-any(menu, menuitem),
+#pageActionContextMenu menuseparator:not(:first-of-type):not([hidden="true"])+ :-moz-any(menu, menuitem),
+.urlbar-input-box .textbox-contextmenu menuseparator:not(:first-of-type):not([hidden="true"])+ :-moz-any(menu, menuitem),
+#widget-overflow #customizationPanelItemContextMenu menuseparator:not(:first-of-type):not([hidden="true"])+ :-moz-any(menu, menuitem),
+.search-one-offs-context-menu menuseparator:not(:first-of-type):not([hidden="true"])+ :-moz-any(menu, menuitem),
+#SyncedTabsSidebarContext menuseparator:not(:first-of-type):not([hidden="true"])+ :-moz-any(menu, menuitem),
+.textbox-contextmenu menuseparator:not(:first-of-type):not([hidden="true"])+ :-moz-any(menu, menuitem),
+#customizationPanelItemContextMenu menuseparator:not(:first-of-type):not([hidden="true"])+ :-moz-any(menu, menuitem),
+#customizationPaletteItemContextMenu menuseparator:not(:first-of-type):not([hidden="true"])+ :-moz-any(menu, menuitem),
+#customization-toolbar-menu menuseparator:not(:first-of-type):not([hidden="true"])+ :-moz-any(menu, menuitem),
+#main-menubar menupopup menuseparator:not(:first-of-type):not([hidden="true"])+ :-moz-any(menu, menuitem) {
+    border-image: linear-gradient(to right, transparent 1%, #363A59CC 40%, #363A59 50%, #363A59CC 60%, transparent 99%) !important;
+    border-image-slice: 1 !important;
+    border-top-width: 1px !important;
+    border-top-style: solid !important;
+}
+
+#toolbar-context-menu :-moz-any(menuitem, menu) image,
+#tabContextMenu :-moz-any(menuitem, menu) image,
+#contentAreaContextMenu :-moz-any(menuitem, menu) image,
+#back-button>menupopup :-moz-any(menuitem, menu) image,
+#forward-button>menupopup :-moz-any(menuitem, menu) image,
+#backForwardMenu :-moz-any(menuitem, menu) image,
+#toolbar-context-menu :-moz-any(menuitem, menu) image,
+#placesContext :-moz-any(menuitem, menu) image,
+#viewButton>menupopup :-moz-any(menuitem, menu) image,
+#pageActionContextMenu :-moz-any(menuitem, menu) image,
+.urlbar-input-box .textbox-contextmenu :-moz-any(menuitem, menu) image,
+#widget-overflow #customizationPanelItemContextMenu :-moz-any(menuitem, menu) image,
+.search-one-offs-context-menu :-moz-any(menuitem, menu) image,
+#SyncedTabsSidebarContext :-moz-any(menuitem, menu) image,
+.textbox-contextmenu :-moz-any(menuitem, menu) image,
+#customizationPanelItemContextMenu :-moz-any(menuitem, menu) image,
+#customizationPaletteItemContextMenu :-moz-any(menuitem, menu) image,
+#customization-toolbar-menu :-moz-any(menuitem, menu) image,
+#main-menubar menupopup :-moz-any(menuitem, menu) image {
+    margin-left: 3px;
+    margin-right: -3px;
+}
+
+#contentAreaContextMenu>*>*>image {
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+}
+
+#toolbar-context-menu menugroup,
+#tabContextMenu menugroup,
+#contentAreaContextMenu menugroup,
+#back-button>menupopup menugroup,
+#forward-button>menupopup menugroup,
+#backForwardMenu menugroup,
+#toolbar-context-menu menugroup,
+#placesContext menugroup,
+#viewButton>menupopup menugroup,
+#pageActionContextMenu menugroup,
+.urlbar-input-box .textbox-contextmenu menugroup,
+#widget-overflow #customizationPanelItemContextMenu menugroup,
+.search-one-offs-context-menu menugroup,
+#SyncedTabsSidebarContext menugroup,
+.textbox-contextmenu menugroup,
+#customizationPanelItemContextMenu menugroup,
+#customizationPaletteItemContextMenu menugroup,
+#customization-toolbar-menu menugroup,
+#main-menubar menupopup menugroup {
+    padding: 0 !important;
+    background-color: transparent !important;
+}
+
+#toolbar-context-menu .menu-right,
+#tabContextMenu .menu-right,
+#contentAreaContextMenu .menu-right,
+#back-button>menupopup .menu-right,
+#forward-button>menupopup .menu-right,
+#backForwardMenu .menu-right,
+#toolbar-context-menu .menu-right,
+#placesContext .menu-right,
+#viewButton>menupopup .menu-right,
+#pageActionContextMenu .menu-right,
+.urlbar-input-box .textbox-contextmenu .menu-right,
+#widget-overflow #customizationPanelItemContextMenu .menu-right,
+.search-one-offs-context-menu .menu-right,
+#SyncedTabsSidebarContext .menu-right,
+.textbox-contextmenu .menu-right,
+#customizationPanelItemContextMenu .menu-right,
+#customizationPaletteItemContextMenu .menu-right,
+#customization-toolbar-menu .menu-right,
+#main-menubar menupopup .menu-right {
+    -moz-appearance: none !important;
+    padding: 7px !important;
+    margin-right: 6px !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(-45deg) scale(.35);
+}
+
+#toolbar-context-menu :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
+#tabContextMenu :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
+#contentAreaContextMenu :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
+#back-button>menupopup :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
+#forward-button>menupopup :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
+#backForwardMenu :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
+#toolbar-context-menu :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
+#placesContext :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
+#viewButton>menupopup :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
+#pageActionContextMenu :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
+.urlbar-input-box .textbox-contextmenu :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
+#widget-overflow #customizationPanelItemContextMenu :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
+.search-one-offs-context-menu :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
+#SyncedTabsSidebarContext :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
+.textbox-contextmenu :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
+#customizationPanelItemContextMenu :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
+#customizationPaletteItemContextMenu :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
+#customization-toolbar-menu :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
+#main-menubar menupopup :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]) {
+    -moz-appearance: none !important;
+    background-color: #363A59 !important;
+}
+
+:-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"])[disabled="true"] {
+    background: none !important;
+    -moz-appearance: none !important;
+}
+
+.subviewbutton:-moz-any(:hover, [_moz-menuactive="true"])[disabled="true"] {
+    color: var(--panel-disabled-color) !important;
+}
+
+#backForwardMenu menuitem[type="checkbox"]>.menu-iconic-left>.menu-iconic-icon,
+#backForwardMenu menuitem[checked="true"]>.menu-iconic-left>.menu-iconic-icon,
+#backForwardMenu menuitem[type="radio"]>.menu-iconic-left>.menu-iconic-icon,
+#back-button menuitem[type="checkbox"]>.menu-iconic-left>.menu-iconic-icon,
+#back-button menuitem[checked="true"]>.menu-iconic-left>.menu-iconic-icon,
+#back-button menuitem[type="radio"]>.menu-iconic-left>.menu-iconic-icon,
+#forward-button menuitem[type="checkbox"]>.menu-iconic-left>.menu-iconic-icon,
+#forward-button menuitem[checked="true"]>.menu-iconic-left>.menu-iconic-icon,
+#forward-button menuitem[type="radio"]>.menu-iconic-left>.menu-iconic-icon {
+    display: -moz-box !important;
+}
+
+#backForwardMenu menuitem[type="radio"]>.menu-iconic-left,
+#back-button menuitem[type="radio"]>.menu-iconic-left,
+#forward-button menuitem[type="radio"]>.menu-iconic-left {
+    -moz-appearance: none !important;
+    padding-right: 7px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity !important;
+    background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTIgMmM1LjUxNCAwIDEwIDQuNDg2IDEwIDEwcy00LjQ4NiAxMC0xMCAxMC0xMC00LjQ4Ni0xMC0xMCA0LjQ4Ni0xMCAxMC0xMHptMC0yYy02LjYyNyAwLTEyIDUuMzczLTEyIDEyczUuMzczIDEyIDEyIDEyIDEyLTUuMzczIDEyLTEyLTUuMzczLTEyLTEyLTEyem0wIDZjLTMuMzEzIDAtNiAyLjY4Ny02IDZzMi42ODcgNiA2IDZjMy4zMTQgMCA2LTIuNjg3IDYtNnMtMi42ODYtNi02LTZ6IiBmaWxsPSJjb250ZXh0LWZpbGwiIGZpbGwtb3BhY2l0eT0iY29udGV4dC1maWxsLW9wYWNpdHkiLz48L3N2Zz4=") 6.5px 1px no-repeat !important;
+    background-size: 15px !important;
+    padding-left: 3px !important;
+}
+
+#backForwardMenu menuitem[type="radio"],
+#back-button menuitem[type="radio"],
+#forward-button menuitem[type="radio"] {
+    padding: 0px !important;
+    color: white !important;
+}
+
+/* style all OS-styled javascript modal prompts */
+tabmodalprompt {
+    background-color: rgba(10, 10, 10, 0.5) !important;
+}
+
+.paymentDialogContainerFrame {
+    background-color: var(--toolbar-bgcolor) !important;
+    color: var(--lwt-text-color, -moz-dialogtext) !important;
+}
+
+.tabmodalprompt-mainContainer {
+    background-color: var(--toolbar-bgcolor) !important;
+    border: none !important;
+    color: #FFF !important;
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.25), 0px 0px 5px -1px rgba(0, 0, 0, 0.125) !important;
+}
+
+.tabmodalprompt-mainContainer textbox {
+    border-radius: 3px !important;
+}
+
+.tabmodalprompt-buttonContainer button {
+    -moz-appearance: none !important;
+    border-radius: 3px !important;
+    background-color: var(--lwt-toolbar-field-background-color) !important;
+    flex: auto !important;
+    color: #fff !important;
+    padding: 2px !important;
+}
+
+.tabmodalprompt-buttonContainer button:hover {
+    background-color: var(--autocomplete-popup-highlight-background) !important;
+    flex: auto !important;
+    color: #fff !important;
+}
+
+.tabmodalprompt-buttonContainer .button-text {
+    margin-top: 0.5px !important;
+}
+
+.tabmodalprompt-buttonContainer spacer {
+    display: none !important;
+}
+
+.tabmodalprompt-buttonContainer {
+    display: flex !important;
+}
+
+.tabmodalprompt-checkboxContainer .checkbox-check {
+    -moz-appearance: none !important;
+    background-color: transparent !important;
+    border: none !important;
+    width: 12px !important;
+    -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity !important;
+    fill: currentColor !important;
+    padding: 1px !important;
+    opacity: 0.8 !important;
+    list-style-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNNSAyYy0xLjY1NCAwLTMgMS4zNDYtMyAzdjE0YzAgMS42NTQgMS4zNDYgMyAzIDNoMTRjMS42NTQgMCAzLTEuMzQ2IDMtM3YtMTRjMC0xLjY1NC0xLjM0Ni0zLTMtM2gtMTR6bTE5IDN2MTRjMCAyLjc2MS0yLjIzOCA1LTUgNWgtMTRjLTIuNzYyIDAtNS0yLjIzOS01LTV2LTE0YzAtMi43NjEgMi4yMzgtNSA1LTVoMTRjMi43NjIgMCA1IDIuMjM5IDUgNXoiIGZpbGw9ImNvbnRleHQtZmlsbCIgZmlsbC1vcGFjaXR5PSJjb250ZXh0LWZpbGwtb3BhY2l0eSIvPjwvc3ZnPg==") !important;
+}
+
+.tabmodalprompt-checkboxContainer .checkbox-check[checked="true"] {
+    -moz-appearance: none !important;
+    background-color: transparent !important;
+    border: none !important;
+    width: 12px !important;
+    padding: 1px !important;
+    opacity: 0.8 !important;
+    list-style-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTAuMDQxIDE3bC00LjUtNC4zMTkgMS4zOTUtMS40MzUgMy4wOCAyLjkzNyA3LjAyMS03LjE4MyAxLjQyMiAxLjQwOS04LjQxOCA4LjU5MXptLTUuMDQxLTE1Yy0xLjY1NCAwLTMgMS4zNDYtMyAzdjE0YzAgMS42NTQgMS4zNDYgMyAzIDNoMTRjMS42NTQgMCAzLTEuMzQ2IDMtM3YtMTRjMC0xLjY1NC0xLjM0Ni0zLTMtM2gtMTR6bTE5IDN2MTRjMCAyLjc2MS0yLjIzOCA1LTUgNWgtMTRjLTIuNzYyIDAtNS0yLjIzOS01LTV2LTE0YzAtMi43NjEgMi4yMzgtNSA1LTVoMTRjMi43NjIgMCA1IDIuMjM5IDUgNXoiIGZpbGw9ImNvbnRleHQtZmlsbCIgZmlsbC1vcGFjaXR5PSJjb250ZXh0LWZpbGwtb3BhY2l0eSIvPjwvc3ZnPg==") !important;
+}
