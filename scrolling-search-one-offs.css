@@ -1,0 +1,158 @@
+.search-panel-header {
+    display: none !important;
+}
+
+.search-setting-button-compact {
+    display: none !important;
+}
+
+.searchbar-engine-one-off-item {
+    min-width: 28px !important;
+    height: 28px !important;
+    border-radius: 3px !important;
+    margin-top: 1.5px !important;
+    margin-left: 2.2px !important;
+    margin-right: 1px !important;
+}
+
+.searchbar-engine-one-off-item .button-icon {
+    height: 17px !important;
+    width: 17px !important;
+}
+
+.searchbar-engine-one-off-item:not([selected]):hover,
+.addengine-item:hover {
+    background-color: var(--arrowpanel-dimmed) !important;
+}
+
+.searchbar-engine-one-off-item[selected],
+.searchbar-engine-one-off-item:hover:active,
+.addengine-item[selected],
+.addengine-item:hover:active {
+    background-color: var(--arrowpanel-dimmed-even-further) !important;
+}
+
+.urlbarView {
+    overflow: visible !important;
+    top: 3.5px !important;
+    margin: 0 !important;
+    width: calc(100% + 6px) !important;
+    left: -3px !important;
+    position: relative !important;
+}
+
+.urlbarView .search-panel-one-offs {
+    width: -moz-fit-content !important;
+    margin: 0 !important;
+    background-color: var(--urlbar-results-bgcolor) !important;
+    display: -moz-box !important;
+    scrollbar-width: none !important;
+    padding-bottom: 4px !important;
+    padding-top: 2px !important;
+    cursor: default !important;
+}
+
+.urlbarView .search-one-offs {
+    margin-top: -2px !important;
+    padding: 0 !important;
+    border: none !important;
+    margin-right: 3.5px !important;
+    margin-left: 0.5px !important;
+    position: absolute !important;
+    top: -35.4px !important;
+    right: -1px !important;
+    max-width: 278px !important;
+    z-index: 0 !important;
+    overflow-x: scroll !important;
+    scroll-behavior: smooth !important;
+    scrollbar-width: none !important;
+    float: right !important;
+    left: auto !important;
+    cursor: default !important;
+    box-sizing: border-box !important;
+    padding-left: 30px !important;
+    border-right: 3px solid transparent !important;
+}
+
+.urlbarView .search-panel-one-offs-container {
+    margin-left: -3px !important;
+}
+
+#urlbar[usertyping="true"] #urlbar-input {
+    z-index: 1 !important;
+    position: relative !important;
+    margin-right: 268px !important;
+    padding-right: 1px !important;
+    height: 33px !important;
+    background-color: var(--lwt-toolbar-field-background-color, rgba(255, 255, 255, 0.8));
+}
+
+#urlbar:not([usertyping="true"])[breakout] .search-one-offs {
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+#urlbar:not([usertyping="true"])[breakout] .search-one-offs * {
+    pointer-events: none !important;
+}
+
+#urlbar[usertyping="true"][breakout] .search-one-offs {
+    opacity: 1 !important;
+}
+
+#urlbar[usertyping="true"][breakout] .search-one-offs {
+    transition: opacity 0.05s ease-in-out !important;
+}
+
+#urlbar:not([usertyping="true"])[breakout] .search-one-offs {
+    transition: opacity 0.15s ease-in-out !important;
+}
+
+#urlbar[textoverflow="right"] > #urlbar-input-container > .urlbar-input-box > #urlbar-input {
+    mask-image: linear-gradient(to left, transparent, rgb(0, 0, 0) 3ch);
+}
+
+#urlbar[textoverflow][usertyping="true"] #urlbar-input {
+    mask-image: linear-gradient(to left, transparent 5px, rgb(0, 0, 0) 55px) !important;
+}
+
+#urlbar .search-one-offs {
+    mask-image: linear-gradient(to right, transparent 10px, rgb(0, 0, 0) 30px);
+}
+
+#urlbar[usertyping="true"] :-moz-any(#page-action-buttons, .urlbar-icon) {
+    display: none !important;
+}
+
+@media screen and (min-height: 600px) {
+    #nav-bar[overflowing="true"] #urlbar[breakout][breakout-extend] .search-one-offs {
+        display: none !important;
+    }
+}
+
+/* search one offs disabled not hidden */
+#urlbar:not([open]) > .urlbarView {
+    display: block !important;
+}
+
+#urlbar:not([open]) .urlbarView-results {
+    display: none !important;
+}
+
+#urlbar[usertyping="true"] .search-panel-one-offs {
+    transition: all 0.2s ease-in-out !important;
+}
+
+#urlbar:not([usertyping="true"]) .search-one-offs {
+    overflow-x: hidden !important;
+}
+
+#urlbar:not([usertyping="true"]) .searchbar-engine-one-off-item {
+    pointer-events: none !important;
+}
+
+#urlbar:not([usertyping="true"]) .search-panel-one-offs {
+    filter: saturate(0.7) !important;
+    opacity: 0.6 !important;
+    transition: all 0.2s ease-in-out !important;
+}
