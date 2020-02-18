@@ -6,6 +6,13 @@
     list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' x='0px' y='0px' viewBox='0 0 512 512' xml:space='preserve' width='512' height='512'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M512,256v-64c0-35.346-28.654-64-64-64H64c-35.346,0-64,28.654-64,64v64h128v42.667H0v170.667     c0,11.782,9.551,21.333,21.333,21.333h469.333c11.782,0,21.333-9.551,21.333-21.333V298.667H384V256H512z M362.667,341.333H339.2     c-1.87,7.463-4.74,14.639-8.533,21.333l17.067,17.067L317.867,409.6L300.8,392.533l-21.333,8.533v25.6h-44.8V403.2l-21.333-8.533     l-17.067,17.067l-29.867-32l17.067-17.067c-3.793-6.694-6.664-13.87-8.533-21.333h-25.6v-42.667H172.8     c1.87-7.463,4.74-14.639,8.533-21.333l-17.067-17.067l29.867-29.867l17.067,17.067l21.333-8.533v-25.6H275.2V236.8l21.333,8.533     l17.067-17.067l29.867,29.867L326.4,275.2c3.793,6.694,6.664,13.87,8.533,21.333h27.733V341.333z'/><circle fill='context-fill' fill-opacity='context-fill-opacity' cx='256' cy='320' r='42.667'/><path fill='context-fill' fill-opacity='context-fill-opacity' d='M192,64h128v42.667h42.667v-64c0-11.782-9.551-21.333-21.333-21.333H170.667c-11.782,0-21.333,9.551-21.333,21.333v64     H192V64z'/></svg>")
 }
 
+#controls.playing #playpause {
+    -moz-context-properties: fill, fill-opacity !important;
+    fill: white !important;
+    fill-opacity: 0.8 !important;
+    background-image: url("data:image/svg+xml;utf8,<svg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='-125 -125 762 762' style='enable-background:new 0 0 512 512;' xml:space='preserve'><g><g><path fill='context-fill' fill-opacity='context-fill-opacity' d='M181.333,0H74.667c-17.643,0-32,14.357-32,32v448c0,17.643,14.357,32,32,32h106.667c17.643,0,32-14.357,32-32V32    C213.333,14.357,198.976,0,181.333,0z'/></g></g><g><g><path fill='context-fill' fill-opacity='context-fill-opacity' d='M437.333,0H330.667c-17.643,0-32,14.357-32,32v448c0,17.643,14.357,32,32,32h106.667c17.643,0,32-14.357,32-32V32    C469.333,14.357,454.976,0,437.333,0z'/></g></g></svg>") !important;
+}
+
 #tabbrowser-tabs::after {
     width: 9px !important;
     margin-right: -9px !important;
@@ -41,9 +48,9 @@ link[href$="global.css"] ~ spacer[part=arrowscrollbox-overflow-end-indicator] {
 }
 
 /* disable toolbar menubar */
-#toggle_toolbar-menubar {
+/* #toggle_toolbar-menubar {
     display: none !important;
-}
+} */
 
 /* disable autohide menu */
 #autohide-context {
@@ -51,13 +58,51 @@ link[href$="global.css"] ~ spacer[part=arrowscrollbox-overflow-end-indicator] {
 }
 
 /* menubar next to tabs */
-#toolbar-menubar {
+:root[sizemode="normal"] #toolbar-menubar{
     position: absolute !important;
     display: block !important;
     z-index: 555 !important;
-    right: 0 !important;
+    right: 90px !important;
     left: auto !important;
     top: 9px !important;
+}
+
+:root[sizemode="normal"] #toolbar-menubar:not([inactive])>.titlebar-buttonbox-container {
+    display: block !important;
+    position: fixed !important;
+    top: 10px !important;
+    right: 0 !important;
+    width: -moz-min-content !important;
+}
+
+:root[sizemode="maximized"] #toolbar-menubar{
+    position: absolute !important;
+    display: block !important;
+    z-index: 555 !important;
+    right: 90px !important;
+    left: auto !important;
+    top: 16px !important;
+}
+
+:root[sizemode="maximized"] #toolbar-menubar:not([inactive])>.titlebar-buttonbox-container {
+    display: block !important;
+    position: fixed !important;
+    top: 17.5px !important;
+    right: 0 !important;
+    width: -moz-min-content !important;
+}
+
+:root[inFullscreen] #toolbar-menubar{
+    position: absolute !important;
+    display: block !important;
+    z-index: 555 !important;
+    right: 90px !important;
+    left: auto !important;
+    top: 9px !important;
+}
+
+:root[inFullscreen] #toolbar-menubar:not([inactive])>.titlebar-buttonbox-container {
+    display: none !important;
 }
 
 /* #main-window[sizemode="maximized"] #toolbar-menubar {
@@ -128,7 +173,7 @@ link[href$="global.css"] ~ spacer[part=arrowscrollbox-overflow-end-indicator] {
 
 /* extension icon color adjustment */
 #_testpilot-containers-browser-action .toolbarbutton-icon {
-    filter: brightness(10) grayscale(2) !important;
+    list-style-image: url("data:image/svg+xml;utf8,<svg height='16' viewBox='0 0 16 16' width='16' xmlns='http://www.w3.org/2000/svg'><g fill='context-fill' fill-opacity='context-fill-opacity' fill-rule='evenodd'><rect height='6' rx='1' width='6' x='1' y='1'/><path d='m11 1h2v6h-2z' transform='matrix(0 1 -1 0 16 -8)'/><path d='m11 1h2v6h-2z'/><rect height='6' rx='1' width='6' x='1' y='9'/><rect height='6' rx='1' width='6' x='9' y='9'/></g></svg>") !important;
 }
 
 #panorama-tab-groups_example_com-browser-action .toolbarbutton-icon {
@@ -139,7 +184,8 @@ link[href$="global.css"] ~ spacer[part=arrowscrollbox-overflow-end-indicator] {
     list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 377.343 377.343'><path d='M301.689,53.505H75.651c-10.876,0-19.725,8.843-19.725,19.713v230.904c0,10.878,8.843,19.727,19.725,19.727h226.039   c10.873,0,19.722-8.843,19.722-19.727V73.218C321.406,62.348,312.562,53.505,301.689,53.505z M188.67,227.7H79.521v-12.728   l60.921-111.861H84.756V75.026H188.29v15.354L128.938,199.52h59.732V227.7z M338.677,0H38.662C19.094,0,3.226,15.869,3.226,35.434   v306.462c0,19.581,15.869,35.447,35.437,35.447h300.02c19.568,0,35.436-15.866,35.436-35.447V35.434   C374.117,15.869,358.25,0,338.677,0z M335.381,304.122c0,18.572-15.113,33.691-33.691,33.691H75.651   c-18.576,0-33.695-15.114-33.695-33.691V73.218c0-18.569,15.114-33.688,33.695-33.688h226.039   c18.572,0,33.691,15.114,33.691,33.688V304.122z' fill='context-fill' fill-opacity='context-fill-opacity'/></svg>") !important;
 }
 
-#_64b2c525-24ed-4c05-aed1-95ff9e6cef70_-browser-action .toolbarbutton-icon {
+#_64b2c525-24ed-4c05-aed1-95ff9e6cef70_-browser-action .toolbarbutton-icon,
+#wnpc_aminomancer-browser-action .toolbarbutton-icon {
     list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 37.6 55'><path fill='none' stroke='context-fill' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M36.1 37.3c0 8.9-7.8 16.1-17.3 16.1S1.5 46.2 1.5 37.3c0-8.9 17.3-35.8 17.3-35.8s17.3 26.9 17.3 35.8z' clip-rule='evenodd'/><path fill='context-fill' fill-rule='evenodd' d='M18.7 35.7c-8.5-6.3-11.6 0-11.6 0-.1.5-.2.9-.2 1.3 0 6.1 5.3 11.1 11.9 11.1 6.6 0 11.9-5 11.9-11.1 0-.4-.1-.8-.1-1.3 0 0-4.7 5.3-11.9 0z' clip-rule='evenodd'/></svg>") !important;
     fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
 }
@@ -223,7 +269,7 @@ link[href$="global.css"] ~ spacer[part=arrowscrollbox-overflow-end-indicator] {
     list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='16' height='16' viewBox='0 0 16 16'><defs><linearGradient id='fpn-green-badge-a' x1='64.065%' x2='27.226%' y1='6.588%' y2='88.848%'><stop offset='0%' stop-color='%23FF9640'/><stop offset='60%' stop-color='%23FC4055'/><stop offset='100%' stop-color='%23E31587'/></linearGradient><linearGradient id='fpn-green-badge-b' x1='64.065%' x2='27.226%' y1='6.588%' y2='88.848%'><stop offset='0%' stop-color='%23FFF36E' stop-opacity='.8'/><stop offset='9%' stop-color='%23FFF36E' stop-opacity='.7'/><stop offset='75%' stop-color='%23FFF36E' stop-opacity='0'/></linearGradient><linearGradient id='fpn-green-badge-c' x1='76.537%' x2='33.666%' y1='89.279%' y2='3.042%'><stop offset='0%' stop-color='%23B833E1'/><stop offset='37%' stop-color='%239059FF'/><stop offset='61%' stop-color='%235B6DF8'/><stop offset='100%' stop-color='%230090ED'/></linearGradient><linearGradient id='fpn-green-badge-d' x1='83.333%' x2='37.602%' y1='101.626%' y2='42.563%'><stop offset='0%' stop-color='%23722291' stop-opacity='.5'/><stop offset='50%' stop-color='%23722291' stop-opacity='0'/></linearGradient><path id='fpn-green-badge-e' d='M2.25,5.25 C2.15055194,5.24997876 2.05518477,5.21045602 1.984875,5.140125 L0.859875,4.015125 C0.717760421,3.86798292 0.71979286,3.63409321 0.864443034,3.48944303 C1.00909321,3.34479286 1.24298292,3.34276042 1.390125,3.484875 L2.199,4.29375 L4.5675,0.910125 C4.6869796,0.74266611 4.91906071,0.702722311 5.0876502,0.820601232 C5.25623969,0.938480154 5.29839254,1.17017022 5.182125,1.339875 L2.557125,5.089875 C2.49388198,5.18129841 2.39333598,5.23995024 2.282625,5.25 C2.27175692,5.25054851 2.26086808,5.25054851 2.25,5.25 Z'/></defs><g fill='none' fill-rule='evenodd'><path fill='%2320123A' fill-rule='nonzero' d='M12.4604878,2.05658537 C11.3067114,0.858377874 9.71215358,0.185574622 8.04878049,0.195021709 C4.65365854,0.195021709 2,2.89365854 2,6.3395122 C2,9.53170732 6.91707317,14.9658537 7.47902439,15.5765854 C7.67107643,15.7857164 7.96010993,15.876503 8.23724878,15.8147466 C8.51438762,15.7529902 8.73752783,15.5480731 8.82261463,15.2771856 C8.90770144,15.0062981 8.84180814,14.7105945 8.6497561,14.5014634 C8.63414634,14.4858537 7.34439024,13.0731707 6.0702439,11.3365854 C3.9102439,8.3902439 3.58829268,6.93853659 3.58829268,6.3395122 C3.58829268,3.78341463 5.5395122,1.78341463 8.04292683,1.78341463 C9.27671093,1.77386308 10.4603345,2.27115429 11.3170732,3.15902439 C12.1478123,4.02038575 12.5886603,5.18492971 12.5365854,6.3804878 C12.4897561,7.64682927 11.2156098,9.65073171 9.98243902,11.1882927 C8.50341463,9.43219512 7.01463415,7.37365854 6.89756098,6.50536585 C6.85137146,6.18560328 6.95089626,5.86196869 7.16878049,5.62341463 C7.40419361,5.3688908 7.73945038,5.23050822 8.08585366,5.24487805 C8.39653441,5.25708993 8.68797926,5.39856801 8.8897561,5.63512195 C9.12873362,5.91094666 9.24374669,6.27292031 9.20780488,6.63609756 C9.19519251,6.88890571 9.12082934,7.13477313 8.99121951,7.35219512 L8.99121951,7.35219512 C8.80334698,7.57372956 8.75178229,7.88031724 8.85684897,8.15112083 C8.96191565,8.42192443 9.2067622,8.61351015 9.49488572,8.65036711 C9.78300923,8.68722407 10.068198,8.56344084 10.2380488,8.32780488 L10.2380488,8.32780488 C10.5621507,7.87108797 10.750226,7.3318936 10.7804878,6.77268293 C10.8564484,5.97383961 10.6010907,5.17884472 10.0741463,4.57365854 C9.58154164,4.00627028 8.87399267,3.67089207 8.12292683,3.64878049 C7.3096289,3.61848354 6.52434356,3.94830338 5.97658537,4.5502439 C5.44973532,5.13740612 5.20845313,5.92692713 5.31707317,6.70829268 C5.39317073,7.27609756 5.92780488,9.00097561 9.24292683,12.7687805 C9.4339066,12.9861931 9.71065347,13.1088747 10,13.1043902 L10,13.1043902 C10.2867693,13.1027451 10.5587129,12.9767399 10.7453659,12.7590244 C11.5258537,11.857561 14.0409756,8.7395122 14.1268293,6.43902439 C14.1958485,4.8115134 13.5933987,3.22708465 12.4604878,2.05658537 Z'/><g transform='translate(1.951)'><path fill='url(%23fpn-green-badge-a)' fill-rule='nonzero' d='M7.44780488,8.64390244 L7.4595122,8.64390244 C7.49005488,8.64569993 7.52067683,8.64569993 7.55121951,8.64390244 C7.51678458,8.64614928 7.48223981,8.64614928 7.44780488,8.64390244 L7.44780488,8.64390244 Z M10.4604878,2.05658537 C9.30671139,0.858377874 7.71215358,0.185574622 6.04878049,0.195021709 C2.65365854,0.195021709 0,2.89365854 0,6.3395122 C0,9.53170732 4.91707317,14.9658537 5.47902439,15.5765854 C5.67107643,15.7857164 5.96010993,15.876503 6.23724878,15.8147466 C6.51438762,15.7529902 6.73752783,15.5480731 6.82261463,15.2771856 C6.90770144,15.0062981 6.84180814,14.7105945 6.6497561,14.5014634 C6.63414634,14.4858537 5.34439024,13.0731707 4.0702439,11.3365854 C1.9102439,8.3902439 1.58829268,6.93853659 1.58829268,6.3395122 C1.58829268,3.78341463 3.5395122,1.78341463 6.04292683,1.78341463 C7.27671093,1.77386308 8.46033452,2.27115429 9.31707317,3.15902439 C10.1478123,4.02038575 10.5886603,5.18492971 10.5365854,6.3804878 C10.4897561,7.64682927 9.21560976,9.65073171 7.98243902,11.1882927 L7.54146341,11.6468293 C7.11609756,12.0097561 6.47414634,11.8712195 6.12292683,11.4380488 C6.45853659,11.8497561 6.82926829,12.2926829 7.25073171,12.7687805 C7.43992885,12.9841113 7.71336765,13.1065891 8,13.1043902 L8,13.1043902 C8.28676931,13.1027451 8.55871292,12.9767399 8.74536585,12.7590244 C9.52585366,11.857561 12.0409756,8.7395122 12.1268293,6.43902439 C12.1958485,4.8115134 11.5933987,3.22708465 10.4604878,2.05658537 Z M6.80390244,7.73463415 C6.80390244,7.73463415 6.80390244,7.75219512 6.80390244,7.76195122 C6.80932357,7.71432251 6.81912107,7.66729451 6.83317073,7.62146341 C6.82059944,7.65840234 6.81081591,7.69623199 6.80390244,7.73463415 Z'/><path fill='url(%23fpn-green-badge-b)' fill-rule='nonzero' d='M7.44780488,8.64390244 L7.4595122,8.64390244 C7.49005488,8.64569993 7.52067683,8.64569993 7.55121951,8.64390244 C7.51678458,8.64614928 7.48223981,8.64614928 7.44780488,8.64390244 L7.44780488,8.64390244 Z M10.4604878,2.05658537 C9.30671139,0.858377874 7.71215358,0.185574622 6.04878049,0.195021709 C2.65365854,0.195021709 0,2.89365854 0,6.3395122 C0,9.53170732 4.91707317,14.9658537 5.47902439,15.5765854 C5.67107643,15.7857164 5.96010993,15.876503 6.23724878,15.8147466 C6.51438762,15.7529902 6.73752783,15.5480731 6.82261463,15.2771856 C6.90770144,15.0062981 6.84180814,14.7105945 6.6497561,14.5014634 C6.63414634,14.4858537 5.34439024,13.0731707 4.0702439,11.3365854 C1.9102439,8.3902439 1.58829268,6.93853659 1.58829268,6.3395122 C1.58829268,3.78341463 3.5395122,1.78341463 6.04292683,1.78341463 C7.27671093,1.77386308 8.46033452,2.27115429 9.31707317,3.15902439 C10.1478123,4.02038575 10.5886603,5.18492971 10.5365854,6.3804878 C10.4897561,7.64682927 9.21560976,9.65073171 7.98243902,11.1882927 L7.54146341,11.6468293 C7.11609756,12.0097561 6.47414634,11.8712195 6.12292683,11.4380488 C6.45853659,11.8497561 6.82926829,12.2926829 7.25073171,12.7687805 C7.43992885,12.9841113 7.71336765,13.1065891 8,13.1043902 L8,13.1043902 C8.28676931,13.1027451 8.55871292,12.9767399 8.74536585,12.7590244 C9.52585366,11.857561 12.0409756,8.7395122 12.1268293,6.43902439 C12.1958485,4.8115134 11.5933987,3.22708465 10.4604878,2.05658537 Z M6.80390244,7.73463415 C6.80390244,7.73463415 6.80390244,7.75219512 6.80390244,7.76195122 C6.80932357,7.71432251 6.81912107,7.66729451 6.83317073,7.62146341 C6.82059944,7.65840234 6.81081591,7.69623199 6.80390244,7.73463415 Z'/><path fill='url(%23fpn-green-badge-c)' fill-rule='nonzero' d='M7.54341463,11.6468293 C7.11804878,12.0117073 6.47609756,11.8712195 6.12292683,11.4360976 L6.06243902,11.3619512 C3.80097561,8.56 3.39121951,7.19804878 3.31707317,6.70829268 C3.21054744,5.92574657 3.4547337,5.13606819 3.98439024,4.5502439 C4.53214844,3.94830338 5.31743377,3.61848354 6.13073171,3.64878049 C6.88179755,3.67089207 7.58934652,4.00627028 8.08195122,4.57365854 C8.60608867,5.18009111 8.85858071,5.97494736 8.7804878,6.77268293 C8.74632749,7.3284432 8.55630674,7.86334148 8.23219512,8.31609756 L8.23219512,8.31609756 C8.06234434,8.55173352 7.77715557,8.67551676 7.48903206,8.6386598 C7.20090854,8.60180284 6.95606199,8.41021711 6.85099531,8.13941352 C6.74592863,7.86860992 6.79749332,7.56202224 6.98536585,7.3404878 L6.98536585,7.3404878 C7.11497568,7.12306581 7.18933885,6.87719839 7.20195122,6.62439024 C7.23789303,6.261213 7.12287996,5.89923934 6.88390244,5.62341463 C6.6821256,5.38686069 6.39068075,5.24538261 6.08,5.23317073 C5.73359673,5.2188009 5.39833995,5.35718348 5.16292683,5.61170732 C4.9450426,5.85026137 4.8455178,6.17389596 4.89170732,6.49365854 C5.01073171,7.37170732 6.49756098,9.43804878 7.97658537,11.1765854 L7.54341463,11.6468293 Z'/><path fill='url(%23fpn-green-badge-d)' fill-rule='nonzero' d='M5.10439024,10.1112195 C5.38146341,10.5014634 5.6897561,10.9073171 6.06243902,11.3619512 L6.12292683,11.4360976 C6.47609756,11.8712195 7.11804878,12.0097561 7.54341463,11.6468293 L7.98439024,11.1882927 C7.37170732,10.4663415 6.76292683,9.69365854 6.24390244,8.97560976 L5.10439024,10.1112195 Z'/></g></g></svg>") !important;
 }
 
-.webextension-browser-action[label="Nano Defender"] {
+.webextension-browser-action[label^="Nano Defender"] {
     list-style-image: url("data:image/svg+xml;utf8,<svg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 494.674 494.674' style='enable-background:new 0 0 494.674 494.674;' xml:space='preserve'><path id='XMLID_322_' d='M491.384,235.101L379.941,42.087c-4.354-7.563-12.443-12.232-21.185-12.232H135.902   c-8.739,0-16.832,4.67-21.185,12.232L3.289,235.101c-4.386,7.568-4.386,16.894,0,24.474l111.428,193.012   c4.353,7.562,12.445,12.233,21.185,12.233h222.854c8.741,0,16.83-4.671,21.185-12.233l111.443-193.012   C495.771,252.004,495.771,242.663,491.384,235.101z M344.623,415.871H150.035L52.74,247.332l97.295-168.529h194.588l97.309,168.529   L344.623,415.871z' fill='context-fill' fill-opacity='context-fill-opacity'/><polygon id='XMLID_321_' points='168.539,110.846 89.747,247.332 168.539,383.827 326.119,383.827 404.925,247.332    326.119,110.846  ' fill='context-fill' fill-opacity='context-fill-opacity'/></svg>") !important;
 }
 
@@ -1323,11 +1369,13 @@ link[href$="global.css"] ~ spacer[part=arrowscrollbox-overflow-end-indicator] {
     padding-left: 21px !important;
     padding-right: 0px !important;
     margin-top: 0px !important;
-    margin-left: 6px !important;
+    margin-left: 6.5px !important;
     margin-right: -6px !important;
     fill: currentColor !important;
+    fill-opacity: context-fill-opacity !important;
     -moz-context-properties: fill, fill-opacity, stroke !important;
-    background: url("moz-extension://14960f03-eca3-472b-b4d2-0b7f831ebe41/img/container-site.svg") left no-repeat !important;
+/*     background: url("moz-extension://14960f03-eca3-472b-b4d2-0b7f831ebe41/img/container-site.svg") left no-repeat !important; */
+    background: url("data:image/svg+xml;utf8,<svg height='16' viewBox='0 0 16 16' width='16' xmlns='http://www.w3.org/2000/svg'><g fill='context-fill' fill-opacity='context-fill-opacity' fill-rule='evenodd'><rect height='6' rx='1' width='6' x='1' y='1'/><path d='m11 1h2v6h-2z' transform='matrix(0 1 -1 0 16 -8)'/><path d='m11 1h2v6h-2z'/><rect height='6' rx='1' width='6' x='1' y='9'/><rect height='6' rx='1' width='6' x='9' y='9'/></g></svg>") left no-repeat !important;
     content: "Open Link in Container Tab" !important;
 }
 
@@ -2033,7 +2081,7 @@ toolbarbutton[disabled="true"] {
     border-radius: 50% !important;
     background-color: var(--textbox-button-hidden) !important;
     background: none !important;
-    padding: 1.5px !important;
+    padding: 3.2px !important;
     width: 17px !important;
     margin-top: -3px !important;
     margin-bottom: -3px !important;
@@ -2053,6 +2101,14 @@ toolbarbutton[disabled="true"] {
 
 .findbar-find-previous {
     margin-right: -1.5px !important;
+}
+
+.findbar-find-previous {
+    list-style-image: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='5px' height='5px' viewBox='0 0 492 492' xml:space='preserve'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M198.608,246.104L382.664,62.04c5.068-5.056,7.856-11.816,7.856-19.024c0-7.212-2.788-13.968-7.856-19.032l-16.128-16.12   C361.476,2.792,354.712,0,347.504,0s-13.964,2.792-19.028,7.864L109.328,227.008c-5.084,5.08-7.868,11.868-7.848,19.084   c-0.02,7.248,2.76,14.028,7.848,19.112l218.944,218.932c5.064,5.072,11.82,7.864,19.032,7.864c7.208,0,13.964-2.792,19.032-7.864   l16.124-16.12c10.492-10.492,10.492-27.572,0-38.06L198.608,246.104z'/></svg>") !important;
+}
+
+.findbar-find-next {
+    list-style-image: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='5px' height='5px' viewBox='0 0 492 492' xml:space='preserve'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M382.678,226.804L163.73,7.86C158.666,2.792,151.906,0,144.698,0s-13.968,2.792-19.032,7.86l-16.124,16.12    c-10.492,10.504-10.492,27.576,0,38.064L293.398,245.9l-184.06,184.06c-5.064,5.068-7.86,11.824-7.86,19.028    c0,7.212,2.796,13.968,7.86,19.04l16.124,16.116c5.068,5.068,11.824,7.86,19.032,7.86s13.968-2.792,19.032-7.86L382.678,265    c5.076-5.084,7.864-11.872,7.848-19.088C390.542,238.668,387.754,231.884,382.678,226.804z'/></svg>") !important;
 }
 
 /* .findbar-find-previous>.toolbarbutton-icon {
@@ -2076,6 +2132,7 @@ toolbarbutton[disabled="true"] {
 .findbar-find-previous:not([disabled]):hover:active>.toolbarbutton-icon,
 .findbar-find-next:not([disabled]):hover:active>.toolbarbutton-icon {
     background: var(--desaturate-dimmed-further) !important;
+    background: none !important;
     opacity: 1 !important;
 }
 
@@ -2458,6 +2515,10 @@ toolbar .toolbarbutton-1:not([disabled="true"]):not([checked]):not([open]):not(:
     margin-inline-start: 20px !important;
 }
 
+/* .urlbarView-row[type="tip"] {
+    display: none !important;
+} */
+
 .urlbarView-row-inner {
     align-items: center !important;
 }
@@ -2583,6 +2644,9 @@ toolbar[brighttext] {
     --toolbarbutton-hover-background: hsla(236, 85%, 83%, 0.17) !important;
     --toolbarbutton-active-background: hsla(236, 85%, 83%, 0.25) !important;
     --toolbarbutton-checked-background: hsla(236, 85%, 83%, 0.13) !important;
+    --urlbar-input-bgcolor: hsla(233, 24%, 26%, 1) !important;
+    --urlbar-input-bgcolor-brighter: hsla(233, 23%, 29%, 1) !important;
+    --urlbar-input-bgcolor-even-brighter: hsla(233, 21%, 33%, 1) !important;
     --tooltip-dark: hsl(234, 39%, 10%);
     --badge-color-dark: hsl(236, 13%, 42%);
     --tab-hover: linear-gradient(0deg, hsl(231, 42%, 15%), hsl(233, 61%, 8%));
@@ -2594,6 +2658,7 @@ toolbar[brighttext] {
     --textbox-button-hidden: hsla(240, 100%, 89%, 0);
     --urlbar-results-bgcolor: hsl(233, 32%, 10%);
     --urlbar-height: 33px !important;
+    --urlbar-container-height: 39px !important;
     --lwt-toolbarbutton-icon-fill-attention: hsl(224, 100%, 71%) !important;
 }
 
@@ -3777,7 +3842,7 @@ toolbarbutton[label="GitZip"] .toolbarbutton-icon {
 
 /* macOS style window controls */
 /* re-order window buttons */
-:root:not([sizemode="fullscreen"]) .titlebar-buttonbox,
+/* :root:not([sizemode="fullscreen"]) .titlebar-buttonbox,
 :root[sizemode="fullscreen"] #window-controls {
     display: grid !important;
     grid-template-columns: repeat(3, 1fr);
@@ -3787,7 +3852,7 @@ toolbarbutton[label="GitZip"] .toolbarbutton-icon {
 #window-controls>toolbarbutton {
     position: relative !important;
     grid-row: 1 !important;
-}
+} */
 
 .titlebar-buttonbox:-moz-window-inactive>*,
 #window-controls:-moz-window-inactive>* {
@@ -3871,6 +3936,7 @@ toolbarbutton[label="GitZip"] .toolbarbutton-icon {
     background-color: transparent !important;
     list-style-image: url(window/max-normal.png) !important;
     grid-column: 1 !important;
+    -moz-box-ordinal-group: 0 !important;
 }
 
 .titlebar-max:hover,
@@ -5605,13 +5671,16 @@ tabmodalprompt {
     height: var(--urlbar-height) !important;
     padding-block: 0px !important;
     padding-inline: 0px !important;
-    background-color: var(--lwt-toolbar-field-background-color, rgba(255, 255, 255, 0.8));
     transition: none !important;
     border-radius: var(--toolbarbutton-border-radius);
 }
 
+#urlbar-input-container {
+    background-color: var(--urlbar-input-bgcolor) !important;
+}
+
 #urlbar[focused="true"] > #urlbar-input-container {
-    background-color: var(--desaturate-dimmed-further) !important;
+    background-color: var(--urlbar-input-bgcolor-even-brighter) !important;
     box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.25) !important;
 }
 
@@ -6218,6 +6287,105 @@ tabmodalprompt {
     margin-inline-start: 6px !important;
 }
 
+/* #downloadsPanel-mainView {
+    margin-right: -0.4px !important;
+} */
+
+#downloadsListBox>.download-state>toolbarseparator {
+    visibility: collapse !important;
+}
+
+#downloadsListBox>.download-state {
+    min-height: 66px !important;
+    -moz-box-align: center !important;
+}
+
+#downloadsListBox>richlistitem {
+/*     border-bottom: 0px solid transparent !important; */
+}
+
+#downloadsListBox>.download-state>.downloadMainArea {
+    border-top-right-radius: 7px !important;
+    border-bottom-right-radius: 7px !important;
+/*     border-bottom: 1px solid var(--arrowpanel-dimmed) !important;
+    border-right: 1px solid var(--arrowpanel-dimmed) !important; */
+}
+
+#downloadsListBox .downloadContainer {
+    min-height: 66px !important;
+}
+
+#downloadsListBox>.download-state>.downloadButton {
+    min-height: 56px !important;
+    min-width: 56px !important;
+    margin: 5px !important;
+    border-radius: 100% !important;
+    -moz-box-align: center !important;
+    background: none !important;
+    -moz-box-pack: center !important;
+}
+
+#downloadsListBox>.download-state>.downloadButton:hover .button-box {
+    background: var(--arrowpanel-dimmed) !important;
+}
+
+#downloadsListBox>.download-state>.downloadButton .button-box {
+    min-width: 35.5px !important;
+    max-width: 35.5px !important;
+    min-height: 35.5px !important;
+    max-height: 35.5px !important;
+    border-radius: 100% !important;
+}
+
+#downloadsListBox>.download-state>.downloadButton .button-box .button-icon {
+    width: 20.5px !important;
+    height: 20px !important;
+}
+
+/* wrap all toolbar buttons in a slider - corresponds to navbarToolbarbuttonSlider.uc.js */
+/* #nav-bar-toolbarbutton-slider {
+  display: -moz-box !important;
+  overflow-x: scroll !important;
+  overflow-y: hidden !important;
+  max-width: 352px !important;
+  scrollbar-width: none !important;
+}
+
+#nav-bar-overflow-button {
+    display: none !important;
+    visibility: collapse !important;
+}
+
+#customization-panelWrapper {
+    --panel-arrow-offset: 0 !important;
+} */
+
+#urlbar:not([focused="true"]):not(:hover) #urlbar-input,
+#urlbar:not([focused="true"]):hover #urlbar-input {
+    transition: 620ms ease-in-out all !important;
+    transition-delay: 0 !important;
+}
+
+#urlbar:not([focused="true"]):not(:hover) #urlbar-input-container,
+#urlbar:not([focused="true"]):hover #urlbar-input-container {
+    transition: 620ms ease-in-out all !important;
+    transition-delay: 0 !important;
+}
+
+#urlbar:not([focused="true"]):hover #urlbar-input-container {
+    background-color: var(--urlbar-input-bgcolor-brighter) !important;
+    box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.25) !important;
+}
+
+#urlbar:not([focused="true"]):hover #urlbar-input {
+    filter: brightness(2) !important;
+    opacity: 1 !important;
+}
+
+:root {
+    --toolbarbutton-border-radius: 2.6px !important;
+}
+
 /* testing */
 /* #nav-bar {
     z-index: 0 !important;
@@ -6266,5 +6434,3 @@ tabmodalprompt {
     right: 0 !important;
     z-index: 50 !important;
 } */
-
-/* pick up changing colors to variables at line 2365 */

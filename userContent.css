@@ -4,6 +4,24 @@
     }
 } */
 
+#pictureInPictureToggleButton {
+    cursor: pointer !important;
+    background-color: hsl(244, 100%, 63%) !important;
+}
+
+@-moz-document domain("reddit.com") {
+    .ListingLayout-backgroundContainer {
+        --pseudo-before-background: rgb(15,18,23,1) !important;
+    }
+    
+    #2x-container > *,
+    ._1VP69d9lk-Wk9zokOaylL {
+        --background: rgb(15,18,23,1) !important;
+        --canvas: rgb(15,18,23,1) !important;
+        background-color: rgb(15,18,23,1) !important;
+    }
+}
+
 @-moz-document domain("mail.google.com") {
     div:-moz-any([role="dialog"], [role="menu"]) {
         z-index:  !important;
@@ -1197,7 +1215,7 @@ domain("wikimedia.org") {
     #mw-head #searchform>div {
         position: absolute !important;
         top: -32px !important;
-        right: -30px !important;
+        right: -29.5px !important;
         margin-top: 13px !important;
         margin-left: 15px !important;
         border: none !important;
@@ -3068,12 +3086,16 @@ domain("wikimedia.org") {
     #pt-notifications-notice .mw-echo-notifications-badge::after {
         top: 15% !important;
         left: 15% !important;
-        font-size: 0.88em !important;
+/*         font-size: 0.88em !important; */
     }
 
-    #pt-notifications-alert .mw-echo-notifications-badge.mw-echo-notifications-badge-all-read::after,
-    #pt-notifications-notice .mw-echo-notifications-badge.mw-echo-notifications-badge-all-read::after {
-        visibility: visible;
+    #pt-notifications-alert .mw-echo-notifications-badge::after,
+    #pt-notifications-notice .mw-echo-notifications-badge::after {
+        visibility: visible !important;
+        padding-inline: 2.5px !important;
+        padding-block: 0px !important;
+        line-height: 12.5px !important;
+        margin-block: -0.7px !important;
     }
 
     #p-personal #pt-notifications-alert,
@@ -3145,11 +3167,13 @@ domain("wikimedia.org") {
         border-bottom-right-radius: 3px !important;
         -webkit-box-shadow: 0 0 25px 2px rgba(0, 0, 0, 0.05), 0 0 5px 1px rgba(0, 0, 0, 0.25) !important;
         z-index: 4 !important;
+        margin-left: 0px !important;
+        position: absolute !important;
     }
 
     .suggestions-results,
     .suggestions-special {
-        background-color: rgb(17, 17, 17) !important;
+        background-color: #111113 !important;
         border: none !important;
     }
 
