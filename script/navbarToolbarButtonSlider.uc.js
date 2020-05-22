@@ -9,6 +9,7 @@
 (function () {
     setTimeout(() => {
         var toolbarIcons = document.querySelectorAll('#urlbar-container~*');
+        var toolbarSliderContainer = document.createElement('div');
         var toolbarSlider = document.createElement('div');
         var customizableNavBar = document.getElementById('nav-bar-customization-target');
         var bippityBop = {
@@ -24,7 +25,7 @@
                 try {
                     if (aNode.parentNode.id == "nav-bar-customization-target" && CustomizationHandler.isCustomizing() == false) {
                         setTimeout(() => {
-                            toolbarSlider.appendChild(toolbarSlider.nextSibling);
+                            toolbarSlider.appendChild(toolbarSliderContainer.nextSibling);
                         }, 100)
                     }
                 } catch (e) {};
@@ -40,7 +41,8 @@
                 for (var i = 0; buttons.length - i; container.firstChild === buttons[0] && i++) {
                     container.appendChild(buttons[i]);
                 }
-                parent.insertBefore(container, previousSibling.nextSibling);
+                toolbarSliderContainer.appendChild(container);
+                parent.insertBefore(toolbarSliderContainer, previousSibling.nextSibling);
                 return container;
             } catch (e) {};
         };
@@ -56,7 +58,7 @@
 
         function rewrapAll() {
             try {
-                let widgets = document.querySelectorAll('#nav-bar-toolbarbutton-slider~*');
+                let widgets = document.querySelectorAll('#nav-bar-toolbarbutton-slider-container~*');
                 for (var i = 0; widgets.length - i; toolbarSlider.firstChild === widgets[0] && i++) {
                     toolbarSlider.appendChild(widgets[i]);
                 }
@@ -65,9 +67,12 @@
         };
 
         try {
+            toolbarSliderContainer.classList.add('container');
+            toolbarSliderContainer.setAttribute("id", "nav-bar-toolbarbutton-slider-container");
+            toolbarSliderContainer.setAttribute("style", "display: -moz-box; -moz-box-align: center; overflow-x: scroll; overflow-y: hidden; max-width: 352px; scrollbar-width: none;");
             toolbarSlider.classList.add('container');
             toolbarSlider.setAttribute("id", "nav-bar-toolbarbutton-slider");
-            toolbarSlider.setAttribute("style", "display: -moz-box; overflow-x: scroll; overflow-y: hidden; max-width: 352px; scrollbar-width: none;");
+            toolbarSlider.setAttribute("style", "display: flex; flex-flow: row; flex-direction: row;");
             CustomizableUI.addListener(bippityBop);
         } catch (e) {};
     }, 1000);

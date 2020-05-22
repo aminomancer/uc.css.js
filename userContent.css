@@ -9,6 +9,12 @@
     background-color: hsl(244, 100%, 63%) !important;
 }
 
+@-moz-document url("about:processes") {
+    td:nth-child(7) {
+        width: 3% !important;
+    }
+}
+
 @-moz-document domain("reddit.com") {
     .ListingLayout-backgroundContainer {
         --pseudo-before-background: rgb(15,18,23,1) !important;
@@ -22,11 +28,199 @@
     }
 }
 
-@-moz-document domain("mail.google.com") {
-    div:-moz-any([role="dialog"], [role="menu"]) {
-        z-index:  !important;
+/* ublock origin styling */
+@-moz-document regexp("disabledmoz-extension://8d413415-fec4-4612-9717-941c64de177b/.*") {
+
+    body {
+        background-color: #1f1f1f !important;
+        color: #ffffff !important;
     }
+
+    a {
+        color: hsl(237, 100%, 75%) !important;
+    }
+
+    h2 {
+        background-color: #353535 !important;
+        color: #ffffff !important;
+    }
+
+    code {
+        background-color: #555 !important;
+    }
+    
+    div#refresh {
+        background-color: #1f1f1f !important;
+        border: none !important;
+    }
+    
+    symbol#refresh {
+        fill: hsl(235, 100%, 70%) !important;
+    }
+
+    #switch .fa-icon {
+        fill: hsl(235, 100%, 70%) !important;
+    }
+
+    body.off #switch .fa-icon {
+        color: #555 !important;
+        fill: #555 !important;
+    }
+
+    .tool {
+        color: #ffffff !important;
+    }
+
+    .tool.enabled:hover {
+        fill: hsl(235, 100%, 70%) !important;
+    }
+
+    .permatoolbar {
+        background-color: #252525 !important;
+    }
+
+    .permatoolbar .button {
+        background-color: #353535 !important;
+    }
+
+    .permatoolbar .button:hover {
+        background-color: #888 !important;
+    }
+
+    #tooltip {
+        background-color: #252525 !important;
+        width: -moz-fit-content !important;
+        left: 0 !important;
+        right: 0 !important;
+        margin-inline: auto !important;
+        border: none !important;
+        box-shadow: 0 0 8px -1px rgba(0, 0, 0, 0.1), 0 0 3px 0px rgba(0, 0, 0, 0.1) !important;
+        color: #ffffff !important;
+    }
+
+    #firewallContainer>div {
+        background-color: #252525 !important;
+    }
+
+    #firewallContainer>div:hover {
+        background-color: #353535 !important;
+    }
+
+    #firewallContainer>div>span {
+        color: #ffffff !important;
+        border-bottom: 1px solid #111 !important;
+    }
+
+    #firewallContainer>div>span:first-of-type~span {
+        border-left: 1px solid #111 !important;
+    }
+
+    #extraTools {
+        background-color: #353535 !important;
+        color: rgb(170, 170, 170) !important;
+        fill: rgb(170, 170, 170) !important;
+    }
+
+    #extraTools>span:hover {
+        fill: hsl(235, 100%, 70%) !important;
+        color: hsl(235, 100%, 70%) !important;
+    }
+
+    #dashboard-nav-widgets {
+        background-color: #111 !important;
+        border-bottom: 1px solid #555 !important;
+    }
+    
+    input[type="radio"], input[type="checkbox"] {
+        filter: brightness(1.8) contrast(1.5) brightness(0.3) saturate(0) invert(1) brightness(0.6) contrast(4) !important;
+    }
+    
+    input[type="radio"]:hover, input[type="checkbox"]:hover {
+        filter: brightness(1.8) contrast(1.5) brightness(0.3) invert(1) hue-rotate(250deg) brightness(0.64) contrast(7) !important;
+    }
+    
+    input:-moz-any([type="number"], [type="search"], [type="text"]) {
+        -moz-appearance: none !important;
+        border: none !important;
+        outline: none !important;
+        padding: 2px !important;
+        background: #353535 !important;
+        color: #fff !important;
+        fill: #fff !important;
+    }
+
+    .tabButton {
+        background-color: #353535 !important;
+        border: 1px solid #555 !important;
+        border-bottom: 1px solid #555 !important;
+        color: #ffffff !important;
+    }
+    
+    button.custom {
+        background: #353535 !important;
+        border: 1px solid #555 !important;
+        color: #fff !important;
+    }
+
+    .tabButton.selected {
+        background-color: #1f1f1f !important;
+        border-bottom: 1px solid transparent !important;
+    }
+
+    #diff li {
+        background-color: #555 !important;
+    }
+
+    #diff li:nth-child(even) {
+        background-color: #353535 !important;
+    }
+
+    #diff textarea {
+        background-color: #252525 !important;
+        color: #ffff !important;
+    }
+    
+    #cloudWidget {
+        background: #252525 !important;
+        color: #fff !important;
+    }
+    
+    #cloudInfo {
+        color: #fff !important;
+    }
+    
+    textarea {
+        -moz-appearance: none !important;
+        background: #252525 !important;
+        color: #fff !important;
+        border: none !important;
+        padding: 2px !important;
+    }
+    
+    .cm-search-widget {
+        background-color: #252525 !important;
+    }
+    
+    .cm-search-widget-input {
+        border: none !important;
+    }
+    
+/*     .CodeMirror {
+        background-color: #292929 !important;
+        color: #ffffff !important;
+    }
+    
+    .CodeMirror-gutters {
+        background: none !important;
+        border-color: #454545 !important;
+    } */
 }
+
+/* @-moz-document domain("mail.google.com") {
+    div:-moz-any([role="dialog"], [role="menu"]) {
+        z-index: 1111111 !important;
+    }
+} */
 
 @-moz-document url(moz-extension://482959ea-7a4a-4baa-900a-86fb03b08903/popup/index.html) {
     :root {
@@ -124,8 +318,7 @@
         border-color: white !important;
     }
 
-    select,
-        {
+    select {
         background-color: var(--lwt-toolbar-field-background-color) !important;
         color: var(--lwt-toolbar-field-color) !important;
         border-color: transparent !important;
@@ -675,7 +868,8 @@ url-prefix("chrome://browser/content/preferences/") {
 
 
 /* New tab page */
-@-moz-document url("moz-extension://341da70b-415b-44de-979b-de30458e8a84/newtab.html") {
+/* @-moz-document url("moz-extension://341da70b-415b-44de-979b-de30458e8a84/newtab.html") */
+@-moz-document regexp("moz-extension://.*/newtab.html") {
     html, body {
         background-color: rgb(25, 25, 27) !important;
     }
