@@ -2812,8 +2812,7 @@ domain("wikimedia.org") {
     table:not([class])>tr>td,
     table:not([class])>*>tr>th,
     table:not([class])>*>tr>td {
-        border: 1px solid rgba(162, 169, 177, 0.4) !important;
-        padding: 0.2em 0.4em;
+        border-color: rgba(162, 169, 177, 0.4) !important;
     }
 
     table:not([class])>tr>th,

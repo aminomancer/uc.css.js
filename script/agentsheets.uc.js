@@ -30,20 +30,23 @@
         -moz-appearance: none!important;
         border-width: 0px!important;
         border-radius: 5px!important;
-        background-color: rgba(125, 125, 125, 0)!important;
-        transition: background-color 0.14s ease-in-out!important;
+        background-color: rgba(124, 124, 131, 1)!important;
+        opacity: 0!important;
+        transition: opacity 0.4s ease-in-out!important;
         -webkit-transform-style: preserve-3d!important;
         -webkit-backface-visibility: hidden!important;
     }
     .hidevscroll-scrollbar:hover thumb {
-        background-color: rgba(125, 125, 125, 0.5)!important;
-        transition: background-color 0.06s ease-in-out!important;
+        background-color: rgba(124, 124, 131, 1)!important;
+        opacity: 0.5!important;
+        transition: opacity 0.1s ease-in-out!important;
         -webkit-transform-style: preserve-3d!important;
         -webkit-backface-visibility: hidden!important;
     }
     .hidevscroll-scrollbar thumb:active {
-        background-color: rgba(125, 125, 125, 0.9)!important;
-        transition: background-color 0.04s ease-in-out!important;
+        background-color: rgba(124, 124, 131, 1)!important;
+        opacity: 0.9!important;
+        transition: opacity 0.06s ease-in-out!important;
         -webkit-transform-style: preserve-3d!important;
         -webkit-backface-visibility: hidden!important;
     }
@@ -103,20 +106,23 @@
         -moz-appearance: none!important;
         border-width: 0px!important;
         border-radius: 5px!important;
-        background-color: rgba(125, 125, 125, 0)!important;
-        transition: background-color 0.14s ease-in-out;
+        background-color: rgba(124, 124, 131, 1)!important;
+        opacity: 0!important;
+        transition: opacity 0.4s ease-in-out;
         -webkit-transform-style: preserve-3d;
         -webkit-backface-visibility: hidden;
     }
     :not(select):not(hbox) > scrollbar:hover thumb {
-        background-color: rgba(125, 125, 125, 0.5)!important;
-        transition: background-color 0.06s ease-in-out;
+        background-color: rgba(124, 124, 131, 1)!important;
+        opacity: 0.5!important;
+        transition: opacity 0.1s ease-in-out;
         -webkit-transform-style: preserve-3d;
         -webkit-backface-visibility: hidden;
     }
     :not(select):not(hbox) > scrollbar thumb:active {
-        background-color: rgba(125, 125, 125, 0.9)!important;
-        transition: background-color 0.04s ease-in-out;
+        background-color: rgba(124, 124, 131, 1)!important;
+        opacity: 0.9!important;
+        transition: opacity 0.06s ease-in-out;
         -webkit-transform-style: preserve-3d;
         -webkit-backface-visibility: hidden;
     }

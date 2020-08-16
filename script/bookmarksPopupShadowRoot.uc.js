@@ -41,5 +41,5 @@
         };
 
         BMBtoolbarPopup.addEventListener("popupshowing", toolbarPopupOpened, false);
-    }, 1000);
+    }, 2000);
 })();
