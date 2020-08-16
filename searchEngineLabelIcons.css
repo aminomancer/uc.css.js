@@ -1,0 +1,142 @@
+#urlbar[searchmode] #tracking-protection-icon-container {
+    display: none !important;
+}
+
+#urlbar[searchmode] > #urlbar-input-container > #identity-box {
+    background: none !important;
+    padding-inline-start: 8px !important;
+    margin-inline-start: 0 !important;
+    margin-inline-end: 0 !important;
+    height: var(--urlbar-height) !important;
+    margin-top: 0 !important;
+    padding-block-start: 7.2px !important;
+    padding-block-end: 6.6px !important;
+    padding-inline-end: 0 !important;
+}
+
+#urlbar[searchmode] > #urlbar-input-container > #identity-box > #identity-icon {
+    margin-inline-start: 0 !important;
+    margin-inline-end: 0 !important;
+}
+
+#urlbar-label-box,
+#urlbar-search-mode-indicator {
+    background-color: rgba(22, 25, 70, 0.4) !important;
+    margin-inline-end: 6px !important;
+    padding-inline-end: 5px !important;
+    border-radius: 0px !important;
+    outline: none !important;
+    -moz-outline-radius: 2px !important;
+    margin-inline-start: -24px !important;
+    margin-inline-end: 6px !important;
+    font-size: 14px !important;
+    min-width: 16px !important;
+    align-items: center !important;
+    color: #000 !important;
+    height: var(--urlbar-height) !important;
+    padding-block: 6.6px !important;
+    padding-inline-end: 5px !important;
+    padding-inline-start: 28px !important;
+    border: none !important;
+    border-right: 1px solid transparent !important;
+}
+
+#urlbar-search-mode-indicator-close {
+    display: none !important;
+    pointer-events: none !important;
+}
+
+#urlbar-label-box .urlbar-label,
+#urlbar-search-mode-indicator-title {
+    color: var(--lwt-toolbar-field-color, rgb(0, 0, 0)) !important;;
+    opacity: 0.6 !important;
+    padding-inline: 0px !important;
+    font-size: 14px !important;
+}
+
+#urlbar[pageproxystate="invalid"] #identity-box > #identity-icon.youtubeIndicator,
+#urlbar[pageproxystate="valid"] #identity-box > #identity-icon.youtubeIndicator,
+#identity-icon.youtubeIndicator {
+    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 202.3 141.6'><path d='M101.1 0S37.9 0 22 4.1c-8.5 2.4-15.5 9.4-17.9 18C0 38 0 70.8 0 70.8s0 33 4.1 48.6c2.4 8.6 9.2 15.5 17.9 17.9 16 4.2 79.1 4.2 79.1 4.2s63.3 0 79.2-4.1c8.6-2.4 15.5-9.1 17.7-17.9 4.2-15.7 4.2-48.6 4.2-48.6s.1-33-4.2-48.9c-2.3-8.6-9.1-15.5-17.7-17.7C164.4 0 101.1 0 101.1 0zM81 40.5l52.6 30.4L81 101.1V40.5z' fill='context-fill' fill-opacity='context-fill-opacity'/></svg>") !important;
+}
+
+#urlbar[pageproxystate="invalid"] #identity-box > #identity-icon.historyIndicator,
+#urlbar[pageproxystate="valid"] #identity-box > #identity-icon.historyIndicator,
+#identity-icon.historyIndicator {
+    list-style-image: url("chrome://browser/skin/history.svg") !important;
+}
+
+#urlbar[pageproxystate="invalid"] #identity-box > #identity-icon.bookmarksIndicator,
+#urlbar[pageproxystate="valid"] #identity-box > #identity-icon.bookmarksIndicator,
+#identity-icon.bookmarksIndicator {
+    list-style-image: url("chrome://browser/skin/bookmark.svg") !important;
+    margin-top: -0.6px !important;
+}
+
+#urlbar[pageproxystate="invalid"] #identity-box > #identity-icon.xVideosIndicator,
+#urlbar[pageproxystate="valid"] #identity-box > #identity-icon.xVideosIndicator,
+#identity-icon.xVideosIndicator {
+    list-style-image: url("data:image/svg+xml;utf8,<svg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='-25 -35 510.775 510.775'><path d='M285.08,230.397L456.218,59.27c6.076-6.077,6.076-15.911,0-21.986L423.511,4.565c-2.913-2.911-6.866-4.55-10.992-4.55  c-4.127,0-8.08,1.639-10.993,4.55l-171.138,171.14L59.25,4.565c-2.913-2.911-6.866-4.55-10.993-4.55  c-4.126,0-8.08,1.639-10.992,4.55L4.558,37.284c-6.077,6.075-6.077,15.909,0,21.986l171.138,171.128L4.575,401.505  c-6.074,6.077-6.074,15.911,0,21.986l32.709,32.719c2.911,2.911,6.865,4.55,10.992,4.55c4.127,0,8.08-1.639,10.994-4.55  l171.117-171.12l171.118,171.12c2.913,2.911,6.866,4.55,10.993,4.55c4.128,0,8.081-1.639,10.992-4.55l32.709-32.719  c6.074-6.075,6.074-15.909,0-21.986L285.08,230.397z' fill='context-fill' fill-opacity='context-fill-opacity'/></svg>") !important;
+}
+
+#urlbar[pageproxystate="invalid"] #identity-box > #identity-icon.gitHubIndicator,
+#urlbar[pageproxystate="valid"] #identity-box > #identity-icon.gitHubIndicator,
+#identity-icon.gitHubIndicator {
+    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1024 998.7'><path d='M512 0C229.1 0 0 229.1 0 512c0 226.6 146.6 417.9 350.1 485.8 25.6 4.5 35.2-10.9 35.2-24.3 0-12.2-.6-52.5-.6-95.4-128.6 23.7-161.9-31.4-172.2-60.2-5.8-14.7-30.7-60.2-52.5-72.3-17.9-9.6-43.5-33.3-.6-33.9 40.3-.6 69.1 37.1 78.7 52.5 46.1 77.4 119.7 55.7 149.1 42.2 4.5-33.3 17.9-55.7 32.6-68.5-113.9-12.8-233-57-233-252.8 0-55.7 19.8-101.8 52.5-137.6-5.1-12.8-23-65.3 5.1-135.7 0 0 42.9-13.4 140.8 52.5 41-11.5 84.5-17.3 128-17.3s87 5.8 128 17.3c97.9-66.6 140.8-52.5 140.8-52.5 28.2 70.4 10.2 122.9 5.1 135.7 32.6 35.8 52.5 81.3 52.5 137.6 0 196.5-119.7 240-233.6 252.8 18.6 16 34.6 46.7 34.6 94.7 0 68.5-.6 123.5-.6 140.8 0 13.4 9.6 29.4 35.2 24.3C877.4 929.9 1024 737.9 1024 512 1024 229.1 794.9 0 512 0z' fill-rule='evenodd' clip-rule='evenodd' fill='context-fill' fill-opacity='context-fill-opacity'/></svg>") !important;
+}
+
+#urlbar[pageproxystate="invalid"] #identity-box > #identity-icon.wikipediaIndicator,
+#urlbar[pageproxystate="valid"] #identity-box > #identity-icon.wikipediaIndicator,
+#urlbar[searchmode] > #urlbar-input-container > #identity-box > #identity-icon.wikipediaIndicator {
+    width: 18px !important;
+    margin-inline-start: -2px !important;
+    list-style-image: url("data:image/svg+xml;utf8,<svg shape-rendering='geometricPrecision' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 113.7 72'><path d='M113.7 1.2c0 .4-.1.8-.4 1.1-.3.3-.5.5-.8.5-2.5.2-4.5 1-6.1 2.4-1.6 1.4-3.2 4-4.9 7.8L75.7 71.2c-.2.5-.7.8-1.5.8-.6 0-1.1-.3-1.4-.8L58.3 40.9 41.7 71.2c-.3.5-.8.8-1.4.8-.7 0-1.2-.3-1.5-.8L13.5 13.1c-1.6-3.6-3.3-6.1-5-7.6-1.8-1.4-4.2-2.3-7.4-2.7-.3 0-.5-.1-.8-.4-.2-.3-.3-.6-.3-1C0 .5.3 0 .8 0c2.3 0 4.6.1 7.1.3 2.3.2 4.5.3 6.5.3 2.1 0 4.5-.1 7.3-.3 2.9-.2 5.5-.3 7.8-.3.5 0 .8.5.8 1.4 0 .9-.2 1.4-.5 1.4-2.3.2-4 .8-5.3 1.7-1.3 1-2 2.3-2 3.8 0 .8.3 1.8.8 3l21 47.3 11.9-22.5-11.2-23c-2-4.1-3.6-6.8-4.9-8-1.3-1.2-3.2-1.9-5.8-2.2-.2 0-.5-.1-.7-.4-.2-.3-.3-.6-.3-1 0-1 .2-1.4.7-1.4 2.3 0 4.3.1 6.2.3 1.8.1 3.8.2 5.8.2s4.2-.1 6.4-.3c2.4-.2 4.7-.3 6.9-.3.5 0 .8.5.8 1.4 0 .9-.2 1.4-.5 1.4-4.5.3-6.8 1.6-6.8 3.8 0 1 .5 2.6 1.6 4.7l7.3 14.9L69 12.6c1-1.9 1.5-3.5 1.5-4.9 0-3.1-2.3-4.8-6.8-5-.4 0-.6-.5-.6-1.4 0-.3.1-.7.3-1 .3-.1.5-.3.7-.3 1.6 0 3.6.1 6 .3 2.3.2 4.1.3 5.6.3 1 0 2.6-.1 4.6-.3C82.8.1 85 0 86.7 0c.4 0 .6.4.6 1.2 0 1.1-.4 1.6-1.1 1.6-2.6.3-4.8 1-6.3 2.2-1.6 1.2-3.6 3.9-6 8l-9.7 18 13.2 26.8 19.4-45.2c.7-1.7 1-3.2 1-4.5 0-3.3-2.3-5.1-6.8-5.3-.4 0-.6-.5-.6-1.4 0-1 .3-1.4.9-1.4 1.7 0 3.6.1 5.9.3 2.1.2 3.8.3 5.3.3s3.2-.1 5.2-.3c2-.2 3.8-.3 5.5-.3.3 0 .5.4.5 1.2z' fill-rule='evenodd' clip-rule='evenodd' fill='context-fill' fill-opacity='context-fill-opacity'/></svg>") !important;
+}
+
+#urlbar[pageproxystate="invalid"] #identity-box > #identity-icon.amazonIndicator,
+#urlbar[pageproxystate="valid"] #identity-box > #identity-icon.amazonIndicator,
+#identity-icon.amazonIndicator {
+    margin-top: 1.4px !important;
+    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1736 1792'><path d='M1522.8 1476c10-4 18.7-5 26-3s11 7.8 11 17.5-5 20.8-15 33.5c-8.7 10.7-23.3 25.2-44 43.5s-52.5 41-95.5 68-90 51.7-141 74-113.7 41.7-188 58-150.8 24.5-229.5 24.5c-79.3 0-158.7-10.3-238-31s-149-46.2-209-76.5-117.5-65-172.5-104-99.2-74-132.5-105-61.3-60.2-84-87.5c-5.3-6-8.7-11.5-10-16.5s-1-9 1-12 4.7-5.3 8-7 7.2-2.3 11.5-2 8.2 1.8 11.5 4.5c128 78 228 133.3 300 166 259.3 117.3 525.7 147.3 799 90 126.7-26.7 257-71.7 391-135zm207-115c7.3 10.7 8.2 33.8 2.5 69.5s-15.2 69.8-28.5 102.5c-22.7 55.3-51 96.7-85 124-11.3 9.3-20 12.3-26 9s-6-11.3 0-24c14-30 28.8-70.5 44.5-121.5s17.8-83.8 6.5-98.5c-3.3-4.7-8.5-8.5-15.5-11.5s-16-5-27-6-20.8-1.8-29.5-2.5-20.3-.7-35 0-25.2 1.3-31.5 2-16.7 1.7-31 3-21.8 2-22.5 2c-4 .7-8.3 1.2-13 1.5s-8.3.7-11 1-5.5.7-8.5 1-5.3.5-7 .5h-10l-3-.5-2-1.5-1.5-3c-4-10.7 11.7-24 47-40s69.7-26 103-30c30.7-4.7 66.7-5 108-1s66.7 12 76 24zm-394-443c0 20.7 4.5 42 13.5 64s19.7 41.3 32 58c12.3 16.7 24.8 32 37.5 46s23.7 24.7 33 32l13 11-227 224c-26.7-24.7-53-49.8-79-75.5s-45.3-45.2-58-58.5l-19-20c-7.3-7.3-15.7-18.3-25-33-25.3 39.3-57.8 73.5-97.5 102.5s-82.2 50.2-127.5 63.5-92 21-140 23-93.8-5-137.5-21-82.8-37.8-117.5-65.5-62.3-65.3-83-113-31-101.8-31-162.5c0-56 9.3-107.3 28-154s42.7-85.5 72-116.5 64.8-58.7 106.5-83 82.5-43.3 122.5-57 83.3-25.2 130-34.5 86.5-15.5 119.5-18.5 66.2-5.2 99.5-6.5V396c0-43.3-7-75.7-21-97-22.7-35.3-63-53-121-53-4 0-9.5.3-16.5 1s-20.5 4.7-40.5 12-38.7 17.2-56 29.5-36 32.2-56 59.5-36 59.3-48 96l-294-27c0-40 7.3-79.7 22-119s37-77 67-113 66-67.7 108-95 92.5-49.2 151.5-65.5S818.8 0 886.8 0c66.7 0 127 8.3 181 25s97.2 37.2 129.5 61.5 59.3 52 81 83 36.7 59.7 45 86 12.5 50.8 12.5 73.5v589zm-672 21c0 57.3 23.3 101.7 70 133 44 29.3 90.3 36.7 139 22 56-16.7 94-57.7 114-123 9.3-30 14-63.7 14-101V708c-39.3 1.3-76.3 5.3-111 12s-70.2 17.8-106.5 33.5-65.3 39.3-87 71-32.5 69.8-32.5 114.5z' fill='context-fill' fill-opacity='context-fill-opacity'/></svg>") !important;
+}
+
+#urlbar[pageproxystate="invalid"] #identity-box > #identity-icon.doorDashIndicator,
+#urlbar[pageproxystate="valid"] #identity-box > #identity-icon.doorDashIndicator,
+#identity-icon.doorDashIndicator {
+    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 18.2'><path d='M30.8 4.3C29.3 1.6 26.6 0 23.6 0H.8C.3 0 0 .4 0 .8c0 .2.1.4.2.5l5 5c.4.5 1 .7 1.6.7h16.1c1.2 0 2.1.9 2.1 2.1s-.9 2.1-2.1 2.1h-11c-.4 0-.8.4-.8.8 0 .2.1.4.2.5l5 5c.4.4 1 .7 1.7.7h5c6.5 0 11.4-7 7.8-13.9' fill='context-fill' fill-opacity='context-fill-opacity'/></svg>") !important;
+}
+
+#urlbar[pageproxystate="invalid"] #identity-box > #identity-icon.netflixIndicator,
+#urlbar[pageproxystate="valid"] #identity-box > #identity-icon.netflixIndicator,
+#identity-icon.netflixIndicator {
+    height: 18px !important;
+    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 121.8 221'><path d='M0 0v110.4C0 171.2.1 220.9.1 221c.1.1 3.8-.3 8.4-.8 4.5-.5 10.8-1.1 13.9-1.4 4.8-.4 19.1-1.3 20.7-1.3.5 0 .5-2.5.6-46.8l.1-46.7L0 0zm121.7 110.5V.1H78.4L78.3 49l-.1 48.8L121.6 221c.1-.1.2-49.9.1-110.5z' fill='context-fill' fill-opacity='.4'/><path d='M78.2 97.8l-4-11.3c-4-11.1-6.6-18.5-22.4-63.1-4.2-12-7.8-22.2-8-22.6l-.2-.8H0l43.8 124v-.1l3.5 9.8c19.2 54.4 29.6 83.6 29.6 83.7 0 0 2.9.2 6.5.4 10.7.5 23.9 1.7 33.9 2.9 2.3.3 4.3.4 4.4.3L78.2 97.8z' fill='context-fill' fill-opacity='context-fill-opacity'/></svg>") !important;
+}
+
+#urlbar[pageproxystate="invalid"] #identity-box > #identity-icon.googleMapsIndicator,
+#urlbar[pageproxystate="valid"] #identity-box > #identity-icon.googleMapsIndicator,
+#identity-icon.googleMapsIndicator {
+    height: 17px !important;
+    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 92.3 132.3'><path fill='context-fill' fill-opacity='.2' d='M60.2 2.2C55.8.8 51 0 46.1 0 32 0 19.3 6.4 10.8 16.5l21.8 18.3L60.2 2.2z'/><path fill='context-fill' fill-opacity='.3' d='M10.8 16.5C4.1 24.5 0 34.9 0 46.1c0 8.7 1.7 15.7 4.6 22l28-33.3-21.8-18.3z'/><path fill='context-fill' fill-opacity='.4' d='M46.2 28.5c9.8 0 17.7 7.9 17.7 17.7 0 4.3-1.6 8.3-4.2 11.4 0 0 13.9-16.6 27.5-32.7-5.6-10.8-15.3-19-27-22.7L32.6 34.8c3.3-3.8 8.1-6.3 13.6-6.3'/><path fill='context-fill' fill-opacity='.5' d='M46.2 63.8c-9.8 0-17.7-7.9-17.7-17.7 0-4.3 1.5-8.3 4.1-11.3l-28 33.3c4.8 10.6 12.8 19.2 21 29.9l34.1-40.5c-3.3 3.9-8.1 6.3-13.5 6.3'/><path fill='context-fill' fill-opacity='.6' d='M59.1 109.2c15.4-24.1 33.3-35 33.3-63 0-7.7-1.9-14.9-5.2-21.3L25.6 98c2.6 3.4 5.3 7.3 7.9 11.3 9.4 14.5 6.8 23.1 12.8 23.1s3.4-8.7 12.8-23.2'/></svg>") !important;
+}
+
+#urlbar[pageproxystate="invalid"] #identity-box > #identity-icon.googleDriveIndicator,
+#urlbar[pageproxystate="valid"] #identity-box > #identity-icon.googleDriveIndicator,
+#identity-icon.googleDriveIndicator {
+    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 511.1 442.3'><path fill='context-fill' fill-opacity='.4' d='M166.8 1c2.1 2.8 3.7 5.9 5.4 8.9 27.8 48.1 55.6 96.2 83.3 144.3-12.8 22.4-25.8 44.7-38.7 67-1.7-10.7-5-21.1-7-31.7-3.2-11.4-5-23.2-8.3-34.6-3.8-18.4-8.4-36.6-12.6-55-6.3-26.7-12.4-53.5-18.4-80.3-1.4-6.1-3.2-12.2-3.7-18.6zm343.1 286.4c-25-7.2-49.6-15.7-74.7-22.6-22.8-7.4-45.8-14-68.5-21.4-12.6-3.6-25-7.6-37.5-11.3-11.6-3.8-23.6-6.9-35.1-11.1 12.9 22.5 26.1 44.8 38.8 67.4l.7.1c30.8.1 61.5 0 92.3 0 28.1-.2 56.2.4 84.3-.3l-.3-.8zm-362.7 53.7c10.3-17.6 20.1-35.5 30.8-52.9 51.6.2 103.3-.3 154.9.2l.7.1c-26.1.8-52.3-.2-78.4.4-5 3.2-8.3 8.4-13.1 11.9-4.4 3.2-7.7 7.7-11.9 11.2-5.9 4.4-10.3 10.4-16.4 14.7-7 7.4-15 13.6-22 20.9-5.3 4-9.7 9-14.6 13.5-5.4 3.9-9.5 9.2-14.6 13.5-.1.1-.4.3-.5.5-.3.2-.8.6-1.1.9-.1.1-.4.3-.5.4-4 3.1-7 7.1-10.9 10.3-.1.1-.4.3-.5.4-.1.1-.4.3-.5.4-5.7 4.7-10.3 10.6-16.2 14.9-6 6-12.8 11.1-18.5 17.4-8.4 6.9-15.7 15.1-24.4 21.8 2.2-4.7 5-9 7.5-13.5 16.7-29.1 33.5-58.1 50.2-87z'/><path fill='context-fill' fill-opacity='.6' d='M209.8 189.5c-3.2-11.4-5-23.2-8.3-34.5-3.8-18.4-8.4-36.6-12.6-55-6.3-26.7-12.4-53.5-18.4-80.3-1.4-6.2-3.3-12.3-3.8-18.6V.2h-.4l-.1.5-.1.5c-.4.6-1.2 1.7-1.5 2.2l-.1.2-1 1.6c0 .1-.1.2-.2.3l-1 1.8c-.1.2-.3.5-.4.6-.1.2-.3.5-.3.6l-1 1.7c0 .1-.1.2-.2.3l-.9 1.7c0 .2-.1.5-.2.6-.3.6-1 1.7-1.4 2.2-.1.2-.4.6-.5.8l-.8 1.2c-.1.1-.2.4-.3.5l-.8 1.6c0 .2-.1.5-.2.7-.4.5-1.1 1.6-1.5 2.2-.1.2-.4.6-.5.8l-.8 1.3c-.1.1-.2.3-.2.4l-1 1.7c-.1.2-.3.5-.4.7-.1.2-.3.5-.4.6l-1 1.7c0 .1-.1.2-.2.3l-.9 1.6c0 .1-.1.2-.2.3l-1 1.7c-.1.2-.3.5-.4.7-.1.2-.3.5-.4.7l-1 1.7c0 .1-.1.2-.2.3l-.9 1.7c0 .2-.1.5-.2.7-.4.5-1.1 1.7-1.5 2.2-.1.2-.4.6-.5.8l-.7 1.1c-.1.3-.4.9-.6 1.2l-.5 1c-.1.2-.4.6-.5.8-.1.2-.4.6-.6.8l-.7 1c-.1.2-.4.6-.5.8l-.9 1.7c-.1.2-.3.7-.5.9l-.5 1c-.1.2-.4.6-.5.8-.1.2-.4.6-.6.8l-.7.9c-.2.3-.5.9-.7 1.2l-.5 1.2-.4.8c-.3.6-1 1.7-1.4 2.2-.1.2-.4.6-.5.8l-.8 1.2c-.1.1-.2.4-.3.5l-.9 1.7c-.1.1-.2.4-.3.6-.4.6-1.1 1.8-1.4 2.4-.1.1-.3.4-.4.5l-.5.8c-.2.4-.5 1.2-.7 1.6l-.5 1c-.1.2-.4.6-.5.8-.1.2-.4.6-.6.8l-.6 1c-.1.2-.4.6-.5.8l-1 1.7c-.1.1-.2.3-.2.4l-.7 1.3c-.1.1-.2.4-.3.6-.4.7-1.2 2-1.6 2.7-.1.1-.2.4-.3.6l-.7 1.2c-.1.2-.3.5-.4.6l-.8 1.5-.4.8c-.1.2-.3.5-.4.7l-1 1.7c0 .1-.1.2-.2.3l-.9 1.7c0 .2-.1.5-.1.7-.4.5-1.1 1.6-1.5 2.2-.1.2-.4.6-.5.8l-.7 1.2c-.1.1-.2.4-.3.5l-1 1.8c-.1.2-.3.5-.4.7-.1.1-.3.5-.4.6l-1 1.7c0 .1-.1.2-.2.3l-1 1.7c0 .1-.1.2-.1.2C71.5 164.3 35.8 226.3 0 288.2c9 16.5 18.7 32.6 28 48.9 16.7 29 33.5 58 50.2 87 3.7 6 6.8 12.4 10.8 18.2h.4v-.7c2.2-4.7 5-9 7.5-13.5 16.7-29 33.5-57.9 50.2-86.9 10.3-17.6 20.1-35.5 30.8-52.9 1.9-2.7 3.4-5.7 5.1-8.5.1-.1.2-.4.3-.6.1-.2.3-.5.3-.6l1-1.8c.1-.1.2-.4.3-.5l.6-1.1c.1-.2.3-.5.4-.7.4-.7 1.2-2 1.6-2.6.1-.1.2-.4.3-.5l.8-1.5c.1-.1.2-.3.2-.4l.8-1.5c.1-.1.2-.4.3-.5.4-.7 1.1-2 1.5-2.6.1-.2.3-.5.4-.7l.6-1c.1-.1.2-.4.3-.5.4-.7 1.3-2.2 1.7-2.9.1-.1.2-.4.3-.5l.8-1.4c.1-.1.2-.3.3-.5l.7-1.3c.1-.2.3-.5.4-.6.4-.7 1.2-2 1.6-2.7.1-.1.2-.4.3-.6l.8-1.3c.1-.1.2-.4.3-.5l.8-1.3c.1-.2.3-.5.3-.6.4-.7 1.1-1.9 1.5-2.6.1-.2.3-.5.4-.7l.6-1c.1-.1.2-.4.3-.5l1.6-2.8c.1-.2.3-.5.4-.7l.6-1c.1-.1.2-.4.3-.5l1-1.7c.1-.2.3-.5.4-.7.1-.2.3-.5.4-.6l1-1.8c.1-.1.1-.2.2-.3l.8-1.5c.1-.2.3-.4.3-.6l.7-1.3c.1-.1.2-.4.3-.5.4-.7 1.2-2.1 1.6-2.9 0-.1.1-.3.2-.3l.3-.5c.2-.3.5-.8.7-1.1.7-1.2 1.4-2.3 2.1-3.5-1.6-10.9-4.8-21.3-6.9-31.9z'/><path fill='context-fill' fill-opacity='.6' d='M510.4 287.4c-.1-.2-.4-.7-.5-.9l-1.1-2c0-.1-.1-.2-.1-.3l-1-1.7c-.1-.2-.3-.5-.4-.7-.1-.2-.3-.5-.4-.7l-1-1.7c0-.1-.1-.2-.2-.3l-1-1.7c0-.1-.1-.2-.2-.3l-1-1.7c-.1-.2-.3-.5-.4-.6-.1-.2-.3-.5-.4-.6l-1-1.8c-.1-.2-.4-.6-.5-.8l-.7-1c-.2-.2-.4-.6-.6-.8-.1-.2-.3-.6-.5-.8l-.5-1-.4-.8c-.7-1.3-1.4-2.5-2.1-3.8-.1-.2-.3-.5-.4-.6-.1-.2-.3-.6-.4-.7l-.9-1.6c-.1-.1-.2-.3-.2-.4l-.9-1.6c0-.1-.1-.2-.2-.3l-1-1.7c-.1-.2-.3-.5-.4-.6-.1-.2-.3-.5-.4-.6l-1-1.8c-.1-.2-.3-.5-.4-.6l-.6-1c-.1-.2-.3-.5-.5-.7-.4-.6-1.3-2-1.8-2.6 0-.1-.1-.3-.2-.3l-.3-.5c-.2-.5-.6-1.4-.8-1.8l-.7-1c-.1-.2-.4-.6-.5-.8-.2-.3-.6-1-.8-1.3l-.6-.9c-.1-.1-.3-.4-.3-.6l-.3-.5c-.1-.3-.4-1-.6-1.4l-1-1.8c-.1-.2-.3-.5-.4-.7-.1-.2-.3-.5-.4-.7l-1-1.7c0-.1-.1-.2-.2-.3l-1-1.7c0-.1-.1-.2-.2-.3l-1-1.7c-.1-.2-.3-.5-.4-.6-.1-.2-.3-.5-.4-.7l-1-1.7c-.1-.1-.2-.3-.2-.4l-.8-1.4c-.1-.1-.2-.4-.3-.5-.4-.7-1.2-2-1.6-2.6-.1-.1-.2-.4-.3-.5-17.3-30.2-34.8-60.3-52.1-90.4-11.9-20.7-23.8-41.3-35.8-61.9-.1-.1-.2-.4-.3-.5-1.2-2.2-2.5-4.3-3.7-6.5-.1-.1-.2-.4-.3-.5-1.3-2.2-2.5-4.4-3.8-6.6 0-.1-.1-.2-.2-.3-1.3-2.2-2.5-4.4-3.8-6.6-.1-.1-.2-.4-.3-.5-.9-1.5-1.8-3.1-2.7-4.6 0-.1-.1-.2-.2-.3-4.9-8.6-9.8-17.2-14.8-25.7-.1-.1-.1-.2-.2-.3-2.6-4.5-5.2-9.1-7.8-13.6-.1-.1-.2-.4-.3-.5-.6-1-1.1-2-1.6-3-26.9-.4-53.8 0-80.7-.1-32.5 0-65-.1-97.5.1v.9c2.1 2.8 3.7 5.9 5.5 8.9 27.8 48.1 55.6 96.2 83.3 144.3.6 1 1.2 2.1 1.8 3.1.1.1.2.4.3.5.4.7 1.1 2 1.5 2.7.1.1.2.3.3.5l.8 1.5c0 .1.1.3.2.3l1 1.8c.1.2.3.5.4.6.1.2.3.5.4.7l1 1.6c0 .1.2.3.2.4.6 1.1 1.3 2.3 2 3.4.1.2.3.5.3.6.4.7 1.2 2 1.5 2.6.1.2.3.4.3.6l.9 1.5c.2.3.6 1 .8 1.3l.3.5c0 .1.1.3.2.3.4.8 1.3 2.4 1.8 3.2.2.3.6.8.8 1.1l.3.5c0 .1.1.3.2.3.9 1.7 1.8 3.4 2.8 5.1.2.3.6.8.8 1.1l.3.5c0 .1.1.3.2.3.4.7 1.2 2.1 1.6 2.9.1.1.3.5.4.6l.6 1.1c.1.2.3.5.4.7l.8 1.5c.1.2.3.5.4.7.1.2.3.5.4.6l1 1.8c0 .1.1.2.2.3l1 1.7c.1.1.2.4.3.5l.6 1c.1.2.3.5.4.7.4.7 1.3 2.2 1.7 2.9.2.3.5.9.7 1.1l.3.5c0 .1.2.3.2.3.5.7 1.3 2.1 1.8 2.8 0 .1.1.2.1.2.6 1.3 1.2 2.6 1.9 3.9.1.2.3.4.3.6.1.2.3.5.4.7l1 1.6c0 .1.2.3.2.4l.7 1.2c11.5 4.2 23.5 7.3 35.1 11.1 12.5 3.7 24.9 7.7 37.5 11.3 22.8 7.3 45.8 14 68.5 21.4 25.1 6.9 49.7 15.5 74.7 22.6l.2.8h.6l.3-1.2z'/><path fill='context-fill' fill-opacity='.6' d='M510.7 288.2h-.6c-28.1.6-56.2.1-84.3.3-30.8 0-61.5.1-92.3 0-26.1.8-52.3-.2-78.4.4-5 3.2-8.3 8.4-13.1 11.9-4.4 3.2-7.7 7.7-11.9 11.2-5.9 4.4-10.3 10.4-16.4 14.7-7 7.4-15 13.6-22 20.9-5.3 4-9.7 9-14.6 13.5-5.4 3.9-9.5 9.2-14.6 13.5-.1.1-.4.3-.5.5-.3.2-.8.6-1.1.9-.1.1-.4.3-.5.4-4 3.1-7 7.1-10.9 10.3-.1.1-.4.3-.5.4-.1.1-.4.3-.5.4-5.7 4.7-10.3 10.6-16.2 14.9-6 6-12.8 11.1-18.5 17.4-8.4 6.9-15.7 15.1-24.4 21.8v.7c110.9.2 221.8 0 332.8.1 29.7-51.3 59.2-102.6 88.9-153.9v-.1l-.4-.2z'/></svg>") !important;
+}
+
+#urlbar[pageproxystate="invalid"] #identity-box > #identity-icon.gmailIndicator,
+#urlbar[pageproxystate="valid"] #identity-box > #identity-icon.gmailIndicator,
+#identity-icon.gmailIndicator {
+    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 38 30'><path d='M34 0H4C1.8 0 0 1.8 0 4v22c0 2.2 1.8 4 4 4h30c2.2 0 4-1.8 4-4V4c0-2.2-1.8-4-4-4zm-2 4L18.6 16.6l-.1.1-.1-.1L5.7 4H32zM4 26V8l11.5 11.4c.6.6 1.6 1.5 2.9 1.5h.1c1.3 0 2.3-.8 2.9-1.4L34 7.6V26H4z' fill='context-fill' fill-opacity='context-fill-opacity'/></svg>") !important;
+}
+
+:root[lwt-toolbar-field-brighttext] #urlbar-engine-one-off-item-history > .button-box > .button-icon {
+    fill: currentColor;
+    fill-opacity: 1 !important;
+}
+
+:root[lwt-toolbar-field-brighttext] #urlbar-engine-one-off-item-bookmarks > .button-box > .button-icon {
+    fill: white !important;
+}
