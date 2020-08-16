@@ -2982,6 +2982,10 @@ toolbar {
     --urlbar-container-height: 39px !important;
     --lwt-toolbarbutton-icon-fill-attention: hsl(224, 100%, 71%) !important;
     --places-cell-focus-bgcolor: hsla(233, 24%, 28%, 50%) !important;
+    --ctrlTab-panel-disabled-bgcolor: hsla(240, 2%, 9%, 0.8) !important;
+    --ctrlTab-panel-disabled-focused-bgcolor: hsla(240, 8%, 3%, 0.9) !important;
+    --ctrlTab-panel-bgcolor: hsla(240, 3%, 4%, 0.9) !important;
+    --ctrlTab-panel-focused-bgcolor: hsla(240, 3%, 2.5%, 0.99) !important;
 }
 
 toolbar .toolbarbutton-1:not([disabled]):hover:-moz-any([open]) > .toolbarbutton-icon {
@@ -3483,18 +3487,28 @@ spacer[part=arrowscrollbox-overflow-end-indicator] {
     margin-left: -28px !important;
 }
 
+#ctrlTab-showAll {
+    background-color: var(--ctrlTab-panel-bgcolor) !important;
+}
+
+#ctrlTab-showAll:focus,
+#ctrlTab-showAll:focus-within {
+    background-color: var(--ctrlTab-panel-focused-bgcolor) !important;
+    border: 2px solid transparent !important;
+}
+
 .ctrlTab-preview-inner {
     padding: 8px transparent !important;
     border: 2px solid transparent !important;
     border-radius: 3px !important;
 /*     box-shadow: none !important; */
     box-shadow: 0 0 4px -1px rgba(0, 0, 0, 0.2), 0 0 25px -2px rgba(0, 0, 0, 0.2) !important;
-    background-color: hsla(240, 2%, 9%, 0.8) !important;
+    background-color: var(--ctrlTab-panel-bgcolor) !important;
 /*     backdrop-filter: blur(10px) !important; */
 }
 
 .ctrlTab-preview:focus>.ctrlTab-preview-inner {
-    background-color: hsla(240, 8%, 3%, 0.9) !important;
+    background-color: var(--ctrlTab-panel-focused-bgcolor) !important;
 /*     transition: all 0.05s ease 0s !important; */
 }
 
