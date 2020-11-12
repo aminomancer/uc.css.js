@@ -1,0 +1,634 @@
+.tabbrowser-tab {
+    min-height: 35px !important;
+}
+
+#tabs-newtab-button {
+    display: none !important;
+}
+
+#new-tab-button {
+    display: -moz-box !important;
+}
+
+.titlebar-spacer[type="pre-tabs"] {
+    border-inline-end: 0px solid white !important;
+    width: 0px !important;
+}
+
+.titlebar-spacer[type="post-tabs"] {
+    width: 15.6px !important;
+}
+
+:root[privatebrowsingmode="temporary"] .titlebar-spacer[type="post-tabs"] {
+    width: 0px !important;
+    margin-left: -2px !important;
+}
+
+.tabbrowser-tab:not([pinned]) {
+    min-width: 76px !important;
+}
+
+.tabbrowser-scroll-arrow-hide {
+    display: none !important;
+}
+
+.tabbrowser-scroll-start-indicator,
+.tabbrowser-scroll-end-indicator {
+    display: none !important;
+}
+
+#toolbox-button {
+    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' x='0px' y='0px' viewBox='0 0 512 512' xml:space='preserve' width='512' height='512'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M512,256v-64c0-35.346-28.654-64-64-64H64c-35.346,0-64,28.654-64,64v64h128v42.667H0v170.667     c0,11.782,9.551,21.333,21.333,21.333h469.333c11.782,0,21.333-9.551,21.333-21.333V298.667H384V256H512z M362.667,341.333H339.2     c-1.87,7.463-4.74,14.639-8.533,21.333l17.067,17.067L317.867,409.6L300.8,392.533l-21.333,8.533v25.6h-44.8V403.2l-21.333-8.533     l-17.067,17.067l-29.867-32l17.067-17.067c-3.793-6.694-6.664-13.87-8.533-21.333h-25.6v-42.667H172.8     c1.87-7.463,4.74-14.639,8.533-21.333l-17.067-17.067l29.867-29.867l17.067,17.067l21.333-8.533v-25.6H275.2V236.8l21.333,8.533     l17.067-17.067l29.867,29.867L326.4,275.2c3.793,6.694,6.664,13.87,8.533,21.333h27.733V341.333z'/><circle fill='context-fill' fill-opacity='context-fill-opacity' cx='256' cy='320' r='42.667'/><path fill='context-fill' fill-opacity='context-fill-opacity' d='M192,64h128v42.667h42.667v-64c0-11.782-9.551-21.333-21.333-21.333H170.667c-11.782,0-21.333,9.551-21.333,21.333v64     H192V64z'/></svg>");
+}
+
+#controls.playing #playpause {
+    -moz-context-properties: fill, fill-opacity !important;
+    fill: white !important;
+    fill-opacity: 0.8 !important;
+    background-image: url("data:image/svg+xml;utf8,<svg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='-125 -125 762 762' style='enable-background:new 0 0 512 512;' xml:space='preserve'><g><g><path fill='context-fill' fill-opacity='context-fill-opacity' d='M181.333,0H74.667c-17.643,0-32,14.357-32,32v448c0,17.643,14.357,32,32,32h106.667c17.643,0,32-14.357,32-32V32    C213.333,14.357,198.976,0,181.333,0z'/></g></g><g><g><path fill='context-fill' fill-opacity='context-fill-opacity' d='M437.333,0H330.667c-17.643,0-32,14.357-32,32v448c0,17.643,14.357,32,32,32h106.667c17.643,0,32-14.357,32-32V32    C469.333,14.357,454.976,0,437.333,0z'/></g></g></svg>") !important;
+}
+
+#tabbrowser-tabs::after {
+    width: 9px !important;
+    margin-right: -9px !important;
+    position: relative !important;
+/*     box-shadow: 0px 0 12px 0px rgba(0,0,0,0.27) !important; */
+    display: block !important;
+    content: "" !important;
+    z-index: 0 !important;
+    pointer-events: none !important;
+}
+
+#tabbrowser-tabs {
+    background-color: var(--lwt-accent-color) !important;
+}
+
+
+#tabbrowser-tabs::after {
+    box-shadow: -7px 0px 7px 0px rgba(0, 0, 0, 0.1) !important;
+    background-color: transparent !important;
+    mix-blend-mode: darken !important;
+    width: 20px !important;
+    margin-right: -20px !important;
+    z-index: 5 !important;
+}
+
+/* link[href$="global.css"] ~ scrollbox {
+    overflow-y: auto !important;
+} */
+link[href$="global.css"] ~ .menupopup-scrollbutton {
+    display: none !important;
+}
+link[href$="global.css"] ~ hbox > arrowscrollbox.in-bookmarks-menu {
+    padding-bottom: 0px !important;
+}
+link[href$="global.css"] ~ scrollbox {
+    padding-top: 0px !important;
+}
+link[href$="global.css"] ~ .scrollbutton-up,
+link[href$="global.css"] ~ .scrollbutton-down,
+link[href$="global.css"] ~ spacer[part=arrowscrollbox-overflow-start-indicator],
+link[href$="global.css"] ~ spacer[part=arrowscrollbox-overflow-end-indicator] {
+    display: none !important;
+}
+
+/* disable toolbar menubar */
+/* #toggle_toolbar-menubar {
+    display: none !important;
+} */
+
+/* disable autohide menu */
+#autohide-context {
+    display: none !important;
+}
+
+/* menubar next to tabs */
+:root[sizemode="normal"] #toolbar-menubar{
+    position: absolute !important;
+    display: block !important;
+    z-index: 555 !important;
+    right: 90px !important;
+    left: auto !important;
+    top: 9px !important;
+}
+
+:root[sizemode="normal"] #toolbar-menubar:not([inactive])>.titlebar-buttonbox-container {
+    display: block !important;
+    position: fixed !important;
+    top: 10px !important;
+    right: 0 !important;
+    width: -moz-min-content !important;
+}
+
+:root[sizemode="maximized"] #toolbar-menubar{
+    position: absolute !important;
+    display: block !important;
+    z-index: 555 !important;
+    right: 90px !important;
+    left: auto !important;
+    top: 16px !important;
+}
+
+:root[sizemode="maximized"] #toolbar-menubar:not([inactive])>.titlebar-buttonbox-container {
+    display: block !important;
+    position: fixed !important;
+    top: 17.5px !important;
+    right: 0 !important;
+    width: -moz-min-content !important;
+}
+
+:root[inFullscreen] #toolbar-menubar{
+    position: absolute !important;
+    display: block !important;
+    z-index: 555 !important;
+    right: 90px !important;
+    left: auto !important;
+    top: 9px !important;
+}
+
+:root[inFullscreen] #toolbar-menubar:not([inactive])>.titlebar-buttonbox-container {
+    display: none !important;
+}
+
+/* #main-window[sizemode="maximized"] #toolbar-menubar {
+    top: 16px !important;
+    bottom: auto !important;
+} */
+
+:root[inFullscreen] #toolbar-menubar {
+    visibility: visible !important;
+    right: 92px !important;
+}
+
+#toolbar-menubar:not([inactive]) ~ #TabsToolbar .toolbar-items {
+    margin-right: 392px !important;
+}
+
+:root[inFullscreen] #toolbar-menubar:not([inactive]) ~ #TabsToolbar .toolbar-items {
+    margin-right: 292.5px !important;
+}
+
+#toolbar-menubar #menubar-items,
+#toolbar-menubar #wrapper-menubar-items {
+    position: relative !important;
+    top: -3px !important;
+    right: 2px !important;
+}
+
+#toolbar-menubar #main-menubar>menu {
+    border-radius: 2px !important;
+    -moz-appearance: none !important;
+    padding-top: 2px !important;
+    padding-bottom: 2px !important;
+}
+
+#toolbar-menubar #main-menubar>menu[_moz-menuactive] {
+    background-color: var(--toolbarbutton-hover-background) !important;
+}
+
+#toolbar-menubar #main-menubar>menu[open] {
+    background-color: var(--toolbarbutton-active-background) !important;
+}
+
+:root[privatebrowsingmode] #toolbar-menubar:not([inactive]) ~ #TabsToolbar .private-browsing-indicator {
+    display: block !important;
+    right: 92px !important;
+    top: 9.5px !important;
+    z-index: 0 !important;
+    pointer-events: none !important;
+    position: fixed !important;
+}
+
+:root[privatebrowsingmode] #toolbar-menubar #menubar-items,
+:root[privatebrowsingmode] #toolbar-menubar #wrapper-menubar-items {
+    right: 39px !important;
+}
+
+:root[privatebrowsingmode] #toolbar-menubar:not([inactive]) ~ #TabsToolbar .toolbar-items {
+    margin-right: 429px !important;
+}
+
+:root[inFullscreen][privatebrowsingmode] #toolbar-menubar:not([inactive]) ~ #TabsToolbar .toolbar-items {
+    margin-right: 329.5px !important;
+}
+
+.tab-background {
+    border: none !important;
+}
+
+/* toolbar slider extension order */
+#nav-bar-toolbarbutton-slider>toolbarbutton[id="bookmarks-menu-button"] {
+    order: 1 !important;
+}
+
+#nav-bar-toolbarbutton-slider>toolbarbutton[id="history-panelmenu"] {
+    order: 2 !important;
+}
+
+#nav-bar-toolbarbutton-slider>toolbarbutton[id="downloads-button"] {
+    order: 3 !important;
+}
+
+#nav-bar-toolbarbutton-slider>toolbarbutton[id="toolbox-button"] {
+    order: 4 !important;
+}
+
+#nav-bar-toolbarbutton-slider>toolbarbutton[label="Pushbullet"] {
+    order: 5 !important;
+}
+
+#nav-bar-toolbarbutton-slider>toolbarbutton[label="Simple Translate"] {
+    order: 6 !important;
+}
+
+#nav-bar-toolbarbutton-slider>toolbarbutton[label="Bitwarden"] {
+    order: 7 !important;
+}
+
+#nav-bar-toolbarbutton-slider>toolbarbutton[label="uBlock Origin"],
+#nav-bar-toolbarbutton-slider>toolbarbutton[label="Nano Adblocker"] {
+    order: 8 !important;
+}
+
+#nav-bar-toolbarbutton-slider>toolbarbutton[label^="Firefox Private Network"] {
+    order: 9 !important;
+}
+
+#nav-bar-toolbarbutton-slider>toolbarbutton[label="Dark Reader"] {
+    order: 10 !important;
+}
+
+#nav-bar-toolbarbutton-slider>toolbarbutton[id="fullscreen-button"] {
+    order: 11 !important;
+}
+
+#nav-bar-toolbarbutton-slider>toolbarbutton[label="Multithreaded Download Manager"] {
+    order: 12 !important;
+}
+
+#nav-bar-toolbarbutton-slider>toolbarbutton#sync-button {
+    order: 13 !important;
+}
+
+#nav-bar-toolbarbutton-slider>toolbarbutton[label="Multi-Account Containers"] {
+    order: 14 !important;
+}
+
+#nav-bar-toolbarbutton-slider>toolbarbutton#panic-button {
+    order: 15 !important;
+}
+
+#nav-bar-toolbarbutton-slider>toolbarbutton[id="preferences-button"] {
+    order: 16 !important;
+}
+
+#nav-bar-toolbarbutton-slider>toolbarbutton[id="add-ons-button"] {
+    order: 17 !important;
+}
+
+#nav-bar-toolbarbutton-slider>toolbarbutton[label="Add custom search engine"] {
+    order: 18 !important;
+}
+
+#nav-bar-toolbarbutton-slider>toolbarbutton[id="sidebar-button"] {
+    order: 19 !important;
+}
+
+#nav-bar-toolbarbutton-slider>toolbarbutton[id="privatebrowsing-button"] {
+    order: 20 !important;
+}
+
+#nav-bar-toolbarbutton-slider>toolbarbutton[id="wnpc_aminomancer-browser-action"] {
+    order: 21 !important;
+}
+
+#nav-bar-toolbarbutton-slider>toolbarbutton[label="Firefox Color"] {
+    order: 22 !important;
+}
+
+#nav-bar-toolbarbutton-slider>toolbarbutton[label^="Violentmonkey"] {
+    order: 23 !important;
+}
+
+#nav-bar-toolbarbutton-slider>toolbarbutton[label="mozlz4-edit"] {
+    order: 24 !important;
+}
+
+#nav-bar-toolbarbutton-slider>toolbarbutton[label="Nano Defender for Firefox"] {
+    order: 25 !important;
+}
+
+#nav-bar-toolbarbutton-slider>toolbarbutton[id="zotero_chnm_gmu_edu-browser-action"] {
+    order: 26 !important;
+}
+
+/* extension icon color adjustment */
+#_testpilot-containers-browser-action .toolbarbutton-icon {
+    list-style-image: url("data:image/svg+xml;utf8,<svg height='16' viewBox='0 0 16 16' width='16' xmlns='http://www.w3.org/2000/svg'><g fill='context-fill' fill-opacity='context-fill-opacity' fill-rule='evenodd'><rect height='6' rx='1' width='6' x='1' y='1'/><path d='m11 1h2v6h-2z' transform='matrix(0 1 -1 0 16 -8)'/><path d='m11 1h2v6h-2z'/><rect height='6' rx='1' width='6' x='1' y='9'/><rect height='6' rx='1' width='6' x='9' y='9'/></g></svg>") !important;
+}
+
+#panorama-tab-groups_example_com-browser-action .toolbarbutton-icon {
+    filter: brightness(1) grayscale(1000) contrast(1.5) !important;
+}
+
+#zotero_chnm_gmu_edu-browser-action {
+    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 377.343 377.343'><path d='M301.689,53.505H75.651c-10.876,0-19.725,8.843-19.725,19.713v230.904c0,10.878,8.843,19.727,19.725,19.727h226.039   c10.873,0,19.722-8.843,19.722-19.727V73.218C321.406,62.348,312.562,53.505,301.689,53.505z M188.67,227.7H79.521v-12.728   l60.921-111.861H84.756V75.026H188.29v15.354L128.938,199.52h59.732V227.7z M338.677,0H38.662C19.094,0,3.226,15.869,3.226,35.434   v306.462c0,19.581,15.869,35.447,35.437,35.447h300.02c19.568,0,35.436-15.866,35.436-35.447V35.434   C374.117,15.869,358.25,0,338.677,0z M335.381,304.122c0,18.572-15.113,33.691-33.691,33.691H75.651   c-18.576,0-33.695-15.114-33.695-33.691V73.218c0-18.569,15.114-33.688,33.695-33.688h226.039   c18.572,0,33.691,15.114,33.691,33.688V304.122z' fill='context-fill' fill-opacity='context-fill-opacity'/></svg>") !important;
+}
+
+#_64b2c525-24ed-4c05-aed1-95ff9e6cef70_-browser-action .toolbarbutton-icon,
+#wnpc_aminomancer-browser-action .toolbarbutton-icon {
+    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 37.6 55'><path fill='none' stroke='context-fill' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M36.1 37.3c0 8.9-7.8 16.1-17.3 16.1S1.5 46.2 1.5 37.3c0-8.9 17.3-35.8 17.3-35.8s17.3 26.9 17.3 35.8z' clip-rule='evenodd'/><path fill='context-fill' fill-rule='evenodd' d='M18.7 35.7c-8.5-6.3-11.6 0-11.6 0-.1.5-.2.9-.2 1.3 0 6.1 5.3 11.1 11.9 11.1 6.6 0 11.9-5 11.9-11.1 0-.4-.1-.8-.1-1.3 0 0-4.7 5.3-11.9 0z' clip-rule='evenodd'/></svg>") !important;
+    fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
+}
+
+#_af37054b-3ace-46a2-ac59-709e4412bec6_-browser-action .toolbarbutton-icon {
+    list-style-image: url("chrome://browser/skin/search-glass.svg") !important;
+    fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
+}
+
+#_bee8b1f2-823a-424c-959c-f8f76c8b2306_-browser-action .toolbarbutton-icon {
+    list-style-image: url("chrome://browser/skin/notification-icons/screen-blocked.svg") !important;
+    fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
+}
+
+#_0981817c-71b3-4853-a801-481c90af2e8e_-browser-action .toolbarbutton-icon {
+    list-style-image: url("chrome://devtools/skin/images/tool-dom.svg") !important;
+    fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
+}
+
+#jid1-bycqofyfmbmd9a_jetpack-browser-action .toolbarbutton-icon {
+    list-style-image: url("chrome://browser/skin/notification-icons/desktop-notification.svg") !important;
+    fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
+    /*     filter: hue-rotate(125deg) saturate(90%) brightness(110%) !important; */
+}
+
+#_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action .toolbarbutton-icon {
+    list-style-image: url("chrome://browser/skin/notification-icons/webauthn.svg") !important;
+    fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
+    /*     filter: hue-rotate(38deg) saturate(50%) brightness(90%) contrast(1.7) !important; */
+}
+
+#jid1-93wyvpgvxzgatw_jetpack-browser-action .toolbarbutton-icon,
+#simple-translate_sienori-browser-action .toolbarbutton-icon {
+    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='2 2 20 20'><path style='text-indent:0;text-align:start;line-height:normal;text-transform:none;block-progression:tb;-inkscape-font-specification:Sans' d='M 4 2 C 2.895 2 2 2.895 2 4 L 2 13 C 2 14.105 2.895 15 4 15 L 5 15 L 5 17 L 7 19 L 9 19 L 9 20 C 9 21.105 9.895 22 11 22 L 20 22 C 21.105 22 22 21.105 22 20 L 22 11 C 22 9.895 21.105 9 20 9 L 15 9 L 15 4 C 15 2.895 14.105 2 13 2 L 4 2 z M 4 4 L 13 4 L 13 9 L 11 9 C 10.341763 9 9.7706576 9.3221194 9.40625 9.8125 C 9.2445116 9.7044445 9.1097992 9.5742854 8.96875 9.46875 C 9.6025727 8.8044147 10.234886 7.9984382 10.75 7 L 12 7 L 12 6 L 9 6 L 9 5 L 8 5 L 8 6 L 5 6 L 5 7 L 6.125 7 A 0.50005 0.50005 0 0 0 6.03125 7.5 C 6.03125 7.5 6.1990849 8.0080321 6.71875 8.6875 C 6.9071286 8.9338071 7.1681985 9.2086071 7.46875 9.5 C 6.3240739 10.473776 5.34375 10.90625 5.34375 10.90625 A 0.5048592 0.5048592 0 0 0 5.71875 11.84375 C 5.71875 11.84375 6.915412 11.354151 8.25 10.1875 C 8.4829694 10.368343 8.7491541 10.535248 9.03125 10.71875 C 9.0182221 10.811016 9 10.904125 9 11 L 9 13 L 6 13 L 4 13 L 4 4 z M 6.875 7 L 9.5625 7 C 9.136858 7.7208757 8.6725215 8.3424895 8.1875 8.84375 C 7.9037308 8.5739944 7.6665472 8.3115123 7.5 8.09375 C 7.0644151 7.5242179 7 7.21875 7 7.21875 A 0.50005 0.50005 0 0 0 6.875 7 z M 14.84375 12 L 16.15625 12 L 19 20 L 17.84375 20 L 17.09375 17.8125 L 13.84375 17.8125 L 13.125 20 L 12 20 L 14.84375 12 z M 15.4375 12.90625 C 15.3135 13.38125 14.15625 17 14.15625 17 L 16.8125 17 C 16.8125 17 15.59275 13.36925 15.46875 12.90625 L 15.4375 12.90625 z M 7 15 L 9 15 L 9 17 L 7 17 L 7 15 z' overflow='visible' font-family='Sans' fill='context-fill' fill-opacity='context-fill-opacity'/></svg>") !important;
+    fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
+    /*     list-style-image: url("https://visualpharm.com/assets/116/Google%20Translate-595b40b75ba036ed117d7e7c.svg") !important; */
+    /*     filter: hue-rotate(20deg) saturate(50%) contrast(1.5) brightness(90%) !important; */
+}
+
+#addon_darkreader_org-browser-action .toolbarbutton-icon {
+    list-style-image: url("data:image/svg+xml;utf8,<svg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='523.854px' height='523.854px' viewBox='0 0 523.854 523.854' style='enable-background:new 0 0 523.854 523.854;' xml:space='preserve'><path d='M506.51,347.083c-7.057-7.037-15.245-8.531-24.571-4.424c-25.031,11.597-50.968,17.398-77.81,17.398    c-33.673,0-64.726-8.292-93.165-24.914c-28.439-16.598-50.961-39.125-67.571-67.559c-16.609-28.434-24.915-59.493-24.915-93.166    c0-26.169,5.171-51.016,15.527-74.572c10.349-23.543,25.306-44.192,44.878-61.935c7.509-7.05,9.217-15.238,5.116-24.565    c-3.874-9.333-10.808-13.758-20.82-13.317c-34.811,1.371-67.797,9.156-98.966,23.379c-31.175,14.223-57.963,32.925-80.368,56.132    c-22.411,23.207-40.159,50.68-53.238,82.412c-13.072,31.732-19.608,65.006-19.608,99.811c0,35.502,6.94,69.401,20.82,101.697    c13.874,32.313,32.534,60.189,55.967,83.611c23.434,23.445,51.304,42.087,83.611,55.974    c32.301,13.861,66.206,20.808,101.696,20.808c50.962,0,98-13.825,141.115-41.457c43.109-27.65,75.361-64.56,96.751-110.735    c1.817-4.106,2.326-8.427,1.536-12.968C511.682,354.146,509.692,350.278,506.51,347.083z' fill='context-fill' fill-opacity='context-fill-opacity'/></svg>") !important;
+    fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
+    /*     filter: hue-rotate(45deg) !important; */
+}
+
+#ublock0_raymondhill_net-browser-action .toolbarbutton-icon,
+.webextension-browser-action[label="Nano Adblocker"]{
+    /*     filter: contrast(0.5) hue-rotate(240deg) brightness(1.3) saturate(130%) !important; */
+    list-style-image: url("chrome://browser/skin/controlcenter/tracking-protection.svg") !important;
+    fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
+}
+
+#multithreaded-download-manager_qw_linux-2g64_local-browser-action .toolbarbutton-icon {
+    fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
+    fill-opacity: var(--toolbarbutton-icon-fill-opacity) !important;
+    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path stroke='context-fill' stroke-opacity='context-fill-opacity' fill='none' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' d='M 6,1 v 9 M 10,1 v 9 M 3,7 l 5,5 l 5,-5 M 3,15 H 13'/></svg>") !important;
+}
+
+#_63d150c4-394c-4275-bc32-c464e76a891c_-browser-action .toolbarbutton-icon {
+    filter: grayscale(1) brightness(1.5) contrast(2) !important;
+}
+
+#note-tab_wildsky_cc-browser-action .toolbarbutton-icon {
+    list-style-image: url("chrome://browser/skin/readerMode.svg");
+    fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
+    /*     mix-blend-mode: luminosity !important; */
+    /*     list-style-image: url("data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA3d3dAP///wB3d3cAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADMzMzMzMwAAMiIiIiIjAAAyIiIiIiMAADIjMzMyIwAAMiIiIiIjAAAyIiIiIiMAADIjMzMyIwAAMiIiIiIjAAAyIiIiIiMAADIjMzMyIwAAMiIiIiIjAAAyIiIiIiMAADIiIiIzMwAAMiIiIjEwAAAyIiIiMwAAADMzMzMwAADAAwAAwAMAAMADAADAAwAAwAMAAMADAADAAwAAwAMAAMADAADAAwAAwAMAAMADAADAAwAAwAcAAMAPAADAHwAA") !important; */
+}
+
+.webextension-browser-action[widget-id="secure-proxy_mozilla_com-browser-action"] {
+    fill-opacity: 1 !important;
+    -moz-context-properties: fill, fill-opacity !important;
+    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M12.46 2.057A6.077 6.077 0 008.05.195C4.654.195 2 2.894 2 6.34c0 3.192 4.917 8.626 5.479 9.237a.795.795 0 001.17-1.076 42.157 42.157 0 01-2.579-3.164C3.91 8.39 3.588 6.939 3.588 6.34c0-2.557 1.952-4.557 4.455-4.557a4.501 4.501 0 013.274 1.376 4.367 4.367 0 011.22 3.221c-.047 1.267-1.321 3.27-2.555 4.808-1.479-1.756-2.967-3.814-3.084-4.683-.047-.32.053-.643.27-.882.236-.254.571-.392.918-.378.31.012.602.154.804.39.239.276.354.638.318 1.001a1.55 1.55 0 01-.217.716.792.792 0 101.247.976c.324-.457.512-.996.542-1.555a2.927 2.927 0 00-.706-2.2 2.689 2.689 0 00-1.951-.924c-.813-.03-1.599.3-2.146.901a2.679 2.679 0 00-.66 2.158c.076.568.61 2.293 3.926 6.06.19.218.468.34.757.336a.99.99 0 00.745-.345c.78-.901 3.296-4.02 3.382-6.32a5.94 5.94 0 00-1.667-4.382z'/></svg>") !important;
+}
+
+.webextension-browser-action[widget-id="secure-proxy_mozilla_com-browser-action"][label="Firefox Private Network is inactive"] {
+    fill-opacity: 0.6 !important;
+}
+
+.webextension-browser-action[widget-id="secure-proxy_mozilla_com-browser-action"][label="Firefox Private Network is On"] {
+    filter: contrast(0.7) brightness(1.4) !important;
+    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='16' height='16' viewBox='0 0 16 16'><defs><linearGradient id='fpn-green-badge-a' x1='64.065%' x2='27.226%' y1='6.588%' y2='88.848%'><stop offset='0%' stop-color='%23FF9640'/><stop offset='60%' stop-color='%23FC4055'/><stop offset='100%' stop-color='%23E31587'/></linearGradient><linearGradient id='fpn-green-badge-b' x1='64.065%' x2='27.226%' y1='6.588%' y2='88.848%'><stop offset='0%' stop-color='%23FFF36E' stop-opacity='.8'/><stop offset='9%' stop-color='%23FFF36E' stop-opacity='.7'/><stop offset='75%' stop-color='%23FFF36E' stop-opacity='0'/></linearGradient><linearGradient id='fpn-green-badge-c' x1='76.537%' x2='33.666%' y1='89.279%' y2='3.042%'><stop offset='0%' stop-color='%23B833E1'/><stop offset='37%' stop-color='%239059FF'/><stop offset='61%' stop-color='%235B6DF8'/><stop offset='100%' stop-color='%230090ED'/></linearGradient><linearGradient id='fpn-green-badge-d' x1='83.333%' x2='37.602%' y1='101.626%' y2='42.563%'><stop offset='0%' stop-color='%23722291' stop-opacity='.5'/><stop offset='50%' stop-color='%23722291' stop-opacity='0'/></linearGradient><path id='fpn-green-badge-e' d='M2.25,5.25 C2.15055194,5.24997876 2.05518477,5.21045602 1.984875,5.140125 L0.859875,4.015125 C0.717760421,3.86798292 0.71979286,3.63409321 0.864443034,3.48944303 C1.00909321,3.34479286 1.24298292,3.34276042 1.390125,3.484875 L2.199,4.29375 L4.5675,0.910125 C4.6869796,0.74266611 4.91906071,0.702722311 5.0876502,0.820601232 C5.25623969,0.938480154 5.29839254,1.17017022 5.182125,1.339875 L2.557125,5.089875 C2.49388198,5.18129841 2.39333598,5.23995024 2.282625,5.25 C2.27175692,5.25054851 2.26086808,5.25054851 2.25,5.25 Z'/></defs><g fill='none' fill-rule='evenodd'><path fill='%2320123A' fill-rule='nonzero' d='M12.4604878,2.05658537 C11.3067114,0.858377874 9.71215358,0.185574622 8.04878049,0.195021709 C4.65365854,0.195021709 2,2.89365854 2,6.3395122 C2,9.53170732 6.91707317,14.9658537 7.47902439,15.5765854 C7.67107643,15.7857164 7.96010993,15.876503 8.23724878,15.8147466 C8.51438762,15.7529902 8.73752783,15.5480731 8.82261463,15.2771856 C8.90770144,15.0062981 8.84180814,14.7105945 8.6497561,14.5014634 C8.63414634,14.4858537 7.34439024,13.0731707 6.0702439,11.3365854 C3.9102439,8.3902439 3.58829268,6.93853659 3.58829268,6.3395122 C3.58829268,3.78341463 5.5395122,1.78341463 8.04292683,1.78341463 C9.27671093,1.77386308 10.4603345,2.27115429 11.3170732,3.15902439 C12.1478123,4.02038575 12.5886603,5.18492971 12.5365854,6.3804878 C12.4897561,7.64682927 11.2156098,9.65073171 9.98243902,11.1882927 C8.50341463,9.43219512 7.01463415,7.37365854 6.89756098,6.50536585 C6.85137146,6.18560328 6.95089626,5.86196869 7.16878049,5.62341463 C7.40419361,5.3688908 7.73945038,5.23050822 8.08585366,5.24487805 C8.39653441,5.25708993 8.68797926,5.39856801 8.8897561,5.63512195 C9.12873362,5.91094666 9.24374669,6.27292031 9.20780488,6.63609756 C9.19519251,6.88890571 9.12082934,7.13477313 8.99121951,7.35219512 L8.99121951,7.35219512 C8.80334698,7.57372956 8.75178229,7.88031724 8.85684897,8.15112083 C8.96191565,8.42192443 9.2067622,8.61351015 9.49488572,8.65036711 C9.78300923,8.68722407 10.068198,8.56344084 10.2380488,8.32780488 L10.2380488,8.32780488 C10.5621507,7.87108797 10.750226,7.3318936 10.7804878,6.77268293 C10.8564484,5.97383961 10.6010907,5.17884472 10.0741463,4.57365854 C9.58154164,4.00627028 8.87399267,3.67089207 8.12292683,3.64878049 C7.3096289,3.61848354 6.52434356,3.94830338 5.97658537,4.5502439 C5.44973532,5.13740612 5.20845313,5.92692713 5.31707317,6.70829268 C5.39317073,7.27609756 5.92780488,9.00097561 9.24292683,12.7687805 C9.4339066,12.9861931 9.71065347,13.1088747 10,13.1043902 L10,13.1043902 C10.2867693,13.1027451 10.5587129,12.9767399 10.7453659,12.7590244 C11.5258537,11.857561 14.0409756,8.7395122 14.1268293,6.43902439 C14.1958485,4.8115134 13.5933987,3.22708465 12.4604878,2.05658537 Z'/><g transform='translate(1.951)'><path fill='url(%23fpn-green-badge-a)' fill-rule='nonzero' d='M7.44780488,8.64390244 L7.4595122,8.64390244 C7.49005488,8.64569993 7.52067683,8.64569993 7.55121951,8.64390244 C7.51678458,8.64614928 7.48223981,8.64614928 7.44780488,8.64390244 L7.44780488,8.64390244 Z M10.4604878,2.05658537 C9.30671139,0.858377874 7.71215358,0.185574622 6.04878049,0.195021709 C2.65365854,0.195021709 0,2.89365854 0,6.3395122 C0,9.53170732 4.91707317,14.9658537 5.47902439,15.5765854 C5.67107643,15.7857164 5.96010993,15.876503 6.23724878,15.8147466 C6.51438762,15.7529902 6.73752783,15.5480731 6.82261463,15.2771856 C6.90770144,15.0062981 6.84180814,14.7105945 6.6497561,14.5014634 C6.63414634,14.4858537 5.34439024,13.0731707 4.0702439,11.3365854 C1.9102439,8.3902439 1.58829268,6.93853659 1.58829268,6.3395122 C1.58829268,3.78341463 3.5395122,1.78341463 6.04292683,1.78341463 C7.27671093,1.77386308 8.46033452,2.27115429 9.31707317,3.15902439 C10.1478123,4.02038575 10.5886603,5.18492971 10.5365854,6.3804878 C10.4897561,7.64682927 9.21560976,9.65073171 7.98243902,11.1882927 L7.54146341,11.6468293 C7.11609756,12.0097561 6.47414634,11.8712195 6.12292683,11.4380488 C6.45853659,11.8497561 6.82926829,12.2926829 7.25073171,12.7687805 C7.43992885,12.9841113 7.71336765,13.1065891 8,13.1043902 L8,13.1043902 C8.28676931,13.1027451 8.55871292,12.9767399 8.74536585,12.7590244 C9.52585366,11.857561 12.0409756,8.7395122 12.1268293,6.43902439 C12.1958485,4.8115134 11.5933987,3.22708465 10.4604878,2.05658537 Z M6.80390244,7.73463415 C6.80390244,7.73463415 6.80390244,7.75219512 6.80390244,7.76195122 C6.80932357,7.71432251 6.81912107,7.66729451 6.83317073,7.62146341 C6.82059944,7.65840234 6.81081591,7.69623199 6.80390244,7.73463415 Z'/><path fill='url(%23fpn-green-badge-b)' fill-rule='nonzero' d='M7.44780488,8.64390244 L7.4595122,8.64390244 C7.49005488,8.64569993 7.52067683,8.64569993 7.55121951,8.64390244 C7.51678458,8.64614928 7.48223981,8.64614928 7.44780488,8.64390244 L7.44780488,8.64390244 Z M10.4604878,2.05658537 C9.30671139,0.858377874 7.71215358,0.185574622 6.04878049,0.195021709 C2.65365854,0.195021709 0,2.89365854 0,6.3395122 C0,9.53170732 4.91707317,14.9658537 5.47902439,15.5765854 C5.67107643,15.7857164 5.96010993,15.876503 6.23724878,15.8147466 C6.51438762,15.7529902 6.73752783,15.5480731 6.82261463,15.2771856 C6.90770144,15.0062981 6.84180814,14.7105945 6.6497561,14.5014634 C6.63414634,14.4858537 5.34439024,13.0731707 4.0702439,11.3365854 C1.9102439,8.3902439 1.58829268,6.93853659 1.58829268,6.3395122 C1.58829268,3.78341463 3.5395122,1.78341463 6.04292683,1.78341463 C7.27671093,1.77386308 8.46033452,2.27115429 9.31707317,3.15902439 C10.1478123,4.02038575 10.5886603,5.18492971 10.5365854,6.3804878 C10.4897561,7.64682927 9.21560976,9.65073171 7.98243902,11.1882927 L7.54146341,11.6468293 C7.11609756,12.0097561 6.47414634,11.8712195 6.12292683,11.4380488 C6.45853659,11.8497561 6.82926829,12.2926829 7.25073171,12.7687805 C7.43992885,12.9841113 7.71336765,13.1065891 8,13.1043902 L8,13.1043902 C8.28676931,13.1027451 8.55871292,12.9767399 8.74536585,12.7590244 C9.52585366,11.857561 12.0409756,8.7395122 12.1268293,6.43902439 C12.1958485,4.8115134 11.5933987,3.22708465 10.4604878,2.05658537 Z M6.80390244,7.73463415 C6.80390244,7.73463415 6.80390244,7.75219512 6.80390244,7.76195122 C6.80932357,7.71432251 6.81912107,7.66729451 6.83317073,7.62146341 C6.82059944,7.65840234 6.81081591,7.69623199 6.80390244,7.73463415 Z'/><path fill='url(%23fpn-green-badge-c)' fill-rule='nonzero' d='M7.54341463,11.6468293 C7.11804878,12.0117073 6.47609756,11.8712195 6.12292683,11.4360976 L6.06243902,11.3619512 C3.80097561,8.56 3.39121951,7.19804878 3.31707317,6.70829268 C3.21054744,5.92574657 3.4547337,5.13606819 3.98439024,4.5502439 C4.53214844,3.94830338 5.31743377,3.61848354 6.13073171,3.64878049 C6.88179755,3.67089207 7.58934652,4.00627028 8.08195122,4.57365854 C8.60608867,5.18009111 8.85858071,5.97494736 8.7804878,6.77268293 C8.74632749,7.3284432 8.55630674,7.86334148 8.23219512,8.31609756 L8.23219512,8.31609756 C8.06234434,8.55173352 7.77715557,8.67551676 7.48903206,8.6386598 C7.20090854,8.60180284 6.95606199,8.41021711 6.85099531,8.13941352 C6.74592863,7.86860992 6.79749332,7.56202224 6.98536585,7.3404878 L6.98536585,7.3404878 C7.11497568,7.12306581 7.18933885,6.87719839 7.20195122,6.62439024 C7.23789303,6.261213 7.12287996,5.89923934 6.88390244,5.62341463 C6.6821256,5.38686069 6.39068075,5.24538261 6.08,5.23317073 C5.73359673,5.2188009 5.39833995,5.35718348 5.16292683,5.61170732 C4.9450426,5.85026137 4.8455178,6.17389596 4.89170732,6.49365854 C5.01073171,7.37170732 6.49756098,9.43804878 7.97658537,11.1765854 L7.54341463,11.6468293 Z'/><path fill='url(%23fpn-green-badge-d)' fill-rule='nonzero' d='M5.10439024,10.1112195 C5.38146341,10.5014634 5.6897561,10.9073171 6.06243902,11.3619512 L6.12292683,11.4360976 C6.47609756,11.8712195 7.11804878,12.0097561 7.54341463,11.6468293 L7.98439024,11.1882927 C7.37170732,10.4663415 6.76292683,9.69365854 6.24390244,8.97560976 L5.10439024,10.1112195 Z'/></g></g></svg>") !important;
+}
+
+.webextension-browser-action[label^="Nano Defender"] {
+    list-style-image: url("data:image/svg+xml;utf8,<svg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 494.674 494.674' style='enable-background:new 0 0 494.674 494.674;' xml:space='preserve'><path id='XMLID_322_' d='M491.384,235.101L379.941,42.087c-4.354-7.563-12.443-12.232-21.185-12.232H135.902   c-8.739,0-16.832,4.67-21.185,12.232L3.289,235.101c-4.386,7.568-4.386,16.894,0,24.474l111.428,193.012   c4.353,7.562,12.445,12.233,21.185,12.233h222.854c8.741,0,16.83-4.671,21.185-12.233l111.443-193.012   C495.771,252.004,495.771,242.663,491.384,235.101z M344.623,415.871H150.035L52.74,247.332l97.295-168.529h194.588l97.309,168.529   L344.623,415.871z' fill='context-fill' fill-opacity='context-fill-opacity'/><polygon id='XMLID_321_' points='168.539,110.846 89.747,247.332 168.539,383.827 326.119,383.827 404.925,247.332    326.119,110.846  ' fill='context-fill' fill-opacity='context-fill-opacity'/></svg>") !important;
+}
+
+#_a6c4a591-f1b2-4f03-b3ff-767e5bedf4e7_-browser-action .toolbarbutton-icon {
+    filter: grayscale(1) brightness(50);
+}
+
+#_aecec67f-0d10-4fa7-b7c7-609a2db280cf_-browser-action .toolbarbutton-icon {
+    list-style-image: url("chrome://devtools/skin/images/command-console.svg");
+    fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
+    fill-opacity: var(--toolbarbutton-icon-fill-opacity) !important;
+}
+
+#customizationui-widget-panel[viewId="PanelUI-webext-note-tab_wildsky_cc-browser-action-view"] .panel-arrow[side="top"] {
+    list-style-image: url("chrome://global/skin/arrow/panelarrow-vertical.svg");
+    fill: hsl(240, 4%, 10%) !important;
+}
+
+#nav-bar-customization-target toolbarbutton:not([attention="warning"]) .toolbarbutton-badge,
+#widget-overflow toolbarbutton:not([attention="warning"]) .toolbarbutton-badge {
+    background-color: var(--badge-color-dark) !important;
+    color: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
+    /*     background-color: rgba(112, 118, 219, 1) !important; */
+    box-shadow: 0 1px 2px hsla(0, 0%, 100%, 0.1) inset, 0 -1px 2px hsla(0, 0%, 0%, 0.2) inset, 0 1px 1px hsla(240, 3%, 12%, 0.15), 0 1px 3px hsla(240, 3%, 12%, 0.2) !important;
+    padding-top: 1px !important;
+    font-size: xx-small !important;
+    line-height: 8.4px !important;
+    min-width: 0px !important;
+    justify-self: right !important;
+    margin-right: -6.4px !important;
+    margin-top: -5.5px !important;
+}
+
+#nav-bar-customization-target toolbarbutton[attention="warning"] .toolbarbutton-badge,
+#widget-overflow toolbarbutton[attention="warning"] .toolbarbutton-badge {
+    margin-right: -4.4px !important;
+    margin-top: -4px !important;
+}
+
+/* make multithreaded download manager context menu label smaller */
+#multithreaded-download-manager_qw_linux-2g64_local-menuitem-_link-context-menu .menu-iconic-text {
+    display: none !important;
+}
+
+#multithreaded-download-manager_qw_linux-2g64_local-menuitem-_link-context-menu .menu-iconic-left::after {
+    opacity: 1 !important;
+    content: 'Download (Multithread)' !important;
+    position: relative !important;
+    top: -3.5px !important;
+    margin-inline-start: 6.5px !important;
+    margin-inline-end: 5px !important;
+}
+
+/* make addon context menu icons white */
+#multithreaded-download-manager_qw_linux-2g64_local-menuitem-_link-context-menu .menu-iconic-left::before {
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-left: 3px !important;
+    margin-right: 0px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path stroke='context-fill' fill='none' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' d='M 6,1 v 9 M 10,1 v 9 M 3,7 l 5,5 l 5,-5 M 3,15 H 13'/></svg>") !important;
+}
+
+#multithreaded-download-manager_qw_linux-2g64_local-menuitem-_link-context-menu .menu-iconic-left {
+    margin-top: 3px !important;
+}
+
+#multithreaded-download-manager_qw_linux-2g64_local-menuitem-_link-context-menu .menu-iconic-icon {
+    display: none !important;
+}
+
+#_bee8b1f2-823a-424c-959c-f8f76c8b2306_-menuitem-_removeOL .menu-iconic-left::before {
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-left: 5px !important;
+    margin-right: -5px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='context-fill' fill-opacity='context-fill-opacity'><path d='M4 10a1 1 0 0 0 0-2H2V3h6v1a1 1 0 0 0 2 0V2a1 1 0 0 0-1-1H1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1zm11-4h-2l-2 2h3v5H8v-2l-2 2v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1z'/><path d='M14.707 1.293a1 1 0 0 0-1.414 0L8.586 6H7a1 1 0 0 0-1 1v1.586l-4.707 4.707a1 1 0 1 0 1.414 1.414l12-12a1 1 0 0 0 0-1.414z'/></svg>") !important;
+}
+
+#_bee8b1f2-823a-424c-959c-f8f76c8b2306_-menuitem-_removeOL .menu-iconic-left {
+    margin-top: 3px !important;
+}
+
+#_bee8b1f2-823a-424c-959c-f8f76c8b2306_-menuitem-_removeOL .menu-iconic-icon {
+    display: none !important;
+}
+
+:-moz-any(.menu-iconic, .menuitem-iconic)[label="To Google Translate"] .menu-iconic-left::before,
+:-moz-any(.menu-iconic, .menuitem-iconic)[label^="Translate this page"] .menu-iconic-left::before,
+:-moz-any(.menu-iconic, .menuitem-iconic)[label="Translate selected link"] .menu-iconic-left::before,
+:-moz-any(.menu-iconic, .menuitem-iconic)[label="Translate selected text"] .menu-iconic-left::before,
+:-moz-any(.menu-iconic, .menuitem-iconic)[label="Simple Translate"] .menu-iconic-left::before {
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-left: 5px !important;
+    margin-right: -5px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='1.5 1.5 21.5 21.5'><path style='text-indent:0;text-align:start;line-height:normal;text-transform:none;block-progression:tb;-inkscape-font-specification:Sans' d='M 4 2 C 2.895 2 2 2.895 2 4 L 2 13 C 2 14.105 2.895 15 4 15 L 5 15 L 5 17 L 7 19 L 9 19 L 9 20 C 9 21.105 9.895 22 11 22 L 20 22 C 21.105 22 22 21.105 22 20 L 22 11 C 22 9.895 21.105 9 20 9 L 15 9 L 15 4 C 15 2.895 14.105 2 13 2 L 4 2 z M 4 4 L 13 4 L 13 9 L 11 9 C 10.341763 9 9.7706576 9.3221194 9.40625 9.8125 C 9.2445116 9.7044445 9.1097992 9.5742854 8.96875 9.46875 C 9.6025727 8.8044147 10.234886 7.9984382 10.75 7 L 12 7 L 12 6 L 9 6 L 9 5 L 8 5 L 8 6 L 5 6 L 5 7 L 6.125 7 A 0.50005 0.50005 0 0 0 6.03125 7.5 C 6.03125 7.5 6.1990849 8.0080321 6.71875 8.6875 C 6.9071286 8.9338071 7.1681985 9.2086071 7.46875 9.5 C 6.3240739 10.473776 5.34375 10.90625 5.34375 10.90625 A 0.5048592 0.5048592 0 0 0 5.71875 11.84375 C 5.71875 11.84375 6.915412 11.354151 8.25 10.1875 C 8.4829694 10.368343 8.7491541 10.535248 9.03125 10.71875 C 9.0182221 10.811016 9 10.904125 9 11 L 9 13 L 6 13 L 4 13 L 4 4 z M 6.875 7 L 9.5625 7 C 9.136858 7.7208757 8.6725215 8.3424895 8.1875 8.84375 C 7.9037308 8.5739944 7.6665472 8.3115123 7.5 8.09375 C 7.0644151 7.5242179 7 7.21875 7 7.21875 A 0.50005 0.50005 0 0 0 6.875 7 z M 14.84375 12 L 16.15625 12 L 19 20 L 17.84375 20 L 17.09375 17.8125 L 13.84375 17.8125 L 13.125 20 L 12 20 L 14.84375 12 z M 15.4375 12.90625 C 15.3135 13.38125 14.15625 17 14.15625 17 L 16.8125 17 C 16.8125 17 15.59275 13.36925 15.46875 12.90625 L 15.4375 12.90625 z M 7 15 L 9 15 L 9 17 L 7 17 L 7 15 z' font-family='Sans' fill='context-fill' fill-opacity='context-fill-opacity'/></svg>") !important;
+}
+
+:-moz-any(.menu-iconic, .menuitem-iconic)[label="To Google Translate"] .menu-iconic-left,
+:-moz-any(.menu-iconic, .menuitem-iconic)[label^="Translate this page"] .menu-iconic-left,
+:-moz-any(.menu-iconic, .menuitem-iconic)[label="Translate selected link"] .menu-iconic-left,
+:-moz-any(.menu-iconic, .menuitem-iconic)[label="Translate selected text"] .menu-iconic-left,
+:-moz-any(.menu-iconic, .menuitem-iconic)[label="Simple Translate"] .menu-iconic-left {
+    margin-top: 3px !important;
+}
+
+:-moz-any(.menu-iconic, .menuitem-iconic)[label="To Google Translate"] .menu-iconic-icon,
+:-moz-any(.menu-iconic, .menuitem-iconic)[label^="Translate this page"] .menu-iconic-icon,
+:-moz-any(.menu-iconic, .menuitem-iconic)[label="Translate selected link"] .menu-iconic-icon,
+:-moz-any(.menu-iconic, .menuitem-iconic)[label="Translate selected text"] .menu-iconic-icon,
+:-moz-any(.menu-iconic, .menuitem-iconic)[label="Simple Translate"] .menu-iconic-icon {
+    display: none !important;
+}
+
+#contentAreaContextMenu :-moz-any(.menu-iconic, .menuitem-iconic)[label="Pushbullet"] .menu-iconic-left::before {
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-left: 5px !important;
+    margin-right: -5px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://browser/skin/notification-icons/desktop-notification.svg") !important;
+}
+
+#contentAreaContextMenu :-moz-any(.menu-iconic, .menuitem-iconic)[label="Pushbullet"] .menu-iconic-left {
+    margin-top: 3px !important;
+}
+
+#contentAreaContextMenu :-moz-any(.menu-iconic, .menuitem-iconic)[label="Pushbullet"] .menu-iconic-icon {
+    display: none !important;
+}
+
+#contentAreaContextMenu :-moz-any(.menu-iconic, .menuitem-iconic)[label="Zotero Connector"] .menu-iconic-left::before {
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-left: 5px !important;
+    margin-right: -5px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://browser/skin/sync.svg") !important;
+}
+
+#contentAreaContextMenu :-moz-any(.menu-iconic, .menuitem-iconic)[label="Zotero Connector"] .menu-iconic-left {
+    margin-top: 3px !important;
+}
+
+#contentAreaContextMenu :-moz-any(.menu-iconic, .menuitem-iconic)[label="Zotero Connector"] .menu-iconic-icon {
+    display: none !important;
+}
+
+#contentAreaContextMenu :-moz-any(.menu-iconic, .menuitem-iconic)[label="Block element..."] .menu-iconic-left::before {
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-left: 5px !important;
+    margin-right: -5px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    /*     content: url("data:image/svg+xml;utf8,<svg width='16' height='16' viewBox='0 0 13 13' xmlns='http://www.w3.org/2000/svg' fill='context-fill'><path d='M7 3H5a2 2 0 0 0-2 2v2H1.5a.5.5 0 0 0 0 1H3v2c0 1.1.9 2 2 2h2v1.5a.5.5 0 0 0 1 0V12h2a2 2 0 0 0 2-2V8h1.5a.5.5 0 0 0 0-1H12V5a2 2 0 0 0-2-2H8V1.5a.5.5 0 0 0-1 0V3zM5 5h5v5H5V5z'/></svg>") !important; */
+    content: url("chrome://devtools/skin/images/pseudo-class.svg") !important;
+}
+
+#contentAreaContextMenu :-moz-any(.menu-iconic, .menuitem-iconic)[label="Block element..."] .menu-iconic-left {
+    margin-top: 3px !important;
+}
+
+#contentAreaContextMenu :-moz-any(.menu-iconic, .menuitem-iconic)[label="Block element..."] .menu-iconic-icon {
+    display: none !important;
+}
+
+#contentAreaContextMenu :-moz-any(.menu-iconic, .menuitem-iconic)[label="Bitwarden"] .menu-iconic-left::before {
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-left: 5px !important;
+    margin-right: -5px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 32 32' fill-opacity='context-fill-opacity' fill='context-fill' fill-rule='evenodd'><path d='M11.0013,17.9999 C11.0013,15.2386153 13.2400153,12.9999 16.0013,12.9999 C18.7625847,12.9999 21.0013,15.2386153 21.0013,17.9999 C21.0013,23.5534188 17.4872463,28.4378884 12.3346491,30.2597035 C11.8139531,30.4438071 11.2426002,30.1709451 11.0584965,29.6502491 C10.8743929,29.1295531 11.1472549,28.5582002 11.6679509,28.3740965 C16.027576,26.8326543 19.0013,22.699233 19.0013,17.9999 C19.0013,16.3431847 17.6580153,14.9999 16.0013,14.9999 C14.3445847,14.9999 13.0013,16.3431847 13.0013,17.9999 C13.0013,20.7611847 10.7625847,22.9999 8.0013,22.9999 C5.24001525,22.9999 3.0013,20.7611847 3.0013,17.9999 C3.0013,10.8206153 8.82201525,4.9999 16.0013,4.9999 C23.1805847,4.9999 29.0013,10.8206153 29.0013,17.9999 C29.0013,19.4211716 28.8597186,20.8259325 28.581352,22.1986412 C28.4715903,22.739909 27.9438266,23.0897137 27.4025588,22.979952 C26.861291,22.8701903 26.5114863,22.3424266 26.621248,21.8011588 C26.8731384,20.559012 27.0013,19.2874016 27.0013,17.9999 C27.0013,11.9251847 22.0760153,6.9999 16.0013,6.9999 C9.92658475,6.9999 5.0013,11.9251847 5.0013,17.9999 C5.0013,19.6566153 6.34458475,20.9999 8.0013,20.9999 C9.65801525,20.9999 11.0013,19.6566153 11.0013,17.9999 Z'/><path d='M8.0013,26.9999 C7.44901525,26.9999 7.0013,26.5521847 7.0013,25.9999 C7.0013,25.4476153 7.44901525,24.9999 8.0013,24.9999 C11.8670153,24.9999 15.0013,21.8656153 15.0013,17.9999 C15.0013,17.4476153 15.4490153,16.9999 16.0013,16.9999 C16.5535847,16.9999 17.0013,17.4476153 17.0013,17.9999 C17.0013,22.9701847 12.9715847,26.9999 8.0013,26.9999 Z'/><path d='M9.0013 17.9999C9.0013 18.5521847 8.55358475 18.9999 8.0013 18.9999 7.44901525 18.9999 7.0013 18.5521847 7.0013 17.9999 7.0013 13.0296153 11.0310153 8.9999 16.0013 8.9999 20.9715847 8.9999 25.0013 13.0296153 25.0013 17.9999 25.0013 21.0536668 24.2197241 23.9472067 22.7567899 26.4983547 22.4820533 26.9774562 21.8709467 27.1431266 21.3918453 26.8683899 20.9127438 26.5936533 20.7470734 25.9825467 21.0218101 25.5034453 22.3122709 23.2530661 23.0013 20.7021516 23.0013 18.0499 23.0013 14.1341847 19.8670153 10.9999 16.0013 10.9999 12.1355847 10.9999 9.0013 14.1341847 9.0013 17.9999zM4.74954564 8.07962613C4.38408439 8.49369922 3.75214695 8.53310689 3.33807387 8.16764564 2.92400078 7.80218439 2.88459311 7.17024695 3.25005436 6.75617387 6.45721717 3.12241027 11.0590025.9999 16.0008.9999 20.9435975.9999 25.5453828 3.12241027 28.7525456 6.75617387 29.1180069 7.17024695 29.0785992 7.80218439 28.6645261 8.16764564 28.2504531 8.53310689 27.6185156 8.49369922 27.2530544 8.07962613 24.4216114 4.87155881 20.3636937 2.9999 16.0018 2.9999 11.6389063 2.9999 7.58098857 4.87155881 4.74954564 8.07962613z'/></svg>") !important;
+}
+
+#contentAreaContextMenu :-moz-any(.menu-iconic, .menuitem-iconic)[label="Bitwarden"] .menu-iconic-left {
+    margin-top: 3px !important;
+}
+
+#contentAreaContextMenu :-moz-any(.menu-iconic, .menuitem-iconic)[label="Bitwarden"] .menu-iconic-icon {
+    display: none !important;
+}
+
+#SyncedTabsSidebarTabsFilterContext #syncedTabsRefreshFilter {
+    display: none !important;
+}

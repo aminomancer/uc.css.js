@@ -1,0 +1,1400 @@
+/* add icons to non-iconized context menu items */
+#context-inspect-a11y:not(.menuitem-iconic) .menu-text,
+#context-inspect:not(.menuitem-iconic) .menu-text,
+#context-viewsource:not(.menuitem-iconic) .menu-text,
+#context-viewinfo:not(.menuitem-iconic) .menu-text,
+#context-viewbgimage:not(.menuitem-iconic) .menu-text,
+#context-savepage:not(.menuitem-iconic) .menu-text,
+#context-sendpagetodevice:not(.menuitem-iconic)>.menu-text,
+#context-selectall:not(.menuitem-iconic) .menu-text,
+#context-sendlinktodevice:not(.menuitem-iconic)>.menu-text,
+#context-viewimageinfo:not(.menuitem-iconic) .menu-text,
+#context-setDesktopBackground:not(.menuitem-iconic) .menu-text,
+#context-sendaudio:not(.menuitem-iconic)>.menu-text,
+#context-sendimage:not(.menuitem-iconic)>.menu-text,
+#context-sendvideo:not(.menuitem-iconic)>.menu-text,
+#context-saveimage:not(.menuitem-iconic) .menu-text,
+#context-saveaudio:not(.menuitem-iconic) .menu-text,
+#context-savevideo:not(.menuitem-iconic) .menu-text,
+#context-savelink:not(.menuitem-iconic) .menu-text,
+#context-savelinktopocket:not(.menuitem-iconic) .menu-text,
+#context-pocket:not(.menuitem-iconic) .menu-text,
+#context-saveframe:not(.menuitem-iconic) .menu-text,
+#context-viewimage:not(.menuitem-iconic) .menu-text,
+#context-copy:not(.menuitem-iconic) .menu-text,
+#context-copyaudiourl:not(.menuitem-iconic) .menu-text,
+#context-copyemail:not(.menuitem-iconic) .menu-text,
+#context-copyimage:not(.menuitem-iconic) .menu-text,
+#context-copyimage-contents:not(.menuitem-iconic) .menu-text,
+#context-copylink:not(.menuitem-iconic) .menu-text,
+#context-copyvideourl:not(.menuitem-iconic) .menu-text,
+#context-bookmarkframe:not(.menuitem-iconic) .menu-text,
+#context-bookmarklink:not(.menuitem-iconic) .menu-text,
+#context-bookmarkpage:not(.menuitem-iconic) .menu-text,
+#context-openframe:not(.menuitem-iconic) .menu-text,
+#context-openframeintab:not(.menuitem-iconic) .menu-text,
+#context-openlink:not(.menuitem-iconic) .menu-text,
+#context-openlinkincontainertab:not(.menuitem-iconic) .menu-text,
+#context-openlinkincurrent:not(.menuitem-iconic) .menu-text,
+#context-openlinkintab:not(.menuitem-iconic) .menu-text,
+#context-openlinkinusercontext-menu:not(.menuitem-iconic)>.menu-text,
+#context-openlinkprivate:not(.menuitem-iconic) .menu-text,
+#context-searchselect:not(.menuitem-iconic) .menu-text,
+#context-searchselect-private:not(.menuitem-iconic) .menu-text,
+#context-viewpartialsource-selection:not(.menuitem-iconic) .menu-text,
+#context-undo:not(.menuitem-iconic) .menu-text,
+#context-cut:not(.menuitem-iconic) .menu-text,
+#context-paste:not(.menuitem-iconic) .menu-text,
+#context-delete:not(.menuitem-iconic) .menu-text,
+#context-keywordfield:not(.menuitem-iconic) .menu-text,
+#context-printframe:not(.menuitem-iconic) .menu-text,
+#context-print-selection:not(.menuitem-iconic) .menu-text,
+#context-viewframesource:not(.menuitem-iconic) .menu-text,
+#context-viewframeinfo:not(.menuitem-iconic) .menu-text,
+#context-frameOsPid:not(.menuitem-iconic) .menu-text,
+#context-reload:not(.menuitem-iconic) .menu-text,
+#context-reloadframe:not(.menuitem-iconic) .menu-text,
+#context-reloadimage:not(.menuitem-iconic) .menu-text,
+#context-showonlythisframe:not(.menuitem-iconic) .menu-text,
+#contentAreaContextMenu #frame:not(.menuitem-iconic)>.menu-text,
+#context-video-saveimage:not(.menuitem-iconic) .menu-text,
+#context-media-pause:not(.menuitem-iconic) .menu-text,
+#context-media-play:not(.menuitem-iconic) .menu-text,
+#context-media-mute:not(.menuitem-iconic) .menu-text,
+#context-media-unmute:not(.menuitem-iconic) .menu-text,
+#context-video-fullscreen:not(.menuitem-iconic) .menu-text,
+#context-leave-dom-fullscreen:not(.menuitem-iconic) .menu-text,
+#context-media-playbackrate:not(.menuitem-iconic)>.menu-text,
+#context-media-showcontrols:not(.menuitem-iconic) .menu-text,
+#context-media-hidecontrols:not(.menuitem-iconic) .menu-text,
+#context-viewvideo:not(.menuitem-iconic) .menu-text,
+#context_moveToStart:not(.menuitem-iconic) .menu-text,
+#context_moveToEnd:not(.menuitem-iconic) .menu-text,
+#context_openTabInWindow:not(.menuitem-iconic) .menu-text,
+#contentAreaContextMenu menuitem[type="checkbox"] .menu-iconic-text,
+#contentAreaContextMenu menuitem[type="radio"] .menu-iconic-text,
+#contentAreaContextMenu menuitem[checked] .menu-iconic-text,
+#customization-footer menuitem[type="checkbox"] .menu-iconic-text,
+#customization-footer menuitem[type="radio"] .menu-iconic-text,
+#customization-footer menuitem[checked] .menu-iconic-text,
+.textbox-contextmenu menuitem[label="Undo"]:not(.menuitem-iconic) .menu-text,
+.textbox-contextmenu menuitem[label="Cut"]:not(.menuitem-iconic) .menu-text,
+.textbox-contextmenu menuitem[label="Copy"]:not(.menuitem-iconic) .menu-text,
+.textbox-contextmenu menuitem[label="Paste"]:not(.menuitem-iconic) .menu-text,
+.textbox-contextmenu menuitem[label="Paste & Go"]:not(.menuitem-iconic) .menu-text,
+.textbox-contextmenu menuitem[label="Delete"]:not(.menuitem-iconic) .menu-text,
+.textbox-contextmenu menuitem[label="Select All"]:not(.menuitem-iconic) .menu-text,
+#spell-check-enabled:not(.menuitem-iconic) .menu-iconic-text,
+#spell-add-to-dictionary:not(.menuitem-iconic) .menu-text,
+#context_reopenInContainer:not(.menuitem-iconic)>.menu-text,
+#context_reloadTab:not(.menuitem-iconic) .menu-text,
+#context_reloadSelectedTabs:not(.menuitem-iconic) .menu-text,
+#context_toggleMuteTab:not(.menuitem-iconic) .menu-text,
+#context_toggleMuteSelectedTabs:not(.menuitem-iconic) .menu-text,
+#context_pinTab:not(.menuitem-iconic) .menu-text,
+#context_pinSelectedTabs:not(.menuitem-iconic) .menu-text,
+#context_unpinTab:not(.menuitem-iconic) .menu-text,
+#context_unpinSelectedTabs:not(.menuitem-iconic) .menu-text,
+#context_duplicateTab:not(.menuitem-iconic) .menu-text,
+#context_duplicateTabs:not(.menuitem-iconic) .menu-text,
+#context_selectAllTabs:not(.menuitem-iconic) .menu-text,
+#context_bookmarkTab:not(.menuitem-iconic) .menu-text,
+#context_bookmarkSelectedTabs:not(.menuitem-iconic) .menu-text,
+#context_moveTabOptions:not(.menuitem-iconic)>.menu-text,
+#context_sendTabToDevice:not(.menuitem-iconic)>.menu-text,
+#context_closeTabOptions:not(.menuitem-iconic)>.menu-text,
+#context_undoCloseTab:not(.menuitem-iconic) .menu-text,
+#context_closeTab:not(.menuitem-iconic) .menu-text,
+#discardTab:not(.menuitem-iconic) .menu-text,
+#historyUndoWindowMenu3:not(.menuitem-iconic)>.menu-text,
+#tabContextUndoList:not(.menuitem-iconic)>.menu-text,
+#tabContextMenu menuitem[label^="Restore All"]:not(.menuitem-iconic) .menu-text,
+#context_sendTabToDevicePopupMenu .sendtab-target:is([clientType="phone"], [clientType="mobile"]):not(.menuitem-iconic) .menu-text,
+#context_sendTabToDevicePopupMenu .sendtab-target[clientType="desktop"]:not(.menuitem-iconic) .menu-text {
+    display: -moz-box !important;
+    margin-inline-start: -14px !important;
+    padding-left: 0px !important;
+}
+
+#main-menubar menuitem[type="checkbox"] .menu-iconic-left,
+#main-menubar menuitem[type="radio"] .menu-iconic-left,
+#toolbar-context-menu menuitem[type="checkbox"] .menu-iconic-left,
+#toolbar-context-menu menuitem[type="radio"] .menu-iconic-left,
+#viewButton menuitem[type="radio"] .menu-iconic-left {
+    -moz-appearance: none !important;
+}
+
+#main-menubar menuitem[type="checkbox"] .menu-iconic-icon,
+#toolbar-context-menu menuitem[type="checkbox"] .menu-iconic-icon {
+    -moz-appearance: none !important;
+    display: inline-block !important;
+    position: relative !important;
+    width: 25px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: "" !important;
+    list-style-image: none !important;
+    background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNNSAyYy0xLjY1NCAwLTMgMS4zNDYtMyAzdjE0YzAgMS42NTQgMS4zNDYgMyAzIDNoMTRjMS42NTQgMCAzLTEuMzQ2IDMtM3YtMTRjMC0xLjY1NC0xLjM0Ni0zLTMtM2gtMTR6bTE5IDN2MTRjMCAyLjc2MS0yLjIzOCA1LTUgNWgtMTRjLTIuNzYyIDAtNS0yLjIzOS01LTV2LTE0YzAtMi43NjEgMi4yMzgtNSA1LTVoMTRjMi43NjIgMCA1IDIuMjM5IDUgNXoiIGZpbGw9ImNvbnRleHQtZmlsbCIgZmlsbC1vcGFjaXR5PSJjb250ZXh0LWZpbGwtb3BhY2l0eSIvPjwvc3ZnPg==") 2px 0.6px no-repeat !important;
+    background-size: 12px !important;
+}
+
+#main-menubar menuitem[type="checkbox"][checked="true"] .menu-iconic-icon,
+#toolbar-context-menu menuitem[type="checkbox"][checked="true"] .menu-iconic-icon {
+    -moz-appearance: none !important;
+    display: inline-block !important;
+    position: relative !important;
+    width: 25px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: "" !important;
+    list-style-image: none !important;
+    background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTAuMDQxIDE3bC00LjUtNC4zMTkgMS4zOTUtMS40MzUgMy4wOCAyLjkzNyA3LjAyMS03LjE4MyAxLjQyMiAxLjQwOS04LjQxOCA4LjU5MXptLTUuMDQxLTE1Yy0xLjY1NCAwLTMgMS4zNDYtMyAzdjE0YzAgMS42NTQgMS4zNDYgMyAzIDNoMTRjMS42NTQgMCAzLTEuMzQ2IDMtM3YtMTRjMC0xLjY1NC0xLjM0Ni0zLTMtM2gtMTR6bTE5IDN2MTRjMCAyLjc2MS0yLjIzOCA1LTUgNWgtMTRjLTIuNzYyIDAtNS0yLjIzOS01LTV2LTE0YzAtMi43NjEgMi4yMzgtNSA1LTVoMTRjMi43NjIgMCA1IDIuMjM5IDUgNXoiIGZpbGw9ImNvbnRleHQtZmlsbCIgZmlsbC1vcGFjaXR5PSJjb250ZXh0LWZpbGwtb3BhY2l0eSIvPjwvc3ZnPg==") 2px 0.6px no-repeat !important;
+    background-size: 12px !important;
+}
+
+#main-menubar menuitem[type="radio"] .menu-iconic-icon,
+#toolbar-context-menu menuitem[type="radio"] .menu-iconic-icon,
+#main-menubar #viewSidebarMenu menuitem:not([checked="true"]) .menu-iconic-icon,
+#sidebar-search-container #viewButton menuitem[type="radio"] .menu-iconic-icon {
+    -moz-appearance: none !important;
+    display: inline-block !important;
+    position: relative !important;
+    width: 25px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: "" !important;
+    list-style-image: none !important;
+    background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTIgMGMtNi42MjMgMC0xMiA1LjM3Ny0xMiAxMnM1LjM3NyAxMiAxMiAxMiAxMi01LjM3NyAxMi0xMi01LjM3Ny0xMi0xMi0xMnptMCAyMmMtNS41MTkgMC0xMC00LjQ4LTEwLTEwIDAtNS41MTkgNC40ODEtMTAgMTAtMTAgNS41MiAwIDEwIDQuNDgxIDEwIDEwIDAgNS41Mi00LjQ4IDEwLTEwIDEweiIgZmlsbD0iY29udGV4dC1maWxsIiBmaWxsLW9wYWNpdHk9ImNvbnRleHQtZmlsbC1vcGFjaXR5Ii8+PC9zdmc+") 2px 0.6px no-repeat !important;
+    background-size: 12px !important;
+}
+
+#main-menubar menuitem[type="radio"][checked="true"] .menu-iconic-icon,
+#toolbar-context-menu menuitem[type="radio"][checked="true"] .menu-iconic-icon,
+#main-menubar #viewSidebarMenu menuitem[checked="true"] .menu-iconic-icon,
+#sidebar-search-container #viewButton menuitem[type="radio"][checked="true"] .menu-iconic-icon {
+    -moz-appearance: none !important;
+    display: inline-block !important;
+    position: relative !important;
+    width: 25px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: "" !important;
+    list-style-image: none !important;
+    background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTIgMmM1LjUxNCAwIDEwIDQuNDg2IDEwIDEwcy00LjQ4NiAxMC0xMCAxMC0xMC00LjQ4Ni0xMC0xMCA0LjQ4Ni0xMCAxMC0xMHptMC0yYy02LjYyNyAwLTEyIDUuMzczLTEyIDEyczUuMzczIDEyIDEyIDEyIDEyLTUuMzczIDEyLTEyLTUuMzczLTEyLTEyLTEyem0wIDZjLTMuMzEzIDAtNiAyLjY4Ny02IDZzMi42ODcgNiA2IDZjMy4zMTQgMCA2LTIuNjg3IDYtNnMtMi42ODYtNi02LTZ6IiBmaWxsPSJjb250ZXh0LWZpbGwiIGZpbGwtb3BhY2l0eT0iY29udGV4dC1maWxsLW9wYWNpdHkiLz48L3N2Zz4=") 2px 0.6px no-repeat !important;
+    background-size: 12px !important;
+}
+
+#main-menubar menuitem[type="checkbox"] .menu-iconic-left::before,
+#toolbar-context-menu menuitem[type="checkbox"] .menu-iconic-left::before {
+    display: none !important;
+}
+
+#contentAreaContextMenu menuitem[type="checkbox"]::before,
+#customization-footer menuitem[type="checkbox"]::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: "" !important;
+    background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNNSAyYy0xLjY1NCAwLTMgMS4zNDYtMyAzdjE0YzAgMS42NTQgMS4zNDYgMyAzIDNoMTRjMS42NTQgMCAzLTEuMzQ2IDMtM3YtMTRjMC0xLjY1NC0xLjM0Ni0zLTMtM2gtMTR6bTE5IDN2MTRjMCAyLjc2MS0yLjIzOCA1LTUgNWgtMTRjLTIuNzYyIDAtNS0yLjIzOS01LTV2LTE0YzAtMi43NjEgMi4yMzgtNSA1LTVoMTRjMi43NjIgMCA1IDIuMjM5IDUgNXoiIGZpbGw9ImNvbnRleHQtZmlsbCIgZmlsbC1vcGFjaXR5PSJjb250ZXh0LWZpbGwtb3BhY2l0eSIvPjwvc3ZnPg==") 2px 0.6px no-repeat !important;
+    background-size: 12px !important;
+}
+
+#contentAreaContextMenu menuitem[type="checkbox"][checked="true"]::before,
+#customization-footer menuitem[type="checkbox"][checked="true"]::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: "" !important;
+    background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTAuMDQxIDE3bC00LjUtNC4zMTkgMS4zOTUtMS40MzUgMy4wOCAyLjkzNyA3LjAyMS03LjE4MyAxLjQyMiAxLjQwOS04LjQxOCA4LjU5MXptLTUuMDQxLTE1Yy0xLjY1NCAwLTMgMS4zNDYtMyAzdjE0YzAgMS42NTQgMS4zNDYgMyAzIDNoMTRjMS42NTQgMCAzLTEuMzQ2IDMtM3YtMTRjMC0xLjY1NC0xLjM0Ni0zLTMtM2gtMTR6bTE5IDN2MTRjMCAyLjc2MS0yLjIzOCA1LTUgNWgtMTRjLTIuNzYyIDAtNS0yLjIzOS01LTV2LTE0YzAtMi43NjEgMi4yMzgtNSA1LTVoMTRjMi43NjIgMCA1IDIuMjM5IDUgNXoiIGZpbGw9ImNvbnRleHQtZmlsbCIgZmlsbC1vcGFjaXR5PSJjb250ZXh0LWZpbGwtb3BhY2l0eSIvPjwvc3ZnPg==") 2px 0.6px no-repeat !important;
+    background-size: 12px !important;
+}
+
+#contentAreaContextMenu menuitem[type="checkbox"] .menu-iconic-left,
+#customization-footer menuitem[type="checkbox"] .menu-iconic-left {
+    -moz-appearance: none !important;
+    width: 25px !important;
+}
+
+#contentAreaContextMenu menuitem[type="radio"]::before,
+#customization-footer menuitem[type="radio"]::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: "" !important;
+    background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTIgMGMtNi42MjMgMC0xMiA1LjM3Ny0xMiAxMnM1LjM3NyAxMiAxMiAxMiAxMi01LjM3NyAxMi0xMi01LjM3Ny0xMi0xMi0xMnptMCAyMmMtNS41MTkgMC0xMC00LjQ4LTEwLTEwIDAtNS41MTkgNC40ODEtMTAgMTAtMTAgNS41MiAwIDEwIDQuNDgxIDEwIDEwIDAgNS41Mi00LjQ4IDEwLTEwIDEweiIgZmlsbD0iY29udGV4dC1maWxsIiBmaWxsLW9wYWNpdHk9ImNvbnRleHQtZmlsbC1vcGFjaXR5Ii8+PC9zdmc+") 2px 0.6px no-repeat !important;
+    background-size: 12px !important;
+}
+
+#contentAreaContextMenu menuitem[type="radio"][checked="true"]::before,
+#customization-footer menuitem[type="radio"][checked="true"]::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: "" !important;
+    background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTIgMmM1LjUxNCAwIDEwIDQuNDg2IDEwIDEwcy00LjQ4NiAxMC0xMCAxMC0xMC00LjQ4Ni0xMC0xMCA0LjQ4Ni0xMCAxMC0xMHptMC0yYy02LjYyNyAwLTEyIDUuMzczLTEyIDEyczUuMzczIDEyIDEyIDEyIDEyLTUuMzczIDEyLTEyLTUuMzczLTEyLTEyLTEyem0wIDZjLTMuMzEzIDAtNiAyLjY4Ny02IDZzMi42ODcgNiA2IDZjMy4zMTQgMCA2LTIuNjg3IDYtNnMtMi42ODYtNi02LTZ6IiBmaWxsPSJjb250ZXh0LWZpbGwiIGZpbGwtb3BhY2l0eT0iY29udGV4dC1maWxsLW9wYWNpdHkiLz48L3N2Zz4=") 2px 0.6px no-repeat !important;
+    background-size: 12px !important;
+}
+
+#contentAreaContextMenu menuitem[type="radio"] .menu-iconic-left,
+#customization-footer menuitem[type="radio"] .menu-iconic-left {
+    -moz-appearance: none !important;
+    width: 25px !important;
+}
+
+#context_moveToStart:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: flex !important;
+    padding-bottom: 2px !important;
+    width: 14px !important;
+    height: 14px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://browser/skin/back.svg") !important;
+}
+
+#context_moveToEnd:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: flex !important;
+    padding-bottom: 2px !important;
+    width: 14px !important;
+    height: 14px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://browser/skin/forward.svg") !important;
+}
+
+#context_openTabInWindow:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://browser/skin/new-window.svg") !important;
+}
+
+#context-video-saveimage:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://browser/skin/notification-icons/canvas.svg") !important;
+}
+
+#context-media-pause:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 5px !important;
+    margin-right: -6.5px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://global/skin/media/pauseButton.svg") !important;
+}
+
+#context-media-play:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 5px !important;
+    margin-right: -6.5px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://global/skin/media/playButton.svg") !important;
+}
+
+#context-media-mute:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 5px !important;
+    margin-right: -6.5px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://global/skin/media/audioMutedButton.svg") !important;
+}
+
+#context-media-unmute:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 5px !important;
+    margin-right: -6.5px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://global/skin/media/audioUnmutedButton.svg") !important;
+}
+
+#context-video-fullscreen:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 5px !important;
+    margin-right: -7px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://global/skin/media/fullscreenEnterButton.svg") !important;
+}
+
+#context-leave-dom-fullscreen:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 5px !important;
+    margin-right: -7px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://global/skin/media/fullscreenExitButton.svg") !important;
+}
+
+#context-media-playbackrate:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://global/skin/icons/performance.svg") !important;
+}
+
+#context-viewvideo:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://global/skin/icons/more.svg") !important;
+}
+
+#context-media-showcontrols:not(.menuitem-iconic)::before,
+#context-media-hidecontrols:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://browser/skin/menu.svg") !important;
+}
+
+#context-showonlythisframe:not(.menuitem-iconic)::before,
+#contentAreaContextMenu #frame:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://browser/skin/print.svg") !important;
+}
+
+#context-printframe:not(.menuitem-iconic)::before,
+#context-print-selection:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://browser/skin/print.svg") !important;
+}
+
+#context-frameOsPid:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://devtools/skin/images/tool-memory.svg") !important;
+}
+
+#context-reload:not(.menuitem-iconic)::before,
+#context-reloadimage:not(.menuitem-iconic)::before,
+#context-reloadframe:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://browser/skin/reload.svg") !important;
+}
+
+#context-inspect:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://devtools/skin/images/tool-inspector.svg") !important;
+}
+
+#context-inspect-a11y:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://devtools/skin/images/tool-accessibility.svg") !important;
+}
+
+#context-inspect-a11y {
+    display: none !important;
+}
+
+#context-viewsource:not(.menuitem-iconic)::before,
+#context-viewpartialsource-selection:not(.menuitem-iconic)::before,
+#context-viewframesource:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://devtools/skin/images/tool-dom.svg") !important;
+}
+
+#context-viewinfo:not(.menuitem-iconic)::before,
+#context-viewimageinfo:not(.menuitem-iconic)::before,
+#context-viewframeinfo:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://devtools/skin/images/info.svg") !important;
+}
+
+#context-viewbgimage:not(.menuitem-iconic)::before,
+#context-setDesktopBackground:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://browser/skin/notification-icons/canvas.svg") !important;
+}
+
+#context-savepage:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://global/skin/icons/document.svg") !important;
+}
+
+#context-sendpagetodevice:not(.menuitem-iconic)::before,
+#context-sendlinktodevice:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='15' height='15' viewBox='0 0 16 16'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M12 0H4a2 2 0 00-2 2v2a1 1 0 001 1 1 1 0 001-1V2.5a.5.5 0 01.5-.5h7a.5.5 0 01.5.5v10a.5.5 0 01-.5.5h-7a.5.5 0 01-.5-.5V11a1 1 0 00-1-1 1 1 0 00-1 1v3a2 2 0 002 2h8a2 2 0 002-2V2a2 2 0 00-2-2zM9 15H7v-1h2z'/><path fill='context-fill' fill-opacity='context-fill-opacity' d='M5.146 10.146a.5.5 0 10.707.707l3-3a.5.5 0 000-.708l-3-3a.5.5 0 00-.707.707L7.293 7H.5a.5.5 0 000 1h6.793z'/></svg>") !important;
+}
+
+#context-selectall:not(.menuitem-iconic)::before,
+.textbox-contextmenu menuitem[label="Select All"]:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://devtools/skin/images/command-pick.svg") !important;
+}
+
+#context-sendimage:not(.menuitem-iconic)::before,
+#context-sendvideo:not(.menuitem-iconic)::before,
+#context-sendaudio:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://browser/skin/mail.svg") !important;
+}
+
+#context-saveaudio:not(.menuitem-iconic)::before,
+#context-saveframe:not(.menuitem-iconic)::before,
+#context-saveimage:not(.menuitem-iconic)::before,
+#context-savelink:not(.menuitem-iconic)::before,
+#context-savevideo:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://browser/skin/save.svg") !important;
+}
+
+#context-savelinktopocket:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://browser/skin/pocket-outline.svg") !important;
+}
+
+#context-pocket:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://browser/skin/pocket.svg") !important;
+}
+
+#context-viewimage:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://browser/skin/notification-icons/canvas.svg") !important;
+}
+
+#context-copy:not(.menuitem-iconic)::before,
+#context-copyimage-contents:not(.menuitem-iconic)::before,
+.textbox-contextmenu menuitem[label="Copy"]:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://browser/skin/edit-copy.svg") !important;
+    /*     content: url("chrome://devtools/skin/images/copy.svg") !important; */
+}
+
+#context-cut:not(.menuitem-iconic)::before,
+.textbox-contextmenu menuitem[label="Cut"]:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://browser/skin/edit-cut.svg") !important;
+}
+
+#context-paste:not(.menuitem-iconic)::before,
+.textbox-contextmenu menuitem[label="Paste"]:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://browser/skin/edit-paste.svg") !important;
+}
+
+.textbox-contextmenu menuitem[label="Paste & Go"]:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://devtools/skin/images/command-paintflashing.svg") !important;
+}
+
+#context-delete:not(.menuitem-iconic)::before,
+.textbox-contextmenu menuitem[label="Delete"]:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://devtools/skin/images/close.svg") !important;
+}
+
+#context-copyemail:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://browser/skin/mail.svg") !important;
+}
+
+#context-copyaudiourl:not(.menuitem-iconic)::before,
+#context-copyimage:not(.menuitem-iconic)::before,
+#context-copylink:not(.menuitem-iconic)::before,
+#context-copyvideourl:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://browser/skin/link.svg") !important;
+}
+
+#context-bookmarkframe:not(.menuitem-iconic)::before,
+#context-bookmarklink:not(.menuitem-iconic)::before,
+#context-bookmarkpage:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://browser/skin/bookmark-hollow.svg") !important;
+}
+
+#context-openlinkintab:not(.menuitem-iconic)::before,
+#context-openframeintab:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://browser/skin/new-tab.svg") !important;
+}
+
+#context-openlinkincurrent:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://browser/skin/tab.svg") !important;
+}
+
+/* #context-openlinkinusercontext-menu:not(.menuitem-iconic)::before,
+#context-openlinkincontainertab:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("moz-extension://14960f03-eca3-472b-b4d2-0b7f831ebe41/img/container-site.svg") !important;
+} */
+
+#context-openlinkinusercontext-menu:not(.menuitem-iconic) .menu-text,
+#context-openlinkincontainertab:not(.menuitem-iconic) .menu-text {
+    visibility: hidden !important;
+    width: 0px !important;
+}
+
+#context-openlinkinusercontext-menu:not(.menuitem-iconic)::before,
+#context-openlinkincontainertab:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: flex !important;
+    padding-left: 21px !important;
+    padding-right: 0px !important;
+    margin-top: 0px !important;
+    margin-left: 6.5px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    fill-opacity: context-fill-opacity !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+/*     background: url("moz-extension://14960f03-eca3-472b-b4d2-0b7f831ebe41/img/container-site.svg") left no-repeat !important; */
+    background: url("data:image/svg+xml;utf8,<svg height='16' viewBox='0 0 16 16' width='16' xmlns='http://www.w3.org/2000/svg'><g fill='context-fill' fill-opacity='context-fill-opacity' fill-rule='evenodd'><rect height='6' rx='1' width='6' x='1' y='1'/><path d='m11 1h2v6h-2z' transform='matrix(0 1 -1 0 16 -8)'/><path d='m11 1h2v6h-2z'/><rect height='6' rx='1' width='6' x='1' y='9'/><rect height='6' rx='1' width='6' x='9' y='9'/></g></svg>") left no-repeat !important;
+    content: "Open Link in Container Tab" !important;
+}
+
+#context-openlink:not(.menuitem-iconic)::before,
+#context-openframe:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://browser/skin/new-window.svg") !important;
+}
+
+#context-openlinkprivate:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://browser/skin/privateBrowsing.svg") !important;
+}
+
+#context-searchselect:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://browser/skin/search-glass.svg") !important;
+}
+
+#context-searchselect-private:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://browser/skin/privateBrowsing.svg") !important;
+}
+
+#context-undo:not(.menuitem-iconic)::before,
+.textbox-contextmenu menuitem[label="Undo"]:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://browser/skin/undo.svg") !important;
+}
+
+#context-keywordfield:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://devtools/skin/images/filter.svg") !important;
+}
+
+#context_reopenInContainer:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("data:image/svg+xml;utf8,<svg height='16' viewBox='0 0 16 16' width='16' xmlns='http://www.w3.org/2000/svg'><g fill='context-fill' fill-opacity='context-fill-opacity' fill-rule='evenodd'><rect height='6' rx='1' width='6' x='1' y='1'/><path d='m11 1h2v6h-2z' transform='matrix(0 1 -1 0 16 -8)'/><path d='m11 1h2v6h-2z'/><rect height='6' rx='1' width='6' x='1' y='9'/><rect height='6' rx='1' width='6' x='9' y='9'/></g></svg>") !important;
+}
+
+:is(#context_reloadTab, #context_reloadSelectedTabs):not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://browser/skin/reload.svg");
+}
+
+:is(#context_toggleMuteTab, #context_toggleMuteSelectedTabs):not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url(chrome://browser/skin/tabbrowser/tab-audio-muted.svg) !important;
+}
+
+:is(#context_toggleMuteTab, #context_toggleMuteSelectedTabs)[muted="true"]:not(.menuitem-iconic)::before {
+    content: url(chrome://browser/skin/tabbrowser/tab-audio-playing.svg) !important;
+}
+
+:is(#context_pinTab, #context_pinSelectedTabs):not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://browser/skin/pin-tab.svg");
+}
+
+:is(#context_unpinTab, #context_unpinSelectedTabs):not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://browser/skin/unpin-tab.svg");
+}
+
+:is(#context_duplicateTab, #context_duplicateTabs):not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://browser/skin/new-tab.svg") !important;
+}
+
+#context_selectAllTabs:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://devtools/skin/images/tool-styleeditor.svg") !important;
+}
+
+:is(#context_bookmarkTab, #context_bookmarkSelectedTabs):not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://browser/skin/bookmark-hollow.svg") !important;
+}
+
+
+#context_moveTabOptions:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("data:image/svg+xml;utf8,<svg height='17' viewBox='0 0 512 512' width='17' xmlns='http://www.w3.org/2000/svg'><path d='m192 424a23.928 23.928 0 0 1 -16.971-7.029l-144-144a24 24 0 0 1 0-33.942l144-144a24 24 0 0 1 33.942 33.942l-127.03 127.029 127.03 127.029a24 24 0 0 1 -16.971 40.971zm144.971-7.029 144-144a24 24 0 0 0 0-33.942l-144-144a24 24 0 0 0 -33.942 33.942l127.03 127.029-127.03 127.029a24 24 0 0 0 33.942 33.942z' fill='context-fill' fill-opacity='context-fill-opacity'/></svg>") !important;
+}
+
+#context_sendTabToDevice:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='15' height='15' viewBox='0 0 16 16'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M12 0H4a2 2 0 00-2 2v2a1 1 0 001 1 1 1 0 001-1V2.5a.5.5 0 01.5-.5h7a.5.5 0 01.5.5v10a.5.5 0 01-.5.5h-7a.5.5 0 01-.5-.5V11a1 1 0 00-1-1 1 1 0 00-1 1v3a2 2 0 002 2h8a2 2 0 002-2V2a2 2 0 00-2-2zM9 15H7v-1h2z'/><path fill='context-fill' fill-opacity='context-fill-opacity' d='M5.146 10.146a.5.5 0 10.707.707l3-3a.5.5 0 000-.708l-3-3a.5.5 0 00-.707.707L7.293 7H.5a.5.5 0 000 1h6.793z'/></svg>") !important;
+}
+
+#context_closeTabOptions:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16'><path d='M14.3 10l-1.8 1.8-1.8-1.8c-.2-.2-.5-.2-.7 0s-.2.5 0 .7l1.8 1.8-1.8 1.8c-.2.2-.2.5 0 .7s.5.2.7 0l1.8-1.8 1.8 1.8c.2.2.5.2.7 0s.2-.5 0-.7l-1.8-1.8 1.8-1.8c.2-.2.2-.5 0-.7s-.5-.2-.7 0z' fill='context-fill' fill-opacity='context-fill-opacity'/><path d='M16 12c0-.2-.1-.5-.2-.6l-1.1 1.1.5.5c.4-.1.8-.5.8-1zm-5.6.5L9 11.1c-.4-.4-.4-1 0-1.4l.7-.7c.4-.4 1-.4 1.4 0l1.4 1.4L13.9 9s.1 0 .1-.1V5c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v6H1c-.6 0-1 .4-1 1s.4 1 1 1h8.9l.5-.5z' fill='context-fill' fill-opacity='context-fill-opacity'/></svg>") !important;
+}
+
+#context_undoCloseTab:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://browser/skin/undo.svg") !important;
+}
+
+#context_closeTab:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://browser/skin/stop.svg") !important;
+}
+
+#discardTab:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://browser/skin/quit.svg") !important;
+}
+
+#historyUndoWindowMenu3:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://browser/skin/window.svg") !important;
+}
+
+#tabContextUndoList:not(.menuitem-iconic)::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://browser/skin/tab.svg") !important;
+}
+
+#tabContextMenu menuitem[label^="Restore All"]::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://browser/skin/restore-session.svg") !important;
+}
+
+#context_sendTabToDevicePopupMenu .sendtab-target:is([clientType="phone"], [clientType="mobile"])::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://browser/skin/device-phone.svg") !important;
+}
+
+#context_sendTabToDevicePopupMenu .sendtab-target[clientType="desktop"]::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://browser/skin/device-desktop.svg") !important;
+}
+
+#spell-dictionaries,
+#toolbar-context-menu #toggle_PersonalToolbar {
+    display: none !important;
+}
+
+/* #spell-check-enabled::before, */
+#spell-add-to-dictionary::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    content: url("chrome://browser/skin/readerMode.svg") !important;
+}
+
+#spell-check-enabled[checked]::before {
+    position: relative !important;
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-top: 3px !important;
+    margin-left: 6px !important;
+    margin-right: -6px !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+/*     content: url("chrome://browser/skin/readerMode.svg"); */
+    content: url("chrome://global/skin/icons/check.svg");
+}
+
+#spell-check-enabled[checked="true"]::before {
+    content: url("chrome://devtools/skin/images/close.svg");
+}
+
+#spell-check-enabled .menu-iconic-left {
+    visibility: hidden !important;
+}

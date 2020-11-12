@@ -4,9 +4,49 @@
     }
 } */
 
-#pictureInPictureToggleButton {
+.pictureInPictureToggleButton {
+    padding-block: 4px !important;
+    padding-inline: 5px;
+    font-size: 11.5px !important;
+    line-height: 15px !important;
+    opacity: 0 !important;
     cursor: pointer !important;
     background-color: hsl(244, 100%, 63%) !important;
+    max-height: 24px !important;
+    translate: 100% 0 !important;
+    top: calc(50% - 12px) !important;
+    border-top-left-radius: 3px !important;
+    border-bottom-left-radius: 3px !important;
+}
+
+.pictureInPictureToggleIcon {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 625.8 512'><path d='M568.9 0h-512C25.6 0 0 25 0 56.3v398.8C0 486.4 25.6 512 56.9 512h512c31.3 0 56.9-25.6 56.9-56.9V56.3C625.8 25 600.2 0 568.9 0zm-512 425.7V86c0-16.5 13.5-30 30-30h452c16.5 0 30 13.5 30 30v339.6c0 16.5-13.5 30-30 30h-452c-16.5.1-30-13.4-30-29.9zM482 227.6H314.4c-16.5 0-30 13.5-30 30v110.7c0 16.5 13.5 30 30 30H482c16.5 0 30-13.5 30-30V257.6c0-16.5-13.5-30-30-30z' fill='context-fill' fill-opacity='context-fill-opacity'/></svg>") !important;
+    background-position: 0 1.6px !important;
+    background-repeat: no-repeat;
+    width: 16px !important;
+    height: 16px !important;
+    min-width: 16px !important;
+}
+
+.controlsOverlay.hovering .pictureInPictureToggleButton {
+    opacity: 1 !important;
+    translate: var(--pip-toggle-translate-x) 0 !important;
+}
+
+.controlsOverlay.hovering .pictureInPictureToggleButton.hovering {
+    opacity: 1 !important;
+    translate: 0 0 !important;
+}
+
+.controlsOverlay[hidetoggle="true"].hovering .pictureInPictureToggleButton:not(.hovering) {
+    opacity: 0 !important;
+    translate: 100% 0 !important;
+}
+
+@-moz-document url-prefix("moz-extension://0163b722-07ea-4fbd-80d6-7b5de657bb9e") {
+    .warning-bar, .error-bar {
+        background-color: rgb(22, 21, 22) !important;
+    }
 }
 
 @-moz-document url("about:processes") {
@@ -25,6 +65,12 @@
         --background: rgb(15,18,23,1) !important;
         --canvas: rgb(15,18,23,1) !important;
         background-color: rgb(15,18,23,1) !important;
+    }
+}
+
+@-moz-document domain("xvideos.com") {
+    #html5video #hlsplayer .video-loader {
+        display: none !important;
     }
 }
 
@@ -869,7 +915,7 @@ url-prefix("chrome://browser/content/preferences/") {
 
 /* New tab page */
 /* @-moz-document url("moz-extension://341da70b-415b-44de-979b-de30458e8a84/newtab.html") */
-@-moz-document regexp("moz-extension://.*/newtab.html") {
+@-moz-document regexp("disabled:moz-extension://.*/newtab.html") {
     html, body {
         background-color: rgb(25, 25, 27) !important;
     }
@@ -879,7 +925,6 @@ url-prefix("chrome://browser/content/preferences/") {
         padding: 4rem 20% 2rem 10% !important;
         font-size: 20px !important;
         font-family: Cutive Mono !important;
-        transition-duration: 0s !important;
     }
 
     textarea {
@@ -939,7 +984,6 @@ url-prefix("chrome://browser/content/preferences/") {
         /* padding-left: calc(10% + 320px) !important; */
         padding-left: calc(10% + 230px) !important;
         padding-right: calc(20% - 230px) !important;
-        resize: none !important;
         width: 100% !important;
         margin-left: 0px !important;
     }
@@ -1000,6 +1044,34 @@ url-prefix("chrome://browser/content/preferences/") {
     #list li>span {
         border-bottom: 1px solid rgba(255, 255, 255, 0.082) !important;
     }
+    
+    #list .del {
+        display: inline-block !important;
+        color: transparent !important;
+        background-size: 20px !important;
+        fill: white !important;
+        -moz-context-properties: fill, fill-opacity !important;
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path d='M13.5 6l-3.4 3.5L6.5 6l-.5.5L9.4 10l-3.3 3.5.5.5 3.5-3.5 3.4 3.5.5-.5-3.4-3.5L14 6.5l-.5-.5z' fill='context-fill'/><path d='M10 2c-4.4 0-8 3.6-8 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm0 15.3c-4 0-7.3-3.3-7.3-7.3S6 2.7 10 2.7 17.3 6 17.3 10 14 17.3 10 17.3z' fill='context-fill' fill-opacity='context-fill-opacity'/></svg>") !important;
+        width: 20px !important;
+        height: 20px !important;
+        transform: none !important;
+        transition-duration: 0.2s !important;
+        transition-property: opacity, fill-opacity !important;
+        fill-opacity: 0 !important;
+        opacity: 0 !important;
+    }
+    
+    #list .list-inner li:hover .del {
+        opacity: 0.7 !important;
+    }
+    
+    #list .del:hover {
+        fill-opacity: 0.6 !important;
+    }
+    
+    #list .current .del:hover {
+        opacity: 1 !important;
+    }
 
     #create_entry.delete {
         transform: none !important;
@@ -1008,36 +1080,37 @@ url-prefix("chrome://browser/content/preferences/") {
     }
 
     #create_entry {
-        top: 12px !important;
-        right: 12px !important;
-        width: 0px !important;
         height: 22px;
-        color: rgba(170, 170, 170, 0) !important;
+        color: transparent !important;
         background: none !important;
         cursor: default !important;
         border: none !important;
         opacity: 0.45 !important;
+        -moz-context-properties: fill, fill-opacity !important;
+        fill: white !important;
+        fill-opacity: 1 !important;
+        position: fixed !important;
     }
 
     #create_entry:hover {
         opacity: 1 !important;
     }
 
-    #create_entry:not(.delete):after {
-        background-image: url("data:image/svg+xml;utf8,<svg width='20' height='20' viewBox='0 0 25 25' xmlns='http://www.w3.org/2000/svg' fill-rule='evenodd' clip-rule='evenodd'><path d='M11.5 0c6.347 0 11.5 5.153 11.5 11.5s-5.153 11.5-11.5 11.5-11.5-5.153-11.5-11.5 5.153-11.5 11.5-11.5zm0 1c5.795 0 10.5 4.705 10.5 10.5s-4.705 10.5-10.5 10.5-10.5-4.705-10.5-10.5 4.705-10.5 10.5-10.5zm.5 10h6v1h-6v6h-1v-6h-6v-1h6v-6h1v6z' fill='rgba(255, 255, 255, 1)'/></svg>") !important;
+    #create_entry:after {
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path d='M10 0c5.5 0 10 4.5 10 10s-4.5 10-10 10S0 15.5 0 10 4.5 0 10 0zm0 .9c5 0 9.1 4.1 9.1 9.1S15 19.1 10 19.1.9 15 .9 10 5 .9 10 .9zm.4 8.7h5.2v.9h-5.2v5.2h-.8v-5.2H4.3v-.9h5.2V4.3h.9v5.3z' fill-rule='evenodd' clip-rule='evenodd' fill='context-fill' fill-opacity='context-fill-opacity'/></svg>") !important;
         width: 20px !important;
         height: 20px !important;
         position: relative !important;
         top: -18.5px !important;
-        right: 22px !important;
+/*         right: 22px !important; */
         display: block !important;
         content: "" !important;
         cursor: pointer !important;
         background-repeat: no-repeat !important;
     }
 
-    #create_entry.delete:after {
-        background-image: url("data:image/svg+xml;utf8,<svg width='20' height='20' viewBox='0 0 26 26' xmlns='http://www.w3.org/2000/svg' fill-rule='evenodd' clip-rule='evenodd'><path d='M12 0c6.623 0 12 5.377 12 12s-5.377 12-12 12-12-5.377-12-12 5.377-12 12-12zm0 1c6.071 0 11 4.929 11 11s-4.929 11-11 11-11-4.929-11-11 4.929-11 11-11zm0 10.293l5.293-5.293.707.707-5.293 5.293 5.293 5.293-.707.707-5.293-5.293-5.293 5.293-.707-.707 5.293-5.293-5.293-5.293.707-.707 5.293 5.293z' fill='rgba(255, 255, 255, 1)'/></svg>") !important;
+/*     #create_entry.delete:after {
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path d='M10 0c5.5 0 10 4.5 10 10s-4.5 10-10 10S0 15.5 0 10 4.5 0 10 0zm0 .9c5 0 9.1 4.1 9.1 9.1S15 19.1 10 19.1.9 15 .9 10 5 .9 10 .9zm.4 8.7h5.2v.9h-5.2v5.2h-.8v-5.2H4.3v-.9h5.2V4.3h.9v5.3z' fill-rule='evenodd' clip-rule='evenodd' fill='context-fill' fill-opacity='context-fill-opacity'/></svg>") !important;
         width: 20px !important;
         height: 20px !important;
         position: relative !important;
@@ -1047,15 +1120,14 @@ url-prefix("chrome://browser/content/preferences/") {
         content: "" !important;
         cursor: pointer !important;
         background-repeat: no-repeat !important;
-    }
-    
-    #create_entry {
-        position: fixed !important;
-        left: 0px
-    }
+    } */
     
     #list-indicator:checked~#create_entry {
         left: 308px !important;
+    }
+    
+    #list-indicator:checked~#create_entry:after {
+        right: 22px !important;
     }
     
     #gradient-overlay {
@@ -1073,32 +1145,17 @@ url-prefix("chrome://browser/content/preferences/") {
     }
     
     #list {
-        border-top: 30px !important;
+        border-top: 48px !important;
         border-top-style: solid !important;
         border-color: transparent !important;
 /*         mask-image: linear-gradient(to bottom, transparent 52px, rgb(250, 0, 0) 84px) !important;
         mask-clip: no-clip !important; */
     }
     
-    #list::after {
-        background-color: linear-gradient(to bottom, transparent 52px, rgb(250, 0, 0) 84px) !important;
-    }
-    
     .list-inner {
-        margin-top: 1em !important;
+        margin-top: 0em !important;
         padding-top: 0em !important;
-    }
-
-    #note-content {
-        transition-duration: .2s !important;
-    }
-
-    #list-indicator:checked~#note-content {
-        transition-duration: .2s !important;
-    }
-    
-    #list-indicator:checked~#gradient-overlay {
-        transition-duration: .2s !important;
+        padding-inline: 12px !important;
     }
 }
 
@@ -1354,6 +1411,10 @@ domain("wikimedia.org") {
         margin: 0 auto !important;
         pointer-events: auto !important;
     }
+    
+    .vector-menu-tabs, .vector-menu-tabs a, #mw-head .vector-menu-dropdown h3 {
+        background-image: none !important;
+    }
 
     #mw-head a,
     #mw-head ul,
@@ -1479,38 +1540,176 @@ domain("wikimedia.org") {
         margin-bottom: 0 !important;
         margin-top: 7px !important;
     }
-
-    #mw-navigation #p-lang:before {
-        content: "" !important;
-        font-size: 0 !important;
+    
+    #mw-panel>.portal {
         display: inline-block !important;
-        height: 0px !important;
-        width: 100% !important;
-        border-top: none !important;
-        border-bottom: none !important;
+        box-shadow: none !important;
+        -webkit-box-shadow: none !important;
     }
-
-    #mw-navigation #p-lang {
-        margin-top: -30px !important;
-        margin-bottom: 15px !important;
+    
+    #mw-panel>.portal>h3 {
+        color: rgb(255, 255, 255) !important;
+        font-size: 1rem !important;
+        margin-left: 5px !important;
+        padding-bottom: 0 !important;
+        background-image: linear-gradient(to right, transparent 0, white 20%, transparent 100%) !important;
+        background-size: 100% 0.85px !important;
     }
-
-    #mw-navigation #p-lang-label {
-        color: #fff !important;
-        font-size: 1.2rem !important;
-        margin-left: 9px !important;
-        margin-top: -18px !important;
-        padding-bottom: 1.5px !important;
+    
+    #mw-panel>.portal .vector-menu-content-list {
+        padding-top: 3px !important;
+    }
+    
+    #mw-panel .portal-first h3 {
+        display: block !important;
+    }
+    
+    #mw-navigation #p-lang #p-lang-label {
+        display: block !important;
     }
 
     #mw-navigation #p-lang .uls-settings-trigger {
-        margin-right: 8px !important;
-        margin-top: 6px !important;
+/*         margin-left: 16px !important;
+        margin-top: 17px !important;
+        min-width: 13px !important;
+        min-height: 13px !important;
+        fill: white !important;
+        background: url(chrome://global/skin/icons/settings.svg) !important;
+        background-size: 13px 13px !important;
+        padding: 0 !important;
+        position: static !important;
+        float: inline-end !important;
+        display: block !important; */
+        display: none !important;
+    }
+    
+    #mw-navigation :focus {
+        outline: none !important;
     }
 
     #mw-navigation>#mw-panel>div:not(#p-lang):not(#p-navigation):not(.first),
     #mw-navigation #p-lang .wbc-editpage {
         display: none !important;
+    }
+    
+    #mw-navigation .portal:last-of-type {
+        margin-bottom: 20px !important;
+    }
+    
+/*     search language menu */
+    .uls-menu {
+        box-shadow: 0 0 12px -2px rgba(0,0,0,0.35) !important;
+    }
+    
+    .uls-menu,
+    .uls-menu>*,
+    .uls-menu .uls-filterinput {
+        background-color: rgb(35, 35, 36) !important;
+        border-color: transparent !important;
+        color: rgb(204, 204, 204) !important;
+    }
+    
+    .uls-menu .uls-search {
+        border-bottom-color: rgb(55, 55, 55) !important;
+    }
+    
+    .uls-search:-moz-any(:hover, :focus-within) .uls-search-label {
+        opacity: 0.7 !important;
+    }
+    
+    .skin-vector .uls-search-label {
+        -webkit-transition: none !important;
+        -moz-transition: none !important;
+        transition: none !important;
+    }
+    
+    .uls-menu .uls-filterinput {
+        background: none !important;
+        opacity: 0.7 !important;
+    }
+    
+    .uls-menu .uls-filtersuggestion,
+    .uls-menu .uls-search:focus-within .uls-filtersuggestion,
+    .uls-menu .uls-search:hover .uls-filtersuggestion {
+        opacity: 0.5 !important;
+        color: rgb(204, 204, 204) !important;
+    }
+    
+    .uls-menu .uls-filterinput::placeholder {
+        opacity: 0.7 !important;
+    }
+    
+    .uls-menu .uls-search:focus-within .uls-filterinput::placeholder,
+    .uls-menu .uls-search:hover .uls-filterinput::placeholder {
+        opacity: 0.7 !important;
+    }
+    
+    .uls-menu .uls-search:focus-within .uls-languagefilter,
+    .uls-menu .uls-search:hover .uls-languagefilter {
+        opacity: 1 !important;
+    }
+    
+    .uls-menu .uls-search-label,
+    .uls-languagefilter-clear {
+        filter: invert(1) !important;
+    }
+    
+    .uls-menu .uls-lcd-region-title {
+        color: rgb(204, 204, 204) !important;
+        font-size: 16px !important;
+        padding-left: 18px !important;
+    }
+    
+    .uls-no-results-found-title {
+        color: rgb(204, 204, 204) !important;
+        font-size: 16px !important;
+        padding-left: 7px !important;
+        margin-bottom: 10px !important;
+        margin-top: 15px !important;
+    }
+    
+    .uls-no-found-more {
+        position: absolute !important;
+        background: none !important;
+        float: right !important;
+        border-top: 1px solid rgb(55, 55, 55) !important;
+        border-left: 1px solid rgb(55, 55, 55) !important;
+        border-radius: 3px !important;
+        color: rgb(204, 204, 204) !important;
+        padding: 12px 12px 12px 12px !important;
+        width: 58% !important;
+        text-align: justify !important;
+        margin-top: 0 !important;
+        line-height: 1.5em !important;
+        left: auto !important;
+        right: 0 !important;
+    }
+    
+    .uls-language-block > ul > li {
+        background: none !important;
+        margin-left: 3px !important;
+        padding-left: 25px !important;
+        width: -moz-min-content !important;
+        padding-right: 25px !important;
+    }
+    
+    .uls-language-block a {
+        color: rgb(138, 181, 229) !important;
+        font-size: 16px !important;
+    }
+    
+    .uls-language-block > ul > li:hover a {
+        text-decoration: underline !important;
+    }
+    
+    .interlanguage-uls-menu.selector-left::before {
+        border-right: 10px solid rgba(0,0,0,0.05) !important;
+        color: rgb(35, 35, 36) !important;
+    }
+
+    .interlanguage-uls-menu.selector-left::after {
+        border-right: 10px solid rgb(35, 35, 36) !important;
+        color: rgb(35, 35, 36) !important;
     }
 
     /* article */
@@ -1755,6 +1954,11 @@ domain("wikimedia.org") {
         color: #c0c0c0 !important;
         font-size: 14px !important;
         line-height: 17px !important;
+    }
+    
+    .mw-body-content blockquote {
+        border-left: 3px double hsl(220, 5%, 18%) !important;
+        padding: 4px 18px !important;
     }
 
     /* boxes */
@@ -2423,7 +2627,7 @@ domain("wikimedia.org") {
     }
 
     .mwe-popups.mwe-popups-image-pointer .mwe-popups-extract {
-        padding-top: 16px !important;
+        padding-top: 8px !important;
         margin-top: 200px !important;
     }
 
@@ -2432,6 +2636,12 @@ domain("wikimedia.org") {
         position: absolute !important;
         z-index: 113 !important;
         left: 0 !important;
+    }
+
+    .mwe-popups-is-not-tall.flipped-y .mwe-popups-discreet,
+    .mwe-popups-is-not-tall.flipped-x-y .mwe-popups-discreet {
+        height: 200px !important;
+        display: block !important;
     }
 
     .mwe-popups.flipped-x.mwe-popups-is-tall {
@@ -2636,6 +2846,10 @@ domain("wikimedia.org") {
     .mwe-popups.mwe-popups-type-reference .mwe-popups-read-link {
         font-size: 12px !important;
     }
+    
+    .mwe-popups-read-link {
+        display: none !important;
+    }
 
     .mwe-popups-overlay {
         background-color: rgba(255, 255, 255, 0.9) !important;
@@ -2764,11 +2978,23 @@ domain("wikimedia.org") {
         color: rgba(255, 255, 255, 0.75) !important;
         background-color: rgba(5, 5, 5, 0.9) !important;
     }
+    
+    .mw-mmv-image-metadata-column {
+        margin-bottom: 8px !important;
+    }
 
     .mw-mmv-image-metadata {
         border-top: none !important;
-        background-color: rgba(9, 9, 9, 0.9) !important;
-        padding-top: 2px !important;
+        background-color: rgba(19, 19, 19, 0.9) !important;
+        padding-top: 0px !important;
+    }
+    
+    .mw-mmv-untruncated .mw-mmv-image-metadata {
+        background: none !important;
+    }
+    
+    .metadata-panel-is-closed .mw-mmv-image-metadata-links-column {
+        margin-top: -4px !important;
     }
 
     .mw-mmv-credit {
@@ -2781,6 +3007,28 @@ domain("wikimedia.org") {
 
     .mw-mmv-source-author a:not(.new):visited {
         color: #dcb7ff !important;
+    }
+    
+    .mw-mmv-ttf-ellipsis {
+        background-color: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        -moz-context-properties: fill, fill-opacity !important;
+        fill: hsla(0, 0%, 100%, 0.6) !important;
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'> <g fill='context-fill' fill-opacity='context-fill-opacity' transform='translate(0 20)'> <path d='M22 48.3c0 6.1-4.9 11-11 11s-11-4.9-11-11 4.9-11 11-11 11 4.9 11 11zm37 0c0 6.1-4.9 11-11 11s-11-4.9-11-11 4.9-11 11-11 11 4.9 11 11z'/> <circle cx='85' cy='48.3' r='11'/> </g> </svg>") !important;
+    }
+    
+    .mw-mmv-ttf-ellipsis:hover {
+        fill: hsla(0, 0%, 100%, 1) !important;
+    }
+    
+    .mw-mmv-ttf-ellipsis::before {
+        background-image: none !important;
+        display: none !important;
+    }
+    
+    .mw-mmv-about-links {
+        display: none !important;
     }
 
     /* #bodyContent li::marker {
@@ -2807,6 +3055,11 @@ domain("wikimedia.org") {
         font-weight: normal !important;
         font-family: Patua One;
     }
+    
+    table.wikitable>caption {
+        background: none !important;
+        border: none !important;
+    }
 
     table:not([class])>tr>th,
     table:not([class])>tr>td,
@@ -2825,6 +3078,8 @@ domain("wikimedia.org") {
 
     table.wikitable.sortable.jquery-tablesorter thead tr th.headerSort {
         background-image: linear-gradient(transparent, transparent), url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2221%22 height=%229%22 viewBox=%220 0 21 9%22%3E %3Cpath d=%22M14.5 5l-4 4-4-4zm0-1l-4-4-4 4z %22 fill=%22%23f0f0f0%22/%3E %3C/svg%3E") !important;
+        background-repeat: no-repeat !important;
+        background-position: center right !important;
     }
 
     .vertical-navbox th,
@@ -2832,6 +3087,10 @@ domain("wikimedia.org") {
     tbody tr td {
         background-color: rgba(43, 47, 50, 0) !important;
         /*         border-radius: 3px !important; */
+    }
+    
+    tbody tr td div[style*="background-color: lavender" i] {
+        background-color: rgba(43, 47, 50, 0) !important;
     }
 
     .clade tbody tr td {
@@ -2936,17 +3195,17 @@ domain("wikimedia.org") {
         text-decoration: none !important;
     }
 
-    #p-navigation.portal ul li:hover,
-    #p-lang.portal ul li:hover,
-    #p-navigation.portal ul li:active,
-    #p-lang.portal ul li:active {
+    #mw-navigation .portal ul li:hover,
+    #mw-navigation .portal ul li:hover,
+    #mw-navigation .portal ul li:active,
+    #mw-navigation .portal ul li:active {
         border-radius: 3px !important;
         background-color: rgba(255, 255, 255, 0.075) !important;
         color: #fff !important;
     }
 
-    #p-navigation.portal ul li,
-    #p-lang.portal ul li {
+    #mw-navigation .portal ul li,
+    #mw-navigation .portal ul li {
         display: inline-block !important;
         clear: both !important;
         float: left !important;
@@ -3001,6 +3260,292 @@ domain("wikimedia.org") {
         filter: brightness(500%) grayscale(100) contrast(50%) !important;
     }
 
+    .mw-mmv-dialog {
+        position: fixed;
+        right: 58px;
+        display: none;
+        width: 450px;
+        height: 350px;
+        color: hsla(0, 0%, 100%, 0.75) !important;
+        background-color: hsla(0, 0%, 1.7%, 1) !important;
+        box-shadow: none !important;
+        border-radius: 3px !important;
+        z-index: 1004;
+    }
+    
+    .mw-mmv-download-dialog .mw-mmv-dialog-down-arrow {
+        background-color: hsl(215, 8%, 3.5%) !important;
+    }
+    
+    .mw-mmv-download-pane .mw-mmv-download-attribution {
+        background-color: hsl(215, 8%, 3.5%) !important;
+        color: hsl(0, 0%, 60%) !important;
+        border-bottom-left-radius: 3px !important;
+        border-bottom-right-radius: 3px !important;
+    }
+    
+    .mw-mmv-download-pane .mw-mmv-download-attribution-cta * {
+        background: none !important;
+        color: hsl(0, 0%, 60%) !important;
+    }
+    
+    .mw-mmv-download-pane .mw-mmv-download-attribution:hover .mw-mmv-download-attribution-cta * {
+        color: hsl(0, 0%, 90%) !important;
+    }
+    
+    .oo-ui-menuSelectWidget {
+        overflow: hidden !important;
+        color: hsl(0, 0%, 60%) !important;
+        background-color: hsl(215, 8%, 3.5%) !important;
+        border: none !important;
+        border-radius: 3px !important;
+        box-shadow: 0 0px 5px -1px hsla(0, 0%, 0%, 0.25) !important;
+    }
+    
+    .oo-ui-menuOptionWidget.oo-ui-optionWidget {
+        color: hsl(0, 0%, 70%) !important;
+    }
+    
+    .oo-ui-menuOptionWidget.oo-ui-optionWidget-selected,
+    .oo-ui-menuOptionWidget.oo-ui-optionWidget-selected.oo-ui-optionWidget-highlighted {
+        background-color: hsl(215, 6%, 8%) !important;
+        color: hsl(0, 0%, 90%) !important;
+    }
+    
+    .oo-ui-menuOptionWidget.oo-ui-optionWidget-highlighted {
+        background-color: hsl(215, 6%, 6%) !important;
+        color: hsl(0, 0%, 90%) !important;
+    }
+    
+    .mw-mmv-reuse-dialog .mw-mmv-reuse-tabs .oo-ui-optionWidget.oo-ui-optionWidget-selected,
+    .mw-mmv-reuse-dialog .mw-mmv-reuse-tabs .oo-ui-optionWidget.oo-ui-optionWidget-highlighted.oo-ui-optionWidget-selected {
+        border-bottom: 3px solid hsl(0, 0%, 90%) !important;
+    }
+    
+    .mw-mmv-reuse-dialog .mw-mmv-reuse-tabs .oo-ui-optionWidget.oo-ui-optionWidget-highlighted {
+        border-bottom: 3px solid hsl(0, 0%, 60%) !important;
+    }
+    
+    .mw-mmv-reuse-dialog .mw-mmv-dialog-down-arrow,
+    .mw-mmv-options-dialog .mw-mmv-dialog-down-arrow {
+        background-color: hsla(0, 0%, 1.7%, 1) !important;
+    }
+    
+    .oo-ui-textInputWidget .oo-ui-inputWidget-input {
+        -moz-appearance: none !important;
+        background-color: hsl(215, 6%, 6%) !important;
+        color: hsl(0, 0%, 60%) !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+    
+    .mw-mmv-share-pane .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button {
+        background-color: hsl(215, 6%, 6%) !important;
+        color: hsl(0, 0%, 60%) !important;
+        border: none !important;
+        cursor: default !important;
+    }
+    
+    .mw-mmv-share-pane .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button:hover {
+        background-color: hsl(215, 6%, 6%) !important;
+        color: hsl(0, 0%, 60%) !important;
+        border: none !important;
+    }
+    
+    .mw-mmv-share-pane .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button > .oo-ui-iconElement-icon:not(.oo-ui-image-invert),
+    .mw-mmv-share-pane .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button > .oo-ui-indicatorElement-indicator:not(.oo-ui-image-invert) {
+        filter: invert(1) !important;
+        opacity: 0.2 !important;
+        cursor: pointer !important;
+    }
+    
+    .mw-mmv-share-pane .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button:hover > .oo-ui-iconElement-icon:not(.oo-ui-image-invert):hover,
+    .mw-mmv-share-pane .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button:hover > .oo-ui-indicatorElement-indicator:not(.oo-ui-image-invert):hover {
+        opacity: 0.3 !important;
+    }
+    
+    .mw-mmv-share-pane .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button:hover > .oo-ui-iconElement-icon:not(.oo-ui-image-invert),
+    .mw-mmv-share-pane .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button:hover > .oo-ui-indicatorElement-indicator:not(.oo-ui-image-invert) {
+        opacity: 0.2 !important;
+    }
+    
+    .oo-ui-inputWidget-input {
+        border: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+    }
+    
+    .mw-mmv-embed-select .oo-ui-buttonElement.oo-ui-labelElement > input.oo-ui-buttonElement-button,
+    .mw-mmv-embed-select .oo-ui-buttonElement.oo-ui-labelElement > .oo-ui-buttonElement-button > .oo-ui-labelElement-label {
+        line-height: 1.6em !important;
+    }
+    
+    .mw-mmv-embed-select .oo-ui-buttonElement > .oo-ui-buttonElement-button {
+        font-family: Abel !important;
+        font-size: 14px !important;
+        font-weight: normal !important;
+    }
+    
+    .mw-mmv-embed-select .oo-ui-buttonElement-framed.oo-ui-widget-enabled.oo-ui-buttonElement-active > .oo-ui-buttonElement-button,
+    .mw-mmv-embed-select .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button:hover {
+        background-color: hsl(215, 8%, 9%) !important;
+        color: hsl(0, 0%, 90%) !important;
+        border: none !important;
+    }
+    
+    .mw-mmv-embed-select .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button {
+        background-color: hsl(215, 8%, 7%) !important;
+        color: hsl(0, 0%, 60%) !important;
+        border: none !important;
+    }
+    
+    .mw-mmv-embed-pane .mw-widget-copyTextLayout-multiline-button .oo-ui-buttonElement-button {
+        padding-block: 0 !important;
+        padding-left: 34px !important;
+        padding-right: 10px !important;
+        background-color: hsl(215, 8%, 7%) !important;
+        border: none !important;
+    }
+    
+    .mw-mmv-embed-pane .mw-widget-copyTextLayout-multiline-button .oo-ui-buttonElement .oo-ui-iconElement-icon {
+        left: 5px !important;
+    }
+    
+    .mw-mmv-embed-pane .mw-widget-copyTextLayout-multiline-button .oo-ui-buttonElement .oo-ui-labelElement-label {
+        font-family: Abel !important;
+        font-size: 24px !important;
+        font-weight: 400 !important;
+        text-transform: uppercase !important;
+        line-height: 1.7em !important;
+        color: white !important;
+        opacity: 0.6 !important;
+    }
+    
+    .mw-mmv-embed-pane .mw-widget-copyTextLayout-multiline-button .oo-ui-buttonElement:hover .oo-ui-labelElement-label {
+        opacity: 0.9 !important;
+    }
+    
+    .mw-mmv-embed-pane .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button > .oo-ui-iconElement-icon:not(.oo-ui-image-invert),
+    .mw-mmv-embed-pane .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button > .oo-ui-indicatorElement-indicator:not(.oo-ui-image-invert) {
+        filter: invert(1) !important;
+        opacity: 0.3 !important;
+        cursor: pointer !important;
+    }
+    
+    .mw-mmv-embed-pane .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button:hover > .oo-ui-iconElement-icon:not(.oo-ui-image-invert),
+    .mw-mmv-embed-pane .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button:hover > .oo-ui-indicatorElement-indicator:not(.oo-ui-image-invert) {
+        opacity: 0.45 !important;
+    }
+    
+    .oo-ui-buttonElement.oo-ui-widget-enabled > .oo-ui-buttonElement-button > .oo-ui-iconElement-icon,
+    .oo-ui-buttonElement.oo-ui-widget-enabled > .oo-ui-buttonElement-button > .oo-ui-indicatorElement-indicator {
+        transition: none !important;
+    }
+    
+    .mw-mmv-embed-pane .oo-ui-textInputWidget {
+        font-family: monospace !important;
+        font-size: 13px !important;
+    }
+    
+    .mw-mmv-reuse-dialog .oo-ui-dropdownWidget.oo-ui-widget-enabled .oo-ui-dropdownWidget-handle {
+        background-color: hsl(215, 6%, 8%) !important;
+        color: hsl(0, 0%, 90%) !important;
+        border: none !important;
+        box-shadow: none !important;
+        transition: none !important;
+    }
+    
+    .mw-mmv-reuse-dialog .oo-ui-dropdownWidget.oo-ui-widget-enabled .oo-ui-dropdownWidget-handle .oo-ui-indicator-down {
+        filter: invert(1) !important;
+        opacity: 0.4 !important;
+        transform: scaleY(-1) !important;
+    }
+    
+    .mw-mmv-reuse-dialog .oo-ui-dropdownWidget.oo-ui-widget-enabled.oo-ui-dropdownWidget-open .oo-ui-dropdownWidget-handle .oo-ui-indicator-down {
+        opacity: 0.7 !important;
+    }
+    
+    .mw-mmv-options-text-header,
+    .mw-mmv-options-text-body {
+        color: hsl(0, 0%, 50%) !important;
+    }
+    
+    .mw-mmv-options-text-body {
+        margin-top: 0px !important;
+        margin-bottom: -1px !important;
+        font-size: 13px !important;
+        font-style: italic !important;
+    }
+    
+    .mw-mmv-options-dialog-header {
+        color: hsl(0, 0%, 70%) !important;
+    }
+    
+    .mw-mmv-options-disable {
+        margin-left: 5px !important;
+    }
+    
+    .mw-mmv-options-icon {
+        margin-top: 5px !important;
+    }
+    
+    .mw-mmv-project-info-link {
+        font-size: 15px !important;
+    }
+    
+    .mw-mmv-options-cancel-button {
+        background-color: hsl(0, 0%, 17.3%) !important;
+        color: hsl(0, 0%, 100%) !important;
+        border: 1px solid transparent !important;
+        opacity: 0.3 !important;
+        transition: 0.15s ease-in-out !important;
+        font-weight: normal !important;
+        text-transform: uppercase !important;
+        font-family: Abel !important;
+        line-height: 25px !important;
+        margin-right: 5px !important;
+    }
+    
+    .mw-mmv-options-cancel-button:hover {
+        background-color: hsl(0, 0%, 17.3%) !important;
+        color: hsl(0, 0%, 100%) !important;
+        border: 1px solid transparent !important;
+        opacity: 0.7 !important;
+    }
+    
+    .mw-ui-button:focus {
+        box-shadow: none !important;
+        outline: none !important;
+    }
+    
+    .mw-mmv-next-image, .mw-mmv-prev-image {
+        top: -999px;
+        width: 40px !important;
+        height: 120px;
+        transition: opacity 0.25s,margin 0.25s;
+    }
+
+    .tipsy-inner {
+        color: hsla(0, 0%, 100%, 0.75) !important;
+        background-color: hsl(0, 0%, 4%) !important;
+        box-shadow: none !important;
+        border: solid 1px hsl(0, 0%, 4%) !important;
+    }
+
+    .tipsy-arrow {
+        background-color: hsl(0, 0%, 4%) !important;
+        background-image: none !important;
+        width: 11px !important;
+        height: 11px !important;
+        -webkit-transform: rotate(-45deg);
+        -moz-transform: rotate(-45deg);
+        transform: scale(85%) rotate(-45deg);
+    }
+    
+    .mw-mmv-fullscreen {
+        background-size: contain !important;
+    }
+
     .mwe-popups .mwe-popups-container {
         color: rgb(255, 255, 255, 0.75) !important;
     }
@@ -3022,6 +3567,14 @@ domain("wikimedia.org") {
 
     .mw-ui-icon:hover {
         filter: contrast(0%) brightness(10000%) grayscale(0%) !important;
+    }
+    
+    .mw-ui-icon.mw-ui-icon-preview-generic {
+        filter: invert() !important;
+    }
+    
+    .mwe-popups footer {
+        display: none !important;
     }
 
     .mwe-popups .mw-ui-icon::before {
@@ -3653,5 +4206,14 @@ domain("wikimedia.org") {
 
     #content .mw-parser-output>ul.gallery .gallerybox {
         padding: 3px !important;
+    }
+    
+    #siteNotice {
+        display: none !important;
+    }
+    
+/*     phylogeny daggers */
+    img[alt="dagger"] {
+        filter: invert(1) !important;
     }
 }
