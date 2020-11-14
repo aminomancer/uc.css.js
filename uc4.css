@@ -89,7 +89,7 @@ toolbar {
     --ctrlTab-panel-disabled-bgcolor: hsla(240, 2%, 9%, 0.8) !important;
     --ctrlTab-panel-disabled-focused-bgcolor: hsla(240, 8%, 3%, 0.9) !important;
     --ctrlTab-panel-bgcolor: hsla(240, 3%, 4%, 0.9) !important;
-    --ctrlTab-panel-focused-bgcolor: hsla(240, 3%, 2.5%, 0.99) !important;
+    --ctrlTab-panel-focused-bgcolor: hsla(10, 12%, 2%, 0.99) !important;
 }
 
 toolbar .toolbarbutton-1:not([disabled]):hover:-moz-any([open]) > .toolbarbutton-icon {

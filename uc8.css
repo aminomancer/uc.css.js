@@ -565,9 +565,8 @@ treechildren::-moz-tree-drop-feedback {
         font-size: 14px !important;
     }
     
-    #alertTextLabel {
-        font-family:  !important;
-    }
+/*     #alertTextLabel {
+    } */
     
     #alertSourceLabel {
         font-family: FreeMono, monospace !important;
@@ -685,7 +684,7 @@ treechildren::-moz-tree-drop-feedback {
 }
 
 /* dialog and ugly window styling */
-@-moz-document regexp("chrome:\/\/(?!devtools).*") {
+/* @-moz-document regexp("chrome:\/\/(?!devtools).*") {
 
 }
 
@@ -747,7 +746,7 @@ treechildren::-moz-tree-drop-feedback {
 
 @-moz-document url("chrome://global/content/pictureinpicture/player.xhtml") {
 
-}
+} */
 
 #pictureInPictureToggleContextMenu {
     display: none !important;
