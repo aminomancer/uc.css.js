@@ -4216,4 +4216,11 @@ domain("wikimedia.org") {
     img[alt="dagger"] {
         filter: invert(1) !important;
     }
+    
+/*     text backgrounds in content */
+    #bodyContent span.nounderlines {
+        border: none !important;
+        background: none !important;
+        padding: inherit !important;
+    }
 }

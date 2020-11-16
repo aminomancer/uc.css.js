@@ -92,10 +92,40 @@ treechildren::-moz-tree-drop-feedback {
     height: 2px !important;
 }
 
-:root[customizing] #navigator-toolbox,
+/* before fullscreenNavBar.uc.js */
+/* :root[customizing] #navigator-toolbox,
 :root[inFullscreen]:not([customizing]) #navigator-toolbox:focus-within,
 :root[inFullscreen]:not([customizing]) #navigator-toolbox:hover,
 :root[inFullscreen]:not([customizing]) #mainPopupSet:-moz-any(:hover, :focus-within) ~ box>#navigator-toolbox {
+    margin-top: 0 !important;
+    transition-delay: 0s !important;
+    transition: all .2s ease-in-out 0s !important;
+    opacity: 1 !important;
+    transition-timing-function: cubic-bezier !important;
+}
+
+:root[inFullscreen]:not([customizing]) body>box:focus-within ~ #browser findbar,
+:root[inFullscreen]:not([customizing]) body>box:hover ~ #browser findbar,
+:root[inFullscreen]:not([customizing]) #mainPopupSet:-moz-any(:hover, :focus-within) ~ #browser findbar {
+    margin-top: 5.4px !important;
+}
+
+:root[inFullscreen]:not([customizing]) body>box:focus-within ~ #browser findbar[hidden],
+:root[inFullscreen]:not([customizing]) body>box:hover ~ #browser findbar[hidden],
+:root[inFullscreen]:not([customizing]) #mainPopupSet:-moz-any(:hover, :focus-within) ~ #browser findbar[hidden] {
+    margin-top: calc(5.4px - 69px) !important;
+}
+
+:root[inFullscreen]:not([customizing]) body>box:focus-within ~ #browser #sidebar-box,
+:root[inFullscreen]:not([customizing]) body>box:hover ~ #browser #sidebar-box,
+:root[inFullscreen]:not([customizing]) #mainPopupSet:-moz-any(:hover, :focus-within) ~ #browser #sidebar-box {
+    margin-top: 74px !important;
+} */
+
+/* hides the nav-bar in fullscreen, but reveals it when hovering or focusing the nav-bar, or when nav-bar related popups are opened.
+requires fullscreenNavBar.uc.js to set attributes popup-status and urlbar-status. */
+:root[customizing] #navigator-toolbox,
+:root[inFullscreen]:not([customizing]) body>box:is(:focus-within, :hover, [popup-status], [urlbar-status]) #navigator-toolbox {
     margin-top: 0 !important;
     transition-delay: 0s !important;
     transition: all .2s ease-in-out 0s !important;
@@ -149,21 +179,15 @@ treechildren::-moz-tree-drop-feedback {
     margin-top: calc(-2em - 69px) !important;
 }
 
-:root[inFullscreen]:not([customizing]) body>box:focus-within ~ #browser findbar,
-:root[inFullscreen]:not([customizing]) body>box:hover ~ #browser findbar,
-:root[inFullscreen]:not([customizing]) #mainPopupSet:-moz-any(:hover, :focus-within) ~ #browser findbar {
+:root[inFullscreen]:not([customizing]) body>box:is(:focus-within, :hover, [popup-status], [urlbar-status]) ~ #browser findbar {
     margin-top: 5.4px !important;
 }
 
-:root[inFullscreen]:not([customizing]) body>box:focus-within ~ #browser findbar[hidden],
-:root[inFullscreen]:not([customizing]) body>box:hover ~ #browser findbar[hidden],
-:root[inFullscreen]:not([customizing]) #mainPopupSet:-moz-any(:hover, :focus-within) ~ #browser findbar[hidden] {
+:root[inFullscreen]:not([customizing]) body>box:is(:focus-within, :hover, [popup-status], [urlbar-status]) ~ #browser findbar[hidden] {
     margin-top: calc(5.4px - 69px) !important;
 }
 
-:root[inFullscreen]:not([customizing]) body>box:focus-within ~ #browser #sidebar-box,
-:root[inFullscreen]:not([customizing]) body>box:hover ~ #browser #sidebar-box,
-:root[inFullscreen]:not([customizing]) #mainPopupSet:-moz-any(:hover, :focus-within) ~ #browser #sidebar-box {
+:root[inFullscreen]:not([customizing]) body>box:is(:focus-within, :hover, [popup-status], [urlbar-status]) ~ #browser #sidebar-box {
     margin-top: 74px !important;
 }
 
@@ -408,6 +432,10 @@ treechildren::-moz-tree-drop-feedback {
 #identity-box[open="true"]>#notification-popup-box>*,
 #identity-box[open="true"]>#remote-control-icon {
     fill-opacity: 1 !important;
+}
+
+#notification-popup menulist {
+    color: hsl(212.5, 42.9%, 89%) !important;
 }
 
 /* #downloadsPanel-mainView {
@@ -1027,4 +1055,9 @@ treechildren::-moz-tree-drop-feedback {
 
 #protections-popup-panel-arrow {
     stroke: HSL(216.5, 90%, 39.4%) !important;
+    stroke: none !important;
+    width: 22px !important;
+    height: 11.4px !important;
+    margin-inline-start: 9.2px !important;
+    margin-top: 0px !important;
 }
