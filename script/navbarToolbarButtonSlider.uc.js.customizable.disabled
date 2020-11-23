@@ -1,0 +1,126 @@
+// ==UserScript==
+// @name           navbarToolbarButtonSlider.uc.js
+// @namespace      https://www.reddit.com/user/MotherStylus
+// @description    Wrap all toolbar buttons after #urlbar-container in a scrollable div. I recommend setting mousewheel.autodir.enabled to true, so you can scroll horizontally through the buttons by scrolling up/down with a mousewheel. You may need to adjust the "300" on line 32, this is the time (in milliseconds) before the script executes. Without it, the script will execute too fast so toolbar buttons added by scripts or extensions may not load depending on your overall startup speed. You want it as low as possible so you don't see the massive container shrinking a second after startup. 300 is just enough for me to never miss any buttons but my setup is pretty heavy, you may want a smaller number. 100 might work for you at first but every now and then you have an abnormally slow startup and you miss an icon. That said, if you don't use any buttons added by scripts or the built-in devtools button, you could probably remove setTimeout altogether. You can also change "max-width" on line 31 to make the container wider or smaller, ideally by increments of 32. I use 352 because I want 11 icons to be visible.
+// @include        *
+// @author         aminomancer
+// ==/UserScript==
+
+(function () {
+    var toolbarSliderContainer = document.createElement("div");
+    var toolbarSlider = document.createElement("div");
+    var customizableNavBar = document.getElementById("nav-bar-customization-target");
+    var toolbarWidgets = CustomizableUI.getWidgetsInArea('nav-bar').filter(Boolean).filter(filterWidgets);
+    // var toolbarIcons = customizableNavBar.children;
+    // var toolbarButtonArray = [];
+    var widgetCallback = {
+        onCustomizeStart: function () {
+            unwrapAll(toolbarSlider.childNodes, customizableNavBar);
+        },
+        onCustomizeEnd: function () {
+            rewrapAll(toolbarWidgets);
+        },
+        onWidgetAfterDOMChange: function (aNode, aNextNode, aContainer, aWasRemoval) {
+            if (aContainer.id == "nav-bar-customization-target" && aWasRemoval == false && CustomizationHandler.isCustomizing() == false) {
+                while (toolbarSliderContainer.nextElementSibling) pickUpSibling();
+            }
+        }
+    };
+
+    // function convertToArray(buttons) {
+    //     return new Promise(resolve => {
+    //         toolbarButtonArray.length = 0;
+    //         for (let i = 0; i < buttons.length; i++) {
+    //             switch (buttons[i].id) {
+    //                 case "wrapper-back-button":
+    //                 case "back-button":
+    //                 case "wrapper-forward-button":
+    //                 case "forward-button":
+    //                 case "wrapper-stop-reload-button":
+    //                 case "stop-reload-button":
+    //                 case "wrapper-urlbar-container":
+    //                 case "urlbar-container":
+    //                 case "wrapper-search-container":
+    //                 case "search-container":
+    //                 case "nav-bar-toolbarbutton-slider-container":
+    //                     break;
+    //                 default:
+    //                     toolbarButtonArray.push(buttons[i]);
+    //             }
+    //         }
+    //         resolve("resolved");
+    //     });
+    // };
+
+    function filterWidgets(item) {
+        switch (item.id) {
+            case "wrapper-back-button":
+            case "back-button":
+            case "wrapper-forward-button":
+            case "forward-button":
+            case "wrapper-stop-reload-button":
+            case "stop-reload-button":
+            case "wrapper-urlbar-container":
+            case "urlbar-container":
+            case "wrapper-search-container":
+            case "search-container":
+            case "nav-bar-toolbarbutton-slider-container":
+                return false;
+            default:
+                return true;
+        }
+    };
+
+    function wrapAll(widgets, container) {
+        return new Promise(resolve => {
+            var parent = widgets[0].instances[0].node.parentNode;
+            var previousSibling = widgets[0].instances[0].node.previousSibling;
+            for (let i = 0; i < widgets.length; i++) {
+                container.appendChild(widgets[i].instances[0].node);
+            }
+            toolbarSliderContainer.appendChild(container);
+            parent.insertBefore(toolbarSliderContainer, previousSibling.nextSibling);
+        })
+    };
+
+    function unwrapAll(buttons, bar) {
+        for (let i = 0; i < buttons.length; i++) {
+            bar.appendChild(buttons[i]);
+        }
+    };
+
+    function rewrapAll(widgets) {
+        for (let i = 0; i < widgets.length; i++) {
+            toolbarSlider.appendChild(widgets[i].instances[0].node);
+        }
+    };
+
+    function getOrphanSibling(orphan) {
+        var pos = toolbarWidgets.findIndex((item) => item.id == orphan.id);
+        return toolbarWidgets[pos + 1].instances[0].node;
+    };
+
+    function pickUpSibling() {
+        var sib = toolbarSliderContainer.nextElementSibling;
+        toolbarSlider.insertBefore(sib, getOrphanSibling(sib));
+    };
+
+    async function init() {
+        await wrapAll(toolbarWidgets, toolbarSlider);
+        while (toolbarSliderContainer.nextElementSibling) pickUpSibling();
+        // setTimeout(() => {
+        //     if (toolbarSliderContainer.nextSibling) {
+        //         pickUpSibling();
+        //     }
+        // }, 1e3);
+    };
+
+    init();
+    CustomizableUI.addListener(widgetCallback);
+    toolbarSliderContainer.className = "container";
+    toolbarSliderContainer.id = "nav-bar-toolbarbutton-slider-container";
+    toolbarSliderContainer.style.cssText = "display:-moz-box;-moz-box-align:center;overflow-x:scroll;overflow-y:hidden;max-width:352px;scrollbar-width:none";
+    toolbarSlider.className = "container";
+    toolbarSlider.id = "nav-bar-toolbarbutton-slider";
+    toolbarSlider.style.cssText = "display:flex;flex-flow:row;flex-direction:row";
+})();
