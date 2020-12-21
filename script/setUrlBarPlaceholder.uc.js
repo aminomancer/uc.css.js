@@ -1,1 +1,36 @@
-function initialize(){function e(e){for(let i of e){if(gURLBar.view.oneOffSearchButtons.input.searchMode)return;setTimeout(()=>{gURLBar.inputField.placeholder=`Search ${s}`},1)}}let i=new MutationObserver(e),r={childList:!0,subtree:!0};var t="browser.urlbar.placeholderName"+(PrivateBrowsingUtils.isWindowPrivate(window)?".private":""),s=Services.prefs.getStringPref(t,"");gURLBar.inputField.placeholder=`Search ${s}`,i.observe(gURLBar._searchModeIndicatorTitle,r)}if(gBrowserInit.delayedStartupFinished)this.initialize();else{let e=(i,r)=>{"browser-delayed-startup-finished"==r&&i==window&&(Services.obs.removeObserver(e,r),this.initialize())};Services.obs.addObserver(e,"browser-delayed-startup-finished")}
+function initialize() {
+    let observer = new MutationObserver(updatePlaceholder),
+        options = {
+            childList: true,
+            subtree: true,
+        };
+
+    var pref = "browser.urlbar.placeholderName" + (PrivateBrowsingUtils.isWindowPrivate(window) ? ".private" : ""),
+        engineName = Services.prefs.getStringPref(pref, "");
+
+    gURLBar.inputField.placeholder = `Search ${engineName}`;
+    observer.observe(gURLBar._searchModeIndicatorTitle, options);
+
+    function updatePlaceholder(mutations) {
+        for (let mutation of mutations) {
+            if (gURLBar.view.oneOffSearchButtons.input.searchMode) {
+                return;
+            }
+            setTimeout(() => {
+                gURLBar.inputField.placeholder = `Search ${engineName}`;
+            }, 1);
+        }
+    }
+}
+
+if (gBrowserInit.delayedStartupFinished) {
+    this.initialize();
+} else {
+    let delayedStartupFinished = (subject, topic) => {
+        if (topic == "browser-delayed-startup-finished" && subject == window) {
+            Services.obs.removeObserver(delayedStartupFinished, topic);
+            this.initialize();
+        }
+    };
+    Services.obs.addObserver(delayedStartupFinished, "browser-delayed-startup-finished");
+}
