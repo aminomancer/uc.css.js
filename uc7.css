@@ -240,6 +240,10 @@ tabmodalprompt input:focus {
         border: none !important;
     }
     
+    #BMB_bookmarksToolbarPopup {
+        margin-inline-start: 0px !important;
+    }
+    
     .BMB-special-innerbox > .menupopup-arrowscrollbox {
         padding-bottom: 0 !important;
     }
@@ -247,6 +251,22 @@ tabmodalprompt input:focus {
     #BMB_bookmarksToolbarPopup menuseparator {
         display: none !important;
     }
+    
+    .openintabs-menuitem {
+        display: none !important;
+    }
+    
+    .BMBsmallContentBox {
+/*         border-radius: 5px !important; */
+/*         overflow: hidden !important; */
+/*         border: none !important; */
+        margin-top: -1px !important;
+        margin-inline: -1px;
+    }
+    
+/*     .BMBsmallContentBox>.menupopup-arrowscrollbox {
+        padding-block: 4px !important;
+    } */
     
     /* .BMB-special-scrollbutton-up > .toolbarbutton-icon,
     .BMB-special-scrollbutton-down > .toolbarbutton-icon {
@@ -377,17 +397,7 @@ tabmodalprompt input:focus {
     #BMB_bookmarksPopup .openintabs-menuitem {
         display: none !important;
     }
-    
-    .BMBsmallContentBox {
-        border-radius: 5px !important;
-        overflow: hidden !important;
-        border: none !important;
-        margin-top: -0.6px !important;
-    }
-    
-    .BMBsmallContentBox>.menupopup-arrowscrollbox {
-        padding-bottom: 4px !important;
-    } */
+ */
 }
 
 
@@ -532,6 +542,7 @@ tabmodalprompt input:focus {
 
 #urlbar-input-container {
     background-color: var(--urlbar-input-bgcolor) !important;
+    margin-top: -0.6px !important;
 }
 
 #urlbar[focused="true"] > #urlbar-input-container {
@@ -776,6 +787,8 @@ tabmodalprompt input:focus {
 
 #urlbar .searchbar-engine-one-off-item {
     pointer-events: none !important;
+    -moz-context-properties: fill, fill-opacity;
+    fill: currentColor;
 }
 
 #urlbar[usertyping="true"] .searchbar-engine-one-off-item,
@@ -834,10 +847,39 @@ tabmodalprompt input:focus {
 
 /* search one offs visible when pageproxystate=invalid even if urlbar is not focused */
 #urlbar .urlbarView {
-    top: 3px !important;
+    top: 3.4px !important;
     margin: 0 !important;
     width: calc(100% + 6px) !important;
     left: -3px !important;
     position: relative !important;
     align-self: start !important;
+}
+
+/* individual search one offs */
+#urlbar-engine-one-off-item-Gatherer .button-icon {
+    width: 17.5px !important;
+    height: 17.5px !important;
+}
+
+#urlbar-engine-one-off-item-Scryfall .button-icon {
+    width: 17.5px !important;
+    height: 17.5px !important;
+}
+
+#urlbar-engine-one-off-item-XVIDEOS .button-icon {
+    margin-left: 0.5px !important;
+    width: 16.5px !important;
+    height: 16.5px !important;
+}
+
+#urlbar-engine-one-off-item-Wikipedia .button-icon {
+    width: 19px !important;
+    height: 19px !important;
+    margin-left: -0.3px !important;
+    margin-top: 0.7px !important;
+}
+
+#urlbar-engine-one-off-item-Amazon .button-icon {
+    margin-left: -0.5px !important;
+    margin-top: 0.5px !important;
 }

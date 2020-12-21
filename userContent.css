@@ -4,6 +4,10 @@
     }
 } */
 
+.gitzip-check-mark {
+    color: white !important;
+}
+
 .pictureInPictureToggleButton {
     padding-block: 4px !important;
     padding-inline: 5px;
@@ -68,9 +72,21 @@
     }
 }
 
+@-moz-document domain("youtube.com") {
+    #movie_player .ytp-ce-element {
+        display: none !important;
+    }
+}
+
 @-moz-document domain("xvideos.com") {
     #html5video #hlsplayer .video-loader {
         display: none !important;
+    }
+}
+
+@-moz-document domain("watchtv.cox.com") {
+    #playerDiv #inner-cc-container>div {
+        font-family: monospace !important;
     }
 }
 
@@ -250,16 +266,182 @@
     .cm-search-widget-input {
         border: none !important;
     }
-    
-/*     .CodeMirror {
-        background-color: #292929 !important;
-        color: #ffffff !important;
+}
+
+@-moz-document regexp("moz-extension://8d413415-fec4-4612-9717-941c64de177b/.*") {
+    :root {
+        --default-ink: var(--light-gray-10);
+        --default-ink-a4: var(--light-gray-10-a4);
+        --default-ink-a50: var(--light-gray-30-a50);
+        --default-surface: var(--dark-gray-90);
+        --default-surface-hover: var(--dark-gray-50);
+        --bg-1: hsl(250, 13%, 9%);
+        --bg-1-border: hsl(250.9, 13.6%, 15.9%);
+        --bg-overlay-50: hsla(0, 0%, 0%, 0.5);
+        --bg-code: hsla(0, 2%, 0%, 0.8);
+        --fg-0-80: hsla(0, 0%, 53%, 0.8);
+        --fg-0-70: hsla(0, 0%, 53%, 0.7);
+        --fg-0-60: hsla(0, 0%, 53%, 0.6);
+        --fg-0-50: hsla(0, 0%, 53%, 0.5);
+        --fg-0-40: hsla(0, 0%, 53%, 0.4);
+        --fg-0-30: hsla(0, 0%, 53%, 0.3);
+        --fg-0-20: hsla(0, 0%, 53%, 0.2);
+        --link-ink: hsl(266.9, 95.2%, 75.7%);
+        --fieldset-header-surface: transparent;
+        --fieldset-header-ink: var(--light-gray-30);
+        --hr-ink: var(--dark-gray-50);
+        --button-surface: var(--light-gray-10-a12);
+        --button-ink: var(--default-ink);
+        --button-surface-hover: var(--light-gray-10-a12);
+        --button-active-surface: var(--light-gray-70);
+        --button-important-surface: var(--dark-gray-30);
+        --button-important-surface-hover: var(--light-gray-60);
+        --button-disabled-filter: opacity(38%);
+        --button-disabled-surface: var(--dark-gray-50);
+        --button-disabled-ink: var(--light-gray-30-a50);
+        --button-preferred-surface: var(--dark-gray-50);
+        --button-preferred-ink: var(--light-gray-70);
+        --checkbox-size: calc(var(--font-size) + 2px);
+        --checkbox-ink: var(--default-ink);
+        --checkbox-checked-ink: hsl(266.9, 95.2%, 75.7%);
+        --bg-transient-notice: var(--dark-gray-50);
+        --dashboard-bar-shadow: 0px 0px 0px 1px var(--default-ink-a4);
+        --dashboard-tab-active-ink: hsl(266.9, 95.2%, 75.7%);
+        --dashboard-tab-surface-hover: var(--default-surface-hover);
+        --fg-icon-info-lvl-0-dimmed: hsl(0, 0%, 53.3%);
+        --fg-icon-info-lvl-0: inherit;
+        --fg-icon-info-lvl-1-dimmed: hsl(258.2, 57.3%, 34.9%);
+        --fg-icon-info-lvl-1: hsl(257.9, 65.7%, 48%);
+        --info-lvl-2-ink: var(--yellow-50);
+        --info-lvl-2-ink-hover: var(--yellow-60);
+        --fg-icon-info-lvl-3-dimmed: hsla(16, 100%, 50%, 0.5);
+        --fg-icon-info-lvl-3: hsl(16, 100%, 50%);
+        --fg-icon-info-lvl-4-dimmed: hsla(0, 100%, 35%, 0.5);
+        --fg-icon-info-lvl-4: hsl(0, 100%, 35.1%);
+        --large-icon-info-lvl-2: hsl(41, 100%, 47.1%);
+        --bg-tooltip: var(--dark-gray-50);
+        --fg-tooltip: var(--light-gray-30);
+        --bg-popup-cell-1: var(--dark-gray-50);
+        --popup-power-disabled-ink: var(--light-gray-60);
+        --popup-power-ink-hover: var(--dark-gray-30);
+        --bg-popup-cell-2: var(--dark-gray-50);
+        --bg-popup-cell-label-filter: opacity(40%);
+        --fg-popup-cell-cname: hsla(0, 0%, 53%, 0.3);
+        --bg-popup-cell-allow: hsl(120, 40.2%, 75.1%);
+        --bg-popup-cell-allow-own: hsl(120, 100%, 30%);
+        --bg-popup-cell-noop: hsl(0, 0%, 74.9%);
+        --bg-popup-cell-noop-own: hsl(0, 0%, 45.1%);
+        --bg-popup-cell-block: hsl(0, 50.5%, 80.2%);
+        --bg-popup-cell-block-own: hsl(0, 100%, 40%);
+        --bg-popup-cell-label-mixed: hsl(44.8, 100%, 38%);
+        --popup-icon-x-ink: hsl(347.1, 76.2%, 52.2%);
+        --cloud-widget-surface: var(--dark-gray-70) !important;
+        --cm-gutter-border: var(--dark-gray-70) !important;
+        --cm-gutter-ink: var(--light-gray-40) !important;
+        --cm-gutter-surface: var(--dark-gray-70) !important;
+        --cm-selection-surface: var(--dark-gray-30) !important;
+        --select-surface: var(--dark-gray-30) !important;
+        --cm-selection-ink: var(--default-ink) !important;
+        --button-surface: var(--light-gray-10-a12);
+        --button-ink: var(--default-ink);
+        --button-surface-hover: var(--dark-gray-30) !important;
+        --button-active-surface: var(--light-gray-70);
+        --button-important-surface: var(--dark-gray-30);
+        --button-important-surface-hover: var(--light-gray-60);
+        --button-disabled-filter: opacity(68%) !important;
+        --button-disabled-surface: var(--dark-gray-70) !important;
+        --button-disabled-ink: var(--light-gray-30-a50);
+        --button-preferred-surface: var(--dark-gray-50);
+        --button-preferred-ink: var(--light-gray-70);
+        --checkbox-size: calc(var(--font-size) + 2px);
+        --checkbox-ink: var(--default-ink);
+        --checkbox-checked-ink: hsl(266.9, 95.2%, 75.7%);
+        --checkbox-hover-ink: hsl(266.9, 35.2%, 35.7%);
     }
     
-    .CodeMirror-gutters {
-        background: none !important;
-        border-color: #454545 !important;
-    } */
+    body {
+        background-color: hsl(250, 13%, 9%) !important;
+    }
+    
+    #cloudWidget {
+        background-color: hsl(246.7, 11.7%, 15.1%) !important;
+    }
+    
+    #actions {
+        background-color: hsl(250, 13%, 9%) !important;
+    }
+    
+    .CodeMirror-cursor {
+        caret-color: white !important;
+        color: white !important;
+        border-color: white !important;
+    }
+    
+    .CodeMirror-selected {
+        background: var(--dark-gray-70) !important;
+    }
+    
+    .CodeMirror-focused .CodeMirror-selected {
+        background: var(--dark-gray-50) !important;
+    }
+    
+    a:hover {
+        color: hsl(266.9, 99.2%, 85.7%) !important;
+    }
+    
+    #cloudCapacity {
+        background-color: var(--dark-gray-30) !important;
+    }
+    
+    .CodeMirror-activeline-background {
+        background: var(--dark-gray-70) !important;
+    }
+    
+    input[type="search"] {
+        -moz-appearance: none !important;
+        appearance: none !important;
+        background-color: var(--dark-gray-30) !important;
+        color: var(--default-ink) !important;
+        border: none !important;
+        border-radius: 3px !important;
+        padding-block: 3px !important;
+        padding-inline: 5px !important;
+    }
+    
+    .checkbox > input[type="checkbox"] + svg {
+        border: 1.5px solid var(--checkbox-ink) !important;
+    }
+    
+    .checkbox > input[type="checkbox"]:checked + svg {
+        background-color: var(--checkbox-checked-ink);
+        border-color: var(--checkbox-checked-ink) !important;
+        stroke: var(--default-surface);
+    }
+    
+    .checkbox > input[type="checkbox"]:not(:checked):hover + svg {
+        border-color: var(--checkbox-checked-ink) !important;
+        background-color: var(--checkbox-hover-ink) !important;
+        stroke: transparent !important;
+    }
+    
+    select {
+        -moz-appearance: none !important;
+        appearance: none !important;
+        background-color: var(--dark-gray-30) !important;
+        color: var(--default-ink) !important;
+        border: none !important;
+        border-radius: 3px !important;
+        padding-block: 3px !important;
+        padding-inline: 3px !important;
+    }
+    
+    select>option {
+        -moz-appearance: none !important;
+        appearance: none !important;
+        background-color: var(--dark-gray-30) !important;
+        color: var(--default-ink) !important;
+        border: none !important;
+    }
 }
 
 /* @-moz-document domain("mail.google.com") {
@@ -516,10 +698,10 @@
     margin-top: -18px !important;
 } */
 
-/* :-moz-focusring {
+:-moz-focusring {
     outline: unset !important;
     outline-offset: unset !important;
-} */
+}
 
 @-moz-document regexp("file:.*") {
     body {
@@ -1477,6 +1659,12 @@ domain("wikimedia.org") {
         background: #111113 !important;
         width: 345px !important;
         padding: 0 0 7px !important;
+        border-radius: 3px !important;
+    }
+    
+    #mw-head #searchform>div#simpleSearch:focus-within ::placeholder {
+        opacity: 1 !important;
+        color: hsla(0, 0%, 100%, 0.5) !important;
     }
 
     #mw-head #searchform>div input#searchInput {
@@ -1488,6 +1676,18 @@ domain("wikimedia.org") {
     #mw-head #p-cactions,
     #mw-head #ca-watch {
         display: none !important;
+    }
+    
+    #mw-head #searchform #searchButton {
+        -moz-context-properties: fill, fill-opacity !important;
+        opacity: 1 !important;
+        fill: white !important;
+        fill-opacity: 0.67 !important;
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='context-fill' fill-opacity='context-fill-opacity'><path d='M7.5 13a5.5 5.5 0 100-11 5.5 5.5 0 000 11zm4.55.46A7.43 7.43 0 017.5 15a7.5 7.5 0 115.96-2.95l6.49 6.49-1.41 1.41-6.49-6.49z'/></svg>") !important;
+    }
+    
+    #mw-head #searchform #searchButton:hover {
+        fill-opacity: 1 !important;
     }
 
     /* logo */
@@ -1858,13 +2058,8 @@ domain("wikimedia.org") {
     }
 
     #bodyContent #siteSub,
-    /* hide Wikipedia byline */
     #bodyContent #mw-fr-revisiontag,
-    /* hide revision thingie */
-    #bodyContent #tfd.boilerplate
-
-    /* hide template considered for deletion */
-        {
+    #bodyContent #tfd.boilerplate {
         display: none !important;
     }
 
@@ -1884,6 +2079,23 @@ domain("wikimedia.org") {
         {
         top: 53px !important;
         right: 32px !important;
+    }
+    
+    .template-documentation,
+    .documentation {
+        clear: both;
+        margin: 1em 0 0 0;
+        border: none !important;
+        background-color: transparent !important;
+        padding: 1em;
+    }
+    
+    .documentation-metadata {
+        clear: both;
+        margin: 1em 0 0 0;
+        border: none !important;
+        background-color: transparent !important;
+        padding: 1em;
     }
 
     #bodyContent #protected-icon,
@@ -1909,6 +2121,10 @@ domain("wikimedia.org") {
 
     #bodyContent a:not(.new) {
         color: #8ab5e5 !important;
+    }
+    
+    #mw-content-text a:not(.new)>span {
+        color: inherit !important;
     }
 
     #bodyContent a:not(.new):visited {
@@ -2383,6 +2599,233 @@ domain("wikimedia.org") {
         background-color: rgba(255, 255, 255, 0.95) !important;
         color: rgb(0, 0, 0) !important;
         border: none !important;
+    }
+    
+    .oo-ui-toolbar-bar {
+        background-color: rgb(35, 35, 36) !important;
+        color: hsl(0, 0%, 80%) !important;
+        fill: hsl(0, 0%, 80%) !important;
+        border-radius: 2px !important;
+        border: none !important;
+    }
+    
+    .oo-ui-toolbar-position-top > .oo-ui-toolbar-bar {
+        box-shadow: 0 0 7px -1px rgba(0, 0, 0, 0.05), 0 0 2px 1px rgba(0, 0, 0, 0.15) !important;
+    }
+    
+    .oo-ui-toolbar-bar .oo-ui-toolbar-bar {
+        box-shadow: none !important;
+    }
+    
+    .oo-ui-menuToolGroup {
+        border-left: 1px solid hsl(240, 1.4%, 19%) !important;
+        border-right: 1px solid hsl(240, 1.4%, 19%) !important;
+    }
+    
+    .oo-ui-popupToolGroup.oo-ui-widget-enabled > .oo-ui-popupToolGroup-handle:hover,
+    .oo-ui-tool.oo-ui-widget-enabled > .oo-ui-tool-link:hover {
+        background-color: hsl(240, 1.4%, 19%) !important;
+    }
+    
+    :is(.oo-ui-toolbar-bar, .ve-ce-branchNode-slug) .oo-ui-iconElement-icon,
+    :is(.oo-ui-toolbar-bar, .ve-ce-branchNode-slug) .oo-ui-indicatorElement-indicator {
+        filter: invert(1) !important;
+    }
+    
+    :is(.oo-ui-popupToolGroup-active, .oo-ui-popupToolGroup-active-tools) > .oo-ui-popupToolGroup-handle {
+        background-color: hsl(240, 1.4%, 19%) !important;
+        color: hsl(0, 0%, 90%) !important;
+    }
+    
+    :is(.oo-ui-popupToolGroup-active, .oo-ui-popupToolGroup-active-tools) .oo-ui-iconElement-icon {
+        opacity: 1 !important;
+        filter: invert(1) hue-rotate(190deg) brightness(1) !important;
+    }
+    
+    :is(.oo-ui-popupToolGroup-active, .oo-ui-popupToolGroup-active-tools) .oo-ui-tool-active.oo-ui-widget-enabled .oo-ui-tool-link .oo-ui-tool-title,
+    .oo-ui-tool.oo-ui-widget-enabled.oo-ui-tool-active > .oo-ui-tool-link {
+        color: hsl(228.9, 100%, 75.7%) !important;
+    }
+    
+    .oo-ui-toolbar-actions .oo-ui-popupToolGroup.oo-ui-widget-enabled > .oo-ui-popupToolGroup-handle:hover {
+        border-right: 1px solid transparent !important;
+    }
+    
+    .oo-ui-popupToolGroup-tools {
+        background-color: hsl(240, 1.4%, 19%) !important;
+        border: none !important;
+        margin-left: -0.2px !important;
+        box-shadow: 0 2px 2px 0 hsla(0, 0%, 0%, 0.03) !important;
+    }
+    
+    .oo-ui-menuToolGroup-tools .oo-ui-tool.oo-ui-tool-active,
+    .oo-ui-toolGroup-tools .oo-ui-tool.oo-ui-widget-enabled.oo-ui-tool-active > .oo-ui-tool-link:hover,
+    .oo-ui-tool.oo-ui-widget-enabled.oo-ui-tool-active > .oo-ui-tool-link {
+        background-color: hsl(240, 1.4%, 28%) !important;
+    }
+    
+    .oo-ui-toolGroup-tools .oo-ui-menuToolGroup-tools > .oo-ui-tool.oo-ui-widget-enabled:hover,
+    .oo-ui-toolGroup-tools .oo-ui-tool.oo-ui-widget-enabled > .oo-ui-tool-link:hover,
+    .oo-ui-menuToolGroup-tools .oo-ui-tool.oo-ui-widget-enabled:hover,
+    .oo-ui-listToolGroup-tools .oo-ui-tool.oo-ui-widget-enabled:hover {
+        background-color: hsl(240, 1.4%, 25%) !important;
+    }
+    
+    .oo-ui-widget-disabled > .ve-ui-toolbar-saveButton {
+        background-color: hsl(240, 5.4%, 19%) !important;
+        opacity: 0.5 !important;
+    }
+    
+    .oo-ui-widget.oo-ui-tool:is(.oo-ui-widget-enabled, .oo-ui-tool-active) > .oo-ui-tool-link.ve-ui-toolbar-saveButton {
+        background-color: hsl(228.9, 100%, 68%) !important;
+        color: white !important;
+        opacity: 1 !important;
+        border: none !important;
+    }
+    
+    .oo-ui-widget.oo-ui-tool:is(.oo-ui-widget-enabled, .oo-ui-tool-active) > .oo-ui-tool-link.ve-ui-toolbar-saveButton:hover {
+        background-color: hsl(228.9, 93%, 62%) !important;
+        color: white !important;
+    }
+    
+    .oo-ui-toolbar-position-top .ve-ui-toolbarDialog-position-above.oo-ui-window-ready {
+        max-height: 300px !important;
+    }
+    
+    .oo-ui-toolbar-position-top .ve-ui-toolbarDialog-position-above.oo-ui-window-ready .oo-ui-window-frame,
+    .ve-ui-specialCharacterDialog .oo-ui-bookletLayout {
+        height: 300px !important;
+    }
+    
+    .oo-ui-toolbar-position-top .ve-ui-toolbarDialog-position-above {
+        border-top: none !important;
+    }
+    
+    .oo-ui-outlineOptionWidget.oo-ui-optionWidget-selected {
+        background-color: hsl(240, 1.4%, 28%) !important;
+        color: hsl(0, 0%, 90%) !important;
+    }
+    
+    .oo-ui-outlineOptionWidget.oo-ui-optionWidget-highlighted:not(.oo-ui-optionWidget-selected) {
+        background-color: hsl(240, 1.4%, 25%) !important;
+        color: hsl(0, 0%, 80%) !important;
+    }
+    
+    .ve-ui-specialCharacterPage-character {
+        border-color: hsl(240, 1.4%, 25%) !important;
+        color: hsl(0, 0%, 80%) !important;
+        transition: none !important;
+    }
+    
+    .ve-ui-specialCharacterPage-character:hover {
+        border-color: hsl(240, 1.4%, 40%) !important;
+        color: hsl(0, 0%, 100%) !important;
+    }
+    
+    .ve-ui-specialCharacterPage h3 {
+        color: hsl(0, 0%, 80%) !important;
+    }
+    
+    .ve-ce-branchNode-blockSlug, .ve-ce-branchNode-newSlug {
+        outline: none !important;
+        background-color: hsl(240, 1.4%, 19%) !important;
+    }
+    
+    #bodyContent :is(.ve-ce-branchNode-blockSlug, .ve-ce-branchNode-newSlug) a {
+        text-decoration: none !important;
+    }
+    
+    .ve-ce-branchNode-blockSlug > .oo-ui-buttonWidget {
+        opacity: 1 !important;
+    }
+    
+    .ve-ce-focusableNode-highlight {
+        background: hsl(230.9, 100%, 75%) !important;
+        box-shadow: none !important;
+    }
+    
+    .ve-ce-surface-highlights-focused .ve-ce-focusableNode-highlights {
+        opacity: 0.3 !important;
+    }
+    
+    .ve-ui-mwSaveDialog-options {
+        position: relative;
+        background-color: hsl(240, 1.4%, 19%) !important;
+        border: none !important;
+    }
+    
+    .ve-ui-mwSaveDialog-summary {
+        background-color: transparent !important;
+    }
+    
+    .ve-ui-overlay a:not([role="button"]) {
+        color: #8ab5e5 !important;
+    }
+    
+    .oo-ui-checkboxInputWidget.oo-ui-widget-enabled [type="checkbox"] + span {
+        background-color: hsl(240, 1.4%, 30%) !important;
+        border: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+        transition: none !important;
+    }
+    
+    .oo-ui-checkboxInputWidget.oo-ui-widget-enabled [type="checkbox"]:hover + span {
+        background-color: hsl(240, 1.4%, 35%) !important;
+        border: 1px solid hsl(240, 1.4%, 45%) !important;
+    }
+    
+    .oo-ui-checkboxInputWidget.oo-ui-widget-enabled [type="checkbox"]:checked + span {
+        background-color: hsl(228.9, 93%, 62%) !important;
+        border: none !important;
+    }
+    
+    .oo-ui-checkboxInputWidget.oo-ui-widget-enabled [type="checkbox"]:checked:hover + span {
+        border: 1px solid hsl(228.9, 100%, 74%) !important;
+    }
+    
+    .oo-ui-processDialog-actions-primary > .oo-ui-buttonElement > .oo-ui-buttonElement-button {
+        background-color: hsl(228.9, 100%, 68%) !important;
+        border: none !important;
+    }
+    
+    .oo-ui-processDialog-actions-primary > .oo-ui-buttonElement > .oo-ui-buttonElement-button:hover {
+        background-color: hsl(228.9, 93%, 62%) !important;
+        border: none !important;
+    }
+    
+    .oo-ui-processDialog-content .oo-ui-window-head, .oo-ui-processDialog-content .oo-ui-window-foot {
+        outline: 1px solid hsl(240, 1.4%, 15%) !important;
+    }
+    
+    .oo-ui-processDialog-actions-other .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button {
+        background-color: hsl(240, 1.4%, 30%) !important;
+        color: hsl(0, 0%, 90%) !important;
+        border-color: transparent !important;
+    }
+    
+    .oo-ui-processDialog-actions-other .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button:hover {
+        background-color: hsl(240, 1.4%, 35%) !important;
+    }
+    
+    .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button:focus {
+        border-color: transparent !important;
+        box-shadow: none !important;
+        outline: none !important;
+    }
+    
+    .oo-ui-processDialog-actions-safe .oo-ui-iconElement-icon {
+        filter: invert(1) !important;
+        opacity: 0.75 !important;
+    }
+    
+    .oo-ui-processDialog-actions-safe .oo-ui-buttonElement-button {
+        background-color: transparent !important;
+        border: none !important;
+    }
+    
+    .oo-ui-processDialog-actions-safe .oo-ui-buttonElement-button:hover > .oo-ui-iconElement-icon {
+        opacity: 1 !important;
     }
 
     .oo-ui-windowManager-modal>.oo-ui-dialog {
@@ -3056,6 +3499,20 @@ domain("wikimedia.org") {
         font-family: Patua One;
     }
     
+    .mw-parser-output .IPA-common-caption,
+    .mw-parser-output .IPA-vowels-main th,
+    .mw-parser-output .IPA-vowels-container-right > span,
+    .mw-parser-output .IPA-vowels-container-left > span,
+    .mw-parser-output .IPA-vowels-container-single,
+    .mw-parser-output .IPA-vowels-container-dot,
+    .mw-parser-output .IPA-vowels-container > div {
+        background: none !important;
+    }
+    
+    .mw-parser-output .IPA-vowels-container {
+        font-size: initial !important;
+    }
+    
     table.wikitable>caption {
         background: none !important;
         border: none !important;
@@ -3091,6 +3548,36 @@ domain("wikimedia.org") {
     
     tbody tr td div[style*="background-color: lavender" i] {
         background-color: rgba(43, 47, 50, 0) !important;
+    }
+    
+    #bodyContent div:not([class])[style*="background"] {
+        background: none !important;
+    }
+    
+    #bodyContent .mw-collapsible {
+        border-radius: 3px !important;
+        padding: 0 !important;
+        margin-block: 4px !important;
+        background: hsl(240, 1.4%, 13.9%) !important;
+    }
+    
+    #bodyContent .mw-collapsible[style*="width:100%"] {
+        width: -moz-max-content !important;
+    }
+    
+    #bodyContent .mw-collapsed>.mw-collapsible-content {
+        display: block !important;
+        visibility: collapse !important;
+        max-height: 1px !important;
+    }
+    
+    #bodyContent .mw-collapsible-content>table {
+        padding: 3px !important;
+    }
+    
+    #bodyContent .mw-collapsible>:is(div, span):not([class]) {
+        width: -moz-fit-content !important;
+        margin: auto !important;
     }
 
     .clade tbody tr td {
@@ -3648,8 +4135,11 @@ domain("wikimedia.org") {
     }
 
     body .ui-dialog .ui-icon-closethick {
-        background-image: url("https://www.tradeoakbuildingkits.com/wp-content/plugins/portfolio-filter-gallery-premium/img/x-close-icon-white.png") !important;
-        background-size: 120% !important;
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path d='M13.5 6l-3.4 3.5L6.5 6l-.5.5L9.4 10l-3.3 3.5.5.5 3.5-3.5 3.4 3.5.5-.5-3.4-3.5L14 6.5l-.5-.5z' fill='context-fill'/><path d='M10 2c-4.4 0-8 3.6-8 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm0 15.3c-4 0-7.3-3.3-7.3-7.3S6 2.7 10 2.7 17.3 6 17.3 10 14 17.3 10 17.3z' fill='context-fill' fill-opacity='context-fill-opacity'/></svg>") !important;
+        background-size: 200% !important;
+        fill: white !important;
+        fill-opacity: 0 !important;
+        -moz-context-properties: fill, fill-opacity !important;
         opacity: 0.7 !important;
         border: none !important;
     }
@@ -3658,6 +4148,7 @@ domain("wikimedia.org") {
         position: absolute;
         right: .3em !important;
         top: 57% !important;
+        border: none !important;
     }
 
     body .ui-dialog .ui-icon-closethick:hover {
@@ -3667,6 +4158,11 @@ domain("wikimedia.org") {
 
     .ui-dialog .ui-dialog-titlebar-close:hover {
         background: none !important;
+    }
+    
+    .ui-dialog .ui-dialog-titlebar-close:hover,
+    .ui-dialog .ui-dialog-titlebar-close:focus {
+        padding: 1px !important;
     }
 
     .ui-dialog-titlebar-close .ui-icon-closethick {
@@ -3678,34 +4174,34 @@ domain("wikimedia.org") {
         border-color: transparent !important;
     }
 
-    .ui-widget-header.ui-helper-clearfix.control-bar {
+    .ui-widget-header.ui-helper-clearfix.control-bar:not(.block) {
         border: none !important;
         background: rgb(35, 35, 36) !important;
         background-image: none !important;
         color: #fff !important;
     }
 
-    .ui-widget-header.ui-helper-clearfix.control-bar .k-options,
-    .ui-widget-header.ui-helper-clearfix.control-bar .source-switch,
-    .ui-widget-header.ui-helper-clearfix.control-bar .rButton,
-    .ui-widget-header.ui-helper-clearfix.control-bar .lButton {
+    .ui-widget-header.ui-helper-clearfix.control-bar:not(.block) .k-options,
+    .ui-widget-header.ui-helper-clearfix.control-bar:not(.block) .source-switch,
+    .ui-widget-header.ui-helper-clearfix.control-bar:not(.block) .rButton,
+    .ui-widget-header.ui-helper-clearfix.control-bar:not(.block) .lButton {
         visibility: collapse !important;
     }
 
-    .ui-widget-header.ui-helper-clearfix.control-bar .time-disp {
+    .ui-widget-header.ui-helper-clearfix.control-bar:not(.block) .time-disp {
         float: left !important;
         position: relative !important;
         color: #ffffffaa !important;
         bottom: 2px !important;
     }
 
-    .k-player .time-disp {
+    .k-player .control-bar:not(.block) .time-disp {
         font: 12px Source Sans Pro, sans-serif;
         line-height: 17px;
         width: 30px;
     }
 
-    .ui-widget-header.ui-helper-clearfix.control-bar .play_head {
+    .ui-widget-header.ui-helper-clearfix.control-bar:not(.block) .play_head {
         float: right !important;
         display: inline !important;
         margin-inline-start: 2% !important;
@@ -3716,21 +4212,21 @@ domain("wikimedia.org") {
         box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.15), 0 0 2px 0px rgba(0, 0, 0, 0.15) !important;
     }
 
-    .ui-widget-header.ui-helper-clearfix.control-bar {
+    .ui-widget-header.ui-helper-clearfix.control-bar:not(.block) {
         height: 16px !important;
     }
 
-    .ui-widget-header.ui-helper-clearfix.control-bar .ui-slider-range-min {
+    .ui-widget-header.ui-helper-clearfix.control-bar:not(.block) .ui-slider-range-min {
         background: rgb(255, 255, 255, 0.5) !important;
     }
 
-    .ui-widget-header .mw_buffer,
-    .ui-widget-header .ui-state-highlight {
+    .ui-widget-header:not(.block) .mw_buffer,
+    .ui-widget-header:not(.block) .ui-state-highlight {
         display: none !important;
         visibility: collapse !important;
     }
 
-    .ui-widget-header.ui-helper-clearfix.control-bar .ui-slider-handle {
+    .ui-widget-header.ui-helper-clearfix.control-bar:not(.block) .ui-slider-handle {
         border: none !important;
         top: 0px !important;
         height: 9.5px !important;
@@ -3740,7 +4236,7 @@ domain("wikimedia.org") {
         -webkit-box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.1), 0 0 2px 0px rgba(0, 0, 0, 0.15) !important;
     }
 
-    .ui-widget-header.ui-helper-clearfix.control-bar .ui-slider-handle:-moz-any(:hover) {
+    .ui-widget-header.ui-helper-clearfix.control-bar:not(.block) .ui-slider-handle:-moz-any(:hover) {
         background: rgb(245, 245, 245, 1) !important;
         -webkit-box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.1), 0 0 2px 0px rgba(0, 0, 0, 0.15) !important;
     }
@@ -3817,6 +4313,10 @@ domain("wikimedia.org") {
     #pt-notifications-notice .mw-echo-notifications-badge {
         top: 0px !important;
     }
+    
+    .mw-echo-notifications-badge-all-read {
+        display: none !important;
+    }
 
     #pt-notifications-notice .mw-echo-notifications-badge.oo-ui-flaggedElement-unseen::after,
     #pt-notifications-notice .mw-echo-notifications-badge.mw-echo-unseen-notifications::after {
@@ -3843,36 +4343,46 @@ domain("wikimedia.org") {
         line-height: 12.5px !important;
         margin-block: -0.7px !important;
     }
+    
+    :is(#pt-notifications-notice, #pt-notifications-alert) .mw-echo-notifications-badge {
+        margin-inline: 0 !important;
+    }
 
     #p-personal #pt-notifications-alert,
     #p-personal #pt-notifications-notice {
         margin-right: 0em !important;
         margin-top: -0.35em !important;
+        margin-inline: 0 !important;
+        top: -3px !important;
     }
 
     #p-personal #pt-notifications-alert {
-        right: -1.5em !important;
+        right: -2px !important;
         position: relative !important;
-        float: right !important;
+        float: none !important;
     }
 
     #p-personal #pt-notifications-notice {
-        right: -3em !important;
+        right: 2px !important;
         position: relative !important;
-        float: right !important;
+        float: none !important;
     }
 
     #p-personal #pt-userpage {
         position: relative !important;
         margin-left: 0px !important;
         margin-right: 0px !important;
-        float: right !important;
-        right: 0.2em !important;
+        float: none !important;
     }
-
-    #p-personal li {
-        right: -2.25em !important;
-        position: relative !important;
+    
+    #pt-notifications-alert .mw-echo-notifications-badge:focus,
+    #pt-notifications-notice .mw-echo-notifications-badge:focus {
+        box-shadow: none !important;
+    }
+    
+    #pt-notifications-alert .mw-echo-notifications-badge:focus::after,
+    #pt-notifications-notice .mw-echo-notifications-badge:focus::after {
+        border-color: unset !important;
     }
 
     #p-views {
@@ -3913,13 +4423,14 @@ domain("wikimedia.org") {
         border-bottom-right-radius: 3px !important;
         -webkit-box-shadow: 0 0 25px 2px rgba(0, 0, 0, 0.05), 0 0 5px 1px rgba(0, 0, 0, 0.25) !important;
         z-index: 4 !important;
-        margin-left: 0px !important;
+        margin-right: 0.5px !important;
         position: absolute !important;
+        background-color: #111113 !important;
     }
 
     .suggestions-results,
     .suggestions-special {
-        background-color: #111113 !important;
+        background: none !important;
         border: none !important;
     }
 
@@ -3928,9 +4439,13 @@ domain("wikimedia.org") {
     }
 
     .suggestions-result,
-    .suggestions-special,
-    .suggestions-special .special-query {
+    .suggestions-special {
         color: rgb(204, 204, 204) !important;
+        padding-inline: 8px !important;
+    }
+    
+    .suggestions-special .special-query {
+        color: inherit !important;
     }
 
     .suggestions-result {
@@ -4071,6 +4586,48 @@ domain("wikimedia.org") {
     span.unicode.haudio span.fn span a img {
         filter: invert(1) !important;
         opacity: 0.93 !important;
+    }
+    
+    img[src*="Speaker_Icon.svg"] {
+        filter: invert(1) brightness(4) !important;
+        opacity: 0.9 !important;
+    }
+    
+/*     clarification needed text */
+    span.cleanup-needed-content {
+        color: #ccc !important;
+        border: none !important;
+        padding: unset !important;
+        font-style: italic !important;
+    }
+    
+/*     math elements */
+    .mwe-math-element {
+        filter: contrast(0.85) invert(1) !important;
+    }
+    
+/*     alphabet images */
+    img[src*="extensions/wikihiero/"],
+    .image[src*="extensions/wikihiero/"]>img,
+    .image[href*="Runic_letter"]:is([href$=".svg"], [href$=".png"])>img,
+    .image[href*="Proto-semitic"]>img,
+    .mw-hiero-table img:is([src$=".png"], [src$=".svg"]),
+    .mw-hiero-table~* img:is([src$=".png"], [src$=".svg"]),
+    .mw-hiero-table~* .image:is([href$=".png"], [href$=".svg"])>img,
+    .image[href*="/wiki/File:Braille"]:is([href$=".svg"], [href$=".png"])>img {
+        filter: invert(1) !important;
+    }
+    
+/*     pdf external link */
+    .mw-parser-output a[href$=".pdf"].external,
+    .mw-parser-output a[href*=".pdf?"].external,
+    .mw-parser-output a[href*=".pdf#"].external,
+    .mw-parser-output a[href$=".PDF"].external,
+    .mw-parser-output a[href*=".PDF?"].external,
+    .mw-parser-output a[href*=".PDF#"].external {
+        background: url("data:image/svg+xml;utf8,<svg height='30' width='30' xmlns='http://www.w3.org/2000/svg'><path clip-rule='evenodd' fill='%23EA4C3A' fill-rule='evenodd' d='M30.018 28.667H0V0h30.018v28.667'/><path d='M15.372 4.377c.452.213.358.489.219 1.793-.142 1.345-.618 3.802-1.535 6.219-.918 2.413-2.28 4.784-3.467 6.539-1.186 1.756-2.201 2.897-2.975 3.556-.777.659-1.314.835-1.665.893-.348.058-.506 0-.6-.177-.094-.176-.127-.466-.046-.82.079-.35.268-.76.804-1.285.541-.527 1.426-1.172 2.661-1.771 1.235-.6 2.817-1.156 4.116-1.537a30.03 30.03 0 013.197-.746 23.98 23.98 0 012.391-.337 14.241 14.241 0 012.186 0c.712.06 1.408.175 2.011.323.6.146 1.108.321 1.551.601.442.276.823.657 1.012 1.083.192.423.192.893.033 1.228-.158.337-.476.541-.839.66a2.103 2.103 0 01-1.267 0c-.49-.148-1.062-.47-1.662-.894-.601-.425-1.235-.952-2.057-1.771a35.417 35.417 0 01-2.692-3.013c-.854-1.083-1.553-2.136-2.028-3.029a11.317 11.317 0 01-.933-2.355c-.206-.733-.364-1.464-.427-2.122s-.034-1.245.03-1.714c.063-.466.16-.82.317-1.055.158-.23.381-.35.539-.408s.254-.058.348-.073c.094-.015.188-.044.333 0 .138.042.321.154.504.268' fill='none' stroke='%23FFF' stroke-linejoin='round' stroke-miterlimit='10' stroke-width='1.4'/></svg>") no-repeat right !important;
+        background-size: 14px 15px !important;
+        padding-right: 17px !important;
     }
 
     /* references formatting */

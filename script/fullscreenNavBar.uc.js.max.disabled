@@ -27,6 +27,7 @@
             case "urlbar-search-mode-indicator":
             case "tracking-protection-icon-tooltip":
             case "tabbrowser-tab-tooltip":
+            case "pageActionContextMenu":
                 break;
             case "backForwardMenu":
                 if (backButton.disabled == true && fwdButton.disabled == true) {
@@ -56,6 +57,7 @@
             case "urlbar-search-mode-indicator":
             case "tracking-protection-icon-tooltip":
             case "tabbrowser-tab-tooltip":
+            case "pageActionContextMenu":
                 break;
             case "backForwardMenu":
                 if (backButton.disabled == true && fwdButton.disabled == true) {
@@ -64,9 +66,11 @@
                     navBarContainer.removeAttribute("popup-status");
                 };
             default:
-                if (event.target.className != "urlbarView" && event.target.parentElement.tagName != "menu") {
-                    navBarContainer.removeAttribute("popup-status");
-                    // console.log(event.target);
+                if (event.target.className != "urlbarView") {
+                    if (event.target.parentElement.tagName != "menu" || event.target.parentElement.parentElement.tagName == "menubar") {
+                        navBarContainer.removeAttribute("popup-status");
+                        // console.log(event.target);
+                    }
                 }
         }
     };

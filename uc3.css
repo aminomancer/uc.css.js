@@ -196,6 +196,18 @@
     /*     display: none !important; */
 }
 
+.tab-label[attention]:not([selected="true"]) {
+    font-weight: unset !important;
+}
+
+.tabbrowser-tab:is([image],
+[pinned]) > .tab-stack > .tab-content[attention]:not([selected="true"]),
+.tabbrowser-tab > .tab-stack > .tab-content[pinned][titlechanged]:not([selected="true"]) {
+    background-image: unset !important;
+    background-position: unset !important;
+    background-repeat: unset !important;
+}
+
 /* dim discarded tabs */
 .tabbrowser-tab[pending] .tab-content .tab-icon-image {
     opacity: 0.5;
@@ -886,8 +898,8 @@ toolbar .toolbarbutton-1:not([disabled="true"]):not([checked]):not([open]):not(:
     scrollbar-width: none !important;
     padding-left: 2px !important;
     padding-right: 0.5px !important;
-    padding-bottom: 4px !important;
-    padding-top: 2px !important;
+    padding-bottom: 2px !important;
+    padding-top: 1.7px !important;
 }
 
 .search-one-offs {
@@ -896,8 +908,9 @@ toolbar .toolbarbutton-1:not([disabled="true"]):not([checked]):not([open]):not(:
     z-index: 1 !important;
     border: none !important;
     left: 0% !important;
-    margin-top: -2px !important;
-    top: -2px !important;
+    margin-top: -1.7px !important;
+    min-height: 35px !important;
+/*     top: -2px !important; */
     padding: 0 !important;
 }
 
@@ -1275,9 +1288,9 @@ toolbar .toolbarbutton-1:not([disabled="true"]):not([checked]):not([open]):not(:
 .urlbarView-favicon[src^="page-icon:http://google.com/search?"] {
     box-sizing: border-box !important;
     background: url(window/googlelogo.svg) no-repeat !important;
-    width: 16px !important;
+    width: 16.5px !important;
     height: 16px !important;
-    padding-left: 16px; /* Equal to width of new image */
+    padding-left: 16.5px; /* Equal to width of new image */
 }
 
 .urlbarView-title {

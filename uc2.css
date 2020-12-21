@@ -109,8 +109,7 @@
 #historyUndoWindowMenu3:not(.menuitem-iconic)>.menu-text,
 #tabContextUndoList:not(.menuitem-iconic)>.menu-text,
 #tabContextMenu menuitem[label^="Restore All"]:not(.menuitem-iconic) .menu-text,
-#context_sendTabToDevicePopupMenu .sendtab-target:is([clientType="phone"], [clientType="mobile"]):not(.menuitem-iconic) .menu-text,
-#context_sendTabToDevicePopupMenu .sendtab-target[clientType="desktop"]:not(.menuitem-iconic) .menu-text {
+:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup) .sendtab-target:is([clientType="phone"], [clientType="mobile"], [clientType="desktop"]):not(.menuitem-iconic) .menu-text {
     display: -moz-box !important;
     margin-inline-start: -14px !important;
     padding-left: 0px !important;
@@ -1324,7 +1323,7 @@
     content: url("chrome://browser/skin/restore-session.svg") !important;
 }
 
-#context_sendTabToDevicePopupMenu .sendtab-target:is([clientType="phone"], [clientType="mobile"])::before {
+:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup) .sendtab-target:is([clientType="phone"], [clientType="mobile"])::before {
     position: relative !important;
     display: inline-block !important;
     width: 16px !important;
@@ -1339,7 +1338,7 @@
     content: url("chrome://browser/skin/device-phone.svg") !important;
 }
 
-#context_sendTabToDevicePopupMenu .sendtab-target[clientType="desktop"]::before {
+:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup) .sendtab-target[clientType="desktop"]::before {
     position: relative !important;
     display: inline-block !important;
     width: 16px !important;

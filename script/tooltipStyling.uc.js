@@ -46,4 +46,7 @@ tooltip {
   sspi.getAttribute = function (name) {
     return document.documentElement.getAttribute(name);
   };
+  document.getElementById("fullscreen-button").setAttribute("tooltiptext", "Display the window in full screen (Ctrl+E)");
+  document.getElementById("fullscreen-button").removeAttribute("tooltip");
+  document.getElementById("sidebar-button").setAttribute("tooltiptext", "Show sidebars (Ctrl+B)");
 })();

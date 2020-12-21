@@ -90,6 +90,29 @@ toolbar {
     --ctrlTab-panel-disabled-focused-bgcolor: hsla(240, 8%, 3%, 0.9) !important;
     --ctrlTab-panel-bgcolor: hsla(240, 3%, 4%, 0.9) !important;
     --ctrlTab-panel-focused-bgcolor: hsla(10, 12%, 2%, 0.99) !important;
+    --in-content-page-background: var(--arrowpanel-background) !important;
+    --in-content-page-color: hsl(212.5, 42.9%, 89%) !important;
+    --in-content-box-background: hsl(232, 32%, 14%) !important;
+    --in-content-box-border-color: rgba(249, 249, 250, 0.1) !important;
+    --in-content-button-background: var(--arrowpanel-dimmed) !important;
+    --in-content-button-background-hover: var(--arrowpanel-dimmed-further) !important;
+    --in-content-button-background-active: var(--arrowpanel-dimmed-even-further) !important;
+    --in-content-item-selected: var(--purple-40) !important;
+    --in-content-border-highlight: var(--purple-40) !important;
+    --in-content-border-focus: var(--purple-40) !important;
+    --in-content-border-active: var(--purple-40) !important;
+    --in-content-border-active-shadow: var(--purple-40-a30) !important;
+    --in-content-category-outline-focus: 1px solid transparent !important;
+    --purple-30: hsl(245, 100%, 70%) !important;
+    --purple-30-a50: hsla(240, 100%, 70%, 0.5) !important;
+    --purple-40: hsl(250, 100%, 60%) !important;
+    --purple-40-a10: hsla(250, 100%, 60%, 0.1) !important;
+    --purple-40-a30: hsla(250, 100%, 60%, 0.5) !important;
+    --purple-50: hsl(256, 100%, 50%) !important;
+    --purple-50-a30: hsla(256, 100%, 50%, 0.3) !important;
+    --purple-60: hsl(258, 100%, 40%) !important;
+    --purple-70: hsl(256, 100%, 30%) !important;
+    --purple-80: hsl(254, 100%, 20%) !important;
 }
 
 toolbar .toolbarbutton-1:not([disabled]):hover:-moz-any([open]) > .toolbarbutton-icon {

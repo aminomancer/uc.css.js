@@ -84,23 +84,28 @@
 }
 
 #PanelUI-menu-button[badge-status^="update"]>.toolbarbutton-badge-stack>.toolbarbutton-badge {
-    background: hsl(125, 81%, 57%) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='11px' height='11px'><line x1='5' x2='5' y1='9' y2='2' stroke='context-stroke' stroke-width='1.5' stroke-linecap='round'/><line x1='5' x2='2' y1='2' y2='5' stroke='context-stroke' stroke-width='1.5' stroke-linecap='round'/><line x1='5' x2='8' y1='2' y2='5' stroke='context-stroke' stroke-width='1.5' stroke-linecap='round'/></svg>") no-repeat center !important;
+    background: hsl(125, 81%, 57%) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='11' height='11' viewBox='-0.55 0 11 11'><path stroke='context-stroke' stroke-width='1.5' stroke-linecap='round' d='M5 9V2m0 0L2 5m3-3l3 3'/></svg>") no-repeat center !important;
     stroke: transparent !important;
     -moz-context-properties: stroke !important;
 }
 
 #PanelUI-menu-button[badge-status^="addon"]>.toolbarbutton-badge-stack>.toolbarbutton-badge,
 #PanelUI-menu-button[badge-status^="extension"]>.toolbarbutton-badge-stack>.toolbarbutton-badge {
-    background: hsl(125, 81%, 57%) url("chrome://browser/skin/addons/addon-install-confirm.svg") !important;
+    display: none !important;
+    background: hsl(125, 81%, 57%) url("chrome://browser/skin/addons/addon-install-installed.svg") !important;
+    background-color: transparent !important;
+    background-size: 100% !important;
+    background-repeat: no-repeat !important;
+    background-position: 50% 50% !important;
     box-shadow: none !important;
-    background-size: 75% !important;
     width: 11.5px !important;
     min-width: 0px !important;
     height: 12px !important;
     margin: -6px 0 0 !important;
     margin-inline-end: -5px !important;
     stroke: transparent !important;
-    -moz-context-properties: stroke !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, stroke !important;
 }
 
 #PanelUI-menu-button[badge-status^="update"]:hover>.toolbarbutton-badge-stack>.toolbarbutton-badge {
@@ -108,15 +113,13 @@
 }
 
 .panel-banner-item[notificationid^="update"]::after {
-    background: hsl(125, 81%, 57%) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0.8 0.3 9.2 9' width='12px' height='12px'><line x1='5' x2='5' y1='9' y2='2' stroke='context-stroke' stroke-width='1.5' stroke-linecap='round'/><line x1='5' x2='2' y1='2' y2='5' stroke='context-stroke' stroke-width='1.5' stroke-linecap='round'/><line x1='5' x2='8' y1='2' y2='5' stroke='context-stroke' stroke-width='1.5' stroke-linecap='round'/></svg>") no-repeat center !important;
+    background: hsl(125, 81%, 57%) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-.6 -.6 12 12' width='17' height='17'><path stroke='context-stroke' stroke-width='1.5' stroke-linecap='round' d='M5 9V2M5 2L2 5M5 2l3 3'/></svg>") no-repeat center !important;
     stroke: hsl(118, 89%, 24%) !important;
     -moz-context-properties: stroke !important;
 }
 
 #PanelUI-menu-button[badge-status] > .toolbarbutton-badge-stack > .toolbarbutton-badge:-moz-window-inactive {
     filter: brightness(0.65) sepia(1) hue-rotate(185deg) !important;
-/*     filter: none !important;
-    background: hsl(227, 23%, 50%) !important; */
 }
 
 /* move current url or placeholder left a little, except for UI pages */
@@ -613,11 +616,11 @@ findbar {
 #toolbar-context-menu,
 #tabContextMenu,
 #contentAreaContextMenu,
-#back-button>menupopup,
-#forward-button>menupopup,
+#back-button menupopup,
+#forward-button menupopup,
 #backForwardMenu,
 #placesContext,
-#viewButton>menupopup,
+#viewButton menupopup,
 #pageActionContextMenu,
 .urlbar-input-box .textbox-contextmenu,
 #widget-overflow #customizationPanelItemContextMenu,
@@ -629,15 +632,13 @@ findbar {
 #customization-toolbar-menu,
 #main-menubar menupopup,
 #new-tab-button-popup,
+#downloadsContextMenu,
 #toolbar-context-menu menupopup,
 #tabContextMenu menupopup,
 #contentAreaContextMenu menupopup,
-#back-button>menupopup menupopup,
-#forward-button>menupopup menupopup,
 #backForwardMenu menupopup,
 #toolbar-context-menu menupopup,
 #placesContext menupopup,
-#viewButton>menupopup menupopup,
 #pageActionContextMenu menupopup,
 .urlbar-input-box .textbox-contextmenu menupopup,
 #widget-overflow #customizationPanelItemContextMenu menupopup,
@@ -685,7 +686,8 @@ findbar {
 #main-menubar menupopup menuseparator,
 #new-tab-button-popup menuseparator,
 #new-tab-button menuseparator,
-.popup-notification-dropmarker menuseparator {
+.popup-notification-dropmarker menuseparator,
+#downloadsContextMenu menuseparator {
     /*     -moz-appearance: none !important;
     max-height: 1px !important;
     border: none !important;
@@ -717,7 +719,8 @@ findbar {
 #main-menubar menupopup :-moz-any(menuitem, menu),
 #new-tab-button-popup :-moz-any(menuitem, menu),
 #new-tab-button :is(menuitem, menu),
-.popup-notification-dropmarker menupopup :-moz-any(menuitem, menu) {
+.popup-notification-dropmarker menupopup :-moz-any(menuitem, menu),
+#downloadsContextMenu :is(menuitem, menu) {
     -moz-appearance: none !important;
     color: rgba(255, 255, 255, 0.8) !important;
     padding: 0 0 0 0 !important;
@@ -745,7 +748,8 @@ findbar {
 #main-menubar menupopup :-moz-any(menuitem, menu)[disabled="true"],
 #new-tab-button-popup :-moz-any(menuitem, menu)[disabled="true"],
 #new-tab-button :-moz-any(menuitem, menu)[disabled="true"],
-.popup-notification-dropmarker menupopup :-moz-any(menuitem, menu)[disabled="true"] {
+.popup-notification-dropmarker menupopup :-moz-any(menuitem, menu)[disabled="true"],
+#downloadsContextMenu :is(menuitem, menu)[disabled="true"] {
     -moz-appearance: none !important;
     color: rgba(255, 255, 255, 0.45) !important;
     background-color: initial !important;
@@ -777,7 +781,8 @@ findbar {
 #main-menubar menupopup menuseparator:not(:first-of-type):not([hidden="true"])+ :-moz-any(menu, menuitem),
 #new-tab-button-popup menuseparator:not([hidden="true"])+ :-moz-any(menu, menuitem),
 #new-tab-button menuseparator:not([hidden="true"])+ :-moz-any(menu, menuitem),
-.popup-notification-dropmarker menupopup menuseparator:not([hidden="true"])+ :-moz-any(menu, menuitem) {
+.popup-notification-dropmarker menupopup menuseparator:not([hidden="true"])+ :-moz-any(menu, menuitem),
+#downloadsContextMenu menuseparator:not([hidden="true"])+ :-moz-any(menu, menuitem) {
     /*     border-top: 1px solid hsla(233, 24%, 28%, 0.47) !important; */
     border-image: linear-gradient(to right, transparent 1%, hsl(233, 25%, 23%) 50%, transparent 99%) !important;
     border-image-slice: 1 !important;
@@ -828,7 +833,8 @@ findbar {
 #main-menubar menupopup :-moz-any(menuitem, menu) image,
 #new-tab-button-popup :-moz-any(menuitem, menu) image,
 #new-tab-button :is(menuitem, menu) image,
-.popup-notification-dropmarker menupopup :-moz-any(menuitem, menu) image {
+.popup-notification-dropmarker menupopup :-moz-any(menuitem, menu) image,
+#downloadsContextMenu :is(menuitem, menu) image {
     /*     margin: 0 -3px 0 3px; */
     margin-left: 3px;
     margin-right: -3px;
@@ -860,7 +866,8 @@ findbar {
 #main-menubar menupopup menugroup,
 #new-tab-button-popup menugroup,
 #new-tab-button menugroup,
-.popup-notification-dropmarker menupopup menugroup {
+.popup-notification-dropmarker menupopup menugroup,
+#downloadsContextMenu menugroup {
     padding: 0 !important;
     background-color: transparent !important;
 }
@@ -886,7 +893,8 @@ findbar {
 #main-menubar menupopup .menu-right,
 #new-tab-button-popup .menu-right,
 #new-tab-button .menu-right,
-.popup-notification-dropmarker menupopup .menu-right {
+.popup-notification-dropmarker menupopup .menu-right,
+#downloadsContextMenu .menu-right {
     -moz-appearance: none !important;
 /*     padding: 7px !important;
     margin-right: 6px !important;
@@ -927,7 +935,8 @@ findbar {
 #main-menubar menupopup :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
 #new-tab-button-popup :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
 #new-tab-button :is(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
-.popup-notification-dropmarker menupopup :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]) {
+.popup-notification-dropmarker menupopup :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
+#downloadsContextMenu :is(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]) {
     -moz-appearance: none !important;
     background-color: var(--arrowpanel-dimmed) !important;
 }
