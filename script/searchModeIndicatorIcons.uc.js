@@ -1,1 +1,93 @@
-(function(){function a(a,o){for(let o of a)switch(e.textContent){case"Google":t.className="googleIndicator";break;case"Google Images":t.className="googleImagesIndicator";break;case"Google Videos":t.className="googleVideosIndicator";break;case"Google Shopping":t.className="googleShoppingIndicator";break;case"Gmail":t.className="gmailIndicator";break;case"Google Drive":t.className="googleDriveIndicator";break;case"Google Maps":t.className="googleMapsIndicator";break;case"Netflix":t.className="netflixIndicator";break;case"YouTube":t.className="youtubeIndicator";break;case"DoorDash":t.className="doorDashIndicator";break;case"Amazon":t.className="amazonIndicator";break;case"Prime Now":t.className="primeNowIndicator";break;case"Wikipedia":t.className="wikipediaIndicator";break;case"GitHub":t.className="gitHubIndicator";break;case"XVIDEOS":t.className="xVideosIndicator";break;case"Scryfall":t.className="scryIndicator";break;case"Gatherer":t.className="mtgIndicator";break;case"Bookmarks":t.className="bookmarksIndicator";break;case"History":t.className="historyIndicator";break;case"Tabs":t.className="tabsIndicator";break;case"Twitter":t.className="twitterIndicator";break;case"Instagram":t.className="instagramIndicator";break;default:"switchtab"==s.getAttribute("actiontype")&&"true"!=s.getAttribute("actionoverride")?t.className="tabsIndicator":t.className="otherIndicator"}}const e=document.getElementById("urlbar-search-mode-indicator-title"),s=document.getElementById("urlbar"),t=document.getElementById("identity-icon"),o={childList:!0,subtree:!0,attributes:!0,attributeFilter:["actiontype","searchmode","actionoverride"]},c=new MutationObserver(a);c.observe(s,o)})();
+(function () {
+    const searchModeIndicatorFocused = document.getElementById("urlbar-search-mode-indicator-title");
+    const urlbar = document.getElementById("urlbar");
+    const identityIcon = document.getElementById("identity-icon");
+    const options = {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ["actiontype", "searchmode", "actionoverride"],
+    };
+    const observer = new MutationObserver(searchModeCallback);
+
+    function searchModeCallback(mutationsList, observer) {
+        for (let mutation of mutationsList) {
+            switch (searchModeIndicatorFocused.textContent) {
+                case "Google":
+                    identityIcon.className = "googleIndicator";
+                    break;
+                case "Google Images":
+                    identityIcon.className = "googleImagesIndicator";
+                    break;
+                case "Google Videos":
+                    identityIcon.className = "googleVideosIndicator";
+                    break;
+                case "Google Shopping":
+                    identityIcon.className = "googleShoppingIndicator";
+                    break;
+                case "Gmail":
+                    identityIcon.className = "gmailIndicator";
+                    break;
+                case "Google Drive":
+                    identityIcon.className = "googleDriveIndicator";
+                    break;
+                case "Google Maps":
+                    identityIcon.className = "googleMapsIndicator";
+                    break;
+                case "Netflix":
+                    identityIcon.className = "netflixIndicator";
+                    break;
+                case "YouTube":
+                    identityIcon.className = "youtubeIndicator";
+                    break;
+                case "DoorDash":
+                    identityIcon.className = "doorDashIndicator";
+                    break;
+                case "Amazon":
+                    identityIcon.className = "amazonIndicator";
+                    break;
+                case "Prime Now":
+                    identityIcon.className = "primeNowIndicator";
+                    break;
+                case "Wikipedia":
+                    identityIcon.className = "wikipediaIndicator";
+                    break;
+                case "GitHub":
+                    identityIcon.className = "gitHubIndicator";
+                    break;
+                case "XVIDEOS":
+                    identityIcon.className = "xVideosIndicator";
+                    break;
+                case "Scryfall":
+                    identityIcon.className = "scryIndicator";
+                    break;
+                case "Gatherer":
+                    identityIcon.className = "mtgIndicator";
+                    break;
+                case "Bookmarks":
+                    identityIcon.className = "bookmarksIndicator";
+                    break;
+                case "History":
+                    identityIcon.className = "historyIndicator";
+                    break;
+                case "Tabs":
+                    identityIcon.className = "tabsIndicator";
+                    break;
+                case "Twitter":
+                    identityIcon.className = "twitterIndicator";
+                    break;
+                case "Instagram":
+                    identityIcon.className = "instagramIndicator";
+                    break;
+                default:
+                    if (urlbar.getAttribute("actiontype") == "switchtab" && urlbar.getAttribute("actionoverride") != "true") {
+                        identityIcon.className = "tabsIndicator";
+                    } else {
+                        identityIcon.className = "otherIndicator";
+                    }
+            }
+        }
+    }
+
+    observer.observe(urlbar, options);
+})();

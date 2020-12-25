@@ -567,13 +567,13 @@ requires fullscreenNavBar.uc.js to set attributes popup-status and urlbar-status
 
 #urlbar:not([focused="true"]):not(:hover) #urlbar-input,
 #urlbar:not([focused="true"]):hover #urlbar-input {
-    transition: 620ms ease-in-out all !important;
+    transition: 150ms ease-in-out all !important;
     transition-delay: 0s !important;
 }
 
 #urlbar:not([focused="true"]):not(:hover) #urlbar-input-container,
 #urlbar:not([focused="true"]):hover #urlbar-input-container {
-    transition: 620ms ease-in-out all !important;
+    transition: 150ms ease-in-out all !important;
     transition-delay: 0s !important;
 }
 

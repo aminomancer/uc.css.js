@@ -4618,6 +4618,11 @@ domain("wikimedia.org") {
         filter: invert(1) !important;
     }
     
+/*     musical score images */
+    .mw-ext-score>img {
+        filter: invert(1) !important;
+    }
+    
 /*     pdf external link */
     .mw-parser-output a[href$=".pdf"].external,
     .mw-parser-output a[href*=".pdf?"].external,

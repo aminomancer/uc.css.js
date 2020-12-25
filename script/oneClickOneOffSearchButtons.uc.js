@@ -40,7 +40,7 @@ function searchClickInit() {
 
         oneOffs.selectedButton = button;
         executeSearchOnClick(event, {
-            engineName: button.engine.name,
+            engineName: button.engine?.name,
             source: button.source,
             entry: "oneoff",
         });
@@ -97,7 +97,7 @@ function searchClickInit() {
                     // Set the search string for the new tab.
                     newTab.linkedBrowser.userTypedValue = oneOffs.input.value;
                 }
-                if (!params.inBackground) {
+                if (!params?.inBackground) {
                     oneOffs.input.window.gBrowser.selectedTab = newTab;
                     newTab.ownerGlobal.gURLBar.startQuery(startQueryParams);
                 }

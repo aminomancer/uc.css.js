@@ -464,6 +464,47 @@ toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:ho
   background: radial-gradient(circle farthest-side at top right, hsl(318, 73%, 69%), hsl(265, 100%, 69%), hsl(217, 90%, 39%)) !important;
 }
 
+#protections-popup-milestones {
+    border-radius: 4px !important;
+    overflow: hidden !important;
+    background: radial-gradient(circle farthest-side at top left, hsla(318, 73%, 69%, 0.1), hsla(265, 100%, 69%, 0.25), hsla(217, 90%, 39%, 0.5)) !important;
+}
+
+#protections-popup-milestones-content {
+    border-radius: 4px !important;
+}
+
+#identity-popup-security-expander > .button-box {
+    border: none !important;
+}
+
+#identity-popup-security-expander {
+    border-radius: 3px !important;
+    width: 34px !important;
+    height: 34px !important;
+    margin-inline-end: 12px !important;
+    background-size: 20px !important;
+}
+
+#identity-popup-security-expander:hover {
+    fill-opacity: 0.8 !important;
+}
+
+#identity-popup-security {
+    -moz-box-align: center !important;
+}
+
+.panel-header > .subviewbutton-back,
+.panel-header > .subviewbutton-back > .toolbarbutton-icon {
+    -moz-context-properties: fill, fill-opacity !important;
+    fill-opacity: 0.6;
+}
+
+.panel-header > .subviewbutton-back:hover,
+.panel-header > .subviewbutton-back:hover > .toolbarbutton-icon {
+    fill-opacity: 0.8;
+}
+
 /* weird border-bottom under identity popup button */
 /* #identity-popup .panel-arrowcontent {
     background: none !important;

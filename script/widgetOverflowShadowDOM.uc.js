@@ -1,1 +1,20 @@
-setTimeout(()=>{const e=document.getElementById("widget-overflow");try{var o=document.getElementById("widget-overflow").shadowRoot;function t(){o&&(o.children[2].classList.add("widget-overflow-arrowcontainer"),o.children[2].children[0].classList.add("widget-overflow-arrowbox"))}t()}catch(e){}e.addEventListener("popupshowing",t,!1)},1e4);
+(function () {
+    setTimeout(() => {
+        const wOverflow = document.getElementById('widget-overflow');
+        try {
+            var root = document.getElementById('widget-overflow').shadowRoot;
+
+            function widgetOverflowOpened() {
+                if (root) {
+                    root.children[2].classList.add("widget-overflow-arrowcontainer");
+                    root.children[2].children[0].classList.add("widget-overflow-arrowbox");
+                    // console.log("arrowbox updated!");
+                }
+            };
+
+            widgetOverflowOpened();
+        } catch (e) {};
+
+        wOverflow.addEventListener("popupshowing", widgetOverflowOpened, false);
+    }, 10000);
+})();

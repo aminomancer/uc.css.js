@@ -1,1 +1,95 @@
-(function(){function e(e){switch(e.target.id){case"contentAreaContextMenu":case"aHTMLTooltip":case"remoteBrowserTooltip":case"sidebarMenu-popup":case"ctrlTab-panel":case"dynamic-shortcut-tooltip":case"SyncedTabsSidebarContext":case"SyncedTabsSidebarTabsFilterContext":case"urlbar-scheme":case"urlbar-input":case"urlbar-label-box":case"urlbar-search-mode-indicator":case"tracking-protection-icon-tooltip":case"tabbrowser-tab-tooltip":case"pageActionContextMenu":break;case"backForwardMenu":if(1==c.disabled&&1==i.disabled)break;n.setAttribute("popup-status","true");default:n.setAttribute("popup-status","true")}}function t(e){switch(e.target.id){case"contentAreaContextMenu":case"aHTMLTooltip":case"remoteBrowserTooltip":case"sidebarMenu-popup":case"ctrlTab-panel":case"dynamic-shortcut-tooltip":case"SyncedTabsSidebarContext":case"SyncedTabsSidebarTabsFilterContext":case"urlbar-scheme":case"urlbar-input":case"urlbar-label-box":case"urlbar-search-mode-indicator":case"tracking-protection-icon-tooltip":case"tabbrowser-tab-tooltip":case"pageActionContextMenu":break;case"backForwardMenu":if(1==c.disabled&&1==i.disabled)break;n.removeAttribute("popup-status");default:"urlbarView"!=e.target.className&&("menu"==e.target.parentElement.tagName&&"menubar"!=e.target.parentElement.parentElement.tagName||n.removeAttribute("popup-status"))}}function a(e,t){for(let t of e)"attributes"===t.type&&("true"==s.getAttribute("focused")?n.setAttribute("urlbar-status","true"):n.removeAttribute("urlbar-status"))}var r=document.getElementById("mainPopupSet"),o=document.getElementById("navigator-toolbox"),n=o.parentElement,s=document.getElementById("urlbar"),c=document.getElementById("back-button"),i=document.getElementById("forward-button");const u={attributes:!0,attributeFilter:["focused"]},b=new MutationObserver(a);b.observe(s,u),r.addEventListener("popupshowing",e,!0),r.addEventListener("popuphiding",t,!0),o.addEventListener("popupshowing",e,!0),o.addEventListener("popuphiding",t,!0)})();
+(function () {
+    var mainPopupSet = document.getElementById("mainPopupSet");
+    var navBar = document.getElementById("navigator-toolbox");
+    var navBarContainer = navBar.parentElement;
+    var urlbar = document.getElementById("urlbar");
+    var backButton = document.getElementById("back-button");
+    var fwdButton = document.getElementById("forward-button");
+    const options = {
+        attributes: true,
+        attributeFilter: ["focused"]
+    };
+    const observer = new MutationObserver(urlbarCallback);
+
+    function popupShowing(event) {
+        switch (event.target.id) {
+            case "contentAreaContextMenu":
+            case "aHTMLTooltip":
+            case "remoteBrowserTooltip":
+            case "sidebarMenu-popup":
+            case "ctrlTab-panel":
+            case "dynamic-shortcut-tooltip":
+            case "SyncedTabsSidebarContext":
+            case "SyncedTabsSidebarTabsFilterContext":
+            case "urlbar-scheme":
+            case "urlbar-input":
+            case "urlbar-label-box":
+            case "urlbar-search-mode-indicator":
+            case "tracking-protection-icon-tooltip":
+            case "tabbrowser-tab-tooltip":
+            case "pageActionContextMenu":
+                break;
+            case "backForwardMenu":
+                if (backButton.disabled == true && fwdButton.disabled == true) {
+                    break;
+                } else {
+                    navBarContainer.setAttribute("popup-status", "true");
+                };
+            default:
+                navBarContainer.setAttribute("popup-status", "true");
+                // console.log(event.target);
+        }
+    };
+
+    function popupHiding(event) {
+        switch (event.target.id) {
+            case "contentAreaContextMenu":
+            case "aHTMLTooltip":
+            case "remoteBrowserTooltip":
+            case "sidebarMenu-popup":
+            case "ctrlTab-panel":
+            case "dynamic-shortcut-tooltip":
+            case "SyncedTabsSidebarContext":
+            case "SyncedTabsSidebarTabsFilterContext":
+            case "urlbar-scheme":
+            case "urlbar-input":
+            case "urlbar-label-box":
+            case "urlbar-search-mode-indicator":
+            case "tracking-protection-icon-tooltip":
+            case "tabbrowser-tab-tooltip":
+            case "pageActionContextMenu":
+                break;
+            case "backForwardMenu":
+                if (backButton.disabled == true && fwdButton.disabled == true) {
+                    break;
+                } else {
+                    navBarContainer.removeAttribute("popup-status");
+                };
+            default:
+                if (event.target.className != "urlbarView") {
+                    if (event.target.parentElement.tagName != "menu" || event.target.parentElement.parentElement.tagName == "menubar") {
+                        navBarContainer.removeAttribute("popup-status");
+                        // console.log(event.target);
+                    }
+                }
+        }
+    };
+
+    function urlbarCallback(mutationsList, observer) {
+        for (let mutation of mutationsList) {
+            if (mutation.type === "attributes") {
+                if (urlbar.getAttribute("focused") == "true") {
+                    navBarContainer.setAttribute("urlbar-status", "true");
+                } else {
+                    navBarContainer.removeAttribute("urlbar-status");
+                }
+            }
+        }
+    };
+
+    observer.observe(urlbar, options);
+    mainPopupSet.addEventListener("popupshowing", popupShowing, true);
+    mainPopupSet.addEventListener("popuphiding", popupHiding, true);
+    navBar.addEventListener("popupshowing", popupShowing, true);
+    navBar.addEventListener("popuphiding", popupHiding, true);
+})();
