@@ -708,7 +708,7 @@ tabmodalprompt input:focus {
     right: 0px !important;
     max-width: 278px !important;
     z-index: 0 !important;
-    overflow-x: scroll !important;
+/*     overflow-x: scroll !important; */
     scroll-behavior: smooth !important;
     scrollbar-width: none !important;
     float: right !important;
@@ -748,7 +748,7 @@ tabmodalprompt input:focus {
     transition: opacity 0.15s ease-in-out !important;
     opacity: 0 !important;
     pointer-events: none !important;
-    overflow-x: hidden !important;
+/*     overflow-x: hidden !important; */
 }
 
 #urlbar .search-one-offs * {
@@ -759,7 +759,7 @@ tabmodalprompt input:focus {
 #urlbar[searchmode] .search-one-offs {
     opacity: 1 !important;
     pointer-events: auto !important;
-    overflow-x: scroll !important;
+/*     overflow-x: scroll !important; */
 }
 
 #urlbar[usertyping="true"] .search-one-offs *,

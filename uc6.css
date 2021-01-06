@@ -84,9 +84,11 @@
 }
 
 #PanelUI-menu-button[badge-status^="update"]>.toolbarbutton-badge-stack>.toolbarbutton-badge {
-    background: hsl(125, 81%, 57%) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='11' height='11' viewBox='-0.55 0 11 11'><path stroke='context-stroke' stroke-width='1.5' stroke-linecap='round' d='M5 9V2m0 0L2 5m3-3l3 3'/></svg>") no-repeat center !important;
-    stroke: transparent !important;
-    -moz-context-properties: stroke !important;
+    background: hsl(125, 81%, 57%) url("data:image/svg+xml;utf8,<svg fill='context-fill' fill-opacity='context-fill-opacity' stroke='context-stroke' version='1.1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 5'><path d='M7.707 3.293l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L4 2.414l2.293 2.293a.997.997 0 001.414 0 1 1 0 000-1.414z'/></svg>") no-repeat center !important;
+    fill: transparent !important;
+    background-size: 72% !important;
+    -moz-context-properties: fill !important;
+    padding: 0 !important;
 }
 
 #PanelUI-menu-button[badge-status^="addon"]>.toolbarbutton-badge-stack>.toolbarbutton-badge,
@@ -108,8 +110,8 @@
     -moz-context-properties: fill, stroke !important;
 }
 
-#PanelUI-menu-button[badge-status^="update"]:hover>.toolbarbutton-badge-stack>.toolbarbutton-badge {
-    stroke: hsl(118, 89%, 24%) !important;
+#PanelUI-menu-button[badge-status^="update"]:is(:hover, [open])>.toolbarbutton-badge-stack>.toolbarbutton-badge {
+    fill: hsl(118, 89%, 24%) !important;
 }
 
 .panel-banner-item[notificationid^="update"]::after {
@@ -441,6 +443,11 @@ toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:ho
     color: hsl(0, 100%, 66%) !important;
     background-color: transparent !important;
     border: none !important;
+}
+
+#identity-popup-mainView > #identity-popup-security > .identity-popup-security-content > .identity-popup-security-connection {
+    background-position: 2.05em 40% !important;
+    background-size: 18px auto !important;
 }
 
 /* url bar popups */

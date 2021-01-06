@@ -1,131 +1,254 @@
 // ==UserScript==
 // @name           navbarToolbarButtonSlider.uc.js
-// @namespace      https://www.reddit.com/user/MotherStylus
-// @description    Wrap all toolbar buttons after #urlbar-container in a scrollable div. I recommend setting mousewheel.autodir.enabled to true, so you can scroll horizontally through the buttons by scrolling up/down with a mousewheel. You may need to adjust the "300" on line 32, this is the time (in milliseconds) before the script executes. Without it, the script will execute too fast so toolbar buttons added by scripts or extensions may not load depending on your overall startup speed. You want it as low as possible so you don't see the massive container shrinking a second after startup. 300 is just enough for me to never miss any buttons but my setup is pretty heavy, you may want a smaller number. 100 might work for you at first but every now and then you have an abnormally slow startup and you miss an icon. That said, if you don't use any buttons added by scripts or the built-in devtools button, you could probably remove setTimeout altogether. You can also change "max-width" on line 31 to make the container wider or smaller, ideally by increments of 32. I use 352 because I want 11 icons to be visible.
-// @include        *
+// @homepage       https://github.com/aminomancer
+// @description    Wrap all toolbar buttons after #urlbar-container in a scrollable div. It can scroll horizontally through the buttons by scrolling up/down with a mousewheel, like the tab bar. You can change "max-width" in outer.style.cssText to make the container wider or smaller, ideally by increments of 32. I use 352 because I want 11 icons to be visible. To scroll faster you can add a multiplier right before scrollByPixels is called, like scrollAmount = scrollAmount * 1.5 or something like that. Doesn't handle touch events yet since I don't have a touchpad to test it on. Let me know if you have any ideas though.
 // @author         aminomancer
 // ==/UserScript==
 
 (function () {
-    var toolbarSliderContainer = document.createElement("div");
-    var toolbarSlider = document.createElement("div");
-    var customizableNavBar = document.getElementById("nav-bar-customization-target");
-    var toolbarIcons = customizableNavBar.children;
-    // var toolbarWidgets = CustomizableUI.getWidgetsInArea('nav-bar').filter(Boolean).filter(filterWidgets);
-    var toolbarButtonArray = [];
-    var bippityBop = {
-        onCustomizeStart: function () {
-            unwrapAll(toolbarSlider.childNodes, customizableNavBar)
+    let outer = document.createElement("div"),
+        inner = document.createElement("div"),
+        kids = inner.children,
+        cNavBar = document.getElementById("nav-bar-customization-target"),
+        bin = document.getElementById("mainPopupSet"),
+        widgets = cNavBar.children,
+        domArray = [],
+        cuiListen = {
+            onCustomizeStart: cStart.bind(this),
+            onCustomizeEnd: cEnd.bind(this),
+            onWidgetAfterDOMChange: domChange.bind(this),
+            onWindowClosed: windowClosed.bind(this),
         },
-        onCustomizeEnd: async function () {
-            await convertToArray(toolbarIcons);
-            rewrapAll(toolbarButtonArray);
+        cuiArray = function () {
+            return CustomizableUI.getWidgetsInArea("nav-bar").filter(Boolean).filter(filterWidgets);
         },
-        onWidgetAfterDOMChange: function (aNode) {
-            if (aNode.parentNode.id == "nav-bar-customization-target" && CustomizationHandler.isCustomizing() == false) {
-                pickUpSibling();
+        opener = function (mus) {
+            for (let mu of mus) {
+                if (mu.type === "attributes") {
+                    kids.some((elem) => elem.open) ? outer.open || (outer.open = true) : !outer.open || (outer.open = false);
+                }
             }
+        };
+
+    const observer = new MutationObserver(opener),
+        obsOps = {
+            attributeFilter: ["open"],
+            subtree: true,
+        };
+
+    function cStart() {
+        unwrapAll(kids, cNavBar);
+    }
+
+    async function cEnd() {
+        await convertToArray(widgets);
+        rewrapAll(domArray);
+    }
+
+    function domChange(aNode, aNextNode, aContainer, aWasRemoval) {
+        if (aWasRemoval) return;
+        if (aNode.ownerGlobal == this && aContainer == cNavBar && CustomizationHandler.isCustomizing() == false) {
+            pickUpOrphans(aNode);
         }
-    };
+    }
+
+    function windowClosed(aWindow) {
+        aWindow == this ? this.CustomizableUI.removeListener(cuiListen) : aWindow.CustomizationHandler.isCustomizing() && rewrapAll(domArray);
+    }
 
     function convertToArray(buttons) {
-        return new Promise(resolve => {
-            toolbarButtonArray.length = 0;
+        return new Promise((resolve) => {
+            domArray.length = 0;
             for (let i = 0; i < buttons.length; i++) {
-                switch (buttons[i].id) {
-                    case "wrapper-back-button":
-                    case "back-button":
-                    case "wrapper-forward-button":
-                    case "forward-button":
-                    case "wrapper-stop-reload-button":
-                    case "stop-reload-button":
-                    case "wrapper-urlbar-container":
-                    case "urlbar-container":
-                    case "wrapper-search-container":
-                    case "search-container":
-                    case "nav-bar-toolbarbutton-slider-container":
-                        break;
-                    default:
-                        toolbarButtonArray.push(buttons[i]);
-                }
+                if (filterWidgets(buttons[i])) domArray.push(buttons[i]);
             }
             resolve("resolved");
         });
-    };
+    }
 
-    // function filterWidgets(item) {
-    //     switch (item.id) {
-    //         case "wrapper-back-button":
-    //         case "back-button":
-    //         case "wrapper-forward-button":
-    //         case "forward-button":
-    //         case "wrapper-stop-reload-button":
-    //         case "stop-reload-button":
-    //         case "wrapper-urlbar-container":
-    //         case "urlbar-container":
-    //         case "wrapper-search-container":
-    //         case "search-container":
-    //         case "nav-bar-toolbarbutton-slider-container":
-    //             return false;
-    //         default:
-    //             return true;
-    //     }
-    // };
+    function filterWidgets(item) {
+        if (item.showInPrivateBrowsing === false && PrivateBrowsingUtils.isWindowPrivate(this)) {
+            return false;
+        }
+        switch (item.id) {
+            case "wrapper-back-button":
+            case "back-button":
+            case "wrapper-forward-button":
+            case "forward-button":
+            case "wrapper-stop-reload-button":
+            case "stop-reload-button":
+            case "wrapper-urlbar-container":
+            case "urlbar-container":
+            case "wrapper-search-container":
+            case "search-container":
+            case "nav-bar-toolbarbutton-slider-container":
+                return false;
+            default:
+                return true;
+        }
+    }
 
     function wrapAll(buttons, container) {
-        var parent = buttons[0].parentNode;
-        var previousSibling = buttons[0].previousSibling;
+        let parent = buttons[0].parentElement;
+        let previousSibling = buttons[0].previousSibling;
         for (var i = 0; buttons.length - i; container.firstChild === buttons[0] && i++) {
             container.appendChild(buttons[i]);
         }
-        toolbarSliderContainer.appendChild(container);
-        parent.insertBefore(toolbarSliderContainer, previousSibling.nextSibling);
-    };
+        outer.appendChild(container);
+        parent.insertBefore(outer, previousSibling.nextSibling);
+    }
 
     function unwrapAll(buttons, container) {
         for (var i = 0; buttons.length - i; container.firstChild === buttons[0] && i++) {
             container.appendChild(buttons[i]);
         }
-    };
+        bin.appendChild(outer);
+    }
 
-    function rewrapAll(widgets) {
-        for (var i = 0; widgets.length - i; toolbarSlider.firstChild === widgets[0] && i++) {
-            toolbarSlider.appendChild(widgets[i]);
+    function rewrapAll(buttons) {
+        let parent = buttons[0].parentElement;
+        let previousSibling = buttons[0].previousSibling;
+        for (var i = 0; buttons.length - i; inner.firstChild === buttons[0] && i++) {
+            inner.appendChild(buttons[i]);
         }
-    };
+        parent.insertBefore(outer, previousSibling.nextSibling);
+    }
 
-    // function getOrphansIntendedNeighbor(orphan) {
-    //     var pos = toolbarWidgets.findIndex(
-    //         (item) =>
-    //         item.id == orphan.id
-    //     );
-    //     return toolbarWidgets[pos + 1].instances[0].node;
-    // };
+    function pickUpOrphans(aNode) {
+        let array = cuiArray();
+        for (let i = 0; i < array.length; i++) {
+            if (array[i].id == aNode?.id) {
+                let win = array[i]?.instances.findIndex((item) => item.node?.ownerGlobal === this) || 0;
+                if (i + 1 === array?.length) {
+                    array[i - 1].instances[win].node.after(aNode);
+                } else {
+                    inner.insertBefore(aNode, array[i + 1].instances[win].node);
+                }
+            }
+        }
+    }
 
-    // function pickUpOrphan() {
-    //     var orph = toolbarSliderContainer.nextElementSibling;
-    //     toolbarSlider.insertBefore(orph, getOrphansIntendedNeighbor(orph));
-    // };
+    function cleanUp() {
+        if (outer.nextElementSibling) pickUpOrphans(outer.nextElementSibling);
+    }
 
-    function pickUpSibling() {
-        toolbarSlider.appendChild(toolbarSliderContainer.nextElementSibling);
-    };
+    function reOrder() {
+        let array = cuiArray();
+        for (let i = 0; i < array.length; i++) {
+            let win = array[i]?.instances.findIndex((instance) => instance.node?.ownerGlobal === this);
+            if (array[i].instances[win]?.node.nextElementSibling != array[i + 1]?.instances[win].node) {
+                inner.insertBefore(array[i].instances[win]?.node, array[i + 1]?.instances[win].node);
+            }
+        }
+    }
 
     async function init() {
-        await convertToArray(toolbarIcons);
-        wrapAll(toolbarButtonArray, toolbarSlider);
-        while (toolbarSliderContainer.nextElementSibling) pickUpSibling();
-        // setTimeout(() => {
-        //     while (toolbarSliderContainer.nextElementSibling) pickUpOrphan();
-        // }, 1000);
-    };
+        await convertToArray(widgets);
+        wrapAll(domArray, inner);
+        cleanUp();
+    }
 
     init();
-    CustomizableUI.addListener(bippityBop);
-    toolbarSliderContainer.className = "container";
-    toolbarSliderContainer.id = "nav-bar-toolbarbutton-slider-container";
-    toolbarSliderContainer.style.cssText = "display:-moz-box;-moz-box-align:center;overflow-x:scroll;overflow-y:hidden;max-width:352px;scrollbar-width:none";
-    toolbarSlider.className = "container";
-    toolbarSlider.id = "nav-bar-toolbarbutton-slider";
-    toolbarSlider.style.cssText = "display:flex;flex-flow:row;flex-direction:row";
+    kids.some = Array.prototype.some;
+    observer.observe(inner, obsOps);
+    outer.className = "container";
+    outer.id = "nav-bar-toolbarbutton-slider-container";
+    outer.style.cssText =
+        "display: -moz-box; -moz-box-align: center; max-width: 352px; scrollbar-width: none; box-sizing: border-box; scroll-behavior: smooth; overflow: hidden";
+    inner.className = "container";
+    inner.id = "nav-bar-toolbarbutton-slider";
+    inner.style.cssText = "display: flex; flex-flow: row; flex-direction: row";
+    outer.setAttribute("smoothscroll", "true");
+    outer.setAttribute("clicktoscroll", "true");
+    outer.setAttribute("overflowing", "true");
+    outer.setAttribute("orient", "horizontal");
+    outer.smoothScroll = true;
+    outer._clickToScroll = true;
+    outer._isScrolling = false;
+    outer._destination = 0;
+    outer._direction = 0;
+    outer._prevMouseScrolls = [null, null];
+
+    outer.scrollByPixels = function (aPixels, aInstant) {
+        let scrollOptions = { behavior: aInstant ? "instant" : "auto" };
+        scrollOptions["left"] = aPixels;
+        this.scrollBy(scrollOptions);
+    };
+
+    outer.lineScrollAmount = function () {
+        let elements = kids;
+        return elements.length && this.scrollWidth / elements.length;
+    };
+
+    outer.on_Scroll = function (event) {
+        if (this.open) return;
+        this._isScrolling = true;
+    };
+
+    outer.on_Scrollend = function (event) {
+        this._isScrolling = false;
+        this._destination = 0;
+        this._direction = 0;
+    };
+
+    outer.on_Wheel = function (event) {
+        if (this.open) return;
+        let doScroll = false;
+        let instant;
+        let scrollAmount = 0;
+        let isVertical = Math.abs(event.deltaY) > Math.abs(event.deltaX);
+        let delta = isVertical ? event.deltaY : event.deltaX;
+
+        if (this._prevMouseScrolls.every((prev) => prev == isVertical)) {
+            doScroll = true;
+            if (event.deltaMode == event.DOM_DELTA_PIXEL) {
+                scrollAmount = delta;
+                instant = true;
+            } else if (event.deltaMode == event.DOM_DELTA_PAGE) {
+                scrollAmount = delta * this.clientWidth;
+            } else {
+                scrollAmount = delta * this.lineScrollAmount();
+            }
+        }
+
+        if (this._prevMouseScrolls.length > 1) {
+            this._prevMouseScrolls.shift();
+        }
+        this._prevMouseScrolls.push(isVertical);
+
+        if (doScroll) {
+            let direction = scrollAmount < 0 ? -1 : 1;
+            let startPos = this.scrollLeft;
+
+            if (!this._isScrolling || this._direction != direction) {
+                this._destination = startPos + scrollAmount;
+                this._direction = direction;
+            } else {
+                // We were already in the process of scrolling in this direction
+                this._destination = this._destination + scrollAmount;
+                scrollAmount = this._destination - startPos;
+            }
+            this.scrollByPixels(scrollAmount, instant);
+        }
+
+        event.stopPropagation();
+        event.preventDefault();
+    };
+
+    outer.addEventListener("wheel", outer.on_Wheel);
+    outer.addEventListener("scroll", outer.on_Scroll);
+    outer.addEventListener("scrollend", outer.on_Scrollend);
+    if (gBrowserInit.delayedStartupFinished) {
+        CustomizableUI.addListener(cuiListen);
+        reOrder();
+    } else {
+        let delayedStartupFinished = (subject, topic) => {
+            if (topic == "browser-delayed-startup-finished" && subject == window) {
+                Services.obs.removeObserver(delayedStartupFinished, topic);
+                CustomizableUI.addListener(cuiListen);
+                reOrder();
+            }
+        };
+        Services.obs.addObserver(delayedStartupFinished, "browser-delayed-startup-finished");
+    }
 })();

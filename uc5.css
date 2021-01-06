@@ -219,9 +219,9 @@
 }
 
 /* Close tab button visible only on hover */
-.tabbrowser-tab:not([pinned]):not(:hover) .tab-close-button {
-/*     visibility: collapse !important; */
-}
+/* .tabbrowser-tab:not([pinned]):not(:hover) .tab-close-button {
+    visibility: collapse !important;
+} */
 
 .tabbrowser-tab[pinned] .tab-close-button {
     opacity: 0 !important;

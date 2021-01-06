@@ -80,6 +80,10 @@ treechildren::-moz-tree-drop-feedback {
     z-index: 2147483647 !important;
     -webkit-transform-style: preserve-3d !important;
     -webkit-backface-visibility: hidden !important;
+    -moz-transform-style: preserve-3d !important;
+    -moz-backface-visibility: hidden !important;
+    transform-style: preserve-3d !important;
+    backface-visibility: hidden !important;
     transition-timing-function: cubic-bezier !important;
 }
 
@@ -168,6 +172,10 @@ requires fullscreenNavBar.uc.js to set attributes popup-status and urlbar-status
     backface-visibility: hidden !important;
     -webkit-transform-style: preserve-3d !important;
     -webkit-backface-visibility: hidden !important;
+    -moz-transform-style: preserve-3d !important;
+    -moz-backface-visibility: hidden !important;
+    transform-style: preserve-3d !important;
+    backface-visibility: hidden !important;
 }
 
 :root[inFullscreen]:not([customizing]) #browser findbar {
@@ -1130,3 +1138,5 @@ dialog#handling richlistitem[selected="true"] {
     background-color: var(--arrowpanel-dimmed-further) !important;
     color: var(--in-content-page-color) !important;
 }
+
+

@@ -451,6 +451,10 @@ notification[value="keyword-uri-fixup"] {
     transition: all .2s ease-in-out 0s !important;
     -webkit-transform-style: preserve-3d !important;
     -webkit-backface-visibility: hidden !important;
+    -moz-transform-style: preserve-3d !important;
+    -moz-backface-visibility: hidden !important;
+    transform-style: preserve-3d !important;
+    backface-visibility: hidden !important;
     transition-timing-function: cubic-bezier !important;
     z-index: 1 !important;
 }
