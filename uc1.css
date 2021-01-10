@@ -103,7 +103,7 @@ link[href$="global.css"] ~ spacer[part=arrowscrollbox-overflow-end-indicator] {
 }
 
 /* menubar next to tabs */
-:root[sizemode="normal"] #toolbar-menubar{
+:root[sizemode="normal"] #toolbar-menubar {
     position: absolute !important;
     display: block !important;
     z-index: 555 !important;
@@ -120,7 +120,7 @@ link[href$="global.css"] ~ spacer[part=arrowscrollbox-overflow-end-indicator] {
     width: -moz-min-content !important;
 }
 
-:root[sizemode="maximized"] #toolbar-menubar{
+:root[sizemode="maximized"] #toolbar-menubar {
     position: absolute !important;
     display: block !important;
     z-index: 555 !important;

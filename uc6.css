@@ -114,6 +114,11 @@
     fill: hsl(118, 89%, 24%) !important;
 }
 
+.panel-banner-item[notificationid^="update"]:not([disabled]) {
+    background-color: hsla(109.9, 90.9%, 47.3%, 0.1) !important;
+    color: HSL(240, 9.1%, 97.8%) !important;
+}
+
 .panel-banner-item[notificationid^="update"]::after {
     background: hsl(125, 81%, 57%) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-.6 -.6 12 12' width='17' height='17'><path stroke='context-stroke' stroke-width='1.5' stroke-linecap='round' d='M5 9V2M5 2L2 5M5 2l3 3'/></svg>") no-repeat center !important;
     stroke: hsl(118, 89%, 24%) !important;

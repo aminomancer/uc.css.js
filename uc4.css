@@ -409,7 +409,17 @@ treechildren::-moz-tree-row(selected, current, focus) {
 .sidebar-placesTree {
     -moz-appearance: none !important;
     color: var(--lwt-text-color) !important;
+    scroll-behavior: smooth !important;
+    overflow: hidden !important;
 }
+
+/* #bookmarks-view {
+    padding-right: 0.2px !important;
+}
+
+#bookmarks-view treecol {
+    margin-right: -0.2px !important;
+} */
 
 /* .hidevscroll-scrollbar {
     -moz-appearance: none !important;

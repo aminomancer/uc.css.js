@@ -632,6 +632,7 @@ tabmodalprompt input:focus {
     padding-left: 3px !important;
     padding-right: 3.5px !important;
     padding-top: 3px !important;
+    clip-path: inset(0 -100% -100% -100%);
 }
 
 .urlbarView .search-panel-one-offs {
@@ -707,7 +708,6 @@ tabmodalprompt input:focus {
     top: -35px !important;
     right: 0px !important;
     max-width: 278px !important;
-    z-index: 0 !important;
 /*     overflow-x: scroll !important; */
     scroll-behavior: smooth !important;
     scrollbar-width: none !important;
@@ -736,7 +736,6 @@ tabmodalprompt input:focus {
 }
 
 #urlbar[usertyping="true"] #urlbar-input {
-    z-index: 1 !important;
     position: relative !important;
     margin-right: 268px !important;
     padding-right: 1px !important;
