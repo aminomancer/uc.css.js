@@ -1,5 +1,7 @@
 (function () {
-    const searchModeIndicatorFocused = document.getElementById("urlbar-search-mode-indicator-title");
+    const searchModeIndicatorFocused = document.getElementById(
+        "urlbar-search-mode-indicator-title"
+    );
     const urlbar = document.getElementById("urlbar");
     const identityIcon = document.getElementById("identity-icon");
     const options = {
@@ -10,8 +12,8 @@
     };
     const observer = new MutationObserver(searchModeCallback);
 
-    function searchModeCallback(mutationsList, observer) {
-        for (let mutation of mutationsList) {
+    function searchModeCallback(mutationsList, _observer) {
+        for (let _mutation of mutationsList) {
             switch (searchModeIndicatorFocused.textContent) {
                 case "Google":
                     identityIcon.className = "googleIndicator";
@@ -58,6 +60,9 @@
                 case "XVIDEOS":
                     identityIcon.className = "xVideosIndicator";
                     break;
+                case "Searchfox":
+                    identityIcon.className = "searchfoxIndicator";
+                    break;
                 case "Scryfall":
                     identityIcon.className = "scryIndicator";
                     break;
@@ -80,11 +85,10 @@
                     identityIcon.className = "instagramIndicator";
                     break;
                 default:
-                    if (urlbar.getAttribute("actiontype") == "switchtab" && urlbar.getAttribute("actionoverride") != "true") {
-                        identityIcon.className = "tabsIndicator";
-                    } else {
-                        identityIcon.className = "otherIndicator";
-                    }
+                    urlbar.getAttribute("actiontype") == "switchtab" &&
+                    urlbar.getAttribute("actionoverride") != "true"
+                        ? (identityIcon.className = "tabsIndicator")
+                        : (identityIcon.className = "otherIndicator");
             }
         }
     }

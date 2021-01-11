@@ -307,6 +307,10 @@ toolbar .toolbarbutton-1:not([disabled]):-moz-any([checked]) > .toolbarbutton-ic
     margin-top: 7px !important;
 }
 
+/* #sidebar-switcher-bookmarks::after {
+    display: none !important;
+} */
+
 .textbox-search-sign {
     margin-left: 2px !important;
     margin-top: 0.5px !important;
