@@ -861,14 +861,6 @@ requires fullscreenNavBar.uc.js to set attributes popup-status and urlbar-status
     z-index: 50 !important;
 } */
 
-#browser {
-    display: flex !important;
-}
-
-#appcontent {
-    flex-basis: -moz-available !important;
-}
-
 #sidebar-box {
     background-color: var(--tooltip-dark) !important;
     top: 74px !important;
@@ -881,8 +873,8 @@ requires fullscreenNavBar.uc.js to set attributes popup-status and urlbar-status
     position: fixed !important;
     left: 0 !important;
     right: auto !important;
-    min-width: 270px !important;
-    max-width: 270px !important;
+/*     min-width: 270px !important;
+    max-width: 270px !important; */
 /*     width: 263px !important; */
 }
 
@@ -893,15 +885,6 @@ requires fullscreenNavBar.uc.js to set attributes popup-status and urlbar-status
 
 #sidebar-header {
     top: 0 !important;
-}
-
-#sidebar-splitter {
-    display: none !important;
-}
-
-#sidebar-box>* {
-    display: -moz-box !important;
-    min-width: -moz-available !important;
 }
 
 #sidebar {

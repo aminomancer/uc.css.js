@@ -201,6 +201,7 @@ toolbar .toolbarbutton-1:not([disabled]):-moz-any([checked]) > .toolbarbutton-ic
     padding-bottom: 5px !important;
     transition: 300ms !important;
     color: currentColor !important;
+    min-height: 27px !important;
 }
 
 .sidebar-search-container .search-box,
@@ -306,15 +307,15 @@ toolbar .toolbarbutton-1:not([disabled]):-moz-any([checked]) > .toolbarbutton-ic
     margin-top: 7px !important;
 }
 
-textbox:not([searchbutton])>.textbox-search-sign {
+.textbox-search-sign {
     margin-left: 2px !important;
-    margin-top: 1px !important;
+    margin-top: 0.5px !important;
     margin-inline-end: 6px !important;
 }
 
 .textbox-search-clear {
     margin-right: 3px !important;
-    margin-top: 1px !important;
+    margin-top: 0px !important;
 }
 
 #sidebar-close {
@@ -348,8 +349,6 @@ textbox:not([searchbutton])>.textbox-search-sign {
     outline: none !important;
 }
 
-.sidebar-placesTreechildren,
-#sidebar,
 #sidebar-box {
     z-index: 1 !important;
     position: relative !important;
@@ -409,8 +408,8 @@ treechildren::-moz-tree-row(selected, current, focus) {
 .sidebar-placesTree {
     -moz-appearance: none !important;
     color: var(--lwt-text-color) !important;
-    scroll-behavior: smooth !important;
-    overflow: hidden !important;
+/*     scroll-behavior: smooth !important;
+    overflow: hidden !important; */
 }
 
 /* #bookmarks-view {
@@ -435,12 +434,13 @@ treechildren::-moz-tree-row(selected, current, focus) {
 .sidebar-splitter {
     border-inline-end-width: 1px !important;
     border-inline-end-color: transparent !important;
-    /* opacity: 0 !important; */
-    /* visibility: hidden !important; */
-
     position: relative !important;
     z-index: 5 !important;
     width: 4px !important;
+}
+
+#sidebar-splitter {
+    display: none !important;
 }
 
 #sidebar-box {

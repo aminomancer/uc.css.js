@@ -1,3 +1,7 @@
+.devtools-highlighter-renderer {
+    z-index: 5555
+}
+
 .tabbrowser-tab {
     min-height: 35px !important;
 }
