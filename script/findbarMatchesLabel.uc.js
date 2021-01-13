@@ -65,12 +65,15 @@
             function exitFindBar(event) {
                 if (event.code === "KeyF" && (event.ctrlKey || event.metaKey)) {
                     if (this.hidden) return; // if it's already hidden then let the built-in command open it.
+                    let field = this._findField;
                     try {
                         this.findMode > 0 // if we're in 'find as you type' mode...
                             ? this.open(0) // switch to normal find mode.
-                            : this._findField.contains(document.activeElement) // if we're in normal mode already then check if the input box is focused...
-                            ? this.close() // if so, close the findbar.
-                            : this._findField.select() && this._findField.focus(); // if not, focus the input box.
+                            : field.contains(document.activeElement) // if we're in normal mode already then check if the input box is focused...
+                            ? field.selectionEnd - field.selectionStart === field.textLength // if already focused, check if all input text is selected. difference between end and start only equals length if every character is within the selection range.
+                                ? this.close() // if there's already a selection, close the findbar.
+                                : (field.select(), field.focus()) // if nothing is selected, select the full contents of the input box.
+                            : (field.select(), field.focus()); // if not focused, focus and select the input box.
                     } catch (e) {
                         // i haven't seen an error here but if any of these references don't exist it probably means the built-in findbar object initialized wrong for some reason.
                         // in which case it's probably not open. it definitely exists though, since this event listener can't exist in the first place unless the findbar object exists. so just try opening it

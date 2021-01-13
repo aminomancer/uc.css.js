@@ -24,9 +24,9 @@
 }
 
 /* hide update popups, i think */
-#appMenu-notification-popup {
+/* #appMenu-notification-popup {
     display: none !important;
-}
+} */
 
 /* popupnotification:-moz-any([popupid="update-available"]) {
     display: none !important;

@@ -185,6 +185,129 @@
         }
     }
 
+    function setupScroll() {
+        // element.children does not return an array, so doesn't have the some() method. i think adding the prototype method is faster and fewer characters than making a new function.
+        kids.some = Array.prototype.some;
+        // begin observing for changes to the "open" attribute of the slider's toolbar buttons.
+        observer.observe(inner, obsOps);
+        outer.className = "container";
+        outer.id = "nav-bar-toolbarbutton-slider-container";
+        // the crucial parts here are scroll-behavior: smooth, overflow: hidden. without this, smooth horizontal scrolling won't work.
+        outer.style.cssText =
+            "display: -moz-box; -moz-box-align: center; max-width: 352px; scrollbar-width: none; box-sizing: border-box; scroll-behavior: smooth; overflow: hidden";
+        inner.className = "container";
+        inner.id = "nav-bar-toolbarbutton-slider";
+        inner.style.cssText = "display: flex; flex-flow: row; flex-direction: row";
+        // these attributes aren't exactly necessary, just there for consistency in firefox and maybe future extension.
+        outer.setAttribute("smoothscroll", "true");
+        outer.setAttribute("clicktoscroll", "true");
+        outer.setAttribute("overflowing", "true");
+        outer.setAttribute("orient", "horizontal");
+        outer.smoothScroll = true;
+        outer._clickToScroll = true;
+        outer._isScrolling = false;
+        // these objects hold values used for scrolling
+        outer._destination = 0;
+        outer._direction = 0;
+        outer._prevMouseScrolls = [null, null];
+
+        // these are patterned after the arrowscrollbox functions.
+        outer.scrollByPixels = function (aPixels, aInstant) {
+            let scrollOptions = { behavior: aInstant ? "instant" : "auto" };
+            scrollOptions["left"] = aPixels;
+            this.scrollBy(scrollOptions);
+        };
+
+        // evaluate how much to scroll by in line deltaMode
+        outer.lineScrollAmount = function () {
+            return kids.length && this.scrollWidth / kids.length;
+        };
+
+        // these 2 are just here for future extension
+        outer.on_Scroll = function () {
+            if (this.open) return;
+            this._isScrolling = true;
+        };
+
+        outer.on_Scrollend = function () {
+            this._isScrolling = false;
+            this._destination = 0;
+            this._direction = 0;
+        };
+
+        // main wheel event callback
+        outer.on_Wheel = function (event) {
+            /* this is what the mutation observer was for. when a toolbar button in the slider has its popup open, we set outer.open = true.
+        so if outer.open = true we don't want to scroll at all. in other words, if a popup for a button in the slider is open, don't do anything. */
+            if (this.open) return;
+            let doScroll = false,
+                instant,
+                scrollAmount = 0,
+                // check if the wheel event is mostly vertical (up/down) or mostly horizontal (left/right).
+                isVertical = Math.abs(event.deltaY) > Math.abs(event.deltaX),
+                /* if we're scrolling vertically, then use the deltaY as the general delta. if horizontal, then use deltaX instead.
+            you can use this to invert the vertical scrolling direction. just change event.deltaY to -event.deltaY.
+            the tabbrowser has this reversed, at least for english. but in this implementation, wheelDown scrolls right, and wheelUp scrolls left. */
+                delta = isVertical ? event.deltaY : event.deltaX;
+
+            /* if we're using a trackpad or ball or something that can scroll horizontally and vertically at the same time, we need some extra logic.
+        otherwise it can stutter like crazy. as you see in delta, we want to only use either the deltaY or the deltaX, never both.
+        but if you're scrolling diagonally, that could change very quickly from X to Y to X and so on. so we want to only call scrollBy if the scroll input is consistent in one direction.
+        that's what outer._prevMouseScrolls = [null, null] is for. we want to check that the last 2 scroll events were primarily vertical.
+        if they were, then we'll enable scrolling and set the scroll amount. */
+            if (this._prevMouseScrolls.every((prev) => prev == isVertical)) {
+                doScroll = true;
+                // check the delta mode to determine scrollAmount. depends on the device and settings. with a mousewheel it should usually use delta * lineScrollAmount
+                if (event.deltaMode == event.DOM_DELTA_PIXEL) {
+                    scrollAmount = delta;
+                    instant = true;
+                } else if (event.deltaMode == event.DOM_DELTA_PAGE) {
+                    scrollAmount = delta * this.clientWidth;
+                } else {
+                    scrollAmount = delta * this.lineScrollAmount();
+                }
+            }
+
+            /* we need to constantly update those 2 values in _prevMouseScrolls so that it won't scroll vertically for sudden axis changes.
+        when an item gets added, it shoves the last item out of the array with shift(). so the array only ever has 2 values, the isVertical value of the latest 2 events.
+        so if i move the wheel horizontally once, then vertically once, this will be [true, false].
+        and it won't allow vertical scrolling, since the every() method above checks that every member of the array is equal to isVertical.
+        in other words, the last 2 scroll events need to be in the same direction or the events won't scroll the container.
+        if i move vertically once more, it will be [true, true] and THEN the above block will be allowed to set doScroll and scrollAmount.
+        if i move horizontally now, then it'll be [false, true] and vertical scrolling will be disabled again. */
+            if (this._prevMouseScrolls.length > 1) {
+                this._prevMouseScrolls.shift(); // shift the last member out, before...
+            }
+            this._prevMouseScrolls.push(isVertical); // adding the latest event's value to the array
+
+            // provided we're allowed to scroll, then call scrollByPixels with the values previously returned.
+            if (doScroll) {
+                let direction = scrollAmount < 0 ? -1 : 1,
+                    startPos = this.scrollLeft;
+
+                /* since we're using smooth scrolling, we check if the event is being sent while a scroll animation is already "playing."
+            this will avoid stuttering if scrolling quickly (or on a trackpad, methinks) */
+                if (!this._isScrolling || this._direction != direction) {
+                    this._destination = startPos + scrollAmount;
+                    this._direction = direction;
+                } else {
+                    // We were already in the process of scrolling in this direction
+                    this._destination = this._destination + scrollAmount;
+                    scrollAmount = this._destination - startPos;
+                }
+                // finally do the actual scrolly thing
+                this.scrollByPixels(scrollAmount, instant);
+            }
+
+            event.stopPropagation();
+            event.preventDefault();
+        };
+
+        outer.addEventListener("wheel", outer.on_Wheel);
+        outer.addEventListener("scroll", outer.on_Scroll);
+        outer.addEventListener("scrollend", outer.on_Scrollend);
+    }
+
     async function init() {
         // wait for nodes to be filtered. making an array from the DOM seems to be faster than using CustomizableUI's widgets list.
         // idk how but i guess the CustomizableUI component loads stuff lazily...
@@ -196,130 +319,11 @@
         let array = await convertToArray(widgets);
         // first wrap call
         wrapAll(array, inner, true);
+        setupScroll();
         cleanUp();
     }
 
     init();
-    // element.children does not return an array, so doesn't have the some() method. i think adding the prototype method is faster and fewer characters than making a new function.
-    kids.some = Array.prototype.some;
-    // begin observing for changes to the "open" attribute of the slider's toolbar buttons.
-    observer.observe(inner, obsOps);
-    outer.className = "container";
-    outer.id = "nav-bar-toolbarbutton-slider-container";
-    // the crucial parts here are scroll-behavior: smooth, overflow: hidden. without this, smooth horizontal scrolling won't work.
-    outer.style.cssText =
-        "display: -moz-box; -moz-box-align: center; max-width: 352px; scrollbar-width: none; box-sizing: border-box; scroll-behavior: smooth; overflow: hidden";
-    inner.className = "container";
-    inner.id = "nav-bar-toolbarbutton-slider";
-    inner.style.cssText = "display: flex; flex-flow: row; flex-direction: row";
-    // these attributes aren't exactly necessary, just there for consistency in firefox and maybe future extension.
-    outer.setAttribute("smoothscroll", "true");
-    outer.setAttribute("clicktoscroll", "true");
-    outer.setAttribute("overflowing", "true");
-    outer.setAttribute("orient", "horizontal");
-    outer.smoothScroll = true;
-    outer._clickToScroll = true;
-    outer._isScrolling = false;
-    // these objects hold values used for scrolling
-    outer._destination = 0;
-    outer._direction = 0;
-    outer._prevMouseScrolls = [null, null];
-
-    // these are patterned after the arrowscrollbox functions.
-    outer.scrollByPixels = function (aPixels, aInstant) {
-        let scrollOptions = { behavior: aInstant ? "instant" : "auto" };
-        scrollOptions["left"] = aPixels;
-        this.scrollBy(scrollOptions);
-    };
-
-    // evaluate how much to scroll by in line deltaMode
-    outer.lineScrollAmount = function () {
-        return kids.length && this.scrollWidth / kids.length;
-    };
-
-    // these 2 are just here for future extension
-    outer.on_Scroll = function () {
-        if (this.open) return;
-        this._isScrolling = true;
-    };
-
-    outer.on_Scrollend = function () {
-        this._isScrolling = false;
-        this._destination = 0;
-        this._direction = 0;
-    };
-
-    // main wheel event callback
-    outer.on_Wheel = function (event) {
-        /* this is what the mutation observer was for. when a toolbar button in the slider has its popup open, we set outer.open = true.
-        so if outer.open = true we don't want to scroll at all. in other words, if a popup for a button in the slider is open, don't do anything. */
-        if (this.open) return;
-        let doScroll = false,
-            instant,
-            scrollAmount = 0,
-            // check if the wheel event is mostly vertical (up/down) or mostly horizontal (left/right).
-            isVertical = Math.abs(event.deltaY) > Math.abs(event.deltaX),
-            /* if we're scrolling vertically, then use the deltaY as the general delta. if horizontal, then use deltaX instead.
-            you can use this to invert the vertical scrolling direction. just change event.deltaY to -event.deltaY.
-            the tabbrowser has this reversed, at least for english. but in this implementation, wheelDown scrolls right, and wheelUp scrolls left. */
-            delta = isVertical ? event.deltaY : event.deltaX;
-
-        /* if we're using a trackpad or ball or something that can scroll horizontally and vertically at the same time, we need some extra logic.
-        otherwise it can stutter like crazy. as you see in delta, we want to only use either the deltaY or the deltaX, never both.
-        but if you're scrolling diagonally, that could change very quickly from X to Y to X and so on. so we want to only call scrollBy if the scroll input is consistent in one direction.
-        that's what outer._prevMouseScrolls = [null, null] is for. we want to check that the last 2 scroll events were primarily vertical.
-        if they were, then we'll enable scrolling and set the scroll amount. */
-        if (this._prevMouseScrolls.every((prev) => prev == isVertical)) {
-            doScroll = true;
-            // check the delta mode to determine scrollAmount. depends on the device and settings. with a mousewheel it should usually use delta * lineScrollAmount
-            if (event.deltaMode == event.DOM_DELTA_PIXEL) {
-                scrollAmount = delta;
-                instant = true;
-            } else if (event.deltaMode == event.DOM_DELTA_PAGE) {
-                scrollAmount = delta * this.clientWidth;
-            } else {
-                scrollAmount = delta * this.lineScrollAmount();
-            }
-        }
-
-        /* we need to constantly update those 2 values in _prevMouseScrolls so that it won't scroll vertically for sudden axis changes.
-        when an item gets added, it shoves the last item out of the array with shift(). so the array only ever has 2 values, the isVertical value of the latest 2 events.
-        so if i move the wheel horizontally once, then vertically once, this will be [true, false].
-        and it won't allow vertical scrolling, since the every() method above checks that every member of the array is equal to isVertical.
-        in other words, the last 2 scroll events need to be in the same direction or the events won't scroll the container.
-        if i move vertically once more, it will be [true, true] and THEN the above block will be allowed to set doScroll and scrollAmount.
-        if i move horizontally now, then it'll be [false, true] and vertical scrolling will be disabled again. */
-        if (this._prevMouseScrolls.length > 1) {
-            this._prevMouseScrolls.shift(); // shift the last member out, before...
-        }
-        this._prevMouseScrolls.push(isVertical); // adding the latest event's value to the array
-
-        // provided we're allowed to scroll, then call scrollByPixels with the values previously returned.
-        if (doScroll) {
-            let direction = scrollAmount < 0 ? -1 : 1,
-                startPos = this.scrollLeft;
-
-            /* since we're using smooth scrolling, we check if the event is being sent while a scroll animation is already "playing."
-            this will avoid stuttering if scrolling quickly (or on a trackpad, methinks) */
-            if (!this._isScrolling || this._direction != direction) {
-                this._destination = startPos + scrollAmount;
-                this._direction = direction;
-            } else {
-                // We were already in the process of scrolling in this direction
-                this._destination = this._destination + scrollAmount;
-                scrollAmount = this._destination - startPos;
-            }
-            // finally do the actual scrolly thing
-            this.scrollByPixels(scrollAmount, instant);
-        }
-
-        event.stopPropagation();
-        event.preventDefault();
-    };
-
-    outer.addEventListener("wheel", outer.on_Wheel);
-    outer.addEventListener("scroll", outer.on_Scroll);
-    outer.addEventListener("scrollend", outer.on_Scrollend);
     /* for this script we want to do everything as quickly as possible so there isn't a jarring transition during startup.
     if we waited too long, you'd see all the widgets on your toolbar for a moment, not overflowed but instead squeezing down the urlbar to make room.
     then when the script executed, you'd see them suddenly shrink into the slider box.
@@ -331,13 +335,17 @@
     maybe there's another way to actually wait for all the extensions to load, lmk if you know~ */
     if (gBrowserInit.delayedStartupFinished) {
         CustomizableUI.addListener(cuiListen);
-        reOrder();
+        setTimeout(() => {
+            reOrder();
+        }, 300);
     } else {
         let delayedStartupFinished = (subject, topic) => {
             if (topic == "browser-delayed-startup-finished" && subject == window) {
                 Services.obs.removeObserver(delayedStartupFinished, topic);
                 CustomizableUI.addListener(cuiListen);
-                reOrder();
+                setTimeout(() => {
+                    reOrder();
+                }, 300);
             }
         };
         Services.obs.addObserver(delayedStartupFinished, "browser-delayed-startup-finished");

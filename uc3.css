@@ -477,6 +477,7 @@ findbar[hidden] {
     margin-bottom: auto !important;
     visibility: visible !important;
     transition: all .2s ease-in-out 0s !important;
+    pointer-events: none;
 }
 
 #sidebar-box[hidden="true"]~#appcontent findbar,

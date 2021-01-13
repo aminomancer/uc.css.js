@@ -865,22 +865,50 @@ requires fullscreenNavBar.uc.js to set attributes popup-status and urlbar-status
     background-color: var(--tooltip-dark) !important;
     top: 74px !important;
     bottom: 0 !important;
-}
-
-#sidebar-box[checked] {
     display: flex !important;
     flex-direction: column !important;
     position: fixed !important;
     left: 0 !important;
     right: auto !important;
-/*     min-width: 270px !important;
-    max-width: 270px !important; */
-/*     width: 263px !important; */
+/*     animation: 0.2s ease-out both sidebar-step; */
 }
 
-#sidebar-box[positionend="true"] {
+/* #sidebar-box[checked] {
+    min-width: 270px !important;
+    max-width: 270px !important;
+    width: 263px !important;
+} */
+
+#sidebar-box[hidden] {
+    display: none !important;
+}
+
+/* @keyframes sidebar-step {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes sidebar-reverse {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+} */
+
+#sidebar-box[positionend] {
     left: auto !important;
     right: 0 !important;
+/*     animation: 0.2s ease-out both sidebar-reverse; */
 }
 
 #sidebar-header {

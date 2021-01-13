@@ -21,9 +21,9 @@
             toolbarCmd = document.getElementById(csB), // the actual ctrl+shift+B command
             sidebarSwitch = document.getElementById("sidebar-switcher-bookmarks"), // the bookmarks button that appears in the switcher menu at the top of the sidebar
             menuSwitch = document.getElementById("menu_bookmarksSidebar"), // the bookmarks button that appears in the titlebar menubar under view > sidebar > bookmarks
-            startX,
+            frame = false,
             startWidth,
-            frame = false;
+            startX;
 
         function initDrag(e) {
             resizer.style.width = "200%"; // this is not directly visible since the element has no background or content. this just means that while you're clicking+dragging the resizer, its width expands to double the size of the entire sidebar. sounds weird but this is done because there are iframes under the cursor... an iframe in the sidebar, on one side of the cursor, and an iframe in the browser on the other side. when the cursor moves over these elements, the CSS changes the cursor from "ew-resize" to "default" or "pointer" or whatever. at the same time, the script kicks in and sets the width of the sidebar to follow the cursor. if these actually happened simultaneously then it wouldn't matter, since the sidebar would always resize instantly, meaning the resizer would always be directly underneath the cursor. but they don't happen simultaneously, the CSS changes the cursor and THEN the sidebar is resized. meaning that during the intervening period, the cursor flickers to something else. when you're actually resizing, this is happening like dozens of times a second or more, so you would see really rapid flickering of the cursor. if we were designing a web app this would be easy to solve, just use javascript to modulate document.body.style.cursor on mousedown and mouseup. but since this is a userChrome script, and the cursor is on top of iframes with documents that are very complicated to access from the global execution context, we should just work around it. so instead of trying to manually set cursor rules for every element the cursor might intersect, we'll just make the invisible resizer so big that there's no way to move your mouse outside of it before the sidebar catches up. then we set its size back to normal on mouseup.
