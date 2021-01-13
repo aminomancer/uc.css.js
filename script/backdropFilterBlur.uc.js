@@ -1,26 +1,9 @@
-// ==UserScript==
-// @name           tooltipStyling.uc.js
-// @description    tooltipStyling
-// @include        *
-// ==/UserScript==
-Components.utils.import("resource://gre/modules/Services.jsm");
-var ss = Components.classes["@mozilla.org/content/style-sheet-service;1"].getService(Components.interfaces.nsIStyleSheetService);
-
-var custom_tooltips = {
-
-  init: function () {
-
-    var uri = Services.io.newURI("data:text/css;charset=utf-8," + encodeURIComponent(`
+(() => {
+    var css = `
 #statuspanel-label {
     background-image: url("texture/noise-512x512.png") !important;
     background-color: var(--urlbarView-bgcolor) !important;
     backdrop-filter: blur(22px) !important;
-}
-
-.urlbarView #urlbar-results {
-    // background-image: url("texture/noise-512x512.png") !important;
-    // background-color: var(--urlbarView-bgcolor) !important;
-    // backdrop-filter: blur(32px) !important;
 }
 
 @-moz-document url("chrome://global/content/alerts/alert.xhtml") {
@@ -36,13 +19,9 @@ var custom_tooltips = {
     background-color: var(--urlbarView-bgcolor) !important;
     backdrop-filter: blur(22px) !important;
 }
-`), null, null);
+	`,
+        sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(Ci.nsIStyleSheetService),
+        uri = makeURI("data:text/css;charset=UTF=8," + encodeURIComponent(css));
 
-    setTimeout(() => {
-      ss.loadAndRegisterSheet(uri, ss.AGENT_SHEET);
-    }, 1000);
-
-  }
-};
-
-custom_tooltips.init();
+    sss.loadAndRegisterSheet(uri, sss.AGENT_SHEET);
+})();
