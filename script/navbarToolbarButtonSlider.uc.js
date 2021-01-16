@@ -136,17 +136,12 @@
     async function pickUpOrphans(aNode) {
         let array = await cuiArray();
         for (let i = 0; i < array.length; i++) {
-            // check that the node which changed is in the customizable widgets list, since the ordering logic relies on the widgets list
+            // check that the node which changed is in the customizable widgets list, since the ordering logic relies on the widgets list. we use forWindow(this) when selecting nodes from the widgets list, since each widget has an instance for every window it's visible in. with multiple windows open, array[0] will return an object with a property "instances" whose value is an array of objects, each of which has a node property referencing the DOM node we actually want. forWindow(this) is just a shortcut to get to the object corresponding to the context we're executing in.
             if (array[i].id === aNode?.id) {
-                /* the widgets list is for the entire browser. only one interface = one object. but each widget has a property, instances, which is a collection of objects, one for each window, and each has a node. if we don't do this, it will append the node for all windows to whichever window belongs to the execution context that last called this. so we'd get duplicate nodes. instead when we use instances[x] we want x to equal a number corresponding to the execution context that called the function.
-                so we check the items in instances and test that their ownerGlobal property equals this context's global object. and if so, we set win = that item's index. that way, when a given execution context calls this function, it will use the instance for its own context.
-                we're using optional chaining a lot here since we are expecting some stuff to not exist yet during startup, which would result in unnecessary errors. any nodes that don't exist yet during startup will be picked up moments later by the other functions. */
-                let win =
-                    array[i]?.instances.findIndex((item) => item.node?.ownerGlobal === this) || 0;
-                /* if the node that changed is the last item in the array, meaning it's *supposed* to be the last in order, then we can't use insertBefore since there's nothing meant to be after it. so we check for its intended position... */
+                /* if the node that changed is the last item in the array, meaning it's *supposed* to be the last in order, then we can't use insertBefore() since there's nothing meant to be after it. we can't only use after() either since it won't work for the first node. so we check for its intended position... */
                 i + 1 === array?.length
-                    ? array[i - 1].instances[win].node.after(aNode) // and if it's the last item, we use the after() method to put it after the node corresponding to the previous widget.
-                    : inner.insertBefore(aNode, array[i + 1].instances[win].node); // for all the other widgets we just insert their nodes before the node corresponding to the next widget.
+                    ? array[i - 1].forWindow(this).node.after(aNode) // and if it's the last item, we use the after() method to put it after the node corresponding to the previous widget.
+                    : inner.insertBefore(aNode, array[i + 1].forWindow(this).node); // for all the other widgets we just insert their nodes before the node corresponding to the next widget.
             }
         }
     }
@@ -162,24 +157,20 @@
         let array = await cuiArray();
         // for every valid item in the widgets list...
         for (let i = 0; i < array.length; i++) {
-            // (again, make sure we're only using instances for THIS execution context)
-            let win = array[i]?.instances.findIndex(
-                (instance) => instance.node?.ownerGlobal === this
-            );
             /* if the NODE's next sibling does not match the next WIDGET's node, then we need to move the node to where it belongs. basically the DOM order is supposed to match the widget array's order.
             an instance of widget 1 has a property 'node', let's call it node 1. same for widget 2, call it node 2.
             node 1's next sibling should be equal to node 2. if node 1's next sibling is actually node 5, then the DOM is out of order relative to the array.
             so we check each widget's node's next sibling, and if it's not equal to the node of the next widget in the array, we insert the node before the next widget's node. */
             if (
-                array[i].instances[win]?.node.nextElementSibling !=
-                array[i + 1]?.instances[win].node
+                array[i].forWindow(this).node.nextElementSibling !=
+                array[i + 1]?.forWindow(this).node
             ) {
                 /* if nextElementSibling returns null, then it's the last child of the slider. if that widget is the last in the array, then array[i+1] will return undefined. since null == undefined the if statement will still execute for the last widget.
                 but the following expression says to insert the node before the next widget's node. since there is no next widget, we're telling the engine to insert the node before undefined. which always results in inserting the node at the end. so it ends up where it should be anyway.
                 and this is faster than actually checking if it's the last node for every iteration of the loop. */
                 inner.insertBefore(
-                    array[i].instances[win]?.node,
-                    array[i + 1]?.instances[win].node
+                    array[i].forWindow(this)?.node,
+                    array[i + 1]?.forWindow(this).node
                 );
             }
         }
@@ -344,7 +335,7 @@
                 Services.obs.removeObserver(delayedStartupFinished, topic);
                 CustomizableUI.addListener(cuiListen);
                 setTimeout(() => {
-                    reOrder();
+                    reOrder.bind(this)();
                 }, 300);
             }
         };

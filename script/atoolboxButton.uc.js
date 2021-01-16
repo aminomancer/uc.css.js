@@ -25,6 +25,7 @@
 // We couldn't use it explicitly since it only accepts messages as items in browser.properties, which rules out custom messages.
 // ==/UserScript==
 (function () {
+    var toolbox = ChromeUtils.import("resource://devtools/client/framework/browser-toolbox/Launcher.jsm").BrowserToolboxLauncher;
     var CustomHint = {
         _timerID: null,
 
@@ -137,7 +138,7 @@
         _ensurePanel() {
             if (!this.__panel) {
                 let wrapper = document.getElementById("confirmation-hint-wrapper");
-                wrapper.replaceWith(wrapper.content);
+                wrapper?.replaceWith(wrapper.content);
                 this.__panel = document.getElementById("confirmation-hint");
                 ConfirmationHint.__panel = document.getElementById("confirmation-hint");
             }
@@ -155,23 +156,18 @@
                     toolbarbutton.onclick = (e) => {
                         switch (e.button) {
                             case 0:
-                                key_toggleToolbox.click(), e.preventDefault();
+                                e.preventDefault(), key_toggleToolbox.click();
                                 break;
                             case 2:
-                                if (
-                                    ChromeUtils.import(
-                                        "resource://devtools/client/framework/browser-toolbox/Launcher.jsm"
-                                    ).BrowserToolboxLauncher.getBrowserToolboxSessionState() === false
-                                ) {
-                                    key_browserToolbox.click(), e.preventDefault();
-                                } else {
-                                    CustomHint.show(toolbarbutton, "Browser Toolbox already open.", { event: e, hideCheck: true });
-                                }
                                 e.preventDefault();
+                                toolbox.getBrowserToolboxSessionState()
+                                    ? CustomHint.show(toolbarbutton, "Browser Toolbox already open.", { event: e, hideCheck: true })
+                                    : key_browserToolbox.click();
                                 break;
                             case 1:
+                                e.preventDefault();
                                 Services.prefs.getBoolPref("ui.popup.disable_autohide")
-                                    ? CustomHint.show(toolbarbutton, "Letting popups close.", { event: e })
+                                    ? CustomHint.show(toolbarbutton, "Letting popups close.", { event: e, hideCheck: true })
                                     : CustomHint.show(toolbarbutton, "Holding popups open.", { event: e });
                                 Services.prefs.setBoolPref("ui.popup.disable_autohide", !Services.prefs.getBoolPref("ui.popup.disable_autohide"));
                                 break;

@@ -90,8 +90,6 @@ toolbar {
     --ctrlTab-panel-disabled-focused-bgcolor: hsla(240, 8%, 3%, 0.9) !important;
     --ctrlTab-panel-bgcolor: hsla(240, 3%, 4%, 0.9) !important;
     --ctrlTab-panel-focused-bgcolor: hsla(10, 12%, 2%, 0.99) !important;
-    --in-content-page-background: var(--arrowpanel-background) !important;
-    --in-content-page-color: hsl(212.5, 42.9%, 89%) !important;
     --in-content-box-background: hsl(232, 32%, 14%) !important;
     --in-content-box-border-color: rgba(249, 249, 250, 0.1) !important;
     --in-content-button-background: var(--arrowpanel-dimmed) !important;
@@ -103,8 +101,15 @@ toolbar {
     --in-content-border-active: var(--purple-40) !important;
     --in-content-border-active-shadow: var(--purple-40-a30) !important;
     --in-content-category-outline-focus: 1px solid transparent !important;
-    --purple-30: hsl(245, 100%, 70%) !important;
+    --in-content-link-color: var(--purple-35) !important;
+    --in-content-link-color-hover: var(--purple-30) !important;
+    --in-content-link-color-active: var(--purple-30) !important;
+    --in-content-primary-button-background: var(--purple-40) !important;
+    --in-content-primary-button-background-hover: var(--purple-35) !important;
+    --in-content-primary-button-background-active: var(--purple-30) !important;
+    --purple-30: hsl(244, 100%, 70%) !important;
     --purple-30-a50: hsla(240, 100%, 70%, 0.5) !important;
+    --purple-35: hsl(245, 100%, 65%) !important;
     --purple-40: hsl(250, 100%, 60%) !important;
     --purple-40-a10: hsla(250, 100%, 60%, 0.1) !important;
     --purple-40-a30: hsla(250, 100%, 60%, 0.5) !important;
@@ -643,10 +648,9 @@ spacer[part=arrowscrollbox-overflow-end-indicator] {
 }
 
 .ctrlTab-preview-inner {
-    padding: 8px transparent !important;
-    border: 2px solid transparent !important;
-    border-radius: 3px !important;
-/*     box-shadow: none !important; */
+    padding: 10px !important;
+    border: 0px solid transparent !important;
+    border-radius: 5px !important;
     box-shadow: 0 0 4px -1px rgba(0, 0, 0, 0.2), 0 0 25px -2px rgba(0, 0, 0, 0.2) !important;
     background-color: var(--ctrlTab-panel-bgcolor) !important;
 /*     backdrop-filter: blur(10px) !important; */
@@ -654,12 +658,8 @@ spacer[part=arrowscrollbox-overflow-end-indicator] {
 
 .ctrlTab-preview:focus>.ctrlTab-preview-inner {
     background-color: var(--ctrlTab-panel-focused-bgcolor) !important;
-/*     transition: all 0.05s ease 0s !important; */
+    box-shadow: 0 0 4px -1px rgba(0, 0, 0, 0.2), 0 0 25px -2px rgba(0, 0, 0, 0.2), inset 0 0 20px 5px hsla(0, 0%, 0%, 0.5) !important;
 }
-
-/* .ctrlTab-preview>.ctrlTab-preview-inner {
-    transition: all 0.2s ease 0s !important;
-} */
 
 .ctrlTab-canvas > * {
     border-radius: 3px !important;
