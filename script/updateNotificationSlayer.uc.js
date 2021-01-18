@@ -55,6 +55,7 @@
                   this._showBadge(doorhangers[0]);
                   this._showBannerItem(doorhangers[0]);
                   if (doorhangers[0].id === "update-available") {
+                      AppMenuNotifications.dismissNotification("update-available");
                       doorhangers[0].dismissed = true;
                   }
               } else {

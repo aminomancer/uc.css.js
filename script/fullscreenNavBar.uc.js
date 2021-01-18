@@ -7,7 +7,7 @@
     var fwdButton = document.getElementById("forward-button");
     const options = {
         attributes: true,
-        attributeFilter: ["focused"]
+        attributeFilter: ["focused"],
     };
     const observer = new MutationObserver(urlbarCallback);
 
@@ -34,12 +34,15 @@
                     break;
                 } else {
                     navBarContainer.setAttribute("popup-status", "true");
-                };
+                }
+            case "":
+                if (event.target.hasAttribute("menu-api")) {
+                    break;
+                }
             default:
                 navBarContainer.setAttribute("popup-status", "true");
-                // console.log(event.target);
         }
-    };
+    }
 
     function popupHiding(event) {
         switch (event.target.id) {
@@ -64,16 +67,22 @@
                     break;
                 } else {
                     navBarContainer.removeAttribute("popup-status");
-                };
+                }
+            case "":
+                if (event.target.hasAttribute("menu-api")) {
+                    break;
+                }
             default:
                 if (event.target.className != "urlbarView") {
-                    if (event.target.parentElement.tagName != "menu" || event.target.parentElement.parentElement.tagName == "menubar") {
+                    if (
+                        event.target.parentElement.tagName != "menu" ||
+                        event.target.parentElement.parentElement.tagName == "menubar"
+                    ) {
                         navBarContainer.removeAttribute("popup-status");
-                        // console.log(event.target);
                     }
                 }
         }
-    };
+    }
 
     function urlbarCallback(mutationsList, observer) {
         for (let mutation of mutationsList) {
@@ -85,7 +94,7 @@
                 }
             }
         }
-    };
+    }
 
     observer.observe(urlbar, options);
     mainPopupSet.addEventListener("popupshowing", popupShowing, true);

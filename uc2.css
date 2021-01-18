@@ -77,6 +77,9 @@
 #customization-footer menuitem[type="checkbox"] .menu-iconic-text,
 #customization-footer menuitem[type="radio"] .menu-iconic-text,
 #customization-footer menuitem[checked] .menu-iconic-text,
+menupopup[menu-api] menuitem[type="checkbox"] .menu-iconic-text,
+menupopup[menu-api] menuitem[type="radio"] .menu-iconic-text,
+menupopup[menu-api] menuitem[checked] .menu-iconic-text,
 .textbox-contextmenu menuitem[label="Undo"]:not(.menuitem-iconic) .menu-text,
 .textbox-contextmenu menuitem[label="Cut"]:not(.menuitem-iconic) .menu-text,
 .textbox-contextmenu menuitem[label="Copy"]:not(.menuitem-iconic) .menu-text,
@@ -213,7 +216,8 @@
 }
 
 #contentAreaContextMenu menuitem[type="checkbox"]::before,
-#customization-footer menuitem[type="checkbox"]::before {
+#customization-footer menuitem[type="checkbox"]::before,
+menupopup[menu-api] menuitem[type="checkbox"]::before {
     position: relative !important;
     display: inline-block !important;
     width: 16px !important;
@@ -231,7 +235,8 @@
 }
 
 #contentAreaContextMenu menuitem[type="checkbox"][checked="true"]::before,
-#customization-footer menuitem[type="checkbox"][checked="true"]::before {
+#customization-footer menuitem[type="checkbox"][checked="true"]::before,
+menupopup[menu-api] menuitem[type="checkbox"][checked="true"]::before {
     position: relative !important;
     display: inline-block !important;
     width: 16px !important;
@@ -249,13 +254,15 @@
 }
 
 #contentAreaContextMenu menuitem[type="checkbox"] .menu-iconic-left,
-#customization-footer menuitem[type="checkbox"] .menu-iconic-left {
+#customization-footer menuitem[type="checkbox"] .menu-iconic-left,
+menupopup[menu-api] menuitem[type="checkbox"] .menu-iconic-left {
     -moz-appearance: none !important;
     width: 25px !important;
 }
 
 #contentAreaContextMenu menuitem[type="radio"]::before,
-#customization-footer menuitem[type="radio"]::before {
+#customization-footer menuitem[type="radio"]::before,
+menupopup[menu-api] menuitem[type="radio"]::before {
     position: relative !important;
     display: inline-block !important;
     width: 16px !important;
@@ -273,7 +280,8 @@
 }
 
 #contentAreaContextMenu menuitem[type="radio"][checked="true"]::before,
-#customization-footer menuitem[type="radio"][checked="true"]::before {
+#customization-footer menuitem[type="radio"][checked="true"]::before,
+menupopup[menu-api] menuitem[type="radio"][checked="true"]::before {
     position: relative !important;
     display: inline-block !important;
     width: 16px !important;
@@ -291,7 +299,8 @@
 }
 
 #contentAreaContextMenu menuitem[type="radio"] .menu-iconic-left,
-#customization-footer menuitem[type="radio"] .menu-iconic-left {
+#customization-footer menuitem[type="radio"] .menu-iconic-left,
+menupopup[menu-api] menuitem[type="radio"] .menu-iconic-left {
     -moz-appearance: none !important;
     width: 25px !important;
 }
@@ -506,8 +515,9 @@
     margin-left: 6px !important;
     margin-right: -6px !important;
     fill: currentColor !important;
+    fill-opacity: 0.3 !important;
     -moz-context-properties: fill, fill-opacity, stroke !important;
-    content: url("chrome://browser/skin/print.svg") !important;
+    content: url("chrome://devtools/skin/images/command-frames.svg") !important;
 }
 
 #context-printframe:not(.menuitem-iconic)::before,
@@ -523,7 +533,7 @@
     margin-right: -6px !important;
     fill: currentColor !important;
     -moz-context-properties: fill, fill-opacity, stroke !important;
-    content: url("chrome://browser/skin/print.svg") !important;
+    content: url("chrome://global/skin/icons/print.svg") !important;
 }
 
 #context-frameOsPid:not(.menuitem-iconic)::before {

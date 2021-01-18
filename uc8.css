@@ -808,6 +808,64 @@ requires fullscreenNavBar.uc.js to set attributes popup-status and urlbar-status
 
 } */
 
+#DateTimePickerPanel {
+    --arrowpanel-background: var(--in-content-box-background) !important;
+    --arrowpanel-color: hsl(212.5, 42.9%, 89%) !important;
+    --arrowpanel-border-color: var(--in-content-box-background) !important;
+}
+
+@-moz-document url-prefix("chrome://global/content/timepicker.xhtml"),
+    url-prefix("chrome://global/content/datepicker.xhtml") {
+        body {
+            background-color: var(--in-content-box-background) !important;
+        }
+
+        :root {
+            --in-content-page-background: var(--toolbar-bgcolor) !important;
+            --font-color: var(--lwt-toolbar-field-color) !important;
+            --fill-color: var(--arrowpanel-dimmed) !important;
+            --border: none !important;
+            --border-active-color: var(--in-content-link-color-hover) !important;
+            --today-fill-color: var(--lwt-toolbar-field-color) !important;
+            --selected-fill-color: var(--in-content-link-color) !important;
+            --button-fill-color-active: var(--in-content-link-color) !important;
+            --weekend-font-color: var(--urlbar-popup-action-color) !important;
+            scrollbar-width: none !important;
+        }
+
+        * {
+            scrollbar-width: none !important;
+        }
+
+        .month-year {
+            color: var(--font-color) !important;
+        }
+
+        .month-year-view {
+            background-color: var(--in-content-box-background) !important;
+            opacity: 1 !important;
+        }
+
+        .nav > button:is(.prev, .next) {
+            fill-opacity: 0.6 !important;
+        }
+
+        .nav > button:is(.prev, .next):hover {
+            fill-opacity: 1 !important;
+        }
+        
+        .month-year-view .spinner-container {
+            height: 150% !important;
+        }
+        
+        .month-year-view .spinner > div {
+            align-self: center !important;
+            padding-block: calc(var(--spinner-item-height)/5) !important;
+            -moz-box-align: center !important;
+            -moz-box-pack: center !important;
+        }
+}
+
 #pictureInPictureToggleContextMenu {
     display: none !important;
 }

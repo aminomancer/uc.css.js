@@ -151,6 +151,14 @@
         if (outer.nextElementSibling) pickUpOrphans(outer.nextElementSibling);
     }
 
+    async function slowCleanUp() {
+        let array = await convertToArray(widgets);
+        if (array.length) {
+            wrapAll(array, inner);
+        }
+        reOrder();
+    }
+
     /* like pickUpOrphans, but moves ALL nodes rather than only nodes which triggered onWidgetAfterDOMChange. we only use this once, after delayed startup.
     its only job is to check that the order of DOM nodes in the slider container matches the order of widgets in CustomizableUI. and if not, reorder it so that it does match. */
     async function reOrder() {
@@ -327,16 +335,16 @@
     if (gBrowserInit.delayedStartupFinished) {
         CustomizableUI.addListener(cuiListen);
         setTimeout(() => {
-            reOrder();
-        }, 300);
+            slowCleanUp();
+        }, 1000);
     } else {
         let delayedStartupFinished = (subject, topic) => {
             if (topic == "browser-delayed-startup-finished" && subject == window) {
                 Services.obs.removeObserver(delayedStartupFinished, topic);
                 CustomizableUI.addListener(cuiListen);
                 setTimeout(() => {
-                    reOrder.bind(this)();
-                }, 300);
+                    slowCleanUp.bind(this)();
+                }, 1000);
             }
         };
         Services.obs.addObserver(delayedStartupFinished, "browser-delayed-startup-finished");

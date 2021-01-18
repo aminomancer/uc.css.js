@@ -761,11 +761,11 @@ findbar {
 #main-menubar menupopup,
 #new-tab-button-popup,
 #downloadsContextMenu,
+menupopup[menu-api],
 #toolbar-context-menu menupopup,
 #tabContextMenu menupopup,
 #contentAreaContextMenu menupopup,
 #backForwardMenu menupopup,
-#toolbar-context-menu menupopup,
 #placesContext menupopup,
 #pageActionContextMenu menupopup,
 .urlbar-input-box .textbox-contextmenu menupopup,
@@ -778,7 +778,8 @@ findbar {
 #customization-toolbar-menu menupopup,
 #new-tab-button-popup menupopup,
 #new-tab-button menupopup,
-.popup-notification-dropmarker menupopup {
+.popup-notification-dropmarker menupopup,
+menupopup[menu-api] menupopup {
     -moz-appearance: none !important;
     background: hsl(233, 36%, 11%) !important;
     border: none !important;
@@ -815,7 +816,8 @@ findbar {
 #new-tab-button-popup menuseparator,
 #new-tab-button menuseparator,
 .popup-notification-dropmarker menuseparator,
-#downloadsContextMenu menuseparator {
+#downloadsContextMenu menuseparator,
+menupopup[menu-api] menuseparator {
     /*     -moz-appearance: none !important;
     max-height: 1px !important;
     border: none !important;
@@ -848,7 +850,8 @@ findbar {
 #new-tab-button-popup :-moz-any(menuitem, menu),
 #new-tab-button :is(menuitem, menu),
 .popup-notification-dropmarker menupopup :-moz-any(menuitem, menu),
-#downloadsContextMenu :is(menuitem, menu) {
+#downloadsContextMenu :is(menuitem, menu),
+menupopup[menu-api] :is(menuitem, menu) {
     -moz-appearance: none !important;
     color: rgba(255, 255, 255, 0.8) !important;
     padding: 0 0 0 0 !important;
@@ -877,7 +880,8 @@ findbar {
 #new-tab-button-popup :-moz-any(menuitem, menu)[disabled="true"],
 #new-tab-button :-moz-any(menuitem, menu)[disabled="true"],
 .popup-notification-dropmarker menupopup :-moz-any(menuitem, menu)[disabled="true"],
-#downloadsContextMenu :is(menuitem, menu)[disabled="true"] {
+#downloadsContextMenu :is(menuitem, menu)[disabled="true"],
+menupopup[menu-api] :is(menuitem, menu)[disabled="true"] {
     -moz-appearance: none !important;
     color: rgba(255, 255, 255, 0.45) !important;
     background-color: initial !important;
@@ -910,7 +914,8 @@ findbar {
 #new-tab-button-popup menuseparator:not([hidden="true"])+ :-moz-any(menu, menuitem),
 #new-tab-button menuseparator:not([hidden="true"])+ :-moz-any(menu, menuitem),
 .popup-notification-dropmarker menupopup menuseparator:not([hidden="true"])+ :-moz-any(menu, menuitem),
-#downloadsContextMenu menuseparator:not([hidden="true"])+ :-moz-any(menu, menuitem) {
+#downloadsContextMenu menuseparator:not([hidden="true"])+ :-moz-any(menu, menuitem),
+menupopup[menu-api] menuseparator:not([hidden="true"])+ :-moz-any(menu, menuitem) {
     /*     border-top: 1px solid hsla(233, 24%, 28%, 0.47) !important; */
     border-image: linear-gradient(to right, transparent 1%, hsl(233, 25%, 23%) 50%, transparent 99%) !important;
     border-image-slice: 1 !important;
@@ -962,7 +967,8 @@ findbar {
 #new-tab-button-popup :-moz-any(menuitem, menu) image,
 #new-tab-button :is(menuitem, menu) image,
 .popup-notification-dropmarker menupopup :-moz-any(menuitem, menu) image,
-#downloadsContextMenu :is(menuitem, menu) image {
+#downloadsContextMenu :is(menuitem, menu) image,
+menupopup[menu-api] :is(menuitem, menu) image {
     /*     margin: 0 -3px 0 3px; */
     margin-left: 3px;
     margin-right: -3px;
@@ -995,7 +1001,8 @@ findbar {
 #new-tab-button-popup menugroup,
 #new-tab-button menugroup,
 .popup-notification-dropmarker menupopup menugroup,
-#downloadsContextMenu menugroup {
+#downloadsContextMenu menugroup,
+menupopup[menu-api] menugroup {
     padding: 0 !important;
     background-color: transparent !important;
 }
@@ -1022,7 +1029,8 @@ findbar {
 #new-tab-button-popup .menu-right,
 #new-tab-button .menu-right,
 .popup-notification-dropmarker menupopup .menu-right,
-#downloadsContextMenu .menu-right {
+#downloadsContextMenu .menu-right,
+menupopup[menu-api] .menu-right {
     -moz-appearance: none !important;
 /*     padding: 7px !important;
     margin-right: 6px !important;
@@ -1064,7 +1072,8 @@ findbar {
 #new-tab-button-popup :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
 #new-tab-button :is(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
 .popup-notification-dropmarker menupopup :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
-#downloadsContextMenu :is(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]) {
+#downloadsContextMenu :is(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
+menupopup[menu-api] :is(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]) {
     -moz-appearance: none !important;
     background-color: var(--arrowpanel-dimmed) !important;
 }
