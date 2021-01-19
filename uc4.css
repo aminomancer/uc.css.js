@@ -133,6 +133,13 @@ toolbar .toolbarbutton-1:not([disabled]):-moz-any([checked]) > .toolbarbutton-ic
     transition: none !important;
 }
 
+#sanitizeEverythingWarningBox {
+    background-color: Window !important;
+    border: 1px solid hsla(0, 0%, 5%, 0.2) !important;
+    border-radius: 5px;
+    padding: 16px;
+}
+
 #confirmation-hint {
     --arrowpanel-background: hsl(240, 60%, 59%) !important;
     --arrowpanel-border-color: hsl(240, 60%, 59%) !important;
