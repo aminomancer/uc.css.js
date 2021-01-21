@@ -441,8 +441,14 @@ link[href$="global.css"] ~ spacer[part=arrowscrollbox-overflow-end-indicator] {
     filter: grayscale(1) brightness(50);
 }
 
-#_aecec67f-0d10-4fa7-b7c7-609a2db280cf_-browser-action .toolbarbutton-icon {
+.webextension-browser-action[label^="Violentmonkey"] .toolbarbutton-icon {
     list-style-image: url("chrome://devtools/skin/images/command-console.svg");
+    fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
+    fill-opacity: var(--toolbarbutton-icon-fill-opacity) !important;
+}
+
+.webextension-browser-action[label=Stylus] .toolbarbutton-icon {
+    list-style-image: url("chrome://devtools/skin/images/tool-styleeditor.svg");
     fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
     fill-opacity: var(--toolbarbutton-icon-fill-opacity) !important;
 }

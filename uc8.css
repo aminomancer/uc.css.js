@@ -13,6 +13,10 @@
     background-color: hsla(240, 100%, 84%, 0.13) !important;
 }
 
+.all-tabs-item[pending] {
+    opacity: .6;
+}
+
 /* dragging items in places menus */
 :-moz-any(.BMB-special-innerbox, .BMBsmallContentBox) image[part="drop-indicator"] {
     list-style-image: none;

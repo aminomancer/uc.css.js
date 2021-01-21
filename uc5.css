@@ -902,7 +902,7 @@ toolbarbutton[label="GitZip"] .toolbarbutton-icon {
     opacity: 1 !important;
 }
 
-:is(#editBookmarkPanel, .popup-notification-checkbox) .checkbox-check {
+#editBookmarkPanel .checkbox-check {
     -moz-appearance: none !important;
     background-color: transparent !important;
     border: none !important;
@@ -914,11 +914,11 @@ toolbarbutton[label="GitZip"] .toolbarbutton-icon {
     list-style-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNNSAyYy0xLjY1NCAwLTMgMS4zNDYtMyAzdjE0YzAgMS42NTQgMS4zNDYgMyAzIDNoMTRjMS42NTQgMCAzLTEuMzQ2IDMtM3YtMTRjMC0xLjY1NC0xLjM0Ni0zLTMtM2gtMTR6bTE5IDN2MTRjMCAyLjc2MS0yLjIzOCA1LTUgNWgtMTRjLTIuNzYyIDAtNS0yLjIzOS01LTV2LTE0YzAtMi43NjEgMi4yMzgtNSA1LTVoMTRjMi43NjIgMCA1IDIuMjM5IDUgNXoiIGZpbGw9ImNvbnRleHQtZmlsbCIgZmlsbC1vcGFjaXR5PSJjb250ZXh0LWZpbGwtb3BhY2l0eSIvPjwvc3ZnPg==") !important;
 }
 
-:is(#editBookmarkPanel checkbox, .popup-notification-checkbox):hover>.checkbox-check {
+#editBookmarkPanel checkbox:hover>.checkbox-check {
     opacity: 1 !important;
 }
 
-:is(#editBookmarkPanel, .popup-notification-checkbox) .checkbox-check[checked="true"] {
+#editBookmarkPanel .checkbox-check[checked="true"] {
     -moz-appearance: none !important;
     background-color: transparent !important;
     border: none !important;
@@ -935,3 +935,60 @@ toolbarbutton[label="GitZip"] .toolbarbutton-icon {
 #editBookmarkPanel html {
     height: 120px !important;
 }
+
+/* popupnotification checkbox .checkbox-check {
+    -moz-appearance: none !important;
+    margin-inline-end: 4px !important;
+    background-color: transparent !important;
+    border: none !important;
+    -moz-context-properties: fill, fill-opacity !important;
+    fill: currentColor !important;
+    min-width: 12px !important;
+    width: 12.5px !important;
+    opacity: 0.8 !important;
+    list-style-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNNSAyYy0xLjY1NCAwLTMgMS4zNDYtMyAzdjE0YzAgMS42NTQgMS4zNDYgMyAzIDNoMTRjMS42NTQgMCAzLTEuMzQ2IDMtM3YtMTRjMC0xLjY1NC0xLjM0Ni0zLTMtM2gtMTR6bTE5IDN2MTRjMCAyLjc2MS0yLjIzOCA1LTUgNWgtMTRjLTIuNzYyIDAtNS0yLjIzOS01LTV2LTE0YzAtMi43NjEgMi4yMzgtNSA1LTVoMTRjMi43NjIgMCA1IDIuMjM5IDUgNXoiIGZpbGw9ImNvbnRleHQtZmlsbCIgZmlsbC1vcGFjaXR5PSJjb250ZXh0LWZpbGwtb3BhY2l0eSIvPjwvc3ZnPg==") !important;
+}
+
+popupnotification checkbox:hover>.checkbox-check {
+    opacity: 1 !important;
+}
+
+popupnotification checkbox .checkbox-check[checked="true"] {
+    -moz-appearance: none !important;
+    list-style-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTAuMDQxIDE3bC00LjUtNC4zMTkgMS4zOTUtMS40MzUgMy4wOCAyLjkzNyA3LjAyMS03LjE4MyAxLjQyMiAxLjQwOS04LjQxOCA4LjU5MXptLTUuMDQxLTE1Yy0xLjY1NCAwLTMgMS4zNDYtMyAzdjE0YzAgMS42NTQgMS4zNDYgMyAzIDNoMTRjMS42NTQgMCAzLTEuMzQ2IDMtM3YtMTRjMC0xLjY1NC0xLjM0Ni0zLTMtM2gtMTR6bTE5IDN2MTRjMCAyLjc2MS0yLjIzOCA1LTUgNWgtMTRjLTIuNzYyIDAtNS0yLjIzOS01LTV2LTE0YzAtMi43NjEgMi4yMzgtNSA1LTVoMTRjMi43NjIgMCA1IDIuMjM5IDUgNXoiIGZpbGw9ImNvbnRleHQtZmlsbCIgZmlsbC1vcGFjaXR5PSJjb250ZXh0LWZpbGwtb3BhY2l0eSIvPjwvc3ZnPg==") !important;
+} */
+
+popupnotification checkbox .checkbox-check {
+	appearance: none !important;
+    min-width: 10px !important;
+    min-height: 10px !important;
+	width: 13px;
+	height: 13px;
+    margin-inline-end: 4px !important;
+	padding: 0.5px;
+	border: 1px solid var(--in-content-box-border-color);
+	border-radius: 2px;
+	margin: 0;
+	background-color: var(--arrowpanel-dimmed);
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+popupnotification checkbox .checkbox-check[checked] {
+    list-style-image: url("chrome://global/skin/icons/check.svg");
+    -moz-context-properties: fill, fill-opacity !important;
+    fill: currentColor;
+    color: hsl(0, 0%, 100%);
+    background-color: var(--purple-35);
+}
+
+popupnotification checkbox:hover .checkbox-check:not(:disabled) {
+	background-color: var(--arrowpanel-darker);
+}
+
+popupnotification checkbox:hover .checkbox-check[checked]:not(:disabled) {
+	background-color: var(--purple-45);
+}
+
+
+

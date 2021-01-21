@@ -57,6 +57,7 @@ toolbar {
     --lwt-toolbarbutton-icon-fill: hsl(0, 0%, 100%) !important;
     --arrowpanel-background: hsl(233, 36%, 11%);
     --arrowpanel-color: hsl(213, 43%, 89%);
+    --arrowpanel-darker: hsla(236, 70%, 73%, 0.17) !important;
     --arrowpanel-dimmed: hsla(236, 100%, 83%, 0.17) !important;
     --arrowpanel-dimmed-further: hsla(236, 100%, 83%, 0.25) !important;
     --arrowpanel-dimmed-even-further: hsla(236, 100%, 85%, 0.3) !important;
@@ -113,6 +114,7 @@ toolbar {
     --purple-40: hsl(250, 100%, 60%) !important;
     --purple-40-a10: hsla(250, 100%, 60%, 0.1) !important;
     --purple-40-a30: hsla(250, 100%, 60%, 0.5) !important;
+    --purple-45: hsl(250, 90%, 55%) !important;
     --purple-50: hsl(256, 100%, 50%) !important;
     --purple-50-a30: hsla(256, 100%, 50%, 0.3) !important;
     --purple-60: hsl(258, 100%, 40%) !important;
