@@ -164,7 +164,7 @@
                         autoHide = "ui.popup.disable_autohide",
                         toolbarbutton = aDoc.createElementNS(
                             "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul",
-                            "toolbarbutton"
+                            "toolbaritem"
                         ),
                         animBox = document.createElementNS(
                             "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul",
@@ -256,11 +256,11 @@
                     }
                     for (const key in attr) toolbarbutton.setAttribute(key, attr[key]);
 
-                    animBox.className = "toolbarbutton-animatable-box";
-                    icon.className = "toolbarbutton-animatable-image";
+                    animBox.className = "toolbarbutton-icon";
+                    icon.className = "toolbarbutton-animation";
                     icon.src = toolboxURL;
-                    animBox.style.cssText = `display: block; position: relative; margin-inline-start: -28px; top: calc(50% - 14px); width: calc(2 * var(--toolbarbutton-inner-padding) + 16px); height: calc(2 * var(--toolbarbutton-inner-padding) + 16px);`;
-                    icon.style.cssText = `min-height: 28px; min-width: 28px; position: relative; overflow: visible; padding: var(--toolbarbutton-inner-padding); transition: 50ms ease-in-out fill`;
+                    animBox.style.cssText = `-moz-box-pack: center;`;
+                    icon.style.cssText = `height: 16px; width: 16px; transition: fill 50ms ease-in-out 0s;`;
                     toolbarbutton.appendChild(animBox);
                     animBox.appendChild(icon);
 
@@ -286,3 +286,5 @@
             });
         } catch (e) {}
 })();
+
+// gNavToolbox.palette

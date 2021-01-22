@@ -572,7 +572,7 @@ tabmodalprompt .checkbox-check[checked="true"] {
 
 #urlbar[breakout][breakout-extend],
 #urlbar[breakout][breakout-extend-disabled][open] {
-    top: 3px !important;
+    top: calc((var(--urlbar-toolbar-height) - var(--urlbar-height)) / 2) !important;
     left: 0px !important;
     width: calc(100% + 50px) !important;
     height: auto !important;
@@ -847,7 +847,7 @@ tabmodalprompt .checkbox-check[checked="true"] {
 
 /* search one offs visible when pageproxystate=invalid even if urlbar is not focused */
 #urlbar .urlbarView {
-    top: 3.4px !important;
+    top: calc(0.5px + (var(--urlbar-toolbar-height) - var(--urlbar-height)) / 2) !important;
     margin: 0 !important;
     width: calc(100% + 6px) !important;
     left: -3px !important;
