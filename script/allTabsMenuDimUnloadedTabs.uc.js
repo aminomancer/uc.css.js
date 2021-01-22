@@ -41,9 +41,11 @@
     }
 
     function start() {
-        gTabsPanel.init();
-        gTabsPanel.allTabsView.addEventListener("ViewShowing", setOpacity);
-        document.getElementById("tabContextMenu").addEventListener("command", contextCmd, true);
+        setTimeout(() => {
+            gTabsPanel.init();
+            gTabsPanel.allTabsView.addEventListener("ViewShowing", setOpacity);
+            document.getElementById("tabContextMenu").addEventListener("command", contextCmd, true);
+        }, 1000);
     }
 
     if (gBrowserInit.delayedStartupFinished) {

@@ -28,6 +28,7 @@
             case "tracking-protection-icon-tooltip":
             case "tabbrowser-tab-tooltip":
             case "pageActionContextMenu":
+            case "confirmation-hint":
                 break;
             case "backForwardMenu":
                 if (backButton.disabled == true && fwdButton.disabled == true) {
@@ -61,6 +62,7 @@
             case "tracking-protection-icon-tooltip":
             case "tabbrowser-tab-tooltip":
             case "pageActionContextMenu":
+            case "confirmation-hint":
                 break;
             case "backForwardMenu":
                 if (backButton.disabled == true && fwdButton.disabled == true) {
