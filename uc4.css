@@ -75,9 +75,14 @@ toolbar {
     --urlbar-input-bgcolor-even-brighter: hsla(233, 21%, 31%, 1) !important;
     --tooltip-dark: hsl(234, 39%, 10%);
     --badge-color-dark: hsl(236, 13%, 42%);
-    --tab-hover: linear-gradient(0deg, hsl(231, 42%, 15%), hsl(233, 61%, 8%));
+/*     --tab-hover: linear-gradient(0deg, hsl(231, 42%, 15%), hsl(233, 61%, 8%));
     --tab-pinned: linear-gradient(0deg, hsl(231, 50%, 11%), hsl(232, 70%, 6%));
-    --tab-multi: linear-gradient(0deg, hsl(231, 42%, 15%), hsl(232, 70%, 6%));
+    --tab-multi: linear-gradient(0deg, hsl(231, 42%, 15%), hsl(232, 70%, 6%)); */
+    --tab-hover: linear-gradient(180deg, hsl(231, 47%, 11%), hsl(233, 55%, 8%));
+    --tab-pinned: linear-gradient(0deg, hsl(231, 50%, 11%), hsl(232, 70%, 6%));
+    --tab-multi: linear-gradient(180deg, hsl(231, 50%, 11%), hsl(233, 53%, 8%));
+    --tab-multi-hover: linear-gradient(180deg, hsl(231, 47%, 13%), hsl(233, 51%, 10%));
+    --tab-pinned-hover: linear-gradient(0deg, hsl(231, 42%, 15%), hsl(233, 61%, 8%));
     --search-box-color: hsl(229, 32%, 23%);
     --search-box-focus: hsl(229, 27%, 27%);
     --search-box-null: hsl(230, 30%, 20%);
@@ -419,6 +424,10 @@ treechildren::-moz-tree-row(selected, current, focus) {
     z-index: 2 !important;
 }
 
+#nav-bar {
+    z-index: 5 !important;
+}
+
 /* .sidebar-placesTreechildren treechildren::-moz-tree-cell:active {
     -moz-appearance: none !important;
     background-color: rgb(70, 74, 107) !important;
@@ -470,24 +479,36 @@ treechildren::-moz-tree-row(selected, current, focus) {
 #TabsToolbar .tabbrowser-tab .tab-stack,
 #TabsToolbar .tabbrowser-tab .tab-background,
 #TabsToolbar .tabbrowser-tab .tab-content {
-    border-top-right-radius: 0px !important;
-    border-top-left-radius: 5px !important;
+    border-top-right-radius: 0px;
+    border-top-left-radius: 5px;
     overflow: hidden;
 }
 
 /* selected tab top border roundness */
-#TabsToolbar .tabbrowser-tab[selected],
-#TabsToolbar .tabbrowser-tab[selected] .tab-stack,
-#TabsToolbar .tabbrowser-tab[selected] .tab-background,
-#TabsToolbar .tabbrowser-tab[selected] .tab-content {
-    border-top-right-radius: 5px !important;
-    border-top-left-radius: 5px !important;
+#TabsToolbar .tabbrowser-tab[selected]:not([multiselected]),
+#TabsToolbar .tabbrowser-tab[selected]:not([multiselected]) .tab-stack,
+#TabsToolbar .tabbrowser-tab[selected]:not([multiselected]) .tab-background,
+#TabsToolbar .tabbrowser-tab[selected]:not([multiselected]) .tab-content {
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
     overflow: hidden;
 }
 
+#TabsToolbar .tabbrowser-tab[selected][pinned][multiselected],
+#TabsToolbar .tabbrowser-tab[selected][pinned][multiselected] .tab-stack,
+#TabsToolbar .tabbrowser-tab[selected][pinned][multiselected] .tab-background {
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+#TabsToolbar .tabbrowser-tab[multiselected]:not([pinned]) .tab-stack,
+#TabsToolbar .tabbrowser-tab[multiselected]:not([pinned]) .tab-background {
+    border-radius: 0 !important;
+}
+
 #TabsToolbar .tabs-newtab-button {
-    border-top-left-radius: var(--default_tab_border_roundness) !important;
-    border-top-right-radius: var(--default_tab_border_roundness) !important;
+    border-top-left-radius: var(--default_tab_border_roundness);
+    border-top-right-radius: var(--default_tab_border_roundness);
 }
 
 /* hide tab separators */
@@ -510,7 +531,7 @@ Delete this rule if you want separators between background tabs */
 #TabsToolbar .tabbrowser-tab:not([selected]):hover .tab-stack,
 #TabsToolbar .tabbrowser-tab:not([selected]):hover .tab-background,
 #TabsToolbar .tabbrowser-tab:not([selected]):hover .tab-content {
-    border-top-right-radius: 5px !important;
+    border-top-right-radius: 5px;
 }
 
 #TabsToolbar .tabbrowser-tab[last-visible-tab],
@@ -521,7 +542,7 @@ Delete this rule if you want separators between background tabs */
 #TabsToolbar .tabbrowser-tab[last-visible-tab]:hover .tab-stack,
 #TabsToolbar .tabbrowser-tab[last-visible-tab]:hover .tab-background,
 #TabsToolbar .tabbrowser-tab[last-visible-tab]:hover .tab-content {
-    border-top-right-radius: 1px !important;
+    border-top-right-radius: 0 !important;
 }
 
 /* #tabbrowser-tabs > .tabbrowser-arrowscrollbox > scrollbox {
@@ -550,12 +571,12 @@ Delete this rule if you want separators between background tabs */
     border-top-left-radius: 0px !important;
 }
 
-#TabsToolbar .tabbrowser-tab[usercontextid] .tab-stack,
+/* #TabsToolbar .tabbrowser-tab[usercontextid] .tab-stack,
 #TabsToolbar .tabbrowser-tab[usercontextid] .tab-content,
 #TabsToolbar .tabbrowser-tab[usercontextid] .tab-background,
 #TabsToolbar .tabbrowser-tab[usercontextid] {
     border-top-right-radius: 5px !important;
-}
+} */
 
 /* .tabbrowser-tab:-moz-window-inactive .tab-icon-image {
     opacity: 0.8 !important;

@@ -6,8 +6,16 @@
 // @updateURL    https://github.com/aminomancer/uc.css.js/tree/master/script/updateNotificationSlayer.uc.js
 // ==/UserScript==
 
-(() => {
-    function init() {
+(async () => {
+    /**
+    * pause execution for ms milliseconds
+    * @param {int} ms (milliseconds)
+    */
+    function sleep(ms) {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+    }
+    async function init() {
+        await sleep(30000);
         PanelUI._updateNotifications = function _updateNotifications(notificationsChanged) {
             let notifications = this._notifications;
             if (!notifications || !notifications.length) {
@@ -70,6 +78,7 @@
           }
     }
 
+    await sleep(1000);
     // wait until PanelUI is initialized before fucking with it
     if (gBrowserInit.delayedStartupFinished) {
         init();

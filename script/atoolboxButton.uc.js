@@ -198,7 +198,7 @@
                                 toolbox.getBrowserToolboxSessionState()
                                     ? CustomHint.show(
                                           toolbarbutton,
-                                          "Browser Toolbox already open.",
+                                          "Browser Toolbox is already open.",
                                           { event: e, hideCheck: true }
                                       )
                                     : key_browserToolbox.click();

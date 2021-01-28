@@ -38,7 +38,7 @@ tooltip,
         "xml-stylesheet",
         'type="text/css" href="data:text/css,' + encodeURIComponent(style) + '"'
     );
-    custom_tooltips.init();
+    // custom_tooltips.init();
     document.insertBefore(sspi, document.documentElement);
     sspi.getAttribute = function (name) {
         return document.documentElement.getAttribute(name);

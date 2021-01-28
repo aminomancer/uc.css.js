@@ -6,7 +6,7 @@
             buttons = oneOffs.buttons,
             buttonsList = buttons.children;
         container.style.cssText =
-            "display: -moz-box !important; -moz-box-align: center !important; max-width: 352px; scrollbar-width: none; box-sizing: border-box; scroll-behavior: smooth !important; overflow: hidden !important";
+            "display: -moz-box !important; -moz-box-align: center !important; max-width: 270px; scrollbar-width: none; box-sizing: border-box; scroll-behavior: smooth !important; overflow: hidden !important";
         container.setAttribute("smoothscroll", "true");
         container.setAttribute("clicktoscroll", "true");
         container.setAttribute("overflowing", "true");
@@ -25,7 +25,9 @@
         };
 
         container.lineScrollAmount = function () {
-            return buttonsList.length && this.scrollLeftMax / buttonsList.length;
+            return buttonsList.length
+                ? Math.round(buttons.scrollWidth * 0.1) / 0.1 / buttonsList.length
+                : 30;
         };
 
         container.on_Scroll = function (event) {

@@ -131,9 +131,12 @@
 
 /* .tabbrowser-tab:not([selected]):hover .tab-content,
 .tabbrowser-tab:not([selected]):hover .tab-background-inner, */
-.tabbrowser-tab:not([selected]):hover .tab-background,
-.tabbrowser-tab:not([selected])[pinned]:hover .tab-background {
+.tabbrowser-tab:not([selected]):hover .tab-background {
     background: var(--tab-hover) !important;
+}
+
+.tabbrowser-tab:not([selected])[pinned]:hover .tab-background {
+    background: var(--tab-pinned-hover) !important;
 }
 
 .tabbrowser-tab:not([selected]):not(:hover):not([pinned]) .tab-background {
@@ -158,11 +161,13 @@
     box-shadow: 0px 0px 11px 0px hsla(0, 0%, 0%, 0.35) !important;
 }
 
-.tabbrowser-tab[multiselected=true]:not([selected]):not(:hover) .tab-background,
-.tabbrowser-tab[multiselected=true]:not([selected]):not(:hover) .tab-background-inner,
-.tabbrowser-tab[multiselected=true]:not([selected])[pinned]:not(:hover) .tab-background,
-.tabbrowser-tab[multiselected=true]:not([selected])[pinned]:not(:hover) .tab-background-inner {
+.tabbrowser-tab[multiselected]:not([selected], [pinned], :hover) .tab-background,
+.tabbrowser-tab[multiselected]:not([selected], [pinned], :hover) .tab-background-inner {
     background: var(--tab-multi) !important;
+}
+
+.tabbrowser-tab[multiselected]:not([selected], [pinned]):hover .tab-background {
+    background: var(--tab-multi-hover) !important;
 }
 
 .tab-background[multiselected="true"]:not([selected="true"]) > .tab-background-inner {
@@ -357,19 +362,30 @@ toolbarspring {
     background-color: var(--toolbarbutton-active-background) !important;
 }
 
+#back-button, #forward-button, #stop-reload-button {
+    appearance: none !important;
+    margin: 0 !important;
+    padding: 0 var(--toolbarbutton-outer-padding) !important;
+    -moz-box-pack: center !important;
+}
+
 
 /* Remove pre-padding */
 
-:root:not([uidensity="compact"]) #back-button {
+/* :root:not([uidensity="compact"]) #back-button {
     padding-inline-start: 5px !important;
+} */
+
+#nav-bar-customization-target {
+    padding-left: 2px !important;
 }
 
-:root:not([uidensity="compact"]) #back-button,
+/* :root:not([uidensity="compact"]) #back-button,
 :root:not([uidensity="compact"]) #forward-button,
 :root:not([uidensity="compact"]) #stop-reload-button>.toolbarbutton-1 {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-}
+    ! padding-top: 0 !important;
+    ! padding-bottom: 0 !important;
+} */
 
 /* :root:not([uidensity="compact"]) #back-button>.toolbarbutton-icon,
 :root:not([uidensity="compact"]) #forward-button>.toolbarbutton-icon,
@@ -379,8 +395,16 @@ toolbarspring {
     height: calc(2 * var(--toolbarbutton-inner-padding) + 21px) !important;
 } */
 
-:root:not([uidensity="compact"]) #stop-reload-button {
-    margin-inline-start: -1.5px !important;
+:root:not([uidensity="compact"]) #nav-bar-customization-target > :is(#stop-reload-button, #wrapper-stop-reload-button) {
+    margin-inline: -2px !important;
+}
+
+#stop-reload-button {
+    pointer-events: none !important;
+}
+
+#stop-reload-button>* {
+    pointer-events: auto !important;
 }
 
 /* navbar shadow */
@@ -964,12 +988,12 @@ toolbar .toolbarbutton-1:not([disabled="true"]):not([checked]):not([open]):not(:
 }
 
 .searchbar-engine-one-off-item {
-    min-width: 28px !important;
-    height: 28px !important;
+    min-width: 27px !important;
+    height: 27px !important;
     padding: 0 !important;
     border-radius: 3px !important;
     margin-top: 1.5px !important;
-    margin-left: 2.2px !important;
+    margin-left: 2px !important;
     margin-right: 1px !important;
     background-size: 0px !important;
     position: relative !important;

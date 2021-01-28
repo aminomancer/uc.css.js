@@ -45,7 +45,7 @@ treechildren::-moz-tree-drop-feedback {
 }
 
 #TabsToolbar .tabbrowser-tab[multiselected="true"] .tab-bottom-line {
-    min-height: 1.6px !important;
+    min-height: 1px !important;
     background-color: hsl(241, 50%, 51%) !important;
 }
 
@@ -1361,5 +1361,16 @@ requires fullscreenNavBar.uc.js to set attributes popup-status and urlbar-status
             color: var(--in-content-page-color) !important;
         }
 }
+
+#TabsToolbar .tabbrowser-tab {
+    border-radius: 0 !important;
+    background-color: var(--lwt-accent-color) !important;
+}
+
+#TabsToolbar .tabbrowser-tab[multiselected]:not([pinned]) .tab-background {
+    border-top-left-radius: 5px !important;
+    border-top-right-radius: 5px !important;
+}
+
 
 

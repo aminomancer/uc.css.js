@@ -708,7 +708,7 @@ tabmodalprompt .checkbox-check[checked="true"] {
     position: absolute !important;
     top: -35px !important;
     right: 0px !important;
-    max-width: 278px !important;
+    max-width: 270px !important;
 /*     overflow-x: scroll !important; */
     scroll-behavior: smooth !important;
     scrollbar-width: none !important;
@@ -716,7 +716,7 @@ tabmodalprompt .checkbox-check[checked="true"] {
     left: auto !important;
     cursor: default !important;
     box-sizing: border-box !important;
-    padding-left: 30px !important;
+    padding-left: 31.4px !important;
     border-right: 3px solid transparent !important;
 }
 
@@ -738,10 +738,14 @@ tabmodalprompt .checkbox-check[checked="true"] {
 
 #urlbar[usertyping="true"] #urlbar-input {
     position: relative !important;
-    margin-right: 268px !important;
+    margin-right: 240px !important;
     padding-right: 1px !important;
     height: 33px !important;
     background-color: var(--lwt-toolbar-field-background-color, rgba(255, 255, 255, 0.8));
+}
+
+#urlbar[textoverflow][usertyping="true"] #urlbar-input {
+    margin-right: 258px !important;
 }
 
 #urlbar .search-one-offs {
@@ -758,8 +762,36 @@ tabmodalprompt .checkbox-check[checked="true"] {
 #urlbar[usertyping="true"] .search-one-offs,
 #urlbar[searchmode] .search-one-offs {
     opacity: 1 !important;
-    pointer-events: auto !important;
-/*     overflow-x: scroll !important; */
+/*     pointer-events: none !important; */
+}
+
+.urlbar-input-box {
+    cursor: text !important;
+}
+
+#userContext-icons, #userContext-icons>* {
+    pointer-events: none !important;
+}
+
+#page-action-buttons {
+    pointer-events: none !important;
+    transition: opacity 0.05s ease-in-out !important;
+}
+
+#urlbar[searchmode] #page-action-buttons * {
+    pointer-events: none !important;
+}
+
+#urlbar[searchmode] #page-action-buttons {
+    opacity: 0 !important;
+}
+
+#urlbar:not([usertyping]) #pageActionButton {
+	display: -moz-inline-box !important;
+}
+
+#urlbar:not([usertyping]) #star-button-box {
+	display: -moz-box !important;
 }
 
 #urlbar[usertyping="true"] .search-one-offs *,

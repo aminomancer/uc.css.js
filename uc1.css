@@ -2,6 +2,10 @@
     z-index: 5555
 }
 
+:root {
+    --min-tab-height: 35px !important;
+}
+
 .tabbrowser-tab {
     min-height: 35px !important;
 }
@@ -114,6 +118,14 @@ link[href$="global.css"] ~ spacer[part=arrowscrollbox-overflow-end-indicator] {
     right: 90px !important;
     left: auto !important;
     top: 9px !important;
+    height: unset !important;
+    overflow: visible !important;
+}
+
+:root #toolbar-menubar[inactive="true"] {
+    opacity: 0 !important;
+    height: 0 !important;
+    pointer-events: none !important;
 }
 
 :root[sizemode="normal"] #toolbar-menubar:not([inactive])>.titlebar-buttonbox-container {
@@ -170,6 +182,14 @@ link[href$="global.css"] ~ spacer[part=arrowscrollbox-overflow-end-indicator] {
 
 :root[inFullscreen] #toolbar-menubar:not([inactive]) ~ #TabsToolbar .toolbar-items {
     margin-right: 292.5px !important;
+}
+
+:root #toolbar-menubar:not([inactive]) ~ #TabsToolbar .titlebar-buttonbox-container {
+    visibility: collapse !important;
+}
+
+:root #toolbar-menubar:not([inactive]) ~ #TabsToolbar > .toolbar-items ~ .titlebar-spacer {
+    visibility: collapse !important;
 }
 
 #toolbar-menubar #menubar-items,
@@ -354,7 +374,7 @@ link[href$="global.css"] ~ spacer[part=arrowscrollbox-overflow-end-indicator] {
 }
 
 #_af37054b-3ace-46a2-ac59-709e4412bec6_-browser-action .toolbarbutton-icon {
-    list-style-image: url("chrome://browser/skin/search-glass.svg") !important;
+    list-style-image: url("chrome://global/skin/icons/search-glass.svg") !important;
     fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
 }
 

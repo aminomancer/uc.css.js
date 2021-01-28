@@ -62,8 +62,11 @@
                     : matchesIndicator.removeAttribute("empty"); // bring it back if it's not blank.
             }
 
-            function exitFindBar(event) {
-                if (event.code === "KeyF" && (event.ctrlKey || event.metaKey)) {
+            function exitFindBar(e) {
+                if (e.repeat || e.shiftKey || e.altKey) {
+                    return;
+                }
+                if (e.code === "KeyF" && (e.ctrlKey || e.metaKey)) {
                     if (this.hidden) return; // if it's already hidden then let the built-in command open it.
                     let field = this._findField;
                     try {
@@ -79,7 +82,7 @@
                         // in which case it's probably not open. it definitely exists though, since this event listener can't exist in the first place unless the findbar object exists. so just try opening it
                         this.open(0);
                     }
-                    event.preventDefault();
+                    e.preventDefault();
                 }
             }
 
