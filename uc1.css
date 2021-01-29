@@ -32,9 +32,9 @@
     margin-left: -2px !important;
 }
 
-.tabbrowser-tab:not([pinned]) {
+/* .tabbrowser-tab:not([pinned]) {
     min-width: 76px !important;
-}
+} */
 
 .tabbrowser-scroll-arrow-hide {
     display: none !important;

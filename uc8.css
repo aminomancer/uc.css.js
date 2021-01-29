@@ -173,7 +173,7 @@ requires fullscreenNavBar.uc.js to set attributes popup-status and urlbar-status
     padding-top: 200px !important;
     margin-top: -200px !important;
     top: 0 !important;
-    transition: all .2s ease-in-out 0s !important;
+    transition: margin-top .2s ease-in-out 0s !important;
     transition-delay: 0s !important;
     transform-style: preserve-3d !important;
     backface-visibility: hidden !important;
