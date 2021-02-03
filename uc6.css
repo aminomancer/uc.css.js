@@ -761,7 +761,7 @@ findbar {
 #new-tab-button-popup,
 #downloadsContextMenu,
 menupopup[menu-api],
-menupopup[context="placesContext"],
+#PlacesToolbar menupopup,
 #toolbar-context-menu menupopup,
 #tabContextMenu menupopup,
 #contentAreaContextMenu menupopup,
@@ -779,8 +779,7 @@ menupopup[context="placesContext"],
 #new-tab-button-popup menupopup,
 #new-tab-button menupopup,
 .popup-notification-dropmarker menupopup,
-menupopup[menu-api] menupopup,
-menupopup[context="placesContext"] menupopup {
+menupopup[menu-api] menupopup {
     -moz-appearance: none !important;
     background: hsl(233, 36%, 11%) !important;
     border: none !important;
@@ -819,7 +818,7 @@ menupopup[context="placesContext"] menupopup {
 .popup-notification-dropmarker menuseparator,
 #downloadsContextMenu menuseparator,
 menupopup[menu-api] menuseparator,
-menupopup[context="placesContext"] menuseparator {
+#PlacesToolbar menupopup menuseparator {
     /*     -moz-appearance: none !important;
     max-height: 1px !important;
     border: none !important;
@@ -854,7 +853,7 @@ menupopup[context="placesContext"] menuseparator {
 .popup-notification-dropmarker menupopup :-moz-any(menuitem, menu),
 #downloadsContextMenu :is(menuitem, menu),
 menupopup[menu-api] :is(menuitem, menu),
-menupopup[context="placesContext"] :is(menuitem, menu) {
+#PlacesToolbar menupopup :is(menuitem, menu) {
     -moz-appearance: none !important;
     color: rgba(255, 255, 255, 0.8) !important;
     padding: 0 0 0 0 !important;
@@ -885,7 +884,7 @@ menupopup[context="placesContext"] :is(menuitem, menu) {
 .popup-notification-dropmarker menupopup :-moz-any(menuitem, menu)[disabled="true"],
 #downloadsContextMenu :is(menuitem, menu)[disabled="true"],
 menupopup[menu-api] :is(menuitem, menu)[disabled="true"],
-menupopup[context="placesContext"] :is(menuitem, menu)[disabled="true"] {
+#PlacesToolbar menupopup :is(menuitem, menu)[disabled="true"] {
     -moz-appearance: none !important;
     color: rgba(255, 255, 255, 0.45) !important;
     background-color: initial !important;
@@ -920,7 +919,7 @@ menupopup[context="placesContext"] :is(menuitem, menu)[disabled="true"] {
 .popup-notification-dropmarker menupopup menuseparator:not([hidden="true"])+ :-moz-any(menu, menuitem),
 #downloadsContextMenu menuseparator:not([hidden="true"])+ :-moz-any(menu, menuitem),
 menupopup[menu-api] menuseparator:not([hidden="true"])+ :-moz-any(menu, menuitem),
-menupopup[context="placesContext"] menuseparator:not([hidden="true"])+ :-moz-any(menu, menuitem) {
+#PlacesToolbar menupopup menuseparator:not([hidden="true"])+ :-moz-any(menu, menuitem) {
     /*     border-top: 1px solid hsla(233, 24%, 28%, 0.47) !important; */
     border-image: linear-gradient(to right, transparent 1%, hsl(233, 25%, 23%) 50%, transparent 99%) !important;
     border-image-slice: 1 !important;
@@ -974,7 +973,7 @@ menupopup[context="placesContext"] menuseparator:not([hidden="true"])+ :-moz-any
 .popup-notification-dropmarker menupopup :-moz-any(menuitem, menu) image,
 #downloadsContextMenu :is(menuitem, menu) image,
 menupopup[menu-api] :is(menuitem, menu) image,
-menupopup[context="placesContext"] :is(menuitem, menu) image {
+#PlacesToolbar menupopup :is(menuitem, menu) image {
     /*     margin: 0 -3px 0 3px; */
     margin-left: 3px;
     margin-right: -3px;
@@ -1009,7 +1008,7 @@ menupopup[context="placesContext"] :is(menuitem, menu) image {
 .popup-notification-dropmarker menupopup menugroup,
 #downloadsContextMenu menugroup,
 menupopup[menu-api] menugroup,
-menupopup[context="placesContext"] menugroup {
+#PlacesToolbar menupopup menugroup {
     padding: 0 !important;
     background-color: transparent !important;
 }
@@ -1038,7 +1037,7 @@ menupopup[context="placesContext"] menugroup {
 .popup-notification-dropmarker menupopup .menu-right,
 #downloadsContextMenu .menu-right,
 menupopup[menu-api] .menu-right,
-menupopup[context="placesContext"] .menu-right {
+#PlacesToolbar menupopup .menu-right {
     -moz-appearance: none !important;
 /*     padding: 7px !important;
     margin-right: 6px !important;
@@ -1082,7 +1081,7 @@ menupopup[context="placesContext"] .menu-right {
 .popup-notification-dropmarker menupopup :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
 #downloadsContextMenu :is(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
 menupopup[menu-api] :is(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
-menupopup[context="placesContext"] :is(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]) {
+#PlacesToolbar menupopup :is(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]) {
     -moz-appearance: none !important;
     background-color: var(--arrowpanel-dimmed) !important;
 }
