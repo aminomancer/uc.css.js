@@ -68,10 +68,6 @@ treechildren::-moz-tree-drop-feedback {
     display: none !important;
 }
 
-#TabsToolbar {
-    background-color: var(--lwt-accent-color) !important;
-}
-
 :root:not([sizemode="normal"]) :-moz-any(#TabsToolbar, #nav-bar, #PersonalToolbar) {
     -moz-window-dragging: no-drag !important;
 }

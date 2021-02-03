@@ -80,6 +80,12 @@
 menupopup[menu-api] menuitem[type="checkbox"] .menu-iconic-text,
 menupopup[menu-api] menuitem[type="radio"] .menu-iconic-text,
 menupopup[menu-api] menuitem[checked] .menu-iconic-text,
+menupopup[context="placesContext"] menuitem[type="checkbox"] .menu-iconic-text,
+menupopup[context="placesContext"] menuitem[type="radio"] .menu-iconic-text,
+menupopup[context="placesContext"] menuitem[checked] .menu-iconic-text,
+menupopup#placesContext menuitem[type="checkbox"] .menu-iconic-text,
+menupopup#placesContext menuitem[type="radio"] .menu-iconic-text,
+menupopup#placesContext menuitem[checked] .menu-iconic-text,
 .textbox-contextmenu menuitem[label="Undo"]:not(.menuitem-iconic) .menu-text,
 .textbox-contextmenu menuitem[label="Cut"]:not(.menuitem-iconic) .menu-text,
 .textbox-contextmenu menuitem[label="Copy"]:not(.menuitem-iconic) .menu-text,
@@ -217,7 +223,9 @@ menupopup[menu-api] menuitem[checked] .menu-iconic-text,
 
 #contentAreaContextMenu menuitem[type="checkbox"]::before,
 #customization-footer menuitem[type="checkbox"]::before,
-menupopup[menu-api] menuitem[type="checkbox"]::before {
+menupopup[menu-api] menuitem[type="checkbox"]::before,
+menupopup[context="placesContext"] menuitem[type="checkbox"]::before,
+menupopup#placesContext menuitem[type="checkbox"]::before {
     position: relative !important;
     display: inline-block !important;
     width: 16px !important;
@@ -236,7 +244,9 @@ menupopup[menu-api] menuitem[type="checkbox"]::before {
 
 #contentAreaContextMenu menuitem[type="checkbox"][checked="true"]::before,
 #customization-footer menuitem[type="checkbox"][checked="true"]::before,
-menupopup[menu-api] menuitem[type="checkbox"][checked="true"]::before {
+menupopup[menu-api] menuitem[type="checkbox"][checked="true"]::before,
+menupopup[context="placesContext"] menuitem[type="checkbox"][checked="true"]::before,
+menupopup#placesContext menuitem[type="checkbox"][checked="true"]::before {
     position: relative !important;
     display: inline-block !important;
     width: 16px !important;
@@ -255,14 +265,18 @@ menupopup[menu-api] menuitem[type="checkbox"][checked="true"]::before {
 
 #contentAreaContextMenu menuitem[type="checkbox"] .menu-iconic-left,
 #customization-footer menuitem[type="checkbox"] .menu-iconic-left,
-menupopup[menu-api] menuitem[type="checkbox"] .menu-iconic-left {
+menupopup[menu-api] menuitem[type="checkbox"] .menu-iconic-left,
+menupopup[context="placesContext"] menuitem[type="checkbox"] .menu-iconic-left,
+menupopup#placesContext menuitem[type="checkbox"] .menu-iconic-left {
     -moz-appearance: none !important;
     width: 25px !important;
 }
 
 #contentAreaContextMenu menuitem[type="radio"]::before,
 #customization-footer menuitem[type="radio"]::before,
-menupopup[menu-api] menuitem[type="radio"]::before {
+menupopup[menu-api] menuitem[type="radio"]::before,
+menupopup[context="placesContext"] menuitem[type="radio"]::before,
+menupopup#placesContext menuitem[type="radio"]::before {
     position: relative !important;
     display: inline-block !important;
     width: 16px !important;
@@ -281,7 +295,9 @@ menupopup[menu-api] menuitem[type="radio"]::before {
 
 #contentAreaContextMenu menuitem[type="radio"][checked="true"]::before,
 #customization-footer menuitem[type="radio"][checked="true"]::before,
-menupopup[menu-api] menuitem[type="radio"][checked="true"]::before {
+menupopup[menu-api] menuitem[type="radio"][checked="true"]::before,
+menupopup[context="placesContext"] menuitem[type="radio"][checked="true"]::before,
+menupopup#placesContext menuitem[type="radio"][checked="true"]::before{
     position: relative !important;
     display: inline-block !important;
     width: 16px !important;
@@ -300,7 +316,9 @@ menupopup[menu-api] menuitem[type="radio"][checked="true"]::before {
 
 #contentAreaContextMenu menuitem[type="radio"] .menu-iconic-left,
 #customization-footer menuitem[type="radio"] .menu-iconic-left,
-menupopup[menu-api] menuitem[type="radio"] .menu-iconic-left {
+menupopup[menu-api] menuitem[type="radio"] .menu-iconic-left,
+menupopup[context="placesContext"] menuitem[type="radio"] .menu-iconic-left,
+menupopup#placesContext menuitem[type="radio"] .menu-iconic-left {
     -moz-appearance: none !important;
     width: 25px !important;
 }

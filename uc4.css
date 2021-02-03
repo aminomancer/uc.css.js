@@ -78,7 +78,7 @@ toolbar {
 /*     --tab-hover: linear-gradient(0deg, hsl(231, 42%, 15%), hsl(233, 61%, 8%));
     --tab-pinned: linear-gradient(0deg, hsl(231, 50%, 11%), hsl(232, 70%, 6%));
     --tab-multi: linear-gradient(0deg, hsl(231, 42%, 15%), hsl(232, 70%, 6%)); */
-    --tab-hover: linear-gradient(180deg, hsl(231, 47%, 11%), hsl(233, 55%, 8%));
+    --tab-hover: linear-gradient(180deg, hsl(231, 49%, 11%), hsl(233, 55%, 8%));
     --tab-pinned: linear-gradient(0deg, hsl(231, 50%, 11%), hsl(232, 70%, 6%));
     --tab-multi: linear-gradient(180deg, hsl(231, 50%, 11%), hsl(233, 53%, 8%));
     --tab-multi-hover: linear-gradient(180deg, hsl(231, 47%, 13%), hsl(233, 51%, 10%));
@@ -974,18 +974,31 @@ browser[type=content]>html {
     margin-left: -18px !important;
 } */
 
+#tabbrowser-tabs::after {
+    position: relative !important;
+    display: block !important;
+    content: "" !important;
+    pointer-events: none !important;
+    box-shadow: -7px 0px 7px 0px rgba(0, 0, 0, 0.1) !important;
+    background-color: transparent !important;
+    width: 20px !important;
+    margin-right: -20px !important;
+    z-index: 5 !important;
+}
+
+#TabsToolbar {
+    background: var(--tab-hover) !important;
+}
+
 #new-tab-button, #tabs-newtab-button {
     padding-left: 4px !important;
     z-index: 1 !important;
     position: relative !important;
-    background: var(--lwt-accent-color) !important;
 }
 
 /* non-overflowing tabs shouldn't draw shadows on new tab button since overflowing tabs don't draw shadows on the special new tab button */
 #tabbrowser-tabs:not([overflow]) #tabs-newtab-button {
     z-index: 5 !important;
-    position: relative !important;
-    background-color: var(--lwt-accent-color) !important;
 }
 
 /* invisible fix for fullscreen/maximized mode */

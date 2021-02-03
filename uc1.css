@@ -56,29 +56,8 @@
     background-image: url("data:image/svg+xml;utf8,<svg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='-125 -125 762 762' style='enable-background:new 0 0 512 512;' xml:space='preserve'><g><g><path fill='context-fill' fill-opacity='context-fill-opacity' d='M181.333,0H74.667c-17.643,0-32,14.357-32,32v448c0,17.643,14.357,32,32,32h106.667c17.643,0,32-14.357,32-32V32    C213.333,14.357,198.976,0,181.333,0z'/></g></g><g><g><path fill='context-fill' fill-opacity='context-fill-opacity' d='M437.333,0H330.667c-17.643,0-32,14.357-32,32v448c0,17.643,14.357,32,32,32h106.667c17.643,0,32-14.357,32-32V32    C469.333,14.357,454.976,0,437.333,0z'/></g></g></svg>") !important;
 }
 
-#tabbrowser-tabs::after {
-    width: 9px !important;
-    margin-right: -9px !important;
-    position: relative !important;
-/*     box-shadow: 0px 0 12px 0px rgba(0,0,0,0.27) !important; */
-    display: block !important;
-    content: "" !important;
-    z-index: 0 !important;
-    pointer-events: none !important;
-}
-
 #tabbrowser-tabs {
     background-color: var(--lwt-accent-color) !important;
-}
-
-
-#tabbrowser-tabs::after {
-    box-shadow: -7px 0px 7px 0px rgba(0, 0, 0, 0.1) !important;
-    background-color: transparent !important;
-    mix-blend-mode: darken !important;
-    width: 20px !important;
-    margin-right: -20px !important;
-    z-index: 5 !important;
 }
 
 /* link[href$="global.css"] ~ scrollbox {
