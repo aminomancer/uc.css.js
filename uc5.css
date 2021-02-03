@@ -109,7 +109,8 @@
 #tabbrowser-tabs:not([movingtab]) .tabbrowser-tab:not([tabdrop-samewindow], [justmoved]) .tab-close-button,
 #tabbrowser-tabs:not([movingtab]) .tabbrowser-tab:not([tabdrop-samewindow], [justmoved]) .tab-icon-image,
 #tabbrowser-tabs:not([movingtab]) .tabbrowser-tab:not([tabdrop-samewindow], [justmoved]) .tab-sharing-icon-overlay,
-#tabbrowser-tabs:not([movingtab]) .tabbrowser-tab:not([tabdrop-samewindow], [justmoved]) .tab-icon-overlay {
+#tabbrowser-tabs:not([movingtab]) .tabbrowser-tab:not([tabdrop-samewindow], [justmoved]) .tab-icon-overlay,
+#tabbrowser-tabs:not([movingtab]) .tabbrowser-tab:not([tabdrop-samewindow], [justmoved]) .tab-throbber {
     transition: 0.1s transform ease-in-out, 0.1s opacity ease-in-out !important;
 }
 
@@ -139,10 +140,6 @@
     transform: translateX(-15px) scale(0.5) !important;
 }
 
-#tabbrowser-tabs:not([movingtab]) .tabbrowser-tab:not([tabdrop-samewindow], [justmoved]) .tab-throbber {
-    transition: 0.1s transform ease-in-out, 0.1s opacity ease-in-out !important;
-}
-
 .tab-throbber {
     display: block !important;
     position: relative !important;
@@ -163,6 +160,31 @@
     opacity: 0.8 !important;
 }
 
+#tabbrowser-tabs:not([movingtab]) .tabbrowser-tab:not([tabdrop-samewindow], [justmoved]) .tab-icon-sound {
+    transition: 0.1s transform ease-in-out, 0.1s opacity ease-in-out, 0.1s margin ease-in-out !important;
+}
+
+#tabbrowser-tabs:not(:hover, :focus) .tab-icon-sound {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: translateX(16px) scale(0.5) !important;
+    margin-right: -16px !important;
+}
+
+/* .tab-throbber::before {
+    content: "" !important;
+    background-image: url(window/loading.svg) !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    position: absolute !important;
+    -moz-context-properties: fill !important;
+    fill: currentColor !important;
+    opacity: 0.7 !important;
+    width: 16px !important;
+    height: 16px !important;
+    animation: none !important;
+} */
+
 /* 
 .tab-throbber::before {
     content: "" !important;
@@ -178,6 +200,7 @@
     opacity: 0.7 !important;
 }
  */
+
 .tabbrowser-tab .tab-icon-overlay {
     display: none !important;
 }
@@ -249,6 +272,16 @@
 .tabbrowser-tab[label*="Image, "][label$=" pixels)"] .tab-icon-image:not([src]),
 .tabbrowser-tab:-moz-any([label^="/A:/"i], [label^="/B:/"i], [label^="/C:/"i], [label^="/D:/"i], [label^="/E:/"i], [label^="/F:/"i], [label^="/G:/"i], [label^="/H:/"i], [label^="/I:/"i]):-moz-any([label$=".svg"i], [label$=".png"i], [label$=".jpg"i], [label$=".jpeg"i], [label$=".gif"i]) .tab-icon-image:not([src]) {
     list-style-image: url(chrome://browser/skin/notification-icons/canvas.svg) !important;
+}
+
+.tabbrowser-tab[label$="Violentmonkey"] .tab-sharing-icon-overlay {
+    list-style-image: url(chrome://devtools/skin/images/command-console.svg) !important;
+    display: block !important;
+    fill: currentColor !important;
+}
+
+.tabbrowser-tab[label$="Violentmonkey"] .tab-icon-image {
+    visibility: hidden !important;
 }
 
 :-moz-any(.unified-nav-forward, .unified-nav-back):not([_moz-menuactive])[uri^="file:///"]:-moz-any([uri$=".svg"i], [uri$=".png"i], [uri$=".jpg"i], [uri$=".jpeg"i], [uri$=".gif"i]) .menu-iconic-icon,
