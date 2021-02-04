@@ -12,11 +12,7 @@
     stroke: hsl(234, 27%, 23%) !important;
 }
 
-/* #backForwardMenu menuitem[type="radio"]>.menu-iconic-left {
-    filter: invert(1) !important;
-} */
-
-/* style all OS-styled javascript modal prompts */
+/* OS-styled javascript modal prompts */
 tabmodalprompt {
     background-color: hsla(0, 0%, 4%, 0.5) !important;
 }
@@ -77,7 +73,6 @@ tabmodalprompt input:focus {
     background-color: var(--desaturate-dimmed-further) !important;
     flex: auto !important;
     color: #fff !important;
-    /*     cursor: pointer !important; */
 }
 
 .tabmodalprompt-buttonContainer button:hover:active {
@@ -125,29 +120,12 @@ tabmodalprompt .checkbox-check[checked="true"] {
     margin-right: initial !important;
 }
 
-/* .tabbrowser-tab[pinned]:hover .tab-close-button {
-    display: -moz-box !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    z-index: 5 !important;
-    position: relative !important;
-}
-
-.tabbrowser-tab[pinned]:hover .tab-icon-image {
-    display: -moz-box !important;
-    visibility: visible !important;
-    opacity: 0 !important;
-    position: relative !important;
-} */
-
 
 @-moz-document url("chrome://browser/content/browser.xhtml") {
-    /* "Open in New Tab" menu item */
     #placesContext_open\:newtab~* {
         -moz-box-ordinal-group: 2;
     }
 
-    /* Position after the "Open in New Tab", but before anything else. */
     #bookmark-menu-container_robwu_nl-menuitem-_bookmark-menu-item {
         -moz-box-ordinal-group: 1;
     }
@@ -228,11 +206,6 @@ tabmodalprompt .checkbox-check[checked="true"] {
         color: rgb(255, 255, 255) !important;
     }
 }
-
-/* Scrollbar JS enabler */
-/* toolbarbutton#alltabs-button {
-    -moz-binding: url(data:text/plain;charset=utf-8;base64,PD94bWwgdmVyc2lvbj0iMS4wIj8+DQo8IS0tIENvcHlyaWdodCAoYykgMjAxNyBIYWdnYWkgTnVjaGkNCkF2YWlsYWJsZSBmb3IgdXNlIHVuZGVyIHRoZSBNSVQgTGljZW5zZToNCmh0dHBzOi8vb3BlbnNvdXJjZS5vcmcvbGljZW5zZXMvTUlUDQogLS0+DQoNCjwhLS0gUnVuIHVzZXJDaHJvbWUuanMvdXNlckNocm9tZS54dWwgYW5kIC51Yy5qcy8udWMueHVsLy5jc3MgZmlsZXMgIC0tPg0KPGJpbmRpbmdzIHhtbG5zPSJodHRwOi8vd3d3Lm1vemlsbGEub3JnL3hibCI+DQogICAgPGJpbmRpbmcgaWQ9ImpzIj4NCiAgICAgICAgPGltcGxlbWVudGF0aW9uPg0KICAgICAgICAgICAgPGNvbnN0cnVjdG9yPjwhW0NEQVRBWw0KICAgICAgICAgICAgICAgIGlmKHdpbmRvdy51c2VyQ2hyb21lSnNNb2QpIHJldHVybjsNCiAgICAgICAgICAgICAgICB3aW5kb3cudXNlckNocm9tZUpzTW9kID0gdHJ1ZTsNCg0KICAgICAgICAgICAgICAgIHZhciBjaHJvbWVGaWxlcyA9IEZpbGVVdGlscy5nZXREaXIoIlVDaHJtIiwgW10pLmRpcmVjdG9yeUVudHJpZXM7DQogICAgICAgICAgICAgICAgdmFyIHh1bEZpbGVzID0gW107DQogICAgICAgICAgICAgICAgdmFyIHNzcyA9IENjWydAbW96aWxsYS5vcmcvY29udGVudC9zdHlsZS1zaGVldC1zZXJ2aWNlOzEnXS5nZXRTZXJ2aWNlKENpLm5zSVN0eWxlU2hlZXRTZXJ2aWNlKTsNCg0KICAgICAgICAgICAgICAgIHdoaWxlKGNocm9tZUZpbGVzLmhhc01vcmVFbGVtZW50cygpKSB7DQogICAgICAgICAgICAgICAgICAgIHZhciBmaWxlID0gY2hyb21lRmlsZXMuZ2V0TmV4dCgpLlF1ZXJ5SW50ZXJmYWNlKENpLm5zSUZpbGUpOw0KICAgICAgICAgICAgICAgICAgICB2YXIgZmlsZVVSSSA9IFNlcnZpY2VzLmlvLm5ld0ZpbGVVUkkoZmlsZSk7DQoNCiAgICAgICAgICAgICAgICAgICAgaWYoZmlsZS5pc0ZpbGUoKSkgew0KICAgICAgICAgICAgICAgICAgICAgICAgdHlwZSA9ICJub25lIjsNCiAgICAgICAgICAgICAgICAgICAgICAgIGlmKC8oXnVzZXJDaHJvbWV8LnVjKS5qcyQvaS50ZXN0KGZpbGUubGVhZk5hbWUpKSB7DQogICAgICAgICAgICAgICAgICAgICAgICAgICAgdHlwZSA9ICJ1c2VyY2hyb21lL2pzIjsNCiAgICAgICAgICAgICAgICAgICAgICAgIH0NCiAgICAgICAgICAgICAgICAgICAgICAgIGVsc2UgaWYoLyhedXNlckNocm9tZXwudWMpLnh1bCQvaS50ZXN0KGZpbGUubGVhZk5hbWUpKSB7DQogICAgICAgICAgICAgICAgICAgICAgICAgICAgdHlwZSA9ICJ1c2VyY2hyb21lL3h1bCI7DQogICAgICAgICAgICAgICAgICAgICAgICB9DQogICAgICAgICAgICAgICAgICAgICAgICBlbHNlIGlmKC8uYXMuY3NzJC9pLnRlc3QoZmlsZS5sZWFmTmFtZSkpIHsNCiAgICAgICAgICAgICAgICAgICAgICAgICAgICB0eXBlID0gImFnZW50c2hlZXQiOw0KICAgICAgICAgICAgICAgICAgICAgICAgfQ0KICAgICAgICAgICAgICAgICAgICAgICAgZWxzZSBpZigvXig/ISh1c2VyQ2hyb21lfHVzZXJDb250ZW50KS5jc3MkKS4rLmNzcyQvaS50ZXN0KGZpbGUubGVhZk5hbWUpKSB7DQogICAgICAgICAgICAgICAgICAgICAgICAgICAgdHlwZSA9ICJ1c2Vyc2hlZXQiOw0KICAgICAgICAgICAgICAgICAgICAgICAgfQ0KICAgICAgICAgICAgICAgICAgICAgICAgaWYodHlwZSAhPSAibm9uZSIpIHsNCiAgICAgICAgICAgICAgICAgICAgICAgICAgICBjb25zb2xlLmxvZygiLS0tLS0tLS0tLVwgIiArIGZpbGUubGVhZk5hbWUgKyAiICgiICsgdHlwZSArICIpIik7DQogICAgICAgICAgICAgICAgICAgICAgICAgICAgdHJ5IHsNCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgaWYodHlwZSA9PSAidXNlcmNocm9tZS9qcyIpIHsNCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFNlcnZpY2VzLnNjcmlwdGxvYWRlci5sb2FkU3ViU2NyaXB0V2l0aE9wdGlvbnMoZmlsZVVSSS5zcGVjLCB7dGFyZ2V0OiB3aW5kb3csIGlnbm9yZUNhY2hlOiB0cnVlfSk7DQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIH0NCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZWxzZSBpZih0eXBlID09ICJ1c2VyY2hyb21lL3h1bCIpIHsNCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHh1bEZpbGVzLnB1c2goZmlsZVVSSS5zcGVjKTsNCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfQ0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBlbHNlIGlmKHR5cGUgPT0gImFnZW50c2hlZXQiKSB7DQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBpZighc3NzLnNoZWV0UmVnaXN0ZXJlZChmaWxlVVJJLCBzc3MuQUdFTlRfU0hFRVQpKQ0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHNzcy5sb2FkQW5kUmVnaXN0ZXJTaGVldChmaWxlVVJJLCBzc3MuQUdFTlRfU0hFRVQpOw0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB9DQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGVsc2UgaWYodHlwZSA9PSAidXNlcnNoZWV0Iikgew0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgaWYoIXNzcy5zaGVldFJlZ2lzdGVyZWQoZmlsZVVSSSwgc3NzLlVTRVJfU0hFRVQpKQ0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHNzcy5sb2FkQW5kUmVnaXN0ZXJTaGVldChmaWxlVVJJLCBzc3MuVVNFUl9TSEVFVCk7DQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIH0NCiAgICAgICAgICAgICAgICAgICAgICAgICAgICB9IGNhdGNoKGUpIHsNCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY29uc29sZS5sb2coIiMjIyMjIyMjIyMgRVJST1I6ICIgKyBlICsgIiBhdCAiICsgZS5saW5lTnVtYmVyICsgIjoiICsgZS5jb2x1bW5OdW1iZXIpOw0KICAgICAgICAgICAgICAgICAgICAgICAgICAgIH0NCiAgICAgICAgICAgICAgICAgICAgICAgICAgICBjb25zb2xlLmxvZygiLS0tLS0tLS0tLS8gIiArIGZpbGUubGVhZk5hbWUpOw0KICAgICAgICAgICAgICAgICAgICAgICAgfQ0KICAgICAgICAgICAgICAgICAgICB9DQogICAgICAgICAgICAgICAgfQ0KDQogICAgICAgICAgICAgICAgc2V0VGltZW91dChmdW5jdGlvbiBsb2FkWFVMKCkgew0KICAgICAgICAgICAgICAgICAgICBpZih4dWxGaWxlcy5sZW5ndGggPiAwKSB7DQogICAgICAgICAgICAgICAgICAgICAgICBkb2N1bWVudC5sb2FkT3ZlcmxheSh4dWxGaWxlcy5zaGlmdCgpLCBudWxsKTsNCiAgICAgICAgICAgICAgICAgICAgICAgIHNldFRpbWVvdXQobG9hZFhVTCwgNSk7DQogICAgICAgICAgICAgICAgICAgIH0NCiAgICAgICAgICAgICAgICB9LCAwKTsNCiAgICAgICAgICAgIF1dPjwvY29uc3RydWN0b3I+DQogICAgICAgIDwvaW1wbGVtZW50YXRpb24+DQogICAgPC9iaW5kaW5nPg0KPC9iaW5kaW5ncz4=);
-} */
 
 /* bookmarks toolbar button's popup */
 @-moz-document url(chrome://browser/content/browser.xhtml) {
@@ -521,7 +494,7 @@ tabmodalprompt .checkbox-check[checked="true"] {
     border: none !important;
 }
 
-/* blurry megabar */
+/* urlbar */
 #urlbar[breakout],
 #urlbar[breakout] .urlbarView {
     transition: none !important;
@@ -537,7 +510,6 @@ tabmodalprompt .checkbox-check[checked="true"] {
     height: var(--urlbar-height) !important;
     padding-block: 0px !important;
     padding-inline: 0px !important;
-/*     transition: none !important; */
     border-radius: var(--toolbarbutton-border-radius);
 }
 
@@ -585,7 +557,6 @@ tabmodalprompt .checkbox-check[checked="true"] {
 }
 
 #urlbar[breakout][breakout-extend] .urlbarView {
-/*     top: 3.5px !important; */
     margin: 0 !important;
     width: calc(100% + 6px) !important;
     left: -3px !important;
@@ -593,11 +564,9 @@ tabmodalprompt .checkbox-check[checked="true"] {
 }
 
 .urlbarView {
-/*     top: 3.5px !important; */
     margin: 0 !important;
     width: calc(100% + 6px) !important;
     left: -3px !important;
-/*     position: relative !important; */
     overflow: visible !important;
 }
 
@@ -624,9 +593,6 @@ tabmodalprompt .checkbox-check[checked="true"] {
 }
 
 .urlbarView #urlbar-results {
-/*     background-image: url("texture/noise-512x512.png") !important;
-    background-color: var(--urlbarView-bgcolor) !important;
-    backdrop-filter: blur(32px) !important; */
     border-bottom-left-radius: 4px !important;
     border-bottom-right-radius: 4px !important;
     box-shadow: 0 5px 18px rgba(0, 0, 0, .2);
@@ -709,7 +675,6 @@ tabmodalprompt .checkbox-check[checked="true"] {
     top: -35px !important;
     right: 0px !important;
     max-width: 270px !important;
-/*     overflow-x: scroll !important; */
     scroll-behavior: smooth !important;
     scrollbar-width: none !important;
     float: right !important;
@@ -752,7 +717,6 @@ tabmodalprompt .checkbox-check[checked="true"] {
     transition: opacity 0.15s ease-in-out !important;
     opacity: 0 !important;
     pointer-events: none !important;
-/*     overflow-x: hidden !important; */
 }
 
 #urlbar .search-one-offs * {
@@ -762,7 +726,6 @@ tabmodalprompt .checkbox-check[checked="true"] {
 #urlbar[usertyping="true"] .search-one-offs,
 #urlbar[searchmode] .search-one-offs {
     opacity: 1 !important;
-/*     pointer-events: none !important; */
 }
 
 .urlbar-input-box {
@@ -887,7 +850,7 @@ tabmodalprompt .checkbox-check[checked="true"] {
     align-self: start !important;
 }
 
-/* individual search one offs */
+/* individual search one off adjustments */
 #urlbar-engine-one-off-item-Gatherer .button-icon {
     width: 17.5px !important;
     height: 17.5px !important;

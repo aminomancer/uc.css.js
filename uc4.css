@@ -1,24 +1,5 @@
-/* .search-one-offs[style="display: none;"] {
-    left: 0px !important;
-    display: -moz-box !important;
-}
-
-.search-one-offs[style="display: none;"] button {
-    pointer-events: none !important;
-}
-
-#urlbar-results {
-    border: none !important;
-    border-bottom-left-radius: 0px !important;
-    border-bottom-right-radius: 5px !important;
-} */
-/* that's it */
-
 :root,
 toolbar {
-/*     --toolbarbutton-hover-background: hsla(236,60%,83%,.17) !important;
-    --toolbarbutton-active-background: hsla(236,60%,85%,.25) !important;
-    --toolbarbutton-checked-background: hsla(236,60%,83%,.13) !important; */
     --toolbarbutton-hover-background: hsla(236, 82%, 83%, 0.17) !important;
     --toolbarbutton-active-background: hsla(236, 82%, 83%, 0.22) !important;
     --toolbarbutton-checked-background: hsla(236, 82%, 83%, 0.13) !important;
@@ -33,40 +14,32 @@ toolbar {
     --default_tab_border_roundness: 5px;
     --tab_close_icons_size: 16px;
     --tabs-border: transparent !important;
-    /* active tab left & right borders - not working in 58?*/
-
     --toolbox-border-bottom-color: transparent !important;
-    /* 1px line under background tabs */
-
     --chrome-nav-bar-controls-border-color: transparent !important;
-    /* border around url bar */
-
     --tabs-navbar-shadow-size: 0px !important;
     --autocomplete-popup-highlight-background: hsl(234, 21%, 35%) !important;
     --toolbarbutton-border-radius: 3px;
-    --lwt-accent-color: hsl(233, 61%, 8%);
-    --lwt-text-color: hsl(213, 43%, 89%);
-    --lwt-toolbar-field-background-color: hsl(233, 24%, 28%);
-    --lwt-toolbar-field-color: hsl(0, 0%, 100%);
-    --lwt-accent-color: rgb(255, 255, 255) !important;
-    --lwt-text-color: rgba(255, 255, 255) !important;
+    --lwt-accent-color: hsl(233, 61%, 8%) !important;
+    --lwt-text-color: hsl(213, 43%, 89%) !important;
+    --lwt-toolbar-field-background-color: hsla(233, 25%, 28%, 85%) !important;
+    --lwt-toolbar-field-color: hsl(0, 0%, 100%) !important;
     --lwt-toolbar-field-focus: rgb(255, 255, 255) !important;
     --lwt-toolbar-field-focus-color: rgb(255, 255, 255) !important;
-    --toolbar-bgcolor: hsl(231, 42%, 15%);
-    --toolbar-color: hsl(231, 42%, 15%);
+    --toolbar-bgcolor: hsl(231, 42%, 15%) !important;
+    --toolbar-color: hsl(0, 0%, 100%) !important;
     --lwt-toolbarbutton-icon-fill: hsl(0, 0%, 100%) !important;
-    --arrowpanel-background: hsl(233, 36%, 11%);
-    --arrowpanel-color: hsl(213, 43%, 89%);
+    --lwt-background-alignment: top !important;
+    --lwt-background-tiling: repeat !important;
+    --arrowpanel-background: hsl(233, 36%, 11%) !important;
+    --arrowpanel-color: hsl(213, 43%, 89%) !important;
     --arrowpanel-darker: hsla(236, 70%, 73%, 0.17) !important;
     --arrowpanel-dimmed: hsla(236, 100%, 83%, 0.17) !important;
     --arrowpanel-dimmed-further: hsla(236, 100%, 83%, 0.25) !important;
     --arrowpanel-dimmed-even-further: hsla(236, 100%, 85%, 0.3) !important;
-/*     --arrowpanel-dimmed: rgba(170, 175, 255, 0.17) !important;
-    --arrowpanel-dimmed-further: rgba(170, 175, 255, 0.25) !important;
-    --arrowpanel-dimmed-even-further: rgba(180, 185, 255, 0.3) !important; */
     --desaturate-dimmed: hsla(236,60%,83%,.17) !important;
     --desaturate-dimmed-further: hsla(236,60%,83%,.25) !important;
     --desaturate-dimmed-even-further: hsla(236,60%,85%,.3) !important;
+    --panel-disabled-color: hsla(213, 43%, 89%, 0.5) !important;
     --toolbarbutton-hover-background: hsla(236, 85%, 83%, 0.17) !important;
     --toolbarbutton-active-background: hsla(236, 85%, 83%, 0.25) !important;
     --toolbarbutton-checked-background: hsla(236, 85%, 83%, 0.13) !important;
@@ -125,6 +98,16 @@ toolbar {
     --purple-60: hsl(258, 100%, 40%) !important;
     --purple-70: hsl(256, 100%, 30%) !important;
     --purple-80: hsl(254, 100%, 20%) !important;
+    --autocomplete-popup-background: hsl(233, 36%, 11%) !important;
+    --autocomplete-popup-color: hsl(213, 43%, 89%) !important;
+    --urlbarView-bgcolor: hsla(233, 38%, 9%, 0.8) !important;
+    --ui-textbox-bgcolor: hsl(233, 24%, 28%) !important;
+    --ui-textbox-focus-bgcolor: hsl(232, 20%, 38%) !important;
+    --ebmp-hover-bgcolor: hsl(233, 24%, 33%) !important;
+    --ebmp-focus-bgcolor: hsl(233, 24%, 38%) !important;
+    --urlbar-popup-url-color: hsl(251, 100%, 64%) !important;
+    --urlbar-popup-action-color: hsl(340, 73%, 58%) !important;
+    --toolbarbutton-icon-fill-opacity: 1 !important;
 }
 
 toolbar .toolbarbutton-1:not([disabled]):hover:-moz-any([open]) > .toolbarbutton-icon {
@@ -290,12 +273,6 @@ toolbar .toolbarbutton-1:not([disabled]):-moz-any([checked]) > .toolbarbutton-ic
     transition: 300ms !important;
 }
 
-/* textbox[is="search-textbox"] {
-    -moz-appearance: none !important;
-    background-color: #363A59 !important;
-    color: #FFF !important;
-} */
-
 #viewButton:hover {
     background-color: var(--arrowpanel-dimmed) !important;
 }
@@ -325,10 +302,6 @@ toolbar .toolbarbutton-1:not([disabled]):-moz-any([checked]) > .toolbarbutton-ic
     margin-left: 7px !important;
     margin-top: 7px !important;
 }
-
-/* #sidebar-switcher-bookmarks::after {
-    display: none !important;
-} */
 
 .textbox-search-sign {
     margin-left: 2px !important;
@@ -428,31 +401,10 @@ treechildren::-moz-tree-row(selected, current, focus) {
     z-index: 5 !important;
 }
 
-/* .sidebar-placesTreechildren treechildren::-moz-tree-cell:active {
-    -moz-appearance: none !important;
-    background-color: rgb(70, 74, 107) !important;
-} */
 .sidebar-placesTree {
     -moz-appearance: none !important;
     color: var(--lwt-text-color) !important;
-/*     scroll-behavior: smooth !important;
-    overflow: hidden !important; */
 }
-
-/* #bookmarks-view {
-    padding-right: 0.2px !important;
-}
-
-#bookmarks-view treecol {
-    margin-right: -0.2px !important;
-} */
-
-/* .hidevscroll-scrollbar {
-    -moz-appearance: none !important;
-    margin-left: 4px !important;
-    border: none !important;
-    display: none !important;
-} */
 
 #browser {
     --sidebar-border-color: transparent !important;
@@ -520,8 +472,6 @@ treechildren::-moz-tree-row(selected, current, focus) {
     width: unset !important;
 }
 
-/* Remove border between tabs
-Delete this rule if you want separators between background tabs */
 .tabbrowser-tab::after,
 .tabbrowser-tab::before {
     border-left: none !important;
@@ -545,21 +495,6 @@ Delete this rule if you want separators between background tabs */
     border-top-right-radius: 0 !important;
 }
 
-/* #tabbrowser-tabs > .tabbrowser-arrowscrollbox > scrollbox {
-    padding-right: 28.5px !important;
-}
-
-#tabbrowser-tabs {
-    margin-right: -28.5px !important;
-    z-index: 3 !important;
-}
-
-#TabsToolbar #new-tab-button {
-    z-index: 6 !important;
-    position: relative !important;
-    background: var(--lwt-accent-color) !important;
-} */
-
 #TabsToolbar .tabbrowser-tab[first-visible-tab],
 #TabsToolbar .tabbrowser-tab[first-visible-tab] .tab-stack,
 #TabsToolbar .tabbrowser-tab[first-visible-tab] .tab-background,
@@ -571,32 +506,10 @@ Delete this rule if you want separators between background tabs */
     border-top-left-radius: 0px !important;
 }
 
-/* #TabsToolbar .tabbrowser-tab[usercontextid] .tab-stack,
-#TabsToolbar .tabbrowser-tab[usercontextid] .tab-content,
-#TabsToolbar .tabbrowser-tab[usercontextid] .tab-background,
-#TabsToolbar .tabbrowser-tab[usercontextid] {
-    border-top-right-radius: 5px !important;
-} */
-
-/* .tabbrowser-tab:-moz-window-inactive .tab-icon-image {
-    opacity: 0.8 !important;
-}
-
-#urlbar>*:-moz-window-inactive {
-    opacity: 0.7 !important;
-} */
-
 tabbrowser toolbarbutton[class^="scrollbutton"],
 #TabsToolbar toolbarbutton[class^="scrollbutton"] {
     display: none !important;
 }
-
-/* toolbarbutton[part="scrollbutton-up"],
-toolbarbutton[part="scrollbutton-down"],
-spacer[part=arrowscrollbox-overflow-start-indicator], 
-spacer[part=arrowscrollbox-overflow-end-indicator] {
-    display: none !important;
-} */
 
 #tabbrowser-tabs[movingtab]>.tabbrowser-tab[beforeselected]:not([last-visible-tab])::after,
 .tabbrowser-tab:not([selected]):not([afterselected-visible]):not([afterhovered]):not([first-visible-tab]):not(:hover)::before,
@@ -605,26 +518,12 @@ spacer[part=arrowscrollbox-overflow-end-indicator] {
     display: unset !important;
 }
 
-/* .tabbrowser-tab[soundplaying="true"]:not(:hover) :-moz-any(.tab-icon-sound) {
-    visibility: collapse !important;
-    width: 13px !important;
-    height: 13px !important;
-}
-
-.tabbrowser-tab[soundplaying="true"]:hover :-moz-any(.tab-icon-sound) {
-    display: block !important;
-    width: 13px !important;
-    height: 13px !important;
-} */
-
 #urlbar #identity-box.notSecureText #identity-icon-label {
     color: hsla(0, 100%, 50%, 0.867) !important;
 }
 
-/* Tweaks for Ctrl+Tab */
 #ctrlTab-previews {
     border-radius: 0% !important;
-/*     box-shadow: none !important; */
 }
 
 #ctrlTab-panel {
@@ -637,13 +536,10 @@ spacer[part=arrowscrollbox-overflow-end-indicator] {
     text-shadow: 0 0 2px hsl(0, 0%, 8%), 0 0 2px hsl(0, 0%, 8%) !important;
     box-shadow: none !important;
     background: transparent !important;
-/*     backdrop-filter: blur(10px) !important; */
-/*     display: none !important; */
 }
 
 .ctrlTab-preview:not(#ctrlTab-showAll)>*>.ctrlTab-preview-inner {
     margin: -10px -10px 0 !important;
-/*     box-shadow: none !important; */
 }
 
 .ctrlTab-preview-inner img:-moz-broken {
@@ -651,7 +547,6 @@ spacer[part=arrowscrollbox-overflow-end-indicator] {
 }
 
 .ctrlTab-canvas {
-/*     box-shadow: 0 0 3px 0px rgba(0, 0, 0, 0.125), 0 0 10px -2px rgba(0, 0, 0, 0.2) !important; */
     box-shadow: none !important;
     background-color: transparent !important;
     border: none !important;
@@ -683,7 +578,6 @@ spacer[part=arrowscrollbox-overflow-end-indicator] {
     border-radius: 5px !important;
     box-shadow: 0 0 4px -1px rgba(0, 0, 0, 0.2), 0 0 25px -2px rgba(0, 0, 0, 0.2) !important;
     background-color: var(--ctrlTab-panel-bgcolor) !important;
-/*     backdrop-filter: blur(10px) !important; */
 }
 
 .ctrlTab-preview:focus>.ctrlTab-preview-inner {
@@ -756,8 +650,6 @@ spacer[part=arrowscrollbox-overflow-end-indicator] {
 .urlbar-history-dropmarker {
     border-radius: 3px !important;
     width: 28px !important;
-/*     margin-right: 2px !important; */
-/*     display: -moz-box !important; */
 }
 
 .urlbar-history-dropmarker {
@@ -776,38 +668,21 @@ spacer[part=arrowscrollbox-overflow-end-indicator] {
     padding-block: 6.6px !important;
 }
 
-/* #protections-popup {
-    margin-top: calc(var(--toolbarbutton-inner-padding) - 6px) !important;
-} */
-
 #plugins-notification-icon {
     margin-top: 1.4px;
 }
-
-/* .notification-anchor-icon {
-    list-style-image: url(chrome://browser/skin/notification-icons/desktop-notification.svg) !important;
-} */
 
 .default-notification-icon {
     list-style-image: url(chrome://browser/skin/notification-icons/desktop-notification.svg) !important;
 }
 
 #star-button-box[animationsenabled] {
-/*     margin-right: 3px !important; */
     border-radius: 3px !important;
 }
 
 #page-action-buttons {
     margin-right: 3px !important;
 }
-
-/* #pageAction-panel-bookmark,
-#star-button {
-    padding-bottom: 6px !important;
-    padding-top: 5px !important;
-    width: 28px !important;
-    height: 28px !important;
-} */
 
 .toolbaritem-combined-buttons:-moz-any(:not([cui-areatype="toolbar"]), [overflowedItem="true"])>toolbarbutton {
     border-radius: 3px !important;
@@ -849,25 +724,12 @@ spacer[part=arrowscrollbox-overflow-end-indicator] {
     mix-blend-mode: normal !important;
 }
 
-/* more toolbar icons */
-
-/* #reload-button .toolbarbutton-icon, .toolbarbutton-animatable-box {
-    padding-left: 5px !important;
-    padding-right: 6.3px !important;
-}
-
-#stop-button .toolbarbutton-icon, .toolbarbutton-animatable-box {
-    padding-left: 5px !important;
-    padding-right: 6.3px !important;
-} */
-
 /* hide the pixel above the tabs in windows */
 :root[sizemode="normal"][tabsintitlebar] {
     border-top: none !important;
 }
 
-/* remove white flash and make default unloaded background dark gray (matching wikipedia and NTP) */
-
+/* remove white flash and make default unloaded background dark gray (matching my new tab page addon, message u/MotherStylus on reddit for a download link) */
 #browser vbox#appcontent tabbrowser,
 #content,
 #tabbrowser-tabpanels,
@@ -898,15 +760,6 @@ browser[type=content]>html {
     z-index: 5 !important;
 }
 
-/* .tabbrowser-tab[pinned] {
-    position: relative !important;
-    margin-inline-start: unset !important;
-}
-
-#tabbrowser-tabs {
-    padding-inline-start: unset !important;
-} */
-
 .tabbrowser-tab:not([selected]):not([pinned]):hover {
     z-index: 3 !important;
     position: relative !important;
@@ -932,7 +785,6 @@ browser[type=content]>html {
 /* tab dragging and dropping icon */
 .tab-drop-indicator {
     background-image: url("chrome://global/skin/icons/arrow-up-12.svg") !important;
-/*     list-style-image: url("data:image/svg+xml;utf8,<svg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 490 490' xml:space='preserve'><path d='M437.2,178.7c12.8,12.8,12.8,33.4,0,46.2c-6.4,6.4-14.7,9.6-23.1,9.6s-16.7-3.2-23.1-9.6L277.7,111.5v345.8   c0,18-14.6,32.7-32.7,32.7s-32.7-14.6-32.7-32.7V111.5L99,224.9c-12.8,12.8-33.4,12.8-46.2,0s-12.8-33.4,0-46.2L221.9,9.6   C228,3.4,236.3,0,245,0c8.7,0,17,3.4,23.1,9.6L437.2,178.7z' fill='context-fill' fill-opacity='context-fill-opacity'/></svg>") !important; */
     -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity !important;
     fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
     margin-bottom: -39px !important;
@@ -943,14 +795,6 @@ browser[type=content]>html {
     width: 20px !important;
     max-width: 20px !important;
 }
-
-/* #tabbrowser-tabs[positionpinnedtabs] {
-    padding-inline-start: 40px !important;
-} */
-
-/* #tabbrowser-tabs[positionpinnedtabs] .tabbrowser-tab[pinned] {
-    margin-inline-start: -40px !important;
-} */
 
 #tabbrowser-tabs[positionpinnedtabs] .tabbrowser-tab[pinned] .tab-content {
     min-width: 42.2px !important;
@@ -965,14 +809,6 @@ browser[type=content]>html {
 #tabbrowser-tabs[positionpinnedtabs] .tabbrowser-tab[pinned] .tab-label-container {
     visibility: collapse !important;
 }
-
-/* .tabbrowser-arrowscrollbox>.arrowscrollbox-overflow-start-indicator:not([collapsed]) {
-    margin-left: -16px !important;
-}
-
-.arrowscrollbox-overflow-end-indicator:not([collapsed]) {
-    margin-left: -18px !important;
-} */
 
 #tabbrowser-tabs::after {
     position: relative !important;
@@ -1009,21 +845,3 @@ browser[type=content]>html {
 :root:not([sizemode="normal"]) .tabbrowser-arrowscrollbox>.arrowscrollbox-overflow-start-indicator {
     visibility: collapse !important;
 }
-
-/* broken fix for maximized mode */
-/* :root[sizemode="maximized"] .tabbrowser-arrowscrollbox>.arrowscrollbox-overflow-start-indicator:not([collapsed]),
-.tabbrowser-arrowscrollbox>.arrowscrollbox-overflow-end-indicator:not([collapsed]) {
-    margin-left: -15px  !important;
-} */
-
-/* :root[sizemode="maximized"] .tabbrowser-arrowscrollbox>.arrowscrollbox-overflow-start-indicator:not([collapsed]) {
-    margin-left: -16px !important;
-}
-
-:root[sizemode="maximized"] .arrowscrollbox-overflow-end-indicator:not([collapsed]) {
-    margin-left: -18px !important;
-}
-
-:root[sizemode="maximized"] .arrowscrollbox-overflow-end-indicator[collapsed] {
-    opacity: 0 !important;
-} */

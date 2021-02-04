@@ -49,19 +49,10 @@ treechildren::-moz-tree-drop-feedback {
     background-color: hsl(241, 50%, 51%) !important;
 }
 
-/* nav-bar autohide */
-/**
- * Make #navigator-toolbox float over page content in maximized window and fullscreen modes
- * Original code provided by am803
- * https://www.reddit.com/r/FirefoxCSS/comments/bhbvhj/make_navigatortoolbox_appear_on_top_of_page/elrzrq3/
- */
-
 #navigator-toolbox,
 #navigator-toolbox > *{
   width: -moz-available;
 }
-
-/* Disable native toggler that triggers JS listener */
 
 #fullscr-toggler {
     pointer-events: none;
@@ -87,16 +78,11 @@ treechildren::-moz-tree-drop-feedback {
     transition-timing-function: cubic-bezier !important;
 }
 
-/* :root[sizemode="maximized"]:not([customizing]) #navigator-toolbox {
-    margin-top: calc(-40.4px - var(--tab-min-height)) !important;
-    top: 7px !important;
-} */
-
 :root[inFullscreen]:not([customizing]) #navigator-toolbox::after {
     height: 2px !important;
 }
 
-/* before fullscreenNavBar.uc.js */
+/* this is the code i used before fullscreenNavBar.uc.js. just use the script instead, it's much better */
 /* :root[customizing] #navigator-toolbox,
 :root[inFullscreen]:not([customizing]) #navigator-toolbox:focus-within,
 :root[inFullscreen]:not([customizing]) #navigator-toolbox:hover,
@@ -127,7 +113,7 @@ treechildren::-moz-tree-drop-feedback {
 } */
 
 /* hides the nav-bar in fullscreen, but reveals it when hovering or focusing the nav-bar, or when nav-bar related popups are opened.
-requires fullscreenNavBar.uc.js to set attributes popup-status and urlbar-status. */
+requires fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-status. */
 #main-window[customizing] #navigator-toolbox,
 #main-window[inFullscreen]:not([customizing])>body>box:is(:focus-within, :hover, [popup-status], [urlbar-status]) #navigator-toolbox {
     margin-top: 0 !important;
@@ -147,14 +133,6 @@ requires fullscreenNavBar.uc.js to set attributes popup-status and urlbar-status
 #navigator-toolbox * {
     line-height: normal;
 }
-
-/* :root:-moz-any([sizemode="normal"],[customizing]) #browser {
-    margin-top: 74px !important;
-}
-
-:root[sizemode="maximized"] #browser {
-    padding-top: 74px !important;
-} */
 
 :root[inFullscreen]:not([customizing]) .browserContainer>findbar {
     top: 0px !important;
@@ -206,10 +184,6 @@ requires fullscreenNavBar.uc.js to set attributes popup-status and urlbar-status
     opacity: 1 !important;
 }
 
-/* :root[customizing] #customization-container {
-    margin-top: 74px !important;
-} */
-
 :root[customizing][inFullscreen] #customization-container {
     margin-top: 74px !important;
 }
@@ -222,7 +196,7 @@ requires fullscreenNavBar.uc.js to set attributes popup-status and urlbar-status
     visibility: visible !important;
 }
 
-/* grid overflow menu */
+/* grid overflow menu (i don't have an overflow menu at all thanks to the toolbar button slider script. but just in case) */
 :root:not([customizing]) #widget-overflow-mainView {
     min-width: 370px !important;
 }
@@ -276,7 +250,6 @@ requires fullscreenNavBar.uc.js to set attributes popup-status and urlbar-status
 }
 
 :root:not([customizing]) .widget-overflow-list {
-/*     display: flex; */
     width: 370px !important;
 }
 
@@ -328,7 +301,6 @@ requires fullscreenNavBar.uc.js to set attributes popup-status and urlbar-status
     min-width: 700px !important;
 }
 
-/* identity box and tracking icon always visible */
 #urlbar[pageproxystate="valid"] #identity-box.extensionPage {
     display: -moz-box !important;
 }
@@ -380,7 +352,6 @@ requires fullscreenNavBar.uc.js to set attributes popup-status and urlbar-status
     margin-inline-start: 2px !important;
     margin-inline-end: -3px !important;
     fill-opacity: .6 !important;
-    /* list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 48 48'><defs><path id='prefix__a' d='M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z'/></defs><clipPath id='prefix__b'><use xlink:href='%23prefix__a' overflow='visible'/></clipPath><path clip-path='url(%23prefix__b)' fill='%23FBBC05' d='M0 37V11l17 13z'/><path clip-path='url(%23prefix__b)' fill='%23EA4335' d='M0 11l17 13 7-6.1L48 14V0H0z'/><path clip-path='url(%23prefix__b)' fill='%2334A853' d='M0 37l30-23 7.9 1L48 0v48H0z'/><path clip-path='url(%23prefix__b)' fill='%234285F4' d='M48 48L17 24l-4-3 35-10z'/></svg>") !important; */
     list-style-image: url("data:image/svg+xml;utf8,<svg height='1792' viewBox='-40 0 1792 1792' width='1792' xmlns='http://www.w3.org/2000/svg'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M896 786h725q12 67 12 128 0 217-91 387.5t-259.5 266.5-386.5 96q-157 0-299-60.5t-245-163.5-163.5-245-60.5-299 60.5-299 163.5-245 245-163.5 299-60.5q300 0 515 201l-209 201q-123-119-306-119-129 0-238.5 65t-173.5 176.5-64 243.5 64 243.5 173.5 176.5 238.5 65q87 0 160-24t120-60 82-82 51.5-87 22.5-78h-436v-264z'/></svg>") !important;
 }
 
@@ -445,7 +416,6 @@ requires fullscreenNavBar.uc.js to set attributes popup-status and urlbar-status
 #notification-popup-box:hover,
 #tracking-protection-icon-container:hover:not([open="true"]) {
     background-color: unset !important;
-/*     fill-opacity: unset !important; */
 }
 
 #permissions-granted-icon,
@@ -470,10 +440,6 @@ requires fullscreenNavBar.uc.js to set attributes popup-status and urlbar-status
     color: hsl(212.5, 42.9%, 89%) !important;
 }
 
-/* #downloadsPanel-mainView {
-    margin-right: -0.4px !important;
-} */
-
 #downloadsListBox>.download-state>toolbarseparator {
     visibility: collapse !important;
 }
@@ -493,26 +459,11 @@ requires fullscreenNavBar.uc.js to set attributes popup-status and urlbar-status
     margin-top: 0 !important;
 }
 
-/* #downloadsListBox>richlistitem {
-    border-bottom: 0px solid transparent !important;
-} */
-
-/* #downloadsListBox>.download-state>.downloadMainArea {
-    border-top-right-radius: 7px !important;
-    border-bottom-right-radius: 7px !important;
-    border-bottom: 1px solid var(--arrowpanel-dimmed) !important;
-    border-right: 1px solid var(--arrowpanel-dimmed) !important;
-} */
-
 #downloadsListBox > richlistitem[state="1"][exists] .downloadMainArea:hover,
 #downloadsListBox > richlistitem:not([verdict]) > .downloadButton:hover,
 #downloadsListBox > richlistitem[verdict]:hover {
     background-color: unset !important;
 }
-
-/* #downloadsListBox>.download-state:hover {
-    background-image: linear-gradient(to right, hsla(235.9, 100%, 82.9%, 0.09) 20%, hsla(235.9, 100%, 83%, 0.005) 80%) !important;
-} */
 
 #downloadsListBox>.download-state:hover {
     background-image: linear-gradient(
@@ -558,24 +509,6 @@ requires fullscreenNavBar.uc.js to set attributes popup-status and urlbar-status
     height: 20px !important;
 }
 
-/* wrap all toolbar buttons in a slider - corresponds to navbarToolbarbuttonSlider.uc.js */
-/* #nav-bar-toolbarbutton-slider {
-  display: -moz-box !important;
-  overflow-x: scroll !important;
-  overflow-y: hidden !important;
-  max-width: 352px !important;
-  scrollbar-width: none !important;
-}
-
-#nav-bar-overflow-button {
-    display: none !important;
-    visibility: collapse !important;
-}
-
-#customization-panelWrapper {
-    --panel-arrow-offset: 0 !important;
-} */
-
 #urlbar:not([focused="true"]):not(:hover) #urlbar-input,
 #urlbar:not([focused="true"]):hover #urlbar-input {
     transition: 150ms ease-in-out all !important;
@@ -606,8 +539,6 @@ requires fullscreenNavBar.uc.js to set attributes popup-status and urlbar-status
 @-moz-document url("chrome://global/content/alerts/alert.xhtml") {
     #alertBox {
         background-color: rgba(18, 18, 18, 0.97) !important;
-/*         background-image: url("texture/noise-512x512.png") !important;
-        backdrop-filter: blur(22px) !important; */
         box-shadow: 0 0 9px 3px rgba(0, 0, 0, 0.2) !important;
         color: white !important;
         fill: rgba(255, 255, 255, 0.5) !important;
@@ -624,9 +555,6 @@ requires fullscreenNavBar.uc.js to set attributes popup-status and urlbar-status
         font-weight: normal !important;
         font-size: 14px !important;
     }
-    
-/*     #alertTextLabel {
-    } */
     
     #alertSourceLabel {
         font-family: FreeMono, monospace !important;
@@ -736,11 +664,10 @@ requires fullscreenNavBar.uc.js to set attributes popup-status and urlbar-status
     }
 }
 
-/* backdrop blur on some elements */
 #fullscreen-warning {
-/*     background-image: url("texture/noise-512x512.png") !important; */
     background-color: var(--urlbarView-bgcolor) !important;
-/*     backdrop-filter: blur(22px) !important; */
+    /* background-image: url("texture/noise-512x512.png") !important;
+    backdrop-filter: blur(22px) !important; */
 }
 
 /* dialog and ugly window styling */
@@ -903,55 +830,6 @@ requires fullscreenNavBar.uc.js to set attributes popup-status and urlbar-status
     display: none !important;
 }
 
-/* testing */
-/* #nav-bar {
-    z-index: 0 !important;
-    padding-inline-end: 95px !important;
-}
-
-:root:not([chromehidden~="toolbar"]) #PanelUI-button {
-    margin-inline-end: 3px;
-    border-inline-end: 1px solid;
-    padding-inline-end: 5px;
-}
-
-:root:not([uidensity="compact"]):not([chromehidden~="toolbar"]) #PanelUI-button {
-    margin-inline-start: 0 !important;
-    padding-inline-start: 0 !important;
-    border-inline-start: none !important;
-}
-
-#titlebar {
-    position: fixed !important;
-    display: block !important;
-    top: 0px !important;
-    height: 74px !important;
-    width: 100% !important;
-    background: none !important;
-    z-index: 1 !important;
-}
-
-#toolbar-menubar {
-    position: fixed !important;
-    top: 48px !important;
-}
-
-#TabsToolbar {
-    position: fixed !important;
-    display: block !important;
-    height: 35px !important;
-    top: 39px !important;
-    z-index: 5555 !important;
-}
-
-#toolbar-menubar[autohide="true"] + #TabsToolbar > .titlebar-buttonbox-container {
-    position: absolute !important;
-    display: block !important;
-    top: -27px !important;
-    right: 0 !important;
-    z-index: 50 !important;
-} */
-
 #sidebar-box {
     background-color: var(--tooltip-dark) !important;
     top: 74px !important;
@@ -961,45 +839,15 @@ requires fullscreenNavBar.uc.js to set attributes popup-status and urlbar-status
     position: fixed !important;
     left: 0 !important;
     right: auto !important;
-/*     animation: 0.2s ease-out both sidebar-step; */
 }
-
-/* #sidebar-box[checked] {
-    min-width: 270px !important;
-    max-width: 270px !important;
-    width: 263px !important;
-} */
 
 #sidebar-box[hidden] {
     display: none !important;
 }
 
-/* @keyframes sidebar-step {
-    0% {
-        transform: translateX(-100%);
-        opacity: 0;
-    }
-    100% {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-@keyframes sidebar-reverse {
-    0% {
-        transform: translateX(100%);
-        opacity: 0;
-    }
-    100% {
-        transform: translateX(0);
-        opacity: 1;
-    }
-} */
-
 #sidebar-box[positionend] {
     left: auto !important;
     right: 0 !important;
-/*     animation: 0.2s ease-out both sidebar-reverse; */
 }
 
 #sidebar-header {
@@ -1186,7 +1034,7 @@ requires fullscreenNavBar.uc.js to set attributes popup-status and urlbar-status
     fill: white !important;
 }
 
-/* picture-in-picture button */
+/* picture-in-picture button — put this in userContent.css, not userChrome.css. i just keep it in both files. */
 .pictureInPictureToggleButton {
     padding-block: 4px !important;
     padding-inline: 5px;
@@ -1360,6 +1208,3 @@ requires fullscreenNavBar.uc.js to set attributes popup-status and urlbar-status
     border-top-left-radius: 5px !important;
     border-top-right-radius: 5px !important;
 }
-
-
-

@@ -31,7 +31,7 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection {
     }
 }
 
-/* hide update popups, i think */
+/* hide update popups. i use a script for this now, updateNotificationSlayer.uc.js. use that instead, it's MUCH better. */
 /* #appMenu-notification-popup {
     display: none !important;
 } */
@@ -44,19 +44,11 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection {
 #fullscreen-button .toolbarbutton-icon {
     transition: none !important;
     list-style-image: url("chrome://browser/skin/fullscreen.svg") !important;
-/*     list-style-image: url("chrome://global/skin/media/fullscreenEnterButton.svg") !important;
-    padding: 4px !important;
-    padding-top: 3.5px !important; */
-/*     list-style-image: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 357.18 357.18' xml:space='preserve'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M123.292,96.7c-0.128-0.196-0.112-0.408-0.284-0.58L65.456,38.564l31.268,0.048c7.396,0,13.82-6.42,13.816-13.812    l0.004-10.524c0-7.648-6.22-13.868-13.864-13.868H15.04C11.264,0.408,7.7,2,5.072,4.68c-2.608,2.596-4.164,6.088-4.164,9.86V97.9    c-0.004,7.64,6.216,13.86,13.86,13.86l10.528,0.008c7.636,0,13.848-6.212,13.852-13.852l-0.02-31.32L89,116.472    c0.028,0.024,0.052,0.048,0.072,0.072l6.428,6.42c5.404,5.408,14.104,5.284,19.512-0.124l7.44-7.436    C127.576,110.272,127.884,102.144,123.292,96.7z'/><path fill='context-fill' fill-opacity='context-fill-opacity' d='M357.132,260.884c0-7.648-6.212-13.876-13.856-13.876L332.756,247c-7.384-0.008-13.836,6.444-13.836,13.836l0.048,31.272    L261.64,234.78c-0.18-0.18-0.5-0.268-0.696-0.4c-5.444-4.6-13.688-4.396-18.812,0.728l-7.444,7.444    c-5.4,5.4-5.316,14.32,0.1,19.736l6.42,6.42c0.024,0.024,0.048,0.048,0.072,0.072l49.656,49.656l-31.312-0.016    c-7.384,0-13.852,6.46-13.852,13.852l0.024,10.544c-0.008,7.64,6.228,13.876,13.868,13.868l83.38,0.032    c3.688-0.008,7.196-1.4,9.824-4.032l0.376-0.376c2.532-2.54,3.936-6.048,3.936-9.728L357.132,260.884z'/><path fill='context-fill' fill-opacity='context-fill-opacity' d='M122.308,242.804l-7.448-7.452c-5.12-5.116-13.412-5.24-18.852-0.648c-0.196,0.132-0.56,0.296-0.736,0.468l-57.084,57.084    l0.036-31.288c0.004-3.684-1.42-7.14-4.04-9.764c-2.624-2.62-6.104-4.072-9.792-4.064l-10.524-0.008    c-3.824,0-7.288,1.556-9.8,4.072C1.552,253.712,0,257.18,0,261v81.64c0,3.78,1.52,7.32,4.272,9.968    c2.544,2.648,6.084,4.164,9.86,4.164h83.36c7.644,0.008,13.864-6.212,13.864-13.852v-10.532c0-3.688-1.436-7.156-4.064-9.78    c-2.62-2.628-6.084-4.056-9.772-4.056l-31.296,0.024l49.412-49.404c0.024-0.024,0.044-0.04,0.064-0.064l5.584-5.584l0.84-0.844    C127.532,257.272,127.708,248.204,122.308,242.804z'/><path fill='context-fill' fill-opacity='context-fill-opacity' d='M356.348,14.576c0-3.772-1.516-7.312-4.264-9.964c-2.556-2.648-6.096-4.172-9.868-4.172h-81.64    c-3.82,0-7.288,1.556-9.796,4.064c-2.516,2.516-4.072,5.976-4.072,9.796v10.524c0,3.696,1.44,7.164,4.064,9.788    c2.616,2.62,6.084,4.056,9.772,4.056l31.288-0.04l-57.4,57.4c-0.172,0.18-0.312,0.516-0.444,0.712    c-4.592,5.444-4.436,13.704,0.68,18.82l7.452,7.452c5.4,5.4,14.412,5.276,19.82-0.132l6.42-6.42    c0.032-0.024,0.048-0.048,0.072-0.072l49.728-49.724l-0.032,31.296c0,3.692,1.416,7.14,4.04,9.756    c2.624,2.636,6.108,4.08,9.788,4.072l10.532,0.008c7.648,0,13.864-6.22,13.864-13.868L356.348,14.576z'/><path fill='context-fill' fill-opacity='context-fill-opacity' d='M205.732,151.704c-15.004-14.992-39.396-14.992-54.392,0c-14.996,14.992-14.996,39.392,0.004,54.392    c14.992,14.992,39.392,14.992,54.388,0C220.724,191.104,220.724,166.696,205.732,151.704z'/></svg>") !important; */
 }
 
 #fullscreen-button[checked="true"] .toolbarbutton-icon {
     background: var(--toolbarbutton-checked-background) !important;
     list-style-image: url("chrome://browser/skin/fullscreen-exit.svg") !important;
-/*     list-style-image: url("chrome://global/skin/media/fullscreenExitButton.svg") !important;
-    padding: 4px !important;
-    padding-top: 3.5px !important; */
-/*     list-style-image: url("data:image/svg+xml;utf8,<svg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 363.477 363.477' style='enable-background:new 0 0 363.477 363.477;' xml:space='preserve'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M111.786,15.199l-10.524-0.008c-7.64,0-13.852,6.212-13.852,13.852l0.016,31.32L37.558,10.487    c-0.032-0.024-0.052-0.048-0.072-0.072l-6.428-6.42C25.654-1.413,16.95-1.289,11.542,4.119l-7.436,7.436    c-5.124,5.132-5.436,13.26-0.84,18.704c0.128,0.196,0.112,0.408,0.284,0.58l57.544,57.556L29.83,88.347    c-7.396,0-13.82,6.42-13.82,13.812v10.524c0,7.648,6.22,13.868,13.864,13.868h81.64c3.78,0,7.344-1.592,9.968-4.272    c2.612-2.596,4.168-6.088,4.164-9.86l0.004-83.36C125.654,21.419,119.434,15.199,111.786,15.199z'/><path fill='context-fill' fill-opacity='context-fill-opacity' d='M359.342,332.279l-6.42-6.42c-0.024-0.024-0.048-0.048-0.072-0.072l-49.656-49.656l31.312,0.016    c7.384,0,13.852-6.46,13.852-13.852l-0.024-10.544c0.008-7.64-6.228-13.876-13.868-13.868l-83.38-0.032    c-3.688,0.008-7.196,1.4-9.824,4.032l-0.376,0.376c-2.532,2.54-3.936,6.048-3.936,9.728l0.048,81.696    c0,7.648,6.212,13.876,13.856,13.876l10.52,0.008c7.384,0.008,13.836-6.444,13.836-13.836l-0.048-31.272l57.328,57.328    c0.18,0.18,0.5,0.268,0.696,0.4c5.444,4.6,13.688,4.396,18.812-0.728l7.444-7.444    C364.842,346.615,364.758,337.695,359.342,332.279z'/><path fill='context-fill' fill-opacity='context-fill-opacity' d='M122.074,242.234c-2.54-2.648-6.08-4.164-9.86-4.164h-83.36c-7.64-0.008-13.864,6.212-13.86,13.852v10.532    c-0.004,3.688,1.432,7.156,4.06,9.78c2.62,2.628,6.084,4.056,9.776,4.056l31.292-0.024L10.71,325.674    c-0.024,0.024-0.04,0.04-0.064,0.064l-5.588,5.584l-0.836,0.84c-5.408,5.408-5.58,14.476-0.18,19.876l7.444,7.452    c5.124,5.116,13.412,5.24,18.852,0.648c0.196-0.132,0.564-0.296,0.736-0.468l57.084-57.084l-0.032,31.288    c-0.008,3.684,1.416,7.14,4.036,9.764c2.624,2.62,6.104,4.072,9.792,4.064l10.524,0.008c3.828,0,7.288-1.556,9.804-4.072    c2.512-2.508,4.064-5.976,4.064-9.796v-81.64C126.346,248.422,124.83,244.883,122.074,242.234z'/><path fill='context-fill' fill-opacity='context-fill-opacity' d='M359.382,11.599l-7.452-7.452c-5.4-5.4-14.412-5.276-19.82,0.132l-6.42,6.42c-0.032,0.024-0.048,0.048-0.072,0.072    L275.89,60.495l0.032-31.296c0-3.692-1.416-7.14-4.04-9.756c-2.624-2.636-6.108-4.08-9.788-4.072l-10.532-0.008    c-7.648,0-13.864,6.22-13.864,13.868l0.004,83.352c0,3.772,1.516,7.312,4.264,9.964c2.556,2.648,6.096,4.172,9.868,4.172h81.64    c3.82,0,7.288-1.556,9.796-4.064c2.516-2.516,4.072-5.976,4.072-9.796v-10.524c0-3.696-1.44-7.164-4.064-9.788    c-2.616-2.62-6.084-4.056-9.772-4.056l-31.288,0.04l57.4-57.4c0.172-0.18,0.312-0.516,0.444-0.712    C364.654,24.975,364.498,16.715,359.382,11.599z'/><path fill='context-fill' fill-opacity='context-fill-opacity' d='M208.846,154.495c-15.004-14.992-39.396-14.992-54.392,0c-14.996,14.992-14.996,39.392,0.004,54.392    c14.992,14.992,39.392,14.992,54.388,0C223.838,193.895,223.838,169.487,208.846,154.495z'/></svg>") !important; */
 }
 
 #fullscreen-button[checked="true"]:hover .toolbarbutton-icon {
@@ -69,23 +61,7 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection {
 
 :root:not([chromehidden~="toolbar"]) #nav-bar>#PanelUI-button {
     border-image-source: linear-gradient(transparent 4px, var(--lwt-toolbar-vertical-separator, hsla(240, 100%, 89%, 0.2)) 5.5px, var(--lwt-toolbar-vertical-separator, hsla(240, 100%, 89%, 0.2)) calc(100% - 6.5px), transparent calc(100% - 5px)) !important;
-/*     margin-inline-start: -2px !important;
-    border-inline-start: none !important;
-    border-image-slice: 1;
-    padding-inline-start: 0px !important; */
 }
-
-/* #PanelUI-menu-button .toolbarbutton-icon {
-    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30' width='30' height='30'><path d='M10.85 6.683A9.278 9.278 0 0 0 8.208 8.64c.37.008.74-.01 1.11-.05.428-.69.94-1.33 1.532-1.907zm.876-.38a10.12 10.12 0 0 1 2.337.16c.264-.236.51-.49.74-.753a9.277 9.277 0 0 0-3.077.593zm-.485.857a9.53 9.53 0 0 0-1.096 1.297 8.566 8.566 0 0 0 1.464-.455l-.365-.842zm.575-.246l.36.833c.445-.22.86-.477 1.248-.76a9.446 9.446 0 0 0-1.607-.073zm3.78-1.186a8.842 8.842 0 0 1-.8.9 10.05 10.05 0 0 1 3.85 1.99c.418-.505.795-1.038 1.13-1.595a9.385 9.385 0 0 0-4.18-1.295zM7.69 9.238a9.38 9.38 0 0 0-1.84 3.97 13.34 13.34 0 0 0 1.962.23 10.048 10.048 0 0 1 1.132-4.19 9.11 9.11 0 0 1-1.254-.01zm6.554-2.11a9.1 9.1 0 0 1-1.823 1.188l1.67 3.844a13.277 13.277 0 0 0 4.15-3.074 9.424 9.424 0 0 0-3.994-1.957zM9.686 9.17a9.413 9.413 0 0 0-1.256 4.283c1.7-.006 3.427-.34 5.09-1.037l-1.666-3.84a9.13 9.13 0 0 1-2.168.596zm10.612-1.81c-.354.583-.75 1.142-1.19 1.67a9.85 9.85 0 0 1 2.574 4.033 18.494 18.494 0 0 0 1.73-2.06 9.273 9.273 0 0 0-3.114-3.643zM5.746 13.82a9.278 9.278 0 0 0 .614 4.753 18.5 18.5 0 0 0 2.686.1 9.852 9.852 0 0 1-1.242-4.612c-.693-.03-1.38-.11-2.058-.24zM18.7 9.5a13.88 13.88 0 0 1-4.364 3.233l1.836 4.232a18.496 18.496 0 0 0 5.014-3.406A9.366 9.366 0 0 0 18.7 9.496zM8.42 14.072a9.265 9.265 0 0 0 1.32 4.563c1.97-.145 3.946-.61 5.863-1.42l-1.835-4.23A13.892 13.892 0 0 1 8.42 14.07zm15.276-2.415c-.55.734-1.156 1.43-1.813 2.084a9.88 9.88 0 0 1-.008 4.964 22.915 22.915 0 0 0 2.29-1.892 9.28 9.28 0 0 0-.47-5.152zm-17.04 7.57a9.282 9.282 0 0 0 3.51 3.8 22.9 22.9 0 0 0 2.89-.42 9.887 9.887 0 0 1-3.646-3.33c-.923.05-1.843.032-2.754-.05zm14.708-4.988a19.107 19.107 0 0 1-4.944 3.293L17.923 21a23.178 23.178 0 0 0 3.14-1.735s.002 0 .002-.002a9.3 9.3 0 0 0 .3-5.024zm-11.24 4.985a9.307 9.307 0 0 0 3.882 3.16 23.226 23.226 0 0 0 3.348-1.135l-1.503-3.465a19.138 19.138 0 0 1-5.724 1.44zM23.882 17.9a23.52 23.52 0 0 1-2.31 1.772 10.106 10.106 0 0 1-2.43 3.733 9.31 9.31 0 0 0 4.74-5.504zm-12.724 5.647a9.312 9.312 0 0 0 7.12.233 10.1 10.1 0 0 1-4.313-.744c-.932.23-1.87.398-2.807.51zm9.498-3.288c-.793.48-1.62.92-2.484 1.31l.585 1.35a9.455 9.455 0 0 0 1.9-2.663zm-5.654 2.496a9.47 9.47 0 0 0 3.185.413l-.585-1.348c-.86.365-1.726.677-2.6.935z' fill='context-fill' fill-opacity='context-fill-opacity'/><path d='M15 1.043c-4.777 0-8.998 2.397-11.525 6.053L6.182 8.66A10.874 10.874 0 0 1 15 4.153c3.626 0 6.84 1.777 8.818 4.505l2.707-1.564C23.998 3.44 19.777 1.044 15 1.044z' fill='context-fill' fill-opacity='context-fill-opacity'/><path d='M2.002 9.84A13.927 13.927 0 0 0 1 15.043c0 7.202 5.448 13.14 12.444 13.914V25.82C8.17 25.062 4.11 20.524 4.11 15.042c0-1.272.22-2.493.622-3.628L2.002 9.84zm25.996 0l-2.73 1.575a10.86 10.86 0 0 1 .62 3.628c0 5.482-4.058 10.02-9.332 10.776v3.135C23.552 28.183 29 22.245 29 15.043c0-1.84-.356-3.595-1.002-5.203z' fill='context-fill' fill-opacity='context-fill-opacity'/></svg>") !important;
-} */
-
-/* #PanelUI-menu-button[badge-status]>.toolbarbutton-badge-stack>.toolbarbutton-badge {
-    display: -moz-box;
-    height: 10px;
-    width: 10px;
-    background-size: contain;
-    border: none;
-} */
 
 #PanelUI-menu-button[badge-status=""]>.toolbarbutton-badge-stack>.toolbarbutton-badge {
     display: none !important;
@@ -122,15 +98,7 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection {
     fill: hsl(118, 89%, 24%) !important;
 }
 
-/* .panel-banner-item[notificationid^="update"]:not([disabled]) {
-    background-color: hsla(109.9, 90.9%, 47.3%, 0.1) !important;
-    color: HSL(240, 9.1%, 97.8%) !important;
-} */
-
 .panel-banner-item[notificationid^="update"]::after {
-    /* background: hsl(125, 81%, 57%) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-.6 -.6 12 12' width='17' height='17'><path stroke='context-stroke' stroke-width='1.5' stroke-linecap='round' d='M5 9V2M5 2L2 5M5 2l3 3'/></svg>") no-repeat center !important;
-    stroke: hsl(118, 89%, 24%) !important;
-    -moz-context-properties: stroke !important; */
     background: hsl(125, 81%, 57%) url("data:image/svg+xml;utf8,<svg fill='context-fill' fill-opacity='context-fill-opacity' stroke='context-stroke' version='1.1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 5'><path d='M7.707 3.293l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L4 2.414l2.293 2.293a.997.997 0 001.414 0 1 1 0 000-1.414z'/></svg>") no-repeat center !important;
     fill: hsl(118, 89%, 24%) !important;
     background-size: 72% !important;
@@ -143,40 +111,6 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection {
     filter: brightness(0.65) sepia(1) hue-rotate(185deg) !important;
 }
 
-/* move current url or placeholder left a little, except for UI pages */
-/* #urlbar:not([pageproxystate="invalid"]) #tracking-protection-icon-container:not([hidden="true"])~.urlbar-input-box>#urlbar-input {
-    margin-inline-start: -3px !important;
-}
-
-#urlbar[pageproxystate="invalid"] #identity-box>#identity-icon {
-    margin-inline-start: 2px !important;
-    margin-inline-end: -3px !important;
-    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 48 48'><defs><path id='prefix__a' d='M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z'/></defs><clipPath id='prefix__b'><use xlink:href='%23prefix__a' overflow='visible'/></clipPath><path clip-path='url(%23prefix__b)' fill='%23FBBC05' d='M0 37V11l17 13z'/><path clip-path='url(%23prefix__b)' fill='%23EA4335' d='M0 11l17 13 7-6.1L48 14V0H0z'/><path clip-path='url(%23prefix__b)' fill='%2334A853' d='M0 37l30-23 7.9 1L48 0v48H0z'/><path clip-path='url(%23prefix__b)' fill='%234285F4' d='M48 48L17 24l-4-3 35-10z'/></svg>") !important;
-}
-
-#urlbar[pageproxystate="invalid"] #urlbar-input,
-#urlbar:not([pageproxystate="invalid"]) #identity-box.extensionPage~.urlbar-input-box>#urlbar-input,
-#urlbar:not([pageproxystate="invalid"]) #tracking-protection-icon-container[hidden="true"]~#identity-box.unknownIdentity~.urlbar-input-box>#urlbar-input {
-    margin-inline-start: 1px !important;
-}
-
-
-#identity-box {
-    margin-inline-end: 2px !important;
-} */
-
-/* scale up tracking protection icon in url/searchbar a little */
-/* #tracking-protection-icon {
-    width: 17px !important;
-    margin-top: 0.2px !important;
-} */
-
-/* #tracking-protection-icon-animatable-box {
-    transform: scale(0.96) !important;
-    width: 17px !important;
-    margin-top: 0px !important;
-} */
-
 #tracking-protection-icon-box>#tracking-protection-icon-animatable-box {
     margin-inline-start: 0px !important;
 }
@@ -184,14 +118,6 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection {
 #tracking-protection-icon-box>#tracking-protection-icon {
     margin-inline-start: 0px !important;
 }
-
-/* #tracking-protection-icon-animatable-box:hover, #tracking-protection-icon-container[open="true"] {
-    filter: brightness(10) grayscale(1) !important;
-} */
-
-/* #tracking-protection-icon-container:not([open="true"]):not(:hover) #tracking-protection-icon-box:not([animate="true"]) #tracking-protection-icon-animatable-box {
-    filter: grayscale(1) !important;
-} */
 
 toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:hover, [open="true"]) #tracking-protection-icon-box:not([animate="true"]) #tracking-protection-icon {
     display: -moz-box !important;
@@ -220,60 +146,9 @@ toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:ho
     filter: brightness(1.15) saturate(1.5) contrast(1.15) !important;
 }
 
-/* hide identity labels in url bar, change identity icon hover */
-
-/* #identity-box:hover:active:not(.no-hover),
-#identity-box[open="true"] {
-    background-color: transparent !important;
-    fill-opacity: .95 !important;
-}
-
-#identity-box:hover:not(.no-hover):not([open="true"]) {
-    fill-opacity: .95 !important;
-    background-color: transparent !important;
-}
-
-#identity-box:not(.notSecureText):not(.chromeUI):hover:active:not(.no-hover),
-#identity-box:not(.notSecureText):not(.chromeUI)[open="true"] {
-    filter: brightness(25) grayscale(1) !important;
-}
-
-#identity-box:not(.notSecureText):not(.chromeUI):hover:not(.no-hover):not([open="true"]) {
-    filter: brightness(25) grayscale(1) !important;
-}
-
-#identity-box.notSecureText:hover:active:not(.no-hover)>#identity-icon,
-#identity-box.notSecureText[open="true"]>#identity-icon {
-    fill-opacity: 1 !important;
-}
-
-#identity-box.notSecureText:hover:not(.no-hover):not([open="true"])>#identity-icon {
-    fill-opacity: 1 !important;
-}
-
-#identity-box.chromeUI:hover:active:not(.no-hover)>#identity-icon,
-#identity-box.chromeUI[open="true"]>#identity-icon,
-#identity-box.chromeUI:hover:not(.no-hover):not([open="true"])>#identity-icon {
-    filter: brightness(1.35) contrast(1.15) !important;
-}
-
-#identity-box.chromeUI {
-    background-color: rgba(22,25,69,0.4) !important;
-}
-
-#identity-box.chromeUI:hover:active:not(.no-hover),
-#identity-box.chromeUI[open="true"],
-#identity-box.chromeUI:hover:not(.no-hover):not([open="true"]) {
-    background-color: rgba(28,33,86,0.4) !important;
-} */
-
 #identity-box:-moz-any(:hover:active, [open="true"], :hover:not([open="true"])) {
     background-color: transparent !important;
 }
-
-/* #identity-box:-moz-any(:hover:active, [open="true"], :hover:not([open="true"]))>#identity-icon {
-    fill: #fff !important;
-} */
 
 #identity-box[open="true"]>#identity-icon,
 #identity-box:-moz-any(:hover:active, :hover:not([open="true"]))>#identity-icon:hover {
@@ -291,56 +166,7 @@ toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:ho
     fill-opacity: 1 !important;
 }
 
-/* #urlbar[pageproxystate="valid"] > #identity-box.weakCipher:-moz-any(:hover:active, [open="true"], :hover:not([open="true"])) > #identity-icon[lock-icon-gray],
-#urlbar[pageproxystate="valid"] > #identity-box.mixedDisplayContent:-moz-any(:hover:active, [open="true"], :hover:not([open="true"])) > #identity-icon[lock-icon-gray],
-#urlbar[pageproxystate="valid"] > #identity-box.mixedDisplayContentLoadedActiveBlocked:-moz-any(:hover:active, [open="true"], :hover:not([open="true"])) > #identity-icon[lock-icon-gray],
-#urlbar[pageproxystate="valid"] > #identity-box.certUserOverriden:-moz-any(:hover:active, [open="true"], :hover:not([open="true"])) > #identity-icon[lock-icon-gray] {
-    fill: RGB(235, 198, 90) !important;
-    fill-opacity: 1 !important;
-    list-style-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path d='M8 1a4 4 0 0 0-4 4v1.984h-.5a1.5 1.5 0 0 0-1.5 1.5V13.5A1.5 1.5 0 0 0 3.5 15h2.535a2.274 2.274 0 0 1 .207-1.318L9.43 7.27a2.266 2.266 0 0 1 .2-.286H6V5a2 2 0 0 1 4 0v1.568A2.255 2.255 0 0 1 11.478 6a2.283 2.283 0 0 1 .522.073V5a4 4 0 0 0-4-4z' fill='RGB(255, 238, 40)' fill-opacity='1' style=''/><path d='M15.818 14.127l-3.189-6.411a1.285 1.285 0 0 0-2.3 0l-3.192 6.411A1.294 1.294 0 0 0 8.289 16h6.377a1.294 1.294 0 0 0 1.152-1.873z' fill='%23dd1f1f' style=''/><path d='M11.478 8a.272.272 0 0 1 .256.161l3.188 6.412a.291.291 0 0 1-.013.291.275.275 0 0 1-.243.137H8.289a.275.275 0 0 1-.243-.137.29.29 0 0 1-.013-.291l3.188-6.412A.272.272 0 0 1 11.478 8m0-1a1.272 1.272 0 0 0-1.152.716l-3.189 6.411A1.294 1.294 0 0 0 8.289 16h6.377a1.294 1.294 0 0 0 1.152-1.873l-3.189-6.411A1.272 1.272 0 0 0 11.478 7z' fill='%23ff1111' opacity='.35'/><path d='M11.5 12a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-1 0v2a.5.5 0 0 0 .5.5zm0 .809a.691.691 0 1 0 .691.691.691.691 0 0 0-.691-.691z' fill='%23fff'/></svg>") !important;
-}
-
-#urlbar[pageproxystate="valid"] > #identity-box.weakCipher > #identity-icon,
-#urlbar[pageproxystate="valid"] > #identity-box.mixedDisplayContent > #identity-icon,
-#urlbar[pageproxystate="valid"] > #identity-box.mixedDisplayContentLoadedActiveBlocked > #identity-icon,
-#urlbar[pageproxystate="valid"] > #identity-box.certUserOverridden > #identity-icon {
-    list-style-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path d='M8 1a4 4 0 0 0-4 4v1.984h-.5a1.5 1.5 0 0 0-1.5 1.5V13.5A1.5 1.5 0 0 0 3.5 15h2.535a2.274 2.274 0 0 1 .207-1.318L9.43 7.27a2.266 2.266 0 0 1 .2-.286H6V5a2 2 0 0 1 4 0v1.568A2.255 2.255 0 0 1 11.478 6a2.283 2.283 0 0 1 .522.073V5a4 4 0 0 0-4-4z' fill='white' fill-opacity='0.6' style=''/><path d='M15.818 14.127l-3.189-6.411a1.285 1.285 0 0 0-2.3 0l-3.192 6.411A1.294 1.294 0 0 0 8.289 16h6.377a1.294 1.294 0 0 0 1.152-1.873z' fill='%23dd1f1f' style=''/><path d='M11.478 8a.272.272 0 0 1 .256.161l3.188 6.412a.291.291 0 0 1-.013.291.275.275 0 0 1-.243.137H8.289a.275.275 0 0 1-.243-.137.29.29 0 0 1-.013-.291l3.188-6.412A.272.272 0 0 1 11.478 8m0-1a1.272 1.272 0 0 0-1.152.716l-3.189 6.411A1.294 1.294 0 0 0 8.289 16h6.377a1.294 1.294 0 0 0 1.152-1.873l-3.189-6.411A1.272 1.272 0 0 0 11.478 7z' fill='%23ff1111' opacity='.35'/><path d='M11.5 12a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-1 0v2a.5.5 0 0 0 .5.5zm0 .809a.691.691 0 1 0 .691.691.691.691 0 0 0-.691-.691z' fill='%23fff'/></svg>") !important;
-    fill: white;
-    fill-opacity: .6;
-} */
-
-/* .mixedActiveBlocked, .weakCipher, .mixedDisplayContent, .mixedDisplayContentLoadedActiveBlocked, .certUserOverriden
-.notSecure, .insecureLoginForms, .mixedActiveContent */
-
-/* #identity-box:not(.notSecureText):not(.chromeUI):hover:active,
-#identity-box:not(.notSecureText):not(.chromeUI)[open="true"] {
-    filter: brightness(25) grayscale(1) !important;
-}
-
-#identity-box:not(.notSecureText):not(.mixedDisplayContent):not(.chromeUI):hover:not([open="true"]) {
-    filter: brightness(25) grayscale(1) !important;
-} */
-
-/* #identity-box:hover:active>#identity-icon,
-#identity-box[open="true"]>#identity-icon {
-    fill-opacity: 1 !important;
-}
-
-#identity-box:hover:not([open="true"])>#identity-icon {
-    fill-opacity: 1 !important;
-}
-
-#identity-box.unknownIdentity:hover:active>#identity-icon,
-#identity-box.unknownIdentity[open="true"]>#identity-icon {
-    fill-opacity: 0.95 !important;
-}
-
-#identity-box.unknownIdentity:hover:not([open="true"])>#identity-icon {
-    fill-opacity: 0.95 !important;
-} */
-
 #identity-box.chromeUI:-moz-any(:hover:active, [open="true"], :hover:not([open="true"]))>#identity-icon {
-    /*     filter: brightness(1.2) contrast(0.9) !important; */
     list-style-image: url("chrome://branding/content/about-logo.png") !important;
 }
 
@@ -364,11 +190,6 @@ toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:ho
     border-image-slice: 1;
 }
 
-/* #identity-box.chromeUI {
-    border: none !important;
-    padding-right: 8.8px !important;
-} */
-
 #tracking-protection-icon-container {
     fill-opacity: .5 !important;
 }
@@ -378,10 +199,6 @@ toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:ho
     background-color: transparent !important;
     fill-opacity: 1 !important;
 }
-
-/* #urlbar[pageproxystate="valid"]>#identity-box:not(.chromeUI):not(.extensionPage) {
-    padding-inline-start: 0px !important;
-} */
 
 #urlbar[pageproxystate="invalid"] #identity-box {
     padding-inline-start: 4px;
@@ -403,7 +220,6 @@ toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:ho
 #identity-box.notSecureText,
 #identity-box.verifiedIdentity,
 #urlbar-display-box {
-    /*     margin-inline-end: 0px !important; */
     border: none !important;
 }
 
@@ -419,25 +235,6 @@ toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:ho
     display: none !important;
 }
 
-/* #urlbar[pageproxystate="valid"] #tracking-protection-icon-container:not([hidden="true"])~#identity-box:not(.chromeUI):not(.extensionPage) {
-    margin-inline-start: -8px !important;
-    padding-inline-start: 0px !important;
-}
-
-#urlbar[pageproxystate="valid"] #identity-box:not(.chromeUI)>#identity-icon {
-    margin-left: 2px !important;
-    margin-right: 0px !important;
-}
-
-#urlbar[pageproxystate="valid"] #tracking-protection-icon-container[hidden="true"]~#identity-box.unknownIdentity>#identity-icon {
-    margin-inline-end: -3px !important;
-}
-
-#urlbar[pageproxystate="valid"] #tracking-protection-icon-container:not([hidden="true"])~#identity-box {
-    padding-inline-end: 6px !important;
-    margin-inline-end: 2px !important;
-} */
-
 #identity-box[pageproxystate="valid"].notSecureText,
 #identity-box[pageproxystate="valid"].verifiedIdentity,
 #identity-box[pageproxystate="valid"].extensionPage {
@@ -445,14 +242,7 @@ toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:ho
     margin-inline-end: 2px !important;
 }
 
-/* connection security popup text position */
-/* .identity-popup-security-connection,
-#identity-popup-security-description {
-    padding-inline-start: calc(1.5em + 14px) !important;
-} */
-
 .identity-popup-security-connection {
-    /*     background-position: 1.5em 50% !important; */
     background-position: 2.1em 50% !important;
 }
 
@@ -564,22 +354,6 @@ toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:ho
     pointer-events: none !important;
 }
 
-/* #identity-popup-security-expander {
-    border-radius: 3px !important;
-    width: 34px !important;
-    height: 34px !important;
-    margin-inline-end: 12px !important;
-    background-size: 20px !important;
-}
-
-#identity-popup-security-expander:hover {
-    fill-opacity: 0.8 !important;
-}
-
-#identity-popup-security {
-    -moz-box-align: center !important;
-} */
-
 .panel-header > .subviewbutton-back,
 .panel-header > .subviewbutton-back > .toolbarbutton-icon {
     -moz-context-properties: fill, fill-opacity !important;
@@ -590,15 +364,6 @@ toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:ho
 .panel-header > .subviewbutton-back:hover > .toolbarbutton-icon {
     fill-opacity: 0.8;
 }
-
-/* weird border-bottom under identity popup button */
-/* #identity-popup .panel-arrowcontent {
-    background: none !important;
-} */
-
-/* #identity-box>#notification-popup-box>image, #identity-box>#sharing-icon, #identity-box>#blocked-permissions-container>image {
-    margin-left: 7px !important;
-} */
 
 /* put animated colored tracking protection icon on every site */
 #tracking-protection-icon-box:not([animationsenabled]):not([active]):not([hasException])>#tracking-protection-icon-animatable-box,
@@ -636,44 +401,15 @@ toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:ho
 }
 
 
-/* show identity icon on extension pages except NTP */
-/* #urlbar:not([pageproxystate="invalid"]) #identity-box.extensionPage~.urlbar-input-box>#urlbar-input {
-    margin-inline-start: -1px !important;
-} */
-
-/* hide tracking protection icon on new tab page, and show search identity icon */
+/* hide tracking protection icon on new tab page, and show search identity icon. again, message u/MotherStylus if you want my tab notes addon. */
 #main-window[title="Tab Notes - Firefox Nightly"] #tracking-protection-icon-container {
     visibility: collapse;
 }
-
-/* #urlbar[pageproxystate="valid"] #identity-box.extensionPage {
-    border: none !important;
-    border-image: none !important;
-    margin-inline-start: 0px !important;
-    padding-inline-start: 6px !important;
-    pointer-events: none;
-    -moz-user-focus: ignore;
-}
-
-#urlbar[pageproxystate="valid"] #identity-box.extensionPage>#identity-icon {
-    margin-inline-start: 2px !important;
-    margin-inline-end: -3px !important;
-    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 48 48'><defs><path id='prefix__a' d='M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z'/></defs><clipPath id='prefix__b'><use xlink:href='%23prefix__a' overflow='visible'/></clipPath><path clip-path='url(%23prefix__b)' fill='%23FBBC05' d='M0 37V11l17 13z'/><path clip-path='url(%23prefix__b)' fill='%23EA4335' d='M0 11l17 13 7-6.1L48 14V0H0z'/><path clip-path='url(%23prefix__b)' fill='%2334A853' d='M0 37l30-23 7.9 1L48 0v48H0z'/><path clip-path='url(%23prefix__b)' fill='%234285F4' d='M48 48L17 24l-4-3 35-10z'/></svg>") !important;
-} */
-
-/* #urlbar[pageproxystate="valid"] #identity-box.extensionPage ~ .urlbar-input-box {
-    margin-inline-start: 0px !important;
-    padding-inline-start: 31px !important;
-} */
 
 #urlbar-input::placeholder {
     opacity: 0.4 !important;
     color: rgb(255, 255, 255) !important;
 }
-
-/* #urlbar[focused="true"] #identity-box.extensionPage~.urlbar-input-box>#urlbar-input::placeholder {
-    opacity: 0 !important;
-} */
 
 #urlbar[focused="true"] .urlbar-input-box>#urlbar-input::placeholder {
     opacity: 0.65 !important;
@@ -693,47 +429,6 @@ toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:ho
 #plugins-notification-icon[extraAttr="inactive"] > #plugin-icon-badge {
     fill-opacity: 1;
 }
-
-/* fix firefox color? */
-:root {
-    --lwt-accent-color: hsl(233, 61%, 8%) !important;
-    --lwt-text-color: hsl(213, 43%, 89%) !important;
-    --lwt-additional-images: url("moz-extension://a881e65b-0464-4a83-8e5c-124f87e00995/images/bg-000-5672c42860d5b06e1058dc477397f3ef.svg") !important;
-    --panel-disabled-color: hsla(213, 43%, 89%, 0.5) !important;
-    --arrowpanel-background: hsl(233, 36%, 11%) !important;
-    --arrowpanel-color: hsl(213, 43%, 89%) !important;
-    --lwt-toolbar-field-background-color: hsla(233, 25%, 28%, 85%) !important;
-    --lwt-toolbar-field-color: hsl(0, 0%, 100%) !important;
-    --lwt-background-alignment: top !important;
-    --lwt-background-tiling: repeat !important;
-    --toolbar-bgcolor: hsl(231, 42%, 15%) !important;
-    --toolbar-color: hsl(0, 0%, 100%) !important;
-    --autocomplete-popup-background: hsl(233, 36%, 11%) !important;
-    --autocomplete-popup-color: hsl(213, 43%, 89%) !important;
-    --urlbarView-bgcolor: hsla(233, 38%, 9%, 0.8) !important;
-    --ui-textbox-bgcolor: hsl(233, 24%, 28%) !important;
-    --ui-textbox-focus-bgcolor: hsl(232, 20%, 38%) !important;
-    --ebmp-hover-bgcolor: hsl(233, 24%, 33%) !important;
-    --ebmp-focus-bgcolor: hsl(233, 24%, 38%) !important;
-/*     --lwt-accent-color: hsl(233, 61%, 8%) !important;
-    --lwt-text-color: hsl(213, 43%, 89%) !important;
-    --toolbar-bgcolor: hsl(231, 42%, 15%) !important;
-    --lwt-toolbar-field-background-color: hsl(233, 24%, 28%) !important; */
-    --toolbarbutton-icon-fill-opacity: 1 !important;
-/*     --arrowpanel-border-color: hsla(233, 36%, 11%, 0) !important; */
-/*     --arrowpanel-border-color: hsla(210, 4%, 10%, 0.2) !important; */
-}
-
-:root {
-    --urlbar-popup-url-color: hsl(251, 100%, 64%) !important;
-    --urlbar-popup-action-color: hsl(340, 73%, 58%) !important;
-}
-
-/* no scrollbar on findbar */
-/* put in userChrome.js */
-/* findbar > scrollbar {\
-    display: none !important;\
-}\ */
 
 findbar {
     overflow: hidden;
@@ -974,7 +669,6 @@ menupopup[menu-api] menuseparator:not([hidden="true"])+ :-moz-any(menu, menuitem
 #downloadsContextMenu :is(menuitem, menu) image,
 menupopup[menu-api] :is(menuitem, menu) image,
 #PlacesToolbar menupopup :is(menuitem, menu) image {
-    /*     margin: 0 -3px 0 3px; */
     margin-left: 3px;
     margin-right: -3px;
 }
@@ -1039,12 +733,6 @@ menupopup[menu-api] menugroup,
 menupopup[menu-api] .menu-right,
 #PlacesToolbar menupopup .menu-right {
     -moz-appearance: none !important;
-/*     padding: 7px !important;
-    margin-right: 6px !important;
-    color: rgba(255, 255, 255, 0.8) !important;
-    border: solid white;
-    border-width: 0 2px 2px 0;
-    transform: rotate(-45deg) scale(.35); */
     padding: 0px !important;
     margin-right: 2px !important;
     width: 12px !important;
@@ -1123,7 +811,6 @@ menu.subviewbutton:not([disabled])[_moz-menuactive]:active {
     background-size: 16px !important;
     padding-left: 3px !important;
     margin-left: 0 !important;
-/*     opacity: 0.75 !important; */
 }
 
 #backForwardMenu menuitem[type="radio"],
