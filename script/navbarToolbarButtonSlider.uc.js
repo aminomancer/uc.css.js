@@ -310,6 +310,38 @@
             outer.addEventListener("scrollend", outer.on_Scrollend);
         }
 
+        // when you download a file in Firefox, a little gray arrow icon appears on the downloads toolbar button. this popup appears no matter where the downloads button is, as long as it's actually saved to a toolbar somewhere. it is anchored to the toolbar button itself, and for us the toolbar button's slider container is overflowing. so it's possible for the downloads button to be scrolled out of view, and still have the downloads animation appear. it will just be floating off over the urlbar or something, which looks pretty stupid. so we're overriding an internal function to give it some behavior it probably should have had anyway. now it will check that the toolbar button is actually scrolled into view relative to its parent before showing the popup. if the downloads button is scrolled out of view, then it'll just download the file without displaying the floating arrow.
+        function overflowDownloadsAnimation() {
+            DownloadsIndicatorView.showEventNotification = function showEventNotification(aType) {
+                if (!this._initialized) {
+                    return;
+                }
+
+                if (!DownloadsCommon.animateNotifications) {
+                    return;
+                }
+
+                let el = DownloadsButton._placeholder;
+                if (el?.parentNode.offsetLeft) {
+                    if (
+                        el.getBoundingClientRect().left - el.parentNode.offsetLeft <
+                        -(el.clientWidth * 0.5)
+                    )
+                        return;
+                }
+
+                // enqueue this notification while the current one is being displayed
+                if (this._currentNotificationType) {
+                    // only queue up the notification if it is different to the current one
+                    if (this._currentNotificationType != aType) {
+                        this._nextNotificationType = aType;
+                    }
+                } else {
+                    this._showNotification(aType);
+                }
+            };
+        }
+
         async function init() {
             // wait for nodes to be filtered. making an array from the DOM seems to be faster than using CustomizableUI's widgets list.
             // idk how but i guess the CustomizableUI component loads stuff lazily...
@@ -323,6 +355,7 @@
             wrapAll(array, inner, true);
             setupScroll();
             cleanUp();
+            overflowDownloadsAnimation();
         }
 
         init();
