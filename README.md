@@ -25,7 +25,7 @@ I might try to make the customization more user-friendly in the future if other 
 <br>
 <h2><b>Scripts:</b></h2>
 
-The files in the scripts folder are not content scripts like you'd load in Tampermonkey. They're meant to execute in the same context as Firefox's internal scripts. They're scripts for the Firefox frontend itself rather than pages. This is sort of analogous to gaining "privileges" to modify your UI document directly. With CSS alone you can only do so much. Even a lot of purely aesthetic features may require JavaScript, like the search engine icons shown in the GIF above.
+The files in the scripts folder are not content scripts like you'd load in Tampermonkey. They're meant to execute in the same context as Firefox's internal scripts. They're scripts for the Firefox frontend itself rather than for webpages. This is sort of analogous to gaining "privileges" to modify your UI document directly. With CSS alone you can only do so much. Even a lot of purely aesthetic features may require JavaScript, like the search engine icons shown in the GIF above.
 
 They are loaded by [**alice0775's autoconfig loader**](https://github.com/alice0775/userChrome.js/tree/master/72). From that repo you put the stuff in `install_folder` in the firefox installation folder. That is, you should end up with 1) a file called `config.js` in your Firefox installation's root directory; 2) a folder called `defaults` in the root directory; 3) a file called `config-prefs.js` inside that `defaults` folder. You may already have a file called `channel-prefs.js` inside that folder. This is unrelated.
 
