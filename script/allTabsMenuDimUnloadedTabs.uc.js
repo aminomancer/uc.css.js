@@ -51,12 +51,12 @@
     if (gBrowserInit.delayedStartupFinished) {
         start();
     } else {
-        let delayedStartupFinished = (subject, topic) => {
+        let delayedListener = (subject, topic) => {
             if (topic == "browser-delayed-startup-finished" && subject == window) {
-                Services.obs.removeObserver(delayedStartupFinished, topic);
+                Services.obs.removeObserver(delayedListener, topic);
                 start();
             }
         };
-        Services.obs.addObserver(delayedStartupFinished, "browser-delayed-startup-finished");
+        Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
     }
 })();

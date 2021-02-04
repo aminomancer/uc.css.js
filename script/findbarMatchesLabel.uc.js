@@ -7,7 +7,7 @@
 // as for the matches indicator, it's written to be as snappy as possible but the built-in indicator logic is a little buggy. we have to cover that weirdness up a bit by checking for unexpected values. it's slower when there are a ton of matched results. the indicator can be styled with the selector .matches-indicator. it's the next sibling of the findbar input box. see uc3.css in this repo for how i styled it. i think there's other findbar-related stuff in some of the other ucX.css files so do a search for 'findbar' or something. it's explained in more detail in the code comments below.
 // ==/UserScript==
 
-(function () {
+(() => {
     let findbarMatchesLabel = {
         /* on window startup, attach an event listener to the window's tab container that listens for the initialization of the findbar. every tab has its own findbar, or strictly speaking every tab has its own browser and every browser has its own findbar. a findbar is not actually created when you make a new tab though. you have to actually hit ctrl+F to generate the object that we reference with gFindBar. it doesn't get garbage collected when you close the findbar, so each tab should only ever have one findbar object under ordinary circumstances. but the initial setup requires user interaction, so we need to use this special event which i guess was made for test purposes but is apparently also used to help resist fingerprinting somehow. */
         init() {
@@ -106,12 +106,12 @@
     if (gBrowserInit.delayedStartupFinished) {
         findbarMatchesLabel.init();
     } else {
-        let delayedStartupFinished = (subject, topic) => {
+        let delayedListener = (subject, topic) => {
             if (topic == "browser-delayed-startup-finished" && subject == window) {
-                Services.obs.removeObserver(delayedStartupFinished, topic);
+                Services.obs.removeObserver(delayedListener, topic);
                 findbarMatchesLabel.init();
             }
         };
-        Services.obs.addObserver(delayedStartupFinished, "browser-delayed-startup-finished");
+        Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
     }
 })();

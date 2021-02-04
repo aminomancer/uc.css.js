@@ -61,14 +61,14 @@
 
     // wait until gURLBar is initialized to attach event listeners
     if (gBrowserInit.delayedStartupFinished) {
-        init();
+        setTimeout(init, 1000);
     } else {
-        let delayedStartupFinished = (subject, topic) => {
+        let delayedListener = (subject, topic) => {
             if (topic == "browser-delayed-startup-finished" && subject == window) {
-                Services.obs.removeObserver(delayedStartupFinished, topic);
-                init();
+                Services.obs.removeObserver(delayedListener, topic);
+                setTimeout(init, 1000);
             }
         };
-        Services.obs.addObserver(delayedStartupFinished, "browser-delayed-startup-finished");
+        Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
     }
 })();

@@ -142,16 +142,14 @@
     }
     // wait until components are initialized so we can access SidebarUI
     if (gBrowserInit.delayedStartupFinished) {
-        // if we're executing after it's already finished then just call startup
         startup();
     } else {
-        // otherwise set up a listener that calls startup when it really is finished
-        let delayedStartupFinished = (subject, topic) => {
+        let delayedListener = (subject, topic) => {
             if (topic == "browser-delayed-startup-finished" && subject == window) {
-                Services.obs.removeObserver(delayedStartupFinished, topic);
+                Services.obs.removeObserver(delayedListener, topic);
                 startup();
             }
         };
-        Services.obs.addObserver(delayedStartupFinished, "browser-delayed-startup-finished");
+        Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
     }
 })();
