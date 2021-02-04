@@ -30,7 +30,6 @@
         let toolbox = ChromeUtils.import(
             "resource://devtools/client/framework/browser-toolbox/Launcher.jsm"
         ).BrowserToolboxLauncher;
-        
 
         if (
             "chrome://browser/content/browser.xul" == location ||
@@ -44,7 +43,7 @@
                     onBuild: function (aDoc) {
                         let CustomHint = {
                             _timerID: null,
-                
+
                             /**
                              * Shows a transient, non-interactive confirmation hint anchored to an
                              * element, usually used in response to a user action to reaffirm that it was
@@ -65,9 +64,9 @@
                              */
                             show(anchor, message, options = {}) {
                                 this._reset();
-                
+
                                 this._message.textContent = message;
-                
+
                                 if (options.description) {
                                     this._description.textContent = options.description;
                                     this._description.hidden = false;
@@ -76,16 +75,16 @@
                                     this._description.hidden = true;
                                     this._panel.classList.remove("with-description");
                                 }
-                
+
                                 if (options.hideArrow) {
                                     this._panel.setAttribute("hidearrow", "true");
                                 }
-                
+
                                 if (options.hideCheck) {
                                     this._animationBox.setAttribute("hidden", "true");
                                     this._panel.setAttribute("data-message-id", "hideCheckHint");
                                 } else this._panel.setAttribute("data-message-id", "checkmarkHint");
-                
+
                                 const DURATION = options.duration || 1500;
                                 this._panel.addEventListener(
                                     "popupshown",
@@ -98,7 +97,7 @@
                                     },
                                     { once: true }
                                 );
-                
+
                                 this._panel.addEventListener(
                                     "popuphidden",
                                     () => {
@@ -107,13 +106,13 @@
                                     },
                                     { once: true }
                                 );
-                
+
                                 this._panel.openPopup(anchor, {
                                     position: "bottomcenter topleft",
                                     triggerEvent: options.event,
                                 });
                             },
-                
+
                             _reset() {
                                 if (this._timerID) {
                                     clearTimeout(this._timerID);
@@ -127,12 +126,12 @@
                                     this._panel.hidePopup();
                                 }
                             },
-                
+
                             get _panel() {
                                 this._ensurePanel();
                                 return this.__panel;
                             },
-                
+
                             get _animationBox() {
                                 this._ensurePanel();
                                 delete this._animationBox;
@@ -140,13 +139,15 @@
                                     "confirmation-hint-checkmark-animation-container"
                                 ));
                             },
-                
+
                             get _message() {
                                 this._ensurePanel();
                                 delete this._message;
-                                return (this._message = aDoc.getElementById("confirmation-hint-message"));
+                                return (this._message = aDoc.getElementById(
+                                    "confirmation-hint-message"
+                                ));
                             },
-                
+
                             get _description() {
                                 this._ensurePanel();
                                 delete this._description;
@@ -154,13 +155,15 @@
                                     "confirmation-hint-description"
                                 ));
                             },
-                
+
                             _ensurePanel() {
                                 if (!this.__panel) {
                                     let wrapper = aDoc.getElementById("confirmation-hint-wrapper");
                                     wrapper?.replaceWith(wrapper.content);
                                     this.__panel = aDoc.getElementById("confirmation-hint");
-                                    ConfirmationHint.__panel = aDoc.getElementById("confirmation-hint");
+                                    ConfirmationHint.__panel = aDoc.getElementById(
+                                        "confirmation-hint"
+                                    );
                                 }
                             },
                         };
@@ -195,7 +198,8 @@
                         toolbarbutton.onclick = (e) => {
                             switch (e.button) {
                                 case 0:
-                                    e.preventDefault(), key_toggleToolbox.click();
+                                    e.preventDefault(),
+                                        e.target.ownerDocument.defaultView.key_toggleToolbox.click();
                                     break;
                                 case 2:
                                     e.preventDefault();
@@ -205,7 +209,7 @@
                                               "Browser Toolbox is already open.",
                                               { event: e, hideCheck: true }
                                           )
-                                        : key_browserToolbox.click();
+                                        : e.target.ownerDocument.defaultView.key_browserToolbox.click();
                                     break;
                                 case 1:
                                     e.preventDefault();
