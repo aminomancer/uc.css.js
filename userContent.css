@@ -189,6 +189,7 @@
 
 #publication .flipbook .background .img-fit {
     background-color: transparent !important;
+    -webkit-filter: invert(1) hue-rotate(180deg) contrast(0.9) brightness(0.8) !important;
     filter: invert(1) hue-rotate(180deg) contrast(0.9) brightness(0.8) !important;
 }
 
@@ -275,6 +276,7 @@
 
 #pictureInPictureToggle .pip-icon-label {
     padding-block: 4px !important;
+    -webkit-padding-start: 5.5px;
     padding-inline-start: 5.5px;
     font-size: 13px !important;
     line-height: 20px !important;
@@ -317,10 +319,12 @@
 
 input[type="number"] {
     -moz-appearance: none;
+    -webkit-appearance: none;
     appearance: none;
 }
 
 input[type="number"]::-moz-number-spin-box {
+    -moz-appearance: none;
     appearance: none;
     min-width: 16px;
     min-height: 100%;
@@ -330,6 +334,7 @@ input[type="number"]::-moz-number-spin-box {
 
 input[type="number"]::-moz-number-spin-up,
 input[type="number"]::-moz-number-spin-down {
+    -moz-appearance: none;
     appearance: none;
     -moz-context-properties: fill, fill-opacity;
     fill-opacity: 0.4;
@@ -432,6 +437,7 @@ input[type="number"]::-moz-number-spin-up:hover {
     }
     
     .sidebar__footer__support-help {
+        -moz-column-gap: calc(var(--base-unit) * 1.5) !important;
         column-gap: calc(var(--base-unit) * 1.5) !important;
     }
     
@@ -603,6 +609,7 @@ input[type="number"]::-moz-number-spin-up:hover {
     input[type="number"]::-moz-number-spin-box {
         border: none !important;
         margin: 0 !important;
+        -moz-appearance: none !important;
         appearance: none !important;
         background: none !important;
         width: 16px;
@@ -617,6 +624,7 @@ input[type="number"]::-moz-number-spin-up:hover {
     
     input[type="number"]::-moz-number-spin-up,
     input[type="number"]::-moz-number-spin-down {
+        -moz-appearance: none !important;
         appearance: none !important;
         -moz-context-properties: fill, fill-opacity;
         fill-opacity: 0.4;
@@ -699,12 +707,12 @@ img.transparent {
     background: center/16px repeat hsl(0, 0%, 25%) url(checker.svg) !important;
 }
 
-::selection {
+::-moz-selection {
     background-color: rgba(142, 132, 255, 0.5) !important;
     color: #fff !important;
 }
 
-::-moz-selection {
+::selection {
     background-color: rgba(142, 132, 255, 0.5) !important;
     color: #fff !important;
 }
@@ -740,9 +748,6 @@ img.transparent {
 .ps-container>.ps-scrollbar-y-rail,
 .ps-container>.ps-scrollbar-x-rail {
     opacity: 0 !important;
-    -webkit-transition: background-color .1s linear, opacity .1s linear !important;
-    -o-transition: background-color .1s linear, opacity .1s linear !important;
-    -moz-transition: background-color .1s linear, opacity .1s linear !important;
     transition: background-color .1s linear, opacity .1s linear !important;
 }
 
@@ -799,12 +804,12 @@ img.transparent {
             background-color: transparent !important;
         }
 
-        ::selection {
+        ::-moz-selection {
             color: rgb(25, 25, 27) !important;
             background-color: rgba(255, 255, 255, 0.8) !important;
         }
 
-        ::-moz-selection {
+        ::selection {
             color: rgb(25, 25, 27) !important;
             background-color: rgba(255, 255, 255, 0.8) !important;
         }
@@ -832,18 +837,22 @@ img.transparent {
         background: none !important;
     }
 
-    ::selection {
+    ::-moz-selection {
         color: rgb(25, 25, 27) !important;
         background-color: rgba(255, 255, 255, 0.8) !important;
     }
 
-    ::-moz-selection {
+    ::selection {
         color: rgb(25, 25, 27) !important;
         background-color: rgba(255, 255, 255, 0.8) !important;
     }
 
     .attribute-name {
         color: lightskyblue !important;
+    }
+
+    .attribute-name::-moz-selection {
+        color: darkcyan !important;
     }
 
     .attribute-name::selection {
@@ -854,6 +863,10 @@ img.transparent {
         color: lightgreen !important;
     }
 
+    .attribute-value::-moz-selection {
+        color: darkgreen !important;
+    }
+
     .attribute-value::selection {
         color: darkgreen !important;
     }
@@ -862,12 +875,20 @@ img.transparent {
         color: tan !important;
     }
 
+    .start-tag::-moz-selection {
+        color: darkgoldenrod !important;
+    }
+
     .start-tag::selection {
         color: darkgoldenrod !important;
     }
 
     .end-tag {
         color: indianred !important;
+    }
+
+    .end-tag::-moz-selection {
+        color: sienna !important;
     }
 
     .end-tag::selection {
@@ -879,6 +900,17 @@ img.transparent {
         background-color: rgba(178, 34, 34, 0.5) !important;
     }
 
+    .error::-moz-selection,
+    .error>*::-moz-selection {
+        color: firebrick !important;
+        background-color: rgba(255, 255, 255, 0.8) !important;
+    }
+
+    .error::-moz-selection, .error>*::-moz-selection {
+        color: firebrick !important;
+        background-color: rgba(255, 255, 255, 0.8) !important;
+    }
+
     .error::selection,
     .error>*::selection {
         color: firebrick !important;
@@ -887,6 +919,10 @@ img.transparent {
 
     .entity {
         color: mediumorchid !important;
+    }
+
+    .entity::-moz-selection {
+        color: darkorchid !important;
     }
 
     .entity::selection {
@@ -1222,6 +1258,11 @@ domain("wikimedia.org") {
         border-radius: 3px !important;
     }
     
+    #mw-head #searchform>div#simpleSearch:focus-within ::-moz-placeholder {
+        opacity: 1 !important;
+        color: hsla(0, 0%, 100%, 0.5) !important;
+    }
+    
     #mw-head #searchform>div#simpleSearch:focus-within ::placeholder {
         opacity: 1 !important;
         color: hsla(0, 0%, 100%, 0.5) !important;
@@ -1378,8 +1419,6 @@ domain("wikimedia.org") {
     }
     
     .skin-vector .uls-search-label {
-        -webkit-transition: none !important;
-        -moz-transition: none !important;
         transition: none !important;
     }
     
@@ -1395,7 +1434,15 @@ domain("wikimedia.org") {
         color: rgb(204, 204, 204) !important;
     }
     
+    .uls-menu .uls-filterinput::-moz-placeholder {
+        opacity: 0.7 !important;
+    }
+    
     .uls-menu .uls-filterinput::placeholder {
+        opacity: 0.7 !important;
+    }
+    
+    .uls-menu .uls-search:focus-within .uls-filterinput::-moz-placeholder, .uls-menu .uls-search:hover .uls-filterinput::-moz-placeholder {
         opacity: 0.7 !important;
     }
     
@@ -2104,8 +2151,6 @@ domain("wikimedia.org") {
 
     #mwe-popups-settings .mwe-ui-icon-popups-close {
         opacity: 0.87 !important;
-        -webkit-transition: opacity 100ms !important;
-        -moz-transition: opacity 100ms !important;
         transition: opacity 100ms !important;
     }
 
@@ -2848,13 +2893,9 @@ domain("wikimedia.org") {
         width: 100% !important;
         height: 20px !important;
         background-color: transparent !important;
-        background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0), #ffffff) !important;
-        background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0), #ffffff) !important;
         background-image: linear-gradient(rgba(255, 255, 255, 0), #ffffff) !important;
         opacity: 0 !important;
         pointer-events: none !important;
-        -webkit-transition: opacity 250ms ease !important;
-        -moz-transition: opacity 250ms ease !important;
         transition: opacity 250ms ease !important;
     }
 
@@ -3605,8 +3646,6 @@ domain("wikimedia.org") {
         background-image: none !important;
         width: 11px !important;
         height: 11px !important;
-        -webkit-transform: rotate(-45deg);
-        -moz-transform: rotate(-45deg);
         transform: scale(85%) rotate(-45deg);
     }
     
@@ -3867,12 +3906,19 @@ domain("wikimedia.org") {
         border-radius: 2px !important;
     } */
 
+    abbr::-moz-selection {
+        color: rgb(85, 80, 137) !important;
+        background-color: rgba(255, 255, 255, 0.8) !important;
+        border-radius: 2px !important;
+    }
+
     a::-moz-selection,
     a b::-moz-selection,
     a i::-moz-selection,
     a .nowrap::-moz-selection,
     bdi::-moz-selection,
-    abbr::selection {
+    abbr::selection,
+    abbr::-moz-selection {
         color: rgb(85, 80, 137) !important;
         background-color: rgba(255, 255, 255, 0.8) !important;
         border-radius: 2px !important;
