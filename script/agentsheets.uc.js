@@ -18,63 +18,6 @@
                 padding: 0px !important;
                 z-index: 2147483647 !important;
             }
-            .hidevscroll-scrollbar[orient="vertical"] {
-                -moz-margin-start: -11px !important;
-                min-width: 11px !important;
-                padding-block: 2px !important;
-            }
-            .hidevscroll-scrollbar[orient="vertical"] thumb {
-                min-height: 20px !important;
-            }
-            .hidevscroll-scrollbar thumb {
-                -moz-appearance: none !important;
-                border-width: 0px !important;
-                border-radius: 5px !important;
-                background-color: transparent !important;
-                opacity: 0 !important;
-                transition: opacity 0.4s ease-in-out !important;
-                -webkit-transform-style: preserve-3d !important;
-                -webkit-backface-visibility: hidden !important;
-                -moz-transform-style: preserve-3d !important;
-                -moz-backface-visibility: hidden !important;
-                transform-style: preserve-3d !important;
-                backface-visibility: hidden !important;
-            }
-            .hidevscroll-scrollbar thumb::before {
-                content: "" !important;
-                display: -moz-box !important;
-                border-radius: 5px !important;
-                opacity: 0 !important;
-                background-color: rgba(124, 124, 131, 1) !important;
-                -moz-box-flex: 1 !important;
-                transition: opacity 0.4s ease-in-out;
-            }
-            .hidevscroll-scrollbar[orient="vertical"] thumb::before {
-                margin-inline-end: 2px !important;
-                min-width: 9px !important;
-            }
-            .hidevscroll-scrollbar:hover thumb::before {
-                opacity: 1 !important;
-                transition: opacity 0.1s ease-in-out;
-            }
-            .hidevscroll-scrollbar thumb:active::before {
-                opacity: 1 !important;
-                transition: opacity 0.06s ease-in-out;
-            }
-            .hidevscroll-scrollbar:hover thumb {
-                background-color: transparent !important;
-                opacity: 0.5 !important;
-                transition: opacity 0.1s ease-in-out !important;
-            }
-            .hidevscroll-scrollbar thumb:active {
-                background-color: transparent !important;
-                opacity: 0.9 !important;
-                transition: opacity 0.06s ease-in-out !important;
-            }
-            .hidevscroll-scrollbar scrollbarbutton,
-            .hidevscroll-scrollbar gripper {
-                display: none !important;
-            }
             .hidehscroll-scrollbar {
                 -moz-appearance: none !important;
                 border: none !important;
@@ -83,59 +26,69 @@
                 padding: 0px !important;
                 z-index: 2147483647 !important;
             }
+            .hidevscroll-scrollbar[orient="vertical"] {
+                -moz-margin-start: -11px !important;
+                min-width: 11px !important;
+                padding-block: 2px !important;
+            }
             .hidehscroll-scrollbar[orient="horizontal"] {
-                margin-top: -11px;
-                min-height: 11px;
+                margin-block-start: -11px !important;
+                min-height: 11px !important;
                 padding-inline: 2px !important;
+            }
+            .hidevscroll-scrollbar[orient="vertical"] thumb {
+                min-height: 20px !important;
+                transform-origin: right !important;
             }
             .hidehscroll-scrollbar[orient="horizontal"] thumb {
                 min-width: 20px !important;
+                transform-origin: bottom !important;
             }
+            .hidevscroll-scrollbar[orient="vertical"]:not(:hover) thumb:not(:active) {
+                transform: scaleX(20%) !important;
+            }
+            .hidehscroll-scrollbar[orient="horizontal"]:not(:hover) thumb:not(:active) {
+                transform: scaleY(20%) !important;
+            }
+            .hidevscroll-scrollbar thumb,
             .hidehscroll-scrollbar thumb {
                 -moz-appearance: none !important;
                 border-width: 0px !important;
                 border-radius: 5px !important;
                 background-color: transparent !important;
-                opacity: 0 !important;
-                transition: opacity 0.4s ease-in-out !important;
-                -webkit-transform-style: preserve-3d !important;
-                -webkit-backface-visibility: hidden !important;
-                -moz-transform-style: preserve-3d !important;
-                -moz-backface-visibility: hidden !important;
-                transform-style: preserve-3d !important;
-                backface-visibility: hidden !important;
+                opacity: 0.3 !important;
+                transition: opacity 0.4s ease-in-out, transform 0.2s ease-in-out !important;
             }
+            .hidevscroll-scrollbar thumb::before,
             .hidehscroll-scrollbar thumb::before {
                 content: "" !important;
                 display: -moz-box !important;
                 border-radius: 5px !important;
-                opacity: 0 !important;
                 background-color: rgba(124, 124, 131, 1) !important;
                 -moz-box-flex: 1 !important;
-                transition: opacity 0.4s ease-in-out;
+            }
+            .hidevscroll-scrollbar[orient="vertical"] thumb::before {
+                margin-inline-end: 2px !important;
+                min-width: 9px !important;
             }
             .hidehscroll-scrollbar[orient="horizontal"] thumb::before {
                 margin-block-end: 2px !important;
                 min-height: 9px !important;
             }
-            .hidehscroll-scrollbar:hover thumb::before {
-                opacity: 1 !important;
-                transition: opacity 0.1s ease-in-out;
-            }
-            .hidehscroll-scrollbar thumb:active::before {
-                opacity: 1 !important;
-                transition: opacity 0.06s ease-in-out;
-            }
+            .hidevscroll-scrollbar:hover thumb,
             .hidehscroll-scrollbar:hover thumb {
                 background-color: transparent !important;
                 opacity: 0.5 !important;
-                transition: opacity 0.1s ease-in-out !important;
+                transition: opacity 0.1s ease-in-out, transform 0.15s ease-in-out !important;
             }
+            .hidevscroll-scrollbar thumb:active,
             .hidehscroll-scrollbar thumb:active {
                 background-color: transparent !important;
                 opacity: 0.9 !important;
-                transition: opacity 0.06s ease-in-out !important;
+                transition: opacity 0.06s ease-in-out, transform 0.1s ease-in-out !important;
             }
+            .hidevscroll-scrollbar scrollbarbutton,
+            .hidevscroll-scrollbar gripper,
             .hidehscroll-scrollbar scrollbarbutton,
             .hidehscroll-scrollbar gripper {
                 display: none !important;
@@ -181,6 +134,10 @@
             }
             :not(select):not(hbox) > scrollbar[orient="vertical"] thumb {
                 min-height: 20px;
+                transform-origin: right;
+            }
+            :not(select):not(hbox) > scrollbar[orient="vertical"]:not(:hover) thumb:not(:active) {
+                transform: scaleX(20%);
             }
             :not(select):not(hbox) > scrollbar[orient="horizontal"] {
                 margin-top: -11px;
@@ -190,29 +147,25 @@
             }
             :not(select):not(hbox) > scrollbar[orient="horizontal"] thumb {
                 min-width: 20px;
+                transform-origin: bottom;
+            }
+            :not(select):not(hbox) > scrollbar[orient="horizontal"]:not(:hover) thumb:not(:active) {
+                transform: scaleY(20%);
             }
             :not(select):not(hbox) > scrollbar thumb {
                 -moz-appearance: none !important;
                 border-width: 0px !important;
                 border-radius: 5px !important;
                 background-color: transparent !important;
-                opacity: 0 !important;
-                transition: opacity 0.4s ease-in-out;
-                -webkit-transform-style: preserve-3d;
-                -webkit-backface-visibility: hidden;
-                -moz-transform-style: preserve-3d !important;
-                -moz-backface-visibility: hidden !important;
-                transform-style: preserve-3d !important;
-                backface-visibility: hidden !important;
+                opacity: 0.3 !important;
+                transition: opacity 0.4s ease-in-out, transform 0.2s ease-in-out;
             }
             :not(select):not(hbox) > scrollbar thumb::before {
                 content: "" !important;
                 display: -moz-box !important;
                 border-radius: 5px !important;
-                opacity: 0 !important;
                 background-color: rgba(124, 124, 131, 1) !important;
                 -moz-box-flex: 1 !important;
-                transition: opacity 0.4s ease-in-out;
             }
             :not(select):not(hbox) > scrollbar[orient="vertical"] thumb::before {
                 margin-inline-end: 2px !important;
@@ -222,35 +175,13 @@
                 margin-block-end: 2px !important;
                 min-height: 9px !important;
             }
-            :not(select):not(hbox) > scrollbar:hover thumb::before {
-                opacity: 1 !important;
-                transition: opacity 0.1s ease-in-out;
-            }
-            :not(select):not(hbox) > scrollbar thumb:active::before {
-                opacity: 1 !important;
-                transition: opacity 0.06s ease-in-out;
-            }
             :not(select):not(hbox) > scrollbar:hover thumb {
-                background-color: transparent !important;
                 opacity: 0.5 !important;
-                transition: opacity 0.1s ease-in-out;
-                -webkit-transform-style: preserve-3d;
-                -webkit-backface-visibility: hidden;
-                -moz-transform-style: preserve-3d !important;
-                -moz-backface-visibility: hidden !important;
-                transform-style: preserve-3d !important;
-                backface-visibility: hidden !important;
+                transition: opacity 0.1s ease-in-out, transform 0.15s ease-in-out;
             }
             :not(select):not(hbox) > scrollbar thumb:active {
-                background-color: transparent !important;
                 opacity: 0.9 !important;
-                transition: opacity 0.06s ease-in-out;
-                -webkit-transform-style: preserve-3d;
-                -webkit-backface-visibility: hidden;
-                -moz-transform-style: preserve-3d !important;
-                -moz-backface-visibility: hidden !important;
-                transform-style: preserve-3d !important;
-                backface-visibility: hidden !important;
+                transition: opacity 0.06s ease-in-out, transform 0.1s ease-in-out;
             }
             :not(select):not(hbox) > scrollbar scrollbarbutton,
             :not(select):not(hbox) > scrollbar gripper {

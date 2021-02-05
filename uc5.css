@@ -280,8 +280,7 @@
 }
 
 .tab-loading-burst {
-    filter: brightness(3) saturate(1.5) hue-rotate(-60deg) !important;
-    opacity: 0.8 !important;
+    --tab-loading-fill: var(--lwt-toolbarbutton-icon-fill-attention) !important;
 }
 
 .tab-icon-image[sharing],
