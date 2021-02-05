@@ -47,24 +47,25 @@
     opacity: 1 !important;
 }
 
-.tab-icon-sound[pictureinpicture] {
+.tab-icon-sound[pictureinpicture]:not([muted]) {
     -moz-context-properties: fill, fill-opacity !important;
     fill: white !important;
     width: 16px !important;
     height: 16px !important;
     padding: 1.6px !important;
     background-color: transparent !important;
-    list-style-image: url(chrome://global/skin/media/pictureinpicture.svg) !important;
-    list-style-image: url(chrome://devtools/skin/images/import.svg) !important;
+/*     list-style-image: url(chrome://global/skin/media/pictureinpicture.svg) !important; */
+/*     list-style-image: url(chrome://devtools/skin/images/import.svg) !important; */
+    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 625.8 512'><path d='M568.9 0h-512C25.6 0 0 25 0 56.3v398.8C0 486.4 25.6 512 56.9 512h512c31.3 0 56.9-25.6 56.9-56.9V56.3C625.8 25 600.2 0 568.9 0zm-512 425.7V86c0-16.5 13.5-30 30-30h452c16.5 0 30 13.5 30 30v339.6c0 16.5-13.5 30-30 30h-452c-16.5.1-30-13.4-30-29.9zM482 227.6H314.4c-16.5 0-30 13.5-30 30v110.7c0 16.5 13.5 30 30 30H482c16.5 0 30-13.5 30-30V257.6c0-16.5-13.5-30-30-30z' fill='context-fill' fill-opacity='context-fill-opacity'/></svg>") !important;
     pointer-events: none !important;
 }
 
-.tabbrowser-tab:hover .tab-icon-sound[pictureinpicture]:active,
-.tabbrowser-tab:hover .tab-icon-sound[pictureinpicture]:active {
+.tabbrowser-tab:hover .tab-icon-sound[pictureinpicture]:not([muted]):active,
+.tabbrowser-tab:hover .tab-icon-sound[pictureinpicture]:not([muted]):active {
     background-color: transparent !important;
 }
 
-.tab-icon-sound[pictureinpicture]:not(:hover),
+.tab-icon-sound[pictureinpicture]:not([muted], :hover),
 .tab-icon-sound[soundplaying]:not(:hover),
 .tab-icon-sound[muted]:not(:hover),
 .tab-icon-sound[activemedia-blocked]:not(:hover) {
@@ -162,7 +163,18 @@
     transition: 0.1s transform ease-in-out, 0.1s opacity ease-in-out, 0.1s margin ease-in-out !important;
 }
 
-#tabbrowser-tabs:not(:hover, :focus) .tab-icon-sound {
+#tabbrowser-tabs .tab-icon-sound:not([soundplaying], [muted], [activemedia-blocked], [pictureinpicture]) {
+    list-style-image: url(chrome://browser/skin/tabbrowser/tab-audio-playing.svg) !important;
+    display: -moz-inline-box !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: translateX(16px) scale(0.5) !important;
+    margin-right: -16px !important;
+    padding: 2.5px 1.5px 2px 1px !important;
+}
+
+#tabbrowser-tabs:not(:hover, :focus) .tab-icon-sound:not([soundplaying], [muted], [pictureinpicture]),
+#tabbrowser-tabs:not(:hover, :focus) .tab-icon-sound[soundplaying-scheduledremoval]:not([muted], [pictureinpicture]){
     opacity: 0 !important;
     pointer-events: none !important;
     transform: translateX(16px) scale(0.5) !important;
@@ -200,8 +212,49 @@
 }
  */
 
-.tabbrowser-tab .tab-icon-overlay {
+.tab-icon-overlay {
     display: none !important;
+}
+
+.tab-icon-overlay[pictureinpicture]:not([crashed]) {
+    display: -moz-box !important;
+    pointer-events: auto !important;
+    opacity: 0 !important;
+    transform: none !important;
+    -moz-box-ordinal-group: 2 !important;
+    margin-block: 0 !important;
+}
+
+.tab-icon-overlay[pictureinpicture][soundplaying]:not([soundplaying-scheduledremoval]):hover ~ .tab-icon-sound[pictureinpicture] {
+    opacity: 1 !important;
+    list-style-image: url(chrome://browser/skin/tabbrowser/tab-audio-playing.svg) !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding: 2.5px 1.5px 2px 1px !important;
+    background-color: var(--arrowpanel-dimmed) !important;
+    border-radius: 50% !important;
+}
+
+.tab-icon-overlay[pictureinpicture][muted] ~ .tab-icon-sound[pictureinpicture] {
+    list-style-image: url(chrome://browser/skin/tabbrowser/tab-audio-muted.svg) !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding: 2.5px 1.5px 2px 1px !important;
+    border-radius: 50% !important;
+}
+
+.tab-icon-overlay[pictureinpicture][muted]:hover ~ .tab-icon-sound[pictureinpicture] {
+    opacity: 1 !important;
+    background-color: var(--arrowpanel-dimmed) !important;
+}
+
+.tab-icon-overlay[pictureinpicture] ~ .tab-icon-sound[muted] {
+    border-radius: 50% !important;
+}
+
+.tab-icon-overlay[pictureinpicture]:hover ~ .tab-icon-sound[muted] {
+    background-color: var(--arrowpanel-dimmed) !important;
+    border-radius: 50% !important;
 }
 
 #tabbrowser-tabs[movingtab] .tabbrowser-tab[selected] .tab-icon-image {
