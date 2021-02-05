@@ -30,9 +30,10 @@ The files in the scripts folder are not content scripts like you'd load in Tampe
 They are loaded by [**alice0775's autoconfig loader**](https://github.com/alice0775/userChrome.js/tree/master/72). From that repo you put the stuff in `install_folder` in your firefox installation folder. That is, you should end up with...
 1) &nbsp; a file called `config.js` in your Firefox installation's root directory;
 2) &nbsp; a folder called `defaults` in the root directory;
-3) &nbsp; a file called `config-prefs.js` inside that `defaults` folder.
+3) &nbsp; a folder called `pref` inside that `defaults` folder;
+4) &nbsp; a file called `config-prefs.js` inside that `pref` folder.
 
-You may already have a file called `channel-prefs.js` inside the `defaults` folder. This is unrelated.
+You may already have a file called `channel-prefs.js` inside the `prefs` folder. This is unrelated.
 
 Then, get the updated [**userChrome.js from here**](https://github.com/alice0775/userChrome.js/tree/master/73) and put it in your profile's chrome folder, along with all the stylesheets you use. Then at startup firefox will load any scripts you place in your chrome folder that end in .uc.js, such as the ones in my repo. Once you have all this set up you can download my scripts to your chrome folder and restart, and you should see the changes immediately.
 <br>
