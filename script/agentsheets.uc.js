@@ -23,9 +23,6 @@
                 min-width: 11px !important;
                 padding-block: 2px !important;
             }
-            .hidevscroll-scrollbar[orient="vertical"] slider[orient="vertical"] {
-                -moz-margin-end: 0.1px;
-            }
             .hidevscroll-scrollbar[orient="vertical"] thumb {
                 min-height: 20px !important;
             }
@@ -46,8 +43,6 @@
             .hidevscroll-scrollbar thumb::before {
                 content: "" !important;
                 display: -moz-box !important;
-                min-width: 25px !important;
-                min-height: 25px !important;
                 border-radius: 5px !important;
                 opacity: 0 !important;
                 background-color: rgba(124, 124, 131, 1) !important;
@@ -56,6 +51,7 @@
             }
             .hidevscroll-scrollbar[orient="vertical"] thumb::before {
                 margin-inline-end: 2px !important;
+                min-width: 9px !important;
             }
             .hidevscroll-scrollbar:hover thumb::before {
                 opacity: 1 !important;
@@ -69,17 +65,39 @@
                 background-color: transparent !important;
                 opacity: 0.5 !important;
                 transition: opacity 0.1s ease-in-out !important;
-                -webkit-transform-style: preserve-3d !important;
-                -webkit-backface-visibility: hidden !important;
-                -moz-transform-style: preserve-3d !important;
-                -moz-backface-visibility: hidden !important;
-                transform-style: preserve-3d !important;
-                backface-visibility: hidden !important;
             }
             .hidevscroll-scrollbar thumb:active {
                 background-color: transparent !important;
                 opacity: 0.9 !important;
                 transition: opacity 0.06s ease-in-out !important;
+            }
+            .hidevscroll-scrollbar scrollbarbutton,
+            .hidevscroll-scrollbar gripper {
+                display: none !important;
+            }
+            .hidehscroll-scrollbar {
+                -moz-appearance: none !important;
+                border: none !important;
+                position: relative !important;
+                background-color: transparent !important;
+                padding: 0px !important;
+                z-index: 2147483647 !important;
+            }
+            .hidehscroll-scrollbar[orient="horizontal"] {
+                margin-top: -11px;
+                min-height: 11px;
+                padding-inline: 2px !important;
+            }
+            .hidehscroll-scrollbar[orient="horizontal"] thumb {
+                min-width: 20px !important;
+            }
+            .hidehscroll-scrollbar thumb {
+                -moz-appearance: none !important;
+                border-width: 0px !important;
+                border-radius: 5px !important;
+                background-color: transparent !important;
+                opacity: 0 !important;
+                transition: opacity 0.4s ease-in-out !important;
                 -webkit-transform-style: preserve-3d !important;
                 -webkit-backface-visibility: hidden !important;
                 -moz-transform-style: preserve-3d !important;
@@ -87,8 +105,39 @@
                 transform-style: preserve-3d !important;
                 backface-visibility: hidden !important;
             }
-            .hidevscroll-scrollbar scrollbarbutton,
-            .hidevscroll-scrollbar gripper {
+            .hidehscroll-scrollbar thumb::before {
+                content: "" !important;
+                display: -moz-box !important;
+                border-radius: 5px !important;
+                opacity: 0 !important;
+                background-color: rgba(124, 124, 131, 1) !important;
+                -moz-box-flex: 1 !important;
+                transition: opacity 0.4s ease-in-out;
+            }
+            .hidehscroll-scrollbar[orient="horizontal"] thumb::before {
+                margin-block-end: 2px !important;
+                min-height: 9px !important;
+            }
+            .hidehscroll-scrollbar:hover thumb::before {
+                opacity: 1 !important;
+                transition: opacity 0.1s ease-in-out;
+            }
+            .hidehscroll-scrollbar thumb:active::before {
+                opacity: 1 !important;
+                transition: opacity 0.06s ease-in-out;
+            }
+            .hidehscroll-scrollbar:hover thumb {
+                background-color: transparent !important;
+                opacity: 0.5 !important;
+                transition: opacity 0.1s ease-in-out !important;
+            }
+            .hidehscroll-scrollbar thumb:active {
+                background-color: transparent !important;
+                opacity: 0.9 !important;
+                transition: opacity 0.06s ease-in-out !important;
+            }
+            .hidehscroll-scrollbar scrollbarbutton,
+            .hidehscroll-scrollbar gripper {
                 display: none !important;
             }
             link[href$="global.css"] ~ scrollbox {
@@ -130,9 +179,6 @@
                 max-width: 11px;
                 padding-block: 2px !important;
             }
-            :not(select):not(hbox) > scrollbar[orient="vertical"] slider[orient="vertical"] {
-                -moz-margin-end: 0.1px;
-            }
             :not(select):not(hbox) > scrollbar[orient="vertical"] thumb {
                 min-height: 20px;
             }
@@ -162,8 +208,6 @@
             :not(select):not(hbox) > scrollbar thumb::before {
                 content: "" !important;
                 display: -moz-box !important;
-                min-width: 25px !important;
-                min-height: 25px !important;
                 border-radius: 5px !important;
                 opacity: 0 !important;
                 background-color: rgba(124, 124, 131, 1) !important;
@@ -172,9 +216,11 @@
             }
             :not(select):not(hbox) > scrollbar[orient="vertical"] thumb::before {
                 margin-inline-end: 2px !important;
+                min-width: 9px !important;
             }
             :not(select):not(hbox) > scrollbar[orient="horizontal"] thumb::before {
                 margin-block-end: 2px !important;
+                min-height: 9px !important;
             }
             :not(select):not(hbox) > scrollbar:hover thumb::before {
                 opacity: 1 !important;

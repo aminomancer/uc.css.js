@@ -57,10 +57,8 @@
             // we want the resizer to go on the left side of the sidebar when the sidebar is on the right side of the window, and vice versa.
             // mozilla implements this by just making the sidebar a -moz-box and changing -moz-box-ordinal-group to change the order. the children of #browser are packed horizontally so that works fine. but -moz-box works kinda like flexbox and makes it a bitch to implement something like this "floating sidebar." the whole purpose of this is to make it so opening the sidebar *doesn't* squeeze the browser content area. so we do this kinda thing manually instead.
             prefsvc.getBoolPref(pref)
-                ? ((resizer.style.right = "0"), (box.style.paddingRight = "4px"))
-                : (resizer.style.removeProperty("right"),
-                  box.style.removeProperty("padding-right"));
-            // you can remove this if you use default scrollbars. since i use floating overlay scrollbars i need a gutter to the right of the scrollbars if there's gonna be an element on the right edge of the sidebar. i don't need it on the left since, naturally, my scrollbars are always on the right side of the element they're scrolling. this is just because my scrollbar thumb is not in its own slider. or more accurately, the slider and buttons are invisible, and the scrollbar's margin is shifted so that it completely overlaps with the content of the page. in other words if you had text going all the way to the edge of the page, my scrollbar would overlap with it. the text could go right under the scrollbar. since the scrollbar only shows when it's hovered or active, that works fine. but normally there's nothing to resize on the far end of the scrollbar. in this unusual case, we're putting the resizer on the far right edge of the sidebar, where a scrollbar already is. since my scrollbar script sets the scrollbar's z-index to the maximum value, (necessary because it removes the appearance property, and by default the scrollbar doesn't appear on top of anything, but rather flexes the document or element to the side to make room for it) without this padding the resizer would fall completely underneath the scrollbar and be unclickable. so we add a 4px gutter to make room for the 4px resizer element.
+                ? (resizer.style.right = "0")
+                : resizer.style.removeProperty("right");
         }
 
         function hotkeyObserve(_sub, _top, pref) {
@@ -112,11 +110,8 @@
             } catch (e) {
                 box.style.width = "18em"; // if the pref doesn't already exist (e.g. on first script run) then use the built-in default.
             }
-            if (prefsvc.getBoolPref(anchor)) {
-                // on initial setup, if the sidebar is on the left side, move the resizer to the right edge.
-                resizer.style.right = "0"; // align resizer to the right edge
-                box.style.paddingRight = "4px"; // again, adding the gutter if it's on the left side.
-            }
+            // on initial setup, if the sidebar is on the left side, move the resizer to the right edge.
+            if (prefsvc.getBoolPref(anchor)) resizer.style.right = "0"; // align resizer to the right edge
         }
 
         function attachListeners() {
