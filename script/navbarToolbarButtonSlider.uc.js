@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           navbarToolbarButtonSlider.uc.js
 // @homepage       https://github.com/aminomancer
-// @description    Wrap all toolbar buttons after #urlbar-container in a scrollable div. It can scroll horizontally through the buttons by scrolling up/down with a mousewheel, like the tab bar. You can change "max-width" in outer.style.cssText to make the container wider or smaller, ideally by increments of 32. I use 352 because I want 11 icons to be visible. To scroll faster you can add a multiplier right before scrollByPixels is called, like scrollAmount = scrollAmount * 1.5 or something like that. Doesn't handle touch events yet since I don't have a touchpad to test it on. Let me know if you have any ideas though.
+// @description    Wrap all toolbar buttons after #urlbar-container in a scrollable div. It can scroll horizontally through the buttons by scrolling up/down with a mousewheel, like the tab bar. You can change "max-width" in outer.style.cssText to make the container wider or smaller, ideally by increments of 32 — the width of a toolbar button (28) plus its outer inline padding (2), by default. I use 352 because I want 11 icons to be visible. If you want 8 to be visible then use 88px. To scroll faster you can add a multiplier right before scrollByPixels is called, like scrollAmount = scrollAmount * 1.5 or something like that. Doesn't handle touch events yet since I don't have a touchpad to test it on. Let me know if you have any ideas though.
 // @author         aminomancer
 // ==/UserScript==
 
