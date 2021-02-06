@@ -14,13 +14,14 @@
         let handler = {
             handleEvent(e) {
                 if (!gURLBar.view.isOpen || oneOffs.selectedButton || !keyNav) return;
+                if (!oneOffs.input.value || oneOffs.input.getAttribute("pageproxystate") === "valid") return;
                 if (e.keyCode === KeyboardEvent.DOM_VK_LEFT) {
-                    oneOffs.advanceSelection(false, this.compact, true);
+                    oneOffs.advanceSelection(false, oneOffs.compact, true);
                     e.preventDefault();
                     e.stopImmediatePropagation();
                 }
                 if (e.keyCode === KeyboardEvent.DOM_VK_RIGHT) {
-                    oneOffs.advanceSelection(true, this.compact, true);
+                    oneOffs.advanceSelection(true, oneOffs.compact, true);
                     e.preventDefault();
                     e.stopImmediatePropagation();
                 }
@@ -54,7 +55,7 @@
                 window.removeEventListener("unload", this.destroyListeners, false);
                 prefsvc.removeObserver(keyNavPref, this);
                 gURLBar.inputField.removeEventListener("keydown", this, false);
-            }
+            },
         };
         gURLBar.view.oneOffSearchButtons.handleSearchCommand = function handleSearchCommand(event, searchMode) {
             // The settings button is a special case. Its action should be executed
