@@ -1,3 +1,10 @@
+// ==UserScript==
+// @name           oneClickOneOffSearchButtons.uc.js
+// @homepage       https://github.com/aminomancer
+// @description    Restore old behavior for one-off search engine buttons. It used to be that, if you entered a search term in the url bar, clicking a search engine button would immediately execute a search with that engine. This was changed in an update so that clicking the buttons only changes the "active" engine — you still have to press enter to actually execute the search. Until recently this could be overridden with a preference in about:config, but that setting was removed. This script simply restores the old functionality.
+// @author         aminomancer
+// ==/UserScript==
+
 (() => {
     function init() {
         var oneOffs = gURLBar.view.oneOffSearchButtons,

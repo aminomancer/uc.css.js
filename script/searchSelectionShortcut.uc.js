@@ -1,3 +1,10 @@
+// ==UserScript==
+// @name           searchSelectionShortcut.uc.js
+// @homepage       https://github.com/aminomancer
+// @description    Adds a new keyboard shortcut (ctrl+shift+F) that searches your default search engine for whatever text you currently have highlighted. This does basically the same thing as the context menu option "Search {Engine} for {Selection}" except that if you highlight a URL, instead of searching for the selection it will navigate directly to the URL.
+// @author         aminomancer
+// ==/UserScript==
+
 (() => {
     const frameScript = `const{Services:Services}=ChromeUtils.import("resource://gre/modules/Services.jsm"),{XPCOMUtils:XPCOMUtils}=ChromeUtils.import("resource://gre/modules/XPCOMUtils.jsm");XPCOMUtils.defineLazyModuleGetters(this,{E10SUtils:"resource://gre/modules/E10SUtils.jsm",SelectionUtils:"resource://gre/modules/SelectionUtils.jsm"});let attachKeyListener=(e,t)=>{if("document-element-inserted"==t&&content&&e==content.document)try{content.addEventListener("keydown",(e=>{if("KeyF"===e.code&&e.ctrlKey&&e.shiftKey&&!e.repeat){try{let t=SelectionUtils.getSelectionDetails(content);if(t.text&&!t.docSelectionIsCollapsed){let s=e.composedTarget.ownerDocument.nodePrincipal,i={csp:E10SUtils.serializeCSP(e.composedTarget.ownerDocument.csp),text:t.text,linkURL:t.linkURL,principal:s};try{this.sendAsyncMessage("ctrl-shift-f",i)}catch(e){}}}catch(e){}e.stopPropagation(),e.stopImmediatePropagation(),e.preventDefault()}}))}catch(e){}};Services.obs.addObserver(attachKeyListener,"document-element-inserted"),attachKeyListener(content.document,"document-element-inserted");`;
 
