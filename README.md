@@ -14,7 +14,7 @@ My personal Firefox theme/layout, plus some privileged scripts to add new behavi
 <br>
 <p></p>
 
-To get the complete functionality [shown in the video](https://youtu.be/BAuABH13ytM), you'll need to install at least some of the scripts. The instructions and explanations are below.
+Make sure to set `ui.systemUsesDarkTheme` to `1` in about:config. To get the complete functionality [shown in the video](https://youtu.be/BAuABH13ytM), you'll need to install at least some of the scripts. The instructions and explanations are below.
 
 I don't use tree style tabs but I've tested this with TST and they don't seem to interact in a negative way. It just doesn't fully style all the TST stuff. I'll probably make a TST theme if someone asks, but since I don't use the extension myself it's not a high priority.
 
