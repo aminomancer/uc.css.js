@@ -354,9 +354,9 @@ toolbar .toolbarbutton-1:not([disabled]):-moz-any([checked]) > .toolbarbutton-ic
     background-color: var(--tooltip-dark) !important;
 }
 
-.panel-arrow {
+/* .panel-arrow {
     stroke: var(--arrowpanel-background) !important;
-}
+} */
 
 .sidebar-panel .sidebar-placesTreechildren::-moz-tree-row(selected),
 .sidebar-panel .sidebar-placesTreechildren::-moz-tree-cell(selected) {

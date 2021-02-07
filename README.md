@@ -27,15 +27,22 @@ I might try to make the customization more user-friendly in the future if other 
 
 The files in the scripts folder are not content scripts like you'd load in Tampermonkey. They're meant to execute in the same context as Firefox's internal scripts. They're scripts for the Firefox frontend itself rather than for webpages. This is sort of analogous to gaining "privileges" to modify your UI document directly. With CSS alone you can only do so much. Even a lot of purely aesthetic features may require JavaScript, like the search engine icons shown in the GIF above.
 
-They are loaded by [**alice0775's autoconfig loader**](https://github.com/alice0775/userChrome.js/tree/master/72). From that repo you put the stuff in `install_folder` in your firefox installation folder. That is, you should end up with...
+They need to be loaded by an autoconfig script loader. I recommend [MrOtherGuy's script manager](https://github.com/MrOtherGuy/fx-autoconfig) which is extremely robust. You can also use [**alice0775's autoconfig loader**](https://github.com/alice0775/userChrome.js/tree/master/72) if you prefer something more lightweight, though from here on out some of my scripts will not be fully compatible with loaders other than MrOtherGuy's because they don't support loading scripts into the global execution context before windows have been initialized. Whatever you choose, you should end up with...
 1) &nbsp; a file called `config.js` in your Firefox installation's root directory;
 2) &nbsp; a folder called `defaults` in the root directory;
 3) &nbsp; a folder called `pref` inside that `defaults` folder;
-4) &nbsp; a file called `config-prefs.js` inside that `pref` folder.
+4) &nbsp; a file called `config-prefs.js` inside that `pref` folder;
+5) &nbsp; a `JS` folder and a `utils` folder in your `chrome` folder (if you use MrOtherGuy's loader); or a `userChrome.js` file in your `chrome` folder if you use alice0775's loader.
 
 You may already have a file called `channel-prefs.js` inside the `prefs` folder. This is unrelated.
 
-Then, get the updated [**userChrome.js from here**](https://github.com/alice0775/userChrome.js/tree/master/73) and put it in your profile's chrome folder, along with all the stylesheets you use. Then at startup firefox will load any scripts you place in your chrome folder that end in .uc.js, such as the ones in my repo. Once you have all this set up you can download my scripts to your chrome folder and restart, and you should see the changes immediately.
+If you're using alice0775's loader, then get the updated [**userChrome.js from here**](https://github.com/alice0775/userChrome.js/tree/master/73) and put it in your profile's chrome folder, along with all the stylesheets you use. With alice0775's loader, scripts should go directly in the main chrome folder, right along with userChrome.css, etc. If you're using MrOtherGuy's script manager like I recommended, then your scripts should go in the `JS` folder. Any agent sheets or author sheets (files ending in .as.css or .au.css) should go in the `chrome` folder with your regular stylesheets.
+
+After you've installed the files, the script loader will locate any scripts you place in the proper folder that end in .uc.js, such as the ones in my repo. Once you have all this set up you can download my scripts, put them in the correct folder for your loader, restart, and you should see the changes immediately.
+
+In the main directory on this repo you might notice two files: `userChrome.as.css` and `userChrome.au.css`. These are meant to be loaded with the scripts: `userChrome_as_css_module.uc.js` and `userChrome_au_css_module.uc.js`. These agent and author sheets basically replace some of the scripts on my repo. It's a cleaner, less hamfisted way of achieving the same things. If you install those files, then you don't need any of the following scripts: `agentsheets`, `authorsheets`, `backdropFilterBlur`, `hideTabBrowserArrows`, `shadowRootClassAssignment`, or `tooltipStyling` (though you should replace it with `tooltipOverrides`).
+
+Once you've installed those, you can edit `userChrome.as.css` and `userChrome.au.css` yourself. The main purposes for using these instead of your main userChrome.css are 1) to use CSS syntax that is forbidden to user sheets, such as the ::part(*) pseudo-element, or 2) to traverse shadow trees from parent to children, e.g. when you need to select a specific menupopup's children without affecting other menupopups' children. In some cases, this is impossible for some reason I haven't figured out yet. In those cases I use javascript to traverse the shadow tree, and then assign a unique ID or class to the shadow DOM nodes I want to style with specificity. Then, I use the regular `userChrome.css` stylesheet to implement those rules. So, for example, `bookmarksPopupShadowRoot` gives several elements in the bookmarks toolbar popup unique classes, which are styled later in my main stylesheets.
 <br>
 
 Here's a description of each of the scripts:
@@ -69,6 +76,8 @@ Here's a description of each of the scripts:
 -   `searchSelectionShortcut`: Adds a new keyboard shortcut (ctrl+shift+F) that searches your default search engine for whatever text you currently have highlighted. This does basically the same thing as the context menu option "Search {Engine} for {Selection}" except that if you highlight a URL, instead of searching for the selection it will navigate directly to the URL.
 
 -   `tooltipStyling`: As the name suggests, register an agent sheet with the privilege to style tooltips.
+
+-   `tooltipOverrides`: The main functionality of `tooltipStyling` has been moved to `userChrome.as.css`, so what's left is this: specific elements for which I've changed the tooltip label. <details><summary>You might want to edit or omit this script entirely, here's what it does:</summary> **1)** It sets the fullscreen button's tooltip to say (Ctrl+E) in reference to a hotkey I set up on my own computers, remapping Ctrl+E to F11 for Firefox. I might reimplement this hotkey in javascript instead of autohotkey in the future, so others can use it more easily. **2)** It sets the sidebar button's tooltip to say (Ctrl+B) in reference to a hotkey set up by `floatingSidebarResizer`, which does the same thing as the sidebar button: opening the sidebar to whatever panel was last open when the sidebar was closed. Normally, Ctrl+B opens specifically the bookmarks sidebar panel. I remapped the bookmarks sidebar shortcut to Ctrl+Shift+B and remapped Ctrl+B to open the sidebar in general. These hotkeys are implemented by `floatingSidebarResizer` and can be disabled in about:config, so see the description at the top of that file.</details>
 
 -   `updateNotificationSlayer`: Prevent "update available" notification popups, instead just create a badge (like the one that ordinarily appears once you dismiss the notification). See the file description for more info.
 

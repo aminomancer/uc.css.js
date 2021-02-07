@@ -210,6 +210,10 @@ tabmodalprompt .checkbox-check[checked="true"] {
 /* bookmarks toolbar button's popup */
 @-moz-document url(chrome://browser/content/browser.xhtml) {
     
+    link[href="chrome://global/skin/arrowscrollbox.css"] ~ :is(#scrollbutton-up, #scrollbutton-down) {
+        visibility: collapse;
+    }
+    
     .BMB-special-innerbox {
         border: none !important;
     }

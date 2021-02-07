@@ -1,0 +1,48 @@
+/* use scrollbars instead of scroll buttons on most arrowscrollboxes */
+menupopup::part(arrowscrollbox-scrollbox) {
+    overflow-y: auto !important;
+    padding-top: 0 !important;
+    margin-block: 0 !important;
+    scroll-behavior: smooth !important;
+}
+
+/* style the scrollbox so it works without scroll buttons */
+menupopup::part(arrowscrollbox) {
+    padding-bottom: 0 !important;
+}
+
+menupopup[placespopup="true"]::part(innerbox) {
+    border: none !important;
+}
+
+/* hide scroll buttons — doesn't seem to work anymore. put this in your regular userChrome.css instead:
+link[href="chrome://global/skin/arrowscrollbox.css"] ~ :is(#scrollbutton-up, #scrollbutton-down) {
+        visibility: collapse;
+} */
+.menupopup-arrowscrollbox::part(scrollbutton-up),
+.menupopup-arrowscrollbox::part(scrollbutton-down) {
+    visibility: collapse;
+}
+
+/* hide tab bar's arrow buttons and spacers */
+#tabbrowser-arrowscrollbox::part(scrollbutton-up),
+#tabbrowser-arrowscrollbox::part(scrollbutton-down),
+#tabbrowser-arrowscrollbox::part(overflow-start-indicator),
+#tabbrowser-arrowscrollbox::part(overflow-end-indicator) {
+    visibility: collapse;
+}
+
+/* protections popup panel's arrow style */
+#protections-popup::part(arrow) {
+    /* stroke: hsl(216.5, 90%, 39.4%) !important; */
+    stroke: none !important;
+    width: 22px !important;
+    height: 11.4px !important;
+    margin-inline-start: 9.2px !important;
+    margin-top: 0 !important;
+}
+
+/* other panel arrows */
+:is(panel, menupopup)::part(arrow) {
+    stroke: var(--arrowpanel-background);
+}
