@@ -205,25 +205,3 @@ tooltip[default][page] {
     padding: 5px !important;
     /* font-family: FreeMono !important; */
 }
-
-/* blur filter */
-#statuspanel-label {
-    background-image: url("texture/noise-512x512.png") !important;
-    background-color: var(--urlbarView-bgcolor) !important;
-    backdrop-filter: blur(22px) !important;
-}
-
-@-moz-document url("chrome://global/content/alerts/alert.xhtml")
-{
-    #alertBox {
-        background-color: rgba(18, 18, 18, 0.97) !important;
-        background-image: url("texture/noise-512x512.png") !important;
-        backdrop-filter: blur(22px) !important;
-    }
-}
-
-#fullscreen-warning {
-    background-image: url("texture/noise-512x512.png") !important;
-    background-color: var(--urlbarView-bgcolor) !important;
-    backdrop-filter: blur(22px) !important;
-}
