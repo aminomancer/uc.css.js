@@ -556,9 +556,9 @@ requires fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-statu
         font-size: 14px !important;
     }
     
-    #alertSourceLabel {
+    /* #alertSourceLabel {
         font-family: FreeMono, monospace !important;
-    }
+    } */
     
     #alertTitleLabel {
         margin-left: 5px !important;

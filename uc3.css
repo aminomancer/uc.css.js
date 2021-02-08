@@ -252,7 +252,7 @@
 #statuspanel-label {
     color: rgba(255, 255, 255, 0.85) !important;
     border: none !important;
-    font-family: FreeMono !important;
+    /* font-family: FreeMono !important; */
     transition: opacity 70ms ease-in-out !important;
     opacity: 1 !important;
 }
@@ -267,7 +267,7 @@ tooltip {
     color: rgba(255, 255, 255, 1) !important;
     border: none !important;
     padding: 5px !important;
-    font-family: FreeMono !important;
+    /* font-family: FreeMono !important; */
 }
 
 #urlbar[pageproxystate="valid"] #identity-box.extensionPage {

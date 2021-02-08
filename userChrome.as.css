@@ -203,7 +203,7 @@ tooltip[default][page] {
     color: rgba(255, 255, 255, 1) !important;
     border: none !important;
     padding: 5px !important;
-    font-family: FreeMono !important;
+    /* font-family: FreeMono !important; */
 }
 
 /* blur filter */

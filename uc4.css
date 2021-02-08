@@ -531,7 +531,7 @@ tabbrowser toolbarbutton[class^="scrollbutton"],
     color: white !important;
     border-style: none !important;
     padding: 40px 20px 30px 50px !important;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important; */
     font-weight: normal !important;
     text-shadow: 0 0 2px hsl(0, 0%, 8%), 0 0 2px hsl(0, 0%, 8%) !important;
     box-shadow: none !important;
