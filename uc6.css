@@ -146,27 +146,29 @@ toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:ho
     filter: brightness(1.15) saturate(1.5) contrast(1.15) !important;
 }
 
-#identity-box:-moz-any(:hover:active, [open="true"], :hover:not([open="true"])) {
+#identity-box:-moz-any(:hover:active, [open="true"], :hover:not([open="true"])),
+#identity-icon-box,
+.identity-box-button {
     background-color: transparent !important;
 }
 
-#identity-box[open="true"]>#identity-icon,
-#identity-box:-moz-any(:hover:active, :hover:not([open="true"]))>#identity-icon:hover {
+#identity-icon-box[open="true"] #identity-icon,
+#identity-icon-box:-moz-any(:hover:active, :hover:not([open="true"])) #identity-icon:hover {
     fill: #fff !important;
     fill-opacity: 1 !important;
 }
 
-#urlbar[pageproxystate="valid"] #identity-box.verifiedDomain[open="true"]>#identity-icon[lock-icon-gray],
-#urlbar[pageproxystate="valid"] #identity-box.verifiedDomain:-moz-any(:hover:active, :hover:not([open="true"]))>#identity-icon[lock-icon-gray]:hover,
-#urlbar[pageproxystate="valid"] #identity-box.verifiedIdentity[open="true"]>#identity-icon[lock-icon-gray],
-#urlbar[pageproxystate="valid"] #identity-box.verifiedIdentity:-moz-any(:hover:active, :hover:not([open="true"]))>#identity-icon[lock-icon-gray]:hover,
-#urlbar[pageproxystate="valid"] #identity-box.mixedActiveBlocked[open="true"]>#identity-icon[lock-icon-gray],
-#urlbar[pageproxystate="valid"] #identity-box.mixedActiveBlocked:-moz-any(:hover:active, :hover:not([open="true"]))>#identity-icon[lock-icon-gray]:hover {
+#urlbar[pageproxystate="valid"] #identity-box.verifiedDomain #identity-icon-box[open="true"] #identity-icon,
+#urlbar[pageproxystate="valid"] #identity-box.verifiedDomain #identity-icon-box:-moz-any(:hover:active, :hover:not([open="true"])) #identity-icon:hover,
+#urlbar[pageproxystate="valid"] #identity-box.verifiedIdentity #identity-icon-box[open="true"] #identity-icon,
+#urlbar[pageproxystate="valid"] #identity-box.verifiedIdentity #identity-icon-box:-moz-any(:hover:active, :hover:not([open="true"])) #identity-icon:hover,
+#urlbar[pageproxystate="valid"] #identity-box.mixedActiveBlocked #identity-icon-box[open="true"] #identity-icon,
+#urlbar[pageproxystate="valid"] #identity-box.mixedActiveBlocked #identity-icon-box:-moz-any(:hover:active, :hover:not([open="true"])) #identity-icon:hover {
     fill: hsl(119, 100%, 43%) !important;
     fill-opacity: 1 !important;
 }
 
-#identity-box.chromeUI:-moz-any(:hover:active, [open="true"], :hover:not([open="true"]))>#identity-icon {
+#identity-box.chromeUI #identity-icon-box:-moz-any(:hover:active, [open="true"], :hover:not([open="true"]))>#identity-icon {
     list-style-image: url("chrome://branding/content/about-logo.png") !important;
 }
 
@@ -174,6 +176,10 @@ toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:ho
     background-color: hsla(236, 52%, 18%, 0.4) !important;
     margin-inline-end: 6px !important;
     padding-inline-end: 5px !important;
+    padding-inline-start: 8px;
+    border-image: none !important;
+    border-right: 1px solid transparent !important;
+    border-image-slice: 1;
 }
 
 #urlbar[pageproxystate="valid"] #identity-box.chromeUI:-moz-any(:hover:active, [open="true"], :hover:not([open="true"])) {
@@ -182,12 +188,6 @@ toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:ho
 
 #urlbar[pageproxystate="valid"] #identity-box.chromeUI:-moz-any(:hover:active, [open="true"], :hover:not([open="true"])) #identity-icon-label {
     opacity: 1 !important;
-}
-
-#urlbar[pageproxystate="valid"] #identity-box.chromeUI {
-    border-image: none !important;
-    border-right: 1px solid transparent !important;
-    border-image-slice: 1;
 }
 
 #tracking-protection-icon-container {
