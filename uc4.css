@@ -446,6 +446,10 @@ treechildren::-moz-tree-row(selected, current, focus) {
     overflow: hidden;
 }
 
+#TabsToolbar .tab-loading-burst::before {
+    backface-visibility: hidden;
+}
+
 #TabsToolbar .tabbrowser-tab[selected][pinned][multiselected],
 #TabsToolbar .tabbrowser-tab[selected][pinned][multiselected] .tab-stack,
 #TabsToolbar .tabbrowser-tab[selected][pinned][multiselected] .tab-background {

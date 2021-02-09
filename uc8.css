@@ -130,9 +130,9 @@ requires fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-statu
     height: 74px !important;
 }
 
-#navigator-toolbox * {
+/* #navigator-toolbox * {
     line-height: normal;
-}
+} */
 
 :root[inFullscreen]:not([customizing]) .browserContainer>findbar {
     top: 0px !important;
