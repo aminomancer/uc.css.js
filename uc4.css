@@ -827,7 +827,9 @@ browser[type=content]>html {
 }
 
 #TabsToolbar {
-    background: var(--tab-hover) !important;
+/*     background-image: linear-gradient(180deg, hsl(231, 49%, 11%), hsl(233, 55%, 8%)) !important; */
+    background-image: radial-gradient(circle at 100% 0%, hsl(231, 49%, 11%), hsl(233, 55%, 8%) 140px) !important;
+    background-color: var(--lwt-accent-color) !important;
 }
 
 #new-tab-button, #tabs-newtab-button {

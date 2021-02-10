@@ -233,6 +233,7 @@
                             class: "toolbarbutton-1 chromeclass-toolbar-additional",
                             label: "Browser Toolbox",
                             tooltiptext: "Open Content/Browser Toolbox",
+                            style: "-moz-box-align: center;",
                         };
                         function getPref(root, pref, type) {
                             switch (type) {

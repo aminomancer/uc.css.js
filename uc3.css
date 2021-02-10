@@ -664,6 +664,10 @@ findbar:focus-within .findbar-textbox:not([status="notfound"])~ :-moz-any(.findb
     margin-top: 1.4px;
 }
 
+#customization-panelWrapper > .panel-arrowbox > .panel-arrow[side="top"] {
+    stroke: var(--arrowpanel-background) !important;
+}
+
 .protections-popup-category,
 .protections-popup-footer-button {
     border-radius: initial !important;

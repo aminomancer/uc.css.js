@@ -803,6 +803,14 @@ menu.subviewbutton:not([disabled])[_moz-menuactive]:active {
     padding-block: unset !important
 }
 
+#ContentSelectDropdown :is(menu, menuitem, menucaption) {
+    padding-inline-start: 8px !important;
+}
+
+.contentSelectDropdown-ingroup > .menu-iconic-text {
+	padding-inline-start: 8px !important;
+}
+
 #ContentSelectDropdown > menupopup {
 	font: menu !important;
 }

@@ -1,19 +1,68 @@
 // ==UserScript==
 // @name           navbarToolbarButtonSlider.uc.js
 // @homepage       https://github.com/aminomancer
-// @description    Wrap all toolbar buttons after #urlbar-container in a scrollable div. It can scroll horizontally through the buttons by scrolling up/down with a mousewheel, like the tab bar. You can change "max-width" in outer.style.cssText to make the container wider or smaller, ideally by increments of 32 — the width of a toolbar button (28) plus its outer inline padding (2), by default. I use 352 because I want 11 icons to be visible. If you want 8 to be visible then use 88px. To scroll faster you can add a multiplier right before scrollByPixels is called, like scrollAmount = scrollAmount * 1.5 or something like that. Doesn't handle touch events yet since I don't have a touchpad to test it on. Let me know if you have any ideas though.
+// @description    Wrap all toolbar buttons after #urlbar-container in a scrollable div. It can scroll horizontally through the buttons by scrolling up/down with a mousewheel, like the tab bar. You can change userChrome.toolbarSlider.width in about:config to make the container wider or smaller. The slider scales with the window: if you choose 12, it'll be 12 buttons long when the window is at full size. As the window gets smaller, the slider shrinks in width to accommodate the urlbar. To scroll faster you can add a multiplier right before scrollByPixels is called, like scrollAmount = scrollAmount * 1.5 or something like that. Doesn't handle touch events yet since I don't have a touchpad to test it on. Let me know if you have any ideas though.
 // @author         aminomancer
 // ==/UserScript==
 
 (() => {
     function startup() {
+        const prefsvc = Services.prefs,
+            widthPref = "userChrome.toolbarSlider.width";
         let outer = document.createElement("div"),
             inner = document.createElement("div"),
             kids = inner.children,
             cNavBar = document.getElementById("nav-bar-customization-target"),
+            urlbar = document.getElementById("urlbar-container"),
             bin = document.getElementById("mainPopupSet"),
             widgets = cNavBar.children,
             domArray = [],
+            prefHandler = {
+                width() {
+                    delete this.width;
+                    return (this.width = prefsvc.getIntPref(widthPref, 11) * 32);
+                },
+                get prop() {
+                    return (
+                        Math.round(
+                            ((window.innerWidth / window.screen.availWidth) * this.width) / 32
+                        ) * 32
+                    );
+                },
+                handleEvent(e) {
+                    if (e.type !== "unload") return;
+                    window.removeEventListener("unload", this, false);
+                    prefsvc.removeObserver(widthPref, this);
+                    this.muObserver.disconnect();
+                },
+                observe(_sub, _top, pref) {
+                    this.width = prefsvc.getIntPref(pref, 11) * 32;
+                    if (outer.ready) outer.style.maxWidth = `${this.prop}px`;
+                },
+                muObserver: new MutationObserver(function (mus) {
+                    for (let mu of mus) {
+                        outer.style.maxWidth = `${prefHandler.prop}px`;
+                    }
+                }),
+                async prefSet(pref, val) {
+                    return prefsvc.setIntPref(pref, val);
+                },
+                async initialSet() {
+                    try {
+                        this.width = prefsvc.getIntPref(widthPref) * 32;
+                    } catch (e) {
+                        await this.prefSet(widthPref, 11);
+                        this.observe(null, null, widthPref);
+                    }
+                },
+                attachListeners() {
+                    window.addEventListener("unload", this, false);
+                    prefsvc.addObserver(widthPref, this);
+                    this.muObserver.observe(document.documentElement, {
+                        attributeFilter: ["width"],
+                    });
+                },
+            },
             cuiListen = {
                 onCustomizeStart: cStart.bind(this),
                 onCustomizeEnd: cEnd.bind(this),
@@ -78,9 +127,12 @@
 
         // convert the buttons we want to wrap into an array. isn't entirely necessary but it's a performant way to prevent weird anomalies during startup that could show up otherwise.
         async function convertToArray(buttons) {
+            buttons.indexOf = Array.prototype.indexOf;
             domArray.length = 0;
             for (let i = 0; i < buttons.length; i++) {
-                if (filterWidgets(buttons[i])) domArray.push(buttons[i]);
+                if (filterWidgets(buttons[i]) && buttons.indexOf(urlbar) < i) {
+                    domArray.push(buttons[i]);
+                }
             }
             return domArray;
         }
@@ -105,6 +157,7 @@
                 case "urlbar-container":
                 case "wrapper-search-container":
                 case "search-container":
+                case "urlbar-search-splitter":
                 case "nav-bar-toolbarbutton-slider-container":
                     return false;
                 default:
@@ -196,10 +249,14 @@
             outer.id = "nav-bar-toolbarbutton-slider-container";
             // the crucial parts here are scroll-behavior: smooth, overflow: hidden. without this, smooth horizontal scrolling won't work.
             outer.style.cssText =
-                "display: -moz-box; -moz-box-align: center; max-width: 352px; scrollbar-width: none; box-sizing: border-box; scroll-behavior: smooth; overflow: hidden";
+                "display: -moz-box; -moz-box-align: center; scrollbar-width: none; box-sizing: border-box; scroll-behavior: smooth; overflow: hidden; transition: max-width 0.2s ease-out;";
+            outer.style.maxWidth = `${prefHandler.prop}px`;
+            outer.ready = true;
             inner.className = "container";
             inner.id = "nav-bar-toolbarbutton-slider";
             inner.style.cssText = "display: flex; flex-flow: row; flex-direction: row";
+            outer.setAttribute("overflows", "false");
+            urlbar.style.minWidth = "unset";
             // these attributes aren't exactly necessary, just there for consistency in firefox and maybe future extension.
             outer.setAttribute("smoothscroll", "true");
             outer.setAttribute("clicktoscroll", "true");
@@ -343,6 +400,7 @@
         }
 
         async function init() {
+            prefHandler.initialSet();
             // wait for nodes to be filtered. making an array from the DOM seems to be faster than using CustomizableUI's widgets list.
             // idk how but i guess the CustomizableUI component loads stuff lazily...
             // and probably the browser starts rebuilding the widget area from some kind of cache before the component has fully loaded?
@@ -354,6 +412,7 @@
             // first wrap call
             wrapAll(array, inner, true);
             setupScroll();
+            prefHandler.attachListeners();
             cleanUp();
             overflowDownloadsAnimation();
         }
