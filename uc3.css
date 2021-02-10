@@ -865,16 +865,6 @@ findbar:focus-within .findbar-textbox:not([status="notfound"])~ :-moz-any(.findb
     background-size: 110% !important;
 }
 
-.urlbarView-row[source="bookmarks"] .urlbarView-favicon {
-    list-style-image: url(chrome://browser/skin/bookmark.svg) !important;
-    width: 17px !important;
-    height: 17px !important;
-    margin-inline-end: 7px !important;
-    -moz-context-properties: fill, stroke, fill-opacity, stroke-opacity !important;
-    background-repeat: no-repeat !important;
-    fill: currentColor !important;
-}
-
 #urlbar-engine-one-off-item-bookmarks:not([selected]) {
     fill: currentColor !important;
 }

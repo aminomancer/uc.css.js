@@ -10,7 +10,7 @@
     function init() {
         const searchModeIndicatorFocused = this.gURLBar._searchModeIndicatorTitle,
             urlbar = this.gURLBar.textbox,
-            identityIcon = this.gURLBar._identityBox.firstChild,
+            identityIcon = this.gURLBar._identityBox.firstElementChild,
             buttons = this.gURLBar.view.oneOffSearchButtons.buttons,
             observer = new MutationObserver(searchModeCallback),
             options = {

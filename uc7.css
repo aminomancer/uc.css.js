@@ -718,8 +718,12 @@ tabmodalprompt .checkbox-check[checked="true"] {
 }
 
 #urlbar .search-one-offs {
-    transition: opacity 0.15s ease-in-out !important;
+    transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out !important;
     opacity: 0 !important;
+    transform: translateX(-50px) scale(0.5) !important;
+    transform-style: flat !important;
+    backface-visibility: hidden !important;
+    transform-origin: left !important;
     pointer-events: none !important;
 }
 
@@ -730,6 +734,7 @@ tabmodalprompt .checkbox-check[checked="true"] {
 #urlbar[usertyping="true"] .search-one-offs,
 #urlbar[searchmode] .search-one-offs {
     opacity: 1 !important;
+    transform: none !important;
 }
 
 .urlbar-input-box {
@@ -740,9 +745,10 @@ tabmodalprompt .checkbox-check[checked="true"] {
     pointer-events: none !important;
 }
 
-#page-action-buttons {
+#page-action-buttons,
+#urlbar-input-container > .urlbar-icon {
     pointer-events: none !important;
-    transition: opacity 0.05s ease-in-out !important;
+    transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out !important;
 }
 
 #urlbar[searchmode] #page-action-buttons * {
@@ -768,7 +774,7 @@ tabmodalprompt .checkbox-check[checked="true"] {
 
 #urlbar[usertyping="true"] .search-one-offs,
 #urlbar[searchmode] .search-one-offs {
-    transition: opacity 0.05s ease-in-out !important;
+    transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out !important;
 }
 
 #urlbar:not([open]) > .urlbarView {
@@ -781,7 +787,7 @@ tabmodalprompt .checkbox-check[checked="true"] {
 
 #urlbar[usertyping="true"] .search-panel-one-offs,
 #urlbar[searchmode] .search-panel-one-offs {
-    transition: all 0.2s ease-in-out !important;
+    transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out !important;
 }
 
 #urlbar .searchbar-engine-one-off-item {
@@ -823,12 +829,25 @@ tabmodalprompt .checkbox-check[checked="true"] {
     background-color: var(--desaturate-dimmed) !important;
 }
 
-.searchbar-engine-one-off-item[selected], .searchbar-engine-one-off-item:hover:active, .addengine-item[selected], .addengine-item:hover:active {
-    background-color: var(--desaturate-dimmed-even-further) !important;
+.searchbar-engine-one-off-item[selected],
+.searchbar-engine-one-off-item:hover:active,
+.addengine-item[selected],
+.addengine-item:hover:active {
+    background-color: var(--desaturate-dimmed-further) !important;
 }
 
-#urlbar[usertyping="true"] :-moz-any(#page-action-buttons, .urlbar-icon) {
-    display: none !important;
+#urlbar[usertyping="true"] #page-action-buttons,
+#urlbar[usertyping="true"] #urlbar-input-container > .urlbar-icon {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform-style: flat !important;
+    backface-visibility: hidden !important;
+    transform: translateX(50px) scale(0.5) !important;
+    transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out !important;
+}
+
+#page-action-buttons > *:not([hidden]) {
+	display: -moz-box !important;
 }
 
 .urlbarView-row:last-child {

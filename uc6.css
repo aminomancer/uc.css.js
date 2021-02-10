@@ -457,6 +457,7 @@ findbar {
 #downloadsContextMenu,
 menupopup[menu-api],
 #PlacesToolbar menupopup,
+#ContentSelectDropdown,
 #toolbar-context-menu menupopup,
 #tabContextMenu menupopup,
 #contentAreaContextMenu menupopup,
@@ -474,7 +475,8 @@ menupopup[menu-api],
 #new-tab-button-popup menupopup,
 #new-tab-button menupopup,
 .popup-notification-dropmarker menupopup,
-menupopup[menu-api] menupopup {
+menupopup[menu-api] menupopup,
+#ContentSelectDropdown menupopup {
     -moz-appearance: none !important;
     background: hsl(233, 36%, 11%) !important;
     border: none !important;
@@ -513,7 +515,8 @@ menupopup[menu-api] menupopup {
 .popup-notification-dropmarker menuseparator,
 #downloadsContextMenu menuseparator,
 menupopup[menu-api] menuseparator,
-#PlacesToolbar menupopup menuseparator {
+#PlacesToolbar menupopup menuseparator,
+#ContentSelectDropdown menuseparator {
     /*     -moz-appearance: none !important;
     max-height: 1px !important;
     border: none !important;
@@ -548,7 +551,8 @@ menupopup[menu-api] menuseparator,
 .popup-notification-dropmarker menupopup :-moz-any(menuitem, menu),
 #downloadsContextMenu :is(menuitem, menu),
 menupopup[menu-api] :is(menuitem, menu),
-#PlacesToolbar menupopup :is(menuitem, menu) {
+#PlacesToolbar menupopup :is(menuitem, menu),
+#ContentSelectDropdown :is(menuitem, menu) {
     -moz-appearance: none !important;
     color: rgba(255, 255, 255, 0.8) !important;
     padding: 0 0 0 0 !important;
@@ -579,7 +583,8 @@ menupopup[menu-api] :is(menuitem, menu),
 .popup-notification-dropmarker menupopup :-moz-any(menuitem, menu)[disabled="true"],
 #downloadsContextMenu :is(menuitem, menu)[disabled="true"],
 menupopup[menu-api] :is(menuitem, menu)[disabled="true"],
-#PlacesToolbar menupopup :is(menuitem, menu)[disabled="true"] {
+#PlacesToolbar menupopup :is(menuitem, menu)[disabled="true"],
+#ContentSelectDropdown :is(menuitem, menu)[disabled="true"] {
     -moz-appearance: none !important;
     color: rgba(255, 255, 255, 0.45) !important;
     background-color: initial !important;
@@ -614,7 +619,8 @@ menupopup[menu-api] :is(menuitem, menu)[disabled="true"],
 .popup-notification-dropmarker menupopup menuseparator:not([hidden="true"])+ :-moz-any(menu, menuitem),
 #downloadsContextMenu menuseparator:not([hidden="true"])+ :-moz-any(menu, menuitem),
 menupopup[menu-api] menuseparator:not([hidden="true"])+ :-moz-any(menu, menuitem),
-#PlacesToolbar menupopup menuseparator:not([hidden="true"])+ :-moz-any(menu, menuitem) {
+#PlacesToolbar menupopup menuseparator:not([hidden="true"])+ :-moz-any(menu, menuitem),
+#ContentSelectDropdown menuseparator:not([hidden="true"])+ :-moz-any(menu, menuitem) {
     /*     border-top: 1px solid hsla(233, 24%, 28%, 0.47) !important; */
     border-image: linear-gradient(to right, transparent 1%, hsl(233, 25%, 23%) 50%, transparent 99%) !important;
     border-image-slice: 1 !important;
@@ -668,7 +674,8 @@ menupopup[menu-api] menuseparator:not([hidden="true"])+ :-moz-any(menu, menuitem
 .popup-notification-dropmarker menupopup :-moz-any(menuitem, menu) image,
 #downloadsContextMenu :is(menuitem, menu) image,
 menupopup[menu-api] :is(menuitem, menu) image,
-#PlacesToolbar menupopup :is(menuitem, menu) image {
+#PlacesToolbar menupopup :is(menuitem, menu) image,
+#ContentSelectDropdown :is(menuitem, menu) image {
     margin-left: 3px;
     margin-right: -3px;
 }
@@ -702,7 +709,8 @@ menupopup[menu-api] :is(menuitem, menu) image,
 .popup-notification-dropmarker menupopup menugroup,
 #downloadsContextMenu menugroup,
 menupopup[menu-api] menugroup,
-#PlacesToolbar menupopup menugroup {
+#PlacesToolbar menupopup menugroup,
+#ContentSelectDropdown menugroup {
     padding: 0 !important;
     background-color: transparent !important;
 }
@@ -731,7 +739,8 @@ menupopup[menu-api] menugroup,
 .popup-notification-dropmarker menupopup .menu-right,
 #downloadsContextMenu .menu-right,
 menupopup[menu-api] .menu-right,
-#PlacesToolbar menupopup .menu-right {
+#PlacesToolbar menupopup .menu-right,
+#ContentSelectDropdown .menu-right {
     -moz-appearance: none !important;
     padding: 0px !important;
     margin-right: 2px !important;
@@ -769,7 +778,8 @@ menupopup[menu-api] .menu-right,
 .popup-notification-dropmarker menupopup :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
 #downloadsContextMenu :is(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
 menupopup[menu-api] :is(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
-#PlacesToolbar menupopup :is(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]) {
+#PlacesToolbar menupopup :is(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
+#ContentSelectDropdown :is(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]) {
     -moz-appearance: none !important;
     background-color: var(--arrowpanel-dimmed) !important;
 }
@@ -786,6 +796,25 @@ menupopup[menu-api] :is(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"
 menu.subviewbutton:not([disabled])[_moz-menuactive]:active {
     background: var(--arrowpanel-dimmed) !important;
     box-shadow: none !important;
+}
+
+#ContentSelectDropdown > menupopup > menucaption > .menu-iconic-text,
+#ContentSelectDropdown > menupopup > menuitem > .menu-iconic-text {
+    padding-block: unset !important
+}
+
+#ContentSelectDropdown > menupopup {
+	font: menu !important;
+}
+
+#ContentSelectDropdown > menupopup > menuitem:not([_moz-menuactive="true"]) {
+    background-color: transparent !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+#ContentSelectDropdown > menupopup {
+    color: rgba(255, 255, 255, 0.8) !important;
+    background-image: unset !important;
 }
 
 #backForwardMenu menuitem[type="checkbox"]>.menu-iconic-left>.menu-iconic-icon,
