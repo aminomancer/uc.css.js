@@ -230,8 +230,8 @@ tooltip[default][page] {
 
 @-moz-document url(chrome://global/content/commonDialog.xhtml)
 {
-    #commonDialogWindow {
-        background: none !important;
+    #commonDialog::part(content-box) {
+        padding-block: 5px;
     }
 }
 

@@ -18,11 +18,8 @@
             widgets = cNavBar.children,
             domArray = [],
             prefHandler = {
-                width() {
-                    delete this.width;
-                    return (this.width = prefsvc.getIntPref(widthPref, 11) * 32);
-                },
                 get prop() {
+                    if (window.innerWidth / window.screen.availWidth > 0.7) return this.width;
                     return (
                         Math.round(
                             ((window.innerWidth / window.screen.availWidth) * this.width) / 32

@@ -277,8 +277,7 @@ tooltip {
 }
 
 /* i prefer about:config => alerts.useSystemBackend = true */
-@-moz-document url("chrome://global/content/alerts/alert.xhtml")
-{
+@-moz-document url("chrome://global/content/alerts/alert.xhtml") {
     #alertBox {
         background-color: rgba(18, 18, 18, 0.97) !important;
         background-image: url("texture/noise-512x512.png") !important;
@@ -286,13 +285,10 @@ tooltip {
     }
 }
 
-@-moz-document url(chrome://global/content/commonDialog.xhtml)
-{
-    #commonDialogWindow {
-        background: none !important;
-    }
+@-moz-document url(chrome://global/content/commonDialog.xhtml) {
     
     #commonDialogWindow {
+        --in-content-page-background: transparent !important;
         --in-content-box-background: hsla(232, 100%, 75%, 8%) !important;
         --in-content-box-border-color: rgba(249, 249, 250, 0.1) !important;
         --in-content-button-background: var(--arrowpanel-dimmed) !important;
@@ -312,6 +308,11 @@ tooltip {
         --in-content-primary-button-background-hover: var(--purple-35) !important;
         --in-content-primary-button-background-active: var(--purple-30) !important;
     }
+
+    #commonDialog::part(content-box) {
+        padding-block: 5px;
+    }
+
 }
 
 .content-prompt-dialog .dialogFrame {
