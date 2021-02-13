@@ -14,7 +14,7 @@
 .tab-icon-sound[muted] {
     width: 16px !important;
     height: 16px !important;
-    padding: 2.5px 1.5px 2px 1px !important;
+    padding: 2px 3px 2px 2px !important;
 }
 
 .tab-icon-sound[activemedia-blocked],
@@ -159,11 +159,26 @@
     opacity: 0.8 !important;
 }
 
-#tabbrowser-tabs:not([movingtab]) .tabbrowser-tab:not([tabdrop-samewindow], [justmoved]) .tab-icon-sound {
+#tabbrowser-tabs:not([movingtab]) .tabbrowser-tab:not([tabdrop-samewindow], [justmoved]) .tab-content > .tab-icon-sound {
     transition: 0.1s transform ease-in-out, 0.1s opacity ease-in-out, 0.1s margin ease-in-out !important;
 }
 
-#tabbrowser-tabs .tab-icon-sound:not([soundplaying], [muted], [activemedia-blocked], [pictureinpicture]) {
+.tab-icon-sound {
+    list-style-image: url(chrome://browser/skin/tabbrowser/tab-audio-playing.svg) !important;
+    -moz-context-properties: fill, fill-opacity !important;
+    -moz-box-ordinal-group: 2 !important;
+    fill: currentColor !important;
+}
+
+.tab-icon-sound[muted] {
+    list-style-image: url(chrome://browser/skin/tabbrowser/tab-audio-muted.svg) !important;
+}
+
+.tab-icon-sound[activemedia-blocked] {
+  list-style-image: url(chrome://browser/skin/tabbrowser/tab-audio-blocked.svg) !important;
+}
+
+#tabbrowser-tabs .tab-content > .tab-icon-sound:not([soundplaying], [muted], [activemedia-blocked], [pictureinpicture]) {
     list-style-image: url(chrome://browser/skin/tabbrowser/tab-audio-playing.svg) !important;
     display: -moz-inline-box !important;
     opacity: 0 !important;
@@ -173,8 +188,8 @@
     padding: 2.5px 1.5px 2px 1px !important;
 }
 
-#tabbrowser-tabs:not(:hover, :focus) .tab-icon-sound:not([soundplaying], [muted], [pictureinpicture]),
-#tabbrowser-tabs:not(:hover, :focus) .tab-icon-sound[soundplaying-scheduledremoval]:not([muted], [pictureinpicture]){
+#tabbrowser-tabs:not(:hover, :focus) .tab-content > .tab-icon-sound:not([soundplaying], [muted], [pictureinpicture]),
+#tabbrowser-tabs:not(:hover, :focus) .tab-content > .tab-icon-sound[soundplaying-scheduledremoval]:not([muted], [pictureinpicture]){
     opacity: 0 !important;
     pointer-events: none !important;
     transform: translateX(16px) scale(0.5) !important;
@@ -214,6 +229,8 @@
 
 .tab-icon-overlay {
     display: none !important;
+    margin-inline-end: -16px !important;
+    margin-inline-start: 0 !important;
 }
 
 .tab-icon-overlay[pictureinpicture]:not([crashed]) {
@@ -223,6 +240,7 @@
     transform: none !important;
     -moz-box-ordinal-group: 2 !important;
     margin-block: 0 !important;
+    z-index: 5 !important;
 }
 
 .tab-icon-overlay[pictureinpicture][soundplaying]:not([soundplaying-scheduledremoval]):hover ~ .tab-icon-sound[pictureinpicture] {
@@ -230,7 +248,7 @@
     list-style-image: url(chrome://browser/skin/tabbrowser/tab-audio-playing.svg) !important;
     width: 16px !important;
     height: 16px !important;
-    padding: 2.5px 1.5px 2px 1px !important;
+    padding: 2px 3px 2px 2px !important;
     background-color: var(--arrowpanel-dimmed) !important;
     border-radius: 50% !important;
 }
@@ -239,7 +257,7 @@
     list-style-image: url(chrome://browser/skin/tabbrowser/tab-audio-muted.svg) !important;
     width: 16px !important;
     height: 16px !important;
-    padding: 2.5px 1.5px 2px 1px !important;
+    padding: 2px 3px 2px 2px !important;
     border-radius: 50% !important;
 }
 

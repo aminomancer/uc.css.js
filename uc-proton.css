@@ -1,0 +1,237 @@
+:root {
+    --panelview-toolbarbutton-hover-bgcolor: var(--arrowpanel-dimmed) !important;
+    --panelview-toolbarbutton-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
+    --panel-banner-item-color: HSL(240, 9.1%, 97.8%);
+    --panel-banner-item-background-color: hsla(109.9, 90.9%, 47.3%, 0.1);
+    --panel-banner-item-hover-bgcolor: hsla(109.9, 90.9%, 47.3%, 0.15);
+    --panel-banner-item-active-bgcolor: hsla(109.9, 90.9%, 47.3%, 0.2);
+    --arrowpanel-menuitem-margin: 0 4px !important;
+    --arrowpanel-menuitem-padding: 6px !important;
+    --panel-subview-body-padding: 4px 0 !important;
+    --arrowpanel-menuitem-border-radius: 3px !important;
+    --proton-tab-radius: 0 !important;
+    --proton-tab-block-margin: 0 !important;
+    --panel-shortcut-color: hsla(234, 17%, 73%, 50%) !important;
+}
+
+:root[proton] #appMenu-multiView {
+    --arrowpanel-menuitem-margin: 0 8px !important;
+    --arrowpanel-menuitem-padding: 8px !important;
+    --panel-subview-body-padding: 8px 0 !important;
+}
+
+.tab-icon-sound-label {
+    display: none !important;
+}
+
+.tab-label-container.proton > .tab-icon-sound {
+    display: none !important;
+}
+
+/* .tab-label-container.proton {
+    -moz-box-orient: horizontal !important;
+} */
+
+:root[proton] .tab-background,
+:root[proton] .tabbrowser-tab {
+    min-height: 0 !important;
+    margin: 0 !important;
+}
+
+:root[proton] #TabsToolbar .toolbarbutton-1 > .toolbarbutton-icon,
+:root[proton] #TabsToolbar .toolbarbutton-1 > .toolbarbutton-badge-stack {
+	min-height: 16px !important;
+	padding-block: 6px !important;
+}
+
+:root[proton] #TabsToolbar .toolbarbutton-1 > .toolbarbutton-icon,
+:root[proton] #TabsToolbar .toolbarbutton-1 > .toolbarbutton-text,
+:root[proton] #TabsToolbar .toolbarbutton-1 > .toolbarbutton-badge-stack {
+	border-radius: var(--toolbarbutton-border-radius) !important;
+}
+
+/* .tab-label-container:not(.proton), */
+.tab-label-container:not(.proton) + .tab-icon-sound {
+    display: -moz-box !important;
+}
+
+#BMB_bookmarksPopup menupopup[placespopup="true"] {
+    padding-top: 0 !important;
+}
+
+/* appmenu */
+/* add icons to non-iconized appmenu items */
+.subviewbutton:not(.subviewbutton-iconic)>.toolbarbutton-icon {
+    -moz-context-properties: fill, fill-opacity;
+    fill: currentColor;
+}
+
+#appMenu-save-file-button2 {
+    list-style-image: url(chrome://browser/skin/save.svg);
+}
+
+#appMenu-more-button2 {
+    list-style-image: url(chrome://browser/skin/developer.svg);
+}
+
+#appMenu-help-button2 {
+    list-style-image: url(chrome://browser/skin/tip.svg);
+}
+
+#appMenu-new-window-button2 {
+    list-style-image: url(chrome://browser/skin/new-window.svg);
+}
+
+#appMenu-new-tab-button2 {
+    list-style-image: url("chrome://browser/skin/new-tab.svg");
+}
+
+#appMenu-new-private-window-button2 {
+    list-style-image: url("chrome://browser/skin/privateBrowsing.svg");
+}
+
+#appMenu-print-button2 {
+    list-style-image: url(chrome://global/skin/icons/print.svg);
+}
+
+#appMenu-passwords-button {
+    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M12 4a4 4 0 00-3.86 3H1a1 1 0 000 2v1a1 1 0 002 0V9h1v1a1 1 0 002 0V9h2.14A4 4 0 1012 4zm0 6a2 2 0 112-2 2 2 0 01-2 2z'/></svg>");
+}
+
+#appMenu-bookmarks-button {
+    list-style-image: url("chrome://browser/skin/bookmark.svg");
+}
+
+#appMenu-history-button {
+    list-style-image: url("chrome://browser/skin/history.svg");
+}
+
+#appMenu-downloads-button {
+    list-style-image: url("chrome://browser/skin/downloads/download-icons.svg#arrow-with-bar");
+}
+
+#appMenu-extensions-themes-button {
+    list-style-image: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' x='0' y='0' width='16' height='16' fill='context-fill' fill-opacity='context-fill-opacity'><path d='M7 2.1H3.7c-.9 0-1.6.7-1.6 1.6V7C.9 7 0 7.9 0 9s.9 2.1 2.1 2.1v3.3c0 .9.7 1.6 1.6 1.6h3.1c0-2.2 1.8-2.5 2.2-2.5s2.2.2 2.2 2.5h3.1c.9 0 1.6-.7 1.6-1.6v-3.1c-2.2 0-2.5-1.8-2.5-2.2 0-.4.2-2.2 2.5-2.2V3.7c0-.9-.7-1.6-1.6-1.6H11C11.1.9 10.2 0 9 0S7 .9 7 2.1z'/></svg>") !important;
+}
+
+#appMenu-find-button2,
+#panelMenu_searchBookmarks {
+    list-style-image: url(chrome://global/skin/icons/search-glass.svg);
+}
+
+#panelMenu_bookmarkingTools {
+    list-style-image: url("chrome://browser/skin/developer.svg");
+}
+
+#panelMenu_viewBookmarksToolbar {
+    list-style-image: url("chrome://browser/skin/bookmarks-toolbar.svg");
+}
+
+#panelMenuBookmarkThisPage {
+    list-style-image: url("chrome://browser/skin/bookmark-hollow.svg");
+}
+
+#PanelUI-fxa-menu-remotetabs-button,
+#appMenuRecentlyClosedTabs {
+    list-style-image: url("chrome://browser/skin/tab.svg");
+}
+
+#appMenuClearRecentHistory {
+    list-style-image: url("chrome://browser/skin/forget.svg");
+}
+
+#appMenuRestoreLastSession {
+    list-style-image: url("chrome://browser/skin/restore-session.svg");
+}
+
+#appMenuRecentlyClosedWindows {
+    list-style-image: url(chrome://browser/skin/window.svg);
+}
+
+#appMenu-settings-button {
+    list-style-image: url(chrome://global/skin/icons/settings.svg);
+}
+
+#appmenu-moreTools-button {
+    list-style-image: url(chrome://browser/skin/customize.svg);
+}
+
+#appMenu-quit-button2 {
+    list-style-image: url(chrome://browser/skin/quit.svg);
+}
+
+#appMenu-save-file-button2>.toolbarbutton-text,
+#appMenu-more-button2>.toolbarbutton-text,
+#appMenu-help-button2>.toolbarbutton-text,
+#appMenu-new-window-button2>.toolbarbutton-text,
+#appMenu-new-tab-button2>.toolbarbutton-text,
+#appMenu-new-private-window-button2>.toolbarbutton-text,
+#appMenu-print-button2>.toolbarbutton-text,
+#appMenu-passwords-button>.toolbarbutton-text,
+#appMenu-bookmarks-button>.toolbarbutton-text,
+#appMenu-history-button>.toolbarbutton-text,
+#appMenu-downloads-button>.toolbarbutton-text,
+#appMenu-extensions-themes-button>.toolbarbutton-text,
+#appMenu-find-button2>.toolbarbutton-text,
+#panelMenu_searchBookmarks>.toolbarbutton-text,
+#panelMenuBookmarkThisPage>.toolbarbutton-text,
+#panelMenu_viewBookmarksToolbar>.toolbarbutton-text,
+#panelMenu_bookmarkingTools>.toolbarbutton-text,
+#PanelUI-fxa-menu-remotetabs-button>.toolbarbutton-text,
+#appMenuRecentlyClosedTabs>.toolbarbutton-text,
+#appMenuClearRecentHistory>.toolbarbutton-text,
+#appMenuRestoreLastSession>.toolbarbutton-text,
+#appMenuRecentlyClosedWindows>.toolbarbutton-text,
+#appMenu-settings-button>.toolbarbutton-text,
+#appmenu-moreTools-button>.toolbarbutton-text,
+#appMenu-quit-button2>.toolbarbutton-text,
+#appMenu-zoom-controls2>.toolbarbutton-text {
+    padding-inline-start: 8px !important;
+}
+
+#appMenu-zoom-controls2::before {
+    content: "" !important;
+    display: block;
+    width: 16px;
+    height: 16px;
+    -moz-context-properties: fill, fill-opacity;
+    fill: currentColor;
+    background-image: url(chrome://browser/skin/fxa/add-device.svg);
+}
+
+/* appmenu buttons border radius */
+.subviewbutton-back {
+    border-radius: 2px !important;
+}
+
+#appMenu-zoom-controls2 toolbarbutton {
+    margin-inline: 4px !important;
+    border: 1px solid var(--desaturate-dimmed) !important;
+    min-height: 20px !important;
+    min-width: 20px !important;
+    width: unset !important;
+    padding: 4px !important;
+}
+
+#appMenu-zoom-controls2 .toolbarbutton-icon {
+    width: 12px !important;
+    height: 12px !important;
+}
+
+#appMenu-zoom-controls2 #appMenu-zoomReset-button2 {
+    border: 1px solid var(--desaturate-dimmed) !important;
+    height: 20px !important;
+    border-radius: 10px !important;
+    padding: 0 4px !important;
+    height: 20px !important;
+    min-height: 20px !important;
+}
+
+#appMenu-zoom-controls2 #appMenu-zoomReset-button2 .toolbarbutton-text {
+    margin-block: 1px !important;
+    margin-inline: 6px !important;
+}
+
+
+
+

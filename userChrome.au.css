@@ -46,3 +46,9 @@ link[href="chrome://global/skin/arrowscrollbox.css"] ~ :is(#scrollbutton-up, #sc
 :is(panel, menupopup)::part(arrow) {
     stroke: var(--arrowpanel-background);
 }
+
+/* proton stuff */
+menupopup::part(innerbox) {
+    padding-block: 4px;
+    border-radius: 5px;
+}

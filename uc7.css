@@ -239,7 +239,7 @@ tabmodalprompt .checkbox-check[checked="true"] {
 /*         overflow: hidden !important; */
 /*         border: none !important; */
         margin-top: -1px !important;
-        margin-inline: -1px;
+/*         margin-inline: -1px; */
     }
     
 /*     .BMBsmallContentBox>.menupopup-arrowscrollbox {

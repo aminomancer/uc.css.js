@@ -126,8 +126,7 @@ requires fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-statu
 :root[inFullscreen] #navigator-toolbox {
     position: fixed !important;
     display: block;
-    line-height: 0;
-    height: 74px !important;
+    height: 75.5px !important;
 }
 
 /* #navigator-toolbox * {
@@ -144,8 +143,8 @@ requires fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-statu
 }
 
 :root[inFullscreen]:not([customizing]) #browser #sidebar-box {
-    padding-top: 200px !important;
-    margin-top: -200px !important;
+/*     padding-top: 200px !important;
+    margin-top: -200px !important; */
     top: 0 !important;
     transition: margin-top .2s ease-in-out 0s !important;
     transition-delay: 0s !important;
@@ -161,11 +160,11 @@ requires fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-statu
 
 :root[inFullscreen]:not([customizing]) #browser findbar {
     padding-top: 73px !important;
-    margin-top: -69px !important;
+    margin-top: -71px !important;
 }
 
 :root[inFullscreen]:not([customizing]) #browser findbar[hidden] {
-    margin-top: calc(-2em - 69px) !important;
+    margin-top: -96px !important;
 }
 
 #main-window[inFullscreen]:not([customizing])>body>box:is(:focus-within, :hover, [popup-status], [urlbar-status]) ~ #browser findbar {
@@ -173,12 +172,12 @@ requires fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-statu
 }
 
 #main-window[inFullscreen]:not([customizing])>body>box:is(:focus-within, :hover, [popup-status], [urlbar-status]) ~ #browser findbar[hidden] {
-    margin-top: calc(5.4px - 69px) !important;
+    margin-top: -21px !important;
 }
 
-#main-window[inFullscreen]:not([customizing])>body>box:is(:focus-within, :hover, [popup-status], [urlbar-status]) ~ #browser #sidebar-box {
+/* #main-window[inFullscreen]:not([customizing])>body>box:is(:focus-within, :hover, [popup-status], [urlbar-status]) ~ #browser #sidebar-box {
     margin-top: -126px !important;
-}
+} */
 
 .tabbrowser-tab:hover:not([selected]) .tab-label-container {
     opacity: 1 !important;

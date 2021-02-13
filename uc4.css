@@ -108,6 +108,7 @@ toolbar {
     --urlbar-popup-url-color: hsl(251, 100%, 64%) !important;
     --urlbar-popup-action-color: hsl(340, 73%, 58%) !important;
     --toolbarbutton-icon-fill-opacity: 1 !important;
+    --tab-min-height: 35px !important;
 }
 
 toolbar .toolbarbutton-1:not([disabled]):hover:-moz-any([open]) > .toolbarbutton-icon {
