@@ -205,3 +205,45 @@ tooltip[default][page] {
     padding: 5px !important;
     /* font-family: FreeMono !important; */
 }
+
+/* blur filter */
+#statuspanel-label {
+    background-image: url("texture/noise-512x512.png") !important;
+    background-color: hsla(233.3, 39.1%, 9%, 0.58) !important;
+    backdrop-filter: blur(10px);
+    color: hsla(0, 0%, 100%, 0.85) !important;
+    border: none !important;
+    /* font-family: FreeMono !important; */
+    transition: opacity 70ms ease-in-out !important;
+    opacity: 1;
+}
+
+/* i prefer about:config => alerts.useSystemBackend = true */
+@-moz-document url("chrome://global/content/alerts/alert.xhtml")
+{
+    #alertBox {
+        background-color: rgba(18, 18, 18, 0.97) !important;
+        background-image: url("texture/noise-512x512.png") !important;
+        backdrop-filter: blur(10px) !important;
+    }
+}
+
+@-moz-document url(chrome://global/content/commonDialog.xhtml)
+{
+    #commonDialogWindow {
+        background: none !important;
+    }
+}
+
+.content-prompt-dialog .dialogFrame {
+    background-color: hsla(240, 5.9%, 6.7%, 0.6) !important;
+    background-image: url("texture/noise-512x512.png") !important;
+    backdrop-filter: blur(5px) !important;
+    border-radius: 5px !important;
+}
+
+#fullscreen-warning {
+    background-image: url("texture/noise-512x512.png") !important;
+    background-color: hsla(233.3, 39.1%, 9%, 0.58) !important;
+    backdrop-filter: blur(10px) !important;
+}

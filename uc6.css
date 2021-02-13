@@ -128,22 +128,37 @@ toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:ho
     display: none !important;
 }
 
-#tracking-protection-icon-container:not([open="true"]):not(:hover) #tracking-protection-icon-box:not([animate="true"]) #tracking-protection-icon {
+/* #tracking-protection-icon-container:not([open="true"]):not(:hover) #tracking-protection-icon-box:not([animate="true"], [active]) #tracking-protection-icon {
     display: -moz-box !important;
 }
 
-#tracking-protection-icon-container:not([open="true"]):not(:hover) #tracking-protection-icon-box:not([animate="true"]) #tracking-protection-icon-animatable-box {
+#tracking-protection-icon-container:not([open="true"]):not(:hover) #tracking-protection-icon-box:not([animate="true"], [active]) #tracking-protection-icon-animatable-box {
     display: none !important;
-}
-
-#tracking-protection-icon {
-    list-style-image: url(chrome://browser/skin/tracking-protection.svg);
 }
 
 #tracking-protection-icon-container[open="true"] #tracking-protection-icon-box:not([animate="true"]) #tracking-protection-icon-animatable-box,
 #tracking-protection-icon-container:hover #tracking-protection-icon-box:not([animate="true"]) #tracking-protection-icon-animatable-box,
 #tracking-protection-icon-container #tracking-protection-icon-box[animate="true"] #tracking-protection-icon-animatable-box {
     filter: brightness(1.15) saturate(1.5) contrast(1.15) !important;
+} */
+
+/* #tracking-protection-icon-container #tracking-protection-icon-box[active]:not([animate]) #tracking-protection-icon-animatable-box {
+    filter: brightness(1.15) saturate(1.5) contrast(1.15) !important;
+} */
+
+#tracking-protection-icon-container:is([open="true"], :hover) #tracking-protection-icon-box[active]:not([animate]) #tracking-protection-icon-animatable-box {
+    display: block !important;
+}
+
+#tracking-protection-icon-container:not([open="true"], :hover) #tracking-protection-icon-box[active]:not([animate]) #tracking-protection-icon {
+    display: -moz-box !important;
+    fill: hsl(218, 100%, 72%) !important;
+    fill-opacity: 1 !important;
+}
+
+#tracking-protection-icon-container:not([open="true"], :hover) #tracking-protection-icon-box[active]:not([animate]) #tracking-protection-icon-animatable-box,
+#tracking-protection-icon-container:is([open="true"], :hover) #tracking-protection-icon-box[active]:not([animate]) #tracking-protection-icon {
+    display: none !important;
 }
 
 #identity-box:-moz-any(:hover:active, [open="true"], :hover:not([open="true"])),
@@ -164,40 +179,51 @@ toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:ho
 #urlbar[pageproxystate="valid"] #identity-box.verifiedIdentity #identity-icon-box:-moz-any(:hover:active, :hover:not([open="true"])) #identity-icon:hover,
 #urlbar[pageproxystate="valid"] #identity-box.mixedActiveBlocked #identity-icon-box[open="true"] #identity-icon,
 #urlbar[pageproxystate="valid"] #identity-box.mixedActiveBlocked #identity-icon-box:-moz-any(:hover:active, :hover:not([open="true"])) #identity-icon:hover {
-    fill: hsl(119, 100%, 43%) !important;
+/*     fill: hsl(119, 100%, 43%) !important; */
+    fill: hsl(119, 80%, 60%) !important;
     fill-opacity: 1 !important;
 }
 
-#identity-box.chromeUI #identity-icon-box:-moz-any(:hover:active, [open="true"], :hover:not([open="true"]))>#identity-icon {
+#urlbar[pageproxystate="valid"] #identity-box.chromeUI:hover #identity-icon-box:not([open="true"]) > #identity-icon,
+#urlbar[pageproxystate="valid"] #identity-box.chromeUI:hover:active #identity-icon-box > #identity-icon,
+#urlbar[pageproxystate="valid"] #identity-box.chromeUI #identity-icon-box[open="true"] > #identity-icon {
     list-style-image: url("chrome://branding/content/about-logo.png") !important;
 }
 
 #urlbar[pageproxystate="valid"] #identity-box.chromeUI {
-    background-color: hsla(236, 52%, 18%, 0.4) !important;
+    padding: 0 !important;
+    margin: 0 !important;
     margin-inline-end: 6px !important;
-    padding-inline-end: 5px !important;
-    padding-inline-start: 8px;
     border-image: none !important;
     border-right: 1px solid transparent !important;
     border-image-slice: 1;
 }
 
-#urlbar[pageproxystate="valid"] #identity-box.chromeUI:-moz-any(:hover:active, [open="true"], :hover:not([open="true"])) {
+#urlbar[pageproxystate="valid"] #identity-box.chromeUI #identity-icon-box {
+    background-color: hsla(236, 52%, 18%, 0.4) !important;
+    padding-inline-end: 5px !important;
+    padding-inline-start: 8px !important;
+}
+
+#urlbar[pageproxystate="valid"] #identity-box.chromeUI:hover #identity-icon-box:not([open="true"]),
+#urlbar[pageproxystate="valid"] #identity-box.chromeUI:hover:active #identity-icon-box,
+#urlbar[pageproxystate="valid"] #identity-box.chromeUI #identity-icon-box[open="true"] {
     background-color: hsla(236, 49%, 25%, 0.4) !important;
 }
 
-#urlbar[pageproxystate="valid"] #identity-box.chromeUI:-moz-any(:hover:active, [open="true"], :hover:not([open="true"])) #identity-icon-label {
+#urlbar[pageproxystate="valid"] #identity-box.chromeUI:hover #identity-icon-box:not([open="true"]) > #identity-icon-label,
+#urlbar[pageproxystate="valid"] #identity-box.chromeUI:hover:active #identity-icon-box > #identity-icon-label,
+#urlbar[pageproxystate="valid"] #identity-box.chromeUI #identity-icon-box[open="true"] > #identity-icon-label {
     opacity: 1 !important;
 }
 
-#tracking-protection-icon-container {
-    fill-opacity: .5 !important;
-}
-
-#tracking-protection-icon-container:hover:not([open="true"]),
-#tracking-protection-icon-container[open="true"] {
-    background-color: transparent !important;
-    fill-opacity: 1 !important;
+#urlbar[pageproxystate="valid"] #identity-box.chromeUI #notification-popup-box {
+    opacity: 0 !important;
+    display: block !important;
+    position: absolute !important;
+    pointer-events: none !important;
+    top: 7px !important;
+    padding-inline: 1px !important;
 }
 
 #urlbar[pageproxystate="invalid"] #identity-box {
@@ -229,6 +255,11 @@ toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:ho
     margin-inline-start: 0px !important;
     padding-inline-start: 7px !important;
     border: none !important;
+    background: none !important;
+}
+
+#tracking-protection-icon {
+    list-style-image: url(chrome://browser/skin/tracking-protection.svg);
 }
 
 #tracking-protection-icon-container::after {
@@ -271,8 +302,11 @@ toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:ho
     margin-left: -17px !important;
 }
 
-#identity-popup[connection^=secure] .identity-popup-security-connection {
-  fill: hsl(114, 100%, 37%) !important;
+#identity-popup[connection^=secure] .identity-popup-security-connection,
+:root[lwt-popup-brighttext] .identity-popup-connection-secure {
+/*   fill: hsl(114, 100%, 37%) !important; */
+    fill: hsl(119, 80%, 60%) !important;
+    color: hsl(119, 80%, 60%) !important;
 }
 
 #protections-popup-mainView-panel-header-section {
@@ -291,6 +325,10 @@ toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:ho
 
 #identity-popup-security-expander > .button-box {
     border: none !important;
+}
+
+#protections-popup-not-blocking-section-why {
+	border-radius: 0.1% !important;
 }
 
 .identity-popup-warning-box {
@@ -366,21 +404,21 @@ toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:ho
 }
 
 /* put animated colored tracking protection icon on every site */
-#tracking-protection-icon-box:not([animationsenabled]):not([active]):not([hasException])>#tracking-protection-icon-animatable-box,
-#tracking-protection-icon-box:not([active]):not([hasException])>#tracking-protection-icon-animatable-box {
+/* #tracking-protection-icon-box:not([animationsenabled]):not([animate="true"]):not([hasException])>#tracking-protection-icon-animatable-box,
+#tracking-protection-icon-box:not([animate="true"]):not([hasException])>#tracking-protection-icon-animatable-box {
     display: block !important;
 }
 
-#tracking-protection-icon-box:not([animationsenabled]):not([active]):not([hasException])>#tracking-protection-icon,
-#tracking-protection-icon-box:not([active]):not([hasException])>#tracking-protection-icon {
+#tracking-protection-icon-box:not([animationsenabled]):not([animate="true"]):not([hasException])>#tracking-protection-icon,
+#tracking-protection-icon-box:not([animate="true"]):not([hasException])>#tracking-protection-icon {
     display: none !important;
 }
 
-#tracking-protection-icon-box:not([active]):not([hasException]) #tracking-protection-icon-animatable-image {
+#tracking-protection-icon-box:not([animate="true"]):not([hasException]) #tracking-protection-icon-animatable-image {
     background-image: url("chrome://browser/skin/tracking-protection-animation-brighttext.svg");
 }
 
-#tracking-protection-icon-box:not([active]):not([hasException]) #tracking-protection-icon-animatable-image {
+#tracking-protection-icon-box:not([animate="true"]):not([hasException]) #tracking-protection-icon-animatable-image {
     background-image: url("chrome://browser/skin/tracking-protection-animation-brighttext.svg");
     transform: translateX(-256px);
     width: 272px;
@@ -388,8 +426,8 @@ toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:ho
     height: 16px;
     min-height: 16px;
     -moz-context-properties: fill, fill-opacity;
-}
-
+} */
+/* 
 #tracking-protection-icon-box[hasException]::before {
     background: url("chrome://browser/skin/badge-blue.svg");
     content: "";
@@ -398,7 +436,7 @@ toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:ho
     right: -3.5px !important;
     height: 14px !important;
     width: 14px !important;
-}
+} */
 
 
 /* hide tracking protection icon on new tab page, and show search identity icon. again, message u/MotherStylus if you want my tab notes addon. */
@@ -419,7 +457,24 @@ toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:ho
 .popup-notification-icon[popupid="xpinstall-disabled"],
 .popup-notification-icon[popupid="addon-install-blocked"],
 .popup-notification-icon[popupid="addon-install-origin-blocked"] {
-    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='64' height='64' viewBox='0 0 64 64'><defs><style>.style-puzzle-piece {fill: white; fill-opacity: context-fill-opacity;} .style-badge-shadow {fill: %230d131a; fill-opacity: .15;} .style-badge-background {fill: %23fff;} .style-badge-inside {fill: %23e62117;} .style-badge-icon {fill: %23fff;}</style></defs><path class='style-puzzle-piece' d='M42,62c2.2,0,4-1.8,4-4l0-14.2c0,0,0.4-3.7,2.8-3.7c2.4,0,2.2,3.9,6.7,3.9c2.3,0,6.2-1.2,6.2-8.2 c0-7-3.9-7.9-6.2-7.9c-4.5,0-4.3,3.7-6.7,3.7c-2.4,0-2.8-3.8-2.8-3.8V22c0-2.2-1.8-4-4-4H31.5c0,0-3.4-0.6-3.4-3 c0-2.4,3.8-2.6,3.8-7.1c0-2.3-1.3-5.9-8.3-5.9s-8,3.6-8,5.9c0,4.5,3.4,4.7,3.4,7.1c0,2.4-3.4,3-3.4,3H6c-2.2,0-4,1.8-4,4l0,7.8 c0,0-0.4,6,4.4,6c3.1,0,3.2-4.1,7.3-4.1c2,0,4,1.9,4,6c0,4.2-2,6.3-4,6.3c-4,0-4.2-4.1-7.3-4.1c-4.8,0-4.4,5.8-4.4,5.8L2,58 c0,2.2,1.8,4,4,4H19c0,0,6.3,0.4,6.3-4.4c0-3.1-4-3.6-4-7.7c0-2,2.2-4.5,6.4-4.5c4.2,0,6.6,2.5,6.6,4.5c0,4-3.9,4.6-3.9,7.7 c0,4.9,6.3,4.4,6.3,4.4H42z'/><svg width='32' height='32' x='32' y='0'><ellipse class='style-badge-shadow' rx='14' ry='15' cx='16' cy='17'/><circle class='style-badge-background' r='15' cy='15' cx='16'/><circle class='style-badge-inside' r='12' cy='15' cx='16'/><rect class='style-badge-icon' x='9' y='13' width='14' height='4' rx='1' ry='1'/></svg></svg>") !important;
+/*     list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='64' height='64' viewBox='0 0 64 64'><defs><style>.style-puzzle-piece {fill: white; fill-opacity: context-fill-opacity;} .style-badge-shadow {fill: %230d131a; fill-opacity: .15;} .style-badge-background {fill: %23fff;} .style-badge-inside {fill: %23e62117;} .style-badge-icon {fill: %23fff;}</style></defs><path class='style-puzzle-piece' d='M42,62c2.2,0,4-1.8,4-4l0-14.2c0,0,0.4-3.7,2.8-3.7c2.4,0,2.2,3.9,6.7,3.9c2.3,0,6.2-1.2,6.2-8.2 c0-7-3.9-7.9-6.2-7.9c-4.5,0-4.3,3.7-6.7,3.7c-2.4,0-2.8-3.8-2.8-3.8V22c0-2.2-1.8-4-4-4H31.5c0,0-3.4-0.6-3.4-3 c0-2.4,3.8-2.6,3.8-7.1c0-2.3-1.3-5.9-8.3-5.9s-8,3.6-8,5.9c0,4.5,3.4,4.7,3.4,7.1c0,2.4-3.4,3-3.4,3H6c-2.2,0-4,1.8-4,4l0,7.8 c0,0-0.4,6,4.4,6c3.1,0,3.2-4.1,7.3-4.1c2,0,4,1.9,4,6c0,4.2-2,6.3-4,6.3c-4,0-4.2-4.1-7.3-4.1c-4.8,0-4.4,5.8-4.4,5.8L2,58 c0,2.2,1.8,4,4,4H19c0,0,6.3,0.4,6.3-4.4c0-3.1-4-3.6-4-7.7c0-2,2.2-4.5,6.4-4.5c4.2,0,6.6,2.5,6.6,4.5c0,4-3.9,4.6-3.9,7.7 c0,4.9,6.3,4.4,6.3,4.4H42z'/><svg width='32' height='32' x='32' y='0'><ellipse class='style-badge-shadow' rx='14' ry='15' cx='16' cy='17'/><circle class='style-badge-background' r='15' cy='15' cx='16'/><circle class='style-badge-inside' r='12' cy='15' cx='16'/><rect class='style-badge-icon' x='9' y='13' width='14' height='4' rx='1' ry='1'/></svg></svg>") !important; */
+    list-style-image: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' x='0' y='0' width='16' height='16' fill='context-fill' fill-opacity='context-fill-opacity'><path d='M15.7.3c-.4-.4-1.2-.4-1.6 0L12.4 2h-1.3c0-1.1-.9-2-2.1-2S7 .9 7 2.1H3.7c-.9 0-1.6.7-1.6 1.6V7C.9 7 0 7.9 0 9s.9 2.1 2.1 2.1v1.3L.3 14c-.5.4-.5 1.2 0 1.6s1.2.5 1.6 0L15.7 2c.4-.5.4-1.2 0-1.7zM13.5 9c0-.4.2-2.2 2.5-2.2V3.7c0-.2 0-.4-.1-.6L3 15.9c.2.1.5.1.7.1h3.1c0-2.2 1.8-2.5 2.2-2.5.4 0 2.2.2 2.2 2.5h3.1c.9 0 1.6-.7 1.6-1.6v-3.1c-2.1-.1-2.4-1.8-2.4-2.3z'/></svg>") !important;
+}
+
+#addons-notification-icon,
+#add-ons-button,
+#appMenu-addons-button {
+    list-style-image: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' x='0' y='0' width='16' height='16' fill='context-fill' fill-opacity='context-fill-opacity'><path d='M7 2.1H3.7c-.9 0-1.6.7-1.6 1.6V7C.9 7 0 7.9 0 9s.9 2.1 2.1 2.1v3.3c0 .9.7 1.6 1.6 1.6h3.1c0-2.2 1.8-2.5 2.2-2.5s2.2.2 2.2 2.5h3.1c.9 0 1.6-.7 1.6-1.6v-3.1c-2.2 0-2.5-1.8-2.5-2.2 0-.4.2-2.2 2.5-2.2V3.7c0-.9-.7-1.6-1.6-1.6H11C11.1.9 10.2 0 9 0S7 .9 7 2.1z'/></svg>") !important;
+}
+
+.tabbrowser-tab[image="chrome://mozapps/skin/extensions/extension.svg"] .tab-sharing-icon-overlay {
+    list-style-image: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' x='0' y='0' width='16' height='16' fill='context-fill' fill-opacity='context-fill-opacity'><path d='M7 2.1H3.7c-.9 0-1.6.7-1.6 1.6V7C.9 7 0 7.9 0 9s.9 2.1 2.1 2.1v3.3c0 .9.7 1.6 1.6 1.6h3.1c0-2.2 1.8-2.5 2.2-2.5s2.2.2 2.2 2.5h3.1c.9 0 1.6-.7 1.6-1.6v-3.1c-2.2 0-2.5-1.8-2.5-2.2 0-.4.2-2.2 2.5-2.2V3.7c0-.9-.7-1.6-1.6-1.6H11C11.1.9 10.2 0 9 0S7 .9 7 2.1z'/></svg>") !important;
+    display: block !important;
+    fill: currentColor !important;
+}
+
+.tabbrowser-tab[image="chrome://mozapps/skin/extensions/extension.svg"] .tab-icon-image {
+    visibility: hidden !important;
 }
 
 #plugins-notification-icon[extraAttr="inactive"] > .plugin-icon {
@@ -454,6 +509,7 @@ findbar {
 #customization-toolbar-menu,
 #main-menubar menupopup,
 #new-tab-button-popup,
+.new-tab-popup,
 #downloadsContextMenu,
 menupopup[menu-api],
 #PlacesToolbar menupopup,
@@ -476,7 +532,8 @@ menupopup[menu-api],
 #new-tab-button menupopup,
 .popup-notification-dropmarker menupopup,
 menupopup[menu-api] menupopup,
-#ContentSelectDropdown menupopup {
+#ContentSelectDropdown menupopup,
+.new-tab-popup menupopup {
     -moz-appearance: none !important;
     background: hsl(233, 36%, 11%) !important;
     border: none !important;
@@ -516,7 +573,8 @@ menupopup[menu-api] menupopup,
 #downloadsContextMenu menuseparator,
 menupopup[menu-api] menuseparator,
 #PlacesToolbar menupopup menuseparator,
-#ContentSelectDropdown menuseparator {
+#ContentSelectDropdown menuseparator,
+.new-tab-popup menuseparator {
     /*     -moz-appearance: none !important;
     max-height: 1px !important;
     border: none !important;
@@ -552,7 +610,8 @@ menupopup[menu-api] menuseparator,
 #downloadsContextMenu :is(menuitem, menu),
 menupopup[menu-api] :is(menuitem, menu),
 #PlacesToolbar menupopup :is(menuitem, menu),
-#ContentSelectDropdown :is(menuitem, menu) {
+#ContentSelectDropdown :is(menuitem, menu),
+.new-tab-popup :is(menuitem, menu) {
     -moz-appearance: none !important;
     color: rgba(255, 255, 255, 0.8) !important;
     padding: 0 0 0 0 !important;
@@ -584,7 +643,8 @@ menupopup[menu-api] :is(menuitem, menu),
 #downloadsContextMenu :is(menuitem, menu)[disabled="true"],
 menupopup[menu-api] :is(menuitem, menu)[disabled="true"],
 #PlacesToolbar menupopup :is(menuitem, menu)[disabled="true"],
-#ContentSelectDropdown :is(menuitem, menu)[disabled="true"] {
+#ContentSelectDropdown :is(menuitem, menu)[disabled="true"],
+.new-tab-popup :is(menuitem, menu)[disabled="true"] {
     -moz-appearance: none !important;
     color: rgba(255, 255, 255, 0.45) !important;
     background-color: initial !important;
@@ -620,7 +680,8 @@ menupopup[menu-api] :is(menuitem, menu)[disabled="true"],
 #downloadsContextMenu menuseparator:not([hidden="true"])+ :-moz-any(menu, menuitem),
 menupopup[menu-api] menuseparator:not([hidden="true"])+ :-moz-any(menu, menuitem),
 #PlacesToolbar menupopup menuseparator:not([hidden="true"])+ :-moz-any(menu, menuitem),
-#ContentSelectDropdown menuseparator:not([hidden="true"])+ :-moz-any(menu, menuitem) {
+#ContentSelectDropdown menuseparator:not([hidden="true"])+ :-moz-any(menu, menuitem),
+.new-tab-popup menuseparator:not([hidden="true"])+ :-moz-any(menu, menuitem) {
     /*     border-top: 1px solid hsla(233, 24%, 28%, 0.47) !important; */
     border-image: linear-gradient(to right, transparent 1%, hsl(233, 25%, 23%) 50%, transparent 99%) !important;
     border-image-slice: 1 !important;
@@ -675,7 +736,8 @@ menupopup[menu-api] menuseparator:not([hidden="true"])+ :-moz-any(menu, menuitem
 #downloadsContextMenu :is(menuitem, menu) image,
 menupopup[menu-api] :is(menuitem, menu) image,
 #PlacesToolbar menupopup :is(menuitem, menu) image,
-#ContentSelectDropdown :is(menuitem, menu) image {
+#ContentSelectDropdown :is(menuitem, menu) image,
+.new-tab-popup :is(menuitem, menu) image {
     margin-left: 3px;
     margin-right: -3px;
 }
@@ -710,7 +772,8 @@ menupopup[menu-api] :is(menuitem, menu) image,
 #downloadsContextMenu menugroup,
 menupopup[menu-api] menugroup,
 #PlacesToolbar menupopup menugroup,
-#ContentSelectDropdown menugroup {
+#ContentSelectDropdown menugroup,
+.new-tab-popup menugroup {
     padding: 0 !important;
     background-color: transparent !important;
 }
@@ -740,7 +803,8 @@ menupopup[menu-api] menugroup,
 #downloadsContextMenu .menu-right,
 menupopup[menu-api] .menu-right,
 #PlacesToolbar menupopup .menu-right,
-#ContentSelectDropdown .menu-right {
+#ContentSelectDropdown .menu-right,
+.new-tab-popup .menu-right {
     -moz-appearance: none !important;
     padding: 0px !important;
     margin-right: 2px !important;
@@ -779,7 +843,8 @@ menupopup[menu-api] .menu-right,
 #downloadsContextMenu :is(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
 menupopup[menu-api] :is(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
 #PlacesToolbar menupopup :is(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
-#ContentSelectDropdown :is(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]) {
+#ContentSelectDropdown :is(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
+.new-tab-popup :is(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]) {
     -moz-appearance: none !important;
     background-color: var(--arrowpanel-dimmed) !important;
 }

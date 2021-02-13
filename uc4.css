@@ -685,7 +685,12 @@ tabbrowser toolbarbutton[class^="scrollbutton"],
 }
 
 #page-action-buttons {
-    margin-right: 3px !important;
+    margin-right: 2.5px !important;
+}
+
+.urlbar-icon {
+    width: 27px !important;
+    height: 27px !important;
 }
 
 .toolbaritem-combined-buttons:-moz-any(:not([cui-areatype="toolbar"]), [overflowedItem="true"])>toolbarbutton {

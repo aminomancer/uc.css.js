@@ -313,7 +313,8 @@ requires fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-statu
     display: -moz-box !important;
 }
 
-#identity-box:not(.chromeUI) {
+#identity-box:not(.chromeUI),
+#identity-box[pageproxystate="invalid"] {
     margin-inline-start: -8px !important;
     padding-inline-start: 0px !important;
 }
@@ -353,8 +354,27 @@ requires fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-statu
     pointer-events: none !important;
 }
 
-#identity-box, #tracking-protection-icon-container {
+#identity-box,
+#tracking-protection-icon-container {
     fill-opacity: .6 !important;
+}
+
+#tracking-protection-icon-container:hover:not([open="true"]) #tracking-protection-icon-box,
+#tracking-protection-icon-container[open="true"] #tracking-protection-icon-box {
+    fill-opacity: 1 !important;
+    fill: hsl(275, 100%, 75%) !important;
+}
+
+#tracking-protection-icon-container:hover:not([open="true"]) #tracking-protection-icon-box[hasException],
+#tracking-protection-icon-container[open="true"] #tracking-protection-icon-box[hasException] {
+    fill-opacity: 1 !important;
+    fill: hsl(229, 100%, 75%) !important;
+}
+
+#tracking-protection-icon-container:hover:not([open="true"]),
+#tracking-protection-icon-container[open="true"] {
+    background-color: transparent !important;
+    fill-opacity: 1 !important;
 }
 
 #identity-box.extensionPage #identity-icon,
@@ -373,7 +393,7 @@ requires fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-statu
     margin-inline-end: -3px !important;
 }
 
-#tracking-protection-icon-container.chromeUI {
+#urlbar[pageproxystate="valid"] #tracking-protection-icon-container.chromeUI {
     display: none !important;
 }
 
@@ -386,7 +406,9 @@ requires fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-statu
     margin-inline-start: -0.6px !important;
 }
 
-#identity-box:not(.chromeUI), #tracking-protection-icon-container {
+#identity-box:not(.chromeUI),
+#tracking-protection-icon-container,
+#identity-box[pageproxystate="invalid"] {
     margin-top: 0.6px !important;
 }
 

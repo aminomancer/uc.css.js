@@ -490,7 +490,7 @@ toolbarbutton[label="GitZip"] .toolbarbutton-icon {
     background-color: var(--ui-textbox-bgcolor) !important;
     color: #fff !important;
     border: none !important;
-    padding: 2px 2px 3px;
+    padding: 2px;
     padding-inline-start: 4px;
     border-radius: 3px !important;
 }
@@ -504,12 +504,9 @@ toolbarbutton[label="GitZip"] .toolbarbutton-icon {
     -moz-appearance: none !important;
     background-color: var(--ui-textbox-bgcolor) !important;
     line-height: normal;
-    padding-bottom: 3.5px;
+    padding-block: 2px;
     padding-inline-start: 4px;
-    padding-left: 4px;
     padding-right: 2px;
-    padding-top: 3.5px;
-    margin-inline-end: 4.4px !important;
     color: #fff !important;
     border: none !important;
     border-radius: 3px !important;
@@ -686,11 +683,8 @@ toolbarbutton[label="GitZip"] .toolbarbutton-icon {
 #editBookmarkPanel .expander-down {
     -moz-appearance: none !important;
     background-color: var(--ui-textbox-bgcolor) !important;
-    line-height: normal;
-    padding-bottom: 2px;
-    padding-left: 2.5px;
-    padding-right: 2px;
-    padding-top: 3px;
+    line-height: normal !important;
+    padding: 2px !important;
     margin-left: 0px !important;
     color: #fff !important;
     border: none !important;
@@ -710,6 +704,7 @@ toolbarbutton[label="GitZip"] .toolbarbutton-icon {
 #editBookmarkPanel menuitem,
 #editBookmarkPanel menu {
     padding-left: 4px !important;
+    padding-block: 2px !important;
 }
 
 #editBookmarkPanel menuitem:hover,
@@ -718,12 +713,6 @@ toolbarbutton[label="GitZip"] .toolbarbutton-icon {
 #editBookmarkPanel menuitem[_moz-menuactive="true"] {
     -moz-appearance: none !important;
     background-color: hsl(232, 21%, 40%) !important;
-    line-height: normal;
-    padding-bottom: 3px;
-    padding-inline-start: 2px !important;
-    padding-left: 4px !important;
-    padding-right: 2px;
-    padding-top: 2px;
     color: #fff !important;
     border: none !important;
 }
@@ -806,7 +795,20 @@ toolbarbutton[label="GitZip"] .toolbarbutton-icon {
 
 #editBookmarkPanelImage,
 #editBookmarkPanel html {
-    height: 120px !important;
+    height: 140px !important;
+}
+
+#editBookmarkPanelFavicon[src] {
+	box-sizing: content-box;
+	width: 32px;
+	height: 32px;
+	padding: 5px;
+	background: hsla(232, 24%, 26%, 50%) !important;
+	box-shadow: 0 0 2px rgba(0,0,0,.1), 0 0 5px rgba(0,0,0,.05) !important;
+	border-radius: 6px;
+	margin-top: 10px;
+	margin-inline-start: 10px;
+	margin-bottom: -52px;
 }
 
 popupnotification checkbox .checkbox-check {

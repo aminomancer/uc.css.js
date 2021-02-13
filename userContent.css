@@ -1125,6 +1125,10 @@ domain("wikimedia.org") {
         src: local('Source Serif Pro Bold'), local('SourceSerifPro-Bold'), url(https://fonts.gstatic.com/s/sourceserifpro/v5/yd5lDMt8Sva2PE17yiLarPgHLTi6vdOOFgNDwEC6JgI.woff2) format('woff2');
     }
 
+    :root {
+        background: #19191a !important;
+    }
+
     body {
         border: none !important;
         font-family: 'Source Sans Pro', sans-serif !important;
@@ -1256,6 +1260,10 @@ domain("wikimedia.org") {
         width: 345px !important;
         padding: 0 0 7px !important;
         border-radius: 3px !important;
+        height: 50% !important;
+        box-shadow: none !important;
+        position: absolute !important;
+        z-index: 5 !important;
     }
     
     #mw-head #searchform>div#simpleSearch:focus-within ::-moz-placeholder {
@@ -1272,6 +1280,16 @@ domain("wikimedia.org") {
         padding: 4px 0 6px 8px !important;
         font-size: 1rem !important;
         color: #ccc !important;
+        background: none !important;
+        border: none !important;
+        margin: unset !important;
+        box-shadow: none !important;
+        border: none !important;
+        height: 28px !important;
+    }
+    
+    .imeselector {
+        display: none !important;
     }
 
     #mw-head #p-cactions,
@@ -1324,6 +1342,10 @@ domain("wikimedia.org") {
         opacity: 0 !important;
         pointer-events: auto !important;
         scrollbar-width: none !important;
+    }
+    
+    #sidebarCollapse {
+        display: none !important;
     }
 
     #mw-navigation #mw-panel:hover {
