@@ -111,6 +111,16 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection {
     filter: brightness(0.65) sepia(1) hue-rotate(185deg) !important;
 }
 
+#PanelUI-menu-button[badge-status^="update"] > .toolbarbutton-badge-stack > .toolbarbutton-badge:-moz-window-inactive {
+/*     filter: brightness(0.65) sepia(1) hue-rotate(185deg) !important; */
+    filter: none !important;
+    background-color: hsl(227, 19%, 48%) !important;
+}
+
+#PanelUI-menu-button[badge-status^="update"]:is(:hover, [open]) > .toolbarbutton-badge-stack > .toolbarbutton-badge:-moz-window-inactive {
+    background-color: hsl(125, 81%, 57%) !important;
+}
+
 #tracking-protection-icon-box>#tracking-protection-icon-animatable-box {
     margin-inline-start: 0px !important;
 }

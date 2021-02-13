@@ -232,6 +232,60 @@
     margin-inline: 6px !important;
 }
 
+.panel-banner-item {
+    margin-block: 0 8px !important;
+}
+
+.panel-banner-item[notificationid^=update]::after {
+    display: none !important;
+}
+
+.panel-banner-item[notificationid^=update] > .toolbarbutton-text {
+    line-height: 18px !important;
+}
+
+.panel-banner-item[notificationid^=update] > .toolbarbutton-icon {
+    background: hsl(118, 89%, 24%) url("chrome://global/skin/icons/update-icon.svg") no-repeat center/contain !important;
+	fill: hsl(125, 81%, 57%) !important;
+    width: 18px !important;
+    height: 18px !important;
+	-moz-context-properties: fill !important;
+	padding: 0 !important;
+}
+
+.panel-banner-item[notificationid=update-available] > .toolbarbutton-icon,
+.panel-banner-item[notificationid=update-downloading] > .toolbarbutton-icon {
+    transform: scaleY(-1);
+}
+
+.panel-banner-item[notificationid=update-restart] > .toolbarbutton-icon,
+.panel-banner-item[notificationid=update-manual] > .toolbarbutton-icon {
+    transform: rotate(90deg);
+}
+
+.panel-banner-item[notificationid=update-unsupported] > .toolbarbutton-icon {
+    fill: hsl(44, 95%, 60%) !important;
+    background-color: hsl(32, 52%, 35%) !important
+}
+
+#PanelUI-menu-button[badge-status^="update"] > .toolbarbutton-badge-stack > .toolbarbutton-badge {
+    background-size: contain !important;
+    background-position: center !important;
+    background-color: hsl(125, 81%, 57%) !important;
+	-moz-context-properties: fill !important;
+	padding: 0 !important;
+}
+
+#PanelUI-menu-button[badge-status^="update"]:is(:hover, [open])>.toolbarbutton-badge-stack>.toolbarbutton-badge {
+    background-image: url(chrome://devtools/skin/images/error.svg) !important;
+    fill: hsl(125, 81%, 57%) !important;
+    background-color: hsl(118, 89%, 24%) !important;
+}
+
+#PanelUI-menu-button[badge-status^="update"]:is(:hover, [open]) > .toolbarbutton-badge-stack > .toolbarbutton-badge:-moz-window-inactive {
+    background-color: hsl(118, 89%, 24%) !important;
+}
+
 
 
 

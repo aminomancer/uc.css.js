@@ -185,11 +185,11 @@
     pointer-events: none !important;
     transform: translateX(16px) scale(0.5) !important;
     margin-right: -16px !important;
-    padding: 2.5px 1.5px 2px 1px !important;
 }
 
-#tabbrowser-tabs:not(:hover, :focus) .tab-content > .tab-icon-sound:not([soundplaying], [muted], [pictureinpicture]),
-#tabbrowser-tabs:not(:hover, :focus) .tab-content > .tab-icon-sound[soundplaying-scheduledremoval]:not([muted], [pictureinpicture]){
+#tabbrowser-tabs:not(:hover, :focus) .tab-content > .tab-icon-sound:not([soundplaying], [muted], [activemedia-blocked], [pictureinpicture]),
+#tabbrowser-tabs:not(:hover, :focus) .tab-content > .tab-icon-sound[soundplaying-scheduledremoval]:not([muted], [pictureinpicture]),
+#tabbrowser-tabs:not(:hover, :focus) .tabbrowser-tab[visuallyselected] .tab-content > .tab-icon-sound {
     opacity: 0 !important;
     pointer-events: none !important;
     transform: translateX(16px) scale(0.5) !important;
