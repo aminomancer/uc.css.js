@@ -15,7 +15,7 @@
         return new Promise((resolve) => setTimeout(resolve, ms));
     }
     async function init() {
-        await sleep(30000);
+        await sleep(3000);
         PanelUI._updateNotifications = function _updateNotifications(notificationsChanged) {
             let notifications = this._notifications;
             if (!notifications || !notifications.length) {

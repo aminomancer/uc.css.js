@@ -17,6 +17,17 @@
     padding: 2px 3px 2px 2px !important;
 }
 
+.tab-icon-sound {
+    list-style-image: url(chrome://browser/skin/tabbrowser/tab-audio-playing.svg) !important;
+    -moz-context-properties: fill !important;
+    -moz-box-ordinal-group: 2 !important;
+    fill: currentColor !important;
+}
+
+.tab-icon-sound[muted] {
+    list-style-image: url(chrome://browser/skin/tabbrowser/tab-audio-muted.svg) !important;
+}
+
 .tab-icon-sound[activemedia-blocked],
 .tab-icon-sound[activemedia-blocked]:hover {
     width: 16px !important;
@@ -163,21 +174,6 @@
     transition: 0.1s transform ease-in-out, 0.1s opacity ease-in-out, 0.1s margin ease-in-out !important;
 }
 
-.tab-icon-sound {
-    list-style-image: url(chrome://browser/skin/tabbrowser/tab-audio-playing.svg) !important;
-    -moz-context-properties: fill, fill-opacity !important;
-    -moz-box-ordinal-group: 2 !important;
-    fill: currentColor !important;
-}
-
-.tab-icon-sound[muted] {
-    list-style-image: url(chrome://browser/skin/tabbrowser/tab-audio-muted.svg) !important;
-}
-
-.tab-icon-sound[activemedia-blocked] {
-  list-style-image: url(chrome://browser/skin/tabbrowser/tab-audio-blocked.svg) !important;
-}
-
 #tabbrowser-tabs .tab-content > .tab-icon-sound:not([soundplaying], [muted], [activemedia-blocked], [pictureinpicture]) {
     list-style-image: url(chrome://browser/skin/tabbrowser/tab-audio-playing.svg) !important;
     display: -moz-inline-box !important;
@@ -189,7 +185,7 @@
 
 #tabbrowser-tabs:not(:hover, :focus) .tab-content > .tab-icon-sound:not([soundplaying], [muted], [activemedia-blocked], [pictureinpicture]),
 #tabbrowser-tabs:not(:hover, :focus) .tab-content > .tab-icon-sound[soundplaying-scheduledremoval]:not([muted], [pictureinpicture]),
-#tabbrowser-tabs:not(:hover, :focus) .tabbrowser-tab[visuallyselected] .tab-content > .tab-icon-sound {
+#tabbrowser-tabs:not(:hover, :focus) .tabbrowser-tab[visuallyselected] .tab-content > .tab-icon-sound:not([pictureinpicture], [muted]) {
     opacity: 0 !important;
     pointer-events: none !important;
     transform: translateX(16px) scale(0.5) !important;

@@ -114,8 +114,8 @@ treechildren::-moz-tree-drop-feedback {
 
 /* hides the nav-bar in fullscreen, but reveals it when hovering or focusing the nav-bar, or when nav-bar related popups are opened.
 requires fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-status. */
-#main-window[customizing] #navigator-toolbox,
-#main-window[inFullscreen]:not([customizing])>body>box:is(:focus-within, :hover, [popup-status], [urlbar-status]) #navigator-toolbox {
+:root[customizing] #navigator-toolbox,
+:root[inFullscreen]:not([customizing])>body>box:is(:focus-within, :hover, [popup-status], [urlbar-status]) #navigator-toolbox {
     margin-top: 0 !important;
     transition-delay: 0s !important;
     transition: all .2s ease-in-out 0s !important;
@@ -167,15 +167,15 @@ requires fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-statu
     margin-top: -96px !important;
 }
 
-#main-window[inFullscreen]:not([customizing])>body>box:is(:focus-within, :hover, [popup-status], [urlbar-status]) ~ #browser findbar {
+:root[inFullscreen]:not([customizing])>body>box:is(:focus-within, :hover, [popup-status], [urlbar-status]) ~ #browser findbar {
     margin-top: 5.4px !important;
 }
 
-#main-window[inFullscreen]:not([customizing])>body>box:is(:focus-within, :hover, [popup-status], [urlbar-status]) ~ #browser findbar[hidden] {
+:root[inFullscreen]:not([customizing])>body>box:is(:focus-within, :hover, [popup-status], [urlbar-status]) ~ #browser findbar[hidden] {
     margin-top: -21px !important;
 }
 
-/* #main-window[inFullscreen]:not([customizing])>body>box:is(:focus-within, :hover, [popup-status], [urlbar-status]) ~ #browser #sidebar-box {
+/* :root[inFullscreen]:not([customizing])>body>box:is(:focus-within, :hover, [popup-status], [urlbar-status]) ~ #browser #sidebar-box {
     margin-top: -126px !important;
 } */
 

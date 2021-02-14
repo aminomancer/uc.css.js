@@ -711,6 +711,8 @@ tabmodalprompt .checkbox-check[checked="true"] {
     padding-right: 1px !important;
     height: 33px !important;
     background-color: var(--lwt-toolbar-field-background-color, rgba(255, 255, 255, 0.8));
+/*     for transform animation on search one-offs */
+    margin-right: 200px !important;
 }
 
 #urlbar[textoverflow][usertyping="true"] #urlbar-input {

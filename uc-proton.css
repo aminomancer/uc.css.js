@@ -258,9 +258,10 @@
     transform: scaleY(-1);
 }
 
-.panel-banner-item[notificationid=update-restart] > .toolbarbutton-icon,
-.panel-banner-item[notificationid=update-manual] > .toolbarbutton-icon {
-    transform: rotate(90deg);
+.panel-banner-item[notificationid=update-restart] > .toolbarbutton-icon {
+    background: hsl(125, 81%, 57%) url(chrome://browser/skin/notification-icons/popup-subitem.svg) no-repeat 0 1px/18px !important;
+	fill: hsl(118, 89%, 24%) !important;
+    transform: none !important;
 }
 
 .panel-banner-item[notificationid=update-unsupported] > .toolbarbutton-icon {
@@ -284,6 +285,35 @@
 
 #PanelUI-menu-button[badge-status^="update"]:is(:hover, [open]) > .toolbarbutton-badge-stack > .toolbarbutton-badge:-moz-window-inactive {
     background-color: hsl(118, 89%, 24%) !important;
+}
+
+/* reconciling the stylesheet with minBrowserNavbar.uc.js */
+:root {
+    --min-toolbar-height: 39px;
+}
+
+:root[inFullscreen][min-browser] #navigator-toolbox {
+    height: var(--min-toolbar-height) !important;
+}
+
+:root[inFullscreen][min-browser]:not([customizing]) #navigator-toolbox {
+	margin-top: calc(1px - var(--min-toolbar-height)) !important;
+}
+
+:root[inFullscreen][min-browser]:not([customizing]) > body > box:is(:focus-within, :hover, [popup-status], [urlbar-status]) ~ #browser findbar {
+	margin-top: calc(8px - var(--min-toolbar-height)) !important;
+}
+
+:root[customizing][inFullscreen][min-browser] #customization-container {
+	margin-top: var(--min-toolbar-height) !important;
+}
+
+:root[min-browser] #sidebar-box {
+	top: var(--min-toolbar-height) !important;
+}
+
+:root[min-browser] .browserContainer > findbar {
+	top: var(--min-toolbar-height) !important;
 }
 
 

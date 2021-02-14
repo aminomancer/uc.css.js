@@ -367,7 +367,12 @@ toolbarspring {
     padding-left: 2px !important;
 }
 
-:root:not([uidensity="compact"]) #nav-bar-customization-target > :is(#stop-reload-button, #wrapper-stop-reload-button) {
+#TabsToolbar-customization-target > #back-button {
+    margin-inline-start: 2px !important;
+}
+
+:root:not([uidensity="compact"]) #nav-bar-customization-target > :is(#stop-reload-button, #wrapper-stop-reload-button),
+:root:not([uidensity="compact"]) #TabsToolbar-customization-target > :is(#stop-reload-button, #wrapper-stop-reload-button) {
     margin-inline: -2px !important;
 }
 
@@ -1036,6 +1041,19 @@ findbar:focus-within .findbar-textbox:not([status="notfound"])~ :-moz-any(.findb
     padding-top: 2px !important;
     padding-bottom: 2px !important;
     align-self: center !important;
+}
+
+.urlbarView-row[has-action] .urlbarView-title strong,
+.urlbarView-row[has-url] .urlbarView-title {
+    font-weight: 500 !important;
+    font-style: normal !important;
+    color: hsl(235, 35%, 73%);
+}
+
+.urlbarView-row[has-url] .urlbarView-title strong {
+    font-weight: 500 !important;
+    font-style: normal !important;
+    color: var(--lwt-toolbar-field-color);
 }
 
 .urlbarView-row .urlbarView-action {
