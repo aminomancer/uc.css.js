@@ -1,6 +1,7 @@
 :root {
     --panelview-toolbarbutton-hover-bgcolor: var(--arrowpanel-dimmed) !important;
     --panelview-toolbarbutton-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
+    --panelview-toolbarbutton-focus-box-shadow: none !important;
     --panel-banner-item-color: HSL(240, 9.1%, 97.8%);
     --panel-banner-item-background-color: hsla(109.9, 90.9%, 47.3%, 0.1);
     --panel-banner-item-hover-bgcolor: hsla(109.9, 90.9%, 47.3%, 0.15);
@@ -11,7 +12,9 @@
     --arrowpanel-menuitem-border-radius: 3px !important;
     --proton-tab-radius: 0 !important;
     --proton-tab-block-margin: 0 !important;
-    --panel-shortcut-color: hsla(234, 17%, 73%, 50%) !important;
+/*     --panel-shortcut-color: hsla(234, 17%, 73%, 50%) !important; */
+    --panel-shortcut-color: hsl(235, 27%, 73%, 70%) !important;
+    --panel-shortcut-focus: hsl(235, 32%, 75%, 90%) !important;
     --context-margin-inline: -14px 0;
     --context-padding-inline: 27px 0;
 }
@@ -62,6 +65,23 @@
 }
 
 /* appmenu */
+panelview .toolbarbutton-1:not([disabled], [open], :active):is(:focus),
+toolbarbutton.subviewbutton:not([disabled], [open], :active):is(:focus),
+.navigable.subviewbutton:not([disabled], [open], :active):is(:focus),
+.widget-overflow-list .toolbarbutton-1:not([disabled], [open], :active):is(:focus),
+.toolbaritem-combined-buttons:is(:not([cui-areatype="toolbar"]), [overflowedItem="true"]) > toolbarbutton:not([disabled], [open], :active):is(:focus) {
+	box-shadow: var(--panelview-toolbarbutton-focus-box-shadow);
+    background-color: var(--panelview-toolbarbutton-hover-bgcolor) !important;
+    color: var(--panelview-toolbarbutton-hover-color) !important;
+}
+panelview .toolbarbutton-1:not([disabled], [open]):focus:active,
+toolbarbutton.subviewbutton:not([disabled], [open]):focus:active,
+.navigable.subviewbutton:not([disabled], [open]):focus:active,
+.widget-overflow-list .toolbarbutton-1:not([disabled], [open]):focus:active,
+.toolbaritem-combined-buttons:is(:not([cui-areatype="toolbar"]), [overflowedItem="true"]) > toolbarbutton:not([disabled], [open]):focus:active {
+    background-color: var(--panelview-toolbarbutton-active-bgcolor) !important;
+    color: var(--panelview-toolbarbutton-active-color) !important;
+}
 /* add icons to non-iconized appmenu items */
 .subviewbutton:not(.subviewbutton-iconic)>.toolbarbutton-icon {
     -moz-context-properties: fill, fill-opacity;

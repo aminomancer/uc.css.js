@@ -499,10 +499,10 @@ tabmodalprompt .checkbox-check[checked="true"] {
 }
 
 /* urlbar */
-#urlbar[breakout],
+/* #urlbar[breakout],
 #urlbar[breakout] .urlbarView {
     transition: none !important;
-}
+} */
 
 #urlbar,
 #urlbar[breakout-extend] {
@@ -520,13 +520,12 @@ tabmodalprompt .checkbox-check[checked="true"] {
 #urlbar-input-container {
     background-color: var(--urlbar-input-bgcolor) !important;
     margin-top: -0.6px !important;
+    transition: 220ms ease-in-out background-color 0s, 220ms ease-in-out box-shadow 0s !important;
 }
 
 #urlbar[focused="true"] > #urlbar-input-container {
     background-color: var(--urlbar-input-bgcolor-even-brighter) !important;
-    box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.25) !important;
-    transition: 220ms ease-in-out all !important;
-    transition-delay: 0 !important;
+/*     box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.25) !important; */
 }
 
 #urlbar {
@@ -613,13 +612,10 @@ tabmodalprompt .checkbox-check[checked="true"] {
     padding-right: 0 !important;
 }
 
-.urlbarView .search-one-offs {
-    width: -moz-fit-content !important;
-    direction: ltr !important;
-    top: -36.5px !important;
-    right: 0px !important;
-    margin-right: 3px !important;
-    margin-left: 0.5px !important;
+.search-panel-one-offs, .search-panel-one-offs-container {
+    min-width: max-content !important;
+    max-width: max-content !important;
+    width: max-content !important;
 }
 
 #urlbar[breakout][breakout-extend] .search-one-offs,
@@ -677,20 +673,17 @@ tabmodalprompt .checkbox-check[checked="true"] {
 .urlbarView .search-one-offs {
     position: absolute !important;
     top: -35px !important;
-    right: 0px !important;
-    max-width: 270px !important;
+    right: 0 !important;
+    max-width: 244.4px !important;
     scroll-behavior: smooth !important;
     scrollbar-width: none !important;
     float: right !important;
     left: auto !important;
     cursor: default !important;
     box-sizing: border-box !important;
-    padding-left: 31.4px !important;
-    border-right: 3px solid transparent !important;
-}
-
-.urlbarView .search-panel-one-offs-container {
-    margin-left: -3px !important;
+/*     padding-left: 31.4px !important; */
+    border-right: 5px solid transparent !important;
+    align-items: center !important;
 }
 
 .urlbarView .search-panel-one-offs {
@@ -712,28 +705,40 @@ tabmodalprompt .checkbox-check[checked="true"] {
     height: 33px !important;
     background-color: var(--lwt-toolbar-field-background-color, rgba(255, 255, 255, 0.8));
 /*     for transform animation on search one-offs */
-    margin-right: 200px !important;
+    margin-right: 244px !important;
 }
 
 #urlbar[textoverflow]:is([usertyping], [searchmode], [open][pageproxystate="invalid"]) #urlbar-input {
-    margin-right: 258px !important;
+    margin-right: 244px !important;
 }
 
-#urlbar .search-one-offs {
+#urlbar[textoverflow="right"] > #urlbar-input-container > .urlbar-input-box > #urlbar-input {
+    mask-image: linear-gradient(to left, transparent, rgb(0, 0, 0) 3ch);
+}
+
+#urlbar[textoverflow][usertyping="true"] #urlbar-input {
+    mask-image: linear-gradient(to left, transparent 5px, rgb(0, 0, 0) 55px) !important;
+}
+
+#urlbar .search-one-offs:not([scrolledtostart], [scrolledtoend]) {
+    mask-image: linear-gradient(to right, transparent 10px, rgb(0, 0, 0) 30px);
+}
+
+#urlbar .search-panel-one-offs {
     transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out !important;
     opacity: 0 !important;
-    transform: translateX(-50px) scale(0.5) !important;
-    transform-style: flat !important;
+    transform: translateX(90px) !important;
+    transform-style: preserve-3d !important;
     backface-visibility: hidden !important;
-    transform-origin: left !important;
+    transform-origin: right !important;
     pointer-events: none !important;
 }
 
-#urlbar .search-one-offs * {
+#urlbar .search-one-offs, #urlbar .search-one-offs * {
     pointer-events: none !important;
 }
 
-#urlbar:is([usertyping], [searchmode], [open][pageproxystate="invalid"]) .search-one-offs {
+#urlbar:is([usertyping], [searchmode], [open][pageproxystate="invalid"]) .search-panel-one-offs {
     opacity: 1 !important;
     transform: none !important;
 }
@@ -761,6 +766,24 @@ tabmodalprompt .checkbox-check[checked="true"] {
     transform: translateX(50px) scale(0.5) !important;
     transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out !important; */
     display: none !important;
+}
+
+#urlbar #page-action-buttons,
+#urlbar #urlbar-input-container > .urlbar-icon {
+    animation: slideinUrlbar 0.1s linear 0s;
+    transform-style: preserve-3d !important;
+    backface-visibility: hidden !important;
+    transform-origin: right !important;
+}
+
+@keyframes slideinUrlbar {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    } to {
+        opacity: 1;
+        transform: none;
+    }
 }
 
 #urlbar-go-button {
@@ -792,20 +815,12 @@ tabmodalprompt .checkbox-check[checked="true"] {
     pointer-events: auto !important;
 }
 
-#urlbar:is([usertyping], [searchmode], [open][pageproxystate="invalid"]) .search-one-offs {
-    transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out !important;
-}
-
 #urlbar:not([open]) > .urlbarView {
     display: block !important;
 }
 
 #urlbar:not([open]) .urlbarView-results {
     display: none !important;
-}
-
-#urlbar:is([usertyping], [searchmode], [open][pageproxystate="invalid"]) .search-panel-one-offs {
-    transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out !important;
 }
 
 #urlbar .searchbar-engine-one-off-item {
@@ -820,18 +835,6 @@ tabmodalprompt .checkbox-check[checked="true"] {
 
 #urlbar #urlbar-input {
     height: 33px !important;
-}
-
-#urlbar[textoverflow="right"] > #urlbar-input-container > .urlbar-input-box > #urlbar-input {
-    mask-image: linear-gradient(to left, transparent, rgb(0, 0, 0) 3ch);
-}
-
-#urlbar[textoverflow][usertyping="true"] #urlbar-input {
-    mask-image: linear-gradient(to left, transparent 5px, rgb(0, 0, 0) 55px) !important;
-}
-
-#urlbar .search-one-offs {
-    mask-image: linear-gradient(to right, transparent 10px, rgb(0, 0, 0) 30px);
 }
 
 .urlbarView {

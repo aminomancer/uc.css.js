@@ -778,7 +778,9 @@ findbar:focus-within .findbar-textbox:not([status="notfound"])~ :-moz-any(.findb
     height: 27px !important;
     padding: 0 !important;
     border-radius: 3px !important;
-    margin-top: 1.5px !important;
+/*     margin-top: 1.5px !important; */
+/*     margin-left: 1.5px !important;
+    margin-right: 1.5px !important; */
     margin-left: 2px !important;
     margin-right: 1px !important;
     background-size: 0px !important;
@@ -1044,12 +1046,20 @@ findbar:focus-within .findbar-textbox:not([status="notfound"])~ :-moz-any(.findb
 }
 
 .urlbarView-row[has-action] .urlbarView-title strong,
+.urlbarView-row[has-action] .urlbarView-title[isurl],
 .urlbarView-row[has-url] .urlbarView-title {
     font-weight: 500 !important;
     font-style: normal !important;
-    color: hsl(235, 35%, 73%);
+    color: var(--panel-shortcut-color);
 }
 
+.urlbarView-row[has-action][selected] .urlbarView-title strong,
+.urlbarView-row[has-action][selected] .urlbarView-title[isurl],
+.urlbarView-row[has-url][selected] .urlbarView-title {
+    color: var(--panel-shortcut-focus);
+}
+
+.urlbarView-row[has-action] .urlbarView-title[isurl] strong,
 .urlbarView-row[has-url] .urlbarView-title strong {
     font-weight: 500 !important;
     font-style: normal !important;

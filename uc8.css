@@ -564,19 +564,7 @@ requires fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-statu
     height: 20px !important;
 }
 
-#urlbar:not([focused="true"]):not(:hover) #urlbar-input,
-#urlbar:not([focused="true"]):hover #urlbar-input {
-    transition: 150ms ease-in-out all !important;
-    transition-delay: 0s !important;
-}
-
-#urlbar:not([focused="true"]):not(:hover) #urlbar-input-container,
-#urlbar:not([focused="true"]):hover #urlbar-input-container {
-    transition: 150ms ease-in-out all !important;
-    transition-delay: 0s !important;
-}
-
-:root:not(:-moz-window-inactive) #urlbar:not([focused="true"]):hover #urlbar-input-container {
+/* :root:not(:-moz-window-inactive) #urlbar:not([focused="true"]):hover #urlbar-input-container {
     background-color: var(--urlbar-input-bgcolor-brighter) !important;
     box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.25) !important;
 }
@@ -584,7 +572,7 @@ requires fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-statu
 :root:not(:-moz-window-inactive) #urlbar:not([focused="true"]):hover #urlbar-input {
     filter: brightness(1.1) !important;
     opacity: 1 !important;
-}
+} */
 
 :root {
     --toolbarbutton-border-radius: 2.6px !important;
