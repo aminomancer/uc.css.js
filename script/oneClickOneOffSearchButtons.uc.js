@@ -9,10 +9,17 @@
     function init() {
         const prefsvc = Services.prefs;
         const keyNavPref = "userChrome.urlbar.update2.disableOneOffsHorizontalKeyNavigation";
+        const hideSettingsButton = true; // change this if you don't want to disable the search settings button. I'll add a full-on user preference later probably.
         let oneOffs = gURLBar.view.oneOffSearchButtons;
         let keyNav = true;
         let handler = {
             handleEvent(e) {
+                if (e.type === "unload") {
+                    window.removeEventListener("unload", this, false);
+                    prefsvc.removeObserver(keyNavPref, this);
+                    gURLBar.inputField.removeEventListener("keydown", this, false);
+                    return;
+                }
                 if (!gURLBar.view.isOpen || oneOffs.selectedButton || !keyNav) return;
                 if (!oneOffs.input.value || oneOffs.input.getAttribute("pageproxystate") === "valid") return;
                 if (e.keyCode === KeyboardEvent.DOM_VK_LEFT) {
@@ -47,14 +54,9 @@
                 }
             },
             attachListeners() {
-                window.addEventListener("unload", this.destroyListeners, false);
+                window.addEventListener("unload", this, false);
                 prefsvc.addObserver(keyNavPref, this);
                 gURLBar.inputField.addEventListener("keydown", this, false);
-            },
-            destroyListeners() {
-                window.removeEventListener("unload", this.destroyListeners, false);
-                prefsvc.removeObserver(keyNavPref, this);
-                gURLBar.inputField.removeEventListener("keydown", this, false);
             },
         };
         gURLBar.view.oneOffSearchButtons.handleSearchCommand = function handleSearchCommand(event, searchMode) {
@@ -135,6 +137,36 @@
         
             this.selectedButton = null;
           }
+
+        if (hideSettingsButton) {
+            gURLBar.view.oneOffSearchButtons.getSelectableButtons = function getSelectableButtons(
+                aIncludeNonEngineButtons
+            ) {
+                let buttons = [];
+                for (
+                    let oneOff = this.buttons.firstElementChild;
+                    oneOff;
+                    oneOff = oneOff.nextElementSibling
+                ) {
+                    buttons.push(oneOff);
+                }
+
+                if (aIncludeNonEngineButtons) {
+                    for (
+                        let addEngine = this.addEngines.firstElementChild;
+                        addEngine;
+                        addEngine = addEngine.nextElementSibling
+                    ) {
+                        buttons.push(addEngine);
+                    }
+                }
+
+                return buttons;
+            };
+
+            gURLBar.view.oneOffSearchButtons.settingsButtonCompact.style.display = "none";
+            gURLBar.view.oneOffSearchButtons.settingsButton.style.display = "none";
+        }
 
         handler.setKeyNavPref();
         handler.attachListeners();

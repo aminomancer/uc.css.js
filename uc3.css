@@ -769,9 +769,9 @@ findbar:focus-within .findbar-textbox:not([status="notfound"])~ :-moz-any(.findb
     display: none !important;
 }
 
-.search-setting-button-compact {
+/* .search-setting-button-compact {
     display: none !important;
-}
+} */
 
 .searchbar-engine-one-off-item {
     min-width: 27px !important;

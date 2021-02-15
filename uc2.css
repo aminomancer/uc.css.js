@@ -121,8 +121,8 @@ menupopup#placesContext menuitem[checked] .menu-iconic-text,
 :is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup) .sendtab-target:is([clientType="phone"], [clientType="mobile"], [clientType="desktop"]):not(.menuitem-iconic) .menu-text,
 #userScriptsMenu>.menu-text {
     display: -moz-inline-box !important;
-    margin-inline: -14px 0 !important;
-    padding-inline: 0 !important;
+    margin-inline: var(--context-margin-inline) !important;
+    padding-inline: var(--context-padding-inline) !important;
 }
 
 #main-menubar menuitem[type="checkbox"] .menu-iconic-left,

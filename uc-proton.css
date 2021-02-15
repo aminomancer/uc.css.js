@@ -12,6 +12,8 @@
     --proton-tab-radius: 0 !important;
     --proton-tab-block-margin: 0 !important;
     --panel-shortcut-color: hsla(234, 17%, 73%, 50%) !important;
+    --context-margin-inline: -14px 0;
+    --context-padding-inline: 27px 0;
 }
 
 :root[proton] #appMenu-multiView {

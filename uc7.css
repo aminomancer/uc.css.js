@@ -705,7 +705,7 @@ tabmodalprompt .checkbox-check[checked="true"] {
     fill: white !important;
 }
 
-#urlbar[usertyping="true"] #urlbar-input {
+#urlbar:is([usertyping], [searchmode], [open][pageproxystate="invalid"]) #urlbar-input {
     position: relative !important;
     margin-right: 240px !important;
     padding-right: 1px !important;
@@ -715,7 +715,7 @@ tabmodalprompt .checkbox-check[checked="true"] {
     margin-right: 200px !important;
 }
 
-#urlbar[textoverflow][usertyping="true"] #urlbar-input {
+#urlbar[textoverflow]:is([usertyping], [searchmode], [open][pageproxystate="invalid"]) #urlbar-input {
     margin-right: 258px !important;
 }
 
@@ -733,8 +733,7 @@ tabmodalprompt .checkbox-check[checked="true"] {
     pointer-events: none !important;
 }
 
-#urlbar[usertyping="true"] .search-one-offs,
-#urlbar[searchmode] .search-one-offs {
+#urlbar:is([usertyping], [searchmode], [open][pageproxystate="invalid"]) .search-one-offs {
     opacity: 1 !important;
     transform: none !important;
 }
@@ -747,10 +746,29 @@ tabmodalprompt .checkbox-check[checked="true"] {
     pointer-events: none !important;
 }
 
-#page-action-buttons,
+/* #page-action-buttons,
 #urlbar-input-container > .urlbar-icon {
     pointer-events: none !important;
     transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out !important;
+} */
+
+#urlbar:is([usertyping], [searchmode], [open][pageproxystate="invalid"]) #page-action-buttons,
+#urlbar:is([usertyping], [searchmode], [open][pageproxystate="invalid"]) #urlbar-input-container > .urlbar-icon {
+/*     opacity: 0 !important;
+    pointer-events: none !important;
+    transform-style: flat !important;
+    backface-visibility: hidden !important;
+    transform: translateX(50px) scale(0.5) !important;
+    transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out !important; */
+    display: none !important;
+}
+
+#urlbar-go-button {
+    display: none !important;
+}
+
+#page-action-buttons > *:not([hidden]) {
+	display: -moz-box !important;
 }
 
 #urlbar[searchmode] #page-action-buttons * {
@@ -761,21 +779,20 @@ tabmodalprompt .checkbox-check[checked="true"] {
     opacity: 0 !important;
 }
 
-#urlbar:not([usertyping]) #pageActionButton {
+#urlbar:not([usertyping], [searchmode], [open][pageproxystate="invalid"]) #pageActionButton {
 	display: -moz-inline-box !important;
 }
 
-#urlbar:not([usertyping]) #star-button-box {
+#urlbar:not([usertyping], [searchmode], [open][pageproxystate="invalid"]) #star-button-box {
 	display: -moz-box !important;
 }
 
-#urlbar[usertyping="true"] .search-one-offs *,
-#urlbar[searchmode] .search-one-offs * {
+#urlbar:is([usertyping], [searchmode], [open][pageproxystate="invalid"]) .search-one-offs *,
+#urlbar:is([usertyping], [searchmode], [open][pageproxystate="invalid"]) .search-one-offs {
     pointer-events: auto !important;
 }
 
-#urlbar[usertyping="true"] .search-one-offs,
-#urlbar[searchmode] .search-one-offs {
+#urlbar:is([usertyping], [searchmode], [open][pageproxystate="invalid"]) .search-one-offs {
     transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out !important;
 }
 
@@ -787,8 +804,7 @@ tabmodalprompt .checkbox-check[checked="true"] {
     display: none !important;
 }
 
-#urlbar[usertyping="true"] .search-panel-one-offs,
-#urlbar[searchmode] .search-panel-one-offs {
+#urlbar:is([usertyping], [searchmode], [open][pageproxystate="invalid"]) .search-panel-one-offs {
     transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out !important;
 }
 
@@ -798,8 +814,7 @@ tabmodalprompt .checkbox-check[checked="true"] {
     fill: currentColor;
 }
 
-#urlbar[usertyping="true"] .searchbar-engine-one-off-item,
-#urlbar[searchmode] .searchbar-engine-one-off-item {
+#urlbar:is([usertyping], [searchmode], [open][pageproxystate="invalid"]) .searchbar-engine-one-off-item {
     pointer-events: auto !important;
 }
 
@@ -836,20 +851,6 @@ tabmodalprompt .checkbox-check[checked="true"] {
 .addengine-item[selected],
 .addengine-item:hover:active {
     background-color: var(--desaturate-dimmed-further) !important;
-}
-
-#urlbar[usertyping="true"] #page-action-buttons,
-#urlbar[usertyping="true"] #urlbar-input-container > .urlbar-icon {
-    opacity: 0 !important;
-    pointer-events: none !important;
-    transform-style: flat !important;
-    backface-visibility: hidden !important;
-    transform: translateX(50px) scale(0.5) !important;
-    transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out !important;
-}
-
-#page-action-buttons > *:not([hidden]) {
-	display: -moz-box !important;
 }
 
 .urlbarView-row:last-child {
