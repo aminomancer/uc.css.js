@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           oneClickOneOffSearchButtons.uc.js
 // @homepage       https://github.com/aminomancer
-// @description    Restore old behavior for one-off search engine buttons. It used to be that, if you entered a search term in the url bar, clicking a search engine button would immediately execute a search with that engine. This was changed in an update so that clicking the buttons only changes the "active" engine — you still have to press enter to actually execute the search. You also used to be able to advance through your one-off search engine buttons by pressing left/right arrow keys. Until recently these functions could be overridden with a preference in about:config, but those settings were removed, e.g. browser.urlbar.update2.disableOneOffsHorizontalKeyNavigation. This script restores the old functionality. If you want to restore the one-click functionality but don't want the horizontal key navigation, go to about:config and toggle this custom setting to false: userChrome.urlbar.oneOffs.keyNavigation. This script also has some conditional functions to work together with scrollingOneOffs.uc.js. They don't require each other at all, but they heavily improve each other both functionally and visually. It's hard to explain exactly what's going on so for now I'll just say to try them out yourself. The script also hides the one-off search settings button, but this can be turned off in about:config with userChrome.urlbar.oneOffs.hideSettingsButton.
+// @description    Restore old behavior for one-off search engine buttons. It used to be that, if you entered a search term in the url bar, clicking a search engine button would immediately execute a search with that engine. This was changed in an update so that clicking the buttons only changes the "active" engine — you still have to press enter to actually execute the search. You also used to be able to advance through your one-off search engine buttons by pressing left/right arrow keys. Until recently these functions could be overridden with a preference in about:config, but those settings were removed, e.g. browser.urlbar.update2.disableOneOffsHorizontalKeyNavigation. This script restores the old functionality. If you want to restore the one-click functionality but don't want the horizontal key navigation, go to about:config and toggle this custom setting to false: userChrome.urlbar.oneOffs.keyNavigation. This script also has some conditional functions to work together with scrollingOneOffs.uc.js. They don't require each other at all, but they heavily improve each other both functionally and visually. Changing search engines with the arrow keys will scroll the one-offs container to keep the selected one-off button in view. And exiting the query in any way will automatically scroll back to the beginning of the one-offs container, so that it's reset for the next time you use it. It's hard to explain exactly what's going on so for now I'll just say to try them out yourself. The script also hides the one-off search settings button, but this can be turned off in about:config with userChrome.urlbar.oneOffs.hideSettingsButton.
 // @author         aminomancer
 // ==/UserScript==
 
@@ -58,6 +58,15 @@
                 gURLBar.inputField.addEventListener("keydown", this, false);
             },
         };
+
+        function parseWidth(el) {
+            let style = window.getComputedStyle(el),
+                width = el.clientWidth,
+                margin = parseFloat(style.marginLeft) + parseFloat(style.marginRight),
+                padding = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight),
+                border = parseFloat(style.borderLeftWidth) + parseFloat(style.borderRightWidth);
+            return width + margin + padding + border;
+        }
 
         function toggleSettingsButton(hide) {
             if (hide) {
@@ -128,6 +137,8 @@
                 },
               });
               this.selectedButton = null;
+              if (this.canScroll && !gURLBar.searchMode && !this.window.gBrowser.userTypedValue)
+                  this.container.scrollTo(0, 0);
               return;
             }
 
@@ -160,16 +171,24 @@
             }
 
             this.selectedButton = null;
+            if (this.canScroll && !gURLBar.searchMode && !this.window.gBrowser.userTypedValue)
+                this.container.scrollTo(0, 0);
         };
 
         oneOffs.scrollToButton = function scrollToButton(el) {
-            let width = this.container.clientWidth,
-                diff =
-                    el.getBoundingClientRect().left - this.container.getBoundingClientRect().left;
-            console.log(diff);
-            if (diff > width / 2 + el.clientWidth || diff < width / 2 - el.clientWidth)
-                this.container.scrollBy({
-                    left: diff - width / 2,
+            let buttons = this.getSelectableButtons(true);
+            let index = buttons.indexOf(el);
+            let fullWidth = parseWidth(el);
+            let buttonX = index * fullWidth;
+            let container = this.container.clientWidth / 2;
+            let diff = el.getBoundingClientRect().x - this.container.getBoundingClientRect().x;
+            if (diff > container + (fullWidth / 2) || diff < container - (fullWidth / 2))
+                // this.container.scrollBy({
+                //     left: diff - container / 2,
+                //     behavior: "auto",
+                // });
+                this.container.scrollTo({
+                    left: buttonX - container,
                     behavior: "auto",
                 });
         };
@@ -204,88 +223,8 @@
 
         oneOffs.onViewClose = function onViewClose() {
             this._on_popuphidden();
-            if (this.canScroll && !gURLBar.searchMode && !this.window.gBrowser.userTypedValue)
+            if (this.canScroll && !gURLBar.searchMode)
                 this.container.scrollTo(0, 0);
-        };
-
-        gURLBar._updateSearchModeUI = function _updateSearchModeUI(searchMode) {
-            let { engineName, source } = searchMode || {};
-        
-            if (!engineName && !source && !this.hasAttribute("searchmode")) {
-              return;
-            }
-
-            let oneOffs = this.view.oneOffSearchButtons;
-            let { canScroll } = oneOffs;
-
-            this._searchModeIndicatorTitle.textContent = "";
-            this._searchModeLabel.textContent = "";
-            this._searchModeIndicatorTitle.removeAttribute("data-l10n-id");
-            this._searchModeLabel.removeAttribute("data-l10n-id");
-
-            if (!engineName && !source) {
-              try {
-                this.window.BrowserSearch.initPlaceHolder(true);
-              } catch (ex) {}
-              this.removeAttribute("searchmode");
-              if (canScroll) oneOffs.container.scrollTo(0, 0);
-              return;
-            }
-
-            if (engineName) {
-              this._searchModeIndicatorTitle.textContent = engineName;
-              this._searchModeLabel.textContent = engineName;
-              this.document.l10n.setAttributes(
-                this.inputField,
-                UrlbarUtils.WEB_ENGINE_NAMES.has(engineName)
-                  ? "urlbar-placeholder-search-mode-web-2"
-                  : "urlbar-placeholder-search-mode-other-engine",
-                { name: engineName }
-              );
-              if (canScroll && this.view.isOpen) {
-                  let id = `urlbar-engine-one-off-item-${oneOffs._fixUpEngineNameForID(engineName)}`;
-                  oneOffs.selectedButton = document.getElementById(id);
-                  if (searchMode.entry !== "oneoff") oneOffs.scrollToButton(oneOffs.selectedButton);
-              }
-            } else if (source) {
-              let sourceName = UrlbarUtils.getResultSourceName(source);
-              let l10nID = `urlbar-search-mode-${sourceName}`;
-              this.document.l10n.setAttributes(this._searchModeIndicatorTitle, l10nID);
-              this.document.l10n.setAttributes(this._searchModeLabel, l10nID);
-              this.document.l10n.setAttributes(
-                this.inputField,
-                `urlbar-placeholder-search-mode-other-${sourceName}`
-              );
-              if (canScroll && this.view.isOpen)
-                  if (source === 3) oneOffs.container.scrollTo(0, 0);
-                  else {
-                      oneOffs.selectedButton = document.getElementById(`urlbar-engine-one-off-item-${sourceName}`);
-                      if (searchMode.entry !== "oneoff")
-                          oneOffs.scrollToButton(oneOffs.selectedButton);
-                  }
-            }
-
-            this.toggleAttribute("searchmode", true);
-
-            if (this._autofillPlaceholder && this.window.gBrowser.userTypedValue) {
-              this.value = this.window.gBrowser.userTypedValue;
-            }
-
-            if (this.getAttribute("pageproxystate") == "valid") {
-              this.value = "";
-              this.setPageProxyState("invalid", true);
-            }
-        };
-
-        gURLBar.confirmSearchMode = function confirmSearchMode() {
-            let searchMode = this.searchMode;
-            if (!oneOffs.canScroll) return;
-            if (searchMode?.isPreview) {
-                searchMode.isPreview = false;
-                this.searchMode = searchMode;
-
-                this.view.oneOffSearchButtons.selectedButton = null;
-            }
         };
 
         Object.defineProperty(oneOffs, "query", {
