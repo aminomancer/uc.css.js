@@ -1,63 +1,59 @@
-:root {
-    --panelview-toolbarbutton-hover-bgcolor: var(--arrowpanel-dimmed) !important;
-    --panelview-toolbarbutton-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
-    --panelview-toolbarbutton-focus-box-shadow: none !important;
-    --panel-banner-item-color: HSL(240, 9.1%, 97.8%);
-    --panel-banner-item-background-color: hsla(109.9, 90.9%, 47.3%, 0.1);
-    --panel-banner-item-hover-bgcolor: hsla(109.9, 90.9%, 47.3%, 0.15);
-    --panel-banner-item-active-bgcolor: hsla(109.9, 90.9%, 47.3%, 0.2);
-    --arrowpanel-menuitem-margin: 0 4px !important;
-    --arrowpanel-menuitem-padding: 6px !important;
-    --panel-subview-body-padding: 4px 0 !important;
-    --arrowpanel-menuitem-border-radius: 3px !important;
-    --proton-tab-radius: 0 !important;
-    --proton-tab-block-margin: 0 !important;
-/*     --panel-shortcut-color: hsla(234, 17%, 73%, 50%) !important; */
-    --panel-shortcut-color: hsl(235, 27%, 73%, 70%) !important;
-    --panel-shortcut-focus: hsl(235, 32%, 75%, 90%) !important;
-    --context-margin-inline: -14px 0;
-    --context-padding-inline: 27px 0;
+@supports (-moz-bool-pref("browser.proton.enabled")) {
+    :root {
+        --panelview-toolbarbutton-hover-bgcolor: var(--arrowpanel-dimmed) !important;
+        --panelview-toolbarbutton-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
+        --panelview-toolbarbutton-focus-box-shadow: none !important;
+        --panel-banner-item-color: HSL(240, 9.1%, 97.8%);
+        --panel-banner-item-background-color: hsla(109.9, 90.9%, 47.3%, 0.1);
+        --panel-banner-item-hover-bgcolor: hsla(109.9, 90.9%, 47.3%, 0.15);
+        --panel-banner-item-active-bgcolor: hsla(109.9, 90.9%, 47.3%, 0.2);
+        --arrowpanel-menuitem-margin: 0 4px !important;
+        --arrowpanel-menuitem-padding: 6px !important;
+        --panel-subview-body-padding: 4px 0 !important;
+        --arrowpanel-menuitem-border-radius: 3px !important;
+        --proton-tab-radius: 0 !important;
+        --proton-tab-block-margin: 0 !important;
+        /*     --panel-shortcut-color: hsla(234, 17%, 73%, 50%) !important; */
+        --panel-shortcut-color: hsl(235, 27%, 73%, 70%) !important;
+        --panel-shortcut-focus: hsl(235, 32%, 75%, 90%) !important;
+    }
 }
 
-:root[proton] #appMenu-multiView {
-    --arrowpanel-menuitem-margin: 0 8px !important;
-    --arrowpanel-menuitem-padding: 8px !important;
-    --panel-subview-body-padding: 8px 0 !important;
-}
+@supports (-moz-bool-pref("browser.proton.tabs.enabled")) {
+    .tab-icon-sound-label {
+        display: none !important;
+    }
 
-.tab-icon-sound-label {
-    display: none !important;
-}
+    .tab-label-container.proton > .tab-icon-sound {
+        display: none !important;
+    }
 
-.tab-label-container.proton > .tab-icon-sound {
-    display: none !important;
-}
-
-/* .tab-label-container.proton {
+    /* .tab-label-container.proton {
     -moz-box-orient: horizontal !important;
 } */
 
-:root[proton] .tab-background,
-:root[proton] .tabbrowser-tab {
-    min-height: 0 !important;
-    margin: 0 !important;
-}
+    :root[proton] .tab-background,
+    :root[proton] .tabbrowser-tab {
+        min-height: 0 !important;
+        margin: 0 !important;
+    }
 
-:root[proton] #TabsToolbar .toolbarbutton-1 > .toolbarbutton-icon,
-:root[proton] #TabsToolbar .toolbarbutton-1 > .toolbarbutton-badge-stack {
-	min-height: 16px !important;
-	padding-block: 6px !important;
-}
+    :root[proton] #TabsToolbar .toolbarbutton-1 > .toolbarbutton-icon,
+    :root[proton] #TabsToolbar .toolbarbutton-1 > .toolbarbutton-badge-stack {
+        min-height: 16px !important;
+        padding-block: 6px !important;
+    }
 
-:root[proton] #TabsToolbar .toolbarbutton-1 > .toolbarbutton-icon,
-:root[proton] #TabsToolbar .toolbarbutton-1 > .toolbarbutton-text,
-:root[proton] #TabsToolbar .toolbarbutton-1 > .toolbarbutton-badge-stack {
-	border-radius: var(--toolbarbutton-border-radius) !important;
-}
+    :root[proton] #TabsToolbar .toolbarbutton-1 > .toolbarbutton-icon,
+    :root[proton] #TabsToolbar .toolbarbutton-1 > .toolbarbutton-text,
+    :root[proton] #TabsToolbar .toolbarbutton-1 > .toolbarbutton-badge-stack {
+        border-radius: var(--toolbarbutton-border-radius) !important;
+    }
 
-/* .tab-label-container:not(.proton), */
-.tab-label-container:not(.proton) + .tab-icon-sound {
-    display: -moz-box !important;
+    /* .tab-label-container:not(.proton), */
+    .tab-label-container:not(.proton) + .tab-icon-sound {
+        display: -moz-box !important;
+    }
 }
 
 #BMB_bookmarksPopup menupopup[placespopup="true"] {
@@ -65,252 +61,270 @@
 }
 
 /* appmenu */
-panelview .toolbarbutton-1:not([disabled], [open], :active):is(:focus),
-toolbarbutton.subviewbutton:not([disabled], [open], :active):is(:focus),
-.navigable.subviewbutton:not([disabled], [open], :active):is(:focus),
-.widget-overflow-list .toolbarbutton-1:not([disabled], [open], :active):is(:focus),
-.toolbaritem-combined-buttons:is(:not([cui-areatype="toolbar"]), [overflowedItem="true"]) > toolbarbutton:not([disabled], [open], :active):is(:focus) {
-	box-shadow: var(--panelview-toolbarbutton-focus-box-shadow);
-    background-color: var(--panelview-toolbarbutton-hover-bgcolor) !important;
-    color: var(--panelview-toolbarbutton-hover-color) !important;
-}
-panelview .toolbarbutton-1:not([disabled], [open]):focus:active,
-toolbarbutton.subviewbutton:not([disabled], [open]):focus:active,
-.navigable.subviewbutton:not([disabled], [open]):focus:active,
-.widget-overflow-list .toolbarbutton-1:not([disabled], [open]):focus:active,
-.toolbaritem-combined-buttons:is(:not([cui-areatype="toolbar"]), [overflowedItem="true"]) > toolbarbutton:not([disabled], [open]):focus:active {
-    background-color: var(--panelview-toolbarbutton-active-bgcolor) !important;
-    color: var(--panelview-toolbarbutton-active-color) !important;
-}
-/* add icons to non-iconized appmenu items */
-.subviewbutton:not(.subviewbutton-iconic)>.toolbarbutton-icon {
-    -moz-context-properties: fill, fill-opacity;
-    fill: currentColor;
-}
+@supports (-moz-bool-pref("browser.proton.appmenu.enabled")) {
+    :root[proton] #appMenu-multiView {
+        --arrowpanel-menuitem-margin: 0 8px !important;
+        --arrowpanel-menuitem-padding: 8px !important;
+        --panel-subview-body-padding: 8px 0 !important;
+    }
 
-#appMenu-save-file-button2 {
-    list-style-image: url(chrome://browser/skin/save.svg);
-}
+    panelview .toolbarbutton-1:not([disabled], [open], :active):is(:focus),
+    toolbarbutton.subviewbutton:not([disabled], [open], :active):is(:focus),
+    .navigable.subviewbutton:not([disabled], [open], :active):is(:focus),
+    .widget-overflow-list .toolbarbutton-1:not([disabled], [open], :active):is(:focus),
+    .toolbaritem-combined-buttons:is(:not([cui-areatype="toolbar"]), [overflowedItem="true"])
+        > toolbarbutton:not([disabled], [open], :active):is(:focus) {
+        box-shadow: var(--panelview-toolbarbutton-focus-box-shadow);
+        background-color: var(--panelview-toolbarbutton-hover-bgcolor) !important;
+        color: var(--panelview-toolbarbutton-hover-color) !important;
+    }
+    panelview .toolbarbutton-1:not([disabled], [open]):focus:active,
+    toolbarbutton.subviewbutton:not([disabled], [open]):focus:active,
+    .navigable.subviewbutton:not([disabled], [open]):focus:active,
+    .widget-overflow-list .toolbarbutton-1:not([disabled], [open]):focus:active,
+    .toolbaritem-combined-buttons:is(:not([cui-areatype="toolbar"]), [overflowedItem="true"])
+        > toolbarbutton:not([disabled], [open]):focus:active {
+        background-color: var(--panelview-toolbarbutton-active-bgcolor) !important;
+        color: var(--panelview-toolbarbutton-active-color) !important;
+    }
+    /* add icons to non-iconized appmenu items */
+    .subviewbutton:not(.subviewbutton-iconic) > .toolbarbutton-icon {
+        -moz-context-properties: fill, fill-opacity;
+        fill: currentColor;
+    }
 
-#appMenu-more-button2 {
-    list-style-image: url(chrome://browser/skin/developer.svg);
-}
+    #appMenu-save-file-button2 {
+        list-style-image: url(chrome://browser/skin/save.svg);
+    }
 
-#appMenu-help-button2 {
-    list-style-image: url(chrome://browser/skin/tip.svg);
-}
+    #appMenu-more-button2 {
+        list-style-image: url(chrome://browser/skin/developer.svg);
+    }
 
-#appMenu-new-window-button2 {
-    list-style-image: url(chrome://browser/skin/new-window.svg);
-}
+    #appMenu-help-button2 {
+        list-style-image: url(chrome://browser/skin/tip.svg);
+    }
 
-#appMenu-new-tab-button2 {
-    list-style-image: url("chrome://browser/skin/new-tab.svg");
-}
+    #appMenu-new-window-button2 {
+        list-style-image: url(chrome://browser/skin/new-window.svg);
+    }
 
-#appMenu-new-private-window-button2 {
-    list-style-image: url("chrome://browser/skin/privateBrowsing.svg");
-}
+    #appMenu-new-tab-button2 {
+        list-style-image: url("chrome://browser/skin/new-tab.svg");
+    }
 
-#appMenu-print-button2 {
-    list-style-image: url(chrome://global/skin/icons/print.svg);
-}
+    #appMenu-new-private-window-button2 {
+        list-style-image: url("chrome://browser/skin/privateBrowsing.svg");
+    }
 
-#appMenu-passwords-button {
-    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M12 4a4 4 0 00-3.86 3H1a1 1 0 000 2v1a1 1 0 002 0V9h1v1a1 1 0 002 0V9h2.14A4 4 0 1012 4zm0 6a2 2 0 112-2 2 2 0 01-2 2z'/></svg>");
-}
+    #appMenu-print-button2 {
+        list-style-image: url(chrome://global/skin/icons/print.svg);
+    }
 
-#appMenu-bookmarks-button {
-    list-style-image: url("chrome://browser/skin/bookmark.svg");
-}
+    #appMenu-passwords-button {
+        list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M12 4a4 4 0 00-3.86 3H1a1 1 0 000 2v1a1 1 0 002 0V9h1v1a1 1 0 002 0V9h2.14A4 4 0 1012 4zm0 6a2 2 0 112-2 2 2 0 01-2 2z'/></svg>");
+    }
 
-#appMenu-history-button {
-    list-style-image: url("chrome://browser/skin/history.svg");
-}
+    #appMenu-bookmarks-button {
+        list-style-image: url("chrome://browser/skin/bookmark.svg");
+    }
 
-#appMenu-downloads-button {
-    list-style-image: url("chrome://browser/skin/downloads/download-icons.svg#arrow-with-bar");
-}
+    #appMenu-history-button {
+        list-style-image: url("chrome://browser/skin/history.svg");
+    }
 
-#appMenu-extensions-themes-button {
-    list-style-image: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' x='0' y='0' width='16' height='16' fill='context-fill' fill-opacity='context-fill-opacity'><path d='M7 2.1H3.7c-.9 0-1.6.7-1.6 1.6V7C.9 7 0 7.9 0 9s.9 2.1 2.1 2.1v3.3c0 .9.7 1.6 1.6 1.6h3.1c0-2.2 1.8-2.5 2.2-2.5s2.2.2 2.2 2.5h3.1c.9 0 1.6-.7 1.6-1.6v-3.1c-2.2 0-2.5-1.8-2.5-2.2 0-.4.2-2.2 2.5-2.2V3.7c0-.9-.7-1.6-1.6-1.6H11C11.1.9 10.2 0 9 0S7 .9 7 2.1z'/></svg>") !important;
-}
+    #appMenu-downloads-button {
+        list-style-image: url("chrome://browser/skin/downloads/download-icons.svg#arrow-with-bar");
+    }
 
-#appMenu-find-button2,
-#panelMenu_searchBookmarks {
-    list-style-image: url(chrome://global/skin/icons/search-glass.svg);
-}
+    #appMenu-extensions-themes-button {
+        list-style-image: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' x='0' y='0' width='16' height='16' fill='context-fill' fill-opacity='context-fill-opacity'><path d='M7 2.1H3.7c-.9 0-1.6.7-1.6 1.6V7C.9 7 0 7.9 0 9s.9 2.1 2.1 2.1v3.3c0 .9.7 1.6 1.6 1.6h3.1c0-2.2 1.8-2.5 2.2-2.5s2.2.2 2.2 2.5h3.1c.9 0 1.6-.7 1.6-1.6v-3.1c-2.2 0-2.5-1.8-2.5-2.2 0-.4.2-2.2 2.5-2.2V3.7c0-.9-.7-1.6-1.6-1.6H11C11.1.9 10.2 0 9 0S7 .9 7 2.1z'/></svg>") !important;
+    }
 
-#panelMenu_bookmarkingTools {
-    list-style-image: url("chrome://browser/skin/developer.svg");
-}
+    #appMenu-find-button2,
+    #panelMenu_searchBookmarks {
+        list-style-image: url(chrome://global/skin/icons/search-glass.svg);
+    }
 
-#panelMenu_viewBookmarksToolbar {
-    list-style-image: url("chrome://browser/skin/bookmarks-toolbar.svg");
-}
+    #panelMenu_bookmarkingTools {
+        list-style-image: url("chrome://browser/skin/developer.svg");
+    }
 
-#panelMenuBookmarkThisPage {
-    list-style-image: url("chrome://browser/skin/bookmark-hollow.svg");
-}
+    #panelMenu_viewBookmarksToolbar {
+        list-style-image: url("chrome://browser/skin/bookmarks-toolbar.svg");
+    }
 
-#PanelUI-fxa-menu-remotetabs-button,
-#appMenuRecentlyClosedTabs {
-    list-style-image: url("chrome://browser/skin/tab.svg");
-}
+    #panelMenuBookmarkThisPage {
+        list-style-image: url("chrome://browser/skin/bookmark-hollow.svg");
+    }
 
-#appMenuClearRecentHistory {
-    list-style-image: url("chrome://browser/skin/forget.svg");
-}
+    #PanelUI-fxa-menu-remotetabs-button,
+    #appMenuRecentlyClosedTabs {
+        list-style-image: url("chrome://browser/skin/tab.svg");
+    }
 
-#appMenuRestoreLastSession {
-    list-style-image: url("chrome://browser/skin/restore-session.svg");
-}
+    #appMenuClearRecentHistory {
+        list-style-image: url("chrome://browser/skin/forget.svg");
+    }
 
-#appMenuRecentlyClosedWindows {
-    list-style-image: url(chrome://browser/skin/window.svg);
-}
+    #appMenuRestoreLastSession {
+        list-style-image: url("chrome://browser/skin/restore-session.svg");
+    }
 
-#appMenu-settings-button {
-    list-style-image: url(chrome://global/skin/icons/settings.svg);
-}
+    #appMenuRecentlyClosedWindows {
+        list-style-image: url(chrome://browser/skin/window.svg);
+    }
 
-#appmenu-moreTools-button {
-    list-style-image: url(chrome://browser/skin/customize.svg);
-}
+    #appMenu-settings-button {
+        list-style-image: url(chrome://global/skin/icons/settings.svg);
+    }
 
-#appMenu-quit-button2 {
-    list-style-image: url(chrome://browser/skin/quit.svg);
-}
+    #appmenu-moreTools-button {
+        list-style-image: url(chrome://browser/skin/customize.svg);
+    }
 
-#appMenu-save-file-button2>.toolbarbutton-text,
-#appMenu-more-button2>.toolbarbutton-text,
-#appMenu-help-button2>.toolbarbutton-text,
-#appMenu-new-window-button2>.toolbarbutton-text,
-#appMenu-new-tab-button2>.toolbarbutton-text,
-#appMenu-new-private-window-button2>.toolbarbutton-text,
-#appMenu-print-button2>.toolbarbutton-text,
-#appMenu-passwords-button>.toolbarbutton-text,
-#appMenu-bookmarks-button>.toolbarbutton-text,
-#appMenu-history-button>.toolbarbutton-text,
-#appMenu-downloads-button>.toolbarbutton-text,
-#appMenu-extensions-themes-button>.toolbarbutton-text,
-#appMenu-find-button2>.toolbarbutton-text,
-#panelMenu_searchBookmarks>.toolbarbutton-text,
-#panelMenuBookmarkThisPage>.toolbarbutton-text,
-#panelMenu_viewBookmarksToolbar>.toolbarbutton-text,
-#panelMenu_bookmarkingTools>.toolbarbutton-text,
-#PanelUI-fxa-menu-remotetabs-button>.toolbarbutton-text,
-#appMenuRecentlyClosedTabs>.toolbarbutton-text,
-#appMenuClearRecentHistory>.toolbarbutton-text,
-#appMenuRestoreLastSession>.toolbarbutton-text,
-#appMenuRecentlyClosedWindows>.toolbarbutton-text,
-#appMenu-settings-button>.toolbarbutton-text,
-#appmenu-moreTools-button>.toolbarbutton-text,
-#appMenu-quit-button2>.toolbarbutton-text,
-#appMenu-zoom-controls2>.toolbarbutton-text {
-    padding-inline-start: 8px !important;
-}
+    #appMenu-quit-button2 {
+        list-style-image: url(chrome://browser/skin/quit.svg);
+    }
 
-#appMenu-zoom-controls2::before {
-    content: "" !important;
-    display: block;
-    width: 16px;
-    height: 16px;
-    -moz-context-properties: fill, fill-opacity;
-    fill: currentColor;
-    background-image: url(chrome://browser/skin/fxa/add-device.svg);
-}
+    #appMenu-save-file-button2 > .toolbarbutton-text,
+    #appMenu-more-button2 > .toolbarbutton-text,
+    #appMenu-help-button2 > .toolbarbutton-text,
+    #appMenu-new-window-button2 > .toolbarbutton-text,
+    #appMenu-new-tab-button2 > .toolbarbutton-text,
+    #appMenu-new-private-window-button2 > .toolbarbutton-text,
+    #appMenu-print-button2 > .toolbarbutton-text,
+    #appMenu-passwords-button > .toolbarbutton-text,
+    #appMenu-bookmarks-button > .toolbarbutton-text,
+    #appMenu-history-button > .toolbarbutton-text,
+    #appMenu-downloads-button > .toolbarbutton-text,
+    #appMenu-extensions-themes-button > .toolbarbutton-text,
+    #appMenu-find-button2 > .toolbarbutton-text,
+    #panelMenu_searchBookmarks > .toolbarbutton-text,
+    #panelMenuBookmarkThisPage > .toolbarbutton-text,
+    #panelMenu_viewBookmarksToolbar > .toolbarbutton-text,
+    #panelMenu_bookmarkingTools > .toolbarbutton-text,
+    #PanelUI-fxa-menu-remotetabs-button > .toolbarbutton-text,
+    #appMenuRecentlyClosedTabs > .toolbarbutton-text,
+    #appMenuClearRecentHistory > .toolbarbutton-text,
+    #appMenuRestoreLastSession > .toolbarbutton-text,
+    #appMenuRecentlyClosedWindows > .toolbarbutton-text,
+    #appMenu-settings-button > .toolbarbutton-text,
+    #appmenu-moreTools-button > .toolbarbutton-text,
+    #appMenu-quit-button2 > .toolbarbutton-text,
+    #appMenu-zoom-controls2 > .toolbarbutton-text {
+        padding-inline-start: 8px !important;
+    }
 
-/* appmenu buttons border radius */
-.subviewbutton-back {
-    border-radius: 2px !important;
-}
+    #appMenu-zoom-controls2::before {
+        content: "" !important;
+        display: block;
+        width: 16px;
+        height: 16px;
+        -moz-context-properties: fill, fill-opacity;
+        fill: currentColor;
+        background-image: url(chrome://browser/skin/fxa/add-device.svg);
+    }
 
-#appMenu-zoom-controls2 toolbarbutton {
-    margin-inline: 4px !important;
-    border: 1px solid var(--desaturate-dimmed) !important;
-    min-height: 20px !important;
-    min-width: 20px !important;
-    width: unset !important;
-    padding: 4px !important;
-}
+    /* appmenu buttons border radius */
+    .subviewbutton-back {
+        border-radius: 2px !important;
+    }
 
-#appMenu-zoom-controls2 .toolbarbutton-icon {
-    width: 12px !important;
-    height: 12px !important;
-}
+    #appMenu-zoom-controls2 toolbarbutton {
+        margin-inline: 4px !important;
+        border: 1px solid var(--desaturate-dimmed) !important;
+        min-height: 20px !important;
+        min-width: 20px !important;
+        width: unset !important;
+        padding: 4px !important;
+    }
 
-#appMenu-zoom-controls2 #appMenu-zoomReset-button2 {
-    border: 1px solid var(--desaturate-dimmed) !important;
-    height: 20px !important;
-    border-radius: 10px !important;
-    padding: 0 4px !important;
-    height: 20px !important;
-    min-height: 20px !important;
-}
+    #appMenu-zoom-controls2 .toolbarbutton-icon {
+        width: 12px !important;
+        height: 12px !important;
+    }
 
-#appMenu-zoom-controls2 #appMenu-zoomReset-button2 .toolbarbutton-text {
-    margin-block: 1px !important;
-    margin-inline: 6px !important;
-}
+    #appMenu-zoom-controls2 #appMenu-zoomReset-button2 {
+        border: 1px solid var(--desaturate-dimmed) !important;
+        height: 20px !important;
+        border-radius: 10px !important;
+        padding: 0 4px !important;
+        height: 20px !important;
+        min-height: 20px !important;
+    }
 
-.panel-banner-item {
-    margin-block: 0 8px !important;
-}
+    #appMenu-zoom-controls2 #appMenu-zoomReset-button2 .toolbarbutton-text {
+        margin-block: 1px !important;
+        margin-inline: 6px !important;
+    }
 
-.panel-banner-item[notificationid^=update]::after {
-    display: none !important;
-}
+    .panel-banner-item {
+        margin-block: 0 8px !important;
+    }
 
-.panel-banner-item[notificationid^=update] > .toolbarbutton-text {
-    line-height: 18px !important;
-}
+    .panel-banner-item[notificationid^="update"]::after {
+        display: none !important;
+    }
 
-.panel-banner-item[notificationid^=update] > .toolbarbutton-icon {
-    background: hsl(118, 89%, 24%) url("chrome://global/skin/icons/update-icon.svg") no-repeat center/contain !important;
-	fill: hsl(125, 81%, 57%) !important;
-    width: 18px !important;
-    height: 18px !important;
-	-moz-context-properties: fill !important;
-	padding: 0 !important;
-}
+    .panel-banner-item[notificationid^="update"] > .toolbarbutton-text {
+        line-height: 18px !important;
+    }
 
-.panel-banner-item[notificationid=update-available] > .toolbarbutton-icon,
-.panel-banner-item[notificationid=update-downloading] > .toolbarbutton-icon {
-    transform: scaleY(-1);
-}
+    .panel-banner-item[notificationid^="update"] > .toolbarbutton-icon {
+        background: hsl(118, 89%, 24%) url("chrome://global/skin/icons/update-icon.svg") no-repeat
+            center/contain !important;
+        fill: hsl(125, 81%, 57%) !important;
+        width: 18px !important;
+        height: 18px !important;
+        -moz-context-properties: fill !important;
+        padding: 0 !important;
+    }
 
-.panel-banner-item[notificationid=update-restart] > .toolbarbutton-icon {
-    background: hsl(125, 81%, 57%) url(chrome://browser/skin/notification-icons/popup-subitem.svg) no-repeat 0 1px/18px !important;
-	fill: hsl(118, 89%, 24%) !important;
-    transform: none !important;
-}
+    .panel-banner-item[notificationid="update-available"] > .toolbarbutton-icon,
+    .panel-banner-item[notificationid="update-downloading"] > .toolbarbutton-icon {
+        transform: scaleY(-1);
+    }
 
-.panel-banner-item[notificationid=update-unsupported] > .toolbarbutton-icon {
-    fill: hsl(44, 95%, 60%) !important;
-    background-color: hsl(32, 52%, 35%) !important
-}
+    .panel-banner-item[notificationid="update-restart"] > .toolbarbutton-icon {
+        background: hsl(125, 81%, 57%)
+            url(chrome://browser/skin/notification-icons/popup-subitem.svg) no-repeat 0 1px/18px !important;
+        fill: hsl(118, 89%, 24%) !important;
+        transform: none !important;
+    }
 
-#PanelUI-menu-button[badge-status^="update"] > .toolbarbutton-badge-stack > .toolbarbutton-badge {
-    background-size: contain !important;
-    background-position: center !important;
-    background-color: hsl(125, 81%, 57%) !important;
-	-moz-context-properties: fill !important;
-	padding: 0 !important;
-}
+    .panel-banner-item[notificationid="update-unsupported"] > .toolbarbutton-icon {
+        fill: hsl(44, 95%, 60%) !important;
+        background-color: hsl(32, 52%, 35%) !important;
+    }
 
-#PanelUI-menu-button[badge-status^="update"]:is(:hover, [open])>.toolbarbutton-badge-stack>.toolbarbutton-badge {
-    background-image: url(chrome://devtools/skin/images/error.svg) !important;
-    fill: hsl(125, 81%, 57%) !important;
-    background-color: hsl(118, 89%, 24%) !important;
-}
+    #PanelUI-menu-button[badge-status^="update"]
+        > .toolbarbutton-badge-stack
+        > .toolbarbutton-badge {
+        background-size: contain !important;
+        background-position: center !important;
+        background-color: hsl(125, 81%, 57%) !important;
+        -moz-context-properties: fill !important;
+        padding: 0 !important;
+    }
 
-#PanelUI-menu-button[badge-status^="update"]:is(:hover, [open]) > .toolbarbutton-badge-stack > .toolbarbutton-badge:-moz-window-inactive {
-    background-color: hsl(118, 89%, 24%) !important;
+    #PanelUI-menu-button[badge-status^="update"]:is(:hover, [open])
+        > .toolbarbutton-badge-stack
+        > .toolbarbutton-badge {
+        background-image: url(chrome://devtools/skin/images/error.svg) !important;
+        fill: hsl(125, 81%, 57%) !important;
+        background-color: hsl(118, 89%, 24%) !important;
+    }
+
+    #PanelUI-menu-button[badge-status^="update"]:is(:hover, [open])
+        > .toolbarbutton-badge-stack
+        > .toolbarbutton-badge:-moz-window-inactive {
+        background-color: hsl(118, 89%, 24%) !important;
+    }
 }
 
 /* reconciling the stylesheet with minBrowserNavbar.uc.js */
-:root {
+:root[min-browser] {
     --min-toolbar-height: 39px;
 }
 
@@ -319,25 +333,113 @@ toolbarbutton.subviewbutton:not([disabled], [open]):focus:active,
 }
 
 :root[inFullscreen][min-browser]:not([customizing]) #navigator-toolbox {
-	margin-top: calc(1px - var(--min-toolbar-height)) !important;
+    margin-top: calc(1px - var(--min-toolbar-height)) !important;
 }
 
-:root[inFullscreen][min-browser]:not([customizing]) > body > box:is(:focus-within, :hover, [popup-status], [urlbar-status]) ~ #browser findbar {
-	margin-top: calc(8px - var(--min-toolbar-height)) !important;
+:root[inFullscreen][min-browser]:not([customizing])
+    > body
+    > box:is(:focus-within, :hover, [popup-status], [urlbar-status])
+    ~ #browser
+    findbar {
+    margin-top: calc(8px - var(--min-toolbar-height)) !important;
 }
 
 :root[customizing][inFullscreen][min-browser] #customization-container {
-	margin-top: var(--min-toolbar-height) !important;
+    margin-top: var(--min-toolbar-height) !important;
 }
 
 :root[min-browser] #sidebar-box {
-	top: var(--min-toolbar-height) !important;
+    top: var(--min-toolbar-height) !important;
 }
 
 :root[min-browser] .browserContainer > findbar {
-	top: var(--min-toolbar-height) !important;
+    top: var(--min-toolbar-height) !important;
 }
 
+/* context menus (more in userChrome.as.css) */
+@supports (-moz-bool-pref("browser.proton.contextmenus.enabled")) {
+    :root {
+        --menupopup-background: transparent;
+        --menu-background-color: hsl(233, 36%, 11%) !important;
+        --menupopup-margin: 0;
+        --menupopup-padding: 0;
+        --context-padding-inline: 27px 0 !important;
+        --context-margin-inline: -14px 0 !important;
+        --context-checkbox-margin: 6px -6px;
+        --context-iconic-margin: 3px 0;
+        --context-iconic-special-margin: 5px -1px;
+        --menupopup-shadow: none !important;
+        --menupopup-border-radius: 3px !important;
+        --menu-right-bg: none;
+        --menu-right-img: url(chrome://browser/skin/customizableui/menu-arrow.svg);
+        --menu-right-margin: 4px;
+        --menu-right-size: 10px;
+    }
 
+    menupopup {
+        padding: var(--menupopup-padding) !important;
+        background-color: transparent !important;
+        border-color: transparent !important;
+    }
 
+    menu > menupopup {
+        margin-inline-start: 4px !important;
+    }
 
+    .menu-text {
+        padding-inline: var(--context-padding-inline) !important;
+    }
+
+    .menupopup-arrowscrollbox {
+        background-color: var(--menu-background-color) !important;
+        color: var(--menu-color) !important;
+        border: none !important;
+        border-radius: var(--menupopup-border-radius) !important;
+        box-shadow: var(--menupopup-shadow) !important;
+    }
+
+    #contentAreaContextMenu menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-left,
+    #customization-footer menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-left,
+    menupopup[menu-api] menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-left,
+    #PlacesToolbar menupopup menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-left,
+    menupopup#placesContext menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-left {
+        display: none !important;
+    }
+
+    #context-back {
+        list-style-image: url("chrome://browser/skin/back.svg") !important;
+    }
+
+    #context-forward {
+        list-style-image: url("chrome://browser/skin/forward.svg") !important;
+    }
+
+    #context-reload {
+        list-style-image: url("chrome://browser/skin/reload.svg") !important;
+    }
+
+    #context-bookmarkpage {
+        list-style-image: url("chrome://browser/skin/bookmark-hollow.svg") !important;
+    }
+
+    #backForwardMenu menuitem[type="radio"] > .menu-iconic-left,
+    #back-button menuitem[type="radio"] > .menu-iconic-left,
+    #forward-button menuitem[type="radio"] > .menu-iconic-left {
+        -moz-appearance: none !important;
+        padding-right: 5.33px !important;
+        fill: currentColor !important;
+        -moz-context-properties: fill, fill-opacity !important;
+        list-style-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTIgMmM1LjUxNCAwIDEwIDQuNDg2IDEwIDEwcy00LjQ4NiAxMC0xMCAxMC0xMC00LjQ4Ni0xMC0xMCA0LjQ4Ni0xMCAxMC0xMHptMC0yYy02LjYyNyAwLTEyIDUuMzczLTEyIDEyczUuMzczIDEyIDEyIDEyIDEyLTUuMzczIDEyLTEyLTUuMzczLTEyLTEyLTEyem0wIDZjLTMuMzEzIDAtNiAyLjY4Ny02IDZzMi42ODcgNiA2IDZjMy4zMTQgMCA2LTIuNjg3IDYtNnMtMi42ODYtNi02LTZ6IiBmaWxsPSJjb250ZXh0LWZpbGwiIGZpbGwtb3BhY2l0eT0iY29udGV4dC1maWxsLW9wYWNpdHkiLz48L3N2Zz4=") !important;
+        background: none !important;
+        padding-left: 2px !important;
+        margin-left: 0 !important;
+        min-width: 26px !important;
+    }
+
+    #backForwardMenu menuitem[type="radio"],
+    #back-button menuitem[type="radio"],
+    #forward-button menuitem[type="radio"] {
+        padding: 0px !important;
+        color: white !important;
+    }
+}

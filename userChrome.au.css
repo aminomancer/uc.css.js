@@ -48,7 +48,7 @@ link[href="chrome://global/skin/arrowscrollbox.css"] ~ :is(#scrollbutton-up, #sc
 }
 
 /* proton stuff */
-menupopup::part(innerbox) {
+.subviewbutton > menupopup::part(innerbox) {
     padding-block: 4px;
     border-radius: 5px;
 }

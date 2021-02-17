@@ -13,6 +13,7 @@
 }
 
 @-moz-document url-prefix("chrome://devtools/content/") {
+
     :root {
         --toolbarbutton-hover-background: hsla(236, 82%, 83%, 0.17) !important;
         --toolbarbutton-active-background: hsla(236, 82%, 83%, 0.22) !important;
@@ -121,72 +122,148 @@
         --urlbar-popup-url-color: hsl(251, 100%, 64%) !important;
         --urlbar-popup-action-color: hsl(340, 73%, 58%) !important;
         --toolbarbutton-border-radius: 2.6px !important;
+        --tab-min-height: 35px !important;
+        --context-margin-inline: -14px 0;
+        --context-padding-inline: -14px 0;
+        --menupopup-background: hsl(233, 36%, 11%);
+        --menu-background-color: hsl(233, 36%, 11%) !important;
+        --menupopup-margin: 0px 0 0 0;
+        --menupopup-padding: 0;
+        --context-checkbox-margin: 6px -5.5px;
+        --context-iconic-special-margin: 4px -2px;
+        --menupopup-border-radius: 3px;
+        --menu-right-bg: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='5px' height='5px' viewBox='0 0 492 492' xml:space='preserve'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M382.678,226.804L163.73,7.86C158.666,2.792,151.906,0,144.698,0s-13.968,2.792-19.032,7.86l-16.124,16.12    c-10.492,10.504-10.492,27.576,0,38.064L293.398,245.9l-184.06,184.06c-5.064,5.068-7.86,11.824-7.86,19.028    c0,7.212,2.796,13.968,7.86,19.04l16.124,16.116c5.068,5.068,11.824,7.86,19.032,7.86s13.968-2.792,19.032-7.86L382.678,265    c5.076-5.084,7.864-11.872,7.848-19.088C390.542,238.668,387.754,231.884,382.678,226.804z'/></svg>");
+        --menu-right-img: none;
+        --menu-right-margin: 2px;
+        --menu-right-size: 12px;
     }
+
     menupopup {
         -moz-appearance: none !important;
-        background: hsl(233, 36%, 11%) !important;
+        background: var(--menupopup-background) !important;
         border: none !important;
-        border-radius: 3px !important;
-        margin: 0px 0 0 0 !important;
+        border-radius: var(--menupopup-border-radius) !important;
+        margin: var(--menupopup-margin) !important;
         overflow: hidden !important;
     }
+
     menuseparator {
         visibility: hidden !important;
         display: none !important;
     }
+
     :is(menuitem, menu) {
         -moz-appearance: none !important;
         color: rgba(255, 255, 255, 0.8) !important;
         padding: 0 0 0 0 !important;
         min-height: 25px !important;
     }
+
     :is(menuitem, menu)[disabled="true"] {
         -moz-appearance: none !important;
         color: rgba(255, 255, 255, 0.45) !important;
         background-color: initial !important;
     }
+
     menuseparator:not([hidden="true"])+ :-moz-any(menu, menuitem) {
         border-image: linear-gradient(to right, transparent 1%, hsl(233, 25%, 23%) 50%, transparent 99%) !important;
         border-image-slice: 1 !important;
         border-top-width: 1px !important;
         border-top-style: solid !important;
     }
+
     :is(menuitem, menu) image {
         margin-left: 3px;
         margin-right: -3px;
     }
+
     menugroup {
         padding: 0 !important;
         background-color: transparent !important;
     }
+
     .menu-right {
         -moz-appearance: none !important;
         padding: 0px !important;
-        margin-right: 2px !important;
-        width: 12px !important;
-        height: 12px !important;
+        margin-right: var(--menu-right-margin) !important;
+        width: var(--menu-right-size) !important;
+        height: var(--menu-right-size) !important;
         fill: currentColor !important;
         -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity !important;
         background-size: 10px 10px !important;
         background-position: center !important;
         background-repeat: no-repeat !important;
-        background-image: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='5px' height='5px' viewBox='0 0 492 492' xml:space='preserve'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M382.678,226.804L163.73,7.86C158.666,2.792,151.906,0,144.698,0s-13.968,2.792-19.032,7.86l-16.124,16.12    c-10.492,10.504-10.492,27.576,0,38.064L293.398,245.9l-184.06,184.06c-5.064,5.068-7.86,11.824-7.86,19.028    c0,7.212,2.796,13.968,7.86,19.04l16.124,16.116c5.068,5.068,11.824,7.86,19.032,7.86s13.968-2.792,19.032-7.86L382.678,265    c5.076-5.084,7.864-11.872,7.848-19.088C390.542,238.668,387.754,231.884,382.678,226.804z'/></svg>") !important;
+        background-image: var(--menu-right-bg) !important;
+        list-style-image: var(--menu-right-img) !important;
     }
+
     :is(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]) {
         -moz-appearance: none !important;
         background-color: var(--arrowpanel-dimmed) !important;
     }
+
     :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"])[disabled="true"] {
         background: none !important;
         -moz-appearance: none !important;
     }
+
     .subviewbutton:-moz-any(:hover, [_moz-menuactive="true"])[disabled="true"] {
         color: var(--panel-disabled-color) !important;
     }
+
     menu.subviewbutton:not([disabled])[_moz-menuactive]:active {
         background: var(--arrowpanel-dimmed) !important;
         box-shadow: none !important;
     }
+
+    @supports (-moz-bool-pref("browser.proton.contextmenus.enabled")) {
+
+        :root {
+            --menupopup-background: transparent;
+            --menu-background-color: hsl(233, 36%, 11%) !important;
+            --menupopup-margin: 0;
+            --menupopup-padding: 0;
+            --context-padding-inline: 27px 0 !important;
+            --context-margin-inline: -14px 0 !important;
+            --context-checkbox-margin: 6px -6px;
+            --context-iconic-margin: 3px 0;
+            --context-iconic-special-margin: 5px -1px;
+            --menupopup-shadow: none !important;
+            --menupopup-border-radius: 3px !important;
+            --menu-right-bg: none;
+            --menu-right-img: url(chrome://browser/skin/customizableui/menu-arrow.svg);
+            --menu-right-margin: 4px;
+            --menu-right-size: 10px;
+        }
+
+        menupopup {
+            padding: var(--menupopup-padding) !important;
+            background-color: transparent !important;
+            border-color: transparent !important;
+        }
+
+        menu>menupopup {
+            margin-inline-start: 4px !important;
+        }
+
+        .menu-text {
+            padding-inline: var(--context-padding-inline) !important;
+        }
+
+        .menupopup-arrowscrollbox {
+            background-color: var(--menu-background-color) !important;
+            color: var(--menu-color) !important;
+            border: none !important;
+            border-radius: var(--menupopup-border-radius) !important;
+            box-shadow: var(--menupopup-shadow) !important;
+        }
+
+        menupopup[menu-api] menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-left {
+            display: none !important;
+        }
+
+    }
+
 }
 
 :root {

@@ -397,7 +397,9 @@ notification[value="keyword-uri-fixup"] {
 .browserContainer>findbar {
     -moz-box-ordinal-group: 0;
     position: absolute !important;
-    display: block !important;
+    display: flex !important;
+    flex-flow: row nowrap;
+    align-items: center;
     top: 74px !important;
     left: 1.5333em;
     border: 0px solid transparent !important;
@@ -447,32 +449,27 @@ findbar[hidden] {
     border: none !important;
 }
 
-/* fix findbar close button positioning in maximized/fullscreen */
-.findbar-closebutton {
-    margin-top: -1px !important;
-}
-
 /* minor position fix */
 tab .tab-icon-sound {
     margin-top: 1px !important;
 }
 
 .findbar-closebutton {
-    display: inline-block !important;
     margin-inline-start: 0.5em !important;
-    vertical-align: middle !important;
-    margin-bottom: -0.14em !important;
-    height: inherit !important;
     padding-left: 0px !important;
     padding: 0px !important;
     margin-inline-end: 7px !important;
 }
 
+:root[sizemode="fullscreen"] .findbar-closebutton {
+    margin-top: 0.5px !important;
+}
+
 .findbar-closebutton .toolbarbutton-icon {
     border-radius: 50% !important;
-    width: 1.5em !important;
-    height: 1.5em !important;
     fill-opacity: 0 !important;
+    max-width: 19px;
+    max-height: 19px;
 }
 
 .findbar-closebutton:hover .toolbarbutton-icon {
@@ -635,7 +632,8 @@ findbar:focus-within .findbar-textbox:not([status="notfound"])~ :-moz-any(.findb
 
 .findbar-find-status,
 .found-matches,
-.find-status-icon {
+.find-status-icon,
+.findbar-find-fast[anonid="match-diacritics-status"] {
     display: none !important;
 }
 

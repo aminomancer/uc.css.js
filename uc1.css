@@ -359,7 +359,7 @@ link[href$="global.css"] ~ spacer[part=arrowscrollbox-overflow-end-indicator] {
 #multithreaded-download-manager_qw_linux-2g64_local-menuitem-_link-context-menu .menu-iconic-left::before {
     width: 16px !important;
     height: 16px !important;
-    margin-left: 4px !important;
+    margin-inline: 4px 1px !important;
     fill: currentColor !important;
     display: -moz-inline-box !important;
     position: relative !important;
@@ -375,8 +375,7 @@ link[href$="global.css"] ~ spacer[part=arrowscrollbox-overflow-end-indicator] {
 #_bee8b1f2-823a-424c-959c-f8f76c8b2306_-menuitem-_removeOL .menu-iconic-left::before {
     width: 16px !important;
     height: 16px !important;
-    margin-left: 3px !important;
-    margin-right: -2px !important;
+    margin-inline: var(--context-iconic-margin) !important;
     fill: currentColor !important;
     -moz-context-properties: fill, fill-opacity, stroke !important;
     content: "" !important;
@@ -393,8 +392,7 @@ link[href$="global.css"] ~ spacer[part=arrowscrollbox-overflow-end-indicator] {
 :is(.menu-iconic, .menuitem-iconic):is([label="To Google Translate"], [label^="Translate this page"], [label="Translate selected link"], [label="Translate selected text"], [label="Simple Translate"]) .menu-iconic-left::before {
     width: 16px !important;
     height: 16px !important;
-    margin-left: 4px !important;
-    margin-right: -2px !important;
+    margin-inline: var(--context-iconic-special-margin) !important;
     fill: currentColor !important;
     -moz-context-properties: fill, fill-opacity, stroke !important;
     content: "" !important;
@@ -411,8 +409,7 @@ link[href$="global.css"] ~ spacer[part=arrowscrollbox-overflow-end-indicator] {
 #contentAreaContextMenu :-moz-any(.menu-iconic, .menuitem-iconic)[label="Pushbullet"] .menu-iconic-left::before {
     width: 16px !important;
     height: 16px !important;
-    margin-left: 3px !important;
-    margin-right: -2px !important;
+    margin-inline: var(--context-iconic-margin) !important;
     fill: currentColor !important;
     -moz-context-properties: fill, fill-opacity, stroke !important;
     content: "" !important;
@@ -429,8 +426,7 @@ link[href$="global.css"] ~ spacer[part=arrowscrollbox-overflow-end-indicator] {
 #contentAreaContextMenu :-moz-any(.menu-iconic, .menuitem-iconic)[label="Zotero Connector"] .menu-iconic-left::before {
     width: 16px !important;
     height: 16px !important;
-    margin-left: 3px !important;
-    margin-right: -2px !important;
+    margin-inline: var(--context-iconic-margin) !important;
     fill: currentColor !important;
     -moz-context-properties: fill, fill-opacity, stroke !important;
     content: "" !important;
@@ -447,8 +443,7 @@ link[href$="global.css"] ~ spacer[part=arrowscrollbox-overflow-end-indicator] {
 #contentAreaContextMenu :-moz-any(.menu-iconic, .menuitem-iconic):is([label="Block element..."], [label="uBlock Origin"]) .menu-iconic-left::before {
     width: 16px !important;
     height: 16px !important;
-    margin-left: 3px !important;
-    margin-right: -2px !important;
+    margin-inline: var(--context-iconic-margin) !important;
     fill: currentColor !important;
     -moz-context-properties: fill, fill-opacity, stroke !important;
     content: "" !important;
@@ -465,8 +460,7 @@ link[href$="global.css"] ~ spacer[part=arrowscrollbox-overflow-end-indicator] {
 #contentAreaContextMenu :-moz-any(.menu-iconic, .menuitem-iconic)[label="Bitwarden"] .menu-iconic-left::before {
     width: 16px !important;
     height: 16px !important;
-    margin-left: 3px !important;
-    margin-right: -2px !important;
+    margin-inline: var(--context-iconic-margin) !important;
     fill: currentColor !important;
     -moz-context-properties: fill, fill-opacity, stroke !important;
     content: "" !important;

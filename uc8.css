@@ -168,7 +168,7 @@ requires fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-statu
 }
 
 :root[inFullscreen]:not([customizing])>body>box:is(:focus-within, :hover, [popup-status], [urlbar-status]) ~ #browser findbar {
-    margin-top: 5.4px !important;
+    margin-top: 4.4px !important;
 }
 
 :root[inFullscreen]:not([customizing])>body>box:is(:focus-within, :hover, [popup-status], [urlbar-status]) ~ #browser findbar[hidden] {

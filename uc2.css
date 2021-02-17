@@ -190,7 +190,7 @@ menupopup#placesContext menuitem:is([type="checkbox"], [type="radio"])::before {
     display: -moz-inline-box !important;
     width: 16px !important;
     height: 16px !important;
-    margin-inline: 6px -5.5px !important;
+    margin-inline: var(--context-checkbox-margin) !important;
     fill: currentColor !important;
     -moz-context-properties: fill, fill-opacity, stroke !important;
     content: "" !important;
