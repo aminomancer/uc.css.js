@@ -55,8 +55,8 @@
     };
 
     function init() {
-        gURLBar.view.panel.addEventListener("wheel", wheelSelect, false);
-        gURLBar.view.panel.addEventListener("mouseup", rightClick, false);
+        gURLBar.view._rows.addEventListener("wheel", wheelSelect, false);
+        gURLBar.view._rows.addEventListener("mouseup", rightClick, false);
     }
 
     // wait until gURLBar is initialized to attach event listeners

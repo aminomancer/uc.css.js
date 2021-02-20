@@ -1,4 +1,5 @@
 @supports (-moz-bool-pref("browser.proton.enabled")) {
+
     :root {
         --panelview-toolbarbutton-hover-bgcolor: var(--arrowpanel-dimmed) !important;
         --panelview-toolbarbutton-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
@@ -17,9 +18,32 @@
         --panel-shortcut-color: hsl(235, 27%, 73%, 70%) !important;
         --panel-shortcut-focus: hsl(235, 32%, 75%, 90%) !important;
     }
+
+    #BMB_bookmarksPopup menupopup[placespopup="true"] {
+        padding-top: 0 !important;
+    }
+
+}
+
+@supports (-moz-bool-pref("browser.proton.toolbar.enabled")) {
+
+    :root {
+        --toolbarbutton-inner-padding: 6px !important;
+    }
+
+    #urlbar-container, #urlbar {
+        --urlbar-toolbar-height: 39px !important;
+        --urlbar-container-height: 39px !important;
+    }
+
 }
 
 @supports (-moz-bool-pref("browser.proton.tabs.enabled")) {
+
+    :root {
+        --proton-tab-inline-padding: 0 !important;
+    }
+
     .tab-icon-sound-label {
         display: none !important;
     }
@@ -54,14 +78,12 @@
     .tab-label-container:not(.proton) + .tab-icon-sound {
         display: -moz-box !important;
     }
-}
 
-#BMB_bookmarksPopup menupopup[placespopup="true"] {
-    padding-top: 0 !important;
 }
 
 /* appmenu */
 @supports (-moz-bool-pref("browser.proton.appmenu.enabled")) {
+
     :root[proton] #appMenu-multiView {
         --arrowpanel-menuitem-margin: 0 8px !important;
         --arrowpanel-menuitem-padding: 8px !important;
@@ -303,7 +325,9 @@
         > .toolbarbutton-badge {
         background-size: contain !important;
         background-position: center !important;
-        background-color: hsl(125, 81%, 57%) !important;
+        background-image: url(chrome://devtools/skin/images/error.svg) !important;
+        fill: hsl(125, 81%, 57%) !important;
+        background-color: hsl(118, 89%, 24%) !important;
         -moz-context-properties: fill !important;
         padding: 0 !important;
     }
@@ -315,49 +339,26 @@
         fill: hsl(125, 81%, 57%) !important;
         background-color: hsl(118, 89%, 24%) !important;
     }
+    
+    #PanelUI-menu-button[badge-status^="update"]
+        > .toolbarbutton-badge-stack
+        > .toolbarbutton-badge:-moz-window-inactive {
+        fill: hsl(227, 19%, 48%) !important;
+        background-color: hsl(227, 19%, 48%) !important;
+    }
 
     #PanelUI-menu-button[badge-status^="update"]:is(:hover, [open])
         > .toolbarbutton-badge-stack
         > .toolbarbutton-badge:-moz-window-inactive {
         background-color: hsl(118, 89%, 24%) !important;
+        fill: hsl(125, 81%, 57%) !important;
     }
-}
 
-/* reconciling the stylesheet with minBrowserNavbar.uc.js */
-:root[min-browser] {
-    --min-toolbar-height: 39px;
-}
-
-:root[inFullscreen][min-browser] #navigator-toolbox {
-    height: var(--min-toolbar-height) !important;
-}
-
-:root[inFullscreen][min-browser]:not([customizing]) #navigator-toolbox {
-    margin-top: calc(1px - var(--min-toolbar-height)) !important;
-}
-
-:root[inFullscreen][min-browser]:not([customizing])
-    > body
-    > box:is(:focus-within, :hover, [popup-status], [urlbar-status])
-    ~ #browser
-    findbar {
-    margin-top: calc(8px - var(--min-toolbar-height)) !important;
-}
-
-:root[customizing][inFullscreen][min-browser] #customization-container {
-    margin-top: var(--min-toolbar-height) !important;
-}
-
-:root[min-browser] #sidebar-box {
-    top: var(--min-toolbar-height) !important;
-}
-
-:root[min-browser] .browserContainer > findbar {
-    top: var(--min-toolbar-height) !important;
 }
 
 /* context menus (more in userChrome.as.css) */
 @supports (-moz-bool-pref("browser.proton.contextmenus.enabled")) {
+
     :root {
         --menupopup-background: transparent;
         --menu-background-color: hsl(233, 36%, 11%) !important;
@@ -442,4 +443,46 @@
         padding: 0px !important;
         color: white !important;
     }
+
 }
+
+/* reconciling the stylesheet with minBrowserNavbar.uc.js */
+:root[min-browser] {
+    --min-toolbar-height: 39px;
+}
+
+:root[inFullscreen][min-browser] #navigator-toolbox {
+    height: var(--min-toolbar-height) !important;
+}
+
+:root[inFullscreen][min-browser]:not([customizing]) #navigator-toolbox {
+    margin-top: calc(1px - var(--min-toolbar-height)) !important;
+}
+
+:root[inFullscreen][min-browser]:not([customizing])
+    > body
+    > box:is(:focus-within, :hover, [popup-status], [urlbar-status])
+    ~ #browser
+    findbar {
+    margin-top: calc(8px - var(--min-toolbar-height)) !important;
+}
+
+:root[customizing][inFullscreen][min-browser] #customization-container {
+    margin-top: var(--min-toolbar-height) !important;
+}
+
+:root[min-browser] #sidebar-box {
+    top: var(--min-toolbar-height) !important;
+}
+
+:root[min-browser] .browserContainer > findbar {
+    top: var(--min-toolbar-height) !important;
+}
+
+
+
+
+
+
+
+

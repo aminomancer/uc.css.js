@@ -118,8 +118,12 @@ menupopup#placesContext menuitem[checked] .menu-iconic-text,
 #historyUndoWindowMenu3:not(.menuitem-iconic)>.menu-text,
 #tabContextUndoList:not(.menuitem-iconic)>.menu-text,
 #tabContextMenu menuitem[label^="Restore All"]:not(.menuitem-iconic) .menu-text,
-:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup) .sendtab-target:is([clientType="phone"], [clientType="mobile"], [clientType="desktop"]):not(.menuitem-iconic) .menu-text,
-#userScriptsMenu>.menu-text {
+:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice) .sendtab-target:is([clientType="phone"], [clientType="mobile"], [clientType="desktop"]):not(.menuitem-iconic) .menu-text,
+#userScriptsMenu>.menu-text,
+#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"] :is(menu, menuitem)[label="Auto-fill"] > .menu-text,
+#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"] :is(menu, menuitem)[label="Copy Username"] > .menu-text,
+#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"] :is(menu, menuitem)[label="Copy Password"] > .menu-text,
+#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"] :is(menu, menuitem)[label*="Generate Password"] > .menu-text {
     display: -moz-inline-box !important;
     margin-inline: var(--context-margin-inline) !important;
     padding-inline: var(--context-padding-inline) !important;
@@ -324,7 +328,7 @@ menupopup#placesContext menuitem[type="radio"][checked="true"]::before{
 #historyUndoWindowMenu3:not(.menuitem-iconic)::before,
 #tabContextUndoList:not(.menuitem-iconic)::before,
 #tabContextMenu menuitem[label^="Restore All"]::before,
-:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup) .sendtab-target:is([clientType="phone"], [clientType="mobile"], [clientType="desktop"])::before,
+:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice) .sendtab-target:is([clientType="phone"], [clientType="mobile"], [clientType="desktop"])::before,
 #spell-add-to-dictionary::before,
 #context-showonlythisframe:not(.menuitem-iconic)::before,
 #contentAreaContextMenu #frame:not(.menuitem-iconic)::before,
@@ -336,7 +340,11 @@ menupopup#placesContext menuitem[type="radio"][checked="true"]::before{
 #context-leave-dom-fullscreen:not(.menuitem-iconic)::before,
 #context_moveToStart:not(.menuitem-iconic)::before,
 #context_moveToEnd:not(.menuitem-iconic)::before,
-#userScriptsMenu::before {
+#userScriptsMenu::before,
+#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"] :is(menu, menuitem)[label="Auto-fill"]::before,
+#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"] :is(menu, menuitem)[label="Copy Username"]::before,
+#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"] :is(menu, menuitem)[label="Copy Password"]::before,
+#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"] :is(menu, menuitem)[label*="Generate Password"]::before {
     content: "" !important;
     position: relative !important;
     display: -moz-inline-box !important;
@@ -511,7 +519,8 @@ menupopup#placesContext menuitem[type="radio"][checked="true"]::before{
 }
 
 .textbox-contextmenu menuitem[label="Paste & Go"]:not(.menuitem-iconic)::before {
-    background-image: url("chrome://devtools/skin/images/command-paintflashing.svg") !important;
+    background-image: url("chrome://devtools/skin/images/command-paintflashing.svg");
+    background-image: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='context-fill' fill-opacity='context-fill-opacity'><path d='M5.5 8c-.3 0-.5.2-.5.5s.2.5.5.5h2c.3 0 .5-.2.5-.5S7.8 8 7.5 8h-2zM10 6.5c0-.3-.2-.5-.5-.5h-4c-.3 0-.5.2-.5.5s.2.5.5.5h4c.3 0 .5-.2.5-.5z'/><path d='M11.5 13.8v-.3h-1.1c-.8 0-1.5-.3-2-.9-.5-.6-.8-1.3-.8-2V10H5c-.6 0-1-.4-1-1V5h7v5.3h.6c-.1-.5.1-1 .4-1.4.3-.3.6-.4 1-.5V4c0-1.1-.9-2-2-2h-1C9.7.6 8.4-.2 7 0 6 .2 5.2 1 5 2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h7c.6 0 1.1-.3 1.5-.7-.2-.1-.4-.2-.5-.4-.3-.3-.5-.7-.5-1.1zM4 3h1c.5 0 .9-.3 1-.8.2-.8 1-1.3 1.8-1.2.6.1 1 .6 1.2 1.2.1.5.5.8.9.8H11v1H4V3z'/><circle cx='7.5' cy='2.5' r='.5'/><path d='M15.5 11.5l-1.9-1.9c-.1-.1-.3-.2-.4-.2-.2 0-.3.1-.5.2-.2.2-.2.6 0 .9l.3.3.6.6h-3.1c-.3 0-.5-.2-.6-.5V8.7c0-.4-.3-.6-.6-.6s-.6.3-.6.6V11c.1.5.4.9.7 1.2.3.2.6.3 1 .3h3.2l-.6.6-.3.3c-.3.2-.3.6 0 .9.1.1.2.1.2.2h.2c.2 0 .3-.1.4-.2l1.9-1.9c.4-.3.4-.7.1-.9z'/></svg>");
 }
 
 #context-delete:not(.menuitem-iconic)::before,
@@ -648,27 +657,43 @@ menupopup#placesContext menuitem[type="radio"][checked="true"]::before{
 }
 
 #discardTab:not(.menuitem-iconic)::before {
-    background-image: url("chrome://browser/skin/quit.svg") !important;
+    background-image: url("chrome://browser/skin/quit.svg");
 }
 
 #historyUndoWindowMenu3:not(.menuitem-iconic)::before {
-    background-image: url("chrome://browser/skin/window.svg") !important;
+    background-image: url("chrome://browser/skin/window.svg");
 }
 
 #tabContextUndoList:not(.menuitem-iconic)::before {
-    background-image: url("chrome://browser/skin/tab.svg") !important;
+    background-image: url("chrome://browser/skin/tab.svg");
 }
 
 #tabContextMenu menuitem[label^="Restore All"]::before {
-    background-image: url("chrome://browser/skin/restore-session.svg") !important;
+    background-image: url("chrome://browser/skin/restore-session.svg");
 }
 
-:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup) .sendtab-target:is([clientType="phone"], [clientType="mobile"])::before {
-    background-image: url("chrome://browser/skin/device-phone.svg") !important;
+:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice) .sendtab-target:is([clientType="phone"], [clientType="mobile"])::before {
+    background-image: url("chrome://browser/skin/device-phone.svg");
 }
 
-:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup) .sendtab-target[clientType="desktop"]::before {
-    background-image: url("chrome://browser/skin/device-desktop.svg") !important;
+:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice) .sendtab-target[clientType="desktop"]::before {
+    background-image: url(chrome://browser/skin/device-desktop.svg);
+}
+
+#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"] :is(menu, menuitem)[label="Auto-fill"]::before {
+    background-image: url(chrome://browser/skin/preferences/formfill.svg);
+}
+
+#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"] :is(menu, menuitem)[label="Copy Username"]::before {
+    background-image: url(chrome://browser/skin/fxa/avatar-empty.svg);
+}
+
+#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"] :is(menu, menuitem)[label="Copy Password"]::before {
+    background-image: url(chrome://browser/skin/login.svg);
+}
+
+#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"] :is(menu, menuitem)[label*="Generate Password"]::before {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0.5 0 16 16'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M3.4 8.8c.3.5 1 .7 1.6.4l1.8-1v2.1c0 .7.5 1.2 1.2 1.2s1.2-.5 1.2-1.2V8.1l1.8 1c.6.3 1.3.1 1.6-.4.3-.6.1-1.3-.4-1.6l-1.8-1 1.8-1c.6-.3.8-1.1.4-1.6-.3-.6-1-.8-1.6-.5L9.2 4V1.9C9.2 1.2 8.7.7 8 .7s-1.2.6-1.2 1.2V4L5 3c-.6-.3-1.3-.1-1.6.4-.3.6-.2 1.3.4 1.6l1.8 1-1.8 1c-.6.5-.7 1.2-.4 1.8zm9.8 4.1H2.8c-.7 0-1.2.5-1.2 1.2s.5 1.2 1.2 1.2h10.4c.7 0 1.2-.5 1.2-1.2s-.5-1.2-1.2-1.2z'/></svg>");
 }
 
 #userScriptsMenu::before {

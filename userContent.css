@@ -339,6 +339,90 @@
     display: flex !important;
     opacity: 1 !important;
     scale: 1 1 !important;
+    box-shadow: 0 0 4px 0 hsla(240, 4%, 2.9%, 0.25), 0 0 10px 0 hsla(240, 6%, 0.9%, 0.35) !important;
+    border: none !important;
+    padding: unset !important;
+    cursor: pointer !important;
+    background-color: hsl(244, 100%, 63%) !important;
+    background-color: hsla(0, 0%, 3%, 0.5) !important;
+    background-image: url("texture/noise-512x512.png") !important;
+    backdrop-filter: blur(22px) !important;
+    height: 32px !important;
+    border-radius: 2px !important;
+    pointer-events: auto !important;
+}
+
+#pictureInPictureToggle .pip-icon {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 625.8 512'><path d='M568.9 0h-512C25.6 0 0 25 0 56.3v398.8C0 486.4 25.6 512 56.9 512h512c31.3 0 56.9-25.6 56.9-56.9V56.3C625.8 25 600.2 0 568.9 0zm-512 425.7V86c0-16.5 13.5-30 30-30h452c16.5 0 30 13.5 30 30v339.6c0 16.5-13.5 30-30 30h-452c-16.5.1-30-13.4-30-29.9zM482 227.6H314.4c-16.5 0-30 13.5-30 30v110.7c0 16.5 13.5 30 30 30H482c16.5 0 30-13.5 30-30V257.6c0-16.5-13.5-30-30-30z' fill='context-fill' fill-opacity='context-fill-opacity'/></svg>") !important;
+    background-position: 0 1.6px !important;
+    background-repeat: no-repeat;
+    margin-inline: 6.4px !important;
+    margin-block-start: 0.5px !important;
+    width: 24px !important;
+    height: 24px !important;
+    min-width: 24px !important;
+    background-size: contain !important;
+}
+
+#pictureInPictureToggle .pip-icon-label {
+    padding-block: 4px !important;
+    font-size: 13px !important;
+    line-height: normal !important;
+    font-family: Overpass !important;
+    font-weight: 500 !important;
+    
+}
+
+#pictureInPictureToggle .pip-label {
+    margin-block: 0 !important;
+    margin-right: 5px !important;
+    min-height: 18px !important;
+    max-height: 18px !important;
+    display: none !important;
+}
+
+#pictureInPictureToggle .pip-explainer,
+#pictureInPictureToggle .pip-small,
+#pictureInPictureToggle > .pip-icon {
+    display: none !important;
+}
+
+#pictureInPictureToggle {
+    pointer-events: none !important;
+}
+
+.controlsOverlay > .pip-wrapper {
+    opacity: 1 !important;
+    transition: none !important;
+}
+
+#pictureInPictureToggle .pip-expanded,
+.controlsOverlay[hidetoggle="true"].hovering > #pictureInPictureToggle > .pip-expanded {
+    opacity: 0 !important;
+    transform-style: flat !important;
+    backface-visibility: hidden !important;
+    translate: 0 !important;
+    transition: opacity 250ms, background-color 190ms !important;
+    translate: calc(-100% + 1.75em) !important;
+}
+
+.controlsOverlay.hovering #pictureInPictureToggle .pip-expanded {
+    opacity: 1 !important;
+    translate: 0 !important;
+    translate: calc(-100% + 1.75em) !important;
+}
+
+.controlsOverlay.hovering #pictureInPictureToggle .pip-expanded:hover {
+    opacity: 1 !important;
+    translate: 0 !important;
+    background-color: hsla(0, 0%, 3%, 0.7) !important;
+    translate: calc(-100% + 1.75em) !important;
+}
+
+/* #pictureInPictureToggle .pip-expanded {
+    display: flex !important;
+    opacity: 1 !important;
+    scale: 1 1 !important;
     box-shadow: 0 0 4px 0 hsla(240, 4%, 4.9%, 0.25) !important;
     border: none !important;
     padding: unset !important;
@@ -404,7 +488,7 @@
 .controlsOverlay:hover .pip-expanded:hover {
     opacity: 1 !important;
     translate: calc(-100% + 48px) !important;
-}
+} */
 
 input[type="number"] {
     -moz-appearance: none;
@@ -2343,7 +2427,7 @@ domain("wikimedia.org") {
         src: local('Source Serif Pro Bold'), local('SourceSerifPro-Bold'), url(https://fonts.gstatic.com/s/sourceserifpro/v5/yd5lDMt8Sva2PE17yiLarPgHLTi6vdOOFgNDwEC6JgI.woff2) format('woff2');
     }
     
-    :root {
+    html:root {
         background: #19191a !important;
     }
 

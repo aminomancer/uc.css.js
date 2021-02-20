@@ -712,16 +712,28 @@ tabmodalprompt .checkbox-check[checked="true"] {
     margin-right: 244px !important;
 }
 
-#urlbar[textoverflow="right"] > #urlbar-input-container > .urlbar-input-box > #urlbar-input {
-    mask-image: linear-gradient(to left, transparent, rgb(0, 0, 0) 3ch);
+#urlbar[textoverflow="both"] > #urlbar-input-container > .urlbar-input-box > #urlbar-input {
+    mask-image: linear-gradient(to right, transparent, black 3ch, black calc(100% - 3ch), transparent);
 }
 
-#urlbar[textoverflow][usertyping="true"] #urlbar-input {
-    mask-image: linear-gradient(to left, transparent 5px, rgb(0, 0, 0) 55px) !important;
+#urlbar[textoverflow="right"] > #urlbar-input-container > .urlbar-input-box > #urlbar-input {
+    mask-image: linear-gradient(to left, transparent, black 3ch);
+}
+
+#urlbar[textoverflow="left"] > #urlbar-input-container > .urlbar-input-box > #urlbar-input {
+    mask-image: linear-gradient(to right, transparent, black 3ch);
+}
+
+#urlbar[textoverflow="both"][usertyping="true"] #urlbar-input {
+    mask-image: linear-gradient(to right, transparent, black 3ch, black calc(100% - 55px), transparent calc(100% - 5px)) !important;
+}
+
+#urlbar[textoverflow="right"][usertyping="true"] #urlbar-input {
+    mask-image: linear-gradient(to left, transparent 5px, black 55px) !important;
 }
 
 #urlbar .search-one-offs:not([scrolledtostart], [scrolledtoend]) {
-    mask-image: linear-gradient(to right, transparent 10px, rgb(0, 0, 0) 30px);
+    mask-image: linear-gradient(to right, transparent 10px, black 30px);
 }
 
 #urlbar .search-panel-one-offs {
@@ -743,9 +755,13 @@ tabmodalprompt .checkbox-check[checked="true"] {
     transform: none !important;
 }
 
-.urlbar-input-box {
+/* .urlbar-input-box {
     cursor: text !important;
 }
+
+.textbox-contextmenu {
+    cursor: initial !important;
+} */
 
 #userContext-icons, #userContext-icons>* {
     pointer-events: none !important;
