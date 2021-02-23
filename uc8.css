@@ -448,23 +448,24 @@ requires fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-statu
     display: none !important;
 }
 
-.sharing-icon {
+#webrtc-sharing-icon {
     fill-opacity: 0.6 !important;
     fill: white !important;
     animation: none !important;
 }
 
-.sharing-icon:hover {
+#webrtc-sharing-icon:hover {
     fill-opacity: 1 !important;
     fill: hsl(3.7, 77.1%, 49.6%) !important;
     animation: 1.5s ease identity-popup-permission-icon-in-use-blink infinite !important;
 }
 
+#identity-permission-box,
 #permissions-granted-icon,
 #blocked-permissions-container,
 #notification-popup-box,
 #remote-control-icon {
-    fill-opacity: 1 !important;
+    fill-opacity: 0.6 !important;
 }
 
 #identity-box:hover:not(.no-hover):not([open="true"]),
@@ -473,20 +474,15 @@ requires fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-statu
     background-color: unset !important;
 }
 
-#permissions-granted-icon,
-#blocked-permissions-container>*,
-#notification-popup-box>*,
-#remote-control-icon {
-    fill-opacity: 0.6 !important;
-}
-
 #permissions-granted-icon:hover,
-#blocked-permissions-container>*:hover,
-#notification-popup-box>*:hover,
+.sharing-icon:hover,
+#blocked-permissions-container > :hover,
+#notification-popup-box > :hover,
 #remote-control-icon:hover,
-#identity-box[open="true"] #permissions-granted-icon,
-#identity-box[open="true"] #blocked-permissions-container>*,
-#identity-box[open="true"] #notification-popup-box>*,
+#identity-permission-box[open="true"] #permissions-granted-icon,
+#identity-permission-box[open="true"] .sharing-icon,
+#identity-permission-box[open="true"] #blocked-permissions-container > *,
+#notification-popup-box > [open],      /* for this selector to do anything, you need urlbarNotificationIconsOpenStatus.uc.js from my repo */
 #identity-box[open="true"] #remote-control-icon {
     fill-opacity: 1 !important;
 }
