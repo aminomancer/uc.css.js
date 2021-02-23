@@ -902,6 +902,12 @@ menu.subviewbutton:not([disabled])[_moz-menuactive]:active {
 
 #ContentSelectDropdown > menupopup {
 	font: menu !important;
+    background-color: var(--menu-background-color) !important;
+    /* --content-select-background-image: none !important; */
+    /* a background image is added on top of the menupopup based on the appearance of the select element in-content.
+    if you want all of these to be styled consistently then you can uncomment the above rule.
+    personally, i like this feature since websites use all manner of different styles for select elements.
+    making them all bluish-purple doesn't always look great. */
 }
 
 #ContentSelectDropdown > menupopup > menuitem:not([_moz-menuactive="true"]) {

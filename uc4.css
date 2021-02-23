@@ -445,8 +445,8 @@ treechildren::-moz-tree-row(selected, current, focus) {
 #TabsToolbar .tabbrowser-tab .tab-stack,
 #TabsToolbar .tabbrowser-tab .tab-background,
 #TabsToolbar .tabbrowser-tab .tab-content {
-    border-top-right-radius: 0px;
-    border-top-left-radius: 5px;
+    border-top-right-radius: 0px !important;
+    border-top-left-radius: 5px !important;
     overflow: hidden;
 }
 
@@ -455,20 +455,16 @@ treechildren::-moz-tree-row(selected, current, focus) {
 #TabsToolbar .tabbrowser-tab[selected]:not([multiselected]) .tab-stack,
 #TabsToolbar .tabbrowser-tab[selected]:not([multiselected]) .tab-background,
 #TabsToolbar .tabbrowser-tab[selected]:not([multiselected]) .tab-content {
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
+    border-top-right-radius: 5px !important;
+    border-top-left-radius: 5px !important;
     overflow: hidden;
-}
-
-#TabsToolbar .tab-loading-burst::before {
-    backface-visibility: hidden;
 }
 
 #TabsToolbar .tabbrowser-tab[selected][pinned][multiselected],
 #TabsToolbar .tabbrowser-tab[selected][pinned][multiselected] .tab-stack,
 #TabsToolbar .tabbrowser-tab[selected][pinned][multiselected] .tab-background {
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
+    border-top-right-radius: 5px !important;
+    border-top-left-radius: 5px !important;
 }
 
 #TabsToolbar .tabbrowser-tab[multiselected]:not([pinned]) .tab-stack,
@@ -476,9 +472,42 @@ treechildren::-moz-tree-row(selected, current, focus) {
     border-radius: 0 !important;
 }
 
+#TabsToolbar .tabbrowser-tab:not([selected]):hover,
+#TabsToolbar .tabbrowser-tab:not([selected]):hover .tab-stack,
+#TabsToolbar .tabbrowser-tab:not([selected]):hover .tab-background,
+#TabsToolbar .tabbrowser-tab:not([selected]):hover .tab-content {
+    border-top-right-radius: 5px !important;
+}
+
+#TabsToolbar .tabbrowser-tab[last-visible-tab]:not([justmoved]),
+#TabsToolbar .tabbrowser-tab[last-visible-tab]:not([justmoved]) .tab-stack,
+#TabsToolbar .tabbrowser-tab[last-visible-tab]:not([justmoved]) .tab-background,
+#TabsToolbar .tabbrowser-tab[last-visible-tab]:not([justmoved]) .tab-content,
+#TabsToolbar .tabbrowser-tab[last-visible-tab]:not([justmoved]):hover,
+#TabsToolbar .tabbrowser-tab[last-visible-tab]:not([justmoved]):hover .tab-stack,
+#TabsToolbar .tabbrowser-tab[last-visible-tab]:not([justmoved]):hover .tab-background,
+#TabsToolbar .tabbrowser-tab[last-visible-tab]:not([justmoved]):hover .tab-content {
+    border-top-right-radius: 0 !important;
+}
+
+#TabsToolbar .tabbrowser-tab[first-visible-tab]:not([justmoved]),
+#TabsToolbar .tabbrowser-tab[first-visible-tab]:not([justmoved]) .tab-stack,
+#TabsToolbar .tabbrowser-tab[first-visible-tab]:not([justmoved]) .tab-background,
+#TabsToolbar .tabbrowser-tab[first-visible-tab]:not([justmoved]) .tab-content,
+#TabsToolbar .tabbrowser-tab[first-visible-tab]:not([justmoved]):hover,
+#TabsToolbar .tabbrowser-tab[first-visible-tab]:not([justmoved]):hover .tab-stack,
+#TabsToolbar .tabbrowser-tab[first-visible-tab]:not([justmoved]):hover .tab-background,
+#TabsToolbar .tabbrowser-tab[first-visible-tab]:not([justmoved]):hover .tab-content {
+    border-top-left-radius: 0 !important;
+}
+
 #TabsToolbar .tabs-newtab-button {
     border-top-left-radius: var(--default_tab_border_roundness);
     border-top-right-radius: var(--default_tab_border_roundness);
+}
+
+#TabsToolbar .tab-loading-burst::before {
+    backface-visibility: hidden;
 }
 
 /* hide tab separators */
@@ -493,35 +522,6 @@ treechildren::-moz-tree-row(selected, current, focus) {
 .tabbrowser-tab::after,
 .tabbrowser-tab::before {
     border-left: none !important;
-}
-
-#TabsToolbar .tabbrowser-tab:not([selected]):hover,
-#TabsToolbar .tabbrowser-tab:not([selected]):hover .tab-stack,
-#TabsToolbar .tabbrowser-tab:not([selected]):hover .tab-background,
-#TabsToolbar .tabbrowser-tab:not([selected]):hover .tab-content {
-    border-top-right-radius: 5px;
-}
-
-#TabsToolbar .tabbrowser-tab[last-visible-tab],
-#TabsToolbar .tabbrowser-tab[last-visible-tab] .tab-stack,
-#TabsToolbar .tabbrowser-tab[last-visible-tab] .tab-background,
-#TabsToolbar .tabbrowser-tab[last-visible-tab] .tab-content,
-#TabsToolbar .tabbrowser-tab[last-visible-tab]:hover,
-#TabsToolbar .tabbrowser-tab[last-visible-tab]:hover .tab-stack,
-#TabsToolbar .tabbrowser-tab[last-visible-tab]:hover .tab-background,
-#TabsToolbar .tabbrowser-tab[last-visible-tab]:hover .tab-content {
-    border-top-right-radius: 0 !important;
-}
-
-#TabsToolbar .tabbrowser-tab[first-visible-tab],
-#TabsToolbar .tabbrowser-tab[first-visible-tab] .tab-stack,
-#TabsToolbar .tabbrowser-tab[first-visible-tab] .tab-background,
-#TabsToolbar .tabbrowser-tab[first-visible-tab] .tab-content,
-#TabsToolbar .tabbrowser-tab[first-visible-tab]:hover,
-#TabsToolbar .tabbrowser-tab[first-visible-tab]:hover .tab-stack,
-#TabsToolbar .tabbrowser-tab[first-visible-tab]:hover .tab-background,
-#TabsToolbar .tabbrowser-tab[first-visible-tab]:hover .tab-content {
-    border-top-left-radius: 0px !important;
 }
 
 tabbrowser toolbarbutton[class^="scrollbutton"],
@@ -759,19 +759,6 @@ tabbrowser toolbarbutton[class^="scrollbutton"],
 browser[type=content-primary],
 browser[type=content]>html {
     background: hsl(240, 4%, 10%) !important;
-}
-
-/* replace border to the left of new tab button with drop shadow */
-.tabbrowser-arrowscrollbox>.arrowscrollbox-overflow-start-indicator:not([collapsed]),
-.tabbrowser-arrowscrollbox>.arrowscrollbox-overflow-end-indicator:not([collapsed]) {
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.4) -10%, transparent 50%) !important;
-    background-size: 17px 100% !important;
-    background-position-y: 0px !important;
-    filter: brightness(0) !important;
-    border: none !important;
-    z-index: 2 !important;
-    mix-blend-mode: luminosity !important;
-    opacity: 0 !important;
 }
 
 /* get rid of drop shadow drawn on leftmost visible tab */

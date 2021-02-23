@@ -1378,7 +1378,7 @@ requires fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-statu
 }
 
 #TabsToolbar .tabbrowser-tab {
-    border-radius: 0 !important;
+/*     border-radius: 0 !important; */
     background-color: var(--lwt-accent-color) !important;
 }
 

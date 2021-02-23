@@ -42,6 +42,7 @@
 
     :root {
         --proton-tab-inline-padding: 0 !important;
+        --proton-shadow-blur-radius: 0 !important;
     }
 
     .tab-icon-sound-label {
@@ -57,7 +58,7 @@
 } */
 
     :root[proton] .tab-background,
-    :root[proton] .tabbrowser-tab {
+    :root[proton] .tabbrowser-tab:not([pinned]) {
         min-height: 0 !important;
         margin: 0 !important;
     }
