@@ -228,18 +228,27 @@ tooltip[default][page] {
     }
 }
 
-@-moz-document url(chrome://global/content/commonDialog.xhtml)
+@-moz-document url(chrome://global/content/commonDialog.xhtml),
+               url("chrome://mozapps/content/handling/permissionDialog.xhtml"),
+               url("chrome://mozapps/content/handling/appChooser.xhtml")
 {
     #commonDialog::part(content-box) {
         padding-block: 5px;
     }
 }
 
-.content-prompt-dialog .dialogFrame {
+:is(.content-prompt-dialog, .tab-prompt-dialog) .dialogFrame {
     background-color: hsla(240, 5.9%, 6.7%, 0.6) !important;
     background-image: url("texture/noise-512x512.png") !important;
     backdrop-filter: blur(5px) !important;
-    border-radius: 5px !important;
+}
+
+.tab-prompt-dialog :is(.dialogBox, .dialogFrame) {
+    border-radius: 0 0 5px 5px;
+}
+
+.content-prompt-dialog :is(.dialogBox, .dialogFrame) {
+    border-radius: 5px;
 }
 
 #fullscreen-warning {

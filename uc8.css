@@ -1201,54 +1201,180 @@ requires fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-statu
     margin-top: 0px !important;
 }
 
-/* app chooser dialog */
-.tab-prompt-dialog .dialogStack {
-    z-index: 1 !important;
+/* in-content dialogs */
+.tab-prompt-dialog.dialogStack {
+    z-index: 0 !important; /* to avoid dimming the sidebar and findbar */
 }
 
 .tab-prompt-dialog .dialogBox {
-    margin-top: 0px !important;
+    margin-top: 0px !important; /* tab-prompt-dialogs are anchored to the top of the browser content area.
+    this makes them look like they emerge from under the navbar. */
 }
 
-.tab-prompt-dialog .dialogFrame {
-    border-bottom-left-radius: 5px !important;
-    border-bottom-right-radius: 5px !important;
+.tab-prompt-dialog :is(.dialogBox, .dialogFrame) {
+    border-radius: 0 0 5px 5px;
 }
 
-/* in-content dialog (e.g. data entered in form, would you like to leave this page) */
-.content-prompt-dialog .dialogFrame {
-    border-radius: 5px !important;
+.content-prompt-dialog :is(.dialogBox, .dialogFrame) {
+    border-radius: 5px;
+}
+
+/* the resizer is on the right side for ltr languages, and on the left side for rtl languages. adjust the border radius accordingly */
+:is(.content-prompt-dialog, .tab-prompt-dialog) .dialogBox[resizable="true"]:is(:dir(ltr), :-moz-locale-dir(ltr)),
+:is(.content-prompt-dialog, .tab-prompt-dialog) .dialogBox[resizable="true"] .dialogFrame:is(:dir(ltr), :-moz-locale-dir(ltr)) {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 0;
+}
+
+:is(.content-prompt-dialog, .tab-prompt-dialog) .dialogBox[resizable="true"]:is(:dir(rtl), :-moz-locale-dir(rtl)),
+:is(.content-prompt-dialog, .tab-prompt-dialog) .dialogBox[resizable="true"] .dialogFrame:is(:dir(rtl), :-moz-locale-dir(rtl)) {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 5px;
+}
+
+/* blur backdrop filter */
+:is(.content-prompt-dialog, .tab-prompt-dialog) .dialogFrame {
+    background-color: hsla(240, 5.9%, 6.7%, 0.7) !important;
+    background-image: url("texture/noise-512x512.png") !important;
+    backdrop-filter: blur(5px) !important;
+}
+
+/* make the box shadow even, i hate offset drop shadows */
+:is(.content-prompt-dialog, .tab-prompt-dialog) .dialogBox {
+    box-shadow: 0 0 6px 0 rgba(0,0,0,0.1), 0 0 8px 2px rgba(0,0,0,0.1) !important;
 }
 
 /* center text in any dialog box */
 .dialog-content-box {
-    -moz-box-pack: center !important;
+    -moz-box-pack: center;
 }
 
-@-moz-document url("chrome://global/content/commonDialog.xhtml"),
-    url("chrome://mozapps/content/handling/permissionDialog.xhtml") {
-        :root {
-            --in-content-page-background: var(--arrowpanel-background) !important;
+@-moz-document url(chrome://global/content/commonDialog.xhtml),
+    url("chrome://mozapps/content/handling/permissionDialog.xhtml"),
+    url("chrome://mozapps/content/handling/appChooser.xhtml") {
+
+        #commonDialogWindow {
+            --in-content-page-background: transparent !important;
             --in-content-page-color: hsl(212.5, 42.9%, 89%) !important;
+            --in-content-box-background: hsla(232, 100%, 75%, 8%) !important;
+            --in-content-box-border-color: rgba(249, 249, 250, 0.1) !important;
+            --in-content-button-background: var(--arrowpanel-dimmed) !important;
+            --in-content-button-background-hover: var(--arrowpanel-dimmed-further) !important;
+            --in-content-button-background-active: var(--arrowpanel-dimmed-even-further) !important;
+            --in-content-item-selected: var(--purple-40) !important;
+            --in-content-border-highlight: var(--purple-40) !important;
+            --in-content-border-hover: rgba(249, 249, 250, 0.2) !important;
+            --in-content-border-focus: var(--purple-40) !important;
+            --in-content-border-active: var(--purple-40) !important;
+            --in-content-border-active-shadow: var(--purple-40-a30) !important;
+            --in-content-category-outline-focus: 1px solid transparent !important;
+            --in-content-link-color: var(--purple-35) !important;
+            --in-content-link-color-hover: var(--purple-30) !important;
+            --in-content-link-color-active: var(--purple-30) !important;
+            --in-content-primary-button-background: var(--purple-40) !important;
+            --in-content-primary-button-background-hover: var(--purple-35) !important;
+            --in-content-primary-button-background-active: var(--purple-30) !important;
         }
-        
+
+        #commonDialog::part(content-box) {
+            padding-block: 5px;
+        }
+
+        .dialog-button-box > button[dlgtype="accept"]:enabled,
+        .dialog-button-box > button[dlgtype="accept"]:not([disabled="true"]) {
+            background-color: var(--in-content-primary-button-background) !important;
+        }
+
+        .dialog-button-box > button[dlgtype="accept"]:enabled:hover,
+        .dialog-button-box > button[dlgtype="accept"]:not([disabled="true"]):hover {
+            background-color: var(--in-content-primary-button-background-hover) !important;
+        }
+
+        .dialog-button-box > button[dlgtype="accept"]:enabled:hover:active,
+        .dialog-button-box > button[dlgtype="accept"]:not([disabled="true"]):hover:active,
+        .dialog-button-box > button[dlgtype="accept"][open],
+        .dialog-button-box > button[dlgtype="accept"][open]:hover {
+            background-color: var(--in-content-primary-button-background-active) !important;
+        }
+
         dialog input:-moz-focusring,
         button:-moz-focusring {
             box-shadow: none !important;
         }
 
-        dialog input[type="checkbox"]:checked {
+        checkbox[checked] > .checkbox-check,
+        input[type="checkbox"]:checked {
+            background-color: var(--purple-40) !important;
+        }
+
+        checkbox:not([disabled="true"])[checked]:hover > .checkbox-check,
+        input[type="checkbox"]:enabled:checked:hover {
+            background-color: var(--purple-35) !important;
+        }
+
+        checkbox:not([disabled="true"])[checked]:hover:active > .checkbox-check,
+        input[type="checkbox"]:enabled:checked:hover:active {
             background-color: var(--purple-30) !important;
         }
 
-        dialog input[type="checkbox"]:hover {
-            border-color: var(--arrowpanel-dimmed-further) !important;
+        richlistbox {
+            background-color: var(--in-content-box-background-dim) !important;
         }
 
-        dialog richlistitem[selected="true"] {
-            background-color: var(--arrowpanel-dimmed-further) !important;
+        richlistitem[selected="true"] {
+            background-color: var(--arrowpanel-dimmed) !important;
             color: var(--in-content-page-color) !important;
         }
+
+        richlistitem > button[label] {
+            background-color: var(--in-content-primary-button-background) !important;
+        }
+
+        richlistitem:not([disabled="true"]) > button[label]:enabled:hover,
+        richlistitem:not([disabled="true"]) > button[label]:not([disabled="true"]):hover {
+            background-color: var(--in-content-primary-button-background-hover) !important;
+        }
+
+        richlistitem:not([disabled="true"]) > button[label]:enabled:hover:active,
+        richlistitem:not([disabled="true"]) > button[label]:not([disabled="true"]):hover:active,
+        richlistitem > button[label][open],
+        richlistitem > button[label][open]:hover {
+            background-color: var(--in-content-primary-button-background-active) !important;
+        }
+
+        richlistitem[selected="true"] > button[label] {
+            border-color: var(--in-content-box-border-color) !important;
+        }
+
+}
+
+@-moz-document url("chrome://mozapps/content/handling/permissionDialog.xhtml"),
+    url("chrome://mozapps/content/handling/appChooser.xhtml") {
+
+        :root {
+            --in-content-page-background: transparent !important;
+            --in-content-page-color: hsl(212.5, 42.9%, 89%) !important;
+            --in-content-box-background: hsla(232, 100%, 75%, 8%) !important;
+            --in-content-box-background-dim: hsla(240, 100%, 70%, 3%) !important;
+            --in-content-box-border-color: hsla(232, 100%, 85%, .2) !important;
+            --in-content-button-background: var(--arrowpanel-dimmed) !important;
+            --in-content-button-background-hover: var(--arrowpanel-dimmed-further) !important;
+            --in-content-button-background-active: var(--arrowpanel-dimmed-even-further) !important;
+            --in-content-item-selected: var(--purple-40) !important;
+            --in-content-border-highlight: var(--purple-40) !important;
+            --in-content-border-hover: rgba(249, 249, 250, 0.2) !important;
+            --in-content-border-focus: var(--purple-40) !important;
+            --in-content-border-active: var(--purple-40) !important;
+            --in-content-border-active-shadow: var(--purple-40-a30) !important;
+            --in-content-category-outline-focus: 1px solid transparent !important;
+            --in-content-link-color: var(--purple-35) !important;
+            --in-content-link-color-hover: var(--purple-30) !important;
+            --in-content-link-color-active: var(--purple-30) !important;
+            --in-content-primary-button-background: var(--purple-40) !important;
+            --in-content-primary-button-background-hover: var(--purple-35) !important;
+            --in-content-primary-button-background-active: var(--purple-30) !important;
+        }
+
 }
 
 #TabsToolbar .tabbrowser-tab {
