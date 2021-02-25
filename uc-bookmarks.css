@@ -1,0 +1,401 @@
+#main-window #editBookmarkPanel input:focus {
+    background-color: var(--ui-textbox-focus-bgcolor) !important;
+}
+
+#main-window #editBMPanel_tagsField,
+#main-window #editBMPanel_namePicker,
+#editBookmarkPanel input {
+    -moz-appearance: none !important;
+    user-select: text !important;
+    -moz-user-select: text !important;
+    background-color: var(--ui-textbox-bgcolor) !important;
+    color: #fff !important;
+    border: none !important;
+    padding: 2px;
+    padding-inline-start: 4px;
+    border-radius: 3px !important;
+}
+
+/* 'add bookmark' popup menu formatting */
+#editBookmarkPanel {
+    min-width: 270px !important;
+}
+
+#editBookmarkPanel menulist {
+    -moz-appearance: none !important;
+    background-color: var(--ui-textbox-bgcolor) !important;
+    line-height: normal;
+    padding-block: 2px;
+    padding-inline-start: 4px;
+    padding-right: 2px;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 3px !important;
+}
+
+#editBookmarkPanel menulist[open="true"] {
+    border-bottom-right-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
+
+#editBookmarkPanel menulist[open="true"] menupopup {
+    border-top-right-radius: 0 !important;
+    border-top-left-radius: 0 !important;
+}
+
+#main-window #editBMPanel_folderTree {
+    min-width: unset !important;
+    max-width: 27em !important;
+}
+
+#editBookmarkPanel tree {
+    -moz-appearance: none !important;
+    background-color: var(--ui-textbox-bgcolor) !important;
+    line-height: normal;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 3px !important;
+    overflow: hidden !important;
+}
+
+#editBookmarkPanel richlistbox {
+    border-radius: 3px !important;
+    overflow: hidden !important;
+}
+
+#editBookmarkPanel treechildren::-moz-tree-row(hover),
+#editBookmarkPanel treechildren::-moz-tree-cell(hover) {
+    -moz-appearance: none !important;
+    background-color: var(--ebmp-hover-bgcolor) !important;
+    line-height: normal;
+    color: #fff !important;
+    border: none !important;
+}
+
+#editBookmarkPanel treechildren::-moz-tree-row(selected),
+#editBookmarkPanel treechildren::-moz-tree-cell(selected) {
+    -moz-appearance: none !important;
+    background-color: var(--ebmp-focus-bgcolor) !important;
+    line-height: normal;
+    color: #fff !important;
+    border: none !important;
+    outline: none !important;
+}
+
+#editBookmarkPanel treechildren::-moz-tree-row(selected):hover,
+#editBookmarkPanel treechildren::-moz-tree-cell(selected):hover {
+    -moz-appearance: none !important;
+    background-color: var(--ebmp-focus-bgcolor) !important;
+    line-height: normal;
+    color: #fff !important;
+    border: none !important;
+}
+
+/* #editBookmarkPanel treechildren::-moz-tree-row(hover)(selected),
+#editBookmarkPanel treechildren::-moz-tree-cell(hover)(selected) {
+    -moz-appearance: none !important;
+    background-color: var(--ebmp-focus-bgcolor) !important;
+    line-height: normal;
+    color: #fff !important;
+    border: none !important;
+} */
+
+#editBookmarkPanel treechildren::-moz-tree-cell-text(selected),
+#editBookmarkPanel treechildren::-moz-tree-image(selected),
+#editBookmarkPanel treechildren::-moz-tree-twisty(selected) {
+    -moz-appearance: none !important;
+    background-color: var(--ebmp-focus-bgcolor) !important;
+    line-height: normal;
+    color: #fff !important;
+    border: none !important;
+    outline: none !important;
+}
+
+#editBookmarkPanel menuitem,
+#editBookmarkPanel menu {
+    -moz-appearance: none !important;
+    background-color: hsl(232, 24%, 32%) !important;
+    line-height: normal !important;
+    padding-bottom: 3px;
+    padding-inline-start: 2px !important;
+    padding-left: 0px !important;
+    padding-right: 2px;
+    padding-top: 2px;
+    color: #fff !important;
+    border: none !important;
+}
+
+#editBookmarkPanel menupopup {
+    padding: 0px !important;
+    -moz-appearance: none !important;
+    background-color: hsl(232, 24%, 32%) !important;
+    line-height: normal !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 3px !important;
+    overflow: hidden !important;
+}
+
+#editBookmarkPanelDropMarker {
+    -moz-appearance: none !important;
+    list-style-image: url("chrome://devtools/skin/images/select-arrow.svg") !important;
+    margin-bottom: -2.5px !important;
+    border-radius: 3px !important;
+}
+
+#editBookmarkPanel #editBookmarkPanelContent button {
+    -moz-appearance: none !important;
+    background-color: var(--ui-textbox-bgcolor) !important;
+    line-height: normal;
+    padding-bottom: 2px;
+    padding-left: 2.5px;
+    padding-right: 2px;
+    padding-top: 3px;
+    margin-left: 4px !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 3px !important;
+}
+
+#editBookmarkPanel #editBookmarkPanelContent button:hover {
+    -moz-appearance: none !important;
+    background-color: var(--ebmp-hover-bgcolor) !important;
+}
+
+#editBookmarkPanel #editBookmarkPanelContent button:active {
+    -moz-appearance: none !important;
+    background-color: var(--ebmp-focus-bgcolor) !important;
+}
+
+#editBookmarkPanelBottomButtons:hover,
+#editBookmarkPanelBottomButtons:active {
+    background-color: hsl(233, 24%, 8%) !important;
+}
+
+#editBookmarkPanelDoneButton {
+    background-color: hsl(251, 59%, 44%) !important;
+}
+
+#editBookmarkPanelDoneButton:hover {
+    background-color: hsl(248, 80%, 56%) !important;
+}
+
+#editBookmarkPanelDoneButton:active {
+    background-color: hsl(247, 80%, 58%) !important;
+}
+
+#editBookmarkPanelRemoveButton {
+    background-color: hsl(233, 28%, 24%) !important;
+}
+
+#editBookmarkPanelRemoveButton:hover {
+    background-color: hsl(234, 30%, 28%) !important;
+}
+
+#editBookmarkPanelRemoveButton:active {
+    background-color: hsl(234, 30%, 30%) !important;
+}
+
+#editBookmarkPanel .expander-up,
+#editBookmarkPanel .expander-down {
+    -moz-appearance: none !important;
+    background-color: var(--ui-textbox-bgcolor) !important;
+    line-height: normal !important;
+    padding: 2px !important;
+    margin-left: 0px !important;
+    color: #fff !important;
+    border: none !important;
+    transform: none !important;
+}
+
+#editBookmarkPanel .expander-down image {
+    list-style-image: url("chrome://devtools/skin/images/arrowhead-down.svg") !important;
+    width: 16px !important;
+}
+
+#editBookmarkPanel .expander-up image {
+    list-style-image: url("chrome://devtools/skin/images/arrowhead-up.svg") !important;
+    width: 16px !important;
+}
+
+#editBookmarkPanel menuitem,
+#editBookmarkPanel menu {
+    padding-left: 4px !important;
+    padding-block: 2px !important;
+}
+
+#editBookmarkPanel menuitem:hover,
+#editBookmarkPanel menu:hover,
+#editBookmarkPanel menu[_moz-menuactive="true"],
+#editBookmarkPanel menuitem[_moz-menuactive="true"] {
+    -moz-appearance: none !important;
+    background-color: hsl(232, 21%, 40%) !important;
+    color: #fff !important;
+    border: none !important;
+}
+
+#editBookmarkPanel menulist[_moz-menuactive="true"] {
+    -moz-appearance: none !important;
+    background-color: hsl(232, 21%, 40%) !important;
+}
+
+#editBookmarkPanel menuseparator {
+    display: none !important;
+}
+
+#editBookmarkPanel richlistbox,
+#editBookmarkPanel richlistitem {
+    -moz-appearance: none !important;
+    -moz-user-select: text !important;
+    background-color: var(--ui-textbox-bgcolor) !important;
+    color: #fff !important;
+}
+
+#editBookmarkPanel richlistitem {
+    padding-inline-start: 2px !important;
+    padding-top: 1px !important;
+}
+
+#editBookmarkPanel richlistitem image {
+    -moz-appearance: none !important;
+    background-color: transparent !important;
+    border: none !important;
+    -moz-context-properties: fill, fill-opacity !important;
+    fill: currentColor !important;
+    width: 12px !important;
+    padding: 1px !important;
+    opacity: 0.8 !important;
+    list-style-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNNSAyYy0xLjY1NCAwLTMgMS4zNDYtMyAzdjE0YzAgMS42NTQgMS4zNDYgMyAzIDNoMTRjMS42NTQgMCAzLTEuMzQ2IDMtM3YtMTRjMC0xLjY1NC0xLjM0Ni0zLTMtM2gtMTR6bTE5IDN2MTRjMCAyLjc2MS0yLjIzOCA1LTUgNWgtMTRjLTIuNzYyIDAtNS0yLjIzOS01LTV2LTE0YzAtMi43NjEgMi4yMzgtNSA1LTVoMTRjMi43NjIgMCA1IDIuMjM5IDUgNXoiIGZpbGw9ImNvbnRleHQtZmlsbCIgZmlsbC1vcGFjaXR5PSJjb250ZXh0LWZpbGwtb3BhY2l0eSIvPjwvc3ZnPg==");
+}
+
+#editBookmarkPanel richlistitem[checked="true"] image {
+    -moz-appearance: none !important;
+    background-color: transparent !important;
+    border: none !important;
+    width: 12px !important;
+    padding: 1px !important;
+    list-style-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTAuMDQxIDE3bC00LjUtNC4zMTkgMS4zOTUtMS40MzUgMy4wOCAyLjkzNyA3LjAyMS03LjE4MyAxLjQyMiAxLjQwOS04LjQxOCA4LjU5MXptLTUuMDQxLTE1Yy0xLjY1NCAwLTMgMS4zNDYtMyAzdjE0YzAgMS42NTQgMS4zNDYgMyAzIDNoMTRjMS42NTQgMCAzLTEuMzQ2IDMtM3YtMTRjMC0xLjY1NC0xLjM0Ni0zLTMtM2gtMTR6bTE5IDN2MTRjMCAyLjc2MS0yLjIzOCA1LTUgNWgtMTRjLTIuNzYyIDAtNS0yLjIzOS01LTV2LTE0YzAtMi43NjEgMi4yMzgtNSA1LTVoMTRjMi43NjIgMCA1IDIuMjM5IDUgNXoiIGZpbGw9ImNvbnRleHQtZmlsbCIgZmlsbC1vcGFjaXR5PSJjb250ZXh0LWZpbGwtb3BhY2l0eSIvPjwvc3ZnPg==") !important;
+}
+
+#editBookmarkPanel richlistitem:hover>image {
+    opacity: 1 !important;
+}
+
+#editBookmarkPanel .checkbox-check {
+    -moz-appearance: none !important;
+    background-color: transparent !important;
+    border: none !important;
+    -moz-context-properties: fill, fill-opacity !important;
+    fill: currentColor !important;
+    width: 14px !important;
+    padding: 1px !important;
+    opacity: 0.8 !important;
+    list-style-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNNSAyYy0xLjY1NCAwLTMgMS4zNDYtMyAzdjE0YzAgMS42NTQgMS4zNDYgMyAzIDNoMTRjMS42NTQgMCAzLTEuMzQ2IDMtM3YtMTRjMC0xLjY1NC0xLjM0Ni0zLTMtM2gtMTR6bTE5IDN2MTRjMCAyLjc2MS0yLjIzOCA1LTUgNWgtMTRjLTIuNzYyIDAtNS0yLjIzOS01LTV2LTE0YzAtMi43NjEgMi4yMzgtNSA1LTVoMTRjMi43NjIgMCA1IDIuMjM5IDUgNXoiIGZpbGw9ImNvbnRleHQtZmlsbCIgZmlsbC1vcGFjaXR5PSJjb250ZXh0LWZpbGwtb3BhY2l0eSIvPjwvc3ZnPg==") !important;
+}
+
+#editBookmarkPanel checkbox:hover>.checkbox-check {
+    opacity: 1 !important;
+}
+
+#editBookmarkPanel .checkbox-check[checked="true"] {
+    -moz-appearance: none !important;
+    background-color: transparent !important;
+    border: none !important;
+    width: 14px !important;
+    list-style-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTAuMDQxIDE3bC00LjUtNC4zMTkgMS4zOTUtMS40MzUgMy4wOCAyLjkzNyA3LjAyMS03LjE4MyAxLjQyMiAxLjQwOS04LjQxOCA4LjU5MXptLTUuMDQxLTE1Yy0xLjY1NCAwLTMgMS4zNDYtMyAzdjE0YzAgMS42NTQgMS4zNDYgMyAzIDNoMTRjMS42NTQgMCAzLTEuMzQ2IDMtM3YtMTRjMC0xLjY1NC0xLjM0Ni0zLTMtM2gtMTR6bTE5IDN2MTRjMCAyLjc2MS0yLjIzOCA1LTUgNWgtMTRjLTIuNzYyIDAtNS0yLjIzOS01LTV2LTE0YzAtMi43NjEgMi4yMzgtNSA1LTVoMTRjMi43NjIgMCA1IDIuMjM5IDUgNXoiIGZpbGw9ImNvbnRleHQtZmlsbCIgZmlsbC1vcGFjaXR5PSJjb250ZXh0LWZpbGwtb3BhY2l0eSIvPjwvc3ZnPg==") !important;
+}
+
+#editBookmarkPanel richlistitem:hover,
+#editBookmarkPanel richlistitem[_moz-menuactive="true"] {
+    background-color: hsl(232, 21%, 40%) !important;
+}
+
+#editBookmarkPanelImage,
+#editBookmarkPanel html {
+    height: 140px !important;
+}
+
+#editBookmarkPanelFavicon[src] {
+	box-sizing: content-box;
+	width: 32px;
+	height: 32px;
+	padding: 5px;
+	background: hsla(232, 24%, 26%, 50%) !important;
+	box-shadow: 0 0 2px rgba(0,0,0,.1), 0 0 5px rgba(0,0,0,.05) !important;
+	border-radius: 6px;
+	margin-top: 10px;
+	margin-inline-start: 10px;
+	margin-bottom: -52px;
+}
+
+/* bookmarks toolbar button's popup */
+@-moz-document url(chrome://browser/content/browser.xhtml) {
+    
+    link[href="chrome://global/skin/arrowscrollbox.css"] ~ :is(#scrollbutton-up, #scrollbutton-down) {
+        visibility: collapse;
+    }
+    
+    .BMB-special-innerbox {
+        border: none !important;
+    }
+    
+    #BMB_bookmarksToolbarPopup {
+        margin-inline-start: 0px !important;
+    }
+    
+    .BMB-special-innerbox > .menupopup-arrowscrollbox {
+        padding-bottom: 0 !important;
+    }
+    
+    #BMB_bookmarksToolbarPopup menuseparator {
+        display: none !important;
+    }
+    
+    .openintabs-menuitem {
+        display: none !important;
+    }
+    
+    .BMBsmallContentBox {
+        margin-top: -1px !important;
+    }
+
+}
+
+/* dragging items in places menus */
+:-moz-any(.BMB-special-innerbox, .BMBsmallContentBox) image[part="drop-indicator"] {
+    list-style-image: none;
+    height: 2px;
+    margin-inline-end: -4em;
+    background-color: var(--toolbarbutton-icon-fill-attention) !important;
+    background-image: linear-gradient(to right, hsla(224, 100%, 71%, 100%) 0%, hsla(224, 100%, 71%, 10%) 40%, hsla(224, 100%, 71%, 1%) 70%, transparent 100%) !important;
+    background-color: transparent !important;
+    width: 270px !important;
+    margin-right: -270px !important;
+    height: 1px !important;
+    pointer-events: none;
+}
+
+.BMB-special-innerbox {
+    border-left: none !important;
+    border-right: none !important;
+}
+
+treechildren::-moz-tree-drop-feedback {
+    background-image: linear-gradient(to right, hsla(224, 100%, 71%, 100%) 0%, hsla(224, 100%, 71%, 10%) 40%, hsla(224, 100%, 71%, 1%) 70%, transparent 100%) !important;
+    background-color: transparent !important;
+    width: 270px !important;
+    height: 1px !important;
+    margin-inline-start: -8px !important;
+}
+
+#BMB_bookmarksPopup {
+    margin-top: -6px !important;
+}
+
+@supports (-moz-bool-pref("browser.proton.enabled")) {
+
+    #BMB_bookmarksPopup menupopup[placespopup="true"] {
+        padding-top: 0 !important;
+    }
+
+}

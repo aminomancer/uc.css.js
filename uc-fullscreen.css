@@ -1,0 +1,105 @@
+#fullscr-toggler {
+    pointer-events: none;
+    display: none !important;
+}
+
+/* disable autohide menu */
+#autohide-context {
+    display: none !important;
+}
+
+:root:not([sizemode="normal"]) :-moz-any(#TabsToolbar, #nav-bar, #PersonalToolbar) {
+    -moz-window-dragging: no-drag !important;
+}
+
+:root[inFullscreen]:not([customizing]) #navigator-toolbox {
+    margin-top: calc(-40.6px - var(--tab-min-height)) !important;
+    transition: all .2s ease-in-out 0s !important;
+    transition-delay: 0s !important;
+    opacity: 0 !important;
+    z-index: 2147483647 !important;
+    -webkit-transform-style: preserve-3d !important;
+    -webkit-backface-visibility: hidden !important;
+    -moz-transform-style: preserve-3d !important;
+    -moz-backface-visibility: hidden !important;
+    transform-style: preserve-3d !important;
+    backface-visibility: hidden !important;
+    transition-timing-function: cubic-bezier !important;
+}
+
+:root[inFullscreen]:not([customizing]) #navigator-toolbox::after {
+    height: 2px !important;
+}
+
+/* hides the nav-bar in fullscreen, but reveals it when hovering or focusing the nav-bar, or when nav-bar related popups are opened.
+requires fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-status. */
+:root[customizing] #navigator-toolbox,
+:root[inFullscreen]:not([customizing])>body>box:is(:focus-within, :hover, [popup-status], [urlbar-status]) #navigator-toolbox {
+    margin-top: 0 !important;
+    transition-delay: 0s !important;
+    transition: all .2s ease-in-out 0s !important;
+    opacity: 1 !important;
+    transition-timing-function: cubic-bezier !important;
+}
+
+:root[inFullscreen] #navigator-toolbox {
+    position: fixed !important;
+    display: block;
+    height: 75.5px !important;
+}
+
+:root[inFullscreen]:not([customizing]) .browserContainer>findbar {
+    top: 0px !important;
+}
+
+:root[sizemode="maximized"]:not([customizing]) .browserContainer>findbar {
+    top: 70px !important;
+    padding-top: 15px !important;
+}
+
+:root[inFullscreen]:not([customizing]) #browser #sidebar-box {
+    top: 0 !important;
+    transition: margin-top .2s ease-in-out 0s !important;
+    transition-delay: 0s !important;
+    transform-style: preserve-3d !important;
+    backface-visibility: hidden !important;
+    -webkit-transform-style: preserve-3d !important;
+    -webkit-backface-visibility: hidden !important;
+    -moz-transform-style: preserve-3d !important;
+    -moz-backface-visibility: hidden !important;
+    transform-style: preserve-3d !important;
+    backface-visibility: hidden !important;
+}
+
+:root[inFullscreen]:not([customizing]) #browser findbar {
+    padding-top: 73px !important;
+    margin-top: -71px !important;
+}
+
+:root[inFullscreen]:not([customizing]) #browser findbar[hidden] {
+    margin-top: -96px !important;
+}
+
+:root[inFullscreen]:not([customizing])>body>box:is(:focus-within, :hover, [popup-status], [urlbar-status]) ~ #browser findbar {
+    margin-top: 4.4px !important;
+}
+
+:root[inFullscreen]:not([customizing])>body>box:is(:focus-within, :hover, [popup-status], [urlbar-status]) ~ #browser findbar[hidden] {
+    margin-top: -21px !important;
+}
+
+.tabbrowser-tab:hover:not([selected]) .tab-label-container {
+    opacity: 1 !important;
+}
+
+:root[customizing][inFullscreen] #customization-container {
+    margin-top: 74px !important;
+}
+
+/* DOM fullscreen, e.g. hitting the fullscreen button on youtube */
+:root[inDOMFullscreen] #navigator-toolbox,
+:root[inDOMFullscreen] #fullscr-toggler,
+:root[inDOMFullscreen] #sidebar-box,
+:root[inDOMFullscreen] #sidebar-splitter {
+    visibility: visible !important;
+}

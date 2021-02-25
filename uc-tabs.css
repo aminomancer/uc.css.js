@@ -1,0 +1,621 @@
+.tabbrowser-tab[fadein] {
+    max-width: 200vw !important;
+}
+
+.tabbrowser-tab:not([selected]):hover .tab-background {
+    background: var(--tab-hover) !important;
+}
+
+.tabbrowser-tab:not([selected])[pinned]:hover .tab-background {
+    background: var(--tab-pinned-hover) !important;
+}
+
+.tabbrowser-tab:not([selected]):not(:hover):not([pinned]) .tab-background {
+    background: var(--lwt-accent-color) !important;
+    z-index: -1 !important;
+}
+
+.tabbrowser-tab:not([selected])[pinned] .tab-background {
+    background: var(--tab-pinned) !important;
+}
+
+.tabbrowser-tab[pinned] .tab-icon-overlay {
+    display: none !important;
+    pointer-events: none !important;
+}
+
+.tabbrowser-tab {
+    box-shadow: -6px 0px 9px -3px hsla(0, 0%, 0%, 0.25);
+}
+
+.tabbrowser-tab[selected]:not([pinned]) {
+    box-shadow: 0px 0px 11px 0px hsla(0, 0%, 0%, 0.35) !important;
+}
+
+.tabbrowser-tab[multiselected]:not([selected], [pinned], :hover) .tab-background,
+.tabbrowser-tab[multiselected]:not([selected], [pinned], :hover) .tab-background-inner {
+    background: var(--tab-multi) !important;
+}
+
+.tabbrowser-tab[multiselected]:not([selected], [pinned]):hover .tab-background {
+    background: var(--tab-multi-hover) !important;
+}
+
+.tab-background[multiselected="true"]:not([selected="true"]) > .tab-background-inner {
+    background: initial !important;
+    opacity: initial !important;
+}
+
+.tabbrowser-tab[multiselected="true"] {
+    box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.35), 0px 0px 25px 3px rgba(0, 0, 0, 0.2) !important;
+}
+
+.tabbrowser-tab:not([selected]):not([multiselected]):hover,
+.tabbrowser-tab[selected][pinned] {
+    box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.35), 0px 0px 25px 3px rgba(0, 0, 0, 0.2) !important;
+}
+
+.tabbrowser-tab:not([pinned="true"])[multiselected="true"] {
+    position: relative !important;
+}
+
+.tabbrowser-tab[multiselected="true"]:hover {
+    z-index: 4 !important;
+}
+
+.tabbrowser-tab[usercontextid] > .tab-stack > .tab-background > .tab-bottom-line {
+    background: linear-gradient(
+        to right,
+        transparent 0%,
+        var(--identity-tab-color) 45%,
+        var(--identity-tab-color) 55%,
+        transparent 100%
+    ) !important;
+    height: 1px !important;
+    opacity: 0.5 !important;
+    margin-bottom: 0 !important;
+}
+
+.tab-label[attention]:not([selected="true"]) {
+    font-weight: unset !important;
+}
+
+.tabbrowser-tab:is([image], [pinned]) > .tab-stack > .tab-content[attention]:not([selected="true"]),
+.tabbrowser-tab > .tab-stack > .tab-content[pinned][titlechanged]:not([selected="true"]) {
+    background-image: unset !important;
+    background-position: unset !important;
+    background-repeat: unset !important;
+}
+
+/* dim discarded tabs */
+.tabbrowser-tab[pending] .tab-content .tab-icon-image {
+    opacity: 0.5;
+}
+
+.tabbrowser-tab[pending] .tab-content .tab-label {
+    opacity: 0.6;
+}
+
+.tabbrowser-tab[pending][pinned]:hover .tab-content .tab-icon-image {
+    opacity: 0.8;
+}
+
+.tabbrowser-tab[pending]:not([pinned]):hover .tab-content .tab-label {
+    opacity: 0.8 !important;
+}
+
+.tab-line {
+    display: none !important;
+}
+
+.tab-line:not([selected="true"]):not([multiselected]) {
+    display: none !important;
+}
+
+/* tab top border roundness */
+#TabsToolbar .tabbrowser-tab,
+#TabsToolbar .tabbrowser-tab .tab-stack,
+#TabsToolbar .tabbrowser-tab .tab-background,
+#TabsToolbar .tabbrowser-tab .tab-content {
+    border-top-right-radius: 0px !important;
+    border-top-left-radius: 5px !important;
+    overflow: hidden;
+}
+
+/* selected tab top border roundness */
+#TabsToolbar .tabbrowser-tab[selected]:not([multiselected]),
+#TabsToolbar .tabbrowser-tab[selected]:not([multiselected]) .tab-stack,
+#TabsToolbar .tabbrowser-tab[selected]:not([multiselected]) .tab-background,
+#TabsToolbar .tabbrowser-tab[selected]:not([multiselected]) .tab-content {
+    border-top-right-radius: 5px !important;
+    border-top-left-radius: 5px !important;
+    overflow: hidden;
+}
+
+#TabsToolbar .tabbrowser-tab[selected][pinned][multiselected],
+#TabsToolbar .tabbrowser-tab[selected][pinned][multiselected] .tab-stack,
+#TabsToolbar .tabbrowser-tab[selected][pinned][multiselected] .tab-background {
+    border-top-right-radius: 5px !important;
+    border-top-left-radius: 5px !important;
+}
+
+#TabsToolbar .tabbrowser-tab[multiselected]:not([pinned]) .tab-stack,
+#TabsToolbar .tabbrowser-tab[multiselected]:not([pinned]) .tab-background {
+    border-radius: 0 !important;
+}
+
+#TabsToolbar .tabbrowser-tab:not([selected]):hover,
+#TabsToolbar .tabbrowser-tab:not([selected]):hover .tab-stack,
+#TabsToolbar .tabbrowser-tab:not([selected]):hover .tab-background,
+#TabsToolbar .tabbrowser-tab:not([selected]):hover .tab-content {
+    border-top-right-radius: 5px !important;
+}
+
+#TabsToolbar .tabbrowser-tab[last-visible-tab]:not([justmoved]),
+#TabsToolbar .tabbrowser-tab[last-visible-tab]:not([justmoved]) .tab-stack,
+#TabsToolbar .tabbrowser-tab[last-visible-tab]:not([justmoved]) .tab-background,
+#TabsToolbar .tabbrowser-tab[last-visible-tab]:not([justmoved]) .tab-content,
+#TabsToolbar .tabbrowser-tab[last-visible-tab]:not([justmoved]):hover,
+#TabsToolbar .tabbrowser-tab[last-visible-tab]:not([justmoved]):hover .tab-stack,
+#TabsToolbar .tabbrowser-tab[last-visible-tab]:not([justmoved]):hover .tab-background,
+#TabsToolbar .tabbrowser-tab[last-visible-tab]:not([justmoved]):hover .tab-content {
+    border-top-right-radius: 0 !important;
+}
+
+#TabsToolbar .tabbrowser-tab[first-visible-tab]:not([justmoved]),
+#TabsToolbar .tabbrowser-tab[first-visible-tab]:not([justmoved]) .tab-stack,
+#TabsToolbar .tabbrowser-tab[first-visible-tab]:not([justmoved]) .tab-background,
+#TabsToolbar .tabbrowser-tab[first-visible-tab]:not([justmoved]) .tab-content,
+#TabsToolbar .tabbrowser-tab[first-visible-tab]:not([justmoved]):hover,
+#TabsToolbar .tabbrowser-tab[first-visible-tab]:not([justmoved]):hover .tab-stack,
+#TabsToolbar .tabbrowser-tab[first-visible-tab]:not([justmoved]):hover .tab-background,
+#TabsToolbar .tabbrowser-tab[first-visible-tab]:not([justmoved]):hover .tab-content {
+    border-top-left-radius: 0 !important;
+}
+
+#TabsToolbar .tabs-newtab-button {
+    border-top-left-radius: var(--default_tab_border_roundness);
+    border-top-right-radius: var(--default_tab_border_roundness);
+}
+
+#TabsToolbar .tab-loading-burst::before {
+    backface-visibility: hidden;
+}
+
+.tabbrowser-tab[selected],
+.tabbrowser-tab[pinned][selected] {
+    z-index: 5 !important;
+}
+
+.tabbrowser-tab:not([selected]):not([pinned]):hover {
+    z-index: 3 !important;
+    position: relative !important;
+}
+
+.tabbrowser-tab:not([selected])[multiselected="true"] {
+    z-index: 3 !important;
+}
+
+.tabbrowser-tab[pinned] {
+    z-index: 3 !important;
+    box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.35), 0px 0px 25px 3px rgba(0, 0, 0, 0.2) !important;
+}
+
+.tabbrowser-tab[pinned]:hover {
+    z-index: 4 !important;
+}
+
+#tabbrowser-tabs[positionpinnedtabs]
+    > #tabbrowser-arrowscrollbox
+    > .tabbrowser-tab[pinned]
+    > .tab-stack {
+    border-inline: none !important;
+}
+
+#tabbrowser-tabs[positionpinnedtabs] .tabbrowser-tab[pinned] .tab-content {
+    min-width: 40px !important;
+    max-width: 40px !important;
+    margin-left: 0 !important;
+}
+
+#tabbrowser-tabs[positionpinnedtabs]
+    > .tabbrowser-arrowscrollbox
+    > .tabbrowser-tab[pinned]
+    > .tab-stack {
+    border: none !important;
+}
+
+#tabbrowser-tabs[positionpinnedtabs] .tabbrowser-tab[pinned] .tab-label-container {
+    visibility: collapse !important;
+}
+
+.tab-close-button,
+.tab-icon-sound:not([pictureinpicture]) {
+    opacity: 0 !important;
+    fill: white !important;
+    fill-opacity: 0 !important;
+    border-radius: 50% !important;
+}
+
+.tab-close-button:hover {
+    opacity: 1 !important;
+}
+
+.tab-icon-sound[soundplaying],
+.tab-icon-sound[muted] {
+    width: 16px !important;
+    height: 16px !important;
+    padding: 2px 3px 2px 2px !important;
+}
+
+.tab-icon-sound {
+    margin-top: 1px !important;
+    list-style-image: url(chrome://browser/skin/tabbrowser/tab-audio-playing.svg) !important;
+    -moz-context-properties: fill !important;
+    -moz-box-ordinal-group: 2 !important;
+    fill: currentColor !important;
+}
+
+.tab-icon-sound[muted] {
+    list-style-image: url(chrome://browser/skin/tabbrowser/tab-audio-muted.svg) !important;
+}
+
+.tab-icon-sound[activemedia-blocked],
+.tab-icon-sound[activemedia-blocked]:hover {
+    width: 16px !important;
+    height: 16px !important;
+    padding: 2.5px 0px 2.5px 2px !important;
+    list-style-image: url(chrome://global/skin/media/playButton.svg) !important;
+}
+
+.tab-icon-sound:hover,
+.tab-close-button:hover {
+    background-color: var(--arrowpanel-dimmed) !important;
+    opacity: 1 !important;
+}
+
+.tabbrowser-tab:hover .tab-icon-sound[pictureinpicture="true"]:hover,
+.tabbrowser-tab:hover .tab-icon-sound[pictureinpicture="true"]:hover:active {
+    opacity: 0.6 !important;
+}
+
+.tabbrowser-tab:hover .tab-icon-sound:not(:hover),
+.tabbrowser-tab:hover .tab-close-button:not(:hover) {
+    opacity: 0.6 !important;
+}
+
+.tabbrowser-tab:hover .tab-icon-sound:hover:active,
+.tabbrowser-tab:hover .tab-close-button:hover:active {
+    background-color: var(--arrowpanel-dimmed-further) !important;
+    opacity: 1 !important;
+}
+
+.tab-icon-sound[pictureinpicture]:not([muted]) {
+    -moz-context-properties: fill, fill-opacity !important;
+    fill: white !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding: 1.6px !important;
+    background-color: transparent !important;
+    /*     list-style-image: url(chrome://global/skin/media/pictureinpicture.svg) !important; */
+    /*     list-style-image: url(chrome://devtools/skin/images/import.svg) !important; */
+    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 625.8 512'><path d='M568.9 0h-512C25.6 0 0 25 0 56.3v398.8C0 486.4 25.6 512 56.9 512h512c31.3 0 56.9-25.6 56.9-56.9V56.3C625.8 25 600.2 0 568.9 0zm-512 425.7V86c0-16.5 13.5-30 30-30h452c16.5 0 30 13.5 30 30v339.6c0 16.5-13.5 30-30 30h-452c-16.5.1-30-13.4-30-29.9zM482 227.6H314.4c-16.5 0-30 13.5-30 30v110.7c0 16.5 13.5 30 30 30H482c16.5 0 30-13.5 30-30V257.6c0-16.5-13.5-30-30-30z' fill='context-fill' fill-opacity='context-fill-opacity'/></svg>") !important;
+    pointer-events: none !important;
+}
+
+.tabbrowser-tab:hover .tab-icon-sound[pictureinpicture]:not([muted]):active,
+.tabbrowser-tab:hover .tab-icon-sound[pictureinpicture]:not([muted]):active {
+    background-color: transparent !important;
+}
+
+.tab-icon-sound[pictureinpicture]:not([muted], :hover),
+.tab-icon-sound[soundplaying]:not(:hover),
+.tab-icon-sound[muted]:not(:hover),
+.tab-icon-sound[activemedia-blocked]:not(:hover) {
+    opacity: 0.6 !important;
+}
+
+.tab-icon-sound[pictureinpicture][muted] {
+    list-style-image: url(chrome://browser/skin/tabbrowser/tab-audio-muted.svg) !important;
+    background-color: transparent !important;
+}
+
+.tabbrowser-tab:-moz-any([image], [pinned])
+    > .tab-stack
+    > .tab-content[attention]:not([selected="true"]),
+.tabbrowser-tab > .tab-stack > .tab-content[pinned][titlechanged]:not([selected="true"]) {
+    background-image: url(chrome://browser/skin/tabbrowser/indicator-tab-attention.svg);
+    background-position: right 6px top 4px !important;
+    background-repeat: no-repeat;
+}
+
+.tabbrowser-tab:not([pinned]):hover .tab-close-button:not(:hover):not(:active) {
+    opacity: 0.6 !important;
+}
+
+.tab-icon-image {
+    display: -moz-box !important;
+}
+
+.tab-close-button {
+    -moz-box-ordinal-group: 0;
+    display: block !important;
+    position: relative;
+    margin-right: -16px !important;
+    z-index: -1;
+}
+
+.tabbrowser-tab:not(:hover, [tabdrop-samewindow]) .tab-close-button {
+    transform: translateX(-15px) scale(0.5) !important;
+}
+
+#tabbrowser-tabs:not([movingtab])
+    .tabbrowser-tab:not([tabdrop-samewindow], [justmoved])
+    .tab-close-button,
+#tabbrowser-tabs:not([movingtab])
+    .tabbrowser-tab:not([tabdrop-samewindow], [justmoved])
+    .tab-icon-image,
+#tabbrowser-tabs:not([movingtab])
+    .tabbrowser-tab:not([tabdrop-samewindow], [justmoved])
+    .tab-sharing-icon-overlay,
+#tabbrowser-tabs:not([movingtab])
+    .tabbrowser-tab:not([tabdrop-samewindow], [justmoved])
+    .tab-icon-overlay,
+#tabbrowser-tabs:not([movingtab])
+    .tabbrowser-tab:not([tabdrop-samewindow], [justmoved])
+    .tab-throbber {
+    transition: 0.1s transform ease-in-out, 0.1s opacity ease-in-out !important;
+}
+
+.tab-icon-pending {
+    pointer-events: none !important;
+    display: block !important;
+    margin-right: -16px !important;
+}
+
+.tab-icon-image {
+    display: block !important;
+    position: relative !important;
+}
+
+.tabbrowser-tab:is(:hover, [busy]) .tab-icon-image,
+.tabbrowser-tab:is(:hover, [busy]) .tab-sharing-icon-overlay,
+.tabbrowser-tab:is(:hover, [busy]) .tab-icon-overlay {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: translateX(25px) scale(0.5) !important;
+}
+
+.tabbrowser-tab:is(:hover, [tabdrop-samewindow]) .tab-throbber,
+.tabbrowser-tab .tab-throbber:not([busy]) {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: translateX(-15px) scale(0.5) !important;
+}
+
+.tab-throbber {
+    display: block !important;
+    position: relative !important;
+    margin-right: -16px !important;
+    overflow: hidden !important;
+    pointer-events: none !important;
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.tab-throbber::before {
+    content: "" !important;
+    opacity: 0 !important;
+    transition: 0.2s opacity ease-in-out !important;
+}
+
+.tab-throbber[busy]::before {
+    fill: hsl(218, 100%, 81%) !important;
+    opacity: 0.8 !important;
+}
+
+#tabbrowser-tabs:not([movingtab])
+    .tabbrowser-tab:not([tabdrop-samewindow], [justmoved])
+    .tab-content
+    > .tab-icon-sound {
+    transition: 0.1s transform ease-in-out, 0.1s opacity ease-in-out, 0.1s margin ease-in-out !important;
+}
+
+#tabbrowser-tabs
+    .tab-content
+    > .tab-icon-sound:not([soundplaying], [muted], [activemedia-blocked], [pictureinpicture]) {
+    list-style-image: url(chrome://browser/skin/tabbrowser/tab-audio-playing.svg) !important;
+    display: -moz-inline-box !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: translateX(16px) scale(0.5) !important;
+    margin-right: -16px !important;
+}
+
+#tabbrowser-tabs:not(:hover, :focus)
+    .tab-content
+    > .tab-icon-sound:not([soundplaying], [muted], [activemedia-blocked], [pictureinpicture]),
+#tabbrowser-tabs:not(:hover, :focus)
+    .tab-content
+    > .tab-icon-sound[soundplaying-scheduledremoval]:not([muted], [pictureinpicture]),
+#tabbrowser-tabs:not(:hover, :focus)
+    .tabbrowser-tab[visuallyselected]
+    .tab-content
+    > .tab-icon-sound:not([pictureinpicture], [muted]) {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: translateX(16px) scale(0.5) !important;
+    margin-right: -16px !important;
+}
+
+/* these rules are 2 different ways of achieving a more consistent animation on the tab throbber. however, it's expensive because the throbber is loaded 24/7 for every single tab, even though it's not actually drawn. don't use these unless you have a decent PC. it's really not necessary anyway, it happens so fast you can't actually see it pop in. */
+/* .tab-throbber::before {
+    content: "" !important;
+    background-image: url(window/loading.svg) !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    position: absolute !important;
+    -moz-context-properties: fill !important;
+    fill: currentColor !important;
+    opacity: 0.7 !important;
+    width: 16px !important;
+    height: 16px !important;
+    animation: none !important;
+} */
+
+/* 
+.tab-throbber::before {
+    content: "" !important;
+    position: absolute !important;
+    background-image: url("chrome://browser/skin/tabbrowser/loading.svg") !important;
+    background-position: left center !important;
+    background-repeat: no-repeat !important;
+    width: 480px !important;
+    height: 100% !important;
+    animation: tab-throbber-animation 1.05s steps(30) infinite !important;
+    -moz-context-properties: fill !important;
+    fill: currentColor !important;
+    opacity: 0.7 !important;
+}
+ */
+
+.tab-icon-overlay {
+    display: none !important;
+    margin-inline-end: -16px !important;
+    margin-inline-start: 0 !important;
+}
+
+.tab-icon-overlay[pictureinpicture]:not([crashed]) {
+    display: -moz-box !important;
+    pointer-events: auto !important;
+    opacity: 0 !important;
+    transform: none !important;
+    -moz-box-ordinal-group: 2 !important;
+    margin-block: 0 !important;
+    z-index: 5 !important;
+}
+
+.tab-icon-overlay[pictureinpicture][soundplaying]:not([soundplaying-scheduledremoval]):hover
+    ~ .tab-icon-sound[pictureinpicture] {
+    opacity: 1 !important;
+    list-style-image: url(chrome://browser/skin/tabbrowser/tab-audio-playing.svg) !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding: 2px 3px 2px 2px !important;
+    background-color: var(--arrowpanel-dimmed) !important;
+    border-radius: 50% !important;
+}
+
+.tab-icon-overlay[pictureinpicture][muted] ~ .tab-icon-sound[pictureinpicture] {
+    list-style-image: url(chrome://browser/skin/tabbrowser/tab-audio-muted.svg) !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding: 2px 3px 2px 2px !important;
+    border-radius: 50% !important;
+}
+
+.tab-icon-overlay[pictureinpicture][muted]:hover ~ .tab-icon-sound[pictureinpicture] {
+    opacity: 1 !important;
+    background-color: var(--arrowpanel-dimmed) !important;
+}
+
+.tab-icon-overlay[pictureinpicture] ~ .tab-icon-sound[muted] {
+    border-radius: 50% !important;
+}
+
+.tab-icon-overlay[pictureinpicture]:hover ~ .tab-icon-sound[muted] {
+    background-color: var(--arrowpanel-dimmed) !important;
+    border-radius: 50% !important;
+}
+
+#tabbrowser-tabs[movingtab] .tabbrowser-tab[selected] .tab-icon-image {
+    opacity: 0 !important;
+}
+
+#tabbrowser-tabs[movingtab] .tabbrowser-tab[selected] .tab-close-button {
+    -moz-box-ordinal-group: 0 !important;
+    display: -moz-box !important;
+    position: relative !important;
+    margin-right: -16px !important;
+    z-index: 1 !important;
+    visibility: visible !important;
+    opacity: 0.6 !important;
+}
+
+#tabbrowser-tabs[movingtab] .tabbrowser-tab[selected]::before {
+    display: none !important;
+}
+
+.tab-icon-image[sharing],
+.tab-sharing-icon-overlay {
+    animation: none !important;
+}
+
+.tab-icon-image[sharing] {
+    visibility: hidden !important;
+}
+
+.tab-sharing-icon-overlay[sharing] {
+    display: -moz-box !important;
+}
+
+.tabbrowser-tab[label$="Violentmonkey"] .tab-sharing-icon-overlay {
+    list-style-image: url(chrome://devtools/skin/images/command-console.svg) !important;
+    display: block !important;
+    fill: currentColor !important;
+}
+
+.tabbrowser-tab[label$="Violentmonkey"] .tab-icon-image {
+    visibility: hidden !important;
+}
+
+#TabsToolbar .tabbrowser-tab[multiselected="true"] .tab-bottom-line {
+    min-height: 1px !important;
+    background-color: hsl(241, 50%, 51%) !important;
+}
+
+#TabsToolbar .tabbrowser-tab {
+    /*     border-radius: 0 !important; */
+    background-color: var(--lwt-accent-color) !important;
+}
+
+#TabsToolbar .tabbrowser-tab[multiselected]:not([pinned]) .tab-background {
+    border-top-left-radius: 5px !important;
+    border-top-right-radius: 5px !important;
+}
+
+@supports (-moz-bool-pref("browser.proton.tabs.enabled")) {
+    .tab-icon-sound-label {
+        display: none !important;
+    }
+
+    .tab-label-container.proton > .tab-icon-sound {
+        display: none !important;
+    }
+
+    /* .tab-label-container.proton {
+    -moz-box-orient: horizontal !important;
+} */
+
+    :root[proton] .tab-background,
+    :root[proton] .tabbrowser-tab:not([pinned]) {
+        min-height: 0 !important;
+        margin: 0 !important;
+    }
+
+    :root[proton] #TabsToolbar .toolbarbutton-1 > .toolbarbutton-icon,
+    :root[proton] #TabsToolbar .toolbarbutton-1 > .toolbarbutton-badge-stack {
+        min-height: 16px !important;
+        padding-block: 6px !important;
+    }
+
+    :root[proton] #TabsToolbar .toolbarbutton-1 > .toolbarbutton-icon,
+    :root[proton] #TabsToolbar .toolbarbutton-1 > .toolbarbutton-text,
+    :root[proton] #TabsToolbar .toolbarbutton-1 > .toolbarbutton-badge-stack {
+        border-radius: var(--toolbarbutton-border-radius) !important;
+    }
+
+    /* .tab-label-container:not(.proton), */
+    .tab-label-container:not(.proton) + .tab-icon-sound {
+        display: -moz-box !important;
+    }
+}

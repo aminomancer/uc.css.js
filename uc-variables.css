@@ -1,0 +1,202 @@
+:root {
+    --min-tab-height: 35px !important;
+    --inline-tab-padding: 10px !important;
+    --default_tab_border_roundness: 5px;
+    --tab_close_icons_size: 16px;
+    --tabs-border: transparent !important;
+    --toolbox-border-bottom-color: transparent !important;
+    --chrome-nav-bar-controls-border-color: transparent !important;
+    --chrome-content-separator-color: rgba(0, 0, 0, 0) !important;
+    --tabs-navbar-shadow-size: 0px !important;
+    --autocomplete-popup-highlight-background: hsl(234, 21%, 35%) !important;
+    --toolbarbutton-border-radius: 2.6px !important;
+    --lwt-accent-color: hsl(233, 61%, 8%) !important;
+    --lwt-text-color: hsl(213, 43%, 89%) !important;
+    --lwt-toolbar-field-background-color: hsla(233, 25%, 28%, 85%) !important;
+    --lwt-toolbar-field-color: hsl(0, 0%, 100%) !important;
+    --lwt-toolbar-field-focus: rgb(255, 255, 255) !important;
+    --lwt-toolbar-field-focus-color: rgb(255, 255, 255) !important;
+    --toolbar-bgcolor: hsl(231, 42%, 15%) !important;
+    --toolbar-color: hsl(0, 0%, 100%) !important;
+    --lwt-toolbarbutton-icon-fill: hsl(0, 0%, 100%) !important;
+    --lwt-background-alignment: top !important;
+    --lwt-background-tiling: repeat !important;
+    --arrowpanel-background: hsl(233, 36%, 11%) !important;
+    --arrowpanel-color: var(--lwt-text-color) !important;
+    --arrowpanel-darker: hsla(236, 70%, 73%, 0.17) !important;
+    --arrowpanel-dimmed: hsla(236, 100%, 83%, 0.17) !important;
+    --arrowpanel-dimmed-further: hsla(236, 100%, 83%, 0.25) !important;
+    --arrowpanel-dimmed-even-further: hsla(236, 100%, 85%, 0.3) !important;
+    --desaturate-dimmed: hsla(236, 60%, 83%, 0.17) !important;
+    --desaturate-dimmed-further: hsla(236, 60%, 83%, 0.25) !important;
+    --desaturate-dimmed-even-further: hsla(236, 60%, 85%, 0.3) !important;
+    --panel-disabled-color: hsla(213, 43%, 89%, 0.5) !important;
+    --toolbarbutton-hover-background: hsla(236, 82%, 83%, 0.17) !important;
+    --toolbarbutton-active-background: hsla(236, 82%, 83%, 0.22) !important;
+    --toolbarbutton-checked-background: hsla(236, 82%, 83%, 0.13) !important;
+    --urlbar-input-bgcolor: hsla(233, 24%, 26%, 1) !important;
+    --urlbar-input-bgcolor-brighter: hsla(233, 23%, 27.2%, 1) !important;
+    --urlbar-input-bgcolor-even-brighter: hsla(233, 21%, 31%, 1) !important;
+    --urlbar-height: 33px !important;
+    --urlbar-container-height: 39px !important;
+    --lwt-toolbarbutton-icon-fill-attention: hsl(224, 100%, 71%) !important;
+    --places-cell-focus-bgcolor: hsla(233, 24%, 28%, 50%) !important;
+    --ctrlTab-panel-disabled-bgcolor: hsla(240, 2%, 9%, 0.8) !important;
+    --ctrlTab-panel-disabled-focused-bgcolor: hsla(240, 8%, 3%, 0.9) !important;
+    --ctrlTab-panel-bgcolor: hsla(240, 3%, 4%, 0.9) !important;
+    --ctrlTab-panel-focused-bgcolor: hsla(10, 12%, 2%, 0.99) !important;
+    --in-content-box-background: hsl(232, 32%, 14%) !important;
+    --in-content-box-border-color: rgba(249, 249, 250, 0.1) !important;
+    --in-content-button-background: var(--arrowpanel-dimmed) !important;
+    --in-content-button-background-hover: var(--arrowpanel-dimmed-further) !important;
+    --in-content-button-background-active: var(--arrowpanel-dimmed-even-further) !important;
+    --in-content-item-selected: var(--purple-40) !important;
+    --in-content-border-highlight: var(--purple-40) !important;
+    --in-content-border-focus: var(--purple-40) !important;
+    --in-content-border-active: var(--purple-40) !important;
+    --in-content-border-active-shadow: var(--purple-40-a30) !important;
+    --in-content-category-outline-focus: 1px solid transparent !important;
+    --in-content-link-color: var(--purple-35) !important;
+    --in-content-link-color-hover: var(--purple-30) !important;
+    --in-content-link-color-active: var(--purple-30) !important;
+    --in-content-primary-button-background: var(--purple-40) !important;
+    --in-content-primary-button-background-hover: var(--purple-35) !important;
+    --in-content-primary-button-background-active: var(--purple-30) !important;
+    --purple-30: hsl(244, 100%, 70%) !important;
+    --purple-30-a50: hsla(240, 100%, 70%, 0.5) !important;
+    --purple-35: hsl(245, 100%, 65%) !important;
+    --purple-40: hsl(250, 100%, 60%) !important;
+    --purple-40-a10: hsla(250, 100%, 60%, 0.1) !important;
+    --purple-40-a30: hsla(250, 100%, 60%, 0.5) !important;
+    --purple-45: hsl(250, 90%, 55%) !important;
+    --purple-50: hsl(256, 100%, 50%) !important;
+    --purple-50-a30: hsla(256, 100%, 50%, 0.3) !important;
+    --purple-60: hsl(258, 100%, 40%) !important;
+    --purple-70: hsl(256, 100%, 30%) !important;
+    --purple-80: hsl(254, 100%, 20%) !important;
+    --autocomplete-popup-background: var(--arrowpanel-background) !important;
+    --autocomplete-popup-color: var(--lwt-text-color) !important;
+    --urlbarView-bgcolor: hsla(233, 38%, 9%, 0.8) !important;
+    --ui-textbox-bgcolor: hsl(233, 24%, 28%) !important;
+    --ui-textbox-focus-bgcolor: hsl(232, 20%, 38%) !important;
+    --ebmp-hover-bgcolor: hsl(233, 24%, 33%) !important;
+    --ebmp-focus-bgcolor: hsl(233, 24%, 38%) !important;
+    --urlbar-popup-url-color: hsl(251, 100%, 64%) !important;
+    --urlbar-popup-action-color: hsl(340, 73%, 58%) !important;
+    --toolbarbutton-icon-fill-opacity: 1 !important;
+    --tab-min-height: 35px !important;
+    --min-tab-height: 35px !important;
+    --context-margin-inline: -14px 0;
+    --context-padding-inline: -14px 0;
+    --menupopup-background: var(--arrowpanel-background);
+    --menu-background-color: var(--arrowpanel-background) !important;
+    --menupopup-margin: 0px 0 0 0;
+    --menupopup-padding: 0;
+    --context-checkbox-margin: 6px -5.5px;
+    --context-iconic-special-margin: 4px -2px;
+    --menupopup-border-radius: 3px;
+    --menu-right-bg: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='5px' height='5px' viewBox='0 0 492 492' xml:space='preserve'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M382.678,226.804L163.73,7.86C158.666,2.792,151.906,0,144.698,0s-13.968,2.792-19.032,7.86l-16.124,16.12    c-10.492,10.504-10.492,27.576,0,38.064L293.398,245.9l-184.06,184.06c-5.064,5.068-7.86,11.824-7.86,19.028    c0,7.212,2.796,13.968,7.86,19.04l16.124,16.116c5.068,5.068,11.824,7.86,19.032,7.86s13.968-2.792,19.032-7.86L382.678,265    c5.076-5.084,7.864-11.872,7.848-19.088C390.542,238.668,387.754,231.884,382.678,226.804z'/></svg>");
+    --menu-right-img: none;
+    --menu-right-margin: 2px;
+    --menu-right-size: 12px;
+}
+
+toolbar {
+    --toolbarbutton-hover-background: hsla(236, 82%, 83%, 0.17) !important;
+    --toolbarbutton-active-background: hsla(236, 82%, 83%, 0.22) !important;
+    --toolbarbutton-checked-background: hsla(236, 82%, 83%, 0.13) !important;
+}
+
+#confirmation-hint {
+    --arrowpanel-background: var(--confirmation-hint-bgcolor) !important;
+    --arrowpanel-border-color: var(--confirmation-hint-bgcolor) !important;
+}
+
+#browser {
+    --sidebar-border-color: transparent !important;
+}
+
+.tab-throbber {
+    --tab-loading-fill: var(--tab-throbber-fill) !important;
+}
+
+.tab-loading-burst {
+    --tab-loading-fill: var(--lwt-toolbarbutton-icon-fill-attention) !important;
+}
+
+@supports (-moz-bool-pref("browser.proton.enabled")) {
+
+    :root {
+        --panelview-toolbarbutton-hover-bgcolor: var(--arrowpanel-dimmed) !important;
+        --panelview-toolbarbutton-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
+        --panelview-toolbarbutton-focus-box-shadow: none !important;
+        --panel-banner-item-color: HSL(240, 9.1%, 97.8%);
+        --panel-banner-item-background-color: hsla(109.9, 90.9%, 47.3%, 0.1);
+        --panel-banner-item-hover-bgcolor: hsla(109.9, 90.9%, 47.3%, 0.15);
+        --panel-banner-item-active-bgcolor: hsla(109.9, 90.9%, 47.3%, 0.2);
+        --arrowpanel-menuitem-margin: 0 4px !important;
+        --arrowpanel-menuitem-padding: 6px !important;
+        --panel-subview-body-padding: 4px 0 !important;
+        --arrowpanel-menuitem-border-radius: 3px !important;
+        --proton-tab-radius: 0 !important;
+        --proton-tab-block-margin: 0 !important;
+        --panel-shortcut-color: hsl(235, 27%, 73%, 70%) !important;
+        --panel-shortcut-focus: hsl(235, 32%, 75%, 90%) !important;
+    }
+
+}
+
+@supports (-moz-bool-pref("browser.proton.toolbar.enabled")) {
+
+    :root {
+        --toolbarbutton-inner-padding: 6px !important;
+    }
+
+    #urlbar-container, #urlbar {
+        --urlbar-toolbar-height: var(--user-urlbar-container-height) !important;
+        --urlbar-container-height: var(--user-urlbar-container-height) !important;
+    }
+
+}
+
+@supports (-moz-bool-pref("browser.proton.tabs.enabled")) {
+
+    :root {
+        --proton-tab-inline-padding: 0 !important;
+        --proton-shadow-blur-radius: 0 !important;
+    }
+
+}
+
+@supports (-moz-bool-pref("browser.proton.appmenu.enabled")) {
+
+    :root[proton] #appMenu-multiView {
+        --arrowpanel-menuitem-margin: 0 8px !important;
+        --arrowpanel-menuitem-padding: 8px !important;
+        --panel-subview-body-padding: 8px 0 !important;
+    }
+
+}
+
+@supports (-moz-bool-pref("browser.proton.contextmenus.enabled")) {
+
+    :root {
+        --menupopup-background: transparent;
+        --menu-background-color: var(--arrowpanel-background) !important;
+        --menupopup-margin: 0;
+        --menupopup-padding: 0;
+        --context-padding-inline: 27px 0 !important;
+        --context-margin-inline: -14px 0 !important;
+        --context-checkbox-margin: 6px -6px;
+        --context-iconic-margin: 3px 0;
+        --context-iconic-special-margin: 5px -1px;
+        --menupopup-shadow: none !important;
+        --menupopup-border-radius: 3px !important;
+        --menu-right-bg: none;
+        --menu-right-img: url(chrome://browser/skin/customizableui/menu-arrow.svg);
+        --menu-right-margin: 4px;
+        --menu-right-size: 10px;
+    }
+
+}
+

@@ -1,0 +1,225 @@
+.panel-arrowcontent {
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2) !important;
+}
+
+.panel-arrow {
+    margin-top: 1.4px;
+}
+
+#customization-panelWrapper > .panel-arrowbox > .panel-arrow[side="top"] {
+    stroke: var(--arrowpanel-background) !important;
+}
+
+.protections-popup-category,
+.protections-popup-footer-button {
+    border-radius: initial !important;
+}
+
+.panel-footer {
+    background-color: initial !important;
+}
+
+.panel-footer>button {
+    border-top: 0px solid transparent !important;
+    margin-top: -0.5px !important;
+}
+
+.panel-footer > button:not([disabled]):hover:active,
+.panel-footer > button:not([disabled])[open] {
+    background-color: var(--arrowpanel-dimmed-even-further) !important;
+}
+
+.panel-footer > button:not([disabled]):hover {
+    background-color: var(--arrowpanel-dimmed-further) !important;
+}
+
+.panel-footer > button:not([disabled]) {
+    background-color: var(--arrowpanel-dimmed) !important;
+}
+
+.popup-notification-primary-button {
+    border-inline-end: 1px solid var(--panel-separator-color) !important;
+}
+
+.panel-footer .popup-notification-primary-button:not([disabled]) {
+    background-color: hsl(237, 26%, 30%) !important;
+}
+
+.panel-footer .popup-notification-primary-button:not([disabled]):hover {
+    background-color: hsl(242, 60%, 56%) !important;
+}
+
+.panel-footer .popup-notification-primary-button:not([disabled]):hover:active {
+    background-color: hsl(242, 65%, 60%) !important;
+}
+
+popupnotification checkbox .checkbox-check {
+	appearance: none !important;
+    min-width: 10px !important;
+    min-height: 10px !important;
+	width: 13px;
+	height: 13px;
+    margin-inline-end: 4px !important;
+	padding: 0.5px;
+	border: 1px solid var(--in-content-box-border-color);
+	border-radius: 2px;
+	margin: 0;
+	background-color: var(--arrowpanel-dimmed);
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+popupnotification checkbox .checkbox-check[checked] {
+    list-style-image: url("chrome://global/skin/icons/check.svg");
+    -moz-context-properties: fill, fill-opacity !important;
+    fill: currentColor;
+    color: hsl(0, 0%, 100%);
+    background-color: var(--purple-35);
+}
+
+popupnotification checkbox:hover .checkbox-check:not(:disabled) {
+	background-color: var(--arrowpanel-darker);
+}
+
+popupnotification checkbox:hover .checkbox-check[checked]:not(:disabled) {
+	background-color: var(--purple-45);
+}
+
+/* hides update popups. i use a script for this now, updateNotificationSlayer.uc.js. use that instead, it's MUCH better. */
+/* #appMenu-notification-popup {
+    display: none !important;
+} */
+
+/* popupnotification:-moz-any([popupid="update-available"]) {
+    display: none !important;
+} */
+
+.panel-header > .subviewbutton-back,
+.panel-header > .subviewbutton-back > .toolbarbutton-icon {
+    -moz-context-properties: fill, fill-opacity !important;
+    fill-opacity: 0.6;
+}
+
+.panel-header > .subviewbutton-back:hover,
+.panel-header > .subviewbutton-back:hover > .toolbarbutton-icon {
+    fill-opacity: 0.8;
+}
+
+#plugins-notification-icon[extraAttr="inactive"] > .plugin-icon {
+    fill: currentColor !important;
+}
+
+#plugins-notification-icon[extraAttr="inactive"] > #plugin-icon-badge {
+    fill-opacity: 1;
+}
+
+/* ugly small menu separators */
+.cui-widget-panelview menuseparator.small-separator {
+    margin-left: initial !important;
+    margin-right: initial !important;
+}
+
+/* grid overflow menu (i don't have an overflow menu at all thanks to the toolbar button slider script. but just in case) */
+:root:not([customizing]) #widget-overflow-mainView {
+    min-width: 370px !important;
+}
+
+:root:not([customizing]) #widget-overflow-mainView>.panel-subview-body {
+    padding: 4px !important;
+}
+
+:root:not([customizing]) .widget-overflow-list {
+    display: grid;
+    grid-template-areas: "a a a a a a a a a a a a";
+    grid-auto-columns: auto;
+}
+
+:root:not([customizing]) #widget-overflow-mainView[visible] .widget-overflow-list {
+    max-width: 370px
+}
+
+:root:not([customizing]) #widget-overflow-mainView~panelview[visible] {
+    max-width: unset !important;
+}
+
+:root:not([customizing]) .widget-overflow-list>* {
+    padding-block: 8px !important;
+}
+
+:root:not([customizing]) .widget-overflow-list>#search-container {
+    grid-area: s
+}
+
+:root:not([customizing]) .widget-overflow-list .subviewbutton-nav::after,
+:root:not([customizing]) .widget-overflow-list .toolbarbutton-text {
+    display: none
+}
+
+:root:not([customizing]) .widget-overflow-list .toolbarbutton-1 {
+    -moz-appearance: none !important;
+    margin: 2px !important;
+    padding: 0 !important;
+    -moz-box-pack: center !important;
+    display: -moz-box !important;
+    border-radius: var(--toolbarbutton-border-radius) !important;
+    width: 28px !important;
+    height: 28px !important;
+}
+
+:root:not([customizing]) .widget-overflow-list .toolbarbutton-1 .toolbarbutton-icon {
+    padding: 6px !important;
+    width: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
+    height: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
+}
+
+:root:not([customizing]) .widget-overflow-list {
+    width: 370px !important;
+}
+
+:root:not([customizing]) #widget-overflow-mainView .panel-subview-body {
+    width: 370px !important;
+}
+
+:root:not([customizing]) #widget-overflow-mainView {
+    min-width: 370px !important;
+    max-width: 370px !important;
+}
+
+:root:not([customizing]) #widget-overflow {
+    width: 370px !important;
+}
+
+.widget-overflow-arrowbox[pack="end"] {
+    margin-right: 4.4px !important;
+}
+
+#widget-overflow-list .toolbarbutton-menu-dropmarker {
+    display: none !important;
+}
+
+#widget-overflow {
+    margin-right: -24.4px !important;
+}
+
+#widget-overflow .toolbarbutton-badge {
+    margin: 0 !important;
+    margin-inline-end: 0px !important;
+}
+
+/* specific widget menus */
+#PanelUI-webext-_63d150c4-394c-4275-bc32-c464e76a891c_-browser-action-view {
+    min-width: 550px !important;
+}
+
+#PanelUI-webext-_bee8b1f2-823a-424c-959c-f8f76c8b2306_-browser-action-view {
+    min-width: 200px !important;
+    width: 230px !important;
+}
+
+#PanelUI-webext-multithreaded-download-manager_qw_linux-2g64_local-browser-action-view .webextension-popup-browser {
+    min-height: 230px !important;
+}
+
+#PanelUI-webext-_a6c4a591-f1b2-4f03-b3ff-767e5bedf4e7_-browser-action-view {
+    min-width: 700px !important;
+}

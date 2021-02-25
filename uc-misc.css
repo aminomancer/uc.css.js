@@ -1,0 +1,155 @@
+#statuspanel[type="status"] #statuspanel-label {
+    opacity: 0 !important;
+}
+
+#statuspanel[type="defaultStatus"] #statuspanel-label {
+    opacity: 0 !important;
+}
+
+:root[inDOMFullscreen] #statuspanel {
+    display: none !important;
+}
+
+tooltip {
+    -moz-default-appearance: none !important;
+    display: -moz-popup;
+    -moz-appearance: none !important;
+    background-color: var(--tooltip-bgcolor) !important;
+    color: var(--tooltip-color) !important;
+    border: none !important;
+    padding: 5px !important;
+    /* font-family: FreeMono !important; */
+}
+
+/* blur filter */
+#statuspanel-label {
+    background-image: url("texture/noise-512x512.png") !important;
+    background-color: hsla(233.3, 39.1%, 9%, 0.58) !important;
+    backdrop-filter: blur(10px);
+    color: hsla(0, 0%, 100%, 0.85) !important;
+    border: none !important;
+    /* font-family: FreeMono !important; */
+    transition: opacity 70ms ease-in-out !important;
+    opacity: 1;
+}
+
+/* i prefer about:config => alerts.useSystemBackend = true */
+@-moz-document url("chrome://global/content/alerts/alert.xhtml")
+{
+    #alertBox {
+        background-color: rgba(18, 18, 18, 0.97) !important;
+        background-image: url("texture/noise-512x512.png") !important;
+        backdrop-filter: blur(10px) !important;
+    }
+}
+
+#fullscreen-warning {
+    background-image: url("texture/noise-512x512.png") !important;
+    background-color: hsla(233.3, 39.1%, 9%, 0.58) !important;
+    backdrop-filter: blur(10px) !important;
+}
+
+/* hide keyword fixup notification */
+notification[value="keyword-uri-fixup"] {
+    display: none !important;
+}
+
+#confirmation-hint[data-message-id="hideCheckHint"] #confirmation-hint-message {
+    margin-inline: 0 !important;
+}
+
+/* remove white flash and make default unloaded background dark gray (matching my new tab page addon, message u/MotherStylus on reddit for a download link) */
+#browser vbox#appcontent tabbrowser,
+#content,
+#tabbrowser-tabpanels,
+browser[type="content-primary"],
+browser[type="content"] > html {
+    background: var(--in-content-bg-dark) !important;
+}
+
+:-moz-any(.unified-nav-forward, .unified-nav-back):not([_moz-menuactive])[uri^="file:///"],
+.tabbrowser-tab:-moz-any([label^="/A:/"i], [label^="/B:/"i], [label^="/C:/"i], [label^="/D:/"i], [label^="/E:/"i], [label^="/F:/"i], [label^="/G:/"i], [label^="/H:/"i], [label^="/I:/"i]) .tab-icon-image:not([src]) {
+    list-style-image: url(chrome://browser/skin/notification-icons/persistent-storage.svg) !important;
+}
+
+:-moz-any(.unified-nav-forward, .unified-nav-back):not([_moz-menuactive])[uri^="file:///"]:-moz-any([uri$=".svg"i], [uri$=".png"i], [uri$=".jpg"i], [uri$=".jpeg"i], [uri$=".gif"i]),
+.tabbrowser-tab[label*="Image, "][label$=" pixels)"] .tab-icon-image:not([src]),
+.tabbrowser-tab:-moz-any([label^="/A:/"i], [label^="/B:/"i], [label^="/C:/"i], [label^="/D:/"i], [label^="/E:/"i], [label^="/F:/"i], [label^="/G:/"i], [label^="/H:/"i], [label^="/I:/"i]):-moz-any([label$=".svg"i], [label$=".png"i], [label$=".jpg"i], [label$=".jpeg"i], [label$=".gif"i]) .tab-icon-image:not([src]) {
+    list-style-image: url(chrome://browser/skin/notification-icons/canvas.svg) !important;
+}
+
+#mainPopupSet textbox,
+#browser textbox,
+#navigator-toolbox textbox {
+    -moz-appearance: none !important;
+    user-select: text !important;
+    -moz-user-select: text !important;
+    background-color: var(--ui-textbox-bgcolor) !important;
+    color: #fff !important;
+}
+
+#label-box {
+    outline: unset !important;
+}
+
+/* get rid of ugly outline on focused and clicked buttons and shit */
+:not(#browser) *:-moz-focusring,
+:not(#browser) *:focus,
+:not(#browser) button::-moz-focus-inner,
+:not(#browser) *:-moz-focusring *,
+:not(#browser) *:focus * {
+    outline: unset !important;
+    outline-offset: unset !important;
+    -moz-outline-radius: unset !important;
+}
+
+#mainPopupSet ::selection,
+#browser ::selection,
+#navigator-toolbox ::selection,
+.sidebar-panel ::selection,
+link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
+{
+    background-color: var(--ui-selection-bgcolor) !important;
+    color: var(--ui-selection-color) !important;
+}
+
+@-moz-document url-prefix("chrome://")
+{
+    ::selection {
+        background-color: var(--url-selection-bgcolor) !important;
+        color: var(--url-selection-color) !important;
+    }
+}
+
+/* reconciling the stylesheet with minBrowserNavbar.uc.js */
+:root[min-browser] {
+    --min-toolbar-height: 39px;
+}
+
+:root[inFullscreen][min-browser] #navigator-toolbox {
+    height: var(--min-toolbar-height) !important;
+}
+
+:root[inFullscreen][min-browser]:not([customizing]) #navigator-toolbox {
+    margin-top: calc(1px - var(--min-toolbar-height)) !important;
+}
+
+:root[inFullscreen][min-browser]:not([customizing])
+    > body
+    > box:is(:focus-within, :hover, [popup-status], [urlbar-status])
+    ~ #browser
+    findbar {
+    margin-top: calc(8px - var(--min-toolbar-height)) !important;
+}
+
+:root[customizing][inFullscreen][min-browser] #customization-container {
+    margin-top: var(--min-toolbar-height) !important;
+}
+
+:root[min-browser] #sidebar-box {
+    top: var(--min-toolbar-height) !important;
+}
+
+:root[min-browser] .browserContainer > findbar {
+    top: var(--min-toolbar-height) !important;
+}

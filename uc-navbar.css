@@ -1,0 +1,194 @@
+/* remove line under navigation toolbar */
+#navigator-toolbox:-moz-lwtheme {
+    border: none !important;
+}
+
+:root:not([sizemode="normal"]) #navigator-toolbox {
+    border: none !important;
+}
+
+#urlbar,
+.searchbar-textbox {
+    border: none !important;
+    box-shadow: none !important;
+}
+
+#urlbar,
+.searchbar-textbox {
+    min-height: var(--urlbar-height) !important;
+}
+
+/* makes the flexible space in toolbar customization way smaller */
+toolbarpaletteitem[place="toolbar"][id^="wrapper-customizableui-special-spring"],
+toolbarspring {
+    max-width: none !important;
+    -moz-box-flex: 1 !important;
+}
+
+:root:not([uidensity="compact"]) #back-button>.toolbarbutton-icon {
+    background-color: unset !important;
+    border: unset !important;
+    padding: var(--toolbarbutton-inner-padding) !important;
+    border-radius: var(--toolbarbutton-border-radius) !important;
+    width: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
+    height: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
+}
+
+:root:not([uidensity="compact"]) #back-button:hover:not([disabled])>.toolbarbutton-icon {
+    background-color: var(--toolbarbutton-hover-background) !important;
+}
+
+:root:not([uidensity="compact"]) #back-button:active:not([disabled])>.toolbarbutton-icon {
+    background-color: var(--toolbarbutton-active-background) !important;
+}
+
+#back-button, #forward-button, #stop-reload-button {
+    appearance: none !important;
+    margin: 0 !important;
+    padding: 0 var(--toolbarbutton-outer-padding) !important;
+    -moz-box-pack: center !important;
+}
+
+#nav-bar-customization-target {
+    padding-left: 2px !important;
+}
+
+#TabsToolbar-customization-target > #back-button {
+    margin-inline-start: 2px !important;
+}
+
+:root:not([uidensity="compact"]) #nav-bar-customization-target > :is(#stop-reload-button, #wrapper-stop-reload-button),
+:root:not([uidensity="compact"]) #TabsToolbar-customization-target > :is(#stop-reload-button, #wrapper-stop-reload-button) {
+    margin-inline: -2px !important;
+}
+
+#stop-reload-button {
+    pointer-events: none !important;
+}
+
+#stop-reload-button>* {
+    pointer-events: auto !important;
+}
+
+/* navbar shadow */
+#navigator-toolbox {
+    box-shadow: 0px 0px 8px -5px hsla(240, 4%, 0%, 0.5), 0px 0px 15px 0px hsla(0, 0%, 0%, 0.2) !important;
+}
+
+#nav-bar-customization-target {
+    overflow: visible !important
+}
+
+toolbar .toolbarbutton-1:not([disabled]):hover:-moz-any([open]) > .toolbarbutton-icon {
+    background-color: var(--toolbarbutton-active-background) !important;
+}
+
+toolbar .toolbarbutton-1:not([disabled]):hover:-moz-any([checked]) > .toolbarbutton-icon {
+    background-color: var(--toolbarbutton-hover-background) !important;
+}
+
+toolbar .toolbarbutton-1:not([disabled]):-moz-any([checked]) > .toolbarbutton-icon {
+    background-color: var(--toolbarbutton-checked-background) !important;
+    transition: none !important;
+}
+
+#navigator-toolbox {
+    z-index: 2 !important;
+}
+
+#nav-bar {
+    z-index: 5 !important;
+}
+
+/* fullscreen button */
+#fullscreen-button .toolbarbutton-icon {
+    transition: none !important;
+    list-style-image: url("chrome://browser/skin/fullscreen.svg") !important;
+}
+
+#fullscreen-button[checked="true"] .toolbarbutton-icon {
+    background: var(--toolbarbutton-checked-background) !important;
+    list-style-image: url("chrome://browser/skin/fullscreen-exit.svg") !important;
+}
+
+#fullscreen-button[checked="true"]:hover .toolbarbutton-icon {
+    background-color: var(--toolbarbutton-hover-background) !important;
+}
+
+#fullscreen-button[checked="true"]:hover:active .toolbarbutton-icon {
+    background-color: var(--toolbarbutton-active-background) !important;
+}
+
+#navigator-toolbox,
+#navigator-toolbox > *{
+  width: -moz-available;
+}
+
+#downloadsListBox>.download-state>toolbarseparator {
+    visibility: collapse !important;
+}
+
+#downloadsListBox>.download-state {
+    min-height: 66px !important;
+    height: 66px !important;
+    -moz-box-align: center !important;
+    border: none !important;
+}
+
+.downloadsPanelFooterButton:hover {
+    outline: none !important;
+}
+
+#downloadsHistory {
+    margin-top: 0 !important;
+}
+
+#downloadsListBox > richlistitem[state="1"][exists] .downloadMainArea:hover,
+#downloadsListBox > richlistitem:not([verdict]) > .downloadButton:hover,
+#downloadsListBox > richlistitem[verdict]:hover {
+    background-color: unset !important;
+}
+
+#downloadsListBox>.download-state:hover {
+    background-image: linear-gradient(
+        to right,
+        hsla(235.86, 100%, 82.94%, 0.092) 7.1%,
+        hsla(235.86, 100%, 82.94%, 0.075) 20.9%,
+        hsla(235.86, 100%, 82.94%, 0.069) 34.1%,
+        hsla(235.86, 100%, 82.94%, 0.04) 47.1%,
+        hsla(235.86, 100%, 82.94%, 0.025) 60%,
+        hsla(235.86, 95%, 76.94%, 0.02) 73%,
+        hsla(235.86, 90%, 73.94%, 0.015) 86.3%
+    ) !important;
+}
+
+#downloadsListBox .downloadContainer {
+    min-height: 66px !important;
+}
+
+#downloadsListBox>.download-state>.downloadButton {
+    min-height: 56px !important;
+    min-width: 56px !important;
+    margin: 5px !important;
+    border-radius: 100% !important;
+    -moz-box-align: center !important;
+    background: none !important;
+    -moz-box-pack: center !important;
+}
+
+#downloadsListBox>.download-state>.downloadButton:hover .button-box {
+    background: var(--arrowpanel-dimmed) !important;
+}
+
+#downloadsListBox>.download-state>.downloadButton .button-box {
+    min-width: 35.5px !important;
+    max-width: 35.5px !important;
+    min-height: 35.5px !important;
+    max-height: 35.5px !important;
+    border-radius: 100% !important;
+}
+
+#downloadsListBox>.download-state>.downloadButton .button-box .button-icon {
+    width: 20.5px !important;
+    height: 20px !important;
+}

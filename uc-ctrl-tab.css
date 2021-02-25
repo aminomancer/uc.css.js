@@ -1,0 +1,96 @@
+#ctrlTab-previews {
+    border-radius: 0% !important;
+}
+
+#ctrlTab-panel {
+    -moz-appearance: none !important;
+    color: white !important;
+    border-style: none !important;
+    padding: 40px 20px 30px 50px !important;
+    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important; */
+    font-weight: normal !important;
+    text-shadow: 0 0 2px hsl(0, 0%, 8%), 0 0 2px hsl(0, 0%, 8%) !important;
+    box-shadow: none !important;
+    background: transparent !important;
+}
+
+.ctrlTab-preview:not(#ctrlTab-showAll)>*>.ctrlTab-preview-inner {
+    margin: -10px -10px 0 !important;
+}
+
+.ctrlTab-preview-inner img:-moz-broken {
+    visibility: hidden !important;
+}
+
+.ctrlTab-canvas {
+    box-shadow: none !important;
+    background-color: transparent !important;
+    border: none !important;
+    fill: white !important;
+    fill-opacity: 0.7 !important;
+    -moz-context-properties: fill, fill-opacity !important;
+    background: url("chrome://browser/skin/restore-session.svg") center no-repeat !important;
+    background-size: 42% !important;
+}
+
+#ctrlTab-showAll-container {
+    margin-top: 8px !important;
+    margin-left: -28px !important;
+}
+
+#ctrlTab-showAll {
+    background-color: var(--ctrlTab-panel-bgcolor) !important;
+}
+
+#ctrlTab-showAll:focus,
+#ctrlTab-showAll:focus-within {
+    background-color: var(--ctrlTab-panel-focused-bgcolor) !important;
+    border: 2px solid transparent !important;
+}
+
+.ctrlTab-preview-inner {
+    padding: 10px !important;
+    border: 0px solid transparent !important;
+    border-radius: 5px !important;
+    box-shadow: 0 0 4px -1px rgba(0, 0, 0, 0.2), 0 0 25px -2px rgba(0, 0, 0, 0.2) !important;
+    background-color: var(--ctrlTab-panel-bgcolor) !important;
+}
+
+.ctrlTab-preview:focus>.ctrlTab-preview-inner {
+    background-color: var(--ctrlTab-panel-focused-bgcolor) !important;
+    box-shadow: 0 0 4px -1px rgba(0, 0, 0, 0.2), 0 0 25px -2px rgba(0, 0, 0, 0.2), inset 0 0 20px 5px hsla(0, 0%, 0%, 0.5) !important;
+}
+
+.ctrlTab-canvas > * {
+    border-radius: 3px !important;
+}
+
+.ctrlTab-favicon-container {
+    -moz-box-align: start !important;
+    -moz-box-pack: start !important;
+    box-shadow: none !important;
+    margin-inline-start: 7px !important;
+    margin-top: -47px !important;
+    padding-bottom: 13px !important;
+    height: 45px !important;
+    position: absolute !important;
+}
+
+.ctrlTab-favicon {
+    margin: 0 !important;
+}
+
+.ctrlTab-favicon[src] {
+    background: hsla(0, 0%, 49%, 0.3) !important;
+    width: 32px !important;
+    height: 32px !important;
+    padding: 3px !important;
+    box-shadow: none !important;
+    border-radius: 3px !important;
+    -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity !important;
+    fill: currentColor !important;
+}
+
+.ctrlTab-label {
+    margin-bottom: -1.5px !important;
+}

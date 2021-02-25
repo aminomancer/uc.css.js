@@ -1,5 +1,69 @@
+@import url(uc-globals.css);
+/* tooltips */
+tooltip[default][page] {
+    -moz-default-appearance: none !important;
+    display: -moz-popup;
+    -moz-appearance: none !important;
+    background-color: var(--tooltip-bgcolor) !important;
+    color: var(--tooltip-color) !important;
+    border: none !important;
+    padding: 5px !important;
+    /* font-family: FreeMono !important; */
+}
+
+/* blur filter */
+#statuspanel-label {
+    background-image: url("texture/noise-512x512.png") !important;
+    background-color: var(--blur-bgcolor) !important;
+    backdrop-filter: blur(10px);
+    color: var(--statuspanel-color) !important;
+    border: none !important;
+    /* font-family: FreeMono !important; */
+    transition: opacity 70ms ease-in-out !important;
+    opacity: 1;
+}
+
+/* i prefer about:config => alerts.useSystemBackend = true */
+@-moz-document url("chrome://global/content/alerts/alert.xhtml")
+{
+    #alertBox {
+        background-color: var(--alertbox-bgcolor) !important;
+        background-image: url("texture/noise-512x512.png") !important;
+        backdrop-filter: blur(10px) !important;
+    }
+}
+
+@-moz-document url(chrome://global/content/commonDialog.xhtml),
+               url("chrome://mozapps/content/handling/permissionDialog.xhtml"),
+               url("chrome://mozapps/content/handling/appChooser.xhtml")
+{
+    #commonDialog::part(content-box) {
+        padding-block: 5px;
+    }
+}
+
+:is(.content-prompt-dialog, .tab-prompt-dialog) .dialogFrame {
+    background-color: var(--dialog-bgcolor) !important;
+    background-image: url("texture/noise-512x512.png") !important;
+    backdrop-filter: blur(5px) !important;
+}
+
+.tab-prompt-dialog :is(.dialogBox, .dialogFrame) {
+    border-radius: 0 0 5px 5px;
+}
+
+.content-prompt-dialog :is(.dialogBox, .dialogFrame) {
+    border-radius: 5px;
+}
+
+#fullscreen-warning {
+    background-image: url("texture/noise-512x512.png") !important;
+    background-color: var(--blur-bgcolor) !important;
+    backdrop-filter: blur(10px) !important;
+}
+
 /* bookmarks popup scroll buttons (requires bookmarksPopupShadowRoot.uc.js...
-but isn't necessary if you put this in your regular userChrome.css:
+but that script isn't necessary if you put this in your regular userChrome.css:
 link[href="chrome://global/skin/arrowscrollbox.css"] ~ :is(#scrollbutton-up, #scrollbutton-down) {
         visibility: collapse;
 } */
@@ -192,67 +256,4 @@ link[href="chrome://global/skin/arrowscrollbox.css"] ~ :is(#scrollbutton-up, #sc
 :not(select):not(hbox) > scrollbar scrollbarbutton,
 :not(select):not(hbox) > scrollbar gripper {
     display: none;
-}
-
-/* tooltips */
-tooltip[default][page] {
-    -moz-default-appearance: none !important;
-    display: -moz-popup;
-    -moz-appearance: none !important;
-    background-color: rgba(15, 17, 34, 1) !important;
-    color: rgba(255, 255, 255, 1) !important;
-    border: none !important;
-    padding: 5px !important;
-    /* font-family: FreeMono !important; */
-}
-
-/* blur filter */
-#statuspanel-label {
-    background-image: url("texture/noise-512x512.png") !important;
-    background-color: hsla(233.3, 39.1%, 9%, 0.58) !important;
-    backdrop-filter: blur(10px);
-    color: hsla(0, 0%, 100%, 0.85) !important;
-    border: none !important;
-    /* font-family: FreeMono !important; */
-    transition: opacity 70ms ease-in-out !important;
-    opacity: 1;
-}
-
-/* i prefer about:config => alerts.useSystemBackend = true */
-@-moz-document url("chrome://global/content/alerts/alert.xhtml")
-{
-    #alertBox {
-        background-color: rgba(18, 18, 18, 0.97) !important;
-        background-image: url("texture/noise-512x512.png") !important;
-        backdrop-filter: blur(10px) !important;
-    }
-}
-
-@-moz-document url(chrome://global/content/commonDialog.xhtml),
-               url("chrome://mozapps/content/handling/permissionDialog.xhtml"),
-               url("chrome://mozapps/content/handling/appChooser.xhtml")
-{
-    #commonDialog::part(content-box) {
-        padding-block: 5px;
-    }
-}
-
-:is(.content-prompt-dialog, .tab-prompt-dialog) .dialogFrame {
-    background-color: hsla(240, 5.9%, 6.7%, 0.6) !important;
-    background-image: url("texture/noise-512x512.png") !important;
-    backdrop-filter: blur(5px) !important;
-}
-
-.tab-prompt-dialog :is(.dialogBox, .dialogFrame) {
-    border-radius: 0 0 5px 5px;
-}
-
-.content-prompt-dialog :is(.dialogBox, .dialogFrame) {
-    border-radius: 5px;
-}
-
-#fullscreen-warning {
-    background-image: url("texture/noise-512x512.png") !important;
-    background-color: hsla(233.3, 39.1%, 9%, 0.58) !important;
-    backdrop-filter: blur(10px) !important;
 }
