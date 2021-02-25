@@ -20,7 +20,9 @@ I don't use tree style tabs but I've tested this with TST and they don't seem to
 
 Most of the important colors can be changed in uc-globals.css and uc-variables.css, but I'm still in the process of making everything easily configurable and adding a light mode. It's just a theme I built for personal use over the course of a couple years, so there isn't much top-down organization at the moment.
 
-I might try to make the customization more user-friendly in the future if other people actually like the aesthetic. So far I've mostly gotten requests for some of the individual snippets that can't be found anywhere else, so it hasn't seemed like a good use of my time.
+The theme can be customized with preferences in about:config. There are more prefs for the individual scripts too, which are documented in the script descriptions. Here are the CSS prefs:
+-  `userChrome.tabs.pinned-tabs.close-buttons.disabled`: If set to `true`, hides the close buttons for pinned tabs. This theme already hides the close buttons on every tab, but when you hover a tab, its close button is normally revealed. Since the theme makes pinned tabs quite small, you might want to eliminate the close buttons for pinned tabs completely so you don't accidentally click on them. This is what I use personally, I just close pinned tabs by middle-clicking them.
+-  `userChrome.tabs.rounded-outer-corners.disabled`: As of 2/25/21, the theme adds rounded outside corners to tabs, sort of like Microsoft Edge does. They're designed to look like actual physical folder tabs, (the kind you'd stick folder labels onto if anyone still used paper folders) which was a popular UI choice when tabs were first introduced, since they were inspired by real folder tabs after all. If you're not a fan of this visual style, set this pref to `true`.
 
 
 <h2><b>Scripts:</b></h2>

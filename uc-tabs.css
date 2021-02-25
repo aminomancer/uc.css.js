@@ -10,7 +10,7 @@
     background: var(--tab-pinned-hover) !important;
 }
 
-.tabbrowser-tab:not([selected]):not(:hover):not([pinned]) .tab-background {
+.tabbrowser-tab:not([selected], [pinned], :hover) .tab-background {
     background: var(--lwt-accent-color) !important;
     z-index: -1 !important;
 }
@@ -22,14 +22,6 @@
 .tabbrowser-tab[pinned] .tab-icon-overlay {
     display: none !important;
     pointer-events: none !important;
-}
-
-.tabbrowser-tab {
-    box-shadow: -6px 0px 9px -3px hsla(0, 0%, 0%, 0.25);
-}
-
-.tabbrowser-tab[selected]:not([pinned]) {
-    box-shadow: 0px 0px 11px 0px hsla(0, 0%, 0%, 0.35) !important;
 }
 
 .tabbrowser-tab[multiselected]:not([selected], [pinned], :hover) .tab-background,
@@ -46,21 +38,29 @@
     opacity: initial !important;
 }
 
-.tabbrowser-tab[multiselected="true"] {
+.tabbrowser-tab .tab-content {
+    box-shadow: -6px 0px 9px -3px hsla(0, 0%, 0%, 0.25);
+}
+
+.tabbrowser-tab[selected]:not([pinned]) .tab-content {
+    box-shadow: 0px 0px 11px 0px hsla(0, 0%, 0%, 0.35) !important;
+}
+
+.tabbrowser-tab[pinned] .tab-content {
     box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.35), 0px 0px 25px 3px rgba(0, 0, 0, 0.2) !important;
 }
 
-.tabbrowser-tab:not([selected]):not([multiselected]):hover,
-.tabbrowser-tab[selected][pinned] {
+.tabbrowser-tab:not([selected]):not([multiselected]):hover .tab-content,
+.tabbrowser-tab[selected][pinned] .tab-content {
+    box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.35), 0px 0px 25px 3px rgba(0, 0, 0, 0.2) !important;
+}
+
+.tabbrowser-tab[multiselected="true"] .tab-content {
     box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.35), 0px 0px 25px 3px rgba(0, 0, 0, 0.2) !important;
 }
 
 .tabbrowser-tab:not([pinned="true"])[multiselected="true"] {
     position: relative !important;
-}
-
-.tabbrowser-tab[multiselected="true"]:hover {
-    z-index: 4 !important;
 }
 
 .tabbrowser-tab[usercontextid] > .tab-stack > .tab-background > .tab-bottom-line {
@@ -87,7 +87,7 @@
     background-repeat: unset !important;
 }
 
-/* dim discarded tabs */
+/* dim unloaded/discarded tabs */
 .tabbrowser-tab[pending] .tab-content .tab-icon-image {
     opacity: 0.5;
 }
@@ -122,26 +122,20 @@
     overflow: hidden;
 }
 
-/* selected tab top border roundness */
-#TabsToolbar .tabbrowser-tab[selected]:not([multiselected]),
-#TabsToolbar .tabbrowser-tab[selected]:not([multiselected]) .tab-stack,
-#TabsToolbar .tabbrowser-tab[selected]:not([multiselected]) .tab-background,
-#TabsToolbar .tabbrowser-tab[selected]:not([multiselected]) .tab-content {
-    border-top-right-radius: 5px !important;
-    border-top-left-radius: 5px !important;
-    overflow: hidden;
-}
-
-#TabsToolbar .tabbrowser-tab[selected][pinned][multiselected],
-#TabsToolbar .tabbrowser-tab[selected][pinned][multiselected] .tab-stack,
-#TabsToolbar .tabbrowser-tab[selected][pinned][multiselected] .tab-background {
+#TabsToolbar .tabbrowser-tab[selected],
+#TabsToolbar .tabbrowser-tab[selected] .tab-stack,
+#TabsToolbar .tabbrowser-tab[selected] .tab-background,
+#TabsToolbar .tabbrowser-tab[selected] .tab-content {
     border-top-right-radius: 5px !important;
     border-top-left-radius: 5px !important;
 }
 
+#TabsToolbar .tabbrowser-tab[multiselected]:not([pinned]),
 #TabsToolbar .tabbrowser-tab[multiselected]:not([pinned]) .tab-stack,
-#TabsToolbar .tabbrowser-tab[multiselected]:not([pinned]) .tab-background {
-    border-radius: 0 !important;
+#TabsToolbar .tabbrowser-tab[multiselected]:not([pinned]) .tab-background,
+#TabsToolbar .tabbrowser-tab[multiselected]:not([pinned]) .tab-content {
+    border-top-left-radius: 5px !important;
+    border-top-right-radius: 5px !important;
 }
 
 #TabsToolbar .tabbrowser-tab:not([selected]):hover,
@@ -173,17 +167,112 @@
     border-top-left-radius: 0 !important;
 }
 
-#TabsToolbar .tabs-newtab-button {
-    border-top-left-radius: var(--default_tab_border_roundness);
-    border-top-right-radius: var(--default_tab_border_roundness);
+#TabsToolbar .tabbrowser-tab,
+#TabsToolbar .tabbrowser-tab .tab-stack {
+    overflow: visible;
+}
+
+/* set rounded outside corners on tabs so they look like folder labels. you can disable this by making a new pref in about:config and setting it to true: "userChrome.tabs.rounded-outer-corners.disabled" */
+.tabbrowser-tab .tab-stack:before,
+.tabbrowser-tab .tab-stack:after {
+    bottom: 0;
+    content: "";
+    display: block;
+    position: absolute;
+    pointer-events: none;
+    width: 5px;
+    height: 5px;
+    z-index: 2;
+}
+
+.tabbrowser-tab .tab-content {
+    z-index: 1;
+}
+
+.tabbrowser-tab[pinned] .tab-stack:before,
+.tabbrowser-tab[pinned] .tab-stack:after {
+    z-index: 6;
+}
+
+.tabbrowser-tab .tab-stack:before {
+    mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><circle r='5' cx='0' cy='0' fill='black'/></svg>") 0/100% 100%, linear-gradient(#fff,#fff);
+    mask-composite: exclude;
+    left: -5px;
+}
+
+.tabbrowser-tab .tab-stack:after {
+    mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><circle r='5' cx='5' cy='0' fill='black'/></svg>") 0/100% 100%, linear-gradient(#fff,#fff);
+    mask-composite: exclude;
+    right: -5px;
+}
+
+.tabbrowser-tab[first-visible-tab] .tab-stack:before,
+.tabbrowser-tab[last-visible-tab] .tab-stack:after {
+    display: none;
+}
+
+.tabbrowser-tab:not([selected], [multiselected]) .tab-stack:after,
+.tabbrowser-tab:not([selected], [multiselected]) .tab-stack:before {
+    background-image: linear-gradient(var(--tab-bg-current), var(--tab-bg-current));
+}
+
+.tabbrowser-tab[selected] .tab-stack:after,
+.tabbrowser-tab[selected] .tab-stack:before {
+    background-image: linear-gradient(var(--tab-bg-current), var(--tab-bg-current));
+    --tab-hover: linear-gradient(180deg, hsl(231, 49%, 11%), hsl(233, 55%, 8%));
+    --tab-pinned: linear-gradient(0deg, hsl(231, 50%, 11%), hsl(232, 70%, 6%));
+    --tab-multi: linear-gradient(180deg, hsl(231, 50%, 11%), hsl(233, 53%, 8%));
+    --tab-multi-hover: linear-gradient(180deg, hsl(231, 47%, 13%), hsl(233, 51%, 10%));
+    --tab-pinned-hover: linear-gradient(0deg, var(--toolbar-bgcolor), var(--lwt-accent-color));
+}
+
+.tabbrowser-tab[multiselected] .tab-stack:after,
+.tabbrowser-tab[multiselected] .tab-stack:before {
+    background-image: linear-gradient(0deg, hsl(241, 50%, 51%) 0px, hsl(241, 50%, 51%) 1px, var(--tab-bg-current) 1px);
+}
+
+.tabbrowser-tab:not([selected], [pinned]) {
+    --tab-bg-current: var(--lwt-accent-color);
+}
+
+.tabbrowser-tab[selected],
+.tabbrowser-tab[pinned]:not([selected]):hover {
+    --tab-bg-current: var(--toolbar-bgcolor);
+}
+
+.tabbrowser-tab:not([selected], [pinned], [multiselected]):hover {
+    --tab-bg-current: hsl(233, 55%, 8%);
+}
+
+.tabbrowser-tab[multiselected]:not([selected], [pinned]) {
+    --tab-bg-current: hsl(233, 53%, 8%);
+}
+
+.tabbrowser-tab[multiselected]:not([selected], [pinned]):hover {
+    --tab-bg-current: hsl(233, 51%, 10%);
+}
+
+.tabbrowser-tab[pinned]:not([selected]) {
+    --tab-bg-current: hsl(231, 50%, 11%);
+}
+
+@supports -moz-bool-pref("userChrome.tabs.rounded-outer-corners.disabled") {
+    .tabbrowser-tab .tab-stack:before,
+    .tabbrowser-tab .tab-stack:after {
+        display: none;
+    }
+
+    #TabsToolbar .tabbrowser-tab,
+    #TabsToolbar .tabbrowser-tab .tab-stack {
+        overflow: hidden;
+    }
 }
 
 #TabsToolbar .tab-loading-burst::before {
     backface-visibility: hidden;
 }
 
-.tabbrowser-tab[selected],
-.tabbrowser-tab[pinned][selected] {
+.tabbrowser-tab[selected] {
     z-index: 5 !important;
 }
 
@@ -192,17 +281,25 @@
     position: relative !important;
 }
 
-.tabbrowser-tab:not([selected])[multiselected="true"] {
+.tabbrowser-tab:not([selected])[multiselected] {
     z-index: 3 !important;
+}
+
+.tabbrowser-tab[multiselected]:hover {
+    z-index: 4 !important;
 }
 
 .tabbrowser-tab[pinned] {
-    z-index: 3 !important;
-    box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.35), 0px 0px 25px 3px rgba(0, 0, 0, 0.2) !important;
+    z-index: 4 !important;
 }
 
-.tabbrowser-tab[pinned]:hover {
-    z-index: 4 !important;
+.tabbrowser-tab[pinned]:hover,
+.tabbrowser-tab[pinned]:not([selected])[multiselected] {
+    z-index: 5 !important;
+}
+
+.tabbrowser-tab[pinned][selected] {
+    z-index: 6 !important;
 }
 
 #tabbrowser-tabs[positionpinnedtabs]
@@ -574,13 +671,24 @@
 }
 
 #TabsToolbar .tabbrowser-tab {
-    /*     border-radius: 0 !important; */
     background-color: var(--lwt-accent-color) !important;
 }
 
-#TabsToolbar .tabbrowser-tab[multiselected]:not([pinned]) .tab-background {
-    border-top-left-radius: 5px !important;
-    border-top-right-radius: 5px !important;
+/* hide the close button for pinned tabs. requires you to make a pref in about:config and set it to true: "userChrome.tabs.pinned-tabs.close-buttons.disabled" */
+@supports (-moz-bool-pref("userChrome.tabs.pinned-tabs.close-buttons.disabled")) {
+    .tabbrowser-tab[pinned] .tab-close-button,
+    #tabbrowser-tabs[movingtab] .tabbrowser-tab[pinned] .tab-close-button {
+        display: none !important;
+    }
+
+    #tabbrowser-tabs[movingtab] .tabbrowser-tab[pinned][selected] .tab-icon-image,
+    .tabbrowser-tab[pinned] .tab-throbber[busy],
+    .tabbrowser-tab[pinned]:not([busy]) .tab-icon-image,
+    .tabbrowser-tab[pinned]:not([busy]) .tab-sharing-icon-overlay,
+    .tabbrowser-tab[pinned]:not([busy]) .tab-icon-overlay {
+        opacity: 1 !important;
+        transform: none !important;
+    }
 }
 
 @supports (-moz-bool-pref("browser.proton.tabs.enabled")) {
@@ -592,9 +700,9 @@
         display: none !important;
     }
 
-    /* .tab-label-container.proton {
-    -moz-box-orient: horizontal !important;
-} */
+/*     .tab-label-container.proton {
+        -moz-box-orient: horizontal !important;
+    } */
 
     :root[proton] .tab-background,
     :root[proton] .tabbrowser-tab:not([pinned]) {

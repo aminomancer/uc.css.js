@@ -118,7 +118,7 @@ toolbar .toolbarbutton-1:not([disabled]):-moz-any([checked]) > .toolbarbutton-ic
 }
 
 #nav-bar {
-    z-index: 5 !important;
+    z-index: 7 !important;
 }
 
 /* fullscreen button */
