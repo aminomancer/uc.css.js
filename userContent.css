@@ -199,6 +199,7 @@
 
     :root {
         --min-tab-height: 35px !important;
+        --inline-tab-padding: 10px !important;
         --default_tab_border_roundness: 5px;
         --tab_close_icons_size: 16px;
         --tabs-border: transparent !important;
@@ -207,7 +208,7 @@
         --chrome-content-separator-color: rgba(0, 0, 0, 0) !important;
         --tabs-navbar-shadow-size: 0px !important;
         --autocomplete-popup-highlight-background: hsl(234, 21%, 35%) !important;
-        --toolbarbutton-border-radius: 3px;
+        --toolbarbutton-border-radius: 2.6px !important;
         --lwt-accent-color: hsl(233, 61%, 8%) !important;
         --lwt-text-color: hsl(213, 43%, 89%) !important;
         --lwt-toolbar-field-background-color: hsla(233, 25%, 28%, 85%) !important;
@@ -235,46 +236,8 @@
         --urlbar-input-bgcolor: hsla(233, 24%, 26%, 1) !important;
         --urlbar-input-bgcolor-brighter: hsla(233, 23%, 27.2%, 1) !important;
         --urlbar-input-bgcolor-even-brighter: hsla(233, 21%, 31%, 1) !important;
-        --ui-secondary-bg: hsl(234, 39%, 10%);
-        --blur-bgcolor: rgba(14, 16, 32, 0.58);
-        --tooltip-bgcolor: var(--ui-secondary-bg);
-        --tooltip-color: var(--toolbar-color);
-        --statuspanel-color: hsla(0, 0%, 100%, 0.85);
-        --dialog-bgcolor: hsla(240, 5.9%, 6.7%, 0.6);
-        --dialog-box-bgcolor: hsla(232, 100%, 75%, 8%);
-        --dialog-box-bgcolor-dim: hsla(240, 100%, 70%, 3%);
-        --dialog-box-border-color: hsla(232, 100%, 85%, 0.2);
-        --dialog-box-border-hover: hsla(232, 100%, 85%, 0.3);
-        --alertbox-bgcolor: hsla(0, 0%, 7%, 0.97);
-        --notification-menu-color: hsl(212.5, 42.9%, 89%);
-        --identity-box-solid-bg: hsla(236, 52%, 18%, 0.4);
-        --identity-box-hover-bg: hsla(236, 49%, 25%, 0.4);
-        --secure-color: hsl(119, 80%, 60%);
-        --warning-color: hsl(0, 100%, 66%);
-        --update-badge-bg: hsl(125, 81%, 57%);
-        --update-badge-color: hsl(118, 89%, 24%);
-        --update-badge-inactive: hsl(227, 19%, 48%);
-        --url-selection-bgcolor: rgba(142, 132, 255, 0.5);
-        --ui-selection-bgcolor: rgba(255, 255, 255, 0.9);
-        --ui-selection-color: hsl(236, 20%, 16%);
-        --ui-text-80: rgba(255, 255, 255, 0.8);
-        --badge-color-dark: hsl(236, 13%, 42%);
-    /*     --tab-hover: linear-gradient(0deg, hsl(231, 42%, 15%), hsl(233, 61%, 8%));
-        --tab-pinned: linear-gradient(0deg, hsl(231, 50%, 11%), hsl(232, 70%, 6%));
-        --tab-multi: linear-gradient(0deg, hsl(231, 42%, 15%), hsl(232, 70%, 6%)); */
-        --tab-hover: linear-gradient(180deg, hsl(231, 49%, 11%), hsl(233, 55%, 8%));
-        --tab-pinned: linear-gradient(0deg, hsl(231, 50%, 11%), hsl(232, 70%, 6%));
-        --tab-multi: linear-gradient(180deg, hsl(231, 50%, 11%), hsl(233, 53%, 8%));
-        --tab-multi-hover: linear-gradient(180deg, hsl(231, 47%, 13%), hsl(233, 51%, 10%));
-        --tab-pinned-hover: linear-gradient(0deg, var(--toolbar-bgcolor), var(--lwt-accent-color));
-        --search-box-color: hsl(229, 32%, 23%);
-        --search-box-focus: hsl(229, 27%, 27%);
-        --search-box-null: hsl(230, 30%, 20%);
-        --textbox-button-hidden: hsla(240, 100%, 89%, 0);
-        --urlbar-results-bgcolor: hsl(233, 32%, 10%);
         --urlbar-height: 33px !important;
         --urlbar-container-height: 39px !important;
-        --user-urlbar-container-height: 39px;
         --lwt-toolbarbutton-icon-fill-attention: hsl(224, 100%, 71%) !important;
         --places-cell-focus-bgcolor: hsla(233, 24%, 28%, 50%) !important;
         --ctrlTab-panel-disabled-bgcolor: hsla(240, 2%, 9%, 0.8) !important;
@@ -320,11 +283,8 @@
         --urlbar-popup-url-color: hsl(251, 100%, 64%) !important;
         --urlbar-popup-action-color: hsl(340, 73%, 58%) !important;
         --toolbarbutton-icon-fill-opacity: 1 !important;
-        --confirmation-hint-bgcolor: hsl(240, 60%, 59%);
         --tab-min-height: 35px !important;
         --min-tab-height: 35px !important;
-        --tab-throbber-fill: rgba(255, 255, 255, 0.6);
-        --sanitize-border-color: hsla(0, 0%, 5%, 0.2);
         --context-margin-inline: -14px 0;
         --context-padding-inline: -14px 0;
         --menupopup-background: var(--arrowpanel-background);
@@ -338,7 +298,6 @@
         --menu-right-img: none;
         --menu-right-margin: 2px;
         --menu-right-size: 12px;
-        --menu-separator-color: hsl(233, 25%, 23%);
     }
     
     toolbar {
@@ -438,8 +397,8 @@
             --menu-right-size: 10px;
         }
     
-    }    
-    
+    }
+
     menupopup {
         -moz-appearance: none !important;
         background: var(--menupopup-background) !important;
