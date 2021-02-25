@@ -42,6 +42,27 @@ toolbarspring {
     background-color: var(--toolbarbutton-active-background) !important;
 }
 
+/* toolbar button badges */
+#nav-bar-customization-target toolbarbutton:not([attention="warning"]) .toolbarbutton-badge,
+#widget-overflow toolbarbutton:not([attention="warning"]) .toolbarbutton-badge {
+    background-color: var(--badge-color-dark) !important;
+    color: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
+    box-shadow: 0 1px 2px hsla(0, 0%, 100%, 0.1) inset, 0 -1px 2px hsla(0, 0%, 0%, 0.2) inset, 0 1px 1px hsla(240, 3%, 12%, 0.15), 0 1px 3px hsla(240, 3%, 12%, 0.2) !important;
+    padding-top: 1px !important;
+    font-size: xx-small !important;
+    line-height: 8.4px !important;
+    min-width: 0px !important;
+    justify-self: right !important;
+    margin-right: -6.4px !important;
+    margin-top: -5.5px !important;
+}
+
+#nav-bar-customization-target toolbarbutton[attention="warning"] .toolbarbutton-badge,
+#widget-overflow toolbarbutton[attention="warning"] .toolbarbutton-badge {
+    margin-right: -4.4px !important;
+    margin-top: -4px !important;
+}
+
 #back-button, #forward-button, #stop-reload-button {
     appearance: none !important;
     margin: 0 !important;
