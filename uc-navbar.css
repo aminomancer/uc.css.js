@@ -70,6 +70,21 @@ toolbarspring {
     -moz-box-pack: center !important;
 }
 
+/* fix a little visual bug (maybe related to window scaling) where the stop button appears to move half a pixel to the left between animations.
+this is because the reload button is replaced with a step animation for a few moments, and the step animation is then replaced with a static stop icon.
+the stop icon sticks around until the page finishes loading, then it's hidden again and the step animation returns and plays in reverse.
+unfortunately the way the static icon is rendered is not identical to the step animation for every given scaling factor.
+to fix this we can just replace the static icon's path entirely with a path pulled directly from the step animation.
+i haven't tested this on every scaling factor, if it makes things worse on your setup then just delete or override this. */
+#stop-button .toolbarbutton-icon {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='context-fill' fill-opacity='context-fill-opacity'><path d='M10.414 10l5.293-5.293a1 1 0 00-1.414-1.414L9 8.586 3.707 3.293a1 1 0 00-1.414 1.414L7.586 10l-5.293 5.293a1 1 0 101.414 1.414L9 11.414l5.293 5.293a1 1 0 001.414-1.414z'/></svg>") !important;
+    background-repeat: no-repeat;
+    background-position: center;
+    list-style-image: none;
+    margin-inline-start: 1px;
+    margin-inline-end: -1px !important;
+}
+
 #nav-bar-customization-target {
     padding-left: 2px !important;
 }
@@ -118,7 +133,7 @@ toolbar .toolbarbutton-1:not([disabled]):-moz-any([checked]) > .toolbarbutton-ic
 }
 
 #nav-bar {
-    z-index: 7 !important;
+    z-index: 11 !important;
 }
 
 /* fullscreen button */

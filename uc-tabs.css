@@ -266,34 +266,45 @@
     backface-visibility: hidden;
 }
 
+.tabbrowser-tab:not([selected], [pinned], [multiselected]):hover {
+    z-index: 3 !important;
+}
+
 .tabbrowser-tab[selected] {
     z-index: 5 !important;
 }
 
-.tabbrowser-tab:not([selected]):not([pinned]):hover {
-    z-index: 3 !important;
-    position: relative !important;
-}
-
-.tabbrowser-tab:not([selected])[multiselected] {
-    z-index: 3 !important;
-}
-
-.tabbrowser-tab[multiselected]:hover {
+.tabbrowser-tab[multiselected] {
     z-index: 4 !important;
 }
 
-.tabbrowser-tab[pinned] {
-    z-index: 4 !important;
-}
-
-.tabbrowser-tab[pinned]:hover,
-.tabbrowser-tab[pinned]:not([selected])[multiselected] {
+.tabbrowser-tab[multiselected]:not([selected], [pinned]):hover {
     z-index: 5 !important;
 }
 
-.tabbrowser-tab[pinned][selected] {
+.tabbrowser-tab[multiselected][selected] {
     z-index: 6 !important;
+}
+
+.tabbrowser-tab[pinned] {
+    z-index: 7 !important;
+}
+
+.tabbrowser-tab[pinned]:not([selected], [multiselected]):hover {
+    z-index: 8 !important;
+}
+
+.tabbrowser-tab[pinned][selected],
+.tabbrowser-tab[pinned][multiselected] {
+    z-index: 9 !important;
+}
+
+.tabbrowser-tab[pinned][multiselected]:not([selected]):hover {
+    z-index: 10 !important;
+}
+
+.tabbrowser-tab[pinned][selected][multiselected] {
+    z-index: 11 !important;
 }
 
 #tabbrowser-tabs[positionpinnedtabs]
