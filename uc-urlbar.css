@@ -1,3 +1,7 @@
+#urlbar-container {
+    padding-block: calc((var(--urlbar-container-height) - var(--urlbar-height)) / 2) !important;
+}
+
 :not(.urlbar-icon-wrapper) > .urlbar-icon:not([disabled]):hover,
 .urlbar-icon-wrapper:not([disabled]):hover {
     background-color: var(--desaturate-dimmed) !important;
@@ -66,7 +70,7 @@
 }
 
 #page-action-buttons {
-    margin-right: 2.5px !important;
+    margin-right: 2.8px !important;
 }
 
 .urlbar-icon {

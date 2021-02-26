@@ -47,6 +47,13 @@ link[href="chrome://global/skin/arrowscrollbox.css"] ~ :is(#scrollbutton-up, #sc
     stroke: var(--arrowpanel-background);
 }
 
+/* select dropmarkers in the bookmark editor popup */
+#editBMPanel_folderMenuList::part(dropmarker) {
+    -moz-appearance: none !important;
+    list-style-image: url("chrome://devtools/skin/images/select-arrow.svg") !important;
+    margin-block: 0 !important;
+}
+
 /* proton stuff */
 .subviewbutton > menupopup::part(innerbox) {
     padding-block: 4px;

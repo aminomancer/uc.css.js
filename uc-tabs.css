@@ -10,7 +10,7 @@
     background: var(--tab-pinned-hover) !important;
 }
 
-.tabbrowser-tab:not([selected], [pinned], :hover) .tab-background {
+.tabbrowser-tab:not([selected], [pinned], [multiselected], :hover) .tab-background {
     background: var(--lwt-accent-color) !important;
     z-index: -1 !important;
 }
@@ -63,16 +63,9 @@
     position: relative !important;
 }
 
-.tabbrowser-tab[usercontextid] > .tab-stack > .tab-background > .tab-bottom-line {
-    background: linear-gradient(
-        to right,
-        transparent 0%,
-        var(--identity-tab-color) 45%,
-        var(--identity-tab-color) 55%,
-        transparent 100%
-    ) !important;
+.tabbrowser-tab[usercontextid] .tab-bottom-line {
+    background: var(--identity-tab-color) !important;
     height: 1px !important;
-    opacity: 0.5 !important;
     margin-bottom: 0 !important;
 }
 
@@ -105,10 +98,6 @@
 }
 
 .tab-line {
-    display: none !important;
-}
-
-.tab-line:not([selected="true"]):not([multiselected]) {
     display: none !important;
 }
 
@@ -219,16 +208,21 @@
 .tabbrowser-tab[selected] .tab-stack:after,
 .tabbrowser-tab[selected] .tab-stack:before {
     background-image: linear-gradient(var(--tab-bg-current), var(--tab-bg-current));
-    --tab-hover: linear-gradient(180deg, hsl(231, 49%, 11%), hsl(233, 55%, 8%));
-    --tab-pinned: linear-gradient(0deg, hsl(231, 50%, 11%), hsl(232, 70%, 6%));
-    --tab-multi: linear-gradient(180deg, hsl(231, 50%, 11%), hsl(233, 53%, 8%));
-    --tab-multi-hover: linear-gradient(180deg, hsl(231, 47%, 13%), hsl(233, 51%, 10%));
-    --tab-pinned-hover: linear-gradient(0deg, var(--toolbar-bgcolor), var(--lwt-accent-color));
 }
 
 .tabbrowser-tab[multiselected] .tab-stack:after,
 .tabbrowser-tab[multiselected] .tab-stack:before {
-    background-image: linear-gradient(0deg, hsl(241, 50%, 51%) 0px, hsl(241, 50%, 51%) 1px, var(--tab-bg-current) 1px);
+    background-image: linear-gradient(0deg, var(--multiselected-color) 0px, var(--multiselected-color) 1px, var(--tab-bg-current) 1px);
+}
+
+.tabbrowser-tab[usercontextid]:is([selected], [pinned], :hover) .tab-stack:after,
+.tabbrowser-tab[usercontextid]:is([selected], [pinned], :hover) .tab-stack:before {
+    background-image: linear-gradient(0deg, var(--identity-tab-color) 0px, var(--identity-tab-color) 1px, var(--tab-bg-current) 1px);
+}
+
+.tabbrowser-tab[usercontextid][multiselected] .tab-stack:after,
+.tabbrowser-tab[usercontextid][multiselected] .tab-stack:before {
+    background-image: linear-gradient(0deg, var(--multiselected-color) 0px, var(--multiselected-color) 1px, var(--tab-bg-current) 1px);
 }
 
 .tabbrowser-tab:not([selected], [pinned]) {
@@ -667,7 +661,7 @@
 
 #TabsToolbar .tabbrowser-tab[multiselected="true"] .tab-bottom-line {
     min-height: 1px !important;
-    background-color: hsl(241, 50%, 51%) !important;
+    background-color: var(--multiselected-color) !important;
 }
 
 #TabsToolbar .tabbrowser-tab {

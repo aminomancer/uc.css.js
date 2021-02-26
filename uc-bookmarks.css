@@ -136,11 +136,17 @@
     overflow: hidden !important;
 }
 
-#editBookmarkPanelDropMarker {
+#editBookmarkPanel menulist menupopup {
+    margin: 0 !important;
+    --menupopup-border-radius: 0 0 3px 3px !important;
+}
+
+/* this goes in userChrome.au.css */
+#editBookmarkPanelDropMarker,
+#editBMPanel_folderMenuList::part(dropmarker) {
     -moz-appearance: none !important;
     list-style-image: url("chrome://devtools/skin/images/select-arrow.svg") !important;
-    margin-bottom: -2.5px !important;
-    border-radius: 3px !important;
+    margin-block: 0 !important;
 }
 
 #editBookmarkPanel #editBookmarkPanelContent button {

@@ -39,6 +39,7 @@
     --tab-multi: linear-gradient(180deg, hsl(231, 50%, 11%), hsl(233, 53%, 8%));
     --tab-multi-hover: linear-gradient(180deg, hsl(231, 47%, 13%), hsl(233, 51%, 10%));
     --tab-pinned-hover: linear-gradient(0deg, var(--toolbar-bgcolor), var(--lwt-accent-color));
+    --multiselected-color: hsl(241, 50%, 51%);
     --search-box-color: hsl(229, 32%, 23%);
     --search-box-focus: hsl(229, 27%, 27%);
     --search-box-null: hsl(230, 30%, 20%);

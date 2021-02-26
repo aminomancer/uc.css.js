@@ -32,13 +32,6 @@
     border-bottom-right-radius: 4px !important;
 }
 
-/* urlbar popup equal width to urlbar */
-.urlbarView {
-    left: -4px !important;
-    right: -4px !important;
-    box-shadow: none !important;
-}
-
 #urlbar-container {
     transform: translateY(0);
     position: relative;
@@ -399,6 +392,7 @@
     width: calc(100% + 6px) !important;
     left: -3px !important;
     overflow: visible !important;
+    box-shadow: none !important;
 }
 
 .urlbarView[noresults="true"] #urlbar-results {

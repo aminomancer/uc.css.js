@@ -11,17 +11,16 @@
     scrollbar-width: none !important;
     padding-left: 2px !important;
     padding-right: 0.5px !important;
-    padding-bottom: 2px !important;
-    padding-top: 1.7px !important;
+    padding-bottom: 3px !important;
+    padding-top: 3px !important;
 }
 
 .search-one-offs {
     width: -moz-fit-content !important;
     position: relative !important;
     border: none !important;
-    left: 0% !important;
     margin-top: -1.7px !important;
-    min-height: 35px !important;
+    min-height: 33px !important;
     padding: 0 !important;
 }
 
@@ -103,7 +102,7 @@
 .urlbarView .search-one-offs {
     position: absolute !important;
     top: -35px !important;
-    right: 0 !important;
+    right: 0.6px !important;
     max-width: 244.4px !important;
     scroll-behavior: smooth !important;
     scrollbar-width: none !important;
