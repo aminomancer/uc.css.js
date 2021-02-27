@@ -7,10 +7,8 @@
     background-color: var(--desaturate-dimmed) !important;
 }
 
-:not(.urlbar-icon-wrapper) > .urlbar-icon:not([disabled])[open],
-:not(.urlbar-icon-wrapper) > .urlbar-icon:not([disabled]):hover:active,
-.urlbar-icon-wrapper:not([disabled])[open],
-.urlbar-icon-wrapper:not([disabled]):hover:active {
+:not(.urlbar-icon-wrapper) > .urlbar-icon:not([disabled]):is([open], :hover:active),
+.urlbar-icon-wrapper:not([disabled]):is([open], :hover:active) {
     background-color: var(--desaturate-dimmed-further) !important;
 }
 
@@ -21,7 +19,7 @@
     border-radius: 3px !important;
 }
 
-#page-action-buttons> :not([hidden]):not(toolbartabstop)~#pageActionSeparator {
+#page-action-buttons > :not([hidden], toolbartabstop) ~ #pageActionSeparator {
     visibility: collapse !important;
     margin-left: 4px !important;
     margin-right: 4px !important;
@@ -34,7 +32,7 @@
     border-radius: 3px !important;
 }
 
-#page-action-buttons>:is(.urlbar-icon, .urlbar-icon-wrapper),
+#page-action-buttons > :is(.urlbar-icon, .urlbar-icon-wrapper),
 #urlbar-go-button,
 #urlbar-zoom-button,
 #pocket-button {
@@ -105,20 +103,23 @@
     color: var(--ui-selection-color) !important;
 }
 
-#tracking-protection-icon-box>#tracking-protection-icon-animatable-box {
+#tracking-protection-icon-box
+    > :is(#tracking-protection-icon-animatable-box, #tracking-protection-icon) {
     margin-inline-start: 0px !important;
 }
 
-#tracking-protection-icon-box>#tracking-protection-icon {
-    margin-inline-start: 0px !important;
-}
-
-toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:hover, [open="true"]) #tracking-protection-icon-box:not([animate="true"]) #tracking-protection-icon {
+toolbarpaletteitem[removable="false"]
+    #tracking-protection-icon-container:is(:hover, [open="true"])
+    #tracking-protection-icon-box:not([animate="true"])
+    #tracking-protection-icon {
     display: -moz-box !important;
     fill-opacity: 0.6 !important;
 }
 
-toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:hover, [open="true"]) #tracking-protection-icon-box:not([animate="true"]) #tracking-protection-icon-animatable-box {
+toolbarpaletteitem[removable="false"]
+    #tracking-protection-icon-container:is(:hover, [open="true"])
+    #tracking-protection-icon-box:not([animate="true"])
+    #tracking-protection-icon-animatable-box {
     display: none !important;
 }
 
@@ -140,47 +141,65 @@ toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:ho
     filter: brightness(1.15) saturate(1.5) contrast(1.15) !important;
 } */
 
-#tracking-protection-icon-container:is([open="true"], :hover) #tracking-protection-icon-box[active]:not([animate]) #tracking-protection-icon-animatable-box {
+#tracking-protection-icon-container:is([open="true"], :hover)
+    #tracking-protection-icon-box[active]:not([animate])
+    #tracking-protection-icon-animatable-box {
     display: block !important;
 }
 
-#tracking-protection-icon-container:not([open="true"], :hover) #tracking-protection-icon-box[active]:not([animate]) #tracking-protection-icon {
+#tracking-protection-icon-container:not([open="true"], :hover)
+    #tracking-protection-icon-box[active]:not([animate])
+    #tracking-protection-icon {
     display: -moz-box !important;
     fill: hsl(218, 100%, 72%) !important;
     fill-opacity: 1 !important;
 }
 
-#tracking-protection-icon-container:not([open="true"], :hover) #tracking-protection-icon-box[active]:not([animate]) #tracking-protection-icon-animatable-box,
-#tracking-protection-icon-container:is([open="true"], :hover) #tracking-protection-icon-box[active]:not([animate]) #tracking-protection-icon {
+#tracking-protection-icon-container:not([open="true"], :hover)
+    #tracking-protection-icon-box[active]:not([animate])
+    #tracking-protection-icon-animatable-box,
+#tracking-protection-icon-container:is([open="true"], :hover)
+    #tracking-protection-icon-box[active]:not([animate])
+    #tracking-protection-icon {
     display: none !important;
 }
 
-#identity-box:-moz-any(:hover:active, [open="true"], :hover:not([open="true"])),
+#identity-box:is(:hover:active, [open="true"], :hover:not([open="true"])),
 #identity-icon-box,
 .identity-box-button {
     background-color: transparent !important;
 }
 
 #identity-icon-box[open="true"] #identity-icon,
-#identity-icon-box:-moz-any(:hover:active, :hover:not([open="true"])) #identity-icon:hover {
+#identity-icon-box:is(:hover:active, :hover:not([open="true"])) #identity-icon:hover {
     fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
     fill-opacity: 1 !important;
 }
 
-#urlbar[pageproxystate="valid"] #identity-box.verifiedDomain #identity-icon-box[open="true"] #identity-icon,
-#urlbar[pageproxystate="valid"] #identity-box.verifiedDomain #identity-icon-box:-moz-any(:hover:active, :hover:not([open="true"])) #identity-icon:hover,
-#urlbar[pageproxystate="valid"] #identity-box.verifiedIdentity #identity-icon-box[open="true"] #identity-icon,
-#urlbar[pageproxystate="valid"] #identity-box.verifiedIdentity #identity-icon-box:-moz-any(:hover:active, :hover:not([open="true"])) #identity-icon:hover,
-#urlbar[pageproxystate="valid"] #identity-box.mixedActiveBlocked #identity-icon-box[open="true"] #identity-icon,
-#urlbar[pageproxystate="valid"] #identity-box.mixedActiveBlocked #identity-icon-box:-moz-any(:hover:active, :hover:not([open="true"])) #identity-icon:hover {
-/*     fill: hsl(119, 100%, 43%) !important; */
+#urlbar[pageproxystate="valid"]
+    #identity-box:is(.verifiedDomain, .verifiedIdentity, .mixedActiveBlocked)
+    #identity-icon-box[open="true"]
+    #identity-icon,
+#urlbar[pageproxystate="valid"]
+    #identity-box:is(.verifiedDomain, .verifiedIdentity, .mixedActiveBlocked)
+    #identity-icon-box:is(:hover:active, :hover:not([open="true"]))
+    #identity-icon:hover {
     fill: var(--secure-color) !important;
     fill-opacity: 1 !important;
 }
 
-#urlbar[pageproxystate="valid"] #identity-box.chromeUI:hover #identity-icon-box:not([open="true"]) > #identity-icon,
-#urlbar[pageproxystate="valid"] #identity-box.chromeUI:hover:active #identity-icon-box > #identity-icon,
-#urlbar[pageproxystate="valid"] #identity-box.chromeUI #identity-icon-box[open="true"] > #identity-icon {
+#urlbar[pageproxystate="valid"]
+    #identity-box.chromeUI:hover
+    #identity-icon-box:not([open="true"])
+    > #identity-icon,
+#urlbar[pageproxystate="valid"]
+    #identity-box.chromeUI:hover:active
+    #identity-icon-box
+    > #identity-icon,
+#urlbar[pageproxystate="valid"]
+    #identity-box.chromeUI
+    #identity-icon-box[open="true"]
+    > #identity-icon {
     list-style-image: url("chrome://branding/content/about-logo.png") !important;
 }
 
@@ -205,9 +224,18 @@ toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:ho
     background-color: var(--identity-box-hover-bg) !important;
 }
 
-#urlbar[pageproxystate="valid"] #identity-box.chromeUI:hover #identity-icon-box:not([open="true"]) > #identity-icon-label,
-#urlbar[pageproxystate="valid"] #identity-box.chromeUI:hover:active #identity-icon-box > #identity-icon-label,
-#urlbar[pageproxystate="valid"] #identity-box.chromeUI #identity-icon-box[open="true"] > #identity-icon-label {
+#urlbar[pageproxystate="valid"]
+    #identity-box.chromeUI:hover
+    #identity-icon-box:not([open="true"])
+    > #identity-icon-label,
+#urlbar[pageproxystate="valid"]
+    #identity-box.chromeUI:hover:active
+    #identity-icon-box
+    > #identity-icon-label,
+#urlbar[pageproxystate="valid"]
+    #identity-box.chromeUI
+    #identity-icon-box[open="true"]
+    > #identity-icon-label {
     opacity: 1 !important;
 }
 
@@ -235,26 +263,20 @@ toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:ho
     display: none !important;
 }
 
-#identity-box.verifiedIdentity #identity-icon-label {
-    display: none !important;
-}
-
+#identity-box.verifiedIdentity #identity-icon-label,
 #identity-box:not(.chromeUI) #identity-icon-label {
     display: none !important;
 }
 
 /* remove little border between identity icon and url */
-#identity-box.notSecureText,
-#identity-box.verifiedIdentity,
+#identity-box:is(.notSecureText, .verifiedIdentity),
 #urlbar-display-box {
     border: none !important;
 }
 
 #tracking-protection-icon-container {
-    margin-inline-end: 7px !important;
-    padding-inline-end: 1px !important;
-    margin-inline-start: 0px !important;
-    padding-inline-start: 7px !important;
+    margin-inline: 0 7px !important;
+    padding-inline: 7px 1px !important;
     border: none !important;
     background: none !important;
 }
@@ -267,9 +289,7 @@ toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:ho
     display: none !important;
 }
 
-#identity-box[pageproxystate="valid"].notSecureText,
-#identity-box[pageproxystate="valid"].verifiedIdentity,
-#identity-box[pageproxystate="valid"].extensionPage {
+#identity-box[pageproxystate="valid"]:is(.notSecureText, .verifiedIdentity .extensionPage) {
     padding-inline-end: 6px !important;
     margin-inline-end: 2px !important;
 }
@@ -285,7 +305,10 @@ toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:ho
     border: none !important;
 }
 
-#identity-popup-mainView > #identity-popup-security > .identity-popup-security-content > .identity-popup-security-connection {
+#identity-popup-mainView
+    > #identity-popup-security
+    > .identity-popup-security-content
+    > .identity-popup-security-connection {
     background-position: 2.05em 40% !important;
     background-size: 18px auto !important;
 }
@@ -303,21 +326,31 @@ toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:ho
     margin-left: -17px !important;
 }
 
-#identity-popup[connection^=secure] .identity-popup-security-connection,
+#identity-popup[connection^="secure"] .identity-popup-security-connection,
 :root[lwt-popup-brighttext] .identity-popup-connection-secure {
-/*   fill: hsl(114, 100%, 37%) !important; */
+    /*   fill: hsl(114, 100%, 37%) !important; */
     fill: var(--secure-color) !important;
     color: var(--secure-color) !important;
 }
 
 #protections-popup-mainView-panel-header-section {
-  background: radial-gradient(circle farthest-side at top right, hsl(318, 73%, 69%), hsl(265, 100%, 69%), hsl(217, 90%, 39%)) !important;
+    background: radial-gradient(
+        circle farthest-side at top right,
+        hsl(318, 73%, 69%),
+        hsl(265, 100%, 69%),
+        hsl(217, 90%, 39%)
+    ) !important;
 }
 
 #protections-popup-milestones {
     border-radius: 4px !important;
     overflow: hidden !important;
-    background: radial-gradient(circle farthest-side at top left, hsla(318, 73%, 69%, 0.1), hsla(265, 100%, 69%, 0.25), hsla(217, 90%, 39%, 0.5)) !important;
+    background: radial-gradient(
+        circle farthest-side at top left,
+        hsla(318, 73%, 69%, 0.1),
+        hsla(265, 100%, 69%, 0.25),
+        hsla(217, 90%, 39%, 0.5)
+    ) !important;
 }
 
 #protections-popup-milestones-content {
@@ -329,7 +362,7 @@ toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:ho
 }
 
 #protections-popup-not-blocking-section-why {
-	border-radius: 0.1% !important;
+    border-radius: 0.1% !important;
 }
 
 .identity-popup-warning-box {
@@ -344,7 +377,8 @@ toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:ho
 
 #identity-popup[customroot="true"] [when-customroot="true"],
 #identity-popup[connection="not-secure"] [when-connection~="not-secure"],
-#identity-popup[connection="secure-cert-user-overridden"] [when-connection~="secure-cert-user-overridden"],
+#identity-popup[connection="secure-cert-user-overridden"]
+    [when-connection~="secure-cert-user-overridden"],
 #identity-popup[connection="secure-ev"] [when-connection~="secure-ev"],
 #identity-popup[connection="secure"] [when-connection~="secure"],
 #identity-popup[connection="chrome"] [when-connection~="chrome"],
@@ -354,14 +388,18 @@ toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:ho
 #identity-popup[connection="https-only-error-page"] [when-connection~="https-only-error-page"],
 #identity-popup[ciphers="weak"] [when-ciphers~="weak"],
 #identity-popup[mixedcontent~="active-loaded"] [when-mixedcontent="active-loaded"],
-#identity-popup[mixedcontent~="passive-loaded"]:not([mixedcontent~="active-loaded"]) [when-mixedcontent="passive-loaded"],
-#identity-popup[mixedcontent~="active-blocked"]:not([mixedcontent~="passive-loaded"]) [when-mixedcontent="active-blocked"],
-#identity-popup[mixedcontent~="active-blocked"][mixedcontent~="passive-loaded"] [when-mixedcontent~="active-blocked"][when-mixedcontent~="passive-loaded"],
+#identity-popup[mixedcontent~="passive-loaded"]:not([mixedcontent~="active-loaded"])
+    [when-mixedcontent="passive-loaded"],
+#identity-popup[mixedcontent~="active-blocked"]:not([mixedcontent~="passive-loaded"])
+    [when-mixedcontent="active-blocked"],
+#identity-popup[mixedcontent~="active-blocked"][mixedcontent~="passive-loaded"]
+    [when-mixedcontent~="active-blocked"][when-mixedcontent~="passive-loaded"],
 #identity-popup[httpsonlystatus="exception"] [when-httpsonlystatus~="exception"],
 #identity-popup[httpsonlystatus="upgraded"] [when-httpsonlystatus~="upgraded"],
 #identity-popup[httpsonlystatus="failed-top"] [when-httpsonlystatus~="failed-top"],
 #identity-popup[httpsonlystatus="failed-sub"] [when-httpsonlystatus~="failed-sub"],
-#identity-popup-securityView-body[mixedcontent~="active-blocked"]>button[when-mixedcontent="active-blocked"] {
+#identity-popup-securityView-body[mixedcontent~="active-blocked"]
+    > button[when-mixedcontent="active-blocked"] {
     display: -moz-box !important;
 }
 
@@ -375,8 +413,7 @@ toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:ho
     align-self: center !important;
 }
 
-#identity-popup-multiView .panel-button:not([disabled]):hover:active,
-#identity-popup-multiView .panel-button:not([disabled])[open] {
+#identity-popup-multiView .panel-button:not([disabled]):is(:hover:active, [open]) {
     background-color: var(--arrowpanel-dimmed-even-further) !important;
 }
 
@@ -428,7 +465,6 @@ toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:ho
     width: 14px !important;
 } */
 
-
 /* hide tracking protection icon on new tab page, and show search identity icon. again, message u/MotherStylus if you want my tab notes addon. */
 #main-window[title="Tab Notes - Firefox Nightly"] #tracking-protection-icon-container {
     visibility: collapse;
@@ -439,11 +475,12 @@ toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:ho
     color: var(--toolbar-color) !important;
 }
 
-#urlbar[focused="true"] .urlbar-input-box>#urlbar-input::placeholder {
+#urlbar[focused="true"] .urlbar-input-box > #urlbar-input::placeholder {
     opacity: 0.65 !important;
 }
 
-@-moz-document url("chrome://browser/content/webrtcIndicator.xul") {
+@-moz-document url("chrome://browser/content/webrtcIndicator.xul")
+{
     :root {
         display: none !important;
     }
@@ -486,7 +523,7 @@ toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:ho
 }
 
 #urlbar #urlbar-input {
-    height: 33px !important;
+    height: var(--urlbar-height) !important;
 }
 
 #urlbar[pageproxystate="valid"] #identity-box.extensionPage {
@@ -501,8 +538,7 @@ toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:ho
     display: -moz-box !important;
 }
 
-#identity-box:not(.chromeUI),
-#identity-box[pageproxystate="invalid"] {
+#identity-box:is(:not(.chromeUI), [pageproxystate="invalid"]) {
     margin-inline-start: -8px !important;
     padding-inline-start: 0px !important;
 }
@@ -544,30 +580,29 @@ toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:ho
 
 #identity-box,
 #tracking-protection-icon-container {
-    fill-opacity: .6 !important;
+    fill-opacity: 0.6 !important;
 }
 
-#tracking-protection-icon-container:hover:not([open="true"]) #tracking-protection-icon-box,
-#tracking-protection-icon-container[open="true"] #tracking-protection-icon-box {
-    fill-opacity: 1 !important;
-    fill: hsl(275, 100%, 75%) !important;
-}
-
-#tracking-protection-icon-container:hover:not([open="true"]) #tracking-protection-icon-box[hasException],
-#tracking-protection-icon-container[open="true"] #tracking-protection-icon-box[hasException] {
-    fill-opacity: 1 !important;
-    fill: hsl(229, 100%, 75%) !important;
-}
-
-#tracking-protection-icon-container:hover:not([open="true"]),
-#tracking-protection-icon-container[open="true"] {
+#tracking-protection-icon-container:is([open="true"], :hover:not([open="true"])) {
     background-color: transparent !important;
     fill-opacity: 1 !important;
 }
 
+#tracking-protection-icon-container:is([open="true"], :hover:not([open="true"]))
+    #tracking-protection-icon-box {
+    fill-opacity: 1 !important;
+    fill: hsl(275, 100%, 75%) !important;
+}
+
+#tracking-protection-icon-container:is([open="true"], :hover:not([open="true"]))
+    #tracking-protection-icon-box[hasException] {
+    fill-opacity: 1 !important;
+    fill: hsl(229, 100%, 75%) !important;
+}
+
 #identity-box.extensionPage #identity-icon,
 #urlbar[pageproxystate="invalid"] #identity-box #identity-icon {
-    fill-opacity: .6 !important;
+    fill-opacity: 0.6 !important;
     list-style-image: url("data:image/svg+xml;utf8,<svg height='1792' viewBox='-40 0 1792 1792' width='1792' xmlns='http://www.w3.org/2000/svg'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M896 786h725q12 67 12 128 0 217-91 387.5t-259.5 266.5-386.5 96q-157 0-299-60.5t-245-163.5-163.5-245-60.5-299 60.5-299 163.5-245 245-163.5 299-60.5q300 0 515 201l-209 201q-123-119-306-119-129 0-238.5 65t-173.5 176.5-64 243.5 64 243.5 173.5 176.5 238.5 65q87 0 160-24t120-60 82-82 51.5-87 22.5-78h-436v-264z'/></svg>") !important;
 }
 
@@ -594,9 +629,8 @@ toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:ho
     margin-inline-start: -0.6px !important;
 }
 
-#identity-box:not(.chromeUI),
-#tracking-protection-icon-container,
-#identity-box[pageproxystate="invalid"] {
+#identity-box:is(:not(.chromeUI), [pageproxystate="invalid"]),
+#tracking-protection-icon-container {
     margin-top: 0.6px !important;
 }
 
@@ -679,7 +713,9 @@ toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:ho
 }
 
 #urlbar[searchmode] > #urlbar-input-container > #identity-box,
-#urlbar[actiontype="switchtab"]:not([actionoverride="true"]) > #urlbar-input-container > #identity-box {
+#urlbar[actiontype="switchtab"]:not([actionoverride="true"])
+    > #urlbar-input-container
+    > #identity-box {
     background: none !important;
     padding-inline-start: 8px !important;
     margin-inline-start: 0 !important;
@@ -690,7 +726,10 @@ toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:ho
 }
 
 #urlbar[searchmode] > #urlbar-input-container > #identity-box #identity-icon,
-#urlbar[actiontype="switchtab"]:not([actionoverride="true"]) > #urlbar-input-container > #identity-box #identity-icon {
+#urlbar[actiontype="switchtab"]:not([actionoverride="true"])
+    > #urlbar-input-container
+    > #identity-box
+    #identity-icon {
     margin-inline-start: 0 !important;
     margin-inline-end: 0 !important;
 }

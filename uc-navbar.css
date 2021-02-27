@@ -1,8 +1,5 @@
 /* remove line under navigation toolbar */
-#navigator-toolbox:-moz-lwtheme {
-    border: none !important;
-}
-
+#navigator-toolbox:-moz-lwtheme,
 :root:not([sizemode="normal"]) #navigator-toolbox {
     border: none !important;
 }
@@ -11,10 +8,6 @@
 .searchbar-textbox {
     border: none !important;
     box-shadow: none !important;
-}
-
-#urlbar,
-.searchbar-textbox {
     min-height: var(--urlbar-height) !important;
 }
 
@@ -25,7 +18,7 @@ toolbarspring {
     -moz-box-flex: 1 !important;
 }
 
-:root:not([uidensity="compact"]) #back-button>.toolbarbutton-icon {
+:root:not([uidensity="compact"]) #back-button > .toolbarbutton-icon {
     background-color: unset !important;
     border: unset !important;
     padding: var(--toolbarbutton-inner-padding) !important;
@@ -34,20 +27,22 @@ toolbarspring {
     height: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
 }
 
-:root:not([uidensity="compact"]) #back-button:hover:not([disabled])>.toolbarbutton-icon {
+:root:not([uidensity="compact"]) #back-button:hover:not([disabled]) > .toolbarbutton-icon {
     background-color: var(--toolbarbutton-hover-background) !important;
 }
 
-:root:not([uidensity="compact"]) #back-button:active:not([disabled])>.toolbarbutton-icon {
+:root:not([uidensity="compact"]) #back-button:active:not([disabled]) > .toolbarbutton-icon {
     background-color: var(--toolbarbutton-active-background) !important;
 }
 
 /* toolbar button badges */
-#nav-bar-customization-target toolbarbutton:not([attention="warning"]) .toolbarbutton-badge,
-#widget-overflow toolbarbutton:not([attention="warning"]) .toolbarbutton-badge {
+:is(#nav-bar-customization-target, #widget-overflow)
+    toolbarbutton:not([attention="warning"])
+    .toolbarbutton-badge {
     background-color: var(--badge-color-dark) !important;
     color: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
-    box-shadow: 0 1px 2px hsla(0, 0%, 100%, 0.1) inset, 0 -1px 2px hsla(0, 0%, 0%, 0.2) inset, 0 1px 1px hsla(240, 3%, 12%, 0.15), 0 1px 3px hsla(240, 3%, 12%, 0.2) !important;
+    box-shadow: 0 1px 2px hsla(0, 0%, 100%, 0.1) inset, 0 -1px 2px hsla(0, 0%, 0%, 0.2) inset,
+        0 1px 1px hsla(240, 3%, 12%, 0.15), 0 1px 3px hsla(240, 3%, 12%, 0.2) !important;
     padding-top: 1px !important;
     font-size: xx-small !important;
     line-height: 8.4px !important;
@@ -57,13 +52,16 @@ toolbarspring {
     margin-top: -5.5px !important;
 }
 
-#nav-bar-customization-target toolbarbutton[attention="warning"] .toolbarbutton-badge,
-#widget-overflow toolbarbutton[attention="warning"] .toolbarbutton-badge {
+:is(#nav-bar-customization-target, #widget-overflow)
+    toolbarbutton[attention="warning"]
+    .toolbarbutton-badge {
     margin-right: -4.4px !important;
     margin-top: -4px !important;
 }
 
-#back-button, #forward-button, #stop-reload-button {
+#back-button,
+#forward-button,
+#stop-reload-button {
     appearance: none !important;
     margin: 0 !important;
     padding: 0 var(--toolbarbutton-outer-padding) !important;
@@ -86,15 +84,16 @@ i haven't tested this on every scaling factor, if it makes things worse on your 
 }
 
 #nav-bar-customization-target {
-    padding-left: 2px !important;
+    padding-inline-start: var(--toolbarbutton-outer-padding) !important;
 }
 
 #TabsToolbar-customization-target > #back-button {
     margin-inline-start: 2px !important;
 }
 
-:root:not([uidensity="compact"]) #nav-bar-customization-target > :is(#stop-reload-button, #wrapper-stop-reload-button),
-:root:not([uidensity="compact"]) #TabsToolbar-customization-target > :is(#stop-reload-button, #wrapper-stop-reload-button) {
+:root:not([uidensity="compact"])
+    :is(#nav-bar-customization-target, #TabsToolbar-customization-target)
+    > :is(#stop-reload-button, #wrapper-stop-reload-button) {
     margin-inline: -2px !important;
 }
 
@@ -102,7 +101,7 @@ i haven't tested this on every scaling factor, if it makes things worse on your 
     pointer-events: none !important;
 }
 
-#stop-reload-button>* {
+#stop-reload-button > * {
     pointer-events: auto !important;
 }
 
@@ -112,20 +111,20 @@ i haven't tested this on every scaling factor, if it makes things worse on your 
 }
 
 #nav-bar-customization-target {
-    overflow: visible !important
+    overflow: visible !important;
 }
 
-toolbar .toolbarbutton-1:not([disabled]):hover:-moz-any([open]) > .toolbarbutton-icon {
+toolbar .toolbarbutton-1:not([disabled])[open]:hover > .toolbarbutton-icon {
     background-color: var(--toolbarbutton-active-background) !important;
 }
 
-toolbar .toolbarbutton-1:not([disabled]):hover:-moz-any([checked]) > .toolbarbutton-icon {
-    background-color: var(--toolbarbutton-hover-background) !important;
-}
-
-toolbar .toolbarbutton-1:not([disabled]):-moz-any([checked]) > .toolbarbutton-icon {
+toolbar .toolbarbutton-1:not([disabled])[checked] > .toolbarbutton-icon {
     background-color: var(--toolbarbutton-checked-background) !important;
     transition: none !important;
+}
+
+toolbar .toolbarbutton-1:not([disabled])[checked]:hover > .toolbarbutton-icon {
+    background-color: var(--toolbarbutton-hover-background) !important;
 }
 
 #navigator-toolbox {
@@ -156,15 +155,15 @@ toolbar .toolbarbutton-1:not([disabled]):-moz-any([checked]) > .toolbarbutton-ic
 }
 
 #navigator-toolbox,
-#navigator-toolbox > *{
-  width: -moz-available;
+#navigator-toolbox > * {
+    width: -moz-available;
 }
 
-#downloadsListBox>.download-state>toolbarseparator {
+#downloadsListBox > .download-state > toolbarseparator {
     visibility: collapse !important;
 }
 
-#downloadsListBox>.download-state {
+#downloadsListBox > .download-state {
     min-height: 66px !important;
     height: 66px !important;
     -moz-box-align: center !important;
@@ -185,7 +184,7 @@ toolbar .toolbarbutton-1:not([disabled]):-moz-any([checked]) > .toolbarbutton-ic
     background-color: unset !important;
 }
 
-#downloadsListBox>.download-state:hover {
+#downloadsListBox > .download-state:hover {
     background-image: linear-gradient(
         to right,
         hsla(235.86, 100%, 82.94%, 0.092) 7.1%,
@@ -202,7 +201,7 @@ toolbar .toolbarbutton-1:not([disabled]):-moz-any([checked]) > .toolbarbutton-ic
     min-height: 66px !important;
 }
 
-#downloadsListBox>.download-state>.downloadButton {
+#downloadsListBox > .download-state > .downloadButton {
     min-height: 56px !important;
     min-width: 56px !important;
     margin: 5px !important;
@@ -212,11 +211,11 @@ toolbar .toolbarbutton-1:not([disabled]):-moz-any([checked]) > .toolbarbutton-ic
     -moz-box-pack: center !important;
 }
 
-#downloadsListBox>.download-state>.downloadButton:hover .button-box {
+#downloadsListBox > .download-state > .downloadButton:hover .button-box {
     background: var(--arrowpanel-dimmed) !important;
 }
 
-#downloadsListBox>.download-state>.downloadButton .button-box {
+#downloadsListBox > .download-state > .downloadButton .button-box {
     min-width: 35.5px !important;
     max-width: 35.5px !important;
     min-height: 35.5px !important;
@@ -224,7 +223,7 @@ toolbar .toolbarbutton-1:not([disabled]):-moz-any([checked]) > .toolbarbutton-ic
     border-radius: 100% !important;
 }
 
-#downloadsListBox>.download-state>.downloadButton .button-box .button-icon {
+#downloadsListBox > .download-state > .downloadButton .button-box .button-icon {
     width: 20.5px !important;
     height: 20px !important;
 }

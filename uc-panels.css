@@ -24,8 +24,7 @@
     margin-top: -0.5px !important;
 }
 
-.panel-footer > button:not([disabled]):hover:active,
-.panel-footer > button:not([disabled])[open] {
+.panel-footer > button:not([disabled]):is(:hover:active, [open]) {
     background-color: var(--arrowpanel-dimmed-even-further) !important;
 }
 
@@ -90,7 +89,7 @@ popupnotification checkbox:hover .checkbox-check[checked]:not(:disabled) {
     display: none !important;
 } */
 
-/* popupnotification:-moz-any([popupid="update-available"]) {
+/* popupnotification:is([popupid="update-available"]) {
     display: none !important;
 } */
 

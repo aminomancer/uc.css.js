@@ -15,30 +15,24 @@
 }
 
 .urlbarView {
-    top: calc(100% + 3px) !important;
     background: transparent !important;
     border: none !important;
     font-size: 1.04em !important;
 }
 
-#urlbarView-results {
+#urlbarView-results,
+#urlbar-results {
     border-bottom-left-radius: 4px !important;
     border-bottom-right-radius: 4px !important;
 }
 
 #urlbar-results {
     border: none !important;
-    border-bottom-left-radius: 4px !important;
-    border-bottom-right-radius: 4px !important;
 }
 
 #urlbar-container {
     transform: translateY(0);
     position: relative;
-}
-
-.urlbarView {
-    top: 100% !important;
 }
 
 #urlbar-results {
@@ -56,7 +50,7 @@
     background-position: center !important;
 }
 
-.urlbarView-row:not([type]):not([has-url]) .urlbarView-favicon {
+.urlbarView-row:not([type], [has-url]) .urlbarView-favicon {
     max-width: 16px !important;
     max-height: 16px !important;
 }
@@ -65,7 +59,8 @@
     margin-inline-end: 0px !important;
 }
 
-.urlbarView-row:is([type="switchtab"], [type="bookmark"], [type="remotetab"]) .urlbarView-type-icon {
+.urlbarView-row:is([type="switchtab"], [type="bookmark"], [type="remotetab"])
+    .urlbarView-type-icon {
     fill-opacity: 0.75 !important;
     margin-inline-start: 22px !important;
     margin-bottom: 1px !important;
@@ -113,7 +108,9 @@
     background-position: 0px 1px !important;
 }
 
-.urlbarView[actionoverride] .urlbarView-row:is([type="switchtab"], [type="remotetab"]) .urlbarView-type-icon {
+.urlbarView[actionoverride]
+    .urlbarView-row:is([type="switchtab"], [type="remotetab"])
+    .urlbarView-type-icon {
     background: url("chrome://browser/skin/forward.svg") no-repeat !important;
     background-size: 90% !important;
     background-position: 0px 1.5px !important;
@@ -123,7 +120,11 @@
     margin-inline-start: 20px !important;
 }
 
-:root[lwt-toolbar-field-brighttext] .urlbarView-row[source]:not([selected]) > .urlbarView-row-inner > .urlbarView-no-wrap > .urlbarView-favicon {
+:root[lwt-toolbar-field-brighttext]
+    .urlbarView-row[source]:not([selected])
+    > .urlbarView-row-inner
+    > .urlbarView-no-wrap
+    > .urlbarView-favicon {
     fill: currentColor !important;
     fill-opacity: 0.6 !important;
 }
@@ -148,7 +149,8 @@
     text-transform: lowercase !important;
 }
 
-.urlbarView-tip-button, .urlbarView-tip-help {
+.urlbarView-tip-button,
+.urlbarView-tip-help {
     margin-block: unset !important;
     height: unset !important;
     min-height: 16px !important;
@@ -186,21 +188,21 @@
     fill: var(--urlbar-popup-action-color) !important;
 }
 
-.urlbarView-tip-help:hover, .urlbarView-tip-button:hover {
+:is(.urlbarView-tip-help, .urlbarView-tip-button):hover {
     background-color: var(--arrowpanel-dimmed) !important;
     color: currentColor !important;
     fill: currentColor !important;
 }
 
-.urlbarView-tip-help:-moz-any(:hover, [aria-selected]), .urlbarView-tip-button:-moz-any(:hover, [aria-selected]) {
+:is(.urlbarView-tip-help, .urlbarView-tip-button):is(:hover, [aria-selected]) {
     box-shadow: none !important;
 }
 
-.urlbarView-tip-help[aria-selected]:not(:hover), .urlbarView-tip-button[aria-selected]:not(:hover) {
+:is(.urlbarView-tip-help, .urlbarView-tip-button)[aria-selected]:not(:hover) {
     background-color: transparent !important;
 }
 
-.urlbarView-tip-help:hover:active, .urlbarView-tip-button:hover:active {
+:is(.urlbarView-tip-help, .urlbarView-tip-button):hover:active {
     background-color: var(--arrowpanel-dimmed-further) !important;
     color: currentColor !important;
     fill: currentColor !important;
@@ -287,13 +289,15 @@
     font-weight: initial !important;
 }
 
-.urlbarView-favicon[src="moz-extension://cd4aad93-9726-49dd-a5cd-9e5f5c4d76f4/favicon.ico"],
-.urlbarView-favicon[src="page-icon:https://www.google.com/"],
-.urlbarView-favicon[src="page-icon:http://google.com/"],
-.urlbarView-favicon[src^="page-icon:https://www.google.com/search?"],
-.urlbarView-favicon[src^="page-icon:http://google.com/search?"] {
+.urlbarView-favicon:is([src="moz-extension://cd4aad93-9726-49dd-a5cd-9e5f5c4d76f4/favicon.ico"],
+    [src="page-icon:https://www.google.com/"],
+    [src="page-icon:http://google.com/"],
+    [src^="page-icon:https://www.google.com/search?"],
+    [src^="page-icon:http://google.com/search?"])
+{
     box-sizing: border-box !important;
-    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 48 48'><defs><path id='prefix__a' d='M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z'/></defs><clipPath id='prefix__b'><use xlink:href='%23prefix__a' overflow='visible'/></clipPath><path clip-path='url(%23prefix__b)' fill='%23FBBC05' d='M0 37V11l17 13z'/><path clip-path='url(%23prefix__b)' fill='%23EA4335' d='M0 11l17 13 7-6.1L48 14V0H0z'/><path clip-path='url(%23prefix__b)' fill='%2334A853' d='M0 37l30-23 7.9 1L48 0v48H0z'/><path clip-path='url(%23prefix__b)' fill='%234285F4' d='M48 48L17 24l-4-3 35-10z'/></svg>") no-repeat !important;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 48 48'><defs><path id='prefix__a' d='M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z'/></defs><clipPath id='prefix__b'><use xlink:href='%23prefix__a' overflow='visible'/></clipPath><path clip-path='url(%23prefix__b)' fill='%23FBBC05' d='M0 37V11l17 13z'/><path clip-path='url(%23prefix__b)' fill='%23EA4335' d='M0 11l17 13 7-6.1L48 14V0H0z'/><path clip-path='url(%23prefix__b)' fill='%2334A853' d='M0 37l30-23 7.9 1L48 0v48H0z'/><path clip-path='url(%23prefix__b)' fill='%234285F4' d='M48 48L17 24l-4-3 35-10z'/></svg>")
+        no-repeat !important;
     width: 16px !important;
     height: 16px !important;
     padding-left: 16px;
@@ -306,24 +310,24 @@
 .urlbarView-url {
     align-self: center !important;
     margin-top: 0.6px !important;
-} 
+}
 
-.urlbarView-row[type="tabtosearch"] > .urlbarView-row-inner > .urlbarView-no-wrap > .urlbarView-favicon {
+.urlbarView-row[type="tabtosearch"]
+    > .urlbarView-row-inner
+    > .urlbarView-no-wrap
+    > .urlbarView-favicon {
     color: var(--urlbar-popup-url-color) !important;
     border-radius: 2px !important;
 }
 
-.urlbarView-row[type="tabtosearch"][selected] > .urlbarView-row-inner > .urlbarView-no-wrap > .urlbarView-favicon {
+.urlbarView-row[type="tabtosearch"][selected]
+    > .urlbarView-row-inner
+    > .urlbarView-no-wrap
+    > .urlbarView-favicon {
     color: white !important;
     stroke: var(--urlbar-popup-action-color) !important;
     border-radius: 2px !important;
 }
-
-/* urlbar */
-/* #urlbar[breakout],
-#urlbar[breakout] .urlbarView {
-    transition: none !important;
-} */
 
 #urlbar,
 #urlbar[breakout-extend] {
@@ -346,15 +350,14 @@
 
 #urlbar[focused="true"] > #urlbar-input-container {
     background-color: var(--urlbar-input-bgcolor-even-brighter) !important;
-/*     box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.25) !important; */
+    /*     box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.25) !important; */
 }
 
 #urlbar {
     background: none !important;
 }
 
-#urlbar[breakout][breakout-extend] > #urlbar-background,
-#urlbar[breakout][breakout-extend] > .urlbarView {
+#urlbar[breakout][breakout-extend] > :is(#urlbar-background, .urlbarView) {
     animation-name: none !important;
     animation-timing-function: var(--animation-easing-function);
 }
@@ -416,19 +419,11 @@
 .urlbarView #urlbar-results {
     border-bottom-left-radius: 4px !important;
     border-bottom-right-radius: 4px !important;
-    box-shadow: 0 5px 18px rgba(0, 0, 0, .2);
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.2);
     padding-left: 3px !important;
     padding-right: 3.5px !important;
     padding-top: 3px !important;
     clip-path: inset(0 -100% -100% -100%);
-}
-
-.urlbarView {
-    direction: rtl !important;
-}
-
-.urlbarView * {
-    direction: ltr !important;
 }
 
 .urlbarView-row:last-child {
@@ -447,14 +442,6 @@
 
 .urlbarView-row {
     margin-bottom: 3px !important;
-}
-
-.urlbarView {
-    direction: initial !important;
-}
-
-.urlbarView * {
-    direction: initial !important;
 }
 
 .urlbarView-row:last-child {

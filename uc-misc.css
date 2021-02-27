@@ -1,8 +1,4 @@
-#statuspanel[type="status"] #statuspanel-label {
-    opacity: 0 !important;
-}
-
-#statuspanel[type="defaultStatus"] #statuspanel-label {
+#statuspanel:is([type="status"], [type="defaultStatus"]) #statuspanel-label {
     opacity: 0 !important;
 }
 
@@ -44,8 +40,8 @@ tooltip {
 }
 
 #fullscreen-warning {
-    background-image: url("texture/noise-512x512.png") !important;
     background-color: hsla(233.3, 39.1%, 9%, 0.58) !important;
+    background-image: url("texture/noise-512x512.png") !important;
     backdrop-filter: blur(10px) !important;
 }
 
@@ -67,20 +63,18 @@ browser[type="content"] > html {
     background: var(--in-content-bg-dark) !important;
 }
 
-:-moz-any(.unified-nav-forward, .unified-nav-back):not([_moz-menuactive])[uri^="file:///"],
-.tabbrowser-tab:-moz-any([label^="/A:/"i], [label^="/B:/"i], [label^="/C:/"i], [label^="/D:/"i], [label^="/E:/"i], [label^="/F:/"i], [label^="/G:/"i], [label^="/H:/"i], [label^="/I:/"i]) .tab-icon-image:not([src]) {
+:is(.unified-nav-forward, .unified-nav-back):not([_moz-menuactive])[uri^="file:///"],
+.tabbrowser-tab:is([label^="/A:/"i], [label^="/B:/"i], [label^="/C:/"i], [label^="/D:/"i], [label^="/E:/"i], [label^="/F:/"i], [label^="/G:/"i], [label^="/H:/"i], [label^="/I:/"i]) .tab-icon-image:not([src]) {
     list-style-image: url(chrome://browser/skin/notification-icons/persistent-storage.svg) !important;
 }
 
-:-moz-any(.unified-nav-forward, .unified-nav-back):not([_moz-menuactive])[uri^="file:///"]:-moz-any([uri$=".svg"i], [uri$=".png"i], [uri$=".jpg"i], [uri$=".jpeg"i], [uri$=".gif"i]),
+:is(.unified-nav-forward, .unified-nav-back):not([_moz-menuactive])[uri^="file:///"]:is([uri$=".svg"i], [uri$=".png"i], [uri$=".jpg"i], [uri$=".jpeg"i], [uri$=".gif"i]),
 .tabbrowser-tab[label*="Image, "][label$=" pixels)"] .tab-icon-image:not([src]),
-.tabbrowser-tab:-moz-any([label^="/A:/"i], [label^="/B:/"i], [label^="/C:/"i], [label^="/D:/"i], [label^="/E:/"i], [label^="/F:/"i], [label^="/G:/"i], [label^="/H:/"i], [label^="/I:/"i]):-moz-any([label$=".svg"i], [label$=".png"i], [label$=".jpg"i], [label$=".jpeg"i], [label$=".gif"i]) .tab-icon-image:not([src]) {
+.tabbrowser-tab:is([label^="/A:/"i], [label^="/B:/"i], [label^="/C:/"i], [label^="/D:/"i], [label^="/E:/"i], [label^="/F:/"i], [label^="/G:/"i], [label^="/H:/"i], [label^="/I:/"i]):is([label$=".svg"i], [label$=".png"i], [label$=".jpg"i], [label$=".jpeg"i], [label$=".gif"i]) .tab-icon-image:not([src]) {
     list-style-image: url(chrome://browser/skin/notification-icons/canvas.svg) !important;
 }
 
-#mainPopupSet textbox,
-#browser textbox,
-#navigator-toolbox textbox {
+:is(#mainPopupSet, #browser, #navigator-toolbox) textbox {
     -moz-appearance: none !important;
     user-select: text !important;
     -moz-user-select: text !important;
@@ -93,20 +87,17 @@ browser[type="content"] > html {
 }
 
 /* get rid of ugly outline on focused and clicked buttons and shit */
-:not(#browser) *:-moz-focusring,
-:not(#browser) *:focus,
+:not(#browser) :-moz-focusring,
+:not(#browser) :focus,
 :not(#browser) button::-moz-focus-inner,
-:not(#browser) *:-moz-focusring *,
-:not(#browser) *:focus * {
+:not(#browser) :-moz-focusring *,
+:not(#browser) :focus * {
     outline: unset !important;
     outline-offset: unset !important;
     -moz-outline-radius: unset !important;
 }
 
-#mainPopupSet ::selection,
-#browser ::selection,
-#navigator-toolbox ::selection,
-.sidebar-panel ::selection,
+:is(#mainPopupSet, #browser, #navigator-toolbox, .sidebar-panel) ::selection,
 link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
 {
     background-color: var(--ui-selection-bgcolor) !important;

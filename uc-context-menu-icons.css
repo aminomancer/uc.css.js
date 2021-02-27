@@ -302,6 +302,8 @@ menupopup#placesContext menuitem[type="radio"][checked="true"]::before{
 #context-bookmarklink:not(.menuitem-iconic)::before,
 #context-bookmarkpage:not(.menuitem-iconic)::before,
 #context-openlinkintab:not(.menuitem-iconic)::before,
+#context-openlinkincontainertab:not(.menuitem-iconic)::before,
+#context-openlinkinusercontext-menu:not(.menuitem-iconic)::before,
 #context-openframeintab:not(.menuitem-iconic)::before,
 #context-openlinkincurrent:not(.menuitem-iconic)::before,
 #context-openlink:not(.menuitem-iconic)::before,
@@ -554,23 +556,9 @@ menupopup#placesContext menuitem[type="radio"][checked="true"]::before{
     background-image: url("chrome://browser/skin/tab.svg") !important;
 }
 
-#context-openlinkinusercontext-menu:not(.menuitem-iconic) .menu-text,
-#context-openlinkincontainertab:not(.menuitem-iconic) .menu-text {
-    visibility: hidden !important;
-    width: 0px !important;
-}
-
 #context-openlinkinusercontext-menu:not(.menuitem-iconic)::before,
 #context-openlinkincontainertab:not(.menuitem-iconic)::before {
-    position: relative !important;
-    display: -moz-inline-box !important;
-    padding-inline: 21.5px 0 !important;
-    margin-inline: 6px 0 !important;
-    fill: currentColor !important;
-    fill-opacity: context-fill-opacity !important;
-    -moz-context-properties: fill, fill-opacity, stroke !important;
-    background: url("data:image/svg+xml;utf8,<svg height='16' viewBox='0 0 16 16' width='16' xmlns='http://www.w3.org/2000/svg'><g fill='context-fill' fill-opacity='context-fill-opacity' fill-rule='evenodd'><rect height='6' rx='1' width='6' x='1' y='1'/><path d='m11 1h2v6h-2z' transform='matrix(0 1 -1 0 16 -8)'/><path d='m11 1h2v6h-2z'/><rect height='6' rx='1' width='6' x='1' y='9'/><rect height='6' rx='1' width='6' x='9' y='9'/></g></svg>") left no-repeat !important;
-    content: "Open Link in Container Tab" !important;
+    background-image: url("data:image/svg+xml;utf8,<svg height='16' width='16' xmlns='http://www.w3.org/2000/svg'><g fill='context-fill' fill-opacity='context-fill-opacity'><rect height='6' rx='1' width='6' x='1' y='1'/><path d='M15 3v2H9V3z'/><path d='M11 1h2v6h-2z'/><rect height='6' rx='1' width='6' x='1' y='9'/><rect height='6' rx='1' width='6' x='9' y='9'/></g></svg>") !important;
 }
 
 #context-openlink:not(.menuitem-iconic)::before,

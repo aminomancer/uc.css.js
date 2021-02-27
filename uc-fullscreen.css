@@ -13,7 +13,7 @@
 }
 
 :root[inFullscreen]:not([customizing]) #navigator-toolbox {
-    margin-top: calc(-40.6px - var(--tab-min-height)) !important;
+    margin-top: calc(0px - var(--urlbar-container-height) - var(--tab-min-height)) !important;
     transition: all .2s ease-in-out 0s !important;
     transition-delay: 0s !important;
     opacity: 0 !important;
@@ -45,7 +45,7 @@ requires fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-statu
 :root[inFullscreen] #navigator-toolbox {
     position: fixed !important;
     display: block;
-    height: 75.5px !important;
+/*     height: 75.5px !important; */
 }
 
 :root[inFullscreen]:not([customizing]) .browserContainer>findbar {

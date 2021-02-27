@@ -189,7 +189,7 @@ findbar:focus-within .findbar-textbox:not([status="notfound"]) ~ .matches-indica
 }
 
 .findbar-textbox[status="notfound"]
-    ~ :-moz-any(.findbar-find-previous, .findbar-find-next)
+    ~ :is(.findbar-find-previous, .findbar-find-next)
     > .toolbarbutton-icon,
 .findbar-find-next[disabled="true"] > .toolbarbutton-icon,
 .findbar-find-previous[disabled="true"] > .toolbarbutton-icon {
@@ -198,23 +198,23 @@ findbar:focus-within .findbar-textbox:not([status="notfound"]) ~ .matches-indica
     opacity: 0.25 !important;
 }
 
-.findbar-textbox[status="notfound"] ~ :-moz-any(.findbar-find-previous, .findbar-find-next) {
+.findbar-textbox[status="notfound"] ~ :is(.findbar-find-previous, .findbar-find-next) {
     pointer-events: none !important;
 }
 
-.findbar-textbox:focus ~ :-moz-any(.findbar-find-previous, .findbar-find-next) {
+.findbar-textbox:focus ~ :is(.findbar-find-previous, .findbar-find-next) {
     background-color: var(--search-box-focus) !important;
     transition: 300ms !important;
 }
 
-.findbar-textbox[status="notfound"] ~ :-moz-any(.findbar-find-previous, .findbar-find-next) {
+.findbar-textbox[status="notfound"] ~ :is(.findbar-find-previous, .findbar-find-next) {
     background-color: var(--search-box-null) !important;
     transition: 400ms !important;
 }
 
 findbar:focus-within
     .findbar-textbox:not([status="notfound"])
-    ~ :-moz-any(.findbar-find-previous, .findbar-find-next) {
+    ~ :is(.findbar-find-previous, .findbar-find-next) {
     background-color: var(--search-box-focus) !important;
     transition: 300ms !important;
 }

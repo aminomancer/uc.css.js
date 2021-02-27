@@ -1,5 +1,5 @@
 /* add icons to non-iconized appmenu items */
-.subviewbutton:not(.subviewbutton-iconic)>.toolbarbutton-icon {
+.subviewbutton:not(.subviewbutton-iconic) > .toolbarbutton-icon {
     -moz-context-properties: fill, fill-opacity;
     fill: currentColor;
 }
@@ -8,7 +8,7 @@
     list-style-image: url(chrome://browser/skin/save.svg);
 }
 
-#appMenu-save-file-button>.toolbarbutton-text {
+#appMenu-save-file-button > .toolbarbutton-text {
     padding: 0 !important;
     padding-inline-start: 8px !important;
 }
@@ -17,7 +17,7 @@
     list-style-image: url(chrome://browser/skin/open.svg);
 }
 
-#appMenu-open-file-button>.toolbarbutton-text {
+#appMenu-open-file-button > .toolbarbutton-text {
     padding: 0 !important;
     padding-inline-start: 8px !important;
 }
@@ -26,7 +26,7 @@
     list-style-image: url(chrome://devtools/skin/images/tool-application.svg);
 }
 
-#appMenu-more-button>.toolbarbutton-text {
+#appMenu-more-button > .toolbarbutton-text {
     padding: 0 !important;
     padding-inline-start: 8px !important;
 }
@@ -35,7 +35,7 @@
     list-style-image: url(chrome://devtools/skin/images/tool-webconsole.svg);
 }
 
-#appMenu-developer-button>.toolbarbutton-text {
+#appMenu-developer-button > .toolbarbutton-text {
     padding: 0 !important;
     padding-inline-start: 8px !important;
 }
@@ -44,7 +44,7 @@
     list-style-image: url(chrome://browser/skin/characterEncoding.svg);
 }
 
-#appMenu-characterencoding-button>.toolbarbutton-text {
+#appMenu-characterencoding-button > .toolbarbutton-text {
     padding: 0 !important;
     padding-inline-start: 8px !important;
 }
@@ -53,7 +53,7 @@
     list-style-image: url(chrome://browser/skin/readerMode.svg);
 }
 
-#appMenu-workoffline-button>.toolbarbutton-text {
+#appMenu-workoffline-button > .toolbarbutton-text {
     padding: 0 !important;
     padding-inline-start: 8px !important;
 }
@@ -97,7 +97,8 @@
     color: inherit !important;
 }
 
-.toolbaritem-combined-buttons:-moz-any(:not([cui-areatype="toolbar"]), [overflowedItem="true"])>toolbarbutton {
+.toolbaritem-combined-buttons:is(:not([cui-areatype="toolbar"]), [overflowedItem="true"])
+    > toolbarbutton {
     border-radius: 3px !important;
 }
 
@@ -116,7 +117,7 @@
     height: 20px !important;
 }
 
-#appMenu-zoomReset-button:not([disabled]):-moz-any(:hover, :focus) {
+#appMenu-zoomReset-button:not([disabled]):is(:hover, :focus) {
     border-color: transparent !important;
 }
 
@@ -124,22 +125,27 @@
     border-image-source: linear-gradient(transparent 4px, var(--lwt-toolbar-vertical-separator, hsla(240, 100%, 89%, 0.2)) 5.5px, var(--lwt-toolbar-vertical-separator, hsla(240, 100%, 89%, 0.2)) calc(100% - 6.5px), transparent calc(100% - 5px)) !important;
 } */
 
-#PanelUI-menu-button[badge-status=""]>.toolbarbutton-badge-stack>.toolbarbutton-badge {
+#PanelUI-menu-button[badge-status=""] > .toolbarbutton-badge-stack > .toolbarbutton-badge {
     display: none !important;
 }
 
-#PanelUI-menu-button[badge-status^="update"]>.toolbarbutton-badge-stack>.toolbarbutton-badge {
-    background: var(--update-badge-bg) url("data:image/svg+xml;utf8,<svg fill='context-fill' fill-opacity='context-fill-opacity' stroke='context-stroke' version='1.1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 5'><path d='M7.707 3.293l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L4 2.414l2.293 2.293a.997.997 0 001.414 0 1 1 0 000-1.414z'/></svg>") no-repeat center !important;
+#PanelUI-menu-button[badge-status^="update"] > .toolbarbutton-badge-stack > .toolbarbutton-badge {
+    background: var(--update-badge-bg)
+        url("data:image/svg+xml;utf8,<svg fill='context-fill' fill-opacity='context-fill-opacity' stroke='context-stroke' version='1.1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 5'><path d='M7.707 3.293l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L4 2.414l2.293 2.293a.997.997 0 001.414 0 1 1 0 000-1.414z'/></svg>")
+        no-repeat center !important;
     fill: transparent !important;
     background-size: 72% !important;
     -moz-context-properties: fill !important;
     padding: 0 !important;
 }
 
-#PanelUI-menu-button[badge-status^="addon"]>.toolbarbutton-badge-stack>.toolbarbutton-badge,
-#PanelUI-menu-button[badge-status^="extension"]>.toolbarbutton-badge-stack>.toolbarbutton-badge {
+#PanelUI-menu-button[badge-status^="addon"] > .toolbarbutton-badge-stack > .toolbarbutton-badge,
+#PanelUI-menu-button[badge-status^="extension"]
+    > .toolbarbutton-badge-stack
+    > .toolbarbutton-badge {
     display: none !important;
-    background: var(--update-badge-bg) url("chrome://browser/skin/addons/addon-install-installed.svg") !important;
+    background: var(--update-badge-bg)
+        url("chrome://browser/skin/addons/addon-install-installed.svg") !important;
     background-color: transparent !important;
     background-size: 100% !important;
     background-repeat: no-repeat !important;
@@ -155,12 +161,16 @@
     -moz-context-properties: fill, stroke !important;
 }
 
-#PanelUI-menu-button[badge-status^="update"]:is(:hover, [open])>.toolbarbutton-badge-stack>.toolbarbutton-badge {
+#PanelUI-menu-button[badge-status^="update"]:is(:hover, [open])
+    > .toolbarbutton-badge-stack
+    > .toolbarbutton-badge {
     fill: var(--update-badge-color) !important;
 }
 
 .panel-banner-item[notificationid^="update"]::after {
-    background: var(--update-badge-bg) url("data:image/svg+xml;utf8,<svg fill='context-fill' fill-opacity='context-fill-opacity' stroke='context-stroke' version='1.1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 5'><path d='M7.707 3.293l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L4 2.414l2.293 2.293a.997.997 0 001.414 0 1 1 0 000-1.414z'/></svg>") no-repeat center !important;
+    background: var(--update-badge-bg)
+        url("data:image/svg+xml;utf8,<svg fill='context-fill' fill-opacity='context-fill-opacity' stroke='context-stroke' version='1.1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 5'><path d='M7.707 3.293l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L4 2.414l2.293 2.293a.997.997 0 001.414 0 1 1 0 000-1.414z'/></svg>")
+        no-repeat center !important;
     fill: var(--update-badge-color) !important;
     background-size: 72% !important;
     background-position: 45% 50% !important;
@@ -168,28 +178,33 @@
     padding: 0 !important;
 }
 
-#PanelUI-menu-button[badge-status] > .toolbarbutton-badge-stack > .toolbarbutton-badge:-moz-window-inactive {
+#PanelUI-menu-button[badge-status]
+    > .toolbarbutton-badge-stack
+    > .toolbarbutton-badge:-moz-window-inactive {
     filter: brightness(0.65) sepia(1) hue-rotate(185deg) !important;
 }
 
-#PanelUI-menu-button[badge-status^="update"] > .toolbarbutton-badge-stack > .toolbarbutton-badge:-moz-window-inactive {
-/*     filter: brightness(0.65) sepia(1) hue-rotate(185deg) !important; */
+#PanelUI-menu-button[badge-status^="update"]
+    > .toolbarbutton-badge-stack
+    > .toolbarbutton-badge:-moz-window-inactive {
+    /*     filter: brightness(0.65) sepia(1) hue-rotate(185deg) !important; */
     filter: none !important;
     background-color: var(--update-badge-inactive) !important;
 }
 
-#PanelUI-menu-button[badge-status^="update"]:is(:hover, [open]) > .toolbarbutton-badge-stack > .toolbarbutton-badge:-moz-window-inactive {
+#PanelUI-menu-button[badge-status^="update"]:is(:hover, [open])
+    > .toolbarbutton-badge-stack
+    > .toolbarbutton-badge:-moz-window-inactive {
     background-color: var(--update-badge-bg) !important;
 }
 
 @supports (-moz-bool-pref("browser.proton.appmenu.enabled")) {
-
-    panelview .toolbarbutton-1:not([disabled], [open], :active):is(:focus),
-    toolbarbutton.subviewbutton:not([disabled], [open], :active):is(:focus),
-    .navigable.subviewbutton:not([disabled], [open], :active):is(:focus),
-    .widget-overflow-list .toolbarbutton-1:not([disabled], [open], :active):is(:focus),
+    panelview .toolbarbutton-1:not([disabled], [open], :active):focus,
+    toolbarbutton.subviewbutton:not([disabled], [open], :active):focus,
+    .navigable.subviewbutton:not([disabled], [open], :active):focus,
+    .widget-overflow-list .toolbarbutton-1:not([disabled], [open], :active):focus,
     .toolbaritem-combined-buttons:is(:not([cui-areatype="toolbar"]), [overflowedItem="true"])
-        > toolbarbutton:not([disabled], [open], :active):is(:focus) {
+        > toolbarbutton:not([disabled], [open], :active):focus {
         box-shadow: var(--panelview-toolbarbutton-focus-box-shadow);
         background-color: var(--panelview-toolbarbutton-hover-bgcolor) !important;
         color: var(--panelview-toolbarbutton-hover-color) !important;
@@ -226,11 +241,11 @@
     }
 
     #appMenu-new-tab-button2 {
-        list-style-image: url("chrome://browser/skin/new-tab.svg");
+        list-style-image: url(chrome://browser/skin/new-tab.svg);
     }
 
     #appMenu-new-private-window-button2 {
-        list-style-image: url("chrome://browser/skin/privateBrowsing.svg");
+        list-style-image: url(chrome://browser/skin/privateBrowsing.svg);
     }
 
     #appMenu-print-button2 {
@@ -242,11 +257,11 @@
     }
 
     #appMenu-bookmarks-button {
-        list-style-image: url("chrome://browser/skin/bookmark.svg");
+        list-style-image: url(chrome://browser/skin/bookmark.svg);
     }
 
     #appMenu-history-button {
-        list-style-image: url("chrome://browser/skin/history.svg");
+        list-style-image: url(chrome://browser/skin/history.svg);
     }
 
     #appMenu-downloads-button {
@@ -263,28 +278,28 @@
     }
 
     #panelMenu_bookmarkingTools {
-        list-style-image: url("chrome://browser/skin/developer.svg");
+        list-style-image: url(chrome://browser/skin/developer.svg);
     }
 
     #panelMenu_viewBookmarksToolbar {
-        list-style-image: url("chrome://browser/skin/bookmarks-toolbar.svg");
+        list-style-image: url(chrome://browser/skin/bookmarks-toolbar.svg);
     }
 
     #panelMenuBookmarkThisPage {
-        list-style-image: url("chrome://browser/skin/bookmark-hollow.svg");
+        list-style-image: url(chrome://browser/skin/bookmark-hollow.svg);
     }
 
     #PanelUI-fxa-menu-remotetabs-button,
     #appMenuRecentlyClosedTabs {
-        list-style-image: url("chrome://browser/skin/tab.svg");
+        list-style-image: url(chrome://browser/skin/tab.svg);
     }
 
     #appMenuClearRecentHistory {
-        list-style-image: url("chrome://browser/skin/forget.svg");
+        list-style-image: url(chrome://browser/skin/forget.svg);
     }
 
     #appMenuRestoreLastSession {
-        list-style-image: url("chrome://browser/skin/restore-session.svg");
+        list-style-image: url(chrome://browser/skin/restore-session.svg);
     }
 
     #appMenuRecentlyClosedWindows {
@@ -301,6 +316,15 @@
 
     #appMenu-quit-button2 {
         list-style-image: url(chrome://browser/skin/quit.svg);
+    }
+
+    #appMenu-fxa-status2 {
+        list-style-image: url(chrome://browser/skin/fxa/avatar.svg) !important;
+    }
+
+    #appMenu-fxa-status2 .toolbarbutton-icon {
+        width: 16px !important;
+        height: 16px !important;
     }
 
     #appMenu-save-file-button2 > .toolbarbutton-text,
@@ -328,7 +352,8 @@
     #appMenu-settings-button > .toolbarbutton-text,
     #appmenu-moreTools-button > .toolbarbutton-text,
     #appMenu-quit-button2 > .toolbarbutton-text,
-    #appMenu-zoom-controls2 > .toolbarbutton-text {
+    #appMenu-zoom-controls2 > .toolbarbutton-text,
+    #appMenu-fxa-status2 > #appMenu-fxa-label2 > .toolbarbutton-text {
         padding-inline-start: 8px !important;
     }
 
@@ -347,9 +372,31 @@
         border-radius: 2px !important;
     }
 
+    :is(#appMenu-zoomReduce-button2, #appMenu-zoomEnlarge-button2, #appMenu-fullscreen-button2)
+        > .toolbarbutton-icon {
+        background-color: unset !important;
+        fill: currentColor !important;
+        -moz-context-properties: fill, fill-opacity !important;
+    }
+
+    #appMenu-zoom-controls2
+        :is(#appMenu-zoomReduce-button2, #appMenu-zoomEnlarge-button2, #appMenu-fullscreen-button2, #appMenu-zoomReset-button2)
+        :not([disabled], [open], :active)
+        :is(:hover, :focus) {
+        background-color: var(--arrowpanel-dimmed) !important;
+        border-color: transparent !important;
+    }
+
+    #appMenu-zoom-controls2
+        :is(#appMenu-zoomReduce-button2, #appMenu-zoomEnlarge-button2, #appMenu-fullscreen-button2, #appMenu-zoomReset-button2)
+        :not([disabled])
+        :is([open], :hover:active) {
+        background-color: var(--arrowpanel-dimmed-further) !important;
+    }
+
     #appMenu-zoom-controls2 toolbarbutton {
         margin-inline: 4px !important;
-        border: 1px solid var(--desaturate-dimmed) !important;
+        border: 1px solid transparent !important;
         min-height: 20px !important;
         min-width: 20px !important;
         width: unset !important;
@@ -373,6 +420,11 @@
     #appMenu-zoom-controls2 #appMenu-zoomReset-button2 .toolbarbutton-text {
         margin-block: 1px !important;
         margin-inline: 6px !important;
+    }
+
+    #appMenu-fxa-status2[fxastatus] > #appMenu-fxa-label2 {
+        padding-block: calc(var(--arrowpanel-menuitem-padding) + 2px) !important;
+        font-weight: unset !important;
     }
 
     .panel-banner-item {
@@ -433,7 +485,7 @@
         fill: hsl(125, 81%, 57%) !important;
         background-color: hsl(118, 89%, 24%) !important;
     }
-    
+
     #PanelUI-menu-button[badge-status^="update"]
         > .toolbarbutton-badge-stack
         > .toolbarbutton-badge:-moz-window-inactive {
@@ -447,5 +499,4 @@
         background-color: hsl(118, 89%, 24%) !important;
         fill: hsl(125, 81%, 57%) !important;
     }
-
 }

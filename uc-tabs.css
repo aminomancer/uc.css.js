@@ -24,8 +24,8 @@
     pointer-events: none !important;
 }
 
-.tabbrowser-tab[multiselected]:not([selected], [pinned], :hover) .tab-background,
-.tabbrowser-tab[multiselected]:not([selected], [pinned], :hover) .tab-background-inner {
+.tabbrowser-tab[multiselected]:not([selected], [pinned], :hover)
+    :is(.tab-background, .tab-background-inner) {
     background: var(--tab-multi) !important;
 }
 
@@ -103,56 +103,50 @@
 
 /* tab top border roundness */
 #TabsToolbar .tabbrowser-tab,
-#TabsToolbar .tabbrowser-tab .tab-stack,
-#TabsToolbar .tabbrowser-tab .tab-background,
-#TabsToolbar .tabbrowser-tab .tab-content {
+#TabsToolbar .tabbrowser-tab :is(.tab-stack, .tab-background, .tab-content) {
     border-top-right-radius: 0px !important;
     border-top-left-radius: 5px !important;
     overflow: hidden;
 }
 
 #TabsToolbar .tabbrowser-tab[selected],
-#TabsToolbar .tabbrowser-tab[selected] .tab-stack,
-#TabsToolbar .tabbrowser-tab[selected] .tab-background,
-#TabsToolbar .tabbrowser-tab[selected] .tab-content {
+#TabsToolbar .tabbrowser-tab[selected] :is(.tab-stack, .tab-background, .tab-content) {
     border-top-right-radius: 5px !important;
     border-top-left-radius: 5px !important;
 }
 
 #TabsToolbar .tabbrowser-tab[multiselected]:not([pinned]),
-#TabsToolbar .tabbrowser-tab[multiselected]:not([pinned]) .tab-stack,
-#TabsToolbar .tabbrowser-tab[multiselected]:not([pinned]) .tab-background,
-#TabsToolbar .tabbrowser-tab[multiselected]:not([pinned]) .tab-content {
+#TabsToolbar
+    .tabbrowser-tab[multiselected]:not([pinned])
+    :is(.tab-stack, .tab-background, .tab-content) {
     border-top-left-radius: 5px !important;
     border-top-right-radius: 5px !important;
 }
 
 #TabsToolbar .tabbrowser-tab:not([selected]):hover,
-#TabsToolbar .tabbrowser-tab:not([selected]):hover .tab-stack,
-#TabsToolbar .tabbrowser-tab:not([selected]):hover .tab-background,
-#TabsToolbar .tabbrowser-tab:not([selected]):hover .tab-content {
+#TabsToolbar .tabbrowser-tab:not([selected]):hover :is(.tab-stack, .tab-background, .tab-content) {
     border-top-right-radius: 5px !important;
 }
 
 #TabsToolbar .tabbrowser-tab[last-visible-tab]:not([justmoved]),
-#TabsToolbar .tabbrowser-tab[last-visible-tab]:not([justmoved]) .tab-stack,
-#TabsToolbar .tabbrowser-tab[last-visible-tab]:not([justmoved]) .tab-background,
-#TabsToolbar .tabbrowser-tab[last-visible-tab]:not([justmoved]) .tab-content,
+#TabsToolbar
+    .tabbrowser-tab[last-visible-tab]:not([justmoved])
+    :is(.tab-stack, .tab-background, .tab-content),
 #TabsToolbar .tabbrowser-tab[last-visible-tab]:not([justmoved]):hover,
-#TabsToolbar .tabbrowser-tab[last-visible-tab]:not([justmoved]):hover .tab-stack,
-#TabsToolbar .tabbrowser-tab[last-visible-tab]:not([justmoved]):hover .tab-background,
-#TabsToolbar .tabbrowser-tab[last-visible-tab]:not([justmoved]):hover .tab-content {
+#TabsToolbar
+    .tabbrowser-tab[last-visible-tab]:not([justmoved]):hover
+    :is(.tab-stack, .tab-background, .tab-content) {
     border-top-right-radius: 0 !important;
 }
 
 #TabsToolbar .tabbrowser-tab[first-visible-tab]:not([justmoved]),
-#TabsToolbar .tabbrowser-tab[first-visible-tab]:not([justmoved]) .tab-stack,
-#TabsToolbar .tabbrowser-tab[first-visible-tab]:not([justmoved]) .tab-background,
-#TabsToolbar .tabbrowser-tab[first-visible-tab]:not([justmoved]) .tab-content,
+#TabsToolbar
+    .tabbrowser-tab[first-visible-tab]:not([justmoved])
+    :is(.tab-stack, .tab-background, .tab-content),
 #TabsToolbar .tabbrowser-tab[first-visible-tab]:not([justmoved]):hover,
-#TabsToolbar .tabbrowser-tab[first-visible-tab]:not([justmoved]):hover .tab-stack,
-#TabsToolbar .tabbrowser-tab[first-visible-tab]:not([justmoved]):hover .tab-background,
-#TabsToolbar .tabbrowser-tab[first-visible-tab]:not([justmoved]):hover .tab-content {
+#TabsToolbar
+    .tabbrowser-tab[first-visible-tab]:not([justmoved]):hover
+    :is(.tab-stack, .tab-background, .tab-content) {
     border-top-left-radius: 0 !important;
 }
 
@@ -184,13 +178,17 @@
 }
 
 .tabbrowser-tab .tab-stack:before {
-    mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><circle r='5' cx='0' cy='0' fill='black'/></svg>") 0/100% 100%, linear-gradient(#fff,#fff);
+    mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><circle r='5' cx='0' cy='0' fill='black'/></svg>")
+            0/100% 100%,
+        linear-gradient(#fff, #fff);
     mask-composite: exclude;
     left: -5px;
 }
 
 .tabbrowser-tab .tab-stack:after {
-    mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><circle r='5' cx='5' cy='0' fill='black'/></svg>") 0/100% 100%, linear-gradient(#fff,#fff);
+    mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><circle r='5' cx='5' cy='0' fill='black'/></svg>")
+            0/100% 100%,
+        linear-gradient(#fff, #fff);
     mask-composite: exclude;
     right: -5px;
 }
@@ -212,17 +210,32 @@
 
 .tabbrowser-tab[multiselected] .tab-stack:after,
 .tabbrowser-tab[multiselected] .tab-stack:before {
-    background-image: linear-gradient(0deg, var(--multiselected-color) 0px, var(--multiselected-color) 1px, var(--tab-bg-current) 1px);
+    background-image: linear-gradient(
+        0deg,
+        var(--multiselected-color) 0px,
+        var(--multiselected-color) 1px,
+        var(--tab-bg-current) 1px
+    );
 }
 
 .tabbrowser-tab[usercontextid]:is([selected], [pinned], :hover) .tab-stack:after,
 .tabbrowser-tab[usercontextid]:is([selected], [pinned], :hover) .tab-stack:before {
-    background-image: linear-gradient(0deg, var(--identity-tab-color) 0px, var(--identity-tab-color) 1px, var(--tab-bg-current) 1px);
+    background-image: linear-gradient(
+        0deg,
+        var(--identity-tab-color) 0px,
+        var(--identity-tab-color) 1px,
+        var(--tab-bg-current) 1px
+    );
 }
 
 .tabbrowser-tab[usercontextid][multiselected] .tab-stack:after,
 .tabbrowser-tab[usercontextid][multiselected] .tab-stack:before {
-    background-image: linear-gradient(0deg, var(--multiselected-color) 0px, var(--multiselected-color) 1px, var(--tab-bg-current) 1px);
+    background-image: linear-gradient(
+        0deg,
+        var(--multiselected-color) 0px,
+        var(--multiselected-color) 1px,
+        var(--tab-bg-current) 1px
+    );
 }
 
 .tabbrowser-tab:not([selected], [pinned]) {
@@ -343,8 +356,7 @@
     opacity: 1 !important;
 }
 
-.tab-icon-sound[soundplaying],
-.tab-icon-sound[muted] {
+.tab-icon-sound:is([soundplaying], [muted]) {
     width: 16px !important;
     height: 16px !important;
     padding: 2px 3px 2px 2px !important;
@@ -370,24 +382,20 @@
     list-style-image: url(chrome://global/skin/media/playButton.svg) !important;
 }
 
-.tab-icon-sound:hover,
-.tab-close-button:hover {
+:is(.tab-icon-sound, .tab-close-button):hover {
     background-color: var(--arrowpanel-dimmed) !important;
     opacity: 1 !important;
 }
 
-.tabbrowser-tab:hover .tab-icon-sound[pictureinpicture="true"]:hover,
-.tabbrowser-tab:hover .tab-icon-sound[pictureinpicture="true"]:hover:active {
+.tabbrowser-tab:hover .tab-icon-sound[pictureinpicture="true"]:is(:hover, :hover:active) {
     opacity: 0.6 !important;
 }
 
-.tabbrowser-tab:hover .tab-icon-sound:not(:hover),
-.tabbrowser-tab:hover .tab-close-button:not(:hover) {
+.tabbrowser-tab:hover :is(.tab-icon-sound, .tab-close-button):not(:hover) {
     opacity: 0.6 !important;
 }
 
-.tabbrowser-tab:hover .tab-icon-sound:hover:active,
-.tabbrowser-tab:hover .tab-close-button:hover:active {
+.tabbrowser-tab:hover :is(.tab-icon-sound, .tab-close-button):hover:active {
     background-color: var(--arrowpanel-dimmed-further) !important;
     opacity: 1 !important;
 }
@@ -405,15 +413,12 @@
     pointer-events: none !important;
 }
 
-.tabbrowser-tab:hover .tab-icon-sound[pictureinpicture]:not([muted]):active,
 .tabbrowser-tab:hover .tab-icon-sound[pictureinpicture]:not([muted]):active {
     background-color: transparent !important;
 }
 
 .tab-icon-sound[pictureinpicture]:not([muted], :hover),
-.tab-icon-sound[soundplaying]:not(:hover),
-.tab-icon-sound[muted]:not(:hover),
-.tab-icon-sound[activemedia-blocked]:not(:hover) {
+.tab-icon-sound:is([soundplaying], [muted], [activemedia-blocked]):not(:hover) {
     opacity: 0.6 !important;
 }
 
@@ -422,9 +427,7 @@
     background-color: transparent !important;
 }
 
-.tabbrowser-tab:-moz-any([image], [pinned])
-    > .tab-stack
-    > .tab-content[attention]:not([selected="true"]),
+.tabbrowser-tab:is([image], [pinned]) > .tab-stack > .tab-content[attention]:not([selected="true"]),
 .tabbrowser-tab > .tab-stack > .tab-content[pinned][titlechanged]:not([selected="true"]) {
     background-image: url(chrome://browser/skin/tabbrowser/indicator-tab-attention.svg);
     background-position: right 6px top 4px !important;
@@ -453,19 +456,7 @@
 
 #tabbrowser-tabs:not([movingtab])
     .tabbrowser-tab:not([tabdrop-samewindow], [justmoved])
-    .tab-close-button,
-#tabbrowser-tabs:not([movingtab])
-    .tabbrowser-tab:not([tabdrop-samewindow], [justmoved])
-    .tab-icon-image,
-#tabbrowser-tabs:not([movingtab])
-    .tabbrowser-tab:not([tabdrop-samewindow], [justmoved])
-    .tab-sharing-icon-overlay,
-#tabbrowser-tabs:not([movingtab])
-    .tabbrowser-tab:not([tabdrop-samewindow], [justmoved])
-    .tab-icon-overlay,
-#tabbrowser-tabs:not([movingtab])
-    .tabbrowser-tab:not([tabdrop-samewindow], [justmoved])
-    .tab-throbber {
+    :is(.tab-close-button, .tab-icon-image, .tab-sharing-icon-overlay, .tab-icon-overlay, .tab-throbber) {
     transition: 0.1s transform ease-in-out, 0.1s opacity ease-in-out !important;
 }
 
@@ -480,9 +471,8 @@
     position: relative !important;
 }
 
-.tabbrowser-tab:is(:hover, [busy]) .tab-icon-image,
-.tabbrowser-tab:is(:hover, [busy]) .tab-sharing-icon-overlay,
-.tabbrowser-tab:is(:hover, [busy]) .tab-icon-overlay {
+.tabbrowser-tab:is(:hover, [busy])
+    :is(.tab-icon-image, .tab-sharing-icon-overlay, .tab-icon-overlay) {
     opacity: 0 !important;
     pointer-events: none !important;
     transform: translateX(25px) scale(0.5) !important;
@@ -688,42 +678,37 @@
 
     #tabbrowser-tabs[movingtab] .tabbrowser-tab[pinned][selected] .tab-icon-image,
     .tabbrowser-tab[pinned] .tab-throbber[busy],
-    .tabbrowser-tab[pinned]:not([busy]) .tab-icon-image,
-    .tabbrowser-tab[pinned]:not([busy]) .tab-sharing-icon-overlay,
-    .tabbrowser-tab[pinned]:not([busy]) .tab-icon-overlay {
+    .tabbrowser-tab[pinned]:not([busy])
+        :is(.tab-icon-image, .tab-sharing-icon-overlay, .tab-icon-overlay) {
         opacity: 1 !important;
         transform: none !important;
     }
 }
 
 @supports (-moz-bool-pref("browser.proton.tabs.enabled")) {
-    .tab-icon-sound-label {
-        display: none !important;
-    }
-
+    .tab-icon-sound-label,
     .tab-label-container.proton > .tab-icon-sound {
         display: none !important;
     }
 
-/*     .tab-label-container.proton {
+    /*     .tab-label-container.proton {
         -moz-box-orient: horizontal !important;
     } */
 
-    :root[proton] .tab-background,
-    :root[proton] .tabbrowser-tab:not([pinned]) {
+    .tab-background,
+    .tabbrowser-tab:not([pinned]) {
         min-height: 0 !important;
         margin: 0 !important;
     }
 
-    :root[proton] #TabsToolbar .toolbarbutton-1 > .toolbarbutton-icon,
-    :root[proton] #TabsToolbar .toolbarbutton-1 > .toolbarbutton-badge-stack {
+    #TabsToolbar .toolbarbutton-1 > :is(.toolbarbutton-icon, .toolbarbutton-badge-stack) {
         min-height: 16px !important;
         padding-block: 6px !important;
     }
 
-    :root[proton] #TabsToolbar .toolbarbutton-1 > .toolbarbutton-icon,
-    :root[proton] #TabsToolbar .toolbarbutton-1 > .toolbarbutton-text,
-    :root[proton] #TabsToolbar .toolbarbutton-1 > .toolbarbutton-badge-stack {
+    #TabsToolbar
+        .toolbarbutton-1
+        > :is(.toolbarbutton-icon, .toolbarbutton-text .toolbarbutton-badge-stack) {
         border-radius: var(--toolbarbutton-border-radius) !important;
     }
 

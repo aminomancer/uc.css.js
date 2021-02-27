@@ -2,48 +2,23 @@
 #toolbar-context-menu,
 #tabContextMenu,
 #contentAreaContextMenu,
-#back-button menupopup,
-#forward-button menupopup,
 #backForwardMenu,
 #placesContext,
-#viewButton menupopup,
 #pageActionContextMenu,
-.urlbar-input-box .textbox-contextmenu,
-#widget-overflow #customizationPanelItemContextMenu,
 .search-one-offs-context-menu,
 #SyncedTabsSidebarContext,
 .textbox-contextmenu,
 #customizationPanelItemContextMenu,
 #customizationPaletteItemContextMenu,
 #customization-toolbar-menu,
-#main-menubar menupopup,
 #new-tab-button-popup,
 .new-tab-popup,
 #downloadsContextMenu,
 menupopup[menu-api],
-#PlacesToolbar menupopup,
 #ContentSelectDropdown,
-#toolbar-context-menu menupopup,
-#tabContextMenu menupopup,
-#contentAreaContextMenu menupopup,
-#backForwardMenu menupopup,
-#placesContext menupopup,
-#pageActionContextMenu menupopup,
-.urlbar-input-box .textbox-contextmenu menupopup,
-#widget-overflow #customizationPanelItemContextMenu menupopup,
-.search-one-offs-context-menu menupopup,
-#SyncedTabsSidebarContext menupopup,
-.textbox-contextmenu menupopup,
-#customizationPanelItemContextMenu menupopup,
-#customizationPaletteItemContextMenu menupopup,
-#customization-toolbar-menu menupopup,
-#new-tab-button-popup menupopup,
-#new-tab-button menupopup,
-.popup-notification-dropmarker menupopup,
-menupopup[menu-api] menupopup,
-#ContentSelectDropdown menupopup,
-.new-tab-popup menupopup,
-#openHandlerPopup {
+#openHandlerPopup,
+:is(#back-button, #forward-button, #viewButton, #main-menubar, #PlacesToolbar, #toolbar-context-menu, #tabContextMenu, #contentAreaContextMenu, #backForwardMenu, #placesContext, #pageActionContextMenu, .search-one-offs-context-menu, .textbox-contextmenu, #SyncedTabsSidebarContext, #customizationPanelItemContextMenu, #customizationPaletteItemContextMenu, #customization-toolbar-menu, #new-tab-button-popup, #new-tab-button, .popup-notification-dropmarker, menupopup[menu-api], #ContentSelectDropdown, .new-tab-popup)
+    menupopup {
     -moz-appearance: none !important;
     background: var(--menupopup-background) !important;
     border: none !important;
@@ -58,34 +33,10 @@ menupopup[menu-api] menupopup,
     border: none !important;
 }
 
-#toolbar-context-menu menuseparator,
-#tabContextMenu menuseparator,
-#contentAreaContextMenu menuseparator,
-#back-button > menupopup menuseparator,
-#forward-button > menupopup menuseparator,
-#backForwardMenu menuseparator,
-#toolbar-context-menu menuseparator,
-#placesContext menuseparator,
-#viewButton > menupopup menuseparator,
-#pageActionContextMenu menuseparator,
-.urlbar-input-box .textbox-contextmenu menuseparator,
-#widget-overflow #customizationPanelItemContextMenu menuseparator,
-.search-one-offs-context-menu menuseparator,
-#SyncedTabsSidebarContext menuseparator,
-.textbox-contextmenu menuseparator,
-#customizationPanelItemContextMenu menuseparator,
-#customizationPaletteItemContextMenu menuseparator,
-#customization-toolbar-menu menuseparator,
-#main-menubar menupopup menuseparator,
-#new-tab-button-popup menuseparator,
-#new-tab-button menuseparator,
-.popup-notification-dropmarker menuseparator,
-#downloadsContextMenu menuseparator,
-menupopup[menu-api] menuseparator,
-#PlacesToolbar menupopup menuseparator,
-#ContentSelectDropdown menuseparator,
-.new-tab-popup menuseparator,
-#openHandlerPopup menuseparator {
+:is(#back-button, #forward-button, #viewButton) > menupopup menuseparator,
+:is(#main-menubar, #PlacesToolbar) menupopup menuseparator,
+:is(#toolbar-context-menu, #tabContextMenu, #contentAreaContextMenu, #backForwardMenu, #placesContext, #pageActionContextMenu, .search-one-offs-context-menu, #SyncedTabsSidebarContext, .textbox-contextmenu, #customizationPanelItemContextMenu, #customizationPaletteItemContextMenu, #customization-toolbar-menu, #new-tab-button-popup, #new-tab-button, .popup-notification-dropmarker, #downloadsContextMenu, menupopup[menu-api], #ContentSelectDropdown, .new-tab-popup, #openHandlerPopup)
+    menuseparator {
     /*     -moz-appearance: none !important;
     max-height: 1px !important;
     border: none !important;
@@ -96,34 +47,10 @@ menupopup[menu-api] menuseparator,
     display: none !important;
 }
 
-#toolbar-context-menu :-moz-any(menuitem, menu),
-#tabContextMenu :-moz-any(menuitem, menu),
-#contentAreaContextMenu :-moz-any(menuitem, menu),
-#back-button > menupopup :-moz-any(menuitem, menu),
-#forward-button > menupopup :-moz-any(menuitem, menu),
-#backForwardMenu :-moz-any(menuitem, menu),
-#toolbar-context-menu :-moz-any(menuitem, menu),
-#placesContext :-moz-any(menuitem, menu),
-#viewButton > menupopup :-moz-any(menuitem, menu),
-#pageActionContextMenu :-moz-any(menuitem, menu),
-.urlbar-input-box .textbox-contextmenu :-moz-any(menuitem, menu),
-#widget-overflow #customizationPanelItemContextMenu :-moz-any(menuitem, menu),
-.search-one-offs-context-menu :-moz-any(menuitem, menu),
-#SyncedTabsSidebarContext :-moz-any(menuitem, menu),
-.textbox-contextmenu :-moz-any(menuitem, menu),
-#customizationPanelItemContextMenu :-moz-any(menuitem, menu),
-#customizationPaletteItemContextMenu :-moz-any(menuitem, menu),
-#customization-toolbar-menu :-moz-any(menuitem, menu),
-#main-menubar menupopup :-moz-any(menuitem, menu),
-#new-tab-button-popup :-moz-any(menuitem, menu),
-#new-tab-button :is(menuitem, menu),
-.popup-notification-dropmarker menupopup :-moz-any(menuitem, menu),
-#downloadsContextMenu :is(menuitem, menu),
-menupopup[menu-api] :is(menuitem, menu),
-#PlacesToolbar menupopup :is(menuitem, menu),
-#ContentSelectDropdown :is(menuitem, menu),
-.new-tab-popup :is(menuitem, menu),
-#openHandlerPopup :is(menuitem, menu) {
+:is(#back-button, #forward-button, #viewButton) > menupopup :is(menuitem, menu),
+:is(.popup-notification-dropmarker, #main-menubar, #PlacesToolbar) menupopup :is(menuitem, menu),
+:is(#toolbar-context-menu, #tabContextMenu, #contentAreaContextMenu, #backForwardMenu, #placesContext, #pageActionContextMenu, .search-one-offs-context-menu, #SyncedTabsSidebarContext, .textbox-contextmenu, #customizationPanelItemContextMenu, #customizationPaletteItemContextMenu, #customization-toolbar-menu, #new-tab-button-popup, #new-tab-button, #downloadsContextMenu, menupopup[menu-api], #ContentSelectDropdown, .new-tab-popup, #openHandlerPopup)
+    :is(menuitem, menu) {
     -moz-appearance: none !important;
     color: var(--ui-text-80) !important;
     padding: 0 0 0 0 !important;
@@ -134,114 +61,44 @@ menupopup[menu-api] :is(menuitem, menu),
     padding-inline-start: 5px !important;
 }
 
-#toolbar-context-menu :-moz-any(menuitem, menu)[disabled="true"],
-#tabContextMenu :-moz-any(menuitem, menu)[disabled="true"],
-#contentAreaContextMenu :-moz-any(menuitem, menu)[disabled="true"],
-#back-button > menupopup :-moz-any(menuitem, menu)[disabled="true"],
-#forward-button > menupopup :-moz-any(menuitem, menu)[disabled="true"],
-#backForwardMenu :-moz-any(menuitem, menu)[disabled="true"],
-#toolbar-context-menu :-moz-any(menuitem, menu)[disabled="true"],
-#placesContext :-moz-any(menuitem, menu)[disabled="true"],
-#viewButton > menupopup :-moz-any(menuitem, menu)[disabled="true"],
-#pageActionContextMenu :-moz-any(menuitem, menu)[disabled="true"],
-.urlbar-input-box .textbox-contextmenu :-moz-any(menuitem, menu)[disabled="true"],
-#widget-overflow #customizationPanelItemContextMenu :-moz-any(menuitem, menu)[disabled="true"],
-.search-one-offs-context-menu :-moz-any(menuitem, menu)[disabled="true"],
-#SyncedTabsSidebarContext :-moz-any(menuitem, menu)[disabled="true"],
-.textbox-contextmenu :-moz-any(menuitem, menu)[disabled="true"],
-#customizationPanelItemContextMenu :-moz-any(menuitem, menu)[disabled="true"],
-#customizationPaletteItemContextMenu :-moz-any(menuitem, menu)[disabled="true"],
-#customization-toolbar-menu :-moz-any(menuitem, menu)[disabled="true"],
-#main-menubar menupopup :-moz-any(menuitem, menu)[disabled="true"],
-#new-tab-button-popup :-moz-any(menuitem, menu)[disabled="true"],
-#new-tab-button :-moz-any(menuitem, menu)[disabled="true"],
-.popup-notification-dropmarker menupopup :-moz-any(menuitem, menu)[disabled="true"],
-#downloadsContextMenu :is(menuitem, menu)[disabled="true"],
-menupopup[menu-api] :is(menuitem, menu)[disabled="true"],
-#PlacesToolbar menupopup :is(menuitem, menu)[disabled="true"],
-#ContentSelectDropdown :is(menuitem, menu)[disabled="true"],
-.new-tab-popup :is(menuitem, menu)[disabled="true"],
-#openHandlerPopup :is(menuitem, menu)[disabled="true"] {
+:is(#back-button, #forward-button, #viewButton) > menupopup :is(menuitem, menu)[disabled="true"],
+:is(.popup-notification-dropmarker, #main-menubar, #PlacesToolbar)
+    menupopup
+    :is(menuitem, menu)[disabled="true"],
+:is(#toolbar-context-menu, #tabContextMenu, #contentAreaContextMenu, #backForwardMenu, #placesContext, #pageActionContextMenu, .search-one-offs-context-menu, #SyncedTabsSidebarContext, .textbox-contextmenu, #customizationPanelItemContextMenu, #customizationPaletteItemContextMenu, #customization-toolbar-menu, #new-tab-button-popup, #new-tab-button, #downloadsContextMenu, menupopup[menu-api], #ContentSelectDropdown, .new-tab-popup, #openHandlerPopup)
+    :is(menuitem, menu)[disabled="true"] {
     -moz-appearance: none !important;
     color: rgba(255, 255, 255, 0.45) !important;
     background-color: initial !important;
 }
 
-/* menuseparator:not(:first-of-type) + :-moz-any(menu, menuitem) {
+/* menuseparator:not(:first-of-type) + :is(menu, menuitem) {
     border-top: 1px solid #363A59 !important;
     padding-top: 3px !important;
 } */
 
-#toolbar-context-menu
-    menuseparator:not(:first-of-type):not([hidden="true"])
-    + :-moz-any(menu, menuitem),
-#tabContextMenu menuseparator:not(:first-of-type):not([hidden="true"]) + :-moz-any(menu, menuitem),
-#contentAreaContextMenu
-    menuseparator:not(:first-of-type):not([hidden="true"])
-    + :-moz-any(menu, menuitem),
-#back-button
+:is(#PlacesToolbar, .popup-notification-dropmarker)
+    menupopup
+    menuseparator:not([hidden="true"])
+    + :is(menu, menuitem),
+:is(#back-button, #forward-button, #viewButton)
     > menupopup
     menuseparator:not(:first-of-type):not([hidden="true"])
-    + :-moz-any(menu, menuitem),
-#forward-button
-    > menupopup
+    + :is(menu, menuitem),
+:is(#toolbar-context-menu, #tabContextMenu, #contentAreaContextMenu, #backForwardMenu, #placesContext, #pageActionContextMenu, .search-one-offs-context-menu, #SyncedTabsSidebarContext, .textbox-contextmenu, #customizationPanelItemContextMenu, #customizationPaletteItemContextMenu, #customization-toolbar-menu)
     menuseparator:not(:first-of-type):not([hidden="true"])
-    + :-moz-any(menu, menuitem),
-#backForwardMenu menuseparator:not(:first-of-type):not([hidden="true"]) + :-moz-any(menu, menuitem),
-#toolbar-context-menu
-    menuseparator:not(:first-of-type):not([hidden="true"])
-    + :-moz-any(menu, menuitem),
-#placesContext menuseparator:not(:first-of-type):not([hidden="true"]) + :-moz-any(menu, menuitem),
-#viewButton
-    > menupopup
-    menuseparator:not(:first-of-type):not([hidden="true"])
-    + :-moz-any(menu, menuitem),
-#pageActionContextMenu
-    menuseparator:not(:first-of-type):not([hidden="true"])
-    + :-moz-any(menu, menuitem),
-.urlbar-input-box
-    .textbox-contextmenu
-    menuseparator:not(:first-of-type):not([hidden="true"])
-    + :-moz-any(menu, menuitem),
+    + :is(menu, menuitem),
+:is(#new-tab-button-popup, #new-tab-button, #downloadsContextMenu, menupopup[menu-api], #ContentSelectDropdown, .new-tab-popup, #openHandlerPopup)
+    menuseparator:not([hidden="true"])
+    + :is(menu, menuitem),
 #widget-overflow
     #customizationPanelItemContextMenu
     menuseparator:not(:first-of-type):not([hidden="true"])
-    + :-moz-any(menu, menuitem),
-.search-one-offs-context-menu
-    menuseparator:not(:first-of-type):not([hidden="true"])
-    + :-moz-any(menu, menuitem),
-#SyncedTabsSidebarContext
-    menuseparator:not(:first-of-type):not([hidden="true"])
-    + :-moz-any(menu, menuitem),
-.textbox-contextmenu
-    menuseparator:not(:first-of-type):not([hidden="true"])
-    + :-moz-any(menu, menuitem),
-#customizationPanelItemContextMenu
-    menuseparator:not(:first-of-type):not([hidden="true"])
-    + :-moz-any(menu, menuitem),
-#customizationPaletteItemContextMenu
-    menuseparator:not(:first-of-type):not([hidden="true"])
-    + :-moz-any(menu, menuitem),
-#customization-toolbar-menu
-    menuseparator:not(:first-of-type):not([hidden="true"])
-    + :-moz-any(menu, menuitem),
+    + :is(menu, menuitem),
 #main-menubar
     menupopup
     menuseparator:not(:first-of-type):not([hidden="true"])
-    + :-moz-any(menu, menuitem),
-#new-tab-button-popup menuseparator:not([hidden="true"]) + :-moz-any(menu, menuitem),
-#new-tab-button menuseparator:not([hidden="true"]) + :-moz-any(menu, menuitem),
-.popup-notification-dropmarker
-    menupopup
-    menuseparator:not([hidden="true"])
-    + :-moz-any(menu, menuitem),
-#downloadsContextMenu menuseparator:not([hidden="true"]) + :-moz-any(menu, menuitem),
-menupopup[menu-api] menuseparator:not([hidden="true"]) + :-moz-any(menu, menuitem),
-#PlacesToolbar menupopup menuseparator:not([hidden="true"]) + :-moz-any(menu, menuitem),
-#ContentSelectDropdown menuseparator:not([hidden="true"]) + :-moz-any(menu, menuitem),
-.new-tab-popup menuseparator:not([hidden="true"]) + :-moz-any(menu, menuitem),
-#openHandlerPopup menuseparator:not([hidden="true"]) + :-moz-any(menu, menuitem) {
-    /*     border-top: 1px solid hsla(233, 24%, 28%, 0.47) !important; */
+    + :is(menu, menuitem) {
     border-image: linear-gradient(
         to right,
         transparent 1%,
@@ -253,125 +110,35 @@ menupopup[menu-api] menuseparator:not([hidden="true"]) + :-moz-any(menu, menuite
     border-top-style: solid !important;
 }
 
-/* #toolbar-context-menu menuseparator:not(:first-of-type):not([hidden="true"]) + :-moz-any(menu, menuitem) > :-moz-any(.menu-text, .menu-iconic-text),
-#tabContextMenu menuseparator:not(:first-of-type):not([hidden="true"]) + :-moz-any(menu, menuitem) > :-moz-any(.menu-text, .menu-iconic-text),
-#contentAreaContextMenu menuseparator:not(:first-of-type):not([hidden="true"]) + :-moz-any(menu, menuitem) > :-moz-any(.menu-text, .menu-iconic-text),
-#back-button>menupopup menuseparator:not(:first-of-type):not([hidden="true"]) + :-moz-any(menu, menuitem) > :-moz-any(.menu-text, .menu-iconic-text),
-#forward-button>menupopup menuseparator:not(:first-of-type):not([hidden="true"]) + :-moz-any(menu, menuitem) > :-moz-any(.menu-text, .menu-iconic-text),
-#backForwardMenu menuseparator:not(:first-of-type):not([hidden="true"]) + :-moz-any(menu, menuitem) > :-moz-any(.menu-text, .menu-iconic-text),
-#toolbar-context-menu menuseparator:not(:first-of-type):not([hidden="true"]) + :-moz-any(menu, menuitem) > :-moz-any(.menu-text, .menu-iconic-text),
-#placesContext menuseparator:not(:first-of-type):not([hidden="true"]) + :-moz-any(menu, menuitem) > :-moz-any(.menu-text, .menu-iconic-text),
-#viewButton>menupopup menuseparator:not(:first-of-type):not([hidden="true"]) + :-moz-any(menu, menuitem) > :-moz-any(.menu-text, .menu-iconic-text),
-#pageActionContextMenu menuseparator:not(:first-of-type):not([hidden="true"]) + :-moz-any(menu, menuitem) > :-moz-any(.menu-text, .menu-iconic-text),
-.urlbar-input-box .textbox-contextmenu menuseparator:not(:first-of-type):not([hidden="true"]) + :-moz-any(menu, menuitem) > :-moz-any(.menu-text, .menu-iconic-text),
-#widget-overflow #customizationPanelItemContextMenu menuseparator:not(:first-of-type):not([hidden="true"]) + :-moz-any(menu, menuitem) > :-moz-any(.menu-text, .menu-iconic-text),
-.search-one-offs-context-menu menuseparator:not(:first-of-type):not([hidden="true"]) + :-moz-any(menu, menuitem) > :-moz-any(.menu-text, .menu-iconic-text),
-#SyncedTabsSidebarContext menuseparator:not(:first-of-type):not([hidden="true"]) + :-moz-any(menu, menuitem) > :-moz-any(.menu-text, .menu-iconic-text),
-.textbox-contextmenu menuseparator:not(:first-of-type):not([hidden="true"]) + :-moz-any(menu, menuitem) > :-moz-any(.menu-text, .menu-iconic-text),
-#customizationPanelItemContextMenu menuseparator:not(:first-of-type):not([hidden="true"]) + :-moz-any(menu, menuitem) > :-moz-any(.menu-text, .menu-iconic-text),
-#customizationPaletteItemContextMenu menuseparator:not(:first-of-type):not([hidden="true"]) + :-moz-any(menu, menuitem) > :-moz-any(.menu-text, .menu-iconic-text),
-#customization-toolbar-menu menuseparator:not(:first-of-type):not([hidden="true"]) + :-moz-any(menu, menuitem) > :-moz-any(.menu-text, .menu-iconic-text) {
-    margin-top: 6px !important;
-    margin-bottom: 6px !important;
-} */
-
-#toolbar-context-menu :-moz-any(menuitem, menu) image,
-#tabContextMenu :-moz-any(menuitem, menu) image,
-#contentAreaContextMenu :-moz-any(menuitem, menu) image,
-#back-button > menupopup :-moz-any(menuitem, menu) image,
-#forward-button > menupopup :-moz-any(menuitem, menu) image,
-#backForwardMenu :-moz-any(menuitem, menu) image,
-#toolbar-context-menu :-moz-any(menuitem, menu) image,
-#placesContext :-moz-any(menuitem, menu) image,
-#viewButton > menupopup :-moz-any(menuitem, menu) image,
-#pageActionContextMenu :-moz-any(menuitem, menu) image,
-.urlbar-input-box .textbox-contextmenu :-moz-any(menuitem, menu) image,
-#widget-overflow #customizationPanelItemContextMenu :-moz-any(menuitem, menu) image,
-.search-one-offs-context-menu :-moz-any(menuitem, menu) image,
-#SyncedTabsSidebarContext :-moz-any(menuitem, menu) image,
-.textbox-contextmenu :-moz-any(menuitem, menu) image,
-#customizationPanelItemContextMenu :-moz-any(menuitem, menu) image,
-#customizationPaletteItemContextMenu :-moz-any(menuitem, menu) image,
-#customization-toolbar-menu :-moz-any(menuitem, menu) image,
-#main-menubar menupopup :-moz-any(menuitem, menu) image,
-#new-tab-button-popup :-moz-any(menuitem, menu) image,
-#new-tab-button :is(menuitem, menu) image,
-.popup-notification-dropmarker menupopup :-moz-any(menuitem, menu) image,
-#downloadsContextMenu :is(menuitem, menu) image,
-menupopup[menu-api] :is(menuitem, menu) image,
-#PlacesToolbar menupopup :is(menuitem, menu) image,
-#ContentSelectDropdown :is(menuitem, menu) image,
-.new-tab-popup :is(menuitem, menu) image,
-#openHandlerPopup :is(menuitem, menu) image {
+:is(#back-button, #forward-button, #viewButton) > menupopup :is(menuitem, menu) image,
+:is(.popup-notification-dropmarker, #main-menubar, #PlacesToolbar)
+    menupopup
+    :is(menuitem, menu)
+    image,
+:is(#toolbar-context-menu, #tabContextMenu, #contentAreaContextMenu, #backForwardMenu, #placesContext, #pageActionContextMenu, .search-one-offs-context-menu, #SyncedTabsSidebarContext, .textbox-contextmenu, #customizationPanelItemContextMenu, #customizationPaletteItemContextMenu, #customization-toolbar-menu, #new-tab-button-popup, #new-tab-button, #downloadsContextMenu, menupopup[menu-api], #ContentSelectDropdown, .new-tab-popup, #openHandlerPopup)
+    :is(menuitem, menu)
+    image {
     margin-left: 3px;
     margin-right: -3px;
 }
 
-#contentAreaContextMenu > * > * > image {
-    fill: currentColor !important;
-    -moz-context-properties: fill, fill-opacity, stroke !important;
+#contentAreaContextMenu > .menuitem-iconic > .menu-iconic-left > .menu-iconic-icon {
+    fill: currentColor;
+    -moz-context-properties: fill, fill-opacity, stroke;
 }
 
-#toolbar-context-menu menugroup,
-#tabContextMenu menugroup,
-#contentAreaContextMenu menugroup,
-#back-button > menupopup menugroup,
-#forward-button > menupopup menugroup,
-#backForwardMenu menugroup,
-#toolbar-context-menu menugroup,
-#placesContext menugroup,
-#viewButton > menupopup menugroup,
-#pageActionContextMenu menugroup,
-.urlbar-input-box .textbox-contextmenu menugroup,
-#widget-overflow #customizationPanelItemContextMenu menugroup,
-.search-one-offs-context-menu menugroup,
-#SyncedTabsSidebarContext menugroup,
-.textbox-contextmenu menugroup,
-#customizationPanelItemContextMenu menugroup,
-#customizationPaletteItemContextMenu menugroup,
-#customization-toolbar-menu menugroup,
-#main-menubar menupopup menugroup,
-#new-tab-button-popup menugroup,
-#new-tab-button menugroup,
-.popup-notification-dropmarker menupopup menugroup,
-#downloadsContextMenu menugroup,
-menupopup[menu-api] menugroup,
-#PlacesToolbar menupopup menugroup,
-#ContentSelectDropdown menugroup,
-.new-tab-popup menugroup,
-#openHandlerPopup menugroup {
+:is(#back-button, #forward-button, #viewButton) > menupopup menugroup,
+:is(.popup-notification-dropmarker, #main-menubar, #PlacesToolbar) menupopup menugroup,
+:is(#toolbar-context-menu, #tabContextMenu, #contentAreaContextMenu, #backForwardMenu, #placesContext, #pageActionContextMenu, .search-one-offs-context-menu, #SyncedTabsSidebarContext, .textbox-contextmenu, #customizationPanelItemContextMenu, #customizationPaletteItemContextMenu, #customization-toolbar-menu, #new-tab-button-popup, #new-tab-button, #downloadsContextMenu, menupopup[menu-api], #ContentSelectDropdown, .new-tab-popup, #openHandlerPopup)
+    menugroup {
     padding: 0 !important;
     background-color: transparent !important;
 }
 
-#toolbar-context-menu .menu-right,
-#tabContextMenu .menu-right,
-#contentAreaContextMenu .menu-right,
-#back-button > menupopup .menu-right,
-#forward-button > menupopup .menu-right,
-#backForwardMenu .menu-right,
-#toolbar-context-menu .menu-right,
-#placesContext .menu-right,
-#viewButton > menupopup .menu-right,
-#pageActionContextMenu .menu-right,
-.urlbar-input-box .textbox-contextmenu .menu-right,
-#widget-overflow #customizationPanelItemContextMenu .menu-right,
-.search-one-offs-context-menu .menu-right,
-#SyncedTabsSidebarContext .menu-right,
-.textbox-contextmenu .menu-right,
-#customizationPanelItemContextMenu .menu-right,
-#customizationPaletteItemContextMenu .menu-right,
-#customization-toolbar-menu .menu-right,
-#main-menubar menupopup .menu-right,
-#new-tab-button-popup .menu-right,
-#new-tab-button .menu-right,
-.popup-notification-dropmarker menupopup .menu-right,
-#downloadsContextMenu .menu-right,
-menupopup[menu-api] .menu-right,
-#PlacesToolbar menupopup .menu-right,
-#ContentSelectDropdown .menu-right,
-.new-tab-popup .menu-right,
-#openHandlerPopup .menu-right {
+:is(#back-button, #forward-button, #viewButton) > menupopup .menu-right,
+:is(.popup-notification-dropmarker, #main-menubar, #PlacesToolbar) menupopup .menu-right,
+:is(#toolbar-context-menu, #tabContextMenu, #contentAreaContextMenu, #backForwardMenu, #placesContext, #pageActionContextMenu, .search-one-offs-context-menu, #SyncedTabsSidebarContext, .textbox-contextmenu, #customizationPanelItemContextMenu, #customizationPaletteItemContextMenu, #customization-toolbar-menu, #new-tab-button-popup, #new-tab-button, #downloadsContextMenu, menupopup[menu-api], #ContentSelectDropdown, .new-tab-popup, #openHandlerPopup)
+    .menu-right {
     -moz-appearance: none !important;
     padding: 0px !important;
     margin-right: var(--menu-right-margin) !important;
@@ -386,80 +153,24 @@ menupopup[menu-api] .menu-right,
     list-style-image: var(--menu-right-img) !important;
 }
 
-#toolbar-context-menu
-    :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
-#tabContextMenu
-    :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
-#contentAreaContextMenu
-    :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
-#back-button
+:is(#back-button, #forward-button, #viewButton)
     > menupopup
-    :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
-#forward-button
-    > menupopup
-    :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
-#backForwardMenu
-    :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
-#toolbar-context-menu
-    :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
-#placesContext
-    :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
-#viewButton
-    > menupopup
-    :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
-#pageActionContextMenu
-    :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
-.urlbar-input-box
-    .textbox-contextmenu
-    :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
-#widget-overflow
-    #customizationPanelItemContextMenu
-    :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
-.search-one-offs-context-menu
-    :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
-#SyncedTabsSidebarContext
-    :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
-.textbox-contextmenu
-    :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
-#customizationPanelItemContextMenu
-    :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
-#customizationPaletteItemContextMenu
-    :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
-#customization-toolbar-menu
-    :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
-#main-menubar
+    :is(menu, menuitem):is(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
+:is(.popup-notification-dropmarker, #main-menubar, #PlacesToolbar)
     menupopup
-    :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
-#new-tab-button-popup
-    :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
-#new-tab-button
-    :is(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
-.popup-notification-dropmarker
-    menupopup
-    :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
-#downloadsContextMenu
-    :is(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
-menupopup[menu-api]
-    :is(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
-#PlacesToolbar
-    menupopup
-    :is(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
-#ContentSelectDropdown
-    :is(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
-.new-tab-popup
-    :is(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
-#openHandlerPopup
-    :is(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]) {
+    :is(menu, menuitem):is(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
+:is(#toolbar-context-menu, #tabContextMenu, #contentAreaContextMenu, #backForwardMenu, #placesContext, #pageActionContextMenu, .search-one-offs-context-menu, #SyncedTabsSidebarContext, .textbox-contextmenu, #customizationPanelItemContextMenu, #customizationPaletteItemContextMenu, #customization-toolbar-menu, #new-tab-button-popup, #new-tab-button, #downloadsContextMenu, menupopup[menu-api], #ContentSelectDropdown, .new-tab-popup, #openHandlerPopup)
+    :is(menu, menuitem):is(:hover, [_moz-menuactive="true"]):not([disabled="true"]) {
     -moz-appearance: none !important;
     background-color: var(--arrowpanel-dimmed) !important;
 }
 
-:-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"])[disabled="true"] {
+:is(menu, menuitem):is(:hover, [_moz-menuactive="true"])[disabled="true"] {
     background: none !important;
     -moz-appearance: none !important;
 }
 
-.subviewbutton:-moz-any(:hover, [_moz-menuactive="true"])[disabled="true"] {
+.subviewbutton:is(:hover, [_moz-menuactive="true"])[disabled="true"] {
     color: var(--panel-disabled-color) !important;
 }
 
@@ -468,15 +179,11 @@ menu.subviewbutton:not([disabled])[_moz-menuactive]:active {
     box-shadow: none !important;
 }
 
-#ContentSelectDropdown > menupopup > menucaption > .menu-iconic-text,
-#ContentSelectDropdown > menupopup > menuitem > .menu-iconic-text {
+#ContentSelectDropdown > menupopup > :is(menucaption, menuitem) > .menu-iconic-text {
     padding-block: unset !important;
 }
 
-#ContentSelectDropdown :is(menu, menuitem, menucaption) {
-    padding-inline-start: 8px !important;
-}
-
+#ContentSelectDropdown :is(menu, menuitem, menucaption),
 .contentSelectDropdown-ingroup > .menu-iconic-text {
     padding-inline-start: 8px !important;
 }
@@ -501,21 +208,14 @@ menu.subviewbutton:not([disabled])[_moz-menuactive]:active {
     background-image: unset !important;
 }
 
-#backForwardMenu menuitem[type="checkbox"] > .menu-iconic-left > .menu-iconic-icon,
-#backForwardMenu menuitem[checked="true"] > .menu-iconic-left > .menu-iconic-icon,
-#backForwardMenu menuitem[type="radio"] > .menu-iconic-left > .menu-iconic-icon,
-#back-button menuitem[type="checkbox"] > .menu-iconic-left > .menu-iconic-icon,
-#back-button menuitem[checked="true"] > .menu-iconic-left > .menu-iconic-icon,
-#back-button menuitem[type="radio"] > .menu-iconic-left > .menu-iconic-icon,
-#forward-button menuitem[type="checkbox"] > .menu-iconic-left > .menu-iconic-icon,
-#forward-button menuitem[checked="true"] > .menu-iconic-left > .menu-iconic-icon,
-#forward-button menuitem[type="radio"] > .menu-iconic-left > .menu-iconic-icon {
+:is(#backForwardMenu, #back-button, #forward-button)
+    menuitem:is([type="checkbox"], [checked="true"], [type="radio"])
+    > .menu-iconic-left
+    > .menu-iconic-icon {
     display: -moz-inline-box !important;
 }
 
-#backForwardMenu menuitem[type="radio"] > .menu-iconic-left,
-#back-button menuitem[type="radio"] > .menu-iconic-left,
-#forward-button menuitem[type="radio"] > .menu-iconic-left {
+:is(#backForwardMenu, #back-button, #forward-button) menuitem[type="radio"] > .menu-iconic-left {
     -moz-appearance: none !important;
     padding-right: 7px !important;
     fill: currentColor !important;
@@ -527,15 +227,13 @@ menu.subviewbutton:not([disabled])[_moz-menuactive]:active {
     margin-left: 0 !important;
 }
 
-#backForwardMenu menuitem[type="radio"],
-#back-button menuitem[type="radio"],
-#forward-button menuitem[type="radio"] {
+:is(#backForwardMenu, #back-button, #forward-button) menuitem[type="radio"] {
     padding: 0px !important;
     color: var(--lwt-toolbarbutton-icon-fill) !important;
 }
 
-:-moz-any(.unified-nav-forward, .unified-nav-back):not([_moz-menuactive])[uri^="file:///"]:-moz-any([uri$=".svg"i], [uri$=".png"i], [uri$=".jpg"i], [uri$=".jpeg"i], [uri$=".gif"i]) .menu-iconic-icon,
-:-moz-any(.unified-nav-forward, .unified-nav-back):not([_moz-menuactive])[uri^="file:///"] .menu-iconic-icon
+/* :is(.unified-nav-forward, .unified-nav-back):not([_moz-menuactive])[uri^="file:///"]:is([uri$=".svg"i], [uri$=".png"i], [uri$=".jpg"i], [uri$=".jpeg"i], [uri$=".gif"i]) .menu-iconic-icon, */
+:is(.unified-nav-forward, .unified-nav-back):not([_moz-menuactive])[uri^="file:///"] .menu-iconic-icon
 {
     margin-left: 2px !important;
     width: 15px !important;
@@ -569,11 +267,10 @@ menu.subviewbutton:not([disabled])[_moz-menuactive]:active {
         box-shadow: var(--menupopup-shadow) !important;
     }
 
-    #contentAreaContextMenu menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-left,
-    #customization-footer menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-left,
-    menupopup[menu-api] menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-left,
-    #PlacesToolbar menupopup menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-left,
-    menupopup#placesContext menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-left {
+    :is(#contentAreaContextMenu, #customization-footer, menupopup[menu-api], menupopup#placesContext)
+        menuitem:is([type="checkbox"], [type="radio"])
+        .menu-iconic-left,
+    #PlacesToolbar menupopup menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-left {
         display: none !important;
     }
 
@@ -593,9 +290,9 @@ menu.subviewbutton:not([disabled])[_moz-menuactive]:active {
         list-style-image: url("chrome://browser/skin/bookmark-hollow.svg") !important;
     }
 
-    #backForwardMenu menuitem[type="radio"] > .menu-iconic-left,
-    #back-button menuitem[type="radio"] > .menu-iconic-left,
-    #forward-button menuitem[type="radio"] > .menu-iconic-left {
+    :is(#backForwardMenu, #back-button, #forward-button)
+        menuitem[type="radio"]
+        > .menu-iconic-left {
         -moz-appearance: none !important;
         padding-right: 5.33px !important;
         fill: currentColor !important;
@@ -607,9 +304,7 @@ menu.subviewbutton:not([disabled])[_moz-menuactive]:active {
         min-width: 26px !important;
     }
 
-    #backForwardMenu menuitem[type="radio"],
-    #back-button menuitem[type="radio"],
-    #forward-button menuitem[type="radio"] {
+    :is(#backForwardMenu, #back-button, #forward-button) menuitem[type="radio"] {
         padding: 0px !important;
         color: white !important;
     }

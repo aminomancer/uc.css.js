@@ -48,18 +48,6 @@
     width: 17px !important;
 }
 
-.searchbar-engine-one-off-item:not([selected]):hover,
-.addengine-item:hover {
-    background-color: var(--arrowpanel-dimmed) !important;
-}
-
-.searchbar-engine-one-off-item[selected],
-.searchbar-engine-one-off-item:hover:active,
-.addengine-item[selected],
-.addengine-item:hover:active {
-    background-color: var(--arrowpanel-dimmed-even-further) !important;
-}
-
 #urlbar-engine-one-off-item-bookmarks:not([selected]) {
     fill: currentColor !important;
 }
@@ -269,14 +257,12 @@
     pointer-events: auto !important;
 }
 
-.searchbar-engine-one-off-item:not([selected]):hover, .addengine-item:hover {
+.searchbar-engine-one-off-item:not([selected]):hover,
+.addengine-item:hover {
     background-color: var(--desaturate-dimmed) !important;
 }
 
-.searchbar-engine-one-off-item[selected],
-.searchbar-engine-one-off-item:hover:active,
-.addengine-item[selected],
-.addengine-item:hover:active {
+:is(.searchbar-engine-one-off-item, .addengine-item):is([selected], :hover:active) {
     background-color: var(--desaturate-dimmed-further) !important;
 }
 
@@ -300,11 +286,7 @@
 }
 
 /* individual search one off adjustments */
-#urlbar-engine-one-off-item-Gatherer .button-icon {
-    width: 17.5px !important;
-    height: 17.5px !important;
-}
-
+#urlbar-engine-one-off-item-Gatherer .button-icon,
 #urlbar-engine-one-off-item-Scryfall .button-icon {
     width: 17.5px !important;
     height: 17.5px !important;

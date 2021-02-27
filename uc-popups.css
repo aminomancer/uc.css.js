@@ -155,11 +155,8 @@ tabmodalprompt .checkbox-check[checked="true"] {
         margin: 4px !important;
     }
 
-    #alertSettings:hover,
-    #alertSettings[open],
-    #alertSettings:hover:active,
-    #alertBox .close-icon:hover,
-    #alertBox .close-icon:hover:active {
+    #alertSettings:is(:hover, [open], :hover:active),
+    #alertBox .close-icon:is(:hover, :hover:active) {
         fill: var(--ui-text-80) !important;
         background: rgba(255, 255, 255, 0.08) !important;
     }
@@ -182,20 +179,20 @@ tabmodalprompt .checkbox-check[checked="true"] {
         display: none !important;
     }
 
-    #alertSettings menupopup :-moz-any(menuitem, menu) {
+    #alertSettings menupopup :is(menuitem, menu) {
         -moz-appearance: none !important;
         color: var(--ui-text-80) !important;
         padding: 0 0 0 0 !important;
         min-height: 25px !important;
     }
 
-    #alertSettings menupopup :-moz-any(menuitem, menu)[disabled="true"] {
+    #alertSettings menupopup :is(menuitem, menu)[disabled="true"] {
         -moz-appearance: none !important;
         color: rgba(255, 255, 255, 0.45) !important;
         background-color: initial !important;
     }
 
-    #alertSettings menupopup menuseparator:not([hidden="true"]) + :-moz-any(menu, menuitem) {
+    #alertSettings menupopup menuseparator:not([hidden="true"]) + :is(menu, menuitem) {
         border-image: linear-gradient(
             to right,
             transparent 1%,
@@ -207,7 +204,7 @@ tabmodalprompt .checkbox-check[checked="true"] {
         border-top-style: solid !important;
     }
 
-    #alertSettings menupopup :-moz-any(menuitem, menu) image {
+    #alertSettings menupopup :is(menuitem, menu) image {
         margin-left: 3px;
         margin-right: -3px;
     }
@@ -232,7 +229,7 @@ tabmodalprompt .checkbox-check[checked="true"] {
 
     #alertSettings
         menupopup
-        :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]) {
+        :is(menu, menuitem):is(:hover, [_moz-menuactive="true"]):not([disabled="true"]) {
         -moz-appearance: none !important;
         background-color: rgba(255, 255, 255, 0.08) !important;
     }
@@ -316,12 +313,7 @@ tabmodalprompt .checkbox-check[checked="true"] {
         background-image: url("data:image/svg+xml;utf8,<svg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='-125 -125 762 762' style='enable-background:new 0 0 512 512;' xml:space='preserve'><g><g><path fill='context-fill' fill-opacity='context-fill-opacity' d='M181.333,0H74.667c-17.643,0-32,14.357-32,32v448c0,17.643,14.357,32,32,32h106.667c17.643,0,32-14.357,32-32V32    C213.333,14.357,198.976,0,181.333,0z'/></g></g><g><g><path fill='context-fill' fill-opacity='context-fill-opacity' d='M437.333,0H330.667c-17.643,0-32,14.357-32,32v448c0,17.643,14.357,32,32,32h106.667c17.643,0,32-14.357,32-32V32    C469.333,14.357,454.976,0,437.333,0z'/></g></g></svg>") !important;
     }
 
-    #controls:not(.muted) #audio {
-        background-size: 80% !important;
-        background-position: 35% center !important;
-    }
-
-    #controls.muted #audio {
+    #controls #audio {
         background-size: 80% !important;
         background-position: 35% center !important;
     }
@@ -492,18 +484,16 @@ tabmodalprompt .checkbox-check[checked="true"] {
         padding-block: 5px;
     }
 
-    .dialog-button-box > button[dlgtype="accept"]:enabled,
-    .dialog-button-box > button[dlgtype="accept"]:not([disabled="true"]) {
+    .dialog-button-box > button[dlgtype="accept"]:is(:enabled, :not([disabled="true"])) {
         background-color: var(--in-content-primary-button-background) !important;
     }
 
-    .dialog-button-box > button[dlgtype="accept"]:enabled:hover,
-    .dialog-button-box > button[dlgtype="accept"]:not([disabled="true"]):hover {
+    .dialog-button-box > button[dlgtype="accept"]:is(:enabled, :not([disabled="true"])):hover {
         background-color: var(--in-content-primary-button-background-hover) !important;
     }
 
-    .dialog-button-box > button[dlgtype="accept"]:enabled:hover:active,
-    .dialog-button-box > button[dlgtype="accept"]:not([disabled="true"]):hover:active,
+    .dialog-button-box
+        > button[dlgtype="accept"]:is(:enabled, :not([disabled="true"])):hover:active,
     .dialog-button-box > button[dlgtype="accept"][open],
     .dialog-button-box > button[dlgtype="accept"][open]:hover {
         background-color: var(--in-content-primary-button-background-active) !important;
@@ -542,13 +532,13 @@ tabmodalprompt .checkbox-check[checked="true"] {
         background-color: var(--in-content-primary-button-background) !important;
     }
 
-    richlistitem:not([disabled="true"]) > button[label]:enabled:hover,
-    richlistitem:not([disabled="true"]) > button[label]:not([disabled="true"]):hover {
+    richlistitem:not([disabled="true"])
+        > button[label]:is(:enabled, :not([disabled="true"])):hover {
         background-color: var(--in-content-primary-button-background-hover) !important;
     }
 
-    richlistitem:not([disabled="true"]) > button[label]:enabled:hover:active,
-    richlistitem:not([disabled="true"]) > button[label]:not([disabled="true"]):hover:active,
+    richlistitem:not([disabled="true"])
+        > button[label]:is(:enabled, :not([disabled="true"])):hover:active,
     richlistitem > button[label][open],
     richlistitem > button[label][open]:hover {
         background-color: var(--in-content-primary-button-background-active) !important;

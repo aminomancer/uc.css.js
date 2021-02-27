@@ -13,7 +13,7 @@
     border: none !important;
     padding: 2px;
     padding-inline-start: 4px;
-    border-radius: 3px !important;
+    border-radius: 2px !important;
 }
 
 /* 'add bookmark' popup menu formatting */
@@ -30,7 +30,7 @@
     padding-right: 2px;
     color: #fff !important;
     border: none !important;
-    border-radius: 3px !important;
+    border-radius: 2px !important;
 }
 
 #editBookmarkPanel menulist[open="true"] {
@@ -54,12 +54,12 @@
     line-height: normal;
     color: #fff !important;
     border: none !important;
-    border-radius: 3px !important;
+    border-radius: 2px !important;
     overflow: hidden !important;
 }
 
 #editBookmarkPanel richlistbox {
-    border-radius: 3px !important;
+    border-radius: 2px !important;
     overflow: hidden !important;
 }
 
@@ -132,13 +132,13 @@
     line-height: normal !important;
     color: #fff !important;
     border: none !important;
-    border-radius: 3px !important;
+    border-radius: 2px !important;
     overflow: hidden !important;
 }
 
 #editBookmarkPanel menulist menupopup {
     margin: 0 !important;
-    --menupopup-border-radius: 0 0 3px 3px !important;
+    --menupopup-border-radius: 0 0 2px 2px !important;
 }
 
 /* this goes in userChrome.au.css */
@@ -160,7 +160,7 @@
     margin-left: 4px !important;
     color: #fff !important;
     border: none !important;
-    border-radius: 3px !important;
+    border-radius: 2px !important;
 }
 
 #editBookmarkPanel #editBookmarkPanelContent button:hover {
@@ -328,7 +328,7 @@
 	padding: 5px;
 	background: hsla(232, 24%, 26%, 50%) !important;
 	box-shadow: 0 0 2px rgba(0,0,0,.1), 0 0 5px rgba(0,0,0,.05) !important;
-	border-radius: 6px;
+	border-radius: 3px !important;
 	margin-top: 10px;
 	margin-inline-start: 10px;
 	margin-bottom: -52px;
@@ -368,7 +368,7 @@
 }
 
 /* dragging items in places menus */
-:-moz-any(.BMB-special-innerbox, .BMBsmallContentBox) image[part="drop-indicator"] {
+:is(.BMB-special-innerbox, .BMBsmallContentBox) image[part="drop-indicator"] {
     list-style-image: none;
     height: 2px;
     margin-inline-end: -4em;

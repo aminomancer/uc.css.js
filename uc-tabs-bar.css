@@ -127,16 +127,12 @@ link[href$="global.css"] ~ spacer[part="arrowscrollbox-overflow-end-indicator"] 
     margin-right: 292.5px !important;
 }
 
-:root #toolbar-menubar:not([inactive]) ~ #TabsToolbar .titlebar-buttonbox-container {
-    visibility: collapse !important;
-}
-
+:root #toolbar-menubar:not([inactive]) ~ #TabsToolbar .titlebar-buttonbox-container,
 :root #toolbar-menubar:not([inactive]) ~ #TabsToolbar > .toolbar-items ~ .titlebar-spacer {
     visibility: collapse !important;
 }
 
-#toolbar-menubar #menubar-items,
-#toolbar-menubar #wrapper-menubar-items {
+#toolbar-menubar :is(#menubar-items, #wrapper-menubar-items) {
     position: relative !important;
     top: -3px !important;
     right: 2px !important;
@@ -169,8 +165,7 @@ link[href$="global.css"] ~ spacer[part="arrowscrollbox-overflow-end-indicator"] 
     position: fixed !important;
 }
 
-:root[privatebrowsingmode] #toolbar-menubar #menubar-items,
-:root[privatebrowsingmode] #toolbar-menubar #wrapper-menubar-items {
+:root[privatebrowsingmode] #toolbar-menubar :is(#menubar-items, #wrapper-menubar-items) {
     right: 39px !important;
 }
 
@@ -190,7 +185,7 @@ link[href$="global.css"] ~ spacer[part="arrowscrollbox-overflow-end-indicator"] 
 }
 
 /* get rid of drop shadow drawn on leftmost visible tab */
-.tabbrowser-arrowscrollbox>.arrowscrollbox-overflow-start-indicator {
+.tabbrowser-arrowscrollbox > .arrowscrollbox-overflow-start-indicator {
     visibility: collapse !important;
 }
 
@@ -226,12 +221,17 @@ link[href$="global.css"] ~ spacer[part="arrowscrollbox-overflow-end-indicator"] 
 }
 
 #TabsToolbar {
-/*     background-image: linear-gradient(180deg, hsl(231, 49%, 11%), hsl(233, 55%, 8%)) !important; */
-    background-image: radial-gradient(circle at 100% 0%, hsl(231, 49%, 11%), hsl(233, 55%, 8%) 140px) !important;
+    /* background-image: linear-gradient(180deg, hsl(231, 49%, 11%), hsl(233, 55%, 8%)) !important; */
+    background-image: radial-gradient(
+        circle at 100% 0%,
+        hsl(231, 49%, 11%),
+        hsl(233, 55%, 8%) 140px
+    ) !important;
     background-color: var(--lwt-accent-color) !important;
 }
 
-#new-tab-button, #tabs-newtab-button {
+#new-tab-button,
+#tabs-newtab-button {
     padding-left: 4px !important;
     z-index: 1 !important;
     position: relative !important;
@@ -242,16 +242,14 @@ link[href$="global.css"] ~ spacer[part="arrowscrollbox-overflow-end-indicator"] 
     z-index: 5 !important;
 }
 
-:root:not([sizemode="normal"]) .arrowscrollbox-overflow-end-indicator {
+:root:not([sizemode="normal"]) .arrowscrollbox-overflow-end-indicator,
+:root:not([sizemode="normal"])
+    .tabbrowser-arrowscrollbox
+    > .arrowscrollbox-overflow-start-indicator {
     visibility: collapse !important;
 }
 
-:root:not([sizemode="normal"]) .tabbrowser-arrowscrollbox>.arrowscrollbox-overflow-start-indicator {
-    visibility: collapse !important;
-}
-
-tabbrowser toolbarbutton[class^="scrollbutton"],
-#TabsToolbar toolbarbutton[class^="scrollbutton"] {
+:is(tabbrowser, #TabsToolbar) toolbarbutton[class^="scrollbutton"] {
     display: none !important;
 }
 
@@ -270,26 +268,24 @@ tabbrowser toolbarbutton[class^="scrollbutton"],
 }
 
 #tabbrowser-tabs[movingtab] > .tabbrowser-tab[beforeselected]:not([last-visible-tab])::after,
-.tabbrowser-tab:not([selected]):not([afterselected-visible]):not([afterhovered]):not([first-visible-tab]):not(:hover)::before,
+.tabbrowser-tab:not([selected], [afterselected-visible], [afterhovered], [first-visible-tab], :hover)::before,
 #tabbrowser-tabs:not([overflow])
-    > .tabbrowser-tab[last-visible-tab]:not([selected]):not([beforehovered]):not(:hover)::after {
+    > .tabbrowser-tab[last-visible-tab]:not([selected], [beforehovered], :hover)::after {
     content: unset !important;
     display: unset !important;
 }
 
 /* macOS style window controls */
-.titlebar-buttonbox:-moz-window-inactive>toolbarbutton:not(:hover),
-#window-controls:-moz-window-inactive>toolbarbutton:not(:hover) {
+:is(.titlebar-buttonbox, #window-controls):-moz-window-inactive > toolbarbutton:not(:hover) {
     list-style-image: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' x='0' y='0' viewBox='0 0 114 114' xml:space='preserve'><circle transform='rotate(-86.438 56.99 56.99) scale(1.00003)' cx='57' cy='57' fill-rule='evenodd' clip-rule='evenodd' fill='hsl(227, 19%, 48%)' r='57'/></svg>") !important;
 }
 
-.titlebar-buttonbox .toolbarbutton-icon,
-#window-controls .toolbarbutton-icon {
+:is(.titlebar-buttonbox, #window-controls) .toolbarbutton-icon {
     opacity: 1 !important;
 }
 
-.titlebar-button>.toolbarbutton-icon,
-#window-controls>toolbarbutton>.toolbarbutton-icon {
+.titlebar-button > .toolbarbutton-icon,
+#window-controls > toolbarbutton > .toolbarbutton-icon {
     width: 15.3px !important;
     height: 15.3px !important;
     stroke: none !important;
@@ -387,7 +383,8 @@ tabbrowser toolbarbutton[class^="scrollbutton"],
 }
 
 /* private browsing indicator next to window controls */
-.accessibility-indicator, .private-browsing-indicator {
+.accessibility-indicator,
+.private-browsing-indicator {
     width: 16px !important;
     height: 16px !important;
     -moz-context-properties: fill, fill-opacity !important;
@@ -409,14 +406,14 @@ tabbrowser toolbarbutton[class^="scrollbutton"],
     box-shadow: inset 4px 0 var(--toolbarbutton-icon-fill-attention) !important;
 }
 
-.all-tabs-item:not([selected]):-moz-any(:hover, [_moz-menuactive]) {
+.all-tabs-item:not([selected]):is(:hover, [_moz-menuactive]) {
     background-color: hsla(240, 100%, 82%, 0.1) !important;
 }
 
-.all-tabs-item:not([selected]):-moz-any(:hover, [_moz-menuactive]):active {
+.all-tabs-item:not([selected]):is(:hover, [_moz-menuactive]):active {
     background-color: hsla(240, 100%, 84%, 0.13) !important;
 }
 
 .all-tabs-item[pending] {
-    opacity: .6;
+    opacity: 0.6;
 }
