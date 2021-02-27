@@ -2,8 +2,9 @@
     --in-content-bg-dark: rgb(25, 25, 27);
     --ui-secondary-bg: hsl(234, 39%, 10%);
     --blur-bgcolor: rgba(14, 16, 32, 0.58);
-    --tooltip-bgcolor: var(--ui-secondary-bg);
+    --tooltip-bgcolor: hsl(233, 36%, 11%);
     --tooltip-color: white;
+    --tooltip-border-radius: 2px;
     --statuspanel-color: hsla(0, 0%, 100%, 0.85);
     --dialog-bgcolor: hsla(240, 5.9%, 6.7%, 0.6);
     --dialog-box-bgcolor: hsla(232, 100%, 75%, 8%);

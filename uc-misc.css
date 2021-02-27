@@ -10,11 +10,44 @@ tooltip {
     -moz-default-appearance: none !important;
     display: -moz-popup;
     -moz-appearance: none !important;
-    background-color: var(--tooltip-bgcolor) !important;
+    appearance: none !important;
+    background-color: transparent !important;
     color: var(--tooltip-color) !important;
     border: none !important;
     padding: 5px !important;
     /* font-family: FreeMono !important; */
+}
+
+tooltip > description {
+    background-color: var(--tooltip-bgcolor) !important;
+    color: var(--tooltip-color) !important;
+    border: none !important;
+    border-radius: var(--tooltip-border-radius) !important;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2) !important;
+    padding: 2px 6px 4px 6px !important;
+}
+
+.places-tooltip {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    margin-inline-start: 5px !important;
+    margin-block-start: 5px !important;
+}
+
+.places-tooltip > description {
+    padding: 0 !important;
+}
+
+.places-tooltip-box {
+    padding: 3px 6px 4px 6px !important;
+    border-radius: var(--tooltip-border-radius) !important;
+    background-color: var(--tooltip-bgcolor) !important;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2) !important;
+}
+
+.places-tooltip-uri {
+	color: var(--panel-shortcut-color) !important;
 }
 
 /* blur filter */
@@ -24,6 +57,7 @@ tooltip {
     backdrop-filter: blur(10px);
     color: hsla(0, 0%, 100%, 0.85) !important;
     border: none !important;
+    border-top-right-radius: var(--tooltip-border-radius) !important;
     /* font-family: FreeMono !important; */
     transition: opacity 70ms ease-in-out !important;
     opacity: 1;

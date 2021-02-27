@@ -4,11 +4,21 @@ tooltip[default][page] {
     -moz-default-appearance: none !important;
     display: -moz-popup;
     -moz-appearance: none !important;
-    background-color: var(--tooltip-bgcolor) !important;
+    appearance: none !important;
+    background-color: transparent !important;
     color: var(--tooltip-color) !important;
     border: none !important;
     padding: 5px !important;
     /* font-family: FreeMono !important; */
+}
+
+tooltip[default][page] > description {
+    background-color: var(--tooltip-bgcolor) !important;
+    color: var(--tooltip-color) !important;
+    border: none !important;
+    border-radius: var(--tooltip-border-radius) !important;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2) !important;
+    padding: 2px 6px 4px 6px !important;
 }
 
 /* blur filter */
@@ -18,6 +28,7 @@ tooltip[default][page] {
     backdrop-filter: blur(10px);
     color: var(--statuspanel-color) !important;
     border: none !important;
+    border-top-right-radius: var(--tooltip-border-radius) !important;
     /* font-family: FreeMono !important; */
     transition: opacity 70ms ease-in-out !important;
     opacity: 1;

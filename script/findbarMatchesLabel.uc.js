@@ -2,9 +2,9 @@
 // @name           mini findbar matches label
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
-// @description    creates a miniaturized label for findbar matches and also adds a ctrl+F hotkey to close the findbar if you already have it focused. instead of "1 of 500 matches" this one says "1/500" and floats inside the input box. requires some CSS from my repo obviously. and you'll want to hide the long-winded built-in matches label, naturally. i just added the hotkey because i don't like reaching over to the escape key. this makes ctrl+F more of a findbar toggle than a key that strictly opens the findbar.
+// @description    creates a miniaturized label for findbar matches, miniaturizes the "Match Case" and "Whole Words" buttons, and also adds a ctrl+F hotkey to close the findbar if you already have it focused. instead of "1 of 500 matches" this one says "1/500" and floats inside the input box. requires some CSS from my repo obviously, namely uc-findbar.css. and you'll want to hide the long-winded built-in matches label, naturally. i just added the hotkey because i don't like reaching over to the escape key. this makes ctrl+F more of a findbar toggle than a key that strictly opens the findbar.
 // fyi, the hotkey works with ctrl as well as for cmd/meta, like the built-in 'accel' key, but doesn't actually use the accel key pref because it's deprecated. the hotkey works like this: if the findbar isn't open, then ctrl+F opens it. if it is open but the input box is not focused, then ctrl+F focuses it and selects whatever text is in the box. (that's the normal behavior in firefox) and if the findbar is open and the input box is focused, then ctrl+F closes it. also, if you're in 'find as you type' mode, ctrl+F switches to regular find mode. from there, ctrl+F again will close the findbar. (or if you un-focus the findbar in between, it will focus the findbar, and then hitting ctrl+F once more will close it)
-// as for the matches indicator, it's written to be as snappy as possible but the built-in indicator logic is a little buggy. we have to cover that weirdness up a bit by checking for unexpected values. it's slower when there are a ton of matched results. the indicator can be styled with the selector .matches-indicator. it's the next sibling of the findbar input box. see uc3.css in this repo for how i styled it. i think there's other findbar-related stuff in some of the other ucX.css files so do a search for 'findbar' or something. it's explained in more detail in the code comments below.
+// as for the matches indicator, it's written to be as snappy as possible but the built-in indicator logic is a little buggy. we have to cover that weirdness up a bit by checking for unexpected values. it's slower when there are a ton of matched results. the indicator can be styled with the selector .matches-indicator. it's the next sibling of the findbar input box. see uc-findbar.css in this repo for how i styled it. it's explained in more detail in the code comments below.
 // ==/UserScript==
 
 (() => {
@@ -91,9 +91,15 @@
                 // there's also some CSS in my stylesheets that gives the findbar a smooth transition and starting animation and compresses the buttons and stuff. the effects of this script probably look really weird without those rules so i'd definitely look for the findbar rules in my repo if you're gonna try this script.
                 findbar._findField.style.width = "20em";
                 matchesIndicator.style.cssText = // this could all be set in a stylesheet, i just put it here so the core CSS won't get separated from the javascript it depends on. the other stuff in the stylesheets works with or without this script. whereas this code is exclusive to the new match indicator.
-                    "box-sizing: border-box; display: inline-block; -moz-box-align: center; line-height: 20px; position: fixed; font-size: 10px; right: 68px; color: hsla(0, 0%, 100%, 0.25); pointer-events: none; padding-inline-start: 20px; mask-image: linear-gradient(to right, transparent 0px, black 20px);";
+                    "box-sizing: border-box; display: inline-block; -moz-box-align: center; line-height: 20px; position: fixed; font-size: 10px; right: 109px; color: hsla(0, 0%, 100%, 0.25); pointer-events: none; padding-inline-start: 20px; mask-image: linear-gradient(to right, transparent 0px, black 20px);";
                 matchesIndicator.className = "matches-indicator"; // for styling the background color changes which depend on the status of the findbar and whether it's focused
                 findbar._findField.after(matchesIndicator); // put it after the input box so we can use the ~ squiggly combinator
+                findbar // move the match-case and entire-word buttons into the text field. uc-findbar.css turns these buttons into mini icons, same size as the next/previous buttons. this way we can fit everything important into one row.
+                    .getElementsByClassName("findbar-find-next")[0]
+                    .after(
+                        findbar.getElementsByClassName("findbar-case-sensitive")[0],
+                        findbar.getElementsByClassName("findbar-entire-word")[0]
+                    );
             }
 
             domSetup();
