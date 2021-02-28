@@ -427,10 +427,6 @@
         font-weight: unset !important;
     }
 
-    .panel-banner-item {
-        margin-block: 0 8px !important;
-    }
-
     .panel-banner-item[notificationid^="update"]::after {
         display: none !important;
     }
