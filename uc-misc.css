@@ -6,6 +6,7 @@
     display: none !important;
 }
 
+/* tooltip stuff, pair with userChrome.as.css to cover all tooltips */
 tooltip {
     -moz-default-appearance: none !important;
     display: -moz-popup;
@@ -15,6 +16,8 @@ tooltip {
     color: var(--tooltip-color) !important;
     border: none !important;
     padding: 5px !important;
+    margin-inline-start: -5px !important;
+    margin-block-start: 16px !important;
     /* font-family: FreeMono !important; */
 }
 
@@ -31,12 +34,27 @@ tooltip > description {
     background: transparent !important;
     background-color: transparent !important;
     border: none !important;
-    margin-inline-start: 5px !important;
-    margin-block-start: 5px !important;
+    margin-inline-start: -5px !important;
+    margin-block-start: -5px !important;
 }
 
-.places-tooltip > description {
+.places-tooltip > description,
+:is(#tracking-protection-icon-tooltip, #back-button-tooltip, #forward-button-tooltip) .tooltip-label:not([value], [id]) {
     padding: 0 !important;
+}
+
+:is(#back-button-tooltip, #forward-button-tooltip) .tooltip-label[id]:not(:last-of-type) {
+    padding: 4px 6px 21px 6px !important;
+    font-weight: 600;
+}
+
+:is(#back-button-tooltip, #forward-button-tooltip) .tooltip-label:last-of-type:not([id]) {
+    padding-block: 0 6px !important;
+    margin-block-start: -20px !important;
+    color: var(--panel-shortcut-color) !important;
+    box-shadow: none !important;
+    background: none !important;
+    font-size: 0.9em;
 }
 
 .places-tooltip-box {
@@ -48,6 +66,16 @@ tooltip > description {
 
 .places-tooltip-uri {
 	color: var(--panel-shortcut-color) !important;
+}
+
+#tracking-protection-container tooltip {
+    background-color: var(--ui-secondary-bg) !important;
+    color: var(--tooltip-color) !important;
+    border: none !important;
+    border-radius: var(--tooltip-border-radius) !important;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2) !important;
+    padding: 2px 6px 4px 6px !important;
+    margin-block-start: 26px !important;
 }
 
 /* blur filter */
