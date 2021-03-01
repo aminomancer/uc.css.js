@@ -4,7 +4,7 @@
     display: flex !important;
     flex-flow: row nowrap;
     align-items: center;
-    top: 74px !important;
+    top: calc(var(--urlbar-container-height) + var(--tab-min-height)) !important;
     left: 1.5333em;
     border: 0px solid transparent !important;
     border-bottom-left-radius: 4px !important;

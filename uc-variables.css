@@ -37,8 +37,8 @@
     --urlbar-input-bgcolor: hsla(233, 24%, 26%, 1) !important;
     --urlbar-input-bgcolor-brighter: hsla(233, 23%, 27.2%, 1) !important;
     --urlbar-input-bgcolor-even-brighter: hsla(233, 21%, 31%, 1) !important;
-    --urlbar-height: 33px !important;
     --urlbar-container-height: 39px !important;
+    --urlbar-height: calc(var(--urlbar-container-height) - 6px) !important;
     --lwt-toolbarbutton-icon-fill-attention: hsl(224, 100%, 71%) !important;
     --places-cell-focus-bgcolor: hsla(233, 24%, 28%, 50%) !important;
     --ctrlTab-panel-disabled-bgcolor: hsla(240, 2%, 9%, 0.8) !important;
@@ -105,6 +105,10 @@ toolbar {
     --toolbarbutton-hover-background: hsla(236, 82%, 83%, 0.17) !important;
     --toolbarbutton-active-background: hsla(236, 82%, 83%, 0.22) !important;
     --toolbarbutton-checked-background: hsla(236, 82%, 83%, 0.13) !important;
+}
+
+#urlbar {
+    --urlbar-height: calc(var(--urlbar-container-height) - 6px) !important;
 }
 
 #confirmation-hint {

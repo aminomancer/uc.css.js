@@ -85,10 +85,21 @@ tooltip > description {
     backdrop-filter: blur(10px);
     color: hsla(0, 0%, 100%, 0.85) !important;
     border: none !important;
-    border-top-right-radius: var(--tooltip-border-radius) !important;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2) !important;
     /* font-family: FreeMono !important; */
     transition: opacity 70ms ease-in-out !important;
     opacity: 1;
+}
+
+#statuspanel:not([mirror]) #statuspanel-inner:is(:dir(ltr), :-moz-locale-dir(ltr)) #statuspanel-label {
+    border-top-left-radius: 0;
+    border-top-right-radius: var(--tooltip-border-radius);
+}
+
+#statuspanel[mirror] #statuspanel-inner #statuspanel-label,
+#statuspanel #statuspanel-inner:is(:dir(rtl), :-moz-locale-dir(rtl)) #statuspanel-label {
+    border-top-left-radius: var(--tooltip-border-radius);
+    border-top-right-radius: 0;
 }
 
 /* i prefer about:config => alerts.useSystemBackend = true */

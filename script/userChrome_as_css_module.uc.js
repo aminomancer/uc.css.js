@@ -10,7 +10,19 @@ let EXPORTED_SYMBOLS = [];
 (function () {
   const {Services} = ChromeUtils.import('resource://gre/modules/Services.jsm');
 	let sss = Cc['@mozilla.org/content/style-sheet-service;1'].getService(Ci.nsIStyleSheetService);
-  const path = Services.io.getProtocolHandler('file').QueryInterface(Ci.nsIFileProtocolHandler).getURLSpecFromDir(Services.dirsvc.get('UChrm',Ci.nsIFile));
+  function traverseToMainProfile(str){
+    let dir = Services.dirsvc.get(str,Ci.nsIFile);
+    if (!dir.exists()) {
+      let toAddChrome = false;
+      while (dir.target.includes('chrome_debugger_profile')) {
+        dir = dir.parent;
+        toAddChrome = true;
+      }
+      if (toAddChrome) dir.append('chrome');
+    }
+    return dir;
+  }
+  const path = Services.io.getProtocolHandler('file').QueryInterface(Ci.nsIFileProtocolHandler).getURLSpecFromDir(traverseToMainProfile('UChrm'));
   try{
     sss.loadAndRegisterSheet(Services.io.newURI(path + "userChrome.as.css"), sss.AGENT_SHEET);
   }catch(e){

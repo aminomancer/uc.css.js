@@ -142,7 +142,7 @@ toolbarpaletteitem[removable="false"]
 } */
 
 #tracking-protection-icon-container:is([open="true"], :hover)
-    #tracking-protection-icon-box[active]:not([animate])
+    #tracking-protection-icon-box[active]:not([animate], [hasException])
     #tracking-protection-icon-animatable-box {
     display: block !important;
 }
@@ -156,10 +156,10 @@ toolbarpaletteitem[removable="false"]
 }
 
 #tracking-protection-icon-container:not([open="true"], :hover)
-    #tracking-protection-icon-box[active]:not([animate])
+    #tracking-protection-icon-box[active]:not([animate], [hasException])
     #tracking-protection-icon-animatable-box,
 #tracking-protection-icon-container:is([open="true"], :hover)
-    #tracking-protection-icon-box[active]:not([animate])
+    #tracking-protection-icon-box[active]:not([animate], [hasException])
     #tracking-protection-icon {
     display: none !important;
 }

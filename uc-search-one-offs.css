@@ -20,7 +20,7 @@
     position: relative !important;
     border: none !important;
     margin-top: -1.7px !important;
-    min-height: 33px !important;
+    min-height: var(--urlbar-height) !important;
     padding: 0 !important;
 }
 
@@ -89,7 +89,7 @@
 /* search one-offs in urlbar */
 .urlbarView .search-one-offs {
     position: absolute !important;
-    top: -35px !important;
+    top: calc(-2px - var(--urlbar-height)) !important;
     right: 0.6px !important;
     max-width: 244.4px !important;
     scroll-behavior: smooth !important;
@@ -277,7 +277,7 @@
 
 /* search one offs visible when pageproxystate=invalid even if urlbar is not focused */
 #urlbar .urlbarView {
-    top: calc(0.5px + (var(--urlbar-toolbar-height) - var(--urlbar-height)) / 2) !important;
+    top: calc((var(--urlbar-container-height) - var(--urlbar-height)) / 2) !important;
     margin: 0 !important;
     width: calc(100% + 6px) !important;
     left: -3px !important;

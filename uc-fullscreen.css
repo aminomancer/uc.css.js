@@ -53,7 +53,7 @@ requires fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-statu
 }
 
 :root[sizemode="maximized"]:not([customizing]) .browserContainer>findbar {
-    top: 70px !important;
+    top: calc(var(--urlbar-container-height) + var(--tab-min-height) - 4px) !important;
     padding-top: 15px !important;
 }
 
@@ -72,12 +72,12 @@ requires fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-statu
 }
 
 :root[inFullscreen]:not([customizing]) #browser findbar {
-    padding-top: 73px !important;
-    margin-top: -71px !important;
+    padding-top: calc(var(--urlbar-container-height) + var(--tab-min-height) - 1px) !important;
+    margin-top: calc(3px - var(--urlbar-container-height) - var(--tab-min-height)) !important;
 }
 
 :root[inFullscreen]:not([customizing]) #browser findbar[hidden] {
-    margin-top: -96px !important;
+    margin-top: calc(-22px - var(--urlbar-container-height) - var(--tab-min-height)) !important;
 }
 
 :root[inFullscreen]:not([customizing])>body>box:is(:focus-within, :hover, [popup-status], [urlbar-status]) ~ #browser findbar {
@@ -93,7 +93,7 @@ requires fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-statu
 }
 
 :root[customizing][inFullscreen] #customization-container {
-    margin-top: 74px !important;
+    margin-top: calc(var(--urlbar-container-height) + var(--tab-min-height)) !important;
 }
 
 /* DOM fullscreen, e.g. hitting the fullscreen button on youtube */
