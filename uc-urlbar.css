@@ -275,8 +275,8 @@ toolbarpaletteitem[removable="false"]
 }
 
 #tracking-protection-icon-container {
-    margin-inline: 0 7px !important;
-    padding-inline: 7px 1px !important;
+    margin-inline: 6px 7px !important;
+    padding-inline: 1px !important;
     border: none !important;
     background: none !important;
 }
@@ -322,9 +322,9 @@ toolbarpaletteitem[removable="false"]
     margin-top: calc(var(--toolbarbutton-inner-padding) - 4px) !important;
 }
 
-#protections-popup {
+/* #protections-popup {
     margin-left: -17px !important;
-}
+} */
 
 #identity-popup[connection^="secure"] .identity-popup-security-connection,
 :root[lwt-popup-brighttext] .identity-popup-connection-secure {
@@ -753,9 +753,8 @@ toolbarpaletteitem[removable="false"]
     min-width: 16px !important;
     align-items: center !important;
     height: var(--urlbar-height) !important;
-    padding-block: 6.6px !important;
-    padding-inline-end: 5px !important;
-    padding-inline-start: 28px !important;
+    padding-block: calc((var(--urlbar-height) - 19px) / 2) !important;
+    padding-inline: 28px 5px !important;
     border: none !important;
     border-right: 1px solid transparent !important;
 }

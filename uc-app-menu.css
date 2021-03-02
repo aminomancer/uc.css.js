@@ -380,17 +380,13 @@
     }
 
     #appMenu-zoom-controls2
-        :is(#appMenu-zoomReduce-button2, #appMenu-zoomEnlarge-button2, #appMenu-fullscreen-button2, #appMenu-zoomReset-button2)
-        :not([disabled], [open], :active)
-        :is(:hover, :focus) {
+        :is(#appMenu-zoomReduce-button2, #appMenu-zoomEnlarge-button2, #appMenu-fullscreen-button2, #appMenu-zoomReset-button2):not([disabled], [open], :active):is(:hover, :focus) {
         background-color: var(--arrowpanel-dimmed) !important;
         border-color: transparent !important;
     }
 
     #appMenu-zoom-controls2
-        :is(#appMenu-zoomReduce-button2, #appMenu-zoomEnlarge-button2, #appMenu-fullscreen-button2, #appMenu-zoomReset-button2)
-        :not([disabled])
-        :is([open], :hover:active) {
+        :is(#appMenu-zoomReduce-button2, #appMenu-zoomEnlarge-button2, #appMenu-fullscreen-button2, #appMenu-zoomReset-button2):not([disabled]):is([open], :hover:active) {
         background-color: var(--arrowpanel-dimmed-further) !important;
     }
 
