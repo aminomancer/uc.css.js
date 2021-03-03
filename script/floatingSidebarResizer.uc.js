@@ -62,6 +62,9 @@
         }
 
         function hotkeyObserve(_sub, _top, pref) {
+            let sidebarBundle = Services.strings.createBundle(
+                "chrome://browser/locale/customizableui/customizableWidgets.properties"
+            );
             if (prefsvc.getBoolPref(pref)) {
                 sidebarCmd.setAttribute("oncommand", "SidebarUI.toggle();"); // ctrl+B to toggle
                 toolbarCmd.setAttribute(
@@ -82,6 +85,14 @@
                 sidebarSwitch.setAttribute("key", cB);
                 SidebarUI.updateShortcut({ button: sidebarSwitch });
             }
+            document
+                .getElementById("sidebar-button")
+                .setAttribute(
+                    "tooltiptext",
+                    `${sidebarBundle.GetStringFromName(
+                        "sidebar-button.tooltiptext2"
+                    )} (${ShortcutUtils.prettifyShortcut(sidebarCmd)})`
+                );
         }
 
         async function prefSet(pref, val) {
