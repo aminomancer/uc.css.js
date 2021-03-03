@@ -16,25 +16,24 @@
             E10SUtils: "resource://gre/modules/E10SUtils.jsm",
             SelectionUtils: "resource://gre/modules/SelectionUtils.jsm",
         });
-        let attachKeyListener = (e, t) => {
-            if ("document-element-inserted" == t && content && e == content.document)
+        let attachKeyListener = (d, n) => {
+            if ("document-element-inserted" == n && content && d == content.document)
                 try {
                     content.addEventListener("keydown", (e) => {
                         if ("KeyF" === e.code && e.ctrlKey && e.shiftKey && !e.repeat) {
                             try {
-                                let t = utils.SelectionUtils.getSelectionDetails(content);
-                                if (t.text && !t.docSelectionIsCollapsed) {
-                                    let s = e.composedTarget.ownerDocument.nodePrincipal,
-                                        i = {
-                                            csp: utils.E10SUtils.serializeCSP(
-                                                e.composedTarget.ownerDocument.csp
-                                            ),
-                                            text: t.text,
-                                            linkURL: t.linkURL,
-                                            principal: s,
-                                        };
+                                let s = utils.SelectionUtils.getSelectionDetails(content);
+                                if (s.text && !s.docSelectionIsCollapsed) {
+                                    let msg = {
+                                        csp: utils.E10SUtils.serializeCSP(
+                                            e.composedTarget.ownerDocument.csp
+                                        ),
+                                        text: s.text,
+                                        linkURL: s.linkURL,
+                                        location: content.location.href,
+                                    };
                                     try {
-                                        sendAsyncMessage("ctrl-shift-f", i);
+                                        sendAsyncMessage("ctrl-shift-f", msg);
                                     } catch (e) {}
                                 }
                             } catch (e) {}
@@ -61,14 +60,27 @@
                     let csp = E10SUtils.deserializeCSP(message.data.csp),
                         text = message.data.text,
                         linkURL = message.data.linkURL,
-                        principal = message.data.principal;
+                        principal = Services.scriptSecurityManager.getSystemPrincipal(),
+                        location = message.data.location,
+                        where =
+                            location === AboutNewTab.newTabURL || location === HomePage.get(window)
+                                ? "current"
+                                : "tab";
                     if (linkURL) {
-                        openLinkIn(linkURL, "tab", {
+                        openLinkIn(linkURL, where, {
                             inBackground: false,
                             triggeringPrincipal: principal,
                         });
                     } else {
-                        window.BrowserSearch.loadSearchFromContext(text, false, principal, csp);
+                        window.BrowserSearch._loadSearch(
+                            text,
+                            where,
+                            false,
+                            "contextmenu",
+                            principal,
+                            csp,
+                            false
+                        );
                     }
                 } catch (e) {}
             }

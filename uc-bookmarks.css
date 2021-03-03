@@ -347,6 +347,7 @@
     
     #BMB_bookmarksToolbarPopup {
         margin-inline-start: 0px !important;
+        padding-block-end: 4px !important;
     }
     
     .BMB-special-innerbox > .menupopup-arrowscrollbox {
@@ -400,8 +401,14 @@ treechildren::-moz-tree-drop-feedback {
 
 @supports (-moz-bool-pref("browser.proton.enabled")) {
 
-    #BMB_bookmarksPopup menupopup[placespopup="true"] {
+/*     #BMB_bookmarksPopup menupopup[placespopup="true"] {
         padding-top: 0 !important;
+    } */
+
+    .BMB-special-innerbox {
+        margin-top: 0px !important;
     }
+    
+    
 
 }

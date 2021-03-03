@@ -43,6 +43,7 @@
 #context-searchselect-private:not(.menuitem-iconic) .menu-text,
 #context-viewpartialsource-selection:not(.menuitem-iconic) .menu-text,
 #context-undo:not(.menuitem-iconic) .menu-text,
+#context-redo:not(.menuitem-iconic) .menu-text,
 #context-cut:not(.menuitem-iconic) .menu-text,
 #context-paste:not(.menuitem-iconic) .menu-text,
 #context-delete:not(.menuitem-iconic) .menu-text,
@@ -87,12 +88,15 @@ menupopup#placesContext menuitem[type="checkbox"] .menu-iconic-text,
 menupopup#placesContext menuitem[type="radio"] .menu-iconic-text,
 menupopup#placesContext menuitem[checked] .menu-iconic-text,
 .textbox-contextmenu menuitem[label="Undo"]:not(.menuitem-iconic) .menu-text,
+.textbox-contextmenu menuitem[label="Redo"]:not(.menuitem-iconic) .menu-text,
 .textbox-contextmenu menuitem[label="Cut"]:not(.menuitem-iconic) .menu-text,
 .textbox-contextmenu menuitem[label="Copy"]:not(.menuitem-iconic) .menu-text,
 .textbox-contextmenu menuitem[label="Paste"]:not(.menuitem-iconic) .menu-text,
-.textbox-contextmenu menuitem[label="Paste & Go"]:not(.menuitem-iconic) .menu-text,
+.textbox-contextmenu menuitem[label="Paste & Search"]:not(.menuitem-iconic) .menu-text,
+.textbox-contextmenu menuitem[label="Paste and Go"]:not(.menuitem-iconic) .menu-text,
 .textbox-contextmenu menuitem[label="Delete"]:not(.menuitem-iconic) .menu-text,
 .textbox-contextmenu menuitem[label="Select All"]:not(.menuitem-iconic) .menu-text,
+.searchbar-clear-history:not(.menuitem-iconic) .menu-text,
 #spell-check-enabled:not(.menuitem-iconic) .menu-iconic-text,
 #spell-add-to-dictionary:not(.menuitem-iconic) .menu-text,
 #context_reopenInContainer:not(.menuitem-iconic)>.menu-text,
@@ -275,9 +279,12 @@ menupopup#placesContext menuitem[type="radio"][checked="true"]::before{
 .textbox-contextmenu menuitem[label="Copy"]:not(.menuitem-iconic)::before,
 .textbox-contextmenu menuitem[label="Cut"]:not(.menuitem-iconic)::before,
 .textbox-contextmenu menuitem[label="Paste"]:not(.menuitem-iconic)::before,
-.textbox-contextmenu menuitem[label="Paste & Go"]:not(.menuitem-iconic)::before,
+.textbox-contextmenu menuitem[label="Paste & Search"]:not(.menuitem-iconic)::before,
+.textbox-contextmenu menuitem[label="Paste and Go"]:not(.menuitem-iconic)::before,
 .textbox-contextmenu menuitem[label="Delete"]:not(.menuitem-iconic)::before,
 .textbox-contextmenu menuitem[label="Undo"]:not(.menuitem-iconic)::before,
+.textbox-contextmenu menuitem[label="Redo"]:not(.menuitem-iconic)::before,
+.searchbar-clear-history:not(.menuitem-iconic)::before,
 #context-sendimage:not(.menuitem-iconic)::before,
 #context-sendvideo:not(.menuitem-iconic)::before,
 #context-sendaudio:not(.menuitem-iconic)::before,
@@ -313,6 +320,7 @@ menupopup#placesContext menuitem[type="radio"][checked="true"]::before{
 #context-searchselect:not(.menuitem-iconic)::before,
 #context-searchselect-private:not(.menuitem-iconic)::before,
 #context-undo:not(.menuitem-iconic)::before,
+#context-redo:not(.menuitem-iconic)::before,
 #context-keywordfield:not(.menuitem-iconic)::before,
 #context_reopenInContainer:not(.menuitem-iconic)::before,
 :is(#context_reloadTab, #context_reloadSelectedTabs):not(.menuitem-iconic)::before,
@@ -522,7 +530,8 @@ menupopup#placesContext menuitem[type="radio"][checked="true"]::before{
     background-image: url("chrome://browser/skin/edit-paste.svg") !important;
 }
 
-.textbox-contextmenu menuitem[label="Paste & Go"]:not(.menuitem-iconic)::before {
+.textbox-contextmenu menuitem[label="Paste & Search"]:not(.menuitem-iconic)::before,
+.textbox-contextmenu menuitem[label="Paste and Go"]:not(.menuitem-iconic)::before {
     background-image: url("chrome://devtools/skin/images/command-paintflashing.svg");
     background-image: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='context-fill' fill-opacity='context-fill-opacity'><path d='M5.5 8c-.3 0-.5.2-.5.5s.2.5.5.5h2c.3 0 .5-.2.5-.5S7.8 8 7.5 8h-2zM10 6.5c0-.3-.2-.5-.5-.5h-4c-.3 0-.5.2-.5.5s.2.5.5.5h4c.3 0 .5-.2.5-.5z'/><path d='M11.5 13.8v-.3h-1.1c-.8 0-1.5-.3-2-.9-.5-.6-.8-1.3-.8-2V10H5c-.6 0-1-.4-1-1V5h7v5.3h.6c-.1-.5.1-1 .4-1.4.3-.3.6-.4 1-.5V4c0-1.1-.9-2-2-2h-1C9.7.6 8.4-.2 7 0 6 .2 5.2 1 5 2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h7c.6 0 1.1-.3 1.5-.7-.2-.1-.4-.2-.5-.4-.3-.3-.5-.7-.5-1.1zM4 3h1c.5 0 .9-.3 1-.8.2-.8 1-1.3 1.8-1.2.6.1 1 .6 1.2 1.2.1.5.5.8.9.8H11v1H4V3z'/><circle cx='7.5' cy='2.5' r='.5'/><path d='M15.5 11.5l-1.9-1.9c-.1-.1-.3-.2-.4-.2-.2 0-.3.1-.5.2-.2.2-.2.6 0 .9l.3.3.6.6h-3.1c-.3 0-.5-.2-.6-.5V8.7c0-.4-.3-.6-.6-.6s-.6.3-.6.6V11c.1.5.4.9.7 1.2.3.2.6.3 1 .3h3.2l-.6.6-.3.3c-.3.2-.3.6 0 .9.1.1.2.1.2.2h.2c.2 0 .3-.1.4-.2l1.9-1.9c.4-.3.4-.7.1-.9z'/></svg>");
 }
@@ -530,6 +539,10 @@ menupopup#placesContext menuitem[type="radio"][checked="true"]::before{
 #context-delete:not(.menuitem-iconic)::before,
 .textbox-contextmenu menuitem[label="Delete"]:not(.menuitem-iconic)::before {
     background-image: url("chrome://devtools/skin/images/close.svg") !important;
+}
+
+.searchbar-clear-history:not(.menuitem-iconic)::before {
+    background-image: url("chrome://devtools/skin/images/clear.svg") !important;
 }
 
 #context-copyemail:not(.menuitem-iconic)::before {
@@ -583,6 +596,12 @@ menupopup#placesContext menuitem[type="radio"][checked="true"]::before{
 #context-undo:not(.menuitem-iconic)::before,
 .textbox-contextmenu menuitem[label="Undo"]:not(.menuitem-iconic)::before {
     background-image: url("chrome://global/skin/icons/undo.svg") !important;
+}
+
+#context-redo:not(.menuitem-iconic)::before,
+.textbox-contextmenu menuitem[label="Redo"]:not(.menuitem-iconic)::before {
+    background-image: url("chrome://global/skin/icons/undo.svg") !important;
+    transform: rotate(180deg);
 }
 
 #context-keywordfield:not(.menuitem-iconic)::before {

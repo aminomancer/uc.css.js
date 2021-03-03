@@ -6,6 +6,7 @@
     --tooltip-color: white;
     --tooltip-border-radius: 2px;
     --statuspanel-color: hsla(0, 0%, 100%, 0.85);
+    --general-button-border-radius: 2.6px;
     --dialog-bgcolor: hsla(240, 5.9%, 6.7%, 0.6);
     --dialog-box-bgcolor: hsla(232, 100%, 75%, 8%);
     --dialog-box-bgcolor-dim: hsla(240, 100%, 70%, 3%);

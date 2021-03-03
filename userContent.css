@@ -208,12 +208,12 @@
         --chrome-content-separator-color: rgba(0, 0, 0, 0) !important;
         --tabs-navbar-shadow-size: 0px !important;
         --autocomplete-popup-highlight-background: hsl(234, 21%, 35%) !important;
-        --toolbarbutton-border-radius: 2.6px !important;
+        --toolbarbutton-border-radius: var(--general-button-border-radius) !important;
         --lwt-accent-color: hsl(233, 61%, 8%) !important;
         --lwt-text-color: hsl(213, 43%, 89%) !important;
         --lwt-toolbar-field-background-color: hsla(233, 25%, 28%, 85%) !important;
         --lwt-toolbar-field-color: hsl(0, 0%, 100%) !important;
-        --lwt-toolbar-field-focus: rgb(255, 255, 255) !important;
+        --lwt-toolbar-field-focus: hsla(233, 25%, 28%, 85%) !important;
         --lwt-toolbar-field-focus-color: rgb(255, 255, 255) !important;
         --toolbar-bgcolor: hsl(231, 42%, 15%) !important;
         --toolbar-color: hsl(0, 0%, 100%) !important;
@@ -236,8 +236,8 @@
         --urlbar-input-bgcolor: hsla(233, 24%, 26%, 1) !important;
         --urlbar-input-bgcolor-brighter: hsla(233, 23%, 27.2%, 1) !important;
         --urlbar-input-bgcolor-even-brighter: hsla(233, 21%, 31%, 1) !important;
-        --urlbar-height: 33px !important;
         --urlbar-container-height: 39px !important;
+        --urlbar-height: calc(var(--urlbar-container-height) - 6px) !important;
         --lwt-toolbarbutton-icon-fill-attention: hsl(224, 100%, 71%) !important;
         --places-cell-focus-bgcolor: hsla(233, 24%, 28%, 50%) !important;
         --ctrlTab-panel-disabled-bgcolor: hsla(240, 2%, 9%, 0.8) !important;
@@ -249,6 +249,7 @@
         --in-content-button-background: var(--arrowpanel-dimmed) !important;
         --in-content-button-background-hover: var(--arrowpanel-dimmed-further) !important;
         --in-content-button-background-active: var(--arrowpanel-dimmed-even-further) !important;
+        --in-content-button-border-radius: var(--general-button-border-radius) !important;
         --in-content-item-selected: var(--purple-40) !important;
         --in-content-border-highlight: var(--purple-40) !important;
         --in-content-border-focus: var(--purple-40) !important;
@@ -304,6 +305,10 @@
         --toolbarbutton-hover-background: hsla(236, 82%, 83%, 0.17) !important;
         --toolbarbutton-active-background: hsla(236, 82%, 83%, 0.22) !important;
         --toolbarbutton-checked-background: hsla(236, 82%, 83%, 0.13) !important;
+    }
+    
+    #urlbar {
+        --urlbar-height: calc(var(--urlbar-container-height) - 6px) !important;
     }
     
     #confirmation-hint {
@@ -1096,6 +1101,12 @@
 
     #islsp {
         float: left !important;
+    }
+}
+
+@-moz-document regexp("^(?!about:|chrome:).*") {
+    [data-thumb="1"] {
+        visibility: collapse;
     }
 }
 

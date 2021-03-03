@@ -9,12 +9,12 @@
     --chrome-content-separator-color: rgba(0, 0, 0, 0) !important;
     --tabs-navbar-shadow-size: 0px !important;
     --autocomplete-popup-highlight-background: hsl(234, 21%, 35%) !important;
-    --toolbarbutton-border-radius: 2.6px !important;
+    --toolbarbutton-border-radius: var(--general-button-border-radius) !important;
     --lwt-accent-color: hsl(233, 61%, 8%) !important;
     --lwt-text-color: hsl(213, 43%, 89%) !important;
     --lwt-toolbar-field-background-color: hsla(233, 25%, 28%, 85%) !important;
     --lwt-toolbar-field-color: hsl(0, 0%, 100%) !important;
-    --lwt-toolbar-field-focus: rgb(255, 255, 255) !important;
+    --lwt-toolbar-field-focus: hsla(233, 25%, 28%, 85%) !important;
     --lwt-toolbar-field-focus-color: rgb(255, 255, 255) !important;
     --toolbar-bgcolor: hsl(231, 42%, 15%) !important;
     --toolbar-color: hsl(0, 0%, 100%) !important;
@@ -50,6 +50,7 @@
     --in-content-button-background: var(--arrowpanel-dimmed) !important;
     --in-content-button-background-hover: var(--arrowpanel-dimmed-further) !important;
     --in-content-button-background-active: var(--arrowpanel-dimmed-even-further) !important;
+    --in-content-button-border-radius: var(--general-button-border-radius) !important;
     --in-content-item-selected: var(--purple-40) !important;
     --in-content-border-highlight: var(--purple-40) !important;
     --in-content-border-focus: var(--purple-40) !important;
@@ -203,4 +204,3 @@ toolbar {
     }
 
 }
-

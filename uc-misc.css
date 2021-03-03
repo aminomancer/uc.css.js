@@ -34,6 +34,9 @@ tooltip > description {
     background: transparent !important;
     background-color: transparent !important;
     border: none !important;
+}
+
+#mainPopupSet > .places-tooltip {
     margin-inline-start: -5px !important;
     margin-block-start: -5px !important;
 }
@@ -87,7 +90,7 @@ tooltip > description {
     border: none !important;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2) !important;
     /* font-family: FreeMono !important; */
-    transition: opacity 70ms ease-in-out !important;
+/*     transition: opacity 70ms ease-in-out !important; */
     opacity: 1;
 }
 

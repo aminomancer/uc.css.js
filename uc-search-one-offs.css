@@ -15,6 +15,12 @@
     padding-top: 3px !important;
 }
 
+#PopupSearchAutoComplete .search-panel-one-offs {
+    background: none !important;
+    -moz-context-properties: fill, fill-opacity !important;
+    fill: currentColor !important;
+}
+
 .search-one-offs {
     width: -moz-fit-content !important;
     position: relative !important;
