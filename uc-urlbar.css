@@ -141,6 +141,13 @@ toolbarpaletteitem[removable="false"]
     filter: brightness(1.15) saturate(1.5) contrast(1.15) !important;
 } */
 
+#urlbar-input-container
+    > #tracking-protection-icon-container:not([hidden])
+    > #tracking-protection-icon-box[hasException]
+    > #tracking-protection-icon {
+    list-style-image: url(chrome://browser/skin/tracking-protection-disabled.svg) !important;
+}
+
 #tracking-protection-icon-container:is([open="true"], :hover)
     #tracking-protection-icon-box[active]:not([animate], [hasException])
     #tracking-protection-icon-animatable-box {
@@ -376,37 +383,43 @@ toolbarpaletteitem[removable="false"]
     border-color: transparent !important;
 }
 
-#identity-popup-securityView-body {
-    display: inline-flex !important;
-    flex-direction: column !important;
+.identity-popup-section {
+    -moz-box-align: center;
 }
 
-#identity-popup[customroot="true"] [when-customroot="true"],
-#identity-popup[connection="not-secure"] [when-connection~="not-secure"],
-#identity-popup[connection="secure-cert-user-overridden"]
-    [when-connection~="secure-cert-user-overridden"],
-#identity-popup[connection="secure-ev"] [when-connection~="secure-ev"],
-#identity-popup[connection="secure"] [when-connection~="secure"],
-#identity-popup[connection="chrome"] [when-connection~="chrome"],
-#identity-popup[connection="file"] [when-connection~="file"],
-#identity-popup[connection="extension"] [when-connection~="extension"],
-#identity-popup[connection="cert-error-page"] [when-connection~="cert-error-page"],
-#identity-popup[connection="https-only-error-page"] [when-connection~="https-only-error-page"],
-#identity-popup[ciphers="weak"] [when-ciphers~="weak"],
-#identity-popup[mixedcontent~="active-loaded"] [when-mixedcontent="active-loaded"],
-#identity-popup[mixedcontent~="passive-loaded"]:not([mixedcontent~="active-loaded"])
-    [when-mixedcontent="passive-loaded"],
-#identity-popup[mixedcontent~="active-blocked"]:not([mixedcontent~="passive-loaded"])
-    [when-mixedcontent="active-blocked"],
-#identity-popup[mixedcontent~="active-blocked"][mixedcontent~="passive-loaded"]
-    [when-mixedcontent~="active-blocked"][when-mixedcontent~="passive-loaded"],
-#identity-popup[httpsonlystatus="exception"] [when-httpsonlystatus~="exception"],
-#identity-popup[httpsonlystatus="upgraded"] [when-httpsonlystatus~="upgraded"],
-#identity-popup[httpsonlystatus="failed-top"] [when-httpsonlystatus~="failed-top"],
-#identity-popup[httpsonlystatus="failed-sub"] [when-httpsonlystatus~="failed-sub"],
-#identity-popup-securityView-body[mixedcontent~="active-blocked"]
-    > button[when-mixedcontent="active-blocked"] {
-    display: -moz-box !important;
+.identity-popup-expander {
+    width: min-content !important;
+    height: min-content !important;
+    padding: 10px !important;
+    background-clip: content-box !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+.identity-popup-expander .button-box {
+    border-radius: var(--toolbarbutton-border-radius);
+    width: 32px;
+    height: 32px;
+}
+
+.identity-popup-expander:hover .button-box {
+	background-color: var(--arrowpanel-dimmed);
+}
+
+.identity-popup-expander:hover:active .button-box {
+	background-color: var(--arrowpanel-dimmed-further);
+}
+
+.panel-header > .subviewbutton-back {
+	list-style-image: url("chrome://global/skin/icons/arrow-left.svg") !important;
+	padding: 0 !important;
+    width: 32px !important;
+    height: 32px !important;
+}
+
+.panel-header > .subviewbutton-back > .toolbarbutton-icon {
+    width: 16px !important;
+    height: auto !important;
 }
 
 #identity-popup-multiView .panel-button {
