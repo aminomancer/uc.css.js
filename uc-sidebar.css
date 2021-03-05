@@ -34,8 +34,7 @@
 
 #sidebar-header {
     -moz-appearance: none !important;
-    padding: 1px !important;
-    padding-bottom: 8px !important;
+    padding: 7px !important;
     border-bottom: 0px solid transparent !important;
     background-color: var(--ui-secondary-bg) !important;
     color: #fff !important;
@@ -74,43 +73,47 @@
     padding-inline-start: 13px !important;
 }
 
-.textbox-search-icons {
-    display: flex !important;
-    flex-flow: row nowrap !important;
-}
+@-moz-document regexp(".*sidebar.*") {
 
-.textbox-search-clear {
-    list-style-image: url(chrome://global/skin/icons/close.svg) !important;
-    fill: var(--ui-text-80) !important;
-    -moz-context-properties: fill, fill-opacity !important;
-    fill-opacity: 0 !important;
-    width: 16.5px !important;
-    height: 16.5px !important;
-    min-height: 1px !important;
-    border-radius: 100% !important;
-    margin: 0 3px 0 0 !important;
-    padding: 0 !important;
-    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20'><rect fill='context-fill' fill-opacity='context-fill-opacity' width='20' height='20' rx='2' ry='2'/><path fill='context-fill' fill-opacity='context-stroke-opacity' d='M11.06 10l3.47-3.47a.75.75 0 00-1.06-1.06L10 8.94 6.53 5.47a.75.75 0 10-1.06 1.06L8.94 10l-3.47 3.47a.75.75 0 101.06 1.06L10 11.06l3.47 3.47a.75.75 0 001.06-1.06z'/></svg>") !important;
-}
+    .textbox-search-icons {
+        display: flex;
+        flex-flow: row nowrap !important;
+    }
 
-.textbox-search-clear:is(:hover, :active) {
-    fill: rgba(255, 255, 255, 1) !important;
-    background-color: var(--arrowpanel-dimmed-further) !important;
-}
+    .textbox-search-clear {
+        list-style-image: url(chrome://global/skin/icons/close.svg) !important;
+        fill: var(--ui-text-80) !important;
+        -moz-context-properties: fill, fill-opacity !important;
+        fill-opacity: 0 !important;
+        width: 16.5px !important;
+        height: 16.5px !important;
+        min-height: 1px !important;
+        border-radius: 100% !important;
+        margin: 0 3px 0 0 !important;
+        padding: 0 !important;
+        list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20'><rect fill='context-fill' fill-opacity='context-fill-opacity' width='20' height='20' rx='2' ry='2'/><path fill='context-fill' fill-opacity='context-stroke-opacity' d='M11.06 10l3.47-3.47a.75.75 0 00-1.06-1.06L10 8.94 6.53 5.47a.75.75 0 10-1.06 1.06L8.94 10l-3.47 3.47a.75.75 0 101.06 1.06L10 11.06l3.47 3.47a.75.75 0 001.06-1.06z'/></svg>") !important;
+    }
 
-.textbox-search-sign {
-    margin-left: 2px !important;
-    margin-top: 0.5px !important;
-    margin-inline-end: 6px !important;
-    -moz-context-properties: fill, fill-opacity;
-    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'><path fill='context-fill' fill-opacity='context-fill-opacity' fill-rule='evenodd' d='M.646 10.646l.707.707L4.705 8A4.483 4.483 0 103 4.5a4.458 4.458 0 001 2.795zM7.5 1A3.5 3.5 0 114 4.5 3.5 3.5 0 017.5 1z'/></svg>") !important;
-    fill: var(--panel-shortcut-color) !important;
-    fill-opacity: 1;
-}
+    .textbox-search-clear:is(:hover, :active) {
+        fill: rgba(255, 255, 255, 1) !important;
+        background-color: var(--arrowpanel-dimmed-further) !important;
+    }
 
-link[href="chrome://global/skin/search-textbox.css"] ~ input::placeholder {
-    opacity: 1;
-    color: var(--panel-shortcut-color);
+    .textbox-search-sign {
+        margin-left: 2px !important;
+        margin-top: 0.5px !important;
+        margin-inline-end: 6px !important;
+        -moz-context-properties: fill, fill-opacity;
+        list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'><path fill='context-fill' fill-opacity='context-fill-opacity' fill-rule='evenodd' d='M.646 10.646l.707.707L4.705 8A4.483 4.483 0 103 4.5a4.458 4.458 0 001 2.795zM7.5 1A3.5 3.5 0 114 4.5 3.5 3.5 0 017.5 1z'/></svg>") !important;
+        fill: var(--panel-shortcut-color) !important;
+        fill-opacity: 1;
+    }
+
+    link[href="chrome://global/skin/search-textbox.css"] ~ input::placeholder {
+        opacity: 1;
+        color: var(--panel-shortcut-color);
+    }
+
 }
 
 #sidebar-search-container #search-box:focus-within,
@@ -141,14 +144,15 @@ link[href="chrome://global/skin/search-textbox.css"] ~ input::placeholder {
     background: var(--arrowpanel-dimmed-further) !important;
 }
 
-#sidebar-switcher-target {
-    margin-left: 7px !important;
-    margin-top: 7px !important;
+#sidebar-close {
+    width: 26.667px !important;
+    height: 26.667px !important;
+    border-radius: var(--toolbarbutton-border-radius) !important;
 }
 
-#sidebar-close {
-    margin-right: 7px !important;
-    margin-top: 7px !important;
+#sidebar-close .toolbarbutton-icon {
+    width: 18px !important;
+    height: auto !important;
 }
 
 #sidebar-close:hover {
