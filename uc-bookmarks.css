@@ -336,34 +336,30 @@
 
 /* bookmarks toolbar button's popup */
 @-moz-document url(chrome://browser/content/browser.xhtml) {
-    
+
     link[href="chrome://global/skin/arrowscrollbox.css"] ~ :is(#scrollbutton-up, #scrollbutton-down) {
         visibility: collapse;
     }
-    
+
     .BMB-special-innerbox {
         border: none !important;
     }
     
-    #BMB_bookmarksToolbarPopup {
-        margin-inline-start: 0px !important;
-        padding-block-end: 4px !important;
+    menuitem.menuitem-iconic#BMB_viewBookmarksToolbar {
+        list-style-image: url("chrome://browser/skin/bookmarks-toolbar.svg") !important;
+        -moz-context-properties: fill, fill-opacity;
     }
     
-    .BMB-special-innerbox > .menupopup-arrowscrollbox {
-        padding-bottom: 0 !important;
+    menuitem.menuitem-iconic#BMB_viewBookmarksToolbar[data-l10n-args*='{"isVisible":true}'] {
+        fill-opacity: 0.5;
     }
-    
-    #BMB_bookmarksToolbarPopup menuseparator {
-        display: none !important;
-    }
-    
-    .openintabs-menuitem {
-        display: none !important;
-    }
-    
+
     .BMBsmallContentBox {
-        margin-top: -1px !important;
+        margin-top: 0px !important;
+    }
+    
+    .panel-subview-footer.openintabs-menuitem {
+        display: none !important;
     }
 
 }

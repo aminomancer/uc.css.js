@@ -18,6 +18,7 @@ tooltip {
     padding: 5px !important;
     margin-inline-start: -5px !important;
     margin-block-start: 16px !important;
+    pointer-events: none !important;
     /* font-family: FreeMono !important; */
 }
 
