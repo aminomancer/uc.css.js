@@ -14,7 +14,16 @@ My personal Firefox theme/layout, plus some privileged scripts to add new behavi
 <br>
 <p></p>
 
-Make sure to set `ui.systemUsesDarkTheme` to `1` in about:config. To get the complete functionality [shown in the video](https://youtu.be/BAuABH13ytM), you'll need to install at least some of the scripts. The instructions and explanations are below.
+Make sure to set `ui.systemUsesDarkTheme` to `1` in about:config. <details><summary>Currently I recommend using this on Nightly, and setting all of the proton prefs to true. Click for a full list.</summary>`browser.proton.appmenu.enabled`  
+`browser.proton.contextmenus.enabled`  
+`browser.proton.doorhangers.enabled`  
+`browser.proton.enabled`  
+`browser.proton.places-tooltip.enabled`  
+`browser.proton.tabs.enabled`  
+`browser.proton.toolbar.enabled`  
+`browser.proton.urlbar.enabled`</details>
+
+To get the complete functionality [shown in the video](https://youtu.be/BAuABH13ytM), you'll need to install at least some of the scripts. The instructions and explanations are below.
 
 I don't use tree style tabs but I've tested this with TST and they don't seem to interact in a negative way. It just doesn't fully style all the TST stuff. I'll probably make a TST theme if someone asks, but since I don't use the extension myself it's not a high priority.
 

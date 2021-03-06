@@ -71,6 +71,12 @@
     margin-right: 2.8px !important;
 }
 
+/* this fixes a bug, but it should be fixed by mozilla soon anyway */
+/* .urlbar-page-action[actionid] {
+    list-style-image: none !important;
+    background: var(--pageAction-image-32px, inherit) no-repeat center/16px;
+} */
+
 .urlbar-icon {
     width: 27px !important;
     height: 27px !important;
