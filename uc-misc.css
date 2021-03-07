@@ -45,13 +45,35 @@ tooltip > description {
 }
 
 .places-tooltip-box>hbox {
-    display: block !important;
+    display: flex !important;
+    align-items: center !important;
     max-width: 500px !important;
+	color: var(--panel-shortcut-color) !important;
+}
+
+.places-tooltip-title {
+    max-height: 2.7em !important;
 }
 
 .places-tooltip-uri {
 	color: var(--panel-shortcut-color) !important;
 }
+
+#places-tooltip-insecure-icon {
+    min-width: 1em !important;
+}
+
+/* the following makes the lock icon visible on ALL tab tooltips.
+by default, it only shows an insecure lock on pages connected by http or with invalid certificates.
+this rule makes it show a secure lock on all other pages.
+but it's a little silly because 1) CSS on the tooltip can't differentiate between secure pages and pages with mixed content...
+and 2) we can't differentiate between secure pages and local pages, system pages, etc. so the lock icon could be misleading.
+for that reason i disabled it but maybe someone else wants it. it does look kinda cool i guess. */
+
+/* #places-tooltip-insecure-icon[hidden] {
+    display: -moz-inline-box !important;
+	list-style-image: url(chrome://browser/skin/connection-secure.svg) !important;
+} */
 
 #mainPopupSet > .places-tooltip {
     margin-inline-start: -5px !important;
