@@ -37,9 +37,30 @@ tooltip > description {
     border: none !important;
 }
 
+.places-tooltip-box {
+    padding: 3px 6px 4px 6px !important;
+    border-radius: var(--tooltip-border-radius) !important;
+    background-color: var(--tooltip-bgcolor) !important;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2) !important;
+}
+
+.places-tooltip-box>hbox {
+    display: block !important;
+    max-width: 500px !important;
+}
+
+.places-tooltip-uri {
+	color: var(--panel-shortcut-color) !important;
+}
+
 #mainPopupSet > .places-tooltip {
     margin-inline-start: -5px !important;
     margin-block-start: -5px !important;
+}
+
+#mainPopupSet > #aHTMLTooltip description {
+    overflow-wrap: anywhere !important;
+    text-overflow: ellipsis !important;
 }
 
 .places-tooltip > description,
@@ -59,17 +80,6 @@ tooltip > description {
     box-shadow: none !important;
     background: none !important;
     font-size: 0.9em;
-}
-
-.places-tooltip-box {
-    padding: 3px 6px 4px 6px !important;
-    border-radius: var(--tooltip-border-radius) !important;
-    background-color: var(--tooltip-bgcolor) !important;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2) !important;
-}
-
-.places-tooltip-uri {
-	color: var(--panel-shortcut-color) !important;
 }
 
 #tracking-protection-container tooltip {

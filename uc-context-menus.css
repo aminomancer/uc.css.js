@@ -17,7 +17,7 @@
 menupopup[menu-api],
 #ContentSelectDropdown,
 #openHandlerPopup,
-:is(#back-button, #forward-button, #viewButton, #main-menubar, #PlacesToolbar, #toolbar-context-menu, #tabContextMenu, #contentAreaContextMenu, #backForwardMenu, #placesContext, #pageActionContextMenu, .search-one-offs-context-menu, .textbox-contextmenu, #SyncedTabsSidebarContext, #customizationPanelItemContextMenu, #customizationPaletteItemContextMenu, #customization-toolbar-menu, #new-tab-button-popup, #new-tab-button, .popup-notification-dropmarker, menupopup[menu-api], #ContentSelectDropdown, .new-tab-popup)
+:is(#back-button, #forward-button, #viewButton, #main-menubar, #PlacesToolbar, #places, #toolbar-context-menu, #tabContextMenu, #contentAreaContextMenu, #backForwardMenu, #placesContext, #pageActionContextMenu, .search-one-offs-context-menu, .textbox-contextmenu, #SyncedTabsSidebarContext, #customizationPanelItemContextMenu, #customizationPaletteItemContextMenu, #customization-toolbar-menu, #new-tab-button-popup, #new-tab-button, .popup-notification-dropmarker, menupopup[menu-api], #ContentSelectDropdown, .new-tab-popup)
     menupopup {
     -moz-appearance: none !important;
     background: var(--menupopup-background) !important;
@@ -34,7 +34,7 @@ menupopup[menu-api],
 }
 
 :is(#back-button, #forward-button, #viewButton) > menupopup menuseparator,
-:is(#main-menubar, #PlacesToolbar) menupopup menuseparator,
+:is(#main-menubar, #PlacesToolbar, #places) menupopup menuseparator,
 :is(#toolbar-context-menu, #tabContextMenu, #contentAreaContextMenu, #backForwardMenu, #placesContext, #pageActionContextMenu, .search-one-offs-context-menu, #SyncedTabsSidebarContext, .textbox-contextmenu, #customizationPanelItemContextMenu, #customizationPaletteItemContextMenu, #customization-toolbar-menu, #new-tab-button-popup, #new-tab-button, .popup-notification-dropmarker, #downloadsContextMenu, menupopup[menu-api], #ContentSelectDropdown, .new-tab-popup, #openHandlerPopup)
     menuseparator {
     /*     -moz-appearance: none !important;
@@ -48,7 +48,7 @@ menupopup[menu-api],
 }
 
 :is(#back-button, #forward-button, #viewButton) > menupopup :is(menuitem, menu),
-:is(.popup-notification-dropmarker, #main-menubar, #PlacesToolbar) menupopup :is(menuitem, menu),
+:is(.popup-notification-dropmarker, #main-menubar, #PlacesToolbar, #places) menupopup :is(menuitem, menu),
 :is(#toolbar-context-menu, #tabContextMenu, #contentAreaContextMenu, #backForwardMenu, #placesContext, #pageActionContextMenu, .search-one-offs-context-menu, #SyncedTabsSidebarContext, .textbox-contextmenu, #customizationPanelItemContextMenu, #customizationPaletteItemContextMenu, #customization-toolbar-menu, #new-tab-button-popup, #new-tab-button, #downloadsContextMenu, menupopup[menu-api], #ContentSelectDropdown, .new-tab-popup, #openHandlerPopup)
     :is(menuitem, menu) {
     -moz-appearance: none !important;
@@ -62,7 +62,7 @@ menupopup[menu-api],
 }
 
 :is(#back-button, #forward-button, #viewButton) > menupopup :is(menuitem, menu)[disabled="true"],
-:is(.popup-notification-dropmarker, #main-menubar, #PlacesToolbar)
+:is(.popup-notification-dropmarker, #main-menubar, #PlacesToolbar, #places)
     menupopup
     :is(menuitem, menu)[disabled="true"],
 :is(#toolbar-context-menu, #tabContextMenu, #contentAreaContextMenu, #backForwardMenu, #placesContext, #pageActionContextMenu, .search-one-offs-context-menu, #SyncedTabsSidebarContext, .textbox-contextmenu, #customizationPanelItemContextMenu, #customizationPaletteItemContextMenu, #customization-toolbar-menu, #new-tab-button-popup, #new-tab-button, #downloadsContextMenu, menupopup[menu-api], #ContentSelectDropdown, .new-tab-popup, #openHandlerPopup)
@@ -77,7 +77,7 @@ menupopup[menu-api],
     padding-top: 3px !important;
 } */
 
-:is(#PlacesToolbar, .popup-notification-dropmarker)
+:is(#PlacesToolbar, #places, .popup-notification-dropmarker)
     menupopup
     menuseparator:not([hidden="true"])
     + :is(menu, menuitem),
@@ -111,7 +111,7 @@ menupopup[menu-api],
 }
 
 :is(#back-button, #forward-button, #viewButton) > menupopup :is(menuitem, menu) image,
-:is(.popup-notification-dropmarker, #main-menubar, #PlacesToolbar)
+:is(.popup-notification-dropmarker, #main-menubar, #PlacesToolbar, #places)
     menupopup
     :is(menuitem, menu)
     image,
@@ -128,7 +128,7 @@ menupopup[menu-api],
 }
 
 :is(#back-button, #forward-button, #viewButton) > menupopup menugroup,
-:is(.popup-notification-dropmarker, #main-menubar, #PlacesToolbar) menupopup menugroup,
+:is(.popup-notification-dropmarker, #main-menubar, #PlacesToolbar, #places) menupopup menugroup,
 :is(#toolbar-context-menu, #tabContextMenu, #contentAreaContextMenu, #backForwardMenu, #placesContext, #pageActionContextMenu, .search-one-offs-context-menu, #SyncedTabsSidebarContext, .textbox-contextmenu, #customizationPanelItemContextMenu, #customizationPaletteItemContextMenu, #customization-toolbar-menu, #new-tab-button-popup, #new-tab-button, #downloadsContextMenu, menupopup[menu-api], #ContentSelectDropdown, .new-tab-popup, #openHandlerPopup)
     menugroup {
     padding: 0 !important;
@@ -136,7 +136,7 @@ menupopup[menu-api],
 }
 
 :is(#back-button, #forward-button, #viewButton) > menupopup .menu-right,
-:is(.popup-notification-dropmarker, #main-menubar, #PlacesToolbar) menupopup .menu-right,
+:is(.popup-notification-dropmarker, #main-menubar, #PlacesToolbar, #places) menupopup .menu-right,
 :is(#toolbar-context-menu, #tabContextMenu, #contentAreaContextMenu, #backForwardMenu, #placesContext, #pageActionContextMenu, .search-one-offs-context-menu, #SyncedTabsSidebarContext, .textbox-contextmenu, #customizationPanelItemContextMenu, #customizationPaletteItemContextMenu, #customization-toolbar-menu, #new-tab-button-popup, #new-tab-button, #downloadsContextMenu, menupopup[menu-api], #ContentSelectDropdown, .new-tab-popup, #openHandlerPopup)
     .menu-right {
     -moz-appearance: none !important;
@@ -156,7 +156,7 @@ menupopup[menu-api],
 :is(#back-button, #forward-button, #viewButton)
     > menupopup
     :is(menu, menuitem):is(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
-:is(.popup-notification-dropmarker, #main-menubar, #PlacesToolbar)
+:is(.popup-notification-dropmarker, #main-menubar, #PlacesToolbar, #places)
     menupopup
     :is(menu, menuitem):is(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
 :is(#toolbar-context-menu, #tabContextMenu, #contentAreaContextMenu, #backForwardMenu, #placesContext, #pageActionContextMenu, .search-one-offs-context-menu, #SyncedTabsSidebarContext, .textbox-contextmenu, #customizationPanelItemContextMenu, #customizationPaletteItemContextMenu, #customization-toolbar-menu, #new-tab-button-popup, #new-tab-button, #downloadsContextMenu, menupopup[menu-api], #ContentSelectDropdown, .new-tab-popup, #openHandlerPopup)
@@ -270,7 +270,7 @@ menu.subviewbutton:not([disabled])[_moz-menuactive]:active {
     :is(#contentAreaContextMenu, #customization-footer, menupopup[menu-api], menupopup#placesContext)
         menuitem:is([type="checkbox"], [type="radio"])
         .menu-iconic-left,
-    #PlacesToolbar menupopup menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-left {
+    :is(#PlacesToolbar, #places) menupopup menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-left {
         display: none !important;
     }
 
