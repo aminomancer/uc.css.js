@@ -45,7 +45,13 @@ link[href="chrome://global/skin/arrowscrollbox.css"] ~ :is(#scrollbutton-up, #sc
 /* other panel arrows */
 :is(panel, menupopup)::part(arrow) {
     stroke: var(--arrowpanel-background);
-    display: -moz-inline-box;
+}
+
+@-moz-document url(chrome://browser/content/browser.xhtml)
+{
+    :is(panel, menupopup)::part(arrow) {
+        display: -moz-inline-box;
+    }
 }
 
 /* select dropmarkers in the bookmark editor popup */

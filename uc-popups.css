@@ -409,11 +409,11 @@ tabmodalprompt .checkbox-check[checked="true"] {
 }
 
 .tab-prompt-dialog :is(.dialogBox, .dialogFrame) {
-    border-radius: 0 0 5px 5px;
+    border-radius: 0 0 5px 5px !important;
 }
 
 .content-prompt-dialog :is(.dialogBox, .dialogFrame) {
-    border-radius: 5px;
+    border-radius: 5px !important;
 }
 
 /* the resizer is on the right side for ltr languages, and on the left side for rtl languages. adjust the border radius accordingly */
@@ -422,8 +422,8 @@ tabmodalprompt .checkbox-check[checked="true"] {
 :is(.content-prompt-dialog, .tab-prompt-dialog)
     .dialogBox[resizable="true"]
     .dialogFrame:is(:dir(ltr), :-moz-locale-dir(ltr)) {
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 5px !important;
+    border-bottom-right-radius: 0 !important;
 }
 
 :is(.content-prompt-dialog, .tab-prompt-dialog)
@@ -431,8 +431,8 @@ tabmodalprompt .checkbox-check[checked="true"] {
 :is(.content-prompt-dialog, .tab-prompt-dialog)
     .dialogBox[resizable="true"]
     .dialogFrame:is(:dir(rtl), :-moz-locale-dir(rtl)) {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 5px !important;
 }
 
 /* blur backdrop filter */
@@ -440,6 +440,12 @@ tabmodalprompt .checkbox-check[checked="true"] {
     background-color: hsla(240, 5.9%, 6.7%, 0.7) !important;
     background-image: url("texture/noise-512x512.png") !important;
     backdrop-filter: blur(5px) !important;
+}
+
+/* hide the background overlay */
+.dialogOverlay[topmost="true"],
+#window-modal-dialog::backdrop {
+    background-color: transparent !important;
 }
 
 /* make the box shadow even, i hate offset drop shadows */
