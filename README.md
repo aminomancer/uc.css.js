@@ -23,7 +23,11 @@ Make sure to set `ui.systemUsesDarkTheme` to `1` in about:config. <details><summ
 `browser.proton.toolbar.enabled`  
 `browser.proton.urlbar.enabled`</details>
 
-To get the complete functionality [shown in the video](https://youtu.be/BAuABH13ytM), you'll need to install at least some of the scripts. The instructions and explanations are below.
+The `userContent.css` file handles stuff like the devtools, some UI pages and context menus, plaintext pages, browser background color while pages are loading, and the built-in HTML video player. It also includes some site-specific changes like my personal dark mode layout for Wikipedia. It isn't required for the rest of the theme to work, but takes care of some issues endemic to Firefox that might cause dark mode users a lot of grief otherwise.
+
+`userChrome.css` doesn't require any fonts, but `userContent.css` uses [Overpass](https://fonts.google.com/specimen/Overpass), [Overpass Mono](https://fonts.google.com/specimen/Overpass+Mono) and [Cutive Mono](https://fonts.google.com/specimen/Cutive+Mono) for plaintext files and the picture-in-picture button. Since they're free and show up frequently, it makes sense to install them locally rather than use webfont.
+
+To get the complete functionality [shown in the video](https://youtu.be/BAuABH13ytM), you'll need to install at least some of the scripts. The stylesheets work fine without the scripts, but functionally it'll be just like vanilla Firefox. Instructions and explanations for the scripts are below.
 
 I don't use tree style tabs but I've tested this with TST and they don't seem to interact in a negative way. It just doesn't fully style all the TST stuff. I'll probably make a TST theme if someone asks, but since I don't use the extension myself it's not a high priority.
 
