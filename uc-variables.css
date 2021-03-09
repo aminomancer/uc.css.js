@@ -41,6 +41,7 @@
     --urlbar-height: calc(var(--urlbar-container-height) - 6px) !important;
     --lwt-toolbarbutton-icon-fill-attention: hsl(224, 100%, 71%) !important;
     --places-cell-focus-bgcolor: hsla(233, 24%, 28%, 50%) !important;
+    --ctrlTab-bgcolor: transparent !important;
     --ctrlTab-panel-disabled-bgcolor: hsla(240, 2%, 9%, 0.8) !important;
     --ctrlTab-panel-disabled-focused-bgcolor: hsla(240, 8%, 3%, 0.9) !important;
     --ctrlTab-panel-bgcolor: hsla(240, 3%, 4%, 0.9) !important;

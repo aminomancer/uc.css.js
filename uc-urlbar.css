@@ -797,3 +797,16 @@ toolbarpaletteitem[removable="false"]
     padding-inline: 0px !important;
     font-size: 14px !important;
 }
+
+#urlbar toolbarbutton.urlbar-icon {
+    appearance: none !important;
+}
+
+#urlbar toolbarbutton.urlbar-icon > .toolbarbutton-icon {
+    width: 16px !important;
+    height: auto !important;
+}
+
+image.urlbar-icon {
+    padding-block: 6px !important;
+}

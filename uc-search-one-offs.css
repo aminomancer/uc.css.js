@@ -221,7 +221,7 @@
 }
 
 #page-action-buttons > *:not([hidden]) {
-	display: -moz-box !important;
+	display: -moz-inline-box !important;
 }
 
 #urlbar[searchmode] #page-action-buttons * {

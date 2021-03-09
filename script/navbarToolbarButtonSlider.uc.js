@@ -158,8 +158,14 @@
                 case "nav-bar-toolbarbutton-slider-container":
                     return false;
                 default:
-                    return true;
+                    break;
             }
+            if (
+                item.id.startsWith("customizableui-special-spring") ||
+                item.id.startsWith("wrapper-customizableui-special-spring")
+            )
+                return false;
+            return true;
         }
 
         function appendLoop(buttons, container) {

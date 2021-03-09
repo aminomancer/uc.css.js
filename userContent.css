@@ -518,7 +518,7 @@
     --in-content-category-outline-focus: transparent !important;
 }
 
-.pictureInPictureToggleButton {
+/* .pictureInPictureToggleButton {
     padding-block: 4px !important;
     padding-inline: 5px;
     font-size: 11.5px !important;
@@ -555,9 +555,9 @@
 .controlsOverlay[hidetoggle="true"].hovering .pictureInPictureToggleButton:not(.hovering) {
     opacity: 0 !important;
     translate: 100% 0 !important;
-}
+} */
 
-#pictureInPictureToggle.pip-wrapper {
+/* #pictureInPictureToggle.pip-wrapper {
     top: calc(50% - 1px) !important;
 }
 
@@ -643,9 +643,13 @@
     translate: 0 !important;
     background-color: hsla(0, 0%, 3%, 0.7) !important;
     translate: calc(-100% + 1.75em) !important;
+} */
+
+#pictureInPictureToggle.pip-wrapper {
+    top: calc(50% - 1px) !important;
 }
 
-/* #pictureInPictureToggle .pip-expanded {
+#pictureInPictureToggle .pip-expanded {
     display: flex !important;
     opacity: 1 !important;
     scale: 1 1 !important;
@@ -701,20 +705,30 @@
     pointer-events: none !important;
 }
 
-.controlsOverlay .pip-expanded {
+.controlsOverlay.hovering #pictureInPictureToggle {
+    opacity: 1 !important;
+}
+
+#pictureInPictureToggle .pip-expanded,
+.controlsOverlay[hidetoggle="true"].hovering > #pictureInPictureToggle > .pip-expanded {
     opacity: 0 !important;
+    transform-style: flat !important;
+    backface-visibility: hidden !important;
+    transition: opacity 250ms, translate 190ms !important;
     translate: calc(48px) !important;
 }
 
-.controlsOverlay:hover .pip-expanded {
+.controlsOverlay.hovering #pictureInPictureToggle .pip-expanded {
     opacity: 1 !important;
+    translate: 0 !important;
     translate: calc(19px) !important;
 }
 
-.controlsOverlay:hover .pip-expanded:hover {
+.controlsOverlay.hovering #pictureInPictureToggle .pip-expanded:hover {
     opacity: 1 !important;
+    translate: 0 !important;
     translate: calc(-100% + 48px) !important;
-} */
+}
 
 @-moz-document url-prefix("moz-extension://0163b722-07ea-4fbd-80d6-7b5de657bb9e") {
     .warning-bar, .error-bar {
