@@ -15,6 +15,18 @@
     border-radius: initial !important;
 }
 
+.panel-footer.popup-notification-button-container {
+    gap: 12px !important;
+}
+
+.panel-footer.popup-notification-button-container > .popup-notification-button {
+    margin-inline: 0 !important;
+    border-radius: var(--toolbarbutton-border-radius) !important;
+    flex: 1 !important;
+    font-weight: normal !important;
+    border-inline: 0 !important;
+}
+
 .panel-footer {
     background-color: initial !important;
 }
@@ -110,12 +122,6 @@ popupnotification checkbox:hover .checkbox-check[checked]:not(:disabled) {
 
 #plugins-notification-icon[extraAttr="inactive"] > #plugin-icon-badge {
     fill-opacity: 1;
-}
-
-/* ugly small menu separators */
-.cui-widget-panelview menuseparator.small-separator {
-    margin-left: initial !important;
-    margin-right: initial !important;
 }
 
 /* grid overflow menu (i don't have an overflow menu at all thanks to the toolbar button slider script. but just in case) */
@@ -221,4 +227,25 @@ popupnotification checkbox:hover .checkbox-check[checked]:not(:disabled) {
 
 #PanelUI-webext-_a6c4a591-f1b2-4f03-b3ff-767e5bedf4e7_-browser-action-view {
     min-width: 700px !important;
+}
+
+/* all tabs menu panel */
+#customizationui-widget-panel[viewId="allTabsMenu-allTabsView"] .panel-viewcontainer[panelopen] {
+    min-height: auto !important;
+}
+
+#allTabsMenu-containerTabsView {
+    padding-block-end: 4px !important;
+}
+
+@supports -moz-bool-pref("browser.proton.contextmenus.enabled") {
+    .menu-right {
+        margin-inline-end: 0 !important;
+    }
+
+    /* ugly small menu separators */
+    .cui-widget-panelview menuseparator {
+        margin-left: 4px !important;
+        margin-right: 4px !important;
+    }
 }

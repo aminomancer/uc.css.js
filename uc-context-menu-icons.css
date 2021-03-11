@@ -19,6 +19,7 @@
 #context-savelink:not(.menuitem-iconic) .menu-text,
 #context-savelinktopocket:not(.menuitem-iconic) .menu-text,
 #context-pocket:not(.menuitem-iconic) .menu-text,
+#context-take-screenshot:not(.menuitem-iconic) .menu-text,
 #context-saveframe:not(.menuitem-iconic) .menu-text,
 #context-viewimage:not(.menuitem-iconic) .menu-text,
 #context-copy:not(.menuitem-iconic) .menu-text,
@@ -262,6 +263,7 @@ menupopup[menu-api] menuitem[type="radio"][checked="true"]::before,
 #context-savevideo:not(.menuitem-iconic)::before,
 #context-savelinktopocket:not(.menuitem-iconic)::before,
 #context-pocket:not(.menuitem-iconic)::before,
+#context-take-screenshot:not(.menuitem-iconic)::before,
 #context-viewimage:not(.menuitem-iconic)::before,
 #context-copy:not(.menuitem-iconic)::before,
 #context-copyimage-contents:not(.menuitem-iconic)::before,
@@ -461,6 +463,10 @@ menupopup[menu-api] menuitem[type="radio"][checked="true"]::before,
     background-image: url("chrome://browser/skin/pocket.svg") !important;
 }
 
+#context-take-screenshot:not(.menuitem-iconic)::before {
+    background-image: url("chrome://devtools/skin/images/command-screenshot.svg") !important;
+}
+
 #context-viewimage:not(.menuitem-iconic)::before {
     background-image: url("chrome://browser/skin/notification-icons/canvas.svg") !important;
 }
@@ -516,6 +522,14 @@ menupopup[menu-api] menuitem[type="radio"][checked="true"]::before,
 
 :is(#context-openlinkincontainertab, #context-openlinkinusercontext-menu):not(.menuitem-iconic)::before {
     background-image: url("data:image/svg+xml;utf8,<svg height='16' width='16' xmlns='http://www.w3.org/2000/svg'><g fill='context-fill' fill-opacity='context-fill-opacity'><rect height='6' rx='1' width='6' x='1' y='1'/><path d='M15 3v2H9V3z'/><path d='M11 1h2v6h-2z'/><rect height='6' rx='1' width='6' x='1' y='9'/><rect height='6' rx='1' width='6' x='9' y='9'/></g></svg>") !important;
+}
+
+#allTabsMenu-containerTabsButton {
+    list-style-image: url("data:image/svg+xml;utf8,<svg height='16' width='16' xmlns='http://www.w3.org/2000/svg'><g fill='context-fill' fill-opacity='context-fill-opacity'><rect height='6' rx='1' width='6' x='1' y='1'/><path d='M15 3v2H9V3z'/><path d='M11 1h2v6h-2z'/><rect height='6' rx='1' width='6' x='1' y='9'/><rect height='6' rx='1' width='6' x='9' y='9'/></g></svg>");
+}
+
+#allTabsMenu-containerTabsButton .toolbarbutton-text {
+    padding-inline-start: 8px;
 }
 
 :is(#context-openframe, #context-openlink):not(.menuitem-iconic)::before {

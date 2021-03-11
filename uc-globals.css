@@ -51,5 +51,5 @@
     --tab-throbber-fill: rgba(255, 255, 255, 0.6);
     --sanitize-border-color: hsla(0, 0%, 5%, 0.2);
     --menu-separator-color: hsl(233, 25%, 23%);
-    --user-urlbar-container-height: 39px;
+    --user-urlbar-container-height: 38px;
 }

@@ -236,10 +236,12 @@
         --urlbar-input-bgcolor: hsla(233, 24%, 26%, 1) !important;
         --urlbar-input-bgcolor-brighter: hsla(233, 23%, 27.2%, 1) !important;
         --urlbar-input-bgcolor-even-brighter: hsla(233, 21%, 31%, 1) !important;
-        --urlbar-container-height: 39px !important;
+        --urlbar-toolbar-height: var(--user-urlbar-container-height) !important;
+        --urlbar-container-height: var(--user-urlbar-container-height) !important;
         --urlbar-height: calc(var(--urlbar-container-height) - 6px) !important;
         --lwt-toolbarbutton-icon-fill-attention: hsl(224, 100%, 71%) !important;
         --places-cell-focus-bgcolor: hsla(233, 24%, 28%, 50%) !important;
+        --ctrlTab-bgcolor: transparent !important;
         --ctrlTab-panel-disabled-bgcolor: hsla(240, 2%, 9%, 0.8) !important;
         --ctrlTab-panel-disabled-focused-bgcolor: hsla(240, 8%, 3%, 0.9) !important;
         --ctrlTab-panel-bgcolor: hsla(240, 3%, 4%, 0.9) !important;
@@ -300,36 +302,36 @@
         --menu-right-margin: 2px;
         --menu-right-size: 12px;
     }
-    
+
     toolbar {
         --toolbarbutton-hover-background: hsla(236, 82%, 83%, 0.17) !important;
         --toolbarbutton-active-background: hsla(236, 82%, 83%, 0.22) !important;
         --toolbarbutton-checked-background: hsla(236, 82%, 83%, 0.13) !important;
     }
-    
+
     #urlbar {
         --urlbar-height: calc(var(--urlbar-container-height) - 6px) !important;
     }
-    
+
     #confirmation-hint {
         --arrowpanel-background: var(--confirmation-hint-bgcolor) !important;
         --arrowpanel-border-color: var(--confirmation-hint-bgcolor) !important;
     }
-    
+
     #browser {
         --sidebar-border-color: transparent !important;
     }
-    
+
     .tab-throbber {
         --tab-loading-fill: var(--tab-throbber-fill) !important;
     }
-    
+
     .tab-loading-burst {
         --tab-loading-fill: var(--lwt-toolbarbutton-icon-fill-attention) !important;
     }
-    
+
     @supports (-moz-bool-pref("browser.proton.enabled")) {
-    
+
         :root {
             --panelview-toolbarbutton-hover-bgcolor: var(--arrowpanel-dimmed) !important;
             --panelview-toolbarbutton-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
@@ -347,43 +349,45 @@
             --panel-shortcut-color: hsl(235, 27%, 73%, 70%) !important;
             --panel-shortcut-focus: hsl(235, 32%, 75%, 90%) !important;
         }
-    
+
     }
-    
+
     @supports (-moz-bool-pref("browser.proton.toolbar.enabled")) {
-    
-        :root {
+
+        :root,
+        #TabsToolbar {
             --toolbarbutton-inner-padding: 6px !important;
         }
-    
-        #urlbar-container, #urlbar {
+
+        #urlbar-container,
+        #urlbar {
             --urlbar-toolbar-height: var(--user-urlbar-container-height) !important;
             --urlbar-container-height: var(--user-urlbar-container-height) !important;
         }
-    
+
     }
-    
+
     @supports (-moz-bool-pref("browser.proton.tabs.enabled")) {
-    
+
         :root {
             --proton-tab-inline-padding: 0 !important;
             --proton-shadow-blur-radius: 0 !important;
         }
-    
+
     }
-    
+
     @supports (-moz-bool-pref("browser.proton.appmenu.enabled")) {
-    
+
         :root[proton] #appMenu-multiView {
             --arrowpanel-menuitem-margin: 0 8px !important;
             --arrowpanel-menuitem-padding: 8px !important;
             --panel-subview-body-padding: 8px 0 !important;
         }
-    
+
     }
-    
+
     @supports (-moz-bool-pref("browser.proton.contextmenus.enabled")) {
-    
+
         :root {
             --menupopup-background: transparent;
             --menu-background-color: var(--arrowpanel-background) !important;
@@ -401,7 +405,7 @@
             --menu-right-margin: 4px;
             --menu-right-size: 10px;
         }
-    
+
     }
 
     menupopup {
@@ -431,7 +435,7 @@
         background-color: initial !important;
     }
 
-    menuseparator:not([hidden="true"])+ :-moz-any(menu, menuitem) {
+    menuseparator:not([hidden="true"])+ :is(menu, menuitem) {
         border-image: linear-gradient(to right, transparent 1%, var(--menu-separator-color) 50%, transparent 99%) !important;
         border-image-slice: 1 !important;
         border-top-width: 1px !important;
@@ -463,17 +467,17 @@
         list-style-image: var(--menu-right-img) !important;
     }
 
-    :is(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"]):not([disabled="true"]) {
+    :is(menu, menuitem):is(:hover, [_moz-menuactive="true"]):not([disabled="true"]) {
         -moz-appearance: none !important;
         background-color: var(--arrowpanel-dimmed) !important;
     }
 
-    :-moz-any(menu, menuitem):-moz-any(:hover, [_moz-menuactive="true"])[disabled="true"] {
+    :is(menu, menuitem):is(:hover, [_moz-menuactive="true"])[disabled="true"] {
         background: none !important;
         -moz-appearance: none !important;
     }
 
-    .subviewbutton:-moz-any(:hover, [_moz-menuactive="true"])[disabled="true"] {
+    .subviewbutton:is(:hover, [_moz-menuactive="true"])[disabled="true"] {
         color: var(--panel-disabled-color) !important;
     }
 

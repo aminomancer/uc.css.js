@@ -13,7 +13,7 @@
 }
 
 :root[inFullscreen]:not([customizing]) #navigator-toolbox {
-    margin-top: calc(0px - var(--urlbar-container-height) - var(--tab-min-height)) !important;
+    margin-top: calc(0.5px - var(--urlbar-container-height) - var(--tab-min-height)) !important;
     transition: all .2s ease-in-out 0s !important;
     transition-delay: 0s !important;
     opacity: 0 !important;
@@ -81,7 +81,7 @@ requires fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-statu
 }
 
 :root[inFullscreen]:not([customizing])>body>box:is(:focus-within, :hover, [popup-status], [urlbar-status]) ~ #browser findbar {
-    margin-top: 4.4px !important;
+    margin-top: 5px !important;
 }
 
 :root[inFullscreen]:not([customizing])>body>box:is(:focus-within, :hover, [popup-status], [urlbar-status]) ~ #browser findbar[hidden] {
