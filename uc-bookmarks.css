@@ -12,8 +12,10 @@
     color: #fff !important;
     border: none !important;
     padding: 2px;
-    padding-inline-start: 4px;
+    padding-inline: 8px;
     border-radius: 2px !important;
+    min-height: 24px !important;
+    box-sizing: border-box !important;
 }
 
 /* 'add bookmark' popup menu formatting */
@@ -31,6 +33,7 @@
     color: #fff !important;
     border: none !important;
     border-radius: 2px !important;
+    min-height: 24px !important;
 }
 
 #editBookmarkPanel menulist[open="true"] {
@@ -168,14 +171,13 @@
     background-color: var(--ebmp-hover-bgcolor) !important;
 }
 
-#editBookmarkPanel #editBookmarkPanelContent button:active {
+/* #editBookmarkPanel #editBookmarkPanelContent button:hover:active {
     -moz-appearance: none !important;
     background-color: var(--ebmp-focus-bgcolor) !important;
-}
+} */
 
-#editBookmarkPanelBottomButtons:hover,
-#editBookmarkPanelBottomButtons:active {
-    background-color: hsl(233, 24%, 8%) !important;
+#editBookmarkPanel .panel-footer > button.editBookmarkPanelBottomButton {
+    border: none !important;
 }
 
 #editBookmarkPanelDoneButton {
@@ -206,8 +208,10 @@
 #editBookmarkPanel .expander-down {
     -moz-appearance: none !important;
     background-color: var(--ui-textbox-bgcolor) !important;
-    line-height: normal !important;
-    padding: 2px !important;
+    padding: 0 !important;
+    min-width: 24px !important;
+    min-height: 24px;
+    box-sizing: border-box !important;
     margin-left: 0px !important;
     color: #fff !important;
     border: none !important;
@@ -216,33 +220,38 @@
 
 #editBookmarkPanel .expander-down image {
     list-style-image: url("chrome://devtools/skin/images/arrowhead-down.svg") !important;
-    width: 16px !important;
+    width: 17px !important;
 }
 
 #editBookmarkPanel .expander-up image {
     list-style-image: url("chrome://devtools/skin/images/arrowhead-up.svg") !important;
-    width: 16px !important;
+    width: 17px !important;
 }
 
-#editBookmarkPanel menuitem,
-#editBookmarkPanel menu {
-    padding-left: 4px !important;
+#editBookmarkPanel :is(menu, menuitem) {
+    padding-left: 0 !important;
     padding-block: 2px !important;
 }
 
-#editBookmarkPanel menuitem:hover,
-#editBookmarkPanel menu:hover,
-#editBookmarkPanel menu[_moz-menuactive="true"],
-#editBookmarkPanel menuitem[_moz-menuactive="true"] {
+#editBookmarkPanel .in-menulist :is(menu, menuitem) {
+    min-height: 24px !important;
+    height: 24px !important;
+}
+
+#editBookmarkPanel .in-menulist .menuitem-iconic .menu-iconic-text {
+    padding-inline: 0 !important;
+}
+
+#editBookmarkPanel .in-menulist :is(menu, menuitem):is(:hover, [_moz-menuactive="true"]):not([disabled="true"]) {
     -moz-appearance: none !important;
     background-color: hsl(232, 21%, 40%) !important;
     color: #fff !important;
     border: none !important;
 }
 
-#editBookmarkPanel menulist[_moz-menuactive="true"] {
+#editBookmarkPanel menulist[open="true"] {
     -moz-appearance: none !important;
-    background-color: hsl(232, 21%, 40%) !important;
+    background-color: hsl(232, 24%, 32%) !important;
 }
 
 #editBookmarkPanel menuseparator {
@@ -285,6 +294,10 @@
 
 #editBookmarkPanel richlistitem:hover>image {
     opacity: 1 !important;
+}
+
+#editBookmarkPanel checkbox {
+    margin-inline: 0 !important;
 }
 
 #editBookmarkPanel .checkbox-check {
@@ -405,12 +418,12 @@ treechildren::-moz-tree-drop-feedback {
         margin-top: 0px !important;
     }
     
-    #BMB_bookmarksPopup .menu-iconic-left {
-        min-width: 0 !important;
+    #BMB_bookmarksShowAllTop {
+        list-style-image: url("chrome://browser/skin/library.svg") !important;
     }
     
-    #BMB_bookmarksShowAllTop {
-        display: none !important;
+    #BMB_bookmarksShowAllTop .menu-iconic-left {
+        transform: scaleX(-1);
     }
     
     #BMB_viewBookmarksSidebar {
@@ -427,10 +440,6 @@ treechildren::-moz-tree-drop-feedback {
         margin-inline: 4px 0 !important;
         fill: currentColor !important;
         -moz-context-properties: fill, fill-opacity, stroke !important;
-        background-position: center !important;
-        background-size: 16px !important;
-        background-repeat: no-repeat !important;
-        background-image: url("chrome://browser/skin/library.svg") !important;
     }
     
     #BMB_bookmarksShowAll .menu-text {

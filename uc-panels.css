@@ -31,9 +31,8 @@
     background-color: initial !important;
 }
 
-.panel-footer>button {
-    border-top: 0px solid transparent !important;
-    margin-top: -0.5px !important;
+panel {
+    --panel-separator-color: var(--desaturate-dimmed) !important;
 }
 
 .panel-footer > button:not([disabled]):is(:hover:active, [open]) {

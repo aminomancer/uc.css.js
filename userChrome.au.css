@@ -54,11 +54,28 @@ link[href="chrome://global/skin/arrowscrollbox.css"] ~ :is(#scrollbutton-up, #sc
     }
 }
 
-/* select dropmarkers in the bookmark editor popup */
-#editBMPanel_folderMenuList::part(dropmarker) {
-    -moz-appearance: none !important;
-    list-style-image: url("chrome://devtools/skin/images/select-arrow.svg") !important;
-    margin-block: 0 !important;
+/* dropmarkers and other select/menulist stuff */
+@-moz-document url(chrome://browser/content/browser.xhtml)
+{
+    panel menulist::part(dropmarker) {
+        -moz-appearance: none !important;
+        list-style-image: url("chrome://devtools/skin/images/select-arrow.svg") !important;
+        margin-block: 0 !important;
+    }
+
+    panel menulist::part(dropmarker),
+    panel menulist::part(icon) {
+        -moz-context-properties: fill, fill-opacity !important;
+    }
+
+    menulist::part(label) {
+        -moz-appearance: none !important;
+        margin-block: 0 !important;
+    }
+
+    #editBMPanel_folderMenuList::part(icon) {
+        margin-inline: 3px 2px !important;
+    }
 }
 
 /* proton stuff */

@@ -383,11 +383,19 @@ toolbarpaletteitem[removable="false"]
 
 .identity-popup-expander {
     width: min-content !important;
-    height: min-content !important;
     padding: 10px !important;
-    background-clip: content-box !important;
-    background-color: transparent !important;
     box-shadow: none !important;
+    list-style-image: url(chrome://global/skin/icons/menu-arrow-left.svg) !important;
+    background: none !important;
+}
+
+.identity-popup-expander:-moz-locale-dir(ltr) {
+    transform: scaleX(-1);
+}
+
+.identity-popup-expander .button-icon {
+    width: 16px !important;
+    height: 16px !important;
 }
 
 .identity-popup-expander .button-box {
@@ -402,18 +410,6 @@ toolbarpaletteitem[removable="false"]
 
 .identity-popup-expander:hover:active .button-box {
 	background-color: var(--arrowpanel-dimmed-further);
-}
-
-.panel-header > .subviewbutton-back {
-	list-style-image: url("chrome://global/skin/icons/arrow-left.svg") !important;
-	padding: 0 !important;
-    width: 32px !important;
-    height: 32px !important;
-}
-
-.panel-header > .subviewbutton-back > .toolbarbutton-icon {
-    width: 16px !important;
-    height: auto !important;
 }
 
 #identity-popup-multiView .panel-button {

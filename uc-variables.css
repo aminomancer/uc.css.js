@@ -147,6 +147,7 @@ toolbar {
         --arrowpanel-menuitem-border-radius: 3px !important;
         --proton-tab-radius: 0 !important;
         --proton-tab-block-margin: 0 !important;
+        --panel-description-color: hsl(235, 48%, 89%, 70%) !important;
         --panel-shortcut-color: hsl(235, 27%, 73%, 70%) !important;
         --panel-shortcut-focus: hsl(235, 32%, 75%, 90%) !important;
     }
@@ -179,9 +180,9 @@ toolbar {
 @supports (-moz-bool-pref("browser.proton.appmenu.enabled")) {
 
     :root[proton] #appMenu-multiView {
-        --arrowpanel-menuitem-margin: 0 8px !important;
+        --arrowpanel-menuitem-margin: 0 6px !important;
         --arrowpanel-menuitem-padding: 8px !important;
-        --panel-subview-body-padding: 8px 0 !important;
+        --panel-subview-body-padding: 6px 0 !important;
     }
 
 }
@@ -201,8 +202,8 @@ toolbar {
         --menupopup-shadow: none !important;
         --menupopup-border-radius: 3px !important;
         --menu-right-bg: none;
-        --menu-right-img: url(chrome://browser/skin/customizableui/menu-arrow.svg);
-        --menu-right-margin: 4px;
+        --menu-right-img: url("chrome://global/skin/icons/menu-arrow.svg");
+        --menu-right-margin: 2px;
         --menu-right-size: 10px;
     }
 
