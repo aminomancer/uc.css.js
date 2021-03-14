@@ -63,9 +63,9 @@ link[href$="global.css"] ~ spacer[part="arrowscrollbox-overflow-end-indicator"] 
     position: absolute !important;
     display: block !important;
     z-index: 555 !important;
-    right: 90px !important;
+    right: 93px !important;
     left: auto !important;
-    top: 9px !important;
+    top: calc(9px + var(--space-above-tabbar)) !important;
     height: unset !important;
     overflow: visible !important;
 }
@@ -79,7 +79,7 @@ link[href$="global.css"] ~ spacer[part="arrowscrollbox-overflow-end-indicator"] 
 :root[sizemode="normal"] #toolbar-menubar:not([inactive]) > .titlebar-buttonbox-container {
     display: block !important;
     position: fixed !important;
-    top: 10px !important;
+    top: calc(10px + var(--space-above-tabbar)) !important;
     right: 0 !important;
     width: -moz-min-content !important;
 }
@@ -88,7 +88,7 @@ link[href$="global.css"] ~ spacer[part="arrowscrollbox-overflow-end-indicator"] 
     position: absolute !important;
     display: block !important;
     z-index: 555 !important;
-    right: 90px !important;
+    right: 93px !important;
     left: auto !important;
     top: 16px !important;
 }
@@ -105,18 +105,24 @@ link[href$="global.css"] ~ spacer[part="arrowscrollbox-overflow-end-indicator"] 
     position: absolute !important;
     display: block !important;
     z-index: 555 !important;
-    right: 90px !important;
+    right: 93px !important;
     left: auto !important;
     top: 9px !important;
+    visibility: visible !important;
+}
+
+/* the drag space should push down everything */
+:root[sizemode="normal"] #TabsToolbar-customization-target > toolbarbutton > :is(.toolbarbutton-icon, .toolbarbutton-badge-stack) {
+    margin-top: var(--space-above-tabbar);
 }
 
 :root[inFullscreen] #toolbar-menubar:not([inactive]) > .titlebar-buttonbox-container {
     display: none !important;
 }
 
-:root[inFullscreen] #toolbar-menubar {
-    visibility: visible !important;
-    right: 92px !important;
+/* when drag space is enabled */
+#TabsToolbar > .toolbar-items {
+	padding-top: 0 !important;
 }
 
 #toolbar-menubar:not([inactive]) ~ #TabsToolbar .toolbar-items {
@@ -158,8 +164,8 @@ link[href$="global.css"] ~ spacer[part="arrowscrollbox-overflow-end-indicator"] 
     ~ #TabsToolbar
     .private-browsing-indicator {
     display: block !important;
-    right: 92px !important;
-    top: 9.5px !important;
+    right: 94px !important;
+    top: calc(9.5px + var(--space-above-tabbar)) !important;
     z-index: 0 !important;
     pointer-events: none !important;
     position: fixed !important;

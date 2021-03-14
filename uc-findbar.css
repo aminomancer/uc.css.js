@@ -25,6 +25,10 @@
     overflow: hidden;
 }
 
+:root[sizemode="normal"] findbar {
+    top: calc(var(--urlbar-container-height) + var(--tab-min-height) + var(--space-above-tabbar)) !important;
+}
+
 @keyframes findbar-down {
     0% {
         opacity: 0;

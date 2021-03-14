@@ -76,8 +76,12 @@ for that reason i disabled it but maybe someone else wants it. it does look kind
 } */
 
 #mainPopupSet > .places-tooltip {
-    margin-inline-start: -5px !important;
-    margin-block-start: -5px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+#mainPopupSet > .places-tooltip > .places-tooltip-box {
+    box-shadow: none !important;
 }
 
 #mainPopupSet > #aHTMLTooltip description {

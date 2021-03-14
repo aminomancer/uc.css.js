@@ -61,6 +61,14 @@
                 : resizer.style.removeProperty("right");
         }
 
+        function exitSideBar(e) {
+            if (e.code === "Escape") {
+                if (e.repeat || e.shiftKey || e.altKey || e.ctrlKey || this.hidden) return;
+                SidebarUI.toggle();
+                e.preventDefault();
+            }
+        }
+
         function hotkeyObserve(_sub, _top, pref) {
             let sidebarBundle = Services.strings.createBundle(
                 "chrome://browser/locale/customizableui/customizableWidgets.properties"
@@ -131,6 +139,7 @@
             window.addEventListener("unload", uninit, false); // listen for unload so we can clean up after ourselves explicitly
             prefsvc.addObserver(anchor, alignObserve); // watch the pref set by the "Move Sidebar to Left/Right" button
             prefsvc.addObserver(hotkey, hotkeyObserve); // watch the custom hotkey pref
+            box.addEventListener("keypress", exitSideBar, true);
         }
 
         // since some of this stuff is for global interfaces we wanna destroy the listeners for a window when it's gone. probably not necessary but not a bad habit

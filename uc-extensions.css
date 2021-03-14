@@ -13,6 +13,21 @@
     --pageAction-image-32px: url("data:image/svg+xml;utf8,<svg data-name='icon' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect fill='context-fill' fill-opacity='context-fill-opacity' x='1' y='1' width='6' height='6' rx='1'/><rect fill='context-fill' fill-opacity='context-fill-opacity' x='1' y='9' width='6' height='6' rx='1'/><rect fill='context-fill' fill-opacity='context-fill-opacity' x='9' y='9' width='6' height='6' rx='1'/><path fill='context-fill' fill-opacity='context-fill-opacity' d='M14.92 1.62a1 1 0 0 0-0.54-0.54A1 1 0 0 0 14 1h-4a1 1 0 0 0 0 2h1.59l-2.3 2.29a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0L13 4.41V6a1 1 0 0 0 2 0V2a1 1 0 0 0-0.08-0.38z'/></svg>");
 }
 
+#pageAction-urlbar-_testpilot-containers {
+    --pageAction-image-16px: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><g fill='context-fill' fill-opacity='context-fill-opacity'><rect x='1' y='1' width='6' height='6' rx='1'/><rect x='1' y='9' width='6' height='6' rx='1'/><rect x='9' y='9' width='6' height='6' rx='1'/><path d='M14.92 1.62a1 1 0 00-.54-.54A1 1 0 0014 1h-4a1 1 0 000 2h1.59l-2.3 2.29a1 1 0 000 1.42 1 1 0 001.42 0L13 4.41V6a1 1 0 002 0V2a1 1 0 00-.08-.38z'/></g></svg>") !important;
+    --pageAction-image-32px: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><g fill='context-fill' fill-opacity='context-fill-opacity'><rect x='1' y='1' width='6' height='6' rx='1'/><rect x='1' y='9' width='6' height='6' rx='1'/><rect x='9' y='9' width='6' height='6' rx='1'/><path d='M14.92 1.62a1 1 0 00-.54-.54A1 1 0 0014 1h-4a1 1 0 000 2h1.59l-2.3 2.29a1 1 0 000 1.42 1 1 0 001.42 0L13 4.41V6a1 1 0 002 0V2a1 1 0 00-.08-.38z'/></g></svg>") !important;
+}
+
+#pageAction-urlbar-screenshots_mozilla_org {
+    --pageAction-image-16px: url("data:image/svg+xml;utf8,<svg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'><path d='M8 2a4 4 0 0 0-4 4h4V2zm12 0h-4v4h4V2zm8 0v4h4a4 4 0 0 0-4-4zM14 2h-4v4h4V2zm12 0h-4v4h4V2zm2 10h4V8h-4v4zm0 12a4 4 0 0 0 4-4h-4v4zm0-6h4v-4h-4v4zm-.882-4.334a4 4 0 0 0-5.57-.984l-7.67 5.662-3.936-2.76c.031-.193.05-.388.058-.584a4.976 4.976 0 0 0-2-3.978V8H4v2.1a5 5 0 1 0 3.916 8.948l2.484 1.738-2.8 1.964a4.988 4.988 0 1 0 2.3 3.266l17.218-12.35zM5 17.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm0 12a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm10.8-4.858l6.034 4.6a4 4 0 0 0 5.57-.984L19.28 22.2l-3.48 2.442z' fill='context-fill' fill-opacity='context-fill-opacity'/></svg>") !important;
+    --pageAction-image-32px: url("data:image/svg+xml;utf8,<svg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'><path d='M8 2a4 4 0 0 0-4 4h4V2zm12 0h-4v4h4V2zm8 0v4h4a4 4 0 0 0-4-4zM14 2h-4v4h4V2zm12 0h-4v4h4V2zm2 10h4V8h-4v4zm0 12a4 4 0 0 0 4-4h-4v4zm0-6h4v-4h-4v4zm-.882-4.334a4 4 0 0 0-5.57-.984l-7.67 5.662-3.936-2.76c.031-.193.05-.388.058-.584a4.976 4.976 0 0 0-2-3.978V8H4v2.1a5 5 0 1 0 3.916 8.948l2.484 1.738-2.8 1.964a4.988 4.988 0 1 0 2.3 3.266l17.218-12.35zM5 17.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm0 12a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm10.8-4.858l6.034 4.6a4 4 0 0 0 5.57-.984L19.28 22.2l-3.48 2.442z' fill='context-fill' fill-opacity='context-fill-opacity'/></svg>") !important;
+}
+
+#pageAction-urlbar-screenshots_mozilla_org[style*="highlight"] {
+    fill: var(--lwt-toolbarbutton-icon-fill-attention) !important;
+    fill-opacity: 1 !important;
+}
+
 #panorama-tab-groups_example_com-browser-action .toolbarbutton-icon {
     filter: brightness(1) grayscale(1000) contrast(1.5) !important;
 }
@@ -79,11 +94,6 @@
     filter: grayscale(1) brightness(1.5) contrast(2) !important;
 }
 
-#note-tab_wildsky_cc-browser-action .toolbarbutton-icon {
-    list-style-image: url("chrome://browser/skin/readerMode.svg");
-    fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
-}
-
 .webextension-browser-action[widget-id="secure-proxy_mozilla_com-browser-action"] {
     fill-opacity: 1 !important;
     -moz-context-properties: fill, fill-opacity !important;
@@ -107,7 +117,7 @@
     filter: grayscale(1) brightness(50);
 }
 
-.webextension-browser-action[label^="Violentmonkey"] .toolbarbutton-icon {
+.webextension-browser-action[label^=Violentmonkey] .toolbarbutton-icon {
     list-style-image: url("chrome://devtools/skin/images/command-console.svg");
     fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
     fill-opacity: var(--toolbarbutton-icon-fill-opacity) !important;
@@ -117,11 +127,6 @@
     list-style-image: url("chrome://devtools/skin/images/tool-styleeditor.svg");
     fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
     fill-opacity: var(--toolbarbutton-icon-fill-opacity) !important;
-}
-
-#customizationui-widget-panel[viewId="PanelUI-webext-note-tab_wildsky_cc-browser-action-view"] .panel-arrow[side="top"] {
-    list-style-image: url("chrome://global/skin/arrow/panelarrow-vertical.svg");
-    fill: hsl(240, 4%, 10%) !important;
 }
 
 /* make multithreaded download manager context menu label smaller */
@@ -263,17 +268,6 @@
 .toolbarbutton-icon:is([src^="page-icon:https://github.com"], [src^="page-icon:http://github.com"]),
 .urlbarView-favicon:is([src^="page-icon:https://github.com"], [src^="page-icon:http://github.com"]) {
     filter: invert(1) brightness(10) !important;
-}
-
-.urlbarView-favicon[src='data:image/svg+xml;utf8,<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="-25 -35 510.775 510.775"><path d="M285.08,230.397L456.218,59.27c6.076-6.077,6.076-15.911,0-21.986L423.511,4.565c-2.913-2.911-6.866-4.55-10.992-4.55  c-4.127,0-8.08,1.639-10.993,4.55l-171.138,171.14L59.25,4.565c-2.913-2.911-6.866-4.55-10.993-4.55  c-4.126,0-8.08,1.639-10.992,4.55L4.558,37.284c-6.077,6.075-6.077,15.909,0,21.986l171.138,171.128L4.575,401.505  c-6.074,6.077-6.074,15.911,0,21.986l32.709,32.719c2.911,2.911,6.865,4.55,10.992,4.55c4.127,0,8.08-1.639,10.994-4.55  l171.117-171.12l171.118,171.12c2.913,2.911,6.866,4.55,10.993,4.55c4.128,0,8.081-1.639,10.992-4.55l32.709-32.719  c6.074-6.075,6.074-15.909,0-21.986L285.08,230.397z" fill="rgb(255, 255, 255)"/></svg>'] {
-    height: 15.5px !important;
-}
-
-.install-icon.blocked-permission-icon,
-.popup-notification-icon[popupid="xpinstall-disabled"],
-.popup-notification-icon[popupid="addon-install-blocked"],
-.popup-notification-icon[popupid="addon-install-origin-blocked"] {
-    list-style-image: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' x='0' y='0' width='16' height='16' fill='context-fill' fill-opacity='context-fill-opacity'><path d='M15.7.3c-.4-.4-1.2-.4-1.6 0L12.4 2h-1.3c0-1.1-.9-2-2.1-2S7 .9 7 2.1H3.7c-.9 0-1.6.7-1.6 1.6V7C.9 7 0 7.9 0 9s.9 2.1 2.1 2.1v1.3L.3 14c-.5.4-.5 1.2 0 1.6s1.2.5 1.6 0L15.7 2c.4-.5.4-1.2 0-1.7zM13.5 9c0-.4.2-2.2 2.5-2.2V3.7c0-.2 0-.4-.1-.6L3 15.9c.2.1.5.1.7.1h3.1c0-2.2 1.8-2.5 2.2-2.5.4 0 2.2.2 2.2 2.5h3.1c.9 0 1.6-.7 1.6-1.6v-3.1c-2.1-.1-2.4-1.8-2.4-2.3z'/></svg>") !important;
 }
 
 #addons-notification-icon,

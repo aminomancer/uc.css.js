@@ -32,6 +32,12 @@ link[href="chrome://global/skin/arrowscrollbox.css"] ~ :is(#scrollbutton-up, #sc
     visibility: collapse;
 }
 
+/* when drag mode is enabled. this enables the tab shadows to draw onto the drag space. */
+:root[sizemode="normal"] #TabsToolbar > .toolbar-items #tabbrowser-arrowscrollbox::part(scrollbox) {
+    min-height: calc(var(--min-tab-height) + var(--space-above-tabbar));
+    padding-block-start: var(--space-above-tabbar);
+}
+
 /* protections popup panel's arrow style */
 #protections-popup[side="top"]::part(arrow) {
     /* stroke: hsl(216.5, 90%, 39.4%) !important; */

@@ -12,7 +12,26 @@
 
 .protections-popup-category,
 .protections-popup-footer-button {
-    border-radius: initial !important;
+    border-radius: var(--toolbarbutton-border-radius) !important;
+    margin-inline: calc(var(--horizontal-padding) - var(--arrowpanel-menuitem-inline-margin) - 1px) !important;
+}
+
+.protections-popup-category {
+	padding-inline: calc(var(--arrowpanel-menuitem-inline-margin) + 1px) !important;
+}
+
+.protections-popup-footer-button {
+	padding-inline: calc(var(--arrowpanel-menuitem-inline-margin) + 1px) !important;
+}
+
+#protections-popup-footer-protection-type-label {
+	margin-inline-end: 0 !important;
+}
+
+.protections-popup-category::after {
+	content: url(chrome://global/skin/icons/menu-arrow.svg) !important;
+    transform: translateX(3px) !important;
+    display: -moz-inline-box;
 }
 
 .panel-footer.popup-notification-button-container {

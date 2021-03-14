@@ -101,6 +101,10 @@ menupopup[menu-api],
     list-style-image: var(--menu-right-img) !important;
 }
 
+:is(menu)[disabled] > .menu-right {
+    visibility: collapse;
+}
+
 :is(#back-button, #forward-button, #viewButton)
     > menupopup
     :is(menu, menuitem):is(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
@@ -204,10 +208,6 @@ menupopup.in-menulist {
         fill: currentColor !important;
         border: none !important;
         border-radius: 2px !important;
-    }
-
-    panel .in-menulist {
-        appearance: !important;
     }
 }
 

@@ -486,11 +486,11 @@ toolbarpaletteitem[removable="false"]
 }
 
 /* iffy fix for wide invisible urlbar blocking bookmarks button pointer events */
-#urlbar {
+:root:not([customizing]) #urlbar {
     pointer-events: none;
 }
 
-#urlbar * {
+:root:not([customizing]) #urlbar * {
     pointer-events: auto;
 }
 
@@ -719,6 +719,13 @@ use 0.6 instead of 1 since 1 will end up being shown as like 1.4px for some wind
     :is(.drm-icon, .autoplay-media-icon, .install-icon, #canvas-notification-icon, .canvas-icon, .indexedDB-icon, .desktop-notification-icon, .screen-icon, .translation-icon, .storage-access-icon),
 #webrtc-sharing-icon[sharing="screen"] {
     padding: 0.6px;
+}
+
+.install-icon.blocked-permission-icon,
+.popup-notification-icon[popupid="xpinstall-disabled"],
+.popup-notification-icon[popupid="addon-install-blocked"],
+.popup-notification-icon[popupid="addon-install-origin-blocked"] {
+    list-style-image: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' x='0' y='0' width='16' height='16' fill='context-fill' fill-opacity='context-fill-opacity'><path d='M15.7.3c-.4-.4-1.2-.4-1.6 0L12.4 2h-1.3c0-1.1-.9-2-2.1-2S7 .9 7 2.1H3.7c-.9 0-1.6.7-1.6 1.6V7C.9 7 0 7.9 0 9s.9 2.1 2.1 2.1v1.3L.3 14c-.5.4-.5 1.2 0 1.6s1.2.5 1.6 0L15.7 2c.4-.5.4-1.2 0-1.7zM13.5 9c0-.4.2-2.2 2.5-2.2V3.7c0-.2 0-.4-.1-.6L3 15.9c.2.1.5.1.7.1h3.1c0-2.2 1.8-2.5 2.2-2.5.4 0 2.2.2 2.2 2.5h3.1c.9 0 1.6-.7 1.6-1.6v-3.1c-2.1-.1-2.4-1.8-2.4-2.3z'/></svg>") !important;
 }
 
 #notification-popup menulist {

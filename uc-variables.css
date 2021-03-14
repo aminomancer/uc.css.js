@@ -142,7 +142,8 @@ toolbar {
         --panel-banner-item-background-color: hsla(109.9, 90.9%, 47.3%, 0.1);
         --panel-banner-item-hover-bgcolor: hsla(109.9, 90.9%, 47.3%, 0.15);
         --panel-banner-item-active-bgcolor: hsla(109.9, 90.9%, 47.3%, 0.2);
-        --arrowpanel-menuitem-margin: 0 4px !important;
+        --arrowpanel-menuitem-inline-margin: 4px;
+        --arrowpanel-menuitem-margin: 0 var(--arrowpanel-menuitem-inline-margin) !important;
         --arrowpanel-menuitem-padding: 6px !important;
         --panel-subview-body-padding: 4px 0 !important;
         --arrowpanel-menuitem-border-radius: 3px !important;
@@ -204,8 +205,8 @@ toolbar {
         --menupopup-border-radius: 3px !important;
         --menu-right-bg: none;
         --menu-right-img: url("chrome://global/skin/icons/menu-arrow.svg");
-        --menu-right-margin: 2px;
-        --menu-right-size: 10px;
+        --menu-right-margin: 4px;
+        --menu-right-size: 11px;
     }
 
 }

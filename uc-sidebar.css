@@ -55,11 +55,10 @@
     padding-inline-start: 5px !important;
     background-color: var(--search-box-color) !important;
     border-radius: 3px !important;
-    padding-top: 5px !important;
-    padding-bottom: 5px !important;
+    padding-block: 0 !important;
     transition: 300ms !important;
     color: currentColor !important;
-    min-height: 27px !important;
+    min-height: 25px !important;
 }
 
 .sidebar-search-container .search-box,
@@ -73,11 +72,12 @@
     padding-inline-start: 13px !important;
 }
 
-@-moz-document regexp(".*sidebar.*") {
+@-moz-document regexp(".*sidebar.*\\i") {
 
     .textbox-search-icons {
         display: flex;
-        flex-flow: row nowrap !important;
+        flex-flow: row nowrap;
+        align-items: center;
     }
 
     .textbox-search-clear {
@@ -336,13 +336,17 @@ treechildren::-moz-tree-row(selected, current, focus) {
 
 #sidebar-box {
     background-color: var(--ui-secondary-bg) !important;
-    top: 74px !important;
+    top: calc(var(--urlbar-container-height) + var(--tab-min-height)) !important;
     bottom: 0 !important;
     display: flex !important;
     flex-direction: column !important;
     position: fixed !important;
     left: 0 !important;
     right: auto !important;
+}
+
+:root[sizemode="normal"] #sidebar-box {
+    top: calc(var(--urlbar-container-height) + var(--tab-min-height) + var(--space-above-tabbar)) !important;
 }
 
 #sidebar-box[hidden] {
