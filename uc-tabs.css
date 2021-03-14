@@ -462,11 +462,6 @@
     display: block !important;
 }
 
-#navigator-toolbox:not(:hover) .tab-icon-overlay:not([pinned], [sharing], [crashed]):is([soundplaying], [muted], [activemedia-blocked]),
-#navigator-toolbox:hover .tab-icon-stack:not([pinned], [sharing], [crashed]):is([soundplaying], [muted], [activemedia-blocked]) > :not(.tab-icon-overlay) {
-	opacity: 0;
-}
-
 .tab-close-button {
     -moz-box-ordinal-group: 0;
     display: block !important;

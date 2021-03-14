@@ -99,3 +99,9 @@ link[href="chrome://global/skin/arrowscrollbox.css"] ~ :is(#scrollbutton-up, #sc
     padding-block: 4px;
     border-radius: 5px;
 }
+
+/* prevent hiding the close button when audio is playing. undoes an irritating rule in the proton update */
+#navigator-toolbox:not(:hover) .tab-icon-overlay:not([pinned], [sharing], [crashed]):is([soundplaying], [muted], [activemedia-blocked]),
+#navigator-toolbox:hover .tab-icon-stack:not([pinned], [sharing], [crashed]):is([soundplaying], [muted], [activemedia-blocked]) > :not(.tab-icon-overlay) {
+	opacity: revert;
+}

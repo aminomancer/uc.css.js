@@ -294,6 +294,11 @@ popupnotification .popup-notification-checkbox:hover .checkbox-check[checked]:no
     padding-block-end: 4px !important;
 }
 
+/* urlbar page action menu */
+#pageActionPanel panelview {
+	min-width: 18em !important;
+}
+
 @supports -moz-bool-pref("browser.proton.contextmenus.enabled") {
     .menu-right {
         margin-inline-end: 0 !important;
