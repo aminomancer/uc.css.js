@@ -231,7 +231,7 @@
     display: -moz-inline-box !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
-    background-image: url("chrome://devtools/skin/images/pseudo-class.svg") !important;
+    background-image: url("chrome://browser/content/aboutlogins/icons/hide-password.svg") !important;
 }
 
 #contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic):is([label="Block element..."], [label="uBlock Origin"]) .menu-iconic-icon {

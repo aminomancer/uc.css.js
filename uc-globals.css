@@ -19,6 +19,8 @@
     --secure-color: hsl(119, 80%, 60%);
     --insecure-text-color: hsla(0, 100%, 50%, 0.867);
     --warning-color: hsl(0, 100%, 66%);
+    --protection-idle-color: hsl(205, 100%, 67%);
+    --protection-active-color: hsl(358, 98%, 66%);
     --update-badge-bg: hsl(125, 81%, 57%);
     --update-badge-color: hsl(118, 89%, 24%);
     --update-badge-inactive: hsl(227, 19%, 48%);
@@ -33,7 +35,7 @@
     --plaintext-color: rgba(255, 255, 255, 0.932);
     --ui-text-80: rgba(255, 255, 255, 0.8);
     --badge-color-dark: hsl(236, 13%, 42%);
-    /*     --tab-hover: linear-gradient(0deg, hsl(231, 42%, 15%), hsl(233, 61%, 8%));
+/*     --tab-hover: linear-gradient(0deg, hsl(231, 42%, 15%), hsl(233, 61%, 8%));
     --tab-pinned: linear-gradient(0deg, hsl(231, 50%, 11%), hsl(232, 70%, 6%));
     --tab-multi: linear-gradient(0deg, hsl(231, 42%, 15%), hsl(232, 70%, 6%)); */
     --tab-hover: linear-gradient(180deg, hsl(231, 49%, 11%), hsl(233, 55%, 8%));
@@ -52,4 +54,10 @@
     --sanitize-border-color: hsla(0, 0%, 5%, 0.2);
     --menu-separator-color: hsl(233, 25%, 23%);
     --user-urlbar-container-height: 38px;
+/*     --default-identity-icon: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M8 1C4.136 1 1 4.136 1 8s3.136 7 7 7 7-3.136 7-7-3.136-7-7-7zm0 11.404a.938.938 0 01-.936-.936V7.723c0-.515.421-.936.936-.936s.936.421.936.936v3.745a.938.938 0 01-.936.936zm0-6.552a1.128 1.128 0 110-2.256 1.128 1.128 0 110 2.256z'/></svg>"); */
+    --default-identity-icon: url(chrome://global/skin/icons/info-filled.svg);
+    --protection-header-gradient-color-1: hsl(318, 73%, 69%);
+    --protection-header-gradient-color-2: hsl(265, 100%, 69%);
+    --protection-header-gradient-color-3: hsl(217, 90%, 39%);
+    --protection-header-arrow-color: hsl(220, 80%, 42%);
 }

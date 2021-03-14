@@ -135,33 +135,20 @@ toolbarpaletteitem[removable="false"]
     filter: brightness(1.15) saturate(1.5) contrast(1.15) !important;
 } */
 
-#urlbar-input-container
-    > #tracking-protection-icon-container:not([hidden])
-    > #tracking-protection-icon-box[hasException]
-    > #tracking-protection-icon {
-    list-style-image: url(chrome://browser/skin/tracking-protection-disabled.svg) !important;
-}
-
-#tracking-protection-icon-container:is([open="true"], :hover)
-    #tracking-protection-icon-box[active]:not([animate], [hasException])
-    #tracking-protection-icon-animatable-box {
-    display: block !important;
-}
-
-#tracking-protection-icon-container:not([open="true"], :hover)
-    #tracking-protection-icon-box[active]:not([animate])
-    #tracking-protection-icon {
+#tracking-protection-icon {
     display: -moz-box !important;
-    fill: hsl(218, 100%, 72%) !important;
-    fill-opacity: 1 !important;
+    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M7.505 1.089L3.262 2.681c-.552.212-.92.735-.92 1.329v3.324c0 3.416 2.214 6.626 5.255 7.602.262.085.545.085.806 0 3.041-.976 5.255-4.18 5.255-7.602V4.01c0-.587-.368-1.117-.919-1.322L8.495 1.096a1.37 1.37 0 00-.99-.007z'/></svg>") !important;
 }
 
-#tracking-protection-icon-container:not([open="true"], :hover)
-    #tracking-protection-icon-box[active]:not([animate], [hasException])
-    #tracking-protection-icon-animatable-box,
-#tracking-protection-icon-container:is([open="true"], :hover)
-    #tracking-protection-icon-box[active]:not([animate], [hasException])
-    #tracking-protection-icon {
+#tracking-protection-icon-box[hasException] > #tracking-protection-icon {
+    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M7.597 14.936c.262.085.545.085.806 0 3.041-.976 5.255-4.18 5.255-7.602V4.973l-8.534 8.534a6.96 6.96 0 002.473 1.429zM13.804 1.532l-.005-.005a.875.875 0 00-1.237-.005l-.005.005-.794.794-3.268-1.225a1.37 1.37 0 00-.99-.007L3.261 2.681a1.424 1.424 0 00-.919 1.329v3.324a8.25 8.25 0 00.834 3.573l-.979.979a.875.875 0 00-.005 1.237l.005.005a.875.875 0 001.237.005l.005-.005L13.798 2.77a.875.875 0 00.006-1.238z'/></svg>") !important;
+}
+
+#tracking-protection-icon-box:not([hasException])[active] > #tracking-protection-icon {
+    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M12.739 2.688L8.495 1.096a1.37 1.37 0 00-.99-.007L3.262 2.681c-.552.212-.92.735-.92 1.329v3.324c0 3.416 2.214 6.626 5.255 7.602.262.085.545.085.806 0 3.041-.976 5.255-4.18 5.255-7.602V4.01c0-.587-.368-1.117-.919-1.322zM10.567 7.3c-1.718 2.997-2.715 4.746-3.002 5.247a.301.301 0 01-.559-.194l.47-3.31H5.648c-.459 0-.172-.392-.162-.407.658-1.164 1.645-2.887 2.95-5.185a.301.301 0 01.559.194l-.47 3.31h1.833c.209.001.323.1.209.345z'/></svg>") !important;
+}
+
+#tracking-protection-icon-animatable-box {
     display: none !important;
 }
 
@@ -189,6 +176,15 @@ toolbarpaletteitem[removable="false"]
     fill-opacity: 1 !important;
 }
 
+#identity-box[pageproxystate="valid"].chromeUI #identity-icon-label,
+#identity-box[pageproxystate="valid"].extensionPage #identity-icon-label {
+    opacity: 0.6 !important;
+}
+
+#urlbar[pageproxystate="valid"] #identity-box.chromeUI #identity-icon {
+    list-style-image: url(chrome://branding/content/identity-icons-brand.svg) !important;
+}
+
 #urlbar[pageproxystate="valid"]
     #identity-box.chromeUI:hover
     #identity-icon-box:not([open="true"])
@@ -202,12 +198,6 @@ toolbarpaletteitem[removable="false"]
     #identity-icon-box[open="true"]
     > #identity-icon {
     list-style-image: url("chrome://branding/content/about-logo.png") !important;
-}
-
-#tracking-protection-icon-container[hidden]
-    ~ #identity-box[pageproxystate="valid"].notSecure:not(.chromeUI, .localResource)
-    #identity-icon {
-    list-style-image: url("data:image/svg+xml;utf8,<svg height='1792' viewBox='-40 0 1792 1792' width='1792' xmlns='http://www.w3.org/2000/svg'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M896 786h725q12 67 12 128 0 217-91 387.5t-259.5 266.5-386.5 96q-157 0-299-60.5t-245-163.5-163.5-245-60.5-299 60.5-299 163.5-245 245-163.5 299-60.5q300 0 515 201l-209 201q-123-119-306-119-129 0-238.5 65t-173.5 176.5-64 243.5 64 243.5 173.5 176.5 238.5 65q87 0 160-24t120-60 82-82 51.5-87 22.5-78h-436v-264z'/></svg>") !important;
 }
 
 #urlbar[pageproxystate="valid"] #identity-box.chromeUI {
@@ -343,9 +333,9 @@ toolbarpaletteitem[removable="false"]
 #protections-popup-mainView-panel-header-section {
     background: radial-gradient(
         circle farthest-side at top right,
-        hsl(318, 73%, 69%),
-        hsl(265, 100%, 69%),
-        hsl(217, 90%, 39%)
+        var(--protection-header-gradient-color-1),
+        var(--protection-header-gradient-color-2),
+        var(--protection-header-gradient-color-3)
     ) !important;
 }
 
@@ -570,6 +560,7 @@ toolbarpaletteitem[removable="false"]
     margin-inline-end: 0 !important;
     padding-inline: 0 !important;
     max-width: unset !important;
+    border-radius: 0 !important;
 }
 
 .identity-box-button {
@@ -598,21 +589,24 @@ toolbarpaletteitem[removable="false"]
 }
 
 #tracking-protection-icon-container:is([open="true"], :hover:not([open="true"]))
-    #tracking-protection-icon-box {
+    #tracking-protection-icon-box:not([hasException]) {
     fill-opacity: 1 !important;
-    fill: hsl(275, 100%, 75%) !important;
+    fill: var(--protection-idle-color) !important;
 }
 
 #tracking-protection-icon-container:is([open="true"], :hover:not([open="true"]))
-    #tracking-protection-icon-box[hasException] {
+    #tracking-protection-icon-box[active]:not([hasException]) {
     fill-opacity: 1 !important;
-    fill: hsl(229, 100%, 75%) !important;
+    fill: var(--protection-active-color) !important;
 }
 
 #identity-box.extensionPage #identity-icon,
-#urlbar[pageproxystate="invalid"] #identity-box #identity-icon {
+#urlbar[pageproxystate="invalid"] #identity-box #identity-icon,
+#tracking-protection-icon-container[hidden]
+    ~ #identity-box[pageproxystate="valid"].notSecure:not(.chromeUI, .localResource)
+    #identity-icon {
     fill-opacity: 0.6 !important;
-    list-style-image: url("data:image/svg+xml;utf8,<svg height='1792' viewBox='-40 0 1792 1792' width='1792' xmlns='http://www.w3.org/2000/svg'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M896 786h725q12 67 12 128 0 217-91 387.5t-259.5 266.5-386.5 96q-157 0-299-60.5t-245-163.5-163.5-245-60.5-299 60.5-299 163.5-245 245-163.5 299-60.5q300 0 515 201l-209 201q-123-119-306-119-129 0-238.5 65t-173.5 176.5-64 243.5 64 243.5 173.5 176.5 238.5 65q87 0 160-24t120-60 82-82 51.5-87 22.5-78h-436v-264z'/></svg>") !important;
+    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 -0.2 16 16'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M8.141 6.997h6.608c.073.407.109.796.109 1.167 0 1.319-.276 2.496-.829 3.532s-1.341 1.846-2.365 2.429S9.466 15 8.141 15a6.891 6.891 0 01-2.725-.551 7.003 7.003 0 01-2.233-1.49 6.986 6.986 0 01-1.49-2.233C1.325 9.862 1.141 8.954 1.141 8s.184-1.862.551-2.725.864-1.607 1.49-2.233 1.37-1.123 2.233-1.49S7.187 1 8.141 1c1.823 0 3.388.611 4.694 1.832L10.93 4.664c-.747-.723-1.677-1.085-2.789-1.085-.784 0-1.508.197-2.174.592s-1.192.932-1.581 1.61S3.803 7.198 3.803 8s.194 1.542.583 2.219.916 1.214 1.581 1.609 1.39.592 2.174.592c.529 0 1.015-.073 1.458-.219.444-.146.808-.328 1.094-.547s.535-.468.747-.747.369-.544.469-.793c.1-.249.169-.486.205-.711H8.141V6.997z'/></svg>") !important;
 }
 
 #identity-box[pageproxystate="valid"].localResource #identity-icon {
@@ -708,6 +702,25 @@ toolbarpaletteitem[removable="false"]
     fill-opacity: 1 !important;
 }
 
+/* some permission icons are too big relative to their viewbox.
+urlbar icons that display frequently like the tracking icon or the identity icon have a max width/height of 14px but a viewbox of 16px and are drawn to 16px.
+so they have at least 1px of virtual "padding" on every side. we could replace all the svg icons and maybe I will, but this is a lot easier.
+use 0.6 instead of 1 since 1 will end up being shown as like 1.4px for some window scaling factors.*/
+#blocked-permissions-container
+:is(
+.desktop-notification-icon,
+.screen-icon,
+.popup-icon,
+.autoplay-media-icon,
+.canvas-icon,
+.install-icon
+),
+#notification-popup-box
+    :is(.drm-icon, .autoplay-media-icon, .install-icon, #canvas-notification-icon, .canvas-icon, .indexedDB-icon, .desktop-notification-icon, .screen-icon, .translation-icon, .storage-access-icon),
+#webrtc-sharing-icon[sharing="screen"] {
+    padding: 0.6px;
+}
+
 #notification-popup menulist {
     color: var(--notification-menu-color) !important;
 }
@@ -743,6 +756,8 @@ toolbarpaletteitem[removable="false"]
     margin-inline-end: 0 !important;
 }
 
+#urlbar[actiontype] #identity-box #identity-icon-box,
+#urlbar[pageproxystate="invalid"][actiontype] #identity-box #identity-icon-box
 #urlbar[searchmode] #identity-box #identity-icon-box,
 #urlbar[pageproxystate="invalid"][searchmode] #identity-box #identity-icon-box {
     margin-inline: 0 !important;
@@ -780,4 +795,16 @@ toolbarpaletteitem[removable="false"]
     opacity: 0.6 !important;
     padding-inline: 0px !important;
     font-size: 14px !important;
+}
+
+/* shorten "Switch to tab:" urlbar indicator to "Tabs" */
+#urlbar[actiontype="switchtab"] #urlbar-label-box::before {
+    content: "Tabs";
+    display: -moz-inline-box;
+    color: var(--lwt-toolbar-field-color, hsl(0, 0%, 0%));
+    opacity: 0.6;
+}
+
+#urlbar-label-switchtab {
+    display: none;
 }

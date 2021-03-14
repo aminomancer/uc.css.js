@@ -385,11 +385,11 @@ menupopup[menu-api] menuitem[type="radio"][checked="true"]::before,
 }
 
 #context-viewvideo:not(.menuitem-iconic)::before {
-    background-image: url("chrome://global/skin/icons/more.svg") !important;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='context-fill' fill-opacity='context-fill-opacity'><path d='M15.926 12.3a.551.551 0 00-.202-.202l-4.969-2.869a.552.552 0 00-.828.476v5.743c0 .305.247.552.552.552a.557.557 0 00.276-.074l4.969-2.871a.554.554 0 00.202-.755z'/><path d='M11.255 8.363L14 9.948V5a2 2 0 00-2-2H4a2 2 0 00-2 2v6H1a1 1 0 000 2h7.927V9.701c.001-.27.073-.536.207-.769a1.556 1.556 0 012.121-.569z'/></svg>") !important;
 }
 
 :is(#context-media-showcontrols, #context-media-hidecontrols):not(.menuitem-iconic)::before {
-    background-image: url("chrome://browser/skin/menu.svg") !important;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M1 12.667c0 .428.35.778.778.778h3.889v-1.556H1.778a.78.78 0 00-.778.778zm0-9.334c0 .428.35.778.778.778h7V2.556h-7A.78.78 0 001 3.333zm7.778 10.889v-.778h5.444c.428 0 .778-.35.778-.778s-.35-.778-.778-.778H8.778v-.778A.78.78 0 008 10.332a.78.78 0 00-.778.778v3.111c0 .429.35.779.778.779a.78.78 0 00.778-.778zM4.111 6.444v.778H1.778A.78.78 0 001 8c0 .428.35.778.778.778h2.333v.778c0 .428.35.778.778.778s.778-.35.778-.778V6.444c0-.428-.35-.778-.778-.778s-.778.351-.778.778zM15 8a.78.78 0 00-.778-.778h-7v1.556h7A.78.78 0 0015 8zm-3.889-2.333a.78.78 0 00.778-.778v-.778h2.333c.428 0 .778-.35.778-.778s-.35-.778-.778-.778h-2.333v-.777A.78.78 0 0011.111 1a.78.78 0 00-.778.778v3.111c0 .428.35.778.778.778z'/></svg>") !important;
 }
 
 #context-showonlythisframe:not(.menuitem-iconic)::before,
@@ -415,11 +415,14 @@ menupopup[menu-api] menuitem[type="radio"][checked="true"]::before,
 }
 
 #context-inspect-a11y:not(.menuitem-iconic)::before {
+    background-position: left center !important;
+    content: "Inspect Accessibility" !important;
+    padding-inline-start: 23px !important;
     background-image: url("chrome://devtools/skin/images/tool-accessibility.svg") !important;
 }
 
-#context-inspect-a11y {
-    display: none !important;
+#context-inspect-a11y .menu-text {
+    visibility: collapse !important;
 }
 
 :is(#context-viewframesource, #context-viewpartialsource-selection, #context-viewsource):not(.menuitem-iconic)::before {
@@ -650,7 +653,7 @@ menupopup[menu-api] menuitem[type="radio"][checked="true"]::before,
 }
 
 #contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"] :is(menu, menuitem)[label="Auto-fill"]::before {
-    background-image: url(chrome://browser/skin/preferences/formfill.svg);
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16'><g fill='context-fill'><path d='M7.281 5H8.75A.25.25 0 009 4.75V.984a.984.984 0 00-1.969 0V4.75a.25.25 0 00.25.25z'/><path d='M13.5 2H11a1 1 0 000 2h2.5a.5.5 0 01.5.5v7a.5.5 0 01-.5.5h-11a.5.5 0 01-.5-.5v-7a.5.5 0 01.5-.5H5a1 1 0 000-2H2.5A2.5 2.5 0 000 4.5v7A2.5 2.5 0 002.5 14h11a2.5 2.5 0 002.5-2.5v-7A2.5 2.5 0 0013.5 2z'/><rect x='3' y='6' width='4' height='4' rx='.577' ry='.577'/><path d='M9.5 7h3a.5.5 0 000-1h-3a.5.5 0 000 1zm0 1a.5.5 0 000 1h2a.5.5 0 000-1z'/></g></svg>");
 }
 
 #contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"] :is(menu, menuitem)[label="Copy Username"]::before {

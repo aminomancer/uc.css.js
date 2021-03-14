@@ -95,6 +95,44 @@ popupnotification checkbox:hover .checkbox-check[checked]:not(:disabled) {
 	background-color: var(--purple-45);
 }
 
+popupnotification .popup-notification-body > .popup-notification-checkbox {
+    margin-inline-start: 6px !important;
+}
+
+popupnotification .popup-notification-checkbox .checkbox-check {
+	width: 13px !important;
+	height: 13px !important;
+	border: 1px solid var(--in-content-box-border-color) !important;
+	background-color: var(--arrowpanel-dimmed) !important;
+	background-position: center !important;
+	background-repeat: no-repeat !important;
+}
+
+popupnotification .popup-notification-checkbox .checkbox-check[checked] {
+    list-style-image: url("chrome://global/skin/icons/check.svg") !important;
+    -moz-context-properties: fill, fill-opacity !important;
+    fill: currentColor !important;
+    color: hsl(0, 0%, 100%) !important;
+    background-color: var(--purple-35) !important;
+}
+
+popupnotification .popup-notification-checkbox:hover .checkbox-check:not(:disabled) {
+	background-color: var(--arrowpanel-darker) !important;
+}
+
+popupnotification .popup-notification-checkbox:hover .checkbox-check[checked]:not(:disabled) {
+	background-color: var(--purple-45) !important;
+}
+
+.popup-notification-learnmore-link {
+	margin-top: 2px !important;
+}
+
+.popup-subitem {
+	margin-inline-start: 27px !important;
+    margin-top: 1px;
+}
+
 /* hides update popups. i use a script for this now, updateNotificationSlayer.uc.js. use that instead, it's MUCH better. */
 /* #appMenu-notification-popup {
     display: none !important;
