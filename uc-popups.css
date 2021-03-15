@@ -110,7 +110,11 @@ tabmodalprompt .checkbox-check[checked="true"] {
         color: white !important;
         fill: rgba(255, 255, 255, 0.5) !important;
         border: none !important;
-        border-radius: 5px !important;
+        border-radius: calc(var(--toolbarbutton-border-radius) + 1px) !important;
+        background-color: rgba(18, 18, 18, 0.97) !important;
+        background-image: url("texture/noise-512x512.png") !important;
+        backdrop-filter: blur(10px) !important;
+        animation: none !important;
     }
 
     #alertBox #alertTitleBox {
@@ -124,8 +128,8 @@ tabmodalprompt .checkbox-check[checked="true"] {
     }
 
     /* #alertSourceLabel {
-        font-family: FreeMono, monospace !important;
-    } */
+    font-family: FreeMono, monospace !important;
+} */
 
     #alertTitleLabel {
         margin-left: 5px !important;
@@ -134,11 +138,10 @@ tabmodalprompt .checkbox-check[checked="true"] {
     button,
     #alertBox .close-icon {
         color: rgba(255, 255, 255, 0.5) !important;
-        fill-opacity: 0 !important;
     }
 
     #alertSettings {
-        border-radius: 3px !important;
+        border-radius: var(--toolbarbutton-border-radius) !important;
         width: 20px !important;
         height: 20px !important;
         margin-right: 3px !important;
@@ -150,9 +153,17 @@ tabmodalprompt .checkbox-check[checked="true"] {
     }
 
     #alertTitleBox .close-icon {
-        border-radius: 3px !important;
-        padding: 0 !important;
-        margin: 4px !important;
+        border-radius: var(--toolbarbutton-border-radius) !important;
+        margin: 4px 4px 0 0 !important;
+    }
+
+    #alertTitleLabel {
+        margin: 0 !important;
+        padding-block: 4px 0 !important;
+    }
+
+    #alertImage {
+        border-radius: var(--toolbarbutton-border-radius);
     }
 
     #alertSettings:is(:hover, [open], :hover:active),
@@ -324,8 +335,8 @@ tabmodalprompt .checkbox-check[checked="true"] {
         -moz-context-properties: fill, fill-opacity !important;
         color: white !important;
         background-image: url(chrome://global/skin/icons/close.svg) !important;
-        fill-opacity: 0 !important;
-        background-size: 120% !important;
+        fill-opacity: 1 !important;
+        background-size: 100% !important;
         background-position: center !important;
         background-repeat: no-repeat !important;
     }

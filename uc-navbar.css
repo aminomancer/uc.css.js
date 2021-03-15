@@ -253,6 +253,77 @@ toolbar .toolbarbutton-1:not([disabled])[checked]:hover > .toolbarbutton-icon {
 }
 
 #downloadsListBox > .download-state > .downloadButton .button-box .button-icon {
-    width: 20.5px !important;
-    height: 20px !important;
+    width: 17.5px !important;
+    height: auto !important;
+}
+
+/* proton notifications */
+@supports (-moz-bool-pref("browser.proton.infobars.enabled")) {
+    #navigator-toolbox > :is(legacy-stack, .notificationbox-stack),
+    #navigator-toolbox > named-deck > :is(legacy-stack, .notificationbox-stack),
+    #navigator-toolbox > named-deck {
+        display: flex !important;
+        position: absolute !important;
+        width: unset !important;
+        border-bottom-right-radius: 4px !important;
+        max-height: 74px !important;
+    }
+
+    #navigator-toolbox notification {
+        width: unset !important;
+        overflow: hidden !important;
+        border: none !important;
+        min-width: 225px !important;
+        transition: margin-top 300ms var(--animation-easing-function), opacity 300ms var(--animation-easing-function) !important;
+    }
+
+    #navigator-toolbox notification .messageDetails {
+        width: unset !important;
+        overflow: hidden !important;
+    }
+
+    #navigator-toolbox notification .messageText {
+        display: flex !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+
+    #navigator-toolbox notification .messageImage {
+        min-width: 24px !important;
+    }
+    
+    #navigator-toolbox notification .close-icon {
+        background: none !important;
+        width: 40px !important;
+        height: 40px !important;
+    }
+
+    #navigator-toolbox notification .close-icon .toolbarbutton-icon {
+        border-radius: var(--toolbarbutton-border-radius);
+    }
+
+    #navigator-toolbox notification .close-icon:hover .toolbarbutton-icon {
+        background-color: color-mix(in srgb, currentColor 10%, transparent);
+    }
+
+    #navigator-toolbox notification .close-icon:hover:active .toolbarbutton-icon {
+        background-color: color-mix(in srgb, currentColor 20%, transparent);
+    }
+
+    #navigator-toolbox notification[type="info"] .text-link {
+        color: var(--toolbarbutton-icon-fill-attention) !important;
+    }
+
+    #navigator-toolbox notification[type="critical"] .text-link {
+        color: black !important;
+    }
+
+    #navigator-toolbox notification[type="info"] {
+        --notification-background: var(--arrowpanel-background) !important;
+    }
+
+    #navigator-toolbox notification[type="critical"] {
+        --notification-background: hsl(350.5, 100%, 50%) !important;
+        --notification-text: black !important;
+    }
 }

@@ -142,16 +142,6 @@ for that reason i disabled it but maybe someone else wants it. it does look kind
     border-top-right-radius: 0;
 }
 
-/* i prefer about:config => alerts.useSystemBackend = true */
-@-moz-document url("chrome://global/content/alerts/alert.xhtml")
-{
-    #alertBox {
-        background-color: rgba(18, 18, 18, 0.97) !important;
-        background-image: url("texture/noise-512x512.png") !important;
-        backdrop-filter: blur(10px) !important;
-    }
-}
-
 #fullscreen-warning {
     background-color: hsla(233.3, 39.1%, 9%, 0.58) !important;
     background-image: url("texture/noise-512x512.png") !important;
