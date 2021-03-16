@@ -178,7 +178,7 @@
 :is(.menu-iconic, .menuitem-iconic):is([label="To Google Translate"], [label^="Translate this page"], [label="Translate selected link"], [label="Translate selected text"], [label="Simple Translate"]) .menu-iconic-left::before {
     width: 16px !important;
     height: 16px !important;
-    margin-inline: var(--context-iconic-special-margin) !important;
+    margin-inline: var(--context-iconic-margin) !important;
     fill: currentColor !important;
     -moz-context-properties: fill, fill-opacity, stroke !important;
     content: "" !important;

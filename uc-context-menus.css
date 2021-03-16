@@ -58,16 +58,28 @@ menupopup[menu-api],
     background-color: initial !important;
 }
 
-:is(#back-button, #forward-button, #viewButton) > menupopup :is(menuitem, menu) image,
+:is(#back-button, #forward-button, #viewButton) > menupopup :is(menuitem, menu) .menu-iconic-left,
 :is(.popup-notification-dropmarker, #main-menubar, #PlacesToolbar, #places)
     menupopup
     :is(menuitem, menu)
-    image,
+    .menu-iconic-left,
 :is(#toolbar-context-menu, #tabContextMenu, #contentAreaContextMenu, #backForwardMenu, #placesContext, #pageActionContextMenu, .search-one-offs-context-menu, #SyncedTabsSidebarContext, .textbox-contextmenu, #customizationPanelItemContextMenu, #customizationPaletteItemContextMenu, #customization-toolbar-menu, #new-tab-button-popup, #new-tab-button, #downloadsContextMenu, menupopup[menu-api], #ContentSelectDropdown, menupopup.in-menulist, .new-tab-popup, #openHandlerPopup)
     :is(menuitem, menu)
-    image {
-    margin-left: 3px;
-    margin-right: -3px;
+    .menu-iconic-left {
+    padding: 0 !important;
+    appearance: none !important;
+    margin-inline-end: 0 !important;
+}
+
+:is(#back-button, #forward-button, #viewButton) > menupopup :is(menuitem, menu) .menu-iconic-icon,
+:is(.popup-notification-dropmarker, #main-menubar, #PlacesToolbar, #places)
+    menupopup
+    :is(menuitem, menu)
+    .menu-iconic-icon,
+:is(#toolbar-context-menu, #tabContextMenu, #contentAreaContextMenu, #backForwardMenu, #placesContext, #pageActionContextMenu, .search-one-offs-context-menu, #SyncedTabsSidebarContext, .textbox-contextmenu, #customizationPanelItemContextMenu, #customizationPaletteItemContextMenu, #customization-toolbar-menu, #new-tab-button-popup, #new-tab-button, #downloadsContextMenu, menupopup[menu-api], #ContentSelectDropdown, menupopup.in-menulist, .new-tab-popup, #openHandlerPopup)
+    :is(menuitem, menu)
+    .menu-iconic-icon {
+    margin-inline: 6px;
 }
 
 #contentAreaContextMenu > .menuitem-iconic > .menu-iconic-left > .menu-iconic-icon {

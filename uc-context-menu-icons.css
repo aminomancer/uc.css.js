@@ -111,6 +111,7 @@ menupopup[menu-api] menuitem:is([type="checkbox"], [type="radio"], [checked]) .m
 #discardTab:not(.menuitem-iconic) .menu-text,
 #historyUndoWindowMenu3:not(.menuitem-iconic)>.menu-text,
 #tabContextUndoList:not(.menuitem-iconic)>.menu-text,
+#ContextUndoList:not(.menuitem-iconic)>.menu-text,
 #tabContextMenu menuitem[label^="Restore All"]:not(.menuitem-iconic) .menu-text,
 :is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice) .sendtab-target:is([clientType="phone"], [clientType="mobile"], [clientType="desktop"]):not(.menuitem-iconic) .menu-text,
 #userScriptsMenu>.menu-text,
@@ -136,7 +137,7 @@ menupopup[menu-api] menuitem:is([type="checkbox"], [type="radio"], [checked]) .m
     position: relative !important;
     width: 16px !important;
     height: 16px !important;
-    margin-inline: 6px 4px !important;
+    margin-inline: 6px !important;
     fill: currentColor !important;
     -moz-context-properties: fill, fill-opacity, stroke !important;
     content: "" !important;
@@ -308,6 +309,7 @@ menupopup[menu-api] menuitem[type="radio"][checked="true"]::before,
 #discardTab:not(.menuitem-iconic)::before,
 #historyUndoWindowMenu3:not(.menuitem-iconic)::before,
 #tabContextUndoList:not(.menuitem-iconic)::before,
+#ContextUndoList:not(.menuitem-iconic)::before,
 #tabContextMenu menuitem[label^="Restore All"]::before,
 :is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice) .sendtab-target:is([clientType="phone"], [clientType="mobile"], [clientType="desktop"])::before,
 :is(#spell-add-to-dictionary, #spell-add-dictionaries, #spell-add-dictionaries-main, #spell-dictionaries)::before,
@@ -636,7 +638,8 @@ menupopup[menu-api] menuitem[type="radio"][checked="true"]::before,
     background-image: url("chrome://browser/skin/window.svg");
 }
 
-#tabContextUndoList:not(.menuitem-iconic)::before {
+#tabContextUndoList:not(.menuitem-iconic)::before,
+#ContextUndoList:not(.menuitem-iconic)::before {
     background-image: url("chrome://browser/skin/tab.svg");
 }
 

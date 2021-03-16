@@ -196,11 +196,10 @@ toolbar {
         --menu-background-color: var(--arrowpanel-background) !important;
         --menupopup-margin: 0;
         --menupopup-padding: 0;
-        --context-padding-inline: 27px 0 !important;
-        --context-margin-inline: -14px 0 !important;
+        --context-padding-inline: 28px 0 !important;
+        --context-margin-inline: -16px 0 !important;
         --context-checkbox-margin: 6px -6px;
-        --context-iconic-margin: 3px 0;
-        --context-iconic-special-margin: 5px -1px;
+        --context-iconic-margin: 6px;
         --menupopup-shadow: none !important;
         --menupopup-border-radius: 3px !important;
         --menu-right-bg: none;

@@ -414,12 +414,12 @@ tabmodalprompt .checkbox-check[checked="true"] {
     z-index: 0 !important; /* to avoid dimming the sidebar and findbar */
 }
 
-.tab-prompt-dialog .dialogBox {
+:is(.tab-prompt-dialog, #window-modal-dialog) .dialogBox {
     margin-top: 0px !important; /* tab-prompt-dialogs are anchored to the top of the browser content area.
     this makes them look like they emerge from under the navbar. */
 }
 
-.tab-prompt-dialog :is(.dialogBox, .dialogFrame) {
+:is(.tab-prompt-dialog, #window-modal-dialog) :is(.dialogBox, .dialogFrame) {
     border-radius: 0 0 5px 5px !important;
 }
 
@@ -428,18 +428,18 @@ tabmodalprompt .checkbox-check[checked="true"] {
 }
 
 /* the resizer is on the right side for ltr languages, and on the left side for rtl languages. adjust the border radius accordingly */
-:is(.content-prompt-dialog, .tab-prompt-dialog)
+:is(.content-prompt-dialog, .tab-prompt-dialog, #window-modal-dialog)
     .dialogBox[resizable="true"]:is(:dir(ltr), :-moz-locale-dir(ltr)),
-:is(.content-prompt-dialog, .tab-prompt-dialog)
+:is(.content-prompt-dialog, .tab-prompt-dialog, #window-modal-dialog)
     .dialogBox[resizable="true"]
     .dialogFrame:is(:dir(ltr), :-moz-locale-dir(ltr)) {
     border-bottom-left-radius: 5px !important;
     border-bottom-right-radius: 0 !important;
 }
 
-:is(.content-prompt-dialog, .tab-prompt-dialog)
+:is(.content-prompt-dialog, .tab-prompt-dialog, #window-modal-dialog)
     .dialogBox[resizable="true"]:is(:dir(rtl), :-moz-locale-dir(rtl)),
-:is(.content-prompt-dialog, .tab-prompt-dialog)
+:is(.content-prompt-dialog, .tab-prompt-dialog, #window-modal-dialog)
     .dialogBox[resizable="true"]
     .dialogFrame:is(:dir(rtl), :-moz-locale-dir(rtl)) {
     border-bottom-left-radius: 0 !important;
@@ -447,7 +447,7 @@ tabmodalprompt .checkbox-check[checked="true"] {
 }
 
 /* blur backdrop filter */
-:is(.content-prompt-dialog, .tab-prompt-dialog) .dialogFrame {
+:is(.content-prompt-dialog, .tab-prompt-dialog, #window-modal-dialog) .dialogFrame {
     background-color: hsla(240, 5.9%, 6.7%, 0.7) !important;
     background-image: url("texture/noise-512x512.png") !important;
     backdrop-filter: blur(5px) !important;
@@ -460,7 +460,7 @@ tabmodalprompt .checkbox-check[checked="true"] {
 }
 
 /* make the box shadow even, i hate offset drop shadows */
-:is(.content-prompt-dialog, .tab-prompt-dialog) .dialogBox {
+:is(.content-prompt-dialog, .tab-prompt-dialog, #window-modal-dialog) .dialogBox {
     box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1), 0 0 8px 2px rgba(0, 0, 0, 0.1) !important;
 }
 
