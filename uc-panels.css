@@ -62,23 +62,32 @@ panel {
     background-color: var(--arrowpanel-dimmed-further) !important;
 }
 
-.panel-footer > button:not([disabled]) {
+.panel-footer > button {
     background-color: var(--arrowpanel-dimmed) !important;
+}
+
+.panel-footer > button[disabled] {
+    background-color: var(--arrowpanel-dimmed) !important;
+    opacity: 0.5;
+}
+
+.panel-footer > button[disabled] .button-text {
+    color: white;
 }
 
 .popup-notification-primary-button {
     border-inline-end: 1px solid var(--panel-separator-color) !important;
 }
 
-.panel-footer .popup-notification-primary-button:not([disabled]) {
+.panel-footer > .popup-notification-primary-button:not([disabled]) {
     background-color: hsl(237, 26%, 30%) !important;
 }
 
-.panel-footer .popup-notification-primary-button:not([disabled]):hover {
+.panel-footer > .popup-notification-primary-button:not([disabled]):hover {
     background-color: hsl(242, 60%, 56%) !important;
 }
 
-.panel-footer .popup-notification-primary-button:not([disabled]):hover:active {
+.panel-footer > .popup-notification-primary-button:not([disabled]):hover:active {
     background-color: hsl(242, 65%, 60%) !important;
 }
 
@@ -90,10 +99,10 @@ popupnotification checkbox .checkbox-check {
 	height: 13px;
     margin-inline-end: 4px !important;
 	padding: 0.5px;
-	border: 1px solid var(--in-content-box-border-color);
+	border: 1px solid var(--in-content-box-border-color) !important;
 	border-radius: 2px;
 	margin: 0;
-	background-color: var(--arrowpanel-dimmed);
+	background-color: var(--arrowpanel-dimmed) !important;
 	background-position: center;
 	background-repeat: no-repeat;
 }
@@ -101,19 +110,20 @@ popupnotification checkbox .checkbox-check {
 popupnotification checkbox .checkbox-check[checked] {
     list-style-image: url("chrome://global/skin/icons/check.svg");
     -moz-context-properties: fill, fill-opacity !important;
-    fill: currentColor;
-    color: hsl(0, 0%, 100%);
-    background-color: var(--purple-35);
+    fill: currentColor !important;
+    color: hsl(0, 0%, 100%) !important;
+    background-color: var(--purple-35) !important;
 }
 
 popupnotification checkbox:hover .checkbox-check:not(:disabled) {
-	background-color: var(--arrowpanel-darker);
+	background-color: var(--arrowpanel-darker) !important;
 }
 
 popupnotification checkbox:hover .checkbox-check[checked]:not(:disabled) {
-	background-color: var(--purple-45);
+	background-color: var(--purple-45) !important;
 }
 
+.addon-installed-notification-content > checkbox,
 popupnotification .popup-notification-body > .popup-notification-checkbox {
     margin-inline-start: 6px !important;
 }
@@ -150,6 +160,10 @@ popupnotification .popup-notification-checkbox:hover .checkbox-check[checked]:no
 .popup-subitem {
 	margin-inline-start: 27px !important;
     margin-top: 1px;
+}
+
+#addon-webext-permissions-notification {
+    padding-top: 5px;
 }
 
 /* hides update popups. i use a script for this now, updateNotificationSlayer.uc.js. use that instead, it's MUCH better. */

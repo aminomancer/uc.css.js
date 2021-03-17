@@ -20,9 +20,9 @@ const ucBookmarksShortcuts = {
         e.stopPropagation();
     },
 
-    addMenuItem() {
-        this.popup = document.getElementById("BMB_bookmarksPopup");
-        this.menuitem = document.createXULElement("menuitem");
+    addMenuItem(popup) {
+        this.popup = popup;
+        this.menuitem = popup.ownerDocument.createXULElement("menuitem");
 
         this.menuitem.id = "BMB_bookmarkThisPage";
         this.menuitem.setAttribute("label", "");
@@ -43,10 +43,10 @@ const ucBookmarksShortcuts = {
 
     init() {
         BookmarkingUI.button.setAttribute("onclick", "ucBookmarksShortcuts.bookmarkClick(event)");
-        document
-            .getElementById("library-button")
-            .setAttribute("onclick", "ucBookmarksShortcuts.bookmarkClick(event)");
-        this.addMenuItem();
+        CustomizableUI.getWidget("library-button")
+            .forWindow(window)
+            .node?.setAttribute("onclick", "ucBookmarksShortcuts.bookmarkClick(event)");
+        this.addMenuItem(BookmarkingUI.button.firstElementChild);
     },
 };
 

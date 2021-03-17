@@ -68,6 +68,9 @@
 
 #page-action-buttons {
     margin-right: 2px !important;
+    display: flex !important;
+    justify-content: end !important;
+    align-items: center !important;
 }
 
 #urlbar-zoom-button {

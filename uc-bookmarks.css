@@ -414,10 +414,6 @@ treechildren::-moz-tree-drop-feedback {
     margin-inline-start: -8px !important;
 }
 
-#BMB_bookmarksPopup {
-    margin-top: -6px !important;
-}
-
 @supports (-moz-bool-pref("browser.proton.enabled")) {
 
 /*     #BMB_bookmarksPopup menupopup[placespopup="true"] {

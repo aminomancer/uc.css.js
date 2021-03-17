@@ -188,11 +188,6 @@ toolbar .toolbarbutton-1:not([disabled])[checked]:hover > .toolbarbutton-icon {
     background-color: var(--toolbarbutton-active-background) !important;
 }
 
-/* bookmarks button's popup is anchored to the wrong element */
-#bookmarks-menu-button {
-    max-height: 28px !important;
-}
-
 #navigator-toolbox,
 #navigator-toolbox > * {
     width: -moz-available;
