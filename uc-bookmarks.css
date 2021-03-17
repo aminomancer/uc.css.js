@@ -431,19 +431,27 @@ treechildren::-moz-tree-drop-feedback {
     #BMB_bookmarksPopup .subviewbutton > .menu-iconic-left {
         margin-inline-end: 5px !important;
     }
-    
+
     #BMB_bookmarksShowAllTop {
         list-style-image: url("chrome://browser/skin/library.svg") !important;
     }
-    
+
     #BMB_bookmarksShowAllTop .menu-iconic-left {
         transform: scaleX(-1);
     }
-    
+
     #BMB_viewBookmarksSidebar {
         list-style-image: url("chrome://browser/skin/sidebars-right.svg") !important;
     }
-    
+
+    #BMB_bookmarkThisPage[data-l10n-id="bookmarks-current-tab"] {
+        list-style-image: url(chrome://browser/skin/bookmark-hollow.svg) !important;
+    }
+
+    #BMB_bookmarkThisPage[data-l10n-id="bookmarks-bookmark-edit-panel"] {
+        list-style-image: url(chrome://browser/skin/bookmark.svg) !important;
+    }
+
     #BMB_bookmarksShowAll:before {
         content: "" !important;
         position: relative !important;
@@ -455,29 +463,29 @@ treechildren::-moz-tree-drop-feedback {
         fill: currentColor !important;
         -moz-context-properties: fill, fill-opacity, stroke !important;
     }
-    
+
     #BMB_bookmarksShowAll .menu-text {
         padding-inline-start: 2px !important;
     }
-    
+
     #BMB_bookmarksShowAll .menu-accel-container:before {
         content: "(" !important;
         display: inline-block !important;
         box-sizing: border-box !important;
         padding-block: 1px !important;
     }
-    
+
     #BMB_bookmarksShowAll .menu-accel-container:after {
         content: ")" !important;
         display: inline-block !important;
         box-sizing: border-box !important;
         padding-block: 1px !important;
     }
-    
+
     #BMB_bookmarksShowAll .menu-accel-container {
         margin-inline: 4px 6px !important;
     }
-    
+
     #BMB_bookmarksShowAll .menu-accel {
         margin-inline: 0 !important;
     }

@@ -200,8 +200,8 @@
     --menupopup-border-radius: 3px;
     --menupopup-margin: 0;
     --menupopup-padding: 0;
-    --context-padding-inline: 27px 0;
-    --context-margin-inline: -14px 0;
+    --context-padding-inline: 28px 0;
+    --context-margin-inline: -16px 0;
     --menupopup-background: var(--arrowpanel-background);
     --menu-background-color: var(--arrowpanel-background) !important;
     --menu-right-bg: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='5px' height='5px' viewBox='0 0 492 492' xml:space='preserve'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M382.678,226.804L163.73,7.86C158.666,2.792,151.906,0,144.698,0s-13.968,2.792-19.032,7.86l-16.124,16.12    c-10.492,10.504-10.492,27.576,0,38.064L293.398,245.9l-184.06,184.06c-5.064,5.068-7.86,11.824-7.86,19.028    c0,7.212,2.796,13.968,7.86,19.04l16.124,16.116c5.068,5.068,11.824,7.86,19.032,7.86s13.968-2.792,19.032-7.86L382.678,265    c5.076-5.084,7.864-11.872,7.848-19.088C390.542,238.668,387.754,231.884,382.678,226.804z'/></svg>");
@@ -263,9 +263,14 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
     background-color: initial !important;
 }
 
-#ContentSelectDropdown > menupopup :is(menuitem, menu) image {
-    margin-left: 3px;
-    margin-right: -3px;
+#ContentSelectDropdown > menupopup :is(menuitem, menu) .menu-iconic-left {
+    padding: 0 !important;
+    appearance: none !important;
+    margin-inline-end: 0 !important;
+}
+
+#ContentSelectDropdown > menupopup :is(menuitem, menu) .menu-iconic-icon {
+    margin-inline: 6px;
 }
 
 #ContentSelectDropdown > menupopup menugroup {
@@ -493,8 +498,8 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
         --toolbarbutton-icon-fill-opacity: 1 !important;
         --tab-min-height: 35px !important;
         --min-tab-height: 35px !important;
-        --context-margin-inline: -14px 0;
-        --context-padding-inline: 27px 0;
+        --context-margin-inline: -16px 0;
+        --context-padding-inline: 28px 0;
         --menupopup-background: var(--arrowpanel-background);
         --menu-background-color: var(--arrowpanel-background) !important;
         --menupopup-margin: 0px 0 0 0;
@@ -566,17 +571,16 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
     }
     
     @supports (-moz-bool-pref("browser.proton.contextmenus.enabled")) {
-
+    
         :root {
             --menupopup-background: transparent;
             --menu-background-color: var(--arrowpanel-background) !important;
             --menupopup-margin: 0;
             --menupopup-padding: 0;
-            --context-padding-inline: 27px 0 !important;
-            --context-margin-inline: -14px 0 !important;
+            --context-padding-inline: 28px 0 !important;
+            --context-margin-inline: -16px 0 !important;
             --context-checkbox-margin: 6px -6px;
-            --context-iconic-margin: 3px 0;
-            --context-iconic-special-margin: 5px -1px;
+            --context-iconic-margin: 6px;
             --menupopup-shadow: none !important;
             --menupopup-border-radius: 3px !important;
             --menu-right-bg: none;
@@ -584,8 +588,9 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
             --menu-right-margin: 4px;
             --menu-right-size: 11px;
         }
-
+    
     }
+    
 
     menupopup {
         -moz-appearance: none !important;
@@ -609,9 +614,14 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
         background-color: initial !important;
     }
 
-    :is(menuitem, menu) image {
-        margin-left: 3px;
-        margin-right: -3px;
+    :is(menuitem, menu) .menu-iconic-left {
+        padding: 0 !important;
+        appearance: none !important;
+        margin-inline-end: 0 !important;
+    }
+
+    :is(menuitem, menu) .menu-iconic-icon {
+        margin-inline: 6px;
     }
 
     menugroup {
@@ -971,16 +981,6 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
 @-moz-document regexp("^(?!about:|chrome:).*") {
     [data-thumb="1"] {
         visibility: collapse;
-    }
-}
-
-@-moz-document media-document(video) {
-    #controlsContainer:not([hidden]) #controlBar #scrubberStack {
-        display: inline-block !important;
-    }
-
-    #controlsContainer:not([hidden]) #pictureInPictureToggle[hidden] ~ #controlBar #playButton {
-        display: none !important;
     }
 }
 

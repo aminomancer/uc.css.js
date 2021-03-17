@@ -257,7 +257,7 @@
             outer.ready = true;
             inner.className = "container";
             inner.id = "nav-bar-toolbarbutton-slider";
-            inner.style.cssText = "display: flex; flex-flow: row; flex-direction: row";
+            inner.style.cssText = "display: -moz-box; height: var(--urlbar-container-height);";
             outer.setAttribute("overflows", "false");
             urlbar.style.minWidth = "unset";
             // these attributes aren't exactly necessary, just there for consistency in firefox and maybe future extension.

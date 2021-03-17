@@ -285,8 +285,12 @@
         list-style-image: url(chrome://browser/skin/bookmarks-toolbar.svg);
     }
 
-    #panelMenuBookmarkThisPage {
+    #panelMenuBookmarkThisPage[data-l10n-id="bookmarks-current-tab"] {
         list-style-image: url(chrome://browser/skin/bookmark-hollow.svg);
+    }
+
+    #panelMenuBookmarkThisPage[data-l10n-id="bookmarks-bookmark-edit-panel"] {
+        list-style-image: url(chrome://browser/skin/bookmark.svg);
     }
 
     #PanelUI-fxa-menu-remotetabs-button,
