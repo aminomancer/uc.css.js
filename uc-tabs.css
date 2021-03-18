@@ -15,6 +15,10 @@
     z-index: 1 !important;
 }
 
+.tab-loading-burst {
+    z-index: 2 !important;
+}
+
 .tabbrowser-tab:not([selected])[pinned] .tab-background {
     background: var(--tab-pinned) !important;
 }
@@ -125,14 +129,14 @@
 
 /* tab top border roundness */
 #TabsToolbar .tabbrowser-tab,
-#TabsToolbar .tabbrowser-tab :is(.tab-stack, .tab-background, .tab-content) {
+#TabsToolbar .tabbrowser-tab :is(.tab-stack, .tab-background, .tab-content, .tab-loading-burst) {
     border-top-right-radius: 0px !important;
     border-top-left-radius: 5px !important;
     overflow: hidden;
 }
 
 #TabsToolbar .tabbrowser-tab[selected],
-#TabsToolbar .tabbrowser-tab[selected] :is(.tab-stack, .tab-background, .tab-content) {
+#TabsToolbar .tabbrowser-tab[selected] :is(.tab-stack, .tab-background, .tab-content, .tab-loading-burst) {
     border-top-right-radius: 5px !important;
     border-top-left-radius: 5px !important;
 }
@@ -140,35 +144,35 @@
 #TabsToolbar .tabbrowser-tab[multiselected]:not([pinned]),
 #TabsToolbar
     .tabbrowser-tab[multiselected]:not([pinned])
-    :is(.tab-stack, .tab-background, .tab-content) {
+    :is(.tab-stack, .tab-background, .tab-content, .tab-loading-burst) {
     border-top-left-radius: 5px !important;
     border-top-right-radius: 5px !important;
 }
 
 #TabsToolbar .tabbrowser-tab:not([selected]):hover,
-#TabsToolbar .tabbrowser-tab:not([selected]):hover :is(.tab-stack, .tab-background, .tab-content) {
+#TabsToolbar .tabbrowser-tab:not([selected]):hover :is(.tab-stack, .tab-background, .tab-content, .tab-loading-burst) {
     border-top-right-radius: 5px !important;
 }
 
 #TabsToolbar .tabbrowser-tab[last-visible-tab]:not([justmoved]),
 #TabsToolbar
     .tabbrowser-tab[last-visible-tab]:not([justmoved])
-    :is(.tab-stack, .tab-background, .tab-content),
+    :is(.tab-stack, .tab-background, .tab-content, .tab-loading-burst),
 #TabsToolbar .tabbrowser-tab[last-visible-tab]:not([justmoved]):hover,
 #TabsToolbar
     .tabbrowser-tab[last-visible-tab]:not([justmoved]):hover
-    :is(.tab-stack, .tab-background, .tab-content) {
+    :is(.tab-stack, .tab-background, .tab-content, .tab-loading-burst) {
     border-top-right-radius: 0 !important;
 }
 
 #TabsToolbar .tabbrowser-tab[first-visible-tab]:not([justmoved]),
 #TabsToolbar
     .tabbrowser-tab[first-visible-tab]:not([justmoved])
-    :is(.tab-stack, .tab-background, .tab-content),
+    :is(.tab-stack, .tab-background, .tab-content, .tab-loading-burst),
 #TabsToolbar .tabbrowser-tab[first-visible-tab]:not([justmoved]):hover,
 #TabsToolbar
     .tabbrowser-tab[first-visible-tab]:not([justmoved]):hover
-    :is(.tab-stack, .tab-background, .tab-content) {
+    :is(.tab-stack, .tab-background, .tab-content, .tab-loading-burst) {
     border-top-left-radius: 0 !important;
 }
 
