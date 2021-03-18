@@ -36,8 +36,15 @@
     display: -moz-inline-box;
 }
 
+.popup-notification-warning:empty,
+.addon-webext-perm-list:empty {
+    display: none !important;
+}
+
 .panel-footer.popup-notification-button-container {
-    gap: 12px !important;
+    gap: var(--arrowpanel-padding) !important;
+    margin-inline: var(--arrowpanel-padding) !important;
+    margin-bottom: var(--arrowpanel-padding) !important;
 }
 
 .panel-footer.popup-notification-button-container > .popup-notification-button {
@@ -330,6 +337,35 @@ popupnotification .popup-notification-checkbox:hover .checkbox-check[checked]:no
 #identity-popup-multiView .panel-button[disabled="true"] {
     opacity: 0.6 !important;
     pointer-events: none !important;
+}
+
+description#identity-popup-content-verifier {
+    margin-top: 0 !important;
+}
+
+description#identity-popup-content-owner {
+    margin-bottom: revert !important;
+    padding-inline-start: 8px;
+    margin-top: 0 !important;
+}
+
+description#identity-popup-content-supplemental {
+	margin-top: revert !important;
+    padding-inline-start: 16px;
+}
+
+.panel-view-body-unscrollable {
+	overflow-y: scroll !important;
+}
+
+.identity-popup-warning-yellow {
+    color: inherit !important;
+    background-color: var(--warning-background) !important;
+    --lwt-popup-brighttext-url-color: var(--urlbar-popup-action-color);
+}
+
+.identity-popup-warning-gray {
+    --lwt-popup-brighttext-url-color: var(--urlbar-popup-url-color);
 }
 
 #downloadsFooterButtons {

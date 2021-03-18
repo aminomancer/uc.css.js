@@ -6,17 +6,17 @@
     background: var(--tab-hover) !important;
 }
 
+.tabbrowser-tab:is([visuallyselected], [selected]) .tab-background {
+    background-image: none !important;
+    background: var(--toolbar-bgcolor) !important;
+}
+
 .tabbrowser-tab:not([selected])[pinned]:hover .tab-background {
     background: var(--tab-pinned-hover) !important;
 }
 
 .tabbrowser-tab:not([selected], [pinned], [multiselected], :hover) .tab-background {
     background: var(--lwt-accent-color) !important;
-    z-index: 1 !important;
-}
-
-.tab-loading-burst {
-    z-index: 2 !important;
 }
 
 .tabbrowser-tab:not([selected])[pinned] .tab-background {
@@ -40,6 +40,11 @@
 .tab-background[multiselected="true"]:not([selected="true"]) > .tab-background-inner {
     background: initial !important;
     opacity: initial !important;
+}
+
+#tabbrowser-tabs[movingtab] .tabbrowser-tab *,
+#tabbrowser-tabs .tabbrowser-tab[justmoved] * {
+    transform: none !important;
 }
 
 .tabbrowser-tab .tab-content {
@@ -194,8 +199,22 @@
     z-index: 2;
 }
 
+.tabbrowser-tab :is(.tab-line, .tab-context-line) {
+    z-index: 3;
+}
+
 .tabbrowser-tab .tab-content {
     z-index: 1;
+}
+
+.tab-loading-burst {
+    z-index: 2;
+    pointer-events: none;
+}
+
+.tab-loading-burst[pinned]::before {
+	margin-inline-start: calc((var(--pinned-tab-width) / 2) - (var(--pinned-tab-width) * 0.05)) !important;
+    width: calc(var(--pinned-tab-width) * 0.05) !important;
 }
 
 .tabbrowser-tab[pinned] .tab-stack:before,
@@ -367,8 +386,8 @@
 }
 
 #tabbrowser-tabs[positionpinnedtabs] .tabbrowser-tab[pinned] .tab-content {
-    min-width: 36px !important;
-    max-width: 36px !important;
+    min-width: var(--pinned-tab-width) !important;
+    max-width: var(--pinned-tab-width) !important;
 }
 
 #tabbrowser-tabs[positionpinnedtabs]

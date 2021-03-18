@@ -92,15 +92,23 @@ link[href="chrome://global/skin/arrowscrollbox.css"] ~ :is(#scrollbutton-up, #sc
 /* dropmarkers and other select/menulist stuff */
 @-moz-document url(chrome://browser/content/browser.xhtml)
 {
+    menulist:not([native]) {
+        padding-inline: 6px;
+    }
+
     panel menulist::part(dropmarker-icon) {
-        -moz-appearance: none !important;
-        list-style-image: url("chrome://devtools/skin/images/select-arrow.svg") !important;
+        appearance: none;
+        list-style-image: url("chrome://devtools/skin/images/select-arrow.svg");
         margin-block: 0 !important;
+    }
+
+    panel menulist::part(dropmarker) {
+        margin-inline-start: 6px;
     }
 
     panel menulist::part(dropmarker),
     panel menulist::part(icon) {
-        -moz-context-properties: fill, fill-opacity !important;
+        -moz-context-properties: fill, fill-opacity;
     }
 
     panel menulist::part(label) {
@@ -108,12 +116,12 @@ link[href="chrome://global/skin/arrowscrollbox.css"] ~ :is(#scrollbutton-up, #sc
     }
 
     menulist::part(label) {
-        -moz-appearance: none !important;
-        margin-block: 0 !important;
+        appearance: none;
+        margin-block: 0;
     }
 
     #editBMPanel_folderMenuList::part(icon) {
-        margin-inline: 3px 2px !important;
+        margin-inline: 3px;
     }
 }
 
@@ -126,5 +134,10 @@ link[href="chrome://global/skin/arrowscrollbox.css"] ~ :is(#scrollbutton-up, #sc
 /* prevent hiding the close button when audio is playing. undoes an irritating rule in the proton update */
 #navigator-toolbox:not(:hover) .tab-icon-overlay:not([pinned], [sharing], [crashed]):is([soundplaying], [muted], [activemedia-blocked]),
 #navigator-toolbox:hover .tab-icon-stack:not([pinned], [sharing], [crashed]):is([soundplaying], [muted], [activemedia-blocked]) > :not(.tab-icon-overlay) {
+	opacity: revert;
+}
+
+#toolbar-menubar:not(:hover) + #TabsToolbar:not(:hover) .tab-icon-overlay:not([pinned], [sharing], [crashed]):is([soundplaying], [muted], [activemedia-blocked]),
+:is(#toolbar-menubar:hover + #TabsToolbar, #TabsToolbar:hover) .tab-icon-stack:not([pinned], [sharing], [crashed]):is([soundplaying], [muted], [activemedia-blocked]) > :not(.tab-icon-overlay) {
 	opacity: revert;
 }

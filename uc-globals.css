@@ -18,7 +18,8 @@
     --identity-box-hover-bg: hsla(236, 49%, 25%, 0.4);
     --secure-color: hsl(119, 80%, 60%);
     --insecure-text-color: hsla(0, 100%, 50%, 0.867);
-    --warning-color: hsl(0, 100%, 66%);
+    --warning-color: hsl(355, 100%, 66%);
+    --warning-background: hsla(2, 100%, 66%, 25%);
     --protection-idle-color: hsl(205, 100%, 67%);
     --protection-active-color: hsl(358, 98%, 66%);
     --update-badge-bg: hsl(125, 81%, 57%);
