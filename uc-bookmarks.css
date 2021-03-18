@@ -20,7 +20,11 @@
 
 /* 'add bookmark' popup menu formatting */
 #editBookmarkPanel {
-    min-width: 270px !important;
+    min-width: 25em !important;
+}
+
+#editBookmarkPanelRows > vbox {
+	margin-bottom: 4px !important;
 }
 
 #editBookmarkPanel menulist {
@@ -28,12 +32,15 @@
     background-color: var(--ui-textbox-bgcolor) !important;
     line-height: normal;
     padding-block: 2px;
-    padding-inline-start: 4px;
-    padding-right: 2px;
+    padding-inline: 3px 5px !important;
     color: #fff !important;
     border: none !important;
     border-radius: 2px !important;
     min-height: 24px !important;
+    box-shadow: none !important;
+    --menupopup-inner-padding: 0 !important;
+    --context-menuitem-border-radius: 0 !important;
+    margin: 2px 4px !important;
 }
 
 #editBookmarkPanel menulist[open="true"] {
@@ -114,6 +121,10 @@
     outline: none !important;
 }
 
+#editBMPanel_newFolderBox {
+    margin-block: 6px 0 !important;
+}
+
 #editBookmarkPanel menuitem,
 #editBookmarkPanel menu {
     -moz-appearance: none !important;
@@ -176,8 +187,22 @@
     background-color: var(--ebmp-focus-bgcolor) !important;
 } */
 
+#editBookmarkPanelBottomButtons {
+    margin: 0 14px 14px 14px !important;
+    gap: 8px !important;
+    min-width: unset !important;
+}
+
 #editBookmarkPanel .panel-footer > button.editBookmarkPanelBottomButton {
     border: none !important;
+    flex-grow: 5 !important;
+    margin: 0 !important;
+    padding-inline: 0 !important;
+    flex-basis: 25% !important;
+}
+
+#editBookmarkPanel .panel-footer > button.editBookmarkPanelBottomButton[default] {
+    flex-grow: 3 !important;
 }
 
 #editBookmarkPanelDoneButton {

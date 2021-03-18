@@ -15,6 +15,27 @@ menupopup[placespopup="true"]::part(innerbox) {
     border: none !important;
 }
 
+/* padding for proton context menus */
+:is(#back-button, #forward-button, #viewButton) > menupopup::part(arrowscrollbox),
+:is(.popup-notification-dropmarker, #main-menubar, #PlacesToolbar, #places) menupopup::part(arrowscrollbox),
+:is(#toolbar-context-menu, #tabContextMenu, #contentAreaContextMenu, #backForwardMenu, #placesContext, #pageActionContextMenu, .search-one-offs-context-menu, #SyncedTabsSidebarContext, .textbox-contextmenu, #customizationPanelItemContextMenu, #customizationPaletteItemContextMenu, #customization-toolbar-menu, #new-tab-button-popup, #new-tab-button, #downloadsContextMenu, menupopup[menu-api], #ContentSelectDropdown, menupopup.in-menulist, .new-tab-popup, #openHandlerPopup)::part(arrowscrollbox),
+:is(#back-button, #forward-button, #viewButton) > menupopup menupopup::part(arrowscrollbox),
+:is(.popup-notification-dropmarker, #main-menubar, #PlacesToolbar, #places) menupopup menupopup::part(arrowscrollbox),
+:is(#toolbar-context-menu, #tabContextMenu, #contentAreaContextMenu, #backForwardMenu, #placesContext, #pageActionContextMenu, .search-one-offs-context-menu, #SyncedTabsSidebarContext, .textbox-contextmenu, #customizationPanelItemContextMenu, #customizationPaletteItemContextMenu, #customization-toolbar-menu, #new-tab-button-popup, #new-tab-button, #downloadsContextMenu, menupopup[menu-api], #ContentSelectDropdown, menupopup.in-menulist, .new-tab-popup, #openHandlerPopup) menupopup::part(arrowscrollbox)
+{
+    padding: var(--menupopup-inner-padding) !important;
+}
+
+@-moz-document url-prefix("chrome://devtools/content/") {
+    menupopup::part(arrowscrollbox) {
+        padding: var(--menupopup-inner-padding) !important;
+    }
+}
+
+#ContentSelectDropdown > menupopup::part(arrowscrollbox) {
+    padding: var(--menupopup-inner-padding) !important;
+}
+
 /* hide scroll buttons — doesn't seem to work anymore. put this in your regular userChrome.css instead:
 link[href="chrome://global/skin/arrowscrollbox.css"] ~ :is(#scrollbutton-up, #scrollbutton-down) {
         visibility: collapse;
@@ -64,8 +85,6 @@ link[href="chrome://global/skin/arrowscrollbox.css"] ~ :is(#scrollbutton-up, #sc
     }
 }
 
-
-
 #identity-icon {
     list-style-image: var(--default-identity-icon);
 }
@@ -73,7 +92,7 @@ link[href="chrome://global/skin/arrowscrollbox.css"] ~ :is(#scrollbutton-up, #sc
 /* dropmarkers and other select/menulist stuff */
 @-moz-document url(chrome://browser/content/browser.xhtml)
 {
-    panel menulist::part(dropmarker) {
+    panel menulist::part(dropmarker-icon) {
         -moz-appearance: none !important;
         list-style-image: url("chrome://devtools/skin/images/select-arrow.svg") !important;
         margin-block: 0 !important;
@@ -82,6 +101,10 @@ link[href="chrome://global/skin/arrowscrollbox.css"] ~ :is(#scrollbutton-up, #sc
     panel menulist::part(dropmarker),
     panel menulist::part(icon) {
         -moz-context-properties: fill, fill-opacity !important;
+    }
+
+    panel menulist::part(label) {
+        font-weight: normal;
     }
 
     menulist::part(label) {

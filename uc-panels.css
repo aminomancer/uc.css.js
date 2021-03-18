@@ -48,32 +48,28 @@
     border-inline: 0 !important;
 }
 
-.panel-footer {
-    background-color: initial !important;
-}
-
 panel {
     --panel-separator-color: var(--desaturate-dimmed) !important;
 }
 
-.panel-footer > button:not([disabled]):is(:hover:active, [open]) {
+.popup-notification-button-container > button:not([disabled]):is(:hover:active, [open]) {
     background-color: var(--arrowpanel-dimmed-even-further) !important;
 }
 
-.panel-footer > button:not([disabled]):hover {
+.popup-notification-button-container > button:not([disabled]):hover {
     background-color: var(--arrowpanel-dimmed-further) !important;
 }
 
-.panel-footer > button {
+.popup-notification-button-container > button {
     background-color: var(--arrowpanel-dimmed) !important;
 }
 
-.panel-footer > button[disabled] {
+.popup-notification-button-container > button[disabled] {
     background-color: var(--arrowpanel-dimmed) !important;
     opacity: 0.5;
 }
 
-.panel-footer > button[disabled] .button-text {
+.popup-notification-button-container > button[disabled] .button-text {
     color: white;
 }
 
@@ -194,6 +190,226 @@ popupnotification .popup-notification-checkbox:hover .checkbox-check[checked]:no
 
 #plugins-notification-icon[extraAttr="inactive"] > #plugin-icon-badge {
     fill-opacity: 1;
+}
+
+#identity-popup-mainView #identity-popup-security-description description {
+    font-size: smaller;
+    height: 0.5em !important;
+    line-height: 0.1em !important;
+}
+
+/* connection security popup yellow "parts of this page" warning styling */
+.identity-popup-warning-yellow {
+    color: var(--warning-color) !important;
+    background-color: transparent !important;
+    border: none !important;
+}
+
+#identity-popup-mainView
+    > #identity-popup-security
+    > .identity-popup-security-content
+    > .identity-popup-security-connection {
+    background-position: 2.05em 40% !important;
+    background-size: 18px auto !important;
+}
+
+/* url bar popups */
+#identity-popup,
+#protections-popup,
+.popup-notification-panel {
+    fill: currentColor;
+    -moz-context-properties: fill, fill-opacity, opacity, stroke, stroke-opacity !important;
+    margin-top: calc(var(--toolbarbutton-inner-padding) - 4px) !important;
+}
+
+/* #protections-popup {
+    margin-left: -17px !important;
+} */
+
+#identity-popup[connection^="secure"] .identity-popup-security-connection,
+:root[lwt-popup-brighttext] .identity-popup-connection-secure {
+    /*   fill: hsl(114, 100%, 37%) !important; */
+    fill: var(--secure-color) !important;
+    color: var(--secure-color) !important;
+}
+
+#protections-popup-mainView-panel-header-section {
+    background: radial-gradient(
+        circle farthest-side at top right,
+        var(--protection-header-gradient-color-1),
+        var(--protection-header-gradient-color-2),
+        var(--protection-header-gradient-color-3)
+    ) !important;
+}
+
+#protections-popup-milestones {
+    border-radius: 4px !important;
+    overflow: hidden !important;
+    background: radial-gradient(
+        circle farthest-side at top left,
+        hsla(318, 73%, 69%, 0.1),
+        hsla(265, 100%, 69%, 0.25),
+        hsla(217, 90%, 39%, 0.5)
+    ) !important;
+}
+
+#protections-popup-milestones-content {
+    border-radius: 4px !important;
+}
+
+#identity-popup-security-expander > .button-box {
+    border: none !important;
+}
+
+#protections-popup-not-blocking-section-why {
+    border-radius: 0.1% !important;
+}
+
+.identity-popup-warning-box {
+    border-radius: 4px !important;
+    border-color: transparent !important;
+}
+
+.identity-popup-section {
+    -moz-box-align: center;
+}
+
+.identity-popup-expander {
+    width: min-content !important;
+    padding: 10px !important;
+    box-shadow: none !important;
+    list-style-image: url(chrome://global/skin/icons/menu-arrow-left.svg) !important;
+    background: none !important;
+}
+
+.identity-popup-expander:-moz-locale-dir(ltr) {
+    transform: scaleX(-1);
+}
+
+.identity-popup-expander .button-icon {
+    width: 16px !important;
+    height: 16px !important;
+}
+
+.identity-popup-expander .button-box {
+    border-radius: var(--toolbarbutton-border-radius);
+    width: 32px;
+    height: 32px;
+}
+
+.identity-popup-expander:hover .button-box {
+	background-color: var(--arrowpanel-dimmed);
+}
+
+.identity-popup-expander:hover:active .button-box {
+	background-color: var(--arrowpanel-dimmed-further);
+}
+
+#identity-popup-multiView .panel-button {
+    appearance: none !important;
+    color: currentColor !important;
+    fill: currentColor !important;
+    background-color: var(--arrowpanel-dimmed) !important;
+    border-radius: 3px !important;
+    padding: 0.15em 0.4em !important;
+    align-self: center !important;
+}
+
+#identity-popup-multiView .panel-button:not([disabled]):is(:hover:active, [open]) {
+    background-color: var(--arrowpanel-dimmed-even-further) !important;
+}
+
+#identity-popup-multiView .panel-button:not([disabled]):hover {
+    background-color: var(--arrowpanel-dimmed-further) !important;
+}
+
+#identity-popup-multiView .panel-button:not([disabled]) {
+    background-color: var(--arrowpanel-dimmed) !important;
+}
+
+#identity-popup-multiView .panel-button[disabled="true"] {
+    opacity: 0.6 !important;
+    pointer-events: none !important;
+}
+
+#downloadsFooterButtons {
+    margin: 0 !important;
+}
+
+#downloadsFooterButtons > button {
+	padding-inline: 16px !important;
+	padding-block: 10px 11px !important;
+    border-radius: 0 !important;
+}
+
+#downloadsListBox > .download-state > toolbarseparator {
+    visibility: collapse !important;
+}
+
+#downloadsListBox > .download-state {
+    min-height: 66px !important;
+    height: 66px !important;
+    -moz-box-align: center !important;
+    border: none !important;
+}
+
+.downloadsPanelFooterButton:hover {
+    outline: none !important;
+}
+
+#downloadsHistory {
+    margin-top: 0 !important;
+}
+
+#downloadsListBox > richlistitem[state="1"][exists] .downloadMainArea:hover,
+#downloadsListBox > richlistitem:not([verdict]) > .downloadButton:hover,
+#downloadsListBox > richlistitem[verdict]:hover {
+    background-color: unset !important;
+}
+
+#downloadsListBox > .download-state:hover {
+    background-image: linear-gradient(
+        to right,
+        hsla(235.86, 100%, 82.94%, 0.092) 7.1%,
+        hsla(235.86, 100%, 82.94%, 0.075) 20.9%,
+        hsla(235.86, 100%, 82.94%, 0.069) 34.1%,
+        hsla(235.86, 100%, 82.94%, 0.04) 47.1%,
+        hsla(235.86, 100%, 82.94%, 0.025) 60%,
+        hsla(235.86, 95%, 76.94%, 0.02) 73%,
+        hsla(235.86, 90%, 73.94%, 0.015) 86.3%
+    ) !important;
+}
+
+#downloadsListBox .downloadContainer {
+    min-height: 66px !important;
+}
+
+#downloadsListBox > .download-state > .downloadButton {
+    min-height: 56px !important;
+    min-width: 56px !important;
+    margin: 5px !important;
+    border-radius: 100% !important;
+    -moz-box-align: center !important;
+    background: none !important;
+    -moz-box-pack: center !important;
+}
+
+#downloadsListBox > .download-state > .downloadButton:hover .button-box {
+    background: var(--arrowpanel-dimmed) !important;
+}
+
+#downloadsListBox > .download-state > .downloadButton .button-box {
+    min-width: 35.5px !important;
+    max-width: 35.5px !important;
+    min-height: 35.5px !important;
+    max-height: 35.5px !important;
+    border-radius: 100% !important;
+}
+
+#downloadsListBox > .download-state > .downloadButton .button-box .button-icon {
+    width: 22px !important;
+    height: auto !important;
+    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M17.3 9.4h10.4v-.2c0-1.5-.9-2.6-2-2.6h-5.8v-.3c0-.6-1.5-2-2.8-2H4.9v7h8.5c3 0 3.9-1.9 3.9-1.9zM29 13c0-.6-.6-1.1-1.5-1.7h-9s-1.5 2.4-3.7 2.4H5.4C3 13.7 3 15.9 3 15.9l1.1 9.7c0 1.5.9 2.4 2.4 2.4h19.1c1.5 0 2.4-.9 2.4-2.4l1-11.9V13z'/></svg>") !important;
 }
 
 /* grid overflow menu (i don't have an overflow menu at all thanks to the toolbar button slider script. but just in case) */
