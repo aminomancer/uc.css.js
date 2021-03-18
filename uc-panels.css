@@ -30,7 +30,9 @@
 
 .protections-popup-category::after {
 	content: url(chrome://global/skin/icons/menu-arrow.svg) !important;
-    transform: translateX(3px) !important;
+    scale: none !important;
+    translate: none !important;
+    transform: translateX(2px) !important;
     display: -moz-inline-box;
 }
 
