@@ -6,9 +6,8 @@ menupopup::part(arrowscrollbox-scrollbox) {
     scroll-behavior: smooth !important;
 }
 
-/* style the scrollbox so it works without scroll buttons */
-menupopup::part(arrowscrollbox) {
-    padding-bottom: 0 !important;
+#BMB_bookmarksPopup menupopup::part(arrowscrollbox) {
+	padding-block: 4px;
 }
 
 menupopup[placespopup="true"]::part(innerbox) {
@@ -127,7 +126,6 @@ link[href="chrome://global/skin/arrowscrollbox.css"] ~ :is(#scrollbutton-up, #sc
 
 /* proton stuff */
 .subviewbutton > menupopup::part(innerbox) {
-    padding-block: 4px;
     border-radius: 5px;
 }
 

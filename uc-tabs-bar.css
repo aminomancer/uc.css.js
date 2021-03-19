@@ -402,20 +402,30 @@ link[href$="global.css"] ~ spacer[part="arrowscrollbox-overflow-end-indicator"] 
 }
 
 /* all tabs button popup */
+.all-tabs-item {
+    border-radius: var(--arrowpanel-menuitem-border-radius);
+    margin-inline: 4px;
+}
+
+#allTabsMenu-allTabsViewTabs {
+    padding: var(--panel-subview-body-padding) !important;
+}
+
 .all-tabs-item[selected] {
     font-weight: normal !important;
-    background-color: var(--arrowpanel-dimmed) !important;
-    box-shadow: inset 4px 0 var(--toolbarbutton-icon-fill-attention) !important;
+    background-color: var(--arrowpanel-dimmed-further) !important;
+    box-shadow: none !important;
+    background-image: linear-gradient(to right, var(--toolbarbutton-icon-fill-attention) 0, var(--toolbarbutton-icon-fill-attention) 4px, transparent 4px) !important;
 }
 
 .all-tabs-item:not([selected]):is(:hover, [_moz-menuactive]) {
-    background-color: hsla(240, 100%, 82%, 0.1) !important;
+    background-color: var(--arrowpanel-dimmed) !important;
 }
 
 .all-tabs-item:not([selected]):is(:hover, [_moz-menuactive]):active {
-    background-color: hsla(240, 100%, 84%, 0.13) !important;
+    background-color: var(--arrowpanel-dimmed-further) !important;
 }
 
-.all-tabs-item[pending] {
+.all-tabs-item[pending] .all-tabs-button {
     opacity: 0.6;
 }
