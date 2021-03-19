@@ -186,10 +186,6 @@ link[href$="global.css"] ~ spacer[part="arrowscrollbox-overflow-end-indicator"] 
     margin-right: 329.5px !important;
 }
 
-.tab-background {
-    border: none !important;
-}
-
 /* get rid of drop shadow drawn on leftmost visible tab */
 .tabbrowser-arrowscrollbox > .arrowscrollbox-overflow-start-indicator {
     visibility: collapse !important;
