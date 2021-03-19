@@ -96,6 +96,8 @@
     --menupopup-background: var(--arrowpanel-background);
     --menu-background-color: var(--arrowpanel-background) !important;
     --menupopup-margin: 0px 0 0 0;
+    --menupopup-child-margin-block-start: 0;
+    --menupopup-child-margin-inline-start: 0;
     --menupopup-padding: 0;
     --menupopup-inner-padding: 0;
     --context-checkbox-margin: 6px -5.5px;
@@ -200,6 +202,8 @@ toolbar {
         --menupopup-background: transparent;
         --menu-background-color: var(--arrowpanel-background) !important;
         --menupopup-margin: 0;
+        --menupopup-child-margin-block-start: -4px;
+        --menupopup-child-margin-inline-start: 4px;
         --menupopup-padding: 0;
         --menupopup-inner-padding: 4px;
         --context-padding-inline: 28px 0 !important;

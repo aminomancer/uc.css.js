@@ -27,6 +27,14 @@ menupopup[menu-api],
     overflow: hidden !important;
 }
 
+:is(#back-button, #forward-button, #viewButton) > menupopup menu > menupopup,
+:is(.popup-notification-dropmarker, #main-menubar, #PlacesToolbar, #places) menupopup menu > menupopup,
+:is(#toolbar-context-menu, #tabContextMenu, #contentAreaContextMenu, #backForwardMenu, #placesContext, #pageActionContextMenu, .search-one-offs-context-menu, #SyncedTabsSidebarContext, .textbox-contextmenu, #customizationPanelItemContextMenu, #customizationPaletteItemContextMenu, #customization-toolbar-menu, #new-tab-button-popup, #new-tab-button, #downloadsContextMenu, menupopup[menu-api], #ContentSelectDropdown, menupopup.in-menulist, .new-tab-popup, #openHandlerPopup)
+    menu > menupopup {
+    margin-inline-start: var(--menupopup-child-margin-inline-start) !important;
+    margin-block-start: var(--menupopup-child-margin-block-start) !important;
+}
+
 .panel-arrowcontent {
     border-radius: var(--menupopup-border-radius) !important;
     overflow: hidden !important;
@@ -188,30 +196,6 @@ menupopup.in-menulist {
     --menu-background-color: var(--ui-secondary-bg) !important;
 }
 
-:is(#backForwardMenu, #back-button, #forward-button)
-    menuitem:is([type="checkbox"], [checked="true"], [type="radio"])
-    > .menu-iconic-left
-    > .menu-iconic-icon {
-    display: -moz-inline-box !important;
-}
-
-:is(#backForwardMenu, #back-button, #forward-button) menuitem[type="radio"] > .menu-iconic-left {
-    -moz-appearance: none !important;
-    padding-right: 7px !important;
-    fill: currentColor !important;
-    -moz-context-properties: fill, fill-opacity !important;
-    background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTIgMmM1LjUxNCAwIDEwIDQuNDg2IDEwIDEwcy00LjQ4NiAxMC0xMCAxMC0xMC00LjQ4Ni0xMC0xMCA0LjQ4Ni0xMCAxMC0xMHptMC0yYy02LjYyNyAwLTEyIDUuMzczLTEyIDEyczUuMzczIDEyIDEyIDEyIDEyLTUuMzczIDEyLTEyLTUuMzczLTEyLTEyLTEyem0wIDZjLTMuMzEzIDAtNiAyLjY4Ny02IDZzMi42ODcgNiA2IDZjMy4zMTQgMCA2LTIuNjg3IDYtNnMtMi42ODYtNi02LTZ6IiBmaWxsPSJjb250ZXh0LWZpbGwiIGZpbGwtb3BhY2l0eT0iY29udGV4dC1maWxsLW9wYWNpdHkiLz48L3N2Zz4=")
-        5.5px 0px no-repeat !important;
-    background-size: 16px !important;
-    padding-left: 3px !important;
-    margin-left: 0 !important;
-}
-
-:is(#backForwardMenu, #back-button, #forward-button) menuitem[type="radio"] {
-    padding: 0px !important;
-    color: var(--lwt-toolbarbutton-icon-fill) !important;
-}
-
 @-moz-document url(chrome://browser/content/browser.xhtml) {
     panel menulist {
         appearance: none !important;
@@ -353,25 +337,6 @@ menupopup.in-menulist {
     /* #context-bookmarkpage {
         list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M8.6 3.3c-.3-.5-1-.5-1.3 0l-.7 1.5c-.4.7-1.1 1.2-1.9 1.3l-1.6.3c-.6.1-.8.8-.4 1.2l1.1 1.2c.6.6.8 1.4.7 2.2l-.2 1.6c-.1.6.5 1 1 .7l1.5-.7c.7-.4 1.6-.4 2.3 0l1.5.7c.5.2 1.1-.2 1-.7l-.2-1.6c-.1-.8.2-1.6.7-2.2l1.1-1.2c.4-.4.2-1.1-.4-1.2l-1.6-.3c-.7-.1-1.4-.6-1.8-1.3l-.8-1.5zM9.1 1C8.6.1 7.4.1 6.9 1L5.3 4c-.2.4-.5.6-.9.6L1 5.3c-1 .2-1.3 1.3-.7 2l2.4 2.5c.2.3.4.6.3 1l-.5 3.5c-.1.9.9 1.7 1.7 1.2L7.5 14c.3-.2.7-.2 1 0l3.2 1.5c.9.4 1.8-.3 1.7-1.2l-.5-3.5c0-.4.1-.7.3-1l2.4-2.5c.7-.7.3-1.8-.7-2l-3.4-.6c-.4-.1-.7-.3-.8-.6L9.1 1z' fill-rule='evenodd' clip-rule='evenodd'/></svg>") !important;
     } */
-
-    :is(#backForwardMenu, #back-button, #forward-button)
-        menuitem[type="radio"]
-        > .menu-iconic-left {
-        -moz-appearance: none !important;
-        padding-right: 5.33px !important;
-        fill: currentColor !important;
-        -moz-context-properties: fill, fill-opacity !important;
-        list-style-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTIgMmM1LjUxNCAwIDEwIDQuNDg2IDEwIDEwcy00LjQ4NiAxMC0xMCAxMC0xMC00LjQ4Ni0xMC0xMCA0LjQ4Ni0xMCAxMC0xMHptMC0yYy02LjYyNyAwLTEyIDUuMzczLTEyIDEyczUuMzczIDEyIDEyIDEyIDEyLTUuMzczIDEyLTEyLTUuMzczLTEyLTEyLTEyem0wIDZjLTMuMzEzIDAtNiAyLjY4Ny02IDZzMi42ODcgNiA2IDZjMy4zMTQgMCA2LTIuNjg3IDYtNnMtMi42ODYtNi02LTZ6IiBmaWxsPSJjb250ZXh0LWZpbGwiIGZpbGwtb3BhY2l0eT0iY29udGV4dC1maWxsLW9wYWNpdHkiLz48L3N2Zz4=") !important;
-        background: none !important;
-        padding-left: 2px !important;
-        margin-left: 0 !important;
-        min-width: 26px !important;
-    }
-
-    :is(#backForwardMenu, #back-button, #forward-button) menuitem[type="radio"] {
-        padding: 0px !important;
-        color: white !important;
-    }
 
 }
 

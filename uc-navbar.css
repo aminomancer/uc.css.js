@@ -52,23 +52,6 @@ toolbarspring {
     -moz-box-flex: 1 !important;
 }
 
-:root:not([uidensity="compact"]) #back-button > .toolbarbutton-icon {
-    background-color: unset !important;
-    border: unset !important;
-    padding: var(--toolbarbutton-inner-padding) !important;
-    border-radius: var(--toolbarbutton-border-radius) !important;
-    width: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
-    height: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
-}
-
-:root:not([uidensity="compact"]) #back-button:hover:not([disabled]) > .toolbarbutton-icon {
-    background-color: var(--toolbarbutton-hover-background) !important;
-}
-
-:root:not([uidensity="compact"]) #back-button:active:not([disabled]) > .toolbarbutton-icon {
-    background-color: var(--toolbarbutton-active-background) !important;
-}
-
 /* toolbar button badges */
 :is(#nav-bar-customization-target, #widget-overflow)
     toolbarbutton:not([attention="warning"])

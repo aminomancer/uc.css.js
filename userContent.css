@@ -1,24 +1,23 @@
 @import url(uc-globals.css);
 
 @media (prefers-color-scheme: dark) {
-
     .gitzip-check-mark {
         color: white !important;
     }
-    
+
     #publication .flipbook .background {
         background-color: hsl(240, 4%, 10%) !important;
     }
-    
+
     #publication .flipbook .background .img-fit {
         background-color: transparent !important;
         filter: invert(1) hue-rotate(180deg) contrast(0.9) brightness(0.8) !important;
     }
-    
+
     #publication.publication-container {
         background-color: hsl(240, 4%, 8%) !important;
     }
-    
+
     #publication #publ-container #tool-window {
         background-color: hsl(240, 4%, 8%) !important;
         box-shadow: hsla(0, 0%, 0%, 0.5) 0px 0px 8px !important;
@@ -28,7 +27,7 @@
         -moz-appearance: none;
         appearance: none;
     }
-    
+
     input[type="number"]::-moz-number-spin-box {
         appearance: none;
         min-width: 16px;
@@ -36,7 +35,7 @@
         margin: 0;
         padding: 0;
     }
-    
+
     input[type="number"]::-moz-number-spin-up,
     input[type="number"]::-moz-number-spin-down {
         appearance: none;
@@ -48,16 +47,15 @@
         border: none;
         border-radius: 0;
     }
-    
+
     input[type="number"]::-moz-number-spin-down {
         background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="6" height="5"><path d="M1,1 L3,5 5,1" fill="context-fill" fill-opacity="context-fill-opacity"/></svg>');
     }
-    
+
     input[type="number"]::-moz-number-spin-down:hover,
     input[type="number"]::-moz-number-spin-up:hover {
         fill-opacity: 0.7;
     }
-
 }
 
 @media (prefers-color-scheme: dark) {
@@ -101,7 +99,8 @@
     }
 }
 
-@-moz-document url-prefix("about:"), url-prefix("chrome://") {
+@-moz-document url-prefix("about:"), url-prefix("chrome://")
+{
     @media (prefers-color-scheme: dark) {
         window,
         browser,
@@ -180,7 +179,7 @@
         }
 
         .error::selection,
-        .error>*::selection {
+        .error > *::selection {
             color: firebrick !important;
             background-color: var(--content-selection-bgcolor) !important;
         }
@@ -200,6 +199,8 @@
     --menupopup-border-radius: 3px;
     --context-menuitem-border-radius: 0;
     --menupopup-margin: 0;
+    --menupopup-child-margin-block-start: 0;
+    --menupopup-child-margin-inline-start: 0;
     --menupopup-padding: 0;
     --menupopup-inner-padding: 0;
     --context-padding-inline: 28px 0;
@@ -252,6 +253,11 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
     border-radius: var(--menupopup-border-radius) !important;
     margin: var(--menupopup-margin) !important;
     overflow: hidden !important;
+}
+
+#ContentSelectDropdown > menupopup menu > menupopup {
+    margin-inline-start: var(--menupopup-child-margin-inline-start) !important;
+    margin-block-start: var(--menupopup-child-margin-block-start) !important;
 }
 
 #ContentSelectDropdown > menupopup :is(menuitem, menu) {
@@ -327,6 +333,8 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
 
 @supports (-moz-bool-pref("browser.proton.contextmenus.enabled")) {
     #ContentSelectDropdown {
+        --menupopup-child-margin-block-start: -4px;
+        --menupopup-child-margin-inline-start: 4px;
         --arrowpanel-menuitem-border-radius: 3px !important;
         --menupopup-border-radius: 3px !important;
         --context-menuitem-border-radius: var(--arrowpanel-menuitem-border-radius);
@@ -386,7 +394,10 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
         display: -moz-box !important;
     }
 
-    #ContentSelectDropdown > menupopup[menu-api] menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-left {
+    #ContentSelectDropdown
+        > menupopup[menu-api]
+        menuitem:is([type="checkbox"], [type="radio"])
+        .menu-iconic-left {
         display: none !important;
     }
 
@@ -415,8 +426,8 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
     }
 }
 
-@-moz-document url-prefix("chrome://devtools/content/") {
-
+@-moz-document url-prefix("chrome://devtools/content/")
+{
     :root {
         --min-tab-height: 35px !important;
         --inline-tab-padding: 10px !important;
@@ -514,6 +525,8 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
         --menupopup-background: var(--arrowpanel-background);
         --menu-background-color: var(--arrowpanel-background) !important;
         --menupopup-margin: 0px 0 0 0;
+        --menupopup-child-margin-block-start: 0;
+        --menupopup-child-margin-inline-start: 0;
         --menupopup-padding: 0;
         --menupopup-inner-padding: 0;
         --context-checkbox-margin: 6px -5.5px;
@@ -525,9 +538,8 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
         --menu-right-margin: 2px;
         --menu-right-size: 12px;
     }
-    
+
     @supports (-moz-bool-pref("browser.proton.enabled")) {
-    
         :root {
             --panelview-toolbarbutton-hover-bgcolor: var(--arrowpanel-dimmed) !important;
             --panelview-toolbarbutton-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
@@ -547,48 +559,43 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
             --panel-shortcut-color: hsl(235, 27%, 73%, 70%) !important;
             --panel-shortcut-focus: hsl(235, 32%, 75%, 90%) !important;
         }
-    
     }
-    
+
     @supports (-moz-bool-pref("browser.proton.toolbar.enabled")) {
-    
         :root,
         #TabsToolbar {
             --toolbarbutton-inner-padding: 6px !important;
         }
-    
-        #urlbar-container, #urlbar {
+
+        #urlbar-container,
+        #urlbar {
             --urlbar-toolbar-height: var(--user-urlbar-container-height) !important;
             --urlbar-container-height: var(--user-urlbar-container-height) !important;
         }
-    
     }
-    
+
     @supports (-moz-bool-pref("browser.proton.tabs.enabled")) {
-    
         :root {
             --proton-tab-inline-padding: 0 !important;
             --proton-shadow-blur-radius: 0 !important;
         }
-    
     }
-    
+
     @supports (-moz-bool-pref("browser.proton.appmenu.enabled")) {
-    
         :root[proton] #appMenu-multiView {
             --arrowpanel-menuitem-margin: 0 6px !important;
             --arrowpanel-menuitem-padding: 8px !important;
             --panel-subview-body-padding: 6px 0 !important;
         }
-    
     }
-    
+
     @supports (-moz-bool-pref("browser.proton.contextmenus.enabled")) {
-    
         :root {
             --menupopup-background: transparent;
             --menu-background-color: var(--arrowpanel-background) !important;
             --menupopup-margin: 0;
+            --menupopup-child-margin-block-start: -4px;
+            --menupopup-child-margin-inline-start: 4px;
             --menupopup-padding: 0;
             --menupopup-inner-padding: 4px;
             --context-padding-inline: 28px 0 !important;
@@ -603,9 +610,7 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
             --menu-right-margin: 4px;
             --menu-right-size: 11px;
         }
-    
     }
-    
 
     menupopup {
         -moz-appearance: none !important;
@@ -723,7 +728,6 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
     }
 
     @supports (-moz-bool-pref("browser.proton.contextmenus.enabled")) {
-
         menupopup {
             padding: var(--menupopup-padding) !important;
             background-color: transparent !important;
@@ -759,11 +763,11 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
             padding: 0 !important;
             margin: 0 !important;
         }
-    
+
         menuseparator[id]:not(#context-sep-open, #context-media-sep-commands, #context-sep-copylink, #spell-suggestions-separator, #context-sep-selectall) {
             display: none !important;
         }
-    
+
         menuseparator:not([id]) {
             display: -moz-box !important;
         }
@@ -775,12 +779,10 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
         menupopup[menu-api] menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-left {
             display: none !important;
         }
-
     }
 
     /* proton disabled */
     @supports not -moz-bool-pref("browser.proton.contextmenus.enabled") {
-
         menuseparator {
             visibility: hidden !important;
             display: none !important;
@@ -797,9 +799,7 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
             border-top-width: 1px !important;
             border-top-style: solid !important;
         }
-
     }
-
 }
 
 :root {
@@ -846,7 +846,6 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
     line-height: 20px !important;
     font-family: Overpass !important;
     font-weight: 500 !important;
-    
 }
 
 #pictureInPictureToggle .pip-label {
@@ -891,10 +890,22 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
     translate: calc(-100% + 48px) !important;
 }
 
+@-moz-document url-prefix("moz-extension://0163b722-07ea-4fbd-80d6-7b5de657bb9e")
+{
+    .warning-bar,
+    .error-bar {
+        background-color: rgb(22, 21, 22) !important;
+    }
+}
+
+@-moz-document url("about:processes") {
+    td:nth-child(7) {
+        width: 3% !important;
+    }
+}
+
 @-moz-document url-prefix("about:debugging") {
-
     @media (prefers-color-scheme: dark) {
-
         :root {
             --bg-color: rgb(30, 29, 31) !important;
             --bg-color-float: rgb(37, 36, 38);
@@ -910,7 +921,7 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
             --button-bg-hover: hsla(0, 10%, 80%, 0.09);
             --button-bg-active: hsla(0, 10%, 80%, 0.11);
             --card-separator-color: var(--button-bg-active) !important;
-            --category-background-hover: rgba(12,12,13,0.1);
+            --category-background-hover: rgba(12, 12, 13, 0.1);
             --category-text: var(--plaintext-color) !important;
             --category-text-selected: var(--link-color-active) !important;
             --link-color: hsl(251, 100%, 64%) !important;
@@ -920,65 +931,63 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
             --grey-50: var(--text-color-3rd) !important;
             --grey-20: var(--card-separator-color) !important;
         }
-        
+
         .card {
             background-color: var(--bg-color-float) !important;
             box-shadow: var(--shadow-var) !important;
             -moz-context-properties: fill, fill-opacity !important;
             fill: currentColor !important;
         }
-        
+
         .connect-section__header__icon {
             opacity: 0.932 !important;
         }
-        
+
         .default-button {
             color: var(--button-color) !important;
             background-color: var(--button-bg) !important;
         }
-        
+
         .default-button:enabled:hover,
         .sidebar-item--selectable:hover {
             background: var(--button-bg-hover) !important;
         }
-        
+
         .default-button:enabled:hover:active,
         .sidebar-item--selectable:hover:active {
             background: var(--button-bg-active) !important;
         }
-        
+
         .sidebar__footer {
             -moz-context-properties: fill, fill-opacity !important;
             fill: currentColor !important;
             fill-opacity: 0.932 !important;
         }
-        
+
         .fieldpair__description {
             color: var(--text-color-2nd) !important;
         }
-        
+
         .primary-button {
             background-color: var(--link-color) !important;
         }
-        
+
         .primary-button:hover {
             background-color: var(--link-color-hover) !important;
         }
-        
+
         .primary-button:hover:active {
             background-color: var(--link-color-active) !important;
         }
-        
+
         .sidebar__footer__support-help {
             column-gap: calc(var(--base-unit) * 1.5) !important;
         }
-        
+
         .icon-label--info {
             --icon-color: currentColor !important;
         }
-
     }
-
 }
 
 img.transparent {
@@ -1014,190 +1023,233 @@ img.transparent {
 /* my personal wikipedia dark mode theme. */
 @-moz-document domain("wikipedia.org"),
 domain("wikimedia.org") {
-
     /* latin-ext */
     @font-face {
-        font-family: 'Source Code Pro';
+        font-family: "Source Code Pro";
         font-style: normal;
         font-weight: 400;
-        src: local('Source Code Pro'), local('SourceCodePro-Regular'), url(https://fonts.gstatic.com/s/sourcecodepro/v7/mrl8jkM18OlOQN8JLgasDy2Q8seG17bfDXYR_jUsrzg.woff2) format('woff2');
+        src: local("Source Code Pro"), local("SourceCodePro-Regular"),
+            url(https://fonts.gstatic.com/s/sourcecodepro/v7/mrl8jkM18OlOQN8JLgasDy2Q8seG17bfDXYR_jUsrzg.woff2)
+                format("woff2");
     }
 
     /* latin */
     @font-face {
-        font-family: 'Source Code Pro';
+        font-family: "Source Code Pro";
         font-style: normal;
         font-weight: 400;
-        src: local('Source Code Pro'), local('SourceCodePro-Regular'), url(https://fonts.gstatic.com/s/sourcecodepro/v7/mrl8jkM18OlOQN8JLgasD9V_2ngZ8dMf8fLgjYEouxg.woff2) format('woff2');
+        src: local("Source Code Pro"), local("SourceCodePro-Regular"),
+            url(https://fonts.gstatic.com/s/sourcecodepro/v7/mrl8jkM18OlOQN8JLgasD9V_2ngZ8dMf8fLgjYEouxg.woff2)
+                format("woff2");
     }
 
     /* latin */
     @font-face {
-        font-family: 'Source Code Pro';
+        font-family: "Source Code Pro";
         font-style: normal;
         font-weight: 700;
-        src: local('Source Code Pro Bold'), local('SourceCodePro-Bold'), url(https://fonts.gstatic.com/s/sourcecodepro/v7/leqv3v-yTsJNC7nFznSMqUo0As1BFRXtCDhS66znb_k.woff2) format('woff2');
+        src: local("Source Code Pro Bold"), local("SourceCodePro-Bold"),
+            url(https://fonts.gstatic.com/s/sourcecodepro/v7/leqv3v-yTsJNC7nFznSMqUo0As1BFRXtCDhS66znb_k.woff2)
+                format("woff2");
     }
 
     /* cyrillic */
     @font-face {
-        font-family: 'Source Sans Pro';
+        font-family: "Source Sans Pro";
         font-style: italic;
         font-weight: 400;
-        src: local('Source Sans Pro Italic'), local('SourceSansPro-Italic'), url(https://fonts.gstatic.com/s/sourcesanspro/v11/M2Jd71oPJhLKp0zdtTvoMywVDUTj8DgJRSuHEKdySfs.woff2) format('woff2');
+        src: local("Source Sans Pro Italic"), local("SourceSansPro-Italic"),
+            url(https://fonts.gstatic.com/s/sourcesanspro/v11/M2Jd71oPJhLKp0zdtTvoMywVDUTj8DgJRSuHEKdySfs.woff2)
+                format("woff2");
     }
 
     /* greek */
     @font-face {
-        font-family: 'Source Sans Pro';
+        font-family: "Source Sans Pro";
         font-style: italic;
         font-weight: 400;
-        src: local('Source Sans Pro Italic'), local('SourceSansPro-Italic'), url(https://fonts.gstatic.com/s/sourcesanspro/v11/M2Jd71oPJhLKp0zdtTvoM2qPyaMejTZ925Ro5CnyJwc.woff2) format('woff2');
+        src: local("Source Sans Pro Italic"), local("SourceSansPro-Italic"),
+            url(https://fonts.gstatic.com/s/sourcesanspro/v11/M2Jd71oPJhLKp0zdtTvoM2qPyaMejTZ925Ro5CnyJwc.woff2)
+                format("woff2");
     }
 
     /* latin-ext */
     @font-face {
-        font-family: 'Source Sans Pro';
+        font-family: "Source Sans Pro";
         font-style: italic;
         font-weight: 400;
-        src: local('Source Sans Pro Italic'), local('SourceSansPro-Italic'), url(https://fonts.gstatic.com/s/sourcesanspro/v11/M2Jd71oPJhLKp0zdtTvoM40tgx99jmYGv_xzYuwd1rU.woff2) format('woff2');
+        src: local("Source Sans Pro Italic"), local("SourceSansPro-Italic"),
+            url(https://fonts.gstatic.com/s/sourcesanspro/v11/M2Jd71oPJhLKp0zdtTvoM40tgx99jmYGv_xzYuwd1rU.woff2)
+                format("woff2");
     }
 
     /* latin */
     @font-face {
-        font-family: 'Source Sans Pro';
+        font-family: "Source Sans Pro";
         font-style: italic;
         font-weight: 400;
-        src: local('Source Sans Pro Italic'), local('SourceSansPro-Italic'), url(https://fonts.gstatic.com/s/sourcesanspro/v11/M2Jd71oPJhLKp0zdtTvoMxgy2Fsj5sj3EzlXpqVXRKo.woff2) format('woff2');
+        src: local("Source Sans Pro Italic"), local("SourceSansPro-Italic"),
+            url(https://fonts.gstatic.com/s/sourcesanspro/v11/M2Jd71oPJhLKp0zdtTvoMxgy2Fsj5sj3EzlXpqVXRKo.woff2)
+                format("woff2");
     }
 
     /* cyrillic */
     @font-face {
-        font-family: 'Source Sans Pro';
+        font-family: "Source Sans Pro";
         font-style: normal;
         font-weight: 400;
-        src: local('Source Sans Pro Regular'), local('SourceSansPro-Regular'), url(https://fonts.gstatic.com/s/sourcesanspro/v11/ODelI1aHBYDBqgeIAH2zlMgmx_L9kV4w6g8dYQOLFUI.woff2) format('woff2');
+        src: local("Source Sans Pro Regular"), local("SourceSansPro-Regular"),
+            url(https://fonts.gstatic.com/s/sourcesanspro/v11/ODelI1aHBYDBqgeIAH2zlMgmx_L9kV4w6g8dYQOLFUI.woff2)
+                format("woff2");
     }
 
     /* greek */
     @font-face {
-        font-family: 'Source Sans Pro';
+        font-family: "Source Sans Pro";
         font-style: normal;
         font-weight: 400;
-        src: local('Source Sans Pro Regular'), local('SourceSansPro-Regular'), url(https://fonts.gstatic.com/s/sourcesanspro/v11/ODelI1aHBYDBqgeIAH2zlFjqPhnWKseBf12Mt9_m7kc.woff2) format('woff2');
+        src: local("Source Sans Pro Regular"), local("SourceSansPro-Regular"),
+            url(https://fonts.gstatic.com/s/sourcesanspro/v11/ODelI1aHBYDBqgeIAH2zlFjqPhnWKseBf12Mt9_m7kc.woff2)
+                format("woff2");
     }
 
     /* vietnamese */
     @font-face {
-        font-family: 'Source Sans Pro';
+        font-family: "Source Sans Pro";
         font-style: normal;
         font-weight: 400;
-        src: local('Source Sans Pro Regular'), local('SourceSansPro-Regular'), url(https://fonts.gstatic.com/s/sourcesanspro/v11/ODelI1aHBYDBqgeIAH2zlNOAHFN6BivSraYkjhveRHY.woff2) format('woff2');
+        src: local("Source Sans Pro Regular"), local("SourceSansPro-Regular"),
+            url(https://fonts.gstatic.com/s/sourcesanspro/v11/ODelI1aHBYDBqgeIAH2zlNOAHFN6BivSraYkjhveRHY.woff2)
+                format("woff2");
     }
 
     /* latin-ext */
     @font-face {
-        font-family: 'Source Sans Pro';
+        font-family: "Source Sans Pro";
         font-style: normal;
         font-weight: 400;
-        src: local('Source Sans Pro Regular'), local('SourceSansPro-Regular'), url(https://fonts.gstatic.com/s/sourcesanspro/v11/ODelI1aHBYDBqgeIAH2zlC2Q8seG17bfDXYR_jUsrzg.woff2) format('woff2');
+        src: local("Source Sans Pro Regular"), local("SourceSansPro-Regular"),
+            url(https://fonts.gstatic.com/s/sourcesanspro/v11/ODelI1aHBYDBqgeIAH2zlC2Q8seG17bfDXYR_jUsrzg.woff2)
+                format("woff2");
     }
 
     /* latin */
     @font-face {
-        font-family: 'Source Sans Pro';
+        font-family: "Source Sans Pro";
         font-style: normal;
         font-weight: 400;
-        src: local('Source Sans Pro Regular'), local('SourceSansPro-Regular'), url(https://fonts.gstatic.com/s/sourcesanspro/v11/ODelI1aHBYDBqgeIAH2zlNV_2ngZ8dMf8fLgjYEouxg.woff2) format('woff2');
+        src: local("Source Sans Pro Regular"), local("SourceSansPro-Regular"),
+            url(https://fonts.gstatic.com/s/sourcesanspro/v11/ODelI1aHBYDBqgeIAH2zlNV_2ngZ8dMf8fLgjYEouxg.woff2)
+                format("woff2");
     }
 
     /* cyrillic-ext */
     @font-face {
-        font-family: 'Source Sans Pro';
+        font-family: "Source Sans Pro";
         font-style: normal;
         font-weight: 700;
-        src: local('Source Sans Pro Bold'), local('SourceSansPro-Bold'), url(https://fonts.gstatic.com/s/sourcesanspro/v11/toadOcfmlt9b38dHJxOBGH2tx1iQUBYLA4fTJZSoO3U.woff2) format('woff2');
+        src: local("Source Sans Pro Bold"), local("SourceSansPro-Bold"),
+            url(https://fonts.gstatic.com/s/sourcesanspro/v11/toadOcfmlt9b38dHJxOBGH2tx1iQUBYLA4fTJZSoO3U.woff2)
+                format("woff2");
     }
 
     /* cyrillic */
     @font-face {
-        font-family: 'Source Sans Pro';
+        font-family: "Source Sans Pro";
         font-style: normal;
         font-weight: 700;
-        src: local('Source Sans Pro Bold'), local('SourceSansPro-Bold'), url(https://fonts.gstatic.com/s/sourcesanspro/v11/toadOcfmlt9b38dHJxOBGJaoTU19aO7Bfv-FLfOt5YM.woff2) format('woff2');
+        src: local("Source Sans Pro Bold"), local("SourceSansPro-Bold"),
+            url(https://fonts.gstatic.com/s/sourcesanspro/v11/toadOcfmlt9b38dHJxOBGJaoTU19aO7Bfv-FLfOt5YM.woff2)
+                format("woff2");
     }
 
     /* greek */
     @font-face {
-        font-family: 'Source Sans Pro';
+        font-family: "Source Sans Pro";
         font-style: normal;
         font-weight: 700;
-        src: local('Source Sans Pro Bold'), local('SourceSansPro-Bold'), url(https://fonts.gstatic.com/s/sourcesanspro/v11/toadOcfmlt9b38dHJxOBGO4f2SQTi4oYi3kh3bYmG2Y.woff2) format('woff2');
+        src: local("Source Sans Pro Bold"), local("SourceSansPro-Bold"),
+            url(https://fonts.gstatic.com/s/sourcesanspro/v11/toadOcfmlt9b38dHJxOBGO4f2SQTi4oYi3kh3bYmG2Y.woff2)
+                format("woff2");
     }
 
     /* vietnamese */
     @font-face {
-        font-family: 'Source Sans Pro';
+        font-family: "Source Sans Pro";
         font-style: normal;
         font-weight: 700;
-        src: local('Source Sans Pro Bold'), local('SourceSansPro-Bold'), url(https://fonts.gstatic.com/s/sourcesanspro/v11/toadOcfmlt9b38dHJxOBGDovqjS_dXPZszO_XltPdNg.woff2) format('woff2');
+        src: local("Source Sans Pro Bold"), local("SourceSansPro-Bold"),
+            url(https://fonts.gstatic.com/s/sourcesanspro/v11/toadOcfmlt9b38dHJxOBGDovqjS_dXPZszO_XltPdNg.woff2)
+                format("woff2");
     }
 
     /* latin-ext */
     @font-face {
-        font-family: 'Source Sans Pro';
+        font-family: "Source Sans Pro";
         font-style: normal;
         font-weight: 700;
-        src: local('Source Sans Pro Bold'), local('SourceSansPro-Bold'), url(https://fonts.gstatic.com/s/sourcesanspro/v11/toadOcfmlt9b38dHJxOBGFxe-GPfKKFmiXaJ_Q0GFr8.woff2) format('woff2');
+        src: local("Source Sans Pro Bold"), local("SourceSansPro-Bold"),
+            url(https://fonts.gstatic.com/s/sourcesanspro/v11/toadOcfmlt9b38dHJxOBGFxe-GPfKKFmiXaJ_Q0GFr8.woff2)
+                format("woff2");
     }
 
     /* latin */
     @font-face {
-        font-family: 'Source Sans Pro';
+        font-family: "Source Sans Pro";
         font-style: normal;
         font-weight: 700;
-        src: local('Source Sans Pro Bold'), local('SourceSansPro-Bold'), url(https://fonts.gstatic.com/s/sourcesanspro/v11/toadOcfmlt9b38dHJxOBGEo0As1BFRXtCDhS66znb_k.woff2) format('woff2');
+        src: local("Source Sans Pro Bold"), local("SourceSansPro-Bold"),
+            url(https://fonts.gstatic.com/s/sourcesanspro/v11/toadOcfmlt9b38dHJxOBGEo0As1BFRXtCDhS66znb_k.woff2)
+                format("woff2");
     }
 
     /* latin-ext */
     @font-face {
-        font-family: 'Source Serif Pro';
+        font-family: "Source Serif Pro";
         font-style: normal;
         font-weight: 400;
-        src: local('Source Serif Pro'), local('SourceSerifPro-Regular'), url(https://fonts.gstatic.com/s/sourceserifpro/v5/CeUM4np2c42DV49nanp55Q_BUM40eMa9-jBVStC9wY0.woff2) format('woff2');
+        src: local("Source Serif Pro"), local("SourceSerifPro-Regular"),
+            url(https://fonts.gstatic.com/s/sourceserifpro/v5/CeUM4np2c42DV49nanp55Q_BUM40eMa9-jBVStC9wY0.woff2)
+                format("woff2");
     }
 
     /* latin */
     @font-face {
-        font-family: 'Source Serif Pro';
+        font-family: "Source Serif Pro";
         font-style: normal;
         font-weight: 400;
-        src: local('Source Serif Pro'), local('SourceSerifPro-Regular'), url(https://fonts.gstatic.com/s/sourceserifpro/v5/CeUM4np2c42DV49nanp55fETq2ZMMnErnN6OL83eMrU.woff2) format('woff2');
+        src: local("Source Serif Pro"), local("SourceSerifPro-Regular"),
+            url(https://fonts.gstatic.com/s/sourceserifpro/v5/CeUM4np2c42DV49nanp55fETq2ZMMnErnN6OL83eMrU.woff2)
+                format("woff2");
     }
 
     /* latin-ext */
     @font-face {
-        font-family: 'Source Serif Pro';
+        font-family: "Source Serif Pro";
         font-style: normal;
         font-weight: 700;
-        src: local('Source Serif Pro Bold'), local('SourceSerifPro-Bold'), url(https://fonts.gstatic.com/s/sourceserifpro/v5/yd5lDMt8Sva2PE17yiLarKwVIEQt96q_HGoOJQzfwxw.woff2) format('woff2');
+        src: local("Source Serif Pro Bold"), local("SourceSerifPro-Bold"),
+            url(https://fonts.gstatic.com/s/sourceserifpro/v5/yd5lDMt8Sva2PE17yiLarKwVIEQt96q_HGoOJQzfwxw.woff2)
+                format("woff2");
     }
 
     /* latin */
     @font-face {
-        font-family: 'Source Serif Pro';
+        font-family: "Source Serif Pro";
         font-style: normal;
         font-weight: 700;
-        src: local('Source Serif Pro Bold'), local('SourceSerifPro-Bold'), url(https://fonts.gstatic.com/s/sourceserifpro/v5/yd5lDMt8Sva2PE17yiLarPgHLTi6vdOOFgNDwEC6JgI.woff2) format('woff2');
+        src: local("Source Serif Pro Bold"), local("SourceSerifPro-Bold"),
+            url(https://fonts.gstatic.com/s/sourceserifpro/v5/yd5lDMt8Sva2PE17yiLarPgHLTi6vdOOFgNDwEC6JgI.woff2)
+                format("woff2");
     }
-    
+
     html:root {
         background: #19191a !important;
     }
 
     body {
         border: none !important;
-        font-family: 'Source Sans Pro', sans-serif !important;
+        font-family: "Source Sans Pro", sans-serif !important;
         font-size: 18px !important;
         background: #19191a !important;
     }
@@ -1205,7 +1257,7 @@ domain("wikimedia.org") {
     #content {
         margin: 0 auto !important;
         border: none !important;
-        font-family: 'Source Sans Pro' !important;
+        font-family: "Source Sans Pro" !important;
         font-size: 1rem !important;
         line-height: 80% !important;
         max-width: 1280px !important;
@@ -1259,8 +1311,10 @@ domain("wikimedia.org") {
         margin: 0 auto !important;
         pointer-events: auto !important;
     }
-    
-    .vector-menu-tabs, .vector-menu-tabs a, #mw-head .vector-menu-dropdown h3 {
+
+    .vector-menu-tabs,
+    .vector-menu-tabs a,
+    #mw-head .vector-menu-dropdown h3 {
         background-image: none !important;
     }
 
@@ -1273,7 +1327,7 @@ domain("wikimedia.org") {
         border: none !important;
     }
 
-    #mw-head>* {
+    #mw-head > * {
         position: absolute !important;
         font-size: 16px !important;
         margin: 0 !important;
@@ -1315,7 +1369,7 @@ domain("wikimedia.org") {
         color: #f0f0f0 !important;
     }
 
-    #mw-head #searchform>div {
+    #mw-head #searchform > div {
         position: absolute !important;
         top: -32px !important;
         right: -29.5px !important;
@@ -1331,13 +1385,13 @@ domain("wikimedia.org") {
         position: absolute !important;
         z-index: 5 !important;
     }
-    
-    #mw-head #searchform>div#simpleSearch:focus-within ::placeholder {
+
+    #mw-head #searchform > div#simpleSearch:focus-within ::placeholder {
         opacity: 1 !important;
         color: hsla(0, 0%, 100%, 0.5) !important;
     }
 
-    #mw-head #searchform>div input#searchInput {
+    #mw-head #searchform > div input#searchInput {
         padding: 4px 0 6px 8px !important;
         font-size: 1rem !important;
         color: #ccc !important;
@@ -1347,8 +1401,8 @@ domain("wikimedia.org") {
         box-shadow: none !important;
         border: none !important;
         height: 28px !important;
-}
-    
+    }
+
     .imeselector {
         display: none !important;
     }
@@ -1357,7 +1411,7 @@ domain("wikimedia.org") {
     #mw-head #ca-watch {
         display: none !important;
     }
-    
+
     #mw-head #searchform #searchButton {
         -moz-context-properties: fill, fill-opacity !important;
         opacity: 1 !important;
@@ -1365,7 +1419,7 @@ domain("wikimedia.org") {
         fill-opacity: 0.67 !important;
         background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='context-fill' fill-opacity='context-fill-opacity'><path d='M7.5 13a5.5 5.5 0 100-11 5.5 5.5 0 000 11zm4.55.46A7.43 7.43 0 017.5 15a7.5 7.5 0 115.96-2.95l6.49 6.49-1.41 1.41-6.49-6.49z'/></svg>") !important;
     }
-    
+
     #mw-head #searchform #searchButton:hover {
         fill-opacity: 1 !important;
     }
@@ -1377,8 +1431,8 @@ domain("wikimedia.org") {
         height: 120px !important;
         top: 30px !important;
         left: -25px !important;
-        content: 'Wikipedia' !important;
-        font-family: 'Source Serif Pro', serif !important;
+        content: "Wikipedia" !important;
+        font-family: "Source Serif Pro", serif !important;
         /*font-style: italic !important;*/
         font-weight: normal !important;
         font-size: 28px !important;
@@ -1404,7 +1458,7 @@ domain("wikimedia.org") {
         pointer-events: auto !important;
         scrollbar-width: none !important;
     }
-    
+
     #sidebarCollapse {
         display: none !important;
     }
@@ -1424,126 +1478,119 @@ domain("wikimedia.org") {
         margin-bottom: 0 !important;
         margin-top: 7px !important;
     }
-    
-    #mw-panel>.portal {
+
+    #mw-panel > .portal {
         display: inline-block !important;
         box-shadow: none !important;
-        -webkit-box-shadow: none !important;
     }
-    
-    #mw-panel>.portal>h3 {
+
+    #mw-panel > .portal > h3 {
         color: rgb(255, 255, 255) !important;
         font-size: 1rem !important;
         margin-left: 5px !important;
         padding-bottom: 0 !important;
-        background-image: linear-gradient(to right, transparent 0, white 20%, transparent 100%) !important;
+        background-image: linear-gradient(
+            to right,
+            transparent 0,
+            white 20%,
+            transparent 100%
+        ) !important;
         background-size: 100% 0.85px !important;
     }
-    
-    #mw-panel>.portal .vector-menu-content-list {
+
+    #mw-panel > .portal .vector-menu-content-list {
         padding-top: 3px !important;
     }
-    
+
     #mw-panel .portal-first h3 {
         display: block !important;
     }
-    
+
     #mw-navigation #p-lang #p-lang-label {
         display: block !important;
     }
 
     #mw-navigation #p-lang .uls-settings-trigger {
-/*         margin-left: 16px !important;
-        margin-top: 17px !important;
-        min-width: 13px !important;
-        min-height: 13px !important;
-        fill: white !important;
-        background: url(chrome://global/skin/icons/settings.svg) !important;
-        background-size: 13px 13px !important;
-        padding: 0 !important;
-        position: static !important;
-        float: inline-end !important;
-        display: block !important; */
         display: none !important;
     }
-    
+
     #mw-navigation :focus {
         outline: none !important;
     }
 
-    #mw-navigation>#mw-panel>div:not(#p-lang):not(#p-navigation):not(.first),
+    #mw-navigation > #mw-panel > div:not(#p-lang):not(#p-navigation):not(.first),
     #mw-navigation #p-lang .wbc-editpage {
         display: none !important;
     }
-    
+
     #mw-navigation .portal:last-of-type {
         margin-bottom: 20px !important;
     }
-    
-/*     search language menu */
+
+    /* search language menu */
     .uls-menu {
-        box-shadow: 0 0 12px -2px rgba(0,0,0,0.35) !important;
+        box-shadow: 0 0 12px -2px rgba(0, 0, 0, 0.35) !important;
     }
-    
+
     .uls-menu,
-    .uls-menu>*,
+    .uls-menu > *,
     .uls-menu .uls-filterinput {
         background-color: rgb(35, 35, 36) !important;
         border-color: transparent !important;
         color: rgb(204, 204, 204) !important;
     }
-    
+
     .uls-menu .uls-search {
         border-bottom-color: rgb(55, 55, 55) !important;
     }
-    
+
     .uls-search:is(:hover, :focus-within) .uls-search-label {
         opacity: 0.7 !important;
     }
-    
+
     .skin-vector .uls-search-label {
         -webkit-transition: none !important;
         -moz-transition: none !important;
         transition: none !important;
     }
-    
+
     .uls-menu .uls-filterinput {
         background: none !important;
         opacity: 0.7 !important;
     }
-    
+
     .uls-menu .uls-filtersuggestion,
     .uls-menu .uls-search:focus-within .uls-filtersuggestion,
     .uls-menu .uls-search:hover .uls-filtersuggestion {
         opacity: 0.5 !important;
         color: rgb(204, 204, 204) !important;
     }
-    
+
     .uls-menu .uls-filterinput::placeholder {
         opacity: 0.7 !important;
     }
-    
+
     .uls-menu .uls-search:focus-within .uls-filterinput::placeholder,
     .uls-menu .uls-search:hover .uls-filterinput::placeholder {
         opacity: 0.7 !important;
     }
-    
+
     .uls-menu .uls-search:focus-within .uls-languagefilter,
     .uls-menu .uls-search:hover .uls-languagefilter {
         opacity: 1 !important;
     }
-    
+
     .uls-menu .uls-search-label,
     .uls-languagefilter-clear {
         filter: invert(1) !important;
     }
-    
+
     .uls-menu .uls-lcd-region-title {
         color: rgb(204, 204, 204) !important;
         font-size: 16px !important;
         padding-left: 18px !important;
     }
-    
+
     .uls-no-results-found-title {
         color: rgb(204, 204, 204) !important;
         font-size: 16px !important;
@@ -1551,7 +1598,7 @@ domain("wikimedia.org") {
         margin-bottom: 10px !important;
         margin-top: 15px !important;
     }
-    
+
     .uls-no-found-more {
         position: absolute !important;
         background: none !important;
@@ -1568,7 +1615,7 @@ domain("wikimedia.org") {
         left: auto !important;
         right: 0 !important;
     }
-    
+
     .uls-language-block > ul > li {
         background: none !important;
         margin-left: 3px !important;
@@ -1576,18 +1623,18 @@ domain("wikimedia.org") {
         width: -moz-min-content !important;
         padding-right: 25px !important;
     }
-    
+
     .uls-language-block a {
         color: rgb(138, 181, 229) !important;
         font-size: 16px !important;
     }
-    
+
     .uls-language-block > ul > li:hover a {
         text-decoration: underline !important;
     }
-    
+
     .interlanguage-uls-menu.selector-left::before {
-        border-right: 10px solid rgba(0,0,0,0.05) !important;
+        border-right: 10px solid rgba(0, 0, 0, 0.05) !important;
         color: rgb(35, 35, 36) !important;
     }
 
@@ -1599,7 +1646,7 @@ domain("wikimedia.org") {
     /* article */
     /* headlines */
     #firstHeading {
-        font-family: 'Source Serif Pro', sans-serif !important;
+        font-family: "Source Serif Pro", sans-serif !important;
         font-size: 2.7em !important;
         margin-top: -20px !important;
         padding-bottom: 5px !important;
@@ -1617,7 +1664,7 @@ domain("wikimedia.org") {
         margin-top: 40px !important;
         margin-bottom: 10px !important;
         font-weight: normal !important;
-        font-family: 'Source Serif Pro', sans-serif !important;
+        font-family: "Source Serif Pro", sans-serif !important;
         text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5) !important;
         color: #eee !important;
     }
@@ -1630,7 +1677,7 @@ domain("wikimedia.org") {
     #bodyContent h6 span.mw-editsection {
         float: right !important;
         margin-top: 12px !important;
-        font-family: 'Source Sans Pro', sans-serif !important;
+        font-family: "Source Sans Pro", sans-serif !important;
         text-shadow: none !important;
     }
 
@@ -1676,7 +1723,7 @@ domain("wikimedia.org") {
     #bodyContent h5:before,
     #bodyContent h6:before {
         padding-right: 9px !important;
-        font-family: 'Lora', serif !important;
+        font-family: "Lora", serif !important;
         text-shadow: none !important;
     }
 
@@ -1696,7 +1743,7 @@ domain("wikimedia.org") {
 
     #bodyContent h3:before {
         counter-increment: headingTwo !important;
-        content: counter(headingOne)"."counter(headingTwo) !important;
+        content: counter(headingOne) "." counter(headingTwo) !important;
         font-size: 15px !important;
     }
 
@@ -1706,7 +1753,7 @@ domain("wikimedia.org") {
 
     #bodyContent h4:before {
         counter-increment: headingThree !important;
-        content: counter(headingOne)"."counter(headingTwo)"."counter(headingThree) !important;
+        content: counter(headingOne) "." counter(headingTwo) "." counter(headingThree) !important;
         font-size: 14px !important;
     }
 
@@ -1716,7 +1763,8 @@ domain("wikimedia.org") {
 
     #bodyContent h5:before {
         counter-increment: headingFour !important;
-        content: counter(headingOne)"."counter(headingTwo)"."counter(headingThree)"."counter(headingFour) !important;
+        content: counter(headingOne) "." counter(headingTwo) "." counter(headingThree) "."
+            counter(headingFour) !important;
         font-size: 13px !important;
     }
 
@@ -1726,7 +1774,8 @@ domain("wikimedia.org") {
 
     #bodyContent h6:before {
         counter-increment: headingFive !important;
-        content: counter(headingOne)"."counter(headingTwo)"."counter(headingThree)"."counter(headingFour)"."counter(headingFive) !important;
+        content: counter(headingOne) "." counter(headingTwo) "." counter(headingThree) "."
+            counter(headingFour) "." counter(headingFive) !important;
         font-size: 12px !important;
     }
 
@@ -1740,7 +1789,7 @@ domain("wikimedia.org") {
         margin-left: 0px !important;
         box-shadow: none !important;
     }
-    
+
     #bodyContent .center {
         max-width: max-content;
         max-width: -moz-fit-content;
@@ -1764,12 +1813,11 @@ domain("wikimedia.org") {
 
     html[lang="de"] #bodyContent #coordinates
 
-    /* .de fix */
-        {
+    /* .de fix */ {
         top: 53px !important;
         right: 32px !important;
     }
-    
+
     .template-documentation,
     .documentation {
         clear: both;
@@ -1778,7 +1826,7 @@ domain("wikimedia.org") {
         background-color: transparent !important;
         padding: 1em;
     }
-    
+
     .documentation-metadata {
         clear: both;
         margin: 1em 0 0 0;
@@ -1804,15 +1852,15 @@ domain("wikimedia.org") {
     #bodyContent div.hatnote {
         font-size: 16px !important;
         line-height: 26px !important;
-        font-family: 'Source Sans Pro' !important;
+        font-family: "Source Sans Pro" !important;
         letter-spacing: -0.3px !important;
     }
 
     #bodyContent a:not(.new) {
         color: #8ab5e5 !important;
     }
-    
-    #mw-content-text a:not(.new)>span {
+
+    #mw-content-text a:not(.new) > span {
         color: inherit !important;
     }
 
@@ -1836,8 +1884,7 @@ domain("wikimedia.org") {
 
     #bodyContent #contentSub
 
-    /* redirected from msg */
-        {
+    /* redirected from msg */ {
         margin: 5px 0 12px -5px !important;
         padding: 0 !important;
         font-size: 12px !important;
@@ -1860,7 +1907,7 @@ domain("wikimedia.org") {
         font-size: 14px !important;
         line-height: 17px !important;
     }
-    
+
     .mw-body-content blockquote {
         border-left: 3px double hsl(220, 5%, 18%) !important;
         padding: 4px 18px !important;
@@ -1919,7 +1966,7 @@ domain("wikimedia.org") {
     }
 
     code {
-        font-family: 'Source Code Pro', monospace !important;
+        font-family: "Source Code Pro", monospace !important;
         border-color: #151819 !important;
         margin: auto 2px !important;
     }
@@ -1927,12 +1974,11 @@ domain("wikimedia.org") {
     #content .thumbinner {
         border-color: #b9b9b9 !important;
     }
-    
+
     .sidebar .sidebar-list-title {
         background: unset !important;
     }
 
-    /* noborder test */
     #toc,
     .thumbinner,
     .thumbinner .thumbimage,
@@ -1947,10 +1993,7 @@ domain("wikimedia.org") {
     .catlinks,
     .navbox,
     .hintergrundfarbe1,
-    table
-
-    /* check this! i added this for "roma" on italian wikipedia */
-        {
+    table {
         border: none !important;
     }
 
@@ -1962,7 +2005,7 @@ domain("wikimedia.org") {
         border-width: 0 0 0 5px !important;
     }
 
-    .navbox+.navbox {
+    .navbox + .navbox {
         margin-top: 9px !important;
     }
 
@@ -2014,7 +2057,6 @@ domain("wikimedia.org") {
         position: fixed !important;
         bottom: 0 !important;
         height: 100% !important;
-        /*         right: -200px !important; */
         left: -150px !important;
         width: 245px !important;
         border: none !important;
@@ -2043,11 +2085,11 @@ domain("wikimedia.org") {
         margin: 0 !important;
     }
 
-    #bodyContent #toc>ul>li:first-child {
+    #bodyContent #toc > ul > li:first-child {
         border-top: none !important;
     }
 
-    #bodyContent #toc>ul>li:last-child {
+    #bodyContent #toc > ul > li:last-child {
         border-bottom: none !important;
         margin-bottom: 10px !important;
     }
@@ -2055,7 +2097,7 @@ domain("wikimedia.org") {
     #bodyContent #toc ul li a {
         font-size: 18px !important;
         line-height: 21px !important;
-        color: #EAE9E8 !important;
+        color: #eae9e8 !important;
         padding: 3px 0 4px !important;
     }
 
@@ -2085,15 +2127,11 @@ domain("wikimedia.org") {
         display: none !important;
     }
 
-    #bodyContent #toc ul>li {
+    #bodyContent #toc ul > li {
         padding: 0 2px 0 0 !important;
     }
 
-    /*     #bodyContent #toc ul ul ul>li {
-        padding: 0 2px 0 0px !important;
-    } */
-
-    #bodyContent #toc>ul>li {
+    #bodyContent #toc > ul > li {
         padding: 3px 3px 3px 13px !important;
     }
 
@@ -2137,41 +2175,39 @@ domain("wikimedia.org") {
         display: none !important;
     }
 
-    #bodyContent #toc>ul>li {
+    #bodyContent #toc > ul > li {
         width: 92.5% !important;
     }
 
-    #bodyContent #toc>ul>li>ul li {
+    #bodyContent #toc > ul > li > ul li {
         width: -moz-fit-content !important;
     }
 
-    #bodyContent #toc>ul>li>ul>li ul {
+    #bodyContent #toc > ul > li > ul > li ul {
         padding-top: 0px !important;
     }
 
-    #bodyContent #toc>ul>li>a:hover {
+    #bodyContent #toc > ul > li > a:hover {
         color: RGB(234, 233, 232) !important;
     }
 
-    table.wikitable>tr>th,
-    table.wikitable>tr>td,
-    table.wikitable>*>tr>th,
-    table.wikitable>*>tr>td {
+    table.wikitable > tr > th,
+    table.wikitable > tr > td,
+    table.wikitable > * > tr > th,
+    table.wikitable > * > tr > td {
         font-size: 1rem !important;
         color: #ccc !important;
-        /*         border-color: #111113 !important; */
         border-color: rgba(162, 169, 177, 0.1) !important;
     }
 
-    table.wikitable>*>tr>th.headerSort {
+    table.wikitable > * > tr > th.headerSort {
         font-size: 1rem !important;
         color: #000 !important;
-        /*         border-color: #111113 !important; */
         border-color: rgba(162, 169, 177, 0.1) !important;
     }
 
-    table.wikitable>tr>th,
-    table.wikitable>*>tr>th {
+    table.wikitable > tr > th,
+    table.wikitable > * > tr > th {
         background-color: #111113 !important;
     }
 
@@ -2186,10 +2222,10 @@ domain("wikimedia.org") {
         background-color: #38445700 !important;
     }
 
-    tr+tr>.navbox-abovebelow,
-    tr+tr>.navbox-group,
-    tr+tr>.navbox-image,
-    tr+tr>.navbox-list {
+    tr + tr > .navbox-abovebelow,
+    tr + tr > .navbox-group,
+    tr + tr > .navbox-image,
+    tr + tr > .navbox-list {
         border-color: #2c2f3300 !important;
     }
 
@@ -2247,22 +2283,22 @@ domain("wikimedia.org") {
     }
 
     #mwe-popups-settings {
-        background-color: #040404FF !important;
+        background-color: #040404ff !important;
         border: none !important;
         border-radius: 4px !important;
-        color: #ffffffC9 !important;
+        color: #ffffffc9 !important;
     }
 
     #mwe-popups-settings h1 {
-        color: #ffffffC9 !important;
+        color: #ffffffc9 !important;
     }
 
     #mwe-popups-settings main {
         padding-top: 10px !important;
     }
 
-    #mwe-popups-settings main form label>span {
-        color: #ffffffC9 !important;
+    #mwe-popups-settings main form label > span {
+        color: #ffffffc9 !important;
     }
 
     #mwe-popups-settings header {
@@ -2293,7 +2329,7 @@ domain("wikimedia.org") {
         color: rgb(0, 0, 0) !important;
         border: none !important;
     }
-    
+
     .oo-ui-toolbar-bar {
         background-color: rgb(35, 35, 36) !important;
         color: hsl(0, 0%, 80%) !important;
@@ -2301,160 +2337,173 @@ domain("wikimedia.org") {
         border-radius: 2px !important;
         border: none !important;
     }
-    
+
     .oo-ui-toolbar-position-top > .oo-ui-toolbar-bar {
         box-shadow: 0 0 7px -1px rgba(0, 0, 0, 0.05), 0 0 2px 1px rgba(0, 0, 0, 0.15) !important;
     }
-    
+
     .oo-ui-toolbar-bar .oo-ui-toolbar-bar {
         box-shadow: none !important;
     }
-    
+
     .oo-ui-menuToolGroup {
         border-left: 1px solid hsl(240, 1.4%, 19%) !important;
         border-right: 1px solid hsl(240, 1.4%, 19%) !important;
     }
-    
+
     .oo-ui-popupToolGroup.oo-ui-widget-enabled > .oo-ui-popupToolGroup-handle:hover,
     .oo-ui-tool.oo-ui-widget-enabled > .oo-ui-tool-link:hover {
         background-color: hsl(240, 1.4%, 19%) !important;
     }
-    
+
     :is(.oo-ui-toolbar-bar, .ve-ce-branchNode-slug) .oo-ui-iconElement-icon,
     :is(.oo-ui-toolbar-bar, .ve-ce-branchNode-slug) .oo-ui-indicatorElement-indicator {
         filter: invert(1) !important;
     }
-    
-    :is(.oo-ui-popupToolGroup-active, .oo-ui-popupToolGroup-active-tools) > .oo-ui-popupToolGroup-handle {
+
+    :is(.oo-ui-popupToolGroup-active, .oo-ui-popupToolGroup-active-tools)
+        > .oo-ui-popupToolGroup-handle {
         background-color: hsl(240, 1.4%, 19%) !important;
         color: hsl(0, 0%, 90%) !important;
     }
-    
+
     :is(.oo-ui-popupToolGroup-active, .oo-ui-popupToolGroup-active-tools) .oo-ui-iconElement-icon {
         opacity: 1 !important;
         filter: invert(1) hue-rotate(190deg) brightness(1) !important;
     }
-    
-    :is(.oo-ui-popupToolGroup-active, .oo-ui-popupToolGroup-active-tools) .oo-ui-tool-active.oo-ui-widget-enabled .oo-ui-tool-link .oo-ui-tool-title,
+
+    :is(.oo-ui-popupToolGroup-active, .oo-ui-popupToolGroup-active-tools)
+        .oo-ui-tool-active.oo-ui-widget-enabled
+        .oo-ui-tool-link
+        .oo-ui-tool-title,
     .oo-ui-tool.oo-ui-widget-enabled.oo-ui-tool-active > .oo-ui-tool-link {
         color: hsl(228.9, 100%, 75.7%) !important;
     }
-    
-    .oo-ui-toolbar-actions .oo-ui-popupToolGroup.oo-ui-widget-enabled > .oo-ui-popupToolGroup-handle:hover {
+
+    .oo-ui-toolbar-actions
+        .oo-ui-popupToolGroup.oo-ui-widget-enabled
+        > .oo-ui-popupToolGroup-handle:hover {
         border-right: 1px solid transparent !important;
     }
-    
+
     .oo-ui-popupToolGroup-tools {
         background-color: hsl(240, 1.4%, 19%) !important;
         border: none !important;
         margin-left: -0.2px !important;
         box-shadow: 0 2px 2px 0 hsla(0, 0%, 0%, 0.03) !important;
     }
-    
+
     .oo-ui-menuToolGroup-tools .oo-ui-tool.oo-ui-tool-active,
-    .oo-ui-toolGroup-tools .oo-ui-tool.oo-ui-widget-enabled.oo-ui-tool-active > .oo-ui-tool-link:hover,
+    .oo-ui-toolGroup-tools
+        .oo-ui-tool.oo-ui-widget-enabled.oo-ui-tool-active
+        > .oo-ui-tool-link:hover,
     .oo-ui-tool.oo-ui-widget-enabled.oo-ui-tool-active > .oo-ui-tool-link {
         background-color: hsl(240, 1.4%, 28%) !important;
     }
-    
+
     .oo-ui-toolGroup-tools .oo-ui-menuToolGroup-tools > .oo-ui-tool.oo-ui-widget-enabled:hover,
     .oo-ui-toolGroup-tools .oo-ui-tool.oo-ui-widget-enabled > .oo-ui-tool-link:hover,
     .oo-ui-menuToolGroup-tools .oo-ui-tool.oo-ui-widget-enabled:hover,
     .oo-ui-listToolGroup-tools .oo-ui-tool.oo-ui-widget-enabled:hover {
         background-color: hsl(240, 1.4%, 25%) !important;
     }
-    
+
     .oo-ui-widget-disabled > .ve-ui-toolbar-saveButton {
         background-color: hsl(240, 5.4%, 19%) !important;
         opacity: 0.5 !important;
     }
-    
-    .oo-ui-widget.oo-ui-tool:is(.oo-ui-widget-enabled, .oo-ui-tool-active) > .oo-ui-tool-link.ve-ui-toolbar-saveButton {
+
+    .oo-ui-widget.oo-ui-tool:is(.oo-ui-widget-enabled, .oo-ui-tool-active)
+        > .oo-ui-tool-link.ve-ui-toolbar-saveButton {
         background-color: hsl(228.9, 100%, 68%) !important;
         color: white !important;
         opacity: 1 !important;
         border: none !important;
     }
-    
-    .oo-ui-widget.oo-ui-tool:is(.oo-ui-widget-enabled, .oo-ui-tool-active) > .oo-ui-tool-link.ve-ui-toolbar-saveButton:hover {
+
+    .oo-ui-widget.oo-ui-tool:is(.oo-ui-widget-enabled, .oo-ui-tool-active)
+        > .oo-ui-tool-link.ve-ui-toolbar-saveButton:hover {
         background-color: hsl(228.9, 93%, 62%) !important;
         color: white !important;
     }
-    
+
     .oo-ui-toolbar-position-top .ve-ui-toolbarDialog-position-above.oo-ui-window-ready {
         max-height: 300px !important;
     }
-    
-    .oo-ui-toolbar-position-top .ve-ui-toolbarDialog-position-above.oo-ui-window-ready .oo-ui-window-frame,
+
+    .oo-ui-toolbar-position-top
+        .ve-ui-toolbarDialog-position-above.oo-ui-window-ready
+        .oo-ui-window-frame,
     .ve-ui-specialCharacterDialog .oo-ui-bookletLayout {
         height: 300px !important;
     }
-    
+
     .oo-ui-toolbar-position-top .ve-ui-toolbarDialog-position-above {
         border-top: none !important;
     }
-    
+
     .oo-ui-outlineOptionWidget.oo-ui-optionWidget-selected {
         background-color: hsl(240, 1.4%, 28%) !important;
         color: hsl(0, 0%, 90%) !important;
     }
-    
+
     .oo-ui-outlineOptionWidget.oo-ui-optionWidget-highlighted:not(.oo-ui-optionWidget-selected) {
         background-color: hsl(240, 1.4%, 25%) !important;
         color: hsl(0, 0%, 80%) !important;
     }
-    
+
     .ve-ui-specialCharacterPage-character {
         border-color: hsl(240, 1.4%, 25%) !important;
         color: hsl(0, 0%, 80%) !important;
         transition: none !important;
     }
-    
+
     .ve-ui-specialCharacterPage-character:hover {
         border-color: hsl(240, 1.4%, 40%) !important;
         color: hsl(0, 0%, 100%) !important;
     }
-    
+
     .ve-ui-specialCharacterPage h3 {
         color: hsl(0, 0%, 80%) !important;
     }
-    
-    .ve-ce-branchNode-blockSlug, .ve-ce-branchNode-newSlug {
+
+    .ve-ce-branchNode-blockSlug,
+    .ve-ce-branchNode-newSlug {
         outline: none !important;
         background-color: hsl(240, 1.4%, 19%) !important;
     }
-    
+
     #bodyContent :is(.ve-ce-branchNode-blockSlug, .ve-ce-branchNode-newSlug) a {
         text-decoration: none !important;
     }
-    
+
     .ve-ce-branchNode-blockSlug > .oo-ui-buttonWidget {
         opacity: 1 !important;
     }
-    
+
     .ve-ce-focusableNode-highlight {
         background: hsl(230.9, 100%, 75%) !important;
         box-shadow: none !important;
     }
-    
+
     .ve-ce-surface-highlights-focused .ve-ce-focusableNode-highlights {
         opacity: 0.3 !important;
     }
-    
+
     .ve-ui-mwSaveDialog-options {
         position: relative;
         background-color: hsl(240, 1.4%, 19%) !important;
         border: none !important;
     }
-    
+
     .ve-ui-mwSaveDialog-summary {
         background-color: transparent !important;
     }
-    
+
     .ve-ui-overlay a:not([role="button"]) {
         color: #8ab5e5 !important;
     }
-    
+
     .oo-ui-checkboxInputWidget.oo-ui-widget-enabled [type="checkbox"] + span {
         background-color: hsl(240, 1.4%, 30%) !important;
         border: none !important;
@@ -2462,74 +2511,81 @@ domain("wikimedia.org") {
         box-shadow: none !important;
         transition: none !important;
     }
-    
+
     .oo-ui-checkboxInputWidget.oo-ui-widget-enabled [type="checkbox"]:hover + span {
         background-color: hsl(240, 1.4%, 35%) !important;
         border: 1px solid hsl(240, 1.4%, 45%) !important;
     }
-    
+
     .oo-ui-checkboxInputWidget.oo-ui-widget-enabled [type="checkbox"]:checked + span {
         background-color: hsl(228.9, 93%, 62%) !important;
         border: none !important;
     }
-    
+
     .oo-ui-checkboxInputWidget.oo-ui-widget-enabled [type="checkbox"]:checked:hover + span {
         border: 1px solid hsl(228.9, 100%, 74%) !important;
     }
-    
+
     .oo-ui-processDialog-actions-primary > .oo-ui-buttonElement > .oo-ui-buttonElement-button {
         background-color: hsl(228.9, 100%, 68%) !important;
         border: none !important;
     }
-    
-    .oo-ui-processDialog-actions-primary > .oo-ui-buttonElement > .oo-ui-buttonElement-button:hover {
+
+    .oo-ui-processDialog-actions-primary
+        > .oo-ui-buttonElement
+        > .oo-ui-buttonElement-button:hover {
         background-color: hsl(228.9, 93%, 62%) !important;
         border: none !important;
     }
-    
-    .oo-ui-processDialog-content .oo-ui-window-head, .oo-ui-processDialog-content .oo-ui-window-foot {
+
+    .oo-ui-processDialog-content .oo-ui-window-head,
+    .oo-ui-processDialog-content .oo-ui-window-foot {
         outline: 1px solid hsl(240, 1.4%, 15%) !important;
     }
-    
-    .oo-ui-processDialog-actions-other .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button {
+
+    .oo-ui-processDialog-actions-other
+        .oo-ui-buttonElement-framed.oo-ui-widget-enabled
+        > .oo-ui-buttonElement-button {
         background-color: hsl(240, 1.4%, 30%) !important;
         color: hsl(0, 0%, 90%) !important;
         border-color: transparent !important;
     }
-    
-    .oo-ui-processDialog-actions-other .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button:hover {
+
+    .oo-ui-processDialog-actions-other
+        .oo-ui-buttonElement-framed.oo-ui-widget-enabled
+        > .oo-ui-buttonElement-button:hover {
         background-color: hsl(240, 1.4%, 35%) !important;
     }
-    
+
     .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button:focus {
         border-color: transparent !important;
         box-shadow: none !important;
         outline: none !important;
     }
-    
+
     .oo-ui-processDialog-actions-safe .oo-ui-iconElement-icon {
         filter: invert(1) !important;
         opacity: 0.75 !important;
     }
-    
+
     .oo-ui-processDialog-actions-safe .oo-ui-buttonElement-button {
         background-color: transparent !important;
         border: none !important;
     }
-    
+
     .oo-ui-processDialog-actions-safe .oo-ui-buttonElement-button:hover > .oo-ui-iconElement-icon {
         opacity: 1 !important;
     }
 
-    .oo-ui-windowManager-modal>.oo-ui-dialog {
+    .oo-ui-windowManager-modal > .oo-ui-dialog {
         background-color: rgba(0, 0, 0, 0.8) !important;
     }
 
-    .oo-ui-windowManager-modal.oo-ui-windowManager-floating>.oo-ui-dialog>.oo-ui-window-frame {
-        background-color: #040404FF !important;
+    .oo-ui-windowManager-modal.oo-ui-windowManager-floating > .oo-ui-dialog > .oo-ui-window-frame {
+        background-color: #040404ff !important;
         border: none !important;
         border-radius: 4px !important;
-        color: #ffffffC9 !important;
+        color: #ffffffc9 !important;
     }
 
     .oo-ui-processDialog-actions-safe .oo-ui-labelElement-label {
@@ -2538,13 +2594,12 @@ domain("wikimedia.org") {
 
     .mwe-popups {
         background: unset !important;
-        -webkit-box-shadow: 0 0 25px 2px rgba(0, 0, 0, 0.05), 0 0 5px 1px rgba(0, 0, 0, 0.25) !important;
+        box-shadow: 0 0 25px 2px rgba(0, 0, 0, 0.05), 0 0 5px 1px rgba(0, 0, 0, 0.25) !important;
         border-radius: 3px !important;
     }
 
     .mwe-popups .mw-ui-icon {
         font-size: 16px !important;
-        /*  visibility:collapse !important; */
     }
 
     .mwe-popups .mw-ui-icon:before {
@@ -2558,9 +2613,6 @@ domain("wikimedia.org") {
     }
 
     .mwe-popups .mwe-popups-container {
-        /*! margin-top: -9px !important; */
-        /*! padding-top: 9px !important; */
-        /*! text-decoration: none !important; */
         background-color: hsla(0, 0%, 2%, 0.95) !important;
     }
 
@@ -2574,12 +2626,8 @@ domain("wikimedia.org") {
     }
 
     .mwe-popups .mwe-popups-extract {
-        /*! margin: 16px !important; */
-        /*! display: block !important; */
         color: rgba(255, 255, 255, 0.75) !important;
         text-decoration: none !important;
-        /*! position: relative !important; */
-        /*! overflow: scroll !important; */
         scrollbar-width: none !important;
     }
 
@@ -2588,7 +2636,7 @@ domain("wikimedia.org") {
     }
 
     .mwe-popups .mwe-popups-extract:after {
-        content: ' ' !important;
+        content: " " !important;
         position: absolute !important;
         bottom: 0 !important;
         width: 25% !important;
@@ -2597,12 +2645,12 @@ domain("wikimedia.org") {
         pointer-events: none !important;
     }
 
-    .mwe-popups .mwe-popups-extract[dir='ltr']:after {
+    .mwe-popups .mwe-popups-extract[dir="ltr"]:after {
         right: 0 !important;
         background-image: none !important;
     }
 
-    .mwe-popups .mwe-popups-extract[dir='rtl']:after {
+    .mwe-popups .mwe-popups-extract[dir="rtl"]:after {
         left: 0 !important;
         background-image: none !important;
     }
@@ -2634,20 +2682,18 @@ domain("wikimedia.org") {
         width: 450px !important;
     }
 
-    .mwe-popups.mwe-popups-is-tall>div>a>svg {
+    .mwe-popups.mwe-popups-is-tall > div > a > svg {
         vertical-align: middle !important;
     }
 
     .mwe-popups.mwe-popups-is-tall .mwe-popups-extract {
-        /* width: 215px !important; */
         height: 200px !important;
         overflow: scroll !important;
         scrollbar-width: none !important;
-        /*! float: left !important; */
         margin-block: 25px !important;
         padding-block: 0 !important;
     }
-    
+
     .mwe-popups:is(.flipped-y, .flipped-x-y) .mwe-popups-extract {
         margin-top: 16px !important;
     }
@@ -2670,12 +2716,12 @@ domain("wikimedia.org") {
         margin-top: 25px !important;
         padding-bottom: 0 !important;
     }
-    
+
     .mwe-popups.mwe-popups-is-not-tall:is(.flipped-y, .flipped-x-y) .mwe-popups-extract {
         margin-bottom: 25px !important;
         margin-top: 16px !important;
     }
-    
+
     .mwe-popups.mwe-popups-is-not-tall.mwe-popups-image-pointer .mwe-popups-extract {
         padding-top: 0px !important;
         margin-top: 16px !important;
@@ -2700,18 +2746,17 @@ domain("wikimedia.org") {
     }
 
     .mwe-popups.mwe-popups-no-image-pointer:before {
-        content: '' !important;
+        content: "" !important;
         position: absolute !important;
         border: 8px solid transparent !important;
         border-top: 0 !important;
         border-bottom: 8px solid rgba(5, 5, 5, 0.95) !important;
         top: -8px !important;
         left: 10px !important;
-        /*         visibility: collapse !important; */
     }
 
     .mwe-popups.mwe-popups-no-image-pointer:after {
-        content: '' !important;
+        content: "" !important;
         position: absolute !important;
         border: 11px solid transparent !important;
         border-top: 0 !important;
@@ -2724,7 +2769,6 @@ domain("wikimedia.org") {
     .mwe-popups.flipped-x.mwe-popups-no-image-pointer:before {
         left: auto !important;
         right: 10px !important;
-        /*         visibility: collapse !important; */
     }
 
     .mwe-popups.flipped-x.mwe-popups-no-image-pointer:after {
@@ -2734,7 +2778,7 @@ domain("wikimedia.org") {
     }
 
     .mwe-popups.mwe-popups-image-pointer:before {
-        content: '' !important;
+        content: "" !important;
         position: absolute !important;
         border: 8px solid transparent !important;
         border-top: 0 !important;
@@ -2742,11 +2786,10 @@ domain("wikimedia.org") {
         top: -8px !important;
         left: 10px !important;
         z-index: 111 !important;
-        /*         visibility: collapse !important; */
     }
 
     .mwe-popups.mwe-popups-image-pointer:after {
-        content: '' !important;
+        content: "" !important;
         position: absolute !important;
         border: 12px solid transparent !important;
         border-top: 0 !important;
@@ -2758,18 +2801,17 @@ domain("wikimedia.org") {
     }
 
     .mwe-popups.mwe-popups-image-pointer.flipped-x:before {
-        content: '' !important;
+        content: "" !important;
         position: absolute !important;
         border: 8px solid transparent !important;
         border-top: 0 !important;
         border-bottom: 8px solid rgba(5, 5, 5, 0.95) !important;
         top: -8px !important;
         left: 294px !important;
-        /*         visibility: collapse !important; */
     }
 
     .mwe-popups.mwe-popups-image-pointer.flipped-x:after {
-        content: '' !important;
+        content: "" !important;
         position: absolute !important;
         border: 12px solid transparent !important;
         border-top: 0 !important;
@@ -2779,18 +2821,7 @@ domain("wikimedia.org") {
         visibility: collapse !important;
     }
 
-/*     .mwe-popups.mwe-popups-image-pointer .mwe-popups-extract {
-        padding-top: 8px !important;
-        margin-top: 200px !important;
-    }
-
-    .mwe-popups-is-not-tall.flipped-y .mwe-popups-discreet,
-    .mwe-popups-is-not-tall.flipped-x-y .mwe-popups-discreet {
-        height: 200px !important;
-        display: block !important;
-    } */
-
-    .mwe-popups.mwe-popups-image-pointer>div>a>svg {
+    .mwe-popups.mwe-popups-image-pointer > div > a > svg {
         margin-top: -8px !important;
         position: absolute !important;
         z-index: 113 !important;
@@ -2799,11 +2830,10 @@ domain("wikimedia.org") {
 
     .mwe-popups.flipped-x.mwe-popups-is-tall {
         min-height: 242px !important;
-        /*         visibility: collapse !important; */
     }
 
     .mwe-popups.flipped-x.mwe-popups-is-tall:before {
-        content: '' !important;
+        content: "" !important;
         position: absolute !important;
         border: 7px solid transparent !important;
         border-top: 0 !important;
@@ -2811,10 +2841,9 @@ domain("wikimedia.org") {
         top: -7px !important;
         left: 422px !important;
         z-index: 111 !important;
-        /*         visibility: collapse !important; */
     }
 
-    .mwe-popups.flipped-x.mwe-popups-is-tall>div>a>svg {
+    .mwe-popups.flipped-x.mwe-popups-is-tall > div > a > svg {
         margin: 0 !important;
         margin-top: -8px !important;
         margin-bottom: -7px !important;
@@ -2824,7 +2853,7 @@ domain("wikimedia.org") {
     }
 
     .mwe-popups.flipped-x-y:before {
-        content: '' !important;
+        content: "" !important;
         position: absolute !important;
         border: 8px solid transparent !important;
         border-bottom: 0 !important;
@@ -2832,11 +2861,10 @@ domain("wikimedia.org") {
         bottom: -8px !important;
         left: 294px !important;
         z-index: 111 !important;
-        /*         visibility: collapse !important; */
     }
 
     .mwe-popups.flipped-x-y:after {
-        content: '' !important;
+        content: "" !important;
         position: absolute !important;
         border: 12px solid transparent !important;
         border-bottom: 0 !important;
@@ -2849,22 +2877,20 @@ domain("wikimedia.org") {
 
     .mwe-popups.flipped-x-y.mwe-popups-is-tall {
         min-height: 242px !important;
-        /*         visibility: collapse !important; */
     }
 
     .mwe-popups.flipped-x-y.mwe-popups-is-tall:before {
-        content: '' !important;
+        content: "" !important;
         position: absolute !important;
         border: 7px solid transparent !important;
         border-bottom: 0 !important;
         border-top: 7px solid rgba(5, 5, 5, 0.95) !important;
         bottom: -7px !important;
         left: 422px !important;
-        /*         visibility: collapse !important; */
     }
 
     .mwe-popups.flipped-x-y.mwe-popups-is-tall:after {
-        content: '' !important;
+        content: "" !important;
         position: absolute !important;
         border: 12px solid transparent !important;
         border-bottom: 0 !important;
@@ -2874,7 +2900,7 @@ domain("wikimedia.org") {
         visibility: collapse !important;
     }
 
-    .mwe-popups.flipped-x-y.mwe-popups-is-tall>div>a>svg {
+    .mwe-popups.flipped-x-y.mwe-popups-is-tall > div > a > svg {
         margin: 0 !important;
         margin-bottom: -9px !important;
         position: absolute !important;
@@ -2883,18 +2909,17 @@ domain("wikimedia.org") {
     }
 
     .mwe-popups.flipped-y:before {
-        content: '' !important;
+        content: "" !important;
         position: absolute !important;
         border: 8px solid transparent !important;
         border-bottom: 0 !important;
         border-top: 8px solid rgba(5, 5, 5, 0.95) !important;
         bottom: -8px !important;
         left: 10px !important;
-        /*         visibility: collapse !important; */
     }
 
     .mwe-popups.flipped-y:after {
-        content: '' !important;
+        content: "" !important;
         position: absolute !important;
         border: 11px solid transparent !important;
         border-bottom: 0 !important;
@@ -2937,7 +2962,7 @@ domain("wikimedia.org") {
         margin: 0 16px !important;
     }
 
-    #mw-content-text .reference a[href*='#'] * {
+    #mw-content-text .reference a[href*="#"] * {
         pointer-events: none !important;
     }
 
@@ -2958,7 +2983,9 @@ domain("wikimedia.org") {
         margin: 0 !important;
     }
 
-    .mwe-popups.mwe-popups-type-reference .mwe-popups-title .mw-ui-icon.mw-ui-icon-reference-generic {
+    .mwe-popups.mwe-popups-type-reference
+        .mwe-popups-title
+        .mw-ui-icon.mw-ui-icon-reference-generic {
         margin-left: -2px !important;
     }
 
@@ -2999,7 +3026,7 @@ domain("wikimedia.org") {
     .mwe-popups.mwe-popups-type-reference .mwe-popups-read-link {
         font-size: 12px !important;
     }
-    
+
     .mwe-popups-read-link {
         display: none !important;
     }
@@ -3038,7 +3065,7 @@ domain("wikimedia.org") {
     }
 
     td.mbox-text {
-        color: #ffffffC9 !important;
+        color: #ffffffc9 !important;
     }
 
     .rt-tooltip {
@@ -3049,7 +3076,7 @@ domain("wikimedia.org") {
         font-size: 13px !important;
         line-height: 1.48em !important;
         background: rgba(5, 5, 5, 0.95) !important;
-        -webkit-box-shadow: 0 0 25px 2px rgba(0, 0, 0, 0.05), 0 0 5px 1px rgba(0, 0, 0, 0.25) !important;
+        box-shadow: 0 0 25px 2px rgba(0, 0, 0, 0.05), 0 0 5px 1px rgba(0, 0, 0, 0.25) !important;
         border: none !important;
         overflow-wrap: break-word !important;
     }
@@ -3067,7 +3094,7 @@ domain("wikimedia.org") {
     }
 
     .rt-tooltip-below .rt-tooltipTail {
-        content: '' !important;
+        content: "" !important;
         border: 9px solid transparent !important;
         border-top: 0 !important;
         border-bottom: 9px solid rgba(5, 5, 5, 0.95) !important;
@@ -3131,7 +3158,7 @@ domain("wikimedia.org") {
         color: rgba(255, 255, 255, 0.75) !important;
         background-color: rgba(5, 5, 5, 0.9) !important;
     }
-    
+
     .mw-mmv-image-metadata-column {
         margin-bottom: 8px !important;
     }
@@ -3141,11 +3168,11 @@ domain("wikimedia.org") {
         background-color: rgba(19, 19, 19, 0.9) !important;
         padding-top: 0px !important;
     }
-    
+
     .mw-mmv-untruncated .mw-mmv-image-metadata {
         background: none !important;
     }
-    
+
     .metadata-panel-is-closed .mw-mmv-image-metadata-links-column {
         margin-top: -4px !important;
     }
@@ -3161,7 +3188,7 @@ domain("wikimedia.org") {
     .mw-mmv-source-author a:not(.new):visited {
         color: #dcb7ff !important;
     }
-    
+
     .mw-mmv-ttf-ellipsis {
         background-color: transparent !important;
         border: none !important;
@@ -3170,45 +3197,28 @@ domain("wikimedia.org") {
         fill: hsla(0, 0%, 100%, 0.6) !important;
         background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'> <g fill='context-fill' fill-opacity='context-fill-opacity' transform='translate(0 20)'> <path d='M22 48.3c0 6.1-4.9 11-11 11s-11-4.9-11-11 4.9-11 11-11 11 4.9 11 11zm37 0c0 6.1-4.9 11-11 11s-11-4.9-11-11 4.9-11 11-11 11 4.9 11 11z'/> <circle cx='85' cy='48.3' r='11'/> </g> </svg>") !important;
     }
-    
+
     .mw-mmv-ttf-ellipsis:hover {
         fill: hsla(0, 0%, 100%, 1) !important;
     }
-    
+
     .mw-mmv-ttf-ellipsis::before {
         background-image: none !important;
         display: none !important;
     }
-    
+
     .mw-mmv-about-links {
         display: none !important;
     }
 
-    /* #bodyContent li::marker {
-        color: #fff !important;
-        filter: brightness(550%) !important;
-    } */
-
-    /* .client-js .sortable:not(.jquery-tablesorter)>*>tr:first-child>th:not(.unsortable),
-    .jquery-tablesorter th.headerSort {
-        filter: invert(1) !important;
-        background-color: rgb(250, 250, 250) !important;
-    }
-
-    .client-js .sortable:not(.jquery-tablesorter)>*>tr:first-child>th:not(.unsortable),
-    .jquery-tablesorter th.headerSort .reference {
-        filter: invert(1) !important;
-    } */
-
     table.jquery-tablesorter thead tr th.headerSort,
-    table.wikitable>tbody>tr>th {
-        /*         filter: invert(1) !important; */
+    table.wikitable > tbody > tr > th {
         background-color: rgb(11, 11, 12) !important;
         color: rgb(250, 250, 250) !important;
         font-weight: normal !important;
         font-family: Patua One;
     }
-    
+
     .mw-parser-output .IPA-common-caption,
     .mw-parser-output .IPA-vowels-main th,
     .mw-parser-output .IPA-vowels-container-right > span,
@@ -3218,25 +3228,25 @@ domain("wikimedia.org") {
     .mw-parser-output .IPA-vowels-container > div {
         background: none !important;
     }
-    
+
     .mw-parser-output .IPA-vowels-container {
         font-size: initial !important;
     }
-    
-    table.wikitable>caption {
+
+    table.wikitable > caption {
         background: none !important;
         border: none !important;
     }
 
-    table:not([class])>tr>th,
-    table:not([class])>tr>td,
-    table:not([class])>*>tr>th,
-    table:not([class])>*>tr>td {
+    table:not([class]) > tr > th,
+    table:not([class]) > tr > td,
+    table:not([class]) > * > tr > th,
+    table:not([class]) > * > tr > td {
         border-color: rgba(162, 169, 177, 0.4) !important;
     }
 
-    table:not([class])>tr>th,
-    table:not([class])>*>tr>th {
+    table:not([class]) > tr > th,
+    table:not([class]) > * > tr > th {
         background-color: rgb(11, 11, 12) !important;
         color: rgb(250, 250, 250) !important;
         font-weight: normal !important;
@@ -3244,7 +3254,8 @@ domain("wikimedia.org") {
     }
 
     table.wikitable.sortable.jquery-tablesorter thead tr th.headerSort {
-        background-image: linear-gradient(transparent, transparent), url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2221%22 height=%229%22 viewBox=%220 0 21 9%22%3E %3Cpath d=%22M14.5 5l-4 4-4-4zm0-1l-4-4-4 4z %22 fill=%22%23f0f0f0%22/%3E %3C/svg%3E") !important;
+        background-image: linear-gradient(transparent, transparent),
+            url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2221%22 height=%229%22 viewBox=%220 0 21 9%22%3E %3Cpath d=%22M14.5 5l-4 4-4-4zm0-1l-4-4-4 4z %22 fill=%22%23f0f0f0%22/%3E %3C/svg%3E") !important;
         background-repeat: no-repeat !important;
         background-position: center right !important;
     }
@@ -3253,39 +3264,38 @@ domain("wikimedia.org") {
     tbody tr,
     tbody tr td {
         background-color: rgba(43, 47, 50, 0) !important;
-        /*         border-radius: 3px !important; */
     }
-    
+
     tbody tr td div[style*="background-color: lavender" i] {
         background-color: rgba(43, 47, 50, 0) !important;
     }
-    
+
     #bodyContent div:not([class])[style*="background"] {
         background: none !important;
     }
-    
+
     #bodyContent .mw-collapsible {
         border-radius: 3px !important;
         padding: 0 !important;
         margin-block: 4px !important;
         background: hsl(240, 1.4%, 13.9%) !important;
     }
-    
+
     #bodyContent .mw-collapsible[style*="width:100%"] {
         width: -moz-max-content !important;
     }
-    
-    #bodyContent .mw-collapsed>.mw-collapsible-content {
+
+    #bodyContent .mw-collapsed > .mw-collapsible-content {
         display: block !important;
         visibility: collapse !important;
         max-height: 1px !important;
     }
-    
-    #bodyContent .mw-collapsible-content>table {
+
+    #bodyContent .mw-collapsible-content > table {
         padding: 3px !important;
     }
-    
-    #bodyContent .mw-collapsible>:is(div, span):not([class]) {
+
+    #bodyContent .mw-collapsible > :is(div, span):not([class]) {
         width: -moz-fit-content !important;
         margin: auto !important;
     }
@@ -3302,20 +3312,18 @@ domain("wikimedia.org") {
         background-color: rgb(35, 35, 36) !important;
     }
 
-    .vertical-navbox>tbody tr td {
+    .vertical-navbox > tbody tr td {
         border-radius: 0px !important;
     }
 
     :is(th, tr, td)[style*="background:"]:not([style*="color:"]) {
-        /*         color: initial !important;
-        filter: invert(1) hue-rotate(180deg) !important; */
         background-color: transparent !important;
         color: rgb(204, 204, 204) !important;
     }
 
     #p-navigation.portal,
     #p-lang.portal {
-        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
     }
 
     .navbox-list {
@@ -3334,7 +3342,7 @@ domain("wikimedia.org") {
         padding-bottom: 7px !important;
         border-radius: 3px !important;
         background-color: rgb(35, 35, 36) !important;
-        -webkit-box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.05), 0 0 3px 1px rgba(0, 0, 0, 0.15) !important;
+        box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.05), 0 0 3px 1px rgba(0, 0, 0, 0.15) !important;
     }
 
     .plainlinks.hlist.navbar.mini ul {
@@ -3349,17 +3357,17 @@ domain("wikimedia.org") {
     #bodyContent div.thumb {
         border-radius: 3px !important;
         background-color: rgb(35, 35, 36) !important;
-        -webkit-box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.05), 0 0 3px 1px rgba(0, 0, 0, 0.15) !important;
+        box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.05), 0 0 3px 1px rgba(0, 0, 0, 0.15) !important;
         border: none !important;
     }
 
     #content .gallerybox div.thumb {
         background-color: rgba(248, 249, 250, 0) !important;
-        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
     }
 
     #content .infobox {
-        -webkit-box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.05), 0 0 3px 1px rgba(0, 0, 0, 0.15) !important;
+        box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.05), 0 0 3px 1px rgba(0, 0, 0, 0.15) !important;
     }
 
     #content .thumbinner {
@@ -3375,7 +3383,7 @@ domain("wikimedia.org") {
         border-radius: 4px !important;
         background-color: rgb(35, 35, 36) !important;
         color: #fff !important;
-        -webkit-box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.05), 0 0 3px 1px rgba(0, 0, 0, 0.15) !important;
+        box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.05), 0 0 3px 1px rgba(0, 0, 0, 0.15) !important;
     }
 
     #bodyContent .portal a {
@@ -3428,8 +3436,7 @@ domain("wikimedia.org") {
     }
 
     #content .gallery {
-        -webkit-box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.05), 0 0 3px 1px rgba(0, 0, 0, 0.15) !important;
-        /*         border-radius: 3px !important; */
+        box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.05), 0 0 3px 1px rgba(0, 0, 0, 0.15) !important;
         display: inline-block !important;
     }
 
@@ -3469,27 +3476,27 @@ domain("wikimedia.org") {
         border-radius: 3px !important;
         z-index: 1004;
     }
-    
+
     .mw-mmv-download-dialog .mw-mmv-dialog-down-arrow {
         background-color: hsl(215, 8%, 3.5%) !important;
     }
-    
+
     .mw-mmv-download-pane .mw-mmv-download-attribution {
         background-color: hsl(215, 8%, 3.5%) !important;
         color: hsl(0, 0%, 60%) !important;
         border-bottom-left-radius: 3px !important;
         border-bottom-right-radius: 3px !important;
     }
-    
+
     .mw-mmv-download-pane .mw-mmv-download-attribution-cta * {
         background: none !important;
         color: hsl(0, 0%, 60%) !important;
     }
-    
+
     .mw-mmv-download-pane .mw-mmv-download-attribution:hover .mw-mmv-download-attribution-cta * {
         color: hsl(0, 0%, 90%) !important;
     }
-    
+
     .oo-ui-menuSelectWidget {
         overflow: hidden !important;
         color: hsl(0, 0%, 60%) !important;
@@ -3498,36 +3505,38 @@ domain("wikimedia.org") {
         border-radius: 3px !important;
         box-shadow: 0 0px 5px -1px hsla(0, 0%, 0%, 0.25) !important;
     }
-    
+
     .oo-ui-menuOptionWidget.oo-ui-optionWidget {
         color: hsl(0, 0%, 70%) !important;
     }
-    
+
     .oo-ui-menuOptionWidget.oo-ui-optionWidget-selected,
     .oo-ui-menuOptionWidget.oo-ui-optionWidget-selected.oo-ui-optionWidget-highlighted {
         background-color: hsl(215, 6%, 8%) !important;
         color: hsl(0, 0%, 90%) !important;
     }
-    
+
     .oo-ui-menuOptionWidget.oo-ui-optionWidget-highlighted {
         background-color: hsl(215, 6%, 6%) !important;
         color: hsl(0, 0%, 90%) !important;
     }
-    
+
     .mw-mmv-reuse-dialog .mw-mmv-reuse-tabs .oo-ui-optionWidget.oo-ui-optionWidget-selected,
-    .mw-mmv-reuse-dialog .mw-mmv-reuse-tabs .oo-ui-optionWidget.oo-ui-optionWidget-highlighted.oo-ui-optionWidget-selected {
+    .mw-mmv-reuse-dialog
+        .mw-mmv-reuse-tabs
+        .oo-ui-optionWidget.oo-ui-optionWidget-highlighted.oo-ui-optionWidget-selected {
         border-bottom: 3px solid hsl(0, 0%, 90%) !important;
     }
-    
+
     .mw-mmv-reuse-dialog .mw-mmv-reuse-tabs .oo-ui-optionWidget.oo-ui-optionWidget-highlighted {
         border-bottom: 3px solid hsl(0, 0%, 60%) !important;
     }
-    
+
     .mw-mmv-reuse-dialog .mw-mmv-dialog-down-arrow,
     .mw-mmv-options-dialog .mw-mmv-dialog-down-arrow {
         background-color: hsla(0, 0%, 1.7%, 1) !important;
     }
-    
+
     .oo-ui-textInputWidget .oo-ui-inputWidget-input {
         -moz-appearance: none !important;
         background-color: hsl(215, 6%, 6%) !important;
@@ -3535,67 +3544,98 @@ domain("wikimedia.org") {
         border: none !important;
         box-shadow: none !important;
     }
-    
-    .mw-mmv-share-pane .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button {
+
+    .mw-mmv-share-pane
+        .oo-ui-buttonElement-framed.oo-ui-widget-enabled
+        > .oo-ui-buttonElement-button {
         background-color: hsl(215, 6%, 6%) !important;
         color: hsl(0, 0%, 60%) !important;
         border: none !important;
         cursor: default !important;
     }
-    
-    .mw-mmv-share-pane .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button:hover {
+
+    .mw-mmv-share-pane
+        .oo-ui-buttonElement-framed.oo-ui-widget-enabled
+        > .oo-ui-buttonElement-button:hover {
         background-color: hsl(215, 6%, 6%) !important;
         color: hsl(0, 0%, 60%) !important;
         border: none !important;
     }
-    
-    .mw-mmv-share-pane .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button > .oo-ui-iconElement-icon:not(.oo-ui-image-invert),
-    .mw-mmv-share-pane .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button > .oo-ui-indicatorElement-indicator:not(.oo-ui-image-invert) {
+
+    .mw-mmv-share-pane
+        .oo-ui-buttonElement-framed.oo-ui-widget-enabled
+        > .oo-ui-buttonElement-button
+        > .oo-ui-iconElement-icon:not(.oo-ui-image-invert),
+    .mw-mmv-share-pane
+        .oo-ui-buttonElement-framed.oo-ui-widget-enabled
+        > .oo-ui-buttonElement-button
+        > .oo-ui-indicatorElement-indicator:not(.oo-ui-image-invert) {
         filter: invert(1) !important;
         opacity: 0.2 !important;
         cursor: pointer !important;
     }
-    
-    .mw-mmv-share-pane .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button:hover > .oo-ui-iconElement-icon:not(.oo-ui-image-invert):hover,
-    .mw-mmv-share-pane .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button:hover > .oo-ui-indicatorElement-indicator:not(.oo-ui-image-invert):hover {
+
+    .mw-mmv-share-pane
+        .oo-ui-buttonElement-framed.oo-ui-widget-enabled
+        > .oo-ui-buttonElement-button:hover
+        > .oo-ui-iconElement-icon:not(.oo-ui-image-invert):hover,
+    .mw-mmv-share-pane
+        .oo-ui-buttonElement-framed.oo-ui-widget-enabled
+        > .oo-ui-buttonElement-button:hover
+        > .oo-ui-indicatorElement-indicator:not(.oo-ui-image-invert):hover {
         opacity: 0.3 !important;
     }
-    
-    .mw-mmv-share-pane .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button:hover > .oo-ui-iconElement-icon:not(.oo-ui-image-invert),
-    .mw-mmv-share-pane .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button:hover > .oo-ui-indicatorElement-indicator:not(.oo-ui-image-invert) {
+
+    .mw-mmv-share-pane
+        .oo-ui-buttonElement-framed.oo-ui-widget-enabled
+        > .oo-ui-buttonElement-button:hover
+        > .oo-ui-iconElement-icon:not(.oo-ui-image-invert),
+    .mw-mmv-share-pane
+        .oo-ui-buttonElement-framed.oo-ui-widget-enabled
+        > .oo-ui-buttonElement-button:hover
+        > .oo-ui-indicatorElement-indicator:not(.oo-ui-image-invert) {
         opacity: 0.2 !important;
     }
-    
+
     .oo-ui-inputWidget-input {
         border: none !important;
         outline: none !important;
         box-shadow: none !important;
     }
-    
+
     .mw-mmv-embed-select .oo-ui-buttonElement.oo-ui-labelElement > input.oo-ui-buttonElement-button,
-    .mw-mmv-embed-select .oo-ui-buttonElement.oo-ui-labelElement > .oo-ui-buttonElement-button > .oo-ui-labelElement-label {
+    .mw-mmv-embed-select
+        .oo-ui-buttonElement.oo-ui-labelElement
+        > .oo-ui-buttonElement-button
+        > .oo-ui-labelElement-label {
         line-height: 1.6em !important;
     }
-    
+
     .mw-mmv-embed-select .oo-ui-buttonElement > .oo-ui-buttonElement-button {
         font-family: Abel !important;
         font-size: 14px !important;
         font-weight: normal !important;
     }
-    
-    .mw-mmv-embed-select .oo-ui-buttonElement-framed.oo-ui-widget-enabled.oo-ui-buttonElement-active > .oo-ui-buttonElement-button,
-    .mw-mmv-embed-select .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button:hover {
+
+    .mw-mmv-embed-select
+        .oo-ui-buttonElement-framed.oo-ui-widget-enabled.oo-ui-buttonElement-active
+        > .oo-ui-buttonElement-button,
+    .mw-mmv-embed-select
+        .oo-ui-buttonElement-framed.oo-ui-widget-enabled
+        > .oo-ui-buttonElement-button:hover {
         background-color: hsl(215, 8%, 9%) !important;
         color: hsl(0, 0%, 90%) !important;
         border: none !important;
     }
-    
-    .mw-mmv-embed-select .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button {
+
+    .mw-mmv-embed-select
+        .oo-ui-buttonElement-framed.oo-ui-widget-enabled
+        > .oo-ui-buttonElement-button {
         background-color: hsl(215, 8%, 7%) !important;
         color: hsl(0, 0%, 60%) !important;
         border: none !important;
     }
-    
+
     .mw-mmv-embed-pane .mw-widget-copyTextLayout-multiline-button .oo-ui-buttonElement-button {
         padding-block: 0 !important;
         padding-left: 34px !important;
@@ -3603,12 +3643,18 @@ domain("wikimedia.org") {
         background-color: hsl(215, 8%, 7%) !important;
         border: none !important;
     }
-    
-    .mw-mmv-embed-pane .mw-widget-copyTextLayout-multiline-button .oo-ui-buttonElement .oo-ui-iconElement-icon {
+
+    .mw-mmv-embed-pane
+        .mw-widget-copyTextLayout-multiline-button
+        .oo-ui-buttonElement
+        .oo-ui-iconElement-icon {
         left: 5px !important;
     }
-    
-    .mw-mmv-embed-pane .mw-widget-copyTextLayout-multiline-button .oo-ui-buttonElement .oo-ui-labelElement-label {
+
+    .mw-mmv-embed-pane
+        .mw-widget-copyTextLayout-multiline-button
+        .oo-ui-buttonElement
+        .oo-ui-labelElement-label {
         font-family: Abel !important;
         font-size: 24px !important;
         font-weight: 400 !important;
@@ -3617,33 +3663,52 @@ domain("wikimedia.org") {
         color: white !important;
         opacity: 0.6 !important;
     }
-    
-    .mw-mmv-embed-pane .mw-widget-copyTextLayout-multiline-button .oo-ui-buttonElement:hover .oo-ui-labelElement-label {
+
+    .mw-mmv-embed-pane
+        .mw-widget-copyTextLayout-multiline-button
+        .oo-ui-buttonElement:hover
+        .oo-ui-labelElement-label {
         opacity: 0.9 !important;
     }
-    
-    .mw-mmv-embed-pane .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button > .oo-ui-iconElement-icon:not(.oo-ui-image-invert),
-    .mw-mmv-embed-pane .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button > .oo-ui-indicatorElement-indicator:not(.oo-ui-image-invert) {
+
+    .mw-mmv-embed-pane
+        .oo-ui-buttonElement-framed.oo-ui-widget-enabled
+        > .oo-ui-buttonElement-button
+        > .oo-ui-iconElement-icon:not(.oo-ui-image-invert),
+    .mw-mmv-embed-pane
+        .oo-ui-buttonElement-framed.oo-ui-widget-enabled
+        > .oo-ui-buttonElement-button
+        > .oo-ui-indicatorElement-indicator:not(.oo-ui-image-invert) {
         filter: invert(1) !important;
         opacity: 0.3 !important;
         cursor: pointer !important;
     }
-    
-    .mw-mmv-embed-pane .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button:hover > .oo-ui-iconElement-icon:not(.oo-ui-image-invert),
-    .mw-mmv-embed-pane .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button:hover > .oo-ui-indicatorElement-indicator:not(.oo-ui-image-invert) {
+
+    .mw-mmv-embed-pane
+        .oo-ui-buttonElement-framed.oo-ui-widget-enabled
+        > .oo-ui-buttonElement-button:hover
+        > .oo-ui-iconElement-icon:not(.oo-ui-image-invert),
+    .mw-mmv-embed-pane
+        .oo-ui-buttonElement-framed.oo-ui-widget-enabled
+        > .oo-ui-buttonElement-button:hover
+        > .oo-ui-indicatorElement-indicator:not(.oo-ui-image-invert) {
         opacity: 0.45 !important;
     }
-    
-    .oo-ui-buttonElement.oo-ui-widget-enabled > .oo-ui-buttonElement-button > .oo-ui-iconElement-icon,
-    .oo-ui-buttonElement.oo-ui-widget-enabled > .oo-ui-buttonElement-button > .oo-ui-indicatorElement-indicator {
+
+    .oo-ui-buttonElement.oo-ui-widget-enabled
+        > .oo-ui-buttonElement-button
+        > .oo-ui-iconElement-icon,
+    .oo-ui-buttonElement.oo-ui-widget-enabled
+        > .oo-ui-buttonElement-button
+        > .oo-ui-indicatorElement-indicator {
         transition: none !important;
     }
-    
+
     .mw-mmv-embed-pane .oo-ui-textInputWidget {
         font-family: monospace !important;
         font-size: 13px !important;
     }
-    
+
     .mw-mmv-reuse-dialog .oo-ui-dropdownWidget.oo-ui-widget-enabled .oo-ui-dropdownWidget-handle {
         background-color: hsl(215, 6%, 8%) !important;
         color: hsl(0, 0%, 90%) !important;
@@ -3651,45 +3716,51 @@ domain("wikimedia.org") {
         box-shadow: none !important;
         transition: none !important;
     }
-    
-    .mw-mmv-reuse-dialog .oo-ui-dropdownWidget.oo-ui-widget-enabled .oo-ui-dropdownWidget-handle .oo-ui-indicator-down {
+
+    .mw-mmv-reuse-dialog
+        .oo-ui-dropdownWidget.oo-ui-widget-enabled
+        .oo-ui-dropdownWidget-handle
+        .oo-ui-indicator-down {
         filter: invert(1) !important;
         opacity: 0.4 !important;
         transform: scaleY(-1) !important;
     }
-    
-    .mw-mmv-reuse-dialog .oo-ui-dropdownWidget.oo-ui-widget-enabled.oo-ui-dropdownWidget-open .oo-ui-dropdownWidget-handle .oo-ui-indicator-down {
+
+    .mw-mmv-reuse-dialog
+        .oo-ui-dropdownWidget.oo-ui-widget-enabled.oo-ui-dropdownWidget-open
+        .oo-ui-dropdownWidget-handle
+        .oo-ui-indicator-down {
         opacity: 0.7 !important;
     }
-    
+
     .mw-mmv-options-text-header,
     .mw-mmv-options-text-body {
         color: hsl(0, 0%, 50%) !important;
     }
-    
+
     .mw-mmv-options-text-body {
         margin-top: 0px !important;
         margin-bottom: -1px !important;
         font-size: 13px !important;
         font-style: italic !important;
     }
-    
+
     .mw-mmv-options-dialog-header {
         color: hsl(0, 0%, 70%) !important;
     }
-    
+
     .mw-mmv-options-disable {
         margin-left: 5px !important;
     }
-    
+
     .mw-mmv-options-icon {
         margin-top: 5px !important;
     }
-    
+
     .mw-mmv-project-info-link {
         font-size: 15px !important;
     }
-    
+
     .mw-mmv-options-cancel-button {
         background-color: hsl(0, 0%, 17.3%) !important;
         color: hsl(0, 0%, 100%) !important;
@@ -3702,24 +3773,25 @@ domain("wikimedia.org") {
         line-height: 25px !important;
         margin-right: 5px !important;
     }
-    
+
     .mw-mmv-options-cancel-button:hover {
         background-color: hsl(0, 0%, 17.3%) !important;
         color: hsl(0, 0%, 100%) !important;
         border: 1px solid transparent !important;
         opacity: 0.7 !important;
     }
-    
+
     .mw-ui-button:focus {
         box-shadow: none !important;
         outline: none !important;
     }
-    
-    .mw-mmv-next-image, .mw-mmv-prev-image {
+
+    .mw-mmv-next-image,
+    .mw-mmv-prev-image {
         top: -999px;
         width: 40px !important;
         height: 120px;
-        transition: opacity 0.25s,margin 0.25s;
+        transition: opacity 0.25s, margin 0.25s;
     }
 
     .tipsy-inner {
@@ -3738,13 +3810,9 @@ domain("wikimedia.org") {
         -moz-transform: rotate(-45deg);
         transform: scale(85%) rotate(-45deg);
     }
-    
+
     .mw-mmv-fullscreen {
         background-size: contain !important;
-    }
-
-    .mwe-popups .mwe-popups-container {
-        /*! color: rgb(255, 255, 255, 0.75) !important; */
     }
 
     .mwe-popups .mw-ui-icon-preview-disambiguation {
@@ -3765,11 +3833,11 @@ domain("wikimedia.org") {
     .mw-ui-icon:hover {
         filter: contrast(0%) brightness(10000%) grayscale(0%) !important;
     }
-    
+
     .mw-ui-icon.mw-ui-icon-preview-generic {
         filter: invert() !important;
     }
-    
+
     .mwe-popups footer {
         display: none !important;
     }
@@ -3809,7 +3877,7 @@ domain("wikimedia.org") {
     .catlinks,
     .hintergrundfarbe1,
     .navbox-inner {
-        -webkit-box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.05), 0 0 3px 1px rgba(0, 0, 0, 0.15) !important;
+        box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.05), 0 0 3px 1px rgba(0, 0, 0, 0.15) !important;
     }
 
     body .ui-dialog .ttmlStyled {
@@ -3821,7 +3889,7 @@ domain("wikimedia.org") {
         border: none !important;
         background: rgb(35, 35, 36) !important;
         color: #fff !important;
-        font-family: 'Source Sans Pro' !important;
+        font-family: "Source Sans Pro" !important;
         font-weight: normal !important;
         font-size: 18px !important;
         padding: 5px !important;
@@ -3833,11 +3901,11 @@ domain("wikimedia.org") {
         border: none !important;
         background: rgb(35, 35, 36) !important;
         color: #fff !important;
-        font-family: 'Source Sans Pro' !important;
+        font-family: "Source Sans Pro" !important;
         font-size: 14px !important;
         padding: 5px !important;
         padding-left: 10px !important;
-        -webkit-box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.15), 0 0 3px 1px rgba(0, 0, 0, 0.15) !important;
+        box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.15), 0 0 3px 1px rgba(0, 0, 0, 0.15) !important;
     }
 
     .ui-widget-overlay {
@@ -3856,7 +3924,7 @@ domain("wikimedia.org") {
 
     .ui-dialog .ui-dialog-titlebar-close {
         position: absolute;
-        right: .3em !important;
+        right: 0.3em !important;
         top: 57% !important;
         border: none !important;
     }
@@ -3869,7 +3937,7 @@ domain("wikimedia.org") {
     .ui-dialog .ui-dialog-titlebar-close:hover {
         background: none !important;
     }
-    
+
     .ui-dialog .ui-dialog-titlebar-close:hover,
     .ui-dialog .ui-dialog-titlebar-close:focus {
         padding: 1px !important;
@@ -3943,12 +4011,12 @@ domain("wikimedia.org") {
         width: 9.5px !important;
         background-image: none !important;
         background: rgb(205, 205, 205, 1) !important;
-        -webkit-box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.1), 0 0 2px 0px rgba(0, 0, 0, 0.15) !important;
+        box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.1), 0 0 2px 0px rgba(0, 0, 0, 0.15) !important;
     }
 
     .ui-widget-header.ui-helper-clearfix.control-bar:not(.block) .ui-slider-handle:is(:hover) {
         background: rgb(245, 245, 245, 1) !important;
-        -webkit-box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.1), 0 0 2px 0px rgba(0, 0, 0, 0.15) !important;
+        box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.1), 0 0 2px 0px rgba(0, 0, 0, 0.15) !important;
     }
 
     .k-player,
@@ -3981,21 +4049,6 @@ domain("wikimedia.org") {
         border-radius: 2px !important;
     }
 
-    /* p::-moz-selection,
-    i::-moz-selection,
-    b::-moz-selection,
-    .hatnote::-moz-selection,
-    caption::-moz-selection,
-    span::-moz-selection,
-    div::-moz-selection,
-    li::-moz-selection,
-    cite::-moz-selection,
-    td::-moz-selection {
-        color: var(--content-selection-color) !important;
-        background-color: var(--content-selection-bgcolor) !important;
-        border-radius: 2px !important;
-    } */
-
     a::-moz-selection,
     a b::-moz-selection,
     a i::-moz-selection,
@@ -4023,7 +4076,7 @@ domain("wikimedia.org") {
     #pt-notifications-notice .mw-echo-notifications-badge {
         top: 0px !important;
     }
-    
+
     .mw-echo-notifications-badge-all-read {
         display: none !important;
     }
@@ -4034,7 +4087,8 @@ domain("wikimedia.org") {
     }
 
     #pt-notifications-notice .mw-echo-notifications-badge.oo-ui-flaggedElement-unseen:hover::after,
-    #pt-notifications-notice .mw-echo-notifications-badge.mw-echo-unseen-notifications:hover::after {
+    #pt-notifications-notice
+        .mw-echo-notifications-badge.mw-echo-unseen-notifications:hover::after {
         background-color: rgba(255, 255, 255, 0.4) !important;
     }
 
@@ -4042,7 +4096,7 @@ domain("wikimedia.org") {
     #pt-notifications-notice .mw-echo-notifications-badge::after {
         top: 15% !important;
         left: 15% !important;
-/*         font-size: 0.88em !important; */
+        /*         font-size: 0.88em !important; */
     }
 
     #pt-notifications-alert .mw-echo-notifications-badge::after,
@@ -4053,7 +4107,7 @@ domain("wikimedia.org") {
         line-height: 12.5px !important;
         margin-block: -0.7px !important;
     }
-    
+
     :is(#pt-notifications-notice, #pt-notifications-alert) .mw-echo-notifications-badge {
         margin-inline: 0 !important;
     }
@@ -4084,12 +4138,12 @@ domain("wikimedia.org") {
         margin-right: 0px !important;
         float: none !important;
     }
-    
+
     #pt-notifications-alert .mw-echo-notifications-badge:focus,
     #pt-notifications-notice .mw-echo-notifications-badge:focus {
         box-shadow: none !important;
     }
-    
+
     #pt-notifications-alert .mw-echo-notifications-badge:focus::after,
     #pt-notifications-notice .mw-echo-notifications-badge:focus::after {
         border-color: unset !important;
@@ -4100,38 +4154,10 @@ domain("wikimedia.org") {
         position: relative !important;
     }
 
-    /* #searchInput {
-        border: none !important;
-        border-radius: 2px !important;
-        background: transparent !important;
-        height: 28px !important;
-    }
-
-    #simpleSearch {
-        height: 50% !important;
-        border-radius: 2px !important;
-        -webkit-box-shadow: none !important;
-        position: absolute !important;
-        z-index: 5 !important;
-    }
-
-    #searchInput:focus,
-    #simpleSearch:hover #searchInput:focus {
-        outline: 0 !important;
-        border-color: transparent !important;
-        -webkit-box-shadow: none !important;
-        box-shadow: none !important;
-    }
-
-    #simpleSearch input {
-        background-color: transparent !important;
-        color: rgb(204, 204, 204) !important;
-    } */
-
     .suggestions {
         border-bottom-left-radius: 3px !important;
         border-bottom-right-radius: 3px !important;
-        -webkit-box-shadow: 0 0 25px 2px rgba(0, 0, 0, 0.05), 0 0 5px 1px rgba(0, 0, 0, 0.25) !important;
+        box-shadow: 0 0 25px 2px rgba(0, 0, 0, 0.05), 0 0 5px 1px rgba(0, 0, 0, 0.25) !important;
         z-index: 4 !important;
         margin-right: 0.5px !important;
         position: absolute !important;
@@ -4153,7 +4179,7 @@ domain("wikimedia.org") {
         color: rgb(204, 204, 204) !important;
         padding-inline: 8px !important;
     }
-    
+
     .suggestions-special .special-query {
         color: inherit !important;
     }
@@ -4187,21 +4213,6 @@ domain("wikimedia.org") {
         color: rgb(255, 255, 255) !important;
     }
 
-    /* .suggestions-special:active .special-query,
-    .suggestions-special:active .special-label {
-        color: rgb(255, 255, 255) !important;
-    }
-
-    .suggestions-special:focus .special-query,
-    .suggestions-special:focus .special-label {
-        color: rgb(255, 255, 255) !important;
-    }
-
-    .suggestions-result-current .special-query,
-    .suggestions-result-current .special-label {
-        color: rgb(255, 255, 255) !important;
-    } */
-
     .suggestions-result:hover,
     .suggestions-result:active,
     .suggestions-result:focus,
@@ -4220,7 +4231,11 @@ domain("wikimedia.org") {
 
     /* media viewer colors, buttons and shit */
     .mw-mmv-permission-box .mw-mmv-permission-text .mw-mmv-permission-text-fader {
-        background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgb(24, 24, 24) 100%) !important;
+        background-image: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0) 0%,
+            rgb(24, 24, 24) 100%
+        ) !important;
     }
 
     .mw-mmv-info-box {
@@ -4235,7 +4250,11 @@ domain("wikimedia.org") {
     .mw-mmv-permission-box .mw-mmv-permission-text .mw-mmv-permission-text-fader a {
         padding: 0px 0 0 2em !important;
         background-color: transparent !important;
-        background-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgb(24, 24, 24) 25%) !important;
+        background-image: linear-gradient(
+            to right,
+            rgba(0, 0, 0, 0) 0%,
+            rgb(24, 24, 24) 25%
+        ) !important;
         font-size: 1em !important;
     }
 
@@ -4288,7 +4307,7 @@ domain("wikimedia.org") {
     }
 
     /* more border radius fixes */
-    table.infobox>tbody>tr>td {
+    table.infobox > tbody > tr > td {
         border-radius: 0px !important;
     }
 
@@ -4297,42 +4316,42 @@ domain("wikimedia.org") {
         filter: invert(1) !important;
         opacity: 0.93 !important;
     }
-    
+
     img[src*="Speaker_Icon.svg"] {
         filter: invert(1) brightness(4) !important;
         opacity: 0.9 !important;
     }
-    
-/*     clarification needed text */
+
+    /* clarification needed text */
     span.cleanup-needed-content {
         color: #ccc !important;
         border: none !important;
         padding: unset !important;
         font-style: italic !important;
     }
-    
-/*     math elements */
+
+    /* math elements */
     .mwe-math-element {
         filter: contrast(0.85) invert(1) !important;
     }
-    
+
     .equation-box {
         background-color: hsl(240, 1%, 14%) !important;
         border-color: transparent !important;
         border-radius: 4px !important;
     }
-    
-/*     alphabet images */
+
+    /* alphabet images */
     img[src*="extensions/wikihiero/"],
-    .image[src*="extensions/wikihiero/"]>img,
-    .image[href*="Runic_letter" i]:is([href$=".svg"], [href$=".png"])>img,
-    .image[href*="Proto-semitic" i]>img,
+    .image[src*="extensions/wikihiero/"] > img,
+    .image[href*="Runic_letter" i]:is([href$=".svg"], [href$=".png"]) > img,
+    .image[href*="Proto-semitic" i] > img,
     .mw-hiero-table img:is([src$=".png"], [src$=".svg"]),
-    .mw-hiero-table~* > img[src$=".png"],
-    .mw-hiero-table~* > .image[href$=".png"]>img,
-    .mw-hiero-table~* img[src$=".svg"],
-    .mw-hiero-table~* .image[href$=".svg"]>img,
-    .image[href*="/wiki/File:Braille" i]:is([href$=".svg"], [href$=".png"])>img,
+    .mw-hiero-table ~ * > img[src$=".png"],
+    .mw-hiero-table ~ * > .image[href$=".png"] > img,
+    .mw-hiero-table ~ * img[src$=".svg"],
+    .mw-hiero-table ~ * .image[href$=".svg"] > img,
+    .image[href*="/wiki/File:Braille" i]:is([href$=".svg"], [href$=".png"]) > img,
     .svg:not(.mw-mmv-final-image),
     .thumbimage[src*=".svg"][alt*="line drawing" i],
     .fullImageLink [src*=".svg"],
@@ -4340,43 +4359,45 @@ domain("wikimedia.org") {
     img[alt="<?>"] {
         filter: contrast(0.85) invert(1) hue-rotate(180deg);
     }
-    
+
     .locmap img,
     .image[href*="map" i] img,
     img[src*="map" i] {
         filter: unset !important;
     }
-    
+
     .mw-mmv-image .svg,
     .fullImageLink [src*=".svg"],
     a[href$=".svg"]:hover > img,
     a[href*=".gif"]:hover > img {
         background-color: unset !important;
     }
-    
-/*     musical score images */
-    .mw-ext-score>img {
+
+    /* musical score images */
+    .mw-ext-score > img {
         filter: contrast(0.85) invert(1) !important;
     }
-    
-/*     translate page arrow */
+
+    /* translate page arrow */
     img[src*="Translation_to_english_arrow"] {
-        filter: invert(1) hue-rotate(190deg) brightness(0.8) brightness(0.8) contrast(2) saturate(2) brightness(1.6);
+        filter: invert(1) hue-rotate(190deg) brightness(0.8) brightness(0.8) contrast(2) saturate(2)
+            brightness(1.6);
     }
-    
-/*     pdf external link */
+
+    /* pdf external link */
     .mw-parser-output a[href$=".pdf"].external,
     .mw-parser-output a[href*=".pdf?"].external,
     .mw-parser-output a[href*=".pdf#"].external,
     .mw-parser-output a[href$=".PDF"].external,
     .mw-parser-output a[href*=".PDF?"].external,
     .mw-parser-output a[href*=".PDF#"].external {
-        background: url("data:image/svg+xml;utf8,<svg height='30' width='30' xmlns='http://www.w3.org/2000/svg'><path clip-rule='evenodd' fill='%23EA4C3A' fill-rule='evenodd' d='M30.018 28.667H0V0h30.018v28.667'/><path d='M15.372 4.377c.452.213.358.489.219 1.793-.142 1.345-.618 3.802-1.535 6.219-.918 2.413-2.28 4.784-3.467 6.539-1.186 1.756-2.201 2.897-2.975 3.556-.777.659-1.314.835-1.665.893-.348.058-.506 0-.6-.177-.094-.176-.127-.466-.046-.82.079-.35.268-.76.804-1.285.541-.527 1.426-1.172 2.661-1.771 1.235-.6 2.817-1.156 4.116-1.537a30.03 30.03 0 013.197-.746 23.98 23.98 0 012.391-.337 14.241 14.241 0 012.186 0c.712.06 1.408.175 2.011.323.6.146 1.108.321 1.551.601.442.276.823.657 1.012 1.083.192.423.192.893.033 1.228-.158.337-.476.541-.839.66a2.103 2.103 0 01-1.267 0c-.49-.148-1.062-.47-1.662-.894-.601-.425-1.235-.952-2.057-1.771a35.417 35.417 0 01-2.692-3.013c-.854-1.083-1.553-2.136-2.028-3.029a11.317 11.317 0 01-.933-2.355c-.206-.733-.364-1.464-.427-2.122s-.034-1.245.03-1.714c.063-.466.16-.82.317-1.055.158-.23.381-.35.539-.408s.254-.058.348-.073c.094-.015.188-.044.333 0 .138.042.321.154.504.268' fill='none' stroke='%23FFF' stroke-linejoin='round' stroke-miterlimit='10' stroke-width='1.4'/></svg>") no-repeat right !important;
+        background: url("data:image/svg+xml;utf8,<svg height='30' width='30' xmlns='http://www.w3.org/2000/svg'><path clip-rule='evenodd' fill='%23EA4C3A' fill-rule='evenodd' d='M30.018 28.667H0V0h30.018v28.667'/><path d='M15.372 4.377c.452.213.358.489.219 1.793-.142 1.345-.618 3.802-1.535 6.219-.918 2.413-2.28 4.784-3.467 6.539-1.186 1.756-2.201 2.897-2.975 3.556-.777.659-1.314.835-1.665.893-.348.058-.506 0-.6-.177-.094-.176-.127-.466-.046-.82.079-.35.268-.76.804-1.285.541-.527 1.426-1.172 2.661-1.771 1.235-.6 2.817-1.156 4.116-1.537a30.03 30.03 0 013.197-.746 23.98 23.98 0 012.391-.337 14.241 14.241 0 012.186 0c.712.06 1.408.175 2.011.323.6.146 1.108.321 1.551.601.442.276.823.657 1.012 1.083.192.423.192.893.033 1.228-.158.337-.476.541-.839.66a2.103 2.103 0 01-1.267 0c-.49-.148-1.062-.47-1.662-.894-.601-.425-1.235-.952-2.057-1.771a35.417 35.417 0 01-2.692-3.013c-.854-1.083-1.553-2.136-2.028-3.029a11.317 11.317 0 01-.933-2.355c-.206-.733-.364-1.464-.427-2.122s-.034-1.245.03-1.714c.063-.466.16-.82.317-1.055.158-.23.381-.35.539-.408s.254-.058.348-.073c.094-.015.188-.044.333 0 .138.042.321.154.504.268' fill='none' stroke='%23FFF' stroke-linejoin='round' stroke-miterlimit='10' stroke-width='1.4'/></svg>")
+            no-repeat right !important;
         background-size: 14px 15px !important;
         padding-right: 17px !important;
     }
-    
-/*     commons logo */
+
+    /* commons logo */
     img[src*="Commons-logo.svg" i] {
         filter: brightness(4) invert(1) hue-rotate(195deg) contrast(0.3) saturate(10);
     }
@@ -4431,7 +4452,6 @@ domain("wikimedia.org") {
         width: 7.5px;
         height: 13.5px;
         content: "";
-        /* opacity: 0.85; */
     }
 
     span.citation-needed-content:after {
@@ -4442,13 +4462,12 @@ domain("wikimedia.org") {
         width: 9px;
         height: 13.5px;
         content: "";
-        /* opacity: 0.85; */
     }
 
     .tracklist span {
         background-color: unset !important;
     }
-    
+
     .tracklist caption {
         background-color: unset !important;
     }
@@ -4457,19 +4476,19 @@ domain("wikimedia.org") {
         border-radius: 0px !important;
     }
 
-    .tracklist *>tr:nth-of-type(odd) {
+    .tracklist * > tr:nth-of-type(odd) {
         background-color: rgba(45, 44, 45, 1) !important;
     }
 
-    .tracklist tr:nth-of-type(odd)>th {
+    .tracklist tr:nth-of-type(odd) > th {
         background-color: rgba(45, 44, 45, 1) !important;
     }
 
-    .tracklist *>tr:nth-of-type(even) {
+    .tracklist * > tr:nth-of-type(even) {
         background-color: transparent !important;
     }
 
-    .tracklist tr:nth-of-type(even)>th {
+    .tracklist tr:nth-of-type(even) > th {
         background-color: transparent !important;
     }
 
@@ -4510,33 +4529,31 @@ domain("wikimedia.org") {
         border: none !important;
     }
 
-    #content .mw-parser-output>ul.gallery {
+    #content .mw-parser-output > ul.gallery {
         width: -moz-fit-content !important;
-        /*         margin: auto !important;
-        display: flex !important; */
     }
 
-    #content .mw-parser-output>ul.gallery .gallerybox {
+    #content .mw-parser-output > ul.gallery .gallerybox {
         padding: 3px !important;
     }
-    
+
     #siteNotice {
         display: none !important;
     }
-    
-/*     phylogeny daggers */
+
+    /* phylogeny daggers */
     img[alt="dagger"] {
         filter: invert(1) !important;
     }
-    
-/*     text backgrounds in content */
+
+    /* text backgrounds in content */
     #bodyContent span.nounderlines {
         border: none !important;
         background: none !important;
         padding: inherit !important;
     }
-    
-/*     code formatting */
+
+    /* code formatting */
     .mw-highlight .hll {
         background-color: hsla(60, 100%, 90%, 0.2) !important;
     }
@@ -4689,7 +4706,4 @@ domain("wikimedia.org") {
     .mw-highlight .sr {
         color: #ffd5e6 !important;
     }
-    
-    
-    
 }
