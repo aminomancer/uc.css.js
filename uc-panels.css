@@ -567,6 +567,10 @@ description#identity-popup-content-supplemental {
 	min-width: 18em !important;
 }
 
+#pageAction-panel-builtInSeparator {
+    display: none;
+}
+
 @supports -moz-bool-pref("browser.proton.contextmenus.enabled") {
     .menu-right {
         margin-inline-end: 0 !important;
