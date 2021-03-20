@@ -5,6 +5,8 @@
 // @description    The browser context menu has a button to save the current page to Pocket. By default, this opens a page action panel in the urlbar which tells you the page was saved and gives you an option to remove it or view the list of saved pages. This script overrides the saving function so that, rather than opening a panel, it immediately saves the link to Pocket and only creates a brief confirmation hint that fades after a few seconds. The confirmation hint is of the same type as the hint that pops up when you save a bookmark. It also turns the Pocket button red, the same as saving to Pocket does without the script.
 // ==/UserScript==
 
+const savedToPocketConfirmationString = "Saved to Pocket."; // This is the confirmation message that pops up when you save a page to Pocket. Localizing the message automatically looks really complicated so you'll have to set the variable yourself.
+
 let pocketCustomHint = {
     _timerID: null,
 
@@ -136,7 +138,7 @@ let pocketCustomHint = {
                     success: (resolve) => {
                         let button = document.getElementById(this.pageAction.anchorIDOverride);
                         if (button.hidden) button = document.getElementById("pageActionButton");
-                        pocketCustomHint.show(button, "Saved to Pocket.");
+                        pocketCustomHint.show(button, savedToPocketConfirmationString);
                         if (browser === gBrowser.selectedBrowser)
                             document
                                 .getElementById(this.pageAction.anchorIDOverride)
