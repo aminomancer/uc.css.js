@@ -14,7 +14,7 @@ My personal Firefox theme/layout, plus some privileged scripts to add new behavi
 <br>
 <p></p>
 
-Make sure to set `ui.systemUsesDarkTheme` to `1` in about:config, and set density mode to `Normal` in the customization menu. (right click on the navbar and click "Customize Toolbar") <details><summary>Currently I recommend using this on Nightly, and setting all of the proton prefs to true. Click for a full list.</summary>`browser.proton.appmenu.enabled`  
+Make sure to set the following in about:config: `svg.context-properties.content.enabled` to `true`; and `ui.systemUsesDarkTheme` to `1`. Then set density mode to `Normal` in the customization menu. (right click on the navbar and click "Customize Toolbar") <details><summary>Currently I recommend using this on Nightly, and setting all of the proton prefs to true. Click for a full list.</summary>`browser.proton.appmenu.enabled`  
 `browser.proton.contextmenus.enabled`  
 `browser.proton.doorhangers.enabled`  
 `browser.proton.enabled`  

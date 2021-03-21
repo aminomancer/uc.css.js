@@ -60,12 +60,7 @@ link[href="chrome://global/skin/arrowscrollbox.css"] ~ :is(#scrollbutton-up, #sc
 
 /* protections popup panel's arrow style */
 #protections-popup[side="top"]::part(arrow) {
-    /* stroke: hsl(216.5, 90%, 39.4%) !important; */
-    stroke: none !important;
-    width: 22px !important;
-    height: 11.4px !important;
-    margin-inline-start: 9.2px !important;
-    margin-top: 0 !important;
+    stroke: var(--protection-header-arrow-color) !important;
 }
 
 #protections-popup[mainviewshowing][side="top"]::part(arrow) {

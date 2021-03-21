@@ -74,14 +74,20 @@
 }
 
 #urlbar-zoom-button {
-    height: 20px !important;
+    height: 19px !important;
     border-radius: 10px !important;
-    border-color: var(--desaturate-dimmed) !important;
+    border: 1px solid var(--desaturate-dimmed) !important;
     background: rgb(0, 0, 0, 0.09) !important;
     mix-blend-mode: luminosity !important;
     margin-right: 4px !important;
     margin-left: 4px !important;
     -moz-box-ordinal-group: 0 !important;
+    padding-inline: 5px !important;
+}
+
+#urlbar-zoom-button .toolbarbutton-text {
+    height: 19px !important;
+    padding-block: 1px !important;
 }
 
 #urlbar-zoom-button:hover {
@@ -446,6 +452,11 @@ toolbarpaletteitem[removable="false"]
 #identity-box,
 #tracking-protection-icon-container {
     fill-opacity: 0.6 !important;
+    height: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
+}
+
+#identity-box.chromeUI[pageproxystate="valid"] {
+    height: var(--urlbar-height) !important;
 }
 
 #tracking-protection-icon-container:is([open="true"], :hover:not([open="true"])) {
@@ -513,15 +524,10 @@ toolbarpaletteitem[removable="false"]
 
 #notification-popup-box {
     padding-inline-end: 0 !important;
-}
-
-#notification-popup-box {
+    padding-block: 0 !important;
+    margin-block: 0 !important;
     margin-right: -2px !important;
     margin-left: 2px !important;
-}
-
-#permission-popup {
-    margin-top: 1px !important;
 }
 
 #identity-box[pageproxystate="invalid"] .sharing-icon {
@@ -591,10 +597,6 @@ use 0.6 instead of 1 since 1 will end up being shown as like 1.4px for some wind
 .popup-notification-icon[popupid="addon-install-blocked"],
 .popup-notification-icon[popupid="addon-install-origin-blocked"] {
     list-style-image: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' x='0' y='0' width='16' height='16' fill='context-fill' fill-opacity='context-fill-opacity'><path d='M15.7.3c-.4-.4-1.2-.4-1.6 0L12.4 2h-1.3c0-1.1-.9-2-2.1-2S7 .9 7 2.1H3.7c-.9 0-1.6.7-1.6 1.6V7C.9 7 0 7.9 0 9s.9 2.1 2.1 2.1v1.3L.3 14c-.5.4-.5 1.2 0 1.6s1.2.5 1.6 0L15.7 2c.4-.5.4-1.2 0-1.7zM13.5 9c0-.4.2-2.2 2.5-2.2V3.7c0-.2 0-.4-.1-.6L3 15.9c.2.1.5.1.7.1h3.1c0-2.2 1.8-2.5 2.2-2.5.4 0 2.2.2 2.2 2.5h3.1c.9 0 1.6-.7 1.6-1.6v-3.1c-2.1-.1-2.4-1.8-2.4-2.3z'/></svg>") !important;
-}
-
-#notification-popup menulist {
-    color: var(--notification-menu-color) !important;
 }
 
 #urlbar[searchmode] #tracking-protection-icon-container,

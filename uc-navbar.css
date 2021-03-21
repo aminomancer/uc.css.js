@@ -189,26 +189,26 @@ toolbar .toolbarbutton-1:not([disabled])[checked]:hover > .toolbarbutton-icon {
     }
 
     #navigator-toolbox notification {
-        width: unset !important;
+        width: -moz-fit-content !important;
+        display: flex !important;
         overflow: hidden !important;
         border: none !important;
-        min-width: 225px !important;
         transition: margin-top 300ms var(--animation-easing-function), opacity 300ms var(--animation-easing-function) !important;
     }
 
-    #navigator-toolbox notification .messageDetails {
-        width: unset !important;
-        overflow: hidden !important;
-    }
-
     #navigator-toolbox notification .messageText {
-        display: flex !important;
+        display: inline-block !important;
         overflow: hidden !important;
+        white-space: nowrap !important;
         text-overflow: ellipsis !important;
     }
 
     #navigator-toolbox notification .messageImage {
         min-width: 24px !important;
+    }
+    
+    #navigator-toolbox notification .notification-button {
+        margin-inline: 4px 0 !important;
     }
     
     #navigator-toolbox notification .close-icon {

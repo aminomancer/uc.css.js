@@ -205,6 +205,7 @@
     --menupopup-inner-padding: 0;
     --context-padding-inline: 28px 0;
     --context-margin-inline: -16px 0;
+    --arrowpanel-background: hsl(233, 36%, 11%);
     --menupopup-background: var(--arrowpanel-background);
     --menu-background-color: var(--arrowpanel-background) !important;
     --menu-right-bg: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='5px' height='5px' viewBox='0 0 492 492' xml:space='preserve'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M382.678,226.804L163.73,7.86C158.666,2.792,151.906,0,144.698,0s-13.968,2.792-19.032,7.86l-16.124,16.12    c-10.492,10.504-10.492,27.576,0,38.064L293.398,245.9l-184.06,184.06c-5.064,5.068-7.86,11.824-7.86,19.028    c0,7.212,2.796,13.968,7.86,19.04l16.124,16.116c5.068,5.068,11.824,7.86,19.032,7.86s13.968-2.792,19.032-7.86L382.678,265    c5.076-5.084,7.864-11.872,7.848-19.088C390.542,238.668,387.754,231.884,382.678,226.804z'/></svg>");
@@ -1017,6 +1018,84 @@ img.transparent {
         border-color: var(--toolbar-border) !important;
         box-shadow: 0 0 8px hsl(0, 0%, 6.3%) !important;
         margin-inline-start: calc(var(--inline-padding) * 2) !important;
+    }
+}
+
+@-moz-document url-prefix("moz-extension://14960f03-eca3-472b-b4d2-0b7f831ebe41") {
+    :root {
+        --arrowpanel-background: hsl(233, 36%, 11%);
+        --arrowpanel-dimmed: hsla(236, 100%, 83%, 0.17);
+        --context-menuitem-border-radius: 0;
+        --panel-separator-margin: 0;
+        --arrowpanel-menuitem-padding: 6px;
+        background-color: var(--arrowpanel-background) !important;
+    }
+
+    @supports (-moz-bool-pref("browser.proton.contextmenus.enabled")) {
+        :root {
+            --arrowpanel-menuitem-border-radius: 3px;
+            --context-menuitem-border-radius: var(--arrowpanel-menuitem-border-radius);
+            --menupopup-inner-padding: 4px;
+            --panel-separator-margin: 0 4px;
+        }
+    }
+
+    svg:root {
+        background: none !important;
+    }
+
+    body {
+        --hr-grey: var(--arrowpanel-dimmed) !important;
+        inline-size: min-content !important;
+    }
+
+    h3.title {
+        line-height: normal !important;
+        block-size: min-content !important;
+        padding-block: .7em .6em !important;
+        white-space: nowrap !important;
+        margin-inline-end: 30px !important;
+        font-weight: normal !important;
+        font-size: 14px !important;
+        text-align: start !important;
+        user-select: none;
+        padding-inline: calc(var(--menupopup-inner-padding) + 8px) !important;
+    }
+
+    hr {
+        margin-block: 0 !important;
+        padding-block: 0 !important;
+        margin: var(--panel-separator-margin) !important;
+    }
+
+    .identities-list {
+        padding-block: var(--menupopup-inner-padding) !important;
+        margin: 0 !important;
+    }
+
+    .menu-item {
+        border-radius: var(--context-menuitem-border-radius) !important;
+        inline-size: unset !important;
+        display: flex !important;
+        flex-flow: row nowrap;
+        margin-inline: var(--menupopup-inner-padding) !important;
+        padding-inline: 3px !important;
+        min-height: 28px !important;
+    }
+
+    .hover-highlight:hover,
+    .hover-highlight:focus {
+        background: var(--arrowpanel-dimmed) !important;
+    }
+
+    .menu-item td {
+        align-items: center !important;
+        margin-inline-end: 30px !important;
+    }
+
+    .menu-icon {
+        margin: 0 !important;
+        margin-inline-end: 3px !important;
     }
 }
 
@@ -3274,30 +3353,13 @@ domain("wikimedia.org") {
         background: none !important;
     }
 
-    #bodyContent .mw-collapsible {
-        border-radius: 3px !important;
-        padding: 0 !important;
-        margin-block: 4px !important;
-        background: hsl(240, 1.4%, 13.9%) !important;
-    }
-
-    #bodyContent .mw-collapsible[style*="width:100%"] {
-        width: -moz-max-content !important;
-    }
-
-    #bodyContent .mw-collapsed > .mw-collapsible-content {
-        display: block !important;
-        visibility: collapse !important;
-        max-height: 1px !important;
-    }
-
     #bodyContent .mw-collapsible-content > table {
         padding: 3px !important;
     }
 
     #bodyContent .mw-collapsible > :is(div, span):not([class]) {
-        width: -moz-fit-content !important;
-        margin: auto !important;
+        text-align: unset !important;
+        margin: 0 !important;
     }
 
     .clade tbody tr td {

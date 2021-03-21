@@ -149,6 +149,8 @@ let pocketCustomHint = {
         };
     }
 
+    if (!Pocket) return;
+
     if (gBrowserInit.delayedStartupFinished) {
         init();
     } else {
