@@ -66,15 +66,21 @@
         });
     }
 
+    function attachContextListeners() {
+        tabContext.addEventListener("command", contextCmd, true);
+        tabContext.addEventListener("popuphidden", contextHide, false);
+    }
+
+    function reallyStart() {
+        gBrowser.tabContainer.addEventListener("TabAttrModified", tabUpdated, false);
+        gBrowser.addEventListener("TabMultiSelect", tabUpdated, false);
+        tabContext.addEventListener("popupshowing", attachContextListeners, { once: true });
+    }
+
     function start() {
-        setTimeout(() => {
-            gTabsPanel.init();
-            gTabsPanel.allTabsView.addEventListener("ViewShowing", updateTabItems);
-            tabContext.addEventListener("command", contextCmd, true);
-            tabContext.addEventListener("popuphidden", contextHide, false);
-            gBrowser.tabContainer.addEventListener("TabAttrModified", tabUpdated, false);
-            gBrowser.addEventListener("TabMultiSelect", tabUpdated, false);
-        }, 1000);
+        gTabsPanel.init();
+        gTabsPanel.allTabsView.addEventListener("ViewShowing", reallyStart, { once: true });
+        gTabsPanel.allTabsView.addEventListener("ViewShowing", updateTabItems);
     }
 
     if (gBrowserInit.delayedStartupFinished) {
