@@ -61,4 +61,15 @@
     --protection-header-gradient-color-2: hsl(265, 100%, 69%);
     --protection-header-gradient-color-3: hsl(217, 90%, 39%);
     --protection-header-arrow-color: hsl(220, 80%, 42%);
+    --download-button-hue: 235.86;
+    --download-button-hover-bg: linear-gradient(
+        to right,
+        hsla(var(--download-button-hue), 100%, 82.94%, 0.092) 7.1%,
+        hsla(var(--download-button-hue), 100%, 82.94%, 0.075) 20.9%,
+        hsla(var(--download-button-hue), 100%, 82.94%, 0.069) 34.1%,
+        hsla(var(--download-button-hue), 100%, 82.94%, 0.04) 47.1%,
+        hsla(var(--download-button-hue), 100%, 82.94%, 0.025) 60%,
+        hsla(var(--download-button-hue), 95%, 76.94%, 0.02) 73%,
+        hsla(var(--download-button-hue), 90%, 73.94%, 0.015) 86.3%
+    );
 }

@@ -404,28 +404,77 @@ link[href$="global.css"] ~ spacer[part="arrowscrollbox-overflow-end-indicator"] 
 /* all tabs button popup */
 .all-tabs-item {
     border-radius: var(--arrowpanel-menuitem-border-radius);
+    box-shadow: none !important;
     margin-inline: 4px;
+    min-height: 28px;
+    -moz-box-align: center;
 }
 
 #allTabsMenu-allTabsViewTabs {
     padding: var(--panel-subview-body-padding) !important;
 }
 
+.all-tabs-item[selected],
+.all-tabs-item[multiselected],
+.all-tabs-item[usercontextid]:is(:hover, [_moz-menuactive]) {
+    background-image: linear-gradient(to right, var(--main-stripe-color) 0, var(--main-stripe-color) 4px, transparent 4px) !important;
+}
+
 .all-tabs-item[selected] {
     font-weight: normal !important;
     background-color: var(--arrowpanel-dimmed-further) !important;
-    box-shadow: none !important;
-    background-image: linear-gradient(to right, var(--toolbarbutton-icon-fill-attention) 0, var(--toolbarbutton-icon-fill-attention) 4px, transparent 4px) !important;
+    --main-stripe-color: var(--arrowpanel-dimmed-even-further);
 }
 
+.all-tabs-item[usercontextid]:not([multiselected]) {
+    --main-stripe-color: var(--identity-tab-color);
+}
+
+.all-tabs-item[multiselected] {
+    --main-stripe-color: var(--multiselected-color);
+}
+
+.all-tabs-item[multiselected]:not([selected]),
 .all-tabs-item:not([selected]):is(:hover, [_moz-menuactive]) {
     background-color: var(--arrowpanel-dimmed) !important;
+}
+
+.all-tabs-item[multiselected]:not([selected]):is(:hover, [_moz-menuactive]) {
+    background-color: var(--arrowpanel-dimmed-further) !important;
 }
 
 .all-tabs-item:not([selected]):is(:hover, [_moz-menuactive]):active {
     background-color: var(--arrowpanel-dimmed-further) !important;
 }
 
-.all-tabs-item[pending] .all-tabs-button {
+.all-tabs-item[pending] {
     opacity: 0.6;
 }
+
+.all-tabs-item .all-tabs-secondary-button,
+.all-tabs-item .all-tabs-secondary-button:focus:not([disabled]) {
+    max-width: 18px;
+    max-height: 18px;
+    padding: 2px 2px 2px 1px !important;
+    border-radius: 100% !important;
+    color: white !important;
+    background-color: transparent !important;
+    opacity: .7 !important;
+    min-height: 0 !important;
+    min-width: 0 !important;
+    margin-inline: 6px 10px !important;
+}
+
+.all-tabs-item .all-tabs-secondary-button > label:empty {
+    display: none !important;
+}
+
+.all-tabs-item .all-tabs-secondary-button:hover:not([disabled]) {
+	background-color: var(--arrowpanel-dimmed) !important;
+	opacity: 1 !important;
+}
+
+.all-tabs-item .all-tabs-secondary-button:hover:active:not([disabled]) {
+	background-color: var(--arrowpanel-dimmed-further) !important;
+}
+

@@ -25,12 +25,10 @@
     --arrowpanel-background: hsl(233, 36%, 11%) !important;
     --arrowpanel-color: var(--lwt-text-color) !important;
     --arrowpanel-darker: hsla(236, 70%, 73%, 0.17) !important;
+    --arrowpanel-faint: hsla(236, 100%, 83%, 0.1);
     --arrowpanel-dimmed: hsla(236, 100%, 83%, 0.17) !important;
     --arrowpanel-dimmed-further: hsla(236, 100%, 83%, 0.25) !important;
     --arrowpanel-dimmed-even-further: hsla(236, 100%, 85%, 0.3) !important;
-    --desaturate-dimmed: hsla(236, 60%, 83%, 0.17) !important;
-    --desaturate-dimmed-further: hsla(236, 60%, 83%, 0.25) !important;
-    --desaturate-dimmed-even-further: hsla(236, 60%, 85%, 0.3) !important;
     --panel-disabled-color: hsla(213, 43%, 89%, 0.5) !important;
     --toolbarbutton-hover-background: hsla(236, 82%, 83%, 0.17) !important;
     --toolbarbutton-active-background: hsla(236, 82%, 83%, 0.22) !important;
@@ -181,7 +179,7 @@ toolbar {
 
     :root {
         --proton-tab-inline-padding: 0 !important;
-        --proton-shadow-blur-radius: 0 !important;
+        --tab-shadow-max-size: 0 !important;
     }
 
 }
