@@ -388,10 +388,6 @@
     link[href="chrome://global/skin/arrowscrollbox.css"] ~ :is(#scrollbutton-up, #scrollbutton-down) {
         visibility: collapse;
     }
-
-    .BMB-special-innerbox {
-        border: none !important;
-    }
     
     menuitem.menuitem-iconic#BMB_viewBookmarksToolbar {
         list-style-image: url("chrome://browser/skin/bookmarks-toolbar.svg") !important;
@@ -401,34 +397,15 @@
     menuitem.menuitem-iconic#BMB_viewBookmarksToolbar[data-l10n-args*='{"isVisible":true}'] {
         fill-opacity: 0.5;
     }
-
-    .BMBsmallContentBox {
-        margin-top: 0px !important;
+    
+    menupopup {
+        --nested-margin: -4px !important;
     }
     
     .panel-subview-footer.openintabs-menuitem {
         display: none !important;
     }
 
-}
-
-/* dragging items in places menus */
-:is(.BMB-special-innerbox, .BMBsmallContentBox) image[part="drop-indicator"] {
-    list-style-image: none;
-    height: 2px;
-    margin-inline-end: -4em;
-    background-color: var(--toolbarbutton-icon-fill-attention) !important;
-    background-image: linear-gradient(to right, hsla(224, 100%, 71%, 100%) 0%, hsla(224, 100%, 71%, 10%) 40%, hsla(224, 100%, 71%, 1%) 70%, transparent 100%) !important;
-    background-color: transparent !important;
-    width: 270px !important;
-    margin-right: -270px !important;
-    height: 1px !important;
-    pointer-events: none;
-}
-
-.BMB-special-innerbox {
-    border-left: none !important;
-    border-right: none !important;
 }
 
 treechildren::-moz-tree-drop-feedback {
@@ -444,10 +421,6 @@ treechildren::-moz-tree-drop-feedback {
 /*     #BMB_bookmarksPopup menupopup[placespopup="true"] {
         padding-top: 0 !important;
     } */
-
-    .BMB-special-innerbox {
-        margin-top: 0px !important;
-    }
 
     #BMB_bookmarksPopup .subviewbutton > .menu-iconic-left {
         margin-inline-end: 5px !important;

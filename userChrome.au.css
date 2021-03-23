@@ -10,8 +10,29 @@ menupopup::part(arrowscrollbox-scrollbox) {
 	padding-block: 4px;
 }
 
-menupopup[placespopup="true"]::part(innerbox) {
-    border: none !important;
+#BMB_bookmarksPopup menupopup[placespopup="true"]::part(innerbox) {
+    margin-top: 0;
+    border: none;
+}
+
+menupopup::part(drop-indicator-bar) {
+    margin-block: -14px;
+}
+
+menupopup::part(drop-indicator) {
+/* 	background-image: linear-gradient(to right, hsla(224, 100%, 71%, 100%) 0%, hsla(224, 100%, 71%, 10%) 40%, hsla(224, 100%, 71%, 1%) 70%, transparent 100%);
+	background-color: transparent;
+	height: 1px;
+    margin-inline-end: -28px; */
+	pointer-events: none;
+    background: none;
+    list-style-image: url(chrome://browser/skin/customizableui/menu-arrow.svg);
+    -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity;
+    fill: var(--lwt-toolbarbutton-icon-fill, currentColor);
+    height: 28px;
+    max-width: 28px;
+    padding-block: 6px;
+    padding-inline: 0 12px;
 }
 
 /* padding for proton context menus */

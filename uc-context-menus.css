@@ -208,13 +208,6 @@ menupopup.in-menulist {
     }
 }
 
-/* :is(.unified-nav-forward, .unified-nav-back):not([_moz-menuactive])[uri^="file:///"]:is([uri$=".svg"i], [uri$=".png"i], [uri$=".jpg"i], [uri$=".jpeg"i], [uri$=".gif"i]) .menu-iconic-icon, */
-:is(.unified-nav-forward, .unified-nav-back):not([_moz-menuactive="true"])[uri^="file:///"] .menu-iconic-icon
-{
-    margin-left: 2px !important;
-    width: 15px !important;
-}
-
 #SyncedTabsSidebarTabsFilterContext #syncedTabsRefreshFilter {
     display: none !important;
 }

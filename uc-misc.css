@@ -166,6 +166,7 @@ browser[type="content"] > html {
     background: var(--in-content-bg-dark) !important;
 }
 
+/* change default favicon for local files */
 :is(.unified-nav-forward, .unified-nav-back):not([_moz-menuactive])[uri^="file:///"],
 .tabbrowser-tab:is([label^="/A:/"i], [label^="/B:/"i], [label^="/C:/"i], [label^="/D:/"i], [label^="/E:/"i], [label^="/F:/"i], [label^="/G:/"i], [label^="/H:/"i], [label^="/I:/"i]) .tab-icon-image:not([src]) {
     list-style-image: url(chrome://browser/skin/notification-icons/persistent-storage.svg) !important;
@@ -175,6 +176,11 @@ browser[type="content"] > html {
 .tabbrowser-tab[label*="Image, "][label$=" pixels)"] .tab-icon-image:not([src]),
 .tabbrowser-tab:is([label^="/A:/"i], [label^="/B:/"i], [label^="/C:/"i], [label^="/D:/"i], [label^="/E:/"i], [label^="/F:/"i], [label^="/G:/"i], [label^="/H:/"i], [label^="/I:/"i]):is([label$=".svg"i], [label$=".png"i], [label$=".jpg"i], [label$=".jpeg"i], [label$=".gif"i]) .tab-icon-image:not([src]) {
     list-style-image: url(chrome://browser/skin/notification-icons/canvas.svg) !important;
+}
+
+.unified-nav-forward[_moz-menuactive] .menu-iconic-icon,
+.unified-nav-back[_moz-menuactive] .menu-iconic-icon {
+    padding: 1px;
 }
 
 :is(#mainPopupSet, #browser, #navigator-toolbox) textbox {
@@ -246,4 +252,9 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
 
 :root[min-browser] .browserContainer > findbar {
     top: var(--min-toolbar-height) !important;
+}
+
+/* i don't like the context menu share button */
+#context_shareTabURL {
+    display: none;
 }
