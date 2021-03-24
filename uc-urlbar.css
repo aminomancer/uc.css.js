@@ -438,17 +438,6 @@ toolbarpaletteitem[removable="false"]
     padding-inline: unset !important;
 }
 
-#identity-box.extensionPage {
-    border: none !important;
-    border-image: none !important;
-    pointer-events: none !important;
-    -moz-user-focus: ignore !important;
-}
-
-#identity-box.extensionPage :is(#identity-icon, #identity-icon-box) {
-    pointer-events: none !important;
-}
-
 #identity-box,
 #tracking-protection-icon-container {
     fill-opacity: 0.6 !important;
@@ -459,19 +448,20 @@ toolbarpaletteitem[removable="false"]
     height: var(--urlbar-height) !important;
 }
 
-#tracking-protection-icon-container:is([open="true"], :hover:not([open="true"])) {
+#tracking-protection-icon-container[open="true"] #tracking-protection-icon-box,
+#tracking-protection-icon-container:not([open="true"]) #tracking-protection-icon-box:hover {
     background-color: transparent !important;
     fill-opacity: 1 !important;
 }
 
-#tracking-protection-icon-container:is([open="true"], :hover:not([open="true"]))
-    #tracking-protection-icon-box:not([hasException]) {
+#tracking-protection-icon-container[open="true"] #tracking-protection-icon-box:not([hasException]),
+#tracking-protection-icon-container:not([open="true"]) #tracking-protection-icon-box:hover:not([hasException]) {
     fill-opacity: 1 !important;
     fill: var(--protection-idle-color) !important;
 }
 
-#tracking-protection-icon-container:is([open="true"], :hover:not([open="true"]))
-    #tracking-protection-icon-box[active]:not([hasException]) {
+#tracking-protection-icon-container[open="true"] #tracking-protection-icon-box[active]:not([hasException]),
+#tracking-protection-icon-container:not([open="true"]) #tracking-protection-icon-box[active]:hover:not([hasException]) {
     fill-opacity: 1 !important;
     fill: var(--protection-active-color) !important;
 }
@@ -495,7 +485,8 @@ toolbarpaletteitem[removable="false"]
     margin-inline-end: -3px !important;
 }
 
-#urlbar[pageproxystate="valid"] #tracking-protection-icon-container.chromeUI {
+#urlbar[pageproxystate="valid"] #tracking-protection-icon-container.chromeUI,
+#identity-box.chromeUI[pageproxystate="valid"] #remote-control-icon {
     display: none !important;
 }
 
@@ -518,16 +509,18 @@ toolbarpaletteitem[removable="false"]
 }
 
 #identity-permission-box {
-    margin-inline-start: 7px !important;
-    margin-inline-end: -1.6px !important;
+    margin-inline: 7px -2px !important;
 }
 
 #notification-popup-box {
     padding-inline-end: 0 !important;
     padding-block: 0 !important;
     margin-block: 0 !important;
-    margin-right: -2px !important;
-    margin-left: 2px !important;
+    margin-inline: 3px -3px !important;
+}
+
+#identity-permission-box:is([open="true"], [hasPermissions], [hasSharingIcon]) + #notification-popup-box {
+    margin-inline: 2px -2px !important;
 }
 
 #identity-box[pageproxystate="invalid"] .sharing-icon {
@@ -544,6 +537,11 @@ toolbarpaletteitem[removable="false"]
     fill-opacity: 1 !important;
     fill: hsl(3.7, 77.1%, 49.6%) !important;
     animation: 1.5s ease identity-popup-permission-icon-in-use-blink infinite !important;
+}
+
+#remote-control-icon {
+    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M7.6 3c.1.1.4.1.5 0 .9-.7 1.9-1.1 3-1.1s2.1.4 3 1.1c.2.1.4.1.6 0 .2-.2.2-.5 0-.6-1-.9-2.3-1.3-3.6-1.3s-2.5.3-3.5 1.2c-.2.2-.2.5 0 .7-.1-.1 0 0 0 0zm1.3.6c-.2.1-.2.4 0 .6.2.2.4.2.6 0 .5-.4 1.1-.5 1.7-.5.6 0 1.2.2 1.7.5.2.1.4.1.6 0 .2-.2.2-.5 0-.6-.6-.5-1.4-.8-2.2-.8-1 0-1.8.3-2.4.8zm4.5 5.2h-1.6V6.4c0-.4-.4-.8-.8-.8s-.8.3-.8.8v2.3H2.6c-.9.1-1.6.8-1.6 1.6v3.1c0 .9.7 1.6 1.6 1.6h10.9c.9 0 1.6-.7 1.6-1.6v-3.1c-.1-.8-.8-1.5-1.7-1.5zm-8.5 3.9H3.3v-1.6h1.6v1.6zm2.7 0H6.1v-1.6h1.6v1.6zm2.7 0H8.8v-1.6h1.6v1.6z'/></svg>") !important;
+    -moz-context-properties: fill, fill-opacity;
 }
 
 #identity-permission-box,

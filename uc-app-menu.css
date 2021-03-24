@@ -125,6 +125,10 @@
     border-image-source: linear-gradient(transparent 4px, var(--lwt-toolbar-vertical-separator, hsla(240, 100%, 89%, 0.2)) 5.5px, var(--lwt-toolbar-vertical-separator, hsla(240, 100%, 89%, 0.2)) calc(100% - 6.5px), transparent calc(100% - 5px)) !important;
 } */
 
+#PanelUI-menu-button {
+	padding-inline: var(--toolbarbutton-outer-padding) calc(var(--toolbarbutton-outer-padding) * 2) !important;
+}
+
 #PanelUI-menu-button[badge-status=""] > .toolbarbutton-badge-stack > .toolbarbutton-badge {
     display: none !important;
 }
@@ -377,20 +381,20 @@
     }
 
     :is(#appMenu-zoomReduce-button2, #appMenu-zoomEnlarge-button2, #appMenu-fullscreen-button2)
-        > .toolbarbutton-icon {
+    > .toolbarbutton-icon {
         background-color: unset !important;
         fill: currentColor !important;
         -moz-context-properties: fill, fill-opacity !important;
     }
 
     #appMenu-zoom-controls2
-        :is(#appMenu-zoomReduce-button2, #appMenu-zoomEnlarge-button2, #appMenu-fullscreen-button2, #appMenu-zoomReset-button2):not([disabled], [open], :active):is(:hover, :focus) {
+    :is(#appMenu-zoomReduce-button2, #appMenu-zoomEnlarge-button2, #appMenu-fullscreen-button2, #appMenu-zoomReset-button2):not([disabled], [open], :active):is(:hover, :focus) {
         background-color: var(--arrowpanel-dimmed) !important;
         border-color: transparent !important;
     }
 
     #appMenu-zoom-controls2
-        :is(#appMenu-zoomReduce-button2, #appMenu-zoomEnlarge-button2, #appMenu-fullscreen-button2, #appMenu-zoomReset-button2):not([disabled]):is([open], :hover:active) {
+    :is(#appMenu-zoomReduce-button2, #appMenu-zoomEnlarge-button2, #appMenu-fullscreen-button2, #appMenu-zoomReset-button2):not([disabled]):is([open], :hover:active) {
         background-color: var(--arrowpanel-dimmed-further) !important;
     }
 
@@ -425,6 +429,20 @@
     #appMenu-fxa-status2[fxastatus] > #appMenu-fxa-label2 {
         padding-block: calc(var(--arrowpanel-menuitem-padding) + 2px) !important;
         font-weight: unset !important;
+    }
+
+    #appMenu-proton-update-banner {
+        padding-block: calc(var(--arrowpanel-menuitem-padding) + 2px) !important;
+        margin: var(--arrowpanel-menuitem-margin) !important;
+        margin-bottom: 4px !important;
+    }
+
+    #appMenu-popup toolbarseparator {
+        margin-inline: 6px !important;
+    }
+
+    #appMenu-fxa-separator {
+        opacity: 0.7 !important;
     }
 
     .panel-banner-item[notificationid^="update"]::after {

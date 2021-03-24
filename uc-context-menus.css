@@ -166,7 +166,7 @@ menupopup.in-menulist .menu-iconic-text {
 #ContentSelectDropdown > menupopup {
     font: menu !important;
     background-color: var(--tooltip-bgcolor) !important;
-    /* --content-select-background-image: none !important; */
+    --content-select-background-image: none !important;
     /* a background image is added on top of the menupopup based on the appearance of the select element in-content.
     if you want all of these to be styled consistently then you can uncomment the above rule.
     personally, i like this feature since websites use all manner of different styles for select elements.
@@ -273,7 +273,7 @@ menupopup.in-menulist {
         display: -moz-box !important;
     }
 
-    :is(#contentAreaContextMenu, #customization-footer, menupopup[menu-api], menupopup#placesContext)
+    :is(#contentAreaContextMenu, #customization-footer, menupopup[menu-api], menupopup#placesContext, #downloadsContextMenu)
     menuitem:is([type="checkbox"], [type="radio"])
     .menu-iconic-left,
     :is(#PlacesToolbar, #places) menupopup menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-left {

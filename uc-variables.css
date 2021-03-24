@@ -189,7 +189,7 @@ toolbar {
 
 @supports (-moz-bool-pref("browser.proton.appmenu.enabled")) {
 
-    :root[proton] #appMenu-multiView {
+    :root #appMenu-multiView {
         --arrowpanel-menuitem-margin: 0 6px !important;
         --arrowpanel-menuitem-padding: 8px !important;
         --panel-subview-body-padding: 6px 0 !important;
