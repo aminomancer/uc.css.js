@@ -1043,7 +1043,7 @@ img.transparent {
     }
 }
 
-@-moz-document url-prefix("moz-extension://14960f03-eca3-472b-b4d2-0b7f831ebe41")
+@-moz-document url-prefix("moz-extension://14960f03-eca3-472b-b4d2-0b7f831ebe41/pageActionPopup.html")
 {
     :root {
         --arrowpanel-background: hsl(233, 36%, 11%);
