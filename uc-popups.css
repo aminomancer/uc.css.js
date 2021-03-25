@@ -500,6 +500,10 @@ tabmodalprompt .checkbox-check[checked="true"] {
     #commonDialog::part(content-box) {
         padding-block: 5px;
     }
+    
+    .dialog-content-box:not([hidden]) + .dialog-button-box {
+        margin-top: 5px;
+    }
 
     .dialog-button-box > button[dlgtype="accept"]:is(:enabled, :not([disabled="true"])) {
         background-color: var(--in-content-primary-button-background) !important;
@@ -519,6 +523,11 @@ tabmodalprompt .checkbox-check[checked="true"] {
     dialog input:-moz-focusring,
     button:-moz-focusring {
         box-shadow: none !important;
+    }
+    
+    #checkboxContainer checkbox {
+        margin-inline-start: 4px !important;
+        margin-top: 4px !important;
     }
 
     checkbox[checked] > .checkbox-check,
