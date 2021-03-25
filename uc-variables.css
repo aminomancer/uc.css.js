@@ -36,6 +36,9 @@
     --toolbarbutton-hover-background: hsla(236, 82%, 83%, 0.17) !important;
     --toolbarbutton-active-background: hsla(236, 82%, 83%, 0.22) !important;
     --toolbarbutton-checked-background: hsla(236, 82%, 83%, 0.13) !important;
+/*     --button-bgcolor: var(--arrowpanel-dimmed) !important; */
+    --button-hover-bgcolor: var(--arrowpanel-dimmed) !important;
+    --button-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
     --urlbar-input-bgcolor: hsla(233, 24%, 26%, 1) !important;
     --urlbar-input-bgcolor-brighter: hsla(233, 23%, 27.2%, 1) !important;
     --urlbar-input-bgcolor-even-brighter: hsla(233, 21%, 31%, 1) !important;

@@ -230,7 +230,7 @@ menupopup.in-menulist {
         margin-inline-start: 4px !important;
     }
 
-    .menu-text {
+    :not(.subviewbutton) > .menu-text {
         padding-inline: var(--context-padding-inline) !important;
     }
 

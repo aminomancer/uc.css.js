@@ -23,6 +23,16 @@
     min-width: 25em !important;
 }
 
+#editBookmarkPanelRows {
+	padding-inline: 10px !important;
+    padding-block: 6px 0 !important;
+}
+
+#editBookmarkPanelBottomContent {
+	padding-inline: 10px !important;
+    padding-block: 0 8px !important;
+}
+
 #editBookmarkPanelRows > vbox {
 	margin-bottom: 4px !important;
 }
@@ -321,6 +331,10 @@
     opacity: 1 !important;
 }
 
+#editBookmarkPanel checkbox {
+    margin-inline-start: 0 !important;
+}
+
 #editBookmarkPanel checkbox .checkbox-check {
 	appearance: none !important;
     min-width: 10px !important;
@@ -421,17 +435,17 @@ treechildren::-moz-tree-drop-feedback {
 /*     #BMB_bookmarksPopup menupopup[placespopup="true"] {
         padding-top: 0 !important;
     } */
+    
+    #BMB_bookmarksPopup .subviewbutton:not(.menuitem-iconic) .menu-text {
+        padding-inline-start: 21px !important;
+    }
 
     #BMB_bookmarksPopup .subviewbutton > .menu-iconic-left {
         margin-inline-end: 5px !important;
     }
 
     #BMB_bookmarksShowAllTop {
-        list-style-image: url("chrome://browser/skin/library.svg") !important;
-    }
-
-    #BMB_bookmarksShowAllTop .menu-iconic-left {
-        transform: scaleX(-1);
+        display: none !important;
     }
 
     #BMB_viewBookmarksSidebar {
@@ -452,13 +466,15 @@ treechildren::-moz-tree-drop-feedback {
         display: -moz-inline-box !important;
         width: 16px !important;
         height: 16px !important;
-        padding-inline: 0px !important;
-        margin-inline: 4px 0 !important;
+        padding-inline: 0 !important;
+        margin-inline: 0 4px !important;
         fill: currentColor !important;
+        background-image: url("chrome://browser/skin/library.svg") !important;
+        transform: scaleX(-1);
         -moz-context-properties: fill, fill-opacity, stroke !important;
     }
 
-    #BMB_bookmarksShowAll .menu-text {
+    #BMB_bookmarksPopup #BMB_bookmarksShowAll .menu-text {
         padding-inline-start: 2px !important;
     }
 

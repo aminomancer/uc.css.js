@@ -733,6 +733,7 @@
 
 #TabsToolbar .tabbrowser-tab {
     background-color: var(--lwt-accent-color) !important;
+    padding: 0 !important;
 }
 
 /* hide the close button for pinned tabs. requires you to make a pref in about:config and set it to true: "userChrome.tabs.pinned-tabs.close-buttons.disabled" */

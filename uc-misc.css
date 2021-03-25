@@ -158,11 +158,10 @@ notification[value="keyword-uri-fixup"] {
 }
 
 /* remove white flash and make default unloaded background dark gray (matching my new tab page addon, message u/MotherStylus on reddit for a download link) */
-#browser vbox#appcontent tabbrowser,
-#content,
 #tabbrowser-tabpanels,
-browser[type="content-primary"],
-browser[type="content"] > html {
+#webextpanels-window,
+#webext-panels-stack,
+#webext-panels-browser {
     background: var(--in-content-bg-dark) !important;
 }
 

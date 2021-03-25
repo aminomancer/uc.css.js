@@ -6,13 +6,25 @@ menupopup::part(arrowscrollbox-scrollbox) {
     scroll-behavior: smooth !important;
 }
 
+#BMB_bookmarksPopup::part(arrowscrollbox) {
+	padding-block: 4px 0;
+}
+
 #BMB_bookmarksPopup menupopup::part(arrowscrollbox) {
 	padding-block: 4px;
+}
+
+#BMB_bookmarksPopup::part(arrowcontent) {
+	padding-block: 0;
 }
 
 #BMB_bookmarksPopup menupopup[placespopup="true"]::part(innerbox) {
     margin-top: 0;
     border: none;
+}
+
+.panel-subview-footer-button {
+	margin-bottom: 4px;
 }
 
 menupopup::part(drop-indicator-bar) {
@@ -152,3 +164,37 @@ link[href="chrome://global/skin/arrowscrollbox.css"] ~ :is(#scrollbutton-up, #sc
 :is(#toolbar-menubar:hover + #TabsToolbar, #TabsToolbar:hover) .tab-icon-stack:not([pinned], [sharing], [crashed]):is([soundplaying], [muted], [activemedia-blocked]) > :not(.tab-icon-overlay) {
 	opacity: revert;
 }
+
+/* revert proton changes */
+.browserContainer > findbar {
+	padding: 0;
+}
+
+.findbar-container {
+    padding-block: 4px;
+    padding-inline: 8px;
+}
+
+.findbar-find-previous,
+.findbar-find-next {
+    background: rgba(255,255,255,.2);
+    border: 1px solid ThreeDShadow;
+    border-inline-start: none;
+    border-radius: 0;
+}
+
+.findbar-find-previous > .toolbarbutton-icon,
+.findbar-find-next > .toolbarbutton-icon {
+    padding: 0;
+}
+
+.findbar-find-previous {
+    margin-inline-start: 0;
+}
+
+.findbar-find-next {
+    border-start-end-radius: 2px;
+    border-end-end-radius: 2px;
+    margin-inline-end: 0;
+}
+
