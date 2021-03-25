@@ -7,7 +7,7 @@ menupopup::part(arrowscrollbox-scrollbox) {
 }
 
 #BMB_bookmarksPopup::part(arrowscrollbox) {
-	padding-block: 4px 0;
+	padding-block: 4px;
 }
 
 #BMB_bookmarksPopup menupopup::part(arrowscrollbox) {
@@ -21,6 +21,10 @@ menupopup::part(arrowscrollbox-scrollbox) {
 #BMB_bookmarksPopup menupopup[placespopup="true"]::part(innerbox) {
     margin-top: 0;
     border: none;
+}
+
+#BMB_bookmarksPopup .panel-subview-footer-button {
+	margin-bottom: unset;
 }
 
 .panel-subview-footer-button {
@@ -152,6 +156,10 @@ link[href="chrome://global/skin/arrowscrollbox.css"] ~ :is(#scrollbutton-up, #sc
 /* proton stuff */
 .subviewbutton > menupopup::part(innerbox) {
     border-radius: 5px;
+}
+
+.menu-text, .menu-iconic-text {
+	padding-block: 0;
 }
 
 /* prevent hiding the close button when audio is playing. undoes an irritating rule in the proton update */

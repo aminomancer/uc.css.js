@@ -318,6 +318,10 @@
         list-style-image: url(chrome://global/skin/icons/settings.svg);
     }
 
+    #appMenu-advanced-settings-button {
+        list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M1 12.667c0 .428.35.778.778.778h3.889v-1.556H1.778a.78.78 0 00-.778.778zm0-9.334c0 .428.35.778.778.778h7V2.556h-7A.78.78 0 001 3.333zm7.778 10.889v-.778h5.444c.428 0 .778-.35.778-.778s-.35-.778-.778-.778H8.778v-.778A.78.78 0 008 10.332a.78.78 0 00-.778.778v3.111c0 .429.35.779.778.779a.78.78 0 00.778-.778zM4.111 6.444v.778H1.778A.78.78 0 001 8c0 .428.35.778.778.778h2.333v.778c0 .428.35.778.778.778s.778-.35.778-.778V6.444c0-.428-.35-.778-.778-.778s-.778.351-.778.778zM15 8a.78.78 0 00-.778-.778h-7v1.556h7A.78.78 0 0015 8zm-3.889-2.333a.78.78 0 00.778-.778v-.778h2.333c.428 0 .778-.35.778-.778s-.35-.778-.778-.778h-2.333v-.777A.78.78 0 0011.111 1a.78.78 0 00-.778.778v3.111c0 .428.35.778.778.778z'/></svg>") !important;
+    }
+
     #appmenu-moreTools-button {
         list-style-image: url(chrome://browser/skin/customize.svg);
     }
@@ -358,6 +362,7 @@
     #appMenuRestoreLastSession > .toolbarbutton-text,
     #appMenuRecentlyClosedWindows > .toolbarbutton-text,
     #appMenu-settings-button > .toolbarbutton-text,
+    #appMenu-advanced-settings-button > .toolbarbutton-text,
     #appmenu-moreTools-button > .toolbarbutton-text,
     #appMenu-quit-button2 > .toolbarbutton-text,
     #appMenu-zoom-controls2 > .toolbarbutton-text,
@@ -385,6 +390,7 @@
         background-color: unset !important;
         fill: currentColor !important;
         -moz-context-properties: fill, fill-opacity !important;
+        padding: 0 !important;
     }
 
     #appMenu-zoom-controls2
@@ -424,6 +430,7 @@
     #appMenu-zoom-controls2 #appMenu-zoomReset-button2 .toolbarbutton-text {
         margin-block: 1px !important;
         margin-inline: 6px !important;
+        background: none !important;
     }
 
     #appMenu-fxa-status2[fxastatus] > #appMenu-fxa-label2 {

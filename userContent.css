@@ -110,6 +110,14 @@
     }
 }
 
+@-moz-document url("about:blank") {
+    window,
+    browser,
+    html {
+        background-color: transparent;
+    }
+}
+
 @-moz-document regexp("view-source:.*") {
     @media (prefers-color-scheme: dark) {
         :root,
@@ -216,16 +224,13 @@
     --arrowpanel-dimmed-further: hsla(236, 100%, 83%, 0.25) !important;
     --arrowpanel-dimmed-even-further: hsla(236, 100%, 85%, 0.3) !important;
     --panel-disabled-color: hsla(213, 43%, 89%, 0.5) !important;
+    --button-hover-bgcolor: var(--arrowpanel-dimmed) !important;
+    --button-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
 }
 
 #ContentSelectDropdown > menupopup > :is(menucaption, menuitem) > .menu-iconic-text,
 menupopup.in-menulist > :is(menucaption, menuitem) > .menu-iconic-text {
     padding-block: unset !important;
-}
-
-#ContentSelectDropdown > menupopup {
-    font: menu !important;
-    background-color: var(--tooltip-bgcolor) !important;
 }
 
 #ContentSelectDropdown > menupopup > menuitem:not([_moz-menuactive="true"]),
@@ -247,9 +252,11 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
 }
 
 #ContentSelectDropdown > menupopup {
+    font: menu !important;
     color: var(--ui-text-80) !important;
     -moz-appearance: none !important;
     background-color: var(--menupopup-background) !important;
+    --content-select-background-image: none !important;
     border: none !important;
     border-radius: var(--menupopup-border-radius) !important;
     margin: var(--menupopup-margin) !important;
@@ -303,7 +310,7 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
     list-style-image: var(--menu-right-img) !important;
 }
 
-#ContentSelectDropdown > menupopup :is(menu)[disabled] > .menu-right {
+#ContentSelectDropdown > menupopup menu[disabled="true"] > .menu-right {
     visibility: collapse;
 }
 
@@ -327,7 +334,9 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
     color: var(--panel-disabled-color) !important;
 }
 
-#ContentSelectDropdown > menupopup menu.subviewbutton:not([disabled])[_moz-menuactive]:active {
+#ContentSelectDropdown
+    > menupopup
+    menu.subviewbutton:not([disabled="true"])[_moz-menuactive]:active {
     background: var(--arrowpanel-dimmed) !important;
     box-shadow: none !important;
 }
@@ -369,6 +378,14 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
         border: none !important;
         border-radius: var(--menupopup-border-radius) !important;
         box-shadow: var(--menupopup-shadow) !important;
+    }
+
+    #ContentSelectDropdown
+        > menupopup
+        menuitem:not([disabled="true"])
+        :is(.menu-accel, .menu-iconic-accel)[value] {
+        color: var(--panel-shortcut-color);
+        margin-inline-start: 1.55em !important;
     }
 
     #ContentSelectDropdown > menupopup menuseparator {
@@ -465,6 +482,8 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
         --toolbarbutton-hover-background: hsla(236, 82%, 83%, 0.17) !important;
         --toolbarbutton-active-background: hsla(236, 82%, 83%, 0.22) !important;
         --toolbarbutton-checked-background: hsla(236, 82%, 83%, 0.13) !important;
+        --button-hover-bgcolor: var(--arrowpanel-dimmed) !important;
+        --button-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
         --urlbar-input-bgcolor: hsla(233, 24%, 26%, 1) !important;
         --urlbar-input-bgcolor-brighter: hsla(233, 23%, 27.2%, 1) !important;
         --urlbar-input-bgcolor-even-brighter: hsla(233, 21%, 31%, 1) !important;
@@ -666,7 +685,7 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
         list-style-image: var(--menu-right-img) !important;
     }
 
-    :is(menu)[disabled] > .menu-right {
+    menu[disabled="true"] > .menu-right {
         visibility: collapse;
     }
 
@@ -684,7 +703,7 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
         color: var(--panel-disabled-color) !important;
     }
 
-    menu.subviewbutton:not([disabled])[_moz-menuactive]:active {
+    menu.subviewbutton:not([disabled="true"])[_moz-menuactive="true"]:active {
         background: var(--arrowpanel-dimmed) !important;
         box-shadow: none !important;
     }
@@ -703,17 +722,15 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
     #ContentSelectDropdown > menupopup {
         font: menu !important;
         background-color: var(--tooltip-bgcolor) !important;
+        --content-select-background-image: none !important;
+        color: var(--ui-text-80) !important;
+        background-image: unset !important;
     }
 
     #ContentSelectDropdown > menupopup > menuitem:not([_moz-menuactive="true"]),
     menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
         background-color: transparent !important;
         color: var(--ui-text-80) !important;
-    }
-
-    #ContentSelectDropdown > menupopup {
-        color: var(--ui-text-80) !important;
-        background-image: unset !important;
     }
 
     menupopup.in-menulist {
@@ -739,7 +756,7 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
             margin-inline-start: 4px !important;
         }
 
-        .menu-text {
+        :not(.subviewbutton) > .menu-text {
             padding-inline: var(--context-padding-inline) !important;
         }
 
@@ -749,6 +766,11 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
             border: none !important;
             border-radius: var(--menupopup-border-radius) !important;
             box-shadow: var(--menupopup-shadow) !important;
+        }
+
+        menuitem:not([disabled="true"]) :is(.menu-accel, .menu-iconic-accel)[value] {
+            color: var(--panel-shortcut-color);
+            margin-inline-start: 1.55em !important;
         }
 
         menuseparator {
@@ -1021,7 +1043,8 @@ img.transparent {
     }
 }
 
-@-moz-document url-prefix("moz-extension://14960f03-eca3-472b-b4d2-0b7f831ebe41") {
+@-moz-document url-prefix("moz-extension://14960f03-eca3-472b-b4d2-0b7f831ebe41")
+{
     :root {
         --arrowpanel-background: hsl(233, 36%, 11%);
         --arrowpanel-dimmed: hsla(236, 100%, 83%, 0.17);
@@ -1052,7 +1075,7 @@ img.transparent {
     h3.title {
         line-height: normal !important;
         block-size: min-content !important;
-        padding-block: .7em .6em !important;
+        padding-block: 0.7em 0.6em !important;
         white-space: nowrap !important;
         margin-inline-end: 30px !important;
         font-weight: normal !important;
@@ -2064,7 +2087,7 @@ domain("wikimedia.org") {
     .infobox,
     .vertical-navbox,
     .mergedtoprow,
-    table.infobox>tbody:first-child>tr:first-child>th,
+    table.infobox > tbody:first-child > tr:first-child > th,
     .metadata:not(.ambox),
     .mbox-small,
     .quotebox,

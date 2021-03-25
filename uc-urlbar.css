@@ -74,20 +74,18 @@
 }
 
 #urlbar-zoom-button {
-    height: 19px !important;
+    height: 20px !important;
     border-radius: 10px !important;
     border: 1px solid var(--desaturate-dimmed) !important;
     background: rgb(0, 0, 0, 0.09) !important;
     mix-blend-mode: luminosity !important;
-    margin-right: 4px !important;
-    margin-left: 4px !important;
+    margin: 0 4px !important;
     -moz-box-ordinal-group: 0 !important;
-    padding-inline: 5px !important;
+    padding: 1px 5px !important;
 }
 
 #urlbar-zoom-button .toolbarbutton-text {
-    height: 19px !important;
-    padding-block: 1px !important;
+    height: 20px !important;
 }
 
 #urlbar-zoom-button:hover {

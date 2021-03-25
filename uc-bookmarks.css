@@ -467,7 +467,7 @@ treechildren::-moz-tree-drop-feedback {
         width: 16px !important;
         height: 16px !important;
         padding-inline: 0 !important;
-        margin-inline: 0 4px !important;
+        margin-inline: 0 3px !important;
         fill: currentColor !important;
         background-image: url("chrome://browser/skin/library.svg") !important;
         transform: scaleX(-1);
@@ -478,26 +478,13 @@ treechildren::-moz-tree-drop-feedback {
         padding-inline-start: 2px !important;
     }
 
-    #BMB_bookmarksShowAll .menu-accel-container:before {
-        content: "(" !important;
-        display: inline-block !important;
-        box-sizing: border-box !important;
-        padding-block: 1px !important;
+    #BMB_bookmarksShowAll :is(.menu-accel, .menu-iconic-accel)[value] {
+        margin-inline: 10px 4px !important;
+        padding-block: 0 !important;
     }
 
-    #BMB_bookmarksShowAll .menu-accel-container:after {
-        content: ")" !important;
-        display: inline-block !important;
-        box-sizing: border-box !important;
-        padding-block: 1px !important;
-    }
-
-    #BMB_bookmarksShowAll .menu-accel-container {
-        margin-inline: 4px 6px !important;
-    }
-
-    #BMB_bookmarksShowAll .menu-accel {
-        margin-inline: 0 !important;
+    #bookmarksMenuPopup > menuseparator.small-separator {
+        display: none;
     }
 
 }
