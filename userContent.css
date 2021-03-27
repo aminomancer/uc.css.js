@@ -421,7 +421,7 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
         border-top-width: 1px !important;
         border-top-style: solid !important;
         padding: 0 !important;
-        margin: 0 !important;
+        margin-inline: 0 !important;
     }
 
     #ContentSelectDropdown
@@ -831,7 +831,7 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
             border-top-width: 1px !important;
             border-top-style: solid !important;
             padding: 0 !important;
-            margin: 0 !important;
+            margin-inline: 0 !important;
         }
 
         menuseparator[id]:not(#context-sep-open, #context-media-sep-commands, #context-sep-copylink, #spell-suggestions-separator, #context-sep-selectall) {
