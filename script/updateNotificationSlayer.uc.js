@@ -75,6 +75,44 @@
               this._showBannerItem(notifications[0]);
             }
           }
+
+          AppMenuNotifications.showNotification = function showNotification(id, mainAction, secondaryAction, options = {}) {
+            let newOptions = options;
+            if (id === "update-available") {
+              newOptions.badgeOnly = true;
+              newOptions.dismissed = true;
+            }
+            let notification = new AppMenuNotification(
+              id,
+              mainAction,
+              secondaryAction,
+              newOptions
+            );
+            let existingIndex = this._notifications.findIndex(n => n.id == id);
+            if (existingIndex != -1) {
+              this._notifications.splice(existingIndex, 1);
+            }
+        
+            // We don't want to clobber doorhanger notifications just to show a badge,
+            // so don't dismiss any of them and the badge will show once the doorhanger
+            // gets resolved.
+            if (!newOptions.badgeOnly && !newOptions.dismissed) {
+              this._notifications.forEach(n => {
+                n.dismissed = true;
+              });
+            }
+        
+            // Since notifications are generally somewhat pressing, the ideal case is that
+            // we never have two notifications at once. However, in the event that we do,
+            // it's more likely that the older notification has been sitting around for a
+            // bit, and so we don't want to hide the new notification behind it. Thus,
+            // we want our notifications to behave like a stack instead of a queue.
+            this._notifications.unshift(notification);
+        
+            this._lazyInit();
+            this._updateNotifications();
+            return notification;
+          }
     }
 
     await sleep(1000);
