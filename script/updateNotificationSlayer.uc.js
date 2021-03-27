@@ -14,6 +14,15 @@
     function sleep(ms) {
         return new Promise((resolve) => setTimeout(resolve, ms));
     }
+
+    function AppMenuNotification(id, mainAction, secondaryAction, options = {}) {
+      this.id = id;
+      this.mainAction = mainAction;
+      this.secondaryAction = secondaryAction;
+      this.options = options;
+      this.dismissed = this.options.dismissed || false;
+    }
+    
     async function init() {
         await sleep(3000);
         PanelUI._updateNotifications = function _updateNotifications(notificationsChanged) {
