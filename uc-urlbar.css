@@ -25,23 +25,12 @@
     opacity: 0.5 !important;
 }
 
-#pageActionButton,
-.urlbar-page-action,
-.share-more-button {
-    border-radius: 3px !important;
-}
 
 #page-action-buttons > :is(.urlbar-icon, .urlbar-icon-wrapper),
 #urlbar-go-button,
 #urlbar-zoom-button,
 #pocket-button {
     margin-inline-start: 2px !important;
-}
-
-#urlbar-go-button,
-.urlbar-history-dropmarker {
-    border-radius: 3px !important;
-    width: 28px !important;
 }
 
 .urlbar-history-dropmarker {
@@ -62,15 +51,8 @@
     list-style-image: url(chrome://browser/skin/notification-icons/desktop-notification.svg) !important;
 }
 
-#star-button-box[animationsenabled] {
-    border-radius: 3px !important;
-}
-
 #page-action-buttons {
-    margin-right: 2px !important;
-    display: flex !important;
-    justify-content: end !important;
-    align-items: center !important;
+    margin-inline-end: 2px !important;
 }
 
 #urlbar-zoom-button {
@@ -78,10 +60,8 @@
     border-radius: 10px !important;
     border: 1px solid var(--desaturate-dimmed) !important;
     background: rgb(0, 0, 0, 0.09) !important;
-    mix-blend-mode: luminosity !important;
-    margin: 0 4px !important;
-    -moz-box-ordinal-group: 0 !important;
-    padding: 1px 5px !important;
+    margin-inline-end: 4px !important;
+    padding: 1px 8px !important;
 }
 
 #urlbar-zoom-button .toolbarbutton-text {
