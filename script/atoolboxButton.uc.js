@@ -13,7 +13,7 @@
 // (The toolbar button also changes appearance when popup auto-hide is disabled. It becomes blue like the downloads button and the icon changes into a popup icon)
 // All of these notifications use the native confirmation hint custom element, since it looks nice.
 // That's the one that appears when you save a bookmark, #confirmation-hint. So you can style them with that selector.
-// This script needs a CSS rule in your userChrome.css: #confirmation-hint[data-message-id="hideCheckHint"] #confirmation-hint-message {margin-inline: 0;}
+// This script needs a CSS rule in your userChrome.css: #confirmation-hint[data-message-id="hideCheckHint"] #confirmation-hint-message {margin-inline: 0 !important;}
 // Otherwise the padding will be a little off for the message popup that says "Browser Toolbox is already open."
 // I could have added this rule with javascript instead, but there's an internal CSS file that does exactly the opposite, 7px.
 // Using !important in an inline style or overriding it with javascript just seem dirty.
