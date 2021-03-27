@@ -2,7 +2,7 @@
 // @name           Toggle Tabs and Sidebar
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
-// @description    Adds a new toolbar button that can toggle between hiding tabs and hiding sidebar. It toggles the sidebar on its own, but it hides tabs by setting a custom user pref which you need to reference in your userChrome.css file, like this: @supports -moz-bool-pref("userChrome.toggleTabsOrSidebar.state") { <rules for hiding tabs> }
+// @description    Adds a new toolbar button that can toggle between hiding tabs and hiding sidebar. Intended for use with tree style tabs, but will work just fine without it. It toggles the sidebar on its own, but it hides tabs by setting a custom user pref which you need to reference in your userChrome.css file, like this: @supports -moz-bool-pref("userChrome.toggleTabsOrSidebar.state") { <rules for hiding tabs> }
 // ==/UserScript==
 (() => {
     function init() {
@@ -113,6 +113,7 @@
                         let prefSvc = Services.prefs,
                             hideState = "userChrome.toggleTabsOrSidebar.state",
                             positionStart = "sidebar.position_start",
+                            tstID = "treestyletab_piro_sakura_ne_jp-sidebar-action",
                             toolbarbutton = aDoc.createXULElement("toolbaritem"),
                             animBox = document.createXULElement("box"),
                             icon = document.createXULElement("image"),
@@ -135,18 +136,25 @@
                         toolbarbutton.onclick = (e) => {
                             if (e.button !== 0) return;
                             e.preventDefault();
+                            let hasTST = SidebarUI.sidebars.get(tstID);
                             if (prefSvc.getBoolPref(hideState)) {
                                 CustomHint.show(animBox, "Hiding sidebar.", {
                                     event: e,
                                     hideCheck: true,
                                 });
+                                SidebarUI.show(
+                                    hasTST
+                                        ? tstID
+                                        : SidebarUI._box.getAttribute("sidebarcommand") ||
+                                              SidebarUI.DEFAULT_SIDEBAR_ID
+                                );
                             } else {
                                 CustomHint.show(animBox, "Hiding tabs.", {
                                     event: e,
                                     hideCheck: true,
                                 });
+                                SidebarUI.hide();
                             }
-                            SidebarUI.toggle();
                             prefSvc.setBoolPref(hideState, !prefSvc.getBoolPref(hideState));
                             icon.animate(keyframes, animOptions);
                         };
