@@ -2,7 +2,7 @@
 // @name           Toggle Tabs and Sidebar
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
-// @description    Adds a new toolbar button that can toggle between hiding tabs and hiding sidebar. Intended for use with tree style tabs, but will work just fine without it. It toggles the sidebar on its own, but it hides tabs by setting a custom user pref which you need to reference in your userChrome.css file, like this: @supports -moz-bool-pref("userChrome.toggleTabsOrSidebar.state") { <rules for hiding tabs> }
+// @description    Adds a new toolbar button that can toggle between hiding tabs and hiding sidebar. Intended for use with tree style tabs, but will work just fine without it. It toggles the sidebar on its own, but it hides tabs by setting an attribute on the document element, which you need to reference in your userChrome.css file, like this: :root[toggle-hidden="tabs"] #TabsToolbar {...}
 // ==/UserScript==
 (() => {
     function init() {
@@ -181,6 +181,7 @@
                             try {
                                 let type = sub.getPrefType(pref);
                                 if (getPref(sub, pref, type)) {
+                                    document.documentElement.setAttribute("toggle-hidden", "sidebar");
                                     icon.src = tabsURL;
                                     label.setAttribute("value", "Hide Tabs");
                                     toolbarbutton.setAttribute("label", "Hide Tabs");
@@ -189,6 +190,7 @@
                                         "Hide tabs and reveal sidebar"
                                     );
                                 } else {
+                                    document.documentElement.setAttribute("toggle-hidden", "tabs");
                                     positionObserver(prefSvc, _top, positionStart);
                                     label.setAttribute("value", "Hide Sidebar");
                                     toolbarbutton.setAttribute("label", "Hide Sidebar");
