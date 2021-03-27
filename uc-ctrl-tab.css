@@ -41,17 +41,18 @@
 
 #ctrlTab-showAll {
     background-color: var(--ctrlTab-panel-bgcolor) !important;
+    border: 2px solid transparent !important;
 }
 
 #ctrlTab-showAll:focus,
 #ctrlTab-showAll:focus-within {
     background-color: var(--ctrlTab-panel-focused-bgcolor) !important;
-    border: 2px solid transparent !important;
+    border: 2px solid var(--toolbarbutton-icon-fill-attention) !important;
 }
 
 .ctrlTab-preview-inner {
     padding: 10px !important;
-    border: 0px solid transparent !important;
+    border: 2px solid transparent !important;
     border-radius: 5px !important;
     box-shadow: 0 0 4px -1px rgba(0, 0, 0, 0.2), 0 0 25px -2px rgba(0, 0, 0, 0.2) !important;
     background-color: var(--ctrlTab-panel-bgcolor) !important;
@@ -59,6 +60,7 @@
 
 .ctrlTab-preview:focus>.ctrlTab-preview-inner {
     background-color: var(--ctrlTab-panel-focused-bgcolor) !important;
+    border: 2px solid var(--toolbarbutton-icon-fill-attention) !important;
     box-shadow: 0 0 4px -1px rgba(0, 0, 0, 0.2), 0 0 25px -2px rgba(0, 0, 0, 0.2), inset 0 0 20px 5px hsla(0, 0%, 0%, 0.5) !important;
 }
 

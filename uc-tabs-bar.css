@@ -410,8 +410,13 @@ link[href$="global.css"] ~ spacer[part="arrowscrollbox-overflow-end-indicator"] 
     -moz-box-align: center;
 }
 
+panelview .all-tabs-button:not([disabled], [open]):focus {
+    background: none !important;
+}
+
 #allTabsMenu-allTabsViewTabs {
-    padding: var(--panel-subview-body-padding) !important;
+    margin: var(--panel-subview-body-padding) !important;
+    padding-block-start: 0 !important;
 }
 
 .all-tabs-item[selected],
@@ -435,7 +440,7 @@ link[href$="global.css"] ~ spacer[part="arrowscrollbox-overflow-end-indicator"] 
 }
 
 .all-tabs-item[multiselected]:not([selected]),
-.all-tabs-item:not([selected]):is(:hover, [_moz-menuactive]) {
+.all-tabs-item:not([selected]):is(:hover, :focus-within, [_moz-menuactive]) {
     background-color: var(--arrowpanel-dimmed) !important;
 }
 
@@ -469,9 +474,10 @@ link[href$="global.css"] ~ spacer[part="arrowscrollbox-overflow-end-indicator"] 
     display: none !important;
 }
 
-.all-tabs-item .all-tabs-secondary-button:hover:not([disabled]) {
+.all-tabs-item .all-tabs-secondary-button:is(:hover, :focus):not([disabled]) {
 	background-color: var(--arrowpanel-dimmed) !important;
 	opacity: 1 !important;
+    color: white !important;
 }
 
 .all-tabs-item .all-tabs-secondary-button:hover:active:not([disabled]) {

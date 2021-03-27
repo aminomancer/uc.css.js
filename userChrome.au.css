@@ -31,6 +31,23 @@ menupopup::part(arrowscrollbox-scrollbox) {
 	margin-bottom: 4px;
 }
 
+/* focused buttons to look like hovered buttons */
+panelview :is(.toolbarbutton-1, toolbarbutton.subviewbutton, .navigable.subviewbutton):not([disabled], [open]):focus,
+.widget-overflow-list .toolbarbutton-1:not([disabled], [open]):focus,
+.toolbaritem-combined-buttons:is(:not([cui-areatype="toolbar"]), [overflowedItem="true"])
+> toolbarbutton:not([disabled], [open]):focus {
+    background-color: var(--panelview-toolbarbutton-hover-bgcolor);
+    color: var(--panelview-toolbarbutton-hover-color);
+}
+
+panelview :is(.toolbarbutton-1, toolbarbutton.subviewbutton, .navigable.subviewbutton):not([disabled], [open]):focus:active,
+.widget-overflow-list .toolbarbutton-1:not([disabled], [open]):focus:active,
+.toolbaritem-combined-buttons:is(:not([cui-areatype="toolbar"]), [overflowedItem="true"])
+> toolbarbutton:not([disabled], [open]):focus:active {
+    background-color: var(--panelview-toolbarbutton-active-bgcolor);
+    color: var(--panelview-toolbarbutton-active-color);
+}
+
 menupopup::part(drop-indicator-bar) {
     margin-block: -14px;
 }
@@ -110,6 +127,10 @@ link[href="chrome://global/skin/arrowscrollbox.css"] ~ :is(#scrollbutton-up, #sc
 {
     :is(panel, menupopup)::part(arrow) {
         display: -moz-inline-box;
+    }
+
+    :is(panel, menupopup)[side="top"]::part(arrow) {
+        margin-bottom: -4px;
     }
 }
 

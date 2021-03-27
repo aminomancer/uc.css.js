@@ -202,6 +202,28 @@ menupopup.in-menulist {
     --menu-background-color: var(--ui-secondary-bg) !important;
 }
 
+.contentSelectDropdown-searchbox {
+    appearance: none !important;
+    color: inherit !important;
+    border-radius: var(--context-menuitem-border-radius);
+    margin: 0 !important;
+    padding-inline-start: 3px !important;
+    background-color: var(--arrowpanel-dimmed) !important;
+    padding-block: 0 !important;
+    transition: 300ms background-color !important;
+    min-height: 25px !important;
+    -moz-user-modify: read-write !important;
+}
+
+.contentSelectDropdown-searchbox:focus-within {
+	background-color: var(--search-box-focus) !important;
+	transition: 300ms background-color !important;
+}
+
+.contentSelectDropdown-searchbox + :is(menu, menuitem) {
+    margin-top: 4px;
+}
+
 @-moz-document url(chrome://browser/content/browser.xhtml)
 {
     panel menulist {

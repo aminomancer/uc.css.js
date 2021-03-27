@@ -251,6 +251,28 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
     --menu-background-color: var(--ui-secondary-bg) !important;
 }
 
+#ContentSelectDropdown > menupopup .contentSelectDropdown-searchbox {
+    appearance: none !important;
+    color: inherit !important;
+    border-radius: var(--context-menuitem-border-radius);
+    margin: 0 !important;
+    padding-inline-start: 3px !important;
+    background-color: var(--arrowpanel-dimmed) !important;
+    padding-block: 0 !important;
+    transition: 300ms background-color !important;
+    min-height: 25px !important;
+    -moz-user-modify: read-write !important;
+}
+
+#ContentSelectDropdown > menupopup .contentSelectDropdown-searchbox:focus-within {
+    background-color: var(--search-box-focus) !important;
+    transition: 300ms background-color !important;
+}
+
+#ContentSelectDropdown > menupopup .contentSelectDropdown-searchbox + :is(menu, menuitem) {
+    margin-top: 4px;
+}
+
 #ContentSelectDropdown > menupopup {
     font: menu !important;
     color: var(--ui-text-80) !important;
@@ -571,7 +593,8 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
             --arrowpanel-menuitem-inline-margin: 4px;
             --arrowpanel-menuitem-margin: 0 var(--arrowpanel-menuitem-inline-margin) !important;
             --arrowpanel-menuitem-padding: 6px !important;
-            --panel-subview-body-padding: 4px 0 !important;
+            --panel-subview-body-padding-magnitude: var(--arrowpanel-menuitem-inline-margin);
+            --panel-subview-body-padding: var(--panel-subview-body-padding-magnitude) 0 !important;
             --arrowpanel-menuitem-border-radius: 3px !important;
             --proton-tab-radius: 0 !important;
             --proton-tab-block-margin: 0 !important;
@@ -602,10 +625,12 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
     }
 
     @supports (-moz-bool-pref("browser.proton.appmenu.enabled")) {
-        :root[proton] #appMenu-multiView {
-            --arrowpanel-menuitem-margin: 0 6px !important;
+        #appMenu-multiView {
+            --arrowpanel-menuitem-inline-margin: 6px;
+            --arrowpanel-menuitem-margin: 0 var(--arrowpanel-menuitem-inline-margin) !important;
             --arrowpanel-menuitem-padding: 8px !important;
-            --panel-subview-body-padding: 6px 0 !important;
+            --panel-subview-body-padding-magnitude: var(--arrowpanel-menuitem-inline-margin);
+            --panel-subview-body-padding: var(--panel-subview-body-padding-magnitude) 0 !important;
         }
     }
 
@@ -743,6 +768,28 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
         color: var(--ui-text-80) !important;
         background-image: unset !important;
         --menu-background-color: var(--ui-secondary-bg) !important;
+    }
+
+    #ContentSelectDropdown > menupopup .contentSelectDropdown-searchbox {
+        appearance: none !important;
+        color: inherit !important;
+        border-radius: var(--context-menuitem-border-radius);
+        margin: 0 !important;
+        padding-inline-start: 3px !important;
+        background-color: var(--arrowpanel-dimmed) !important;
+        padding-block: 0 !important;
+        transition: 300ms background-color !important;
+        min-height: 25px !important;
+        -moz-user-modify: read-write !important;
+    }
+
+    #ContentSelectDropdown > menupopup .contentSelectDropdown-searchbox:focus-within {
+        background-color: var(--search-box-focus) !important;
+        transition: 300ms background-color !important;
+    }
+
+    #ContentSelectDropdown > menupopup .contentSelectDropdown-searchbox + :is(menu, menuitem) {
+        margin-top: 4px;
     }
 
     @supports (-moz-bool-pref("browser.proton.contextmenus.enabled")) {

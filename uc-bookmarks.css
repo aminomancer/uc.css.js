@@ -12,7 +12,7 @@
     color: #fff !important;
     border: none !important;
     padding: 2px;
-    padding-inline: 8px;
+    padding-inline: 6px;
     border-radius: 2px !important;
     min-height: 24px !important;
     box-sizing: border-box !important;
@@ -187,7 +187,7 @@
     border-radius: 2px !important;
 }
 
-#editBookmarkPanel #editBookmarkPanelContent button:hover {
+#editBookmarkPanel #editBookmarkPanelContent button:is(:hover, :focus-visible) {
     -moz-appearance: none !important;
     background-color: var(--ebmp-hover-bgcolor) !important;
 }
@@ -219,11 +219,11 @@
     background-color: hsl(251, 59%, 44%) !important;
 }
 
-#editBookmarkPanelDoneButton:hover {
+#editBookmarkPanelDoneButton:is(:hover, :focus-visible) {
     background-color: hsl(248, 80%, 56%) !important;
 }
 
-#editBookmarkPanelDoneButton:active {
+#editBookmarkPanelDoneButton:is(:hover, :focus-visible):active {
     background-color: hsl(247, 80%, 58%) !important;
 }
 
@@ -231,11 +231,11 @@
     background-color: hsl(233, 28%, 24%) !important;
 }
 
-#editBookmarkPanelRemoveButton:hover {
+#editBookmarkPanelRemoveButton:is(:hover, :focus-visible) {
     background-color: hsl(234, 30%, 28%) !important;
 }
 
-#editBookmarkPanelRemoveButton:active {
+#editBookmarkPanelRemoveButton:is(:hover, :focus-visible):active {
     background-color: hsl(234, 30%, 30%) !important;
 }
 
@@ -277,14 +277,14 @@
     padding-inline: 0 !important;
 }
 
-#editBookmarkPanel .in-menulist :is(menu, menuitem):is(:hover, [_moz-menuactive="true"]):not([disabled="true"]) {
+#editBookmarkPanel .in-menulist :is(menu, menuitem):is(:hover, :focus-visible, [_moz-menuactive="true"]):not([disabled="true"]) {
     -moz-appearance: none !important;
     background-color: hsl(232, 21%, 40%) !important;
     color: #fff !important;
     border: none !important;
 }
 
-#editBookmarkPanel menulist[open="true"] {
+#editBookmarkPanel menulist:is(:focus-visible, [open="true"]) {
     -moz-appearance: none !important;
     background-color: hsl(232, 24%, 32%) !important;
 }
@@ -359,11 +359,11 @@
     background-color: var(--purple-35) !important;
 }
 
-#editBookmarkPanel checkbox:hover .checkbox-check:not(:disabled) {
-	background-color: var(--arrowpanel-darker) !important;
+#editBookmarkPanel checkbox:is(:hover, :focus-visible) .checkbox-check:not(:disabled) {
+	background-color: var(--arrowpanel-dimmed-further) !important;
 }
 
-#editBookmarkPanel checkbox:hover .checkbox-check[checked]:not(:disabled) {
+#editBookmarkPanel checkbox:is(:hover, :focus-visible) .checkbox-check[checked]:not(:disabled) {
 	background-color: var(--purple-45) !important;
 }
 

@@ -169,18 +169,10 @@
                         };
                         let prefSvc = Services.prefs,
                             autoHide = "ui.popup.disable_autohide",
-                            toolbarbutton = aDoc.createElementNS(
-                                "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul",
-                                "toolbaritem"
-                            ),
-                            animBox = document.createElementNS(
-                                "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul",
-                                "box"
-                            ),
-                            icon = document.createElementNS(
-                                "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul",
-                                "image"
-                            ),
+                            toolbarbutton = aDoc.createXULElement("toolbaritem"),
+                            animBox = document.createXULElement("box"),
+                            icon = document.createXULElement("image"),
+                            label = document.createXULElement("label"),
                             keyframes = {
                                 transform: [
                                     "scale(100%)",
@@ -205,7 +197,7 @@
                                     e.preventDefault();
                                     toolbox.getBrowserToolboxSessionState()
                                         ? CustomHint.show(
-                                              toolbarbutton,
+                                              animBox,
                                               "Browser Toolbox is already open.",
                                               { event: e, hideCheck: true }
                                           )
@@ -214,11 +206,11 @@
                                 case 1:
                                     e.preventDefault();
                                     prefSvc.getBoolPref(autoHide)
-                                        ? CustomHint.show(toolbarbutton, "Letting popups close.", {
+                                        ? CustomHint.show(animBox, "Letting popups close.", {
                                               event: e,
                                               hideCheck: true,
                                           })
-                                        : CustomHint.show(toolbarbutton, "Holding popups open.", {
+                                        : CustomHint.show(animBox, "Holding popups open.", {
                                               event: e,
                                           });
                                     prefSvc.setBoolPref(autoHide, !prefSvc.getBoolPref(autoHide));
@@ -270,7 +262,12 @@
                         icon.src = toolboxURL;
                         animBox.style.cssText = `-moz-box-pack: center;`;
                         icon.style.cssText = `height: 16px; width: 16px; transition: fill 50ms ease-in-out 0s;`;
+                        label.className = "toolbarbutton-text";
+                        label.setAttribute("crop", "right");
+                        label.setAttribute("flex", "1");
+                        label.setAttribute("value", "Browser Toolbox");
                         toolbarbutton.appendChild(animBox);
+                        toolbarbutton.appendChild(label);
                         animBox.appendChild(icon);
 
                         window.addEventListener("unload", uninit, false);

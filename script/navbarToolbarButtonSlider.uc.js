@@ -1,46 +1,36 @@
 // ==UserScript==
 // @name           navbarToolbarButtonSlider.uc.js
 // @homepage       https://github.com/aminomancer
-// @description    Wrap all toolbar buttons after #urlbar-container in a scrollable div. It can scroll horizontally through the buttons by scrolling up/down with a mousewheel, like the tab bar. You can change userChrome.toolbarSlider.width in about:config to make the container wider or smaller. The slider scales with the window: if you choose 12, it'll be 12 buttons long when the window is at full size. As the window gets smaller, the slider shrinks in width to accommodate the urlbar. To scroll faster you can add a multiplier right before scrollByPixels is called, like scrollAmount = scrollAmount * 1.5 or something like that. Doesn't handle touch events yet since I don't have a touchpad to test it on. Let me know if you have any ideas though.
+// @description    Wrap all toolbar buttons after #urlbar-container in a scrollable div. It can scroll horizontally through the buttons by scrolling up/down with a mousewheel, like the tab bar. You can change userChrome.toolbarSlider.width in about:config to make the container wider or smaller. If you choose 12, it'll be 12 buttons long. When the window gets *really* small, the slider disappears and the toolbar buttons are placed into the normal widget overflow panel. You can specify more buttons to exclude from the slider by adding their IDs (in quotes, separated by commas) to userChrome.toolbarSlider.excludeButtons in about:config. For example you might type ["bookmarks-menu-button", "downloads-button"] if you want those to stay outside of the slider. You can also decide whether to exclude flexible space springs from the slider by toggling userChrome.toolbarSlider.excludeFlexibleSpace in about:config. By default, springs are excluded. To scroll faster you can add a multiplier right before scrollByPixels is called, like scrollAmount = scrollAmount * 1.5 or something like that. Doesn't handle touch events yet since I don't have a touchpad to test it on. Let me know if you have any ideas though.
 // @author         aminomancer
 // ==/UserScript==
 
 (() => {
     function startup() {
         const prefsvc = Services.prefs,
-            widthPref = "userChrome.toolbarSlider.width";
-        let outer = document.createElement("div"),
-            inner = document.createElement("div"),
+            widthPref = "userChrome.toolbarSlider.width",
+            excludedPref = "userChrome.toolbarSlider.excludeButtons",
+            springPref = "userChrome.toolbarSlider.excludeFlexibleSpace";
+        let outer = document.createElement("toolbaritem"),
+            inner = document.createElement("hbox"),
             kids = inner.children,
-            cNavBar = document.getElementById("nav-bar-customization-target"),
+            cNavBar = document.getElementById("nav-bar"),
+            cTarget = document.getElementById(cNavBar.getAttribute("customizationtarget")),
+            cOverflow = document.getElementById(cNavBar.getAttribute("overflowtarget")),
             urlbar = document.getElementById("urlbar-container"),
             bin = document.getElementById("mainPopupSet"),
-            widgets = cNavBar.children,
+            widgets = cTarget.children,
             domArray = [],
             prefHandler = {
-                get prop() {
-                    if (window.innerWidth / window.screen.availWidth > 0.7) return this.width;
-                    return (
-                        Math.round(
-                            ((window.innerWidth / window.screen.availWidth) * this.width) / 32
-                        ) * 32
-                    );
-                },
                 handleEvent(e) {
                     if (e.type !== "unload") return;
                     window.removeEventListener("unload", this, false);
                     prefsvc.removeObserver(widthPref, this);
-                    this.muObserver.disconnect();
                 },
                 observe(_sub, _top, pref) {
                     this.width = prefsvc.getIntPref(pref, 11) * 32;
-                    if (outer.ready) outer.style.maxWidth = `${this.prop}px`;
+                    if (outer.ready) outer.style.maxWidth = `${this.width}px`;
                 },
-                muObserver: new MutationObserver(function (mus) {
-                    for (let mu of mus) {
-                        outer.style.maxWidth = `${prefHandler.prop}px`;
-                    }
-                }),
                 async prefSet(pref, val) {
                     return prefsvc.setIntPref(pref, val);
                 },
@@ -51,20 +41,65 @@
                         await this.prefSet(widthPref, 11);
                         this.observe(null, null, widthPref);
                     }
+                    if (!prefsvc.prefHasUserValue(excludedPref))
+                        prefsvc.setStringPref(excludedPref, "[]");
+                    if (!prefsvc.prefHasUserValue(springPref))
+                        prefsvc.setBoolPref(springPref, true);
                 },
                 attachListeners() {
                     window.addEventListener("unload", this, false);
                     prefsvc.addObserver(widthPref, this);
-                    this.muObserver.observe(document.documentElement, {
-                        attributeFilter: ["width"],
-                    });
                 },
             },
             cuiListen = {
-                onCustomizeStart: cStart.bind(this),
-                onCustomizeEnd: cEnd.bind(this),
-                onWidgetAfterDOMChange: domChange.bind(this),
-                onWindowClosed: windowClosed.bind(this),
+                onCustomizeStart() {
+                    let isOverflowing = cNavBar.getAttribute("overflowing");
+                    if (!isOverflowing) unwrapAll(kids, cTarget);
+                    /* temporarily move the slider out of the way. we don't want to delete it since we only want to add listeners and observers once per window. the slider needs to be out of the customization target during customization, or else we get a tiny bug where dragging a widget ahead of the empty slider causes the widget to teleport to the end. */
+                    bin.appendChild(outer);
+                    outer.style.display = isOverflowing ? "none" : "-moz-box";
+                },
+                async onCustomizeEnd() {
+                    let isOverflowing = cNavBar.getAttribute("overflowing");
+                    let array = await convertToArray(widgets);
+                    if (!isOverflowing) wrapAll(array, inner);
+                    else {
+                        wrapAll(array, cOverflow);
+                        cOverflow.insertBefore(outer, cOverflow.firstElementChild);
+                    }
+                    outer.style.display = isOverflowing ? "none" : "-moz-box";
+                },
+                onWidgetOverflow(aNode, aContainer) {
+                    if (aNode.ownerGlobal !== window) return;
+                    if (aNode === outer && aContainer === cTarget) unwrapAll(kids, cOverflow);
+                    outer.style.display = "none";
+                },
+                async onWidgetUnderflow(aNode, aContainer) {
+                    if (aNode.ownerGlobal !== window) return;
+                    if (aNode === outer && aContainer === cTarget) {
+                        let array = await convertToArray(cOverflow.children);
+                        backToNavbar(array, inner);
+                        outer.style.display = "-moz-box";
+                    }
+                },
+                onWidgetAfterDOMChange(aNode, aNextNode, aContainer, aWasRemoval) {
+                    // if the dom change was the removal of a toolbar button node, do nothing.
+                    if (aWasRemoval) return;
+                    /* first makes sure that "this" refers to the window where the node was created, otherwise this would run multiple times per-window if you have more than one window open. second makes sure that the node being mutated is actually in the nav-bar, since there are other widget areas. third makes sure we're not in customize mode, since that involves a lot of dom changes and we want to basically pause this whole feature during customize mode. if all are true then we call pickUpOrphans to wrap any widgets that aren't already wrapped. */
+                    if (
+                        aNode.ownerGlobal === window &&
+                        aContainer === cTarget &&
+                        !CustomizationHandler.isCustomizing()
+                    ) {
+                        pickUpOrphans(aNode);
+                    }
+                },
+                onWindowClosed(aWindow) {
+                    /* argument 2 of this expression detaches listener for window that got closed. but other windows still have listeners that hear about the closed window. if a window happens to be open to the "customize" page when the window closes, that window won't send an onCustomizeEnd event. so the slider containers in EVERY window would remain unwrapped after the window closes. so when a window closes, we need to check if the window that sent the closed event is in customization. if it is, then we need to call wrapAll in the windows that weren't closed. that's what the 3rd argument here is for. */
+                    aWindow === window
+                        ? window.CustomizableUI.removeListener(cuiListen)
+                        : aWindow.CustomizationHandler.isCustomizing() && wrapAll(domArray, inner);
+                },
             },
             cuiArray = async function () {
                 /* get all the widgets in the nav-bar, filter out any nullish/falsy items, then call the big boy filter. if the global context is a private browsing window, then it will filter out any extension widgets that aren't allowed in private browsing. this is important because every item in the array needs to have a corresponding DOM node for us to remember the DOM order and place widgets where they belong. if we leave an item in the array that has no DOM node, then insertBefore will put the widget before undefined, which means put it at the very end, which isn't always what we want. most importantly this returns anew every time it's called so it can update during the invocation of pickUpOrphans but also during the execution. using async since it's fewer characters than "return new Promise..." */
@@ -90,38 +125,6 @@
                 subtree: true,
             };
 
-        // unwrap all the buttons when customization starts
-        function cStart() {
-            unwrapAll(kids, cNavBar);
-        }
-
-        // rewrap all when customization ends.
-        async function cEnd() {
-            let array = await convertToArray(widgets);
-            wrapAll(array, inner);
-        }
-
-        // check for toolbar buttons being created or updated on a continuing basis.
-        function domChange(aNode, aNextNode, aContainer, aWasRemoval) {
-            // if the dom change was the removal of a toolbar button node, do nothing.
-            if (aWasRemoval) return;
-            /* first makes sure that "this" refers to the window where the node was created, otherwise this would run multiple times per-window if you have more than one window open. second makes sure that the node being mutated is actually in the nav-bar, since there are other widget areas. third makes sure we're not in customize mode, since that involves a lot of dom changes and we want to basically pause this whole feature during customize mode. if all are true then we call pickUpOrphans to wrap any widgets that aren't already wrapped. */
-            if (
-                aNode.ownerGlobal === this &&
-                aContainer === cNavBar &&
-                !CustomizationHandler.isCustomizing()
-            ) {
-                pickUpOrphans(aNode);
-            }
-        }
-
-        function windowClosed(aWindow) {
-            /* argument 2 of this expression detaches listener for window that got closed. but other windows still have listeners that hear about the closed window. if a window happens to be open to the "customize" page when the window closes, that window won't send an onCustomizeEnd event. so the slider containers in EVERY window would remain unwrapped after the window closes. so when a window closes, we need to check if the window that sent the closed event is in customization. if it is, then we need to call wrapAll in the windows that weren't closed. that's what the 3rd argument here is for. */
-            aWindow === this
-                ? this.CustomizableUI.removeListener(cuiListen)
-                : aWindow.CustomizationHandler.isCustomizing() && wrapAll(domArray, inner);
-        }
-
         // convert the buttons we want to wrap into an array. isn't entirely necessary but it's a performant way to prevent weird anomalies during startup that could show up otherwise.
         async function convertToArray(buttons) {
             buttons.indexOf = Array.prototype.indexOf;
@@ -142,7 +145,7 @@
             ) {
                 return false;
             }
-            // exclude system buttons and anything else you don't want to wrap in the slider container.
+            // exclude urlbar, searchbar, system buttons, and the slider itself.
             switch (item.id) {
                 case "wrapper-back-button":
                 case "back-button":
@@ -160,11 +163,14 @@
                 default:
                     break;
             }
+            // exclude spacing springs
             if (
                 item.id.startsWith("customizableui-special-spring") ||
                 item.id.startsWith("wrapper-customizableui-special-spring")
             )
-                return false;
+                return !prefsvc.getBoolPref(springPref);
+            let excludedButtons = JSON.parse(prefsvc.getStringPref(excludedPref));
+            if (excludedButtons.some((str) => str === item.id)) return false;
             return true;
         }
 
@@ -186,9 +192,11 @@
 
         function unwrapAll(buttons, container) {
             appendLoop(buttons, container);
-            /* temporarily move the slider out of the way. we don't want to delete it since we only want to add listeners and observers once per window.
-        the slider needs to be out of the customization target during customization, or else we get a tiny bug where dragging a widget ahead of the empty slider causes the widget to teleport to the end. */
-            bin.appendChild(outer);
+        }
+
+        function backToNavbar(buttons, container) {
+            buttons.forEach((val) => container.appendChild(val));
+            cTarget.appendChild(outer);
         }
 
         // pick up any nodes that belong in the slider but aren't in it.
@@ -248,17 +256,17 @@
             kids.some = Array.prototype.some;
             // begin observing for changes to the "open" attribute of the slider's toolbar buttons.
             observer.observe(inner, obsOps);
-            outer.className = "container";
+            outer.className = "chromeclass-location slider-container";
             outer.id = "nav-bar-toolbarbutton-slider-container";
             // the crucial parts here are scroll-behavior: smooth, overflow: hidden. without this, smooth horizontal scrolling won't work.
             outer.style.cssText =
                 "display: -moz-box; -moz-box-align: center; scrollbar-width: none; box-sizing: border-box; scroll-behavior: smooth; overflow: hidden; transition: max-width 0.2s ease-out;";
-            outer.style.maxWidth = `${prefHandler.prop}px`;
+            outer.style.maxWidth = `${prefHandler.width}px`;
             outer.ready = true;
-            inner.className = "container";
+            inner.className = "slider-inner-container";
             inner.id = "nav-bar-toolbarbutton-slider";
             inner.style.cssText = "display: -moz-box; height: var(--urlbar-container-height);";
-            outer.setAttribute("overflows", "false");
+            outer.setAttribute("overflows", "true");
             urlbar.style.minWidth = "unset";
             // these attributes aren't exactly necessary, just there for consistency in firefox and maybe future extension.
             outer.setAttribute("smoothscroll", "true");

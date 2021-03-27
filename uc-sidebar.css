@@ -72,7 +72,8 @@
     padding-inline-start: 13px !important;
 }
 
-@-moz-document regexp(".*Sidebar.*"), regexp(".*sidebar.*") {
+/* search-textbox icons (magnifying glass and clear input button) */
+@-moz-document url("chrome://browser/content/browser.xhtml"), regexp(".*Sidebar.*"), regexp(".*sidebar.*") {
 
     .textbox-search-icons {
         display: flex;

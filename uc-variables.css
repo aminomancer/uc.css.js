@@ -156,7 +156,8 @@ toolbar {
         --arrowpanel-menuitem-inline-margin: 4px;
         --arrowpanel-menuitem-margin: 0 var(--arrowpanel-menuitem-inline-margin) !important;
         --arrowpanel-menuitem-padding: 6px !important;
-        --panel-subview-body-padding: 4px 0 !important;
+        --panel-subview-body-padding-magnitude: var(--arrowpanel-menuitem-inline-margin);
+        --panel-subview-body-padding: var(--panel-subview-body-padding-magnitude) 0 !important;
         --arrowpanel-menuitem-border-radius: 3px !important;
         --proton-tab-radius: 0 !important;
         --proton-tab-block-margin: 0 !important;
@@ -192,10 +193,12 @@ toolbar {
 
 @supports (-moz-bool-pref("browser.proton.appmenu.enabled")) {
 
-    :root #appMenu-multiView {
-        --arrowpanel-menuitem-margin: 0 6px !important;
+    #appMenu-multiView {
+        --arrowpanel-menuitem-inline-margin: 6px;
+        --arrowpanel-menuitem-margin: 0 var(--arrowpanel-menuitem-inline-margin) !important;
         --arrowpanel-menuitem-padding: 8px !important;
-        --panel-subview-body-padding: 6px 0 !important;
+        --panel-subview-body-padding-magnitude: var(--arrowpanel-menuitem-inline-margin);
+        --panel-subview-body-padding: var(--panel-subview-body-padding-magnitude) 0 !important;
     }
 
 }

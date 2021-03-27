@@ -100,6 +100,10 @@ i haven't tested this on every scaling factor, if it makes things worse on your 
     margin-inline-end: -1px !important;
 }
 
+#nav-bar[brighttext] #panic-button[open] {
+	fill: var(--warning-color) !important;
+}
+
 #nav-bar-customization-target {
     padding-inline-start: var(--toolbarbutton-outer-padding) !important;
 }

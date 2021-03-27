@@ -753,6 +753,10 @@
 }
 
 @supports (-moz-bool-pref("browser.proton.tabs.enabled")) {
+    .tabbrowser-tab {
+        --tab-label-mask-size: 2em !important;
+    }
+
     .tab-icon-sound-label,
     .tab-label-container.proton > .tab-icon-sound {
         display: none !important;
