@@ -69,7 +69,7 @@ menupopup[menu-api],
 :is(#toolbar-context-menu, #tabContextMenu, #contentAreaContextMenu, #backForwardMenu, #placesContext, #pageActionContextMenu, .search-one-offs-context-menu, #SyncedTabsSidebarContext, .textbox-contextmenu, #customizationPanelItemContextMenu, #customizationPaletteItemContextMenu, #customization-toolbar-menu, #new-tab-button-popup, #new-tab-button, #downloadsContextMenu, menupopup[menu-api], #ContentSelectDropdown, menupopup.in-menulist, .new-tab-popup, #openHandlerPopup)
     :is(menuitem, menu)[disabled="true"] {
     -moz-appearance: none !important;
-    color: rgba(255, 255, 255, 0.45) !important;
+    color: var(--panel-disabled-color) !important;
     background-color: initial !important;
 }
 
@@ -216,8 +216,8 @@ menupopup.in-menulist {
 }
 
 .contentSelectDropdown-searchbox:focus-within {
-	background-color: var(--search-box-focus) !important;
-	transition: 300ms background-color !important;
+    background-color: var(--search-box-focus) !important;
+    transition: 300ms background-color !important;
 }
 
 .contentSelectDropdown-searchbox + :is(menu, menuitem) {
@@ -270,9 +270,16 @@ menupopup.in-menulist {
         box-shadow: var(--menupopup-shadow) !important;
     }
 
-    menuitem:not([disabled="true"]) :is(.menu-accel, .menu-iconic-accel)[value] {
+    :is(.menu-accel, .menu-iconic-accel)[value] {
+        margin-inline: 1.55em calc(var(--menu-right-margin) + 4px) !important;
+    }
+
+    menuitem:not([disabled="true"]) :is(.menu-accel, .menu-iconic-accel) {
         color: var(--panel-shortcut-color);
-        margin-inline-start: 1.55em !important;
+    }
+
+    menuitem[disabled="true"] :is(.menu-accel, .menu-iconic-accel) {
+        opacity: 0.6;
     }
 
     :is(#back-button, #forward-button, #viewButton) > menupopup menuseparator,

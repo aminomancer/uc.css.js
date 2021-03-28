@@ -9,11 +9,11 @@ menupopup::part(arrowscrollbox-scrollbox) {
 #BMB_bookmarksPopup::part(arrowscrollbox),
 #BMB_bookmarksPopup menupopup::part(arrowscrollbox),
 #BMB_bookmarksPopup menupopup[placespopup="true"]::part(arrowscrollbox) {
-	padding-block: 4px;
+    padding-block: 4px;
 }
 
 #BMB_bookmarksPopup::part(arrowcontent) {
-	padding-block: 0;
+    padding-block: 0;
 }
 
 #BMB_bookmarksPopup menupopup[placespopup="true"]::part(innerbox) {
@@ -22,26 +22,28 @@ menupopup::part(arrowscrollbox-scrollbox) {
 }
 
 #BMB_bookmarksPopup .panel-subview-footer-button {
-	margin-bottom: unset;
+    margin-bottom: unset;
 }
 
 .panel-subview-footer-button {
-	margin-bottom: 4px;
+    margin-bottom: 4px;
 }
 
 /* focused buttons to look like hovered buttons */
-panelview :is(.toolbarbutton-1, toolbarbutton.subviewbutton, .navigable.subviewbutton):not([disabled], [open]):focus,
+panelview
+    :is(.toolbarbutton-1, toolbarbutton.subviewbutton, .navigable.subviewbutton):not([disabled], [open]):focus,
 .widget-overflow-list .toolbarbutton-1:not([disabled], [open]):focus,
 .toolbaritem-combined-buttons:is(:not([cui-areatype="toolbar"]), [overflowedItem="true"])
-> toolbarbutton:not([disabled], [open]):focus {
+    > toolbarbutton:not([disabled], [open]):focus {
     background-color: var(--panelview-toolbarbutton-hover-bgcolor);
     color: var(--panelview-toolbarbutton-hover-color);
 }
 
-panelview :is(.toolbarbutton-1, toolbarbutton.subviewbutton, .navigable.subviewbutton):not([disabled], [open]):focus:active,
+panelview
+    :is(.toolbarbutton-1, toolbarbutton.subviewbutton, .navigable.subviewbutton):not([disabled], [open]):focus:active,
 .widget-overflow-list .toolbarbutton-1:not([disabled], [open]):focus:active,
 .toolbaritem-combined-buttons:is(:not([cui-areatype="toolbar"]), [overflowedItem="true"])
-> toolbarbutton:not([disabled], [open]):focus:active {
+    > toolbarbutton:not([disabled], [open]):focus:active {
     background-color: var(--panelview-toolbarbutton-active-bgcolor);
     color: var(--panelview-toolbarbutton-active-color);
 }
@@ -51,11 +53,7 @@ menupopup::part(drop-indicator-bar) {
 }
 
 menupopup::part(drop-indicator) {
-/* 	background-image: linear-gradient(to right, hsla(224, 100%, 71%, 100%) 0%, hsla(224, 100%, 71%, 10%) 40%, hsla(224, 100%, 71%, 1%) 70%, transparent 100%);
-	background-color: transparent;
-	height: 1px;
-    margin-inline-end: -28px; */
-	pointer-events: none;
+    pointer-events: none;
     background: none;
     list-style-image: url(chrome://browser/skin/customizableui/menu-arrow.svg);
     -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity;
@@ -68,16 +66,20 @@ menupopup::part(drop-indicator) {
 
 /* padding for proton context menus */
 :is(#back-button, #forward-button, #viewButton) > menupopup::part(arrowscrollbox),
-:is(.popup-notification-dropmarker, #main-menubar, #PlacesToolbar, #places) menupopup::part(arrowscrollbox),
+:is(.popup-notification-dropmarker, #main-menubar, #PlacesToolbar, #places)
+    menupopup::part(arrowscrollbox),
 :is(#toolbar-context-menu, #tabContextMenu, #contentAreaContextMenu, #backForwardMenu, #placesContext, #pageActionContextMenu, .search-one-offs-context-menu, #SyncedTabsSidebarContext, .textbox-contextmenu, #customizationPanelItemContextMenu, #customizationPaletteItemContextMenu, #customization-toolbar-menu, #new-tab-button-popup, #new-tab-button, #downloadsContextMenu, menupopup[menu-api], #ContentSelectDropdown, menupopup.in-menulist, .new-tab-popup, #openHandlerPopup)::part(arrowscrollbox),
 :is(#back-button, #forward-button, #viewButton) > menupopup menupopup::part(arrowscrollbox),
-:is(.popup-notification-dropmarker, #main-menubar, #PlacesToolbar, #places) menupopup menupopup::part(arrowscrollbox),
-:is(#toolbar-context-menu, #tabContextMenu, #contentAreaContextMenu, #backForwardMenu, #placesContext, #pageActionContextMenu, .search-one-offs-context-menu, #SyncedTabsSidebarContext, .textbox-contextmenu, #customizationPanelItemContextMenu, #customizationPaletteItemContextMenu, #customization-toolbar-menu, #new-tab-button-popup, #new-tab-button, #downloadsContextMenu, menupopup[menu-api], #ContentSelectDropdown, menupopup.in-menulist, .new-tab-popup, #openHandlerPopup) menupopup::part(arrowscrollbox)
-{
+:is(.popup-notification-dropmarker, #main-menubar, #PlacesToolbar, #places)
+    menupopup
+    menupopup::part(arrowscrollbox),
+:is(#toolbar-context-menu, #tabContextMenu, #contentAreaContextMenu, #backForwardMenu, #placesContext, #pageActionContextMenu, .search-one-offs-context-menu, #SyncedTabsSidebarContext, .textbox-contextmenu, #customizationPanelItemContextMenu, #customizationPaletteItemContextMenu, #customization-toolbar-menu, #new-tab-button-popup, #new-tab-button, #downloadsContextMenu, menupopup[menu-api], #ContentSelectDropdown, menupopup.in-menulist, .new-tab-popup, #openHandlerPopup)
+    menupopup::part(arrowscrollbox) {
     padding: var(--menupopup-inner-padding) !important;
 }
 
-@-moz-document url-prefix("chrome://devtools/content/") {
+@-moz-document url-prefix("chrome://devtools/content/")
+{
     menupopup::part(arrowscrollbox) {
         padding: var(--menupopup-inner-padding) !important;
     }
@@ -177,24 +179,32 @@ link[href="chrome://global/skin/arrowscrollbox.css"] ~ :is(#scrollbutton-up, #sc
     border-radius: 5px;
 }
 
-.menu-text, .menu-iconic-text {
-	padding-block: 0;
+.menu-text,
+.menu-iconic-text {
+    padding-block: 0;
 }
 
 /* prevent hiding the close button when audio is playing. undoes an irritating rule in the proton update */
-#navigator-toolbox:not(:hover) .tab-icon-overlay:not([pinned], [sharing], [crashed]):is([soundplaying], [muted], [activemedia-blocked]),
-#navigator-toolbox:hover .tab-icon-stack:not([pinned], [sharing], [crashed]):is([soundplaying], [muted], [activemedia-blocked]) > :not(.tab-icon-overlay) {
-	opacity: revert;
+#navigator-toolbox:not(:hover)
+    .tab-icon-overlay:not([pinned], [sharing], [crashed]):is([soundplaying], [muted], [activemedia-blocked]),
+#navigator-toolbox:hover
+    .tab-icon-stack:not([pinned], [sharing], [crashed]):is([soundplaying], [muted], [activemedia-blocked])
+    > :not(.tab-icon-overlay) {
+    opacity: revert;
 }
 
-#toolbar-menubar:not(:hover) + #TabsToolbar:not(:hover) .tab-icon-overlay:not([pinned], [sharing], [crashed]):is([soundplaying], [muted], [activemedia-blocked]),
-:is(#toolbar-menubar:hover + #TabsToolbar, #TabsToolbar:hover) .tab-icon-stack:not([pinned], [sharing], [crashed]):is([soundplaying], [muted], [activemedia-blocked]) > :not(.tab-icon-overlay) {
-	opacity: revert;
+#toolbar-menubar:not(:hover)
+    + #TabsToolbar:not(:hover)
+    .tab-icon-overlay:not([pinned], [sharing], [crashed]):is([soundplaying], [muted], [activemedia-blocked]),
+:is(#toolbar-menubar:hover + #TabsToolbar, #TabsToolbar:hover)
+    .tab-icon-stack:not([pinned], [sharing], [crashed]):is([soundplaying], [muted], [activemedia-blocked])
+    > :not(.tab-icon-overlay) {
+    opacity: revert;
 }
 
 /* revert proton changes */
 .browserContainer > findbar {
-	padding: 0;
+    padding: 0;
 }
 
 .findbar-container {
@@ -204,7 +214,7 @@ link[href="chrome://global/skin/arrowscrollbox.css"] ~ :is(#scrollbutton-up, #sc
 
 .findbar-find-previous,
 .findbar-find-next {
-    background: rgba(255,255,255,.2);
+    background: rgba(255, 255, 255, 0.2);
     border: 1px solid ThreeDShadow;
     border-inline-start: none;
     border-radius: 0;
@@ -224,4 +234,3 @@ link[href="chrome://global/skin/arrowscrollbox.css"] ~ :is(#scrollbutton-up, #sc
     border-end-end-radius: 2px;
     margin-inline-end: 0;
 }
-

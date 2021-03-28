@@ -500,7 +500,7 @@ tabmodalprompt .checkbox-check[checked="true"] {
     #commonDialog::part(content-box) {
         padding-block: 5px;
     }
-    
+
     .dialog-content-box:not([hidden]) + .dialog-button-box {
         margin-top: 5px;
     }
@@ -524,7 +524,7 @@ tabmodalprompt .checkbox-check[checked="true"] {
     button:-moz-focusring {
         box-shadow: none !important;
     }
-    
+
     #checkboxContainer checkbox {
         margin-inline-start: 4px !important;
         margin-top: 4px !important;

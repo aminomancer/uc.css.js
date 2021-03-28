@@ -79,7 +79,7 @@
 }
 
 #ublock0_raymondhill_net-browser-action .toolbarbutton-icon,
-.webextension-browser-action[label="Nano Adblocker"]{
+.webextension-browser-action[label="Nano Adblocker"] {
     list-style-image: url("chrome://browser/skin/controlcenter/tracking-protection.svg") !important;
     fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
 }
@@ -117,13 +117,13 @@
     filter: grayscale(1) brightness(50);
 }
 
-.webextension-browser-action[label^=Violentmonkey] .toolbarbutton-icon {
+.webextension-browser-action[label^="Violentmonkey"] .toolbarbutton-icon {
     list-style-image: url("chrome://devtools/skin/images/command-console.svg");
     fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
     fill-opacity: var(--toolbarbutton-icon-fill-opacity) !important;
 }
 
-.webextension-browser-action[label=Stylus] .toolbarbutton-icon {
+.webextension-browser-action[label="Stylus"] .toolbarbutton-icon {
     list-style-image: url("chrome://devtools/skin/images/tool-styleeditor.svg");
     fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
     fill-opacity: var(--toolbarbutton-icon-fill-opacity) !important;
@@ -134,15 +134,17 @@
     display: none !important;
 }
 
-#multithreaded-download-manager_qw_linux-2g64_local-menuitem-_link-context-menu .menu-iconic-left::after {
+#multithreaded-download-manager_qw_linux-2g64_local-menuitem-_link-context-menu
+    .menu-iconic-left::after {
     opacity: 1 !important;
-    content: 'Download (Multithread)' !important;
+    content: "Download (Multithread)" !important;
     display: -moz-inline-box !important;
     margin-inline: 6px 0 !important;
 }
 
 /* make addon context menu icons white */
-#multithreaded-download-manager_qw_linux-2g64_local-menuitem-_link-context-menu .menu-iconic-left::before {
+#multithreaded-download-manager_qw_linux-2g64_local-menuitem-_link-context-menu
+    .menu-iconic-left::before {
     width: 16px !important;
     height: 16px !important;
     margin-inline: 4px 1px !important;
@@ -175,7 +177,8 @@
     display: none !important;
 }
 
-:is(.menu-iconic, .menuitem-iconic):is([label="To Google Translate"], [label^="Translate this page"], [label="Translate selected link"], [label="Translate selected text"], [label="Simple Translate"]) .menu-iconic-left::before {
+:is(.menu-iconic, .menuitem-iconic):is([label="To Google Translate"], [label^="Translate this page"], [label="Translate selected link"], [label="Translate selected text"], [label="Simple Translate"])
+    .menu-iconic-left::before {
     width: 16px !important;
     height: 16px !important;
     margin-inline: var(--context-iconic-margin) !important;
@@ -188,11 +191,14 @@
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='1.5 1.5 21.5 21.5'><path style='text-indent:0;text-align:start;line-height:normal;text-transform:none;block-progression:tb;-inkscape-font-specification:Sans' d='M 4 2 C 2.895 2 2 2.895 2 4 L 2 13 C 2 14.105 2.895 15 4 15 L 5 15 L 5 17 L 7 19 L 9 19 L 9 20 C 9 21.105 9.895 22 11 22 L 20 22 C 21.105 22 22 21.105 22 20 L 22 11 C 22 9.895 21.105 9 20 9 L 15 9 L 15 4 C 15 2.895 14.105 2 13 2 L 4 2 z M 4 4 L 13 4 L 13 9 L 11 9 C 10.341763 9 9.7706576 9.3221194 9.40625 9.8125 C 9.2445116 9.7044445 9.1097992 9.5742854 8.96875 9.46875 C 9.6025727 8.8044147 10.234886 7.9984382 10.75 7 L 12 7 L 12 6 L 9 6 L 9 5 L 8 5 L 8 6 L 5 6 L 5 7 L 6.125 7 A 0.50005 0.50005 0 0 0 6.03125 7.5 C 6.03125 7.5 6.1990849 8.0080321 6.71875 8.6875 C 6.9071286 8.9338071 7.1681985 9.2086071 7.46875 9.5 C 6.3240739 10.473776 5.34375 10.90625 5.34375 10.90625 A 0.5048592 0.5048592 0 0 0 5.71875 11.84375 C 5.71875 11.84375 6.915412 11.354151 8.25 10.1875 C 8.4829694 10.368343 8.7491541 10.535248 9.03125 10.71875 C 9.0182221 10.811016 9 10.904125 9 11 L 9 13 L 6 13 L 4 13 L 4 4 z M 6.875 7 L 9.5625 7 C 9.136858 7.7208757 8.6725215 8.3424895 8.1875 8.84375 C 7.9037308 8.5739944 7.6665472 8.3115123 7.5 8.09375 C 7.0644151 7.5242179 7 7.21875 7 7.21875 A 0.50005 0.50005 0 0 0 6.875 7 z M 14.84375 12 L 16.15625 12 L 19 20 L 17.84375 20 L 17.09375 17.8125 L 13.84375 17.8125 L 13.125 20 L 12 20 L 14.84375 12 z M 15.4375 12.90625 C 15.3135 13.38125 14.15625 17 14.15625 17 L 16.8125 17 C 16.8125 17 15.59275 13.36925 15.46875 12.90625 L 15.4375 12.90625 z M 7 15 L 9 15 L 9 17 L 7 17 L 7 15 z' font-family='Sans' fill='context-fill' fill-opacity='context-fill-opacity'/></svg>") !important;
 }
 
-:is(.menu-iconic, .menuitem-iconic):is([label="To Google Translate"], [label^="Translate this page"], [label="Translate selected link"], [label="Translate selected text"], [label="Simple Translate"]) .menu-iconic-icon {
+:is(.menu-iconic, .menuitem-iconic):is([label="To Google Translate"], [label^="Translate this page"], [label="Translate selected link"], [label="Translate selected text"], [label="Simple Translate"])
+    .menu-iconic-icon {
     display: none !important;
 }
 
-#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Pushbullet"] .menu-iconic-left::before {
+#contentAreaContextMenu
+    :is(.menu-iconic, .menuitem-iconic)[label="Pushbullet"]
+    .menu-iconic-left::before {
     width: 16px !important;
     height: 16px !important;
     margin-inline: var(--context-iconic-margin) !important;
@@ -209,7 +215,9 @@
     display: none !important;
 }
 
-#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Zotero Connector"] .menu-iconic-left::before {
+#contentAreaContextMenu
+    :is(.menu-iconic, .menuitem-iconic)[label="Zotero Connector"]
+    .menu-iconic-left::before {
     width: 16px !important;
     height: 16px !important;
     margin-inline: var(--context-iconic-margin) !important;
@@ -222,11 +230,15 @@
     background-image: url("chrome://browser/skin/sync.svg") !important;
 }
 
-#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Zotero Connector"] .menu-iconic-icon {
+#contentAreaContextMenu
+    :is(.menu-iconic, .menuitem-iconic)[label="Zotero Connector"]
+    .menu-iconic-icon {
     display: none !important;
 }
 
-#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic):is([label="Block element..."], [label="uBlock Origin"]) .menu-iconic-left::before {
+#contentAreaContextMenu
+    :is(.menu-iconic, .menuitem-iconic):is([label="Block element..."], [label="uBlock Origin"])
+    .menu-iconic-left::before {
     width: 16px !important;
     height: 16px !important;
     margin-inline: var(--context-iconic-margin) !important;
@@ -239,11 +251,15 @@
     background-image: url("chrome://browser/content/aboutlogins/icons/hide-password.svg") !important;
 }
 
-#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic):is([label="Block element..."], [label="uBlock Origin"]) .menu-iconic-icon {
+#contentAreaContextMenu
+    :is(.menu-iconic, .menuitem-iconic):is([label="Block element..."], [label="uBlock Origin"])
+    .menu-iconic-icon {
     display: none !important;
 }
 
-#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"] .menu-iconic-left::before {
+#contentAreaContextMenu
+    :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"]
+    .menu-iconic-left::before {
     width: 16px !important;
     height: 16px !important;
     margin-inline: var(--context-iconic-margin) !important;
@@ -260,13 +276,15 @@
     display: none !important;
 }
 
-.menuitem-with-favicon[uri="moz-extension://341da70b-415b-44de-979b-de30458e8a84/newtab.html"]:not([_moz-menuactive="true"]) {
+.menuitem-with-favicon[uri="moz-extension://341da70b-415b-44de-979b-de30458e8a84/newtab.html"]:not([_moz-menuactive="true"])
+{
     list-style-image: url("data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA3d3dAP///wB3d3cAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADMzMzMzMwAAMiIiIiIjAAAyIiIiIiMAADIjMzMyIwAAMiIiIiIjAAAyIiIiIiMAADIjMzMyIwAAMiIiIiIjAAAyIiIiIiMAADIjMzMyIwAAMiIiIiIjAAAyIiIiIiMAADIiIiIzMwAAMiIiIjEwAAAyIiIiMwAAADMzMzMwAADAAwAAwAMAAMADAADAAwAAwAMAAMADAADAAwAAwAMAAMADAADAAwAAwAMAAMADAADAAwAAwAcAAMAPAADAHwAA") !important;
 }
 
 .menu-iconic-icon:is([src^="page-icon:https://github.com"], [src^="page-icon:http://github.com"]),
 .toolbarbutton-icon:is([src^="page-icon:https://github.com"], [src^="page-icon:http://github.com"]),
-.urlbarView-favicon:is([src^="page-icon:https://github.com"], [src^="page-icon:http://github.com"]) {
+.urlbarView-favicon:is([src^="page-icon:https://github.com"], [src^="page-icon:http://github.com"])
+{
     filter: invert(1) brightness(10) !important;
 }
 
@@ -276,12 +294,14 @@
     list-style-image: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' x='0' y='0' width='16' height='16' fill='context-fill' fill-opacity='context-fill-opacity'><path d='M7 2.1H3.7c-.9 0-1.6.7-1.6 1.6V7C.9 7 0 7.9 0 9s.9 2.1 2.1 2.1v3.3c0 .9.7 1.6 1.6 1.6h3.1c0-2.2 1.8-2.5 2.2-2.5s2.2.2 2.2 2.5h3.1c.9 0 1.6-.7 1.6-1.6v-3.1c-2.2 0-2.5-1.8-2.5-2.2 0-.4.2-2.2 2.5-2.2V3.7c0-.9-.7-1.6-1.6-1.6H11C11.1.9 10.2 0 9 0S7 .9 7 2.1z'/></svg>") !important;
 }
 
-.tabbrowser-tab[image="chrome://mozapps/skin/extensions/extension.svg"] .tab-sharing-icon-overlay {
+.tabbrowser-tab[image="chrome://mozapps/skin/extensions/extension.svg"] .tab-sharing-icon-overlay
+{
     list-style-image: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' x='0' y='0' width='16' height='16' fill='context-fill' fill-opacity='context-fill-opacity'><path d='M7 2.1H3.7c-.9 0-1.6.7-1.6 1.6V7C.9 7 0 7.9 0 9s.9 2.1 2.1 2.1v3.3c0 .9.7 1.6 1.6 1.6h3.1c0-2.2 1.8-2.5 2.2-2.5s2.2.2 2.2 2.5h3.1c.9 0 1.6-.7 1.6-1.6v-3.1c-2.2 0-2.5-1.8-2.5-2.2 0-.4.2-2.2 2.5-2.2V3.7c0-.9-.7-1.6-1.6-1.6H11C11.1.9 10.2 0 9 0S7 .9 7 2.1z'/></svg>") !important;
     display: block !important;
     fill: currentColor !important;
 }
 
-.tabbrowser-tab[image="chrome://mozapps/skin/extensions/extension.svg"] .tab-icon-image {
+.tabbrowser-tab[image="chrome://mozapps/skin/extensions/extension.svg"] .tab-icon-image
+{
     visibility: hidden !important;
 }

@@ -1,4 +1,5 @@
-:root, tooltip {
+:root,
+tooltip {
     --in-content-bg-dark: rgb(25, 25, 27);
     --ui-secondary-bg: hsl(234, 39%, 10%);
     --blur-bgcolor: rgba(14, 16, 32, 0.58);
@@ -35,8 +36,9 @@
     --content-selection-color: rgb(25, 25, 27);
     --plaintext-color: rgba(255, 255, 255, 0.932);
     --ui-text-80: rgba(255, 255, 255, 0.8);
+    --context-menu-disabled-color: hsla(213, 43%, 89%, 0.5);
     --badge-color-dark: hsl(236, 13%, 42%);
-/*     --tab-hover: linear-gradient(0deg, hsl(231, 42%, 15%), hsl(233, 61%, 8%));
+    /* --tab-hover: linear-gradient(0deg, hsl(231, 42%, 15%), hsl(233, 61%, 8%));
     --tab-pinned: linear-gradient(0deg, hsl(231, 50%, 11%), hsl(232, 70%, 6%));
     --tab-multi: linear-gradient(0deg, hsl(231, 42%, 15%), hsl(232, 70%, 6%)); */
     --tab-hover: linear-gradient(180deg, hsl(231, 49%, 11%), hsl(233, 55%, 8%));
@@ -51,12 +53,13 @@
     --textbox-button-hidden: hsla(240, 100%, 89%, 0);
     --urlbar-results-bgcolor: hsl(233, 32%, 10%);
     --confirmation-hint-bgcolor: hsl(240, 60%, 59%);
+    --urlbar-bookmark-icon-color: hsl(250, 100%, 64%);
     --tab-throbber-fill: rgba(255, 255, 255, 0.6);
     --sanitize-border-color: hsla(0, 0%, 5%, 0.2);
     --menu-separator-color: hsl(233, 25%, 23%);
     --user-urlbar-container-height: 38px;
     --urlbar-element-top-adjust-magnitude: 0.6px; /* used to adjust the vertical position of the urlbar results and urlbar input field, so it looks even on 150% window scaling */
-/*     --default-identity-icon: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M8 1C4.136 1 1 4.136 1 8s3.136 7 7 7 7-3.136 7-7-3.136-7-7-7zm0 11.404a.938.938 0 01-.936-.936V7.723c0-.515.421-.936.936-.936s.936.421.936.936v3.745a.938.938 0 01-.936.936zm0-6.552a1.128 1.128 0 110-2.256 1.128 1.128 0 110 2.256z'/></svg>"); */
+    /* --default-identity-icon: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M8 1C4.136 1 1 4.136 1 8s3.136 7 7 7 7-3.136 7-7-3.136-7-7-7zm0 11.404a.938.938 0 01-.936-.936V7.723c0-.515.421-.936.936-.936s.936.421.936.936v3.745a.938.938 0 01-.936.936zm0-6.552a1.128 1.128 0 110-2.256 1.128 1.128 0 110 2.256z'/></svg>"); */
     --default-identity-icon: url(chrome://global/skin/icons/info-filled.svg);
     --protection-header-gradient-color-1: hsl(318, 73%, 69%);
     --protection-header-gradient-color-2: hsl(265, 100%, 69%);

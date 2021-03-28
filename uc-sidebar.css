@@ -73,8 +73,8 @@
 }
 
 /* search-textbox icons (magnifying glass and clear input button) */
-@-moz-document url("chrome://browser/content/browser.xhtml"), regexp(".*Sidebar.*"), regexp(".*sidebar.*") {
-
+@-moz-document url("chrome://browser/content/browser.xhtml"), regexp(".*Sidebar.*"), regexp(".*sidebar.*")
+{
     .textbox-search-icons {
         display: flex;
         flex-flow: row nowrap;
@@ -110,11 +110,11 @@
         fill-opacity: 1;
     }
 
-    link[href="chrome://global/skin/search-textbox.css"] ~ input::placeholder {
+    link[href="chrome://global/skin/search-textbox.css"] ~ input::placeholder
+    {
         opacity: 1;
         color: var(--panel-shortcut-color);
     }
-
 }
 
 #sidebar-search-container #search-box:focus-within,
@@ -347,7 +347,9 @@ treechildren::-moz-tree-row(selected, current, focus) {
 }
 
 :root[sizemode="normal"] #sidebar-box {
-    top: calc(var(--urlbar-container-height) + var(--tab-min-height) + var(--space-above-tabbar)) !important;
+    top: calc(
+        var(--urlbar-container-height) + var(--tab-min-height) + var(--space-above-tabbar)
+    ) !important;
 }
 
 #sidebar-box[hidden] {

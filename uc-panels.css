@@ -11,33 +11,41 @@
 }
 
 .panel-footer > button:not([disabled]):is(:hover, :focus-visible) {
-	background-color: var(--button-hover-bgcolor, color-mix(in srgb, currentColor 17%, transparent));
+    background-color: var(
+        --button-hover-bgcolor,
+        color-mix(in srgb, currentColor 17%, transparent)
+    );
 }
 
 .panel-footer > button:not([disabled]):is(:hover, :focus-visible):active {
-	background-color: var(--button-active-bgcolor, color-mix(in srgb, currentColor 30%, transparent));
+    background-color: var(
+        --button-active-bgcolor,
+        color-mix(in srgb, currentColor 30%, transparent)
+    );
 }
 
 .protections-popup-category,
 .protections-popup-footer-button {
     border-radius: var(--toolbarbutton-border-radius) !important;
-    margin-inline: calc(var(--horizontal-padding) - var(--arrowpanel-menuitem-inline-margin) - 5px) !important;
+    margin-inline: calc(
+        var(--horizontal-padding) - var(--arrowpanel-menuitem-inline-margin) - 5px
+    ) !important;
 }
 
 .protections-popup-category {
-	padding-inline: calc(var(--arrowpanel-menuitem-inline-margin) + 5px) !important;
+    padding-inline: calc(var(--arrowpanel-menuitem-inline-margin) + 5px) !important;
 }
 
 .protections-popup-footer-button {
-	padding-inline: calc(var(--arrowpanel-menuitem-inline-margin) + 1px) !important;
+    padding-inline: calc(var(--arrowpanel-menuitem-inline-margin) + 1px) !important;
 }
 
 #protections-popup-footer-protection-type-label {
-	margin-inline-end: 0 !important;
+    margin-inline-end: 0 !important;
 }
 
 .protections-popup-category::after {
-	content: url(chrome://global/skin/icons/menu-arrow.svg) !important;
+    content: url(chrome://global/skin/icons/menu-arrow.svg) !important;
     scale: none !important;
     translate: none !important;
     transform: translateX(2px) !important;
@@ -110,19 +118,19 @@ popupnotification .popup-notification-checkbox {
 }
 
 popupnotification checkbox .checkbox-check {
-	appearance: none !important;
+    appearance: none !important;
     min-width: 10px !important;
     min-height: 10px !important;
-	width: 13px;
-	height: 13px;
+    width: 13px;
+    height: 13px;
     margin-inline-end: 4px !important;
-	padding: 0.5px;
-	border: 1px solid var(--in-content-box-border-color) !important;
-	border-radius: 2px;
-	margin: 0;
-	background-color: var(--arrowpanel-dimmed) !important;
-	background-position: center;
-	background-repeat: no-repeat;
+    padding: 0.5px;
+    border: 1px solid var(--in-content-box-border-color) !important;
+    border-radius: 2px;
+    margin: 0;
+    background-color: var(--arrowpanel-dimmed) !important;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 popupnotification checkbox .checkbox-check[checked] {
@@ -134,11 +142,11 @@ popupnotification checkbox .checkbox-check[checked] {
 }
 
 popupnotification checkbox:hover .checkbox-check:not(:disabled) {
-	background-color: var(--arrowpanel-darker) !important;
+    background-color: var(--arrowpanel-darker) !important;
 }
 
 popupnotification checkbox:hover .checkbox-check[checked]:not(:disabled) {
-	background-color: var(--purple-45) !important;
+    background-color: var(--purple-45) !important;
 }
 
 .addon-installed-notification-content > checkbox,
@@ -147,12 +155,12 @@ popupnotification .popup-notification-body > .popup-notification-checkbox {
 }
 
 popupnotification .popup-notification-checkbox .checkbox-check {
-	width: 13px !important;
-	height: 13px !important;
-	border: 1px solid var(--in-content-box-border-color) !important;
-	background-color: var(--arrowpanel-dimmed) !important;
-	background-position: center !important;
-	background-repeat: no-repeat !important;
+    width: 13px !important;
+    height: 13px !important;
+    border: 1px solid var(--in-content-box-border-color) !important;
+    background-color: var(--arrowpanel-dimmed) !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
 }
 
 popupnotification .popup-notification-checkbox .checkbox-check[checked] {
@@ -164,19 +172,19 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
 }
 
 popupnotification .popup-notification-checkbox:hover .checkbox-check:not(:disabled) {
-	background-color: var(--arrowpanel-darker) !important;
+    background-color: var(--arrowpanel-darker) !important;
 }
 
 popupnotification .popup-notification-checkbox:hover .checkbox-check[checked]:not(:disabled) {
-	background-color: var(--purple-45) !important;
+    background-color: var(--purple-45) !important;
 }
 
 .popup-notification-learnmore-link {
-	margin-block: 2px !important;
+    margin-block: 2px !important;
 }
 
 .popup-subitem {
-	margin-inline-start: 27px !important;
+    margin-inline-start: 27px !important;
     margin-top: 1px;
 }
 
@@ -277,8 +285,8 @@ popupnotification .popup-notification-checkbox:hover .checkbox-check[checked]:no
 }
 
 #protections-popup-tp-switch:is(:hover, :focus-visible) {
-    border: 1px solid hsla(210,4%,90%,.14) !important;
-    background: #003EAA !important;
+    border: 1px solid hsla(210, 4%, 90%, 0.14) !important;
+    background: #003eaa !important;
 }
 
 #identity-popup-security-expander > .button-box {
@@ -322,11 +330,11 @@ popupnotification .popup-notification-checkbox:hover .checkbox-check[checked]:no
 }
 
 .identity-popup-expander:is(:hover, :focus-visible) .button-box {
-	background-color: var(--arrowpanel-dimmed);
+    background-color: var(--arrowpanel-dimmed);
 }
 
 .identity-popup-expander:is(:hover, :focus-visible):active .button-box {
-	background-color: var(--arrowpanel-dimmed-further);
+    background-color: var(--arrowpanel-dimmed-further);
 }
 
 #identity-popup-multiView .panel-button {
@@ -417,19 +425,16 @@ popupnotification .popup-notification-checkbox:hover .checkbox-check[checked]:no
 }
 
 #downloadsFooterButtons > button {
-	padding-inline: 16px !important;
-	padding-block: 10px 11px !important;
+    padding-inline: 16px !important;
+    padding-block: 10px 11px !important;
     border-radius: 0 !important;
     border-top: 1px solid var(--panel-separator-color) !important;
 }
 
-#downloadsFooterButtons > button:hover {
-    border-color: transparent !important;
-}
-
-#downloadsFooterButtons > button:is(:hover, :focus-visible) {
+#downloadsFooterButtons > button:hover,
+#downloadsPanel[hasdownloads="true"] #downloadsFooterButtons > button:focus-visible {
     background-color: transparent !important;
-	background-image: var(--download-button-hover-bg) !important;
+    background-image: var(--download-button-hover-bg) !important;
 }
 
 #downloadsListBox > .download-state > toolbarseparator {
@@ -479,7 +484,10 @@ popupnotification .popup-notification-checkbox:hover .checkbox-check[checked]:no
     background: var(--arrowpanel-dimmed) !important;
 }
 
-#downloadsListBox > .download-state > .downloadButton:is(:hover, :focus-visible):active .button-box {
+#downloadsListBox
+    > .download-state
+    > .downloadButton:is(:hover, :focus-visible):active
+    .button-box {
     background: var(--arrowpanel-dimmed-further) !important;
 }
 
@@ -594,7 +602,8 @@ popupnotification .popup-notification-checkbox:hover .checkbox-check[checked]:no
     width: 230px !important;
 }
 
-#PanelUI-webext-multithreaded-download-manager_qw_linux-2g64_local-browser-action-view .webextension-popup-browser {
+#PanelUI-webext-multithreaded-download-manager_qw_linux-2g64_local-browser-action-view
+    .webextension-popup-browser {
     min-height: 230px !important;
 }
 
@@ -613,7 +622,7 @@ popupnotification .popup-notification-checkbox:hover .checkbox-check[checked]:no
 
 /* urlbar page action menu */
 #pageActionPanel panelview {
-	min-width: 18em !important;
+    min-width: 18em !important;
 }
 
 #pageAction-panel-builtInSeparator {
@@ -638,7 +647,7 @@ popupnotification .popup-notification-checkbox:hover .checkbox-check[checked]:no
         margin-inline: 4px !important;
         margin-block: 0 4px !important;
     }
-    
+
     #identity-popup-securityView-body {
         padding-block: 0.5em;
     }

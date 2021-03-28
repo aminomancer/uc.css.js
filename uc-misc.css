@@ -44,11 +44,11 @@ tooltip > description {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2) !important;
 }
 
-.places-tooltip-box>hbox {
+.places-tooltip-box > hbox {
     display: flex !important;
     align-items: center !important;
     max-width: 500px !important;
-	color: var(--panel-shortcut-color) !important;
+    color: var(--panel-shortcut-color) !important;
 }
 
 .places-tooltip-title {
@@ -56,7 +56,7 @@ tooltip > description {
 }
 
 .places-tooltip-uri {
-	color: var(--panel-shortcut-color) !important;
+    color: var(--panel-shortcut-color) !important;
 }
 
 #places-tooltip-insecure-icon {
@@ -90,7 +90,8 @@ for that reason i disabled it but maybe someone else wants it. it does look kind
 }
 
 .places-tooltip > description,
-:is(#tracking-protection-icon-tooltip, #back-button-tooltip, #forward-button-tooltip) .tooltip-label:not([value], [id]) {
+:is(#tracking-protection-icon-tooltip, #back-button-tooltip, #forward-button-tooltip)
+    .tooltip-label:not([value], [id]) {
     padding: 0 !important;
 }
 
@@ -127,11 +128,13 @@ for that reason i disabled it but maybe someone else wants it. it does look kind
     border: none !important;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2) !important;
     /* font-family: FreeMono !important; */
-/*     transition: opacity 70ms ease-in-out !important; */
+    /*     transition: opacity 70ms ease-in-out !important; */
     opacity: 1;
 }
 
-#statuspanel:not([mirror]) #statuspanel-inner:is(:dir(ltr), :-moz-locale-dir(ltr)) #statuspanel-label {
+#statuspanel:not([mirror])
+    #statuspanel-inner:is(:dir(ltr), :-moz-locale-dir(ltr))
+    #statuspanel-label {
     border-top-left-radius: 0;
     border-top-right-radius: var(--tooltip-border-radius);
 }

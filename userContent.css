@@ -223,7 +223,7 @@
     --arrowpanel-dimmed: hsla(236, 100%, 83%, 0.17) !important;
     --arrowpanel-dimmed-further: hsla(236, 100%, 83%, 0.25) !important;
     --arrowpanel-dimmed-even-further: hsla(236, 100%, 85%, 0.3) !important;
-    --panel-disabled-color: hsla(213, 43%, 89%, 0.5) !important;
+    --panel-disabled-color: var(--context-menu-disabled-color) !important;
     --button-hover-bgcolor: var(--arrowpanel-dimmed) !important;
     --button-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
 }
@@ -298,7 +298,7 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
 
 #ContentSelectDropdown > menupopup :is(menuitem, menu)[disabled="true"] {
     -moz-appearance: none !important;
-    color: rgba(255, 255, 255, 0.45) !important;
+    color: var(--panel-disabled-color) !important;
     background-color: initial !important;
 }
 
@@ -402,12 +402,22 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
         box-shadow: var(--menupopup-shadow) !important;
     }
 
+    #ContentSelectDropdown > menupopup :is(.menu-accel, .menu-iconic-accel)[value] {
+        margin-inline: 1.55em calc(var(--menu-right-margin) + 4px) !important;
+    }
+
     #ContentSelectDropdown
         > menupopup
         menuitem:not([disabled="true"])
-        :is(.menu-accel, .menu-iconic-accel)[value] {
+        :is(.menu-accel, .menu-iconic-accel) {
         color: var(--panel-shortcut-color);
-        margin-inline-start: 1.55em !important;
+    }
+
+    #ContentSelectDropdown
+        > menupopup
+        menuitem[disabled="true"]
+        :is(.menu-accel, .menu-iconic-accel) {
+        opacity: 0.6;
     }
 
     #ContentSelectDropdown > menupopup menuseparator {
@@ -500,7 +510,7 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
         --desaturate-dimmed: hsla(236, 60%, 83%, 0.17) !important;
         --desaturate-dimmed-further: hsla(236, 60%, 83%, 0.25) !important;
         --desaturate-dimmed-even-further: hsla(236, 60%, 85%, 0.3) !important;
-        --panel-disabled-color: hsla(213, 43%, 89%, 0.5) !important;
+        --panel-disabled-color: var(--context-menu-disabled-color) !important;
         --toolbarbutton-hover-background: hsla(236, 82%, 83%, 0.17) !important;
         --toolbarbutton-active-background: hsla(236, 82%, 83%, 0.22) !important;
         --toolbarbutton-checked-background: hsla(236, 82%, 83%, 0.13) !important;
@@ -676,7 +686,7 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
 
     :is(menuitem, menu)[disabled="true"] {
         -moz-appearance: none !important;
-        color: rgba(255, 255, 255, 0.45) !important;
+        color: var(--panel-disabled-color) !important;
         background-color: initial !important;
     }
 
@@ -818,6 +828,18 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
         menuitem:not([disabled="true"]) :is(.menu-accel, .menu-iconic-accel)[value] {
             color: var(--panel-shortcut-color);
             margin-inline-start: 1.55em !important;
+        }
+
+        :is(.menu-accel, .menu-iconic-accel)[value] {
+            margin-inline: 1.55em calc(var(--menu-right-margin) + 4px) !important;
+        }
+
+        menuitem:not([disabled="true"]) :is(.menu-accel, .menu-iconic-accel) {
+            color: var(--panel-shortcut-color);
+        }
+
+        menuitem[disabled="true"] :is(.menu-accel, .menu-iconic-accel) {
+            opacity: 0.6;
         }
 
         menuseparator {

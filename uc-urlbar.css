@@ -25,7 +25,6 @@
     opacity: 0.5 !important;
 }
 
-
 #page-action-buttons > :is(.urlbar-icon, .urlbar-icon-wrapper),
 #urlbar-go-button,
 #urlbar-zoom-button,
@@ -433,13 +432,16 @@ toolbarpaletteitem[removable="false"]
 }
 
 #tracking-protection-icon-container[open="true"] #tracking-protection-icon-box:not([hasException]),
-#tracking-protection-icon-container:not([open="true"]) #tracking-protection-icon-box:hover:not([hasException]) {
+#tracking-protection-icon-container:not([open="true"])
+    #tracking-protection-icon-box:hover:not([hasException]) {
     fill-opacity: 1 !important;
     fill: var(--protection-idle-color) !important;
 }
 
-#tracking-protection-icon-container[open="true"] #tracking-protection-icon-box[active]:not([hasException]),
-#tracking-protection-icon-container:not([open="true"]) #tracking-protection-icon-box[active]:hover:not([hasException]) {
+#tracking-protection-icon-container[open="true"]
+    #tracking-protection-icon-box[active]:not([hasException]),
+#tracking-protection-icon-container:not([open="true"])
+    #tracking-protection-icon-box[active]:hover:not([hasException]) {
     fill-opacity: 1 !important;
     fill: var(--protection-active-color) !important;
 }
@@ -498,7 +500,8 @@ toolbarpaletteitem[removable="false"]
     background: none !important;
 }
 
-#identity-permission-box:is([open="true"], [hasPermissions], [hasSharingIcon]) + #notification-popup-box {
+#identity-permission-box:is([open="true"], [hasPermissions], [hasSharingIcon])
+    + #notification-popup-box {
     margin-inline: 2px -2px !important;
 }
 
@@ -555,14 +558,7 @@ urlbar icons that display frequently like the tracking icon or the identity icon
 so they have at least 1px of virtual "padding" on every side. we could replace all the svg icons and maybe I will, but this is a lot easier.
 use 0.6 instead of 1 since 1 will end up being shown as like 1.4px for some window scaling factors.*/
 #blocked-permissions-container
-:is(
-.desktop-notification-icon,
-.screen-icon,
-.popup-icon,
-.autoplay-media-icon,
-.canvas-icon,
-.install-icon
-),
+    :is(.desktop-notification-icon, .screen-icon, .popup-icon, .autoplay-media-icon, .canvas-icon, .install-icon),
 #notification-popup-box
     :is(.drm-icon, .autoplay-media-icon, .install-icon, #canvas-notification-icon, .canvas-icon, .indexedDB-icon, .desktop-notification-icon, .screen-icon, .translation-icon, .storage-access-icon),
 #webrtc-sharing-icon[sharing="screen"] {
@@ -608,8 +604,12 @@ use 0.6 instead of 1 since 1 will end up being shown as like 1.4px for some wind
 }
 
 #urlbar[actiontype] #identity-box #identity-icon-box,
-#urlbar[pageproxystate="invalid"][actiontype] #identity-box #identity-icon-box
-#urlbar[searchmode] #identity-box #identity-icon-box,
+#urlbar[pageproxystate="invalid"][actiontype]
+    #identity-box
+    #identity-icon-box
+    #urlbar[searchmode]
+    #identity-box
+    #identity-icon-box,
 #urlbar[pageproxystate="invalid"][searchmode] #identity-box #identity-icon-box {
     margin-inline: 0 !important;
 }

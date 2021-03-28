@@ -126,7 +126,7 @@
 } */
 
 #PanelUI-menu-button {
-	padding-inline: var(--toolbarbutton-outer-padding) calc(var(--toolbarbutton-outer-padding) * 2) !important;
+    padding-inline: var(--toolbarbutton-outer-padding) calc(var(--toolbarbutton-outer-padding) * 2) !important;
 }
 
 #PanelUI-menu-button[badge-status=""] > .toolbarbutton-badge-stack > .toolbarbutton-badge {
@@ -203,7 +203,8 @@
 }
 
 @supports (-moz-bool-pref("browser.proton.appmenu.enabled")) {
-    #appMenu-multiView :is(.toolbarbutton-1, toolbarbutton.subviewbutton, .navigable.subviewbutton):not([disabled], [open]):focus,
+    #appMenu-multiView
+        :is(.toolbarbutton-1, toolbarbutton.subviewbutton, .navigable.subviewbutton):not([disabled], [open]):focus,
     .widget-overflow-list .toolbarbutton-1:not([disabled], [open]):focus,
     .toolbaritem-combined-buttons:is(:not([cui-areatype="toolbar"]), [overflowedItem="true"])
         > toolbarbutton:not([disabled], [open]):focus {
@@ -212,7 +213,8 @@
         color: var(--panelview-toolbarbutton-hover-color) !important;
     }
 
-    #appMenu-multiView :is(.toolbarbutton-1, toolbarbutton.subviewbutton, .navigable.subviewbutton):not([disabled], [open]):focus:active,
+    #appMenu-multiView
+        :is(.toolbarbutton-1, toolbarbutton.subviewbutton, .navigable.subviewbutton):not([disabled], [open]):focus:active,
     .widget-overflow-list .toolbarbutton-1:not([disabled], [open]):focus:active,
     .toolbaritem-combined-buttons:is(:not([cui-areatype="toolbar"]), [overflowedItem="true"])
         > toolbarbutton:not([disabled], [open]):focus:active {
@@ -384,7 +386,7 @@
     }
 
     :is(#appMenu-zoomReduce-button2, #appMenu-zoomEnlarge-button2, #appMenu-fullscreen-button2)
-    > .toolbarbutton-icon {
+        > .toolbarbutton-icon {
         background-color: unset !important;
         fill: currentColor !important;
         -moz-context-properties: fill, fill-opacity !important;
@@ -392,13 +394,13 @@
     }
 
     #appMenu-zoom-controls2
-    :is(#appMenu-zoomReduce-button2, #appMenu-zoomEnlarge-button2, #appMenu-fullscreen-button2, #appMenu-zoomReset-button2):not([disabled], [open], :active):is(:hover, :focus) {
+        :is(#appMenu-zoomReduce-button2, #appMenu-zoomEnlarge-button2, #appMenu-fullscreen-button2, #appMenu-zoomReset-button2):not([disabled], [open], :active):is(:hover, :focus) {
         background-color: var(--arrowpanel-dimmed) !important;
         border-color: transparent !important;
     }
 
     #appMenu-zoom-controls2
-    :is(#appMenu-zoomReduce-button2, #appMenu-zoomEnlarge-button2, #appMenu-fullscreen-button2, #appMenu-zoomReset-button2):not([disabled]):is([open], :hover:active) {
+        :is(#appMenu-zoomReduce-button2, #appMenu-zoomEnlarge-button2, #appMenu-fullscreen-button2, #appMenu-zoomReset-button2):not([disabled]):is([open], :hover:active) {
         background-color: var(--arrowpanel-dimmed-further) !important;
     }
 

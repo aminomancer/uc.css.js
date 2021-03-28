@@ -5,14 +5,14 @@
 #context-viewinfo:not(.menuitem-iconic) .menu-text,
 #context-viewbgimage:not(.menuitem-iconic) .menu-text,
 #context-savepage:not(.menuitem-iconic) .menu-text,
-#context-sendpagetodevice:not(.menuitem-iconic)>.menu-text,
+#context-sendpagetodevice:not(.menuitem-iconic) > .menu-text,
 #context-selectall:not(.menuitem-iconic) .menu-text,
-#context-sendlinktodevice:not(.menuitem-iconic)>.menu-text,
+#context-sendlinktodevice:not(.menuitem-iconic) > .menu-text,
 #context-viewimageinfo:not(.menuitem-iconic) .menu-text,
 #context-setDesktopBackground:not(.menuitem-iconic) .menu-text,
-#context-sendaudio:not(.menuitem-iconic)>.menu-text,
-#context-sendimage:not(.menuitem-iconic)>.menu-text,
-#context-sendvideo:not(.menuitem-iconic)>.menu-text,
+#context-sendaudio:not(.menuitem-iconic) > .menu-text,
+#context-sendimage:not(.menuitem-iconic) > .menu-text,
+#context-sendvideo:not(.menuitem-iconic) > .menu-text,
 #context-saveimage:not(.menuitem-iconic) .menu-text,
 #context-saveaudio:not(.menuitem-iconic) .menu-text,
 #context-savevideo:not(.menuitem-iconic) .menu-text,
@@ -38,7 +38,7 @@
 #context-openlinkincontainertab:not(.menuitem-iconic) .menu-text,
 #context-openlinkincurrent:not(.menuitem-iconic) .menu-text,
 #context-openlinkintab:not(.menuitem-iconic) .menu-text,
-#context-openlinkinusercontext-menu:not(.menuitem-iconic)>.menu-text,
+#context-openlinkinusercontext-menu:not(.menuitem-iconic) > .menu-text,
 #context-openlinkprivate:not(.menuitem-iconic) .menu-text,
 #context-searchselect:not(.menuitem-iconic) .menu-text,
 #context-searchselect-private:not(.menuitem-iconic) .menu-text,
@@ -58,7 +58,7 @@
 #context-reloadframe:not(.menuitem-iconic) .menu-text,
 #context-reloadimage:not(.menuitem-iconic) .menu-text,
 #context-showonlythisframe:not(.menuitem-iconic) .menu-text,
-#contentAreaContextMenu #frame:not(.menuitem-iconic)>.menu-text,
+#contentAreaContextMenu #frame:not(.menuitem-iconic) > .menu-text,
 #context-video-saveimage:not(.menuitem-iconic) .menu-text,
 #context-media-pause:not(.menuitem-iconic) .menu-text,
 #context-media-play:not(.menuitem-iconic) .menu-text,
@@ -66,16 +66,21 @@
 #context-media-unmute:not(.menuitem-iconic) .menu-text,
 #context-video-fullscreen:not(.menuitem-iconic) .menu-text,
 #context-leave-dom-fullscreen:not(.menuitem-iconic) .menu-text,
-#context-media-playbackrate:not(.menuitem-iconic)>.menu-text,
+#context-media-playbackrate:not(.menuitem-iconic) > .menu-text,
 #context-media-showcontrols:not(.menuitem-iconic) .menu-text,
 #context-media-hidecontrols:not(.menuitem-iconic) .menu-text,
 #context-viewvideo:not(.menuitem-iconic) .menu-text,
 #context_moveToStart:not(.menuitem-iconic) .menu-text,
 #context_moveToEnd:not(.menuitem-iconic) .menu-text,
 #context_openTabInWindow:not(.menuitem-iconic) .menu-text,
-:is(#contentAreaContextMenu, #customization-footer, menupopup#placesContext, #downloadsContextMenu) menuitem:is([type="checkbox"], [type="radio"], [checked]) .menu-iconic-text,
+:is(#contentAreaContextMenu, #customization-footer, menupopup#placesContext, #downloadsContextMenu)
+    menuitem:is([type="checkbox"], [type="radio"], [checked])
+    .menu-iconic-text,
 menupopup[menu-api] menuitem:is([type="checkbox"], [type="radio"], [checked]) .menu-iconic-text,
-:is(#PlacesToolbar, #places) menupopup menuitem:is([type="checkbox"], [type="radio"], [checked]) .menu-iconic-text,
+:is(#PlacesToolbar, #places)
+    menupopup
+    menuitem:is([type="checkbox"], [type="radio"], [checked])
+    .menu-iconic-text,
 .textbox-contextmenu menuitem[label="Undo"]:not(.menuitem-iconic) .menu-text,
 .textbox-contextmenu menuitem[label="Redo"]:not(.menuitem-iconic) .menu-text,
 .textbox-contextmenu menuitem[label="Cut"]:not(.menuitem-iconic) .menu-text,
@@ -87,8 +92,9 @@ menupopup[menu-api] menuitem:is([type="checkbox"], [type="radio"], [checked]) .m
 .textbox-contextmenu menuitem[label="Select All"]:not(.menuitem-iconic) .menu-text,
 .searchbar-clear-history:not(.menuitem-iconic) .menu-text,
 #spell-check-enabled:not(.menuitem-iconic) .menu-iconic-text,
-:is(#spell-add-to-dictionary, #spell-add-dictionaries, #spell-add-dictionaries-main, #spell-dictionaries):not(.menuitem-iconic) .menu-text,
-#context_reopenInContainer:not(.menuitem-iconic)>.menu-text,
+:is(#spell-add-to-dictionary, #spell-add-dictionaries, #spell-add-dictionaries-main, #spell-dictionaries):not(.menuitem-iconic)
+    .menu-text,
+#context_reopenInContainer:not(.menuitem-iconic) > .menu-text,
 #context_reloadTab:not(.menuitem-iconic) .menu-text,
 #context_reloadSelectedTabs:not(.menuitem-iconic) .menu-text,
 #context_toggleMuteTab:not(.menuitem-iconic) .menu-text,
@@ -102,34 +108,52 @@ menupopup[menu-api] menuitem:is([type="checkbox"], [type="radio"], [checked]) .m
 #context_selectAllTabs:not(.menuitem-iconic) .menu-text,
 #context_bookmarkTab:not(.menuitem-iconic) .menu-text,
 #context_bookmarkSelectedTabs:not(.menuitem-iconic) .menu-text,
-#context_moveTabOptions:not(.menuitem-iconic)>.menu-text,
-#context_sendTabToDevice:not(.menuitem-iconic)>.menu-text,
-#context_shareTabURL:not(.menuitem-iconic)>.menu-text,
-#context_closeTabOptions:not(.menuitem-iconic)>.menu-text,
+#context_moveTabOptions:not(.menuitem-iconic) > .menu-text,
+#context_sendTabToDevice:not(.menuitem-iconic) > .menu-text,
+#context_shareTabURL:not(.menuitem-iconic) > .menu-text,
+#context_closeTabOptions:not(.menuitem-iconic) > .menu-text,
 #context_undoCloseTab:not(.menuitem-iconic) .menu-text,
 #context_closeTab:not(.menuitem-iconic) .menu-text,
 #discardTab:not(.menuitem-iconic) .menu-text,
-#historyUndoWindowMenu3:not(.menuitem-iconic)>.menu-text,
-#tabContextUndoList:not(.menuitem-iconic)>.menu-text,
-#ContextUndoList:not(.menuitem-iconic)>.menu-text,
+#historyUndoWindowMenu3:not(.menuitem-iconic) > .menu-text,
+#tabContextUndoList:not(.menuitem-iconic) > .menu-text,
+#ContextUndoList:not(.menuitem-iconic) > .menu-text,
 #tabContextMenu menuitem[label^="Restore All"]:not(.menuitem-iconic) .menu-text,
-:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice) .sendtab-target:is([clientType="phone"], [clientType="mobile"], [clientType="desktop"]):not(.menuitem-iconic) .menu-text,
-#userScriptsMenu>.menu-text,
-#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"] :is(menu, menuitem)[label="Auto-fill"] > .menu-text,
-#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"] :is(menu, menuitem)[label="Copy Username"] > .menu-text,
-#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"] :is(menu, menuitem)[label="Copy Password"] > .menu-text,
-#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"] :is(menu, menuitem)[label*="Generate Password"] > .menu-text {
+:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
+    .sendtab-target:is([clientType="phone"], [clientType="mobile"], [clientType="desktop"]):not(.menuitem-iconic)
+    .menu-text,
+#userScriptsMenu > .menu-text,
+#contentAreaContextMenu
+    :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"]
+    :is(menu, menuitem)[label="Auto-fill"]
+    > .menu-text,
+#contentAreaContextMenu
+    :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"]
+    :is(menu, menuitem)[label="Copy Username"]
+    > .menu-text,
+#contentAreaContextMenu
+    :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"]
+    :is(menu, menuitem)[label="Copy Password"]
+    > .menu-text,
+#contentAreaContextMenu
+    :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"]
+    :is(menu, menuitem)[label*="Generate Password"]
+    > .menu-text {
     display: -moz-inline-box !important;
     margin-inline: var(--context-margin-inline) !important;
     padding-inline: var(--context-padding-inline) !important;
 }
 
-:is(#main-menubar, #toolbar-context-menu) menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-left,
+:is(#main-menubar, #toolbar-context-menu)
+    menuitem:is([type="checkbox"], [type="radio"])
+    .menu-iconic-left,
 #viewButton menuitem[type="radio"] .menu-iconic-left {
     -moz-appearance: none !important;
 }
 
-:is(#main-menubar, #toolbar-context-menu) menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-icon,
+:is(#main-menubar, #toolbar-context-menu)
+    menuitem:is([type="checkbox"], [type="radio"])
+    .menu-iconic-icon,
 #main-menubar #viewSidebarMenu menuitem .menu-iconic-icon,
 #sidebar-search-container #viewButton menuitem[type="radio"] .menu-iconic-icon {
     -moz-appearance: none !important;
@@ -151,7 +175,9 @@ menupopup[menu-api] menuitem:is([type="checkbox"], [type="radio"], [checked]) .m
     background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNNSAyYy0xLjY1NCAwLTMgMS4zNDYtMyAzdjE0YzAgMS42NTQgMS4zNDYgMyAzIDNoMTRjMS42NTQgMCAzLTEuMzQ2IDMtM3YtMTRjMC0xLjY1NC0xLjM0Ni0zLTMtM2gtMTR6bTE5IDN2MTRjMCAyLjc2MS0yLjIzOCA1LTUgNWgtMTRjLTIuNzYyIDAtNS0yLjIzOS01LTV2LTE0YzAtMi43NjEgMi4yMzgtNSA1LTVoMTRjMi43NjIgMCA1IDIuMjM5IDUgNXoiIGZpbGw9ImNvbnRleHQtZmlsbCIgZmlsbC1vcGFjaXR5PSJjb250ZXh0LWZpbGwtb3BhY2l0eSIvPjwvc3ZnPg==") !important;
 }
 
-:is(#main-menubar, #toolbar-context-menu) menuitem[type="checkbox"][checked="true"] .menu-iconic-icon {
+:is(#main-menubar, #toolbar-context-menu)
+    menuitem[type="checkbox"][checked="true"]
+    .menu-iconic-icon {
     background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTAuMDQxIDE3bC00LjUtNC4zMTkgMS4zOTUtMS40MzUgMy4wOCAyLjkzNyA3LjAyMS03LjE4MyAxLjQyMiAxLjQwOS04LjQxOCA4LjU5MXptLTUuMDQxLTE1Yy0xLjY1NCAwLTMgMS4zNDYtMyAzdjE0YzAgMS42NTQgMS4zNDYgMyAzIDNoMTRjMS42NTQgMCAzLTEuMzQ2IDMtM3YtMTRjMC0xLjY1NC0xLjM0Ni0zLTMtM2gtMTR6bTE5IDN2MTRjMCAyLjc2MS0yLjIzOCA1LTUgNWgtMTRjLTIuNzYyIDAtNS0yLjIzOS01LTV2LTE0YzAtMi43NjEgMi4yMzgtNSA1LTVoMTRjMi43NjIgMCA1IDIuMjM5IDUgNXoiIGZpbGw9ImNvbnRleHQtZmlsbCIgZmlsbC1vcGFjaXR5PSJjb250ZXh0LWZpbGwtb3BhY2l0eSIvPjwvc3ZnPg==") !important;
 }
 
@@ -171,7 +197,8 @@ menupopup[menu-api] menuitem:is([type="checkbox"], [type="radio"], [checked]) .m
     display: none !important;
 }
 
-:is(#contentAreaContextMenu, #customization-footer, menupopup#placesContext, #downloadsContextMenu) menuitem:is([type="checkbox"], [type="radio"])::before,
+:is(#contentAreaContextMenu, #customization-footer, menupopup#placesContext, #downloadsContextMenu)
+    menuitem:is([type="checkbox"], [type="radio"])::before,
 menupopup[menu-api] menuitem:is([type="checkbox"], [type="radio"])::before,
 :is(#PlacesToolbar, #places) menupopup menuitem:is([type="checkbox"], [type="radio"])::before {
     position: relative !important;
@@ -187,32 +214,41 @@ menupopup[menu-api] menuitem:is([type="checkbox"], [type="radio"])::before,
     background-repeat: no-repeat !important;
 }
 
-:is(#contentAreaContextMenu, #customization-footer, menupopup#placesContext, #downloadsContextMenu) menuitem[type="checkbox"]::before,
+:is(#contentAreaContextMenu, #customization-footer, menupopup#placesContext, #downloadsContextMenu)
+    menuitem[type="checkbox"]::before,
 menupopup[menu-api] menuitem[type="checkbox"]::before,
 :is(#PlacesToolbar, #places) menupopup menuitem[type="checkbox"]::before {
     background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNNSAyYy0xLjY1NCAwLTMgMS4zNDYtMyAzdjE0YzAgMS42NTQgMS4zNDYgMyAzIDNoMTRjMS42NTQgMCAzLTEuMzQ2IDMtM3YtMTRjMC0xLjY1NC0xLjM0Ni0zLTMtM2gtMTR6bTE5IDN2MTRjMCAyLjc2MS0yLjIzOCA1LTUgNWgtMTRjLTIuNzYyIDAtNS0yLjIzOS01LTV2LTE0YzAtMi43NjEgMi4yMzgtNSA1LTVoMTRjMi43NjIgMCA1IDIuMjM5IDUgNXoiIGZpbGw9ImNvbnRleHQtZmlsbCIgZmlsbC1vcGFjaXR5PSJjb250ZXh0LWZpbGwtb3BhY2l0eSIvPjwvc3ZnPg==") !important;
 }
 
-:is(#contentAreaContextMenu, #customization-footer, menupopup#placesContext, #downloadsContextMenu) menuitem[type="checkbox"][checked="true"]::before,
+:is(#contentAreaContextMenu, #customization-footer, menupopup#placesContext, #downloadsContextMenu)
+    menuitem[type="checkbox"][checked="true"]::before,
 menupopup[menu-api] menuitem[type="checkbox"][checked="true"]::before,
 :is(#PlacesToolbar, #places) menupopup menuitem[type="checkbox"][checked="true"]::before {
     background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTAuMDQxIDE3bC00LjUtNC4zMTkgMS4zOTUtMS40MzUgMy4wOCAyLjkzNyA3LjAyMS03LjE4MyAxLjQyMiAxLjQwOS04LjQxOCA4LjU5MXptLTUuMDQxLTE1Yy0xLjY1NCAwLTMgMS4zNDYtMyAzdjE0YzAgMS42NTQgMS4zNDYgMyAzIDNoMTRjMS42NTQgMCAzLTEuMzQ2IDMtM3YtMTRjMC0xLjY1NC0xLjM0Ni0zLTMtM2gtMTR6bTE5IDN2MTRjMCAyLjc2MS0yLjIzOCA1LTUgNWgtMTRjLTIuNzYyIDAtNS0yLjIzOS01LTV2LTE0YzAtMi43NjEgMi4yMzgtNSA1LTVoMTRjMi43NjIgMCA1IDIuMjM5IDUgNXoiIGZpbGw9ImNvbnRleHQtZmlsbCIgZmlsbC1vcGFjaXR5PSJjb250ZXh0LWZpbGwtb3BhY2l0eSIvPjwvc3ZnPg==") !important;
 }
 
-:is(#contentAreaContextMenu, #customization-footer, menupopup#placesContext, #downloadsContextMenu) menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-left,
+:is(#contentAreaContextMenu, #customization-footer, menupopup#placesContext, #downloadsContextMenu)
+    menuitem:is([type="checkbox"], [type="radio"])
+    .menu-iconic-left,
 menupopup[menu-api] menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-left,
-:is(#PlacesToolbar, #places) menupopup menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-left {
+:is(#PlacesToolbar, #places)
+    menupopup
+    menuitem:is([type="checkbox"], [type="radio"])
+    .menu-iconic-left {
     -moz-appearance: none !important;
     width: 25px !important;
 }
 
-:is(#contentAreaContextMenu, #customization-footer, menupopup#placesContext, #downloadsContextMenu) menuitem[type="radio"]::before,
+:is(#contentAreaContextMenu, #customization-footer, menupopup#placesContext, #downloadsContextMenu)
+    menuitem[type="radio"]::before,
 menupopup[menu-api] menuitem[type="radio"]::before,
 :is(#PlacesToolbar, #places) menupopup menuitem[type="radio"]::before {
     background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTIgMGMtNi42MjMgMC0xMiA1LjM3Ny0xMiAxMnM1LjM3NyAxMiAxMiAxMiAxMi01LjM3NyAxMi0xMi01LjM3Ny0xMi0xMi0xMnptMCAyMmMtNS41MTkgMC0xMC00LjQ4LTEwLTEwIDAtNS41MTkgNC40ODEtMTAgMTAtMTAgNS41MiAwIDEwIDQuNDgxIDEwIDEwIDAgNS41Mi00LjQ4IDEwLTEwIDEweiIgZmlsbD0iY29udGV4dC1maWxsIiBmaWxsLW9wYWNpdHk9ImNvbnRleHQtZmlsbC1vcGFjaXR5Ii8+PC9zdmc+") !important;
 }
 
-:is(#contentAreaContextMenu, #customization-footer, menupopup#placesContext, #downloadsContextMenu) menuitem[type="radio"][checked="true"]::before,
+:is(#contentAreaContextMenu, #customization-footer, menupopup#placesContext, #downloadsContextMenu)
+    menuitem[type="radio"][checked="true"]::before,
 menupopup[menu-api] menuitem[type="radio"][checked="true"]::before,
 :is(#PlacesToolbar, #places) menupopup menuitem[type="radio"][checked="true"]::before {
     background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTIgMmM1LjUxNCAwIDEwIDQuNDg2IDEwIDEwcy00LjQ4NiAxMC0xMCAxMC0xMC00LjQ4Ni0xMC0xMCA0LjQ4Ni0xMCAxMC0xMHptMC0yYy02LjYyNyAwLTEyIDUuMzczLTEyIDEyczUuMzczIDEyIDEyIDEyIDEyLTUuMzczIDEyLTEyLTUuMzczLTEyLTEyLTEyem0wIDZjLTMuMzEzIDAtNiAyLjY4Ny02IDZzMi42ODcgNiA2IDZjMy4zMTQgMCA2LTIuNjg3IDYtNnMtMi42ODYtNi02LTZ6IiBmaWxsPSJjb250ZXh0LWZpbGwiIGZpbGwtb3BhY2l0eT0iY29udGV4dC1maWxsLW9wYWNpdHkiLz48L3N2Zz4=") !important;
@@ -311,7 +347,8 @@ menupopup[menu-api] menuitem[type="radio"][checked="true"]::before,
 #tabContextUndoList:not(.menuitem-iconic)::before,
 #ContextUndoList:not(.menuitem-iconic)::before,
 #tabContextMenu menuitem[label^="Restore All"]::before,
-:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice) .sendtab-target:is([clientType="phone"], [clientType="mobile"], [clientType="desktop"])::before,
+:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
+    .sendtab-target:is([clientType="phone"], [clientType="mobile"], [clientType="desktop"])::before,
 :is(#spell-add-to-dictionary, #spell-add-dictionaries, #spell-add-dictionaries-main, #spell-dictionaries)::before,
 #context-showonlythisframe:not(.menuitem-iconic)::before,
 #contentAreaContextMenu #frame:not(.menuitem-iconic)::before,
@@ -324,10 +361,18 @@ menupopup[menu-api] menuitem[type="radio"][checked="true"]::before,
 #context_moveToStart:not(.menuitem-iconic)::before,
 #context_moveToEnd:not(.menuitem-iconic)::before,
 #userScriptsMenu::before,
-#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"] :is(menu, menuitem)[label="Auto-fill"]::before,
-#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"] :is(menu, menuitem)[label="Copy Username"]::before,
-#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"] :is(menu, menuitem)[label="Copy Password"]::before,
-#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"] :is(menu, menuitem)[label*="Generate Password"]::before {
+#contentAreaContextMenu
+    :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"]
+    :is(menu, menuitem)[label="Auto-fill"]::before,
+#contentAreaContextMenu
+    :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"]
+    :is(menu, menuitem)[label="Copy Username"]::before,
+#contentAreaContextMenu
+    :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"]
+    :is(menu, menuitem)[label="Copy Password"]::before,
+#contentAreaContextMenu
+    :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"]
+    :is(menu, menuitem)[label*="Generate Password"]::before {
     content: "" !important;
     position: relative !important;
     display: -moz-inline-box !important;
@@ -449,7 +494,7 @@ menupopup[menu-api] menuitem[type="radio"][checked="true"]::before,
 
 #context-selectall:not(.menuitem-iconic)::before,
 .textbox-contextmenu menuitem[label="Select All"]:not(.menuitem-iconic)::before {
-    background-image: url('chrome://activity-stream/content/data/content/assets/glyph-highlights-16.svg');
+    background-image: url("chrome://activity-stream/content/data/content/assets/glyph-highlights-16.svg");
 }
 
 :is(#context-sendaudio, #context-sendimage, #context-sendvideo):not(.menuitem-iconic)::before {
@@ -491,7 +536,8 @@ menupopup[menu-api] menuitem[type="radio"][checked="true"]::before,
     background-image: url("chrome://browser/skin/edit-paste.svg") !important;
 }
 
-.textbox-contextmenu menuitem:is([label="Paste and Go"], [label="Paste & Search"]):not(.menuitem-iconic)::before {
+.textbox-contextmenu
+    menuitem:is([label="Paste and Go"], [label="Paste & Search"]):not(.menuitem-iconic)::before {
     background-image: url("chrome://devtools/skin/images/command-paintflashing.svg");
     background-image: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='context-fill' fill-opacity='context-fill-opacity'><path d='M5.5 8c-.3 0-.5.2-.5.5s.2.5.5.5h2c.3 0 .5-.2.5-.5S7.8 8 7.5 8h-2zM10 6.5c0-.3-.2-.5-.5-.5h-4c-.3 0-.5.2-.5.5s.2.5.5.5h4c.3 0 .5-.2.5-.5z'/><path d='M11.5 13.8v-.3h-1.1c-.8 0-1.5-.3-2-.9-.5-.6-.8-1.3-.8-2V10H5c-.6 0-1-.4-1-1V5h7v5.3h.6c-.1-.5.1-1 .4-1.4.3-.3.6-.4 1-.5V4c0-1.1-.9-2-2-2h-1C9.7.6 8.4-.2 7 0 6 .2 5.2 1 5 2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h7c.6 0 1.1-.3 1.5-.7-.2-.1-.4-.2-.5-.4-.3-.3-.5-.7-.5-1.1zM4 3h1c.5 0 .9-.3 1-.8.2-.8 1-1.3 1.8-1.2.6.1 1 .6 1.2 1.2.1.5.5.8.9.8H11v1H4V3z'/><circle cx='7.5' cy='2.5' r='.5'/><path d='M15.5 11.5l-1.9-1.9c-.1-.1-.3-.2-.4-.2-.2 0-.3.1-.5.2-.2.2-.2.6 0 .9l.3.3.6.6h-3.1c-.3 0-.5-.2-.6-.5V8.7c0-.4-.3-.6-.6-.6s-.6.3-.6.6V11c.1.5.4.9.7 1.2.3.2.6.3 1 .3h3.2l-.6.6-.3.3c-.3.2-.3.6 0 .9.1.1.2.1.2.2h.2c.2 0 .3-.1.4-.2l1.9-1.9c.4-.3.4-.7.1-.9z'/></svg>");
 }
@@ -604,7 +650,6 @@ menupopup[menu-api] menuitem[type="radio"][checked="true"]::before,
     background-image: url("chrome://browser/skin/bookmark-hollow.svg") !important;
 }
 
-
 #context_moveTabOptions:not(.menuitem-iconic)::before {
     background-image: url("data:image/svg+xml;utf8,<svg height='17' viewBox='0 0 512 512' width='17' xmlns='http://www.w3.org/2000/svg'><path d='m192 424a23.928 23.928 0 0 1 -16.971-7.029l-144-144a24 24 0 0 1 0-33.942l144-144a24 24 0 0 1 33.942 33.942l-127.03 127.029 127.03 127.029a24 24 0 0 1 -16.971 40.971zm144.971-7.029 144-144a24 24 0 0 0 0-33.942l-144-144a24 24 0 0 0 -33.942 33.942l127.03 127.029-127.03 127.029a24 24 0 0 0 33.942 33.942z' fill='context-fill' fill-opacity='context-fill-opacity'/></svg>") !important;
 }
@@ -647,27 +692,37 @@ menupopup[menu-api] menuitem[type="radio"][checked="true"]::before,
     background-image: url("chrome://browser/skin/restore-session.svg");
 }
 
-:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice) .sendtab-target:is([clientType="phone"], [clientType="mobile"])::before {
+:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
+    .sendtab-target:is([clientType="phone"], [clientType="mobile"])::before {
     background-image: url("chrome://browser/skin/device-phone.svg");
 }
 
-:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice) .sendtab-target[clientType="desktop"]::before {
+:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
+    .sendtab-target[clientType="desktop"]::before {
     background-image: url(chrome://browser/skin/device-desktop.svg);
 }
 
-#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"] :is(menu, menuitem)[label="Auto-fill"]::before {
+#contentAreaContextMenu
+    :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"]
+    :is(menu, menuitem)[label="Auto-fill"]::before {
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16'><g fill='context-fill'><path d='M7.281 5H8.75A.25.25 0 009 4.75V.984a.984.984 0 00-1.969 0V4.75a.25.25 0 00.25.25z'/><path d='M13.5 2H11a1 1 0 000 2h2.5a.5.5 0 01.5.5v7a.5.5 0 01-.5.5h-11a.5.5 0 01-.5-.5v-7a.5.5 0 01.5-.5H5a1 1 0 000-2H2.5A2.5 2.5 0 000 4.5v7A2.5 2.5 0 002.5 14h11a2.5 2.5 0 002.5-2.5v-7A2.5 2.5 0 0013.5 2z'/><rect x='3' y='6' width='4' height='4' rx='.577' ry='.577'/><path d='M9.5 7h3a.5.5 0 000-1h-3a.5.5 0 000 1zm0 1a.5.5 0 000 1h2a.5.5 0 000-1z'/></g></svg>");
 }
 
-#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"] :is(menu, menuitem)[label="Copy Username"]::before {
+#contentAreaContextMenu
+    :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"]
+    :is(menu, menuitem)[label="Copy Username"]::before {
     background-image: url(chrome://browser/skin/fxa/avatar-empty.svg);
 }
 
-#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"] :is(menu, menuitem)[label="Copy Password"]::before {
+#contentAreaContextMenu
+    :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"]
+    :is(menu, menuitem)[label="Copy Password"]::before {
     background-image: url(chrome://browser/skin/login.svg);
 }
 
-#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"] :is(menu, menuitem)[label*="Generate Password"]::before {
+#contentAreaContextMenu
+    :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"]
+    :is(menu, menuitem)[label*="Generate Password"]::before {
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0.5 0 16 16'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M3.4 8.8c.3.5 1 .7 1.6.4l1.8-1v2.1c0 .7.5 1.2 1.2 1.2s1.2-.5 1.2-1.2V8.1l1.8 1c.6.3 1.3.1 1.6-.4.3-.6.1-1.3-.4-1.6l-1.8-1 1.8-1c.6-.3.8-1.1.4-1.6-.3-.6-1-.8-1.6-.5L9.2 4V1.9C9.2 1.2 8.7.7 8 .7s-1.2.6-1.2 1.2V4L5 3c-.6-.3-1.3-.1-1.6.4-.3.6-.2 1.3.4 1.6l1.8 1-1.8 1c-.6.5-.7 1.2-.4 1.8zm9.8 4.1H2.8c-.7 0-1.2.5-1.2 1.2s.5 1.2 1.2 1.2h10.4c.7 0 1.2-.5 1.2-1.2s-.5-1.2-1.2-1.2z'/></svg>");
 }
 

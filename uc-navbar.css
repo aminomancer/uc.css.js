@@ -30,8 +30,8 @@
 }
 
 #searchbar .urlbar-icon {
-	border-radius: 3px;
-	max-height: 27px !important;
+    border-radius: 3px;
+    max-height: 27px !important;
     margin-right: 3px !important;
 }
 
@@ -101,7 +101,7 @@ i haven't tested this on every scaling factor, if it makes things worse on your 
 }
 
 #nav-bar[brighttext] #panic-button[open] {
-	fill: var(--warning-color) !important;
+    fill: var(--warning-color) !important;
 }
 
 #nav-bar-customization-target {
@@ -197,7 +197,8 @@ toolbar .toolbarbutton-1:not([disabled])[checked]:hover > .toolbarbutton-icon {
         display: flex !important;
         overflow: hidden !important;
         border: none !important;
-        transition: margin-top 300ms var(--animation-easing-function), opacity 300ms var(--animation-easing-function) !important;
+        transition: margin-top 300ms var(--animation-easing-function),
+            opacity 300ms var(--animation-easing-function) !important;
     }
 
     #navigator-toolbox notification .messageText {
@@ -210,11 +211,11 @@ toolbar .toolbarbutton-1:not([disabled])[checked]:hover > .toolbarbutton-icon {
     #navigator-toolbox notification .messageImage {
         min-width: 24px !important;
     }
-    
+
     #navigator-toolbox notification .notification-button {
         margin-inline: 4px 0 !important;
     }
-    
+
     #navigator-toolbox notification .close-icon {
         background: none !important;
         width: 40px !important;

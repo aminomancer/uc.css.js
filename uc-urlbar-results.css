@@ -71,7 +71,7 @@
 }
 
 .urlbarView-row[type="bookmark"] .urlbarView-type-icon {
-    fill: hsl(250, 100%, 64%) !important;
+    fill: var(--urlbar-bookmark-icon-color) !important;
     fill: var(--lwt-toolbarbutton-icon-fill-attention) !important;
     fill-opacity: 1 !important;
     position: absolute;
@@ -104,8 +104,7 @@
 
 .urlbarView-row[type="remotetab"] .urlbarView-type-icon {
     background: url("chrome://browser/skin/sync.svg") no-repeat !important;
-    background-size: 90% !important;
-    background-position: 0px 1px !important;
+    background-position: 1px 1px !important;
 }
 
 .urlbarView[actionoverride]
@@ -340,7 +339,6 @@
 
 #urlbar[focused="true"] > #urlbar-input-container {
     background-color: var(--urlbar-input-bgcolor-even-brighter) !important;
-    /*     box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.25) !important; */
 }
 
 #urlbar {
@@ -351,13 +349,6 @@
     animation-name: none !important;
     animation-timing-function: var(--animation-easing-function);
 }
-
-/* @keyframes slide-down {
-  0% {
-  }
-  100% {
-  }
-} */
 
 #urlbar[breakout][breakout-extend],
 #urlbar[breakout][breakout-extend-disabled][open] {
@@ -377,7 +368,10 @@
     position: relative !important;
     overflow: visible !important;
     box-shadow: none !important;
-    top: calc(var(--urlbar-element-top-adjust-magnitude) + (var(--urlbar-container-height) - var(--urlbar-height)) / 2) !important;
+    top: calc(
+        var(--urlbar-element-top-adjust-magnitude) +
+            (var(--urlbar-container-height) - var(--urlbar-height)) / 2
+    ) !important;
 }
 
 .urlbarView[noresults="true"] #urlbar-results {

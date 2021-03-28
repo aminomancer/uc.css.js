@@ -15,7 +15,7 @@
     border-radius: 5px !important;
 }
 
-.ctrlTab-preview:not(#ctrlTab-showAll)>*>.ctrlTab-preview-inner {
+.ctrlTab-preview:not(#ctrlTab-showAll) > * > .ctrlTab-preview-inner {
     margin: -10px -10px 0 !important;
 }
 
@@ -58,10 +58,11 @@
     background-color: var(--ctrlTab-panel-bgcolor) !important;
 }
 
-.ctrlTab-preview:focus>.ctrlTab-preview-inner {
+.ctrlTab-preview:focus > .ctrlTab-preview-inner {
     background-color: var(--ctrlTab-panel-focused-bgcolor) !important;
     border: 2px solid var(--toolbarbutton-icon-fill-attention) !important;
-    box-shadow: 0 0 4px -1px rgba(0, 0, 0, 0.2), 0 0 25px -2px rgba(0, 0, 0, 0.2), inset 0 0 20px 5px hsla(0, 0%, 0%, 0.5) !important;
+    box-shadow: 0 0 4px -1px rgba(0, 0, 0, 0.2), 0 0 25px -2px rgba(0, 0, 0, 0.2),
+        inset 0 0 20px 5px hsla(0, 0%, 0%, 0.5) !important;
 }
 
 .ctrlTab-canvas > * {

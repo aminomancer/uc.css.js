@@ -29,14 +29,14 @@
     --arrowpanel-dimmed: hsla(236, 100%, 83%, 0.17) !important;
     --arrowpanel-dimmed-further: hsla(236, 100%, 83%, 0.25) !important;
     --arrowpanel-dimmed-even-further: hsla(236, 100%, 85%, 0.3) !important;
-    --desaturate-dimmed: hsla(236,60%,83%,.17) !important;
-    --desaturate-dimmed-further: hsla(236,60%,83%,.25) !important;
-    --desaturate-dimmed-even-further: hsla(236,60%,85%,.3) !important;
-    --panel-disabled-color: hsla(213, 43%, 89%, 0.5) !important;
+    --desaturate-dimmed: hsla(236, 60%, 83%, 0.17) !important;
+    --desaturate-dimmed-further: hsla(236, 60%, 83%, 0.25) !important;
+    --desaturate-dimmed-even-further: hsla(236, 60%, 85%, 0.3) !important;
+    --panel-disabled-color: var(--context-menu-disabled-color) !important;
     --toolbarbutton-hover-background: hsla(236, 82%, 83%, 0.17) !important;
     --toolbarbutton-active-background: hsla(236, 82%, 83%, 0.22) !important;
     --toolbarbutton-checked-background: hsla(236, 82%, 83%, 0.13) !important;
-/*     --button-bgcolor: var(--arrowpanel-dimmed) !important; */
+    /* --button-bgcolor: var(--arrowpanel-dimmed) !important; */
     --button-hover-bgcolor: var(--arrowpanel-dimmed) !important;
     --button-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
     --urlbar-input-bgcolor: hsla(233, 24%, 26%, 1) !important;
@@ -144,7 +144,6 @@ toolbar {
 }
 
 @supports (-moz-bool-pref("browser.proton.enabled")) {
-
     :root {
         --panelview-toolbarbutton-hover-bgcolor: var(--arrowpanel-dimmed) !important;
         --panelview-toolbarbutton-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
@@ -165,34 +164,29 @@ toolbar {
         --panel-shortcut-color: hsl(235, 27%, 73%, 70%) !important;
         --panel-shortcut-focus: hsl(235, 32%, 75%, 90%) !important;
     }
-
 }
 
 @supports (-moz-bool-pref("browser.proton.toolbar.enabled")) {
-
     :root,
     #TabsToolbar {
         --toolbarbutton-inner-padding: 6px !important;
     }
 
-    #urlbar-container, #urlbar {
+    #urlbar-container,
+    #urlbar {
         --urlbar-toolbar-height: var(--user-urlbar-container-height) !important;
         --urlbar-container-height: var(--user-urlbar-container-height) !important;
     }
-
 }
 
 @supports (-moz-bool-pref("browser.proton.tabs.enabled")) {
-
     :root {
         --proton-tab-inline-padding: 0 !important;
         --tab-shadow-max-size: 0 !important;
     }
-
 }
 
 @supports (-moz-bool-pref("browser.proton.appmenu.enabled")) {
-
     #appMenu-multiView {
         --arrowpanel-menuitem-inline-margin: 6px;
         --arrowpanel-menuitem-margin: 0 var(--arrowpanel-menuitem-inline-margin) !important;
@@ -200,11 +194,9 @@ toolbar {
         --panel-subview-body-padding-magnitude: var(--arrowpanel-menuitem-inline-margin);
         --panel-subview-body-padding: var(--panel-subview-body-padding-magnitude) 0 !important;
     }
-
 }
 
 @supports (-moz-bool-pref("browser.proton.contextmenus.enabled")) {
-
     :root {
         --menupopup-background: transparent;
         --menu-background-color: var(--arrowpanel-background) !important;
@@ -225,5 +217,4 @@ toolbar {
         --menu-right-margin: 4px;
         --menu-right-size: 11px;
     }
-
 }

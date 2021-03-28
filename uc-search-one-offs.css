@@ -59,8 +59,10 @@
 }
 
 /* replace google search icon since updates keep resetting the custom icon in search.json.mozlz4 */
-.searchbar-engine-one-off-item[image="moz-extension://cd4aad93-9726-49dd-a5cd-9e5f5c4d76f4/favicon.ico"] .button-icon {
-    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 48 48'><defs><path id='prefix__a' d='M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z'/></defs><clipPath id='prefix__b'><use xlink:href='%23prefix__a' overflow='visible'/></clipPath><path clip-path='url(%23prefix__b)' fill='%23FBBC05' d='M0 37V11l17 13z'/><path clip-path='url(%23prefix__b)' fill='%23EA4335' d='M0 11l17 13 7-6.1L48 14V0H0z'/><path clip-path='url(%23prefix__b)' fill='%2334A853' d='M0 37l30-23 7.9 1L48 0v48H0z'/><path clip-path='url(%23prefix__b)' fill='%234285F4' d='M48 48L17 24l-4-3 35-10z'/></svg>") no-repeat !important;
+.searchbar-engine-one-off-item[image="moz-extension://cd4aad93-9726-49dd-a5cd-9e5f5c4d76f4/favicon.ico"] .button-icon
+{
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 48 48'><defs><path id='prefix__a' d='M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z'/></defs><clipPath id='prefix__b'><use xlink:href='%23prefix__a' overflow='visible'/></clipPath><path clip-path='url(%23prefix__b)' fill='%23FBBC05' d='M0 37V11l17 13z'/><path clip-path='url(%23prefix__b)' fill='%23EA4335' d='M0 11l17 13 7-6.1L48 14V0H0z'/><path clip-path='url(%23prefix__b)' fill='%2334A853' d='M0 37l30-23 7.9 1L48 0v48H0z'/><path clip-path='url(%23prefix__b)' fill='%234285F4' d='M48 48L17 24l-4-3 35-10z'/></svg>")
+        no-repeat !important;
     width: 17px !important;
     height: 17px !important;
     padding-left: 17px; /* Equal to width of new image */
@@ -77,7 +79,8 @@
     padding-right: 0 !important;
 }
 
-.search-panel-one-offs, .search-panel-one-offs-container {
+.search-panel-one-offs,
+.search-panel-one-offs-container {
     min-width: max-content !important;
     max-width: max-content !important;
     width: max-content !important;
@@ -126,16 +129,23 @@
     padding-right: 1px !important;
     height: 33px !important;
     background-color: var(--lwt-toolbar-field-background-color, rgba(255, 255, 255, 0.8));
-/*     for transform animation on search one-offs */
+    /* for transform animation on search one-offs */
     margin-right: 244px !important;
 }
 
-#urlbar[textoverflow]:is([usertyping], [searchmode], [open][pageproxystate="invalid"]) #urlbar-input {
+#urlbar[textoverflow]:is([usertyping], [searchmode], [open][pageproxystate="invalid"])
+    #urlbar-input {
     margin-right: 244px !important;
 }
 
 #urlbar[textoverflow="both"] > #urlbar-input-container > .urlbar-input-box > #urlbar-input {
-    mask-image: linear-gradient(to right, transparent, black 3ch, black calc(100% - 3ch), transparent);
+    mask-image: linear-gradient(
+        to right,
+        transparent,
+        black 3ch,
+        black calc(100% - 3ch),
+        transparent
+    );
 }
 
 #urlbar[textoverflow="right"] > #urlbar-input-container > .urlbar-input-box > #urlbar-input {
@@ -147,7 +157,13 @@
 }
 
 #urlbar[textoverflow="both"][usertyping="true"] #urlbar-input {
-    mask-image: linear-gradient(to right, transparent, black 3ch, black calc(100% - 55px), transparent calc(100% - 5px)) !important;
+    mask-image: linear-gradient(
+        to right,
+        transparent,
+        black 3ch,
+        black calc(100% - 55px),
+        transparent calc(100% - 5px)
+    ) !important;
 }
 
 #urlbar[textoverflow="right"][usertyping="true"] #urlbar-input {
@@ -168,7 +184,8 @@
     pointer-events: none !important;
 }
 
-#urlbar .search-one-offs, #urlbar .search-one-offs * {
+#urlbar .search-one-offs,
+#urlbar .search-one-offs * {
     pointer-events: none !important;
 }
 
@@ -177,7 +194,8 @@
     transform: none !important;
 }
 
-#userContext-icons, #userContext-icons>* {
+#userContext-icons,
+#userContext-icons > * {
     pointer-events: none !important;
 }
 
@@ -188,8 +206,10 @@
 } */
 
 #urlbar:is([usertyping], [searchmode], [open][pageproxystate="invalid"]) #page-action-buttons,
-#urlbar:is([usertyping], [searchmode], [open][pageproxystate="invalid"]) #urlbar-input-container > .urlbar-icon {
-/*     opacity: 0 !important;
+#urlbar:is([usertyping], [searchmode], [open][pageproxystate="invalid"])
+    #urlbar-input-container
+    > .urlbar-icon {
+    /* opacity: 0 !important;
     pointer-events: none !important;
     transform-style: flat !important;
     backface-visibility: hidden !important;
@@ -210,7 +230,8 @@
     from {
         opacity: 0;
         transform: translateX(100%);
-    } to {
+    }
+    to {
         opacity: 1;
         transform: none;
     }
@@ -221,7 +242,7 @@
 }
 
 #page-action-buttons > *:not([hidden]) {
-	display: -moz-inline-box !important;
+    display: -moz-inline-box !important;
 }
 
 #urlbar[searchmode] #page-action-buttons * {
@@ -233,11 +254,11 @@
 }
 
 #urlbar:not([usertyping], [searchmode], [open][pageproxystate="invalid"]) #pageActionButton {
-	display: -moz-inline-box !important;
+    display: -moz-inline-box !important;
 }
 
 #urlbar:not([usertyping], [searchmode], [open][pageproxystate="invalid"]) #star-button-box {
-	display: -moz-box !important;
+    display: -moz-box !important;
 }
 
 #urlbar:is([usertyping], [searchmode], [open][pageproxystate="invalid"]) .search-one-offs *,
@@ -259,7 +280,8 @@
     fill: currentColor;
 }
 
-#urlbar:is([usertyping], [searchmode], [open][pageproxystate="invalid"]) .searchbar-engine-one-off-item {
+#urlbar:is([usertyping], [searchmode], [open][pageproxystate="invalid"])
+    .searchbar-engine-one-off-item {
     pointer-events: auto !important;
 }
 
@@ -306,11 +328,17 @@
     margin-top: 0.5px !important;
 }
 
-:root[lwt-toolbar-field-brighttext] #urlbar-engine-one-off-item-history > .button-box > .button-icon {
+:root[lwt-toolbar-field-brighttext]
+    #urlbar-engine-one-off-item-history
+    > .button-box
+    > .button-icon {
     fill: currentColor;
     fill-opacity: 1 !important;
 }
 
-:root[lwt-toolbar-field-brighttext] #urlbar-engine-one-off-item-bookmarks > .button-box > .button-icon {
+:root[lwt-toolbar-field-brighttext]
+    #urlbar-engine-one-off-item-bookmarks
+    > .button-box
+    > .button-icon {
     fill: white !important;
 }

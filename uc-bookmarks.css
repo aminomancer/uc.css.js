@@ -24,17 +24,17 @@
 }
 
 #editBookmarkPanelRows {
-	padding-inline: 10px !important;
+    padding-inline: 10px !important;
     padding-block: 6px 0 !important;
 }
 
 #editBookmarkPanelBottomContent {
-	padding-inline: 10px !important;
+    padding-inline: 10px !important;
     padding-block: 0 8px !important;
 }
 
 #editBookmarkPanelRows > vbox {
-	margin-bottom: 4px !important;
+    margin-bottom: 4px !important;
 }
 
 #editBookmarkPanel menulist {
@@ -277,7 +277,9 @@
     padding-inline: 0 !important;
 }
 
-#editBookmarkPanel .in-menulist :is(menu, menuitem):is(:hover, :focus-visible, [_moz-menuactive="true"]):not([disabled="true"]) {
+#editBookmarkPanel
+    .in-menulist
+    :is(menu, menuitem):is(:hover, :focus-visible, [_moz-menuactive="true"]):not([disabled="true"]) {
     -moz-appearance: none !important;
     background-color: hsl(232, 21%, 40%) !important;
     color: #fff !important;
@@ -327,7 +329,7 @@
     list-style-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTAuMDQxIDE3bC00LjUtNC4zMTkgMS4zOTUtMS40MzUgMy4wOCAyLjkzNyA3LjAyMS03LjE4MyAxLjQyMiAxLjQwOS04LjQxOCA4LjU5MXptLTUuMDQxLTE1Yy0xLjY1NCAwLTMgMS4zNDYtMyAzdjE0YzAgMS42NTQgMS4zNDYgMyAzIDNoMTRjMS42NTQgMCAzLTEuMzQ2IDMtM3YtMTRjMC0xLjY1NC0xLjM0Ni0zLTMtM2gtMTR6bTE5IDN2MTRjMCAyLjc2MS0yLjIzOCA1LTUgNWgtMTRjLTIuNzYyIDAtNS0yLjIzOS01LTV2LTE0YzAtMi43NjEgMi4yMzgtNSA1LTVoMTRjMi43NjIgMCA1IDIuMjM5IDUgNXoiIGZpbGw9ImNvbnRleHQtZmlsbCIgZmlsbC1vcGFjaXR5PSJjb250ZXh0LWZpbGwtb3BhY2l0eSIvPjwvc3ZnPg==") !important;
 }
 
-#editBookmarkPanel richlistitem:hover>image {
+#editBookmarkPanel richlistitem:hover > image {
     opacity: 1 !important;
 }
 
@@ -336,17 +338,17 @@
 }
 
 #editBookmarkPanel checkbox .checkbox-check {
-	appearance: none !important;
+    appearance: none !important;
     min-width: 10px !important;
     min-height: 10px !important;
-	width: 14px !important;
-	height: 14px !important;
+    width: 14px !important;
+    height: 14px !important;
     margin-inline: 4px !important;
-	border: 1px solid var(--in-content-box-border-color) !important;
-	border-radius: 2px !important;
-	background-color: var(--arrowpanel-dimmed) !important;
-	background-position: center !important;
-	background-repeat: no-repeat !important;
+    border: 1px solid var(--in-content-box-border-color) !important;
+    border-radius: 2px !important;
+    background-color: var(--arrowpanel-dimmed) !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
     line-height: 20px !important;
     box-shadow: none !important;
 }
@@ -360,11 +362,11 @@
 }
 
 #editBookmarkPanel checkbox:is(:hover, :focus-visible) .checkbox-check:not(:disabled) {
-	background-color: var(--arrowpanel-dimmed-further) !important;
+    background-color: var(--arrowpanel-dimmed-further) !important;
 }
 
 #editBookmarkPanel checkbox:is(:hover, :focus-visible) .checkbox-check[checked]:not(:disabled) {
-	background-color: var(--purple-45) !important;
+    background-color: var(--purple-45) !important;
 }
 
 #editBookmarkPanel .checkbox-label {
@@ -382,48 +384,54 @@
 }
 
 #editBookmarkPanelFavicon[src] {
-	box-sizing: content-box;
-	width: 32px;
-	height: 32px;
-	padding: 5px;
-	background: hsla(232, 24%, 26%, 50%) !important;
-	box-shadow: 0 0 2px rgba(0,0,0,.1), 0 0 5px rgba(0,0,0,.05) !important;
-	border-radius: 3px !important;
-	margin-top: 10px;
-	margin-inline-start: 10px;
-	margin-bottom: -52px;
+    box-sizing: content-box;
+    width: 32px;
+    height: 32px;
+    padding: 5px;
+    background: hsla(232, 24%, 26%, 50%) !important;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.05) !important;
+    border-radius: 3px !important;
+    margin-top: 10px;
+    margin-inline-start: 10px;
+    margin-bottom: -52px;
     -moz-context-properties: fill, fill-opacity;
     fill: currentColor;
 }
 
 /* bookmarks toolbar button's popup */
-@-moz-document url(chrome://browser/content/browser.xhtml) {
-
-    link[href="chrome://global/skin/arrowscrollbox.css"] ~ :is(#scrollbutton-up, #scrollbutton-down) {
+@-moz-document url(chrome://browser/content/browser.xhtml)
+{
+    link[href="chrome://global/skin/arrowscrollbox.css"] ~ :is(#scrollbutton-up, #scrollbutton-down)
+    {
         visibility: collapse;
     }
-    
+
     menuitem.menuitem-iconic#BMB_viewBookmarksToolbar {
         list-style-image: url("chrome://browser/skin/bookmarks-toolbar.svg") !important;
         -moz-context-properties: fill, fill-opacity;
     }
-    
+
     menuitem.menuitem-iconic#BMB_viewBookmarksToolbar[data-l10n-args*='{"isVisible":true}'] {
         fill-opacity: 0.5;
     }
-    
+
     menupopup {
         --nested-margin: -4px !important;
     }
-    
+
     .panel-subview-footer.openintabs-menuitem {
         display: none !important;
     }
-
 }
 
 treechildren::-moz-tree-drop-feedback {
-    background-image: linear-gradient(to right, hsla(224, 100%, 71%, 100%) 0%, hsla(224, 100%, 71%, 10%) 40%, hsla(224, 100%, 71%, 1%) 70%, transparent 100%) !important;
+    background-image: linear-gradient(
+        to right,
+        hsla(224, 100%, 71%, 100%) 0%,
+        hsla(224, 100%, 71%, 10%) 40%,
+        hsla(224, 100%, 71%, 1%) 70%,
+        transparent 100%
+    ) !important;
     background-color: transparent !important;
     width: 270px !important;
     height: 1px !important;
@@ -431,11 +439,10 @@ treechildren::-moz-tree-drop-feedback {
 }
 
 @supports (-moz-bool-pref("browser.proton.enabled")) {
-
-/*     #BMB_bookmarksPopup menupopup[placespopup="true"] {
+    /*     #BMB_bookmarksPopup menupopup[placespopup="true"] {
         padding-top: 0 !important;
     } */
-    
+
     #BMB_bookmarksPopup .subviewbutton:not(.menuitem-iconic) .menu-text {
         padding-inline-start: 21px !important;
     }
@@ -486,5 +493,4 @@ treechildren::-moz-tree-drop-feedback {
     #bookmarksMenuPopup > menuseparator.small-separator {
         display: none;
     }
-
 }

@@ -37,7 +37,9 @@ tooltip[default][page] > description {
     opacity: 1;
 }
 
-#statuspanel:not([mirror]) #statuspanel-inner:is(:dir(ltr), :-moz-locale-dir(ltr)) #statuspanel-label {
+#statuspanel:not([mirror])
+    #statuspanel-inner:is(:dir(ltr), :-moz-locale-dir(ltr))
+    #statuspanel-label {
     border-top-left-radius: 0;
     border-top-right-radius: var(--tooltip-border-radius);
 }

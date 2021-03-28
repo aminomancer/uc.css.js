@@ -26,7 +26,9 @@
 }
 
 :root[sizemode="normal"] findbar {
-    top: calc(var(--urlbar-container-height) + var(--tab-min-height) + var(--space-above-tabbar)) !important;
+    top: calc(
+        var(--urlbar-container-height) + var(--tab-min-height) + var(--space-above-tabbar)
+    ) !important;
 }
 
 @keyframes findbar-down {
@@ -186,13 +188,13 @@ findbar:focus-within .findbar-textbox:not([status="notfound"]) ~ .matches-indica
 }
 
 .findbar-find-previous {
-/*     list-style-image: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='5px' height='5px' viewBox='0 0 492 492' xml:space='preserve'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M198.608,246.104L382.664,62.04c5.068-5.056,7.856-11.816,7.856-19.024c0-7.212-2.788-13.968-7.856-19.032l-16.128-16.12   C361.476,2.792,354.712,0,347.504,0s-13.964,2.792-19.028,7.864L109.328,227.008c-5.084,5.08-7.868,11.868-7.848,19.084   c-0.02,7.248,2.76,14.028,7.848,19.112l218.944,218.932c5.064,5.072,11.82,7.864,19.032,7.864c7.208,0,13.964-2.792,19.032-7.864   l16.124-16.12c10.492-10.492,10.492-27.572,0-38.06L198.608,246.104z'/></svg>") !important; */
+    /* list-style-image: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='5px' height='5px' viewBox='0 0 492 492' xml:space='preserve'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M198.608,246.104L382.664,62.04c5.068-5.056,7.856-11.816,7.856-19.024c0-7.212-2.788-13.968-7.856-19.032l-16.128-16.12   C361.476,2.792,354.712,0,347.504,0s-13.964,2.792-19.028,7.864L109.328,227.008c-5.084,5.08-7.868,11.868-7.848,19.084   c-0.02,7.248,2.76,14.028,7.848,19.112l218.944,218.932c5.064,5.072,11.82,7.864,19.032,7.864c7.208,0,13.964-2.792,19.032-7.864   l16.124-16.12c10.492-10.492,10.492-27.572,0-38.06L198.608,246.104z'/></svg>") !important; */
     list-style-image: url("data:image/svg+xml;utf8,<svg width='12' height='12' xmlns='http://www.w3.org/2000/svg'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M8.988 11.455L3.54 6 8.99.545 8.46.017 2.473 6l5.988 5.982z'/></svg>") !important;
-/*     transform: scaleX(-1); */
+    /*     transform: scaleX(-1); */
 }
 
 .findbar-find-next {
-/*     list-style-image: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='5px' height='5px' viewBox='0 0 492 492' xml:space='preserve'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M382.678,226.804L163.73,7.86C158.666,2.792,151.906,0,144.698,0s-13.968,2.792-19.032,7.86l-16.124,16.12    c-10.492,10.504-10.492,27.576,0,38.064L293.398,245.9l-184.06,184.06c-5.064,5.068-7.86,11.824-7.86,19.028    c0,7.212,2.796,13.968,7.86,19.04l16.124,16.116c5.068,5.068,11.824,7.86,19.032,7.86s13.968-2.792,19.032-7.86L382.678,265    c5.076-5.084,7.864-11.872,7.848-19.088C390.542,238.668,387.754,231.884,382.678,226.804z'/></svg>") !important; */
+    /* list-style-image: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='5px' height='5px' viewBox='0 0 492 492' xml:space='preserve'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M382.678,226.804L163.73,7.86C158.666,2.792,151.906,0,144.698,0s-13.968,2.792-19.032,7.86l-16.124,16.12    c-10.492,10.504-10.492,27.576,0,38.064L293.398,245.9l-184.06,184.06c-5.064,5.068-7.86,11.824-7.86,19.028    c0,7.212,2.796,13.968,7.86,19.04l16.124,16.116c5.068,5.068,11.824,7.86,19.032,7.86s13.968-2.792,19.032-7.86L382.678,265    c5.076-5.084,7.864-11.872,7.848-19.088C390.542,238.668,387.754,231.884,382.678,226.804z'/></svg>") !important; */
     list-style-image: url("data:image/svg+xml;utf8,<svg width='12' height='12' xmlns='http://www.w3.org/2000/svg'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M.242 11.455L5.692 6 .241.545.77.017 6.758 6 .77 11.982z'/></svg>") !important;
 }
 
@@ -201,21 +203,24 @@ findbar:focus-within .findbar-textbox:not([status="notfound"]) ~ .matches-indica
     opacity: 1 !important;
 }
 
-:is(.findbar-entire-word, .findbar-case-sensitive):not([disabled]):hover :is(.toolbarbutton-icon, .checkbox-icon) {
+:is(.findbar-entire-word, .findbar-case-sensitive):not([disabled]):hover
+    :is(.toolbarbutton-icon, .checkbox-icon) {
     background: none !important;
-    opacity: .8 !important;
+    opacity: 0.8 !important;
 }
 
-:is(.findbar-entire-word, .findbar-case-sensitive):not([disabled])[checked] :is(.toolbarbutton-icon, .checkbox-icon) {
+:is(.findbar-entire-word, .findbar-case-sensitive):not([disabled])[checked]
+    :is(.toolbarbutton-icon, .checkbox-icon) {
     background: none !important;
-    opacity: .8 !important;
+    opacity: 0.8 !important;
 }
 
 :is(.findbar-find-previous, .findbar-find-next, .findbar-entire-word, .findbar-case-sensitive):not([disabled]):hover:active {
     box-shadow: none !important;
 }
 
-:is(.findbar-find-previous, .findbar-find-next, .findbar-entire-word, .findbar-case-sensitive):not([disabled]):is([checked]:hover, :hover:active) :is(.toolbarbutton-icon, .checkbox-icon) {
+:is(.findbar-find-previous, .findbar-find-next, .findbar-entire-word, .findbar-case-sensitive):not([disabled]):is([checked]:hover, :hover:active)
+    :is(.toolbarbutton-icon, .checkbox-icon) {
     background: none !important;
     opacity: 1 !important;
 }
@@ -223,7 +228,8 @@ findbar:focus-within .findbar-textbox:not([status="notfound"]) ~ .matches-indica
 .findbar-textbox[status="notfound"]
     ~ :is(.findbar-find-previous, .findbar-find-next)
     > .toolbarbutton-icon,
-:is(.findbar-find-previous, .findbar-find-next, .findbar-entire-word, .findbar-case-sensitive)[disabled="true"] :is(.toolbarbutton-icon, .checkbox-icon) {
+:is(.findbar-find-previous, .findbar-find-next, .findbar-entire-word, .findbar-case-sensitive)[disabled="true"]
+    :is(.toolbarbutton-icon, .checkbox-icon) {
     fill: rgba(255, 255, 255, 1) !important;
     pointer-events: none !important;
     opacity: 0.25 !important;
@@ -233,12 +239,14 @@ findbar:focus-within .findbar-textbox:not([status="notfound"]) ~ .matches-indica
     pointer-events: none !important;
 }
 
-.findbar-textbox:focus ~ :is(.findbar-find-previous, .findbar-find-next, .findbar-entire-word, .findbar-case-sensitive) {
+.findbar-textbox:focus
+    ~ :is(.findbar-find-previous, .findbar-find-next, .findbar-entire-word, .findbar-case-sensitive) {
     background-color: var(--search-box-focus) !important;
     transition: 300ms !important;
 }
 
-.findbar-textbox[status="notfound"] ~ :is(.findbar-find-previous, .findbar-find-next, .findbar-entire-word, .findbar-case-sensitive) {
+.findbar-textbox[status="notfound"]
+    ~ :is(.findbar-find-previous, .findbar-find-next, .findbar-entire-word, .findbar-case-sensitive) {
     background-color: var(--search-box-null) !important;
     transition: 400ms !important;
 }

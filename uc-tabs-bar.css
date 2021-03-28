@@ -81,7 +81,10 @@
 }
 
 /* the drag space should push down everything */
-:root[sizemode="normal"] #TabsToolbar-customization-target > toolbarbutton > :is(.toolbarbutton-icon, .toolbarbutton-badge-stack) {
+:root[sizemode="normal"]
+    #TabsToolbar-customization-target
+    > toolbarbutton
+    > :is(.toolbarbutton-icon, .toolbarbutton-badge-stack) {
     margin-top: var(--space-above-tabbar);
 }
 
@@ -91,7 +94,7 @@
 
 /* when drag space is enabled */
 #TabsToolbar > .toolbar-items {
-	padding-top: 0 !important;
+    padding-top: 0 !important;
 }
 
 #toolbar-menubar:not([inactive]) ~ #TabsToolbar .toolbar-items {
@@ -391,7 +394,12 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
 .all-tabs-item[selected],
 .all-tabs-item[multiselected],
 .all-tabs-item[usercontextid]:is(:hover, [_moz-menuactive]) {
-    background-image: linear-gradient(to right, var(--main-stripe-color) 0, var(--main-stripe-color) 4px, transparent 4px) !important;
+    background-image: linear-gradient(
+        to right,
+        var(--main-stripe-color) 0,
+        var(--main-stripe-color) 4px,
+        transparent 4px
+    ) !important;
 }
 
 .all-tabs-item[selected] {
@@ -433,7 +441,7 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
     border-radius: 100% !important;
     color: white !important;
     background-color: transparent !important;
-    opacity: .7 !important;
+    opacity: 0.7 !important;
     min-height: 0 !important;
     min-width: 0 !important;
     margin-inline: 6px 10px !important;
@@ -444,12 +452,11 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
 }
 
 .all-tabs-item .all-tabs-secondary-button:is(:hover, :focus):not([disabled]) {
-	background-color: var(--arrowpanel-dimmed) !important;
-	opacity: 1 !important;
+    background-color: var(--arrowpanel-dimmed) !important;
+    opacity: 1 !important;
     color: white !important;
 }
 
 .all-tabs-item .all-tabs-secondary-button:hover:active:not([disabled]) {
-	background-color: var(--arrowpanel-dimmed-further) !important;
+    background-color: var(--arrowpanel-dimmed-further) !important;
 }
-
