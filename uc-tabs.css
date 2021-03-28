@@ -51,6 +51,7 @@
     border: none !important;
     border-radius: 0 !important;
     box-shadow: none !important;
+    opacity: 1 !important;
 }
 
 .tabbrowser-tab .tab-content {
@@ -89,7 +90,7 @@
     opacity: 1 !important;
 }
 
-#TabsToolbar .tabbrowser-tab[multiselected="true"] .tab-line {
+#TabsToolbar .tabbrowser-tab[multiselected="true"] .tab-context-line {
     min-height: 1px !important;
     background-color: var(--multiselected-color) !important;
 }
@@ -105,8 +106,7 @@
 }
 
 .tabbrowser-tab:not([multiselected]) .tab-line,
-.tabbrowser-tab:not([usercontextid]) .tab-context-line,
-.tabbrowser-tab[multiselected][usercontextid] .tab-context-line {
+.tabbrowser-tab:not([usercontextid], [multiselected]) .tab-context-line {
     display: none !important;
 }
 
@@ -211,6 +211,7 @@
 
 .tabbrowser-tab :is(.tab-line, .tab-context-line) {
     z-index: 3;
+    position: relative !important;
 }
 
 .tabbrowser-tab .tab-content {
@@ -285,8 +286,8 @@
     );
 }
 
-.tabbrowser-tab[usercontextid]:is([selected], [pinned], :hover) .tab-stack:after,
-.tabbrowser-tab[usercontextid]:is([selected], [pinned], :hover) .tab-stack:before {
+.tabbrowser-tab[usercontextid]:is([selected], :hover) .tab-stack:after,
+.tabbrowser-tab[usercontextid]:is([selected], :hover) .tab-stack:before {
     background-image: linear-gradient(
         0deg,
         var(--identity-tab-color) 0px,
