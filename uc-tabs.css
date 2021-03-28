@@ -434,7 +434,6 @@
 }
 
 .tab-icon-sound {
-    margin-top: 1px !important;
     list-style-image: url(chrome://browser/skin/tabbrowser/tab-audio-playing.svg) !important;
     -moz-context-properties: fill !important;
     -moz-box-ordinal-group: 2 !important;
