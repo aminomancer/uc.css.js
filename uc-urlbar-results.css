@@ -254,11 +254,6 @@
     color: var(--lwt-toolbar-field-color);
 }
 
-.urlbarView-row .urlbarView-action {
-    align-self: center !important;
-    margin-top: 0.6px !important;
-}
-
 .urlbarView-action[slide-in] {
     animation: none !important;
 }
@@ -307,11 +302,6 @@
     min-height: 20px !important;
 }
 
-.urlbarView-url {
-    align-self: center !important;
-    margin-top: 0.6px !important;
-}
-
 .urlbarView-row[type="tabtosearch"]
     > .urlbarView-row-inner
     > .urlbarView-no-wrap
@@ -344,7 +334,7 @@
 
 #urlbar-input-container {
     background-color: var(--urlbar-input-bgcolor) !important;
-    margin-top: -0.6px !important;
+    margin-top: calc(0px - var(--urlbar-element-top-adjust-magnitude)) !important;
     transition: 220ms ease-in-out background-color 0s, 220ms ease-in-out box-shadow 0s !important;
 }
 
@@ -373,29 +363,21 @@
 #urlbar[breakout][breakout-extend-disabled][open] {
     top: calc((var(--urlbar-toolbar-height) - var(--urlbar-height)) / 2) !important;
     left: 0px !important;
-    width: calc(100% + 50px) !important;
-    height: auto !important;
-    padding-left: 25px !important;
-    padding-right: 25px !important;
-    margin-left: -25px !important;
+    width: -moz-available !important;
+    overflow: visible;
     box-shadow: none !important;
     background: none !important;
     transition: none !important;
-}
-
-#urlbar[breakout][breakout-extend] .urlbarView {
-    margin: 0 !important;
-    width: calc(100% + 6px) !important;
-    left: -3px !important;
-    position: relative !important;
 }
 
 .urlbarView {
     margin: 0 !important;
     width: calc(100% + 6px) !important;
     left: -3px !important;
+    position: relative !important;
     overflow: visible !important;
     box-shadow: none !important;
+    top: calc(var(--urlbar-element-top-adjust-magnitude) + (var(--urlbar-container-height) - var(--urlbar-height)) / 2) !important;
 }
 
 .urlbarView[noresults="true"] #urlbar-results {

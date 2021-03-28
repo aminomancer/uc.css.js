@@ -281,16 +281,6 @@
     }
 }
 
-/* search one offs visible when pageproxystate=invalid even if urlbar is not focused */
-#urlbar .urlbarView {
-    top: calc((var(--urlbar-container-height) - var(--urlbar-height)) / 2) !important;
-    margin: 0 !important;
-    width: calc(100% + 6px) !important;
-    left: -3px !important;
-    position: relative !important;
-    align-self: start !important;
-}
-
 /* individual search one off adjustments */
 #urlbar-engine-one-off-item-Gatherer .button-icon,
 #urlbar-engine-one-off-item-Scryfall .button-icon {

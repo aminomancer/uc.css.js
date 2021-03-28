@@ -479,7 +479,7 @@ toolbarpaletteitem[removable="false"]
 
 #identity-box:is(:not(.chromeUI), [pageproxystate="invalid"]),
 #tracking-protection-icon-container {
-    margin-top: 0.6px !important;
+    margin-top: var(--urlbar-element-top-adjust-magnitude) !important;
 }
 
 #tracking-protection-icon {
@@ -495,6 +495,7 @@ toolbarpaletteitem[removable="false"]
     padding-block: 0 !important;
     margin-block: 0 !important;
     margin-inline: 3px -3px !important;
+    background: none !important;
 }
 
 #identity-permission-box:is([open="true"], [hasPermissions], [hasSharingIcon]) + #notification-popup-box {

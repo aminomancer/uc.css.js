@@ -22,7 +22,7 @@
       this.options = options;
       this.dismissed = this.options.dismissed || false;
     }
-    
+
     async function init() {
         await sleep(3000);
         PanelUI._updateNotifications = function _updateNotifications(notificationsChanged) {
@@ -88,7 +88,6 @@
           AppMenuNotifications.showNotification = function showNotification(id, mainAction, secondaryAction, options = {}) {
             let newOptions = options;
             if (id === "update-available") {
-              newOptions.badgeOnly = true;
               newOptions.dismissed = true;
             }
             let notification = new AppMenuNotification(

@@ -6,11 +6,9 @@ menupopup::part(arrowscrollbox-scrollbox) {
     scroll-behavior: smooth !important;
 }
 
-#BMB_bookmarksPopup::part(arrowscrollbox) {
-	padding-block: 4px;
-}
-
-#BMB_bookmarksPopup menupopup::part(arrowscrollbox) {
+#BMB_bookmarksPopup::part(arrowscrollbox),
+#BMB_bookmarksPopup menupopup::part(arrowscrollbox),
+#BMB_bookmarksPopup menupopup[placespopup="true"]::part(arrowscrollbox) {
 	padding-block: 4px;
 }
 

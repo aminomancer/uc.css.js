@@ -11,8 +11,7 @@
 }
 
 .titlebar-spacer[type="pre-tabs"] {
-    border-inline-end: 0px solid white !important;
-    width: 0px !important;
+    display: none;
 }
 
 .titlebar-spacer[type="post-tabs"] {
@@ -24,38 +23,8 @@
     margin-left: -2px !important;
 }
 
-/* set with browser.tabs.tabMinWidth instead. i use 90 now */
-/* .tabbrowser-tab:not([pinned]) {
-    min-width: 76px !important;
-} */
-
-.tabbrowser-scroll-arrow-hide {
-    display: none !important;
-}
-
-.tabbrowser-scroll-start-indicator,
-.tabbrowser-scroll-end-indicator {
-    display: none !important;
-}
-
 #tabbrowser-tabs {
     background-color: var(--lwt-accent-color) !important;
-}
-
-link[href$="global.css"] ~ .menupopup-scrollbutton {
-    display: none !important;
-}
-link[href$="global.css"] ~ hbox > arrowscrollbox.in-bookmarks-menu {
-    padding-bottom: 0px !important;
-}
-link[href$="global.css"] ~ scrollbox {
-    padding-top: 0px !important;
-}
-link[href$="global.css"] ~ .scrollbutton-up,
-link[href$="global.css"] ~ .scrollbutton-down,
-link[href$="global.css"] ~ spacer[part="arrowscrollbox-overflow-start-indicator"],
-link[href$="global.css"] ~ spacer[part="arrowscrollbox-overflow-end-indicator"] {
-    display: none !important;
 }
 
 /* menubar next to tabs */
