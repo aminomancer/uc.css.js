@@ -41,7 +41,7 @@ If set to `true`, hides the close buttons for pinned tabs. This theme already hi
 `userChrome.tabs.rounded-outer-corners.disabled`:  
 As of 2/25/21, the theme adds rounded outside corners to tabs, sort of like Microsoft Edge does. They're designed to look like actual physical folder tabs, (the kind you'd stick folder labels onto if anyone still used paper folders) which was a popular UI choice when tabs were first introduced, since they were inspired by real folder tabs after all. If you're not a fan of this visual style, set this pref to `true`.
 
-<img src="preview/prev-tabcorners.png" width="254"/>
+<a href="https://youtu.be/BAuABH13ytM"><img src="preview/prev-tabcorners.png" width="254"/></a>
 
 
 <h2><b>Scripts:</b></h2>
