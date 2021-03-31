@@ -7,7 +7,7 @@
 }
 
 .urlbarView-row[selected] {
-    background: var(--arrowpanel-dimmed-even-further) !important;
+    background: var(--arrowpanel-dimmed-further) !important;
 }
 
 .urlbarView-row:not([selected]):hover {
@@ -33,12 +33,6 @@
 #urlbar-container {
     transform: translateY(0);
     position: relative;
-}
-
-#urlbar-results {
-    max-width: 100% !important;
-    top: 100% !important;
-    background: var(--urlbar-results-bgcolor) !important;
 }
 
 .urlbarView-row {
@@ -393,33 +387,13 @@
 }
 
 .urlbarView #urlbar-results {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: stretch;
+    gap: 3px;
+    background: var(--urlbar-results-bgcolor) !important;
     border-bottom-left-radius: 4px !important;
     border-bottom-right-radius: 4px !important;
     box-shadow: 0 5px 18px rgba(0, 0, 0, 0.2);
-    padding-left: 3px !important;
-    padding-right: 3px !important;
-    padding-top: 3px !important;
-    clip-path: inset(0 -100% -100% -100%);
-}
-
-.urlbarView-row:last-child {
-    margin-right: 474px !important;
-}
-
-@media screen and (min-height: 600px) {
-    .urlbarView .urlbarView-results[wrap] .urlbarView-row:last-child {
-        max-height: 26px !important;
-    }
-}
-
-#urlbar-results {
-    padding-bottom: 1px !important;
-}
-
-.urlbarView-row {
-    margin-bottom: 3px !important;
-}
-
-.urlbarView-row:last-child {
-    margin-right: initial !important;
+    padding: calc(3px - var(--urlbar-element-top-adjust-magnitude)) 3px !important;
 }

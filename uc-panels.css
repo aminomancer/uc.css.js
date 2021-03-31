@@ -437,6 +437,10 @@ popupnotification .popup-notification-checkbox:hover .checkbox-check[checked]:no
     background-image: var(--download-button-hover-bg) !important;
 }
 
+#downloadsPanel:not([hasdownloads="true"]) #downloadsFooterButtons > button:focus-visible:not(:hover) {
+    background-color: transparent !important;
+}
+
 #downloadsListBox > .download-state > toolbarseparator {
     visibility: collapse !important;
 }

@@ -473,7 +473,7 @@ tabmodalprompt .checkbox-check[checked="true"] {
     url("chrome://mozapps/content/handling/permissionDialog.xhtml"),
     url("chrome://mozapps/content/handling/appChooser.xhtml")
 {
-    #commonDialogWindow {
+    #commonDialogWindow, #commonDialogWindow * {
         --in-content-page-background: transparent !important;
         --in-content-page-color: var(--notification-menu-color) !important;
         --in-content-box-background: var(--dialog-box-bgcolor) !important;
@@ -495,10 +495,16 @@ tabmodalprompt .checkbox-check[checked="true"] {
         --in-content-primary-button-background: var(--purple-40) !important;
         --in-content-primary-button-background-hover: var(--purple-35) !important;
         --in-content-primary-button-background-active: var(--purple-30) !important;
+        --in-content-primary-button-text-color: var(--in-content-page-color) !important;
+        --dropdown-bgcolor: var(--arrowpanel-background) !important;
     }
 
     #commonDialog::part(content-box) {
         padding-block: 5px;
+    }
+
+    dialog[subdialog] .dialogRow {
+        margin-block: 0 5px !important;
     }
 
     .dialog-content-box:not([hidden]) + .dialog-button-box {
@@ -532,6 +538,7 @@ tabmodalprompt .checkbox-check[checked="true"] {
 
     checkbox[checked] > .checkbox-check,
     input[type="checkbox"]:checked {
+        color: var(--in-content-page-color) !important;
         background-color: var(--purple-40) !important;
     }
 
@@ -573,12 +580,17 @@ tabmodalprompt .checkbox-check[checked="true"] {
     richlistitem[selected="true"] > button[label] {
         border-color: var(--in-content-box-border-color) !important;
     }
+
+    select:not([size], [multiple]) > option {
+        background-color: var(--dropdown-bgcolor) !important;
+    }
 }
 
 @-moz-document url("chrome://mozapps/content/handling/permissionDialog.xhtml"),
-    url("chrome://mozapps/content/handling/appChooser.xhtml")
+    url("chrome://mozapps/content/handling/appChooser.xhtml"),
+    url-prefix("chrome://global/content/print.html")
 {
-    :root {
+    :root, window, dialog {
         --in-content-page-background: transparent !important;
         --in-content-page-color: var(--notification-menu-color) !important;
         --in-content-box-background: var(--dialog-box-bgcolor) !important;
@@ -600,5 +612,27 @@ tabmodalprompt .checkbox-check[checked="true"] {
         --in-content-primary-button-background: var(--purple-40) !important;
         --in-content-primary-button-background-hover: var(--purple-35) !important;
         --in-content-primary-button-background-active: var(--purple-30) !important;
+        --in-content-primary-button-text-color: var(--in-content-page-color) !important;
+        --dropdown-bgcolor: var(--arrowpanel-background) !important;
+    }
+
+    input[type="radio"],
+    .radio-check {
+        appearance: none;
+        width: 18px !important;
+        height: 18px !important;
+        border: 1px solid var(--in-content-box-border-color);
+        border-radius: 100%;
+        margin-block: 3px;
+        margin-inline: 0 10px;
+        background-color: var(--in-content-button-background);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 18px !important;
+        flex-shrink: 0;
+    }
+
+    select:not([size], [multiple]) > option {
+        background-color: var(--dropdown-bgcolor) !important;
     }
 }

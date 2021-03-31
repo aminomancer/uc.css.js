@@ -169,7 +169,7 @@
     -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity !important;
     fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
     margin-bottom: -39px !important;
-    z-index: 6 !important;
+    z-index: 2500 !important;
     margin-inline-start: -20px !important;
     background-size: 17px !important;
     background-position-x: 1.4px !important;
