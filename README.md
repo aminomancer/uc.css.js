@@ -14,35 +14,77 @@ My personal Firefox theme/layout, plus some privileged scripts to add new behavi
 <br>
 <p></p>
 
-Make sure to set the following in about:config: `svg.context-properties.content.enabled` to `true`; and `ui.systemUsesDarkTheme` to `1`. Then set density mode to `Normal` in the customization menu. (right click on the navbar and click "Customize Toolbar") <details><summary>Currently I recommend using this on Nightly, and setting all of the proton prefs to true. Click for a full list.</summary>`browser.proton.appmenu.enabled`  
-`browser.proton.contextmenus.enabled`  
-`browser.proton.doorhangers.enabled`  
-`browser.proton.enabled`  
-`browser.proton.places-tooltip.enabled`  
-`browser.proton.tabs.enabled`  
-`browser.proton.toolbar.enabled`  
-`browser.proton.urlbar.enabled`</details>
-
+For best results, set density mode to `Normal` and theme to `Dark` in the customization menu. (right click on the navbar and click "Customize Toolbar...") I recommend using this on Firefox Nightly, updating at least weekly, and setting the following prefs in about:config:<details><summary>*Click for a full list.*</summary>
+| Pref&nbsp;name 	| Pref&nbsp;type 	| Value 	| Notes&nbsp;(optional&nbsp;unless&nbsp;otherwise&nbsp;noted) 	|
+|-	|-	|-	|-	|
+| browser.anchor_color 	| String 	| `#5311ff` 	|  	|
+| browser.display.focus_ring_style 	| Number 	| 0 	|  	|
+| browser.display.focus_ring_width 	| Number 	| 0 	|  	|
+| browser.proton.appmenu.enabled 	| Boolean 	| true 	| The stylesheets have fallback options if these prefs are disabled. But the fallback styles are not regularly updated. So I strongly recommend enabling all of the proton prefs 	|
+| browser.proton.contextmenus.enabled 	| Boolean 	| true 	|  	|
+| browser.proton.doorhangers.enabled 	| Boolean 	| true 	|  	|
+| browser.proton.enabled 	| Boolean 	| true 	|  	|
+| browser.proton.infobars.enabled 	| Boolean 	| true 	|  	|
+| browser.proton.modals.enabled 	| Boolean 	| true 	|  	|
+| browser.proton.places-tooltip.enabled 	| Boolean 	| true 	|  	|
+| browser.proton.tabs.audio-tab 	| Boolean 	| true 	|  	|
+| browser.proton.tabs.audio-tab-area 	| Boolean 	| true 	|  	|
+| browser.proton.tabs.enabled 	| Boolean 	| true 	|  	|
+| browser.proton.toolbar.enabled 	| Boolean 	| true 	|  	|
+| browser.proton.urlbar.enabled 	| Boolean 	| true 	|  	|
+| browser.startup.blankWindow 	| Boolean 	| false 	| These two settings eliminate the blank white window during startup 	|
+| browser.startup.preXulSkeletonUI 	| Boolean 	| false 	|  	|
+| browser.tabs.tabMinWidth 	| Number 	| 90 	| User preference, but mine is 90 	|
+| browser.tabs.tabmanager.enabled 	| Boolean 	| true 	| Enables "all tabs menu" 	|
+| browser.urlbar.accessibility.tabToSearch.announceResults 	| Boolean 	| false 	|  	|
+| browser.urlbar.richSuggestions.tail 	| Boolean 	| false 	|  	|
+| browser.urlbar.searchTips 	| Boolean 	| false 	|  	|
+| browser.urlbar.trimURLs 	| Boolean 	| false 	|  	|
+| dom.forms.selectSearch 	| Boolean 	| true 	|  	|
+| extensions.activeThemeID 	| String 	| `default-theme@mozilla.org` 	| Any dark theme will work 	|
+| findbar.highlightAll 	| Boolean 	| true 	| Stylesheet eliminates some rarely used findbar buttons. So I leave this set to true 	|
+| findbar.matchdiacritics 	| Number 	| 2 	|  	|
+| gfx.font_rendering.cleartype_params.cleartype_level 	| Number 	| 100 	| These settings are a major improvement to text rendering on Windows. Idk about mac/linux 	|
+| gfx.font_rendering.cleartype_params.force_gdi_classic_for_families 	| String 	| `<empty>` 	| Leave the value completely empty 	|
+| gfx.font_rendering.cleartype_params.force_gdi_classic_max_size 	| Number 	| 6 	|  	|
+| gfx.font_rendering.cleartype_params.pixel_structure 	| Number 	| 1 	|  	|
+| gfx.font_rendering.cleartype_params.rendering_mode 	| Number 	| 5 	|  	|
+| gfx.font_rendering.directwrite.use_gdi_table_loading 	| Boolean 	| false 	|  	|
+| gfx.webrender.svg-images 	| Boolean 	| true 	|  	|
+| layout.css.backdrop-filter.enabled 	| Boolean 	| true 	| Required for the acrylic/glass gaussian blur effect 	|
+| layout.css.moz-document.content.enabled 	| Boolean 	| true 	| Required 	|
+| reader.color_scheme 	| String 	| `dark` 	|  	|
+| svg.context-properties.content.enabled 	| Boolean 	| true 	| Required for making some icons white 	|
+| toolkit.legacyUserProfileCustomizations.stylesheets 	| Boolean 	| true 	| Required, of course 	|
+| ui.IMERawInputBackground 	| String 	| `#000000` 	| This affects the appearance of IME overlays. e.g. when typing Hangul or Pinyin 	|
+| ui.IMESelectedRawTextBackground 	| String 	| `#7755FF` 	|  	|
+| ui.SpellCheckerUnderline 	| String 	| `#E2467A` 	|  	|
+| ui.prefersReducedMotion 	| Number 	| 0 	|  	|
+| ui.submenuDelay 	| Number 	| 100 	| These aren't required, but feel more responsive imo 	|
+| ui.tooltipDelay 	| Number 	| 100 	|  	|
+| ui.systemUsesDarkTheme 	| Number 	| 1 	| Currently required; working on a light mode 	|
+| ui.textHighlightBackground 	| String 	| `#7755FF` 	| These prefs control the appearance of text highlighted by the findbar. I choose white text on purple/pink background 	|
+| ui.textHighlightForeground 	| String 	| `#FFFFFF` 	|  	|
+| ui.textSelectBackground 	| String 	| `#FFFFFF` 	|  	|
+| ui.textSelectBackgroundAttention 	| String 	| `#FF3388` 	|  	|
+| ui.textSelectBackgroundDisabled 	| String 	| `#000000` 	|  	|
+| ui.textSelectForegroundAttention 	| String 	| `#000000` 	|  	|
+| ui.textSelectForegroundCustom 	| String 	| `#7755FF` 	|  	|
+| userChrome... 	|  	|  	| Several of my scripts use custom prefs beginning with `userChrome` for user cusotmization. See the individual script files for details 	|
+| userChrome.tabs.pinned-tabs.close-buttons.disabled 	| Boolean 	| true 	| This controls whether close buttons are shown on pinned tabs 	|
+| userChrome.tabs.rounded-outer-corners.disabled 	| Boolean 	| false 	| This controls whether tabs have rounded bottom corners<br><a href="https://youtu.be/BAuABH13ytM"><img src="preview/prev-tabcorners.png" width="254"/></a> 	|
+| widget.chrome.allow-gtk-dark-theme 	| Boolean 	| true 	| I'm not sure if these still do anything. But might as well enable them 	|
+| widget.content.allow-gtk-dark-theme 	| Boolean 	| true 	|  	|
+| widget.disable-native-theme-for-content 	| Boolean 	| true 	| Enables Firefox's custom appearance for elements like checkboxes. Overrides the "native" appearance given by the OS stylesheets. 	|
+</details>
+<br>
 The `userContent.css` file handles stuff like the devtools, some UI pages and context menus, plaintext pages, browser background color while pages are loading, and the built-in HTML video player. It also includes some site-specific changes like my personal dark mode layout for Wikipedia. It isn't required for the rest of the theme to work, but takes care of some issues endemic to Firefox that might cause dark mode users a lot of grief otherwise.
 
 `userChrome.css` doesn't require any fonts, but `userContent.css` uses [Overpass](https://fonts.google.com/specimen/Overpass), [Overpass Mono](https://fonts.google.com/specimen/Overpass+Mono) and [Cutive Mono](https://fonts.google.com/specimen/Cutive+Mono) for plaintext files and the picture-in-picture button. Since they're free and show up frequently, it makes sense to install them locally rather than use webfont.
 
 To get the complete functionality [shown in the video](https://youtu.be/BAuABH13ytM), you'll need to install at least some of the scripts. The stylesheets work fine without the scripts, but functionally it'll be just like vanilla Firefox. Instructions and explanations for the scripts are below.
 
-I don't use tree style tabs but I've tested this with TST and they don't seem to interact in a negative way. It just doesn't fully style all the TST stuff. I'll probably make a TST theme if someone asks, but since I don't use the extension myself it's not a high priority.
-
 Most of the important colors can be changed in uc-globals.css and uc-variables.css, but I'm still in the process of making everything easily configurable and adding a light mode. It's just a theme I built for personal use over the course of a couple years, so there isn't much top-down organization at the moment.
-
-The theme can be customized with preferences in about:config. There are more prefs for the individual scripts too, which are documented in the script descriptions. Here are the CSS prefs:
-
-`userChrome.tabs.pinned-tabs.close-buttons.disabled`:  
-If set to `true`, hides the close buttons for pinned tabs. This theme already hides the close buttons on every tab, but when you hover a tab, its close button is normally revealed. Since the theme makes pinned tabs quite small, you might want to eliminate the close buttons for pinned tabs completely so you don't accidentally click on them. This is what I use personally, I just close pinned tabs by middle-clicking them.
-
-`userChrome.tabs.rounded-outer-corners.disabled`:  
-As of 2/25/21, the theme adds rounded outside corners to tabs, sort of like Microsoft Edge does. They're designed to look like actual physical folder tabs, (the kind you'd stick folder labels onto if anyone still used paper folders) which was a popular UI choice when tabs were first introduced, since they were inspired by real folder tabs after all. If you're not a fan of this visual style, set this pref to `true`.
-
-<a href="https://youtu.be/BAuABH13ytM"><img src="preview/prev-tabcorners.png" width="254"/></a>
-
 
 <h2><b>Scripts:</b></h2>
 
@@ -90,7 +132,7 @@ In the main directory on this repo you might notice two files: `userChrome.as.cs
 
 -   `letCtrlWClosePinnedTabs`: The name should say it all, this just removes the "feature" that prevents you from closing pinned tabs with the Ctrl+W/Cmd+W shortcut.
 
--   `minBrowserNavbar`: This script makes the Firefox navbar UI more like [Min Browser](https://minbrowser.org/) by hiding the main toolbar until the selected tab is clicked. The idle state is such that only the tab bar is visible at the top. Clicking the selected tab will automatically open the urlbar and focus the input area, while hiding the tab bar. It's essentially like the tab bar gets replaced by the urlbar (and other toolbar buttons) when the currently-open tab is clicked. When the urlbar area is un-focused, whether by clicking outside of it or by executing a search or URL navigation, the urlbar is automatically hidden again and replaced by the tab bar. Opening a new (blank) tab will also select the urlbar. <details><summary>More details...</summary>Clicking and dragging tabs, and closing tabs with middle click, are still allowed. In order to preserve functionality, some new buttons have been added to the tab bar: back/forward/reload navigation buttons, and min/max/close buttons. Speaking of which, this handles all 3 size modes: normal, maximized, and fullscreen.  
+-   `minBrowserNavbar`: This script makes the Firefox navbar UI more like [Min Browser](https://minbrowser.org/) by hiding the main toolbar until the selected tab is clicked. The idle state is such that only the tab bar is visible at the top. Clicking the selected tab will automatically open the urlbar and focus the input area, while hiding the tab bar. It's essentially like the tab bar gets replaced by the urlbar (and other toolbar buttons) when the currently-open tab is clicked. When the urlbar area is un-focused, whether by clicking outside of it or by executing a search or URL navigation, the urlbar is automatically hidden again and replaced by the tab bar. Opening a new (blank) tab will also select the urlbar. <details><summary><i>More details...</i></summary>Clicking and dragging tabs, and closing tabs with middle click, are still allowed. In order to preserve functionality, some new buttons have been added to the tab bar: back/forward/reload navigation buttons, and min/max/close buttons. Speaking of which, this handles all 3 size modes: normal, maximized, and fullscreen.  
 In order to fully emulate Min Browser, the script closes the urlbar results whenever a different tab is clicked. However, this behavior can be disabled by toggling userChrome.minBrowser.resetOnBlur in about:config. In order to make everything look right, the tab bar and nav bar are given the same height, which is defined by a variable. This variable can also be changed by editing userChrome.minBrowser.toolbarHeight in about:config.  
 I've set up the styling so that it should be as versatile as possible, working with the default layout, the proton layout, and probably most user layouts. Still, you may need to set the colors yourself. For instance, by default the backgrounds of the tab bar and the navbar are different colors. If you want them to be the same color, you'll need to handle that yourself — I wouldn't change something like that in this script, or I'd end up making it unusable for some people.  
 And if you have a lot of your own customizations, you'll probably need to make some changes, either in your own userChrome.css or by editing the stylesheet embedded in this script (search "const css").</details>

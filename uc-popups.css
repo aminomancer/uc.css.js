@@ -588,7 +588,8 @@ tabmodalprompt .checkbox-check[checked="true"] {
 
 @-moz-document url("chrome://mozapps/content/handling/permissionDialog.xhtml"),
     url("chrome://mozapps/content/handling/appChooser.xhtml"),
-    url-prefix("chrome://global/content/print.html")
+    url-prefix("chrome://global/content/print.html"),
+    url("chrome://browser/content/places/bookmarkProperties.xhtml")
 {
     :root, window, dialog {
         --in-content-page-background: transparent !important;
@@ -634,5 +635,20 @@ tabmodalprompt .checkbox-check[checked="true"] {
 
     select:not([size], [multiple]) > option {
         background-color: var(--dropdown-bgcolor) !important;
+    }
+
+    #editBMPanel_tagsField {
+        margin-block: 0 !important;
+        padding-block: 0 !important;
+        margin-inline-end: 8px !important;
+    }
+
+    #editBMPanel_tagsSelectorExpander {
+        min-height: 28px !important;
+        min-width: 28px !important;
+    }
+
+    #editBMPanel_tagsSelector {
+        margin-inline: 4px !important;
     }
 }
