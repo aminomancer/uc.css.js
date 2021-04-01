@@ -76,7 +76,7 @@ For best results, set density mode to `Normal` and theme to `Dark` in the custom
 | widget.content.allow-gtk-dark-theme 	| Boolean 	| true 	|  	|
 | widget.disable-native-theme-for-content 	| Boolean 	| true 	| Enables Firefox's custom appearance for elements like checkboxes. Overrides the "native" appearance given by the OS stylesheets. 	|
 </details>
-<br>
+
 The `userContent.css` file handles stuff like the devtools, some UI pages and context menus, plaintext pages, browser background color while pages are loading, and the built-in HTML video player. It also includes some site-specific changes like my personal dark mode layout for Wikipedia. It isn't required for the rest of the theme to work, but takes care of some issues endemic to Firefox that might cause dark mode users a lot of grief otherwise.
 
 `userChrome.css` doesn't require any fonts, but `userContent.css` uses [Overpass](https://fonts.google.com/specimen/Overpass), [Overpass Mono](https://fonts.google.com/specimen/Overpass+Mono) and [Cutive Mono](https://fonts.google.com/specimen/Cutive+Mono) for plaintext files and the picture-in-picture button. Since they're free and show up frequently, it makes sense to install them locally rather than use webfont.
