@@ -36,25 +36,25 @@ For best results, set density mode to `Normal` and theme to `Dark` in the custom
 | browser.startup.preXulSkeletonUI 	| Boolean 	| false 	|  	|
 | browser.tabs.tabMinWidth 	| Number 	| 90 	| User preference, but mine is 90 	|
 | browser.tabs.tabmanager.enabled 	| Boolean 	| true 	| Enables "all tabs menu" 	|
-| browser.urlbar.accessibility.tabToSearch<br>.announceResults 	| Boolean 	| false 	|  	|
+| browser.urlbar.accessibility.tabToSearch.announceResults 	| Boolean 	| false 	|  	|
 | browser.urlbar.richSuggestions.tail 	| Boolean 	| false 	|  	|
 | browser.urlbar.searchTips 	| Boolean 	| false 	|  	|
 | browser.urlbar.trimURLs 	| Boolean 	| false 	|  	|
 | dom.forms.selectSearch 	| Boolean 	| true 	|  	|
 | findbar.highlightAll 	| Boolean 	| true 	| Stylesheet eliminates some rarely used findbar buttons. So I leave this set to true 	|
 | findbar.matchdiacritics 	| Number 	| 2 	|  	|
-| gfx.font_rendering.cleartype_params<br>.cleartype_level 	| Number 	| 100 	| These settings are a major improvement to text rendering on Windows. Idk about mac/linux 	|
-| gfx.font_rendering.cleartype_params<br>.force_gdi_classic_for_families 	| String 	| `<empty>` 	| Leave the value completely empty 	|
-| gfx.font_rendering.cleartype_params<br>.force_gdi_classic_max_size 	| Number 	| 6 	|  	|
-| gfx.font_rendering.cleartype_params<br>.pixel_structure 	| Number 	| 1 	|  	|
-| gfx.font_rendering.cleartype_params<br>.rendering_mode 	| Number 	| 5 	|  	|
-| gfx.font_rendering.directwrite<br>.use_gdi_table_loading 	| Boolean 	| false 	|  	|
+| gfx.font_rendering.cleartype_params.cleartype_level 	| Number 	| 100 	| These settings are a major improvement to text rendering on Windows. Idk about mac/linux 	|
+| gfx.font_rendering.cleartype_params.force_gdi_classic_for_families 	| String 	| `<empty>` 	| Leave the value completely empty 	|
+| gfx.font_rendering.cleartype_params.force_gdi_classic_max_size 	| Number 	| 6 	|  	|
+| gfx.font_rendering.cleartype_params.pixel_structure 	| Number 	| 1 	|  	|
+| gfx.font_rendering.cleartype_params.rendering_mode 	| Number 	| 5 	|  	|
+| gfx.font_rendering.directwrite.use_gdi_table_loading 	| Boolean 	| false 	|  	|
 | gfx.webrender.svg-images 	| Boolean 	| true 	|  	|
 | layout.css.backdrop-filter.enabled 	| Boolean 	| true 	| Required for the acrylic/glass gaussian blur effect 	|
 | layout.css.moz-document.content.enabled 	| Boolean 	| true 	| Required 	|
 | reader.color_scheme 	| String 	| `dark` 	|  	|
 | svg.context-properties.content.enabled 	| Boolean 	| true 	| Required for making some icons white 	|
-| toolkit.legacyUserProfileCustomizations<br>.stylesheets 	| Boolean 	| true 	| Required, of course 	|
+| toolkit.legacyUserProfileCustomizations.stylesheets 	| Boolean 	| true 	| Required, of course 	|
 | ui.IMERawInputBackground 	| String 	| `#000000` 	| This affects the appearance of IME overlays. e.g. when typing Hangul or Pinyin 	|
 | ui.IMESelectedRawTextBackground 	| String 	| `#7755FF` 	|  	|
 | ui.SpellCheckerUnderline 	| String 	| `#E2467A` 	|  	|
@@ -70,7 +70,7 @@ For best results, set density mode to `Normal` and theme to `Dark` in the custom
 | ui.textSelectForegroundAttention 	| String 	| `#000000` 	|  	|
 | ui.textSelectForegroundCustom 	| String 	| `#7755FF` 	|  	|
 | userChrome... 	|  	|  	| Several of my scripts use custom prefs beginning with `userChrome` for user cusotmization. See the individual script files for details 	|
-| userChrome.tabs.pinned-tabs<br>.close-buttons.disabled 	| Boolean 	| true 	| This controls whether close buttons are shown on pinned tabs 	|
+| userChrome.tabs.pinned-tabs.close-buttons.disabled 	| Boolean 	| true 	| This controls whether close buttons are shown on pinned tabs 	|
 | userChrome.tabs.rounded-outer-corners.disabled 	| Boolean 	| false 	| This controls whether tabs have rounded bottom corners<br><a href="https://youtu.be/BAuABH13ytM"><img src="preview/prev-tabcorners.png" width="100%"/></a> 	|
 | widget.chrome.allow-gtk-dark-theme 	| Boolean 	| true 	| I'm not sure if these still do anything. But might as well enable them 	|
 | widget.content.allow-gtk-dark-theme 	| Boolean 	| true 	|  	|
