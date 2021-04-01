@@ -222,6 +222,7 @@
                         };
                         let attr = {
                             id: "toolbox-button",
+                            role: "button",
                             class: "toolbarbutton-1 chromeclass-toolbar-additional",
                             label: "Browser Toolbox",
                             tooltiptext: "Open Content/Browser Toolbox",

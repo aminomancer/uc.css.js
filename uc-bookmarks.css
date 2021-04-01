@@ -5,14 +5,14 @@
 #main-window #editBMPanel_tagsField,
 #main-window #editBMPanel_namePicker,
 #editBookmarkPanel input {
-    -moz-appearance: none !important;
-    user-select: text !important;
+    appearance: none !important;
     -moz-user-select: text !important;
     background-color: var(--ui-textbox-bgcolor) !important;
     color: #fff !important;
     border: none !important;
-    padding: 2px;
-    padding-inline: 6px;
+    padding-block: 2px !important;
+    padding-inline: 6px !important;
+    outline: none !important;
     border-radius: 2px !important;
     min-height: 24px !important;
     box-sizing: border-box !important;
@@ -24,24 +24,25 @@
 }
 
 #editBookmarkPanelRows {
-    padding-inline: 10px !important;
-    padding-block: 6px 0 !important;
+    padding-inline: 14px !important;
+    padding-block: 8px 0 !important;
 }
 
 #editBookmarkPanelBottomContent {
     padding-inline: 10px !important;
-    padding-block: 0 8px !important;
+    padding-block: 6px 8px !important;
 }
 
 #editBookmarkPanelRows > vbox {
-    margin-bottom: 4px !important;
+    margin-block: 0 !important;
+    padding-block: 8px 0 !important;
 }
 
 #editBookmarkPanel menulist {
     -moz-appearance: none !important;
     background-color: var(--ui-textbox-bgcolor) !important;
     line-height: normal;
-    padding-block: 2px;
+    padding-block: 2px !important;
     padding-inline: 3px 5px !important;
     color: #fff !important;
     border: none !important;
@@ -50,7 +51,7 @@
     box-shadow: none !important;
     --menupopup-inner-padding: 0 !important;
     --context-menuitem-border-radius: 0 !important;
-    margin: 2px 4px !important;
+    margin: 0 !important;
 }
 
 #editBookmarkPanel menulist[open="true"] {
@@ -76,11 +77,13 @@
     border: none !important;
     border-radius: 2px !important;
     overflow: hidden !important;
+    margin: 0 !important;
 }
 
 #editBookmarkPanel richlistbox {
     border-radius: 2px !important;
     overflow: hidden !important;
+    margin: 0 !important;
 }
 
 #editBookmarkPanel treechildren::-moz-tree-row(hover),
@@ -177,11 +180,8 @@
     -moz-appearance: none !important;
     background-color: var(--ui-textbox-bgcolor) !important;
     line-height: normal;
-    padding-bottom: 2px;
-    padding-left: 2.5px;
-    padding-right: 2px;
-    padding-top: 3px;
-    margin-left: 4px !important;
+    padding: 2px;
+    margin: 0 !important;
     color: #fff !important;
     border: none !important;
     border-radius: 2px !important;
@@ -209,6 +209,7 @@
     margin: 0 !important;
     padding-inline: 0 !important;
     flex-basis: 25% !important;
+    border-radius: var(--toolbarbutton-border-radius) !important;
 }
 
 #editBookmarkPanel .panel-footer > button.editBookmarkPanelBottomButton[default] {
@@ -239,15 +240,19 @@
     background-color: hsl(234, 30%, 30%) !important;
 }
 
-#editBookmarkPanel .expander-up,
-#editBookmarkPanel .expander-down {
+#editBMPanel_tagsField {
+	display: -moz-inline-box !important;
+}
+
+#editBookmarkPanel #editBookmarkPanelContent .expander-up,
+#editBookmarkPanel #editBookmarkPanelContent .expander-down {
     -moz-appearance: none !important;
     background-color: var(--ui-textbox-bgcolor) !important;
     padding: 0 !important;
     min-width: 24px !important;
-    min-height: 24px;
+    min-height: 24px !important;
     box-sizing: border-box !important;
-    margin-left: 0px !important;
+    margin-left: 6px !important;
     color: #fff !important;
     border: none !important;
     transform: none !important;
@@ -317,6 +322,7 @@
     width: 12px !important;
     padding: 1px !important;
     opacity: 0.8 !important;
+    margin-right: 0 !important;
     list-style-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNNSAyYy0xLjY1NCAwLTMgMS4zNDYtMyAzdjE0YzAgMS42NTQgMS4zNDYgMyAzIDNoMTRjMS42NTQgMCAzLTEuMzQ2IDMtM3YtMTRjMC0xLjY1NC0xLjM0Ni0zLTMtM2gtMTR6bTE5IDN2MTRjMCAyLjc2MS0yLjIzOCA1LTUgNWgtMTRjLTIuNzYyIDAtNS0yLjIzOS01LTV2LTE0YzAtMi43NjEgMi4yMzgtNSA1LTVoMTRjMi43NjIgMCA1IDIuMjM5IDUgNXoiIGZpbGw9ImNvbnRleHQtZmlsbCIgZmlsbC1vcGFjaXR5PSJjb250ZXh0LWZpbGwtb3BhY2l0eSIvPjwvc3ZnPg==");
 }
 

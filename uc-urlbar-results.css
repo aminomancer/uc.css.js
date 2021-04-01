@@ -331,7 +331,7 @@
     transition: 220ms ease-in-out background-color 0s, 220ms ease-in-out box-shadow 0s !important;
 }
 
-#urlbar[focused="true"] > #urlbar-input-container {
+#urlbar:is([focused="true"], :focus-within) > #urlbar-input-container {
     background-color: var(--urlbar-input-bgcolor-even-brighter) !important;
 }
 

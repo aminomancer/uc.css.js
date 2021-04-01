@@ -20,6 +20,7 @@
         setupForBrowser(event) {
             if (event.target.ownerGlobal !== this) return; // make sure event was called from this window, otherwise we might have problems when multiple windows are open.
             let findbar = this.gFindBar; // just an alias
+            let getBounds = window.windowUtils.getBoundsWithoutFlushing;
 
             function exitFindBar(e) {
                 if (e.repeat || e.shiftKey || e.altKey) {
@@ -45,25 +46,83 @@
                 }
             }
 
+            function onKey(e) {
+                if (this.hasMenu() && this.open) return;
+                // handle arrow key focus navigation
+                else {
+                    if (
+                        e.keyCode == KeyEvent.DOM_VK_UP ||
+                        (e.keyCode == KeyEvent.DOM_VK_LEFT &&
+                            document.defaultView.getComputedStyle(this.parentNode).direction ==
+                                "ltr") ||
+                        (e.keyCode == KeyEvent.DOM_VK_RIGHT &&
+                            document.defaultView.getComputedStyle(this.parentNode).direction ==
+                                "rtl")
+                    ) {
+                        e.preventDefault();
+                        window.document.commandDispatcher.rewindFocus();
+                        return;
+                    }
+                    if (
+                        e.keyCode == KeyEvent.DOM_VK_DOWN ||
+                        (e.keyCode == KeyEvent.DOM_VK_RIGHT &&
+                            document.defaultView.getComputedStyle(this.parentNode).direction ==
+                                "ltr") ||
+                        (e.keyCode == KeyEvent.DOM_VK_LEFT &&
+                            document.defaultView.getComputedStyle(this.parentNode).direction ==
+                                "rtl")
+                    ) {
+                        e.preventDefault();
+                        window.document.commandDispatcher.advanceFocus();
+                        return;
+                    }
+                }
+                // handle access keys
+                if (!e.charCode || e.charCode <= 32 || e.altKey || e.ctrlKey || e.metaKey) return;
+                const charLower = String.fromCharCode(e.charCode).toLowerCase();
+                if (this.accessKey.toLowerCase() == charLower) {
+                    this.click();
+                    return;
+                }
+                // check against accesskeys of siblings and activate them if matched
+                for (const el of Object.values(this.parentElement.children))
+                    if (el.accessKey.toLowerCase() === charLower) {
+                        el.focus();
+                        el.click();
+                        return;
+                    }
+            }
+
             function domSetup() {
                 findbar._tinyIndicator = document.createElement("label"); // the new mini indicator that will read something like 1/27 instead of 1 of 27 matches.
+                findbar._caseSensitiveButton = findbar.querySelector(".findbar-case-sensitive");
+                findbar._entireWordButton = findbar.querySelector(".findbar-entire-word");
+                findbar._closeButton = findbar.querySelector(".findbar-closebutton");
                 // my own findbar CSS is pretty complicated. it turns the findbar into a small floating box rather than a bar that covers the full width of the window and flexes the browser out of the way. mine hovers over the window, i.e. like position: absolute & display: block. i also hide all the buttons except the next, previous, and close buttons. so my findbar is tiny but since we're adding an indicator we might as well make the text field bigger. the default firefox findbar is really silly, why have such a giant findbar if the text field is only gonna be 14em?
                 // there's also some CSS in my stylesheets that gives the findbar a smooth transition and starting animation and compresses the buttons and stuff. the effects of this script probably look really weird without those rules so i'd definitely look for the findbar rules in my repo if you're gonna try this script.
                 findbar._findField.style.width = "20em";
                 findbar._tinyIndicator.style.cssText = // this could all be set in a stylesheet, i just put it here so the core CSS won't get separated from the javascript it depends on. the other stuff in the stylesheets works with or without this script. whereas this code is exclusive to the new match indicator.
-                    "box-sizing: border-box; display: inline-block; -moz-box-align: center; margin: 0; line-height: 20px; position: fixed; font-size: 10px; right: 113px; color: hsla(0, 0%, 100%, 0.25); pointer-events: none; padding-inline-start: 20px; mask-image: linear-gradient(to right, transparent 0px, black 20px);";
+                    "box-sizing: border-box; display: inline-block; -moz-box-align: center; margin: 0; line-height: 20px; position: fixed; font-size: 10px; right: 107px; color: hsla(0, 0%, 100%, 0.25); pointer-events: none; padding-inline-start: 20px; mask-image: linear-gradient(to right, transparent 0px, black 20px);";
                 findbar._tinyIndicator.className = "matches-indicator"; // for styling the background color changes which depend on the status of the findbar and whether it's focused
+                findbar._findField.parentNode.after(findbar._closeButton);
                 findbar._findField.after(findbar._tinyIndicator); // put it after the input box so we can use the ~ squiggly combinator
-                findbar // move the match-case and entire-word buttons into the text field. uc-findbar.css turns these buttons into mini icons, same size as the next/previous buttons. this way we can fit everything important into one row.
-                    .getElementsByClassName("findbar-find-next")[0]
-                    .after(
-                        findbar.getElementsByClassName("findbar-case-sensitive")[0],
-                        findbar.getElementsByClassName("findbar-entire-word")[0]
-                    );
+                // move the match-case and entire-word buttons into the text field. uc-findbar.css turns these buttons into mini icons, same size as the next/previous buttons. this way we can fit everything important into one row.
+                findbar._tinyIndicator.after(
+                    findbar._caseSensitiveButton,
+                    findbar._entireWordButton
+                );
             }
 
             domSetup();
             findbar.addEventListener("keypress", exitFindBar, true); // set up hotkey ctrl+F to close findbar when it's already open
+            findbar._caseSensitiveButton.addEventListener("keypress", onKey);
+            findbar._entireWordButton.addEventListener("keypress", onKey);
+
+            setTimeout(() => {
+                let distanceFromEdge =
+                    getBounds(findbar).right - getBounds(findbar._caseSensitiveButton).left;
+                findbar._tinyIndicator.style.right = `${distanceFromEdge + 1}px`;
+            }, 500);
 
             // override the native function so it updates both labels.
             findbar.onMatchesCountResult = function onMatchesCountResult(result) {

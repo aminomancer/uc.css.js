@@ -197,15 +197,33 @@ notification[value="keyword-uri-fixup"] {
     outline: unset !important;
 }
 
-/* get rid of ugly outline on focused and clicked buttons and shit */
-:not(#browser) :-moz-focusring,
-:not(#browser) :focus,
-:not(#browser) button::-moz-focus-inner,
-:not(#browser) :-moz-focusring *,
-:not(#browser) :focus * {
+:-moz-focusring,
+:focus,
+button::-moz-focus-inner,
+:-moz-focusring *,
+:focus *,
+:-moz-focusring:focus:not(:focus-visible),
+:-moz-focusring:focus:not(:focus-visible) > * {
     outline: unset !important;
     outline-offset: unset !important;
     -moz-outline-radius: unset !important;
+}
+
+toolbarbutton:focus-visible,
+.keyboard-focused-tab > .tab-stack > .tab-background,
+.tabbrowser-tab:focus:not([aria-activedescendant]) > .tab-stack > .tab-background,
+.identity-box-button:not(:active):focus-visible,
+#tracking-protection-icon-container:not(:active):focus-visible,
+#PersonalToolbar .toolbarbutton-1:focus-visible,
+findbar toolbarbutton.tabbable:focus-visible,
+toolbarbutton.bookmark-item:not(.subviewbutton):focus-visible,
+toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-icon,
+toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-text,
+toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-badge-stack {
+	color: inherit;
+	outline: unset !important;
+	-moz-outline-radius: unset !important;
+	outline-offset: unset !important;
 }
 
 :is(#mainPopupSet, #browser, #navigator-toolbox, .sidebar-panel) ::selection,

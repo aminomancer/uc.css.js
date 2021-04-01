@@ -137,7 +137,12 @@
     background-color: var(--arrowpanel-dimmed-further) !important;
 }
 
-#sidebar-switcher-target:hover {
+#sidebar-switcher-target:-moz-focusring,
+#sidebar-close:-moz-focusring {
+    outline: unset !important;
+}
+
+#sidebar-switcher-target:is(:hover, :focus-visible) {
     background: var(--arrowpanel-dimmed) !important;
 }
 
@@ -156,11 +161,11 @@
     height: auto !important;
 }
 
-#sidebar-close:hover {
+#sidebar-close:is(:hover, :focus-visible) {
     background-color: var(--arrowpanel-dimmed) !important;
 }
 
-#sidebar-close:hover:active {
+#sidebar-close:is(:hover, :focus-visible):active {
     background-color: var(--arrowpanel-dimmed-further) !important;
 }
 

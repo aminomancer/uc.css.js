@@ -230,7 +230,7 @@ link[href="chrome://global/skin/arrowscrollbox.css"] ~ :is(#scrollbutton-up, #sc
 }
 
 .findbar-find-next {
-    border-start-end-radius: 2px;
-    border-end-end-radius: 2px;
+    border-start-end-radius: 0;
+    border-end-end-radius: 0;
     margin-inline-end: 0;
 }

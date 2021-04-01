@@ -26,6 +26,7 @@ tooltip {
     --update-badge-bg: hsl(125, 81%, 57%);
     --update-badge-color: hsl(118, 89%, 24%);
     --update-badge-inactive: hsl(227, 19%, 48%);
+    --attention-color: hsl(224, 100%, 71%);
     --global-selection-bgcolor: rgba(142, 132, 255, 0.5);
     --global-selection-color: white;
     --url-selection-bgcolor: rgba(142, 132, 255, 0.5);
@@ -46,6 +47,8 @@ tooltip {
     --tab-multi: linear-gradient(180deg, hsl(231, 50%, 11%), hsl(233, 53%, 8%));
     --tab-multi-hover: linear-gradient(180deg, hsl(231, 47%, 13%), hsl(233, 51%, 10%));
     --tab-pinned-hover: linear-gradient(0deg, var(--toolbar-bgcolor), var(--lwt-accent-color));
+    --tab-focused-highlight: hsl(231, 36%, 24%);
+    --tab-focused-hover: linear-gradient(0deg, var(--toolbar-bgcolor), color-mix(in srgb, var(--tab-focused-highlight) 50%, var(--toolbar-bgcolor)));
     --multiselected-color: hsl(241, 50%, 51%);
     --search-box-color: hsl(229, 32%, 23%);
     --search-box-focus: hsl(229, 27%, 27%);

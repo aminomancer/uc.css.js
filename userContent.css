@@ -70,7 +70,7 @@
     }
 }
 
-:-moz-focusring {
+:-moz-focusring:focus:not(:focus-visible) {
     outline: unset !important;
     outline-offset: unset !important;
 }
