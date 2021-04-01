@@ -329,14 +329,12 @@
     #appMenu-quit-button2 {
         list-style-image: url(chrome://browser/skin/quit.svg);
     }
-
-    #appMenu-fxa-status2 {
-        list-style-image: url(chrome://browser/skin/fxa/avatar.svg) !important;
-    }
-
-    #appMenu-fxa-status2 .toolbarbutton-icon {
-        width: 16px !important;
-        height: 16px !important;
+    
+    #appMenu-fxa-label2:before {
+        -moz-context-properties: fill, fill-opacity;
+        content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='context-fill' fill-opacity='context-fill-opacity'><path d='M8 0C3.58 0 0 3.58 0 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm0 2.29c1.89 0 3.43 1.54 3.43 3.43S9.89 9.14 8 9.14 4.57 7.61 4.57 5.71 6.11 2.29 8 2.29zm4.7 8.92c-1.8 2.59-5.36 3.24-7.95 1.44-.56-.39-1.05-.88-1.44-1.44-.29-.44-.24-1.02.13-1.41 1.13-1.39 2.82.49 4.56.49s3.43-1.87 4.63-.48c.34.39.37.97.07 1.4z'/></svg>");
+        fill: currentColor;
+        display: -moz-box;
     }
 
     #appMenu-save-file-button2 > .toolbarbutton-text,
@@ -366,7 +364,7 @@
     #appmenu-moreTools-button > .toolbarbutton-text,
     #appMenu-quit-button2 > .toolbarbutton-text,
     #appMenu-zoom-controls2 > .toolbarbutton-text,
-    #appMenu-fxa-status2 > #appMenu-fxa-label2 > .toolbarbutton-text {
+    #appMenu-fxa-status2 #appMenu-header-description {
         padding-inline-start: 8px !important;
     }
 
@@ -433,9 +431,18 @@
         background: none !important;
     }
 
-    #appMenu-fxa-status2[fxastatus] > #appMenu-fxa-label2 {
+    #appMenu-fxa-status2 > #appMenu-fxa-label2 {
         padding-block: calc(var(--arrowpanel-menuitem-padding) + 2px) !important;
         font-weight: unset !important;
+    }
+
+    #appMenu-fxa-status2 > #appMenu-fxa-label2 label {
+        font-weight: unset !important;
+    }
+
+    .panel-banner-item {
+        padding-block: calc(var(--arrowpanel-menuitem-padding) + 2px) !important;
+        margin: var(--arrowpanel-menuitem-margin) !important;
     }
 
     #appMenu-proton-update-banner {
