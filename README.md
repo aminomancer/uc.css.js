@@ -41,7 +41,6 @@ For best results, set density mode to `Normal` and theme to `Dark` in the custom
 | browser.urlbar.searchTips 	| Boolean 	| false 	|  	|
 | browser.urlbar.trimURLs 	| Boolean 	| false 	|  	|
 | dom.forms.selectSearch 	| Boolean 	| true 	|  	|
-| extensions.activeThemeID 	| String 	| `default-theme@mozilla.org` 	| Any dark theme will work 	|
 | findbar.highlightAll 	| Boolean 	| true 	| Stylesheet eliminates some rarely used findbar buttons. So I leave this set to true 	|
 | findbar.matchdiacritics 	| Number 	| 2 	|  	|
 | gfx.font_rendering.cleartype_params<br>.cleartype_level 	| Number 	| 100 	| These settings are a major improvement to text rendering on Windows. Idk about mac/linux 	|
