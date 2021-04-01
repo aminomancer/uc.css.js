@@ -15,7 +15,7 @@ My personal Firefox theme/layout, plus some privileged scripts to add new behavi
 <p></p>
 
 For best results, set density mode to `Normal` and theme to `Dark` in the customization menu. (right click on the navbar and click "Customize Toolbar...") I recommend using this on Firefox Nightly, updating at least weekly, and setting the following prefs in about:config:<details><summary>*Click for a full list.*</summary>
-| Pref&nbsp;name 	| Pref&nbsp;type 	| Value 	| Notes&nbsp;(optional&nbsp;unless&nbsp;otherwise&nbsp;noted) 	|
+| Pref&nbsp;name 	| Type 	| Value 	| Notes&nbsp;(optional&nbsp;unless&nbsp;otherwise&nbsp;noted) 	|
 |-	|-	|-	|-	|
 | browser.anchor_color 	| String 	| `#5311ff` 	|  	|
 | browser.display.focus_ring_style 	| Number 	| 0 	|  	|
@@ -71,7 +71,7 @@ For best results, set density mode to `Normal` and theme to `Dark` in the custom
 | ui.textSelectForegroundCustom 	| String 	| `#7755FF` 	|  	|
 | userChrome... 	|  	|  	| Several of my scripts use custom prefs beginning with `userChrome` for user cusotmization. See the individual script files for details 	|
 | userChrome.tabs.pinned-tabs<br>.close-buttons.disabled 	| Boolean 	| true 	| This controls whether close buttons are shown on pinned tabs 	|
-| userChrome.tabs.rounded-outer-corners.disabled 	| Boolean 	| false 	| This controls whether tabs have rounded bottom corners<br><a href="https://youtu.be/BAuABH13ytM"><img src="preview/prev-tabcorners.png" width="254"/></a> 	|
+| userChrome.tabs.rounded-outer-corners.disabled 	| Boolean 	| false 	| This controls whether tabs have rounded bottom corners<br><a href="https://youtu.be/BAuABH13ytM"><img src="preview/prev-tabcorners.png" width="100%"/></a> 	|
 | widget.chrome.allow-gtk-dark-theme 	| Boolean 	| true 	| I'm not sure if these still do anything. But might as well enable them 	|
 | widget.content.allow-gtk-dark-theme 	| Boolean 	| true 	|  	|
 | widget.disable-native-theme-for-content 	| Boolean 	| true 	| Enables Firefox's custom appearance for elements like checkboxes. Overrides the "native" appearance given by the OS stylesheets. 	|
