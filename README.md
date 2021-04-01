@@ -4,77 +4,77 @@ My personal Firefox theme/layout, plus some privileged scripts to add new behavi
 
 <a href="https://youtu.be/BAuABH13ytM">
 <i>Click any of the gifs for a more thorough video preview of the theme and some of the major scripts.</i>
-<br>
+<br/>
 <p></p>
 <img src="preview/prev-navbar.gif"/>
-<br>
+<br/>
 <p></p>
 <img src="preview/prev-search.gif"/>
 </a>
-<br>
+<br/>
 <p></p>
 
 For best results, set density mode to `Normal` and theme to `Dark` in the customization menu. (right click on the navbar and click "Customize Toolbar...") I recommend using this on Firefox Nightly, updating at least weekly, and setting the following prefs in about:config:<details><summary>*Click for a full list.*</summary>
 | Pref&nbsp;name 	| Type 	| Value 	| Notes&nbsp;(optional&nbsp;unless&nbsp;otherwise&nbsp;noted) 	|
 |-	|-	|-	|-	|
-| `browser.anchor_color` 	| String 	| `#5311ff` 	|  	|
-| `browser.display.focus_ring_style` 	| Number 	| 0 	|  	|
-| `browser.display.focus_ring_width` 	| Number 	| 0 	|  	|
-| `browser.proton.appmenu.enabled` 	| Boolean 	| true 	| The stylesheets have fallback options if these prefs are disabled. But the fallback styles are not regularly updated. So I strongly recommend enabling all of the proton prefs 	|
-| `browser.proton.contextmenus.enabled` 	| Boolean 	| true 	|  	|
-| `browser.proton.doorhangers.enabled` 	| Boolean 	| true 	|  	|
-| `browser.proton.enabled` 	| Boolean 	| true 	|  	|
-| `browser.proton.infobars.enabled` 	| Boolean 	| true 	|  	|
-| `browser.proton.modals.enabled` 	| Boolean 	| true 	|  	|
-| `browser.proton.places-tooltip.enabled` 	| Boolean 	| true 	|  	|
-| `browser.proton.tabs.audio-tab` 	| Boolean 	| true 	|  	|
-| `browser.proton.tabs.audio-tab-area` 	| Boolean 	| true 	|  	|
-| `browser.proton.tabs.enabled` 	| Boolean 	| true 	|  	|
-| `browser.proton.toolbar.enabled` 	| Boolean 	| true 	|  	|
-| `browser.proton.urlbar.enabled` 	| Boolean 	| true 	|  	|
-| `browser.startup.blankWindow` 	| Boolean 	| false 	| These two settings eliminate the blank white window during startup 	|
-| `browser.startup.preXulSkeletonUI` 	| Boolean 	| false 	|  	|
-| `browser.tabs.tabMinWidth` 	| Number 	| 90 	| User preference, but mine is 90 	|
-| `browser.tabs.tabmanager.enabled` 	| Boolean 	| true 	| Enables "all tabs menu" 	|
-| `browser.urlbar.accessibility.tabToSearch.announceResults` 	| Boolean 	| false 	|  	|
-| `browser.urlbar.richSuggestions.tail` 	| Boolean 	| false 	|  	|
-| `browser.urlbar.searchTips` 	| Boolean 	| false 	|  	|
-| `browser.urlbar.trimURLs` 	| Boolean 	| false 	|  	|
-| `dom.forms.selectSearch` 	| Boolean 	| true 	|  	|
-| `findbar.highlightAll` 	| Boolean 	| true 	| Stylesheet eliminates some rarely used findbar buttons. So I leave this set to true 	|
-| `findbar.matchdiacritics` 	| Number 	| 2 	|  	|
-| `gfx.font_rendering.cleartype_params.cleartype_level` 	| Number 	| 100 	| These settings are a major improvement to text rendering on Windows. Idk about mac/linux 	|
-| `gfx.font_rendering.cleartype_params.force_gdi_classic_for_families` 	| String 	| `<empty>` 	| Leave the value completely empty 	|
-| `gfx.font_rendering.cleartype_params.force_gdi_classic_max_size` 	| Number 	| 6 	|  	|
-| `gfx.font_rendering.cleartype_params.pixel_structure` 	| Number 	| 1 	|  	|
-| `gfx.font_rendering.cleartype_params.rendering_mode` 	| Number 	| 5 	|  	|
-| `gfx.font_rendering.directwrite.use_gdi_table_loading` 	| Boolean 	| false 	|  	|
-| `gfx.webrender.svg-images` 	| Boolean 	| true 	|  	|
-| `layout.css.backdrop-filter.enabled` 	| Boolean 	| true 	| Required for the acrylic/glass gaussian blur effect 	|
-| `layout.css.moz-document.content.enabled` 	| Boolean 	| true 	| Required 	|
-| `reader.color_scheme` 	| String 	| `dark` 	|  	|
-| `svg.context-properties.content.enabled` 	| Boolean 	| true 	| Required for making some icons white 	|
-| `toolkit.legacyUserProfileCustomizations.stylesheets` 	| Boolean 	| true 	| Required, of course 	|
-| `ui.IMERawInputBackground` 	| String 	| `#000000` 	| This affects the appearance of IME overlays. e.g. when typing Hangul or Pinyin 	|
-| `ui.IMESelectedRawTextBackground` 	| String 	| `#7755FF` 	|  	|
-| `ui.SpellCheckerUnderline` 	| String 	| `#E2467A` 	|  	|
-| `ui.prefersReducedMotion` 	| Number 	| 0 	|  	|
-| `ui.submenuDelay` 	| Number 	| 100 	| These aren't required, but feel more responsive imo 	|
-| `ui.tooltipDelay` 	| Number 	| 100 	|  	|
-| `ui.systemUsesDarkTheme` 	| Number 	| 1 	| Currently required; working on a light mode 	|
-| `ui.textHighlightBackground` 	| String 	| `#7755FF` 	| These prefs control the appearance of text highlighted by the findbar. I choose white text on purple/pink background 	|
-| `ui.textHighlightForeground` 	| String 	| `#FFFFFF` 	|  	|
-| `ui.textSelectBackground` 	| String 	| `#FFFFFF` 	|  	|
-| `ui.textSelectBackgroundAttention` 	| String 	| `#FF3388` 	|  	|
-| `ui.textSelectBackgroundDisabled` 	| String 	| `#000000` 	|  	|
-| `ui.textSelectForegroundAttention` 	| String 	| `#000000` 	|  	|
-| `ui.textSelectForegroundCustom` 	| String 	| `#7755FF` 	|  	|
-| `userChrome...` 	|  	|  	| Several of my scripts use custom prefs beginning with `userChrome` for user cusotmization. See the individual script files for details 	|
-| `userChrome.tabs.pinned-tabs.close-buttons.disabled` 	| Boolean 	| true 	| This controls whether close buttons are shown on pinned tabs 	|
-| `userChrome.tabs.rounded-outer-corners.disabled` 	| Boolean 	| false 	| This controls whether tabs have rounded bottom corners<br><a href="https://youtu.be/BAuABH13ytM"><img src="preview/prev-tabcorners.png" width="100%"/></a> 	|
-| `widget.chrome.allow-gtk-dark-theme` 	| Boolean 	| true 	| I'm not sure if these still do anything. But might as well enable them 	|
-| `widget.content.allow-gtk-dark-theme` 	| Boolean 	| true 	|  	|
-| `widget.disable-native-theme-for-content` 	| Boolean 	| true 	| Enables Firefox's custom appearance for elements like checkboxes. Overrides the "native" appearance given by the OS stylesheets. 	|
+| browser.anchor_color 	| String 	| `#5311ff` 	|  	|
+| browser.display.focus_ring_style 	| Number 	| 0 	|  	|
+| browser.display.focus_ring_width 	| Number 	| 0 	|  	|
+| browser.proton.appmenu.enabled 	| Boolean 	| true 	| The stylesheets have fallback options if these prefs are disabled. But the fallback styles are not regularly updated. So I strongly recommend enabling all of the proton prefs 	|
+| browser.proton.contextmenus.enabled 	| Boolean 	| true 	|  	|
+| browser.proton.doorhangers.enabled 	| Boolean 	| true 	|  	|
+| browser.proton.enabled 	| Boolean 	| true 	|  	|
+| browser.proton.infobars.enabled 	| Boolean 	| true 	|  	|
+| browser.proton.modals.enabled 	| Boolean 	| true 	|  	|
+| browser.proton.places-tooltip.enabled 	| Boolean 	| true 	|  	|
+| browser.proton.tabs.audio-tab 	| Boolean 	| true 	|  	|
+| browser.proton.tabs.audio-tab-area 	| Boolean 	| true 	|  	|
+| browser.proton.tabs.enabled 	| Boolean 	| true 	|  	|
+| browser.proton.toolbar.enabled 	| Boolean 	| true 	|  	|
+| browser.proton.urlbar.enabled 	| Boolean 	| true 	|  	|
+| browser.startup.blankWindow 	| Boolean 	| false 	| These two settings eliminate the blank white window during startup 	|
+| browser.startup.preXulSkeletonUI 	| Boolean 	| false 	|  	|
+| browser.tabs.tabMinWidth 	| Number 	| 90 	| User preference, but mine is 90 	|
+| browser.tabs.tabmanager.enabled 	| Boolean 	| true 	| Enables "all tabs menu" 	|
+| browser.urlbar.accessibility.tabToSearch.announceResults 	| Boolean 	| false 	|  	|
+| browser.urlbar.richSuggestions.tail 	| Boolean 	| false 	|  	|
+| browser.urlbar.searchTips 	| Boolean 	| false 	|  	|
+| browser.urlbar.trimURLs 	| Boolean 	| false 	|  	|
+| dom.forms.selectSearch 	| Boolean 	| true 	|  	|
+| findbar.highlightAll 	| Boolean 	| true 	| Stylesheet eliminates some rarely used findbar buttons. So I leave this set to true 	|
+| findbar.matchdiacritics 	| Number 	| 2 	|  	|
+| gfx.font_rendering.cleartype_params.cleartype_level 	| Number 	| 100 	| These settings are a major improvement to text rendering on Windows. Idk about mac/linux 	|
+| gfx.font_rendering.cleartype_params.force_gdi_classic_for_families 	| String 	| `<empty>` 	| Leave the value completely empty 	|
+| gfx.font_rendering.cleartype_params.force_gdi_classic_max_size 	| Number 	| 6 	|  	|
+| gfx.font_rendering.cleartype_params.pixel_structure 	| Number 	| 1 	|  	|
+| gfx.font_rendering.cleartype_params.rendering_mode 	| Number 	| 5 	|  	|
+| gfx.font_rendering.directwrite.use_gdi_table_loading 	| Boolean 	| false 	|  	|
+| gfx.webrender.svg-images 	| Boolean 	| true 	|  	|
+| layout.css.backdrop-filter.enabled 	| Boolean 	| true 	| Required for the acrylic/glass gaussian blur effect 	|
+| layout.css.moz-document.content.enabled 	| Boolean 	| true 	| Required 	|
+| reader.color_scheme 	| String 	| `dark` 	|  	|
+| svg.context-properties.content.enabled 	| Boolean 	| true 	| Required for making some icons white 	|
+| toolkit.legacyUserProfileCustomizations.stylesheets 	| Boolean 	| true 	| Required, of course 	|
+| ui.IMERawInputBackground 	| String 	| `#000000` 	| This affects the appearance of IME overlays. e.g. when typing Hangul or Pinyin 	|
+| ui.IMESelectedRawTextBackground 	| String 	| `#7755FF` 	|  	|
+| ui.SpellCheckerUnderline 	| String 	| `#E2467A` 	|  	|
+| ui.prefersReducedMotion 	| Number 	| 0 	|  	|
+| ui.submenuDelay 	| Number 	| 100 	| These aren't required, but feel more responsive imo 	|
+| ui.tooltipDelay 	| Number 	| 100 	|  	|
+| ui.systemUsesDarkTheme 	| Number 	| 1 	| Currently required; working on a light mode 	|
+| ui.textHighlightBackground 	| String 	| `#7755FF` 	| These prefs control the appearance of text highlighted by the findbar. I choose white text on purple/pink background 	|
+| ui.textHighlightForeground 	| String 	| `#FFFFFF` 	|  	|
+| ui.textSelectBackground 	| String 	| `#FFFFFF` 	|  	|
+| ui.textSelectBackgroundAttention 	| String 	| `#FF3388` 	|  	|
+| ui.textSelectBackgroundDisabled 	| String 	| `#000000` 	|  	|
+| ui.textSelectForegroundAttention 	| String 	| `#000000` 	|  	|
+| ui.textSelectForegroundCustom 	| String 	| `#7755FF` 	|  	|
+| userChrome... 	|  	|  	| Several of my scripts use custom prefs beginning with `userChrome` for user cusotmization. See the individual script files for details 	|
+| userChrome.tabs.pinned-tabs.close-buttons.disabled 	| Boolean 	| true 	| This controls whether close buttons are shown on pinned tabs 	|
+| userChrome.tabs.rounded-outer-corners.disabled 	| Boolean 	| false 	| This controls whether tabs have rounded bottom corners<br/><a href="https://youtu.be/BAuABH13ytM"><img src="preview/prev-tabcorners.png" width="100%"/></a> 	|
+| widget.chrome.allow-gtk-dark-theme 	| Boolean 	| true 	| I'm not sure if these still do anything. But might as well enable them 	|
+| widget.content.allow-gtk-dark-theme 	| Boolean 	| true 	|  	|
+| widget.disable-native-theme-for-content 	| Boolean 	| true 	| Enables Firefox's custom appearance for elements like checkboxes. Overrides the "native" appearance given by the OS stylesheets. 	|
 </details>
 
 The `userContent.css` file handles stuff like the devtools, some UI pages and context menus, plaintext pages, browser background color while pages are loading, and the built-in HTML video player. It also includes some site-specific changes like my personal dark mode layout for Wikipedia. It isn't required for the rest of the theme to work, but takes care of some issues endemic to Firefox that might cause dark mode users a lot of grief otherwise.
@@ -105,7 +105,7 @@ If you're using MrOtherGuy's script manager like I recommended, then your script
 After you've installed the files, the script loader will locate any scripts you place in the proper folder that end in .uc.js, such as the ones in my repo. Once you have all this set up you can download my scripts, put them in the correct folder for your loader, restart, and you should see the changes immediately.
 
 In the main directory on this repo you might notice two files: `userChrome.as.css` and `userChrome.au.css`. These are loaded by the scripts: `userChrome_as_css_module.uc.js` and `userChrome_au_css_module.uc.js`. The main purposes for using these instead of your main userChrome.css are 1) to use CSS syntax that is forbidden to user sheets, such as the `::part(...)` pseudo-element; 2) to style native-anonymous content like default tooltips or scrollbars; or 3) to traverse shadow trees from parent to children, e.g. when you need to select a specific menupopup's children without affecting other menupopups' children. In some cases, this is impossible even in an agent sheet for some reason I haven't figured out yet. In those cases I use javascript to traverse the shadow tree, and then assign a unique ID or class to the shadow DOM nodes I want to style with specificity. Then, I use the regular `userChrome.css` stylesheet to implement those rules. So, for example, `bookmarksPopupShadowRoot` gives several elements in the bookmarks toolbar popup unique classes, which are styled later in my main stylesheets.
-<br>
+<br/>
 
 ### **Script descriptions:**
 
