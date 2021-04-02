@@ -589,7 +589,8 @@ tabmodalprompt .checkbox-check[checked="true"] {
 @-moz-document url("chrome://mozapps/content/handling/permissionDialog.xhtml"),
     url("chrome://mozapps/content/handling/appChooser.xhtml"),
     url-prefix("chrome://global/content/print.html"),
-    url("chrome://browser/content/places/bookmarkProperties.xhtml")
+    url("chrome://browser/content/places/bookmarkProperties.xhtml"),
+    url("chrome://browser/content/places/bookmarkProperties2.xhtml")
 {
     :root, window, dialog {
         --in-content-page-background: transparent !important;
@@ -601,6 +602,7 @@ tabmodalprompt .checkbox-check[checked="true"] {
         --in-content-button-background-hover: var(--arrowpanel-dimmed-further) !important;
         --in-content-button-background-active: var(--arrowpanel-dimmed-even-further) !important;
         --in-content-item-selected: var(--purple-40) !important;
+        --in-content-item-hover: var(--arrowpanel-dimmed) !important;
         --in-content-border-highlight: var(--purple-40) !important;
         --in-content-border-hover: var(--dialog-box-border-hover) !important;
         --in-content-border-focus: var(--purple-40) !important;
@@ -637,18 +639,38 @@ tabmodalprompt .checkbox-check[checked="true"] {
         background-color: var(--dropdown-bgcolor) !important;
     }
 
-    #editBMPanel_tagsField {
-        margin-block: 0 !important;
-        padding-block: 0 !important;
-        margin-inline-end: 8px !important;
-    }
-
-    #editBMPanel_tagsSelectorExpander {
-        min-height: 28px !important;
-        min-width: 28px !important;
+    .expander-up, .expander-down {
+        min-height: 24px !important;
+        min-width: 24px !important;
+        margin-inline-start: 4px !important;
     }
 
     #editBMPanel_tagsSelector {
         margin-inline: 4px !important;
+    }
+
+    #editBookmarkPanelRows {
+        padding-inline: 0 !important;
+        padding-block: 0 8px !important;
+    }
+
+    menulist, input {
+        margin-inline: 4px !important;
+        padding-block: 0 !important;
+        padding-inline: 6px !important;
+        margin-block: 0 !important;
+        min-height: 24px !important;
+    }
+
+    menulist {
+        padding-inline: 4px 2px !important;
+    }
+    
+    tree {
+        margin-inline: 4px !important;
+    }
+    
+    button {
+        border-radius: var(--toolbarbutton-border-radius) !important;
     }
 }

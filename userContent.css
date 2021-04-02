@@ -214,6 +214,7 @@
     --context-padding-inline: 28px 0;
     --context-margin-inline: -16px 0;
     --arrowpanel-background: hsl(233, 36%, 11%);
+    --menu-color: color: var(--ui-text-80) !important;
     --menupopup-background: var(--arrowpanel-background);
     --menu-background-color: var(--arrowpanel-background) !important;
     --menu-right-bg: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='5px' height='5px' viewBox='0 0 492 492' xml:space='preserve'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M382.678,226.804L163.73,7.86C158.666,2.792,151.906,0,144.698,0s-13.968,2.792-19.032,7.86l-16.124,16.12    c-10.492,10.504-10.492,27.576,0,38.064L293.398,245.9l-184.06,184.06c-5.064,5.068-7.86,11.824-7.86,19.028    c0,7.212,2.796,13.968,7.86,19.04l16.124,16.116c5.068,5.068,11.824,7.86,19.032,7.86s13.968-2.792,19.032-7.86L382.678,265    c5.076-5.084,7.864-11.872,7.848-19.088C390.542,238.668,387.754,231.884,382.678,226.804z'/></svg>");
@@ -366,11 +367,12 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
 @supports (-moz-bool-pref("browser.proton.contextmenus.enabled")) {
     #ContentSelectDropdown {
         --menupopup-child-margin-block-start: -4px;
-        --menupopup-child-margin-inline-start: 4px;
+        --menupopup-child-margin-inline-start: 0;
         --arrowpanel-menuitem-border-radius: 3px !important;
         --menupopup-border-radius: 3px !important;
         --context-menuitem-border-radius: var(--arrowpanel-menuitem-border-radius);
         --menupopup-inner-padding: 4px;
+        --menu-color: color: var(--ui-text-80) !important;
         --menupopup-background: transparent;
         --menu-background-color: var(--arrowpanel-background) !important;
         --menu-right-bg: none;
@@ -387,7 +389,7 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
     }
 
     #ContentSelectDropdown > menupopup menu > menupopup {
-        margin-inline-start: 4px !important;
+        margin-inline-start: var(--menupopup-child-margin-inline-start) !important;
     }
 
     #ContentSelectDropdown > menupopup .menu-text {
@@ -478,8 +480,8 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
 
 @-moz-document url-prefix("chrome://devtools/content/")
 {
-    :root {
-        --min-tab-height: 35px !important;
+    :root,
+    menupopup {
         --inline-tab-padding: 10px !important;
         --default_tab_border_roundness: 5px;
         --tab_close_icons_size: 16px;
@@ -574,6 +576,7 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
         --min-tab-height: 35px !important;
         --context-margin-inline: -16px 0;
         --context-padding-inline: 28px 0;
+        --menu-color: color: var(--ui-text-80) !important;
         --menupopup-background: var(--arrowpanel-background);
         --menu-background-color: var(--arrowpanel-background) !important;
         --menupopup-margin: 0px 0 0 0;
@@ -592,7 +595,8 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
     }
 
     @supports (-moz-bool-pref("browser.proton.enabled")) {
-        :root {
+        :root,
+        menupopup {
             --panelview-toolbarbutton-hover-bgcolor: var(--arrowpanel-dimmed) !important;
             --panelview-toolbarbutton-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
             --panelview-toolbarbutton-focus-box-shadow: none !important;
@@ -616,6 +620,7 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
 
     @supports (-moz-bool-pref("browser.proton.toolbar.enabled")) {
         :root,
+        menupopup
         #TabsToolbar {
             --toolbarbutton-inner-padding: 6px !important;
         }
@@ -628,7 +633,8 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
     }
 
     @supports (-moz-bool-pref("browser.proton.tabs.enabled")) {
-        :root {
+        :root,
+        menupopup {
             --proton-tab-inline-padding: 0 !important;
             --proton-shadow-blur-radius: 0 !important;
         }
@@ -645,12 +651,14 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
     }
 
     @supports (-moz-bool-pref("browser.proton.contextmenus.enabled")) {
-        :root {
+        :root,
+        menupopup {
+            --menu-color: color: var(--ui-text-80) !important;
             --menupopup-background: transparent;
             --menu-background-color: var(--arrowpanel-background) !important;
             --menupopup-margin: 0;
             --menupopup-child-margin-block-start: -4px;
-            --menupopup-child-margin-inline-start: 4px;
+            --menupopup-child-margin-inline-start: 0;
             --menupopup-padding: 0;
             --menupopup-inner-padding: 4px;
             --context-padding-inline: 28px 0 !important;
@@ -810,7 +818,7 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
         }
 
         menu > menupopup {
-            margin-inline-start: 4px !important;
+            margin-inline-start: var(--menupopup-child-margin-inline-start) !important;
         }
 
         :not(.subviewbutton) > .menu-text {
@@ -894,7 +902,8 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
     }
 }
 
-:root {
+:root,
+menupopup {
     --in-content-category-outline-focus: transparent !important;
 }
 

@@ -1,5 +1,5 @@
-:root {
-    --min-tab-height: 35px !important;
+:root,
+menupopup {
     --pinned-tab-width: 36px;
     --inline-tab-padding: 10px !important;
     --default_tab_border_roundness: 5px;
@@ -102,6 +102,7 @@
     --min-tab-height: 35px !important;
     --context-margin-inline: -14px 0;
     --context-padding-inline: 27px 0;
+    --menu-color: color: var(--ui-text-80) !important;
     --menupopup-background: var(--arrowpanel-background);
     --menu-background-color: var(--arrowpanel-background) !important;
     --menupopup-margin: 0px 0 0 0;
@@ -149,7 +150,8 @@ toolbar {
 }
 
 @supports (-moz-bool-pref("browser.proton.enabled")) {
-    :root {
+    :root,
+    menupopup {
         --panelview-toolbarbutton-hover-bgcolor: var(--arrowpanel-dimmed) !important;
         --panelview-toolbarbutton-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
         --panelview-toolbarbutton-focus-box-shadow: none !important;
@@ -173,6 +175,7 @@ toolbar {
 
 @supports (-moz-bool-pref("browser.proton.toolbar.enabled")) {
     :root,
+    menupopup,
     #TabsToolbar {
         --toolbarbutton-inner-padding: 6px !important;
     }
@@ -185,7 +188,8 @@ toolbar {
 }
 
 @supports (-moz-bool-pref("browser.proton.tabs.enabled")) {
-    :root {
+    :root,
+    menupopup {
         --proton-tab-inline-padding: 0 !important;
         --tab-shadow-max-size: 0 !important;
     }
@@ -202,12 +206,13 @@ toolbar {
 }
 
 @supports (-moz-bool-pref("browser.proton.contextmenus.enabled")) {
-    :root {
+    :root,
+    menupopup {
         --menupopup-background: transparent;
         --menu-background-color: var(--arrowpanel-background) !important;
         --menupopup-margin: 0;
         --menupopup-child-margin-block-start: -4px;
-        --menupopup-child-margin-inline-start: 4px;
+        --menupopup-child-margin-inline-start: 0;
         --menupopup-padding: 0;
         --menupopup-inner-padding: 4px;
         --context-padding-inline: 28px 0 !important;

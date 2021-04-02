@@ -255,7 +255,7 @@ menupopup.in-menulist {
     }
 
     menu > menupopup {
-        margin-inline-start: 4px !important;
+        margin-inline-start: var(--menupopup-child-margin-inline-start) !important;
     }
 
     :not(.subviewbutton) > .menu-text {

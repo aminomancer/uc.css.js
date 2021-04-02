@@ -27,21 +27,41 @@
 .protections-popup-category,
 .protections-popup-footer-button {
     border-radius: var(--toolbarbutton-border-radius) !important;
-    margin-inline: calc(
-        var(--horizontal-padding) - var(--arrowpanel-menuitem-inline-margin) - 5px
-    ) !important;
+    margin-inline: calc(var(--vertical-section-padding) - 4px) !important;
 }
 
 .protections-popup-category {
-    padding-inline: calc(var(--arrowpanel-menuitem-inline-margin) + 5px) !important;
+    padding-inline: calc(var(--arrowpanel-menuitem-inline-margin) + 3px) !important;
+    padding-block: var(--arrowpanel-menuitem-inline-margin) !important;
+    height: unset !important;
+    max-height: unset !important;
+    min-height: 28px !important;
 }
 
 .protections-popup-footer-button {
-    padding-inline: calc(var(--arrowpanel-menuitem-inline-margin) + 1px) !important;
+    padding-inline: calc(var(--arrowpanel-menuitem-inline-margin) + 3px) !important;
+    padding-block: var(--arrowpanel-menuitem-inline-margin) !important;
+    height: unset !important;
+    max-height: unset !important;
+    min-height: 28px !important;
 }
 
 #protections-popup-footer-protection-type-label {
     margin-inline-end: 0 !important;
+}
+
+#protections-popup-trackers-blocked-counter-box {
+    margin-inline-end: calc(var(--vertical-section-padding) + 3px) !important;
+}
+
+#protections-popup-blocking-section-header, #protections-popup-not-blocking-section-header, #protections-popup-not-found-section-header {
+	margin: 0;
+	padding-inline: calc(var(--vertical-section-padding) + 3px) !important;
+	color: var(--panel-description-color);
+}
+
+#protections-popup-siteNotWorkingView-header, #protections-popup-tp-switch-section {
+	padding-inline: calc(var(--vertical-section-padding) + 3px) !important;
 }
 
 .protections-popup-category::after {

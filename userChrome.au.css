@@ -139,28 +139,34 @@ link[href="chrome://global/skin/arrowscrollbox.css"] ~ :is(#scrollbutton-up, #sc
 }
 
 /* dropmarkers and other select/menulist stuff */
-@-moz-document url(chrome://browser/content/browser.xhtml)
+@-moz-document url(chrome://browser/content/browser.xhtml),
+    url("chrome://mozapps/content/handling/permissionDialog.xhtml"),
+    url("chrome://mozapps/content/handling/appChooser.xhtml"),
+    url-prefix("chrome://global/content/print.html"),
+    url("chrome://browser/content/places/bookmarkProperties.xhtml"),
+    url("chrome://browser/content/places/bookmarkProperties2.xhtml")
 {
     menulist:not([native]) {
         padding-inline: 6px;
     }
 
-    panel menulist::part(dropmarker-icon) {
+    :is(panel, dialog) menulist::part(dropmarker-icon) {
         appearance: none;
         list-style-image: url("chrome://devtools/skin/images/select-arrow.svg");
         margin-block: 0 !important;
+        width: 10px !important;
     }
 
-    panel menulist::part(dropmarker) {
+    :is(panel, dialog) menulist::part(dropmarker) {
         margin-inline-start: 6px;
     }
 
-    panel menulist::part(dropmarker),
-    panel menulist::part(icon) {
+    :is(panel, dialog) menulist::part(dropmarker),
+    :is(panel, dialog) menulist::part(icon) {
         -moz-context-properties: fill, fill-opacity;
     }
 
-    panel menulist::part(label) {
+    :is(panel, dialog) menulist::part(label) {
         font-weight: normal;
     }
 
