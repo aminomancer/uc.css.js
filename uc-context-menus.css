@@ -366,7 +366,7 @@ menupopup.in-menulist {
         height: 34px;
         padding: 0 !important;
         -moz-box-flex: 1;
-        border-radius: var(--toolbarbutton-border-radius);
+        border-radius: var(--arrowpanel-menuitem-border-radius);
     }
 
     #context-navigation
@@ -378,6 +378,8 @@ menupopup.in-menulist {
     #context-navigation .menu-iconic-icon {
         margin: 0 !important;
         width: 16px !important;
+        padding: 0 !important;
+        background: none !important;
     }
 
     #context-sep-navigation {

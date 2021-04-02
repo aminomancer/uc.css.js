@@ -210,7 +210,7 @@
     margin: 0 !important;
     padding-inline: 0 !important;
     flex-basis: 25% !important;
-    border-radius: var(--toolbarbutton-border-radius) !important;
+    border-radius: var(--arrowpanel-menuitem-border-radius) !important;
 }
 
 #editBookmarkPanel .panel-footer > button.editBookmarkPanelBottomButton[default] {

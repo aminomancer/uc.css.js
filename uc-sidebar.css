@@ -153,7 +153,7 @@
 #sidebar-close {
     width: 26.667px !important;
     height: 26.667px !important;
-    border-radius: var(--toolbarbutton-border-radius) !important;
+    border-radius: var(--arrowpanel-menuitem-border-radius) !important;
 }
 
 #sidebar-close .toolbarbutton-icon {

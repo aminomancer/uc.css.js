@@ -29,6 +29,16 @@ menupopup::part(arrowscrollbox-scrollbox) {
     margin-bottom: 4px;
 }
 
+/* panel width */
+#customizationui-widget-multiview panelview:not([extension]) {
+    width: unset;
+    min-width: 23em;
+}
+
+:where(#customizationui-widget-multiview) panelview:not([extension]) {
+    max-width: 18vw;
+}
+
 /* focused buttons to look like hovered buttons */
 panelview
     :is(.toolbarbutton-1, toolbarbutton.subviewbutton, .navigable.subviewbutton):not([disabled], [open]):focus,

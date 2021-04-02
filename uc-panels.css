@@ -27,7 +27,7 @@
 
 .protections-popup-category,
 .protections-popup-footer-button {
-    border-radius: var(--toolbarbutton-border-radius) !important;
+    border-radius: var(--arrowpanel-menuitem-border-radius) !important;
     margin-inline: calc(var(--vertical-section-padding) - 4px) !important;
 }
 
@@ -90,7 +90,7 @@
 
 .panel-footer.popup-notification-button-container > .popup-notification-button {
     margin-inline: 0 !important;
-    border-radius: var(--toolbarbutton-border-radius) !important;
+    border-radius: var(--arrowpanel-menuitem-border-radius) !important;
     flex: 1 !important;
     font-weight: normal !important;
     border-inline: 0 !important;
@@ -348,7 +348,7 @@ popupnotification .popup-notification-checkbox:hover .checkbox-check[checked]:no
 }
 
 .identity-popup-expander .button-box {
-    border-radius: var(--toolbarbutton-border-radius);
+    border-radius: var(--arrowpanel-menuitem-border-radius);
     width: 32px;
     height: 32px;
 }

@@ -380,7 +380,7 @@
 
     /* appmenu buttons border radius */
     .subviewbutton-back {
-        border-radius: 2px !important;
+        border-radius: var(--arrowpanel-menuitem-border-radius) !important;
     }
 
     :is(#appMenu-zoomReduce-button2, #appMenu-zoomEnlarge-button2, #appMenu-fullscreen-button2)
