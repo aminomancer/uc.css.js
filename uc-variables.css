@@ -23,6 +23,7 @@ menupopup {
     --lwt-background-alignment: top !important;
     --lwt-background-tiling: repeat !important;
     --arrowpanel-background: hsl(233, 36%, 11%) !important;
+    --panel-shadow: 0 0 4px 0 hsla(0, 0%, 0%, 0.4) !important;
     --arrowpanel-color: var(--lwt-text-color) !important;
     --arrowpanel-darker: hsla(236, 70%, 73%, 0.17) !important;
     --arrowpanel-faint: hsla(236, 100%, 83%, 0.1);
@@ -226,5 +227,6 @@ toolbar {
         --menu-right-img: url("chrome://global/skin/icons/menu-arrow.svg");
         --menu-right-margin: 4px;
         --menu-right-size: 11px;
+        --panel-shadow: none !important;
     }
 }

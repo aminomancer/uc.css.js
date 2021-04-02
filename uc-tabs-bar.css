@@ -23,26 +23,30 @@
     margin-left: -2px !important;
 }
 
+#titlebar {
+    -moz-box-orient: horizontal !important;
+}
+
 #tabbrowser-tabs {
     background-color: var(--lwt-accent-color) !important;
 }
 
 /* menubar next to tabs */
-:root[sizemode="normal"] #toolbar-menubar {
-    position: absolute !important;
-    display: block !important;
-    z-index: 555 !important;
-    right: 93px !important;
-    left: auto !important;
-    top: calc(9px + var(--space-above-tabbar)) !important;
-    height: unset !important;
-    overflow: visible !important;
+#toolbar-menubar {
+    -moz-box-align: center !important;
+    padding-inline: 6px !important;
+    z-index: 12 !important;
+    background: var(--lwt-accent-color) !important;
+    position: relative !important;
+    -moz-box-ordinal-group: 0;
 }
 
-:root #toolbar-menubar[inactive="true"] {
+#toolbar-menubar[inactive="true"] {
     opacity: 0 !important;
     height: 0 !important;
     pointer-events: none !important;
+    width: 0 !important;
+    min-width: 0 !important;
 }
 
 :root[sizemode="normal"] #toolbar-menubar:not([inactive]) > .titlebar-buttonbox-container {
@@ -51,15 +55,6 @@
     top: calc(10px + var(--space-above-tabbar)) !important;
     right: 0 !important;
     width: -moz-min-content !important;
-}
-
-:root[sizemode="maximized"] #toolbar-menubar {
-    position: absolute !important;
-    display: block !important;
-    z-index: 555 !important;
-    right: 93px !important;
-    left: auto !important;
-    top: 16px !important;
 }
 
 :root[sizemode="maximized"] #toolbar-menubar:not([inactive]) > .titlebar-buttonbox-container {
@@ -71,13 +66,16 @@
 }
 
 :root[inFullscreen] #toolbar-menubar {
-    position: absolute !important;
-    display: block !important;
-    z-index: 555 !important;
-    right: 93px !important;
-    left: auto !important;
-    top: 9px !important;
     visibility: visible !important;
+}
+
+:root[inFullscreen]
+    body
+    > box:not([urlbar-status], [popup-status])
+    > #navigator-toolbox:not(:hover, :focus-within)
+    > #titlebar
+    > #toolbar-menubar {
+    visibility: collapse !important;
 }
 
 /* the drag space should push down everything */
@@ -97,17 +95,19 @@
     padding-top: 0 !important;
 }
 
-#toolbar-menubar:not([inactive]) ~ #TabsToolbar .toolbar-items {
-    margin-right: 392px !important;
+:root:not([chromehidden~="menubar"], [inFullscreen="true"])
+    #toolbar-menubar:not([autohide="true"])
+    ~ #TabsToolbar
+    .titlebar-spacer[type="post-tabs"] {
+    display: -moz-box !important;
 }
 
-:root[inFullscreen] #toolbar-menubar:not([inactive]) ~ #TabsToolbar .toolbar-items {
-    margin-right: 292.5px !important;
-}
-
-:root #toolbar-menubar:not([inactive]) ~ #TabsToolbar .titlebar-buttonbox-container,
-:root #toolbar-menubar:not([inactive]) ~ #TabsToolbar > .toolbar-items ~ .titlebar-spacer {
-    visibility: collapse !important;
+:root:not([chromehidden~="menubar"], [inFullscreen="true"])
+    #toolbar-menubar:not([autohide="true"])
+    + #TabsToolbar
+    > .titlebar-buttonbox-container {
+    visibility: hidden !important;
+    display: -moz-box !important;
 }
 
 #toolbar-menubar :is(#menubar-items, #wrapper-menubar-items) {
@@ -182,6 +182,20 @@
     border-top: none !important;
 }
 
+#toolbar-menubar:not([inactive]) ~ #TabsToolbar #TabsToolbar-customization-target::before {
+    position: relative !important;
+    display: block !important;
+    content: "" !important;
+    pointer-events: none !important;
+    box-shadow: 7px 0px 7px 0px rgba(0, 0, 0, 0.1) !important;
+    background-color: transparent !important;
+    width: 20px !important;
+    margin-left: -20px !important;
+    height: 46px !important;
+    margin-block: -8px !important;
+    z-index: 11 !important;
+}
+
 #tabbrowser-tabs::after {
     position: relative !important;
     display: block !important;
@@ -191,7 +205,9 @@
     background-color: transparent !important;
     width: 20px !important;
     margin-right: -20px !important;
-    z-index: 5 !important;
+    height: 46px !important;
+    margin-block: -8px !important;
+    z-index: 11 !important;
 }
 
 #TabsToolbar {

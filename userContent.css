@@ -203,7 +203,8 @@
 }
 
 /* native select menus */
-#ContentSelectDropdown {
+#ContentSelectDropdown,
+menupopup.in-menulist {
     --menupopup-border-radius: 3px;
     --context-menuitem-border-radius: 0;
     --menupopup-margin: 0;
@@ -276,10 +277,12 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
     color: var(--ui-text-80) !important;
 }
 
-#ContentSelectDropdown > menupopup.in-menulist {
+#ContentSelectDropdown > menupopup,
+menupopup.in-menulist {
     appearance: none !important;
     font: menu !important;
     border: none !important;
+    background-color: transparent !important;
     border-radius: var(--menupopup-border-radius) !important;
     margin: var(--menupopup-margin) !important;
     overflow: hidden !important;
@@ -288,7 +291,8 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
     --menu-background-color: var(--ui-secondary-bg) !important;
 }
 
-#ContentSelectDropdown > menupopup .contentSelectDropdown-searchbox {
+#ContentSelectDropdown > menupopup .contentSelectDropdown-searchbox,
+menupopup.in-menulist .contentSelectDropdown-searchbox {
     appearance: none !important;
     color: inherit !important;
     border-radius: var(--context-menuitem-border-radius);
@@ -301,60 +305,57 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
     -moz-user-modify: read-write !important;
 }
 
-#ContentSelectDropdown > menupopup .contentSelectDropdown-searchbox:focus-within {
+#ContentSelectDropdown > menupopup .contentSelectDropdown-searchbox:focus-within,
+menupopup.in-menulist .contentSelectDropdown-searchbox:focus-within {
     background-color: var(--search-box-focus) !important;
     transition: 300ms background-color !important;
 }
 
-#ContentSelectDropdown > menupopup .contentSelectDropdown-searchbox + :is(menu, menuitem) {
+#ContentSelectDropdown > menupopup .contentSelectDropdown-searchbox + :is(menu, menuitem),
+menupopup.in-menulist .contentSelectDropdown-searchbox + :is(menu, menuitem) {
     margin-top: 4px;
 }
 
-#ContentSelectDropdown > menupopup {
-    font: menu !important;
-    color: var(--ui-text-80) !important;
-    appearance: none !important;
-    background-color: var(--menupopup-background) !important;
-    --content-select-background-image: none !important;
-    border: none !important;
-    border-radius: var(--menupopup-border-radius) !important;
-    margin: var(--menupopup-margin) !important;
-    overflow: hidden !important;
-}
-
-#ContentSelectDropdown > menupopup menu > menupopup {
+#ContentSelectDropdown > menupopup menu > menupopup,
+menupopup.in-menulist menu > menupopup {
     margin-inline-start: var(--menupopup-child-margin-inline-start) !important;
     margin-block-start: var(--menupopup-child-margin-block-start) !important;
 }
 
-#ContentSelectDropdown > menupopup :is(menuitem, menu) {
+#ContentSelectDropdown > menupopup :is(menuitem, menu),
+menupopup.in-menulist :is(menuitem, menu) {
     appearance: none !important;
     color: var(--ui-text-80) !important;
     border-radius: var(--context-menuitem-border-radius);
 }
 
-#ContentSelectDropdown > menupopup :is(menuitem, menu)[disabled="true"] {
+#ContentSelectDropdown > menupopup :is(menuitem, menu)[disabled="true"],
+menupopup.in-menulist :is(menuitem, menu)[disabled="true"] {
     appearance: none !important;
     color: var(--panel-disabled-color) !important;
     background-color: initial !important;
 }
 
-#ContentSelectDropdown > menupopup :is(menuitem, menu) .menu-iconic-left {
+#ContentSelectDropdown > menupopup :is(menuitem, menu) .menu-iconic-left,
+menupopup.in-menulist :is(menuitem, menu) .menu-iconic-left {
     padding: 0 !important;
     appearance: none !important;
     margin-inline-end: 0 !important;
 }
 
-#ContentSelectDropdown > menupopup :is(menuitem, menu) .menu-iconic-icon {
+#ContentSelectDropdown > menupopup :is(menuitem, menu) .menu-iconic-icon,
+menupopup.in-menulist :is(menuitem, menu) .menu-iconic-icon {
     margin-inline: 6px;
 }
 
-#ContentSelectDropdown > menupopup menugroup {
+#ContentSelectDropdown > menupopup menugroup,
+menupopup.in-menulist menugroup {
     padding: 0 !important;
     background-color: transparent !important;
 }
 
-#ContentSelectDropdown > menupopup .menu-right {
+#ContentSelectDropdown > menupopup .menu-right,
+menupopup.in-menulist .menu-right {
     appearance: none !important;
     padding: 0px !important;
     margin-right: var(--menu-right-margin) !important;
@@ -369,12 +370,15 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
     list-style-image: var(--menu-right-img) !important;
 }
 
-#ContentSelectDropdown > menupopup menu[disabled="true"] > .menu-right {
+#ContentSelectDropdown > menupopup menu[disabled="true"] > .menu-right,
+menupopup.in-menulist menu[disabled="true"] > .menu-right {
     visibility: collapse;
 }
 
 #ContentSelectDropdown
     > menupopup
+    :is(menu, menuitem):is(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
+menupopup.in-menulist
     :is(menu, menuitem):is(:hover, [_moz-menuactive="true"]):not([disabled="true"]) {
     appearance: none !important;
     background-color: var(--arrowpanel-dimmed) !important;
@@ -382,26 +386,30 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
 
 #ContentSelectDropdown
     > menupopup
-    :is(menu, menuitem):is(:hover, [_moz-menuactive="true"])[disabled="true"] {
+    :is(menu, menuitem):is(:hover, [_moz-menuactive="true"])[disabled="true"],
+menupopup.in-menulist :is(menu, menuitem):is(:hover, [_moz-menuactive="true"])[disabled="true"] {
     background: none !important;
     appearance: none !important;
 }
 
 #ContentSelectDropdown
     > menupopup
-    .subviewbutton:is(:hover, [_moz-menuactive="true"])[disabled="true"] {
+    .subviewbutton:is(:hover, [_moz-menuactive="true"])[disabled="true"],
+menupopup.in-menulist .subviewbutton:is(:hover, [_moz-menuactive="true"])[disabled="true"] {
     color: var(--panel-disabled-color) !important;
 }
 
 #ContentSelectDropdown
     > menupopup
-    menu.subviewbutton:not([disabled="true"])[_moz-menuactive]:active {
+    menu.subviewbutton:not([disabled="true"])[_moz-menuactive]:active,
+menupopup.in-menulist menu.subviewbutton:not([disabled="true"])[_moz-menuactive]:active {
     background: var(--arrowpanel-dimmed) !important;
     box-shadow: none !important;
 }
 
 @supports (-moz-bool-pref("browser.proton.contextmenus.enabled")) {
-    #ContentSelectDropdown {
+    #ContentSelectDropdown,
+    menupopup.in-menulist {
         --menupopup-child-margin-block-start: -4px;
         --menupopup-child-margin-inline-start: 0;
         --arrowpanel-menuitem-border-radius: 3px !important;
@@ -418,21 +426,24 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
         --menupopup-shadow: none !important;
     }
 
-    #ContentSelectDropdown > menupopup {
+    #ContentSelectDropdown > menupopup,
+    menupopup.in-menulist {
         padding: var(--menupopup-padding) !important;
         background-color: transparent !important;
         border-color: transparent !important;
     }
 
-    #ContentSelectDropdown > menupopup menu > menupopup {
+    #ContentSelectDropdown > menupopup menu > menupopup,
+    menupopup.in-menulist menu > menupopup {
         margin-inline-start: var(--menupopup-child-margin-inline-start) !important;
     }
 
-    #ContentSelectDropdown > menupopup .menu-text {
+    #ContentSelectDropdown > menupopup .menu-text,
+    menupopup.in-menulist .menu-text {
         padding-inline: var(--context-padding-inline) !important;
     }
 
-    #ContentSelectDropdown > menupopup .menupopup-arrowscrollbox {
+    link[href="chrome://global/skin/global.css"] ~ .menupopup-arrowscrollbox {
         background-color: var(--menu-background-color) !important;
         color: var(--menu-color) !important;
         border: none !important;
@@ -440,25 +451,29 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
         box-shadow: var(--menupopup-shadow) !important;
     }
 
-    #ContentSelectDropdown > menupopup :is(.menu-accel, .menu-iconic-accel)[value] {
+    #ContentSelectDropdown > menupopup :is(.menu-accel, .menu-iconic-accel)[value],
+    menupopup.in-menulist :is(.menu-accel, .menu-iconic-accel)[value] {
         margin-inline: 1.55em calc(var(--menu-right-margin) + 4px) !important;
     }
 
     #ContentSelectDropdown
         > menupopup
         menuitem:not([disabled="true"])
-        :is(.menu-accel, .menu-iconic-accel) {
+        :is(.menu-accel, .menu-iconic-accel),
+    menupopup.in-menulist menuitem:not([disabled="true"]) :is(.menu-accel, .menu-iconic-accel) {
         color: var(--panel-shortcut-color);
     }
 
     #ContentSelectDropdown
         > menupopup
         menuitem[disabled="true"]
-        :is(.menu-accel, .menu-iconic-accel) {
+        :is(.menu-accel, .menu-iconic-accel),
+    menupopup.in-menulist menuitem[disabled="true"] :is(.menu-accel, .menu-iconic-accel) {
         opacity: 0.6;
     }
 
-    #ContentSelectDropdown > menupopup menuseparator {
+    #ContentSelectDropdown > menupopup menuseparator,
+    menupopup.in-menulist menuseparator {
         border-image: linear-gradient(
             to right,
             transparent 1%,
@@ -478,30 +493,37 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
         display: none !important;
     }
 
-    #ContentSelectDropdown > menupopup menuseparator:not([id]) {
+    #ContentSelectDropdown > menupopup menuseparator:not([id]),
+    menupopup.in-menulist menuseparator:not([id]) {
         display: -moz-box !important;
     }
 
     #ContentSelectDropdown
         > menupopup[menu-api]
         menuitem:is([type="checkbox"], [type="radio"])
+        .menu-iconic-left,
+    menupopup.in-menulist[menu-api]
+        menuitem:is([type="checkbox"], [type="radio"])
         .menu-iconic-left {
         display: none !important;
     }
 
-    #ContentSelectDropdown > menupopup menuseparator:last-child {
+    #ContentSelectDropdown > menupopup menuseparator:last-child,
+    menupopup.in-menulist menuseparator:last-child {
         display: none;
     }
 }
 
 /* proton disabled */
 @supports not -moz-bool-pref("browser.proton.contextmenus.enabled") {
-    #ContentSelectDropdown > menupopup menuseparator {
+    #ContentSelectDropdown > menupopup menuseparator,
+    menupopup.in-menulist menuseparator {
         visibility: hidden !important;
         display: none !important;
     }
 
-    #ContentSelectDropdown > menupopup :is(menu, menuitem) {
+    #ContentSelectDropdown > menupopup :is(menu, menuitem),
+    menupopup.in-menulist :is(menu, menuitem) {
         border-image: linear-gradient(
             to right,
             transparent 1%,
@@ -828,7 +850,7 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
 
     #ContentSelectDropdown > menupopup {
         font: menu !important;
-        background-color: var(--tooltip-bgcolor) !important;
+        background-color: transparent !important;
         --content-select-background-image: none !important;
         color: var(--ui-text-80) !important;
         background-image: unset !important;

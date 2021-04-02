@@ -21,9 +21,9 @@ menupopup[menu-api],
     appearance: none !important;
     background: var(--menupopup-background) !important;
     border: none !important;
-    border-radius: var(--menupopup-border-radius) !important;
+    border-radius: 0 !important;
     margin: var(--menupopup-margin) !important;
-    overflow: hidden !important;
+    overflow: visible !important;
 }
 
 :is(#back-button, #forward-button, #viewButton) > menupopup menu > menupopup,
@@ -162,11 +162,14 @@ menupopup.in-menulist > :is(menucaption, menuitem) > .menu-iconic-text {
     padding-block: unset !important;
 }
 
-:is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup) :is(menu, menuitem, menucaption) {
+:is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
+    :is(menu, menuitem, menucaption) {
     padding-inline: 8px !important;
 }
 
-:is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup) :is(menu, menuitem, menucaption) > :is(label, .menu-iconic-text, .menu-text) {
+:is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
+    :is(menu, menuitem, menucaption)
+    > :is(label, .menu-iconic-text, .menu-text) {
     padding-inline: 0 !important;
 }
 
@@ -175,23 +178,28 @@ menupopup.in-menulist > :is(menucaption, menuitem) > .menu-iconic-text {
     min-height: 25px !important;
 }
 
-:is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup) menucaption:first-child {
+:is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
+    menucaption:first-child {
     margin-bottom: 2px !important;
     border-bottom: 1px solid var(--menu-separator-color) !important;
 }
 
-:is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup) menucaption > label {
+:is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
+    menucaption
+    > label {
     font-weight: inherit !important;
     font-style: inherit !important;
 }
 
-:is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup) menucaption:first-child > label {
+:is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
+    menucaption:first-child
+    > label {
     margin-block: -3px 0 !important;
 }
 
 #ContentSelectDropdown > menupopup {
     font: menu !important;
-    background-color: var(--tooltip-bgcolor) !important;
+    background-color: transparent !important;
     --content-select-background-image: none !important;
     /* a gradient background image is added on top of the menupopup based on the appearance of the select element in-content.
     if you want all select dropdowns to have the same, standard color then leave this alone. if you want the select dropdowns to match the color of the menulist (as defined by the website) then comment out the rule above. however, this can cause problems on sites that have really heavily customized menulists with light backgrounds. the background color is generated correctly but the text color may not be, in which case you get white text on a white background. I like the idea of this background image feature but it needs work, since this issue crops up on major popular websites like amazon.com */

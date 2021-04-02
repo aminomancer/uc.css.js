@@ -427,6 +427,10 @@ tabmodalprompt .checkbox-check[checked="true"] {
     border-radius: 5px !important;
 }
 
+:is(.tab-prompt-dialog, #window-modal-dialog) .printDialogBox > .dialogFrame {
+    border-radius: 0 !important;
+}
+
 /* the resizer is on the right side for ltr languages, and on the left side for rtl languages. adjust the border radius accordingly */
 :is(.content-prompt-dialog, .tab-prompt-dialog, #window-modal-dialog)
     .dialogBox[resizable="true"]:is(:dir(ltr), :-moz-locale-dir(ltr)),
@@ -659,7 +663,7 @@ tabmodalprompt .checkbox-check[checked="true"] {
     }
 
     menulist,
-    input {
+    input:not([type="checkbox"], [type="radio"], .radio-check) {
         margin-inline: 4px !important;
         padding-block: 0 !important;
         padding-inline: 6px !important;
@@ -677,5 +681,13 @@ tabmodalprompt .checkbox-check[checked="true"] {
 
     button {
         border-radius: var(--toolbarbutton-border-radius) !important;
+    }
+}
+
+@-moz-document url-prefix("chrome://global/content/print.html")
+{
+    :root {
+        --in-content-page-background: rgb(28, 27, 34) !important;
+        --dropdown-bgcolor: var(--in-content-page-background) !important;
     }
 }
