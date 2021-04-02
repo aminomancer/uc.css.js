@@ -102,6 +102,7 @@ link[href="chrome://global/skin/arrowscrollbox.css"] ~ :is(#scrollbutton-up, #sc
 /* firefox UI scrollbars */
 .hidevscroll-scrollbar {
     -moz-appearance: none !important;
+    appearance: none !important;
     margin-left: 4px !important;
     border: none !important;
     position: relative !important;
@@ -112,6 +113,7 @@ link[href="chrome://global/skin/arrowscrollbox.css"] ~ :is(#scrollbutton-up, #sc
 
 .hidehscroll-scrollbar {
     -moz-appearance: none !important;
+    appearance: none !important;
     border: none !important;
     position: relative !important;
     background-color: transparent !important;
@@ -152,6 +154,7 @@ link[href="chrome://global/skin/arrowscrollbox.css"] ~ :is(#scrollbutton-up, #sc
 .hidevscroll-scrollbar thumb,
 .hidehscroll-scrollbar thumb {
     -moz-appearance: none !important;
+    appearance: none !important;
     border-width: 0px !important;
     border-radius: 5px !important;
     background-color: transparent !important;
@@ -204,6 +207,7 @@ link[href="chrome://global/skin/arrowscrollbox.css"] ~ :is(#scrollbutton-up, #sc
 
 :not(select):not(hbox) > scrollbar {
     -moz-appearance: none !important;
+    appearance: none !important;
     position: relative;
     background-color: transparent;
     background-image: none;
@@ -245,6 +249,7 @@ link[href="chrome://global/skin/arrowscrollbox.css"] ~ :is(#scrollbutton-up, #sc
 
 :not(select):not(hbox) > scrollbar thumb {
     -moz-appearance: none !important;
+    appearance: none !important;
     border-width: 0px !important;
     border-radius: 5px !important;
     background-color: transparent !important;

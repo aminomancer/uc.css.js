@@ -29,7 +29,7 @@ tabmodalprompt {
 }
 
 tabmodalprompt input {
-    -moz-appearance: none !important;
+    appearance: none !important;
     user-select: text !important;
     -moz-user-select: text !important;
     background-color: var(--desaturate-dimmed) !important;
@@ -45,7 +45,7 @@ tabmodalprompt input:focus {
 }
 
 .tabmodalprompt-buttonContainer button {
-    -moz-appearance: none !important;
+    appearance: none !important;
     border-radius: 3px !important;
     background-color: var(--desaturate-dimmed) !important;
     max-width: -moz-fit-content !important;
@@ -82,7 +82,7 @@ tabmodalprompt input:focus {
 }
 
 tabmodalprompt .checkbox-check {
-    -moz-appearance: none !important;
+    appearance: none !important;
     background-color: transparent !important;
     border: none !important;
     width: 14px !important;
@@ -177,7 +177,7 @@ tabmodalprompt .checkbox-check[checked="true"] {
     }
 
     #alertSettings menupopup {
-        -moz-appearance: none !important;
+        appearance: none !important;
         background: rgb(23, 23, 23) !important;
         border: none !important;
         border-radius: 3px !important;
@@ -191,14 +191,14 @@ tabmodalprompt .checkbox-check[checked="true"] {
     }
 
     #alertSettings menupopup :is(menuitem, menu) {
-        -moz-appearance: none !important;
+        appearance: none !important;
         color: var(--ui-text-80) !important;
         padding: 0 0 0 0 !important;
         min-height: 25px !important;
     }
 
     #alertSettings menupopup :is(menuitem, menu)[disabled="true"] {
-        -moz-appearance: none !important;
+        appearance: none !important;
         color: rgba(255, 255, 255, 0.45) !important;
         background-color: initial !important;
     }
@@ -225,7 +225,7 @@ tabmodalprompt .checkbox-check[checked="true"] {
     }
 
     #alertSettings menupopup .menu-right {
-        -moz-appearance: none !important;
+        appearance: none !important;
         padding: 0px !important;
         margin-right: 2px !important;
         width: 12px !important;
@@ -241,7 +241,7 @@ tabmodalprompt .checkbox-check[checked="true"] {
     #alertSettings
         menupopup
         :is(menu, menuitem):is(:hover, [_moz-menuactive="true"]):not([disabled="true"]) {
-        -moz-appearance: none !important;
+        appearance: none !important;
         background-color: rgba(255, 255, 255, 0.08) !important;
     }
 }
@@ -473,7 +473,8 @@ tabmodalprompt .checkbox-check[checked="true"] {
     url("chrome://mozapps/content/handling/permissionDialog.xhtml"),
     url("chrome://mozapps/content/handling/appChooser.xhtml")
 {
-    #commonDialogWindow, #commonDialogWindow * {
+    #commonDialogWindow,
+    #commonDialogWindow * {
         --in-content-page-background: transparent !important;
         --in-content-page-color: var(--notification-menu-color) !important;
         --in-content-box-background: var(--dialog-box-bgcolor) !important;
@@ -592,7 +593,9 @@ tabmodalprompt .checkbox-check[checked="true"] {
     url("chrome://browser/content/places/bookmarkProperties.xhtml"),
     url("chrome://browser/content/places/bookmarkProperties2.xhtml")
 {
-    :root, window, dialog {
+    :root,
+    window,
+    dialog {
         --in-content-page-background: transparent !important;
         --in-content-page-color: var(--notification-menu-color) !important;
         --in-content-box-background: var(--dialog-box-bgcolor) !important;
@@ -639,7 +642,8 @@ tabmodalprompt .checkbox-check[checked="true"] {
         background-color: var(--dropdown-bgcolor) !important;
     }
 
-    .expander-up, .expander-down {
+    .expander-up,
+    .expander-down {
         min-height: 24px !important;
         min-width: 24px !important;
         margin-inline-start: 4px !important;
@@ -654,7 +658,8 @@ tabmodalprompt .checkbox-check[checked="true"] {
         padding-block: 0 8px !important;
     }
 
-    menulist, input {
+    menulist,
+    input {
         margin-inline: 4px !important;
         padding-block: 0 !important;
         padding-inline: 6px !important;
@@ -665,11 +670,11 @@ tabmodalprompt .checkbox-check[checked="true"] {
     menulist {
         padding-inline: 4px 2px !important;
     }
-    
+
     tree {
         margin-inline: 4px !important;
     }
-    
+
     button {
         border-radius: var(--toolbarbutton-border-radius) !important;
     }

@@ -148,7 +148,7 @@ menupopup[menu-api] menuitem:is([type="checkbox"], [type="radio"], [checked]) .m
     menuitem:is([type="checkbox"], [type="radio"])
     .menu-iconic-left,
 #viewButton menuitem[type="radio"] .menu-iconic-left {
-    -moz-appearance: none !important;
+    appearance: none !important;
 }
 
 :is(#main-menubar, #toolbar-context-menu)
@@ -156,7 +156,7 @@ menupopup[menu-api] menuitem:is([type="checkbox"], [type="radio"], [checked]) .m
     .menu-iconic-icon,
 #main-menubar #viewSidebarMenu menuitem .menu-iconic-icon,
 #sidebar-search-container #viewButton menuitem[type="radio"] .menu-iconic-icon {
-    -moz-appearance: none !important;
+    appearance: none !important;
     display: -moz-inline-box !important;
     position: relative !important;
     width: 16px !important;
@@ -236,7 +236,7 @@ menupopup[menu-api] menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-
     menupopup
     menuitem:is([type="checkbox"], [type="radio"])
     .menu-iconic-left {
-    -moz-appearance: none !important;
+    appearance: none !important;
     width: 25px !important;
 }
 

@@ -1,4 +1,3 @@
-/* context menus */
 #toolbar-context-menu,
 #tabContextMenu,
 #contentAreaContextMenu,
@@ -19,7 +18,7 @@ menupopup[menu-api],
 #openHandlerPopup,
 :is(#back-button, #forward-button, #viewButton, #main-menubar, #PlacesToolbar, #places, #toolbar-context-menu, #tabContextMenu, #contentAreaContextMenu, #backForwardMenu, #placesContext, #pageActionContextMenu, .search-one-offs-context-menu, .textbox-contextmenu, #SyncedTabsSidebarContext, #customizationPanelItemContextMenu, #customizationPaletteItemContextMenu, #customization-toolbar-menu, #new-tab-button-popup, #new-tab-button, .popup-notification-dropmarker, menupopup[menu-api], #ContentSelectDropdown, .new-tab-popup)
     menupopup {
-    -moz-appearance: none !important;
+    appearance: none !important;
     background: var(--menupopup-background) !important;
     border: none !important;
     border-radius: var(--menupopup-border-radius) !important;
@@ -51,7 +50,7 @@ menupopup[menu-api],
     :is(menuitem, menu),
 :is(#toolbar-context-menu, #tabContextMenu, #contentAreaContextMenu, #backForwardMenu, #placesContext, #pageActionContextMenu, .search-one-offs-context-menu, #SyncedTabsSidebarContext, .textbox-contextmenu, #customizationPanelItemContextMenu, #customizationPaletteItemContextMenu, #customization-toolbar-menu, #new-tab-button-popup, #new-tab-button, #downloadsContextMenu, menupopup[menu-api], #ContentSelectDropdown, menupopup.in-menulist, .new-tab-popup, #openHandlerPopup)
     :is(menuitem, menu) {
-    -moz-appearance: none !important;
+    appearance: none !important;
     color: var(--ui-text-80) !important;
     padding: 0 0 0 0 !important;
     min-height: 25px !important;
@@ -68,7 +67,7 @@ menupopup[menu-api],
     :is(menuitem, menu)[disabled="true"],
 :is(#toolbar-context-menu, #tabContextMenu, #contentAreaContextMenu, #backForwardMenu, #placesContext, #pageActionContextMenu, .search-one-offs-context-menu, #SyncedTabsSidebarContext, .textbox-contextmenu, #customizationPanelItemContextMenu, #customizationPaletteItemContextMenu, #customization-toolbar-menu, #new-tab-button-popup, #new-tab-button, #downloadsContextMenu, menupopup[menu-api], #ContentSelectDropdown, menupopup.in-menulist, .new-tab-popup, #openHandlerPopup)
     :is(menuitem, menu)[disabled="true"] {
-    -moz-appearance: none !important;
+    appearance: none !important;
     color: var(--panel-disabled-color) !important;
     background-color: initial !important;
 }
@@ -114,7 +113,7 @@ menupopup[menu-api],
 :is(.popup-notification-dropmarker, #main-menubar, #PlacesToolbar, #places) menupopup .menu-right,
 :is(#toolbar-context-menu, #tabContextMenu, #contentAreaContextMenu, #backForwardMenu, #placesContext, #pageActionContextMenu, .search-one-offs-context-menu, #SyncedTabsSidebarContext, .textbox-contextmenu, #customizationPanelItemContextMenu, #customizationPaletteItemContextMenu, #customization-toolbar-menu, #new-tab-button-popup, #new-tab-button, #downloadsContextMenu, menupopup[menu-api], #ContentSelectDropdown, menupopup.in-menulist, .new-tab-popup, #openHandlerPopup)
     .menu-right {
-    -moz-appearance: none !important;
+    appearance: none !important;
     padding: 0px !important;
     margin-right: var(--menu-right-margin) !important;
     width: var(--menu-right-size) !important;
@@ -140,13 +139,13 @@ menu[disabled="true"] > .menu-right {
     :is(menu, menuitem):is(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
 :is(#toolbar-context-menu, #tabContextMenu, #contentAreaContextMenu, #backForwardMenu, #placesContext, #pageActionContextMenu, .search-one-offs-context-menu, #SyncedTabsSidebarContext, .textbox-contextmenu, #customizationPanelItemContextMenu, #customizationPaletteItemContextMenu, #customization-toolbar-menu, #new-tab-button-popup, #new-tab-button, #downloadsContextMenu, menupopup[menu-api], #ContentSelectDropdown, menupopup.in-menulist, .new-tab-popup, #openHandlerPopup)
     :is(menu, menuitem):is(:hover, [_moz-menuactive="true"]):not([disabled="true"]) {
-    -moz-appearance: none !important;
+    appearance: none !important;
     background-color: var(--arrowpanel-dimmed) !important;
 }
 
 :is(menu, menuitem):is(:hover, [_moz-menuactive="true"])[disabled="true"] {
     background: none !important;
-    -moz-appearance: none !important;
+    appearance: none !important;
 }
 
 .subviewbutton:is(:hover, [_moz-menuactive="true"])[disabled="true"] {
@@ -163,20 +162,39 @@ menupopup.in-menulist > :is(menucaption, menuitem) > .menu-iconic-text {
     padding-block: unset !important;
 }
 
-#ContentSelectDropdown :is(menu, menuitem, menucaption),
-.contentSelectDropdown-ingroup > .menu-iconic-text,
-menupopup.in-menulist .menu-iconic-text {
+:is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup) :is(menu, menuitem, menucaption) {
     padding-inline: 8px !important;
+}
+
+:is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup) :is(menu, menuitem, menucaption) > :is(label, .menu-iconic-text, .menu-text) {
+    padding-inline: 0 !important;
+}
+
+:is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup) menucaption {
+    font-weight: inherit !important;
+    min-height: 25px !important;
+}
+
+:is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup) menucaption:first-child {
+    margin-bottom: 2px !important;
+    border-bottom: 1px solid var(--menu-separator-color) !important;
+}
+
+:is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup) menucaption > label {
+    font-weight: inherit !important;
+    font-style: inherit !important;
+}
+
+:is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup) menucaption:first-child > label {
+    margin-block: -3px 0 !important;
 }
 
 #ContentSelectDropdown > menupopup {
     font: menu !important;
     background-color: var(--tooltip-bgcolor) !important;
     --content-select-background-image: none !important;
-    /* a background image is added on top of the menupopup based on the appearance of the select element in-content.
-    if you want all of these to be styled consistently then you can uncomment the above rule.
-    personally, i like this feature since websites use all manner of different styles for select elements.
-    making them all bluish-purple doesn't always look great. */
+    /* a gradient background image is added on top of the menupopup based on the appearance of the select element in-content.
+    if you want all select dropdowns to have the same, standard color then leave this alone. if you want the select dropdowns to match the color of the menulist (as defined by the website) then comment out the rule above. however, this can cause problems on sites that have really heavily customized menulists with light backgrounds. the background color is generated correctly but the text color may not be, in which case you get white text on a white background. I like the idea of this background image feature but it needs work, since this issue crops up on major popular websites like amazon.com */
 }
 
 #ContentSelectDropdown > menupopup > menuitem:not([_moz-menuactive="true"]),
@@ -191,7 +209,7 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
 }
 
 menupopup.in-menulist {
-    -moz-appearance: none !important;
+    appearance: none !important;
     font: menu !important;
     border: none !important;
     border-radius: var(--menupopup-border-radius) !important;
@@ -386,7 +404,7 @@ menupopup.in-menulist {
     :is(#main-menubar, #PlacesToolbar, #places) menupopup menuseparator,
     :is(#toolbar-context-menu, #tabContextMenu, #contentAreaContextMenu, #backForwardMenu, #placesContext, #pageActionContextMenu, .search-one-offs-context-menu, #SyncedTabsSidebarContext, .textbox-contextmenu, #customizationPanelItemContextMenu, #customizationPaletteItemContextMenu, #customization-toolbar-menu, #new-tab-button-popup, #new-tab-button, .popup-notification-dropmarker, #downloadsContextMenu, menupopup[menu-api], #ContentSelectDropdown, .new-tab-popup, #openHandlerPopup)
         menuseparator {
-        /*     -moz-appearance: none !important;
+        /* appearance: none !important;
         max-height: 1px !important;
         border: none !important;
         padding: 0.5px 0 !important;
@@ -396,7 +414,7 @@ menupopup.in-menulist {
         display: none !important;
     }
 
-    /*     menuseparator:not(:first-of-type) + :is(menu, menuitem) {
+    /* menuseparator:not(:first-of-type) + :is(menu, menuitem) {
         border-top: 1px solid #363A59 !important;
         padding-top: 3px !important;
     } */

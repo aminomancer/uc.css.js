@@ -186,7 +186,7 @@ notification[value="keyword-uri-fixup"] {
 }
 
 :is(#mainPopupSet, #browser, #navigator-toolbox) textbox {
-    -moz-appearance: none !important;
+    appearance: none !important;
     user-select: text !important;
     -moz-user-select: text !important;
     background-color: var(--ui-textbox-bgcolor) !important;
@@ -220,10 +220,10 @@ toolbarbutton.bookmark-item:not(.subviewbutton):focus-visible,
 toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-icon,
 toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-text,
 toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-badge-stack {
-	color: inherit;
-	outline: unset !important;
-	-moz-outline-radius: unset !important;
-	outline-offset: unset !important;
+    color: inherit;
+    outline: unset !important;
+    -moz-outline-radius: unset !important;
+    outline-offset: unset !important;
 }
 
 :is(#mainPopupSet, #browser, #navigator-toolbox, .sidebar-panel) ::selection,

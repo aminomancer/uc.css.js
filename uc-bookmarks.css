@@ -7,6 +7,7 @@
 #editBookmarkPanel input {
     appearance: none !important;
     -moz-user-select: text !important;
+    user-select: text !important;
     background-color: var(--ui-textbox-bgcolor) !important;
     color: #fff !important;
     border: none !important;
@@ -39,7 +40,7 @@
 }
 
 #editBookmarkPanel menulist {
-    -moz-appearance: none !important;
+    appearance: none !important;
     background-color: var(--ui-textbox-bgcolor) !important;
     line-height: normal;
     padding-block: 2px !important;
@@ -70,7 +71,7 @@
 }
 
 #editBookmarkPanel tree {
-    -moz-appearance: none !important;
+    appearance: none !important;
     background-color: var(--ui-textbox-bgcolor) !important;
     line-height: normal;
     color: #fff !important;
@@ -88,7 +89,7 @@
 
 #editBookmarkPanel treechildren::-moz-tree-row(hover),
 #editBookmarkPanel treechildren::-moz-tree-cell(hover) {
-    -moz-appearance: none !important;
+    appearance: none !important;
     background-color: var(--ebmp-hover-bgcolor) !important;
     line-height: normal;
     color: #fff !important;
@@ -97,7 +98,7 @@
 
 #editBookmarkPanel treechildren::-moz-tree-row(selected),
 #editBookmarkPanel treechildren::-moz-tree-cell(selected) {
-    -moz-appearance: none !important;
+    appearance: none !important;
     background-color: var(--ebmp-focus-bgcolor) !important;
     line-height: normal;
     color: #fff !important;
@@ -107,7 +108,7 @@
 
 #editBookmarkPanel treechildren::-moz-tree-row(selected):hover,
 #editBookmarkPanel treechildren::-moz-tree-cell(selected):hover {
-    -moz-appearance: none !important;
+    appearance: none !important;
     background-color: var(--ebmp-focus-bgcolor) !important;
     line-height: normal;
     color: #fff !important;
@@ -116,7 +117,7 @@
 
 /* #editBookmarkPanel treechildren::-moz-tree-row(hover)(selected),
 #editBookmarkPanel treechildren::-moz-tree-cell(hover)(selected) {
-    -moz-appearance: none !important;
+    appearance: none !important;
     background-color: var(--ebmp-focus-bgcolor) !important;
     line-height: normal;
     color: #fff !important;
@@ -126,7 +127,7 @@
 #editBookmarkPanel treechildren::-moz-tree-cell-text(selected),
 #editBookmarkPanel treechildren::-moz-tree-image(selected),
 #editBookmarkPanel treechildren::-moz-tree-twisty(selected) {
-    -moz-appearance: none !important;
+    appearance: none !important;
     background-color: var(--ebmp-focus-bgcolor) !important;
     line-height: normal;
     color: #fff !important;
@@ -140,7 +141,7 @@
 
 #editBookmarkPanel menuitem,
 #editBookmarkPanel menu {
-    -moz-appearance: none !important;
+    appearance: none !important;
     background-color: hsl(232, 24%, 32%) !important;
     line-height: normal !important;
     padding-bottom: 3px;
@@ -154,7 +155,7 @@
 
 #editBookmarkPanel menupopup {
     padding: 0px !important;
-    -moz-appearance: none !important;
+    appearance: none !important;
     background-color: hsl(232, 24%, 32%) !important;
     line-height: normal !important;
     color: #fff !important;
@@ -171,13 +172,13 @@
 /* this goes in userChrome.au.css */
 #editBookmarkPanelDropMarker,
 #editBMPanel_folderMenuList::part(dropmarker) {
-    -moz-appearance: none !important;
+    appearance: none !important;
     list-style-image: url("chrome://devtools/skin/images/select-arrow.svg") !important;
     margin-block: 0 !important;
 }
 
 #editBookmarkPanel #editBookmarkPanelContent button {
-    -moz-appearance: none !important;
+    appearance: none !important;
     background-color: var(--ui-textbox-bgcolor) !important;
     line-height: normal;
     padding: 2px;
@@ -188,12 +189,12 @@
 }
 
 #editBookmarkPanel #editBookmarkPanelContent button:is(:hover, :focus-visible) {
-    -moz-appearance: none !important;
+    appearance: none !important;
     background-color: var(--ebmp-hover-bgcolor) !important;
 }
 
 /* #editBookmarkPanel #editBookmarkPanelContent button:hover:active {
-    -moz-appearance: none !important;
+    appearance: none !important;
     background-color: var(--ebmp-focus-bgcolor) !important;
 } */
 
@@ -241,12 +242,12 @@
 }
 
 #editBMPanel_tagsField {
-	display: -moz-inline-box !important;
+    display: -moz-inline-box !important;
 }
 
 #editBookmarkPanel #editBookmarkPanelContent .expander-up,
 #editBookmarkPanel #editBookmarkPanelContent .expander-down {
-    -moz-appearance: none !important;
+    appearance: none !important;
     background-color: var(--ui-textbox-bgcolor) !important;
     padding: 0 !important;
     min-width: 24px !important;
@@ -285,14 +286,14 @@
 #editBookmarkPanel
     .in-menulist
     :is(menu, menuitem):is(:hover, :focus-visible, [_moz-menuactive="true"]):not([disabled="true"]) {
-    -moz-appearance: none !important;
+    appearance: none !important;
     background-color: hsl(232, 21%, 40%) !important;
     color: #fff !important;
     border: none !important;
 }
 
 #editBookmarkPanel menulist:is(:focus-visible, [open="true"]) {
-    -moz-appearance: none !important;
+    appearance: none !important;
     background-color: hsl(232, 24%, 32%) !important;
 }
 
@@ -302,8 +303,9 @@
 
 #editBookmarkPanel richlistbox,
 :is(#bookmarkpropertiesdialog, #editBookmarkPanel) richlistitem {
-    -moz-appearance: none !important;
+    appearance: none !important;
     -moz-user-select: text !important;
+    user-select: text !important;
     background-color: var(--ui-textbox-bgcolor) !important;
     color: #fff !important;
 }
@@ -314,7 +316,7 @@
 }
 
 :is(#bookmarkpropertiesdialog, #editBookmarkPanel) richlistitem image {
-    -moz-appearance: none !important;
+    appearance: none !important;
     background-color: transparent !important;
     border: none !important;
     -moz-context-properties: fill, fill-opacity !important;
@@ -327,7 +329,7 @@
 }
 
 :is(#bookmarkpropertiesdialog, #editBookmarkPanel) richlistitem[checked="true"] image {
-    -moz-appearance: none !important;
+    appearance: none !important;
     background-color: transparent !important;
     border: none !important;
     width: 12px !important;
@@ -367,11 +369,15 @@
     background-color: var(--purple-35) !important;
 }
 
-:is(#bookmarkpropertiesdialog, #editBookmarkPanel) checkbox:is(:hover, :focus-visible) .checkbox-check:not(:disabled) {
+:is(#bookmarkpropertiesdialog, #editBookmarkPanel)
+    checkbox:is(:hover, :focus-visible)
+    .checkbox-check:not(:disabled) {
     background-color: var(--arrowpanel-dimmed-further) !important;
 }
 
-:is(#bookmarkpropertiesdialog, #editBookmarkPanel) checkbox:is(:hover, :focus-visible) .checkbox-check[checked]:not(:disabled) {
+:is(#bookmarkpropertiesdialog, #editBookmarkPanel)
+    checkbox:is(:hover, :focus-visible)
+    .checkbox-check[checked]:not(:disabled) {
     background-color: var(--purple-45) !important;
 }
 
@@ -379,7 +385,8 @@
     margin: 0 !important;
 }
 
-:is(#bookmarkpropertiesdialog, #editBookmarkPanel) richlistitem:is(:hover, [_moz-menuactive="true"]) {
+:is(#bookmarkpropertiesdialog, #editBookmarkPanel)
+    richlistitem:is(:hover, [_moz-menuactive="true"]) {
     background-color: hsl(232, 21%, 40%) !important;
 }
 

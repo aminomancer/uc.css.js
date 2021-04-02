@@ -3,7 +3,7 @@
 }
 
 #ctrlTab-panel {
-    -moz-appearance: none !important;
+    appearance: none !important;
     color: white !important;
     border-style: none !important;
     padding: 40px 20px 20px 20px !important;

@@ -102,7 +102,7 @@ menupopup {
     --min-tab-height: 35px !important;
     --context-margin-inline: -14px 0;
     --context-padding-inline: 27px 0;
-    --menu-color: color: var(--ui-text-80) !important;
+    --menu-color: var(--ui-text-80) !important;
     --menupopup-background: var(--arrowpanel-background);
     --menu-background-color: var(--arrowpanel-background) !important;
     --menupopup-margin: 0px 0 0 0;

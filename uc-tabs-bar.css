@@ -118,7 +118,7 @@
 
 #toolbar-menubar #main-menubar > menu {
     border-radius: 2px !important;
-    -moz-appearance: none !important;
+    appearance: none !important;
     padding-top: 2px !important;
     padding-bottom: 2px !important;
 }

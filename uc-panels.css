@@ -54,14 +54,17 @@
     margin-inline-end: calc(var(--vertical-section-padding) + 3px) !important;
 }
 
-#protections-popup-blocking-section-header, #protections-popup-not-blocking-section-header, #protections-popup-not-found-section-header {
-	margin: 0;
-	padding-inline: calc(var(--vertical-section-padding) + 3px) !important;
-	color: var(--panel-description-color);
+#protections-popup-blocking-section-header,
+#protections-popup-not-blocking-section-header,
+#protections-popup-not-found-section-header {
+    margin: 0;
+    padding-inline: calc(var(--vertical-section-padding) + 3px) !important;
+    color: var(--panel-description-color);
 }
 
-#protections-popup-siteNotWorkingView-header, #protections-popup-tp-switch-section {
-	padding-inline: calc(var(--vertical-section-padding) + 3px) !important;
+#protections-popup-siteNotWorkingView-header,
+#protections-popup-tp-switch-section {
+    padding-inline: calc(var(--vertical-section-padding) + 3px) !important;
 }
 
 .protections-popup-category::after {
@@ -457,7 +460,9 @@ popupnotification .popup-notification-checkbox:hover .checkbox-check[checked]:no
     background-image: var(--download-button-hover-bg) !important;
 }
 
-#downloadsPanel:not([hasdownloads="true"]) #downloadsFooterButtons > button:focus-visible:not(:hover) {
+#downloadsPanel:not([hasdownloads="true"])
+    #downloadsFooterButtons
+    > button:focus-visible:not(:hover) {
     background-color: transparent !important;
 }
 
@@ -566,7 +571,7 @@ popupnotification .popup-notification-checkbox:hover .checkbox-check[checked]:no
 }
 
 :root:not([customizing]) .widget-overflow-list .toolbarbutton-1 {
-    -moz-appearance: none !important;
+    appearance: none !important;
     margin: 2px !important;
     padding: 0 !important;
     -moz-box-pack: center !important;

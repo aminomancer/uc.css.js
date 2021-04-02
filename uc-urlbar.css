@@ -7,10 +7,11 @@
     background-color: var(--desaturate-dimmed) !important;
 }
 
-.urlbar-icon:focus-visible, .urlbar-icon-wrapper:focus-visible {
-	outline: unset !important;
-	outline-offset: unset !important;
-	-moz-outline-radius: unset !important;
+.urlbar-icon:focus-visible,
+.urlbar-icon-wrapper:focus-visible {
+    outline: unset !important;
+    outline-offset: unset !important;
+    -moz-outline-radius: unset !important;
     background-color: var(--desaturate-checked-background) !important;
 }
 
@@ -210,7 +211,9 @@ toolbarpaletteitem[removable="false"]
 
 #urlbar[pageproxystate="valid"] #identity-box.chromeUI:hover #identity-icon-box:not([open="true"]),
 #urlbar[pageproxystate="valid"] #identity-box.chromeUI:hover:active #identity-icon-box,
-#urlbar[pageproxystate="valid"] #identity-box.chromeUI #identity-icon-box:is([open="true"], :focus-visible) {
+#urlbar[pageproxystate="valid"]
+    #identity-box.chromeUI
+    #identity-icon-box:is([open="true"], :focus-visible) {
     background-color: var(--identity-box-hover-bg) !important;
 }
 
@@ -438,7 +441,8 @@ toolbarpaletteitem[removable="false"]
     fill-opacity: 1 !important;
 }
 
-#tracking-protection-icon-container:is([open="true"], :focus-visible) #tracking-protection-icon-box:not([hasException]),
+#tracking-protection-icon-container:is([open="true"], :focus-visible)
+    #tracking-protection-icon-box:not([hasException]),
 #tracking-protection-icon-container:not([open="true"])
     #tracking-protection-icon-box:hover:not([hasException]) {
     fill-opacity: 1 !important;

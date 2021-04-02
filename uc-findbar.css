@@ -195,7 +195,8 @@ findbar:focus-within .findbar-textbox:not([status="notfound"]) ~ .matches-indica
     list-style-image: url("data:image/svg+xml;utf8,<svg width='12' height='12' xmlns='http://www.w3.org/2000/svg'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M.242 11.455L5.692 6 .241.545.77.017 6.758 6 .77 11.982z'/></svg>") !important;
 }
 
-:is(.findbar-find-previous, .findbar-find-next):not([disabled]):is(:hover, :focus-visible) > .toolbarbutton-icon {
+:is(.findbar-find-previous, .findbar-find-next):not([disabled]):is(:hover, :focus-visible)
+    > .toolbarbutton-icon {
     background: none !important;
     opacity: 1 !important;
 }

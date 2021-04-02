@@ -25,7 +25,7 @@
 #sidebar,
 #sidebar-search-container,
 #historyTree {
-    -moz-appearance: none !important;
+    appearance: none !important;
     --sidebar-background-color: var(--toolbar-bgcolor) !important;
     --sidebar-text-color: var(--toolbar-color) !important;
     background-color: var(--ui-secondary-bg) !important;
@@ -33,7 +33,7 @@
 }
 
 #sidebar-header {
-    -moz-appearance: none !important;
+    appearance: none !important;
     padding: 7px !important;
     border-bottom: 0px solid transparent !important;
     background-color: var(--ui-secondary-bg) !important;
@@ -51,7 +51,7 @@
 
 #sidebar-search-container #search-box,
 .sidebar-search-container .tabsFilter {
-    -moz-appearance: none !important;
+    appearance: none !important;
     padding-inline-start: 5px !important;
     background-color: var(--search-box-color) !important;
     border-radius: 3px !important;
@@ -227,7 +227,7 @@ treechildren::-moz-tree-row(selected, current, focus) {
 }
 
 .sidebar-placesTree {
-    -moz-appearance: none !important;
+    appearance: none !important;
     color: var(--lwt-text-color) !important;
 }
 
@@ -256,7 +256,7 @@ treechildren::-moz-tree-row(selected, current, focus) {
     }
 
     .content-header {
-        -moz-appearance: none !important;
+        appearance: none !important;
         padding: 1px !important;
         margin-top: -4px !important;
         border-bottom: 0px solid transparent !important;
@@ -265,7 +265,7 @@ treechildren::-moz-tree-row(selected, current, focus) {
     }
 
     .search-box {
-        -moz-appearance: none !important;
+        appearance: none !important;
         padding-inline-start: 7px !important;
         background-color: var(--ui-textbox-bgcolor) !important;
         border-radius: 3px !important;
@@ -319,7 +319,7 @@ treechildren::-moz-tree-row(selected, current, focus) {
     }
 
     .item.selected > .item-title-container {
-        -moz-appearance: none !important;
+        appearance: none !important;
         background-color: var(--ui-textbox-bgcolor) !important;
         color: #fff !important;
     }
@@ -329,7 +329,7 @@ treechildren::-moz-tree-row(selected, current, focus) {
     }
 
     .item-title-container:hover {
-        -moz-appearance: none !important;
+        appearance: none !important;
         background-color: var(--ui-textbox-bgcolor) !important;
         color: var(--lwt-text-color) !important;
     }

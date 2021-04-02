@@ -214,7 +214,7 @@
     --context-padding-inline: 28px 0;
     --context-margin-inline: -16px 0;
     --arrowpanel-background: hsl(233, 36%, 11%);
-    --menu-color: color: var(--ui-text-80) !important;
+    --menu-color: var(--ui-text-80) !important;
     --menupopup-background: var(--arrowpanel-background);
     --menu-background-color: var(--arrowpanel-background) !important;
     --menu-right-bg: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='5px' height='5px' viewBox='0 0 492 492' xml:space='preserve'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M382.678,226.804L163.73,7.86C158.666,2.792,151.906,0,144.698,0s-13.968,2.792-19.032,7.86l-16.124,16.12    c-10.492,10.504-10.492,27.576,0,38.064L293.398,245.9l-184.06,184.06c-5.064,5.068-7.86,11.824-7.86,19.028    c0,7.212,2.796,13.968,7.86,19.04l16.124,16.116c5.068,5.068,11.824,7.86,19.032,7.86s13.968-2.792,19.032-7.86L382.678,265    c5.076-5.084,7.864-11.872,7.848-19.088C390.542,238.668,387.754,231.884,382.678,226.804z'/></svg>");
@@ -234,6 +234,42 @@ menupopup.in-menulist > :is(menucaption, menuitem) > .menu-iconic-text {
     padding-block: unset !important;
 }
 
+#ContentSelectDropdown > menupopup :is(menucaption, menuitem),
+menupopup.in-menulist > :is(menucaption, menuitem) {
+    padding-inline: 8px !important;
+}
+
+#ContentSelectDropdown
+    > menupopup
+    :is(menucaption, menuitem)
+    > :is(label, .menu-iconic-text, .menu-text),
+menupopup.in-menulist > :is(menucaption, menuitem) > :is(label, .menu-iconic-text, .menu-text) {
+    padding-inline: 0 !important;
+}
+
+#ContentSelectDropdown > menupopup menucaption,
+menupopup.in-menulist > menucaption {
+    font-weight: inherit !important;
+    min-height: 25px !important;
+}
+
+#ContentSelectDropdown > menupopup menucaption:first-child,
+menupopup.in-menulist > menucaption:first-child {
+    margin-bottom: 2px !important;
+    border-bottom: 1px solid var(--menu-separator-color) !important;
+}
+
+#ContentSelectDropdown > menupopup menucaption > label,
+menupopup.in-menulist > menucaption > label {
+    font-weight: inherit !important;
+    font-style: inherit !important;
+}
+
+#ContentSelectDropdown > menupopup menucaption:first-child > label,
+menupopup.in-menulist > menucaption:first-child > label {
+    margin-block: -3px 0 !important;
+}
+
 #ContentSelectDropdown > menupopup > menuitem:not([_moz-menuactive="true"]),
 menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
     background-color: transparent !important;
@@ -241,7 +277,7 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
 }
 
 #ContentSelectDropdown > menupopup.in-menulist {
-    -moz-appearance: none !important;
+    appearance: none !important;
     font: menu !important;
     border: none !important;
     border-radius: var(--menupopup-border-radius) !important;
@@ -277,7 +313,7 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
 #ContentSelectDropdown > menupopup {
     font: menu !important;
     color: var(--ui-text-80) !important;
-    -moz-appearance: none !important;
+    appearance: none !important;
     background-color: var(--menupopup-background) !important;
     --content-select-background-image: none !important;
     border: none !important;
@@ -292,13 +328,13 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
 }
 
 #ContentSelectDropdown > menupopup :is(menuitem, menu) {
-    -moz-appearance: none !important;
+    appearance: none !important;
     color: var(--ui-text-80) !important;
     border-radius: var(--context-menuitem-border-radius);
 }
 
 #ContentSelectDropdown > menupopup :is(menuitem, menu)[disabled="true"] {
-    -moz-appearance: none !important;
+    appearance: none !important;
     color: var(--panel-disabled-color) !important;
     background-color: initial !important;
 }
@@ -319,7 +355,7 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
 }
 
 #ContentSelectDropdown > menupopup .menu-right {
-    -moz-appearance: none !important;
+    appearance: none !important;
     padding: 0px !important;
     margin-right: var(--menu-right-margin) !important;
     width: var(--menu-right-size) !important;
@@ -340,7 +376,7 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
 #ContentSelectDropdown
     > menupopup
     :is(menu, menuitem):is(:hover, [_moz-menuactive="true"]):not([disabled="true"]) {
-    -moz-appearance: none !important;
+    appearance: none !important;
     background-color: var(--arrowpanel-dimmed) !important;
 }
 
@@ -348,7 +384,7 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
     > menupopup
     :is(menu, menuitem):is(:hover, [_moz-menuactive="true"])[disabled="true"] {
     background: none !important;
-    -moz-appearance: none !important;
+    appearance: none !important;
 }
 
 #ContentSelectDropdown
@@ -372,7 +408,7 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
         --menupopup-border-radius: 3px !important;
         --context-menuitem-border-radius: var(--arrowpanel-menuitem-border-radius);
         --menupopup-inner-padding: 4px;
-        --menu-color: color: var(--ui-text-80) !important;
+        --menu-color: var(--ui-text-80) !important;
         --menupopup-background: transparent;
         --menu-background-color: var(--arrowpanel-background) !important;
         --menu-right-bg: none;
@@ -576,7 +612,7 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
         --min-tab-height: 35px !important;
         --context-margin-inline: -16px 0;
         --context-padding-inline: 28px 0;
-        --menu-color: color: var(--ui-text-80) !important;
+        --menu-color: var(--ui-text-80) !important;
         --menupopup-background: var(--arrowpanel-background);
         --menu-background-color: var(--arrowpanel-background) !important;
         --menupopup-margin: 0px 0 0 0;
@@ -620,8 +656,7 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
 
     @supports (-moz-bool-pref("browser.proton.toolbar.enabled")) {
         :root,
-        menupopup
-        #TabsToolbar {
+        menupopup #TabsToolbar {
             --toolbarbutton-inner-padding: 6px !important;
         }
 
@@ -653,7 +688,7 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
     @supports (-moz-bool-pref("browser.proton.contextmenus.enabled")) {
         :root,
         menupopup {
-            --menu-color: color: var(--ui-text-80) !important;
+            --menu-color: var(--ui-text-80) !important;
             --menupopup-background: transparent;
             --menu-background-color: var(--arrowpanel-background) !important;
             --menupopup-margin: 0;
@@ -676,7 +711,7 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
     }
 
     menupopup {
-        -moz-appearance: none !important;
+        appearance: none !important;
         background: var(--menupopup-background) !important;
         border: none !important;
         border-radius: var(--menupopup-border-radius) !important;
@@ -685,7 +720,7 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
     }
 
     :is(menuitem, menu) {
-        -moz-appearance: none !important;
+        appearance: none !important;
         color: var(--ui-text-80) !important;
         padding: 0 0 0 0 !important;
         min-height: 25px !important;
@@ -693,7 +728,7 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
     }
 
     :is(menuitem, menu)[disabled="true"] {
-        -moz-appearance: none !important;
+        appearance: none !important;
         color: var(--panel-disabled-color) !important;
         background-color: initial !important;
     }
@@ -714,7 +749,7 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
     }
 
     .menu-right {
-        -moz-appearance: none !important;
+        appearance: none !important;
         padding: 0px !important;
         margin-right: var(--menu-right-margin) !important;
         width: var(--menu-right-size) !important;
@@ -733,13 +768,13 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
     }
 
     :is(menu, menuitem):is(:hover, [_moz-menuactive="true"]):not([disabled="true"]) {
-        -moz-appearance: none !important;
+        appearance: none !important;
         background-color: var(--arrowpanel-dimmed) !important;
     }
 
     :is(menu, menuitem):is(:hover, [_moz-menuactive="true"])[disabled="true"] {
         background: none !important;
-        -moz-appearance: none !important;
+        appearance: none !important;
     }
 
     .subviewbutton:is(:hover, [_moz-menuactive="true"])[disabled="true"] {
@@ -756,10 +791,39 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
         padding-block: unset !important;
     }
 
-    #ContentSelectDropdown :is(menu, menuitem, menucaption),
-    .contentSelectDropdown-ingroup > .menu-iconic-text,
-    menupopup.in-menulist .menu-iconic-text {
+    :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
+        :is(menu, menuitem, menucaption) {
         padding-inline: 8px !important;
+    }
+
+    :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
+        :is(menu, menuitem, menucaption)
+        > :is(label, .menu-iconic-text, .menu-text) {
+        padding-inline: 0 !important;
+    }
+
+    :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup) menucaption {
+        font-weight: inherit !important;
+        min-height: 25px !important;
+    }
+
+    :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
+        menucaption:first-child {
+        margin-bottom: 2px !important;
+        border-bottom: 1px solid var(--menu-separator-color) !important;
+    }
+
+    :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
+        menucaption
+        > label {
+        font-weight: inherit !important;
+        font-style: inherit !important;
+    }
+
+    :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
+        menucaption:first-child
+        > label {
+        margin-block: -3px 0 !important;
     }
 
     #ContentSelectDropdown > menupopup {
@@ -777,7 +841,7 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
     }
 
     menupopup.in-menulist {
-        -moz-appearance: none !important;
+        appearance: none !important;
         font: menu !important;
         border: none !important;
         border-radius: var(--menupopup-border-radius) !important;
@@ -3701,7 +3765,7 @@ domain("wikimedia.org") {
     }
 
     .oo-ui-textInputWidget .oo-ui-inputWidget-input {
-        -moz-appearance: none !important;
+        appearance: none !important;
         background-color: hsl(215, 6%, 6%) !important;
         color: hsl(0, 0%, 60%) !important;
         border: none !important;

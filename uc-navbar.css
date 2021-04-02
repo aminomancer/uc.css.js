@@ -139,9 +139,12 @@ toolbar .toolbarbutton-1:not([disabled])[open]:hover > .toolbarbutton-icon {
     background-color: var(--toolbarbutton-active-background) !important;
 }
 
-#PersonalToolbar .toolbarbutton-1:is(:focus-visible, [checked="true"]):not([disabled], [open], :hover, :active),
+#PersonalToolbar
+    .toolbarbutton-1:is(:focus-visible, [checked="true"]):not([disabled], [open], :hover, :active),
 toolbarbutton.bookmark-item:not(.subviewbutton):is(:focus-visible, [checked="true"]):not([disabled], [open], :hover, :active),
-toolbar .toolbarbutton-1:is(:focus-visible, [checked="true"]):not([disabled], [open], :hover, :active) > :is(.toolbarbutton-icon, .toolbarbutton-text, .toolbarbutton-badge-stack) {
+toolbar
+    .toolbarbutton-1:is(:focus-visible, [checked="true"]):not([disabled], [open], :hover, :active)
+    > :is(.toolbarbutton-icon, .toolbarbutton-text, .toolbarbutton-badge-stack) {
     background-color: var(--toolbarbutton-checked-background) !important;
     transition: none !important;
 }
