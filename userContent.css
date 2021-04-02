@@ -3319,7 +3319,9 @@ domain("wikimedia.org") {
         border: none !important;
         filter: contrast(0%) brightness(180%) !important;
         clear: both !important;
-        float: left !important;
+        padding-inline: 25px 6px !important;
+        background-position: left 6px center !important;
+        min-height: 25px !important;
     }
 
     .mw-interlanguage-selector.mw-ui-button:hover,
@@ -3660,13 +3662,12 @@ domain("wikimedia.org") {
 
     #mw-navigation .portal ul li,
     #mw-navigation .portal ul li {
-        display: inline-block !important;
         clear: both !important;
-        float: left !important;
-        padding-left: 3.5px !important;
-        padding-right: 4px !important;
-        padding-top: 2px !important;
-        padding-bottom: 2.5px !important;
+        cursor: pointer !important;
+        width: min-content !important;
+        text-overflow: clip !important;
+        white-space: nowrap !important;
+        padding: 2px 4.5px 2.5px 3.5px !important;
     }
 
     #p-lang.portal button.uls-settings-trigger:hover {
