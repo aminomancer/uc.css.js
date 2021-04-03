@@ -1,5 +1,105 @@
+#urlbar,
+.searchbar-textbox {
+    border: none !important;
+    box-shadow: none !important;
+    min-height: var(--urlbar-height) !important;
+}
+
+#search-container {
+    padding-block: calc((var(--urlbar-container-height) - var(--urlbar-height)) / 2) !important;
+    height: var(--urlbar-container-height) !important;
+    min-height: var(--urlbar-container-height) !important;
+}
+
+#searchbar {
+    margin-block-start: -0.6px !important;
+    box-shadow: none !important;
+    -moz-box-align: center;
+    min-height: var(--urlbar-height) !important;
+    border: none !important;
+}
+
+#urlbar-search-splitter {
+    min-width: 6px !important;
+}
+
+#PopupSearchAutoComplete {
+    margin-top: 3.5px !important;
+    border: none !important;
+    background: var(--urlbar-results-bgcolor) !important;
+    border-radius: 0 !important;
+    border-bottom-left-radius: 4px !important;
+    border-bottom-right-radius: 4px !important;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.2);
+    font-size: 1.04em !important;
+}
+
+#PopupSearchAutoComplete .search-panel-tree {
+    margin-inline: var(--arrowpanel-menuitem-inline-margin) !important;
+}
+
+#PopupSearchAutoComplete .autocomplete-richlistitem {
+    padding-block: 6px !important;
+    min-height: 32px;
+    border-radius: var(--arrowpanel-menuitem-border-radius) !important;
+}
+
+#PopupSearchAutoComplete .autocomplete-richlistitem .ac-title-text {
+    font-weight: 500 !important;
+    font-style: normal !important;
+    color: var(--panel-shortcut-color);
+}
+
+.urlbarView-row[has-action][selected] .urlbarView-title strong,
+.urlbarView-row[has-action][selected] .urlbarView-title[isurl],
+.urlbarView-row[has-url][selected] .urlbarView-title {
+    color: var(--panel-shortcut-focus);
+}
+
+#PopupSearchAutoComplete .autocomplete-richlistitem .ac-emphasize-text {
+    color: var(--lwt-toolbar-field-color);
+}
+
+#PopupSearchAutoComplete .search-panel-current-engine {
+    padding: 6px 12px !important;
+}
+
+#PopupSearchAutoComplete .search-panel-current-engine > label {
+    color: var(--panel-shortcut-color) !important;
+    opacity: 1 !important;
+}
+
+#searchbar .urlbar-icon {
+    margin-right: 2px !important;
+}
+
+#searchbar .searchbar-search-icon {
+    fill-opacity: 0.6 !important;
+    fill: white !important;
+}
+
+#searchbar .searchbar-search-button:hover > .searchbar-search-icon {
+	fill-opacity: 1 !important;
+}
+
+#PopupSearchAutoComplete {
+    border-bottom-right-radius: 4px !important;
+    border-bottom-left-radius: 4px !important;
+}
+
 #urlbar-container {
     padding-block: calc((var(--urlbar-container-height) - var(--urlbar-height)) / 2) !important;
+}
+
+#urlbar-input-container, #searchbar {
+    background-color: var(--urlbar-input-bgcolor) !important;
+    margin-top: calc(0px - var(--urlbar-element-top-adjust-magnitude)) !important;
+    transition: 220ms ease-in-out background-color 0s, 220ms ease-in-out box-shadow 0s !important;
+}
+
+#urlbar:is([focused="true"], :focus-within) > #urlbar-input-container,
+#searchbar:is(:focus-within, :focus-visible) {
+    background-color: var(--urlbar-input-bgcolor-even-brighter) !important;
 }
 
 :not(.urlbar-icon-wrapper) > .urlbar-icon:not([disabled]):hover,
@@ -350,17 +450,6 @@ toolbarpaletteitem[removable="false"]
 
 :root:not([customizing]) #urlbar * {
     pointer-events: auto;
-}
-
-/* searchbar */
-#searchbar {
-    height: 33px !important;
-    border: none !important;
-}
-
-#PopupSearchAutoComplete {
-    margin-top: 3.5px !important;
-    border: none !important;
 }
 
 #urlbar-background {

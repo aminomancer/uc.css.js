@@ -9,42 +9,6 @@
     height: 0;
 }
 
-#urlbar,
-.searchbar-textbox {
-    border: none !important;
-    box-shadow: none !important;
-    min-height: var(--urlbar-height) !important;
-}
-
-#search-container {
-    padding-block: calc((var(--urlbar-container-height) - var(--urlbar-height)) / 2) !important;
-    height: var(--urlbar-container-height) !important;
-    min-height: var(--urlbar-container-height) !important;
-}
-
-#searchbar {
-    margin-block-start: -0.6px !important;
-    box-shadow: none !important;
-    -moz-box-align: center;
-    min-height: var(--urlbar-height) !important;
-}
-
-#searchbar .urlbar-icon {
-    border-radius: 3px;
-    max-height: 27px !important;
-    margin-right: 3px !important;
-}
-
-#PopupSearchAutoComplete,
-#PopupSearchAutoComplete #searchbar-anon-search-settings {
-    border-bottom-right-radius: 4px !important;
-    border-bottom-left-radius: 4px !important;
-}
-
-#PopupSearchAutoComplete richlistitem {
-    padding-block: 5px !important;
-}
-
 /* makes the flexible space in toolbar customization way smaller */
 toolbarpaletteitem[place="toolbar"][id^="wrapper-customizableui-special-spring"],
 toolbarspring {

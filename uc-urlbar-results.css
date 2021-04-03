@@ -325,16 +325,6 @@
     border-radius: var(--toolbarbutton-border-radius);
 }
 
-#urlbar-input-container {
-    background-color: var(--urlbar-input-bgcolor) !important;
-    margin-top: calc(0px - var(--urlbar-element-top-adjust-magnitude)) !important;
-    transition: 220ms ease-in-out background-color 0s, 220ms ease-in-out box-shadow 0s !important;
-}
-
-#urlbar:is([focused="true"], :focus-within) > #urlbar-input-container {
-    background-color: var(--urlbar-input-bgcolor-even-brighter) !important;
-}
-
 #urlbar {
     background: none !important;
 }
@@ -379,7 +369,8 @@
 }
 
 .urlbarView-row-inner {
-    padding: 6px 6.5px !important;
+    padding: 6px 8px !important;
+    border-radius: var(--arrowpanel-menuitem-border-radius) !important;
 }
 
 .urlbarView .urlbarView-body-inner {

@@ -1,4 +1,4 @@
-.search-panel-one-offs {
+.urlbarView .search-panel-one-offs {
     margin: 0 !important;
     border-top: 0px solid transparent !important;
     line-height: 0 !important;
@@ -15,13 +15,65 @@
     padding-top: 3px !important;
 }
 
+#PopupSearchAutoComplete .search-one-offs {
+    -moz-box-orient: horizontal !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    display: flex !important;
+    flex-flow: row nowrap !important;
+    align-items: center !important;
+}
+
+#PopupSearchAutoComplete .search-one-offs > * {
+    flex-grow: 1 !important;
+    max-width: -moz-available !important;
+    min-width: 0 !important;
+}
+
 #PopupSearchAutoComplete .search-panel-one-offs {
     background: none !important;
     -moz-context-properties: fill, fill-opacity !important;
     fill: currentColor !important;
+    height: unset !important;
+    flex-wrap: nowrap !important;
+    scroll-behavior: smooth !important;
+    overflow: scroll !important;
+    scrollbar-width: none !important;
 }
 
-.search-one-offs {
+#PopupSearchAutoComplete .search-panel-one-offs-header {
+    margin-inline: var(--arrowpanel-menuitem-inline-margin) 0 !important;
+    min-width: -moz-fit-content !important;
+}
+
+#PopupSearchAutoComplete .search-panel-one-offs-header::before {
+    content: "Search with:";
+    display: inline-block;
+    margin-block: 2px 3px;
+    margin-inline: 10px 3px;
+    color: var(--panel-shortcut-color);
+}
+
+#PopupSearchAutoComplete .search-setting-button-compact {
+    display: -moz-box !important;
+}
+
+#PopupSearchAutoComplete .search-one-offs .button-icon {
+    fill-opacity: 1 !important;
+}
+
+#PopupSearchAutoComplete #searchbar-one-offs-header-label,
+#PopupSearchAutoComplete .search-setting-button,
+#PopupSearchAutoComplete .search-one-offs > .searchbar-separator {
+    display: none !important;
+}
+
+.searchbar-separator {
+    margin-inline: var(--arrowpanel-menuitem-inline-margin) !important;
+}
+
+.urlbarView .search-one-offs {
     width: -moz-fit-content !important;
     position: relative !important;
     border: none !important;
@@ -30,15 +82,15 @@
     padding: 0 !important;
 }
 
-.search-panel-header {
+.urlbarView .search-panel-header {
     display: none !important;
 }
 
-.search-one-offs-context-menu {
+.urlbarView .search-one-offs-context-menu {
     display: none !important;
 }
 
-.searchbar-engine-one-off-item {
+.urlbarView .searchbar-engine-one-off-item {
     min-width: 27px !important;
     height: 27px !important;
     padding: 0 !important;
@@ -49,7 +101,7 @@
     position: relative !important;
 }
 
-.searchbar-engine-one-off-item .button-icon {
+.urlbarView .searchbar-engine-one-off-item .button-icon {
     height: 17px !important;
     width: 17px !important;
 }
@@ -68,7 +120,7 @@
     padding-left: 17px; /* Equal to width of new image */
 }
 
-.search-panel-one-offs {
+.urlbarView .search-panel-one-offs {
     min-width: 0 !important;
 }
 
@@ -79,8 +131,8 @@
     padding-right: 0 !important;
 }
 
-.search-panel-one-offs,
-.search-panel-one-offs-container {
+.urlbarView .search-panel-one-offs,
+.urlbarView .search-panel-one-offs-container {
     min-width: max-content !important;
     max-width: max-content !important;
     width: max-content !important;
@@ -115,7 +167,7 @@
     padding-left: 0 !important;
 }
 
-.search-panel-one-offs {
+.urlbarView .search-panel-one-offs {
     cursor: default !important;
 }
 
@@ -285,8 +337,8 @@
     pointer-events: auto !important;
 }
 
-.searchbar-engine-one-off-item:not([selected]):hover,
-.addengine-item:hover {
+.urlbarView .searchbar-engine-one-off-item:not([selected]):hover,
+.urlbarView .addengine-item:hover {
     background-color: var(--desaturate-dimmed) !important;
 }
 
