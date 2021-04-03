@@ -163,6 +163,7 @@ findbar:focus-within .findbar-textbox:not([status="notfound"]) ~ .matches-indica
 .findbar-find-next {
     border: none !important;
     padding-inline: 2px !important;
+    padding-block: 0 !important;
     background: var(--search-box-color) !important;
     fill: rgba(255, 255, 255, 1) !important;
     transition: 300ms !important;
@@ -300,15 +301,7 @@ findbar:focus-within
 .findbar-find-status,
 .found-matches,
 .find-status-icon,
-.findbar-find-fast[anonid="match-diacritics-status"] {
-    display: none !important;
-}
-
-/* .findbar-entire-word,
-.findbar-case-sensitive {
-    display: none !important;
-} */
-
+.findbar-label,
 .findbar-highlight,
 .findbar-match-diacritics {
     display: none !important;
