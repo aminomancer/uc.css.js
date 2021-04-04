@@ -62,12 +62,21 @@ const UndoListInTabmenu = {
         context.addEventListener(
             "popupshowing",
             function (_e) {
-                windowMenu.accessKey = "W";
-                tabMenu.accessKey = "T";
+                let winWords = windowMenu.label.split(" ");
+                windowMenu.accessKey = RTL_UI
+                    ? windowMenu.label.substr(0, 1)
+                    : winWords[winWords.length - 1]?.substr(0, 1) || "W";
+
+                let tabWords = tabMenu.label.split(" ");
+                tabMenu.accessKey = RTL_UI
+                    ? tabMenu.label.substr(0, 1)
+                    : tabWords[tabWords.length - 1]?.substr(0, 1) || "T";
+
                 // closed tab list is empty so should be disabled
                 if (UndoListInTabmenu.ss.getClosedTabCount(window) == 0)
                     tabMenu.setAttribute("disabled", true);
                 else tabMenu.removeAttribute("disabled");
+
                 // closed window list is empty so should be disabled
                 if (UndoListInTabmenu.ss.getClosedWindowCount() == 0)
                     windowMenu.setAttribute("disabled", true);
@@ -100,7 +109,7 @@ const UndoListInTabmenu = {
             `menu-history-reopen-all-${type.toLowerCase()}s`
         );
 
-        fragment.lastChild.accessKey = "R";
+        fragment.lastChild.accessKey = fragment.lastChild.label.substr(0, 1) || "R";
         popup.appendChild(fragment); // populate menu
         popup.firstChild._inheritedElements[".menu-iconic-accel"].value = "";
     },

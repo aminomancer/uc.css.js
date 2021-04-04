@@ -663,7 +663,7 @@ tabmodalprompt .checkbox-check[checked="true"] {
     }
 
     menulist,
-    input:not([type="checkbox"], [type="radio"], .radio-check) {
+    input[type="text"] {
         margin-inline: 4px !important;
         padding-block: 0 !important;
         padding-inline: 6px !important;

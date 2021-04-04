@@ -2,29 +2,18 @@
 // @name           Toolbox Button
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
-// @description    Adds a new toolbar button that 1) opens the content toolbox on left click; 2) opens the browser toolbox on right click; 3) toggles "Popup Auto-Hide" on middle click.
-// Left click will open the toolbox for the active tab, or close it if it's already open.
-// Right click will open the elevated browser toolbox if it's not already open.
-// If it is already open, then instead of trying to start a new process and spawning an irritating dialog, it'll just show a brief notification saying the toolbox is already open.
-// Middle click will toggle the preference for popup auto-hide: ui.popup.disable_autohide
-// This does the same thing as the "Disable Popup Auto-Hide" option in the menu at the top right of the browser toolbox...
-// except it will also show a notification telling you the current status of that preference, e.g. "Holding popups open."
-// This is just so that people who use the feature a lot won't lose track of whether it's on or off, and won't need to open a context menu to test it.
-// (The toolbar button also changes appearance when popup auto-hide is disabled. It becomes blue like the downloads button and the icon changes into a popup icon)
-// All of these notifications use the native confirmation hint custom element, since it looks nice.
-// That's the one that appears when you save a bookmark, #confirmation-hint. So you can style them with that selector.
-// This script needs a CSS rule in your userChrome.css: #confirmation-hint[data-message-id="hideCheckHint"] #confirmation-hint-message {margin-inline: 0 !important;}
-// Otherwise the padding will be a little off for the message popup that says "Browser Toolbox is already open."
-// I could have added this rule with javascript instead, but there's an internal CSS file that does exactly the opposite, 7px.
-// Using !important in an inline style or overriding it with javascript just seem dirty.
-// Besides that, it should work out of the box on any setup.
-// You can use this code to make your own little notifications, via CustomHint.show(anchor, message, options)
-// In this case we're anchoring to the toolbar button but you can anchor to any node in the browser.
-// hideArrow will remove the arrow pointing to the anchor, and hideCheck will remove the checkmark animation.
-// description will add a more detailed description (in addition to the message) and duration will change how long the notification lasts.
-// This is all modeled on the native class ConfirmationHint, (look in browser.js) we could have even extended it I guess.
-// We couldn't use it explicitly since it only accepts messages as items in browser.properties, which rules out custom messages.
+// @description    Adds a new toolbar button that 1) opens the content toolbox on left click; 2) opens the browser toolbox on right click; 3) toggles "Popup Auto-Hide" on middle click. Left click will open the toolbox for the active tab, or close it if it's already open. Right click will open the elevated browser toolbox if it's not already open. If it is already open, then instead of trying to start a new process and spawning an irritating dialog, it'll just show a brief notification saying the toolbox is already open. Middle click will toggle the preference for popup auto-hide: ui.popup.disable_autohide This does the same thing as the "Disable Popup Auto-Hide" option in the menu at the top right of the browser toolbox... except it will also show a notification telling you the current status of that preference, e.g. "Holding popups open." This is just so that people who use the feature a lot won't lose track of whether it's on or off, and won't need to open a context menu to test it. (The toolbar button also changes appearance when popup auto-hide is disabled. It becomes blue like the downloads button and the icon changes into a popup icon) All of these notifications use the native confirmation hint custom element, since it looks nice. That's the one that appears when you save a bookmark, #confirmation-hint. So you can style them with that selector. This script needs a CSS rule in your userChrome.css: #confirmation-hint[data-message-id="hideCheckHint"] #confirmation-hint-message {margin-inline: 0 !important;} Otherwise the padding will be a little off for the message popup that says "Browser Toolbox is already open." I could have added this rule with javascript instead, but there's an internal CSS file that does exactly the opposite, 7px. Using !important in an inline style or overriding it with javascript just seem dirty. Besides that, it should work out of the box on any setup. You can use this code to make your own little notifications, via CustomHint.show(anchor, message, options) In this case we're anchoring to the toolbar button but you can anchor to any node in the browser. hideArrow will remove the arrow pointing to the anchor, and hideCheck will remove the checkmark animation. description will add a more detailed description (in addition to the message) and duration will change how long the notification lasts. This is all modeled on the native class ConfirmationHint, (see browser.js) we could have even extended it I guess. We couldn't use it explicitly since it only accepts messages as items in browser.properties, which rules out custom messages.
 // ==/UserScript==
+
+// Modify these strings for easy localization. I tried to use built-in strings for this so it would automatically localize itself, but I found that every reference to the "Browser Toolbox" throughout the entire firefox UI is derived from a single message in a single localization file, which doesn't follow the standard format. It can only be parsed by the devtools' own special l10n module, which itself can only be imported by a CJS module. Requiring CJS just for a button seems ridiculous, plus there really aren't any localized strings that work for these confirmation messages anyway, or even the tooltip. So if your UI language isn't English you can modify all the strings created by this script in the following object:
+const toolboxButtonL10n = {
+    buttonLabel: "Browser Toolbox", // The label of the button. Only appears in the overflow menu and the customize menu, unless you have toolbar button labels enabled.
+    buttonTooltip: "Open Content/Browser Toolbox", // The button's tooltip. Appears on hover.
+    alreadyOpenMsg: "Browser Toolbox is already open.", // Confirmation hint. You receive this message when you right click the toolbox button, but a toolbox process for the window is already open. You can only have one toolbox open per-window. So if I have 3 windows open, and I right-click the toolbox button in window 1, then it'll launch a browser toolbox for window 1. If I then right-click the toolbox button in window 2, it'll launch a browser toolbox for window 2. But if I go back to window 1 and right-click the toolbox button a second time, it will do nothing except show a brief confirmation hint to explain the lack of action.
+    holdingOpenMsg: "Holding popups open.", // Confirmation hint. This appears when you first middle-click the toolbox button. It signifies that popups are being kept open. That is, "popup auto-hide" has been temporarily disabled.
+    lettingCloseMsg: "Letting popups close.", // Confirmation hint. This appears when you middle-click the toolbox button a second time, toggling "popup auto-hide" back on, thereby allowing popups to close on their own.
+};
+
 (() => {
     function init() {
         let toolbox = ChromeUtils.import(
@@ -198,7 +187,7 @@
                                     toolbox.getBrowserToolboxSessionState()
                                         ? CustomHint.show(
                                               animBox,
-                                              "Browser Toolbox is already open.",
+                                              toolboxButtonL10n.alreadyOpenMsg,
                                               { event: e, hideCheck: true }
                                           )
                                         : e.target.ownerDocument.defaultView.key_browserToolbox.click();
@@ -206,13 +195,21 @@
                                 case 1:
                                     e.preventDefault();
                                     prefSvc.getBoolPref(autoHide)
-                                        ? CustomHint.show(animBox, "Letting popups close.", {
-                                              event: e,
-                                              hideCheck: true,
-                                          })
-                                        : CustomHint.show(animBox, "Holding popups open.", {
-                                              event: e,
-                                          });
+                                        ? CustomHint.show(
+                                              animBox,
+                                              toolboxButtonL10n.lettingCloseMsg,
+                                              {
+                                                  event: e,
+                                                  hideCheck: true,
+                                              }
+                                          )
+                                        : CustomHint.show(
+                                              animBox,
+                                              toolboxButtonL10n.holdingOpenMsg,
+                                              {
+                                                  event: e,
+                                              }
+                                          );
                                     prefSvc.setBoolPref(autoHide, !prefSvc.getBoolPref(autoHide));
                                     icon.animate(keyframes, animOptions);
                                     break;
@@ -224,8 +221,8 @@
                             id: "toolbox-button",
                             role: "button",
                             class: "toolbarbutton-1 chromeclass-toolbar-additional",
-                            label: "Browser Toolbox",
-                            tooltiptext: "Open Content/Browser Toolbox",
+                            label: toolboxButtonL10n.buttonLabel,
+                            tooltiptext: toolboxButtonL10n.buttonTooltip,
                             style: "-moz-box-align: center;",
                         };
                         function getPref(root, pref, type) {
@@ -266,7 +263,7 @@
                         label.className = "toolbarbutton-text";
                         label.setAttribute("crop", "right");
                         label.setAttribute("flex", "1");
-                        label.setAttribute("value", "Browser Toolbox");
+                        label.setAttribute("value", toolboxButtonL10n.buttonLabel);
                         toolbarbutton.appendChild(animBox);
                         toolbarbutton.appendChild(label);
                         animBox.appendChild(icon);
