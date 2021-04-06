@@ -91,7 +91,8 @@ The files in the scripts folder are not content scripts like you'd load in Tampe
 
 They need to be loaded by an autoconfig script loader. I recommend [**fx-autoconfig by MrOtherGuy**](https://github.com/MrOtherGuy/fx-autoconfig) which is extremely robust. You can also use [alice0775's autoconfig loader](https://github.com/alice0775/userChrome.js/tree/master/72) if you prefer something more lightweight, though from here on out some of my scripts will not be fully compatible with loaders other than MrOtherGuy's because they don't support loading scripts into the global execution context before windows have been initialized.
 
-### **Installation:**
+<h3><b>Installation:</b></h3>
+
 Whatever you choose, the installation steps are almost the same. You first need to find your Firefox installation folder. On Windows that's `C:/Program Files/Firefox/`. On Linux it should be `usr/lib/firefox/`. On macOS this is more complicated. You need to open the application file itself, probably in `Macintosh HD/Applications/`. It's the file you double-click to open Firefox, but it's actually a package, not a binary. If you right click it, there will be an option in the context menu labeled "Show Package Contents." Clicking this takes you to the root directory. So whichever OS you're on, you should end up with...
 1) &nbsp; a file called `config.js` in your Firefox installation's root directory;
 2) &nbsp; a folder called `defaults` in the root directory;
@@ -103,14 +104,16 @@ You may already have a file called `channel-prefs.js` inside the `prefs` folder.
 
 If you're using fx-autoconfig like I recommended, then your scripts should go in the `JS` folder. Any agent sheets or author sheets (files ending in .as.css or .au.css) should go in the `chrome` folder with your regular stylesheets. If you're using alice0775's loader instead, then get the updated [userChrome.js from here](https://github.com/alice0775/userChrome.js/tree/master/73) and put it in your profile's chrome folder, along with all the stylesheets you use. With alice0775's loader, scripts should go directly in the main chrome folder, right along with userChrome.css, etc.
 
-### **Usage:**
+<h3><b>Usage:</b></h3>
+
 After you've installed the files, the script loader will locate any scripts you place in the proper folder that end in .uc.js, such as the ones in my repo. Once you have all this set up you can download my scripts, put them in the correct folder for your loader, restart, and you should see the changes immediately.
 
 In the main directory on this repo you might notice two files: `userChrome.as.css` and `userChrome.au.css`. The "as" is an abbreviation for user agent sheet, and "au" is an abbreviation for author sheet. They're used for rules that will not work in `userChrome.css`. But Firefox will not load them on its own. These are loaded by the script `userChrome_as_css_module.uc.js`. The script has the same name as one of the files included with fx-autoconfig, but it is quite different, so you need the script from my repo.
 
 These stylesheets look short, but they style some of the most common and problematic elements like tooltips, scrollbars, etc. The main purposes for using special stylesheets are 1) to use CSS syntax that is forbidden to user sheets, such as the `::part(...)` pseudo-element; 2) to style native-anonymous content like default tooltips or scrollbars; or 3) to traverse shadow trees from parent to children, e.g. when you need to select a specific menupopup's children without affecting other menupopups' children.
 
-#### **Styling Browser Toolbox Windows:**
+<h4><b>Styling Browser Toolbox Windows:</b></h4>
+
 There's another script labeled `userChrome_devtools_module.uc.js` which is necessary if you want the theme to apply to elements in browser toolbox windows. My theme mainly uses this to make all context menus and scrollbars in the devtools consistent with the context menus and scrollbars in the main chrome window. It doesn't load a special stylesheet like the other module, it just loads userChrome and userContent.css into the devtools.
 
 But by itself it doesn't do anything. It only works in conjunction with modifications I made to fx-autoconfig. I won't upload the modified script loader since it's not my original work, but you can either 1) follow the instructions below to modify it yourself; or 2) just copy all the contents of your chrome folder into `{your profile folder}/chrome_debugger_profile/chrome/`.
@@ -170,7 +173,7 @@ get chromeDir() {return traverseToMainProfile('UChrm')},
 </details>
 <br/>
 
-### **Script descriptions:**
+<h3><b>Script descriptions:</b></h3>
 
 -   `allTabsMenuDimUnloadedTabs`: Automatically dims unloaded tabs in the 'all tabs' menu so you can tell which ones have been loaded and which haven't. Also adds color stripes to container tabs and multiselected tabs so you can identify them from the all tabs menu. Pretty handy for anyone who's too lazy to clean up their 500+ tabs (like me) and doesn't use a vertical tab layout. Requires CSS rules from uc-tabs-bar.css, see the description in the script file for details.
 
