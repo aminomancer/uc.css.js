@@ -89,7 +89,9 @@ Most of the important colors can be changed in uc-globals.css and uc-variables.c
 
 The files in the scripts folder are not content scripts like you'd load in Tampermonkey. They're meant to execute in the same context as Firefox's internal scripts. They're scripts for the Firefox frontend itself rather than for webpages. This is sort of analogous to gaining "privileges" to modify your UI document directly. With CSS alone you can only do so much. Even a lot of purely aesthetic features may require JavaScript, like the search engine icons shown in the GIF above.
 
-They need to be loaded by an autoconfig script loader. I recommend [**MrOtherGuy's script manager**](https://github.com/MrOtherGuy/fx-autoconfig) which is extremely robust. You can also use [alice0775's autoconfig loader](https://github.com/alice0775/userChrome.js/tree/master/72) if you prefer something more lightweight, though from here on out some of my scripts will not be fully compatible with loaders other than MrOtherGuy's because they don't support loading scripts into the global execution context before windows have been initialized.
+They need to be loaded by an autoconfig script loader. I recommend [**fx-autoconfig by MrOtherGuy**](https://github.com/MrOtherGuy/fx-autoconfig) which is extremely robust. You can also use [alice0775's autoconfig loader](https://github.com/alice0775/userChrome.js/tree/master/72) if you prefer something more lightweight, though from here on out some of my scripts will not be fully compatible with loaders other than MrOtherGuy's because they don't support loading scripts into the global execution context before windows have been initialized.
+
+### **Installation:**
 
 Whatever you choose, the installation steps are almost the same. You first need to find your Firefox installation folder. On Windows that's `C:/Program Files/Firefox/`. On Linux it should be `usr/lib/firefox/`. On macOS this is more complicated. You need to open the application file itself, probably in `Macintosh HD/Applications/`. It's the file you double-click to open Firefox, but it's actually a package, not a binary. If you right click it, there will be an option in the context menu labeled "Show Package Contents." Clicking this takes you to the root directory. So whichever OS you're on, you should end up with...
 1) &nbsp; a file called `config.js` in your Firefox installation's root directory;
@@ -100,11 +102,75 @@ Whatever you choose, the installation steps are almost the same. You first need 
 
 You may already have a file called `channel-prefs.js` inside the `prefs` folder. This is unrelated.
 
-If you're using MrOtherGuy's script manager like I recommended, then your scripts should go in the `JS` folder. Any agent sheets or author sheets (files ending in .as.css or .au.css) should go in the `chrome` folder with your regular stylesheets. If you're using alice0775's loader instead, then get the updated [userChrome.js from here](https://github.com/alice0775/userChrome.js/tree/master/73) and put it in your profile's chrome folder, along with all the stylesheets you use. With alice0775's loader, scripts should go directly in the main chrome folder, right along with userChrome.css, etc.
+If you're using fx-autoconfig like I recommended, then your scripts should go in the `JS` folder. Any agent sheets or author sheets (files ending in .as.css or .au.css) should go in the `chrome` folder with your regular stylesheets. If you're using alice0775's loader instead, then get the updated [userChrome.js from here](https://github.com/alice0775/userChrome.js/tree/master/73) and put it in your profile's chrome folder, along with all the stylesheets you use. With alice0775's loader, scripts should go directly in the main chrome folder, right along with userChrome.css, etc.
+
+### **Usage:**
 
 After you've installed the files, the script loader will locate any scripts you place in the proper folder that end in .uc.js, such as the ones in my repo. Once you have all this set up you can download my scripts, put them in the correct folder for your loader, restart, and you should see the changes immediately.
 
-In the main directory on this repo you might notice two files: `userChrome.as.css` and `userChrome.au.css`. These are loaded by the scripts: `userChrome_as_css_module.uc.js` and `userChrome_au_css_module.uc.js`. The main purposes for using these instead of your main userChrome.css are 1) to use CSS syntax that is forbidden to user sheets, such as the `::part(...)` pseudo-element; 2) to style native-anonymous content like default tooltips or scrollbars; or 3) to traverse shadow trees from parent to children, e.g. when you need to select a specific menupopup's children without affecting other menupopups' children. In some cases, this is impossible even in an agent sheet for some reason I haven't figured out yet. In those cases I use javascript to traverse the shadow tree, and then assign a unique ID or class to the shadow DOM nodes I want to style with specificity. Then, I use the regular `userChrome.css` stylesheet to implement those rules. So, for example, `bookmarksPopupShadowRoot` gives several elements in the bookmarks toolbar popup unique classes, which are styled later in my main stylesheets.
+In the main directory on this repo you might notice two files: `userChrome.as.css` and `userChrome.au.css`. The "as" is an abbreviation for user agent sheet, and "au" is an abbreviation for author sheet. They're used for rules that will not work in `userChrome.css`. But Firefox will not load them on its own. These are loaded by the script `userChrome_as_css_module.uc.js`. The script has the same name as one of the files included with fx-autoconfig, but it is quite different, so you need the script from my repo.
+
+These stylesheets look short, but they style some of the most common and problematic elements like tooltips, scrollbars, etc. The main purposes for using special stylesheets are 1) to use CSS syntax that is forbidden to user sheets, such as the `::part(...)` pseudo-element; 2) to style native-anonymous content like default tooltips or scrollbars; or 3) to traverse shadow trees from parent to children, e.g. when you need to select a specific menupopup's children without affecting other menupopups' children.
+
+#### **Styling Browser Toolbox Windows:**
+
+There's another script labeled `userChrome_devtools_module.uc.js` which is necessary if you want the theme to apply to elements in browser toolbox windows. My theme mainly uses this to make all context menus and scrollbars in the devtools consistent with the context menus and scrollbars in the main chrome window. It doesn't load a special stylesheet like the other module, it just loads userChrome and userContent.css into the devtools.
+
+But by itself it doesn't do anything. It only works in conjunction with modifications I made to fx-autoconfig. I won't upload the modified script loader since it's not my original work, but you can either 1) follow the instructions below to modify it yourself; or 2) just copy all the contents of your chrome folder into `{your profile folder}/chrome_debugger_profile/chrome/`.
+
+The problem with copying everything to `chrome_debugger_profile` is that you may need to reset the debugger profile from time to time. That's why I worked out a method for dynamically loading the main profile's scripts and stylesheets into toolbox processes without modifying the debugger profile.
+
+<details><summary><i>Here's how if you want to do the same: (it's pretty fast)</i></summary>
+
+1. Download and install [fx-autoconfig](https://github.com/MrOtherGuy/fx-autoconfig) as normal.
+2. Open `config.js` from your Firefox installation folder, in a text editor.
+3. After line 8, (after it says `Components;`) add some new lines and paste this: 
+```
+function traverseToMainProfile(str) {
+    let dir = Cc["@mozilla.org/file/directory_service;1"]
+        .getService(Ci.nsIProperties)
+        .get(str, Ci.nsIFile);
+    if (!dir.exists()) {
+        let toAddChrome = false;
+        while (dir.target.includes("chrome_debugger_profile")) {
+            dir = dir.parent;
+            toAddChrome = true;
+        }
+        if (toAddChrome) dir.append("chrome");
+    }
+    return dir;
+}
+```
+4. Then replace the entire next line of code (the one that starts with `let cmanifest`) with this: `let cmanifest = traverseToMainProfile('UChrm');`
+5. Now save `config.js` and exit.
+6. Go back to your `chrome` folder, and open `boot.jsm` from the `utils` folder.
+7. Go to the end of line 57 and hit enter twice to make two new lines, so you should now be at line 59.
+8. Paste this:
+```
+function traverseToMainProfile(str){
+  let dir = Services.dirsvc.get(str,Ci.nsIFile);
+  if (!dir.exists()) {
+    let toAddChrome = false;
+    while (dir.target.includes('chrome_debugger_profile')) {
+      dir = dir.parent;
+      toAddChrome = true;
+    }
+    if (toAddChrome) dir.append('chrome');
+  }
+  return dir;
+}
+```
+9. Go to what should now be line 79 (used to be line 66, this line starts with `BASE_FILEURI:`) and replace the entire line with this:
+```
+BASE_FILEURI: Services.io.getProtocolHandler('file').QueryInterface(Ci.nsIFileProtocolHandler).getURLSpecFromDir(traverseToMainProfile('UChrm')),
+```
+10. Go to what should now be line 83 (used to be line 70), this line starts with `get chromeDir()`) and replace the entire line with this:
+```
+get chromeDir() {return traverseToMainProfile('UChrm')},
+```
+11. Save `boot.jsm` and exit.
+12. That's it! The scripts that are in your main profile folder should now run in browser toolbox windows, even though they're not in the `chrome_debugger_profile` folder. Make sure you download `userChrome_devtools_module.uc.js` so stylesheets will be loaded too.
+</details>
 <br/>
 
 ### **Script descriptions:**
