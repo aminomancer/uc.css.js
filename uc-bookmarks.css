@@ -50,8 +50,6 @@
     border-radius: 2px !important;
     min-height: 24px !important;
     box-shadow: none !important;
-    --menupopup-inner-padding: 0 !important;
-    --context-menuitem-border-radius: 0 !important;
     margin: 0 !important;
 }
 
@@ -162,6 +160,8 @@
     border: none !important;
     border-radius: 2px !important;
     overflow: hidden !important;
+    --menupopup-inner-padding: 0 !important;
+    --context-menuitem-border-radius: 0 !important;
 }
 
 #editBookmarkPanel menulist menupopup {

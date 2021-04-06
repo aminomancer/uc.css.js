@@ -49,6 +49,22 @@ toolbarspring {
     -moz-box-pack: center !important;
 }
 
+:root:not([customizing]) #stop-reload-button > .toolbarbutton-1 {
+    opacity: 1 !important;
+}
+
+:root:not([customizing]) #stop-reload-button > .toolbarbutton-1:not([checked], [open], :active):hover > .toolbarbutton-icon {
+    background-color: var(--toolbarbutton-hover-background);
+}
+
+:root:not([customizing]) #stop-reload-button > .toolbarbutton-1:is(:focus-visible, [checked="true"]):not([open], :hover, :active) > .toolbarbutton-icon {
+    background-color: var(--toolbarbutton-checked-background);
+}
+
+:root:not([customizing]) #stop-reload-button > .toolbarbutton-1:is([open], [checked], :hover:active) > .toolbarbutton-icon {
+    background-color: var(--toolbarbutton-active-background);
+}
+
 /* fix a little visual bug (maybe related to window scaling) where the stop button appears to move half a pixel to the left between animations.
 this is because the reload button is replaced with a step animation for a few moments, and the step animation is then replaced with a static stop icon.
 the stop icon sticks around until the page finishes loading, then it's hidden again and the step animation returns and plays in reverse.
@@ -58,10 +74,8 @@ i haven't tested this on every scaling factor, if it makes things worse on your 
 #stop-button .toolbarbutton-icon {
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='context-fill' fill-opacity='context-fill-opacity'><path d='M10.414 10l5.293-5.293a1 1 0 00-1.414-1.414L9 8.586 3.707 3.293a1 1 0 00-1.414 1.414L7.586 10l-5.293 5.293a1 1 0 101.414 1.414L9 11.414l5.293 5.293a1 1 0 001.414-1.414z'/></svg>") !important;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: left 5px center;
     list-style-image: none;
-    margin-inline-start: 1px;
-    margin-inline-end: -1px !important;
 }
 
 #nav-bar[brighttext] #panic-button[open] {

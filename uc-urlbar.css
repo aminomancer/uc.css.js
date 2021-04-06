@@ -252,8 +252,8 @@ toolbarpaletteitem[removable="false"]
     background-color: transparent !important;
 }
 
-#identity-box #identity-icon-box:is([open="true"], :focus-visible) #identity-icon,
-#identity-box #identity-icon-box:is(:hover:active, :hover:not([open="true"])) #identity-icon:hover {
+#identity-box[pageproxystate="valid"] #identity-icon-box:is([open="true"], :focus-visible) #identity-icon,
+#identity-box[pageproxystate="valid"] #identity-icon-box:is(:hover:active, :hover:not([open="true"])) #identity-icon:hover {
     fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
     fill-opacity: 1 !important;
 }
@@ -524,6 +524,10 @@ toolbarpaletteitem[removable="false"]
     height: var(--urlbar-height) !important;
 }
 
+#identity-box[pageproxystate="invalid"] :is(#identity-icon-box, #identity-icon) {
+    pointer-events: none !important;
+}
+
 #tracking-protection-icon-container:is([open="true"], :focus-visible) #tracking-protection-icon-box,
 #tracking-protection-icon-container:not([open="true"]) #tracking-protection-icon-box:hover {
     background-color: transparent !important;
@@ -546,7 +550,7 @@ toolbarpaletteitem[removable="false"]
     fill: var(--protection-active-color) !important;
 }
 
-#identity-box.extensionPage #identity-icon,
+#identity-box.extensionPage #identity-icon[tooltiptext="Loaded by extension: Tab Notes"],
 #urlbar[pageproxystate="invalid"] #identity-box #identity-icon,
 #tracking-protection-icon-container[hidden]
     ~ #identity-box[pageproxystate="valid"].notSecure:not(.chromeUI, .localResource)
