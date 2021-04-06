@@ -141,7 +141,10 @@ function traverseToMainProfile(str) {
     return dir;
 }
 ```
-4. Then replace the entire next line of code (the one that starts with `let cmanifest`) with this: `let cmanifest = traverseToMainProfile('UChrm');`
+4. Then replace the entire next line of code (the one that starts with `let cmanifest`) with this:
+```
+let cmanifest = traverseToMainProfile('UChrm');
+```
 5. Now save `config.js` and exit.
 6. Go back to your `chrome` folder, and open `boot.jsm` from the `utils` folder.
 7. Go to the end of line 57 and hit enter twice to make two new lines, so you should now be at line 59.
