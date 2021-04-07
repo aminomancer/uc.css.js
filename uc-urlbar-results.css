@@ -2,6 +2,19 @@
     border-radius: 3px !important;
 }
 
+.urlbarView-no-wrap {
+    min-width: 0 !important;
+    max-width: 100% !important;
+}
+
+.urlbarView-no-wrap > span:empty,
+.urlbarView:not([actionoverride])
+    .urlbarView-row[type="switchtab"]
+    > .urlbarView-row-inner
+    > .urlbarView-url {
+    display: none;
+}
+
 .urlbarView-row-inner {
     background: none !important;
 }
@@ -31,7 +44,7 @@
 }
 
 #urlbar-container {
-    transform: translateY(0);
+    transform: none !important;
     position: relative;
 }
 
@@ -42,6 +55,7 @@
 .urlbarView-favicon {
     align-self: center !important;
     background-position: center !important;
+    margin-inline: 0 !important;
 }
 
 .urlbarView-row:not([type], [has-url]) .urlbarView-favicon {
@@ -50,18 +64,23 @@
 }
 
 .urlbarView-type-icon {
-    margin-inline-end: 0px !important;
+    margin-inline: 0px !important;
+    display: none;
 }
 
 .urlbarView-row:is([type="switchtab"], [type="bookmark"], [type="remotetab"])
     .urlbarView-type-icon {
     fill-opacity: 0.75 !important;
-    margin-inline-start: 22px !important;
     margin-bottom: 1px !important;
+    display: -moz-box !important;
 }
 
 .urlbarView-type-icon {
-    position: absolute !important;
+    position: relative !important;
+    min-width: 16px !important;
+    width: 16px !important;
+    height: 16px !important;
+    -moz-context-properties: fill, fill-opacity !important;
 }
 
 .urlbarView-row[type="bookmark"] .urlbarView-type-icon {
@@ -69,8 +88,6 @@
     fill: var(--lwt-toolbarbutton-icon-fill-attention) !important;
     fill-opacity: 1 !important;
     position: absolute;
-    min-width: 16px !important;
-    height: 16px !important;
     align-self: center !important;
     stroke: none !important;
     background-position: center !important;
@@ -78,13 +95,8 @@
 }
 
 .urlbarView-row:is([type="switchtab"], [type="remotetab"]) .urlbarView-type-icon {
-    position: fixed !important;
     fill: white !important;
     fill-opacity: 0.6 !important;
-    -moz-context-properties: fill, fill-opacity !important;
-    position: absolute;
-    width: 16px !important;
-    height: 16px !important;
     align-self: center !important;
     stroke: none !important;
     background: url("chrome://browser/skin/tab.svg") no-repeat !important;
@@ -109,8 +121,28 @@
     background-position: 0px 1.5px !important;
 }
 
-.urlbarView-row:is([type="switchtab"], [type="bookmark"], [type="remotetab"]) .urlbarView-title {
-    margin-inline-start: 20px !important;
+.urlbarView-row:is([type="switchtab"], [type="remotetab"])
+    > .urlbarView-row-inner
+    > .urlbarView-no-wrap
+    > .urlbarView-action {
+    background-color: transparent !important;
+    border-radius: unset !important;
+}
+
+.urlbarView-row:is([type="switchtab"], [type="remotetab"])
+    > .urlbarView-row-inner
+    > .urlbarView-no-wrap
+    > .urlbarView-title-separator {
+    visibility: visible !important;
+}
+
+.urlbarView-row-inner,
+.urlbarView-no-wrap {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: end;
+    justify-content: start;
+    column-gap: calc(var(--urlbar-icon-padding) + 2px);
 }
 
 :root[lwt-toolbar-field-brighttext]
@@ -217,13 +249,24 @@
     align-items: center !important;
 }
 
-.urlbarView-title,
 .urlbarView-title-separator {
-    margin-top: -1px !important;
-    margin-bottom: -1px !important;
-    padding-top: 2px !important;
-    padding-bottom: 2px !important;
-    align-self: center !important;
+    -moz-box-align: center;
+    display: -moz-box;
+    display: none !important;
+}
+
+.urlbarView-title-separator::before {
+    content: "" !important;
+    width: 15px;
+    height: 2px;
+    display: -moz-box;
+    color: var(--panel-shortcut-color);
+    border-bottom: 1px solid currentColor;
+    opacity: 1 !important;
+}
+
+.urlbarView-row[selected] .urlbarView-title-separator::before {
+    color: hsla(0, 0%, 100%, 0.6);
 }
 
 .urlbarView-row[has-action] .urlbarView-title strong,
@@ -249,11 +292,6 @@
 
 .urlbarView-action[slide-in] {
     animation: none !important;
-}
-
-.urlbarView-title {
-    padding-right: 1px !important;
-    margin-right: -1px !important;
 }
 
 .urlbarView-tail-prefix > .urlbarView-tail-prefix-string {
@@ -292,7 +330,12 @@
 }
 
 .urlbarView-title {
-    min-height: 20px !important;
+    min-height: 20px;
+}
+
+.urlbarView-action {
+    padding: 0 !important;
+    margin-inline: 0 6px !important;
 }
 
 .urlbarView-row[type="tabtosearch"]
@@ -369,7 +412,7 @@
 }
 
 .urlbarView-row-inner {
-    padding: 6px 8px !important;
+    padding: 7px 8px !important;
     border-radius: var(--arrowpanel-menuitem-border-radius) !important;
 }
 
@@ -387,4 +430,73 @@
     border-bottom-right-radius: 4px !important;
     box-shadow: 0 5px 18px rgba(0, 0, 0, 0.2);
     padding: calc(3px - var(--urlbar-element-top-adjust-magnitude)) 3px !important;
+}
+
+/* handle overflowing urlbar result rows. requires multiLineUrlbarResults.uc.js */
+.urlbarView-row-inner.overflown {
+    flex-flow: column nowrap !important;
+    align-items: start !important;
+    justify-content: center !important;
+}
+
+.urlbarView-row-inner.overflown .urlbarView-url {
+    mask-image: linear-gradient(to left, transparent, black 2em);
+    max-width: -moz-available !important;
+}
+
+/* override firefox's built-in text wrapping */
+.urlbarView-results[overflow-handler="userChromeJS"][wrap]
+    > .urlbarView-row
+    > .urlbarView-row-inner {
+    flex-wrap: nowrap !important;
+}
+
+.urlbarView-results[overflow-handler="userChromeJS"][wrap]
+    > .urlbarView-row
+    > .urlbarView-row-inner
+    > .urlbarView-no-wrap {
+    flex-basis: unset !important;
+}
+
+.urlbarView-results[overflow-handler="userChromeJS"][wrap]
+    > .urlbarView-row[has-url]
+    > .urlbarView-row-inner
+    > .urlbarView-url {
+    margin-top: 0 !important;
+}
+
+.urlbarView-results[overflow-handler="userChromeJS"][wrap]
+    > .urlbarView-row[has-url]
+    > .urlbarView-row-inner
+    > .urlbarView-url:-moz-locale-dir(ltr) {
+    padding-left: unset !important;
+}
+
+.urlbarView-results[overflow-handler="userChromeJS"][wrap]
+    > .urlbarView-row[has-url]
+    > .urlbarView-row-inner
+    > .urlbarView-url:-moz-locale-dir(rtl) {
+    padding-right: unset !important;
+}
+
+.urlbarView-results[overflow-handler="userChromeJS"][wrap]
+    > .urlbarView-row[type="tabtosearch"]
+    > .urlbarView-row-inner
+    > .urlbarView-no-wrap {
+    flex-wrap: nowrap !important;
+}
+
+.urlbarView-results[overflow-handler="userChromeJS"][wrap]
+    > .urlbarView-row[type="tabtosearch"]
+    > .urlbarView-row-inner
+    > .urlbarView-no-wrap
+    > .urlbarView-action {
+    flex-basis: unset !important;
+    margin-inline: 0 6px !important;
+}
+
+.urlbarView-results[overflow-handler="userChromeJS"][wrap]
+    > .urlbarView-row[type="tip"]
+    > .urlbarView-row-inner {
+    flex-wrap: nowrap !important;
 }

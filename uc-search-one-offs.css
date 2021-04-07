@@ -77,7 +77,7 @@
     width: -moz-fit-content !important;
     position: relative !important;
     border: none !important;
-    margin-top: -1.7px !important;
+    margin-top: -2px !important;
     min-height: var(--urlbar-height) !important;
     padding: 0 !important;
 }

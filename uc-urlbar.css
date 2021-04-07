@@ -12,7 +12,6 @@
 }
 
 #searchbar {
-    margin-block-start: -0.6px !important;
     box-shadow: none !important;
     -moz-box-align: center;
     min-height: var(--urlbar-height) !important;
@@ -79,7 +78,7 @@
 }
 
 #searchbar .searchbar-search-button:hover > .searchbar-search-icon {
-	fill-opacity: 1 !important;
+    fill-opacity: 1 !important;
 }
 
 #PopupSearchAutoComplete {
@@ -91,9 +90,10 @@
     padding-block: calc((var(--urlbar-container-height) - var(--urlbar-height)) / 2) !important;
 }
 
-#urlbar-input-container, #searchbar {
+#urlbar-input-container,
+#searchbar {
     background-color: var(--urlbar-input-bgcolor) !important;
-    margin-top: calc(0px - var(--urlbar-element-top-adjust-magnitude)) !important;
+    margin-top: 0 !important;
     transition: 220ms ease-in-out background-color 0s, 220ms ease-in-out box-shadow 0s !important;
 }
 
@@ -252,8 +252,12 @@ toolbarpaletteitem[removable="false"]
     background-color: transparent !important;
 }
 
-#identity-box[pageproxystate="valid"] #identity-icon-box:is([open="true"], :focus-visible) #identity-icon,
-#identity-box[pageproxystate="valid"] #identity-icon-box:is(:hover:active, :hover:not([open="true"])) #identity-icon:hover {
+#identity-box[pageproxystate="valid"]
+    #identity-icon-box:is([open="true"], :focus-visible)
+    #identity-icon,
+#identity-box[pageproxystate="valid"]
+    #identity-icon-box:is(:hover:active, :hover:not([open="true"]))
+    #identity-icon:hover {
     fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
     fill-opacity: 1 !important;
 }
@@ -581,11 +585,6 @@ toolbarpaletteitem[removable="false"]
 
 #identity-box.chromeUI ~ .urlbar-input-box > #urlbar-input {
     margin-inline-start: -0.6px !important;
-}
-
-#identity-box:is(:not(.chromeUI), [pageproxystate="invalid"]),
-#tracking-protection-icon-container {
-    margin-top: var(--urlbar-element-top-adjust-magnitude) !important;
 }
 
 #tracking-protection-icon {

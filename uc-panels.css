@@ -308,9 +308,22 @@ popupnotification .popup-notification-checkbox:hover .checkbox-check[checked]:no
     border-radius: 4px !important;
 }
 
-#protections-popup-tp-switch:is(:hover, :focus-visible) {
-    border: 1px solid hsla(210, 4%, 90%, 0.14) !important;
-    background: #003eaa !important;
+.protections-popup-tp-switch:not([enabled]):is(:hover, :focus-visible) {
+    border: 1px solid var(--protections-popup-switch-off-hover-border-custom) !important;
+    background: var(--protections-popup-switch-off-hover-background-custom) !important;
+}
+
+.protections-popup-tp-switch[enabled]:is(:hover, :focus-visible) {
+    border: 1px solid var(--protections-popup-switch-on-hover-border-custom) !important;
+    background: var(--protections-popup-switch-on-hover-background-custom) !important;
+}
+
+.protections-popup-tp-switch:not([enabled]):is(:hover, :focus-visible):active {
+    background: var(--protections-popup-switch-off-active-background-custom) !important;
+}
+
+.protections-popup-tp-switch[enabled]:is(:hover, :focus-visible):active {
+    background: var(--protections-popup-switch-on-active-background-custom) !important;
 }
 
 #identity-popup-security-expander > .button-box {
