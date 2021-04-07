@@ -52,7 +52,7 @@ menupopup[menu-api],
     :is(menuitem, menu) {
     appearance: none !important;
     color: var(--ui-text-80) !important;
-    padding: 0 0 0 0 !important;
+    padding: 0 !important;
     min-height: 25px !important;
     border-radius: var(--context-menuitem-border-radius);
 }
@@ -171,6 +171,7 @@ menupopup.in-menulist > :is(menucaption, menuitem) > .menu-iconic-text {
     :is(menu, menuitem, menucaption)
     > :is(label, .menu-iconic-text, .menu-text) {
     padding-inline: 0 !important;
+        font: menu !important;
 }
 
 :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup) menucaption {
@@ -198,7 +199,6 @@ menupopup.in-menulist > :is(menucaption, menuitem) > .menu-iconic-text {
 }
 
 #ContentSelectDropdown > menupopup {
-    font: menu !important;
     background-color: transparent !important;
     --content-select-background-image: none !important;
     /* a gradient background image is added on top of the menupopup based on the appearance of the select element in-content.
@@ -218,7 +218,6 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
 
 menupopup.in-menulist {
     appearance: none !important;
-    font: menu !important;
     border: none !important;
     border-radius: var(--menupopup-border-radius) !important;
     margin: var(--menupopup-margin) !important;
@@ -259,7 +258,11 @@ menupopup.in-menulist {
         color: inherit !important;
         fill: currentColor !important;
         border: none !important;
-        border-radius: 2px !important;
+        border-radius: var(--context-menuitem-border-radius) !important;
+    }
+
+    panel menulist:is(:focus-visible, [open="true"]) {
+        background-color: var(--ui-textbox-focus-bgcolor) !important;
     }
 }
 

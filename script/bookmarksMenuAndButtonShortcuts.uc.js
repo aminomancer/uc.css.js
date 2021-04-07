@@ -7,9 +7,7 @@
 
 const ucBookmarksShortcuts = {
     async bookmarkClick(e) {
-        if (e.button !== 1 || e.target.tagName !== "toolbarbutton") {
-            return;
-        }
+        if (e.button !== 1 || e.target.tagName !== "toolbarbutton") return;
 
         let bm = await PlacesUtils.bookmarks.fetch({ url: new URL(BookmarkingUI._uri.spec) });
         bm
@@ -30,15 +28,32 @@ const ucBookmarksShortcuts = {
         this.popup.insertBefore(this.menuitem, this.popup.firstElementChild);
 
         this.popup.addEventListener("popupshowing", this.updateMenuItem, false);
-        this.menuitem.setAttribute("onclick", "ucBookmarksShortcuts.updateMenuItem(event)");
+        this.menuitem.setAttribute("onclick", "ucBookmarksShortcuts.updateMenuItem()");
         this.menuitem.setAttribute("oncommand", "BookmarkingUI.onStarCommand(event);");
+        this.menuitem.ownerDocument.l10n.setAttributes(this.menuitem, "bookmarks-current-tab");
     },
 
-    async updateMenuItem(_e) {
-        let bm = await PlacesUtils.bookmarks.fetch({ url: new URL(BookmarkingUI._uri.spec) });
-        let isStarred = !!bm;
-        let l10nId = isStarred ? "bookmarks-bookmark-edit-panel" : "bookmarks-current-tab";
-        document.l10n.setAttributes(ucBookmarksShortcuts.menuitem, l10nId);
+    onLocationChange(browser, _prog, _req, location, _flags) {
+        if (browser !== gBrowser.selectedBrowser) return;
+        this.updateMenuItem(null, location);
+    },
+
+    handlePlacesEvents(events) {
+        for (let e of events) if (e.url && e.url == BookmarkingUI._uri?.spec) this.updateMenuItem();
+    },
+
+    async updateMenuItem(_e, location) {
+        let uri;
+        let menuitem = ucBookmarksShortcuts.menuitem;
+        if (location) uri = new URL(location?.spec);
+        if (BookmarkingUI._uri) uri = new URL(BookmarkingUI._uri.spec);
+        if (!uri) return;
+
+        let isStarred = await PlacesUtils.bookmarks.fetch({ url: uri });
+        menuitem.ownerDocument.l10n.setAttributes(
+            menuitem,
+            isStarred ? "bookmarks-bookmark-edit-panel" : "bookmarks-current-tab"
+        );
     },
 
     init() {
@@ -47,7 +62,15 @@ const ucBookmarksShortcuts = {
             .forWindow(window)
             .node?.setAttribute("onclick", "ucBookmarksShortcuts.bookmarkClick(event)");
         this.addMenuItem(BookmarkingUI.button.firstElementChild);
+        gBrowser.addTabsProgressListener(this);
+        PlacesUtils.bookmarks.addObserver(this);
+        PlacesUtils.observers.addListener(
+            ["bookmark-added", "bookmark-removed"],
+            this.handlePlacesEvents.bind(this)
+        );
     },
+
+    QueryInterface: ChromeUtils.generateQI(["nsINavBookmarkObserver"]),
 };
 
 if (gBrowserInit.delayedStartupFinished) {
