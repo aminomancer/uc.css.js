@@ -390,15 +390,16 @@
 
 .urlbarView {
     margin: 0 !important;
-    width: calc(100% + 6px) !important;
-    left: -3px !important;
+    padding: 2px !important;
+    width: calc(100% + 8px) !important;
+    left: -4px !important;
     position: relative !important;
     overflow: visible !important;
-    box-shadow: none !important;
-    top: calc(
-        var(--urlbar-element-top-adjust-magnitude) +
-            (var(--urlbar-container-height) - var(--urlbar-height)) / 2
-    ) !important;
+    top: calc((var(--urlbar-container-height) - var(--urlbar-height)) / 2) !important;
+    box-shadow: 0 5px 18px hsla(0, 0%, 0%, .2) !important;
+    background: var(--urlbar-results-bgcolor) !important;
+    border-bottom-left-radius: 4px !important;
+    border-bottom-right-radius: 4px !important;
 }
 
 .urlbarView[noresults="true"] #urlbar-results {
@@ -428,8 +429,7 @@
     background: var(--urlbar-results-bgcolor) !important;
     border-bottom-left-radius: 4px !important;
     border-bottom-right-radius: 4px !important;
-    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.2);
-    padding: calc(3px - var(--urlbar-element-top-adjust-magnitude)) 3px !important;
+    padding: 2px !important;
 }
 
 /* handle overflowing urlbar result rows. requires multiLineUrlbarResults.uc.js */

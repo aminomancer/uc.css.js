@@ -1,20 +1,3 @@
-.urlbarView .search-panel-one-offs {
-    margin: 0 !important;
-    border-top: 0px solid transparent !important;
-    line-height: 0 !important;
-    border-bottom-left-radius: 4px !important;
-    border-bottom-right-radius: 4px !important;
-    width: -moz-fit-content !important;
-    background-color: var(--urlbar-results-bgcolor) !important;
-    display: -moz-box !important;
-    height: -moz-fit-content !important;
-    scrollbar-width: none !important;
-    padding-left: 2px !important;
-    padding-right: 0.5px !important;
-    padding-bottom: 3px !important;
-    padding-top: 3px !important;
-}
-
 #PopupSearchAutoComplete .search-one-offs {
     -moz-box-orient: horizontal !important;
     max-width: 100% !important;
@@ -73,15 +56,6 @@
     margin-inline: var(--arrowpanel-menuitem-inline-margin) !important;
 }
 
-.urlbarView .search-one-offs {
-    width: -moz-fit-content !important;
-    position: relative !important;
-    border: none !important;
-    margin-top: -2px !important;
-    min-height: var(--urlbar-height) !important;
-    padding: 0 !important;
-}
-
 .urlbarView .search-panel-header {
     display: none !important;
 }
@@ -90,20 +64,32 @@
     display: none !important;
 }
 
-.urlbarView .searchbar-engine-one-off-item {
-    min-width: 27px !important;
-    height: 27px !important;
-    padding: 0 !important;
-    border-radius: 3px !important;
-    margin-left: 2px !important;
-    margin-right: 1px !important;
-    background-size: 0px !important;
+.urlbarView :is(.searchbar-engine-one-off-item, .addengine-item) {
+    min-width: 32px !important;
+    height: 32px !important;
+    padding: 2px !important;
+    margin-inline: 0 !important;
+    background: none !important;
     position: relative !important;
+    background-color: transparent !important;
+    pointer-events: none !important;
+    -moz-context-properties: fill, fill-opacity;
+    fill: currentColor;
 }
 
-.urlbarView .searchbar-engine-one-off-item .button-icon {
-    height: 17px !important;
-    width: 17px !important;
+.urlbarView :is(.searchbar-engine-one-off-item, .addengine-item) > .button-box {
+    min-width: 28px !important;
+    height: 28px !important;
+    padding: 0 !important;
+    border-radius: var(--toolbarbutton-border-radius) !important;
+}
+
+.urlbarView :is(.searchbar-engine-one-off-item, .addengine-item):not([selected]):hover > .button-box {
+    background-color: var(--desaturate-dimmed) !important;
+}
+
+.urlbarView :is(.searchbar-engine-one-off-item, .addengine-item):is([selected], :hover:active) > .button-box {
+    background-color: var(--desaturate-dimmed-further) !important;
 }
 
 #urlbar-engine-one-off-item-bookmarks:not([selected]) {
@@ -111,83 +97,42 @@
 }
 
 /* replace google search icon since updates keep resetting the custom icon in search.json.mozlz4 */
-.searchbar-engine-one-off-item[image="moz-extension://cd4aad93-9726-49dd-a5cd-9e5f5c4d76f4/favicon.ico"] .button-icon
-{
-    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 48 48'><defs><path id='prefix__a' d='M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z'/></defs><clipPath id='prefix__b'><use xlink:href='%23prefix__a' overflow='visible'/></clipPath><path clip-path='url(%23prefix__b)' fill='%23FBBC05' d='M0 37V11l17 13z'/><path clip-path='url(%23prefix__b)' fill='%23EA4335' d='M0 11l17 13 7-6.1L48 14V0H0z'/><path clip-path='url(%23prefix__b)' fill='%2334A853' d='M0 37l30-23 7.9 1L48 0v48H0z'/><path clip-path='url(%23prefix__b)' fill='%234285F4' d='M48 48L17 24l-4-3 35-10z'/></svg>")
-        no-repeat !important;
-    width: 17px !important;
-    height: 17px !important;
-    padding-left: 17px; /* Equal to width of new image */
+.searchbar-engine-one-off-item[image="moz-extension://cd4aad93-9726-49dd-a5cd-9e5f5c4d76f4/favicon.ico"] .button-icon {
+    display: none;
 }
 
-.urlbarView .search-panel-one-offs {
-    min-width: 0 !important;
-}
-
-.urlbarView .search-panel-one-offs {
-    background: none !important;
-    width: -moz-fit-content !important;
-    margin: 0 !important;
-    padding-right: 0 !important;
-}
-
-.urlbarView .search-panel-one-offs,
-.urlbarView .search-panel-one-offs-container {
-    min-width: max-content !important;
-    max-width: max-content !important;
-    width: max-content !important;
-}
-
-#urlbar[breakout][breakout-extend] .search-one-offs,
-#urlbar[breakout][breakout-extend-disabled][open] .search-one-offs {
-    display: flex !important;
-}
-
-#urlbar .search-one-offs:not([hidden]) {
-    display: flex !important;
+.searchbar-engine-one-off-item[image="moz-extension://cd4aad93-9726-49dd-a5cd-9e5f5c4d76f4/favicon.ico"] .button-box::before {
+    content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 48 48'><defs><path id='prefix__a' d='M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z'/></defs><clipPath id='prefix__b'><use xlink:href='%23prefix__a' overflow='visible'/></clipPath><path clip-path='url(%23prefix__b)' fill='%23FBBC05' d='M0 37V11l17 13z'/><path clip-path='url(%23prefix__b)' fill='%23EA4335' d='M0 11l17 13 7-6.1L48 14V0H0z'/><path clip-path='url(%23prefix__b)' fill='%2334A853' d='M0 37l30-23 7.9 1L48 0v48H0z'/><path clip-path='url(%23prefix__b)' fill='%234285F4' d='M48 48L17 24l-4-3 35-10z'/></svg>");
+    display: block;
+    width: 16px;
+    height: 16px;
 }
 
 /* search one-offs in urlbar */
 .urlbarView .search-one-offs {
     position: absolute !important;
-    top: calc(-2px - var(--urlbar-height)) !important;
-    right: 0.6px !important;
-    max-width: 244.4px !important;
+    z-index: 12;
+    min-height: var(--urlbar-height) !important;
+    max-width: 256px !important;
+    padding: 0 !important;
+    top: calc(-3px - var(--urlbar-height)) !important;
+    right: 4px !important;
     scroll-behavior: smooth !important;
-    scrollbar-width: none !important;
-    float: right !important;
-    left: auto !important;
-    cursor: default !important;
     box-sizing: border-box !important;
-    border-right: 5px solid transparent !important;
-    align-items: center !important;
+    border: none !important;
+    clip-path: inset(0 2px 0 0);
 }
 
 .urlbarView .search-panel-one-offs {
-    padding-left: 0 !important;
-}
-
-.urlbarView .search-panel-one-offs {
-    cursor: default !important;
-}
-
-#urlbar-engine-one-off-item-tabs .button-icon {
-    fill: white !important;
+    flex-wrap: nowrap !important;
 }
 
 #urlbar:is([usertyping], [searchmode], [open][pageproxystate="invalid"]) #urlbar-input {
-    position: relative !important;
-    margin-right: 240px !important;
-    padding-right: 1px !important;
-    height: 33px !important;
-    background-color: var(--lwt-toolbar-field-background-color, rgba(255, 255, 255, 0.8));
-    /* for transform animation on search one-offs */
-    margin-right: 244px !important;
+    margin-right: 256px !important;
 }
 
-#urlbar[textoverflow]:is([usertyping], [searchmode], [open][pageproxystate="invalid"])
-    #urlbar-input {
-    margin-right: 244px !important;
+#urlbar[textoverflow]:is([usertyping], [searchmode], [open][pageproxystate="invalid"]) #urlbar-input {
+    margin-right: 258px !important;
 }
 
 #urlbar[textoverflow="both"] > #urlbar-input-container > .urlbar-input-box > #urlbar-input {
@@ -267,7 +212,7 @@
     backface-visibility: hidden !important;
     transform: translateX(50px) scale(0.5) !important;
     transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out !important; */
-    display: none !important;
+    display: none;
 }
 
 #urlbar #page-action-buttons,
@@ -312,7 +257,7 @@
 #urlbar:not([usertyping], [searchmode], [open][pageproxystate="invalid"]) #star-button-box {
     display: -moz-box !important;
 }
-
+#urlbar:is([usertyping], [searchmode], [open][pageproxystate="invalid"]) .searchbar-engine-one-off-item,
 #urlbar:is([usertyping], [searchmode], [open][pageproxystate="invalid"]) .search-one-offs *,
 #urlbar:is([usertyping], [searchmode], [open][pageproxystate="invalid"]) .search-one-offs {
     pointer-events: auto !important;
@@ -326,32 +271,25 @@
     display: none !important;
 }
 
-#urlbar .searchbar-engine-one-off-item {
-    pointer-events: none !important;
-    -moz-context-properties: fill, fill-opacity;
-    fill: currentColor;
-}
-
-#urlbar:is([usertyping], [searchmode], [open][pageproxystate="invalid"])
-    .searchbar-engine-one-off-item {
-    pointer-events: auto !important;
-}
-
-.urlbarView .searchbar-engine-one-off-item:not([selected]):hover,
-.urlbarView .addengine-item:hover {
-    background-color: var(--desaturate-dimmed) !important;
-}
-
-:is(.searchbar-engine-one-off-item, .addengine-item):is([selected], :hover:active) {
-    background-color: var(--desaturate-dimmed-further) !important;
-}
-
-@media screen and (min-height: 600px) {
-    .urlbarView .urlbarView-results[wrap] .urlbarView-row:last-child {
-        max-height: initial !important;
+@media screen and (max-width: 500px) {
+    #nav-bar[overflowing="true"] #urlbar .search-one-offs {
+        position: static !important;
+        top: unset !important;
+        max-width: unset !important;
+        clip-path: inset(0 2px 0 2px);
+        mask-image: none !important;
+        --desaturate-dimmed: var(--arrowpanel-dimmed);
+        --desaturate-dimmed-further: var(--arrowpanel-dimmed-further);
     }
-    #nav-bar[overflowing="true"] #urlbar[breakout][breakout-extend] .search-one-offs {
-        display: none !important;
+
+    #nav-bar[overflowing="true"] #urlbar #page-action-buttons, #urlbar #urlbar-input-container > .urlbar-icon {
+        animation: none;
+        display: -moz-box;
+    }
+
+    #urlbar[textoverflow]:is([usertyping], [searchmode], [open][pageproxystate="invalid"]) #urlbar-input,
+    #urlbar:is([usertyping], [searchmode], [open][pageproxystate="invalid"]) #urlbar-input {
+        margin-right: unset !important;
     }
 }
 

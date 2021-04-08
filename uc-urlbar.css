@@ -148,6 +148,7 @@
 /* iffy modification to center urlbar buttons not contained in page action button box */
 #urlbar-input-container {
     -moz-box-align: center;
+    z-index: 11;
 }
 
 #plugins-notification-icon {
