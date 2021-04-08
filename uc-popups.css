@@ -101,6 +101,27 @@ tabmodalprompt .checkbox-check[checked="true"] {
     list-style-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTAuMDQxIDE3bC00LjUtNC4zMTkgMS4zOTUtMS40MzUgMy4wOCAyLjkzNyA3LjAyMS03LjE4MyAxLjQyMiAxLjQwOS04LjQxOCA4LjU5MXptLTUuMDQxLTE1Yy0xLjY1NCAwLTMgMS4zNDYtMyAzdjE0YzAgMS42NTQgMS4zNDYgMyAzIDNoMTRjMS42NTQgMCAzLTEuMzQ2IDMtM3YtMTRjMC0xLjY1NC0xLjM0Ni0zLTMtM2gtMTR6bTE5IDN2MTRjMCAyLjc2MS0yLjIzOCA1LTUgNWgtMTRjLTIuNzYyIDAtNS0yLjIzOS01LTV2LTE0YzAtMi43NjEgMi4yMzgtNSA1LTVoMTRjMi43NjIgMCA1IDIuMjM5IDUgNXoiIGZpbGw9ImNvbnRleHQtZmlsbCIgZmlsbC1vcGFjaXR5PSJjb250ZXh0LWZpbGwtb3BhY2l0eSIvPjwvc3ZnPg==") !important;
 }
 
+/* in-content autocomplete popup */
+panel#PopupAutoComplete[type="autocomplete-richlistbox"] {
+	padding: var(--menupopup-inner-padding) !important;
+    background-color: var(--menu-background-color) !important;
+    color: var(--menu-color) !important;
+    border: none !important;
+    border-radius: var(--menupopup-border-radius);
+    box-shadow: var(--menupopup-shadow);
+}
+
+panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox {
+    background: none !important;
+    color: inherit !important;
+}
+
+panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlistitem {
+    border-radius: var(--context-menuitem-border-radius) !important;
+    min-height: 25px !important;
+    padding-inline: 2px !important;
+}
+
 /* push notification popup (lower right corner) */
 @-moz-document url("chrome://global/content/alerts/alert.xhtml")
 {

@@ -202,7 +202,7 @@
     background-color: var(--update-badge-bg) !important;
 }
 
-@supports (-moz-bool-pref("browser.proton.appmenu.enabled")) {
+@supports (-moz-bool-pref("browser.proton.enabled")) {
     #appMenu-multiView
         :is(.toolbarbutton-1, toolbarbutton.subviewbutton, .navigable.subviewbutton):not([disabled], [open]):focus,
     .widget-overflow-list .toolbarbutton-1:not([disabled], [open]):focus,

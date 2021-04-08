@@ -89,16 +89,6 @@ tooltip[default][page] > description {
     backdrop-filter: blur(10px) !important;
 }
 
-/* bookmarks popup scroll buttons (requires bookmarksPopupShadowRoot.uc.js...
-but that script isn't necessary if you put this in your regular userChrome.css:
-link[href="chrome://global/skin/arrowscrollbox.css"] ~ :is(#scrollbutton-up, #scrollbutton-down) {
-        visibility: collapse;
-} */
-.BMB-special-scrollbutton-up,
-.BMB-special-scrollbutton-down {
-    visibility: collapse;
-}
-
 /* firefox UI scrollbars */
 .hidevscroll-scrollbar {
     -moz-appearance: none !important;

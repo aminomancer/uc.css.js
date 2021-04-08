@@ -410,14 +410,91 @@
     fill: currentColor;
 }
 
+/* bookmarks popup scroll buttons */
+.BMB-special-scrollbutton-up,
+.BMB-special-scrollbutton-down {
+    visibility: visible !important;
+    position: absolute !important;
+    display: block !important;
+}
+
+:is(.BMB-special-scrollbutton-up, .BMB-special-scrollbutton-down) > .toolbarbutton-icon {
+    transform: none !important;
+}
+
+.BMB-special-scrollbutton-up > .toolbarbutton-icon {
+    margin-block: 0 !important;
+    height: 10px !important;
+}
+
+.BMB-special-scrollbutton-down > .toolbarbutton-icon {
+    height: 10px !important;
+}
+
+.BMB-special-scrollbutton-up,
+.BMB-special-scrollbutton-up:not([disabled="true"]):hover {
+    -moz-appearance: none;
+    position: absolute !important;
+    min-width: 21.5px !important;
+    padding-inline: 1px !important;
+    padding-block: 5px 6px !important;
+    margin-block: -4px -18px !important;
+    margin-inline: 5vw !important;
+    background-color: hsl(233, 28%, 24%) !important;
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.25), 0px 0px 5px -1px rgba(0, 0, 0, 0.125) !important;
+    border-bottom-left-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
+    transition: 0.2s ease-in-out opacity !important;
+    transform-style: flat !important;
+    backface-visibility: hidden !important;
+}
+
+.BMB-special-scrollbutton-down,
+.BMB-special-scrollbutton-down:not([disabled="true"]):hover {
+    -moz-appearance: none;
+    position: absolute !important;
+    min-width: 21.5px !important;
+    padding-inline: 1px !important;
+    padding-block: 6px !important;
+    margin-block: -18px -4px !important;
+    margin-inline: 5vw !important;
+    background-color: hsl(233, 28%, 24%) !important;
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.25), 0px 0px 5px -1px rgba(0, 0, 0, 0.125) !important;
+    border-top-left-radius: 5px !important;
+    border-top-right-radius: 5px !important;
+    transition: 0.2s ease-in-out opacity !important;
+    transform-style: flat !important;
+    backface-visibility: hidden !important;
+}
+
+.BMB-special-scrollbutton-down:is(:not(:hover), [disabled="true"]) {
+    list-style-image: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='8.847px' height='8.847px' viewBox='0 0 451.847 451.847' xml:space='preserve'><path d='M225.923,354.706c-8.098,0-16.195-3.092-22.369-9.263L9.27,151.157c-12.359-12.359-12.359-32.397,0-44.751   c12.354-12.354,32.388-12.354,44.748,0l171.905,171.915l171.906-171.909c12.359-12.354,32.391-12.354,44.744,0   c12.365,12.354,12.365,32.392,0,44.751L248.292,345.449C242.115,351.621,234.018,354.706,225.923,354.706z' fill='white'/></svg>") !important;
+}
+
+.BMB-special-scrollbutton-down:not([disabled="true"]):hover {
+    list-style-image: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='8.819px' height='8.819px' viewBox='0 0 444.819 444.819' xml:space='preserve'><path d='M434.252,114.203l-21.409-21.416c-7.419-7.04-16.084-10.561-25.975-10.561c-10.095,0-18.657,3.521-25.7,10.561   L222.41,231.549L83.653,92.791c-7.042-7.04-15.606-10.561-25.697-10.561c-9.896,0-18.559,3.521-25.979,10.561l-21.128,21.416   C3.615,121.436,0,130.099,0,140.188c0,10.277,3.619,18.842,10.848,25.693l185.864,185.865c6.855,7.23,15.416,10.848,25.697,10.848   c10.088,0,18.75-3.617,25.977-10.848l185.865-185.865c7.043-7.044,10.567-15.608,10.567-25.693   C444.819,130.287,441.295,121.629,434.252,114.203z' fill='white'/></svg>") !important;
+}
+
+.BMB-special-scrollbutton-up:is(:not(:hover), [disabled="true"]) {
+    list-style-image: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='8.847px' height='8.847px' viewBox='0 0 451.847 451.847' xml:space='preserve'><path d='M225.923,354.706c-8.098,0-16.195-3.092-22.369-9.263L9.27,151.157c-12.359-12.359-12.359-32.397,0-44.751   c12.354-12.354,32.388-12.354,44.748,0l171.905,171.915l171.906-171.909c12.359-12.354,32.391-12.354,44.744,0   c12.365,12.354,12.365,32.392,0,44.751L248.292,345.449C242.115,351.621,234.018,354.706,225.923,354.706z' fill='white' transform='scale(-1) translate(-451.847 -451.847)'/></svg>") !important;
+}
+
+.BMB-special-scrollbutton-up:not([disabled="true"]):hover {
+    list-style-image: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='8.819px' height='8.819px' viewBox='0 0 444.819 444.819' xml:space='preserve'><path d='M434.252,114.203l-21.409-21.416c-7.419-7.04-16.084-10.561-25.975-10.561c-10.095,0-18.657,3.521-25.7,10.561   L222.41,231.549L83.653,92.791c-7.042-7.04-15.606-10.561-25.697-10.561c-9.896,0-18.559,3.521-25.979,10.561l-21.128,21.416   C3.615,121.436,0,130.099,0,140.188c0,10.277,3.619,18.842,10.848,25.693l185.864,185.865c6.855,7.23,15.416,10.848,25.697,10.848   c10.088,0,18.75-3.617,25.977-10.848l185.865-185.865c7.043-7.044,10.567-15.608,10.567-25.693   C444.819,130.287,441.295,121.629,434.252,114.203z' fill='white' transform='scale(-1) translate(-451.847 -451.847)'/></svg>") !important;
+}
+
+:is(.BMB-special-scrollbutton-up, .BMB-special-scrollbutton-down)[disabled="true"] {
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+:is(.BMB-special-scrollbutton-up, .BMB-special-scrollbutton-down):not([disabled="true"]):hover {
+    opacity: 1 !important;
+}
+
 /* bookmarks toolbar button's popup */
 @-moz-document url(chrome://browser/content/browser.xhtml)
 {
-    link[href="chrome://global/skin/arrowscrollbox.css"] ~ :is(#scrollbutton-up, #scrollbutton-down)
-    {
-        visibility: collapse;
-    }
-
     menuitem.menuitem-iconic#BMB_viewBookmarksToolbar {
         list-style-image: url("chrome://browser/skin/bookmarks-toolbar.svg") !important;
         -moz-context-properties: fill, fill-opacity;
@@ -454,6 +531,10 @@ treechildren::-moz-tree-drop-feedback {
     /*     #BMB_bookmarksPopup menupopup[placespopup="true"] {
         padding-top: 0 !important;
     } */
+
+    #BMB_bookmarksPopup {
+        --panel-separator-color: var(--desaturate-dimmed) !important;
+    }
 
     #BMB_bookmarksPopup .subviewbutton:not(.menuitem-iconic) .menu-text {
         padding-inline-start: 21px !important;

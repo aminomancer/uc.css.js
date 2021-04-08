@@ -99,15 +99,6 @@ menupopup::part(drop-indicator) {
     padding: var(--menupopup-inner-padding) !important;
 }
 
-/* hide scroll buttons — doesn't seem to work anymore. put this in your regular userChrome.css instead:
-link[href="chrome://global/skin/arrowscrollbox.css"] ~ :is(#scrollbutton-up, #scrollbutton-down) {
-        visibility: collapse;
-} */
-.menupopup-arrowscrollbox::part(scrollbutton-up),
-.menupopup-arrowscrollbox::part(scrollbutton-down) {
-    visibility: collapse;
-}
-
 /* hide tab bar's arrow buttons and spacers */
 #tabbrowser-arrowscrollbox::part(scrollbutton-up),
 #tabbrowser-arrowscrollbox::part(scrollbutton-down),

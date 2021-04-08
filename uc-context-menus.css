@@ -120,6 +120,7 @@ menupopup[menu-api],
     height: var(--menu-right-size) !important;
     fill: currentColor !important;
     -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity !important;
+    fill-opacity: 0.6;
     background-size: 10px 10px !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
@@ -171,7 +172,7 @@ menupopup.in-menulist > :is(menucaption, menuitem) > .menu-iconic-text {
     :is(menu, menuitem, menucaption)
     > :is(label, .menu-iconic-text, .menu-text) {
     padding-inline: 0 !important;
-        font: menu !important;
+    font: menu !important;
 }
 
 :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup) menucaption {

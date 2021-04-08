@@ -20,17 +20,12 @@ For best results, set density mode to `Normal` and theme to `Dark` in the custom
 | browser.anchor_color 	| String 	| `#5311ff` 	|  	|
 | browser.display.focus_ring_style 	| Number 	| 0 	|  	|
 | browser.display.focus_ring_width 	| Number 	| 0 	|  	|
-| browser.proton.appmenu.enabled 	| Boolean 	| true 	| The stylesheets have fallback options if these prefs are disabled. But the fallback styles are not regularly updated. So I strongly recommend enabling all of the proton prefs 	|
-| browser.proton.contextmenus.enabled 	| Boolean 	| true 	|  	|
+| browser.proton.contextmenus.enabled 	| Boolean 	| true 	| The stylesheets have fallback options if these prefs are disabled. But the fallback styles are not regularly updated. So I strongly recommend enabling all of the proton prefs 	|
 | browser.proton.doorhangers.enabled 	| Boolean 	| true 	|  	|
 | browser.proton.enabled 	| Boolean 	| true 	|  	|
 | browser.proton.infobars.enabled 	| Boolean 	| true 	|  	|
 | browser.proton.modals.enabled 	| Boolean 	| true 	|  	|
 | browser.proton.places-tooltip.enabled 	| Boolean 	| true 	|  	|
-| browser.proton.tabs.audio-tab 	| Boolean 	| true 	|  	|
-| browser.proton.tabs.audio-tab-area 	| Boolean 	| true 	|  	|
-| browser.proton.tabs.enabled 	| Boolean 	| true 	|  	|
-| browser.proton.toolbar.enabled 	| Boolean 	| true 	|  	|
 | browser.proton.urlbar.enabled 	| Boolean 	| true 	|  	|
 | browser.startup.blankWindow 	| Boolean 	| false 	| These two settings eliminate the blank white window during startup 	|
 | browser.startup.preXulSkeletonUI 	| Boolean 	| false 	|  	|

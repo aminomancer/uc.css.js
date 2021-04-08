@@ -171,10 +171,9 @@ toolbar {
         --panel-description-color: hsl(235, 48%, 89%, 70%) !important;
         --panel-shortcut-color: hsl(235, 27%, 73%, 70%) !important;
         --panel-shortcut-focus: hsl(235, 32%, 75%, 90%) !important;
+        --proton-tab-inline-padding: 0 !important;
+        --tab-shadow-max-size: 0 !important;
     }
-}
-
-@supports (-moz-bool-pref("browser.proton.toolbar.enabled")) {
     :root,
     menupopup,
     #TabsToolbar {
@@ -186,17 +185,7 @@ toolbar {
         --urlbar-toolbar-height: var(--user-urlbar-container-height) !important;
         --urlbar-container-height: var(--user-urlbar-container-height) !important;
     }
-}
 
-@supports (-moz-bool-pref("browser.proton.tabs.enabled")) {
-    :root,
-    menupopup {
-        --proton-tab-inline-padding: 0 !important;
-        --tab-shadow-max-size: 0 !important;
-    }
-}
-
-@supports (-moz-bool-pref("browser.proton.appmenu.enabled")) {
     #appMenu-multiView {
         --arrowpanel-menuitem-inline-margin: 6px;
         --arrowpanel-menuitem-margin: 0 var(--arrowpanel-menuitem-inline-margin) !important;
@@ -226,7 +215,7 @@ toolbar {
         --menu-right-bg: none;
         --menu-right-img: url("chrome://global/skin/icons/menu-arrow.svg");
         --menu-right-margin: 4px;
-        --menu-right-size: 11px;
+        --menu-right-size: 14px;
         --panel-shadow: none !important;
     }
 }
