@@ -43,10 +43,10 @@ tooltip {
     --tab-pinned: linear-gradient(0deg, hsl(231, 50%, 11%), hsl(232, 70%, 6%));
     --tab-multi: linear-gradient(0deg, hsl(231, 42%, 15%), hsl(232, 70%, 6%)); */
     --tab-hover: linear-gradient(180deg, hsl(231, 49%, 11%), hsl(233, 55%, 8%));
-    --tab-pinned: linear-gradient(0deg, hsl(231, 50%, 11%), hsl(232, 70%, 6%));
+    --tab-pinned: linear-gradient(0deg, var(--toolbar-bgcolor), var(--lwt-accent-color));
     --tab-multi: linear-gradient(180deg, hsl(231, 50%, 11%), hsl(233, 53%, 8%));
     --tab-multi-hover: linear-gradient(180deg, hsl(231, 47%, 13%), hsl(233, 51%, 10%));
-    --tab-pinned-hover: linear-gradient(0deg, var(--toolbar-bgcolor), var(--lwt-accent-color));
+    --tab-pinned-hover: var(--toolbar-bgcolor);
     --tab-focused-highlight: hsl(231, 36%, 24%);
     --tab-focused-hover: linear-gradient(
         0deg,

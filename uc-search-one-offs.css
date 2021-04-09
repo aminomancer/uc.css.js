@@ -84,11 +84,15 @@
     border-radius: var(--toolbarbutton-border-radius) !important;
 }
 
-.urlbarView :is(.searchbar-engine-one-off-item, .addengine-item):not([selected]):hover > .button-box {
+.urlbarView
+    :is(.searchbar-engine-one-off-item, .addengine-item):not([selected]):hover
+    > .button-box {
     background-color: var(--desaturate-dimmed) !important;
 }
 
-.urlbarView :is(.searchbar-engine-one-off-item, .addengine-item):is([selected], :hover:active) > .button-box {
+.urlbarView
+    :is(.searchbar-engine-one-off-item, .addengine-item):is([selected], :hover:active)
+    > .button-box {
     background-color: var(--desaturate-dimmed-further) !important;
 }
 
@@ -97,11 +101,13 @@
 }
 
 /* replace google search icon since updates keep resetting the custom icon in search.json.mozlz4 */
-.searchbar-engine-one-off-item[image="moz-extension://cd4aad93-9726-49dd-a5cd-9e5f5c4d76f4/favicon.ico"] .button-icon {
+.searchbar-engine-one-off-item[image="moz-extension://cd4aad93-9726-49dd-a5cd-9e5f5c4d76f4/favicon.ico"] .button-icon
+{
     display: none;
 }
 
-.searchbar-engine-one-off-item[image="moz-extension://cd4aad93-9726-49dd-a5cd-9e5f5c4d76f4/favicon.ico"] .button-box::before {
+.searchbar-engine-one-off-item[image="moz-extension://cd4aad93-9726-49dd-a5cd-9e5f5c4d76f4/favicon.ico"] .button-box::before
+{
     content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 48 48'><defs><path id='prefix__a' d='M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z'/></defs><clipPath id='prefix__b'><use xlink:href='%23prefix__a' overflow='visible'/></clipPath><path clip-path='url(%23prefix__b)' fill='%23FBBC05' d='M0 37V11l17 13z'/><path clip-path='url(%23prefix__b)' fill='%23EA4335' d='M0 11l17 13 7-6.1L48 14V0H0z'/><path clip-path='url(%23prefix__b)' fill='%2334A853' d='M0 37l30-23 7.9 1L48 0v48H0z'/><path clip-path='url(%23prefix__b)' fill='%234285F4' d='M48 48L17 24l-4-3 35-10z'/></svg>");
     display: block;
     width: 16px;
@@ -131,7 +137,8 @@
     margin-right: 256px !important;
 }
 
-#urlbar[textoverflow]:is([usertyping], [searchmode], [open][pageproxystate="invalid"]) #urlbar-input {
+#urlbar[textoverflow]:is([usertyping], [searchmode], [open][pageproxystate="invalid"])
+    #urlbar-input {
     margin-right: 258px !important;
 }
 
@@ -257,7 +264,8 @@
 #urlbar:not([usertyping], [searchmode], [open][pageproxystate="invalid"]) #star-button-box {
     display: -moz-box !important;
 }
-#urlbar:is([usertyping], [searchmode], [open][pageproxystate="invalid"]) .searchbar-engine-one-off-item,
+#urlbar:is([usertyping], [searchmode], [open][pageproxystate="invalid"])
+    .searchbar-engine-one-off-item,
 #urlbar:is([usertyping], [searchmode], [open][pageproxystate="invalid"]) .search-one-offs *,
 #urlbar:is([usertyping], [searchmode], [open][pageproxystate="invalid"]) .search-one-offs {
     pointer-events: auto !important;
@@ -282,12 +290,14 @@
         --desaturate-dimmed-further: var(--arrowpanel-dimmed-further);
     }
 
-    #nav-bar[overflowing="true"] #urlbar #page-action-buttons, #urlbar #urlbar-input-container > .urlbar-icon {
+    #nav-bar[overflowing="true"] #urlbar #page-action-buttons,
+    #urlbar #urlbar-input-container > .urlbar-icon {
         animation: none;
         display: -moz-box;
     }
 
-    #urlbar[textoverflow]:is([usertyping], [searchmode], [open][pageproxystate="invalid"]) #urlbar-input,
+    #urlbar[textoverflow]:is([usertyping], [searchmode], [open][pageproxystate="invalid"])
+        #urlbar-input,
     #urlbar:is([usertyping], [searchmode], [open][pageproxystate="invalid"]) #urlbar-input {
         margin-right: unset !important;
     }

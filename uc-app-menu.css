@@ -449,6 +449,17 @@
         padding-block: calc(var(--arrowpanel-menuitem-padding) + 2px) !important;
         margin: var(--arrowpanel-menuitem-margin) !important;
         margin-bottom: 4px !important;
+        --panel-banner-item-color: black;
+        --panel-banner-item-background-color: hsla(96, 65%, 75%, 0.5);
+        --panel-banner-item-hover-bgcolor: hsla(96, 65%, 75%, 0.8);
+        --panel-banner-item-active-bgcolor: hsl(96, 65%, 75%);
+    }
+
+    :root[lwt-popup-brighttext] #appMenu-proton-update-banner {
+        --panel-banner-item-color: #f9f9fa;
+        --panel-banner-item-background-color: rgba(48, 230, 11, 0.1);
+        --panel-banner-item-hover-bgcolor: rgba(48, 230, 11, 0.15);
+        --panel-banner-item-active-bgcolor: rgba(48, 230, 11, 0.2);
     }
 
     #appMenu-popup toolbarseparator {
@@ -457,6 +468,15 @@
 
     #appMenu-fxa-separator {
         opacity: 0.7 !important;
+    }
+
+    .panel-banner-item {
+        padding-inline: var(--arrowpanel-menuitem-padding) !important;
+    }
+
+    .addon-banner-item > .toolbarbutton-icon,
+    .panel-banner-item > .toolbarbutton-icon {
+        -moz-box-ordinal-group: 0 !important;
     }
 
     .panel-banner-item[notificationid^="update"]::after {
@@ -471,8 +491,9 @@
         background: hsl(118, 89%, 24%) url("chrome://global/skin/icons/update-icon.svg") no-repeat
             center/contain !important;
         fill: hsl(125, 81%, 57%) !important;
-        width: 18px !important;
-        height: 18px !important;
+        width: 16px !important;
+        height: 16px !important;
+        margin-block: 1px !important;
         -moz-context-properties: fill !important;
         padding: 0 !important;
     }

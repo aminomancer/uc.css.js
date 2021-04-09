@@ -448,15 +448,6 @@ toolbarpaletteitem[removable="false"]
     }
 }
 
-/* iffy fix for wide invisible urlbar blocking bookmarks button pointer events */
-:root:not([customizing]) #urlbar {
-    pointer-events: none;
-}
-
-:root:not([customizing]) #urlbar * {
-    pointer-events: auto;
-}
-
 #urlbar-background {
     display: none !important;
 }
@@ -487,6 +478,7 @@ toolbarpaletteitem[removable="false"]
 
 #tracking-protection-icon-container[hidden] {
     display: -moz-box !important;
+    pointer-events: none !important;
 }
 
 #identity-box:is(:not(.chromeUI), [pageproxystate="invalid"]) {

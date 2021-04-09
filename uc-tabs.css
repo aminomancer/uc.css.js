@@ -53,6 +53,7 @@
     border-radius: 0 !important;
     box-shadow: none !important;
     opacity: 1 !important;
+    z-index: 1;
 }
 
 .tabbrowser-tab .tab-content {
@@ -68,15 +69,12 @@
         0px 0px 25px 3px rgba(0, 0, 0, 0.2) !important;
 }
 
-.tabbrowser-tab:not([selected], [multiselected]):hover .tab-content {
+.tabbrowser-tab:not([selected], [multiselected]):hover .tab-content,
+.tabbrowser-tab:is([multiselected], [pinned]) .tab-content {
     box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.25), 0px 0px 25px 3px rgba(0, 0, 0, 0.2) !important;
 }
 
-.tabbrowser-tab[multiselected] .tab-content {
-    box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.25), 0px 0px 25px 3px rgba(0, 0, 0, 0.2) !important;
-}
-
-.tabbrowser-tab[multiselected][selected] .tab-content {
+.tabbrowser-tab:is([multiselected], [pinned])[selected] .tab-content {
     box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.35), 0px 0px 25px 3px rgba(0, 0, 0, 0.2) !important;
 }
 
@@ -317,7 +315,7 @@
 }
 
 .tabbrowser-tab[selected],
-.tabbrowser-tab[pinned]:not([selected]):hover {
+.tabbrowser-tab[pinned]:not([selected]) {
     --tab-bg-current: var(--toolbar-bgcolor);
 }
 
@@ -331,10 +329,6 @@
 
 .tabbrowser-tab[multiselected]:not([selected], [pinned]):hover {
     --tab-bg-current: hsl(233, 51%, 10%);
-}
-
-.tabbrowser-tab[pinned]:not([selected]) {
-    --tab-bg-current: hsl(231, 50%, 11%);
 }
 
 @supports -moz-bool-pref("userChrome.tabs.rounded-outer-corners.disabled") {
