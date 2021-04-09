@@ -212,8 +212,8 @@ menupopup.in-menulist {
     --menupopup-child-margin-inline-start: 0;
     --menupopup-padding: 0;
     --menupopup-inner-padding: 0;
-    --context-padding-inline: 28px 0;
-    --context-margin-inline: -16px 0;
+    --context-padding-inline: 27px 0;
+    --context-margin-inline: -14px 0;
     --arrowpanel-background: hsl(233, 36%, 11%);
     --menu-color: var(--ui-text-80) !important;
     --menupopup-background: var(--arrowpanel-background);
@@ -414,6 +414,8 @@ menupopup.in-menulist menu.subviewbutton:not([disabled="true"])[_moz-menuactive]
     menupopup.in-menulist {
         --menupopup-child-margin-block-start: -4px;
         --menupopup-child-margin-inline-start: 0;
+        --context-padding-inline: 28px 0 !important;
+        --context-margin-inline: -16px 0 !important;
         --arrowpanel-menuitem-border-radius: 3px !important;
         --menupopup-border-radius: 3px !important;
         --context-menuitem-border-radius: var(--arrowpanel-menuitem-border-radius);
@@ -424,7 +426,7 @@ menupopup.in-menulist menu.subviewbutton:not([disabled="true"])[_moz-menuactive]
         --menu-right-bg: none;
         --menu-right-img: url("chrome://global/skin/icons/menu-arrow.svg");
         --menu-right-margin: 4px;
-        --menu-right-size: 11px;
+        --menu-right-size: 14px;
         --menupopup-shadow: none !important;
     }
 
@@ -543,6 +545,7 @@ menupopup.in-menulist menu.subviewbutton:not([disabled="true"])[_moz-menuactive]
 {
     :root,
     menupopup {
+        --pinned-tab-width: 36px;
         --inline-tab-padding: 10px !important;
         --default_tab_border_roundness: 5px;
         --tab_close_icons_size: 16px;
@@ -565,8 +568,10 @@ menupopup.in-menulist menu.subviewbutton:not([disabled="true"])[_moz-menuactive]
         --lwt-background-alignment: top !important;
         --lwt-background-tiling: repeat !important;
         --arrowpanel-background: hsl(233, 36%, 11%) !important;
+        --panel-shadow: 0 0 4px 0 hsla(0, 0%, 0%, 0.4) !important;
         --arrowpanel-color: var(--lwt-text-color) !important;
         --arrowpanel-darker: hsla(236, 70%, 73%, 0.17) !important;
+        --arrowpanel-faint: hsla(236, 100%, 83%, 0.1);
         --arrowpanel-dimmed: hsla(236, 100%, 83%, 0.17) !important;
         --arrowpanel-dimmed-further: hsla(236, 100%, 83%, 0.25) !important;
         --arrowpanel-dimmed-even-further: hsla(236, 100%, 85%, 0.3) !important;
@@ -577,6 +582,10 @@ menupopup.in-menulist menu.subviewbutton:not([disabled="true"])[_moz-menuactive]
         --toolbarbutton-hover-background: hsla(236, 82%, 83%, 0.17) !important;
         --toolbarbutton-active-background: hsla(236, 82%, 83%, 0.22) !important;
         --toolbarbutton-checked-background: hsla(236, 82%, 83%, 0.13) !important;
+        --desaturate-hover-background: hsla(236, 60%, 83%, 0.17) !important;
+        --desaturate-active-background: hsla(236, 60%, 83%, 0.22) !important;
+        --desaturate-checked-background: hsla(236, 60%, 83%, 0.13) !important;
+        /* --button-bgcolor: var(--arrowpanel-dimmed) !important; */
         --button-hover-bgcolor: var(--arrowpanel-dimmed) !important;
         --button-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
         --urlbar-input-bgcolor: hsla(233, 24%, 26%, 1) !important;
@@ -585,8 +594,11 @@ menupopup.in-menulist menu.subviewbutton:not([disabled="true"])[_moz-menuactive]
         --urlbar-toolbar-height: var(--user-urlbar-container-height) !important;
         --urlbar-container-height: var(--user-urlbar-container-height) !important;
         --urlbar-height: calc(var(--urlbar-container-height) - 6px) !important;
-        --lwt-toolbarbutton-icon-fill-attention: hsl(224, 100%, 71%) !important;
-        --places-cell-focus-bgcolor: hsla(233, 24%, 28%, 50%) !important;
+        --lwt-toolbarbutton-icon-fill-attention: var(--attention-color) !important;
+        --focus-outline-color: var(--attention-color) !important;
+        --focus-outline-width: 2px;
+        --places-cell-focus-bgcolor: hsl(232, 30%, 19%) !important;
+        --places-cell-hover-bgcolor: hsl(232, 30%, 23%) !important;
         --ctrlTab-bgcolor: transparent !important;
         --ctrlTab-panel-disabled-bgcolor: hsla(240, 2%, 9%, 0.8) !important;
         --ctrlTab-panel-disabled-focused-bgcolor: hsla(240, 8%, 3%, 0.9) !important;
@@ -626,7 +638,7 @@ menupopup.in-menulist menu.subviewbutton:not([disabled="true"])[_moz-menuactive]
         --autocomplete-popup-color: var(--lwt-text-color) !important;
         --urlbarView-bgcolor: hsla(233, 38%, 9%, 0.8) !important;
         --ui-textbox-bgcolor: hsl(233, 24%, 28%) !important;
-        --ui-textbox-focus-bgcolor: hsl(232, 20%, 38%) !important;
+        --ui-textbox-focus-bgcolor: hsl(232, 22%, 34%) !important;
         --ebmp-hover-bgcolor: hsl(233, 24%, 33%) !important;
         --ebmp-focus-bgcolor: hsl(233, 24%, 38%) !important;
         --urlbar-popup-url-color: hsl(251, 100%, 64%) !important;
@@ -635,8 +647,8 @@ menupopup.in-menulist menu.subviewbutton:not([disabled="true"])[_moz-menuactive]
         --toolbarbutton-icon-fill-opacity: 1 !important;
         --tab-min-height: 35px !important;
         --min-tab-height: 35px !important;
-        --context-margin-inline: -16px 0;
-        --context-padding-inline: 28px 0;
+        --context-margin-inline: -14px 0;
+        --context-padding-inline: 27px 0;
         --menu-color: var(--ui-text-80) !important;
         --menupopup-background: var(--arrowpanel-background);
         --menu-background-color: var(--arrowpanel-background) !important;
@@ -653,6 +665,8 @@ menupopup.in-menulist menu.subviewbutton:not([disabled="true"])[_moz-menuactive]
         --menu-right-img: none;
         --menu-right-margin: 2px;
         --menu-right-size: 12px;
+        --buttons-secondary-hover-bgcolor: var(--arrowpanel-dimmed) !important;
+        --buttons-secondary-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
     }
 
     @supports (-moz-bool-pref("browser.proton.enabled")) {
@@ -677,7 +691,7 @@ menupopup.in-menulist menu.subviewbutton:not([disabled="true"])[_moz-menuactive]
             --panel-shortcut-color: hsl(235, 27%, 73%, 70%) !important;
             --panel-shortcut-focus: hsl(235, 32%, 75%, 90%) !important;
             --proton-tab-inline-padding: 0 !important;
-            --proton-shadow-blur-radius: 0 !important;
+            --tab-shadow-max-size: 0 !important;
         }
 
         :root,
@@ -703,7 +717,6 @@ menupopup.in-menulist menu.subviewbutton:not([disabled="true"])[_moz-menuactive]
     @supports (-moz-bool-pref("browser.proton.contextmenus.enabled")) {
         :root,
         menupopup {
-            --menu-color: var(--ui-text-80) !important;
             --menupopup-background: transparent;
             --menu-background-color: var(--arrowpanel-background) !important;
             --menupopup-margin: 0;
@@ -721,7 +734,8 @@ menupopup.in-menulist menu.subviewbutton:not([disabled="true"])[_moz-menuactive]
             --menu-right-bg: none;
             --menu-right-img: url("chrome://global/skin/icons/menu-arrow.svg");
             --menu-right-margin: 4px;
-            --menu-right-size: 11px;
+            --menu-right-size: 14px;
+            --panel-shadow: none !important;
         }
     }
 

@@ -169,18 +169,32 @@
     background-color: var(--arrowpanel-dimmed-further) !important;
 }
 
-:is(#bookmarks-view, #historyTree) treechildren::-moz-tree-row(hover),
-:is(#bookmarks-view, #historyTree):focus treechildren::-moz-tree-row(selected),
-:is(#bookmarks-view, #historyTree) treechildren::-moz-tree-cell(hover),
-:is(#bookmarks-view, #historyTree):focus treechildren::-moz-tree-cell(selected) {
+.sidebar-panel treechildren::-moz-tree-row(selected),
+.sidebar-panel treechildren::-moz-tree-cell(selected) {
     background-color: var(--places-cell-focus-bgcolor) !important;
+    outline: none !important;
+    border: none !important;
+}
+
+.sidebar-panel treechildren::-moz-tree-row(hover),
+.sidebar-panel treechildren::-moz-tree-cell(hover),
+.sidebar-panel treechildren::-moz-tree-row(selected, hover),
+.sidebar-panel treechildren::-moz-tree-cell(selected, hover) {
+    background-color: var(--places-cell-hover-bgcolor) !important;
     color: var(--lwt-text-color) !important;
     outline: none !important;
 }
 
-#sidebar-box {
-    z-index: 1 !important;
-    position: relative !important;
+.sidebar-panel:-moz-window-inactive treechildren::-moz-tree-row(selected),
+.sidebar-panel:-moz-window-inactive treechildren::-moz-tree-cell(selected) {
+    background-color: transparent !important;
+}
+
+.sidebar-panel:-moz-window-inactive treechildren::-moz-tree-row(selected, hover),
+.sidebar-panel:-moz-window-inactive treechildren::-moz-tree-cell(selected, hover) {
+    background-color: var(--places-cell-hover-bgcolor) !important;
+    color: var(--lwt-text-color) !important;
+    outline: none !important;
 }
 
 .sidebar-panel .sidebar-placesTree {
@@ -190,13 +204,6 @@
 /* .panel-arrow {
     stroke: var(--arrowpanel-background) !important;
 } */
-
-.sidebar-panel .sidebar-placesTreechildren::-moz-tree-row(selected),
-.sidebar-panel .sidebar-placesTreechildren::-moz-tree-cell(selected) {
-    background-color: var(--places-cell-focus-bgcolor) !important;
-    outline: none !important;
-    border: none !important;
-}
 
 treechildren::-moz-tree-row,
 treechildren::-moz-tree-row(current, focus),
@@ -208,6 +215,55 @@ treechildren::-moz-tree-row(selected, current, focus) {
     border: none !important;
 }
 
+.sidebar-panel treechildren::-moz-tree-cell-text(primary, dropOn) {
+    background: none !important;
+}
+
+.sidebar-panel treechildren::-moz-tree-cell(primary, dropOn) {
+    background-color: var(--places-cell-focus-bgcolor) !important;
+}
+
+treechildren::-moz-tree-drop-feedback {
+    background-color: transparent !important;
+    margin-inline-start: 8px !important;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml;utf8,<svg width='14' height='14' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path fill='white' d='M8.293 4.293a1 1 0 011.414 0l7 7a1 1 0 010 1.414l-7 7a1 1 0 01-1.414-1.414L14.586 12 8.293 5.707a1 1 0 010-1.414z'/></svg>") !important;
+    background-repeat: no-repeat !important;
+    background-size: contain !important;
+    height: 14px !important;
+}
+
+treechildren::-moz-tree-twisty {
+    width: 14px !important;
+    height: auto !important;
+    padding-inline: 3px !important;
+    list-style-image: url("data:image/svg+xml;utf8,<svg width='14' height='14' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M8.293 4.293a1 1 0 011.414 0l7 7a1 1 0 010 1.414l-7 7a1 1 0 01-1.414-1.414L14.586 12 8.293 5.707a1 1 0 010-1.414z'/></svg>") !important;
+    -moz-context-properties: fill, fill-opacity;
+}
+
+treechildren:-moz-locale-dir(rtl)::-moz-tree-twisty(closed) {
+    list-style-image: url("data:image/svg+xml;utf8,<svg width='14' height='14' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M15.707 4.293a1 1 0 010 1.414L9.414 12l6.293 6.293a1 1 0 11-1.414 1.414l-7-7a1 1 0 010-1.414l7-7a1 1 0 011.414 0z'/></svg>") !important;
+}
+
+treechildren::-moz-tree-twisty(open) {
+    list-style-image: url("data:image/svg+xml;utf8,<svg width='14' height='14' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M4.293 8.293a1 1 0 011.414 0L12 14.586l6.293-6.293a1 1 0 111.414 1.414l-7 7a1 1 0 01-1.414 0l-7-7a1 1 0 010-1.414z'/></svg>") !important;
+}
+
+.item.client .item-twisty-container {
+    min-width: 14px !important;
+    height: 14px !important;
+    background-image: url("data:image/svg+xml;utf8,<svg width='14' height='14' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M4.293 8.293a1 1 0 011.414 0L12 14.586l6.293-6.293a1 1 0 111.414 1.414l-7 7a1 1 0 01-1.414 0l-7-7a1 1 0 010-1.414z'/></svg>") !important;
+    -moz-context-properties: fill, fill-opacity;
+}
+
+.item.client.closed .item-twisty-container {
+    background-image: url("data:image/svg+xml;utf8,<svg width='14' height='14' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M8.293 4.293a1 1 0 011.414 0l7 7a1 1 0 010 1.414l-7 7a1 1 0 01-1.414-1.414L14.586 12 8.293 5.707a1 1 0 010-1.414z'/></svg>") !important;
+}
+
+.item.client.closed .item-twisty-container:dir(rtl) {
+    background-image: url("data:image/svg+xml;utf8,<svg width='14' height='14' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M15.707 4.293a1 1 0 010 1.414L9.414 12l6.293 6.293a1 1 0 11-1.414 1.414l-7-7a1 1 0 010-1.414l7-7a1 1 0 011.414 0z'/></svg>") !important;
+}
+
 .sidebar-placesTreechildren::-moz-tree-cell-text {
     padding-right: 7px !important;
 }
@@ -215,15 +271,15 @@ treechildren::-moz-tree-row(selected, current, focus) {
 .sidebar-placesTreechildren::-moz-tree-cell-text(selected),
 .sidebar-placesTreechildren::-moz-tree-image(selected),
 .sidebar-placesTreechildren::-moz-tree-twisty(selected) {
-    color: #fff !important;
+    color: var(--lwt-text-color) !important;
 }
 
 .sidebar-placesTreechildren::-moz-tree-row-text(selected) {
-    color: #fff !important;
+    color: var(--lwt-text-color) !important;
 }
 
 .sidebar-placesTreechildren::-moz-tree-indentation {
-    width: 6px !important;
+    width: 16px;
 }
 
 .sidebar-placesTree {
@@ -241,10 +297,6 @@ treechildren::-moz-tree-row(selected, current, focus) {
 
 #sidebar-splitter {
     display: none !important;
-}
-
-#sidebar-box {
-    box-shadow: 0px 0px 8px -4px hsla(240, 4%, 0%, 0.6), 0px 0px 15px 0px hsla(0, 0%, 0%, 0.2) !important;
 }
 
 @-moz-document url("chrome://browser/content/syncedtabs/sidebar.xhtml")
@@ -299,15 +351,7 @@ treechildren::-moz-tree-row(selected, current, focus) {
 
     .item-twisty-container,
     .item-icon-container {
-        margin-inline-start: 4px !important;
-    }
-
-    .item-twisty-container {
-        height: 12px !important;
-        width: 12px !important;
-        background-size: 12px !important;
-        background-repeat: no-repeat !important;
-        background-position: center center !important;
+        margin-inline-start: 3px !important;
     }
 
     .item-tabs-list .item-icon-container {
@@ -318,21 +362,35 @@ treechildren::-moz-tree-row(selected, current, focus) {
         margin-top: 2.5px !important;
     }
 
-    .item.selected > .item-title-container {
-        appearance: none !important;
-        background-color: var(--ui-textbox-bgcolor) !important;
-        color: #fff !important;
+    .item.tab,
+    .item.tab * {
+        cursor: pointer !important;
     }
 
-    .client .item.tab > .item-title-container {
-        padding-inline-start: 16px !important;
+    .item.selected > .item-title-container:not(:hover) {
+        appearance: none !important;
+        background-color: var(--places-cell-focus-bgcolor) !important;
+        color: var(--lwt-text-color) !important;
+    }
+
+    .item.selected:-moz-window-inactive > .item-title-container:not(:hover) {
+        background-color: transparent !important;
     }
 
     .item-title-container:hover {
         appearance: none !important;
-        background-color: var(--ui-textbox-bgcolor) !important;
+        background-color: var(--places-cell-hover-bgcolor) !important;
         color: var(--lwt-text-color) !important;
     }
+
+    .item.client.selected > .item-title-container:not(:hover) {
+        background: none !important;
+        color: inherit !important;
+    }
+
+    /* .client .item.tab > .item-title-container {
+        padding-inline-start: 26px;
+    } */
 
     ::selection {
         background-color: rgba(255, 255, 255, 0.9) !important;
@@ -347,8 +405,10 @@ treechildren::-moz-tree-row(selected, current, focus) {
     display: flex !important;
     flex-direction: column !important;
     position: fixed !important;
+    z-index: 1 !important;
     left: 0 !important;
     right: auto !important;
+    box-shadow: 0px 0px 8px -4px hsla(240, 4%, 0%, 0.6), 0px 0px 15px 0px hsla(0, 0%, 0%, 0.2) !important;
 }
 
 :root[sizemode="normal"] #sidebar-box {

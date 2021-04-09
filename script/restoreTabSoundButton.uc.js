@@ -7,14 +7,6 @@
 
 (function () {
     const tabEventHandler = {
-        sentenceCase(str) {
-            return str
-                .replace(/[a-z]/i, function (letter) {
-                    return letter.toUpperCase();
-                })
-                .trim();
-        },
-
         handleEvent(e) {
             if (!e.target.classList.contains("tab-icon-sound")) return;
             let tab = e.target.closest(".tabbrowser-tab");
@@ -31,23 +23,40 @@
             }
         },
 
+        stringWithShortcut(stringId, keyElemId, pluralCount) {
+            let keyElem = document.getElementById(keyElemId);
+            let shortcut = ShortcutUtils.prettifyShortcut(keyElem);
+            return PluralForm.get(pluralCount, gTabBrowserBundle.GetStringFromName(stringId))
+                .replace("%S", shortcut)
+                .replace("#1", pluralCount);
+        },
+
         async tooltipHandler(e, tab) {
             const selectedTabs = gBrowser.selectedTabs;
-            const contextTabInSelection = selectedTabs.includes(tab);
-            const affectedTabsLength = contextTabInSelection ? selectedTabs.length : 1;
-            let state = null;
+            const tabInSelection = selectedTabs.includes(tab);
+            const affectedTabsLength = tabInSelection ? selectedTabs.length : 1;
 
-            if (tab.soundPlaying) state = "mute";
-            if (tab.muted) state = "unmute";
-            if (tab.activeMediaBlocked) state = "unblock";
+            if (tab.selected)
+                label = this.stringWithShortcut(
+                    tab.linkedBrowser.audioMuted
+                        ? "tabs.unmuteAudio2.tooltip"
+                        : "tabs.muteAudio2.tooltip",
+                    "key_toggleMute",
+                    affectedTabsLength
+                );
+            else
+                label = PluralForm.get(
+                    affectedTabsLength,
+                    gTabBrowserBundle.GetStringFromName(
+                        tab.hasAttribute("activemedia-blocked")
+                            ? "tabs.unblockAudio2.tooltip"
+                            : tab.linkedBrowser.audioMuted
+                            ? "tabs.unmuteAudio2.background.tooltip"
+                            : "tabs.muteAudio2.background.tooltip"
+                    )
+                ).replace("#1", affectedTabsLength);
 
-            let tipString = await document.l10n.formatValue(`browser-tab-${state}`, {
-                count: affectedTabsLength,
-            });
-
-            if (state)
-                e.target.setAttribute("tooltiptext", this.sentenceCase(tipString.toLowerCase()));
-            else e.target.removeAttribute("tooltiptext");
+            e.target.setAttribute("tooltiptext", label);
         },
 
         clickHandler(e, tab) {

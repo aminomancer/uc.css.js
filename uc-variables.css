@@ -52,7 +52,8 @@ menupopup {
     --lwt-toolbarbutton-icon-fill-attention: var(--attention-color) !important;
     --focus-outline-color: var(--attention-color) !important;
     --focus-outline-width: 2px;
-    --places-cell-focus-bgcolor: hsla(233, 24%, 28%, 50%) !important;
+    --places-cell-focus-bgcolor: hsl(232, 30%, 19%) !important;
+    --places-cell-hover-bgcolor: hsl(232, 30%, 23%) !important;
     --ctrlTab-bgcolor: transparent !important;
     --ctrlTab-panel-disabled-bgcolor: hsla(240, 2%, 9%, 0.8) !important;
     --ctrlTab-panel-disabled-focused-bgcolor: hsla(240, 8%, 3%, 0.9) !important;
@@ -174,6 +175,7 @@ toolbar {
         --proton-tab-inline-padding: 0 !important;
         --tab-shadow-max-size: 0 !important;
     }
+
     :root,
     menupopup,
     #TabsToolbar {

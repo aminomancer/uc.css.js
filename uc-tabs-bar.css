@@ -165,16 +165,14 @@
 
 /* tab dragging and dropping icon */
 .tab-drop-indicator {
-    background-image: url("chrome://global/skin/icons/arrow-up-12.svg") !important;
+    background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path fill='context-fill' fill-opacity='context-fill-opacity' fill-rule='evenodd' clip-rule='evenodd' d='M12.707 7.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L12 9.414l6.293 6.293a1 1 0 001.414-1.414l-7-7z'/></svg>") !important;
     -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity !important;
     fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
-    margin-bottom: -39px !important;
+    margin-bottom: -40px !important;
     z-index: 2500 !important;
     margin-inline-start: -20px !important;
-    background-size: 17px !important;
-    background-position-x: 1.4px !important;
+    background-size: contain !important;
     width: 20px !important;
-    max-width: 20px !important;
 }
 
 /* hide the pixel above the tabs in windows */
@@ -396,6 +394,7 @@
     margin-inline: 4px;
     min-height: 28px;
     -moz-box-align: center;
+    padding-inline-end: 2px;
 }
 
 panelview .all-tabs-button:not([disabled], [open]):focus {
@@ -429,11 +428,10 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
 }
 
 .all-tabs-item[multiselected] {
-    --main-stripe-color: var(--multiselected-color);
+    --main-stripe-color: var(--multiselected-color, var(--lwt-selected-tab-background-color));
 }
 
-.all-tabs-item[multiselected]:not([selected]),
-.all-tabs-item:not([selected]):is(:hover, :focus-within, [_moz-menuactive]) {
+.all-tabs-item:not([selected]):is(:hover, :focus-within, [_moz-menuactive], [multiselected]) {
     background-color: var(--arrowpanel-dimmed) !important;
 }
 
@@ -445,7 +443,11 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
     background-color: var(--arrowpanel-dimmed-further) !important;
 }
 
-.all-tabs-item[pending] {
+.all-tabs-item[pending]:not([selected]):is(:hover, :focus-within, [_moz-menuactive], [multiselected]) {
+    background-color: var(--arrowpanel-faint, color-mix(in srgb, var(--arrowpanel-dimmed) 60%, transparent)) !important;
+}
+
+.all-tabs-item[pending] > .all-tabs-button {
     opacity: 0.6;
 }
 
@@ -453,26 +455,60 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
 .all-tabs-item .all-tabs-secondary-button:focus:not([disabled]) {
     max-width: 18px;
     max-height: 18px;
-    padding: 2px 2px 2px 1px !important;
     border-radius: 100% !important;
     color: white !important;
     background-color: transparent !important;
     opacity: 0.7 !important;
     min-height: 0 !important;
     min-width: 0 !important;
-    margin-inline: 6px 10px !important;
+    padding: 0 !important;
+}
+
+.all-tabs-secondary-button > .toolbarbutton-icon {
+    min-width: 18px !important;
+    min-height: 18px !important;
+    fill: inherit !important;
+    fill-opacity: inherit !important;
+    -moz-context-properties: inherit !important;
 }
 
 .all-tabs-item .all-tabs-secondary-button > label:empty {
     display: none !important;
 }
 
-.all-tabs-item .all-tabs-secondary-button:is(:hover, :focus):not([disabled]) {
+.all-tabs-item .all-tabs-secondary-button:is(:hover, :focus):not([disabled]),
+.all-tabs-item:is(:hover, :focus-within) .all-tabs-secondary-button[close-button]:is(:hover, :focus):not([disabled]) {
     background-color: var(--arrowpanel-dimmed) !important;
     opacity: 1 !important;
     color: white !important;
 }
 
-.all-tabs-item .all-tabs-secondary-button:hover:active:not([disabled]) {
+.all-tabs-item .all-tabs-secondary-button:hover:active:not([disabled]),
+.all-tabs-item:is(:hover, :focus-within) .all-tabs-secondary-button[close-button]:hover:active:not([disabled]) {
     background-color: var(--arrowpanel-dimmed-further) !important;
+}
+
+.all-tabs-item .all-tabs-secondary-button[toggle-mute] {
+    padding: 2px 2px 2px 1px !important;
+    margin-inline-end: 8px !important;
+}
+
+.all-tabs-secondary-button[close-button] {
+    fill-opacity: 0 !important;
+    transform: translateX(28px);
+    opacity: 0 !important;
+    margin-inline-start: -28px !important;
+    transition: 0.075s ease-in-out transform, 0.075s ease-in-out margin, 0.075s linear opacity;
+    display: block !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    fill: currentColor !important;
+    fill-opacity: 0 !important;
+    border-radius: 50% !important;
+    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20'><rect fill='context-fill' fill-opacity='context-fill-opacity' width='20' height='20' rx='2' ry='2'/><path fill='context-fill' fill-opacity='context-stroke-opacity' d='M11.06 10l3.47-3.47a.75.75 0 00-1.06-1.06L10 8.94 6.53 5.47a.75.75 0 10-1.06 1.06L8.94 10l-3.47 3.47a.75.75 0 101.06 1.06L10 11.06l3.47 3.47a.75.75 0 001.06-1.06z'/></svg>") !important;
+}
+
+.all-tabs-item:is(:hover, :focus-within) .all-tabs-secondary-button[close-button] {
+    transform: none !important;
+    opacity: 0.7 !important;
+    margin-inline-start: -2px !important;
 }

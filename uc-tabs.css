@@ -218,6 +218,10 @@
     position: relative !important;
 }
 
+.tabbrowser-tab {
+    z-index: 0;
+}
+
 .tabbrowser-tab .tab-content {
     z-index: 1;
 }

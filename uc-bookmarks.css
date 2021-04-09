@@ -513,22 +513,8 @@
     }
 }
 
-treechildren::-moz-tree-drop-feedback {
-    background-image: linear-gradient(
-        to right,
-        hsla(224, 100%, 71%, 100%) 0%,
-        hsla(224, 100%, 71%, 10%) 40%,
-        hsla(224, 100%, 71%, 1%) 70%,
-        transparent 100%
-    ) !important;
-    background-color: transparent !important;
-    width: 270px !important;
-    height: 1px !important;
-    margin-inline-start: -8px !important;
-}
-
 @supports (-moz-bool-pref("browser.proton.enabled")) {
-    /*     #BMB_bookmarksPopup menupopup[placespopup="true"] {
+    /* #BMB_bookmarksPopup menupopup[placespopup="true"] {
         padding-top: 0 !important;
     } */
 

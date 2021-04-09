@@ -65,13 +65,13 @@ menupopup::part(drop-indicator-bar) {
 menupopup::part(drop-indicator) {
     pointer-events: none;
     background: none;
-    list-style-image: url(chrome://browser/skin/customizableui/menu-arrow.svg);
+    list-style-image: url("data:image/svg+xml;utf8,<svg width='14' height='14' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path fill='white' d='M8.293 4.293a1 1 0 011.414 0l7 7a1 1 0 010 1.414l-7 7a1 1 0 01-1.414-1.414L14.586 12 8.293 5.707a1 1 0 010-1.414z'/></svg>") !important;
     -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity;
     fill: var(--lwt-toolbarbutton-icon-fill, currentColor);
     height: 28px;
     max-width: 28px;
-    padding-block: 6px;
-    padding-inline: 0 12px;
+    padding-block: 3px;
+    padding-inline: 0 6px;
 }
 
 /* padding for proton context menus */
