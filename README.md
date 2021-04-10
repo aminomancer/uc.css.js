@@ -96,7 +96,7 @@ You first need to find your Firefox installation folder. On Windows that's `C:/P
 3) &nbsp; a folder called `pref` inside that `defaults` folder;
 4) &nbsp; a file called `config-prefs.js` inside that `pref` folder;
 5) &nbsp; a `JS` folder (or `script` if you're using my chrome.manifest file) in your profile's `chrome` folder;
-6) &nbsp; a `resources` folder in your `chrome` folder, containing all the icons (assuming you're using the script or the toolbox button);
+6) &nbsp; a `resources` folder in your `chrome` folder, containing all the icons (assuming you're using the theme or the toolbox button script);
 6) &nbsp; a `utils` folder in your `chrome` folder, containing `chrome.manifest` and `boot.jsm`
 
 You may already have a file called `channel-prefs.js` inside the `prefs` folder. This is unrelated.
