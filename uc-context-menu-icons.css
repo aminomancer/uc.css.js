@@ -388,7 +388,7 @@ menupopup[menu-api] menuitem[type="radio"][checked="true"]::before,
 }
 
 #context_moveToStart:not(.menuitem-iconic)::before {
-    background-image: url("chrome://browser/skin/back.svg") !important;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M15 7H3.414l4.293-4.293a1 1 0 00-1.414-1.414l-6 6a1 1 0 000 1.414l6 6a1 1 0 001.414-1.414L3.414 9H15a1 1 0 000-2z'/></svg>") !important;
 }
 
 #context_moveToEnd:not(.menuitem-iconic)::before {
@@ -568,7 +568,7 @@ menupopup[menu-api] menuitem[type="radio"][checked="true"]::before,
 }
 
 #context-openlinkincurrent:not(.menuitem-iconic)::before {
-    background-image: url("chrome://browser/skin/tab.svg") !important;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M15 11h-1V5a2 2 0 00-2-2H4a2 2 0 00-2 2v6H1a1 1 0 000 2h14a1 1 0 100-2z'/></svg>") !important;
 }
 
 :is(#context-openlinkincontainertab, #context-openlinkinusercontext-menu):not(.menuitem-iconic)::before {
@@ -685,7 +685,7 @@ menupopup[menu-api] menuitem[type="radio"][checked="true"]::before,
 
 #tabContextUndoList:not(.menuitem-iconic)::before,
 #ContextUndoList:not(.menuitem-iconic)::before {
-    background-image: url("chrome://browser/skin/tab.svg");
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M15 11h-1V5a2 2 0 00-2-2H4a2 2 0 00-2 2v6H1a1 1 0 000 2h14a1 1 0 100-2z'/></svg>");
 }
 
 #tabContextMenu menuitem[label^="Restore All"]::before {
