@@ -64,7 +64,7 @@ For best results, set density mode to `Normal` and theme to `Dark` in the custom
 | ui.textSelectBackgroundDisabled 	| String 	| `#000000` 	|  	|
 | ui.textSelectForegroundAttention 	| String 	| `#000000` 	|  	|
 | ui.textSelectForegroundCustom 	| String 	| `#7755FF` 	|  	|
-| userChrome... 	|  	|  	| Several of my scripts use custom prefs beginning with `userChrome` for user cusotmization. See the individual script files for details 	|
+| userChrome... 	|  	|  	| Several of my scripts use custom prefs beginning with `userChrome` for user customization. See the individual script files for details 	|
 | userChrome.tabs.pinned-tabs.close-buttons.disabled 	| Boolean 	| true 	| This controls whether close buttons are shown on pinned tabs 	|
 | userChrome.tabs.rounded-outer-corners.disabled 	| Boolean 	| false 	| This controls whether tabs have rounded bottom corners<br/><a href="https://youtu.be/BAuABH13ytM"><img src="preview/prev-tabcorners.png" width="100%"/></a> 	|
 | widget.chrome.allow-gtk-dark-theme 	| Boolean 	| true 	| I'm not sure if these still do anything. But might as well enable them 	|
