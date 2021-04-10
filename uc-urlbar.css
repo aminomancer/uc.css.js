@@ -142,7 +142,7 @@
 
 .urlbar-history-dropmarker {
     list-style-image: none !important;
-    background: url(chrome://global/skin/icons/arrow-dropdown-16.svg) center/18.5px no-repeat !important;
+    background: url(chrome://userchrome/content/arrow-dropdown-16.svg) center/18.5px no-repeat !important;
 }
 
 /* iffy modification to center urlbar buttons not contained in page action button box */
@@ -156,7 +156,7 @@
 }
 
 .default-notification-icon {
-    list-style-image: url(chrome://browser/skin/notification-icons/desktop-notification.svg) !important;
+    list-style-image: url(chrome://userchrome/content/notifications/desktop-notification.svg) !important;
 }
 
 #page-action-buttons {
@@ -232,15 +232,15 @@ toolbarpaletteitem[removable="false"]
 
 #tracking-protection-icon {
     display: -moz-box !important;
-    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M7.505 1.089L3.262 2.681c-.552.212-.92.735-.92 1.329v3.324c0 3.416 2.214 6.626 5.255 7.602.262.085.545.085.806 0 3.041-.976 5.255-4.18 5.255-7.602V4.01c0-.587-.368-1.117-.919-1.322L8.495 1.096a1.37 1.37 0 00-.99-.007z'/></svg>") !important;
+    list-style-image: url(chrome://userchrome/content/material/tracking.svg) !important;
 }
 
 #tracking-protection-icon-box[hasException] > #tracking-protection-icon {
-    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M7.597 14.936c.262.085.545.085.806 0 3.041-.976 5.255-4.18 5.255-7.602V4.973l-8.534 8.534a6.96 6.96 0 002.473 1.429zM13.804 1.532l-.005-.005a.875.875 0 00-1.237-.005l-.005.005-.794.794-3.268-1.225a1.37 1.37 0 00-.99-.007L3.261 2.681a1.424 1.424 0 00-.919 1.329v3.324a8.25 8.25 0 00.834 3.573l-.979.979a.875.875 0 00-.005 1.237l.005.005a.875.875 0 001.237.005l.005-.005L13.798 2.77a.875.875 0 00.006-1.238z'/></svg>") !important;
+    list-style-image: url(chrome://userchrome/content/material/tracking-disabled.svg) !important;
 }
 
 #tracking-protection-icon-box:not([hasException])[active] > #tracking-protection-icon {
-    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M12.739 2.688L8.495 1.096a1.37 1.37 0 00-.99-.007L3.262 2.681c-.552.212-.92.735-.92 1.329v3.324c0 3.416 2.214 6.626 5.255 7.602.262.085.545.085.806 0 3.041-.976 5.255-4.18 5.255-7.602V4.01c0-.587-.368-1.117-.919-1.322zM10.567 7.3c-1.718 2.997-2.715 4.746-3.002 5.247a.301.301 0 01-.559-.194l.47-3.31H5.648c-.459 0-.172-.392-.162-.407.658-1.164 1.645-2.887 2.95-5.185a.301.301 0 01.559.194l-.47 3.31h1.833c.209.001.323.1.209.345z'/></svg>") !important;
+    list-style-image: url(chrome://userchrome/content/material/tracking-attention.svg) !important;
 }
 
 #tracking-protection-icon-animatable-box {
@@ -248,15 +248,15 @@ toolbarpaletteitem[removable="false"]
 }
 
 #identity-icon {
-    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path fill='context-fill' fill-opacity='context-fill-opacity' fill-rule='evenodd' d='M8 15a7 7 0 117-7 7 7 0 01-7 7zM8 2a6 6 0 106 6 6 6 0 00-6-6zm0 10a1 1 0 01-1-1V8a1 1 0 012 0v3a1 1 0 01-1 1zm0-6a1 1 0 111-1 1 1 0 01-1 1z'/></svg>") !important;
+    list-style-image: url(chrome://userchrome/content/identity-icon.svg) !important;
 }
 
 #identity-box[pageproxystate="valid"].chromeUI #identity-icon {
-    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M15.424 5.366A4.384 4.384 0 0013.817 3.4a7.893 7.893 0 01.811 2.353v.017c-.9-2.185-2.441-3.066-3.7-4.984l-.189-.3a2.813 2.813 0 01-.088-.161 1.341 1.341 0 01-.119-.306.022.022 0 00-.013-.019.026.026 0 00-.019 0h-.006a5.629 5.629 0 00-2.755 4.308c.094-.006.187-.014.282-.014a4.069 4.069 0 013.51 1.983A2.838 2.838 0 009.6 5.824a3.2 3.2 0 01-1.885 6.013 3.651 3.651 0 01-1.042-.2 3.817 3.817 0 01-.37-.155A3.282 3.282 0 014.415 8.95s.369-1.334 2.647-1.334a1.91 1.91 0 00.964-.857 12.756 12.756 0 01-1.941-1.118c-.29-.277-.428-.411-.551-.511a2.362 2.362 0 00-.207-.152 3.481 3.481 0 01-.022-1.894 5.915 5.915 0 00-1.929 1.442A4.108 4.108 0 013.1 2.584a1.561 1.561 0 00-.267.138 5.767 5.767 0 00-.783.649 6.9 6.9 0 00-.748.868 6.446 6.446 0 00-1.08 2.348c0 .009-.076.325-.131.715l-.025.182a5.104 5.104 0 00-.048.444v.023c-.005.076-.011.16-.016.258v.04A7.884 7.884 0 008.011 16a7.941 7.941 0 007.9-6.44l.036-.3a7.724 7.724 0 00-.523-3.894z'/></svg>") !important;
+    list-style-image: url(chrome://userchrome/content/identity-icons-brand.svg) !important;
 }
 
 #identity-box[pageproxystate="valid"].localResource #identity-icon {
-    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M14.12 3.71L11.29.88A3 3 0 009.17 0H4a3 3 0 00-3 3v10a3 3 0 003 3h8a3 3 0 003-3V5.83a3 3 0 00-.88-2.12zM12.59 5H10V2.41zM12 14H4a1 1 0 01-1-1V3a1 1 0 011-1h5v3a1 1 0 001 1h3v7a1 1 0 01-1 1z'/></svg>") !important;
+    list-style-image: url(chrome://userchrome/content/document.svg) !important;
 }
 
 /* #urlbar:not(.searchButton) > #urlbar-input-container > #identity-box[pageproxystate="invalid"] #identity-icon {
@@ -266,12 +266,12 @@ toolbarpaletteitem[removable="false"]
 
 #urlbar[actiontype="extension"] > #urlbar-input-container > #identity-box #identity-icon,
 #identity-box.extensionPage[pageproxystate="valid"] #identity-icon {
-    list-style-image: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' x='0' y='0' width='16' height='16' viewBox='-0.5 0 18 16' fill='context-fill' fill-opacity='context-fill-opacity'><path d='M7 2.1H3.7c-.9 0-1.6.7-1.6 1.6V7C.9 7 0 7.9 0 9s.9 2.1 2.1 2.1v3.3c0 .9.7 1.6 1.6 1.6h3.1c0-2.2 1.8-2.5 2.2-2.5s2.2.2 2.2 2.5h3.1c.9 0 1.6-.7 1.6-1.6v-3.1c-2.2 0-2.5-1.8-2.5-2.2 0-.4.2-2.2 2.5-2.2V3.7c0-.9-.7-1.6-1.6-1.6H11C11.1.9 10.2 0 9 0S7 .9 7 2.1z'/></svg>") !important;
+    list-style-image: url(chrome://userchrome/content/material/extension.svg) !important;
 }
 
 #identity-box[pageproxystate="valid"].verifiedDomain #identity-icon,
 #identity-box[pageproxystate="valid"].mixedActiveBlocked #identity-icon {
-    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M12 7h1a1 1 0 011 1v6a1 1 0 01-1 1H3a1 1 0 01-1-1V8a1 1 0 011-1h1V5c0-2.208 1.793-4 4-4 2.208 0 4 1.795 4 4v2zm-2 0V5c0-1.101-.898-2-2-2-1.103 0-2 .897-2 2v2h4z'/></svg>") !important;
+    list-style-image: url(chrome://userchrome/content/skin/connection-secure.svg) !important;
 }
 
 #identity-box[pageproxystate="valid"].weakCipher #identity-icon,
@@ -279,19 +279,19 @@ toolbarpaletteitem[removable="false"]
 #identity-box[pageproxystate="valid"].mixedDisplayContentLoadedActiveBlocked #identity-icon,
 #identity-box[pageproxystate="valid"].certUserOverridden #identity-icon,
 #identity-box[pageproxystate="valid"].certErrorPage #identity-icon {
-    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path d='M8 1a4 4 0 00-4 4v1.984h-.5a1.5 1.5 0 00-1.5 1.5V13.5A1.5 1.5 0 003.5 15h2.535a2.274 2.274 0 01.207-1.318L9.43 7.27a2.266 2.266 0 01.2-.286H6V5a2 2 0 014 0v1.568A2.255 2.255 0 0111.478 6a2.283 2.283 0 01.522.073V5a4 4 0 00-4-4z' fill='context-fill' fill-opacity='context-fill-opacity'/><path d='M15.818 14.127l-3.189-6.411a1.285 1.285 0 00-2.3 0l-3.192 6.411A1.294 1.294 0 008.289 16h6.377a1.294 1.294 0 001.152-1.873z' fill='%23ffbf00'/><path d='M11.478 8a.272.272 0 01.256.161l3.188 6.412a.291.291 0 01-.013.291.275.275 0 01-.243.137H8.289a.275.275 0 01-.243-.137.29.29 0 01-.013-.291l3.188-6.412A.272.272 0 0111.478 8m0-1a1.272 1.272 0 00-1.152.716l-3.189 6.411A1.294 1.294 0 008.289 16h6.377a1.294 1.294 0 001.152-1.873l-3.189-6.411A1.272 1.272 0 0011.478 7z' fill='%23d76e00' opacity='.35'/><path d='M11.5 12a.5.5 0 00.5-.5v-2a.5.5 0 00-1 0v2a.5.5 0 00.5.5zm0 .809a.691.691 0 10.691.691.691.691 0 00-.691-.691z' fill='%23fff'/></svg>") !important;
+    list-style-image: url(chrome://userchrome/content/connection-mixed-passive-loaded.svg) !important;
     fill: unset !important;
 }
 
 #identity-box[pageproxystate="valid"].notSecure #identity-icon,
 #identity-box[pageproxystate="valid"].mixedActiveContent #identity-icon,
 #identity-box[pageproxystate="valid"].httpsOnlyErrorPage #identity-icon {
-    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path d='M12.5 6.984h-.484L4 15h8.5a1.5 1.5 0 001.5-1.5V8.484a1.5 1.5 0 00-1.5-1.5zm-6.5 0V5a2 2 0 014 0v1l1.892-1.892A4 4 0 004 5v1.984h-.5a1.5 1.5 0 00-1.5 1.5V13.5a1.483 1.483 0 00.07.43l6.946-6.946z' fill='context-fill' fill-opacity='context-fill-opacity'/><path d='M2 15a1 1 0 01-.707-1.707l12-12a1 1 0 011.414 1.414l-12 12A1 1 0 012 15z' fill='%23ff0039'/></svg>") !important;
+    list-style-image: url(chrome://userchrome/content/connection-mixed-active-loaded.svg) !important;
     fill: unset !important;
 }
 
 #permissions-granted-icon {
-    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M4 8a3 3 0 113-3 3 3 0 01-3 3zm0-4a1 1 0 101 1 1 1 0 00-1-1zm8 10a3 3 0 113-3 3 3 0 01-3 3zm0-4a1 1 0 101 1 1 1 0 00-1-1zm2-6H7.86A4.09 4.09 0 018 5a4.09 4.09 0 01-.14 1H14a1 1 0 000-2zm-6 7a4.09 4.09 0 01.14-1H2a1 1 0 000 2h6.14A4.09 4.09 0 018 11z'/></svg>") !important;
+    list-style-image: url(chrome://userchrome/content/skin/permissions.svg) !important;
 }
 
 #identity-box:is(:hover:active, [open="true"], :hover:not([open="true"])),
@@ -328,7 +328,7 @@ toolbarpaletteitem[removable="false"]
 }
 
 #urlbar[pageproxystate="valid"] #identity-box.chromeUI #identity-icon {
-    list-style-image: url(chrome://branding/content/identity-icons-brand.svg) !important;
+    list-style-image: url(chrome://userchrome/content/identity-icons-brand.svg) !important;
 }
 
 #urlbar[pageproxystate="valid"]
@@ -343,7 +343,7 @@ toolbarpaletteitem[removable="false"]
     #identity-box.chromeUI
     #identity-icon-box:is([open="true"], :focus-visible)
     > #identity-icon {
-    list-style-image: url("chrome://branding/content/about-logo.png") !important;
+    list-style-image: url(chrome://userchrome/content/about-logo.png) !important;
 }
 
 #urlbar[pageproxystate="valid"] #identity-box.chromeUI {
@@ -426,10 +426,6 @@ toolbarpaletteitem[removable="false"]
     background: none !important;
 }
 
-#tracking-protection-icon {
-    list-style-image: url(chrome://browser/skin/tracking-protection.svg);
-}
-
 #tracking-protection-icon-container::after {
     display: none !important;
 }
@@ -438,41 +434,6 @@ toolbarpaletteitem[removable="false"]
     padding-inline-end: 6px !important;
     margin-inline-end: 2px !important;
 }
-
-/* put animated colored tracking protection icon on every site */
-/* #tracking-protection-icon-box:not([animationsenabled]):not([animate="true"]):not([hasException])>#tracking-protection-icon-animatable-box,
-#tracking-protection-icon-box:not([animate="true"]):not([hasException])>#tracking-protection-icon-animatable-box {
-    display: block !important;
-}
-
-#tracking-protection-icon-box:not([animationsenabled]):not([animate="true"]):not([hasException])>#tracking-protection-icon,
-#tracking-protection-icon-box:not([animate="true"]):not([hasException])>#tracking-protection-icon {
-    display: none !important;
-}
-
-#tracking-protection-icon-box:not([animate="true"]):not([hasException]) #tracking-protection-icon-animatable-image {
-    background-image: url("chrome://browser/skin/tracking-protection-animation-brighttext.svg");
-}
-
-#tracking-protection-icon-box:not([animate="true"]):not([hasException]) #tracking-protection-icon-animatable-image {
-    background-image: url("chrome://browser/skin/tracking-protection-animation-brighttext.svg");
-    transform: translateX(-256px);
-    width: 272px;
-    background-size: auto;
-    height: 16px;
-    min-height: 16px;
-    -moz-context-properties: fill, fill-opacity;
-} */
-/* 
-#tracking-protection-icon-box[hasException]::before {
-    background: url("chrome://browser/skin/badge-blue.svg");
-    content: "";
-    position: absolute !important;
-    bottom: 8.5px !important;
-    right: -3.5px !important;
-    height: 14px !important;
-    width: 14px !important;
-} */
 
 /* hide tracking protection icon on new tab page, and show search identity icon. again, message u/MotherStylus if you want my tab notes addon. */
 #main-window[title="Tab Notes - Firefox Nightly"] #tracking-protection-icon-container {
@@ -600,7 +561,7 @@ toolbarpaletteitem[removable="false"]
     ~ #identity-box[pageproxystate="valid"].notSecure:not(.chromeUI, .localResource)
     #identity-icon {
     fill-opacity: 0.6 !important;
-    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 -0.2 16 16'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M8.141 6.997h6.608c.073.407.109.796.109 1.167 0 1.319-.276 2.496-.829 3.532s-1.341 1.846-2.365 2.429S9.466 15 8.141 15a6.891 6.891 0 01-2.725-.551 7.003 7.003 0 01-2.233-1.49 6.986 6.986 0 01-1.49-2.233C1.325 9.862 1.141 8.954 1.141 8s.184-1.862.551-2.725.864-1.607 1.49-2.233 1.37-1.123 2.233-1.49S7.187 1 8.141 1c1.823 0 3.388.611 4.694 1.832L10.93 4.664c-.747-.723-1.677-1.085-2.789-1.085-.784 0-1.508.197-2.174.592s-1.192.932-1.581 1.61S3.803 7.198 3.803 8s.194 1.542.583 2.219.916 1.214 1.581 1.609 1.39.592 2.174.592c.529 0 1.015-.073 1.458-.219.444-.146.808-.328 1.094-.547s.535-.468.747-.747.369-.544.469-.793c.1-.249.169-.486.205-.711H8.141V6.997z'/></svg>") !important;
+    list-style-image: url(chrome://userchrome/content/engines/google.svg) !important;
 }
 
 #identity-box[pageproxystate="valid"].localResource #identity-icon {
@@ -664,8 +625,28 @@ toolbarpaletteitem[removable="false"]
     animation: 1.5s ease identity-popup-permission-icon-in-use-blink infinite !important;
 }
 
+#webrtc-sharing-icon[sharing="camera"] {
+    list-style-image: url(chrome://userchrome/content/notifications/camera.svg) !important;
+}
+
+#webrtc-sharing-icon[sharing="microphone"] {
+    list-style-image: url(chrome://userchrome/content/notifications/microphone.svg) !important;
+}
+
+#webrtc-sharing-icon[sharing="screen"] {
+    list-style-image: url(chrome://userchrome/content/notifications/screen.svg) !important;
+}
+
+.sharing-icon {
+    pointer-events: auto !important;
+}
+
+#geo-sharing-icon[sharing] {
+    list-style-image: url(chrome://userchrome/content/notifications/geo.svg) !important;
+}
+
 #remote-control-icon {
-    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M7.6 3c.1.1.4.1.5 0 .9-.7 1.9-1.1 3-1.1s2.1.4 3 1.1c.2.1.4.1.6 0 .2-.2.2-.5 0-.6-1-.9-2.3-1.3-3.6-1.3s-2.5.3-3.5 1.2c-.2.2-.2.5 0 .7-.1-.1 0 0 0 0zm1.3.6c-.2.1-.2.4 0 .6.2.2.4.2.6 0 .5-.4 1.1-.5 1.7-.5.6 0 1.2.2 1.7.5.2.1.4.1.6 0 .2-.2.2-.5 0-.6-.6-.5-1.4-.8-2.2-.8-1 0-1.8.3-2.4.8zm4.5 5.2h-1.6V6.4c0-.4-.4-.8-.8-.8s-.8.3-.8.8v2.3H2.6c-.9.1-1.6.8-1.6 1.6v3.1c0 .9.7 1.6 1.6 1.6h10.9c.9 0 1.6-.7 1.6-1.6v-3.1c-.1-.8-.8-1.5-1.7-1.5zm-8.5 3.9H3.3v-1.6h1.6v1.6zm2.7 0H6.1v-1.6h1.6v1.6zm2.7 0H8.8v-1.6h1.6v1.6z'/></svg>") !important;
+    list-style-image: url(chrome://userchrome/content/material/remote.svg) !important;
     -moz-context-properties: fill, fill-opacity;
 }
 
@@ -709,14 +690,14 @@ use 0.6 instead of 1 since 1 will end up being shown as like 1.4px for some wind
 }
 
 .notification-anchor-icon#default-notification-icon {
-    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='context-fill' fill-opacity='context-fill-opacity'><path d='M8 15.75c.85 0 1.54-.7 1.54-1.54H6.46c0 .84.68 1.54 1.54 1.54zm4.62-4.62V7.29c0-2.36-1.26-4.34-3.46-4.86v-.52C9.16 1.27 8.65.75 8 .75s-1.16.51-1.16 1.16v.52c-2.2.52-3.46 2.49-3.46 4.86v3.85l-1 1c-.48.48-.15 1.32.54 1.32h10.14c.69 0 1.03-.84.55-1.32l-.99-1.01z'/></svg>") !important;
+    list-style-image: url(chrome://userchrome/content/material/notification.svg) !important;
 }
 
 .install-icon.blocked-permission-icon,
 .popup-notification-icon[popupid="xpinstall-disabled"],
 .popup-notification-icon[popupid="addon-install-blocked"],
 .popup-notification-icon[popupid="addon-install-origin-blocked"] {
-    list-style-image: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' x='0' y='0' width='16' height='16' fill='context-fill' fill-opacity='context-fill-opacity'><path d='M15.7.3c-.4-.4-1.2-.4-1.6 0L12.4 2h-1.3c0-1.1-.9-2-2.1-2S7 .9 7 2.1H3.7c-.9 0-1.6.7-1.6 1.6V7C.9 7 0 7.9 0 9s.9 2.1 2.1 2.1v1.3L.3 14c-.5.4-.5 1.2 0 1.6s1.2.5 1.6 0L15.7 2c.4-.5.4-1.2 0-1.7zM13.5 9c0-.4.2-2.2 2.5-2.2V3.7c0-.2 0-.4-.1-.6L3 15.9c.2.1.5.1.7.1h3.1c0-2.2 1.8-2.5 2.2-2.5.4 0 2.2.2 2.2 2.5h3.1c.9 0 1.6-.7 1.6-1.6v-3.1c-2.1-.1-2.4-1.8-2.4-2.3z'/></svg>") !important;
+    list-style-image: url(chrome://userchrome/content/material/extension-blocked.svg) !important;
 }
 
 #urlbar[searchmode] #tracking-protection-icon-container,

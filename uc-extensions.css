@@ -43,27 +43,27 @@
 }
 
 #_af37054b-3ace-46a2-ac59-709e4412bec6_-browser-action .toolbarbutton-icon {
-    list-style-image: url("chrome://global/skin/icons/search-glass.svg") !important;
+    list-style-image: url(chrome://userchrome/content/search-glass.svg) !important;
     fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
 }
 
 #_bee8b1f2-823a-424c-959c-f8f76c8b2306_-browser-action .toolbarbutton-icon {
-    list-style-image: url("chrome://browser/skin/notification-icons/screen-blocked.svg") !important;
+    list-style-image: url(chrome://userchrome/content/notifications/screen-blocked.svg) !important;
     fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
 }
 
 #_0981817c-71b3-4853-a801-481c90af2e8e_-browser-action .toolbarbutton-icon {
-    list-style-image: url("chrome://devtools/skin/images/tool-dom.svg") !important;
+    list-style-image: url(chrome://userchrome/content/devtools/tool-dom.svg) !important;
     fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
 }
 
 #jid1-bycqofyfmbmd9a_jetpack-browser-action .toolbarbutton-icon {
-    list-style-image: url("chrome://browser/skin/notification-icons/desktop-notification.svg") !important;
+    list-style-image: url(chrome://userchrome/content/notifications/desktop-notification.svg) !important;
     fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
 }
 
 #_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action .toolbarbutton-icon {
-    list-style-image: url("chrome://browser/skin/notification-icons/webauthn.svg") !important;
+    list-style-image: url(chrome://userchrome/content/notifications/webauthn.svg) !important;
     fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
 }
 
@@ -80,7 +80,7 @@
 
 #ublock0_raymondhill_net-browser-action .toolbarbutton-icon,
 .webextension-browser-action[label="Nano Adblocker"] {
-    list-style-image: url("chrome://browser/skin/controlcenter/tracking-protection.svg") !important;
+    list-style-image: url(chrome://userchrome/content/skin/controlcenter/tracking-protection.svg) !important;
     fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
 }
 
@@ -118,13 +118,13 @@
 }
 
 .webextension-browser-action[label^="Violentmonkey"] .toolbarbutton-icon {
-    list-style-image: url("chrome://devtools/skin/images/command-console.svg");
+    list-style-image: url(chrome://userchrome/content/devtools/command-console.svg);
     fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
     fill-opacity: var(--toolbarbutton-icon-fill-opacity) !important;
 }
 
 .webextension-browser-action[label="Stylus"] .toolbarbutton-icon {
-    list-style-image: url("chrome://devtools/skin/images/tool-styleeditor.svg");
+    list-style-image: url(chrome://userchrome/content/devtools/tool-styleeditor.svg);
     fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
     fill-opacity: var(--toolbarbutton-icon-fill-opacity) !important;
 }
@@ -208,7 +208,7 @@
     display: -moz-inline-box !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
-    background-image: url("chrome://browser/skin/notification-icons/desktop-notification.svg") !important;
+    background-image: url(chrome://userchrome/content/notifications/desktop-notification.svg) !important;
 }
 
 #contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Pushbullet"] .menu-iconic-icon {
@@ -227,7 +227,7 @@
     display: -moz-inline-box !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
-    background-image: url("chrome://browser/skin/sync.svg") !important;
+    background-image: url(chrome://userchrome/content/skin/sync.svg) !important;
 }
 
 #contentAreaContextMenu
@@ -248,7 +248,7 @@
     display: -moz-inline-box !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
-    background-image: url("chrome://browser/content/aboutlogins/icons/hide-password.svg") !important;
+    background-image: url(chrome://userchrome/content/hide-password.svg) !important;
 }
 
 #contentAreaContextMenu

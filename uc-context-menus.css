@@ -391,36 +391,20 @@ menupopup.in-menulist {
         display: none;
     }
 
-    /* #context-back {
-        list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M15 7H3.414l4.293-4.293a1 1 0 00-1.414-1.414l-6 6a1 1 0 000 1.414l6 6a1 1 0 001.414-1.414L3.414 9H15a1 1 0 000-2z'/></svg>") !important;
-    }
-
-    #context-forward {
-        list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M15.707 7.293l-6-6a1 1 0 00-1.414 1.414L12.586 7H1a1 1 0 000 2h11.586l-4.293 4.293a1 1 0 101.414 1.414l6-6a1 1 0 000-1.414z'/></svg>") !important;
-    }
-
-    #context-reload {
-        list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M15 1a1 1 0 00-1 1v2.418A6.995 6.995 0 108 15a6.954 6.954 0 004.95-2.05 1 1 0 00-1.414-1.414A5.019 5.019 0 1112.549 6H10a1 1 0 000 2h5a1 1 0 001-1V2a1 1 0 00-1-1z'/></svg>") !important;
-    }
-
-    #context-bookmarkpage {
-        list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M3.8 15.922a1.1 1.1 0 01-1.09-1.253l.609-4.36L.393 7.163a1.1 1.1 0 01.616-1.833l4.08-.73L7.016.734a1.1 1.1 0 011.969 0L10.911 4.6 15 5.331a1.1 1.1 0 01.611 1.833L12.68 10.31l.609 4.359a1.1 1.1 0 01-1.6 1.127L8 13.873 4.308 15.8a1.093 1.093 0 01-.508.122zm-.415-1.9zm9.228 0zM2.981 7.01l2.451 2.635-.5 3.572L8 11.618l3.067 1.6-.5-3.572 2.452-2.636-3.45-.616L8 3.244l-1.569 3.15zm11.659.29zm-13.278 0zm12.78-1.5zm-12.286 0z'/></svg>") !important;
-    } */
-
     #context-back {
-        list-style-image: url("chrome://browser/skin/back.svg") !important;
+        list-style-image: url(chrome://userchrome/content/skin/back.svg) !important;
     }
 
     #context-forward {
-        list-style-image: url("chrome://browser/skin/forward.svg") !important;
+        list-style-image: url(chrome://userchrome/content/skin/forward.svg) !important;
     }
 
     #context-reload {
-        list-style-image: url("chrome://browser/skin/reload.svg") !important;
+        list-style-image: url(chrome://userchrome/content/skin/reload.svg) !important;
     }
 
     #context-bookmarkpage {
-        list-style-image: url("chrome://browser/skin/bookmark-hollow.svg") !important;
+        list-style-image: url(chrome://userchrome/content/skin/bookmark-hollow.svg) !important;
     }
 
     /* fix the new proton context menu bookmarks button, assuming you actually want to use it */

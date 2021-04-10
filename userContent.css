@@ -218,7 +218,7 @@ menupopup.in-menulist {
     --menu-color: var(--ui-text-80) !important;
     --menupopup-background: var(--arrowpanel-background);
     --menu-background-color: var(--arrowpanel-background) !important;
-    --menu-right-bg: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='5px' height='5px' viewBox='0 0 492 492' xml:space='preserve'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M382.678,226.804L163.73,7.86C158.666,2.792,151.906,0,144.698,0s-13.968,2.792-19.032,7.86l-16.124,16.12    c-10.492,10.504-10.492,27.576,0,38.064L293.398,245.9l-184.06,184.06c-5.064,5.068-7.86,11.824-7.86,19.028    c0,7.212,2.796,13.968,7.86,19.04l16.124,16.116c5.068,5.068,11.824,7.86,19.032,7.86s13.968-2.792,19.032-7.86L382.678,265    c5.076-5.084,7.864-11.872,7.848-19.088C390.542,238.668,387.754,231.884,382.678,226.804z'/></svg>");
+    --menu-right-bg: url(chrome://userchrome/content/old-menu-right.svg);
     --menu-right-img: none;
     --menu-right-margin: 2px;
     --menu-right-size: 12px;
@@ -424,7 +424,7 @@ menupopup.in-menulist menu.subviewbutton:not([disabled="true"])[_moz-menuactive]
         --menupopup-background: transparent;
         --menu-background-color: var(--arrowpanel-background) !important;
         --menu-right-bg: none;
-        --menu-right-img: url("chrome://global/skin/icons/menu-arrow.svg");
+        --menu-right-img: url(chrome://userchrome/content/menu-arrow.svg);
         --menu-right-margin: 4px;
         --menu-right-size: 14px;
         --menupopup-shadow: none !important;
@@ -661,7 +661,7 @@ menupopup.in-menulist menu.subviewbutton:not([disabled="true"])[_moz-menuactive]
         --context-iconic-special-margin: 4px -2px;
         --menupopup-border-radius: 3px;
         --context-menuitem-border-radius: 0;
-        --menu-right-bg: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='5px' height='5px' viewBox='0 0 492 492' xml:space='preserve'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M382.678,226.804L163.73,7.86C158.666,2.792,151.906,0,144.698,0s-13.968,2.792-19.032,7.86l-16.124,16.12    c-10.492,10.504-10.492,27.576,0,38.064L293.398,245.9l-184.06,184.06c-5.064,5.068-7.86,11.824-7.86,19.028    c0,7.212,2.796,13.968,7.86,19.04l16.124,16.116c5.068,5.068,11.824,7.86,19.032,7.86s13.968-2.792,19.032-7.86L382.678,265    c5.076-5.084,7.864-11.872,7.848-19.088C390.542,238.668,387.754,231.884,382.678,226.804z'/></svg>");
+        --menu-right-bg: url(chrome://userchrome/content/old-menu-right.svg);
         --menu-right-img: none;
         --menu-right-margin: 2px;
         --menu-right-size: 12px;
@@ -732,7 +732,7 @@ menupopup.in-menulist menu.subviewbutton:not([disabled="true"])[_moz-menuactive]
             --menupopup-border-radius: 5px !important;
             --context-menuitem-border-radius: var(--arrowpanel-menuitem-border-radius);
             --menu-right-bg: none;
-            --menu-right-img: url("chrome://global/skin/icons/menu-arrow.svg");
+            --menu-right-img: url(chrome://userchrome/content/menu-arrow.svg);
             --menu-right-margin: 4px;
             --menu-right-size: 14px;
             --panel-shadow: none !important;
@@ -1023,7 +1023,7 @@ menupopup {
 }
 
 #pictureInPictureToggle .pip-icon {
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 625.8 512'><path d='M568.9 0h-512C25.6 0 0 25 0 56.3v398.8C0 486.4 25.6 512 56.9 512h512c31.3 0 56.9-25.6 56.9-56.9V56.3C625.8 25 600.2 0 568.9 0zm-512 425.7V86c0-16.5 13.5-30 30-30h452c16.5 0 30 13.5 30 30v339.6c0 16.5-13.5 30-30 30h-452c-16.5.1-30-13.4-30-29.9zM482 227.6H314.4c-16.5 0-30 13.5-30 30v110.7c0 16.5 13.5 30 30 30H482c16.5 0 30-13.5 30-30V257.6c0-16.5-13.5-30-30-30z' fill='context-fill' fill-opacity='context-fill-opacity'/></svg>") !important;
+    background-image: url(chrome://userchrome/content/tab-picture-in-picture.svg) !important;
     background-position: 0 1.6px !important;
     background-repeat: no-repeat;
     margin-left: 0 !important;
@@ -1186,7 +1186,7 @@ menupopup {
 }
 
 img.transparent {
-    background: center/16px repeat hsl(0, 0%, 25%) url(checker.svg) !important;
+    background: center/16px repeat hsl(0, 0%, 25%) url(chrome://userchrome/content/checker.svg) !important;
 }
 
 @-moz-document url-prefix("about:reader") {
@@ -4649,8 +4649,7 @@ domain("wikimedia.org") {
     .mw-parser-output a[href$=".PDF"].external,
     .mw-parser-output a[href*=".PDF?"].external,
     .mw-parser-output a[href*=".PDF#"].external {
-        background: url("data:image/svg+xml;utf8,<svg height='30' width='30' xmlns='http://www.w3.org/2000/svg'><path clip-rule='evenodd' fill='%23EA4C3A' fill-rule='evenodd' d='M30.018 28.667H0V0h30.018v28.667'/><path d='M15.372 4.377c.452.213.358.489.219 1.793-.142 1.345-.618 3.802-1.535 6.219-.918 2.413-2.28 4.784-3.467 6.539-1.186 1.756-2.201 2.897-2.975 3.556-.777.659-1.314.835-1.665.893-.348.058-.506 0-.6-.177-.094-.176-.127-.466-.046-.82.079-.35.268-.76.804-1.285.541-.527 1.426-1.172 2.661-1.771 1.235-.6 2.817-1.156 4.116-1.537a30.03 30.03 0 013.197-.746 23.98 23.98 0 012.391-.337 14.241 14.241 0 012.186 0c.712.06 1.408.175 2.011.323.6.146 1.108.321 1.551.601.442.276.823.657 1.012 1.083.192.423.192.893.033 1.228-.158.337-.476.541-.839.66a2.103 2.103 0 01-1.267 0c-.49-.148-1.062-.47-1.662-.894-.601-.425-1.235-.952-2.057-1.771a35.417 35.417 0 01-2.692-3.013c-.854-1.083-1.553-2.136-2.028-3.029a11.317 11.317 0 01-.933-2.355c-.206-.733-.364-1.464-.427-2.122s-.034-1.245.03-1.714c.063-.466.16-.82.317-1.055.158-.23.381-.35.539-.408s.254-.058.348-.073c.094-.015.188-.044.333 0 .138.042.321.154.504.268' fill='none' stroke='%23FFF' stroke-linejoin='round' stroke-miterlimit='10' stroke-width='1.4'/></svg>")
-            no-repeat right !important;
+        background: url("data:image/svg+xml;utf8,") no-repeat right !important;
         background-size: 14px 15px !important;
         padding-right: 17px !important;
     }

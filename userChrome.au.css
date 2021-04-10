@@ -65,7 +65,7 @@ menupopup::part(drop-indicator-bar) {
 menupopup::part(drop-indicator) {
     pointer-events: none;
     background: none;
-    list-style-image: url("data:image/svg+xml;utf8,<svg width='14' height='14' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path fill='white' d='M8.293 4.293a1 1 0 011.414 0l7 7a1 1 0 010 1.414l-7 7a1 1 0 01-1.414-1.414L14.586 12 8.293 5.707a1 1 0 010-1.414z'/></svg>") !important;
+    list-style-image: url(chrome://userchrome/content/menu-drop-indicator.svg) !important;
     -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity;
     fill: var(--lwt-toolbarbutton-icon-fill, currentColor);
     height: 28px;
@@ -153,7 +153,7 @@ menupopup::part(drop-indicator) {
 
     :is(panel, dialog) menulist::part(dropmarker-icon) {
         appearance: none;
-        list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 16 16'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M7.9 16.3c-.3 0-.6-.1-.8-.4l-4-4.8c-.2-.3-.3-.5-.1-.8.1-.3.5-.3.9-.3h8c.4 0 .7 0 .9.3.2.4.1.6-.1.9l-4 4.8c-.2.3-.5.3-.8.3zM7.8 0c.3 0 .6.1.7.4L12.4 5c.2.3.3.4.1.7-.1.4-.5.3-.8.3H3.9c-.4 0-.8.1-.9-.2-.2-.4-.1-.6.1-.9L7 .3c.2-.3.5-.3.8-.3z'/></svg>");
+        list-style-image: url(chrome://userchrome/content/select-drop-marker.svg);
         margin-block: 0 !important;
         width: 10px !important;
         fill-opacity: 0.6;
@@ -163,7 +163,8 @@ menupopup::part(drop-indicator) {
         fill-opacity: 0.8;
     }
 
-    :is(panel, dialog) menulist:is(:focus-visible, :hover:active, [open="true"])::part(dropmarker-icon) {
+    :is(panel, dialog)
+        menulist:is(:focus-visible, :hover:active, [open="true"])::part(dropmarker-icon) {
         fill-opacity: 1;
     }
 
@@ -250,4 +251,672 @@ menupopup::part(drop-indicator) {
     border-start-end-radius: 0;
     border-end-end-radius: 0;
     margin-inline-end: 0;
+}
+
+#downloads-indicator-anchor {
+    min-width: 16px;
+    min-height: 16px;
+}
+
+#downloads-indicator-progress-outer {
+    width: 16px;
+    height: 16px;
+    background-size: 16px;
+    background: url("chrome://userchrome/content/downloads/download-icons.svg#default-bar") center
+        no-repeat;
+}
+
+#downloads-button[attention="success"]
+    > .toolbarbutton-badge-stack
+    > #downloads-indicator-anchor
+    > #downloads-indicator-icon,
+#downloads-button[attention="success"]
+    > .toolbarbutton-badge-stack
+    > #downloads-indicator-anchor
+    > #downloads-indicator-progress-outer {
+    -moz-context-properties: fill, fill-opacity;
+    fill: var(--toolbarbutton-icon-fill-attention);
+    fill-opacity: 1;
+}
+#downloads-button[progress]
+    > .toolbarbutton-badge-stack
+    > #downloads-indicator-anchor
+    > #downloads-indicator-progress-outer {
+    background: url("chrome://userchrome/content/downloads/download-icons.svg#progress-bar-bg")
+        center no-repeat;
+}
+
+#downloads-indicator-icon {
+    -moz-context-properties: fill, fill-opacity;
+    background-image: url("chrome://userchrome/content/downloads/download-icons.svg#arrow");
+    width: 16px;
+    height: 16px;
+}
+
+#downloads-indicator-progress-inner {
+    background: url("chrome://userchrome/content/downloads/download-icons.svg#progress-bar-fg") left
+        no-repeat;
+    margin-inline-end: 16px;
+    -moz-context-properties: fill;
+    fill: var(--toolbarbutton-icon-fill-attention);
+    background-size: 16px;
+    animation-play-state: paused;
+    animation-delay: 1s;
+    animation-duration: 100s;
+    animation-timing-function: linear;
+    animation-name: indicatorArrowProgress;
+}
+
+#downloads-indicator-progress-inner:-moz-locale-dir(rtl) {
+    background-position-x: right;
+}
+
+@keyframes indicatorArrowProgress {
+    0% {
+        margin-inline-end: 15px;
+    }
+    100% {
+        margin-inline-end: 1px;
+    }
+}
+
+/*** Status badges ***/
+#downloads-button[attention="warning"] > .toolbarbutton-badge-stack > .toolbarbutton-badge,
+#downloads-button[attention="severe"] > .toolbarbutton-badge-stack > .toolbarbutton-badge {
+    display: -moz-box;
+    height: 8px;
+    width: 8px;
+    min-width: 0;
+    border-radius: 50%;
+    margin-top: -1px !important;
+    margin-inline-end: -2px !important;
+}
+
+#downloads-button[cui-areatype="toolbar"] > .toolbarbutton-badge-stack > .toolbarbutton-badge {
+    height: 7px;
+    width: 7px;
+}
+
+#downloads-button[attention="severe"] > .toolbarbutton-badge-stack > .toolbarbutton-badge {
+    background: #d90000;
+}
+
+#downloads-button[attention="warning"] > .toolbarbutton-badge-stack > .toolbarbutton-badge {
+    background: #ffbf00;
+}
+
+#downloads-button[attention="severe"]
+    > .toolbarbutton-badge-stack
+    > .toolbarbutton-badge:-moz-window-inactive,
+#downloads-button[attention="warning"]
+    > .toolbarbutton-badge-stack
+    > .toolbarbutton-badge:-moz-window-inactive {
+    filter: none;
+}
+
+/*** Download notifications ***/
+#downloads-button[notification="start"]
+    > .toolbarbutton-badge-stack
+    > #downloads-indicator-anchor
+    > #downloads-indicator-icon {
+    animation-name: downloadsIndicatorStartDip;
+    animation-duration: 360ms;
+    animation-delay: 400ms;
+    animation-iteration-count: 1;
+}
+
+@keyframes downloadsIndicatorStartDip {
+    0% {
+        transform: translateY(0);
+        animation-timing-function: linear;
+    }
+    50% {
+        transform: translateY(0);
+        animation-timing-function: ease-out;
+    }
+    88% {
+        transform: translateY(3px);
+        animation-timing-function: ease-out;
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes downloadsIndicatorFinishPulse {
+    from {
+        transform: scale(1);
+    }
+    37.5% {
+        transform: scale(1.4);
+        animation-timing-function: ease-out;
+    }
+    to {
+        transform: scale(1);
+        animation-timing-function: ease-in;
+    }
+}
+
+#downloads-button[notification="finish"]
+    > .toolbarbutton-badge-stack
+    > #downloads-indicator-anchor
+    > #downloads-indicator-icon {
+    animation-name: downloadsIndicatorFinishPulse;
+    animation-delay: 250ms;
+    animation-duration: 300ms;
+    animation-iteration-count: 2;
+}
+
+#downloads-animation-container {
+    min-height: 1px;
+    min-width: 1px;
+    height: 1px;
+    margin-bottom: -1px;
+    position: relative;
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* download start animation */
+
+#downloads-notification-anchor {
+    width: 42px;
+    height: 98px;
+    min-height: 98px;
+    overflow: hidden;
+    direction: ltr;
+}
+
+#downloads-indicator-notification {
+    opacity: 0;
+    min-width: 1344px;
+    height: 98px;
+    -moz-context-properties: fill;
+    fill: #737373;
+}
+
+@keyframes downloadsIndicatorNotificationStart {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-1302px);
+    }
+}
+
+#downloads-notification-anchor[notification="start"] > #downloads-indicator-notification {
+    opacity: 1;
+    background: url(chrome://userchrome/content/downloads/notification-start-animation.svg) 0 center
+        no-repeat;
+    transform: translateX(0px);
+    animation-name: downloadsIndicatorNotificationStart;
+    animation-duration: 540ms;
+    animation-delay: 64ms;
+    animation-timing-function: steps(31);
+}
+
+#back-button {
+    list-style-image: url(chrome://userchrome/content/skin/back.svg);
+}
+
+#forward-button {
+    list-style-image: url(chrome://userchrome/content/skin/forward.svg);
+}
+
+:is(#reload-button, #stop-button) > .toolbarbutton-animatable-box {
+    display: none;
+}
+
+#nav-bar-customization-target
+    > #stop-reload-button
+    > :is(#reload-button, #stop-button)
+    > .toolbarbutton-animatable-box {
+    display: block;
+}
+
+#stop-reload-button[animate] > #reload-button > .toolbarbutton-icon,
+#stop-reload-button[animate] > #reload-button[displaystop] + #stop-button > .toolbarbutton-icon {
+    fill: transparent;
+}
+
+@keyframes reload-to-stop {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-450px);
+    }
+}
+
+@keyframes stop-to-reload {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-450px);
+    }
+}
+
+#stop-reload-button[animate] > #reload-button,
+#stop-reload-button[animate] > #stop-button {
+    position: relative;
+}
+
+#reload-button > .toolbarbutton-animatable-box,
+#stop-button > .toolbarbutton-animatable-box {
+    top: calc(50% - 10px); /* Vertically center the 20px tall animatable image */
+    /* Since .toolbarbutton-icon uses a different width than the animatable-box,
+    we need to set a padding relative to the difference in widths. */
+    margin-inline-start: calc((16px + 2 * var(--toolbarbutton-inner-padding) - 18px) / 2);
+    width: 18px; /* Width of each frame within the SVG sprite */
+    height: 20px; /* Height of each frame within the SVG sprite */
+}
+
+#stop-reload-button[animate]
+    > #reload-button
+    > .toolbarbutton-animatable-box
+    > .toolbarbutton-animatable-image {
+    background-image: url(chrome://userchrome/content/skin/reload-to-stop.svg);
+    width: 468px;
+}
+
+#stop-reload-button[animate]
+    > #reload-button:not([displaystop])
+    > .toolbarbutton-animatable-box
+    > .toolbarbutton-animatable-image {
+    animation-name: reload-to-stop;
+}
+
+#reload-button:not([displaystop])
+    > .toolbarbutton-animatable-box
+    > .toolbarbutton-animatable-image {
+    animation-timing-function: steps(25);
+    animation-duration: 417ms;
+}
+
+#stop-reload-button[animate]
+    > #reload-button[displaystop]
+    + #stop-button
+    > .toolbarbutton-animatable-box
+    > .toolbarbutton-animatable-image {
+    background-image: url(chrome://userchrome/content/skin/stop-to-reload.svg);
+    width: 468px;
+}
+
+#stop-reload-button[animate]
+    > #reload-button[displaystop]
+    + #stop-button
+    > .toolbarbutton-animatable-box
+    > .toolbarbutton-animatable-image {
+    animation-name: stop-to-reload;
+}
+
+#reload-button[displaystop]
+    + #stop-button
+    > .toolbarbutton-animatable-box
+    > .toolbarbutton-animatable-image {
+    animation-timing-function: steps(25);
+    animation-duration: 417ms;
+}
+
+#reload-button > .toolbarbutton-animatable-box > .toolbarbutton-animatable-image,
+#reload-button[displaystop]
+    + #stop-button
+    > .toolbarbutton-animatable-box
+    > .toolbarbutton-animatable-image {
+    transform: translateX(-450px);
+}
+
+#reload-button {
+    list-style-image: url(chrome://userchrome/content/skin/reload.svg);
+}
+
+#stop-button {
+    list-style-image: url(chrome://userchrome/content/skin/stop.svg);
+}
+
+#home-button {
+    list-style-image: url(chrome://userchrome/content/skin/home.svg);
+}
+
+#bookmarks-toolbar-button,
+#bookmarks-toolbar-placeholder {
+    list-style-image: url(chrome://userchrome/content/skin/bookmarks-toolbar.svg);
+}
+
+#bookmarks-menu-button {
+    list-style-image: url(chrome://userchrome/content/skin/bookmark-star-on-tray.svg);
+}
+
+#history-panelmenu,
+#sidebar-switcher-history > .toolbarbutton-icon,
+#sidebar-box[sidebarcommand="viewHistorySidebar"]
+    > #sidebar-header
+    > #sidebar-switcher-target
+    > #sidebar-icon {
+    list-style-image: url(chrome://userchrome/content/skin/history.svg);
+}
+
+#downloads-button {
+    list-style-image: url("chrome://userchrome/content/skin/downloads/download-icons.svg#arrow-with-bar");
+}
+
+#open-file-button {
+    list-style-image: url(chrome://userchrome/content/skin/open.svg);
+}
+
+#screenshot-button {
+    list-style-image: url(chrome://userchrome/content/skin/screenshot.svg);
+}
+
+#save-page-button {
+    list-style-image: url(chrome://userchrome/content/skin/save.svg);
+}
+
+#sync-button,
+#sidebar-switcher-tabs > .toolbarbutton-icon,
+#sidebar-box[sidebarcommand="viewTabsSidebar"]
+    > #sidebar-header
+    > #sidebar-switcher-target
+    > #sidebar-icon {
+    list-style-image: url(chrome://userchrome/content/skin/tab.svg);
+}
+
+#characterencoding-button {
+    list-style-image: url(chrome://userchrome/content/skin/characterEncoding.svg);
+}
+
+#new-window-button {
+    list-style-image: url(chrome://userchrome/content/skin/new-window.svg);
+}
+
+#new-tab-button {
+    list-style-image: url(chrome://userchrome/content/skin/new-tab.svg);
+}
+
+#privatebrowsing-button {
+    list-style-image: url(chrome://userchrome/content/skin/privateBrowsing.svg);
+}
+
+#find-button {
+    list-style-image: url(chrome://userchrome/content/search-glass.svg);
+}
+
+#print-button {
+    list-style-image: url(chrome://userchrome/content/print.svg);
+}
+
+#fullscreen-button {
+    list-style-image: url(chrome://userchrome/content/skin/fullscreen.svg);
+}
+
+#developer-button {
+    list-style-image: url(chrome://userchrome/content/skin/developer.svg);
+}
+
+#profiler-button-button > .toolbarbutton-icon {
+    list-style-image: url(chrome://userchrome/content/devtools/tool-profiler.svg);
+}
+
+#profiler-button-button:not(.profiler-active) > image {
+    transform: scaleX(-1);
+}
+
+#profiler-button-button.profiler-active > image {
+    fill: #0060df;
+    fill-opacity: 1;
+    background-color: #0060df33;
+}
+
+#profiler-button-button.profiler-active:hover > image {
+    background-color: #0060df22;
+}
+
+#profiler-button-button.profiler-paused > image {
+    opacity: 0.4;
+}
+
+#preferences-button {
+    list-style-image: url(chrome://userchrome/content/settings.svg);
+}
+
+#PanelUI-menu-button {
+    list-style-image: url(chrome://userchrome/content/skin/menu.svg);
+}
+
+#PanelUI-menu-button[badge-status="update-available"],
+#PanelUI-menu-button[badge-status="update-downloading"],
+#PanelUI-menu-button[badge-status="update-manual"],
+#PanelUI-menu-button[badge-status="update-other-instance"],
+#PanelUI-menu-button[badge-status="update-restart"] {
+    list-style-image: url(chrome://userchrome/content/skin/menu-badged.svg);
+}
+
+#cut-button {
+    list-style-image: url(chrome://userchrome/content/skin/edit-cut.svg);
+}
+
+#copy-button {
+    list-style-image: url(chrome://userchrome/content/skin/edit-copy.svg);
+}
+
+#paste-button {
+    list-style-image: url(chrome://userchrome/content/skin/edit-paste.svg);
+}
+
+#zoom-out-button {
+    list-style-image: url(chrome://userchrome/content/skin/zoom-out.svg);
+}
+
+#zoom-in-button {
+    list-style-image: url(chrome://userchrome/content/skin/zoom-in.svg);
+}
+
+#PlacesChevron,
+#nav-bar-overflow-button {
+    list-style-image: url(chrome://userchrome/content/chevron.svg);
+}
+
+#nav-bar-overflow-button[animate] > .toolbarbutton-icon {
+    fill: transparent;
+}
+
+@keyframes overflow-animation {
+    from {
+        transform: translateX(0);
+    }
+    50% {
+        fill: var(--toolbarbutton-icon-fill-attention);
+        fill-opacity: 1;
+    }
+    to {
+        transform: translateX(-1260px);
+        fill: var(--toolbarbutton-icon-fill-attention);
+        fill-opacity: 1;
+    }
+}
+
+/* The animation is supposed to show the blue fill color for 520ms, then the
+fade to the toolbarbutton-fill color for the remaining 210ms. Thus with an
+animation-duration of 730ms, 71% is the point where we start the fade out. */
+@keyframes overflow-fade {
+    from {
+        fill: var(--toolbarbutton-icon-fill-attention);
+        fill-opacity: 1;
+    }
+    71% {
+        fill: var(--toolbarbutton-icon-fill-attention);
+        fill-opacity: 1;
+    }
+    to {
+        fill: inherit;
+    }
+}
+
+#nav-bar-overflow-button > .toolbarbutton-animatable-box {
+    top: calc(50% - 18px); /* Vertically center the 36px tall animatable image */
+    /* Since .toolbarbutton-icon uses a different width than the animatable box,
+    we need to set a padding relative to the difference in widths. */
+    margin-inline-start: calc((16px + 2 * var(--toolbarbutton-inner-padding) - 18px) / 2);
+    width: 18px; /* Width of each frame within the SVG sprite */
+    height: 36px; /* Height of each frame within the SVG sprite */
+}
+
+#nav-bar-overflow-button > .toolbarbutton-animatable-box > .toolbarbutton-animatable-image {
+    min-height: 36px; /* Minimum height must be equal to the height of the SVG sprite */
+}
+
+#nav-bar-overflow-button[animate]
+    > .toolbarbutton-animatable-box
+    > .toolbarbutton-animatable-image {
+    animation-name: overflow-animation;
+    animation-timing-function: steps(70);
+    animation-duration: 1167ms;
+    background-image: url(chrome://userchrome/content/skin/chevron-animation.svg);
+    width: 1278px;
+}
+
+#nav-bar-overflow-button[animate][fade]
+    > .toolbarbutton-animatable-box
+    > .toolbarbutton-animatable-image {
+    animation-name: overflow-fade;
+    animation-timing-function: ease-out;
+    animation-duration: 730ms;
+}
+
+#email-link-button {
+    list-style-image: url(chrome://userchrome/content/skin/mail.svg);
+}
+
+#sidebar-button {
+    list-style-image: url(chrome://userchrome/content/skin/sidebars-right.svg);
+}
+
+#sidebar-button:-moz-locale-dir(ltr):not([positionend]),
+#sidebar-button:-moz-locale-dir(rtl)[positionend] {
+    list-style-image: url(chrome://userchrome/content/skin/sidebars.svg);
+}
+
+#panic-button {
+    list-style-image: url(chrome://userchrome/content/skin/forget.svg);
+}
+
+#panic-button[open] {
+    fill: rgb(213, 32, 20);
+}
+
+toolbar[brighttext] #panic-button[open] {
+    fill: #ff848b;
+}
+
+#library-button {
+    list-style-image: url(chrome://userchrome/content/skin/library.svg);
+}
+
+@keyframes library-bookmark-animation {
+    from {
+        transform: translateX(0);
+        fill: inherit;
+    }
+    25% {
+        fill: inherit;
+    }
+    50% {
+        fill: var(--toolbarbutton-icon-fill-attention);
+        fill-opacity: 1;
+    }
+    to {
+        transform: translateX(-1056px);
+        fill: var(--toolbarbutton-icon-fill-attention);
+        fill-opacity: 1;
+    }
+}
+
+@keyframes library-bookmark-animation-rtl {
+    from {
+        transform: translateX(1056px);
+        fill: inherit;
+    }
+    25% {
+        fill: inherit;
+    }
+    50% {
+        fill: var(--toolbarbutton-icon-fill-attention);
+        fill-opacity: 1;
+    }
+    to {
+        transform: translateX(0);
+        fill: var(--toolbarbutton-icon-fill-attention);
+        fill-opacity: 1;
+    }
+}
+
+@keyframes library-bookmark-fade {
+    from {
+        fill: var(--toolbarbutton-icon-fill-attention);
+        fill-opacity: 1;
+    }
+    to {
+        fill: inherit;
+    }
+}
+
+#library-button[animate] > .toolbarbutton-icon {
+    fill: transparent;
+}
+
+#library-animatable-box[animate] {
+    /* Position the sprite at the y-position of the library-button, then adjust
+    based on the size difference between half of the button height and half
+    of the sprite height. */
+    top: calc(var(--library-button-height) / 2 - 27px);
+    /* Set a margin relative to the difference in widths of the .toolbarbutton-icon
+    and the .toolbar-animatable-box. This is correct even in RTL because the item
+    is positioned using `left`. */
+    left: calc(var(--library-icon-x) + (16px + 2 * var(--toolbarbutton-inner-padding) - 22px) / 2);
+    width: 22px; /* Width of each frame within the SVG sprite */
+    height: 54px; /* Height of each frame within the SVG sprite */
+}
+
+#library-animatable-box[animate] > .toolbarbutton-animatable-image {
+    min-height: 54px; /* Minimum height must be equal to the height of the SVG sprite */
+    width: 1078px;
+    animation-duration: 800ms;
+    animation-timing-function: steps(48);
+}
+
+#library-animatable-box[animate][fade] > .toolbarbutton-animatable-image {
+    animation-duration: 2s;
+    animation-timing-function: ease-out;
+}
+
+#library-animatable-box[animate="bookmark"] > .toolbarbutton-animatable-image {
+    background-image: url(chrome://userchrome/content/skin/library-bookmark-animation.svg);
+    animation-name: library-bookmark-animation;
+    -moz-context-properties: fill, fill-opacity, stroke;
+    stroke: var(--toolbarbutton-icon-fill-attention);
+}
+
+#library-animatable-box[animate="bookmark"]:-moz-locale-dir(rtl) > .toolbarbutton-animatable-image {
+    animation-name: library-bookmark-animation-rtl;
+}
+
+#library-animatable-box[animate="bookmark"][fade] > .toolbarbutton-animatable-image {
+    animation-name: library-bookmark-fade;
+}
+
+#save-to-pocket-button {
+    list-style-image: url(chrome://userchrome/content/skin/pocket-outline.svg);
+    fill: var(--lwt-toolbarbutton-icon-fill, currentColor);
+    fill-opacity: var(--toolbarbutton-icon-fill-opacity);
+}
+
+#save-to-pocket-button[open="true"],
+#save-to-pocket-button[pocketed="true"] {
+    list-style-image: url(chrome://userchrome/content/skin/pocket.svg);
+    fill: #ef4056;
+}
+
+.panel-header > .subviewbutton-back {
+    list-style-image: url(chrome://userchrome/content/menu-arrow-left-big.svg);
 }

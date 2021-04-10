@@ -30,7 +30,7 @@
     fill: white !important;
     fill-opacity: 0.7 !important;
     -moz-context-properties: fill, fill-opacity !important;
-    background: url("chrome://browser/skin/restore-session.svg") center no-repeat !important;
+    background: url(chrome://userchrome/content/skin/restore-session.svg) center no-repeat !important;
     background-size: 42% !important;
 }
 

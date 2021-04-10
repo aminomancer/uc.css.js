@@ -355,7 +355,7 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlis
         fill: currentColor !important;
         -moz-context-properties: fill, fill-opacity !important;
         color: white !important;
-        background-image: url(chrome://global/skin/icons/close.svg) !important;
+        background-image: url(chrome://userchrome/content/close.svg) !important;
         fill-opacity: 1 !important;
         background-size: 100% !important;
         background-position: center !important;

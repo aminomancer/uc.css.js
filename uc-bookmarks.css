@@ -173,7 +173,7 @@
 #editBookmarkPanelDropMarker,
 #editBMPanel_folderMenuList::part(dropmarker) {
     appearance: none !important;
-    list-style-image: url("chrome://devtools/skin/images/select-arrow.svg") !important;
+    list-style-image: url(chrome://userchrome/content/devtools/select-arrow.svg) !important;
     margin-block: 0 !important;
 }
 
@@ -260,12 +260,12 @@
 }
 
 #editBookmarkPanel .expander-down image {
-    list-style-image: url("chrome://devtools/skin/images/arrowhead-down.svg") !important;
+    list-style-image: url(chrome://userchrome/content/devtools/arrowhead-down.svg) !important;
     width: 17px !important;
 }
 
 #editBookmarkPanel .expander-up image {
-    list-style-image: url("chrome://devtools/skin/images/arrowhead-up.svg") !important;
+    list-style-image: url(chrome://userchrome/content/devtools/arrowhead-up.svg) !important;
     width: 17px !important;
 }
 
@@ -362,7 +362,7 @@
 }
 
 :is(#bookmarkpropertiesdialog, #editBookmarkPanel) checkbox .checkbox-check[checked] {
-    list-style-image: url("chrome://global/skin/icons/check.svg");
+    list-style-image: url(chrome://userchrome/content/check.svg);
     -moz-context-properties: fill, fill-opacity !important;
     fill: currentColor !important;
     color: hsl(0, 0%, 100%) !important;
@@ -496,7 +496,7 @@
 @-moz-document url(chrome://browser/content/browser.xhtml)
 {
     menuitem.menuitem-iconic#BMB_viewBookmarksToolbar {
-        list-style-image: url("chrome://browser/skin/bookmarks-toolbar.svg") !important;
+        list-style-image: url(chrome://userchrome/content/skin/bookmarks-toolbar.svg) !important;
         -moz-context-properties: fill, fill-opacity;
     }
 
@@ -535,15 +535,15 @@
     }
 
     #BMB_viewBookmarksSidebar {
-        list-style-image: url("chrome://browser/skin/sidebars-right.svg") !important;
+        list-style-image: url(chrome://userchrome/content/skin/sidebars-right.svg) !important;
     }
 
     #BMB_bookmarkThisPage[data-l10n-id="bookmarks-current-tab"] {
-        list-style-image: url(chrome://browser/skin/bookmark-hollow.svg) !important;
+        list-style-image: url(chrome://userchrome/content/skin/bookmark-hollow.svg) !important;
     }
 
     #BMB_bookmarkThisPage[data-l10n-id="bookmarks-bookmark-edit-panel"] {
-        list-style-image: url(chrome://browser/skin/bookmark.svg) !important;
+        list-style-image: url(chrome://userchrome/content/skin/bookmark.svg) !important;
     }
 
     #BMB_bookmarksShowAll:before {
@@ -555,7 +555,7 @@
         padding-inline: 0 !important;
         margin-inline: 0 3px !important;
         fill: currentColor !important;
-        background-image: url("chrome://browser/skin/library.svg") !important;
+        background-image: url(chrome://userchrome/content/skin/library.svg) !important;
         transform: scaleX(-1);
         -moz-context-properties: fill, fill-opacity, stroke !important;
     }

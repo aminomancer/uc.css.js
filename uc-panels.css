@@ -69,7 +69,7 @@
 }
 
 .protections-popup-category::after {
-    content: url(chrome://global/skin/icons/menu-arrow.svg) !important;
+    content: url(chrome://userchrome/content/menu-arrow.svg) !important;
     scale: none !important;
     translate: none !important;
     transform: translateX(2px) !important;
@@ -158,7 +158,7 @@ popupnotification checkbox .checkbox-check {
 }
 
 popupnotification checkbox .checkbox-check[checked] {
-    list-style-image: url("chrome://global/skin/icons/check.svg");
+    background-image: url(chrome://userchrome/content/check.svg);
     -moz-context-properties: fill, fill-opacity !important;
     fill: currentColor !important;
     color: hsl(0, 0%, 100%) !important;
@@ -188,7 +188,7 @@ popupnotification .popup-notification-checkbox .checkbox-check {
 }
 
 popupnotification .popup-notification-checkbox .checkbox-check[checked] {
-    list-style-image: url("chrome://global/skin/icons/check.svg") !important;
+    background-image: url(chrome://userchrome/content/check.svg);
     -moz-context-properties: fill, fill-opacity !important;
     fill: currentColor !important;
     color: hsl(0, 0%, 100%) !important;
@@ -365,7 +365,8 @@ popupnotification .popup-notification-checkbox:hover .checkbox-check[checked]:no
     width: min-content !important;
     padding: 10px !important;
     box-shadow: none !important;
-    list-style-image: url(chrome://global/skin/icons/menu-arrow-left.svg) !important;
+    list-style-image: url(chrome://userchrome/content/menu-arrow-big.svg) !important;
+    transform: none !important;
     background: none !important;
 }
 
@@ -374,8 +375,8 @@ popupnotification .popup-notification-checkbox:hover .checkbox-check[checked]:no
 }
 
 .identity-popup-expander .button-icon {
-    width: 16px !important;
-    height: 16px !important;
+    width: 14px !important;
+    height: 14px !important;
 }
 
 .identity-popup-expander .button-box {

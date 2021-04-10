@@ -447,7 +447,7 @@
     -moz-box-ordinal-group: 2 !important;
     fill: currentColor !important;
     list-style-image: none !important;
-    background-image: url(chrome://browser/skin/tabbrowser/tab-audio-playing.svg) !important;
+    background-image: url(chrome://userchrome/content/tab-audio-playing.svg) !important;
     background-size: 12px !important;
     background-position: 1px center !important;
     background-repeat: no-repeat !important;
@@ -455,7 +455,7 @@
 }
 
 .tab-icon-sound[muted] {
-    background-image: url(chrome://browser/skin/tabbrowser/tab-audio-muted.svg) !important;
+    background-image: url(chrome://userchrome/content/tab-audio-muted.svg) !important;
     background-size: 12px !important;
     background-position: 1px center !important;
     background-repeat: no-repeat !important;
@@ -467,7 +467,7 @@
     width: 16px !important;
     height: 16px !important;
     padding: 0 !important;
-    background-image: url("chrome://activity-stream/content/data/content/assets/glyph-play-12.svg") !important;
+    background-image: url(chrome://userchrome/content/glyph-play-12.svg) !important;
     background-size: 8px !important;
     background-position: 4.5px center !important;
     background-repeat: no-repeat !important;
@@ -489,7 +489,7 @@
 
 /* for the picture in picture button to mute/unmute tabs with proton, you need restoreTabSoundButton.uc.js from my repo's scripts folder */
 .tabbrowser-tab:not(:hover) .tab-icon-sound[pictureinpicture]:not([muted]) {
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 625.8 512'><path d='M568.9 0h-512C25.6 0 0 25 0 56.3v398.8C0 486.4 25.6 512 56.9 512h512c31.3 0 56.9-25.6 56.9-56.9V56.3C625.8 25 600.2 0 568.9 0zm-512 425.7V86c0-16.5 13.5-30 30-30h452c16.5 0 30 13.5 30 30v339.6c0 16.5-13.5 30-30 30h-452c-16.5.1-30-13.4-30-29.9zM482 227.6H314.4c-16.5 0-30 13.5-30 30v110.7c0 16.5 13.5 30 30 30H482c16.5 0 30-13.5 30-30V257.6c0-16.5-13.5-30-30-30z' fill='context-fill' fill-opacity='context-fill-opacity'/></svg>") !important;
+    background-image: url(chrome://userchrome/content/tab-picture-in-picture.svg) !important;
     background-size: 12px !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
@@ -518,16 +518,16 @@
 
 .tabbrowser-tab:hover
     .tab-icon-sound[pictureinpicture][soundplaying]:not([soundplaying-scheduledremoval]) {
-    background-image: url(chrome://browser/skin/tabbrowser/tab-audio-playing.svg) !important;
+    background-image: url(chrome://userchrome/content/tab-audio-playing.svg) !important;
 }
 
 .tabbrowser-tab .tab-icon-sound[pictureinpicture][muted] {
-    background-image: url(chrome://browser/skin/tabbrowser/tab-audio-muted.svg) !important;
+    background-image: url(chrome://userchrome/content/tab-audio-muted.svg) !important;
 }
 
 .tabbrowser-tab:is([image], [pinned]) > .tab-stack > .tab-content[attention]:not([selected="true"]),
 .tabbrowser-tab > .tab-stack > .tab-content[pinned][titlechanged]:not([selected="true"]) {
-    background-image: url(chrome://browser/skin/tabbrowser/indicator-tab-attention.svg);
+    background-image: url(chrome://userchrome/content/indicator-tab-attention.svg);
     background-position: right 6px top 4px !important;
     background-repeat: no-repeat;
 }
@@ -549,7 +549,7 @@
     width: 16px !important;
     height: 16px !important;
     padding: 0 !important;
-    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20'><rect fill='context-fill' fill-opacity='context-fill-opacity' width='20' height='20' rx='2' ry='2'/><path fill='context-fill' fill-opacity='context-stroke-opacity' d='M11.06 10l3.47-3.47a.75.75 0 00-1.06-1.06L10 8.94 6.53 5.47a.75.75 0 10-1.06 1.06L8.94 10l-3.47 3.47a.75.75 0 101.06 1.06L10 11.06l3.47 3.47a.75.75 0 001.06-1.06z'/></svg>") !important;
+    list-style-image: url(chrome://userchrome/content/textbox-clear.svg) !important;
 }
 
 .tab-icon-stack {
@@ -620,7 +620,7 @@
 #tabbrowser-tabs
     .tab-content
     > .tab-icon-sound:not([soundplaying], [muted], [activemedia-blocked], [pictureinpicture]) {
-    list-style-image: url(chrome://browser/skin/tabbrowser/tab-audio-playing.svg) !important;
+    list-style-image: url(chrome://userchrome/content/tab-audio-playing.svg) !important;
     display: -moz-inline-box !important;
     opacity: 0 !important;
     pointer-events: none !important;
@@ -663,7 +663,7 @@
 .tab-throbber::before {
     content: "" !important;
     position: absolute !important;
-    background-image: url("chrome://browser/skin/tabbrowser/loading.svg") !important;
+    background-image: url("chrome://userchrome/content/loading.svg") !important;
     background-position: left center !important;
     background-repeat: no-repeat !important;
     width: 480px !important;
@@ -707,7 +707,7 @@
 }
 
 .tabbrowser-tab[label$="Violentmonkey"] .tab-sharing-icon-overlay {
-    list-style-image: url(chrome://devtools/skin/images/command-console.svg) !important;
+    list-style-image: url(chrome://userchrome/content/devtools/command-console.svg) !important;
     display: block !important;
     fill: currentColor !important;
 }

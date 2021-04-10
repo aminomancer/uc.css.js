@@ -74,6 +74,8 @@ For best results, set density mode to `Normal` and theme to `Dark` in the custom
 
 The `userContent.css` file handles stuff like the devtools, some UI pages and context menus, plaintext pages, browser background color while pages are loading, and the built-in HTML video player. It also includes some site-specific changes like my personal dark mode layout for Wikipedia. It isn't required for the rest of the theme to work, but takes care of some issues endemic to Firefox that might cause dark mode users a lot of grief otherwise.
 
+This theme requires `fx-autoconfig` or some other javascript loader to register the icon package. Download the `resources` folder and place it in your `chrome` folder — fx-autoconfig will automatically register it. For extra completeness, you can download `utils/chrome.manifest` to deal with some of the trickier icons. Replace the one in fx-autoconfig with mine, then make sure to rename your `JS` folder to `script`, or change the line in the manifest file. This will strictly redirect some `chrome://` URIs from the vanilla icons to icons from this theme, so the changes will apply globally, even in markup.
+
 `userChrome.css` doesn't require any fonts, but `userContent.css` uses [Overpass](https://fonts.google.com/specimen/Overpass), [Overpass Mono](https://fonts.google.com/specimen/Overpass+Mono) and [Cutive Mono](https://fonts.google.com/specimen/Cutive+Mono) for plaintext files and the picture-in-picture button. Since they're free and show up frequently, it makes sense to install them locally rather than use webfont.
 
 To get the complete functionality [shown in the video](https://youtu.be/BAuABH13ytM), you'll need to install at least some of the scripts. The stylesheets work fine without the scripts, but functionally it'll be just like vanilla Firefox. Instructions and explanations for the scripts are below.
@@ -84,20 +86,22 @@ Most of the important colors can be changed in uc-globals.css and uc-variables.c
 
 The files in the scripts folder are not content scripts like you'd load in Tampermonkey. They're meant to execute in the same context as Firefox's internal scripts. They're scripts for the Firefox frontend itself rather than for webpages. This is sort of analogous to gaining "privileges" to modify your UI document directly. With CSS alone you can only do so much. Even a lot of purely aesthetic features may require JavaScript, like the search engine icons shown in the GIF above.
 
-They need to be loaded by an autoconfig script loader. I recommend [**fx-autoconfig by MrOtherGuy**](https://github.com/MrOtherGuy/fx-autoconfig) which is extremely robust. You can also use [alice0775's autoconfig loader](https://github.com/alice0775/userChrome.js/tree/master/72) if you prefer something more lightweight, though from here on out some of my scripts will not be fully compatible with loaders other than MrOtherGuy's because they don't support loading scripts into the global execution context before windows have been initialized.
+They need to be loaded by an autoconfig script loader. I recommend [**fx-autoconfig by MrOtherGuy**](https://github.com/MrOtherGuy/fx-autoconfig) which is extremely robust. Some of my scripts are not fully compatible with loaders other than MrOtherGuy's because they don't support loading scripts into the global execution context before windows have been initialized. (The theme itself needs a javascript loader, and is designed for this particular one, but if you know how to register a manifest file then you can use any loader)
 
 <h3><b>Installation:</b></h3>
 
-Whatever you choose, the installation steps are almost the same. You first need to find your Firefox installation folder. On Windows that's `C:/Program Files/Firefox/`. On Linux it should be `usr/lib/firefox/`. On macOS this is more complicated. You need to open the application file itself, probably in `Macintosh HD/Applications/`. It's the file you double-click to open Firefox, but it's actually a package, not a binary. If you right click it, there will be an option in the context menu labeled "Show Package Contents." Clicking this takes you to the root directory. So whichever OS you're on, you should end up with...
+You first need to find your Firefox installation folder. On Windows that's `C:/Program Files/Firefox/`. On Linux it should be `usr/lib/firefox/`. On macOS this is more complicated. You need to open the application file itself, probably in `Macintosh HD/Applications/`. It's the file you double-click to open Firefox, but it's actually a package, not a binary. If you right click it, there will be an option in the context menu labeled "Show Package Contents." Clicking this takes you to the root directory. So whichever OS you're on, you should end up with...
 1) &nbsp; a file called `config.js` in your Firefox installation's root directory;
 2) &nbsp; a folder called `defaults` in the root directory;
 3) &nbsp; a folder called `pref` inside that `defaults` folder;
 4) &nbsp; a file called `config-prefs.js` inside that `pref` folder;
-5) &nbsp; a `JS` folder and a `utils` folder in your profile's `chrome` folder (if you use MrOtherGuy's loader); or a `userChrome.js` file in your `chrome` folder if you use alice0775's loader.
+5) &nbsp; a `JS` folder (or `script` if you're using my chrome.manifest file) in your profile's `chrome` folder;
+6) &nbsp; a `resources` folder in your `chrome` folder, containing all the icons;
+6) &nbsp; a `utils` folder in your `chrome` folder, containing `chrome.manifest` and `boot.jsm`
 
 You may already have a file called `channel-prefs.js` inside the `prefs` folder. This is unrelated.
 
-If you're using fx-autoconfig like I recommended, then your scripts should go in the `JS` folder. Any agent sheets or author sheets (files ending in .as.css or .au.css) should go in the `chrome` folder with your regular stylesheets. If you're using alice0775's loader instead, then get the updated [userChrome.js from here](https://github.com/alice0775/userChrome.js/tree/master/73) and put it in your profile's chrome folder, along with all the stylesheets you use. With alice0775's loader, scripts should go directly in the main chrome folder, right along with userChrome.css, etc.
+If you're using fx-autoconfig like I recommended, then your scripts should go in the `JS` folder by default. You should rename it `script` if you're planning to use my `chrome.manifest` file. This has no effect on any of the scripts, it's only done so we can override certain icon files. Any agent sheets or author sheets (files ending in .as.css or .au.css) should go in the `chrome` folder with your regular stylesheets.
 
 <h3><b>Usage:</b></h3>
 

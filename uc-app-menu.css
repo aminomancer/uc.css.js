@@ -5,7 +5,7 @@
 }
 
 #appMenu-save-file-button {
-    list-style-image: url(chrome://browser/skin/save.svg);
+    list-style-image: url(chrome://userchrome/content/skin/save.svg);
 }
 
 #appMenu-save-file-button > .toolbarbutton-text {
@@ -14,7 +14,7 @@
 }
 
 #appMenu-open-file-button {
-    list-style-image: url(chrome://browser/skin/open.svg);
+    list-style-image: url(chrome://userchrome/content/skin/open.svg);
 }
 
 #appMenu-open-file-button > .toolbarbutton-text {
@@ -23,7 +23,7 @@
 }
 
 #appMenu-more-button {
-    list-style-image: url(chrome://devtools/skin/images/tool-application.svg);
+    list-style-image: url(chrome://userchrome/content/devtools/tool-application.svg);
 }
 
 #appMenu-more-button > .toolbarbutton-text {
@@ -32,7 +32,7 @@
 }
 
 #appMenu-developer-button {
-    list-style-image: url(chrome://devtools/skin/images/tool-webconsole.svg);
+    list-style-image: url(chrome://userchrome/content/devtools/tool-webconsole.svg);
 }
 
 #appMenu-developer-button > .toolbarbutton-text {
@@ -41,7 +41,7 @@
 }
 
 #appMenu-characterencoding-button {
-    list-style-image: url(chrome://browser/skin/characterEncoding.svg);
+    list-style-image: url(chrome://userchrome/content/skin/characterEncoding.svg);
 }
 
 #appMenu-characterencoding-button > .toolbarbutton-text {
@@ -50,7 +50,7 @@
 }
 
 #appMenu-workoffline-button {
-    list-style-image: url(chrome://browser/skin/readerMode.svg);
+    list-style-image: url(chrome://userchrome/content/skin/readerMode.svg);
 }
 
 #appMenu-workoffline-button > .toolbarbutton-text {
@@ -59,7 +59,7 @@
 }
 
 #appMenu-help-button {
-    list-style-image: url(chrome://browser/skin/tip.svg) !important;
+    list-style-image: url(chrome://userchrome/content/skin/tip.svg) !important;
 }
 
 /* appmenu buttons border radius */
@@ -149,7 +149,7 @@
     > .toolbarbutton-badge {
     display: none !important;
     background: var(--update-badge-bg)
-        url("chrome://browser/skin/addons/addon-install-installed.svg") !important;
+        url(chrome://userchrome/content/skin/addon-install-installed.svg) !important;
     background-color: transparent !important;
     background-size: 100% !important;
     background-repeat: no-repeat !important;
@@ -229,31 +229,31 @@
     }
 
     #appMenu-save-file-button2 {
-        list-style-image: url(chrome://browser/skin/save.svg);
+        list-style-image: url(chrome://userchrome/content/skin/save.svg);
     }
 
     #appMenu-more-button2 {
-        list-style-image: url(chrome://browser/skin/developer.svg);
+        list-style-image: url(chrome://userchrome/content/skin/developer.svg);
     }
 
     #appMenu-help-button2 {
-        list-style-image: url(chrome://browser/skin/tip.svg);
+        list-style-image: url(chrome://userchrome/content/skin/tip.svg);
     }
 
     #appMenu-new-window-button2 {
-        list-style-image: url(chrome://browser/skin/new-window.svg);
+        list-style-image: url(chrome://userchrome/content/skin/new-window.svg);
     }
 
     #appMenu-new-tab-button2 {
-        list-style-image: url(chrome://browser/skin/new-tab.svg);
+        list-style-image: url(chrome://userchrome/content/skin/new-tab.svg);
     }
 
     #appMenu-new-private-window-button2 {
-        list-style-image: url(chrome://browser/skin/privateBrowsing.svg);
+        list-style-image: url(chrome://userchrome/content/skin/privateBrowsing.svg);
     }
 
     #appMenu-print-button2 {
-        list-style-image: url(chrome://global/skin/icons/print.svg);
+        list-style-image: url(chrome://userchrome/content/print.svg);
     }
 
     #appMenu-passwords-button {
@@ -261,15 +261,15 @@
     }
 
     #appMenu-bookmarks-button {
-        list-style-image: url(chrome://browser/skin/bookmark.svg);
+        list-style-image: url(chrome://userchrome/content/skin/bookmark.svg);
     }
 
     #appMenu-history-button {
-        list-style-image: url(chrome://browser/skin/history.svg);
+        list-style-image: url(chrome://userchrome/content/skin/history.svg);
     }
 
     #appMenu-downloads-button {
-        list-style-image: url("chrome://browser/skin/downloads/download-icons.svg#arrow-with-bar");
+        list-style-image: url(chrome://userchrome/content/downloads/download-icons.svg#arrow-with-bar);
     }
 
     #appMenu-extensions-themes-button {
@@ -278,44 +278,44 @@
 
     #appMenu-find-button2,
     #panelMenu_searchBookmarks {
-        list-style-image: url(chrome://global/skin/icons/search-glass.svg);
+        list-style-image: url(chrome://userchrome/content/search-glass.svg);
     }
 
     #panelMenu_bookmarkingTools {
-        list-style-image: url(chrome://browser/skin/developer.svg);
+        list-style-image: url(chrome://userchrome/content/skin/developer.svg);
     }
 
     #panelMenu_viewBookmarksToolbar {
-        list-style-image: url(chrome://browser/skin/bookmarks-toolbar.svg);
+        list-style-image: url(chrome://userchrome/content/skin/bookmarks-toolbar.svg);
     }
 
     #panelMenuBookmarkThisPage[data-l10n-id="bookmarks-current-tab"] {
-        list-style-image: url(chrome://browser/skin/bookmark-hollow.svg);
+        list-style-image: url(chrome://userchrome/content/skin/bookmark-hollow.svg);
     }
 
     #panelMenuBookmarkThisPage[data-l10n-id="bookmarks-bookmark-edit-panel"] {
-        list-style-image: url(chrome://browser/skin/bookmark.svg);
+        list-style-image: url(chrome://userchrome/content/skin/bookmark.svg);
     }
 
     #PanelUI-fxa-menu-remotetabs-button,
     #appMenuRecentlyClosedTabs {
-        list-style-image: url(chrome://browser/skin/tab.svg);
+        list-style-image: url(chrome://userchrome/content/skin/tab.svg);
     }
 
     #appMenuClearRecentHistory {
-        list-style-image: url(chrome://browser/skin/forget.svg);
+        list-style-image: url(chrome://userchrome/content/skin/forget.svg);
     }
 
     #appMenuRestoreLastSession {
-        list-style-image: url(chrome://browser/skin/restore-session.svg);
+        list-style-image: url(chrome://userchrome/content/skin/restore-session.svg);
     }
 
     #appMenuRecentlyClosedWindows {
-        list-style-image: url(chrome://browser/skin/window.svg);
+        list-style-image: url(chrome://userchrome/content/skin/window.svg);
     }
 
     #appMenu-settings-button {
-        list-style-image: url(chrome://global/skin/icons/settings.svg);
+        list-style-image: url(chrome://userchrome/content/settings.svg);
     }
 
     #appMenu-advanced-settings-button {
@@ -323,11 +323,11 @@
     }
 
     #appmenu-moreTools-button {
-        list-style-image: url(chrome://browser/skin/customize.svg);
+        list-style-image: url(chrome://userchrome/content/skin/customize.svg);
     }
 
     #appMenu-quit-button2 {
-        list-style-image: url(chrome://browser/skin/quit.svg);
+        list-style-image: url(chrome://userchrome/content/skin/quit.svg);
     }
 
     #appMenu-fxa-label2:before {
@@ -375,7 +375,7 @@
         height: 16px;
         -moz-context-properties: fill, fill-opacity;
         fill: currentColor;
-        background-image: url(chrome://browser/skin/fxa/add-device.svg);
+        background-image: url(chrome://userchrome/content/fxa/add-device.svg);
     }
 
     /* appmenu buttons border radius */
@@ -488,7 +488,7 @@
     }
 
     .panel-banner-item[notificationid^="update"] > .toolbarbutton-icon {
-        background: hsl(118, 89%, 24%) url("chrome://global/skin/icons/update-icon.svg") no-repeat
+        background: hsl(118, 89%, 24%) url(chrome://userchrome/content/update-icon.svg) no-repeat
             center/contain !important;
         fill: hsl(125, 81%, 57%) !important;
         width: 16px !important;
@@ -505,7 +505,7 @@
 
     .panel-banner-item[notificationid="update-restart"] > .toolbarbutton-icon {
         background: hsl(125, 81%, 57%)
-            url(chrome://browser/skin/notification-icons/popup-subitem.svg) no-repeat 0 1px/18px !important;
+            url(chrome://userchrome/content/notifications/popup-subitem.svg) no-repeat 0 1px/18px !important;
         fill: hsl(118, 89%, 24%) !important;
         transform: none !important;
     }
@@ -520,7 +520,7 @@
         > .toolbarbutton-badge {
         background-size: contain !important;
         background-position: center !important;
-        background-image: url(chrome://devtools/skin/images/error.svg) !important;
+        background-image: url(chrome://userchrome/content/devtools/error.svg) !important;
         fill: hsl(125, 81%, 57%) !important;
         background-color: hsl(118, 89%, 24%) !important;
         -moz-context-properties: fill !important;
@@ -530,7 +530,7 @@
     #PanelUI-menu-button[badge-status^="update"]:is(:hover, [open])
         > .toolbarbutton-badge-stack
         > .toolbarbutton-badge {
-        background-image: url(chrome://devtools/skin/images/error.svg) !important;
+        background-image: url(chrome://userchrome/content/devtools/error.svg) !important;
         fill: hsl(125, 81%, 57%) !important;
         background-color: hsl(118, 89%, 24%) !important;
     }

@@ -19,11 +19,12 @@
     background: none !important;
 }
 
-.urlbarView-row[selected] {
+.urlbarView-row[selected] > .urlbarView-row-inner,
+.urlbarView-row[dynamicType="calculator"] > .urlbarView-row-inner[selected] {
     background: var(--arrowpanel-dimmed-further) !important;
 }
 
-.urlbarView-row:not([selected]):hover {
+.urlbarView-row:not([selected]):hover > .urlbarView-row-inner:not([selected]) {
     background: var(--arrowpanel-dimmed) !important;
 }
 
@@ -68,7 +69,7 @@
     display: none;
 }
 
-.urlbarView-row:is([type="switchtab"], [type="bookmark"], [type="remotetab"])
+.urlbarView-row:is([type="switchtab"], [type="bookmark"], [type="remotetab"], [type="dynamic"])
     .urlbarView-type-icon {
     fill-opacity: 0.75 !important;
     margin-bottom: 1px !important;
@@ -99,7 +100,7 @@
     fill-opacity: 0.6 !important;
     align-self: center !important;
     stroke: none !important;
-    background: url("chrome://browser/skin/tab.svg") no-repeat !important;
+    background: url(chrome://userchrome/content/skin/tab.svg) no-repeat !important;
     background-position: 0px 0px !important;
     background-size: contain !important;
 }
@@ -109,14 +110,22 @@
 }
 
 .urlbarView-row[type="remotetab"] .urlbarView-type-icon {
-    background: url("chrome://browser/skin/sync.svg") no-repeat !important;
+    background: url(chrome://userchrome/content/skin/sync.svg) no-repeat !important;
     background-position: 1px 1px !important;
+}
+
+.urlbarView-row[type="dynamic"][dynamicType="calculator"] .urlbarView-favicon {
+    box-sizing: border-box !important;
+    background: url(chrome://userchrome/content/material/function.svg) no-repeat !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 16px;
 }
 
 .urlbarView[actionoverride]
     .urlbarView-row:is([type="switchtab"], [type="remotetab"])
     .urlbarView-type-icon {
-    background: url("chrome://browser/skin/forward.svg") no-repeat !important;
+    background: url(chrome://userchrome/content/skin/forward.svg) no-repeat !important;
     background-size: 90% !important;
     background-position: 0px 1.5px !important;
 }
@@ -247,15 +256,18 @@
 
 .urlbarView-row-inner {
     align-items: center !important;
+    fill-opacity: 0.75;
 }
 
-.urlbarView-title-separator {
+.urlbarView-title-separator,
+.urlbarView-dynamic-calculator-action::before {
     -moz-box-align: center;
     display: -moz-box;
     display: none !important;
 }
 
-.urlbarView-title-separator::before {
+.urlbarView-title-separator::before,
+.urlbarView-dynamic-calculator-action::before {
     content: "" !important;
     width: 15px;
     height: 2px;
@@ -265,13 +277,15 @@
     opacity: 1 !important;
 }
 
-.urlbarView-row[selected] .urlbarView-title-separator::before {
+.urlbarView-row[selected] .urlbarView-title-separator::before,
+.urlbarView-row-inner[selected] .urlbarView-dynamic-calculator-action::before {
     color: hsla(0, 0%, 100%, 0.6);
 }
 
 .urlbarView-row[has-action] .urlbarView-title strong,
 .urlbarView-row[has-action] .urlbarView-title[isurl],
-.urlbarView-row[has-url] .urlbarView-title {
+.urlbarView-row[has-url] .urlbarView-title,
+.urlbarView-dynamic-calculator-input {
     font-weight: 500 !important;
     font-style: normal !important;
     color: var(--panel-shortcut-color);
@@ -279,7 +293,8 @@
 
 .urlbarView-row[has-action][selected] .urlbarView-title strong,
 .urlbarView-row[has-action][selected] .urlbarView-title[isurl],
-.urlbarView-row[has-url][selected] .urlbarView-title {
+.urlbarView-row[has-url][selected] .urlbarView-title,
+.urlbarView-row-inner[selected] .urlbarView-dynamic-calculator-input {
     color: var(--panel-shortcut-focus);
 }
 
@@ -322,8 +337,7 @@
     [src^="page-icon:http://google.com/search?"])
 {
     box-sizing: border-box !important;
-    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 48 48'><defs><path id='prefix__a' d='M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z'/></defs><clipPath id='prefix__b'><use xlink:href='%23prefix__a' overflow='visible'/></clipPath><path clip-path='url(%23prefix__b)' fill='%23FBBC05' d='M0 37V11l17 13z'/><path clip-path='url(%23prefix__b)' fill='%23EA4335' d='M0 11l17 13 7-6.1L48 14V0H0z'/><path clip-path='url(%23prefix__b)' fill='%2334A853' d='M0 37l30-23 7.9 1L48 0v48H0z'/><path clip-path='url(%23prefix__b)' fill='%234285F4' d='M48 48L17 24l-4-3 35-10z'/></svg>")
-        no-repeat !important;
+    background: url(chrome://userchrome/content/engines/google-color.svg) no-repeat !important;
     width: 16px !important;
     height: 16px !important;
     padding-left: 16px;
@@ -402,8 +416,10 @@
     border-bottom-right-radius: 4px !important;
 }
 
+.urlbarView[noresults="true"],
 .urlbarView[noresults="true"] #urlbar-results {
     padding-block: 0 !important;
+    box-shadow: none !important;
 }
 
 .urlbarView-row {
