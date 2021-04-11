@@ -2,11 +2,14 @@
 tooltip {
     --in-content-bg-dark: rgb(25, 25, 27);
     --ui-secondary-bg: hsl(234, 39%, 10%);
-    --blur-bgcolor: rgba(14, 16, 32, 0.58);
     --tooltip-bgcolor: hsl(233, 36%, 11%);
     --tooltip-color: white;
     --tooltip-border-radius: 2px;
     --statuspanel-color: hsla(0, 0%, 100%, 0.85);
+    --acrylic-blur: blur(10px);
+    --acrylic-texture: url(chrome://userchrome/content/texture/lightnoise.png);
+    --acrylic-blue: hsla(233.3, 39.1%, 9%, 0.58);
+    --blur-bgcolor: hsla(233, 39%, 9%, 0.58);
     --general-button-border-radius: 2.6px;
     --dialog-bgcolor: hsla(240, 5.9%, 6.7%, 0.6);
     --dialog-box-bgcolor: hsla(232, 100%, 75%, 8%);

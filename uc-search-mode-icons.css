@@ -2,13 +2,13 @@
 #urlbar[pageproxystate="invalid"] #identity-box #identity-icon-box[engine="History"] #identity-icon,
 #urlbar[pageproxystate="valid"] #identity-box #identity-icon-box[engine="History"] #identity-icon,
 #identity-icon-box[engine="History"] #identity-icon {
-    list-style-image: url(chrome://userchrome/content/history.svg) !important;
+    list-style-image: url(chrome://userchrome/content/skin/history.svg) !important;
 }
 
 #urlbar[pageproxystate="invalid"] #identity-box #identity-icon-box[engine="Tabs"] #identity-icon,
 #urlbar[pageproxystate="valid"] #identity-box #identity-icon-box[engine="Tabs"] #identity-icon,
 #identity-icon-box[engine="Tabs"] #identity-icon {
-    list-style-image: url(chrome://userchrome/content/tab.svg) !important;
+    list-style-image: url(chrome://userchrome/content/skin/tab.svg) !important;
 }
 
 #urlbar[pageproxystate="invalid"]
@@ -17,7 +17,7 @@
     #identity-icon,
 #urlbar[pageproxystate="valid"] #identity-box #identity-icon-box[engine="Bookmarks"] #identity-icon,
 #identity-icon-box[engine="Bookmarks"] #identity-icon {
-    list-style-image: url(chrome://userchrome/content/bookmark.svg) !important;
+    list-style-image: url(chrome://userchrome/content/skin/bookmark.svg) !important;
     margin-top: -0.6px !important;
 }
 

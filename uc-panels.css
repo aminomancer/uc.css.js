@@ -7,6 +7,40 @@
     margin-top: 2px;
 }
 
+#identity-popup[type="arrow"][side="top"],
+#identity-popup[type="arrow"][side="bottom"] {
+	margin-inline: -20px !important;
+}
+
+#permission-popup[type="arrow"][side="top"],
+#permission-popup[type="arrow"][side="bottom"],
+#protections-popup[type="arrow"][side="top"],
+#protections-popup[type="arrow"][side="bottom"],
+#notification-popup[type="arrow"][side="top"],
+#notification-popup[type="arrow"][side="bottom"] {
+	margin-inline: -21px !important;
+}
+
+#downloadsPanel,
+#widget-overflow,
+#appMenu-popup,
+#customizationui-widget-panel,
+#protections-popup {
+  margin-top: -6px !important;
+}
+
+#notification-popup {
+    margin-top: 0 !important;
+}
+
+panel[type="arrow"][side="top"] {
+    margin-top: -6px;
+}
+
+#BMB_bookmarksPopup {
+  margin-top: -11px !important;
+}
+
 #customization-panelWrapper > .panel-arrowbox > .panel-arrow[side="top"] {
     stroke: var(--arrowpanel-background) !important;
 }

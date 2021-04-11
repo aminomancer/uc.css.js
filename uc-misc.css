@@ -121,9 +121,9 @@ for that reason i disabled it but maybe someone else wants it. it does look kind
 
 /* blur filter */
 #statuspanel-label {
-    background-image: url("texture/noise-512x512.png") !important;
-    background-color: hsla(233.3, 39.1%, 9%, 0.58) !important;
-    backdrop-filter: blur(10px);
+    background-color: var(--acrylic-blue) !important;
+    background-image: var(--acrylic-texture) !important;
+    backdrop-filter: var(--acrylic-blur) !important;
     color: hsla(0, 0%, 100%, 0.85) !important;
     border: none !important;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2) !important;
@@ -146,9 +146,9 @@ for that reason i disabled it but maybe someone else wants it. it does look kind
 }
 
 #fullscreen-warning {
-    background-color: hsla(233.3, 39.1%, 9%, 0.58) !important;
-    background-image: url("texture/noise-512x512.png") !important;
-    backdrop-filter: blur(10px) !important;
+    background-color: var(--acrylic-blue) !important;
+    background-image: var(--acrylic-texture) !important;
+    backdrop-filter: var(--acrylic-blur) !important;
 }
 
 /* hide keyword fixup notification */

@@ -26,9 +26,9 @@ tooltip[default][page] > description {
 
 /* blur filter */
 #statuspanel-label {
-    background-image: url("texture/noise-512x512.png") !important;
+    background-image: var(--acrylic-texture) !important;
     background-color: var(--blur-bgcolor) !important;
-    backdrop-filter: blur(10px);
+    backdrop-filter: var(--acrylic-blur);
     color: var(--statuspanel-color) !important;
     border: none !important;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2) !important;
@@ -55,8 +55,8 @@ tooltip[default][page] > description {
 {
     #alertBox {
         background-color: var(--alertbox-bgcolor) !important;
-        background-image: url("texture/noise-512x512.png") !important;
-        backdrop-filter: blur(10px) !important;
+        background-image: var(--acrylic-texture) !important;
+        backdrop-filter: var(--acrylic-blur) !important;
     }
 }
 
@@ -71,7 +71,7 @@ tooltip[default][page] > description {
 
 :is(.content-prompt-dialog, .tab-prompt-dialog) .dialogFrame {
     background-color: var(--dialog-bgcolor) !important;
-    background-image: url("texture/noise-512x512.png") !important;
+    background-image: var(--acrylic-texture) !important;
     backdrop-filter: blur(5px) !important;
 }
 
@@ -84,9 +84,9 @@ tooltip[default][page] > description {
 }
 
 #fullscreen-warning {
-    background-image: url("texture/noise-512x512.png") !important;
     background-color: var(--blur-bgcolor) !important;
-    backdrop-filter: blur(10px) !important;
+    background-image: var(--acrylic-texture) !important;
+    backdrop-filter: var(--acrylic-blur) !important;
 }
 
 /* firefox UI scrollbars */

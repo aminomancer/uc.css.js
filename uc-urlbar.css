@@ -597,7 +597,7 @@ toolbarpaletteitem[removable="false"]
 }
 
 #notification-popup-box {
-    padding-inline-end: 0 !important;
+    padding-inline: 0 !important;
     padding-block: 0 !important;
     margin-block: 0 !important;
     margin-inline: 3px -3px !important;
