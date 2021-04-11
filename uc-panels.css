@@ -37,6 +37,10 @@ panel[type="arrow"][side="top"] {
     margin-top: -6px;
 }
 
+#confirmation-hint {
+    margin-top: -9px;
+}
+
 #BMB_bookmarksPopup {
   margin-top: -11px !important;
 }

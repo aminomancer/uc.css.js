@@ -186,7 +186,7 @@ const toolboxButtonL10n = {
                                     e.preventDefault();
                                     toolbox.getBrowserToolboxSessionState()
                                         ? CustomHint.show(
-                                              animBox,
+                                              toolbarbutton,
                                               toolboxButtonL10n.alreadyOpenMsg,
                                               { event: e, hideCheck: true }
                                           )
@@ -196,7 +196,7 @@ const toolboxButtonL10n = {
                                     e.preventDefault();
                                     prefSvc.getBoolPref(autoHide)
                                         ? CustomHint.show(
-                                              animBox,
+                                              toolbarbutton,
                                               toolboxButtonL10n.lettingCloseMsg,
                                               {
                                                   event: e,
@@ -204,7 +204,7 @@ const toolboxButtonL10n = {
                                               }
                                           )
                                         : CustomHint.show(
-                                              animBox,
+                                              toolbarbutton,
                                               toolboxButtonL10n.holdingOpenMsg,
                                               {
                                                   event: e,
