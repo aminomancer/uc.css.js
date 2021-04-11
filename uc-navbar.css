@@ -40,6 +40,85 @@ toolbarspring {
     margin-top: -4px !important;
 }
 
+toolbar .toolbaritem-combined-buttons.chromeclass-toolbar-additional {
+    margin-inline: 0 !important;
+}
+
+toolbar :not(toolbarpaletteitem) > .toolbaritem-combined-buttons.chromeclass-toolbar-additional {
+    margin-inline: 0 !important;
+    max-height: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
+    margin-block: calc((var(--urlbar-container-height) - calc(2 * var(--toolbarbutton-inner-padding) + 16px)) / 2);
+}
+
+toolbar .toolbaritem-combined-buttons.chromeclass-toolbar-additional:not(:hover) > separator {
+    content: "";
+    display: -moz-box;
+    width: 0.67px !important;
+    height: 20px !important;
+    margin-inline-end: -0.67px !important;
+    background-image: linear-gradient(currentColor 0, currentColor 100%);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 1px 20px !important;
+    opacity: .2;
+}
+
+toolbar .toolbarbutton-combined-buttons-dropmarker {
+    min-height: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
+}
+
+toolbar .toolbarbutton-combined-buttons-dropmarker > .toolbarbutton-icon {
+    padding-inline: 2px !important;
+    padding-block: 2px !important;
+    height: 20px !important;
+    width: 16px !important;
+}
+
+toolbar #edit-controls > #cut-button,
+toolbar #profiler-button > #profiler-button-button {
+    padding-left: 2px !important;
+}
+
+toolbar #edit-controls > #paste-button,
+toolbar #profiler-button > #profiler-button-dropmarker {
+    padding-right: 2px !important;
+}
+
+toolbar #zoom-controls > :is(#zoom-out-button, #zoom-in-button) {
+    min-height: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
+    width: unset !important;
+    padding: 0 !important;
+    padding-inline: 2px !important;
+}
+
+toolbar #zoom-controls > :is(#zoom-out-button, #zoom-in-button) > .toolbarbutton-icon {
+    height: 20px !important;
+    width: 20px !important;
+    padding: 4px !important;
+}
+
+toolbar #zoom-controls > #zoom-reset-button {
+    min-height: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
+}
+
+toolbar #zoom-controls > #zoom-reset-button:not([disabled]):is(:hover, :focus) > .toolbarbutton-text {
+    border-color: transparent;
+}
+
+toolbar #zoom-controls > #zoom-reset-button > .toolbarbutton-text {
+    height: 20px !important;
+    min-height: 20px !important;
+    font-size: 0.98em;
+    padding-block: 1px !important;
+    background: hsla(0, 0%, 100%, 0.045);
+    border: 1px solid var(--toolbarbutton-hover-background);
+    border-radius: 10px !important;
+}
+
+toolbar #zoom-controls separator {
+    display: none !important;
+}
+
 #back-button,
 #forward-button,
 #stop-reload-button {

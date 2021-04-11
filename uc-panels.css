@@ -326,6 +326,12 @@ popupnotification .popup-notification-checkbox:hover .checkbox-check[checked]:no
     border-radius: 4px !important;
 }
 
+:root[lwt-popup-brighttext] #protections-popup-mainView-panel-header {
+    --arrowpanel-dimmed: hsla(0, 0%, 0%, 0.125);
+    --arrowpanel-dimmed-further: hsla(0, 0%, 0%, 0.175);
+    --arrowpanel-dimmed-even-further: hsla(0, 0%, 0%, 0.225);
+}
+
 .protections-popup-tp-switch:not([enabled]):is(:hover, :focus-visible) {
     border: 1px solid var(--protections-popup-switch-off-hover-border-custom) !important;
     background: var(--protections-popup-switch-off-hover-background-custom) !important;

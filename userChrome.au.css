@@ -606,7 +606,7 @@ menupopup::part(drop-indicator) {
 }
 
 #screenshot-button {
-    list-style-image: url(chrome://userchrome/content/skin/screenshot.svg);
+    list-style-image: var(--screenshot-icon);
 }
 
 #save-page-button {

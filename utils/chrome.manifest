@@ -4,3 +4,4 @@ content userchrome ../resources/
 override chrome://global/skin/icons/defaultFavicon.svg ../resources/overrides/icons/defaultFavicon.svg
 override chrome://global/skin/icons/search-glass.svg ../resources/overrides/icons/search-glass.svg
 override chrome://browser/skin/history.svg ../resources/overrides/icons/history.svg
+override chrome://browser/skin/tab.svg ../resources/overrides/icons/tab.svg
