@@ -121,8 +121,17 @@
     border-color: transparent !important;
 }
 
-/* :root:not([chromehidden~="toolbar"]) #nav-bar>#PanelUI-button {
-    border-image-source: linear-gradient(transparent 4px, var(--lwt-toolbar-vertical-separator, hsla(240, 100%, 89%, 0.2)) 5.5px, var(--lwt-toolbar-vertical-separator, hsla(240, 100%, 89%, 0.2)) calc(100% - 6.5px), transparent calc(100% - 5px)) !important;
+/* separator between the navbar widgets and the panelUI hamburger button, if you want it */
+/* :root:not([uidensity="compact"], [chromehidden~="toolbar"]) #PanelUI-button {
+    margin-inline-start: 3px;
+    border-inline-start: 1px solid;
+    border-image: linear-gradient( transparent 5px, var(--toolbarseparator-color) 5px, var(--toolbarseparator-color) calc(100% - 5px), transparent calc(100% - 5px) );
+    border-image-slice: 1;
+    padding-inline-start: 3px;
+}
+
+:root:not([chromehidden~="toolbar"]) #PanelUI-button {
+    border-image-source: linear-gradient(transparent 4px, var(--toolbarseparator-color, hsla(240, 100%, 89%, 0.2)) 40%, var(--toolbarseparator-color, hsla(240, 100%, 89%, 0.2)) 60%, transparent calc(100% - 4px)) !important;
 } */
 
 #PanelUI-menu-button {

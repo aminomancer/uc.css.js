@@ -5,6 +5,14 @@
     min-height: var(--urlbar-height) !important;
 }
 
+#urlbar-container, #search-container {
+	margin-inline: 3px !important;
+}
+
+#urlbar-container {
+    padding-block: calc((var(--urlbar-container-height) - var(--urlbar-height)) / 2) !important;
+}
+
 #search-container {
     padding-block: calc((var(--urlbar-container-height) - var(--urlbar-height)) / 2) !important;
     height: var(--urlbar-container-height) !important;
@@ -84,10 +92,6 @@
 #PopupSearchAutoComplete {
     border-bottom-right-radius: 4px !important;
     border-bottom-left-radius: 4px !important;
-}
-
-#urlbar-container {
-    padding-block: calc((var(--urlbar-container-height) - var(--urlbar-height)) / 2) !important;
 }
 
 #urlbar-input-container,
