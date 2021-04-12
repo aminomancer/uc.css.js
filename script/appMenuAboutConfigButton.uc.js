@@ -7,7 +7,7 @@
 
 (function () {
     // begin user configuration
-    const preferredAboutConfigURL = "chrome://userchrome/content/aboutconfig/config.xhtml"; // replace with "about:config" if you prefer the built-in page
+    window.preferredAboutConfigURL = "chrome://userchrome/content/aboutconfig/config.xhtml"; // replace with "about:config" if you prefer the built-in page
     // end user configuration
 
     async function createButton() {
@@ -24,7 +24,7 @@
             id: "appMenu-advanced-settings-button",
             class: "subviewbutton",
             label: advancedPrefsLabel,
-            oncommand: `openTrustedLinkIn("${preferredAboutConfigURL}", "tab");`,
+            oncommand: `openTrustedLinkIn(preferredAboutConfigURL, gBrowser.currentURI.spec === AboutNewTab.newTabURL || gBrowser.currentURI.spec === HomePage.get(window) ? "current" : "tab")`,
         }))
             prefsButton.setAttribute(key, val);
 

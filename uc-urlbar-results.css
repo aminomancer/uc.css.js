@@ -15,17 +15,16 @@
     display: none;
 }
 
-.urlbarView-row-inner {
-    background: none !important;
-}
-
 .urlbarView-row[selected] > .urlbarView-row-inner,
-.urlbarView-row[dynamicType="calculator"] > .urlbarView-row-inner[selected] {
-    background: var(--arrowpanel-dimmed-further) !important;
+.urlbarView-row:is([dynamicType="calculator"], [has-help="true"]) > .urlbarView-row-inner[selected],
+.urlbarView-help[selected] {
+    background-color: var(--arrowpanel-dimmed-further) !important;
+    fill-opacity: 1;
 }
 
-.urlbarView-row:not([selected]):hover > .urlbarView-row-inner:not([selected]) {
-    background: var(--arrowpanel-dimmed) !important;
+.urlbarView-row:not([selected]):hover > .urlbarView-row-inner:not([selected]),
+.urlbarView-help:not([selected]):hover {
+    background-color: var(--arrowpanel-dimmed) !important;
 }
 
 .urlbarView {
@@ -306,6 +305,16 @@
     color: var(--lwt-toolbar-field-color);
 }
 
+.urlbarView-row[sponsored] > .urlbarView-row-inner > .urlbarView-no-wrap > .urlbarView-action {
+	color: var(--panel-shortcut-color) !important;
+	opacity: 1 !important;
+}
+
+.urlbarView-row[sponsored] > .urlbarView-row-inner[selected] > .urlbarView-no-wrap > .urlbarView-action {
+	color: var(--lwt-toolbar-field-color) !important;
+	opacity: 1 !important;
+}
+
 .urlbarView-action[slide-in] {
     animation: none !important;
 }
@@ -437,6 +446,13 @@
     align-items: center !important;
     fill-opacity: 0.6;
     fill: var(--panel-description-color);
+}
+
+.urlbarView-help {
+    margin-inline: 3.4px 0 !important;
+    box-shadow: none !important;
+    fill: var(--panel-description-color);
+    background-image: url("chrome://userchrome/content/help.svg") !important;
 }
 
 .urlbarView .urlbarView-body-inner {
