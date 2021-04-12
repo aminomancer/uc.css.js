@@ -230,6 +230,13 @@
     transform-origin: right !important;
 }
 
+:root[customizing="true"] #urlbar :is(#page-action-buttons, #search-one-offs),
+:root[customizing="true"] #urlbar #urlbar-input-container > .urlbar-icon,
+toolbarpaletteitem > #urlbar-container :is(#page-action-buttons, #search-one-offs) {
+    animation: none !important;
+    transition: none !important;
+}
+
 @keyframes slideinUrlbar {
     from {
         opacity: 0;
@@ -279,28 +286,31 @@
     display: none !important;
 }
 
-@media screen and (max-width: 500px) {
-    #nav-bar[overflowing="true"] #urlbar .search-one-offs {
-        position: static !important;
-        top: unset !important;
-        max-width: unset !important;
-        clip-path: inset(0 2px 0 2px);
-        mask-image: none !important;
-        --desaturate-dimmed: var(--arrowpanel-dimmed);
-        --desaturate-dimmed-further: var(--arrowpanel-dimmed-further);
-    }
+#nav-bar[overflowing="true"] #urlbar .search-one-offs {
+    position: static !important;
+    max-width: unset !important;
+    clip-path: inset(0 2px 0 2px);
+    mask-image: none !important;
+    --desaturate-dimmed: var(--arrowpanel-dimmed);
+    --desaturate-dimmed-further: var(--arrowpanel-dimmed-further);
+}
 
-    #nav-bar[overflowing="true"] #urlbar #page-action-buttons,
-    #urlbar #urlbar-input-container > .urlbar-icon {
-        animation: none;
-        display: -moz-box;
-    }
+#nav-bar[overflowing="true"] #urlbar .search-one-offs * {
+    opacity: 1 !important;
+    transition: none !important;
+    pointer-events: auto !important;
+    transform: none !important;
+}
 
-    #urlbar[textoverflow]:is([usertyping], [searchmode], [open][pageproxystate="invalid"])
-        #urlbar-input,
-    #urlbar:is([usertyping], [searchmode], [open][pageproxystate="invalid"]) #urlbar-input {
-        margin-right: unset !important;
-    }
+#nav-bar[overflowing="true"] #urlbar #page-action-buttons,
+#nav-bar[overflowing="true"] #urlbar #urlbar-input-container > .urlbar-icon {
+    animation: none;
+    display: -moz-box;
+}
+
+#nav-bar[overflowing="true"] #urlbar[textoverflow]:is([usertyping], [searchmode], [open][pageproxystate="invalid"]) #urlbar-input,
+#nav-bar[overflowing="true"] #urlbar:is([usertyping], [searchmode], [open][pageproxystate="invalid"]) #urlbar-input {
+    margin-right: unset !important;
 }
 
 /* individual search one off adjustments */

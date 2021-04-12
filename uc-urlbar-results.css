@@ -85,9 +85,9 @@
 }
 
 .urlbarView-row[type="bookmark"] .urlbarView-type-icon {
-    fill: var(--urlbar-bookmark-icon-color) !important;
+    /* fill: var(--urlbar-bookmark-icon-color) !important;
     fill: var(--lwt-toolbarbutton-icon-fill-attention) !important;
-    fill-opacity: 1 !important;
+    fill-opacity: 1 !important; */
     position: absolute;
     align-self: center !important;
     stroke: none !important;
@@ -96,8 +96,6 @@
 }
 
 .urlbarView-row:is([type="switchtab"], [type="remotetab"]) .urlbarView-type-icon {
-    fill: white !important;
-    fill-opacity: 0.6 !important;
     align-self: center !important;
     stroke: none !important;
     background: url(chrome://userchrome/content/skin/tab.svg) no-repeat !important;
@@ -409,8 +407,8 @@
 .urlbarView {
     margin: 0 !important;
     padding: 2px !important;
-    width: calc(100% + 8px) !important;
-    left: -4px !important;
+    width: calc(100% + 6px) !important;
+    left: -3px !important;
     position: relative !important;
     overflow: visible !important;
     top: calc((var(--urlbar-container-height) - var(--urlbar-height)) / 2) !important;
@@ -420,8 +418,8 @@
     border-bottom-right-radius: 4px !important;
 }
 
-.urlbarView[noresults="true"],
-.urlbarView[noresults="true"] #urlbar-results {
+#nav-bar:not([overflowing="true"]) .urlbarView[noresults="true"],
+#nav-bar:not([overflowing="true"]) .urlbarView[noresults="true"] #urlbar-results {
     padding-block: 0 !important;
     box-shadow: none !important;
 }
@@ -430,14 +428,15 @@
     overflow: hidden !important;
     min-width: 0 !important;
     min-height: 34px !important;
-    padding: 0 !important;
+    padding: 1px 0 !important;
 }
 
 .urlbarView-row-inner {
     padding: 7px 8px !important;
     border-radius: var(--arrowpanel-menuitem-border-radius) !important;
     align-items: center !important;
-    fill-opacity: 0.75;
+    fill-opacity: 0.6;
+    fill: var(--panel-description-color);
 }
 
 .urlbarView .urlbarView-body-inner {
@@ -448,11 +447,11 @@
     display: flex;
     flex-flow: column nowrap;
     align-items: stretch;
-    gap: 3px;
+    gap: 0px;
     background: var(--urlbar-results-bgcolor) !important;
     border-bottom-left-radius: 4px !important;
     border-bottom-right-radius: 4px !important;
-    padding: 2px !important;
+    padding: 0.4px 1px !important;
 }
 
 /* handle overflowing urlbar result rows. requires multiLineUrlbarResults.uc.js */

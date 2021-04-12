@@ -14,7 +14,7 @@
             buttonsList = buttons.children;
         oneOffs.canScroll = true;
         container.style.cssText =
-            "display: -moz-box !important; -moz-box-align: center !important; max-width: 270px; scrollbar-width: none; box-sizing: border-box; scroll-behavior: smooth !important; overflow: hidden !important";
+            "display: -moz-box !important; -moz-box-align: center !important; scrollbar-width: none; box-sizing: border-box; scroll-behavior: smooth !important; overflow: hidden !important";
         container.setAttribute("smoothscroll", "true");
         container.setAttribute("clicktoscroll", "true");
         container.setAttribute("overflowing", "true");

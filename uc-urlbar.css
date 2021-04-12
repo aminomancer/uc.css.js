@@ -5,33 +5,33 @@
     min-height: var(--urlbar-height) !important;
 }
 
-#urlbar-container, #search-container {
-	margin-inline: 3px !important;
-}
-
 #urlbar-container {
+	margin-inline: 3px !important;
     padding-block: calc((var(--urlbar-container-height) - var(--urlbar-height)) / 2) !important;
 }
 
 #search-container {
-    padding-block: calc((var(--urlbar-container-height) - var(--urlbar-height)) / 2) !important;
+    padding-block: 0 !important;
     height: var(--urlbar-container-height) !important;
     min-height: var(--urlbar-container-height) !important;
+    margin-inline: 0 !important;
 }
 
 #searchbar {
     box-shadow: none !important;
     -moz-box-align: center;
-    min-height: var(--urlbar-height) !important;
-    border: none !important;
+    border-radius: 5px !important;
+    background-clip: content-box !important;
+    border: 3px solid transparent !important;
 }
 
 #urlbar-search-splitter {
-    min-width: 6px !important;
+    min-width: 3px !important;
+    margin-inline: -3px !important;
 }
 
 #PopupSearchAutoComplete {
-    margin-top: 3.5px !important;
+    margin-top: 0.5px !important;
     border: none !important;
     background: var(--urlbar-results-bgcolor) !important;
     border-radius: 0 !important;
@@ -65,6 +65,16 @@
 
 #PopupSearchAutoComplete .autocomplete-richlistitem .ac-emphasize-text {
     color: var(--lwt-toolbar-field-color);
+}
+
+#PopupSearchAutoComplete .ac-type-icon {
+    -moz-context-properties: fill, fill-opacity !important;
+    fill: var(--panel-description-color) !important;
+}
+
+#PopupSearchAutoComplete .search-panel-tree > .autocomplete-richlistitem:is([originaltype="datalist-first"], [originaltype="null"]) > .ac-type-icon {
+	list-style-image: url(chrome://userchrome/content/search-glass.svg);
+	fill-opacity: 0.6;
 }
 
 #PopupSearchAutoComplete .search-panel-current-engine {

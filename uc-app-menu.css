@@ -135,7 +135,7 @@
 } */
 
 #PanelUI-menu-button {
-    padding-inline: var(--toolbarbutton-outer-padding) calc(var(--toolbarbutton-outer-padding) * 2) !important;
+    padding-inline: var(--toolbarbutton-outer-padding) calc(var(--toolbarbutton-outer-padding) + 3px) !important;
 }
 
 #PanelUI-menu-button[badge-status=""] > .toolbarbutton-badge-stack > .toolbarbutton-badge {

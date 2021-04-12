@@ -450,7 +450,9 @@ menupopup:not(.PanelUI-subView)::part(arrowscrollbox) {
     list-style-image: url(chrome://userchrome/content/skin/back.svg);
 }
 
-#forward-button {
+#forward-button,
+#urlbar-go-button,
+.search-go-button {
     list-style-image: url(chrome://userchrome/content/skin/forward.svg);
 }
 
