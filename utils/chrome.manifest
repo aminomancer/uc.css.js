@@ -6,3 +6,5 @@ override chrome://global/skin/icons/search-glass.svg ../resources/overrides/icon
 override chrome://browser/skin/history.svg ../resources/overrides/icons/history.svg
 override chrome://browser/skin/tab.svg ../resources/overrides/icons/tab.svg
 override chrome://browser/skin/reader-mode.svg ../resources/overrides/icons/reader-mode.svg
+override chrome://browser/skin/forward.svg ..resources/overrides/icons/forward.svg
+override chrome://browser/skin/back.svg ..resources/overrides/icons/back.svg
