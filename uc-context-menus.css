@@ -1,23 +1,4 @@
-#toolbar-context-menu,
-#tabContextMenu,
-#contentAreaContextMenu,
-#backForwardMenu,
-#placesContext,
-#pageActionContextMenu,
-.search-one-offs-context-menu,
-#SyncedTabsSidebarContext,
-.textbox-contextmenu,
-#customizationPanelItemContextMenu,
-#customizationPaletteItemContextMenu,
-#customization-toolbar-menu,
-#new-tab-button-popup,
-.new-tab-popup,
-#downloadsContextMenu,
-menupopup[menu-api],
-#ContentSelectDropdown,
-#openHandlerPopup,
-:is(#back-button, #forward-button, #viewButton, #main-menubar, #PlacesToolbar, #places, #toolbar-context-menu, #tabContextMenu, #contentAreaContextMenu, #backForwardMenu, #placesContext, #pageActionContextMenu, .search-one-offs-context-menu, .textbox-contextmenu, #SyncedTabsSidebarContext, #customizationPanelItemContextMenu, #customizationPaletteItemContextMenu, #customization-toolbar-menu, #new-tab-button-popup, #new-tab-button, .popup-notification-dropmarker, menupopup[menu-api], #ContentSelectDropdown, .new-tab-popup)
-    menupopup {
+menupopup:not(.PanelUI-subView) {
     appearance: none !important;
     background: var(--menupopup-background) !important;
     border: none !important;
@@ -26,14 +7,7 @@ menupopup[menu-api],
     overflow: visible !important;
 }
 
-:is(#back-button, #forward-button, #viewButton) > menupopup menu > menupopup,
-:is(.popup-notification-dropmarker, #main-menubar, #PlacesToolbar, #places)
-    menupopup
-    menu
-    > menupopup,
-:is(#toolbar-context-menu, #tabContextMenu, #contentAreaContextMenu, #backForwardMenu, #placesContext, #pageActionContextMenu, .search-one-offs-context-menu, #SyncedTabsSidebarContext, .textbox-contextmenu, #customizationPanelItemContextMenu, #customizationPaletteItemContextMenu, #customization-toolbar-menu, #new-tab-button-popup, #new-tab-button, #downloadsContextMenu, menupopup[menu-api], #ContentSelectDropdown, menupopup.in-menulist, .new-tab-popup, #openHandlerPopup)
-    menu
-    > menupopup {
+menupopup:not(.PanelUI-subView) menu > menupopup {
     margin-inline-start: var(--menupopup-child-margin-inline-start) !important;
     margin-block-start: var(--menupopup-child-margin-block-start) !important;
 }
@@ -44,16 +18,11 @@ menupopup[menu-api],
     border: none !important;
 }
 
-:is(#back-button, #forward-button, #viewButton) > menupopup :is(menuitem, menu),
-:is(.popup-notification-dropmarker, #main-menubar, #PlacesToolbar, #places)
-    menupopup
-    :is(menuitem, menu),
-:is(#toolbar-context-menu, #tabContextMenu, #contentAreaContextMenu, #backForwardMenu, #placesContext, #pageActionContextMenu, .search-one-offs-context-menu, #SyncedTabsSidebarContext, .textbox-contextmenu, #customizationPanelItemContextMenu, #customizationPaletteItemContextMenu, #customization-toolbar-menu, #new-tab-button-popup, #new-tab-button, #downloadsContextMenu, menupopup[menu-api], #ContentSelectDropdown, menupopup.in-menulist, .new-tab-popup, #openHandlerPopup)
-    :is(menuitem, menu) {
+menupopup:not(.PanelUI-subView) :is(menuitem, menu) {
     appearance: none !important;
     color: var(--ui-text-80) !important;
-    padding: 0 !important;
-    min-height: 25px !important;
+    padding: 5px 0 !important;
+    min-height: 26px !important;
     border-radius: var(--context-menuitem-border-radius);
 }
 
@@ -61,38 +30,19 @@ menupopup[menu-api],
     padding-inline-start: 5px !important;
 }
 
-:is(#back-button, #forward-button, #viewButton) > menupopup :is(menuitem, menu)[disabled="true"],
-:is(.popup-notification-dropmarker, #main-menubar, #PlacesToolbar, #places)
-    menupopup
-    :is(menuitem, menu)[disabled="true"],
-:is(#toolbar-context-menu, #tabContextMenu, #contentAreaContextMenu, #backForwardMenu, #placesContext, #pageActionContextMenu, .search-one-offs-context-menu, #SyncedTabsSidebarContext, .textbox-contextmenu, #customizationPanelItemContextMenu, #customizationPaletteItemContextMenu, #customization-toolbar-menu, #new-tab-button-popup, #new-tab-button, #downloadsContextMenu, menupopup[menu-api], #ContentSelectDropdown, menupopup.in-menulist, .new-tab-popup, #openHandlerPopup)
-    :is(menuitem, menu)[disabled="true"] {
+menupopup:not(.PanelUI-subView) :is(menuitem, menu)[disabled="true"] {
     appearance: none !important;
     color: var(--panel-disabled-color) !important;
     background-color: initial !important;
 }
 
-:is(#back-button, #forward-button, #viewButton) > menupopup :is(menuitem, menu) .menu-iconic-left,
-:is(.popup-notification-dropmarker, #main-menubar, #PlacesToolbar, #places)
-    menupopup
-    :is(menuitem, menu)
-    .menu-iconic-left,
-:is(#toolbar-context-menu, #tabContextMenu, #contentAreaContextMenu, #backForwardMenu, #placesContext, #pageActionContextMenu, .search-one-offs-context-menu, #SyncedTabsSidebarContext, .textbox-contextmenu, #customizationPanelItemContextMenu, #customizationPaletteItemContextMenu, #customization-toolbar-menu, #new-tab-button-popup, #new-tab-button, #downloadsContextMenu, menupopup[menu-api], #ContentSelectDropdown, menupopup.in-menulist, .new-tab-popup, #openHandlerPopup)
-    :is(menuitem, menu)
-    .menu-iconic-left {
+menupopup:not(.PanelUI-subView) :is(menuitem, menu) .menu-iconic-left {
     padding: 0 !important;
     appearance: none !important;
     margin-inline-end: 0 !important;
 }
 
-:is(#back-button, #forward-button, #viewButton) > menupopup :is(menuitem, menu) .menu-iconic-icon,
-:is(.popup-notification-dropmarker, #main-menubar, #PlacesToolbar, #places)
-    menupopup
-    :is(menuitem, menu)
-    .menu-iconic-icon,
-:is(#toolbar-context-menu, #tabContextMenu, #contentAreaContextMenu, #backForwardMenu, #placesContext, #pageActionContextMenu, .search-one-offs-context-menu, #SyncedTabsSidebarContext, .textbox-contextmenu, #customizationPanelItemContextMenu, #customizationPaletteItemContextMenu, #customization-toolbar-menu, #new-tab-button-popup, #new-tab-button, #downloadsContextMenu, menupopup[menu-api], #ContentSelectDropdown, menupopup.in-menulist, .new-tab-popup, #openHandlerPopup)
-    :is(menuitem, menu)
-    .menu-iconic-icon {
+menupopup:not(.PanelUI-subView) :is(menuitem, menu) .menu-iconic-icon {
     margin-inline: 6px;
 }
 
@@ -101,18 +51,12 @@ menupopup[menu-api],
     -moz-context-properties: fill, fill-opacity, stroke;
 }
 
-:is(#back-button, #forward-button, #viewButton) > menupopup menugroup,
-:is(.popup-notification-dropmarker, #main-menubar, #PlacesToolbar, #places) menupopup menugroup,
-:is(#toolbar-context-menu, #tabContextMenu, #contentAreaContextMenu, #backForwardMenu, #placesContext, #pageActionContextMenu, .search-one-offs-context-menu, #SyncedTabsSidebarContext, .textbox-contextmenu, #customizationPanelItemContextMenu, #customizationPaletteItemContextMenu, #customization-toolbar-menu, #new-tab-button-popup, #new-tab-button, #downloadsContextMenu, menupopup[menu-api], #ContentSelectDropdown, menupopup.in-menulist, .new-tab-popup, #openHandlerPopup)
-    menugroup {
+menupopup:not(.PanelUI-subView) menugroup {
     padding: 0 !important;
     background-color: transparent !important;
 }
 
-:is(#back-button, #forward-button, #viewButton) > menupopup .menu-right,
-:is(.popup-notification-dropmarker, #main-menubar, #PlacesToolbar, #places) menupopup .menu-right,
-:is(#toolbar-context-menu, #tabContextMenu, #contentAreaContextMenu, #backForwardMenu, #placesContext, #pageActionContextMenu, .search-one-offs-context-menu, #SyncedTabsSidebarContext, .textbox-contextmenu, #customizationPanelItemContextMenu, #customizationPaletteItemContextMenu, #customization-toolbar-menu, #new-tab-button-popup, #new-tab-button, #downloadsContextMenu, menupopup[menu-api], #ContentSelectDropdown, menupopup.in-menulist, .new-tab-popup, #openHandlerPopup)
-    .menu-right {
+menupopup:not(.PanelUI-subView) .menu-right {
     appearance: none !important;
     padding: 0px !important;
     margin-right: var(--menu-right-margin) !important;
@@ -129,23 +73,18 @@ menupopup[menu-api],
     list-style-image: var(--menu-right-img) !important;
 }
 
-menu[disabled="true"] > .menu-right {
+menupopup:not(.PanelUI-subView) menu[disabled="true"] > .menu-right {
     visibility: collapse;
 }
 
-:is(#back-button, #forward-button, #viewButton)
-    > menupopup
-    :is(menu, menuitem):is(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
-:is(.popup-notification-dropmarker, #main-menubar, #PlacesToolbar, #places)
-    menupopup
-    :is(menu, menuitem):is(:hover, [_moz-menuactive="true"]):not([disabled="true"]),
-:is(#toolbar-context-menu, #tabContextMenu, #contentAreaContextMenu, #backForwardMenu, #placesContext, #pageActionContextMenu, .search-one-offs-context-menu, #SyncedTabsSidebarContext, .textbox-contextmenu, #customizationPanelItemContextMenu, #customizationPaletteItemContextMenu, #customization-toolbar-menu, #new-tab-button-popup, #new-tab-button, #downloadsContextMenu, menupopup[menu-api], #ContentSelectDropdown, menupopup.in-menulist, .new-tab-popup, #openHandlerPopup)
+menupopup:not(.PanelUI-subView)
     :is(menu, menuitem):is(:hover, [_moz-menuactive="true"]):not([disabled="true"]) {
     appearance: none !important;
     background-color: var(--arrowpanel-dimmed) !important;
 }
 
-:is(menu, menuitem):is(:hover, [_moz-menuactive="true"])[disabled="true"] {
+menupopup:not(.PanelUI-subView)
+    :is(menu, menuitem):is(:hover, [_moz-menuactive="true"])[disabled="true"] {
     background: none !important;
     appearance: none !important;
 }
@@ -157,6 +96,76 @@ menu[disabled="true"] > .menu-right {
 menu.subviewbutton:not([disabled="true"])[_moz-menuactive="true"]:active {
     background: var(--arrowpanel-dimmed) !important;
     box-shadow: none !important;
+}
+
+menupopup:not(.PanelUI-subView)
+    menuitem:is([type="checkbox"], [type="radio"], [checked])
+    :is(.menu-text, .menu-iconic-text) {
+    display: -moz-inline-box !important;
+    margin-inline: var(--context-margin-inline) !important;
+    padding-inline: var(--context-padding-inline) !important;
+}
+
+menupopup:not(.PanelUI-subView) menuitem:is([type="checkbox"], [type="radio"])::before {
+    position: relative;
+    display: -moz-inline-box;
+    width: 16px;
+    height: 16px;
+    margin-inline: var(--context-checkbox-margin);
+    fill: currentColor;
+    -moz-context-properties: fill, fill-opacity, stroke;
+    content: "";
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 1px solid var(--checkbox-border-color);
+    background-color: var(--checkbox-unchecked-bgcolor);
+    color: var(--in-parent-primary-button-text-color);
+}
+
+menupopup menuitem[type="checkbox"]::before {
+    border-radius: 2px;
+}
+
+menupopup
+    menuitem:is([type="checkbox"], [type="radio"]):is(:hover, [_moz-menuactive="true"])::before {
+    background-color: var(--checkbox-unchecked-hover-bgcolor);
+}
+
+menupopup
+    menuitem:is([type="checkbox"], [type="radio"]):is(:hover, [_moz-menuactive="true"]):active::before {
+    background-color: var(--checkbox-unchecked-active-bgcolor);
+}
+
+menupopup
+    menuitem:is([type="checkbox"], [type="radio"])[checked="true"]:is(:hover, [_moz-menuactive="true"])::before {
+    background-color: var(--checkbox-checked-hover-bgcolor);
+}
+
+menupopup
+    menuitem:is([type="checkbox"], [type="radio"])[checked="true"]:is(:hover, [_moz-menuactive="true"]):active::before {
+    background-color: var(--checkbox-checked-active-bgcolor);
+}
+
+menupopup menuitem[type="checkbox"][checked="true"]::before {
+    background-image: url(chrome://userchrome/content/check.svg);
+    border-color: var(--checkbox-checked-border-color);
+    background-color: var(--checkbox-checked-bgcolor);
+}
+
+menupopup menuitem[type="radio"]::before,
+#main-menubar #viewSidebarMenu menuitem[type="checkbox"]::before {
+    border-radius: 100%;
+}
+
+menupopup menuitem[type="radio"][checked="true"]::before,
+#main-menubar #viewSidebarMenu menuitem[checked="true"]::before {
+    background-image: url("chrome://userchrome/content/radio.svg");
+    border-color: var(--checkbox-checked-border-color);
+    background-color: var(--checkbox-checked-bgcolor);
+}
+
+menupopup menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-left {
+    display: none;
 }
 
 #ContentSelectDropdown > menupopup > :is(menucaption, menuitem) > .menu-iconic-text,
@@ -313,10 +322,7 @@ menupopup.in-menulist {
         opacity: 0.6;
     }
 
-    :is(#back-button, #forward-button, #viewButton) > menupopup menuseparator,
-    :is(#main-menubar, #PlacesToolbar, #places) menupopup menuseparator,
-    :is(#toolbar-context-menu, #tabContextMenu, #contentAreaContextMenu, #backForwardMenu, #placesContext, #pageActionContextMenu, .search-one-offs-context-menu, #SyncedTabsSidebarContext, .textbox-contextmenu, #customizationPanelItemContextMenu, #customizationPaletteItemContextMenu, #customization-toolbar-menu, #new-tab-button-popup, #new-tab-button, .popup-notification-dropmarker, #downloadsContextMenu, menupopup[menu-api], #ContentSelectDropdown, .new-tab-popup, #openHandlerPopup)
-        menuseparator {
+    menupopup:not(.PanelUI-subView) menuseparator {
         border-image: linear-gradient(
             to right,
             transparent 1%,
@@ -330,10 +336,7 @@ menupopup.in-menulist {
         margin-inline: 0 !important;
     }
 
-    :is(#back-button, #forward-button, #viewButton) > menupopup menuseparator:last-child,
-    :is(#main-menubar, #PlacesToolbar, #places) menupopup menuseparator:last-child,
-    :is(#toolbar-context-menu, #tabContextMenu, #contentAreaContextMenu, #backForwardMenu, #placesContext, #pageActionContextMenu, .search-one-offs-context-menu, #SyncedTabsSidebarContext, .textbox-contextmenu, #customizationPanelItemContextMenu, #customizationPaletteItemContextMenu, #customization-toolbar-menu, #new-tab-button-popup, #new-tab-button, .popup-notification-dropmarker, #downloadsContextMenu, menupopup[menu-api], #ContentSelectDropdown, .new-tab-popup, #openHandlerPopup)
-        menuseparator:last-child {
+    menupopup:not(.PanelUI-subView) menuseparator:last-child {
         display: none;
     }
 
@@ -346,19 +349,10 @@ menupopup.in-menulist {
         display: -moz-box !important;
     }
 
-    :is(#contentAreaContextMenu, #customization-footer, menupopup[menu-api], menupopup#placesContext, #downloadsContextMenu, #customizationPanelItemContextMenu)
-        menuitem:is([type="checkbox"], [type="radio"])
-        .menu-iconic-left,
-    :is(#PlacesToolbar, #places)
-        menupopup
-        menuitem:is([type="checkbox"], [type="radio"])
-        .menu-iconic-left {
-        display: none !important;
-    }
-
     #context-navigation .menuitem-iconic {
         min-width: 34px;
         height: 36px;
+        padding: 0 !important;
         padding-bottom: 2px !important;
     }
 
@@ -415,10 +409,7 @@ menupopup.in-menulist {
 
 /* proton disabled */
 @supports not -moz-bool-pref("browser.proton.contextmenus.enabled") {
-    :is(#back-button, #forward-button, #viewButton) > menupopup menuseparator,
-    :is(#main-menubar, #PlacesToolbar, #places) menupopup menuseparator,
-    :is(#toolbar-context-menu, #tabContextMenu, #contentAreaContextMenu, #backForwardMenu, #placesContext, #pageActionContextMenu, .search-one-offs-context-menu, #SyncedTabsSidebarContext, .textbox-contextmenu, #customizationPanelItemContextMenu, #customizationPaletteItemContextMenu, #customization-toolbar-menu, #new-tab-button-popup, #new-tab-button, .popup-notification-dropmarker, #downloadsContextMenu, menupopup[menu-api], #ContentSelectDropdown, .new-tab-popup, #openHandlerPopup)
-        menuseparator {
+    menupopup:not(.PanelUI-subView) menuseparator {
         /* appearance: none !important;
         max-height: 1px !important;
         border: none !important;
@@ -438,24 +429,10 @@ menupopup.in-menulist {
         menupopup
         menuseparator:not([hidden="true"])
         + :is(menu, menuitem),
-    :is(#back-button, #forward-button, #viewButton)
-        > menupopup
-        menuseparator:not(:first-of-type):not([hidden="true"])
-        + :is(menu, menuitem),
-    :is(#toolbar-context-menu, #tabContextMenu, #contentAreaContextMenu, #backForwardMenu, #placesContext, #pageActionContextMenu, .search-one-offs-context-menu, #SyncedTabsSidebarContext, .textbox-contextmenu, #customizationPanelItemContextMenu, #customizationPaletteItemContextMenu, #customization-toolbar-menu)
-        menuseparator:not(:first-of-type):not([hidden="true"])
-        + :is(menu, menuitem),
     :is(#new-tab-button-popup, #new-tab-button, #downloadsContextMenu, menupopup[menu-api], #ContentSelectDropdown, .new-tab-popup, #openHandlerPopup)
         menuseparator:not([hidden="true"])
         + :is(menu, menuitem),
-    #widget-overflow
-        #customizationPanelItemContextMenu
-        menuseparator:not(:first-of-type):not([hidden="true"])
-        + :is(menu, menuitem),
-    #main-menubar
-        menupopup
-        menuseparator:not(:first-of-type):not([hidden="true"])
-        + :is(menu, menuitem) {
+    menupopup menuseparator:not(:first-of-type):not([hidden="true"]) + :is(menu, menuitem) {
         border-image: linear-gradient(
             to right,
             transparent 1%,

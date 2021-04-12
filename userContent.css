@@ -214,6 +214,7 @@ menupopup.in-menulist {
     --menupopup-inner-padding: 0px;
     --context-padding-inline: 27px 0px;
     --context-margin-inline: -14px 0px;
+    --context-checkbox-margin: 6px -5.5px;
     --arrowpanel-background: hsl(233, 36%, 11%);
     --menu-color: var(--ui-text-80) !important;
     --menupopup-background: var(--arrowpanel-background);
@@ -252,7 +253,7 @@ menupopup.in-menulist > :is(menucaption, menuitem) > :is(label, .menu-iconic-tex
 #ContentSelectDropdown > menupopup menucaption,
 menupopup.in-menulist > menucaption {
     font-weight: inherit !important;
-    min-height: 25px !important;
+    min-height: 26px !important;
 }
 
 #ContentSelectDropdown > menupopup menucaption:first-child,
@@ -301,7 +302,7 @@ menupopup.in-menulist .contentSelectDropdown-searchbox {
     background-color: var(--arrowpanel-dimmed) !important;
     padding-block: 0 !important;
     transition: 300ms background-color !important;
-    min-height: 25px !important;
+    min-height: 26px !important;
     -moz-user-modify: read-write !important;
 }
 
@@ -409,6 +410,96 @@ menupopup.in-menulist menu.subviewbutton:not([disabled="true"])[_moz-menuactive]
     box-shadow: none !important;
 }
 
+#ContentSelectDropdown
+    > menupopup
+    menuitem:is([type="checkbox"], [type="radio"], [checked])
+    :is(.menu-text, .menu-iconic-text),
+menupopup.in-menulist
+    menuitem:is([type="checkbox"], [type="radio"], [checked])
+    :is(.menu-text, .menu-iconic-text) {
+    display: -moz-inline-box !important;
+    margin-inline: var(--context-margin-inline) !important;
+    padding-inline: var(--context-padding-inline) !important;
+}
+
+#ContentSelectDropdown > menupopup menuitem:is([type="checkbox"], [type="radio"])::before,
+menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"])::before {
+    position: relative;
+    display: -moz-inline-box;
+    width: 16px;
+    height: 16px;
+    margin-inline: var(--context-checkbox-margin);
+    fill: currentColor;
+    -moz-context-properties: fill, fill-opacity, stroke;
+    content: "";
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 1px solid var(--checkbox-border-color);
+    background-color: var(--checkbox-unchecked-bgcolor);
+    color: var(--in-parent-primary-button-text-color);
+}
+
+#ContentSelectDropdown > menupopup menuitem[type="checkbox"]::before,
+menupopup.in-menulist menuitem[type="checkbox"]::before {
+    border-radius: 2px;
+}
+
+#ContentSelectDropdown
+    > menupopup
+    menuitem:is([type="checkbox"], [type="radio"]):is(:hover, [_moz-menuactive="true"])::before,
+menupopup.in-menulist
+    menuitem:is([type="checkbox"], [type="radio"]):is(:hover, [_moz-menuactive="true"])::before {
+    background-color: var(--checkbox-unchecked-hover-bgcolor);
+}
+
+#ContentSelectDropdown
+    > menupopup
+    menuitem:is([type="checkbox"], [type="radio"]):is(:hover, [_moz-menuactive="true"]):active::before,
+menupopup.in-menulist
+    menuitem:is([type="checkbox"], [type="radio"]):is(:hover, [_moz-menuactive="true"]):active::before {
+    background-color: var(--checkbox-unchecked-active-bgcolor);
+}
+
+#ContentSelectDropdown
+    > menupopup
+    menuitem:is([type="checkbox"], [type="radio"])[checked="true"]:is(:hover, [_moz-menuactive="true"])::before,
+menupopup.in-menulist
+    menuitem:is([type="checkbox"], [type="radio"])[checked="true"]:is(:hover, [_moz-menuactive="true"])::before {
+    background-color: var(--checkbox-checked-hover-bgcolor);
+}
+
+#ContentSelectDropdown
+    > menupopup
+    menuitem:is([type="checkbox"], [type="radio"])[checked="true"]:is(:hover, [_moz-menuactive="true"]):active::before,
+menupopup.in-menulist
+    menuitem:is([type="checkbox"], [type="radio"])[checked="true"]:is(:hover, [_moz-menuactive="true"]):active::before {
+    background-color: var(--checkbox-checked-active-bgcolor);
+}
+
+#ContentSelectDropdown > menupopup menuitem[type="checkbox"][checked="true"]::before,
+menupopup.in-menulist menuitem[type="checkbox"][checked="true"]::before {
+    background-image: url(chrome://userchrome/content/check.svg);
+    border-color: var(--checkbox-checked-border-color);
+    background-color: var(--checkbox-checked-bgcolor);
+}
+
+#ContentSelectDropdown > menupopup menuitem[type="radio"]::before,
+menupopup.in-menulist menuitem[type="radio"]::before {
+    border-radius: 100%;
+}
+
+#ContentSelectDropdown > menupopup menuitem[type="radio"][checked="true"]::before,
+menupopup.in-menulist menuitem[type="radio"][checked="true"]::before {
+    background-image: url("chrome://userchrome/content/radio.svg");
+    border-color: var(--checkbox-checked-border-color);
+    background-color: var(--checkbox-checked-bgcolor);
+}
+
+#ContentSelectDropdown > menupopup menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-left,
+menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-left {
+    display: none;
+}
+
 @supports (-moz-bool-pref("browser.proton.contextmenus.enabled")) {
     #ContentSelectDropdown,
     menupopup.in-menulist {
@@ -416,6 +507,7 @@ menupopup.in-menulist menu.subviewbutton:not([disabled="true"])[_moz-menuactive]
         --menupopup-child-margin-inline-start: 0px;
         --context-padding-inline: 28px 0px !important;
         --context-margin-inline: -16px 0px !important;
+        --context-checkbox-margin: 6px -6px;
         --arrowpanel-menuitem-border-radius: 3px !important;
         --menupopup-border-radius: 3px !important;
         --context-menuitem-border-radius: var(--arrowpanel-menuitem-border-radius);
@@ -752,8 +844,8 @@ menupopup.in-menulist menu.subviewbutton:not([disabled="true"])[_moz-menuactive]
     :is(menuitem, menu) {
         appearance: none !important;
         color: var(--ui-text-80) !important;
-        padding: 0 !important;
-        min-height: 25px !important;
+        padding: 5px 0 !important;
+        min-height: 26px !important;
         border-radius: var(--context-menuitem-border-radius);
     }
 
@@ -818,6 +910,74 @@ menupopup.in-menulist menu.subviewbutton:not([disabled="true"])[_moz-menuactive]
         box-shadow: none !important;
     }
 
+    menupopup
+        menuitem:is([type="checkbox"], [type="radio"], [checked])
+        :is(.menu-text, .menu-iconic-text) {
+        display: -moz-inline-box !important;
+        margin-inline: var(--context-margin-inline) !important;
+        padding-inline: var(--context-padding-inline) !important;
+    }
+
+    menupopup menuitem:is([type="checkbox"], [type="radio"])::before {
+        position: relative;
+        display: -moz-inline-box;
+        width: 16px;
+        height: 16px;
+        margin-inline: var(--context-checkbox-margin);
+        fill: currentColor;
+        -moz-context-properties: fill, fill-opacity, stroke;
+        content: "";
+        background-position: center;
+        background-repeat: no-repeat;
+        border: 1px solid var(--checkbox-border-color);
+        background-color: var(--checkbox-unchecked-bgcolor);
+        color: var(--in-parent-primary-button-text-color);
+    }
+
+    menupopup menuitem[type="checkbox"]::before {
+        border-radius: 2px;
+    }
+
+    menupopup
+        menuitem:is([type="checkbox"], [type="radio"]):is(:hover, [_moz-menuactive="true"])::before {
+        background-color: var(--checkbox-unchecked-hover-bgcolor);
+    }
+
+    menupopup
+        menuitem:is([type="checkbox"], [type="radio"]):is(:hover, [_moz-menuactive="true"]):active::before {
+        background-color: var(--checkbox-unchecked-active-bgcolor);
+    }
+
+    menupopup
+        menuitem:is([type="checkbox"], [type="radio"])[checked="true"]:is(:hover, [_moz-menuactive="true"])::before {
+        background-color: var(--checkbox-checked-hover-bgcolor);
+    }
+
+    menupopup
+        menuitem:is([type="checkbox"], [type="radio"])[checked="true"]:is(:hover, [_moz-menuactive="true"]):active::before {
+        background-color: var(--checkbox-checked-active-bgcolor);
+    }
+
+    menupopup menuitem[type="checkbox"][checked="true"]::before {
+        background-image: url(chrome://userchrome/content/check.svg);
+        border-color: var(--checkbox-checked-border-color);
+        background-color: var(--checkbox-checked-bgcolor);
+    }
+
+    menupopup menuitem[type="radio"]::before {
+        border-radius: 100%;
+    }
+
+    menupopup menuitem[type="radio"][checked="true"]::before {
+        background-image: url("chrome://userchrome/content/radio.svg");
+        border-color: var(--checkbox-checked-border-color);
+        background-color: var(--checkbox-checked-bgcolor);
+    }
+
+    menupopup menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-left {
+        display: none;
+    }
+
     #ContentSelectDropdown > menupopup > :is(menucaption, menuitem) > .menu-iconic-text,
     menupopup.in-menulist > :is(menucaption, menuitem) > .menu-iconic-text {
         padding-block: unset !important;
@@ -837,7 +997,7 @@ menupopup.in-menulist menu.subviewbutton:not([disabled="true"])[_moz-menuactive]
 
     :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup) menucaption {
         font-weight: inherit !important;
-        min-height: 25px !important;
+        min-height: 26px !important;
     }
 
     :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
@@ -892,7 +1052,7 @@ menupopup.in-menulist menu.subviewbutton:not([disabled="true"])[_moz-menuactive]
         background-color: var(--arrowpanel-dimmed) !important;
         padding-block: 0 !important;
         transition: 300ms background-color !important;
-        min-height: 25px !important;
+        min-height: 26px !important;
         -moz-user-modify: read-write !important;
     }
 

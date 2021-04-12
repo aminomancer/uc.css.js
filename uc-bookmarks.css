@@ -447,6 +447,8 @@
     transition: 0.2s ease-in-out opacity !important;
     transform-style: flat !important;
     backface-visibility: hidden !important;
+    -moz-context-properties: fill, fill-opacity !important;
+    fill-opacity: 1 !important;
 }
 
 .BMB-special-scrollbutton-down,
@@ -465,22 +467,24 @@
     transition: 0.2s ease-in-out opacity !important;
     transform-style: flat !important;
     backface-visibility: hidden !important;
+    -moz-context-properties: fill, fill-opacity !important;
+    fill-opacity: 1 !important;
 }
 
 .BMB-special-scrollbutton-down:is(:not(:hover), [disabled="true"]) {
-    list-style-image: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='8.847px' height='8.847px' viewBox='0 0 451.847 451.847' xml:space='preserve'><path d='M225.923,354.706c-8.098,0-16.195-3.092-22.369-9.263L9.27,151.157c-12.359-12.359-12.359-32.397,0-44.751   c12.354-12.354,32.388-12.354,44.748,0l171.905,171.915l171.906-171.909c12.359-12.354,32.391-12.354,44.744,0   c12.365,12.354,12.365,32.392,0,44.751L248.292,345.449C242.115,351.621,234.018,354.706,225.923,354.706z' fill='white'/></svg>") !important;
+    list-style-image: url(chrome://userchrome/content/scrollbutton-down.svg) !important;
 }
 
 .BMB-special-scrollbutton-down:not([disabled="true"]):hover {
-    list-style-image: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='8.819px' height='8.819px' viewBox='0 0 444.819 444.819' xml:space='preserve'><path d='M434.252,114.203l-21.409-21.416c-7.419-7.04-16.084-10.561-25.975-10.561c-10.095,0-18.657,3.521-25.7,10.561   L222.41,231.549L83.653,92.791c-7.042-7.04-15.606-10.561-25.697-10.561c-9.896,0-18.559,3.521-25.979,10.561l-21.128,21.416   C3.615,121.436,0,130.099,0,140.188c0,10.277,3.619,18.842,10.848,25.693l185.864,185.865c6.855,7.23,15.416,10.848,25.697,10.848   c10.088,0,18.75-3.617,25.977-10.848l185.865-185.865c7.043-7.044,10.567-15.608,10.567-25.693   C444.819,130.287,441.295,121.629,434.252,114.203z' fill='white'/></svg>") !important;
+    list-style-image: url(chrome://userchrome/content/scrollbutton-down-hover.svg) !important;
 }
 
 .BMB-special-scrollbutton-up:is(:not(:hover), [disabled="true"]) {
-    list-style-image: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='8.847px' height='8.847px' viewBox='0 0 451.847 451.847' xml:space='preserve'><path d='M225.923,354.706c-8.098,0-16.195-3.092-22.369-9.263L9.27,151.157c-12.359-12.359-12.359-32.397,0-44.751   c12.354-12.354,32.388-12.354,44.748,0l171.905,171.915l171.906-171.909c12.359-12.354,32.391-12.354,44.744,0   c12.365,12.354,12.365,32.392,0,44.751L248.292,345.449C242.115,351.621,234.018,354.706,225.923,354.706z' fill='white' transform='scale(-1) translate(-451.847 -451.847)'/></svg>") !important;
+    list-style-image: url(chrome://userchrome/content/scrollbutton-up.svg) !important;
 }
 
 .BMB-special-scrollbutton-up:not([disabled="true"]):hover {
-    list-style-image: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='8.819px' height='8.819px' viewBox='0 0 444.819 444.819' xml:space='preserve'><path d='M434.252,114.203l-21.409-21.416c-7.419-7.04-16.084-10.561-25.975-10.561c-10.095,0-18.657,3.521-25.7,10.561   L222.41,231.549L83.653,92.791c-7.042-7.04-15.606-10.561-25.697-10.561c-9.896,0-18.559,3.521-25.979,10.561l-21.128,21.416   C3.615,121.436,0,130.099,0,140.188c0,10.277,3.619,18.842,10.848,25.693l185.864,185.865c6.855,7.23,15.416,10.848,25.697,10.848   c10.088,0,18.75-3.617,25.977-10.848l185.865-185.865c7.043-7.044,10.567-15.608,10.567-25.693   C444.819,130.287,441.295,121.629,434.252,114.203z' fill='white' transform='scale(-1) translate(-451.847 -451.847)'/></svg>") !important;
+    list-style-image: url(chrome://userchrome/content/scrollbutton-up-hover.svg) !important;
 }
 
 :is(.BMB-special-scrollbutton-up, .BMB-special-scrollbutton-down)[disabled="true"] {
@@ -510,6 +514,21 @@
 
     .panel-subview-footer.openintabs-menuitem {
         display: none !important;
+    }
+
+    #BMB_bookmarksPopup menupopup {
+        margin-block-start: var(--nested-margin) !important;
+    }
+
+    #BMB_bookmarksPopup :is(menu, menuitem) {
+        margin: var(--arrowpanel-menuitem-margin) !important;
+        min-height: 24px !important;
+        padding: var(--arrowpanel-menuitem-padding) !important;
+        border-radius: var(--arrowpanel-menuitem-border-radius) !important;
+    }
+
+    #BMB_bookmarksPopup menupopup :is(menuitem, menu) .menu-iconic-icon {
+        margin-inline: unset;
     }
 }
 

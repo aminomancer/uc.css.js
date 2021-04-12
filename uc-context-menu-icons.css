@@ -1,4 +1,7 @@
 /* add icons to non-iconized context menu items */
+menupopup
+    menuitem:is([type="checkbox"], [type="radio"], [checked])
+    :is(.menu-text, .menu-iconic-text),
 #context-inspect-a11y:not(.menuitem-iconic) .menu-text,
 #context-inspect:not(.menuitem-iconic) .menu-text,
 #context-viewsource:not(.menuitem-iconic) .menu-text,
@@ -73,14 +76,6 @@
 #context_moveToStart:not(.menuitem-iconic) .menu-text,
 #context_moveToEnd:not(.menuitem-iconic) .menu-text,
 #context_openTabInWindow:not(.menuitem-iconic) .menu-text,
-:is(#contentAreaContextMenu, #customization-footer, menupopup#placesContext, #downloadsContextMenu, #customizationPanelItemContextMenu)
-    menuitem:is([type="checkbox"], [type="radio"], [checked])
-    .menu-iconic-text,
-menupopup[menu-api] menuitem:is([type="checkbox"], [type="radio"], [checked]) .menu-iconic-text,
-:is(#PlacesToolbar, #places)
-    menupopup
-    menuitem:is([type="checkbox"], [type="radio"], [checked])
-    .menu-iconic-text,
 .textbox-contextmenu menuitem[label="Undo"]:not(.menuitem-iconic) .menu-text,
 .textbox-contextmenu menuitem[label="Redo"]:not(.menuitem-iconic) .menu-text,
 .textbox-contextmenu menuitem[label="Cut"]:not(.menuitem-iconic) .menu-text,
@@ -142,116 +137,6 @@ menupopup[menu-api] menuitem:is([type="checkbox"], [type="radio"], [checked]) .m
     display: -moz-inline-box !important;
     margin-inline: var(--context-margin-inline) !important;
     padding-inline: var(--context-padding-inline) !important;
-}
-
-:is(#main-menubar, #toolbar-context-menu)
-    menuitem:is([type="checkbox"], [type="radio"])
-    .menu-iconic-left,
-#viewButton menuitem[type="radio"] .menu-iconic-left {
-    appearance: none !important;
-}
-
-:is(#main-menubar, #toolbar-context-menu)
-    menuitem:is([type="checkbox"], [type="radio"])
-    .menu-iconic-icon,
-#main-menubar #viewSidebarMenu menuitem .menu-iconic-icon,
-#sidebar-search-container #viewButton menuitem[type="radio"] .menu-iconic-icon {
-    appearance: none !important;
-    display: -moz-inline-box !important;
-    position: relative !important;
-    width: 16px !important;
-    height: 16px !important;
-    margin-inline: 6px !important;
-    fill: currentColor !important;
-    -moz-context-properties: fill, fill-opacity, stroke !important;
-    content: "" !important;
-    list-style-image: none !important;
-    background-size: 12px !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-}
-
-:is(#main-menubar, #toolbar-context-menu) menuitem[type="checkbox"] .menu-iconic-icon {
-    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNNSAyYy0xLjY1NCAwLTMgMS4zNDYtMyAzdjE0YzAgMS42NTQgMS4zNDYgMyAzIDNoMTRjMS42NTQgMCAzLTEuMzQ2IDMtM3YtMTRjMC0xLjY1NC0xLjM0Ni0zLTMtM2gtMTR6bTE5IDN2MTRjMCAyLjc2MS0yLjIzOCA1LTUgNWgtMTRjLTIuNzYyIDAtNS0yLjIzOS01LTV2LTE0YzAtMi43NjEgMi4yMzgtNSA1LTVoMTRjMi43NjIgMCA1IDIuMjM5IDUgNXoiIGZpbGw9ImNvbnRleHQtZmlsbCIgZmlsbC1vcGFjaXR5PSJjb250ZXh0LWZpbGwtb3BhY2l0eSIvPjwvc3ZnPg==") !important;
-}
-
-:is(#main-menubar, #toolbar-context-menu)
-    menuitem[type="checkbox"][checked="true"]
-    .menu-iconic-icon {
-    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTAuMDQxIDE3bC00LjUtNC4zMTkgMS4zOTUtMS40MzUgMy4wOCAyLjkzNyA3LjAyMS03LjE4MyAxLjQyMiAxLjQwOS04LjQxOCA4LjU5MXptLTUuMDQxLTE1Yy0xLjY1NCAwLTMgMS4zNDYtMyAzdjE0YzAgMS42NTQgMS4zNDYgMyAzIDNoMTRjMS42NTQgMCAzLTEuMzQ2IDMtM3YtMTRjMC0xLjY1NC0xLjM0Ni0zLTMtM2gtMTR6bTE5IDN2MTRjMCAyLjc2MS0yLjIzOCA1LTUgNWgtMTRjLTIuNzYyIDAtNS0yLjIzOS01LTV2LTE0YzAtMi43NjEgMi4yMzgtNSA1LTVoMTRjMi43NjIgMCA1IDIuMjM5IDUgNXoiIGZpbGw9ImNvbnRleHQtZmlsbCIgZmlsbC1vcGFjaXR5PSJjb250ZXh0LWZpbGwtb3BhY2l0eSIvPjwvc3ZnPg==") !important;
-}
-
-:is(#main-menubar, #toolbar-context-menu) menuitem[type="radio"] .menu-iconic-icon,
-#main-menubar #viewSidebarMenu menuitem:not([checked="true"]) .menu-iconic-icon,
-#sidebar-search-container #viewButton menuitem[type="radio"] .menu-iconic-icon {
-    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTIgMGMtNi42MjMgMC0xMiA1LjM3Ny0xMiAxMnM1LjM3NyAxMiAxMiAxMiAxMi01LjM3NyAxMi0xMi01LjM3Ny0xMi0xMi0xMnptMCAyMmMtNS41MTkgMC0xMC00LjQ4LTEwLTEwIDAtNS41MTkgNC40ODEtMTAgMTAtMTAgNS41MiAwIDEwIDQuNDgxIDEwIDEwIDAgNS41Mi00LjQ4IDEwLTEwIDEweiIgZmlsbD0iY29udGV4dC1maWxsIiBmaWxsLW9wYWNpdHk9ImNvbnRleHQtZmlsbC1vcGFjaXR5Ii8+PC9zdmc+") !important;
-}
-
-:is(#main-menubar, #toolbar-context-menu) menuitem[type="radio"][checked="true"] .menu-iconic-icon,
-#main-menubar #viewSidebarMenu menuitem[checked="true"] .menu-iconic-icon,
-#sidebar-search-container #viewButton menuitem[type="radio"][checked="true"] .menu-iconic-icon {
-    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTIgMmM1LjUxNCAwIDEwIDQuNDg2IDEwIDEwcy00LjQ4NiAxMC0xMCAxMC0xMC00LjQ4Ni0xMC0xMCA0LjQ4Ni0xMCAxMC0xMHptMC0yYy02LjYyNyAwLTEyIDUuMzczLTEyIDEyczUuMzczIDEyIDEyIDEyIDEyLTUuMzczIDEyLTEyLTUuMzczLTEyLTEyLTEyem0wIDZjLTMuMzEzIDAtNiAyLjY4Ny02IDZzMi42ODcgNiA2IDZjMy4zMTQgMCA2LTIuNjg3IDYtNnMtMi42ODYtNi02LTZ6IiBmaWxsPSJjb250ZXh0LWZpbGwiIGZpbGwtb3BhY2l0eT0iY29udGV4dC1maWxsLW9wYWNpdHkiLz48L3N2Zz4=") !important;
-}
-
-:is(#main-menubar, #toolbar-context-menu) menuitem[type="checkbox"] .menu-iconic-left::before {
-    display: none !important;
-}
-
-:is(#contentAreaContextMenu, #customization-footer, menupopup#placesContext, #downloadsContextMenu, #customizationPanelItemContextMenu)
-    menuitem:is([type="checkbox"], [type="radio"])::before,
-menupopup[menu-api] menuitem:is([type="checkbox"], [type="radio"])::before,
-:is(#PlacesToolbar, #places) menupopup menuitem:is([type="checkbox"], [type="radio"])::before {
-    position: relative !important;
-    display: -moz-inline-box !important;
-    width: 16px !important;
-    height: 16px !important;
-    margin-inline: var(--context-checkbox-margin) !important;
-    fill: currentColor !important;
-    -moz-context-properties: fill, fill-opacity, stroke !important;
-    content: "" !important;
-    background-size: 12px !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-}
-
-:is(#contentAreaContextMenu, #customization-footer, menupopup#placesContext, #downloadsContextMenu, #customizationPanelItemContextMenu)
-    menuitem[type="checkbox"]::before,
-menupopup[menu-api] menuitem[type="checkbox"]::before,
-:is(#PlacesToolbar, #places) menupopup menuitem[type="checkbox"]::before {
-    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNNSAyYy0xLjY1NCAwLTMgMS4zNDYtMyAzdjE0YzAgMS42NTQgMS4zNDYgMyAzIDNoMTRjMS42NTQgMCAzLTEuMzQ2IDMtM3YtMTRjMC0xLjY1NC0xLjM0Ni0zLTMtM2gtMTR6bTE5IDN2MTRjMCAyLjc2MS0yLjIzOCA1LTUgNWgtMTRjLTIuNzYyIDAtNS0yLjIzOS01LTV2LTE0YzAtMi43NjEgMi4yMzgtNSA1LTVoMTRjMi43NjIgMCA1IDIuMjM5IDUgNXoiIGZpbGw9ImNvbnRleHQtZmlsbCIgZmlsbC1vcGFjaXR5PSJjb250ZXh0LWZpbGwtb3BhY2l0eSIvPjwvc3ZnPg==") !important;
-}
-
-:is(#contentAreaContextMenu, #customization-footer, menupopup#placesContext, #downloadsContextMenu, #customizationPanelItemContextMenu)
-    menuitem[type="checkbox"][checked="true"]::before,
-menupopup[menu-api] menuitem[type="checkbox"][checked="true"]::before,
-:is(#PlacesToolbar, #places) menupopup menuitem[type="checkbox"][checked="true"]::before {
-    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTAuMDQxIDE3bC00LjUtNC4zMTkgMS4zOTUtMS40MzUgMy4wOCAyLjkzNyA3LjAyMS03LjE4MyAxLjQyMiAxLjQwOS04LjQxOCA4LjU5MXptLTUuMDQxLTE1Yy0xLjY1NCAwLTMgMS4zNDYtMyAzdjE0YzAgMS42NTQgMS4zNDYgMyAzIDNoMTRjMS42NTQgMCAzLTEuMzQ2IDMtM3YtMTRjMC0xLjY1NC0xLjM0Ni0zLTMtM2gtMTR6bTE5IDN2MTRjMCAyLjc2MS0yLjIzOCA1LTUgNWgtMTRjLTIuNzYyIDAtNS0yLjIzOS01LTV2LTE0YzAtMi43NjEgMi4yMzgtNSA1LTVoMTRjMi43NjIgMCA1IDIuMjM5IDUgNXoiIGZpbGw9ImNvbnRleHQtZmlsbCIgZmlsbC1vcGFjaXR5PSJjb250ZXh0LWZpbGwtb3BhY2l0eSIvPjwvc3ZnPg==") !important;
-}
-
-:is(#contentAreaContextMenu, #customization-footer, menupopup#placesContext, #downloadsContextMenu, #customizationPanelItemContextMenu)
-    menuitem:is([type="checkbox"], [type="radio"])
-    .menu-iconic-left,
-menupopup[menu-api] menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-left,
-:is(#PlacesToolbar, #places)
-    menupopup
-    menuitem:is([type="checkbox"], [type="radio"])
-    .menu-iconic-left {
-    appearance: none !important;
-    width: 25px !important;
-}
-
-:is(#contentAreaContextMenu, #customization-footer, menupopup#placesContext, #downloadsContextMenu, #customizationPanelItemContextMenu)
-    menuitem[type="radio"]::before,
-menupopup[menu-api] menuitem[type="radio"]::before,
-:is(#PlacesToolbar, #places) menupopup menuitem[type="radio"]::before {
-    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTIgMGMtNi42MjMgMC0xMiA1LjM3Ny0xMiAxMnM1LjM3NyAxMiAxMiAxMiAxMi01LjM3NyAxMi0xMi01LjM3Ny0xMi0xMi0xMnptMCAyMmMtNS41MTkgMC0xMC00LjQ4LTEwLTEwIDAtNS41MTkgNC40ODEtMTAgMTAtMTAgNS41MiAwIDEwIDQuNDgxIDEwIDEwIDAgNS41Mi00LjQ4IDEwLTEwIDEweiIgZmlsbD0iY29udGV4dC1maWxsIiBmaWxsLW9wYWNpdHk9ImNvbnRleHQtZmlsbC1vcGFjaXR5Ii8+PC9zdmc+") !important;
-}
-
-:is(#contentAreaContextMenu, #customization-footer, menupopup#placesContext, #downloadsContextMenu, #customizationPanelItemContextMenu)
-    menuitem[type="radio"][checked="true"]::before,
-menupopup[menu-api] menuitem[type="radio"][checked="true"]::before,
-:is(#PlacesToolbar, #places) menupopup menuitem[type="radio"][checked="true"]::before {
-    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTIgMmM1LjUxNCAwIDEwIDQuNDg2IDEwIDEwcy00LjQ4NiAxMC0xMCAxMC0xMC00LjQ4Ni0xMC0xMCA0LjQ4Ni0xMCAxMC0xMHptMC0yYy02LjYyNyAwLTEyIDUuMzczLTEyIDEyczUuMzczIDEyIDEyIDEyIDEyLTUuMzczIDEyLTEyLTUuMzczLTEyLTEyLTEyem0wIDZjLTMuMzEzIDAtNiAyLjY4Ny02IDZzMi42ODcgNiA2IDZjMy4zMTQgMCA2LTIuNjg3IDYtNnMtMi42ODYtNi02LTZ6IiBmaWxsPSJjb250ZXh0LWZpbGwiIGZpbGwtb3BhY2l0eT0iY29udGV4dC1maWxsLW9wYWNpdHkiLz48L3N2Zz4=") !important;
 }
 
 #context_openTabInWindow:not(.menuitem-iconic)::before,
@@ -734,16 +619,4 @@ menupopup[menu-api] menuitem[type="radio"][checked="true"]::before,
 
 #spell-dictionaries::before {
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M15.84 7.416c-.107-.305-.262-.567-.467-.787s-.455-.391-.75-.515-.63-.185-1.007-.185c-1.046 0-1.94.34-2.68 1.017l.283.496c.046.08.107.146.182.2a.449.449 0 00.27.082c.125 0 .24-.03.345-.088.104-.058.218-.124.342-.198a1.922 1.922 0 011.064-.285c.346 0 .611.103.793.31.182.208.273.527.273.957v.377c-.732.017-1.345.088-1.839.213s-.888.284-1.185.474c-.297.19-.51.404-.637.64a1.498 1.498 0 00-.192.718c0 .289.046.542.138.76.092.217.221.399.386.545.165.147.363.257.593.33.23.073.481.11.753.11.23 0 .44-.02.628-.057s.366-.094.533-.17c.167-.075.33-.168.486-.278.157-.111.317-.24.48-.386l.138.458c.042.134.105.222.188.266a.75.75 0 00.346.066H16V8.42a3.02 3.02 0 00-.16-1.004zm-1.352 3.408c-.113.117-.225.218-.336.304s-.226.158-.345.216c-.12.059-.246.103-.38.132s-.28.044-.439.044c-.26 0-.47-.059-.63-.176-.161-.117-.242-.311-.242-.583 0-.138.039-.266.116-.383s.208-.22.392-.307c.184-.088.428-.16.731-.217s.681-.095 1.133-.116v1.086zM3.564 3.413L0 12.486h1.311a.594.594 0 00.558-.383l.678-1.85h3.759l.678 1.85a.57.57 0 00.565.383h1.304L5.29 3.413H3.564zM2.98 9.06l1.105-3.005c.054-.138.11-.3.166-.483.056-.184.114-.383.173-.596a11.556 11.556 0 00.345 1.066L5.873 9.06H2.98z'/></svg>") !important;
-}
-
-#spell-check-enabled[checked]::before {
-    background-image: url(chrome://userchrome/content/check.svg);
-}
-
-#spell-check-enabled[checked="true"]::before {
-    background-image: url(chrome://userchrome/content/devtools/close.svg);
-}
-
-#spell-check-enabled .menu-iconic-left {
-    visibility: hidden !important;
 }

@@ -88,6 +88,50 @@ tooltip {
         hsla(var(--download-button-hue), 95%, 76.94%, 0.02) 73%,
         hsla(var(--download-button-hue), 90%, 73.94%, 0.015) 86.3%
     );
+    --purple-30: hsl(244, 100%, 70%) !important;
+    --purple-30-a50: hsla(240, 100%, 70%, 0.5) !important;
+    --purple-35: hsl(245, 100%, 65%) !important;
+    --purple-40: hsl(250, 100%, 60%) !important;
+    --purple-40-a10: hsla(250, 100%, 60%, 0.1) !important;
+    --purple-40-a30: hsla(250, 100%, 60%, 0.5) !important;
+    --purple-45: hsl(250, 90%, 55%) !important;
+    --purple-50: hsl(256, 100%, 50%) !important;
+    --purple-50-a30: hsla(256, 100%, 50%, 0.3) !important;
+    --purple-60: hsl(258, 100%, 40%) !important;
+    --purple-70: hsl(256, 100%, 30%) !important;
+    --purple-80: hsl(254, 100%, 20%) !important;
+    --in-parent-page-background: transparent;
+    --in-parent-page-color: var(--notification-menu-color);
+    --in-parent-box-background: var(--dialog-box-bgcolor);
+    --in-parent-box-background-dim: var(--dialog-box-bgcolor-dim);
+    --in-parent-box-border-color: var(--dialog-box-border-color);
+    --in-parent-button-background: var(--arrowpanel-dimmed);
+    --in-parent-button-background-hover: var(--arrowpanel-dimmed-further);
+    --in-parent-button-background-active: var(--arrowpanel-dimmed-even-further);
+    --in-parent-item-selected: var(--purple-40);
+    --in-parent-item-hover: var(--arrowpanel-dimmed);
+    --in-parent-border-highlight: var(--purple-40);
+    --in-parent-border-hover: var(--dialog-box-border-hover);
+    --in-parent-border-focus: var(--purple-40);
+    --in-parent-border-active: var(--purple-40);
+    --in-parent-border-active-shadow: var(--purple-40-a30);
+    --in-parent-category-outline-focus: 1px solid transparent;
+    --in-parent-link-color: var(--purple-35);
+    --in-parent-link-color-hover: var(--purple-30);
+    --in-parent-link-color-active: var(--purple-30);
+    --in-parent-primary-button-background: var(--purple-40);
+    --in-parent-primary-button-background-hover: var(--purple-35);
+    --in-parent-primary-button-background-active: var(--purple-30);
+    --in-parent-primary-button-text-color: var(--in-parent-page-color);
+    --checkbox-border-color: var(--in-parent-box-border-color) !important;
+    --checkbox-checked-border-color: transparent !important;
+    --checkbox-unchecked-bgcolor: var(--in-parent-button-background) !important;
+    --checkbox-unchecked-hover-bgcolor: var(--in-parent-button-background-hover) !important;
+    --checkbox-unchecked-active-bgcolor: var(--in-parent-button-background-active) !important;
+    --checkbox-checked-bgcolor: var(--in-parent-primary-button-background) !important;
+    --checkbox-checked-color: var(--in-parent-primary-button-text-color) !important;
+    --checkbox-checked-hover-bgcolor: var(--in-parent-primary-button-background-hover) !important;
+    --checkbox-checked-active-bgcolor: var(--in-parent-primary-button-background-active) !important;
 }
 
 #protections-popup {

@@ -521,6 +521,19 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlis
         --in-content-primary-button-background-hover: var(--purple-35) !important;
         --in-content-primary-button-background-active: var(--purple-30) !important;
         --in-content-primary-button-text-color: var(--in-content-page-color) !important;
+        --checkbox-border-color: var(--in-content-box-border-color) !important;
+        --checkbox-checked-border-color: transparent !important;
+        --checkbox-unchecked-bgcolor: var(--in-content-button-background) !important;
+        --checkbox-unchecked-hover-bgcolor: var(--in-content-button-background-hover) !important;
+        --checkbox-unchecked-active-bgcolor: var(--in-content-button-background-active) !important;
+        --checkbox-checked-bgcolor: var(--in-content-primary-button-background) !important;
+        --checkbox-checked-color: var(--in-content-primary-button-text-color) !important;
+        --checkbox-checked-hover-bgcolor: var(
+            --in-content-primary-button-background-hover
+        ) !important;
+        --checkbox-checked-active-bgcolor: var(
+            --in-content-primary-button-background-active
+        ) !important;
         --dropdown-bgcolor: var(--arrowpanel-background) !important;
     }
 
@@ -643,6 +656,19 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlis
         --in-content-primary-button-background-hover: var(--purple-35) !important;
         --in-content-primary-button-background-active: var(--purple-30) !important;
         --in-content-primary-button-text-color: var(--in-content-page-color) !important;
+        --checkbox-border-color: var(--in-content-box-border-color) !important;
+        --checkbox-checked-border-color: transparent !important;
+        --checkbox-unchecked-bgcolor: var(--in-content-button-background) !important;
+        --checkbox-unchecked-hover-bgcolor: var(--in-content-button-background-hover) !important;
+        --checkbox-unchecked-active-bgcolor: var(--in-content-button-background-active) !important;
+        --checkbox-checked-bgcolor: var(--in-content-primary-button-background) !important;
+        --checkbox-checked-color: var(--in-content-primary-button-text-color) !important;
+        --checkbox-checked-hover-bgcolor: var(
+            --in-content-primary-button-background-hover
+        ) !important;
+        --checkbox-checked-active-bgcolor: var(
+            --in-content-primary-button-background-active
+        ) !important;
         --dropdown-bgcolor: var(--arrowpanel-background) !important;
     }
 
@@ -689,10 +715,16 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlis
         padding-inline: 6px !important;
         margin-block: 0 !important;
         min-height: 24px !important;
+        box-sizing: border-box !important;
+        border-radius: var(--toolbarbutton-border-radius) !important;
     }
 
     menulist {
         padding-inline: 4px 2px !important;
+    }
+
+    richlistbox {
+        border-radius: var(--toolbarbutton-border-radius) !important;
     }
 
     tree {
