@@ -56,7 +56,8 @@
                 onCustomizeStart() {
                     let isOverflowing = cNavBar.getAttribute("overflowing");
                     if (!isOverflowing) unwrapAll(kids, cTarget);
-                    /* temporarily move the slider out of the way. we don't want to delete it since we only want to add listeners and observers once per window. the slider needs to be out of the customization target during customization, or else we get a tiny bug where dragging a widget ahead of the empty slider causes the widget to teleport to the end. */
+                    /* temporarily move the slider out of the way. we don't want to delete it since we only want to add listeners and observers once per window.
+                    the slider needs to be out of the customization target during customization, or else we get a tiny bug where dragging a widget ahead of the empty slider causes the widget to teleport to the end. */
                     bin.appendChild(outer);
                     outer.style.display = isOverflowing ? "none" : "-moz-box";
                 },
@@ -92,7 +93,10 @@
                         }
                         return;
                     }
-                    /* first makes sure that "this" refers to the window where the node was created, otherwise this would run multiple times per-window if you have more than one window open. second makes sure that the node being mutated is actually in the nav-bar, since there are other widget areas. third makes sure we're not in customize mode, since that involves a lot of dom changes and we want to basically pause this whole feature during customize mode. if all are true then we call pickUpOrphans to wrap any widgets that aren't already wrapped. */
+                    /* first makes sure that "this" refers to the window where the node was created, otherwise this would run multiple times per-window if you have more than one window open.
+                    second makes sure that the node being mutated is actually in the nav-bar, since there are other widget areas.
+                    third makes sure we're not in customize mode, since that involves a lot of dom changes and we want to basically pause this whole feature during customize mode.
+                    if all are true then we call pickUpOrphans to wrap any widgets that aren't already wrapped. */
                     if (
                         aNode.ownerGlobal === window &&
                         aContainer === cTarget &&
@@ -102,20 +106,36 @@
                     }
                 },
                 onWindowClosed(aWindow) {
-                    /* argument 2 of this expression detaches listener for window that got closed. but other windows still have listeners that hear about the closed window. if a window happens to be open to the "customize" page when the window closes, that window won't send an onCustomizeEnd event. so the slider containers in EVERY window would remain unwrapped after the window closes. so when a window closes, we need to check if the window that sent the closed event is in customization. if it is, then we need to call wrapAll in the windows that weren't closed. that's what the 3rd argument here is for. */
+                    /* argument 2 of this expression detaches listener for window that got closed. but other windows still have listeners that hear about the closed window.
+                    if a window happens to be open to the "customize" page when the window closes, that window won't send an onCustomizeEnd event.
+                    so the slider containers in EVERY window would remain unwrapped after the window closes.
+                    so when a window closes, we need to check if the window that sent the closed event is in customization.
+                    if it is, then we need to call wrapAll in the windows that weren't closed. that's what the 3rd argument here is for. */
                     aWindow === window
                         ? window.CustomizableUI.removeListener(cuiListen)
                         : aWindow.CustomizationHandler.isCustomizing() && wrapAll(domArray, inner);
                 },
             },
             cuiArray = async function () {
-                /* get all the widgets in the nav-bar, filter out any nullish/falsy items, then call the big boy filter. if the global context is a private browsing window, then it will filter out any extension widgets that aren't allowed in private browsing. this is important because every item in the array needs to have a corresponding DOM node for us to remember the DOM order and place widgets where they belong. if we leave an item in the array that has no DOM node, then insertBefore will put the widget before undefined, which means put it at the very end, which isn't always what we want. most importantly this returns anew every time it's called so it can update during the invocation of pickUpOrphans but also during the execution. using async since it's fewer characters than "return new Promise..." */
+                /* get all the widgets in the nav-bar, filter out any nullish/falsy items, then call the big boy filter.
+                if the global context is a private browsing window, then it will filter out any extension widgets that aren't allowed in private browsing.
+                this is important because every item in the array needs to have a corresponding DOM node for us to remember the DOM order and place widgets where they belong.
+                if we leave an item in the array that has no DOM node, then insertBefore will put the widget before undefined, which means put it at the very end, which isn't always what we want.
+                most importantly this returns anew every time it's called so it can update during the invocation of pickUpOrphans but also during the execution. */
                 return CustomizableUI.getWidgetsInArea("nav-bar")
                     .filter(Boolean)
                     .filter(filterWidgets);
             },
             opener = function (mus) {
-                /* mutation observer callback. we're listening for changes to the "open" attribute of children of inner (the inner container). when you click a toolbar button that has a popup, it opens the popup and sets the "open" attribute of the button to "true". if you were to scroll the slider container while the popup is open, the popup will move right along with its anchor, the button. this is a problem because some button popups are actually children of the button. meaning mousewheeling with the cursor over the popup would scroll the slider, not the popup. there are other ways to deal with this, but we don't want the slider to scroll at all when the popup is open. because firefox normally blocks scrolling when a menupopup is open. so let's just listen for button nodes having open="true" and set a property on the outer container accordingly. then we can use that prop to enable/disable scrolling. */
+                /* mutation observer callback. we're listening for changes to the "open" attribute of children of inner (the inner container).
+                when you click a toolbar button that has a popup, it opens the popup and sets the "open" attribute of the button to "true".
+                if you were to scroll the slider container while the popup is open, the popup will move right along with its anchor, the button.
+                this is a problem because some button popups are actually children of the button.
+                meaning mousewheeling with the cursor over the popup would scroll the slider, not the popup.
+                there are other ways to deal with this, but we don't want the slider to scroll at all when the popup is open.
+                because firefox normally blocks scrolling when a menupopup is open.
+                so let's just listen for button nodes having open="true" and set a property on the outer container accordingly.
+                then we can use that prop to enable/disable scrolling. */
                 for (let mu of mus) {
                     if (mu.type === "attributes") {
                         // if any button has open=true, set outer.open=true, else, outer.open=false.
@@ -126,13 +146,20 @@
                 }
             };
 
+        // allow the toolbar context menu to work correctly even though the toolbar buttons' parent is the slider, not the navbar customization target.
         window.sliderContextHandler = {
+            /**
+             * when the context menu is showing, we need to do things differently if it was called on a button inside the slider vs. a button outside of the slider.
+             * @param {object} e (event => "popupshowing")
+             * @returns (nothing)
+             */
             handleEvent(e) {
                 let popup = e.target;
                 let button = popup.triggerNode;
                 let moveToPanel = popup.querySelector(".customize-context-moveToPanel");
                 let removeFromToolbar = popup.querySelector(".customize-context-removeFromToolbar");
                 if (!moveToPanel || !removeFromToolbar) return;
+                // if the parent element is not the slider, then make the context menu work as normal and bail.
                 if (button.parentElement !== inner) {
                     moveToPanel.setAttribute(
                         "oncommand",
@@ -145,6 +172,7 @@
                     return;
                 }
 
+                // if a non-removable system button got into the slider somehow, then disable these commands
                 let movable = button && button.id && CustomizableUI.isWidgetRemovable(button);
                 if (movable) {
                     if (CustomizableUI.isSpecialWidget(button.id))
@@ -156,6 +184,7 @@
                     removeFromToolbar.setAttribute("disabled", true);
                 }
 
+                // override the commands
                 moveToPanel.setAttribute(
                     "oncommand",
                     "sliderContextHandler.addToPanel(document.popupNode, 'toolbar-context-menu')"
@@ -166,21 +195,37 @@
                 );
             },
 
-            async addToPanel(aNode, aReason) {
+            /**
+             * temporarily hide the button since CustomizableUI is slow. move the button out of the slider and onto the customization target.
+             * @param {object} aNode (the button by which the context menu was triggered)
+             */
+            onBeforeCommand(aNode) {
+                // if the node's already hidden, we don't want to interfere with any native methods.
                 if (!aNode.hidden) {
                     aNode.style.visibility = "collapse";
                     aNode.hidingBeforeRemoval = true;
                 }
-                cTarget.appendChild(aNode);
+                cTarget.appendChild(aNode); // the node must be moved to the customization target, since CustomizableUI expects widgets to be immediate children of a customization target.
+                // the slider itself can't be a customization target, since then a customization target would be a child of a customization target, which would immediately crash the browser.
+            },
+
+            /**
+             * "pin to overflow menu" => before calling the native method to move it to the overflow panel, hide it and move it to the customization target.
+             * @param {object} aNode (the button by which the context menu was triggered)
+             * @param {string} aReason (the ID for the context menu that sent the command)
+             */
+            async addToPanel(aNode, aReason) {
+                this.onBeforeCommand(aNode);
                 gCustomizeMode.addToPanel(aNode, aReason);
             },
 
+            /**
+             * "remove from toolbar" => same as above, but call the method to remove it instead.
+             * @param {object} aNode (the button by which the context menu was triggered)
+             * @param {string} aReason (the ID for the context menu that sent the command)
+             */
             async removeFromArea(aNode, aReason) {
-                if (!aNode.hidden) {
-                    aNode.style.visibility = "collapse";
-                    aNode.hidingBeforeRemoval = true;
-                }
-                cTarget.appendChild(aNode);
+                this.onBeforeCommand(aNode);
                 gCustomizeMode.removeFromArea(aNode, aReason);
             },
 
@@ -256,7 +301,10 @@
             appendLoop(buttons, container);
             // on first run put the inner container in the outer container
             if (first) outer.appendChild(container);
-            /* previousSibling = the first button's original previousSibling. in this case the urlbar. so we're inserting the container before the urlbar's next sibling, i.e. moving it to the original position of the first button. this way the container wraps the buttons "in place," wherever they happen to be. though for this reason, all the buttons you intend to collect should be consecutive, obviously. */
+            /* previousSibling = the first button's original previousSibling. in this case the urlbar.
+            so we're inserting the container before the urlbar's next sibling, i.e. moving it to the original position of the first button.
+            this way the container wraps the buttons "in place," wherever they happen to be.
+            though for this reason, all the buttons you intend to collect should be consecutive, obviously. */
             parent.insertBefore(outer, previousSibling.nextSibling);
         }
 
@@ -273,7 +321,10 @@
         async function pickUpOrphans(aNode) {
             let array = await cuiArray();
             for (let i = 0; i < array.length; i++) {
-                // check that the node which changed is in the customizable widgets list, since the ordering logic relies on the widgets list. we use forWindow(this) when selecting nodes from the widgets list, since each widget has an instance for every window it's visible in. with multiple windows open, array[0] will return an object with a property "instances" whose value is an array of objects, each of which has a node property referencing the DOM node we actually want. forWindow(this) is just a shortcut to get to the object corresponding to the context we're executing in.
+                /* check that the node which changed is in the customizable widgets list, since the ordering logic relies on the widgets list.
+                we use forWindow(this) when selecting nodes from the widgets list, since each widget has an instance for every window it's visible in.
+                with multiple windows open, array[0] will return an object with a property "instances" whose value is an array of objects, each of which has a node property referencing the DOM node we actually want.
+                forWindow(this) is just a shortcut to get to the object corresponding to the context we're executing in. */
                 if (array[i].id === aNode?.id) {
                     /* if the node that changed is the last item in the array, meaning it's *supposed* to be the last in order, then we can't use insertBefore() since there's nothing meant to be after it. we can't only use after() either since it won't work for the first node. so we check for its intended position... */
                     i + 1 === array?.length
@@ -297,22 +348,26 @@
         }
 
         /* like pickUpOrphans, but moves ALL nodes rather than only nodes which triggered onWidgetAfterDOMChange. we only use this once, after delayed startup.
-    its only job is to check that the order of DOM nodes in the slider container matches the order of widgets in CustomizableUI. and if not, reorder it so that it does match. */
+        its only job is to check that the order of DOM nodes in the slider container matches the order of widgets in CustomizableUI. and if not, reorder it so that it does match. */
         async function reOrder() {
             let array = await cuiArray();
             // for every valid item in the widgets list...
             for (let i = 0; i < array.length; i++) {
                 /* if the NODE's next sibling does not match the next WIDGET's node, then we need to move the node to where it belongs. basically the DOM order is supposed to match the widget array's order.
-            an instance of widget 1 has a property 'node', let's call it node 1. same for widget 2, call it node 2.
-            node 1's next sibling should be equal to node 2. if node 1's next sibling is actually node 5, then the DOM is out of order relative to the array.
-            so we check each widget's node's next sibling, and if it's not equal to the node of the next widget in the array, we insert the node before the next widget's node. */
+                an instance of widget 1 has a property 'node', let's call it node 1. same for widget 2, call it node 2.
+                node 1's next sibling should be equal to node 2. if node 1's next sibling is actually node 5, then the DOM is out of order relative to the array.
+                so we check each widget's node's next sibling, and if it's not equal to the node of the next widget in the array, we insert the node before the next widget's node. */
                 if (
                     array[i].forWindow(this).node.nextElementSibling !=
                     array[i + 1]?.forWindow(this).node
                 ) {
-                    /* if nextElementSibling returns null, then it's the last child of the slider. if that widget is the last in the array, then array[i+1] will return undefined. since null == undefined the if statement will still execute for the last widget.
-                but the following expression says to insert the node before the next widget's node. since there is no next widget, we're telling the engine to insert the node before undefined. which always results in inserting the node at the end. so it ends up where it should be anyway.
-                and this is faster than actually checking if it's the last node for every iteration of the loop. */
+                    /* if nextElementSibling returns null, then it's the last child of the slider.
+                    if that widget is the last in the array, then array[i+1] will return undefined.
+                    since null == undefined the if statement will still execute for the last widget.
+                    but the following expression says to insert the node before the next widget's node.
+                    since there is no next widget, we're telling the engine to insert the node before undefined.
+                    which always results in inserting the node at the end. so it ends up where it should be anyway.
+                    and this is faster than actually checking if it's the last node for every iteration of the loop. */
                     inner.insertBefore(
                         array[i].forWindow(this)?.node,
                         array[i + 1]?.forWindow(this).node
@@ -322,7 +377,7 @@
         }
 
         function setupScroll() {
-            // element.children does not return an array, so doesn't have the some() method. i think adding the prototype method is faster and fewer characters than making a new function.
+            // element.children does not return an array, so doesn't have the some() method.
             kids.some = Array.prototype.some;
             // begin observing for changes to the "open" attribute of the slider's toolbar buttons.
             observer.observe(inner, obsOps);
@@ -378,7 +433,7 @@
             // main wheel event callback
             outer.on_Wheel = function (event) {
                 /* this is what the mutation observer was for. when a toolbar button in the slider has its popup open, we set outer.open = true.
-        so if outer.open = true we don't want to scroll at all. in other words, if a popup for a button in the slider is open, don't do anything. */
+                so if outer.open = true we don't want to scroll at all. in other words, if a popup for a button in the slider is open, don't do anything. */
                 if (this.open) return;
                 let doScroll = false,
                     instant,
@@ -386,15 +441,16 @@
                     // check if the wheel event is mostly vertical (up/down) or mostly horizontal (left/right).
                     isVertical = Math.abs(event.deltaY) > Math.abs(event.deltaX),
                     /* if we're scrolling vertically, then use the deltaY as the general delta. if horizontal, then use deltaX instead.
-            you can use this to invert the vertical scrolling direction. just change event.deltaY to -event.deltaY.
-            the tabbrowser has this reversed, at least for english. but in this implementation, wheelDown scrolls right, and wheelUp scrolls left. */
+                    you can use this to invert the vertical scrolling direction. just change event.deltaY to -event.deltaY.
+                    the tabbrowser has this reversed, at least for english. but in this implementation, wheelDown scrolls right, and wheelUp scrolls left. */
                     delta = isVertical ? event.deltaY : event.deltaX;
 
                 /* if we're using a trackpad or ball or something that can scroll horizontally and vertically at the same time, we need some extra logic.
-        otherwise it can stutter like crazy. as you see in delta, we want to only use either the deltaY or the deltaX, never both.
-        but if you're scrolling diagonally, that could change very quickly from X to Y to X and so on. so we want to only call scrollBy if the scroll input is consistent in one direction.
-        that's what outer._prevMouseScrolls = [null, null] is for. we want to check that the last 2 scroll events were primarily vertical.
-        if they were, then we'll enable scrolling and set the scroll amount. */
+                otherwise it can stutter like crazy. as you see in delta, we want to only use either the deltaY or the deltaX, never both.
+                but if you're scrolling diagonally, that could change very quickly from X to Y to X and so on.
+                so we want to only call scrollBy if the scroll input is consistent in one direction.
+                that's what outer._prevMouseScrolls = [null, null] is for. we want to check that the last 2 scroll events were primarily vertical.
+                if they were, then we'll enable scrolling and set the scroll amount. */
                 if (this._prevMouseScrolls.every((prev) => prev == isVertical)) {
                     doScroll = true;
                     // check the delta mode to determine scrollAmount. depends on the device and settings. with a mousewheel it should usually use delta * lineScrollAmount
@@ -409,12 +465,13 @@
                 }
 
                 /* we need to constantly update those 2 values in _prevMouseScrolls so that it won't scroll vertically for sudden axis changes.
-        when an item gets added, it shoves the last item out of the array with shift(). so the array only ever has 2 values, the isVertical value of the latest 2 events.
-        so if i move the wheel horizontally once, then vertically once, this will be [true, false].
-        and it won't allow vertical scrolling, since the every() method above checks that every member of the array is equal to isVertical.
-        in other words, the last 2 scroll events need to be in the same direction or the events won't scroll the container.
-        if i move vertically once more, it will be [true, true] and THEN the above block will be allowed to set doScroll and scrollAmount.
-        if i move horizontally now, then it'll be [false, true] and vertical scrolling will be disabled again. */
+                when an item gets added, it shoves the last item out of the array with shift().
+                so the array only ever has 2 values, the isVertical value of the latest 2 events.
+                so if i move the wheel horizontally once, then vertically once, this will be [true, false].
+                and it won't allow vertical scrolling, since the every() method above checks that every member of the array is equal to isVertical.
+                in other words, the last 2 scroll events need to be in the same direction or the events won't scroll the container.
+                if i move vertically once more, it will be [true, true] and THEN the above block will be allowed to set doScroll and scrollAmount.
+                if i move horizontally now, then it'll be [false, true] and vertical scrolling will be disabled again. */
                 if (this._prevMouseScrolls.length > 1) {
                     this._prevMouseScrolls.shift(); // shift the last member out, before...
                 }
@@ -426,7 +483,7 @@
                         startPos = this.scrollLeft;
 
                     /* since we're using smooth scrolling, we check if the event is being sent while a scroll animation is already "playing."
-            this will avoid stuttering if scrolling quickly (or on a trackpad, methinks) */
+                    this will avoid stuttering if scrolling quickly (or on a trackpad, methinks) */
                     if (!this._isScrolling || this._direction != direction) {
                         this._destination = startPos + scrollAmount;
                         this._direction = direction;
@@ -448,7 +505,14 @@
             outer.addEventListener("scrollend", outer.on_Scrollend);
         }
 
-        // when you download a file in Firefox, a little gray arrow icon appears on the downloads toolbar button. this popup appears no matter where the downloads button is, as long as it's actually saved to a toolbar somewhere. it is anchored to the toolbar button itself, and for us the toolbar button's slider container is overflowing. so it's possible for the downloads button to be scrolled out of view, and still have the downloads animation appear. it will just be floating off over the urlbar or something, which looks pretty stupid. so we're overriding an internal function to give it some behavior it probably should have had anyway. now it will check that the toolbar button is actually scrolled into view relative to its parent before showing the popup. if the downloads button is scrolled out of view, then it'll just download the file without displaying the floating arrow.
+        /* when you download a file in Firefox, a little gray arrow icon appears on the downloads toolbar button.
+        this popup appears no matter where the downloads button is, as long as it's actually saved to a toolbar somewhere.
+        it is anchored to the toolbar button itself, and for us the toolbar button's slider container is overflowing.
+        so it's possible for the downloads button to be scrolled out of view, and still have the downloads animation appear.
+        it will just be floating off over the urlbar or something, which looks pretty stupid.
+        so we're overriding an internal function to give it some behavior it probably should have had anyway.
+        now it will check that the toolbar button is actually scrolled into view relative to its parent before showing the popup.
+        if the downloads button is scrolled out of view, then it'll just download the file without displaying the floating arrow. */
         function overflowDownloadsAnimation() {
             DownloadsIndicatorView.showEventNotification = function showEventNotification(aType) {
                 if (!this._initialized) {
@@ -482,13 +546,13 @@
 
         async function init() {
             prefHandler.initialSet();
-            // wait for nodes to be filtered. making an array from the DOM seems to be faster than using CustomizableUI's widgets list.
-            // idk how but i guess the CustomizableUI component loads stuff lazily...
-            // and probably the browser starts rebuilding the widget area from some kind of cache before the component has fully loaded?
-            // we use the widgets list very shortly afterwards in cleanUp() to verify and correct the DOM order though.
-            // speed matters here because it lets the browser wrap all the buttons in the overflowed slider before they're rendered...
-            // therefore we don't have to see like 30 toolbar buttons side-by-side for a split second before jarringly shrinking into just 11 buttons.
-            // so it's just an aesthetic decision i guess.
+            /* wait for nodes to be filtered. making an array from the DOM seems to be faster than using CustomizableUI's widgets list.
+            idk how but i guess the CustomizableUI component loads stuff lazily...
+            and probably the browser starts rebuilding the widget area from some kind of cache before the component has fully loaded?
+            we use the widgets list very shortly afterwards in cleanUp() to verify and correct the DOM order though.
+            speed matters here because it lets the browser wrap all the buttons in the overflowed slider before they're rendered...
+            therefore we don't have to see like 30 toolbar buttons side-by-side for a split second before jarringly shrinking into just 11 buttons.
+            so it's just an aesthetic decision i guess. */
             let array = await convertToArray(widgets);
             // first wrap call
             wrapAll(array, inner, true);
