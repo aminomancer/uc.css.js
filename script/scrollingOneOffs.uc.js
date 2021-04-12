@@ -6,7 +6,7 @@
 // ==/UserScript==
 
 (() => {
-    // if you ever delete this, uncomment the overflow-x rules under .urlbarView .search-one-offs in uc7.css
+    // if you ever delete this script and you use my theme, make sure .search-one-offs has overflow-x: hidden.
     function init() {
         let oneOffs = gURLBar.view.oneOffSearchButtons,
             container = oneOffs.container,
