@@ -102,20 +102,21 @@ menupopup {
     --toolbarbutton-icon-fill-opacity: 1 !important;
     --tab-min-height: 35px !important;
     --min-tab-height: 35px !important;
-    --context-margin-inline: -14px 0;
-    --context-padding-inline: 27px 0;
+    --space-above-tabbar: 0px;
+    --context-margin-inline: -14px 0px;
+    --context-padding-inline: 27px 0px;
     --menu-color: var(--ui-text-80) !important;
     --menupopup-background: var(--arrowpanel-background);
     --menu-background-color: var(--arrowpanel-background) !important;
-    --menupopup-margin: 0px 0 0 0;
-    --menupopup-child-margin-block-start: 0;
-    --menupopup-child-margin-inline-start: 0;
-    --menupopup-padding: 0;
-    --menupopup-inner-padding: 0;
+    --menupopup-margin: 0px;
+    --menupopup-child-margin-block-start: 0px;
+    --menupopup-child-margin-inline-start: 0px;
+    --menupopup-padding: 0px;
+    --menupopup-inner-padding: 0px;
     --context-checkbox-margin: 6px -5.5px;
     --context-iconic-special-margin: 4px -2px;
     --menupopup-border-radius: 3px;
-    --context-menuitem-border-radius: 0;
+    --context-menuitem-border-radius: 0px;
     --menu-right-bg: url(chrome://userchrome/content/old-menu-right.svg);
     --menu-right-img: none;
     --menu-right-margin: 2px;
@@ -162,18 +163,18 @@ toolbar {
         --panel-banner-item-hover-bgcolor: hsla(109.9, 90.9%, 47.3%, 0.15);
         --panel-banner-item-active-bgcolor: hsla(109.9, 90.9%, 47.3%, 0.2);
         --arrowpanel-menuitem-inline-margin: 4px;
-        --arrowpanel-menuitem-margin: 0 var(--arrowpanel-menuitem-inline-margin) !important;
+        --arrowpanel-menuitem-margin: 0px var(--arrowpanel-menuitem-inline-margin) !important;
         --arrowpanel-menuitem-padding: 6px !important;
         --panel-subview-body-padding-magnitude: var(--arrowpanel-menuitem-inline-margin);
         --panel-subview-body-padding: var(--panel-subview-body-padding-magnitude) 0 !important;
         --arrowpanel-menuitem-border-radius: 3px !important;
-        --proton-tab-radius: 0 !important;
-        --proton-tab-block-margin: 0 !important;
+        --proton-tab-radius: 0px !important;
+        --proton-tab-block-margin: 0px !important;
         --panel-description-color: hsl(235, 48%, 89%, 70%) !important;
         --panel-shortcut-color: hsl(235, 27%, 73%, 70%) !important;
         --panel-shortcut-focus: hsl(235, 32%, 75%, 90%) !important;
-        --proton-tab-inline-padding: 0 !important;
-        --tab-shadow-max-size: 0 !important;
+        --proton-tab-inline-padding: 0px !important;
+        --tab-shadow-max-size: 0px !important;
     }
 
     :root,
@@ -190,7 +191,7 @@ toolbar {
 
     #appMenu-multiView {
         --arrowpanel-menuitem-inline-margin: 6px;
-        --arrowpanel-menuitem-margin: 0 var(--arrowpanel-menuitem-inline-margin) !important;
+        --arrowpanel-menuitem-margin: 0px var(--arrowpanel-menuitem-inline-margin) !important;
         --arrowpanel-menuitem-padding: 8px !important;
         --panel-subview-body-padding-magnitude: var(--arrowpanel-menuitem-inline-margin);
         --panel-subview-body-padding: var(--panel-subview-body-padding-magnitude) 0 !important;
@@ -202,13 +203,13 @@ toolbar {
     menupopup {
         --menupopup-background: transparent;
         --menu-background-color: var(--arrowpanel-background) !important;
-        --menupopup-margin: 0;
+        --menupopup-margin: 0px;
         --menupopup-child-margin-block-start: -4px;
-        --menupopup-child-margin-inline-start: 0;
-        --menupopup-padding: 0;
+        --menupopup-child-margin-inline-start: 0px;
+        --menupopup-padding: 0px;
         --menupopup-inner-padding: 4px;
-        --context-padding-inline: 28px 0 !important;
-        --context-margin-inline: -16px 0 !important;
+        --context-padding-inline: 28px 0px !important;
+        --context-margin-inline: -16px 0px !important;
         --context-checkbox-margin: 6px -6px;
         --context-iconic-margin: 6px;
         --menupopup-shadow: none !important;

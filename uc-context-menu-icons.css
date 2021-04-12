@@ -73,7 +73,7 @@
 #context_moveToStart:not(.menuitem-iconic) .menu-text,
 #context_moveToEnd:not(.menuitem-iconic) .menu-text,
 #context_openTabInWindow:not(.menuitem-iconic) .menu-text,
-:is(#contentAreaContextMenu, #customization-footer, menupopup#placesContext, #downloadsContextMenu)
+:is(#contentAreaContextMenu, #customization-footer, menupopup#placesContext, #downloadsContextMenu, #customizationPanelItemContextMenu)
     menuitem:is([type="checkbox"], [type="radio"], [checked])
     .menu-iconic-text,
 menupopup[menu-api] menuitem:is([type="checkbox"], [type="radio"], [checked]) .menu-iconic-text,
@@ -197,7 +197,7 @@ menupopup[menu-api] menuitem:is([type="checkbox"], [type="radio"], [checked]) .m
     display: none !important;
 }
 
-:is(#contentAreaContextMenu, #customization-footer, menupopup#placesContext, #downloadsContextMenu)
+:is(#contentAreaContextMenu, #customization-footer, menupopup#placesContext, #downloadsContextMenu, #customizationPanelItemContextMenu)
     menuitem:is([type="checkbox"], [type="radio"])::before,
 menupopup[menu-api] menuitem:is([type="checkbox"], [type="radio"])::before,
 :is(#PlacesToolbar, #places) menupopup menuitem:is([type="checkbox"], [type="radio"])::before {
@@ -214,21 +214,21 @@ menupopup[menu-api] menuitem:is([type="checkbox"], [type="radio"])::before,
     background-repeat: no-repeat !important;
 }
 
-:is(#contentAreaContextMenu, #customization-footer, menupopup#placesContext, #downloadsContextMenu)
+:is(#contentAreaContextMenu, #customization-footer, menupopup#placesContext, #downloadsContextMenu, #customizationPanelItemContextMenu)
     menuitem[type="checkbox"]::before,
 menupopup[menu-api] menuitem[type="checkbox"]::before,
 :is(#PlacesToolbar, #places) menupopup menuitem[type="checkbox"]::before {
     background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNNSAyYy0xLjY1NCAwLTMgMS4zNDYtMyAzdjE0YzAgMS42NTQgMS4zNDYgMyAzIDNoMTRjMS42NTQgMCAzLTEuMzQ2IDMtM3YtMTRjMC0xLjY1NC0xLjM0Ni0zLTMtM2gtMTR6bTE5IDN2MTRjMCAyLjc2MS0yLjIzOCA1LTUgNWgtMTRjLTIuNzYyIDAtNS0yLjIzOS01LTV2LTE0YzAtMi43NjEgMi4yMzgtNSA1LTVoMTRjMi43NjIgMCA1IDIuMjM5IDUgNXoiIGZpbGw9ImNvbnRleHQtZmlsbCIgZmlsbC1vcGFjaXR5PSJjb250ZXh0LWZpbGwtb3BhY2l0eSIvPjwvc3ZnPg==") !important;
 }
 
-:is(#contentAreaContextMenu, #customization-footer, menupopup#placesContext, #downloadsContextMenu)
+:is(#contentAreaContextMenu, #customization-footer, menupopup#placesContext, #downloadsContextMenu, #customizationPanelItemContextMenu)
     menuitem[type="checkbox"][checked="true"]::before,
 menupopup[menu-api] menuitem[type="checkbox"][checked="true"]::before,
 :is(#PlacesToolbar, #places) menupopup menuitem[type="checkbox"][checked="true"]::before {
     background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTAuMDQxIDE3bC00LjUtNC4zMTkgMS4zOTUtMS40MzUgMy4wOCAyLjkzNyA3LjAyMS03LjE4MyAxLjQyMiAxLjQwOS04LjQxOCA4LjU5MXptLTUuMDQxLTE1Yy0xLjY1NCAwLTMgMS4zNDYtMyAzdjE0YzAgMS42NTQgMS4zNDYgMyAzIDNoMTRjMS42NTQgMCAzLTEuMzQ2IDMtM3YtMTRjMC0xLjY1NC0xLjM0Ni0zLTMtM2gtMTR6bTE5IDN2MTRjMCAyLjc2MS0yLjIzOCA1LTUgNWgtMTRjLTIuNzYyIDAtNS0yLjIzOS01LTV2LTE0YzAtMi43NjEgMi4yMzgtNSA1LTVoMTRjMi43NjIgMCA1IDIuMjM5IDUgNXoiIGZpbGw9ImNvbnRleHQtZmlsbCIgZmlsbC1vcGFjaXR5PSJjb250ZXh0LWZpbGwtb3BhY2l0eSIvPjwvc3ZnPg==") !important;
 }
 
-:is(#contentAreaContextMenu, #customization-footer, menupopup#placesContext, #downloadsContextMenu)
+:is(#contentAreaContextMenu, #customization-footer, menupopup#placesContext, #downloadsContextMenu, #customizationPanelItemContextMenu)
     menuitem:is([type="checkbox"], [type="radio"])
     .menu-iconic-left,
 menupopup[menu-api] menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-left,
@@ -240,14 +240,14 @@ menupopup[menu-api] menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-
     width: 25px !important;
 }
 
-:is(#contentAreaContextMenu, #customization-footer, menupopup#placesContext, #downloadsContextMenu)
+:is(#contentAreaContextMenu, #customization-footer, menupopup#placesContext, #downloadsContextMenu, #customizationPanelItemContextMenu)
     menuitem[type="radio"]::before,
 menupopup[menu-api] menuitem[type="radio"]::before,
 :is(#PlacesToolbar, #places) menupopup menuitem[type="radio"]::before {
     background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTIgMGMtNi42MjMgMC0xMiA1LjM3Ny0xMiAxMnM1LjM3NyAxMiAxMiAxMiAxMi01LjM3NyAxMi0xMi01LjM3Ny0xMi0xMi0xMnptMCAyMmMtNS41MTkgMC0xMC00LjQ4LTEwLTEwIDAtNS41MTkgNC40ODEtMTAgMTAtMTAgNS41MiAwIDEwIDQuNDgxIDEwIDEwIDAgNS41Mi00LjQ4IDEwLTEwIDEweiIgZmlsbD0iY29udGV4dC1maWxsIiBmaWxsLW9wYWNpdHk9ImNvbnRleHQtZmlsbC1vcGFjaXR5Ii8+PC9zdmc+") !important;
 }
 
-:is(#contentAreaContextMenu, #customization-footer, menupopup#placesContext, #downloadsContextMenu)
+:is(#contentAreaContextMenu, #customization-footer, menupopup#placesContext, #downloadsContextMenu, #customizationPanelItemContextMenu)
     menuitem[type="radio"][checked="true"]::before,
 menupopup[menu-api] menuitem[type="radio"][checked="true"]::before,
 :is(#PlacesToolbar, #places) menupopup menuitem[type="radio"][checked="true"]::before {

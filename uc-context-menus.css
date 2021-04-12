@@ -346,7 +346,7 @@ menupopup.in-menulist {
         display: -moz-box !important;
     }
 
-    :is(#contentAreaContextMenu, #customization-footer, menupopup[menu-api], menupopup#placesContext, #downloadsContextMenu)
+    :is(#contentAreaContextMenu, #customization-footer, menupopup[menu-api], menupopup#placesContext, #downloadsContextMenu, #customizationPanelItemContextMenu)
         menuitem:is([type="checkbox"], [type="radio"])
         .menu-iconic-left,
     :is(#PlacesToolbar, #places)

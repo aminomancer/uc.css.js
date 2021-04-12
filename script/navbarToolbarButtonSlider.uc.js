@@ -17,6 +17,7 @@
             cNavBar = document.getElementById("nav-bar"),
             cTarget = document.getElementById(cNavBar.getAttribute("customizationtarget")),
             cOverflow = document.getElementById(cNavBar.getAttribute("overflowtarget")),
+            toolbarContextMenu = document.getElementById("toolbar-context-menu"),
             urlbar = document.getElementById("urlbar-container"),
             bin = document.getElementById("mainPopupSet"),
             widgets = cTarget.children,
@@ -83,8 +84,14 @@
                     }
                 },
                 onWidgetAfterDOMChange(aNode, aNextNode, aContainer, aWasRemoval) {
-                    // if the dom change was the removal of a toolbar button node, do nothing.
-                    if (aWasRemoval) return;
+                    // if the dom change was the removal of a toolbar button node, do nothing, unless we hid it before removal via context menu.
+                    if (aWasRemoval) {
+                        if (aNode.hidingBeforeRemoval) {
+                            aNode.style.removeProperty("visibility");
+                            aNode.hidingBeforeRemoval = false;
+                        }
+                        return;
+                    }
                     /* first makes sure that "this" refers to the window where the node was created, otherwise this would run multiple times per-window if you have more than one window open. second makes sure that the node being mutated is actually in the nav-bar, since there are other widget areas. third makes sure we're not in customize mode, since that involves a lot of dom changes and we want to basically pause this whole feature during customize mode. if all are true then we call pickUpOrphans to wrap any widgets that aren't already wrapped. */
                     if (
                         aNode.ownerGlobal === window &&
@@ -118,6 +125,69 @@
                     }
                 }
             };
+
+        window.sliderContextHandler = {
+            handleEvent(e) {
+                let popup = e.target;
+                let button = popup.triggerNode;
+                let moveToPanel = popup.querySelector(".customize-context-moveToPanel");
+                let removeFromToolbar = popup.querySelector(".customize-context-removeFromToolbar");
+                if (!moveToPanel || !removeFromToolbar) return;
+                if (button.parentElement !== inner) {
+                    moveToPanel.setAttribute(
+                        "oncommand",
+                        "gCustomizeMode.addToPanel(document.popupNode, 'toolbar-context-menu')"
+                    );
+                    removeFromToolbar.setAttribute(
+                        "oncommand",
+                        "gCustomizeMode.removeFromArea(document.popupNode, 'toolbar-context-menu')"
+                    );
+                    return;
+                }
+
+                let movable = button && button.id && CustomizableUI.isWidgetRemovable(button);
+                if (movable) {
+                    if (CustomizableUI.isSpecialWidget(button.id))
+                        moveToPanel.setAttribute("disabled", true);
+                    else moveToPanel.removeAttribute("disabled");
+                    removeFromToolbar.removeAttribute("disabled");
+                } else {
+                    moveToPanel.setAttribute("disabled", true);
+                    removeFromToolbar.setAttribute("disabled", true);
+                }
+
+                moveToPanel.setAttribute(
+                    "oncommand",
+                    "sliderContextHandler.addToPanel(document.popupNode, 'toolbar-context-menu')"
+                );
+                removeFromToolbar.setAttribute(
+                    "oncommand",
+                    "sliderContextHandler.removeFromArea(document.popupNode, 'toolbar-context-menu')"
+                );
+            },
+
+            async addToPanel(aNode, aReason) {
+                if (!aNode.hidden) {
+                    aNode.style.visibility = "collapse";
+                    aNode.hidingBeforeRemoval = true;
+                }
+                cTarget.appendChild(aNode);
+                gCustomizeMode.addToPanel(aNode, aReason);
+            },
+
+            async removeFromArea(aNode, aReason) {
+                if (!aNode.hidden) {
+                    aNode.style.visibility = "collapse";
+                    aNode.hidingBeforeRemoval = true;
+                }
+                cTarget.appendChild(aNode);
+                gCustomizeMode.removeFromArea(aNode, aReason);
+            },
+
+            attachListener() {
+                toolbarContextMenu.addEventListener("popupshowing", this, false);
+            },
+        };
 
         const observer = new MutationObserver(opener),
             obsOps = {
@@ -424,6 +494,7 @@
             wrapAll(array, inner, true);
             setupScroll();
             prefHandler.attachListeners();
+            sliderContextHandler.attachListener();
             cleanUp();
             overflowDownloadsAnimation();
         }
