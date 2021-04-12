@@ -98,7 +98,7 @@ menu.subviewbutton:not([disabled="true"])[_moz-menuactive="true"]:active {
     box-shadow: none !important;
 }
 
-menupopup:not(.PanelUI-subView)
+menupopup
     menuitem:is([type="checkbox"], [type="radio"], [checked])
     :is(.menu-text, .menu-iconic-text) {
     display: -moz-inline-box !important;
@@ -106,17 +106,18 @@ menupopup:not(.PanelUI-subView)
     padding-inline: var(--context-padding-inline) !important;
 }
 
-menupopup:not(.PanelUI-subView) menuitem:is([type="checkbox"], [type="radio"])::before {
+menupopup menuitem:is([type="checkbox"], [type="radio"])::before {
     position: relative;
     display: -moz-inline-box;
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
     margin-inline: var(--context-checkbox-margin);
     fill: currentColor;
     -moz-context-properties: fill, fill-opacity, stroke;
     content: "";
     background-position: center;
     background-repeat: no-repeat;
+    background-size: contain;
     border: 1px solid var(--checkbox-border-color);
     background-color: var(--checkbox-unchecked-bgcolor);
     color: var(--in-parent-primary-button-text-color);
