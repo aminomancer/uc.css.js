@@ -75,17 +75,7 @@ menupopup::part(drop-indicator) {
 }
 
 /* padding for proton context menus */
-menupopup:not(.PanelUI-subView)::part(arrowscrollbox) {
-    padding: var(--menupopup-inner-padding) !important;
-}
-
-@-moz-document url-prefix("chrome://devtools/content/")
-{
-    menupopup::part(arrowscrollbox) {
-        padding: var(--menupopup-inner-padding) !important;
-    }
-}
-
+menupopup::part(arrowscrollbox),
 #ContentSelectDropdown > menupopup::part(arrowscrollbox) {
     padding: var(--menupopup-inner-padding) !important;
 }
@@ -446,13 +436,17 @@ menupopup:not(.PanelUI-subView)::part(arrowscrollbox) {
     animation-timing-function: steps(31);
 }
 
-#back-button {
+#back-button,
+.unified-nav-back[_moz-menuactive]:-moz-locale-dir(ltr),
+.unified-nav-forward[_moz-menuactive]:-moz-locale-dir(rtl) {
     list-style-image: url(chrome://userchrome/content/skin/back.svg);
 }
 
 #forward-button,
 #urlbar-go-button,
-.search-go-button {
+.search-go-button,
+.unified-nav-forward[_moz-menuactive]:-moz-locale-dir(ltr),
+.unified-nav-back[_moz-menuactive]:-moz-locale-dir(rtl) {
     list-style-image: url(chrome://userchrome/content/skin/forward.svg);
 }
 
