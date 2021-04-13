@@ -80,6 +80,11 @@ menupopup::part(arrowscrollbox),
     padding: var(--menupopup-inner-padding) !important;
 }
 
+#BMB_bookmarksPopup::part(arrowscrollbox),
+#BMB_bookmarksPopup menupopup[placespopup="true"]::part(arrowscrollbox) {
+	padding-inline: 0 !important;
+}
+
 /* hide tab bar's arrow buttons and spacers */
 #tabbrowser-arrowscrollbox::part(scrollbutton-up),
 #tabbrowser-arrowscrollbox::part(scrollbutton-down),

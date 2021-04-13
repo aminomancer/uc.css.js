@@ -521,7 +521,7 @@
     }
 
     #BMB_bookmarksPopup :is(menu, menuitem) {
-        margin: 0 !important;
+        margin: var(--arrowpanel-menuitem-margin) !important;
         min-height: 24px !important;
         padding: var(--arrowpanel-menuitem-padding) !important;
         border-radius: var(--arrowpanel-menuitem-border-radius) !important;

@@ -388,8 +388,7 @@
 #urlbar[breakout][breakout-extend] > #urlbar-input-container,
 #urlbar-input-container {
     height: var(--urlbar-height) !important;
-    padding-block: 0px !important;
-    padding-inline: 0px !important;
+    padding: 0px !important;
     border-radius: var(--toolbarbutton-border-radius);
 }
 

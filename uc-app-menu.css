@@ -142,73 +142,117 @@
     display: none !important;
 }
 
-#PanelUI-menu-button[badge-status^="update"] > .toolbarbutton-badge-stack > .toolbarbutton-badge {
-    background: var(--update-badge-bg)
-        url("data:image/svg+xml;utf8,<svg fill='context-fill' fill-opacity='context-fill-opacity' stroke='context-stroke' version='1.1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 5'><path d='M7.707 3.293l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L4 2.414l2.293 2.293a.997.997 0 001.414 0 1 1 0 000-1.414z'/></svg>")
-        no-repeat center !important;
-    fill: transparent !important;
-    background-size: 72% !important;
-    -moz-context-properties: fill !important;
-    padding: 0 !important;
-}
-
-#PanelUI-menu-button[badge-status^="addon"] > .toolbarbutton-badge-stack > .toolbarbutton-badge,
-#PanelUI-menu-button[badge-status^="extension"]
-    > .toolbarbutton-badge-stack
-    > .toolbarbutton-badge {
-    display: none !important;
-    background: var(--update-badge-bg)
-        url(chrome://userchrome/content/skin/addon-install-installed.svg) !important;
-    background-color: transparent !important;
-    background-size: 100% !important;
-    background-repeat: no-repeat !important;
-    background-position: 50% 50% !important;
-    box-shadow: none !important;
-    width: 11.5px !important;
-    min-width: 0px !important;
-    height: 12px !important;
-    margin: -6px 0 0 !important;
-    margin-inline-end: -5px !important;
-    stroke: transparent !important;
-    fill: currentColor !important;
-    -moz-context-properties: fill, stroke !important;
-}
-
-#PanelUI-menu-button[badge-status^="update"]:is(:hover, [open])
-    > .toolbarbutton-badge-stack
-    > .toolbarbutton-badge {
-    fill: var(--update-badge-color) !important;
-}
-
 .panel-banner-item[notificationid^="update"]::after {
-    background: var(--update-badge-bg)
-        url("data:image/svg+xml;utf8,<svg fill='context-fill' fill-opacity='context-fill-opacity' stroke='context-stroke' version='1.1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 5'><path d='M7.707 3.293l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L4 2.414l2.293 2.293a.997.997 0 001.414 0 1 1 0 000-1.414z'/></svg>")
-        no-repeat center !important;
-    fill: var(--update-badge-color) !important;
-    background-size: 72% !important;
-    background-position: 45% 50% !important;
+    display: none !important;
+}
+
+.panel-banner-item[notificationid^="update"] > .toolbarbutton-icon {
+    background: hsl(125, 81%, 57%) url(chrome://userchrome/content/update-icon-inverted.svg) no-repeat
+        center/contain !important;
+    border: 1px solid transparent;
+    fill: hsl(118, 89%, 24%) !important;
+    width: 16px !important;
+    height: 16px !important;
+    margin-block: 1px !important;
     -moz-context-properties: fill !important;
     padding: 0 !important;
 }
 
-#PanelUI-menu-button[badge-status]
-    > .toolbarbutton-badge-stack
-    > .toolbarbutton-badge:-moz-window-inactive {
-    filter: brightness(0.65) sepia(1) hue-rotate(185deg) !important;
+.panel-banner-item[notificationid="update-available"] > .toolbarbutton-icon,
+.panel-banner-item[notificationid="update-downloading"] > .toolbarbutton-icon {
+    transform: scaleY(-1);
+}
+
+.panel-banner-item[notificationid="update-restart"] > .toolbarbutton-icon {
+    background: hsl(125, 81%, 57%)
+        url(chrome://userchrome/content/check.svg) no-repeat center/contain !important;
+    fill: hsl(118, 89%, 24%) !important;
+    transform: none !important;
+}
+
+.panel-banner-item[notificationid="update-unsupported"] > .toolbarbutton-icon {
+    background: hsl(32, 52%, 35%)
+        url(chrome://userchrome/content/check-partial.svg) no-repeat center/contain !important;
+    fill: hsl(44, 95%, 60%) !important;
+    transform: none !important;
+}
+
+#PanelUI-menu-button[badge-status] .toolbarbutton-badge {
+    filter: none !important;
 }
 
 #PanelUI-menu-button[badge-status^="update"]
-    > .toolbarbutton-badge-stack
-    > .toolbarbutton-badge:-moz-window-inactive {
-    /*     filter: brightness(0.65) sepia(1) hue-rotate(185deg) !important; */
-    filter: none !important;
-    background-color: var(--update-badge-inactive) !important;
+> .toolbarbutton-badge-stack
+> .toolbarbutton-badge {
+    background: hsl(125, 81%, 57%) url(chrome://userchrome/content/update-icon-inverted.svg) no-repeat
+        center/contain !important;
+    fill: hsl(118, 89%, 24%) !important;
+    -moz-context-properties: fill !important;
+    padding: 0 !important;
+}
+
+#PanelUI-menu-button[badge-status^="update"]
+> .toolbarbutton-badge-stack
+> .toolbarbutton-badge:-moz-window-inactive {
+    fill: transparent !important;
+    background-color: hsl(227, 19%, 48%) !important;
 }
 
 #PanelUI-menu-button[badge-status^="update"]:is(:hover, [open])
-    > .toolbarbutton-badge-stack
-    > .toolbarbutton-badge:-moz-window-inactive {
-    background-color: var(--update-badge-bg) !important;
+> .toolbarbutton-badge-stack
+> .toolbarbutton-badge:-moz-window-inactive {
+    background-color: hsl(125, 81%, 57%) !important;
+    fill: hsl(118, 89%, 24%) !important;
+}
+
+#PanelUI-menu-button[badge-status^="update"][open] {
+    list-style-image: url(chrome://userchrome/content/skin/menu.svg) !important;
+}
+
+#PanelUI-menu-button[badge-status^="update"][open]
+> .toolbarbutton-badge-stack
+> .toolbarbutton-badge {
+    visibility: collapse;
+}
+
+#PanelUI-menu-button[badge-status="fxa-needs-authentication"] > .toolbarbutton-badge-stack > .toolbarbutton-badge {
+    background: url(chrome://userchrome/content/skin/controlcenter/warning.svg) no-repeat center/contain !important;
+    stroke: hsl(32, 52%, 35%) !important;
+    fill: hsl(44, 95%, 60%) !important;
+    -moz-context-properties: fill, stroke !important;
+    margin: -7px 0 0 !important;
+    margin-inline-end: -6px !important;
+}
+
+#PanelUI-menu-button[badge-status="addon-alert"] > .toolbarbutton-badge-stack > .toolbarbutton-badge {
+    background: url(chrome://userchrome/content/material/extension.svg) no-repeat center/contain !important;
+    stroke: hsl(32, 52%, 35%) !important;
+    fill: hsl(44, 95%, 60%) !important;
+    -moz-context-properties: fill, stroke !important;
+    margin: -8px 0 0 !important;
+    margin-inline-end: -6px !important;
+}
+
+#PanelUI-menu-button[badge-status="addon-alert"] {
+    list-style-image: url(chrome://userchrome/content/skin/menu-badged.svg) !important;
+}
+
+#PanelUI-menu-button[badge-status="addon-alert"]:not(:hover, [open])
+> .toolbarbutton-badge-stack
+> .toolbarbutton-badge:-moz-window-inactive {
+    fill: hsl(227, 19%, 48%) !important;
+}
+
+#PanelUI-menu-button[badge-status="fxa-needs-authentication"]:not(:hover, [open])
+> .toolbarbutton-badge-stack
+> .toolbarbutton-badge:-moz-window-inactive {
+    fill: hsl(227, 19%, 48%) !important;
+    stroke: transparent !important;
+}
+
+#PanelUI-menu-button[badge-status="extension-new-tab"] > .toolbarbutton-badge-stack > .toolbarbutton-badge,
+#PanelUI-menu-button[badge-status="download-success"] > .toolbarbutton-badge-stack > .toolbarbutton-badge {
+    display: none;
 }
 
 @supports (-moz-bool-pref("browser.proton.enabled")) {
@@ -450,12 +494,11 @@
     }
 
     .panel-banner-item {
-        padding-block: calc(var(--arrowpanel-menuitem-padding) + 2px) !important;
+        padding: calc(var(--arrowpanel-menuitem-padding) + 2px) var(--arrowpanel-menuitem-padding) !important;
         margin: var(--arrowpanel-menuitem-margin) !important;
     }
 
     #appMenu-proton-update-banner {
-        padding-block: calc(var(--arrowpanel-menuitem-padding) + 2px) !important;
         margin: var(--arrowpanel-menuitem-margin) !important;
         margin-bottom: 4px !important;
         --panel-banner-item-color: black;
@@ -479,82 +522,12 @@
         opacity: 0.7 !important;
     }
 
-    .panel-banner-item {
-        padding-inline: var(--arrowpanel-menuitem-padding) !important;
-    }
-
     .addon-banner-item > .toolbarbutton-icon,
     .panel-banner-item > .toolbarbutton-icon {
         -moz-box-ordinal-group: 0 !important;
     }
 
-    .panel-banner-item[notificationid^="update"]::after {
-        display: none !important;
-    }
-
     .panel-banner-item[notificationid^="update"] > .toolbarbutton-text {
         line-height: 18px !important;
-    }
-
-    .panel-banner-item[notificationid^="update"] > .toolbarbutton-icon {
-        background: hsl(118, 89%, 24%) url(chrome://userchrome/content/update-icon.svg) no-repeat
-            center/contain !important;
-        fill: hsl(125, 81%, 57%) !important;
-        width: 16px !important;
-        height: 16px !important;
-        margin-block: 1px !important;
-        -moz-context-properties: fill !important;
-        padding: 0 !important;
-    }
-
-    .panel-banner-item[notificationid="update-available"] > .toolbarbutton-icon,
-    .panel-banner-item[notificationid="update-downloading"] > .toolbarbutton-icon {
-        transform: scaleY(-1);
-    }
-
-    .panel-banner-item[notificationid="update-restart"] > .toolbarbutton-icon {
-        background: hsl(125, 81%, 57%)
-            url(chrome://userchrome/content/notifications/popup-subitem.svg) no-repeat 0 1px/18px !important;
-        fill: hsl(118, 89%, 24%) !important;
-        transform: none !important;
-    }
-
-    .panel-banner-item[notificationid="update-unsupported"] > .toolbarbutton-icon {
-        fill: hsl(44, 95%, 60%) !important;
-        background-color: hsl(32, 52%, 35%) !important;
-    }
-
-    #PanelUI-menu-button[badge-status^="update"]
-        > .toolbarbutton-badge-stack
-        > .toolbarbutton-badge {
-        background-size: contain !important;
-        background-position: center !important;
-        background-image: url(chrome://userchrome/content/devtools/error.svg) !important;
-        fill: hsl(125, 81%, 57%) !important;
-        background-color: hsl(118, 89%, 24%) !important;
-        -moz-context-properties: fill !important;
-        padding: 0 !important;
-    }
-
-    #PanelUI-menu-button[badge-status^="update"]:is(:hover, [open])
-        > .toolbarbutton-badge-stack
-        > .toolbarbutton-badge {
-        background-image: url(chrome://userchrome/content/devtools/error.svg) !important;
-        fill: hsl(125, 81%, 57%) !important;
-        background-color: hsl(118, 89%, 24%) !important;
-    }
-
-    #PanelUI-menu-button[badge-status^="update"]
-        > .toolbarbutton-badge-stack
-        > .toolbarbutton-badge:-moz-window-inactive {
-        fill: hsl(227, 19%, 48%) !important;
-        background-color: hsl(227, 19%, 48%) !important;
-    }
-
-    #PanelUI-menu-button[badge-status^="update"]:is(:hover, [open])
-        > .toolbarbutton-badge-stack
-        > .toolbarbutton-badge:-moz-window-inactive {
-        background-color: hsl(118, 89%, 24%) !important;
-        fill: hsl(125, 81%, 57%) !important;
     }
 }

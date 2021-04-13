@@ -174,7 +174,7 @@
 }
 
 #page-action-buttons {
-    margin-inline-end: 2px !important;
+    margin-inline-end: calc(var(--urlbar-container-padding) + 1px) !important;
 }
 
 #urlbar-zoom-button {
