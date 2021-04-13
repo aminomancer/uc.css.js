@@ -23,10 +23,8 @@ For best results, set density mode to `Normal` and theme to `Dark` in the custom
 | browser.proton.contextmenus.enabled 	| Boolean 	| true 	| The stylesheets have fallback options if these prefs are disabled. But the fallback styles are not regularly updated. So I strongly recommend enabling all of the proton prefs 	|
 | browser.proton.doorhangers.enabled 	| Boolean 	| true 	|  	|
 | browser.proton.enabled 	| Boolean 	| true 	|  	|
-| browser.proton.infobars.enabled 	| Boolean 	| true 	|  	|
 | browser.proton.modals.enabled 	| Boolean 	| true 	|  	|
 | browser.proton.places-tooltip.enabled 	| Boolean 	| true 	|  	|
-| browser.proton.urlbar.enabled 	| Boolean 	| true 	|  	|
 | browser.startup.blankWindow 	| Boolean 	| false 	| These two settings eliminate the blank white window during startup 	|
 | browser.startup.preXulSkeletonUI 	| Boolean 	| false 	|  	|
 | browser.tabs.tabMinWidth 	| Number 	| 90 	| User preference, but mine is 90 	|

@@ -40,7 +40,7 @@ menupopup {
     --desaturate-hover-background: hsla(236, 60%, 83%, 0.17) !important;
     --desaturate-active-background: hsla(236, 60%, 83%, 0.22) !important;
     --desaturate-checked-background: hsla(236, 60%, 83%, 0.13) !important;
-    /* --button-bgcolor: var(--arrowpanel-dimmed) !important; */
+    /* --button-bgcolor: var(--arrowpanel-faint) !important; */
     --button-hover-bgcolor: var(--arrowpanel-dimmed) !important;
     --button-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
     --urlbar-input-bgcolor: hsla(233, 24%, 26%, 1) !important;
@@ -83,6 +83,9 @@ menupopup {
     --urlbarView-bgcolor: hsla(233, 38%, 9%, 0.8) !important;
     --ui-textbox-bgcolor: hsl(233, 24%, 28%) !important;
     --ui-textbox-focus-bgcolor: hsl(232, 22%, 34%) !important;
+    --ui-solid-button-bgcolor: var(--ui-textbox-bgcolor) !important;
+    --ui-solid-button-hover-bgcolor: hsl(232, 24%, 34%) !important;
+    --ui-solid-button-active-bgcolor: hsl(232, 23%, 37%) !important;
     --ebmp-hover-bgcolor: hsl(233, 24%, 33%) !important;
     --ebmp-focus-bgcolor: hsl(233, 24%, 38%) !important;
     --urlbar-popup-url-color: hsl(251, 100%, 64%) !important;
@@ -141,7 +144,7 @@ toolbar {
     --tab-loading-fill: var(--lwt-toolbarbutton-icon-fill-attention) !important;
 }
 
-@supports (-moz-bool-pref("browser.proton.enabled")) {
+@media (-moz-proton) {
     :root,
     menupopup {
         --panelview-toolbarbutton-hover-bgcolor: var(--arrowpanel-dimmed) !important;
@@ -187,7 +190,7 @@ toolbar {
     }
 }
 
-@supports (-moz-bool-pref("browser.proton.contextmenus.enabled")) {
+@media (-moz-proton-contextmenus) {
     :root,
     menupopup {
         --menupopup-background: transparent;

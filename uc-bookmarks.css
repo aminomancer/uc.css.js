@@ -532,7 +532,7 @@
     }
 }
 
-@supports (-moz-bool-pref("browser.proton.enabled")) {
+@media (-moz-proton) {
     /* #BMB_bookmarksPopup menupopup[placespopup="true"] {
         padding-top: 0 !important;
     } */

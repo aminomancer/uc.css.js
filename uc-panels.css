@@ -8,17 +8,14 @@
 }
 
 #identity-popup[type="arrow"][side="top"],
-#identity-popup[type="arrow"][side="bottom"] {
-	margin-inline: -20px !important;
-}
-
+#identity-popup[type="arrow"][side="bottom"],
 #permission-popup[type="arrow"][side="top"],
 #permission-popup[type="arrow"][side="bottom"],
 #protections-popup[type="arrow"][side="top"],
 #protections-popup[type="arrow"][side="bottom"],
 #notification-popup[type="arrow"][side="top"],
 #notification-popup[type="arrow"][side="bottom"] {
-	margin-inline: -21px !important;
+	margin-inline: -20.4px !important;
 }
 
 #downloadsPanel,
@@ -26,15 +23,17 @@
 #appMenu-popup,
 #customizationui-widget-panel,
 #protections-popup {
-  margin-top: -6px !important;
+  margin-top: -7px !important;
 }
 
-#notification-popup {
-    margin-top: 0 !important;
+#notification-popup,
+#identity-popup,
+#permission-popup {
+    margin-top: -1px !important;
 }
 
 panel[type="arrow"][side="top"] {
-    margin-top: -6px;
+    margin-top: -7px;
 }
 
 #confirmation-hint {
@@ -42,7 +41,7 @@ panel[type="arrow"][side="top"] {
 }
 
 #BMB_bookmarksPopup {
-  margin-top: -11px !important;
+  margin-top: -12px !important;
 }
 
 #customization-panelWrapper > .panel-arrowbox > .panel-arrow[side="top"] {
@@ -248,6 +247,37 @@ popupnotification .popup-notification-checkbox:hover .checkbox-check[checked]:no
 .popup-subitem {
     margin-inline-start: 27px !important;
     margin-top: 1px;
+}
+
+.permission-popup-permission-remove-button {
+    appearance: none;
+    margin: 0;
+    margin-inline-start: 2px;
+    border-width: 0;
+    min-width: 0;
+    padding: 2px;
+    background-color: var(--ui-solid-button-bgcolor) !important;
+    color: inherit !important;
+    opacity: 1 !important;
+    outline: none !important;
+    box-shadow: none !important;
+    border-radius: var(--context-menuitem-border-radius) !important;
+}
+
+.permission-popup-permission-remove-button > .button-box > .button-icon {
+    margin-inline-end: 3px !important;
+}
+
+.permission-popup-permission-remove-button:is(:hover, :focus-visible) {
+    background-color: var(--ui-solid-button-hover-bgcolor) !important;
+}
+
+.permission-popup-permission-remove-button:is(:hover, :focus-visible):active {
+    background-color: var(--ui-solid-button-active-bgcolor) !important;
+}
+
+.permission-popup-permission-item > .popup-subitem {
+    fill-opacity: 0.8 !important;
 }
 
 #addon-webext-permissions-notification {
@@ -740,7 +770,7 @@ popupnotification .popup-notification-checkbox:hover .checkbox-check[checked]:no
     display: none;
 }
 
-@supports -moz-bool-pref("browser.proton.contextmenus.enabled") {
+@media (-moz-proton-contextmenus) {
     .menu-right {
         margin-inline-end: 0 !important;
     }

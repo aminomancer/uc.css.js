@@ -270,6 +270,8 @@ menupopup.in-menulist {
         color: inherit !important;
         fill: currentColor !important;
         border: none !important;
+        outline: none !important;
+        box-shadow: none !important;
         border-radius: var(--context-menuitem-border-radius) !important;
     }
 
@@ -288,7 +290,7 @@ menupopup.in-menulist {
 }
 
 /* proton */
-@supports (-moz-bool-pref("browser.proton.contextmenus.enabled")) {
+@media (-moz-proton-contextmenus) {
     menupopup {
         padding: var(--menupopup-padding) !important;
         background-color: transparent !important;
@@ -409,7 +411,7 @@ menupopup.in-menulist {
 }
 
 /* proton disabled */
-@supports not -moz-bool-pref("browser.proton.contextmenus.enabled") {
+@media not (-moz-proton-contextmenus) {
     menupopup:not(.PanelUI-subView) menuseparator {
         /* appearance: none !important;
         max-height: 1px !important;

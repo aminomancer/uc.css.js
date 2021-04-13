@@ -736,7 +736,7 @@
     }
 }
 
-@supports (-moz-bool-pref("browser.proton.enabled")) {
+@media (-moz-proton) {
     .tabbrowser-tab {
         --tab-label-mask-size: 2em !important;
     }

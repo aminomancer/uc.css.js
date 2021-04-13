@@ -255,7 +255,7 @@
     display: none;
 }
 
-@supports (-moz-bool-pref("browser.proton.enabled")) {
+@media (-moz-proton) {
     #appMenu-multiView
         :is(.toolbarbutton-1, toolbarbutton.subviewbutton, .navigable.subviewbutton):not([disabled], [open]):focus,
     .widget-overflow-list .toolbarbutton-1:not([disabled], [open]):focus,

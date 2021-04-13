@@ -501,7 +501,7 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
     display: none;
 }
 
-@supports (-moz-bool-pref("browser.proton.contextmenus.enabled")) {
+@media (-moz-proton-contextmenus) {
     #ContentSelectDropdown,
     menupopup.in-menulist {
         --menupopup-child-margin-block-start: -4px;
@@ -612,7 +612,7 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
 }
 
 /* proton disabled */
-@supports not -moz-bool-pref("browser.proton.contextmenus.enabled") {
+@media not (-moz-proton-contextmenus) {
     #ContentSelectDropdown > menupopup menuseparator,
     menupopup.in-menulist menuseparator {
         visibility: hidden !important;
@@ -731,6 +731,9 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
         --urlbarView-bgcolor: hsla(233, 38%, 9%, 0.8) !important;
         --ui-textbox-bgcolor: hsl(233, 24%, 28%) !important;
         --ui-textbox-focus-bgcolor: hsl(232, 22%, 34%) !important;
+        --ui-solid-button-bgcolor: var(--ui-textbox-bgcolor) !important;
+        --ui-solid-button-hover-bgcolor: hsl(232, 24%, 34%) !important;
+        --ui-solid-button-active-bgcolor: hsl(232, 23%, 37%) !important;
         --ebmp-hover-bgcolor: hsl(233, 24%, 33%) !important;
         --ebmp-focus-bgcolor: hsl(233, 24%, 38%) !important;
         --urlbar-popup-url-color: hsl(251, 100%, 64%) !important;
@@ -762,7 +765,7 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
         --buttons-secondary-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
     }
 
-    @supports (-moz-bool-pref("browser.proton.enabled")) {
+    @media (-moz-proton) {
         :root,
         menupopup {
             --panelview-toolbarbutton-hover-bgcolor: var(--arrowpanel-dimmed) !important;
@@ -807,7 +810,7 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
         }
     }
 
-    @supports (-moz-bool-pref("browser.proton.contextmenus.enabled")) {
+    @media (-moz-proton-contextmenus) {
         :root,
         menupopup {
             --menupopup-background: transparent;
@@ -1065,7 +1068,7 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
         margin-top: 4px;
     }
 
-    @supports (-moz-bool-pref("browser.proton.contextmenus.enabled")) {
+    @media (-moz-proton-contextmenus) {
         menupopup {
             padding: var(--menupopup-padding) !important;
             background-color: transparent !important;
@@ -1137,7 +1140,7 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
     }
 
     /* proton disabled */
-    @supports not -moz-bool-pref("browser.proton.contextmenus.enabled") {
+    @media not (-moz-proton-contextmenus) {
         menuseparator {
             visibility: hidden !important;
             display: none !important;
@@ -1387,7 +1390,7 @@ img.transparent {
         background-color: var(--arrowpanel-background) !important;
     }
 
-    @supports (-moz-bool-pref("browser.proton.contextmenus.enabled")) {
+    @media (-moz-proton-contextmenus) {
         :root {
             --arrowpanel-menuitem-border-radius: 3px;
             --context-menuitem-border-radius: var(--arrowpanel-menuitem-border-radius);

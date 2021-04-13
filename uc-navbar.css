@@ -250,7 +250,7 @@ toolbar .toolbarbutton-1:not([disabled])[checked]:hover > .toolbarbutton-icon {
 }
 
 /* proton notifications */
-@supports (-moz-bool-pref("browser.proton.infobars.enabled")) {
+@media (-moz-proton) {
     #navigator-toolbox > :is(legacy-stack, .notificationbox-stack),
     #navigator-toolbox > named-deck > :is(legacy-stack, .notificationbox-stack),
     #navigator-toolbox > named-deck {
