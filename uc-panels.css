@@ -15,7 +15,7 @@
 #protections-popup[type="arrow"][side="bottom"],
 #notification-popup[type="arrow"][side="top"],
 #notification-popup[type="arrow"][side="bottom"] {
-	margin-inline: -20.4px !important;
+    margin-inline: -20.4px !important;
 }
 
 #downloadsPanel,
@@ -23,7 +23,7 @@
 #appMenu-popup,
 #customizationui-widget-panel,
 #protections-popup {
-  margin-top: -7px !important;
+    margin-top: -7px !important;
 }
 
 #notification-popup,
@@ -41,7 +41,7 @@ panel[type="arrow"][side="top"] {
 }
 
 #BMB_bookmarksPopup {
-  margin-top: -12px !important;
+    margin-top: -12px !important;
 }
 
 #customization-panelWrapper > .panel-arrowbox > .panel-arrow[side="top"] {
@@ -321,24 +321,28 @@ popupnotification .popup-notification-checkbox:hover .checkbox-check[checked]:no
 .identity-popup-security-connection {
     background-position: 2em 40% !important;
     background-size: 18px auto !important;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path d='M12.5 6.984h-.484L4 15h8.5a1.5 1.5 0 001.5-1.5V8.484a1.5 1.5 0 00-1.5-1.5zm-6.5 0V5a2 2 0 014 0v1l1.892-1.892A4 4 0 004 5v1.984h-.5a1.5 1.5 0 00-1.5 1.5V13.5a1.483 1.483 0 00.07.43l6.946-6.946z' fill='context-fill' fill-opacity='context-fill-opacity'/><path d='M2 15a1 1 0 01-.707-1.707l12-12a1 1 0 011.414 1.414l-12 12A1 1 0 012 15z' fill='%23ff0039'/></svg>") !important;
+    background-image: url(chrome://userchrome/content/connection-mixed-active-loaded.svg) !important;
 }
 
-#identity-popup[connection=chrome] .identity-popup-security-connection {
+#identity-popup[connection="chrome"] .identity-popup-security-connection {
     background-image: url(chrome://branding/content/about-logo.png) !important;
 }
 
-#identity-popup[connection=file] .identity-popup-security-connection {
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M14.12 3.71L11.29.88A3 3 0 009.17 0H4a3 3 0 00-3 3v10a3 3 0 003 3h8a3 3 0 003-3V5.83a3 3 0 00-.88-2.12zM12.59 5H10V2.41zM12 14H4a1 1 0 01-1-1V3a1 1 0 011-1h5v3a1 1 0 001 1h3v7a1 1 0 01-1 1z'/></svg>") !important;
+#identity-popup[connection="file"] .identity-popup-security-connection {
+    background-image: url(chrome://userchrome/content/document.svg) !important;
 }
 
-#identity-popup[connection^=secure] .identity-popup-security-connection {
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M12 7h1a1 1 0 011 1v6a1 1 0 01-1 1H3a1 1 0 01-1-1V8a1 1 0 011-1h1V5c0-2.208 1.793-4 4-4 2.208 0 4 1.795 4 4v2zm-2 0V5c0-1.101-.898-2-2-2-1.103 0-2 .897-2 2v2h4z'/></svg>") !important;
+#identity-popup[connection^="secure"] .identity-popup-security-connection {
+    background-image: url(chrome://userchrome/content/skin/connection-secure.svg) !important;
     -moz-context-properties: fill;
 }
 
-#identity-popup[connection="extension"] #identity-popup-mainView > #identity-popup-security > .identity-popup-security-content > .identity-popup-security-connection {
-    background-image: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' x='0' y='0' width='16' height='16' fill='context-fill' fill-opacity='context-fill-opacity'><path d='M7 2.1H3.7c-.9 0-1.6.7-1.6 1.6V7C.9 7 0 7.9 0 9s.9 2.1 2.1 2.1v3.3c0 .9.7 1.6 1.6 1.6h3.1c0-2.2 1.8-2.5 2.2-2.5s2.2.2 2.2 2.5h3.1c.9 0 1.6-.7 1.6-1.6v-3.1c-2.2 0-2.5-1.8-2.5-2.2 0-.4.2-2.2 2.5-2.2V3.7c0-.9-.7-1.6-1.6-1.6H11C11.1.9 10.2 0 9 0S7 .9 7 2.1z'/></svg>") !important;
+#identity-popup[connection="extension"]
+    #identity-popup-mainView
+    > #identity-popup-security
+    > .identity-popup-security-content
+    > .identity-popup-security-connection {
+    background-image: url(chrome://userchrome/content/material/extension.svg) !important;
     background-position: calc(2em - 1px) 30% !important;
     background-size: 17px auto !important;
     fill: currentColor !important;
@@ -638,12 +642,12 @@ popupnotification .popup-notification-checkbox:hover .checkbox-check[checked]:no
 #downloadsListBox > .download-state > .downloadButton .button-box .button-icon {
     width: 22px !important;
     height: auto !important;
-    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M17.3 9.4h10.4v-.2c0-1.5-.9-2.6-2-2.6h-5.8v-.3c0-.6-1.5-2-2.8-2H4.9v7h8.5c3 0 3.9-1.9 3.9-1.9zM29 13c0-.6-.6-1.1-1.5-1.7h-9s-1.5 2.4-3.7 2.4H5.4C3 13.7 3 15.9 3 15.9l1.1 9.7c0 1.5.9 2.4 2.4 2.4h19.1c1.5 0 2.4-.9 2.4-2.4l1-11.9V13z'/></svg>") !important;
+    list-style-image: url(chrome://userchrome/content/places/downloads-folder.svg) !important;
 }
 
 /* overflow menu */
 #widget-overflow-mainView .panel-subview-body {
-	padding-bottom: 0 !important;
+    padding-bottom: 0 !important;
 }
 
 /* grid overflow menu (i don't have an overflow menu at all thanks to the toolbar button slider script. but just in case) */

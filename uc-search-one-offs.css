@@ -308,8 +308,12 @@ toolbarpaletteitem > #urlbar-container :is(#page-action-buttons, #search-one-off
     display: -moz-box;
 }
 
-#nav-bar[overflowing="true"] #urlbar[textoverflow]:is([usertyping], [searchmode], [open][pageproxystate="invalid"]) #urlbar-input,
-#nav-bar[overflowing="true"] #urlbar:is([usertyping], [searchmode], [open][pageproxystate="invalid"]) #urlbar-input {
+#nav-bar[overflowing="true"]
+    #urlbar[textoverflow]:is([usertyping], [searchmode], [open][pageproxystate="invalid"])
+    #urlbar-input,
+#nav-bar[overflowing="true"]
+    #urlbar:is([usertyping], [searchmode], [open][pageproxystate="invalid"])
+    #urlbar-input {
     margin-right: unset !important;
 }
 

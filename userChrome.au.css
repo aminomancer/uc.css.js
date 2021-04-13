@@ -82,7 +82,7 @@ menupopup::part(arrowscrollbox),
 
 #BMB_bookmarksPopup::part(arrowscrollbox),
 #BMB_bookmarksPopup menupopup[placespopup="true"]::part(arrowscrollbox) {
-	padding-inline: 0 !important;
+    padding-inline: 0 !important;
 }
 
 /* hide tab bar's arrow buttons and spacers */

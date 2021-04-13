@@ -120,11 +120,13 @@
 }
 
 .urlbarView-row[type="dynamic"][dynamicType="calculator"] .urlbarView-dynamic-calculator-action {
-	color: var(--urlbar-popup-action-color);
+    color: var(--urlbar-popup-action-color);
 }
 
-.urlbarView-row[type="dynamic"][dynamicType="calculator"] .urlbarView-row-inner[selected] .urlbarView-dynamic-calculator-action {
-	color: inherit;
+.urlbarView-row[type="dynamic"][dynamicType="calculator"]
+    .urlbarView-row-inner[selected]
+    .urlbarView-dynamic-calculator-action {
+    color: inherit;
 }
 
 .urlbarView[actionoverride]
@@ -306,13 +308,16 @@
 }
 
 .urlbarView-row[sponsored] > .urlbarView-row-inner > .urlbarView-no-wrap > .urlbarView-action {
-	color: var(--panel-shortcut-color) !important;
-	opacity: 1 !important;
+    color: var(--panel-shortcut-color) !important;
+    opacity: 1 !important;
 }
 
-.urlbarView-row[sponsored] > .urlbarView-row-inner[selected] > .urlbarView-no-wrap > .urlbarView-action {
-	color: var(--lwt-toolbar-field-color) !important;
-	opacity: 1 !important;
+.urlbarView-row[sponsored]
+    > .urlbarView-row-inner[selected]
+    > .urlbarView-no-wrap
+    > .urlbarView-action {
+    color: var(--lwt-toolbar-field-color) !important;
+    opacity: 1 !important;
 }
 
 .urlbarView-action[slide-in] {

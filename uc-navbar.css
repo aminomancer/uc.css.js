@@ -47,7 +47,9 @@ toolbar .toolbaritem-combined-buttons.chromeclass-toolbar-additional {
 toolbar :not(toolbarpaletteitem) > .toolbaritem-combined-buttons.chromeclass-toolbar-additional {
     margin-inline: 0 !important;
     max-height: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
-    margin-block: calc((var(--urlbar-container-height) - calc(2 * var(--toolbarbutton-inner-padding) + 16px)) / 2);
+    margin-block: calc(
+        (var(--urlbar-container-height) - calc(2 * var(--toolbarbutton-inner-padding) + 16px)) / 2
+    );
 }
 
 toolbar .toolbaritem-combined-buttons.chromeclass-toolbar-additional:not(:hover) > separator {
@@ -60,7 +62,7 @@ toolbar .toolbaritem-combined-buttons.chromeclass-toolbar-additional:not(:hover)
     background-position: center;
     background-repeat: no-repeat;
     background-size: 1px 20px !important;
-    opacity: .2;
+    opacity: 0.2;
 }
 
 toolbar .toolbarbutton-combined-buttons-dropmarker {
@@ -101,7 +103,10 @@ toolbar #zoom-controls > #zoom-reset-button {
     min-height: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
 }
 
-toolbar #zoom-controls > #zoom-reset-button:not([disabled]):is(:hover, :focus) > .toolbarbutton-text {
+toolbar
+    #zoom-controls
+    > #zoom-reset-button:not([disabled]):is(:hover, :focus)
+    > .toolbarbutton-text {
     border-color: transparent;
 }
 

@@ -6,7 +6,7 @@
 }
 
 #urlbar-container {
-	margin-inline: 3px !important;
+    margin-inline: 3px !important;
     padding-block: calc((var(--urlbar-container-height) - var(--urlbar-height)) / 2) !important;
 }
 
@@ -72,9 +72,12 @@
     fill: var(--panel-description-color) !important;
 }
 
-#PopupSearchAutoComplete .search-panel-tree > .autocomplete-richlistitem:is([originaltype="datalist-first"], [originaltype="null"]) > .ac-type-icon {
-	list-style-image: url(chrome://userchrome/content/search-glass.svg);
-	fill-opacity: 0.6;
+#PopupSearchAutoComplete
+    .search-panel-tree
+    > .autocomplete-richlistitem:is([originaltype="datalist-first"], [originaltype="null"])
+    > .ac-type-icon {
+    list-style-image: url(chrome://userchrome/content/search-glass.svg);
+    fill-opacity: 0.6;
 }
 
 #PopupSearchAutoComplete .search-panel-current-engine {
