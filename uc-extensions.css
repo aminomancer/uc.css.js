@@ -151,7 +151,7 @@
     .menu-iconic-left::before {
     width: 16px !important;
     height: 16px !important;
-    margin-inline: 4px 1px !important;
+    margin-inline: 4.5px 0.5px !important;
     fill: currentColor !important;
     display: -moz-inline-box !important;
     position: relative !important;

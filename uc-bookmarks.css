@@ -542,11 +542,11 @@
     }
 
     #BMB_bookmarksPopup .subviewbutton:not(.menuitem-iconic) .menu-text {
-        padding-inline-start: 21px !important;
+        padding-inline-start: 22px !important;
     }
 
     #BMB_bookmarksPopup .subviewbutton > .menu-iconic-left {
-        margin-inline-end: 5px !important;
+        margin-inline-end: 6px !important;
     }
 
     #BMB_bookmarksShowAllTop {
@@ -572,7 +572,7 @@
         width: 16px !important;
         height: 16px !important;
         padding-inline: 0 !important;
-        margin-inline: 0 3px !important;
+        margin-inline: 0 4px !important;
         fill: currentColor !important;
         background-image: url(chrome://userchrome/content/skin/library.svg) !important;
         transform: scaleX(-1);

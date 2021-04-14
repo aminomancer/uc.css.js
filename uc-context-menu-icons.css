@@ -266,7 +266,7 @@ menupopup
     width: 16px !important;
     height: 16px !important;
     padding-inline: 0px !important;
-    margin-inline: 6px -6px !important;
+    margin-inline: 5px -6px !important;
     fill: currentColor !important;
     -moz-context-properties: fill, fill-opacity, stroke !important;
     background-position: center !important;
@@ -459,14 +459,6 @@ menupopup
 
 :is(#context-openlinkincontainertab, #context-openlinkinusercontext-menu):not(.menuitem-iconic)::before {
     background-image: url("data:image/svg+xml;utf8,<svg height='16' width='16' xmlns='http://www.w3.org/2000/svg'><g fill='context-fill' fill-opacity='context-fill-opacity'><rect height='6' rx='1' width='6' x='1' y='1'/><path d='M15 3v2H9V3z'/><path d='M11 1h2v6h-2z'/><rect height='6' rx='1' width='6' x='1' y='9'/><rect height='6' rx='1' width='6' x='9' y='9'/></g></svg>") !important;
-}
-
-#allTabsMenu-containerTabsButton {
-    list-style-image: url("data:image/svg+xml;utf8,<svg height='16' width='16' xmlns='http://www.w3.org/2000/svg'><g fill='context-fill' fill-opacity='context-fill-opacity'><rect height='6' rx='1' width='6' x='1' y='1'/><path d='M15 3v2H9V3z'/><path d='M11 1h2v6h-2z'/><rect height='6' rx='1' width='6' x='1' y='9'/><rect height='6' rx='1' width='6' x='9' y='9'/></g></svg>");
-}
-
-#allTabsMenu-containerTabsButton .toolbarbutton-text {
-    padding-inline-start: 8px;
 }
 
 :is(#context-openframe, #context-openlink):not(.menuitem-iconic)::before {

@@ -106,7 +106,8 @@ menupopup {
     --menupopup-child-margin-inline-start: 0px;
     --menupopup-padding: 0px;
     --menupopup-inner-padding: 0px;
-    --context-checkbox-margin: 7px -5px;
+    --context-checkbox-margin: 6px -4.5px;
+    --context-iconic-margin: 5px 6px;
     --context-iconic-special-margin: 4px -2px;
     --menupopup-border-radius: 3px;
     --context-menuitem-border-radius: 0px;
@@ -203,7 +204,6 @@ toolbar {
         --menupopup-inner-padding: 4px;
         --context-padding-inline: 28px 0px !important;
         --context-margin-inline: -16px 0px !important;
-        --context-iconic-margin: 6px;
         --menupopup-shadow: none !important;
         --menupopup-border-radius: 5px !important;
         --context-menuitem-border-radius: var(--arrowpanel-menuitem-border-radius);
