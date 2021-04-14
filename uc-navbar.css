@@ -18,26 +18,42 @@ toolbarspring {
 
 /* toolbar button badges */
 :is(#nav-bar-customization-target, #widget-overflow)
-    toolbarbutton:not([attention="warning"])
+    :is(toolbarbutton, toolbaritem):not([attention])
     .toolbarbutton-badge {
-    background-color: var(--badge-color-dark) !important;
-    color: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
-    box-shadow: 0 1px 2px hsla(0, 0%, 100%, 0.1) inset, 0 -1px 2px hsla(0, 0%, 0%, 0.2) inset,
-        0 1px 1px hsla(240, 3%, 12%, 0.15), 0 1px 3px hsla(240, 3%, 12%, 0.2) !important;
-    padding-top: 1px !important;
-    font-size: xx-small !important;
-    line-height: 8.4px !important;
-    min-width: 0px !important;
-    justify-self: right !important;
-    margin-right: -6.4px !important;
-    margin-top: -5.5px !important;
+    background-color: var(--badge-color-light) !important;
+    color: var(--toolbar-color, currentColor) !important;
+    box-shadow: 0 1px 1px -1px hsla(0, 0%, 100%, 0.3) inset,
+        0 -1px 1px -1px hsla(0, 0%, 0%, 0.5) inset, 0 1px 1px hsla(240, 3%, 12%, 0.15),
+        0 1px 3px hsla(240, 3%, 12%, 0.2) !important;
+    min-width: 11px !important;
+    height: 11px !important;
+    vertical-align: center !important;
+    font-size: 9px !important;
+    font-weight: 600 !important;
+    line-height: 10px !important;
+    filter: none !important;
 }
 
-:is(#nav-bar-customization-target, #widget-overflow)
-    toolbarbutton[attention="warning"]
-    .toolbarbutton-badge {
-    margin-right: -4.4px !important;
-    margin-top: -4px !important;
+#downloads-button[attention] .toolbarbutton-badge {
+    margin-right: -5.5px !important;
+    margin-top: -5.5px !important;
+    width: 10px !important;
+    height: 10px !important;
+    box-shadow: none !important;
+    background-image: url(chrome://userchrome/content/devtools/error.svg) !important;
+    background-size: contain !important;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#downloads-button[attention="warning"] .toolbarbutton-badge {
+    fill: hsl(44, 95%, 60%) !important;
+    background-color: hsl(32, 52%, 35%) !important;
+}
+
+#downloads-button[attention="severe"] .toolbarbutton-badge {
+    fill: hsl(358, 86%, 63%) !important;
+    background-color: hsl(354, 69%, 30%) !important;
 }
 
 toolbar .toolbaritem-combined-buttons.chromeclass-toolbar-additional {

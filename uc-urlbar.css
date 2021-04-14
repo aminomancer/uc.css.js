@@ -143,6 +143,10 @@
     padding-inline: 6.5px !important;
 }
 
+.urlbar-page-action {
+    filter: none !important;
+}
+
 #page-action-buttons > :not([hidden], toolbartabstop) ~ #pageActionSeparator {
     visibility: collapse !important;
     margin-left: 4px !important;

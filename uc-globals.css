@@ -42,6 +42,7 @@ tooltip {
     --ui-text-80: rgba(255, 255, 255, 0.8);
     --context-menu-disabled-color: hsla(213, 43%, 89%, 0.5);
     --badge-color-dark: hsl(236, 13%, 42%);
+    --badge-color-light: var(--lwt-toolbarbutton-icon-fill-attention);
     /* --tab-hover: linear-gradient(0deg, hsl(231, 42%, 15%), hsl(233, 61%, 8%));
     --tab-pinned: linear-gradient(0deg, hsl(231, 50%, 11%), hsl(232, 70%, 6%));
     --tab-multi: linear-gradient(0deg, hsl(231, 42%, 15%), hsl(232, 70%, 6%)); */

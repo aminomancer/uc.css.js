@@ -28,6 +28,10 @@
     fill-opacity: 1 !important;
 }
 
+#page-action-buttons > #pageAction-urlbar-gitzip-firefox-addons_gitzip_org {
+    display: none !important;
+}
+
 #panorama-tab-groups_example_com-browser-action .toolbarbutton-icon {
     filter: brightness(1) grayscale(1000) contrast(1.5) !important;
 }

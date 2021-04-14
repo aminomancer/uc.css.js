@@ -651,7 +651,7 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
         --lwt-accent-color: hsl(233, 61%, 8%) !important;
         --lwt-text-color: hsl(213, 43%, 89%) !important;
         --lwt-toolbar-field-background-color: hsla(233, 25%, 28%, 85%) !important;
-        --lwt-toolbar-field-color: hsl(0, 0%, 100%) !important;
+        --lwt-toolbar-field-color: hsl(240, 60%, 99%);
         --lwt-toolbar-field-focus: hsla(233, 25%, 28%, 85%) !important;
         --lwt-toolbar-field-focus-color: rgb(255, 255, 255) !important;
         --toolbar-bgcolor: hsl(231, 42%, 15%) !important;

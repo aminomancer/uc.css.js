@@ -212,8 +212,10 @@ menupopup::part(arrowscrollbox),
 }
 
 .findbar-container {
-    padding-block: 4px;
-    padding-inline: 8px;
+    padding-block: 0;
+    padding-inline: 8px 4px;
+    margin-inline: 0;
+    height: 20px;
 }
 
 .findbar-find-previous,

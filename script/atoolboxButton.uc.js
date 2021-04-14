@@ -29,6 +29,10 @@ const toolboxButtonL10n = {
                     id: "toolbox-button",
                     type: "custom",
                     defaultArea: CustomizableUI.AREA_NAVBAR,
+                    label: toolboxButtonL10n.buttonLabel,
+                    removable: true,
+                    overflows: true,
+                    tooltiptext: toolboxButtonL10n.buttonTooltip,
                     onBuild: function (aDoc) {
                         let CustomHint = {
                             _timerID: null,
@@ -156,12 +160,51 @@ const toolboxButtonL10n = {
                                 }
                             },
                         };
+
+                        let toolbarbutton = aDoc.createXULElement("toolbarbutton"),
+                            badgeStack = aDoc.createXULElement("stack"),
+                            icon = aDoc.createXULElement("image"),
+                            label = aDoc.createXULElement("label"),
+                            badgeLabel = aDoc.createElement("label");
+                        for (const [key, val] of Object.entries({
+                            class: "toolbarbutton-1 chromeclass-toolbar-additional",
+                            badged: true,
+                            label: toolboxButtonL10n.buttonLabel,
+                            id: "toolbox-button",
+                            role: "button",
+                            removable: true,
+                            overflows: true,
+                            tooltiptext: toolboxButtonL10n.buttonTooltip,
+                            style: "-moz-box-align: center;",
+                        }))
+                            toolbarbutton.setAttribute(key, val);
+
+                        let noAutoHideURL = `chrome://userchrome/content/devtools/command-noautohide.svg`;
+                        let toolboxURL = `chrome://userchrome/content/skin/toolbox.svg`;
+
+                        toolbarbutton.appendChild(badgeStack);
+                        badgeStack.after(label);
+                        badgeStack.appendChild(icon);
+                        icon.after(badgeLabel);
+                        badgeStack.setAttribute("class", "toolbarbutton-badge-stack");
+                        icon.setAttribute("class", "toolbarbutton-icon");
+                        icon.setAttribute("label", toolboxButtonL10n.buttonLabel);
+                        icon.src = toolboxURL;
+                        icon.style.cssText = `height: 16px; width: 16px; transition: fill 50ms ease-in-out 0s;`;
+                        badgeLabel.setAttribute("class", "toolbarbutton-badge");
+                        badgeStack.style.MozBoxPack = "center";
+                        for (const [key, val] of Object.entries({
+                            class: "toolbarbutton-text",
+                            crop: "right",
+                            value: toolboxButtonL10n.buttonLabel,
+                            flex: "1",
+                        }))
+                            label.setAttribute(key, val);
+
                         let prefSvc = Services.prefs,
+                            obSvc = Services.obs,
                             autoHide = "ui.popup.disable_autohide",
-                            toolbarbutton = aDoc.createXULElement("toolbaritem"),
-                            animBox = document.createXULElement("box"),
-                            icon = document.createXULElement("image"),
-                            label = document.createXULElement("label"),
+                            animOptions = { duration: 300, iterations: 1, easing: "ease-in-out" },
                             keyframes = {
                                 transform: [
                                     "scale(100%)",
@@ -172,11 +215,10 @@ const toolboxButtonL10n = {
                                     "scale(100%)",
                                 ],
                                 offset: [0, 0.05, 0.1, 0.2, 0.4, 1],
-                            },
-                            animOptions = { duration: 300, iterations: 1, easing: "ease-in-out" },
-                            noAutoHideURL = `chrome://userchrome/content/devtools/command-noautohide.svg`,
-                            toolboxURL = `chrome://userchrome/content/skin/toolbox.svg`;
+                            };
+
                         toolbarbutton.onclick = (e) => {
+                            if (e.getModifierState("Accel")) return;
                             switch (e.button) {
                                 case 0:
                                     e.preventDefault(),
@@ -217,14 +259,7 @@ const toolboxButtonL10n = {
                                     break;
                             }
                         };
-                        let attr = {
-                            id: "toolbox-button",
-                            role: "button",
-                            class: "toolbarbutton-1 chromeclass-toolbar-additional",
-                            label: toolboxButtonL10n.buttonLabel,
-                            tooltiptext: toolboxButtonL10n.buttonTooltip,
-                            style: "-moz-box-align: center;",
-                        };
+
                         function getPref(root, pref, type) {
                             switch (type) {
                                 case root.PREF_BOOL:
@@ -237,6 +272,7 @@ const toolboxButtonL10n = {
                                     return null;
                             }
                         }
+
                         function prefObserver(sub, _top, pref) {
                             try {
                                 let type = sub.getPrefType(pref);
@@ -249,44 +285,39 @@ const toolboxButtonL10n = {
                                 }
                             } catch (e) {}
                         }
+
+                        function toolboxObserver() {
+                            badgeLabel.textContent = toolbox.getBrowserToolboxSessionState()
+                                ? 1
+                                : "";
+                        }
+
                         function uninit() {
                             prefSvc.removeObserver(autoHide, prefObserver);
+                            obSvc.removeObserver(toolboxObserver, "devtools:loader:destroy");
+                            obSvc.removeObserver(toolboxObserver, "devtools-thread-ready");
                             window.removeEventListener("unload", uninit, false);
                         }
-                        for (const key in attr) toolbarbutton.setAttribute(key, attr[key]);
-
-                        animBox.className = "toolbarbutton-icon";
-                        icon.className = "toolbarbutton-animation";
-                        icon.src = toolboxURL;
-                        animBox.style.cssText = `-moz-box-pack: center;`;
-                        icon.style.cssText = `height: 16px; width: 16px; transition: fill 50ms ease-in-out 0s;`;
-                        label.className = "toolbarbutton-text";
-                        label.setAttribute("crop", "right");
-                        label.setAttribute("flex", "1");
-                        label.setAttribute("value", toolboxButtonL10n.buttonLabel);
-                        toolbarbutton.appendChild(animBox);
-                        toolbarbutton.appendChild(label);
-                        animBox.appendChild(icon);
 
                         window.addEventListener("unload", uninit, false);
                         prefSvc.addObserver(autoHide, prefObserver);
+                        obSvc.addObserver(toolboxObserver, "devtools:loader:destroy");
+                        obSvc.addObserver(toolboxObserver, "devtools-thread-ready");
                         if (gBrowserInit.delayedStartupFinished) {
                             prefObserver(prefSvc, null, autoHide);
+                            toolboxObserver();
                         } else {
                             let delayedListener2 = (subject, topic) => {
                                 if (
                                     topic == "browser-delayed-startup-finished" &&
                                     subject == window
                                 ) {
-                                    Services.obs.removeObserver(delayedListener2, topic);
-
+                                    obSvc.removeObserver(delayedListener2, topic);
                                     prefObserver(prefSvc, null, autoHide);
+                                    toolboxObserver();
                                 }
                             };
-                            Services.obs.addObserver(
-                                delayedListener2,
-                                "browser-delayed-startup-finished"
-                            );
+                            obSvc.addObserver(delayedListener2, "browser-delayed-startup-finished");
                         }
                         return toolbarbutton;
                     },
