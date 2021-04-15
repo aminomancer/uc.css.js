@@ -1,5 +1,6 @@
 :root,
 menupopup {
+    --panel-font-size: 1em !important;
     --pinned-tab-width: 36px;
     --inline-tab-padding: 10px !important;
     --default_tab_border_roundness: 5px;
