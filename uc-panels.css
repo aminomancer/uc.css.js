@@ -22,13 +22,13 @@
 #widget-overflow,
 #appMenu-popup,
 #customizationui-widget-panel,
-#protections-popup {
+#identity-popup,
+#protections-popup,
+#permission-popup {
     margin-top: -7px !important;
 }
 
-#notification-popup,
-#identity-popup,
-#permission-popup {
+#notification-popup {
     margin-top: -1px !important;
 }
 
@@ -266,6 +266,9 @@ popupnotification .popup-notification-checkbox:hover .checkbox-check[checked]:no
 
 .permission-popup-permission-remove-button > .button-box > .button-icon {
     margin-inline-end: 3px !important;
+    width: 14px !important;
+    height: 14px !important;
+    list-style-image: url(chrome://userchrome/content/close.svg) !important;
 }
 
 .permission-popup-permission-remove-button:is(:hover, :focus-visible) {
@@ -312,16 +315,27 @@ popupnotification .popup-notification-checkbox:hover .checkbox-check[checked]:no
     fill-opacity: 1;
 }
 
-#identity-popup-mainView #identity-popup-security-description description {
-    font-size: smaller;
-    height: 0.5em !important;
-    line-height: 0.1em !important;
+#identity-popup,
+#permission-popup,
+#protections-popup {
+	font-size: var(--panel-font-size);
+    --panel-font-size: 1.1em;
 }
 
 .identity-popup-security-connection {
     background-position: 2em 40% !important;
     background-size: 18px auto !important;
     background-image: url(chrome://userchrome/content/connection-mixed-active-loaded.svg) !important;
+    font-size: 1.1em;
+}
+
+#identity-popup-security-description {
+    font-size: 12px !important;
+}
+
+#identity-popup-security-description > description {
+    padding-block: 0 !important;
+    height: -moz-fit-content !important;
 }
 
 #identity-popup[connection="chrome"] .identity-popup-security-connection {
@@ -381,6 +395,10 @@ popupnotification .popup-notification-checkbox:hover .checkbox-check[checked]:no
         var(--protection-header-gradient-color-2),
         var(--protection-header-gradient-color-3)
     ) !important;
+}
+
+#protections-popup-mainView-panel-header-section + toolbarseparator {
+    display: none;
 }
 
 #protections-popup-milestones {
@@ -529,28 +547,24 @@ popupnotification .popup-notification-checkbox:hover .checkbox-check[checked]:no
 
 .identity-popup-security-connection description {
     margin-inline-start: 0 !important;
+    margin-block: 0 !important;
 }
 
 .panel-view-body-unscrollable {
     overflow-y: scroll !important;
 }
 
-.identity-popup-warning-yellow {
-    color: inherit !important;
-    background-color: var(--warning-background) !important;
-    --lwt-popup-brighttext-url-color: var(--urlbar-popup-action-color);
-}
-
-.identity-popup-warning-gray {
-    --lwt-popup-brighttext-url-color: var(--urlbar-popup-url-color);
-}
-
 #notification-popup menulist {
     color: var(--notification-menu-color) !important;
 }
 
+#downloadsListBox {
+    margin: 0 !important;
+}
+
 #downloadsPanel-mainView {
     width: unset !important;
+    padding: 0 !important;
 }
 
 #downloadsFooterButtons {
@@ -579,6 +593,14 @@ popupnotification .popup-notification-checkbox:hover .checkbox-check[checked]:no
 
 #downloadsListBox > .download-state > toolbarseparator {
     visibility: collapse !important;
+}
+
+#downloadsListBox > richlistitem {
+    border-radius: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    padding-inline-start: 12px !important;
+    background: none !important;
 }
 
 #downloadsListBox > .download-state {

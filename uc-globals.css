@@ -1,5 +1,6 @@
 :root,
 tooltip {
+    --subdialog-font-size: 1em !important;
     --in-content-bg-dark: rgb(25, 25, 27);
     --ui-secondary-bg: hsl(234, 39%, 10%);
     --tooltip-bgcolor: hsl(233, 36%, 11%);
@@ -124,6 +125,9 @@ tooltip {
     --in-parent-primary-button-background-hover: var(--purple-35);
     --in-parent-primary-button-background-active: var(--purple-30);
     --in-parent-primary-button-text-color: var(--in-parent-page-color);
+}
+
+:root:not([chromehidden]) {
     --checkbox-border-color: var(--in-parent-box-border-color) !important;
     --checkbox-checked-border-color: transparent !important;
     --checkbox-unchecked-bgcolor: var(--in-parent-button-background) !important;

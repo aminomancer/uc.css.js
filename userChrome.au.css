@@ -628,6 +628,15 @@ menupopup::part(arrowscrollbox),
     list-style-image: url(chrome://userchrome/content/skin/new-tab.svg);
 }
 
+#tabs-newtab-button,
+#TabsToolbar #new-tab-button {
+    list-style-image: url(chrome://userchrome/content/add.svg);
+}
+
+#alltabs-button {
+	list-style-image: url(chrome://userchrome/content/arrow-dropdown-16.svg);
+}
+
 #privatebrowsing-button {
     list-style-image: url(chrome://userchrome/content/skin/privateBrowsing.svg);
 }
