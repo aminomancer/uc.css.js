@@ -70,11 +70,13 @@ tooltip {
     --sanitize-border-color: hsla(0, 0%, 5%, 0.2);
     --menu-separator-color: hsl(233, 25%, 23%);
     --user-urlbar-container-height: 38px;
-    --urlbar-element-top-adjust-magnitude: 0.6px; /* used to adjust the vertical position of the urlbar results and urlbar input field, so it looks even on 150% window scaling */
+    --urlbar-element-top-adjust-magnitude: 0.6px;
+    /* used to adjust the vertical position of the urlbar results and urlbar input field, so it looks even on 150% window scaling */
     /* --default-identity-icon: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M8 1C4.136 1 1 4.136 1 8s3.136 7 7 7 7-3.136 7-7-3.136-7-7-7zm0 11.404a.938.938 0 01-.936-.936V7.723c0-.515.421-.936.936-.936s.936.421.936.936v3.745a.938.938 0 01-.936.936zm0-6.552a1.128 1.128 0 110-2.256 1.128 1.128 0 110 2.256z'/></svg>"); */
     --default-identity-icon: url(chrome://userchrome/content/info-filled.svg);
     /* --screenshot-icon: url(chrome://userchrome/content/skin/screenshot.svg); */
-    --screenshot-icon: url(chrome://userchrome/content/devtools/command-screenshot.svg); /* I prefer this one, but use the one above if you prefer the vanilla icon */
+    --screenshot-icon: url(chrome://userchrome/content/devtools/command-screenshot.svg);
+    /* I prefer this one, but use the one above if you prefer the vanilla icon */
     --protection-header-gradient-color-1: hsl(318, 73%, 69%);
     --protection-header-gradient-color-2: hsl(265, 100%, 69%);
     --protection-header-gradient-color-3: hsl(217, 90%, 39%);
@@ -127,7 +129,9 @@ tooltip {
     --in-parent-primary-button-text-color: var(--in-parent-page-color);
 }
 
-:root:not([chromehidden]) {
+menupopup,
+.in-menulist,
+#ContentSelectDropdown {
     --checkbox-border-color: var(--in-parent-box-border-color) !important;
     --checkbox-checked-border-color: transparent !important;
     --checkbox-unchecked-bgcolor: var(--in-parent-button-background) !important;

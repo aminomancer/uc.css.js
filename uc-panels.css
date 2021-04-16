@@ -562,6 +562,11 @@ popupnotification .popup-notification-checkbox:hover .checkbox-check[checked]:no
     margin: 0 !important;
 }
 
+#emptyDownloads {
+    padding-block: 1.25em !important;
+	padding-inline: 20px 30px !important;
+}
+
 #downloadsPanel-mainView {
     width: unset !important;
     padding: 0 !important;

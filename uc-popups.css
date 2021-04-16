@@ -535,6 +535,8 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlis
             --in-content-primary-button-background-active
         ) !important;
         --dropdown-bgcolor: var(--arrowpanel-background) !important;
+        --in-content-button-border-radius: var(--general-button-border-radius) !important;
+        --in-content-button-vertical-padding: 5px !important;
     }
 
     #commonDialog::part(content-box) {
@@ -547,6 +549,16 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlis
 
     .dialog-content-box:not([hidden]) + .dialog-button-box {
         margin-top: 5px;
+    }
+    
+    .dialog-button-box:not([hidden]) {
+        display: flex;
+        justify-content: end;
+    }
+
+    .dialog-button-box > button {
+        flex-grow: 0.15;
+        flex-wrap: nowrap;
     }
 
     .dialog-button-box > button[dlgtype="accept"]:is(:enabled, :not([disabled="true"])) {
@@ -622,6 +634,21 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlis
     select:not([size], [multiple]) > option {
         background-color: var(--dropdown-bgcolor) !important;
     }
+
+    button, select, input[type="color"], menulist {
+        min-height: 28px !important;
+    }
+
+    input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]),
+    textarea {
+        padding-block: 5px !important;
+    }
+
+    input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"])::selection,
+    textarea::selection {
+        background-color: var(--ui-selection-bgcolor) !important;
+        color: var(--ui-selection-color) !important;
+    }
 }
 
 @-moz-document url("chrome://mozapps/content/handling/permissionDialog.xhtml"),
@@ -670,6 +697,8 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlis
             --in-content-primary-button-background-active
         ) !important;
         --dropdown-bgcolor: var(--arrowpanel-background) !important;
+        --in-content-button-border-radius: var(--general-button-border-radius) !important;
+        --in-content-button-vertical-padding: 5px !important;
     }
 
     input[type="radio"],
@@ -733,6 +762,21 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlis
 
     button {
         border-radius: var(--toolbarbutton-border-radius) !important;
+    }
+
+    button, select, input[type="color"], menulist {
+        min-height: 28px !important;
+    }
+
+    input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]),
+    textarea {
+        padding-block: 5px !important;
+    }
+
+    input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"])::selection,
+    textarea::selection {
+        background-color: var(--ui-selection-bgcolor) !important;
+        color: var(--ui-selection-color) !important;
     }
 }
 

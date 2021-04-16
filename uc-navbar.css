@@ -246,6 +246,7 @@ toolbar .toolbarbutton-1:not([disabled])[checked]:hover > .toolbarbutton-icon {
 
 #nav-bar {
     z-index: 11 !important;
+    box-shadow: none !important;
 }
 
 /* fullscreen button */
