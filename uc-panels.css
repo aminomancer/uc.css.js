@@ -66,9 +66,6 @@ panel[type="arrow"][side="top"] {
 .protections-popup-footer-button {
     border-radius: var(--arrowpanel-menuitem-border-radius) !important;
     margin-inline: calc(var(--vertical-section-padding) - 4px) !important;
-}
-
-.protections-popup-category {
     padding-inline: calc(var(--arrowpanel-menuitem-inline-margin) + 3px) !important;
     padding-block: var(--arrowpanel-menuitem-inline-margin) !important;
     height: unset !important;
@@ -76,12 +73,9 @@ panel[type="arrow"][side="top"] {
     min-height: 28px !important;
 }
 
-.protections-popup-footer-button {
-    padding-inline: calc(var(--arrowpanel-menuitem-inline-margin) + 3px) !important;
-    padding-block: var(--arrowpanel-menuitem-inline-margin) !important;
-    height: unset !important;
-    max-height: unset !important;
-    min-height: 28px !important;
+#protections-popup-footer {
+	padding-bottom: calc(var(--vertical-section-padding) - 4px) !important;
+    margin-bottom: 4px !important;
 }
 
 #protections-popup-footer-protection-type-label {
@@ -89,20 +83,20 @@ panel[type="arrow"][side="top"] {
 }
 
 #protections-popup-trackers-blocked-counter-box {
-    margin-inline-end: calc(var(--vertical-section-padding) + 3px) !important;
+    margin-inline-end: calc(var(--vertical-section-padding) - 4px) !important;
 }
 
 #protections-popup-blocking-section-header,
 #protections-popup-not-blocking-section-header,
 #protections-popup-not-found-section-header {
-    margin: 0;
-    padding-inline: calc(var(--vertical-section-padding) + 3px) !important;
+    margin: 0 !important;
+    padding-inline: var(--vertical-section-padding) !important;
     color: var(--panel-description-color);
 }
 
 #protections-popup-siteNotWorkingView-header,
 #protections-popup-tp-switch-section {
-    padding-inline: calc(var(--vertical-section-padding) + 3px) !important;
+    padding-inline: var(--vertical-section-padding) !important;
 }
 
 .protections-popup-category::after {
@@ -111,6 +105,10 @@ panel[type="arrow"][side="top"] {
     translate: none !important;
     transform: translateX(2px) !important;
     display: -moz-inline-box;
+}
+
+.protections-popup-category[disabled="true"] {
+    background: none !important;
 }
 
 .popup-notification-warning:empty,

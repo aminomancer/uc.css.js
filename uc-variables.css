@@ -202,7 +202,8 @@ toolbar {
         --menupopup-child-margin-block-start: -4px;
         --menupopup-child-margin-inline-start: 0px;
         --menupopup-padding: 0px;
-        --menupopup-inner-padding: 4px;
+        --menupopup-inner-padding-magnitude: 4px;
+        --menupopup-inner-padding: var(--menupopup-inner-padding-magnitude) 0;
         --context-padding-inline: 28px 0px !important;
         --context-margin-inline: -16px 0px !important;
         --menupopup-shadow: none !important;

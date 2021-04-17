@@ -1,6 +1,16 @@
 @import url(uc-globals.css);
 
 @media (prefers-color-scheme: dark) {
+    ::selection {
+        background-color: var(--global-selection-bgcolor) !important;
+        color: var(--global-selection-color) !important;
+    }
+
+    ::-moz-selection {
+        background-color: var(--global-selection-bgcolor) !important;
+        color: var(--global-selection-color) !important;
+    }
+
     .gitzip-check-mark {
         color: white !important;
     }
@@ -58,27 +68,33 @@
     }
 }
 
-@media (prefers-color-scheme: dark) {
-    ::selection {
-        background-color: var(--global-selection-bgcolor) !important;
-        color: var(--global-selection-color) !important;
-    }
-
-    ::-moz-selection {
-        background-color: var(--global-selection-bgcolor) !important;
-        color: var(--global-selection-color) !important;
-    }
-}
-
 :-moz-focusring:focus:not(:focus-visible) {
     outline: unset !important;
     outline-offset: unset !important;
 }
 
 @-moz-document plain-text-document(), media-document(all) {
+    @font-face {
+        font-family: "Overpass Mono";
+        font-style: normal;
+        font-weight: 100;
+        src: local("Overpass Mono"), local("Overpass Mono Light"), local("OverpassMono-Light");
+    }
+
+    :root {
+        font-family: Overpass Mono, -moz-fixed;
+        font-size: 12;
+    }
+
+    xmp,
+    pre,
+    plaintext {
+        font-family: Overpass Mono, -moz-fixed;
+        font-size: 12;
+    }
+
     @media (prefers-color-scheme: dark) {
         :root {
-            font-family: Cutive Mono;
             color: var(--plaintext-color) !important;
             background-color: var(--in-content-bg-dark) !important;
         }
@@ -99,41 +115,38 @@
     }
 }
 
-@-moz-document url-prefix("about:"), url-prefix("chrome://")
-{
-    @media (prefers-color-scheme: dark) {
-        window,
-        browser,
-        html {
-            background-color: var(--in-content-bg-dark);
-        }
-    }
-}
-
-@-moz-document url("about:blank") {
-    window,
-    browser,
-    html {
-        background-color: transparent;
-    }
-}
-
 @-moz-document regexp("view-source:.*") {
+    @font-face {
+        font-family: "Overpass Mono";
+        font-style: normal;
+        font-weight: 100;
+        src: local("Overpass Mono"), local("Overpass Mono Light"), local("OverpassMono-Light");
+    }
+
+    :root {
+        font-family: Overpass Mono, -moz-fixed;
+        font-size: 12;
+    }
+
+    xmp,
+    pre,
+    plaintext {
+        font-family: Overpass Mono, -moz-fixed;
+        font-size: 12;
+    }
+
     @media (prefers-color-scheme: dark) {
         :root,
         body {
-            font-family: Cutive Mono;
             color: var(--plaintext-color);
             background-color: var(--in-content-bg-dark);
         }
 
         span {
-            font-family: Cutive Mono;
             color: var(--plaintext-color);
         }
 
-        html {
-            font-family: Cutive Mono;
+        html:root {
             color: var(--plaintext-color);
             background-color: var(--in-content-bg-dark);
             background: none !important;
@@ -519,7 +532,8 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
         --arrowpanel-menuitem-border-radius: 3px !important;
         --menupopup-border-radius: 3px !important;
         --context-menuitem-border-radius: var(--arrowpanel-menuitem-border-radius);
-        --menupopup-inner-padding: 4px;
+        --menupopup-inner-padding-magnitude: 4px;
+        --menupopup-inner-padding: var(--menupopup-inner-padding-magnitude) 0;
         --menu-color: var(--ui-text-80) !important;
         --menupopup-background: transparent;
         --menu-background-color: var(--arrowpanel-background) !important;
@@ -540,6 +554,11 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
     #ContentSelectDropdown > menupopup menu > menupopup,
     menupopup.in-menulist menu > menupopup {
         margin-inline-start: var(--menupopup-child-margin-inline-start) !important;
+    }
+
+    #ContentSelectDropdown > menupopup > :is(menuitem, menu, menucaption, menugroup, menuseparator),
+    menupopup.in-menulist > :is(menuitem, menu, menucaption, menugroup, menuseparator) {
+        margin-inline: var(--menupopup-inner-padding-magnitude);
     }
 
     #ContentSelectDropdown > menupopup .menu-text,
@@ -589,7 +608,7 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
         border-top-width: 1px !important;
         border-top-style: solid !important;
         padding: 0 !important;
-        margin-inline: 0 !important;
+        margin-inline: var(--menupopup-inner-padding-magnitude) !important;
     }
 
     #ContentSelectDropdown
@@ -829,7 +848,8 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
             --menupopup-child-margin-block-start: -4px;
             --menupopup-child-margin-inline-start: 0px;
             --menupopup-padding: 0px;
-            --menupopup-inner-padding: 4px;
+            --menupopup-inner-padding-magnitude: 4px;
+            --menupopup-inner-padding: var(--menupopup-inner-padding-magnitude) 0;
             --context-padding-inline: 28px 0px !important;
             --context-margin-inline: -16px 0px !important;
             --menupopup-shadow: none !important;
@@ -840,6 +860,10 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
             --menu-right-margin: 4px;
             --menu-right-size: 14px;
             --panel-shadow: none !important;
+        }
+
+        menupopup > :is(menuitem, menu, menucaption, menugroup, menuseparator) {
+            margin-inline: var(--menupopup-inner-padding-magnitude);
         }
     }
 
@@ -1128,7 +1152,7 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
             border-top-width: 1px !important;
             border-top-style: solid !important;
             padding: 0 !important;
-            margin-inline: 0 !important;
+            margin-inline: var(--menupopup-inner-padding-magnitude) !important;
         }
 
         menuseparator[id]:not(#context-sep-open, #context-media-sep-commands, #context-sep-copylink, #spell-suggestions-separator, #context-sep-selectall) {
@@ -1455,7 +1479,8 @@ img.transparent {
         :root {
             --arrowpanel-menuitem-border-radius: 3px;
             --context-menuitem-border-radius: var(--arrowpanel-menuitem-border-radius);
-            --menupopup-inner-padding: 4px;
+            --menupopup-inner-padding-magnitude: 4px;
+            --menupopup-inner-padding: var(--menupopup-inner-padding-magnitude) 0;
             --panel-separator-margin: 0px 4px;
         }
     }

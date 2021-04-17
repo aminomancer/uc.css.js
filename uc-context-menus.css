@@ -307,6 +307,10 @@ menulist:-moz-focusring > menupopup.in-menulist > menuitem[_moz-menuactive="true
         margin-inline-start: var(--menupopup-child-margin-inline-start) !important;
     }
 
+    menupopup > :is(menuitem, menu, menucaption, menugroup, menuseparator) {
+        margin-inline: var(--menupopup-inner-padding-magnitude);
+    }
+
     :not(.subviewbutton) > .menu-text {
         padding-inline: var(--context-padding-inline) !important;
     }
@@ -342,7 +346,7 @@ menulist:-moz-focusring > menupopup.in-menulist > menuitem[_moz-menuactive="true
         border-top-width: 1px !important;
         border-top-style: solid !important;
         padding: 0 !important;
-        margin-inline: 0 !important;
+        margin-inline: var(--menupopup-inner-padding-magnitude) !important;
     }
 
     menupopup:not(.PanelUI-subView) menuseparator:last-child {
