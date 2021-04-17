@@ -18,7 +18,7 @@ tooltip {
     --dialog-box-border-color: hsla(232, 100%, 85%, 0.2);
     --dialog-box-border-hover: hsla(232, 100%, 85%, 0.3);
     --alertbox-bgcolor: hsla(0, 0%, 7%, 0.97);
-    --notification-menu-color: hsl(212.5, 42.9%, 89%);
+    --notification-menu-color: hsl(212, 43%, 90%);
     --identity-box-solid-bg: hsla(236, 52%, 18%, 0.4);
     --identity-box-hover-bg: hsla(236, 49%, 25%, 0.4);
     --secure-color: hsl(119, 80%, 60%);

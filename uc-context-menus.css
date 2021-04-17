@@ -177,6 +177,8 @@ menupopup.in-menulist > :is(menucaption, menuitem) > .menu-iconic-text {
 :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
     :is(menu, menuitem, menucaption) {
     padding-inline: 8px !important;
+    min-height: 26px !important;
+    border: none !important;
 }
 
 :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
@@ -259,6 +261,10 @@ menupopup.in-menulist {
 
 .contentSelectDropdown-searchbox + :is(menu, menuitem) {
     margin-top: 4px;
+}
+
+menulist:-moz-focusring > menupopup.in-menulist > menuitem[_moz-menuactive="true"] {
+    border: none !important;
 }
 
 @-moz-document url(chrome://browser/content/browser.xhtml)

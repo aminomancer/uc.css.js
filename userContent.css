@@ -315,8 +315,11 @@ menupopup.in-menulist .contentSelectDropdown-searchbox:focus-within {
     transition: 300ms background-color !important;
 }
 
-#ContentSelectDropdown > menupopup .contentSelectDropdown-searchbox + :is(menu, menuitem),
-menupopup.in-menulist .contentSelectDropdown-searchbox + :is(menu, menuitem) {
+#ContentSelectDropdown
+    > menupopup
+    .contentSelectDropdown-searchbox
+    + :is(menu, menuitem, menucaption),
+menupopup.in-menulist .contentSelectDropdown-searchbox + :is(menu, menuitem, menucaption) {
     margin-top: 4px;
 }
 
@@ -326,29 +329,31 @@ menupopup.in-menulist menu > menupopup {
     margin-block-start: var(--menupopup-child-margin-block-start) !important;
 }
 
-#ContentSelectDropdown > menupopup :is(menuitem, menu),
-menupopup.in-menulist :is(menuitem, menu) {
+#ContentSelectDropdown > menupopup :is(menu, menuitem, menucaption),
+menupopup.in-menulist :is(menu, menuitem, menucaption) {
     appearance: none !important;
     color: var(--ui-text-80) !important;
     border-radius: var(--context-menuitem-border-radius);
+    border: none !important;
+    min-height: 26px !important;
 }
 
-#ContentSelectDropdown > menupopup :is(menuitem, menu)[disabled="true"],
-menupopup.in-menulist :is(menuitem, menu)[disabled="true"] {
+#ContentSelectDropdown > menupopup :is(menu, menuitem, menucaption)[disabled="true"],
+menupopup.in-menulist :is(menu, menuitem, menucaption)[disabled="true"] {
     appearance: none !important;
     color: var(--panel-disabled-color) !important;
     background-color: initial !important;
 }
 
-#ContentSelectDropdown > menupopup :is(menuitem, menu) .menu-iconic-left,
-menupopup.in-menulist :is(menuitem, menu) .menu-iconic-left {
+#ContentSelectDropdown > menupopup :is(menu, menuitem, menucaption) .menu-iconic-left,
+menupopup.in-menulist :is(menu, menuitem, menucaption) .menu-iconic-left {
     padding: 0 !important;
     appearance: none !important;
     margin-inline-end: 0 !important;
 }
 
-#ContentSelectDropdown > menupopup :is(menuitem, menu) .menu-iconic-icon,
-menupopup.in-menulist :is(menuitem, menu) .menu-iconic-icon {
+#ContentSelectDropdown > menupopup :is(menu, menuitem, menucaption) .menu-iconic-icon,
+menupopup.in-menulist :is(menu, menuitem, menucaption) .menu-iconic-icon {
     margin-inline: 6px;
 }
 
@@ -1256,9 +1261,8 @@ menupopup {
 @-moz-document regexp("^(about:|chrome:).*") {
     html:not([role="dialog"]),
     html:not([role="dialog"]) *,
-    window[type="child"],
-    window[type="child"] > dialog,
-    window[role="application"]:not([chromehidden]) {
+    window:not([chromehidden]),
+    window:not([chromehidden]) > dialog {
         --checkbox-border-color: var(--in-parent-box-border-color) !important;
         --checkbox-checked-border-color: transparent !important;
         --checkbox-unchecked-bgcolor: var(--in-parent-button-background) !important;
@@ -1273,7 +1277,7 @@ menupopup {
             --in-parent-primary-button-background-active
         ) !important;
         --in-content-page-background: rgb(30, 29, 31) !important;
-        --in-content-page-color: var(--notification-menu-color) !important;
+        --in-content-page-color: hsl(212, 43%, 90%) !important;
         --in-content-box-background: hsl(300, 2%, 16%) !important;
         --in-content-box-background-odd: hsl(320, 3%, 21%) !important;
         --in-content-box-background-dim: var(--dialog-box-bgcolor-dim) !important;
