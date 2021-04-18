@@ -1287,19 +1287,15 @@ menupopup {
     html:not([role="dialog"]) *,
     window:not([chromehidden]),
     window:not([chromehidden]) > dialog {
-        --checkbox-border-color: var(--in-parent-box-border-color) !important;
-        --checkbox-checked-border-color: transparent !important;
-        --checkbox-unchecked-bgcolor: var(--in-parent-button-background) !important;
-        --checkbox-unchecked-hover-bgcolor: var(--in-parent-button-background-hover) !important;
-        --checkbox-unchecked-active-bgcolor: var(--in-parent-button-background-active) !important;
-        --checkbox-checked-bgcolor: var(--in-parent-primary-button-background) !important;
-        --checkbox-checked-color: var(--in-parent-primary-button-text-color) !important;
-        --checkbox-checked-hover-bgcolor: var(
-            --in-parent-primary-button-background-hover
-        ) !important;
-        --checkbox-checked-active-bgcolor: var(
-            --in-parent-primary-button-background-active
-        ) !important;
+        --checkbox-border-color: var(--uc-checkbox-border-color) !important;
+        --checkbox-checked-border-color: var(--uc-checkbox-checked-border-color) !important;
+        --checkbox-unchecked-bgcolor: var(--uc-checkbox-unchecked-bgcolor) !important;
+        --checkbox-unchecked-hover-bgcolor: var(--uc-checkbox-unchecked-hover-bgcolor) !important;
+        --checkbox-unchecked-active-bgcolor: var(--uc-checkbox-unchecked-active-bgcolor) !important;
+        --checkbox-checked-bgcolor: var(--uc-checkbox-checked-bgcolor) !important;
+        --checkbox-checked-color: var(--uc-checkbox-checked-color) !important;
+        --checkbox-checked-hover-bgcolor: var(--uc-checkbox-checked-hover-bgcolor) !important;
+        --checkbox-checked-active-bgcolor: var(--uc-checkbox-checked-active-bgcolor) !important;
         --in-content-page-background: rgb(30, 29, 31) !important;
         --in-content-page-color: hsl(212, 43%, 90%) !important;
         --in-content-box-background: hsl(300, 2%, 16%) !important;

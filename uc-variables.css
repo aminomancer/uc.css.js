@@ -170,6 +170,17 @@ toolbar {
         --panel-shortcut-focus: hsl(235, 32%, 75%, 90%) !important;
         --proton-tab-inline-padding: 0px !important;
         --tab-shadow-max-size: 0px !important;
+        --buttons-primary-button-bgcolor: var(--in-parent-primary-button-background) !important;
+        --buttons-primary-button-hover-bgcolor: var(
+            --in-parent-primary-button-background-hover
+        ) !important;
+        --buttons-primary-button-active-bgcolor: var(
+            --in-parent-primary-button-background-active
+        ) !important;
+        --buttons-primary-button-color: var(--in-parent-primary-button-text-color) !important;
+        --popup-notification-body-width: calc(
+            28em - calc(2 * var(--arrowpanel-padding))
+        ) !important;
     }
 
     :root,

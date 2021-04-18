@@ -117,14 +117,13 @@ panel[type="arrow"][side="top"] {
 }
 
 .panel-footer.popup-notification-button-container {
-    gap: var(--arrowpanel-padding) !important;
-    margin-inline: var(--arrowpanel-padding) !important;
-    margin-bottom: var(--arrowpanel-padding) !important;
-    margin-top: calc(var(--arrowpanel-padding) / 4) !important;
+	margin-inline: calc(var(--menupopup-inner-padding-magnitude) * 2) !important;
+	margin-block: calc(var(--menupopup-inner-padding-magnitude) * 2) !important;
+    gap: calc(var(--menupopup-inner-padding-magnitude) * 2) !important;
 }
 
 .panel-footer.popup-notification-button-container > .popup-notification-button {
-    margin-inline: 0 !important;
+    margin: 0 !important;
     border-radius: var(--arrowpanel-menuitem-border-radius) !important;
     flex: 1 !important;
     font-weight: normal !important;
@@ -180,14 +179,12 @@ popupnotification checkbox .checkbox-check {
     appearance: none !important;
     min-width: 10px !important;
     min-height: 10px !important;
-    width: 13px;
-    height: 13px;
+    width: 14px;
+    height: 14px;
     margin-inline-end: 4px !important;
     padding: 0.5px;
-    border: 1px solid var(--in-content-box-border-color) !important;
     border-radius: 2px;
     margin: 0;
-    background-color: var(--arrowpanel-dimmed) !important;
     background-position: center;
     background-repeat: no-repeat;
 }
@@ -196,46 +193,25 @@ popupnotification checkbox .checkbox-check[checked] {
     background-image: url(chrome://userchrome/content/check.svg);
     -moz-context-properties: fill, fill-opacity !important;
     fill: currentColor !important;
-    color: hsl(0, 0%, 100%) !important;
-    background-color: var(--purple-35) !important;
-}
-
-popupnotification checkbox:hover .checkbox-check:not(:disabled) {
-    background-color: var(--arrowpanel-darker) !important;
-}
-
-popupnotification checkbox:hover .checkbox-check[checked]:not(:disabled) {
-    background-color: var(--purple-45) !important;
 }
 
 .addon-installed-notification-content > checkbox,
 popupnotification .popup-notification-body > .popup-notification-checkbox {
-    margin-inline-start: 6px !important;
+    margin-inline-start: 0 !important;
 }
 
 popupnotification .popup-notification-checkbox .checkbox-check {
-    width: 13px !important;
-    height: 13px !important;
-    border: 1px solid var(--in-content-box-border-color) !important;
-    background-color: var(--arrowpanel-dimmed) !important;
+    width: 14px !important;
+    height: 14px !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
+    background-size: contain !important;
 }
 
 popupnotification .popup-notification-checkbox .checkbox-check[checked] {
-    background-image: url(chrome://userchrome/content/check.svg);
+    background-image: url(chrome://userchrome/content/check.svg) !important;
     -moz-context-properties: fill, fill-opacity !important;
     fill: currentColor !important;
-    color: hsl(0, 0%, 100%) !important;
-    background-color: var(--purple-35) !important;
-}
-
-popupnotification .popup-notification-checkbox:hover .checkbox-check:not(:disabled) {
-    background-color: var(--arrowpanel-darker) !important;
-}
-
-popupnotification .popup-notification-checkbox:hover .checkbox-check[checked]:not(:disabled) {
-    background-color: var(--purple-45) !important;
 }
 
 .popup-notification-learnmore-link {

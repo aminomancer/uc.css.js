@@ -127,20 +127,30 @@ tooltip {
     --in-parent-primary-button-background-hover: var(--purple-35);
     --in-parent-primary-button-background-active: var(--purple-30);
     --in-parent-primary-button-text-color: var(--in-parent-page-color);
+    --uc-checkbox-border-color: var(--in-parent-box-border-color);
+    --uc-checkbox-checked-border-color: transparent;
+    --uc-checkbox-unchecked-bgcolor: var(--in-parent-button-background);
+    --uc-checkbox-unchecked-hover-bgcolor: var(--in-parent-button-background-hover);
+    --uc-checkbox-unchecked-active-bgcolor: var(--in-parent-button-background-active);
+    --uc-checkbox-checked-bgcolor: var(--in-parent-primary-button-background);
+    --uc-checkbox-checked-color: var(--in-parent-primary-button-text-color);
+    --uc-checkbox-checked-hover-bgcolor: var(--in-parent-primary-button-background-hover);
+    --uc-checkbox-checked-active-bgcolor: var(--in-parent-primary-button-background-active);
 }
 
 menupopup,
 .in-menulist,
-#ContentSelectDropdown {
-    --checkbox-border-color: var(--in-parent-box-border-color) !important;
-    --checkbox-checked-border-color: transparent !important;
-    --checkbox-unchecked-bgcolor: var(--in-parent-button-background) !important;
-    --checkbox-unchecked-hover-bgcolor: var(--in-parent-button-background-hover) !important;
-    --checkbox-unchecked-active-bgcolor: var(--in-parent-button-background-active) !important;
-    --checkbox-checked-bgcolor: var(--in-parent-primary-button-background) !important;
-    --checkbox-checked-color: var(--in-parent-primary-button-text-color) !important;
-    --checkbox-checked-hover-bgcolor: var(--in-parent-primary-button-background-hover) !important;
-    --checkbox-checked-active-bgcolor: var(--in-parent-primary-button-background-active) !important;
+#ContentSelectDropdown,
+popupnotification {
+    --checkbox-border-color: var(--uc-checkbox-border-color) !important;
+    --checkbox-checked-border-color: var(--uc-checkbox-checked-border-color) !important;
+    --checkbox-unchecked-bgcolor: var(--uc-checkbox-unchecked-bgcolor) !important;
+    --checkbox-unchecked-hover-bgcolor: var(--uc-checkbox-unchecked-hover-bgcolor) !important;
+    --checkbox-unchecked-active-bgcolor: var(--uc-checkbox-unchecked-active-bgcolor) !important;
+    --checkbox-checked-bgcolor: var(--uc-checkbox-checked-bgcolor) !important;
+    --checkbox-checked-color: var(--uc-checkbox-checked-color) !important;
+    --checkbox-checked-hover-bgcolor: var(--uc-checkbox-checked-hover-bgcolor) !important;
+    --checkbox-checked-active-bgcolor: var(--uc-checkbox-checked-active-bgcolor) !important;
 }
 
 #protections-popup {

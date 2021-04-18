@@ -357,12 +357,13 @@
     background-color: var(--arrowpanel-dimmed) !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
+    background-size: contain !important;
     line-height: 20px !important;
     box-shadow: none !important;
 }
 
 :is(#bookmarkpropertiesdialog, #editBookmarkPanel) checkbox .checkbox-check[checked] {
-    list-style-image: url(chrome://userchrome/content/check.svg);
+    background-image: url(chrome://userchrome/content/check.svg) !important;
     -moz-context-properties: fill, fill-opacity !important;
     fill: currentColor !important;
     color: hsl(0, 0%, 100%) !important;
