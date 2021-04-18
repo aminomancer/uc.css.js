@@ -644,6 +644,12 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlis
         padding-block: 5px !important;
     }
 
+    input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):focus,
+    textarea:focus,
+    search-textbox[focused] {
+        border-color: var(--in-content-focus-outline-color) !important;
+    }
+
     input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"])::selection,
     textarea::selection {
         background-color: var(--ui-selection-bgcolor) !important;
@@ -771,6 +777,12 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlis
     input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]),
     textarea {
         padding-block: 5px !important;
+    }
+
+    input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):focus,
+    textarea:focus,
+    search-textbox[focused] {
+        border-color: var(--in-content-focus-outline-color) !important;
     }
 
     input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"])::selection,
