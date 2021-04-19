@@ -93,11 +93,9 @@ const unloadedTabMenuL10n = {
                 hidden: true,
                 oncommand: `unloadedTabMenu.openTab(gContextMenu.linkURL, {fromContent: true, linkText: gContextMenu.linkTextStr})`,
             });
-            document
-                .getElementById("context-openlinkintab")
-                .after(this.contentMenuOpenLinkUnloaded);
+            this.contentMenuOpenLink.after(this.contentMenuOpenLinkUnloaded);
             this.contentContextMenu.addEventListener("popupshowing", this);
-            this.contentContextMenu.addEventListener("popuphidden", this);
+            this.contentContextMenu.addEventListener("popuphidden", this, false);
         }
 
         create(doc, tag, props, isHTML = false) {
@@ -111,7 +109,8 @@ const unloadedTabMenuL10n = {
         handleEvent(e) {
             switch (e.type) {
                 case "popuphidden":
-                    this.contentMenuOpenLinkUnloaded.hidden = true;
+                    if (e.originalTarget === this.contentContextMenu)
+                        this.contentMenuOpenLinkUnloaded.hidden = true;
                     break;
                 case "popupshowing":
                     switch (e.target) {
@@ -242,6 +241,13 @@ const unloadedTabMenuL10n = {
                 (this._syncedMenuOpenTab = this.syncedContextMenu.querySelector(
                     "#syncedTabsOpenSelectedInTab"
                 ))
+            );
+        }
+
+        get contentMenuOpenLink() {
+            return (
+                this._contentMenuOpenLink ||
+                (this._contentMenuOpenLink = document.getElementById("context-openlinkintab"))
             );
         }
 
