@@ -18,7 +18,7 @@ menupopup {
     --lwt-toolbar-field-color: hsl(240, 60%, 99%);
     --lwt-toolbar-field-focus: hsla(233, 25%, 28%, 85%) !important;
     --lwt-toolbar-field-focus-color: rgb(255, 255, 255) !important;
-    --toolbar-bgcolor: hsl(231, 42%, 15%) !important;
+    --toolbar-bgcolor: hsl(233, 42%, 15%) !important;
     --toolbar-color: hsl(0, 0%, 100%) !important;
     --lwt-toolbarbutton-icon-fill: hsl(0, 0%, 100%) !important;
     --lwt-background-alignment: top !important;

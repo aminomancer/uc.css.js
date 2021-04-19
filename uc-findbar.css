@@ -5,30 +5,23 @@
     flex-flow: row nowrap;
     align-items: center;
     top: calc(var(--urlbar-container-height) + var(--tab-min-height)) !important;
-    left: 1.5333em;
+    left: 1.5em;
     border: 0px solid transparent !important;
     border-bottom-left-radius: 5px !important;
     border-bottom-right-radius: 5px !important;
     border-top: none !important;
     box-shadow: 0px 0px 7px -2px hsla(240, 4%, 0%, 0.6), 0px 0px 15px 0px hsla(0, 0%, 0%, 0.2) !important;
     background-image: none !important;
-    transition: all 0.2s ease-in-out 0s !important;
-    -webkit-transform-style: preserve-3d !important;
-    -webkit-backface-visibility: hidden !important;
-    -moz-transform-style: preserve-3d !important;
-    -moz-backface-visibility: hidden !important;
+    transition: 0.2s ease-in-out opacity, 0.2s ease-in-out transform !important;
     transform-style: preserve-3d !important;
     backface-visibility: hidden !important;
-    transition-timing-function: cubic-bezier !important;
     z-index: 1 !important;
     animation: 0.2s ease-in-out findbar-down;
     overflow: hidden !important;
 }
 
 :root[sizemode="normal"] findbar {
-    top: calc(
-        var(--urlbar-container-height) + var(--tab-min-height) + var(--space-above-tabbar)
-    ) !important;
+    top: calc(var(--urlbar-container-height) + var(--tab-min-height)) !important;
 }
 
 @keyframes findbar-down {
@@ -43,11 +36,11 @@
 }
 
 findbar[hidden] {
-    margin-top: -2em !important;
     margin-bottom: auto !important;
     visibility: visible !important;
     transition: all 0.2s ease-in-out 0s !important;
     pointer-events: none;
+    transform: translateY(-2em);
 }
 
 #sidebar-box[hidden="true"] ~ #appcontent findbar,

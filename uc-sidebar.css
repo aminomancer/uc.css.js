@@ -131,6 +131,41 @@
     background-color: var(--arrowpanel-dimmed-further) !important;
 }
 
+#sidebarMenu-popup {
+    --arrowpanel-background: var(--toolbar-bgcolor);
+    margin-top: 0 !important;
+}
+
+#sidebarMenu-popup > .subviewbutton[checked=true] {
+    background: none !important;
+}
+
+#sidebarMenu-popup > .subviewbutton[checked=true] > .toolbarbutton-icon {
+    list-style-image: none !important;
+    background-image: url(chrome://userchrome/content/radio.svg);
+    opacity: 1 !important;
+    background-color: var(--uc-checkbox-checked-bgcolor);
+    background-size: contain;
+    border-radius: 100%;
+}
+
+#sidebarMenu-popup > .subviewbutton[checked=true]:not([disabled], [open]):hover {
+    background-color: var(--arrowpanel-faint) !important;
+}
+
+#sidebarMenu-popup > .subviewbutton[checked=true]:not([disabled], [open]):hover:active {
+    background-color: var(--arrowpanel-dimmed) !important;
+}
+
+#sidebarMenu-popup > .subviewbutton > .toolbarbutton-text {
+    padding-inline-start: 8px !important;
+}
+
+#sidebarMenu-popup > .subviewbutton > .toolbarbutton-icon {
+	margin-inline-start: 0 !important;
+    min-width: 16px !important;
+}
+
 #sidebar-switcher-target:-moz-focusring,
 #sidebar-close:-moz-focusring {
     outline: unset !important;
@@ -145,18 +180,19 @@
 }
 
 #sidebar-close {
-    width: 26.667px !important;
-    height: 26.667px !important;
     border-radius: var(--arrowpanel-menuitem-border-radius) !important;
+    list-style-image: url(chrome://userchrome/content/close.svg) !important;
+    fill-opacity: 0.8 !important;
 }
 
 #sidebar-close .toolbarbutton-icon {
-    width: 18px !important;
+    width: 20px !important;
     height: auto !important;
 }
 
 #sidebar-close:is(:hover, :focus-visible) {
     background-color: var(--arrowpanel-dimmed) !important;
+    fill-opacity: 1 !important;
 }
 
 #sidebar-close:is(:hover, :focus-visible):active {
