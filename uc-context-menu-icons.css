@@ -41,6 +41,7 @@ menupopup
 #context-openlinkincontainertab:not(.menuitem-iconic) .menu-text,
 #context-openlinkincurrent:not(.menuitem-iconic) .menu-text,
 #context-openlinkintab:not(.menuitem-iconic) .menu-text,
+#context-openlinkinunloadedtab:not(.menuitem-iconic) .menu-text,
 #context_openANewTab:not(.menuitem-iconic) .menu-text,
 #context-openlinkinusercontext-menu:not(.menuitem-iconic) > .menu-text,
 #context-openlinkprivate:not(.menuitem-iconic) .menu-text,
@@ -202,6 +203,7 @@ menupopup
 #context-bookmarklink:not(.menuitem-iconic)::before,
 #context-bookmarkpage:not(.menuitem-iconic)::before,
 #context-openlinkintab:not(.menuitem-iconic)::before,
+#context-openlinkinunloadedtab:not(.menuitem-iconic)::before,
 #context_openANewTab:not(.menuitem-iconic)::before,
 #context-openlinkincontainertab:not(.menuitem-iconic)::before,
 #context-openlinkinusercontext-menu:not(.menuitem-iconic)::before,
@@ -451,6 +453,10 @@ menupopup
 
 :is(#context-openframeintab, #context-openlinkintab, #context_openANewTab):not(.menuitem-iconic)::before {
     background-image: url(chrome://userchrome/content/skin/new-tab.svg) !important;
+}
+
+#context-openlinkinunloadedtab:not(.menuitem-iconic)::before {
+    background-image: url(chrome://userchrome/content/skin/quit.svg) !important;
 }
 
 #context-openlinkincurrent:not(.menuitem-iconic)::before {
