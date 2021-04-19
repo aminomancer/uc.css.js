@@ -315,7 +315,7 @@ const unloadedTabMenuL10n = {
                         url: url,
                         title: info?.title || (this.useLinkAsTabTitle && params.linkText),
                         triggeringPrincipal_base64: this.E10SUtils.serializePrincipal(
-                            gBrowser.selectedBrowser.contentPrincipal
+                            tabParams.triggeringPrincipal
                         ),
                     },
                 ],
