@@ -15,7 +15,7 @@ const unloadedTabMenuL10n = {
     openBookmark: `Open in New Unloaded Tab`, // Appears when right-clicking a bookmark, history item, etc.
     openSyncedTab: `Open in a New Unloaded Tab`, // Appears when right-clicking a tab in the synced tabs sidebar.
     openLink: `Open Link in New Unloaded Tab`, // Appears when right-clicking a link in-content.
-    accessKey: `u`, // Some menu items use a predefined access key. (The others are dynamically generated) Access keys are underlined in the menu item's label, and pressing them on your keyboard automatically selects the menu item. They serve as hotkeys while the context menu is open. The default access key is "u" for the English, "unloaded."
+    accessKey: `u`, // All of the menu items use a predefined access key. Access keys are underlined in the menu item's label, and pressing them on your keyboard automatically selects the menu item. They serve as hotkeys while the context menu is open. The default access key is "u" for the English, "unloaded." If the chosen access key is not present in the menu item's label, instead of being underlined in the label, it will be shown after the label in parentheses, e.g. "Open All in Unloaded Tabs (G)"
 };
 
 (function () {
@@ -36,6 +36,7 @@ const unloadedTabMenuL10n = {
             this.placesMenuOpenUnloaded = this.create(document, "menuitem", {
                 id: "placesContext_open:unloaded",
                 label: unloadedTabMenuL10n.openBookmark,
+                accesskey: unloadedTabMenuL10n.accessKey,
                 disabled: true,
                 hidden: true,
                 oncommand: `unloadedTabMenu.openTab(PlacesUIUtils.getViewForNode(document.popupNode).selectedNode.uri)`,
@@ -45,6 +46,7 @@ const unloadedTabMenuL10n = {
             this.placesMenuOpenAllUnloaded = this.create(document, "menuitem", {
                 id: "placesContext_openContainer:unloaded",
                 label: unloadedTabMenuL10n.openAll,
+                accesskey: unloadedTabMenuL10n.accessKey,
                 disabled: true,
                 hidden: true,
                 oncommand: `unloadedTabMenu.openSelectedTabs()`,
@@ -54,6 +56,7 @@ const unloadedTabMenuL10n = {
             this.placesMenuOpenAllLinksUnloaded = this.create(document, "menuitem", {
                 id: "placesContext_openLinks:unloaded",
                 label: unloadedTabMenuL10n.openAll,
+                accesskey: unloadedTabMenuL10n.accessKey,
                 disabled: true,
                 hidden: true,
                 oncommand: `unloadedTabMenu.openSelectedTabs()`,
