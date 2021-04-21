@@ -289,18 +289,30 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
     fill-opacity: 1;
 }
 
-#identity-popup,
-#permission-popup,
-#protections-popup {
-	font-size: var(--panel-font-size);
-    --panel-font-size: 1.1em;
-}
-
 .identity-popup-security-connection {
-    background-position: 2em 40% !important;
+    /* background-position: 2em 40% !important; */
     background-size: 18px auto !important;
     background-image: url(chrome://userchrome/content/connection-mixed-active-loaded.svg) !important;
     font-size: 1.1em;
+}
+
+#identity-popup-securityView .identity-popup-connection-secure.security-view,
+#identity-popup-securityView .identity-popup-connection-not-secure.security-view {
+	margin-inline-start: 28px !important;
+}
+
+#identity-popup-securityView .identity-popup-security-connection {
+    background-position: 10px center !important;
+    padding-block: 4px !important;
+}
+
+#identity-popup-mainView .identity-popup-security-connection {
+    background-position: 4px center !important;
+    padding-block: 4px !important;
+}
+
+#identity-popup-mainView .identity-popup-security-connection description {
+    margin-inline-start: 10px !important;
 }
 
 #identity-popup-security-description {
@@ -325,22 +337,10 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
     -moz-context-properties: fill;
 }
 
-#identity-popup[connection="extension"]
-    #identity-popup-mainView
-    > #identity-popup-security
-    > .identity-popup-security-content
-    > .identity-popup-security-connection {
+#identity-popup[connection="extension"] .identity-popup-security-connection {
     background-image: url(chrome://userchrome/content/material/extension.svg) !important;
-    background-position: calc(2em - 1px) 30% !important;
-    background-size: 17px auto !important;
+    background-size: 18px auto !important;
     fill: currentColor !important;
-}
-
-/* connection security popup yellow "parts of this page" warning styling */
-.identity-popup-warning-yellow {
-    color: var(--warning-color) !important;
-    background-color: transparent !important;
-    border: none !important;
 }
 
 /* url bar popups */
@@ -412,6 +412,14 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
 
 .protections-popup-tp-switch[enabled]:is(:hover, :focus-visible):active {
     background: var(--protections-popup-switch-on-active-background-custom) !important;
+}
+
+#identity-popup-mainView .subviewbutton-nav[disabled="true"]::after {
+    display: none !important;
+}
+
+#identity-popup-mainView .subviewbutton-nav::after {
+	margin-inline-start: -2px !important;
 }
 
 #identity-popup-security-expander > .button-box {
@@ -502,6 +510,7 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
 
 #identity-popup-securityView-body > :is(description, label, button) {
     margin-block: 0 !important;
+    margin-inline-start: 28px !important;
 }
 
 #identity-popup-securityView-body > description#identity-popup-content-verifier {
@@ -517,11 +526,6 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
 #identity-popup-securityView-body > description#identity-popup-content-supplemental {
     margin-top: revert !important;
     padding-inline-start: 16px;
-}
-
-.identity-popup-security-connection description {
-    margin-inline-start: 0 !important;
-    margin-block: 0 !important;
 }
 
 .panel-view-body-unscrollable {
@@ -780,6 +784,16 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
         margin-inline-end: 0 !important;
     }
 
+    #identity-popup,
+    #permission-popup,
+    #protections-popup {
+        --panel-separator-margin: 4px !important;
+        --popup-width: 436.92px !important;
+        line-height: 1.1em !important;
+        font-size: var(--panel-font-size);
+        --panel-font-size: 1.1em;
+    }
+
     /* ugly small menu separators */
     #widget-overflow-mainView > toolbarseparator,
     #widget-overflow-mainView > .panel-subview-body > toolbarseparator,
@@ -789,13 +803,55 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
         margin-inline: 4px !important;
     }
 
+    #identity-popup-clear-sitedata-footer {
+        margin-inline: 4px !important;
+        margin-block: -4px 8px !important;
+    }
+
     .panel-footer.panel-footer-menulike {
         margin-inline: 4px !important;
-        margin-block: 0 4px !important;
+        margin-bottom: 4px !important;
+        margin-top: -4px !important;
+        border-top: 1px solid var(--panel-separator-color);
+    }
+
+    #identity-popup-security-httpsonlymode > label {
+        margin-top: 0 !important;
+    }
+
+    .permission-popup-section {
+        padding-bottom: 8px !important;
+    }
+
+    #permission-popup-permissions-content {
+        padding-inline: 12px 4px !important;
     }
 
     #identity-popup-securityView-body {
-        padding-block: 0.5em;
+        padding-block: 16px;
+    }
+
+    #identity-popup-mainView-panel-header,
+    #permission-popup-mainView-panel-header,
+    #protections-popup-mainView-panel-header {
+        min-height: 32px !important;
+        font-size: 14px !important;
+        line-height: 14px !important;
+        font-weight: normal !important;
+    }
+
+    .panel-header > h1,
+    .popup-notification-description {
+        font-size: 14px !important;
+        font-weight: normal !important;
+    }
+    
+    :is(#identity-popup-mainView-panel-header,
+    #permission-popup-mainView-panel-header,
+    #protections-popup-mainView-panel-header) span,
+    .protections-popup-tp-switch-on-header,
+    .protections-popup-tp-switch-off-header {
+        font-weight: inherit !important;
     }
 
     #identity-popup-securityView .identity-popup-security-content,
@@ -803,5 +859,9 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
     .permission-popup-section,
     .protections-popup-section {
         margin-inline: 4px;
+    }
+    
+    #identity-popup-multiView > .panel-viewcontainer {
+        min-height: revert !important;
     }
 }

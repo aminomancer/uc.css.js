@@ -10,14 +10,21 @@
     padding-block: calc((var(--urlbar-container-height) - var(--urlbar-height)) / 2) !important;
 }
 
-#search-container {
+toolbarpaletteitem[place="palette"] > #search-container {
+	min-height: 32px !important;
+	max-height: 32px !important;
+    padding-block: 0 !important;
+    margin-block: 5px !important;
+}
+
+#nav-bar-customization-target #search-container {
     padding-block: 0 !important;
     height: var(--urlbar-container-height) !important;
     min-height: var(--urlbar-container-height) !important;
     margin-inline: 0 !important;
 }
 
-#searchbar {
+#nav-bar-customization-target #searchbar {
     box-shadow: none !important;
     -moz-box-align: center;
     border-radius: 5px !important;

@@ -18,7 +18,7 @@
     width: 15.6px !important;
 }
 
-:root[privatebrowsingmode="temporary"] .titlebar-spacer[type="post-tabs"] {
+:root:is([privatebrowsingmode], [accessibilitymode]) .titlebar-spacer[type="post-tabs"] {
     width: 0px !important;
     margin-left: -2px !important;
 }
@@ -33,8 +33,7 @@
 
 /* menubar next to tabs */
 #toolbar-menubar {
-    -moz-box-align: center !important;
-    padding-inline: 6px !important;
+    padding-inline: 2px !important;
     z-index: 12 !important;
     background: var(--lwt-accent-color) !important;
     position: relative !important;
@@ -76,6 +75,7 @@
     > #titlebar
     > #toolbar-menubar {
     visibility: collapse !important;
+    transition: 0s 0.2s visibility !important;
 }
 
 /* the drag space should push down everything */
@@ -95,7 +95,7 @@
     padding-top: 0 !important;
 }
 
-:root:not([chromehidden~="menubar"], [inFullscreen="true"])
+:root:not([chromehidden~="menubar"])
     #toolbar-menubar:not([autohide="true"])
     ~ #TabsToolbar
     .titlebar-spacer[type="post-tabs"] {
@@ -110,17 +110,16 @@
     display: -moz-box !important;
 }
 
-#toolbar-menubar :is(#menubar-items, #wrapper-menubar-items) {
-    position: relative !important;
-    top: -3px !important;
-    right: 2px !important;
+#toolbar-menubar #menubar-items {
+    padding-inline: 4px !important;
+    -moz-box-pack: center !important;
 }
 
 #toolbar-menubar #main-menubar > menu {
-    border-radius: 2px !important;
+    border-radius: var(--toolbarbutton-border-radius) !important;
     appearance: none !important;
-    padding-top: 2px !important;
-    padding-bottom: 2px !important;
+    padding-block: 2px !important;
+    min-height: 2em !important;
 }
 
 #toolbar-menubar #main-menubar > menu[_moz-menuactive] {
@@ -131,31 +130,29 @@
     background-color: var(--toolbarbutton-active-background) !important;
 }
 
-:root[privatebrowsingmode]
-    #toolbar-menubar:not([inactive])
-    ~ #TabsToolbar
-    .private-browsing-indicator {
-    display: block !important;
-    right: 94px !important;
-    top: calc(9.5px + var(--space-above-tabbar)) !important;
-    z-index: 0 !important;
-    pointer-events: none !important;
-    position: fixed !important;
+#toolbar-menubar #search-container {
+    padding: 0 !important;
+    margin: 0 2px !important;
+    min-height: 0 !important;
+    min-width: var(--user-menubar-searchbar-width) !important;
+    resize: horizontal !important;
+    height: 100% !important;
+    box-sizing: border-box !important;
 }
 
-:root[privatebrowsingmode] #toolbar-menubar :is(#menubar-items, #wrapper-menubar-items) {
-    right: 39px !important;
+#toolbar-menubar #searchbar {
+    min-height: 28px !important;
+    border: none !important;
+    box-shadow: none !important;
 }
 
-:root[privatebrowsingmode] #toolbar-menubar:not([inactive]) ~ #TabsToolbar .toolbar-items {
-    margin-right: 429px !important;
+#toolbar-menubar .searchbar-textbox {
+    min-height: 28px !important;
 }
 
-:root[inFullscreen][privatebrowsingmode]
-    #toolbar-menubar:not([inactive])
-    ~ #TabsToolbar
-    .toolbar-items {
-    margin-right: 329.5px !important;
+#toolbar-menubar #searchbar .search-go-button {
+    border-radius: 0 !important;
+    margin: 0 !important;
 }
 
 /* get rid of drop shadow drawn on leftmost visible tab */
@@ -280,13 +277,13 @@
 }
 
 .titlebar-buttonbox {
-    margin-right: 7px !important;
-    margin-left: 0px !important;
+    margin-right: 6px !important;
+    margin-left: 0 !important;
 }
 
 #window-controls {
     margin-right: 6px !important;
-    margin-left: 8px !important;
+    margin-left: 0 !important;
 }
 
 .titlebar-min,
@@ -363,11 +360,16 @@
 }
 
 .private-browsing-indicator {
-    background-image: url(chrome://userchrome/content/privateBrowsing.svg) !important;
+    background-image: url(chrome://userchrome/content/skin/privateBrowsing.svg) !important;
 }
 
 .accessibility-indicator {
     background-image: url(chrome://userchrome/content/devtools/tool-accessibility.svg) !important;
+}
+
+.accessibility-indicator:is(:hover, :active, :focus, :focus-visible) {
+	fill: var(--attention-color) !important;
+	outline: 0;
 }
 
 /* all tabs button popup */

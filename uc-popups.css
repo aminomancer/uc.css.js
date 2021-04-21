@@ -557,6 +557,21 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlis
         flex-wrap: nowrap;
     }
 
+/*     .dialog-button-box > button[dlgtype="cancel"][default="true"]:is(:enabled, :not([disabled="true"])) {
+        background-color: var(--in-content-button-background) !important;
+    }
+
+    .dialog-button-box > button[dlgtype="cancel"][default="true"]:is(:enabled, :not([disabled="true"])):hover {
+        background-color: var(--in-content-button-background-hover) !important;
+    }
+
+    .dialog-button-box
+        > button[dlgtype="cancel"][default="true"]:is(:enabled, :not([disabled="true"])):hover:active,
+    .dialog-button-box > button[dlgtype="cancel"][default="true"][open],
+    .dialog-button-box > button[dlgtype="cancel"][default="true"][open]:hover {
+        background-color: var(--in-content-primary-button-background-active) !important;
+    }
+
     .dialog-button-box > button[dlgtype="accept"]:is(:enabled, :not([disabled="true"])) {
         background-color: var(--in-content-primary-button-background) !important;
     }
@@ -570,7 +585,7 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlis
     .dialog-button-box > button[dlgtype="accept"][open],
     .dialog-button-box > button[dlgtype="accept"][open]:hover {
         background-color: var(--in-content-primary-button-background-active) !important;
-    }
+    } */
 
     dialog input:-moz-focusring,
     button:-moz-focusring {

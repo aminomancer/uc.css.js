@@ -168,6 +168,7 @@ toolbar {
         --panel-description-color: hsl(235, 48%, 89%, 70%) !important;
         --panel-shortcut-color: hsl(235, 27%, 73%, 70%) !important;
         --panel-shortcut-focus: hsl(235, 32%, 75%, 90%) !important;
+        --error-text-color: var(--warning-color) !important;
         --proton-tab-inline-padding: 0px !important;
         --tab-shadow-max-size: 0px !important;
         --buttons-primary-button-bgcolor: var(--in-parent-primary-button-background) !important;
@@ -178,9 +179,6 @@ toolbar {
             --in-parent-primary-button-background-active
         ) !important;
         --buttons-primary-button-color: var(--in-parent-primary-button-text-color) !important;
-        --popup-notification-body-width: calc(
-            28em - calc(2 * var(--arrowpanel-padding))
-        ) !important;
     }
 
     :root,

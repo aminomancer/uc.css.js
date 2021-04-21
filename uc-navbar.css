@@ -9,11 +9,19 @@
     height: 0;
 }
 
-/* makes the flexible space in toolbar customization way smaller */
-toolbarpaletteitem[place="toolbar"][id^="wrapper-customizableui-special-spring"],
-toolbarspring {
-    max-width: none !important;
-    -moz-box-flex: 1 !important;
+toolbarpaletteitem > toolbarspring {
+    margin-block: 3px !important;
+    outline: none !important;
+    border: 1px solid var(--arrowpanel-dimmed-even-further) !important;
+    outline-offset: 0 !important;
+    border-radius: var(--toolbarbutton-border-radius) !important;
+}
+
+toolbarpaletteitem[place="palette"] > toolbarspring {
+    min-height: 32px !important;
+    max-height: 32px !important;
+    padding-block: 0 !important;
+    margin-block: 5px !important;
 }
 
 /* toolbar button badges */

@@ -23,6 +23,9 @@
     scroll-behavior: smooth !important;
     overflow: scroll !important;
     scrollbar-width: none !important;
+    min-width: 0 !important;
+    padding-inline: 4px;
+    clip-path: inset(0 4px 0 4px);
 }
 
 #PopupSearchAutoComplete .search-panel-one-offs-header {
@@ -38,15 +41,30 @@
     color: var(--panel-shortcut-color);
 }
 
-#PopupSearchAutoComplete .search-setting-button-compact {
-    display: -moz-box !important;
-}
-
 #PopupSearchAutoComplete .search-one-offs .button-icon {
     fill-opacity: 1 !important;
 }
 
+#PopupSearchAutoComplete .searchbar-engine-one-off-item {
+    margin: 0 !important;
+    padding: 2px !important;
+    background: none !important;
+}
+
+#PopupSearchAutoComplete :is(.searchbar-engine-one-off-item, .addengine-item) > :is(stack, .button-box) {
+    border-radius: var(--toolbarbutton-border-radius);
+}
+
+#PopupSearchAutoComplete :is(.searchbar-engine-one-off-item, .addengine-item):hover > :is(stack, .button-box) {
+	background-color: var(--arrowpanel-dimmed) !important;
+}
+
+#PopupSearchAutoComplete :is(.searchbar-engine-one-off-item, .addengine-item)[selected]:not(:hover) > :is(stack, .button-box) {
+	background-color: var(--arrowpanel-faint) !important;
+}
+
 #PopupSearchAutoComplete #searchbar-one-offs-header-label,
+#PopupSearchAutoComplete .search-add-engines,
 #PopupSearchAutoComplete .search-setting-button,
 #PopupSearchAutoComplete .search-one-offs > .searchbar-separator {
     display: none !important;
