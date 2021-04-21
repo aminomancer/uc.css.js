@@ -67,7 +67,7 @@ For best results, set density mode to `Normal` and theme to `Dark` in the custom
 | userChrome.tabs.rounded-outer-corners.disabled 	| Boolean 	| false 	| This controls whether tabs have rounded bottom corners<br/><a href="https://youtu.be/BAuABH13ytM"><img src="preview/prev-tabcorners.png" width="100%"/></a> 	|
 | widget.chrome.allow-gtk-dark-theme 	| Boolean 	| true 	| I'm not sure if these still do anything. But might as well enable them 	|
 | widget.content.allow-gtk-dark-theme 	| Boolean 	| true 	|  	|
-| widget.disable-native-theme-for-content 	| Boolean 	| true 	| Enables Firefox's custom appearance for elements like checkboxes. Overrides the "native" appearance given by the OS stylesheets. 	|
+| widget.disable-native-theme-for-content 	| Boolean 	| true 	| Enables Firefox's custom appearance for elements like checkboxes. Skips the "native" appearance given by the OS stylesheets. 	|
 </details>
 
 The `userContent.css` file handles stuff like the devtools, some UI pages and context menus, plaintext pages, browser background color while pages are loading, and the built-in HTML video player. It also includes some site-specific changes like my personal dark mode layout for Wikipedia. It isn't required for the rest of the theme to work, but takes care of some issues endemic to Firefox that might cause dark mode users a lot of grief otherwise.
