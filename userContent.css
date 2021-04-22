@@ -557,7 +557,8 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
     }
 
     #ContentSelectDropdown > menupopup > :is(menuitem, menu, menucaption, menugroup, menuseparator),
-    menupopup.in-menulist > :is(menuitem, menu, menucaption, menugroup, menuseparator) {
+    menupopup.in-menulist > :is(menuitem, menu, menucaption, menugroup, menuseparator),
+    #PopupAutoComplete > richlistbox > richlistitem {
         margin-inline: var(--menupopup-inner-padding-magnitude);
     }
 
@@ -862,7 +863,8 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
             --panel-shadow: none !important;
         }
 
-        menupopup > :is(menuitem, menu, menucaption, menugroup, menuseparator) {
+        menupopup > :is(menuitem, menu, menucaption, menugroup, menuseparator),
+        #PopupAutoComplete > richlistbox > richlistitem {
             margin-inline: var(--menupopup-inner-padding-magnitude);
         }
     }

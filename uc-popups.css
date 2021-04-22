@@ -122,6 +122,11 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlis
     padding-inline: 2px !important;
 }
 
+panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlistitem[selected]:not([disabled]) {
+	background-color: var(--arrowpanel-dimmed) !important;
+    color: var(--menu-color) !important;
+}
+
 /* push notification popup (lower right corner) */
 @-moz-document url("chrome://global/content/alerts/alert.xhtml")
 {
