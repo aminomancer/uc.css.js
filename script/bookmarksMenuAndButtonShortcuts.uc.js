@@ -57,12 +57,19 @@ const ucBookmarksShortcuts = {
     },
 
     init() {
+        // delete these two lines if you don't want the confirmation hint to show when you bookmark a page.
+        Services.prefs.setIntPref("browser.bookmarks.editDialog.confirmationHintShowCount", 0);
+        Services.prefs.lockPref("browser.bookmarks.editDialog.confirmationHintShowCount");
+
         BookmarkingUI.button.setAttribute("onclick", "ucBookmarksShortcuts.bookmarkClick(event)");
         CustomizableUI.getWidget("library-button")
             .forWindow(window)
             .node?.setAttribute("onclick", "ucBookmarksShortcuts.bookmarkClick(event)");
+
         this.addMenuItem(BookmarkingUI.button.firstElementChild);
+
         gBrowser.addTabsProgressListener(this);
+
         PlacesUtils.bookmarks.addObserver(this);
         PlacesUtils.observers.addListener(
             ["bookmark-added", "bookmark-removed"],
