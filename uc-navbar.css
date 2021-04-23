@@ -349,4 +349,9 @@ toolbar .toolbarbutton-1:not([disabled])[checked]:hover > .toolbarbutton-icon {
         --notification-background: hsl(350.5, 100%, 50%) !important;
         --notification-text: black !important;
     }
+
+    :root[fxastatus="signedin"] #fxa-menu-avatar,
+    :root[fxastatus="signedin"] #fxa-avatar-image {
+        border-radius: revert !important;
+    }
 }

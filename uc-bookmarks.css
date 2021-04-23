@@ -566,6 +566,10 @@
         list-style-image: url(chrome://userchrome/content/skin/bookmark.svg) !important;
     }
 
+    #BMB_bookmarksPopup #BMB_bookmarksShowAll .menu-text {
+        padding-inline-start: 2px !important;
+    }
+
     #BMB_bookmarksShowAll:before {
         content: "" !important;
         position: relative !important;
@@ -580,13 +584,46 @@
         -moz-context-properties: fill, fill-opacity, stroke !important;
     }
 
-    #BMB_bookmarksPopup #BMB_bookmarksShowAll .menu-text {
-        padding-inline-start: 2px !important;
-    }
-
     #BMB_bookmarksShowAll :is(.menu-accel, .menu-iconic-accel)[value] {
         margin-inline: 10px 4px !important;
         padding-block: 0 !important;
+    }
+
+    menuitem#bookmarksShowAll .menu-text,
+    menuitem#menu_bookmarkThisPage .menu-text {
+        padding-inline-start: 0 !important;
+    }
+
+    menuitem#bookmarksShowAll:before {
+        content: "" !important;
+        position: relative !important;
+        display: -moz-inline-box !important;
+        width: 16px !important;
+        height: 16px !important;
+        padding-inline: 0 !important;
+        margin-inline: 6px !important;
+        fill: currentColor !important;
+        background-image: url(chrome://userchrome/content/skin/library.svg) !important;
+        transform: scaleX(-1);
+        -moz-context-properties: fill, fill-opacity, stroke !important;
+    }
+
+    menuitem#menu_bookmarkThisPage:before {
+        content: "" !important;
+        position: relative !important;
+        display: -moz-inline-box !important;
+        width: 16px !important;
+        height: 16px !important;
+        padding-inline: 0 !important;
+        margin-inline: 6px !important;
+        fill: currentColor !important;
+        background-image: url(chrome://userchrome/content/skin/bookmark-hollow.svg) !important;
+        transform: scaleX(-1);
+        -moz-context-properties: fill, fill-opacity, stroke !important;
+    }
+
+    menuitem#menu_bookmarkThisPage[data-l10n-id="menu-bookmark-edit"]:before {
+        background-image: url(chrome://userchrome/content/skin/bookmark.svg) !important;
     }
 
     #bookmarksMenuPopup > menuseparator.small-separator {
