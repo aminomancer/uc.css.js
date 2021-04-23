@@ -284,74 +284,45 @@ toolbar .toolbarbutton-1:not([disabled])[checked]:hover > .toolbarbutton-icon {
     #navigator-toolbox > :is(legacy-stack, .notificationbox-stack),
     #navigator-toolbox > named-deck > :is(legacy-stack, .notificationbox-stack),
     #navigator-toolbox > named-deck {
-        display: flex !important;
+        display: inline-flex !important;
         position: absolute !important;
         width: unset !important;
         border-bottom-right-radius: 4px !important;
         max-height: 74px !important;
-    }
-
-    #navigator-toolbox notification {
-        width: -moz-fit-content !important;
-        display: flex !important;
-        overflow: hidden !important;
-        border: none !important;
-        transition: margin-top 300ms var(--animation-easing-function),
-            opacity 300ms var(--animation-easing-function) !important;
-    }
-
-    #navigator-toolbox notification .messageText {
-        display: inline-block !important;
-        overflow: hidden !important;
-        white-space: nowrap !important;
-        text-overflow: ellipsis !important;
-    }
-
-    #navigator-toolbox notification .messageImage {
-        min-width: 24px !important;
-    }
-
-    #navigator-toolbox notification .notification-button {
-        margin-inline: 4px 0 !important;
-    }
-
-    #navigator-toolbox notification .close-icon {
         background: none !important;
-        width: 40px !important;
-        height: 40px !important;
+        will-change: width !important;
+        transition: width 300ms var(--animation-easing-function) !important;
     }
 
-    #navigator-toolbox notification .close-icon .toolbarbutton-icon {
-        border-radius: var(--toolbarbutton-border-radius);
+    #navigator-toolbox > :is(legacy-stack, .notificationbox-stack) > notification-message {
+        margin: 0 !important;
+        display: inline-block !important;
+        position: relative !important;
+        max-height: 32px !important;
+        border-radius: 0 !important;
+        transition: none !important;
     }
 
-    #navigator-toolbox notification .close-icon:hover .toolbarbutton-icon {
-        background-color: color-mix(in srgb, currentColor 10%, transparent);
+    link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar {
+        border-radius: 0 !important;
     }
 
-    #navigator-toolbox notification .close-icon:hover:active .toolbarbutton-icon {
-        background-color: color-mix(in srgb, currentColor 20%, transparent);
+    .container.infobar::before {
+        border-radius: 0 !important;
     }
 
-    #navigator-toolbox notification[type="info"] .text-link {
-        color: var(--toolbarbutton-icon-fill-attention) !important;
+    #navigator-toolbox > :is(legacy-stack, .notificationbox-stack) > notification-message[style="margin-top: -32px; opacity: 0;"] {
+        margin-top: -32px !important;
+        opacity: 1 !important;
+        transition: margin-top 0ms 1ms linear !important;
     }
 
-    #navigator-toolbox notification[type="critical"] .text-link {
-        color: black !important;
+    link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar > .icon {
+        margin-inline-start: 12px !important;
     }
 
-    #navigator-toolbox notification[type="info"] {
-        --notification-background: var(--arrowpanel-background) !important;
-    }
-
-    #navigator-toolbox notification[type="critical"] {
-        --notification-background: hsl(350.5, 100%, 50%) !important;
-        --notification-text: black !important;
-    }
-
-    :root[fxastatus="signedin"] #fxa-menu-avatar,
-    :root[fxastatus="signedin"] #fxa-avatar-image {
-        border-radius: revert !important;
+    link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-close {
+        border-radius: var(--toolbarbutton-border-radius) !important;
+        margin: 4px !important;
     }
 }
