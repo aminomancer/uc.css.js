@@ -6,62 +6,38 @@
 // ==/UserScript==
 
 (function () {
+    // wait for {param} milliseconds in async function
     function sleep(ms) {
         return new Promise((resolve) => setTimeout(resolve, ms));
     }
 
+    // a class that manages the update banner
     class UpdateBannerLabelProvider {
         constructor() {
+            // hook up interfaces and services
             XPCOMUtils.defineLazyModuleGetters(this, {
                 AppUpdater: "resource:///modules/AppUpdater.jsm",
             });
             this.updater = new this.AppUpdater();
-            this.updater.provider = this;
-            this.updater.__updateCheckListener = {
-                onCheckComplete(aRequest, aUpdates) {
-                    this.update = this.aus.selectUpdate(aUpdates);
-
-                    if (!this.update) {
-                        this._setStatus(AppUpdater.STATUS.NO_UPDATES_FOUND);
-                        return;
-                    }
-
-                    if (this.update.unsupported) {
-                        this._setStatus(AppUpdater.STATUS.UNSUPPORTED_SYSTEM);
-                        return;
-                    }
-
-                    if (!this.aus.canApplyUpdates) {
-                        this._setStatus(AppUpdater.STATUS.MANUAL_UPDATE);
-                        return;
-                    }
-
-                    if (!this.promiseAutoUpdateSetting) {
-                        this.promiseAutoUpdateSetting = UpdateUtils.getAppUpdateAutoEnabled();
-                    }
-                    this.promiseAutoUpdateSetting.then((updateAuto) => {
-                        if (!updateAuto || this.aus.manualUpdateOnly)
-                            this._setStatus(AppUpdater.STATUS.DOWNLOAD_AND_INSTALL);
-                    });
-
-                    this.provider.handleLabel();
-                },
-                onError(aRequest, aUpdate) {
-                    this._setStatus(AppUpdater.STATUS.NO_UPDATES_FOUND);
-                },
-                QueryInterface: ChromeUtils.generateQI(["nsIUpdateCheckListener"]),
+            // calls the label-setting function when an update check has resolved
+            this._appUpdateListener = (status, ...args) => {
+                this.onUpdateStatus(status, ...args);
             };
-            this.attach();
+            // attach observers of update-related notifications
+            this.manageListeners();
         }
 
+        // DOM node for appmenu panel's update banner
         get banner() {
             return PanelUI._panelBannerItem;
         }
 
+        // object, contains details of the active notification
         get notification() {
             return this.banner?.notification;
         }
 
+        // return an object with the correct label prefix and update version
         get attributes() {
             if (this.notification)
                 switch (this.notification.id) {
@@ -90,17 +66,25 @@
             return false;
         }
 
+        // on receiving update notifications, retrieve the staged update's version name and number
         async observe(_sub, _top, _data) {
             this.updater.checkForUpdates();
         }
 
+        // event listener (currently just for window closing)
         handleEvent(e) {
-            this.detach(e);
+            if (e.target === window) this.manageListeners("remove");
         }
 
+        // method to call when an update check finishes (sets the label)
+        onUpdateStatus(status, ...args) {
+            this.handleLabel();
+        }
+
+        // create text nodes if necessary, memoize the update build, set the label text
         handleLabel() {
             if (!this.notification?.id.startsWith("update")) return;
-            if (!this.labelContainer) this.createTextNode();
+            if (!this.labelContainer) this.createTextNodes();
             if (this.updater.update) {
                 this.buildName = this.updater.update.name;
                 this.buildVersion = this.updater.update.displayVersion;
@@ -108,7 +92,8 @@
             }
         }
 
-        createTextNode() {
+        // replace the single label node with an hbox with 2 nodes so we can make only half the label bold.
+        createTextNodes() {
             this.labelContainer = document.createXULElement("hbox");
             this.banner._textNode.after(this.labelContainer);
             this.banner._textNode.remove();
@@ -127,6 +112,7 @@
             this.updateLabel.style.fontWeight = 600;
         }
 
+        // set the label's text values according to the staged update's parameters
         setText() {
             let attr = this.attributes;
             if (!attr) return;
@@ -134,38 +120,37 @@
             this.versionLabel.textContent = attr.version;
         }
 
-        attach() {
-            Services.obs.addObserver(this, "appMenu-notifications");
-            Services.obs.addObserver(this, "show-update-progress");
-            addEventListener("uninit", this);
-        }
-
-        detach(e) {
-            if (e.target === window) {
-                Services.obs.removeObserver(this, "appMenu-notifications");
-                Services.obs.removeObserver(this, "show-update-progress");
-            }
+        // attach or detach observers (update check listener; notification request listeners; window close listener)
+        manageListeners(mode = "add") {
+            this.updater[`${mode}Listener`](this._appUpdateListener);
+            Services.obs[`${mode}Observer`](this, "appMenu-notifications");
+            Services.obs[`${mode}Observer`](this, "show-update-progress");
+            window[`${mode}EventListener`]("uninit", this);
         }
     }
 
+    // startup
     async function init() {
-        window.gUpdateBanners = new UpdateBannerLabelProvider();
-        await sleep(1000);
+        window.gUpdateBanners = new UpdateBannerLabelProvider(); // globalize the provider (for debugging and connection to other scripts if necessary)
+        await sleep(1000); // wait a second just in case of unrelated errors on startup (probably not necessary if you don't use nightly, but shouldn't matter as firefox doesn't check for updates immediately after startup unless you open the about dialog)
+        // override the built-in method that sets the banner label
         PanelUI._showBannerItem = function _showBannerItem(notification) {
             if (!this._panelBannerItem) {
                 this._panelBannerItem = this.mainView.querySelector(".panel-banner-item");
             }
-            let knownNotification = this._panelBannerItem.hasAttribute("label-" + notification.id);
+            let knownNotification = this._panelBannerItem.getAttribute("label-" + notification.id);
             // Ignore items we don't know about.
             if (!knownNotification) return;
 
             this._panelBannerItem.setAttribute("notificationid", notification.id);
             this._panelBannerItem.notification = notification;
             this._panelBannerItem.hidden = false;
+            this._panelBannerItem.setAttribute("label", label); // temporary label
             gUpdateBanners.handleLabel();
         };
     }
 
+    // wait until PanelUI is initialized since we have to override it
     if (gBrowserInit.delayedStartupFinished) {
         init();
     } else {

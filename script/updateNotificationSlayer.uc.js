@@ -6,7 +6,7 @@
 // @updateURL    https://github.com/aminomancer/uc.css.js/tree/master/script/updateNotificationSlayer.uc.js
 // ==/UserScript==
 
-(async () => {
+(async function () {
     /**
      * pause execution for ms milliseconds
      * @param {int} ms (milliseconds)
@@ -15,12 +15,14 @@
         return new Promise((resolve) => setTimeout(resolve, ms));
     }
 
-    function AppMenuNotification(id, mainAction, secondaryAction, options = {}) {
-        this.id = id;
-        this.mainAction = mainAction;
-        this.secondaryAction = secondaryAction;
-        this.options = options;
-        this.dismissed = this.options.dismissed || false;
+    class AppMenuNotification {
+        constructor(id, mainAction, secondaryAction, options = {}) {
+            this.id = id;
+            this.mainAction = mainAction;
+            this.secondaryAction = secondaryAction;
+            this.options = options;
+            this.dismissed = this.options.dismissed || false;
+        }
     }
 
     async function init() {
@@ -34,8 +36,6 @@
                 }
                 return;
             }
-
-            if (gUpdateBanners) gUpdateBanners.updater.checkForUpdates();
 
             if ((window.fullScreen && FullScreen.navToolboxHidden) || document.fullscreenElement) {
                 this._hidePopup();
