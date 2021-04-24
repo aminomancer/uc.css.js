@@ -127,7 +127,8 @@ menupopup {
 }
 
 :root:-moz-window-inactive:not([customizing]) {
-    --toolbarbutton-icon-fill-opacity: 0.6 !important;
+    --toolbarbutton-icon-fill-opacity: 0.7 !important;
+    --urlbar-icon-fill-opacity: 0.4 !important;
 }
 
 toolbar {

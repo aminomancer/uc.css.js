@@ -315,6 +315,11 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
     margin-inline-start: 10px !important;
 }
 
+#identity-popup-mainView .identity-popup-security-connection .upgraded {
+    margin-inline-start: -4px !important;
+    font-size: 0.8em !important;
+}
+
 #identity-popup-security-description {
     font-size: 12px !important;
 }
