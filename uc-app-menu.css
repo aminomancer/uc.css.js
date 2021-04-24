@@ -67,6 +67,22 @@
     border-radius: 2px !important;
 }
 
+#appMenu-multiView .subviewbutton-back .toolbarbutton-icon {
+    height: revert !important;
+    width: revert !important;
+}
+
+#appMenu-multiView .panel-header {
+    padding-block: 6px 0 !important;
+    padding-inline: 2px !important;
+}
+
+#appMenu-multiView .panel-header > h1 {
+    font-size: 1.1em !important;
+    font-weight: 600 !important;
+    margin-block: 0 !important;
+}
+
 /* appmenu what's new checkbox */
 #panelMenu-toggleWhatsNew {
     fill: currentColor !important;
@@ -146,8 +162,10 @@
 #PanelUI-menu-button[badge-status^="update"] > .toolbarbutton-badge-stack > .toolbarbutton-badge {
     background: hsl(125, 81%, 57%) url(chrome://userchrome/content/update-icon-inverted.svg)
         no-repeat center/contain !important;
+    background-clip: border-box !important;
     fill: hsl(118, 89%, 24%) !important;
     border: 1px solid transparent !important;
+    border-radius: 100% !important;
     -moz-context-properties: fill !important;
     padding: 0 !important;
 }
@@ -173,12 +191,16 @@
 .panel-banner-item[notificationid^="update"] > .toolbarbutton-icon {
     background: hsl(125, 81%, 57%) url(chrome://userchrome/content/update-icon-inverted.svg)
         no-repeat center/contain !important;
-    border: 1px solid transparent;
+    background-clip: border-box !important;
     fill: hsl(118, 89%, 24%) !important;
-    width: 16px !important;
-    height: 16px !important;
-    margin-block: 1px !important;
+    border: 1px solid transparent;
+    border-radius: 100% !important;
     -moz-context-properties: fill !important;
+    min-width: 16px !important;
+    min-height: 16px !important;
+    width: unset !important;
+    height: unset !important;
+    box-sizing: content-box !important;
     padding: 0 !important;
 }
 
@@ -517,10 +539,15 @@
     #appMenu-proton-update-banner {
         margin: var(--arrowpanel-menuitem-margin) !important;
         margin-bottom: 4px !important;
+        -moz-box-align: center !important;
         --panel-banner-item-color: black;
         --panel-banner-item-background-color: hsla(96, 65%, 75%, 0.5);
         --panel-banner-item-hover-bgcolor: hsla(96, 65%, 75%, 0.8);
         --panel-banner-item-active-bgcolor: hsl(96, 65%, 75%);
+    }
+
+    #appMenu-proton-update-banner strong {
+        font-weight: 600 !important;
     }
 
     :root[lwt-popup-brighttext] #appMenu-proton-update-banner {

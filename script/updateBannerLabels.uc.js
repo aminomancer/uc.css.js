@@ -12,50 +12,113 @@
                 AppUpdater: "resource:///modules/AppUpdater.jsm",
             });
             this.updater = new this.AppUpdater();
-            Services.obs.addObserver(this, "appMenu-notifications");
-            Services.obs.addObserver(this, "show-update-progress");
-            addEventListener("uninit", this);
-        }
-
-        async observe(_sub, top, _data) {
-            switch (top) {
-                case "appMenu-notifications":
-                case "show-update-progress":
-                    await this.updater.checkForUpdates();
-                    this.buildName = this.updater.update.name;
-                    this.buildVersion = this.updater.update.displayVersion;
-                    this.setAttributes(this.banner, this.attributes);
-                    break;
-            }
-        }
-
-        handleEvent(e) {
-            switch (e.type) {
-                case "uninit":
-                    Services.obs.removeObserver(this, "appMenu-notifications");
-                    Services.obs.removeObserver(this, "show-update-progress");
-                    break;
-            }
-        }
-
-        setAttributes(el, attrs) {
-            for (var key in attrs) {
-                el.setAttribute(key, attrs[key]);
-            }
+            this.attach();
         }
 
         get banner() {
             return PanelUI._panelBannerItem;
         }
 
+        get notification() {
+            return this.banner?.notification;
+        }
+
         get attributes() {
-            return {
-                "label-update-available": `Download update: ${this.buildName}`,
-                "label-update-manual": `Download update: ${this.buildName}`,
-                "label-update-downloading": `Downloading update: ${this.buildName}`,
-                "label-update-restart": `Restart to install update: ${this.buildVersion}`,
-                "label-update-unsupported": `Unable to update: system incompatible`,
-            };
+            if (this.notification)
+                switch (this.notification.id) {
+                    case "update-available":
+                    case "update-manual":
+                        return {
+                            label: "Download update: ",
+                            version: this.buildName,
+                        };
+                    case "update-downloading":
+                        return {
+                            label: "Downloading update: ",
+                            version: this.buildName,
+                        };
+                    case "update-restart":
+                        return {
+                            label: "Restart to install update: ",
+                            version: this.buildVersion,
+                        };
+                    case "update-unsupported":
+                        return {
+                            label: "Unable to update: ",
+                            version: "system incompatible",
+                        };
+                }
+            return false;
+        }
+
+        async observe(_sub, _top, _data) {
+            await this.updater.checkForUpdates();
+            this.handleLabel();
+            break;
+        }
+
+        handleEvent(e) {
+            switch (e.type) {
+                case "uninit":
+                    this.detach(e);
+                    break;
+                case "ViewShowing":
+                    this.handleLabel();
+                    break;
+            }
+        }
+
+        handleLabel() {
+            if (!this.notification?.id.startsWith("update")) return;
+            if (!this.labelContainer) this.createTextNode();
+            if (this.updater.update) {
+                this.buildName = this.updater.update.name;
+                this.buildVersion = this.updater.update.displayVersion;
+                this.setText();
+            }
+        }
+
+        createTextNode() {
+            this.labelContainer = document.createXULElement("hbox");
+            this.banner._textNode.after(this.labelContainer);
+            this.banner._textNode.remove();
+
+            this.updateLabel = document.createElement("strong");
+            this.versionLabel = document.createElement("span");
+            this.labelContainer.appendChild(this.updateLabel);
+            this.updateLabel.after(this.versionLabel);
+
+            this.labelContainer.className = "toolbarbutton-text";
+            this.labelContainer.setAttribute("crop", "right");
+            this.labelContainer.setAttribute("flex", 1);
+            this.updateLabel.id = "appMenu-proton-update-banner-label";
+            this.versionLabel.id = "appMenu-proton-update-banner-version";
+            this.banner.style.fontWeight = "normal";
+            this.updateLabel.style.fontWeight = 600;
+        }
+
+        setText() {
+            let attr = this.attributes;
+            if (!attr) return;
+            this.updateLabel.textContent = attr.label;
+            this.versionLabel.textContent = attr.version;
+        }
+
+        attach() {
+            Services.obs.addObserver(this, "appMenu-notifications");
+            Services.obs.addObserver(this, "show-update-progress");
+            PanelMultiView.getViewNode(document, "appMenu-protonMainView").addEventListener(
+                "ViewShowing",
+                this
+            );
+            addEventListener("uninit", this);
+        }
+
+        detach(e) {
+            if (e.target === window) {
+                Services.obs.removeObserver(this, "appMenu-notifications");
+                Services.obs.removeObserver(this, "show-update-progress");
+            }
         }
     }
 
