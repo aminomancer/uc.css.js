@@ -54,7 +54,6 @@
         async observe(_sub, _top, _data) {
             await this.updater.checkForUpdates();
             this.handleLabel();
-            break;
         }
 
         handleEvent(e) {
