@@ -6,12 +6,51 @@
 // ==/UserScript==
 
 (function () {
+    function sleep(ms) {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+    }
+
     class UpdateBannerLabelProvider {
         constructor() {
             XPCOMUtils.defineLazyModuleGetters(this, {
                 AppUpdater: "resource:///modules/AppUpdater.jsm",
             });
             this.updater = new this.AppUpdater();
+            this.updater.provider = this;
+            this.updater.__updateCheckListener = {
+                onCheckComplete(aRequest, aUpdates) {
+                    this.update = this.aus.selectUpdate(aUpdates);
+
+                    if (!this.update) {
+                        this._setStatus(AppUpdater.STATUS.NO_UPDATES_FOUND);
+                        return;
+                    }
+
+                    if (this.update.unsupported) {
+                        this._setStatus(AppUpdater.STATUS.UNSUPPORTED_SYSTEM);
+                        return;
+                    }
+
+                    if (!this.aus.canApplyUpdates) {
+                        this._setStatus(AppUpdater.STATUS.MANUAL_UPDATE);
+                        return;
+                    }
+
+                    if (!this.promiseAutoUpdateSetting) {
+                        this.promiseAutoUpdateSetting = UpdateUtils.getAppUpdateAutoEnabled();
+                    }
+                    this.promiseAutoUpdateSetting.then((updateAuto) => {
+                        if (!updateAuto || this.aus.manualUpdateOnly)
+                            this._setStatus(AppUpdater.STATUS.DOWNLOAD_AND_INSTALL);
+                    });
+
+                    this.provider.handleLabel();
+                },
+                onError(aRequest, aUpdate) {
+                    this._setStatus(AppUpdater.STATUS.NO_UPDATES_FOUND);
+                },
+                QueryInterface: ChromeUtils.generateQI(["nsIUpdateCheckListener"]),
+            };
             this.attach();
         }
 
@@ -52,19 +91,11 @@
         }
 
         async observe(_sub, _top, _data) {
-            await this.updater.checkForUpdates();
-            this.handleLabel();
+            this.updater.checkForUpdates();
         }
 
         handleEvent(e) {
-            switch (e.type) {
-                case "uninit":
-                    this.detach(e);
-                    break;
-                case "ViewShowing":
-                    this.handleLabel();
-                    break;
-            }
+            this.detach(e);
         }
 
         handleLabel() {
@@ -106,10 +137,6 @@
         attach() {
             Services.obs.addObserver(this, "appMenu-notifications");
             Services.obs.addObserver(this, "show-update-progress");
-            PanelMultiView.getViewNode(document, "appMenu-protonMainView").addEventListener(
-                "ViewShowing",
-                this
-            );
             addEventListener("uninit", this);
         }
 
@@ -121,8 +148,22 @@
         }
     }
 
-    function init() {
+    async function init() {
         window.gUpdateBanners = new UpdateBannerLabelProvider();
+        await sleep(1000);
+        PanelUI._showBannerItem = function _showBannerItem(notification) {
+            if (!this._panelBannerItem) {
+                this._panelBannerItem = this.mainView.querySelector(".panel-banner-item");
+            }
+            let knownNotification = this._panelBannerItem.hasAttribute("label-" + notification.id);
+            // Ignore items we don't know about.
+            if (!knownNotification) return;
+
+            this._panelBannerItem.setAttribute("notificationid", notification.id);
+            this._panelBannerItem.notification = notification;
+            this._panelBannerItem.hidden = false;
+            gUpdateBanners.handleLabel();
+        };
     }
 
     if (gBrowserInit.delayedStartupFinished) {

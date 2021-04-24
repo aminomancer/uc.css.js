@@ -93,6 +93,11 @@ menupopup::part(arrowscrollbox),
     visibility: collapse;
 }
 
+/* devtools highlighter */
+:root > iframe.devtools-highlighter-renderer {
+	z-index: 2147483647;
+}
+
 /* when drag mode is enabled. this enables the tab shadows to draw onto the drag space. */
 :root[sizemode="normal"] #TabsToolbar > .toolbar-items #tabbrowser-arrowscrollbox::part(scrollbox) {
     min-height: calc(var(--min-tab-height) + var(--space-above-tabbar));
