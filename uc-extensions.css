@@ -5,27 +5,16 @@
 }
 
 #_testpilot-containers-browser-action .toolbarbutton-icon {
-    list-style-image: url("data:image/svg+xml;utf8,<svg height='16' viewBox='0 0 16 16' width='16' xmlns='http://www.w3.org/2000/svg'><g fill='context-fill' fill-opacity='context-fill-opacity' fill-rule='evenodd'><rect height='6' rx='1' width='6' x='1' y='1'/><path d='m11 1h2v6h-2z' transform='matrix(0 1 -1 0 16 -8)'/><path d='m11 1h2v6h-2z'/><rect height='6' rx='1' width='6' x='1' y='9'/><rect height='6' rx='1' width='6' x='9' y='9'/></g></svg>") !important;
-}
-
-#pageAction-panel-_testpilot-containers .toolbarbutton-icon {
-    --pageAction-image-16px: url("data:image/svg+xml;utf8,<svg data-name='icon' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect fill='context-fill' fill-opacity='context-fill-opacity' x='1' y='1' width='6' height='6' rx='1'/><rect fill='context-fill' fill-opacity='context-fill-opacity' x='1' y='9' width='6' height='6' rx='1'/><rect fill='context-fill' fill-opacity='context-fill-opacity' x='9' y='9' width='6' height='6' rx='1'/><path fill='context-fill' fill-opacity='context-fill-opacity' d='M14.92 1.62a1 1 0 0 0-0.54-0.54A1 1 0 0 0 14 1h-4a1 1 0 0 0 0 2h1.59l-2.3 2.29a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0L13 4.41V6a1 1 0 0 0 2 0V2a1 1 0 0 0-0.08-0.38z'/></svg>");
-    --pageAction-image-32px: url("data:image/svg+xml;utf8,<svg data-name='icon' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect fill='context-fill' fill-opacity='context-fill-opacity' x='1' y='1' width='6' height='6' rx='1'/><rect fill='context-fill' fill-opacity='context-fill-opacity' x='1' y='9' width='6' height='6' rx='1'/><rect fill='context-fill' fill-opacity='context-fill-opacity' x='9' y='9' width='6' height='6' rx='1'/><path fill='context-fill' fill-opacity='context-fill-opacity' d='M14.92 1.62a1 1 0 0 0-0.54-0.54A1 1 0 0 0 14 1h-4a1 1 0 0 0 0 2h1.59l-2.3 2.29a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0L13 4.41V6a1 1 0 0 0 2 0V2a1 1 0 0 0-0.08-0.38z'/></svg>");
+    list-style-image: url(chrome://userchrome/content/skin/container-plus.svg);
 }
 
 #pageAction-urlbar-_testpilot-containers {
-    --pageAction-image-16px: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><g fill='context-fill' fill-opacity='context-fill-opacity'><rect x='1' y='1' width='6' height='6' rx='1'/><rect x='1' y='9' width='6' height='6' rx='1'/><rect x='9' y='9' width='6' height='6' rx='1'/><path d='M14.92 1.62a1 1 0 00-.54-.54A1 1 0 0014 1h-4a1 1 0 000 2h1.59l-2.3 2.29a1 1 0 000 1.42 1 1 0 001.42 0L13 4.41V6a1 1 0 002 0V2a1 1 0 00-.08-.38z'/></g></svg>") !important;
-    --pageAction-image-32px: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><g fill='context-fill' fill-opacity='context-fill-opacity'><rect x='1' y='1' width='6' height='6' rx='1'/><rect x='1' y='9' width='6' height='6' rx='1'/><rect x='9' y='9' width='6' height='6' rx='1'/><path d='M14.92 1.62a1 1 0 00-.54-.54A1 1 0 0014 1h-4a1 1 0 000 2h1.59l-2.3 2.29a1 1 0 000 1.42 1 1 0 001.42 0L13 4.41V6a1 1 0 002 0V2a1 1 0 00-.08-.38z'/></g></svg>") !important;
-}
-
-#pageAction-urlbar-screenshots_mozilla_org {
-    --pageAction-image-16px: url("data:image/svg+xml;utf8,<svg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'><path d='M8 2a4 4 0 0 0-4 4h4V2zm12 0h-4v4h4V2zm8 0v4h4a4 4 0 0 0-4-4zM14 2h-4v4h4V2zm12 0h-4v4h4V2zm2 10h4V8h-4v4zm0 12a4 4 0 0 0 4-4h-4v4zm0-6h4v-4h-4v4zm-.882-4.334a4 4 0 0 0-5.57-.984l-7.67 5.662-3.936-2.76c.031-.193.05-.388.058-.584a4.976 4.976 0 0 0-2-3.978V8H4v2.1a5 5 0 1 0 3.916 8.948l2.484 1.738-2.8 1.964a4.988 4.988 0 1 0 2.3 3.266l17.218-12.35zM5 17.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm0 12a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm10.8-4.858l6.034 4.6a4 4 0 0 0 5.57-.984L19.28 22.2l-3.48 2.442z' fill='context-fill' fill-opacity='context-fill-opacity'/></svg>") !important;
-    --pageAction-image-32px: url("data:image/svg+xml;utf8,<svg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'><path d='M8 2a4 4 0 0 0-4 4h4V2zm12 0h-4v4h4V2zm8 0v4h4a4 4 0 0 0-4-4zM14 2h-4v4h4V2zm12 0h-4v4h4V2zm2 10h4V8h-4v4zm0 12a4 4 0 0 0 4-4h-4v4zm0-6h4v-4h-4v4zm-.882-4.334a4 4 0 0 0-5.57-.984l-7.67 5.662-3.936-2.76c.031-.193.05-.388.058-.584a4.976 4.976 0 0 0-2-3.978V8H4v2.1a5 5 0 1 0 3.916 8.948l2.484 1.738-2.8 1.964a4.988 4.988 0 1 0 2.3 3.266l17.218-12.35zM5 17.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm0 12a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm10.8-4.858l6.034 4.6a4 4 0 0 0 5.57-.984L19.28 22.2l-3.48 2.442z' fill='context-fill' fill-opacity='context-fill-opacity'/></svg>") !important;
+    --pageAction-image-16px: url(chrome://userchrome/content/skin/container-go.svg) !important;
+    --pageAction-image-32px: url(chrome://userchrome/content/skin/container-go.svg) !important;
 }
 
 #pageAction-urlbar-screenshots_mozilla_org[style*="highlight"] {
-    fill: var(--lwt-toolbarbutton-icon-fill-attention) !important;
-    fill-opacity: 1 !important;
+    fill: var(--toolbarbutton-icon-fill-attention) !important;
 }
 
 #page-action-buttons > #pageAction-urlbar-gitzip-firefox-addons_gitzip_org {
@@ -42,95 +31,61 @@
 
 #_64b2c525-24ed-4c05-aed1-95ff9e6cef70_-browser-action .toolbarbutton-icon,
 #wnpc_aminomancer-browser-action .toolbarbutton-icon {
-    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 37.6 55'><path fill='none' stroke='context-fill' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M36.1 37.3c0 8.9-7.8 16.1-17.3 16.1S1.5 46.2 1.5 37.3c0-8.9 17.3-35.8 17.3-35.8s17.3 26.9 17.3 35.8z' clip-rule='evenodd'/><path fill='context-fill' fill-rule='evenodd' d='M18.7 35.7c-8.5-6.3-11.6 0-11.6 0-.1.5-.2.9-.2 1.3 0 6.1 5.3 11.1 11.9 11.1 6.6 0 11.9-5 11.9-11.1 0-.4-.1-.8-.1-1.3 0 0-4.7 5.3-11.9 0z' clip-rule='evenodd'/></svg>") !important;
-    fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
+    list-style-image: url(chrome://userchrome/content/material/rainmeter.svg);
 }
 
 #_af37054b-3ace-46a2-ac59-709e4412bec6_-browser-action .toolbarbutton-icon {
-    list-style-image: url(chrome://userchrome/content/search-glass.svg) !important;
-    fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
+    list-style-image: url(chrome://userchrome/content/search-glass.svg);
 }
 
 #_bee8b1f2-823a-424c-959c-f8f76c8b2306_-browser-action .toolbarbutton-icon {
-    list-style-image: url(chrome://userchrome/content/notifications/screen-blocked.svg) !important;
-    fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
+    list-style-image: url(chrome://userchrome/content/notifications/screen-blocked.svg);
 }
 
 #_0981817c-71b3-4853-a801-481c90af2e8e_-browser-action .toolbarbutton-icon {
-    list-style-image: url(chrome://userchrome/content/devtools/tool-dom.svg) !important;
-    fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
+    list-style-image: url(chrome://userchrome/content/devtools/tool-dom.svg);
 }
 
 #jid1-bycqofyfmbmd9a_jetpack-browser-action .toolbarbutton-icon {
     list-style-image: url(chrome://userchrome/content/notifications/desktop-notification.svg) !important;
-    fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
 }
 
 #_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action .toolbarbutton-icon {
     list-style-image: url(chrome://userchrome/content/notifications/webauthn.svg) !important;
-    fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
 }
 
 #jid1-93wyvpgvxzgatw_jetpack-browser-action .toolbarbutton-icon,
 #simple-translate_sienori-browser-action .toolbarbutton-icon {
     list-style-image: url(chrome://userchrome/content/material/translate.svg);
-    fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
 }
 
 #addon_darkreader_org-browser-action .toolbarbutton-icon {
-    list-style-image: url("data:image/svg+xml;utf8,<svg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='523.854px' height='523.854px' viewBox='0 0 523.854 523.854' style='enable-background:new 0 0 523.854 523.854;' xml:space='preserve'><path d='M506.51,347.083c-7.057-7.037-15.245-8.531-24.571-4.424c-25.031,11.597-50.968,17.398-77.81,17.398    c-33.673,0-64.726-8.292-93.165-24.914c-28.439-16.598-50.961-39.125-67.571-67.559c-16.609-28.434-24.915-59.493-24.915-93.166    c0-26.169,5.171-51.016,15.527-74.572c10.349-23.543,25.306-44.192,44.878-61.935c7.509-7.05,9.217-15.238,5.116-24.565    c-3.874-9.333-10.808-13.758-20.82-13.317c-34.811,1.371-67.797,9.156-98.966,23.379c-31.175,14.223-57.963,32.925-80.368,56.132    c-22.411,23.207-40.159,50.68-53.238,82.412c-13.072,31.732-19.608,65.006-19.608,99.811c0,35.502,6.94,69.401,20.82,101.697    c13.874,32.313,32.534,60.189,55.967,83.611c23.434,23.445,51.304,42.087,83.611,55.974    c32.301,13.861,66.206,20.808,101.696,20.808c50.962,0,98-13.825,141.115-41.457c43.109-27.65,75.361-64.56,96.751-110.735    c1.817-4.106,2.326-8.427,1.536-12.968C511.682,354.146,509.692,350.278,506.51,347.083z' fill='context-fill' fill-opacity='context-fill-opacity'/></svg>") !important;
-    fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
+    list-style-image: url(chrome://userchrome/content/material/darkmode.svg);
 }
 
 #ublock0_raymondhill_net-browser-action .toolbarbutton-icon,
 .webextension-browser-action[label="Nano Adblocker"] {
-    list-style-image: url(chrome://userchrome/content/skin/controlcenter/tracking-protection.svg) !important;
-    fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
+    list-style-image: url(chrome://userchrome/content/skin/controlcenter/tracking-protection.svg);
 }
 
 #multithreaded-download-manager_qw_linux-2g64_local-browser-action .toolbarbutton-icon {
-    fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
-    fill-opacity: var(--toolbarbutton-icon-fill-opacity) !important;
-    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path stroke='context-fill' stroke-opacity='context-fill-opacity' fill='none' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' d='M 6,1 v 9 M 10,1 v 9 M 3,7 l 5,5 l 5,-5 M 3,15 H 13'/></svg>") !important;
-}
-
-#_63d150c4-394c-4275-bc32-c464e76a891c_-browser-action .toolbarbutton-icon {
-    filter: grayscale(1) brightness(1.5) contrast(2) !important;
+    list-style-image: url(chrome://userchrome/content/downloads/double-download.svg);
 }
 
 .webextension-browser-action[widget-id="secure-proxy_mozilla_com-browser-action"] {
-    fill-opacity: 1 !important;
-    -moz-context-properties: fill, fill-opacity !important;
-    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M12.46 2.057A6.077 6.077 0 008.05.195C4.654.195 2 2.894 2 6.34c0 3.192 4.917 8.626 5.479 9.237a.795.795 0 001.17-1.076 42.157 42.157 0 01-2.579-3.164C3.91 8.39 3.588 6.939 3.588 6.34c0-2.557 1.952-4.557 4.455-4.557a4.501 4.501 0 013.274 1.376 4.367 4.367 0 011.22 3.221c-.047 1.267-1.321 3.27-2.555 4.808-1.479-1.756-2.967-3.814-3.084-4.683-.047-.32.053-.643.27-.882.236-.254.571-.392.918-.378.31.012.602.154.804.39.239.276.354.638.318 1.001a1.55 1.55 0 01-.217.716.792.792 0 101.247.976c.324-.457.512-.996.542-1.555a2.927 2.927 0 00-.706-2.2 2.689 2.689 0 00-1.951-.924c-.813-.03-1.599.3-2.146.901a2.679 2.679 0 00-.66 2.158c.076.568.61 2.293 3.926 6.06.19.218.468.34.757.336a.99.99 0 00.745-.345c.78-.901 3.296-4.02 3.382-6.32a5.94 5.94 0 00-1.667-4.382z'/></svg>") !important;
-}
-
-.webextension-browser-action[widget-id="secure-proxy_mozilla_com-browser-action"][label="Firefox Private Network is inactive"] {
-    fill-opacity: 0.6 !important;
+    list-style-image: url(chrome://userchrome/content/skin/vpn-off-dark.svg) !important;
 }
 
 .webextension-browser-action[widget-id="secure-proxy_mozilla_com-browser-action"][label="Firefox Private Network is On"] {
-    filter: contrast(0.7) brightness(1.4) !important;
-    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='16' height='16' viewBox='0 0 16 16'><defs><linearGradient id='fpn-green-badge-a' x1='64.065%' x2='27.226%' y1='6.588%' y2='88.848%'><stop offset='0%' stop-color='%23FF9640'/><stop offset='60%' stop-color='%23FC4055'/><stop offset='100%' stop-color='%23E31587'/></linearGradient><linearGradient id='fpn-green-badge-b' x1='64.065%' x2='27.226%' y1='6.588%' y2='88.848%'><stop offset='0%' stop-color='%23FFF36E' stop-opacity='.8'/><stop offset='9%' stop-color='%23FFF36E' stop-opacity='.7'/><stop offset='75%' stop-color='%23FFF36E' stop-opacity='0'/></linearGradient><linearGradient id='fpn-green-badge-c' x1='76.537%' x2='33.666%' y1='89.279%' y2='3.042%'><stop offset='0%' stop-color='%23B833E1'/><stop offset='37%' stop-color='%239059FF'/><stop offset='61%' stop-color='%235B6DF8'/><stop offset='100%' stop-color='%230090ED'/></linearGradient><linearGradient id='fpn-green-badge-d' x1='83.333%' x2='37.602%' y1='101.626%' y2='42.563%'><stop offset='0%' stop-color='%23722291' stop-opacity='.5'/><stop offset='50%' stop-color='%23722291' stop-opacity='0'/></linearGradient><path id='fpn-green-badge-e' d='M2.25,5.25 C2.15055194,5.24997876 2.05518477,5.21045602 1.984875,5.140125 L0.859875,4.015125 C0.717760421,3.86798292 0.71979286,3.63409321 0.864443034,3.48944303 C1.00909321,3.34479286 1.24298292,3.34276042 1.390125,3.484875 L2.199,4.29375 L4.5675,0.910125 C4.6869796,0.74266611 4.91906071,0.702722311 5.0876502,0.820601232 C5.25623969,0.938480154 5.29839254,1.17017022 5.182125,1.339875 L2.557125,5.089875 C2.49388198,5.18129841 2.39333598,5.23995024 2.282625,5.25 C2.27175692,5.25054851 2.26086808,5.25054851 2.25,5.25 Z'/></defs><g fill='none' fill-rule='evenodd'><path fill='%2320123A' fill-rule='nonzero' d='M12.4604878,2.05658537 C11.3067114,0.858377874 9.71215358,0.185574622 8.04878049,0.195021709 C4.65365854,0.195021709 2,2.89365854 2,6.3395122 C2,9.53170732 6.91707317,14.9658537 7.47902439,15.5765854 C7.67107643,15.7857164 7.96010993,15.876503 8.23724878,15.8147466 C8.51438762,15.7529902 8.73752783,15.5480731 8.82261463,15.2771856 C8.90770144,15.0062981 8.84180814,14.7105945 8.6497561,14.5014634 C8.63414634,14.4858537 7.34439024,13.0731707 6.0702439,11.3365854 C3.9102439,8.3902439 3.58829268,6.93853659 3.58829268,6.3395122 C3.58829268,3.78341463 5.5395122,1.78341463 8.04292683,1.78341463 C9.27671093,1.77386308 10.4603345,2.27115429 11.3170732,3.15902439 C12.1478123,4.02038575 12.5886603,5.18492971 12.5365854,6.3804878 C12.4897561,7.64682927 11.2156098,9.65073171 9.98243902,11.1882927 C8.50341463,9.43219512 7.01463415,7.37365854 6.89756098,6.50536585 C6.85137146,6.18560328 6.95089626,5.86196869 7.16878049,5.62341463 C7.40419361,5.3688908 7.73945038,5.23050822 8.08585366,5.24487805 C8.39653441,5.25708993 8.68797926,5.39856801 8.8897561,5.63512195 C9.12873362,5.91094666 9.24374669,6.27292031 9.20780488,6.63609756 C9.19519251,6.88890571 9.12082934,7.13477313 8.99121951,7.35219512 L8.99121951,7.35219512 C8.80334698,7.57372956 8.75178229,7.88031724 8.85684897,8.15112083 C8.96191565,8.42192443 9.2067622,8.61351015 9.49488572,8.65036711 C9.78300923,8.68722407 10.068198,8.56344084 10.2380488,8.32780488 L10.2380488,8.32780488 C10.5621507,7.87108797 10.750226,7.3318936 10.7804878,6.77268293 C10.8564484,5.97383961 10.6010907,5.17884472 10.0741463,4.57365854 C9.58154164,4.00627028 8.87399267,3.67089207 8.12292683,3.64878049 C7.3096289,3.61848354 6.52434356,3.94830338 5.97658537,4.5502439 C5.44973532,5.13740612 5.20845313,5.92692713 5.31707317,6.70829268 C5.39317073,7.27609756 5.92780488,9.00097561 9.24292683,12.7687805 C9.4339066,12.9861931 9.71065347,13.1088747 10,13.1043902 L10,13.1043902 C10.2867693,13.1027451 10.5587129,12.9767399 10.7453659,12.7590244 C11.5258537,11.857561 14.0409756,8.7395122 14.1268293,6.43902439 C14.1958485,4.8115134 13.5933987,3.22708465 12.4604878,2.05658537 Z'/><g transform='translate(1.951)'><path fill='url(%23fpn-green-badge-a)' fill-rule='nonzero' d='M7.44780488,8.64390244 L7.4595122,8.64390244 C7.49005488,8.64569993 7.52067683,8.64569993 7.55121951,8.64390244 C7.51678458,8.64614928 7.48223981,8.64614928 7.44780488,8.64390244 L7.44780488,8.64390244 Z M10.4604878,2.05658537 C9.30671139,0.858377874 7.71215358,0.185574622 6.04878049,0.195021709 C2.65365854,0.195021709 0,2.89365854 0,6.3395122 C0,9.53170732 4.91707317,14.9658537 5.47902439,15.5765854 C5.67107643,15.7857164 5.96010993,15.876503 6.23724878,15.8147466 C6.51438762,15.7529902 6.73752783,15.5480731 6.82261463,15.2771856 C6.90770144,15.0062981 6.84180814,14.7105945 6.6497561,14.5014634 C6.63414634,14.4858537 5.34439024,13.0731707 4.0702439,11.3365854 C1.9102439,8.3902439 1.58829268,6.93853659 1.58829268,6.3395122 C1.58829268,3.78341463 3.5395122,1.78341463 6.04292683,1.78341463 C7.27671093,1.77386308 8.46033452,2.27115429 9.31707317,3.15902439 C10.1478123,4.02038575 10.5886603,5.18492971 10.5365854,6.3804878 C10.4897561,7.64682927 9.21560976,9.65073171 7.98243902,11.1882927 L7.54146341,11.6468293 C7.11609756,12.0097561 6.47414634,11.8712195 6.12292683,11.4380488 C6.45853659,11.8497561 6.82926829,12.2926829 7.25073171,12.7687805 C7.43992885,12.9841113 7.71336765,13.1065891 8,13.1043902 L8,13.1043902 C8.28676931,13.1027451 8.55871292,12.9767399 8.74536585,12.7590244 C9.52585366,11.857561 12.0409756,8.7395122 12.1268293,6.43902439 C12.1958485,4.8115134 11.5933987,3.22708465 10.4604878,2.05658537 Z M6.80390244,7.73463415 C6.80390244,7.73463415 6.80390244,7.75219512 6.80390244,7.76195122 C6.80932357,7.71432251 6.81912107,7.66729451 6.83317073,7.62146341 C6.82059944,7.65840234 6.81081591,7.69623199 6.80390244,7.73463415 Z'/><path fill='url(%23fpn-green-badge-b)' fill-rule='nonzero' d='M7.44780488,8.64390244 L7.4595122,8.64390244 C7.49005488,8.64569993 7.52067683,8.64569993 7.55121951,8.64390244 C7.51678458,8.64614928 7.48223981,8.64614928 7.44780488,8.64390244 L7.44780488,8.64390244 Z M10.4604878,2.05658537 C9.30671139,0.858377874 7.71215358,0.185574622 6.04878049,0.195021709 C2.65365854,0.195021709 0,2.89365854 0,6.3395122 C0,9.53170732 4.91707317,14.9658537 5.47902439,15.5765854 C5.67107643,15.7857164 5.96010993,15.876503 6.23724878,15.8147466 C6.51438762,15.7529902 6.73752783,15.5480731 6.82261463,15.2771856 C6.90770144,15.0062981 6.84180814,14.7105945 6.6497561,14.5014634 C6.63414634,14.4858537 5.34439024,13.0731707 4.0702439,11.3365854 C1.9102439,8.3902439 1.58829268,6.93853659 1.58829268,6.3395122 C1.58829268,3.78341463 3.5395122,1.78341463 6.04292683,1.78341463 C7.27671093,1.77386308 8.46033452,2.27115429 9.31707317,3.15902439 C10.1478123,4.02038575 10.5886603,5.18492971 10.5365854,6.3804878 C10.4897561,7.64682927 9.21560976,9.65073171 7.98243902,11.1882927 L7.54146341,11.6468293 C7.11609756,12.0097561 6.47414634,11.8712195 6.12292683,11.4380488 C6.45853659,11.8497561 6.82926829,12.2926829 7.25073171,12.7687805 C7.43992885,12.9841113 7.71336765,13.1065891 8,13.1043902 L8,13.1043902 C8.28676931,13.1027451 8.55871292,12.9767399 8.74536585,12.7590244 C9.52585366,11.857561 12.0409756,8.7395122 12.1268293,6.43902439 C12.1958485,4.8115134 11.5933987,3.22708465 10.4604878,2.05658537 Z M6.80390244,7.73463415 C6.80390244,7.73463415 6.80390244,7.75219512 6.80390244,7.76195122 C6.80932357,7.71432251 6.81912107,7.66729451 6.83317073,7.62146341 C6.82059944,7.65840234 6.81081591,7.69623199 6.80390244,7.73463415 Z'/><path fill='url(%23fpn-green-badge-c)' fill-rule='nonzero' d='M7.54341463,11.6468293 C7.11804878,12.0117073 6.47609756,11.8712195 6.12292683,11.4360976 L6.06243902,11.3619512 C3.80097561,8.56 3.39121951,7.19804878 3.31707317,6.70829268 C3.21054744,5.92574657 3.4547337,5.13606819 3.98439024,4.5502439 C4.53214844,3.94830338 5.31743377,3.61848354 6.13073171,3.64878049 C6.88179755,3.67089207 7.58934652,4.00627028 8.08195122,4.57365854 C8.60608867,5.18009111 8.85858071,5.97494736 8.7804878,6.77268293 C8.74632749,7.3284432 8.55630674,7.86334148 8.23219512,8.31609756 L8.23219512,8.31609756 C8.06234434,8.55173352 7.77715557,8.67551676 7.48903206,8.6386598 C7.20090854,8.60180284 6.95606199,8.41021711 6.85099531,8.13941352 C6.74592863,7.86860992 6.79749332,7.56202224 6.98536585,7.3404878 L6.98536585,7.3404878 C7.11497568,7.12306581 7.18933885,6.87719839 7.20195122,6.62439024 C7.23789303,6.261213 7.12287996,5.89923934 6.88390244,5.62341463 C6.6821256,5.38686069 6.39068075,5.24538261 6.08,5.23317073 C5.73359673,5.2188009 5.39833995,5.35718348 5.16292683,5.61170732 C4.9450426,5.85026137 4.8455178,6.17389596 4.89170732,6.49365854 C5.01073171,7.37170732 6.49756098,9.43804878 7.97658537,11.1765854 L7.54341463,11.6468293 Z'/><path fill='url(%23fpn-green-badge-d)' fill-rule='nonzero' d='M5.10439024,10.1112195 C5.38146341,10.5014634 5.6897561,10.9073171 6.06243902,11.3619512 L6.12292683,11.4360976 C6.47609756,11.8712195 7.11804878,12.0097561 7.54341463,11.6468293 L7.98439024,11.1882927 C7.37170732,10.4663415 6.76292683,9.69365854 6.24390244,8.97560976 L5.10439024,10.1112195 Z'/></g></g></svg>") !important;
-}
-
-.webextension-browser-action[label^="Nano Defender"] {
-    list-style-image: url("data:image/svg+xml;utf8,<svg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 494.674 494.674' style='enable-background:new 0 0 494.674 494.674;' xml:space='preserve'><path id='XMLID_322_' d='M491.384,235.101L379.941,42.087c-4.354-7.563-12.443-12.232-21.185-12.232H135.902   c-8.739,0-16.832,4.67-21.185,12.232L3.289,235.101c-4.386,7.568-4.386,16.894,0,24.474l111.428,193.012   c4.353,7.562,12.445,12.233,21.185,12.233h222.854c8.741,0,16.83-4.671,21.185-12.233l111.443-193.012   C495.771,252.004,495.771,242.663,491.384,235.101z M344.623,415.871H150.035L52.74,247.332l97.295-168.529h194.588l97.309,168.529   L344.623,415.871z' fill='context-fill' fill-opacity='context-fill-opacity'/><polygon id='XMLID_321_' points='168.539,110.846 89.747,247.332 168.539,383.827 326.119,383.827 404.925,247.332    326.119,110.846  ' fill='context-fill' fill-opacity='context-fill-opacity'/></svg>") !important;
-}
-
-#_a6c4a591-f1b2-4f03-b3ff-767e5bedf4e7_-browser-action .toolbarbutton-icon {
-    filter: grayscale(1) brightness(50);
+    list-style-image: var(--vpn-on-icon) !important;
 }
 
 .webextension-browser-action[label^="Violentmonkey"] .toolbarbutton-icon {
     list-style-image: url(chrome://userchrome/content/devtools/command-console.svg);
-    fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
-    fill-opacity: var(--toolbarbutton-icon-fill-opacity) !important;
 }
 
 .webextension-browser-action[label="Stylus"] .toolbarbutton-icon {
     list-style-image: url(chrome://userchrome/content/devtools/tool-styleeditor.svg);
-    fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
-    fill-opacity: var(--toolbarbutton-icon-fill-opacity) !important;
 }
 
 /* make multithreaded download manager context menu label smaller */

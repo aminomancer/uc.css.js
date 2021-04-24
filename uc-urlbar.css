@@ -84,7 +84,7 @@ toolbarpaletteitem[place="palette"] > #search-container {
     > .autocomplete-richlistitem:is([originaltype="datalist-first"], [originaltype="null"])
     > .ac-type-icon {
     list-style-image: url(chrome://userchrome/content/search-glass.svg);
-    fill-opacity: 0.6;
+    fill-opacity: var(--urlbar-icon-fill-opacity);
 }
 
 #PopupSearchAutoComplete .search-panel-current-engine {
@@ -101,7 +101,7 @@ toolbarpaletteitem[place="palette"] > #search-container {
 }
 
 #searchbar .searchbar-search-icon {
-    fill-opacity: 0.6 !important;
+    fill-opacity: var(--urlbar-icon-fill-opacity) !important;
     fill: white !important;
 }
 
@@ -230,7 +230,7 @@ toolbarpaletteitem[removable="false"]
     #tracking-protection-icon-box:not([animate="true"])
     #tracking-protection-icon {
     display: -moz-box !important;
-    fill-opacity: 0.6 !important;
+    fill-opacity: var(--urlbar-icon-fill-opacity) !important;
 }
 
 toolbarpaletteitem[removable="false"]
@@ -549,7 +549,7 @@ toolbarpaletteitem[removable="false"]
 
 #identity-box,
 #tracking-protection-icon-container {
-    fill-opacity: 0.6 !important;
+    fill-opacity: var(--urlbar-icon-fill-opacity) !important;
     height: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
 }
 
@@ -588,7 +588,7 @@ toolbarpaletteitem[removable="false"]
 #tracking-protection-icon-container[hidden]
     ~ #identity-box[pageproxystate="valid"].notSecure:not(.chromeUI, .localResource)
     #identity-icon {
-    fill-opacity: 0.6 !important;
+    fill-opacity: var(--urlbar-icon-fill-opacity) !important;
     list-style-image: url(chrome://userchrome/content/engines/google.svg) !important;
 }
 
@@ -642,7 +642,7 @@ toolbarpaletteitem[removable="false"]
 }
 
 #webrtc-sharing-icon {
-    fill-opacity: 0.6 !important;
+    fill-opacity: var(--urlbar-icon-fill-opacity) !important;
     fill: white !important;
     animation: none !important;
 }
@@ -683,7 +683,7 @@ toolbarpaletteitem[removable="false"]
 #blocked-permissions-container,
 #notification-popup-box,
 #remote-control-icon {
-    fill-opacity: 0.6 !important;
+    fill-opacity: var(--urlbar-icon-fill-opacity) !important;
 }
 
 #identity-box:hover:not(.no-hover):not([open="true"]),

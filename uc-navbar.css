@@ -325,4 +325,8 @@ toolbar .toolbarbutton-1:not([disabled])[checked]:hover > .toolbarbutton-icon {
         border-radius: var(--toolbarbutton-border-radius) !important;
         margin: 4px !important;
     }
+
+    :root[fxastatus="signedin"] #fxa-menu-avatar, :root[fxastatus="signedin"] #fxa-avatar-image {
+        border-radius: revert !important;
+    }
 }

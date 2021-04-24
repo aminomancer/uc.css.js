@@ -122,11 +122,12 @@
 }
 
 /* dim unloaded/discarded tabs */
-.tabbrowser-tab[pending] .tab-content .tab-icon-image {
-    opacity: 0.5;
+.tabbrowser-tab[pending] .tab-content :is(.tab-icon-image, .tab-label):-moz-window-inactive {
+	opacity: 0.4;
 }
 
-.tabbrowser-tab[pending] .tab-content .tab-label {
+.tabbrowser-tab[pending] .tab-content :is(.tab-icon-image, .tab-label),
+:is(.tab-icon-image, .tab-label):-moz-window-inactive {
     opacity: 0.6;
 }
 

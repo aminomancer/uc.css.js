@@ -99,6 +99,11 @@ menupopup::part(arrowscrollbox),
     padding-block-start: var(--space-above-tabbar);
 }
 
+/* undo window inactive tab text opacity */
+:root[tabsintitlebar] .tab-label:-moz-window-inactive {
+	opacity: revert;
+}
+
 /* protections popup panel's arrow style */
 #protections-popup[mainviewshowing][side="top"]::part(arrow) {
     fill: var(--protection-header-arrow-color);
@@ -601,6 +606,10 @@ menupopup::part(arrowscrollbox),
 
 #screenshot-button {
     list-style-image: var(--screenshot-icon);
+}
+
+#import-button {
+	list-style-image: url(chrome://userchrome/content/skin/import.svg);
 }
 
 #save-page-button {

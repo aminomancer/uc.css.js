@@ -114,6 +114,26 @@
     background-color: var(--desaturate-dimmed-further) !important;
 }
 
+.searchbar-engine-one-off-add-engine[image] .button-icon {
+	opacity: 1 !important;
+}
+
+.searchbar-engine-one-off-add-engine[image]:not(:hover, [selected]) > .button-box {
+	opacity: 0.6 !important;
+}
+
+.searchbar-engine-one-off-add-engine > .button-box::after,
+moz-input-box > menupopup .context-menu-add-engine > .menu-iconic-left::after {
+    background: url(chrome://userchrome/content/skin/search-indicator-badge-add.svg) no-repeat center/contain !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    fill: #39ea49 !important;
+    stroke: #0b7407 !important;
+    height: 12px !important;
+    width: 12px !important;
+    margin-inline: -6px -6px !important;
+    margin-top: -16px !important;
+}
+
 #urlbar-engine-one-off-item-bookmarks:not([selected]) {
     fill: currentColor !important;
 }

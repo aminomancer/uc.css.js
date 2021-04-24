@@ -118,6 +118,16 @@ menupopup {
     --menu-right-size: 12px;
     --buttons-secondary-hover-bgcolor: var(--arrowpanel-dimmed) !important;
     --buttons-secondary-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
+    --vpn-on-icon: url(chrome://userchrome/content/skin/vpn-on-light.svg);
+}
+
+:root[lwthemetextcolor="bright"] {
+    --toolbarbutton-icon-fill: var(--lwt-toolbarbutton-icon-fill) !important;
+    --vpn-on-icon: url(chrome://userchrome/content/skin/vpn-on-dark.svg);
+}
+
+:root:-moz-window-inactive:not([customizing]) {
+    --toolbarbutton-icon-fill-opacity: 0.6 !important;
 }
 
 toolbar {
