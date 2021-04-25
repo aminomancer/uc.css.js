@@ -11,14 +11,13 @@ const UndoListInTabmenu = {
      * memoize session store, maybe handle some earlier versions
      */
     get ss() {
-        delete this.ss;
-        try {
-            return (this.ss = Cc["@mozilla.org/browser/sessionstore;1"].getService(
-                Ci.nsISessionStore
-            ));
-        } catch (e) {
-            return (this.ss = SessionStore);
-        }
+        if (!this._ss)
+            try {
+                this._ss = Cc["@mozilla.org/browser/sessionstore;1"].getService(Ci.nsISessionStore);
+            } catch (e) {
+                this._ss = SessionStore;
+            }
+        return this._ss;
     },
 
     /**
