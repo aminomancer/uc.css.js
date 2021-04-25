@@ -1,10 +1,14 @@
+.browserContainer {
+    position: relative;
+}
+
 .browserContainer > findbar {
     -moz-box-ordinal-group: 0;
     position: absolute !important;
     display: flex !important;
     flex-flow: row nowrap;
     align-items: center;
-    top: calc(var(--urlbar-container-height) + var(--tab-min-height)) !important;
+    top: 0 !important;
     left: 1.5em;
     border: 0px solid transparent !important;
     border-bottom-left-radius: 5px !important;
@@ -18,10 +22,6 @@
     z-index: 1 !important;
     animation: 0.2s ease-in-out findbar-down;
     overflow: hidden !important;
-}
-
-:root[sizemode="normal"] findbar {
-    top: calc(var(--urlbar-container-height) + var(--tab-min-height)) !important;
 }
 
 @keyframes findbar-down {
@@ -57,10 +57,6 @@ findbar[hidden] {
     -moz-box-ordinal-group: 2 !important;
     /* I use findbarMatchesLabel.uc.js to actually move the icon to the right side, so the tab index will be correct.
     But -moz-box-ordinal-group is a decent, (purely visual) alternative if you don't use scripts. */
-}
-
-:root[sizemode="fullscreen"] .findbar-closebutton {
-    margin-top: 0.5px !important;
 }
 
 .findbar-closebutton .toolbarbutton-icon {

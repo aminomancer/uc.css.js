@@ -103,6 +103,7 @@ const bookmarksPopupShadowRoot = {
     init() {
         document.getElementById("BMB_bookmarksPopup").addEventListener("popupshowing", this, true);
         document.getElementById("bookmarksMenuPopup").addEventListener("popupshowing", this, true);
+        document.getElementById("PlacesChevronPopup").addEventListener("popupshowing", this, true);
         CustomizableUI.removeListener(this);
     },
 

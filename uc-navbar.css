@@ -89,7 +89,8 @@ toolbar .toolbaritem-combined-buttons.chromeclass-toolbar-additional:not(:hover)
     opacity: 0.2;
 }
 
-toolbar .toolbarbutton-combined-buttons-dropmarker {
+toolbar .toolbarbutton-combined-buttons-dropmarker,
+#PersonalToolbar .toolbaritem-combined-buttons .toolbarbutton-combined-buttons-dropmarker {
     min-height: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
 }
 
@@ -100,41 +101,41 @@ toolbar .toolbarbutton-combined-buttons-dropmarker > .toolbarbutton-icon {
     width: 16px !important;
 }
 
-toolbar #edit-controls > #cut-button,
+toolbar:not(#PersonalToolbar) #edit-controls > #cut-button,
 toolbar #profiler-button > #profiler-button-button {
     padding-left: 2px !important;
 }
 
-toolbar #edit-controls > #paste-button,
+toolbar:not(#PersonalToolbar) #edit-controls > #paste-button,
 toolbar #profiler-button > #profiler-button-dropmarker {
     padding-right: 2px !important;
 }
 
-toolbar #zoom-controls > :is(#zoom-out-button, #zoom-in-button) {
+toolbar:not(#PersonalToolbar) #zoom-controls > :is(#zoom-out-button, #zoom-in-button) {
     min-height: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
     width: unset !important;
     padding: 0 !important;
     padding-inline: 2px !important;
 }
 
-toolbar #zoom-controls > :is(#zoom-out-button, #zoom-in-button) > .toolbarbutton-icon {
+toolbar:not(#PersonalToolbar) #zoom-controls > :is(#zoom-out-button, #zoom-in-button) > .toolbarbutton-icon {
     height: 20px !important;
     width: 20px !important;
     padding: 4px !important;
 }
 
-toolbar #zoom-controls > #zoom-reset-button {
+toolbar:not(#PersonalToolbar) #zoom-controls > #zoom-reset-button {
     min-height: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
 }
 
-toolbar
+toolbar:not(#PersonalToolbar)
     #zoom-controls
     > #zoom-reset-button:not([disabled]):is(:hover, :focus)
     > .toolbarbutton-text {
     border-color: transparent;
 }
 
-toolbar #zoom-controls > #zoom-reset-button > .toolbarbutton-text {
+toolbar:not(#PersonalToolbar) #zoom-controls > #zoom-reset-button > .toolbarbutton-text {
     height: 20px !important;
     min-height: 20px !important;
     font-size: 0.98em;
@@ -144,7 +145,7 @@ toolbar #zoom-controls > #zoom-reset-button > .toolbarbutton-text {
     border-radius: 10px !important;
 }
 
-toolbar #zoom-controls separator {
+toolbar:not(#PersonalToolbar) #zoom-controls separator {
     display: none !important;
 }
 
@@ -244,8 +245,101 @@ toolbar
     transition: none !important;
 }
 
+#PersonalToolbar .toolbarbutton-1 > .toolbarbutton-icon,
+#PersonalToolbar .toolbarbutton-1 > .toolbarbutton-text,
+#PersonalToolbar .toolbarbutton-1 > .toolbarbutton-badge-stack {
+	background: none !important;
+}
+
 toolbar .toolbarbutton-1:not([disabled])[checked]:hover > .toolbarbutton-icon {
     background-color: var(--toolbarbutton-hover-background) !important;
+}
+
+#PersonalToolbar {
+	padding-inline: 2px !important;
+    z-index: 2 !important;
+    position: absolute !important;
+    display: flex !important;
+    flex-flow: row nowrap !important;
+    transition: min-height 200ms ease-in-out, max-height 200ms ease-in-out, opacity 200ms ease-in-out, transform 200ms ease-in-out !important;
+}
+
+:root[inFullscreen]:not([macOSNativeFullscreen]) #PersonalToolbar:not([fullscreentoolbar="true"]),
+#PersonalToolbar[collapsed="true"],
+:root:not([customizing])
+    > body
+    > box:not(:focus-within, :hover, [popup-status], [urlbar-status])
+    #PersonalToolbar {
+	visibility: visible !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    opacity: 0 !important;
+    transform: translateY(-16px);
+}
+
+#personal-toolbar-empty-description,
+#PersonalToolbar .toolbarbutton-1,
+toolbarbutton.bookmark-item:not(.subviewbutton) {
+	margin-block: 0 3.5px !important;
+	padding: var(--bookmark-block-padding) 4px;
+    min-height: 28px !important;
+    min-width: 28px !important;
+}
+
+#PersonalToolbar #profiler-button > #profiler-button-dropmarker,
+#PersonalToolbar .toolbaritem-combined-buttons .toolbarbutton-combined-buttons-dropmarker {
+    min-height: 20px !important;
+    min-width: 0 !important;
+    padding: 0 !important;
+    padding-right: 0 !important;
+}
+
+#PersonalToolbar .toolbaritem-combined-buttons {
+	min-height: 31.5px !important;
+}
+
+#PersonalToolbar #profiler-button > #profiler-button-dropmarker {
+    margin-inline-start: 0 !important;
+}
+
+#PersonalToolbar[mode="icons"] #import-button > .toolbarbutton-icon {
+    margin-inline: 0 !important;
+}
+
+#PersonalToolbar[mode="icons"] #import-button > .toolbarbutton-text {
+	display: none !important;
+}
+
+.bookmark-item > :is(.toolbarbutton-text, .toolbarbutton-icon) {
+	opacity: var(--toolbarbutton-icon-fill-opacity) !important;
+}
+
+#PersonalToolbar[customizing]#personal-toolbar-empty-description,
+#PersonalToolbar[customizing] .toolbarbutton-1,
+#PersonalToolbar[customizing] toolbarbutton.bookmark-item:not(.subviewbutton) {
+    margin-block: 1.75px !important;
+}
+
+#PersonalToolbar[customizing] {
+	outline: none !important;
+    transition: none !important;
+    border-block: 1px dashed var(--arrowpanel-dimmed-even-further) !important;
+}
+
+#PersonalToolbar[customizing] > toolbarpaletteitem {
+    margin-block: -1px !important;
+}
+
+#PersonalToolbar[customizing][draggingover] {
+	z-index: 3 !important;
+}
+
+#customization-header {
+    margin-top: 40px !important;
+}
+
+#customization-panel-container {
+    z-index: 2 !important;
 }
 
 #navigator-toolbox {

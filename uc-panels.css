@@ -28,6 +28,10 @@
     margin-top: -7px !important;
 }
 
+#customizationui-widget-panel.bookmarks-toolbar {
+    margin-top: revert !important;
+}
+
 #notification-popup {
     margin-top: -1px !important;
 }
