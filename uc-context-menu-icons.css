@@ -137,8 +137,8 @@ menupopup
     :is(menu, menuitem)[label*="Generate Password"]
     > .menu-text {
     display: -moz-inline-box !important;
-    margin-inline: var(--context-margin-inline) !important;
-    padding-inline: var(--context-padding-inline) !important;
+    margin-inline: 0 !important;
+    padding-inline: 0 2px !important;
 }
 
 #context_openTabInWindow:not(.menuitem-iconic)::before,
@@ -268,7 +268,7 @@ menupopup
     width: 16px !important;
     height: 16px !important;
     padding-inline: 0px !important;
-    margin-inline: 5px -6px !important;
+    margin-inline: var(--context-iconic-margin) !important;
     fill: currentColor !important;
     -moz-context-properties: fill, fill-opacity, stroke !important;
     background-position: center !important;
@@ -350,10 +350,16 @@ menupopup
     background-image: url(chrome://userchrome/content/devtools/tool-inspector.svg);
 }
 
+/* hide "Inspect Accessibility Properties" */
+#context-inspect-a11y {
+    display: none !important;
+}
+
+/* or just shorten the label */
 #context-inspect-a11y:not(.menuitem-iconic)::before {
     background-position: left center !important;
     content: "Inspect Accessibility" !important;
-    padding-inline-start: 23px !important;
+    padding-inline-start: 22px !important;
     background-image: url(chrome://userchrome/content/devtools/tool-accessibility.svg) !important;
 }
 

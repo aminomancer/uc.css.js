@@ -136,11 +136,11 @@
     margin-top: 0 !important;
 }
 
-#sidebarMenu-popup > .subviewbutton[checked=true] {
+#sidebarMenu-popup > .subviewbutton[checked="true"] {
     background: none !important;
 }
 
-#sidebarMenu-popup > .subviewbutton[checked=true] > .toolbarbutton-icon {
+#sidebarMenu-popup > .subviewbutton[checked="true"] > .toolbarbutton-icon {
     list-style-image: none !important;
     background-image: url(chrome://userchrome/content/radio.svg);
     opacity: 1 !important;
@@ -149,11 +149,11 @@
     border-radius: 100%;
 }
 
-#sidebarMenu-popup > .subviewbutton[checked=true]:not([disabled], [open]):hover {
+#sidebarMenu-popup > .subviewbutton[checked="true"]:not([disabled], [open]):hover {
     background-color: var(--arrowpanel-faint) !important;
 }
 
-#sidebarMenu-popup > .subviewbutton[checked=true]:not([disabled], [open]):hover:active {
+#sidebarMenu-popup > .subviewbutton[checked="true"]:not([disabled], [open]):hover:active {
     background-color: var(--arrowpanel-dimmed) !important;
 }
 
@@ -162,7 +162,7 @@
 }
 
 #sidebarMenu-popup > .subviewbutton > .toolbarbutton-icon {
-	margin-inline-start: 0 !important;
+    margin-inline-start: 0 !important;
     min-width: 16px !important;
 }
 
@@ -376,7 +376,8 @@ treechildren::-moz-tree-twisty(open) {
     }
 
     .item-icon-container {
-        fill: hsla(213, 43%, 89%, 80%) !important;
+        fill-opacity: 0.7 !important;
+        -moz-context-properties: fill, fill-opacity !important;
     }
 
     .item-twisty-container,

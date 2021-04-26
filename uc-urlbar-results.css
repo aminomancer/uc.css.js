@@ -75,6 +75,14 @@
     display: -moz-box !important;
 }
 
+.urlbarView-row:is([type="switchtab"], [type="bookmark"], [type="remotetab"], [type="dynamic"])[selected]
+    .urlbarView-type-icon,
+.urlbarView-row:is([type="switchtab"], [type="bookmark"], [type="remotetab"], [type="dynamic"])
+    > .urlbarView-row-inner[selected]
+    .urlbarView-type-icon {
+    fill-opacity: 1 !important;
+}
+
 .urlbarView-type-icon {
     position: relative !important;
     min-width: 16px !important;
@@ -166,8 +174,17 @@
     > .urlbarView-row-inner
     > .urlbarView-no-wrap
     > .urlbarView-favicon {
-    fill: currentColor !important;
+    fill: var(--panel-description-color) !important;
     fill-opacity: 0.6 !important;
+}
+
+:root[lwt-toolbar-field-brighttext]
+    .urlbarView-row[source][selected]
+    > .urlbarView-row-inner
+    > .urlbarView-no-wrap
+    > .urlbarView-favicon {
+    fill: var(--panel-description-color) !important;
+    fill-opacity: 1 !important;
 }
 
 .urlbarView .urlbarView-row[type="tip"] {

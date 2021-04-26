@@ -501,7 +501,7 @@
 @-moz-document url(chrome://browser/content/browser.xhtml)
 {
     menuitem.menuitem-iconic#BMB_viewBookmarksToolbar {
-        list-style-image: url(chrome://userchrome/content/skin/bookmarks-toolbar.svg) !important;
+        list-style-image: url(chrome://browser/skin/places/bookmarksToolbar.svg) !important;
         -moz-context-properties: fill, fill-opacity;
     }
 

@@ -95,7 +95,7 @@ menupopup::part(arrowscrollbox),
 
 /* devtools highlighter */
 :root > iframe.devtools-highlighter-renderer {
-	z-index: 2147483647;
+    z-index: 2147483647;
 }
 
 /* when drag mode is enabled. this enables the tab shadows to draw onto the drag space. */
@@ -106,7 +106,7 @@ menupopup::part(arrowscrollbox),
 
 /* undo window inactive tab text opacity */
 :root[tabsintitlebar] .tab-label:-moz-window-inactive {
-	opacity: revert;
+    opacity: revert;
 }
 
 /* protections popup panel's arrow style */
@@ -411,7 +411,7 @@ menupopup::part(arrowscrollbox),
     height: 1px;
     margin-bottom: -1px;
     position: relative;
-    z-index: 5;
+    z-index: 13;
     pointer-events: none;
 }
 
@@ -614,7 +614,7 @@ menupopup::part(arrowscrollbox),
 }
 
 #import-button {
-	list-style-image: url(chrome://userchrome/content/skin/import.svg);
+    list-style-image: url(chrome://userchrome/content/skin/import.svg);
 }
 
 #save-page-button {
@@ -648,7 +648,7 @@ menupopup::part(arrowscrollbox),
 }
 
 #alltabs-button {
-	list-style-image: url(chrome://userchrome/content/arrow-dropdown-16.svg);
+    list-style-image: url(chrome://userchrome/content/arrow-dropdown-16.svg);
 }
 
 #privatebrowsing-button {

@@ -43,7 +43,7 @@ menupopup:not(.PanelUI-subView) :is(menuitem, menu) .menu-iconic-left {
 }
 
 menupopup:not(.PanelUI-subView) :is(menuitem, menu) .menu-iconic-icon {
-    margin-inline: 6px;
+    margin-inline: 5px 6px;
 }
 
 #contentAreaContextMenu > .menuitem-iconic > .menu-iconic-left > .menu-iconic-icon {
@@ -98,14 +98,6 @@ menu.subviewbutton:not([disabled="true"])[_moz-menuactive="true"]:active {
     box-shadow: none !important;
 }
 
-menupopup
-    menuitem:is([type="checkbox"], [type="radio"], [checked])
-    :is(.menu-text, .menu-iconic-text) {
-    display: -moz-inline-box !important;
-    margin-inline: var(--context-margin-inline) !important;
-    padding-inline: var(--context-padding-inline) !important;
-}
-
 menupopup menuitem:is([type="checkbox"], [type="radio"])::before {
     position: relative;
     display: -moz-inline-box;
@@ -121,6 +113,25 @@ menupopup menuitem:is([type="checkbox"], [type="radio"])::before {
     border: 1px solid var(--checkbox-border-color);
     background-color: var(--checkbox-unchecked-bgcolor);
     color: var(--in-parent-primary-button-text-color);
+}
+
+menupopup .unified-nav-current[type="radio"][checked="true"]::before {
+    width: 16px;
+    height: 16px;
+    margin-inline: 6px !important;
+    background-image: url(chrome://userchrome/content/check.svg);
+    border-radius: 2px;
+    fill-opacity: 1;
+}
+
+menupopup menuitem[class^="unified-nav"][type="radio"]:not([checked="true"])::before {
+    display: none;
+}
+
+menupopup
+    menuitem[class^="unified-nav"][type="radio"]:not([checked="true"])
+    :is(.menu-iconic-left, .menu-iconic-icon) {
+    display: -moz-box !important;
 }
 
 menupopup menuitem[type="checkbox"]::before {
@@ -160,7 +171,7 @@ menupopup menuitem[type="radio"]::before,
 
 menupopup menuitem[type="radio"][checked="true"]::before,
 #main-menubar #viewSidebarMenu menuitem[checked="true"]::before {
-    background-image: url("chrome://userchrome/content/radio.svg");
+    background-image: url(chrome://userchrome/content/radio.svg);
     border-color: var(--checkbox-checked-border-color);
     background-color: var(--checkbox-checked-bgcolor);
 }
@@ -245,7 +256,8 @@ menupopup.in-menulist {
     appearance: none !important;
     color: inherit !important;
     border-radius: var(--context-menuitem-border-radius);
-    margin: 0 !important;
+    margin-block: 0 !important;
+    margin-inline: var(--menupopup-inner-padding-magnitude) !important;
     padding-inline-start: 3px !important;
     background-color: var(--arrowpanel-dimmed) !important;
     padding-block: 0 !important;
@@ -307,7 +319,7 @@ menulist:-moz-focusring > menupopup.in-menulist > menuitem[_moz-menuactive="true
         margin-inline-start: var(--menupopup-child-margin-inline-start) !important;
     }
 
-    menupopup > :is(menuitem, menu, menucaption, menugroup, menuseparator),
+    menupopup > :is(menuitem, menu, menucaption, menugroup, menuseparator, search-textbox),
     #PopupAutoComplete > richlistbox > richlistitem {
         margin-inline: var(--menupopup-inner-padding-magnitude);
     }

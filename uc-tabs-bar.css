@@ -368,8 +368,8 @@
 }
 
 .accessibility-indicator:is(:hover, :active, :focus, :focus-visible) {
-	fill: var(--attention-color) !important;
-	outline: 0;
+    fill: var(--attention-color) !important;
+    outline: 0;
 }
 
 /* all tabs button popup */
@@ -391,11 +391,15 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
     padding-block-start: 0 !important;
 }
 
+#allTabsMenu-searchTabs {
+    list-style-image: url("chrome://global/skin/icons/search-glass.svg") !important;
+}
+
 #allTabsMenu-containerTabsButton {
     list-style-image: url("data:image/svg+xml;utf8,<svg height='16' width='16' xmlns='http://www.w3.org/2000/svg'><g fill='context-fill' fill-opacity='context-fill-opacity'><rect height='6' rx='1' width='6' x='1' y='1'/><path d='M15 3v2H9V3z'/><path d='M11 1h2v6h-2z'/><rect height='6' rx='1' width='6' x='1' y='9'/><rect height='6' rx='1' width='6' x='9' y='9'/></g></svg>");
 }
 
-#allTabsMenu-containerTabsButton .toolbarbutton-text {
+:is(#allTabsMenu-containerTabsButton, #allTabsMenu-searchTabs) .toolbarbutton-text {
     padding-inline-start: 8px;
 }
 

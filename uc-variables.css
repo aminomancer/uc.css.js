@@ -107,7 +107,7 @@ menupopup {
     --menupopup-child-margin-inline-start: 0px;
     --menupopup-padding: 0px;
     --menupopup-inner-padding: 0px;
-    --context-checkbox-margin: 6px -4.5px;
+    --context-checkbox-margin: 6px 7px;
     --context-iconic-margin: 5px 6px;
     --context-iconic-special-margin: 4px -2px;
     --menupopup-border-radius: 3px;
@@ -127,7 +127,6 @@ menupopup {
 }
 
 :root:-moz-window-inactive:not([customizing]) {
-    --toolbarbutton-icon-fill-opacity: 0.7 !important;
     --urlbar-icon-fill-opacity: 0.4 !important;
 }
 
@@ -224,8 +223,6 @@ toolbar {
         --menupopup-padding: 0px;
         --menupopup-inner-padding-magnitude: 4px;
         --menupopup-inner-padding: var(--menupopup-inner-padding-magnitude) 0;
-        --context-padding-inline: 28px 0px !important;
-        --context-margin-inline: -16px 0px !important;
         --menupopup-shadow: none !important;
         --menupopup-border-radius: 5px !important;
         --context-menuitem-border-radius: var(--arrowpanel-menuitem-border-radius);

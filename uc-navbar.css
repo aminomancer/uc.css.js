@@ -24,6 +24,13 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
     margin-block: 5px !important;
 }
 
+/* dim widgets when window is inactive, like tabs */
+:root:-moz-window-inactive:not([customizing])
+    toolbarbutton
+    :is(.toolbarbutton-animatable-image, .toolbarbutton-icon, #fxa-avatar-image, #downloads-animation-container, #downloads-indicator-anchor) {
+    opacity: 0.7;
+}
+
 /* toolbar button badges */
 :is(#nav-bar-customization-target, #widget-overflow)
     :is(toolbarbutton, toolbaritem):not([attention])
@@ -118,7 +125,10 @@ toolbar:not(#PersonalToolbar) #zoom-controls > :is(#zoom-out-button, #zoom-in-bu
     padding-inline: 2px !important;
 }
 
-toolbar:not(#PersonalToolbar) #zoom-controls > :is(#zoom-out-button, #zoom-in-button) > .toolbarbutton-icon {
+toolbar:not(#PersonalToolbar)
+    #zoom-controls
+    > :is(#zoom-out-button, #zoom-in-button)
+    > .toolbarbutton-icon {
     height: 20px !important;
     width: 20px !important;
     padding: 4px !important;
@@ -248,7 +258,7 @@ toolbar
 #PersonalToolbar .toolbarbutton-1 > .toolbarbutton-icon,
 #PersonalToolbar .toolbarbutton-1 > .toolbarbutton-text,
 #PersonalToolbar .toolbarbutton-1 > .toolbarbutton-badge-stack {
-	background: none !important;
+    background: none !important;
 }
 
 toolbar .toolbarbutton-1:not([disabled])[checked]:hover > .toolbarbutton-icon {
@@ -256,12 +266,13 @@ toolbar .toolbarbutton-1:not([disabled])[checked]:hover > .toolbarbutton-icon {
 }
 
 #PersonalToolbar {
-	padding-inline: 2px !important;
+    padding-inline: 2px !important;
     z-index: 2 !important;
     position: absolute !important;
     display: flex !important;
     flex-flow: row nowrap !important;
-    transition: min-height 200ms ease-in-out, max-height 200ms ease-in-out, opacity 200ms ease-in-out, transform 200ms ease-in-out !important;
+    transition: min-height 200ms ease-in-out, max-height 200ms ease-in-out,
+        opacity 200ms ease-in-out, transform 200ms ease-in-out !important;
 }
 
 :root[inFullscreen]:not([macOSNativeFullscreen]) #PersonalToolbar:not([fullscreentoolbar="true"]),
@@ -270,7 +281,7 @@ toolbar .toolbarbutton-1:not([disabled])[checked]:hover > .toolbarbutton-icon {
     > body
     > box:not(:focus-within, :hover, [popup-status], [urlbar-status])
     #PersonalToolbar {
-	visibility: visible !important;
+    visibility: visible !important;
     min-height: 0 !important;
     max-height: 0 !important;
     opacity: 0 !important;
@@ -280,8 +291,8 @@ toolbar .toolbarbutton-1:not([disabled])[checked]:hover > .toolbarbutton-icon {
 #personal-toolbar-empty-description,
 #PersonalToolbar .toolbarbutton-1,
 toolbarbutton.bookmark-item:not(.subviewbutton) {
-	margin-block: 0 3.5px !important;
-	padding: var(--bookmark-block-padding) 4px;
+    margin-block: 0 3.5px !important;
+    padding: var(--bookmark-block-padding) 4px;
     min-height: 28px !important;
     min-width: 28px !important;
 }
@@ -295,7 +306,7 @@ toolbarbutton.bookmark-item:not(.subviewbutton) {
 }
 
 #PersonalToolbar .toolbaritem-combined-buttons {
-	min-height: 31.5px !important;
+    min-height: 31.5px !important;
 }
 
 #PersonalToolbar #profiler-button > #profiler-button-dropmarker {
@@ -307,11 +318,13 @@ toolbarbutton.bookmark-item:not(.subviewbutton) {
 }
 
 #PersonalToolbar[mode="icons"] #import-button > .toolbarbutton-text {
-	display: none !important;
+    display: none !important;
 }
 
-.bookmark-item > :is(.toolbarbutton-text, .toolbarbutton-icon) {
-	opacity: var(--toolbarbutton-icon-fill-opacity) !important;
+:root:-moz-window-inactive:not([customizing])
+    .bookmark-item
+    > :is(.toolbarbutton-text, .toolbarbutton-icon) {
+    opacity: 0.7;
 }
 
 #PersonalToolbar[customizing]#personal-toolbar-empty-description,
@@ -321,7 +334,7 @@ toolbarbutton.bookmark-item:not(.subviewbutton) {
 }
 
 #PersonalToolbar[customizing] {
-	outline: none !important;
+    outline: none !important;
     transition: none !important;
     border-block: 1px dashed var(--arrowpanel-dimmed-even-further) !important;
 }
@@ -331,7 +344,7 @@ toolbarbutton.bookmark-item:not(.subviewbutton) {
 }
 
 #PersonalToolbar[customizing][draggingover] {
-	z-index: 3 !important;
+    z-index: 3 !important;
 }
 
 #customization-header {
@@ -397,7 +410,8 @@ toolbarbutton.bookmark-item:not(.subviewbutton) {
         transition: none !important;
     }
 
-    link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar {
+    link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar
+    {
         border-radius: 0 !important;
     }
 
@@ -405,22 +419,27 @@ toolbarbutton.bookmark-item:not(.subviewbutton) {
         border-radius: 0 !important;
     }
 
-    #navigator-toolbox > :is(legacy-stack, .notificationbox-stack) > notification-message[style="margin-top: -32px; opacity: 0;"] {
+    #navigator-toolbox
+        > :is(legacy-stack, .notificationbox-stack)
+        > notification-message[style="margin-top: -32px; opacity: 0;"] {
         margin-top: -32px !important;
         opacity: 1 !important;
         transition: margin-top 0ms 1ms linear !important;
     }
 
-    link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar > .icon {
+    link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar > .icon
+    {
         margin-inline-start: 12px !important;
     }
 
-    link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-close {
+    link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-close
+    {
         border-radius: var(--toolbarbutton-border-radius) !important;
         margin: 4px !important;
     }
 
-    :root[fxastatus="signedin"] #fxa-menu-avatar, :root[fxastatus="signedin"] #fxa-avatar-image {
+    :root[fxastatus="signedin"] #fxa-menu-avatar,
+    :root[fxastatus="signedin"] #fxa-avatar-image {
         border-radius: revert !important;
     }
 }

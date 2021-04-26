@@ -227,9 +227,8 @@ menupopup.in-menulist {
     --menupopup-padding: 0px;
     --menupopup-inner-padding: 0px;
     --context-padding-inline: 27px 0px;
-    --context-margin-inline: -14px 0px;
-    --context-checkbox-margin: 6px -4.5px;
-    --context-iconic-margin: 6px;
+    --context-checkbox-margin: 6px 7px;
+    --context-iconic-margin: 5px 6px;
     --context-iconic-special-margin: 4px -2px;
     --arrowpanel-background: hsl(233, 36%, 11%);
     --menu-color: var(--ui-text-80) !important;
@@ -255,6 +254,7 @@ menupopup.in-menulist > :is(menucaption, menuitem) > .menu-iconic-text {
 #ContentSelectDropdown > menupopup :is(menucaption, menuitem),
 menupopup.in-menulist > :is(menucaption, menuitem) {
     padding-inline: 8px !important;
+    -moz-box-align: center !important;
 }
 
 #ContentSelectDropdown
@@ -313,7 +313,8 @@ menupopup.in-menulist .contentSelectDropdown-searchbox {
     appearance: none !important;
     color: inherit !important;
     border-radius: var(--context-menuitem-border-radius);
-    margin: 0 !important;
+    margin-block: 0 !important;
+    margin-inline: var(--menupopup-inner-padding-magnitude) !important;
     padding-inline-start: 3px !important;
     background-color: var(--arrowpanel-dimmed) !important;
     padding-block: 0 !important;
@@ -363,11 +364,6 @@ menupopup.in-menulist :is(menu, menuitem, menucaption) .menu-iconic-left {
     padding: 0 !important;
     appearance: none !important;
     margin-inline-end: 0 !important;
-}
-
-#ContentSelectDropdown > menupopup :is(menu, menuitem, menucaption) .menu-iconic-icon,
-menupopup.in-menulist :is(menu, menuitem, menucaption) .menu-iconic-icon {
-    margin-inline: 6px;
 }
 
 #ContentSelectDropdown > menupopup menugroup,
@@ -429,18 +425,6 @@ menupopup.in-menulist .subviewbutton:is(:hover, [_moz-menuactive="true"])[disabl
 menupopup.in-menulist menu.subviewbutton:not([disabled="true"])[_moz-menuactive]:active {
     background: var(--arrowpanel-dimmed) !important;
     box-shadow: none !important;
-}
-
-#ContentSelectDropdown
-    > menupopup
-    menuitem:is([type="checkbox"], [type="radio"], [checked])
-    :is(.menu-text, .menu-iconic-text),
-menupopup.in-menulist
-    menuitem:is([type="checkbox"], [type="radio"], [checked])
-    :is(.menu-text, .menu-iconic-text) {
-    display: -moz-inline-box !important;
-    margin-inline: var(--context-margin-inline) !important;
-    padding-inline: var(--context-padding-inline) !important;
 }
 
 #ContentSelectDropdown > menupopup menuitem:is([type="checkbox"], [type="radio"])::before,
@@ -512,7 +496,7 @@ menupopup.in-menulist menuitem[type="radio"]::before {
 
 #ContentSelectDropdown > menupopup menuitem[type="radio"][checked="true"]::before,
 menupopup.in-menulist menuitem[type="radio"][checked="true"]::before {
-    background-image: url("chrome://userchrome/content/radio.svg");
+    background-image: url(chrome://userchrome/content/radio.svg);
     border-color: var(--checkbox-checked-border-color);
     background-color: var(--checkbox-checked-bgcolor);
 }
@@ -527,8 +511,6 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
     menupopup.in-menulist {
         --menupopup-child-margin-block-start: -4px;
         --menupopup-child-margin-inline-start: 0px;
-        --context-padding-inline: 28px 0px !important;
-        --context-margin-inline: -16px 0px !important;
         --arrowpanel-menuitem-border-radius: 3px !important;
         --menupopup-border-radius: 3px !important;
         --context-menuitem-border-radius: var(--arrowpanel-menuitem-border-radius);
@@ -556,8 +538,11 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
         margin-inline-start: var(--menupopup-child-margin-inline-start) !important;
     }
 
-    #ContentSelectDropdown > menupopup > :is(menuitem, menu, menucaption, menugroup, menuseparator),
-    menupopup.in-menulist > :is(menuitem, menu, menucaption, menugroup, menuseparator),
+    #ContentSelectDropdown
+        > menupopup
+        > :is(menuitem, menu, menucaption, menugroup, menuseparator, search-textbox),
+    menupopup.in-menulist
+        > :is(menuitem, menu, menucaption, menugroup, menuseparator, search-textbox),
     #PopupAutoComplete > richlistbox > richlistitem {
         margin-inline: var(--menupopup-inner-padding-magnitude);
     }
@@ -772,7 +757,6 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
         --tab-min-height: 35px !important;
         --min-tab-height: 35px !important;
         --space-above-tabbar: 0px;
-        --context-margin-inline: -14px 0px;
         --context-padding-inline: 27px 0px;
         --menu-color: var(--ui-text-80) !important;
         --menupopup-background: var(--arrowpanel-background);
@@ -851,8 +835,6 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
             --menupopup-padding: 0px;
             --menupopup-inner-padding-magnitude: 4px;
             --menupopup-inner-padding: var(--menupopup-inner-padding-magnitude) 0;
-            --context-padding-inline: 28px 0px !important;
-            --context-margin-inline: -16px 0px !important;
             --menupopup-shadow: none !important;
             --menupopup-border-radius: 5px !important;
             --context-menuitem-border-radius: var(--arrowpanel-menuitem-border-radius);
@@ -863,7 +845,7 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
             --panel-shadow: none !important;
         }
 
-        menupopup > :is(menuitem, menu, menucaption, menugroup, menuseparator),
+        menupopup > :is(menuitem, menu, menucaption, menugroup, menuseparator, search-textbox),
         #PopupAutoComplete > richlistbox > richlistitem {
             margin-inline: var(--menupopup-inner-padding-magnitude);
         }
@@ -899,7 +881,7 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
     }
 
     :is(menuitem, menu) .menu-iconic-icon {
-        margin-inline: 6px;
+        margin-inline: 5px 6px;
     }
 
     menugroup {
@@ -945,14 +927,6 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
     menu.subviewbutton:not([disabled="true"])[_moz-menuactive="true"]:active {
         background: var(--arrowpanel-dimmed) !important;
         box-shadow: none !important;
-    }
-
-    menupopup
-        menuitem:is([type="checkbox"], [type="radio"], [checked])
-        :is(.menu-text, .menu-iconic-text) {
-        display: -moz-inline-box !important;
-        margin-inline: var(--context-margin-inline) !important;
-        padding-inline: var(--context-padding-inline) !important;
     }
 
     menupopup menuitem:is([type="checkbox"], [type="radio"])::before {
@@ -1007,7 +981,7 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
     }
 
     menupopup menuitem[type="radio"][checked="true"]::before {
-        background-image: url("chrome://userchrome/content/radio.svg");
+        background-image: url(chrome://userchrome/content/radio.svg);
         border-color: var(--checkbox-checked-border-color);
         background-color: var(--checkbox-checked-bgcolor);
     }
@@ -1085,7 +1059,8 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
         appearance: none !important;
         color: inherit !important;
         border-radius: var(--context-menuitem-border-radius);
-        margin: 0 !important;
+        margin-block: 0 !important;
+        margin-inline: var(--menupopup-inner-padding-magnitude) !important;
         padding-inline-start: 3px !important;
         background-color: var(--arrowpanel-dimmed) !important;
         padding-block: 0 !important;
