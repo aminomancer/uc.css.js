@@ -93,9 +93,9 @@
                 sidebarSwitch.setAttribute("key", cB);
                 SidebarUI.updateShortcut({ button: sidebarSwitch });
             }
-            document
-                .getElementById("sidebar-button")
-                .setAttribute(
+            CustomizableUI.getWidget("sidebar-button")
+                .forWindow(window)
+                .node.setAttribute(
                     "tooltiptext",
                     `${sidebarBundle.GetStringFromName(
                         "sidebar-button.tooltiptext2"

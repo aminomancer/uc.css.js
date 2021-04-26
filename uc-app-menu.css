@@ -546,10 +546,6 @@
         --panel-banner-item-active-bgcolor: hsl(96, 65%, 75%);
     }
 
-    #appMenu-proton-update-banner strong {
-        font-weight: 600 !important;
-    }
-
     :root[lwt-popup-brighttext] #appMenu-proton-update-banner {
         --panel-banner-item-color: #f9f9fa;
         --panel-banner-item-background-color: rgba(48, 230, 11, 0.1);

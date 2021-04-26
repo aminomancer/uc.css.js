@@ -224,7 +224,7 @@ And if you have a lot of your own customizations, you'll probably need to make s
 
 -   `updateNotificationSlayer`: Prevent "update available" notification popups, instead just create a badge (like the one that ordinarily appears once you dismiss the notification). See the file description for more info.
 
--   `updateBannerLabels`: Simply changes the update banners in the hamburger button app menu to show the version number (for the available update, not for the currently installed version), and to make the strings a bit more concise. Instead of "Update available — download now" it will show "Download update: Nightly 90.0a1" for example.
+-   `updateBannerLabels`: Simply changes the update banners in the hamburger button app menu to make the strings a bit more concise. Instead of "Update available — download now" it will show "Download update" for example.
 
 -   `urlbarNotificationIconsOpenStatus`: All this does is set an attribute on the buttons in #notification-popup-box based on whether their popups are open or closed. That way we can set their fill-opacity to 1 when they're open, like we do already with the other icons in #identity-box. There aren't any ways to do this with pure CSS as far as I can tell, so it's necessary to make our own event listeners. (or we could override the class methods in PopupNotifications.jsm, but that would require more frequent updates) Very minor improvement, but also very cheap and easy, so I figured might as well make the icon opacity consistent. *Doesn't have any visual effect without uc-urlbar.css.*
 
