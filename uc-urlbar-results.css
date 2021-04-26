@@ -418,11 +418,6 @@
     background: none !important;
 }
 
-#urlbar[breakout][breakout-extend] > :is(#urlbar-background, .urlbarView) {
-    animation-name: none !important;
-    animation-timing-function: var(--animation-easing-function);
-}
-
 #urlbar[breakout][breakout-extend],
 #urlbar[breakout][breakout-extend-disabled][open] {
     top: calc((var(--urlbar-toolbar-height) - var(--urlbar-height)) / 2) !important;
@@ -442,10 +437,75 @@
     position: relative !important;
     overflow: visible !important;
     top: calc((var(--urlbar-container-height) - var(--urlbar-height)) / 2) !important;
-    box-shadow: 0 5px 18px hsla(0, 0%, 0%, 0.2) !important;
-    background: var(--urlbar-results-bgcolor) !important;
+    box-shadow: none !important;
+    background: none !important;
     border-bottom-left-radius: 4px !important;
     border-bottom-right-radius: 4px !important;
+}
+
+@keyframes urlbar-grow-bg {
+    0% {
+        transform: scaleX(.95) scaleY(.5);
+    }
+    100% {
+        transform: none;
+    }
+}
+
+@keyframes urlbar-grow-results {
+    0% {
+        transform: scaleY(.95);
+        opacity: 0;
+    }
+    100% {
+        transform: none;
+        opacity: 1;
+    }
+}
+
+#urlbar-background {
+    width: calc(100% + 6px) !important;
+    top: var(--urlbar-container-height) !important;
+    border: none !important;
+    background: var(--urlbar-results-bgcolor) !important;
+    border-radius: 0 !important;
+    border-bottom-left-radius: 4px !important;
+    border-bottom-right-radius: 4px !important;
+}
+
+#urlbar[breakout][breakout-extend][breakout-extend-animate] #urlbar-background {
+	animation-duration: 100ms !important;
+    animation-name: urlbar-grow-bg !important;
+    animation-timing-function: var(--animation-easing-function) !important;
+    transform-origin: top !important;
+    transform-style: flat !important;
+    backface-visibility: hidden !important;
+    margin: -3px !important;
+    box-shadow: 0 5px 18px hsla(0, 0%, 0%, 0.2) !important;
+    clip-path: inset(0 -100% -100% -100%); /* used to stop the shadow overflowing onto the nav-bar. this theme is meant to look like it's peaking out from under the nav-bar. */
+}
+
+#urlbar[breakout][breakout-extend][breakout-extend-animate] #urlbar-results {
+	animation-duration: 300ms !important;
+    animation-name: urlbar-grow-results !important;
+    animation-timing-function: var(--animation-easing-function) !important;
+    transform-origin: top !important;
+    transform-style: preserve-3d !important;
+    backface-visibility: hidden !important;
+}
+
+@supports -moz-bool-pref("userChrome.urlbar-results.disable_animation") {
+    #urlbar[breakout][breakout-extend][breakout-extend-animate] #urlbar-results,
+    #urlbar[breakout][breakout-extend][breakout-extend-animate] #urlbar-background {
+        animation: none !important;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #urlbar[breakout][breakout-extend][breakout-extend-animate] #urlbar-results,
+    #urlbar[breakout][breakout-extend][breakout-extend-animate] #urlbar-background {
+        animation: none !important;
+    }
 }
 
 #nav-bar:not([overflowing="true"]) .urlbarView[noresults="true"],
@@ -485,7 +545,7 @@
     flex-flow: column nowrap;
     align-items: stretch;
     gap: 0px;
-    background: var(--urlbar-results-bgcolor) !important;
+    background: none !important;
     border-bottom-left-radius: 4px !important;
     border-bottom-right-radius: 4px !important;
     padding: 0.4px 1px !important;

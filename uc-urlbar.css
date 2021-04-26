@@ -484,10 +484,6 @@ toolbarpaletteitem[removable="false"]
     }
 }
 
-#urlbar-background {
-    display: none !important;
-}
-
 #urlbar > #urlbar-input-container {
     border: none !important;
 }
