@@ -27,10 +27,12 @@
         }
 
         get appName() {
-            return (
-                this._appName ||
-                (this._appName = gBrandBundle.GetStringFromName("brandShorterName"))
-            );
+            if (!this._appName) {
+                this._appName = gBrandBundle.GetStringFromName("brandShorterName");
+                let words = this._appName.split(" ");
+                if (words.length > 1) this._appName = "Firefox";
+            }
+            return this._appName;
         }
 
         get attributes() {
