@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name           scrollingOneOffs.uc.js
+// @name           Scrolling Search One-offs
 // @homepage       https://github.com/aminomancer
 // @description    This is for my own personal stylesheet, which moves the one-off search engine buttons to the right side of the url bar when the user is typing into the url bar. The script allows the search one-offs box to be scrolled with mousewheel up/down.
 // @author         aminomancer

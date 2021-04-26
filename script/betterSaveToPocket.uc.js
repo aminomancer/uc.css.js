@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name           saveToPocket.uc.js
+// @name           Better Save to Pocket
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    The browser context menu has a button to save the current page to Pocket. By default, this opens a page action panel in the urlbar which tells you the page was saved and gives you an option to remove it or view the list of saved pages. This script overrides the saving function so that, rather than opening a panel, it immediately saves the link to Pocket and only creates a brief confirmation hint that fades after a few seconds. The confirmation hint is of the same type as the hint that pops up when you save a bookmark. It also turns the Pocket button red, the same as saving to Pocket does without the script.

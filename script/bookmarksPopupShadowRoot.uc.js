@@ -1,3 +1,10 @@
+// ==UserScript==
+// @name           Bookmarks Popup Shadow Root
+// @author         aminomancer
+// @homepage       https://github.com/aminomancer/uc.css.js
+// @description    Implement smooth scrolling for all bookmarks popups that are tall enough to scroll. Add unique classes to their shadow parts so they can be styled selectively in CSS. Add special click functions to their scroll buttons — hovering a scroll button will scroll at a constant rate, as normal. (though faster than vanilla) But clicking a scroll button will immediately jump to the top/bottom of the list. Combined with uc-bookmarks.css, overhauls the appearance of the scroll buttons.
+// ==/UserScript==
+
 const bookmarksPopupShadowRoot = {
     handleEvent(e) {
         if (!e.target.getAttribute("uc-init"))

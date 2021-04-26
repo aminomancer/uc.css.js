@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name           undoListInTabContextMenu.uc.js
+// @name           Undo Recently Closed Tabs in Tab Context Menu
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Adds new menus to the context menu that appears when you right-click a tab: one lists recently closed tabs so you can restore them, and another lists recently closed windows. These are basically the same functions that exist in the history toolbar button's popup, but I think the tab context menu is a more convenient location for them. An updated script that does basically the same thing as UndoListInTabmenuToo by Alice0775, and is largely derived from it. The original broke around version 86 or 87 I think.

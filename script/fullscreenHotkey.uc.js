@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name           fullscreenHotkey.uc.js
+// @name           Fullscreen Hotkey
 // @homepage       https://github.com/aminomancer
-// @description    all this does is remap the fullscreen shortcut from F11 to Ctrl+E, since I already use F11 for other stuff.
+// @description    All this does is remap the fullscreen shortcut from F11 to Ctrl+E, since I already use F11 for other stuff.
 // @author         aminomancer
 // ==/UserScript==
 

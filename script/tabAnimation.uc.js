@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name           tabAnimation.uc.js
+// @name           Tab Animation Workaround
 // @namespace      https://github.com/aminomancer/uc.css.js/tabAnimation.uc.js
 // @author         aminomancer
 // @version        1.0
