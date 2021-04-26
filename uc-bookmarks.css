@@ -419,6 +419,16 @@
     display: block !important;
 }
 
+/* hide scrollbuttons until bookmarksPopupShadowRoot.uc.js initializes the customizations, to avoid flickering */
+link[href="chrome://global/skin/arrowscrollbox.css"] ~ :is(#scrollbutton-up, #scrollbutton-down):not(.BMB-special-scrollbutton-up, .BMB-special-scrollbutton-down) {
+    display: none !important;
+    visibility: collapse !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    opacity: 0 !important;
+}
+
 :is(.BMB-special-scrollbutton-up, .BMB-special-scrollbutton-down) > .toolbarbutton-icon {
     transform: none !important;
 }
