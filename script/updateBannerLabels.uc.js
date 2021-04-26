@@ -8,27 +8,12 @@
 (function () {
     class UpdateBannerLabelProvider {
         constructor() {
-            Services.obs.addObserver(this, "appMenu-notifications");
-            Services.obs.addObserver(this, "show-update-progress");
-            addEventListener("uninit", this);
+            PanelUI.panel.addEventListener("popupshowing", this);
+            this.setAttributes(this.banner, this.attributes);
         }
 
-        async observe(_sub, top, _data) {
-            switch (top) {
-                case "appMenu-notifications":
-                case "show-update-progress":
-                    this.setAttributes(this.banner, this.attributes);
-                    break;
-            }
-        }
-
-        handleEvent(e) {
-            switch (e.type) {
-                case "uninit":
-                    Services.obs.removeObserver(this, "appMenu-notifications");
-                    Services.obs.removeObserver(this, "show-update-progress");
-                    break;
-            }
+        handleEvent(_e) {
+            this.setAttributes(this.banner, this.attributes);
         }
 
         setAttributes(el, attrs) {
@@ -41,12 +26,19 @@
             return PanelUI._panelBannerItem;
         }
 
+        get appName() {
+            return (
+                this._appName ||
+                (this._appName = gBrandBundle.GetStringFromName("brandShorterName"))
+            );
+        }
+
         get attributes() {
             return {
-                "label-update-available": `Download update`,
-                "label-update-manual": `Download update`,
-                "label-update-downloading": `Downloading update`,
-                "label-update-restart": `Restart to install update`,
+                "label-update-available": `Download ${this.appName} update`,
+                "label-update-manual": `Download ${this.appName} update`,
+                "label-update-downloading": `Downloading ${this.appName} update`,
+                "label-update-restart": `Restart to update ${this.appName}`,
                 "label-update-unsupported": `Unable to update: system incompatible`,
             };
         }
