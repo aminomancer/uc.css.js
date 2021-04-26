@@ -1,30 +1,18 @@
 // ==UserScript==
 // @name           Update Banner Labels with Version Number
 // @homepage       https://github.com/aminomancer
-// @description    This script simply changes the update banners in the hamburger button app menu to make the strings a bit more concise. Instead of "Update available — download now" it will show "Download update" for example.
+// @description    This script simply changes the update banners in the hamburger button app menu to make the strings a bit more concise. Instead of "Update available — download now" it will show "Download Nightly update" for example.
 // @author         aminomancer
 // ==/UserScript==
 
 (function () {
+    // wait for {param} milliseconds in async function
+    function sleep(ms) {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+    }
+
     class UpdateBannerLabelProvider {
-        constructor() {
-            PanelUI.panel.addEventListener("popupshowing", this);
-            this.setAttributes(this.banner, this.attributes);
-        }
-
-        handleEvent(_e) {
-            this.setAttributes(this.banner, this.attributes);
-        }
-
-        setAttributes(el, attrs) {
-            for (var key in attrs) {
-                el.setAttribute(key, attrs[key]);
-            }
-        }
-
-        get banner() {
-            return PanelUI._panelBannerItem;
-        }
+        constructor() {}
 
         get appName() {
             if (!this._appName) {
@@ -36,18 +24,36 @@
         }
 
         get attributes() {
-            return {
-                "label-update-available": `Download ${this.appName} update`,
-                "label-update-manual": `Download ${this.appName} update`,
-                "label-update-downloading": `Downloading ${this.appName} update`,
-                "label-update-restart": `Restart to update ${this.appName}`,
-                "label-update-unsupported": `Unable to update: system incompatible`,
-            };
+            return (
+                this._attributes ||
+                (this._attributes = {
+                    "update-available": `Download ${this.appName} update`,
+                    "update-manual": `Download ${this.appName} update`,
+                    "update-downloading": `Downloading ${this.appName} update`,
+                    "update-restart": `Restart to update ${this.appName}`,
+                    "update-unsupported": `Unable to update: system incompatible`,
+                })
+            );
         }
     }
 
-    function init() {
+    async function init() {
         window.gUpdateBanners = new UpdateBannerLabelProvider();
+        await sleep(1000); // wait a second just in case of unrelated errors on startup (probably not necessary if you don't use nightly, but shouldn't matter as firefox doesn't check for updates immediately after startup unless you open the about dialog)
+        // override the built-in method that sets the banner label
+        PanelUI._showBannerItem = function _showBannerItem(notification) {
+            if (!this._panelBannerItem) {
+                this._panelBannerItem = this.mainView.querySelector(".panel-banner-item");
+            }
+
+            let label = gUpdateBanners.attributes[notification.id];
+            if (!label) return; // Ignore items we don't know about.
+
+            this._panelBannerItem.setAttribute("notificationid", notification.id);
+            this._panelBannerItem.setAttribute("label", label);
+            this._panelBannerItem.hidden = false;
+            this._panelBannerItem.notification = notification;
+        };
     }
 
     if (gBrowserInit.delayedStartupFinished) {
