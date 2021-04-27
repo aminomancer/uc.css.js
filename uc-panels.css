@@ -66,41 +66,56 @@ panel[type="arrow"][side="top"] {
     );
 }
 
+#protections-popup-content {
+	margin-bottom: 0 !important;
+    padding-block: 4px !important;
+}
+
 .protections-popup-category,
 .protections-popup-footer-button {
     border-radius: var(--arrowpanel-menuitem-border-radius) !important;
-    margin-inline: calc(var(--vertical-section-padding) - 4px) !important;
-    padding-inline: calc(var(--arrowpanel-menuitem-inline-margin) + 3px) !important;
-    padding-block: var(--arrowpanel-menuitem-inline-margin) !important;
-    height: unset !important;
-    max-height: unset !important;
+    margin: 0 !important;
+    padding-inline: 6px !important;
     min-height: 28px !important;
 }
 
 #protections-popup-footer {
-	padding-bottom: calc(var(--vertical-section-padding) - 4px) !important;
-    margin-bottom: 4px !important;
+    padding-top: 0 !important;
 }
 
 #protections-popup-footer-protection-type-label {
-    margin-inline-end: 0 !important;
+    margin-inline-end: 4px !important;
 }
 
 #protections-popup-trackers-blocked-counter-box {
-    margin-inline-end: calc(var(--vertical-section-padding) - 4px) !important;
+    padding-inline-end: 6px !important;
+    margin-inline-end: 4px !important;
+}
+
+#protections-popup-not-blocking-section-header {
+    padding: 2px !important;
+    padding-bottom: 0 !important;
 }
 
 #protections-popup-blocking-section-header,
-#protections-popup-not-blocking-section-header,
 #protections-popup-not-found-section-header {
-    margin: 0 !important;
-    padding-inline: var(--vertical-section-padding) !important;
-    color: var(--panel-description-color);
+    padding-block: 8px 4px !important;
 }
 
-#protections-popup-siteNotWorkingView-header,
-#protections-popup-tp-switch-section {
-    padding-inline: var(--vertical-section-padding) !important;
+#protections-popup-not-blocking-section-description,
+#protections-popup-not-blocking-section-why {
+	outline: none !important;
+    padding: 4px !important;
+}
+
+#protections-popup-not-blocking-section-why {
+    border-radius: var(--arrowpanel-menuitem-border-radius) !important; 
+}
+
+#protections-popup-siteNotWorkingView-body, .protections-popup-tp-switch-label-box, .protections-popup-tp-switch-box {
+	min-height: 40px !important;
+	-moz-box-pack: center;
+	position: relative;
 }
 
 .protections-popup-category::after {
@@ -433,10 +448,6 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
 
 #identity-popup-security-expander > .button-box {
     border: none !important;
-}
-
-#protections-popup-not-blocking-section-why {
-    border-radius: 0.1% !important;
 }
 
 .identity-popup-warning-box {
@@ -821,7 +832,6 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
     .panel-footer.panel-footer-menulike {
         margin-inline: 4px !important;
         margin-bottom: 4px !important;
-        margin-top: -4px !important;
         border-top: 1px solid var(--panel-separator-color);
     }
 
@@ -855,7 +865,7 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
         font-size: 14px !important;
         font-weight: normal !important;
     }
-    
+
     :is(#identity-popup-mainView-panel-header,
     #permission-popup-mainView-panel-header,
     #protections-popup-mainView-panel-header) span,
@@ -870,7 +880,7 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
     .protections-popup-section {
         margin-inline: 4px;
     }
-    
+
     #identity-popup-multiView > .panel-viewcontainer {
         min-height: revert !important;
     }

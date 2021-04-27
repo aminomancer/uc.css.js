@@ -1,5 +1,5 @@
 .tabbrowser-tab[fadein] {
-    max-width: 200vw !important;
+    max-width: 100vw !important;
 }
 
 .tabbrowser-tab:not([selected]):hover .tab-background {

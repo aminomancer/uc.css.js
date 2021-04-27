@@ -193,6 +193,12 @@ notification[value="keyword-uri-fixup"] {
     color: #fff !important;
 }
 
+/* basic checkbox appearance.
+the actual icon is set in utils/chrome.manifest since there are far too many checkboxes to override them all with CSS. */
+checkbox .checkbox-check {
+    background-size: contain;
+}
+
 #label-box {
     outline: unset !important;
 }

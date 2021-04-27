@@ -691,7 +691,7 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
         --desaturate-hover-background: hsla(236, 60%, 83%, 0.17) !important;
         --desaturate-active-background: hsla(236, 60%, 83%, 0.22) !important;
         --desaturate-checked-background: hsla(236, 60%, 83%, 0.13) !important;
-        /* --button-bgcolor: var(--arrowpanel-dimmed) !important; */
+        --button-bgcolor: var(--arrowpanel-faint) !important;
         --button-hover-bgcolor: var(--arrowpanel-dimmed) !important;
         --button-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
         --urlbar-input-bgcolor: hsla(233, 24%, 26%, 1) !important;
@@ -700,6 +700,8 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
         --urlbar-toolbar-height: var(--user-urlbar-container-height) !important;
         --urlbar-container-height: var(--user-urlbar-container-height) !important;
         --urlbar-height: calc(var(--urlbar-container-height) - 6px) !important;
+        --urlbar-container-padding: 1px !important;
+        --urlbar-icon-fill-opacity: 0.6 !important;
         --lwt-toolbarbutton-icon-fill-attention: var(--attention-color) !important;
         --focus-outline-color: var(--attention-color) !important;
         --focus-outline-width: 2px;
@@ -728,26 +730,14 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
         --in-content-primary-button-background: var(--purple-40) !important;
         --in-content-primary-button-background-hover: var(--purple-35) !important;
         --in-content-primary-button-background-active: var(--purple-30) !important;
-        --purple-30: hsl(244, 100%, 70%) !important;
-        --purple-30-a50: hsla(240, 100%, 70%, 0.5) !important;
-        --purple-35: hsl(245, 100%, 65%) !important;
-        --purple-40: hsl(250, 100%, 60%) !important;
-        --purple-40-a10: hsla(250, 100%, 60%, 0.1) !important;
-        --purple-40-a30: hsla(250, 100%, 60%, 0.5) !important;
-        --purple-45: hsl(250, 90%, 55%) !important;
-        --purple-50: hsl(256, 100%, 50%) !important;
-        --purple-50-a30: hsla(256, 100%, 50%, 0.3) !important;
-        --purple-60: hsl(258, 100%, 40%) !important;
-        --purple-70: hsl(256, 100%, 30%) !important;
-        --purple-80: hsl(254, 100%, 20%) !important;
         --autocomplete-popup-background: var(--arrowpanel-background) !important;
         --autocomplete-popup-color: var(--lwt-text-color) !important;
         --urlbarView-bgcolor: hsla(233, 38%, 9%, 0.8) !important;
         --ui-textbox-bgcolor: hsl(233, 24%, 28%) !important;
         --ui-textbox-focus-bgcolor: hsl(232, 22%, 34%) !important;
-        --ui-solid-button-bgcolor: var(--ui-textbox-bgcolor) !important;
-        --ui-solid-button-hover-bgcolor: hsl(232, 24%, 34%) !important;
-        --ui-solid-button-active-bgcolor: hsl(232, 23%, 37%) !important;
+        --ui-solid-button-bgcolor: var(--arrowpanel-dimmed) !important;
+        --ui-solid-button-hover-bgcolor: var(--arrowpanel-dimmed-further) !important;
+        --ui-solid-button-active-bgcolor: var(--arrowpanel-dimmed-even-further) !important;
         --ebmp-hover-bgcolor: hsl(233, 24%, 33%) !important;
         --ebmp-focus-bgcolor: hsl(233, 24%, 38%) !important;
         --urlbar-popup-url-color: hsl(251, 100%, 64%) !important;
@@ -757,6 +747,7 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
         --tab-min-height: 35px !important;
         --min-tab-height: 35px !important;
         --space-above-tabbar: 0px;
+        --context-margin-inline: -14px 0px;
         --context-padding-inline: 27px 0px;
         --menu-color: var(--ui-text-80) !important;
         --menupopup-background: var(--arrowpanel-background);
@@ -766,8 +757,8 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
         --menupopup-child-margin-inline-start: 0px;
         --menupopup-padding: 0px;
         --menupopup-inner-padding: 0px;
-        --context-checkbox-margin: 6px -4.5px;
-        --context-iconic-margin: 6px;
+        --context-checkbox-margin: 6px 7px;
+        --context-iconic-margin: 5px 6px;
         --context-iconic-special-margin: 4px -2px;
         --menupopup-border-radius: 3px;
         --context-menuitem-border-radius: 0px;
@@ -777,6 +768,16 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
         --menu-right-size: 12px;
         --buttons-secondary-hover-bgcolor: var(--arrowpanel-dimmed) !important;
         --buttons-secondary-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
+        --vpn-on-icon: url(chrome://userchrome/content/skin/vpn-on-light.svg);
+        --checkbox-border-color: var(--uc-checkbox-border-color) !important;
+        --checkbox-checked-border-color: var(--uc-checkbox-checked-border-color) !important;
+        --checkbox-unchecked-bgcolor: var(--uc-checkbox-unchecked-bgcolor) !important;
+        --checkbox-unchecked-hover-bgcolor: var(--uc-checkbox-unchecked-hover-bgcolor) !important;
+        --checkbox-unchecked-active-bgcolor: var(--uc-checkbox-unchecked-active-bgcolor) !important;
+        --checkbox-checked-bgcolor: var(--uc-checkbox-checked-bgcolor) !important;
+        --checkbox-checked-color: var(--uc-checkbox-checked-color) !important;
+        --checkbox-checked-hover-bgcolor: var(--uc-checkbox-checked-hover-bgcolor) !important;
+        --checkbox-checked-active-bgcolor: var(--uc-checkbox-checked-active-bgcolor) !important;
     }
 
     @media (-moz-proton) {
@@ -793,15 +794,24 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
             --arrowpanel-menuitem-margin: 0px var(--arrowpanel-menuitem-inline-margin) !important;
             --arrowpanel-menuitem-padding: 6px !important;
             --panel-subview-body-padding-magnitude: var(--arrowpanel-menuitem-inline-margin);
-            --panel-subview-body-padding: var(--panel-subview-body-padding-magnitude) 0px !important;
+            --panel-subview-body-padding: var(--panel-subview-body-padding-magnitude) 0 !important;
             --arrowpanel-menuitem-border-radius: 3px !important;
             --proton-tab-radius: 0px !important;
             --proton-tab-block-margin: 0px !important;
             --panel-description-color: hsl(235, 48%, 89%, 70%) !important;
             --panel-shortcut-color: hsl(235, 27%, 73%, 70%) !important;
             --panel-shortcut-focus: hsl(235, 32%, 75%, 90%) !important;
+            --error-text-color: var(--warning-color) !important;
             --proton-tab-inline-padding: 0px !important;
             --tab-shadow-max-size: 0px !important;
+            --buttons-primary-button-bgcolor: var(--in-parent-primary-button-background) !important;
+            --buttons-primary-button-hover-bgcolor: var(
+                --in-parent-primary-button-background-hover
+            ) !important;
+            --buttons-primary-button-active-bgcolor: var(
+                --in-parent-primary-button-background-active
+            ) !important;
+            --buttons-primary-button-color: var(--in-parent-primary-button-text-color) !important;
         }
 
         :root,
@@ -849,6 +859,59 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
         #PopupAutoComplete > richlistbox > richlistitem {
             margin-inline: var(--menupopup-inner-padding-magnitude);
         }
+    }
+
+    .theme-dark input:is([type="checkbox"], [type="radio"]) {
+        appearance: none !important;
+        width: 14px;
+        height: 14px;
+        fill: currentColor;
+        -moz-context-properties: fill, fill-opacity, stroke;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        border: 1px solid var(--checkbox-border-color);
+        background-color: var(--checkbox-unchecked-bgcolor);
+        color: var(--in-parent-primary-button-text-color);
+    }
+
+    .theme-dark input[type="checkbox"] {
+        border-radius: 2px;
+        margin-inline: 4px;
+        margin-block: 3px 2px;
+    }
+
+    .theme-dark input:is([type="checkbox"], [type="radio"]):is(:hover, :focus-visible) {
+        background-color: var(--checkbox-unchecked-hover-bgcolor);
+    }
+
+    .theme-dark input:is([type="checkbox"], [type="radio"]):is(:hover, :focus-visible):active {
+        background-color: var(--checkbox-unchecked-active-bgcolor);
+    }
+
+    .theme-dark input:is([type="checkbox"], [type="radio"]):is([checked="true"], :checked):is(:hover, :focus-visible) {
+        background-color: var(--checkbox-checked-hover-bgcolor);
+    }
+
+    .theme-dark input:is([type="checkbox"], [type="radio"]):is([checked="true"], :checked):is(:hover, :focus-visible):active {
+        background-color: var(--checkbox-checked-active-bgcolor);
+    }
+
+    .theme-dark input[type="checkbox"]:is([checked="true"], :checked) {
+        background-image: url(chrome://userchrome/content/check.svg);
+        border-color: var(--checkbox-checked-border-color);
+        background-color: var(--checkbox-checked-bgcolor);
+    }
+
+    .theme-dark input[type="radio"] {
+        border-radius: 100%;
+        margin-inline: 4px;
+    }
+
+    .theme-dark input[type="radio"]:is([checked="true"], :checked) {
+        background-image: url(chrome://userchrome/content/radio.svg);
+        border-color: var(--checkbox-checked-border-color);
+        background-color: var(--checkbox-checked-bgcolor);
     }
 
     menupopup {

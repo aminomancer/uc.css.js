@@ -16,3 +16,4 @@ override chrome://browser/skin/places/bookmarksMenu.svg ../resources/material/pl
 override chrome://browser/skin/places/folder-smart.svg ../resources/material/places/folder-user.svg
 override chrome://browser/skin/places/tag.svg ../resources/material/places/tag.svg
 override chrome://browser/skin/places/history.svg ../resources/skin/history.svg
+override chrome://global/skin/icons/check.svg ../resources/check.svg

@@ -147,7 +147,8 @@ tooltip {
 menupopup,
 .in-menulist,
 #ContentSelectDropdown,
-popupnotification {
+popupnotification,
+#customization-container {
     --checkbox-border-color: var(--uc-checkbox-border-color) !important;
     --checkbox-checked-border-color: var(--uc-checkbox-checked-border-color) !important;
     --checkbox-unchecked-bgcolor: var(--uc-checkbox-unchecked-bgcolor) !important;
