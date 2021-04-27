@@ -277,6 +277,7 @@
 #editBookmarkPanel .in-menulist :is(menu, menuitem) {
     min-height: 24px !important;
     height: 24px !important;
+    margin: 0 !important;
 }
 
 #editBookmarkPanel .in-menulist .menuitem-iconic .menu-iconic-text {

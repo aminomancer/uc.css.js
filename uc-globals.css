@@ -59,6 +59,11 @@ tooltip {
         color-mix(in srgb, var(--tab-focused-highlight) 50%, var(--toolbar-bgcolor))
     );
     --multiselected-color: hsl(241, 50%, 51%);
+    --titlebar-gradient: radial-gradient(
+        circle at 100% 0%,
+        hsl(231, 48%, 12%),
+        hsl(233, 61%, 8%) 140px
+    );
     --search-box-color: hsl(229, 32%, 23%);
     --search-box-focus: hsl(229, 27%, 27%);
     --search-box-null: hsl(230, 30%, 20%);

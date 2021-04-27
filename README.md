@@ -221,6 +221,8 @@ And if you have a lot of your own customizations, you'll probably need to make s
 
 -   `toggleTabsAndSidebarButton`: Made by request. Adds a new toolbar button that can toggle between hiding tabs and hiding sidebar. Intended for use with tree style tabs, but will work just fine without it. It toggles the sidebar on its own, but it hides tabs by setting an attribute on the document element, which you need to reference in your userChrome.css file, like this: `:root[toggle-hidden="tabs"] #TabsToolbar {...}`
 
+-   `toggleMenubarHotkey`: Adds a hotkey (alt+M by default) that toggles the menubar on and off. Unlike just pressing the alt key, this keeps it open permanently until closed again by the hotkey, toolbar context menu, or customize menu. Requires [**fx-autoconfig**](https://github.com/MrOtherGuy/fx-autoconfig) — other script loaders will not work with this script.
+
 -   `undoListInTabContextMenu`: Adds new menus to the context menu that appears when you right-click a tab: one lists recently closed tabs so you can restore them, and another lists recently closed windows. These are basically the same functions that exist in the history toolbar button's popup, but I think the tab context menu is a more convenient location for them. An updated script that does basically the same thing as [UndoListInTabmenuToo](https://github.com/alice0775/userChrome.js/blob/master/72/UndoListInTabmenuToo.uc.js) by Alice0775, and is largely derived from it. The original broke around version 86 or 87 I think.
 
 -   `updateNotificationSlayer`: Prevent "update available" notification popups, instead just create a badge (like the one that ordinarily appears once you dismiss the notification). See the file description for more info.

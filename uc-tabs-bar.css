@@ -31,85 +31,65 @@
     background-color: var(--lwt-accent-color) !important;
 }
 
-/* menubar next to tabs */
+/* menubar next to tabs (merge tabs bar with titlebar menubar and flow them horizontally) */
 #toolbar-menubar {
-    padding-inline: 2px !important;
-    z-index: 12 !important;
-    background: var(--lwt-accent-color) !important;
-    position: relative !important;
-    -moz-box-ordinal-group: 0;
+    padding-inline: 2px 0;
+    -moz-box-ordinal-group: 2;
 }
 
-#toolbar-menubar[inactive="true"] {
-    opacity: 0 !important;
-    height: 0 !important;
-    pointer-events: none !important;
-    width: 0 !important;
+#toolbar-menubar[autohide="true"][inactive="true"]:not([customizing="true"]) {
+	max-width: 0 !important;
     min-width: 0 !important;
-}
-
-:root[sizemode="normal"] #toolbar-menubar:not([inactive]) > .titlebar-buttonbox-container {
-    display: block !important;
-    position: fixed !important;
-    top: calc(10px + var(--space-above-tabbar)) !important;
-    right: 0 !important;
-    width: -moz-min-content !important;
-}
-
-:root[sizemode="maximized"] #toolbar-menubar:not([inactive]) > .titlebar-buttonbox-container {
-    display: block !important;
-    position: fixed !important;
-    top: 17.5px !important;
-    right: 0 !important;
-    width: -moz-min-content !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    opacity: 0 !important;
 }
 
 :root[inFullscreen] #toolbar-menubar {
     visibility: visible !important;
 }
 
-:root[inFullscreen]
-    body
-    > box:not([urlbar-status], [popup-status])
-    > #navigator-toolbox:not(:hover, :focus-within)
-    > #titlebar
-    > #toolbar-menubar {
-    visibility: collapse !important;
-    transition: 0s 0.2s visibility !important;
-}
-
-/* the drag space should push down everything */
-:root[sizemode="normal"]
-    #TabsToolbar-customization-target
-    > toolbarbutton
-    > :is(.toolbarbutton-icon, .toolbarbutton-badge-stack) {
-    margin-top: var(--space-above-tabbar);
-}
-
 :root[inFullscreen] #toolbar-menubar:not([inactive]) > .titlebar-buttonbox-container {
     display: none !important;
 }
 
-/* when drag space is enabled */
-#TabsToolbar > .toolbar-items {
-    padding-top: 0 !important;
+:root[inFullscreen] #toolbar-menubar:not([inactive]) {
+    margin-right: 91.9px !important;
 }
 
-:root:not([chromehidden~="menubar"])
-    #toolbar-menubar:not([autohide="true"])
-    ~ #TabsToolbar
-    .titlebar-spacer[type="post-tabs"] {
+:root[inFullscreen] #toolbar-menubar:not([inactive]) ~ #TabsToolbar #window-controls {
+    position: absolute !important;
+    display: flex !important;
+    flex-flow: row nowrap !important;
+    right: 0 !important;
+    z-index: 20 !important;
+    top: calc((var(--tab-min-height) / 2) - (15.3px / 2)) !important;
+}
+
+:root[inFullscreen] #toolbar-menubar[inactive] ~ #TabsToolbar #window-controls {
+    margin-left: 15.6px !important;
+}
+
+:root[inDOMFullscreen] #toolbar-menubar[inactive] ~ #TabsToolbar #window-controls {
     display: -moz-box !important;
 }
 
-:root:not([chromehidden~="menubar"], [inFullscreen="true"])
-    #toolbar-menubar:not([autohide="true"])
-    + #TabsToolbar
-    > .titlebar-buttonbox-container {
-    visibility: hidden !important;
-    display: -moz-box !important;
+:root[inFullscreen] #titlebar {
+    background-image: var(--titlebar-gradient);
+    background-color: var(--lwt-accent-color);
 }
 
+:root:not([inFullscreen]) #toolbar-menubar[autohide="true"][inactive="true"]:not([customizing="true"]) ~ #TabsToolbar {
+    background-image: var(--titlebar-gradient);
+    background-color: var(--lwt-accent-color);
+}
+
+:root:not([inFullscreen]) #toolbar-menubar:not([inactive="true"]) {
+    background-image: var(--titlebar-gradient);
+    background-color: var(--lwt-accent-color);
+}
+
+/* menubar buttons */
 #toolbar-menubar #menubar-items {
     padding-inline: 4px !important;
     -moz-box-pack: center !important;
@@ -172,11 +152,6 @@
     width: 20px !important;
 }
 
-/* hide the pixel above the tabs in windows */
-:root[sizemode="normal"][tabsintitlebar] {
-    border-top: none !important;
-}
-
 #toolbar-menubar:not([inactive]) ~ #TabsToolbar #TabsToolbar-customization-target::before {
     position: relative !important;
     display: block !important;
@@ -203,16 +178,6 @@
     height: 46px !important;
     margin-block: -8px !important;
     z-index: 11 !important;
-}
-
-#TabsToolbar {
-    /* background-image: linear-gradient(180deg, hsl(231, 49%, 11%), hsl(233, 55%, 8%)) !important; */
-    background-image: radial-gradient(
-        circle at 100% 0%,
-        hsl(231, 49%, 11%),
-        hsl(233, 55%, 8%) 140px
-    ) !important;
-    background-color: var(--lwt-accent-color) !important;
 }
 
 #new-tab-button,
@@ -298,6 +263,7 @@
     background-color: transparent !important;
     list-style-image: url(chrome://userchrome/content/window/minimize.svg) !important;
     grid-column: 2 !important;
+    order: 2 !important;
 }
 
 .titlebar-min:hover,
@@ -318,6 +284,7 @@
     background-color: transparent !important;
     list-style-image: url(chrome://userchrome/content/window/maximize.svg) !important;
     grid-column: 1 !important;
+    order: 1 !important;
     -moz-box-ordinal-group: 0 !important;
 }
 
@@ -343,6 +310,7 @@
     background-color: transparent !important;
     list-style-image: url(chrome://userchrome/content/window/close.svg) !important;
     grid-column: 3 !important;
+    order: 3 !important;
 }
 
 .titlebar-close:hover,
