@@ -12,7 +12,7 @@
             modifiers: "alt",
             key: "M",
         },
-        (win, hotkey) => {
+        (win, key) => {
             if (win === window)
                 Services.obs.notifyObservers(
                     null,
@@ -22,7 +22,6 @@
                         AutoHideMenubar._node.getAttribute("inactive"),
                     ])
                 );
-            console.log(hotkey);
         }
     );
 })();

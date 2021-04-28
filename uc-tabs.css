@@ -2,6 +2,15 @@
     max-width: 100vw !important;
 }
 
+/* #tabbrowser-tabs:not([movingtab]) .tabbrowser-tab {
+    transform-origin: bottom !important;
+    transition: min-width 100ms ease-out, max-width 100ms ease-out, scale 200ms var(--animation-easing-function) !important;
+}
+
+#tabbrowser-tabs:not([movingtab]) .tabbrowser-tab:active {
+    scale: 0.85 !important;
+} */
+
 .tabbrowser-tab:not([selected]):hover .tab-background {
     background: var(--tab-hover) !important;
 }
