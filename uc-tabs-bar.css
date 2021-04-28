@@ -23,6 +23,10 @@
     margin-left: -2px !important;
 }
 
+:root:not([chromehidden~="menubar"]) #toolbar-menubar:not([inactive]) + #TabsToolbar .titlebar-spacer {
+    display: none;
+}
+
 #titlebar {
     -moz-box-orient: horizontal !important;
 }
@@ -49,6 +53,7 @@
     visibility: visible !important;
 }
 
+:root:not([chromehidden~="menubar"]) #toolbar-menubar:not([inactive]) + #TabsToolbar > .titlebar-buttonbox-container,
 :root[inFullscreen] #toolbar-menubar:not([inactive]) > .titlebar-buttonbox-container {
     display: none !important;
 }
@@ -342,12 +347,12 @@
 
 /* all tabs button popup */
 .all-tabs-item {
-    border-radius: var(--arrowpanel-menuitem-border-radius);
+    border-radius: var(--arrowpanel-menuitem-border-radius) !important;
     box-shadow: none !important;
-    margin-inline: 4px;
-    min-height: 28px;
+    margin-inline: 4px !important;
+    min-height: 28px !important;
     -moz-box-align: center;
-    padding-inline-end: 2px;
+    padding-inline-end: 2px !important;
 }
 
 panelview .all-tabs-button:not([disabled], [open]):focus {
@@ -356,7 +361,8 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
 
 #allTabsMenu-allTabsViewTabs {
     margin: var(--panel-subview-body-padding) !important;
-    padding-block-start: 0 !important;
+    margin-top: 0 !important;
+    padding-block: 0 !important;
 }
 
 #allTabsMenu-searchTabs {

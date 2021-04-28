@@ -130,6 +130,11 @@ panel[type="arrow"][side="top"] {
     background: none !important;
 }
 
+.protections-popup-description,
+.protections-popup-list {
+	font-size: 12px;
+}
+
 .popup-notification-warning:empty,
 .addon-webext-perm-list:empty {
     display: none !important;
@@ -809,10 +814,23 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
     #permission-popup,
     #protections-popup {
         --panel-separator-margin: 4px !important;
-        --popup-width: 436.92px !important;
         line-height: 1.1em !important;
-        font-size: var(--panel-font-size);
+        font-size: var(--panel-font-size) !important;
         --panel-font-size: 1.1em;
+    }
+
+    #identity-popup,
+    #permission-popup {
+        --popup-width: 436.92px !important;
+    }
+
+    #protections-popup {
+        --popup-width: 375px !important;
+    }
+
+    #protections-popup-no-trackers-found-description {
+        font-size: 1.18em !important;
+        margin: 3em 5em !important;
     }
 
     /* ugly small menu separators */
