@@ -4,19 +4,6 @@
     fill: currentColor !important;
 }
 
-#sidebarMenu-popup
-    #button__446900e4-71c2-419f-a6a7-df9c091e268b_-sidebar-action:not([checked="true"])
-    .toolbarbutton-icon {
-    list-style-image: url(chrome://userchrome/content/notifications/webauthn.svg) !important;
-}
-
-#sidebar-box[sidebarcommand="_446900e4-71c2-419f-a6a7-df9c091e268b_-sidebar-action"]
-    #sidebar-switcher-target
-    > #sidebar-icon {
-    fill: currentColor !important;
-    --webextension-menuitem-image-2x: url(chrome://userchrome/content/notifications/webauthn.svg) !important;
-}
-
 #sidebar,
 #sidebar-search-container,
 #historyTree {

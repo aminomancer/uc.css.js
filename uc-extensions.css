@@ -38,10 +38,25 @@
     list-style-image: url(chrome://userchrome/content/devtools/tool-dom.svg);
 }
 
+/* pushbullet */
+#sidebarMenu-popup
+    #button__6540f1c5-ab3d-4eff-9ad2-79a95aec93d5_-sidebar-action:not([checked="true"]),
 .webextension-browser-action[data-extensionid="jid1-BYcQOfYfmBMd9A@jetpack"] {
     list-style-image: url(chrome://userchrome/content/material/pushbullet-solid.svg) !important;
 }
 
+#sidebar-box[sidebarcommand="_6540f1c5-ab3d-4eff-9ad2-79a95aec93d5_-sidebar-action"]
+    #sidebar-switcher-target
+    > #sidebar-icon {
+    list-style-image: url(chrome://userchrome/content/material/pushbullet-hollow.svg) !important;
+}
+
+/* bitwarden */
+#sidebar-box[sidebarcommand="_446900e4-71c2-419f-a6a7-df9c091e268b_-sidebar-action"]
+    #sidebar-switcher-target
+    > #sidebar-icon,
+#sidebarMenu-popup
+    #button__446900e4-71c2-419f-a6a7-df9c091e268b_-sidebar-action:not([checked="true"]),
 #_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action .toolbarbutton-icon {
     list-style-image: url(chrome://userchrome/content/notifications/webauthn.svg) !important;
 }
