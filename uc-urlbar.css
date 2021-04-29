@@ -295,6 +295,7 @@ toolbarpaletteitem[removable="false"]
 #urlbar[actiontype="extension"] > #urlbar-input-container > #identity-box #identity-icon,
 #identity-box.extensionPage[pageproxystate="valid"] #identity-icon {
     list-style-image: url(chrome://userchrome/content/material/extension.svg) !important;
+    padding: 0.6px;
 }
 
 #identity-box[pageproxystate="valid"].verifiedDomain #identity-icon,

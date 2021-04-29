@@ -209,5 +209,5 @@ menupopup menuitem[class^="unified-nav"][uri="moz-extension://e158f52d-b5db-4594
 #addons-notification-icon,
 #add-ons-button,
 #appMenu-addons-button {
-    list-style-image: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' x='0' y='0' width='16' height='16' fill='context-fill' fill-opacity='context-fill-opacity'><path d='M7 2.1H3.7c-.9 0-1.6.7-1.6 1.6V7C.9 7 0 7.9 0 9s.9 2.1 2.1 2.1v3.3c0 .9.7 1.6 1.6 1.6h3.1c0-2.2 1.8-2.5 2.2-2.5s2.2.2 2.2 2.5h3.1c.9 0 1.6-.7 1.6-1.6v-3.1c-2.2 0-2.5-1.8-2.5-2.2 0-.4.2-2.2 2.5-2.2V3.7c0-.9-.7-1.6-1.6-1.6H11C11.1.9 10.2 0 9 0S7 .9 7 2.1z'/></svg>") !important;
+    list-style-image: url(chrome://userchrome/content/material/extension.svg) !important;
 }

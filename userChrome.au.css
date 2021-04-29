@@ -1245,13 +1245,6 @@ toolbar[brighttext] #panic-button[open] {
     visibility: collapse;
 }
 
-#notification-popup-box[hidden] {
-    /* Override display:none to make the pluginBlockedNotification animation work
-       when showing the notification repeatedly. */
-    display: -moz-box;
-    /*! visibility: collapse; */
-}
-
 #plugins-notification-icon.plugin-blocked[showing] {
     animation: pluginBlockedNotification 500ms ease 0s 5 alternate both;
 }

@@ -281,10 +281,6 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
     fill-opacity: 0.8 !important;
 }
 
-#addon-webext-permissions-notification {
-    padding-top: 5px;
-}
-
 /* hides update popups. i use a script for this now, updateNotificationSlayer.uc.js. use that instead, it's MUCH better. */
 /* #appMenu-notification-popup {
     display: none !important;
@@ -368,7 +364,7 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
 
 #identity-popup[connection="extension"] .identity-popup-security-connection {
     background-image: url(chrome://userchrome/content/material/extension.svg) !important;
-    background-size: 18px auto !important;
+    background-size: 16px auto !important;
     fill: currentColor !important;
 }
 
@@ -881,7 +877,12 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
     .panel-header > h1,
     .popup-notification-description {
         font-size: 14px !important;
+        line-height: 14px !important;
         font-weight: normal !important;
+    }
+
+    .popup-notification-description {
+        line-height: 14px !important;
     }
 
     :is(#identity-popup-mainView-panel-header,
