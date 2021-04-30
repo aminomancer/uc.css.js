@@ -319,7 +319,8 @@ toolbarpaletteitem[removable="false"]
 }
 
 #permissions-granted-icon {
-    list-style-image: url(chrome://userchrome/content/skin/permissions.svg) !important;
+    list-style-image: url(chrome://userchrome/content/skin/dashboard.svg) !important;
+    padding: 0.6px !important;
 }
 
 #identity-box:is(:hover:active, [open="true"], :hover:not([open="true"])),
@@ -377,16 +378,14 @@ toolbarpaletteitem[removable="false"]
 #urlbar[pageproxystate="valid"] #identity-box.chromeUI {
     padding: 0 !important;
     margin: 0 !important;
-    margin-inline-end: 6px !important;
-    border-image: none !important;
-    border-right: 1px solid transparent !important;
-    border-image-slice: 1;
+    margin-inline-end: 7px !important;
+    border: none !important;
 }
 
 #urlbar[pageproxystate="valid"] #identity-box.chromeUI #identity-icon-box {
     background-color: var(--identity-box-solid-bg) !important;
-    padding-inline-end: 5px !important;
-    padding-inline-start: 8px !important;
+    padding-inline: 8px !important;
+    border-right: 1px solid var(--desaturate-dimmed) !important;
 }
 
 #urlbar[pageproxystate="valid"] #identity-box.chromeUI:hover #identity-icon-box:not([open="true"]),
@@ -429,26 +428,26 @@ toolbarpaletteitem[removable="false"]
 	display: none !important;
 }
 
-:root[hide-tp-icon-on-ntp]:not([customizing]) #tracking-protection-icon-container[hidden] ~ #identity-box:not(.chromeUI),
-:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar[pageproxystate="invalid"] #identity-box {
+:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar:not([searchmode]) #tracking-protection-icon-container[hidden] ~ #identity-box:not(.chromeUI),
+:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar[pageproxystate="invalid"]:not([searchmode]) #identity-box {
 	padding: 0 !important;
 	margin: 0 !important;
-	margin-inline: 0 6px !important;
-    padding-inline-start: 8px !important;
+	margin-inline: 0 2px !important;
+    padding-inline: 0 6px !important;
 }
 
-:root[hide-tp-icon-on-ntp]:not([customizing]) #tracking-protection-icon-container[hidden] ~ #identity-box:not(.chromeUI, .localResource)[pageproxystate="valid"],
-:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar[pageproxystate="invalid"] #identity-box {
+:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar:not([searchmode]) #tracking-protection-icon-container[hidden] ~ #identity-box:not(.chromeUI, .localResource)[pageproxystate="valid"] #identity-icon-box,
+:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar[pageproxystate="invalid"]:not([searchmode]) #identity-box #identity-icon-box {
 	pointer-events: none !important;
 }
 
-:root[hide-tp-icon-on-ntp]:not([customizing]) #tracking-protection-icon-container[hidden] ~ #identity-box:not(.chromeUI) #identity-icon-box,
-:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar[pageproxystate="invalid"] #identity-box #identity-icon-box {
-	margin-inline: 0 !important;
-	padding-inline: 0 !important;
+:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar:not([searchmode]) #tracking-protection-icon-container[hidden] ~ #identity-box:not(.chromeUI) #identity-icon-box,
+:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar[pageproxystate="invalid"]:not([searchmode]) #identity-box #identity-icon-box {
+	margin-inline: 0 -3px !important;
+	padding-inline: 8px 0 !important;
 }
 
-:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar:not([searchmode]) #tracking-protection-icon-container[hidden] ~ #identity-box:not(.chromeUI, .localResource):not([usertyping=true]) #identity-icon {
+:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar:not([searchmode], [usertyping="true"], [focused="true"]) #tracking-protection-icon-container[hidden] ~ #identity-box:not(.chromeUI, .localResource) #identity-icon {
     fill-opacity: 0.4 !important;
 }
 
@@ -463,19 +462,13 @@ toolbarpaletteitem[removable="false"]
 }
 
 #identity-box.notSecureText #identity-icon-label {
-    color: var(--insecure-text-color) !important;
-    display: none !important;
+    color: var(--warning-color) !important;
 }
 
-#identity-box.verifiedIdentity #identity-icon-label,
+/* uncomment the first line if you want the "not secure" label */
+/* #tracking-protection-icon-container[hidden] ~ */
 #identity-box:not(.chromeUI) #identity-icon-label {
     display: none !important;
-}
-
-/* remove little border between identity icon and url */
-#identity-box:is(.notSecureText, .verifiedIdentity),
-#urlbar-display-box {
-    border: none !important;
 }
 
 #tracking-protection-icon-container {
@@ -494,18 +487,13 @@ toolbarpaletteitem[removable="false"]
     margin-inline-end: 2px !important;
 }
 
-/* hide tracking protection icon on new tab page, and show search identity icon. again, message u/MotherStylus if you want my tab notes addon. */
-#main-window[title="Tab Notes - Firefox Nightly"] #tracking-protection-icon-container {
-    visibility: collapse;
-}
-
 #urlbar-input::placeholder {
     opacity: 0.4 !important;
     color: var(--toolbar-color) !important;
 }
 
-#urlbar[focused="true"] .urlbar-input-box > #urlbar-input::placeholder {
-    opacity: 0.65 !important;
+#urlbar[focused="true"] #urlbar-input::placeholder {
+    opacity: var(--urlbar-icon-fill-opacity) !important;
 }
 
 @-moz-document url("chrome://browser/content/webrtcIndicator.xul")
@@ -654,15 +642,6 @@ toolbarpaletteitem[removable="false"]
     display: none !important;
 }
 
-#urlbar-input {
-    font-size: 14px !important;
-    margin-inline-start: -0.6px !important;
-}
-
-#identity-box.chromeUI ~ .urlbar-input-box > #urlbar-input {
-    margin-inline-start: -0.6px !important;
-}
-
 #tracking-protection-icon {
     margin-inline-start: 6px !important;
 }
@@ -675,7 +654,7 @@ toolbarpaletteitem[removable="false"]
     padding-inline: 0 !important;
     padding-block: 0 !important;
     margin-block: 0 !important;
-    margin-inline: 3px -3px !important;
+    margin-inline: 2px -2px !important;
     background: none !important;
 }
 
@@ -826,15 +805,15 @@ use 0.6 instead of 1 since 1 will end up being shown as like 1.4px for some wind
     outline: none !important;
     -moz-outline-radius: 2px !important;
     margin-inline-start: -24px !important;
-    margin-inline-end: 6px !important;
+    margin-inline-end: 7px !important;
     font-size: 14px !important;
     min-width: 16px !important;
     align-items: center !important;
     height: var(--urlbar-height) !important;
     padding-block: calc((var(--urlbar-height) - 19px) / 2) !important;
-    padding-inline: 28px 5px !important;
+    padding-inline: 28px 8px !important;
     border: none !important;
-    border-right: 1px solid transparent !important;
+    border-right: 1px solid var(--desaturate-dimmed) !important;
 }
 
 #urlbar-search-mode-indicator-close {

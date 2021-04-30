@@ -93,6 +93,11 @@
     pointer-events: none !important;
     -moz-context-properties: fill, fill-opacity;
     fill: currentColor;
+    fill-opacity: 1 !important;
+}
+
+.urlbarView :is(.searchbar-engine-one-off-item, .addengine-item):-moz-window-inactive {
+    opacity: 0.7 !important;
 }
 
 .urlbarView :is(.searchbar-engine-one-off-item, .addengine-item) > .button-box {
@@ -380,16 +385,6 @@ toolbarpaletteitem > #urlbar-container :is(#page-action-buttons, #search-one-off
 }
 
 :root[lwt-toolbar-field-brighttext]
-    #urlbar-engine-one-off-item-history
-    > .button-box
-    > .button-icon {
-    fill: currentColor;
-    fill-opacity: 1 !important;
-}
-
-:root[lwt-toolbar-field-brighttext]
-    #urlbar-engine-one-off-item-bookmarks
-    > .button-box
-    > .button-icon {
-    fill: white !important;
+    .searchbar-engine-one-off-item {
+    color: var(--lwt-toolbarbutton-icon-fill) !important;
 }
