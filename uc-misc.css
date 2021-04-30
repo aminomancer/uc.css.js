@@ -280,6 +280,11 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
     top: var(--min-toolbar-height) !important;
 }
 
+:root[min-browser] #TabsToolbar-customization-target > :is(toolbarbutton, toolbaritem):first-child,
+:root[min-browser] #TabsToolbar-customization-target > toolbarpaletteitem:first-child > :is(toolbarbutton, toolbaritem) {
+    padding-inline-start: 2px !important;
+}
+
 /* i don't like the context menu share button */
 #context_shareTabURL {
     display: none;

@@ -136,7 +136,81 @@
             },
         };
 
-        const css = `#titlebar{-moz-appearance:none!important;-moz-default-appearance:none!important;appearance:none!important;min-height:var(--urlbar-container-height)!important;}:root[sizemode="maximized"] #titlebar{margin-top:7.333px!important;}:root:not([sizemode="fullscreen"]) #min-window-controls #window-controls{display:none;}#navigator-toolbox[urlbar-open] #titlebar{opacity:0!important;max-height:0!important;min-height:0!important;height:0!important;pointer-events:none!important;}#navigator-toolbox:not([urlbar-open]) #nav-bar{opacity:0!important;max-height:0!important;min-height:0!important;height:0!important;pointer-events:none!important;}#urlbar{--urlbar-toolbar-height:var(--urlbar-container-height)!important;}#urlbar-container{--urlbar-container-height:var(--min-toolbar-height)!important;}:root{--min-toolbar-height:39px;}#navigator-toolbox{--min-toolbar-height:39px;--tab-min-height:var(--min-toolbar-height)!important;--urlbar-container-height:var(--min-toolbar-height)!important;}#tabbrowser-tabs[movingtab]{padding-bottom:0!important;margin-bottom:0!important;}#TabsToolbar>.titlebar-spacer{display:none;}.tab-background,.tabbrowser-tab{min-height:0!important;margin:0!important;}#TabsToolbar .toolbarbutton-1>.toolbarbutton-icon,#TabsToolbar .toolbarbutton-1>.toolbarbutton-badge-stack{min-height:16px!important;padding-block:6px!important;}#TabsToolbar .toolbarbutton-1{margin-block:0 0 var(--tabs-navbar-shadow-size)!important;}#min-window-controls>.titlebar-buttonbox-container{margin-bottom:var(--tabs-navbar-shadow-size);}:root:not([uidensity="compact"]) #PanelUI-menu-button{padding-inline-end:2px!important;}`;
+        const css = `#titlebar {
+            -moz-appearance: none !important;
+            -moz-default-appearance: none !important;
+            appearance: none !important;
+            min-height: var(--urlbar-container-height) !important;
+        }
+        :root[sizemode="maximized"] #titlebar {
+            margin-top: 7.333px !important;
+        }
+        :root:not([sizemode="fullscreen"]) #min-window-controls #window-controls {
+            display: none;
+        }
+        #navigator-toolbox[urlbar-open] #titlebar {
+            opacity: 0 !important;
+            max-height: 0 !important;
+            min-height: 0 !important;
+            height: 0 !important;
+            pointer-events: none !important;
+        }
+        #navigator-toolbox:not([urlbar-open]) #nav-bar {
+            opacity: 0 !important;
+            max-height: 0 !important;
+            min-height: 0 !important;
+            height: 0 !important;
+            pointer-events: none !important;
+        }
+        #urlbar {
+            --urlbar-toolbar-height: var(--urlbar-container-height) !important;
+        }
+        #urlbar-container {
+            --urlbar-container-height: var(--min-toolbar-height) !important;
+        }
+        :root {
+            --min-toolbar-height: 39px;
+        }
+        #navigator-toolbox {
+            --min-toolbar-height: 39px;
+            --tab-min-height: var(--min-toolbar-height) !important;
+            --urlbar-container-height: var(--min-toolbar-height) !important;
+        }
+        #TabsToolbar {
+            --toolbarbutton-inner-padding: 8px !important;
+        }
+        #TabsToolbar-customization-target > :is(toolbarbutton, toolbaritem):first-child,
+        #TabsToolbar-customization-target > toolbarpaletteitem:first-child > :is(toolbarbutton, toolbaritem) {
+            padding-inline-start: var(--toolbar-start-end-padding) !important;
+        }
+        #tabbrowser-tabs[movingtab] {
+            padding-bottom: 0 !important;
+            margin-bottom: 0 !important;
+        }
+        #TabsToolbar > .titlebar-spacer {
+            display: none;
+        }
+        .tab-background,
+        .tabbrowser-tab {
+            min-height: 0 !important;
+            margin: 0 !important;
+        }
+        #TabsToolbar .toolbarbutton-1 {
+            margin-block: 0 0 var(--tabs-navbar-shadow-size) !important;
+        }
+        #min-window-controls > .titlebar-buttonbox-container {
+            margin-bottom: var(--tabs-navbar-shadow-size);
+        }
+        :root:not([uidensity="compact"]) #PanelUI-menu-button {
+            padding-inline-end: 2px !important;
+        }
+        #TabsToolbar-customization-target > #stop-reload-button {
+            position: relative !important;
+        }
+        #TabsToolbar-customization-target > #stop-reload-button > :is(#reload-button, #stop-button) > .toolbarbutton-animatable-box {
+            display: block !important;
+        }
+        `;
 
         let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
                 Ci.nsIStyleSheetService
@@ -162,7 +236,7 @@
 
         document.documentElement.setAttribute("min-browser", true);
         minHandler.attachListeners();
-        sss.loadAndRegisterSheet(uri, sss.AGENT_SHEET);
+        sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
         cTabsBar.insertBefore(backBtn, gBrowser.tabContainer);
         backBtn.after(fwdBtn);
         fwdBtn.after(reloadBtn);
@@ -170,6 +244,138 @@
             backBtn.addEventListener(name, gClickAndHoldListenersOnElement);
             fwdBtn.addEventListener(name, gClickAndHoldListenersOnElement);
         }
+
+        CombinedStopReload._initialized = false;
+        CombinedStopReload.stopReloadContainer = reloadBtn;
+        CombinedStopReload.stop = reloadBtn.querySelector("#stop-button");
+        CombinedStopReload.reload = reloadBtn.querySelector("#reload-button");
+        CombinedStopReload.ensureInitialized = function ensureInitialized() {
+            if (this._initialized) {
+                return true;
+            }
+            if (this._destroyed) {
+                return false;
+            }
+
+            let reload = document.getElementById("TabsToolbar").querySelector("#reload-button");
+            let stop = document.getElementById("TabsToolbar").querySelector("#stop-button");
+            // It's possible the stop/reload buttons have been moved to the palette.
+            // They may be reinserted later, so we will retry initialization if/when
+            // we get notified of document loads.
+            if (!stop || !reload) {
+                return false;
+            }
+
+            this._initialized = true;
+            if (XULBrowserWindow.stopCommand.getAttribute("disabled") != "true") {
+                reload.setAttribute("displaystop", "true");
+            }
+            stop.addEventListener("click", this);
+
+            // Removing attributes based on the observed command doesn't happen if the button
+            // is in the palette when the command's attribute is removed (cf. bug 309953)
+            for (let button of [stop, reload]) {
+                if (button.hasAttribute("disabled")) {
+                    let command = document.getElementById(button.getAttribute("command"));
+                    if (!command.hasAttribute("disabled")) {
+                        button.removeAttribute("disabled");
+                    }
+                }
+            }
+
+            this.reload = reload;
+            this.stop = stop;
+            this.stopReloadContainer = this.reload.parentNode;
+            this.timeWhenSwitchedToStop = 0;
+
+            this.stopReloadContainer.addEventListener("animationend", this);
+            this.stopReloadContainer.addEventListener("animationcancel", this);
+
+            return true;
+        };
+
+        CombinedStopReload.switchToStop = function switchToStop(aRequest, aWebProgress) {
+            if (!this.ensureInitialized() || !this._shouldSwitch(aRequest, aWebProgress)) {
+                return;
+            }
+
+            // Store the time that we switched to the stop button only if a request
+            // is active. Requests are null if the switch is related to a tabswitch.
+            // This is used to determine if we should show the stop->reload animation.
+            if (aRequest instanceof Ci.nsIRequest) {
+                this.timeWhenSwitchedToStop = window.performance.now();
+            }
+
+            let shouldAnimate =
+                aRequest instanceof Ci.nsIRequest &&
+                aWebProgress.isTopLevel &&
+                aWebProgress.isLoadingDocument &&
+                !gBrowser.tabAnimationsInProgress &&
+                !gReduceMotion &&
+                (this.stopReloadContainer.closest("#nav-bar-customization-target") ||
+                    this.stopReloadContainer.closest("#TabsToolbar-customization-target"));
+
+            this._cancelTransition();
+            if (shouldAnimate) {
+                BrowserUIUtils.setToolbarButtonHeightProperty(this.stopReloadContainer);
+                this.stopReloadContainer.setAttribute("animate", "true");
+            } else {
+                this.stopReloadContainer.removeAttribute("animate");
+            }
+            this.reload.setAttribute("displaystop", "true");
+        };
+
+        CombinedStopReload.switchToReload = function switchToReload(aRequest, aWebProgress) {
+            if (!this.ensureInitialized() || !this.reload.hasAttribute("displaystop")) {
+                return;
+            }
+
+            let shouldAnimate =
+                aRequest instanceof Ci.nsIRequest &&
+                aWebProgress.isTopLevel &&
+                !aWebProgress.isLoadingDocument &&
+                !gBrowser.tabAnimationsInProgress &&
+                !gReduceMotion &&
+                this._loadTimeExceedsMinimumForAnimation() &&
+                (this.stopReloadContainer.closest("#nav-bar-customization-target") ||
+                    this.stopReloadContainer.closest("#TabsToolbar-customization-target"));
+
+            if (shouldAnimate) {
+                BrowserUIUtils.setToolbarButtonHeightProperty(this.stopReloadContainer);
+                this.stopReloadContainer.setAttribute("animate", "true");
+            } else {
+                this.stopReloadContainer.removeAttribute("animate");
+            }
+
+            this.reload.removeAttribute("displaystop");
+
+            if (!shouldAnimate || this._stopClicked) {
+                this._stopClicked = false;
+                this._cancelTransition();
+                this.reload.disabled =
+                    XULBrowserWindow.reloadCommand.getAttribute("disabled") == "true";
+                return;
+            }
+
+            if (this._timer) {
+                return;
+            }
+
+            // Temporarily disable the reload button to prevent the user from
+            // accidentally reloading the page when intending to click the stop button
+            this.reload.disabled = true;
+            this._timer = setTimeout(
+                function (self) {
+                    self._timer = 0;
+                    self.reload.disabled =
+                        XULBrowserWindow.reloadCommand.getAttribute("disabled") == "true";
+                },
+                650,
+                this
+            );
+        };
+
+        CombinedStopReload.ensureInitialized();
     }
 
     if (gBrowserInit.delayedStartupFinished) {
