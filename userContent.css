@@ -226,7 +226,8 @@ menupopup.in-menulist {
     --menupopup-child-margin-inline-start: 0px;
     --menupopup-padding: 0px;
     --menupopup-inner-padding: 0px;
-    --context-padding-inline: 27px 0px;
+    --context-padding-inline-magnitude: 27px;
+    --context-padding-inline: var(--context-padding-inline-magnitude) 0px;
     --context-checkbox-margin: 6px 7px;
     --context-iconic-margin: 5px 6px;
     --context-iconic-special-margin: 4px -2px;
@@ -253,7 +254,7 @@ menupopup.in-menulist > :is(menucaption, menuitem) > .menu-iconic-text {
 
 #ContentSelectDropdown > menupopup :is(menucaption, menuitem),
 menupopup.in-menulist > :is(menucaption, menuitem) {
-    padding-inline: 8px !important;
+    padding-inline: 0 8px !important;
     -moz-box-align: center !important;
 }
 
@@ -262,7 +263,7 @@ menupopup.in-menulist > :is(menucaption, menuitem) {
     :is(menucaption, menuitem)
     > :is(label, .menu-iconic-text, .menu-text),
 menupopup.in-menulist > :is(menucaption, menuitem) > :is(label, .menu-iconic-text, .menu-text) {
-    padding-inline: 0 !important;
+    padding-inline: var(--context-padding-inline) !important;
     font: menu !important;
 }
 
@@ -363,7 +364,12 @@ menupopup.in-menulist :is(menu, menuitem, menucaption)[disabled="true"] {
 menupopup.in-menulist :is(menu, menuitem, menucaption) .menu-iconic-left {
     padding: 0 !important;
     appearance: none !important;
-    margin-inline-end: 0 !important;
+    margin-inline-end: calc(0px - var(--context-padding-inline-magnitude)) !important;
+}
+
+#ContentSelectDropdown > menupopup :is(menu, menuitem, menucaption) .menu-iconic-icon,
+menupopup.in-menulist :is(menu, menuitem, menucaption) .menu-iconic-icon {
+    margin-inline: 5px 6px !important;
 }
 
 #ContentSelectDropdown > menupopup menugroup,

@@ -284,7 +284,7 @@ toolbarpaletteitem[removable="false"]
 }
 
 #identity-box[pageproxystate="valid"].localResource #identity-icon {
-    list-style-image: url(chrome://userchrome/content/document.svg) !important;
+    list-style-image: url(chrome://userchrome/content/notifications/persistent-storage.svg) !important
 }
 
 /* #urlbar:not(.searchButton) > #urlbar-input-container > #identity-box[pageproxystate="invalid"] #identity-icon {
@@ -421,19 +421,34 @@ toolbarpaletteitem[removable="false"]
     padding-inline: 1px !important;
 }
 
-:root[hide-tp-icon-on-ntp]:not([customizing]) #tracking-protection-icon-container[hidden] ~ #identity-box:not(.chromeUI) {
-	padding: 0 !important;
-	margin: 0 !important;
-	margin-inline: 8px 6px !important;
-    pointer-events: none !important;
+#urlbar[pageproxystate="invalid"] #identity-icon-label {
+    display: none !important;
 }
 
-:root[hide-tp-icon-on-ntp]:not([customizing]) #tracking-protection-icon-container[hidden] ~ #identity-box:not(.chromeUI) #identity-icon-box {
+:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar[pageproxystate="invalid"] #tracking-protection-icon-container {
+	display: none !important;
+}
+
+:root[hide-tp-icon-on-ntp]:not([customizing]) #tracking-protection-icon-container[hidden] ~ #identity-box:not(.chromeUI),
+:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar[pageproxystate="invalid"] #identity-box {
+	padding: 0 !important;
+	margin: 0 !important;
+	margin-inline: 0 6px !important;
+    padding-inline-start: 8px !important;
+}
+
+:root[hide-tp-icon-on-ntp]:not([customizing]) #tracking-protection-icon-container[hidden] ~ #identity-box:not(.chromeUI, .localResource)[pageproxystate="valid"],
+:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar[pageproxystate="invalid"] #identity-box {
+	pointer-events: none !important;
+}
+
+:root[hide-tp-icon-on-ntp]:not([customizing]) #tracking-protection-icon-container[hidden] ~ #identity-box:not(.chromeUI) #identity-icon-box,
+:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar[pageproxystate="invalid"] #identity-box #identity-icon-box {
 	margin-inline: 0 !important;
 	padding-inline: 0 !important;
 }
 
-:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar:not([focused="true"], [searchmode]) #tracking-protection-icon-container[hidden] ~ #identity-box:not(.chromeUI):not([usertyping="true"]) #identity-icon {
+:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar:not([searchmode]) #tracking-protection-icon-container[hidden] ~ #identity-box:not(.chromeUI, .localResource):not([usertyping=true]) #identity-icon {
     fill-opacity: 0.4 !important;
 }
 
@@ -628,10 +643,6 @@ toolbarpaletteitem[removable="false"]
     fill-opacity: 0.6 !important;
 }
 
-#identity-box[pageproxystate="valid"].localResource #identity-icon {
-    padding: 0.75px !important;
-}
-
 #identity-box.extensionPage #identity-icon-box,
 #urlbar[pageproxystate="invalid"] #identity-box #identity-icon-box {
     margin-inline-start: 2px !important;
@@ -673,7 +684,7 @@ toolbarpaletteitem[removable="false"]
     margin-inline: 2px -2px !important;
 }
 
-#identity-box[pageproxystate="invalid"] .sharing-icon {
+#identity-box[pageproxystate="invalid"] :is(#identity-permission-box, #notification-popup-box) {
     display: none !important;
 }
 
