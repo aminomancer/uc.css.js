@@ -421,6 +421,22 @@ toolbarpaletteitem[removable="false"]
     padding-inline: 1px !important;
 }
 
+:root[hide-tp-icon-on-ntp]:not([customizing]) #tracking-protection-icon-container[hidden] ~ #identity-box:not(.chromeUI) {
+	padding: 0 !important;
+	margin: 0 !important;
+	margin-inline: 8px 6px !important;
+    pointer-events: none !important;
+}
+
+:root[hide-tp-icon-on-ntp]:not([customizing]) #tracking-protection-icon-container[hidden] ~ #identity-box:not(.chromeUI) #identity-icon-box {
+	margin-inline: 0 !important;
+	padding-inline: 0 !important;
+}
+
+:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar:not([focused="true"], [searchmode]) #tracking-protection-icon-container[hidden] ~ #identity-box:not(.chromeUI):not([usertyping="true"]) #identity-icon {
+    fill-opacity: 0.4 !important;
+}
+
 #urlbar[pageproxystate="invalid"] #identity-box {
     padding-inline-start: 4px;
 }
@@ -508,7 +524,7 @@ toolbarpaletteitem[removable="false"]
     visibility: visible !important;
 }
 
-#tracking-protection-icon-container[hidden] {
+:root:not([hide-tp-icon-on-ntp]) #tracking-protection-icon-container[hidden] {
     display: -moz-box !important;
     pointer-events: none !important;
 }
@@ -586,6 +602,30 @@ toolbarpaletteitem[removable="false"]
     #identity-icon {
     fill-opacity: var(--urlbar-icon-fill-opacity) !important;
     list-style-image: url(chrome://userchrome/content/engines/google.svg) !important;
+}
+
+:root[customizing] #wrapper-urlbar-container[removable="false"] {
+    opacity: revert !important;
+}
+
+:root[customizing] #wrapper-urlbar-container[removable="false"] #urlbar > #urlbar-input-container image {
+    fill-opacity: 0.3 !important;
+}
+
+:root[customizing] #wrapper-urlbar-container #urlbar-input-container {
+    background-color: var(--urlbar-input-bgcolor-disabled) !important;
+}
+
+:root[customizing] #urlbar #identity-box #identity-icon {
+	list-style-image: url(chrome://global/skin/icons/security.svg) !important;
+}
+
+:root[customizing] #tracking-protection-icon-container {
+    display: -moz-box !important;
+}
+
+#urlbar[searchmode] #identity-box #identity-icon-box #identity-icon {
+    fill-opacity: 0.6 !important;
 }
 
 #identity-box[pageproxystate="valid"].localResource #identity-icon {

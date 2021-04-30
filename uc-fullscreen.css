@@ -14,7 +14,7 @@
 
 :root[inFullscreen]:not([customizing]) #navigator-toolbox {
     margin-top: calc(0.5px - var(--urlbar-container-height) - var(--tab-min-height)) !important;
-    transition: all 0.2s ease-in-out 0s !important;
+    transition: all 0.25s ease-in-out 0s !important;
     transition-delay: 0s !important;
     opacity: 0 !important;
     z-index: 2147483647 !important;
@@ -24,7 +24,6 @@
     -moz-backface-visibility: hidden !important;
     transform-style: preserve-3d !important;
     backface-visibility: hidden !important;
-    transition-timing-function: cubic-bezier !important;
 }
 
 :root[inFullscreen]:not([customizing]) #navigator-toolbox::after {
@@ -40,37 +39,41 @@ requires fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-statu
     #navigator-toolbox {
     margin-top: 0 !important;
     transition-delay: 0s !important;
-    transition: all 0.2s ease-in-out 0s !important;
+    transition: all 0.25s cubic-bezier(.26,1,.8,1) 0s !important;
     opacity: 1 !important;
-    transition-timing-function: cubic-bezier !important;
 }
 
 :root[inFullscreen] #navigator-toolbox {
     position: fixed !important;
     display: block;
-    /*     height: 75.5px !important; */
 }
 
-:root[inFullscreen]:not([customizing]) .browserContainer > findbar {
-    top: 8px !important;
-    transition: 0.2s ease-in-out opacity, 0.2s ease-in-out transform, 0.2s ease-in-out margin !important;
-}
-
-:root[inFullscreen]:not([customizing]) #browser #sidebar-box {
+:root[inFullscreen]:not([customizing]) #sidebar-box {
     top: 0 !important;
-    transition: margin-top 0.2s ease-in-out 0s !important;
-    transition-delay: 0s !important;
-    transform-style: preserve-3d !important;
-    backface-visibility: hidden !important;
-    -webkit-transform-style: preserve-3d !important;
-    -webkit-backface-visibility: hidden !important;
-    -moz-transform-style: preserve-3d !important;
-    -moz-backface-visibility: hidden !important;
-    transform-style: preserve-3d !important;
-    backface-visibility: hidden !important;
 }
+
+/* uncomment out these rules if you want the sidebar to move up and down with the navbar */
+/* :root[inFullscreen]:not([customizing])
+    > body
+    > box:not(:focus-within, :hover, [popup-status], [urlbar-status])
+    ~ #browser
+    #sidebar-box {
+    top: 0 !important;
+    transition: all 0.25s ease-in-out 0s !important;
+}
+
+:root[inFullscreen]:not([customizing]) #sidebar-box {
+    top: calc(var(--urlbar-container-height) + var(--tab-min-height)) !important;
+    padding-top: calc(var(--urlbar-container-height) + var(--tab-min-height)) !important;
+    margin-top: calc(0px - var(--urlbar-container-height) - var(--tab-min-height)) !important;
+    transition: all 0.25s cubic-bezier(.26,1,.8,1) 0s !important;
+    transform-style: flat !important;
+    backface-visibility: hidden !important;
+} */
 
 :root[inFullscreen]:not([customizing]) #browser findbar {
+    top: 8px !important;
+    transition: all 0.25s ease-in-out 0s !important;
     padding-top: calc(var(--urlbar-container-height) + var(--tab-min-height)) !important;
     margin-top: calc(0px - var(--urlbar-container-height) - var(--tab-min-height)) !important;
 }
@@ -80,6 +83,7 @@ requires fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-statu
     > box:is(:focus-within, :hover, [popup-status], [urlbar-status])
     ~ #browser
     findbar {
+    transition: all 0.25s cubic-bezier(.26,1,.8,1) 0s !important;
     margin-top: 0 !important;
 }
 

@@ -122,12 +122,11 @@
 	opacity: 0.6 !important;
 }
 
-.searchbar-engine-one-off-add-engine > .button-box::after,
-moz-input-box > menupopup .context-menu-add-engine > .menu-iconic-left::after {
+.searchbar-engine-one-off-add-engine > .button-box::after {
     background: url(chrome://userchrome/content/skin/search-indicator-badge-add.svg) no-repeat center/contain !important;
     -moz-context-properties: fill, fill-opacity, stroke !important;
-    fill: #39ea49 !important;
-    stroke: #0b7407 !important;
+    fill: var(--update-badge-bg) !important;
+    stroke: var(--update-badge-color) !important;
     height: 12px !important;
     width: 12px !important;
     margin-inline: -6px -6px !important;

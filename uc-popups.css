@@ -876,3 +876,51 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlis
         --dropdown-bgcolor: var(--in-content-page-background) !important;
     }
 }
+
+/* page info popup. kinda lame */
+/* @-moz-document url(chrome://browser/content/pageinfo/pageInfo.xhtml){
+    #main-window,
+    #topBar{
+        background-color: var(--arrowpanel-background) !important;
+        color: var(--arrowpanel-color) !important;
+    }
+    
+    #topBar radio {
+        color: var(--arrowanel-color) !important;
+    }
+    
+    input[readonly],
+    textbox{ color: var(--lwt-toolbar-field-color) !important; }
+
+    richlistbox,
+    treecol,
+    button,
+    #permList{
+        appearance: none !important;
+        background-color: var(--arrowpanel-dimmed) !important;
+        color: var(--arrowpanel-color) !important;
+    }
+    tree{
+        appearance: none !important;
+        background: var(--ui-secondary-bg) !important;
+        color: var(--arrowpanel-color) !important;
+    }
+    treecol:not([hideheader]){ height: 24px; }
+    treecol:hover{ background-color: var(--arrowpanel-dimmed-further) !important; }
+    treechildren{ background-color: transparent !important; }
+    treechildren::-moz-tree-row(multicol, odd){ background-color: rgba(0,0,0,0.2) !important; }
+    treechildren::-moz-tree-row(hover),
+    button:hover,
+    radiogroup > radio:hover,
+    #permList > .permission:hover{
+        background-color: var(--places-cell-focus-bgcolor) !important;
+    }
+    treechildren::-moz-tree-row(selected),
+    radiogroup > radio[selected]{
+        background-color: var(--places-cell-hover-bgcolor) !important;
+        color: var(--arrowpanel-color) !important;
+    }
+    treechildren::-moz-tree-cell-text {
+        color: var(--arrowpanel-color) !important;
+    }
+} */

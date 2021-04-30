@@ -47,6 +47,7 @@ menupopup {
     --urlbar-input-bgcolor: hsla(233, 24%, 26%, 1) !important;
     --urlbar-input-bgcolor-brighter: hsla(233, 23%, 27.2%, 1) !important;
     --urlbar-input-bgcolor-even-brighter: hsla(233, 21%, 31%, 1) !important;
+    --urlbar-input-bgcolor-disabled: hsla(233, 24%, 26%, 0.5) !important;
     --urlbar-toolbar-height: var(--user-urlbar-container-height) !important;
     --urlbar-container-height: var(--user-urlbar-container-height) !important;
     --urlbar-height: calc(var(--urlbar-container-height) - 6px) !important;
