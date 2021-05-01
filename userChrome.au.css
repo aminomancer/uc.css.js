@@ -535,7 +535,7 @@ menupopup::part(arrowscrollbox),
     > .toolbarbutton-animatable-box
     > .toolbarbutton-animatable-image {
     animation-timing-function: steps(25);
-    animation-duration: 417ms;
+    animation-duration: 200ms;
 }
 
 #stop-reload-button[animate]
@@ -560,7 +560,7 @@ menupopup::part(arrowscrollbox),
     > .toolbarbutton-animatable-box
     > .toolbarbutton-animatable-image {
     animation-timing-function: steps(25);
-    animation-duration: 417ms;
+    animation-duration: 200ms;
 }
 
 #reload-button > .toolbarbutton-animatable-box > .toolbarbutton-animatable-image,

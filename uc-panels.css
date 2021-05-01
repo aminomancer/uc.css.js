@@ -18,6 +18,10 @@
     margin-inline: -20.4px !important;
 }
 
+#identity-popup[type="arrow"][side="top"][connection="chrome"] {
+    margin-inline: -44px !important;
+}
+
 #downloadsPanel,
 #widget-overflow,
 #appMenu-popup,
@@ -354,7 +358,7 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
 }
 
 #identity-popup[connection="file"] .identity-popup-security-connection {
-    background-image: url(chrome://userchrome/content/document.svg) !important;
+    background-image: url(chrome://userchrome/content/notifications/persistent-storage.svg) !important
 }
 
 #identity-popup[connection^="secure"] .identity-popup-security-connection {

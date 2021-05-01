@@ -118,7 +118,6 @@ toolbarpaletteitem[place="palette"] > #search-container {
 #searchbar {
     background-color: var(--urlbar-input-bgcolor) !important;
     margin-top: 0 !important;
-    transition: 220ms ease-in-out background-color 0s, 220ms ease-in-out box-shadow 0s !important;
 }
 
 #urlbar:is([focused="true"], :focus-within) > #urlbar-input-container,
@@ -373,27 +372,25 @@ toolbarpaletteitem[removable="false"]
     #identity-icon-box:is([open="true"], :focus-visible)
     > #identity-icon {
     list-style-image: url(chrome://userchrome/content/about-logo.png) !important;
+    filter: var(--lwt-raster-icon-filter);
+}
+
+:root {
+    --lwt-raster-icon-filter: none;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --lwt-raster-icon-filter: brightness(1.1) contrast(0.9) saturate(0.9);
+    }
 }
 
 #urlbar[pageproxystate="valid"] #identity-box.chromeUI {
-    padding: 0 !important;
-    margin: 0 !important;
-    margin-inline-end: 7px !important;
-    border: none !important;
-}
-
-#urlbar[pageproxystate="valid"] #identity-box.chromeUI #identity-icon-box {
-    background-color: var(--identity-box-solid-bg) !important;
     padding-inline: 8px !important;
+    margin: 0 !important;
+    border: none !important;
+    background-color: var(--identity-box-solid-bg) !important;
     border-right: 1px solid var(--desaturate-dimmed) !important;
-}
-
-#urlbar[pageproxystate="valid"] #identity-box.chromeUI:hover #identity-icon-box:not([open="true"]),
-#urlbar[pageproxystate="valid"] #identity-box.chromeUI:hover:active #identity-icon-box,
-#urlbar[pageproxystate="valid"]
-    #identity-box.chromeUI
-    #identity-icon-box:is([open="true"], :focus-visible) {
-    background-color: var(--identity-box-hover-bg) !important;
 }
 
 #urlbar[pageproxystate="valid"]
@@ -411,15 +408,6 @@ toolbarpaletteitem[removable="false"]
     opacity: 1 !important;
 }
 
-#urlbar[pageproxystate="valid"] #identity-box.chromeUI #notification-popup-box {
-    opacity: 0 !important;
-    display: block !important;
-    position: absolute !important;
-    pointer-events: none !important;
-    top: 7px !important;
-    padding-inline: 1px !important;
-}
-
 #urlbar[pageproxystate="invalid"] #identity-icon-label {
     display: none !important;
 }
@@ -433,7 +421,7 @@ toolbarpaletteitem[removable="false"]
 	padding: 0 !important;
 	margin: 0 !important;
 	margin-inline: 0 2px !important;
-    padding-inline: 0 6px !important;
+    padding-inline: 6px 2px !important;
 }
 
 :root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar:not([searchmode]) #tracking-protection-icon-container[hidden] ~ #identity-box:not(.chromeUI, .localResource)[pageproxystate="valid"] #identity-icon-box,
@@ -443,16 +431,11 @@ toolbarpaletteitem[removable="false"]
 
 :root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar:not([searchmode]) #tracking-protection-icon-container[hidden] ~ #identity-box:not(.chromeUI) #identity-icon-box,
 :root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar[pageproxystate="invalid"]:not([searchmode]) #identity-box #identity-icon-box {
-	margin-inline: 0 -3px !important;
-	padding-inline: 8px 0 !important;
+	margin-inline: 2px -3px !important;
 }
 
 :root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar:not([searchmode], [usertyping="true"], [focused="true"]) #tracking-protection-icon-container[hidden] ~ #identity-box:not(.chromeUI, .localResource) #identity-icon {
     fill-opacity: 0.4 !important;
-}
-
-#urlbar[pageproxystate="invalid"] #identity-box {
-    padding-inline-start: 4px;
 }
 
 #identity-icon-label,
@@ -467,7 +450,7 @@ toolbarpaletteitem[removable="false"]
 
 /* uncomment the first line if you want the "not secure" label */
 /* #tracking-protection-icon-container[hidden] ~ */
-#identity-box:not(.chromeUI) #identity-icon-label {
+#identity-box:not(.chromeUI[pageproxystate="valid"]) #identity-icon-label {
     display: none !important;
 }
 
@@ -485,6 +468,15 @@ toolbarpaletteitem[removable="false"]
 #identity-box[pageproxystate="valid"]:is(.notSecureText, .verifiedIdentity .extensionPage) {
     padding-inline-end: 6px !important;
     margin-inline-end: 2px !important;
+}
+
+#urlbar-input {
+    padding-left: 5px !important;
+}
+
+#urlbar[searchmode] #urlbar-input,
+#identity-box.chromeUI[pageproxystate="valid"] ~ .urlbar-input-box #urlbar-input {
+    padding-left: 7px !important;
 }
 
 #urlbar-input::placeholder {
@@ -547,8 +539,7 @@ toolbarpaletteitem[removable="false"]
 }
 
 #identity-box {
-    padding-inline-end: 6px !important;
-    margin-inline-end: 2px !important;
+    margin-inline-end: 3px !important;
 }
 
 #identity-icon-box {
@@ -565,7 +556,7 @@ toolbarpaletteitem[removable="false"]
 #identity-box,
 #tracking-protection-icon-container {
     fill-opacity: var(--urlbar-icon-fill-opacity) !important;
-    height: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
+    height: var(--urlbar-height) !important;
 }
 
 #identity-box.chromeUI[pageproxystate="valid"] {
@@ -647,7 +638,11 @@ toolbarpaletteitem[removable="false"]
 }
 
 #identity-permission-box {
-    margin-inline: 7px -2px !important;
+    margin-inline: 2px -2px !important;
+}
+
+#permissions-granted-icon {
+    margin-inline-start: 4px !important;
 }
 
 #notification-popup-box {
@@ -656,11 +651,6 @@ toolbarpaletteitem[removable="false"]
     margin-block: 0 !important;
     margin-inline: 2px -2px !important;
     background: none !important;
-}
-
-#identity-permission-box:is([open="true"], [hasPermissions], [hasSharingIcon])
-    + #notification-popup-box {
-    margin-inline: 2px -2px !important;
 }
 
 #identity-box[pageproxystate="invalid"] :is(#identity-permission-box, #notification-popup-box) {
@@ -796,29 +786,57 @@ use 0.6 instead of 1 since 1 will end up being shown as like 1.4px for some wind
     margin-inline: 0 !important;
 }
 
+#urlbar[focused="true"],
+#urlbar-input-container:focus-within {
+    --identity-box-solid-bg: var(--identity-box-hover-bg);
+}
+
 #urlbar-label-box,
 #urlbar-search-mode-indicator {
     background-color: var(--identity-box-solid-bg) !important;
-    margin-inline-end: 6px !important;
-    padding-inline-end: 5px !important;
-    border-radius: 0px !important;
+    border-radius: 0 !important;
     outline: none !important;
-    -moz-outline-radius: 2px !important;
-    margin-inline-start: -24px !important;
-    margin-inline-end: 7px !important;
+    margin-inline: -24px 0 !important;
     font-size: 14px !important;
     min-width: 16px !important;
-    align-items: center !important;
     height: var(--urlbar-height) !important;
-    padding-block: calc((var(--urlbar-height) - 19px) / 2) !important;
     padding-inline: 28px 8px !important;
     border: none !important;
     border-right: 1px solid var(--desaturate-dimmed) !important;
+    pointer-events: auto !important;
 }
 
 #urlbar-search-mode-indicator-close {
-    display: none !important;
+    position: absolute !important;
+    background-color: var(--identity-box-solid-bg) !important;
+    background-image: url(chrome://userchrome/content/textbox-clear.svg) !important;
+    background-size: contain !important;
+    fill-opacity: 0 !important;
+    z-index: 151 !important;
+    left: 7px !important;
+    opacity: 0 !important;
     pointer-events: none !important;
+    height: 18px !important;
+    width: 18px !important;
+}
+
+#urlbar[searchmode] #urlbar-search-mode-indicator:is(:hover, :focus-visible, :focus-within) {
+    z-index: 151 !important;
+    position: relative !important;
+}
+
+#urlbar[searchmode] #urlbar-search-mode-indicator:is(:hover, :focus-visible, :focus-within) #urlbar-search-mode-indicator-close {
+    opacity: 0.75 !important;
+    pointer-events: auto !important;
+}
+
+#urlbar[searchmode] #urlbar-search-mode-indicator:is(:hover, :focus-visible, :focus-within) #urlbar-search-mode-indicator-close:is(:hover, :focus-visible) {
+    opacity: 1 !important;
+    fill-opacity: 0.1 !important;
+}
+
+#urlbar[searchmode] #urlbar-search-mode-indicator:is(:hover, :focus-visible, :focus-within) #urlbar-search-mode-indicator-close:active:is(:hover, :focus-visible) {
+    fill-opacity: 0.15 !important;
 }
 
 #urlbar-label-box .urlbar-label,
