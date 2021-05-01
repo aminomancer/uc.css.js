@@ -138,7 +138,7 @@
                             e.preventDefault();
                             let hasTST = SidebarUI.sidebars.get(tstID);
                             if (prefSvc.getBoolPref(hideState)) {
-                                CustomHint.show(animBox, "Hiding sidebar.", {
+                                CustomHint.show(animBox, "Hiding tabs.", {
                                     event: e,
                                     hideCheck: true,
                                 });
@@ -149,7 +149,7 @@
                                               SidebarUI.DEFAULT_SIDEBAR_ID
                                 );
                             } else {
-                                CustomHint.show(animBox, "Hiding tabs.", {
+                                CustomHint.show(animBox, "Hiding sidebar.", {
                                     event: e,
                                     hideCheck: true,
                                 });
