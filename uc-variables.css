@@ -10,7 +10,7 @@ menupopup {
     --chrome-nav-bar-controls-border-color: transparent !important;
     --chrome-content-separator-color: rgba(0, 0, 0, 0) !important;
     --tabs-navbar-shadow-size: 0px !important;
-    --autocomplete-popup-highlight-background: hsl(234, 21%, 35%) !important;
+    --autocomplete-popup-highlight-background: var(--arrowpanel-dimmed-further) !important;
     --toolbarbutton-border-radius: var(--general-button-border-radius) !important;
     --lwt-accent-color: hsl(233, 61%, 8%) !important;
     --lwt-text-color: hsl(213, 43%, 89%) !important;
@@ -83,6 +83,7 @@ menupopup {
     --in-content-primary-button-background-active: var(--purple-30) !important;
     --autocomplete-popup-background: var(--arrowpanel-background) !important;
     --autocomplete-popup-color: var(--lwt-text-color) !important;
+    --autocomplete-popup-separator-color: var(--panel-separator-color) !important;
     --urlbarView-bgcolor: hsla(233, 38%, 9%, 0.8) !important;
     --ui-textbox-bgcolor: hsl(233, 24%, 28%) !important;
     --ui-textbox-focus-bgcolor: hsl(232, 22%, 34%) !important;
@@ -171,6 +172,7 @@ toolbar {
         --arrowpanel-menuitem-inline-margin: 4px;
         --arrowpanel-menuitem-margin: 0px var(--arrowpanel-menuitem-inline-margin) !important;
         --arrowpanel-menuitem-padding: 6px !important;
+        --arrowpanel-padding: 12px !important;
         --panel-subview-body-padding-magnitude: var(--arrowpanel-menuitem-inline-margin);
         --panel-subview-body-padding: var(--panel-subview-body-padding-magnitude) 0 !important;
         --arrowpanel-menuitem-border-radius: 3px !important;
@@ -205,7 +207,7 @@ toolbar {
     }
 
     #appMenu-multiView {
-        --arrowpanel-menuitem-inline-margin: 6px;
+        --arrowpanel-menuitem-inline-margin: 4px;
         --arrowpanel-menuitem-margin: 0px var(--arrowpanel-menuitem-inline-margin) !important;
         --arrowpanel-menuitem-padding: 8px !important;
         --panel-subview-body-padding-magnitude: var(--arrowpanel-menuitem-inline-margin);

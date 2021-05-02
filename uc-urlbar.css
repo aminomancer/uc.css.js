@@ -11,8 +11,8 @@
 }
 
 toolbarpaletteitem[place="palette"] > #search-container {
-	min-height: 32px !important;
-	max-height: 32px !important;
+    min-height: 32px !important;
+    max-height: 32px !important;
     padding-block: 0 !important;
     margin-block: 5px !important;
 }
@@ -84,7 +84,7 @@ toolbarpaletteitem[place="palette"] > #search-container {
     > .autocomplete-richlistitem:is([originaltype="datalist-first"], [originaltype="null"])
     > .ac-type-icon {
     list-style-image: url(chrome://userchrome/content/search-glass.svg);
-    fill-opacity: var(--urlbar-icon-fill-opacity);
+    fill-opacity: 0.6;
 }
 
 #PopupSearchAutoComplete .search-panel-current-engine {
@@ -96,16 +96,36 @@ toolbarpaletteitem[place="palette"] > #search-container {
     opacity: 1 !important;
 }
 
+#PopupSearchAutoComplete .searchbar-engine-image[src="moz-extension://cd4aad93-9726-49dd-a5cd-9e5f5c4d76f4/favicon.ico"]
+{
+    background-image: url(chrome://userchrome/content/engines/google-color.svg) !important;
+    padding-inline: 0 16px !important;
+}
+
 #searchbar .urlbar-icon {
     margin-right: 2px !important;
 }
 
 #searchbar .searchbar-search-icon {
     fill-opacity: var(--urlbar-icon-fill-opacity) !important;
-    fill: white !important;
+    fill: currentColor !important;
+    margin-inline: 8px 4px !important;
+    padding: 0.6px !important;
+}
+
+#searchbar .searchbar-search-icon-overlay {
+    display: none !important;
+}
+
+#searchbar:not(:focus-within) .searchbar-search-icon {
+    fill-opacity: 0.4 !important;
 }
 
 #searchbar .searchbar-search-button:hover > .searchbar-search-icon {
+    fill-opacity: 0.8 !important;
+}
+
+#searchbar:focus-within .searchbar-search-button:hover > .searchbar-search-icon {
     fill-opacity: 1 !important;
 }
 
@@ -283,7 +303,7 @@ toolbarpaletteitem[removable="false"]
 }
 
 #identity-box[pageproxystate="valid"].localResource #identity-icon {
-    list-style-image: url(chrome://userchrome/content/notifications/persistent-storage.svg) !important
+    list-style-image: url(chrome://userchrome/content/notifications/persistent-storage.svg) !important;
 }
 
 /* #urlbar:not(.searchButton) > #urlbar-input-container > #identity-box[pageproxystate="invalid"] #identity-icon {
@@ -315,11 +335,6 @@ toolbarpaletteitem[removable="false"]
 #identity-box[pageproxystate="valid"].httpsOnlyErrorPage #identity-icon {
     list-style-image: url(chrome://userchrome/content/connection-mixed-active-loaded.svg) !important;
     fill: unset !important;
-}
-
-#permissions-granted-icon {
-    list-style-image: url(chrome://userchrome/content/skin/dashboard.svg) !important;
-    padding: 0.6px !important;
 }
 
 #identity-box:is(:hover:active, [open="true"], :hover:not([open="true"])),
@@ -412,29 +427,54 @@ toolbarpaletteitem[removable="false"]
     display: none !important;
 }
 
-:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar[pageproxystate="invalid"] #tracking-protection-icon-container {
-	display: none !important;
+:root[hide-tp-icon-on-ntp]:not([customizing])
+    #urlbar[pageproxystate="invalid"]
+    #tracking-protection-icon-container {
+    display: none !important;
 }
 
-:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar:not([searchmode]) #tracking-protection-icon-container[hidden] ~ #identity-box:not(.chromeUI),
-:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar[pageproxystate="invalid"]:not([searchmode]) #identity-box {
-	padding: 0 !important;
-	margin: 0 !important;
-	margin-inline: 0 2px !important;
+:root[hide-tp-icon-on-ntp]:not([customizing])
+    #urlbar:not([searchmode])
+    #tracking-protection-icon-container[hidden]
+    ~ #identity-box:not(.chromeUI),
+:root[hide-tp-icon-on-ntp]:not([customizing])
+    #urlbar[pageproxystate="invalid"]:not([searchmode])
+    #identity-box {
+    padding: 0 !important;
+    margin: 0 !important;
+    margin-inline: 0 2px !important;
     padding-inline: 6px 2px !important;
 }
 
-:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar:not([searchmode]) #tracking-protection-icon-container[hidden] ~ #identity-box:not(.chromeUI, .localResource)[pageproxystate="valid"] #identity-icon-box,
-:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar[pageproxystate="invalid"]:not([searchmode]) #identity-box #identity-icon-box {
-	pointer-events: none !important;
+:root[hide-tp-icon-on-ntp]:not([customizing])
+    #urlbar:not([searchmode])
+    #tracking-protection-icon-container[hidden]
+    ~ #identity-box:not(.chromeUI, .localResource)[pageproxystate="valid"]
+    #identity-icon-box,
+:root[hide-tp-icon-on-ntp]:not([customizing])
+    #urlbar[pageproxystate="invalid"]:not([searchmode])
+    #identity-box
+    #identity-icon-box {
+    pointer-events: none !important;
 }
 
-:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar:not([searchmode]) #tracking-protection-icon-container[hidden] ~ #identity-box:not(.chromeUI) #identity-icon-box,
-:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar[pageproxystate="invalid"]:not([searchmode]) #identity-box #identity-icon-box {
-	margin-inline: 2px -3px !important;
+:root[hide-tp-icon-on-ntp]:not([customizing])
+    #urlbar:not([searchmode])
+    #tracking-protection-icon-container[hidden]
+    ~ #identity-box:not(.chromeUI)
+    #identity-icon-box,
+:root[hide-tp-icon-on-ntp]:not([customizing])
+    #urlbar[pageproxystate="invalid"]:not([searchmode])
+    #identity-box
+    #identity-icon-box {
+    margin-inline: 2px -3px !important;
 }
 
-:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar:not([searchmode], [usertyping="true"], [focused="true"]) #tracking-protection-icon-container[hidden] ~ #identity-box:not(.chromeUI, .localResource) #identity-icon {
+:root[hide-tp-icon-on-ntp]:not([customizing])
+    #urlbar:not([searchmode], [usertyping="true"], [focused="true"])
+    #tracking-protection-icon-container[hidden]
+    ~ #identity-box:not(.chromeUI, .localResource)
+    #identity-icon {
     fill-opacity: 0.4 !important;
 }
 
@@ -471,7 +511,7 @@ toolbarpaletteitem[removable="false"]
 }
 
 #urlbar-input {
-    padding-left: 5px !important;
+    padding-left: 4px !important;
 }
 
 #urlbar[searchmode] #urlbar-input,
@@ -479,12 +519,14 @@ toolbarpaletteitem[removable="false"]
     padding-left: 7px !important;
 }
 
-#urlbar-input::placeholder {
+#urlbar-input::placeholder,
+.searchbar-textbox::placeholder {
     opacity: 0.4 !important;
     color: var(--toolbar-color) !important;
 }
 
-#urlbar[focused="true"] #urlbar-input::placeholder {
+#urlbar[focused="true"] #urlbar-input::placeholder,
+.searchbar-textbox:focus::placeholder {
     opacity: var(--urlbar-icon-fill-opacity) !important;
 }
 
@@ -602,7 +644,11 @@ toolbarpaletteitem[removable="false"]
     opacity: revert !important;
 }
 
-:root[customizing] #wrapper-urlbar-container[removable="false"] #urlbar > #urlbar-input-container image {
+:root[customizing]
+    #wrapper-urlbar-container[removable="false"]
+    #urlbar
+    > #urlbar-input-container
+    image {
     fill-opacity: 0.3 !important;
 }
 
@@ -611,7 +657,7 @@ toolbarpaletteitem[removable="false"]
 }
 
 :root[customizing] #urlbar #identity-box #identity-icon {
-	list-style-image: url(chrome://global/skin/icons/security.svg) !important;
+    list-style-image: url(chrome://global/skin/icons/security.svg) !important;
 }
 
 :root[customizing] #tracking-protection-icon-container {
@@ -633,6 +679,20 @@ toolbarpaletteitem[removable="false"]
     display: none !important;
 }
 
+.sharing-icon,
+.notification-anchor-icon,
+#permissions-granted-icon,
+.blocked-permission-icon {
+    margin-inline-start: 5px !important;
+}
+
+#identity-box .microphone-icon,
+.notification-anchor-icon#default-notification-icon,
+.notification-anchor-icon#geo-notification-icon,
+.notification-anchor-icon.screen-icon {
+    margin-inline-start: 4px !important;
+}
+
 #tracking-protection-icon {
     margin-inline-start: 6px !important;
 }
@@ -642,7 +702,8 @@ toolbarpaletteitem[removable="false"]
 }
 
 #permissions-granted-icon {
-    margin-inline-start: 5px !important;
+    list-style-image: url(chrome://userchrome/content/formfill.svg) !important;
+    padding: 0.6px !important;
 }
 
 #notification-popup-box {
@@ -825,17 +886,23 @@ use 0.6 instead of 1 since 1 will end up being shown as like 1.4px for some wind
     position: relative !important;
 }
 
-#urlbar[searchmode] #urlbar-search-mode-indicator:is(:hover, :focus-visible, :focus-within) #urlbar-search-mode-indicator-close {
+#urlbar[searchmode]
+    #urlbar-search-mode-indicator:is(:hover, :focus-visible, :focus-within)
+    #urlbar-search-mode-indicator-close {
     opacity: 0.75 !important;
     pointer-events: auto !important;
 }
 
-#urlbar[searchmode] #urlbar-search-mode-indicator:is(:hover, :focus-visible, :focus-within) #urlbar-search-mode-indicator-close:is(:hover, :focus-visible) {
+#urlbar[searchmode]
+    #urlbar-search-mode-indicator:is(:hover, :focus-visible, :focus-within)
+    #urlbar-search-mode-indicator-close:is(:hover, :focus-visible) {
     opacity: 1 !important;
     fill-opacity: 0.1 !important;
 }
 
-#urlbar[searchmode] #urlbar-search-mode-indicator:is(:hover, :focus-visible, :focus-within) #urlbar-search-mode-indicator-close:active:is(:hover, :focus-visible) {
+#urlbar[searchmode]
+    #urlbar-search-mode-indicator:is(:hover, :focus-visible, :focus-within)
+    #urlbar-search-mode-indicator-close:active:is(:hover, :focus-visible) {
     fill-opacity: 0.15 !important;
 }
 

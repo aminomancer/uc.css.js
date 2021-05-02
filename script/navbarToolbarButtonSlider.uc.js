@@ -513,36 +513,36 @@
         so we're overriding an internal function to give it some behavior it probably should have had anyway.
         now it will check that the toolbar button is actually scrolled into view relative to its parent before showing the popup.
         if the downloads button is scrolled out of view, then it'll just download the file without displaying the floating arrow. */
-        function overflowDownloadsAnimation() {
-            DownloadsIndicatorView.showEventNotification = function showEventNotification(aType) {
-                if (!this._initialized) {
-                    return;
-                }
+        // function overflowDownloadsAnimation() {
+        //     DownloadsIndicatorView.showEventNotification = function showEventNotification(aType) {
+        //         if (!this._initialized) {
+        //             return;
+        //         }
 
-                if (!DownloadsCommon.animateNotifications) {
-                    return;
-                }
+        //         if (!DownloadsCommon.animateNotifications) {
+        //             return;
+        //         }
 
-                let el = DownloadsButton._placeholder;
-                if (el?.parentNode.offsetLeft) {
-                    if (
-                        el.getBoundingClientRect().left - el.parentNode.offsetLeft <
-                        -(el.clientWidth * 0.5)
-                    )
-                        return;
-                }
+        //         let el = DownloadsButton._placeholder;
+        //         if (el?.parentNode.offsetLeft) {
+        //             if (
+        //                 el.getBoundingClientRect().left - el.parentNode.offsetLeft <
+        //                 -(el.clientWidth * 0.5)
+        //             )
+        //                 return;
+        //         }
 
-                // enqueue this notification while the current one is being displayed
-                if (this._currentNotificationType) {
-                    // only queue up the notification if it is different to the current one
-                    if (this._currentNotificationType != aType) {
-                        this._nextNotificationType = aType;
-                    }
-                } else {
-                    this._showNotification(aType);
-                }
-            };
-        }
+        //         // enqueue this notification while the current one is being displayed
+        //         if (this._currentNotificationType) {
+        //             // only queue up the notification if it is different to the current one
+        //             if (this._currentNotificationType != aType) {
+        //                 this._nextNotificationType = aType;
+        //             }
+        //         } else {
+        //             this._showNotification(aType);
+        //         }
+        //     };
+        // }
 
         async function init() {
             prefHandler.initialSet();
@@ -560,7 +560,7 @@
             prefHandler.attachListeners();
             sliderContextHandler.attachListener();
             cleanUp();
-            overflowDownloadsAnimation();
+            // overflowDownloadsAnimation();
         }
 
         init();

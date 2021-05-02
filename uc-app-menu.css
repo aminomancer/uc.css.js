@@ -313,6 +313,11 @@
         color: var(--panelview-toolbarbutton-active-color) !important;
     }
 
+    .PanelUI-subView .subviewbutton-nav::after {
+        color: var(--panel-shortcut-color) !important;
+        fill-opacity: 1 !important;
+    }
+
     /* add icons to non-iconized appmenu items */
     .subviewbutton:not(.subviewbutton-iconic) > .toolbarbutton-icon {
         -moz-context-properties: fill, fill-opacity;
@@ -554,7 +559,7 @@
     }
 
     #appMenu-popup toolbarseparator {
-        margin-inline: 6px !important;
+        margin-inline: var(--arrowpanel-menuitem-inline-margin) !important;
     }
 
     #appMenu-fxa-separator {

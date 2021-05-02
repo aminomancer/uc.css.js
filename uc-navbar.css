@@ -25,9 +25,7 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
 }
 
 /* dim widgets when window is inactive, like tabs */
-:root:-moz-window-inactive:not([customizing])
-    toolbarbutton
-    :is(.toolbarbutton-animatable-image, .toolbarbutton-icon, #fxa-avatar-image, #downloads-animation-container, #downloads-indicator-anchor) {
+:root:-moz-window-inactive:not([customizing]) toolbar toolbarbutton {
     opacity: 0.7;
 }
 
@@ -49,7 +47,9 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
     filter: none !important;
 }
 
-#downloads-button[attention] .toolbarbutton-badge {
+:is(#nav-bar-customization-target, #widget-overflow)
+    #downloads-button[attention]
+    .toolbarbutton-badge {
     margin-right: -5.5px !important;
     margin-top: -5.5px !important;
     width: 10px !important;
@@ -57,16 +57,20 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
     box-shadow: none !important;
     background-image: url(chrome://userchrome/content/devtools/error.svg) !important;
     background-size: contain !important;
-    background-position: center;
-    background-repeat: no-repeat;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
 }
 
-#downloads-button[attention="warning"] .toolbarbutton-badge {
+:is(#nav-bar-customization-target, #widget-overflow)
+    #downloads-button[attention="warning"]
+    .toolbarbutton-badge {
     fill: hsl(44, 95%, 60%) !important;
     background-color: hsl(32, 52%, 35%) !important;
 }
 
-#downloads-button[attention="severe"] .toolbarbutton-badge {
+:is(#nav-bar-customization-target, #widget-overflow)
+    #downloads-button[attention="severe"]
+    .toolbarbutton-badge {
     fill: hsl(358, 86%, 63%) !important;
     background-color: hsl(354, 69%, 30%) !important;
 }
@@ -430,22 +434,29 @@ notifications are translucent with acrylic effect. enable layout.css.backdrop-fi
         --in-content-link-color-active: var(--in-parent-link-color-active) !important;
     }
 
-    #navigator-toolbox > :is(legacy-stack, .notificationbox-stack, named-deck) notification-message[type="critical"],
+    #navigator-toolbox
+        > :is(legacy-stack, .notificationbox-stack, named-deck)
+        notification-message[type="critical"],
     #navigator-toolbox > named-deck > .notificationbox-stack notification-message[type="critical"] {
         flex-grow: 0.15 !important;
     }
 
-    #navigator-toolbox > :is(legacy-stack, .notificationbox-stack, named-deck) notification-message[type="warning"],
+    #navigator-toolbox
+        > :is(legacy-stack, .notificationbox-stack, named-deck)
+        notification-message[type="warning"],
     #navigator-toolbox > named-deck > .notificationbox-stack notification-message[type="warning"] {
         flex-grow: 0.03 !important;
     }
 
-    #navigator-toolbox > :is(legacy-stack, .notificationbox-stack, named-deck) notification-message[type="info"],
+    #navigator-toolbox
+        > :is(legacy-stack, .notificationbox-stack, named-deck)
+        notification-message[type="info"],
     #navigator-toolbox > named-deck > .notificationbox-stack notification-message[type="info"] {
         flex-grow: 0.01 !important;
     }
 
-    link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar {
+    link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar
+    {
         border-radius: 0 !important;
         border-bottom-left-radius: 4px !important;
         border-bottom-right-radius: 4px !important;
@@ -473,7 +484,8 @@ notifications are translucent with acrylic effect. enable layout.css.backdrop-fi
         transition: margin-top 100ms linear, max-width 100ms ease-in-out, opacity 100ms ease-in-out !important;
     }
 
-    link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-content {
+    link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-content
+    {
         flex-flow: row nowrap !important;
         flex-grow: 2 !important;
         display: flex !important;
@@ -481,11 +493,13 @@ notifications are translucent with acrylic effect. enable layout.css.backdrop-fi
         text-overflow: ellipsis !important;
     }
 
-    link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar > .spacer {
+    link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar > .spacer
+    {
         flex-grow: 0.1 !important;
     }
 
-    link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-content .notification-button-container {
+    link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-content .notification-button-container
+    {
         flex-flow: row nowrap !important;
         flex-grow: 2 !important;
         display: flex !important;
@@ -495,21 +509,26 @@ notifications are translucent with acrylic effect. enable layout.css.backdrop-fi
         justify-items: end !important;
         gap: 4px !important;
     }
-    
-    link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-content .notification-button-container > .notification-button.small {
+
+    link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-content .notification-button-container > .notification-button.small
+    {
         margin: 0 !important;
     }
 
-    link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar > .icon {
+    link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar > .icon
+    {
         margin-inline-start: 6px !important;
     }
 
     link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-close,
-    link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .icon {
-        transition: 0.25s transform var(--animation-easing-function), 0.25s opacity var(--animation-easing-function) !important;
+    link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .icon
+    {
+        transition: 0.25s transform var(--animation-easing-function),
+            0.25s opacity var(--animation-easing-function) !important;
     }
 
-    link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-close {
+    link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-close
+    {
         width: 20px !important;
         height: 20px !important;
         margin: 0 4px !important;
@@ -518,12 +537,14 @@ notifications are translucent with acrylic effect. enable layout.css.backdrop-fi
         transform: translateX(-15px) scale(0.5) !important;
     }
 
-    link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar:hover .notification-close {
+    link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar:hover .notification-close
+    {
         transform: none !important;
         opacity: 1 !important;
     }
 
-    link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar:hover .icon {
+    link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar:hover .icon
+    {
         transform: translateX(15px) scale(0.5) !important;
         opacity: 0 !important;
     }

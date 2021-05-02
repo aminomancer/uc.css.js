@@ -9,13 +9,16 @@
 
 #identity-popup[type="arrow"][side="top"],
 #identity-popup[type="arrow"][side="bottom"],
-#permission-popup[type="arrow"][side="top"],
-#permission-popup[type="arrow"][side="bottom"],
 #protections-popup[type="arrow"][side="top"],
 #protections-popup[type="arrow"][side="bottom"],
 #notification-popup[type="arrow"][side="top"],
 #notification-popup[type="arrow"][side="bottom"] {
     margin-inline: -20.4px !important;
+}
+
+#permission-popup[type="arrow"][side="top"],
+#permission-popup[type="arrow"][side="bottom"] {
+    margin-inline: -18px !important;
 }
 
 #identity-popup[type="arrow"][side="top"][connection="chrome"] {
@@ -25,11 +28,14 @@
 #downloadsPanel,
 #widget-overflow,
 #appMenu-popup,
-#customizationui-widget-panel,
+#customizationui-widget-panel {
+    margin-top: -7px !important;
+}
+
 #identity-popup,
 #protections-popup,
 #permission-popup {
-    margin-top: -7px !important;
+    margin-top: -9px !important;
 }
 
 #customizationui-widget-panel.bookmarks-toolbar {
@@ -71,7 +77,7 @@ panel[type="arrow"][side="top"] {
 }
 
 #protections-popup-content {
-	margin-bottom: 0 !important;
+    margin-bottom: 0 !important;
     padding-block: 4px !important;
 }
 
@@ -108,18 +114,20 @@ panel[type="arrow"][side="top"] {
 
 #protections-popup-not-blocking-section-description,
 #protections-popup-not-blocking-section-why {
-	outline: none !important;
+    outline: none !important;
     padding: 4px !important;
 }
 
 #protections-popup-not-blocking-section-why {
-    border-radius: var(--arrowpanel-menuitem-border-radius) !important; 
+    border-radius: var(--arrowpanel-menuitem-border-radius) !important;
 }
 
-#protections-popup-siteNotWorkingView-body, .protections-popup-tp-switch-label-box, .protections-popup-tp-switch-box {
-	min-height: 40px !important;
-	-moz-box-pack: center;
-	position: relative;
+#protections-popup-siteNotWorkingView-body,
+.protections-popup-tp-switch-label-box,
+.protections-popup-tp-switch-box {
+    min-height: 40px !important;
+    -moz-box-pack: center;
+    position: relative;
 }
 
 .protections-popup-category::after {
@@ -136,7 +144,7 @@ panel[type="arrow"][side="top"] {
 
 .protections-popup-description,
 .protections-popup-list {
-	font-size: 12px;
+    font-size: 12px;
 }
 
 .popup-notification-warning:empty,
@@ -145,8 +153,8 @@ panel[type="arrow"][side="top"] {
 }
 
 .panel-footer.popup-notification-button-container {
-	margin-inline: calc(var(--menupopup-inner-padding-magnitude) * 2) !important;
-	margin-block: calc(var(--menupopup-inner-padding-magnitude) * 2) !important;
+    margin-inline: calc(var(--menupopup-inner-padding-magnitude) * 2) !important;
+    margin-block: calc(var(--menupopup-inner-padding-magnitude) * 2) !important;
     gap: calc(var(--menupopup-inner-padding-magnitude) * 2) !important;
 }
 
@@ -322,7 +330,7 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
 
 #identity-popup-securityView .identity-popup-connection-secure.security-view,
 #identity-popup-securityView .identity-popup-connection-not-secure.security-view {
-	margin-inline-start: 28px !important;
+    margin-inline-start: 28px !important;
 }
 
 #identity-popup-securityView .identity-popup-security-connection {
@@ -358,7 +366,7 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
 }
 
 #identity-popup[connection="file"] .identity-popup-security-connection {
-    background-image: url(chrome://userchrome/content/notifications/persistent-storage.svg) !important
+    background-image: url(chrome://userchrome/content/notifications/persistent-storage.svg) !important;
 }
 
 #identity-popup[connection^="secure"] .identity-popup-security-connection {
@@ -448,7 +456,7 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
 }
 
 #identity-popup-mainView .subviewbutton-nav::after {
-	margin-inline-start: -2px !important;
+    margin-inline-start: -2px !important;
 }
 
 #identity-popup-security-expander > .button-box {
@@ -567,7 +575,7 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
 
 #emptyDownloads {
     padding-block: 1.25em !important;
-	padding-inline: 16px !important;
+    padding-inline: 16px !important;
 }
 
 #downloadsPanel-mainView {
@@ -642,9 +650,12 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
 }
 
 #downloadsListBox > .download-state > .downloadButton {
-    min-height: 56px !important;
-    min-width: 56px !important;
-    margin: 5px !important;
+    min-height: 66px !important;
+    min-width: 66px !important;
+    height: auto !important;
+    width: auto !important;
+    box-sizing: content-box !important;
+    padding: 0px !important;
     border-radius: 100% !important;
     -moz-box-align: center !important;
     background: none !important;
@@ -663,17 +674,54 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
 }
 
 #downloadsListBox > .download-state > .downloadButton .button-box {
-    min-width: 35.5px !important;
-    max-width: 35.5px !important;
-    min-height: 35.5px !important;
-    max-height: 35.5px !important;
-    border-radius: 100% !important;
+    max-width: 34px !important;
+    height: 34px !important;
+    border-radius: 4px !important;
+    padding: 0 !important;
 }
 
 #downloadsListBox > .download-state > .downloadButton .button-box .button-icon {
-    width: 22px !important;
+    width: 19px !important;
     height: auto !important;
-    list-style-image: url(chrome://userchrome/content/places/downloads-folder.svg) !important;
+}
+
+#downloadsListBox > .download-state > .downloadButton.downloadIconShow .button-box .button-icon {
+    list-style-image: url(chrome://userchrome/content/material/places/folder.svg) !important;
+}
+
+#downloadsListBox > .download-state > .downloadButton.downloadIconCancel .button-box .button-icon {
+    list-style-image: url(chrome://userchrome/content/skin/quit.svg) !important;
+}
+
+#downloadsListBox > .download-state > .downloadButton.downloadIconRetry .button-box .button-icon {
+    list-style-image: url(chrome://userchrome/content/skin/reload.svg) !important;
+}
+
+.downloadProgress {
+    appearance: none !important;
+    margin: 3px 0 -2px 0 !important;
+    border: 1px solid transparent !important;
+    border-radius: 100px !important;
+    height: 8px !important;
+    background-color: var(--arrowpanel-dimmed) !important;
+    overflow: hidden !important;
+}
+
+.downloadProgress[paused] {
+    background-color: var(--desaturate-dimmed) !important;
+}
+
+.downloadProgress:not([value="0"])::-moz-progress-bar {
+    margin: 0 !important;
+    height: 100% !important;
+}
+
+.downloadProgress::-moz-progress-bar {
+    background-color: var(--toolbarbutton-icon-fill-attention) !important;
+}
+
+.downloadProgress[paused]::-moz-progress-bar {
+    background-color: var(--desaturate-dimmed-further) !important;
 }
 
 /* overflow menu */
@@ -873,28 +921,31 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
     #permission-popup-mainView-panel-header,
     #protections-popup-mainView-panel-header {
         min-height: 32px !important;
-        font-size: 14px !important;
-        line-height: 14px !important;
+        font-size: 1.05em !important;
+        line-height: 1.05em !important;
         font-weight: normal !important;
     }
 
     .panel-header > h1,
     .popup-notification-description {
-        font-size: 14px !important;
-        line-height: 14px !important;
+        font-size: 1.05em !important;
+        line-height: 1.05em !important;
         font-weight: normal !important;
     }
 
-    .popup-notification-description {
-        line-height: 14px !important;
-    }
-
-    :is(#identity-popup-mainView-panel-header,
-    #permission-popup-mainView-panel-header,
-    #protections-popup-mainView-panel-header) span,
+    :is(#identity-popup-mainView-panel-header, #permission-popup-mainView-panel-header, #protections-popup-mainView-panel-header)
+        span,
     .protections-popup-tp-switch-on-header,
     .protections-popup-tp-switch-off-header {
         font-weight: inherit !important;
+    }
+
+    #editBookmarkPanelTitle {
+        font-size: 14px !important;
+    }
+
+    #editBookmarkPanel > .panel-header {
+        padding-block: 6px 3px !important;
     }
 
     #identity-popup-securityView .identity-popup-security-content,

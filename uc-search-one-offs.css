@@ -51,16 +51,22 @@
     background: none !important;
 }
 
-#PopupSearchAutoComplete :is(.searchbar-engine-one-off-item, .addengine-item) > :is(stack, .button-box) {
+#PopupSearchAutoComplete
+    :is(.searchbar-engine-one-off-item, .addengine-item)
+    > :is(stack, .button-box) {
     border-radius: var(--toolbarbutton-border-radius);
 }
 
-#PopupSearchAutoComplete :is(.searchbar-engine-one-off-item, .addengine-item):hover > :is(stack, .button-box) {
-	background-color: var(--arrowpanel-dimmed) !important;
+#PopupSearchAutoComplete
+    :is(.searchbar-engine-one-off-item, .addengine-item):hover
+    > :is(stack, .button-box) {
+    background-color: var(--arrowpanel-dimmed) !important;
 }
 
-#PopupSearchAutoComplete :is(.searchbar-engine-one-off-item, .addengine-item)[selected]:not(:hover) > :is(stack, .button-box) {
-	background-color: var(--arrowpanel-faint) !important;
+#PopupSearchAutoComplete
+    :is(.searchbar-engine-one-off-item, .addengine-item)[selected]:not(:hover)
+    > :is(stack, .button-box) {
+    background-color: var(--arrowpanel-faint) !important;
 }
 
 #PopupSearchAutoComplete #searchbar-one-offs-header-label,
@@ -71,7 +77,8 @@
 }
 
 .searchbar-separator {
-    margin-inline: var(--arrowpanel-menuitem-inline-margin) !important;
+    margin: calc(var(--arrowpanel-menuitem-inline-margin) - 1px)
+        var(--arrowpanel-menuitem-inline-margin) !important;
 }
 
 .urlbarView .search-panel-header {
@@ -120,15 +127,16 @@
 }
 
 .searchbar-engine-one-off-add-engine[image] .button-icon {
-	opacity: 1 !important;
+    opacity: 1 !important;
 }
 
 .searchbar-engine-one-off-add-engine[image]:not(:hover, [selected]) > .button-box {
-	opacity: 0.6 !important;
+    opacity: 0.6 !important;
 }
 
 .searchbar-engine-one-off-add-engine > .button-box::after {
-    background: url(chrome://userchrome/content/skin/search-indicator-badge-add.svg) no-repeat center/contain !important;
+    background: url(chrome://userchrome/content/skin/search-indicator-badge-add.svg) no-repeat
+        center/contain !important;
     -moz-context-properties: fill, fill-opacity, stroke !important;
     fill: var(--update-badge-bg) !important;
     stroke: var(--update-badge-color) !important;
@@ -384,7 +392,6 @@ toolbarpaletteitem > #urlbar-container :is(#page-action-buttons, #search-one-off
     margin-top: 0.5px !important;
 }
 
-:root[lwt-toolbar-field-brighttext]
-    .searchbar-engine-one-off-item {
+:root[lwt-toolbar-field-brighttext] .searchbar-engine-one-off-item {
     color: var(--lwt-toolbarbutton-icon-fill) !important;
 }

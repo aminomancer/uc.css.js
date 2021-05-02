@@ -251,116 +251,56 @@ menupopup::part(arrowscrollbox),
     margin-inline-end: 0;
 }
 
-#downloads-indicator-anchor {
-    min-width: 16px;
-    min-height: 16px;
+#back-button,
+.unified-nav-back[_moz-menuactive]:-moz-locale-dir(ltr),
+.unified-nav-forward[_moz-menuactive]:-moz-locale-dir(rtl) {
+    list-style-image: url(chrome://userchrome/content/skin/back.svg);
 }
 
-#downloads-indicator-progress-outer {
-    width: 16px;
-    height: 16px;
-    background-size: 16px;
-    background: url("chrome://userchrome/content/downloads/download-icons.svg#default-bar") center
-        no-repeat;
-}
-
-#downloads-button[attention="success"]
+/* the following animations require restorePreProtonDownloadsButton.uc.js, fx-autoconfig, and the resources/downloads folder */
+:root[pre-proton-downloads-button]
+    #downloads-button
     > .toolbarbutton-badge-stack
-    > #downloads-indicator-anchor
-    > #downloads-indicator-icon,
-#downloads-button[attention="success"]
-    > .toolbarbutton-badge-stack
-    > #downloads-indicator-anchor
     > #downloads-indicator-progress-outer {
-    -moz-context-properties: fill, fill-opacity;
-    fill: var(--toolbarbutton-icon-fill-attention);
-    fill-opacity: 1;
+    visibility: hidden;
+    top: calc(50% - 8.5px);
+    left: calc(50% - 8.5px);
+    width: 17px;
+    height: 16.5px;
+    border-radius: 100%;
+    border-width: 2px;
 }
-#downloads-button[progress]
+
+:root[pre-proton-downloads-button]
+    #downloads-button[progress]:not([notification], [animate])
     > .toolbarbutton-badge-stack
-    > #downloads-indicator-anchor
     > #downloads-indicator-progress-outer {
-    background: url("chrome://userchrome/content/downloads/download-icons.svg#progress-bar-bg")
-        center no-repeat;
+    visibility: visible;
 }
 
-#downloads-indicator-icon {
-    -moz-context-properties: fill, fill-opacity;
-    background-image: url("chrome://userchrome/content/downloads/download-icons.svg#arrow");
-    width: 16px;
-    height: 16px;
-}
-
-#downloads-indicator-progress-inner {
-    background: url("chrome://userchrome/content/downloads/download-icons.svg#progress-bar-fg") left
-        no-repeat;
-    margin-inline-end: 16px;
-    -moz-context-properties: fill;
-    fill: var(--toolbarbutton-icon-fill-attention);
-    background-size: 16px;
-    animation-play-state: paused;
-    animation-delay: 1s;
-    animation-duration: 100s;
-    animation-timing-function: linear;
-    animation-name: indicatorArrowProgress;
-}
-
-#downloads-indicator-progress-inner:-moz-locale-dir(rtl) {
-    background-position-x: right;
-}
-
-@keyframes indicatorArrowProgress {
-    0% {
-        margin-inline-end: 15px;
-    }
-    100% {
-        margin-inline-end: 1px;
-    }
-}
-
-/*** Status badges ***/
-#downloads-button[attention="warning"] > .toolbarbutton-badge-stack > .toolbarbutton-badge,
-#downloads-button[attention="severe"] > .toolbarbutton-badge-stack > .toolbarbutton-badge {
-    display: -moz-box;
-    height: 8px;
-    width: 8px;
-    min-width: 0;
-    border-radius: 50%;
-    margin-top: -1px !important;
-    margin-inline-end: -2px !important;
-}
-
-#downloads-button[cui-areatype="toolbar"] > .toolbarbutton-badge-stack > .toolbarbutton-badge {
-    height: 7px;
-    width: 7px;
-}
-
-#downloads-button[attention="severe"] > .toolbarbutton-badge-stack > .toolbarbutton-badge {
-    background: #d90000;
-}
-
-#downloads-button[attention="warning"] > .toolbarbutton-badge-stack > .toolbarbutton-badge {
-    background: #ffbf00;
-}
-
-#downloads-button[attention="severe"]
-    > .toolbarbutton-badge-stack
-    > .toolbarbutton-badge:-moz-window-inactive,
-#downloads-button[attention="warning"]
-    > .toolbarbutton-badge-stack
-    > .toolbarbutton-badge:-moz-window-inactive {
-    filter: none;
-}
-
-/*** Download notifications ***/
-#downloads-button[notification="start"]
+:root[pre-proton-downloads-button]
+    #downloads-button[progress]:not([notification], [animate])
     > .toolbarbutton-badge-stack
     > #downloads-indicator-anchor
     > #downloads-indicator-icon {
-    animation-name: downloadsIndicatorStartDip;
-    animation-duration: 360ms;
-    animation-delay: 400ms;
-    animation-iteration-count: 1;
+    visibility: hidden !important;
+}
+
+:root[pre-proton-downloads-button] #downloads-indicator-progress-inner {
+    width: 20px;
+    height: 20px;
+    top: -4.5px;
+    left: -4.5px;
+    position: relative;
+    background: conic-gradient(
+        var(--toolbarbutton-icon-fill-attention) var(--download-progress-pcent),
+        transparent var(--download-progress-pcent)
+    );
+    border-radius: 100%;
+}
+
+:root[pre-proton-downloads-button] #downloads-indicator-anchor {
+    list-style-image: url(chrome://userchrome/content/downloads/download-icons.svg#arrow-with-bar);
 }
 
 @keyframes downloadsIndicatorStartDip {
@@ -395,7 +335,23 @@ menupopup::part(arrowscrollbox),
     }
 }
 
-#downloads-button[notification="finish"]
+:root[pre-proton-downloads-button] #downloads-indicator-icon {
+    visibility: visible !important;
+}
+
+:root[pre-proton-downloads-button]
+    #downloads-button[notification="start"]
+    > .toolbarbutton-badge-stack
+    > #downloads-indicator-anchor
+    > #downloads-indicator-icon {
+    animation-name: downloadsIndicatorStartDip;
+    animation-duration: 360ms;
+    animation-delay: 100ms;
+    animation-iteration-count: 1;
+}
+
+:root[pre-proton-downloads-button]
+    #downloads-button[notification="finish"]
     > .toolbarbutton-badge-stack
     > #downloads-indicator-anchor
     > #downloads-indicator-icon {
@@ -405,32 +361,27 @@ menupopup::part(arrowscrollbox),
     animation-iteration-count: 2;
 }
 
-#downloads-animation-container {
-    min-height: 1px;
-    min-width: 1px;
-    height: 1px;
-    margin-bottom: -1px;
-    position: relative;
-    z-index: 13;
+:root[pre-proton-downloads-button] #downloads-indicator-finish-box {
+    display: none !important;
+}
+
+:root[pre-proton-downloads-button]
+    #downloads-button
+    > .toolbarbutton-badge-stack
+    > #downloads-indicator-start-box {
     pointer-events: none;
+    -moz-context-properties: fill, fill-opacity, stroke;
+    grid-area: initial;
+    top: -4px !important;
+    left: calc(50% - 10px);
+    z-index: 0;
+    height: 48px;
 }
 
-/* download start animation */
-
-#downloads-notification-anchor {
-    width: 42px;
-    height: 98px;
-    min-height: 98px;
-    overflow: hidden;
-    direction: ltr;
-}
-
-#downloads-indicator-notification {
-    opacity: 0;
-    min-width: 1344px;
-    height: 98px;
-    -moz-context-properties: fill;
-    fill: #737373;
+:root[pre-proton-downloads-button] #downloads-indicator-start-image {
+    min-width: 658px;
+    height: 48px;
+    list-style-image: none;
 }
 
 @keyframes downloadsIndicatorNotificationStart {
@@ -438,25 +389,22 @@ menupopup::part(arrowscrollbox),
         transform: translateX(0);
     }
     to {
-        transform: translateX(-1302px);
+        transform: translateX(-637.7px);
     }
 }
 
-#downloads-notification-anchor[notification="start"] > #downloads-indicator-notification {
-    opacity: 1;
-    background: url(chrome://userchrome/content/downloads/notification-start-animation.svg) 0 center
-        no-repeat;
-    transform: translateX(0px);
+:root[pre-proton-downloads-button]
+    #downloads-button[animate][notification="start"]
+    > .toolbarbutton-badge-stack
+    > #downloads-indicator-start-box
+    > #downloads-indicator-start-image {
+    --anim-steps: 31 !important;
+    list-style-image: url("chrome://userchrome/content/downloads/notification-start-animation.svg");
     animation-name: downloadsIndicatorNotificationStart;
     animation-duration: 540ms;
+    transform: translateX(0px);
     animation-delay: 64ms;
     animation-timing-function: steps(31);
-}
-
-#back-button,
-.unified-nav-back[_moz-menuactive]:-moz-locale-dir(ltr),
-.unified-nav-forward[_moz-menuactive]:-moz-locale-dir(rtl) {
-    list-style-image: url(chrome://userchrome/content/skin/back.svg);
 }
 
 #forward-button,
