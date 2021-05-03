@@ -53,7 +53,6 @@
 }
 
 .urlbarView-favicon {
-    align-self: center !important;
     background-position: center !important;
     margin-inline: 0 !important;
 }
@@ -68,7 +67,7 @@
     display: none;
 }
 
-.urlbarView-row:is([type="switchtab"], [type="bookmark"], [type="remotetab"], [type="dynamic"])
+.urlbarView-row:is([type="switchtab"], [type="bookmark"], [type="remotetab"], [type="dynamic"], [pinned])
     .urlbarView-type-icon {
     fill-opacity: 0.75 !important;
     margin-bottom: 1px !important;
@@ -89,17 +88,21 @@
     width: 16px !important;
     height: 16px !important;
     -moz-context-properties: fill, fill-opacity !important;
+    fill: inherit !important;
+}
+
+.urlbarView-row[pinned] .urlbarView-type-icon {
+    background: url(chrome://userchrome/content/material/pin.svg) no-repeat !important;
 }
 
 .urlbarView-row[type="bookmark"] .urlbarView-type-icon {
     /* fill: var(--urlbar-bookmark-icon-color) !important;
     fill: var(--lwt-toolbarbutton-icon-fill-attention) !important;
     fill-opacity: 1 !important; */
-    position: absolute;
     align-self: center !important;
     stroke: none !important;
     background-position: center !important;
-    background-size: 110% !important;
+    background-size: contain !important;
 }
 
 .urlbarView-row:is([type="switchtab"], [type="remotetab"]) .urlbarView-type-icon {

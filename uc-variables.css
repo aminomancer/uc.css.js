@@ -12,6 +12,7 @@ menupopup {
     --tabs-navbar-shadow-size: 0px !important;
     --autocomplete-popup-highlight-background: var(--arrowpanel-dimmed-further) !important;
     --toolbarbutton-border-radius: var(--general-button-border-radius) !important;
+    --urlbar-icon-border-radius: var(--general-button-border-radius) !important;
     --lwt-accent-color: hsl(233, 61%, 8%) !important;
     --lwt-text-color: hsl(213, 43%, 89%) !important;
     --lwt-toolbar-field-background-color: hsla(233, 25%, 28%, 85%) !important;

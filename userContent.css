@@ -1539,20 +1539,19 @@ img.transparent {
     h3.title {
         line-height: normal !important;
         block-size: min-content !important;
-        padding-block: 0.7em 0.6em !important;
+        padding-block: 6px 10px !important;
         white-space: nowrap !important;
         margin-inline-end: 30px !important;
         font-weight: normal !important;
         font-size: 14px !important;
         text-align: start !important;
         user-select: none;
-        padding-inline: calc(var(--menupopup-inner-padding) + 8px) !important;
+        padding-inline: var(--menupopup-inner-padding-magnitude) !important;
     }
 
     hr {
-        margin-block: 0 !important;
+        margin: 0 !important;
         padding-block: 0 !important;
-        margin: var(--panel-separator-margin) !important;
     }
 
     .identities-list {
@@ -1565,7 +1564,6 @@ img.transparent {
         inline-size: unset !important;
         display: flex !important;
         flex-flow: row nowrap;
-        margin-inline: var(--menupopup-inner-padding) !important;
         padding-inline: 3px !important;
         min-height: 28px !important;
     }

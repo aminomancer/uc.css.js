@@ -168,6 +168,8 @@
     border-radius: 100% !important;
     -moz-context-properties: fill !important;
     padding: 0 !important;
+    margin-inline: auto -4px !important;
+    margin-block: -7px auto !important;
 }
 
 #PanelUI-menu-button[badge-status^="update"]

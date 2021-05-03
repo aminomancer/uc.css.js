@@ -151,6 +151,7 @@
 #sidebarMenu-popup > .subviewbutton > .toolbarbutton-icon {
     margin-inline-start: 0 !important;
     min-width: 16px !important;
+    fill-opacity: 0.8;
 }
 
 #sidebar-switcher-target:-moz-focusring,

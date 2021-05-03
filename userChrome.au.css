@@ -1251,6 +1251,7 @@ toolbar[brighttext] #panic-button[open] {
     list-style-image: url("chrome://userchrome/content/skin/bookmark-hollow.svg");
 }
 
+#sidebar-switcher-bookmarks,
 #pageAction-panel-bookmark[starred],
 #star-button[starred] {
     list-style-image: url("chrome://userchrome/content/skin/bookmark.svg");

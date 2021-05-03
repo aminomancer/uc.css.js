@@ -259,6 +259,10 @@
     transform: none !important;
 }
 
+#editBookmarkPanel #editBookmarkPanelContent :is(.expander-up, .expander-down) .button-box {
+    padding: 0 !important;
+}
+
 #editBookmarkPanel .expander-down image {
     list-style-image: url(chrome://userchrome/content/devtools/arrowhead-down.svg) !important;
     width: 17px !important;
