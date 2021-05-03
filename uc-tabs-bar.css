@@ -469,6 +469,14 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
     margin-inline-end: 8px !important;
 }
 
+.all-tabs-secondary-button[soundplaying] {
+    list-style-image: url(chrome://userchrome/content/tab-audio-playing.svg) !important
+}
+
+.all-tabs-secondary-button[muted] {
+    list-style-image: url(chrome://userchrome/content/tab-audio-muted.svg) !important;
+}
+
 .all-tabs-secondary-button[close-button] {
     fill-opacity: 0 !important;
     transform: translateX(28px);
