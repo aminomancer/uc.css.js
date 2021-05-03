@@ -897,7 +897,6 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
 
     #identity-popup-clear-sitedata-footer {
         margin-inline: 4px !important;
-        margin-block: -4px 8px !important;
     }
 
     .panel-footer.panel-footer-menulike {
@@ -919,7 +918,7 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
     }
 
     #identity-popup-securityView-body {
-        padding-block: 16px;
+        padding-block: 6px;
     }
 
     #identity-popup-mainView-panel-header,
