@@ -334,8 +334,13 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
 }
 
 #identity-popup-securityView .identity-popup-security-connection {
-    background-position: 10px center !important;
+    background-position: 4px center !important;
     padding-block: 4px !important;
+    margin-inline: 3px !important;
+}
+
+#identity-popup-securityView .identity-popup-security-connection description {
+    margin-inline-start: 26px !important;
 }
 
 #identity-popup-mainView .identity-popup-security-connection {
@@ -543,7 +548,7 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
 
 #identity-popup-securityView-body > :is(description, label, button) {
     margin-block: 0 !important;
-    margin-inline-start: 28px !important;
+    margin-inline-start: 26px !important;
 }
 
 #identity-popup-securityView-body > description#identity-popup-content-verifier {
@@ -905,8 +910,21 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
         border-top: 1px solid var(--panel-separator-color);
     }
 
+    #identity-popup-security-button[footerHidden="true"] {
+        margin-bottom: 4px !important;
+    }
+
+    #identity-popup:is([connection="file"], [connection="chrome"]) #identity-popup-security-button {
+        margin-bottom: 6px !important;
+    }
+
     #identity-popup-security-httpsonlymode > label {
         margin-top: 0 !important;
+    }
+
+    #identity-popup-security-httpsonlymode-menulist,
+    #identity-popup-security-httpsonlymode-menulist menupopup {
+        width: 11em !important;
     }
 
     .permission-popup-section {
