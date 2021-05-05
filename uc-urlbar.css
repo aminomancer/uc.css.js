@@ -445,11 +445,11 @@ toolbarpaletteitem[removable="false"]
 :root[hide-tp-icon-on-ntp]:not([customizing])
     #urlbar:not([searchmode], [actiontype="switchtab"]:not([actionoverride="true"]))
     #tracking-protection-icon-container[hidden]
-    ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage)[pageproxystate="valid"]
+    ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage, .unknownIdentity)[pageproxystate="valid"]
     #identity-icon-box,
 :root[hide-tp-icon-on-ntp]:not([customizing])
     #urlbar[pageproxystate="invalid"]:not([searchmode], [actiontype="switchtab"]:not([actionoverride="true"]))
-    #identity-box:not(.httpsOnlyErrorPage)
+    #identity-box:not(.httpsOnlyErrorPage, .unknownIdentity)
     #identity-icon-box {
     pointer-events: none !important;
 }
@@ -457,11 +457,11 @@ toolbarpaletteitem[removable="false"]
 :root[hide-tp-icon-on-ntp]:not([customizing])
     #urlbar:not([searchmode], [actiontype="switchtab"]:not([actionoverride="true"]))
     #tracking-protection-icon-container[hidden]
-    ~ #identity-box:not(.chromeUI, .httpsOnlyErrorPage)
+    ~ #identity-box:not(.chromeUI, .httpsOnlyErrorPage, .unknownIdentity)
     #identity-icon-box,
 :root[hide-tp-icon-on-ntp]:not([customizing])
     #urlbar[pageproxystate="invalid"]:not([searchmode], [actiontype="switchtab"]:not([actionoverride="true"]))
-    #identity-box:not(.httpsOnlyErrorPage)
+    #identity-box:not(.httpsOnlyErrorPage, .unknownIdentity)
     #identity-icon-box {
     margin-inline: 2px -3px !important;
 }
@@ -469,7 +469,7 @@ toolbarpaletteitem[removable="false"]
 :root[hide-tp-icon-on-ntp]:not([customizing])
     #urlbar:not([searchmode], [usertyping="true"], [focused="true"])
     #tracking-protection-icon-container[hidden]
-    ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage)
+    ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage, .unknownIdentity)
     #identity-icon {
     fill-opacity: 0.4 !important;
 }
@@ -499,11 +499,6 @@ toolbarpaletteitem[removable="false"]
 
 #tracking-protection-icon-container::after {
     display: none !important;
-}
-
-#identity-box[pageproxystate="valid"]:is(.notSecureText, .verifiedIdentity .extensionPage) {
-    padding-inline-end: 6px !important;
-    margin-inline-end: 2px !important;
 }
 
 #urlbar-input {

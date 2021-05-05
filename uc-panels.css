@@ -42,6 +42,7 @@
     margin-top: revert !important;
 }
 
+#extension-notification-panel,
 #notification-popup {
     margin-top: -1px !important;
 }
@@ -89,6 +90,16 @@ panel[type="arrow"][side="top"] {
     min-height: 28px !important;
 }
 
+.protections-popup-category-label {
+	margin-inline-start: 6px !important;
+}
+
+.protections-popup-category:focus-visible:not(:active),
+.protections-popup-footer-button:focus-visible:not(:active),
+#protections-popup-show-report-stack:focus-visible:not(:active) > .protections-popup-footer-button {
+	background-color: var(--button-hover-bgcolor) !important;
+}
+
 #protections-popup-footer {
     padding-top: 0 !important;
 }
@@ -102,20 +113,36 @@ panel[type="arrow"][side="top"] {
     margin-inline-end: 4px !important;
 }
 
+#protections-popup-category-list {
+    margin-top: -10px !important;
+}
+
 #protections-popup-not-blocking-section-header {
-    padding: 2px !important;
-    padding-bottom: 0 !important;
+    padding-inline: 2px !important;
+    padding-block: 10px 2px !important;
+    margin-inline: auto !important;
+    height: 34px !important;
 }
 
 #protections-popup-blocking-section-header,
 #protections-popup-not-found-section-header {
-    padding-block: 8px 4px !important;
+    padding-block: 14px 6px !important;
+    height: 34px !important;
+    margin-inline: auto !important;
 }
 
 #protections-popup-not-blocking-section-description,
 #protections-popup-not-blocking-section-why {
     outline: none !important;
-    padding: 4px !important;
+    padding: 3.75px 4px !important;
+    height: revert !important;
+}
+
+:is(#protections-popup-not-blocking-section-description,
+#protections-popup-not-blocking-section-why,
+#protections-popup-blocking-section-header,
+#protections-popup-not-found-section-header):not([hidden="true"]) {
+    display: flex !important;
 }
 
 #protections-popup-not-blocking-section-why {
@@ -293,6 +320,11 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
     fill-opacity: 0.8 !important;
 }
 
+#permission-popup-storage-access-permission-list-hint,
+#permission-popup-storage-access-permission-learn-more {
+	margin-inline-start: 24px !important;
+}
+
 /* hides update popups. i use a script for this now, updateNotificationSlayer.uc.js. use that instead, it's MUCH better. */
 /* #appMenu-notification-popup {
     display: none !important;
@@ -345,7 +377,27 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
 
 #identity-popup-mainView .identity-popup-security-connection {
     background-position: 4px center !important;
-    padding-block: 4px !important;
+}
+
+#identity-popup .subviewbutton-nav {
+    padding-block: 0 !important;
+}
+
+#identity-popup .subviewbutton-nav > vbox {
+    min-height: 33.3px !important;
+}
+
+#identity-popup toolbarbutton,
+.identity-popup-security-connection.identity-button {
+    width: auto !important;
+    -moz-box-flex: 1 !important;
+}
+
+#identity-popup-mainView .identity-popup-security-connection > hbox {
+    /* display: flex !important;
+    flex-flow: column nowrap !important;
+    justify-content: center !important; */
+    -moz-box-align: center !important;
 }
 
 #identity-popup-mainView .identity-popup-security-connection description {
@@ -353,8 +405,12 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
 }
 
 #identity-popup-mainView .identity-popup-security-connection .upgraded {
-    margin-inline-start: -4px !important;
     font-size: 0.8em !important;
+    margin-inline-start: 0 !important;
+}
+
+#identity-popup[httpsonlystatus="upgraded"] .identity-popup-security-connection description:not(.upgraded) {
+    font-size: 0.91em !important;
 }
 
 #identity-popup-security-description {
@@ -460,8 +516,8 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
     display: none !important;
 }
 
-#identity-popup-mainView .subviewbutton-nav::after {
-    margin-inline-start: -2px !important;
+#identity-popup .subviewbutton-nav::after {
+    margin-inline-end: 2px !important;
 }
 
 #identity-popup-security-expander > .button-box {
@@ -863,6 +919,11 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
     padding: var(--menupopup-inner-padding-magnitude) !important;
 }
 
+/* extension notification popup (on appmenu button) */
+#extension-new-tab-notification-description .text-link:not(:empty) {
+    margin-inline: 6px !important;
+}
+
 @media (-moz-proton-contextmenus) {
     .menu-right {
         margin-inline-end: 0 !important;
@@ -878,11 +939,8 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
     }
 
     #identity-popup,
+    #protections-popup,
     #permission-popup {
-        --popup-width: 436.92px !important;
-    }
-
-    #protections-popup {
         --popup-width: 375px !important;
     }
 

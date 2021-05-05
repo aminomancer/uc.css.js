@@ -295,7 +295,8 @@ menulist:-moz-focusring > menupopup.in-menulist > menuitem[_moz-menuactive="true
     panel menulist {
         appearance: none !important;
         background-color: var(--ui-textbox-bgcolor) !important;
-        padding: 2px 2px 2px 4px;
+        padding: 2px 2px 2px 8px !important;
+        min-height: 25px !important;
         color: inherit !important;
         fill: currentColor !important;
         border: none !important;

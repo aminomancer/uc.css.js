@@ -1344,3 +1344,65 @@ toolbar[brighttext] #panic-button[open] {
         scale: -1 1;
     }
 }
+
+.protections-popup-category-icon.trackers-icon {
+    list-style-image: url(chrome://userchrome/content/skin/controlcenter/tracker-image.svg);
+}
+
+.protections-popup-category-icon.socialblock-icon {
+    list-style-image: url(chrome://userchrome/content/skin/controlcenter/socialblock.svg);
+}
+
+.protections-popup-category-icon.thirdpartycookies-icon {
+    list-style-image: url(chrome://userchrome/content/skin/controlcenter/3rdpartycookies.svg);
+}
+
+.protections-popup-category-icon.cryptominers-icon {
+    list-style-image: url(chrome://userchrome/content/skin/controlcenter/cryptominers.svg);
+}
+
+.protections-popup-category-icon.fingerprinters-icon {
+    list-style-image: url(chrome://userchrome/content/skin/controlcenter/fingerprinters.svg);
+}
+
+.protections-popup-trackersView-icon {
+    list-style-image: url(chrome://userchrome/content/skin/controlcenter/tracker-image-disabled.svg);
+    width: 16px;
+    height: 16px;
+}
+
+.protections-popup-trackersView-icon.allowed {
+    list-style-image: url(chrome://userchrome/content/skin/controlcenter/tracker-image.svg);
+}
+
+.protections-popup-socialblockView-icon {
+    list-style-image: url(chrome://userchrome/content/skin/controlcenter/socialblock-disabled.svg);
+}
+
+.protections-popup-socialblockView-icon.allowed {
+    list-style-image: url(chrome://userchrome/content/skin/controlcenter/socialblock.svg);
+}
+
+.protections-popup-cookiesView-icon {
+    list-style-image: url(chrome://userchrome/content/skin/controlcenter/3rdpartycookies-disabled.svg);
+}
+
+.protections-popup-cookiesView-icon.allowed {
+    list-style-image: url(chrome://userchrome/content/skin/controlcenter/3rdpartycookies.svg);
+}
+
+.protections-popup-fingerprintersView-icon {
+    list-style-image: url(chrome://userchrome/content/skin/controlcenter/fingerprinters-disabled.svg);
+}
+
+.protections-popup-fingerprintersView-icon.allowed {
+    list-style-image: url(chrome://userchrome/content/skin/controlcenter/fingerprinters.svg);
+}
+
+.protections-popup-cryptominersView-icon {
+    list-style-image: url(chrome://userchrome/content/skin/controlcenter/cryptominers-disabled.svg);
+}
+
+.protections-popup-cryptominersView-icon.allowed {
+    list-style-image: url(chrome://userchrome/content/skin/controlcenter/cryptominers.svg);
+}
