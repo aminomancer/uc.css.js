@@ -387,9 +387,13 @@ menupopup::part(arrowscrollbox),
 @keyframes downloadsIndicatorNotificationStart {
     from {
         transform: translateX(0);
+        fill: var(--toolbarbutton-icon-fill);
+        fill-opacity: var(--toolbarbutton-icon-fill-opacity);
     }
     to {
         transform: translateX(-637.7px);
+        fill: var(--toolbarbutton-icon-fill-attention);
+        fill-opacity: 1;
     }
 }
 
