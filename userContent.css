@@ -1541,12 +1541,11 @@ img.transparent {
         block-size: min-content !important;
         padding-block: 6px 10px !important;
         white-space: nowrap !important;
-        margin-inline-end: 30px !important;
+        padding-inline: 9px 16px !important;
         font-weight: normal !important;
         font-size: 14px !important;
         text-align: start !important;
         user-select: none;
-        padding-inline: var(--menupopup-inner-padding-magnitude) !important;
     }
 
     hr {

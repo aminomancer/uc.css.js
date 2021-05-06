@@ -156,6 +156,14 @@
     border-radius: unset !important;
 }
 
+.urlbarView-row:not([selected]) .urlbarView-action {
+	color: var(--urlbar-popup-action-color) !important;
+}
+
+.urlbarView-row[type="switchtab"]:not([selected], :hover) .urlbarView-action {
+    visibility: collapse;
+}
+
 .urlbarView-row:is([type="switchtab"], [type="remotetab"])
     > .urlbarView-row-inner
     > .urlbarView-no-wrap
