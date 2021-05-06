@@ -383,8 +383,10 @@ menulist:-moz-focusring > menupopup.in-menulist > menuitem[_moz-menuactive="true
         display: none !important;
     }
 
-    #contentAreaContextMenu menuseparator:not([id]) {
-        display: -moz-box !important;
+    @-moz-document url("chrome://browser/content/browser.xhtml") {
+        #contentAreaContextMenu menuseparator:not([id]) {
+            display: -moz-box !important;
+        }
     }
 
     #context-navigation .menuitem-iconic {

@@ -1013,6 +1013,15 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
         font-weight: normal !important;
     }
 
+    .popup-notification-description {
+        margin-block: 1px 8px !important;
+    }
+
+    #addon-webext-perm-list,
+    #addon-webext-perm-single-entry {
+        margin-block-start: 6px !important;
+    }
+
     :is(#identity-popup-mainView-panel-header, #permission-popup-mainView-panel-header, #protections-popup-mainView-panel-header)
         span,
     .protections-popup-tp-switch-on-header,

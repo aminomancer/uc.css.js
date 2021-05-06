@@ -129,6 +129,13 @@
     display: none;
 }
 
+/* hide simple translate menu item in sidebars (e.g. TST, sidebery) */
+@-moz-document regexp("chrome://browser/content/webext-panels.xhtml") {
+    #simple-translate_sienori-menuitem-_translatePageOnTab {
+        display: none;
+    }
+}
+
 #contentAreaContextMenu
     :is(.menu-iconic, .menuitem-iconic)[label="Pushbullet"]
     .menu-iconic-left::before {
