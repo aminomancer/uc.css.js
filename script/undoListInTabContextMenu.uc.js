@@ -7,6 +7,7 @@
 // ==/UserScript==
 
 (function () {
+    const includePopupWindows = true; // set this to false if you don't want popup windows to be listed in recently closed windows.
     class UndoListInTabmenu {
         constructor() {
             this.generateStrings(); // add localization strings manually, for the sidebar browser.
@@ -289,8 +290,130 @@
         }
     }
 
-    // instantiate the class on the window so the "oncommand" callbacks can reference it.
+    // instantiate the class and override some built-in methods.
     function init() {
+        RecentlyClosedTabsAndWindowsMenuUtils.includePopupWindows = includePopupWindows;
+        RecentlyClosedTabsAndWindowsMenuUtils.navigatorBundle = Services.strings.createBundle(
+            "chrome://browser/locale/browser.properties"
+        );
+        RecentlyClosedTabsAndWindowsMenuUtils.setImage = function (aItem, aElement) {
+            let iconURL = aItem.image;
+            if (/^https?:/.test(iconURL)) iconURL = "moz-anno:favicon:" + iconURL;
+            aElement.setAttribute("image", iconURL);
+        };
+        RecentlyClosedTabsAndWindowsMenuUtils.createEntry = function (
+            aTagName,
+            aIsWindowsFragment,
+            aIndex,
+            aClosedTab,
+            aDocument,
+            aMenuLabel,
+            aFragment
+        ) {
+            let element = aDocument.createXULElement(aTagName);
+            element.setAttribute("label", aMenuLabel);
+            if (aClosedTab.image) this.setImage(aClosedTab, element);
+            if (!aIsWindowsFragment) element.setAttribute("value", aIndex);
+            if (aTagName == "menuitem")
+                element.setAttribute(
+                    "class",
+                    "menuitem-iconic bookmark-item menuitem-with-favicon"
+                );
+            element.setAttribute(
+                "oncommand",
+                "undoClose" + (aIsWindowsFragment ? "Window" : "Tab") + "(" + aIndex + ");"
+            );
+            let tabData;
+            tabData = aIsWindowsFragment ? aClosedTab : aClosedTab.state;
+            let activeIndex = (tabData.index || tabData.entries.length) - 1;
+            if (activeIndex >= 0 && tabData.entries[activeIndex])
+                element.setAttribute("targetURI", tabData.entries[activeIndex].url);
+            if (!aIsWindowsFragment)
+                element.addEventListener(
+                    "click",
+                    RecentlyClosedTabsAndWindowsMenuUtils._undoCloseMiddleClick
+                );
+            if (aIndex == 0)
+                element.setAttribute(
+                    "key",
+                    "key_undoClose" + (aIsWindowsFragment ? "Window" : "Tab")
+                );
+            aFragment.appendChild(element);
+        };
+        RecentlyClosedTabsAndWindowsMenuUtils.createRestoreAllEntry = function (
+            aDocument,
+            aFragment,
+            aPrefixRestoreAll,
+            aIsWindowsFragment,
+            aRestoreAllLabel,
+            aEntryCount,
+            aTagName
+        ) {
+            let restoreAllElements = aDocument.createXULElement(aTagName);
+            restoreAllElements.classList.add("restoreallitem");
+            restoreAllElements.setAttribute(
+                "label",
+                RecentlyClosedTabsAndWindowsMenuUtils.strings.formatValueSync(aRestoreAllLabel)
+            );
+            restoreAllElements.setAttribute(
+                "oncommand",
+                "for (var i = 0; i < " +
+                    aEntryCount +
+                    "; i++) undoClose" +
+                    (aIsWindowsFragment ? "Window" : "Tab") +
+                    "();"
+            );
+            if (aPrefixRestoreAll) aFragment.insertBefore(restoreAllElements, aFragment.firstChild);
+            else {
+                aFragment.appendChild(aDocument.createXULElement("menuseparator"));
+                aFragment.appendChild(restoreAllElements);
+            }
+        };
+        RecentlyClosedTabsAndWindowsMenuUtils.getWindowsFragment = function getWindowsFragment(
+            aWindow,
+            aTagName,
+            aPrefixRestoreAll = false,
+            aRestoreAllLabel = "appmenu-reopen-all-windows"
+        ) {
+            let closedWindowData = SessionStore.getClosedWindowData(false);
+            let doc = aWindow.document;
+            let fragment = doc.createDocumentFragment();
+            if (closedWindowData.length) {
+                let menuLabelString = this.navigatorBundle.GetStringFromName(
+                    "menuUndoCloseWindowLabel"
+                );
+                let menuLabelStringSingleTab = this.navigatorBundle.GetStringFromName(
+                    "menuUndoCloseWindowSingleTabLabel"
+                );
+
+                for (let i = 0; i < closedWindowData.length; i++) {
+                    let undoItem = closedWindowData[i];
+                    let otherTabsCount = undoItem.tabs.length - 1;
+                    let label =
+                        otherTabsCount == 0
+                            ? menuLabelStringSingleTab
+                            : PluralForm.get(otherTabsCount, menuLabelString);
+                    let menuLabel = label
+                        .replace("#1", undoItem.title)
+                        .replace("#2", otherTabsCount);
+                    let selectedTab = undoItem.tabs[undoItem.selected - 1];
+
+                    if (!undoItem.isPopup || this.includePopupWindows)
+                        this.createEntry(aTagName, true, i, selectedTab, doc, menuLabel, fragment);
+                }
+
+                this.createRestoreAllEntry(
+                    doc,
+                    fragment,
+                    aPrefixRestoreAll,
+                    true,
+                    aRestoreAllLabel,
+                    closedWindowData.length,
+                    aTagName
+                );
+            }
+            return fragment;
+        };
         window.undoListInTabmenu = new UndoListInTabmenu();
     }
 
