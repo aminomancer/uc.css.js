@@ -369,7 +369,7 @@ menupopup.in-menulist :is(menu, menuitem, menucaption) .menu-iconic-left {
 
 #ContentSelectDropdown > menupopup :is(menu, menuitem, menucaption) .menu-iconic-icon,
 menupopup.in-menulist :is(menu, menuitem, menucaption) .menu-iconic-icon {
-    margin-inline: 5px 6px !important;
+    margin-inline: var(--context-iconic-margin) !important;
 }
 
 #ContentSelectDropdown > menupopup menugroup,
@@ -950,7 +950,7 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
     }
 
     :is(menuitem, menu) .menu-iconic-icon {
-        margin-inline: 5px 6px;
+        margin-inline: var(--context-iconic-margin);
     }
 
     menugroup {

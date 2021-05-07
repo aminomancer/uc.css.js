@@ -43,7 +43,7 @@ menupopup:not(.PanelUI-subView) :is(menuitem, menu) .menu-iconic-left {
 }
 
 menupopup:not(.PanelUI-subView) :is(menuitem, menu) .menu-iconic-icon {
-    margin-inline: 5px 6px;
+    margin-inline: var(--context-iconic-margin);
 }
 
 #contentAreaContextMenu > .menuitem-iconic > .menu-iconic-left > .menu-iconic-icon {
@@ -126,10 +126,15 @@ menupopup menuitem:is([type="checkbox"], [type="radio"])::before {
     color: var(--in-parent-primary-button-text-color);
 }
 
+menupopup .unified-nav-current[type="radio"][checked="true"] {
+    font-weight: 600 !important;
+    color: white !important;
+}
+
 menupopup .unified-nav-current[type="radio"][checked="true"]::before {
     width: 16px;
     height: 16px;
-    margin-inline: 6px !important;
+    margin-inline: var(--context-iconic-margin); !important;
     background-image: url(chrome://userchrome/content/check.svg);
     border-radius: 2px;
     fill-opacity: 1;

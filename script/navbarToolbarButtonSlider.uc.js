@@ -155,12 +155,12 @@
              */
             handleEvent(e) {
                 let popup = e.target;
-                let button = popup.triggerNode;
+                let button = this.validWidget(popup);
                 let moveToPanel = popup.querySelector(".customize-context-moveToPanel");
                 let removeFromToolbar = popup.querySelector(".customize-context-removeFromToolbar");
                 if (!moveToPanel || !removeFromToolbar) return;
                 // if the parent element is not the slider, then make the context menu work as normal and bail.
-                if (button.parentElement !== inner) {
+                if (!button || button.parentElement !== inner) {
                     moveToPanel.setAttribute(
                         "oncommand",
                         "gCustomizeMode.addToPanel(document.popupNode, 'toolbar-context-menu')"
@@ -171,6 +171,8 @@
                     );
                     return;
                 }
+
+                this.popupNode = button;
 
                 // if a non-removable system button got into the slider somehow, then disable these commands
                 let movable = button && button.id && CustomizableUI.isWidgetRemovable(button);
@@ -187,12 +189,23 @@
                 // override the commands
                 moveToPanel.setAttribute(
                     "oncommand",
-                    "sliderContextHandler.addToPanel(document.popupNode, 'toolbar-context-menu')"
+                    "sliderContextHandler.addToPanel(sliderContextHandler.popupNode, 'toolbar-context-menu')"
                 );
                 removeFromToolbar.setAttribute(
                     "oncommand",
-                    "sliderContextHandler.removeFromArea(document.popupNode, 'toolbar-context-menu')"
+                    "sliderContextHandler.removeFromArea(sliderContextHandler.popupNode, 'toolbar-context-menu')"
                 );
+            },
+
+            testClass(aNode) {
+                return aNode.classList.contains("chromeclass-toolbar-additional");
+            },
+
+            validWidget(popup) {
+                let node = popup.triggerNode;
+                if (this.testClass(node)) return node;
+                if (this.testClass(node.parentElement)) return node.parentElement;
+                else return null;
             },
 
             /**

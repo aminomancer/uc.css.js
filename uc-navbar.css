@@ -391,6 +391,11 @@ toolbarbutton.bookmark-item:not(.subviewbutton) {
     width: -moz-available;
 }
 
+/* fix a bug that occurs when pre-proton downloads button is installed along with navbar toolbarbutton slider script */
+#nav-bar-toolbarbutton-slider {
+    overflow: -moz-hidden-unscrollable !important;
+}
+
 /* proton stuff, primarily notifications. imo this is about as sexy as a "your plugin crashed" notification can get.
 you can test them by pasting this in the browser console and hitting enter:
 

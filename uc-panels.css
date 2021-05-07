@@ -25,6 +25,11 @@
     margin-inline: -44px !important;
 }
 
+#customizationui-widget-panel[viewId="PanelUI-profiler"][type="arrow"][side="top"] {
+    margin-inline: -19.4px !important;
+    margin-top: -3px !important;
+}
+
 #downloadsPanel,
 #widget-overflow,
 #appMenu-popup,
