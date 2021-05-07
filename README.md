@@ -54,6 +54,8 @@ For best results, set density mode to `Normal` and theme to `Dark` in the custom
 | ui.prefersReducedMotion 	| Number 	| 0 	|  	|
 | ui.submenuDelay 	| Number 	| 100 	| These aren't required, but feel more responsive imo 	|
 | ui.tooltipDelay 	| Number 	| 100 	|  	|
+| ui.skipNavigatingDisabledMenuItem 	| Number 	| 1 	| When focusing menuitems with arrow keys, skip disabled items 	|
+| ui.SpellCheckerUnderlineStyle 	| Number 	| 1 	| Use dotted underline for spell checker 	|
 | ui.systemUsesDarkTheme 	| Number 	| 1 	| Currently required; working on a light mode 	|
 | ui.textHighlightBackground 	| String 	| `#7755FF` 	| These prefs control the appearance of text highlighted by the findbar. I choose white text on purple/pink background 	|
 | ui.textHighlightForeground 	| String 	| `#FFFFFF` 	|  	|
