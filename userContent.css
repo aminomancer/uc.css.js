@@ -570,6 +570,7 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
     #ContentSelectDropdown > menupopup :is(.menu-accel, .menu-iconic-accel)[value],
     menupopup.in-menulist :is(.menu-accel, .menu-iconic-accel)[value] {
         margin-inline: 1.55em calc(var(--menu-right-margin) + 4px) !important;
+        padding-block: 0 !important;
     }
 
     #ContentSelectDropdown
@@ -666,8 +667,9 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
         --chrome-nav-bar-controls-border-color: transparent !important;
         --chrome-content-separator-color: rgba(0, 0, 0, 0) !important;
         --tabs-navbar-shadow-size: 0px !important;
-        --autocomplete-popup-highlight-background: hsl(234, 21%, 35%) !important;
+        --autocomplete-popup-highlight-background: var(--arrowpanel-dimmed-further) !important;
         --toolbarbutton-border-radius: var(--general-button-border-radius) !important;
+        --urlbar-icon-border-radius: var(--general-button-border-radius) !important;
         --lwt-accent-color: hsl(233, 61%, 8%) !important;
         --lwt-text-color: hsl(213, 43%, 89%) !important;
         --lwt-toolbar-field-background-color: hsla(233, 25%, 28%, 85%) !important;
@@ -707,6 +709,7 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
         --urlbar-input-bgcolor: hsla(233, 24%, 26%, 1) !important;
         --urlbar-input-bgcolor-brighter: hsla(233, 23%, 27.2%, 1) !important;
         --urlbar-input-bgcolor-even-brighter: hsla(233, 21%, 31%, 1) !important;
+        --urlbar-input-bgcolor-disabled: hsla(233, 24%, 26%, 0.5) !important;
         --urlbar-toolbar-height: var(--user-urlbar-container-height) !important;
         --urlbar-container-height: var(--user-urlbar-container-height) !important;
         --urlbar-height: calc(var(--urlbar-container-height) - 6px) !important;
@@ -742,6 +745,7 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
         --in-content-primary-button-background-active: var(--purple-30) !important;
         --autocomplete-popup-background: var(--arrowpanel-background) !important;
         --autocomplete-popup-color: var(--lwt-text-color) !important;
+        --autocomplete-popup-separator-color: var(--panel-separator-color) !important;
         --urlbarView-bgcolor: hsla(233, 38%, 9%, 0.8) !important;
         --ui-textbox-bgcolor: hsl(233, 24%, 28%) !important;
         --ui-textbox-focus-bgcolor: hsl(232, 22%, 34%) !important;
@@ -803,6 +807,7 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
             --arrowpanel-menuitem-inline-margin: 4px;
             --arrowpanel-menuitem-margin: 0px var(--arrowpanel-menuitem-inline-margin) !important;
             --arrowpanel-menuitem-padding: 6px !important;
+            --arrowpanel-padding: 12px !important;
             --panel-subview-body-padding-magnitude: var(--arrowpanel-menuitem-inline-margin);
             --panel-subview-body-padding: var(--panel-subview-body-padding-magnitude) 0 !important;
             --arrowpanel-menuitem-border-radius: 3px !important;
@@ -836,7 +841,7 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
         }
 
         #appMenu-multiView {
-            --arrowpanel-menuitem-inline-margin: 6px;
+            --arrowpanel-menuitem-inline-margin: 4px;
             --arrowpanel-menuitem-margin: 0px var(--arrowpanel-menuitem-inline-margin) !important;
             --arrowpanel-menuitem-padding: 8px !important;
             --panel-subview-body-padding-magnitude: var(--arrowpanel-menuitem-inline-margin);
@@ -1176,13 +1181,9 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
             box-shadow: var(--menupopup-shadow) !important;
         }
 
-        menuitem:not([disabled="true"]) :is(.menu-accel, .menu-iconic-accel)[value] {
-            color: var(--panel-shortcut-color);
-            margin-inline-start: 1.55em !important;
-        }
-
         :is(.menu-accel, .menu-iconic-accel)[value] {
             margin-inline: 1.55em calc(var(--menu-right-margin) + 4px) !important;
+            padding-block: 0 !important;
         }
 
         menuitem:not([disabled="true"]) :is(.menu-accel, .menu-iconic-accel) {
@@ -1593,6 +1594,7 @@ img.transparent {
         --context-menuitem-border-radius: 0px;
         --panel-separator-margin: 0px;
         --arrowpanel-menuitem-padding: 6px;
+        --arrowpanel-padding: 12px !important;
         background-color: var(--arrowpanel-background) !important;
     }
 
@@ -5330,5 +5332,705 @@ domain("wikimedia.org") {
     .mw-highlight .si,
     .mw-highlight .sr {
         color: #ffd5e6 !important;
+    }
+}
+
+@-moz-document domain("reddit.com") {
+    @media (prefers-color-scheme: dark) {
+        .ListingLayout-backgroundContainer {
+            --pseudo-before-background: rgb(15, 18, 23, 1) !important;
+        }
+
+        #2x-container > *,
+        ._1VP69d9lk-Wk9zokOaylL {
+            --background: rgb(15, 18, 23, 1) !important;
+            --canvas: rgb(15, 18, 23, 1) !important;
+            background-color: rgb(15, 18, 23, 1) !important;
+        }
+    }
+}
+
+@-moz-document domain("youtube.com") {
+    #movie_player .ytp-ce-element {
+        display: none !important;
+    }
+
+    .ytp-probably-keyboard-focus .ytp-button:focus {
+        box-shadow: unset !important;
+    }
+
+    .focused-line.paper-input-container {
+        border-color: hsl(0, 0%, 74.3%) !important;
+    }
+}
+
+@-moz-document domain("xvideos.com") {
+    #html5video #hlsplayer .video-loader {
+        display: none !important;
+    }
+}
+
+@-moz-document regexp("moz-extension://8d413415-fec4-4612-9717-941c64de177b/.*")
+{
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --bg-1: hsla(250, 13%, 9%, 1) !important;
+            --bg-1-border: hsla(250, 13%, 16%, 1) !important;
+            --bg-overlay-50: #0008 !important;
+            --link-ink: #bb86fc !important;
+            --checkbox-checked-ink: #bb86fc !important;
+            --dashboard-tab-active-ink: #bb86fc !important;
+            --fg-icon-info-lvl-0-dimmed: #888 !important;
+            --fg-icon-info-lvl-1-dimmed: hsla(258, 57%, 35%, 1) !important;
+            --fg-icon-info-lvl-1: hsla(258, 66%, 48%, 1) !important;
+            --fg-icon-info-lvl-3: hsla(16, 100%, 50%, 1) !important;
+            --fg-icon-info-lvl-4: hsla(0, 100%, 35%, 1) !important;
+            --large-icon-info-lvl-2: hsla(41, 100%, 47%, 1) !important;
+            --bg-popup-cell-allow: hsla(120, 40%, 75%, 1) !important;
+            --bg-popup-cell-allow-own: hsla(120, 100%, 30%, 1) !important;
+            --bg-popup-cell-noop: hsla(0, 0%, 75%, 1) !important;
+            --bg-popup-cell-noop-own: hsla(0, 0%, 45%, 1) !important;
+            --bg-popup-cell-block: hsla(0, 50%, 80%, 1) !important;
+            --bg-popup-cell-block-own: hsla(0, 100%, 40%, 1) !important;
+            --bg-popup-cell-label-mixed: hsla(45, 100%, 38%, 1) !important;
+            --popup-icon-x-ink: #e22850 !important;
+            --default-ink: var(--light-gray-10) !important;
+            --default-ink-a4: var(--light-gray-10-a4) !important;
+            --default-ink-a50: var(--light-gray-30-a50) !important;
+            --default-surface: var(--dark-gray-90) !important;
+            --default-surface-hover: var(--dark-gray-50) !important;
+            --bg-1: hsl(250, 13%, 9%) !important;
+            --bg-1-border: hsl(250.9, 13.6%, 15.9%) !important;
+            --bg-overlay-50: hsla(0, 0%, 0%, 0.5) !important;
+            --bg-code: hsla(0, 2%, 0%, 0.8) !important;
+            --fg-0-80: hsla(0, 0%, 53%, 0.8) !important;
+            --fg-0-70: hsla(0, 0%, 53%, 0.7) !important;
+            --fg-0-60: hsla(0, 0%, 53%, 0.6) !important;
+            --fg-0-50: hsla(0, 0%, 53%, 0.5) !important;
+            --fg-0-40: hsla(0, 0%, 53%, 0.4) !important;
+            --fg-0-30: hsla(0, 0%, 53%, 0.3) !important;
+            --fg-0-20: hsla(0, 0%, 53%, 0.2) !important;
+            --link-ink: hsl(266.9, 95.2%, 75.7%) !important;
+            --fieldset-header-surface: transparent !important;
+            --fieldset-header-ink: var(--light-gray-30) !important;
+            --hr-ink: var(--dark-gray-50) !important;
+            --button-surface-hover: var(--light-gray-10-a12) !important;
+            --button-disabled-filter: opacity(38%) !important;
+            --button-disabled-surface: var(--dark-gray-50) !important;
+            --bg-transient-notice: var(--dark-gray-50) !important;
+            --dashboard-bar-shadow: 0px 0px 0px 1px var(--default-ink-a4) !important;
+            --dashboard-tab-active-ink: hsl(266.9, 95.2%, 75.7%) !important;
+            --dashboard-tab-surface-hover: var(--default-surface-hover) !important;
+            --fg-icon-info-lvl-0-dimmed: hsl(0, 0%, 53.3%) !important;
+            --fg-icon-info-lvl-0: inherit !important;
+            --fg-icon-info-lvl-1-dimmed: hsl(258.2, 57.3%, 34.9%) !important;
+            --fg-icon-info-lvl-1: hsl(257.9, 65.7%, 48%) !important;
+            --info-lvl-2-ink: var(--yellow-50) !important;
+            --info-lvl-2-ink-hover: var(--yellow-60) !important;
+            --fg-icon-info-lvl-3-dimmed: hsla(16, 100%, 50%, 0.5) !important;
+            --fg-icon-info-lvl-3: hsl(16, 100%, 50%) !important;
+            --fg-icon-info-lvl-4-dimmed: hsla(0, 100%, 35%, 0.5) !important;
+            --fg-icon-info-lvl-4: hsl(0, 100%, 35.1%) !important;
+            --large-icon-info-lvl-2: hsl(41, 100%, 47.1%) !important;
+            --bg-tooltip: var(--dark-gray-50) !important;
+            --fg-tooltip: var(--light-gray-30) !important;
+            --bg-popup-cell-1: var(--dark-gray-50) !important;
+            --popup-power-disabled-ink: var(--light-gray-60) !important;
+            --popup-power-ink-hover: var(--dark-gray-30) !important;
+            --bg-popup-cell-2: var(--dark-gray-50) !important;
+            --bg-popup-cell-label-filter: opacity(40%) !important;
+            --fg-popup-cell-cname: hsla(0, 0%, 53%, 0.3) !important;
+            --bg-popup-cell-allow: hsl(120, 40.2%, 75.1%) !important;
+            --bg-popup-cell-allow-own: hsl(120, 100%, 30%) !important;
+            --bg-popup-cell-noop: hsl(0, 0%, 74.9%) !important;
+            --bg-popup-cell-noop-own: hsl(0, 0%, 45.1%) !important;
+            --bg-popup-cell-block: hsl(0, 50.5%, 80.2%) !important;
+            --bg-popup-cell-block-own: hsl(0, 100%, 40%) !important;
+            --bg-popup-cell-label-mixed: hsl(44.8, 100%, 38%) !important;
+            --popup-icon-x-ink: hsl(347.1, 76.2%, 52.2%) !important;
+            --cloud-widget-surface: var(--dark-gray-70) !important;
+            --cm-gutter-border: var(--dark-gray-70) !important;
+            --cm-gutter-ink: var(--light-gray-40) !important;
+            --cm-gutter-surface: var(--dark-gray-70) !important;
+            --cm-selection-surface: var(--dark-gray-30) !important;
+            --select-surface: var(--dark-gray-30) !important;
+            --cm-selection-ink: var(--default-ink) !important;
+            --button-surface: var(--light-gray-10-a12) !important;
+            --button-ink: var(--default-ink) !important;
+            --button-surface-hover: var(--dark-gray-30) !important;
+            --button-active-surface: var(--light-gray-70) !important;
+            --button-important-surface: var(--dark-gray-30) !important;
+            --button-important-surface-hover: var(--light-gray-60) !important;
+            --button-disabled-filter: opacity(68%) !important;
+            --button-disabled-surface: var(--dark-gray-70) !important;
+            --button-disabled-ink: var(--light-gray-30-a50) !important;
+            --button-preferred-surface: var(--dark-gray-50) !important;
+            --button-preferred-ink: var(--light-gray-70) !important;
+            --checkbox-size: calc(var(--font-size) + 2px) !important;
+            --checkbox-ink: var(--default-ink) !important;
+            --checkbox-checked-ink: hsl(266.9, 95.2%, 75.7%) !important;
+            --checkbox-hover-ink: hsl(266.9, 35.2%, 35.7%) !important;
+        }
+
+        body {
+            background-color: hsl(250, 13%, 9%) !important;
+        }
+
+        button:not(.disabled):not([disabled]) {
+            cursor: pointer !important;
+        }
+
+        #cloudWidget {
+            background-color: hsl(246.7, 11.7%, 15.1%) !important;
+        }
+
+        #actions {
+            background-color: hsl(250, 13%, 9%) !important;
+        }
+
+        .CodeMirror-cursor {
+            caret-color: white !important;
+            color: white !important;
+            border-color: white !important;
+        }
+
+        .CodeMirror-selected {
+            background: var(--dark-gray-70) !important;
+        }
+
+        .CodeMirror-focused .CodeMirror-selected {
+            background: var(--dark-gray-50) !important;
+        }
+
+        a:hover {
+            color: hsl(266.9, 99.2%, 85.7%) !important;
+        }
+
+        #cloudCapacity {
+            background-color: var(--dark-gray-30) !important;
+        }
+
+        .CodeMirror-activeline-background {
+            background: var(--dark-gray-70) !important;
+        }
+
+        input[type="search"],
+        input[type="number"] {
+            appearance: none !important;
+            appearance: none !important;
+            background-color: var(--dark-gray-30) !important;
+            color: var(--default-ink) !important;
+            border: none !important;
+            border-radius: 3px !important;
+            padding-block: 3px !important;
+            padding-inline: 5px !important;
+        }
+
+        input[type="number"] {
+            padding-inline-end: 3px !important;
+        }
+
+        input[type="number"]::-moz-number-spin-box {
+            border: none !important;
+            margin: 0 !important;
+            appearance: none !important;
+            background: none !important;
+            width: 16px;
+            height: 17px;
+            max-height: 17px;
+        }
+
+        input[type="number"]::-moz-number-spin-box:hover {
+            background: hsla(0, 0%, 0%, 0.2) !important;
+            border-radius: 4px !important;
+        }
+
+        input[type="number"]::-moz-number-spin-up,
+        input[type="number"]::-moz-number-spin-down {
+            appearance: none !important;
+            -moz-context-properties: fill, fill-opacity;
+            fill-opacity: 0.4;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="6" height="5"><path d="M1,4 L3,0 5,4" fill="context-fill" fill-opacity="context-fill-opacity"/></svg>');
+            background-size: 10px 6px !important;
+            background-position: bottom;
+            border: none;
+            border-radius: 0;
+        }
+
+        input[type="number"]::-moz-number-spin-down {
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="6" height="5"><path d="M1,1 L3,5 5,1" fill="context-fill" fill-opacity="context-fill-opacity"/></svg>');
+            background-position: top;
+        }
+
+        input[type="number"]::-moz-number-spin-down:hover,
+        input[type="number"]::-moz-number-spin-up:hover {
+            fill-opacity: 0.7;
+        }
+
+        .checkbox > input[type="checkbox"] + svg {
+            border: 1.5px solid var(--checkbox-ink) !important;
+        }
+
+        .checkbox > input[type="checkbox"]:checked + svg {
+            background-color: var(--checkbox-checked-ink);
+            border-color: var(--checkbox-checked-ink) !important;
+            stroke: var(--default-surface);
+        }
+
+        .checkbox > input[type="checkbox"]:not(:checked):hover + svg {
+            border-color: var(--checkbox-checked-ink) !important;
+            background-color: var(--checkbox-hover-ink) !important;
+            stroke: transparent !important;
+        }
+
+        select {
+            appearance: none !important;
+            appearance: none !important;
+            background-color: var(--dark-gray-30) !important;
+            color: var(--default-ink) !important;
+            border: none !important;
+            border-radius: 3px !important;
+            padding-block: 3px !important;
+            padding-inline: 3px !important;
+        }
+
+        select > option {
+            appearance: none !important;
+            appearance: none !important;
+            background-color: var(--dark-gray-30) !important;
+            color: var(--default-ink) !important;
+            border: none !important;
+        }
+
+        .cm-search-widget .fa-icon:not(.fa-icon-ro):hover {
+            fill: white !important;
+        }
+        .cm-search-widget .cm-search-widget-button:hover {
+            color: white !important;
+        }
+    }
+}
+
+@-moz-document domain("www.google.com") {
+    scrolling-carousel,
+    scrolling-carousel > div {
+        scrollbar-width: none !important;
+    }
+
+    #islsp {
+        float: left !important;
+    }
+}
+
+@-moz-document regexp("^(?!about:|chrome:).*") {
+    [data-thumb="1"] {
+        visibility: collapse;
+    }
+}
+
+@-moz-document url(moz-extension://482959ea-7a4a-4baa-900a-86fb03b08903/popup/index.html)
+{
+    :root {
+        --urlbar-popup-url-color: #6745ff !important;
+        --urlbar-popup-action-color: #e24479 !important;
+        --toolbarbutton-hover-background: hsla(236, 60%, 83%, 0.17) !important;
+        --toolbarbutton-active-background: hsla(236, 60%, 85%, 0.25) !important;
+        --lwt-additional-images: url("moz-extension://a881e65b-0464-4a83-8e5c-124f87e00995/images/bg-000-5672c42860d5b06e1058dc477397f3ef.svg") !important;
+        --panel-disabled-color: var(--context-menu-disabled-color) !important;
+        --arrowpanel-background: rgb(28, 32, 49) !important;
+        --arrowpanel-color: rgb(215, 226, 239) !important;
+        --lwt-toolbar-field-color: hsl(240, 60%, 99%);
+        --lwt-background-alignment: top !important;
+        --lwt-background-tiling: repeat !important;
+        --toolbar-color: rgb(255, 255, 255) !important;
+        --autocomplete-popup-background: rgb(23, 25, 40) !important;
+        --autocomplete-popup-color: rgb(215, 226, 239) !important;
+        --toolbarbutton-icon-fill-opacity: 1 !important;
+        --default_tab_border_roundness: 5px;
+        --tab_close_icons_size: 16px;
+        --tabs-border: transparent !important;
+        --toolbox-border-bottom-color: transparent !important;
+        --chrome-nav-bar-controls-border-color: transparent !important;
+        --tabs-navbar-shadow-size: 0px !important;
+        --lwt-toolbarbutton-icon-fill: rgb(255, 255, 255) !important;
+        --arrowpanel-dimmed: rgba(170, 175, 255, 0.17) !important;
+        --arrowpanel-dimmed-further: rgba(170, 175, 255, 0.25) !important;
+        --arrowpanel-dimmed-even-further: rgba(180, 185, 255, 0.3) !important;
+        --desaturate-dimmed: hsla(236, 60%, 83%, 0.17) !important;
+        --desaturate-dimmed-further: hsla(236, 60%, 83%, 0.25) !important;
+        --desaturate-dimmed-even-further: hsla(236, 60%, 85%, 0.3) !important;
+        --urlbar-height: 33px !important;
+        --lwt-toolbarbutton-icon-fill-attention: rgb(106, 145, 255) !important;
+        --lwt-accent-color: rgb(8, 11, 33);
+        --lwt-text-color: rgba(215, 226, 239);
+        --lwt-toolbar-field-background-color: rgb(54, 58, 89);
+        --lwt-toolbar-field-focus: rgba(54, 58, 89, 1);
+        --toolbar-bgcolor: hsl(233, 42%, 15%);
+        --sub-text: rgba(255, 255, 255, 0.6) !important;
+        --highlight: rgba(130, 152, 255, 0.9) !important;
+        border-radius: 3px !important;
+        background: none !important;
+    }
+
+    html {
+        border-radius: 3px !important;
+        background: none !important;
+    }
+
+    body {
+        background-color: var(--arrowpanel-background) !important;
+        color: var(--arrowpanel-color) !important;
+        border-radius: 3px !important;
+    }
+
+    .react-toggle--disabled {
+        cursor: not-allowed;
+        opacity: 1 !important;
+        -webkit-transition: all 0.25s;
+        transition: all 0.25s;
+    }
+
+    .react-toggle-thumb {
+        border-color: transparent !important;
+    }
+
+    #header {
+        background: none !important;
+    }
+
+    .title {
+        color: var(--arrowpanel-color) !important;
+    }
+
+    :is(textarea, select) {
+        background-color: var(--lwt-toolbar-field-background-color) !important;
+        color: var(--lwt-toolbar-field-color) !important;
+        border: 1px solid transparent !important;
+    }
+
+    :is(textarea, select):focus-within {
+        background-color: var(--arrowpanel-dimmed-further) !important;
+        color: var(--lwt-toolbar-field-color) !important;
+        border-color: var(--highlight) !important;
+    }
+
+    #footer .selectWrap::before {
+        background: none !important;
+        color: var(--lwt-toolbar-field-color) !important;
+        fill: var(--lwt-toolbar-field-color) !important;
+    }
+
+    #footer .selectWrap:hover::before {
+        border-color: white !important;
+    }
+
+    select {
+        background-color: var(--lwt-toolbar-field-background-color) !important;
+        color: var(--lwt-toolbar-field-color) !important;
+        border-color: transparent !important;
+    }
+
+    #footer .selectWrap select:is(:focus-within, :hover) {
+        border-color: var(--highlight) !important;
+    }
+
+    body hr {
+        border-color: var(--desaturate-dimmed-even-further) !important;
+    }
+
+    #resultArea {
+        background-color: var(--arrowpanel-background) !important;
+        color: var(--arrowpanel-color) !important;
+    }
+
+    .resultText,
+    .candidateText,
+    .mediaButtons,
+    .mediaButtons * {
+        background: none !important;
+        fill: var(--arrowpanel-color) !important;
+    }
+
+    .copy {
+        display: none !important;
+    }
+}
+
+#simple-translate .simple-translate-button {
+    background-color: rgba(48, 48, 50, 0.97) !important;
+    -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity !important;
+    fill: rgba(255, 255, 255, 0.9) !important;
+    box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.23), 0 0 2px 1px rgba(0, 0, 0, 0.02) !important;
+}
+
+@-moz-document domain("subscene.com") {
+    #content {
+        width: -moz-available !important;
+        padding-inline: 250px !important;
+    }
+
+    .subtitles td.comment,
+    .subtitles td.a6 div {
+        width: -moz-available !important;
+    }
+
+    .subtitles td.comment,
+    .subtitles td.a6 div {
+        white-space: normal !important;
+    }
+
+    .subtitles td {
+        overflow: scroll !important;
+        white-space: normal !important;
+    }
+
+    .subtitles td.a1 span,
+    .subtitles td.a5,
+    .subtitles td.comment,
+    .subtitles td.a6 div {
+        overflow: scroll !important;
+        white-space: normal !important;
+    }
+
+    .content table tbody tr td {
+        padding-inline: 20px !important;
+        overflow: scroll !important;
+    }
+
+    .subtitles td:not(.a5) a:hover {
+        background-color: hsla(0, 0%, 100%, 0.1) !important;
+        border-radius: 3px !important;
+        width: -moz-fit-content !important;
+        padding-inline-end: 6px !important;
+    }
+
+    .subtitles td.a5 a:hover {
+        text-decoration: underline !important;
+    }
+
+    .subtitles td.a1 span.l {
+        overflow: hidden !important;
+        white-space: nowrap !important;
+    }
+}
+
+@-moz-document domain("github1s.com") {
+    body {
+        background-color: hsl(0, 0%, 11.8%);
+    }
+
+    .lds-roller div::after {
+        background: hsla(0, 0%, 100%, 0.9) !important;
+    }
+}
+
+@-moz-document domain("github.com"), domain("gist.github.com"), domain("github.community") {
+    .rgh-monospace-textareas #merge_title_field,
+    .rgh-monospace-textareas #commit-summary-input,
+    .rgh-monospace-textareas textarea {
+        font-family: Overpass Mono, -moz-fixed !important;
+        font-weight: 100 !important;
+    }
+
+    .blob-code-inner,
+    .markdown-body pre > code,
+    .markdown-body .highlight > pre {
+        white-space: pre-wrap !important;
+        word-break: break-word !important;
+        overflow-wrap: break-word !important;
+    }
+
+    /* GitHub Bug: Enable wrapping of long code lines */
+    body:not(.nowrap) .blob-code-inner,
+    body:not(.nowrap) .markdown-body pre > code,
+    body:not(.nowrap) .markdown-body .highlight > pre {
+        white-space: pre-wrap !important;
+        word-break: break-word !important;
+        overflow-wrap: break-word !important;
+        display: block !important;
+    }
+
+    body:not(.nowrap) td.blob-code-inner {
+        display: table-cell !important;
+    }
+
+    a.btn[href*="github1s.com"] {
+        color: transparent !important;
+        width: min-content !important;
+        font-size: 0 !important;
+    }
+
+    a.btn[href*="github1s.com"]::after {
+        color: var(--color-btn-primary-text) !important;
+        content: "Github1s" !important;
+        display: inline-block !important;
+        position: relative !important;
+        font-size: 14px;
+        font-weight: 500;
+        position: relative;
+        line-height: 20px;
+        white-space: nowrap;
+        vertical-align: middle;
+        cursor: pointer;
+    }
+
+    a.btn[href*="github1s.com"] {
+        background-color: var(--color-btn-primary-bg) !important;
+        border-color: var(--color-btn-primary-border) !important;
+    }
+
+    a.btn[href*="github1s.com"]:hover,
+    a.btn[href*="github1s.com"]:hover:active,
+    a.btn[href*="github1s.com"]:hover:focus {
+        background-color: var(--color-btn-primary-hover-bg) !important;
+        border-color: var(--color-btn-primary-hover-border) !important;
+    }
+
+    a.btn[href*="github1s.com"]:active {
+        background-color: var(--color-btn-primary-selected-bg) !important;
+    }
+
+    a.btn[href*="github1s.com"]:focus {
+        background-color: var(--color-btn-primary-focus-bg) !important;
+        border-color: var(--color-btn-primary-focus-border) !important;
+    }
+
+    .container-xl {
+        max-width: 75% !important;
+    }
+}
+
+@-moz-document regexp("^https?://((education|graphql|guides|raw|resources|status|developer|support|vscode-auth)\\.)?github\\.com/((?!(sponsors)).)*$"),
+    domain("gist.github.com") {
+    .treeViewGitHubDarkStyles
+        .octotree-sidebar.octotree-github-sidebar
+        .octotree-views
+        .octotree-view.octotree-tree-view
+        .jstree-wholerow-clicked,
+    html:not([data-octotree-theme])[data-color-mode="dark"]
+        .octotree-sidebar.octotree-github-sidebar
+        .octotree-views
+        .octotree-view.octotree-tree-view
+        .jstree-wholerow-clicked,
+    html[data-octotree-theme]
+        .octotree-sidebar.octotree-github-sidebar
+        .octotree-views
+        .octotree-view.octotree-tree-view
+        li[role].jstree-node
+        .jstree-wholerow-clicked {
+        background: var(--color-border-primary) !important;
+    }
+
+    .octotree-sidebar.octotree-github-sidebar
+        .octotree-views
+        .octotree-view.octotree-tree-view
+        .jstree-default
+        .jstree-wholerow-hovered {
+        background: var(--color-btn-outline-hover-bg) !important;
+    }
+
+    .jstree-node:not(.jstree-leaf) > .jstree-icon.jstree-ocl {
+        filter: none !important;
+    }
+
+    .octotree-sidebar.octotree-github-sidebar .octotree-ads {
+        background-color: var(--color-btn-outline-hover-bg) !important;
+    }
+
+    .octotree-sidebar .octotree-search-bar {
+        background-color: hsl(0, 0%, 11.8%) !important;
+        height: 61.5px !important;
+        width: calc(100% - 1.4px) !important;
+    }
+
+    .searchGitHubDarkStyles
+        .octotree-sidebar.octotree-github-sidebar
+        .octotree-views
+        .octotree-view.octotree-tree-view
+        li[role].jstree-node
+        .jstree-anchor
+        .octotree-search-match,
+    html:not([data-octotree-theme])[data-color-mode="dark"]
+        .octotree-sidebar.octotree-github-sidebar
+        .octotree-views
+        .octotree-view.octotree-tree-view
+        li[role].jstree-node
+        .jstree-anchor
+        .octotree-search-match {
+        color: hsl(0, 0%, 86.7%) !important;
+        background-color: hsla(245, 50%, 15.3%, 0.4) !important;
+        border: 1px solid hsl(260, 45.9%, 38.3%) !important;
+        border-radius: 6px;
+    }
+
+    .octotree-sidebar .octotree-search-bar .octotree-close-search {
+        line-height: normal;
+        height: unset !important;
+    }
+
+    .octotree-sidebar .jstree-icon {
+        filter: none !important;
+    }
+
+    html:not([data-octotree-theme])[data-color-mode="dark"]
+        .octotree-sidebar.octotree-github-sidebar
+        .octotree-views
+        input[type="text"]:focus,
+    html:not([data-octotree-theme])[data-color-mode="dark"]
+        .octotree-sidebar.octotree-github-sidebar
+        .octotree-views
+        select:focus {
+        background-color: hsl(0, 0%, 10.4%) !important;
+        border-color: var(--color-input-border) !important;
+        outline: 0 !important;
+        box-shadow: none !important;
+    }
+
+    .octotree-sidebar {
+        background-image: var(--ghd-bg-custom) !important;
+    }
+
+    .octotree-sidebar.octotree-github-sidebar .octotree-views .octotree-view .octotree-view-header,
+    .octotree .octotree-sidebar.octotree-github-sidebar .octotree-footer {
+        background: hsla(0, 0%, 9.4%, 0.5) !important;
+    }
+
+    .octotree-views {
+        background-color: hsla(0, 0%, 12.5%, 0.4) !important;
+    }
+
+    .octotree-sidebar.octotree-github-sidebar .ui-resizable-handle {
+        cursor: ew-resize !important;
+    }
+
+    [data-color-mode="dark"] {
+        --color-search-hover-hl: var(--color-scale-gray-2) !important;
+    }
+
+    #tree-browser {
+        border-radius: 6px;
+        overflow: hidden;
+    }
+}
+
+/* New tab page */
+@-moz-document regexp("moz-extension://.*/newtab.html")
+{
+    textarea::selection,
+    ::selection {
+        color: var(--content-selection-color) !important;
+        background-color: var(--content-selection-bgcolor) !important;
+        border-radius: 2px !important;
+    }
+}
+
+/* youtube */
+@-moz-document domain("youtube.com") {
+    .ytp-probably-keyboard-focus .ytp-progress-bar:focus {
+        box-shadow: none !important;
+    }
+
+    .ytp-chapter-container {
+        max-width: -moz-fit-content;
     }
 }

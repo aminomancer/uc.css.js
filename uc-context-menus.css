@@ -355,6 +355,7 @@ menulist:-moz-focusring > menupopup.in-menulist > menuitem[_moz-menuactive="true
 
     :is(.menu-accel, .menu-iconic-accel)[value] {
         margin-inline: 1.55em calc(var(--menu-right-margin) + 4px) !important;
+        padding-block: 0 !important;
     }
 
     menuitem:not([disabled="true"]) :is(.menu-accel, .menu-iconic-accel) {

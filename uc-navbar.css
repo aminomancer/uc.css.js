@@ -405,14 +405,17 @@ you can test them by pasting this in the browser console and hitting enter:
 {let notificationTest = gBrowser.getNotificationBox(gBrowser.selectedBrowser); notificationTest.appendNotification("This is a demo notification", null, null, notificationTest.PRIORITY_INFO_HIGH);}
 
 these are the notifications that appear permanently (until closed) under the navbar, shaped like long bars.
-by default they stack vertically and push the browser content down which is quite a waste. instead we flex them horizontally.
-notification row is scrollable (when overflown) with mousewheel right/left (or up/down if mousewheel.autodir.enabled = true)
+by default they stack vertically and push the browser content down which is quite a waste.
+instead we flex them horizontally and float them over the content area with absolute positioning.
+notification row is scrollable (when overflown) with mousewheel right/left.
+(or mousewheel up/down if mousewheel.autodir.enabled = true. setting that up without the pref is difficult for these elements)
 notification icons/close buttons are animated with a similar slide+zoom motif to tab icons/close buttons.
 notifications are translucent with acrylic effect. enable layout.css.backdrop-filter.enabled */
 
 @media (-moz-proton) {
     #navigator-toolbox > :is(legacy-stack, .notificationbox-stack),
-    #navigator-toolbox > named-deck > :is(legacy-stack, .notificationbox-stack) {
+    #navigator-toolbox > named-deck > :is(legacy-stack, .notificationbox-stack),
+    #navigator-toolbox .global-notificationbox {
         display: flex !important;
         flex-flow: row nowrap !important;
         position: absolute !important;
@@ -420,13 +423,15 @@ notifications are translucent with acrylic effect. enable layout.css.backdrop-fi
         max-height: 74px !important;
         background: none !important;
         width: 100% !important;
+        pointer-events: none !important;
         overflow: scroll !important;
         scrollbar-width: none !important;
         gap: 5px !important;
     }
 
     #navigator-toolbox > :is(legacy-stack, .notificationbox-stack) notification-message,
-    #navigator-toolbox > named-deck > .notificationbox-stack notification-message {
+    #navigator-toolbox > named-deck > .notificationbox-stack notification-message,
+    #navigator-toolbox .global-notificationbox notification-message {
         margin: 0 !important;
         border-radius: 0 !important;
         display: inline-block !important;
@@ -434,6 +439,7 @@ notifications are translucent with acrylic effect. enable layout.css.backdrop-fi
         max-width: 100vh !important;
         transition: margin-top 100ms linear, max-width 100ms ease-in-out !important;
         flex-basis: 10% !important;
+        pointer-events: auto !important;
         --in-content-button-background: var(--desaturate-dimmed) !important;
         --in-content-button-background-hover: var(--desaturate-dimmed-further) !important;
         --in-content-button-background-active: var(--desaturate-dimmed-even-further) !important;
@@ -446,21 +452,24 @@ notifications are translucent with acrylic effect. enable layout.css.backdrop-fi
     #navigator-toolbox
         > :is(legacy-stack, .notificationbox-stack, named-deck)
         notification-message[type="critical"],
-    #navigator-toolbox > named-deck > .notificationbox-stack notification-message[type="critical"] {
+    #navigator-toolbox > named-deck > .notificationbox-stack notification-message[type="critical"],
+    #navigator-toolbox .global-notificationbox notification-message[type="critical"] {
         flex-grow: 0.15 !important;
     }
 
     #navigator-toolbox
         > :is(legacy-stack, .notificationbox-stack, named-deck)
         notification-message[type="warning"],
-    #navigator-toolbox > named-deck > .notificationbox-stack notification-message[type="warning"] {
+    #navigator-toolbox > named-deck > .notificationbox-stack notification-message[type="warning"],
+    #navigator-toolbox .global-notificationbox notification-message[type="warning"] {
         flex-grow: 0.03 !important;
     }
 
     #navigator-toolbox
         > :is(legacy-stack, .notificationbox-stack, named-deck)
         notification-message[type="info"],
-    #navigator-toolbox > named-deck > .notificationbox-stack notification-message[type="info"] {
+    #navigator-toolbox > named-deck > .notificationbox-stack notification-message[type="info"],
+    #navigator-toolbox .global-notificationbox notification-message[type="info"] {
         flex-grow: 0.01 !important;
     }
 
@@ -487,7 +496,10 @@ notifications are translucent with acrylic effect. enable layout.css.backdrop-fi
     #navigator-toolbox
         > named-deck
         > .notificationbox-stack
-        > notification-message[style="margin-top: -32px; opacity: 0;"] {
+        > notification-message[style="margin-top: -32px; opacity: 0;"],
+    #navigator-toolbox
+        .global-notificationbox
+        notification-message[style="margin-top: -32px; opacity: 0;"] {
         margin-top: -32px !important;
         max-width: 1px !important;
         transition: margin-top 100ms linear, max-width 100ms ease-in-out, opacity 100ms ease-in-out !important;
