@@ -9,7 +9,7 @@
     const builtInSidebars = ["Bookmarks", "History", "Tabs"];
     function init() {
         for (let type of builtInSidebars) {
-            SidebarUI._sidebars.get(
+            SidebarUI.sidebars.get(
                 `view${type}Sidebar`
             ).buttonId = `sidebar-switcher-${type.toLowerCase()}`;
         }

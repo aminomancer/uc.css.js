@@ -27,6 +27,12 @@ let EXPORTED_SYMBOLS = [];
             }
             return dir;
         }
+        getChromePath(win) {
+            return Services.io
+                .getProtocolHandler("file")
+                .QueryInterface(win.Ci.nsIFileProtocolHandler)
+                .getURLSpecFromDir(this.traverseToMainProfile(win, "UChrm"));
+        }
         loadSheet(win, path, name, type) {
             let sss = win.Cc["@mozilla.org/content/style-sheet-service;1"].getService(
                 win.Ci.nsIStyleSheetService
@@ -35,12 +41,30 @@ let EXPORTED_SYMBOLS = [];
                 sss.loadAndRegisterSheet(win.Services.io.newURI(path + name), sss[type]);
             } catch (e) {}
         }
+        unloadSheet(win, path, name, type) {
+            let sss = win.Cc["@mozilla.org/content/style-sheet-service;1"].getService(
+                win.Ci.nsIStyleSheetService
+            );
+            try {
+                sss.unegisterSheet(win.Services.io.newURI(path + name), sss[type]);
+            } catch (e) {}
+        }
         observe(sub) {
             if (this.lastSubject === sub) return;
             this.lastSubject = sub;
-            sub.addEventListener("DOMContentLoaded", this, true);
+            sub.addEventListener("DOMContentLoaded", this, true, { once: true });
         }
         handleEvent(e) {
+            switch (e.type) {
+                case "DOMContentLoaded":
+                    this._onContentLoaded(e);
+                    break;
+                case "uninit":
+                    this._onWindowUninit(e);
+                    break;
+            }
+        }
+        _onContentLoaded(e) {
             let document = e.originalTarget;
             let win = document.defaultView;
             this.lastSubject.removeEventListener("DomContentLoaded", this, true);
@@ -51,12 +75,24 @@ let EXPORTED_SYMBOLS = [];
                 !this.regex.test(win.location.href)
             )
                 return;
-            const path = Services.io
-                .getProtocolHandler("file")
-                .QueryInterface(win.Ci.nsIFileProtocolHandler)
-                .getURLSpecFromDir(this.traverseToMainProfile(win, "UChrm"));
+            const path = this.getChromePath(win);
             this.loadSheet(win, path, "userChrome.css", "AGENT_SHEET");
             this.loadSheet(win, path, "userContent.css", "USER_SHEET");
+            win.addEventListener("uninit", this);
+        }
+        _onWindowUninit(e) {
+            let win = e.target;
+            if (
+                !Services.dirsvc
+                    .get("UChrm", Ci.nsIFile)
+                    .target.includes("chrome_debugger_profile") ||
+                !this.regex.test(win.location.href)
+            )
+                return;
+            const path = this.getChromePath(win);
+            this.unloadSheet(win, path, "userChrome.css", "AGENT_SHEET");
+            this.unloadSheet(win, path, "userContent.css", "USER_SHEET");
+            win.removeEventListener("uninit", this);
         }
     }
 

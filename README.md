@@ -17,7 +17,7 @@ My personal Firefox theme/layout, plus some privileged scripts to add new behavi
 <br/>
 <p></p>
 
-For best results, set density mode to `Normal` and theme to `Dark` in the customization menu. (right click on the navbar and click "Customize Toolbar...") I recommend using this on Firefox Nightly, updating at least weekly, and setting the following prefs in about:config:<details><summary>***Click for a full list.***</summary>
+For best results, set density mode to `Normal` and theme to `Dark` in the customization menu. (right click on the navbar and click "Customize Toolbar...") I strongly recommend using this on [Firefox Nightly](https://www.mozilla.org/en-US/firefox/channel/desktop/#nightly) and updating the theme at least weekly. To that end, you might find it easier to clone the repo to your chrome folder so you can pull updates quickly. I also recommend setting the following prefs in about:config: (some of these are required, others are optional)<details><summary>***Click for a full list.***</summary>
 | Pref&nbsp;name 	| Type 	| Value 	| Notes&nbsp;(optional&nbsp;unless&nbsp;otherwise&nbsp;noted) 	|
 |-	|-	|-	|-	|
 | browser.anchor_color 	| String 	| `#5311ff` 	|  	|
@@ -76,21 +76,23 @@ For best results, set density mode to `Normal` and theme to `Dark` in the custom
 | widget.disable-native-theme-for-content 	| Boolean 	| true 	| Enables Firefox's custom appearance for elements like checkboxes. Skips the "native" appearance given by the OS stylesheets. 	|
 </details>
 
-The `userContent.css` file handles stuff like the devtools, some UI pages and context menus, plaintext pages, browser background color while pages are loading, and the built-in HTML video player. It also includes some site-specific changes like my personal dark mode layout for Wikipedia. It isn't required for the rest of the theme to work, but takes care of some issues endemic to Firefox that might cause dark mode users a lot of grief otherwise.
+This theme requires more technical setup than most because it changes a lot of lower-level stuff like javascript methods and icon/animation source code, but if you follow the instructions fully it'll work for anyone on any modern desktop OS, regardless of background knowledge. It requires [**fx-autoconfig**](https://github.com/MrOtherGuy/fx-autoconfig) to register the icon package. This *specific* loader is required for most of my scripts too. Some other scripts are not compatible with it, but I can port them so feel free to post an issue/discussion on here to make a request.
 
-This theme requires [**fx-autoconfig**](https://github.com/MrOtherGuy/fx-autoconfig) or some other javascript loader to register the icon package. Download the [resources](/resources) folder and place it in your `chrome` folder — fx-autoconfig will automatically register it. For extra completeness, you can download [utils/chrome.manifest](/utils/chrome.manifest) to deal with some of the trickier icons. Replace the one from fx-autoconfig with mine, then make sure to rename your `JS` folder to `script`, or change the line in the manifest file. This will strictly redirect some `chrome://` URIs from the vanilla icons to icons from this theme, so the changes will apply globally, even in markup.
+Download the [resources](/resources) folder and place it in your `chrome` folder — fx-autoconfig will automatically register it to the path `chrome://userchrome/content/`. For extra completeness, I also strongly recommend downloading [utils/chrome.manifest](/utils/chrome.manifest) to deal with some of the trickier icons. Replace the file from fx-autoconfig with mine. This will strictly redirect some `chrome://` URIs from the vanilla icons to icons from this theme, so the changes will apply globally, even in markup. This makes it *much* easier to change icons, and makes it possible to customize some icons that would be simply impossible to change otherwise. By default, fx-autoconfig expects scripts to be in folder called `JS`, whereas mine are in `script`. Replacing the manifest with mine changes this, so make sure your script folder is called `script`.
 
-`userChrome.css` doesn't require any fonts, but `userContent.css` uses [Overpass](https://fonts.google.com/specimen/Overpass), [Overpass Mono](https://fonts.google.com/specimen/Overpass+Mono) and [Cutive Mono](https://fonts.google.com/specimen/Cutive+Mono) for plaintext files and the picture-in-picture button. Since they're free and show up frequently, it makes sense to install them locally rather than use webfont.
+The `userContent.css` file handles stuff like the devtools, some UI pages and context menus, plaintext pages, browser background color while pages are loading, and the built-in HTML video player. It also includes some site-specific changes like my personal dark mode layout for Wikipedia. The Firefox UI is increasingly integrated with content browsers. Sometimes you're looking at a content browser and you don't even realize it. For example, several modal dialogs that appear to be part of the parent process are actually content. So `userContent.css` isn't required for the rest of the theme to work, but without it you'll find some elements look inconsistent with the theme, and it also takes care of some issues that make the fabled global dark mode harder to realize.
 
-To get the complete functionality [shown in the video](https://youtu.be/BAuABH13ytM), you'll need to install at least some of the scripts. The stylesheets work fine without the scripts, but functionally it'll be just like vanilla Firefox. Instructions and explanations for the scripts are below.
+`userChrome.css` doesn't require any fonts, but `userContent.css` uses [Overpass](https://fonts.google.com/specimen/Overpass) and [Overpass Mono](https://fonts.google.com/specimen/Overpass+Mono) for plaintext files and the picture-in-picture button. Since they're free and show up frequently, it makes sense to install them locally rather than use webfont.
 
-Most of the important colors can be changed in [uc-globals.css](/uc-globals.css) and [uc-variables.css](/uc-variables.css), but I'm still in the process of making everything easily configurable and adding a light mode. It's just a theme I built for personal use over the course of a couple years, so there isn't much top-down organization at the moment.
+To get the complete functionality [shown in the video](https://youtu.be/BAuABH13ytM), you'll need to install at least some of the scripts. The stylesheets work fine without the scripts, but functionally it'll be just like vanilla Firefox. Instructions and explanations for the scripts are [below](#installation).
+
+Most of the important colors can be changed in [uc-globals.css](/uc-globals.css) and [uc-variables.css](/uc-variables.css). Changing the hues is easy, but at the moment I wouldn't recommend trying to convert it to a "light" color scheme. Also, instead of modifying uc-globals and uc-variables directly, it'll be easier to make your own stylesheet that overrides the variables. Then you can just add `@import url(uc-overrides.css);` to the end of [userChrome.css](/userChrome.css) so it'll win over the theme.
 
 <h2><b>Scripts:</b></h2>
 
 The files in the scripts folder are not content scripts like you'd load in Tampermonkey. They're meant to execute in the same context as Firefox's internal scripts. They're scripts for the Firefox frontend itself rather than for webpages. This is sort of analogous to gaining "privileges" to modify your UI document directly. With CSS alone you can only do so much. Even a lot of purely aesthetic features may require JavaScript, like the search engine icons shown in the GIF above.
 
-They need to be loaded by an autoconfig script loader. I recommend [**fx-autoconfig by MrOtherGuy**](https://github.com/MrOtherGuy/fx-autoconfig) which is extremely robust. Some of my scripts are not fully compatible with loaders other than MrOtherGuy's because they don't support loading scripts into the global execution context before windows have been initialized. (The theme itself needs a javascript loader, and is designed for this particular one, but if you know how to register a manifest file then you can use any loader)
+They need to be loaded by an autoconfig script loader. I recommend [**fx-autoconfig by MrOtherGuy**](https://github.com/MrOtherGuy/fx-autoconfig) which is extremely robust. Some of my scripts are not fully compatible with loaders other than MrOtherGuy's. In particular, most will be incompatible with xiaoxiaoflood's loader. The theme itself needs a javascript loader to register the icon resources too, and it's designed for fx-autoconfig, but if you know how to register a manifest file then you can use any loader. Icons can be loaded other ways, but registering a manifest is the only way to make the paths work in any context. Everyone's absolute paths are different, and relative paths like `./icon.svg` would break down if the referring script or stylesheet was loaded from an unexpected or data path, which this theme does in a few cases.
 
 <h3><b>Installation:</b></h3>
 
@@ -99,13 +101,13 @@ You first need to find your Firefox installation folder. On Windows that's `C:/P
 2) &nbsp; a folder called `defaults` in the root directory;
 3) &nbsp; a folder called `pref` inside that `defaults` folder;
 4) &nbsp; a file called `config-prefs.js` inside that `pref` folder;
-5) &nbsp; a `JS` folder (or `script` if you're using my chrome.manifest file) in your profile's `chrome` folder;
+5) &nbsp; a `JS` folder in your profile's chrome folder; (rename it to `script` if you're using my theme and/or my `chrome.manifest` file)
 6) &nbsp; a `resources` folder in your `chrome` folder, containing all the icons (assuming you're using the theme or the toolbox button script);
 6) &nbsp; a `utils` folder in your `chrome` folder, containing `chrome.manifest` and `boot.jsm`
 
 You may already have a file called `channel-prefs.js` inside the `prefs` folder. This is unrelated.
 
-If you're using fx-autoconfig like I recommended, then your scripts should go in the `JS` folder by default. You should rename it `script` if you're planning to use my `chrome.manifest` file. This has no effect on any of the scripts, it's only done so we can override certain icon files. Any agent sheets or author sheets (files ending in .as.css or .au.css) should go in the `chrome` folder with your regular stylesheets.
+If you're using fx-autoconfig like I recommended, then your scripts should go in the `JS` folder by default. You should rename it `script` if you're planning to use my theme or `chrome.manifest` file. This has no effect on most of the scripts, it's only done so we can give our own icons `chrome://` paths. Any agent sheets or author sheets (files ending in .as.css or .au.css) should go in the `chrome` folder with your regular stylesheets.
 
 <h3><b>Usage:</b></h3>
 
@@ -250,6 +252,6 @@ And if you have a lot of your own customizations, you'll probably need to make s
 
 -   [urlbarViewScrollSelect](/script/urlbarViewScrollSelect.uc.js): This script lets you cycle through urlbar results with mousewheel up/down, and invoke the current selected result by right-clicking anywhere in the urlbar results area. Nothing too special, just makes one-handed operation with a trackpad a little easier. Scroll events are limited proportionally to their magnitude, so it should be comfortable to scroll with any kind of input device, even including a trackpad or ball.
 
--   [userChrome_as_css_module](/script/userChrome_as_css_module.uc.js): Required for loading userChrome.au.css and userChrome.as.css.
+-   [userChrome_as_css_module](/script/userChrome_as_css_module.uc.js): Required for loading userChrome.au.css and userChrome.as.css. It will actually load any file in the chrome folder that ends in `au.css`, `au.css`, or `us.css`. Files ending in `au.css` will be loaded as author sheets, `as.css` as agent sheets, and `us.css` as user sheets. User sheets are roughly equivalent to userChrome.css, so probably aren't necessary for anything, but the functionality is there in the unlikely event you ever need it.
 
 -   [userChrome_devtools_module](/script/userChrome_devtools_module.uc.js): Required for loading stylesheets into browser toolbox windows. [See here](#styling-browser-toolbox-windows) for more info.

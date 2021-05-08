@@ -2,7 +2,7 @@
 // @name           Agent/Author Sheet Loader
 // @namespace      userChrome_Agent_Author_Sheet_CSS_module
 // @version        2.0
-// @note           Load userChrome.as.css file as agent sheet and userChrome.au.css file as author sheet
+// @note           Load *.as.css files as agent sheets and *.au.css files as author sheets. Will also load *.us.css files as user sheets, in case you ever need that for some reason.
 // @backgroundmodule
 // ==/UserScript==
 
@@ -22,18 +22,41 @@ let EXPORTED_SYMBOLS = [];
         }
         return dir;
     }
-    const path = Services.io
-        .getProtocolHandler("file")
-        .QueryInterface(Ci.nsIFileProtocolHandler)
-        .getURLSpecFromDir(traverseToMainProfile("UChrm"));
-    try {
-        sss.loadAndRegisterSheet(Services.io.newURI(path + "userChrome.as.css"), sss.AGENT_SHEET);
-    } catch (e) {
-        console.error(`Could not load userChrome.as.css: ${e.name}`);
-    }
-    try {
-        sss.loadAndRegisterSheet(Services.io.newURI(path + "userChrome.au.css"), sss.AUTHOR_SHEET);
-    } catch (e) {
-        console.error(`Could not load userChrome.au.css: ${e.name}`);
+
+    let chromeDir = traverseToMainProfile("UChrm");
+    let files = chromeDir.directoryEntries.QueryInterface(Ci.nsISimpleEnumerator);
+    if (!files) return;
+    while (files.hasMoreElements()) {
+        let file = files.getNext().QueryInterface(Ci.nsIFile);
+        let name = file.leafName;
+        if (!file.isFile()) continue;
+        if (/\.(?:au||as||us)\.css$/i.test(name)) {
+            let typePrefix = name.split(".")[1];
+            let type, typeString;
+            switch (typePrefix) {
+                case "au":
+                    type = sss.AUTHOR_SHEET;
+                    typeString = "author sheet";
+                    break;
+                case "as":
+                    type = sss.AGENT_SHEET;
+                    typeString = "agent sheet";
+                    break;
+                case "us":
+                    type = sss.USER_SHEET;
+                    typeString = "user sheet";
+                    break;
+            }
+            let uri = Services.io
+                .getProtocolHandler("file")
+                .QueryInterface(Ci.nsIFileProtocolHandler)
+                .getURLSpecFromDir(chromeDir);
+            try {
+                sss.loadAndRegisterSheet(Services.io.newURI(uri + name), type);
+                console.info(`Loaded ${typeString}: ${name}`);
+            } catch (e) {
+                console.error(`Could not load ${name}: ${e.name}`);
+            }
+        }
     }
 })();
