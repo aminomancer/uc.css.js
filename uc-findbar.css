@@ -103,7 +103,11 @@ findbar[hidden] {
 .findbar-textbox,
 .findbar-textbox:-moz-lwtheme {
     background-color: var(--search-box-color) !important;
-    color: hsl(0, 0%, 100%) !important;
+    color: var(--ui-text-80) !important;
+}
+
+.findbar-textbox::placeholder {
+    color: var(--ui-text-50) !important;
 }
 
 .findbar-textbox:focus {

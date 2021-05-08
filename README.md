@@ -6,6 +6,9 @@ My personal Firefox theme/layout, plus some privileged scripts to add new behavi
 <i>Click any of the gifs for a more thorough video preview of the theme and some of the major scripts.</i>
 <br/>
 <p></p>
+<img src="preview/prev-window-small.webp">
+<br/>
+<p></p>
 <img src="preview/prev-navbar.gif"/>
 <br/>
 <p></p>

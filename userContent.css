@@ -895,11 +895,13 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
         background-color: var(--checkbox-unchecked-active-bgcolor);
     }
 
-    .theme-dark input:is([type="checkbox"], [type="radio"]):is([checked="true"], :checked):is(:hover, :focus-visible) {
+    .theme-dark
+        input:is([type="checkbox"], [type="radio"]):is([checked="true"], :checked):is(:hover, :focus-visible) {
         background-color: var(--checkbox-checked-hover-bgcolor);
     }
 
-    .theme-dark input:is([type="checkbox"], [type="radio"]):is([checked="true"], :checked):is(:hover, :focus-visible):active {
+    .theme-dark
+        input:is([type="checkbox"], [type="radio"]):is([checked="true"], :checked):is(:hover, :focus-visible):active {
         background-color: var(--checkbox-checked-active-bgcolor);
     }
 
@@ -1331,6 +1333,7 @@ menupopup {
 @-moz-document regexp("^(about:|chrome:).*") {
     html:not([role="dialog"]),
     html:not([role="dialog"]) *,
+    html:not([role="dialog"]) body.activity-stream,
     window:not([chromehidden]),
     window:not([chromehidden]) > dialog {
         --checkbox-border-color: var(--uc-checkbox-border-color) !important;
@@ -1351,6 +1354,7 @@ menupopup {
         --in-content-button-background: hsla(0, 20%, 90%, 0.08) !important;
         --in-content-button-background-hover: hsla(0, 20%, 90%, 0.15) !important;
         --in-content-button-background-active: hsla(0, 20%, 90%, 0.19) !important;
+        --in-content-button-background-solid: hsl(270, 2%, 20%);
         --in-content-item-selected: var(--purple-40) !important;
         --in-content-border-highlight: var(--purple-40) !important;
         --in-content-border-hover: var(--dialog-box-border-hover) !important;
@@ -1369,6 +1373,77 @@ menupopup {
         --in-content-accent-color: var(--purple-35) !important;
         --in-content-table-background: var(--in-content-box-background) !important;
         --in-content-table-header-background: var(--purple-40-a30) !important;
+        --newtab-background-color: var(--in-content-page-background) !important;
+        --newtab-text-primary-color: var(--in-content-page-color) !important;
+        --lwt-sidebar-background-color: var(--in-content-box-background) !important;
+        --lwt-sidebar-text-color: var(--in-content-page-color) !important;
+        --newtab-search-header-background-color: hsla(250, 3%, 12%, 0.7) !important;
+        --newtab-search-header-background-intermediate: hsla(250, 3%, 12%, 0.8) !important;
+        --newtab-seperator-line-color: var(--in-content-button-background-hover) !important;
+        --newtab-modal-color: var(--in-content-box-background) !important;
+        --newtab-focus-outline: var(--in-content-border-active-shadow) !important;
+        --newtab-focus-border: var(--in-content-border-focus) !important;
+        --newtab-focus-border-selected: var(--purple-30) !important;
+        --newtab-textbox-background-color: var(--in-content-button-background) !important;
+        --newtab-textbox-focus-color: var(--in-content-border-focus) !important;
+        --newtab-primary-action-background: var(
+            --in-content-primary-button-background-hover
+        ) !important;
+        --newtab-button-primary-color: var(--in-content-primary-button-background-hover) !important;
+        --newtab-border-primary-color: var(--in-content-button-background-active) !important;
+        --newtab-card-active-outline-color: var(--in-content-button-background) !important;
+        --newtab-link-primary-color: var(--in-content-link-color-active) !important;
+        --newtab-link-secondary-color: var(--in-content-link-color) !important;
+        --newtab-topsites-background-color: var(--in-content-button-background) !important;
+        --customize-menu-background: var(--in-content-box-background) !important;
+        --customize-menu-secondary-action-background: var(
+            --in-content-button-background
+        ) !important;
+        --customize-menu-secondary-action-background-hover: var(
+            --in-content-button-background-hover
+        ) !important;
+        --customize-menu-secondary-action-background-active: var(
+            --in-content-button-background-active
+        ) !important;
+        --customize-menu-seperator-line-color: HSL(248.6, 8%, 34.5%);
+        --customize-menu-first-shadow: hsla(250, 3%, 2%, 0.2) !important;
+        --customize-menu-second-shadow: hsla(250, 3%, 2%, 0.4) !important;
+        --newtab-contextmenu-background-color: var(--in-content-table-background) !important;
+        --newtab-contextmenu-button-color: var(--in-content-box-background) !important;
+        --newtab-card-background-color: var(--in-content-box-background) !important;
+        --newtab-card-placeholder-color: var(--in-content-box-background) !important;
+    }
+
+    body:not(.inline-onboarding) .fixed-search .search-wrapper {
+        background-image: linear-gradient(
+            180deg,
+            var(--in-content-page-background) 0%,
+            var(--newtab-search-header-background-intermediate) 50%,
+            var(--newtab-search-header-background-color) 100%
+        ) !important;
+        background-color: transparent !important;
+        backdrop-filter: blur(12px);
+    }
+
+    body:not(.inline-onboarding) .fixed-search.newtab-experience .search-handoff-button {
+        background-color: var(--in-content-button-background-solid) !important;
+    }
+
+    .top-site-outer .top-site-icon {
+        background-color: transparent !important;
+    }
+
+    .topsite-form .form-wrapper input[type="text"]:focus-visible {
+        outline: none !important;
+        border-color: var(--newtab-focus-border) !important;
+    }
+
+    [lwt-newtab-brighttext] .ds-card-grid.ds-card-grid-border .ds-card:not(.placeholder) {
+        background: var(--in-content-box-background) !important;
+    }
+
+    [lwt-newtab-brighttext] .ds-card .ds-card-link:hover header {
+        color: var(--in-content-link-color-active) !important;
     }
 
     radio[focused="true"] > .radio-label-box {

@@ -419,6 +419,10 @@ menupopup::part(arrowscrollbox),
     list-style-image: url(chrome://userchrome/content/skin/forward.svg);
 }
 
+:where(#reload-button, #stop-button) > .toolbarbutton-icon, :where(#reload-button, #stop-button) > .toolbarbutton-animatable-box {
+	translate: revert;
+}
+
 :is(#reload-button, #stop-button) > .toolbarbutton-animatable-box {
     display: none;
 }
