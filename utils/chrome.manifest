@@ -8,6 +8,9 @@ override chrome://browser/skin/tab.svg ../resources/skin/tab.svg
 override chrome://browser/skin/reader-mode.svg ../resources/skin/reader-mode.svg
 override chrome://browser/skin/forward.svg ../resources/skin/forward.svg
 override chrome://browser/skin/back.svg ../resources/skin/back.svg
+override chrome://browser/skin/reload.svg ../resources/skin/reload.svg
+override chrome://browser/skin/bookmark.svg ../resources/skin/bookmark.svg
+override chrome://browser/skin/bookmark-hollow.svg ../resources/skin/bookmark-hollow.svg
 override chrome://global/skin/icons/settings.svg ../resources/settings.svg
 override chrome://mozapps/skin/extensions/extension.svg ../resources/material/extension.svg
 override chrome://mozapps/skin/extensions/extensionGeneric.svg ../resources/material/extensionGeneric.svg

@@ -697,9 +697,13 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
         --desaturate-hover-background: hsla(236, 60%, 83%, 0.17) !important;
         --desaturate-active-background: hsla(236, 60%, 83%, 0.22) !important;
         --desaturate-checked-background: hsla(236, 60%, 83%, 0.13) !important;
-        --button-bgcolor: var(--arrowpanel-faint) !important;
-        --button-hover-bgcolor: var(--arrowpanel-dimmed) !important;
-        --button-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
+        --button-bgcolor: var(--arrowpanel-dimmed) !important;
+        --button-hover-bgcolor: var(--arrowpanel-dimmed-further) !important;
+        --button-active-bgcolor: var(--arrowpanel-dimmed-even-further) !important;
+        --button-primary-bgcolor: var(--purple-45) !important;
+        --button-primary-hover-bgcolor: var(--purple-40) !important;
+        --button-primary-active-bgcolor: var(--purple-35) !important;
+        --button-primary-color: var(--button-color) !important;
         --urlbar-input-bgcolor: hsla(233, 24%, 26%, 1) !important;
         --urlbar-input-bgcolor-brighter: hsla(233, 23%, 27.2%, 1) !important;
         --urlbar-input-bgcolor-even-brighter: hsla(233, 21%, 31%, 1) !important;

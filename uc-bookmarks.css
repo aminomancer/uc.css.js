@@ -217,30 +217,6 @@
     flex-grow: 3 !important;
 }
 
-#editBookmarkPanelDoneButton {
-    background-color: hsl(251, 59%, 44%) !important;
-}
-
-#editBookmarkPanelDoneButton:is(:hover, :focus-visible) {
-    background-color: hsl(248, 80%, 56%) !important;
-}
-
-#editBookmarkPanelDoneButton:is(:hover, :focus-visible):active {
-    background-color: hsl(247, 80%, 58%) !important;
-}
-
-#editBookmarkPanelRemoveButton {
-    background-color: hsl(233, 28%, 24%) !important;
-}
-
-#editBookmarkPanelRemoveButton:is(:hover, :focus-visible) {
-    background-color: hsl(234, 30%, 28%) !important;
-}
-
-#editBookmarkPanelRemoveButton:is(:hover, :focus-visible):active {
-    background-color: hsl(234, 30%, 30%) !important;
-}
-
 #editBMPanel_tagsField {
     display: -moz-inline-box !important;
 }

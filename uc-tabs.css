@@ -507,6 +507,10 @@
     opacity: 0.6 !important;
 }
 
+.tab-icon-sound:is([soundplaying], [muted], [activemedia-blocked], [pictureinpicture]):not(:hover):-moz-window-inactive {
+    opacity: 0.5 !important;
+}
+
 .tabbrowser-tab:hover
     .tab-icon-sound[pictureinpicture][soundplaying]:not([soundplaying-scheduledremoval]),
 .tabbrowser-tab .tab-icon-sound[pictureinpicture][muted] {

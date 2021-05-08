@@ -37,7 +37,6 @@
 
 /* menubar next to tabs (merge tabs bar with titlebar menubar and flow them horizontally) */
 #toolbar-menubar {
-    padding-inline: 2px 0;
     -moz-box-ordinal-group: 2;
 }
 
@@ -96,22 +95,32 @@
 
 /* menubar buttons */
 #toolbar-menubar #menubar-items {
-    padding-inline: 4px !important;
     -moz-box-pack: center !important;
 }
 
-#toolbar-menubar #main-menubar > menu {
-    border-radius: var(--toolbarbutton-border-radius) !important;
-    appearance: none !important;
-    padding-block: 2px !important;
-    min-height: 2em !important;
+#toolbar-menubar > spacer {
+    margin-left: 6px;
 }
 
-#toolbar-menubar #main-menubar > menu[_moz-menuactive] {
+#toolbar-menubar #main-menubar > menu {
+    appearance: none !important;
+    min-height: 2em !important;
+    background-color: transparent !important;
+    padding-inline: 1px;
+}
+
+#toolbar-menubar #main-menubar > menu > label {
+    -moz-box-flex: 1000 !important;
+    margin: 0 !important;
+    padding: 3px 6px 4px !important;
+    border-radius: var(--toolbarbutton-border-radius) !important;
+}
+
+#toolbar-menubar #main-menubar > menu[_moz-menuactive] > label {
     background-color: var(--toolbarbutton-hover-background) !important;
 }
 
-#toolbar-menubar #main-menubar > menu[open] {
+#toolbar-menubar #main-menubar > menu[open] > label {
     background-color: var(--toolbarbutton-active-background) !important;
 }
 
@@ -330,6 +339,7 @@
     height: 16px !important;
     -moz-context-properties: fill, fill-opacity !important;
     fill: currentColor !important;
+    margin-inline: 8px !important;
 }
 
 .private-browsing-indicator {
@@ -337,12 +347,34 @@
 }
 
 .accessibility-indicator {
-    background-image: url(chrome://userchrome/content/devtools/tool-accessibility.svg) !important;
+    background-image: none !important;
+    width: 32px !important;
+    -moz-box-align: center !important;
+    -moz-box-pack: center !important;
+    margin: 0 !important;
+    padding-inline: 2px !important;
+    outline: 0;
 }
 
-.accessibility-indicator:is(:hover, :active, :focus, :focus-visible) {
-    fill: var(--attention-color) !important;
-    outline: 0;
+.accessibility-indicator > .button-box > .button-icon {
+    max-width: 16px !important;
+    height: 16px !important;
+    list-style-image: url(chrome://userchrome/content/devtools/tool-accessibility.svg) !important;
+}
+
+.accessibility-indicator > .button-box {
+    height: 28px !important;
+    width: 28px !important;
+    padding: 0 !important;
+    border-radius: var(--toolbarbutton-border-radius) !important;
+}
+
+.accessibility-indicator:is(:hover, :focus-visible) > .button-box {
+    background-color: var(--arrowpanel-dimmed) !important;
+}
+
+.accessibility-indicator:is(:active, [open]) > .button-box {
+    background-color: var(--arrowpanel-dimmed-further) !important;
 }
 
 /* all tabs button popup */

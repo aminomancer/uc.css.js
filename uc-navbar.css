@@ -25,7 +25,10 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
 }
 
 /* dim widgets when window is inactive, like tabs */
-:root:-moz-window-inactive:not([customizing]) toolbar toolbarbutton {
+:root:-moz-window-inactive:not([customizing]) toolbar toolbarbutton > :is(image, .toolbarbutton-badge-stack, .toolbarbutton-animatable-box),
+:root:-moz-window-inactive:not([customizing]) toolbar :is(.accessibility-indicator, .private-browsing-indicator),
+:root:-moz-window-inactive:not([customizing]) #main-menubar > menu > label,
+:root:-moz-window-inactive:not([customizing]) toolbar :is(#zoom-reset-button, #urlbar-zoom-button) {
     opacity: 0.7;
 }
 

@@ -105,11 +105,11 @@ tooltip {
     --purple-40: hsl(250, 100%, 60%) !important;
     --purple-40-a10: hsla(250, 100%, 60%, 0.1) !important;
     --purple-40-a30: hsla(250, 100%, 60%, 0.5) !important;
-    --purple-45: hsl(250, 90%, 55%) !important;
-    --purple-50: hsl(256, 100%, 50%) !important;
-    --purple-50-a30: hsla(256, 100%, 50%, 0.3) !important;
-    --purple-60: hsl(258, 100%, 40%) !important;
-    --purple-70: hsl(256, 100%, 30%) !important;
+    --purple-45: hsl(250, 87%, 55%) !important;
+    --purple-50: hsl(256, 87%, 50%) !important;
+    --purple-50-a30: hsla(256, 87%, 50%, 0.3) !important;
+    --purple-60: hsl(258, 95%, 40%) !important;
+    --purple-70: hsl(256, 97%, 30%) !important;
     --purple-80: hsl(254, 100%, 20%) !important;
     --in-parent-page-background: transparent;
     --in-parent-page-color: var(--notification-menu-color);
@@ -149,7 +149,8 @@ menupopup,
 .in-menulist,
 #ContentSelectDropdown,
 popupnotification,
-#customization-container {
+#customization-container,
+#mainPopupSet panel {
     --checkbox-border-color: var(--uc-checkbox-border-color) !important;
     --checkbox-checked-border-color: var(--uc-checkbox-checked-border-color) !important;
     --checkbox-unchecked-bgcolor: var(--uc-checkbox-unchecked-bgcolor) !important;
