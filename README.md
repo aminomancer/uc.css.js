@@ -105,7 +105,7 @@ You first need to find your Firefox installation folder. On Windows that's `C:/P
 6) &nbsp; a `resources` folder in your `chrome` folder, containing all the icons (assuming you're using the theme or the toolbox button script);
 6) &nbsp; a `utils` folder in your `chrome` folder, containing `chrome.manifest` and `boot.jsm`
 
-You may already have a file called `channel-prefs.js` inside the `prefs` folder. This is unrelated.
+You may already have a file called `channel-prefs.js` inside the `pref` folder. This is unrelated.
 
 If you're using fx-autoconfig like I recommended, then your scripts should go in the `JS` folder by default. You should rename it `script` if you're planning to use my theme or `chrome.manifest` file. This has no effect on most of the scripts, it's only done so we can give our own icons `chrome://` paths. Any agent sheets or author sheets (files ending in .as.css or .au.css) should go in the `chrome` folder with your regular stylesheets.
 
