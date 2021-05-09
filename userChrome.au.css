@@ -58,6 +58,14 @@ panelview
     color: var(--panelview-toolbarbutton-active-color);
 }
 
+.panel-footer > button:not([disabled], :active):is(:hover, :focus-visible) {
+    background-color: var(--button-hover-bgcolor, color-mix(in srgb, currentColor 17%, transparent));
+}
+
+.panel-footer > button[default]:not([disabled], :active):is(:hover, :focus-visible) {
+    background-color: var(--button-primary-hover-bgcolor);
+}
+
 menupopup::part(drop-indicator-bar) {
     margin-block: -14px;
 }

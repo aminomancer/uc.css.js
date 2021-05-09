@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name           Remove Search Engine Alias Formatting
+// @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Depending on your settings you might have noticed that typing a search engine alias (e.g. "goo" for Google) causes some special formatting to be applied to the text you input in the url bar. This is a trainwreck because the formatting is applied using the selection controller, not via CSS, meaning you can't change it in your stylesheets. It's blue by default, and certainly doesn't match my personal theme very well. This script just prevents the formatting from ever happening at all.
-// @author         aminomancer
 // ==/UserScript==
 
 (() => {

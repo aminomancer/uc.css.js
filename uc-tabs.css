@@ -135,18 +135,13 @@
 /* dim unloaded/discarded tabs */
 .tabbrowser-tab[pending]
     .tab-content
-    :is(.tab-icon-image, .tab-label, .tab-sharing-icon-overlay):-moz-window-inactive {
-    opacity: 0.5;
-}
-
-.tabbrowser-tab[pending] .tab-content :is(.tab-icon-image, .tab-label, .tab-sharing-icon-overlay),
-.tabbrowser-tab :is(.tab-icon-image, .tab-label, .tab-sharing-icon-overlay):-moz-window-inactive {
+    :is(.tab-icon-image, .tab-label, .tab-sharing-icon-overlay) {
     opacity: 0.7;
 }
 
 .tabbrowser-tab[pending]:hover
     .tab-content
-    :is(.tab-icon-image, .tab-label, .tab-sharing-icon-overlay):not(:-moz-window-inactive) {
+    :is(.tab-icon-image, .tab-label, .tab-sharing-icon-overlay) {
     opacity: 0.8;
 }
 

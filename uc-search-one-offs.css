@@ -14,18 +14,23 @@
     min-width: 0 !important;
 }
 
+#PopupSearchAutoComplete .search-panel-one-offs-container {
+    padding-inline: 4px;
+    clip-path: inset(0 4px 0 4px);
+}
+
 #PopupSearchAutoComplete .search-panel-one-offs {
+    display: flex !important;
     background: none !important;
     -moz-context-properties: fill, fill-opacity !important;
     fill: currentColor !important;
     height: unset !important;
     flex-wrap: nowrap !important;
-    scroll-behavior: smooth !important;
-    overflow: scroll !important;
+    scroll-behavior: smooth;
+    overflow: scroll;
     scrollbar-width: none !important;
     min-width: 0 !important;
-    padding-inline: 4px;
-    clip-path: inset(0 4px 0 4px);
+    max-width: unset !important;
 }
 
 #PopupSearchAutoComplete .search-panel-one-offs-header {
@@ -172,7 +177,7 @@
     max-width: 256px !important;
     padding: 0 !important;
     top: calc(-3px - var(--urlbar-height)) !important;
-    right: 4px !important;
+    right: 3px !important;
     scroll-behavior: smooth !important;
     box-sizing: border-box !important;
     border: none !important;

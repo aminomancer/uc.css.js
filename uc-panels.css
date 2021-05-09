@@ -206,7 +206,7 @@ panel {
     background-color: var(--arrowpanel-dimmed-even-further) !important;
 }
 
-.popup-notification-button-container > button:not([disabled]):hover {
+.popup-notification-button-container > button:not([disabled], :active):is(:hover, :focus-visible) {
     background-color: var(--arrowpanel-dimmed-further) !important;
 }
 
@@ -231,7 +231,7 @@ panel {
     background-color: hsl(237, 26%, 30%) !important;
 }
 
-.panel-footer > .popup-notification-primary-button:not([disabled]):hover {
+.panel-footer > .popup-notification-primary-button:not([disabled]):not([disabled], :active):is(:hover, :focus-visible) {
     background-color: hsl(242, 60%, 56%) !important;
 }
 
@@ -284,6 +284,11 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
 
 .popup-notification-learnmore-link {
     margin-block: 2px !important;
+    text-decoration: none !important;
+}
+
+.popup-notification-learnmore-link:is(:hover, :focus-visible) {
+	text-decoration: underline !important;
 }
 
 .popup-subitem {
@@ -297,7 +302,7 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
     margin-inline-start: 2px;
     border-width: 0;
     min-width: 0;
-    padding: 2px;
+    padding: 2px !important;
     background-color: var(--ui-solid-button-bgcolor) !important;
     color: inherit !important;
     opacity: 1 !important;

@@ -1,17 +1,30 @@
 // ==UserScript==
 // @name           Scrolling Search One-offs
-// @homepage       https://github.com/aminomancer
-// @description    This is for my own personal stylesheet, which moves the one-off search engine buttons to the right side of the url bar when the user is typing into the url bar. The script allows the search one-offs box to be scrolled with mousewheel up/down.
 // @author         aminomancer
+// @homepage       https://github.com/aminomancer
+// @description    This is for my own personal stylesheet, which moves the one-off search engine buttons to the right side of the url bar when the user is typing into the url bar. The script allows the search one-offs box to be scrolled with mousewheel up/down. It also adds a minor improvement to the one-offs in the searchbar results popup: if the one-offs are overflowing and you switch to a search engine that is overflown off the popup, it will automatically scroll to the selected one-off button, just like the urlbar one-offs does with oneClickOneOffSearchButtons.uc.js.
 // ==/UserScript==
 
 (() => {
-    // if you ever delete this script and you use my theme, make sure .search-one-offs has overflow-x: hidden.
-    function init() {
-        let oneOffs = gURLBar.view.oneOffSearchButtons,
-            container = oneOffs.container,
-            buttons = oneOffs.buttons,
-            buttonsList = buttons.children;
+    function rectX(el) {
+        return el.getBoundingClientRect().x;
+    }
+
+    function parseWidth(el) {
+        let style = window.getComputedStyle(el),
+            width = el.clientWidth,
+            margin = parseFloat(style.marginLeft) + parseFloat(style.marginRight),
+            padding = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight),
+            border = parseFloat(style.borderLeftWidth) + parseFloat(style.borderRightWidth);
+        return width + margin + padding + border;
+    }
+
+    function setUpScroll(oneOffs, mask = false) {
+        let isSearchBar = oneOffs.container.parentElement.id === "PopupSearchAutoComplete";
+        let container = isSearchBar ? oneOffs.buttons.parentElement : oneOffs.container;
+        let buttons = oneOffs.buttons;
+        let buttonsList = buttons.children;
+        container.maskDisabled = !mask;
         oneOffs.canScroll = true;
         container.style.cssText =
             "display: -moz-box !important; -moz-box-align: center !important; scrollbar-width: none; box-sizing: border-box; scroll-behavior: smooth !important; overflow: hidden !important";
@@ -79,6 +92,7 @@
         };
 
         container.scrolledToStart = function () {
+            if (this.maskDisabled) return;
             if (this.scrollLeft === 0 || this.scrollLeft === this.scrollLeftMax) {
                 this.maskAnim();
                 this.setAttribute("scrolledtostart", true);
@@ -88,31 +102,31 @@
             }
         };
 
-        container.on_Scroll = function (event) {
+        container.on_Scroll = function (_e) {
             this._isScrolling = true;
             this.scrolledToStart();
         };
 
-        container.on_Scrollend = function (event) {
+        container.on_Scrollend = function (_e) {
             this._isScrolling = false;
             this._destination = 0;
             this._direction = 0;
             this.scrolledToStart();
         };
 
-        container.on_Wheel = function (event) {
+        container.on_Wheel = function (e) {
             let doScroll = false;
             let instant;
             let scrollAmount = 0;
-            let isVertical = Math.abs(event.deltaY) > Math.abs(event.deltaX);
-            let delta = isVertical ? event.deltaY : event.deltaX;
+            let isVertical = Math.abs(e.deltaY) > Math.abs(e.deltaX);
+            let delta = isVertical ? e.deltaY : e.deltaX;
 
             if (this._prevMouseScrolls.every((prev) => prev == isVertical)) {
                 doScroll = true;
-                if (event.deltaMode == event.DOM_DELTA_PIXEL) {
+                if (e.deltaMode == e.DOM_DELTA_PIXEL) {
                     scrollAmount = delta;
                     instant = true;
-                } else if (event.deltaMode == event.DOM_DELTA_PAGE) {
+                } else if (e.deltaMode == e.DOM_DELTA_PAGE) {
                     scrollAmount = delta * buttons.clientWidth;
                 } else {
                     scrollAmount = delta * this.lineScrollAmount();
@@ -139,14 +153,42 @@
                 this.scrollByPixels(scrollAmount, instant);
             }
 
-            event.stopPropagation();
-            event.preventDefault();
+            e.stopPropagation();
+            e.preventDefault();
         };
 
         container.addEventListener("wheel", container.on_Wheel);
         container.addEventListener("scroll", container.on_Scroll);
         container.addEventListener("scrollend", container.on_Scrollend);
         container.scrolledToStart();
+
+        if (isSearchBar) {
+            container.style.paddingInline = `4px`;
+            container.style.clipPath = `inset(0 4px 0 4px)`;
+            oneOffs.scrollToButton = function (el) {
+                let slider = el.parentElement;
+                let buttonX = rectX(el) - rectX(slider);
+                let buttonWidth = parseWidth(el);
+                let midpoint = slider.parentElement.clientWidth / 2;
+                slider.parentElement.scrollTo({
+                    left: buttonX + buttonWidth / 2 - midpoint,
+                    behavior: "auto",
+                });
+            };
+            oneOffs.on_SelectedOneOffButtonChanged = function (_e) {
+                oneOffs.scrollToButton(oneOffs.selectedButton);
+            };
+            oneOffs.addEventListener(
+                "SelectedOneOffButtonChanged",
+                oneOffs.on_SelectedOneOffButtonChanged,
+                false
+            );
+        }
+    }
+
+    function init() {
+        setUpScroll(gURLBar.view.oneOffSearchButtons, true);
+        setUpScroll(document.getElementById("PopupSearchAutoComplete").oneOffButtons);
     }
 
     if (gBrowserInit.delayedStartupFinished) {

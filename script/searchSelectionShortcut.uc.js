@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name           Search Selection Keyboard Shortcut
+// @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Adds a new keyboard shortcut (ctrl+shift+F) that searches your default search engine for whatever text you currently have highlighted. This does basically the same thing as the context menu option "Search {Engine} for {Selection}" except that if you highlight a URL, instead of searching for the selection it will navigate directly to the URL.
-// @author         aminomancer
 // ==/UserScript==
 
 (() => {

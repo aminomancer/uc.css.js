@@ -1,8 +1,9 @@
 // ==UserScript==
 // @name           Agent/Author Sheet Loader
-// @namespace      userChrome_Agent_Author_Sheet_CSS_module
-// @version        2.0
-// @note           Load *.as.css files as agent sheets and *.au.css files as author sheets. Will also load *.us.css files as user sheets, in case you ever need that for some reason.
+// @author         aminomancer
+// @homepage       https://github.com/aminomancer
+// @version        2.5
+// @description    Load *.as.css files as agent sheets and *.au.css files as author sheets. Will also load *.us.css files as user sheets, in case you ever need that for some reason.
 // @backgroundmodule
 // ==/UserScript==
 

@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name           Nav-bar Toolbar Button Slider
+// @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Wrap all toolbar buttons after #urlbar-container in a scrollable div. It can scroll horizontally through the buttons by scrolling up/down with a mousewheel, like the tab bar. You can change userChrome.toolbarSlider.width in about:config to make the container wider or smaller. If you choose 12, it'll be 12 buttons long. When the window gets *really* small, the slider disappears and the toolbar buttons are placed into the normal widget overflow panel. You can specify more buttons to exclude from the slider by adding their IDs (in quotes, separated by commas) to userChrome.toolbarSlider.excludeButtons in about:config. For example you might type ["bookmarks-menu-button", "downloads-button"] if you want those to stay outside of the slider. You can also decide whether to exclude flexible space springs from the slider by toggling userChrome.toolbarSlider.excludeFlexibleSpace in about:config. By default, springs are excluded. To scroll faster you can add a multiplier right before scrollByPixels is called, like scrollAmount = scrollAmount * 1.5 or something like that. Doesn't handle touch events yet since I don't have a touchpad to test it on. Let me know if you have any ideas though.
-// @author         aminomancer
 // ==/UserScript==
 
 (() => {
@@ -252,6 +252,49 @@
                 attributeFilter: ["open"],
                 subtree: true,
             };
+
+        /**
+         * get an element's x coordinate
+         * @param {object} el (a DOM node)
+         * @returns the DOM node's x coordinate
+         */
+        function rectX(el) {
+            return el.getBoundingClientRect().x;
+        }
+
+        /**
+         * get the border-box width for an element. used for calculating scroll distances.
+         * if we used other methods, we'd miss the margins at the very least and end up undershooting distances, which is cumulative.
+         * @param {object} el (a DOM node)
+         * @returns the DOM node's total effective width
+         */
+        function parseWidth(el) {
+            let style = window.getComputedStyle(el),
+                width = el.clientWidth,
+                margin = parseFloat(style.marginLeft) + parseFloat(style.marginRight),
+                padding = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight),
+                border = parseFloat(style.borderLeftWidth) + parseFloat(style.borderRightWidth);
+            return width + margin + padding + border;
+        }
+
+        /**
+         * smoothly scroll a slider so that the passed element ends up as close to the center of the slider as possible.
+         * native methods like scrollIntoView would only scroll the slider until the element is visible,
+         * which would leave it at the left or right edge of the slider.
+         * not something we want for a button that's supposed to be active, in focus.
+         * @param {object} el (a DOM node to be scrolled to)
+         * @param {object} slider (a DOM node, the inner slider, not the container)
+         */
+        function smoothCenterScrollTo(el, slider) {
+            let container = slider.parentElement;
+            let buttonX = rectX(el) - rectX(slider);
+            let widgetWidth = parseWidth(el);
+            let midpoint = container.clientWidth / 2;
+            container.scrollTo({
+                left: buttonX + widgetWidth / 2 - midpoint,
+                behavior: "auto",
+            });
+        }
 
         // convert the buttons we want to wrap into an array. isn't entirely necessary but it's a performant way to prevent weird anomalies during startup that could show up otherwise.
         async function convertToArray(buttons) {
@@ -513,59 +556,36 @@
                 event.preventDefault();
             };
 
+            /**
+             * called when focusing a toolbar button with tab or arrow keys.
+             * by default, this method calls elem.focus() which scrolls the button into view instantly.
+             * we modify the function so that it checks if the button is contained inside a toolbar slider.
+             * if it is, then we use a custom scroll function that 1) scrolls smoothly, 
+             * and 2) scrolls forward/backward such that the element ends up in the center of the scrollbar,
+             * unless it's already scrolled to the end/beginning.
+             * then it calls a special method that focuses without the native automatic instant scroll behavior.
+             * @param {object} aButton (a button's DOM node)
+             */
+            ToolbarKeyboardNavigator._focusButton = function (aButton) {
+                aButton.setAttribute("tabindex", "-1");
+                let parent = aButton.parentElement;
+                while (parent.tagName === "toolbarbutton" || parent.tagName === "toolbaritem")
+                    parent = parent.parentElement;
+                if (parent.classList.contains("slider-inner-container")) {
+                    smoothCenterScrollTo(aButton, parent);
+                    Services.focus.setFocus(aButton, Ci.nsIFocusManager.FLAG_NOSCROLL);
+                } else aButton.focus();
+                aButton.addEventListener("blur", this);
+            };
+
             outer.addEventListener("wheel", outer.on_Wheel);
             outer.addEventListener("scroll", outer.on_Scroll);
             outer.addEventListener("scrollend", outer.on_Scrollend);
         }
 
-        /* when you download a file in Firefox, a little gray arrow icon appears on the downloads toolbar button.
-        this popup appears no matter where the downloads button is, as long as it's actually saved to a toolbar somewhere.
-        it is anchored to the toolbar button itself, and for us the toolbar button's slider container is overflowing.
-        so it's possible for the downloads button to be scrolled out of view, and still have the downloads animation appear.
-        it will just be floating off over the urlbar or something, which looks pretty stupid.
-        so we're overriding an internal function to give it some behavior it probably should have had anyway.
-        now it will check that the toolbar button is actually scrolled into view relative to its parent before showing the popup.
-        if the downloads button is scrolled out of view, then it'll just download the file without displaying the floating arrow. */
-        // function overflowDownloadsAnimation() {
-        //     DownloadsIndicatorView.showEventNotification = function showEventNotification(aType) {
-        //         if (!this._initialized) {
-        //             return;
-        //         }
-
-        //         if (!DownloadsCommon.animateNotifications) {
-        //             return;
-        //         }
-
-        //         let el = DownloadsButton._placeholder;
-        //         if (el?.parentNode.offsetLeft) {
-        //             if (
-        //                 el.getBoundingClientRect().left - el.parentNode.offsetLeft <
-        //                 -(el.clientWidth * 0.5)
-        //             )
-        //                 return;
-        //         }
-
-        //         // enqueue this notification while the current one is being displayed
-        //         if (this._currentNotificationType) {
-        //             // only queue up the notification if it is different to the current one
-        //             if (this._currentNotificationType != aType) {
-        //                 this._nextNotificationType = aType;
-        //             }
-        //         } else {
-        //             this._showNotification(aType);
-        //         }
-        //     };
-        // }
-
         async function init() {
             prefHandler.initialSet();
-            /* wait for nodes to be filtered. making an array from the DOM seems to be faster than using CustomizableUI's widgets list.
-            idk how but i guess the CustomizableUI component loads stuff lazily...
-            and probably the browser starts rebuilding the widget area from some kind of cache before the component has fully loaded?
-            we use the widgets list very shortly afterwards in cleanUp() to verify and correct the DOM order though.
-            speed matters here because it lets the browser wrap all the buttons in the overflowed slider before they're rendered...
-            therefore we don't have to see like 30 toolbar buttons side-by-side for a split second before jarringly shrinking into just 11 buttons.
-            so it's just an aesthetic decision i guess. */
+            // wait for nodes to be filtered.
             let array = await convertToArray(widgets);
             // first wrap call
             wrapAll(array, inner, true);
@@ -573,7 +593,6 @@
             prefHandler.attachListeners();
             sliderContextHandler.attachListener();
             cleanUp();
-            // overflowDownloadsAnimation();
         }
 
         init();
@@ -581,15 +600,7 @@
         setTimeout(slowCleanUp, 1000);
     }
 
-    /* for this script we want to do everything as quickly as possible so there isn't a jarring transition during startup.
-    if we waited too long, you'd see all the widgets on your toolbar for a moment, not overflowed but instead squeezing down the urlbar to make room.
-    then when the script executed, you'd see them suddenly shrink into the slider box.
-    so we wanna run this script as soon as humanly possible so that everything is already IN the box by the time firefox renders the first frame.
-    but that's potentially too soon if you have a shit ton of extensions or extensions that load their buttons really slowly for some reason.
-    if startup is slow for some reason, then this script could also be executing before CustomizableUI is even fully initialized.
-    so we run the script immediately, but we schedule reOrder() and the CustomizableUI listener for when "delayed startup" is finished.
-    i don't actually know if this observer actually waits for all extensions to load or something. i just know it waits a little bit.
-    maybe there's another way to actually wait for all the extensions to load, lmk if you know~ */
+    // for this script we want to do everything as quickly as possible so there isn't a jarring transition during startup.
     if (gBrowserInit.delayedStartupFinished) {
         startup();
     } else {

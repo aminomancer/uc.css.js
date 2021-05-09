@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name           Fullscreen Hotkey
+// @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    All this does is remap the fullscreen shortcut from F11 to Ctrl+E, since I already use F11 for other stuff.
-// @author         aminomancer
 // ==/UserScript==
 
 (() => {
