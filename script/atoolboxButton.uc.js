@@ -2,7 +2,7 @@
 // @name           Toolbox Button
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
-// @description    Adds a new toolbar button that 1) opens the content toolbox on left click; 2) opens the browser toolbox on right click; 3) toggles "Popup Auto-Hide" on middle click. Left click will open the toolbox for the active tab, or close it if it's already open. Right click will open the elevated browser toolbox if it's not already open. If it is already open, then instead of trying to start a new process and spawning an irritating dialog, it'll just show a brief notification saying the toolbox is already open. The button also shows a badge while a toolbox window is open. Middle click will toggle the preference for popup auto-hide: "ui.popup.disable_autohide". This does the same thing as the "Disable Popup Auto-Hide" option in the menu at the top right of the browser toolbox, prevents popups from closing so you can debug them. By default, when you open a browser toolbox window, the script will disable popup auto-hide, and then re-enable it when you close the toolbox. I find that I usually want popup auto-hide disabled when I'm using the toolbox, and never want it disabled when I'm not using the toolbox, so I made it automatic, instead of having to right click and then immediately middle click every time. If you don't like this automatic feature, you can turn it off by setting "userChrome.toolboxButton.popupAutohide.toggle-on-toolbox-launch" to false in about:config. When you middle click, the button will show a notification telling you the current status of popup auto-hide, e.g. "Holding popups open." This is just so that people who use the feature a lot won't lose track of whether it's on or off, and won't need to open a popup and try to close it to test it. (The toolbar button also changes appearance while popup auto-hide is disabled. It becomes blue like the downloads button and the icon changes into a popup icon — be sure to grab the icons from the resources folder, look for toolbox.svg and command-noautohide.svg) All of these notifications use the native confirmation hint custom element, since it looks nice. That's the one that appears when you save a bookmark, #confirmation-hint. So you can style them with that selector. This script needs a CSS rule in your userChrome.css: #confirmation-hint[data-message-id="hideCheckHint"] #confirmation-hint-message {margin-inline: 0 !important;} Otherwise the padding will be a little off for the message popup that says "Browser Toolbox is already open." I could have added this rule with javascript instead, but there's an internal CSS file that does exactly the opposite, 7px. Using !important in an inline style or overriding it with javascript just seems dirty. The icons for this button are in the resources folder on my repo: look for toolbox.svg and command-noautohide.svg. You'll need to recreate the folder structure for the URLs to work. If you can't use fx-autoconfig for whatever reason, you can try changing the URLs in this script. Take the icons and put them wherever you can access them. I don't recommend trying to load them using relative URLs, but it is possible. I'd recommend just using fx-autoconfig instead, so you can download the entire resources folder and put it in your chrome folder.
+// @description    Adds a new toolbar button that 1) opens the content toolbox on left click; 2) opens the browser toolbox on right click; 3) toggles "Popup Auto-Hide" on middle click. Left click will open the toolbox for the active tab, or close it if it's already open. Right click will open the elevated browser toolbox if it's not already open. If it is already open, then instead of trying to start a new process and spawning an irritating dialog, it'll just show a brief notification saying the toolbox is already open. The button also shows a badge while a toolbox window is open. Middle click will toggle the preference for popup auto-hide: "ui.popup.disable_autohide". This does the same thing as the "Disable Popup Auto-Hide" option in the menu at the top right of the browser toolbox, prevents popups from closing so you can debug them. If you want to change which mouse buttons execute which functions, search for "userChrome.toolboxButton.mouseConfig" in about:config. Change the 0, 1, and 2 values. 0 = left click, 1 = middle, and 2 = right. By default, when you open a browser toolbox window, the script will disable popup auto-hide, and then re-enable it when you close the toolbox. I find that I usually want popup auto-hide disabled when I'm using the toolbox, and never want it disabled when I'm not using the toolbox, so I made it automatic, instead of having to right click and then immediately middle click every time. If you don't like this automatic feature, you can turn it off by setting "userChrome.toolboxButton.popupAutohide.toggle-on-toolbox-launch" to false in about:config. When you middle click, the button will show a notification telling you the current status of popup auto-hide, e.g. "Holding popups open." This is just so that people who use the feature a lot won't lose track of whether it's on or off, and won't need to open a popup and try to close it to test it. (The toolbar button also changes appearance while popup auto-hide is disabled. It becomes blue like the downloads button and the icon changes into a popup icon — be sure to grab the icons from the resources folder, look for toolbox.svg and command-noautohide.svg) All of these notifications use the native confirmation hint custom element, since it looks nice. That's the one that appears when you save a bookmark, #confirmation-hint. So you can style them with that selector. This script needs a CSS rule in your userChrome.css: #confirmation-hint[data-message-id="hideCheckHint"] #confirmation-hint-message {margin-inline: 0 !important;} Otherwise the padding will be a little off for the message popup that says "Browser Toolbox is already open." I could have added this rule with javascript instead, but there's an internal CSS file that does exactly the opposite, 7px. Using !important in an inline style or overriding it with javascript just seems dirty. The icons for this button are in the resources folder on my repo: look for toolbox.svg and command-noautohide.svg. You'll need to recreate the folder structure for the URLs to work. If you can't use fx-autoconfig for whatever reason, you can try changing the URLs in this script. Take the icons and put them wherever you can access them. I don't recommend trying to load them using relative URLs, but it is possible. I'd recommend just using fx-autoconfig instead, so you can download the entire resources folder and put it in your chrome folder.
 // ==/UserScript==
 
 // Modify these strings for easy localization. I tried to use built-in strings for this so it would automatically localize itself, but I found that every reference to the "Browser Toolbox" throughout the entire firefox UI is derived from a single message in a single localization file, which doesn't follow the standard format. It can only be parsed by the devtools' own special l10n module, which itself can only be imported by a CJS module. Requiring CJS just for a button seems ridiculous, plus there really aren't any localized strings that work for these confirmation messages anyway, or even the tooltip. So if your UI language isn't English you can modify all the strings created by this script in the following object:
@@ -204,9 +204,11 @@ const toolboxButtonL10n = {
 
                         let prefSvc = Services.prefs,
                             obSvc = Services.obs,
+                            toolboxBranch = "userChrome.toolboxButton",
                             autoHide = "ui.popup.disable_autohide",
                             autoTogglePopups =
                                 "userChrome.toolboxButton.popupAutohide.toggle-on-toolbox-launch",
+                            mouseConfig = "userChrome.toolboxButton.mouseConfig",
                             animOptions = { duration: 300, iterations: 1, easing: "ease-in-out" },
                             keyframes = {
                                 transform: [
@@ -220,13 +222,13 @@ const toolboxButtonL10n = {
                                 offset: [0, 0.05, 0.1, 0.2, 0.4, 1],
                             };
 
-                        toolbarbutton.onclick = (e) => {
+                        toolbarbutton.onclick = function (e) {
                             if (e.getModifierState("Accel")) return;
                             switch (e.button) {
-                                case 0:
+                                case this.mouseConfig.contentToolbox:
                                     e.target.ownerDocument.defaultView.key_toggleToolbox.click(); // toggle the content toolbox
                                     break;
-                                case 2:
+                                case this.mouseConfig.browserToolbox:
                                     toolbox.getBrowserToolboxSessionState() // check if a browser toolbox window is already open
                                         ? CustomHint.show(
                                               toolbarbutton,
@@ -235,8 +237,8 @@ const toolboxButtonL10n = {
                                           ) // if so, just show a hint that it's already open
                                         : e.target.ownerDocument.defaultView.key_browserToolbox.click(); // if not, launch a new one
                                     break;
-                                case 1:
-                                    prefSvc.getBoolPref(autoHide) // check autohide pref state to dictate hint content
+                                case this.mouseConfig.popupHide:
+                                    this.popupAutoHide // check autohide pref state to dictate hint content
                                         ? CustomHint.show(
                                               toolbarbutton,
                                               toolboxButtonL10n.lettingCloseMsg,
@@ -252,7 +254,7 @@ const toolboxButtonL10n = {
                                                   event: e,
                                               }
                                           );
-                                    prefSvc.setBoolPref(autoHide, !prefSvc.getBoolPref(autoHide)); // toggle the pref
+                                    prefSvc.setBoolPref(autoHide, !this.popupAutoHide); // toggle the pref
                                     icon.animate(keyframes, animOptions); // animate the icon transformation
                                     break;
                                 default:
@@ -275,9 +277,11 @@ const toolboxButtonL10n = {
                         }
 
                         function prefObserver(sub, _top, pref) {
+                            let value = getPref(sub, pref);
                             switch (pref) {
                                 case autoHide:
-                                    if (getPref(sub, pref)) {
+                                    toolbarbutton.popupAutoHide = value;
+                                    if (value) {
                                         icon.src = noAutoHideURL; // change icon src to popup icon
                                         icon.style.fill =
                                             "var(--toolbarbutton-icon-fill-attention)"; // highlight color
@@ -287,7 +291,10 @@ const toolboxButtonL10n = {
                                     }
                                     break;
                                 case autoTogglePopups:
-                                    toolbarbutton.autoTogglePopups = getPref(sub, pref);
+                                    toolbarbutton.autoTogglePopups = value;
+                                    break;
+                                case mouseConfig:
+                                    toolbarbutton.mouseConfig = JSON.parse(value);
                                     break;
                             }
                         }
@@ -300,10 +307,10 @@ const toolboxButtonL10n = {
                             badgeLabel.textContent = state ? 1 : ""; // set toolbar button's badge content
                             // if toolbox is open and autohide is not already enabled, enable it
                             if (sub === "initial-load" || !toolbarbutton.autoTogglePopups) return;
-                            if (state && !prefSvc.getBoolPref(autoHide))
+                            if (state && !toolbarbutton.popupAutoHide)
                                 prefSvc.setBoolPref(autoHide, true);
                             // if toolbox just closed and autohide is not already disabled, disable it
-                            else if (!state && prefSvc.getBoolPref(autoHide))
+                            else if (!state && toolbarbutton.popupAutoHide)
                                 prefSvc.setBoolPref(autoHide, false);
                         }
 
@@ -312,7 +319,7 @@ const toolboxButtonL10n = {
                          */
                         function uninit() {
                             prefSvc.removeObserver(autoHide, prefObserver);
-                            prefSvc.removeObserver(autoTogglePopups, prefObserver);
+                            prefSvc.removeObserver(toolboxBranch, prefObserver);
                             obSvc.removeObserver(toolboxObserver, "devtools:loader:destroy");
                             obSvc.removeObserver(toolboxObserver, "devtools-thread-ready");
                             window.removeEventListener("unload", uninit, false);
@@ -321,14 +328,20 @@ const toolboxButtonL10n = {
                         function toolboxInit() {
                             prefObserver(prefSvc, null, autoHide);
                             prefObserver(prefSvc, null, autoTogglePopups);
+                            prefObserver(prefSvc, null, mouseConfig);
                             toolboxObserver("initial-load");
                         }
 
                         if (!prefSvc.prefHasUserValue(autoTogglePopups))
                             prefSvc.setBoolPref(autoTogglePopups, true);
+                        if (!prefSvc.prefHasUserValue(mouseConfig))
+                            prefSvc.setStringPref(
+                                mouseConfig,
+                                `{"contentToolbox": 0, "browserToolbox": 2, "popupHide": 1}`
+                            );
                         window.addEventListener("unload", uninit, false);
                         prefSvc.addObserver(autoHide, prefObserver); // listen for pref changes
-                        prefSvc.addObserver(autoTogglePopups, prefObserver);
+                        prefSvc.addObserver(toolboxBranch, prefObserver);
                         obSvc.addObserver(toolboxObserver, "devtools:loader:destroy"); // listen for toolbox process closing
                         obSvc.addObserver(toolboxObserver, "devtools-thread-ready"); // listen for toolbox process launching
                         if (gBrowserInit.delayedStartupFinished) {
