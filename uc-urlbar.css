@@ -677,13 +677,6 @@ toolbarpaletteitem[removable="false"]
     margin-inline-start: 5px !important;
 }
 
-#identity-box .microphone-icon,
-.notification-anchor-icon#default-notification-icon,
-.notification-anchor-icon#geo-notification-icon,
-.notification-anchor-icon.screen-icon {
-    margin-inline-start: 4px !important;
-}
-
 #tracking-protection-icon {
     margin-inline-start: 6px !important;
 }
@@ -694,7 +687,7 @@ toolbarpaletteitem[removable="false"]
 
 #permissions-granted-icon {
     list-style-image: url(chrome://userchrome/content/formfill.svg) !important;
-    padding: 0.6px !important;
+    margin-top: 1px;
 }
 
 #notification-popup-box {
@@ -709,16 +702,40 @@ toolbarpaletteitem[removable="false"]
     display: none !important;
 }
 
-#webrtc-sharing-icon {
-    fill-opacity: var(--urlbar-icon-fill-opacity) !important;
-    fill: white !important;
-    animation: none !important;
+#identity-permission-box:not([open]) #webrtc-sharing-icon,
+.permission-popup-permission-icon.in-use:is(.camera-icon, .microphone-icon, .screen-icon) {
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity !important;
+    animation: 3s linear identity-sharing-icon-pulse infinite;
 }
 
-#webrtc-sharing-icon:hover {
+@keyframes identity-sharing-icon-pulse {
+    0%, 16.66%, 83.33%, 100% {
+        color: white;
+        fill-opacity: var(--urlbar-icon-fill-opacity);
+    }
+    33.33%, 66.66% {
+        color: hsl(3.7, 77.1%, 49.6%);
+        fill-opacity: 1;
+    }
+}
+
+.permission-popup-permission-icon.in-use:is(.camera-icon, .microphone-icon, .screen-icon) {
     fill-opacity: 1 !important;
-    fill: hsl(3.7, 77.1%, 49.6%) !important;
-    animation: 1.5s ease identity-popup-permission-icon-in-use-blink infinite !important;
+}
+
+#identity-permission-box[open] #webrtc-sharing-icon {
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity !important;
+}
+
+.tab-sharing-icon-overlay {
+    position: relative;
+    -moz-context-properties: fill;
+    fill: hsl(3.7, 77.1%, 49.6%);
+}
+.tab-icon-image[sharing]:not([selected]), .tab-sharing-icon-overlay {
+    animation: 3s linear tab-sharing-icon-pulse infinite;
 }
 
 #webrtc-sharing-icon[sharing="camera"] {

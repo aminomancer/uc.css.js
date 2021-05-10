@@ -700,19 +700,6 @@
     display: none !important;
 }
 
-.tab-icon-image[sharing],
-.tab-sharing-icon-overlay {
-    animation: none !important;
-}
-
-.tab-icon-image[sharing] {
-    visibility: hidden !important;
-}
-
-.tab-sharing-icon-overlay[sharing] {
-    display: -moz-box !important;
-}
-
 .tabbrowser-tab[label$="Violentmonkey"] .tab-sharing-icon-overlay {
     list-style-image: url(chrome://userchrome/content/devtools/command-console.svg) !important;
     display: block !important;

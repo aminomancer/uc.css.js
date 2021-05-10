@@ -239,10 +239,6 @@ panel {
     background-color: hsl(242, 65%, 60%) !important;
 }
 
-popupnotification .popup-notification-checkbox {
-    margin-block: 4px !important;
-}
-
 popupnotification checkbox .checkbox-check {
     appearance: none !important;
     min-width: 10px !important;
@@ -280,6 +276,10 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
     background-image: url(chrome://userchrome/content/check.svg) !important;
     -moz-context-properties: fill, fill-opacity !important;
     fill: currentColor !important;
+}
+
+.popup-notification-checkbox > .checkbox-label-box > .checkbox-label {
+	margin-block: 0 !important;
 }
 
 .popup-notification-learnmore-link {
@@ -638,6 +638,10 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
 
 #notification-popup menulist {
     color: var(--notification-menu-color) !important;
+}
+
+.webRTC-selectDevice-selector-container label {
+    margin-block: 0 !important;
 }
 
 #downloadsListBox {

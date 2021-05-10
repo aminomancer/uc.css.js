@@ -922,6 +922,27 @@ toolbar[brighttext] #panic-button[open] {
     list-style-image: url(chrome://userchrome/content/info-filled.svg);
 }
 
+/* webrtc notifications */
+#webRTC-selectCamera-icon {
+    list-style-image: url(chrome://userchrome/content/notifications/camera.svg);
+}
+
+#webRTC-selectMicrophone-icon {
+    list-style-image: url(chrome://userchrome/content/notifications/microphone.svg);
+}
+
+.tab-sharing-icon-overlay[sharing="camera"] {
+  list-style-image: url(chrome://userchrome/content/notifications/camera.svg);
+}
+
+.tab-sharing-icon-overlay[sharing="microphone"] {
+  list-style-image: url(chrome://userchrome/content/notifications/microphone.svg);
+}
+
+.tab-sharing-icon-overlay[sharing="screen"] {
+  list-style-image: url(chrome://userchrome/content/notifications/screen.svg);
+}
+
 /* INDIVIDUAL NOTIFICATIONS */
 
 .focus-tab-by-prompt-icon {
