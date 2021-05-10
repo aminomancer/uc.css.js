@@ -1,0 +1,30 @@
+@import url(chrome://userchrome/content/layout/uc-low-globals.css);
+
+pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    -moz-control-character-visibility: visible;
+}
+
+.nowrap pre {
+    white-space: pre;
+}
+
+html:not([dir]) pre {
+    unicode-bidi: plaintext;
+}
+
+@-moz-document unobservable-document() {
+    @media (prefers-color-scheme: dark) {
+        :root {
+            background-color: var(--in-content-bg-dark);
+            color: var(--plaintext-color);
+        }
+    }
+}
+
+@media (width: 0) or (height: 0) {
+    :root {
+        display: none;
+    }
+}

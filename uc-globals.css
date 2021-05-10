@@ -1,7 +1,8 @@
+@import url(chrome://userchrome/content/layout/uc-low-globals.css);
+
 :root,
 tooltip {
     --subdialog-font-size: 1em !important;
-    --in-content-bg-dark: rgb(25, 25, 27);
     --ui-secondary-bg: hsl(234, 39%, 10%);
     --tooltip-bgcolor: hsl(233, 36%, 11%);
     --tooltip-color: white;
@@ -39,7 +40,6 @@ tooltip {
     --ui-selection-color: hsl(236, 20%, 16%);
     --content-selection-bgcolor: rgba(255, 255, 255, 0.8);
     --content-selection-color: rgb(25, 25, 27);
-    --plaintext-color: rgba(255, 255, 255, 0.932);
     --ui-text-30: rgba(255, 255, 255, 0.3);
     --ui-text-40: rgba(255, 255, 255, 0.4);
     --ui-text-50: rgba(255, 255, 255, 0.5);

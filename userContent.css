@@ -1340,7 +1340,7 @@ menupopup {
     translate: calc(-100% + 48px) !important;
 }
 
-@-moz-document regexp("^(about:|chrome:).*") {
+@-moz-document regexp("^(about:|chrome:|moz-extension:).*") {
     html:not([role="dialog"]),
     html:not([role="dialog"]) *,
     html:not([role="dialog"]) body.activity-stream,

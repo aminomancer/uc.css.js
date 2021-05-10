@@ -32,11 +32,8 @@ menupopup::part(arrowscrollbox-scrollbox) {
 /* panel width */
 #customizationui-widget-multiview panelview:not([extension]) {
     width: unset;
-    min-width: 23em;
-}
-
-:where(#customizationui-widget-multiview) panelview:not([extension]) {
-    max-width: 18vw;
+    min-width: 27em;
+    max-width: 42em;
 }
 
 /* focused buttons to look like hovered buttons */
@@ -136,6 +133,18 @@ menupopup::part(arrowscrollbox),
 
     :is(panel, menupopup)[side="top"]::part(arrow) {
         margin-bottom: -4px;
+    }
+    
+    :is(#customization-lwtheme-menu, #customization-uidensity-menu)::part(arrowbox) {
+        -moz-box-ordinal-group: 2;
+    }
+
+    :is(#customization-lwtheme-menu, #customization-uidensity-menu)::part(arrow) {
+        transform: scaleY(-1);
+        margin-top: -5px;
+        margin-bottom: revert;
+        position: relative;
+        margin-inline: 10px;
     }
 }
 
