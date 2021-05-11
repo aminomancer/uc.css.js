@@ -302,7 +302,12 @@ const toolboxButtonL10n = {
                             toolbarbutton.autoTogglePopups = value;
                             break;
                         case mouseConfig:
-                            if (value === null) value = {"contentToolbox": 0, "browserToolbox": 2, "popupHide": 1};
+                            if (value === null)
+                                value = {
+                                    "contentToolbox": 0,
+                                    "browserToolbox": 2,
+                                    "popupHide": 1,
+                                };
                             toolbarbutton.mouseConfig = JSON.parse(value);
                             toolbarbutton.setStrings();
                             break;
@@ -397,11 +402,11 @@ const toolboxButtonL10n = {
     let styleURI = makeURI("data:text/css;charset=UTF=8," + encodeURIComponent(toolboxCSS));
     styleSvc.loadAndRegisterSheet(styleURI, styleSvc.AUTHOR_SHEET);
 
-    const observer = new MutationObserver(() => {
+    let observer = new MutationObserver(() => {
         if (document.getElementById("key_toggleToolbox")) {
             CustomizableUI.getWidget("toolbox-button").forWindow(window).node.setStrings();
             observer.disconnect();
-            delete observer;
+            observer = null;
         }
     });
     observer.observe(document.body, { childList: true });

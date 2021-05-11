@@ -8,9 +8,10 @@
 (() => {
     const handler = {
         handleEvent(e) {
-            if (e.type === "popupshowing")
-                PopupNotifications._currentAnchorElement.setAttribute("open", true);
-            else PopupNotifications._currentAnchorElement.removeAttribute("open");
+            if (e.originalTarget === PopupNotifications.panel)
+                e.type === "popupshowing"
+                    ? PopupNotifications._currentAnchorElement.setAttribute("open", true)
+                    : PopupNotifications._currentAnchorElement.removeAttribute("open");
         },
         attachListeners() {
             PopupNotifications.panel.addEventListener("popupshowing", this, false);
@@ -20,7 +21,16 @@
 
     function init() {
         if (PopupNotifications.panel) handler.attachListeners();
-        else window.setTimeout(handler.attachListeners, 5000);
+        else {
+            let observer = new MutationObserver(() => {
+                if (document.getElementById("notification-popup")) {
+                    handler.attachListeners();
+                    observer.disconnect();
+                    observer = null;
+                }
+            });
+            observer.observe(document.getElementById("mainPopupSet"), { childList: true });
+        }
     }
 
     if (gBrowserInit.delayedStartupFinished) {
