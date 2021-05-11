@@ -86,7 +86,7 @@ The `userContent.css` file handles stuff like the devtools, some UI pages and co
 
 To get the complete functionality [shown in the video](https://youtu.be/BAuABH13ytM), you'll need to install at least some of the scripts. The stylesheets work fine without the scripts, but functionally it'll be just like vanilla Firefox. Instructions and explanations for the scripts are [below](#installation).
 
-Most of the important colors can be changed in [uc-globals.css](/uc-globals.css) and [uc-variables.css](/uc-variables.css). Changing the hues is easy, but at the moment I wouldn't recommend trying to convert it to a "light" color scheme. Also, instead of modifying uc-globals and uc-variables directly, it'll be easier to make your own stylesheet that overrides the variables. Then you can just add `@import url(uc-overrides.css);` to the end of [userChrome.css](/userChrome.css) so it'll win over the theme.
+Most of the important colors can be changed in [uc-low-globals.css](resources/layout/uc-low-globals.css), [uc-globals.css](/uc-globals.css) and [uc-variables.css](/uc-variables.css). Changing the hues is easy, but at the moment I wouldn't recommend trying to convert it to a "light" color scheme. Also, instead of modifying uc-globals and uc-variables directly, it'll be easier to make your own stylesheet that overrides the variables. Then you can just add `@import url(uc-overrides.css);` to the end of [userChrome.css](/userChrome.css) and after the `@import` statements in [userContent.css](/userContent.css) and [userChrome.as.css](/userChrome.as.css).
 
 <h2><b>Scripts:</b></h2>
 
