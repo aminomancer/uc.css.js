@@ -37,3 +37,13 @@ override chrome://global/skin/icons/close.svg ../resources/close.svg
 override chrome://global/skin/icons/delete.svg ../resources/material/delete.svg
 override chrome://global/skin/icons/add.svg ../resources/add.svg
 override chrome://global/skin/icons/edit.svg ../resources/edit.svg
+override chrome://browser/skin/login.svg ../resources/skin/login.svg
+override chrome://global/skin/icons/help.svg ../resources/help.svg
+override chrome://browser/skin/preferences/android-menu.svg ../resources/preferences/android-menu.svg
+override chrome://browser/skin/preferences/category-general.svg ../resources/preferences/category-general.svg
+override chrome://browser/skin/preferences/category-privacy-security.svg ../resources/preferences/category-privacy-security.svg
+override chrome://browser/skin/preferences/category-search.svg ../resources/preferences/category-search.svg
+override chrome://browser/skin/preferences/category-sync.svg ../resources/preferences/category-sync.svg
+override chrome://activity-stream/content/data/content/assets/glyph-highlights-16.svg ../resources/glyph-highlights-16.svg
+override chrome://activity-stream/content/data/content/assets/glyph-info-16.svg ../resources/glyph-info-16.svg
+override chrome://browser/skin/home.svg ../resources/skin/home.svg
