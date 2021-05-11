@@ -219,7 +219,7 @@
                     aNode.hidingBeforeRemoval = true;
                 }
                 cTarget.appendChild(aNode); // the node must be moved to the customization target, since CustomizableUI expects widgets to be immediate children of a customization target.
-                // the slider itself can't be a customization target, since then a customization target would be a child of a customization target, which would immediately crash the browser.
+                // the slider itself can't be a customization target, since you're not supposed to put a customizable area within a customizable area. I would like to figure out a way to do that some day though, since it would mean we could delete a LOT of the stuff in this script lol.
             },
 
             /**
