@@ -17,17 +17,18 @@ My personal Firefox theme/layout, plus some privileged scripts to add new behavi
 <br/>
 <p></p>
 
-For best results, set density mode to `Normal` and theme to `Dark` in the customization menu. (right click on the navbar and click "Customize Toolbar...") I strongly recommend using this on [Firefox Nightly](https://www.mozilla.org/en-US/firefox/channel/desktop/#nightly) and updating the theme at least weekly. To that end, you might find it easier to clone the repo to your chrome folder so you can pull updates quickly. I also recommend setting the following prefs in about:config: (some of these are required, others are optional)<details><summary>***Click for a full list.***</summary>
+For best results, set density mode to `Normal` and theme to `Dark` in the customization menu. (right click on the navbar and click "Customize Toolbar...") I strongly recommend using this on [Firefox Nightly](https://www.mozilla.org/en-US/firefox/channel/desktop/#nightly) and updating the theme at least weekly. To that end, you might find it easier to clone the repo to your chrome folder so you can pull updates quickly. I also recommend setting the following prefs in about:config. These are in alphabetical order, not in order of importance. Several are optional, but the notes column highlights any that are required.<details><summary>***Click for a full list.***</summary>
 | Pref&nbsp;name 	| Type 	| Value 	| Notes&nbsp;(optional&nbsp;unless&nbsp;otherwise&nbsp;noted) 	|
 |-	|-	|-	|-	|
 | browser.anchor_color 	| String 	| `#5311ff` 	|  	|
+| browser.visited_color 	| String 	| `#753afc` 	|  	|
 | browser.display.focus_ring_style 	| Number 	| 0 	|  	|
 | browser.display.focus_ring_width 	| Number 	| 0 	|  	|
-| browser.proton.contextmenus.enabled 	| Boolean 	| true 	| The stylesheets have fallback options if these prefs are disabled. But the fallback styles are not regularly updated. So I strongly recommend enabling all of the proton prefs 	|
-| browser.proton.doorhangers.enabled 	| Boolean 	| true 	|  	|
-| browser.proton.enabled 	| Boolean 	| true 	|  	|
-| browser.proton.modals.enabled 	| Boolean 	| true 	|  	|
-| browser.proton.places-tooltip.enabled 	| Boolean 	| true 	|  	|
+| *browser.proton.contextmenus.enabled* 	| Boolean 	| true 	| The stylesheets have fallback options if these prefs are disabled. But the fallback styles are not regularly updated. So I strongly recommend enabling all of the proton prefs 	|
+| *browser.proton.doorhangers.enabled* 	| Boolean 	| true 	|  	|
+| *browser.proton.enabled* 	| Boolean 	| true 	|  	|
+| *browser.proton.modals.enabled* 	| Boolean 	| true 	|  	|
+| *browser.proton.places-tooltip.enabled* 	| Boolean 	| true 	|  	|
 | browser.startup.blankWindow 	| Boolean 	| false 	| These two settings eliminate the blank white window during startup 	|
 | browser.startup.preXulSkeletonUI 	| Boolean 	| false 	|  	|
 | browser.tabs.tabMinWidth 	| Number 	| 90 	| User preference, but mine is 90 	|
@@ -45,21 +46,23 @@ For best results, set density mode to `Normal` and theme to `Dark` in the custom
 | gfx.font_rendering.cleartype_params.pixel_structure 	| Number 	| 1 	|  	|
 | gfx.font_rendering.cleartype_params.rendering_mode 	| Number 	| 5 	|  	|
 | gfx.font_rendering.directwrite.use_gdi_table_loading 	| Boolean 	| false 	|  	|
-| gfx.webrender.svg-images 	| Boolean 	| true 	|  	|
-| layout.css.backdrop-filter.enabled 	| Boolean 	| true 	| Required for the acrylic/glass gaussian blur effect 	|
-| layout.css.moz-document.content.enabled 	| Boolean 	| true 	| Required 	|
+| *gfx.webrender.svg-images* 	| Boolean 	| true 	|  	|
+| *layout.css.backdrop-filter.enabled* 	| Boolean 	| true 	| Required for the acrylic/glass gaussian blur effect 	|
+| *layout.css.moz-document.content.enabled* 	| Boolean 	| true 	| Required 	|
 | reader.color_scheme 	| String 	| `dark` 	|  	|
-| svg.context-properties.content.enabled 	| Boolean 	| true 	| Required for making some icons white 	|
-| toolkit.legacyUserProfileCustomizations.stylesheets 	| Boolean 	| true 	| Required, of course 	|
+| mousewheel.autodir.enabled 	| Boolean 	| true 	| Allow mousewheel ⇅ to scroll ⇄-only scrollboxes 	|
+| *svg.context-properties.content.enabled* 	| Boolean 	| true 	| Required for making some icons white 	|
+| *toolkit.legacyUserProfileCustomizations.stylesheets* 	| Boolean 	| true 	| Required, of course 	|
 | ui.IMERawInputBackground 	| String 	| `#000000` 	| This affects the appearance of IME overlays. e.g. when typing Hangul or Pinyin 	|
 | ui.IMESelectedRawTextBackground 	| String 	| `#7755FF` 	|  	|
+| ui.key.menuAccessKeyFocuses 	| Boolean 	| false 	| Disable alt-key opening menubar if you use my alt+M hotkey 	|
 | ui.SpellCheckerUnderline 	| String 	| `#E2467A` 	|  	|
 | ui.prefersReducedMotion 	| Number 	| 0 	|  	|
 | ui.submenuDelay 	| Number 	| 100 	| These aren't required, but feel more responsive imo 	|
 | ui.tooltipDelay 	| Number 	| 100 	|  	|
 | ui.skipNavigatingDisabledMenuItem 	| Number 	| 1 	| When focusing menuitems with arrow keys, skip disabled items 	|
 | ui.SpellCheckerUnderlineStyle 	| Number 	| 1 	| Use dotted underline for spell checker 	|
-| ui.systemUsesDarkTheme 	| Number 	| 1 	| Currently required; working on a light mode 	|
+| *ui.systemUsesDarkTheme* 	| Number 	| 1 	| Currently required; working on a light mode 	|
 | ui.textHighlightBackground 	| String 	| `#7755FF` 	| These prefs control the appearance of text highlighted by the findbar. I choose white text on purple/pink background 	|
 | ui.textHighlightForeground 	| String 	| `#FFFFFF` 	|  	|
 | ui.textSelectBackground 	| String 	| `#FFFFFF` 	|  	|
@@ -71,8 +74,7 @@ For best results, set density mode to `Normal` and theme to `Dark` in the custom
 | userChrome.tabs.pinned-tabs.close-buttons.disabled 	| Boolean 	| true 	| This controls whether close buttons are shown on pinned tabs 	|
 | userChrome.tabs.rounded-outer-corners.disabled 	| Boolean 	| false 	| This controls whether tabs have rounded bottom corners<br/><a href="https://youtu.be/BAuABH13ytM"><img src="preview/prev-tabcorners.png" width="100%"/></a> 	|
 | userChrome.urlbar-results.disable_animation 	| Boolean 	| false 	| Toggle to `true` if you don't want urlbar animations 	|
-| widget.chrome.allow-gtk-dark-theme 	| Boolean 	| true 	| I'm not sure if these still do anything. But might as well enable them 	|
-| widget.content.allow-gtk-dark-theme 	| Boolean 	| true 	|  	|
+| widget.content.allow-gtk-dark-theme 	| Boolean 	| true 	| Makes Linux theming more consistent 	|
 | widget.disable-native-theme-for-content 	| Boolean 	| true 	| Enables Firefox's custom appearance for elements like checkboxes. Skips the "native" appearance given by the OS stylesheets. 	|
 </details>
 
