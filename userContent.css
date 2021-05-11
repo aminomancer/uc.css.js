@@ -115,6 +115,14 @@
     }
 }
 
+@-moz-document url("about:blank") {
+    @media (prefers-color-scheme: dark) {
+        :root {
+            background-color: var(--in-content-bg-dark);
+        }
+    }
+}
+
 @-moz-document regexp("view-source:.*") {
     @font-face {
         font-family: "Overpass Mono";
