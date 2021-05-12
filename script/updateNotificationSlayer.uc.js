@@ -26,7 +26,7 @@
 
     async function init() {
         await sleep(3000);
-        PanelUI._updateNotifications = function _updateNotifications(notificationsChanged) {
+        PanelUI.updateNotifications = function (notificationsChanged) {
             let notifications = this._notifications;
             if (!notifications || !notifications.length) {
                 if (notificationsChanged) {
@@ -36,7 +36,11 @@
                 return;
             }
 
-            if ((window.fullScreen && FullScreen.navToolboxHidden) || document.fullscreenElement) {
+            if (
+                (window.fullScreen && FullScreen.navToolboxHidden) ||
+                document.fullscreenElement ||
+                this._shouldSuppress()
+            ) {
                 this._hidePopup();
                 return;
             }

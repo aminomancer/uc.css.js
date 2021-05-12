@@ -2,7 +2,7 @@
     class AppMenuMods {
         constructor() {
             this.addonStrings = new Localization(["toolkit/about/aboutAddons.ftl"], true);
-            PanelUI.init();
+            PanelUI._initialized || PanelUI.init(shouldSuppressPopupNotifications);
             PanelUI.mainView.addEventListener("ViewShowing", this, { once: true });
         }
         static sleep(ms) {
