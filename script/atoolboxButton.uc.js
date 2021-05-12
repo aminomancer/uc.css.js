@@ -212,6 +212,7 @@ const toolboxButtonL10n = {
                     class: "toolbarbutton-text",
                     crop: "right",
                     flex: "1",
+                    value: toolboxButtonL10n.defaultLabel,
                 }))
                     label.setAttribute(key, val);
 
@@ -329,25 +330,26 @@ const toolboxButtonL10n = {
                 }
 
                 toolbarbutton.setStrings = function () {
-                    let hotkey;
+                    let hotkey, labelString;
                     for (const [key, val] of Object.entries(toolbarbutton.mouseConfig))
                         if (val === 0)
                             switch (key) {
                                 case "contentToolbox":
-                                    label = toolboxButtonL10n.contentLabel;
+                                    labelString = toolboxButtonL10n.contentLabel;
                                     hotkey = aDoc.defaultView.key_toggleToolbox;
                                     break;
                                 case "browserToolbox":
-                                    label = toolboxButtonL10n.browserLabel;
+                                    labelString = toolboxButtonL10n.browserLabel;
                                     hotkey = aDoc.defaultView.key_browserToolbox;
                                     break;
                                 case "popupHide":
-                                    label = toolboxButtonL10n.autoHideLabel;
+                                    labelString = toolboxButtonL10n.autoHideLabel;
                                     break;
                             }
                     let shortcut = hotkey ? ` (${ShortcutUtils.prettifyShortcut(hotkey)})` : "";
-                    toolbarbutton.label = label;
-                    toolbarbutton.tooltipText = `${label}${shortcut}`;
+                    toolbarbutton.label = labelString;
+                    label.value = labelString;
+                    toolbarbutton.tooltipText = `${labelString}${shortcut}`;
                 };
 
                 /**

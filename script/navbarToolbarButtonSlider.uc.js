@@ -66,6 +66,7 @@
         const widthPref = "userChrome.toolbarSlider.width";
         const excludedPref = "userChrome.toolbarSlider.excludeButtons";
         const springPref = "userChrome.toolbarSlider.excludeFlexibleSpace";
+        const collapsePref = "userChrome.toolbarSlider.collapseSliderOnOverflow";
         let outer = document.createElement("toolbaritem");
         let inner = document.createElement("hbox");
         let kids = inner.children;
@@ -84,33 +85,64 @@
                 window.removeEventListener("unload", this, false);
                 prefsvc.removeObserver(widthPref, this);
             },
-            observe(_sub, _top, pref) {
-                this.width = prefsvc.getIntPref(pref, 11) * 32;
-                if (outer.ready) outer.style.maxWidth = `${this.width}px`;
-            },
-            async prefSet(pref, val) {
-                return prefsvc.setIntPref(pref, val);
-            },
-            async initialSet() {
-                try {
-                    this.width = prefsvc.getIntPref(widthPref) * 32;
-                } catch (e) {
-                    await this.prefSet(widthPref, 11);
-                    this.observe(null, null, widthPref);
+            async observe(sub, _top, pref) {
+                let value = this.getPref(sub, pref);
+                switch (pref) {
+                    case widthPref:
+                        if (value === null) value = 11;
+                        this.width = value * 32;
+                        if (outer.ready) outer.style.maxWidth = `${this.width}px`;
+                        break;
+                    case collapsePref:
+                        if (value === null) value = true;
+                        this.collapse = value;
+                        value
+                            ? urlbar.style.removeProperty("min-width")
+                            : (urlbar.style.minWidth = "revert");
+                        if (outer.ready) {
+                            outer.setAttribute("overflows", value);
+                            if (cNavBar.getAttribute("overflowing") && !value) {
+                                await cNavBar.overflowable._moveItemsBackToTheirOrigin(true);
+                                let array = await convertToArray(widgets);
+                                backToNavbar(array, inner);
+                                outer.style.display = "-moz-box";
+                            }
+                        }
+                        break;
                 }
+            },
+            getPref(root, pref) {
+                switch (root.getPrefType(pref)) {
+                    case root.PREF_BOOL:
+                        return root.getBoolPref(pref);
+                    case root.PREF_INT:
+                        return root.getIntPref(pref);
+                    case root.PREF_STRING:
+                        return root.getStringPref(pref);
+                    default:
+                        return null;
+                }
+            },
+            initialSet() {
+                if (!prefsvc.prefHasUserValue(widthPref)) prefsvc.setIntPref(widthPref, 11);
+                if (!prefsvc.prefHasUserValue(collapsePref))
+                    prefsvc.setBoolPref(collapsePref, true);
                 if (!prefsvc.prefHasUserValue(excludedPref))
                     prefsvc.setStringPref(excludedPref, "[]");
                 if (!prefsvc.prefHasUserValue(springPref)) prefsvc.setBoolPref(springPref, true);
+                this.observe(Services.prefs, null, widthPref);
+                this.observe(Services.prefs, null, collapsePref);
             },
             attachListeners() {
                 window.addEventListener("unload", this, false);
                 prefsvc.addObserver(widthPref, this);
+                prefsvc.addObserver(collapsePref, this);
             },
         };
 
         let cuiListen = {
             onCustomizeStart() {
-                let isOverflowing = cNavBar.getAttribute("overflowing");
+                let isOverflowing = prefHandler.collapse && cNavBar.getAttribute("overflowing");
                 if (!isOverflowing) unwrapAll(kids, cTarget);
                 /* temporarily move the slider out of the way. we don't want to delete it since we only want to add listeners and observers once per window.
                 the slider needs to be out of the customization target during customization, or else we get a tiny bug where dragging a widget ahead of the empty slider causes the widget to teleport to the end. */
@@ -118,13 +150,12 @@
                 outer.style.display = isOverflowing ? "none" : "-moz-box";
             },
             async onCustomizeEnd() {
-                let isOverflowing = cNavBar.getAttribute("overflowing");
+                let isOverflowing = prefHandler.collapse && cNavBar.getAttribute("overflowing");
                 let array = await convertToArray(widgets);
-                if (!isOverflowing) wrapAll(array, inner);
-                else {
+                if (isOverflowing) {
                     wrapAll(array, cOverflow);
                     cOverflow.insertBefore(outer, cOverflow.firstElementChild);
-                }
+                } else wrapAll(array, inner);
                 outer.style.display = isOverflowing ? "none" : "-moz-box";
             },
             onWidgetOverflow(aNode, aContainer) {
@@ -327,8 +358,8 @@
                 item.id.startsWith("customizableui-special-spring") ||
                 item.id.startsWith("wrapper-customizableui-special-spring")
             )
-                return !prefsvc.getBoolPref(springPref);
-            let excludedButtons = JSON.parse(prefsvc.getStringPref(excludedPref));
+                return !prefsvc.getBoolPref(springPref, true);
+            let excludedButtons = JSON.parse(prefsvc.getStringPref(excludedPref, "[]"));
             if (excludedButtons.some((str) => str === item.id)) return false;
             return true;
         }
@@ -426,7 +457,7 @@
             inner.id = "nav-bar-toolbarbutton-slider";
             inner.style.cssText = "display: -moz-box; height: var(--urlbar-container-height);";
             for (const [key, val] of Object.entries({
-                overflows: true,
+                overflows: prefHandler.collapse,
                 smoothscroll: true,
                 clicktoscroll: true,
                 orient: "horizontal",
