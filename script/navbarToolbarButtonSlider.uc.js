@@ -79,11 +79,13 @@
         let widgets = cTarget.children;
         let domArray = [];
 
+        // set up preferences and change internal variables in response to user's pref changes.
         let prefHandler = {
             handleEvent(e) {
                 if (e.type !== "unload") return;
                 window.removeEventListener("unload", this, false);
                 prefsvc.removeObserver(widthPref, this);
+                prefsvc.removeObserver(collapsePref, this);
             },
             async observe(sub, _top, pref) {
                 let value = this.getPref(sub, pref);
@@ -130,8 +132,8 @@
                 if (!prefsvc.prefHasUserValue(excludedPref))
                     prefsvc.setStringPref(excludedPref, "[]");
                 if (!prefsvc.prefHasUserValue(springPref)) prefsvc.setBoolPref(springPref, true);
-                this.observe(Services.prefs, null, widthPref);
-                this.observe(Services.prefs, null, collapsePref);
+                this.observe(prefsvc, null, widthPref);
+                this.observe(prefsvc, null, collapsePref);
             },
             attachListeners() {
                 window.addEventListener("unload", this, false);
@@ -140,10 +142,11 @@
             },
         };
 
+        // hook up the native toolbar customization component.
         let cuiListen = {
             onCustomizeStart() {
                 let isOverflowing = prefHandler.collapse && cNavBar.getAttribute("overflowing");
-                if (!isOverflowing) unwrapAll(kids, cTarget);
+                if (!isOverflowing) appendLoop(kids, cTarget);
                 /* temporarily move the slider out of the way. we don't want to delete it since we only want to add listeners and observers once per window.
                 the slider needs to be out of the customization target during customization, or else we get a tiny bug where dragging a widget ahead of the empty slider causes the widget to teleport to the end. */
                 bin.appendChild(outer);
@@ -160,7 +163,7 @@
             },
             onWidgetOverflow(aNode, aContainer) {
                 if (aNode.ownerGlobal !== window) return;
-                if (aNode === outer && aContainer === cTarget) unwrapAll(kids, cOverflow);
+                if (aNode === outer && aContainer === cTarget) appendLoop(kids, cOverflow);
                 outer.style.display = "none";
             },
             async onWidgetUnderflow(aNode, aContainer) {
@@ -266,6 +269,14 @@
                 return aNode.classList.contains("chromeclass-toolbar-additional");
             },
 
+            /**
+             * sometimes the context menu is invoked on a toolbar button that's not actually a widget.
+             * examples are the profiler button, the zoom buttons, or the edit buttons.
+             * these are "combined" toolbar buttons, each individual button has its own event listeners, but the actual widget is their container.
+             * so if we're dealing with one of those, we need to get its parent element, not it.
+             * @param {object} popup (a DOM node, the context menu that was invoked)
+             * @returns a DOM node, either the button that was right-clicked or its container
+             */
             validWidget(popup) {
                 let node = popup.triggerNode;
                 if (this.testClass(node)) return node;
@@ -313,7 +324,7 @@
         };
 
         const muObserver = new MutationObserver(function (mus) {
-            // mutation observer callback. we're listening for changes to the "open" attribute of children of inner (the inner container). when you click a toolbar button that has a popup, it opens the popup and sets the "open" attribute of the button to "true". if you were to scroll the slider container while the popup is open, the popup will move right along with its anchor, the button. this is a problem because some button popups are actually children of the button. meaning mousewheeling with the cursor over the popup would scroll the slider, not the popup. there are other ways to deal with this, but we don't want the slider to scroll at all when the popup is open. because firefox normally blocks scrolling when a menupopup is open. so let's just listen for button nodes having open="true" and set a property on the outer container accordingly. then we can use that prop to enable/disable scrolling.
+            // we're listening for changes to the "open" attribute of children of inner (the inner container). when you click a toolbar button that has a popup, it opens the popup and sets the "open" attribute of the button to "true". if you were to scroll the slider container while the popup is open, the popup will move right along with its anchor, the button. this is a problem because some button popups are actually children of the button. meaning mousewheeling with the cursor over the popup would scroll the slider, not the popup. there are other ways to deal with this, but we don't want the slider to scroll at all when the popup is open. because firefox normally blocks scrolling when a menupopup is open. so let's just listen for button nodes having open="true" and set a property on the outer container accordingly. then we can use that prop to enable/disable scrolling.
             for (const mu of mus)
                 if (mu.type === "attributes")
                     // if any button has open=true, set outer.open=true, else, outer.open=false.
@@ -322,7 +333,7 @@
                         : !outer.open || (outer.open = false);
         });
 
-        // convert the buttons we want to wrap into an array. isn't entirely necessary but it's a performant way to prevent weird anomalies during startup that could show up otherwise, e.g. after installing an update and restarting.
+        // convert the available buttons into an array and filter out all the undesirable buttons. used before wrapping
         async function convertToArray(buttons) {
             domArray = Array.from(buttons).filter((item, index, array) => {
                 return array.indexOf(urlbar) < index && filterWidgets(item);
@@ -359,6 +370,7 @@
                 item.id.startsWith("wrapper-customizableui-special-spring")
             )
                 return !prefsvc.getBoolPref(springPref, true);
+            // exclude buttons defined by user preference
             let excludedButtons = JSON.parse(prefsvc.getStringPref(excludedPref, "[]"));
             if (excludedButtons.some((str) => str === item.id)) return false;
             return true;
@@ -377,10 +389,7 @@
             parent.insertBefore(outer, previousSibling.nextSibling);
         }
 
-        function unwrapAll(buttons, container) {
-            appendLoop(buttons, container);
-        }
-
+        // move all the passed buttons back to the slider, and move the slider back to the customization target.
         function backToNavbar(buttons, container) {
             buttons.forEach((val) => container.appendChild(val));
             cTarget.appendChild(outer);
