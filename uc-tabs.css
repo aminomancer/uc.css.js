@@ -700,14 +700,13 @@
     display: none !important;
 }
 
-.tabbrowser-tab[label$="Violentmonkey"] .tab-sharing-icon-overlay {
-    list-style-image: url(chrome://userchrome/content/devtools/command-console.svg) !important;
+.tabbrowser-tab[label$="Violentmonkey"] .tab-icon-image {
+    animation: none !important;
+    background-image: url(chrome://userchrome/content/devtools/command-console.svg) !important;
     display: block !important;
     fill: currentColor !important;
-}
-
-.tabbrowser-tab[label$="Violentmonkey"] .tab-icon-image {
-    visibility: hidden !important;
+    padding-right: 16px !important;
+    box-sizing: border-box !important;
 }
 
 #TabsToolbar .tabbrowser-tab {

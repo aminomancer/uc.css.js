@@ -1349,20 +1349,23 @@ menupopup {
 }
 
 @-moz-document regexp("^(about:|chrome:|moz-extension:).*") {
+    :root {
+        /* --checkbox-border-color: var(--uc-checkbox-border-color);
+        --checkbox-checked-border-color: var(--uc-checkbox-checked-border-color);
+        --checkbox-unchecked-bgcolor: var(--uc-checkbox-unchecked-bgcolor);
+        --checkbox-unchecked-hover-bgcolor: var(--uc-checkbox-unchecked-hover-bgcolor);
+        --checkbox-unchecked-active-bgcolor: var(--uc-checkbox-unchecked-active-bgcolor); */
+        --checkbox-checked-bgcolor: var(--uc-checkbox-checked-bgcolor);
+        --checkbox-checked-color: var(--uc-checkbox-checked-color);
+        --checkbox-checked-hover-bgcolor: var(--uc-checkbox-checked-hover-bgcolor);
+        --checkbox-checked-active-bgcolor: var(--uc-checkbox-checked-active-bgcolor);
+    }
+
     html:not([role="dialog"]),
     html:not([role="dialog"]) *,
     html:not([role="dialog"]) body.activity-stream,
     window:not([chromehidden]),
     window:not([chromehidden]) > dialog {
-        --checkbox-border-color: var(--uc-checkbox-border-color) !important;
-        --checkbox-checked-border-color: var(--uc-checkbox-checked-border-color) !important;
-        --checkbox-unchecked-bgcolor: var(--uc-checkbox-unchecked-bgcolor) !important;
-        --checkbox-unchecked-hover-bgcolor: var(--uc-checkbox-unchecked-hover-bgcolor) !important;
-        --checkbox-unchecked-active-bgcolor: var(--uc-checkbox-unchecked-active-bgcolor) !important;
-        --checkbox-checked-bgcolor: var(--uc-checkbox-checked-bgcolor) !important;
-        --checkbox-checked-color: var(--uc-checkbox-checked-color) !important;
-        --checkbox-checked-hover-bgcolor: var(--uc-checkbox-checked-hover-bgcolor) !important;
-        --checkbox-checked-active-bgcolor: var(--uc-checkbox-checked-active-bgcolor) !important;
         --in-content-page-background: rgb(30, 29, 31) !important;
         --in-content-page-color: hsl(212, 43%, 90%) !important;
         --in-content-box-background: hsl(300, 2%, 16%) !important;

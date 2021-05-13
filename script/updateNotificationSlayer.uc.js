@@ -65,13 +65,13 @@
                 if (
                     (window.fullScreen && this.autoHideToolbarInFullScreen) ||
                     Services.focus.activeWindow !== window ||
-                    doorhangers[0].id === "update-available"
+                    doorhangers[0].id.startsWith("update")
                 ) {
                     this._hidePopup();
                     this._showBadge(doorhangers[0]);
                     this._showBannerItem(doorhangers[0]);
-                    if (doorhangers[0].id === "update-available") {
-                        AppMenuNotifications.dismissNotification("update-available");
+                    if (doorhangers[0].id.startsWith("update")) {
+                        AppMenuNotifications.dismissNotification(doorhangers[0].id);
                         doorhangers[0].dismissed = true;
                     }
                 } else {
@@ -92,7 +92,7 @@
             options = {}
         ) {
             let newOptions = options;
-            if (id === "update-available") {
+            if (id.startsWith("update")) {
                 newOptions.dismissed = true;
             }
             let notification = new AppMenuNotification(id, mainAction, secondaryAction, newOptions);
