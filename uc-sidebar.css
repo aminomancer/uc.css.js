@@ -58,9 +58,15 @@
 @-moz-document url("chrome://browser/content/browser.xhtml"), regexp(".*Sidebar.*"), regexp(".*sidebar.*")
 {
     .textbox-search-icons {
-        display: flex;
+        display: flex !important;
         flex-flow: row nowrap;
         align-items: center;
+    }
+
+    .textbox-search-icons:not([selectedIndex="1"]) {
+        opacity: 0 !important;
+        pointer-events: none !important;
+        -moz-inert: initial !important;
     }
 
     .textbox-search-clear {

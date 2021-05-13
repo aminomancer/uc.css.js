@@ -270,6 +270,7 @@ menupopup.in-menulist {
 
 .contentSelectDropdown-searchbox {
     appearance: none !important;
+    font: menu !important;
     color: inherit !important;
     border-radius: var(--context-menuitem-border-radius);
     margin-block: 0 !important;

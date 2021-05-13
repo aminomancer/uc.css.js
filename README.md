@@ -48,6 +48,7 @@ For best results, set density mode to `Normal` and theme to `Dark` in the custom
 | gfx.font_rendering.directwrite.use_gdi_table_loading 	| Boolean 	| false 	|  	|
 | *gfx.webrender.svg-images* 	| Boolean 	| true 	|  	|
 | *layout.css.backdrop-filter.enabled* 	| Boolean 	| true 	| Required for the acrylic/glass gaussian blur effect 	|
+| *layout.css.cached-scrollbar-styles.enabled* 	| Boolean 	| false 	| Sort of required for userChrome.as.css 	|
 | *layout.css.moz-document.content.enabled* 	| Boolean 	| true 	| Required 	|
 | reader.color_scheme 	| String 	| `dark` 	|  	|
 | mousewheel.autodir.enabled 	| Boolean 	| true 	| Allow mousewheel ⇅ to scroll ⇄-only scrollboxes 	|
