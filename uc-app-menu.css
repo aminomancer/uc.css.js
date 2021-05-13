@@ -421,7 +421,7 @@
     }
 
     #appmenu-moreTools-button {
-        list-style-image: url(chrome://userchrome/content/skin/customize.svg);
+        list-style-image: url(chrome://browser/skin/customize.svg);
     }
 
     #appMenu-quit-button2 {
