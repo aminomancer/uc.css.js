@@ -355,7 +355,7 @@
     }
 
     #appMenu-passwords-button {
-        list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M12 4a4 4 0 00-3.86 3H1a1 1 0 000 2v1a1 1 0 002 0V9h1v1a1 1 0 002 0V9h2.14A4 4 0 1012 4zm0 6a2 2 0 112-2 2 2 0 01-2 2z'/></svg>");
+        list-style-image: url(chrome://userchrome/content/skin/login.svg);
     }
 
     #appMenu-bookmarks-button {
@@ -417,7 +417,7 @@
     }
 
     #appMenu-advanced-settings-button {
-        list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M1 12.667c0 .428.35.778.778.778h3.889v-1.556H1.778a.78.78 0 00-.778.778zm0-9.334c0 .428.35.778.778.778h7V2.556h-7A.78.78 0 001 3.333zm7.778 10.889v-.778h5.444c.428 0 .778-.35.778-.778s-.35-.778-.778-.778H8.778v-.778A.78.78 0 008 10.332a.78.78 0 00-.778.778v3.111c0 .429.35.779.778.779a.78.78 0 00.778-.778zM4.111 6.444v.778H1.778A.78.78 0 001 8c0 .428.35.778.778.778h2.333v.778c0 .428.35.778.778.778s.778-.35.778-.778V6.444c0-.428-.35-.778-.778-.778s-.778.351-.778.778zM15 8a.78.78 0 00-.778-.778h-7v1.556h7A.78.78 0 0015 8zm-3.889-2.333a.78.78 0 00.778-.778v-.778h2.333c.428 0 .778-.35.778-.778s-.35-.778-.778-.778h-2.333v-.777A.78.78 0 0011.111 1a.78.78 0 00-.778.778v3.111c0 .428.35.778.778.778z'/></svg>") !important;
+        list-style-image: url(chrome://userchrome/content/material/tune.svg);
     }
 
     #appmenu-moreTools-button {
@@ -428,7 +428,7 @@
         list-style-image: url(chrome://userchrome/content/skin/quit.svg);
     }
 
-/*     #appMenu-fxa-label2:before {
+    /* #appMenu-fxa-label2:before {
         -moz-context-properties: fill, fill-opacity;
         content: "";
         background-image:  var(--avatar-image-url);
@@ -439,11 +439,11 @@
         height: 16px;
         fill: currentColor;
         display: -moz-box;
-} */
+    } */
 
     #appMenu-fxa-label2:before {
         -moz-context-properties: fill, fill-opacity;
-        content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='context-fill' fill-opacity='context-fill-opacity'><path d='M8 0C3.58 0 0 3.58 0 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm0 2.29c1.89 0 3.43 1.54 3.43 3.43S9.89 9.14 8 9.14 4.57 7.61 4.57 5.71 6.11 2.29 8 2.29zm4.7 8.92c-1.8 2.59-5.36 3.24-7.95 1.44-.56-.39-1.05-.88-1.44-1.44-.29-.44-.24-1.02.13-1.41 1.13-1.39 2.82.49 4.56.49s3.43-1.87 4.63-.48c.34.39.37.97.07 1.4z'/></svg>");
+        content: url(chrome://userchrome/content/fxa/avatar-big.svg);
         fill: currentColor;
         display: -moz-box;
     }
@@ -465,11 +465,13 @@
         fill: var(--arrowpanel-color);
     }
 
-    :root[fxastatus="signedin"] #fxa-menu-avatar, :root[fxastatus="signedin"] #fxa-avatar-image {
+    :root[fxastatus="signedin"] #fxa-menu-avatar,
+    :root[fxastatus="signedin"] #fxa-avatar-image {
         border-radius: 50%;
     }
-    
-    #fxa-menu-header-description, #fxa-menu-header-title {
+
+    #fxa-menu-header-description,
+    #fxa-menu-header-title {
         margin-block: 0 !important;
     }
 

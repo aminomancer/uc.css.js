@@ -52,7 +52,8 @@ menupopup:not(.PanelUI-subView) :is(menuitem, menu) .menu-iconic-icon {
 }
 
 moz-input-box > menupopup .context-menu-add-engine > .menu-iconic-left::after {
-    background: url(chrome://userchrome/content/skin/search-indicator-badge-add.svg) no-repeat center/contain !important;
+    background: url(chrome://userchrome/content/skin/search-indicator-badge-add.svg) no-repeat
+        center/contain !important;
     -moz-context-properties: fill, fill-opacity, stroke !important;
     fill: var(--update-badge-bg) !important;
     stroke: var(--update-badge-color) !important;
@@ -134,7 +135,7 @@ menupopup .unified-nav-current[type="radio"][checked="true"] {
 menupopup .unified-nav-current[type="radio"][checked="true"]::before {
     width: 16px;
     height: 16px;
-    margin-inline: var(--context-iconic-margin); !important;
+    margin-inline: var(--context-iconic-margin);
     background-image: url(chrome://userchrome/content/check.svg);
     border-radius: 2px;
     fill-opacity: 1;
@@ -390,7 +391,8 @@ menulist:-moz-focusring > menupopup.in-menulist > menuitem[_moz-menuactive="true
         display: none !important;
     }
 
-    @-moz-document url("chrome://browser/content/browser.xhtml") {
+    @-moz-document url(chrome://browser/content/browser.xhtml)
+    {
         #contentAreaContextMenu menuseparator:not([id]) {
             display: -moz-box !important;
         }

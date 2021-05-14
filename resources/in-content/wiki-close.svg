@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+    <path fill="context-fill"
+        d="M13.5 6l-3.4 3.5L6.5 6l-.5.5L9.4 10l-3.3 3.5.5.5 3.5-3.5 3.4 3.5.5-.5-3.4-3.5L14 6.5l-.5-.5z" />
+    <path fill="context-fill" fill-opacity="context-fill-opacity"
+        d="M10 2c-4.4 0-8 3.6-8 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm0 15.3c-4 0-7.3-3.3-7.3-7.3S6 2.7 10 2.7 17.3 6 17.3 10 14 17.3 10 17.3z" />
+</svg>

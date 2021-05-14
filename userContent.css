@@ -48,18 +48,20 @@
 
     input[type="number"]::-moz-number-spin-up,
     input[type="number"]::-moz-number-spin-down {
-        appearance: none;
-        -moz-context-properties: fill, fill-opacity;
-        fill-opacity: 0.4;
-        fill: currentColor;
-        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="6" height="5"><path d="M1,4 L3,0 5,4" fill="context-fill" fill-opacity="context-fill-opacity"/></svg>');
-        background-size: 65% 75%;
-        border: none;
+        -moz-context-properties: fill, fill-opacity !important;
+        border: 0;
         border-radius: 0;
+        background-image: url("chrome://userchrome/content/arrow-dropdown-16.svg");
+        background-size: 8px;
+        background-position: center 0px;
+        -moz-context-properties: fill;
+        fill: currentColor;
+        fill-opacity: 0.4;
+        appearance: none;
     }
 
-    input[type="number"]::-moz-number-spin-down {
-        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="6" height="5"><path d="M1,1 L3,5 5,1" fill="context-fill" fill-opacity="context-fill-opacity"/></svg>');
+    input[type="number"]::-moz-number-spin-up {
+        scale: 1 -1;
     }
 
     input[type="number"]::-moz-number-spin-down:hover,
@@ -1472,7 +1474,7 @@ menupopup {
     }
 
     #category-experimental > .category-icon {
-        list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='1 2 14 14'><path fill='context-fill' d='M13.9 9.81a1.23 1.23 0 000-.17v-.08a5.67 5.67 0 00-2.4-3.36 1.17 1.17 0 01-.56-.95V3a1 1 0 00-1-1H6.06a1 1 0 00-1 1v2.25a1.17 1.17 0 01-.56 1 5.66 5.66 0 00-2.35 3.33v.12a.53.53 0 000 .11 5.35 5.35 0 00-.11 1 5.65 5.65 0 003.24 5.09 1 1 0 00.44.1h4.57a1 1 0 00.44-.1A5.65 5.65 0 0014 10.83a5.3 5.3 0 00-.1-1.02zm-8.27-2a3.18 3.18 0 001.43-2.6V4h1.88v1.25a3.18 3.18 0 001.43 2.6 3.68 3.68 0 011.54 2.24v.22a2.82 2.82 0 01-3.68-.59A3.48 3.48 0 004.56 9a3.76 3.76 0 011.07-1.15z'/></svg>") !important;
+        list-style-image: url(chrome://userchrome/content/material/potion-large.svg) !important;
     }
 }
 
@@ -2081,7 +2083,7 @@ domain("wikimedia.org") {
         opacity: 1 !important;
         fill: white !important;
         fill-opacity: 0.67 !important;
-        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='context-fill' fill-opacity='context-fill-opacity'><path d='M7.5 13a5.5 5.5 0 100-11 5.5 5.5 0 000 11zm4.55.46A7.43 7.43 0 017.5 15a7.5 7.5 0 115.96-2.95l6.49 6.49-1.41 1.41-6.49-6.49z'/></svg>") !important;
+        background-image: url(chrome://userchrome/content/preferences/category-search.svg) !important;
     }
 
     #mw-head #searchform #searchButton:hover {
@@ -3861,7 +3863,7 @@ domain("wikimedia.org") {
         box-shadow: none !important;
         -moz-context-properties: fill, fill-opacity !important;
         fill: hsla(0, 0%, 100%, 0.6) !important;
-        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'> <g fill='context-fill' fill-opacity='context-fill-opacity' transform='translate(0 20)'> <path d='M22 48.3c0 6.1-4.9 11-11 11s-11-4.9-11-11 4.9-11 11-11 11 4.9 11 11zm37 0c0 6.1-4.9 11-11 11s-11-4.9-11-11 4.9-11 11-11 11 4.9 11 11z'/> <circle cx='85' cy='48.3' r='11'/> </g> </svg>") !important;
+        background-image: url(chrome://userchrome/content/in-content/wiki-ellipsis.svg) !important;
     }
 
     .mw-mmv-ttf-ellipsis:hover {
@@ -3921,7 +3923,7 @@ domain("wikimedia.org") {
 
     table.wikitable.sortable.jquery-tablesorter thead tr th.headerSort {
         background-image: linear-gradient(transparent, transparent),
-            url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2221%22 height=%229%22 viewBox=%220 0 21 9%22%3E %3Cpath d=%22M14.5 5l-4 4-4-4zm0-1l-4-4-4 4z %22 fill=%22%23f0f0f0%22/%3E %3C/svg%3E") !important;
+            url(chrome://userchrome/content/in-content/wiki-sort.svg) !important;
         background-repeat: no-repeat !important;
         background-position: center right !important;
     }
@@ -4561,7 +4563,7 @@ domain("wikimedia.org") {
     }
 
     body .ui-dialog .ui-icon-closethick {
-        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path d='M13.5 6l-3.4 3.5L6.5 6l-.5.5L9.4 10l-3.3 3.5.5.5 3.5-3.5 3.4 3.5.5-.5-3.4-3.5L14 6.5l-.5-.5z' fill='context-fill'/><path d='M10 2c-4.4 0-8 3.6-8 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm0 15.3c-4 0-7.3-3.3-7.3-7.3S6 2.7 10 2.7 17.3 6 17.3 10 14 17.3 10 17.3z' fill='context-fill' fill-opacity='context-fill-opacity'/></svg>") !important;
+        background-image: url(chrome://userchrome/content/in-content/wiki-close.svg) !important;
         background-size: 200% !important;
         fill: white !important;
         fill-opacity: 0 !important;
@@ -4950,7 +4952,7 @@ domain("wikimedia.org") {
     }
 
     .mw-mmv-stripe-button.mw-mmv-description-page-button.mw-mmv-repo-button-commons::before {
-        background-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%22212 84 600 600.8%22%3E %3Cpath fill=%22%23fff%22 d=%22M422.4 233.6h180v60h-180v-60zm299.2 120v60H422.4v-60h299.2zM422.4 534.4v-60h300v60h-300zM332 233.6h-84l-5.6-8v-67.2c0-24 21.6-44 45.6-44s44 20 44 44v75.2zM812 148c0-35.2-60-64-60-64H276c-35.2 0-64 28.8-64 64v100l16 16h104v420.8h480V148z%22/%3E %3C/svg%3E") !important;
+        background-image: url(chrome://userchrome/content/in-content/wiki-doc.svg) !important;
         image-rendering: -moz-crisp-edges !important;
     }
 
@@ -5039,7 +5041,7 @@ domain("wikimedia.org") {
     .mw-parser-output a[href$=".PDF"].external,
     .mw-parser-output a[href*=".PDF?"].external,
     .mw-parser-output a[href*=".PDF#"].external {
-        background: url("data:image/svg+xml;utf8,") no-repeat right !important;
+        background: url(chrome://userchrome/content/in-content/wiki-acrobat.svg) no-repeat right !important;
         background-size: 14px 15px !important;
         padding-right: 17px !important;
     }
@@ -5092,7 +5094,7 @@ domain("wikimedia.org") {
     }
 
     span.citation-needed-content:before {
-        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z' fill='rgb(204, 204, 204)'/></svg>");
+        background-image: url(chrome://userchrome/content/in-content/wiki-pre-quote.svg);
         background-size: 7px 7px;
         background-repeat: no-repeat !important;
         display: inline-block;
@@ -5102,7 +5104,7 @@ domain("wikimedia.org") {
     }
 
     span.citation-needed-content:after {
-        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M9.983 3v7.391c0 5.704-3.731 9.57-8.983 10.609l-.995-2.151c2.432-.917 3.995-3.638 3.995-5.849h-4v-10h9.983zm14.017 0v7.391c0 5.704-3.748 9.571-9 10.609l-.996-2.151c2.433-.917 3.996-3.638 3.996-5.849h-3.983v-10h9.983z' fill='rgb(204, 204, 204)'/></svg>");
+        background-image: url(chrome://userchrome/content/in-content/wiki-post-quote.svg);
         background-size: 10px 7px;
         background-repeat: no-repeat !important;
         display: inline-block;

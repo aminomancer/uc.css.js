@@ -281,7 +281,10 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
 }
 
 :root[min-browser] #TabsToolbar-customization-target > :is(toolbarbutton, toolbaritem):first-child,
-:root[min-browser] #TabsToolbar-customization-target > toolbarpaletteitem:first-child > :is(toolbarbutton, toolbaritem) {
+:root[min-browser]
+    #TabsToolbar-customization-target
+    > toolbarpaletteitem:first-child
+    > :is(toolbarbutton, toolbaritem) {
     padding-inline-start: 2px !important;
 }
 

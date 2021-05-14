@@ -90,7 +90,7 @@ tabmodalprompt .checkbox-check {
     fill: currentColor !important;
     padding: 1px !important;
     opacity: 0.8 !important;
-    list-style-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNNSAyYy0xLjY1NCAwLTMgMS4zNDYtMyAzdjE0YzAgMS42NTQgMS4zNDYgMyAzIDNoMTRjMS42NTQgMCAzLTEuMzQ2IDMtM3YtMTRjMC0xLjY1NC0xLjM0Ni0zLTMtM2gtMTR6bTE5IDN2MTRjMCAyLjc2MS0yLjIzOCA1LTUgNWgtMTRjLTIuNzYyIDAtNS0yLjIzOS01LTV2LTE0YzAtMi43NjEgMi4yMzgtNSA1LTVoMTRjMi43NjIgMCA1IDIuMjM5IDUgNXoiIGZpbGw9ImNvbnRleHQtZmlsbCIgZmlsbC1vcGFjaXR5PSJjb250ZXh0LWZpbGwtb3BhY2l0eSIvPjwvc3ZnPg==") !important;
+    list-style-image: url(chrome://userchrome/content/monotone-checkbox.svg) !important;
 }
 
 tabmodalprompt checkbox:hover .checkbox-check {
@@ -98,7 +98,7 @@ tabmodalprompt checkbox:hover .checkbox-check {
 }
 
 tabmodalprompt .checkbox-check[checked="true"] {
-    list-style-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTAuMDQxIDE3bC00LjUtNC4zMTkgMS4zOTUtMS40MzUgMy4wOCAyLjkzNyA3LjAyMS03LjE4MyAxLjQyMiAxLjQwOS04LjQxOCA4LjU5MXptLTUuMDQxLTE1Yy0xLjY1NCAwLTMgMS4zNDYtMyAzdjE0YzAgMS42NTQgMS4zNDYgMyAzIDNoMTRjMS42NTQgMCAzLTEuMzQ2IDMtM3YtMTRjMC0xLjY1NC0xLjM0Ni0zLTMtM2gtMTR6bTE5IDN2MTRjMCAyLjc2MS0yLjIzOCA1LTUgNWgtMTRjLTIuNzYyIDAtNS0yLjIzOS01LTV2LTE0YzAtMi43NjEgMi4yMzgtNSA1LTVoMTRjMi43NjIgMCA1IDIuMjM5IDUgNXoiIGZpbGw9ImNvbnRleHQtZmlsbCIgZmlsbC1vcGFjaXR5PSJjb250ZXh0LWZpbGwtb3BhY2l0eSIvPjwvc3ZnPg==") !important;
+    list-style-image: url(chrome://userchrome/content/monotone-checkbox-checked.svg) !important;
 }
 
 /* in-content autocomplete popup */
@@ -122,8 +122,10 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlis
     padding-inline: 2px !important;
 }
 
-panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlistitem[selected]:not([disabled]) {
-	background-color: var(--arrowpanel-dimmed) !important;
+panel#PopupAutoComplete[type="autocomplete-richlistbox"]
+    > richlistbox
+    > richlistitem[selected]:not([disabled]) {
+    background-color: var(--arrowpanel-dimmed) !important;
     color: var(--menu-color) !important;
 }
 
@@ -290,7 +292,7 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlis
         background-size: 10px 10px !important;
         background-position: center !important;
         background-repeat: no-repeat !important;
-        background-image: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='5px' height='5px' viewBox='0 0 492 492' xml:space='preserve'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M382.678,226.804L163.73,7.86C158.666,2.792,151.906,0,144.698,0s-13.968,2.792-19.032,7.86l-16.124,16.12    c-10.492,10.504-10.492,27.576,0,38.064L293.398,245.9l-184.06,184.06c-5.064,5.068-7.86,11.824-7.86,19.028    c0,7.212,2.796,13.968,7.86,19.04l16.124,16.116c5.068,5.068,11.824,7.86,19.032,7.86s13.968-2.792,19.032-7.86L382.678,265    c5.076-5.084,7.864-11.872,7.848-19.088C390.542,238.668,387.754,231.884,382.678,226.804z'/></svg>") !important;
+        background-image: url(chrome://userchrome/content/menu-arrow-thick.svg) !important;
     }
 
     #alertSettings
@@ -305,69 +307,6 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlis
     background-color: var(--urlbarView-bgcolor) !important;
 }
 
-/* for future expansion */
-/* @-moz-document regexp("chrome:\/\/(?!devtools).*") {
-
-}
-
-@-moz-document url("chrome://browser/content/places/places.xhtml") {
-
-}
-
-@-moz-document url("chrome://browser/content/aboutDialog.xhtml") {
-
-}
-
-@-moz-document url("chrome://browser/content/places/bookmarkProperties.xhtml"), url("chrome://browser/content/places/bookmarkProperties2.xhtml") {
-    
-}
-
-@-moz-document url("chrome://mozapps/content/downloads/unknownContentType.xhtml") {
-
-}
-
-@-moz-document url("chrome://global/content/appPicker.xhtml") {
-
-}
-
-@-moz-document url("chrome://mozapps/content/handling/dialog.xhtml") {
-
-}
-
-@-moz-document url("chrome://global/content/alerts/alert.xhtml") {
-
-}
-
-@-moz-document url("chrome://global/content/commonDialog.xhtml") {
-
-}
-
-@-moz-document url("chrome://mozapps/content/profile/createProfileWizard.xhtml") {
-
-}
-
-@-moz-document url("chrome://pippki/content/exceptionDialog.xhtml") {
-
-}
-
-@-moz-document url("chrome://browser/content/pageinfo/pageInfo.xhtml") {
-
-}
-
-@-moz-document url("chrome://pippki/content/certViewer.xhtml") {
-
-}
-
-@-moz-document url("chrome://mozapps/content/update/history.xhtml") {
-	
-}
-
-@-moz-document url("chrome://browser/content/sanitize.xhtml") {
-
-}
-
- */
-
 @-moz-document url("chrome://global/content/pictureinpicture/player.xhtml")
 {
     #controls.playing #playpause {
@@ -376,7 +315,7 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlis
         -moz-context-properties: fill, fill-opacity !important;
         fill: white !important;
         fill-opacity: 0.8 !important;
-        background-image: url("data:image/svg+xml;utf8,<svg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='-125 -125 762 762' style='enable-background:new 0 0 512 512;' xml:space='preserve'><g><g><path fill='context-fill' fill-opacity='context-fill-opacity' d='M181.333,0H74.667c-17.643,0-32,14.357-32,32v448c0,17.643,14.357,32,32,32h106.667c17.643,0,32-14.357,32-32V32    C213.333,14.357,198.976,0,181.333,0z'/></g></g><g><g><path fill='context-fill' fill-opacity='context-fill-opacity' d='M437.333,0H330.667c-17.643,0-32,14.357-32,32v448c0,17.643,14.357,32,32,32h106.667c17.643,0,32-14.357,32-32V32    C469.333,14.357,454.976,0,437.333,0z'/></g></g></svg>") !important;
+        background-image: url(chrome://userchrome/content/pip-pause.svg) !important;
     }
 
     #controls #audio {
@@ -581,7 +520,7 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlis
     .dialog-content-box:not([hidden]) + .dialog-button-box {
         margin-top: 5px;
     }
-    
+
     .dialog-button-box:not([hidden]) {
         display: flex;
         justify-content: end;
@@ -592,7 +531,7 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlis
         flex-wrap: nowrap;
     }
 
-/*     .dialog-button-box > button[dlgtype="cancel"][default="true"]:is(:enabled, :not([disabled="true"])) {
+    /* .dialog-button-box > button[dlgtype="cancel"][default="true"]:is(:enabled, :not([disabled="true"])) {
         background-color: var(--in-content-button-background) !important;
     }
 
@@ -632,7 +571,7 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlis
         margin-top: 4px !important;
     }
 
-/*     input[type="checkbox"]:checked {
+    /*     input[type="checkbox"]:checked {
         background-image: url(chrome://userchrome/content/check.svg) !important;
         background-size: contain !important;
     }
@@ -686,7 +625,10 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlis
         background-color: var(--dropdown-bgcolor) !important;
     }
 
-    button, select, input[type="color"], menulist {
+    button,
+    select,
+    input[type="color"],
+    menulist {
         min-height: 28px !important;
     }
 
@@ -707,7 +649,7 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlis
         color: var(--ui-selection-color) !important;
     }
 
-    input[type=number] {
+    input[type="number"] {
         overflow: hidden !important;
         overflow-clip-box: padding-box !important;
         border-radius: var(--in-content-button-border-radius) !important;
@@ -715,7 +657,7 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlis
         border-right: none !important;
     }
 
-    input[type=number]::-moz-number-spin-box {
+    input[type="number"]::-moz-number-spin-box {
         border-top-right-radius: var(--in-content-button-border-radius) !important;
         border-bottom-right-radius: var(--in-content-button-border-radius) !important;
         border-right: 1px solid var(--in-content-box-border-color) !important;
@@ -723,13 +665,13 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlis
         width: calc(1em + 0.67px) !important;
     }
 
-    input[type=number]:hover,
-    input[type=number]:hover::-moz-number-spin-box {
+    input[type="number"]:hover,
+    input[type="number"]:hover::-moz-number-spin-box {
         border-color: var(--in-content-border-hover) !important;
     }
 
-    input[type=number]:focus,
-    input[type=number]:focus::-moz-number-spin-box {
+    input[type="number"]:focus,
+    input[type="number"]:focus::-moz-number-spin-box {
         border-color: var(--in-content-focus-outline-color) !important;
     }
 }
@@ -850,7 +792,10 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlis
         border-radius: var(--toolbarbutton-border-radius) !important;
     }
 
-    button, select, input[type="color"], menulist {
+    button,
+    select,
+    input[type="color"],
+    menulist {
         min-height: 26px !important;
         line-height: 26px !important;
     }
@@ -872,7 +817,7 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlis
         color: var(--ui-selection-color) !important;
     }
 
-    input[type=number] {
+    input[type="number"] {
         overflow: hidden !important;
         overflow-clip-box: padding-box !important;
         border-radius: var(--in-content-button-border-radius) !important;
@@ -880,7 +825,7 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlis
         border-right: none !important;
     }
 
-    input[type=number]::-moz-number-spin-box {
+    input[type="number"]::-moz-number-spin-box {
         border-top-right-radius: var(--in-content-button-border-radius) !important;
         border-bottom-right-radius: var(--in-content-button-border-radius) !important;
         border-right: 1px solid var(--in-content-box-border-color) !important;
@@ -888,13 +833,13 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlis
         width: calc(1em + 0.67px) !important;
     }
 
-    input[type=number]:hover,
-    input[type=number]:hover::-moz-number-spin-box {
+    input[type="number"]:hover,
+    input[type="number"]:hover::-moz-number-spin-box {
         border-color: var(--in-content-border-hover) !important;
     }
 
-    input[type=number]:focus,
-    input[type=number]:focus::-moz-number-spin-box {
+    input[type="number"]:focus,
+    input[type="number"]:focus::-moz-number-spin-box {
         border-color: var(--in-content-focus-outline-color) !important;
     }
 }

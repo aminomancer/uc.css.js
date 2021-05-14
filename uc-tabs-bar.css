@@ -23,7 +23,10 @@
     margin-left: -2px !important;
 }
 
-:root:not([chromehidden~="menubar"]) #toolbar-menubar:not([inactive]) + #TabsToolbar .titlebar-spacer {
+:root:not([chromehidden~="menubar"])
+    #toolbar-menubar:not([inactive])
+    + #TabsToolbar
+    .titlebar-spacer {
     display: none;
 }
 
@@ -41,7 +44,7 @@
 }
 
 #toolbar-menubar[autohide="true"][inactive="true"]:not([customizing="true"]) {
-	max-width: 0 !important;
+    max-width: 0 !important;
     min-width: 0 !important;
     padding: 0 !important;
     margin: 0 !important;
@@ -52,7 +55,10 @@
     visibility: visible !important;
 }
 
-:root:not([chromehidden~="menubar"]) #toolbar-menubar:not([inactive]) + #TabsToolbar > .titlebar-buttonbox-container,
+:root:not([chromehidden~="menubar"])
+    #toolbar-menubar:not([inactive])
+    + #TabsToolbar
+    > .titlebar-buttonbox-container,
 :root[inFullscreen] #toolbar-menubar:not([inactive]) > .titlebar-buttonbox-container {
     display: none !important;
 }
@@ -83,7 +89,9 @@
     background-color: var(--lwt-accent-color);
 }
 
-:root:not([inFullscreen]) #toolbar-menubar[autohide="true"][inactive="true"]:not([customizing="true"]) ~ #TabsToolbar {
+:root:not([inFullscreen])
+    #toolbar-menubar[autohide="true"][inactive="true"]:not([customizing="true"])
+    ~ #TabsToolbar {
     background-image: var(--titlebar-gradient);
     background-color: var(--lwt-accent-color);
 }
@@ -398,11 +406,11 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
 }
 
 #allTabsMenu-searchTabs {
-    list-style-image: url("chrome://global/skin/icons/search-glass.svg") !important;
+    list-style-image: url(chrome://global/skin/icons/search-glass.svg) !important;
 }
 
 #allTabsMenu-containerTabsButton {
-    list-style-image: url("data:image/svg+xml;utf8,<svg height='16' width='16' xmlns='http://www.w3.org/2000/svg'><g fill='context-fill' fill-opacity='context-fill-opacity'><rect height='6' rx='1' width='6' x='1' y='1'/><path d='M15 3v2H9V3z'/><path d='M11 1h2v6h-2z'/><rect height='6' rx='1' width='6' x='1' y='9'/><rect height='6' rx='1' width='6' x='9' y='9'/></g></svg>");
+    list-style-image: url(chrome://userchrome/content/skin/container-plus.svg);
 }
 
 :is(#allTabsMenu-containerTabsButton, #allTabsMenu-searchTabs) .toolbarbutton-text {
@@ -501,7 +509,7 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
 }
 
 .all-tabs-secondary-button[soundplaying] {
-    list-style-image: url(chrome://userchrome/content/tab-audio-playing.svg) !important
+    list-style-image: url(chrome://userchrome/content/tab-audio-playing.svg) !important;
 }
 
 .all-tabs-secondary-button[muted] {

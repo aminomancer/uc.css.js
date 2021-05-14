@@ -56,7 +56,10 @@ panelview
 }
 
 .panel-footer > button:not([disabled], :active):is(:hover, :focus-visible) {
-    background-color: var(--button-hover-bgcolor, color-mix(in srgb, currentColor 17%, transparent));
+    background-color: var(
+        --button-hover-bgcolor,
+        color-mix(in srgb, currentColor 17%, transparent)
+    );
 }
 
 .panel-footer > button[default]:not([disabled], :active):is(:hover, :focus-visible) {
@@ -134,7 +137,7 @@ menupopup::part(arrowscrollbox),
     :is(panel, menupopup)[side="top"]::part(arrow) {
         margin-bottom: -4px;
     }
-    
+
     :is(#customization-lwtheme-menu, #customization-uidensity-menu)::part(arrowbox) {
         -moz-box-ordinal-group: 2;
     }
@@ -154,11 +157,11 @@ menupopup::part(arrowscrollbox),
 
 /* dropmarkers and other select/menulist stuff */
 @-moz-document url(chrome://browser/content/browser.xhtml),
-    url("chrome://mozapps/content/handling/permissionDialog.xhtml"),
-    url("chrome://mozapps/content/handling/appChooser.xhtml"),
-    url-prefix("chrome://global/content/print.html"),
-    url("chrome://browser/content/places/bookmarkProperties.xhtml"),
-    url("chrome://browser/content/places/bookmarkProperties2.xhtml")
+    url(chrome://mozapps/content/handling/permissionDialog.xhtml),
+    url(chrome://mozapps/content/handling/appChooser.xhtml),
+    url-prefix(chrome://global/content/print.html),
+    url(chrome://browser/content/places/bookmarkProperties.xhtml),
+    url(chrome://browser/content/places/bookmarkProperties2.xhtml)
 {
     menulist:not([native]) {
         padding-inline: 6px;
@@ -420,7 +423,7 @@ menupopup::part(arrowscrollbox),
     > #downloads-indicator-start-box
     > #downloads-indicator-start-image {
     --anim-steps: 31 !important;
-    list-style-image: url("chrome://userchrome/content/downloads/notification-start-animation.svg");
+    list-style-image: url(chrome://userchrome/content/downloads/notification-start-animation.svg);
     animation-name: downloadsIndicatorNotificationStart;
     animation-duration: 540ms;
     transform: translateX(0px);
@@ -436,8 +439,9 @@ menupopup::part(arrowscrollbox),
     list-style-image: url(chrome://userchrome/content/skin/forward.svg);
 }
 
-:where(#reload-button, #stop-button) > .toolbarbutton-icon, :where(#reload-button, #stop-button) > .toolbarbutton-animatable-box {
-	translate: revert;
+:where(#reload-button, #stop-button) > .toolbarbutton-icon,
+:where(#reload-button, #stop-button) > .toolbarbutton-animatable-box {
+    translate: revert;
 }
 
 :is(#reload-button, #stop-button) > .toolbarbutton-animatable-box {
@@ -575,7 +579,7 @@ menupopup::part(arrowscrollbox),
 }
 
 #downloads-button {
-    list-style-image: url("chrome://userchrome/content/skin/downloads/download-icons.svg#arrow-with-bar");
+    list-style-image: url(chrome://userchrome/content/skin/downloads/download-icons.svg#arrow-with-bar);
 }
 
 #open-file-button {
@@ -804,11 +808,11 @@ toolbar[brighttext] #panic-button[open] {
 }
 
 #library-animatable-box {
-  display: none;
+    display: none;
 }
 
 #library-animatable-box[animate] {
-  display: block;
+    display: block;
 }
 
 #library-button {
@@ -816,7 +820,7 @@ toolbar[brighttext] #panic-button[open] {
 }
 
 #library-button[scaling] {
-    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0.3 -0.2 16 16'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M5 3a1 1 0 00-1 1v10a1 1 0 002 0V4a1 1 0 00-1-1zm3-1a1 1 0 00-1 1v11a1 1 0 002 0V3a1 1 0 00-1-1zm7.939 11.658l-4-11a1 1 0 10-1.879.684l4 11a1 1 0 101.879-.684zM2 1a1 1 0 00-1 1v12a1 1 0 002 0V2a1 1 0 00-1-1z'/></svg>");
+    list-style-image: url(chrome://userchrome/content/skin/library-scaling-fix.svg);
 }
 
 @keyframes library-bookmark-animation {
@@ -941,15 +945,15 @@ toolbar[brighttext] #panic-button[open] {
 }
 
 .tab-sharing-icon-overlay[sharing="camera"] {
-  list-style-image: url(chrome://userchrome/content/notifications/camera.svg);
+    list-style-image: url(chrome://userchrome/content/notifications/camera.svg);
 }
 
 .tab-sharing-icon-overlay[sharing="microphone"] {
-  list-style-image: url(chrome://userchrome/content/notifications/microphone.svg);
+    list-style-image: url(chrome://userchrome/content/notifications/microphone.svg);
 }
 
 .tab-sharing-icon-overlay[sharing="screen"] {
-  list-style-image: url(chrome://userchrome/content/notifications/screen.svg);
+    list-style-image: url(chrome://userchrome/content/notifications/screen.svg);
 }
 
 /* INDIVIDUAL NOTIFICATIONS */
@@ -1301,7 +1305,7 @@ toolbar[brighttext] #panic-button[open] {
 
 #pageActionButton,
 .share-more-button {
-    list-style-image: url("chrome://userchrome/content/more.svg");
+    list-style-image: url(chrome://userchrome/content/more.svg);
 }
 
 #reader-mode-button {
@@ -1310,13 +1314,13 @@ toolbar[brighttext] #panic-button[open] {
 
 #pageAction-panel-bookmark,
 #star-button {
-    list-style-image: url("chrome://userchrome/content/skin/bookmark-hollow.svg");
+    list-style-image: url(chrome://userchrome/content/skin/bookmark-hollow.svg);
 }
 
 #sidebar-switcher-bookmarks,
 #pageAction-panel-bookmark[starred],
 #star-button[starred] {
-    list-style-image: url("chrome://userchrome/content/skin/bookmark.svg");
+    list-style-image: url(chrome://userchrome/content/skin/bookmark.svg);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -1336,8 +1340,8 @@ toolbar[brighttext] #panic-button[open] {
     /* Preload the bookmark animations to prevent a flicker during the first playing
     of the animations. */
     #star-button[preloadanimations] + #star-button-animatable-box > #star-button-animatable-image {
-        background-image: url("chrome://userchrome/content/skin/bookmark-animation.svg"),
-            url("chrome://userchrome/content/skin/library-bookmark-animation.svg");
+        background-image: url(chrome://userchrome/content/skin/bookmark-animation.svg),
+            url(chrome://userchrome/content/skin/library-bookmark-animation.svg);
         background-size: 0, 0;
     }
 
@@ -1369,7 +1373,7 @@ toolbar[brighttext] #panic-button[open] {
     }
 
     #star-button[starred][animate] + #star-button-animatable-box > #star-button-animatable-image {
-        background-image: url("chrome://userchrome/content/skin/bookmark-animation.svg");
+        background-image: url(chrome://userchrome/content/skin/bookmark-animation.svg);
         background-size: auto;
         list-style-image: none;
         height: var(--toolbarbutton-height);

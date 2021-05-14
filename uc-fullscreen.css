@@ -38,8 +38,7 @@ requires fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-statu
     > box:is(:focus-within, :hover, [popup-status], [urlbar-status])
     #navigator-toolbox {
     margin-top: 0 !important;
-    transition-delay: 0s !important;
-    transition: all 0.25s cubic-bezier(.26,1,.8,1) 0s !important;
+    transition: all 0.25s cubic-bezier(0.26, 1, 0.8, 1) 0s !important;
     opacity: 1 !important;
 }
 
@@ -83,7 +82,7 @@ requires fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-statu
     > box:is(:focus-within, :hover, [popup-status], [urlbar-status])
     ~ #browser
     findbar {
-    transition: all 0.25s cubic-bezier(.26,1,.8,1) 0s !important;
+    transition: all 0.25s cubic-bezier(0.26, 1, 0.8, 1) 0s !important;
     margin-top: 0 !important;
 }
 

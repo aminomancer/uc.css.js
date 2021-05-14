@@ -147,7 +147,7 @@
 }
 
 .urlbarView-row:not([selected]) .urlbarView-action {
-	color: var(--urlbar-popup-action-color) !important;
+    color: var(--urlbar-popup-action-color) !important;
 }
 
 .urlbarView-row[type="switchtab"]:not([selected], :hover) .urlbarView-action {
@@ -446,7 +446,7 @@
 
 @keyframes urlbar-grow-bg {
     0% {
-        transform: scaleX(.95) scaleY(.5);
+        transform: scaleX(0.95) scaleY(0.5);
     }
     100% {
         transform: none;
@@ -455,7 +455,7 @@
 
 @keyframes urlbar-grow-results {
     0% {
-        transform: scaleY(.95);
+        transform: scaleY(0.95);
         opacity: 0;
     }
     100% {
@@ -475,7 +475,7 @@
 }
 
 #urlbar[breakout][breakout-extend][breakout-extend-animate] #urlbar-background {
-	animation-duration: 100ms !important;
+    animation-duration: 100ms !important;
     animation-name: urlbar-grow-bg !important;
     animation-timing-function: var(--animation-easing-function) !important;
     transform-origin: top !important;
@@ -483,11 +483,13 @@
     backface-visibility: hidden !important;
     margin: -3px !important;
     box-shadow: 0 5px 18px hsla(0, 0%, 0%, 0.2) !important;
-    clip-path: inset(0 -100% -100% -100%); /* used to stop the shadow overflowing onto the nav-bar. this theme is meant to look like it's peaking out from under the nav-bar. */
+    clip-path: inset(
+        0 -100% -100% -100%
+    ); /* used to stop the shadow overflowing onto the nav-bar. this theme is meant to look like it's peaking out from under the nav-bar. */
 }
 
 #urlbar[breakout][breakout-extend][breakout-extend-animate] #urlbar-results {
-	animation-duration: 300ms !important;
+    animation-duration: 300ms !important;
     animation-name: urlbar-grow-results !important;
     animation-timing-function: var(--animation-easing-function) !important;
     transform-origin: top !important;
@@ -534,7 +536,7 @@
     margin-inline: 3.4px 0 !important;
     box-shadow: none !important;
     fill: var(--panel-description-color);
-    background-image: url("chrome://userchrome/content/help.svg") !important;
+    background-image: url(chrome://userchrome/content/help.svg) !important;
 }
 
 .urlbarView .urlbarView-body-inner {

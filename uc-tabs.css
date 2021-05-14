@@ -133,9 +133,7 @@
 }
 
 /* dim unloaded/discarded tabs */
-.tabbrowser-tab[pending]
-    .tab-content
-    :is(.tab-icon-image, .tab-label, .tab-sharing-icon-overlay) {
+.tabbrowser-tab[pending] .tab-content :is(.tab-icon-image, .tab-label, .tab-sharing-icon-overlay) {
     opacity: 0.7;
 }
 
@@ -247,16 +245,14 @@
 }
 
 .tabbrowser-tab .tab-stack:before {
-    mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><circle r='5' cx='0' cy='0' fill='black'/></svg>")
-            0/100% 100%,
+    mask: url(chrome://userchrome/content/skin/tab-corner-mask-left.svg) 0/100% 100%,
         linear-gradient(#fff, #fff);
     mask-composite: exclude;
     left: -5px;
 }
 
 .tabbrowser-tab .tab-stack:after {
-    mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><circle r='5' cx='5' cy='0' fill='black'/></svg>")
-            0/100% 100%,
+    mask: url(chrome://userchrome/content/skin/tab-corner-mask-right.svg) 0/100% 100%,
         linear-gradient(#fff, #fff);
     mask-composite: exclude;
     right: -5px;
@@ -670,7 +666,7 @@
 .tab-throbber::before {
     content: "" !important;
     position: absolute !important;
-    background-image: url("chrome://userchrome/content/loading.svg") !important;
+    background-image: url(chrome://userchrome/content/loading.svg) !important;
     background-position: left center !important;
     background-repeat: no-repeat !important;
     width: 480px !important;

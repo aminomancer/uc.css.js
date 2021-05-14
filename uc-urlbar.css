@@ -306,11 +306,6 @@ toolbarpaletteitem[removable="false"]
     list-style-image: url(chrome://userchrome/content/notifications/persistent-storage.svg) !important;
 }
 
-/* #urlbar:not(.searchButton) > #urlbar-input-container > #identity-box[pageproxystate="invalid"] #identity-icon {
-    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path fill='context-fill' fill-opacity='context-fill-opacity' d='M15.707 14.293l-4.822-4.822a6.019 6.019 0 10-1.414 1.414l4.822 4.822a1 1 0 001.414-1.414zM6 10a4 4 0 114-4 4 4 0 01-4 4z'/></svg>") !important;
-    fill-opacity: .4;
-} */
-
 #urlbar[actiontype="extension"] > #urlbar-input-container > #identity-box #identity-icon,
 #identity-box.extensionPage[pageproxystate="valid"] #identity-icon {
     list-style-image: url(chrome://userchrome/content/material/extension-identity.svg) !important;
@@ -710,11 +705,15 @@ toolbarpaletteitem[removable="false"]
 }
 
 @keyframes identity-sharing-icon-pulse {
-    0%, 16.66%, 83.33%, 100% {
+    0%,
+    16.66%,
+    83.33%,
+    100% {
         color: white;
         fill-opacity: var(--urlbar-icon-fill-opacity);
     }
-    33.33%, 66.66% {
+    33.33%,
+    66.66% {
         color: hsl(3.7, 77.1%, 49.6%);
         fill-opacity: 1;
     }
@@ -734,7 +733,8 @@ toolbarpaletteitem[removable="false"]
     -moz-context-properties: fill;
     fill: hsl(3.7, 77.1%, 49.6%);
 }
-.tab-icon-image[sharing]:not([selected]), .tab-sharing-icon-overlay {
+.tab-icon-image[sharing]:not([selected]),
+.tab-sharing-icon-overlay {
     animation: 3s linear tab-sharing-icon-pulse infinite;
 }
 

@@ -96,13 +96,13 @@ panel[type="arrow"][side="top"] {
 }
 
 .protections-popup-category-label {
-	margin-inline-start: 6px !important;
+    margin-inline-start: 6px !important;
 }
 
 .protections-popup-category:focus-visible:not(:active),
 .protections-popup-footer-button:focus-visible:not(:active),
 #protections-popup-show-report-stack:focus-visible:not(:active) > .protections-popup-footer-button {
-	background-color: var(--button-hover-bgcolor) !important;
+    background-color: var(--button-hover-bgcolor) !important;
 }
 
 #protections-popup-footer {
@@ -143,10 +143,7 @@ panel[type="arrow"][side="top"] {
     height: revert !important;
 }
 
-:is(#protections-popup-not-blocking-section-description,
-#protections-popup-not-blocking-section-why,
-#protections-popup-blocking-section-header,
-#protections-popup-not-found-section-header):not([hidden="true"]) {
+:is(#protections-popup-not-blocking-section-description, #protections-popup-not-blocking-section-why, #protections-popup-blocking-section-header, #protections-popup-not-found-section-header):not([hidden="true"]) {
     display: flex !important;
 }
 
@@ -231,7 +228,8 @@ panel {
     background-color: hsl(237, 26%, 30%) !important;
 }
 
-.panel-footer > .popup-notification-primary-button:not([disabled]):not([disabled], :active):is(:hover, :focus-visible) {
+.panel-footer
+    > .popup-notification-primary-button:not([disabled]):not([disabled], :active):is(:hover, :focus-visible) {
     background-color: hsl(242, 60%, 56%) !important;
 }
 
@@ -279,7 +277,7 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
 }
 
 .popup-notification-checkbox > .checkbox-label-box > .checkbox-label {
-	margin-block: 0 !important;
+    margin-block: 0 !important;
 }
 
 .popup-notification-learnmore-link {
@@ -288,7 +286,7 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
 }
 
 .popup-notification-learnmore-link:is(:hover, :focus-visible) {
-	text-decoration: underline !important;
+    text-decoration: underline !important;
 }
 
 .popup-subitem {
@@ -332,7 +330,7 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
 
 #permission-popup-storage-access-permission-list-hint,
 #permission-popup-storage-access-permission-learn-more {
-	margin-inline-start: 24px !important;
+    margin-inline-start: 24px !important;
 }
 
 /* hides update popups. i use a script for this now, updateNotificationSlayer.uc.js. use that instead, it's MUCH better. */
@@ -419,7 +417,9 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
     margin-inline-start: 0 !important;
 }
 
-#identity-popup[httpsonlystatus="upgraded"] .identity-popup-security-connection description:not(.upgraded) {
+#identity-popup[httpsonlystatus="upgraded"]
+    .identity-popup-security-connection
+    description:not(.upgraded) {
     font-size: 0.91em !important;
 }
 
