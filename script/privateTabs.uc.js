@@ -22,6 +22,7 @@ class PrivateTabManager {
             toggleModifiers: "alt accel", // modifiers for toggle hotkey. this means alt+ctrl on windows or alt+cmd on mac
             newTabModifiers: "alt accel", // modifiers for new tab hotkey.
         };
+        // isn't strictly necessary, but due to a programmer's oversight, this seems to be the only way to prevent irritating animations when toggling private mode on/off for a tab. what's actually happening under the hood is not a simple state change, since that would be insecure. the whole point of all this is to avoid leaking information, so when we turn private mode on, we need to create a brand new tab and restore it from cached data. but the internal duplicateTab method doesn't pass the skipAnimation parameter to addTrustedTab. so we need to make our own function, which requires these unexposed modules.
         let { SessionStoreInternal } = Cu.import(
             "resource:///modules/sessionstore/SessionStore.jsm"
         );
