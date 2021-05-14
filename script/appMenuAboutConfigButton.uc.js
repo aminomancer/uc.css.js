@@ -13,7 +13,7 @@
     async function createButton() {
         const configStrings = new Localization(["toolkit/about/config.ftl"], true); // get fluent file for AboutConfig page
         const advancedPrefsLabel = await configStrings.formatValue(["about-config-page-title"]); // localize the "Advanced Preferences" string
-        const mainView = PanelUI.mainView;
+        const { mainView } = PanelUI;
         const doc = mainView.ownerDocument;
         const settingsButton = PanelUI.protonAppMenuEnabled // if proton is enabled, the buttons used are entirely different nodes
             ? doc.getElementById("appMenu-settings-button")

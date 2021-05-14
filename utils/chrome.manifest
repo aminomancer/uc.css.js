@@ -47,3 +47,4 @@ override chrome://browser/skin/preferences/category-sync.svg ../resources/prefer
 override chrome://activity-stream/content/data/content/assets/glyph-highlights-16.svg ../resources/glyph-highlights-16.svg
 override chrome://activity-stream/content/data/content/assets/glyph-info-16.svg ../resources/glyph-info-16.svg
 override chrome://browser/skin/home.svg ../resources/skin/home.svg
+override chrome://browser/skin/privateBrowsing.svg ../resources/skin/privateBrowsing.svg

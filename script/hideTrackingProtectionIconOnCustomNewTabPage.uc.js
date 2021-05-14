@@ -25,6 +25,11 @@
             // Reset blocking and exception status so that we can send telemetry
             this.hadShieldState = false;
 
+            // Ensure identity box is still clickable on view-source URLs
+            if (gBrowser.currentURI.spec.startsWith("view-source:"))
+                this._trackingProtectionIconContainer.setAttribute("view-source", true);
+            else this._trackingProtectionIconContainer.removeAttribute("view-source");
+
             // Don't deal with about:, file: etc.
             if (
                 !ContentBlockingAllowList.canHandle(gBrowser.selectedBrowser) ||

@@ -378,7 +378,7 @@
 
         function wrapAll(buttons, container, first = false) {
             let parent = buttons[0].parentElement;
-            let previousSibling = buttons[0].previousSibling;
+            let { previousSibling } = buttons[0];
             appendLoop(buttons, container);
             // on first run put the inner container in the outer container
             if (first) outer.appendChild(container);

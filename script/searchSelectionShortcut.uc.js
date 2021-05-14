@@ -58,11 +58,13 @@
             if (message.target === gBrowser.selectedBrowser) {
                 try {
                     let csp = E10SUtils.deserializeCSP(message.data.csp);
-                    let text = message.data.text;
-                    let linkURL = message.data.linkURL;
-                    let principal = Services.scriptSecurityManager.getSystemPrincipal();
-                    let locationURL = message.data.locationURL;
-                    let options = { inBackground: false, triggeringPrincipal: principal };
+                    let { text, linkURL, locationURL } = message.data;
+                    let principal = gBrowser.selectedBrowser.contentPrincipal;
+                    let options = {
+                        inBackground: false,
+                        triggeringPrincipal: principal,
+                        relatedToCurrent: true,
+                    };
                     let where =
                         locationURL === AboutNewTab.newTabURL ||
                         locationURL === HomePage.get(window)

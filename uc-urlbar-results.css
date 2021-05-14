@@ -69,17 +69,9 @@
 
 .urlbarView-row:is([type="switchtab"], [type="bookmark"], [type="remotetab"], [type="dynamic"], [pinned])
     .urlbarView-type-icon {
-    fill-opacity: 0.75 !important;
+    fill-opacity: inherit !important;
     margin-bottom: 1px !important;
     display: -moz-box !important;
-}
-
-.urlbarView-row:is([type="switchtab"], [type="bookmark"], [type="remotetab"], [type="dynamic"])[selected]
-    .urlbarView-type-icon,
-.urlbarView-row:is([type="switchtab"], [type="bookmark"], [type="remotetab"], [type="dynamic"])
-    > .urlbarView-row-inner[selected]
-    .urlbarView-type-icon {
-    fill-opacity: 1 !important;
 }
 
 .urlbarView-type-icon {
@@ -96,9 +88,7 @@
 }
 
 .urlbarView-row[type="bookmark"] .urlbarView-type-icon {
-    /* fill: var(--urlbar-bookmark-icon-color) !important;
-    fill: var(--lwt-toolbarbutton-icon-fill-attention) !important;
-    fill-opacity: 1 !important; */
+    background-image: url(chrome://userchrome/content/skin/bookmark.svg) !important;
     align-self: center !important;
     stroke: none !important;
     background-position: center !important;

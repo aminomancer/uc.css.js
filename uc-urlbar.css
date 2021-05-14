@@ -444,7 +444,7 @@ toolbarpaletteitem[removable="false"]
 
 :root[hide-tp-icon-on-ntp]:not([customizing])
     #urlbar:not([searchmode], [actiontype="switchtab"]:not([actionoverride="true"]))
-    #tracking-protection-icon-container[hidden]
+    #tracking-protection-icon-container[hidden]:not([view-source])
     ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage, .unknownIdentity)[pageproxystate="valid"]
     #identity-icon-box,
 :root[hide-tp-icon-on-ntp]:not([customizing])
@@ -468,7 +468,7 @@ toolbarpaletteitem[removable="false"]
 
 :root[hide-tp-icon-on-ntp]:not([customizing])
     #urlbar:not([searchmode], [usertyping="true"], [focused="true"])
-    #tracking-protection-icon-container[hidden]
+    #tracking-protection-icon-container[hidden]:not([view-source])
     ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage, .unknownIdentity)
     #identity-icon {
     fill-opacity: 0.4 !important;
