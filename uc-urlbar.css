@@ -876,42 +876,43 @@ use 0.6 instead of 1 since 1 will end up being shown as like 1.4px for some wind
 }
 
 #urlbar-search-mode-indicator-close {
-    position: absolute !important;
-    background-color: var(--identity-box-solid-bg) !important;
-    background-image: url(chrome://userchrome/content/textbox-clear.svg) !important;
-    background-size: contain !important;
-    fill-opacity: 0 !important;
-    z-index: 151 !important;
-    left: 7px !important;
-    opacity: 0 !important;
-    pointer-events: none !important;
+    position: absolute;
     height: 18px !important;
     width: 18px !important;
+    background-color: transparent !important;
+    background-image: url(chrome://userchrome/content/close.svg) !important;
+    background-size: 16px !important;
+    fill-opacity: 0.6 !important;
+    z-index: 1;
+    left: 7px;
+    opacity: 0;
+    pointer-events: none;
 }
 
 #urlbar[searchmode] #urlbar-search-mode-indicator:is(:hover, :focus-visible, :focus-within) {
-    z-index: 151 !important;
-    position: relative !important;
+    z-index: 1;
+    position: relative;
 }
 
 #urlbar[searchmode]
     #urlbar-search-mode-indicator:is(:hover, :focus-visible, :focus-within)
     #urlbar-search-mode-indicator-close {
-    opacity: 0.75 !important;
-    pointer-events: auto !important;
+    pointer-events: auto;
+    opacity: 1;
 }
 
 #urlbar[searchmode]
     #urlbar-search-mode-indicator:is(:hover, :focus-visible, :focus-within)
     #urlbar-search-mode-indicator-close:is(:hover, :focus-visible) {
-    opacity: 1 !important;
-    fill-opacity: 0.1 !important;
+    fill-opacity: 0.9 !important;
+    background-color: var(--arrowpanel-dimmed) !important;
 }
 
 #urlbar[searchmode]
     #urlbar-search-mode-indicator:is(:hover, :focus-visible, :focus-within)
     #urlbar-search-mode-indicator-close:active:is(:hover, :focus-visible) {
-    fill-opacity: 0.15 !important;
+    fill-opacity: 1 !important;
+    background-color: var(--arrowpanel-dimmed-further) !important;
 }
 
 #urlbar-label-box .urlbar-label,
