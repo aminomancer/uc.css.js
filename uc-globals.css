@@ -2,11 +2,24 @@
 
 :root,
 tooltip {
+    --uc-arrowpanel-darker: hsla(236, 70%, 73%, 0.17) !important;
+    --uc-arrowpanel-faint: hsla(236, 100%, 83%, 0.1);
+    --uc-arrowpanel-dimmed: hsla(236, 100%, 83%, 0.17) !important;
+    --uc-arrowpanel-dimmed-further: hsla(236, 100%, 83%, 0.25) !important;
+    --uc-arrowpanel-dimmed-even-further: hsla(236, 100%, 85%, 0.3) !important;
+    --uc-desaturate-dimmed: hsla(236, 60%, 83%, 0.17) !important;
+    --uc-desaturate-dimmed-further: hsla(236, 60%, 83%, 0.25) !important;
+    --uc-desaturate-dimmed-even-further: hsla(236, 60%, 85%, 0.3) !important;
+    --uc-panel-button-solid: hsl(234, 24%, 35%);
+    --uc-panel-box-solid: hsl(233, 29%, 18%);
+    --uc-content-text-a50: hsla(236, 100%, 85%, 0.5);
+    --uc-content-text-a80: rgba(255, 255, 255, 0.8);
     --subdialog-font-size: 1em !important;
     --ui-secondary-bg: hsl(234, 39%, 10%);
     --tooltip-bgcolor: hsl(233, 36%, 11%);
     --tooltip-color: white;
     --tooltip-border-radius: 2px;
+    --webextension-panel-border-radius: 7px;
     --statuspanel-color: hsla(0, 0%, 100%, 0.85);
     --acrylic-blur: blur(10px);
     --acrylic-texture: url(chrome://userchrome/content/texture/lightnoise.png);

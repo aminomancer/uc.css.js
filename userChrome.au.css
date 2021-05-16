@@ -125,7 +125,12 @@ menupopup::part(arrowscrollbox),
 
 /* other panel arrows */
 :is(panel, menupopup)::part(arrow) {
+    fill: var(--arrowpanel-background);
     stroke: var(--arrowpanel-background);
+}
+
+#customizationui-widget-panel[viewId^="PanelUI-webext-"]::part(arrowcontent) {
+    border-radius: var(--webextension-panel-border-radius, 7px) !important;
 }
 
 @-moz-document url(chrome://browser/content/browser.xhtml)

@@ -82,6 +82,12 @@ panel[type="arrow"][side="top"] {
     );
 }
 
+.panel-arrowcontent {
+    /* border-radius: var(--arrowpanel-border-radius) !important; */
+    overflow: hidden !important;
+    border: none !important;
+}
+
 #protections-popup-content {
     margin-bottom: 0 !important;
     padding-block: 4px !important;
@@ -161,7 +167,7 @@ panel[type="arrow"][side="top"] {
 
 #protections-popup-tp-switch-section:not([short])
     > :is(.protections-popup-tp-switch-label-box, .protections-popup-tp-switch-box) {
-	min-height: 30px !important;
+    min-height: 30px !important;
 }
 
 .protections-popup-category::after {

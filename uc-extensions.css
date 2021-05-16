@@ -70,6 +70,11 @@
     list-style-image: url(chrome://userchrome/content/material/darkmode.svg);
 }
 
+#customizationui-widget-panel[viewId="PanelUI-webext-addon_darkreader_org-browser-action-view"] {
+    --arrowpanel-background: var(--tooltip-bgcolor) !important;
+    --arrowpanel-border-color: var(--tooltip-bgcolor) !important;
+}
+
 #ublock0_raymondhill_net-browser-action .toolbarbutton-icon,
 .webextension-browser-action[label="Nano Adblocker"] {
     list-style-image: url(chrome://userchrome/content/show-password.svg);
@@ -114,7 +119,6 @@
     display: -moz-inline-box;
     -moz-box-flex: 1;
 }
-
 
 :is(.menu-iconic, .menuitem-iconic):is([label="To Google Translate"], [label^="Translate this page"], [label="Translate selected link"], [label="Translate selected text"], [label="Simple Translate"])
     .menu-iconic-left::before {
@@ -177,23 +181,30 @@
     background-image: url(chrome://userchrome/content/skin/container-plus.svg);
 }
 
-#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Firefox Multi-Account Containers"] .menu-iconic-icon {
+#contentAreaContextMenu
+    :is(.menu-iconic, .menuitem-iconic)[label="Firefox Multi-Account Containers"]
+    .menu-iconic-icon {
     display: none;
 }
 
 /* shorten the multi-account containers label */
-#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Firefox Multi-Account Containers"] .menu-iconic-left {
+#contentAreaContextMenu
+    :is(.menu-iconic, .menuitem-iconic)[label="Firefox Multi-Account Containers"]
+    .menu-iconic-left {
     -moz-box-flex: 1;
 }
 
-#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Firefox Multi-Account Containers"]
+#contentAreaContextMenu
+    :is(.menu-iconic, .menuitem-iconic)[label="Firefox Multi-Account Containers"]
     .menu-iconic-left::after {
     content: "Account Containers";
     display: -moz-inline-box;
     -moz-box-flex: 1;
 }
 
-#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Firefox Multi-Account Containers"] .menu-iconic-text {
+#contentAreaContextMenu
+    :is(.menu-iconic, .menuitem-iconic)[label="Firefox Multi-Account Containers"]
+    .menu-iconic-text {
     display: none;
 }
 
