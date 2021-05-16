@@ -100,6 +100,10 @@
 }
 
 /* make multithreaded download manager context menu label smaller */
+#multithreaded-download-manager_qw_linux-2g64_local-menuitem-_link-context-menu .menu-iconic-left {
+    -moz-box-flex: 1;
+}
+
 #multithreaded-download-manager_qw_linux-2g64_local-menuitem-_link-context-menu .menu-iconic-text {
     display: none;
 }
@@ -108,7 +112,9 @@
     .menu-iconic-left::after {
     content: "Download (multi-threaded)";
     display: -moz-inline-box;
+    -moz-box-flex: 1;
 }
+
 
 :is(.menu-iconic, .menuitem-iconic):is([label="To Google Translate"], [label^="Translate this page"], [label="Translate selected link"], [label="Translate selected text"], [label="Simple Translate"])
     .menu-iconic-left::before {
@@ -153,6 +159,41 @@
 }
 
 #contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Pushbullet"] .menu-iconic-icon {
+    display: none;
+}
+
+#contentAreaContextMenu
+    :is(.menu-iconic, .menuitem-iconic)[label="Firefox Multi-Account Containers"]
+    .menu-iconic-left::before {
+    width: 16px;
+    height: 16px;
+    margin-inline: var(--context-iconic-margin);
+    fill: currentColor;
+    -moz-context-properties: fill, fill-opacity, stroke;
+    content: "";
+    display: -moz-inline-box;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url(chrome://userchrome/content/skin/container-plus.svg);
+}
+
+#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Firefox Multi-Account Containers"] .menu-iconic-icon {
+    display: none;
+}
+
+/* shorten the multi-account containers label */
+#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Firefox Multi-Account Containers"] .menu-iconic-left {
+    -moz-box-flex: 1;
+}
+
+#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Firefox Multi-Account Containers"]
+    .menu-iconic-left::after {
+    content: "Account Containers";
+    display: -moz-inline-box;
+    -moz-box-flex: 1;
+}
+
+#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Firefox Multi-Account Containers"] .menu-iconic-text {
     display: none;
 }
 

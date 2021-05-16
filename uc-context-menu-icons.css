@@ -489,8 +489,12 @@ menuitem.customize-context-reportExtension::before {
     background-image: url(chrome://userchrome/content/skin/tab.svg) !important;
 }
 
-:is(#context-openlinkincontainertab, #context-openlinkinusercontext-menu):not(.menuitem-iconic)::before {
+#context-openlinkincontainertab:not(.menuitem-iconic)::before {
     background-image: url(chrome://userchrome/content/skin/container-go.svg) !important;
+}
+
+#context-openlinkinusercontext-menu:not(.menuitem-iconic)::before {
+    background-image: url(chrome://userchrome/content/skin/container-plus.svg) !important;
 }
 
 :is(#context-openframe, #context-openlink):not(.menuitem-iconic)::before {
