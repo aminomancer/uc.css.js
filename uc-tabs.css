@@ -13,7 +13,7 @@
     scale: 1.05 !important;
 } */
 
-.tabbrowser-tab:not([selected]):hover .tab-background {
+.tabbrowser-tab:not([selected]):is(:hover, .keyboard-focused-tab) .tab-background {
     background: var(--tab-hover) !important;
 }
 
@@ -22,17 +22,20 @@
     background: var(--toolbar-bgcolor) !important;
 }
 
-:is(.tabbrowser-tab:focus:not([aria-activedescendant]), .keyboard-focused-tab)
+.tabbrowser-tab:focus:not([aria-activedescendant])
+    > .tab-stack
+    > .tab-background,
+.tabbrowser-tab.keyboard-focused-tab[selected]
     > .tab-stack
     > .tab-background {
     background: var(--tab-focused-hover) !important;
 }
 
-.tabbrowser-tab:not([selected])[pinned]:hover .tab-background {
+.tabbrowser-tab:not([selected])[pinned]:is(:hover, .keyboard-focused-tab) .tab-background {
     background: var(--tab-pinned-hover) !important;
 }
 
-.tabbrowser-tab:not([selected], [pinned], [multiselected], :hover) .tab-background {
+.tabbrowser-tab:not([selected], [pinned], [multiselected], :hover, .keyboard-focused-tab) .tab-background {
     background: var(--lwt-accent-color) !important;
 }
 
@@ -40,12 +43,12 @@
     background: var(--tab-pinned) !important;
 }
 
-.tabbrowser-tab[multiselected]:not([selected], [pinned], :hover)
+.tabbrowser-tab[multiselected]:not([selected], [pinned], :hover, .keyboard-focused-tab)
     :is(.tab-background, .tab-background-inner) {
     background: var(--tab-multi) !important;
 }
 
-.tabbrowser-tab[multiselected]:not([selected], [pinned]):hover .tab-background {
+.tabbrowser-tab[multiselected]:not([selected], [pinned]):is(:hover, .keyboard-focused-tab) .tab-background {
     background: var(--tab-multi-hover) !important;
 }
 
@@ -71,7 +74,7 @@
     box-shadow: 0px 0px 15px 0px hsla(0, 0%, 0%, 0.2), 0px 0px 5px 0px hsla(0, 0%, 0%, 0.1);
 }
 
-.tabbrowser-tab:not([selected], [multiselected]):hover .tab-content,
+.tabbrowser-tab:not([selected], [multiselected]):is(:hover, .keyboard-focused-tab) .tab-content,
 .tabbrowser-tab:is([multiselected], [pinned]) .tab-content {
     box-shadow: 0px 0px 20px 1px rgba(0, 0, 0, 0.1), 0px 0px 15px 0px hsla(0, 0%, 0%, 0.25) !important;
 }
@@ -81,7 +84,7 @@
     box-shadow: 0px 0px 20px 1px rgba(0, 0, 0, 0.1), 0px 0px 15px 0px hsla(0, 0%, 0%, 0.35) !important;
 }
 
-:is(.tabbrowser-tab:focus:not([aria-activedescendant]), .keyboard-focused-tab) .tab-content {
+.tabbrowser-tab:focus:not([aria-activedescendant]) .tab-content {
     box-shadow: 0px 0px 25px 3px rgba(0, 0, 0, 0.1), 0px 0px 15px 0px hsla(0, 0%, 0%, 0.35) !important;
 }
 
@@ -96,7 +99,7 @@
     transition: none !important;
 }
 
-.tabbrowser-tab[usercontextid]:is(:hover, [selected], [multiselected]) .tab-context-line {
+.tabbrowser-tab[usercontextid]:is(:hover, [selected], [multiselected], .keyboard-focused-tab) .tab-context-line {
     transform: none;
     opacity: 1 !important;
 }
@@ -137,7 +140,7 @@
     opacity: 0.7;
 }
 
-.tabbrowser-tab[pending]:hover
+.tabbrowser-tab[pending]:is(:hover, .keyboard-focused-tab)
     .tab-content
     :is(.tab-icon-image, .tab-label, .tab-sharing-icon-overlay) {
     opacity: 0.8;
@@ -167,9 +170,9 @@
     border-top-right-radius: 5px !important;
 }
 
-#TabsToolbar .tabbrowser-tab:not([selected]):hover,
+#TabsToolbar .tabbrowser-tab:not([selected]):is(:hover, .keyboard-focused-tab),
 #TabsToolbar
-    .tabbrowser-tab:not([selected]):hover
+    .tabbrowser-tab:not([selected]):is(:hover, .keyboard-focused-tab)
     :is(.tab-stack, .tab-background, .tab-content, .tab-loading-burst) {
     border-top-right-radius: 5px !important;
 }
@@ -178,9 +181,9 @@
 #TabsToolbar
     .tabbrowser-tab[last-visible-tab]:not([justmoved])
     :is(.tab-stack, .tab-background, .tab-content, .tab-loading-burst),
-#TabsToolbar .tabbrowser-tab[last-visible-tab]:not([justmoved]):hover,
+#TabsToolbar .tabbrowser-tab[last-visible-tab]:not([justmoved]):is(:hover, .keyboard-focused-tab),
 #TabsToolbar
-    .tabbrowser-tab[last-visible-tab]:not([justmoved]):hover
+    .tabbrowser-tab[last-visible-tab]:not([justmoved]):is(:hover, .keyboard-focused-tab)
     :is(.tab-stack, .tab-background, .tab-content, .tab-loading-burst) {
     border-top-right-radius: 0 !important;
 }
@@ -189,9 +192,9 @@
 #TabsToolbar
     .tabbrowser-tab[first-visible-tab]:not([justmoved])
     :is(.tab-stack, .tab-background, .tab-content, .tab-loading-burst),
-#TabsToolbar .tabbrowser-tab[first-visible-tab]:not([justmoved]):hover,
+#TabsToolbar .tabbrowser-tab[first-visible-tab]:not([justmoved]):is(:hover, .keyboard-focused-tab),
 #TabsToolbar
-    .tabbrowser-tab[first-visible-tab]:not([justmoved]):hover
+    .tabbrowser-tab[first-visible-tab]:not([justmoved]):is(:hover, .keyboard-focused-tab)
     :is(.tab-stack, .tab-background, .tab-content, .tab-loading-burst) {
     border-top-left-radius: 0 !important;
 }
@@ -258,12 +261,12 @@
     right: -5px;
 }
 
-.tabbrowser-tab[usercontextid]:is(:hover, [selected], [visuallyselected]):not([multiselected])
+.tabbrowser-tab[usercontextid]:is(:hover, .keyboard-focused-tab, [selected], [visuallyselected]):not([multiselected])
     .tab-stack:before {
     left: -4.6px;
 }
 
-.tabbrowser-tab[usercontextid]:is(:hover, [selected], [visuallyselected]):not([multiselected])
+.tabbrowser-tab[usercontextid]:is(:hover, .keyboard-focused-tab, [selected], [visuallyselected]):not([multiselected])
     .tab-stack:after {
     right: -4.6px;
 }
@@ -293,8 +296,8 @@
     );
 }
 
-.tabbrowser-tab[usercontextid]:is([selected], :hover) .tab-stack:after,
-.tabbrowser-tab[usercontextid]:is([selected], :hover) .tab-stack:before {
+.tabbrowser-tab[usercontextid]:is([selected], :hover, .keyboard-focused-tab) .tab-stack:after,
+.tabbrowser-tab[usercontextid]:is([selected], :hover, .keyboard-focused-tab) .tab-stack:before {
     background-image: linear-gradient(
         0deg,
         var(--identity-tab-color) 0px,
@@ -322,7 +325,7 @@
     --tab-bg-current: var(--toolbar-bgcolor);
 }
 
-.tabbrowser-tab:not([selected], [pinned], [multiselected]):hover {
+.tabbrowser-tab:not([selected], [pinned], [multiselected]):is(:hover, .keyboard-focused-tab) {
     --tab-bg-current: hsl(233, 55%, 8%);
 }
 
@@ -330,7 +333,7 @@
     --tab-bg-current: hsl(233, 53%, 8%);
 }
 
-.tabbrowser-tab[multiselected]:not([selected], [pinned]):hover {
+.tabbrowser-tab[multiselected]:not([selected], [pinned]):is(:hover, .keyboard-focused-tab) {
     --tab-bg-current: hsl(233, 51%, 10%);
 }
 
@@ -355,7 +358,7 @@
     position: relative;
 }
 
-.tabbrowser-tab:not([selected], [pinned], [multiselected]):hover {
+.tabbrowser-tab:not([selected], [pinned], [multiselected]):is(:hover, .keyboard-focused-tab) {
     z-index: 3 !important;
 }
 
@@ -367,7 +370,7 @@
     z-index: 4 !important;
 }
 
-.tabbrowser-tab[multiselected]:not([selected], [pinned]):hover {
+.tabbrowser-tab[multiselected]:not([selected], [pinned]):is(:hover, .keyboard-focused-tab) {
     z-index: 5 !important;
 }
 
@@ -379,7 +382,7 @@
     z-index: 7 !important;
 }
 
-.tabbrowser-tab[pinned]:not([selected], [multiselected]):hover {
+.tabbrowser-tab[pinned]:not([selected], [multiselected]):is(:hover, .keyboard-focused-tab) {
     z-index: 8 !important;
 }
 
@@ -388,7 +391,7 @@
     z-index: 9 !important;
 }
 
-.tabbrowser-tab[pinned][multiselected]:not([selected]):hover {
+.tabbrowser-tab[pinned][multiselected]:not([selected]):is(:hover, .keyboard-focused-tab) {
     z-index: 10 !important;
 }
 
@@ -477,17 +480,17 @@
     opacity: 1 !important;
 }
 
-.tabbrowser-tab:hover :is(.tab-icon-sound, .tab-close-button):not(:hover) {
+.tabbrowser-tab:is(:hover, .keyboard-focused-tab) :is(.tab-icon-sound, .tab-close-button):not(:hover) {
     opacity: 0.6 !important;
 }
 
-.tabbrowser-tab:hover :is(.tab-icon-sound, .tab-close-button):hover:active {
+.tabbrowser-tab:is(:hover, .keyboard-focused-tab) :is(.tab-icon-sound, .tab-close-button):hover:active {
     background-color: var(--arrowpanel-dimmed-further) !important;
     opacity: 1 !important;
 }
 
 /* for the picture in picture button to mute/unmute tabs with proton, you need restoreTabSoundButton.uc.js from my repo's scripts folder */
-.tabbrowser-tab:not(:hover) .tab-icon-sound[pictureinpicture]:not([muted]) {
+.tabbrowser-tab:not(:hover, .keyboard-focused-tab) .tab-icon-sound[pictureinpicture]:not([muted]) {
     background-image: url(chrome://userchrome/content/tab-picture-in-picture.svg) !important;
     background-size: 12px !important;
     background-position: center !important;
@@ -502,7 +505,7 @@
     opacity: 0.5 !important;
 }
 
-.tabbrowser-tab:hover
+.tabbrowser-tab:is(:hover, .keyboard-focused-tab)
     .tab-icon-sound[pictureinpicture][soundplaying]:not([soundplaying-scheduledremoval]),
 .tabbrowser-tab .tab-icon-sound[pictureinpicture][muted] {
     background-size: 12px !important;
@@ -519,7 +522,7 @@
     background-color: var(--arrowpanel-dimmed) !important;
 }
 
-.tabbrowser-tab:hover
+.tabbrowser-tab:is(:hover, .keyboard-focused-tab)
     .tab-icon-sound[pictureinpicture][soundplaying]:not([soundplaying-scheduledremoval]) {
     background-image: url(chrome://userchrome/content/tab-audio-playing.svg) !important;
 }
@@ -535,7 +538,7 @@
     background-repeat: no-repeat;
 }
 
-.tabbrowser-tab:not([pinned]):hover .tab-close-button:not(:hover):not(:active) {
+.tabbrowser-tab:not([pinned]):is(:hover, .keyboard-focused-tab) .tab-close-button:not(:hover):not(:active) {
     opacity: 0.6 !important;
 }
 
@@ -559,7 +562,7 @@
     z-index: -1;
 }
 
-.tabbrowser-tab:not(:hover, [tabdrop-samewindow]) .tab-close-button {
+.tabbrowser-tab:not(:hover, .keyboard-focused-tab, [tabdrop-samewindow]) .tab-close-button {
     transform: translateX(-15px) scale(0.5) !important;
 }
 
@@ -580,13 +583,13 @@
     position: relative !important;
 }
 
-.tabbrowser-tab:is(:hover, [busy]) :is(.tab-icon-image, .tab-sharing-icon-overlay) {
+.tabbrowser-tab:is(:hover, .keyboard-focused-tab, [busy]) :is(.tab-icon-image, .tab-sharing-icon-overlay) {
     opacity: 0 !important;
     pointer-events: none !important;
     transform: translateX(25px) scale(0.5) !important;
 }
 
-.tabbrowser-tab:is(:hover, [tabdrop-samewindow]) .tab-throbber,
+.tabbrowser-tab:is(:hover, .keyboard-focused-tab, [tabdrop-samewindow]) .tab-throbber,
 .tabbrowser-tab .tab-throbber:not([busy]) {
     opacity: 0 !important;
     pointer-events: none !important;
@@ -631,13 +634,13 @@
     margin-right: -16px !important;
 }
 
-#tabbrowser-tabs:not(:hover, :focus)
+#tabbrowser-tabs:not(:hover, :focus-within, :focus)
     .tab-content
     > .tab-icon-sound:not([soundplaying], [muted], [activemedia-blocked], [pictureinpicture]),
-#tabbrowser-tabs:not(:hover, :focus)
+#tabbrowser-tabs:not(:hover, :focus-within, :focus)
     .tab-content
     > .tab-icon-sound[soundplaying-scheduledremoval]:not([muted], [pictureinpicture]),
-#tabbrowser-tabs:not(:hover, :focus)
+#tabbrowser-tabs:not(:hover, :focus-within, :focus)
     .tabbrowser-tab[visuallyselected]
     .tab-content
     > .tab-icon-sound:not([pictureinpicture], [muted]) {

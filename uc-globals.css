@@ -79,6 +79,7 @@ tooltip {
     --menu-separator-color: hsl(233, 25%, 23%);
     --user-urlbar-container-height: 38px;
     --user-menubar-searchbar-width: 256px;
+    --findbar-height: 22px;
     --urlbar-element-top-adjust-magnitude: 0.6px;
     --default-identity-icon: url(chrome://userchrome/content/info-filled.svg);
     /* --screenshot-icon: url(chrome://userchrome/content/skin/screenshot.svg); */

@@ -95,6 +95,10 @@
         font-size: 12;
     }
 
+    img.transparent {
+        background: center/16px repeat hsla(0, 0%, 80%) url(chrome://userchrome/content/checker.svg) !important;
+    }
+
     @media (prefers-color-scheme: dark) {
         :root {
             color: var(--plaintext-color) !important;
@@ -1576,10 +1580,6 @@ menupopup {
             --icon-color: currentColor !important;
         }
     }
-}
-
-img.transparent {
-    background: center/16px repeat hsl(0, 0%, 25%) url(chrome://userchrome/content/checker.svg) !important;
 }
 
 @-moz-document url-prefix("about:reader") {

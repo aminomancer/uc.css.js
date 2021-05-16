@@ -159,6 +159,11 @@ panel[type="arrow"][side="top"] {
     position: relative;
 }
 
+#protections-popup-tp-switch-section:not([short])
+    > :is(.protections-popup-tp-switch-label-box, .protections-popup-tp-switch-box) {
+	min-height: 30px !important;
+}
+
 .protections-popup-category::after {
     content: url(chrome://userchrome/content/menu-arrow.svg) !important;
     scale: none !important;
@@ -1008,7 +1013,7 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
     }
 
     #identity-popup-securityView-body {
-        padding-block: 6px;
+        padding-block: 4px;
     }
 
     #identity-popup-mainView-panel-header,

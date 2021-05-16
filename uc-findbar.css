@@ -62,9 +62,9 @@ findbar[hidden] {
 .findbar-closebutton .toolbarbutton-icon {
     border-radius: var(--toolbarbutton-border-radius) !important;
     fill-opacity: 0 !important;
-    width: 20px;
-    height: 20px;
-    padding: 4px;
+    width: var(--findbar-height);
+    height: var(--findbar-height);
+    padding: 5px;
     /* list-style-image: url(chrome://userchrome/content/textbox-clear.svg) !important; */
     list-style-image: url(chrome://userchrome/content/window-controls/close.svg) !important;
     stroke: white !important;
@@ -82,7 +82,7 @@ findbar[hidden] {
 [anonid="findbar-textbox-wrapper"] {
     border-radius: var(--toolbarbutton-border-radius) !important;
     overflow: hidden !important;
-    max-height: 20px !important;
+    height: var(--findbar-height) !important;
 }
 
 .findbar-textbox {
@@ -91,8 +91,8 @@ findbar[hidden] {
     width: 20em;
     border-radius: 0 !important;
     outline: none !important;
-    max-height: 26px !important;
-    padding-inline: 5px !important;
+    max-height: var(--findbar-height) !important;
+    padding-inline: 6px !important;
 }
 
 .findbar-textbox input > .anonymous-div {
@@ -132,6 +132,8 @@ findbar .matches-indicator {
     background-color: var(--search-box-color);
     transition: 300ms;
     mask-image: linear-gradient(to right, transparent 0px, black 20px);
+    line-height: var(--findbar-height) !important;
+    height: var(--findbar-height) !important;
 }
 
 .findbar-textbox:focus ~ .matches-indicator {
@@ -285,6 +287,7 @@ findbar:focus-within
 
 .findbar-container {
     -moz-box-orient: horizontal !important;
+    height: var(--findbar-height) !important;
 }
 
 .findbar-find-status,

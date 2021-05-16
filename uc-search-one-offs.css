@@ -90,9 +90,9 @@
     display: none !important;
 }
 
-.urlbarView .search-one-offs-context-menu {
+/* .urlbarView .search-one-offs-context-menu {
     display: none !important;
-}
+} */
 
 .urlbarView :is(.searchbar-engine-one-off-item, .addengine-item) {
     min-width: 32px !important;
