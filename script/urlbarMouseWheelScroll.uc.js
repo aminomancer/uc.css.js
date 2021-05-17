@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name           Scroll Url-bar with Mousewheel
+// @name           Scroll Urlbar with Mousewheel
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Implements vertical scrolling and smooth scrolling inside the urlbar's input field. That might sound weird, but the urlbar doesn't naturally have any special scrolling logic, so scrolling it with a mouse wheel can be a real bitch, and scrolling it horizontally with a trackpad would feel really janky. This makes all scrolling in the urlbar smooth, and lets you scroll it horizontally with mousewheel up/down, since it can't be scrolled vertically anyway.

@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name           Multi-line Url-bar Results
+// @name           Multi-line Urlbar Results
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    When a urlbar result's title overflows off the results panel, this moves its URL to a second line, underneath the title. Results that aren't overflowing are still single lines. This could be done without javascript, but I wanted the URL to be lined up with the title, not with the favicon. This requires some CSS from the end of uc-urlbar-results.css.

@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name           Scroll Url-bar Results with Mousewheel
+// @name           Scroll Urlbar Results with Mousewheel
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Lets you navigate the results/suggestions in the urlbar with the mousewheel, (or trackpad scroll) and execute the active/selected result by right clicking anywhere in the urlbar panel. Makes one-hand operation easier.
