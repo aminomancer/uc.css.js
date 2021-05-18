@@ -1,5 +1,6 @@
 // ==UserScript==
 // @name           Toggle Tabs and Sidebar
+// @version        1.0
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Adds a new toolbar button that can toggle between hiding tabs and hiding sidebar. Intended for use with tree style tabs, but will work just fine without it. It toggles the sidebar on its own, but it hides tabs by setting an attribute on the document element, which you need to reference in your userChrome.css file, like this: :root[toggle-hidden="tabs"] #TabsToolbar {...}

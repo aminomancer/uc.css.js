@@ -1,5 +1,6 @@
 // ==UserScript==
 // @name           Let Ctrl+W Close Pinned Tabs
+// @version        1.0
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    The filename should say it all, this just removes the "feature" that prevents you from closing pinned tabs with the Ctrl+W/Cmd+W shortcut. I guess this is meant to be consistent with the fact that the close button is hidden on pinned tabs by default, but it doesn't really make sense because it's a lot harder to accidentally press Ctrl+W than it is to accidentally click the close button. Firefox still lets you close tabs by middle-clicking them, which is arguably easier to do unintentionally than to press Ctrl+W. Since my theme makes pinned tabs really small, I also added a preference to hide the close button on pinned tabs. But I never find myself accidentally closing tabs with Ctrl+W so I'm disabling this little obstacle.

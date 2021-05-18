@@ -1,5 +1,6 @@
 // ==UserScript==
 // @name           Search Mode Indicator Icons
+// @version        1.0
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    A way to put dynamic icons in the urlbar reflecting the current search engine. Automatically add indicator attributes to the identity icon in the urlbar in response to changing one-off search engines. If you have google set to "goo" and type in goo then hit spacebar, the identity icon will gain an attribute reflecting that, so you can change its icon accordingly with a CSS rule like : #identity-icon[engine="Tabs"] {list-style-image: url("chrome://browser/skin/tab.svg") !important;} Doesn't change anything else about the layout so you may want to tweak some things in your stylesheet. For example I have mine set up so the tracking protection icon disappears while the user is typing in the urlbar, and so a little box appears behind the identity icon while in one-off search mode. This way the icon appears to the left of the label, like it does on about:preferences and other UI pages. I recommend testing my stylesheets so you can see it and get an idea of what you can do, since it's not easily described in words.
@@ -8,17 +9,10 @@
 
 (() => {
     function init() {
-        const searchModeIndicatorFocused = this.gURLBar._searchModeIndicatorTitle,
-            urlbar = this.gURLBar.textbox,
-            identityIcon = this.gURLBar._identityBox.firstElementChild,
-            buttons = this.gURLBar.view.oneOffSearchButtons.buttons,
-            observer = new MutationObserver(searchModeCallback),
-            options = {
-                childList: true,
-                subtree: true,
-                attributes: true,
-                attributeFilter: ["actiontype", "searchmode", "actionoverride"],
-            };
+        const searchModeIndicatorFocused = this.gURLBar._searchModeIndicatorTitle;
+        const urlbar = this.gURLBar.textbox;
+        const identityIcon = this.gURLBar._identityBox.firstElementChild;
+        const buttons = this.gURLBar.view.oneOffSearchButtons.buttons;
 
         function searchModeCallback(mus, _observer) {
             for (let mu of mus) {
@@ -39,7 +33,12 @@
             }
         }
 
-        observer.observe(urlbar, options);
+        new MutationObserver(searchModeCallback).observe(urlbar, {
+            childList: true,
+            subtree: true,
+            attributes: true,
+            attributeFilter: ["actiontype", "searchmode", "actionoverride"],
+        });
     }
 
     if (gBrowserInit.delayedStartupFinished) {

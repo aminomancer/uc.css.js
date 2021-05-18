@@ -1,3 +1,11 @@
+/* 
+@name           duskFox
+@version        2.2
+@author         aminomancer
+@homepage       https://github.com/aminomancer
+@description    A dark indigo theme integrated with extensive functional and visual scripts.
+*/
+
 @import url(uc-globals.css);
 @import url(uc-variables.css);
 @import url(uc-extensions.css);

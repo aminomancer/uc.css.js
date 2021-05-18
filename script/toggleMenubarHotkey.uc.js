@@ -1,5 +1,6 @@
 // ==UserScript==
 // @name           Toggle Menubar Hotkey
+// @version        1.0
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Press alt+M to toggle the menubar.

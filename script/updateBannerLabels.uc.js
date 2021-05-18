@@ -1,5 +1,6 @@
 // ==UserScript==
 // @name           Concise Update Banner Labels
+// @version        1.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    This script simply changes the update banners in the hamburger button app menu to make the strings a bit more concise. Instead of "Update available — download now" it will show "Download Nightly update" for example.

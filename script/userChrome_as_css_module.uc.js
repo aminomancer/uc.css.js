@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name           Agent/Author Sheet Loader
+// @version        2.5
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
-// @version        2.5
 // @description    Load *.as.css files as agent sheets and *.au.css files as author sheets. Will also load *.us.css files as user sheets, in case you ever need that for some reason.
 // @backgroundmodule
 // ==/UserScript==

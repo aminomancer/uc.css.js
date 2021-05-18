@@ -1,5 +1,6 @@
 // ==UserScript==
 // @name           Restore pre-Proton Tab Sound Button
+// @version        1.0
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Proton makes really big changes to tabs, in particular removing the tab sound button. We can currently restore it to some extent with CSS, but it won't display a tooltip and it won't work when the video playing in the tab is in picture-in-picture mode. We can't really restore these functions, we have to recreate them. So this script generates a localized tooltip for the sound button based on its current function (mute, unmute, or block) and also makes the sound button work in picture-in-picture mode. As you might expect, it will mute the tab if it's not muted, and unmute the tab if it is already muted. This is consistent with the styling in uc-tabs.css: in PiP mode, the sound button is styled to look like a PiP icon, but when hovering the tab it will transform into a regular mute/unmute button, since the PiP button has no functionality of its own, it's purely a visual indicator.

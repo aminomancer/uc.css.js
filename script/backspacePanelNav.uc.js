@@ -1,5 +1,6 @@
 // ==UserScript==
 // @name           Backspace Panel Navigation
+// @version        1.0
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Press backspace to navigate back/forward in popup panels.

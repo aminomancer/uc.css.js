@@ -1,5 +1,6 @@
 // ==UserScript==
 // @name           Copy Current URL Hotkey
+// @version        1.0
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Adds a new hotkey (Ctrl+Alt+C by default) that copies whatever is in the urlbar, even when it's not in focus.

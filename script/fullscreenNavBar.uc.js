@@ -1,5 +1,6 @@
 // ==UserScript==
 // @name           Fullscreen Nav-bar
+// @version        1.0
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    In fullscreen, the nav-bar hides automatically when you're not using it. But it doesn't have a very smooth animation. This sets up its own logic to allow CSS transitions to cover the animation. Those are posted here in my stylesheets but you can also do your own thing with selectors like box[popup-status="true"] > #navigator-toolbox > whatever

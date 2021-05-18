@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name           Browser Toolbox Stylesheet Loader
+// @version        2.0
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
-// @version        2.0
 // @description    Load userChrome and userContent stylesheets into Browser Toolbox windows
 // @backgroundmodule
 // ==/UserScript==

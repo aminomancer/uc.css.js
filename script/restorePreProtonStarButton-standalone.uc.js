@@ -1,5 +1,6 @@
 // ==UserScript==
 // @name           Restore pre-Proton Star Button
+// @version        1.0
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    The bookmark page action button used to have a pretty cool starburst animation. That's been removed but it's not too difficult to restore. This standalone version of the script doesn't require any additional CSS or icon downloads. If you use my other stylesheets or icons, you will probably want the non-standalone version instead.
