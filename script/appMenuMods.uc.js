@@ -8,7 +8,6 @@
 (function () {
     class AppMenuMods {
         constructor() {
-            this.addonStrings = new Localization(["toolkit/about/aboutAddons.ftl"], true);
             PanelUI._initialized || PanelUI.init(shouldSuppressPopupNotifications);
             PanelUI.mainView.addEventListener("ViewShowing", this, { once: true });
             this.addSeparatorToAccountPanel();
@@ -16,10 +15,14 @@
         static sleep(ms) {
             return new Promise((resolve) => setTimeout(resolve, ms));
         }
+        async generateStrings() {
+            this.addonStrings = await new Localization(["toolkit/about/aboutAddons.ftl"], true);
+        }
         get fxaPanelView() {
             return PanelMultiView.getViewNode(document, "PanelUI-fxa");
         }
         async handleEvent(_e) {
+            await this.generateStrings();
             await AppMenuMods.sleep(1);
             document.getElementById(
                 gProton ? "appMenu-extensions-themes-button" : "appMenu-addons-button"

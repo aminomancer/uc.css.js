@@ -10,9 +10,9 @@
      * pause execution for ms milliseconds
      * @param {int} ms (milliseconds)
      */
-    function sleep(ms) {
-        return new Promise((resolve) => setTimeout(resolve, ms));
-    }
+    // function sleep(ms) {
+    //     return new Promise((resolve) => setTimeout(resolve, ms));
+    // }
 
     class AppMenuNotification {
         constructor(id, mainAction, secondaryAction, options = {}) {
@@ -25,7 +25,7 @@
     }
 
     async function init() {
-        await sleep(3000);
+        // await sleep(3000);
         PanelUI.updateNotifications = function (notificationsChanged) {
             let notifications = this._notifications;
             if (!notifications || !notifications.length) {
@@ -123,7 +123,7 @@
         };
     }
 
-    await sleep(1000);
+    // await sleep(1000);
     // wait until PanelUI is initialized before fucking with it
     if (gBrowserInit.delayedStartupFinished) {
         init();

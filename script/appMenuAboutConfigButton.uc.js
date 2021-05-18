@@ -11,7 +11,7 @@
     // end user configuration
 
     async function createButton() {
-        const configStrings = new Localization(["toolkit/about/config.ftl"], true); // get fluent file for AboutConfig page
+        const configStrings = await new Localization(["toolkit/about/config.ftl"], true); // get fluent file for AboutConfig page
         const advancedPrefsLabel = await configStrings.formatValue(["about-config-page-title"]); // localize the "Advanced Preferences" string
         const { mainView } = PanelUI;
         const doc = mainView.ownerDocument;
