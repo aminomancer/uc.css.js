@@ -102,6 +102,8 @@ menupopup
 #context_unpinSelectedTabs:not(.menuitem-iconic) .menu-text,
 #context_duplicateTab:not(.menuitem-iconic) .menu-text,
 #context_duplicateTabs:not(.menuitem-iconic) .menu-text,
+#context-markAsRead:not(.menuitem-iconic) .menu-text,
+#context-markAsUnread:not(.menuitem-iconic) .menu-text,
 #context_selectAllTabs:not(.menuitem-iconic) .menu-text,
 #context_bookmarkTab:not(.menuitem-iconic) .menu-text,
 #context_bookmarkSelectedTabs:not(.menuitem-iconic) .menu-text,
@@ -233,6 +235,8 @@ menuitem.customize-context-reportExtension > .menu-text {
 :is(#context_pinTab, #context_pinSelectedTabs):not(.menuitem-iconic)::before,
 :is(#context_unpinTab, #context_unpinSelectedTabs):not(.menuitem-iconic)::before,
 :is(#context_duplicateTab, #context_duplicateTabs):not(.menuitem-iconic)::before,
+#context-markAsRead::before,
+#context-markAsUnread::before,
 :is(#context_bookmarkTab, #context_bookmarkSelectedTabs):not(.menuitem-iconic)::before,
 #context_selectAllTabs:not(.menuitem-iconic)::before,
 #context_moveTabOptions:not(.menuitem-iconic)::before,
@@ -551,23 +555,31 @@ menuitem.customize-context-reportExtension::before {
 }
 
 :is(#context_duplicateTab, #context_duplicateTabs):not(.menuitem-iconic)::before {
-    background-image: url(chrome://userchrome/content/skin/duplicate-tab.svg) !important;
+    background-image: url(chrome://userchrome/content/skin/duplicate-tab.svg);
+}
+
+#context-markAsUnread::before {
+    background-image: url(chrome://userchrome/content/skin/mark-tab-unread.svg);
+}
+
+#context-markAsRead::before {
+    background-image: url(chrome://userchrome/content/skin/mark-tab-read.svg);
 }
 
 #context_selectAllTabs:not(.menuitem-iconic)::before {
-    background-image: url(chrome://userchrome/content/devtools/tool-styleeditor.svg) !important;
+    background-image: url(chrome://userchrome/content/devtools/tool-styleeditor.svg);
 }
 
 :is(#context_bookmarkTab, #context_bookmarkSelectedTabs):not(.menuitem-iconic)::before {
-    background-image: url(chrome://userchrome/content/skin/bookmark-hollow.svg) !important;
+    background-image: url(chrome://userchrome/content/skin/bookmark-hollow.svg);
 }
 
 #context_moveTabOptions:not(.menuitem-iconic)::before {
-    background-image: url(chrome://userchrome/content/skin/move-tab.svg) !important;
+    background-image: url(chrome://userchrome/content/skin/move-tab.svg);
 }
 
 #context_sendTabToDevice:not(.menuitem-iconic)::before {
-    background-image: url(chrome://userchrome/content/skin/send-to-device.svg) !important;
+    background-image: url(chrome://userchrome/content/skin/send-to-device.svg);
 }
 
 #context_shareTabURL:not(.menuitem-iconic)::before {
@@ -576,7 +588,7 @@ menuitem.customize-context-reportExtension::before {
 }
 
 #context_closeTabOptions:not(.menuitem-iconic)::before {
-    background-image: url(chrome://userchrome/content/skin/close-tabs.svg) !important;
+    background-image: url(chrome://userchrome/content/skin/close-tabs.svg);
 }
 
 #context_closeTab:not(.menuitem-iconic)::before {

@@ -98,7 +98,7 @@ tooltip[default][page] > description {
     position: relative !important;
     background-color: transparent !important;
     padding: 0px !important;
-    z-index: 1 !important;
+    z-index: 20 !important;
 }
 
 .hidehscroll-scrollbar {
@@ -108,7 +108,7 @@ tooltip[default][page] > description {
     position: relative !important;
     background-color: transparent !important;
     padding: 0px !important;
-    z-index: 1 !important;
+    z-index: 20 !important;
 }
 
 .hidevscroll-scrollbar[orient="vertical"] {
@@ -201,7 +201,7 @@ tooltip[default][page] > description {
     position: relative;
     background-color: transparent;
     background-image: none;
-    z-index: 1;
+    z-index: 20;
     padding: 0px;
 }
 
