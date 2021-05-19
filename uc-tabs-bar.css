@@ -465,6 +465,11 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
     opacity: 0.6;
 }
 
+:root[italic-unread-tabs] .all-tabs-item[notselectedsinceload]:not([pending]) > .all-tabs-button,
+:root[italic-unread-tabs] .all-tabs-item[notselectedsinceload][pending] > .all-tabs-button[busy] {
+    font-style: italic !important;
+}
+
 .all-tabs-item .all-tabs-secondary-button {
     max-width: 18px;
     max-height: 18px;
