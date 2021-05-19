@@ -8,6 +8,7 @@
 // ==/UserScript==
 
 (function () {
+    document.documentElement.setAttribute("italic-unread-tabs", true);
     function init() {
         gBrowser.tabContainer._handleTabSelect = function (aInstant) {
             let selectedTab = this.selectedItem;

@@ -146,8 +146,8 @@
     opacity: 0.8;
 }
 
-/* highlight unread tabs */
-.tabbrowser-tab[notselectedsinceload]:not([pending]:not([busy])) {
+/* highlight unread tabs; requires italicizeUnreadTabs.uc.js */
+:root[italic-unread-tabs] .tabbrowser-tab[notselectedsinceload]:not([pending]:not([busy])) {
     font-style: italic !important;
 }
 
