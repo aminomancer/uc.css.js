@@ -146,6 +146,11 @@
     opacity: 0.8;
 }
 
+/* highlight unread tabs */
+.tabbrowser-tab[notselectedsinceload]:not([pending]:not([busy])) {
+    font-style: italic !important;
+}
+
 /* tab top border roundness */
 #TabsToolbar .tabbrowser-tab,
 #TabsToolbar .tabbrowser-tab :is(.tab-stack, .tab-background, .tab-content, .tab-loading-burst) {
