@@ -43,7 +43,6 @@
                             script.author === "aminomancer"
                     );
 
-            console.log(allTabsXPac);
             if (allTabsXPac) await FluentRevealEffect.sleep(100);
             eval(
                 `gTabsPanel.allTabsPanel._createRow = function ` +
