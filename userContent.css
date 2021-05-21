@@ -1439,6 +1439,9 @@ menupopup {
         --newtab-contextmenu-button-color: var(--in-content-box-background) !important;
         --newtab-card-background-color: var(--in-content-box-background) !important;
         --newtab-card-placeholder-color: var(--in-content-box-background) !important;
+        --newtab-search-text-color: #B1B1BD !important;
+        --newtab-search-first-shadow: rgba(21, 20, 26, 0.5);
+        --newtab-search-second-shadow: rgba(21, 20, 26, 0.75);
     }
 
     body:not(.inline-onboarding) .fixed-search .search-wrapper {
@@ -1479,6 +1482,43 @@ menupopup {
 
     #category-experimental > .category-icon {
         list-style-image: url(chrome://userchrome/content/material/potion-large.svg) !important;
+    }
+
+    .top-site-outer {
+        border-radius: 6px !important;
+    }
+
+    .search-handoff-button,
+    .top-site-outer .tile {
+        border-radius: 4px !important;
+    }
+
+    .showPrivate .search-handoff-button {
+        background-color: var(--newtab-textbox-background-color) !important;
+        box-shadow: 0 3px 8px var(--newtab-search-first-shadow), 0 0 2px var(--newtab-search-second-shadow) !important;
+        border: 1px solid transparent !important;
+        color: var(--newtab-search-text-color) !important;
+    }
+
+    .showPrivate .search-handoff-button.focused {
+        outline: 0;
+        border: 1px solid var(--newtab-focus-border) !important;
+        box-shadow: 0 0 0 2px var(--newtab-focus-outline) !important;
+    }
+
+    .showPrivate .fake-textbox {
+        color: inherit !important;
+    }
+
+    .showPrivate .fake-caret {
+        width: 0.6px !important;
+        background: var(--newtab-search-text-color) !important;
+    }
+
+    .showPrivate .info {
+        background-image: url(chrome://userchrome/content/skin/privateBrowsing.svg) !important;
+        -moz-context-properties: fill, fill-opacity;
+        fill: hsl(235, 100%, 71%);
     }
 }
 
