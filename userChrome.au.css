@@ -1313,7 +1313,7 @@ toolbar[brighttext] #panic-button[open] {
     list-style-image: url(chrome://userchrome/content/more.svg);
 }
 
-#reader-mode-button {
+#reader-mode-button > .urlbar-icon {
     list-style-image: url(chrome://userchrome/content/skin/reader-mode.svg);
 }
 

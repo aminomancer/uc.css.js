@@ -1726,7 +1726,7 @@ menupopup {
     }
 }
 
-@-moz-document url-prefix("moz-extension://54964627-cc4e-4a5b-9a5a-bc3c14858102/")
+@-moz-document url-prefix("moz-extension://54964627-cc4e-4a5b-9a5a-bc3c14858102/ui/")
 {
     body,
     html,
@@ -1797,6 +1797,11 @@ menupopup {
     .mobile .check-button .checkbox__checkmark,
     .preview .check-button .checkbox__checkmark {
         background-color: var(--uc-panel-button-solid) !important;
+    }
+
+    .site-list__textbox:focus {
+        background-color: var(--uc-arrowpanel-dimmed-further) !important;
+        box-shadow: 0 0 0 0.125rem var(--uc-panel-button-solid) !important
     }
 
     .mobile .theme-group__presets-wrapper,

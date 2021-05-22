@@ -38,6 +38,12 @@
     list-style-image: url(chrome://userchrome/content/devtools/tool-dom.svg);
 }
 
+/* cookie remover */
+.webextension-browser-action[label="Remove cookies for this site"] .toolbarbutton-icon,
+#_3507f56d-2ef5-45c1-b6d7-5297a0ba7642_-browser-action .toolbarbutton-icon {
+    list-style-image: url(chrome://userchrome/content/skin/3rdpartycookies-disabled.svg);
+}
+
 /* pushbullet */
 #sidebarMenu-popup
     #button__6540f1c5-ab3d-4eff-9ad2-79a95aec93d5_-sidebar-action:not([checked="true"]),
