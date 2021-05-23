@@ -515,6 +515,16 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
     --arrowpanel-dimmed-even-further: hsla(0, 0%, 0%, 0.225);
 }
 
+.protections-popup-tp-switch:not([enabled]) {
+    background: var(--protections-popup-switch-off-background) !important;
+    border-color: transparent !important;
+}
+
+.protections-popup-tp-switch[enabled] {
+    background: var(--protections-popup-switch-on-background) !important;
+    border-color: transparent !important;
+}
+
 .protections-popup-tp-switch:not([enabled]):is(:hover, :focus-visible) {
     border: 1px solid var(--protections-popup-switch-off-hover-border-custom) !important;
     background: var(--protections-popup-switch-off-hover-background-custom) !important;

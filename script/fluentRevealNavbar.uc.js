@@ -1,0 +1,182 @@
+// ==UserScript==
+// @name           Fluent Reveal Navbar Buttons
+// @version        1.0
+// @author         aminomancer
+// @homepage       https://github.com/aminomancer/uc.css.js
+// @description    Adds a visual effect to navbar buttons similar to the spotlight gradient effect on Windows 10's start menu tiles. When hovering over or near a button, a subtle radial gradient is applied to every button in the vicinity the mouse. This is compatible with Fluent Reveal Tabs.
+// ==/UserScript==
+
+(function () {
+    class FluentRevealEffect {
+        // user configuration
+        static options = {
+            lightColor: "hsla(224, 100%, 80%, 0.15)", // the color of the gradient. default is sort of a faint baby blue. you may prefer just white, e.g. hsla(0, 0%, 100%, 0.05)
+            gradientSize: 50, // how wide the radial gradient is.
+            clickEffect: false, // whether to show an additional light burst when clicking an element. (not recommended)
+        };
+
+        // instantiate the handler for a given window
+        constructor() {
+            this._options = FluentRevealEffect.options;
+            this.applyEffect(window);
+            document.documentElement.setAttribute("fluent-reveal-hover", true);
+            if (this._options.clickEffect)
+                document.documentElement.setAttribute("fluent-reveal-click", true);
+        }
+
+        // get all the toolbar buttons in the navbar, in iterable form
+        get toolbarButtons() {
+            return Array.from(gNavToolbox.querySelectorAll("toolbarbutton"));
+        }
+
+        /**
+         * main event handler. handles all the mouse behavior.
+         * @param {object} e (event)
+         */
+        handleEvent(e) {
+            switch (e.type) {
+                case "scroll":
+                case "mousemove":
+                    if (this._options.clickEffect && this._options.is_pressed)
+                        this.generateEffectsForAll(e, true);
+                    else this.generateEffectsForAll(e);
+                    break;
+
+                case "mousedown":
+                    this._options.is_pressed = true;
+                    this.generateEffectsForAll(e, true);
+                    break;
+
+                case "mouseup":
+                    this._options.is_pressed = false;
+                    this.generateEffectsForAll(e);
+                    break;
+            }
+        }
+
+        /**
+         * main entry point for applying all the script behavior to an element.
+         * @param {object} el (a DOM node to apply the effect to)
+         * @param {object} options (an object containing options similar to the static options at the top of the script)
+         */
+        applyEffect(el, options = this._options) {
+            let { clickEffect } = options.clickEffect === undefined ? this._options : options;
+            let { gradientSize } = options.gradientSize === undefined ? this._options : options;
+            let { lightColor } = options.lightColor === undefined ? this._options : options;
+
+            this._options = {
+                clickEffect,
+                lightColor,
+                gradientSize,
+                is_pressed: false,
+            };
+
+            el.addEventListener("mousemove", this);
+            el.addEventListener("mouseleave", this);
+            el.addEventListener("scroll", this, true);
+
+            // only set up the click effect if the option is enabled and the element doesn't already have a click effect.
+            if (clickEffect) {
+                el.addEventListener("mousedown", this);
+                el.addEventListener("mouseup", this);
+            }
+        }
+
+        /**
+         * called individually on each toolbar button. finds the element inside the toolbar button that's supposed to have a background color (they're not all the same, some are just the icons, some are badge stacks, and some widgets have multiple buttons too) and generates a gradient for it, since gradient coordinates need to be relative to the top left corner of the element the gradient is displayed on.
+         * @param {object} el (a toolbar button node)
+         * @param {object} e (the event that triggered the painting)
+         * @param {boolean} click (whether the left mouse button is down)
+         */
+        generateToolbarButtonEffect(el, e, click = false) {
+            let { gradientSize, lightColor } = this._options;
+
+            let area =
+                el.querySelector(".toolbarbutton-badge-stack") ||
+                el.querySelector(".toolbarbutton-icon");
+            let areaStyle = getComputedStyle(area);
+            if (
+                areaStyle.display == "none" ||
+                areaStyle.visibility == "hidden" ||
+                areaStyle.visibility == "collapse"
+            )
+                area = el.querySelector(".toolbarbutton-text");
+
+            if (el.disabled || areaStyle.pointerEvents == "none") return this.clearEffect(area);
+
+            let x = (e.pageX || MousePosTracker._x) - this.getOffset(area).left - window.scrollX;
+            let y = (e.pageY || MousePosTracker._y) - this.getOffset(area).top - window.scrollY;
+
+            let cssLightEffect = `radial-gradient(circle ${gradientSize}px at ${x}px ${y}px, ${lightColor}, rgba(255,255,255,0)), radial-gradient(circle ${70}px at ${x}px ${y}px, rgba(255,255,255,0), ${lightColor}, rgba(255,255,255,0), rgba(255,255,255,0))`;
+
+            this.drawEffect(area, x, y, lightColor, gradientSize, click ? cssLightEffect : null);
+        }
+
+        /**
+         * iterate over all the toolbar buttons in the navbar, generating a separate gradient for each.
+         * @param {object} e (the event that invoked this)
+         * @param {boolean} click (whether the left mouse button is down)
+         */
+        generateEffectsForAll(e, click = false) {
+            this.toolbarButtons.forEach((button) =>
+                this.generateToolbarButtonEffect(button, e, click)
+            );
+        }
+
+        /**
+         * used to calculate the x and y coordinates used in drawing the gradient
+         * @param {object} el (a DOM node)
+         * @returns {object} (an object containing top and left coordinates)
+         */
+        getOffset(el) {
+            return {
+                top: el.getBoundingClientRect().top,
+                left: el.getBoundingClientRect().left,
+            };
+        }
+
+        /**
+         * finally draw the specified effect on a given element, that is, give the element an inline background-image property
+         * @param {object} el (a DOM node)
+         * @param {integer} x (x coordinate for gradient center)
+         * @param {integer} y (y coordinate for gradient center)
+         * @param {string} lightColor (any color value accepted by CSS, e.g. "#FFF", "rgba(125, 125, 125, 0.5)", or "hsla(50, 0%, 100%, 0.2)")
+         * @param {integer} gradientSize (how many pixels wide the gradient should be)
+         * @param {string} cssLightEffect (technically, any background-image value accepted by CSS, but should be a radial-gradient() function, surrounded by quotes)
+         */
+        drawEffect(el, x, y, lightColor, gradientSize, cssLightEffect = null) {
+            let lightBg;
+
+            if (cssLightEffect === null)
+                lightBg = `radial-gradient(circle ${gradientSize}px at ${x}px ${y}px, ${lightColor}, rgba(255,255,255,0))`;
+            else lightBg = cssLightEffect;
+
+            el.style.backgroundImage = lightBg;
+        }
+
+        /**
+         * invoked when the script tries to paint a disabled or otherwise unclickable button. (e.g. in the toolbar customization menu)
+         * @param {object} el (a DOM node)
+         */
+        clearEffect(el) {
+            this._options.is_pressed = false;
+            el.style.removeProperty("background-image");
+        }
+    }
+
+    function init() {
+        window.fluentRevealNavbar = new FluentRevealEffect(); // instantiate the class on a global property to share the methods with other scripts if desired.
+    }
+
+    // wait for the chrome window to finish starting up, since we need to reference gNavToolbox as soon as any mouse events are detected
+    if (gBrowserInit.delayedStartupFinished) init();
+    else {
+        let delayedListener = (subject, topic) => {
+            if (topic == "browser-delayed-startup-finished" && subject == window) {
+                Services.obs.removeObserver(delayedListener, topic);
+                init();
+            }
+        };
+        Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
+    }
+})();

@@ -121,6 +121,7 @@ tooltip {
     --purple-40-a30: hsla(250, 100%, 60%, 0.5) !important;
     --purple-45: hsl(250, 87%, 55%) !important;
     --purple-50: hsl(256, 87%, 50%) !important;
+    --purple-55: hsl(256, 87%, 45%) !important;
     --purple-50-a30: hsla(256, 87%, 50%, 0.3) !important;
     --purple-60: hsl(258, 95%, 40%) !important;
     --purple-70: hsl(256, 97%, 30%) !important;
@@ -177,16 +178,22 @@ popupnotification,
 }
 
 #protections-popup {
-    --protections-popup-switch-off-hover-background-custom: hsl(240, 1%, 79%);
-    --protections-popup-switch-off-active-background-custom: hsl(240, 1%, 70%);
-    --protections-popup-switch-off-hover-border-custom: hsl(240, 9%, 98%);
-    --protections-popup-switch-on-hover-background-custom: hsl(216, 100%, 39%);
-    --protections-popup-switch-on-active-background-custom: hsl(218, 100%, 34%);
-    --protections-popup-switch-on-hover-border-custom: hsl(214, 100%, 44%);
+    --button-primary-bgcolor: var(--purple-45) !important;
+    --button-primary-hover-bgcolor: var(--purple-40) !important;
+    --button-primary-active-bgcolor: var(--purple-35) !important;
+    --protections-popup-switch-off-background: color-mix(in srgb, currentColor 15%, transparent);
+    --protections-popup-switch-off-hover-background-custom: color-mix(in srgb, currentColor 20%, transparent);
+    --protections-popup-switch-off-active-background-custom: color-mix(in srgb, currentColor 23%, transparent);
+    --protections-popup-switch-off-hover-border-custom: color-mix(in srgb, currentColor 5%, transparent);
+    --protections-popup-switch-on-background: var(--purple-40);
+    --protections-popup-switch-on-hover-background-custom: var(--purple-50);
+    --protections-popup-switch-on-active-background-custom: var(--purple-55);
+    --protections-popup-switch-on-hover-border-custom: var(--purple-40);
 }
 
 :root[lwt-popup-brighttext] #protections-popup {
-    --protections-popup-switch-off-hover-background-custom: hsl(240, 2%, 33%);
-    --protections-popup-switch-off-active-background-custom: hsl(240, 3%, 29%);
-    --protections-popup-switch-off-hover-border-custom: hsl(240, 3%, 37%);
+    --protections-popup-switch-off-background: hsl(233, 15%, 32%);
+    --protections-popup-switch-off-hover-background-custom: hsl(233, 18%, 27%);
+    --protections-popup-switch-off-active-background-custom: hsl(233, 19%, 24.5%);
+    --protections-popup-switch-off-hover-border-custom: hsl(233, 15%, 32%);
 }

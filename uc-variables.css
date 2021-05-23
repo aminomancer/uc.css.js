@@ -164,6 +164,12 @@ toolbar {
     --tab-loading-fill: var(--lwt-toolbarbutton-icon-fill-attention) !important;
 }
 
+/* fluent reveal toolbar buttons */
+:root[fluent-reveal-hover] #navigator-toolbox toolbarbutton {
+    --toolbarbutton-hover-background: hsla(236, 82%, 83%, 0.1) !important;
+    --toolbarbutton-active-background: hsla(236, 82%, 83%, 0.13) !important;
+}
+
 @media (-moz-proton) {
     :root,
     menupopup {
