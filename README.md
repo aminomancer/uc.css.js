@@ -216,7 +216,7 @@ get chromeDir() {return traverseToMainProfile('UChrm')},
 
 -   [Fluent Reveal Tabs](/script/fluentRevealTabs.uc.js): Adds a pretty visual effect to tabs similar to the spotlight gradient effect on Windows 10's start menu tiles. When hovering a tab, a subtle radial gradient is applied under the mouse. Also applies to tabs in the "All tabs menu," and is fully compatible with my All Tabs Menu Expansion Pack. User configuration is towards the top of the script. Inspired by this [proof of concept](https://www.reddit.com/r/FirefoxCSS/comments/ng5lnt/proof_of_concept_legacy_edge_like_interaction/), and built on a modified version of [this library](https://github.com/d2phap/fluent-reveal-effect).
 
--   [Fluent Reveal Navbar Buttons](/script/fluentRevealNavbar.uc.js): Adds the same Windows 10-style effect to navbar buttons. When hovering over or near a button, a subtle radial gradient is applied to every button in the vicinity the mouse. This is compatible with [Fluent Reveal Tabs](/script/fluentRevealTabs.uc.js) so you can use both if you want.
+-   [Fluent Reveal Navbar Buttons](/script/fluentRevealNavbar.uc.js): Adds the same Windows 10-style effect to navbar buttons. When hovering over or near a button, a subtle radial gradient is applied to every button in the vicinity the mouse. This is compatible with [Fluent Reveal Tabs](/script/fluentRevealTabs.uc.js) so you can use both if you want. </p><details><summary><i><b>Click here for a preview.</b></i></summary><img src="preview/fluent-reveal-navbar.webp"/></details>
 
 -   [Full Screen Hotkey](/script/fullscreenHotkey.uc.js): All this does is remap the fullscreen shortcut key from F11 to Ctrl+E, since I use F11 for other purposes.
 
