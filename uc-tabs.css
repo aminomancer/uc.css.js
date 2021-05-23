@@ -2,6 +2,65 @@
     max-width: 100vw !important;
 }
 
+.tabbrowser-tab[pinned] {
+    transition: max-width 50ms ease-out, -moz-box-flex 50ms ease-out !important;
+}
+
+/* a much, much smoother tab creation animation.
+when the tab bar is not overflowing, new tabs slide into place much more smoothly. */
+.tabbrowser-tab[fadein]:not([pinned], [style]) {
+    animation-name: tabbrowserTabExpand;
+    animation-iteration-count: 1;
+    animation-duration: 200ms;
+}
+
+@keyframes tabbrowserTabExpand {
+    from {
+        -moz-box-flex: 0;
+        animation-timing-function: var(--animation-easing-function);
+    }
+    to {
+        -moz-box-flex: 100;
+        animation-timing-function: ease-in;
+    }
+}
+
+.tabbrowser-tab[pinned]:not([last-visible-tab]) .tab-content {
+    min-width: var(--pinned-tab-width) !important;
+    max-width: var(--pinned-tab-width) !important;
+}
+
+.tabbrowser-tab[pinned]:not([last-visible-tab]) .tab-label-container {
+    visibility: collapse !important;
+}
+
+.tabbrowser-tab[pinned][last-visible-tab] {
+    -moz-box-flex: 100;
+}
+
+.tabbrowser-tab[pinned][last-visible-tab] .tab-label {
+    flex-wrap: nowrap !important;
+    display: flex;
+    -moz-box-orient: horizontal !important;
+}
+
+.tabbrowser-tab[pinned][last-visible-tab] .tab-label::after {
+    display: -moz-box;
+    content: "";
+    margin-left: 2px;
+    background: url(chrome://userchrome/content/skin/pin-tab.svg) no-repeat center/12px;
+    transform: scaleX(-1);
+    -moz-context-properties: fill, fill-opacity;
+    fill: currentColor;
+    width: 16px;
+    height: 16px;
+}
+
+.tabbrowser-tab[pinned][last-visible-tab]
+    :is(.tab-throbber, .tab-icon-pending, .tab-icon-image, .tab-sharing-icon-overlay, .tab-icon-overlay) {
+    margin-inline-end: 5.5px;
+}
+
 /* #tabbrowser-tabs:not([movingtab]) .tabbrowser-tab {
     transform-origin: bottom !important;
     transform-style: preserve-3d !important;
@@ -22,12 +81,8 @@
     background: var(--toolbar-bgcolor) !important;
 }
 
-.tabbrowser-tab:focus:not([aria-activedescendant])
-    > .tab-stack
-    > .tab-background,
-.tabbrowser-tab.keyboard-focused-tab[selected]
-    > .tab-stack
-    > .tab-background {
+.tabbrowser-tab:focus:not([aria-activedescendant]) > .tab-stack > .tab-background,
+.tabbrowser-tab.keyboard-focused-tab[selected] > .tab-stack > .tab-background {
     background: var(--tab-focused-hover) !important;
 }
 
@@ -35,7 +90,8 @@
     background: var(--tab-pinned-hover) !important;
 }
 
-.tabbrowser-tab:not([selected], [pinned], [multiselected], :hover, .keyboard-focused-tab) .tab-background {
+.tabbrowser-tab:not([selected], [pinned], [multiselected], :hover, .keyboard-focused-tab)
+    .tab-background {
     background: var(--lwt-accent-color) !important;
 }
 
@@ -48,7 +104,8 @@
     background: var(--tab-multi) !important;
 }
 
-.tabbrowser-tab[multiselected]:not([selected], [pinned]):is(:hover, .keyboard-focused-tab) .tab-background {
+.tabbrowser-tab[multiselected]:not([selected], [pinned]):is(:hover, .keyboard-focused-tab)
+    .tab-background {
     background: var(--tab-multi-hover) !important;
 }
 
@@ -99,7 +156,8 @@
     transition: none !important;
 }
 
-.tabbrowser-tab[usercontextid]:is(:hover, [selected], [multiselected], .keyboard-focused-tab) .tab-context-line {
+.tabbrowser-tab[usercontextid]:is(:hover, [selected], [multiselected], .keyboard-focused-tab)
+    .tab-context-line {
     transform: none;
     opacity: 1 !important;
 }
@@ -240,7 +298,7 @@
     pointer-events: none;
 }
 
-.tab-loading-burst[pinned]::before {
+.tabbrowser-tab:not([last-visible-tab]) .tab-loading-burst[pinned]::before {
     margin-inline-start: calc(
         (var(--pinned-tab-width) / 2) - (var(--pinned-tab-width) * 0.05)
     ) !important;
@@ -411,20 +469,11 @@
     border-inline: none !important;
 }
 
-#tabbrowser-tabs[positionpinnedtabs] .tabbrowser-tab[pinned] .tab-content {
-    min-width: var(--pinned-tab-width) !important;
-    max-width: var(--pinned-tab-width) !important;
-}
-
 #tabbrowser-tabs[positionpinnedtabs]
     > .tabbrowser-arrowscrollbox
     > .tabbrowser-tab[pinned]
     > .tab-stack {
     border: none !important;
-}
-
-#tabbrowser-tabs[positionpinnedtabs] .tabbrowser-tab[pinned] .tab-label-container {
-    visibility: collapse !important;
 }
 
 .tab-icon-overlay {
@@ -456,7 +505,7 @@
     list-style-image: none !important;
     background-image: url(chrome://userchrome/content/tab-audio-playing.svg) !important;
     background-size: 12px !important;
-    background-position: 1px center !important;
+    background-position: 1.2px center !important;
     background-repeat: no-repeat !important;
     list-style-image: none !important;
 }
@@ -464,7 +513,7 @@
 .tab-icon-sound[muted] {
     background-image: url(chrome://userchrome/content/tab-audio-muted.svg) !important;
     background-size: 12px !important;
-    background-position: 1px center !important;
+    background-position: 1.2px center !important;
     background-repeat: no-repeat !important;
     list-style-image: none !important;
 }
@@ -485,11 +534,13 @@
     opacity: 1 !important;
 }
 
-.tabbrowser-tab:is(:hover, .keyboard-focused-tab) :is(.tab-icon-sound, .tab-close-button):not(:hover) {
+.tabbrowser-tab:is(:hover, .keyboard-focused-tab)
+    :is(.tab-icon-sound, .tab-close-button):not(:hover) {
     opacity: 0.6 !important;
 }
 
-.tabbrowser-tab:is(:hover, .keyboard-focused-tab) :is(.tab-icon-sound, .tab-close-button):hover:active {
+.tabbrowser-tab:is(:hover, .keyboard-focused-tab)
+    :is(.tab-icon-sound, .tab-close-button):hover:active {
     background-color: var(--arrowpanel-dimmed-further) !important;
     opacity: 1 !important;
 }
@@ -514,7 +565,7 @@
     .tab-icon-sound[pictureinpicture][soundplaying]:not([soundplaying-scheduledremoval]),
 .tabbrowser-tab .tab-icon-sound[pictureinpicture][muted] {
     background-size: 12px !important;
-    background-position: 1px center !important;
+    background-position: 1.2px center !important;
     background-repeat: no-repeat !important;
     list-style-image: none !important;
     border-radius: 50% !important;
@@ -543,7 +594,8 @@
     background-repeat: no-repeat;
 }
 
-.tabbrowser-tab:not([pinned]):is(:hover, .keyboard-focused-tab) .tab-close-button:not(:hover):not(:active) {
+.tabbrowser-tab:not([pinned]:not([last-visible-tab])):is(:hover, .keyboard-focused-tab)
+    .tab-close-button:not(:hover):not(:active) {
     opacity: 0.6 !important;
 }
 
@@ -588,7 +640,8 @@
     position: relative !important;
 }
 
-.tabbrowser-tab:is(:hover, .keyboard-focused-tab, [busy]) :is(.tab-icon-image, .tab-sharing-icon-overlay) {
+.tabbrowser-tab:is(:hover, .keyboard-focused-tab, [busy])
+    :is(.tab-icon-image, .tab-sharing-icon-overlay) {
     opacity: 0 !important;
     pointer-events: none !important;
     transform: translateX(25px) scale(0.5) !important;
@@ -720,14 +773,17 @@
 
 /* hide the close button for pinned tabs. requires you to make a pref in about:config and set it to true: "userChrome.tabs.pinned-tabs.close-buttons.disabled" */
 @supports (-moz-bool-pref("userChrome.tabs.pinned-tabs.close-buttons.disabled")) {
-    .tabbrowser-tab[pinned] .tab-close-button,
-    #tabbrowser-tabs[movingtab] .tabbrowser-tab[pinned] .tab-close-button {
+    .tabbrowser-tab[pinned]:not([last-visible-tab]) .tab-close-button,
+    #tabbrowser-tabs[movingtab] .tabbrowser-tab[pinned]:not([last-visible-tab]) .tab-close-button {
         display: none !important;
     }
 
-    #tabbrowser-tabs[movingtab] .tabbrowser-tab[pinned][selected] .tab-icon-image,
-    .tabbrowser-tab[pinned] .tab-throbber[busy],
-    .tabbrowser-tab[pinned]:not([busy]) :is(.tab-icon-image, .tab-sharing-icon-overlay) {
+    #tabbrowser-tabs[movingtab]
+        .tabbrowser-tab[pinned]:not([last-visible-tab])[selected]
+        .tab-icon-image,
+    .tabbrowser-tab[pinned]:not([last-visible-tab]) .tab-throbber[busy],
+    .tabbrowser-tab[pinned]:not([busy], [last-visible-tab])
+        :is(.tab-icon-image, .tab-sharing-icon-overlay) {
         opacity: 1 !important;
         transform: none !important;
     }
@@ -740,6 +796,10 @@
 
     .tab-icon-sound-label,
     .tab-label-container.proton > .tab-icon-sound {
+        display: none !important;
+    }
+
+    .tab-secondary-label {
         display: none !important;
     }
 
@@ -769,7 +829,7 @@
         display: -moz-box !important;
     }
 
-    .tabbrowser-tab[pinned] .tab-icon-sound {
+    .tabbrowser-tab[pinned]:not([last-visible-tab]) .tab-icon-sound {
         display: none !important;
     }
 }
