@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Fluent Reveal Navbar Buttons
-// @version        1.0
+// @version        1.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Adds a visual effect to navbar buttons similar to the spotlight gradient effect on Windows 10's start menu tiles. When hovering over or near a button, a subtle radial gradient is applied to every button in the vicinity the mouse. This is compatible with Fluent Reveal Tabs.
@@ -10,6 +10,7 @@
     class FluentRevealEffect {
         // user configuration
         static options = {
+            includeBookmarks: true, // if true, show the effect on bookmarks on the toolbar
             lightColor: "hsla(224, 100%, 80%, 0.15)", // the color of the gradient. default is sort of a faint baby blue. you may prefer just white, e.g. hsla(0, 0%, 100%, 0.05)
             gradientSize: 50, // how wide the radial gradient is.
             clickEffect: false, // whether to show an additional light burst when clicking an element. (not recommended)
@@ -26,7 +27,19 @@
 
         // get all the toolbar buttons in the navbar, in iterable form
         get toolbarButtons() {
-            return Array.from(gNavToolbox.querySelectorAll("toolbarbutton"));
+            let buttons = Array.from(gNavToolbox.querySelectorAll(".toolbarbutton-1"));
+            if (this._options.includeBookmarks)
+                buttons = buttons.concat(
+                    Array.from(this.placesToolbarItems.querySelectorAll(".bookmark-item"))
+                );
+            return buttons;
+        }
+
+        get placesToolbarItems() {
+            return (
+                this._placesToolbarItems ||
+                (this._placesToolbarItems = document.getElementById("PlacesToolbarItems"))
+            );
         }
 
         /**
@@ -64,12 +77,12 @@
             let { gradientSize } = options.gradientSize === undefined ? this._options : options;
             let { lightColor } = options.lightColor === undefined ? this._options : options;
 
-            this._options = {
+            Object.assign(this._options, {
                 clickEffect,
                 lightColor,
                 gradientSize,
                 is_pressed: false,
-            };
+            });
 
             el.addEventListener("mousemove", this);
             el.addEventListener("mouseleave", this);
@@ -90,17 +103,20 @@
          */
         generateToolbarButtonEffect(el, e, click = false) {
             let { gradientSize, lightColor } = this._options;
-
-            let area =
-                el.querySelector(".toolbarbutton-badge-stack") ||
-                el.querySelector(".toolbarbutton-icon");
+            let isBookmark = el.id === "PlacesChevron" || el.classList.contains("bookmark-item");
+            let area = isBookmark
+                ? el
+                : el.querySelector(".toolbarbutton-badge-stack") ||
+                  el.querySelector(".toolbarbutton-icon");
             let areaStyle = getComputedStyle(area);
             if (
                 areaStyle.display == "none" ||
                 areaStyle.visibility == "hidden" ||
                 areaStyle.visibility == "collapse"
-            )
-                area = el.querySelector(".toolbarbutton-text");
+            ) {
+                if (isBookmark) return this.clearEffect(area);
+                else area = el.querySelector(".toolbarbutton-text");
+            }
 
             if (el.disabled || areaStyle.pointerEvents == "none") return this.clearEffect(area);
 

@@ -336,6 +336,22 @@ toolbarbutton.bookmark-item:not(.subviewbutton) {
     display: none !important;
 }
 
+#PersonalToolbar {
+    overflow-y: visible !important;
+}
+
+#PlacesToolbarDropIndicator {
+    list-style-image: none !important;
+    list-style-image: url(chrome://userchrome/content/tab-drag-indicator.svg) !important;
+    -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity !important;
+    fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
+    margin-top: 22px !important;
+    translate: -2.5px !important;
+    z-index: 2500 !important;
+    width: 20px !important;
+    height: 20px !important;
+}
+
 :root:-moz-window-inactive:not([customizing])
     .bookmark-item
     > :is(.toolbarbutton-text, .toolbarbutton-icon) {

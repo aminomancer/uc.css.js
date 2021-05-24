@@ -165,9 +165,9 @@ toolbar {
 }
 
 /* fluent reveal toolbar buttons */
-:root[fluent-reveal-hover] #navigator-toolbox toolbarbutton {
-    --toolbarbutton-hover-background: hsla(236, 82%, 83%, 0.1) !important;
-    --toolbarbutton-active-background: hsla(236, 82%, 83%, 0.13) !important;
+:root[fluent-reveal-hover] #navigator-toolbox :is(.toolbarbutton-1, .bookmark-item) {
+    --toolbarbutton-hover-background: hsla(236, 82%, 83%, 0.05) !important;
+    --toolbarbutton-active-background: hsla(236, 82%, 83%, 0.1) !important;
 }
 
 @media (-moz-proton) {
