@@ -651,8 +651,13 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
         display: none !important;
     }
 
-    #ContentSelectDropdown > menupopup :is(menu, menuitem),
-    menupopup.in-menulist :is(menu, menuitem) {
+    #ContentSelectDropdown
+        > menupopup
+        menuseparator:not(:first-of-type):not([hidden="true"])
+        + :is(menu, menuitem),
+    menupopup.in-menulist
+        menuseparator:not(:first-of-type):not([hidden="true"])
+        + :is(menu, menuitem) {
         border-image: linear-gradient(
             to right,
             transparent 1%,
