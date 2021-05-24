@@ -292,10 +292,9 @@ toolbar .toolbarbutton-1:not([disabled])[checked]:hover > .toolbarbutton-icon {
 #PersonalToolbar[collapsed="true"],
 :root:not([customizing])
     > body
-    > box:not(:focus-within, :hover, [popup-status], [urlbar-status])
-    /* > box:not(:hover, [popup-status]) */
-    /* use the line above instead if you don't want the bookmarks toolbar to show when the urlbar is focused */
-    #PersonalToolbar {
+    > box:not(:hover, [popup-status])
+    #PersonalToolbar:not(:focus-within),
+:root:not([customizing]) > body > box[urlbar-status] #PersonalToolbar {
     visibility: visible !important;
     min-height: 0 !important;
     max-height: 0 !important;
@@ -307,9 +306,28 @@ toolbar .toolbarbutton-1:not([disabled])[checked]:hover > .toolbarbutton-icon {
 #PersonalToolbar .toolbarbutton-1,
 toolbarbutton.bookmark-item:not(.subviewbutton) {
     margin-block: 0 3.5px !important;
-    padding: var(--bookmark-block-padding) 4px;
+    padding: var(--bookmark-block-padding) 4px; 
     min-height: 28px !important;
     min-width: 28px !important;
+}
+
+@supports -moz-bool-pref("userChrome.bookmarks-toolbar.icons-only") {
+    #PersonalToolbar toolbarbutton.bookmark-item:not(.subviewbutton, [id]) {
+        margin-inline: 2px !important;
+        padding: 0 !important;
+    }
+
+    #PersonalToolbar toolbarbutton.bookmark-item:not(.subviewbutton, [id]) .toolbarbutton-icon {
+        margin: 0 !important;
+        width: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
+        height: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
+        padding: var(--toolbarbutton-inner-padding) !important;
+        border-radius: var(--toolbarbutton-border-radius) !important;
+    }
+
+    #PersonalToolbar toolbarbutton.bookmark-item:not(.subviewbutton, [id]) .toolbarbutton-text {
+        display: none !important;
+    }
 }
 
 #PersonalToolbar #profiler-button > #profiler-button-dropmarker,
