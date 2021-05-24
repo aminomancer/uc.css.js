@@ -295,9 +295,7 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
         background-image: url(chrome://userchrome/content/menu-arrow-thick.svg) !important;
     }
 
-    #alertSettings
-        menupopup
-        :is(menu, menuitem):is(:hover, [_moz-menuactive="true"]):not([disabled="true"]) {
+    #alertSettings menupopup :is(menu, menuitem)[_moz-menuactive="true"]:not([disabled="true"]) {
         appearance: none !important;
         background-color: rgba(255, 255, 255, 0.08) !important;
     }

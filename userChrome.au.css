@@ -277,8 +277,8 @@ menupopup::part(arrowscrollbox),
 }
 
 #back-button,
-.unified-nav-back[_moz-menuactive]:-moz-locale-dir(ltr),
-.unified-nav-forward[_moz-menuactive]:-moz-locale-dir(rtl) {
+.unified-nav-back[_moz-menuactive="true"]:-moz-locale-dir(ltr),
+.unified-nav-forward[_moz-menuactive="true"]:-moz-locale-dir(rtl) {
     list-style-image: url(chrome://userchrome/content/skin/back.svg);
 }
 
@@ -439,8 +439,8 @@ menupopup::part(arrowscrollbox),
 #forward-button,
 #urlbar-go-button,
 .search-go-button,
-.unified-nav-forward[_moz-menuactive]:-moz-locale-dir(ltr),
-.unified-nav-back[_moz-menuactive]:-moz-locale-dir(rtl) {
+.unified-nav-forward[_moz-menuactive="true"]:-moz-locale-dir(ltr),
+.unified-nav-back[_moz-menuactive="true"]:-moz-locale-dir(rtl) {
     list-style-image: url(chrome://userchrome/content/skin/forward.svg);
 }
 

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Fluent Reveal Navbar Buttons
-// @version        1.1
+// @version        1.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Adds a visual effect to navbar buttons similar to the spotlight gradient effect on Windows 10's start menu tiles. When hovering over or near a button, a subtle radial gradient is applied to every button in the vicinity the mouse. This is compatible with Fluent Reveal Tabs.
@@ -47,24 +47,26 @@
          * @param {object} e (event)
          */
         handleEvent(e) {
-            switch (e.type) {
-                case "scroll":
-                case "mousemove":
-                    if (this._options.clickEffect && this._options.is_pressed)
+            requestAnimationFrame((time) => {
+                switch (e.type) {
+                    case "scroll":
+                    case "mousemove":
+                        if (this._options.clickEffect && this._options.is_pressed)
+                            this.generateEffectsForAll(e, true);
+                        else this.generateEffectsForAll(e);
+                        break;
+
+                    case "mousedown":
+                        this._options.is_pressed = true;
                         this.generateEffectsForAll(e, true);
-                    else this.generateEffectsForAll(e);
-                    break;
+                        break;
 
-                case "mousedown":
-                    this._options.is_pressed = true;
-                    this.generateEffectsForAll(e, true);
-                    break;
-
-                case "mouseup":
-                    this._options.is_pressed = false;
-                    this.generateEffectsForAll(e);
-                    break;
-            }
+                    case "mouseup":
+                        this._options.is_pressed = false;
+                        this.generateEffectsForAll(e);
+                        break;
+                }
+            });
         }
 
         /**

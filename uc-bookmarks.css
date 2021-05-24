@@ -264,9 +264,7 @@
     padding-inline: 0 !important;
 }
 
-#editBookmarkPanel
-    .in-menulist
-    :is(menu, menuitem):is(:hover, :focus-visible, [_moz-menuactive="true"]):not([disabled="true"]) {
+#editBookmarkPanel .in-menulist :is(menu, menuitem)[_moz-menuactive="true"]:not([disabled="true"]) {
     appearance: none !important;
     background-color: hsl(232, 21%, 40%) !important;
     color: #fff !important;
@@ -368,7 +366,7 @@
 }
 
 :is(#bookmarkpropertiesdialog, #editBookmarkPanel)
-    richlistitem:is(:hover, [_moz-menuactive="true"]) {
+    richlistitem:is(:hover, [selected="true"], [current="true"]) {
     background-color: hsl(232, 21%, 40%) !important;
 }
 

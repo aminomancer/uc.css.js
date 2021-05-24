@@ -275,7 +275,7 @@
     display: none !important;
 }
 
-menupopup menuitem[class^="unified-nav"][uri="moz-extension://e158f52d-b5db-4594-9757-1e526a5df811/newtab.html"]:not([_moz-menuactive])
+menupopup menuitem[class^="unified-nav"][uri="moz-extension://e158f52d-b5db-4594-9757-1e526a5df811/newtab.html"]:not([_moz-menuactive="true"])
 {
     list-style-image: url("moz-extension://e158f52d-b5db-4594-9757-1e526a5df811/favicon.ico") !important;
 }

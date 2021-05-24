@@ -83,19 +83,17 @@ menupopup:not(.PanelUI-subView) menu[disabled="true"] > .menu-right {
     visibility: collapse;
 }
 
-menupopup:not(.PanelUI-subView)
-    :is(menu, menuitem):is(:hover, [_moz-menuactive="true"]):not([disabled="true"]) {
+menupopup:not(.PanelUI-subView) :is(menu, menuitem)[_moz-menuactive="true"]:not([disabled="true"]) {
     appearance: none !important;
     background-color: var(--arrowpanel-dimmed) !important;
 }
 
-menupopup:not(.PanelUI-subView)
-    :is(menu, menuitem):is(:hover, [_moz-menuactive="true"])[disabled="true"] {
+menupopup:not(.PanelUI-subView) :is(menu, menuitem)[_moz-menuactive="true"][disabled="true"] {
     background: none !important;
     appearance: none !important;
 }
 
-.subviewbutton:is(:hover, [_moz-menuactive="true"])[disabled="true"] {
+.subviewbutton[_moz-menuactive="true"][disabled="true"] {
     color: var(--panel-disabled-color) !important;
 }
 
@@ -149,23 +147,21 @@ menupopup menuitem[type="checkbox"]::before {
     border-radius: 2px;
 }
 
-menupopup
-    menuitem:is([type="checkbox"], [type="radio"]):is(:hover, [_moz-menuactive="true"])::before {
+menupopup menuitem:is([type="checkbox"], [type="radio"])[_moz-menuactive="true"]::before {
     background-color: var(--checkbox-unchecked-hover-bgcolor);
 }
 
-menupopup
-    menuitem:is([type="checkbox"], [type="radio"]):is(:hover, [_moz-menuactive="true"]):active::before {
+menupopup menuitem:is([type="checkbox"], [type="radio"])[_moz-menuactive="true"]:active::before {
     background-color: var(--checkbox-unchecked-active-bgcolor);
 }
 
 menupopup
-    menuitem:is([type="checkbox"], [type="radio"])[checked="true"]:is(:hover, [_moz-menuactive="true"])::before {
+    menuitem:is([type="checkbox"], [type="radio"])[checked="true"][_moz-menuactive="true"]::before {
     background-color: var(--checkbox-checked-hover-bgcolor);
 }
 
 menupopup
-    menuitem:is([type="checkbox"], [type="radio"])[checked="true"]:is(:hover, [_moz-menuactive="true"]):active::before {
+    menuitem:is([type="checkbox"], [type="radio"])[checked="true"][_moz-menuactive="true"]:active::before {
     background-color: var(--checkbox-checked-active-bgcolor);
 }
 
@@ -399,8 +395,7 @@ menulist:-moz-focusring > menupopup.in-menulist > menuitem[_moz-menuactive="true
         padding-bottom: 2px !important;
     }
 
-    #context-navigation
-        .menuitem-iconic:is(:hover, [_moz-menuactive="true"]):not([disabled="true"]) {
+    #context-navigation .menuitem-iconic[_moz-menuactive="true"]:not([disabled="true"]) {
         background: none !important;
     }
 
@@ -412,7 +407,7 @@ menulist:-moz-focusring > menupopup.in-menulist > menuitem[_moz-menuactive="true
     }
 
     #context-navigation
-        .menuitem-iconic:is(:hover, [_moz-menuactive="true"]):not([disabled="true"])
+        .menuitem-iconic[_moz-menuactive="true"]:not([disabled="true"])
         .menu-iconic-left {
         background: var(--arrowpanel-dimmed);
     }

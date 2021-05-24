@@ -124,7 +124,7 @@
     border-radius: var(--toolbarbutton-border-radius) !important;
 }
 
-#toolbar-menubar #main-menubar > menu[_moz-menuactive] > label {
+#toolbar-menubar #main-menubar > menu[_moz-menuactive="true"] > label {
     background-color: var(--toolbarbutton-hover-background) !important;
 }
 
@@ -417,7 +417,7 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
     padding-inline-start: 8px;
 }
 
-.all-tabs-item:is([selected], [multiselected], [usercontextid]:is(:hover, [_moz-menuactive])) .all-tabs-button {
+.all-tabs-item:is([selected], [multiselected], [usercontextid]:hover) .all-tabs-button {
     background-image: linear-gradient(
         to right,
         var(--main-stripe-color) 0,
@@ -440,19 +440,19 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
     --main-stripe-color: var(--multiselected-color, var(--lwt-selected-tab-background-color));
 }
 
-.all-tabs-item:not([selected]):is(:hover, :focus-within, [_moz-menuactive], [multiselected]) {
+.all-tabs-item:not([selected]):is(:hover, :focus-within, [multiselected]) {
     background-color: var(--arrowpanel-dimmed) !important;
 }
 
-.all-tabs-item[multiselected]:not([selected]):is(:hover, [_moz-menuactive]) {
+.all-tabs-item[multiselected]:not([selected]):hover {
     background-color: var(--arrowpanel-dimmed-further) !important;
 }
 
-.all-tabs-item:not([selected]):is(:hover, [_moz-menuactive]):active {
+.all-tabs-item:not([selected]):hover:active {
     background-color: var(--arrowpanel-dimmed-further) !important;
 }
 
-.all-tabs-item[pending]:not([selected]):is(:hover, :focus-within, [_moz-menuactive], [multiselected]) {
+.all-tabs-item[pending]:not([selected]):is(:hover, :focus-within, [multiselected]) {
     background-color: var(
         --arrowpanel-faint,
         color-mix(in srgb, var(--arrowpanel-dimmed) 60%, transparent)

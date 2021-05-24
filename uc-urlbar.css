@@ -153,16 +153,14 @@ toolbarpaletteitem[place="palette"] > #search-container {
     background-color: var(--desaturate-dimmed) !important;
 }
 
-.urlbar-icon:focus-visible,
-.urlbar-icon-wrapper:focus-visible {
+.urlbar-icon-wrapper:focus-visible .urlbar-icon {
     outline: unset !important;
     outline-offset: unset !important;
     -moz-outline-radius: unset !important;
     background-color: var(--desaturate-checked-background) !important;
 }
 
-:not(.urlbar-icon-wrapper) > .urlbar-icon:not([disabled]):is([open], :hover:active),
-.urlbar-icon-wrapper:not([disabled]):is([open], :hover:active) {
+.urlbar-icon-wrapper:not([disabled]):is([open], :hover:active) .urlbar-icon {
     background-color: var(--desaturate-dimmed-further) !important;
 }
 
@@ -227,7 +225,7 @@ toolbarpaletteitem[place="palette"] > #search-container {
     height: 20px !important;
 }
 
-#urlbar-zoom-button:hover {
+#urlbar-zoom-button:is(:hover, :focus-visible) {
     background-color: var(--desaturate-dimmed) !important;
     border-color: transparent !important;
     mix-blend-mode: normal !important;
