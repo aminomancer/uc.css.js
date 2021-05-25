@@ -14,7 +14,12 @@ tooltip {
     --uc-panel-box-solid: hsl(233, 29%, 18%);
     --uc-content-text-a50: hsla(236, 100%, 85%, 0.5);
     --uc-content-text-a80: rgba(255, 255, 255, 0.8);
+    --arrowpanel-dimmed-menu-hover-solid: hsl(234, 27%, 23%);
+    --button-solid-hover-background: hsl(232, 29%, 26%);
+    --button-solid-active-background: hsl(234, 26%, 30%);
+    --button-solid-checked-background: hsl(232, 31%, 23%);
     --subdialog-font-size: 1em !important;
+    --autocomplete-background: hsl(233, 33%, 17%);
     --ui-secondary-bg: hsl(234, 39%, 10%);
     --tooltip-bgcolor: hsl(233, 36%, 11%);
     --tooltip-color: white;
@@ -45,14 +50,16 @@ tooltip {
     --update-badge-color: hsl(118, 89%, 24%);
     --update-badge-inactive: hsl(227, 19%, 48%);
     --attention-color: hsl(224, 100%, 71%);
-    --global-selection-bgcolor: rgba(142, 132, 255, 0.5);
+    --global-selection-bgcolor: hsla(245, 100%, 76%, 0.5);
     --global-selection-color: white;
-    --url-selection-bgcolor: rgba(142, 132, 255, 0.5);
+    --url-selection-bgcolor: hsla(245, 100%, 76%, 0.5);
     --url-selection-color: white;
-    --ui-selection-bgcolor: rgba(255, 255, 255, 0.9);
+    --ui-selection-bgcolor: hsla(0, 0%, 100%, 0.9);
     --ui-selection-color: hsl(236, 20%, 16%);
-    --content-selection-bgcolor: rgba(255, 255, 255, 0.8);
-    --content-selection-color: rgb(25, 25, 27);
+    --content-selection-bgcolor: hsla(0, 0%, 100%, 0.8);
+    --content-selection-color: hsl(240, 4%, 10%);
+    --solid-selection-bgcolor: var(--pink-action); /* controls the color of the search highlights in about:preferences */
+    --aboutPrefs-find-tags: var(--purple-35); /* controls the color of the little tooltips that appear on search highlighted buttons in about:preferences */
     --ui-text-30: rgba(255, 255, 255, 0.3);
     --ui-text-40: rgba(255, 255, 255, 0.4);
     --ui-text-50: rgba(255, 255, 255, 0.5);
@@ -113,6 +120,7 @@ tooltip {
         hsla(var(--download-button-hue), 95%, 76.94%, 0.02) 73%,
         hsla(var(--download-button-hue), 90%, 73.94%, 0.015) 86.3%
     );
+    --pink-action: hsl(340, 73%, 58%);
     --purple-30: hsl(244, 100%, 70%) !important;
     --purple-30-a50: hsla(240, 100%, 70%, 0.5) !important;
     --purple-35: hsl(245, 100%, 65%) !important;

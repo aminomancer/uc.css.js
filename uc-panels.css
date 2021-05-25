@@ -206,6 +206,64 @@ panel[type="arrow"][side="top"] {
     border-inline: 0 !important;
 }
 
+.panel-footer.popup-notification-button-container > .popup-notification-secondary-button:not([dropmarkerhidden="true"]) {
+    margin-inline-end: calc(0px - var(--menupopup-inner-padding-magnitude)) !important;
+    border-start-end-radius: 0 !important;
+    border-end-end-radius: 0 !important;
+}
+
+.panel-footer.popup-notification-button-container > .popup-notification-secondary-button:not([dropmarkerhidden="true"]) + toolbarseparator {
+    margin-inline: calc(0px - var(--menupopup-inner-padding-magnitude)) !important;
+}
+
+.panel-footer.popup-notification-button-container > .popup-notification-dropmarker {
+    margin-inline-start: calc(0px - var(--menupopup-inner-padding-magnitude)) !important;
+    border-start-start-radius: 0 !important;
+    border-end-start-radius: 0 !important;
+    flex: 0 !important;
+    min-width: 32px !important;
+}
+
+popupnotificationcontent {
+    margin-block: 0 !important;
+}
+
+.popup-notification-body input {
+    padding: 5.5px !important;
+    border-radius: 3px !important;
+    border: 1px solid transparent !important;
+    appearance: none !important;
+	outline: none !important;
+	background-color: var(--desaturate-dimmed) !important;
+    box-shadow: none !important;
+	color: inherit !important;
+}
+
+.popup-notification-body input:where(:-moz-focusring) {
+	background-color: var(--desaturate-dimmed-further) !important;
+}
+
+.popup-notification-body .popup-notification-invalid-input {
+    background-color: var(--warning-background) !important;
+}
+
+.password-notification-label,
+#password-notification-visibilityToggle {
+	margin-block-start: 8px !important;
+}
+
+#password-notification-username-dropmarker {
+    height: 100% !important;
+    margin: 0 !important;
+    width: 28px !important;
+    opacity: 0.6 !important;
+    -moz-box-pack: center !important;
+}
+
+#password-notification-username-dropmarker:is(:hover, :focus-visible) {
+    opacity: 1 !important;
+}
+
 panel {
     --panel-separator-color: var(--desaturate-dimmed) !important;
 }
@@ -252,11 +310,11 @@ popupnotification checkbox .checkbox-check {
     appearance: none !important;
     min-width: 10px !important;
     min-height: 10px !important;
-    width: 14px;
-    height: 14px;
+    width: 14px !important;
+    height: 14px !important;
     margin-inline-end: 4px !important;
     padding: 0.5px;
-    border-radius: 2px;
+    border-radius: 2px !important;
     margin: 0;
     background-position: center;
     background-repeat: no-repeat;

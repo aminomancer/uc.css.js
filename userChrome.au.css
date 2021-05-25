@@ -68,6 +68,7 @@ panelview
 
 menupopup::part(drop-indicator-bar) {
     margin-block: -14px;
+    margin-inline: -5px 5px;
 }
 
 menupopup::part(drop-indicator) {
@@ -938,6 +939,7 @@ toolbar[brighttext] #panic-button[open] {
 
 .notification-anchor-icon {
     list-style-image: url(chrome://userchrome/content/info-filled.svg);
+    padding: 0;
 }
 
 /* webrtc notifications */

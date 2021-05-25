@@ -1523,6 +1523,20 @@ menupopup {
         -moz-context-properties: fill, fill-opacity;
         fill: hsl(235, 100%, 71%);
     }
+
+    .search-tooltip {
+        color: var(--global-selection-color) !important;
+        background-color: var(--aboutPrefs-find-tags) !important;
+        border-color: color-mix(in srgb, black 18%, var(--aboutPrefs-find-tags)) !important;
+    }
+
+    .search-tooltip::before {
+        border-top-color: color-mix(in srgb, black 18%, var(--aboutPrefs-find-tags)) !important;
+    }
+
+    .search-tooltip::after {
+        border-top-color: var(--aboutPrefs-find-tags) !important;
+    }
 }
 
 @-moz-document url-prefix("moz-extension://0163b722-07ea-4fbd-80d6-7b5de657bb9e")

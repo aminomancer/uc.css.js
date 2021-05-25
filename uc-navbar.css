@@ -296,6 +296,7 @@ toolbar .toolbarbutton-1:not([disabled])[checked]:hover > .toolbarbutton-icon {
     #PersonalToolbar:not(:focus-within),
 :root:not([customizing]) > body > box[urlbar-status] #PersonalToolbar {
     visibility: visible !important;
+    overflow-y: clip !important;
     min-height: 0 !important;
     max-height: 0 !important;
     opacity: 0 !important;
@@ -327,6 +328,36 @@ toolbarbutton.bookmark-item:not(.subviewbutton) {
 
     #PersonalToolbar toolbarbutton.bookmark-item:not(.subviewbutton, [id]) .toolbarbutton-text {
         display: none !important;
+    }
+
+    /* display the background on the icon, not the button, similar to regular toolbar widgets.
+    allows us to use padding to space the buttons instead of margins,
+    so when we drag a bookmark between buttons, it doesn't get dropped at the end of the bookmarks */
+    :root:not([fluent-reveal-hover], [fluent-reveal-click])
+        #PersonalToolbar
+        toolbarbutton.bookmark-item:not(.subviewbutton, [id]) {
+        background: none !important;
+        margin-inline: 0 !important;
+        padding: 0 2px !important;
+    }
+
+    :root:not([fluent-reveal-hover], [fluent-reveal-click])
+        #PlacesToolbarDropIndicator {
+        margin-inline-start: -18px !important;
+    }
+
+    :root:not([fluent-reveal-hover], [fluent-reveal-click])
+        #PersonalToolbar
+        toolbarbutton.bookmark-item:not(.subviewbutton, [id]):is(:hover, :-moz-drag-over, :focus-visible)
+        .toolbarbutton-icon {
+        background-color: var(--button-solid-hover-background) !important;
+    }
+
+    :root:not([fluent-reveal-hover], [fluent-reveal-click])
+        #PersonalToolbar
+        toolbarbutton.bookmark-item:not(.subviewbutton, [id]):hover:active
+        .toolbarbutton-icon {
+        background-color: var(--button-solid-active-background) !important;
     }
 }
 
