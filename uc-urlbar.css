@@ -464,10 +464,25 @@ toolbarpaletteitem[removable="false"]
 }
 
 :root[hide-tp-icon-on-ntp]:not([customizing])
-    #urlbar:not([searchmode], [usertyping="true"], [focused="true"])
+    #urlbar:not([searchmode], [usertyping="true"], [focused="true"], [open="true"], :focus-within)
     #tracking-protection-icon-container[hidden]:not([view-source])
     ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage, .unknownIdentity)
-    #identity-icon {
+    > #identity-icon-box:not(:focus-visible)
+    :is(#identity-icon, #remote-control-icon:not(:hover, :focus-visible)),
+:root[hide-tp-icon-on-ntp]:not([customizing])
+    #urlbar:not([searchmode], [usertyping="true"], [focused="true"], [open="true"], :focus-within)
+    #tracking-protection-icon-container[hidden]:not([view-source])
+    ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage, .unknownIdentity)
+    > #identity-icon-box
+    ~ #identity-permission-box:not(:focus-visible, [open="true"])
+    image:not(:hover, :focus-visible),
+:root[hide-tp-icon-on-ntp]:not([customizing])
+    #urlbar:not([searchmode], [usertyping="true"], [focused="true"], [open="true"], :focus-within)
+    #tracking-protection-icon-container[hidden]:not([view-source])
+    ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage, .unknownIdentity)
+    > #identity-icon-box
+    ~ #notification-popup-box:not([open="true"])
+    > :is(image, stack):not(:hover, :focus-visible){
     fill-opacity: 0.4 !important;
 }
 
@@ -667,10 +682,8 @@ toolbarpaletteitem[removable="false"]
     display: none !important;
 }
 
-.sharing-icon,
-.notification-anchor-icon,
-#permissions-granted-icon,
-.blocked-permission-icon {
+#urlbar #identity-box
+    :is(.sharing-icon, .notification-anchor-icon, #permissions-granted-icon, .blocked-permission-icon) {
     margin-inline-start: 5px !important;
 }
 
@@ -781,13 +794,13 @@ toolbarpaletteitem[removable="false"]
 
 #permissions-granted-icon:hover,
 .sharing-icon:hover,
-#blocked-permissions-container > :hover,
-#notification-popup-box > :hover,
-#remote-control-icon:hover,
-#identity-permission-box[open="true"] #permissions-granted-icon,
-#identity-permission-box[open="true"] .sharing-icon,
+#blocked-permissions-container > :is(:hover, :focus-visible),
+#notification-popup-box > :is(:hover, :focus-visible),
+#remote-control-icon:is(:hover, :focus-visible),
+#identity-permission-box:is([open="true"], :focus-visible) #permissions-granted-icon,
+#identity-permission-box:is([open="true"], :focus-visible) .sharing-icon,
 #identity-permission-box[open="true"] #blocked-permissions-container > *,
-#notification-popup-box > [open],      /* for this selector to do anything, you need urlbarNotificationIconsOpenStatus.uc.js from my repo */
+#notification-popup-box > [open="true"], /* for this selector to do anything, you need urlbarNotificationIconsOpenStatus.uc.js from my repo */
 #identity-box[open="true"] #remote-control-icon {
     fill-opacity: 1 !important;
 }

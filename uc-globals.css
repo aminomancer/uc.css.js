@@ -187,8 +187,8 @@ popupnotification,
 
 #protections-popup {
     --button-primary-bgcolor: var(--purple-45) !important;
-    --button-primary-hover-bgcolor: var(--purple-40) !important;
-    --button-primary-active-bgcolor: var(--purple-35) !important;
+    --button-primary-hover-bgcolor: var(--purple-35) !important;
+    --button-primary-active-bgcolor: var(--purple-30) !important;
     --protections-popup-switch-off-background: color-mix(in srgb, currentColor 15%, transparent);
     --protections-popup-switch-off-hover-background-custom: color-mix(in srgb, currentColor 20%, transparent);
     --protections-popup-switch-off-active-background-custom: color-mix(in srgb, currentColor 23%, transparent);

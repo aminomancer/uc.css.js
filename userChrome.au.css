@@ -214,6 +214,10 @@ menupopup::part(arrowscrollbox),
     }
 }
 
+.popup-notification-learnmore-link {
+    margin-block: 2px;
+}
+
 /* proton stuff */
 .subviewbutton > menupopup::part(innerbox) {
     border-radius: 5px;

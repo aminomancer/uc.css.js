@@ -206,6 +206,19 @@ panel[type="arrow"][side="top"] {
     border-inline: 0 !important;
 }
 
+#protections-popup .panel-footer {
+    gap: var(--vertical-section-padding) !important;
+    margin-top: 4px !important;
+}
+
+#protections-popup .panel-footer > button {
+    margin: 0 !important;
+    border-radius: var(--arrowpanel-menuitem-border-radius) !important;
+    flex: 1 !important;
+    font-weight: normal !important;
+    border-inline: 0 !important;
+}
+
 .panel-footer.popup-notification-button-container > .popup-notification-secondary-button:not([dropmarkerhidden="true"]) {
     margin-inline-end: calc(0px - var(--menupopup-inner-padding-magnitude)) !important;
     border-start-end-radius: 0 !important;
@@ -228,9 +241,11 @@ popupnotificationcontent {
     margin-block: 0 !important;
 }
 
-.popup-notification-body input {
+.popup-notification-body input,
+#protections-popup-sendReportView-collection-comments,
+#protections-popup-sendReportView-collection-url {
     padding: 5.5px !important;
-    border-radius: 3px !important;
+    border-radius: var(--context-menuitem-border-radius) !important;
     border: 1px solid transparent !important;
     appearance: none !important;
 	outline: none !important;
@@ -239,7 +254,16 @@ popupnotificationcontent {
 	color: inherit !important;
 }
 
-.popup-notification-body input:where(:-moz-focusring) {
+#protections-popup-sendReportView-collection-comments {
+    min-height: 55px;
+}
+
+.protections-popup-sendReportView-collection-section:last-of-type {
+	margin-bottom: 0 !important;
+}
+
+.popup-notification-body input:where(:-moz-focusring),
+#protections-popup-sendReportView-collection-url:where(:-moz-focusring) {
 	background-color: var(--desaturate-dimmed-further) !important;
 }
 
@@ -306,6 +330,10 @@ panel {
     background-color: hsl(242, 65%, 60%) !important;
 }
 
+.panel-info-button[checked]:not([disabled]):is(:hover, :focus-visible) {
+	background-color: var(--arrowpanel-dimmed-even-further) !important;
+}
+
 popupnotification checkbox .checkbox-check {
     appearance: none !important;
     min-width: 10px !important;
@@ -349,12 +377,19 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
     margin-block: 0 !important;
 }
 
+#protections-popup-message .text-link,
 .popup-notification-learnmore-link {
-    margin-block: 2px !important;
     text-decoration: none !important;
 }
 
-.popup-notification-learnmore-link:is(:hover, :focus-visible) {
+#protections-popup-sendReportView .text-link,
+#protections-popup-tp-switch-breakage-link,
+#protections-popup-tp-switch-breakage-fixed-link {
+    margin-block: 2px 0 !important;
+    text-decoration: none !important;
+}
+
+:is(.popup-notification-learnmore-link, #protections-popup .text-link):is(:hover, :focus-visible) {
     text-decoration: underline !important;
 }
 
@@ -721,6 +756,20 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
 
 .webRTC-selectDevice-selector-container label {
     margin-block: 0 !important;
+}
+
+#webRTC-all-windows-shared {
+	font-size: 10px !important;
+    margin-block: 10px 4px !important;
+}
+
+#webRTC-previewWarning {
+	font-size: 10px !important;
+    margin-block: 4px !important;
+}
+
+#webRTC-previewWarning-learnMore {
+    margin-block: 0 4px !important;
 }
 
 #downloadsListBox {
@@ -1135,6 +1184,12 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
     .permission-popup-section,
     .protections-popup-section {
         margin-inline: 4px;
+    }
+
+    #protections-popup-sendReportView-heading,
+    #protections-popup-sendReportView-body {
+        margin: var(--arrowpanel-menuitem-margin) !important;
+        padding-inline: calc(var(--arrowpanel-menuitem-padding) * 2) !important;
     }
 
     #identity-popup-multiView > .panel-viewcontainer {
