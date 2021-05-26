@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Open Link in Unloaded Tab (context menu item)
-// @version        1.2
+// @version        1.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Add a new menu item to context menus prompted by right/accel-clicking on links or other link-like affordances. The menu item will open the link in a new background tab without loading the page. So the tab will start unloaded or "discarded." The context menu entry appears in the content area context menu when right-clicking a link; and in every menu where bookmarks, history, and synced tabs can be interacted with — sidebar, menubar, toolbar, toolbar button popup, and library window. Script is a remake of "Open in Unloaded Tab" by xiaoxiaoflood, but intended for use with fx-autoconfig by MrOtherGuy. It should still work with other loaders that load user scripts per-window, such as alice0775's loader, but is not compatible with older loaders or those like xiaoxiaoflood's loader. The difference is that those loaders run scripts in the global execution context, and simply call a global function when a window is launched, (the global function takes the window as a parameter) whereas fx-autoconfig loads normal scripts entirely within the window context, unless explicitly told to do otherwise. When you open a bookmark or history item in an unloaded tab, the tab draws its title from the entry in the places database. But when you open a link in an unloaded tab, there is no preexisting title. Normally when opening a link in a tab, the title is updated as the tab loads, but since we're opening the tab unloaded from the beginning, Firefox is less likely to know what the document's final title is. By default, the script works around this by generating a temporary title for the tab based on the text of the link that was opened. So if you click a hyperlink "https://mozilla.org" whose label text says "Mozilla" the title will be set to Mozilla until the tab is loaded. But if you click a hyperlink whose label text is the same as the URL itself, the title will simply be the URL. There's a user preference for this, however. If you just want to use the URL for the title no matter what, toggle this pref to false in about:config: "userChrome.openLinkInUnloadedTab.use_link_text_as_tab_title_when_unknown"
@@ -29,7 +29,7 @@ const unloadedTabMenuL10n = {
             else this.E10SUtils = window.E10SUtils;
 
             this.useLinkPref = `userChrome.openLinkInUnloadedTab.use_link_text_as_tab_title_when_unknown`;
-            this.setBoolPref(this.useLinkPref, true);
+            this.initPref(this.useLinkPref, true);
 
             this.QUERY_TYPE_BOOKMARKS = Ci.nsINavHistoryQueryOptions.QUERY_TYPE_BOOKMARKS;
             this.QUERY_TYPE_HISTORY = Ci.nsINavHistoryQueryOptions.QUERY_TYPE_HISTORY;
@@ -40,7 +40,7 @@ const unloadedTabMenuL10n = {
                 accesskey: unloadedTabMenuL10n.accessKey,
                 disabled: true,
                 hidden: true,
-                oncommand: `unloadedTabMenu.openTab(PlacesUIUtils.getViewForNode(document.popupNode).selectedNode.uri)`,
+                oncommand: `unloadedTabMenu.openTab(unloadedTabMenu.activePlacesView.selectedNode)`,
             });
             this.placesMenuOpenNewTab.after(this.placesMenuOpenUnloaded);
 
@@ -95,7 +95,7 @@ const unloadedTabMenuL10n = {
                 label: unloadedTabMenuL10n.openLink,
                 accesskey: unloadedTabMenuL10n.accessKey,
                 hidden: true,
-                oncommand: `unloadedTabMenu.openTab(gContextMenu.linkURL, {fromContent: true, linkText: gContextMenu.linkTextStr})`,
+                oncommand: `unloadedTabMenu.openTab({url: gContextMenu.linkURL}, {fromContent: true, linkText: gContextMenu.linkTextStr})`,
             });
             this.contentMenuOpenLink.after(this.contentMenuOpenLinkUnloaded);
             this.contentContextMenu.addEventListener("popupshowing", this);
@@ -158,7 +158,7 @@ const unloadedTabMenuL10n = {
             this.syncedMenuOpenUnloaded.hidden = this.syncedMenuOpenTab?.hidden;
         }
 
-        setBoolPref(pref, bool) {
+        initPref(pref, bool) {
             if (!Services.prefs.prefHasUserValue(pref)) Services.prefs.setBoolPref(pref, bool);
         }
 
@@ -185,6 +185,22 @@ const unloadedTabMenuL10n = {
                 this._syncedContextMenu ||
                 (this._syncedContextMenu = document.getElementById("SyncedTabsSidebarContext"))
             );
+        }
+
+        get activePlacesView() {
+            return PlacesUIUtils.getViewForNode(document.popupNode);
+        }
+
+        get syncedTabsStore() {
+            return sidebar.syncedTabsDeckComponent._syncedTabsListStore;
+        }
+
+        get selectedSyncedRow() {
+            return this.syncedTabsStore.data[this.syncedTabsStore._selectedRow[0]];
+        }
+
+        get selectedSyncedTab() {
+            return this.selectedSyncedRow.tabs?.[this.syncedTabsStore._selectedRow[1]];
         }
 
         get placesMenuOpenContainer() {
@@ -255,37 +271,44 @@ const unloadedTabMenuL10n = {
             );
         }
 
-        openSelectedTabs(nodes) {
-            if (!nodes) {
-                let view = PlacesUIUtils.getViewForNode(document.popupNode);
-                nodes = view.selectedNode || view.selectedNodes || view.result.root;
+        openSelectedTabs(folder) {
+            if (!folder) {
+                let view = this.activePlacesView;
+                folder = view.selectedNode || view.selectedNodes || view.result.root;
             }
-            if (PlacesUtils.nodeIsContainer(nodes))
-                nodes = PlacesUtils.getURLsForContainerNode(nodes);
-            nodes.forEach((node) => this.openTab(node.uri, { bulkOpen: true }));
+            let items = [];
+            if (PlacesUtils.nodeIsContainer(folder)) {
+                let root = PlacesUtils.getContainerNodeWithOptions(folder, false, true);
+                for (let i = 0; i < root.childCount; ++i) {
+                    let child = root.getChild(i);
+                    if (PlacesUtils.nodeIsURI(child)) {
+                        items.push({
+                            url: child.uri,
+                            title: child.title,
+                            icon: child.icon,
+                        });
+                    }
+                }
+            } else items = folder;
+            items.forEach((item) => this.openTab(item, { bulkOpen: true }));
         }
 
         openSyncedTabUnloaded() {
             if (!this.syncedContextMenuInited) return;
-            let item = document.popupNode
-                .closest(".tabs-container")
-                .querySelector(".item.selected");
-            if (item) this.openTab(item.dataset.url, { syncedTabs: true });
+            if (document.popupNode?.closest(".tabs-container"))
+                this.openTab(this.selectedSyncedTab, { syncedTabs: true });
         }
 
         openAllSyncedFromDevice() {
             if (!this.syncedContextMenuInited) return;
-            let item = document.popupNode
-                .closest(".tabs-container")
-                .querySelector(".item.selected");
-            if (item) {
-                const tabs = item.querySelector(".item-tabs-list").children;
-                const urls = [...tabs].map((tab) => tab.dataset.url);
-                urls.forEach((url) => this.openTab(url, { bulkOpen: true, syncedTabs: true }));
-            }
+            if (document.popupNode?.closest(".tabs-container"))
+                this.selectedSyncedRow.tabs.forEach((item) =>
+                    this.openTab(item, { bulkOpen: true, syncedTabs: true })
+                );
         }
 
-        async openTab(url, params = {}) {
+        async openTab(item, params = {}) {
+            let url = typeof item === "object" ? item.url || item.uri : item;
             let win = window.gBrowser ? window : BrowserWindowTracker.getTopWindow();
             let { gBrowser } = win;
 
@@ -312,12 +335,16 @@ const unloadedTabMenuL10n = {
             let info =
                 this.getInfoFromHistory(uri, this.QUERY_TYPE_HISTORY) ||
                 this.getInfoFromHistory(uri, this.QUERY_TYPE_BOOKMARKS);
+            let tentativeIcon = item?.icon || info?.icon;
 
             win.SessionStore.setTabState(tab, {
                 entries: [
                     {
                         url: url,
-                        title: info?.title || (this.useLinkAsTabTitle && params.linkText),
+                        title:
+                            item?.title ||
+                            info?.title ||
+                            (this.useLinkAsTabTitle && params.linkText),
                         triggeringPrincipal_base64: this.E10SUtils.serializePrincipal(
                             tabParams.triggeringPrincipal
                         ),
@@ -328,30 +355,57 @@ const unloadedTabMenuL10n = {
 
             let iconURL;
             let isReady = false;
-
-            PlacesUtils.favicons.getFaviconURLForPage(uri, async function (url) {
-                if (!url) return;
-                let blob = await fetch(url.spec).then((r) => r.blob());
-                let reader = new FileReader();
-                reader.onloadend = function () {
-                    iconURL = reader.result;
-                    win.unloadedTabMenu.maybeSetIcon(tab, iconURL, isReady);
-                };
-                reader.readAsDataURL(blob);
-            });
-
             tab.addEventListener(
                 "SSTabRestoring",
                 function () {
                     isReady = true;
-                    win.unloadedTabMenu.maybeSetIcon(tab, iconURL, isReady);
+                    win.unloadedTabMenu.maybeSetIcon(
+                        tab,
+                        iconURL,
+                        isReady,
+                        tabParams.triggeringPrincipal
+                    );
                 },
                 { once: true }
             );
+            let tempURL =
+                (await PlacesUtils.promiseFaviconData(uri.spec, 256).then(
+                    (data) => data?.uri?.spec
+                )) || tentativeIcon;
+            if (tempURL) {
+                let blob = await fetch(tempURL)
+                    .then((r) => r.blob())
+                    .catch((e) => {
+                        if (
+                            params.fromContent &&
+                            gContextMenu.linkURI.host === gContextMenu.contentData.principal.host
+                        ) {
+                            iconURL = gBrowser.getTabForBrowser(gContextMenu.browser).image;
+                            win.unloadedTabMenu.maybeSetIcon(
+                                tab,
+                                iconURL,
+                                isReady,
+                                tabParams.triggeringPrincipal
+                            );
+                            return;
+                        }
+                    });
+                let reader = new FileReader();
+                reader.onloadend = function () {
+                    iconURL = reader.result;
+                    win.unloadedTabMenu.maybeSetIcon(
+                        tab,
+                        iconURL,
+                        isReady,
+                        tabParams.triggeringPrincipal
+                    );
+                };
+                reader.readAsDataURL(blob);
+            }
         }
 
-        maybeSetIcon(tab, iconURL, isReady) {
-            if (iconURL && isReady) tab.ownerGlobal.gBrowser.setIcon(tab, iconURL, null);
+        maybeSetIcon(tab, iconURL, isReady, principal) {
+            if (iconURL && isReady) tab.ownerGlobal.gBrowser.setIcon(tab, iconURL, null, principal);
         }
 
         getInfoFromHistory(aURI, aQueryType) {

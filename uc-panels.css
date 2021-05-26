@@ -3,6 +3,12 @@
     box-shadow: var(--panel-shadow) !important;
 }
 
+/* hide the stupid outline shown on panels when transitioning from subview to subview */
+/* see here: https://searchfox.org/mozilla-central/source/browser/components/customizableui/PanelMultiView.jsm#1037 */
+panelview {
+    outline: none !important;
+}
+
 .panel-arrow {
     margin-top: 2px;
 }
@@ -1039,10 +1045,6 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
 }
 
 /* all tabs menu panel */
-#customizationui-widget-panel[viewId="allTabsMenu-allTabsView"] .panel-viewcontainer[panelopen] {
-    min-height: auto !important;
-}
-
 #allTabsMenu-containerTabsView {
     padding-block-end: 4px !important;
 }
