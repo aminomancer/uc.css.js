@@ -1068,6 +1068,16 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
     margin-inline: 6px !important;
 }
 
+#invalid-form-popup {
+    margin-inline-start: 0 !important;
+    margin-top: 65px !important;
+}
+
+#invalid-form-popup description {
+    white-space: nowrap !important;
+    margin-block: 0 !important;
+}
+
 @media (-moz-proton-contextmenus) {
     .menu-right {
         margin-inline-end: 0 !important;

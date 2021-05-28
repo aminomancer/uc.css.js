@@ -9,7 +9,8 @@
 
 // user configuration
 const config = {
-    urlOverride: "", // the script tries to automatically find earthlng's aboutconfig URL, e.g. "chrome://userchrome/content/aboutconfig/config.xhtml" if you followed the instructions on my repo for making it compatible with fx-autoconfig. alternatively, it should also be able to find the URL if you use earthlng's autoconfig loader or xiaoxiaoflood's, and didn't modify anything. if it's unable to find the URL for your particular setup, please find it yourself and paste it here, *inside the quotes*
+    address: "cfg", // the value to put after "about:" — if this is "cfg" then the final URl will be "about:cfg". if you use this and my appMenuAboutConfigButton.uc.js script, and you want to change this address for whatever reason, be sure to edit the urlOverride setting in that script so it says "about:your-new-address"
+    pathOverride: "", // the script tries to automatically find earthlng's aboutconfig URL, e.g. "chrome://userchrome/content/aboutconfig/config.xhtml" if you followed the instructions on my repo for making it compatible with fx-autoconfig. alternatively, it should also be able to find the URL if you use earthlng's autoconfig loader or xiaoxiaoflood's, and didn't modify anything. if it's unable to find the URL for your particular setup, please find it yourself and paste it here, *inside the quotes*
 };
 
 let { Services } = ChromeUtils.import("resource://gre/modules/Services.jsm");
@@ -18,7 +19,7 @@ let registrar = Cm.QueryInterface(Ci.nsIComponentRegistrar);
 ChromeUtils.defineModuleGetter(this, "FileUtils", "resource://gre/modules/FileUtils.jsm");
 
 function findAboutConfig() {
-    if (config.urlOverride) return config.urlOverride;
+    if (config.pathOverride) return config.pathOverride;
     if (FileUtils.getDir("UChrm", ["resources", "aboutconfig", "config.xhtml"]).exists())
         return "chrome://userchrome/content/aboutconfig/config.xhtml";
     if (FileUtils.getDir("UChrm", ["utils", "aboutconfig", "config.xhtml"]).exists())
@@ -77,8 +78,8 @@ var AboutModuleFactory = {
 
 registrar.registerFactory(
     generateFreeCID(),
-    "about:cfg",
-    "@mozilla.org/network/protocol/about;1?what=cfg",
+    `about:${config.address}`,
+    `@mozilla.org/network/protocol/about;1?what=${config.address}`,
     AboutModuleFactory
 );
 
@@ -88,7 +89,7 @@ let onChromeWindow = {
             "win.gIdentityHandler._secureInternalPages = " +
                 `/${win.gIdentityHandler._secureInternalPages.source.replace(
                     /\|config\|/,
-                    `|config|cfg|`
+                    `|config|${config.address}|`
                 )}/`
         );
     },
