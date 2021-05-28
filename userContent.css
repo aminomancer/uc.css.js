@@ -1537,6 +1537,14 @@ menupopup {
     .search-tooltip::after {
         border-top-color: var(--aboutPrefs-find-tags) !important;
     }
+
+    #errorPageContainer .button-container button {
+        border-color: var(--in-content-box-border-color) !important;
+    }
+
+    #errorPageContainer .button-container button.primary {
+        border-color: var(--uc-checkbox-checked-border-color) !important;
+    }
 }
 
 @-moz-document url-prefix("moz-extension://0163b722-07ea-4fbd-80d6-7b5de657bb9e")
