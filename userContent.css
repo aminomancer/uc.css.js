@@ -1636,6 +1636,31 @@ menupopup {
         .icon-label--info {
             --icon-color: currentColor !important;
         }
+
+        .message__button {
+            fill: var(--message-color) !important;
+        }
+
+        .message--level-info {
+            --message-background-color: var(--grey-20) !important;
+            --message-border-color: transparent !important;
+            --message-color: var(--text-color) !important;
+            --message-icon-color: var(--text-color) !important;
+        }
+
+        .message--level-warning {
+            --message-background-color: var(--low-warning-background) !important;
+            --message-border-color: var(--low-warning-border-color) !important;
+            --message-color: var(--text-color) !important;
+            --message-icon-color: var(--low-warning-color) !important;
+        }
+
+        .message--level-error {
+            --message-background-color: color-mix(in srgb, transparent 15%, var(--uc-warning-background)) !important;
+            --message-border-color: color-mix(in srgb, transparent 30%, var(--uc-warning-background)) !important;
+            --message-color: var(--text-color) !important;
+            --message-icon-color: var(--warning-color) !important;
+        }
     }
 }
 

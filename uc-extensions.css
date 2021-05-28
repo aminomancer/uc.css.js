@@ -287,6 +287,18 @@ menupopup menuitem[class^="unified-nav"][uri="moz-extension://e158f52d-b5db-4594
     filter: invert(1) brightness(10);
 }
 
+@supports -moz-bool-pref("userChrome.bookmarks-toolbar.icons-only") {
+    #PersonalToolbar toolbarbutton.bookmark-item:not(.subviewbutton, [id]) .toolbarbutton-icon:is([src^="page-icon:https://github.com"], [src^="page-icon:http://github.com"]) {
+        background-image: url(chrome://userchrome/content/engines/github.svg) !important;
+        background-size: 16px !important;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+        padding-left: 28px !important;
+        padding-right: 0 !important;
+        filter: none !important;
+    }
+}
+
 #addons-notification-icon,
 #add-ons-button,
 #appMenu-addons-button {

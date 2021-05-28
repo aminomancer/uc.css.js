@@ -165,14 +165,30 @@ toolbarpaletteitem[place="palette"] > #search-container {
 }
 
 /* urlbar buttons */
-/* just looks slightly better imo */
-#reader-mode-button .urlbar-icon {
-    padding-inline: 6.5px !important;
-}
-
 .urlbar-page-action,
 .urlbar-icon {
     filter: none !important;
+}
+
+/*
+hide the urlbar bookmark action on system pages,
+and on the new tab page if hideTrackingProtectionIconOnCustomNewTabPage.uc.js is installed.
+also do the same with the screenshot action, if screenshotPageActionButton.uc.js is installed.
+the screenshot action already hides itself on system pages and extension pages,
+but CSS hides it faster and avoids flickering.
+:not([aria-label]) handles the few milliseconds when a new window is opened and the NTP/home page hasn't opened yet.
+*/
+@supports (-moz-bool-pref("userChrome.urlbar.hide-bookmarks-button-on-system-pages")) {
+    #tracking-protection-icon-container:is([hidden], :not([aria-label]))
+    ~ #page-action-buttons
+    > :is(#star-button-box, #pageAction-urlbar-screenshot) {
+        visibility: collapse;
+    }
+}
+
+/* just looks slightly better imo */
+#reader-mode-button .urlbar-icon {
+    padding-inline: 6.5px !important;
 }
 
 #page-action-buttons > :not([hidden], toolbartabstop) ~ #pageActionSeparator {

@@ -75,6 +75,7 @@ For best results, set density mode to `Normal` and theme to `Dark` in the custom
 | userChrome.bookmarks-toolbar.icons-only 	| Boolean 	| false 	| If true, bookmark buttons in the toolbar are just square icons 	|
 | userChrome.tabs.pinned-tabs.close-buttons.disabled 	| Boolean 	| true 	| This controls whether close buttons are shown on pinned tabs 	|
 | userChrome.tabs.rounded-outer-corners.disabled 	| Boolean 	| false 	| This controls whether tabs have rounded bottom corners<br/><a href="https://youtu.be/BAuABH13ytM"><img src="preview/prev-tabcorners.png" width="100%"/></a> 	|
+| userChrome.urlbar.hide-bookmarks-button-on-system-pages 	| Boolean 	| true 	| Hides the urlbar's bookmark button on system pages & new tab page 	|
 | userChrome.urlbar-results.disable_animation 	| Boolean 	| false 	| Toggle to `true` if you don't want urlbar animations 	|
 | widget.content.allow-gtk-dark-theme 	| Boolean 	| true 	| Makes Linux theming more consistent 	|
 | widget.disable-native-theme-for-content 	| Boolean 	| true 	| Enables Firefox's custom appearance for elements like checkboxes. Skips the "native" appearance given by the OS stylesheets. 	|

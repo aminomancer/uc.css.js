@@ -597,7 +597,7 @@ menupopup::part(arrowscrollbox),
 }
 
 #screenshot-button {
-    list-style-image: var(--screenshot-icon);
+    list-style-image: var(--screenshot-icon, url(chrome://browser/skin/screenshot.svg));
 }
 
 #import-button {

@@ -107,7 +107,7 @@
 }
 
 #toolbar-menubar > spacer {
-    margin-left: 6px;
+    margin-left: 5.8px;
 }
 
 #toolbar-menubar #main-menubar > menu {
@@ -146,6 +146,10 @@
     min-height: 28px !important;
     border: none !important;
     box-shadow: none !important;
+}
+
+#toolbar-menubar #searchbar .searchbar-search-icon {
+    margin-left: 5px !important;
 }
 
 #toolbar-menubar .searchbar-textbox {

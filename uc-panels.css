@@ -274,7 +274,7 @@ popupnotificationcontent {
 }
 
 .popup-notification-body .popup-notification-invalid-input {
-    background-color: var(--warning-background) !important;
+    background-color: var(--uc-warning-background) !important;
 }
 
 .password-notification-label,
