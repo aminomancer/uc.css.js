@@ -14,6 +14,7 @@ const config = {
 
 let { Services } = ChromeUtils.import("resource://gre/modules/Services.jsm");
 let { classes: Cc, interfaces: Ci, manager: Cm, utils: Cu, results: Cr } = Components;
+let registrar = Cm.QueryInterface(Ci.nsIComponentRegistrar);
 ChromeUtils.defineModuleGetter(this, "FileUtils", "resource://gre/modules/FileUtils.jsm");
 
 function findAboutConfig() {
@@ -24,6 +25,26 @@ function findAboutConfig() {
         return "chrome://userchromejs/content/aboutconfig/config.xhtml";
     if (FileUtils.getDir("UChrm", ["utils", "aboutconfig", "aboutconfig.xhtml"]).exists())
         return "chrome://userchromejs/content/aboutconfig/aboutconfig.xhtml";
+}
+
+// generate a unique ID on every app launch. protection against the very unlikely possibility that a future update adds a component with the same class ID, which would break the script.
+function generateFreeCID() {
+    let uuid = Components.ID(
+        Cc["@mozilla.org/uuid-generator;1"]
+            .getService(Ci.nsIUUIDGenerator)
+            .generateUUID()
+            .toString()
+    );
+    // I can't tell whether generateUUID is guaranteed to produce a unique ID, or just a random ID. so I add this loop to regenerate it in the extremely unlikely (or potentially impossible) event that the UUID is already registered as a CID. I haven't seen this happen yet on about 200 tests but there's no harm in keeping it just in case.
+    while (registrar.isCIDRegistered(uuid)) {
+        uuid = Components.ID(
+            Cc["@mozilla.org/uuid-generator;1"]
+                .getService(Ci.nsIUUIDGenerator)
+                .generateUUID()
+                .toString()
+        );
+    }
+    return uuid;
 }
 
 function VintageAboutConfig() {}
@@ -54,9 +75,8 @@ var AboutModuleFactory = {
     QueryInterface: ChromeUtils.generateQI(["nsIFactory"]),
 };
 
-let registrar = Cm.QueryInterface(Ci.nsIComponentRegistrar);
 registrar.registerFactory(
-    Components.ID("{56388dad-287b-4240-a785-85c394012504}"),
+    generateFreeCID(),
     "about:cfg",
     "@mozilla.org/network/protocol/about;1?what=cfg",
     AboutModuleFactory
