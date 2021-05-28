@@ -333,11 +333,11 @@ toolbarpaletteitem > #urlbar-container :is(#page-action-buttons, #search-one-off
     pointer-events: auto !important;
 }
 
-#urlbar:not([open]) > .urlbarView {
+#nav-bar:not([overflowing="true"]) #urlbar:not([open][breakout="true"]) > .urlbarView {
     display: block !important;
 }
 
-#urlbar:not([open]) .urlbarView-results {
+#urlbar:not([open][breakout="true"]) .urlbarView-results {
     display: none !important;
 }
 
