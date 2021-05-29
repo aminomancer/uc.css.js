@@ -363,8 +363,7 @@
     font-weight: initial !important;
 }
 
-.urlbarView-favicon:is([src="moz-extension://cd4aad93-9726-49dd-a5cd-9e5f5c4d76f4/favicon.ico"],
-    [src="page-icon:https://www.google.com/"],
+.urlbarView-favicon:is([src="page-icon:https://www.google.com/"],
     [src="page-icon:http://google.com/"],
     [src^="page-icon:https://www.google.com/search?"],
     [src^="page-icon:http://google.com/search?"])
@@ -374,6 +373,23 @@
     width: 16px !important;
     height: 16px !important;
     padding-left: 16px;
+}
+
+.urlbarView-favicon[src="moz-extension://cd4aad93-9726-49dd-a5cd-9e5f5c4d76f4/favicon.ico"] {
+    box-sizing: border-box !important;
+    background: url(chrome://userchrome/content/engines/google.svg) no-repeat !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 16px;
+}
+
+.urlbarView-row:not([type="search"]) .urlbarView-favicon[src^="page-icon:https://en.wikipedia.org/"] {
+    box-sizing: border-box !important;
+    background: url(chrome://userchrome/content/engines/wiki.svg) no-repeat center/contain !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 16px;
+    fill-opacity: 1 !important;
 }
 
 .urlbarView-title,

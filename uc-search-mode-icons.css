@@ -21,6 +21,20 @@
     margin-top: -0.6px !important;
 }
 
+/* for google */
+#urlbar[pageproxystate="invalid"] #identity-box #identity-icon-box[engine="Google"] #identity-icon,
+#urlbar[pageproxystate="valid"] #identity-box #identity-icon-box[engine="Google"] #identity-icon,
+#identity-icon-box[engine="Google"] #identity-icon {
+    list-style-image: url(chrome://userchrome/content/engines/google.svg) !important;
+}
+
+/* for google images */
+#urlbar[pageproxystate="invalid"] #identity-box #identity-icon-box[engine="Google Images"] #identity-icon,
+#urlbar[pageproxystate="valid"] #identity-box #identity-icon-box[engine="Google Images"] #identity-icon,
+#identity-icon-box[engine="Google Images"] #identity-icon {
+    list-style-image: url(chrome://userchrome/content/notifications/canvas.svg) !important;
+}
+
 /* for youtube */
 #urlbar[pageproxystate="invalid"] #identity-box #identity-icon-box[engine="YouTube"] #identity-icon,
 #urlbar[pageproxystate="valid"] #identity-box #identity-icon-box[engine="YouTube"] #identity-icon,
@@ -52,8 +66,10 @@
     > #identity-box
     #identity-icon-box[engine="Wikipedia"]
     #identity-icon {
-    width: 18px !important;
-    margin-inline-start: -2px !important;
+    width: 20px !important;
+    padding-inline: 1px !important;
+    margin-inline: -2px !important;
+    margin-block: 1px 0 !important;
     list-style-image: url(chrome://userchrome/content/engines/wiki.svg) !important;
 }
 

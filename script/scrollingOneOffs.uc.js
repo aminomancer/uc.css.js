@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Scrolling Search One-offs
-// @version        1.0
+// @version        1.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    This is for my own personal stylesheet, which moves the one-off search engine buttons to the right side of the url bar when the user is typing into the url bar. The script allows the search one-offs box to be scrolled with mousewheel up/down. It also adds a minor improvement to the one-offs in the searchbar results popup: if the one-offs are overflowing and you switch to a search engine that is overflown off the popup, it will automatically scroll to the selected one-off button, just like the urlbar one-offs does with oneClickOneOffSearchButtons.uc.js.
@@ -167,6 +167,7 @@
             container.style.paddingInline = `4px`;
             container.style.clipPath = `inset(0 4px 0 4px)`;
             oneOffs.scrollToButton = function (el) {
+                if (!el) el = buttons.firstElementChild;
                 let slider = el.parentElement;
                 let buttonX = rectX(el) - rectX(slider);
                 let buttonWidth = parseWidth(el);
@@ -189,7 +190,14 @@
 
     function init() {
         setUpScroll(gURLBar.view.oneOffSearchButtons, true);
-        setUpScroll(document.getElementById("PopupSearchAutoComplete").oneOffButtons);
+        document
+            .getElementById("PopupSearchAutoComplete")
+            .addEventListener(
+                "popupshowing",
+                (e) =>
+                    setUpScroll(document.getElementById("PopupSearchAutoComplete").oneOffButtons),
+                { once: true }
+            );
     }
 
     if (gBrowserInit.delayedStartupFinished) {

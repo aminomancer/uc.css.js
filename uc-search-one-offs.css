@@ -9,7 +9,8 @@
 }
 
 #PopupSearchAutoComplete .search-one-offs > * {
-    flex-grow: 1 !important;
+    flex-grow: 0 !important;
+    flex-shrink: 1 !important;
     max-width: -moz-available !important;
     min-width: 0 !important;
 }
@@ -17,6 +18,7 @@
 #PopupSearchAutoComplete .search-panel-one-offs-container {
     padding-inline: 4px;
     clip-path: inset(0 4px 0 4px);
+    display: flex !important;
 }
 
 #PopupSearchAutoComplete .search-panel-one-offs {
@@ -27,7 +29,6 @@
     height: unset !important;
     flex-wrap: nowrap !important;
     scroll-behavior: smooth;
-    overflow: scroll;
     scrollbar-width: none !important;
     min-width: 0 !important;
     max-width: unset !important;
@@ -36,13 +37,15 @@
 #PopupSearchAutoComplete .search-panel-one-offs-header {
     margin-inline: var(--arrowpanel-menuitem-inline-margin) 0 !important;
     min-width: -moz-fit-content !important;
+    flex-grow: 0 !important;
+    flex-shrink: 0 !important;
 }
 
 #PopupSearchAutoComplete .search-panel-one-offs-header::before {
     content: "Search with:";
     display: inline-block;
     margin-block: 2px 3px;
-    margin-inline: 10px 3px;
+    margin-inline: 10px 4px;
     color: var(--panel-shortcut-color);
 }
 
@@ -57,28 +60,97 @@
 }
 
 #PopupSearchAutoComplete
-    :is(.searchbar-engine-one-off-item, .addengine-item)
-    > :is(stack, .button-box) {
+:is(.searchbar-engine-one-off-item, .addengine-item)
+> :is(stack, .button-box) {
     border-radius: var(--toolbarbutton-border-radius);
 }
 
 #PopupSearchAutoComplete
-    :is(.searchbar-engine-one-off-item, .addengine-item):hover
-    > :is(stack, .button-box) {
+:is(.searchbar-engine-one-off-item, .addengine-item):hover
+> :is(stack, .button-box) {
     background-color: var(--arrowpanel-dimmed) !important;
 }
 
 #PopupSearchAutoComplete
-    :is(.searchbar-engine-one-off-item, .addengine-item)[selected]:not(:hover)
-    > :is(stack, .button-box) {
+:is(.searchbar-engine-one-off-item, .addengine-item)[selected]:not(:hover)
+> :is(stack, .button-box) {
     background-color: var(--arrowpanel-faint) !important;
 }
 
 #PopupSearchAutoComplete #searchbar-one-offs-header-label,
-#PopupSearchAutoComplete .search-add-engines,
-#PopupSearchAutoComplete .search-setting-button,
 #PopupSearchAutoComplete .search-one-offs > .searchbar-separator {
     display: none !important;
+}
+
+#PopupSearchAutoComplete .search-setting-button,
+#PopupSearchAutoComplete .search-add-engines {
+    flex-shrink: 0 !important;
+    flex-grow: 0 !important;
+}
+
+#PopupSearchAutoComplete .search-add-engines {
+    gap: 4px;
+    display: flex;
+}
+
+#PopupSearchAutoComplete .search-setting-button label,
+#PopupSearchAutoComplete .search-add-engines label {
+    display: none;
+}
+
+#PopupSearchAutoComplete .addengine-item {
+    padding: 0 !important;
+    width: 28px !important;
+    height: 28px !important;
+    background: none !important;
+    margin: 0 !important;
+}
+
+#PopupSearchAutoComplete .addengine-item .toolbarbutton-badge-stack {
+    width: 28px !important;
+    height: 28px !important;
+    margin: unset !important;
+    display: flex !important;
+    align-content: center !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+#PopupSearchAutoComplete .addengine-item .toolbarbutton-badge {
+    justify-self: start !important;
+    margin: 0px -5.5px !important;
+}
+
+#PopupSearchAutoComplete .search-setting-button {
+    padding: 0 !important;
+    width: 28px !important;
+    min-height: 28px !important;
+    margin-right: 6px !important;
+    margin-left: 0 !important;
+}
+
+#PopupSearchAutoComplete .search-add-engines:not(:empty) ~ .search-setting-button {
+    margin-left: 4px !important;
+}
+
+#PopupSearchAutoComplete .search-setting-button[selected]:not(:hover) {
+	background-color: var(--arrowpanel-faint) !important;
+}
+
+#PopupSearchAutoComplete .search-setting-button > .button-box {
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+
+#PopupSearchAutoComplete .search-setting-button .button-icon {
+    width: 16px !important;
+    height: 16px !important;
+    list-style-image: url("chrome://global/skin/icons/settings.svg");
+    -moz-context-properties: fill, fill-opacity;
+    fill: currentColor;
+    fill-opacity: var(--urlbar-icon-fill-opacity);
 }
 
 .searchbar-separator {
@@ -106,6 +178,10 @@
     -moz-context-properties: fill, fill-opacity;
     fill: currentColor;
     fill-opacity: 1 !important;
+}
+
+#nav-bar:not([overflowing="true"]) .urlbarView :is(.searchbar-engine-one-off-item, .addengine-item) {
+    fill-opacity: var(--urlbar-icon-fill-opacity) !important;
 }
 
 .urlbarView :is(.searchbar-engine-one-off-item, .addengine-item):-moz-window-inactive {
@@ -163,7 +239,7 @@
 
 .searchbar-engine-one-off-item[image="moz-extension://cd4aad93-9726-49dd-a5cd-9e5f5c4d76f4/favicon.ico"] .button-box::before
 {
-    content: url(chrome://userchrome/content/engines/google-color.svg);
+    content: url(chrome://userchrome/content/engines/google.svg);
     display: block;
     width: 16px;
     height: 16px;
@@ -373,28 +449,21 @@ toolbarpaletteitem > #urlbar-container :is(#page-action-buttons, #search-one-off
 }
 
 /* individual search one off adjustments */
-#urlbar-engine-one-off-item-Gatherer .button-icon,
-#urlbar-engine-one-off-item-Scryfall .button-icon {
+.searchbar-engine-one-off-item[image="chrome://userchrome/content/engines/gatherer.svg"] .button-icon,
+.searchbar-engine-one-off-item[image="chrome://userchrome/content/engines/scryfall.svg"] .button-icon {
     width: 17.5px !important;
     height: 17.5px !important;
 }
 
-#urlbar-engine-one-off-item-XVIDEOS .button-icon {
-    margin-left: 0.5px !important;
-    width: 16.5px !important;
-    height: 16.5px !important;
-}
-
-#urlbar-engine-one-off-item-Wikipedia .button-icon {
+.searchbar-engine-one-off-item[image="chrome://userchrome/content/engines/wiki.svg"] .button-icon {
     width: 19px !important;
     height: 19px !important;
     margin-left: -0.3px !important;
     margin-top: 0.7px !important;
 }
 
-#urlbar-engine-one-off-item-Amazon .button-icon {
-    margin-left: -0.5px !important;
-    margin-top: 0.5px !important;
+.searchbar-engine-one-off-item[image="chrome://userchrome/content/engines/amazon.svg"] .button-icon {
+    margin-top: 0.7px !important;
 }
 
 :root[lwt-toolbar-field-brighttext] .searchbar-engine-one-off-item {
