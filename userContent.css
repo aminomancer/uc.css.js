@@ -277,7 +277,7 @@ menupopup.in-menulist > :where(menucaption, menuitem) {
     :where(menucaption, menuitem)
     > :is(label, .menu-iconic-text, .menu-text),
 menupopup.in-menulist > :where(menucaption, menuitem) > :is(label, .menu-iconic-text, .menu-text) {
-    padding-inline: var(--context-padding-inline) !important;
+    padding-inline: 8px !important;
     font: menu !important;
 }
 
@@ -579,7 +579,7 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
 
     #ContentSelectDropdown > menupopup .menu-text,
     menupopup.in-menulist .menu-text {
-        padding-inline: var(--context-padding-inline) !important;
+        padding-inline: 8px !important;
     }
 
     link[href="chrome://global/skin/global.css"] ~ .menupopup-arrowscrollbox
@@ -923,6 +923,15 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
         border-radius: 2px;
         margin-inline: 4px;
         margin-block: 3px 2px;
+    }
+
+    .devtools-checkbox-label:not([hidden]) {
+        display: flex;
+        align-items: center;
+    }
+
+    .devtools-checkbox-label input[type="checkbox"] {
+        margin-block: 3px;
     }
 
     .theme-dark input:is([type="checkbox"], [type="radio"]):is(:hover, :focus-visible) {
