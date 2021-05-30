@@ -1,4 +1,4 @@
-:is(panel, menupopup)::part(content) {
+:is(panel, menupopup)[type="arrow"]::part(content) {
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.2) !important;
     box-shadow: var(--panel-shadow) !important;
     /* border-radius: var(--arrowpanel-border-radius) !important; */
