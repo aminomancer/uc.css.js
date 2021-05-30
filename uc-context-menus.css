@@ -187,20 +187,20 @@ menupopup menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-left {
     display: none;
 }
 
-#ContentSelectDropdown > menupopup > :is(menucaption, menuitem) > .menu-iconic-text,
-menupopup.in-menulist > :is(menucaption, menuitem) > .menu-iconic-text {
+#ContentSelectDropdown > menupopup > :where(menucaption, menuitem) > .menu-iconic-text,
+menupopup.in-menulist > :where(menucaption, menuitem) > .menu-iconic-text {
     padding-block: unset !important;
 }
 
 :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
-    :is(menu, menuitem, menucaption) {
+    :where(menu, menuitem, menucaption) {
     padding-inline: 8px !important;
     min-height: 26px !important;
     border: none !important;
 }
 
 :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
-    :is(menu, menuitem, menucaption)
+    :where(menu, menuitem, menucaption)
     > :is(label, .menu-iconic-text, .menu-text) {
     padding-inline: 0 !important;
     font: menu !important;
@@ -208,7 +208,17 @@ menupopup.in-menulist > :is(menucaption, menuitem) > .menu-iconic-text {
 
 :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup) menucaption {
     font-weight: inherit !important;
-    min-height: 25px !important;
+    min-height: 22px !important;
+    border-image: linear-gradient(
+        to right,
+        transparent,
+        var(--menu-separator-color) 5%,
+        transparent
+    ) !important;
+    border-image-slice: 1 !important;
+    border-bottom: 1px solid transparent !important;
+    margin-block: 1px 2px;
+    padding-inline: 5px !important;
 }
 
 :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
@@ -219,14 +229,13 @@ menupopup.in-menulist > :is(menucaption, menuitem) > .menu-iconic-text {
 
 :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
     menucaption
-    > label {
-    font-weight: inherit !important;
-    font-style: inherit !important;
+    > :is(label, .menu-iconic-text, .menu-text) {
+    font-weight: 600 !important;
 }
 
 :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
     menucaption:first-child
-    > label {
+    > :is(label, .menu-iconic-text, .menu-text) {
     margin-block: -3px 0 !important;
 }
 
@@ -270,7 +279,7 @@ menupopup.in-menulist {
     background-color: var(--arrowpanel-dimmed) !important;
     padding-block: 0 !important;
     transition: 300ms background-color !important;
-    min-height: 25px !important;
+    min-height: 26px !important;
     -moz-user-modify: read-write !important;
 }
 
@@ -293,7 +302,7 @@ menulist:-moz-focusring > menupopup.in-menulist > menuitem[_moz-menuactive="true
         appearance: none !important;
         background-color: var(--ui-textbox-bgcolor) !important;
         padding: 2px 2px 2px 8px !important;
-        min-height: 25px !important;
+        min-height: 26px !important;
         color: inherit !important;
         fill: currentColor !important;
         border: none !important;
