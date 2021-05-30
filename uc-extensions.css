@@ -38,6 +38,14 @@
     list-style-image: url(chrome://userchrome/content/devtools/tool-dom.svg);
 }
 
+#nordvpnproxy_nordvpn_com-browser-action .toolbarbutton-icon {
+    list-style-image: url(chrome://userchrome/content/material/nord.svg) !important;
+}
+
+#nordvpnproxy_nordvpn_com-browser-action[badge] {
+    fill: var(--toolbarbutton-icon-fill-attention) !important;
+}
+
 /* cookie remover */
 .webextension-browser-action[label="Remove cookies for this site"] .toolbarbutton-icon,
 #_3507f56d-2ef5-45c1-b6d7-5297a0ba7642_-browser-action .toolbarbutton-icon {

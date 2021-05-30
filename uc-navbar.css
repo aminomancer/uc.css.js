@@ -46,13 +46,14 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
     box-shadow: 0 1px 1px -1px hsla(0, 0%, 100%, 0.3) inset,
         0 -1px 1px -1px hsla(0, 0%, 0%, 0.5) inset, 0 1px 1px hsla(240, 3%, 12%, 0.15),
         0 1px 3px hsla(240, 3%, 12%, 0.2) !important;
-    min-width: 11px !important;
-    height: 11px !important;
+    min-width: 10.5px !important;
+    height: 10.5px !important;
     vertical-align: center !important;
     font-size: 9px !important;
     font-weight: 600 !important;
-    line-height: 10px !important;
+    line-height: 9px !important;
     filter: none !important;
+    margin: -6px -6px 0 0 !important;
 }
 
 :is(#nav-bar-customization-target, #widget-overflow)
