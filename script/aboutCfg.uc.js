@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           about:cfg
-// @version        1.0
+// @version        1.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Registers the old-school about:config page to the URL about:cfg. Intended for use with earthlng's aboutconfig module. That module restores the old about:config page, but gives it a long-winded URL like "chrome://userchromejs/content/aboutconfig/config.xhtml" which takes a lot longer to type in and doesn't look very elegant. This script finds the URL for that module and registers it to an about: URL so it counts as a chrome UI page. We're not just faking it, this makes it a bona-fide about: page. That means you can navigate to it by just typing about:cfg in the urlbar, and also means the identity icon will show it as a secure system page rather than a local file. It even means about:cfg will show up on the about:about page! This technically also makes using the aboutconfig module safer, because it denies the document access to some privileged stuff that it would have with a chrome:// URI. For instructions on installing earthlng's aboutconfig module for fx-autoconfig, please see the script description for App Menu about:config Button. This has only been tested with fx-autoconfig, but it may work with xiaoxiaoflood's loader. I don't think it will work with Alice0775's loader but I haven't tested it. Compatible with my appMenuAboutConfigButton.uc.js script. That button will automatically navigate to about:cfg if this script is installed. I recommend editing earthlng's config.xhtml file to remove line 13: title="about:config" This sets the tab title to about:config, which isn't necessary or desirable since we're changing the URL to about:cfg. Without the title attribute, firefox will automatically set the title to the tab's URL, which (with this script) is about:cfg.
@@ -26,6 +26,7 @@ function findAboutConfig() {
         return "chrome://userchromejs/content/aboutconfig/config.xhtml";
     if (FileUtils.getDir("UChrm", ["utils", "aboutconfig", "aboutconfig.xhtml"]).exists())
         return "chrome://userchromejs/content/aboutconfig/aboutconfig.xhtml";
+    else return false;
 }
 
 // generate a unique ID on every app launch. protection against the very unlikely possibility that a future update adds a component with the same class ID, which would break the script.
@@ -50,8 +51,13 @@ function generateFreeCID() {
 
 function VintageAboutConfig() {}
 
+let urlString = findAboutConfig();
+
 VintageAboutConfig.prototype = {
-    uri: Services.io.newURI(findAboutConfig()),
+    get uri() {
+        if (!urlString) return null;
+        return this._uri || (this._uri = Services.io.newURI(urlString));
+    },
     newChannel: function (_uri, loadInfo) {
         const ch = Services.io.newChannelFromURIWithLoadInfo(this.uri, loadInfo);
         ch.owner = Services.scriptSecurityManager.getSystemPrincipal();
@@ -76,12 +82,13 @@ var AboutModuleFactory = {
     QueryInterface: ChromeUtils.generateQI(["nsIFactory"]),
 };
 
-registrar.registerFactory(
-    generateFreeCID(),
-    `about:${config.address}`,
-    `@mozilla.org/network/protocol/about;1?what=${config.address}`,
-    AboutModuleFactory
-);
+if (urlString)
+    registrar.registerFactory(
+        generateFreeCID(),
+        `about:${config.address}`,
+        `@mozilla.org/network/protocol/about;1?what=${config.address}`,
+        AboutModuleFactory
+    );
 
 let onChromeWindow = {
     observe(win, _top, _data) {
