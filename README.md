@@ -73,6 +73,7 @@ For best results, set density mode to `Normal` and theme to `Dark` in the custom
 | ui.textSelectForegroundCustom 	| String 	| `#7755FF` 	|  	|
 | userChrome... 	|  	|  	| Several of my scripts use custom prefs beginning with `userChrome` for user customization. See the individual script files for details 	|
 | userChrome.bookmarks-toolbar.icons-only 	| Boolean 	| false 	| If true, bookmark buttons in the toolbar are just square icons 	|
+| userChrome.tabs.all-tabs-menu.reverse-order 	| Boolean 	| true 	| Display all tabs menu in reverse order (newer tabs on top, like history) 	|
 | userChrome.tabs.pinned-tabs.close-buttons.disabled 	| Boolean 	| true 	| This controls whether close buttons are shown on pinned tabs 	|
 | userChrome.tabs.rounded-outer-corners.disabled 	| Boolean 	| false 	| This controls whether tabs have rounded bottom corners<br/><a href="https://youtu.be/BAuABH13ytM"><img src="preview/prev-tabcorners.png" width="100%"/></a> 	|
 | userChrome.urlbar.hide-bookmarks-button-on-system-pages 	| Boolean 	| true 	| Hides the urlbar's bookmark button on system pages & new tab page 	|

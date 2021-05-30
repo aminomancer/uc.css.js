@@ -61,8 +61,10 @@ tooltip {
     --ui-selection-color: hsl(236, 20%, 16%);
     --content-selection-bgcolor: hsla(0, 0%, 100%, 0.8);
     --content-selection-color: hsl(240, 4%, 10%);
-    --solid-selection-bgcolor: var(--pink-action); /* controls the color of the search highlights in about:preferences */
-    --aboutPrefs-find-tags: var(--purple-35); /* controls the color of the little tooltips that appear on search highlighted buttons in about:preferences */
+    /* controls the color of the search highlights in about:preferences */
+    --solid-selection-bgcolor: var(--pink-action);
+    /* controls the color of the little tooltips that appear on search highlighted buttons in about:preferences */
+    --aboutPrefs-find-tags: var(--purple-35);
     --ui-text-30: rgba(255, 255, 255, 0.3);
     --ui-text-40: rgba(255, 255, 255, 0.4);
     --ui-text-50: rgba(255, 255, 255, 0.5);
@@ -193,9 +195,21 @@ popupnotification,
     --button-primary-hover-bgcolor: var(--purple-35) !important;
     --button-primary-active-bgcolor: var(--purple-30) !important;
     --protections-popup-switch-off-background: color-mix(in srgb, currentColor 15%, transparent);
-    --protections-popup-switch-off-hover-background-custom: color-mix(in srgb, currentColor 20%, transparent);
-    --protections-popup-switch-off-active-background-custom: color-mix(in srgb, currentColor 23%, transparent);
-    --protections-popup-switch-off-hover-border-custom: color-mix(in srgb, currentColor 5%, transparent);
+    --protections-popup-switch-off-hover-background-custom: color-mix(
+        in srgb,
+        currentColor 20%,
+        transparent
+    );
+    --protections-popup-switch-off-active-background-custom: color-mix(
+        in srgb,
+        currentColor 23%,
+        transparent
+    );
+    --protections-popup-switch-off-hover-border-custom: color-mix(
+        in srgb,
+        currentColor 5%,
+        transparent
+    );
     --protections-popup-switch-on-background: var(--purple-40);
     --protections-popup-switch-on-hover-background-custom: var(--purple-50);
     --protections-popup-switch-on-active-background-custom: var(--purple-55);
