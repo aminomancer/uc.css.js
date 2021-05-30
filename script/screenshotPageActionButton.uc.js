@@ -19,6 +19,30 @@
         return obj.ownerGlobal.BrowserPageActions;
     }
 
+    async function addAction() {
+        const strings = await new Localization(["browser/screenshots.ftl"], true);
+        const messages = await strings.formatMessages(["screenshot-toolbarbutton"]);
+        const ttip = messages[0].attributes[1].value;
+        PageActions.addAction(
+            new PageActions.Action({
+                id: "screenshot",
+                title: ttip,
+                tooltip: ttip,
+                pinnedToUrlbar: true,
+                disablePrivateBrowsing: config[`Disable in private browsing`],
+                onCommand(event, buttonNode) {
+                    browserPageActions(buttonNode).screenshot.onCommand(event, buttonNode);
+                },
+                onBeforePlacedInWindow(win) {
+                    browserPageActions(win).screenshot.onBeforePlacedInWindow(win);
+                },
+                onLocationChange(win) {
+                    browserPageActions(win).screenshot.onLocationChange(win);
+                },
+            })
+        );
+    }
+
     // handle all the actual behavior in the window context
     BrowserPageActions.screenshot = {
         id: "screenshot", // yields a node ID of #pageAction-urlbar-screenshot
@@ -89,7 +113,6 @@
          */
         onBeforePlacedInWindow(win) {
             if (win !== window || this.isSetup) return;
-            win.MozXULElement.insertFTLIfNeeded("browser/screenshots.ftl");
             win.Services.obs.addObserver(this, "toggle-screenshot-disable");
             this.isSetup = true;
         },
@@ -107,23 +130,5 @@
 
     if (PageActions.actionForID("screenshot")) return; // the action itself only needs to be registered once per app launch, not once per window. firefox internally handles replicating it across all windows so we want to stop here if this is the 2nd time the script has executed during a given runtime.
     BrowserPageActions.screenshot.setStyle(); // likewise, stylesheets loaded by the stylesheet XPCOM service are automatically dumped in every window, so it isn't necessary to register the stylesheet any more than once per session.
-    PageActions.addAction(
-        new PageActions.Action({
-            id: "screenshot",
-            title: "Take a screenshot",
-            panelFluentID: "screenshot-toolbarbutton",
-            urlbarFluentID: "screenshot-toolbarbutton",
-            pinnedToUrlbar: true,
-            disablePrivateBrowsing: config[`Disable in private browsing`],
-            onCommand(event, buttonNode) {
-                browserPageActions(buttonNode).screenshot.onCommand(event, buttonNode);
-            },
-            onBeforePlacedInWindow(win) {
-                browserPageActions(win).screenshot.onBeforePlacedInWindow(win);
-            },
-            onLocationChange(win) {
-                browserPageActions(win).screenshot.onLocationChange(win);
-            },
-        })
-    );
+    addAction();
 })();

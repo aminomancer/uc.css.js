@@ -1,8 +1,3 @@
-.panel-arrowcontent {
-    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2) !important;
-    box-shadow: var(--panel-shadow) !important;
-}
-
 /* hide the stupid outline shown on panels when transitioning from subview to subview */
 /* see here: https://searchfox.org/mozilla-central/source/browser/components/customizableui/PanelMultiView.jsm#1037 */
 panelview {
@@ -86,12 +81,6 @@ panel[type="arrow"][side="top"] {
         --button-active-bgcolor,
         color-mix(in srgb, currentColor 30%, transparent)
     );
-}
-
-.panel-arrowcontent {
-    /* border-radius: var(--arrowpanel-border-radius) !important; */
-    overflow: hidden !important;
-    border: none !important;
 }
 
 #protections-popup-content {
@@ -803,6 +792,7 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
     padding-block: 10px 11px !important;
     border-radius: 0 !important;
     border-top: 1px solid var(--panel-separator-color) !important;
+    margin-top: 0 !important;
 }
 
 #downloadsFooterButtons > button:hover,

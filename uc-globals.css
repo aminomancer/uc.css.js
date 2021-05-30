@@ -24,7 +24,7 @@ tooltip {
     --tooltip-bgcolor: hsl(233, 36%, 11%);
     --tooltip-color: white;
     --tooltip-border-radius: 2px;
-    --webextension-panel-border-radius: 7px;
+    --webextension-panel-border-radius: 5px;
     --statuspanel-color: hsla(0, 0%, 100%, 0.85);
     --acrylic-blur: blur(10px);
     --acrylic-texture: url(chrome://userchrome/content/texture/lightnoise.png);

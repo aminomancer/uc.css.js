@@ -1,3 +1,12 @@
+:is(panel, menupopup)::part(content) {
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2) !important;
+    box-shadow: var(--panel-shadow) !important;
+    /* border-radius: var(--arrowpanel-border-radius) !important; */
+    overflow: hidden !important;
+    border: none !important;
+    margin-top: 4px;
+}
+
 /* use scrollbars instead of scroll buttons on most arrowscrollboxes */
 menupopup::part(arrowscrollbox-scrollbox) {
     overflow-y: auto !important;
@@ -130,8 +139,9 @@ menupopup::part(arrowscrollbox),
     stroke: var(--arrowpanel-background);
 }
 
+#customizationui-widget-panel[viewId^="PanelUI-webext-"]::part(content),
 #customizationui-widget-panel[viewId^="PanelUI-webext-"]::part(arrowcontent) {
-    border-radius: var(--webextension-panel-border-radius, 7px) !important;
+    border-radius: var(--webextension-panel-border-radius, 5px) !important;
 }
 
 @-moz-document url(chrome://browser/content/browser.xhtml)
