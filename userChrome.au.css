@@ -9,10 +9,7 @@
 
 :is(panel, menupopup)::part(content) {
 	background: var(--panel-background, Menu);
-	border-radius: revert;
-    background-color: revert;
     border: revert;
-    color: revert;
 }
 
 panel[type="autocomplete-richlistbox"] {
