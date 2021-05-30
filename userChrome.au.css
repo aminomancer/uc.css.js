@@ -7,6 +7,19 @@
     margin-top: 4px;
 }
 
+:is(panel, menupopup)::part(content) {
+	background: var(--panel-background, Menu);
+	border-radius: revert;
+    background-color: revert;
+    border: revert;
+    color: revert;
+}
+
+panel[type="autocomplete-richlistbox"] {
+	--panel-color: var(--ui-text-80);
+	--panel-background: revert;
+}
+
 /* use scrollbars instead of scroll buttons on most arrowscrollboxes */
 menupopup::part(arrowscrollbox-scrollbox) {
     overflow-y: auto !important;

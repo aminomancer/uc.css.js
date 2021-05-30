@@ -49,13 +49,13 @@
 
     function init() {
         try {
-            window.messageManager.loadFrameScript(
+            messageManager.loadFrameScript(
                 "data:application/javascript," +
                     encodeURIComponent(`(${frameScript.toString()})()`),
                 true
             );
         } catch (e) {}
-        window.messageManager.addMessageListener("ctrl-shift-f", (message) => {
+        messageManager.addMessageListener("ctrl-shift-f", (message) => {
             if (message.target === gBrowser.selectedBrowser) {
                 try {
                     let csp = E10SUtils.deserializeCSP(message.data.csp);
@@ -66,17 +66,14 @@
                         triggeringPrincipal: principal,
                         relatedToCurrent: true,
                     };
-                    let where =
-                        locationURL === AboutNewTab.newTabURL ||
-                        locationURL === HomePage.get(window)
-                            ? "current"
-                            : "tab";
+                    let where = new RegExp(
+                        `(${BROWSER_NEW_TAB_URL}|${HomePage.get(window)})`,
+                        "i"
+                    ).test(locationURL)
+                        ? "current"
+                        : "tab";
 
-                    if (
-                        text.startsWith("chrome://") ||
-                        text.startsWith("file://") ||
-                        text.startsWith("about:")
-                    )
+                    if (/^(chrome|file|about)\:\/\//.test(text))
                         return openLinkIn(text, where, options);
                     if (linkURL) {
                         let fixup, fixable;
@@ -98,7 +95,7 @@
                         }
                     }
 
-                    window.BrowserSearch._loadSearch(
+                    BrowserSearch._loadSearch(
                         text,
                         where,
                         false,
