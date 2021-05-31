@@ -138,12 +138,16 @@ menupopup
     :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"]
     :is(menu, menuitem)[label*="Generate Password"]
     > .menu-text,
+:is(menu, menuitem)[id^="multithreaded-download-manager"]:is([label="Open in new tab"], [label="Open in new window"], [label="Open in sidebar"])
+    > .menu-iconic-text,
 menuitem.viewCustomizeToolbar > .menu-text,
 menuitem.customize-context-removeFromToolbar > .menu-text,
 menuitem.customize-context-removeFromPanel > .menu-text,
 menuitem.customize-context-moveToToolbar > .menu-text,
 menuitem.customize-context-moveToPanel > .menu-text,
 menuitem.customize-context-manageExtension > .menu-text,
+menu.customize-context-debugExtension > .menu-text,
+menuitem[class^="customize-context-open"] > .menu-text,
 menuitem.pageActionContextMenuItem.manageExtensionItem > .menu-text,
 menuitem.customize-context-removeExtension > .menu-text,
 menuitem.pageActionContextMenuItem.removeExtensionItem > .menu-text,
@@ -276,12 +280,15 @@ menuitem.customize-context-reportExtension > .menu-text {
 #contentAreaContextMenu
     :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"]
     :is(menu, menuitem)[label*="Generate Password"]::before,
+:is(menu, menuitem)[id^="multithreaded-download-manager"]:is([label="Open in new tab"], [label="Open in new window"], [label="Open in sidebar"])::before,
 menuitem.viewCustomizeToolbar::before,
 menuitem.customize-context-removeFromToolbar::before,
 menuitem.customize-context-removeFromPanel::before,
 menuitem.customize-context-moveToToolbar::before,
 menuitem.customize-context-moveToPanel::before,
 menuitem.customize-context-manageExtension::before,
+menu.customize-context-debugExtension::before,
+menuitem[class^="customize-context-open"]::before,
 menuitem.pageActionContextMenuItem.manageExtensionItem::before,
 menuitem.customize-context-removeExtension::before,
 menuitem.pageActionContextMenuItem.removeExtensionItem::before,
@@ -646,6 +653,22 @@ menuitem.customize-context-reportExtension::before {
     background-image: url(chrome://userchrome/content/generate-password.svg);
 }
 
+:is(menu, menuitem)[id^="multithreaded-download-manager"]:is([label="Open in new tab"], [label="Open in new window"], [label="Open in sidebar"]) .menu-iconic-left {
+    display: none;
+}
+
+:is(menu, menuitem)[id^="multithreaded-download-manager"][label="Open in new tab"]::before {
+    background-image: url(chrome://userchrome/content/skin/tab.svg) !important;
+}
+
+:is(menu, menuitem)[id^="multithreaded-download-manager"][label="Open in new window"]::before {
+    background-image: url(chrome://userchrome/content/skin/window.svg) !important;
+}
+
+:is(menu, menuitem)[id^="multithreaded-download-manager"][label="Open in sidebar"]::before {
+    background-image: url(chrome://userchrome/content/skin/sidebars-right.svg) !important;
+}
+
 #userScriptsMenu::before {
     background-image: url(chrome://userchrome/content/material/javascript.svg);
 }
@@ -682,6 +705,26 @@ menuitem.customize-context-moveToPanel::before {
 menuitem.customize-context-manageExtension::before,
 menuitem.pageActionContextMenuItem.manageExtensionItem::before {
     background-image: url(chrome://userchrome/content/skin/developer.svg);
+}
+
+menu.customize-context-debugExtension::before {
+    background-image: url(chrome://devtools/skin/images/debugging-workers.svg);
+}
+
+menuitem.customize-context-openManifest::before {
+    background-image: url(chrome://userchrome/content/devtools/tool-styleeditor.svg);
+}
+
+menuitem.customize-context-openPopup::before {
+    background-image: url(chrome://userchrome/content/devtools/command-noautohide.svg);
+}
+
+menuitem.customize-context-openOptions::before {
+    background-image: url(chrome://userchrome/content/settings.svg);
+}
+
+menuitem.customize-context-openInspector::before {
+    background-image: url(chrome://userchrome/content/devtools/tool-inspector.svg);
 }
 
 menuitem.customize-context-removeExtension::before,
