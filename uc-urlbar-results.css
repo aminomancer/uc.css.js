@@ -1,3 +1,5 @@
+/* controls the appearance of the urlbar results popup .urlbarView and #urlbar-results, etc. */
+
 .urlbarView-row {
     border-radius: 3px !important;
 }

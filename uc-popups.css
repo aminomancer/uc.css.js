@@ -1,3 +1,5 @@
+/* this adjusts popup dialogs and modal popups */
+
 /* OS-styled javascript modal prompts */
 tabmodalprompt {
     background-color: hsla(0, 0%, 4%, 0.5) !important;

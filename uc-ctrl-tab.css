@@ -1,12 +1,16 @@
+/* this stylesheet only controls the appearance of the ctrl+tab popup */
+
 #ctrlTab-previews {
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
     border-radius: 0% !important;
 }
 
 #ctrlTab-panel {
     appearance: none !important;
-    color: white !important;
     border-style: none !important;
-    padding: 40px 20px 20px 20px !important;
+    padding: 30px 20px 20px 20px !important;
     /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important; */
     font-weight: normal !important;
     text-shadow: 0 0 2px hsl(0, 0%, 8%), 0 0 2px hsl(0, 0%, 8%) !important;
@@ -41,16 +45,22 @@
 
 #ctrlTab-showAll {
     background-color: var(--ctrlTab-panel-bgcolor) !important;
-    border: 2px solid transparent !important;
+    border: 2px solid transparent;
+}
+
+#ctrlTab-showAll .button-box {
+    padding: 2px 4px !important;
 }
 
 #ctrlTab-showAll:focus,
 #ctrlTab-showAll:focus-within {
     background-color: var(--ctrlTab-panel-focused-bgcolor) !important;
-    border: 2px solid var(--toolbarbutton-icon-fill-attention) !important;
+    border: 2px solid var(--attention-color) !important;
 }
 
 .ctrlTab-preview-inner {
+    color: var(--ui-text-80) !important;
+    margin: 0 !important;
     padding: 10px !important;
     border: 2px solid transparent !important;
     border-radius: 5px !important;
@@ -60,7 +70,7 @@
 
 .ctrlTab-preview:focus > .ctrlTab-preview-inner {
     background-color: var(--ctrlTab-panel-focused-bgcolor) !important;
-    border: 2px solid var(--toolbarbutton-icon-fill-attention) !important;
+    border: 2px solid var(--attention-color) !important;
     box-shadow: 0 0 4px -1px rgba(0, 0, 0, 0.2), 0 0 25px -2px rgba(0, 0, 0, 0.2),
         inset 0 0 20px 5px hsla(0, 0%, 0%, 0.5) !important;
 }
@@ -96,5 +106,6 @@
 }
 
 .ctrlTab-label {
+    color: inherit !important;
     margin-bottom: -1.5px !important;
 }

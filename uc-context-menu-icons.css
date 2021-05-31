@@ -1,4 +1,6 @@
-/* add icons to non-iconized context menu items */
+/* this stylesheet adds icons to context menu items that don't already have them,
+and replaces some icons that may already exist. */
+
 menupopup
     menuitem:is([type="checkbox"], [type="radio"], [checked])
     :is(.menu-text, .menu-iconic-text),
@@ -653,7 +655,8 @@ menuitem.customize-context-reportExtension::before {
     background-image: url(chrome://userchrome/content/generate-password.svg);
 }
 
-:is(menu, menuitem)[id^="multithreaded-download-manager"]:is([label="Open in new tab"], [label="Open in new window"], [label="Open in sidebar"]) .menu-iconic-left {
+:is(menu, menuitem)[id^="multithreaded-download-manager"]:is([label="Open in new tab"], [label="Open in new window"], [label="Open in sidebar"])
+    .menu-iconic-left {
     display: none;
 }
 

@@ -1,3 +1,8 @@
+/* this stylesheet is where our basic custom variables are defined, especially colors.
+this is required by almost every other stylesheet, both chrome and content.
+plaintext documents use just uc-low-globals.css,
+but other than that these variables should be available everywhere. */
+
 @import url(chrome://userchrome/content/layout/uc-low-globals.css);
 
 :root,

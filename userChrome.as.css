@@ -1,3 +1,6 @@
+/* this stylesheet is used to style native anonymous content
+and in particular, tooltips and scrollbars. */
+
 @import url(uc-globals.css);
 /* tooltips */
 tooltip[default][page] {

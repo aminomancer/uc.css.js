@@ -1,3 +1,5 @@
+/* controls the basic appearance of the findbar. uc-fullscreen further adjusts it */
+
 .browserContainer {
     position: relative;
 }

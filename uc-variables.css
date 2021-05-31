@@ -1,3 +1,6 @@
+/* this is where we override firefox's built-in variables.
+often we'll make our own variable in uc-globals and override a built-in variable to equal the custom variable. */
+
 :root,
 menupopup {
     --panel-font-size: 1em !important;

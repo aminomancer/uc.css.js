@@ -1,3 +1,6 @@
+/* controls all sorts of things within or associated with the customizable navbar.
+if it's visible in the row beneath the tabs then it's probably in here. */
+
 /* remove line under navigation toolbar */
 #navigator-toolbox:-moz-lwtheme,
 :root:not([sizemode="normal"]) #navigator-toolbox {

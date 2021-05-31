@@ -1,3 +1,8 @@
+/* this controls the general appearance of the tab bar, not individual tabs.
+it also controls the all tabs panel since the all tabs button is within the tab bar.
+since the window controls and main menu bar are normally part of the titlebar,
+this sheet controls their appearance as well. */
+
 .tabbrowser-tab {
     min-height: var(--tab-min-height) !important;
 }

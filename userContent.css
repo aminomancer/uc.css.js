@@ -1575,6 +1575,69 @@ menupopup {
     #errorPageContainer .button-container button.primary {
         border-color: var(--uc-checkbox-checked-border-color) !important;
     }
+
+    message-bar:not([hidden]) {
+        margin-block-start: 15px !important;
+        overflow: hidden;
+        margin-inline: -15.5px !important;
+    }
+
+    link[rel="stylesheet"][href="chrome://global/content/elements/message-bar.css"] ~ .container {
+        padding: 8px !important;
+        border-radius: 0 !important;
+    }
+
+    link[rel="stylesheet"][href="chrome://global/content/elements/message-bar.css"] ~ .container .content {
+        display: flex !important;
+        flex-flow: row nowrap;
+        justify-content: space-between !important;
+        white-space: nowrap !important;
+        margin-inline: 8px 0 !important;
+    }
+
+    message-bar > span {
+        white-space: break-spaces !important;
+        flex-shrink: 1;
+        flex-grow: 1;
+        overflow: hidden;
+        overflow-wrap: break-word !important;
+        text-overflow: ellipsis !important;
+    }
+
+    message-bar > button {
+        display: inline-block !important;
+        flex-shrink: 0;
+        margin: 0 !important;
+        cursor: pointer;
+    }
+
+    message-bar[type="warning"]:not([message-bar-type="infobar"]) {
+        --message-bar-background-color: var(--low-warning-background) !important;
+        --message-bar-text-color: var(--text-color) !important;
+    }
+
+    message-bar:is([type="system"], [type="info"], [type="generic"]) {
+        --message-bar-background-color: var(--grey-60) !important;
+        --message-bar-text-color: var(--text-color) !important;
+    }
+
+    message-bar[type="error"]:not([message-bar-type="infobar"]) {
+        --message-bar-background-color: color-mix(
+            in srgb,
+            transparent 15%,
+            var(--uc-warning-background)
+        ) !important;
+        --message-bar-text-color: var(--text-color) !important;
+    }
+
+    message-bar[type="critical"]:not([message-bar-type="infobar"]) {
+        --message-bar-background-color: color-mix(
+            in srgb,
+            hsla(-2, 100%, 60%, 0.5) 45%,
+            var(--uc-warning-background)
+        ) !important;
+        --message-bar-text-color: var(--text-color) !important;
+    }
 }
 
 @-moz-document url-prefix("moz-extension://0163b722-07ea-4fbd-80d6-7b5de657bb9e")

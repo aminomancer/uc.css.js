@@ -1,3 +1,5 @@
+/* this stylesheet exclusively deals with the bookmarks toolbar popup panel and the "edit bookmark" panel and dialog. */
+
 #main-window #editBookmarkPanel input:focus {
     background-color: var(--ui-textbox-focus-bgcolor) !important;
 }

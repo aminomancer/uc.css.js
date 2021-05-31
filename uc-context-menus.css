@@ -1,3 +1,9 @@
+/* this stylesheet controls the appearance of context menus,
+select dropdowns, autocomplete popups, and similar menus.
+rules in here should match similar rules in userContent.css,
+since devtools and certain system pages contain the same elements,
+but *inside* of content documents rather than in the UI where userChrome.css can style them. */
+
 menupopup:not(.PanelUI-subView) {
     appearance: none !important;
     background: var(--menupopup-background) !important;

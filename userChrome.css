@@ -1,9 +1,10 @@
 /* 
 @name           duskFox
-@version        2.2.8
+@version        2.2.9
 @author         aminomancer
 @homepage       https://github.com/aminomancer
 @description    A dark indigo theme integrated with extensive functional and visual scripts.
+                This stylesheet is just used to load all the other parent-process stylesheets into the chrome window.
 */
 
 @import url(uc-globals.css);

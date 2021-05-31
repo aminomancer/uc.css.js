@@ -1,3 +1,6 @@
+/* controls the appearance of the urlbar and everything inside it.
+that includes all the icons, page actions, etc. */
+
 #urlbar,
 .searchbar-textbox {
     border: none !important;

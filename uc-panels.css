@@ -1,3 +1,6 @@
+/* controls just about every aspect of panelmultiview panels.
+includes general rules as well as rules for specific panels, e.g. tracking protection panel. */
+
 /* hide the stupid outline shown on panels when transitioning from subview to subview */
 /* see here: https://searchfox.org/mozilla-central/source/browser/components/customizableui/PanelMultiView.jsm#1037 */
 panelview {

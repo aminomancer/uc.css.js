@@ -1,3 +1,9 @@
+/* this stylesheet contains general/miscellaneous changes
+that are too small to have their own stylesheet.
+includes status bars, tooltips, confirmation hints and warnings,
+notifications, specific favicons, fixing the white flash when loading pages,
+focus rings, text highlight colors, and compatibility adjustments for minBrowserNavBar.uc.js */
+
 #statuspanel:is([type="status"], [type="defaultStatus"]) #statuspanel-label {
     opacity: 0 !important;
 }

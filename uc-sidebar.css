@@ -1,3 +1,6 @@
+/* controls the appearance of the sidebar itself,
+as well as the internal appearance of the built-in sidebars, e.g. bookmarks, history, etc. */
+
 /* sidebar view button icons */
 #sidebarMenu-popup > .webextension-menuitem > .toolbarbutton-icon {
     opacity: 0.8 !important;

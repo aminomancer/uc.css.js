@@ -1,3 +1,7 @@
+/* this stylesheet is used to style shadow parts with the ::part() function,
+and to override built-in rules without using the "!important" tag.
+the last 75% or so of this stylesheet is dedicated to restoring pre-proton content. */
+
 :is(panel, menupopup)[type="arrow"]::part(content) {
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.2) !important;
     box-shadow: var(--panel-shadow) !important;
@@ -1486,4 +1490,11 @@ toolbar[brighttext] #panic-button[open] {
 
 .protections-popup-cryptominersView-icon.allowed {
     list-style-image: url(chrome://userchrome/content/skin/controlcenter/cryptominers.svg);
+}
+
+/* ctrl tab */
+#ctrlTab-panel::part(content) {
+    -moz-box-orient: vertical;
+    background: none;
+    color: inherit;
 }

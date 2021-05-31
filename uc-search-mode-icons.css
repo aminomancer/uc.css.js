@@ -1,3 +1,7 @@
+/* this does nothing on its own — it requires searchModeIndicatorIcons.uc.js.
+when you switch to a one-off search engine in the urlbar, or otherwise enable search mode,
+this changes the identity icon to one matching the search engine. */
+
 /* built-in history, tabs, bookmarks pseudo-engines */
 #urlbar[pageproxystate="invalid"] #identity-box #identity-icon-box[engine="History"] #identity-icon,
 #urlbar[pageproxystate="valid"] #identity-box #identity-icon-box[engine="History"] #identity-icon,

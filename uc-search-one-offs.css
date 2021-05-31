@@ -1,3 +1,6 @@
+/* this is how we get the scrolling search one-offs in the urlbar.
+it also changes the appearance of the one-offs in the searchbar. */
+
 #PopupSearchAutoComplete .search-one-offs {
     -moz-box-orient: horizontal !important;
     max-width: 100% !important;

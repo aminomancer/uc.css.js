@@ -1,3 +1,6 @@
+/* this stylesheet focuses on the app menu.
+(the menu opened by the PanelUI hamburger button at the far right end of the toolbar) */
+
 /* add icons to non-iconized appmenu items */
 .subviewbutton:not(.subviewbutton-iconic) > .toolbarbutton-icon {
     -moz-context-properties: fill, fill-opacity;
