@@ -124,6 +124,7 @@ menupopup
     .sendtab-target:is([clientType="phone"], [clientType="mobile"], [clientType="desktop"]):not(.menuitem-iconic)
     .menu-text,
 #userScriptsMenu > .menu-text,
+#toggle_PersonalToolbar > .menu-text,
 #contentAreaContextMenu
     :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"]
     :is(menu, menuitem)[label="Auto-fill"]
@@ -270,6 +271,7 @@ menuitem.customize-context-reportExtension > .menu-text {
 #context_moveToStart:not(.menuitem-iconic)::before,
 #context_moveToEnd:not(.menuitem-iconic)::before,
 #userScriptsMenu::before,
+#toggle_PersonalToolbar::before,
 #contentAreaContextMenu
     :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"]
     :is(menu, menuitem)[label="Auto-fill"]::before,
@@ -676,8 +678,8 @@ menuitem.customize-context-reportExtension::before {
     background-image: url(chrome://userchrome/content/material/javascript.svg);
 }
 
-#toolbar-context-menu #toggle_PersonalToolbar {
-    display: none !important;
+#toggle_PersonalToolbar::before {
+    background-image: url(chrome://browser/skin/places/bookmarksToolbar.svg);
 }
 
 :is(#spell-add-to-dictionary, #spell-add-dictionaries, #spell-add-dictionaries-main)::before {

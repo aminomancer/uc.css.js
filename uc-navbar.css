@@ -297,7 +297,7 @@ toolbar .toolbarbutton-1:not([disabled])[checked]:hover > .toolbarbutton-icon {
 :root:not([customizing])
     > body
     > box:not(:hover, [popup-status])
-    #PersonalToolbar:not(:focus-within),
+    #PersonalToolbar:not(:focus-within, [tempopen="true"]),
 :root:not([customizing]) > body > box[urlbar-status] #PersonalToolbar {
     visibility: visible !important;
     overflow-y: clip !important;

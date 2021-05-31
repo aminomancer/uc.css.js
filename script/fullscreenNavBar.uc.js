@@ -38,8 +38,9 @@
             return this._fwdButton || (this._fwdButton = document.getElementById("forward-button"));
         }
         handleEvent(event) {
-            if (event.target.tagName === "tooltip") return;
-            switch (event.target.id) {
+            let targ = event.originalTarget;
+            if (targ.tagName === "tooltip") return;
+            switch (targ.id) {
                 case "contentAreaContextMenu":
                 case "sidebarMenu-popup":
                 case "ctrlTab-panel":
@@ -55,19 +56,26 @@
                 case "backForwardMenu":
                     if (this.backButton.disabled && this.fwdButton.disabled) return;
                 case "":
-                    if (event.target.hasAttribute("menu-api")) return;
+                    if (targ.hasAttribute("menu-api")) return;
             }
             switch (event.type) {
                 case "popupshowing":
+                    if (targ.getAttribute("nopreventnavboxhide")) return;
                     this.navBlock.setAttribute("popup-status", true);
                     break;
                 case "popuphiding":
-                    if (event.target.className === "urlbarView") return;
+                    let popNode = document.popupNode;
+                    if (targ.className === "urlbarView") return;
                     if (
-                        event.target.parentElement.tagName === "menu" &&
-                        event.target.parentElement.parentElement.tagName !== "menubar"
+                        targ.className === "urlbarView" ||
+                        (event.target.parentElement.tagName === "menu" &&
+                            !targ.closest("menubar")) ||
+                        popNode?.closest("panel") ||
+                        popNode?.closest("menupopup")
                     )
                         return;
+                    let panel = targ.closest("panel");
+                    if (targ !== panel && panel?.getAttribute("panelopen")) return;
                     this.navBlock.removeAttribute("popup-status");
                     break;
             }

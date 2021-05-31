@@ -1,12 +1,14 @@
 // ==UserScript==
 // @name           All Tabs Menu Expansion Pack
-// @version        1.0
+// @version        1.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
-// @description    Next to the "new tab" button in Firefox there's a V-shaped button that opens a big scrolling menu containing all the tabs. This script adds several new features to the "all tabs menu" to help it catch up to the functionality of the regular tabs bar. First, it adds an animated close button for every tab in this menu. Second, it allows you to multiselect tabs in the all tabs menu and close an unlimited number of tabs at once without closing/blurring the popup. Third, it significantly improves the mute/unmute button by making it work like the mute button in the tabs bar used to work. If you only have one tab selected, it mutes/unmutes that tab. If you have multiple tabs selected, it mutes/unmutes all of them. This also adds a tooltip to the mute button. By default, Firefox doesn't do anything to differentiate loaded tabs from unloaded tabs. But for the regular tab bar, unloaded tabs gain an attribute pending="true" which you can use to dim them. This way you know which tabs are already initialized and which will actually start up when you click them. Pretty useful if you frequently have 100+ tabs like me. This script adds the same functionality to the all tabs menu. It also adds special color stripes to multiselected tabs and container tabs in the "all tabs menu" so you can differentiate them from normal tabs. All the relevant CSS for this is already included in and loaded by the script. But if you've already changed global variables or altered the menu's appearance significantly, I can't promise it'll still match your layout. It's designed to look consistent with my theme and with the latest vanilla (proton) Firefox. If you need to change anything, see the "const css" line in here, or the end of uc-tabs-bar.css on my repo.
+// @description    Next to the "new tab" button in Firefox there's a V-shaped button that opens a big scrolling menu containing all the tabs. This script adds several new features to the "all tabs menu" to help it catch up to the functionality of the regular tabs bar. First, it adds an animated close button for every tab in this menu. Second, it allows you to multiselect tabs in the all tabs menu and close an unlimited number of tabs at once without closing/blurring the popup. Third, it significantly improves the mute/unmute button by making it work like the mute button in the tabs bar used to work. If you only have one tab selected, it mutes/unmutes that tab. If you have multiple tabs selected, it mutes/unmutes all of them. This also adds a tooltip to the mute button. By default, Firefox doesn't do anything to differentiate loaded tabs from unloaded tabs. But for the regular tab bar, unloaded tabs gain an attribute pending="true" which you can use to dim them. This way you know which tabs are already initialized and which will actually start up when you click them. Pretty useful if you frequently have 100+ tabs like me. This script adds the same functionality to the all tabs menu. It also adds special color stripes to multiselected tabs and container tabs in the "all tabs menu" so you can differentiate them from normal tabs. Since version 1.1 it also includes a preference (userChrome.tabs.all-tabs-menu.reverse-order) that lets you reverse the order of the tabs so that newer tabs are displayed on top rather than on bottom. It also modifies the all tabs button's tooltip to display the number of tabs as well as the shortcut to open the all tabs menu, Ctrl+Shift+Tab. All the relevant CSS for this is already included in and loaded by the script. It's designed to look consistent with my theme and with the latest vanilla (proton) Firefox. If you need to change anything, see the "const css" line in here, or the end of uc-tabs-bar.css on my repo.
 // ==/UserScript==
 (function () {
     let timer;
+    let prefSvc = Services.prefs;
+    let reversePref = "userChrome.tabs.all-tabs-menu.reverse-order";
     let tabContext = document.getElementById("tabContextMenu");
     let observer = new MutationObserver(delayedUpdate);
 
@@ -70,7 +72,7 @@
     class TabEventHandler {
         constructor(target) {
             this.target = target;
-            target.addEventListener("click", this, true);
+            target.addEventListener("command", this, true);
             target.addEventListener("mouseover", this, true);
             target.addEventListener("mouseout", this, true);
         }
@@ -94,7 +96,7 @@
                 case "mouseout":
                     main || this.tooltipHandler(e, tab);
                     break;
-                case "click":
+                case "command":
                     mute && this.clickHandler(e, tab);
                     main && this.selectHandler(e, tab);
                     break;
@@ -173,8 +175,6 @@
         }
 
         clickHandler(e, tab) {
-            if (e.button != 0 || e.getModifierState("Accel") || e.shiftKey) return;
-
             if (tab.soundPlaying || tab.muted || tab.activeMediaBlocked) {
                 tab.multiselected
                     ? gBrowser.toggleMuteAudioOnMultiSelectedTabs(tab)
@@ -213,6 +213,50 @@
     function attachContextListeners() {
         tabContext.addEventListener("command", contextCmd, true);
         tabContext.addEventListener("popuphidden", contextHide, false);
+    }
+
+    function reverseTabOrder() {
+        let panel = gTabsPanel.allTabsPanel;
+        if (prefSvc.getBoolPref(reversePref))
+            eval(
+                `panel._populate = function ` +
+                    panel._populate
+                        .toSource()
+                        .replace(
+                            /super\.\_populate\(event\)\;/,
+                            Object.getPrototypeOf(Object.getPrototypeOf(panel))
+                                ._populate.toSource()
+                                .replace(/^.*\n\s*/, "")
+                                .replace(/\n.*$/, "")
+                        )
+                        .replace(/appendChild/, `prepend`)
+                        .replace(
+                            /(setImageAttributes.*)\n/,
+                            `$1\n      if (row.tab.selected)\n      PanelMultiView.forNode(this.view).selectedElement = row.firstElementChild;\n      PanelMultiView.forNode(this.view).focusSelectedElement(true);\n`
+                        ) +
+                    `\n panel._addTab = function ` +
+                    panel._addTab
+                        .toSource()
+                        .replace(
+                            /nextRow\.parentNode\.insertBefore\(newRow\, nextRow\)\;/,
+                            `nextRow.after(newRow)`
+                        )
+                        .replace(/this\.\_addElement/, `this.containerNode.prepend`)
+            );
+        else {
+            delete panel._addElement;
+            delete panel._populate;
+            delete panel._addTab;
+        }
+    }
+
+    function prefHandler(sub, top, pref) {
+        let panel = gTabsPanel.allTabsPanel;
+        if (panel.panelMultiView)
+            panel.panelMultiView.addEventListener("PanelMultiViewHidden", reverseTabOrder, {
+                once: true,
+            });
+        else reverseTabOrder();
     }
 
     function start() {
@@ -369,8 +413,18 @@
             });
         };
 
+        gTabsPanel.allTabsButton.setAttribute(
+            "onmouseover",
+            `this.tooltipText = PluralForm.get(gBrowser.tabs.length, gNavigatorBundle.getString("ctrlTab.listAllTabs.label")).replace("#1", gBrowser.tabs.length).toLocaleLowerCase().replace(RTL_UI ? /.$/i : /^./i, function (letter) { return letter.toLocaleUpperCase(); }).trim() + " (" + ShortcutUtils.prettifyShortcut(key_showAllTabs) + ")";`
+        );
+
+        reverseTabOrder();
+
         gTabsPanel.allTabsView.addEventListener("ViewShowing", reallyStart, { once: true });
     }
+
+    if (!prefSvc.prefHasUserValue(reversePref)) prefSvc.setBoolPref(reversePref, false);
+    prefSvc.addObserver(reversePref, prefHandler);
 
     if (gBrowserInit.delayedStartupFinished) {
         start();

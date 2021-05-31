@@ -414,12 +414,6 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
     padding-block: 0 !important;
 }
 
-@supports -moz-bool-pref("userChrome.tabs.all-tabs-menu.reverse-order") {
-    #allTabsMenu-allTabsViewTabs {
-        -moz-box-direction: reverse;
-    }
-}
-
 #allTabsMenu-searchTabs {
     list-style-image: url(chrome://global/skin/icons/search-glass.svg) !important;
 }
