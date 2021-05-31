@@ -530,10 +530,10 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
 
 .all-tabs-secondary-button[close-button] {
     fill-opacity: 0 !important;
-    transform: translateX(28px);
+    transform: translateX(14px);
     opacity: 0 !important;
-    margin-inline-start: -28px !important;
-    transition: 0.075s ease-in-out transform, 0.075s ease-in-out margin, 0.075s linear opacity;
+    margin-inline-start: -27px !important;
+    transition: 0.25s cubic-bezier(.07,.78,.21,.95) transform, 0.2s cubic-bezier(.07,.74,.24,.95) margin, 0.075s linear opacity;
     display: block !important;
     -moz-context-properties: fill, fill-opacity, stroke !important;
     fill: currentColor !important;
