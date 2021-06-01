@@ -18,7 +18,7 @@ the last 75% or so of this stylesheet is dedicated to restoring pre-proton conte
 
 panel[type="autocomplete-richlistbox"] {
 	--panel-color: var(--ui-text-80);
-	--panel-background: revert;
+	--panel-background: none;
 }
 
 /* use scrollbars instead of scroll buttons on most arrowscrollboxes */
