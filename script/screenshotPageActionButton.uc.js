@@ -19,30 +19,6 @@
         return obj.ownerGlobal.BrowserPageActions;
     }
 
-    async function addAction() {
-        const strings = await new Localization(["browser/screenshots.ftl"], true);
-        const messages = await strings.formatMessages(["screenshot-toolbarbutton"]);
-        const ttip = messages[0].attributes[1].value;
-        PageActions.addAction(
-            new PageActions.Action({
-                id: "screenshot",
-                title: ttip,
-                tooltip: ttip,
-                pinnedToUrlbar: true,
-                disablePrivateBrowsing: config[`Disable in private browsing`],
-                onCommand(event, buttonNode) {
-                    browserPageActions(buttonNode).screenshot.onCommand(event, buttonNode);
-                },
-                onBeforePlacedInWindow(win) {
-                    browserPageActions(win).screenshot.onBeforePlacedInWindow(win);
-                },
-                onLocationChange(win) {
-                    browserPageActions(win).screenshot.onLocationChange(win);
-                },
-            })
-        );
-    }
-
     // handle all the actual behavior in the window context
     BrowserPageActions.screenshot = {
         id: "screenshot", // yields a node ID of #pageAction-urlbar-screenshot
@@ -53,6 +29,37 @@
         },
         get node() {
             return BrowserPageActions.urlbarButtonNodeForActionID(this.id);
+        },
+        async getString() {
+            if (this.titleString) return this.titleString;
+            this.strings = await new Localization(["browser/screenshots.ftl"], true);
+            const formatted = await this.strings.formatMessages(["screenshot-toolbarbutton"]);
+            this.titleString = formatted[0].attributes[1].value;
+            return this.titleString;
+        },
+        async addAction() {
+            let title = await this.getString();
+            const key = window["ext-keyset-id-screenshots_mozilla_org"]?.firstChild;
+            const shortcut = !!key ? ` (${ShortcutUtils.prettifyShortcut(key)})` : "";
+            let tooltip = title + shortcut;
+            PageActions.addAction(
+                new PageActions.Action({
+                    id: "screenshot",
+                    title,
+                    tooltip,
+                    pinnedToUrlbar: true,
+                    disablePrivateBrowsing: config[`Disable in private browsing`],
+                    onCommand(event, buttonNode) {
+                        browserPageActions(buttonNode).screenshot.onCommand(event, buttonNode);
+                    },
+                    onBeforePlacedInWindow(win) {
+                        browserPageActions(win).screenshot.onBeforePlacedInWindow(win);
+                    },
+                    onLocationChange(win) {
+                        browserPageActions(win).screenshot.onLocationChange(win);
+                    },
+                })
+            );
         },
         // set the icon with CSS so it can be styled more easily by userChrome.css
         setStyle() {
@@ -111,11 +118,26 @@
          * Set up the screenshot extension listener and localization strings when a window is launched.
          * @param {ChromeDocument} win (the window in which the button was placed)
          */
-        onBeforePlacedInWindow(win) {
+        async onBeforePlacedInWindow(win) {
             if (win !== window || this.isSetup) return;
             win.Services.obs.addObserver(this, "toggle-screenshot-disable");
+            const titleString = await this.getString();
+            const key = window["ext-keyset-id-screenshots_mozilla_org"]?.firstChild;
+            const shortcut = !!key ? ` (${ShortcutUtils.prettifyShortcut(key)})` : "";
+            this.action.setTooltip(titleString + shortcut, win);
             this.isSetup = true;
+            this.stringIsDone = !!shortcut;
         },
+        muObserver: new MutationObserver(async function (mus) {
+            const keyset = window["ext-keyset-id-screenshots_mozilla_org"];
+            if (BrowserPageActions.screenshot.stringIsDone || !keyset) return;
+            const titleString = await BrowserPageActions.screenshot.getString();
+            const key = keyset.firstChild;
+            const shortcut = !!key ? ` (${ShortcutUtils.prettifyShortcut(key)})` : "";
+            BrowserPageActions.screenshot.action.setTooltip(titleString + shortcut, window);
+            BrowserPageActions.screenshot.stringIsDone = !!shortcut;
+            if (shortcut) this.disconnect(), delete BrowserPageActions.screenshot.muObserver;
+        }),
         /**
          * Listen to location changes (tab switches, web navigation, etc.) to hide/reveal the button
          * @param {ChromeDocument} win
@@ -130,5 +152,6 @@
 
     if (PageActions.actionForID("screenshot")) return; // the action itself only needs to be registered once per app launch, not once per window. firefox internally handles replicating it across all windows so we want to stop here if this is the 2nd time the script has executed during a given runtime.
     BrowserPageActions.screenshot.setStyle(); // likewise, stylesheets loaded by the stylesheet XPCOM service are automatically dumped in every window, so it isn't necessary to register the stylesheet any more than once per session.
-    addAction();
+    BrowserPageActions.screenshot.addAction();
+    BrowserPageActions.screenshot.muObserver.observe(document.documentElement, { childList: true });
 })();
