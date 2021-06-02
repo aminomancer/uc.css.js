@@ -516,16 +516,31 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
 }
 
 .all-tabs-item .all-tabs-secondary-button[toggle-mute] {
-    padding: 2px 2px 2px 1px !important;
-    margin-inline-end: 8px !important;
-}
-
-.all-tabs-secondary-button[soundplaying] {
     list-style-image: url(chrome://userchrome/content/tab-audio-playing.svg) !important;
+    padding: 2px 2px 2px 1px !important;
+    margin-inline-end: 8.5px !important;
+    transform: translateX(14px);
+    opacity: 0 !important;
+    margin-inline-start: -27px !important;
+    transition: 0.25s cubic-bezier(.07,.78,.21,.95) transform, 0.2s cubic-bezier(.07,.74,.24,.95) margin, 0.075s linear opacity !important;
+    display: block !important;
 }
 
-.all-tabs-secondary-button[muted] {
+.all-tabs-item:is(:hover, :focus-within) .all-tabs-secondary-button[toggle-mute] {
+    transform: translateX(48px);
+}
+
+.all-tabs-item .all-tabs-secondary-button[soundplaying] {
+    transform: none !important;
+    opacity: 0.7 !important;
+    margin-inline-start: -2px !important;
+}
+
+.all-tabs-item .all-tabs-secondary-button[muted] {
     list-style-image: url(chrome://userchrome/content/tab-audio-muted.svg) !important;
+    transform: none !important;
+    opacity: 0.7 !important;
+    margin-inline-start: -2px !important;
 }
 
 .all-tabs-secondary-button[close-button] {
