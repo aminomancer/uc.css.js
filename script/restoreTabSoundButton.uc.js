@@ -15,12 +15,25 @@
     let tabClass = await customElements.whenDefined("tabbrowser-tab");
     eval(
         `gBrowser.createTooltip = function ` +
-            gBrowser.createTooltip.toSource().replace(/alignToTab \= false\;\n/g, "")
+            gBrowser.createTooltip
+                .toSource()
+                .replace(/alignToTab \= false\;\n/g, "")
+                .replace(
+                    /if \(tab\.mOverCloseButton\) \{[^{}]*\}/gs,
+                    `if (tab.mOverCloseButton) {
+                        let shortcut = ShortcutUtils.prettifyShortcut(key_close);
+                        label = PluralForm.get(affectedTabsLength, gTabBrowserBundle.GetStringFromName("tabs.closeTabs.tooltip"))
+                            .replace("#1", affectedTabsLength);
+                        if (tab.selected && shortcut) {
+                            if (label.includes("%S")) label = label.replace("%S", shortcut);
+                            else label = label + " (" + shortcut + ")";
+                        }
+                    }`
+                )
     );
     Object.defineProperty(tabClass.prototype, "soundPlayingIcon", {
         get() {
             return this.querySelector(".tab-icon-sound");
         },
     });
-    gBrowser.tabContainer.addEventListener("click", this, true);
 })();

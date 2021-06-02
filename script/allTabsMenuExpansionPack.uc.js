@@ -101,11 +101,7 @@
                                 .replace(/^.*\n\s*/, "")
                                 .replace(/\n.*$/, "")
                         )
-                        .replace(/appendChild/, `prepend`)
-                        .replace(
-                            /(setImageAttributes.*)\n/,
-                            `$1\n      if (row.tab.selected)\n      PanelMultiView.forNode(this.view).selectedElement = row.firstElementChild;\n      PanelMultiView.forNode(this.view).focusSelectedElement(true);\n`
-                        ) +
+                        .replace(/appendChild/, `prepend`) +
                     `\n panel._addTab = function ` +
                     panel._addTab
                         .toSource()
