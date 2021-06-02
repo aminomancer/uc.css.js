@@ -9,8 +9,14 @@
     let timer;
     let prefSvc = Services.prefs;
     let reversePref = "userChrome.tabs.all-tabs-menu.reverse-order";
+    let attributeFilter = ["pending", "notselectedsinceload"];
     let tabContext = document.getElementById("tabContextMenu");
-    let observer = new MutationObserver(delayedUpdate);
+    let observer = new MutationObserver((_mus) => {
+        for (const row of gTabsPanel.allTabsPanel.rows)
+            for (const attr of attributeFilter)
+                row.toggleAttribute(attr, !!row.tab.getAttribute(attr));
+        delayedDisconnect();
+    });
 
     function setAttributes(element, attrs) {
         for (let [name, value] of Object.entries(attrs)) {
@@ -32,13 +38,13 @@
                 gBrowser.selectedTabs.forEach((tab) => {
                     observer.observe(tab, {
                         attributes: true,
-                        attributeFilter: ["pending"],
+                        attributeFilter,
                     });
                 });
             else
                 observer.observe(TabContextMenu.contextTab, {
                     attributes: true,
-                    attributeFilter: ["pending"],
+                    attributeFilter,
                 });
         }
     }
@@ -47,143 +53,11 @@
         if (gTabsPanel.allTabsPanel.view.panelMultiView) delayedDisconnect();
     }
 
-    function delayedUpdate(mus) {
-        for (const _mu of mus) {
-            updatePendingState();
-            delayedDisconnect();
-        }
-    }
-
     function delayedDisconnect() {
         window.clearTimeout(timer);
         timer = window.setTimeout(() => {
             observer.disconnect();
         }, 3000);
-    }
-
-    function updatePendingState() {
-        Array.from(gTabsPanel.allTabsViewTabs.children).forEach((item) => {
-            item.tab.getAttribute("pending")
-                ? item.setAttribute("pending", "true")
-                : item.removeAttribute("pending");
-        });
-    }
-
-    class TabEventHandler {
-        constructor(target) {
-            this.target = target;
-            target.addEventListener("command", this, true);
-            target.addEventListener("mouseover", this, true);
-            target.addEventListener("mouseout", this, true);
-        }
-
-        sentenceCase(str) {
-            return str
-                .replace(/[a-z]/i, function (letter) {
-                    return letter.toUpperCase();
-                })
-                .trim();
-        }
-
-        handleEvent(e) {
-            let main = e.target.classList.contains("all-tabs-button");
-            let mute = e.target.hasAttribute("toggle-mute");
-            let close = e.target.hasAttribute("close-button");
-            if (!main && !mute && !close) return;
-            let tab = e.target.tab;
-            switch (e.type) {
-                case "mouseover":
-                case "mouseout":
-                    main || this.tooltipHandler(e, tab);
-                    break;
-                case "command":
-                    mute && this.clickHandler(e, tab);
-                    main && this.selectHandler(e, tab);
-                    break;
-                default:
-                    return false;
-            }
-        }
-
-        async tooltipHandler(e, tab) {
-            const selectedTabs = gBrowser.selectedTabs;
-            const tabInSelection = selectedTabs.includes(tab);
-            const affectedTabsLength = tabInSelection ? selectedTabs.length : 1;
-            let stringID;
-
-            if (e.target.hasAttribute("toggle-mute"))
-                stringID = tab.hasAttribute("activemedia-blocked")
-                    ? "tabs.unblockAudio2.tooltip"
-                    : tab.linkedBrowser.audioMuted
-                    ? "tabs.unmuteAudio2.background.tooltip"
-                    : "tabs.muteAudio2.background.tooltip";
-
-            if (e.target.hasAttribute("close-button")) stringID = "tabs.closeTabs.tooltip";
-
-            e.target.setAttribute(
-                "tooltiptext",
-                PluralForm.get(
-                    affectedTabsLength,
-                    gTabBrowserBundle.GetStringFromName(stringID)
-                ).replace("#1", affectedTabsLength)
-            );
-        }
-
-        selectHandler(e, tab) {
-            if (e.button != 0 && e.button != 1) return;
-            let eventMaySelectTab = true;
-
-            if (e.button === 1) {
-                eventMaySelectTab = false;
-                gBrowser.removeTab(tab, {
-                    animate: true,
-                    byMouse: e.mozInputSource == MouseEvent.MOZ_SOURCE_MOUSE,
-                });
-            }
-
-            if (e.button === 0) {
-                let accelKey = e.getModifierState("Accel");
-                if (e.shiftKey) {
-                    eventMaySelectTab = false;
-                    const lastSelectedTab = gBrowser.lastMultiSelectedTab;
-                    if (!accelKey) {
-                        gBrowser.selectedTab = lastSelectedTab;
-                        gBrowser.clearMultiSelectedTabs();
-                    }
-                    gBrowser.addRangeToMultiSelectedTabs(lastSelectedTab, tab);
-                } else if (accelKey) {
-                    // Ctrl (Cmd for mac) key is pressed
-                    eventMaySelectTab = false;
-                    if (tab.multiselected) gBrowser.removeFromMultiSelectedTabs(tab);
-                    else if (tab != gBrowser.selectedTab) {
-                        gBrowser.addToMultiSelectedTabs(tab);
-                        gBrowser.lastMultiSelectedTab = tab;
-                    }
-                } else if (!tab.selected && tab.multiselected)
-                    gBrowser.lockClearMultiSelectionOnce();
-            }
-
-            if (gSharedTabWarning.willShowSharedTabWarning(tab)) eventMaySelectTab = false;
-
-            if (eventMaySelectTab) {
-                if (tab === gBrowser.selectedTab) return;
-                gTabsPanel.allTabsPanel._selectTab(tab);
-            }
-
-            e.preventDefault();
-            e.stopPropagation();
-        }
-
-        clickHandler(e, tab) {
-            if (tab.soundPlaying || tab.muted || tab.activeMediaBlocked) {
-                tab.multiselected
-                    ? gBrowser.toggleMuteAudioOnMultiSelectedTabs(tab)
-                    : tab.toggleMuteAudio();
-                e.preventDefault();
-                e.stopPropagation();
-                return;
-            }
-        }
     }
 
     function registerSheet() {
@@ -196,7 +70,7 @@
         sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
     }
 
-    function reallyStart() {
+    function oneTimeSetup() {
         let lazies = tabContext.querySelectorAll("[data-lazy-l10n-id]");
         if (lazies) {
             MozXULElement.insertFTLIfNeeded("browser/tabContextMenu.ftl");
@@ -205,8 +79,6 @@
                 el.removeAttribute("data-lazy-l10n-id");
             });
         }
-        new TabEventHandler(gTabsPanel.allTabsViewTabs);
-        gBrowser.addEventListener("TabMultiSelect", gTabsPanel.allTabsPanel, false);
         tabContext.addEventListener("popupshowing", attachContextListeners, { once: true });
     }
 
@@ -250,7 +122,7 @@
         }
     }
 
-    function prefHandler(sub, top, pref) {
+    function prefHandler(_sub, _top, _pref) {
         let panel = gTabsPanel.allTabsPanel;
         if (panel.panelMultiView)
             panel.panelMultiView.addEventListener("PanelMultiViewHidden", reverseTabOrder, {
@@ -260,15 +132,28 @@
     }
 
     function start() {
-        const TABS_PANEL_EVENTS = {
-            show: "ViewShowing",
-            hide: "PanelMultiViewHidden",
-        };
-
         gTabsPanel.init();
         registerSheet();
 
-        gTabsPanel.allTabsPanel._createRow = function _createRow(tab) {
+        gTabsPanel.allTabsPanel._setupListeners = function () {
+            this.listenersRegistered = true;
+            this.gBrowser.tabContainer.addEventListener("TabAttrModified", this);
+            this.gBrowser.tabContainer.addEventListener("TabClose", this);
+            this.gBrowser.tabContainer.addEventListener("TabMove", this);
+            this.gBrowser.tabContainer.addEventListener("TabPinned", this);
+            this.gBrowser.addEventListener("TabMultiSelect", this, false);
+        };
+
+        gTabsPanel.allTabsPanel._cleanupListeners = function () {
+            this.gBrowser.tabContainer.removeEventListener("TabAttrModified", this);
+            this.gBrowser.tabContainer.removeEventListener("TabClose", this);
+            this.gBrowser.tabContainer.removeEventListener("TabMove", this);
+            this.gBrowser.tabContainer.removeEventListener("TabPinned", this);
+            this.gBrowser.removeEventListener("TabMultiSelect", this, false);
+            this.listenersRegistered = false;
+        };
+
+        gTabsPanel.allTabsPanel._createRow = function (tab) {
             let { doc } = this;
             let row = doc.createXULElement("toolbaritem");
             row.setAttribute("class", "all-tabs-item");
@@ -278,6 +163,7 @@
             }
             row.tab = tab;
             row.addEventListener("command", this);
+            row.addEventListener("click", this);
             this.tabToElement.set(tab, row);
 
             let button = doc.createXULElement("toolbarbutton");
@@ -296,6 +182,8 @@
             secondaryButton.setAttribute("closemenu", "none");
             secondaryButton.setAttribute("toggle-mute", "true");
             secondaryButton.tab = tab;
+            secondaryButton.addEventListener("mouseover", this);
+            secondaryButton.addEventListener("mouseout", this);
             row.appendChild(secondaryButton);
 
             let closeButton = doc.createXULElement("toolbarbutton");
@@ -305,6 +193,8 @@
             );
             closeButton.setAttribute("close-button", "true");
             closeButton.tab = tab;
+            closeButton.addEventListener("mouseover", this);
+            closeButton.addEventListener("mouseout", this);
             row.appendChild(closeButton);
 
             this._setRowAttributes(row, tab);
@@ -312,56 +202,117 @@
             return row;
         };
 
-        gTabsPanel.allTabsPanel.handleEvent = function handleEvent(event) {
-            switch (event.type) {
-                case TABS_PANEL_EVENTS.hide:
-                    if (event.target == this.panelMultiView) {
+        gTabsPanel.allTabsPanel.handleEvent = function (e) {
+            let eventMaySelectTab = true;
+            switch (e.type) {
+                case "PanelMultiViewHidden":
+                    if (e.target == this.panelMultiView) {
                         this._cleanup();
                         this.panelMultiView = null;
                     }
                     break;
-                case TABS_PANEL_EVENTS.show:
-                    if (!this.listenersRegistered && event.target == this.view) {
+                case "ViewShowing":
+                    if (!this.listenersRegistered && e.target == this.view) {
                         this.panelMultiView = this.view.panelMultiView;
-                        this._populate(event);
+                        this._populate(e);
+                    }
+                    break;
+                case "click":
+                    if (e.button === 2) break;
+                    if (e.button === 1) {
+                        gBrowser.removeTab(e.target.tab, {
+                            animate: true,
+                            byMouse: false,
+                        });
+                        break;
+                    }
+                    let accelKey = AppConstants.platform == "macosx" ? e.metaKey : e.ctrlKey;
+                    if (e.shiftKey) {
+                        eventMaySelectTab = false;
+                        const lastSelectedTab = gBrowser.lastMultiSelectedTab;
+                        if (!accelKey) {
+                            gBrowser.selectedTab = lastSelectedTab;
+                            gBrowser.clearMultiSelectedTabs();
+                        }
+                        gBrowser.addRangeToMultiSelectedTabs(lastSelectedTab, e.target.tab);
+                        e.preventDefault();
+                    } else if (accelKey) {
+                        eventMaySelectTab = false;
+                        if (e.target.tab.multiselected)
+                            gBrowser.removeFromMultiSelectedTabs(e.target.tab);
+                        else if (e.target.tab != gBrowser.selectedTab) {
+                            gBrowser.addToMultiSelectedTabs(e.target.tab);
+                            gBrowser.lastMultiSelectedTab = e.target.tab;
+                        }
+                        e.preventDefault();
                     }
                     break;
                 case "command":
-                    if (event.target.hasAttribute("toggle-mute")) {
-                        event.target.tab.toggleMuteAudio();
+                    if (e.target.hasAttribute("toggle-mute")) {
+                        e.target.tab.multiselected
+                            ? gBrowser.toggleMuteAudioOnMultiSelectedTabs(e.target.tab)
+                            : e.target.tab.toggleMuteAudio();
                         break;
                     }
-                    if (event.target.hasAttribute("close-button")) {
-                        if (event.target.parentElement.tab.multiselected)
-                            gBrowser.removeMultiSelectedTabs();
+                    if (e.target.hasAttribute("close-button")) {
+                        if (e.target.tab.multiselected) gBrowser.removeMultiSelectedTabs();
                         else
-                            gBrowser.removeTab(event.target.parentElement.tab, {
+                            gBrowser.removeTab(e.target.tab, {
                                 animate: true,
-                                byMouse: event.mozInputSource == MouseEvent.MOZ_SOURCE_MOUSE,
+                                byMouse: e.mozInputSource == MouseEvent.MOZ_SOURCE_MOUSE,
                             });
                         break;
                     }
-                    this._selectTab(event.target.tab);
+                    if (!e.target.tab.selected && e.target.tab.multiselected)
+                        gBrowser.lockClearMultiSelectionOnce();
+                    if (gSharedTabWarning.willShowSharedTabWarning(e.target.tab))
+                        eventMaySelectTab = false;
+                    if (eventMaySelectTab) {
+                        if (e.target.tab === gBrowser.selectedTab) break;
+                        this._selectTab(e.target.tab);
+                    }
+                    break;
+                case "mouseover":
+                case "mouseout":
+                    const selectedTabs = gBrowser.selectedTabs;
+                    const affectedTabsLength = selectedTabs.includes(e.target.tab)
+                        ? selectedTabs.length
+                        : 1;
+                    let stringID;
+                    if (e.target.hasAttribute("toggle-mute"))
+                        stringID = e.target.tab.hasAttribute("activemedia-blocked")
+                            ? "tabs.unblockAudio2.tooltip"
+                            : e.target.tab.linkedBrowser.audioMuted
+                            ? "tabs.unmuteAudio2.background.tooltip"
+                            : "tabs.muteAudio2.background.tooltip";
+                    if (e.target.hasAttribute("close-button")) stringID = "tabs.closeTabs.tooltip";
+                    e.target.setAttribute(
+                        "tooltiptext",
+                        PluralForm.get(
+                            affectedTabsLength,
+                            gTabBrowserBundle.GetStringFromName(stringID)
+                        ).replace("#1", affectedTabsLength)
+                    );
                     break;
                 case "TabAttrModified":
-                    this._tabAttrModified(event.target);
+                    this._tabAttrModified(e.target);
                     break;
                 case "TabMultiSelect":
-                    this._tabMultiSelect(event.target);
+                    this._onTabMultiSelect(e.target);
                     break;
                 case "TabClose":
-                    this._tabClose(event.target);
+                    this._tabClose(e.target);
                     break;
                 case "TabMove":
-                    this._moveTab(event.target);
+                    this._moveTab(e.target);
                     break;
                 case "TabPinned":
-                    if (!this.filterFn(event.target)) this._tabClose(event.target);
+                    if (!this.filterFn(e.target)) this._tabClose(e.target);
                     break;
             }
         };
 
-        gTabsPanel.allTabsPanel._tabMultiSelect = function _tabMultiSelect() {
+        gTabsPanel.allTabsPanel._onTabMultiSelect = function () {
             for (let item of this.rows) {
                 item.tab.multiselected
                     ? item.setAttribute("multiselected", "true")
@@ -369,7 +320,7 @@
             }
         };
 
-        gTabsPanel.allTabsPanel._setRowAttributes = function _setRowAttributes(row, tab) {
+        gTabsPanel.allTabsPanel._setRowAttributes = function (row, tab) {
             let pending = tab.getAttribute("pending");
             let multiselected = tab.getAttribute("multiselected");
             let notselectedsinceload = tab.getAttribute("notselectedsinceload");
@@ -420,7 +371,7 @@
 
         reverseTabOrder();
 
-        gTabsPanel.allTabsView.addEventListener("ViewShowing", reallyStart, { once: true });
+        gTabsPanel.allTabsView.addEventListener("ViewShowing", oneTimeSetup, { once: true });
     }
 
     if (!prefSvc.prefHasUserValue(reversePref)) prefSvc.setBoolPref(reversePref, false);
