@@ -341,10 +341,6 @@ menupopup::part(arrowscrollbox),
 }
 
 :root[pre-proton-downloads-button] #downloads-indicator-progress-inner {
-    width: 20px;
-    height: 20px;
-    top: -4.5px;
-    left: -4.5px;
     position: relative;
     background: conic-gradient(
         var(--toolbarbutton-icon-fill-attention) var(--download-progress-pcent),

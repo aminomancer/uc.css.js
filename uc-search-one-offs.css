@@ -63,20 +63,20 @@ it also changes the appearance of the one-offs in the searchbar. */
 }
 
 #PopupSearchAutoComplete
-:is(.searchbar-engine-one-off-item, .addengine-item)
-> :is(stack, .button-box) {
+    :is(.searchbar-engine-one-off-item, .addengine-item)
+    > :is(stack, .button-box) {
     border-radius: var(--toolbarbutton-border-radius);
 }
 
 #PopupSearchAutoComplete
-:is(.searchbar-engine-one-off-item, .addengine-item):hover
-> :is(stack, .button-box) {
+    :is(.searchbar-engine-one-off-item, .addengine-item):hover
+    > :is(stack, .button-box) {
     background-color: var(--arrowpanel-dimmed) !important;
 }
 
 #PopupSearchAutoComplete
-:is(.searchbar-engine-one-off-item, .addengine-item)[selected]:not(:hover)
-> :is(stack, .button-box) {
+    :is(.searchbar-engine-one-off-item, .addengine-item)[selected]:not(:hover)
+    > :is(stack, .button-box) {
     background-color: var(--arrowpanel-faint) !important;
 }
 
@@ -137,7 +137,7 @@ it also changes the appearance of the one-offs in the searchbar. */
 }
 
 #PopupSearchAutoComplete .search-setting-button[selected]:not(:hover) {
-	background-color: var(--arrowpanel-faint) !important;
+    background-color: var(--arrowpanel-faint) !important;
 }
 
 #PopupSearchAutoComplete .search-setting-button > .button-box {
@@ -183,11 +183,15 @@ it also changes the appearance of the one-offs in the searchbar. */
     fill-opacity: 1 !important;
 }
 
-#nav-bar:not([overflowing="true"]) .urlbarView :is(.searchbar-engine-one-off-item, .addengine-item) {
+#nav-bar:not([overflowing="true"])
+    .urlbarView
+    :is(.searchbar-engine-one-off-item, .addengine-item) {
     fill-opacity: var(--urlbar-icon-fill-opacity) !important;
 }
 
-.urlbarView :is(.searchbar-engine-one-off-item, .addengine-item):-moz-window-inactive {
+:root:not([customizing])
+    .urlbarView
+    :is(.searchbar-engine-one-off-item, .addengine-item):-moz-window-inactive {
     opacity: 0.7 !important;
 }
 
@@ -453,19 +457,22 @@ toolbarpaletteitem > #urlbar-container :is(#page-action-buttons, #search-one-off
 
 /* individual search one off adjustments */
 .searchbar-engine-one-off-item[image="chrome://userchrome/content/engines/gatherer.svg"] .button-icon,
-.searchbar-engine-one-off-item[image="chrome://userchrome/content/engines/scryfall.svg"] .button-icon {
+.searchbar-engine-one-off-item[image="chrome://userchrome/content/engines/scryfall.svg"] .button-icon
+{
     width: 17.5px !important;
     height: 17.5px !important;
 }
 
-.searchbar-engine-one-off-item[image="chrome://userchrome/content/engines/wiki.svg"] .button-icon {
+.searchbar-engine-one-off-item[image="chrome://userchrome/content/engines/wiki.svg"] .button-icon
+{
     width: 19px !important;
     height: 19px !important;
     margin-left: -0.3px !important;
     margin-top: 0.7px !important;
 }
 
-.searchbar-engine-one-off-item[image="chrome://userchrome/content/engines/amazon.svg"] .button-icon {
+.searchbar-engine-one-off-item[image="chrome://userchrome/content/engines/amazon.svg"] .button-icon
+{
     margin-top: 0.7px !important;
 }
 

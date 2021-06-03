@@ -257,7 +257,7 @@ this sheet controls their appearance as well. */
 }
 
 /* macOS style window controls */
-:is(.titlebar-buttonbox, #window-controls):-moz-window-inactive > toolbarbutton:not(:hover) {
+:root:-moz-window-inactive:not([customizing]) :is(.titlebar-buttonbox, #window-controls) > toolbarbutton:not(:hover) {
     list-style-image: url(chrome://userchrome/content/window/inactive.svg) !important;
 }
 

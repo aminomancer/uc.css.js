@@ -559,7 +559,8 @@ when the tab bar is not overflowing, new tabs slide into place much more smoothl
     opacity: 0.6 !important;
 }
 
-.tab-icon-sound:is([soundplaying], [muted], [activemedia-blocked], [pictureinpicture]):not(:hover):-moz-window-inactive {
+:root:not([customizing])
+    .tab-icon-sound:is([soundplaying], [muted], [activemedia-blocked], [pictureinpicture]):not(:hover):-moz-window-inactive {
     opacity: 0.5 !important;
 }
 

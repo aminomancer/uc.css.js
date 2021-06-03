@@ -19,6 +19,7 @@ tooltip {
     --uc-panel-box-solid: hsl(233, 29%, 18%);
     --uc-content-text-a50: hsla(236, 100%, 85%, 0.5);
     --uc-content-text-a80: rgba(255, 255, 255, 0.8);
+    --uc-accent-color: hsl(233, 61%, 8%);
     --arrowpanel-dimmed-menu-hover-solid: hsl(234, 27%, 23%);
     --button-solid-hover-background: hsl(232, 29%, 26%);
     --button-solid-active-background: hsl(234, 26%, 30%);
@@ -95,7 +96,7 @@ tooltip {
     --titlebar-gradient: radial-gradient(
         circle at 100% 0%,
         hsl(231, 48%, 12%),
-        hsl(233, 61%, 8%) 140px
+        var(--uc-accent-color) 140px
     );
     --search-box-color: hsl(229, 32%, 23%);
     --search-box-focus: hsl(229, 27%, 27%);

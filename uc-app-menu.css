@@ -175,14 +175,16 @@
     margin-block: -7px auto !important;
 }
 
-#PanelUI-menu-button[badge-status^="update"]
+:root:not([customizing])
+    #PanelUI-menu-button[badge-status^="update"]
     > .toolbarbutton-badge-stack
     > .toolbarbutton-badge:-moz-window-inactive {
     fill: transparent !important;
     background-color: hsl(227, 19%, 48%) !important;
 }
 
-#PanelUI-menu-button[badge-status^="update"]:is(:hover, [open])
+:root:not([customizing])
+    #PanelUI-menu-button[badge-status^="update"]:is(:hover, [open])
     > .toolbarbutton-badge-stack
     > .toolbarbutton-badge:-moz-window-inactive {
     background-color: hsl(125, 81%, 57%) !important;
@@ -276,13 +278,15 @@
     list-style-image: url(chrome://userchrome/content/skin/menu-badged.svg) !important;
 }
 
-#PanelUI-menu-button[badge-status="addon-alert"]:not(:hover, [open])
+:root:not([customizing])
+    #PanelUI-menu-button[badge-status="addon-alert"]:not(:hover, [open])
     > .toolbarbutton-badge-stack
     > .toolbarbutton-badge:-moz-window-inactive {
     fill: hsl(227, 19%, 48%) !important;
 }
 
-#PanelUI-menu-button[badge-status="fxa-needs-authentication"]:not(:hover, [open])
+:root:not([customizing])
+    #PanelUI-menu-button[badge-status="fxa-needs-authentication"]:not(:hover, [open])
     > .toolbarbutton-badge-stack
     > .toolbarbutton-badge:-moz-window-inactive {
     fill: hsl(227, 19%, 48%) !important;
