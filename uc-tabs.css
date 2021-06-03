@@ -695,16 +695,23 @@ when the tab bar is not overflowing, new tabs slide into place much more smoothl
     margin-right: -16px !important;
 }
 
+/* uncomment the line below if you want to hide the sound button on the selected tab
+until the tab container is hovered. e.g. if your tab min size is small and you want more room to see the tab title.
+by default the tab sound button shows on every tab if sound is playing or muted.
+with the following line uncommented, the tab sound button shows on every non-selected tab if sound is playing or muted,
+but only shows on the selected tab if 1) the tab is muted, or 2) the tabs area is hovered.
+so in other words it won't show if audio is playing until you hover the general area of the tabs, but will show if audio is muted. */
+
+/* #tabbrowser-tabs:not(:hover, :focus-within, :focus)
+    .tabbrowser-tab[visuallyselected]
+    .tab-content
+    > .tab-icon-sound:not([pictureinpicture], [muted]), */
 #tabbrowser-tabs:not(:hover, :focus-within, :focus)
     .tab-content
     > .tab-icon-sound:not([soundplaying], [muted], [activemedia-blocked], [pictureinpicture]),
 #tabbrowser-tabs:not(:hover, :focus-within, :focus)
     .tab-content
-    > .tab-icon-sound[soundplaying-scheduledremoval]:not([muted], [pictureinpicture]),
-#tabbrowser-tabs:not(:hover, :focus-within, :focus)
-    .tabbrowser-tab[visuallyselected]
-    .tab-content
-    > .tab-icon-sound:not([pictureinpicture], [muted]) {
+    > .tab-icon-sound[soundplaying-scheduledremoval]:not([muted], [pictureinpicture]) {
     opacity: 0 !important;
     pointer-events: none !important;
     transform: translateX(16px) scale(0.5) !important;

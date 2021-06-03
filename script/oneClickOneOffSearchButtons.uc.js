@@ -7,13 +7,15 @@
 // ==/UserScript==
 
 (() => {
+    const prefsvc = Services.prefs;
+    const keyNavPref = "userChrome.urlbar.oneOffs.keyNavigation"; // change this in about:config if you don't want the arrow keys to switch between one-off search engine buttons.
+    const hideSettingsPref = "userChrome.urlbar.oneOffs.hideSettingsButton"; // change this in about:config if you don't want to disable the search settings button.
+    const skipOneOffsPref = "userChrome.urlbar.oneOffs.skipOneOffsOnArrowKey"; // change this in about:config if you want arrow keys to ONLY cycle through urlbar results, rather than cycling through search engines and urlbar results. e.g. if you press arrow up after clicking the urlbar, normally it would select the last search engine rather than the last urlbar result. if this pref is set to true it will skip all the search engines and just go straight to the urlbar results.
+    const branch = "userChrome.urlbar.oneOffs";
+    let keyNav = true;
+
     function init() {
-        const prefsvc = Services.prefs;
-        const keyNavPref = "userChrome.urlbar.oneOffs.keyNavigation"; // change this in about:config if you don't want the arrow keys to switch between one-off search engine buttons.
-        const hideSettingsPref = "userChrome.urlbar.oneOffs.hideSettingsButton"; // change this in about:config if you don't want to disable the search settings button.
-        const branch = "userChrome.urlbar.oneOffs";
         let oneOffs = gURLBar.view.oneOffSearchButtons;
-        let keyNav = true;
         let handler = {
             handleEvent(e) {
                 if (e.type === "unload") {
@@ -40,42 +42,36 @@
                 }
             },
             observe(sub, _top, pref) {
-                if (pref.includes("keyNavigation")) {
-                    if (sub.getBoolPref(pref)) {
-                        oneOffs.disableOneOffsHorizontalKeyNavigation = false;
-                        keyNav = true;
-                    } else {
-                        oneOffs.disableOneOffsHorizontalKeyNavigation = true;
-                        keyNav = false;
-                    }
-                } else if (pref.includes("hideSettingsButton"))
-                    toggleSettingsButton(sub.getBoolPref(pref));
-            },
-            setPrefs() {
-                if (!prefsvc.prefHasUserValue(keyNavPref)) prefsvc.setBoolPref(keyNavPref, true);
-                else this.observe(prefsvc, null, keyNavPref);
-                if (!prefsvc.prefHasUserValue(hideSettingsPref))
-                    prefsvc.setBoolPref(hideSettingsPref, true);
-                else this.observe(prefsvc, null, hideSettingsPref);
+                switch (pref) {
+                    case keyNavPref:
+                        if (sub.getBoolPref(pref)) {
+                            oneOffs.disableOneOffsHorizontalKeyNavigation = false;
+                            keyNav = true;
+                        } else {
+                            oneOffs.disableOneOffsHorizontalKeyNavigation = true;
+                            keyNav = false;
+                        }
+                        break;
+                    case hideSettingsPref:
+                        toggleSettingsButton(sub.getBoolPref(pref));
+                        break;
+                    case skipOneOffsPref:
+                        toggleKeyNavCallback(sub.getBoolPref(pref));
+                        break;
+                }
             },
             attachListeners() {
                 window.addEventListener("unload", this, false);
                 prefsvc.addObserver(branch, this);
                 gURLBar.inputField.addEventListener("keydown", this, false);
+                this.observe(prefsvc, null, keyNavPref);
+                this.observe(prefsvc, null, hideSettingsPref);
+                this.observe(prefsvc, null, skipOneOffsPref);
             },
         };
 
         function rectX(el) {
             return el.getBoundingClientRect().x;
-        }
-
-        function parseWidth(el) {
-            let style = window.getComputedStyle(el),
-                width = el.clientWidth,
-                margin = parseFloat(style.marginLeft) + parseFloat(style.marginRight),
-                padding = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight),
-                border = parseFloat(style.borderLeftWidth) + parseFloat(style.borderRightWidth);
-            return width + margin + padding + border;
         }
 
         function toggleSettingsButton(hide) {
@@ -110,6 +106,20 @@
                 oneOffs.settingsButtonCompact.style.removeProperty("display");
                 oneOffs.settingsButton.style.removeProperty("display");
             }
+        }
+
+        function toggleKeyNavCallback(disable) {
+            disable
+                ? eval(
+                      `gURLBar.view.controller.handleKeyNavigation = function ` +
+                          gURLBar.view.controller.handleKeyNavigation
+                              .toSource()
+                              .replace(
+                                  /(this\.\_lastQueryContextWrapper)/,
+                                  `$1 && this.allowOneOffKeyNav`
+                              )
+                  )
+                : delete gURLBar.view.controller.handleKeyNavigation;
         }
 
         oneOffs.handleSearchCommand = function handleSearchCommand(event, searchMode) {
@@ -238,8 +248,15 @@
         });
 
         handler.attachListeners();
-        handler.setPrefs();
     }
+
+    [
+        { token: keyNavPref, default: true },
+        { token: hideSettingsPref, default: true },
+        { token: skipOneOffsPref, default: false },
+    ].forEach((pref) => {
+        if (!prefsvc.prefHasUserValue(pref.token)) prefsvc.setBoolPref(pref.token, pref.default);
+    }); // create prefs early if they don't exist
 
     // Delayed startup
     if (gBrowserInit.delayedStartupFinished) {
