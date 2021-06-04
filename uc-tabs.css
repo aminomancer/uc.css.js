@@ -565,7 +565,7 @@ when the tab bar is not overflowing, new tabs slide into place much more smoothl
 }
 
 .tabbrowser-tab:is(:hover, .keyboard-focused-tab)
-    .tab-icon-sound[pictureinpicture][soundplaying]:not([soundplaying-scheduledremoval]),
+    .tab-icon-sound[pictureinpicture][soundplaying],
 .tabbrowser-tab .tab-icon-sound[pictureinpicture][muted] {
     background-size: 12px !important;
     background-position: 1.2px center !important;
@@ -575,14 +575,14 @@ when the tab bar is not overflowing, new tabs slide into place much more smoothl
 }
 
 .tabbrowser-tab
-    .tab-icon-sound[pictureinpicture][soundplaying]:not([soundplaying-scheduledremoval]):hover,
+    .tab-icon-sound[pictureinpicture][soundplaying]:hover,
 .tabbrowser-tab .tab-icon-sound[pictureinpicture][muted]:hover {
     opacity: 1 !important;
     background-color: var(--arrowpanel-dimmed) !important;
 }
 
 .tabbrowser-tab:is(:hover, .keyboard-focused-tab)
-    .tab-icon-sound[pictureinpicture][soundplaying]:not([soundplaying-scheduledremoval]) {
+    .tab-icon-sound[pictureinpicture][soundplaying] {
     background-image: url(chrome://userchrome/content/tab-audio-playing.svg) !important;
 }
 
@@ -708,10 +708,7 @@ so in other words it won't show if audio is playing until you hover the general 
     > .tab-icon-sound:not([pictureinpicture], [muted]), */
 #tabbrowser-tabs:not(:hover, :focus-within, :focus)
     .tab-content
-    > .tab-icon-sound:not([soundplaying], [muted], [activemedia-blocked], [pictureinpicture]),
-#tabbrowser-tabs:not(:hover, :focus-within, :focus)
-    .tab-content
-    > .tab-icon-sound[soundplaying-scheduledremoval]:not([muted], [pictureinpicture]) {
+    > .tab-icon-sound:not([soundplaying], [muted], [activemedia-blocked], [pictureinpicture]) {
     opacity: 0 !important;
     pointer-events: none !important;
     transform: translateX(16px) scale(0.5) !important;

@@ -517,7 +517,7 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
 
 .all-tabs-item .all-tabs-secondary-button[toggle-mute] {
     list-style-image: url(chrome://userchrome/content/tab-audio-playing.svg) !important;
-    padding: 2px 2px 2px 1px !important;
+    padding: 2px 2.5px 2px 0.5px !important;
     margin-inline-end: 8.5px !important;
     transform: translateX(14px);
     opacity: 0 !important;
