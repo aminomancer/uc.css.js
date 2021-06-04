@@ -709,6 +709,11 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlis
     input[type="number"]:focus::-moz-number-spin-box {
         border-color: var(--in-content-focus-outline-color) !important;
     }
+
+    #titleText {
+        font-weight: 500 !important;
+        font-size: 13px !important;
+    }
 }
 
 @-moz-document url("chrome://mozapps/content/handling/permissionDialog.xhtml"),
@@ -896,6 +901,7 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlis
     #titleText {
         font-size: 16px !important;
         line-height: 16px !important;
+        font-weight: 500 !important;
     }
 
     #titleContainer {

@@ -265,6 +265,7 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
         :root,
         panel,
         menupopup,
+        popupnotification,
         tooltip,
         panelview {
             font-family: SF Pro Display, SFProUC, Segoe UI, sans-serif !important;
