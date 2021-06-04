@@ -30,7 +30,7 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
 /* dim widgets when window is inactive, like tabs */
 :root:-moz-window-inactive:not([customizing])
     toolbar
-    toolbarbutton
+    toolbarbutton:not(.subviewbutton)
     > :is(image, .toolbarbutton-badge-stack, .toolbarbutton-animatable-box),
 :root:-moz-window-inactive:not([customizing])
     toolbar
@@ -406,6 +406,7 @@ toolbarbutton.bookmark-item:not(.subviewbutton) {
 }
 
 :root:-moz-window-inactive:not([customizing])
+    #PersonalToolbar
     .bookmark-item
     > :is(.toolbarbutton-text, .toolbarbutton-icon) {
     opacity: 0.7;
