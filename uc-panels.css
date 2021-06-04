@@ -1195,7 +1195,7 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
     }
 
     #editBookmarkPanel > .panel-header {
-        padding-block: 6px 3px !important;
+        padding-block: 6px 1px !important;
     }
 
     #identity-popup-securityView .identity-popup-security-content,

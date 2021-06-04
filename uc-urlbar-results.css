@@ -394,11 +394,6 @@
     fill-opacity: 1 !important;
 }
 
-.urlbarView-title,
-.urlbarView-dynamic-calculator-input {
-    min-height: 20px;
-}
-
 .urlbarView-action {
     padding: 0 !important;
     margin-inline: 0 6px !important;

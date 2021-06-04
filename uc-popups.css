@@ -784,13 +784,6 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlis
         background-color: var(--dropdown-bgcolor) !important;
     }
 
-    .expander-up,
-    .expander-down {
-        min-height: 24px !important;
-        min-width: 24px !important;
-        margin-inline-start: 4px !important;
-    }
-
     #editBMPanel_tagsSelector {
         margin-inline: 4px !important;
     }
@@ -798,33 +791,6 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlis
     #editBookmarkPanelRows {
         padding-inline: 0 !important;
         padding-block: 0 8px !important;
-    }
-
-    menulist,
-    input[type="text"] {
-        margin-inline: 4px !important;
-        padding-block: 0 !important;
-        padding-inline: 6px !important;
-        margin-block: 0 !important;
-        min-height: 24px !important;
-        box-sizing: border-box !important;
-        border-radius: var(--toolbarbutton-border-radius) !important;
-    }
-
-    menulist {
-        padding-inline: 4px 2px !important;
-    }
-
-    richlistbox {
-        border-radius: var(--toolbarbutton-border-radius) !important;
-    }
-
-    tree {
-        margin-inline: 4px !important;
-    }
-
-    button {
-        border-radius: var(--toolbarbutton-border-radius) !important;
     }
 
     button,
@@ -850,6 +816,55 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlis
     textarea::selection {
         background-color: var(--ui-selection-bgcolor) !important;
         color: var(--ui-selection-color) !important;
+    }
+
+    menulist,
+    input[type="text"] {
+        margin-inline: 4px !important;
+        padding-block: 0 !important;
+        padding-inline: 6px !important;
+        margin-block: 0 !important;
+        min-height: 25px !important;
+        box-sizing: border-box !important;
+        border-radius: var(--toolbarbutton-border-radius) !important;
+    }
+
+    menulist {
+        padding-inline: 4px 2px !important;
+    }
+
+    richlistbox {
+        border-radius: var(--toolbarbutton-border-radius) !important;
+    }
+
+    tree {
+        margin-inline: 4px !important;
+    }
+
+    button {
+        border-radius: var(--toolbarbutton-border-radius) !important;
+    }
+
+    .expander-up,
+    .expander-down {
+        min-height: 25px !important;
+        min-width: 25px !important;
+        margin-inline-start: 4px !important;
+    }
+
+    :is(.expander-up, .expander-down, .panel-button, button[dlgtype]:not([default])):is(:hover, :focus-visible) {
+        background-color: var(--in-content-button-background-hover) !important;
+        color: var(--in-content-button-text-color-hover) !important;
+        border-color: transparent;
+    }
+
+    button[autofocus]:enabled:is(:hover, :focus-visible), 
+    button[type="submit"]:enabled:is(:hover, :focus-visible),
+    button.primary:enabled:is(:hover, :focus-visible),
+    button[default]:not([disabled="true"]):is(:hover, :focus-visible),
+    button.primary:not([disabled="true"]):is(:hover, :focus-visible) {
+        background-color: var(--in-content-primary-button-background-hover) !important;
+        color: var(--in-content-primary-button-text-color-hover) !important;
     }
 
     input[type="number"] {

@@ -505,12 +505,6 @@ toolbarpaletteitem[removable="false"]
     fill-opacity: 0.4 !important;
 }
 
-#identity-icon-label,
-#identity-box.chromeUI #identity-icon-label {
-    height: var(--urlbar-height);
-    padding-block: 6.6px !important;
-}
-
 #identity-box.notSecureText #identity-icon-label {
     color: var(--warning-color) !important;
 }
@@ -611,6 +605,8 @@ toolbarpaletteitem[removable="false"]
     padding-inline: 0 !important;
     max-width: unset !important;
     border-radius: 0 !important;
+    -moz-box-align: center !important;
+    -moz-box-pack: center !important;
 }
 
 .identity-box-button {

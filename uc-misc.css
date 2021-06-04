@@ -4,6 +4,14 @@ includes status bars, tooltips, confirmation hints and warnings,
 notifications, specific favicons, fixing the white flash when loading pages,
 focus rings, text highlight colors, and compatibility adjustments for minBrowserNavBar.uc.js */
 
+@font-face {
+    font-family: "SFProUC";
+    src: local("SF Pro Display"),
+        url("chrome://userchrome/content/fonts/SF-Pro-Display-Regular.otf") format("opentype");
+    font-weight: 400;
+    font-style: normal;
+}
+
 #statuspanel:is([type="status"], [type="defaultStatus"]) #statuspanel-label {
     opacity: 0 !important;
 }
@@ -249,6 +257,30 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
     ::selection {
         background-color: var(--url-selection-bgcolor) !important;
         color: var(--url-selection-color) !important;
+    }
+}
+
+@supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
+    @-moz-document regexp("^chrome:(?!\/\/devtools).*") {
+        :root,
+        panel,
+        menupopup,
+        tooltip {
+            font-family: SF Pro Display, SFProUC, Segoe UI, sans-serif !important;
+            font-kerning: normal !important;
+        }
+
+        #urlbar {
+            font-weight: 300;
+        }
+
+        :is(#back-button-tooltip, #forward-button-tooltip) .tooltip-label[id]:not(:last-of-type) {
+            padding: 4px 6px 19px 6px !important;
+        }
+
+        :is(#back-button-tooltip, #forward-button-tooltip) .tooltip-label:last-of-type:not([id]) {
+            margin-block-start: -18px !important;
+        }
     }
 }
 

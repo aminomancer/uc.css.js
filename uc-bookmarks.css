@@ -24,6 +24,7 @@
 /* 'add bookmark' popup menu formatting */
 #editBookmarkPanel {
     min-width: 25em !important;
+    --panel-width: 25em !important;
 }
 
 #editBookmarkPanelRows {
@@ -278,12 +279,12 @@
     background-color: hsl(232, 24%, 32%) !important;
 }
 
-#editBookmarkPanel menuseparator {
+#editBookmarkPanel :is(toolbarseparator, menuseparator) {
     display: none !important;
 }
 
 #editBookmarkPanel richlistbox,
-:is(#bookmarkpropertiesdialog, #editBookmarkPanel) richlistitem {
+#editBookmarkPanel richlistitem {
     appearance: none !important;
     -moz-user-select: text !important;
     user-select: text !important;
@@ -291,9 +292,18 @@
     color: #fff !important;
 }
 
+#bookmarkpropertiesdialog #editBMPanel_tagsSelector {
+	padding: revert !important;
+}
+
 :is(#bookmarkpropertiesdialog, #editBookmarkPanel) richlistitem {
     padding-inline-start: 2px !important;
     padding-top: 1px !important;
+}
+
+#bookmarkpropertiesdialog richlistitem {
+    margin-bottom: revert !important;
+    padding-block: 2.5px !important;
 }
 
 :is(#bookmarkpropertiesdialog, #editBookmarkPanel) richlistitem image {
@@ -307,6 +317,10 @@
     opacity: 0.8 !important;
     margin-right: 0 !important;
     list-style-image: url(chrome://userchrome/content/monotone-checkbox.svg);
+}
+
+:is(#bookmarkpropertiesdialog, #editBookmarkPanel) richlistitem label {
+    margin-inline: 6px 5px !important;
 }
 
 :is(#bookmarkpropertiesdialog, #editBookmarkPanel) richlistitem[checked="true"] image {
@@ -367,9 +381,21 @@
     margin: 0 !important;
 }
 
-:is(#bookmarkpropertiesdialog, #editBookmarkPanel)
+#editBookmarkPanel
     richlistitem:is(:hover, [selected="true"], [current="true"]) {
     background-color: hsl(232, 21%, 40%) !important;
+}
+
+richlistbox:not(#categories) > richlistitem[selected] {
+	--in-content-button-background: revert !important;
+	--in-content-button-background-hover: revert !important;
+	--in-content-button-background-active: revert !important;
+	--in-content-button-text-color-hover: revert !important;
+}
+
+#bookmarkpropertiesdialog
+    richlistitem:is(:hover, [selected="true"], [current="true"]) {
+    background-color: var(--in-content-button-background) !important;
 }
 
 #editBookmarkPanelImage,

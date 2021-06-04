@@ -1,3 +1,4 @@
 *.prproj
 /video/
+/resources/fonts/
 boot.jsm
