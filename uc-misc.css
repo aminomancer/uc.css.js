@@ -261,11 +261,12 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
 }
 
 @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
-    @-moz-document regexp("^chrome:(?!\/\/devtools).*") {
+    @-moz-document regexp("^chrome:(?!\/\/(devtools|mozapps|browser\/content\/sanitize)).*") {
         :root,
         panel,
         menupopup,
-        tooltip {
+        tooltip,
+        panelview {
             font-family: SF Pro Display, SFProUC, Segoe UI, sans-serif !important;
             font-kerning: normal !important;
         }
@@ -280,6 +281,25 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
 
         :is(#back-button-tooltip, #forward-button-tooltip) .tooltip-label:last-of-type:not([id]) {
             margin-block-start: -18px !important;
+        }
+
+        #urlbar .urlbarView-row[has-action] .urlbarView-title[isurl] strong,
+        #urlbar .urlbarView-row[has-url] .urlbarView-title strong,
+        #urlbar .urlbarView-row[has-action] .urlbarView-title strong,
+        #urlbar .urlbarView-row[has-action] .urlbarView-title[isurl],
+        #urlbar .urlbarView-row[has-url] .urlbarView-title,
+        #urlbar .urlbarView-dynamic-calculator-input {
+            font-weight: 400 !important;
+        }
+
+        #fxa-menu-header-description {
+            color: var(--panel-description-color);
+            font-weight: inherit !important;
+        }
+
+        panel #appMenu-multiView .panel-header > h1,
+        panel .panel-banner-item {
+            font-weight: 500 !important;
         }
     }
 }

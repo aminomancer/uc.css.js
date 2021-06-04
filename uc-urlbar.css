@@ -945,6 +945,10 @@ use 0.6 instead of 1 since 1 will end up being shown as like 1.4px for some wind
     background-color: var(--arrowpanel-dimmed-further) !important;
 }
 
+#identity-icon-label {
+    font-weight: 400;
+}
+
 #urlbar-label-box .urlbar-label,
 #urlbar-search-mode-indicator-title,
 #urlbar-label-switchtab {
@@ -952,6 +956,7 @@ use 0.6 instead of 1 since 1 will end up being shown as like 1.4px for some wind
     opacity: 0.6 !important;
     padding-inline: 0px !important;
     font-size: 14px !important;
+    font-weight: 400;
 }
 
 /* shorten "Switch to tab:" urlbar indicator to "Tabs" */
@@ -960,6 +965,7 @@ use 0.6 instead of 1 since 1 will end up being shown as like 1.4px for some wind
     display: -moz-inline-box;
     color: var(--lwt-toolbar-field-color, hsl(0, 0%, 0%));
     opacity: 0.6;
+    font-weight: 400;
 }
 
 #urlbar-label-switchtab {

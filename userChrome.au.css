@@ -158,13 +158,98 @@ menupopup::part(arrowscrollbox),
     border-radius: var(--webextension-panel-border-radius, 5px) !important;
 }
 
+#customization-panelWrapper {
+    margin-top: -12px;
+    min-width: 29em;
+}
+
+#customization-container,
+#customization-container menupopup::part(arrowscrollbox) {
+    --button-bgcolor: color-mix(in srgb, var(--toolbar-color) 7%, transparent);
+    --button-hover-bgcolor: color-mix(in srgb, var(--toolbar-color) 12%, transparent);
+    --button-active-bgcolor: color-mix(in srgb, var(--toolbar-color) 15%, transparent);
+    --arrowpanel-dimmed: color-mix(in srgb, var(--toolbar-color) 7%, transparent);
+    --arrowpanel-dimmed-further: color-mix(in srgb, var(--toolbar-color) 12%, transparent);
+    --arrowpanel-dimmed-even-further: color-mix(in srgb, var(--toolbar-color) 15%, transparent);
+    --menu-background-color: var(--in-content-button-highlight-dark) !important;
+    --uc-checkbox-unchecked-bgcolor: color-mix(in srgb, var(--toolbar-color) 7%, transparent);
+    --uc-checkbox-unchecked-hover-bgcolor: color-mix(in srgb, var(--toolbar-color) 12%, transparent);
+    --uc-checkbox-unchecked-active-bgcolor: color-mix(in srgb, var(--toolbar-color) 15%, transparent);
+    --urlbar-input-bgcolor: color-mix(in srgb, currentColor 4%, var(--in-content-button-highlight-dark));
+}
+
+#customization-container panel::part(content),
+#customization-panelWrapper > .panel-arrowcontent {
+    border-radius: var(--arrowpanel-border-radius, 0);
+    border: none;
+    box-shadow: var(--panel-shadow);
+    margin-top: 12px;
+    z-index: 250;
+    position: absolute;
+	background-color: var(--in-content-button-highlight-dark);
+}
+
+#customization-panelWrapper > .panel-arrowbox {
+    z-index: 250 !important;
+    position: absolute;
+}
+
+#customization-container panel::part(arrow),
+#customization-panelWrapper > .panel-arrowbox > .panel-arrow[side="top"] {
+	stroke: var(--in-content-button-highlight-dark);
+	fill: var(--in-content-button-highlight-dark);
+}
+
+#customization-container {
+	background-color: var(--in-content-bg-dark);
+	background-image: none;
+}
+
+#customization-footer {
+	border: none;
+	background-color: var(--in-content-box-bg-dark);
+}
+
+.customizationmode-button {
+	border: 1px solid var(--in-content-border-color-dim);
+	border-radius: var(--in-content-button-border-radius);
+	background-color: var(--button-hover-bgcolor);
+	appearance: none;
+}
+
+.customizationmode-button:is(:active, :focus-visible, :hover):not([disabled]),
+.customizationmode-button[open],
+.customizationmode-button[checked] {
+	background-color: var(--button-active-bgcolor);
+}
+
+.customizationmode-checkbox:not(:-moz-lwtheme, [disabled]),
+.customizationmode-button {
+	color: var(--toolbar-color);
+}
+
+#customization-done-button {
+	font-weight: 500;
+	border-color: transparent;
+	background-color: var(--in-content-primary-button-background);
+}
+
+#customization-done-button:is(:active, :focus-visible, :hover):not([disabled]) {
+	background-color: var(--in-content-primary-button-background-hover);
+}
+
+.customization-lwtheme-menu-footeritem {
+	font-weight: 500;
+}
+
 @-moz-document url(chrome://browser/content/browser.xhtml)
 {
     :is(panel, menupopup)::part(arrow) {
         display: -moz-inline-box;
     }
 
-    :is(panel, menupopup)[side="top"]::part(arrow) {
+    :is(panel, menupopup)[side="top"]::part(arrow),
+    #customization-panelWrapper > .panel-arrowbox > .panel-arrow[side="top"] {
         margin-bottom: -4px;
     }
 

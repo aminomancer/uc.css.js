@@ -952,6 +952,15 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlis
     }
 }
 
+@-moz-document url-prefix("chrome://browser/content/sanitize.xhtml") {
+    #sanitizeEverythingWarningBox {
+        background-color: Window !important;
+        border: 1px solid ThreeDDarkShadow !important;
+        border-radius: 5px;
+        padding: 16px;
+    }
+}
+
 /* page info popup. kinda lame */
 /* @-moz-document url(chrome://browser/content/pageinfo/pageInfo.xhtml){
     #main-window,

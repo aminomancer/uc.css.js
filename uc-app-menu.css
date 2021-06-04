@@ -578,16 +578,17 @@
 
     #appMenu-fxa-status2 > #appMenu-fxa-label2 {
         padding-block: calc(var(--arrowpanel-menuitem-padding) + 2px) !important;
-        font-weight: unset !important;
+        font-weight: inherit !important;
     }
 
     #appMenu-fxa-status2 > #appMenu-fxa-label2 label {
-        font-weight: unset !important;
+        font-weight: inherit !important;
     }
 
     .panel-banner-item {
         padding: calc(var(--arrowpanel-menuitem-padding) + 2px) var(--arrowpanel-menuitem-padding) !important;
         margin: var(--arrowpanel-menuitem-margin) !important;
+        font-weight: inherit !important;
     }
 
     #appMenu-proton-update-banner {
