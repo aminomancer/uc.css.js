@@ -770,8 +770,13 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
     margin-block: 0 4px !important;
 }
 
+#downloadsPanel-mainView {
+    width: revert !important;
+}
+
 #downloadsListBox {
     margin: 0 !important;
+    width: revert !important;
 }
 
 #emptyDownloads {
@@ -780,34 +785,47 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
 }
 
 #downloadsPanel-mainView {
-    width: unset !important;
-    min-width: 200px !important;
     padding: 0 !important;
 }
 
-#downloadsFooterButtons {
+#downloadsFooterButtons:not([hidden]) {
+    display: flex !important;
+    flex-flow: row nowrap;
     margin: 0 !important;
-    border: none !important;
+    padding: var(--arrowpanel-menuitem-inline-margin) !important;
+    border-top: 1px solid var(--panel-separator-color) !important;
+    gap: var(--arrowpanel-menuitem-inline-margin) !important;
+    --button-hover-bgcolor: var(--arrowpanel-dimmed);
+    --button-active-bgcolor: var(--arrowpanel-dimmed-further);
 }
 
 #downloadsFooterButtons > button {
-    padding-inline: 16px !important;
-    padding-block: 10px 11px !important;
-    border-radius: 0 !important;
-    border-top: 1px solid var(--panel-separator-color) !important;
-    margin-top: 0 !important;
+    border-radius: var(--arrowpanel-menuitem-border-radius) !important;
+    margin: 0 !important;
+    flex-grow: 1;
+    padding: 6px 12px !important;
+    -moz-context-properties: fill, fill-opacity;
+    fill: currentColor;
 }
 
-#downloadsFooterButtons > button:hover,
-#downloadsPanel[hasdownloads="true"] #downloadsFooterButtons > button:focus-visible {
-    background-color: transparent !important;
-    background-image: var(--download-button-hover-bg) !important;
+#downloadsFooterButtons > button > .button-box {
+    display: flex !important;
+    flex-flow: row nowrap;
+    align-items: center;
 }
 
-#downloadsPanel:not([hasdownloads="true"])
-    #downloadsFooterButtons
-    > button:focus-visible:not(:hover) {
-    background-color: transparent !important;
+#downloadsFooterButtons > button .button-icon {
+    margin-inline: 0 6px;
+    width: 16px;
+    height: 16px;
+}
+
+#downloadsHistory {
+    list-style-image: url(chrome://userchrome/content/skin/sort.svg);
+}
+
+#clearDownloadsPanel {
+    list-style-image: url(chrome://userchrome/content/delete.svg);
 }
 
 #downloadsListBox > .download-state > toolbarseparator {
@@ -831,10 +849,6 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
 
 .downloadsPanelFooterButton:hover {
     outline: none !important;
-}
-
-#downloadsHistory {
-    margin-top: 0 !important;
 }
 
 #downloadsListBox > richlistitem[state="1"][exists] .downloadMainArea:hover,

@@ -877,6 +877,56 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlis
     input[type="number"]:focus::-moz-number-spin-box {
         border-color: var(--in-content-focus-outline-color) !important;
     }
+
+    #titleText {
+        font-size: 16px !important;
+        line-height: 16px !important;
+    }
+
+    #titleContainer {
+        align-items: center !important;
+        justify-content: center !important;
+        margin: 0 !important;
+    }
+
+    #titleContainer:not([noicon]) > #titleCropper {
+        translate: none !important;
+    }
+
+    #handling > #description {
+        font-size: 1.15em !important;
+        font-weight: 600 !important;
+    }
+
+    #chooser {
+        margin-bottom: 10px !important;
+    }
+
+    #remember-text {
+        margin-top: 4px !important;
+        color: var(--in-content-deemphasized-text);
+        margin-left: 24px !important;
+    }
+
+    #rememberContainer > .toggle-container-with-text {
+        color: inherit !important;
+    }
+
+    @-moz-document url("chrome://mozapps/content/handling/permissionDialog.xhtml") {
+        dialog > #description,
+        dialog > #description-box > #description {
+            font-size: 1.15em !important;
+            font-weight: 600 !important;
+        }
+
+        #description-box {
+            margin-bottom: 10px !important;
+        }
+
+        #description:not([hidden], :empty) ~ #description-extra {
+            margin-top: -10px !important;
+        }
+    }
 }
 
 @-moz-document url-prefix("chrome://global/content/print.html")

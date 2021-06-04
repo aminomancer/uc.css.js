@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Clear Downloads Panel Button
-// @version        1.0
+// @version        1.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Place a "Clear Downloads" button in the downloads panel, right next to the "Show all downloads" button.
@@ -42,6 +42,7 @@
             }))
                 this.clearPanelButton.setAttribute(key, val);
             DownloadsView.downloadsHistory.after(this.clearPanelButton);
+            this.clearPanelButton.hidden = !DownloadsView._visibleViewItems?.size > 0;
         }
         sentenceCase(str) {
             return str
