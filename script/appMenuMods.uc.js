@@ -25,9 +25,8 @@
         async handleEvent(_e) {
             await this.generateStrings();
             await AppMenuMods.sleep(1);
-            document.getElementById(
-                gProton ? "appMenu-extensions-themes-button" : "appMenu-addons-button"
-            ).label = await this.addonStrings.formatValue(["addon-category-extension"]);
+            document.getElementById("appMenu-extensions-themes-button").label =
+                await this.addonStrings.formatValue(["addon-category-extension"]);
         }
         addSeparatorToAccountPanel() {
             this.manageAccountSeparator =

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Clear Downloads Panel Button
-// @version        1.1
+// @version        1.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Place a "Clear Downloads" button in the downloads panel, right next to the "Show all downloads" button.
@@ -29,7 +29,6 @@
             let labelString = config["Label in sentence case"]
                 ? this.sentenceCase(strings[0])
                 : strings[0];
-            console.log(strings);
             for (const [key, val] of Object.entries({
                 id: "clearDownloadsPanel",
                 class: "downloadsPanelFooterButton",

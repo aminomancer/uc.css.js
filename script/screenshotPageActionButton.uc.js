@@ -134,6 +134,7 @@
             const titleString = await BrowserPageActions.screenshot.getString();
             const key = keyset.firstChild;
             const shortcut = !!key ? ` (${ShortcutUtils.prettifyShortcut(key)})` : "";
+            if (!BrowserPageActions.screenshot.action) return;
             BrowserPageActions.screenshot.action.setTooltip(titleString + shortcut, window);
             BrowserPageActions.screenshot.stringIsDone = !!shortcut;
             if (shortcut) this.disconnect(), delete BrowserPageActions.screenshot.muObserver;

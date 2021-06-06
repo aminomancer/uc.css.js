@@ -564,8 +564,7 @@ when the tab bar is not overflowing, new tabs slide into place much more smoothl
     opacity: 0.5 !important;
 }
 
-.tabbrowser-tab:is(:hover, .keyboard-focused-tab)
-    .tab-icon-sound[pictureinpicture][soundplaying],
+.tabbrowser-tab:is(:hover, .keyboard-focused-tab) .tab-icon-sound[pictureinpicture][soundplaying],
 .tabbrowser-tab .tab-icon-sound[pictureinpicture][muted] {
     background-size: 12px !important;
     background-position: 1.2px center !important;
@@ -574,15 +573,13 @@ when the tab bar is not overflowing, new tabs slide into place much more smoothl
     border-radius: 50% !important;
 }
 
-.tabbrowser-tab
-    .tab-icon-sound[pictureinpicture][soundplaying]:hover,
+.tabbrowser-tab .tab-icon-sound[pictureinpicture][soundplaying]:hover,
 .tabbrowser-tab .tab-icon-sound[pictureinpicture][muted]:hover {
     opacity: 1 !important;
     background-color: var(--arrowpanel-dimmed) !important;
 }
 
-.tabbrowser-tab:is(:hover, .keyboard-focused-tab)
-    .tab-icon-sound[pictureinpicture][soundplaying] {
+.tabbrowser-tab:is(:hover, .keyboard-focused-tab) .tab-icon-sound[pictureinpicture][soundplaying] {
     background-image: url(chrome://userchrome/content/tab-audio-playing.svg) !important;
 }
 
@@ -796,47 +793,40 @@ so in other words it won't show if audio is playing until you hover the general 
     }
 }
 
-@media (-moz-proton) {
-    .tabbrowser-tab {
-        --tab-label-mask-size: 2em !important;
-    }
+.tabbrowser-tab {
+    --tab-label-mask-size: 2em !important;
+}
 
-    .tab-icon-sound-label,
-    .tab-label-container.proton > .tab-icon-sound {
-        display: none !important;
-    }
+.tab-icon-sound-label {
+    display: none !important;
+}
 
-    .tab-secondary-label {
-        display: none !important;
-    }
+.tab-secondary-label {
+    display: none !important;
+}
 
-    /* .tab-label-container.proton {
-        -moz-box-orient: horizontal !important;
-    } */
+.tab-background,
+.tabbrowser-tab:not([pinned]) {
+    min-height: 0 !important;
+    margin: 0 !important;
+}
 
-    .tab-background,
-    .tabbrowser-tab:not([pinned]) {
-        min-height: 0 !important;
-        margin: 0 !important;
-    }
+#TabsToolbar .toolbarbutton-1 > :is(.toolbarbutton-icon, .toolbarbutton-badge-stack) {
+    min-height: 16px !important;
+    padding-block: 6px !important;
+    border-radius: var(--toolbarbutton-border-radius) !important;
+}
 
-    #TabsToolbar .toolbarbutton-1 > :is(.toolbarbutton-icon, .toolbarbutton-badge-stack) {
-        min-height: 16px !important;
-        padding-block: 6px !important;
-        border-radius: var(--toolbarbutton-border-radius) !important;
-    }
+#TabsToolbar
+    .toolbarbutton-1
+    > :is(.toolbarbutton-icon, .toolbarbutton-text .toolbarbutton-badge-stack) {
+    border-radius: var(--toolbarbutton-border-radius) !important;
+}
 
-    #TabsToolbar
-        .toolbarbutton-1
-        > :is(.toolbarbutton-icon, .toolbarbutton-text .toolbarbutton-badge-stack) {
-        border-radius: var(--toolbarbutton-border-radius) !important;
-    }
+.tab-icon-sound {
+    display: -moz-box !important;
+}
 
-    .tab-label-container:not(.proton) + .tab-icon-sound {
-        display: -moz-box !important;
-    }
-
-    .tabbrowser-tab[pinned]:not([last-visible-tab]) .tab-icon-sound {
-        display: none !important;
-    }
+.tabbrowser-tab[pinned]:not([last-visible-tab]) .tab-icon-sound {
+    display: none !important;
 }

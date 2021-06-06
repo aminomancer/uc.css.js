@@ -28,7 +28,8 @@ menupopup {
     --lwt-background-alignment: top !important;
     --lwt-background-tiling: repeat !important;
     --arrowpanel-background: hsl(233, 36%, 11%) !important;
-    --panel-shadow: 0 0 4px 0 hsla(0, 0%, 0%, 0.4) !important;
+    --menupopup-shadow: none !important;
+    --panel-shadow: none !important;
     --arrowpanel-color: var(--lwt-text-color) !important;
     --arrowpanel-darker: var(--uc-arrowpanel-darker) !important;
     --arrowpanel-faint: var(--uc-arrowpanel-faint);
@@ -110,25 +111,57 @@ menupopup {
     --context-margin-inline: -14px 0px;
     --context-padding-inline: 27px 0px;
     --menu-color: var(--ui-text-80) !important;
-    --menupopup-background: var(--arrowpanel-background);
+    --menupopup-background: transparent;
     --menu-background-color: var(--arrowpanel-background) !important;
     --menupopup-margin: 0px;
-    --menupopup-child-margin-block-start: 0px;
+    --menupopup-child-margin-block-start: -4px;
     --menupopup-child-margin-inline-start: 0px;
     --menupopup-padding: 0px;
-    --menupopup-inner-padding: 0px;
+    --menupopup-inner-padding-magnitude: 4px;
+    --menupopup-inner-padding: var(--menupopup-inner-padding-magnitude) 0;
     --context-checkbox-margin: 6px 7px;
     --context-iconic-margin: 5px 6px;
     --context-iconic-special-margin: 4px -2px;
-    --menupopup-border-radius: 3px;
-    --context-menuitem-border-radius: 0px;
-    --menu-right-bg: url(chrome://userchrome/content/old-menu-right.svg);
-    --menu-right-img: none;
-    --menu-right-margin: 2px;
-    --menu-right-size: 12px;
+    --menupopup-border-radius: 5px !important;
+    --context-menuitem-border-radius: var(--arrowpanel-menuitem-border-radius);
+    --menu-right-bg: none;
+    --menu-right-img: url(chrome://userchrome/content/menu-arrow.svg);
+    --menu-right-margin: 4px;
+    --menu-right-size: 14px;
     --buttons-secondary-hover-bgcolor: var(--arrowpanel-dimmed) !important;
     --buttons-secondary-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
     --vpn-on-icon: url(chrome://userchrome/content/skin/vpn-on-light.svg);
+    --panelview-toolbarbutton-hover-bgcolor: var(--arrowpanel-dimmed) !important;
+    --panelview-toolbarbutton-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
+    --panelview-toolbarbutton-focus-box-shadow: none !important;
+    --panel-banner-item-color: HSL(240, 9.1%, 97.8%);
+    --panel-banner-item-background-color: hsla(109.9, 90.9%, 47.3%, 0.1);
+    --panel-banner-item-hover-bgcolor: hsla(109.9, 90.9%, 47.3%, 0.15);
+    --panel-banner-item-active-bgcolor: hsla(109.9, 90.9%, 47.3%, 0.2);
+    --arrowpanel-menuitem-inline-margin: 4px;
+    --arrowpanel-menuitem-margin: 0px var(--arrowpanel-menuitem-inline-margin) !important;
+    --arrowpanel-menuitem-padding: 6px !important;
+    --arrowpanel-padding: 12px !important;
+    --panel-subview-body-padding-magnitude: var(--arrowpanel-menuitem-inline-margin);
+    --panel-subview-body-padding: var(--panel-subview-body-padding-magnitude) 0 !important;
+    --arrowpanel-menuitem-border-radius: 3px !important;
+    --arrowpanel-border-radius: var(--menupopup-border-radius) !important;
+    --proton-tab-radius: 0px !important;
+    --proton-tab-block-margin: 0px !important;
+    --panel-description-color: hsl(235, 48%, 89%, 70%) !important;
+    --panel-shortcut-color: hsl(235, 27%, 73%, 70%) !important;
+    --panel-shortcut-focus: hsl(235, 32%, 75%, 90%) !important;
+    --error-text-color: var(--warning-color) !important;
+    --proton-tab-inline-padding: 0px !important;
+    --tab-shadow-max-size: 0px !important;
+    --buttons-primary-button-bgcolor: var(--in-parent-primary-button-background) !important;
+    --buttons-primary-button-hover-bgcolor: var(
+        --in-parent-primary-button-background-hover
+    ) !important;
+    --buttons-primary-button-active-bgcolor: var(
+        --in-parent-primary-button-background-active
+    ) !important;
+    --buttons-primary-button-color: var(--in-parent-primary-button-text-color) !important;
 }
 
 :root[lwthemetextcolor="bright"] {
@@ -173,81 +206,28 @@ toolbar {
     --toolbarbutton-active-background: hsla(236, 82%, 83%, 0.1) !important;
 }
 
-@media (-moz-proton) {
-    :root,
-    menupopup {
-        --panelview-toolbarbutton-hover-bgcolor: var(--arrowpanel-dimmed) !important;
-        --panelview-toolbarbutton-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
-        --panelview-toolbarbutton-focus-box-shadow: none !important;
-        --panel-banner-item-color: HSL(240, 9.1%, 97.8%);
-        --panel-banner-item-background-color: hsla(109.9, 90.9%, 47.3%, 0.1);
-        --panel-banner-item-hover-bgcolor: hsla(109.9, 90.9%, 47.3%, 0.15);
-        --panel-banner-item-active-bgcolor: hsla(109.9, 90.9%, 47.3%, 0.2);
-        --arrowpanel-menuitem-inline-margin: 4px;
-        --arrowpanel-menuitem-margin: 0px var(--arrowpanel-menuitem-inline-margin) !important;
-        --arrowpanel-menuitem-padding: 6px !important;
-        --arrowpanel-padding: 12px !important;
-        --panel-subview-body-padding-magnitude: var(--arrowpanel-menuitem-inline-margin);
-        --panel-subview-body-padding: var(--panel-subview-body-padding-magnitude) 0 !important;
-        --arrowpanel-menuitem-border-radius: 3px !important;
-        --arrowpanel-border-radius: var(--menupopup-border-radius) !important;
-        --proton-tab-radius: 0px !important;
-        --proton-tab-block-margin: 0px !important;
-        --panel-description-color: hsl(235, 48%, 89%, 70%) !important;
-        --panel-shortcut-color: hsl(235, 27%, 73%, 70%) !important;
-        --panel-shortcut-focus: hsl(235, 32%, 75%, 90%) !important;
-        --error-text-color: var(--warning-color) !important;
-        --proton-tab-inline-padding: 0px !important;
-        --tab-shadow-max-size: 0px !important;
-        --buttons-primary-button-bgcolor: var(--in-parent-primary-button-background) !important;
-        --buttons-primary-button-hover-bgcolor: var(
-            --in-parent-primary-button-background-hover
-        ) !important;
-        --buttons-primary-button-active-bgcolor: var(
-            --in-parent-primary-button-background-active
-        ) !important;
-        --buttons-primary-button-color: var(--in-parent-primary-button-text-color) !important;
-    }
+:root,
+menupopup,
+#TabsToolbar {
+    --toolbarbutton-inner-padding: 6px !important;
+}
 
-    :root,
-    menupopup,
-    #TabsToolbar {
-        --toolbarbutton-inner-padding: 6px !important;
-    }
+#urlbar-container,
+#urlbar {
+    --urlbar-toolbar-height: var(--user-urlbar-container-height) !important;
+    --urlbar-container-height: var(--user-urlbar-container-height) !important;
+}
 
-    #urlbar-container,
-    #urlbar {
-        --urlbar-toolbar-height: var(--user-urlbar-container-height) !important;
-        --urlbar-container-height: var(--user-urlbar-container-height) !important;
-    }
-
-    #appMenu-multiView {
-        --arrowpanel-menuitem-inline-margin: 4px;
-        --arrowpanel-menuitem-margin: 0px var(--arrowpanel-menuitem-inline-margin) !important;
-        --arrowpanel-menuitem-padding: 8px !important;
-        --panel-subview-body-padding-magnitude: var(--arrowpanel-menuitem-inline-margin);
-        --panel-subview-body-padding: var(--panel-subview-body-padding-magnitude) 0 !important;
-    }
+#appMenu-multiView {
+    --arrowpanel-menuitem-inline-margin: 4px;
+    --arrowpanel-menuitem-margin: 0px var(--arrowpanel-menuitem-inline-margin) !important;
+    --arrowpanel-menuitem-padding: 8px !important;
+    --panel-subview-body-padding-magnitude: var(--arrowpanel-menuitem-inline-margin);
+    --panel-subview-body-padding: var(--panel-subview-body-padding-magnitude) 0 !important;
 }
 
 @media (-moz-proton-contextmenus) {
     :root,
     menupopup {
-        --menupopup-background: transparent;
-        --menu-background-color: var(--arrowpanel-background) !important;
-        --menupopup-margin: 0px;
-        --menupopup-child-margin-block-start: -4px;
-        --menupopup-child-margin-inline-start: 0px;
-        --menupopup-padding: 0px;
-        --menupopup-inner-padding-magnitude: 4px;
-        --menupopup-inner-padding: var(--menupopup-inner-padding-magnitude) 0;
-        --menupopup-shadow: none !important;
-        --menupopup-border-radius: 5px !important;
-        --context-menuitem-border-radius: var(--arrowpanel-menuitem-border-radius);
-        --menu-right-bg: none;
-        --menu-right-img: url(chrome://userchrome/content/menu-arrow.svg);
-        --menu-right-margin: 4px;
-        --menu-right-size: 14px;
-        --panel-shadow: none !important;
     }
 }

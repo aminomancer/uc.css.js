@@ -1,13 +1,5 @@
 @import url(uc-globals.css);
 
-@font-face {
-    font-family: "SFProUC";
-    src: local("SF Pro Display"),
-        url("chrome://userchrome/content/fonts/SF-Pro-Display-Regular.otf") format("opentype");
-    font-weight: 400;
-    font-style: normal;
-}
-
 @media (prefers-color-scheme: dark) {
     ::selection {
         background-color: var(--global-selection-bgcolor) !important;
@@ -242,12 +234,14 @@
 menupopup.in-menulist {
     --panel-font-size: 1em !important;
     --menupopup-border-radius: 3px;
-    --context-menuitem-border-radius: 0px;
+    --arrowpanel-menuitem-border-radius: 3px !important;
+    --context-menuitem-border-radius: var(--arrowpanel-menuitem-border-radius);
     --menupopup-margin: 0px;
-    --menupopup-child-margin-block-start: 0px;
+    --menupopup-child-margin-block-start: -4px;
     --menupopup-child-margin-inline-start: 0px;
     --menupopup-padding: 0px;
-    --menupopup-inner-padding: 0px;
+    --menupopup-inner-padding-magnitude: 4px;
+    --menupopup-inner-padding: var(--menupopup-inner-padding-magnitude) 0;
     --context-padding-inline-magnitude: 27px;
     --context-padding-inline: var(--context-padding-inline-magnitude) 0px;
     --context-checkbox-margin: 6px 7px;
@@ -255,18 +249,19 @@ menupopup.in-menulist {
     --context-iconic-special-margin: 4px -2px;
     --arrowpanel-background: hsl(233, 36%, 11%);
     --menu-color: var(--ui-text-80) !important;
-    --menupopup-background: var(--arrowpanel-background);
+    --menupopup-background: transparent;
     --menu-background-color: var(--arrowpanel-background) !important;
-    --menu-right-bg: url(chrome://userchrome/content/old-menu-right.svg);
-    --menu-right-img: none;
-    --menu-right-margin: 2px;
-    --menu-right-size: 12px;
+    --menu-right-bg: none;
+    --menu-right-img: url(chrome://userchrome/content/menu-arrow.svg);
+    --menu-right-margin: 4px;
+    --menu-right-size: 14px;
     --arrowpanel-dimmed: hsla(236, 100%, 83%, 0.17) !important;
     --arrowpanel-dimmed-further: hsla(236, 100%, 83%, 0.25) !important;
     --arrowpanel-dimmed-even-further: hsla(236, 100%, 85%, 0.3) !important;
     --panel-disabled-color: var(--context-menu-disabled-color) !important;
     --button-hover-bgcolor: var(--arrowpanel-dimmed) !important;
     --button-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
+    --menupopup-shadow: none !important;
 }
 
 #ContentSelectDropdown > menupopup > :where(menucaption, menuitem) > .menu-iconic-text,
@@ -341,6 +336,8 @@ menupopup.in-menulist {
     color: var(--ui-text-80) !important;
     background-image: unset !important;
     --menu-background-color: var(--ui-secondary-bg) !important;
+    padding: var(--menupopup-padding) !important;
+    border-color: transparent !important;
 }
 
 #ContentSelectDropdown > menupopup .contentSelectDropdown-searchbox,
@@ -544,150 +541,84 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
     display: none;
 }
 
-@media (-moz-proton-contextmenus) {
-    #ContentSelectDropdown,
-    menupopup.in-menulist {
-        --menupopup-child-margin-block-start: -4px;
-        --menupopup-child-margin-inline-start: 0px;
-        --arrowpanel-menuitem-border-radius: 3px !important;
-        --menupopup-border-radius: 3px !important;
-        --context-menuitem-border-radius: var(--arrowpanel-menuitem-border-radius);
-        --menupopup-inner-padding-magnitude: 4px;
-        --menupopup-inner-padding: var(--menupopup-inner-padding-magnitude) 0;
-        --menu-color: var(--ui-text-80) !important;
-        --menupopup-background: transparent;
-        --menu-background-color: var(--arrowpanel-background) !important;
-        --menu-right-bg: none;
-        --menu-right-img: url(chrome://userchrome/content/menu-arrow.svg);
-        --menu-right-margin: 4px;
-        --menu-right-size: 14px;
-        --menupopup-shadow: none !important;
-    }
-
-    #ContentSelectDropdown > menupopup,
-    menupopup.in-menulist {
-        padding: var(--menupopup-padding) !important;
-        background-color: transparent !important;
-        border-color: transparent !important;
-    }
-
-    #ContentSelectDropdown > menupopup menu > menupopup,
-    menupopup.in-menulist menu > menupopup {
-        margin-inline-start: var(--menupopup-child-margin-inline-start) !important;
-    }
-
-    #ContentSelectDropdown
-        > menupopup
-        > :is(menuitem, menu, menucaption, menugroup, menuseparator, search-textbox),
-    menupopup.in-menulist
-        > :is(menuitem, menu, menucaption, menugroup, menuseparator, search-textbox),
-    #PopupAutoComplete > richlistbox > richlistitem {
-        margin-inline: var(--menupopup-inner-padding-magnitude);
-    }
-
-    #ContentSelectDropdown > menupopup .menu-text,
-    menupopup.in-menulist .menu-text {
-        padding-inline: 8px !important;
-    }
-
-    link[href="chrome://global/skin/global.css"] ~ .menupopup-arrowscrollbox
-    {
-        background-color: var(--menu-background-color) !important;
-        color: var(--menu-color) !important;
-        border: none !important;
-        border-radius: var(--menupopup-border-radius) !important;
-        box-shadow: var(--menupopup-shadow) !important;
-    }
-
-    #ContentSelectDropdown > menupopup :is(.menu-accel, .menu-iconic-accel)[value],
-    menupopup.in-menulist :is(.menu-accel, .menu-iconic-accel)[value] {
-        margin-inline: 1.55em calc(var(--menu-right-margin) + 4px) !important;
-        padding-block: 0 !important;
-    }
-
-    #ContentSelectDropdown
-        > menupopup
-        menuitem:not([disabled="true"])
-        :is(.menu-accel, .menu-iconic-accel),
-    menupopup.in-menulist menuitem:not([disabled="true"]) :is(.menu-accel, .menu-iconic-accel) {
-        color: var(--panel-shortcut-color);
-    }
-
-    #ContentSelectDropdown
-        > menupopup
-        menuitem[disabled="true"]
-        :is(.menu-accel, .menu-iconic-accel),
-    menupopup.in-menulist menuitem[disabled="true"] :is(.menu-accel, .menu-iconic-accel) {
-        opacity: 0.6;
-    }
-
-    #ContentSelectDropdown > menupopup menuseparator,
-    menupopup.in-menulist menuseparator {
-        border-image: linear-gradient(
-            to right,
-            transparent 1%,
-            var(--menu-separator-color) 50%,
-            transparent 99%
-        ) !important;
-        border-image-slice: 1 !important;
-        border-top-width: 1px !important;
-        border-top-style: solid !important;
-        padding: 0 !important;
-        margin-inline: var(--menupopup-inner-padding-magnitude) !important;
-    }
-
-    #ContentSelectDropdown
-        > menupopup
-        menuseparator[id]:not(#context-sep-open, #context-media-sep-commands, #context-sep-copylink, #spell-suggestions-separator, #context-sep-selectall) {
-        display: none !important;
-    }
-
-    #ContentSelectDropdown > menupopup menuseparator:not([id]),
-    menupopup.in-menulist menuseparator:not([id]) {
-        display: -moz-box !important;
-    }
-
-    #ContentSelectDropdown
-        > menupopup[menu-api]
-        menuitem:is([type="checkbox"], [type="radio"])
-        .menu-iconic-left,
-    menupopup.in-menulist[menu-api]
-        menuitem:is([type="checkbox"], [type="radio"])
-        .menu-iconic-left {
-        display: none !important;
-    }
-
-    #ContentSelectDropdown > menupopup menuseparator:last-child,
-    menupopup.in-menulist menuseparator:last-child {
-        display: none;
-    }
+#ContentSelectDropdown
+    > menupopup[menu-api]
+    menuitem:is([type="checkbox"], [type="radio"])
+    .menu-iconic-left,
+menupopup.in-menulist[menu-api] menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-left {
+    display: none !important;
 }
 
-/* proton disabled */
-@media not (-moz-proton-contextmenus) {
-    #ContentSelectDropdown > menupopup menuseparator,
-    menupopup.in-menulist menuseparator {
-        visibility: hidden !important;
-        display: none !important;
-    }
+#ContentSelectDropdown
+    > menupopup
+    > :is(menuitem, menu, menucaption, menugroup, menuseparator, search-textbox),
+menupopup.in-menulist > :is(menuitem, menu, menucaption, menugroup, menuseparator, search-textbox),
+#PopupAutoComplete > richlistbox > richlistitem {
+    margin-inline: var(--menupopup-inner-padding-magnitude);
+}
 
-    #ContentSelectDropdown
-        > menupopup
-        menuseparator:not(:first-of-type):not([hidden="true"])
-        + :is(menu, menuitem),
-    menupopup.in-menulist
-        menuseparator:not(:first-of-type):not([hidden="true"])
-        + :is(menu, menuitem) {
-        border-image: linear-gradient(
-            to right,
-            transparent 1%,
-            var(--menu-separator-color) 50%,
-            transparent 99%
-        ) !important;
-        border-image-slice: 1 !important;
-        border-top-width: 1px !important;
-        border-top-style: solid !important;
-    }
+#ContentSelectDropdown > menupopup .menu-text,
+menupopup.in-menulist .menu-text {
+    padding-inline: 8px !important;
+}
+
+link[href="chrome://global/skin/global.css"] ~ .menupopup-arrowscrollbox
+{
+    background-color: var(--menu-background-color) !important;
+    color: var(--menu-color) !important;
+    border: none !important;
+    border-radius: var(--menupopup-border-radius) !important;
+    box-shadow: var(--menupopup-shadow) !important;
+}
+
+#ContentSelectDropdown > menupopup :is(.menu-accel, .menu-iconic-accel)[value],
+menupopup.in-menulist :is(.menu-accel, .menu-iconic-accel)[value] {
+    margin-inline: 1.55em calc(var(--menu-right-margin) + 4px) !important;
+    padding-block: 0 !important;
+}
+
+#ContentSelectDropdown
+    > menupopup
+    menuitem:not([disabled="true"])
+    :is(.menu-accel, .menu-iconic-accel),
+menupopup.in-menulist menuitem:not([disabled="true"]) :is(.menu-accel, .menu-iconic-accel) {
+    color: var(--panel-shortcut-color);
+}
+
+#ContentSelectDropdown > menupopup menuitem[disabled="true"] :is(.menu-accel, .menu-iconic-accel),
+menupopup.in-menulist menuitem[disabled="true"] :is(.menu-accel, .menu-iconic-accel) {
+    opacity: 0.6;
+}
+
+#ContentSelectDropdown > menupopup menuseparator,
+menupopup.in-menulist menuseparator {
+    border-image: linear-gradient(
+        to right,
+        transparent 1%,
+        var(--menu-separator-color) 50%,
+        transparent 99%
+    ) !important;
+    border-image-slice: 1 !important;
+    border-top-width: 1px !important;
+    border-top-style: solid !important;
+    padding: 0 !important;
+    margin-inline: var(--menupopup-inner-padding-magnitude) !important;
+}
+
+#ContentSelectDropdown
+    > menupopup
+    menuseparator[id]:not(#context-sep-open, #context-media-sep-commands, #context-sep-copylink, #spell-suggestions-separator, #context-sep-selectall) {
+    display: none !important;
+}
+
+#ContentSelectDropdown > menupopup menuseparator:not([id]),
+menupopup.in-menulist menuseparator:not([id]) {
+    display: -moz-box !important;
+}
+
+#ContentSelectDropdown > menupopup menuseparator:last-child,
+menupopup.in-menulist menuseparator:last-child {
+    display: none;
 }
 
 @-moz-document url-prefix("chrome://devtools/content/")
@@ -801,22 +732,25 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
         --context-margin-inline: -14px 0px;
         --context-padding-inline: 27px 0px;
         --menu-color: var(--ui-text-80) !important;
-        --menupopup-background: var(--arrowpanel-background);
+        --menupopup-background: transparent;
         --menu-background-color: var(--arrowpanel-background) !important;
         --menupopup-margin: 0px;
-        --menupopup-child-margin-block-start: 0px;
+        --menupopup-child-margin-block-start: -4px;
         --menupopup-child-margin-inline-start: 0px;
         --menupopup-padding: 0px;
-        --menupopup-inner-padding: 0px;
+        --menupopup-inner-padding-magnitude: 4px;
+        --menupopup-inner-padding: var(--menupopup-inner-padding-magnitude) 0;
         --context-checkbox-margin: 6px 7px;
         --context-iconic-margin: 5px 6px;
         --context-iconic-special-margin: 4px -2px;
-        --menupopup-border-radius: 3px;
-        --context-menuitem-border-radius: 0px;
-        --menu-right-bg: url(chrome://userchrome/content/old-menu-right.svg);
-        --menu-right-img: none;
-        --menu-right-margin: 2px;
-        --menu-right-size: 12px;
+        --menupopup-shadow: none !important;
+        --menupopup-border-radius: 5px !important;
+        --panel-shadow: none !important;
+        --context-menuitem-border-radius: var(--arrowpanel-menuitem-border-radius);
+        --menu-right-bg: none;
+        --menu-right-img: url(chrome://userchrome/content/menu-arrow.svg);
+        --menu-right-margin: 4px;
+        --menu-right-size: 14px;
         --buttons-secondary-hover-bgcolor: var(--arrowpanel-dimmed) !important;
         --buttons-secondary-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
         --vpn-on-icon: url(chrome://userchrome/content/skin/vpn-on-light.svg);
@@ -829,88 +763,60 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
         --checkbox-checked-color: var(--uc-checkbox-checked-color) !important;
         --checkbox-checked-hover-bgcolor: var(--uc-checkbox-checked-hover-bgcolor) !important;
         --checkbox-checked-active-bgcolor: var(--uc-checkbox-checked-active-bgcolor) !important;
+        --panelview-toolbarbutton-hover-bgcolor: var(--arrowpanel-dimmed) !important;
+        --panelview-toolbarbutton-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
+        --panelview-toolbarbutton-focus-box-shadow: none !important;
+        --panel-banner-item-color: HSL(240, 9.1%, 97.8%);
+        --panel-banner-item-background-color: hsla(109.9, 90.9%, 47.3%, 0.1);
+        --panel-banner-item-hover-bgcolor: hsla(109.9, 90.9%, 47.3%, 0.15);
+        --panel-banner-item-active-bgcolor: hsla(109.9, 90.9%, 47.3%, 0.2);
+        --arrowpanel-menuitem-inline-margin: 4px;
+        --arrowpanel-menuitem-margin: 0px var(--arrowpanel-menuitem-inline-margin) !important;
+        --arrowpanel-menuitem-padding: 6px !important;
+        --arrowpanel-padding: 12px !important;
+        --panel-subview-body-padding-magnitude: var(--arrowpanel-menuitem-inline-margin);
+        --panel-subview-body-padding: var(--panel-subview-body-padding-magnitude) 0 !important;
+        --arrowpanel-menuitem-border-radius: 3px !important;
+        --proton-tab-radius: 0px !important;
+        --proton-tab-block-margin: 0px !important;
+        --panel-description-color: hsl(235, 48%, 89%, 70%) !important;
+        --panel-shortcut-color: hsl(235, 27%, 73%, 70%) !important;
+        --panel-shortcut-focus: hsl(235, 32%, 75%, 90%) !important;
+        --error-text-color: var(--warning-color) !important;
+        --proton-tab-inline-padding: 0px !important;
+        --tab-shadow-max-size: 0px !important;
+        --buttons-primary-button-bgcolor: var(--in-parent-primary-button-background) !important;
+        --buttons-primary-button-hover-bgcolor: var(
+            --in-parent-primary-button-background-hover
+        ) !important;
+        --buttons-primary-button-active-bgcolor: var(
+            --in-parent-primary-button-background-active
+        ) !important;
+        --buttons-primary-button-color: var(--in-parent-primary-button-text-color) !important;
     }
 
-    @media (-moz-proton) {
-        :root,
-        menupopup {
-            --panelview-toolbarbutton-hover-bgcolor: var(--arrowpanel-dimmed) !important;
-            --panelview-toolbarbutton-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
-            --panelview-toolbarbutton-focus-box-shadow: none !important;
-            --panel-banner-item-color: HSL(240, 9.1%, 97.8%);
-            --panel-banner-item-background-color: hsla(109.9, 90.9%, 47.3%, 0.1);
-            --panel-banner-item-hover-bgcolor: hsla(109.9, 90.9%, 47.3%, 0.15);
-            --panel-banner-item-active-bgcolor: hsla(109.9, 90.9%, 47.3%, 0.2);
-            --arrowpanel-menuitem-inline-margin: 4px;
-            --arrowpanel-menuitem-margin: 0px var(--arrowpanel-menuitem-inline-margin) !important;
-            --arrowpanel-menuitem-padding: 6px !important;
-            --arrowpanel-padding: 12px !important;
-            --panel-subview-body-padding-magnitude: var(--arrowpanel-menuitem-inline-margin);
-            --panel-subview-body-padding: var(--panel-subview-body-padding-magnitude) 0 !important;
-            --arrowpanel-menuitem-border-radius: 3px !important;
-            --proton-tab-radius: 0px !important;
-            --proton-tab-block-margin: 0px !important;
-            --panel-description-color: hsl(235, 48%, 89%, 70%) !important;
-            --panel-shortcut-color: hsl(235, 27%, 73%, 70%) !important;
-            --panel-shortcut-focus: hsl(235, 32%, 75%, 90%) !important;
-            --error-text-color: var(--warning-color) !important;
-            --proton-tab-inline-padding: 0px !important;
-            --tab-shadow-max-size: 0px !important;
-            --buttons-primary-button-bgcolor: var(--in-parent-primary-button-background) !important;
-            --buttons-primary-button-hover-bgcolor: var(
-                --in-parent-primary-button-background-hover
-            ) !important;
-            --buttons-primary-button-active-bgcolor: var(
-                --in-parent-primary-button-background-active
-            ) !important;
-            --buttons-primary-button-color: var(--in-parent-primary-button-text-color) !important;
-        }
-
-        :root,
-        menupopup #TabsToolbar {
-            --toolbarbutton-inner-padding: 6px !important;
-        }
-
-        #urlbar-container,
-        #urlbar {
-            --urlbar-toolbar-height: var(--user-urlbar-container-height) !important;
-            --urlbar-container-height: var(--user-urlbar-container-height) !important;
-        }
-
-        #appMenu-multiView {
-            --arrowpanel-menuitem-inline-margin: 4px;
-            --arrowpanel-menuitem-margin: 0px var(--arrowpanel-menuitem-inline-margin) !important;
-            --arrowpanel-menuitem-padding: 8px !important;
-            --panel-subview-body-padding-magnitude: var(--arrowpanel-menuitem-inline-margin);
-            --panel-subview-body-padding: var(--panel-subview-body-padding-magnitude) 0px !important;
-        }
+    menupopup > :is(menuitem, menu, menucaption, menugroup, menuseparator, search-textbox),
+    #PopupAutoComplete > richlistbox > richlistitem {
+        margin-inline: var(--menupopup-inner-padding-magnitude);
     }
 
-    @media (-moz-proton-contextmenus) {
-        :root,
-        menupopup {
-            --menupopup-background: transparent;
-            --menu-background-color: var(--arrowpanel-background) !important;
-            --menupopup-margin: 0px;
-            --menupopup-child-margin-block-start: -4px;
-            --menupopup-child-margin-inline-start: 0px;
-            --menupopup-padding: 0px;
-            --menupopup-inner-padding-magnitude: 4px;
-            --menupopup-inner-padding: var(--menupopup-inner-padding-magnitude) 0;
-            --menupopup-shadow: none !important;
-            --menupopup-border-radius: 5px !important;
-            --context-menuitem-border-radius: var(--arrowpanel-menuitem-border-radius);
-            --menu-right-bg: none;
-            --menu-right-img: url(chrome://userchrome/content/menu-arrow.svg);
-            --menu-right-margin: 4px;
-            --menu-right-size: 14px;
-            --panel-shadow: none !important;
-        }
+    :root,
+    menupopup #TabsToolbar {
+        --toolbarbutton-inner-padding: 6px !important;
+    }
 
-        menupopup > :is(menuitem, menu, menucaption, menugroup, menuseparator, search-textbox),
-        #PopupAutoComplete > richlistbox > richlistitem {
-            margin-inline: var(--menupopup-inner-padding-magnitude);
-        }
+    #urlbar-container,
+    #urlbar {
+        --urlbar-toolbar-height: var(--user-urlbar-container-height) !important;
+        --urlbar-container-height: var(--user-urlbar-container-height) !important;
+    }
+
+    #appMenu-multiView {
+        --arrowpanel-menuitem-inline-margin: 4px;
+        --arrowpanel-menuitem-margin: 0px var(--arrowpanel-menuitem-inline-margin) !important;
+        --arrowpanel-menuitem-padding: 8px !important;
+        --panel-subview-body-padding-magnitude: var(--arrowpanel-menuitem-inline-margin);
+        --panel-subview-body-padding: var(--panel-subview-body-padding-magnitude) 0px !important;
     }
 
     .theme-dark input:is([type="checkbox"], [type="radio"]) {
@@ -984,6 +890,12 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
         border-radius: var(--menupopup-border-radius) !important;
         margin: var(--menupopup-margin) !important;
         overflow: hidden !important;
+        padding: var(--menupopup-padding) !important;
+        border-color: transparent !important;
+    }
+
+    menu > menupopup {
+        margin-inline-start: var(--menupopup-child-margin-inline-start) !important;
     }
 
     :is(menuitem, menu) {
@@ -1217,91 +1129,59 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconi
         width: 4px !important;
     }
 
-    @media (-moz-proton-contextmenus) {
-        menupopup {
-            padding: var(--menupopup-padding) !important;
-            background-color: transparent !important;
-            border-color: transparent !important;
-        }
-
-        menu > menupopup {
-            margin-inline-start: var(--menupopup-child-margin-inline-start) !important;
-        }
-
-        :not(.subviewbutton) > .menu-text {
-            padding-inline: var(--context-padding-inline) !important;
-        }
-
-        .menupopup-arrowscrollbox {
-            background-color: var(--menu-background-color) !important;
-            color: var(--menu-color) !important;
-            border: none !important;
-            border-radius: var(--menupopup-border-radius) !important;
-            box-shadow: var(--menupopup-shadow) !important;
-        }
-
-        :is(.menu-accel, .menu-iconic-accel)[value] {
-            margin-inline: 1.55em calc(var(--menu-right-margin) + 4px) !important;
-            padding-block: 0 !important;
-        }
-
-        menuitem:not([disabled="true"]) :is(.menu-accel, .menu-iconic-accel) {
-            color: var(--panel-shortcut-color);
-        }
-
-        menuitem[disabled="true"] :is(.menu-accel, .menu-iconic-accel) {
-            opacity: 0.6;
-        }
-
-        menuseparator {
-            border-image: linear-gradient(
-                to right,
-                transparent 1%,
-                var(--menu-separator-color) 50%,
-                transparent 99%
-            ) !important;
-            border-image-slice: 1 !important;
-            border-top-width: 1px !important;
-            border-top-style: solid !important;
-            padding: 0 !important;
-            margin-inline: var(--menupopup-inner-padding-magnitude) !important;
-        }
-
-        menuseparator[id]:not(#context-sep-open, #context-media-sep-commands, #context-sep-copylink, #spell-suggestions-separator, #context-sep-selectall) {
-            display: none !important;
-        }
-
-        menuseparator:not([id]) {
-            display: -moz-box !important;
-        }
-
-        menuseparator:last-child {
-            display: none;
-        }
-
-        menupopup[menu-api] menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-left {
-            display: none !important;
-        }
+    :not(.subviewbutton) > .menu-text {
+        padding-inline: var(--context-padding-inline) !important;
     }
 
-    /* proton disabled */
-    @media not (-moz-proton-contextmenus) {
-        menuseparator {
-            visibility: hidden !important;
-            display: none !important;
-        }
+    .menupopup-arrowscrollbox {
+        background-color: var(--menu-background-color) !important;
+        color: var(--menu-color) !important;
+        border: none !important;
+        border-radius: var(--menupopup-border-radius) !important;
+        box-shadow: var(--menupopup-shadow) !important;
+    }
 
-        :is(menu, menuitem) {
-            border-image: linear-gradient(
-                to right,
-                transparent 1%,
-                var(--menu-separator-color) 50%,
-                transparent 99%
-            ) !important;
-            border-image-slice: 1 !important;
-            border-top-width: 1px !important;
-            border-top-style: solid !important;
-        }
+    :is(.menu-accel, .menu-iconic-accel)[value] {
+        margin-inline: 1.55em calc(var(--menu-right-margin) + 4px) !important;
+        padding-block: 0 !important;
+    }
+
+    menuitem:not([disabled="true"]) :is(.menu-accel, .menu-iconic-accel) {
+        color: var(--panel-shortcut-color);
+    }
+
+    menuitem[disabled="true"] :is(.menu-accel, .menu-iconic-accel) {
+        opacity: 0.6;
+    }
+
+    menuseparator {
+        border-image: linear-gradient(
+            to right,
+            transparent 1%,
+            var(--menu-separator-color) 50%,
+            transparent 99%
+        ) !important;
+        border-image-slice: 1 !important;
+        border-top-width: 1px !important;
+        border-top-style: solid !important;
+        padding: 0 !important;
+        margin-inline: var(--menupopup-inner-padding-magnitude) !important;
+    }
+
+    menuseparator[id]:not(#context-sep-open, #context-media-sep-commands, #context-sep-copylink, #spell-suggestions-separator, #context-sep-selectall) {
+        display: none !important;
+    }
+
+    menuseparator:not([id]) {
+        display: -moz-box !important;
+    }
+
+    menuseparator:last-child {
+        display: none;
+    }
+
+    menupopup[menu-api] menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-left {
+        display: none !important;
     }
 }
 
@@ -1590,12 +1470,14 @@ menupopup {
         margin-inline: -15.5px !important;
     }
 
-    link[rel="stylesheet"][href="chrome://global/content/elements/message-bar.css"] ~ .container {
+    link[rel="stylesheet"][href="chrome://global/content/elements/message-bar.css"] ~ .container
+    {
         padding: 8px !important;
         border-radius: 0 !important;
     }
 
-    link[rel="stylesheet"][href="chrome://global/content/elements/message-bar.css"] ~ .container .content {
+    link[rel="stylesheet"][href="chrome://global/content/elements/message-bar.css"] ~ .container .content
+    {
         display: flex !important;
         flex-flow: row nowrap;
         justify-content: space-between !important;
@@ -1812,21 +1694,14 @@ menupopup {
     :root {
         --arrowpanel-background: hsl(233, 36%, 11%);
         --arrowpanel-dimmed: hsla(236, 100%, 83%, 0.17);
-        --context-menuitem-border-radius: 0px;
-        --panel-separator-margin: 0px;
+        --context-menuitem-border-radius: var(--arrowpanel-menuitem-border-radius);
+        --panel-separator-margin: 0px 4px;
         --arrowpanel-menuitem-padding: 6px;
         --arrowpanel-padding: 12px !important;
+        --arrowpanel-menuitem-border-radius: 3px;
+        --menupopup-inner-padding-magnitude: 4px;
+        --menupopup-inner-padding: var(--menupopup-inner-padding-magnitude) 0;
         background-color: var(--arrowpanel-background) !important;
-    }
-
-    @media (-moz-proton-contextmenus) {
-        :root {
-            --arrowpanel-menuitem-border-radius: 3px;
-            --context-menuitem-border-radius: var(--arrowpanel-menuitem-border-radius);
-            --menupopup-inner-padding-magnitude: 4px;
-            --menupopup-inner-padding: var(--menupopup-inner-padding-magnitude) 0;
-            --panel-separator-margin: 0px 4px;
-        }
     }
 
     svg:root {
@@ -1840,7 +1715,7 @@ menupopup {
 
     @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
         body {
-            font-family: SF Pro Display, SFProUC, Segoe UI, sans-serif !important;
+            font-family: SF Pro Display, Segoe UI, sans-serif !important;
             font-kerning: normal !important;
         }
     }
@@ -1904,8 +1779,10 @@ menupopup {
     }
 
     @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
-        body, button, * {
-            font-family: SF Pro Display, SFProUC, Segoe UI, sans-serif;
+        body,
+        button,
+        * {
+            font-family: SF Pro Display, Segoe UI, sans-serif;
             font-kerning: normal;
             font-weight: 300;
         }
@@ -2052,10 +1929,12 @@ menupopup {
     }
 }
 
-@-moz-document url-prefix("moz-extension://c1ea5f85-7682-4d41-86cf-4946657a717e/popup/index.html") {
+@-moz-document url-prefix("moz-extension://c1ea5f85-7682-4d41-86cf-4946657a717e/popup/index.html")
+{
     @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
-        body, input {
-            font-family: SF Pro Display, SFProUC, Segoe UI, sans-serif !important;
+        body,
+        input {
+            font-family: SF Pro Display, Segoe UI, sans-serif !important;
         }
 
         header .search .fa {
@@ -2064,19 +1943,22 @@ menupopup {
     }
 }
 
-@-moz-document url-prefix("moz-extension://54896d1f-a658-4fd5-ab86-4ad739b06f69") {
+@-moz-document url-prefix("moz-extension://54896d1f-a658-4fd5-ab86-4ad739b06f69")
+{
     @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
         body {
-            font-family: SF Pro Display, SFProUC, Segoe UI, sans-serif !important;
+            font-family: SF Pro Display, Segoe UI, sans-serif !important;
         }
     }
 
-    body, .Container {
+    body,
+    .Container {
         background-color: var(--in-content-page-background) !important;
         color: var(--in-content-page-color) !important;
     }
-    
-    .c-bw-12, .CountryItem .Text {
+
+    .c-bw-12,
+    .CountryItem .Text {
         color: var(--ui-text-80) !important;
     }
 
@@ -2108,23 +1990,25 @@ menupopup {
 
     .Button--blue {
         background-color: var(--in-content-primary-button-background) !important;
-        border-color: transparent !important;;
+        border-color: transparent !important;
     }
 
     .Button--blue:hover {
         background-color: var(--in-content-primary-button-background-active) !important;
-        border-color: transparent !important;;
+        border-color: transparent !important;
     }
 
     .Link--alt {
         color: var(--purple-35) !important;
     }
 
-    .Link--alt.Link--active, .Link--alt:hover {
+    .Link--alt.Link--active,
+    .Link--alt:hover {
         color: color-mix(in srgb, var(--attention-color) 50%, var(--purple-30)) !important;
     }
 
-    .c-blu-6, .c-blu-6 * {
+    .c-blu-6,
+    .c-blu-6 * {
         color: var(--purple-35) !important;
         fill: var(--purple-35) !important;
     }
@@ -2133,11 +2017,13 @@ menupopup {
         fill: color-mix(in srgb, var(--attention-color) 50%, var(--purple-30)) !important;
     }
 
-    .Link--dark.Link--active, .Link--dark:hover {
+    .Link--dark.Link--active,
+    .Link--dark:hover {
         color: var(--in-content-page-color) !important;
     }
 
-    .CountryItem--active, .CountryItem:hover {
+    .CountryItem--active,
+    .CountryItem:hover {
         background: var(--in-content-button-background) !important;
     }
 
@@ -2152,11 +2038,19 @@ menupopup {
     }
 
     .Toggle:hover:not(.Toggle--disabled) .Toggle-track {
-        background-color: color-mix(in srgb, currentColor 5%, var(--in-content-box-background-odd)) !important;
+        background-color: color-mix(
+            in srgb,
+            currentColor 5%,
+            var(--in-content-box-background-odd)
+        ) !important;
     }
 
     .Toggle-thumb {
-        background-color: color-mix(in srgb, currentColor 35%, var(--in-content-box-background)) !important;
+        background-color: color-mix(
+            in srgb,
+            currentColor 35%,
+            var(--in-content-box-background)
+        ) !important;
         border-color: transparent !important;
         background-clip: content-box !important;
     }
@@ -2180,7 +2074,7 @@ menupopup {
     .Button--destructive.Button--outline:not(:hover) {
         background-color: var(--in-content-button-background) !important;
     }
-    
+
     .form-control {
         background-color: var(--in-content-button-background) !important;
     }

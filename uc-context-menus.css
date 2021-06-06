@@ -332,191 +332,132 @@ menulist:-moz-focusring > menupopup.in-menulist > menuitem[_moz-menuactive="true
 }
 
 /* proton */
-@media (-moz-proton-contextmenus) {
-    menupopup {
-        padding: var(--menupopup-padding) !important;
-        background-color: transparent !important;
-        border-color: transparent !important;
-    }
+menupopup {
+    padding: var(--menupopup-padding) !important;
+    background-color: transparent !important;
+    border-color: transparent !important;
+}
 
-    menu > menupopup {
-        margin-inline-start: var(--menupopup-child-margin-inline-start) !important;
-    }
+menu > menupopup {
+    margin-inline-start: var(--menupopup-child-margin-inline-start) !important;
+}
 
-    menupopup > :is(menuitem, menu, menucaption, menugroup, menuseparator, search-textbox),
-    #PopupAutoComplete > richlistbox > richlistitem {
-        margin-inline: var(--menupopup-inner-padding-magnitude);
-    }
+menupopup > :is(menuitem, menu, menucaption, menugroup, menuseparator, search-textbox),
+#PopupAutoComplete > richlistbox > richlistitem {
+    margin-inline: var(--menupopup-inner-padding-magnitude);
+}
 
-    :not(.subviewbutton) > .menu-text {
-        padding-inline: var(--context-padding-inline) !important;
-    }
+:not(.subviewbutton) > .menu-text {
+    padding-inline: var(--context-padding-inline) !important;
+}
 
-    .menupopup-arrowscrollbox {
-        background-color: var(--menu-background-color) !important;
-        color: var(--menu-color) !important;
-        border: none !important;
-        border-radius: var(--menupopup-border-radius) !important;
-        box-shadow: var(--menupopup-shadow) !important;
-    }
+.menupopup-arrowscrollbox {
+    background-color: var(--menu-background-color) !important;
+    color: var(--menu-color) !important;
+    border: none !important;
+    border-radius: var(--menupopup-border-radius) !important;
+    box-shadow: var(--menupopup-shadow) !important;
+}
 
-    :is(.menu-accel, .menu-iconic-accel)[value] {
-        margin-inline: 1.55em calc(var(--menu-right-margin) + 4px) !important;
-        padding-block: 0 !important;
-    }
+:is(.menu-accel, .menu-iconic-accel)[value] {
+    margin-inline: 1.55em calc(var(--menu-right-margin) + 4px) !important;
+    padding-block: 0 !important;
+}
 
-    menuitem:not([disabled="true"]) :is(.menu-accel, .menu-iconic-accel) {
-        color: var(--panel-shortcut-color);
-    }
+menuitem:not([disabled="true"]) :is(.menu-accel, .menu-iconic-accel) {
+    color: var(--panel-shortcut-color);
+}
 
-    menuitem[disabled="true"] :is(.menu-accel, .menu-iconic-accel) {
-        opacity: 0.6;
-    }
+menuitem[disabled="true"] :is(.menu-accel, .menu-iconic-accel) {
+    opacity: 0.6;
+}
 
-    menupopup:not(.PanelUI-subView) menuseparator {
-        border-image: linear-gradient(
-            to right,
-            transparent 1%,
-            var(--menu-separator-color) 50%,
-            transparent 99%
-        ) !important;
-        border-image-slice: 1 !important;
-        border-top-width: 1px !important;
-        border-top-style: solid !important;
-        padding: 0 !important;
-        margin-inline: var(--menupopup-inner-padding-magnitude) !important;
-    }
+menupopup:not(.PanelUI-subView) menuseparator {
+    border-image: linear-gradient(
+        to right,
+        transparent 1%,
+        var(--menu-separator-color) 50%,
+        transparent 99%
+    ) !important;
+    border-image-slice: 1 !important;
+    border-top-width: 1px !important;
+    border-top-style: solid !important;
+    padding: 0 !important;
+    margin-inline: var(--menupopup-inner-padding-magnitude) !important;
+}
 
-    menupopup:not(.PanelUI-subView) menuseparator:last-child {
-        display: none;
-    }
+menupopup:not(.PanelUI-subView) menuseparator:last-child {
+    display: none;
+}
 
-    #contentAreaContextMenu
-        menuseparator[id]:not(#context-sep-open, #context-media-sep-commands, #context-sep-copylink, #spell-suggestions-separator, #context-sep-selectall) {
-        display: none !important;
-    }
+#contentAreaContextMenu
+    menuseparator[id]:not(#context-sep-open, #context-media-sep-commands, #context-sep-copylink, #spell-suggestions-separator, #context-sep-selectall) {
+    display: none !important;
+}
 
-    @-moz-document url(chrome://browser/content/browser.xhtml)
-    {
-        #contentAreaContextMenu menuseparator:not([id]) {
-            display: -moz-box !important;
-        }
-    }
-
-    #context-navigation .menuitem-iconic {
-        min-width: 34px;
-        height: 36px;
-        padding: 0 !important;
-        padding-bottom: 2px !important;
-    }
-
-    #context-navigation .menuitem-iconic[_moz-menuactive="true"]:not([disabled="true"]) {
-        background: none !important;
-    }
-
-    #context-navigation .menu-iconic-left {
-        height: 34px;
-        padding: 0 !important;
-        -moz-box-flex: 1;
-        border-radius: var(--arrowpanel-menuitem-border-radius);
-    }
-
-    #context-navigation
-        .menuitem-iconic[_moz-menuactive="true"]:not([disabled="true"])
-        .menu-iconic-left {
-        background: var(--arrowpanel-dimmed);
-    }
-
-    #context-navigation .menu-iconic-icon {
-        margin: 0 !important;
-        width: 16px !important;
-        height: 16px !important;
-        padding: 0 !important;
-        background: none !important;
-    }
-
-    #context-sep-navigation {
-        display: none;
-    }
-
-    #context-back {
-        list-style-image: url(chrome://userchrome/content/skin/back.svg) !important;
-    }
-
-    #context-forward {
-        list-style-image: url(chrome://userchrome/content/skin/forward.svg) !important;
-    }
-
-    #context-stop {
-        list-style-image: url(chrome://userchrome/content/skin/stop.svg) !important;
-    }
-
-    #context-reload {
-        list-style-image: url(chrome://userchrome/content/skin/reload.svg) !important;
-    }
-
-    #context-bookmarkpage {
-        list-style-image: url(chrome://userchrome/content/skin/bookmark-hollow.svg) !important;
-    }
-
-    #context-bookmarkpage[starred="true"] {
-        list-style-image: url(chrome://userchrome/content/skin/bookmark.svg) !important;
+@-moz-document url(chrome://browser/content/browser.xhtml)
+{
+    #contentAreaContextMenu menuseparator:not([id]) {
+        display: -moz-box !important;
     }
 }
 
-/* proton disabled */
-@media not (-moz-proton-contextmenus) {
-    menupopup:not(.PanelUI-subView) menuseparator {
-        /* appearance: none !important;
-        max-height: 1px !important;
-        border: none !important;
-        padding: 0.5px 0 !important;
-        margin: 0 10px !important;
-        background-color: var(--ui-textbox-bgcolor) !important; */
-        visibility: hidden !important;
-        display: none !important;
-    }
+#context-navigation .menuitem-iconic {
+    min-width: 34px;
+    height: 36px;
+    padding: 0 !important;
+    padding-bottom: 2px !important;
+}
 
-    /* menuseparator:not(:first-of-type) + :is(menu, menuitem) {
-        border-top: 1px solid #363A59 !important;
-        padding-top: 3px !important;
-    } */
+#context-navigation .menuitem-iconic[_moz-menuactive="true"]:not([disabled="true"]) {
+    background: none !important;
+}
 
-    :is(#PlacesToolbar, #places, .popup-notification-dropmarker)
-        menupopup
-        menuseparator:not([hidden="true"])
-        + :is(menu, menuitem),
-    :is(#new-tab-button-popup, #new-tab-button, #downloadsContextMenu, menupopup[menu-api], #ContentSelectDropdown, .new-tab-popup, #openHandlerPopup)
-        menuseparator:not([hidden="true"])
-        + :is(menu, menuitem),
-    menupopup menuseparator:not(:first-of-type):not([hidden="true"]) + :is(menu, menuitem) {
-        border-image: linear-gradient(
-            to right,
-            transparent 1%,
-            var(--menu-separator-color) 50%,
-            transparent 99%
-        ) !important;
-        border-image-slice: 1 !important;
-        border-top-width: 1px !important;
-        border-top-style: solid !important;
-    }
+#context-navigation .menu-iconic-left {
+    height: 34px;
+    padding: 0 !important;
+    -moz-box-flex: 1;
+    border-radius: var(--arrowpanel-menuitem-border-radius);
+}
 
-    #context-navigation .menu-iconic-left {
-        padding-block: 1px !important;
-    }
+#context-navigation
+    .menuitem-iconic[_moz-menuactive="true"]:not([disabled="true"])
+    .menu-iconic-left {
+    background: var(--arrowpanel-dimmed);
+}
 
-    #context-navigation > menuitem {
-        border-bottom-left-radius: 3px !important;
-        border-bottom-right-radius: 3px !important;
-    }
+#context-navigation .menu-iconic-icon {
+    margin: 0 !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding: 0 !important;
+    background: none !important;
+}
 
-    #context-navigation > menuitem:first-of-type {
-        border-bottom-left-radius: 0 !important;
-        border-bottom-right-radius: 3px !important;
-    }
+#context-sep-navigation {
+    display: none;
+}
 
-    #context-navigation > menuitem:last-of-type {
-        border-bottom-left-radius: 3px !important;
-        border-bottom-right-radius: 0 !important;
-    }
+#context-back {
+    list-style-image: url(chrome://userchrome/content/skin/back.svg) !important;
+}
+
+#context-forward {
+    list-style-image: url(chrome://userchrome/content/skin/forward.svg) !important;
+}
+
+#context-stop {
+    list-style-image: url(chrome://userchrome/content/skin/stop.svg) !important;
+}
+
+#context-reload {
+    list-style-image: url(chrome://userchrome/content/skin/reload.svg) !important;
+}
+
+#context-bookmarkpage {
+    list-style-image: url(chrome://userchrome/content/skin/bookmark-hollow.svg) !important;
+}
+
+#context-bookmarkpage[starred="true"] {
+    list-style-image: url(chrome://userchrome/content/skin/bookmark.svg) !important;
 }

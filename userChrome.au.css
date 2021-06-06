@@ -109,7 +109,7 @@ menupopup::part(drop-indicator) {
 /* padding for proton context menus */
 menupopup::part(arrowscrollbox),
 #ContentSelectDropdown > menupopup::part(arrowscrollbox) {
-    padding: var(--menupopup-inner-padding) !important;
+    padding: var(--menupopup-inner-padding);
 }
 
 #BMB_bookmarksPopup::part(arrowscrollbox),

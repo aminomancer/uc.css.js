@@ -293,7 +293,7 @@
 }
 
 #bookmarkpropertiesdialog #editBMPanel_tagsSelector {
-	padding: revert !important;
+    padding: revert !important;
 }
 
 :is(#bookmarkpropertiesdialog, #editBookmarkPanel) richlistitem {
@@ -381,20 +381,18 @@
     margin: 0 !important;
 }
 
-#editBookmarkPanel
-    richlistitem:is(:hover, [selected="true"], [current="true"]) {
+#editBookmarkPanel richlistitem:is(:hover, [selected="true"], [current="true"]) {
     background-color: hsl(232, 21%, 40%) !important;
 }
 
 richlistbox:not(#categories) > richlistitem[selected] {
-	--in-content-button-background: revert !important;
-	--in-content-button-background-hover: revert !important;
-	--in-content-button-background-active: revert !important;
-	--in-content-button-text-color-hover: revert !important;
+    --in-content-button-background: revert !important;
+    --in-content-button-background-hover: revert !important;
+    --in-content-button-background-active: revert !important;
+    --in-content-button-text-color-hover: revert !important;
 }
 
-#bookmarkpropertiesdialog
-    richlistitem:is(:hover, [selected="true"], [current="true"]) {
+#bookmarkpropertiesdialog richlistitem:is(:hover, [selected="true"], [current="true"]) {
     background-color: var(--in-content-button-background) !important;
 }
 
@@ -551,100 +549,98 @@ link[href="chrome://global/skin/arrowscrollbox.css"] ~ :is(#scrollbutton-up, #sc
     }
 }
 
-@media (-moz-proton) {
-    /* #BMB_bookmarksPopup menupopup[placespopup="true"] {
+/* #BMB_bookmarksPopup menupopup[placespopup="true"] {
         padding-top: 0 !important;
     } */
 
-    #BMB_bookmarksPopup {
-        --panel-separator-color: var(--desaturate-dimmed) !important;
-    }
+#BMB_bookmarksPopup {
+    --panel-separator-color: var(--desaturate-dimmed) !important;
+}
 
-    #BMB_bookmarksPopup .subviewbutton:not(.menuitem-iconic) .menu-text {
-        padding-inline-start: 22px !important;
-    }
+#BMB_bookmarksPopup .subviewbutton:not(.menuitem-iconic) .menu-text {
+    padding-inline-start: 22px !important;
+}
 
-    #BMB_bookmarksPopup .subviewbutton > .menu-iconic-left {
-        margin-inline-end: 6px !important;
-    }
+#BMB_bookmarksPopup .subviewbutton > .menu-iconic-left {
+    margin-inline-end: 6px !important;
+}
 
-    #BMB_bookmarksShowAllTop {
-        display: none !important;
-    }
+#BMB_bookmarksShowAllTop {
+    display: none !important;
+}
 
-    #BMB_viewBookmarksSidebar {
-        list-style-image: url(chrome://userchrome/content/skin/sidebars-right.svg) !important;
-    }
+#BMB_viewBookmarksSidebar {
+    list-style-image: url(chrome://userchrome/content/skin/sidebars-right.svg) !important;
+}
 
-    #BMB_bookmarkThisPage[data-l10n-id="bookmarks-current-tab"] {
-        list-style-image: url(chrome://userchrome/content/skin/bookmark-hollow.svg) !important;
-    }
+#BMB_bookmarkThisPage[data-l10n-id="bookmarks-current-tab"] {
+    list-style-image: url(chrome://userchrome/content/skin/bookmark-hollow.svg) !important;
+}
 
-    #BMB_bookmarkThisPage[data-l10n-id="bookmarks-bookmark-edit-panel"] {
-        list-style-image: url(chrome://userchrome/content/skin/bookmark.svg) !important;
-    }
+#BMB_bookmarkThisPage[data-l10n-id="bookmarks-bookmark-edit-panel"] {
+    list-style-image: url(chrome://userchrome/content/skin/bookmark.svg) !important;
+}
 
-    #BMB_bookmarksPopup #BMB_bookmarksShowAll .menu-text {
-        padding-inline-start: 2px !important;
-    }
+#BMB_bookmarksPopup #BMB_bookmarksShowAll .menu-text {
+    padding-inline-start: 2px !important;
+}
 
-    #BMB_bookmarksShowAll:before {
-        content: "" !important;
-        position: relative !important;
-        display: -moz-inline-box !important;
-        width: 16px !important;
-        height: 16px !important;
-        padding-inline: 0 !important;
-        margin-inline: 0 4px !important;
-        fill: currentColor !important;
-        background-image: url(chrome://userchrome/content/skin/library.svg) !important;
-        transform: scaleX(-1);
-        -moz-context-properties: fill, fill-opacity, stroke !important;
-    }
+#BMB_bookmarksShowAll:before {
+    content: "" !important;
+    position: relative !important;
+    display: -moz-inline-box !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-inline: 0 !important;
+    margin-inline: 0 4px !important;
+    fill: currentColor !important;
+    background-image: url(chrome://userchrome/content/skin/library.svg) !important;
+    transform: scaleX(-1);
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+}
 
-    #BMB_bookmarksShowAll :is(.menu-accel, .menu-iconic-accel)[value] {
-        margin-inline: 10px 4px !important;
-        padding-block: 0 !important;
-    }
+#BMB_bookmarksShowAll :is(.menu-accel, .menu-iconic-accel)[value] {
+    margin-inline: 10px 4px !important;
+    padding-block: 0 !important;
+}
 
-    menuitem#bookmarksShowAll .menu-text,
-    menuitem#menu_bookmarkThisPage .menu-text {
-        padding-inline-start: 0 !important;
-    }
+menuitem#bookmarksShowAll .menu-text,
+menuitem#menu_bookmarkThisPage .menu-text {
+    padding-inline-start: 0 !important;
+}
 
-    menuitem#bookmarksShowAll:before {
-        content: "" !important;
-        position: relative !important;
-        display: -moz-inline-box !important;
-        width: 16px !important;
-        height: 16px !important;
-        padding-inline: 0 !important;
-        margin-inline: 6px !important;
-        fill: currentColor !important;
-        background-image: url(chrome://userchrome/content/skin/library.svg) !important;
-        transform: scaleX(-1);
-        -moz-context-properties: fill, fill-opacity, stroke !important;
-    }
+menuitem#bookmarksShowAll:before {
+    content: "" !important;
+    position: relative !important;
+    display: -moz-inline-box !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-inline: 0 !important;
+    margin-inline: 6px !important;
+    fill: currentColor !important;
+    background-image: url(chrome://userchrome/content/skin/library.svg) !important;
+    transform: scaleX(-1);
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+}
 
-    menuitem#menu_bookmarkThisPage:before {
-        content: "" !important;
-        position: relative !important;
-        display: -moz-inline-box !important;
-        width: 16px !important;
-        height: 16px !important;
-        padding-inline: 0 !important;
-        margin-inline: 6px !important;
-        fill: currentColor !important;
-        background-image: url(chrome://userchrome/content/skin/bookmark-hollow.svg) !important;
-        transform: scaleX(-1);
-        -moz-context-properties: fill, fill-opacity, stroke !important;
-    }
+menuitem#menu_bookmarkThisPage:before {
+    content: "" !important;
+    position: relative !important;
+    display: -moz-inline-box !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-inline: 0 !important;
+    margin-inline: 6px !important;
+    fill: currentColor !important;
+    background-image: url(chrome://userchrome/content/skin/bookmark-hollow.svg) !important;
+    transform: scaleX(-1);
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+}
 
-    menuitem#menu_bookmarkThisPage[data-l10n-id="menu-bookmark-edit"]:before {
-        background-image: url(chrome://userchrome/content/skin/bookmark.svg) !important;
-    }
+menuitem#menu_bookmarkThisPage[data-l10n-id="menu-bookmark-edit"]:before {
+    background-image: url(chrome://userchrome/content/skin/bookmark.svg) !important;
+}
 
-    #bookmarksMenuPopup > menuseparator.small-separator {
-        display: none;
-    }
+#bookmarksMenuPopup > menuseparator.small-separator {
+    display: none;
 }

@@ -27,6 +27,16 @@ tooltip[default][page] > description {
     padding: 2px 6px 4px 6px !important;
 }
 
+@-moz-document url(chrome://browser/content/browser.xhtml)
+{
+    @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
+        tooltip[default][page] {
+            font-family: SF Pro Display, Segoe UI, sans-serif !important;
+            font-kerning: normal !important;
+        }
+    }
+}
+
 /* blur filter */
 #statuspanel-label {
     background-image: var(--acrylic-texture) !important;

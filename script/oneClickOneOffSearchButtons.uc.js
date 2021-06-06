@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           One-click One-off Search Buttons
-// @version        1.5
+// @version        1.6
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Restore old behavior for one-off search engine buttons. It used to be that, if you entered a search term in the url bar, clicking a search engine button would immediately execute a search with that engine. This was changed in an update so that clicking the buttons only changes the "active" engine — you still have to press enter to actually execute the search. You also used to be able to advance through your one-off search engine buttons by pressing left/right arrow keys. Until recently these functions could be overridden with a preference in about:config, but those settings were removed, e.g. browser.urlbar.update2.disableOneOffsHorizontalKeyNavigation. This script restores the old functionality. If you want to restore the one-click functionality but don't want the horizontal key navigation, go to about:config and toggle this custom setting to false: userChrome.urlbar.oneOffs.keyNavigation. This script also has some conditional functions to work together with scrollingOneOffs.uc.js. They don't require each other at all, but they heavily improve each other both functionally and visually. Changing search engines with the arrow keys will scroll the one-offs container to keep the selected one-off button in view. And exiting the query in any way will automatically scroll back to the beginning of the one-offs container, so that it's reset for the next time you use it. It's hard to explain exactly what's going on so for now I'll just say to try them out yourself. The script also hides the one-off search settings button, but this can be turned off in about:config with userChrome.urlbar.oneOffs.hideSettingsButton.
@@ -98,13 +98,13 @@
                     return buttons;
                 };
                 oneOffs.settingsButtonCompact.style.display = "none";
-                oneOffs.settingsButton.style.display = "none";
+                if (oneOffs.settingsButton) oneOffs.settingsButton.style.display = "none";
             } else {
                 oneOffs.getSelectableButtons = Object.getPrototypeOf(
                     gURLBar.view.oneOffSearchButtons
                 ).getSelectableButtons;
                 oneOffs.settingsButtonCompact.style.removeProperty("display");
-                oneOffs.settingsButton.style.removeProperty("display");
+                if (oneOffs.settingsButton) oneOffs.settingsButton.style.removeProperty("display");
             }
         }
 

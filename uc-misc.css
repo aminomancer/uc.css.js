@@ -4,14 +4,6 @@ includes status bars, tooltips, confirmation hints and warnings,
 notifications, specific favicons, fixing the white flash when loading pages,
 focus rings, text highlight colors, and compatibility adjustments for minBrowserNavBar.uc.js */
 
-@font-face {
-    font-family: "SFProUC";
-    src: local("SF Pro Display"),
-        url("chrome://userchrome/content/fonts/SF-Pro-Display-Regular.otf") format("opentype");
-    font-weight: 400;
-    font-style: normal;
-}
-
 #statuspanel:is([type="status"], [type="defaultStatus"]) #statuspanel-label {
     opacity: 0 !important;
 }
@@ -261,14 +253,16 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
 }
 
 @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
-    @-moz-document regexp("^chrome:(?!\/\/(devtools|mozapps|browser\/content\/sanitize)).*") {
-        :root,
+    @-moz-document regexp("^chrome:(?!\/\/(devtools|mozapps|browser\/content\/sanitize|global\/content\/commonDialog)).*") {
+        html:root,
+        window:root,
         panel,
         menupopup,
         popupnotification,
         tooltip,
-        panelview {
-            font-family: SF Pro Display, SFProUC, Segoe UI, sans-serif !important;
+        panelview,
+        #main-menubar {
+            font-family: SF Pro Display, Segoe UI, sans-serif !important;
             font-kerning: normal !important;
         }
 

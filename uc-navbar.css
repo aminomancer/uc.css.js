@@ -311,7 +311,7 @@ toolbar .toolbarbutton-1:not([disabled])[checked]:hover > .toolbarbutton-icon {
 #PersonalToolbar .toolbarbutton-1,
 toolbarbutton.bookmark-item:not(.subviewbutton) {
     margin-block: 0 3.5px !important;
-    padding: var(--bookmark-block-padding) 4px; 
+    padding: var(--bookmark-block-padding) 4px;
     min-height: 28px !important;
     min-width: 28px !important;
 }
@@ -345,8 +345,7 @@ toolbarbutton.bookmark-item:not(.subviewbutton) {
         padding: 0 2px !important;
     }
 
-    :root:not([fluent-reveal-hover], [fluent-reveal-click])
-        #PlacesToolbarDropIndicator {
+    :root:not([fluent-reveal-hover], [fluent-reveal-click]) #PlacesToolbarDropIndicator {
         margin-inline-start: -18px !important;
     }
 
@@ -488,170 +487,167 @@ notification row is scrollable (when overflown) with mousewheel right/left.
 (or mousewheel up/down if mousewheel.autodir.enabled = true. setting that up without the pref is difficult for these elements)
 notification icons/close buttons are animated with a similar slide+zoom motif to tab icons/close buttons.
 notifications are translucent with acrylic effect. enable layout.css.backdrop-filter.enabled */
+#navigator-toolbox > :is(legacy-stack, .notificationbox-stack),
+#navigator-toolbox > named-deck > :is(legacy-stack, .notificationbox-stack),
+#navigator-toolbox .global-notificationbox {
+    display: flex !important;
+    flex-flow: row nowrap !important;
+    position: absolute !important;
+    width: unset !important;
+    max-height: 74px !important;
+    background: none !important;
+    width: 100% !important;
+    pointer-events: none !important;
+    overflow: scroll !important;
+    scrollbar-width: none !important;
+    gap: 5px !important;
+}
 
-@media (-moz-proton) {
-    #navigator-toolbox > :is(legacy-stack, .notificationbox-stack),
-    #navigator-toolbox > named-deck > :is(legacy-stack, .notificationbox-stack),
-    #navigator-toolbox .global-notificationbox {
-        display: flex !important;
-        flex-flow: row nowrap !important;
-        position: absolute !important;
-        width: unset !important;
-        max-height: 74px !important;
-        background: none !important;
-        width: 100% !important;
-        pointer-events: none !important;
-        overflow: scroll !important;
-        scrollbar-width: none !important;
-        gap: 5px !important;
-    }
+#navigator-toolbox > :is(legacy-stack, .notificationbox-stack) notification-message,
+#navigator-toolbox > named-deck > .notificationbox-stack notification-message,
+#navigator-toolbox .global-notificationbox notification-message {
+    margin: 0 !important;
+    border-radius: 0 !important;
+    display: inline-block !important;
+    position: relative !important;
+    max-width: 100vh !important;
+    transition: margin-top 100ms linear, max-width 100ms ease-in-out !important;
+    flex-basis: 10% !important;
+    pointer-events: auto !important;
+    --in-content-button-background: var(--desaturate-dimmed) !important;
+    --in-content-button-background-hover: var(--desaturate-dimmed-further) !important;
+    --in-content-button-background-active: var(--desaturate-dimmed-even-further) !important;
+    --in-content-button-border-radius: var(--general-button-border-radius) !important;
+    --in-content-link-color: var(--in-parent-link-color) !important;
+    --in-content-link-color-hover: var(--in-parent-link-color-hover) !important;
+    --in-content-link-color-active: var(--in-parent-link-color-active) !important;
+}
 
-    #navigator-toolbox > :is(legacy-stack, .notificationbox-stack) notification-message,
-    #navigator-toolbox > named-deck > .notificationbox-stack notification-message,
-    #navigator-toolbox .global-notificationbox notification-message {
-        margin: 0 !important;
-        border-radius: 0 !important;
-        display: inline-block !important;
-        position: relative !important;
-        max-width: 100vh !important;
-        transition: margin-top 100ms linear, max-width 100ms ease-in-out !important;
-        flex-basis: 10% !important;
-        pointer-events: auto !important;
-        --in-content-button-background: var(--desaturate-dimmed) !important;
-        --in-content-button-background-hover: var(--desaturate-dimmed-further) !important;
-        --in-content-button-background-active: var(--desaturate-dimmed-even-further) !important;
-        --in-content-button-border-radius: var(--general-button-border-radius) !important;
-        --in-content-link-color: var(--in-parent-link-color) !important;
-        --in-content-link-color-hover: var(--in-parent-link-color-hover) !important;
-        --in-content-link-color-active: var(--in-parent-link-color-active) !important;
-    }
+#navigator-toolbox
+    > :is(legacy-stack, .notificationbox-stack, named-deck)
+    notification-message[type="critical"],
+#navigator-toolbox > named-deck > .notificationbox-stack notification-message[type="critical"],
+#navigator-toolbox .global-notificationbox notification-message[type="critical"] {
+    flex-grow: 0.15 !important;
+}
 
-    #navigator-toolbox
-        > :is(legacy-stack, .notificationbox-stack, named-deck)
-        notification-message[type="critical"],
-    #navigator-toolbox > named-deck > .notificationbox-stack notification-message[type="critical"],
-    #navigator-toolbox .global-notificationbox notification-message[type="critical"] {
-        flex-grow: 0.15 !important;
-    }
+#navigator-toolbox
+    > :is(legacy-stack, .notificationbox-stack, named-deck)
+    notification-message[type="warning"],
+#navigator-toolbox > named-deck > .notificationbox-stack notification-message[type="warning"],
+#navigator-toolbox .global-notificationbox notification-message[type="warning"] {
+    flex-grow: 0.03 !important;
+}
 
-    #navigator-toolbox
-        > :is(legacy-stack, .notificationbox-stack, named-deck)
-        notification-message[type="warning"],
-    #navigator-toolbox > named-deck > .notificationbox-stack notification-message[type="warning"],
-    #navigator-toolbox .global-notificationbox notification-message[type="warning"] {
-        flex-grow: 0.03 !important;
-    }
+#navigator-toolbox
+    > :is(legacy-stack, .notificationbox-stack, named-deck)
+    notification-message[type="info"],
+#navigator-toolbox > named-deck > .notificationbox-stack notification-message[type="info"],
+#navigator-toolbox .global-notificationbox notification-message[type="info"] {
+    flex-grow: 0.01 !important;
+}
 
-    #navigator-toolbox
-        > :is(legacy-stack, .notificationbox-stack, named-deck)
-        notification-message[type="info"],
-    #navigator-toolbox > named-deck > .notificationbox-stack notification-message[type="info"],
-    #navigator-toolbox .global-notificationbox notification-message[type="info"] {
-        flex-grow: 0.01 !important;
-    }
+link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar
+{
+    border-radius: 0 !important;
+    border-bottom-left-radius: 4px !important;
+    border-bottom-right-radius: 4px !important;
+    background-color: var(--acrylic-blue) !important;
+    overflow: hidden !important;
+    background-image: var(--acrylic-texture) !important;
+    backdrop-filter: var(--acrylic-blur) !important;
+    padding-inline: 4px !important;
+    align-items: center !important;
+}
 
-    link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar
-    {
-        border-radius: 0 !important;
-        border-bottom-left-radius: 4px !important;
-        border-bottom-right-radius: 4px !important;
-        background-color: var(--acrylic-blue) !important;
-        overflow: hidden !important;
-        background-image: var(--acrylic-texture) !important;
-        backdrop-filter: var(--acrylic-blur) !important;
-        padding-inline: 4px !important;
-        align-items: center !important;
-    }
+.container.infobar::before {
+    border-radius: 0 !important;
+}
 
-    .container.infobar::before {
-        border-radius: 0 !important;
-    }
+#navigator-toolbox
+    > :is(legacy-stack, .notificationbox-stack)
+    > notification-message[style="margin-top: -32px; opacity: 0;"],
+#navigator-toolbox
+    > named-deck
+    > .notificationbox-stack
+    > notification-message[style="margin-top: -32px; opacity: 0;"],
+#navigator-toolbox
+    .global-notificationbox
+    notification-message[style="margin-top: -32px; opacity: 0;"] {
+    margin-top: -32px !important;
+    max-width: 1px !important;
+    transition: margin-top 100ms linear, max-width 100ms ease-in-out, opacity 100ms ease-in-out !important;
+}
 
-    #navigator-toolbox
-        > :is(legacy-stack, .notificationbox-stack)
-        > notification-message[style="margin-top: -32px; opacity: 0;"],
-    #navigator-toolbox
-        > named-deck
-        > .notificationbox-stack
-        > notification-message[style="margin-top: -32px; opacity: 0;"],
-    #navigator-toolbox
-        .global-notificationbox
-        notification-message[style="margin-top: -32px; opacity: 0;"] {
-        margin-top: -32px !important;
-        max-width: 1px !important;
-        transition: margin-top 100ms linear, max-width 100ms ease-in-out, opacity 100ms ease-in-out !important;
-    }
+link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-content
+{
+    flex-flow: row nowrap !important;
+    flex-grow: 2 !important;
+    display: flex !important;
+    white-space: nowrap !important;
+    text-overflow: ellipsis !important;
+}
 
-    link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-content
-    {
-        flex-flow: row nowrap !important;
-        flex-grow: 2 !important;
-        display: flex !important;
-        white-space: nowrap !important;
-        text-overflow: ellipsis !important;
-    }
+link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar > .spacer
+{
+    flex-grow: 0.1 !important;
+}
 
-    link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar > .spacer
-    {
-        flex-grow: 0.1 !important;
-    }
+link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-content .notification-button-container
+{
+    flex-flow: row nowrap !important;
+    flex-grow: 2 !important;
+    display: flex !important;
+    align-content: end !important;
+    align-items: end !important;
+    justify-content: end !important;
+    justify-items: end !important;
+    gap: 4px !important;
+}
 
-    link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-content .notification-button-container
-    {
-        flex-flow: row nowrap !important;
-        flex-grow: 2 !important;
-        display: flex !important;
-        align-content: end !important;
-        align-items: end !important;
-        justify-content: end !important;
-        justify-items: end !important;
-        gap: 4px !important;
-    }
+link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-content .notification-button-container > .notification-button.small
+{
+    margin: 0 !important;
+}
 
-    link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-content .notification-button-container > .notification-button.small
-    {
-        margin: 0 !important;
-    }
+link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar > .icon
+{
+    margin-inline-start: 6px !important;
+}
 
-    link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar > .icon
-    {
-        margin-inline-start: 6px !important;
-    }
-
-    link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-close,
+link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-close,
     link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .icon
-    {
-        transition: 0.25s transform var(--animation-easing-function),
-            0.25s opacity var(--animation-easing-function) !important;
-    }
+{
+    transition: 0.25s transform var(--animation-easing-function),
+        0.25s opacity var(--animation-easing-function) !important;
+}
 
-    link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-close
-    {
-        width: 20px !important;
-        height: 20px !important;
-        margin: 0 4px !important;
-        position: absolute !important;
-        opacity: 0 !important;
-        transform: translateX(-15px) scale(0.5) !important;
-    }
+link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-close
+{
+    width: 20px !important;
+    height: 20px !important;
+    margin: 0 4px !important;
+    position: absolute !important;
+    opacity: 0 !important;
+    transform: translateX(-15px) scale(0.5) !important;
+}
 
-    link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar:hover .notification-close
-    {
-        transform: none !important;
-        opacity: 1 !important;
-    }
+link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar:hover .notification-close
+{
+    transform: none !important;
+    opacity: 1 !important;
+}
 
-    link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar:hover .icon
-    {
-        transform: translateX(15px) scale(0.5) !important;
-        opacity: 0 !important;
-    }
+link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar:hover .icon
+{
+    transform: translateX(15px) scale(0.5) !important;
+    opacity: 0 !important;
+}
 
-    #fxa-toolbar-menu-button #fxa-avatar-image {
-        display: none;
-    }
+#fxa-toolbar-menu-button #fxa-avatar-image {
+    display: none;
+}
 
-    #fxa-toolbar-menu-button .toolbarbutton-icon {
-        list-style-image: url(chrome://userchrome/content/fxa/avatar-big.svg);
-    }
+#fxa-toolbar-menu-button .toolbarbutton-icon {
+    list-style-image: url(chrome://userchrome/content/fxa/avatar-big.svg);
 }
