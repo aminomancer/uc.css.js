@@ -78,7 +78,7 @@
          *                 is "true" if we're currently taking a screenshot, "false" if not.
          */
         observe(sub, top, data) {
-            this.setButtonState(data === "true"); // disable the button while we're already taking a screenshot, just like the toolbar button.
+            //this.setButtonState(data === "true"); // uncomment to disable the button while we're already taking a screenshot.
         },
         /**
          * Set the "shooting" property on the button node.
