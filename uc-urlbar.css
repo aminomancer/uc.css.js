@@ -6,6 +6,7 @@ that includes all the icons, page actions, etc. */
     border: none !important;
     box-shadow: none !important;
     min-height: var(--urlbar-height) !important;
+    font-size: 14px !important;
 }
 
 #urlbar-container {

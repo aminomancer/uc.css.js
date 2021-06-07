@@ -416,11 +416,6 @@
     border-radius: 2px !important;
 }
 
-#urlbar,
-#urlbar[breakout-extend] {
-    font-size: 1.15em !important;
-}
-
 #urlbar[breakout][breakout-extend] > #urlbar-input-container,
 #urlbar-input-container {
     height: var(--urlbar-height) !important;

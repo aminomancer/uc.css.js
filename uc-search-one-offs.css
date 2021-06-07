@@ -69,15 +69,15 @@ it also changes the appearance of the one-offs in the searchbar. */
 }
 
 #PopupSearchAutoComplete
-    :is(.searchbar-engine-one-off-item, .addengine-item):hover
+    :is(.searchbar-engine-one-off-item, .addengine-item):hover:not([selected])
     > :is(stack, .button-box) {
-    background-color: var(--arrowpanel-dimmed) !important;
+    background-color: var(--autocomplete-popup-hover-background) !important;
 }
 
 #PopupSearchAutoComplete
-    :is(.searchbar-engine-one-off-item, .addengine-item)[selected]:not(:hover)
+    :is(.searchbar-engine-one-off-item, .addengine-item)[selected]
     > :is(stack, .button-box) {
-    background-color: var(--arrowpanel-faint) !important;
+    background-color: var(--autocomplete-popup-highlight-background) !important;
 }
 
 #PopupSearchAutoComplete #searchbar-one-offs-header-label,
@@ -125,7 +125,6 @@ it also changes the appearance of the one-offs in the searchbar. */
 }
 
 #PopupSearchAutoComplete .search-setting-button {
-    padding: 0 !important;
     width: 28px !important;
     min-height: 28px !important;
     margin-right: 6px !important;
@@ -134,10 +133,6 @@ it also changes the appearance of the one-offs in the searchbar. */
 
 #PopupSearchAutoComplete .search-add-engines:not(:empty) ~ .search-setting-button {
     margin-left: 4px !important;
-}
-
-#PopupSearchAutoComplete .search-setting-button[selected]:not(:hover) {
-    background-color: var(--arrowpanel-faint) !important;
 }
 
 #PopupSearchAutoComplete .search-setting-button > .button-box {

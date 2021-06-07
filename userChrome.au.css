@@ -16,6 +16,11 @@ the last 75% or so of this stylesheet is dedicated to restoring pre-proton conte
     border: revert;
 }
 
+#PopupSearchAutoComplete::part(content) {
+	--panel-color: var(--ui-text-80);
+	--panel-background: none;
+}
+
 panel[type="autocomplete-richlistbox"] {
 	--panel-color: var(--ui-text-80);
 	--panel-background: none;

@@ -76,33 +76,13 @@
 
         function toggleSettingsButton(hide) {
             if (hide) {
-                oneOffs.getSelectableButtons = function getSelectableButtons(
-                    aIncludeNonEngineButtons
-                ) {
-                    let buttons = [];
-                    for (
-                        let oneOff = this.buttons.firstElementChild;
-                        oneOff;
-                        oneOff = oneOff.nextElementSibling
-                    )
-                        buttons.push(oneOff);
-
-                    if (aIncludeNonEngineButtons) {
-                        for (
-                            let addEngine = this.addEngines.firstElementChild;
-                            addEngine;
-                            addEngine = addEngine.nextElementSibling
-                        )
-                            buttons.push(addEngine);
-                    }
-                    return buttons;
+                oneOffs.getSelectableButtons = function () {
+                    return [...this.buttons.querySelectorAll(".searchbar-engine-one-off-item")];
                 };
                 oneOffs.settingsButtonCompact.style.display = "none";
                 if (oneOffs.settingsButton) oneOffs.settingsButton.style.display = "none";
             } else {
-                oneOffs.getSelectableButtons = Object.getPrototypeOf(
-                    gURLBar.view.oneOffSearchButtons
-                ).getSelectableButtons;
+                delete oneOffs.getSelectableButtons;
                 oneOffs.settingsButtonCompact.style.removeProperty("display");
                 if (oneOffs.settingsButton) oneOffs.settingsButton.style.removeProperty("display");
             }
@@ -122,10 +102,14 @@
                 : delete gURLBar.view.controller.handleKeyNavigation;
         }
 
-        oneOffs.handleSearchCommand = function handleSearchCommand(event, searchMode) {
-            if (this.selectedButton == this.view.oneOffSearchButtons.settingsButtonCompact) {
+        oneOffs.handleSearchCommand = function (event, searchMode) {
+            if (
+                this.selectedButton == this.view.oneOffSearchButtons.settingsButtonCompact ||
+                this.selectedButton.classList.contains("searchbar-engine-one-off-add-engine")
+            ) {
                 this.input.controller.engagementEvent.discard();
                 this.selectedButton.doCommand();
+                this.selectedButton = null;
                 return;
             }
 
@@ -187,7 +171,7 @@
                 this.container.scrollTo(0, 0);
         };
 
-        oneOffs.scrollToButton = function scrollToButton(el) {
+        oneOffs.scrollToButton = function (el) {
             let slider = el.parentElement;
             let buttonX = rectX(el) - rectX(slider);
             let midpoint = this.container.clientWidth / 2;
@@ -197,11 +181,7 @@
             });
         };
 
-        oneOffs.advanceSelection = function advanceSelection(
-            aForward,
-            aIncludeNonEngineButtons,
-            aWrapAround
-        ) {
+        oneOffs.advanceSelection = function (aForward, aIncludeNonEngineButtons, aWrapAround) {
             let buttons = this.getSelectableButtons(aIncludeNonEngineButtons);
             let index;
             if (this.selectedButton) {
@@ -237,7 +217,11 @@
                 if (this.isViewOpen) {
                     let isOneOffSelected =
                         this.selectedButton &&
-                        this.selectedButton.classList.contains("searchbar-engine-one-off-item");
+                        this.selectedButton.classList.contains("searchbar-engine-one-off-item") &&
+                        !(
+                            this.selectedButton == this.settingsButtonCompact &&
+                            this.hasAttribute("is_searchbar")
+                        );
                     if (this.selectedButton && !isOneOffSelected) this.selectedButton = null;
                     if (this.canScroll && !gURLBar.searchMode) this.container.scrollTo(0, 0);
                 }
