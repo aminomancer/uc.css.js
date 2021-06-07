@@ -245,7 +245,6 @@ panel[type="arrow"][side="top"] {
 }
 
 #protections-popup .panel-footer > button {
-    margin: 0 !important;
     border-radius: var(--arrowpanel-menuitem-border-radius) !important;
     flex: 1 !important;
     font-weight: normal !important;
