@@ -11,6 +11,45 @@ panelview {
     margin-top: 2px;
 }
 
+/* allow panel height to flex and animate */
+.panel-viewstack,
+.panel-viewcontainer {
+    min-height: revert !important;
+}
+
+/* make the animation smoother */
+.panel-viewcontainer[panelopen] {
+    transition-timing-function: var(--uc-smooth-timing-function) !important;
+}
+
+/* without this, the last button in the panel will typically be touching the edge of the panel,
+instead of 4px from the edge as it should be. */
+toolbarseparator + .panel-subview-body,
+.subview-subheader + .panel-subview-body {
+	padding-bottom: var(--panel-subview-body-padding-magnitude) !important;
+}
+
+.panel-header + .panel-subview-body {
+    margin-block: var(--panel-separator-margin); /* for some reason, the "recently closed tabs" subview doesn't have a separator under the header. simulate one. */
+    margin-block-end: 0;
+    padding-bottom: 0 !important; /* revert the extra padding from the previous rule on certain panels that don't need it */
+    border-top: 1px solid transparent;
+    border-image: linear-gradient(to right, transparent 4px, var(--panel-separator-color) 4px, var(--panel-separator-color) calc(100% - 4px), transparent calc(100% - 4px));
+    border-image-slice: 1;
+}
+
+/* .panel-subview-body + toolbarseparator {
+    margin-top: 0 !important;
+} */
+
+/* #identity-popup-multiView > .panel-viewcontainer {
+    min-height: revert !important;
+}
+
+panel[viewId="PanelUI-eom"] .panel-viewcontainer[panelopen] {
+    min-height: revert !important;
+} */
+
 #identity-popup[type="arrow"][side="top"],
 #identity-popup[type="arrow"][side="bottom"],
 #protections-popup[type="arrow"][side="top"],
@@ -1050,11 +1089,6 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
     min-width: 700px !important;
 }
 
-/* all tabs menu panel */
-#allTabsMenu-containerTabsView {
-    padding-block-end: 4px !important;
-}
-
 /* urlbar page action menu */
 #pageActionPanel panelview {
     min-width: 18em !important;
@@ -1207,8 +1241,4 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
 #protections-popup-sendReportView-body {
     margin: var(--arrowpanel-menuitem-margin) !important;
     padding-inline: calc(var(--arrowpanel-menuitem-padding) * 2) !important;
-}
-
-#identity-popup-multiView > .panel-viewcontainer {
-    min-height: revert !important;
 }

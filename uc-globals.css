@@ -17,6 +17,7 @@ tooltip {
     --uc-desaturate-dimmed-even-further: hsla(236, 60%, 85%, 0.3);
     --uc-panel-button-solid: hsl(234, 24%, 35%);
     --uc-panel-box-solid: hsl(233, 29%, 18%);
+    --uc-smooth-timing-function: cubic-bezier(.07,.78,.21,.95);
     --uc-content-text-a50: hsla(236, 100%, 85%, 0.5);
     --uc-content-text-a80: rgba(255, 255, 255, 0.8);
     --uc-accent-color: hsl(233, 61%, 8%);

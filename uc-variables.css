@@ -162,6 +162,7 @@ menupopup {
         --in-parent-primary-button-background-active
     ) !important;
     --buttons-primary-button-color: var(--in-parent-primary-button-text-color) !important;
+    --panelui-subview-transition-duration: 200ms !important;
 }
 
 :root[lwthemetextcolor="bright"] {
@@ -224,10 +225,4 @@ menupopup,
     --arrowpanel-menuitem-padding: 8px !important;
     --panel-subview-body-padding-magnitude: var(--arrowpanel-menuitem-inline-margin);
     --panel-subview-body-padding: var(--panel-subview-body-padding-magnitude) 0 !important;
-}
-
-@media (-moz-proton-contextmenus) {
-    :root,
-    menupopup {
-    }
 }
