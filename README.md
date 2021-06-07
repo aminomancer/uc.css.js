@@ -40,7 +40,7 @@ For best results, set density mode to `Normal` and theme to `Dark` in the custom
 | dom.forms.selectSearch 	| Boolean 	| true 	|  	|
 | findbar.highlightAll 	| Boolean 	| true 	| Stylesheet eliminates some rarely used findbar buttons. So I leave this set to true 	|
 | findbar.matchdiacritics 	| Number 	| 2 	|  	|
-| gfx.font_rendering.cleartype_params.cleartype_level 	| Number 	| 100 	| These settings are a major improvement to text rendering on Windows. Idk about mac/linux 	|
+| gfx.font_rendering.cleartype_params.cleartype_level 	| Number 	| 100 	| These settings are a major improvement to text rendering on Windows. I don't think they do anything on mac/linux 	|
 | gfx.font_rendering.cleartype_params.force_gdi_classic_for_families 	| String 	| `<empty>` 	| Leave the value completely empty 	|
 | gfx.font_rendering.cleartype_params.force_gdi_classic_max_size 	| Number 	| 6 	|  	|
 | gfx.font_rendering.cleartype_params.pixel_structure 	| Number 	| 1 	|  	|
