@@ -23,7 +23,7 @@
     BrowserPageActions.screenshot = {
         id: "screenshot", // yields a node ID of #pageAction-urlbar-screenshot
         pref: "extensions.screenshots.disabled",
-        css: `#pageAction-urlbar-screenshot{list-style-image:var(--screenshot-icon,url("chrome://browser/skin/screenshot.svg"))}#pageAction-urlbar-screenshot[shooting]{pointer-events:none}#pageAction-urlbar-screenshot[shooting]>.urlbar-icon{fill-opacity:.4}`, // use the icon defined in uc-globals.css, there are 2 options there — the camera icon from the devtools or the default screenshot icon that looks like scissors cutting a picture. I prefer the camera so that's the default if you have my theme installed. without the theme, it just uses the default built-in icon. set up the disabled icon appearance.
+        css: `#pageAction-urlbar-screenshot{list-style-image:var(--screenshot-icon,url("chrome://browser/skin/screenshot.svg"));}#pageAction-urlbar-screenshot[shooting]{background-color:hsla(0,0%,70%,.1);}`, // use the icon defined in uc-globals.css, there are 2 options there — the camera icon from the devtools or the default screenshot icon that looks like scissors cutting a picture. I prefer the camera so that's the default if you have my theme installed. without the theme, it just uses the default built-in icon. set up the disabled icon appearance.
         get action() {
             return PageActions.actionForID(this.id);
         },

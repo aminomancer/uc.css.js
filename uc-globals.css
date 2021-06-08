@@ -12,6 +12,7 @@ tooltip {
     --uc-arrowpanel-dimmed: hsla(236, 100%, 83%, 0.17);
     --uc-arrowpanel-dimmed-further: hsla(236, 100%, 83%, 0.25);
     --uc-arrowpanel-dimmed-even-further: hsla(236, 100%, 85%, 0.3);
+    --uc-desaturate-faint: hsla(236, 60%, 83%, 0.1);
     --uc-desaturate-dimmed: hsla(236, 60%, 83%, 0.17);
     --uc-desaturate-dimmed-further: hsla(236, 60%, 83%, 0.25);
     --uc-desaturate-dimmed-even-further: hsla(236, 60%, 85%, 0.3);
