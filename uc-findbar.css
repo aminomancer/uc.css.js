@@ -138,6 +138,13 @@ findbar .matches-indicator {
     height: var(--findbar-height) !important;
 }
 
+@supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
+    findbar .matches-indicator {
+        font-weight: 300 !important;
+        line-height: 23px !important;
+    }
+}
+
 .findbar-textbox:focus ~ .matches-indicator {
     background-color: var(--search-box-focus);
 }

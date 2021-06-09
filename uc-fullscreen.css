@@ -18,6 +18,7 @@ we also need to adjust window controls, the main menu bar, and the bookmarks too
 }
 
 :root[inFullscreen]:not([customizing]) #navigator-toolbox {
+    max-height: 0 !important;
     margin-top: calc(0.5px - var(--urlbar-container-height) - var(--tab-min-height)) !important;
     transition: all 0.25s ease-in-out 0s !important;
     transition-delay: 0s !important;
@@ -35,6 +36,11 @@ we also need to adjust window controls, the main menu bar, and the bookmarks too
     height: 2px !important;
 }
 
+#main-window:root[inFullscreen]:not([customizing]) > body > box:not([id]) {
+    background: var(--toolbar-bgcolor) !important;
+    max-height: 0 !important;
+}
+
 /* hides the nav-bar in fullscreen, but reveals it when hovering or focusing the nav-bar, or when nav-bar related popups are opened.
 requires fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-status. */
 :root[customizing] #navigator-toolbox,
@@ -47,9 +53,13 @@ requires fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-statu
     opacity: 1 !important;
 }
 
-:root[inFullscreen] #navigator-toolbox {
+/* :root[inFullscreen] #navigator-toolbox {
     position: fixed !important;
     display: block;
+} */
+
+:root[inFullscreen] #navigator-toolbox {
+    margin-bottom: calc(0px - var(--urlbar-container-height) - var(--tab-min-height)) !important;
 }
 
 :root[inFullscreen]:not([customizing]) #sidebar-box {
