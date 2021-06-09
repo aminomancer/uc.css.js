@@ -24,8 +24,8 @@ panelview {
 
 /* without this, the last button in the panel will typically be touching the edge of the panel,
 instead of 4px from the edge as it should be. */
-toolbarseparator + .panel-subview-body,
-.subview-subheader + .panel-subview-body {
+:not(.panel-subview-body) > toolbarseparator + .panel-subview-body,
+:not(.panel-subview-body) > .subview-subheader + .panel-subview-body {
 	padding-bottom: var(--panel-subview-body-padding-magnitude) !important;
 }
 
@@ -36,6 +36,10 @@ toolbarseparator + .panel-subview-body,
     border-top: 1px solid transparent;
     border-image: linear-gradient(to right, transparent 4px, var(--panel-separator-color) 4px, var(--panel-separator-color) calc(100% - 4px), transparent calc(100% - 4px));
     border-image-slice: 1;
+}
+
+.panel-subview-body:not(:last-child) {
+    padding-bottom: 0 !important;
 }
 
 /* .panel-subview-body + toolbarseparator {

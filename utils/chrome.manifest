@@ -17,6 +17,7 @@ override chrome://browser/skin/reload.svg ../resources/skin/reload.svg
 override chrome://browser/skin/bookmark.svg ../resources/skin/bookmark.svg
 override chrome://browser/skin/bookmark-hollow.svg ../resources/skin/bookmark-hollow.svg
 override chrome://global/skin/icons/settings.svg ../resources/settings.svg
+override chrome://browser/content/extension.svg ../resources/material/extension.svg
 override chrome://mozapps/skin/extensions/extension.svg ../resources/material/extension.svg
 override chrome://mozapps/skin/extensions/extensionGeneric.svg ../resources/material/extensionGeneric.svg
 override chrome://browser/skin/places/folder.svg ../resources/material/places/folder.svg

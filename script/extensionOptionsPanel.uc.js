@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Extension Options Panel
-// @version        1.0
+// @version        1.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    This script creates a toolbar button that opens a popup panel where extensions can be configured, disabled, uninstalled, etc. Each extension gets its own button in the panel. Clicking an extension's button leads to a subview where you can jump to the extension's options, disable or enable the extension, uninstall it, view its source code in whatever program is associated with .xpi files, open the extension's homepage, or copy the extension's ID. Based on a similar script by xiaoxiaoflood, but will not be compatible with xiaoxiaoflood's loader. This one requires fx-autoconfig or Alice0775's loader. It opens a panel instead of a menupopup, for more consistency with other toolbar widgets. There are configuration options directly below.
@@ -19,7 +19,7 @@ class ExtensionOptionsWidget {
 
         "Addon ID blacklist": [], // put addon IDs in this list, separated by commas, to exclude them from the list, e.g. ["screenshots@mozilla.org", "dark-theme@mozilla.org"]
 
-        "Icon URL": `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="context-fill" fill-opacity="context-fill-opacity" viewBox="0 0 16 16"><path d="M0 9.026c0 1.132.919 2.051 2.051 2.051v3.274c0 .903.738 1.641 1.641 1.641H6.81c0-2.207 1.772-2.453 2.215-2.453.443 0 2.215.238 2.215 2.462h3.118A1.647 1.647 0 0016 14.359v-3.118c-2.224 0-2.462-1.772-2.462-2.215 0-.443.238-2.215 2.462-2.215V3.692c0-.903-.738-1.641-1.641-1.641h-3.282a2.052 2.052 0 00-4.103 0H3.692c-.903 0-1.641.738-1.641 1.641v3.282A2.052 2.052 0 000 9.026z"/></svg>`, // if you want to change the button's icon for some reason, you can replace this string with any URL or data URL that leads to an image.
+        "Icon URL": `chrome://browser/content/extension.svg`, // if you want to change the button's icon for some reason, you can replace this string with any URL or data URL that leads to an image.
 
         "Button label": "Extension Options Panel", // what should the button's label be when it's in the overflow panel or customization palette?
 
@@ -91,6 +91,17 @@ class ExtensionOptionsWidget {
                         class: "panel-subview-body",
                     });
                     view.appendChild(body);
+
+                    view.appendChild(document.createXULElement("toolbarseparator"));
+
+                    // make a footer button that leads to about:addons
+                    let allAddonsButton = this.create(document, "toolbarbutton", {
+                        label: "Addons Page",
+                        class: "subviewbutton subviewbutton-iconic panel-subview-footer-button",
+                        image: this.config["Icon URL"],
+                        oncommand: `BrowserOpenAddonsMgr("addons://list/extension")`,
+                    });
+                    view.appendChild(allAddonsButton);
                 },
                 // populate the panel before it's shown
                 onViewShowing: (event) => {
@@ -164,7 +175,7 @@ class ExtensionOptionsWidget {
 
                     let subviewbutton = this.create(document, "toolbarbutton", {
                         label: addon.name + (showVersion ? " " + addon.version : ""),
-                        class: "subviewbutton subviewbutton-nav",
+                        class: "subviewbutton subviewbutton-iconic subviewbutton-nav",
                         image: addon.iconURL || this.config["Icon URL"],
                         oncommand: "extensionOptionsPanel.showSubView(event, this)",
                         "widget-type": "view",
@@ -181,25 +192,16 @@ class ExtensionOptionsWidget {
         // if no addons are shown, display a "Download Addons" button that leads to AMO.
         let getAddonsButton = this.create(document, "toolbarbutton", {
             id: "eom-get-addons-button",
-            class: "subviewbutton",
+            class: "subviewbutton subviewbutton-iconic",
             label: "Download Addons",
+            image: `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 68 68" style="border-radius:3px"><path fill="context-fill" fill-opacity="context-fill-opacity" d="M0 0v68h68V0H0zm61.8 49H49.5V32.4c0-5.1-1.7-7-5-7-4 0-5.6 2.9-5.6 6.9v10.2h3.9v6.4H30.5V32.4c0-5.1-1.7-7-5-7-4 0-5.6 2.9-5.6 6.9v10.2h5.6v6.4h-18v-6.4h3.9V26H7.5v-6.4h12.3V24c1.8-3.1 4.8-5 8.9-5 4.2 0 8.1 2 9.5 6.3 1.6-3.9 4.9-6.3 9.5-6.3 5.3 0 10.1 3.2 10.1 10.1v13.5h4V49z"/></svg>`,
             oncommand: `switchToTabHavingURI("https://addons.mozilla.org", true, {
                     inBackground: false,
                     triggeringPrincipal: Services.scriptSecurityManager.getSystemPrincipal(),
                 });`,
         });
         body.appendChild(getAddonsButton);
-
-        body.appendChild(document.createXULElement("toolbarseparator"));
-
-        // make a footer button that leads to about:addons
-        let allAddonsButton = this.create(document, "toolbarbutton", {
-            label: "Addons Page",
-            class: "subviewbutton",
-            oncommand: `BrowserOpenAddonsMgr("addons://list/extension")`,
-        });
-        body.appendChild(allAddonsButton);
-        getAddonsButton.hidden = body.children.length > 3;
+        getAddonsButton.hidden = body.children.length > 1;
     }
 
     /**
@@ -366,19 +368,6 @@ class ExtensionOptionsWidget {
             "data:text/css;charset=UTF=8," +
                 encodeURIComponent(`#eom-button {
                         list-style-image: url('${this.config["Icon URL"]}');
-                    }
-                    #PanelUI-eom .subviewbutton[image] .toolbarbutton-icon {
-                        height: 16px;
-                        width: 16px;
-                    }
-                    #PanelUI-eom .enabling label:after {
-                        content: "+" !important;
-                    }
-                    #PanelUI-eom .disabling label:after {
-                        content: "-" !important;
-                    }
-                    #PanelUI-eom .uninstalling label:after {
-                        content: "!" !important;
                     }
                     #PanelUI-eom .disabled label {
                         opacity: 0.6;

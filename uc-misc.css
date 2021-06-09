@@ -125,6 +125,11 @@ for that reason i disabled it but maybe someone else wants it. it does look kind
     margin-block-start: 26px !important;
 }
 
+/* indigo progress bars */
+progress {
+    filter: hue-rotate(130deg);
+}
+
 /* blur filter */
 #statuspanel-label {
     background-color: var(--acrylic-blue) !important;
