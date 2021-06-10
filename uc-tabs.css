@@ -654,24 +654,32 @@ when the tab bar is not overflowing, new tabs slide into place much more smoothl
     transform: translateX(-15px) scale(0.5) !important;
 }
 
-.tab-throbber {
-    display: block !important;
-    position: relative !important;
-    margin-right: -16px !important;
-    overflow: hidden !important;
-    pointer-events: none !important;
-    color: rgba(255, 255, 255, 0.6) !important;
-}
-
 .tab-throbber::before {
-    content: "" !important;
-    opacity: 0 !important;
-    transition: 0.2s opacity ease-in-out !important;
+    fill: hsl(218, 100%, 81%) !important;
 }
 
 .tab-throbber[busy]::before {
-    fill: hsl(218, 100%, 81%) !important;
     opacity: 0.8 !important;
+}
+
+@supports (-moz-bool-pref("userChrome.tabs.new-loading-spinner-animation")) {
+    .tab-throbber {
+        display: block !important;
+        position: relative !important;
+    }
+
+    .tab-throbber::before {
+        content: "" !important;
+        background-image: url(chrome://userchrome/content/loading-spinner.svg) !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        -moz-context-properties: fill, fill-opacity !important;
+        opacity: 0.7 !important;
+        width: 16px !important;
+        height: 16px !important;
+        animation: none !important;
+        display: -moz-box !important;
+    }
 }
 
 #tabbrowser-tabs:not([movingtab])
@@ -712,7 +720,7 @@ so in other words it won't show if audio is playing until you hover the general 
     margin-right: -16px !important;
 }
 
-/* these rules are 2 different ways of achieving a more consistent animation on the tab throbber. however, it's expensive because the throbber is loaded 24/7 for every single tab, even though it's not actually drawn. don't use these unless you have a decent PC. it's really not necessary anyway, it happens so fast you can't actually see it pop in. */
+/* these rules are 2 different ways of achieving a more consistent animation on the tab throbber with its default animation. however, it's expensive because the throbber is loaded 24/7 for every single tab, even though it's not actually drawn. don't use these unless you have a decent PC. it's really not necessary anyway, it happens so fast you can't actually see it pop in. */
 /* .tab-throbber::before {
     content: "" !important;
     background-image: url(window/loading.svg) !important;

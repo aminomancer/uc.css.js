@@ -152,9 +152,9 @@ tooltip {
     --in-parent-box-background: var(--dialog-box-bgcolor);
     --in-parent-box-background-dim: var(--dialog-box-bgcolor-dim);
     --in-parent-box-border-color: var(--dialog-box-border-color);
-    --in-parent-button-background: var(--arrowpanel-dimmed);
-    --in-parent-button-background-hover: var(--arrowpanel-dimmed-further);
-    --in-parent-button-background-active: var(--arrowpanel-dimmed-even-further);
+    --in-parent-button-background: var(--arrowpanel-faint);
+    --in-parent-button-background-hover: var(--arrowpanel-dimmed);
+    --in-parent-button-background-active: var(--arrowpanel-dimmed-further);
     --in-parent-item-selected: var(--purple-40);
     --in-parent-item-hover: var(--arrowpanel-dimmed);
     --in-parent-border-highlight: var(--purple-40);

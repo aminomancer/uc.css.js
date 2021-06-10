@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Extension Options Panel
-// @version        1.1
+// @version        1.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    This script creates a toolbar button that opens a popup panel where extensions can be configured, disabled, uninstalled, etc. Each extension gets its own button in the panel. Clicking an extension's button leads to a subview where you can jump to the extension's options, disable or enable the extension, uninstall it, view its source code in whatever program is associated with .xpi files, open the extension's homepage, or copy the extension's ID. Based on a similar script by xiaoxiaoflood, but will not be compatible with xiaoxiaoflood's loader. This one requires fx-autoconfig or Alice0775's loader. It opens a panel instead of a menupopup, for more consistency with other toolbar widgets. There are configuration options directly below.
@@ -175,10 +175,11 @@ class ExtensionOptionsWidget {
 
                     let subviewbutton = this.create(document, "toolbarbutton", {
                         label: addon.name + (showVersion ? " " + addon.version : ""),
-                        class: "subviewbutton subviewbutton-iconic subviewbutton-nav",
+                        class: "subviewbutton subviewbutton-iconic subviewbutton-nav eom-addon-button",
                         image: addon.iconURL || this.config["Icon URL"],
                         oncommand: "extensionOptionsPanel.showSubView(event, this)",
                         "widget-type": "view",
+                        "data-extensionid": addon.id,
                     });
                     subviewbutton._Addon = addon;
 

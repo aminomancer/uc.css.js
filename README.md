@@ -75,6 +75,7 @@ For best results, set density mode to `Normal` and theme to `Dark` in the custom
 | userChrome.bookmarks-toolbar.icons-only 	| Boolean 	| false 	| If true, bookmark buttons in the toolbar are just square icons 	|
 | userChrome.css.mac-ui-fonts 	| Boolean 	| true 	| Replace UI font with SF Pro. Requires a local copy of [SF Pro Display Regular](https://developer.apple.com/fonts/) 	|
 | userChrome.tabs.all-tabs-menu.reverse-order 	| Boolean 	| true 	| Display all tabs menu in reverse order (newer tabs on top, like history) 	|
+| userChrome.tabs.new-loading-spinner-animation 	| Boolean 	| true 	| Replace the tab loading throbber with a spinning animation 	|
 | userChrome.tabs.pinned-tabs.close-buttons.disabled 	| Boolean 	| true 	| This controls whether close buttons are shown on pinned tabs 	|
 | userChrome.tabs.rounded-outer-corners.disabled 	| Boolean 	| false 	| This controls whether tabs have rounded bottom corners<br/><a href="https://youtu.be/BAuABH13ytM"><img src="preview/prev-tabcorners.webp" width="100%"/></a> 	|
 | userChrome.urlbar.hide-bookmarks-button-on-system-pages 	| Boolean 	| true 	| Hides the urlbar's bookmark button on system pages & new tab page 	|

@@ -247,7 +247,57 @@ panel[type="arrow"][side="top"] {
     border-radius: var(--arrowpanel-menuitem-border-radius) !important;
     flex: 1 !important;
     font-weight: normal !important;
-    border-inline: 0 !important;
+}
+
+.popup-notification-button-container > button:not([disabled]):is(:hover:active, [open]) {
+    background-color: var(--button-active-bgcolor) !important;
+}
+
+.popup-notification-button-container > button:not([disabled], :active):is(:hover, :focus-visible) {
+    background-color: var(--button-hover-bgcolor) !important;
+}
+
+.popup-notification-button-container > button {
+    background-color: var(--button-hover-bgcolor) !important;
+    border: 1px solid transparent !important;
+    padding: 7.25px 16px !important;
+}
+
+.popup-notification-button-container > button[disabled] {
+    background-color: var(--button-hover-bgcolor) !important;
+    opacity: 0.5;
+}
+
+.popup-notification-button-container > button[disabled] .button-text {
+    color: white;
+}
+
+.popup-notification-button-container > .popup-notification-secondary-button:not([disabled]) {
+    background-color: transparent !important;
+    border-color: var(--button-hover-bgcolor) !important;
+}
+
+.popup-notification-button-container > .popup-notification-secondary-button:not([disabled], :active):is(:hover, :focus-visible) {
+    background-color: var(--button-hover-bgcolor) !important;
+    border-color: transparent !important;
+}
+
+.popup-notification-button-container > .popup-notification-secondary-button:not([disabled]):is(:hover:active, [open]) {
+    background-color: var(--button-active-bgcolor) !important;
+    border-color: transparent !important;
+}
+
+.popup-notification-button-container
+    > .popup-notification-primary-button:not([disabled]):not([disabled], :active):is(:hover, :focus-visible) {
+    background-color: var(--button-primary-hover-bgcolor) !important;
+}
+
+.popup-notification-button-container > .popup-notification-primary-button:not([disabled]):hover:active {
+    background-color: var(--button-primary-active-bgcolor) !important;
+}
+
+.panel-info-button[checked]:not([disabled]):is(:hover, :focus-visible) {
+    background-color: var(--arrowpanel-dimmed-even-further) !important;
 }
 
 #protections-popup .panel-footer {
@@ -336,48 +386,6 @@ popupnotificationcontent {
 
 panel {
     --panel-separator-color: var(--desaturate-dimmed) !important;
-}
-
-.popup-notification-button-container > button:not([disabled]):is(:hover:active, [open]) {
-    background-color: var(--arrowpanel-dimmed-even-further) !important;
-}
-
-.popup-notification-button-container > button:not([disabled], :active):is(:hover, :focus-visible) {
-    background-color: var(--arrowpanel-dimmed-further) !important;
-}
-
-.popup-notification-button-container > button {
-    background-color: var(--arrowpanel-dimmed) !important;
-}
-
-.popup-notification-button-container > button[disabled] {
-    background-color: var(--arrowpanel-dimmed) !important;
-    opacity: 0.5;
-}
-
-.popup-notification-button-container > button[disabled] .button-text {
-    color: white;
-}
-
-.popup-notification-primary-button {
-    border-inline-end: 1px solid var(--panel-separator-color) !important;
-}
-
-.panel-footer > .popup-notification-primary-button:not([disabled]) {
-    background-color: hsl(237, 26%, 30%) !important;
-}
-
-.panel-footer
-    > .popup-notification-primary-button:not([disabled]):not([disabled], :active):is(:hover, :focus-visible) {
-    background-color: hsl(242, 60%, 56%) !important;
-}
-
-.panel-footer > .popup-notification-primary-button:not([disabled]):hover:active {
-    background-color: hsl(242, 65%, 60%) !important;
-}
-
-.panel-info-button[checked]:not([disabled]):is(:hover, :focus-visible) {
-    background-color: var(--arrowpanel-dimmed-even-further) !important;
 }
 
 popupnotification checkbox .checkbox-check {
@@ -473,7 +481,8 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
     text-decoration: none !important;
 }
 
-:is(.popup-notification-learnmore-link, #protections-popup .text-link):is(:hover, :focus-visible) {
+:is(.popup-notification-learnmore-link, panel .text-link):is(:hover, :focus-visible),
+#protections-popup .text-link:is(:hover, :focus-visible) {
     text-decoration: underline !important;
 }
 

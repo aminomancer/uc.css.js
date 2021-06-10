@@ -3034,6 +3034,10 @@ domain("wikimedia.org") {
         background-color: rgb(35, 35, 36) !important;
     }
 
+    .mw-parser-output > .wikitable[width] {
+        width: revert !important;
+    }
+
     code {
         font-family: "Source Code Pro", monospace !important;
         border-color: #151819 !important;

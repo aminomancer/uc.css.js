@@ -7,12 +7,14 @@ that respond to CSS' "fill" and "stroke" properties.
 individual extensions' popups and other content documents are styled in userContent.css. */
 
 /* extension icon appearance */
-#webapps_mendeley_com-browser-action .toolbarbutton-icon {
+
+/* mendeley web importer */
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="webapps@mendeley.com"i] .toolbarbutton-icon {
     list-style-image: url(chrome://userchrome/content/material/mendeley.svg) !important;
 }
 
 /* multi-account containers */
-#_testpilot-containers-browser-action .toolbarbutton-icon {
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="@testpilot-containers"i] .toolbarbutton-icon {
     list-style-image: url(chrome://userchrome/content/skin/container-plus.svg);
 }
 
@@ -27,46 +29,46 @@ individual extensions' popups and other content documents are styled in userCont
 }
 
 /* zotero, an extension for storing articles and auto generating academic citations, etc. */
-#zotero_chnm_gmu_edu-browser-action {
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="zotero@chnm.gmu.edu"i] .toolbarbutton-icon {
     list-style-image: url(chrome://userchrome/content/material/zotero.svg) !important;
 }
 
 /* WebNowPlaying Companion. works for the original or for my fork. */
-#_64b2c525-24ed-4c05-aed1-95ff9e6cef70_-browser-action .toolbarbutton-icon,
-#wnpc_aminomancer-browser-action .toolbarbutton-icon {
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="{64b2c525-24ed-4c05-aed1-95ff9e6cef70}"i] .toolbarbutton-icon,
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="wnpc@aminomancer"i] .toolbarbutton-icon {
     list-style-image: url(chrome://userchrome/content/material/rainmeter.svg);
 }
 
 /* Add custom search engine, an extension for creating new search engines with custom parameters */
-#_af37054b-3ace-46a2-ac59-709e4412bec6_-browser-action .toolbarbutton-icon {
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="{af37054b-3ace-46a2-ac59-709e4412bec6}"i] .toolbarbutton-icon {
     list-style-image: url(chrome://userchrome/content/search-glass.svg);
 }
 
 /* mozlz4-edit, an extension for editing mozlz4 files like your profile's search.json.mozlz4 file that contains all your search engines */
-#_0981817c-71b3-4853-a801-481c90af2e8e_-browser-action .toolbarbutton-icon {
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="{0981817c-71b3-4853-a801-481c90af2e8e}"i] .toolbarbutton-icon {
     list-style-image: url(chrome://userchrome/content/devtools/tool-dom.svg);
 }
 
 /* nordVPN browser extension */
-#nordvpnproxy_nordvpn_com-browser-action .toolbarbutton-icon {
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="nordvpnproxy@nordvpn.com"i] .toolbarbutton-icon {
     list-style-image: url(chrome://userchrome/content/material/nord.svg) !important;
 }
 
 /* nordVPN while it's active */
-#nordvpnproxy_nordvpn_com-browser-action[badge] {
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="nordvpnproxy@nordvpn.com"i][badge] {
     fill: var(--toolbarbutton-icon-fill-attention) !important;
 }
 
 /* cookie remover */
-.webextension-browser-action[label="Remove cookies for this site"] .toolbarbutton-icon,
-#_3507f56d-2ef5-45c1-b6d7-5297a0ba7642_-browser-action .toolbarbutton-icon {
+:is(.webextension-browser-action, .eom-addon-button)[label="Remove cookies for this site"] .toolbarbutton-icon,
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="{3507f56d-2ef5-45c1-b6d7-5297a0ba7642}"i] .toolbarbutton-icon {
     list-style-image: url(chrome://userchrome/content/skin/3rdpartycookies-disabled.svg);
 }
 
 /* pushbullet, an extension for controlling, sharing stuff with, and receiving notifications from your phone */
 #sidebarMenu-popup
     #button__6540f1c5-ab3d-4eff-9ad2-79a95aec93d5_-sidebar-action:not([checked="true"]),
-.webextension-browser-action[data-extensionid="jid1-BYcQOfYfmBMd9A@jetpack"] {
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="jid1-BYcQOfYfmBMd9A@jetpack"i] {
     list-style-image: url(chrome://userchrome/content/material/pushbullet-solid.svg) !important;
 }
 
@@ -86,14 +88,14 @@ individual extensions' popups and other content documents are styled in userCont
     list-style-image: url(chrome://userchrome/content/notifications/webauthn.svg) !important;
 }
 
-/* simple translate */
-#jid1-93wyvpgvxzgatw_jetpack-browser-action .toolbarbutton-icon,
-#simple-translate_sienori-browser-action .toolbarbutton-icon {
+/* simple translate and "to google translate" */
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="jid1-93WyvpgvxzGATw@jetpack"i] .toolbarbutton-icon,
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="simple-translate@sienori"i] .toolbarbutton-icon {
     list-style-image: url(chrome://userchrome/content/material/translate.svg);
 }
 
 /* dark reader */
-#addon_darkreader_org-browser-action .toolbarbutton-icon {
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="addon@darkreader.org"i] .toolbarbutton-icon {
     list-style-image: url(chrome://userchrome/content/material/darkmode.svg);
 }
 
@@ -104,40 +106,42 @@ individual extensions' popups and other content documents are styled in userCont
 }
 
 /* uBlock origin */
-#ublock0_raymondhill_net-browser-action .toolbarbutton-icon {
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="uBlock0@raymondhill.net"i] .toolbarbutton-icon {
     list-style-image: url(chrome://userchrome/content/show-password.svg);
 }
 
 /* uBlock origin disabled on this site */
-#ublock0_raymondhill_net-browser-action[style*="icon_16-off.png"] .toolbarbutton-icon {
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="uBlock0@raymondhill.net"i][style*="icon_16-off.png"] .toolbarbutton-icon {
     list-style-image: url(chrome://userchrome/content/hide-password.svg);
 }
 
 /* multithreaded download manager, an extension for downloading files more quickly or with fewer restrictions */
-#multithreaded-download-manager_qw_linux-2g64_local-browser-action .toolbarbutton-icon {
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="multithreaded-download-manager@qw.linux-2g64.local"i] .toolbarbutton-icon {
     list-style-image: url(chrome://userchrome/content/downloads/double-download.svg);
 }
 
 /* firefox private network beta. not available anymore to my knowledge.
 replaced by firefox VPN which is a paid service. this won't work for that, different extensions.
 I was a beta tester and they never shut the beta off for some reason so this still works for me. */
-.webextension-browser-action[widget-id="secure-proxy_mozilla_com-browser-action"] {
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="secure-proxy@mozilla.com"i] {
     list-style-image: url(chrome://userchrome/content/skin/vpn-off-dark.svg) !important;
 }
 
 /* firefox private network enabled */
-.webextension-browser-action[widget-id="secure-proxy_mozilla_com-browser-action"][label="Firefox Private Network is On"] {
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="secure-proxy@mozilla.com"i][label="Firefox Private Network is On"] {
     list-style-image: var(--vpn-on-icon) !important;
 }
 
 /* violentmonkey, for injecting scripts into content windows */
-.webextension-browser-action[label^="Violentmonkey"] .toolbarbutton-icon {
+:is(.webextension-browser-action, .eom-addon-button)[label^="Violentmonkey"] .toolbarbutton-icon,
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="{aecec67f-0d10-4fa7-b7c7-609a2db280cf}"i] .toolbarbutton-icon {
     list-style-image: url(chrome://userchrome/content/devtools/command-console.svg);
 }
 
 /* stylus, for injecting inline CSS into content windows.
 more useful than userContent.css when dealing with very complex websites that need elaborate/compiled stylesheets */
-.webextension-browser-action[label="Stylus"] .toolbarbutton-icon {
+:is(.webextension-browser-action, .eom-addon-button)[label="Stylus"] .toolbarbutton-icon,
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="{7a7a4a92-a2a0-41d1-9fd7-1e92480d612d}"i] .toolbarbutton-icon {
     list-style-image: url(chrome://userchrome/content/devtools/tool-styleeditor.svg);
 }
 
