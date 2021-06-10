@@ -42,6 +42,13 @@ instead of 4px from the edge as it should be. */
     padding-bottom: 0 !important;
 }
 
+/* fixes a similar tiny height animation hiccup when switching panels in the identity popup */
+.identity-popup-section,
+.identity-popup-security-content,
+#identity-popup .panel-view-body-unscrollable {
+    max-height: 0 !important;
+}
+
 /* .panel-subview-body + toolbarseparator {
     margin-top: 0 !important;
 } */
@@ -416,6 +423,44 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
     margin-block: 0 !important;
 }
 
+.subviewradio:not([disabled], [open], [selected], :active):is(:hover, :focus) {
+    background-color: var(--button-bgcolor) !important;
+}
+
+.subviewradio[selected],
+.subviewradio:not([disabled]):is([open], :hover:active) {
+    background-color: var(--button-hover-bgcolor) !important;
+}
+
+.subviewradio > .radio-check {
+    border-color: var(--uc-checkbox-border-color) !important;
+    background-color: var(--uc-checkbox-unchecked-bgcolor) !important;
+}
+
+.subviewradio > .radio-check[selected] {
+    border: 1px solid var(--uc-checkbox-checked-border-color) !important;
+    background-color: var(--uc-checkbox-checked-bgcolor) !important;
+    list-style-image: url(chrome://userchrome/content/radio.svg);
+    fill: currentColor;
+    -moz-context-properties: fill, fill-opacity;
+}
+
+.subviewradio:is(:hover, :focus) .radio-check {
+    background-color: var(--uc-checkbox-unchecked-hover-bgcolor) !important;
+}
+
+.subviewradio:not(:focus):hover:active .radio-check {
+    background-color: var(--uc-checkbox-unchecked-active-bgcolor) !important;
+}
+
+.subviewradio:is(:hover, :focus) .radio-check[selected] {
+    background-color: var(--uc-checkbox-checked-hover-bgcolor) !important;
+}
+
+.subviewradio:not(:focus):hover:active .radio-check[selected] {
+    background-color: var(--uc-checkbox-checked-active-bgcolor) !important;
+}
+
 #protections-popup-message .text-link,
 .popup-notification-learnmore-link {
     text-decoration: none !important;
@@ -523,7 +568,7 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
 }
 
 #identity-popup-securityView .identity-popup-security-connection description {
-    margin-inline-start: 26px !important;
+    margin-inline-start: 28px !important;
 }
 
 #identity-popup-mainView .identity-popup-security-connection {
@@ -538,7 +583,6 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
     min-height: 33.3px !important;
 }
 
-#identity-popup toolbarbutton,
 .identity-popup-security-connection.identity-button {
     width: auto !important;
     -moz-box-flex: 1 !important;
@@ -687,9 +731,16 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
     border: none !important;
 }
 
-.identity-popup-warning-box {
-    border-radius: 4px !important;
-    border-color: transparent !important;
+#identity-popup-mainView .identity-popup-warning-box {
+    font-weight: 500 !important;
+    font-size: 1em !important;
+}
+
+#identity-popup-securityView-body > .identity-popup-warning-box {
+    font-weight: 400 !important;
+    background: var(--uc-warning-background);
+    padding: 4px !important;
+    border-radius: 3px;
 }
 
 .identity-popup-section {
@@ -767,7 +818,7 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
 
 #identity-popup-securityView-body > :is(description, label, button) {
     margin-block: 0 !important;
-    margin-inline-start: 26px !important;
+    margin-inline-start: 28px !important;
 }
 
 #identity-popup-securityView-body > description#identity-popup-content-verifier {

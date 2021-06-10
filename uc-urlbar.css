@@ -158,7 +158,7 @@ toolbarpaletteitem[place="palette"] > #search-container {
 }
 
 .urlbar-icon-wrapper:focus-visible .urlbar-icon,
-#pageAction-urlbar-screenshot[shooting] .urlbar-icon {
+#pageAction-urlbar-screenshot[shooting]:not(:hover) .urlbar-icon {
     outline: unset !important;
     outline-offset: unset !important;
     -moz-outline-radius: unset !important;

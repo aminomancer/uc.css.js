@@ -2,6 +2,10 @@
 and to override built-in rules without using the "!important" tag.
 the last 75% or so of this stylesheet is dedicated to restoring pre-proton content. */
 
+radio[focused="true"] > .radio-label-box {
+	outline: revert;
+}
+
 :is(panel, menupopup)[type="arrow"]::part(content) {
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.2) !important;
     box-shadow: var(--panel-shadow) !important;

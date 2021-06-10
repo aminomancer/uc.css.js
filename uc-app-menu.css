@@ -86,25 +86,6 @@
     margin-block: 0 !important;
 }
 
-/* appmenu what's new checkbox */
-#panelMenu-toggleWhatsNew {
-    fill: currentColor !important;
-}
-
-#panelMenu-toggleWhatsNew .checkbox-check {
-    background: none !important;
-    border-width: 2px !important;
-    border-color: rgb(169, 169, 169) !important;
-}
-
-#panelMenu-toggleWhatsNew:hover {
-    fill: var(--toolbarbutton-icon-fill-attention) !important;
-}
-
-#panelMenu-toggleWhatsNew:hover .checkbox-check {
-    border-color: var(--toolbarbutton-icon-fill-attention) !important;
-}
-
 /* appmenu text encoding */
 #PanelUI-characterEncodingView toolbarbutton[checked="true"] {
     color: currentColor !important;
