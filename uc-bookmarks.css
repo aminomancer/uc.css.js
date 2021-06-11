@@ -422,6 +422,7 @@ richlistbox:not(#categories) > richlistitem[selected] {
     visibility: visible !important;
     position: absolute !important;
     display: block !important;
+    will-change: opacity;
 }
 
 /* hide scrollbuttons until bookmarksPopupShadowRoot.uc.js initializes the customizations, to avoid flickering */
@@ -486,6 +487,10 @@ link[href="chrome://global/skin/arrowscrollbox.css"] ~ :is(#scrollbutton-up, #sc
     backface-visibility: hidden !important;
     -moz-context-properties: fill, fill-opacity !important;
     fill-opacity: 1 !important;
+}
+
+.BMB-special-scrollbutton-up:not([hidden]) ~ .scrollbox-clip > scrollbox {
+    will-change: scroll-position;
 }
 
 .BMB-special-scrollbutton-down:is(:not(:hover), [disabled="true"]) {

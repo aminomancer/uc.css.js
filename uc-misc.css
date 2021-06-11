@@ -262,7 +262,7 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
 }
 
 @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
-    @-moz-document regexp("^chrome:(?!\/\/(devtools|mozapps|browser\/content\/sanitize|global\/content\/commonDialog)).*") {
+    @-moz-document regexp("^chrome:(?!\/\/(devtools|mozapps|browser\/content\/(sanitize|places\/places.xhtml)|global\/content\/commonDialog)).*") {
         html:root,
         window:root,
         panel,
@@ -320,6 +320,16 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
 
         .places-tooltip-uri {
             font-weight: 300 !important;
+        }
+
+        #urlbar-zoom-button .toolbarbutton-text {
+            height: revert !important;
+            font-weight: 400 !important;
+        }
+
+        toolbar:not(#PersonalToolbar) #zoom-controls > #zoom-reset-button > .toolbarbutton-text {
+            padding-block: 2px !important;
+            font-weight: 400 !important;
         }
     }
 }

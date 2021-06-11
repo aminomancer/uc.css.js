@@ -116,6 +116,11 @@ when the tab bar is not overflowing, new tabs slide into place much more smoothl
     opacity: initial !important;
 }
 
+#tabbrowser-tabs[movingtab] .tabbrowser-tab[selected],
+#tabbrowser-tabs .tabbrowser-tab[justmoved] {
+    will-change: transform;
+}
+
 #tabbrowser-tabs[movingtab] .tabbrowser-tab *,
 #tabbrowser-tabs .tabbrowser-tab[justmoved] * {
     transform: none !important;

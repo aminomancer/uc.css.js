@@ -579,7 +579,7 @@
 }
 
 #appMenu-zoom-controls2
-    :is(#appMenu-zoomReduce-button2, #appMenu-zoomEnlarge-button2, #appMenu-fullscreen-button2, #appMenu-zoomReset-button2):not([disabled], [open], :active):is(:hover, :focus) {
+    :is(#appMenu-zoomReduce-button2, #appMenu-zoomEnlarge-button2, #appMenu-fullscreen-button2, #appMenu-zoomReset-button2):not([disabled], [open]):is(:hover, :focus) {
     background-color: var(--arrowpanel-dimmed) !important;
     border-color: transparent !important;
 }
@@ -616,6 +616,18 @@
     margin-block: 1px !important;
     margin-inline: 6px !important;
     background: none !important;
+}
+
+#appMenu-zoomEnlarge-button2 {
+    list-style-image: url(chrome://userchrome/content/skin/zoom-in.svg) !important;
+}
+
+#appMenu-zoomReduce-button2 {
+    list-style-image: url(chrome://userchrome/content/skin/zoom-out.svg) !important;
+}
+
+#appMenu-fullscreen-button2 {
+    list-style-image: url(chrome://userchrome/content/skin/fullscreen.svg) !important;
 }
 
 #appMenu-fxa-status2 > #appMenu-fxa-label2 {
