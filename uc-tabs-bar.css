@@ -519,11 +519,14 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
     list-style-image: url(chrome://userchrome/content/tab-audio-playing.svg) !important;
     padding: 2px 2.5px 2px 0.5px !important;
     margin-inline-end: 8.5px !important;
-    transform: translateX(14px);
-    opacity: 0 !important;
     margin-inline-start: -27px !important;
     transition: 0.25s cubic-bezier(.07,.78,.21,.95) transform, 0.2s cubic-bezier(.07,.74,.24,.95) margin, 0.075s linear opacity !important;
     display: block !important;
+}
+
+.all-tabs-item .all-tabs-secondary-button[toggle-mute][hidden] {
+    transform: translateX(14px);
+    opacity: 0 !important;
 }
 
 .all-tabs-item:is(:hover, :focus-within) .all-tabs-secondary-button[toggle-mute] {

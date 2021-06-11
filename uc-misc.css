@@ -44,7 +44,8 @@ tooltip > description {
 }
 
 .places-tooltip-box {
-    padding: 3px 6px 4px 6px !important;
+    padding: 4px 6px 5px 6px !important;
+    border: none !important;
     border-radius: var(--tooltip-border-radius) !important;
     background-color: var(--tooltip-bgcolor) !important;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2) !important;
@@ -81,6 +82,9 @@ for that reason i disabled it but maybe someone else wants it. it does look kind
 	list-style-image: url(chrome://userchrome/content/skin/connection-secure.svg) !important;
 } */
 
+/* the shadow on the tab tooltip must be removed since it blocks mouse hover from reaching the tab.
+which would mean when you hover a tab, it'd appear hovered, then the tooltip would show up and it would appear unhovered,
+as the mouse would then be on top of the tooltip popup not the main window. */
 #mainPopupSet > .places-tooltip {
     margin: 0 !important;
     padding: 0 !important;
@@ -276,11 +280,11 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
         }
 
         :is(#back-button-tooltip, #forward-button-tooltip) .tooltip-label[id]:not(:last-of-type) {
-            padding: 4px 6px 19px 6px !important;
+            padding: 3.5px 6px 18px 6px !important;
         }
 
         :is(#back-button-tooltip, #forward-button-tooltip) .tooltip-label:last-of-type:not([id]) {
-            margin-block-start: -18px !important;
+            margin-block-start: -17.5px !important;
         }
 
         #urlbar .urlbarView-row[has-action] .urlbarView-title[isurl] strong,
@@ -300,6 +304,22 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
         panel #appMenu-multiView .panel-header > h1,
         panel .panel-banner-item {
             font-weight: 500 !important;
+        }
+
+        :is(#back-button-tooltip, #forward-button-tooltip) .tooltip-label[id] {
+            font-weight: 400 !important;
+        }
+
+        :is(#back-button-tooltip, #forward-button-tooltip) .tooltip-label:not([id]) {
+            font-weight: 300 !important;
+        }
+
+        .places-tooltip-title {
+            font-weight: 400 !important;
+        }
+
+        .places-tooltip-uri {
+            font-weight: 300 !important;
         }
     }
 }
