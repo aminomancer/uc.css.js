@@ -68,7 +68,9 @@ individual extensions' popups and other content documents are styled in userCont
 /* pushbullet, an extension for controlling, sharing stuff with, and receiving notifications from your phone */
 #sidebarMenu-popup
     #button__6540f1c5-ab3d-4eff-9ad2-79a95aec93d5_-sidebar-action:not([checked="true"]),
-:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="jid1-BYcQOfYfmBMd9A@jetpack"i] {
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="jid1-BYcQOfYfmBMd9A@jetpack"i],
+menupopup#viewSidebarMenu
+    menuitem.menuitem-iconic.webextension-menuitem#menu__6540f1c5-ab3d-4eff-9ad2-79a95aec93d5_-sidebar-action[style]:is([type="checkbox"], [type="radio"]):not([checked="true"]) {
     list-style-image: url(chrome://userchrome/content/material/pushbullet-solid.svg) !important;
 }
 
@@ -84,7 +86,9 @@ individual extensions' popups and other content documents are styled in userCont
     > #sidebar-icon,
 #sidebarMenu-popup
     #button__446900e4-71c2-419f-a6a7-df9c091e268b_-sidebar-action:not([checked="true"]),
-#_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action .toolbarbutton-icon {
+#_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action .toolbarbutton-icon,
+menupopup#viewSidebarMenu
+    menuitem.menuitem-iconic.webextension-menuitem#menu__446900e4-71c2-419f-a6a7-df9c091e268b_-sidebar-action[style]:is([type="checkbox"], [type="radio"]):not([checked="true"]) {
     list-style-image: url(chrome://userchrome/content/notifications/webauthn.svg) !important;
 }
 
@@ -116,7 +120,10 @@ individual extensions' popups and other content documents are styled in userCont
 }
 
 /* multithreaded download manager, an extension for downloading files more quickly or with fewer restrictions */
-:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="multithreaded-download-manager@qw.linux-2g64.local"i] .toolbarbutton-icon {
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="multithreaded-download-manager@qw.linux-2g64.local"i] .toolbarbutton-icon,
+menupopup#viewSidebarMenu
+    menuitem.menuitem-iconic.webextension-menuitem#menu_multithreaded-download-manager_qw_linux-2g64_local-sidebar-action[style]:is([type="checkbox"], [type="radio"]):not([checked="true"])
+    .menu-iconic-left {
     list-style-image: url(chrome://userchrome/content/downloads/double-download.svg);
 }
 
@@ -350,4 +357,24 @@ we need to invert the icon differently since we don't want to invert the backgro
 #add-ons-button,
 #appMenu-addons-button {
     list-style-image: url(chrome://userchrome/content/material/extension.svg) !important;
+}
+
+/* view > sidebar menu */
+menupopup#viewSidebarMenu
+    menuitem.menuitem-iconic.webextension-menuitem[style]:is([type="checkbox"], [type="radio"]):not([checked="true"])
+    .menu-iconic-left {
+    display: revert;
+    fill: currentColor;
+    -moz-context-properties: fill, fill-opacity;
+}
+
+menupopup#viewSidebarMenu
+    menuitem.menuitem-iconic.webextension-menuitem[style]:is([type="checkbox"], [type="radio"]):not([checked="true"])
+    .menu-iconic-icon {
+    display: revert !important;
+}
+
+menupopup#viewSidebarMenu
+    menuitem.menuitem-iconic.webextension-menuitem[style]:is([type="checkbox"], [type="radio"]):not([checked="true"])::before {
+    display: none;
 }

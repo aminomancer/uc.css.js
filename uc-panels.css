@@ -876,8 +876,8 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
 }
 
 #downloadsListBox {
+    width: 56ch !important;
     margin: 0 !important;
-    width: revert !important;
 }
 
 #emptyDownloads {

@@ -78,6 +78,7 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
     .toolbarbutton-badge {
     fill: hsl(44, 95%, 60%) !important;
     background-color: hsl(32, 52%, 35%) !important;
+    border-radius: 50% !important;
 }
 
 :is(#nav-bar-customization-target, #widget-overflow)
@@ -85,6 +86,7 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
     .toolbarbutton-badge {
     fill: hsl(358, 86%, 63%) !important;
     background-color: hsl(354, 69%, 30%) !important;
+    border-radius: 50% !important;
 }
 
 toolbar .toolbaritem-combined-buttons.chromeclass-toolbar-additional {

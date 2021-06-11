@@ -215,14 +215,7 @@ menupopup.in-menulist > :where(menucaption, menuitem) > .menu-iconic-text {
 :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup) menucaption {
     font-weight: inherit !important;
     min-height: 22px !important;
-    border-image: linear-gradient(
-        to right,
-        transparent,
-        var(--menu-separator-color) 5%,
-        transparent
-    ) !important;
-    border-image-slice: 1 !important;
-    border-bottom: 1px solid transparent !important;
+    border-bottom: 1px solid var(--menu-separator-color) !important;
     margin-block: 1px 2px;
     padding-inline: 5px !important;
 }
@@ -373,16 +366,7 @@ menuitem[disabled="true"] :is(.menu-accel, .menu-iconic-accel) {
 }
 
 menupopup:not(.PanelUI-subView) menuseparator {
-    border-image: linear-gradient(
-        to right,
-        transparent 1%,
-        var(--menu-separator-color) 50%,
-        transparent 99%
-    ) !important;
-    border-image-slice: 1 !important;
-    border-top-width: 1px !important;
-    border-top-style: solid !important;
-    padding: 0 !important;
+    border-color: var(--menu-separator-color) !important;
     margin-inline: var(--menupopup-inner-padding-magnitude) !important;
 }
 

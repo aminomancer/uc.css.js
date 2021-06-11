@@ -287,15 +287,8 @@ menupopup.in-menulist > :where(menucaption, menuitem) > :is(label, .menu-iconic-
 #ContentSelectDropdown > menupopup menucaption,
 menupopup.in-menulist > menucaption {
     font-weight: inherit !important;
-    min-height: 23px !important;
-    border-image: linear-gradient(
-        to right,
-        transparent,
-        var(--menu-separator-color) 5%,
-        transparent
-    ) !important;
-    border-image-slice: 1 !important;
-    border-bottom: 1px solid transparent !important;
+    min-height: 22px !important;
+    border-bottom: 1px solid var(--menu-separator-color) !important;
     margin-block: 1px 2px;
     padding-inline: 5px !important;
 }
@@ -592,16 +585,7 @@ menupopup.in-menulist menuitem[disabled="true"] :is(.menu-accel, .menu-iconic-ac
 
 #ContentSelectDropdown > menupopup menuseparator,
 menupopup.in-menulist menuseparator {
-    border-image: linear-gradient(
-        to right,
-        transparent 1%,
-        var(--menu-separator-color) 50%,
-        transparent 99%
-    ) !important;
-    border-image-slice: 1 !important;
-    border-top-width: 1px !important;
-    border-top-style: solid !important;
-    padding: 0 !important;
+    border-color: var(--menu-separator-color) !important;
     margin-inline: var(--menupopup-inner-padding-magnitude) !important;
 }
 
@@ -1047,14 +1031,7 @@ menupopup.in-menulist menuseparator:last-child {
     :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup) menucaption {
         font-weight: inherit !important;
         min-height: 22px !important;
-        border-image: linear-gradient(
-            to right,
-            transparent,
-            var(--menu-separator-color) 5%,
-            transparent
-        ) !important;
-        border-image-slice: 1 !important;
-        border-bottom: 1px solid transparent !important;
+        border-bottom: 1px solid var(--menu-separator-color) !important;
         margin-block: 1px 2px;
         padding-inline: 5px !important;
     }
@@ -1155,16 +1132,7 @@ menupopup.in-menulist menuseparator:last-child {
     }
 
     menuseparator {
-        border-image: linear-gradient(
-            to right,
-            transparent 1%,
-            var(--menu-separator-color) 50%,
-            transparent 99%
-        ) !important;
-        border-image-slice: 1 !important;
-        border-top-width: 1px !important;
-        border-top-style: solid !important;
-        padding: 0 !important;
+        border-color: var(--menu-separator-color) !important;
         margin-inline: var(--menupopup-inner-padding-magnitude) !important;
     }
 
