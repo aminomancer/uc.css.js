@@ -1632,6 +1632,21 @@ menupopup {
 }
 
 @-moz-document url-prefix("about:reader") {
+    body.dark {
+        --main-background: var(--in-content-bg-dark) !important;
+        --tooltip-background: color-mix(in srgb, black 40%, var(--in-content-bg-dark)) !important;
+        --active-color: var(--purple-35) !important;
+        --selected-background: var(--attention-color) !important;
+        --link-foreground: #5311ff !important;
+        --visited-link-foreground: #823afc !important;
+    }
+
+    input:not([type="file"], [type="image"]):focus-visible, select:focus-visible, button:focus-visible, textarea:focus-visible {
+        outline-color: var(--purple-35) !important;
+        outline-style: solid !important;
+        outline-width: 2px !important;
+    }
+
     .container {
         margin: 25px 25px 25px 75px !important;
         max-width: 2400px !important;
