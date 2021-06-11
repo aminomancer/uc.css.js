@@ -257,14 +257,6 @@ but CSS hides it faster and avoids flickering.
     animation-duration: 200ms !important;
 }
 
-#urlbar-zoom-button[hidden="true"] {
-    display: -moz-box !important;
-    opacity: 0 !important;
-    transition: 0.2s ease-in-out opacity;
-    animation-name: uc-urlbar-zoom-reset-fade !important;
-    animation-duration: 200ms !important;
-}
-
 @keyframes uc-urlbar-zoom-reset-pulse {
     from {
         transform: scale(1);
@@ -275,20 +267,6 @@ but CSS hides it faster and avoids flickering.
     }
     to {
         transform: scale(1);
-        animation-timing-function: ease-in;
-    }
-}
-
-@keyframes uc-urlbar-zoom-reset-fade {
-    from {
-        transform: scale(1);
-    }
-    37.5% {
-        transform: scale(1.2);
-        animation-timing-function: ease-out;
-    }
-    to {
-        transform: scale(0);
         animation-timing-function: ease-in;
     }
 }
