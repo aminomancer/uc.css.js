@@ -122,14 +122,23 @@
     padding-left: 16px;
 }
 
+.urlbarView-row[type="dynamic"][dynamicType="unitConversion"] .urlbarView-dynamic-unitConversion-action,
 .urlbarView-row[type="dynamic"][dynamicType="calculator"] .urlbarView-dynamic-calculator-action {
     color: var(--urlbar-popup-action-color);
 }
 
+.urlbarView-row[type="dynamic"][dynamicType="unitConversion"]
+    .urlbarView-row-inner[selected]
+    .urlbarView-dynamic-unitConversion-action,
 .urlbarView-row[type="dynamic"][dynamicType="calculator"]
     .urlbarView-row-inner[selected]
     .urlbarView-dynamic-calculator-action {
     color: inherit;
+}
+
+.urlbarView-row[type="dynamic"][dynamicType="unitConversion"] .urlbarView-dynamic-unitConversion-output + .urlbarView-dynamic-unitConversion-action,
+.urlbarView-row[type="dynamic"][dynamicType="calculator"] .urlbarView-dynamic-calculator-input + .urlbarView-dynamic-calculator-action {
+    margin-inline-start: 6px;
 }
 
 .urlbarView[actionoverride]
@@ -282,14 +291,16 @@
 }
 
 .urlbarView-title-separator,
-.urlbarView-dynamic-calculator-action::before {
+.urlbarView-dynamic-calculator-action::before,
+.urlbarView-dynamic-unitConversion-action::before {
     -moz-box-align: center;
     display: -moz-box;
     display: none !important;
 }
 
 .urlbarView-title-separator::before,
-.urlbarView-dynamic-calculator-action::before {
+.urlbarView-dynamic-calculator-action::before,
+.urlbarView-dynamic-unitConversion-action::before {
     content: "" !important;
     width: 15px;
     height: 2px;
@@ -299,25 +310,40 @@
     opacity: 1 !important;
 }
 
+.urlbarView-row[dynamicType="calculator"]:hover .urlbarView-dynamic-calculator-action,
+.urlbarView-row[dynamicType="unitConversion"]:hover .urlbarView-dynamic-unitConversion-action {
+	visibility: visible !important;
+}
+
 .urlbarView-row[selected] .urlbarView-title-separator::before,
-.urlbarView-row-inner[selected] .urlbarView-dynamic-calculator-action::before {
+.urlbarView-row-inner[selected] .urlbarView-dynamic-calculator-action::before,
+.urlbarView-dynamic-unitConversion-action::before {
     color: hsla(0, 0%, 100%, 0.6);
 }
 
 .urlbarView-row[has-action] .urlbarView-title strong,
 .urlbarView-row[has-action] .urlbarView-title[isurl],
-.urlbarView-row[has-url] .urlbarView-title,
-.urlbarView-dynamic-calculator-input {
+.urlbarView-row[has-url] .urlbarView-title {
     font-weight: 500 !important;
     font-style: normal !important;
+    color: var(--panel-shortcut-color);
+}
+
+.urlbarView-dynamic-calculator-input,
+.urlbarView-dynamic-unitConversion-output {
     color: var(--panel-shortcut-color);
 }
 
 .urlbarView-row[has-action][selected] .urlbarView-title strong,
 .urlbarView-row[has-action][selected] .urlbarView-title[isurl],
 .urlbarView-row[has-url][selected] .urlbarView-title,
-.urlbarView-row-inner[selected] .urlbarView-dynamic-calculator-input {
+.urlbarView-row-inner[selected] .urlbarView-dynamic-calculator-input,
+.urlbarView-row-inner[selected] .urlbarView-dynamic-unitConversion-output {
     color: var(--panel-shortcut-focus);
+}
+
+.urlbarView-row[type="switchtab"][selected] .urlbarView-title strong {
+    color: var(--lwt-toolbar-field-color);
 }
 
 .urlbarView-row[has-action] .urlbarView-title[isurl] strong,
@@ -530,6 +556,10 @@
     min-width: 0 !important;
     min-height: 34px !important;
     padding: 1px 0 !important;
+}
+
+.urlbarView-row[label] {
+	overflow: revert !important;
 }
 
 .urlbarView-row-inner {

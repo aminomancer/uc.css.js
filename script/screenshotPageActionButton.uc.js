@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Screenshot Page Action Button
-// @version        1.0
+// @version        1.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Creates a screenshot button in the page actions area (the right side of the urlbar) that works just like the screenshot toolbar button.
@@ -78,6 +78,7 @@
          *                 is "true" if we're currently taking a screenshot, "false" if not.
          */
         observe(sub, top, data) {
+            if (sub && sub !== window) return;
             this.setButtonState(data === "true"); // disable the button while we're already taking a screenshot, just like the toolbar button.
         },
         /**

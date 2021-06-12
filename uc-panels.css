@@ -1285,6 +1285,16 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
     font-weight: inherit !important;
 }
 
+#eom-mainView-panel-header {
+    font-size: 1.05em !important;
+    line-height: 1.05em !important;
+    font-weight: normal !important;
+}
+
+#eom-mainView-panel-header-span {
+    font-weight: inherit !important;
+}
+
 #editBookmarkPanelTitle {
     font-size: 14px !important;
 }

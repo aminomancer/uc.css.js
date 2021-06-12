@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Extension Options Panel
-// @version        1.2
+// @version        1.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    This script creates a toolbar button that opens a popup panel where extensions can be configured, disabled, uninstalled, etc. Each extension gets its own button in the panel. Clicking an extension's button leads to a subview where you can jump to the extension's options, disable or enable the extension, uninstall it, view its source code in whatever program is associated with .xpi files, open the extension's homepage, or copy the extension's ID. Based on a similar script by xiaoxiaoflood, but will not be compatible with xiaoxiaoflood's loader. This one requires fx-autoconfig or Alice0775's loader. It opens a panel instead of a menupopup, for more consistency with other toolbar widgets. There are configuration options directly below.
@@ -9,6 +9,8 @@
 class ExtensionOptionsWidget {
     // user configuration
     static config = {
+        "Show header": true, // set to false if you don't want the "Extension options" title to be displayed at the top of the panel
+
         "Show version": false, // show the addon version next to its name in the list
 
         "Show hidden extensions": false, // show system extensions?
@@ -86,22 +88,28 @@ class ExtensionOptionsWidget {
                     aDoc.getElementById("appMenu-viewCache").appendChild(view);
                     aDoc.defaultView.extensionOptionsPanel.panelview = view;
 
-                    let body = this.create(aDoc, "vbox", {
-                        id: view.id + "-body",
-                        class: "panel-subview-body",
-                    });
-                    view.appendChild(body);
+                    if (this.config["Show header"]) {
+                        let header = view.appendChild(
+                            this.create(aDoc, "vbox", { id: "eom-mainView-panel-header" })
+                        );
+                        let heading = header.appendChild(this.create(aDoc, "label"));
+                        let label = heading.appendChild(
+                            this.create(aDoc, "html:span", {
+                                id: "eom-mainView-panel-header-span",
+                                role: "heading",
+                                "aria-level": "1",
+                            })
+                        );
+                        label.textContent = this.config["Button tooltip"];
+                        view.appendChild(document.createXULElement("toolbarseparator"));
+                    }
 
-                    view.appendChild(document.createXULElement("toolbarseparator"));
-
-                    // make a footer button that leads to about:addons
-                    let allAddonsButton = this.create(document, "toolbarbutton", {
-                        label: "Addons Page",
-                        class: "subviewbutton subviewbutton-iconic panel-subview-footer-button",
-                        image: this.config["Icon URL"],
-                        oncommand: `BrowserOpenAddonsMgr("addons://list/extension")`,
-                    });
-                    view.appendChild(allAddonsButton);
+                    view.appendChild(
+                        this.create(aDoc, "vbox", {
+                            id: view.id + "-body",
+                            class: "panel-subview-body",
+                        })
+                    );
                 },
                 // populate the panel before it's shown
                 onViewShowing: (event) => {
@@ -203,6 +211,19 @@ class ExtensionOptionsWidget {
         });
         body.appendChild(getAddonsButton);
         getAddonsButton.hidden = body.children.length > 1;
+
+        // make a footer button that leads to about:addons
+        if (view.querySelector("#eom-allAddonsButton")) return;
+        view.appendChild(document.createXULElement("toolbarseparator"));
+        view.appendChild(
+            this.create(document, "toolbarbutton", {
+                label: "Addons Page",
+                id: "eom-allAddonsButton",
+                class: "subviewbutton subviewbutton-iconic panel-subview-footer-button",
+                image: this.config["Icon URL"],
+                oncommand: `BrowserOpenAddonsMgr("addons://list/extension")`,
+            })
+        );
     }
 
     /**
@@ -369,6 +390,18 @@ class ExtensionOptionsWidget {
             "data:text/css;charset=UTF=8," +
                 encodeURIComponent(`#eom-button {
                         list-style-image: url('${this.config["Icon URL"]}');
+                    }
+                    #eom-mainView-panel-header {
+                        padding: 8px 4px 4px 4px;
+                        min-height: 44px;
+                        -moz-box-pack: center;
+                        -moz-box-align: center;
+                    }
+                    #eom-mainView-panel-header-span {
+                        font-weight: 600;
+                        display: inline-block;
+                        text-align: center;
+                        overflow-wrap: break-word;
                     }
                     #PanelUI-eom .disabled label {
                         opacity: 0.6;
