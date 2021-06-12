@@ -184,11 +184,15 @@ class ExtensionOptionsWidget {
                     let subviewbutton = this.create(document, "toolbarbutton", {
                         label: addon.name + (showVersion ? " " + addon.version : ""),
                         class: "subviewbutton subviewbutton-iconic subviewbutton-nav eom-addon-button",
-                        image: addon.iconURL || this.config["Icon URL"],
                         oncommand: "extensionOptionsPanel.showSubView(event, this)",
                         "widget-type": "view",
                         "data-extensionid": addon.id,
                     });
+                    // set the icon using CSS variables and list-style-image so that user stylesheets can override the icon URL.
+                    subviewbutton.style.setProperty(
+                        "--extension-icon",
+                        `url(${addon.iconURL || this.config["Icon URL"]})`
+                    );
                     subviewbutton._Addon = addon;
 
                     this.setDisableStyle(subviewbutton, addon, false);
@@ -402,6 +406,9 @@ class ExtensionOptionsWidget {
                         display: inline-block;
                         text-align: center;
                         overflow-wrap: break-word;
+                    }
+                    .eom-addon-button {
+                        list-style-image: var(--extension-icon);
                     }
                     #PanelUI-eom .disabled label {
                         opacity: 0.6;

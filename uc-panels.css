@@ -23,12 +23,8 @@ panelview {
 }
 
 /* without this, the last button in the panel will typically be touching the edge of the panel,
-instead of 4px from the edge as it should be. */
-:not(.panel-subview-body) > toolbarseparator + .panel-subview-body,
-:not(.panel-subview-body) > .subview-subheader + .panel-subview-body {
-	padding-bottom: var(--panel-subview-body-padding-magnitude) !important;
-}
-
+instead of 4px from the edge as it should be.
+this connects with .panel-subview-body rules in userChrome.au.css */
 .panel-header + .panel-subview-body {
     margin-block: var(--panel-separator-margin); /* for some reason, the "recently closed tabs" subview doesn't have a separator under the header. simulate one. */
     margin-block-end: 0;

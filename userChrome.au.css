@@ -30,6 +30,15 @@ panel[type="autocomplete-richlistbox"] {
 	--panel-background: none;
 }
 
+:not(.panel-subview-body) > toolbarseparator + .panel-subview-body,
+:not(.panel-subview-body) > .subview-subheader + .panel-subview-body {
+	padding-bottom: var(--panel-subview-body-padding-magnitude);
+}
+
+.panel-subview-footer-button {
+    margin-bottom: 4px;
+}
+
 /* use scrollbars instead of scroll buttons on most arrowscrollboxes */
 menupopup::part(arrowscrollbox-scrollbox) {
     overflow-y: auto !important;
@@ -55,10 +64,6 @@ menupopup::part(arrowscrollbox-scrollbox) {
 
 #BMB_bookmarksPopup .panel-subview-footer-button {
     margin-bottom: unset;
-}
-
-.panel-subview-footer-button {
-    margin-bottom: 4px;
 }
 
 /* panel width */
