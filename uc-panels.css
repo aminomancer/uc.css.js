@@ -436,6 +436,10 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
     background-color: var(--button-hover-bgcolor) !important;
 }
 
+#eom-allow-auto-updates .subviewradio {
+    background: none !important;
+}
+
 .subviewradio > .radio-check {
     border-color: var(--uc-checkbox-border-color) !important;
     background-color: var(--uc-checkbox-unchecked-bgcolor) !important;
