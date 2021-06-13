@@ -41,6 +41,7 @@ menupopup {
     --desaturate-dimmed-further: var(--uc-desaturate-dimmed-further);
     --desaturate-dimmed-even-further: var(--uc-desaturate-dimmed-even-further);
     --panel-disabled-color: var(--context-menu-disabled-color) !important;
+    --panel-separator-color: var(--desaturate-dimmed) !important;
     --toolbarbutton-hover-background: hsla(236, 82%, 83%, 0.17) !important;
     --toolbarbutton-active-background: hsla(236, 82%, 83%, 0.22) !important;
     --toolbarbutton-checked-background: hsla(236, 82%, 83%, 0.13) !important;

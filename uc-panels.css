@@ -1161,11 +1161,6 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
     display: none;
 }
 
-/* multi-account containers panel */
-#_testpilot-containers-panel .webextension-popup-stack {
-    padding: var(--menupopup-inner-padding-magnitude) !important;
-}
-
 /* extension notification popup (on appmenu button) */
 #extension-new-tab-notification-description .text-link:not(:empty) {
     margin-inline: 6px !important;

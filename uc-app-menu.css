@@ -65,11 +65,6 @@
     list-style-image: url(chrome://userchrome/content/skin/tip.svg) !important;
 }
 
-/* appmenu buttons border radius */
-.subviewbutton-back {
-    border-radius: 2px !important;
-}
-
 #appMenu-multiView .subviewbutton-back .toolbarbutton-icon {
     height: revert !important;
     width: revert !important;

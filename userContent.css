@@ -1676,7 +1676,6 @@ menupopup {
 {
     :root {
         --arrowpanel-background: hsl(233, 36%, 11%);
-        --arrowpanel-dimmed: hsla(236, 100%, 83%, 0.17);
         --context-menuitem-border-radius: var(--arrowpanel-menuitem-border-radius);
         --panel-separator-margin: 0px 4px;
         --arrowpanel-menuitem-padding: 6px;
@@ -1685,6 +1684,9 @@ menupopup {
         --menupopup-inner-padding-magnitude: 4px;
         --menupopup-inner-padding: var(--menupopup-inner-padding-magnitude) 0;
         background-color: var(--arrowpanel-background) !important;
+        font-size: 12px !important;
+        color: var(--ui-text-80) !important;
+        letter-spacing: 0 !important;
     }
 
     svg:root {
@@ -1692,8 +1694,12 @@ menupopup {
     }
 
     body {
-        --hr-grey: var(--arrowpanel-dimmed) !important;
+        --hr-grey: var(--uc-desaturate-dimmed) !important;
         inline-size: min-content !important;
+        font-size: 12px !important;
+        color: inherit !important;
+        letter-spacing: inherit !important;
+        padding: var(--menupopup-inner-padding-magnitude) !important;
     }
 
     @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
@@ -1705,14 +1711,17 @@ menupopup {
 
     h3.title {
         line-height: normal !important;
-        block-size: min-content !important;
-        padding-block: 6px 10px !important;
+        block-size: 26px !important;
+        min-height: 26px !important;
+        padding-block: 4px !important;
         white-space: nowrap !important;
-        padding-inline: 9px 16px !important;
+        padding-inline: 10px 16px !important;
         font-weight: normal !important;
-        font-size: 14px !important;
+        font-size: 1.1em !important;
         text-align: start !important;
         user-select: none;
+        color: inherit !important;
+        letter-spacing: inherit !important;
     }
 
     hr {
@@ -1726,17 +1735,20 @@ menupopup {
     }
 
     .menu-item {
+        cursor: default !important;
         border-radius: var(--context-menuitem-border-radius) !important;
         inline-size: unset !important;
         display: flex !important;
         flex-flow: row nowrap;
         padding-inline: 3px !important;
-        min-height: 28px !important;
+        min-height: 26px !important;
+        user-select: none !important;
     }
 
     .hover-highlight:hover,
     .hover-highlight:focus {
-        background: var(--arrowpanel-dimmed) !important;
+        color: inherit !important;
+        background: var(--uc-arrowpanel-dimmed) !important;
     }
 
     .menu-item td {
@@ -1747,6 +1759,459 @@ menupopup {
     .menu-icon {
         margin: 0 !important;
         margin-inline-end: 3px !important;
+    }
+}
+
+@-moz-document url-prefix("moz-extension://14960f03-eca3-472b-b4d2-0b7f831ebe41/popup.html")
+{
+    :root {
+        --arrowpanel-background: hsl(233, 36%, 11%);
+        --context-menuitem-border-radius: var(--arrowpanel-menuitem-border-radius);
+        --panel-separator-margin: 0px 4px;
+        --arrowpanel-menuitem-padding: 6px;
+        --arrowpanel-padding: 12px !important;
+        --arrowpanel-menuitem-border-radius: 3px;
+        --menupopup-inner-padding-magnitude: 4px;
+        --menupopup-inner-padding: var(--menupopup-inner-padding-magnitude) 0;
+        --menu-right-img: url(chrome://userchrome/content/menu-arrow.svg);
+        --menu-right-margin: 4px;
+        --menu-right-size: 14px;
+        background-color: var(--arrowpanel-background) !important;
+        font-size: 12px !important;
+        color: var(--ui-text-80) !important;
+        letter-spacing: 0 !important;
+        scrollbar-width: none !important;
+    }
+
+    svg:root {
+        background: none !important;
+    }
+
+    body {
+        --hr-grey: var(--uc-desaturate-dimmed) !important;
+        font-size: 12px !important;
+        color: inherit !important;
+        letter-spacing: inherit !important;
+    }
+
+    @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
+        body {
+            font-family: SF Pro Display, Segoe UI, sans-serif !important;
+            font-kerning: normal !important;
+        }
+
+        h4 {
+            font-weight: 500 !important;
+        }
+    }
+
+    div {
+        user-select: none;
+    }
+    
+    input[type="text"] {
+        background-color: var(--uc-desaturate-faint) !important;
+        border-color: var(--uc-desaturate-dimmed) !important;
+        min-height: 28px !important;
+        block-size: unset !important;
+        height: auto !important;
+    }
+
+    :focus-visible,
+    :-moz-focusring,
+    :focus + label {
+        outline: none !important;
+    }
+
+    input[type="text"]:focus-visible {
+        border-color: transparent !important;
+        outline-style: solid !important;
+        outline-width: 1.5px !important;
+        outline-color: var(--in-parent-border-highlight) !important;
+        box-shadow: 0 0 0 3.5px var(--in-parent-border-active-shadow);
+    }
+
+    input[type="checkbox"] {
+        appearance: none !important;
+        appearance: none !important;
+        min-width: 10px !important;
+        min-height: 10px !important;
+        width: 14px !important;
+        height: 14px !important;
+        margin-inline-end: 4px !important;
+        padding: 0.5px;
+        border-radius: 2px !important;
+        margin: 0;
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        -moz-context-properties: fill, fill-opacity !important;
+        fill: currentColor !important;
+        border-color: var(--uc-checkbox-border-color) !important;
+        background-color: var(--uc-arrowpanel-faint) !important;
+    }
+
+    input[type="checkbox"]:is(:hover, :focus-visible) {
+        background-color: var(--uc-arrowpanel-dimmed) !important;
+    }
+
+    input[type="checkbox"]:is(:hover, :focus-visible):active {
+        background-color: var(--uc-arrowpanel-dimmed-further) !important;
+    }
+
+    input[type="checkbox"]:is([checked="true"], :checked) {
+        background-image: url(chrome://userchrome/content/check.svg) !important;
+        border-color: var(--uc-checkbox-checked-border-color) !important;
+        background-color: var(--uc-checkbox-checked-bgcolor) !important;
+    }
+
+    input[type="checkbox"]:is([checked="true"], :checked):is(:hover, :focus-visible) {
+        background-color: var(--uc-checkbox-checked-hover-bgcolor) !important;
+    }
+
+    input[type="checkbox"]:is([checked="true"], :checked):is(:hover, :focus-visible):active {
+        background-color: var(--uc-checkbox-checked-active-bgcolor) !important;
+    }
+
+    h3.title {
+        line-height: normal !important;
+        padding-block: calc((44px - 1.1em) / 2) !important;
+        block-size: 44px !important;
+        min-height: 44px !important;
+        white-space: nowrap !important;
+        padding-inline: 9px 16px !important;
+        font-weight: normal !important;
+        font-size: 1.1em !important;
+        user-select: none;
+        color: inherit !important;
+        letter-spacing: inherit !important;
+    }
+
+    h4 {
+        font-weight: 400;
+        font-size: 1.1em !important;
+    }
+
+    .sub-header {
+        padding-inline: 12px !important;
+    }
+
+    .info-icon {
+        fill-opacity: 0.8;
+        -moz-context-properties: fill, fill-opacity;
+        fill: var(--ui-text-80);
+        cursor: default !important;
+        width: 20px !important;
+        height: 20px !important;
+        border-radius: 2px;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .info-icon:is(:hover, :focus-visible) {
+        fill-opacity: 1;
+        background-color: var(--uc-arrowpanel-faint);
+    }
+
+    .info-icon img {
+        display: none;
+    }
+
+    .info-icon:before {
+        content: "";
+        display: block;
+        width: 16px;
+        height: 16px;
+        background-image: url(chrome://userchrome/content/info.svg);
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+
+    hr {
+        margin: var(--menupopup-inner-padding-magnitude) !important;
+        padding-block: 0 !important;
+    }
+
+    .panel {
+        min-block-size: unset !important;
+    }
+
+    .scrollable {
+        scrollbar-width: auto !important;
+    }
+
+    .identities-list {
+        margin: 0 !important;
+        margin-inline: var(--menupopup-inner-padding-magnitude) !important;
+        inline-size: unset !important;
+        max-block-size: 600px !important;
+        padding-bottom: var(--menupopup-inner-padding-magnitude) !important;
+    }
+    
+    #edit-container-assignments > .scrollable {
+        padding-bottom: var(--menupopup-inner-padding-magnitude) !important;
+    }
+
+    #container-panel .identities-list {
+        border-bottom: 1px solid var(--uc-desaturate-dimmed) !important;
+    }
+
+    .bottom-btn {
+        position: relative !important;
+        height: revert !important;
+        line-height: 28px !important;
+        min-height: 28px !important;
+        margin: var(--menupopup-inner-padding-magnitude) !important;
+        padding-inline-start: 8px !important;
+        cursor: default !important;
+        border: none !important;
+        inline-size: unset !important;
+        border-radius: var(--context-menuitem-border-radius) !important;
+        background-color: transparent !important;
+    }
+
+    .menu-item {
+        cursor: default !important;
+        border-radius: var(--context-menuitem-border-radius) !important;
+        min-height: 28px !important;
+        line-height: 28px !important;
+        height: 28px !important;
+        user-select: none !important;
+        inline-size: -moz-available !important;
+        margin-inline: var(--menupopup-inner-padding-magnitude) !important;
+        display: block !important;
+    }
+
+    .identities-list .menu-item {
+        margin-inline: 0 !important;
+    }
+
+    .menu-item :is(td, .menu-item-name, .menu-right-float) {
+        align-items: center;
+    }
+
+    .hover-highlight:hover,
+    .hover-highlight:focus {
+        color: inherit !important;
+        background: var(--uc-arrowpanel-dimmed) !important;
+    }
+
+    .menu-text {
+        flex-grow: 1;
+        line-height: inherit !important;
+    }
+
+    .menu-icon {
+        display: block;
+        margin-inline: 5px 6px !important;
+        margin-block: 0 !important;
+        inline-size: 16px !important;
+        background-color: transparent !important;
+    }
+
+    .menu-icon.hover-highlight:is(:hover, :focus) {
+        background-color: transparent !important;
+    }
+
+    .menu-right-float {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: end;
+    }
+
+    .menu-arrow {
+        padding: 0px !important;
+        margin-right: var(--menu-right-margin) !important;
+        min-width: 0 !important;
+        width: var(--menu-right-size) !important;
+        height: var(--menu-right-size) !important;
+        fill-opacity: 0.6;
+        -moz-context-properties: fill, fill-opacity;
+        fill: currentColor;
+    }
+
+    .menu-arrow img {
+        display: none;
+    }
+
+    .menu-arrow:after {
+        content: "";
+        background-image: var(--menu-right-img);
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        width: var(--menu-right-size);
+        height: var(--menu-right-size);
+        display: block;
+    }
+
+    .identities-list .menu-arrow,
+    #sort-containers-link .menu-arrow {
+        display: none !important;
+    }
+
+    .btn-return {
+        background-image: url(chrome://userchrome/content/menu-arrow-left-big.svg) !important;
+        background-size: 16px !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        -moz-context-properties: fill, fill-opacity;
+        fill: currentColor;
+        color: inherit;
+        fill-opacity: 0.6;
+        padding: 8px !important;
+        margin: 0 !important;
+        top: 8px !important;
+        left: 8px !important;
+        min-height: 32px !important;
+        min-width: 32px !important;
+        filter: none !important;
+        cursor: default !important;
+        border-radius: var(--arrowpanel-menuitem-border-radius) !important;
+        background-color: transparent;
+    }
+
+    .btn-return:is(:hover, :focus-visible, :-moz-focusring) {
+        background-color: var(--uc-arrowpanel-dimmed) !important;
+        fill-opacity: 0.8;
+    }
+
+    .menu-item td {
+        border: none !important;
+    }
+
+    .menu-item.drag-over td {
+        background-image: linear-gradient(180deg, var(--uc-desaturate-dimmed-even-further) 1.5px, transparent 1.5px) !important;
+    }
+
+    .move-button img {
+        display: none;
+    }
+
+    .move-button {
+        background-image: url("chrome://browser/skin/notification-icons/drag-indicator.svg");
+        background-size: 14px 28px !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        -moz-context-properties: fill, fill-opacity;
+        fill: var(--uc-desaturate-dimmed-even-further);
+        width: 16px;
+        height: 16px !important;
+    }
+
+    .edit-container-panel legend, .options-header {
+        font-size: 1.05em !important;
+        margin-block: -4px 2px !important;
+    }
+    
+    .options-header {
+        font-size: 1.05em !important;
+        margin-block: 8px !important;
+    }
+
+    #edit-container-panel > .edit-form {
+        padding-top: var(--menupopup-inner-padding-magnitude) !important;
+    }
+    
+    #edit-container-options > .container-options > input[type="checkbox"] {
+        inset-inline-start: 20px;
+    }
+
+    .options-label {
+        cursor: default !important;
+    }
+
+    .manage-assigned-sites-list {
+        cursor: pointer !important;
+        width: max-content !important;
+        color: var(--in-content-link-color-hover) !important;
+    }
+    
+    #manage-assigned-sites-list:is(:hover, :focus-visible, :-moz-focusring) {
+        text-decoration: underline !important;
+    }
+
+    .delete-container {
+        background-color: transparent !important;
+        margin-inline: var(--menupopup-inner-padding-magnitude) !important;
+        padding: 0 !important;
+        padding-bottom: var(--menupopup-inner-padding-magnitude) !important;
+        border-block-start: 1px solid var(--uc-desaturate-dimmed) !important;
+        block-size: unset !important;
+        display: flex;
+        height: auto !important;
+        inline-size: revert !important;
+        justify-content: space-between;
+    }
+
+    .panel-footer > .button,
+    #delete-container-button {
+        border-radius: var(--context-menuitem-border-radius) !important;
+        height: revert !important;
+        line-height: 28px !important;
+        min-height: 28px !important;
+        width: 100% !important;
+        inline-size: -moz-available !important;
+        margin-block-start: var(--menupopup-inner-padding-magnitude) !important;
+        padding-inline-start: 8px !important;
+        cursor: default !important;
+        background-color: transparent !important;
+    }
+
+    .panel-footer > .button {
+        background-color: var(--uc-arrowpanel-faint) !important;   
+    }
+
+    .panel-footer > .button:is(:hover, :focus-visible, :-moz-focusring),
+    #delete-container-button:is(:hover, :focus-visible, :-moz-focusring) {
+        background-color: var(--uc-arrowpanel-dimmed) !important;   
+    }
+
+    .panel-footer > .button:is(:hover, :focus-visible, :-moz-focusring):active,
+    #delete-container-button:is(:hover, :focus-visible, :-moz-focusring):active {
+        background-color: var(--uc-arrowpanel-dimmed-further) !important;   
+    }
+
+    .panel-footer > .button.primary {
+        background-color: var(--in-parent-primary-button-background) !important;
+    }
+
+    .panel-footer > .button.primary:is(:hover, :focus-visible, :-moz-focusring) {
+        background-color: var(--in-parent-primary-button-background-hover) !important;
+    }
+
+    .panel-footer > .button.primary:is(:hover, :focus-visible, :-moz-focusring):active {
+        background-color: var(--in-parent-primary-button-background-active) !important;
+    }
+
+    [type="radio"]:checked + [data-identity-color="grey"] {
+        --identity-icon-color: var(--in-content-bg-dark) !important;
+    }
+
+    .panel-content.delete-container-confirm {
+        padding-block: var(--menupopup-inner-padding-magnitude) !important;
+        padding-inline: 16px 0 !important;
+        display: flex;
+        flex-flow: column;
+        row-gap: 8px !important;
+    }
+
+    .panel-content.delete-container-confirm > * {
+        padding-block: revert !important;
+    }
+
+    #delete-container-tab-warning:empty {
+        display: none !important;
+    }
+    
+    .panel-footer {
+        padding: var(--menupopup-inner-padding-magnitude) !important;
+        background: none !important;
+        border: none !important;
+        block-size: revert !important;
+        column-gap: 4px;
     }
 }
 
