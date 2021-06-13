@@ -1745,10 +1745,18 @@ menupopup {
         user-select: none !important;
     }
 
-    .hover-highlight:hover,
-    .hover-highlight:focus {
+    .hover-highlight:is(:focus):not(:hover, :focus-visible) {
+        background: revert !important;
+        color: inherit !important;
+    }
+
+    .hover-highlight:is(:hover, :focus-visible) {
         color: inherit !important;
         background: var(--uc-arrowpanel-dimmed) !important;
+    }
+
+    .hover-highlight:is(:hover, :focus-visible):active {
+        background: var(--uc-arrowpanel-dimmed-further) !important;
     }
 
     .menu-item td {
@@ -1992,10 +2000,18 @@ menupopup {
         align-items: center;
     }
 
-    .hover-highlight:hover,
-    .hover-highlight:focus {
+    .hover-highlight:is(:focus):not(:hover, :focus-visible) {
+        background: revert !important;
+        color: inherit !important;
+    }
+
+    .hover-highlight:is(:hover, :focus-visible) {
         color: inherit !important;
         background: var(--uc-arrowpanel-dimmed) !important;
+    }
+
+    .hover-highlight:is(:hover, :focus-visible):active {
+        background: var(--uc-arrowpanel-dimmed-further) !important;
     }
 
     .menu-text {
@@ -2011,7 +2027,8 @@ menupopup {
         background-color: transparent !important;
     }
 
-    .menu-icon.hover-highlight:is(:hover, :focus) {
+    .menu-icon.hover-highlight:is(:hover, :focus, :focus-visible),
+    .menu-icon.hover-highlight:is(:hover, :focus, :focus-visible):active {
         background-color: transparent !important;
     }
 
@@ -2076,6 +2093,10 @@ menupopup {
     .btn-return:is(:hover, :focus-visible, :-moz-focusring) {
         background-color: var(--uc-arrowpanel-dimmed) !important;
         fill-opacity: 0.8;
+    }
+
+    .btn-return:is(:hover, :focus-visible, :-moz-focusring):active {
+        background-color: var(--uc-arrowpanel-dimmed-further) !important;
     }
 
     .menu-item td {
