@@ -2133,9 +2133,9 @@ menupopup {
     }
 
     #edit-container-panel > .edit-form {
-        padding-top: var(--menupopup-inner-padding-magnitude) !important;
+        padding-block: var(--menupopup-inner-padding-magnitude) 2px !important;
     }
-    
+
     #edit-container-options > .container-options > input[type="checkbox"] {
         inset-inline-start: 20px;
     }
@@ -2157,18 +2157,28 @@ menupopup {
     .delete-container {
         background-color: transparent !important;
         margin-inline: var(--menupopup-inner-padding-magnitude) !important;
-        padding: 0 !important;
-        padding-bottom: var(--menupopup-inner-padding-magnitude) !important;
-        border-block-start: 1px solid var(--uc-desaturate-dimmed) !important;
+        padding: var(--menupopup-inner-padding-magnitude) !important;
+        padding-block: 0 calc(var(--menupopup-inner-padding-magnitude) * 2) !important;
+        border-block-start: 0 !important;
         block-size: unset !important;
         display: flex;
         height: auto !important;
         inline-size: revert !important;
         justify-content: space-between;
     }
+    
+    .panel-footer {
+        padding: calc(var(--menupopup-inner-padding-magnitude) * 2) !important;
+        padding-top: var(--menupopup-inner-padding-magnitude) !important;
+        background: none !important;
+        border: none !important;
+        block-size: revert !important;
+        column-gap: 4px;
+    }
 
     .panel-footer > .button,
     #delete-container-button {
+        appearance: none !important;
         border-radius: var(--context-menuitem-border-radius) !important;
         height: revert !important;
         line-height: 28px !important;
@@ -2178,33 +2188,42 @@ menupopup {
         margin-block-start: var(--menupopup-inner-padding-magnitude) !important;
         padding-inline-start: 8px !important;
         cursor: default !important;
-        background-color: transparent !important;
+        background-color: var(--uc-arrowpanel-dimmed) !important;
+        border: 1px solid transparent !important;
     }
 
-    .panel-footer > .button {
-        background-color: var(--uc-arrowpanel-faint) !important;   
-    }
-
-    .panel-footer > .button:is(:hover, :focus-visible, :-moz-focusring),
-    #delete-container-button:is(:hover, :focus-visible, :-moz-focusring) {
+    .panel-footer > .button:is(:hover, :focus-visible, :-moz-focusring) {
         background-color: var(--uc-arrowpanel-dimmed) !important;   
     }
 
-    .panel-footer > .button:is(:hover, :focus-visible, :-moz-focusring):active,
-    #delete-container-button:is(:hover, :focus-visible, :-moz-focusring):active {
+    .panel-footer > .button:is(:hover, :focus-visible, :-moz-focusring):active {
         background-color: var(--uc-arrowpanel-dimmed-further) !important;   
     }
 
-    .panel-footer > .button.primary {
-        background-color: var(--in-parent-primary-button-background) !important;
+    .panel-footer > .button.secondary:not([disabled]),
+    #delete-container-button {
+        background-color: transparent !important;
+        border-color: var(--uc-arrowpanel-dimmed) !important;
+    }
+
+    .panel-footer > .button.secondary:not([disabled], :active):is(:hover, :focus-visible),
+    #delete-container-button:is(:hover, :focus-visible, :-moz-focusring) {
+        background-color: var(--uc-arrowpanel-dimmed) !important;
+        border-color: transparent !important;
+    }
+
+    .panel-footer > .button.secondary:not([disabled]):is(:hover:active, [open]),
+    #delete-container-button:is(:hover, :focus-visible, :-moz-focusring):active {
+        background-color: var(--uc-arrowpanel-dimmed-further) !important;
+        border-color: transparent !important;
     }
 
     .panel-footer > .button.primary:is(:hover, :focus-visible, :-moz-focusring) {
-        background-color: var(--in-parent-primary-button-background-hover) !important;
+        background-color: var(--in-parent-primary-button-background) !important;
     }
 
     .panel-footer > .button.primary:is(:hover, :focus-visible, :-moz-focusring):active {
-        background-color: var(--in-parent-primary-button-background-active) !important;
+        background-color: var(--in-parent-primary-button-background-hover) !important;
     }
 
     [type="radio"]:checked + [data-identity-color="grey"] {
@@ -2212,7 +2231,7 @@ menupopup {
     }
 
     .panel-content.delete-container-confirm {
-        padding-block: var(--menupopup-inner-padding-magnitude) !important;
+        padding-block: var(--menupopup-inner-padding-magnitude) 0 !important;
         padding-inline: 16px 0 !important;
         display: flex;
         flex-flow: column;
@@ -2225,14 +2244,6 @@ menupopup {
 
     #delete-container-tab-warning:empty {
         display: none !important;
-    }
-    
-    .panel-footer {
-        padding: var(--menupopup-inner-padding-magnitude) !important;
-        background: none !important;
-        border: none !important;
-        block-size: revert !important;
-        column-gap: 4px;
     }
 }
 

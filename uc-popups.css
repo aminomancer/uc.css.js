@@ -845,6 +845,10 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlis
     tree {
         margin-inline: 4px !important;
     }
+    
+    treecols {
+        border: none !important;
+    }
 
     button {
         border-radius: var(--toolbarbutton-border-radius) !important;
@@ -854,7 +858,7 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlis
     .expander-down {
         min-height: 25px !important;
         min-width: 25px !important;
-        margin-inline-start: 4px !important;
+        margin-inline: 4px !important;
     }
 
     :is(.expander-up, .expander-down, .panel-button, button[dlgtype]:not([default])):is(:hover, :focus-visible) {
@@ -931,6 +935,14 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlis
 
     #rememberContainer > .toggle-container-with-text {
         color: inherit !important;
+    }
+
+    #bookmarkpropertiesdialog #editBookmarkPanelContent label[control] {
+        margin-inline: 0 !important;
+    }
+
+    #bookmarkpropertiesdialog {
+        -moz-box-align: center !important;
     }
 
     @-moz-document url("chrome://mozapps/content/handling/permissionDialog.xhtml") {

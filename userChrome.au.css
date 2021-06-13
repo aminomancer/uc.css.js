@@ -167,6 +167,12 @@ menupopup::part(arrowscrollbox),
     stroke: var(--arrowpanel-background);
 }
 
+@-moz-document regexp("^chrome:(?!\/\/(devtools|mozapps|browser\/content\/(sanitize|places\/places.xhtml)|global\/content\/commonDialog)).*") {
+    button {
+        font-weight: var(--uc-font-weight-bold, 600);
+    }
+}
+
 #customizationui-widget-panel[viewId^="PanelUI-webext-"]::part(content),
 #customizationui-widget-panel[viewId^="PanelUI-webext-"]::part(arrowcontent) {
     border-radius: var(--webextension-panel-border-radius, 5px) !important;

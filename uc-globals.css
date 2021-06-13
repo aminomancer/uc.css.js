@@ -26,6 +26,7 @@ tooltip {
     --button-solid-hover-background: hsl(232, 29%, 26%);
     --button-solid-active-background: hsl(234, 26%, 30%);
     --button-solid-checked-background: hsl(232, 31%, 23%);
+    --uc-font-weight-bold: 600;
     --subdialog-font-size: 1em !important;
     --autocomplete-background: hsl(233, 33%, 17%);
     --ui-secondary-bg: hsl(234, 39%, 10%);
@@ -229,4 +230,10 @@ popupnotification,
     --protections-popup-switch-off-hover-background-custom: hsl(233, 18%, 27%);
     --protections-popup-switch-off-active-background-custom: hsl(233, 19%, 24.5%);
     --protections-popup-switch-off-hover-border-custom: hsl(233, 15%, 32%);
+}
+
+@supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
+    :root {
+        --uc-font-weight-bold: 500;
+    }
 }
