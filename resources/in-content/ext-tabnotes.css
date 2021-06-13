@@ -1,0 +1,12 @@
+/* this is for my custom new tab page extension,
+which you can download from the extensions folder in the main directory. */
+
+@-moz-document regexp("moz-extension://.*/newtab.html")
+{
+    textarea::selection,
+    ::selection {
+        color: var(--content-selection-color) !important;
+        background-color: var(--content-selection-bgcolor) !important;
+        border-radius: 2px !important;
+    }
+}

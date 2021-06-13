@@ -1,0 +1,147 @@
+/* nord VPN extension */
+
+@-moz-document url-prefix("moz-extension://54896d1f-a658-4fd5-ab86-4ad739b06f69")
+{
+    @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
+        body {
+            font-family: SF Pro Display, Segoe UI, sans-serif !important;
+        }
+    }
+
+    body,
+    .Container {
+        background-color: var(--in-content-page-background) !important;
+        color: var(--in-content-page-color) !important;
+    }
+
+    .c-bw-12,
+    .CountryItem .Text {
+        color: var(--ui-text-80) !important;
+    }
+
+    .TopBar .py-5 > div > .SVG-wrapper::before {
+        display: block;
+        content: "";
+        height: 24px;
+        -moz-context-properties: fill, stroke;
+        stroke: var(--in-content-primary-button-background-hover);
+        fill: var(--in-content-page-color);
+        content: url(chrome://userchrome/content/in-content/nordvpn-logo.svg) !important;
+    }
+
+    .TopBar .py-5 > div > .SVG-wrapper > .SVG {
+        display: none !important;
+    }
+
+    .c-bw-14 * {
+        fill: var(--ui-text-60) !important;
+    }
+
+    .TopBar .Link:hover .SVG--inline:not(.SVG--no-hover) * {
+        fill: var(--in-content-primary-button-background-hover) !important;
+    }
+
+    .Button--small {
+        min-height: 32px !important;
+    }
+
+    .Button--blue {
+        background-color: var(--in-content-primary-button-background) !important;
+        border-color: transparent !important;
+    }
+
+    .Button--blue:hover {
+        background-color: var(--in-content-primary-button-background-active) !important;
+        border-color: transparent !important;
+    }
+
+    .Link--alt {
+        color: var(--purple-35) !important;
+    }
+
+    .Link--alt.Link--active,
+    .Link--alt:hover {
+        color: color-mix(in srgb, var(--attention-color) 50%, var(--purple-30)) !important;
+    }
+
+    .c-blu-6,
+    .c-blu-6 * {
+        color: var(--purple-35) !important;
+        fill: var(--purple-35) !important;
+    }
+
+    .Link--alt:is(:active, :focus, :hover) .SVG--inline:not(.SVG--no-hover) * {
+        fill: color-mix(in srgb, var(--attention-color) 50%, var(--purple-30)) !important;
+    }
+
+    .Link--dark.Link--active,
+    .Link--dark:hover {
+        color: var(--in-content-page-color) !important;
+    }
+
+    .CountryItem--active,
+    .CountryItem:hover {
+        background: var(--in-content-button-background) !important;
+    }
+
+    hr {
+        background: none !important;
+        border-bottom: 1px solid var(--in-content-button-background) !important;
+        height: 0 !important;
+    }
+
+    .Toggle-track {
+        background-color: var(--in-content-box-background-odd) !important;
+    }
+
+    .Toggle:hover:not(.Toggle--disabled) .Toggle-track {
+        background-color: color-mix(
+            in srgb,
+            currentColor 5%,
+            var(--in-content-box-background-odd)
+        ) !important;
+    }
+
+    .Toggle-thumb {
+        background-color: color-mix(
+            in srgb,
+            currentColor 35%,
+            var(--in-content-box-background)
+        ) !important;
+        border-color: transparent !important;
+        background-clip: content-box !important;
+    }
+
+    .Toggle--checked .Toggle-track {
+        background-color: var(--in-content-primary-button-background) !important;
+    }
+
+    .Toggle--checked:hover:not(.Toggle--disabled) .Toggle-track {
+        background-color: var(--in-content-primary-button-background-hover) !important;
+    }
+
+    .Toggle--checked .Toggle-thumb {
+        background-color: var(--ui-text-80) !important;
+    }
+
+    .Button--destructive.Button--outline {
+        border-color: transparent !important;
+    }
+
+    .Button--destructive.Button--outline:not(:hover) {
+        background-color: var(--in-content-button-background) !important;
+    }
+
+    .form-control {
+        background-color: var(--in-content-button-background) !important;
+    }
+
+    .TextField__element {
+        border-color: var(--in-content-box-border-color) !important;
+    }
+
+    .form-control:focus,
+    .TextField__element:focus {
+        border-color: var(--in-content-border-focus) !important;
+    }
+}

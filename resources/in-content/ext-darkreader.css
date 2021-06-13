@@ -1,0 +1,163 @@
+/* dark reader */
+
+@-moz-document url-prefix("moz-extension://54964627-cc4e-4a5b-9a5a-bc3c14858102/ui/")
+{
+    body,
+    html,
+    :root {
+        border-color: transparent !important;
+        background-color: var(--tooltip-bgcolor) !important;
+        border-radius: 0 !important;
+        color: var(--uc-content-text-a80) !important;
+    }
+
+    @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
+        body,
+        button,
+        * {
+            font-family: SF Pro Display, Segoe UI, sans-serif;
+            font-kerning: normal;
+            font-weight: 300;
+        }
+    }
+
+    .m-logo {
+        background-image: url(chrome://userchrome/content/in-content/darkreader-logo.svg) !important;
+    }
+
+    .textbox,
+    .mobile .automation-page__system-dark-mode__button,
+    .preview .automation-page__system-dark-mode__button {
+        color: var(--uc-content-text-a80) !important;
+    }
+
+    .page {
+        background-color: transparent !important;
+    }
+
+    .button,
+    .multi-switch,
+    .checkbox,
+    .m-help-button,
+    #editor {
+        background-color: var(--uc-arrowpanel-faint) !important;
+        border-color: var(--uc-panel-button-solid) !important;
+    }
+
+    .dropdown__list__item:hover,
+    .button:hover,
+    .m-help-button:hover,
+    .checkbox:hover,
+    .multi-switch__option:hover:not(.multi-switch__option--selected),
+    .slider__track,
+    .slider__track::after,
+    .mobile .collapsible-panel__group__expand-button,
+    .preview .collapsible-panel__group__expand-button,
+    .textbox {
+        background-color: var(--uc-arrowpanel-dimmed) !important;
+    }
+
+    .m-donate-button {
+        background-color: var(--in-parent-primary-button-background) !important;
+    }
+
+    .m-donate-button:hover {
+        background-color: var(--in-parent-primary-button-background-hover) !important;
+    }
+
+    input::placeholder,
+    .site-toggle:not(.site-toggle--active),
+    #editor {
+        color: var(--uc-content-text-a50) !important;
+    }
+
+    .slider__track__fill,
+    .slider__track::before,
+    .slider__track__fill::before,
+    .multi-switch__highlight,
+    .dropdown__selected,
+    .textbox:hover,
+    .textbox:focus,
+    .mobile .check-button .checkbox__checkmark,
+    .preview .check-button .checkbox__checkmark {
+        background-color: var(--uc-panel-button-solid) !important;
+    }
+
+    .site-list__textbox:focus {
+        background-color: var(--uc-arrowpanel-dimmed-further) !important;
+        box-shadow: 0 0 0 0.125rem var(--uc-panel-button-solid) !important;
+    }
+
+    .mobile .theme-group__presets-wrapper,
+    .preview .theme-group__presets-wrapper {
+        background-color: var(--uc-panel-button-solid) !important;
+        border-color: var(--uc-panel-button-solid) !important;
+    }
+
+    .theme-group__controls-wrapper,
+    .theme-group__presets-wrapper::before,
+    .site-list,
+    .textbox {
+        border-color: var(--uc-panel-button-solid) !important;
+    }
+
+    .dropdown__list {
+        background-color: var(--uc-panel-box-solid) !important;
+        border-color: var(--uc-panel-button-solid) !important;
+    }
+
+    .dropdown__list__item {
+        background-color: var(--uc-panel-box-solid) !important;
+        border-radius: 0.65rem;
+    }
+
+    .mobile .theme-preset-picker .dropdown__list,
+    .preview .theme-preset-picker .dropdown__list {
+        border: none;
+        border-radius: 0.75rem;
+        box-shadow: 0 0 0 0.125rem var(--uc-panel-button-solid),
+            0 0 0.25rem 0.1875rem hsla(0, 0%, 0%, 0.5) !important;
+    }
+
+    .color-picker__wrapper {
+        background-color: transparent !important;
+    }
+
+    .color-picker--focused .color-picker__wrapper,
+    .color-picker--focused .color-picker__input,
+    .color-picker:hover .color-picker__input {
+        background-color: var(--uc-panel-button-solid) !important;
+    }
+
+    .mobile .site-list__item__remove,
+    .preview .site-list__item__remove {
+        background-image: url(chrome://userchrome/content/in-content/darkreader-close.svg) !important;
+    }
+
+    .mobile .site-list__item__remove:hover,
+    .preview .site-list__item__remove:hover {
+        background-color: var(--uc-arrowpanel-dimmed-even-further) !important;
+    }
+
+    .mobile .automation-page__line .checkbox__checkmark,
+    .preview .automation-page__line .checkbox__checkmark {
+        background-image: url(chrome://userchrome/content/in-content/darkreader-check.svg) !important;
+    }
+
+    .automation-page::after {
+        display: none !important;
+    }
+
+    .m-donate-description {
+        display: none !important;
+    }
+
+    .m-donate-group {
+        margin-top: -0.15rem !important;
+    }
+
+    .darkreader-version {
+        opacity: 0.4;
+        margin-bottom: 10px !important;
+    }
+}

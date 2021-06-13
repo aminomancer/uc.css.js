@@ -1,0 +1,534 @@
+/* handles system pages and injects some important global variables into extension pages */
+
+@-moz-document url("about:blank") {
+    @media (prefers-color-scheme: dark) {
+        :root {
+            background-color: var(--in-content-bg-dark);
+        }
+    }
+}
+
+@-moz-document regexp("view-source:.*") {
+    @font-face {
+        font-family: "Overpass Mono";
+        font-style: normal;
+        font-weight: 100;
+        src: local("Overpass Mono"), local("Overpass Mono Light"), local("OverpassMono-Light");
+    }
+
+    :root {
+        font-family: Overpass Mono, -moz-fixed;
+        font-size: 12;
+    }
+
+    xmp,
+    pre,
+    plaintext {
+        font-family: Overpass Mono, -moz-fixed;
+        font-size: 12;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root,
+        body {
+            color: var(--plaintext-color);
+            background-color: var(--in-content-bg-dark);
+        }
+
+        span {
+            color: var(--plaintext-color);
+        }
+
+        html:root {
+            color: var(--plaintext-color);
+            background-color: var(--in-content-bg-dark);
+            background: none !important;
+        }
+
+        ::selection {
+            color: var(--content-selection-color) !important;
+            background-color: var(--content-selection-bgcolor) !important;
+        }
+
+        ::-moz-selection {
+            color: var(--content-selection-color) !important;
+            background-color: var(--content-selection-bgcolor) !important;
+        }
+
+        .attribute-name {
+            color: lightskyblue !important;
+        }
+
+        .attribute-name::selection {
+            color: darkcyan !important;
+        }
+
+        .attribute-value {
+            color: lightgreen !important;
+        }
+
+        .attribute-value::selection {
+            color: darkgreen !important;
+        }
+
+        .start-tag {
+            color: tan !important;
+        }
+
+        .start-tag::selection {
+            color: darkgoldenrod !important;
+        }
+
+        .end-tag {
+            color: indianred !important;
+        }
+
+        .end-tag::selection {
+            color: sienna !important;
+        }
+
+        .error {
+            color: white !important;
+            background-color: rgba(178, 34, 34, 0.5) !important;
+        }
+
+        .error::selection,
+        .error > *::selection {
+            color: firebrick !important;
+            background-color: var(--content-selection-bgcolor) !important;
+        }
+
+        .entity {
+            color: mediumorchid !important;
+        }
+
+        .entity::selection {
+            color: darkorchid !important;
+        }
+    }
+}
+
+@-moz-document regexp("^(about:|chrome:|moz-extension:).*") {
+    :root {
+        /* --checkbox-border-color: var(--uc-checkbox-border-color);
+        --checkbox-checked-border-color: var(--uc-checkbox-checked-border-color);
+        --checkbox-unchecked-bgcolor: var(--uc-checkbox-unchecked-bgcolor);
+        --checkbox-unchecked-hover-bgcolor: var(--uc-checkbox-unchecked-hover-bgcolor);
+        --checkbox-unchecked-active-bgcolor: var(--uc-checkbox-unchecked-active-bgcolor); */
+        --checkbox-checked-bgcolor: var(--uc-checkbox-checked-bgcolor);
+        --checkbox-checked-color: var(--uc-checkbox-checked-color);
+        --checkbox-checked-hover-bgcolor: var(--uc-checkbox-checked-hover-bgcolor);
+        --checkbox-checked-active-bgcolor: var(--uc-checkbox-checked-active-bgcolor);
+    }
+
+    html:not([role="dialog"]),
+    html:not([role="dialog"]) *,
+    html:not([role="dialog"]) body.activity-stream,
+    window:not([chromehidden]),
+    window:not([chromehidden]) > dialog {
+        --in-content-page-background: rgb(30, 29, 31) !important;
+        --in-content-page-color: hsl(212, 43%, 90%) !important;
+        --in-content-box-background: hsl(300, 2%, 16%) !important;
+        --in-content-box-background-odd: hsl(320, 3%, 21%) !important;
+        --in-content-box-background-dim: var(--dialog-box-bgcolor-dim) !important;
+        --in-content-box-border-color: var(--in-parent-box-border-color) !important;
+        --in-content-button-background: hsla(0, 20%, 90%, 0.08) !important;
+        --in-content-button-background-hover: hsla(0, 20%, 90%, 0.15) !important;
+        --in-content-button-background-active: hsla(0, 20%, 90%, 0.19) !important;
+        --in-content-button-background-solid: hsl(270, 2%, 20%);
+        --in-content-item-selected: var(--purple-40) !important;
+        --in-content-border-highlight: var(--purple-40) !important;
+        --in-content-border-hover: var(--dialog-box-border-hover) !important;
+        --in-content-border-focus: var(--purple-40) !important;
+        --in-content-border-active: var(--purple-40) !important;
+        --in-content-border-active-shadow: var(--purple-40-a30) !important;
+        --in-content-category-outline-focus: 1px solid transparent !important;
+        --in-content-link-color: var(--purple-35) !important;
+        --in-content-link-color-hover: var(--purple-30) !important;
+        --in-content-link-color-active: var(--purple-30) !important;
+        --in-content-primary-button-background: var(--purple-40) !important;
+        --in-content-primary-button-background-hover: var(--purple-35) !important;
+        --in-content-primary-button-background-active: var(--purple-30) !important;
+        --in-content-primary-button-text-color: var(--in-content-page-color) !important;
+        --in-content-button-border-radius: var(--general-button-border-radius) !important;
+        --in-content-accent-color: var(--purple-35) !important;
+        --in-content-table-background: var(--in-content-box-background) !important;
+        --in-content-table-header-background: var(--purple-40-a30) !important;
+        --newtab-background-color: var(--in-content-page-background) !important;
+        --newtab-text-primary-color: var(--in-content-page-color) !important;
+        --lwt-sidebar-background-color: var(--in-content-box-background) !important;
+        --lwt-sidebar-text-color: var(--in-content-page-color) !important;
+        --newtab-search-header-background-color: hsla(250, 3%, 12%, 0.7) !important;
+        --newtab-search-header-background-intermediate: hsla(250, 3%, 12%, 0.8) !important;
+        --newtab-seperator-line-color: var(--in-content-button-background-hover) !important;
+        --newtab-modal-color: var(--in-content-box-background) !important;
+        --newtab-focus-outline: var(--in-content-border-active-shadow) !important;
+        --newtab-focus-border: var(--in-content-border-focus) !important;
+        --newtab-focus-border-selected: var(--purple-30) !important;
+        --newtab-textbox-background-color: var(--in-content-button-background) !important;
+        --newtab-textbox-focus-color: var(--in-content-border-focus) !important;
+        --newtab-primary-action-background: var(
+            --in-content-primary-button-background-hover
+        ) !important;
+        --newtab-button-primary-color: var(--in-content-primary-button-background-hover) !important;
+        --newtab-border-primary-color: var(--in-content-button-background-active) !important;
+        --newtab-card-active-outline-color: var(--in-content-button-background) !important;
+        --newtab-link-primary-color: var(--in-content-link-color-active) !important;
+        --newtab-link-secondary-color: var(--in-content-link-color) !important;
+        --newtab-topsites-background-color: var(--in-content-button-background) !important;
+        --customize-menu-background: var(--in-content-box-background) !important;
+        --customize-menu-secondary-action-background: var(
+            --in-content-button-background
+        ) !important;
+        --customize-menu-secondary-action-background-hover: var(
+            --in-content-button-background-hover
+        ) !important;
+        --customize-menu-secondary-action-background-active: var(
+            --in-content-button-background-active
+        ) !important;
+        --customize-menu-seperator-line-color: HSL(248.6, 8%, 34.5%);
+        --customize-menu-first-shadow: hsla(250, 3%, 2%, 0.2) !important;
+        --customize-menu-second-shadow: hsla(250, 3%, 2%, 0.4) !important;
+        --newtab-contextmenu-background-color: var(--in-content-table-background) !important;
+        --newtab-contextmenu-button-color: var(--in-content-box-background) !important;
+        --newtab-card-background-color: var(--in-content-box-background) !important;
+        --newtab-card-placeholder-color: var(--in-content-box-background) !important;
+        --newtab-search-text-color: #b1b1bd !important;
+        --newtab-search-first-shadow: rgba(21, 20, 26, 0.5);
+        --newtab-search-second-shadow: rgba(21, 20, 26, 0.75);
+    }
+
+    body:not(.inline-onboarding) .fixed-search .search-wrapper {
+        background-image: linear-gradient(
+            180deg,
+            var(--in-content-page-background) 0%,
+            var(--newtab-search-header-background-intermediate) 50%,
+            var(--newtab-search-header-background-color) 100%
+        ) !important;
+        background-color: transparent !important;
+        backdrop-filter: blur(12px);
+    }
+
+    body:not(.inline-onboarding) .fixed-search.newtab-experience .search-handoff-button {
+        background-color: var(--in-content-button-background-solid) !important;
+    }
+
+    .top-site-outer .top-site-icon {
+        background-color: transparent !important;
+    }
+
+    .topsite-form .form-wrapper input[type="text"]:focus-visible {
+        outline: none !important;
+        border-color: var(--newtab-focus-border) !important;
+    }
+
+    [lwt-newtab-brighttext] .ds-card-grid.ds-card-grid-border .ds-card:not(.placeholder) {
+        background: var(--in-content-box-background) !important;
+    }
+
+    [lwt-newtab-brighttext] .ds-card .ds-card-link:hover header {
+        color: var(--in-content-link-color-active) !important;
+    }
+
+    radio[focused="true"] > .radio-label-box {
+        outline: none !important;
+    }
+
+    #category-experimental > .category-icon {
+        list-style-image: url(chrome://userchrome/content/material/potion-large.svg) !important;
+    }
+
+    .top-site-outer {
+        border-radius: 6px !important;
+    }
+
+    .search-handoff-button,
+    .top-site-outer .tile {
+        border-radius: 4px !important;
+    }
+
+    .showPrivate .search-handoff-button {
+        background-color: var(--newtab-textbox-background-color) !important;
+        box-shadow: 0 3px 8px var(--newtab-search-first-shadow),
+            0 0 2px var(--newtab-search-second-shadow) !important;
+        border: 1px solid transparent !important;
+        color: var(--newtab-search-text-color) !important;
+    }
+
+    .showPrivate .search-handoff-button.focused {
+        outline: 0;
+        border: 1px solid var(--newtab-focus-border) !important;
+        box-shadow: 0 0 0 2px var(--newtab-focus-outline) !important;
+    }
+
+    .showPrivate .fake-textbox {
+        color: inherit !important;
+    }
+
+    .showPrivate .fake-caret {
+        width: 0.6px !important;
+        background: var(--newtab-search-text-color) !important;
+    }
+
+    .showPrivate .info {
+        background-image: url(chrome://userchrome/content/skin/privateBrowsing.svg) !important;
+        -moz-context-properties: fill, fill-opacity;
+        fill: hsl(235, 100%, 71%);
+    }
+
+    .search-tooltip {
+        color: var(--global-selection-color) !important;
+        background-color: var(--aboutPrefs-find-tags) !important;
+        border-color: color-mix(in srgb, black 18%, var(--aboutPrefs-find-tags)) !important;
+    }
+
+    .search-tooltip::before {
+        border-top-color: color-mix(in srgb, black 18%, var(--aboutPrefs-find-tags)) !important;
+    }
+
+    .search-tooltip::after {
+        border-top-color: var(--aboutPrefs-find-tags) !important;
+    }
+
+    #errorPageContainer .button-container button {
+        border-color: var(--in-content-box-border-color) !important;
+    }
+
+    #errorPageContainer .button-container button.primary {
+        border-color: var(--uc-checkbox-checked-border-color) !important;
+    }
+
+    message-bar:not([hidden]) {
+        margin-block-start: 15px !important;
+        overflow: hidden;
+        margin-inline: -15.5px !important;
+    }
+
+    link[rel="stylesheet"][href="chrome://global/content/elements/message-bar.css"] ~ .container
+    {
+        padding: 8px !important;
+        border-radius: 0 !important;
+    }
+
+    link[rel="stylesheet"][href="chrome://global/content/elements/message-bar.css"] ~ .container .content
+    {
+        display: flex !important;
+        flex-flow: row nowrap;
+        justify-content: space-between !important;
+        white-space: nowrap !important;
+        margin-inline: 8px 0 !important;
+    }
+
+    message-bar > span {
+        white-space: break-spaces !important;
+        flex-shrink: 1;
+        flex-grow: 1;
+        overflow: hidden;
+        overflow-wrap: break-word !important;
+        text-overflow: ellipsis !important;
+    }
+
+    message-bar > button {
+        display: inline-block !important;
+        flex-shrink: 0;
+        margin: 0 !important;
+        cursor: pointer;
+    }
+
+    message-bar[type="warning"]:not([message-bar-type="infobar"]) {
+        --message-bar-background-color: var(--low-warning-background) !important;
+        --message-bar-text-color: var(--text-color) !important;
+    }
+
+    message-bar:is([type="system"], [type="info"], [type="generic"]) {
+        --message-bar-background-color: var(--grey-60) !important;
+        --message-bar-text-color: var(--text-color) !important;
+    }
+
+    message-bar[type="error"]:not([message-bar-type="infobar"]) {
+        --message-bar-background-color: color-mix(
+            in srgb,
+            transparent 15%,
+            var(--uc-warning-background)
+        ) !important;
+        --message-bar-text-color: var(--text-color) !important;
+    }
+
+    message-bar[type="critical"]:not([message-bar-type="infobar"]) {
+        --message-bar-background-color: color-mix(
+            in srgb,
+            hsla(-2, 100%, 60%, 0.5) 45%,
+            var(--uc-warning-background)
+        ) !important;
+        --message-bar-text-color: var(--text-color) !important;
+    }
+}
+
+@-moz-document url("about:processes") {
+    td:nth-child(7) {
+        width: 3% !important;
+    }
+}
+
+@-moz-document url-prefix("about:debugging") {
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --bg-color: rgb(30, 29, 31) !important;
+            --bg-color-float: rgb(37, 36, 38);
+            --text-color: var(--plaintext-color) !important;
+            --text-color-2nd: rgba(255, 255, 255, 0.6) !important;
+            --text-color-3rd: rgba(255, 255, 255, 0.45) !important;
+            --border-color: var(--button-bg-active) !important;
+            --box-background: var(--in-content-bg-dark) !important;
+            --box-border-color: var(--button-bg-active) !important;
+            --shadow-var: 0 0 5px hsla(0, 0%, 0%, 0.08), 0 0 8px hsla(0, 0%, 0%, 0.05);
+            --button-color: var(--plaintext-color);
+            --button-bg: hsla(0, 20%, 90%, 0.06);
+            --button-bg-hover: hsla(0, 10%, 80%, 0.09);
+            --button-bg-active: hsla(0, 10%, 80%, 0.11);
+            --card-separator-color: var(--button-bg-active) !important;
+            --category-background-hover: rgba(12, 12, 13, 0.1);
+            --category-text: var(--plaintext-color) !important;
+            --category-text-selected: var(--link-color-active) !important;
+            --link-color: hsl(251, 100%, 64%) !important;
+            --link-color-active: hsl(240, 100%, 72%) !important;
+            --link-color-hover: hsl(245, 100%, 68%) !important;
+            --green-70: var(--green-50) !important;
+            --grey-50: var(--text-color-3rd) !important;
+            --grey-20: var(--card-separator-color) !important;
+        }
+
+        .card {
+            background-color: var(--bg-color-float) !important;
+            box-shadow: var(--shadow-var) !important;
+            -moz-context-properties: fill, fill-opacity !important;
+            fill: currentColor !important;
+        }
+
+        .connect-section__header__icon {
+            opacity: 0.932 !important;
+        }
+
+        .default-button {
+            color: var(--button-color) !important;
+            background-color: var(--button-bg) !important;
+        }
+
+        .default-button:enabled:hover,
+        .sidebar-item--selectable:hover {
+            background: var(--button-bg-hover) !important;
+        }
+
+        .default-button:enabled:hover:active,
+        .sidebar-item--selectable:hover:active {
+            background: var(--button-bg-active) !important;
+        }
+
+        .sidebar__footer {
+            -moz-context-properties: fill, fill-opacity !important;
+            fill: currentColor !important;
+            fill-opacity: 0.932 !important;
+        }
+
+        .fieldpair__description {
+            color: var(--text-color-2nd) !important;
+        }
+
+        .primary-button {
+            background-color: var(--link-color) !important;
+        }
+
+        .primary-button:hover {
+            background-color: var(--link-color-hover) !important;
+        }
+
+        .primary-button:hover:active {
+            background-color: var(--link-color-active) !important;
+        }
+
+        .sidebar__footer__support-help {
+            column-gap: calc(var(--base-unit) * 1.5) !important;
+        }
+
+        .icon-label--info {
+            --icon-color: currentColor !important;
+        }
+
+        .message__button {
+            fill: var(--message-color) !important;
+        }
+
+        .message--level-info {
+            --message-background-color: var(--grey-20) !important;
+            --message-border-color: transparent !important;
+            --message-color: var(--text-color) !important;
+            --message-icon-color: var(--text-color) !important;
+        }
+
+        .message--level-warning {
+            --message-background-color: var(--low-warning-background) !important;
+            --message-border-color: var(--low-warning-border-color) !important;
+            --message-color: var(--text-color) !important;
+            --message-icon-color: var(--low-warning-color) !important;
+        }
+
+        .message--level-error {
+            --message-background-color: color-mix(
+                in srgb,
+                transparent 15%,
+                var(--uc-warning-background)
+            ) !important;
+            --message-border-color: color-mix(
+                in srgb,
+                transparent 30%,
+                var(--uc-warning-background)
+            ) !important;
+            --message-color: var(--text-color) !important;
+            --message-icon-color: var(--warning-color) !important;
+        }
+    }
+}
+
+@-moz-document url-prefix("about:reader") {
+    body.dark {
+        --main-background: var(--in-content-bg-dark) !important;
+        --tooltip-background: color-mix(in srgb, black 40%, var(--in-content-bg-dark)) !important;
+        --active-color: var(--purple-35) !important;
+        --selected-background: var(--attention-color) !important;
+        --link-foreground: #5311ff !important;
+        --visited-link-foreground: #823afc !important;
+    }
+
+    input:not([type="file"], [type="image"]):focus-visible,
+    select:focus-visible,
+    button:focus-visible,
+    textarea:focus-visible {
+        outline-color: var(--purple-35) !important;
+        outline-style: solid !important;
+        outline-width: 2px !important;
+    }
+
+    .container {
+        margin: 25px 25px 25px 75px !important;
+        max-width: 2400px !important;
+        column-width: 600px !important;
+        column-gap: 40px !important;
+        column-count: 2 !important;
+    }
+
+    .toolbar-container {
+        top: calc(40% - 40px) !important;
+    }
+
+    .reader-toolbar,
+    .close-button:not(:hover),
+    .style-button:not(:hover) {
+        background-color: inherit !important;
+    }
+
+    .toolbar-container .toolbar {
+        border-color: var(--toolbar-border) !important;
+        box-shadow: 0 0 8px hsl(0, 0%, 6.3%) !important;
+        margin-inline-start: calc(var(--inline-padding) * 2) !important;
+    }
+}

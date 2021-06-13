@@ -1,0 +1,127 @@
+/* fundamental content styles, e.g. plaintext pages. */
+
+@media (prefers-color-scheme: dark) {
+    ::selection {
+        background-color: var(--global-selection-bgcolor) !important;
+        color: var(--global-selection-color) !important;
+    }
+
+    ::-moz-selection {
+        background-color: var(--global-selection-bgcolor) !important;
+        color: var(--global-selection-color) !important;
+    }
+
+    .gitzip-check-mark {
+        color: white !important;
+    }
+
+    #publication .flipbook .background {
+        background-color: hsl(240, 4%, 10%) !important;
+    }
+
+    #publication .flipbook .background .img-fit {
+        background-color: transparent !important;
+        filter: invert(1) hue-rotate(180deg) contrast(0.9) brightness(0.8) !important;
+    }
+
+    #publication.publication-container {
+        background-color: hsl(240, 4%, 8%) !important;
+    }
+
+    #publication #publ-container #tool-window {
+        background-color: hsl(240, 4%, 8%) !important;
+        box-shadow: hsla(0, 0%, 0%, 0.5) 0px 0px 8px !important;
+    }
+
+    input[type="number"] {
+        -moz-appearance: none;
+        appearance: none;
+    }
+
+    input[type="number"]::-moz-number-spin-box {
+        appearance: none;
+        min-width: 16px;
+        min-height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    input[type="number"]::-moz-number-spin-up,
+    input[type="number"]::-moz-number-spin-down {
+        -moz-context-properties: fill, fill-opacity !important;
+        border: 0;
+        border-radius: 0;
+        background-image: url(chrome://userchrome/content/arrow-dropdown-16.svg);
+        background-size: 8px;
+        background-position: center 0px;
+        -moz-context-properties: fill;
+        fill: currentColor;
+        fill-opacity: 0.4;
+        appearance: none;
+    }
+
+    input[type="number"]::-moz-number-spin-up {
+        scale: 1 -1;
+    }
+
+    input[type="number"]::-moz-number-spin-down:hover,
+    input[type="number"]::-moz-number-spin-up:hover {
+        fill-opacity: 0.7;
+    }
+}
+
+:-moz-focusring:focus:not(:focus-visible) {
+    outline: unset !important;
+    outline-offset: unset !important;
+}
+
+@-moz-document plain-text-document(), media-document(all) {
+    @font-face {
+        font-family: "Overpass Mono";
+        font-style: normal;
+        font-weight: 100;
+        src: local("Overpass Mono"), local("Overpass Mono Light"), local("OverpassMono-Light");
+    }
+
+    :root {
+        font-family: Overpass Mono, -moz-fixed;
+        font-size: 12;
+    }
+
+    xmp,
+    pre,
+    plaintext {
+        font-family: Overpass Mono, -moz-fixed;
+        font-size: 12;
+    }
+
+    img.transparent {
+        background: center/16px repeat hsla(0, 0%, 80%) url(chrome://userchrome/content/checker.svg) !important;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            color: var(--plaintext-color) !important;
+            background-color: var(--in-content-bg-dark) !important;
+        }
+
+        body:not([style*="background"], [class], [id]) {
+            background-color: transparent !important;
+        }
+
+        ::selection {
+            color: var(--content-selection-color) !important;
+            background-color: var(--content-selection-bgcolor) !important;
+        }
+
+        ::-moz-selection {
+            color: var(--content-selection-color) !important;
+            background-color: var(--content-selection-bgcolor) !important;
+        }
+    }
+}
+
+:root,
+menupopup {
+    --in-content-category-outline-focus: transparent !important;
+}

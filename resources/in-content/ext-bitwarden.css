@@ -1,0 +1,15 @@
+/* bitwarden */
+
+@-moz-document url-prefix("moz-extension://c1ea5f85-7682-4d41-86cf-4946657a717e/popup/index.html")
+{
+    @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
+        body,
+        input {
+            font-family: SF Pro Display, Segoe UI, sans-serif !important;
+        }
+
+        header .search .fa {
+            top: 14px !important;
+        }
+    }
+}

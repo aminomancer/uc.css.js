@@ -1,0 +1,376 @@
+/* mostly handles <select> menus/menulists */
+
+#ContentSelectDropdown,
+menupopup.in-menulist {
+    --panel-font-size: 1em !important;
+    --menupopup-border-radius: 3px;
+    --arrowpanel-menuitem-border-radius: 3px !important;
+    --context-menuitem-border-radius: var(--arrowpanel-menuitem-border-radius);
+    --menupopup-margin: 0px;
+    --menupopup-child-margin-block-start: -4px;
+    --menupopup-child-margin-inline-start: 0px;
+    --menupopup-padding: 0px;
+    --menupopup-inner-padding-magnitude: 4px;
+    --menupopup-inner-padding: var(--menupopup-inner-padding-magnitude) 0;
+    --context-padding-inline-magnitude: 27px;
+    --context-padding-inline: var(--context-padding-inline-magnitude) 0px;
+    --context-checkbox-margin: 6px 7px;
+    --context-iconic-margin: 5px 6px;
+    --context-iconic-special-margin: 4px -2px;
+    --arrowpanel-background: hsl(233, 36%, 11%);
+    --menu-color: var(--ui-text-80) !important;
+    --menupopup-background: transparent;
+    --menu-background-color: var(--arrowpanel-background) !important;
+    --menu-right-bg: none;
+    --menu-right-img: url(chrome://userchrome/content/menu-arrow.svg);
+    --menu-right-margin: 4px;
+    --menu-right-size: 14px;
+    --arrowpanel-dimmed: hsla(236, 100%, 83%, 0.17) !important;
+    --arrowpanel-dimmed-further: hsla(236, 100%, 83%, 0.25) !important;
+    --arrowpanel-dimmed-even-further: hsla(236, 100%, 85%, 0.3) !important;
+    --panel-disabled-color: var(--context-menu-disabled-color) !important;
+    --button-hover-bgcolor: var(--arrowpanel-dimmed) !important;
+    --button-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
+    --menupopup-shadow: none !important;
+}
+
+#ContentSelectDropdown > menupopup > :where(menucaption, menuitem) > .menu-iconic-text,
+menupopup.in-menulist > :where(menucaption, menuitem) > .menu-iconic-text {
+    padding-block: unset !important;
+}
+
+#ContentSelectDropdown > menupopup :where(menucaption, menuitem),
+menupopup.in-menulist > :where(menucaption, menuitem) {
+    padding-inline: 0 8px !important;
+    -moz-box-align: center !important;
+}
+
+#ContentSelectDropdown
+    > menupopup
+    :where(menucaption, menuitem)
+    > :is(label, .menu-iconic-text, .menu-text),
+menupopup.in-menulist > :where(menucaption, menuitem) > :is(label, .menu-iconic-text, .menu-text) {
+    padding-inline: 8px !important;
+    font: menu !important;
+}
+
+#ContentSelectDropdown > menupopup menucaption,
+menupopup.in-menulist > menucaption {
+    font-weight: inherit !important;
+    min-height: 22px !important;
+    border-bottom: 1px solid var(--menu-separator-color) !important;
+    margin-block: 1px 2px;
+    padding-inline: 5px !important;
+}
+
+#ContentSelectDropdown > menupopup menucaption:first-child,
+menupopup.in-menulist > menucaption:first-child {
+    margin-bottom: 2px !important;
+    border-bottom: 1px solid var(--menu-separator-color) !important;
+}
+
+#ContentSelectDropdown > menupopup menucaption > :is(label, .menu-iconic-text, .menu-text),
+menupopup.in-menulist > menucaption > :is(label, .menu-iconic-text, .menu-text) {
+    font-weight: 600 !important;
+}
+
+#ContentSelectDropdown
+    > menupopup
+    menucaption:first-child
+    > :is(label, .menu-iconic-text, .menu-text),
+menupopup.in-menulist > menucaption:first-child > :is(label, .menu-iconic-text, .menu-text) {
+    margin-block: -3px 0 !important;
+}
+
+#ContentSelectDropdown > menupopup > menuitem:not([_moz-menuactive="true"]),
+menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
+    background-color: transparent !important;
+    color: var(--ui-text-80) !important;
+}
+
+#ContentSelectDropdown > menupopup,
+menupopup.in-menulist {
+    appearance: none !important;
+    border: none !important;
+    background-color: transparent !important;
+    border-radius: var(--menupopup-border-radius) !important;
+    margin: var(--menupopup-margin) !important;
+    overflow: hidden !important;
+    color: var(--ui-text-80) !important;
+    background-image: unset !important;
+    --menu-background-color: var(--ui-secondary-bg) !important;
+    padding: var(--menupopup-padding) !important;
+    border-color: transparent !important;
+}
+
+#ContentSelectDropdown > menupopup .contentSelectDropdown-searchbox,
+menupopup.in-menulist .contentSelectDropdown-searchbox {
+    appearance: none !important;
+    color: inherit !important;
+    border-radius: var(--context-menuitem-border-radius);
+    margin-block: 0 !important;
+    margin-inline: var(--menupopup-inner-padding-magnitude) !important;
+    padding-inline-start: 3px !important;
+    background-color: var(--arrowpanel-dimmed) !important;
+    padding-block: 0 !important;
+    transition: 300ms background-color !important;
+    min-height: 26px !important;
+    -moz-user-modify: read-write !important;
+}
+
+#ContentSelectDropdown > menupopup .contentSelectDropdown-searchbox:focus-within,
+menupopup.in-menulist .contentSelectDropdown-searchbox:focus-within {
+    background-color: var(--search-box-focus) !important;
+    transition: 300ms background-color !important;
+}
+
+#ContentSelectDropdown
+    > menupopup
+    .contentSelectDropdown-searchbox
+    + :is(menu, menuitem, menucaption),
+menupopup.in-menulist .contentSelectDropdown-searchbox + :is(menu, menuitem, menucaption) {
+    margin-top: 4px;
+}
+
+#ContentSelectDropdown > menupopup menu > menupopup,
+menupopup.in-menulist menu > menupopup {
+    margin-inline-start: var(--menupopup-child-margin-inline-start) !important;
+    margin-block-start: var(--menupopup-child-margin-block-start) !important;
+}
+
+#ContentSelectDropdown > menupopup :is(menu, menuitem, menucaption),
+menupopup.in-menulist :is(menu, menuitem, menucaption) {
+    appearance: none !important;
+    color: var(--ui-text-80) !important;
+    border-radius: var(--context-menuitem-border-radius);
+    border: none !important;
+    min-height: 26px !important;
+}
+
+#ContentSelectDropdown > menupopup :is(menu, menuitem, menucaption)[disabled="true"],
+menupopup.in-menulist :is(menu, menuitem, menucaption)[disabled="true"] {
+    appearance: none !important;
+    color: var(--panel-disabled-color) !important;
+    background-color: initial !important;
+}
+
+#ContentSelectDropdown > menupopup :is(menu, menuitem, menucaption) .menu-iconic-left,
+menupopup.in-menulist :is(menu, menuitem, menucaption) .menu-iconic-left {
+    padding: 0 !important;
+    appearance: none !important;
+    margin-inline-end: calc(0px - var(--context-padding-inline-magnitude)) !important;
+}
+
+#ContentSelectDropdown > menupopup :is(menu, menuitem, menucaption) .menu-iconic-icon,
+menupopup.in-menulist :is(menu, menuitem, menucaption) .menu-iconic-icon {
+    margin-inline: var(--context-iconic-margin) !important;
+}
+
+#ContentSelectDropdown > menupopup menugroup,
+menupopup.in-menulist menugroup {
+    padding: 0 !important;
+    background-color: transparent !important;
+}
+
+#ContentSelectDropdown > menupopup .menu-right,
+menupopup.in-menulist .menu-right {
+    appearance: none !important;
+    padding: 0px !important;
+    margin-right: var(--menu-right-margin) !important;
+    min-width: 0 !important;
+    width: var(--menu-right-size) !important;
+    height: var(--menu-right-size) !important;
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity !important;
+    fill-opacity: 0.6 !important;
+    background-size: 10px 10px !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-image: var(--menu-right-bg) !important;
+    list-style-image: var(--menu-right-img) !important;
+}
+
+#ContentSelectDropdown > menupopup menu[disabled="true"] > .menu-right,
+menupopup.in-menulist menu[disabled="true"] > .menu-right {
+    visibility: collapse;
+}
+
+#ContentSelectDropdown
+    > menupopup
+    :is(menu, menuitem)[_moz-menuactive="true"]:not([disabled="true"]),
+menupopup.in-menulist :is(menu, menuitem)[_moz-menuactive="true"]:not([disabled="true"]) {
+    appearance: none !important;
+    background-color: var(--arrowpanel-dimmed) !important;
+}
+
+#ContentSelectDropdown > menupopup :is(menu, menuitem)[_moz-menuactive="true"][disabled="true"],
+menupopup.in-menulist :is(menu, menuitem)[_moz-menuactive="true"][disabled="true"] {
+    background: none !important;
+    appearance: none !important;
+}
+
+#ContentSelectDropdown
+    > menupopup
+    .subviewbutton:is(:hover, :focus-visible, [_moz-menuactive="true"])[disabled="true"],
+menupopup.in-menulist
+    .subviewbutton:is(:hover, :focus-visible, [_moz-menuactive="true"])[disabled="true"] {
+    color: var(--panel-disabled-color) !important;
+}
+
+#ContentSelectDropdown
+    > menupopup
+    menu.subviewbutton:not([disabled="true"])[_moz-menuactive="true"]:active,
+menupopup.in-menulist menu.subviewbutton:not([disabled="true"])[_moz-menuactive="true"]:active {
+    background: var(--arrowpanel-dimmed) !important;
+    box-shadow: none !important;
+}
+
+#ContentSelectDropdown > menupopup menuitem:is([type="checkbox"], [type="radio"])::before,
+menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"])::before {
+    position: relative;
+    display: -moz-inline-box;
+    width: 14px;
+    height: 14px;
+    margin-inline: var(--context-checkbox-margin);
+    fill: currentColor;
+    -moz-context-properties: fill, fill-opacity, stroke;
+    content: "";
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border: 1px solid var(--checkbox-border-color);
+    background-color: var(--checkbox-unchecked-bgcolor);
+    color: var(--in-parent-primary-button-text-color);
+}
+
+#ContentSelectDropdown > menupopup menuitem[type="checkbox"]::before,
+menupopup.in-menulist menuitem[type="checkbox"]::before {
+    border-radius: 2px;
+}
+
+#ContentSelectDropdown
+    > menupopup
+    menuitem:is([type="checkbox"], [type="radio"])[_moz-menuactive="true"]::before,
+menupopup.in-menulist
+    menuitem:is([type="checkbox"], [type="radio"])[_moz-menuactive="true"]::before {
+    background-color: var(--checkbox-unchecked-hover-bgcolor);
+}
+
+#ContentSelectDropdown
+    > menupopup
+    menuitem:is([type="checkbox"], [type="radio"])[_moz-menuactive="true"]:active::before,
+menupopup.in-menulist
+    menuitem:is([type="checkbox"], [type="radio"])[_moz-menuactive="true"]:active::before {
+    background-color: var(--checkbox-unchecked-active-bgcolor);
+}
+
+#ContentSelectDropdown
+    > menupopup
+    menuitem:is([type="checkbox"], [type="radio"])[checked="true"][_moz-menuactive="true"]::before,
+menupopup.in-menulist
+    menuitem:is([type="checkbox"], [type="radio"])[checked="true"][_moz-menuactive="true"]::before {
+    background-color: var(--checkbox-checked-hover-bgcolor);
+}
+
+#ContentSelectDropdown
+    > menupopup
+    menuitem:is([type="checkbox"], [type="radio"])[checked="true"][_moz-menuactive="true"]:active::before,
+menupopup.in-menulist
+    menuitem:is([type="checkbox"], [type="radio"])[checked="true"][_moz-menuactive="true"]:active::before {
+    background-color: var(--checkbox-checked-active-bgcolor);
+}
+
+#ContentSelectDropdown > menupopup menuitem[type="checkbox"][checked="true"]::before,
+menupopup.in-menulist menuitem[type="checkbox"][checked="true"]::before {
+    background-image: url(chrome://userchrome/content/check.svg);
+    border-color: var(--checkbox-checked-border-color);
+    background-color: var(--checkbox-checked-bgcolor);
+}
+
+#ContentSelectDropdown > menupopup menuitem[type="radio"]::before,
+menupopup.in-menulist menuitem[type="radio"]::before {
+    border-radius: 100%;
+}
+
+#ContentSelectDropdown > menupopup menuitem[type="radio"][checked="true"]::before,
+menupopup.in-menulist menuitem[type="radio"][checked="true"]::before {
+    background-image: url(chrome://userchrome/content/radio.svg);
+    border-color: var(--checkbox-checked-border-color);
+    background-color: var(--checkbox-checked-bgcolor);
+}
+
+#ContentSelectDropdown > menupopup menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-left,
+menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-left {
+    display: none;
+}
+
+#ContentSelectDropdown
+    > menupopup[menu-api]
+    menuitem:is([type="checkbox"], [type="radio"])
+    .menu-iconic-left,
+menupopup.in-menulist[menu-api] menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-left {
+    display: none !important;
+}
+
+#ContentSelectDropdown
+    > menupopup
+    > :is(menuitem, menu, menucaption, menugroup, menuseparator, search-textbox),
+menupopup.in-menulist > :is(menuitem, menu, menucaption, menugroup, menuseparator, search-textbox),
+#PopupAutoComplete > richlistbox > richlistitem {
+    margin-inline: var(--menupopup-inner-padding-magnitude);
+}
+
+#ContentSelectDropdown > menupopup .menu-text,
+menupopup.in-menulist .menu-text {
+    padding-inline: 8px !important;
+}
+
+link[href="chrome://global/skin/global.css"] ~ .menupopup-arrowscrollbox
+{
+    background-color: var(--menu-background-color) !important;
+    color: var(--menu-color) !important;
+    border: none !important;
+    border-radius: var(--menupopup-border-radius) !important;
+    box-shadow: var(--menupopup-shadow) !important;
+}
+
+#ContentSelectDropdown > menupopup :is(.menu-accel, .menu-iconic-accel)[value],
+menupopup.in-menulist :is(.menu-accel, .menu-iconic-accel)[value] {
+    margin-inline: 1.55em calc(var(--menu-right-margin) + 4px) !important;
+    padding-block: 0 !important;
+}
+
+#ContentSelectDropdown
+    > menupopup
+    menuitem:not([disabled="true"])
+    :is(.menu-accel, .menu-iconic-accel),
+menupopup.in-menulist menuitem:not([disabled="true"]) :is(.menu-accel, .menu-iconic-accel) {
+    color: var(--panel-shortcut-color);
+}
+
+#ContentSelectDropdown > menupopup menuitem[disabled="true"] :is(.menu-accel, .menu-iconic-accel),
+menupopup.in-menulist menuitem[disabled="true"] :is(.menu-accel, .menu-iconic-accel) {
+    opacity: 0.6;
+}
+
+#ContentSelectDropdown > menupopup menuseparator,
+menupopup.in-menulist menuseparator {
+    border-color: var(--menu-separator-color) !important;
+    margin-inline: var(--menupopup-inner-padding-magnitude) !important;
+}
+
+#ContentSelectDropdown
+    > menupopup
+    menuseparator[id]:not(#context-sep-open, #context-media-sep-commands, #context-sep-copylink, #spell-suggestions-separator, #context-sep-selectall) {
+    display: none !important;
+}
+
+#ContentSelectDropdown > menupopup menuseparator:not([id]),
+menupopup.in-menulist menuseparator:not([id]) {
+    display: -moz-box !important;
+}
+
+#ContentSelectDropdown > menupopup menuseparator:last-child,
+menupopup.in-menulist menuseparator:last-child {
+    display: none;
+}

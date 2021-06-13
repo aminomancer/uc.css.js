@@ -1,0 +1,50 @@
+@-moz-document domain("subscene.com") {
+    #content {
+        width: -moz-available !important;
+        padding-inline: 250px !important;
+    }
+
+    .subtitles td.comment,
+    .subtitles td.a6 div {
+        width: -moz-available !important;
+    }
+
+    .subtitles td.comment,
+    .subtitles td.a6 div {
+        white-space: normal !important;
+    }
+
+    .subtitles td {
+        overflow: scroll !important;
+        white-space: normal !important;
+    }
+
+    .subtitles td.a1 span,
+    .subtitles td.a5,
+    .subtitles td.comment,
+    .subtitles td.a6 div {
+        overflow: scroll !important;
+        white-space: normal !important;
+    }
+
+    .content table tbody tr td {
+        padding-inline: 20px !important;
+        overflow: scroll !important;
+    }
+
+    .subtitles td:not(.a5) a:hover {
+        background-color: hsla(0, 0%, 100%, 0.1) !important;
+        border-radius: 3px !important;
+        width: -moz-fit-content !important;
+        padding-inline-end: 6px !important;
+    }
+
+    .subtitles td.a5 a:hover {
+        text-decoration: underline !important;
+    }
+
+    .subtitles td.a1 span.l {
+        overflow: hidden !important;
+        white-space: nowrap !important;
+    }
+}

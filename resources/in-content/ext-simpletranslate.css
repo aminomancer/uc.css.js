@@ -1,0 +1,143 @@
+/* simple translate extension by sienori */
+
+@-moz-document url(moz-extension://482959ea-7a4a-4baa-900a-86fb03b08903/popup/index.html)
+{
+    :root {
+        --urlbar-popup-url-color: #6745ff !important;
+        --urlbar-popup-action-color: #e24479 !important;
+        --toolbarbutton-hover-background: hsla(236, 60%, 83%, 0.17) !important;
+        --toolbarbutton-active-background: hsla(236, 60%, 85%, 0.25) !important;
+        --lwt-additional-images: url(moz-extension://a881e65b-0464-4a83-8e5c-124f87e00995/images/bg-000-5672c42860d5b06e1058dc477397f3ef.svg) !important;
+        --panel-disabled-color: var(--context-menu-disabled-color) !important;
+        --arrowpanel-background: rgb(28, 32, 49) !important;
+        --arrowpanel-color: rgb(215, 226, 239) !important;
+        --lwt-toolbar-field-color: hsl(240, 60%, 99%);
+        --lwt-background-alignment: top !important;
+        --lwt-background-tiling: repeat !important;
+        --toolbar-color: rgb(255, 255, 255) !important;
+        --autocomplete-popup-background: rgb(23, 25, 40) !important;
+        --autocomplete-popup-color: rgb(215, 226, 239) !important;
+        --toolbarbutton-icon-fill-opacity: 1 !important;
+        --default_tab_border_roundness: 5px;
+        --tab_close_icons_size: 16px;
+        --tabs-border: transparent !important;
+        --toolbox-border-bottom-color: transparent !important;
+        --chrome-nav-bar-controls-border-color: transparent !important;
+        --tabs-navbar-shadow-size: 0px !important;
+        --lwt-toolbarbutton-icon-fill: rgb(255, 255, 255) !important;
+        --arrowpanel-dimmed: rgba(170, 175, 255, 0.17) !important;
+        --arrowpanel-dimmed-further: rgba(170, 175, 255, 0.25) !important;
+        --arrowpanel-dimmed-even-further: rgba(180, 185, 255, 0.3) !important;
+        --desaturate-dimmed: hsla(236, 60%, 83%, 0.17) !important;
+        --desaturate-dimmed-further: hsla(236, 60%, 83%, 0.25) !important;
+        --desaturate-dimmed-even-further: hsla(236, 60%, 85%, 0.3) !important;
+        --urlbar-height: 33px !important;
+        --lwt-toolbarbutton-icon-fill-attention: rgb(106, 145, 255) !important;
+        --lwt-accent-color: rgb(8, 11, 33);
+        --lwt-text-color: rgba(215, 226, 239);
+        --lwt-toolbar-field-background-color: rgb(54, 58, 89);
+        --lwt-toolbar-field-focus: rgba(54, 58, 89, 1);
+        --toolbar-bgcolor: hsl(233, 42%, 15%);
+        --sub-text: rgba(255, 255, 255, 0.6) !important;
+        --highlight: rgba(130, 152, 255, 0.9) !important;
+        border-radius: 3px !important;
+        background: none !important;
+    }
+
+    html {
+        border-radius: 3px !important;
+        background: none !important;
+    }
+
+    body {
+        background-color: var(--arrowpanel-background) !important;
+        color: var(--arrowpanel-color) !important;
+        border-radius: 3px !important;
+    }
+
+    @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
+        body {
+            font-family: SF Pro Display, Segoe UI, sans-serif !important;
+            font-kerning: normal !important;
+        }
+    }
+
+    .react-toggle--disabled {
+        cursor: not-allowed;
+        opacity: 1 !important;
+        -webkit-transition: all 0.25s;
+        transition: all 0.25s;
+    }
+
+    .react-toggle-thumb {
+        border-color: transparent !important;
+    }
+
+    #header {
+        background: none !important;
+    }
+
+    .title {
+        color: var(--arrowpanel-color) !important;
+    }
+
+    :is(textarea, select) {
+        background-color: var(--lwt-toolbar-field-background-color) !important;
+        color: var(--lwt-toolbar-field-color) !important;
+        border: 1px solid transparent !important;
+    }
+
+    :is(textarea, select):focus-within {
+        background-color: var(--arrowpanel-dimmed-further) !important;
+        color: var(--lwt-toolbar-field-color) !important;
+        border-color: var(--highlight) !important;
+    }
+
+    #footer .selectWrap::before {
+        background: none !important;
+        color: var(--lwt-toolbar-field-color) !important;
+        fill: var(--lwt-toolbar-field-color) !important;
+    }
+
+    #footer .selectWrap:hover::before {
+        border-color: white !important;
+    }
+
+    select {
+        background-color: var(--lwt-toolbar-field-background-color) !important;
+        color: var(--lwt-toolbar-field-color) !important;
+        border-color: transparent !important;
+    }
+
+    #footer .selectWrap select:is(:focus-within, :hover) {
+        border-color: var(--highlight) !important;
+    }
+
+    body hr {
+        border-color: var(--desaturate-dimmed-even-further) !important;
+    }
+
+    #resultArea {
+        background-color: var(--arrowpanel-background) !important;
+        color: var(--arrowpanel-color) !important;
+    }
+
+    .resultText,
+    .candidateText,
+    .mediaButtons,
+    .mediaButtons * {
+        background: none !important;
+        fill: var(--arrowpanel-color) !important;
+    }
+
+    .copy {
+        display: none !important;
+    }
+}
+
+#simple-translate .simple-translate-button {
+    background-color: rgba(48, 48, 50, 0.97) !important;
+    -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity !important;
+    fill: rgba(255, 255, 255, 0.9) !important;
+    box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.23), 0 0 2px 1px rgba(0, 0, 0, 0.02) !important;
+}

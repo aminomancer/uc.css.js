@@ -1,0 +1,85 @@
+/* styles the picture-in-picture overlay */
+
+#pictureInPictureToggle.pip-wrapper {
+    top: calc(50% - 1px) !important;
+}
+
+#pictureInPictureToggle .pip-expanded {
+    display: flex !important;
+    opacity: 1 !important;
+    scale: 1 1 !important;
+    box-shadow: 0 0 4px 0 hsla(240, 4%, 4.9%, 0.25) !important;
+    border: none !important;
+    padding: unset !important;
+    cursor: pointer !important;
+    background-color: hsl(244, 100%, 63%) !important;
+    max-height: 26px !important;
+    border-top-left-radius: 2px !important;
+    border-bottom-left-radius: 2px !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    pointer-events: auto !important;
+}
+
+#pictureInPictureToggle .pip-icon {
+    background-image: url(chrome://userchrome/content/tab-picture-in-picture.svg) !important;
+    background-position: 0 1.6px !important;
+    background-repeat: no-repeat;
+    margin-left: 0 !important;
+    margin-right: 5.5px !important;
+    width: 18px !important;
+    height: 18px !important;
+    min-width: 18px !important;
+    background-size: contain !important;
+}
+
+#pictureInPictureToggle .pip-icon-label {
+    padding-block: 4px !important;
+    padding-inline-start: 5.5px;
+    font-size: 13px !important;
+    line-height: 21px !important;
+    font-family: Overpass !important;
+    font-weight: 500 !important;
+}
+
+#pictureInPictureToggle .pip-label {
+    margin-block: 0 !important;
+    margin-right: 5px !important;
+    min-height: 18px !important;
+    max-height: 18px !important;
+}
+
+#pictureInPictureToggle .pip-explainer,
+#pictureInPictureToggle .pip-small,
+#pictureInPictureToggle > .pip-icon {
+    display: none !important;
+}
+
+#pictureInPictureToggle {
+    pointer-events: none !important;
+}
+
+.controlsOverlay.hovering #pictureInPictureToggle {
+    opacity: 1 !important;
+}
+
+#pictureInPictureToggle .pip-expanded,
+.controlsOverlay[hidetoggle="true"].hovering > #pictureInPictureToggle > .pip-expanded {
+    opacity: 0 !important;
+    transform-style: flat !important;
+    backface-visibility: hidden !important;
+    transition: opacity 250ms, translate 190ms !important;
+    translate: calc(48px) !important;
+}
+
+.controlsOverlay.hovering #pictureInPictureToggle .pip-expanded {
+    opacity: 1 !important;
+    translate: 0 !important;
+    translate: calc(19px) !important;
+}
+
+.controlsOverlay.hovering #pictureInPictureToggle .pip-expanded:hover {
+    opacity: 1 !important;
+    translate: 0 !important;
+    translate: calc(-100% + 48px) !important;
+}

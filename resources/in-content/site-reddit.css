@@ -1,0 +1,22 @@
+@-moz-document domain("reddit.com") {
+    @media (prefers-color-scheme: dark) {
+        .ListingLayout-backgroundContainer {
+            --pseudo-before-background: rgb(15, 18, 23, 1) !important;
+        }
+
+        #2x-container > *,
+        ._1VP69d9lk-Wk9zokOaylL {
+            --background: rgb(15, 18, 23, 1) !important;
+            --canvas: rgb(15, 18, 23, 1) !important;
+            background-color: rgb(15, 18, 23, 1) !important;
+        }
+
+        #quickMessageDialogBody {
+            color: #4a4a4f !important;
+        }
+    }
+
+    .author-tooltip {
+        display: none !important;
+    }
+}

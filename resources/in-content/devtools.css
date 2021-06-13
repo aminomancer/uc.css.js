@@ -1,0 +1,550 @@
+/* handles context menus opened in devtools processes,
+and a few elements like checkboxes */
+
+@-moz-document url-prefix("chrome://devtools/content/")
+{
+    :root,
+    menupopup {
+        --panel-font-size: 1em !important;
+        --pinned-tab-width: 36px;
+        --inline-tab-padding: 10px !important;
+        --default_tab_border_roundness: 5px;
+        --tab_close_icons_size: 16px;
+        --tabs-border: transparent !important;
+        --toolbox-border-bottom-color: transparent !important;
+        --chrome-nav-bar-controls-border-color: transparent !important;
+        --chrome-content-separator-color: rgba(0, 0, 0, 0) !important;
+        --tabs-navbar-shadow-size: 0px !important;
+        --autocomplete-popup-highlight-background: var(--arrowpanel-dimmed-further) !important;
+        --toolbarbutton-border-radius: var(--general-button-border-radius) !important;
+        --urlbar-icon-border-radius: var(--general-button-border-radius) !important;
+        --lwt-accent-color: hsl(233, 61%, 8%) !important;
+        --lwt-text-color: hsl(213, 43%, 89%) !important;
+        --lwt-toolbar-field-background-color: hsla(233, 25%, 28%, 85%) !important;
+        --lwt-toolbar-field-color: hsl(240, 60%, 99%);
+        --lwt-toolbar-field-focus: hsla(233, 25%, 28%, 85%) !important;
+        --lwt-toolbar-field-focus-color: rgb(255, 255, 255) !important;
+        --toolbar-bgcolor: hsl(233, 42%, 15%) !important;
+        --toolbar-color: hsl(0, 0%, 100%) !important;
+        --lwt-toolbarbutton-icon-fill: hsl(0, 0%, 100%) !important;
+        --lwt-background-alignment: top !important;
+        --lwt-background-tiling: repeat !important;
+        --arrowpanel-background: hsl(233, 36%, 11%) !important;
+        --panel-shadow: 0 0 4px 0 hsla(0, 0%, 0%, 0.4) !important;
+        --arrowpanel-color: var(--lwt-text-color) !important;
+        --arrowpanel-darker: hsla(236, 70%, 73%, 0.17) !important;
+        --arrowpanel-faint: hsla(236, 100%, 83%, 0.1);
+        --arrowpanel-dimmed: hsla(236, 100%, 83%, 0.17) !important;
+        --arrowpanel-dimmed-further: hsla(236, 100%, 83%, 0.25) !important;
+        --arrowpanel-dimmed-even-further: hsla(236, 100%, 85%, 0.3) !important;
+        --desaturate-dimmed: hsla(236, 60%, 83%, 0.17) !important;
+        --desaturate-dimmed-further: hsla(236, 60%, 83%, 0.25) !important;
+        --desaturate-dimmed-even-further: hsla(236, 60%, 85%, 0.3) !important;
+        --panel-disabled-color: var(--context-menu-disabled-color) !important;
+        --toolbarbutton-hover-background: hsla(236, 82%, 83%, 0.17) !important;
+        --toolbarbutton-active-background: hsla(236, 82%, 83%, 0.22) !important;
+        --toolbarbutton-checked-background: hsla(236, 82%, 83%, 0.13) !important;
+        --desaturate-hover-background: hsla(236, 60%, 83%, 0.17) !important;
+        --desaturate-active-background: hsla(236, 60%, 83%, 0.22) !important;
+        --desaturate-checked-background: hsla(236, 60%, 83%, 0.13) !important;
+        --button-bgcolor: var(--arrowpanel-dimmed) !important;
+        --button-hover-bgcolor: var(--arrowpanel-dimmed-further) !important;
+        --button-active-bgcolor: var(--arrowpanel-dimmed-even-further) !important;
+        --button-primary-bgcolor: var(--purple-45) !important;
+        --button-primary-hover-bgcolor: var(--purple-40) !important;
+        --button-primary-active-bgcolor: var(--purple-35) !important;
+        --button-primary-color: var(--button-color) !important;
+        --urlbar-input-bgcolor: hsla(233, 24%, 26%, 1) !important;
+        --urlbar-input-bgcolor-brighter: hsla(233, 23%, 27.2%, 1) !important;
+        --urlbar-input-bgcolor-even-brighter: hsla(233, 21%, 31%, 1) !important;
+        --urlbar-input-bgcolor-disabled: hsla(233, 24%, 26%, 0.5) !important;
+        --urlbar-toolbar-height: var(--user-urlbar-container-height) !important;
+        --urlbar-container-height: var(--user-urlbar-container-height) !important;
+        --urlbar-height: calc(var(--urlbar-container-height) - 6px) !important;
+        --urlbar-container-padding: 1px !important;
+        --urlbar-icon-fill-opacity: 0.6 !important;
+        --lwt-toolbarbutton-icon-fill-attention: var(--attention-color) !important;
+        --focus-outline-color: var(--attention-color) !important;
+        --focus-outline-width: 2px;
+        --places-cell-focus-bgcolor: hsl(232, 30%, 19%) !important;
+        --places-cell-hover-bgcolor: hsl(232, 30%, 23%) !important;
+        --ctrlTab-bgcolor: transparent !important;
+        --ctrlTab-panel-disabled-bgcolor: hsla(240, 2%, 9%, 0.8) !important;
+        --ctrlTab-panel-disabled-focused-bgcolor: hsla(240, 8%, 3%, 0.9) !important;
+        --ctrlTab-panel-bgcolor: hsla(240, 3%, 4%, 0.9) !important;
+        --ctrlTab-panel-focused-bgcolor: hsla(10, 12%, 2%, 0.99) !important;
+        --in-content-box-background: hsl(232, 32%, 14%) !important;
+        --in-content-box-border-color: rgba(249, 249, 250, 0.1) !important;
+        --in-content-button-background: var(--arrowpanel-dimmed) !important;
+        --in-content-button-background-hover: var(--arrowpanel-dimmed-further) !important;
+        --in-content-button-background-active: var(--arrowpanel-dimmed-even-further) !important;
+        --in-content-button-border-radius: var(--general-button-border-radius) !important;
+        --in-content-item-selected: var(--purple-40) !important;
+        --in-content-border-highlight: var(--purple-40) !important;
+        --in-content-border-focus: var(--purple-40) !important;
+        --in-content-border-active: var(--purple-40) !important;
+        --in-content-border-active-shadow: var(--purple-40-a30) !important;
+        --in-content-category-outline-focus: 1px solid transparent !important;
+        --in-content-link-color: var(--purple-35) !important;
+        --in-content-link-color-hover: var(--purple-30) !important;
+        --in-content-link-color-active: var(--purple-30) !important;
+        --in-content-primary-button-background: var(--purple-40) !important;
+        --in-content-primary-button-background-hover: var(--purple-35) !important;
+        --in-content-primary-button-background-active: var(--purple-30) !important;
+        --autocomplete-popup-background: var(--arrowpanel-background) !important;
+        --autocomplete-popup-color: var(--lwt-text-color) !important;
+        --autocomplete-popup-separator-color: var(--panel-separator-color) !important;
+        --urlbarView-bgcolor: hsla(233, 38%, 9%, 0.8) !important;
+        --ui-textbox-bgcolor: hsl(233, 24%, 28%) !important;
+        --ui-textbox-focus-bgcolor: hsl(232, 22%, 34%) !important;
+        --ui-solid-button-bgcolor: var(--arrowpanel-dimmed) !important;
+        --ui-solid-button-hover-bgcolor: var(--arrowpanel-dimmed-further) !important;
+        --ui-solid-button-active-bgcolor: var(--arrowpanel-dimmed-even-further) !important;
+        --ebmp-hover-bgcolor: hsl(233, 24%, 33%) !important;
+        --ebmp-focus-bgcolor: hsl(233, 24%, 38%) !important;
+        --urlbar-popup-url-color: hsl(251, 100%, 64%) !important;
+        --urlbar-popup-action-color: hsl(340, 73%, 58%) !important;
+        --lwt-popup-brighttext-url-color: var(--urlbar-popup-action-color) !important;
+        --toolbarbutton-icon-fill-opacity: 1 !important;
+        --tab-min-height: 35px !important;
+        --min-tab-height: 35px !important;
+        --space-above-tabbar: 0px;
+        --context-margin-inline: -14px 0px;
+        --context-padding-inline: 27px 0px;
+        --menu-color: var(--ui-text-80) !important;
+        --menupopup-background: transparent;
+        --menu-background-color: var(--arrowpanel-background) !important;
+        --menupopup-margin: 0px;
+        --menupopup-child-margin-block-start: -4px;
+        --menupopup-child-margin-inline-start: 0px;
+        --menupopup-padding: 0px;
+        --menupopup-inner-padding-magnitude: 4px;
+        --menupopup-inner-padding: var(--menupopup-inner-padding-magnitude) 0;
+        --context-checkbox-margin: 6px 7px;
+        --context-iconic-margin: 5px 6px;
+        --context-iconic-special-margin: 4px -2px;
+        --menupopup-shadow: none !important;
+        --menupopup-border-radius: 5px !important;
+        --panel-shadow: none !important;
+        --context-menuitem-border-radius: var(--arrowpanel-menuitem-border-radius);
+        --menu-right-bg: none;
+        --menu-right-img: url(chrome://userchrome/content/menu-arrow.svg);
+        --menu-right-margin: 4px;
+        --menu-right-size: 14px;
+        --buttons-secondary-hover-bgcolor: var(--arrowpanel-dimmed) !important;
+        --buttons-secondary-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
+        --vpn-on-icon: url(chrome://userchrome/content/skin/vpn-on-light.svg);
+        --checkbox-border-color: var(--uc-checkbox-border-color) !important;
+        --checkbox-checked-border-color: var(--uc-checkbox-checked-border-color) !important;
+        --checkbox-unchecked-bgcolor: var(--uc-checkbox-unchecked-bgcolor) !important;
+        --checkbox-unchecked-hover-bgcolor: var(--uc-checkbox-unchecked-hover-bgcolor) !important;
+        --checkbox-unchecked-active-bgcolor: var(--uc-checkbox-unchecked-active-bgcolor) !important;
+        --checkbox-checked-bgcolor: var(--uc-checkbox-checked-bgcolor) !important;
+        --checkbox-checked-color: var(--uc-checkbox-checked-color) !important;
+        --checkbox-checked-hover-bgcolor: var(--uc-checkbox-checked-hover-bgcolor) !important;
+        --checkbox-checked-active-bgcolor: var(--uc-checkbox-checked-active-bgcolor) !important;
+        --panelview-toolbarbutton-hover-bgcolor: var(--arrowpanel-dimmed) !important;
+        --panelview-toolbarbutton-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
+        --panelview-toolbarbutton-focus-box-shadow: none !important;
+        --panel-banner-item-color: HSL(240, 9.1%, 97.8%);
+        --panel-banner-item-background-color: hsla(109.9, 90.9%, 47.3%, 0.1);
+        --panel-banner-item-hover-bgcolor: hsla(109.9, 90.9%, 47.3%, 0.15);
+        --panel-banner-item-active-bgcolor: hsla(109.9, 90.9%, 47.3%, 0.2);
+        --arrowpanel-menuitem-inline-margin: 4px;
+        --arrowpanel-menuitem-margin: 0px var(--arrowpanel-menuitem-inline-margin) !important;
+        --arrowpanel-menuitem-padding: 6px !important;
+        --arrowpanel-padding: 12px !important;
+        --panel-subview-body-padding-magnitude: var(--arrowpanel-menuitem-inline-margin);
+        --panel-subview-body-padding: var(--panel-subview-body-padding-magnitude) 0 !important;
+        --arrowpanel-menuitem-border-radius: 3px !important;
+        --proton-tab-radius: 0px !important;
+        --proton-tab-block-margin: 0px !important;
+        --panel-description-color: hsl(235, 48%, 89%, 70%) !important;
+        --panel-shortcut-color: hsl(235, 27%, 73%, 70%) !important;
+        --panel-shortcut-focus: hsl(235, 32%, 75%, 90%) !important;
+        --error-text-color: var(--warning-color) !important;
+        --proton-tab-inline-padding: 0px !important;
+        --tab-shadow-max-size: 0px !important;
+        --buttons-primary-button-bgcolor: var(--in-parent-primary-button-background) !important;
+        --buttons-primary-button-hover-bgcolor: var(
+            --in-parent-primary-button-background-hover
+        ) !important;
+        --buttons-primary-button-active-bgcolor: var(
+            --in-parent-primary-button-background-active
+        ) !important;
+        --buttons-primary-button-color: var(--in-parent-primary-button-text-color) !important;
+    }
+
+    menupopup > :is(menuitem, menu, menucaption, menugroup, menuseparator, search-textbox),
+    #PopupAutoComplete > richlistbox > richlistitem {
+        margin-inline: var(--menupopup-inner-padding-magnitude);
+    }
+
+    :root,
+    menupopup #TabsToolbar {
+        --toolbarbutton-inner-padding: 6px !important;
+    }
+
+    #urlbar-container,
+    #urlbar {
+        --urlbar-toolbar-height: var(--user-urlbar-container-height) !important;
+        --urlbar-container-height: var(--user-urlbar-container-height) !important;
+    }
+
+    #appMenu-multiView {
+        --arrowpanel-menuitem-inline-margin: 4px;
+        --arrowpanel-menuitem-margin: 0px var(--arrowpanel-menuitem-inline-margin) !important;
+        --arrowpanel-menuitem-padding: 8px !important;
+        --panel-subview-body-padding-magnitude: var(--arrowpanel-menuitem-inline-margin);
+        --panel-subview-body-padding: var(--panel-subview-body-padding-magnitude) 0px !important;
+    }
+
+    .theme-dark input:is([type="checkbox"], [type="radio"]) {
+        appearance: none !important;
+        width: 14px;
+        height: 14px;
+        fill: currentColor;
+        -moz-context-properties: fill, fill-opacity, stroke;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        border: 1px solid var(--checkbox-border-color);
+        background-color: var(--checkbox-unchecked-bgcolor);
+        color: var(--in-parent-primary-button-text-color);
+    }
+
+    .theme-dark input[type="checkbox"] {
+        border-radius: 2px;
+        margin-inline: 4px;
+        margin-block: 3px 2px;
+    }
+
+    .devtools-checkbox-label:not([hidden]) {
+        display: flex;
+        align-items: center;
+    }
+
+    .devtools-checkbox-label input[type="checkbox"] {
+        margin-block: 3px;
+    }
+
+    .theme-dark input:is([type="checkbox"], [type="radio"]):is(:hover, :focus-visible) {
+        background-color: var(--checkbox-unchecked-hover-bgcolor);
+    }
+
+    .theme-dark input:is([type="checkbox"], [type="radio"]):is(:hover, :focus-visible):active {
+        background-color: var(--checkbox-unchecked-active-bgcolor);
+    }
+
+    .theme-dark
+        input:is([type="checkbox"], [type="radio"]):is([checked="true"], :checked):is(:hover, :focus-visible) {
+        background-color: var(--checkbox-checked-hover-bgcolor);
+    }
+
+    .theme-dark
+        input:is([type="checkbox"], [type="radio"]):is([checked="true"], :checked):is(:hover, :focus-visible):active {
+        background-color: var(--checkbox-checked-active-bgcolor);
+    }
+
+    .theme-dark input[type="checkbox"]:is([checked="true"], :checked) {
+        background-image: url(chrome://userchrome/content/check.svg);
+        border-color: var(--checkbox-checked-border-color);
+        background-color: var(--checkbox-checked-bgcolor);
+    }
+
+    .theme-dark input[type="radio"] {
+        border-radius: 100%;
+        margin-inline: 4px;
+    }
+
+    .theme-dark input[type="radio"]:is([checked="true"], :checked) {
+        background-image: url(chrome://userchrome/content/radio.svg);
+        border-color: var(--checkbox-checked-border-color);
+        background-color: var(--checkbox-checked-bgcolor);
+    }
+
+    menupopup {
+        appearance: none !important;
+        background: var(--menupopup-background) !important;
+        border: none !important;
+        border-radius: var(--menupopup-border-radius) !important;
+        margin: var(--menupopup-margin) !important;
+        overflow: hidden !important;
+        padding: var(--menupopup-padding) !important;
+        border-color: transparent !important;
+    }
+
+    menu > menupopup {
+        margin-inline-start: var(--menupopup-child-margin-inline-start) !important;
+    }
+
+    :is(menuitem, menu) {
+        appearance: none !important;
+        color: var(--ui-text-80) !important;
+        padding: 5px 0 !important;
+        min-height: 26px !important;
+        border-radius: var(--context-menuitem-border-radius);
+    }
+
+    :is(menuitem, menu)[disabled="true"] {
+        appearance: none !important;
+        color: var(--panel-disabled-color) !important;
+        background-color: initial !important;
+    }
+
+    :is(menuitem, menu) .menu-iconic-left {
+        padding: 0 !important;
+        appearance: none !important;
+        margin-inline-end: 0 !important;
+    }
+
+    :is(menuitem, menu) .menu-iconic-icon {
+        margin-inline: var(--context-iconic-margin);
+    }
+
+    menugroup {
+        padding: 0 !important;
+        background-color: transparent !important;
+    }
+
+    .menu-right {
+        appearance: none !important;
+        padding: 0px !important;
+        margin-right: var(--menu-right-margin) !important;
+        min-width: 0 !important;
+        width: var(--menu-right-size) !important;
+        height: var(--menu-right-size) !important;
+        fill: currentColor !important;
+        -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity !important;
+        fill-opacity: 0.6 !important;
+        background-size: 10px 10px !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        background-image: var(--menu-right-bg) !important;
+        list-style-image: var(--menu-right-img) !important;
+    }
+
+    menu[disabled="true"] > .menu-right {
+        visibility: collapse;
+    }
+
+    :is(menu, menuitem)[_moz-menuactive="true"]:not([disabled="true"]) {
+        appearance: none !important;
+        background-color: var(--arrowpanel-dimmed) !important;
+    }
+
+    :is(menu, menuitem)[_moz-menuactive="true"][disabled="true"] {
+        background: none !important;
+        appearance: none !important;
+    }
+
+    .subviewbutton:is(:hover, :focus-visible, [_moz-menuactive="true"])[disabled="true"] {
+        color: var(--panel-disabled-color) !important;
+    }
+
+    menu.subviewbutton:not([disabled="true"])[_moz-menuactive="true"]:active {
+        background: var(--arrowpanel-dimmed) !important;
+        box-shadow: none !important;
+    }
+
+    menupopup menuitem:is([type="checkbox"], [type="radio"])::before {
+        position: relative;
+        display: -moz-inline-box;
+        width: 14px;
+        height: 14px;
+        margin-inline: var(--context-checkbox-margin);
+        fill: currentColor;
+        -moz-context-properties: fill, fill-opacity, stroke;
+        content: "";
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        border: 1px solid var(--checkbox-border-color);
+        background-color: var(--checkbox-unchecked-bgcolor);
+        color: var(--in-parent-primary-button-text-color);
+    }
+
+    menupopup menuitem[type="checkbox"]::before {
+        border-radius: 2px;
+    }
+
+    menupopup menuitem:is([type="checkbox"], [type="radio"])[_moz-menuactive="true"]::before {
+        background-color: var(--checkbox-unchecked-hover-bgcolor);
+    }
+
+    menupopup
+        menuitem:is([type="checkbox"], [type="radio"])[_moz-menuactive="true"]:active::before {
+        background-color: var(--checkbox-unchecked-active-bgcolor);
+    }
+
+    menupopup
+        menuitem:is([type="checkbox"], [type="radio"])[checked="true"][_moz-menuactive="true"]::before {
+        background-color: var(--checkbox-checked-hover-bgcolor);
+    }
+
+    menupopup
+        menuitem:is([type="checkbox"], [type="radio"])[checked="true"][_moz-menuactive="true"]:active::before {
+        background-color: var(--checkbox-checked-active-bgcolor);
+    }
+
+    menupopup menuitem[type="checkbox"][checked="true"]::before {
+        background-image: url(chrome://userchrome/content/check.svg);
+        border-color: var(--checkbox-checked-border-color);
+        background-color: var(--checkbox-checked-bgcolor);
+    }
+
+    menupopup menuitem[type="radio"]::before {
+        border-radius: 100%;
+    }
+
+    menupopup menuitem[type="radio"][checked="true"]::before {
+        background-image: url(chrome://userchrome/content/radio.svg);
+        border-color: var(--checkbox-checked-border-color);
+        background-color: var(--checkbox-checked-bgcolor);
+    }
+
+    menupopup menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-left {
+        display: none;
+    }
+
+    #ContentSelectDropdown > menupopup > :where(menucaption, menuitem) > .menu-iconic-text,
+    menupopup.in-menulist > :where(menucaption, menuitem) > .menu-iconic-text {
+        padding-block: unset !important;
+    }
+
+    :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
+        :is(menu, menuitem, menucaption) {
+        padding-inline: 8px !important;
+    }
+
+    :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
+        :is(menu, menuitem, menucaption)
+        > :is(label, .menu-iconic-text, .menu-text) {
+        padding-inline: 0 !important;
+        font: menu !important;
+    }
+
+    :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup) menucaption {
+        font-weight: inherit !important;
+        min-height: 22px !important;
+        border-bottom: 1px solid var(--menu-separator-color) !important;
+        margin-block: 1px 2px;
+        padding-inline: 5px !important;
+    }
+
+    :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
+        menucaption:first-child {
+        margin-bottom: 2px !important;
+        border-bottom: 1px solid var(--menu-separator-color) !important;
+    }
+
+    :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
+        menucaption
+        > :is(label, .menu-iconic-text, .menu-text) {
+        font-weight: 600 !important;
+    }
+
+    :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
+        menucaption:first-child
+        > :is(label, .menu-iconic-text, .menu-text) {
+        margin-block: -3px 0 !important;
+    }
+
+    #ContentSelectDropdown > menupopup {
+        background-color: transparent !important;
+        --content-select-background-image: none !important;
+        color: var(--ui-text-80) !important;
+        background-image: unset !important;
+    }
+
+    #ContentSelectDropdown > menupopup > menuitem:not([_moz-menuactive="true"]),
+    menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
+        background-color: transparent !important;
+        color: var(--ui-text-80) !important;
+    }
+
+    menupopup.in-menulist {
+        appearance: none !important;
+        border: none !important;
+        border-radius: var(--menupopup-border-radius) !important;
+        margin: var(--menupopup-margin) !important;
+        overflow: hidden !important;
+        color: var(--ui-text-80) !important;
+        background-image: unset !important;
+        --menu-background-color: var(--ui-secondary-bg) !important;
+    }
+
+    #ContentSelectDropdown > menupopup .contentSelectDropdown-searchbox {
+        appearance: none !important;
+        color: inherit !important;
+        border-radius: var(--context-menuitem-border-radius);
+        margin-block: 0 !important;
+        margin-inline: var(--menupopup-inner-padding-magnitude) !important;
+        padding-inline-start: 3px !important;
+        background-color: var(--arrowpanel-dimmed) !important;
+        padding-block: 0 !important;
+        transition: 300ms background-color !important;
+        min-height: 26px !important;
+        -moz-user-modify: read-write !important;
+    }
+
+    #ContentSelectDropdown > menupopup .contentSelectDropdown-searchbox:focus-within {
+        background-color: var(--search-box-focus) !important;
+        transition: 300ms background-color !important;
+    }
+
+    #ContentSelectDropdown > menupopup .contentSelectDropdown-searchbox + :is(menu, menuitem) {
+        margin-top: 4px;
+    }
+
+    .grid-element-width-resizer {
+        --inline-inset: 3px !important;
+        width: 4px !important;
+    }
+
+    :not(.subviewbutton) > .menu-text {
+        padding-inline: var(--context-padding-inline) !important;
+    }
+
+    .menupopup-arrowscrollbox {
+        background-color: var(--menu-background-color) !important;
+        color: var(--menu-color) !important;
+        border: none !important;
+        border-radius: var(--menupopup-border-radius) !important;
+        box-shadow: var(--menupopup-shadow) !important;
+    }
+
+    :is(.menu-accel, .menu-iconic-accel)[value] {
+        margin-inline: 1.55em calc(var(--menu-right-margin) + 4px) !important;
+        padding-block: 0 !important;
+    }
+
+    menuitem:not([disabled="true"]) :is(.menu-accel, .menu-iconic-accel) {
+        color: var(--panel-shortcut-color);
+    }
+
+    menuitem[disabled="true"] :is(.menu-accel, .menu-iconic-accel) {
+        opacity: 0.6;
+    }
+
+    menuseparator {
+        border-color: var(--menu-separator-color) !important;
+        margin-inline: var(--menupopup-inner-padding-magnitude) !important;
+    }
+
+    menuseparator[id]:not(#context-sep-open, #context-media-sep-commands, #context-sep-copylink, #spell-suggestions-separator, #context-sep-selectall) {
+        display: none !important;
+    }
+
+    menuseparator:not([id]) {
+        display: -moz-box !important;
+    }
+
+    menuseparator:last-child {
+        display: none;
+    }
+
+    menupopup[menu-api] menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-left {
+        display: none !important;
+    }
+}

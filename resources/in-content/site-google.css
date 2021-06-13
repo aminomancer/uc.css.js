@@ -1,0 +1,10 @@
+@-moz-document domain("www.google.com") {
+    scrolling-carousel,
+    scrolling-carousel > div {
+        scrollbar-width: none !important;
+    }
+
+    #islsp {
+        float: left !important;
+    }
+}
