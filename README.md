@@ -209,7 +209,7 @@ Adds an about:config shortcut button to the main app menu panel, under the built
 Makes some minor modifications to the app menu. (the popup opened by clicking the hamburger button on the far right of the navbar) Currently, it changes the "Add-ons and Themes" button to say "Extensions" (or whatever the equivalent is in your language, since the strings are localized automatically) and it adds a separator under the "Manage Account" button in the profile/account panel. I'll continue adding more mods to this script as I think of them.
 
 ####   [All Tabs Menu Expansion Pack](/script/allTabsMenuExpansionPack.uc.js):
-<details><summary>This script adds several new features to the "all tabs menu" to help it catch up to the functionality of the regular tabs bar. <i><b>Click here for details.</b></i></summary>
+<details><summary>This script adds several new features to the "all tabs menu" to help it catch up to the functionality of the regular tabs bar.</p><i><b>Click here for details.</b></i></summary>
 
 1. Allows you to drag and drop tabs in the all tabs menu.
 2. Adds an animated close button for every tab in this menu.
