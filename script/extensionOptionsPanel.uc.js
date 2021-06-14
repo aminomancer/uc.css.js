@@ -134,6 +134,7 @@ class ExtensionOptionsWidget {
                         id: this.viewId,
                         class: "PanelUI-subView cui-widget-panelview",
                         flex: "1",
+                        style: "min-width:30em",
                     });
                     aDoc.getElementById("appMenu-viewCache").appendChild(view);
                     aDoc.defaultView.extensionOptionsPanel.panelview = view;
@@ -539,7 +540,7 @@ class ExtensionOptionsWidget {
         let uri = makeURI(
             "data:text/css;charset=UTF=8," +
                 encodeURIComponent(
-                    `#eom-button{list-style-image:url('${this.config["Icon URL"]}');}#eom-mainView-panel-header{padding:8px 4px 4px 4px;min-height:44px;-moz-box-pack:center;-moz-box-align:center;}#eom-mainView-panel-header-span{font-weight:600;display:inline-block;text-align:center;overflow-wrap:break-word;}.eom-addon-button{list-style-image:var(--extension-icon);}#PanelUI-eom{min-width:30em;}#PanelUI-eom .disabled label{opacity:.6;font-style:italic;}#eom-allow-auto-updates{padding-block:4px;}#eom-allow-auto-updates .radio-check{margin-block:0;}#eom-allow-auto-updates label{padding-bottom:1px;}#eom-allow-auto-updates-desc{margin-inline-end:8px;}#eom-allow-auto-updates .subviewradio{margin:0;margin-inline:2px;padding:0;background:none!important;}#eom-allow-auto-updates .radio-label-box{margin-inline-start:0;padding-block:0;}`
+                    `#eom-button{list-style-image:url('${this.config["Icon URL"]}');}#eom-mainView-panel-header{padding:8px 4px 4px 4px;min-height:44px;-moz-box-pack:center;-moz-box-align:center;}#eom-mainView-panel-header-span{font-weight:600;display:inline-block;text-align:center;overflow-wrap:break-word;}.eom-addon-button{list-style-image:var(--extension-icon);}#PanelUI-eom .disabled label{opacity:.6;font-style:italic;}#eom-allow-auto-updates{padding-block:4px;}#eom-allow-auto-updates .radio-check{margin-block:0;}#eom-allow-auto-updates label{padding-bottom:1px;}#eom-allow-auto-updates-desc{margin-inline-end:8px;}#eom-allow-auto-updates .subviewradio{margin:0;margin-inline:2px;padding:0;background:none!important;}#eom-allow-auto-updates .radio-label-box{margin-inline-start:0;padding-block:0;}`
                 )
         );
         if (sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) return;

@@ -845,6 +845,16 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
     padding-inline-start: 16px;
 }
 
+#identity-popup-security-description > :is(description, label, button) {
+    padding-inline: 30px !important;
+    margin-inline-start: 0 !important;
+}
+
+panel .header,
+#identity-popup-security-description > description {
+	font-weight: var(--uc-font-weight-bold) !important;
+}
+
 .panel-view-body-unscrollable {
     overflow-y: scroll !important;
 }
