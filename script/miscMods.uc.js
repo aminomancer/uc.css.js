@@ -1,6 +1,7 @@
 (function () {
     function init() {
         gEditItemOverlay._autoshowBookmarksToolbar = function () {};
+        gBrowser.arrowKeysShouldWrap = true;
     }
 
     if (gBrowserInit.delayedStartupFinished) init();

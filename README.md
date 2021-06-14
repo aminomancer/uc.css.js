@@ -290,7 +290,87 @@ By default, private windows are opened to about:privatebrowsing, regardless of y
 Depending on your settings you might have noticed that typing a search engine alias (e.g. "goo" for Google) causes some special formatting to be applied to the text you input in the url bar. This is a trainwreck because the formatting is applied using the selection controller, not via CSS, meaning you can't change it in your stylesheets. It's blue by default, and certainly doesn't match my personal theme very well. This script just prevents the formatting from ever happening at all.
 
 ####   [Restore pre-Proton Tab Sound Button](/script/restoreTabSoundButton.uc.js):
-Proton removes the tab sound button and (imo) makes the tab sound tooltip look silly. This fully restores both, but requires some extra steps, and doesn't restore the tab sound button's CSS styles, since there's no reason to use a script to load ordinary CSS. If you want to use my sound icon styles, see [uc-tabs.css](/uc-tabs.css#L503). This script *requires* that you either 1) use my theme, complete with [chrome.manifest](/utils/chrome.manifest) and the [resources](/resources) folder, or 2) download [this file](/resources/script-override/tabMods.uc.js) and put it in `<your profile>/chrome/resources/script-override/`, then edit the [utils/chrome.manifest](/utils/chrome.manifest) file that comes with fx-autoconfig to add the following line (at the bottom):<p>`override chrome://browser/content/tabbrowser-tab.js ../resources/tabMods.uc.js`</p><p>For those who are curious, this will override the tab markup template and some methods relevant to the sound & overlay icons. We can't use a normal script to do this because, by the time a script can change anything, browser.xhtml has already loaded tabbrowser-tab.js, the tab custom element has already been defined, and tabs have already been created with the wrong markup. This wasn't required in the past because `.tab-icon-sound` wasn't fully removed, just hidden. But as of June 06, 2021, the sound button is entirely gone in vanilla Firefox 91. So [tabMods.uc.js](/resources/script-override/tabMods.uc.js) restores the markup and class methods; [restoreTabSoundButton.uc.js](/script/restoreTabSoundButton.uc.js) restores the tooltip; and [uc-tabs.css](/uc-tabs.css#L503) rebuilds the visual appearance.</p>
+Proton removes the tab sound button and (imo) makes the tab sound tooltip look silly. This fully restores both, but requires some extra steps, and doesn't restore the tab sound button's CSS styles, since there's no reason to use a script to load ordinary CSS. If you want to use my sound icon styles, see [uc-tabs.css](/uc-tabs.css#L503). This script *requires* that you either 1) use my theme, complete with [chrome.manifest](/utils/chrome.manifest) and the [resources](/resources) folder, or 2) download [this file](/resources/script-override/tabMods.uc.js) and put it in `<your profile>/chrome/resources/script-override/`, then edit the [utils/chrome.manifest](/utils/chrome.manifest) file that comes with fx-autoconfig to add the following line (at the bottom):<p>`override chrome://browser/content/tabbrowser-tab.js ../resources/tabMods.uc.js`</p><p>For those who are curious, this will override the tab markup template and some methods relevant to the sound & overlay icons. We can't use a normal script to do this because, by the time a script can change anything, browser.xhtml has already loaded tabbrowser-tab.js, the tab custom element has already been defined, and tabs have already been created with the wrong markup. This wasn't required in the past because `.tab-icon-sound` wasn't fully removed, just hidden. But as of June 06, 2021, the sound button is entirely gone in vanilla Firefox 91. So [tabMods.uc.js](/resources/script-override/tabMods.uc.js) restores the markup and class methods; [restoreTabSoundButton.uc.js](/script/restoreTabSoundButton.uc.js) restores the tooltip; and [uc-tabs.css](/uc-tabs.css#L503) rebuilds the visual appearance.</p><details><summary>If you don't use my theme, restoring the sound button will also require some CSS. <i><b>Click to expand...</b></i></summary>
+```
+.tab-icon-sound {
+    margin-inline-start: -16px;
+    width: 16px;
+    height: 16px;
+    padding: 0;
+    -moz-context-properties: fill;
+    fill: currentColor;
+    border-radius: 50%;
+    list-style-image: none;
+    background-repeat: no-repeat;
+}
+.tab-icon-sound[soundplaying],
+.tab-icon-sound[pictureinpicture][soundplaying]:hover {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="context-fill" viewBox="0 0 16 16"><path d="M8.587 2.354L5.5 5H4.191A2.191 2.191 0 002 7.191v1.618A2.191 2.191 0 004.191 11H5.5l3.17 2.717a.2.2 0 00.33-.152V2.544a.25.25 0 00-.413-.19zM11.575 3.275a.5.5 0 00-.316.949 3.97 3.97 0 010 7.551.5.5 0 00.316.949 4.971 4.971 0 000-9.449z"/><path d="M13 8a3 3 0 00-2.056-2.787.5.5 0 10-.343.939A2.008 2.008 0 0112 8a2.008 2.008 0 01-1.4 1.848.5.5 0 00.343.939A3 3 0 0013 8z"/></svg>');
+    background-size: 12px;
+    background-position: 1.2px center;
+    margin-inline-start: 1px;
+}
+.tab-icon-sound[muted],
+.tab-icon-sound[pictureinpicture][muted]:hover {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="context-fill" viewBox="0 0 16 16"><path d="M13 8a2.813 2.813 0 00-.465-1.535l-.744.744A1.785 1.785 0 0112 8a2.008 2.008 0 01-1.4 1.848.5.5 0 00.343.939A3 3 0 0013 8z"/><path d="M13.273 5.727A3.934 3.934 0 0114 8a3.984 3.984 0 01-2.742 3.775.5.5 0 00.316.949A4.985 4.985 0 0015 8a4.93 4.93 0 00-1.012-2.988zM8.67 13.717a.2.2 0 00.33-.152V10l-2.154 2.154zM14.707 1.293a1 1 0 00-1.414 0L9 5.586V2.544a.25.25 0 00-.413-.19L5.5 5H4.191A2.191 2.191 0 002 7.191v1.618a2.186 2.186 0 001.659 2.118l-2.366 2.366a1 1 0 101.414 1.414l12-12a1 1 0 000-1.414z"/></svg>');
+    background-size: 12px;
+    background-position: 1.2px center;
+    margin-inline-start: 1px;
+}
+.tab-icon-sound[activemedia-blocked] {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12"><path fill="context-fill" d="M2.128.13A.968.968 0 00.676.964v10.068a.968.968 0 001.452.838l8.712-5.034a.968.968 0 000-1.676L2.128.13z"/></svg>');
+    background-size: 8px;
+    background-position: 4.5px center;
+    margin-inline-start: 1px;
+}
+.tab-icon-sound[pictureinpicture] {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 625.8 512"><path fill="context-fill" fill-opacity="context-fill-opacity" d="M568.9 0h-512C25.6 0 0 25 0 56.3v398.8C0 486.4 25.6 512 56.9 512h512c31.3 0 56.9-25.6 56.9-56.9V56.3C625.8 25 600.2 0 568.9 0zm-512 425.7V86c0-16.5 13.5-30 30-30h452c16.5 0 30 13.5 30 30v339.6c0 16.5-13.5 30-30 30h-452c-16.5.1-30-13.4-30-29.9zM482 227.6H314.4c-16.5 0-30 13.5-30 30v110.7c0 16.5 13.5 30 30 30H482c16.5 0 30-13.5 30-30V257.6c0-16.5-13.5-30-30-30z"/></svg>');
+    background-size: 12px;
+    background-position: center;
+    border-radius: revert;
+    margin-inline-start: 1px;
+}
+.tab-icon-sound[pictureinpicture]:-moz-locale-dir(rtl) {
+    transform: scaleX(-1);
+}
+.tab-icon-sound[soundplaying]:not(:hover),
+.tab-icon-sound[muted]:not(:hover),
+.tab-icon-sound[activemedia-blocked]:not(:hover) {
+    opacity: 0.8;
+}
+.tab-icon-sound[soundplaying-scheduledremoval]:not([muted], :hover),
+.tab-icon-overlay[soundplaying-scheduledremoval]:not([muted], :hover) {
+    transition: opacity 0.3s linear var(--soundplaying-removal-delay);
+    opacity: 0;
+}
+.tab-icon-sound-label,
+.tab-secondary-label {
+    display: none !important;
+}
+.tab-icon-sound {
+    display: -moz-box !important;
+}
+.tab-icon-sound:not([soundplaying], [muted], [activemedia-blocked], [pictureinpicture]),
+.tab-icon-sound[pinned] {
+    display: none;
+}
+.tab-icon-overlay {
+    display: none !important;
+}
+.tab-close-button {
+    padding: 2px !important;
+    width: 16px !important;
+    height: 16px !important;
+}
+.tabbrowser-tab:hover .tab-icon-stack > :not(.tab-close-button),
+.tabbrowser-tab:not(:hover) .tab-close-button {
+    visibility: collapse;
+}
+.tabbrowser-tab {
+    --tab-label-mask-size: 2em !important;
+}
+```
+</details>
 
 ####   [Restore pre-Proton Downloads Button](/script/restorePreProtonDownloadsButton.uc.js):
 Restores the pre-proton downloads button icons and animations. I kept the new progress animation, but I made it thicker. If you use my theme or my icons you'll definitely want this for the sake of consistency. If you don't use my theme or icons but you still want the old downloads button back, download the [*standalone*](/script/restorePreProtonDownloadsButton-standalone.uc.js) version instead. The standalone version has the stylesheet and icons built-in, so doesn't require anything else except a script loader. This version requires [userChrome.au.css](/userChrome.au.css) and the [resources/downloads](/resources/downloads) folder.
