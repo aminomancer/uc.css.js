@@ -25,7 +25,7 @@ class ExtensionOptionsWidget {
 
         // localization strings
         l10n: {
-            "Button label": "Extension Options Panel", // what should the button's label be when it's in the overflow panel or customization palette?
+            "Button label": "Extension Options", // what should the button's label be when it's in the overflow panel or customization palette?
 
             "Button tooltip": "Extension options", // what should the button's tooltip be? I use sentence case since that's the convention.
 
@@ -391,15 +391,15 @@ class ExtensionOptionsWidget {
                         : l10n["Enable in Private Browsing label"]
                 );
             };
-            let policy = WebExtensionPolicy.getByID(addon.id);
 
             let privateButton = this.create(document, "toolbarbutton", {
                 class: "subviewbutton",
                 closemenu: "none",
             });
             setButtonState(addon, privateButton);
-            privateButton.addEventListener("command", (_e) => {
-                this.ExtensionPermissions[privateButton.permState ? "remove" : "add"](
+            privateButton.addEventListener("command", async (_e) => {
+                let policy = WebExtensionPolicy.getByID(addon.id);
+                await this.ExtensionPermissions[privateButton.permState ? "remove" : "add"](
                     addon.id,
                     {
                         permissions: ["internal:privateBrowsingAllowed"],
@@ -464,12 +464,14 @@ class ExtensionOptionsWidget {
         let copyIdButton = this.create(document, "toolbarbutton", {
             label: l10n["Copy ID label"],
             class: "subviewbutton panel-subview-footer-button",
+            closemenu: "none",
         });
-        copyIdButton.addEventListener("command", (e) =>
+        copyIdButton.addEventListener("command", (e) => {
             Cc["@mozilla.org/widget/clipboardhelper;1"]
                 .getService(Ci.nsIClipboardHelper)
-                .copyString(addon.id)
-        );
+                .copyString(addon.id);
+            window.CustomHint?.show(copyIdButton, "Copied");
+        });
         view.appendChild(copyIdButton);
     }
 
@@ -540,7 +542,7 @@ class ExtensionOptionsWidget {
         let uri = makeURI(
             "data:text/css;charset=UTF=8," +
                 encodeURIComponent(
-                    `#eom-button{list-style-image:url('${this.config["Icon URL"]}');}#eom-mainView-panel-header{padding:8px 4px 4px 4px;min-height:44px;-moz-box-pack:center;-moz-box-align:center;}#eom-mainView-panel-header-span{font-weight:600;display:inline-block;text-align:center;overflow-wrap:break-word;}.eom-addon-button{list-style-image:var(--extension-icon);}#PanelUI-eom .disabled label{opacity:.6;font-style:italic;}#eom-allow-auto-updates{padding-block:4px;}#eom-allow-auto-updates .radio-check{margin-block:0;}#eom-allow-auto-updates label{padding-bottom:1px;}#eom-allow-auto-updates-desc{margin-inline-end:8px;}#eom-allow-auto-updates .subviewradio{margin:0;margin-inline:2px;padding:0;background:none!important;}#eom-allow-auto-updates .radio-label-box{margin-inline-start:0;padding-block:0;}`
+                    `#eom-button{list-style-image:url('${this.config["Icon URL"]}');}#eom-mainView-panel-header{padding:8px 4px 4px 4px;min-height:44px;-moz-box-pack:center;-moz-box-align:center;}#eom-mainView-panel-header-span{font-weight:600;display:inline-block;text-align:center;overflow-wrap:break-word;}#widget-overflow #eom-mainView-panel-header,#widget-overflow #eom-mainView-panel-header + toolbarseparator{display:none;}.eom-addon-button{list-style-image:var(--extension-icon);}#PanelUI-eom .disabled label{opacity:.6;font-style:italic;}#eom-allow-auto-updates{padding-block:4px;}#eom-allow-auto-updates .radio-check{margin-block:0;}#eom-allow-auto-updates label{padding-bottom:1px;}#eom-allow-auto-updates-desc{margin-inline-end:8px;}#eom-allow-auto-updates .subviewradio{margin:0;margin-inline:2px;padding:0;background:none!important;}#eom-allow-auto-updates .radio-label-box{margin-inline-start:0;padding-block:0;}`
                 )
         );
         if (sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) return;

@@ -74,6 +74,7 @@ menupopup#viewSidebarMenu
     list-style-image: url(chrome://userchrome/content/material/pushbullet-solid.svg) !important;
 }
 
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="{6540f1c5-ab3d-4eff-9ad2-79a95aec93d5}"],
 #sidebar-box[sidebarcommand="_6540f1c5-ab3d-4eff-9ad2-79a95aec93d5_-sidebar-action"]
     #sidebar-switcher-target
     > #sidebar-icon {
@@ -86,7 +87,7 @@ menupopup#viewSidebarMenu
     > #sidebar-icon,
 #sidebarMenu-popup
     #button__446900e4-71c2-419f-a6a7-df9c091e268b_-sidebar-action:not([checked="true"]),
-#_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action .toolbarbutton-icon,
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="{446900e4-71c2-419f-a6a7-df9c091e268b}"] .toolbarbutton-icon,
 menupopup#viewSidebarMenu
     menuitem.menuitem-iconic.webextension-menuitem#menu__446900e4-71c2-419f-a6a7-df9c091e268b_-sidebar-action[style]:is([type="checkbox"], [type="radio"]):not([checked="true"]) {
     list-style-image: url(chrome://userchrome/content/notifications/webauthn.svg) !important;
@@ -150,6 +151,26 @@ more useful than userContent.css when dealing with very complex websites that ne
 :is(.webextension-browser-action, .eom-addon-button)[label="Stylus"] .toolbarbutton-icon,
 :is(.webextension-browser-action, .eom-addon-button)[data-extensionid="{7a7a4a92-a2a0-41d1-9fd7-1e92480d612d}"i] .toolbarbutton-icon {
     list-style-image: url(chrome://userchrome/content/devtools/tool-styleeditor.svg);
+}
+
+/* invert some icons in the extension options panel */
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="sponsorBlocker@ajay.app"] .toolbarbutton-icon,
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="@react-devtools"] .toolbarbutton-icon,
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="hide-files-on-github@sindresorhus.com"] .toolbarbutton-icon,
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="bypasspaywalls@bypasspaywalls"] .toolbarbutton-icon,
+.eom-addon-button[data-extensionid="FirefoxColor@mozilla.com"] .toolbarbutton-icon,
+.eom-addon-button[data-extensionid="default-bookmark-folder@gustiaux.com"] .toolbarbutton-icon,
+.eom-addon-button[data-extensionid="{63d150c4-394c-4275-bc32-c464e76a891c}"] .toolbarbutton-icon,
+.eom-addon-button[data-extensionid="{3c078156-979c-498b-8990-85f7987dd929}"] .toolbarbutton-icon,
+.eom-addon-button[data-extensionid="bookmark-menu-container@robwu.nl"] .toolbarbutton-icon,
+.eom-addon-button[data-extensionid="octolinker@stefanbuck.com"] .toolbarbutton-icon,
+.eom-addon-button[data-extensionid="gitzip-firefox-addons@gitzip.org"] .toolbarbutton-icon,
+.eom-addon-button[data-extensionid="{30399a05-ba09-4c3c-b828-dbc9bb3ab8b9}"] .toolbarbutton-icon {
+    filter: grayscale(1) invert(1) brightness(3) !important;
+}
+
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="@react-devtools"] .toolbarbutton-icon {
+    list-style-image: url(chrome://devtools/content/debugger/images/sources/react.svg);
 }
 
 /* context menu stuff */

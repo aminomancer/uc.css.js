@@ -303,10 +303,6 @@ treechildren::-moz-tree-twisty(open) {
     color: var(--lwt-text-color) !important;
 }
 
-.sidebar-placesTreechildren::-moz-tree-row-text(selected) {
-    color: var(--lwt-text-color) !important;
-}
-
 .sidebar-placesTreechildren::-moz-tree-indentation {
     width: 16px;
 }

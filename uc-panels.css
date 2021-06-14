@@ -57,6 +57,15 @@ panel[viewId="PanelUI-eom"] .panel-viewcontainer[panelopen] {
     min-height: revert !important;
 } */
 
+#widget-overflow panelview[extension] {
+    max-width: revert !important;
+    min-width: revert !important;
+}
+
+#widget-overflow .webextension-popup-browser {
+	background: none !important;
+}
+
 #identity-popup[type="arrow"][side="top"],
 #identity-popup[type="arrow"][side="bottom"],
 #protections-popup[type="arrow"][side="top"],
