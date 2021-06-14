@@ -660,7 +660,7 @@ when the tab bar is not overflowing, new tabs slide into place much more smoothl
 }
 
 .tab-throbber::before {
-    fill: hsl(218, 100%, 81%) !important;
+    fill: var(--tab-throbber-fill) !important;
 }
 
 .tab-throbber[busy]::before {
@@ -684,6 +684,18 @@ when the tab bar is not overflowing, new tabs slide into place much more smoothl
         height: 16px !important;
         animation: none !important;
         display: -moz-box !important;
+    }
+
+    .tab-throbber-tabslist[busy] {
+        list-style-image: url(chrome://userchrome/content/loading-spinner.svg) !important;
+        opacity: 0.6 !important;
+        fill: currentColor !important;
+    }
+
+    .tab-throbber-tabslist[progress] {
+        list-style-image: url(chrome://userchrome/content/loading-spinner.svg) !important;
+        fill: var(--tab-throbber-fill) !important;
+        opacity: 0.8 !important;
     }
 }
 

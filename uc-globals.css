@@ -108,7 +108,7 @@ tooltip {
     --urlbar-results-bgcolor: hsl(233, 32%, 10%);
     --confirmation-hint-bgcolor: hsl(240, 60%, 59%);
     --urlbar-bookmark-icon-color: hsl(250, 100%, 64%);
-    --tab-throbber-fill: rgba(255, 255, 255, 0.6);
+    --tab-throbber-fill: hsl(222, 100%, 75%);
     --sanitize-border-color: hsla(0, 0%, 5%, 0.2);
     --menu-separator-color: hsl(233, 25%, 23%);
     --user-urlbar-container-height: 38px;
