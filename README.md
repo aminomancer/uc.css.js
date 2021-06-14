@@ -209,7 +209,7 @@ Adds an about:config shortcut button to the main app menu panel, under the built
 Makes some minor modifications to the app menu. (the popup opened by clicking the hamburger button on the far right of the navbar) Currently, it changes the "Add-ons and Themes" button to say "Extensions" (or whatever the equivalent is in your language, since the strings are localized automatically) and it adds a separator under the "Manage Account" button in the profile/account panel. I'll continue adding more mods to this script as I think of them.
 
 ####   [All Tabs Menu Expansion Pack](/script/allTabsMenuExpansionPack.uc.js):
-<details><summary>This script adds several new features to the "all tabs menu" to help it catch up to the functionality of the regular tabs bar.</p><i><b>Click here for details.</b></i></summary>
+<details><summary>This script adds several new features to the "all tabs menu" to help it catch up to the functionality of the regular tabs bar. <i><b>Click here for details.</b></i></summary>
 
 1. Allows you to drag and drop tabs in the all tabs menu.
 2. Adds an animated close button for every tab in this menu.
@@ -222,7 +222,7 @@ Makes some minor modifications to the app menu. (the popup opened by clicking th
     - This script adds the same functionality to the all tabs menu, but does not add "pending" styling to regular tabs since it's outside the scope of this project. To do it yourself just add a rule like `.tabbrowser-tab .tab-content{opacity:.6;}`
     - If you use [Unread Tab Mods](/script/unreadTabMods.uc.js), this integrates with it to make unread tabs display with italic text.
 6. Adds color stripes to multiselected tabs and container tabs in the "all tabs menu" so you can differentiate them from normal tabs.
-7. Includes a preference (`userChrome.tabs.all-tabs-menu.reverse-order`) that lets you reverse the order of the tabs so that newer tabs are displayed on top rather than on bottom.
+7. Includes a preference `userChrome.tabs.all-tabs-menu.reverse-order` that lets you reverse the order of the tabs so that newer tabs are displayed on top rather than on bottom.
 8. Modifies the all tabs button's tooltip to display the number of tabs as well as the shortcut to open the all tabs menu, Ctrl+Shift+Tab.
 9. And a few other subtle improvements.
 
