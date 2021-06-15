@@ -634,7 +634,7 @@ when the tab bar is not overflowing, new tabs slide into place much more smoothl
     transition: 0.1s transform ease-in-out, 0.1s opacity ease-in-out !important;
 }
 
-.tab-icon-pending {
+.tab-icon-pending[pendingicon] {
     pointer-events: none !important;
     display: block !important;
     margin-right: -16px !important;

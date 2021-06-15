@@ -1,3 +1,5 @@
+// @version        1.1
+
 // by adding a line to chrome.manifest this can be used to completely override the tab element template, markup and class methods:
 // override chrome://browser/content/tabbrowser-tab.js ../resources/script-override/tabMods.uc.js
 
@@ -13,7 +15,7 @@
         </vbox>
         <hbox class="tab-content" align="center">
           <stack class="tab-icon-stack">
-          <image class="tab-close-button close-icon" role="presentation"/>
+            <image class="tab-close-button close-icon" role="presentation"/>
             <hbox class="tab-throbber" layer="true"/>
             <hbox class="tab-icon-pending"/>
             <image class="tab-icon-image" validate="never" role="presentation"/>
