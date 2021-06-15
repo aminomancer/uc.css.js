@@ -228,6 +228,7 @@ Makes some minor modifications to the app menu. (the popup opened by clicking th
 
 All the relevant CSS for this script is already included in and loaded by the script. It's designed to look consistent with my theme as well as with the latest vanilla (proton) Firefox. If you need to change anything, see the "const css" line in here, or the end of uc-tabs-bar.css on my repo.
 </details>
+<img src="preview/prev-alltabs-xpac.webp"/>
 
 ####   [Toolbox Button](/script/atoolboxButton.uc.js):
 Adds a new toolbar button for devtools features. Probably the single most valuable file on this repo, in my opinion. 1) opens the content toolbox on left click; 2) opens the browser toolbox on right click; 3) toggles "Popup Auto-Hide" on middle click. (mouse buttons can be configured by preference) By default, it also disables popup auto-hide when you open a toolbox window, and re-enables it when you close the toolbox. (there's a pref to disable this feature)<p>The icon changes to show whether popup auto-hide is enabled or disabled, and a badge on the button shows whether any toolbox windows are open. Middle-clicking to toggle popup auto-hide also shows a brief confirmation hint, to make it easier to keep track of the state of the preference. See the description at the top of the file for details about usage, configuration, and localization.</p><details><summary><i><b>Click here for a preview of the toolbox button's middle click function.</b></i></summary><a href="https://youtu.be/BAuABH13ytM"><img src="preview/prev-popup-autohide.webp"/></a></details>
