@@ -158,9 +158,9 @@
     }
 
     function prefHandler(_sub, _top, _pref) {
-        let panel = gTabsPanel.allTabsPanel;
-        if (panel.panelMultiView)
-            panel.panelMultiView.addEventListener("PanelMultiViewHidden", reverseTabOrder, {
+        let multiview = gTabsPanel.allTabsPanel.panelMultiView;
+        if (multiview)
+            multiview.addEventListener("PanelMultiViewHidden", reverseTabOrder, {
                 once: true,
             });
         else reverseTabOrder();
@@ -292,11 +292,11 @@
                     this._onClick(e);
                     break;
                 case "command":
-                    this._onCommand(e.target, tab);
+                    this._onCommand(e, tab);
                     break;
                 case "mouseover":
                 case "mouseout":
-                    this._setTooltip(e.target, tab);
+                    this._setTooltip(e, tab);
                     break;
                 case "TabAttrModified":
                     this._tabAttrModified(e.target);
@@ -323,7 +323,7 @@
                     this._onDrop(e);
                     break;
                 case "TabMultiSelect":
-                    this._onTabMultiSelect(e.target);
+                    this._onTabMultiSelect();
                     break;
                 case "TabPinned":
                     if (!this.filterFn(e.target)) this._tabClose(e.target);
@@ -388,17 +388,17 @@
             PanelMultiView.hidePopup(this.view.closest("panel"));
         };
         allTabs._onClick = function (e) {
-            if (e.target.classList.contains("all-tabs-secondary-button")) return;
-            if (e.button === 0) e.preventDefault();
+            if (e.button !== 0 || e.target.classList.contains("all-tabs-secondary-button")) return;
+            e.preventDefault();
         };
-        allTabs._onCommand = function (row, tab) {
-            if (row.hasAttribute("toggle-mute")) {
+        allTabs._onCommand = function (e, tab) {
+            if (e.target.hasAttribute("toggle-mute")) {
                 tab.multiselected
                     ? this.gBrowser.toggleMuteAudioOnMultiSelectedTabs(tab)
                     : tab.toggleMuteAudio();
                 return;
             }
-            if (row.hasAttribute("close-button")) {
+            if (e.target.hasAttribute("close-button")) {
                 if (tab.multiselected) this.gBrowser.removeMultiSelectedTabs();
                 else this.gBrowser.removeTab(tab, { animate: true });
                 return;
@@ -482,13 +482,11 @@
                 }
                 dt.setDragImage(toDrag, dragImageOffset, dragImageOffset);
             }
-
             tab._dragData = {
                 movingTabs: (tab.multiselected ? this.gBrowser.selectedTabs : [tab]).filter(
                     this.filterFn
                 ),
             };
-
             e.stopPropagation();
         };
         // set the drop target style with an attribute, "dragpos", which is either "after" or "before"
@@ -560,12 +558,12 @@
             delete draggedTab.noCanvas;
             for (let row of this.rows) row.removeAttribute("dragpos");
         };
-        allTabs._setTooltip = function (row, tab) {
+        allTabs._setTooltip = function (e, tab) {
             const selectedTabs = this.gBrowser.selectedTabs;
             const contextTabInSelection = selectedTabs.includes(tab);
             const affectedTabsLength = contextTabInSelection ? selectedTabs.length : 1;
             let label;
-            if (row.hasAttribute("toggle-mute"))
+            if (e.target.hasAttribute("toggle-mute"))
                 if (contextTabInSelection)
                     label = PluralForm.get(
                         affectedTabsLength,
@@ -586,26 +584,25 @@
                                 : "tabs.muteAudio2.background.tooltip"
                         )
                     ).replace("#1", affectedTabsLength);
-            if (row.hasAttribute("close-button")) {
+            else if (e.target.hasAttribute("close-button")) {
                 label = PluralForm.get(
                     affectedTabsLength,
                     gTabBrowserBundle.GetStringFromName("tabs.closeTabs.tooltip")
                 ).replace("#1", affectedTabsLength);
                 if (contextTabInSelection) {
                     let shortcut = ShortcutUtils.prettifyShortcut(key_close);
-                    if (label.includes("%S")) label = label.replace("%S", shortcut);
-                    else label = label + ` (${shortcut})`;
+                    label = label.includes("%S")
+                        ? label.replace("%S", shortcut)
+                        : label + ` (${shortcut})`;
                 }
-            }
-            row.setAttribute("tooltiptext", label);
+            } else return;
+            e.target.setAttribute("tooltiptext", label);
         };
         allTabs._onTabMultiSelect = function () {
-            for (let item of this.rows) {
-                item.tab.multiselected
-                    ? item.setAttribute("multiselected", "true")
-                    : item.removeAttribute("multiselected");
-            }
+            for (let item of this.rows)
+                item.toggleAttribute("multiselected", !!item.tab.multiselected);
         };
+
         gTabsPanel.allTabsButton.setAttribute(
             "onmouseover",
             `this.tooltipText = PluralForm.get(gBrowser.tabs.length, gNavigatorBundle.getString("ctrlTab.listAllTabs.label")).replace("#1", gBrowser.tabs.length).toLocaleLowerCase().replace(RTL_UI ? /.$/i : /^./i, function (letter) { return letter.toLocaleUpperCase(); }).trim() + " (" + ShortcutUtils.prettifyShortcut(key_showAllTabs) + ")";`
@@ -615,6 +612,7 @@
         ["dragstart", "dragleave", "dragover", "drop", "dragend"].forEach((ev) =>
             allTabs.containerNode.addEventListener(ev, allTabs)
         );
+
         reverseTabOrder();
         skipHiddenButtons();
     }
