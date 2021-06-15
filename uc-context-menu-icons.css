@@ -383,18 +383,18 @@ menuitem.pageActionContextMenuItem.manageExtensionItem:before,
 menuitem.customize-context-removeExtension:before,
 menuitem.pageActionContextMenuItem.removeExtensionItem:before,
 menuitem.customize-context-reportExtension:before {
-    content: "" !important;
-    position: relative !important;
-    display: -moz-inline-box !important;
-    width: 16px !important;
-    height: 16px !important;
-    padding-inline: 0px !important;
-    margin-inline: var(--context-iconic-margin) !important;
-    fill: currentColor !important;
-    -moz-context-properties: fill, fill-opacity, stroke !important;
-    background-position: center !important;
-    background-size: 16px !important;
-    background-repeat: no-repeat !important;
+    content: "";
+    position: relative;
+    display: -moz-inline-box;
+    width: 16px;
+    height: 16px;
+    padding-inline: 0px;
+    margin-inline: var(--context-iconic-margin);
+    fill: currentColor;
+    -moz-context-properties: fill, fill-opacity, stroke;
+    background-position: center;
+    background-size: 16px;
+    background-repeat: no-repeat;
 }
 
 #context_moveToStart:not(.menuitem-iconic):before {
