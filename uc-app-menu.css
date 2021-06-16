@@ -1,12 +1,7 @@
 /* this stylesheet focuses on the app menu.
 (the menu opened by the PanelUI hamburger button at the far right end of the toolbar) */
 
-/* add icons to non-iconized appmenu items */
-.subviewbutton:not(.subviewbutton-iconic) > .toolbarbutton-icon {
-    -moz-context-properties: fill, fill-opacity;
-    fill: currentColor;
-}
-
+/* add icons to non-iconized appmenu items (pre-proton) */
 #appMenu-save-file-button {
     list-style-image: url(chrome://userchrome/content/skin/save.svg);
 }
@@ -65,22 +60,6 @@
     list-style-image: url(chrome://userchrome/content/skin/tip.svg) !important;
 }
 
-#appMenu-multiView .subviewbutton-back .toolbarbutton-icon {
-    height: revert !important;
-    width: revert !important;
-}
-
-#appMenu-multiView .panel-header {
-    padding-block: 6px 0 !important;
-    padding-inline: 2px !important;
-}
-
-#appMenu-multiView .panel-header > h1 {
-    font-size: 1.1em !important;
-    font-weight: 600 !important;
-    margin-block: 0 !important;
-}
-
 /* appmenu text encoding */
 #PanelUI-characterEncodingView toolbarbutton[checked="true"] {
     color: currentColor !important;
@@ -90,11 +69,6 @@
 #appMenu-edit-controls toolbarbutton[disabled="true"] {
     opacity: 0.4 !important;
     color: inherit !important;
-}
-
-.toolbaritem-combined-buttons:is(:not([cui-areatype="toolbar"]), [overflowedItem="true"])
-    > toolbarbutton {
-    border-radius: 3px !important;
 }
 
 #appMenu-zoomReduce-button,
@@ -638,7 +612,7 @@
     #appMenu-fxa-text,
     #appMenu-fxa-status2[fxastatus] > #appMenu-fxa-label2 > vbox > #appMenu-header-description,
     #appMenu-fxa-status2:not([fxastatus]) > #appMenu-fxa-label2 {
-        font-weight: 500 !important;
+        font-weight: var(--uc-font-weight-bold) !important;
     }
 }
 

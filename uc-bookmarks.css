@@ -21,6 +21,11 @@
     box-sizing: border-box !important;
 }
 
+#main-window #editBookmarkPanel input::placeholder {
+    color: var(--panel-description-color) !important;
+    opacity: 1 !important;
+}
+
 /* 'add bookmark' popup menu formatting */
 #editBookmarkPanel {
     min-width: 25em !important;
@@ -80,6 +85,7 @@
     border-radius: 2px !important;
     overflow: hidden !important;
     margin: 0 !important;
+    font-weight: var(--uc-font-weight-thin);
 }
 
 #editBookmarkPanel richlistbox {

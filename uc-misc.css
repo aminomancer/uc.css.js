@@ -301,7 +301,6 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
             font-weight: inherit !important;
         }
 
-        panel #appMenu-multiView .panel-header > h1,
         panel .panel-banner-item {
             font-weight: 500 !important;
         }

@@ -168,7 +168,7 @@ menupopup::part(arrowscrollbox),
 }
 
 @-moz-document regexp("^chrome:(?!\/\/(devtools|mozapps|browser\/content\/(sanitize|places\/places.xhtml)|global\/content\/commonDialog)).*") {
-    button {
+    .panel-footer > button {
         font-weight: var(--uc-font-weight-bold, 600);
     }
 }

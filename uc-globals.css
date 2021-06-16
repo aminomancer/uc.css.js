@@ -27,6 +27,7 @@ tooltip {
     --button-solid-active-background: hsl(234, 26%, 30%);
     --button-solid-checked-background: hsl(232, 31%, 23%);
     --uc-font-weight-bold: 600;
+    --uc-font-weight-thin: 400;
     --subdialog-font-size: 1em !important;
     --autocomplete-background: hsl(233, 33%, 17%);
     --ui-secondary-bg: hsl(234, 39%, 10%);
@@ -235,5 +236,6 @@ popupnotification,
 @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
     :root {
         --uc-font-weight-bold: 500;
+        --uc-font-weight-thin: 300;
     }
 }

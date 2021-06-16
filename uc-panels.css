@@ -548,6 +548,11 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
     display: none !important;
 } */
 
+.subviewbutton-back > .toolbarbutton-icon {
+	width: 16px;
+	height: 16px;
+}
+
 .panel-header > .subviewbutton-back,
 .panel-header > .subviewbutton-back > .toolbarbutton-icon {
     -moz-context-properties: fill, fill-opacity !important;
@@ -1276,11 +1281,15 @@ panel .header,
     font-weight: normal !important;
 }
 
-.panel-header > h1,
 .popup-notification-description {
     font-size: 1.05em !important;
     line-height: 1.05em !important;
     font-weight: normal !important;
+}
+
+.panel-header > h1 {
+    font-size: 1.1em !important;
+    font-weight: var(--uc-font-weight-bold) !important;
 }
 
 .popup-notification-description {
