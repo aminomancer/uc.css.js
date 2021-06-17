@@ -75,6 +75,12 @@ which requires Stylus. don't use this stylesheet if you don't have that theme, i
     .container-xl {
         max-width: 75% !important;
     }
+
+    .js-expandable-line:hover .blob-num:not(:hover) .directional-expander:first-child,
+    .js-expandable-line:hover .blob-num:not(:hover) + .blob-code {
+        background: hsl(0, 0%, 20%) !important;
+        border-color: hsl(0, 0%, 20%) !important;
+    }
 }
 
 @-moz-document regexp("^https?://((education|graphql|guides|raw|resources|status|developer|support|vscode-auth)\\.)?github\\.com/((?!(sponsors)).)*$"),
