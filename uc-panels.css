@@ -478,6 +478,39 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
     background-color: var(--uc-checkbox-checked-active-bgcolor) !important;
 }
 
+popupnotification progress {
+    appearance: none;
+    border: 1px solid transparent;
+    margin-block: 3px !important;
+    margin-inline-start: 0 !important;
+    border-radius: 100px;
+    height: 8px;
+    background-color: var(--arrowpanel-dimmed);
+    overflow: hidden;
+}
+
+popupnotification progress[paused] {
+    background-color: var(--desaturate-dimmed);
+}
+
+popupnotification progress:not([value="0"])::-moz-progress-bar {
+    margin: 0;
+    height: 100%;
+}
+
+popupnotification progress::-moz-progress-bar {
+    background-color: var(--toolbarbutton-icon-fill-attention);
+}
+
+popupnotification progress[paused]::-moz-progress-bar {
+    background-color: var(--desaturate-dimmed-further);
+}
+
+/* "downloading and verifying add-on..." goes above the addon install progress bar */
+#addon-progress-notification .popup-notification-origin.header + .popup-notification-description {
+    margin-block: 3px !important;
+}
+
 #protections-popup-message .text-link,
 .popup-notification-learnmore-link {
     text-decoration: none !important;

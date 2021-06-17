@@ -17,7 +17,7 @@ My personal Firefox theme/layout, plus some privileged scripts to add new behavi
 <br/>
 <p></p>
 
-For best results, set density mode to `Normal` and theme to `Dark` in the customization menu. (right click on the navbar and click "Customize Toolbar...") I strongly recommend using this on [Firefox Nightly](https://www.mozilla.org/en-US/firefox/channel/desktop/#nightly) and updating the theme at least weekly. To that end, you might find it easier to clone the repo to your chrome folder so you can pull updates quickly. I also recommend setting the following prefs in about:config. These are in alphabetical order, not in order of importance. Several are optional, but the notes column highlights any that are required.<details><summary>***Click for a full list.***</summary>
+For best results, set density mode to `Normal` and theme to `Dark` in the customization menu. (right click on the navbar and click "Customize Toolbar...") I strongly recommend using this on [Firefox Nightly](https://www.mozilla.org/en-US/firefox/channel/desktop/#nightly) and updating the theme at least weekly. To that end, you might find it easier to clone the repo to your chrome folder so you can pull updates quickly. I also recommend setting the following prefs in about:config. I don't include a user.js file to automatically set the prefs for you, because the majority of them are optional, and the ones that are obligatory should be set in your profile whether you use my resources or not. The following are in alphabetical order, not in order of importance. Several are optional, but the few that are required are in italics and are marked in the Notes column.<details><summary>***Click for a full list.***</summary>
 | Pref&nbsp;name 	| Type 	| Value 	| Notes&nbsp;(optional&nbsp;unless&nbsp;otherwise&nbsp;noted) 	|
 |-	|-	|-	|-	|
 | browser.anchor_color 	| String 	| `#5311ff` 	|  	|
@@ -104,9 +104,11 @@ The files in the script folder are not content scripts like you'd load in Tamper
 
 They need to be loaded by an autoconfig script loader. I recommend [**fx-autoconfig by MrOtherGuy**](https://github.com/MrOtherGuy/fx-autoconfig) which is extremely robust. Some of my scripts are not fully compatible with loaders other than MrOtherGuy's. In particular, most will be incompatible with xiaoxiaoflood's loader, and a few will be incompatible with Alice0775's loader.
 
+If you use any of my scripts, please disable telemetry by going to `about:preferences#privacy` and unticking the box towards the bottom that says "Allow Nightly to send technical and interaction data to Mozilla." Because we're modifying the way the browser's internal systems work, sending Mozilla data about your interactions is not only useless but actively confounding. Any interaction data emitted by functions that we modify with these scripts have the potential to confuse and mislead Firefox developers and waste valuable time.
+
 <h3><b>Installation:</b></h3>
 
-You first need to find your Firefox installation folder. On Windows that's `C:/Program Files/Firefox/`. On Linux it should be `usr/lib/firefox/`. On macOS this is more complicated. You need to open the application file itself, probably in `Macintosh HD/Applications/`. It's the file you double-click to open Firefox, but it's actually a package, not a binary. If you right click it, there will be an option in the context menu labeled "Show Package Contents." Clicking this takes you to the root directory. So whichever OS you're on, you should end up with...
+You first need to find your Firefox installation folder. On Windows that's `C:/Program Files/Firefox Nightly/`. On Linux it should be `usr/lib/firefox/`. On macOS this is more complicated. You need to open the application file itself, probably in `Macintosh HD/Applications/`. It's the file you double-click to open Firefox, but it's actually a package, not a binary. If you right click it, there will be an option in the context menu labeled "Show Package Contents." Clicking this takes you to the root directory. So whichever OS you're on, you should end up with...
 1) &nbsp; a file called `config.js` in your Firefox installation's root directory;
 2) &nbsp; a folder called `defaults` in the root directory;
 3) &nbsp; a folder called `pref` inside that `defaults` folder;

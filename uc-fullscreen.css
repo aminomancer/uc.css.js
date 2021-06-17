@@ -17,7 +17,7 @@ we also need to adjust window controls, the main menu bar, and the bookmarks too
     -moz-window-dragging: no-drag !important;
 }
 
-:root[inFullscreen]:not([customizing]) #navigator-toolbox {
+:root[inFullscreen] #navigator-toolbox {
     max-height: 0 !important;
     margin-top: calc(0.5px - var(--urlbar-container-height) - var(--tab-min-height)) !important;
     transition: all 0.25s ease-in-out 0s !important;
@@ -36,7 +36,7 @@ we also need to adjust window controls, the main menu bar, and the bookmarks too
     height: 2px !important;
 }
 
-#main-window:root[inFullscreen]:not([customizing]) > body > box:not([id]) {
+#main-window:root[inFullscreen] > body > box:not([id]) {
     background: var(--toolbar-bgcolor) !important;
     max-height: 0 !important;
 }
@@ -44,7 +44,7 @@ we also need to adjust window controls, the main menu bar, and the bookmarks too
 /* hides the nav-bar in fullscreen, but reveals it when hovering or focusing the nav-bar, or when nav-bar related popups are opened.
 requires fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-status. */
 :root[customizing] #navigator-toolbox,
-:root[inFullscreen]:not([customizing])
+:root[inFullscreen]
     > body
     > box:is(:focus-within, :hover, [popup-status], [urlbar-status])
     #navigator-toolbox {
@@ -113,8 +113,9 @@ requires fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-statu
     opacity: 1 !important;
 }
 
-:root[customizing][inFullscreen] #customization-container {
+:root[customizing][inFullscreen] #customization-container > #customization-content-container {
     margin-top: calc(var(--urlbar-container-height) + var(--tab-min-height)) !important;
+    z-index: 2147483647 !important;
 }
 
 /* DOM fullscreen, e.g. hitting the fullscreen button on youtube */

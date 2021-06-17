@@ -129,9 +129,30 @@ as the mouse would then be on top of the tooltip popup not the main window. */
     margin-block-start: 26px !important;
 }
 
-/* indigo progress bars */
 progress {
-    filter: hue-rotate(130deg);
+    appearance: none;
+    border: 1px solid transparent;
+    border-radius: 100px;
+    height: 8px;
+    background-color: var(--arrowpanel-dimmed);
+    overflow: hidden;
+}
+
+progress[paused] {
+    background-color: var(--desaturate-dimmed);
+}
+
+progress:not([value="0"])::-moz-progress-bar {
+    margin: 0;
+    height: 100%;
+}
+
+progress::-moz-progress-bar {
+    background-color: var(--toolbarbutton-icon-fill-attention);
+}
+
+progress[paused]::-moz-progress-bar {
+    background-color: var(--desaturate-dimmed-further);
 }
 
 /* blur filter */
