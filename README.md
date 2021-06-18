@@ -47,6 +47,9 @@ For best results, set density mode to `Normal` and theme to `Dark` in the custom
 | *layout.css.backdrop-filter.enabled* 	| Boolean 	| true 	| Required for the acrylic/glass gaussian blur effect 	|
 | *layout.css.cached-scrollbar-styles.enabled* 	| Boolean 	| false 	| Sort of required for userChrome.as.css 	|
 | *layout.css.moz-document.content.enabled* 	| Boolean 	| true 	| Required 	|
+| *layout.css.xul-box-display-values.content.enabled* 	| Boolean 	| true 	| Required 	|
+| *layout.css.xul-display-values.content.enabled* 	| Boolean 	| true 	| Required 	|
+| layout.css.xul-tree-pseudos.content.enabled 	| Boolean 	| true 	|  	|
 | reader.color_scheme 	| String 	| `dark` 	|  	|
 | mousewheel.autodir.enabled 	| Boolean 	| true 	| Allow mousewheel ⇅ to scroll ⇄-only scrollboxes 	|
 | *svg.context-properties.content.enabled* 	| Boolean 	| true 	| Required for making some icons white 	|

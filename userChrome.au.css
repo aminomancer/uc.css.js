@@ -3,7 +3,7 @@ and to override built-in rules without using the "!important" tag.
 the last 75% or so of this stylesheet is dedicated to restoring pre-proton content. */
 
 radio[focused="true"] > .radio-label-box {
-	outline: revert;
+    outline: revert;
 }
 
 :is(panel, menupopup)[type="arrow"]::part(content) {
@@ -16,23 +16,23 @@ radio[focused="true"] > .radio-label-box {
 }
 
 :is(panel, menupopup)::part(content) {
-	background: var(--panel-background, Menu);
+    background: var(--panel-background, Menu);
     border: revert;
 }
 
 #PopupSearchAutoComplete::part(content) {
-	--panel-color: var(--ui-text-80);
-	--panel-background: none;
+    --panel-color: var(--ui-text-80);
+    --panel-background: none;
 }
 
 panel[type="autocomplete-richlistbox"] {
-	--panel-color: var(--ui-text-80);
-	--panel-background: none;
+    --panel-color: var(--ui-text-80);
+    --panel-background: none;
 }
 
 :not(.panel-subview-body) > toolbarseparator + .panel-subview-body,
 :not(.panel-subview-body) > .subview-subheader + .panel-subview-body {
-	padding-bottom: var(--panel-subview-body-padding-magnitude);
+    padding-bottom: var(--panel-subview-body-padding-magnitude);
 }
 
 .panel-subview-footer-button {
@@ -163,8 +163,14 @@ menupopup::part(arrowscrollbox),
 
 /* other panel arrows */
 :is(panel, menupopup)::part(arrow) {
+    display: -moz-inline-box;
     fill: var(--arrowpanel-background);
     stroke: var(--arrowpanel-background);
+}
+
+:is(panel, menupopup)[side="top"]::part(arrow),
+#customization-panelWrapper > .panel-arrowbox > .panel-arrow[side="top"] {
+    margin-bottom: -4px;
 }
 
 @-moz-document regexp("^chrome:(?!\/\/(devtools|mozapps|browser\/content\/(sanitize|places\/places.xhtml)|global\/content\/commonDialog)).*") {
@@ -193,9 +199,21 @@ menupopup::part(arrowscrollbox),
     --arrowpanel-dimmed-even-further: color-mix(in srgb, var(--toolbar-color) 15%, transparent);
     --menu-background-color: var(--in-content-button-highlight-dark) !important;
     --uc-checkbox-unchecked-bgcolor: color-mix(in srgb, var(--toolbar-color) 7%, transparent);
-    --uc-checkbox-unchecked-hover-bgcolor: color-mix(in srgb, var(--toolbar-color) 12%, transparent);
-    --uc-checkbox-unchecked-active-bgcolor: color-mix(in srgb, var(--toolbar-color) 15%, transparent);
-    --urlbar-input-bgcolor: color-mix(in srgb, currentColor 4%, var(--in-content-button-highlight-dark));
+    --uc-checkbox-unchecked-hover-bgcolor: color-mix(
+        in srgb,
+        var(--toolbar-color) 12%,
+        transparent
+    );
+    --uc-checkbox-unchecked-active-bgcolor: color-mix(
+        in srgb,
+        var(--toolbar-color) 15%,
+        transparent
+    );
+    --urlbar-input-bgcolor: color-mix(
+        in srgb,
+        currentColor 4%,
+        var(--in-content-button-highlight-dark)
+    );
 }
 
 #customization-container panel::part(content),
@@ -206,7 +224,7 @@ menupopup::part(arrowscrollbox),
     margin-top: 12px;
     z-index: 250;
     position: absolute;
-	background-color: var(--in-content-button-highlight-dark);
+    background-color: var(--in-content-button-highlight-dark);
 }
 
 #customization-panelWrapper > .panel-arrowbox {
@@ -216,74 +234,62 @@ menupopup::part(arrowscrollbox),
 
 #customization-container panel::part(arrow),
 #customization-panelWrapper > .panel-arrowbox > .panel-arrow[side="top"] {
-	stroke: var(--in-content-button-highlight-dark);
-	fill: var(--in-content-button-highlight-dark);
+    stroke: var(--in-content-button-highlight-dark);
+    fill: var(--in-content-button-highlight-dark);
+}
+
+:is(#customization-lwtheme-menu, #customization-uidensity-menu)::part(arrowbox) {
+    -moz-box-ordinal-group: 2;
+}
+
+:is(#customization-lwtheme-menu, #customization-uidensity-menu)::part(arrow) {
+    transform: scaleY(-1);
+    margin-top: -5px;
+    margin-bottom: revert;
+    position: relative;
+    margin-inline: 10px;
 }
 
 #customization-container {
-	background-color: var(--in-content-bg-dark);
-	background-image: none;
+    background-color: var(--in-content-bg-dark);
+    background-image: none;
 }
 
 #customization-footer {
-	border: none;
-	background-color: var(--in-content-box-bg-dark);
+    border: none;
+    background-color: var(--in-content-box-bg-dark);
 }
 
 .customizationmode-button {
-	border: 1px solid var(--in-content-border-color-dim);
-	border-radius: var(--in-content-button-border-radius);
-	background-color: var(--button-hover-bgcolor);
-	appearance: none;
+    border: 1px solid var(--in-content-border-color-dim);
+    border-radius: var(--in-content-button-border-radius);
+    background-color: var(--button-hover-bgcolor);
+    appearance: none;
 }
 
 .customizationmode-button:is(:active, :focus-visible, :hover):not([disabled]),
 .customizationmode-button[open],
 .customizationmode-button[checked] {
-	background-color: var(--button-active-bgcolor);
+    background-color: var(--button-active-bgcolor);
 }
 
 .customizationmode-checkbox:not(:-moz-lwtheme, [disabled]),
 .customizationmode-button {
-	color: var(--toolbar-color);
+    color: var(--toolbar-color);
 }
 
 #customization-done-button {
-	font-weight: 500;
-	border-color: transparent;
-	background-color: var(--in-content-primary-button-background);
+    font-weight: 500;
+    border-color: transparent;
+    background-color: var(--in-content-primary-button-background);
 }
 
 #customization-done-button:is(:active, :focus-visible, :hover):not([disabled]) {
-	background-color: var(--in-content-primary-button-background-hover);
+    background-color: var(--in-content-primary-button-background-hover);
 }
 
 .customization-lwtheme-menu-footeritem {
-	font-weight: 500;
-}
-
-@-moz-document url(chrome://browser/content/browser.xhtml)
-{
-    :is(panel, menupopup)::part(arrow) {
-        display: -moz-inline-box;
-    }
-
-    :is(panel, menupopup)[side="top"]::part(arrow),
-    #customization-panelWrapper > .panel-arrowbox > .panel-arrow[side="top"] {
-        margin-bottom: -4px;
-    }
-
-    :is(#customization-lwtheme-menu, #customization-uidensity-menu)::part(arrowbox) {
-        -moz-box-ordinal-group: 2;
-    }
-
-    :is(#customization-lwtheme-menu, #customization-uidensity-menu)::part(arrow) {
-        transform: scaleY(-1);
-        margin-top: -5px;
-        margin-bottom: revert;
-        position: relative;
-        margin-inline: 10px;
-    }
+    font-weight: 500;
 }
 
 #identity-icon {
