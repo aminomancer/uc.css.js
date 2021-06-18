@@ -219,7 +219,7 @@ when the tab bar is not overflowing, new tabs slide into place much more smoothl
 /* tab top border roundness */
 #TabsToolbar .tabbrowser-tab,
 #TabsToolbar .tabbrowser-tab :is(.tab-stack, .tab-background, .tab-content, .tab-loading-burst) {
-    border-top-right-radius: 0px !important;
+    border-top-right-radius: 5px !important;
     border-top-left-radius: 5px !important;
     overflow: hidden;
 }
@@ -500,9 +500,12 @@ when the tab bar is not overflowing, new tabs slide into place much more smoothl
 }
 
 .tab-icon-sound:is([soundplaying], [muted]) {
+    padding: 0 !important;
+}
+
+.tab-icon-sound:is([soundplaying], [muted], [pictureinpicture], [activemedia-blocked]) {
     width: 16px !important;
     height: 16px !important;
-    padding: 0 !important;
 }
 
 .tab-icon-sound {
@@ -553,7 +556,7 @@ when the tab bar is not overflowing, new tabs slide into place much more smoothl
 }
 
 /* for the picture in picture button to mute/unmute tabs with proton, you need restoreTabSoundButton.uc.js from my repo's scripts folder */
-.tabbrowser-tab:not(:hover, .keyboard-focused-tab) .tab-icon-sound[pictureinpicture]:not([muted]) {
+.tabbrowser-tab:not(:hover, .keyboard-focused-tab) .tab-icon-sound[pictureinpicture] {
     background-image: url(chrome://userchrome/content/tab-picture-in-picture.svg) !important;
     background-size: 12px !important;
     background-position: center !important;
@@ -570,7 +573,8 @@ when the tab bar is not overflowing, new tabs slide into place much more smoothl
 }
 
 .tabbrowser-tab:is(:hover, .keyboard-focused-tab) .tab-icon-sound[pictureinpicture][soundplaying],
-.tabbrowser-tab .tab-icon-sound[pictureinpicture][muted] {
+.tabbrowser-tab .tab-icon-sound[pictureinpicture][muted],
+.tabbrowser-tab .tab-icon-sound[pictureinpicture]:hover {
     background-size: 12px !important;
     background-position: 1.2px center !important;
     background-repeat: no-repeat !important;
@@ -578,8 +582,7 @@ when the tab bar is not overflowing, new tabs slide into place much more smoothl
     border-radius: 50% !important;
 }
 
-.tabbrowser-tab .tab-icon-sound[pictureinpicture][soundplaying]:hover,
-.tabbrowser-tab .tab-icon-sound[pictureinpicture][muted]:hover {
+.tabbrowser-tab .tab-icon-sound[pictureinpicture]:hover {
     opacity: 1 !important;
     background-color: var(--arrowpanel-dimmed) !important;
 }
@@ -588,7 +591,8 @@ when the tab bar is not overflowing, new tabs slide into place much more smoothl
     background-image: url(chrome://userchrome/content/tab-audio-playing.svg) !important;
 }
 
-.tabbrowser-tab .tab-icon-sound[pictureinpicture][muted] {
+.tabbrowser-tab:is(:hover, .keyboard-focused-tab) .tab-icon-sound[pictureinpicture][muted],
+.tabbrowser-tab:is(:hover, .keyboard-focused-tab) .tab-icon-sound[pictureinpicture][soundplaying][muted] {
     background-image: url(chrome://userchrome/content/tab-audio-muted.svg) !important;
 }
 
@@ -834,18 +838,6 @@ so in other words it won't show if audio is playing until you hover the general 
 .tabbrowser-tab:not([pinned]) {
     min-height: 0 !important;
     margin: 0 !important;
-}
-
-#TabsToolbar .toolbarbutton-1 > :is(.toolbarbutton-icon, .toolbarbutton-badge-stack) {
-    min-height: 16px !important;
-    padding-block: 6px !important;
-    border-radius: var(--toolbarbutton-border-radius) !important;
-}
-
-#TabsToolbar
-    .toolbarbutton-1
-    > :is(.toolbarbutton-icon, .toolbarbutton-text .toolbarbutton-badge-stack) {
-    border-radius: var(--toolbarbutton-border-radius) !important;
 }
 
 .tab-icon-sound {

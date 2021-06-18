@@ -256,6 +256,19 @@ this sheet controls their appearance as well. */
     display: unset !important;
 }
 
+/* toolbar buttons */
+#TabsToolbar .toolbarbutton-1 > :is(.toolbarbutton-icon, .toolbarbutton-badge-stack) {
+    min-height: 16px !important;
+    padding-block: 6px !important;
+    border-radius: var(--toolbarbutton-border-radius) !important;
+}
+
+#TabsToolbar
+    .toolbarbutton-1
+    > :is(.toolbarbutton-icon, .toolbarbutton-text .toolbarbutton-badge-stack) {
+    border-radius: var(--toolbarbutton-border-radius) !important;
+}
+
 /* macOS style window controls */
 :root:-moz-window-inactive:not([customizing]) :is(.titlebar-buttonbox, #window-controls) > toolbarbutton:not(:hover) {
     list-style-image: url(chrome://userchrome/content/window/inactive.svg) !important;
