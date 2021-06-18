@@ -1,0 +1,46 @@
+/* for the places organizer, e.g. "Manage Bookmarks" */
+
+@-moz-document url-prefix("chrome://browser/content/places/places.xhtml")
+{
+    :root {
+        --in-content-button-background-hover: hsla(0, 20%, 90%, 0.15) !important;
+        --in-content-button-background-active: hsla(0, 20%, 90%, 0.19) !important;
+        --in-content-border-hover: var(--dialog-box-border-hover) !important;
+        --in-content-border-focus: var(--purple-40) !important;
+        --in-content-border-active: var(--purple-40) !important;
+        --in-content-border-active-shadow: var(--purple-40-a30) !important;
+        --organizer-color: var(--plaintext-color) !important;
+        --organizer-deemphasized-color: color-mix(
+            in srgb,
+            var(--plaintext-color) 75%,
+            transparent
+        ) !important;
+        --organizer-toolbar-background: var(--in-content-button-highlight-dark) !important;
+        --organizer-pane-background: var(--in-content-box-bg-dark) !important;
+        --organizer-content-background: var(--in-content-bg-dark) !important;
+        --organizer-hover-background: var(--in-content-button-background-hover) !important;
+        --organizer-selected-background: var(--in-content-button-background-active) !important;
+        --organizer-outline-color: var(--in-content-border-active) !important;
+        --organizer-border-color: var(--in-content-border-color-dim) !important;
+        --organizer-toolbar-field-background: var(--in-content-bg-dark) !important;
+        --organizer-toolbar-field-background-focused: var(--in-content-box-bg-dark) !important;
+        --organizer-separator-color: var(--in-content-separator-dim) !important;
+        --organizer-toolbar-field-focus-border-color: var(--organizer-outline-color) !important;
+        --organizer-toolbar-field-focus-box-shadow: 0 0 0 0.5px
+            var(--organizer-toolbar-field-focus-border-color) inset !important;
+        --organizer-pane-field-border-color: var(--in-content-separator-dim) !important;
+    }
+
+    #searchFilter[focused] {
+        outline-color: var(--organizer-toolbar-field-focus-border-color);
+        outline-width: 1px;
+        outline-style: solid;
+        box-shadow: none !important;
+        border-color: var(--organizer-toolbar-field-focus-border-color);
+    }
+
+    #places input[type="text"]:focus {
+        outline: 2px solid var(--organizer-outline-color) !important;
+        outline-offset: -1px !important;
+    }
+}

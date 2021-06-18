@@ -1,5 +1,7 @@
 /* handles system pages and injects some important global variables into extension pages */
 
+@import url(library.css);
+
 @-moz-document url("about:blank") {
     @media (prefers-color-scheme: dark) {
         :root {

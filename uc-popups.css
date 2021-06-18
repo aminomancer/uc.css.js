@@ -1,5 +1,7 @@
 /* this adjusts popup dialogs and modal popups */
 
+@import url(resources/in-content/library.css);
+
 /* OS-styled javascript modal prompts */
 tabmodalprompt {
     background-color: hsla(0, 0%, 4%, 0.5) !important;
@@ -140,30 +142,52 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
     margin-inline-end: 6px !important;
 }
 
-panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlistitem[originaltype="generatedPassword"] > .two-line-wrapper > .labels-wrapper > .generated-password-autosave,
-panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlistitem[originaltype="importableLearnMore"] > .ac-title,
-panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlistitem > .two-line-wrapper > .labels-wrapper > .line2-label {
-	opacity: 1 !important;
+panel#PopupAutoComplete[type="autocomplete-richlistbox"]
+    > richlistbox
+    > richlistitem[originaltype="generatedPassword"]
+    > .two-line-wrapper
+    > .labels-wrapper
+    > .generated-password-autosave,
+panel#PopupAutoComplete[type="autocomplete-richlistbox"]
+    > richlistbox
+    > richlistitem[originaltype="importableLearnMore"]
+    > .ac-title,
+panel#PopupAutoComplete[type="autocomplete-richlistbox"]
+    > richlistbox
+    > richlistitem
+    > .two-line-wrapper
+    > .labels-wrapper
+    > .line2-label {
+    opacity: 1 !important;
     color: var(--panel-shortcut-color) !important;
 }
 
-panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlistitem[originaltype="loginsFooter"] {
-	color: inherit !important;
-	border: none !important;
+panel#PopupAutoComplete[type="autocomplete-richlistbox"]
+    > richlistbox
+    > richlistitem[originaltype="loginsFooter"] {
+    color: inherit !important;
+    border: none !important;
     margin-top: 4px;
-	background-color: var(--arrowpanel-dimmed) !important;
+    background-color: var(--arrowpanel-dimmed) !important;
 }
 
-panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlistitem[originaltype="loginsFooter"] .ac-title {
+panel#PopupAutoComplete[type="autocomplete-richlistbox"]
+    > richlistbox
+    > richlistitem[originaltype="loginsFooter"]
+    .ac-title {
     margin-inline: 0 !important;
 }
 
-panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlistitem[originaltype="loginsFooter"]:is(:hover, [selected]) {
-	background-color: var(--arrowpanel-dimmed-further) !important;
+panel#PopupAutoComplete[type="autocomplete-richlistbox"]
+    > richlistbox
+    > richlistitem[originaltype="loginsFooter"]:is(:hover, [selected]) {
+    background-color: var(--arrowpanel-dimmed-further) !important;
 }
 
-panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlistitem[originaltype="loginsFooter"]:hover[selected] {
-	background-color: var(--arrowpanel-dimmed-even-further) !important;
+panel#PopupAutoComplete[type="autocomplete-richlistbox"]
+    > richlistbox
+    > richlistitem[originaltype="loginsFooter"]:hover[selected] {
+    background-color: var(--arrowpanel-dimmed-even-further) !important;
 }
 
 /* update notifications */
@@ -845,7 +869,7 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlis
     tree {
         margin-inline: 4px !important;
     }
-    
+
     treecols {
         border: none !important;
     }
@@ -867,11 +891,8 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlis
         border-color: transparent;
     }
 
-    button[autofocus]:enabled:is(:hover, :focus-visible), 
-    button[type="submit"]:enabled:is(:hover, :focus-visible),
-    button.primary:enabled:is(:hover, :focus-visible),
-    button[default]:not([disabled="true"]):is(:hover, :focus-visible),
-    button.primary:not([disabled="true"]):is(:hover, :focus-visible) {
+    button:is([autofocus], [type="submit"], .primary):enabled:is(:hover, :focus-visible),
+    button:is([default], .primary):not([disabled="true"]):is(:hover, :focus-visible) {
         background-color: var(--in-content-primary-button-background-hover) !important;
         color: var(--in-content-primary-button-text-color-hover) !important;
     }
@@ -945,7 +966,8 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlis
         -moz-box-align: center !important;
     }
 
-    @-moz-document url("chrome://mozapps/content/handling/permissionDialog.xhtml") {
+    @-moz-document url("chrome://mozapps/content/handling/permissionDialog.xhtml")
+    {
         dialog > #description,
         dialog > #description-box > #description {
             font-size: 1.15em !important;
@@ -970,7 +992,8 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlis
     }
 }
 
-@-moz-document url-prefix("chrome://browser/content/sanitize.xhtml") {
+@-moz-document url-prefix("chrome://browser/content/sanitize.xhtml")
+{
     #sanitizeEverythingWarningBox {
         background-color: Window !important;
         border: 1px solid ThreeDDarkShadow !important;

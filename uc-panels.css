@@ -687,6 +687,7 @@ popupnotification progress[paused]::-moz-progress-bar {
 #identity-popup[connection^="secure"] .identity-popup-security-connection {
     background-image: url(chrome://userchrome/content/skin/connection-secure.svg) !important;
     -moz-context-properties: fill;
+    fill: var(--secure-color) !important;
 }
 
 #identity-popup[connection="extension"] .identity-popup-security-connection {
