@@ -39,8 +39,8 @@
 
     h3.title {
         line-height: normal !important;
-        block-size: 26px !important;
-        min-height: 26px !important;
+        block-size: var(--menuitem-height) !important;
+        min-height: var(--menuitem-height) !important;
         padding-block: 4px !important;
         white-space: nowrap !important;
         padding-inline: 10px 16px !important;
@@ -69,7 +69,7 @@
         display: flex !important;
         flex-flow: row nowrap;
         padding-inline: 3px !important;
-        min-height: 26px !important;
+        min-height: var(--menuitem-height) !important;
         user-select: none !important;
     }
 

@@ -28,6 +28,7 @@ tooltip {
     --button-solid-checked-background: hsl(232, 31%, 23%);
     --uc-font-weight-bold: 600;
     --uc-font-weight-thin: 400;
+    --menuitem-height: 26px;
     --subdialog-font-size: 1em !important;
     --autocomplete-background: hsl(233, 33%, 17%);
     --ui-secondary-bg: hsl(234, 39%, 10%);
@@ -40,6 +41,7 @@ tooltip {
     --acrylic-texture: url(chrome://userchrome/content/texture/lightnoise.png);
     --acrylic-blue: hsla(233.3, 39.1%, 9%, 0.58);
     --blur-bgcolor: hsla(233, 39%, 9%, 0.58);
+    --transparent-img-background: center/16px repeat hsla(0, 0%, 80%) url(chrome://userchrome/content/checker.svg);
     --general-button-border-radius: 2.6px;
     --dialog-bgcolor: hsla(240, 5.9%, 6.7%, 0.6);
     --dialog-box-bgcolor: hsla(232, 100%, 75%, 8%);
@@ -47,7 +49,7 @@ tooltip {
     --dialog-box-border-color: hsla(232, 100%, 85%, 0.2);
     --dialog-box-border-hover: hsla(232, 100%, 85%, 0.3);
     --alertbox-bgcolor: hsla(0, 0%, 7%, 0.97);
-    --notification-menu-color: hsl(212, 43%, 90%);
+    --notification-menu-color: var(--in-parent-page-color);
     --identity-box-solid-bg: hsl(235, 33%, 23%);
     --identity-box-hover-bg: hsl(234, 30%, 26%);
     --secure-color: hsl(119, 80%, 60%);
@@ -82,6 +84,7 @@ tooltip {
     --ui-text-70: rgba(255, 255, 255, 0.7);
     --ui-text-80: rgba(255, 255, 255, 0.8);
     --ui-text-90: rgba(255, 255, 255, 0.9);
+    --ui-text-100: rgb(255, 255, 255);
     --context-menu-disabled-color: hsla(213, 43%, 89%, 0.5);
     --badge-color-dark: hsl(236, 13%, 42%);
     --badge-color-light: var(--lwt-toolbarbutton-icon-fill-attention);
@@ -150,7 +153,7 @@ tooltip {
     --purple-70: hsl(256, 97%, 30%) !important;
     --purple-80: hsl(254, 100%, 20%) !important;
     --in-parent-page-background: transparent;
-    --in-parent-page-color: var(--notification-menu-color);
+    --in-parent-page-color: hsl(212, 43%, 90%);
     --in-parent-box-background: var(--dialog-box-bgcolor);
     --in-parent-box-background-dim: var(--dialog-box-bgcolor-dim);
     --in-parent-box-border-color: var(--dialog-box-border-color);
@@ -172,6 +175,17 @@ tooltip {
     --in-parent-primary-button-background-hover: var(--purple-35);
     --in-parent-primary-button-background-active: var(--purple-30);
     --in-parent-primary-button-text-color: var(--in-parent-page-color);
+    --content-principal-page-background: hsl(270, 3%, 12%);
+    --content-principal-page-color: var(--in-parent-page-color);
+    --content-principal-box-background: hsl(300, 2%, 16%);
+    --content-principal-box-background-odd: hsl(320, 3%, 21%);
+    --content-principal-box-background-dim: hsl(300, 2%, 12%);
+    --content-principal-box-border-color: hsla(270, 7%, 98%, 0.1);
+    --content-principal-button-background: hsla(0, 20%, 90%, 0.08);
+    --content-principal-button-background-hover: hsla(0, 20%, 90%, 0.15);
+    --content-principal-button-background-active: hsla(0, 20%, 90%, 0.19);
+    --content-principal-button-background-solid: hsl(270, 2%, 20%);
+    --content-principal-border-hover: var(--content-principal-button-background-hover);
     --uc-checkbox-border-color: var(--in-parent-box-border-color);
     --uc-checkbox-checked-border-color: transparent;
     --uc-checkbox-unchecked-bgcolor: var(--in-parent-button-background);

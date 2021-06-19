@@ -17,10 +17,9 @@ tabmodalprompt {
 }
 
 .tabmodalprompt-mainContainer {
-    background-color: hsl(230, 36%, 25%) !important;
     background-color: var(--toolbar-bgcolor) !important;
     border: none !important;
-    color: #fff !important;
+    color: var(--in-parent-page-color) !important;
     box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.25), 0px 0px 5px -1px rgba(0, 0, 0, 0.125) !important;
 }
 
@@ -37,7 +36,7 @@ tabmodalprompt input {
     user-select: text !important;
     -moz-user-select: text !important;
     background-color: var(--desaturate-dimmed) !important;
-    color: #fff !important;
+    color: var(--in-parent-page-color) !important;
     border: none !important;
     padding: 2px 2px 3px;
     padding-inline-start: 4px;
@@ -56,14 +55,14 @@ tabmodalprompt input:focus-visible {
     margin-left: auto !important;
     margin-right: auto !important;
     flex: auto !important;
-    color: #fff !important;
+    color: var(--in-parent-page-color) !important;
     padding: 2px !important;
 }
 
 .tabmodalprompt-buttonContainer button:hover {
     background-color: var(--desaturate-dimmed-further) !important;
     flex: auto !important;
-    color: #fff !important;
+    color: var(--in-parent-page-color) !important;
 }
 
 .tabmodalprompt-buttonContainer button:hover:active {
@@ -108,11 +107,15 @@ tabmodalprompt .checkbox-check[checked="true"] {
 /* in-content autocomplete popup */
 panel#PopupAutoComplete[type="autocomplete-richlistbox"] {
     padding: var(--menupopup-inner-padding) !important;
-    background-color: var(--autocomplete-background) !important;
+    background-color: var(--arrowpanel-background) !important;
     color: var(--menu-color) !important;
     border: none !important;
     border-radius: var(--menupopup-border-radius);
     box-shadow: var(--menupopup-shadow);
+}
+
+panel#PopupAutoComplete[type="autocomplete-richlistbox"][anchored-on-panel] {
+    background-color: var(--autocomplete-background) !important;
 }
 
 panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox {
@@ -225,8 +228,8 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
 {
     #alertBox {
         box-shadow: 0 0 9px 3px rgba(0, 0, 0, 0.2) !important;
-        color: white !important;
-        fill: rgba(255, 255, 255, 0.5) !important;
+        color: var(--ui-text-100) !important;
+        fill: var(--ui-text-50) !important;
         border: none !important;
         border-radius: calc(var(--toolbarbutton-border-radius) + 1px) !important;
         background-color: hsla(0, 0%, 7%, 0.97) !important;
@@ -255,7 +258,7 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
 
     button,
     #alertBox .close-icon {
-        color: rgba(255, 255, 255, 0.5) !important;
+        color: var(--ui-text-100) !important;
     }
 
     #alertSettings {
@@ -287,7 +290,7 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
     #alertSettings:is(:hover, [open], :hover:active),
     #alertBox .close-icon:is(:hover, :hover:active) {
         fill: var(--ui-text-80) !important;
-        background: rgba(255, 255, 255, 0.08) !important;
+        background: var(--content-principal-button-background) !important;
     }
 
     #alertSettings .button-icon {
@@ -296,7 +299,7 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
 
     #alertSettings menupopup {
         appearance: none !important;
-        background: rgb(23, 23, 23) !important;
+        background: var(--in-content-bg-dark) !important;
         border: none !important;
         border-radius: 3px !important;
         margin: 0px 0 0 0 !important;
@@ -317,7 +320,7 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
 
     #alertSettings menupopup :is(menuitem, menu)[disabled="true"] {
         appearance: none !important;
-        color: rgba(255, 255, 255, 0.45) !important;
+        color: var(--ui-text-50) !important;
         background-color: initial !important;
     }
 
@@ -358,7 +361,7 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
 
     #alertSettings menupopup :is(menu, menuitem)[_moz-menuactive="true"]:not([disabled="true"]) {
         appearance: none !important;
-        background-color: rgba(255, 255, 255, 0.08) !important;
+        background-color: var(--content-principal-button-background) !important;
     }
 }
 
@@ -372,7 +375,7 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
         background-size: 80% !important;
         background-position: center !important;
         -moz-context-properties: fill, fill-opacity !important;
-        fill: white !important;
+        fill: var(--ui-text-100) !important;
         fill-opacity: 0.8 !important;
         background-image: url(chrome://userchrome/content/pip-pause.svg) !important;
     }
@@ -386,7 +389,7 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
         background-color: var(--btn-bg-color) !important;
         fill: currentColor !important;
         -moz-context-properties: fill, fill-opacity !important;
-        color: white !important;
+        color: var(--ui-text-100) !important;
         background-image: url(chrome://userchrome/content/close.svg) !important;
         fill-opacity: 1 !important;
         background-size: 100% !important;
@@ -529,7 +532,7 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
     #commonDialogWindow,
     #commonDialogWindow * {
         --in-content-page-background: transparent !important;
-        --in-content-page-color: var(--notification-menu-color) !important;
+        --in-content-page-color: var(--in-parent-page-color) !important;
         --in-content-box-background: var(--dialog-box-bgcolor) !important;
         --in-content-box-background-dim: var(--dialog-box-bgcolor-dim) !important;
         --in-content-box-border-color: var(--dialog-box-border-color) !important;
@@ -750,7 +753,7 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
     window,
     dialog {
         --in-content-page-background: transparent !important;
-        --in-content-page-color: var(--notification-menu-color) !important;
+        --in-content-page-color: var(--in-parent-page-color) !important;
         --in-content-box-background: var(--dialog-box-bgcolor) !important;
         --in-content-box-background-dim: var(--dialog-box-bgcolor-dim) !important;
         --in-content-box-border-color: var(--dialog-box-border-color) !important;
@@ -987,7 +990,7 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
 @-moz-document url-prefix("chrome://global/content/print.html")
 {
     :root {
-        --in-content-page-background: rgb(28, 27, 34) !important;
+        --in-content-page-background: var(--content-principal-page-background) !important;
         --dropdown-bgcolor: var(--in-content-page-background) !important;
     }
 }

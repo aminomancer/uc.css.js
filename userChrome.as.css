@@ -15,7 +15,6 @@ tooltip[default][page] {
     margin-inline-start: -5px !important;
     margin-block-start: 16px !important;
     pointer-events: none !important;
-    /* font-family: FreeMono !important; */
 }
 
 tooltip[default][page] > description {
@@ -45,8 +44,6 @@ tooltip[default][page] > description {
     color: var(--statuspanel-color) !important;
     border: none !important;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2) !important;
-    /* font-family: FreeMono !important; */
-    /* transition: opacity 70ms ease-in-out !important; */
     opacity: 1;
 }
 

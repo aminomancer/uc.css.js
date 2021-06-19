@@ -6,15 +6,9 @@ and a few elements like checkboxes */
     :root,
     menupopup {
         --panel-font-size: 1em !important;
-        --pinned-tab-width: 36px;
-        --inline-tab-padding: 10px !important;
-        --default_tab_border_roundness: 5px;
-        --tab_close_icons_size: 16px;
-        --tabs-border: transparent !important;
         --toolbox-border-bottom-color: transparent !important;
         --chrome-nav-bar-controls-border-color: transparent !important;
         --chrome-content-separator-color: rgba(0, 0, 0, 0) !important;
-        --tabs-navbar-shadow-size: 0px !important;
         --autocomplete-popup-highlight-background: var(--arrowpanel-dimmed-further) !important;
         --toolbarbutton-border-radius: var(--general-button-border-radius) !important;
         --urlbar-icon-border-radius: var(--general-button-border-radius) !important;
@@ -54,25 +48,11 @@ and a few elements like checkboxes */
         --button-primary-hover-bgcolor: var(--purple-40) !important;
         --button-primary-active-bgcolor: var(--purple-35) !important;
         --button-primary-color: var(--button-color) !important;
-        --urlbar-input-bgcolor: hsla(233, 24%, 26%, 1) !important;
-        --urlbar-input-bgcolor-brighter: hsla(233, 23%, 27.2%, 1) !important;
-        --urlbar-input-bgcolor-even-brighter: hsla(233, 21%, 31%, 1) !important;
-        --urlbar-input-bgcolor-disabled: hsla(233, 24%, 26%, 0.5) !important;
-        --urlbar-toolbar-height: var(--user-urlbar-container-height) !important;
-        --urlbar-container-height: var(--user-urlbar-container-height) !important;
-        --urlbar-height: calc(var(--urlbar-container-height) - 6px) !important;
-        --urlbar-container-padding: 1px !important;
-        --urlbar-icon-fill-opacity: 0.6 !important;
         --lwt-toolbarbutton-icon-fill-attention: var(--attention-color) !important;
         --focus-outline-color: var(--attention-color) !important;
         --focus-outline-width: 2px;
         --places-cell-focus-bgcolor: hsl(232, 30%, 19%) !important;
         --places-cell-hover-bgcolor: hsl(232, 30%, 23%) !important;
-        --ctrlTab-bgcolor: transparent !important;
-        --ctrlTab-panel-disabled-bgcolor: hsla(240, 2%, 9%, 0.8) !important;
-        --ctrlTab-panel-disabled-focused-bgcolor: hsla(240, 8%, 3%, 0.9) !important;
-        --ctrlTab-panel-bgcolor: hsla(240, 3%, 4%, 0.9) !important;
-        --ctrlTab-panel-focused-bgcolor: hsla(10, 12%, 2%, 0.99) !important;
         --in-content-box-background: hsl(232, 32%, 14%) !important;
         --in-content-box-border-color: rgba(249, 249, 250, 0.1) !important;
         --in-content-button-background: var(--arrowpanel-dimmed) !important;
@@ -94,7 +74,6 @@ and a few elements like checkboxes */
         --autocomplete-popup-background: var(--arrowpanel-background) !important;
         --autocomplete-popup-color: var(--lwt-text-color) !important;
         --autocomplete-popup-separator-color: var(--panel-separator-color) !important;
-        --urlbarView-bgcolor: hsla(233, 38%, 9%, 0.8) !important;
         --ui-textbox-bgcolor: hsl(233, 24%, 28%) !important;
         --ui-textbox-focus-bgcolor: hsl(232, 22%, 34%) !important;
         --ui-solid-button-bgcolor: var(--arrowpanel-dimmed) !important;
@@ -106,9 +85,6 @@ and a few elements like checkboxes */
         --urlbar-popup-action-color: hsl(340, 73%, 58%) !important;
         --lwt-popup-brighttext-url-color: var(--urlbar-popup-action-color) !important;
         --toolbarbutton-icon-fill-opacity: 1 !important;
-        --tab-min-height: 35px !important;
-        --min-tab-height: 35px !important;
-        --space-above-tabbar: 0px;
         --context-margin-inline: -14px 0px;
         --context-padding-inline: 27px 0px;
         --menu-color: var(--ui-text-80) !important;
@@ -157,14 +133,10 @@ and a few elements like checkboxes */
         --panel-subview-body-padding-magnitude: var(--arrowpanel-menuitem-inline-margin);
         --panel-subview-body-padding: var(--panel-subview-body-padding-magnitude) 0 !important;
         --arrowpanel-menuitem-border-radius: 3px !important;
-        --proton-tab-radius: 0px !important;
-        --proton-tab-block-margin: 0px !important;
         --panel-description-color: hsl(235, 48%, 89%, 70%) !important;
         --panel-shortcut-color: hsl(235, 27%, 73%, 70%) !important;
         --panel-shortcut-focus: hsl(235, 32%, 75%, 90%) !important;
         --error-text-color: var(--warning-color) !important;
-        --proton-tab-inline-padding: 0px !important;
-        --tab-shadow-max-size: 0px !important;
         --buttons-primary-button-bgcolor: var(--in-parent-primary-button-background) !important;
         --buttons-primary-button-hover-bgcolor: var(
             --in-parent-primary-button-background-hover
@@ -178,25 +150,6 @@ and a few elements like checkboxes */
     menupopup > :is(menuitem, menu, menucaption, menugroup, menuseparator, search-textbox),
     #PopupAutoComplete > richlistbox > richlistitem {
         margin-inline: var(--menupopup-inner-padding-magnitude);
-    }
-
-    :root,
-    menupopup #TabsToolbar {
-        --toolbarbutton-inner-padding: 6px !important;
-    }
-
-    #urlbar-container,
-    #urlbar {
-        --urlbar-toolbar-height: var(--user-urlbar-container-height) !important;
-        --urlbar-container-height: var(--user-urlbar-container-height) !important;
-    }
-
-    #appMenu-multiView {
-        --arrowpanel-menuitem-inline-margin: 4px;
-        --arrowpanel-menuitem-margin: 0px var(--arrowpanel-menuitem-inline-margin) !important;
-        --arrowpanel-menuitem-padding: 8px !important;
-        --panel-subview-body-padding-magnitude: var(--arrowpanel-menuitem-inline-margin);
-        --panel-subview-body-padding: var(--panel-subview-body-padding-magnitude) 0px !important;
     }
 
     .theme-dark input:is([type="checkbox"], [type="radio"]) {
@@ -282,7 +235,7 @@ and a few elements like checkboxes */
         appearance: none !important;
         color: var(--ui-text-80) !important;
         padding: 5px 0 !important;
-        min-height: 26px !important;
+        min-height: var(--menuitem-height) !important;
         border-radius: var(--context-menuitem-border-radius);
     }
 
@@ -484,7 +437,7 @@ and a few elements like checkboxes */
         background-color: var(--arrowpanel-dimmed) !important;
         padding-block: 0 !important;
         transition: 300ms background-color !important;
-        min-height: 26px !important;
+        min-height: var(--menuitem-height) !important;
         -moz-user-modify: read-write !important;
     }
 

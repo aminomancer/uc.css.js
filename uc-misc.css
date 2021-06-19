@@ -351,6 +351,10 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
             padding-block: 2px !important;
             font-weight: 400 !important;
         }
+
+        .popup-notification-body input[type="password"] {
+            font-family: SFPro !important;
+        }
     }
 }
 

@@ -114,7 +114,7 @@ menupopup.in-menulist .contentSelectDropdown-searchbox {
     background-color: var(--arrowpanel-dimmed) !important;
     padding-block: 0 !important;
     transition: 300ms background-color !important;
-    min-height: 26px !important;
+    min-height: var(--menuitem-height) !important;
     -moz-user-modify: read-write !important;
 }
 
@@ -144,7 +144,7 @@ menupopup.in-menulist :is(menu, menuitem, menucaption) {
     color: var(--ui-text-80) !important;
     border-radius: var(--context-menuitem-border-radius);
     border: none !important;
-    min-height: 26px !important;
+    min-height: var(--menuitem-height) !important;
 }
 
 #ContentSelectDropdown > menupopup :is(menu, menuitem, menucaption)[disabled="true"],

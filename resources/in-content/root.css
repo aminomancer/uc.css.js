@@ -15,24 +15,6 @@
         color: white !important;
     }
 
-    #publication .flipbook .background {
-        background-color: hsl(240, 4%, 10%) !important;
-    }
-
-    #publication .flipbook .background .img-fit {
-        background-color: transparent !important;
-        filter: invert(1) hue-rotate(180deg) contrast(0.9) brightness(0.8) !important;
-    }
-
-    #publication.publication-container {
-        background-color: hsl(240, 4%, 8%) !important;
-    }
-
-    #publication #publ-container #tool-window {
-        background-color: hsl(240, 4%, 8%) !important;
-        box-shadow: hsla(0, 0%, 0%, 0.5) 0px 0px 8px !important;
-    }
-
     input[type="number"] {
         -moz-appearance: none;
         appearance: none;
@@ -96,7 +78,7 @@
     }
 
     img.transparent {
-        background: center/16px repeat hsla(0, 0%, 80%) url(chrome://userchrome/content/checker.svg) !important;
+        background: var(--transparent-img-background) !important;
     }
 
     @media (prefers-color-scheme: dark) {

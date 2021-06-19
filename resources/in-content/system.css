@@ -128,19 +128,19 @@
     html:not([role="dialog"]) body.activity-stream,
     window:not([chromehidden]),
     window:not([chromehidden]) > dialog {
-        --in-content-page-background: rgb(30, 29, 31) !important;
-        --in-content-page-color: hsl(212, 43%, 90%) !important;
-        --in-content-box-background: hsl(300, 2%, 16%) !important;
-        --in-content-box-background-odd: hsl(320, 3%, 21%) !important;
-        --in-content-box-background-dim: var(--dialog-box-bgcolor-dim) !important;
-        --in-content-box-border-color: var(--in-parent-box-border-color) !important;
-        --in-content-button-background: hsla(0, 20%, 90%, 0.08) !important;
-        --in-content-button-background-hover: hsla(0, 20%, 90%, 0.15) !important;
-        --in-content-button-background-active: hsla(0, 20%, 90%, 0.19) !important;
-        --in-content-button-background-solid: hsl(270, 2%, 20%);
+        --in-content-page-background: var(--content-principal-page-background) !important;
+        --in-content-page-color: var(--content-principal-page-color) !important;
+        --in-content-box-background: var(--content-principal-box-background) !important;
+        --in-content-box-background-odd: var(--content-principal-box-background-odd) !important;
+        --in-content-box-background-dim: var(--content-principal-box-background-dim) !important;
+        --in-content-box-border-color: var(--content-principal-box-border-color) !important;
+        --in-content-button-background: var(--content-principal-button-background) !important;
+        --in-content-button-background-hover: var(--content-principal-button-background-hover) !important;
+        --in-content-button-background-active: var(--content-principal-button-background-active) !important;
+        --in-content-button-background-solid: var(--content-principal-button-background-solid);
         --in-content-item-selected: var(--purple-40) !important;
         --in-content-border-highlight: var(--purple-40) !important;
-        --in-content-border-hover: var(--dialog-box-border-hover) !important;
+        --in-content-border-hover: var(--content-principal-border-hover) !important;
         --in-content-border-focus: var(--purple-40) !important;
         --in-content-border-active: var(--purple-40) !important;
         --in-content-border-active-shadow: var(--purple-40-a30) !important;
@@ -160,8 +160,8 @@
         --newtab-text-primary-color: var(--in-content-page-color) !important;
         --lwt-sidebar-background-color: var(--in-content-box-background) !important;
         --lwt-sidebar-text-color: var(--in-content-page-color) !important;
-        --newtab-search-header-background-color: hsla(250, 3%, 12%, 0.7) !important;
-        --newtab-search-header-background-intermediate: hsla(250, 3%, 12%, 0.8) !important;
+        --newtab-search-header-background-color: color-mix(in srgb, var(--content-principal-page-background) 70%, transparent) !important;
+        --newtab-search-header-background-intermediate: color-mix(in srgb, var(--content-principal-page-background) 80%, transparent) !important;
         --newtab-seperator-line-color: var(--in-content-button-background-hover) !important;
         --newtab-modal-color: var(--in-content-box-background) !important;
         --newtab-focus-outline: var(--in-content-border-active-shadow) !important;
@@ -188,14 +188,13 @@
         --customize-menu-secondary-action-background-active: var(
             --in-content-button-background-active
         ) !important;
-        --customize-menu-seperator-line-color: HSL(248.6, 8%, 34.5%);
         --customize-menu-first-shadow: hsla(250, 3%, 2%, 0.2) !important;
         --customize-menu-second-shadow: hsla(250, 3%, 2%, 0.4) !important;
         --newtab-contextmenu-background-color: var(--in-content-table-background) !important;
         --newtab-contextmenu-button-color: var(--in-content-box-background) !important;
         --newtab-card-background-color: var(--in-content-box-background) !important;
         --newtab-card-placeholder-color: var(--in-content-box-background) !important;
-        --newtab-search-text-color: #b1b1bd !important;
+        --newtab-search-text-color: var(--ui-text-70) !important;
         --newtab-search-first-shadow: rgba(21, 20, 26, 0.5);
         --newtab-search-second-shadow: rgba(21, 20, 26, 0.75);
     }
@@ -375,19 +374,19 @@
 @-moz-document url-prefix("about:debugging") {
     @media (prefers-color-scheme: dark) {
         :root {
-            --bg-color: rgb(30, 29, 31) !important;
-            --bg-color-float: rgb(37, 36, 38);
-            --text-color: var(--plaintext-color) !important;
-            --text-color-2nd: rgba(255, 255, 255, 0.6) !important;
-            --text-color-3rd: rgba(255, 255, 255, 0.45) !important;
+            --bg-color: var(--content-principal-page-background) !important;
+            --bg-color-float: var(--content-principal-box-background);
+            --text-color: var(--ui-text-90) !important;
+            --text-color-2nd: var(--ui-text-60) !important;
+            --text-color-3rd: var(--ui-text-50) !important;
             --border-color: var(--button-bg-active) !important;
             --box-background: var(--in-content-bg-dark) !important;
             --box-border-color: var(--button-bg-active) !important;
             --shadow-var: 0 0 5px hsla(0, 0%, 0%, 0.08), 0 0 8px hsla(0, 0%, 0%, 0.05);
             --button-color: var(--plaintext-color);
-            --button-bg: hsla(0, 20%, 90%, 0.06);
-            --button-bg-hover: hsla(0, 10%, 80%, 0.09);
-            --button-bg-active: hsla(0, 10%, 80%, 0.11);
+            --button-bg: var(--content-principal-button-background);
+            --button-bg-hover: var(--content-principal-button-background-hover);
+            --button-bg-active: var(--content-principal-button-background-active);
             --card-separator-color: var(--button-bg-active) !important;
             --category-background-hover: rgba(12, 12, 13, 0.1);
             --category-text: var(--plaintext-color) !important;

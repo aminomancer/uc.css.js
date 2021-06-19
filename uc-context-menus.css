@@ -22,7 +22,7 @@ menupopup:not(.PanelUI-subView) :is(menuitem, menu) {
     appearance: none !important;
     color: var(--ui-text-80) !important;
     padding: 5px 0 !important;
-    min-height: 26px !important;
+    min-height: var(--menuitem-height) !important;
     border-radius: var(--context-menuitem-border-radius);
 }
 
@@ -127,7 +127,7 @@ menupopup menuitem:is([type="checkbox"], [type="radio"])::before {
 
 menupopup .unified-nav-current[type="radio"][checked="true"] {
     font-weight: 600 !important;
-    color: white !important;
+    color: var(--ui-text-100) !important;
 }
 
 menupopup .unified-nav-current[type="radio"][checked="true"]::before {
@@ -201,7 +201,7 @@ menupopup.in-menulist > :where(menucaption, menuitem) > .menu-iconic-text {
 :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
     :where(menu, menuitem, menucaption) {
     padding-inline: 8px !important;
-    min-height: 26px !important;
+    min-height: var(--menuitem-height) !important;
     border: none !important;
 }
 
@@ -278,7 +278,7 @@ menupopup.in-menulist {
     background-color: var(--arrowpanel-dimmed) !important;
     padding-block: 0 !important;
     transition: 300ms background-color !important;
-    min-height: 26px !important;
+    min-height: var(--menuitem-height) !important;
     -moz-user-modify: read-write !important;
 }
 
@@ -301,7 +301,7 @@ menulist:-moz-focusring > menupopup.in-menulist > menuitem[_moz-menuactive="true
         appearance: none !important;
         background-color: var(--ui-textbox-bgcolor) !important;
         padding: 2px 2px 2px 8px !important;
-        min-height: 26px !important;
+        min-height: var(--menuitem-height) !important;
         color: inherit !important;
         fill: currentColor !important;
         border: none !important;
