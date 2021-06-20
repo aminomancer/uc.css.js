@@ -147,12 +147,19 @@ and a few elements like checkboxes */
         --buttons-primary-button-color: var(--in-parent-primary-button-text-color) !important;
     }
 
+    .theme-light {
+        --checkbox-border-color: #AAA !important;
+        --checkbox-unchecked-bgcolor: #EEE !important;
+        --checkbox-unchecked-hover-bgcolor: #E6E6E6 !important;
+        --checkbox-unchecked-active-bgcolor: #DDD !important;
+    }
+
     menupopup > :is(menuitem, menu, menucaption, menugroup, menuseparator, search-textbox),
     #PopupAutoComplete > richlistbox > richlistitem {
         margin-inline: var(--menupopup-inner-padding-magnitude);
     }
 
-    .theme-dark input:is([type="checkbox"], [type="radio"]) {
+    input:is([type="checkbox"], [type="radio"]) {
         appearance: none !important;
         width: 14px;
         height: 14px;
@@ -166,7 +173,7 @@ and a few elements like checkboxes */
         color: var(--in-parent-primary-button-text-color);
     }
 
-    .theme-dark input[type="checkbox"] {
+    input[type="checkbox"] {
         border-radius: 2px;
         margin-inline: 4px;
         margin-block: 3px 2px;
@@ -181,36 +188,34 @@ and a few elements like checkboxes */
         margin-block: 3px;
     }
 
-    .theme-dark input:is([type="checkbox"], [type="radio"]):is(:hover, :focus-visible) {
+    input:is([type="checkbox"], [type="radio"]):is(:hover, :focus-visible) {
         background-color: var(--checkbox-unchecked-hover-bgcolor);
     }
 
-    .theme-dark input:is([type="checkbox"], [type="radio"]):is(:hover, :focus-visible):active {
+    input:is([type="checkbox"], [type="radio"]):is(:hover, :focus-visible):active {
         background-color: var(--checkbox-unchecked-active-bgcolor);
     }
 
-    .theme-dark
-        input:is([type="checkbox"], [type="radio"]):is([checked="true"], :checked):is(:hover, :focus-visible) {
+    input:is([type="checkbox"], [type="radio"]):is([checked="true"], :checked):is(:hover, :focus-visible) {
         background-color: var(--checkbox-checked-hover-bgcolor);
     }
 
-    .theme-dark
-        input:is([type="checkbox"], [type="radio"]):is([checked="true"], :checked):is(:hover, :focus-visible):active {
+    input:is([type="checkbox"], [type="radio"]):is([checked="true"], :checked):is(:hover, :focus-visible):active {
         background-color: var(--checkbox-checked-active-bgcolor);
     }
 
-    .theme-dark input[type="checkbox"]:is([checked="true"], :checked) {
+    input[type="checkbox"]:is([checked="true"], :checked) {
         background-image: url(chrome://userchrome/content/check.svg);
         border-color: var(--checkbox-checked-border-color);
         background-color: var(--checkbox-checked-bgcolor);
     }
 
-    .theme-dark input[type="radio"] {
+    input[type="radio"] {
         border-radius: 100%;
         margin-inline: 4px;
     }
 
-    .theme-dark input[type="radio"]:is([checked="true"], :checked) {
+    input[type="radio"]:is([checked="true"], :checked) {
         background-image: url(chrome://userchrome/content/radio.svg);
         border-color: var(--checkbox-checked-border-color);
         background-color: var(--checkbox-checked-bgcolor);
