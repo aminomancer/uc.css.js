@@ -635,7 +635,7 @@ when the tab bar is not overflowing, new tabs slide into place much more smoothl
 #tabbrowser-tabs:not([movingtab])
     .tabbrowser-tab:not([tabdrop-samewindow], [justmoved])
     :is(.tab-close-button, .tab-icon-image, .tab-sharing-icon-overlay, .tab-throbber) {
-    transition: 0.1s transform ease-in-out, 0.1s opacity ease-in-out !important;
+    transition: 0.12s transform ease-in-out, 0.12s opacity ease-in-out !important;
 }
 
 .tab-icon-pending[pendingicon] {
@@ -656,11 +656,16 @@ when the tab bar is not overflowing, new tabs slide into place much more smoothl
     transform: translateX(25px) scale(0.5) !important;
 }
 
-.tabbrowser-tab:is(:hover, .keyboard-focused-tab, [tabdrop-samewindow]) .tab-throbber,
 .tabbrowser-tab .tab-throbber:not([busy]) {
     opacity: 0 !important;
     pointer-events: none !important;
     transform: translateX(-15px) scale(0.5) !important;
+}
+
+.tabbrowser-tab:is(:hover, .keyboard-focused-tab, [tabdrop-samewindow]) .tab-throbber {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: translateX(25px) scale(0.5) !important;
 }
 
 .tab-throbber::before {
@@ -707,7 +712,7 @@ when the tab bar is not overflowing, new tabs slide into place much more smoothl
     .tabbrowser-tab:not([tabdrop-samewindow], [justmoved])
     .tab-content
     > .tab-icon-sound {
-    transition: 0.1s transform ease-in-out, 0.1s opacity ease-in-out, 0.1s margin ease-in-out !important;
+    transition: 0.12s transform ease-in-out, 0.12s opacity ease-in-out, 0.12s margin ease-in-out !important;
 }
 
 #tabbrowser-tabs

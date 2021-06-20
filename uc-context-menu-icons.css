@@ -38,6 +38,7 @@ menupopup
 #context-copyimage-contents:not(.menuitem-iconic) .menu-text,
 #context-copylink:not(.menuitem-iconic) .menu-text,
 #menu_copy:not(.menuitem-iconic) .menu-text,
+:is(#placesContext_show_bookmark\:info, #placesContext_show_folder\:info, #placesContext_show\:info):not(.menuitem-iconic) .menu-text,
 #menu_openLocation:not(.menuitem-iconic) .menu-text,
 #context-copyvideourl:not(.menuitem-iconic) .menu-text,
 #context-bookmarkframe:not(.menuitem-iconic) .menu-text,
@@ -50,9 +51,18 @@ menupopup
 #context-openlinkincurrent:not(.menuitem-iconic) .menu-text,
 #context-openlinkintab:not(.menuitem-iconic) .menu-text,
 #context-openlinkinunloadedtab:not(.menuitem-iconic) .menu-text,
+:is(#placesContext_open\:unloaded, #placesContext_openContainer\:unloaded, #placesContext_openLinks\:unloaded):not(.menuitem-iconic) .menu-text,
+#placesContext_open\:newwindow:not(.menuitem-iconic) .menu-text,
+#placesContext_open\:newprivatewindow:not(.menuitem-iconic) .menu-text,
+:is(#placesContext_new\:bookmark, #placesContext_createBookmark):not(.menuitem-iconic) .menu-text,
+#placesContext_new\:folder:not(.menuitem-iconic) .menu-text,
+#placesContext_new\:separator:not(.menuitem-iconic) .menu-text,
+#bookmark-menu-container_robwu_nl-menuitem-_bookmark-menu-item:not(.menuitem-iconic) > .menu-text,
+#placesContext > :is(menu, menuitem)[label="Open in a New Container Tab"]:not(.menuitem-iconic) > .menu-text,
 #menu_FileQuitItem:not(.menuitem-iconic) .menu-text,
 #context_openANewTab:not(.menuitem-iconic) .menu-text,
 #menu_newNavigatorTab:not(.menuitem-iconic) .menu-text,
+#placesContext_open:not(.menuitem-iconic) .menu-text,
 #context-openlinkinusercontext-menu:not(.menuitem-iconic) > .menu-text,
 #menu_newUserContext:not(.menuitem-iconic) > .menu-text,
 #context-openlinkprivate:not(.menuitem-iconic) .menu-text,
@@ -63,16 +73,21 @@ menupopup
 #menu_findAgain:not(.menuitem-iconic) .menu-text,
 menuitem#textfieldDirection-swap:not(.menuitem-iconic) .menu-text,
 #context-viewpartialsource-selection:not(.menuitem-iconic) .menu-text,
+#placesContext_sortBy\:name:not(.menuitem-iconic) .menu-text,
 #context-undo:not(.menuitem-iconic) .menu-text,
 #context-redo:not(.menuitem-iconic) .menu-text,
 #menu_undo:not(.menuitem-iconic) .menu-text,
 #menu_redo:not(.menuitem-iconic) .menu-text,
+:is(#undobookmarksmenuUndo, #undobookmarksmenuRedo):not(.menuitem-iconic) .menu-text,
 #context-cut:not(.menuitem-iconic) .menu-text,
 #context-paste:not(.menuitem-iconic) .menu-text,
 #menu_cut:not(.menuitem-iconic) .menu-text,
 #menu_paste:not(.menuitem-iconic) .menu-text,
 #context-delete:not(.menuitem-iconic) .menu-text,
 #menu_delete:not(.menuitem-iconic) .menu-text,
+:is(#placesContext_cut, #placesContext_copy, #placesContext_paste, #placesContext_paste_group):not(.menuitem-iconic) .menu-text,
+:is(#placesContext_deleteBookmark, #placesContext_deleteFolder, #placesContext_delete, #placesContext_delete_history):not(.menuitem-iconic) .menu-text,
+#placesContext_deleteHost:not(.menuitem-iconic) .menu-text,
 #context-keywordfield:not(.menuitem-iconic) .menu-text,
 #context-printframe:not(.menuitem-iconic) .menu-text,
 #context-print-selection:not(.menuitem-iconic) .menu-text,
@@ -134,6 +149,10 @@ menuitem#menu_preferences:not(.menuitem-iconic) .menu-text,
 #context_unpinSelectedTabs:not(.menuitem-iconic) .menu-text,
 #context_duplicateTab:not(.menuitem-iconic) .menu-text,
 #context_duplicateTabs:not(.menuitem-iconic) .menu-text,
+#placesContext_open\:newtab:not(.menuitem-iconic) .menu-text,
+:is(#placesContext_openBookmarkContainer\:tabs, #placesContext_openBookmarkLinks\:tabs):not(.menuitem-iconic) .menu-text,
+:is(#placesContext_openContainer\:tabs, #placesContext_openLinks\:tabs):not(.menuitem-iconic) .menu-text,
+#placesContext_showAllBookmarks:not(.menuitem-iconic) .menu-text,
 #context-markAsRead:not(.menuitem-iconic) .menu-text,
 #context-markAsUnread:not(.menuitem-iconic) .menu-text,
 #context_selectAllTabs:not(.menuitem-iconic) .menu-text,
@@ -272,10 +291,14 @@ menuitem#menu_preferences:not(.menuitem-iconic):before,
 #context-cut:not(.menuitem-iconic):before,
 #context-paste:not(.menuitem-iconic):before,
 #menu_copy:not(.menuitem-iconic):before,
+:is(#placesContext_show_bookmark\:info, #placesContext_show_folder\:info, #placesContext_show\:info):not(.menuitem-iconic):before,
 #menu_cut:not(.menuitem-iconic):before,
 #menu_paste:not(.menuitem-iconic):before,
+:is(#placesContext_cut, #placesContext_copy, #placesContext_paste, #placesContext_paste_group):not(.menuitem-iconic):before,
 #context-delete:not(.menuitem-iconic):before,
 #menu_delete:not(.menuitem-iconic):before,
+:is(#placesContext_deleteBookmark, #placesContext_deleteFolder, #placesContext_delete, #placesContext_delete_history):not(.menuitem-iconic):before,
+#placesContext_deleteHost:not(.menuitem-iconic):before,
 #context-copyemail:not(.menuitem-iconic):before,
 #context-copyaudiourl:not(.menuitem-iconic):before,
 #context-copyimage:not(.menuitem-iconic):before,
@@ -287,9 +310,11 @@ menuitem#menu_preferences:not(.menuitem-iconic):before,
 #context-bookmarkpage:not(.menuitem-iconic):before,
 #context-openlinkintab:not(.menuitem-iconic):before,
 #context-openlinkinunloadedtab:not(.menuitem-iconic):before,
+:is(#placesContext_open\:unloaded, #placesContext_openContainer\:unloaded, #placesContext_openLinks\:unloaded):not(.menuitem-iconic):before,
 #menu_FileQuitItem:not(.menuitem-iconic):before,
 #context_openANewTab:not(.menuitem-iconic):before,
 #menu_newNavigatorTab:not(.menuitem-iconic):before,
+#placesContext_open:not(.menuitem-iconic):before,
 #context-openlinkincontainertab:not(.menuitem-iconic):before,
 #context-openlinkinusercontext-menu:not(.menuitem-iconic):before,
 #menu_newUserContext:not(.menuitem-iconic):before,
@@ -304,10 +329,12 @@ menuitem#menu_preferences:not(.menuitem-iconic):before,
 #menu_find:not(.menuitem-iconic):before,
 #menu_findAgain:not(.menuitem-iconic):before,
 menuitem#textfieldDirection-swap:not(.menuitem-iconic):before,
+#placesContext_sortBy\:name:not(.menuitem-iconic):before,
 #context-undo:not(.menuitem-iconic):before,
 #context-redo:not(.menuitem-iconic):before,
 #menu_undo:not(.menuitem-iconic):before,
 #menu_redo:not(.menuitem-iconic):before,
+:is(#undobookmarksmenuUndo, #undobookmarksmenuRedo):not(.menuitem-iconic):before,
 #context-keywordfield:not(.menuitem-iconic):before,
 #context_reopenInContainer:not(.menuitem-iconic):before,
 :is(#context_reloadTab, #context_reloadSelectedTabs):not(.menuitem-iconic):before,
@@ -315,6 +342,17 @@ menuitem#textfieldDirection-swap:not(.menuitem-iconic):before,
 :is(#context_pinTab, #context_pinSelectedTabs):not(.menuitem-iconic):before,
 :is(#context_unpinTab, #context_unpinSelectedTabs):not(.menuitem-iconic):before,
 :is(#context_duplicateTab, #context_duplicateTabs):not(.menuitem-iconic):before,
+#placesContext_open\:newtab:not(.menuitem-iconic):before,
+:is(#placesContext_openBookmarkContainer\:tabs, #placesContext_openBookmarkLinks\:tabs):not(.menuitem-iconic):before,
+:is(#placesContext_openContainer\:tabs, #placesContext_openLinks\:tabs):not(.menuitem-iconic):before,
+#placesContext_showAllBookmarks:not(.menuitem-iconic):before,
+#placesContext_open\:newwindow:not(.menuitem-iconic):before,
+#placesContext_open\:newprivatewindow:not(.menuitem-iconic):before,
+:is(#placesContext_new\:bookmark, #placesContext_createBookmark):not(.menuitem-iconic):before,
+#placesContext_new\:folder:not(.menuitem-iconic):before,
+#placesContext_new\:separator:not(.menuitem-iconic):before,
+#bookmark-menu-container_robwu_nl-menuitem-_bookmark-menu-item:not(.menuitem-iconic):before,
+#placesContext > :is(menu, menuitem)[label="Open in a New Container Tab"]:not(.menuitem-iconic):before,
 #context-markAsRead:before,
 #context-markAsUnread:before,
 :is(#context_bookmarkTab, #context_bookmarkSelectedTabs):not(.menuitem-iconic):before,
@@ -581,17 +619,21 @@ menuitem#menu_preferences:not(.menuitem-iconic):before {
     background-image: url(chrome://userchrome/content/notifications/canvas.svg) !important;
 }
 
-:is(#context-copyimage-contents, #context-copy, #menu_copy):not(.menuitem-iconic):before,
+:is(#context-copyimage-contents, #context-copy, #menu_copy, #placesContext_copy):not(.menuitem-iconic):before,
 .textbox-contextmenu menuitem[label="Copy"]:not(.menuitem-iconic):before {
     background-image: url(chrome://userchrome/content/skin/edit-copy.svg) !important;
 }
 
-:is(#context-cut, #menu_cut):not(.menuitem-iconic):before,
+:is(#placesContext_show_bookmark\:info, #placesContext_show_folder\:info, #placesContext_show\:info):not(.menuitem-iconic):before {
+    background-image: url(chrome://userchrome/content/edit.svg);
+}
+
+:is(#context-cut, #menu_cut, #placesContext_cut):not(.menuitem-iconic):before,
 .textbox-contextmenu menuitem[label="Cut"]:not(.menuitem-iconic):before {
     background-image: url(chrome://userchrome/content/skin/edit-cut.svg) !important;
 }
 
-:is(#context-paste, #menu_paste):not(.menuitem-iconic):before,
+:is(#context-paste, #menu_paste, #placesContext_paste, #placesContext_paste_group):not(.menuitem-iconic):before,
 .textbox-contextmenu menuitem[label="Paste"]:not(.menuitem-iconic):before {
     background-image: url(chrome://userchrome/content/skin/edit-paste.svg) !important;
 }
@@ -601,6 +643,7 @@ menuitem#menu_preferences:not(.menuitem-iconic):before {
     background-image: url(chrome://userchrome/content/skin/edit-paste-and-go.svg);
 }
 
+:is(#placesContext_deleteBookmark, #placesContext_deleteFolder, #placesContext_delete, #placesContext_delete_history):not(.menuitem-iconic):before,
 :is(#context-delete, #menu_delete):not(.menuitem-iconic):before,
 .textbox-contextmenu menuitem[label="Delete"]:not(.menuitem-iconic):before {
     background-image: url(chrome://userchrome/content/delete.svg) !important;
@@ -618,36 +661,54 @@ menuitem#menu_preferences:not(.menuitem-iconic):before {
     background-image: url(chrome://userchrome/content/skin/link.svg) !important;
 }
 
-:is(#context-bookmarkpage, #context-bookmarkframe, #context-bookmarklink):not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/skin/bookmark-hollow.svg) !important;
+:is(#context-bookmarkframe, #context-bookmarklink):not(.menuitem-iconic):before {
+    background-image: url(chrome://userchrome/content/skin/add-bookmark.svg) !important;
 }
 
-:is(#context-openframeintab, #context-openlinkintab, #context_openANewTab, #menu_newNavigatorTab):not(.menuitem-iconic):before {
+:is(#placesContext_openBookmarkContainer\:tabs, #placesContext_openBookmarkLinks\:tabs):not(.menuitem-iconic):before {
+    background-image: url(chrome://userchrome/content/material/places/folder-special.svg);
+}
+
+:is(#context-openframeintab, #context-openlinkintab, #context_openANewTab, #menu_newNavigatorTab, #placesContext_open\:newtab):not(.menuitem-iconic):before {
     background-image: url(chrome://userchrome/content/skin/new-tab.svg) !important;
 }
 
-:is(#context-openlinkinunloadedtab, #menu_FileQuitItem):not(.menuitem-iconic):before {
+:is(#context-openlinkinunloadedtab, #placesContext_open\:unloaded, #placesContext_openContainer\:unloaded, #placesContext_openLinks\:unloaded, #menu_FileQuitItem):not(.menuitem-iconic):before {
     background-image: url(chrome://userchrome/content/skin/quit.svg) !important;
 }
 
-#context-openlinkincurrent:not(.menuitem-iconic):before {
+:is(#context-openlinkincurrent, #placesContext_open):not(.menuitem-iconic):before {
     background-image: url(chrome://userchrome/content/skin/tab.svg) !important;
 }
 
+#bookmark-menu-container_robwu_nl-menuitem-_bookmark-menu-item:not(.menuitem-iconic):before,
+#placesContext > :is(menu, menuitem)[label="Open in a New Container Tab"]:not(.menuitem-iconic):before,
 #context-openlinkincontainertab:not(.menuitem-iconic):before {
     background-image: url(chrome://userchrome/content/skin/container-go.svg) !important;
 }
 
 :is(#context-openlinkinusercontext-menu, #menu_newUserContext):not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/skin/container-plus.svg) !important;
+    background-image: url(chrome://userchrome/content/skin/container-go.svg) !important;
 }
 
-:is(#context-openframe, #context-openlink):not(.menuitem-iconic):before {
+:is(#context-openframe, #context-openlink, #placesContext_open\:newwindow):not(.menuitem-iconic):before {
     background-image: url(chrome://userchrome/content/skin/new-window.svg) !important;
 }
 
-:is(#context-openlinkprivate, #context-searchselect-private, #menu_newPrivateWindow):not(.menuitem-iconic):before {
+:is(#context-openlinkprivate, #context-searchselect-private, #menu_newPrivateWindow, #placesContext_open\:newprivatewindow):not(.menuitem-iconic):before {
     background-image: url(chrome://userchrome/content/skin/privateBrowsing.svg) !important;
+}
+
+:is(#placesContext_new\:bookmark, #placesContext_createBookmark):not(.menuitem-iconic):before {
+    background-image: url(chrome://userchrome/content/skin/add-bookmark.svg);
+}
+
+#placesContext_new\:folder:not(.menuitem-iconic):before {
+    background-image: url(chrome://userchrome/content/material/places/folder-add.svg);
+}
+
+#placesContext_new\:separator:not(.menuitem-iconic):before {
+    background-image: url(chrome://userchrome/content/skin/add-separator.svg);
 }
 
 :is(#context-searchselect, #menu_find):not(.menuitem-iconic):before {
@@ -662,15 +723,23 @@ menuitem#textfieldDirection-swap:not(.menuitem-iconic):before {
     background-image: url(chrome://userchrome/content/material/textdirection.svg) !important;
 }
 
-:is(#context-undo, #context_undoCloseTab, #menu_undo):not(.menuitem-iconic):before,
+#placesContext_sortBy\:name:not(.menuitem-iconic):before {
+    background-image: url(chrome://userchrome/content/skin/sort.svg) !important;
+}
+
+:is(#context-undo, #context_undoCloseTab, #menu_undo, #undobookmarksmenuUndo):not(.menuitem-iconic):before,
 .textbox-contextmenu menuitem[label="Undo"]:not(.menuitem-iconic):before {
     background-image: url(chrome://userchrome/content/undo.svg) !important;
 }
 
-:is(#context-redo, #menu_redo):not(.menuitem-iconic):before,
+:is(#context-redo, #menu_redo, #undobookmarksmenuRedo):not(.menuitem-iconic):before,
 .textbox-contextmenu menuitem[label="Redo"]:not(.menuitem-iconic):before {
     background-image: url(chrome://userchrome/content/undo.svg) !important;
     transform: rotate(180deg);
+}
+
+#placesContext_deleteHost:not(.menuitem-iconic):before {
+    background-image: url(chrome://userchrome/content/skin/forget.svg) !important;
 }
 
 #context-keywordfield:not(.menuitem-iconic):before {
@@ -701,8 +770,13 @@ menuitem#textfieldDirection-swap:not(.menuitem-iconic):before {
     background-image: url(chrome://userchrome/content/skin/unpin-tab.svg);
 }
 
+:is(#placesContext_openContainer\:tabs, #placesContext_openLinks\:tabs):not(.menuitem-iconic):before,
 :is(#context_duplicateTab, #context_duplicateTabs):not(.menuitem-iconic):before {
     background-image: url(chrome://userchrome/content/skin/duplicate-tab.svg);
+}
+
+#placesContext_showAllBookmarks:not(.menuitem-iconic):before {
+    background-image: url(chrome://userchrome/content/skin/library.svg);
 }
 
 #context-markAsUnread:before {
@@ -718,7 +792,7 @@ menuitem#textfieldDirection-swap:not(.menuitem-iconic):before {
 }
 
 :is(#context_bookmarkTab, #context_bookmarkSelectedTabs):not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/skin/bookmark-hollow.svg);
+    background-image: url(chrome://userchrome/content/skin/add-bookmark.svg);
 }
 
 #context_moveTabOptions:not(.menuitem-iconic):before {

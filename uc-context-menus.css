@@ -445,3 +445,7 @@ menupopup:not(.PanelUI-subView) menuseparator:last-child {
 #context-bookmarkpage[starred="true"] {
     list-style-image: url(chrome://userchrome/content/skin/bookmark.svg) !important;
 }
+
+#placesContext_open {
+    font-weight: normal !important;
+}

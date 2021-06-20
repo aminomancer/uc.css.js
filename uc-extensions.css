@@ -15,7 +15,7 @@ individual extensions' popups and other content documents are styled in userCont
 
 /* multi-account containers */
 :is(.webextension-browser-action, .eom-addon-button)[data-extensionid="@testpilot-containers"i] .toolbarbutton-icon {
-    list-style-image: url(chrome://userchrome/content/skin/container-plus.svg);
+    list-style-image: url(chrome://userchrome/content/skin/container-base.svg);
 }
 
 #pageAction-urlbar-_testpilot-containers {
@@ -252,7 +252,7 @@ more useful than userContent.css when dealing with very complex websites that ne
     display: -moz-inline-box;
     background-position: center;
     background-repeat: no-repeat;
-    background-image: url(chrome://userchrome/content/skin/container-plus.svg);
+    background-image: url(chrome://userchrome/content/skin/container-base.svg);
 }
 
 #contentAreaContextMenu

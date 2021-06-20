@@ -237,12 +237,14 @@
         -moz-context-properties: fill, fill-opacity;
         fill: var(--ui-text-80);
         cursor: default !important;
-        width: 20px !important;
-        height: 20px !important;
-        border-radius: 2px;
+        width: 24px !important;
+        height: 24px !important;
+        border-radius: var(--general-button-border-radius);
         display: flex !important;
         align-items: center;
         justify-content: center;
+        inset-block-start: 10.5px !important;
+        right: 10.5px !important;
     }
 
     .info-icon:is(:hover, :focus-visible) {
