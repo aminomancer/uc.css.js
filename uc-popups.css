@@ -1005,6 +1005,82 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
     }
 }
 
+@-moz-document url("chrome://browser/content/webrtcIndicator.xul")
+{
+    :root {
+        display: none !important;
+    }
+}
+
+@-moz-document url("chrome://browser/content/webrtcIndicator.xhtml")
+{
+    :root {
+        --indicator-height: 40px !important;
+    }
+
+    body {
+        align-items: center !important;
+    }
+
+    .row-item.separator {
+        min-height: 28px;
+        border-color: var(--indicator-border-color) !important;
+    }
+
+    .control-icon {
+        width: 28px !important;
+        height: 28px !important;
+        padding: 0 !important;
+        border-radius: var(--toolbarbutton-border-radius) !important;
+    }
+
+    #drag-indicator {
+        background-image: url(chrome://browser/skin/notification-icons/drag-indicator.svg);
+        background-size: 14px 26px !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        -moz-context-properties: fill, fill-opacity;
+        fill: var(--uc-desaturate-dimmed-even-further);
+        height: 28px !important;
+    }
+
+    .control-icon:not(:hover, :active, :checked) {
+        background-color: var(--minimize-button-background-color) !important;
+    }
+
+    #display-share-icon {
+        background-image: url(chrome://userchrome/content/notifications/screen.svg) !important;
+    }
+
+    #microphone-mute-toggle {
+        background-image: url(chrome://userchrome/content/notifications/microphone.svg) !important;
+    }
+
+    #microphone-mute-toggle:checked {
+        background-image: url(chrome://userchrome/content/notifications/microphone-blocked.svg) !important;
+    }
+
+    #camera-mute-toggle {
+        background-image: url(chrome://userchrome/content/notifications/camera.svg) !important;
+    }
+
+    #camera-mute-toggle:checked {
+        background-image: url(chrome://userchrome/content/notifications/camera-blocked.svg) !important;
+    }
+
+    #webRTC-sharingCamera-menu {
+        list-style-image: url(chrome://userchrome/content/notifications/camera.svg) !important;
+    }
+
+    #webRTC-sharingMicrophone-menu {
+        list-style-image: url(chrome://userchrome/content/notifications/microphone.svg) !important;
+    }
+
+    #webRTC-sharingScreen-menu {
+        list-style-image: url(chrome://userchrome/content/notifications/screen.svg) !important;
+    }
+}
+
 /* page info popup. kinda lame */
 /* @-moz-document url(chrome://browser/content/pageinfo/pageInfo.xhtml){
     #main-window,

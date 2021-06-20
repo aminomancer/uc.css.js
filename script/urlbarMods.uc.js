@@ -1,20 +1,21 @@
 // ==UserScript==
 // @name           Urlbar Mods
-// @version        1.0
+// @version        1.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Makes some minor modifications to the urlbar. Currently this only restores the context menu that used to appear when right-clicking a search engine one-off button in the urlbar results panel. The context menu was disabled recently. It's actually disabled by default, so this script will do nothing unless you change the "false" on line 12 to "true" before running the script. I'll continue to add to this script as I think of more urlbar mods that are too small to deserve their own dedicated script.
 // ==/UserScript==
 
-
 (function () {
     class UrlbarMods {
         static config = {
             "restore one-offs context menu": false, // recently the context menu for the search engine one-off buttons in the urlbar results panel has been disabled. but the context menu for the one-off buttons in the searchbar is still enabled. I'm not sure why they did this, and it's a really minor thing, but it's not like right-clicking the buttons does anything else, (at least on windows) so you may want to restore the context menu.
+            "style identity icon drag box": true, // when you click & drag the identity box in the urlbar, it lets you drag and drop the URL into text fields, the tab bar, desktop, etc. while dragging it shows a little white box with the URL and favicon as the drag image. this can't be styled with CSS because it's drawn by the canvas 2D API. but we can easily change the function so that it sets the background and text colors equal to some CSS variables. it uses --tooltip-bgcolor and --tooltip-color, or if those don't exist, it uses the vanilla variables --arrowpanel-background and --arrowpanel-color. so if you use my theme duskFox it'll look similar to a tooltip. if you don't use my theme it'll look similar to a popup panel.
         };
         constructor() {
             if (UrlbarMods.config["restore one-offs context menu"])
                 this.restoreOneOffsContextMenu();
+            if (UrlbarMods.config["style identity icon drag box"]) this.styleIdentityIconDragBox();
         }
         get urlbarOneOffs() {
             return this._urlbarOneOffs || (this._urlbarOneOffs = gURLBar.view.oneOffSearchButtons);
@@ -23,6 +24,40 @@
             const urlbarOneOffsProto = Object.getPrototypeOf(this.urlbarOneOffs);
             const oneOffsBase = Object.getPrototypeOf(urlbarOneOffsProto);
             this.urlbarOneOffs._on_contextmenu = oneOffsBase._on_contextmenu;
+        }
+        styleIdentityIconDragBox() {
+            // for a given string in CSS3 custom property syntax, e.g. "var(--tooltip-color)" or "var(--tooltip-color, rgb(255, 255, 255))", convert it to a hex code string e.g. "#FFFFFF"
+            function varToHex(variable) {
+                let temp = document.createElement("div");
+                document.body.appendChild(temp);
+                temp.style.color = variable;
+                let rgb = getComputedStyle(temp).color;
+                temp.remove();
+                rgb = rgb
+                    .split("(")[1]
+                    .split(")")[0]
+                    .split(rgb.indexOf(",") > -1 ? "," : " ");
+                rgb.length = 3;
+                rgb.forEach((c, i) => {
+                    c = (+c).toString(16);
+                    rgb[i] = c.length === 1 ? "0" + c : c.slice(0, 2);
+                });
+                return "#" + rgb.join("");
+            }
+            // override the internal dragstart callback so it uses variables instead of "white" and "black"
+            eval(
+                `gIdentityHandler.onDragStart = function ` +
+                    gIdentityHandler.onDragStart
+                        .toSource()
+                        .replace(
+                            /(let backgroundColor = ).*;/,
+                            `$1varToHex("var(--tooltip-bgcolor, var(--arrowpanel-background))");`
+                        )
+                        .replace(
+                            /(let textColor = ).*;/,
+                            `$1varToHex("var(--tooltip-color, var(--arrowpanel-color))");`
+                        )
+            );
         }
     }
 

@@ -57,6 +57,7 @@
 .urlbarView-favicon {
     background-position: center !important;
     margin-inline: 0 !important;
+    -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity !important;
 }
 
 .urlbarView-row:not([type], [has-url]) .urlbarView-favicon {
@@ -315,16 +316,25 @@
 	visibility: visible !important;
 }
 
+.urlbarView-row .urlbarView-title {
+    font-weight: var(--urlbar-result-strong-font-weight, 500) !important;
+}
+
+.urlbarView-row .urlbarView-title strong {
+    font-weight: inherit !important;
+}
+
 .urlbarView-row[selected] .urlbarView-title-separator::before,
 .urlbarView-row-inner[selected] .urlbarView-dynamic-calculator-action::before,
 .urlbarView-dynamic-unitConversion-action::before {
     color: hsla(0, 0%, 100%, 0.6);
 }
 
+.urlbarView-row[type="tabtosearch"] .urlbarView-title,
 .urlbarView-row[has-action] .urlbarView-title strong,
 .urlbarView-row[has-action] .urlbarView-title[isurl],
 .urlbarView-row[has-url] .urlbarView-title {
-    font-weight: 500 !important;
+    font-weight: var(--urlbar-result-strong-font-weight, 500) !important;
     font-style: normal !important;
     color: var(--panel-shortcut-color);
 }
@@ -334,6 +344,7 @@
     color: var(--panel-shortcut-color);
 }
 
+.urlbarView-row[type="tabtosearch"][selected] .urlbarView-title,
 .urlbarView-row[has-action][selected] .urlbarView-title strong,
 .urlbarView-row[has-action][selected] .urlbarView-title[isurl],
 .urlbarView-row[has-url][selected] .urlbarView-title,
@@ -348,7 +359,7 @@
 
 .urlbarView-row[has-action] .urlbarView-title[isurl] strong,
 .urlbarView-row[has-url] .urlbarView-title strong {
-    font-weight: 500 !important;
+    font-weight: var(--urlbar-result-strong-font-weight, 500) !important;
     font-style: normal !important;
     color: var(--lwt-toolbar-field-color);
 }
@@ -425,21 +436,8 @@
     margin-inline: 0 6px !important;
 }
 
-.urlbarView-row[type="tabtosearch"]
-    > .urlbarView-row-inner
-    > .urlbarView-no-wrap
-    > .urlbarView-favicon {
-    color: var(--urlbar-popup-url-color) !important;
-    border-radius: 2px !important;
-}
-
-.urlbarView-row[type="tabtosearch"][selected]
-    > .urlbarView-row-inner
-    > .urlbarView-no-wrap
-    > .urlbarView-favicon {
-    color: white !important;
-    stroke: var(--urlbar-popup-action-color) !important;
-    border-radius: 2px !important;
+.urlbarView-row[type="tabtosearch"]:not([selected], [show-action-text], :hover) > .urlbarView-row-inner > .urlbarView-no-wrap > .urlbarView-action {
+    display: none;
 }
 
 #urlbar[breakout][breakout-extend] > #urlbar-input-container,
@@ -476,6 +474,10 @@
     background: none !important;
     border-bottom-left-radius: 4px !important;
     border-bottom-right-radius: 4px !important;
+}
+
+#urlbar:not([open]) .urlbarView {
+    padding-block: 0 !important;
 }
 
 @keyframes urlbar-grow-bg {
@@ -519,7 +521,11 @@
     box-shadow: 0 5px 18px hsla(0, 0%, 0%, 0.2) !important;
     clip-path: inset(
         0 -100% -100% -100%
-    ); /* used to stop the shadow overflowing onto the nav-bar. this theme is meant to look like it's peaking out from under the nav-bar. */
+    ); /* used to stop the shadow from casting onto the nav-bar.
+    this theme intends for the results panel to look like it's sliding out from under the nav-bar like paper in a clipboard,
+    rather than an extension of the urlbar as in vanilla firefox.
+    but in DOM terms it's not actually under the nav-bar, it's inside the urlbar which is in the nav-bar.
+    so in order to create the illusion that it's under the nav-bar we cut the shadow off at the boundary of the nav-bar. */
 }
 
 #urlbar[breakout][breakout-extend][breakout-extend-animate] #urlbar-results {

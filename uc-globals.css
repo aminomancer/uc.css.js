@@ -77,6 +77,7 @@ tooltip {
     --solid-selection-bgcolor: var(--pink-action);
     /* controls the color of the little tooltips that appear on search highlighted buttons in about:preferences */
     --aboutPrefs-find-tags: var(--purple-35);
+
     --ui-text-30: rgba(255, 255, 255, 0.3);
     --ui-text-40: rgba(255, 255, 255, 0.4);
     --ui-text-50: rgba(255, 255, 255, 0.5);
@@ -86,8 +87,10 @@ tooltip {
     --ui-text-90: rgba(255, 255, 255, 0.9);
     --ui-text-100: rgb(255, 255, 255);
     --context-menu-disabled-color: hsla(213, 43%, 89%, 0.5);
+
     --badge-color-dark: hsl(236, 13%, 42%);
     --badge-color-light: var(--lwt-toolbarbutton-icon-fill-attention);
+
     --tab-hover: linear-gradient(180deg, hsl(231, 49%, 11%), hsl(233, 55%, 8%));
     --tab-pinned: linear-gradient(0deg, var(--toolbar-bgcolor), var(--lwt-accent-color));
     --tab-multi: linear-gradient(180deg, hsl(231, 50%, 11%), hsl(233, 53%, 8%));
@@ -100,18 +103,26 @@ tooltip {
         color-mix(in srgb, var(--tab-focused-highlight) 50%, var(--toolbar-bgcolor))
     );
     --multiselected-color: hsl(241, 50%, 51%);
+
     --titlebar-gradient: radial-gradient(
         circle at 100% 0%,
         hsl(231, 48%, 12%),
         var(--uc-accent-color) 140px
     );
+
     --search-box-color: hsl(229, 32%, 23%);
     --search-box-focus: hsl(229, 27%, 27%);
     --search-box-null: hsl(230, 30%, 20%);
     --textbox-button-hidden: hsla(240, 100%, 89%, 0);
+
     --urlbar-results-bgcolor: hsl(233, 32%, 10%);
-    --confirmation-hint-bgcolor: hsl(240, 60%, 59%);
     --urlbar-bookmark-icon-color: hsl(250, 100%, 64%);
+    /* the width of a search one-off button in the urlbar */
+    --urlbar-one-offs-engine-width: 28px;
+    /* how long the scrolling one-offs slider should be. 8 means it's long enough for 8 buttons to be visible without scrolling. */
+    --urlbar-one-offs-engines-per-scroll: 8;
+    /* don't change this unless you know what you're doing. multiplies the one-off button width by the number per scroll to yield the total width */
+    --urlbar-one-offs-width: calc(var(--urlbar-one-offs-engine-width) * var(--urlbar-one-offs-engines-per-scroll)); 
     --tab-throbber-fill: hsl(222, 100%, 75%);
     --sanitize-border-color: hsla(0, 0%, 5%, 0.2);
     --menu-separator-color: hsl(233, 25%, 23%);
@@ -127,6 +138,7 @@ tooltip {
     --protection-header-gradient-color-2: hsl(265, 100%, 69%);
     --protection-header-gradient-color-3: hsl(217, 90%, 39%);
     --protection-header-arrow-color: var(--arrowpanel-background);
+
     --download-button-hue: 235.86;
     --download-button-hover-bg: linear-gradient(
         to right,
@@ -138,6 +150,7 @@ tooltip {
         hsla(var(--download-button-hue), 95%, 76.94%, 0.02) 73%,
         hsla(var(--download-button-hue), 90%, 73.94%, 0.015) 86.3%
     );
+
     --pink-action: hsl(340, 73%, 58%);
     --purple-30: hsl(244, 100%, 70%) !important;
     --purple-30-a50: hsla(240, 100%, 70%, 0.5) !important;
@@ -152,6 +165,7 @@ tooltip {
     --purple-60: hsl(258, 95%, 40%) !important;
     --purple-70: hsl(256, 97%, 30%) !important;
     --purple-80: hsl(254, 100%, 20%) !important;
+
     --in-parent-page-background: transparent;
     --in-parent-page-color: hsl(212, 43%, 90%);
     --in-parent-box-background: var(--dialog-box-bgcolor);
@@ -175,6 +189,7 @@ tooltip {
     --in-parent-primary-button-background-hover: var(--purple-35);
     --in-parent-primary-button-background-active: var(--purple-30);
     --in-parent-primary-button-text-color: var(--in-parent-page-color);
+
     --content-principal-page-background: hsl(270, 3%, 12%);
     --content-principal-page-color: var(--in-parent-page-color);
     --content-principal-box-background: hsl(300, 2%, 16%);
@@ -186,6 +201,7 @@ tooltip {
     --content-principal-button-background-active: hsla(0, 20%, 90%, 0.19);
     --content-principal-button-background-solid: hsl(270, 2%, 20%);
     --content-principal-border-hover: var(--content-principal-button-background-hover);
+
     --uc-checkbox-border-color: var(--in-parent-box-border-color);
     --uc-checkbox-checked-border-color: transparent;
     --uc-checkbox-unchecked-bgcolor: var(--in-parent-button-background);

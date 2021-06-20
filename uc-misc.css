@@ -297,7 +297,8 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
         }
 
         #urlbar {
-            font-weight: 300;
+            --urlbar-base-font-weight: 300;
+            --urlbar-result-strong-font-weight: 400;
         }
 
         :is(#back-button-tooltip, #forward-button-tooltip) .tooltip-label[id]:not(:last-of-type) {
@@ -306,15 +307,6 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
 
         :is(#back-button-tooltip, #forward-button-tooltip) .tooltip-label:last-of-type:not([id]) {
             margin-block-start: -17.5px !important;
-        }
-
-        #urlbar .urlbarView-row[has-action] .urlbarView-title[isurl] strong,
-        #urlbar .urlbarView-row[has-url] .urlbarView-title strong,
-        #urlbar .urlbarView-row[has-action] .urlbarView-title strong,
-        #urlbar .urlbarView-row[has-action] .urlbarView-title[isurl],
-        #urlbar .urlbarView-row[has-url] .urlbarView-title,
-        #urlbar .urlbarView-dynamic-calculator-input {
-            font-weight: 400 !important;
         }
 
         #fxa-menu-header-description {

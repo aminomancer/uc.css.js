@@ -165,9 +165,9 @@ it also changes the appearance of the one-offs in the searchbar. */
 } */
 
 .urlbarView :is(.searchbar-engine-one-off-item, .addengine-item) {
-    min-width: 32px !important;
-    height: 32px !important;
-    padding: 2px !important;
+    min-width: var(--urlbar-one-offs-engine-width) !important;
+    height: var(--urlbar-one-offs-engine-width) !important;
+    padding: 0 !important;
     margin-inline: 0 !important;
     background: none !important;
     position: relative !important;
@@ -186,7 +186,7 @@ it also changes the appearance of the one-offs in the searchbar. */
 
 :root:not([customizing])
     .urlbarView
-    :is(.searchbar-engine-one-off-item, .addengine-item):-moz-window-inactive {
+    :is(.searchbar-engine-one-off-item, .addengine-item):not(:hover, [selected]):-moz-window-inactive {
     opacity: 0.7 !important;
 }
 
@@ -198,15 +198,9 @@ it also changes the appearance of the one-offs in the searchbar. */
 }
 
 .urlbarView
-    :is(.searchbar-engine-one-off-item, .addengine-item):not([selected]):hover
+    :is(.searchbar-engine-one-off-item, .addengine-item):is([selected], :hover)
     > .button-box {
-    background-color: var(--desaturate-dimmed) !important;
-}
-
-.urlbarView
-    :is(.searchbar-engine-one-off-item, .addengine-item):is([selected], :hover:active)
-    > .button-box {
-    background-color: var(--desaturate-dimmed-further) !important;
+    fill-opacity: 1 !important;
 }
 
 .searchbar-engine-one-off-add-engine[image] .button-icon {
@@ -252,14 +246,14 @@ it also changes the appearance of the one-offs in the searchbar. */
     position: absolute !important;
     z-index: 12;
     min-height: var(--urlbar-height) !important;
-    max-width: 256px !important;
+    max-width: var(--urlbar-one-offs-width) !important;
     padding: 0 !important;
     top: calc(-3px - var(--urlbar-height)) !important;
-    right: 3px !important;
+    right: 5px !important;
     scroll-behavior: smooth !important;
     box-sizing: border-box !important;
     border: none !important;
-    clip-path: inset(0 2px 0 0);
+    /* clip-path: inset(0 2px 0 0); */
 }
 
 .urlbarView .search-panel-one-offs {
@@ -267,7 +261,7 @@ it also changes the appearance of the one-offs in the searchbar. */
 }
 
 #urlbar:is([usertyping], [searchmode], [open][pageproxystate="invalid"]) #urlbar-input {
-    margin-right: 256px !important;
+    margin-right: var(--urlbar-one-offs-width) !important;
 }
 
 #urlbar[textoverflow]:is([usertyping], [searchmode], [open][pageproxystate="invalid"])
@@ -312,6 +306,8 @@ it also changes the appearance of the one-offs in the searchbar. */
 }
 
 #urlbar .search-panel-one-offs {
+    min-height: var(--urlbar-height);
+    align-items: center;
     transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out !important;
     opacity: 0 !important;
     transform: translateX(90px) !important;
@@ -379,10 +375,6 @@ toolbarpaletteitem > #urlbar-container :is(#page-action-buttons, #search-one-off
         opacity: 1;
         transform: none;
     }
-}
-
-#urlbar-go-button {
-    display: none !important;
 }
 
 #page-action-buttons > *:not([hidden]) {
@@ -471,6 +463,6 @@ toolbarpaletteitem > #urlbar-container :is(#page-action-buttons, #search-one-off
     margin-top: 0.7px !important;
 }
 
-:root[lwt-toolbar-field-brighttext] .searchbar-engine-one-off-item {
+:root[lwt-toolbar-field-brighttext] :is(.searchbar-engine-one-off-item, .addengine-item) {
     color: var(--lwt-toolbarbutton-icon-fill) !important;
 }
