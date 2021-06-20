@@ -114,6 +114,7 @@ tooltip {
     --search-box-focus: hsl(229, 27%, 27%);
     --search-box-null: hsl(230, 30%, 20%);
     --textbox-button-hidden: hsla(240, 100%, 89%, 0);
+    --confirmation-hint-bgcolor: hsl(240, 60%, 59%);
 
     --urlbar-results-bgcolor: hsl(233, 32%, 10%);
     --urlbar-bookmark-icon-color: hsl(250, 100%, 64%);

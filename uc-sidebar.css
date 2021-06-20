@@ -23,10 +23,21 @@ as well as the internal appearance of the built-in sidebars, e.g. bookmarks, his
     border-bottom: 0px solid transparent !important;
     background-color: var(--ui-secondary-bg) !important;
     color: #fff !important;
+    font-size: 1.2em !important;
+}
+
+#sidebar-switcher-target {
+    min-height: 27px !important;
+    min-width: 27px !important;
+    padding-inline: 5px !important;
+}
+
+#sidebar-switcher-target #sidebar-title {
+    padding-inline: 6px 4px !important;
 }
 
 #sidebar-search-container {
-    padding-top: 1px !important;
+    padding-block: 0 var(--menupopup-inner-padding-magnitude) !important;
 }
 
 .sidebar-search-container .tabsFilter {
@@ -39,7 +50,7 @@ as well as the internal appearance of the built-in sidebars, e.g. bookmarks, his
     appearance: none !important;
     padding-inline-start: 5px !important;
     background-color: var(--search-box-color) !important;
-    border-radius: 3px !important;
+    border-radius: var(--general-button-border-radius) !important;
     padding-block: 0 !important;
     transition: 300ms !important;
     color: currentColor !important;
@@ -55,6 +66,16 @@ as well as the internal appearance of the built-in sidebars, e.g. bookmarks, his
 
 .sidebar-search-container .search-box .textbox-input-box {
     padding-inline-start: 13px !important;
+}
+
+#sidebar-search-container #viewButton {
+    padding-inline: 7px 5px !important;
+    margin-inline-start: 6px !important;
+    border-radius: var(--general-button-border-radius) !important;
+}
+
+#sidebar-search-container #viewButton > .button-box > dropmarker {
+    margin-inline-start: 4px !important;
 }
 
 /* search-textbox icons (magnifying glass and clear input button) */
@@ -179,7 +200,7 @@ as well as the internal appearance of the built-in sidebars, e.g. bookmarks, his
 }
 
 #sidebar-close {
-    border-radius: var(--arrowpanel-menuitem-border-radius) !important;
+    border-radius: var(--general-button-border-radius) !important;
     list-style-image: url(chrome://userchrome/content/close.svg) !important;
     fill-opacity: 0.8 !important;
 }
@@ -196,6 +217,17 @@ as well as the internal appearance of the built-in sidebars, e.g. bookmarks, his
 
 #sidebar-close:is(:hover, :focus-visible):active {
     background-color: var(--arrowpanel-dimmed-further) !important;
+}
+
+.sidebar-panel treechildren::-moz-tree-row {
+    border-radius: var(--general-button-border-radius) !important;
+    margin-inline: 8px !important;
+    cursor: default !important;
+}
+
+.sidebar-panel treechildren::-moz-tree-cell {
+    margin-inline: calc(var(--general-button-border-radius) + 8px) !important;
+    cursor: default !important;
 }
 
 .sidebar-panel treechildren::-moz-tree-row(selected),
@@ -263,11 +295,24 @@ treechildren::-moz-tree-drop-feedback {
 }
 
 treechildren::-moz-tree-twisty {
-    width: 14px !important;
+    width: 16px !important;
     height: auto !important;
-    padding-inline: 3px !important;
     list-style-image: url(chrome://userchrome/content/tree/tree-twisty-right.svg) !important;
     -moz-context-properties: fill, fill-opacity;
+}
+
+.sidebar-placesTreechildren::-moz-tree-twisty {
+    margin-inline: -3px 3px !important;
+    padding-inline: 0 !important;
+}
+
+.sidebar-placesTreechildren::-moz-tree-twisty(sorted) {
+    width: 0 !important;
+    margin-inline: 0 !important;
+}
+
+.sidebar-placesTreechildren::-moz-tree-image {
+    margin-inline-start: 0 !important;
 }
 
 treechildren:-moz-locale-dir(rtl)::-moz-tree-twisty(closed) {
@@ -279,9 +324,13 @@ treechildren::-moz-tree-twisty(open) {
 }
 
 .item.client .item-twisty-container {
-    min-width: 14px !important;
-    height: 14px !important;
+    min-width: 16px !important;
+    height: 16px !important;
+    padding: 0 !important;
+    margin-inline: -1px 1px !important;
     background-image: url(chrome://userchrome/content/tree/tree-twisty-down.svg) !important;
+    background-position: center !important;
+    background-size: 14px !important;
     -moz-context-properties: fill, fill-opacity;
 }
 
@@ -295,12 +344,14 @@ treechildren::-moz-tree-twisty(open) {
 
 .sidebar-placesTreechildren::-moz-tree-cell-text {
     padding-right: 7px !important;
+    cursor: default !important;
 }
 
-.sidebar-placesTreechildren::-moz-tree-cell-text(selected),
-.sidebar-placesTreechildren::-moz-tree-image(selected),
-.sidebar-placesTreechildren::-moz-tree-twisty(selected) {
+.sidebar-placesTreechildren::-moz-tree-cell-text,
+.sidebar-placesTreechildren::-moz-tree-image,
+.sidebar-placesTreechildren::-moz-tree-twisty {
     color: var(--lwt-text-color) !important;
+    cursor: default !important;
 }
 
 .sidebar-placesTreechildren::-moz-tree-indentation {
@@ -334,7 +385,7 @@ treechildren::-moz-tree-twisty(open) {
 
     .content-header {
         appearance: none !important;
-        padding: 1px !important;
+        padding-inline: 1px !important;
         margin-top: -4px !important;
         border-bottom: 0px solid transparent !important;
         background-color: var(--ui-secondary-bg) !important;
@@ -345,7 +396,7 @@ treechildren::-moz-tree-twisty(open) {
         appearance: none !important;
         padding-inline-start: 7px !important;
         background-color: var(--ui-textbox-bgcolor) !important;
-        border-radius: 3px !important;
+        border-radius: var(--general-button-border-radius) !important;
         padding-top: 4px !important;
         padding-bottom: 4px !important;
     }
@@ -377,20 +428,16 @@ treechildren::-moz-tree-twisty(open) {
 
     .item-twisty-container,
     .item-icon-container {
-        margin-inline-start: 3px !important;
+        margin-inline-start: 0 !important;
     }
 
     .item-tabs-list .item-icon-container {
-        margin-inline-start: 16px !important;
+        margin-inline-start: 12px !important;
     }
 
-    .list {
-        margin-top: 2.5px !important;
-    }
-
-    .item.tab,
-    .item.tab * {
-        cursor: pointer !important;
+    .item-title-container {
+        border-radius: var(--general-button-border-radius) !important;
+        margin-inline: 8px !important;
     }
 
     .item.selected > .item-title-container:not(:hover) {

@@ -291,7 +291,8 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
         popupnotification,
         tooltip,
         panelview,
-        #main-menubar {
+        #main-menubar,
+        .sidebar-search-container {
             font-family: SF Pro Display, Segoe UI, sans-serif !important;
             font-kerning: normal !important;
         }
@@ -346,6 +347,10 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
 
         .popup-notification-body input[type="password"] {
             font-family: SFPro !important;
+        }
+
+        treechildren {
+            font: message-box !important;
         }
     }
 }
