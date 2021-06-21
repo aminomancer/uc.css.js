@@ -123,7 +123,8 @@
     padding-left: 16px;
 }
 
-.urlbarView-row[type="dynamic"][dynamicType="unitConversion"] .urlbarView-dynamic-unitConversion-action,
+.urlbarView-row[type="dynamic"][dynamicType="unitConversion"]
+    .urlbarView-dynamic-unitConversion-action,
 .urlbarView-row[type="dynamic"][dynamicType="calculator"] .urlbarView-dynamic-calculator-action {
     color: var(--urlbar-popup-action-color);
 }
@@ -137,14 +138,16 @@
     color: inherit;
 }
 
-.urlbarView-row[type="dynamic"][dynamicType="unitConversion"] .urlbarView-dynamic-unitConversion-output + .urlbarView-dynamic-unitConversion-action,
-.urlbarView-row[type="dynamic"][dynamicType="calculator"] .urlbarView-dynamic-calculator-input + .urlbarView-dynamic-calculator-action {
+.urlbarView-row[type="dynamic"][dynamicType="unitConversion"]
+    .urlbarView-dynamic-unitConversion-output
+    + .urlbarView-dynamic-unitConversion-action,
+.urlbarView-row[type="dynamic"][dynamicType="calculator"]
+    .urlbarView-dynamic-calculator-input
+    + .urlbarView-dynamic-calculator-action {
     margin-inline-start: 6px;
 }
 
-.urlbarView[actionoverride]
-    .urlbarView-row:is([type="switchtab"], [type="remotetab"])
-    .urlbarView-type-icon {
+.urlbarView[actionoverride] .urlbarView-row[type="switchtab"] .urlbarView-type-icon {
     background: url(chrome://userchrome/content/skin/forward.svg) no-repeat !important;
     background-size: 90% !important;
     background-position: 0px 1.5px !important;
@@ -313,7 +316,7 @@
 
 .urlbarView-row[dynamicType="calculator"]:hover .urlbarView-dynamic-calculator-action,
 .urlbarView-row[dynamicType="unitConversion"]:hover .urlbarView-dynamic-unitConversion-action {
-	visibility: visible !important;
+    visibility: visible !important;
 }
 
 .urlbarView-row .urlbarView-title {
@@ -414,7 +417,8 @@
     padding-left: 16px;
 }
 
-.urlbarView-favicon[src="moz-extension://cd4aad93-9726-49dd-a5cd-9e5f5c4d76f4/favicon.ico"] {
+.urlbarView-favicon[src="moz-extension://cd4aad93-9726-49dd-a5cd-9e5f5c4d76f4/favicon.ico"]
+{
     box-sizing: border-box !important;
     background: url(chrome://userchrome/content/engines/google.svg) no-repeat !important;
     width: 16px !important;
@@ -422,7 +426,8 @@
     padding-left: 16px;
 }
 
-.urlbarView-row:not([type="search"]) .urlbarView-favicon[src^="page-icon:https://en.wikipedia.org/"] {
+.urlbarView-row:not([type="search"]) .urlbarView-favicon[src^="page-icon:https://en.wikipedia.org/"]
+{
     box-sizing: border-box !important;
     background: url(chrome://userchrome/content/engines/wiki.svg) no-repeat center/contain !important;
     width: 16px !important;
@@ -436,7 +441,10 @@
     margin-inline: 0 6px !important;
 }
 
-.urlbarView-row[type="tabtosearch"]:not([selected], [show-action-text], :hover) > .urlbarView-row-inner > .urlbarView-no-wrap > .urlbarView-action {
+.urlbarView-row[type="tabtosearch"]:not([selected], [show-action-text], :hover)
+    > .urlbarView-row-inner
+    > .urlbarView-no-wrap
+    > .urlbarView-action {
     display: none;
 }
 
@@ -565,7 +573,7 @@
 }
 
 .urlbarView-row[label] {
-	overflow: revert !important;
+    overflow: revert !important;
 }
 
 .urlbarView-row-inner {
@@ -606,8 +614,12 @@
 }
 
 .urlbarView-row-inner.overflown .urlbarView-url {
-    mask-image: linear-gradient(to left, transparent, black 2em);
     max-width: -moz-available !important;
+    margin-inline-end: calc(var(--urlbar-icon-padding) + 2px);
+}
+
+.urlbarView-row-inner.overflown .urlbarView-url[overflow] {
+    mask-image: linear-gradient(to left, transparent, black 2em);
 }
 
 /* override firefox's built-in text wrapping */
@@ -665,4 +677,35 @@
     > .urlbarView-row[type="tip"]
     > .urlbarView-row-inner {
     flex-wrap: nowrap !important;
+}
+.urlbarView-results[overflow-handler="userChromeJS"]
+    .urlbarView-row:is([type="remotetab"], [sponsored])
+    > .urlbarView-row-inner {
+    flex-flow: column nowrap !important;
+    align-items: start !important;
+    justify-content: center !important;
+}
+
+.urlbarView-results[overflow-handler="userChromeJS"]
+    .urlbarView-row:is([type="remotetab"], [sponsored])
+    > .urlbarView-row-inner
+    .urlbarView-url {
+    max-width: -moz-available !important;
+    margin-inline-end: calc(var(--urlbar-icon-padding) + 2px);
+}
+
+.urlbarView-results[overflow-handler="userChromeJS"]
+    .urlbarView-row:is([type="remotetab"], [sponsored]):not([selected], :hover)
+    > .urlbarView-row-inner
+    > .urlbarView-url {
+    visibility: hidden !important;
+}
+
+.urlbarView-results[overflow-handler="userChromeJS"]
+    .urlbarView-row:is([type="remotetab"], [sponsored]):not([selected], :hover)
+    > .urlbarView-row-inner
+    .urlbarView-action {
+    position: absolute;
+    margin-top: 30px !important;
+    margin-inline-start: 48px !important;
 }

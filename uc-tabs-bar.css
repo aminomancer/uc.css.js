@@ -223,6 +223,11 @@ this sheet controls their appearance as well. */
     z-index: 5 !important;
 }
 
+#TabsToolbar .customization-target {
+    min-width: 0 !important;
+    overflow-x: clip !important;
+}
+
 :root:not([sizemode="normal"]) .arrowscrollbox-overflow-end-indicator,
 :root:not([sizemode="normal"])
     .tabbrowser-arrowscrollbox

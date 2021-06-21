@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Multi-line Urlbar Results
-// @version        1.0
+// @version        1.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    When a urlbar result's title overflows off the results panel, this moves its URL to a second line, underneath the title. Results that aren't overflowing are still single lines. This could be done without javascript, but I wanted the URL to be lined up with the title, not with the favicon. This requires some CSS from the end of uc-urlbar-results.css.
@@ -11,21 +11,21 @@
         const urlbarViewOverflowHandler = {
             bounds: windowUtils.getBoundsWithoutFlushing,
 
-            handleEvent(event) {
+            handleEvent(e) {
+                if (e.detail != 1 || !gURLBar.view?.isOpen) return;
                 if (
-                    event.detail == 1 &&
-                    event.target.classList.contains("urlbarView-title") &&
-                    gURLBar.view.isOpen
+                    e.target.classList.contains("urlbarView-title") ||
+                    (e.target.classList.contains("urlbarView-url") &&
+                        e.target.clientWidth / e.target.scrollWidth < 0.5)
                 )
-                    this.toggleOverflown(event);
+                    this.toggleOverflown(e);
             },
 
-            toggleOverflown(event) {
-                const inner = event.target.closest(".urlbarView-row-inner");
+            toggleOverflown(e) {
+                const inner = e.target.closest(".urlbarView-row-inner");
                 const url = inner.querySelector(".urlbarView-url");
                 const title = inner.querySelector(".urlbarView-title");
-
-                switch (event.type) {
+                switch (e.type) {
                     case "overflow":
                         url.style.marginInlineStart = `${
                             this.bounds(title).left - this.bounds(title.parentElement).left
@@ -43,11 +43,18 @@
                     const inner = row.firstElementChild;
                     const url = inner.querySelector(".urlbarView-url");
                     const title = inner.querySelector(".urlbarView-title");
-
-                    if (inner.classList.contains("overflown"))
+                    if (title.scrollWidth === title.clientWidth)
+                        inner.classList.remove("overflown");
+                    if (
+                        inner.classList.contains("overflown") ||
+                        row.getAttribute("type") === "remotetab" ||
+                        row.hasAttribute("sponsored")
+                    )
                         url.style.marginInlineStart = `${
                             this.bounds(title).left - this.bounds(title.parentElement).left
                         }px`;
+                    else url.style.removeProperty("margin-inline-start");
+                    row.toggleAttribute("hide-url", url.textContent === title.textContent);
                 }
             },
 
@@ -55,11 +62,21 @@
                 this.onResultsChanged();
             },
 
+            onQueryCancelled(_q) {
+                this.onResultsChanged();
+            },
+
+            onQueryResults(_q) {
+                this.onResultsChanged();
+            },
+
+            onQueryResultRemoved(_q) {
+                this.onResultsChanged();
+            },
+
             attachEvents() {
                 gURLBar.view._rows.setAttribute("overflow-handler", "userChromeJS");
-
                 gURLBar.view.controller.addQueryListener(this);
-
                 gURLBar.view._rows.addEventListener("overflow", this);
                 gURLBar.view._rows.addEventListener("underflow", this);
             },

@@ -427,6 +427,26 @@ toolbarpaletteitem > #urlbar-container :is(#page-action-buttons, #search-one-off
     transform: none !important;
 }
 
+#nav-bar[overflowing="true"] :is(.searchbar-engine-one-off-item, .addengine-item) {
+    min-width: 32px !important;
+    height: 32px !important;
+    padding: 2px !important;
+    color: var(--panel-description-color) !important;
+}
+
+#nav-bar[overflowing="true"]
+    :is(.searchbar-engine-one-off-item, .addengine-item):not([selected]):hover
+    > .button-box {
+    background-color: var(--arrowpanel-dimmed) !important;
+}
+
+#nav-bar[overflowing="true"]
+    :is(.searchbar-engine-one-off-item, .addengine-item)[selected]
+    > .button-box {
+    background-color: var(--arrowpanel-faint) !important;
+    color: var(--lwt-text-color) !important;
+}
+
 #nav-bar[overflowing="true"] #urlbar #page-action-buttons,
 #nav-bar[overflowing="true"] #urlbar #urlbar-input-container > .urlbar-icon {
     animation: none;

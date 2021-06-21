@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Nav-bar Toolbar Button Slider
-// @version        2.0
+// @version        2.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Wrap all toolbar buttons after #urlbar-container in a scrollable div. It can scroll horizontally through the buttons by scrolling up/down with a mousewheel, like the tab bar. You can change userChrome.toolbarSlider.width in about:config to make the container wider or smaller. If you choose 12, it'll be 12 buttons long. When the window gets *really* small, the slider disappears and the toolbar buttons are placed into the normal widget overflow panel. You can specify more buttons to exclude from the slider by adding their IDs (in quotes, separated by commas) to userChrome.toolbarSlider.excludeButtons in about:config. For example you might type ["bookmarks-menu-button", "downloads-button"] if you want those to stay outside of the slider. You can also decide whether to exclude flexible space springs from the slider by toggling userChrome.toolbarSlider.excludeFlexibleSpace in about:config. By default, springs are excluded. To scroll faster you can add a multiplier right before scrollByPixels is called, like scrollAmount = scrollAmount * 1.5 or something like that. Doesn't handle touch events yet since I don't have a touchpad to test it on. Let me know if you have any ideas though.
@@ -146,26 +146,27 @@
         // hook up the native toolbar customization component.
         let cuiListen = {
             onCustomizeStart() {
-                let isOverflowing = prefHandler.collapse && cNavBar.getAttribute("overflowing");
-                if (!isOverflowing) appendLoop(kids, cTarget);
+                let overflown = isOverflowing();
+                if (!overflown) appendLoop(kids, cTarget);
                 /* temporarily move the slider out of the way. we don't want to delete it since we only want to add listeners and observers once per window.
                 the slider needs to be out of the customization target during customization, or else we get a tiny bug where dragging a widget ahead of the empty slider causes the widget to teleport to the end. */
                 bin.appendChild(outer);
-                outer.style.display = isOverflowing ? "none" : "-moz-box";
+                outer.style.display = overflown ? "none" : "-moz-box";
             },
             async onCustomizeEnd() {
-                let isOverflowing = prefHandler.collapse && cNavBar.getAttribute("overflowing");
+                let overflown = isOverflowing();
                 let array = await convertToArray(widgets);
-                if (isOverflowing) {
+                if (overflown) {
                     wrapAll(array, cOverflow);
                     cOverflow.insertBefore(outer, cOverflow.firstElementChild);
                 } else wrapAll(array, inner);
-                outer.style.display = isOverflowing ? "none" : "-moz-box";
+                outer.style.display = overflown ? "none" : "-moz-box";
             },
             onWidgetOverflow(aNode, aContainer) {
                 if (aNode.ownerGlobal !== window) return;
                 if (aNode === outer && aContainer === cTarget) appendLoop(kids, cOverflow);
                 outer.style.display = "none";
+                reOrder();
             },
             async onWidgetUnderflow(aNode, aContainer) {
                 if (aNode.ownerGlobal !== window) return;
@@ -174,6 +175,7 @@
                     backToNavbar(array, inner);
                     outer.style.display = "-moz-box";
                 }
+                reOrder();
             },
             onWidgetAfterDOMChange(aNode, aNextNode, aContainer, aWasRemoval) {
                 // if the dom change was the removal of a toolbar button node, do nothing, unless we hid it before removal via context menu.
@@ -206,6 +208,10 @@
                     : aWindow.CustomizationHandler.isCustomizing() && wrapAll(domArray, inner);
             },
         };
+
+        function isOverflowing() {
+            return !!(prefHandler.collapse && cNavBar.getAttribute("overflowing"));
+        }
 
         async function cuiArray() {
             /* get all the widgets in the nav-bar, filter out any nullish/falsy items, then call the big boy filter.
@@ -399,6 +405,7 @@
         // pick up any nodes that belong in the slider but aren't in it.
         async function pickUpOrphans(aNode) {
             let array = await cuiArray();
+            let container = isOverflowing() ? cOverflow : inner;
             array.forEach((item, i) => {
                 /* check that the node which changed is in the customizable widgets list, since the ordering logic relies on the widgets list.
                 we use forWindow when selecting nodes from the widgets list, since each widget has an instance for every window it's visible in.
@@ -408,7 +415,7 @@
                     /* if the node that changed is the last item in the array, meaning it's *supposed* to be the last in order, then we can't use insertBefore() since there's nothing meant to be after it. we can't only use after() either since it won't work for the first node. so we check for its intended position... */
                     i + 1 === array?.length
                         ? array[i - 1].forWindow(window).node.after(aNode) // and if it's the last item, we use the after() method to put it after the node corresponding to the previous widget.
-                        : inner.insertBefore(aNode, array[i + 1].forWindow(window).node); // for all the other widgets we just insert their nodes before the node corresponding to the next widget.
+                        : container.insertBefore(aNode, array[i + 1].forWindow(window).node); // for all the other widgets we just insert their nodes before the node corresponding to the next widget.
             });
         }
 
@@ -427,6 +434,7 @@
         its only job is to check that the order of DOM nodes in the slider container matches the order of widgets in CustomizableUI. and if not, reorder it so that it does match. */
         async function reOrder() {
             let array = await cuiArray();
+            let container = isOverflowing() ? cOverflow : inner;
             // for every valid item in the widgets list...
             array.forEach((item, i) => {
                 /* if the NODE's next sibling does not match the next WIDGET's node, then we need to move the node to where it belongs. basically the DOM order is supposed to match the widget array's order.
@@ -444,7 +452,7 @@
                     since there is no next widget, we're telling the engine to insert the node before undefined.
                     which always results in inserting the node at the end. so it ends up where it should be anyway.
                     and this is faster than actually checking if it's the last node for every iteration of the loop. */
-                    inner.insertBefore(
+                    container.insertBefore(
                         item.forWindow(window)?.node,
                         array[i + 1]?.forWindow(window).node
                     );
