@@ -280,12 +280,14 @@ this sheet controls their appearance as well. */
 
 .titlebar-button > .toolbarbutton-icon,
 #window-controls > toolbarbutton > .toolbarbutton-icon {
+    appearance: none !important;
     width: 15.3px !important;
     height: 15.3px !important;
     stroke: none !important;
 }
 
 .titlebar-buttonbox {
+    appearance: none !important;
     margin-right: 6px !important;
     margin-left: 0 !important;
 }
@@ -297,6 +299,7 @@ this sheet controls their appearance as well. */
 
 .titlebar-min,
 #minimize-button {
+    appearance: none !important;
     padding: 0px !important;
     padding-left: 7px !important;
     padding-right: 7px !important;
@@ -318,6 +321,7 @@ this sheet controls their appearance as well. */
 .titlebar-max,
 .titlebar-restore,
 #restore-button {
+    appearance: none !important;
     padding: 0px !important;
     padding-left: 7px !important;
     padding-right: 7px !important;
@@ -344,6 +348,7 @@ this sheet controls their appearance as well. */
 
 .titlebar-close,
 #close-button {
+    appearance: none !important;
     padding: 0px !important;
     padding-left: 7px !important;
     padding-right: 7px !important;

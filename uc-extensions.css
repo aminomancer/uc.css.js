@@ -373,6 +373,15 @@ we need to invert the icon differently since we don't want to invert the backgro
     }
 }
 
+/* reddit enhancement suite urlbar page action button */
+#pageAction-urlbar-jid1-xufzosoflzsoxg_jetpack {
+    list-style-image: url(chrome://userchrome/content/material/filter-css.svg) !important;
+}
+
+#pageAction-urlbar-jid1-xufzosoflzsoxg_jetpack[tooltiptext="Subreddit Style Off"] {
+    list-style-image: url(chrome://userchrome/content/material/filter-css-blocked.svg) !important;
+}
+
 /* replace extension icon with material icon */
 #addons-notification-icon,
 #add-ons-button,
