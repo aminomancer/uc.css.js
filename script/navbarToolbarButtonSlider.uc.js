@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name           Nav-bar Toolbar Button Slider
-// @version        2.1
+// @version        2.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
-// @description    Wrap all toolbar buttons after #urlbar-container in a scrollable div. It can scroll horizontally through the buttons by scrolling up/down with a mousewheel, like the tab bar. You can change userChrome.toolbarSlider.width in about:config to make the container wider or smaller. If you choose 12, it'll be 12 buttons long. When the window gets *really* small, the slider disappears and the toolbar buttons are placed into the normal widget overflow panel. You can specify more buttons to exclude from the slider by adding their IDs (in quotes, separated by commas) to userChrome.toolbarSlider.excludeButtons in about:config. For example you might type ["bookmarks-menu-button", "downloads-button"] if you want those to stay outside of the slider. You can also decide whether to exclude flexible space springs from the slider by toggling userChrome.toolbarSlider.excludeFlexibleSpace in about:config. By default, springs are excluded. To scroll faster you can add a multiplier right before scrollByPixels is called, like scrollAmount = scrollAmount * 1.5 or something like that. Doesn't handle touch events yet since I don't have a touchpad to test it on. Let me know if you have any ideas though.
+// @description    Wrap all toolbar buttons in a scrollable div. It can scroll horizontally through the buttons by scrolling up/down with a mousewheel, like the tab bar. By default, it wraps all toolbar buttons to the right of the urlbar. You can edit userChrome.toolbarSlider.wrapButtonsRelativeToUrlbar in about:config to change this: a value of "left" will wrap all buttons to the left of the urlbar, and "all" will wrap all buttons. You can change userChrome.toolbarSlider.width to make the container wider or smaller. If you choose 12, it'll be 12 buttons long. When the window gets *really* small, the slider disappears and the toolbar buttons are placed into the normal widget overflow panel. You can specify more buttons to exclude from the slider by adding their IDs (in quotes, separated by commas) to userChrome.toolbarSlider.excludeButtons in about:config. For example you might type ["bookmarks-menu-button", "downloads-button"] if you want those to stay outside of the slider. You can also decide whether to exclude flexible space springs from the slider by toggling userChrome.toolbarSlider.excludeFlexibleSpace in about:config. By default, springs are excluded. To scroll faster you can add a multiplier right before scrollByPixels is called, like scrollAmount = scrollAmount * 1.5 or something like that. Doesn't handle touch events yet since I don't have a touchpad to test it on. Let me know if you have any ideas though.
 // ==/UserScript==
 
 (() => {
@@ -68,6 +68,7 @@
         const excludedPref = "userChrome.toolbarSlider.excludeButtons";
         const springPref = "userChrome.toolbarSlider.excludeFlexibleSpace";
         const collapsePref = "userChrome.toolbarSlider.collapseSliderOnOverflow";
+        const directionPref = "userChrome.toolbarSlider.wrapButtonsRelativeToUrlbar";
         let outer = document.createElement("toolbaritem");
         let inner = document.createElement("hbox");
         let kids = inner.children;
@@ -88,6 +89,9 @@
                 prefsvc.removeObserver(widthPref, this);
                 prefsvc.removeObserver(collapsePref, this);
             },
+            get widgets() {
+                return cTarget.children;
+            },
             async observe(sub, _top, pref) {
                 let value = this.getPref(sub, pref);
                 switch (pref) {
@@ -106,11 +110,19 @@
                             outer.setAttribute("overflows", value);
                             if (cNavBar.getAttribute("overflowing") && !value) {
                                 await cNavBar.overflowable._moveItemsBackToTheirOrigin(true);
-                                let array = await convertToArray(widgets);
+                                let array = await convertToArray(this.widgets);
                                 backToNavbar(array, inner);
                                 outer.style.display = "-moz-box";
                             }
                         }
+                        break;
+                    case directionPref:
+                        this.direction = value;
+                        let overflown = isOverflowing();
+                        if (overflown) break;
+                        unwrapAll();
+                        let array = await convertToArray(this.widgets);
+                        wrapAll(array, inner);
                         break;
                 }
             },
@@ -133,13 +145,15 @@
                 if (!prefsvc.prefHasUserValue(excludedPref))
                     prefsvc.setStringPref(excludedPref, "[]");
                 if (!prefsvc.prefHasUserValue(springPref)) prefsvc.setBoolPref(springPref, true);
+                if (!prefsvc.prefHasUserValue(directionPref))
+                    prefsvc.setStringPref(directionPref, "right");
                 this.observe(prefsvc, null, widthPref);
                 this.observe(prefsvc, null, collapsePref);
+                this.direction = prefsvc.getStringPref(directionPref, "right");
             },
             attachListeners() {
                 window.addEventListener("unload", this, false);
-                prefsvc.addObserver(widthPref, this);
-                prefsvc.addObserver(collapsePref, this);
+                prefsvc.addObserver("userChrome.toolbarSlider", this);
             },
         };
 
@@ -147,7 +161,7 @@
         let cuiListen = {
             onCustomizeStart() {
                 let overflown = isOverflowing();
-                if (!overflown) appendLoop(kids, cTarget);
+                if (!overflown) unwrapAll();
                 /* temporarily move the slider out of the way. we don't want to delete it since we only want to add listeners and observers once per window.
                 the slider needs to be out of the customization target during customization, or else we get a tiny bug where dragging a widget ahead of the empty slider causes the widget to teleport to the end. */
                 bin.appendChild(outer);
@@ -340,15 +354,28 @@
                         : !outer.open || (outer.open = false);
         });
 
+        function getRelToUrlbar(index, array) {
+            let urlbarIdx =
+                array.indexOf(urlbar) > -1
+                    ? array.indexOf(urlbar)
+                    : array.findIndex((w) => w.id === "urlbar-container");
+            switch (prefHandler.direction) {
+                case "right":
+                    return urlbarIdx < index;
+                case "left":
+                    return urlbarIdx > index;
+                case "all":
+                    return true;
+            }
+        }
+
         // convert the available buttons into an array and filter out all the undesirable buttons. used before wrapping
         async function convertToArray(buttons) {
-            domArray = Array.from(buttons).filter((item, index, array) => {
-                return array.indexOf(urlbar) < index && filterWidgets(item);
-            });
+            domArray = Array.from(buttons).filter(filterWidgets);
             return domArray;
         }
 
-        function filterWidgets(item) {
+        function filterWidgets(item, index, array) {
             // check if window is private and widget is disallowed in private browsing. if so, filter it out.
             if (item.showInPrivateBrowsing === false && PrivateBrowsingUtils.isWindowPrivate(this))
                 return false;
@@ -380,7 +407,7 @@
             // exclude buttons defined by user preference
             let excludedButtons = JSON.parse(prefsvc.getStringPref(excludedPref, "[]"));
             if (excludedButtons.some((str) => str === item.id)) return false;
-            return true;
+            return getRelToUrlbar(index, array);
         }
 
         function wrapAll(buttons, container, first = false) {
@@ -394,6 +421,18 @@
             though for this reason, all the buttons you intend to collect should be consecutive, obviously.
             they don't need to be, but if they aren't, the slider may change the actual widget order, which persists through sessions. */
             parent.insertBefore(outer, previousSibling.nextSibling);
+        }
+
+        function unwrapAll() {
+            let orderedWidgets = CustomizableUI.getWidgetsInArea("nav-bar").filter(Boolean);
+            orderedWidgets.forEach((w, i) => {
+                let node = w.forWindow(window).node;
+                let prevWidget = orderedWidgets[i - 1];
+                if (prevWidget) {
+                    let prevNode = prevWidget.forWindow(window).node;
+                    prevNode.after(node);
+                } else cTarget.appendChild(node);
+            });
         }
 
         // move all the passed buttons back to the slider, and move the slider back to the customization target.

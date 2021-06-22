@@ -256,10 +256,6 @@ i haven't tested this on every scaling factor, if it makes things worse on your 
     box-shadow: 0px 0px 8px -5px hsla(240, 4%, 0%, 0.5), 0px 0px 15px 0px hsla(0, 0%, 0%, 0.2) !important;
 }
 
-#nav-bar-customization-target {
-    overflow: visible !important;
-}
-
 toolbar .toolbarbutton-1:not([disabled])[open]:hover > .toolbarbutton-icon {
     background-color: var(--toolbarbutton-active-background) !important;
 }
