@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Nav-bar Toolbar Button Slider
-// @version        2.4
+// @version        2.5
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Wrap all toolbar buttons in a scrollable div. It can scroll horizontally through the buttons by scrolling up/down with a mousewheel, like the tab bar. By default, it wraps all toolbar buttons to the right of the urlbar. You can edit userChrome.toolbarSlider.wrapButtonsRelativeToUrlbar in about:config to change this: a value of "left" will wrap all buttons to the left of the urlbar, and "all" will wrap all buttons. You can change userChrome.toolbarSlider.width to make the container wider or smaller. If you choose 12, it'll be 12 buttons long. When the window gets *really* small, the slider disappears and the toolbar buttons are placed into the normal widget overflow panel. You can specify more buttons to exclude from the slider by adding their IDs (in quotes, separated by commas) to userChrome.toolbarSlider.excludeButtons in about:config. For example you might type ["bookmarks-menu-button", "downloads-button"] if you want those to stay outside of the slider. You can also decide whether to exclude flexible space springs from the slider by toggling userChrome.toolbarSlider.excludeFlexibleSpace in about:config. By default, springs are excluded. To scroll faster you can add a multiplier right before scrollByPixels is called, like scrollAmount = scrollAmount * 1.5 or something like that. Doesn't handle touch events yet since I don't have a touchpad to test it on. Let me know if you have any ideas though.
@@ -438,7 +438,7 @@
                 return;
             }
             let parent = buttons[0].parentElement;
-            let { previousSibling } = buttons[0];
+            let { previousElementSibling } = buttons[0];
             appendLoop(buttons, container);
             // on first run put the inner container in the outer container
             if (first) outer.appendChild(container);
@@ -446,7 +446,12 @@
             this way the container wraps the buttons "in place," wherever they happen to be.
             though for this reason, all the buttons you intend to collect should be consecutive, obviously.
             they don't need to be, but if they aren't, the slider may change the actual widget order, which persists through sessions. */
-            parent.insertBefore(outer, previousSibling.nextSibling);
+            parent.insertBefore(
+                outer,
+                !previousElementSibling
+                    ? parent.firstElementChild
+                    : previousElementSibling?.nextElementSibling
+            );
         }
 
         function unwrapAll() {
@@ -459,12 +464,6 @@
                     prevNode.after(node);
                 } else cTarget.appendChild(node);
             });
-        }
-
-        // move all the passed buttons back to the slider, and move the slider back to the customization target.
-        function backToNavbar(buttons, container) {
-            buttons.forEach((val) => container.appendChild(val));
-            cTarget.appendChild(outer);
         }
 
         // pick up any nodes that belong in the slider but aren't in it.
@@ -666,8 +665,19 @@
             outer.addEventListener("scrollend", outer.on_Scrollend);
         }
 
+        function registerSheet() {
+            const css = `#nav-bar-customization-target>#nav-bar-toolbarbutton-slider-container:first-child,#nav-bar-customization-target>toolbarpaletteitem#nav-bar-toolbarbutton-slider-container:first-child>:is(toolbarbutton,toolbaritem){padding-inline-start:unset;margin-inline-start:calc(var(--toolbar-start-end-padding) - var(--toolbarbutton-outer-padding));}`;
+            let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
+                Ci.nsIStyleSheetService
+            );
+            let uri = makeURI("data:text/css;charset=UTF=8," + encodeURIComponent(css));
+            if (sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) return;
+            sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
+        }
+
         async function init() {
             prefHandler.initialSet();
+            registerSheet();
             let array = await convertToArray(widgets); // wait for nodes to be filtered.
             wrapAll(array, inner, true); // first wrap call
             setupScroll();
