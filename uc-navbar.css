@@ -586,6 +586,12 @@ link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infob
     text-overflow: ellipsis !important;
 }
 
+link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-content .notification-message
+{
+    padding-block: 0 !important;
+    min-height: auto !important;
+}
+
 link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar > .spacer
 {
     flex-grow: 0.1 !important;
@@ -606,6 +612,7 @@ link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infob
 link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-content .notification-button-container > .notification-button.small
 {
     margin: 0 !important;
+    font-weight: var(--uc-font-weight-bold) !important;
 }
 
 link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar > .icon

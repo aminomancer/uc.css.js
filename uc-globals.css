@@ -43,7 +43,7 @@ tooltip {
     --blur-bgcolor: hsla(233, 39%, 9%, 0.58);
     --transparent-img-background: center/16px repeat hsla(0, 0%, 80%) url(chrome://userchrome/content/checker.svg);
     --general-button-border-radius: 2.6px;
-    --dialog-bgcolor: hsla(240, 5.9%, 6.7%, 0.6);
+    --dialog-bgcolor: hsla(240, 5.9%, 6.7%, 0.85);
     --dialog-box-bgcolor: hsla(232, 100%, 75%, 8%);
     --dialog-box-bgcolor-dim: hsla(240, 100%, 70%, 3%);
     --dialog-box-border-color: hsla(232, 100%, 85%, 0.2);
