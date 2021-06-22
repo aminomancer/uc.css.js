@@ -436,85 +436,85 @@ menuitem.customize-context-reportExtension:before {
 }
 
 #context_moveToStart:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/skin/back.svg) !important;
+    background-image: url(chrome://userchrome/content/skin/back.svg);
 }
 
 #context_moveToEnd:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/skin/forward.svg) !important;
+    background-image: url(chrome://userchrome/content/skin/forward.svg);
 }
 
 :is(#context_openTabInWindow, #menu_newNavigator):not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/skin/new-window.svg) !important;
+    background-image: url(chrome://userchrome/content/skin/new-window.svg);
 }
 
 #context-video-saveimage:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/notifications/canvas.svg) !important;
+    background-image: url(chrome://userchrome/content/notifications/canvas.svg);
 }
 
 #context-media-pause:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/pauseButton.svg) !important;
+    background-image: url(chrome://userchrome/content/pauseButton.svg);
 }
 
 #context-media-play:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/playButton.svg) !important;
+    background-image: url(chrome://userchrome/content/playButton.svg);
 }
 
 #context-media-mute:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/audioMutedButton.svg) !important;
+    background-image: url(chrome://userchrome/content/audioMutedButton.svg);
 }
 
 #context-media-unmute:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/audioUnmutedButton.svg) !important;
+    background-image: url(chrome://userchrome/content/audioUnmutedButton.svg);
 }
 
 #context-video-fullscreen:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/fullscreenEnterButton.svg) !important;
+    background-image: url(chrome://userchrome/content/fullscreenEnterButton.svg);
 }
 
 #context-leave-dom-fullscreen:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/fullscreenExitButton.svg) !important;
+    background-image: url(chrome://userchrome/content/fullscreenExitButton.svg);
 }
 
 #context-media-playbackrate:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/performance.svg) !important;
+    background-image: url(chrome://userchrome/content/performance.svg);
 }
 
 #context-viewvideo:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/skin/tab-play.svg) !important;
+    background-image: url(chrome://userchrome/content/skin/tab-play.svg);
 }
 
 :is(#context-media-showcontrols, #context-media-hidecontrols):not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/material/tune.svg) !important;
+    background-image: url(chrome://userchrome/content/material/tune.svg);
 }
 
 #context-showonlythisframe:not(.menuitem-iconic):before,
 #contentAreaContextMenu #frame:not(.menuitem-iconic):before {
-    fill-opacity: 0.3 !important;
-    background-image: url(chrome://userchrome/content/devtools/command-frames.svg) !important;
+    fill-opacity: 0.3;
+    background-image: url(chrome://userchrome/content/devtools/command-frames.svg);
 }
 
 :is(#context-printframe, #context-print-selection, #menu_print):not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/print.svg) !important;
+    background-image: url(chrome://userchrome/content/print.svg);
 }
 
 #menu_printPreview:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/show-password.svg) !important;
+    background-image: url(chrome://userchrome/content/show-password.svg);
 }
 
 #menu_printSetup:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/skin/readerMode.svg) !important;
+    background-image: url(chrome://userchrome/content/skin/readerMode.svg);
 }
 
 #menu_importFromAnotherBrowser:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/skin/import.svg) !important;
+    background-image: url(chrome://userchrome/content/skin/import.svg);
 }
 
 #context-frameOsPid:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/devtools/tool-memory.svg) !important;
+    background-image: url(chrome://userchrome/content/devtools/tool-memory.svg);
 }
 
 :is(#context-reloadframe, #context-reload, #context-reloadimage):not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/skin/reload.svg) !important;
+    background-image: url(chrome://userchrome/content/skin/reload.svg);
 }
 
 #context-inspect:not(.menuitem-iconic):before {
@@ -528,62 +528,62 @@ menuitem.customize-context-reportExtension:before {
 
 /* or just shorten the label */
 #context-inspect-a11y:not(.menuitem-iconic):before {
-    background-position: left center !important;
-    content: "Inspect Accessibility" !important;
-    padding-inline-start: 22px !important;
-    background-image: url(chrome://userchrome/content/devtools/tool-accessibility.svg) !important;
+    background-position: left center;
+    content: "Inspect Accessibility";
+    padding-inline-start: 22px;
+    background-image: url(chrome://userchrome/content/devtools/tool-accessibility.svg);
 }
 
 #context-inspect-a11y .menu-text {
-    visibility: collapse !important;
+    visibility: collapse;
 }
 
 :is(#context-viewframesource, #context-viewpartialsource-selection, #context-viewsource):not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/devtools/tool-dom.svg) !important;
+    background-image: url(chrome://userchrome/content/devtools/tool-dom.svg);
 }
 
 menuitem#menu_openDownloads:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/downloads/downloads.svg) !important;
+    background-image: url(chrome://userchrome/content/downloads/downloads.svg);
 }
 
 menuitem#menu_openAddons:not(.menuitem-iconic):before {
-    background-image: url(chrome://browser/content/extension.svg) !important;
+    background-image: url(chrome://browser/content/extension.svg);
 }
 
 menuitem:is(#sync-setup, #sync-unverifieditem):not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/fxa/avatar.svg) !important;
+    background-image: url(chrome://userchrome/content/fxa/avatar.svg);
 }
 
 menuitem#sync-reauthitem:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/fxa/avatar-alert.svg) !important;
+    background-image: url(chrome://userchrome/content/fxa/avatar-alert.svg);
 }
 
 menuitem:is(#sync-enable, #sync-syncnowitem):not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/skin/sync.svg) !important;
+    background-image: url(chrome://userchrome/content/skin/sync.svg);
 }
 
 menu#webDeveloperMenu:not(.menu-iconic):before {
-    background-image: url(chrome://userchrome/content/skin/developer.svg) !important;
+    background-image: url(chrome://userchrome/content/skin/developer.svg);
 }
 
 :is(#context-viewframeinfo, #context-viewinfo, #context-viewimageinfo, #menu_pageInfo):not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/info-filled.svg) !important;
+    background-image: url(chrome://userchrome/content/info-filled.svg);
 }
 
 menuitem#menu_preferences:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/settings.svg) !important;
+    background-image: url(chrome://userchrome/content/settings.svg);
 }
 
 :is(#context-setDesktopBackground, #context-viewbgimage):not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/notifications/canvas.svg) !important;
+    background-image: url(chrome://userchrome/content/notifications/canvas.svg);
 }
 
 #context-savepage:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/document.svg) !important;
+    background-image: url(chrome://userchrome/content/document.svg);
 }
 
 :is(#context-sendlinktodevice, #context-sendpagetodevice):not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/skin/send-to-device.svg) !important;
+    background-image: url(chrome://userchrome/content/skin/send-to-device.svg);
 }
 
 :is(#context-selectall, #menu_selectAll):not(.menuitem-iconic):before,
@@ -592,36 +592,36 @@ menuitem#menu_preferences:not(.menuitem-iconic):before {
 }
 
 :is(#context-sendaudio, #context-sendimage, #context-sendvideo, #menu_sendLink):not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/skin/mail.svg) !important;
+    background-image: url(chrome://userchrome/content/skin/mail.svg);
 }
 
 :is(#context-savevideo, #context-saveaudio, #context-saveframe, #context-saveimage, #context-savelink, #menu_savePage):not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/skin/save.svg) !important;
+    background-image: url(chrome://userchrome/content/skin/save.svg);
 }
 
 #menu_openFile:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/skin/open.svg) !important;
+    background-image: url(chrome://userchrome/content/skin/open.svg);
 }
 
 #context-savelinktopocket:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/skin/pocket.svg) !important;
+    background-image: url(chrome://userchrome/content/skin/pocket.svg);
 }
 
 #context-pocket:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/skin/pocket.svg) !important;
+    background-image: url(chrome://userchrome/content/skin/pocket.svg);
 }
 
 #context-take-screenshot:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/devtools/command-screenshot.svg) !important;
+    background-image: url(chrome://userchrome/content/devtools/command-screenshot.svg);
 }
 
 #context-viewimage:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/notifications/canvas.svg) !important;
+    background-image: url(chrome://userchrome/content/notifications/canvas.svg);
 }
 
 :is(#context-copyimage-contents, #context-copy, #menu_copy, #placesContext_copy):not(.menuitem-iconic):before,
 .textbox-contextmenu menuitem[label="Copy"]:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/skin/edit-copy.svg) !important;
+    background-image: url(chrome://userchrome/content/skin/edit-copy.svg);
 }
 
 :is(#placesContext_show_bookmark\:info, #placesContext_show_folder\:info, #placesContext_show\:info):not(.menuitem-iconic):before {
@@ -630,12 +630,12 @@ menuitem#menu_preferences:not(.menuitem-iconic):before {
 
 :is(#context-cut, #menu_cut, #placesContext_cut):not(.menuitem-iconic):before,
 .textbox-contextmenu menuitem[label="Cut"]:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/skin/edit-cut.svg) !important;
+    background-image: url(chrome://userchrome/content/skin/edit-cut.svg);
 }
 
 :is(#context-paste, #menu_paste, #placesContext_paste, #placesContext_paste_group):not(.menuitem-iconic):before,
 .textbox-contextmenu menuitem[label="Paste"]:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/skin/edit-paste.svg) !important;
+    background-image: url(chrome://userchrome/content/skin/edit-paste.svg);
 }
 
 .textbox-contextmenu
@@ -646,23 +646,23 @@ menuitem#menu_preferences:not(.menuitem-iconic):before {
 :is(#placesContext_deleteBookmark, #placesContext_deleteFolder, #placesContext_delete, #placesContext_delete_history):not(.menuitem-iconic):before,
 :is(#context-delete, #menu_delete):not(.menuitem-iconic):before,
 .textbox-contextmenu menuitem[label="Delete"]:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/delete.svg) !important;
+    background-image: url(chrome://userchrome/content/delete.svg);
 }
 
 .searchbar-clear-history:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/devtools/clear.svg) !important;
+    background-image: url(chrome://userchrome/content/devtools/clear.svg);
 }
 
 #context-copyemail:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/skin/mail.svg) !important;
+    background-image: url(chrome://userchrome/content/skin/mail.svg);
 }
 
 :is(#context-copyvideourl, #context-copyaudiourl, #context-copyimage, #context-copylink, #menu_openLocation):not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/skin/link.svg) !important;
+    background-image: url(chrome://userchrome/content/skin/link.svg);
 }
 
 :is(#context-bookmarkframe, #context-bookmarklink):not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/skin/add-bookmark.svg) !important;
+    background-image: url(chrome://userchrome/content/skin/add-bookmark.svg);
 }
 
 :is(#placesContext_openBookmarkContainer\:tabs, #placesContext_openBookmarkLinks\:tabs):not(.menuitem-iconic):before {
@@ -670,33 +670,33 @@ menuitem#menu_preferences:not(.menuitem-iconic):before {
 }
 
 :is(#context-openframeintab, #context-openlinkintab, #context_openANewTab, #menu_newNavigatorTab, #placesContext_open\:newtab):not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/skin/new-tab.svg) !important;
+    background-image: url(chrome://userchrome/content/skin/new-tab.svg);
 }
 
 :is(#context-openlinkinunloadedtab, #placesContext_open\:unloaded, #placesContext_openContainer\:unloaded, #placesContext_openLinks\:unloaded, #menu_FileQuitItem):not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/skin/quit.svg) !important;
+    background-image: url(chrome://userchrome/content/skin/quit.svg);
 }
 
 :is(#context-openlinkincurrent, #placesContext_open):not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/skin/tab.svg) !important;
+    background-image: url(chrome://userchrome/content/skin/tab.svg);
 }
 
 #bookmark-menu-container_robwu_nl-menuitem-_bookmark-menu-item:not(.menuitem-iconic):before,
 #placesContext > :is(menu, menuitem)[label="Open in a New Container Tab"]:not(.menuitem-iconic):before,
 #context-openlinkincontainertab:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/skin/container-go.svg) !important;
+    background-image: url(chrome://userchrome/content/skin/container-go.svg);
 }
 
 :is(#context-openlinkinusercontext-menu, #menu_newUserContext):not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/skin/container-go.svg) !important;
+    background-image: url(chrome://userchrome/content/skin/container-go.svg);
 }
 
 :is(#context-openframe, #context-openlink, #placesContext_open\:newwindow):not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/skin/new-window.svg) !important;
+    background-image: url(chrome://userchrome/content/skin/new-window.svg);
 }
 
 :is(#context-openlinkprivate, #context-searchselect-private, #menu_newPrivateWindow, #placesContext_open\:newprivatewindow):not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/skin/privateBrowsing.svg) !important;
+    background-image: url(chrome://userchrome/content/skin/privateBrowsing.svg);
 }
 
 :is(#placesContext_new\:bookmark, #placesContext_createBookmark):not(.menuitem-iconic):before {
@@ -712,42 +712,42 @@ menuitem#menu_preferences:not(.menuitem-iconic):before {
 }
 
 :is(#context-searchselect, #menu_find):not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/search-glass.svg) !important;
+    background-image: url(chrome://userchrome/content/search-glass.svg);
 }
 
 #menu_findAgain:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/find-next-arrow.svg) !important;
+    background-image: url(chrome://userchrome/content/find-next-arrow.svg);
 }
 
 menuitem#textfieldDirection-swap:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/material/textdirection.svg) !important;
+    background-image: url(chrome://userchrome/content/material/textdirection.svg);
 }
 
 #placesContext_sortBy\:name:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/skin/sort.svg) !important;
+    background-image: url(chrome://userchrome/content/skin/sort.svg);
 }
 
 :is(#context-undo, #context_undoCloseTab, #menu_undo, #undobookmarksmenuUndo):not(.menuitem-iconic):before,
 .textbox-contextmenu menuitem[label="Undo"]:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/undo.svg) !important;
+    background-image: url(chrome://userchrome/content/undo.svg);
 }
 
 :is(#context-redo, #menu_redo, #undobookmarksmenuRedo):not(.menuitem-iconic):before,
 .textbox-contextmenu menuitem[label="Redo"]:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/undo.svg) !important;
+    background-image: url(chrome://userchrome/content/undo.svg);
     transform: rotate(180deg);
 }
 
 #placesContext_deleteHost:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/skin/forget.svg) !important;
+    background-image: url(chrome://userchrome/content/skin/forget.svg);
 }
 
 #context-keywordfield:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/devtools/filter.svg) !important;
+    background-image: url(chrome://userchrome/content/devtools/filter.svg);
 }
 
 #context_reopenInContainer:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/skin/container-go.svg) !important;
+    background-image: url(chrome://userchrome/content/skin/container-go.svg);
 }
 
 :is(#context_reloadTab, #context_reloadSelectedTabs):not(.menuitem-iconic):before {
@@ -755,11 +755,11 @@ menuitem#textfieldDirection-swap:not(.menuitem-iconic):before {
 }
 
 :is(#context_toggleMuteTab, #context_toggleMuteSelectedTabs):not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/tab-audio-muted.svg) !important;
+    background-image: url(chrome://userchrome/content/tab-audio-muted.svg);
 }
 
 :is(#context_toggleMuteTab, #context_toggleMuteSelectedTabs)[muted="true"]:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/tab-audio-playing.svg) !important;
+    background-image: url(chrome://userchrome/content/tab-audio-playing.svg);
 }
 
 :is(#context_pinTab, #context_pinSelectedTabs):not(.menuitem-iconic):before {
@@ -813,7 +813,7 @@ menuitem#textfieldDirection-swap:not(.menuitem-iconic):before {
 }
 
 :is(#context_closeTab, #menu_closeWindow):not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/skin/stop.svg) !important;
+    background-image: url(chrome://userchrome/content/skin/stop.svg);
 }
 
 menuitem#menu_devToolbox:not(.menuitem-iconic, [checked="true"]):before {
@@ -824,24 +824,24 @@ menuitem#menu_devToolbox:not(.menuitem-iconic, [checked="true"]):before {
 }
 
 menuitem#menu_taskManager:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/devtools/tool-profiler.svg) !important;
+    background-image: url(chrome://userchrome/content/devtools/tool-profiler.svg);
 }
 
 menuitem#menu_devtools_remotedebugging:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/material/remote.svg) !important;
+    background-image: url(chrome://userchrome/content/material/remote.svg);
 }
 
 menuitem#menu_browserToolbox:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/skin/toolbox.svg) !important;
+    background-image: url(chrome://userchrome/content/skin/toolbox.svg);
 }
 
 menuitem#menu_browserContentToolbox:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/devtools/command-frames.svg) !important;
-    fill-opacity: 0 !important;
+    background-image: url(chrome://userchrome/content/devtools/command-frames.svg);
+    fill-opacity: 0;
 }
 
 menuitem#menu_browserConsole:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/devtools/command-console.svg) !important;
+    background-image: url(chrome://userchrome/content/devtools/command-console.svg);
 }
 
 menuitem#menu_responsiveUI:not(.menuitem-iconic, [checked="true"]):before {
@@ -853,19 +853,19 @@ menuitem#menu_responsiveUI:not(.menuitem-iconic, [checked="true"]):before {
 }
 
 menuitem#menu_eyedropper:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/devtools/command-eyedropper.svg) !important;
+    background-image: url(chrome://userchrome/content/devtools/command-eyedropper.svg);
 }
 
 menuitem#menu_pageSource:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/devtools/tool-dom.svg) !important;
+    background-image: url(chrome://userchrome/content/devtools/tool-dom.svg);
 }
 
 menuitem#extensionsForDevelopers:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/mozilla-logo.svg) !important;
+    background-image: url(chrome://userchrome/content/mozilla-logo.svg);
 }
 
 menuitem#enableDeveloperTools:not(.menuitem-iconic):before {
-    background-image: url(chrome://userchrome/content/skin/developer.svg) !important;
+    background-image: url(chrome://userchrome/content/skin/developer.svg);
 }
 
 #discardTab:not(.menuitem-iconic):before {
@@ -925,15 +925,15 @@ menuitem#enableDeveloperTools:not(.menuitem-iconic):before {
 }
 
 :is(menu, menuitem)[id^="multithreaded-download-manager"][label="Open in new tab"]:before {
-    background-image: url(chrome://userchrome/content/skin/tab.svg) !important;
+    background-image: url(chrome://userchrome/content/skin/tab.svg);
 }
 
 :is(menu, menuitem)[id^="multithreaded-download-manager"][label="Open in new window"]:before {
-    background-image: url(chrome://userchrome/content/skin/window.svg) !important;
+    background-image: url(chrome://userchrome/content/skin/window.svg);
 }
 
 :is(menu, menuitem)[id^="multithreaded-download-manager"][label="Open in sidebar"]:before {
-    background-image: url(chrome://userchrome/content/skin/sidebars-right.svg) !important;
+    background-image: url(chrome://userchrome/content/skin/sidebars-right.svg);
 }
 
 #userScriptsMenu:before {
@@ -945,11 +945,11 @@ menuitem#enableDeveloperTools:not(.menuitem-iconic):before {
 }
 
 :is(#spell-add-to-dictionary, #spell-add-dictionaries, #spell-add-dictionaries-main):before {
-    background-image: url(chrome://userchrome/content/skin/readerMode.svg) !important;
+    background-image: url(chrome://userchrome/content/skin/readerMode.svg);
 }
 
 #spell-dictionaries:before {
-    background-image: url(chrome://userchrome/content/places/defaultFavicon.svg) !important;
+    background-image: url(chrome://userchrome/content/places/defaultFavicon.svg);
 }
 
 menuitem.viewCustomizeToolbar:before {
