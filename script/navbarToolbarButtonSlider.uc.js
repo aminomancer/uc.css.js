@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Nav-bar Toolbar Button Slider
-// @version        2.3
+// @version        2.4
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Wrap all toolbar buttons in a scrollable div. It can scroll horizontally through the buttons by scrolling up/down with a mousewheel, like the tab bar. By default, it wraps all toolbar buttons to the right of the urlbar. You can edit userChrome.toolbarSlider.wrapButtonsRelativeToUrlbar in about:config to change this: a value of "left" will wrap all buttons to the left of the urlbar, and "all" will wrap all buttons. You can change userChrome.toolbarSlider.width to make the container wider or smaller. If you choose 12, it'll be 12 buttons long. When the window gets *really* small, the slider disappears and the toolbar buttons are placed into the normal widget overflow panel. You can specify more buttons to exclude from the slider by adding their IDs (in quotes, separated by commas) to userChrome.toolbarSlider.excludeButtons in about:config. For example you might type ["bookmarks-menu-button", "downloads-button"] if you want those to stay outside of the slider. You can also decide whether to exclude flexible space springs from the slider by toggling userChrome.toolbarSlider.excludeFlexibleSpace in about:config. By default, springs are excluded. To scroll faster you can add a multiplier right before scrollByPixels is called, like scrollAmount = scrollAmount * 1.5 or something like that. Doesn't handle touch events yet since I don't have a touchpad to test it on. Let me know if you have any ideas though.
@@ -86,9 +86,6 @@
                 window.removeEventListener("unload", this, false);
                 prefsvc.removeObserver("userChrome.toolbarSlider", this);
             },
-            get widgets() {
-                return cTarget.children;
-            },
             async observe(sub, _top, pref) {
                 let value = this.getPref(sub, pref);
                 switch (pref) {
@@ -109,7 +106,7 @@
                             if (cNavBar.getAttribute("overflowing") && !value) {
                                 await cNavBar.overflowable._moveItemsBackToTheirOrigin(true);
                                 unwrapAll();
-                                let array = await convertToArray(this.widgets);
+                                let array = await convertToArray(widgets);
                                 wrapAll(array, inner);
                                 outer.style.display = "-moz-box";
                             }
@@ -120,9 +117,9 @@
                         let overflown = isOverflowing();
                         if (overflown) break;
                         unwrapAll();
-                        let array = await convertToArray(this.widgets);
-                        await this.setMaxWidth(array);
+                        let array = await convertToArray(widgets);
                         wrapAll(array, inner);
+                        this.setMaxWidth(array);
                         break;
                 }
             },
@@ -141,7 +138,7 @@
             async setMaxWidth(array) {
                 if (!outer.ready) return;
                 let maxWidth = 0;
-                if (inner.children.length) {
+                if (kids.length) {
                     if (array)
                         array
                             .slice(0, this.widthInButtons)
@@ -349,7 +346,8 @@
              */
             async addToPanel(aNode, aReason) {
                 this.onBeforeCommand(aNode);
-                gCustomizeMode.addToPanel(aNode, aReason);
+                await gCustomizeMode.addToPanel(aNode, aReason);
+                prefHandler.setMaxWidth(Array.from(kids));
             },
 
             /**
@@ -359,7 +357,8 @@
              */
             async removeFromArea(aNode, aReason) {
                 this.onBeforeCommand(aNode);
-                gCustomizeMode.removeFromArea(aNode, aReason);
+                await gCustomizeMode.removeFromArea(aNode, aReason);
+                prefHandler.setMaxWidth(Array.from(kids));
             },
 
             attachListeners() {
@@ -434,6 +433,10 @@
         }
 
         function wrapAll(buttons, container, first = false) {
+            if (!buttons.length) {
+                if (first) outer.appendChild();
+                return;
+            }
             let parent = buttons[0].parentElement;
             let { previousSibling } = buttons[0];
             appendLoop(buttons, container);

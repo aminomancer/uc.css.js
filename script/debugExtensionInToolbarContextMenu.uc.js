@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Debug Extension in Toolbar Context Menu
-// @version        1.0
+// @version        1.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Adds a new context menu when right-clicking an add-on's toolbar button, any time the "Manage Extension" and "Remove Extension" items are available. The new "Debug Extension" menu contains 4 items: "Extension Manifest" will open the extension's manifest directly in a new tab. Aside from reading the manifest, from there you can also see the whole contents of the extension by removing "/manifest.json" from the URL. "Popup Document" will open the extension's popup URL (if it has one) in a regular browser window. The popup URL is whatever document it displays in its panel view. "Options Document" will open the document that the extension displays in its submenu on about:addons, also in a regular browser window. Finally, "Inspect Extension" will open a devtools tab targeting the extension background. This is the same page you'd get if you opened about:debugging and clicked the "Inspect" button next to an extension. The menu items' labels are not localized automatically since Firefox doesn't include any similar strings. If you need to change the language or anything, modify the strings below under "static config." As usual, icons for the new menu are included in uc-context-menu-icons.css
@@ -43,18 +43,32 @@ class DebugExtension {
     constructor() {
         this.setupCallback();
         this.setupUpdate();
-        this.menu = this.makeMenu();
-        this.menupopup = this.menu.appendChild(document.createXULElement("menupopup"));
-        this.menupopup.addEventListener("popupshowing", this);
-        // make a menu item for each type of page
-        DebugExtension.menuitems.forEach(
-            (type) => (this[`${type}MenuItem`] = this.makeMenuItem(type))
+        this.toolbarMenu = this.makeMenu(this.toolbarContext);
+        this.toolbarMenupopup = this.toolbarMenu.appendChild(
+            document.createXULElement("menupopup")
         );
+        this.toolbarMenupopup.addEventListener("popupshowing", this);
+        this.overflowMenu = this.makeMenu(this.overflowContext);
+        this.overflowMenupopup = this.overflowMenu.appendChild(
+            document.createXULElement("menupopup")
+        );
+        this.overflowMenupopup.addEventListener("popupshowing", this);
+        // make a menu item for each type of page
+        DebugExtension.menuitems.forEach((type) => {
+            this[`toolbar${type}MenuItem`] = this.makeMenuItem(type, this.toolbarMenupopup);
+            this[`overflow${type}MenuItem`] = this.makeMenuItem(type, this.overflowMenupopup);
+        });
     }
     get toolbarContext() {
         return (
             this._toolbarContext ||
             (this._toolbarContext = document.getElementById("toolbar-context-menu"))
+        );
+    }
+    get overflowContext() {
+        return (
+            this._overflowContext ||
+            (this._overflowContext = document.getElementById("customizationPanelItemContextMenu"))
         );
     }
     /**
@@ -70,10 +84,12 @@ class DebugExtension {
         let id = ToolbarContextMenu._getExtensionId(e.target);
         if (!id) return;
         let extension = WebExtensionPolicy.getByID(id).extension;
-        this.PopupMenuItem.disabled = !extension.manifest.browser_action?.default_popup;
-        this.OptionsMenuItem.disabled = !extension.manifest.options_ui?.page;
+        this.toolbarPopupMenuItem.disabled = this.overflowPopupMenuItem =
+            !extension.manifest.browser_action?.default_popup;
+        this.toolbarOptionsMenuItem.disabled = this.overflowOptionsMenuItem.disabled =
+            !extension.manifest.options_ui?.page;
     }
-    makeMenu() {
+    makeMenu(popup) {
         let menu = document.createXULElement("menu");
         this.setAttributes(menu, {
             class: "customize-context-debugExtension",
@@ -81,7 +97,7 @@ class DebugExtension {
             accesskey: DebugExtension.config.menuAccessKey,
             contexttype: "toolbaritem",
         });
-        this.toolbarContext.querySelector(".customize-context-manageExtension").after(menu);
+        popup.querySelector(".customize-context-manageExtension").after(menu);
         return menu;
     }
     /**
@@ -89,7 +105,7 @@ class DebugExtension {
      * @param {string} type (equal to "Manifest", "Popup", or "Options")
      * @returns a menuitem DOM node
      */
-    makeMenuItem(type) {
+    makeMenuItem(type, popup) {
         let item = document.createXULElement("menuitem");
         this.setAttributes(item, {
             class: `customize-context-open${type}`,
@@ -98,7 +114,7 @@ class DebugExtension {
             oncommand: `ToolbarContextMenu.openExtensionURL(event, this.parentElement, "${type}")`,
             contexttype: "toolbaritem",
         });
-        this.menupopup.appendChild(item);
+        popup.appendChild(item);
         return item;
     }
     // set the command callback function on a globally accessible object so it can be invoked from oncommand attributes
