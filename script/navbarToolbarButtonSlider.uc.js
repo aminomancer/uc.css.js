@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Nav-bar Toolbar Button Slider
-// @version        2.2
+// @version        2.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Wrap all toolbar buttons in a scrollable div. It can scroll horizontally through the buttons by scrolling up/down with a mousewheel, like the tab bar. By default, it wraps all toolbar buttons to the right of the urlbar. You can edit userChrome.toolbarSlider.wrapButtonsRelativeToUrlbar in about:config to change this: a value of "left" will wrap all buttons to the left of the urlbar, and "all" will wrap all buttons. You can change userChrome.toolbarSlider.width to make the container wider or smaller. If you choose 12, it'll be 12 buttons long. When the window gets *really* small, the slider disappears and the toolbar buttons are placed into the normal widget overflow panel. You can specify more buttons to exclude from the slider by adding their IDs (in quotes, separated by commas) to userChrome.toolbarSlider.excludeButtons in about:config. For example you might type ["bookmarks-menu-button", "downloads-button"] if you want those to stay outside of the slider. You can also decide whether to exclude flexible space springs from the slider by toggling userChrome.toolbarSlider.excludeFlexibleSpace in about:config. By default, springs are excluded. To scroll faster you can add a multiplier right before scrollByPixels is called, like scrollAmount = scrollAmount * 1.5 or something like that. Doesn't handle touch events yet since I don't have a touchpad to test it on. Let me know if you have any ideas though.
@@ -26,9 +26,7 @@
         let style = window.getComputedStyle(el);
         let width = el.clientWidth;
         let margin = parseFloat(style.marginLeft) + parseFloat(style.marginRight);
-        let padding = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
-        let border = parseFloat(style.borderLeftWidth) + parseFloat(style.borderRightWidth);
-        return width + margin + padding + border;
+        return width + margin;
     }
 
     /**
@@ -86,8 +84,7 @@
             handleEvent(e) {
                 if (e.type !== "unload") return;
                 window.removeEventListener("unload", this, false);
-                prefsvc.removeObserver(widthPref, this);
-                prefsvc.removeObserver(collapsePref, this);
+                prefsvc.removeObserver("userChrome.toolbarSlider", this);
             },
             get widgets() {
                 return cTarget.children;
@@ -97,8 +94,8 @@
                 switch (pref) {
                     case widthPref:
                         if (value === null) value = 11;
-                        this.width = value * 32;
-                        if (outer.ready) outer.style.maxWidth = `${this.width}px`;
+                        this.widthInButtons = value;
+                        this.setMaxWidth();
                         break;
                     case collapsePref:
                         if (value === null) value = true;
@@ -107,11 +104,13 @@
                             ? urlbar.style.removeProperty("min-width")
                             : (urlbar.style.minWidth = "revert");
                         if (outer.ready) {
-                            outer.setAttribute("overflows", value);
+                            if (!value) outer.setAttribute("overflows", false);
+                            else outer.removeAttribute("overflows");
                             if (cNavBar.getAttribute("overflowing") && !value) {
                                 await cNavBar.overflowable._moveItemsBackToTheirOrigin(true);
+                                unwrapAll();
                                 let array = await convertToArray(this.widgets);
-                                backToNavbar(array, inner);
+                                wrapAll(array, inner);
                                 outer.style.display = "-moz-box";
                             }
                         }
@@ -122,6 +121,7 @@
                         if (overflown) break;
                         unwrapAll();
                         let array = await convertToArray(this.widgets);
+                        await this.setMaxWidth(array);
                         wrapAll(array, inner);
                         break;
                 }
@@ -137,6 +137,25 @@
                     default:
                         return null;
                 }
+            },
+            async setMaxWidth(array) {
+                if (!outer.ready) return;
+                let maxWidth = 0;
+                if (inner.children.length) {
+                    if (array)
+                        array
+                            .slice(0, this.widthInButtons)
+                            .forEach((el) => (maxWidth += parseWidth(el)));
+                    else {
+                        let widgetArray = await cuiArray();
+                        widgetArray
+                            .slice(0, this.widthInButtons)
+                            .forEach((w) => (maxWidth += parseWidth(w.forWindow(window).node)));
+                    }
+                } else
+                    maxWidth =
+                        this.widthInButtons * parseWidth(document.getElementById("forward-button"));
+                outer.style.maxWidth = `${maxWidth}px`;
             },
             initialSet() {
                 if (!prefsvc.prefHasUserValue(widthPref)) prefsvc.setIntPref(widthPref, 11);
@@ -175,21 +194,25 @@
                     cOverflow.insertBefore(outer, cOverflow.firstElementChild);
                 } else wrapAll(array, inner);
                 outer.style.display = overflown ? "none" : "-moz-box";
+                prefHandler.setMaxWidth();
             },
             onWidgetOverflow(aNode, aContainer) {
                 if (aNode.ownerGlobal !== window) return;
-                if (aNode === outer && aContainer === cTarget) appendLoop(kids, cOverflow);
-                outer.style.display = "none";
-                reOrder();
+                if (aNode === outer && aContainer === cTarget) {
+                    appendLoop(kids, cOverflow);
+                    outer.style.display = "none";
+                    reOrder();
+                }
             },
             async onWidgetUnderflow(aNode, aContainer) {
                 if (aNode.ownerGlobal !== window) return;
                 if (aNode === outer && aContainer === cTarget) {
-                    let array = await convertToArray(cOverflow.children);
-                    backToNavbar(array, inner);
+                    unwrapAll();
+                    let array = await convertToArray(widgets);
+                    wrapAll(array, inner);
                     outer.style.display = "-moz-box";
+                    reOrder();
                 }
-                reOrder();
             },
             onWidgetAfterDOMChange(aNode, aNextNode, aContainer, aWasRemoval) {
                 // if the dom change was the removal of a toolbar button node, do nothing, unless we hid it before removal via context menu.
@@ -349,7 +372,7 @@
             for (const mu of mus)
                 if (mu.type === "attributes")
                     // if any button has open=true, set outer.open=true, else, outer.open=false.
-                    kids.some((elem) => elem.open)
+                    Array.from(kids).some((elem) => elem.open)
                         ? outer.open || (outer.open = true)
                         : !outer.open || (outer.open = false);
         });
@@ -499,8 +522,6 @@
         }
 
         function setupScroll() {
-            // element.children does not return an array, so doesn't have the some() method.
-            kids.some = Array.prototype.some;
             // begin observing for changes to the "open" attribute of the slider's toolbar buttons.
             muObserver.observe(inner, { attributeFilter: ["open"], subtree: true });
             outer.className = "chromeclass-location slider-container";
@@ -508,18 +529,17 @@
             // the crucial parts here are scroll-behavior: smooth, overflow: hidden. without this, smooth horizontal scrolling won't work.
             outer.style.cssText =
                 "display: -moz-box; -moz-box-align: center; scrollbar-width: none; box-sizing: border-box; scroll-behavior: smooth; overflow: hidden; transition: max-width 0.2s ease-out;";
-            outer.style.maxWidth = `${prefHandler.width}px`;
             outer.ready = true;
             inner.className = "slider-inner-container";
             inner.id = "nav-bar-toolbarbutton-slider";
-            inner.style.cssText = "display: -moz-box; height: var(--urlbar-container-height);";
+            inner.style.cssText = "display: -moz-box;";
             for (const [key, val] of Object.entries({
-                overflows: prefHandler.collapse,
                 smoothscroll: true,
                 clicktoscroll: true,
                 orient: "horizontal",
             }))
                 outer.setAttribute(key, val);
+            if (!prefHandler.collapse) outer.setAttribute("overflows", false);
             outer.smoothScroll = true;
             outer._clickToScroll = true;
             outer._isScrolling = false;
@@ -651,6 +671,7 @@
             prefHandler.attachListeners();
             sliderContextHandler.attachListeners();
             cleanUp();
+            await prefHandler.setMaxWidth(array);
         }
 
         init();
