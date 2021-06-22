@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name           Nav-bar Toolbar Button Slider
-// @version        2.5
+// @version        2.6
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
-// @description    Wrap all toolbar buttons in a scrollable div. It can scroll horizontally through the buttons by scrolling up/down with a mousewheel, like the tab bar. By default, it wraps all toolbar buttons to the right of the urlbar. You can edit userChrome.toolbarSlider.wrapButtonsRelativeToUrlbar in about:config to change this: a value of "left" will wrap all buttons to the left of the urlbar, and "all" will wrap all buttons. You can change userChrome.toolbarSlider.width to make the container wider or smaller. If you choose 12, it'll be 12 buttons long. When the window gets *really* small, the slider disappears and the toolbar buttons are placed into the normal widget overflow panel. You can specify more buttons to exclude from the slider by adding their IDs (in quotes, separated by commas) to userChrome.toolbarSlider.excludeButtons in about:config. For example you might type ["bookmarks-menu-button", "downloads-button"] if you want those to stay outside of the slider. You can also decide whether to exclude flexible space springs from the slider by toggling userChrome.toolbarSlider.excludeFlexibleSpace in about:config. By default, springs are excluded. To scroll faster you can add a multiplier right before scrollByPixels is called, like scrollAmount = scrollAmount * 1.5 or something like that. Doesn't handle touch events yet since I don't have a touchpad to test it on. Let me know if you have any ideas though.
+// @description    Wrap all toolbar buttons in a scrollable div. It can scroll horizontally through the buttons by scrolling up/down with a mousewheel, like the tab bar. By default, it wraps all toolbar buttons that come after the urlbar. (to the right of the urlbar, normally) You can edit userChrome.toolbarSlider.wrapButtonsRelativeToUrlbar in about:config to change this: a value of "before" will wrap all buttons that come before the urlbar, and "all" will wrap all buttons. You can change userChrome.toolbarSlider.width to make the container wider or smaller. If you choose 12, it'll be 12 buttons long. When the window gets *really* small, the slider disappears and the toolbar buttons are placed into the normal widget overflow panel. You can specify more buttons to exclude from the slider by adding their IDs (in quotes, separated by commas) to userChrome.toolbarSlider.excludeButtons in about:config. For example you might type ["bookmarks-menu-button", "downloads-button"] if you want those to stay outside of the slider. You can also decide whether to exclude flexible space springs from the slider by toggling userChrome.toolbarSlider.excludeFlexibleSpace in about:config. By default, springs are excluded. To scroll faster you can add a multiplier right before scrollByPixels is called, like scrollAmount = scrollAmount * 1.5 or something like that. Doesn't handle touch events yet since I don't have a touchpad to test it on. Let me know if you have any ideas though.
 // ==/UserScript==
 
 (() => {
@@ -154,6 +154,23 @@
                         this.widthInButtons * parseWidth(document.getElementById("forward-button"));
                 outer.style.maxWidth = `${maxWidth}px`;
             },
+            migrateDirectionPref() {
+                switch (prefsvc.getStringPref(directionPref, "after")) {
+                    case "left":
+                        prefsvc.setStringPref(directionPref, "before");
+                        break;
+                    case "right":
+                        prefsvc.setStringPref(directionPref, "after");
+                        break;
+                    case "before":
+                    case "after":
+                    case "all":
+                        break;
+                    default:
+                        prefsvc.setStringPref(directionPref, "after");
+                        break;
+                }
+            },
             initialSet() {
                 if (!prefsvc.prefHasUserValue(widthPref)) prefsvc.setIntPref(widthPref, 11);
                 if (!prefsvc.prefHasUserValue(collapsePref))
@@ -162,10 +179,11 @@
                     prefsvc.setStringPref(excludedPref, "[]");
                 if (!prefsvc.prefHasUserValue(springPref)) prefsvc.setBoolPref(springPref, true);
                 if (!prefsvc.prefHasUserValue(directionPref))
-                    prefsvc.setStringPref(directionPref, "right");
+                    prefsvc.setStringPref(directionPref, "after");
+                this.migrateDirectionPref();
                 this.observe(prefsvc, null, widthPref);
                 this.observe(prefsvc, null, collapsePref);
-                this.direction = prefsvc.getStringPref(directionPref, "right");
+                this.direction = prefsvc.getStringPref(directionPref, "after");
             },
             attachListeners() {
                 window.addEventListener("unload", this, false);
@@ -382,12 +400,14 @@
                     ? array.indexOf(urlbar)
                     : array.findIndex((w) => w.id === "urlbar-container");
             switch (prefHandler.direction) {
-                case "right":
+                case "after":
                     return urlbarIdx < index;
-                case "left":
+                case "before":
                     return urlbarIdx > index;
                 case "all":
                     return true;
+                default:
+                    return false;
             }
         }
 
