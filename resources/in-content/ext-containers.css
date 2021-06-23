@@ -13,7 +13,7 @@
         --menupopup-inner-padding: var(--menupopup-inner-padding-magnitude) 0;
         background-color: var(--arrowpanel-background) !important;
         font-size: 12px !important;
-        color: var(--ui-text-80) !important;
+        color: var(--uc-toolbar-color) !important;
         letter-spacing: 0 !important;
     }
 
@@ -114,7 +114,7 @@
         --menu-right-size: 14px;
         background-color: var(--arrowpanel-background) !important;
         font-size: 12px !important;
-        color: var(--ui-text-80) !important;
+        color: var(--uc-toolbar-color) !important;
         letter-spacing: 0 !important;
         scrollbar-width: none !important;
     }

@@ -506,7 +506,7 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
 :is(.content-prompt-dialog, .tab-prompt-dialog, #window-modal-dialog) .dialogFrame {
     background-color: var(--dialog-bgcolor) !important;
     background-image: var(--acrylic-texture) !important;
-    backdrop-filter: blur(5px) !important;
+    backdrop-filter: var(--acrylic-blur) !important;
 }
 
 /* hide the background overlay */

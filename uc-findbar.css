@@ -74,11 +74,11 @@ findbar[hidden] {
 }
 
 .findbar-closebutton:is(:hover, :focus-visible) .toolbarbutton-icon {
-    background-color: var(--arrowpanel-dimmed) !important;
+    background-color: var(--toolbarbutton-hover-background) !important;
 }
 
 .findbar-closebutton:is(:hover, :focus-visible):active .toolbarbutton-icon {
-    background-color: var(--arrowpanel-dimmed-further) !important;
+    background-color: var(--toolbarbutton-active-background) !important;
 }
 
 [anonid="findbar-textbox-wrapper"] {
@@ -124,7 +124,7 @@ findbar[hidden] {
     transition: 400ms !important;
 }
 
-findbar:focus-within .findbar-textbox:not([status="notfound"]) {
+[anonid="findbar-textbox-wrapper"]:focus-within .findbar-textbox:not([status="notfound"]) {
     background-color: var(--search-box-focus) !important;
     color: var(--lwt-toolbar-field-color) !important;
     transition: 300ms !important;
@@ -154,7 +154,7 @@ findbar .matches-indicator {
     transition: 400ms;
 }
 
-findbar:focus-within .findbar-textbox:not([status="notfound"]) ~ .matches-indicator {
+[anonid="findbar-textbox-wrapper"]:focus-within .findbar-textbox:not([status="notfound"]) ~ .matches-indicator {
     background-color: var(--search-box-focus);
 }
 
@@ -282,7 +282,7 @@ findbar:focus-within .findbar-textbox:not([status="notfound"]) ~ .matches-indica
     display: none !important;
 }
 
-findbar:focus-within
+[anonid="findbar-textbox-wrapper"]:focus-within
     .findbar-textbox:not([status="notfound"])
     ~ :is(.findbar-find-previous, .findbar-find-next, .findbar-entire-word, .findbar-case-sensitive) {
     background-color: var(--search-box-focus) !important;

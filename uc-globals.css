@@ -22,25 +22,30 @@ tooltip {
     --uc-content-text-a50: hsla(236, 100%, 85%, 0.5);
     --uc-content-text-a80: rgba(255, 255, 255, 0.8);
     --uc-accent-color: hsl(233, 61%, 8%);
+    --uc-toolbar-bgcolor: hsl(233, 42%, 15%);
+    --uc-toolbar-color: var(--ui-text-100);
     --arrowpanel-dimmed-menu-hover-solid: hsl(234, 27%, 23%);
     --button-solid-hover-background: hsl(232, 29%, 26%);
     --button-solid-active-background: hsl(234, 26%, 30%);
     --button-solid-checked-background: hsl(232, 31%, 23%);
+
     --uc-font-weight-bold: 600;
     --uc-font-weight-thin: 400;
     --menuitem-height: 26px;
     --subdialog-font-size: 1em !important;
+
     --autocomplete-background: hsl(233, 33%, 17%);
     --ui-secondary-bg: hsl(234, 39%, 10%);
     --tooltip-bgcolor: hsl(233, 36%, 11%);
     --tooltip-color: white;
     --tooltip-border-radius: 2px;
     --webextension-panel-border-radius: 5px;
+
     --statuspanel-color: hsla(0, 0%, 100%, 0.85);
-    --acrylic-blur: blur(10px);
+    --acrylic-blur: blur(15px);
     --acrylic-texture: url(chrome://userchrome/content/texture/lightnoise.png);
     --acrylic-blue: hsla(233.3, 39.1%, 9%, 0.58);
-    --blur-bgcolor: hsla(233, 39%, 9%, 0.58);
+    --blur-bgcolor: var(--acrylic-blue);
     --transparent-img-background: center/16px repeat hsla(0, 0%, 80%) url(chrome://userchrome/content/checker.svg);
     --general-button-border-radius: 2.6px;
     --dialog-bgcolor: hsla(240, 5.9%, 6.7%, 0.85);
@@ -50,6 +55,7 @@ tooltip {
     --dialog-box-border-hover: hsla(232, 100%, 85%, 0.3);
     --alertbox-bgcolor: hsla(0, 0%, 7%, 0.97);
     --notification-menu-color: var(--in-parent-page-color);
+
     --identity-box-solid-bg: hsl(235, 33%, 23%);
     --identity-box-hover-bg: hsl(234, 30%, 26%);
     --secure-color: hsl(119, 80%, 60%);
@@ -65,6 +71,7 @@ tooltip {
     --update-badge-color: hsl(118, 89%, 24%);
     --update-badge-inactive: hsl(227, 19%, 48%);
     --attention-color: hsl(224, 100%, 71%);
+
     --global-selection-bgcolor: hsla(245, 100%, 76%, 0.5);
     --global-selection-color: white;
     --url-selection-bgcolor: hsla(245, 100%, 76%, 0.5);
@@ -73,6 +80,7 @@ tooltip {
     --ui-selection-color: hsl(236, 20%, 16%);
     --content-selection-bgcolor: hsla(0, 0%, 100%, 0.8);
     --content-selection-color: hsl(240, 4%, 10%);
+
     /* controls the color of the search highlights in about:preferences */
     --solid-selection-bgcolor: var(--pink-action);
     /* controls the color of the little tooltips that appear on search highlighted buttons in about:preferences */

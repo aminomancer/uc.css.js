@@ -388,23 +388,3 @@ we need to invert the icon differently since we don't want to invert the backgro
 #appMenu-addons-button {
     list-style-image: url(chrome://userchrome/content/material/extension.svg) !important;
 }
-
-/* view > sidebar menu */
-menupopup#viewSidebarMenu
-    menuitem.menuitem-iconic.webextension-menuitem[style]:is([type="checkbox"], [type="radio"]):not([checked="true"])
-    .menu-iconic-left {
-    display: revert;
-    fill: currentColor;
-    -moz-context-properties: fill, fill-opacity;
-}
-
-menupopup#viewSidebarMenu
-    menuitem.menuitem-iconic.webextension-menuitem[style]:is([type="checkbox"], [type="radio"]):not([checked="true"])
-    .menu-iconic-icon {
-    display: revert !important;
-}
-
-menupopup#viewSidebarMenu
-    menuitem.menuitem-iconic.webextension-menuitem[style]:is([type="checkbox"], [type="radio"]):not([checked="true"])::before {
-    display: none;
-}
