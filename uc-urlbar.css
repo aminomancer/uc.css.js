@@ -50,6 +50,10 @@ toolbarpaletteitem[place="palette"] > #search-container {
     border-bottom-left-radius: 4px !important;
     border-bottom-right-radius: 4px !important;
     box-shadow: 0 5px 18px rgba(0, 0, 0, 0.2);
+    font-size: 14px !important;
+}
+
+#PopupSearchAutoComplete > * {
     font-size: 1.04em !important;
 }
 
@@ -64,7 +68,7 @@ toolbarpaletteitem[place="palette"] > #search-container {
 }
 
 #PopupSearchAutoComplete .autocomplete-richlistitem .ac-title-text {
-    font-weight: 500 !important;
+    font-weight: var(--uc-font-weight-thin) !important;
     font-style: normal !important;
     color: var(--panel-shortcut-color);
 }

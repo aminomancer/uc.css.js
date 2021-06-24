@@ -33,7 +33,7 @@ it also changes the appearance of the one-offs in the searchbar. */
     flex-wrap: nowrap !important;
     scroll-behavior: smooth;
     scrollbar-width: none !important;
-    min-width: 0 !important;
+    min-width: min-content !important;
     max-width: unset !important;
 }
 
@@ -127,12 +127,15 @@ it also changes the appearance of the one-offs in the searchbar. */
 #PopupSearchAutoComplete .search-setting-button {
     width: 28px !important;
     min-height: 28px !important;
-    margin-right: 6px !important;
-    margin-left: 0 !important;
+    margin-inline: 0 !important;
 }
 
 #PopupSearchAutoComplete .search-add-engines:not(:empty) ~ .search-setting-button {
     margin-left: 4px !important;
+}
+
+#PopupSearchAutoComplete .search-one-offs-spacer {
+    display: none !important;
 }
 
 #PopupSearchAutoComplete .search-setting-button > .button-box {

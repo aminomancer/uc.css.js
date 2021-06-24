@@ -372,3 +372,22 @@ menupopup.in-menulist menuseparator:not([id]) {
 menupopup.in-menulist menuseparator:last-child {
     display: none;
 }
+
+@supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
+    #ContentSelectDropdown,
+    menupopup.in-menulist {
+        font-family: SF Pro Display, Segoe UI, sans-serif !important;
+        font-kerning: normal !important;
+    }
+
+    #ContentSelectDropdown
+        > menupopup
+        :where(menucaption, menuitem)
+        > :is(label, .menu-iconic-text, .menu-text),
+    menupopup.in-menulist
+        > :where(menucaption, menuitem)
+        > :is(label, .menu-iconic-text, .menu-text) {
+        font-family: SF Pro Display, Segoe UI, sans-serif !important;
+        font-kerning: normal !important;
+    }
+}

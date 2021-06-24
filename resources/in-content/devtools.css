@@ -148,10 +148,10 @@ and a few elements like checkboxes */
     }
 
     .theme-light {
-        --checkbox-border-color: #AAA !important;
-        --checkbox-unchecked-bgcolor: #EEE !important;
-        --checkbox-unchecked-hover-bgcolor: #E6E6E6 !important;
-        --checkbox-unchecked-active-bgcolor: #DDD !important;
+        --checkbox-border-color: #aaa !important;
+        --checkbox-unchecked-bgcolor: #eee !important;
+        --checkbox-unchecked-hover-bgcolor: #e6e6e6 !important;
+        --checkbox-unchecked-active-bgcolor: #ddd !important;
     }
 
     menupopup > :is(menuitem, menu, menucaption, menugroup, menuseparator, search-textbox),
@@ -504,5 +504,19 @@ and a few elements like checkboxes */
 
     menupopup[menu-api] menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-left {
         display: none !important;
+    }
+
+    @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
+        menupopup {
+            font-family: SF Pro Display, Segoe UI, sans-serif !important;
+            font-kerning: normal !important;
+        }
+
+        :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
+            :is(menu, menuitem, menucaption)
+            > :is(label, .menu-iconic-text, .menu-text) {
+            font-family: SF Pro Display, Segoe UI, sans-serif !important;
+            font-kerning: normal !important;
+        }
     }
 }
