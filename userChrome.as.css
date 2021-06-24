@@ -60,16 +60,6 @@ tooltip[default][page] > description {
     border-top-right-radius: 0;
 }
 
-/* i prefer about:config => alerts.useSystemBackend = true */
-@-moz-document url("chrome://global/content/alerts/alert.xhtml")
-{
-    #alertBox {
-        background-color: var(--alertbox-bgcolor) !important;
-        background-image: var(--acrylic-texture) !important;
-        backdrop-filter: var(--acrylic-blur) !important;
-    }
-}
-
 @-moz-document url(chrome://global/content/commonDialog.xhtml),
                url("chrome://mozapps/content/handling/permissionDialog.xhtml"),
                url("chrome://mozapps/content/handling/appChooser.xhtml")

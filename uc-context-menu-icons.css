@@ -53,7 +53,6 @@ menuitem#sanitizeItem > .menu-text,
 #context-copyvideourl .menu-text,
 #context-bookmarkframe .menu-text,
 #context-bookmarklink .menu-text,
-#context-bookmarkpage .menu-text,
 #context-openframe .menu-text,
 #context-openframeintab .menu-text,
 #context-openlink .menu-text,
@@ -116,7 +115,6 @@ menuitem:is(#sync-enable, #sync-syncnowitem) .menu-text,
 menu#webDeveloperMenu:not(.menu-iconic) > .menu-text,
 menuitem#menu_preferences .menu-text,
 #context-frameOsPid .menu-text,
-#context-reload .menu-text,
 #context-reloadframe .menu-text,
 #context-reloadimage .menu-text,
 #context-showonlythisframe .menu-text,
@@ -251,7 +249,6 @@ menuitem.customize-context-reportExtension > .menu-text {
 :is(#menu_printSetup, #menu_readerModeItem):before,
 #menu_importFromAnotherBrowser:before,
 #context-frameOsPid:before,
-#context-reload:before,
 #context-reloadimage:before,
 #context-reloadframe:before,
 #context-inspect:before,
@@ -331,7 +328,6 @@ menuitem#sanitizeItem:before,
 #context-copyvideourl:before,
 #context-bookmarkframe:before,
 #context-bookmarklink:before,
-#context-bookmarkpage:before,
 #context-openlinkintab:before,
 #context-openlinkinunloadedtab:before,
 :is(#placesContext_open\:unloaded, #placesContext_openContainer\:unloaded, #placesContext_openLinks\:unloaded):before,
@@ -542,7 +538,7 @@ menuitem.customize-context-reportExtension:before {
     background-image: url(chrome://userchrome/content/devtools/tool-memory.svg);
 }
 
-:is(#context-reloadframe, #context-reload, #context-reloadimage):before {
+:is(#context-reloadframe, #context-reloadimage):before {
     background-image: url(chrome://userchrome/content/skin/reload.svg);
 }
 

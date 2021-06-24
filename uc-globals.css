@@ -53,7 +53,7 @@ tooltip {
     --dialog-box-bgcolor-dim: hsla(240, 100%, 70%, 3%);
     --dialog-box-border-color: hsla(232, 100%, 85%, 0.2);
     --dialog-box-border-hover: hsla(232, 100%, 85%, 0.3);
-    --alertbox-bgcolor: hsla(0, 0%, 7%, 0.97);
+    --alertbox-bgcolor: hsla(0, 0%, 14%, 0.97);
     --notification-menu-color: var(--in-parent-page-color);
 
     --identity-box-solid-bg: hsl(235, 33%, 23%);
