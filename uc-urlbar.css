@@ -187,7 +187,7 @@ toolbarpaletteitem[place="palette"] > #search-container {
 }
 
 /*
-hide the urlbar bookmark action on system pages,
+hide the urlbar bookmark action on some system pages,
 and on the new tab page if hideTrackingProtectionIconOnCustomNewTabPage.uc.js is installed.
 also do the same with the screenshot action, if screenshotPageActionButton.uc.js is installed.
 the screenshot action already hides itself on system pages and extension pages,
@@ -196,6 +196,7 @@ but CSS hides it faster and avoids flickering.
 */
 @supports (-moz-bool-pref("userChrome.urlbar.hide-bookmarks-button-on-system-pages")) {
     #tracking-protection-icon-container:is([hidden], :not([aria-label]))
+    ~ #identity-box:not(.chromeUI)
     ~ #page-action-buttons
     > :is(#star-button-box, #pageAction-urlbar-screenshot) {
         visibility: collapse;
