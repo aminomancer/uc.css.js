@@ -219,6 +219,14 @@ more useful than userContent.css when dealing with very complex websites that ne
     }
 }
 
+/* hide translate this page when right-clicking text input */
+#contentAreaContextMenu
+    #context-cut:not([hidden])
+    ~ :is(.menu-iconic, .menuitem-iconic):is([label^="Translate this page"], [label="Simple Translate"]) {
+    display: none;
+}
+
+
 /* pushbullet context menu icon */
 #contentAreaContextMenu
     :is(.menu-iconic, .menuitem-iconic)[label="Pushbullet"]
@@ -236,6 +244,15 @@ more useful than userContent.css when dealing with very complex websites that ne
 }
 
 #contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Pushbullet"] .menu-iconic-icon {
+    display: none;
+}
+
+/* hide pushbullet when right-clicking dead area, e.g. the page background.
+pushbullet kinda overstays its welcome, you can just use the toolbar button to send the current page,
+there's no need for a context menu item except when right-clicking something particular *on* the page. */
+#contentAreaContextMenu
+    #context-navigation:not([hidden])
+    ~ :is(.menu-iconic, .menuitem-iconic)[label="Pushbullet"] {
     display: none;
 }
 
@@ -344,6 +361,13 @@ more useful than userContent.css when dealing with very complex websites that ne
 
 #contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"] .menu-iconic-icon {
     display: none !important;
+}
+
+/* hide the icon when not right-clicking a text input field */
+#contentAreaContextMenu
+    #context-cut[hidden]
+    ~ :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"] {
+    display: none;
 }
 
 /* tab notes favicon isn't displayed properly in the back/forward menu */

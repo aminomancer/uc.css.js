@@ -199,6 +199,9 @@ menuitem#enableDeveloperTools .menu-text,
     .menu-text,
 #userScriptsMenu > .menu-text,
 #toggle_PersonalToolbar > .menu-text,
+menu#fill-login > .menu-text,
+menuitem#manage-saved-logins > .menu-text,
+menuitem#fill-login-generated-password > .menu-text,
 #contentAreaContextMenu
     :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"]
     :is(menu, menuitem)[label="Auto-fill"]
@@ -419,6 +422,9 @@ menuitem#enableDeveloperTools:before,
 #context_moveToEnd:before,
 #userScriptsMenu:before,
 #toggle_PersonalToolbar:before,
+menu#fill-login:before,
+menuitem#manage-saved-logins:before,
+menuitem#fill-login-generated-password:before,
 #contentAreaContextMenu
     :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"]
     :is(menu, menuitem)[label="Auto-fill"]:before,
@@ -1008,18 +1014,21 @@ menuitem#enableDeveloperTools:before {
     background-image: url(chrome://userchrome/content/formfill.svg);
 }
 
+menuitem#manage-saved-logins:before,
 #contentAreaContextMenu
     :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"]
     :is(menu, menuitem)[label="Copy Username"]:before {
     background-image: url(chrome://userchrome/content/fxa/avatar-empty.svg);
 }
 
+menu#fill-login:before,
 #contentAreaContextMenu
     :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"]
     :is(menu, menuitem)[label="Copy Password"]:before {
     background-image: url(chrome://userchrome/content/skin/login.svg);
 }
 
+menuitem#fill-login-generated-password:before,
 #contentAreaContextMenu
     :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"]
     :is(menu, menuitem)[label*="Generate Password"]:before {
