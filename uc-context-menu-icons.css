@@ -697,11 +697,11 @@ menuitem#sanitizeItem:before {
 }
 
 :is(#context-savevideo, #context-saveaudio, #context-saveframe, #context-saveimage, #context-savelink, #menu_savePage):before {
-    background-image: url(chrome://userchrome/content/skin/save.svg);
+    background-image: url(chrome://userchrome/content/material/places/folder-save.svg);
 }
 
 #menu_openFile:before {
-    background-image: url(chrome://userchrome/content/skin/open.svg);
+    background-image: url(chrome://userchrome/content/material/places/folder-open.svg);
 }
 
 #context-savelinktopocket:before {

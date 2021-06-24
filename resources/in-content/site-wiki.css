@@ -2259,6 +2259,14 @@ domain("wikimedia.org") {
         background: none !important;
     }
 
+    #bodyContent .wikitable :is(.mw-collapsible, .mw-collapsible-content) {
+        background: revert !important;
+    }
+
+    #bodyContent .wikitable table {
+        border-radius: revert !important;
+    }
+
     #bodyContent .mw-collapsible-content > table {
         padding: 3px !important;
     }

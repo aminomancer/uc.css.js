@@ -84,7 +84,9 @@ For best results, set density mode to `Normal` and theme to `Dark` in the custom
 | widget.disable-native-theme-for-content 	| Boolean 	| true 	| Enables Firefox's custom appearance for elements like checkboxes. Skips the "native" appearance given by the OS stylesheets. 	|
 </details>
 
-This theme requires more technical setup than most because it changes a lot of lower-level stuff like javascript methods and icon/animation source code, but if you follow the instructions fully it'll work for anyone on any modern desktop OS, regardless of background knowledge. It requires [**fx-autoconfig**](https://github.com/MrOtherGuy/fx-autoconfig) to register the icon package. This *specific* loader is required for most of my scripts too. Some other scripts are not compatible with it, but I can port them so feel free to post an issue/discussion on here to make a request.
+<h2><b>Theme: (CSS)</b></h2>
+
+This theme requires more technical setup than most because it changes a lot of lower-level stuff like javascript methods and icon/animation source code, but if you follow the instructions fully it'll work for anyone on any modern desktop OS, regardless of background knowledge. It requires [**fx-autoconfig**](https://github.com/MrOtherGuy/fx-autoconfig) to register the icon package and replace some of Firefox's lower-level stylesheets. To be clear, this *specific* loader is required for most of my scripts too. Some other scripts are not compatible with it, but I can port them so feel free to post an issue/discussion on here to make a request.
 
 Download the [resources](/resources) folder and place it in your `chrome` folder — fx-autoconfig will automatically register it to the path `chrome://userchrome/content/`. [Release packages](/../../releases/) are available as a courtesy, but since the theme and scripts are updated on a daily basis to keep up with Nightly, the latest release package may not be completely up to date. If you want the very latest stylesheets/scripts, you should either [clone the repo](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository-from-github/cloning-a-repository) directly to your profile's `chrome` folder, (use [GitHub Desktop](https://desktop.github.com/) if all of this sounds like gibberish to you) or download individual folders with [GitZip](https://addons.mozilla.org/en-US/firefox/addon/gitzip/) or [Refined GitHub](https://addons.mozilla.org/en-US/firefox/addon/refined-github-/).
 
@@ -200,7 +202,7 @@ get chromeDir() {return traverseToMainProfile('UChrm')},
 </details>
 <br/>
 
-<h3><b>Script descriptions:</b></h3>
+<h3><b>Script descriptions & links:</b></h3>
 (<i>Click a script's name to download it</i>)
 
 ####   [about:cfg](/script/aboutCfg.uc.js):
@@ -464,3 +466,46 @@ Required for loading userChrome.au.css and userChrome.as.css. It will actually l
 
 ####   [Browser Toolbox Stylesheet Loader](/script/userChrome_devtools_module.uc.js):
 Required for loading stylesheets into browser toolbox windows. [See here](#styling-browser-toolbox-windows) for more info.
+
+### **Other useful links:**
+<details><summary><b><i>Click to expand...</i></b></summary>
+
+[Searchfox](https://searchfox.org/): A search engine for Firefox's source code. This is what I use to write most of my scripts. For example, if you wanted to make a button that adds a bookmark, you could find something in the UI that already does that, copy its ID, and search for it on Searchfox. From there you could track down its callback function, copy something from that and search for it, and ultimately find what you need. It indexes several repositories, including multiple versions of Firefox. You can permanently add this search engine to Firefox with [this extension](https://addons.mozilla.org/en-US/firefox/addon/add-custom-search-engine/), which makes writing code for Firefox immensely faster.
+
+[FirefoxCSS Subreddit](https://www.reddit.com/r/FirefoxCSS/): Where to bring questions about modding Firefox.
+
+[FirefoxCSS Store](https://firefoxcss-store.github.io/): A collection of Firefox CSS themes. If my theme is too complicated or labor-intensive for you, there are some really nice themes there that don't require autoconfig.
+
+[userChrome.org](https://www.userchrome.org/): A site hosted by Jefferson Scher with a lot of [information](https://www.userchrome.org/what-is-userchrome-css.html), [guides](https://www.userchrome.org/how-create-userchrome-css.html), [tools](https://www.userchrome.org/firefox-89-styling-proton-ui.html), and other [resources](https://www.userchrome.org/help-with-userchrome-css.html) for modding Firefox, [setting up autoconfig](https://www.userchrome.org/what-is-userchrome-js.html), etc.
+
+[firefox-csshacks](https://github.com/MrOtherGuy/firefox-csshacks/): A huge collection of CSS snippets (big and small) and information about CSS theming, by the author of fx-autoconfig. If there's something you're trying but struggling to do with CSS, this is a good place to start.
+
+[Alice0775 scripts](https://github.com/alice0775/userChrome.js): Another repo full of Firefox scripts. Most of these should be compatible with fx-autoconfig. There's another autoconfig loader on this repo, but some of my scripts require fx-autoconfig specifically.
+
+[xiaoxiaoflood scripts](https://github.com/xiaoxiaoflood/firefox-scripts): Another repo full of up-to-date Firefox scripts and addons. These won't be compatible with fx-autoconfig but there's another loader on this repo.
+
+[Add custom search engines](https://addons.mozilla.org/firefox/addon/add-custom-search-engine): An extremely useful addon that can generate search engines for Firefox. That is, if a website you use has an internal search engine that uses URL queries or x-suggestions, e.g. `https://en.wikipedia.org/wiki/Special:Search?search=%s`, you can use this addon to turn it into a one-off search engine, and thereby search wikipedia from your urlbar, and even get search suggestions from wikipedia in your urlbar results.
+
+[mozlz4-edit](https://addons.mozilla.org/firefox/addon/mozlz4-edit): An addon that can read, edit, and save .lz4/.mozlz4 files. Mozilla uses the LZ4 algorithm to compress all sorts of things from caches to databases, but in particular your one-off search engines. The addon above should be sufficient for most people, but if you need to make changes to a search engine you already created and don't want to redo it (or forgot how) this will let you. Just open the search.json.mozlz4 file in your profile folder.
+
+[Violentmonkey](https://addons.mozilla.org/en-US/firefox/addon/violentmonkey/): An addon for running JavaScript in browser tabs. If you need to modify a particular website, this is the best way. This is overall the best GreaseMonkey-like addon for Firefox, in my opinion.
+
+[Sidebar Always Loaded](https://github.com/thepante/SAL-Firefox): A very cool script that makes the sidebar more permanent and less intrusive. It's similar to my Floating Sidebar script but 100% standalone, 50% more elegant, and has ~25% more features. Compatible with [fx-autoconfig](https://github.com/MrOtherGuy/fx-autoconfig) or [Alice0775's loader](https://github.com/alice0775/userChrome.js/tree/master/72).
+
+[NsCDE](https://github.com/NsCDE/NsCDE): A really cool Unix desktop environment package that integrates with Firefox and many other applications to produce remarkably consistent user interfaces.
+
+[Lepton](https://github.com/black7375/Firefox-UI-Fix): A Firefox theme that respects the vanilla Firefox UI "flavor" while fixing many of the biggest problems with Proton.
+
+[MDN — Browser Toolbox](https://developer.mozilla.org/en-US/docs/Tools/Browser_Toolbox): The first tutorial to read if you're trying to get into modding Firefox, whether CSS or JavaScript.
+
+[MDN — Firefox's Code Modules](https://developer.mozilla.org/en-US/docs/Mozilla/JavaScript_code_modules): While there isn't any beginner's guide on making scripts for Firefox, this page has a lot of useful information about many higher-level Firefox components. If you're familiar with JS but not with Firefox's source code, this should be very helpful.
+
+[MDN — Observer Notifications](https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XPCOM/Observer_Notifications): A tutorial on Firefox's observer notification system. Observer notifications are sort of like JS events, but they support multiple programming languages and it's a lot easier to send them. They're used all over Firefox so familiarizing yourself with them is a good idea.
+
+[MDN — Message managers](https://developer.mozilla.org/en-US/docs/Mozilla/Firefox/Multiprocess_Firefox/Message_Manager/Message_manager_overview): A tutorial on message managers and [frame scripts](https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XPCOM/Reference/Interface/nsIFrameScriptLoader). Firefox normally has multiple processes and "frames," which means to achieve some things with JS we need to communicate across very "distant" execution contexts. For example, there can be situations where you need to listen to something inside a browser content window, e.g. a website running in a tab. But the listener needs to do something in the chrome window's UI, e.g. change a toolbar button's label. Without message managers you wouldn't be able to do this, since these contexts are intentionally isolated from each other. A frame script allows you to inject code to run in the frame that wraps around the browser content, which can communicate with code running in the chrome process to interact with the main window's UI. An example of such a script is the [Search Selection Keyboard Shortcut](#search-selection-keyboard-shortcut).
+
+[MDN — CSS Cascade](https://developer.mozilla.org/en-US/docs/Web/CSS/Cascade): If your CSS background is limited to reading posts on r/FirefoxCSS and experimenting in the browser toolbox, learning some of the quirks of CSS may be very helpful. You can save a lot of trial & error time by knowing beforehand that something won't work.
+
+[JavaScript — Understanding the weird parts](https://www.udemy.com/course/understand-javascript/): A really good course if you're trying to learn JavaScript from scratch. It doesn't concern the many internal APIs/components that you'd use in Firefox scripts, like XPCOM, but you definitely want to know most of this stuff beforehand to avoid wasting a lot of time.
+
+</details>

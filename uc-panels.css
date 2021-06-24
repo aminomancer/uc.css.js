@@ -918,7 +918,7 @@ panel .header,
 
 #downloadsListBox {
     width: 56ch !important;
-    margin: 0 !important;
+    margin: var(--arrowpanel-menuitem-inline-margin) 0 !important;
 }
 
 #emptyDownloads {
@@ -933,19 +933,23 @@ panel .header,
 #downloadsFooterButtons:not([hidden]) {
     display: flex !important;
     flex-flow: row nowrap;
-    margin: 0 !important;
-    padding: var(--arrowpanel-menuitem-inline-margin) !important;
+    padding-block: var(--arrowpanel-menuitem-inline-margin) !important;
+    margin: 0 var(--arrowpanel-menuitem-inline-margin) !important;
     border-top: 1px solid var(--panel-separator-color) !important;
     gap: var(--arrowpanel-menuitem-inline-margin) !important;
     --button-hover-bgcolor: var(--arrowpanel-dimmed);
     --button-active-bgcolor: var(--arrowpanel-dimmed-further);
 }
 
+#downloadsFooterButtons > toolbarseparator {
+    display: none !important;
+}
+
 #downloadsFooterButtons > button {
     border-radius: var(--arrowpanel-menuitem-border-radius) !important;
     margin: 0 !important;
     flex-grow: 1;
-    padding: 6px 12px !important;
+    padding: 6px 8px !important;
     -moz-context-properties: fill, fill-opacity;
     fill: currentColor;
 }
@@ -975,16 +979,17 @@ panel .header,
 }
 
 #downloadsListBox > richlistitem {
-    border-radius: 0 !important;
+    border-radius: var(--arrowpanel-menuitem-border-radius) !important;
     margin: 0 !important;
     padding: 0 !important;
+    margin: 0 var(--arrowpanel-menuitem-inline-margin) !important;
     padding-inline-start: 12px !important;
     background: none !important;
 }
 
 #downloadsListBox > .download-state {
-    min-height: 66px !important;
-    height: 66px !important;
+    min-height: 60px !important;
+    height: 60px !important;
     -moz-box-align: center !important;
     border: none !important;
 }
@@ -1000,16 +1005,16 @@ panel .header,
 }
 
 #downloadsListBox > .download-state:is(:hover, :focus-within) {
-    background-image: var(--download-button-hover-bg) !important;
+    background: var(--download-button-hover-bg) !important;
 }
 
 #downloadsListBox .downloadContainer {
-    min-height: 66px !important;
+    min-height: 60px !important;
 }
 
 #downloadsListBox > .download-state > .downloadButton {
-    min-height: 66px !important;
-    min-width: 66px !important;
+    min-height: 60px !important;
+    min-width: 60px !important;
     height: auto !important;
     width: auto !important;
     box-sizing: content-box !important;

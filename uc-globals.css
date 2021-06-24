@@ -148,6 +148,11 @@ tooltip {
     --protection-header-gradient-color-3: hsl(217, 90%, 39%);
     --protection-header-arrow-color: var(--arrowpanel-background);
 
+    /* download items in the downloads panel have a gradient background on hover rather than a solid color.
+    since they're so big, a solid color would look a little jarring unless it was very dim.
+    however, gradients this dark and subtle may not look good on all monitors. it depends on a lot of factors.
+    if you experience banding, (solid bands of color instead of a continuous smooth color transition)
+    just override --download-button-hover-bg with a solid color variable, e.g. var(--arrowpanel-faint) */
     --download-button-hue: 235.86;
     --download-button-hover-bg: linear-gradient(
         to right,

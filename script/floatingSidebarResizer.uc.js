@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Floating Sidebar Resizer
-// @version        1.0
+// @version        1.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    A floating sidebar that you can still resize, plus some better shortcut hotkeys. The default sidebar in firefox is nice, it can move from the left side to the right side and you can resize it. But it squeezes the browser content area out of the way. That might be desirable for some people. That way the entire contents of the page are still visible when the sidebar is open. That works well with responsive page layouts but doesn't work well with elements that try to preserve some explicit aspect ratio. It also doesn't look very aesthetic when you open the sidebar and the entire page makes this jarring transformation as everything shifts left or right to make way for the sidebar. So say your browser window is sized precisely to 16:9 dimensions. Maybe you have ocd like me and don't want to see any letterbox when you watch netflix. By default when you open the sidebar, it pushes the whole content area to the side, which changes the content area width:height ratio. So the player setup needs to resize the video element, resulting in a letterbox effect. It's easy enough to make the sidebar "float" over the content though. You can do it with pure css. The major downside is that you lose the ability to resize the sidebar. You'd have to set the width manually. That's because the native implementation of resizing relies on the old-school proprietary -moz-box spec. The space within #browser is finite and the -moz-boxes within fill that space based on some css rules. The resizing is actually handled by the separator, which is a totally independent element. So within #browser you have: content | separator | sidebar. And moving the separator defines how big the sidebar and content area are, but this only works *because* they can't occupy the same space. To make the sidebar float over the content area you need to change its display and position rules, which means the separator no longer packs right next to the sidebar. It's sort of like plucking the sidebar out of the flexbox. The separator moves all the way to the end of the screen and the content area expands to fill that space. So the separator becomes useless and we lose the ability to resize the sidebar. So the main thing this does is add a resizer to the sidebar. It doesn't make the sidebar float by itself. That's what the css files in this repo are for. It also remaps the ctrl+b shortcut to simply toggle the sidebar rather than exclusively opening the bookmarks sidebar. So if you previously had the synced tabs sidebar open before you closed it, ctrl+b will open the sidebar to the synced tabs page, rather than opening to the bookmarks view. The bookmarks view is instead remapped to ctrl+shift+b. This overrides the built-in ctrl+shift+b command, which opens the bookmarks toolbar. I don't use the bookmarks toolbar myself but I figure someone who does use it probably wants it open 24/7 and isn't likely to need a hotkey to hide/show it. FYI the hotkey depends on your os, like other firefox shortcuts. e.g. On macOS it'll be Cmd+B, not Ctrl+B. It also depends on your accel key setting, so if you change the key in about:config, this hotkey will use your modifier key. Anyway, the hotkey changes can be disabled in about:config by setting userchrome.floating-sidebar.hotkey to false.
@@ -8,21 +8,35 @@
 
 (() => {
     function startup() {
-        let box = SidebarUI._box, // outer box
-            prefsvc = Services.prefs,
-            anchor = "sidebar.position_start", // boolean pref: whether sidebar is on the left or right side of the browser content area.
-            widthPref = "userChrome.floating-sidebar.width", // string pref: we set this so we can remember user's sidebar width when rebooting or opening a new window.
-            hotkey = "userChrome.floating-sidebar.hotkey", // boolean pref: whether the ctrl+B hotkey should be changed or not.
-            cB = "viewBookmarksSidebarKb", // string representing the built-in ctrl+B command
-            csB = "viewBookmarksToolbarKb", // string representing the built-in ctrl+shift+B command
-            resizer = document.createElement("div"), // invisible little bar by which to drag the sidebar to resize it
-            sidebarCmd = document.getElementById(cB), // the actual ctrl+B command
-            toolbarCmd = document.getElementById(csB), // the actual ctrl+shift+B command
-            sidebarSwitch = document.getElementById("sidebar-switcher-bookmarks"), // the bookmarks button that appears in the switcher menu at the top of the sidebar
-            menuSwitch = document.getElementById("menu_bookmarksSidebar"), // the bookmarks button that appears in the titlebar menubar under view > sidebar > bookmarks
-            frame = false,
-            startWidth,
-            startX;
+        // outer box
+        let box = SidebarUI._box;
+        let prefsvc = Services.prefs;
+        let sidebarBundle = Services.strings.createBundle(
+            "chrome://browser/locale/customizableui/customizableWidgets.properties"
+        );
+        // boolean pref: whether sidebar is on the left or right side of the browser content area.
+        let anchor = "sidebar.position_start";
+        // string pref: we set this so we can remember user's sidebar width when rebooting or opening a new window.
+        let widthPref = "userChrome.floating-sidebar.width";
+        // boolean pref: whether the ctrl+B hotkey should be changed or not.
+        let hotkey = "userChrome.floating-sidebar.hotkey";
+        // string representing the built-in ctrl+B command
+        let cB = "viewBookmarksSidebarKb";
+        // string representing the built-in ctrl+shift+B command
+        let csB = "viewBookmarksToolbarKb";
+        // invisible little bar by which to drag the sidebar to resize it
+        let resizer = document.createElement("div");
+        // the actual ctrl+B command
+        let sidebarCmd = document.getElementById(cB);
+        // the actual ctrl+shift+B command
+        let toolbarCmd = document.getElementById(csB);
+        // the bookmarks button that appears in the switcher menu at the top of the sidebar
+        let sidebarSwitch = document.getElementById("sidebar-switcher-bookmarks");
+        // the bookmarks button that appears in the titlebar menubar under view > sidebar > bookmarks
+        let menuSwitch = document.getElementById("menu_bookmarksSidebar");
+        let frame = false;
+        let startWidth;
+        let startX;
 
         function initDrag(e) {
             resizer.style.width = "200%"; // this is not directly visible since the element has no background or content. this just means that while you're clicking+dragging the resizer, its width expands to double the size of the entire sidebar. sounds weird but this is done because there are iframes under the cursor... an iframe in the sidebar, on one side of the cursor, and an iframe in the browser on the other side. when the cursor moves over these elements, the CSS changes the cursor from "ew-resize" to "default" or "pointer" or whatever. at the same time, the script kicks in and sets the width of the sidebar to follow the cursor. if these actually happened simultaneously then it wouldn't matter, since the sidebar would always resize instantly, meaning the resizer would always be directly underneath the cursor. but they don't happen simultaneously, the CSS changes the cursor and THEN the sidebar is resized. meaning that during the intervening period, the cursor flickers to something else. when you're actually resizing, this is happening like dozens of times a second or more, so you would see really rapid flickering of the cursor. if we were designing a web app this would be easy to solve, just use javascript to modulate document.body.style.cursor on mousedown and mouseup. but since this is a userChrome script, and the cursor is on top of iframes with documents that are very complicated to access from the global execution context, we should just work around it. so instead of trying to manually set cursor rules for every element the cursor might intersect, we'll just make the invisible resizer so big that there's no way to move your mouse outside of it before the sidebar catches up. then we set its size back to normal on mouseup.
@@ -69,9 +83,6 @@
         }
 
         function hotkeyObserve(_sub, _top, pref) {
-            let sidebarBundle = Services.strings.createBundle(
-                "chrome://browser/locale/customizableui/customizableWidgets.properties"
-            );
             if (prefsvc.getBoolPref(pref)) {
                 sidebarCmd.setAttribute("oncommand", "SidebarUI.toggle();"); // ctrl+B to toggle
                 toolbarCmd.setAttribute(
@@ -80,9 +91,10 @@
                 );
                 menuSwitch.setAttribute("key", csB); // show ctrl+shift+B as the shortcut for view > sidebar > bookmarks
                 sidebarSwitch.setAttribute("key", csB); // show ctrl+shift+B as the shortcut in the sidebar switcher menu
-                SidebarUI.updateShortcut({ button: sidebarSwitch }); // this generates the shortcut label from the key attribute. better to do it this way so it'll correctly show the modifier key depending on your settings and OS. like if accel key is cmd/meta then it'll say so, if you set it to alt for some reason it should say that as well. although it won't dynamically update if you change your accel key setting during runtime., since that would be extremely rare.
+                SidebarUI.updateShortcut({ button: sidebarSwitch }); // this generates the shortcut label from the key attribute. better to do it this way so it'll correctly show the modifier key depending on your settings and OS. like if accel key is cmd/meta then it'll say so, if you set it to alt for some reason it should say that as well. although it won't dynamically update if you change your accel key setting during runtime, since that would be extremely rare.
+                nodeToShortcutMap["bookmarks-menu-button"] = csB; // change the hotkey in the bookmarks toolbar button's tooltip to reflect the bookmarks sidebar hotkey rather than the bookmarks manager hotkey, since the history toolbar button shows its sidebar hotkey. it's just to clear up a minor inconsistency.
             } else {
-                // factory reset
+                // (mostly) factory reset
                 sidebarCmd.setAttribute("oncommand", "SidebarUI.toggle('viewBookmarksSidebar');");
                 toolbarCmd.setAttribute(
                     "oncommand",
@@ -91,6 +103,7 @@
                 menuSwitch.setAttribute("key", cB);
                 sidebarSwitch.setAttribute("key", cB);
                 SidebarUI.updateShortcut({ button: sidebarSwitch });
+                nodeToShortcutMap["bookmarks-menu-button"] = cB;
             }
             CustomizableUI.getWidget("sidebar-button")
                 .forWindow(window)
@@ -100,6 +113,7 @@
                         "sidebar-button.tooltiptext2"
                     )} (${ShortcutUtils.prettifyShortcut(sidebarCmd)})`
                 );
+            gDynamicTooltipCache.delete("bookmarks-menu-button");
         }
 
         async function prefSet(pref, val) {
