@@ -467,7 +467,7 @@ Required for loading userChrome.au.css and userChrome.as.css. It will actually l
 ####   [Browser Toolbox Stylesheet Loader](/script/userChrome_devtools_module.uc.js):
 Required for loading stylesheets into browser toolbox windows. [See here](#styling-browser-toolbox-windows) for more info.
 
-### **Other useful links:**
+## **Other useful links:**
 <details><summary><b><i>Click to expand...</i></b></summary>
 
 [Searchfox](https://searchfox.org/): A search engine for Firefox's source code. This is what I use to write most of my scripts. For example, if you wanted to make a button that adds a bookmark, you could find something in the UI that already does that, copy its ID, and search for it on Searchfox. From there you could track down its callback function, copy something from that and search for it, and ultimately find what you need. It indexes several repositories, including multiple versions of Firefox. You can permanently add this search engine to Firefox with [this extension](https://addons.mozilla.org/en-US/firefox/addon/add-custom-search-engine/), which makes writing code for Firefox immensely faster.
