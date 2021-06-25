@@ -6,7 +6,6 @@ that includes all the icons, page actions, etc. */
     border: none !important;
     box-shadow: none !important;
     min-height: var(--urlbar-height) !important;
-    font-size: 14px !important;
     font-weight: var(--urlbar-base-font-weight, 400);
 }
 
@@ -50,7 +49,7 @@ toolbarpaletteitem[place="palette"] > #search-container {
     border-bottom-left-radius: 4px !important;
     border-bottom-right-radius: 4px !important;
     box-shadow: 0 5px 18px rgba(0, 0, 0, 0.2);
-    font-size: 14px !important;
+    font-size: 1.15em !important;
 }
 
 #PopupSearchAutoComplete > * {
@@ -68,7 +67,7 @@ toolbarpaletteitem[place="palette"] > #search-container {
 }
 
 #PopupSearchAutoComplete .autocomplete-richlistitem .ac-title-text {
-    font-weight: var(--uc-font-weight-thin) !important;
+    font-weight: var(--urlbar-base-font-weight) !important;
     font-style: normal !important;
     color: var(--panel-shortcut-color);
 }
@@ -925,7 +924,7 @@ use 0.6 instead of 1 since 1 will end up being shown as like 1.4px for some wind
     border-radius: 0 !important;
     outline: none !important;
     margin-inline: -24px 0 !important;
-    font-size: 14px !important;
+    font-size: inherit !important;
     min-width: 16px !important;
     height: var(--urlbar-height) !important;
     padding-inline: 28px 8px !important;
@@ -984,7 +983,7 @@ use 0.6 instead of 1 since 1 will end up being shown as like 1.4px for some wind
     color: var(--lwt-toolbar-field-color, black) !important;
     opacity: 0.6 !important;
     padding-inline: 0px !important;
-    font-size: 14px !important;
+    font-size: inherit !important;
     font-weight: 400;
 }
 

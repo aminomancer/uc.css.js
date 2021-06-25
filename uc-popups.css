@@ -566,10 +566,6 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
         --in-content-button-vertical-padding: 5px !important;
     }
 
-    #commonDialog::part(content-box) {
-        padding-block: 5px;
-    }
-
     dialog[subdialog] .dialogRow {
         margin-block: 0 5px !important;
     }
@@ -856,6 +852,12 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
         border-radius: var(--toolbarbutton-border-radius) !important;
     }
 
+    input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):focus-visible,
+    textarea:focus-visible,
+    search-textbox:focus-visible {
+        background-color: color-mix(in srgb, currentColor 3%, var(--in-content-box-background)) !important;
+    }
+
     menulist {
         padding-inline: 4px 2px !important;
     }
@@ -887,6 +889,11 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
         background-color: var(--in-content-button-background-hover) !important;
         color: var(--in-content-button-text-color-hover) !important;
         border-color: transparent;
+    }
+
+    menulist:not([disabled="true"]):focus-visible {
+        background-color: var(--in-content-button-background-hover) !important;
+        color: var(--in-content-button-text-color-hover) !important;
     }
 
     button:is([autofocus], [type="submit"], .primary):enabled:is(:hover, :focus-visible),

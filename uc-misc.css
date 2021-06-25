@@ -4,14 +4,6 @@ includes status bars, tooltips, confirmation hints and warnings,
 notifications, specific favicons, fixing the white flash when loading pages,
 focus rings, text highlight colors, and compatibility adjustments for minBrowserNavBar.uc.js */
 
-#statuspanel:is([type="status"], [type="defaultStatus"]) #statuspanel-label {
-    opacity: 0 !important;
-}
-
-:root[inDOMFullscreen] #statuspanel {
-    display: none !important;
-}
-
 /* tooltip stuff, pair with userChrome.as.css to cover all tooltips */
 tooltip {
     -moz-default-appearance: none !important;
@@ -25,7 +17,6 @@ tooltip {
     margin-inline-start: -5px !important;
     margin-block-start: 16px !important;
     pointer-events: none !important;
-    /* font-family: FreeMono !important; */
 }
 
 tooltip > description {
@@ -155,6 +146,19 @@ progress[paused]::-moz-progress-bar {
     background-color: var(--desaturate-dimmed-further);
 }
 
+:root[inDOMFullscreen] #statuspanel {
+    display: none !important;
+}
+
+#statuspanel:not([type="overLink"], [inactive][previoustype="overLink"]) {
+    opacity: 0 !important;
+    transition: none !important;
+}
+
+#statuspanel[type="overLink"] {
+    transition: opacity 200ms var(--uc-smooth-timing-function), visibility 200ms;
+}
+
 /* blur filter */
 #statuspanel-label {
     background-color: var(--acrylic-blue) !important;
@@ -163,9 +167,14 @@ progress[paused]::-moz-progress-bar {
     color: hsla(0, 0%, 100%, 0.85) !important;
     border: none !important;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2) !important;
-    /* font-family: FreeMono !important; */
-    /*     transition: opacity 70ms ease-in-out !important; */
     opacity: 1;
+    padding: 6px 8px 6px !important;
+}
+
+#statuspanel-inner {
+    width: -moz-fit-content !important;
+    min-width: unset !important;
+    max-width: unset !important;
 }
 
 #statuspanel:not([mirror])
@@ -284,22 +293,33 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
 
 @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
     @-moz-document regexp("^chrome:(?!\/\/(devtools|mozapps|browser\/content\/(sanitize|places\/places.xhtml|pageinfo\/pageInfo.xhtml)|global\/content\/commonDialog)).*") {
+        /* for most 12px stuff */
         html:root,
         window:root,
         panel,
-        menupopup,
         popupnotification,
         tooltip,
         panelview,
+        #BMB_bookmarksPopup,
         #main-menubar,
         .sidebar-search-container {
-            font-family: SF Pro Display, Segoe UI, sans-serif !important;
+            font-family: SF Pro Text, Segoe UI, sans-serif !important;
             font-kerning: normal !important;
         }
 
-        #urlbar {
-            --urlbar-base-font-weight: 300;
-            --urlbar-result-strong-font-weight: 400;
+        /* for stuff that should be thin */
+        menupopup,
+        #urlbar,
+        #searchbar,
+        #PopupSearchAutoComplete {
+            font-family: SF Pro, Segoe UI, sans-serif !important;
+        }
+
+        /* for displaying larger font sizes */
+        .panel-header,
+        #sidebar-header {
+            font-family: SF Pro Display, Segoe UI, sans-serif !important;
+            font-kerning: normal !important;
         }
 
         :is(#back-button-tooltip, #forward-button-tooltip) .tooltip-label[id]:not(:last-of-type) {
@@ -345,8 +365,12 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
             font-weight: 400 !important;
         }
 
+        #appMenu-zoomReset-button2 .toolbarbutton-text {
+            font-size: 11.5px !important;
+        }
+
         .popup-notification-body input[type="password"] {
-            font-family: SFPro !important;
+            font-family: SF Pro !important;
         }
 
         treechildren {

@@ -30,63 +30,10 @@ tooltip[default][page] > description {
 {
     @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
         tooltip[default][page] {
-            font-family: SF Pro Display, Segoe UI, sans-serif !important;
+            font-family: SF Pro Text, Segoe UI, sans-serif !important;
             font-kerning: normal !important;
         }
     }
-}
-
-/* blur filter */
-#statuspanel-label {
-    background-image: var(--acrylic-texture) !important;
-    background-color: var(--blur-bgcolor) !important;
-    backdrop-filter: var(--acrylic-blur);
-    color: var(--statuspanel-color) !important;
-    border: none !important;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2) !important;
-    opacity: 1;
-}
-
-#statuspanel:not([mirror])
-    #statuspanel-inner:is(:dir(ltr), :-moz-locale-dir(ltr))
-    #statuspanel-label {
-    border-top-left-radius: 0;
-    border-top-right-radius: var(--tooltip-border-radius);
-}
-
-#statuspanel[mirror] #statuspanel-inner #statuspanel-label,
-#statuspanel #statuspanel-inner:is(:dir(rtl), :-moz-locale-dir(rtl)) #statuspanel-label {
-    border-top-left-radius: var(--tooltip-border-radius);
-    border-top-right-radius: 0;
-}
-
-@-moz-document url(chrome://global/content/commonDialog.xhtml),
-               url("chrome://mozapps/content/handling/permissionDialog.xhtml"),
-               url("chrome://mozapps/content/handling/appChooser.xhtml")
-{
-    #commonDialog::part(content-box) {
-        padding-block: 5px;
-    }
-}
-
-:is(.content-prompt-dialog, .tab-prompt-dialog) .dialogFrame {
-    background-color: var(--dialog-bgcolor) !important;
-    background-image: var(--acrylic-texture) !important;
-    backdrop-filter: var(--acrylic-blur) !important;
-}
-
-.tab-prompt-dialog :is(.dialogBox, .dialogFrame) {
-    border-radius: 0 0 5px 5px;
-}
-
-.content-prompt-dialog :is(.dialogBox, .dialogFrame) {
-    border-radius: 5px;
-}
-
-#fullscreen-warning {
-    background-color: var(--blur-bgcolor) !important;
-    background-image: var(--acrylic-texture) !important;
-    backdrop-filter: var(--acrylic-blur) !important;
 }
 
 /* firefox UI scrollbars */

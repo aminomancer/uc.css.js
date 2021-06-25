@@ -5,7 +5,7 @@
     @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
         body,
         input {
-            font-family: SF Pro Display, Segoe UI, sans-serif !important;
+            font-family: SF Pro, Segoe UI, sans-serif !important;
         }
 
         header .search .fa {

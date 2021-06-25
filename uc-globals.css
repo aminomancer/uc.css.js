@@ -7,6 +7,15 @@ but other than that these variables should be available everywhere. */
 
 :root,
 tooltip {
+    --ui-text-30: rgba(255, 255, 255, 0.3);
+    --ui-text-40: rgba(255, 255, 255, 0.4);
+    --ui-text-50: rgba(255, 255, 255, 0.5);
+    --ui-text-60: rgba(255, 255, 255, 0.6);
+    --ui-text-70: rgba(255, 255, 255, 0.7);
+    --ui-text-80: rgba(255, 255, 255, 0.8);
+    --ui-text-90: rgba(255, 255, 255, 0.9);
+    --ui-text-100: #fff;
+
     --uc-arrowpanel-darker: hsla(236, 70%, 73%, 0.17);
     --uc-arrowpanel-faint: hsla(236, 100%, 83%, 0.1);
     --uc-arrowpanel-dimmed: hsla(236, 100%, 83%, 0.17);
@@ -55,6 +64,7 @@ tooltip {
     --dialog-box-border-hover: hsla(232, 100%, 85%, 0.3);
     --alertbox-bgcolor: hsla(0, 0%, 14%, 0.97);
     --notification-menu-color: var(--in-parent-page-color);
+    --context-menu-disabled-color: hsla(213, 43%, 89%, 0.5);
 
     --identity-box-solid-bg: hsl(235, 33%, 23%);
     --identity-box-hover-bg: hsl(234, 30%, 26%);
@@ -78,23 +88,13 @@ tooltip {
     --url-selection-color: white;
     --ui-selection-bgcolor: hsla(0, 0%, 100%, 0.9);
     --ui-selection-color: hsl(236, 20%, 16%);
-    --content-selection-bgcolor: hsla(0, 0%, 100%, 0.8);
+    --content-selection-bgcolor: var(--ui-text-80);
     --content-selection-color: hsl(240, 4%, 10%);
 
     /* controls the color of the search highlights in about:preferences */
     --solid-selection-bgcolor: var(--pink-action);
     /* controls the color of the little tooltips that appear on search highlighted buttons in about:preferences */
     --aboutPrefs-find-tags: var(--purple-35);
-
-    --ui-text-30: rgba(255, 255, 255, 0.3);
-    --ui-text-40: rgba(255, 255, 255, 0.4);
-    --ui-text-50: rgba(255, 255, 255, 0.5);
-    --ui-text-60: rgba(255, 255, 255, 0.6);
-    --ui-text-70: rgba(255, 255, 255, 0.7);
-    --ui-text-80: rgba(255, 255, 255, 0.8);
-    --ui-text-90: rgba(255, 255, 255, 0.9);
-    --ui-text-100: rgb(255, 255, 255);
-    --context-menu-disabled-color: hsla(213, 43%, 89%, 0.5);
 
     --badge-color-dark: hsl(236, 13%, 42%);
     --badge-color-light: var(--lwt-toolbarbutton-icon-fill-attention);
@@ -124,6 +124,8 @@ tooltip {
     --textbox-button-hidden: hsla(240, 100%, 89%, 0);
     --confirmation-hint-bgcolor: hsl(240, 60%, 59%);
 
+    --urlbar-base-font-weight: 400;
+    --urlbar-result-strong-font-weight: 400;
     --urlbar-results-bgcolor: hsl(233, 32%, 10%);
     --urlbar-bookmark-icon-color: hsl(250, 100%, 64%);
     /* the width of a search one-off button in the urlbar */

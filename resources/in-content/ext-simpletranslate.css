@@ -57,8 +57,12 @@
 
     @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
         body {
-            font-family: SF Pro Display, Segoe UI, sans-serif !important;
+            font-family: SF Pro Text, Segoe UI, sans-serif !important;
             font-kerning: normal !important;
+        }
+
+        .title {
+            font-family: SF Pro Display, Segoe UI, sans-serif !important;
         }
     }
 

@@ -26,12 +26,19 @@ panelview {
 instead of 4px from the edge as it should be.
 this connects with .panel-subview-body rules in userChrome.au.css */
 .panel-header + .panel-subview-body {
-    margin-block: var(--panel-separator-margin); /* for some reason, the "recently closed tabs" subview doesn't have a separator under the header. simulate one. */
+    /* for some reason, the "recently closed tabs" subview doesn't have a separator under the header. simulate one. */
+    border-top: 1px solid transparent;
+    border-image: linear-gradient(
+        to right,
+        transparent 4px,
+        var(--panel-separator-color) 4px,
+        var(--panel-separator-color) calc(100% - 4px),
+        transparent calc(100% - 4px)
+    );
+    border-image-slice: 1;
+    margin-block: var(--panel-separator-margin);
     margin-block-end: 0;
     padding-bottom: 0 !important; /* revert the extra padding from the previous rule on certain panels that don't need it */
-    border-top: 1px solid transparent;
-    border-image: linear-gradient(to right, transparent 4px, var(--panel-separator-color) 4px, var(--panel-separator-color) calc(100% - 4px), transparent calc(100% - 4px));
-    border-image-slice: 1;
 }
 
 .panel-subview-body:not(:last-child) {
@@ -63,7 +70,7 @@ panel[viewId="PanelUI-eom"] .panel-viewcontainer[panelopen] {
 }
 
 #widget-overflow .webextension-popup-browser {
-	background: none !important;
+    background: none !important;
 }
 
 #identity-popup[type="arrow"][side="top"],
@@ -275,17 +282,20 @@ panel[type="arrow"][side="top"] {
     color: white;
 }
 
-.popup-notification-button-container > :is(.popup-notification-secondary-button, .popup-notification-dropmarker):not([disabled]) {
+.popup-notification-button-container
+    > :is(.popup-notification-secondary-button, .popup-notification-dropmarker):not([disabled]) {
     background-color: transparent !important;
     border-color: var(--button-hover-bgcolor) !important;
 }
 
-.popup-notification-button-container > :is(.popup-notification-secondary-button, .popup-notification-dropmarker):not([disabled], :active):is(:hover, :focus-visible) {
+.popup-notification-button-container
+    > :is(.popup-notification-secondary-button, .popup-notification-dropmarker):not([disabled], :active):is(:hover, :focus-visible) {
     background-color: var(--button-hover-bgcolor) !important;
     border-color: transparent !important;
 }
 
-.popup-notification-button-container > :is(.popup-notification-secondary-button, .popup-notification-dropmarker):not([disabled]):is(:hover:active, [open]) {
+.popup-notification-button-container
+    > :is(.popup-notification-secondary-button, .popup-notification-dropmarker):not([disabled]):is(:hover:active, [open]) {
     background-color: var(--button-active-bgcolor) !important;
     border-color: transparent !important;
 }
@@ -295,7 +305,8 @@ panel[type="arrow"][side="top"] {
     background-color: var(--button-primary-hover-bgcolor) !important;
 }
 
-.popup-notification-button-container > .popup-notification-primary-button:not([disabled]):hover:active {
+.popup-notification-button-container
+    > .popup-notification-primary-button:not([disabled]):hover:active {
     background-color: var(--button-primary-active-bgcolor) !important;
 }
 
@@ -437,6 +448,10 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
 
 .popup-notification-checkbox > .checkbox-label-box > .checkbox-label {
     margin-block: 0 !important;
+}
+
+.subviewradio {
+    padding-inline-start: 0 !important;
 }
 
 .subviewradio:not([disabled], [open], [selected], :active):is(:hover, :focus) {
@@ -585,8 +600,8 @@ popupnotification progress[paused]::-moz-progress-bar {
 } */
 
 .subviewbutton-back > .toolbarbutton-icon {
-	width: 16px;
-	height: 16px;
+    width: 16px;
+    height: 16px;
 }
 
 .panel-header > .subviewbutton-back,
@@ -640,6 +655,10 @@ popupnotification progress[paused]::-moz-progress-bar {
 
 #identity-popup .subviewbutton-nav > vbox {
     min-height: 33.3px !important;
+}
+
+#identity-popup-security-button {
+    margin-bottom: revert !important;
 }
 
 .identity-popup-security-connection.identity-button {
@@ -713,22 +732,22 @@ popupnotification progress[paused]::-moz-progress-bar {
 
 #protections-popup #messaging-system-message-container {
     margin-inline: var(--panel-separator-margin);
-	transition: margin-bottom .25s, border-color .25s !important;
+    transition: margin-bottom 0.25s, border-color 0.25s !important;
 }
 
 #protections-popup #messaging-system-message-container[disabled] {
-	border-top-color: transparent !important;
-	transition: margin-bottom .25s, border-color .5s !important;
+    border-top-color: transparent !important;
+    transition: margin-bottom 0.25s, border-color 0.5s !important;
 }
 
 #PanelUI-whatsNew .whatsNew-message-title,
 #protections-popup-message .whatsNew-message-title {
-	font-weight: var(--uc-font-weight-bold) !important;
+    font-weight: var(--uc-font-weight-bold) !important;
 }
 
 #protections-popup-message .text-link {
     color: var(--lwt-popup-brighttext-url-color) !important;
-	font-weight: var(--uc-font-weight-bold) !important;
+    font-weight: var(--uc-font-weight-bold) !important;
 }
 
 .protections-popup-tp-switch:not([enabled]) {
@@ -883,7 +902,7 @@ popupnotification progress[paused]::-moz-progress-bar {
 
 panel .header,
 #identity-popup-security-description > description {
-	font-weight: var(--uc-font-weight-bold) !important;
+    font-weight: var(--uc-font-weight-bold) !important;
 }
 
 .panel-view-body-unscrollable {
@@ -1255,10 +1274,6 @@ panel .header,
     margin-inline: 4px !important;
 }
 
-#identity-popup-clear-sitedata-footer {
-    margin-inline: 4px !important;
-}
-
 .panel-footer.panel-footer-menulike {
     margin-inline: 4px !important;
     margin-bottom: 4px !important;
@@ -1377,4 +1392,31 @@ panel .header,
 #protections-popup-sendReportView-body {
     margin: var(--arrowpanel-menuitem-margin) !important;
     padding-inline: calc(var(--arrowpanel-menuitem-padding) * 2) !important;
+}
+
+/* panic button panel */
+#PanelUI-panic-timeframe {
+    padding: 8px !important;
+    padding-bottom: 12px !important;
+    margin: 4px !important;
+}
+
+#panic-button-success-icon,
+#PanelUI-panic-timeframe-icon {
+    filter: hue-rotate(-13deg);
+}
+
+#PanelUI-panic-mainDesc,
+#PanelUI-panic-actionlist-main-label {
+    margin-bottom: 6px !important;
+}
+
+.PanelUI-panic-actionlist {
+    margin-bottom: 4px !important;
+    filter: brightness(1.5);
+}
+
+#PanelUI-panic-warning {
+    color: var(--warning-color) !important;
+    margin-top: 12px !important;
 }

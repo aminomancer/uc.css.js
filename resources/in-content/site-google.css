@@ -7,4 +7,10 @@
     #islsp {
         float: left !important;
     }
+
+    @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
+        * {
+            font-family: SF Pro, Roboto, Arial, sans-serif !important;
+        }
+    }
 }

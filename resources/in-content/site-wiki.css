@@ -400,7 +400,8 @@ domain("wikimedia.org") {
         background-image: url(chrome://userchrome/content/preferences/category-search.svg) !important;
     }
 
-    .oo-ui-icon-search, .mw-ui-icon-search::before {
+    .oo-ui-icon-search,
+    .mw-ui-icon-search::before {
         -moz-context-properties: fill, fill-opacity !important;
         opacity: 1 !important;
         fill: currentColor !important;
@@ -2578,7 +2579,9 @@ domain("wikimedia.org") {
         cursor: pointer !important;
     }
 
-    #bodyContent .oo-ui-tagItemWidget.oo-ui-labelElement:not(.oo-ui-tagItemWidget-fixed) .oo-ui-labelElement-label {
+    #bodyContent
+        .oo-ui-tagItemWidget.oo-ui-labelElement:not(.oo-ui-tagItemWidget-fixed)
+        .oo-ui-labelElement-label {
         text-decoration: none !important;
         margin-inline: 2px !important;
     }
@@ -2609,14 +2612,16 @@ domain("wikimedia.org") {
             url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 fill=%22context-fill%22 fill-opacity=%22context-fill-opacity%22 width=%2212%22 height=%2212%22 viewBox=%220 0 12 12%22%3E%3Ctitle%3Edown%3C/title%3E%3Cpath d=%22M10.085 2.943L6.05 6.803l-3.947-3.86L1.05 3.996l5 5 5-5z%22/%3E%3C/svg%3E") !important;
     }
 
-    .oo-ui-icon-menu, .mw-ui-icon-menu::before {
+    .oo-ui-icon-menu,
+    .mw-ui-icon-menu::before {
         color: inherit !important;
         fill: currentColor !important;
         -moz-context-properties: fill, fill-opacity !important;
         background-size: 16px !important;
         width: 16px !important;
         min-width: 16px !important;
-        background-image: linear-gradient(transparent,transparent),url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 fill=%22context-fill%22 fill-opacity=%22context-fill-opacity%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E%3Ctitle%3Emenu%3C/title%3E%3Cpath d=%22M1 3v2h18V3zm0 8h18V9H1zm0 6h18v-2H1z%22/%3E%3C/svg%3E") !important;
+        background-image: linear-gradient(transparent, transparent),
+            url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 fill=%22context-fill%22 fill-opacity=%22context-fill-opacity%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E%3Ctitle%3Emenu%3C/title%3E%3Cpath d=%22M1 3v2h18V3zm0 8h18V9H1zm0 6h18v-2H1z%22/%3E%3C/svg%3E") !important;
     }
 
     .mw-advancedSearch-namespace-border {
@@ -2634,7 +2639,7 @@ domain("wikimedia.org") {
 
     .mw-advancedSearch-namespace-selection,
     .mw-advancedSearch-fieldContainer {
-        background: linear-gradient(rgba(0,0,0,0.1),rgb(35, 35, 36) 0.5em) !important;
+        background: linear-gradient(rgba(0, 0, 0, 0.1), rgb(35, 35, 36) 0.5em) !important;
         border: solid 1px transparent !important;
     }
 
@@ -2642,7 +2647,10 @@ domain("wikimedia.org") {
         border-color: hsl(240, 1.4%, 25%) !important;
     }
 
-    .mw-advancedSearch-fieldContainer .oo-ui-labelElement > .oo-ui-fieldsetLayout-header > .oo-ui-labelElement-label {
+    .mw-advancedSearch-fieldContainer
+        .oo-ui-labelElement
+        > .oo-ui-fieldsetLayout-header
+        > .oo-ui-labelElement-label {
         background: rgb(35, 35, 36) !important;
         color: hsl(240, 1.4%, 75%) !important;
         height: 1em !important;
@@ -2650,7 +2658,8 @@ domain("wikimedia.org") {
         margin: 0 !important;
     }
 
-    .oo-ui-icon-info, .mw-ui-icon-info::before {
+    .oo-ui-icon-info,
+    .mw-ui-icon-info::before {
         background-image: url(chrome://userchrome/content/info.svg) !important;
         background-size: 80% !important;
         background-position: center !important;
@@ -2682,14 +2691,15 @@ domain("wikimedia.org") {
     }
 
     .oo-ui-dropdownInputWidget.oo-ui-widget-enabled,
-    .oo-ui-dropdownWidget.oo-ui-widget-enabled.oo-ui-dropdownWidget-open .oo-ui-dropdownWidget-handle {
+    .oo-ui-dropdownWidget.oo-ui-widget-enabled.oo-ui-dropdownWidget-open
+        .oo-ui-dropdownWidget-handle {
         background-color: rgb(14, 15, 16) !important;
         border-radius: 2px !important;
         color: inherit !important;
     }
 
     .oo-ui-dropdownWidget.oo-ui-widget-enabled .oo-ui-dropdownWidget-handle:focus {
-        border-color: transparent !important;;
+        border-color: transparent !important;
         box-shadow: none !important;
     }
 
