@@ -40,7 +40,6 @@ tooltip {
 
     --uc-font-weight-bold: 600;
     --uc-font-weight-thin: 400;
-    --menuitem-height: 26px;
     --subdialog-font-size: 1em !important;
 
     --autocomplete-background: hsl(233, 33%, 17%);
@@ -51,6 +50,7 @@ tooltip {
     --webextension-panel-border-radius: 5px;
 
     --statuspanel-color: hsla(0, 0%, 100%, 0.85);
+    --noise-texture: url(chrome://userchrome/content/texture/lightnoise.png);
     --acrylic-blur: blur(15px);
     --acrylic-texture: url(chrome://userchrome/content/texture/lightnoise.png);
     --acrylic-blue: hsla(233.3, 39.1%, 9%, 0.58);
@@ -99,6 +99,8 @@ tooltip {
     --badge-color-dark: hsl(236, 13%, 42%);
     --badge-color-light: var(--lwt-toolbarbutton-icon-fill-attention);
 
+    --tab-background: var(--lwt-accent-color);
+    --tab-selected: var(--toolbar-bgcolor);
     --tab-hover: linear-gradient(180deg, hsl(231, 49%, 11%), hsl(233, 55%, 8%));
     --tab-pinned: linear-gradient(0deg, var(--toolbar-bgcolor), var(--lwt-accent-color));
     --tab-multi: linear-gradient(180deg, hsl(231, 50%, 11%), hsl(233, 53%, 8%));
@@ -139,6 +141,8 @@ tooltip {
     --menu-separator-color: hsl(233, 25%, 23%);
     --user-urlbar-container-height: 38px;
     --user-menubar-searchbar-width: 256px;
+    --menuitem-height: 26px;
+    --subviewbutton-height: 28px;
     --findbar-height: 22px;
     --urlbar-element-top-adjust-magnitude: 0.6px;
     --default-identity-icon: url(chrome://userchrome/content/info-filled.svg);

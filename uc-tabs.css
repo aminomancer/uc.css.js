@@ -79,8 +79,7 @@ when the tab bar is not overflowing, new tabs slide into place much more smoothl
 }
 
 .tabbrowser-tab:is([visuallyselected], [selected]) .tab-background {
-    background-image: none !important;
-    background: var(--toolbar-bgcolor) !important;
+    background: var(--tab-selected) !important;
 }
 
 .tabbrowser-tab:focus:not([aria-activedescendant]) > .tab-stack > .tab-background,
@@ -94,7 +93,7 @@ when the tab bar is not overflowing, new tabs slide into place much more smoothl
 
 .tabbrowser-tab:not([selected], [pinned], [multiselected], :hover, .keyboard-focused-tab)
     .tab-background {
-    background: var(--lwt-accent-color) !important;
+    background: var(--tab-background) !important;
 }
 
 .tabbrowser-tab:not([selected])[pinned] .tab-background {

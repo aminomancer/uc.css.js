@@ -18,10 +18,18 @@ menupopup:not(.PanelUI-subView) menu > menupopup {
     margin-block-start: var(--menupopup-child-margin-block-start) !important;
 }
 
+.menupopup-arrowscrollbox {
+    background-color: var(--menu-background-color) !important;
+    color: var(--menu-color) !important;
+    border: none !important;
+    border-radius: var(--menupopup-border-radius) !important;
+    box-shadow: var(--menupopup-shadow) !important;
+}
+
 menupopup:not(.PanelUI-subView) :is(menuitem, menu) {
     appearance: none !important;
     color: var(--ui-text-80) !important;
-    padding: 5px 0 !important;
+    padding: 0 !important;
     min-height: var(--menuitem-height) !important;
     border-radius: var(--context-menuitem-border-radius);
 }
@@ -106,6 +114,17 @@ menupopup:not(.PanelUI-subView) :is(menu, menuitem)[_moz-menuactive="true"][disa
 menu.subviewbutton:not([disabled="true"])[_moz-menuactive="true"]:active {
     background: var(--arrowpanel-dimmed) !important;
     box-shadow: none !important;
+}
+
+menupopup:not(.PanelUI-subView) menuseparator {
+    border-color: var(--menu-separator-color) !important;
+    margin: var(--menu-separator-margin) !important;
+    margin-inline: var(--menupopup-inner-padding-magnitude) !important;
+}
+
+:is(.menu-accel, .menu-iconic-accel)[value] {
+    margin-inline: 1.55em calc(var(--menu-right-margin) + 4px) !important;
+    padding-block: 0 !important;
 }
 
 menupopup menuitem:is([type="checkbox"], [type="radio"])::before {
@@ -344,30 +363,12 @@ menupopup > :is(menuitem, menu, menucaption, menugroup, menuseparator, search-te
     padding-inline: var(--context-padding-inline) !important;
 }
 
-.menupopup-arrowscrollbox {
-    background-color: var(--menu-background-color) !important;
-    color: var(--menu-color) !important;
-    border: none !important;
-    border-radius: var(--menupopup-border-radius) !important;
-    box-shadow: var(--menupopup-shadow) !important;
-}
-
-:is(.menu-accel, .menu-iconic-accel)[value] {
-    margin-inline: 1.55em calc(var(--menu-right-margin) + 4px) !important;
-    padding-block: 0 !important;
-}
-
 menuitem:not([disabled="true"]) :is(.menu-accel, .menu-iconic-accel) {
     color: var(--panel-shortcut-color);
 }
 
 menuitem[disabled="true"] :is(.menu-accel, .menu-iconic-accel) {
     opacity: 0.6;
-}
-
-menupopup:not(.PanelUI-subView) menuseparator {
-    border-color: var(--menu-separator-color) !important;
-    margin-inline: var(--menupopup-inner-padding-magnitude) !important;
 }
 
 menupopup:not(.PanelUI-subView) menuseparator:last-child {

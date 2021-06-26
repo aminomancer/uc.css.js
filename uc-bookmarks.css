@@ -550,9 +550,13 @@ link[href="chrome://global/skin/arrowscrollbox.css"] ~ :is(#scrollbutton-up, #sc
 
     #BMB_bookmarksPopup :is(menu, menuitem) {
         margin: var(--arrowpanel-menuitem-margin) !important;
-        min-height: 24px !important;
-        padding: var(--arrowpanel-menuitem-padding) !important;
+        min-height: var(--subviewbutton-height) !important;
+        padding: 0 var(--arrowpanel-menuitem-padding) !important;
         border-radius: var(--arrowpanel-menuitem-border-radius) !important;
+    }
+
+    #BMB_bookmarksPopup menuseparator {
+        margin: var(--panel-separator-margin) !important;
     }
 
     #BMB_bookmarksPopup menupopup :is(menuitem, menu) .menu-iconic-icon {

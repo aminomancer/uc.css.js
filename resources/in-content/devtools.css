@@ -505,6 +505,15 @@ and a few elements like checkboxes */
     menupopup[menu-api] menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-left {
         display: none !important;
     }
+    
+    #style-editor-chrome-window .stylesheet-name label:is([value^="uc-"], [value^="userChrome"], [value^="userContent"]),
+    #style-editor-chrome-window .stylesheet-name label:is([value^="ext-"], [value^="site-"]),
+    #style-editor-chrome-window
+        .stylesheet-name
+        label:is([value="devtools.css"], [value="library.css"], [value="menus.css"], [value="root.css"], [value="picture-in-picture.css"], [value="system.css"]) {
+        text-decoration: underline !important;
+        color: var(--attention-color) !important;
+    }
 
     @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
         menupopup {

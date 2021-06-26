@@ -127,6 +127,10 @@ panel[type="arrow"][side="top"] {
     margin-top: -9px;
 }
 
+.subviewbutton {
+    min-height: var(--subviewbutton-height) !important;
+}
+
 .panel-footer > button:not([disabled]):is(:hover, :focus-visible) {
     background-color: var(
         --button-hover-bgcolor,

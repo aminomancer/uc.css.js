@@ -23,6 +23,7 @@ menupopup {
     --lwt-toolbar-field-focus: hsla(233, 25%, 28%, 85%) !important;
     --lwt-toolbar-field-focus-color: #fff !important;
     --toolbar-bgcolor: var(--uc-toolbar-bgcolor) !important;
+    --toolbar-bgimage: none;
     --toolbar-color: var(--uc-toolbar-color) !important;
     --lwt-toolbarbutton-icon-fill: #fff !important;
     --lwt-background-alignment: top !important;
@@ -55,9 +56,9 @@ menupopup {
     --button-primary-hover-bgcolor: var(--purple-40) !important;
     --button-primary-active-bgcolor: var(--purple-35) !important;
     --button-primary-color: var(--button-color) !important;
-    --urlbar-input-bgcolor: hsla(233, 24%, 26%, 1) !important;
-    --urlbar-input-bgcolor-brighter: hsla(233, 23%, 27.2%, 1) !important;
-    --urlbar-input-bgcolor-even-brighter: hsla(233, 21%, 31%, 1) !important;
+    --urlbar-input-bgcolor: hsl(233, 24%, 26%) !important;
+    --urlbar-input-bgcolor-brighter: hsl(233, 23%, 27.2%) !important;
+    --urlbar-input-bgcolor-even-brighter: hsl(233, 21%, 31%) !important;
     --urlbar-input-bgcolor-disabled: hsla(233, 24%, 26%, 0.5) !important;
     --urlbar-toolbar-height: var(--user-urlbar-container-height) !important;
     --urlbar-container-height: var(--user-urlbar-container-height) !important;
@@ -130,6 +131,8 @@ menupopup {
     --menu-right-img: url(chrome://userchrome/content/menu-arrow.svg);
     --menu-right-margin: 4px;
     --menu-right-size: 14px;
+    --menu-separator-margin: 4px;
+    --panel-separator-margin: 4px !important;
     --buttons-secondary-hover-bgcolor: var(--arrowpanel-dimmed) !important;
     --buttons-secondary-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
     --vpn-on-icon: url(chrome://userchrome/content/skin/vpn-on-light.svg);

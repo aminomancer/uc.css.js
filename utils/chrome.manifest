@@ -14,8 +14,10 @@ override chrome://browser/skin/reader-mode.svg ../resources/skin/reader-mode.svg
 override chrome://browser/skin/forward.svg ../resources/skin/forward.svg
 override chrome://browser/skin/back.svg ../resources/skin/back.svg
 override chrome://browser/skin/reload.svg ../resources/skin/reload.svg
+override chrome://browser/skin/library.svg ../resources/skin/library.svg
 override chrome://browser/skin/bookmark.svg ../resources/skin/bookmark.svg
 override chrome://browser/skin/bookmark-hollow.svg ../resources/skin/bookmark-hollow.svg
+override chrome://browser/skin/bookmark-star-on-tray.svg ../resources/skin/bookmark-star-on-tray.svg
 override chrome://global/skin/icons/settings.svg ../resources/settings.svg
 override chrome://browser/content/extension.svg ../resources/material/extension.svg
 override chrome://mozapps/skin/extensions/extension.svg ../resources/material/extension.svg
@@ -53,3 +55,5 @@ override chrome://activity-stream/content/data/content/assets/glyph-highlights-1
 override chrome://activity-stream/content/data/content/assets/glyph-info-16.svg ../resources/glyph-info-16.svg
 override chrome://browser/skin/home.svg ../resources/skin/home.svg
 override chrome://browser/skin/privateBrowsing.svg ../resources/skin/privateBrowsing.svg
+override chrome://browser/skin/sidebars.svg ../resources/skin/sidebars.svg
+override chrome://browser/skin/sidebars-right.svg ../resources/skin/sidebars-right.svg

@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name           Extension Options Panel
-// @version        1.4
+// @version        1.5
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
-// @description    This script creates a toolbar button that opens a popup panel where extensions can be configured, disabled, uninstalled, etc. Each extension gets its own button in the panel. Clicking an extension's button leads to a subview where you can jump to the extension's options, disable or enable the extension, uninstall it, configure automatic updates, disable/enable it in private browsing, view its source code in whatever program is associated with .xpi files, open the extension's homepage, or copy the extension's ID. Based on a similar script by xiaoxiaoflood, but will not be compatible with xiaoxiaoflood's loader. This one requires fx-autoconfig or Alice0775's loader. It opens a panel instead of a menupopup, for more consistency with other toolbar widgets. There are configuration options directly below.
+// @description    This script creates a toolbar button that opens a popup panel where extensions can be configured, disabled, uninstalled, etc. Each extension gets its own button in the panel. Clicking an extension's button leads to a subview where you can jump to the extension's options, disable or enable the extension, uninstall it, configure automatic updates, disable/enable it in private browsing, view its source code in whatever program is associated with .xpi files, open the extension's homepage, or copy the extension's ID. The panel can also be opened from the App Menu, since the built-in "Add-ons and themes" button is replaced with an "Extensions" button that opens the panel, which in turn has an equivalent button inside it. Based on a similar script by xiaoxiaoflood, but will not be compatible with xiaoxiaoflood's loader. This one requires fx-autoconfig or Alice0775's loader. It opens a panel instead of a menupopup, for more consistency with other toolbar widgets. There are configuration options directly below.
 // ==/UserScript==
 
 class ExtensionOptionsWidget {
@@ -78,10 +78,20 @@ class ExtensionOptionsWidget {
      */
     create(aDoc, tag, props, isHTML = false) {
         let el = isHTML ? aDoc.createElement(tag) : aDoc.createXULElement(tag);
-        for (let prop in props) {
-            el.setAttribute(prop, props[prop]);
-        }
+        for (let prop in props) el.setAttribute(prop, props[prop]);
         return el;
+    }
+
+    /**
+     * set or remove multiple attributes for a given node
+     * @param {object} el (a DOM node)
+     * @param {object} props (an object of attribute name/value pairs)
+     * @returns the DOM node
+     */
+    setAttributes(el, props) {
+        for (let [name, value] of Object.entries(props))
+            if (value) el.setAttribute(name, value);
+            else el.removeAttribute(name);
     }
 
     /**
@@ -161,6 +171,8 @@ class ExtensionOptionsWidget {
                             class: "panel-subview-body",
                         })
                     );
+
+                    this.swapAddonsButton();
                 },
                 // populate the panel before it's shown
                 onViewShowing: (event) => {
@@ -180,6 +192,25 @@ class ExtensionOptionsWidget {
                 },
             });
         this.loadStylesheet(); // load the stylesheet
+    }
+
+    async swapAddonsButton() {
+        this.l10n = await new Localization(["toolkit/about/aboutAddons.ftl"], true);
+        PanelUI._initialized || PanelUI.init(shouldSuppressPopupNotifications);
+        this.setAttributes(
+            PanelUI.mainView.querySelector("#appMenu-extensions-themes-button") ||
+                PanelUI.mainView.querySelector("#appMenu-addons-button"),
+            {
+                "data-l10n-id": 0,
+                command: 0,
+                key: 0,
+                shortcut: 0,
+                class: "subviewbutton subviewbutton-nav",
+                oncommand: "PanelUI.showSubView('PanelUI-eom', this);",
+                closemenu: "none",
+                label: await this.l10n.formatValue(["addon-category-extension"]),
+            }
+        );
     }
 
     /**
@@ -212,6 +243,11 @@ class ExtensionOptionsWidget {
         Array.from(this.viewCache.children).forEach((panel) => {
             if (panel.id.includes("PanelUI-eom-addon-")) panel.remove();
         });
+        let appMenuMultiView = PanelMultiView.forNode(PanelUI.multiView);
+        if (PanelMultiView.forNode(view.closest("panelmultiview")) === appMenuMultiView)
+            Array.from(appMenuMultiView._viewStack.children).forEach((panel) => {
+                if (panel.id !== view.id && panel.id.includes("PanelUI-eom-addon-")) panel.remove();
+            });
 
         // all addons...
         addons
@@ -237,7 +273,7 @@ class ExtensionOptionsWidget {
                         label: addon.name + (showVersion ? " " + addon.version : ""),
                         class: "subviewbutton subviewbutton-iconic subviewbutton-nav eom-addon-button",
                         oncommand: "extensionOptionsPanel.showSubView(event, this)",
-                        "widget-type": "view",
+                        closemenu: "none",
                         "data-extensionid": addon.id,
                     });
                     // set the icon using CSS variables and list-style-image so that user stylesheets can override the icon URL.
@@ -277,6 +313,8 @@ class ExtensionOptionsWidget {
                 id: "eom-allAddonsButton",
                 class: "subviewbutton subviewbutton-iconic panel-subview-footer-button",
                 image: this.config["Icon URL"],
+                key: "key_openAddons",
+                shortcut: ShortcutUtils.prettifyShortcut(key_openAddons),
                 oncommand: `BrowserOpenAddonsMgr("addons://list/extension")`,
             })
         );
@@ -307,159 +345,151 @@ class ExtensionOptionsWidget {
             flex: "1",
             class: "PanelUI-subView cui-widget-panelview",
         });
-        document.createXULElement("panelview");
         this.viewCache.appendChild(view); // put it in the panel view cache, showSubView will pull it out later
 
         // create options button
-        if (addon.optionsURL) {
-            let optionsButton = this.create(document, "toolbarbutton", {
-                label: l10n["Addon Options label"],
-                class: "subviewbutton",
-            });
-            optionsButton.addEventListener("command", (e) => this.openAddonOptions(addon));
-            view.appendChild(optionsButton);
-        } else {
-            let manageButton = this.create(document, "toolbarbutton", {
-                label: l10n["Manage Addon label"],
-                class: "subviewbutton",
-            });
-            manageButton.addEventListener("command", (e) =>
-                BrowserOpenAddonsMgr("addons://detail/" + encodeURIComponent(addon.id))
-            );
-            view.appendChild(manageButton);
-        }
+        let optionsButton = this.create(document, "toolbarbutton", {
+            label: l10n["Addon Options label"],
+            class: "subviewbutton",
+        });
+        optionsButton.addEventListener("command", (e) => this.openAddonOptions(addon));
+        view.appendChild(optionsButton);
+
+        // manage button, when no options page exists
+        let manageButton = this.create(document, "toolbarbutton", {
+            label: l10n["Manage Addon label"],
+            class: "subviewbutton",
+        });
+        manageButton.addEventListener("command", (e) =>
+            BrowserOpenAddonsMgr("addons://detail/" + encodeURIComponent(addon.id))
+        );
+        view.appendChild(manageButton);
 
         // allow automatic updates
-        if (!!(addon.permissions & AddonManager.PERM_CAN_UPGRADE)) {
-            let updates = this.create(document, "hbox", {
-                id: "eom-allow-auto-updates",
-                align: "center",
-                class: "subviewbutton",
-            });
-            let updatesLabel = this.create(document, "label", {
-                id: "eom-allow-auto-updates-desc",
-                class: "toolbarbutton-text",
-                flex: 1,
-            });
-            updatesLabel.value = l10n["Automatic Updates label"];
-            let updatesGroup = this.create(document, "radiogroup", {
-                id: "eom-allow-auto-updates-group",
-                value: addon.applyBackgroundUpdates,
-                closemenu: "none",
-                orient: "horizontal",
-                "aria-labelledby": "eom-allow-auto-updates-desc",
-            });
-            updatesGroup.addEventListener(
-                "command",
-                (e) => (addon.applyBackgroundUpdates = e.target.value)
-            );
-            let setDefault = this.create(document, "radio", {
-                label: l10n.autoUpdate["Default label"],
-                class: "subviewradio",
-                value: 1,
-            });
-            let on = this.create(document, "radio", {
-                label: l10n.autoUpdate["On label"],
-                class: "subviewradio",
-                value: 2,
-            });
-            let off = this.create(document, "radio", {
-                label: l10n.autoUpdate["Off label"],
-                class: "subviewradio",
-                value: 0,
-            });
+        let updates = this.create(document, "hbox", {
+            id: "eom-allow-auto-updates",
+            align: "center",
+            class: "subviewbutton",
+        });
+        let updatesLabel = this.create(document, "label", {
+            id: "eom-allow-auto-updates-desc",
+            class: "toolbarbutton-text",
+            flex: 1,
+            wrap: true,
+        });
+        updatesLabel.textContent = l10n["Automatic Updates label"];
+        let updatesGroup = this.create(document, "radiogroup", {
+            id: "eom-allow-auto-updates-group",
+            value: addon.applyBackgroundUpdates,
+            closemenu: "none",
+            orient: "horizontal",
+            "aria-labelledby": "eom-allow-auto-updates-desc",
+        });
+        updatesGroup.addEventListener(
+            "command",
+            (e) => (addon.applyBackgroundUpdates = e.target.value)
+        );
+        let setDefault = this.create(document, "radio", {
+            label: l10n.autoUpdate["Default label"],
+            class: "subviewradio",
+            value: 1,
+        });
+        let on = this.create(document, "radio", {
+            label: l10n.autoUpdate["On label"],
+            class: "subviewradio",
+            value: 2,
+        });
+        let off = this.create(document, "radio", {
+            label: l10n.autoUpdate["Off label"],
+            class: "subviewradio",
+            value: 0,
+        });
 
-            [setDefault, on, off].forEach((node) => updatesGroup.appendChild(node));
-            updates.appendChild(updatesLabel);
-            updates.appendChild(updatesGroup);
-            view.appendChild(updates);
-        }
+        [setDefault, on, off].forEach((node) => updatesGroup.appendChild(node));
+        updates.appendChild(updatesLabel);
+        updates.appendChild(updatesGroup);
+        view.appendChild(updates);
 
         // allow in private browsing
-        if (
-            addon.incognito != "not_allowed" &&
-            !!(addon.permissions & AddonManager.PERM_CAN_CHANGE_PRIVATEBROWSING_ACCESS)
-        ) {
-            let setButtonState = async (addon, node) => {
-                let perms = await this.ExtensionPermissions.get(addon.id);
-                let isAllowed = perms.permissions.includes("internal:privateBrowsingAllowed");
-                node.permState = isAllowed;
-                node.setAttribute(
-                    "label",
-                    isAllowed
-                        ? l10n["Disable in Private Browsing label"]
-                        : l10n["Enable in Private Browsing label"]
-                );
-            };
+        let setButtonState = async (addon, node) => {
+            let perms = await this.ExtensionPermissions.get(addon.id);
+            let isAllowed = perms.permissions.includes("internal:privateBrowsingAllowed");
+            node.permState = isAllowed;
+            node.setAttribute(
+                "label",
+                isAllowed
+                    ? l10n["Disable in Private Browsing label"]
+                    : l10n["Enable in Private Browsing label"]
+            );
+        };
 
-            let privateButton = this.create(document, "toolbarbutton", {
-                class: "subviewbutton",
-                closemenu: "none",
-            });
+        let privateButton = this.create(document, "toolbarbutton", {
+            class: "subviewbutton",
+            closemenu: "none",
+        });
+        setButtonState(addon, privateButton);
+        privateButton.addEventListener("command", async (_e) => {
+            let policy = WebExtensionPolicy.getByID(addon.id);
+            await this.ExtensionPermissions[privateButton.permState ? "remove" : "add"](
+                addon.id,
+                {
+                    permissions: ["internal:privateBrowsingAllowed"],
+                    origins: [],
+                },
+                policy && policy.extension
+            );
             setButtonState(addon, privateButton);
-            privateButton.addEventListener("command", async (_e) => {
-                let policy = WebExtensionPolicy.getByID(addon.id);
-                await this.ExtensionPermissions[privateButton.permState ? "remove" : "add"](
-                    addon.id,
-                    {
-                        permissions: ["internal:privateBrowsingAllowed"],
-                        origins: [],
-                    },
-                    policy && policy.extension
-                );
-                setButtonState(addon, privateButton);
-            });
-            view.appendChild(privateButton);
-        }
+        });
+        view.appendChild(privateButton);
 
         // disable button
         let disableButton = this.create(document, "toolbarbutton", {
             label: addon.userDisabled ? l10n["Enable Addon label"] : l10n["Disable Addon label"],
             class: "subviewbutton",
             closemenu: "none",
-            oncommand: `PanelMultiView.forNode(this.parentElement).node.panelMultiView.goBack()`,
         });
         disableButton.addEventListener("command", (e) => {
-            addon.userDisabled ? addon.enable() : addon.disable();
-            this.getAddonsAndPopulate();
+            if (addon.userDisabled) {
+                addon.enable();
+                disableButton.setAttribute("label", l10n["Disable Addon label"]);
+            } else {
+                addon.disable();
+                disableButton.setAttribute("label", l10n["Enable Addon label"]);
+            }
         });
         view.appendChild(disableButton);
 
         // uninstall button, and so on...
-        if (!addon.isSystem && !addon.isBuiltin && !addon.temporarilyInstalled) {
-            let uninstallButton = this.create(document, "toolbarbutton", {
-                label: l10n["Uninstall Addon label"],
-                class: "subviewbutton",
-            });
-            uninstallButton.addEventListener("command", (e) => {
-                if (Services.prompt.confirm(null, null, `Delete ${addon.name} permanently?`))
-                    addon.pendingOperations & AddonManager.PENDING_UNINSTALL
-                        ? addon.cancelUninstall()
-                        : addon.uninstall();
-            });
-            view.appendChild(uninstallButton);
+        let uninstallButton = this.create(document, "toolbarbutton", {
+            label: l10n["Uninstall Addon label"],
+            class: "subviewbutton",
+        });
+        uninstallButton.addEventListener("command", (e) => {
+            if (Services.prompt.confirm(null, null, `Delete ${addon.name} permanently?`))
+                addon.pendingOperations & AddonManager.PENDING_UNINSTALL
+                    ? addon.cancelUninstall()
+                    : addon.uninstall();
+        });
+        view.appendChild(uninstallButton);
 
-            let viewSrcButton = this.create(document, "toolbarbutton", {
-                label: l10n["View Source label"],
-                class: "subviewbutton",
-            });
-            viewSrcButton.addEventListener("command", (e) => this.openArchive(addon));
-            view.appendChild(viewSrcButton);
-        }
+        let viewSrcButton = this.create(document, "toolbarbutton", {
+            label: l10n["View Source label"],
+            class: "subviewbutton",
+        });
+        viewSrcButton.addEventListener("command", (e) => this.openArchive(addon));
+        view.appendChild(viewSrcButton);
 
-        if (addon.homepageURL || addon.supportURL) {
-            let homePageButton = this.create(document, "toolbarbutton", {
-                label: l10n["Open Homepage label"],
-                class: "subviewbutton",
+        let homePageButton = this.create(document, "toolbarbutton", {
+            label: l10n["Open Homepage label"],
+            class: "subviewbutton",
+        });
+        homePageButton.addEventListener("command", (e) => {
+            switchToTabHavingURI(addon.homepageURL || addon.supportURL, true, {
+                inBackground: false,
+                triggeringPrincipal: Services.scriptSecurityManager.getSystemPrincipal(),
             });
-            homePageButton.addEventListener("command", (e) => {
-                switchToTabHavingURI(addon.homepageURL || addon.supportURL, true, {
-                    inBackground: false,
-                    triggeringPrincipal: Services.scriptSecurityManager.getSystemPrincipal(),
-                });
-            });
-            view.appendChild(homePageButton);
-        }
+        });
+        view.appendChild(homePageButton);
 
         let copyIdButton = this.create(document, "toolbarbutton", {
             label: l10n["Copy ID label"],
@@ -473,6 +503,25 @@ class ExtensionOptionsWidget {
             window.CustomHint?.show(copyIdButton, "Copied");
         });
         view.appendChild(copyIdButton);
+
+        view.addEventListener("ViewShowing", (e) => {
+            optionsButton.hidden = !addon.optionsURL;
+            manageButton.hidden = !!addon.optionsURL;
+            updates.hidden = !(addon.permissions & AddonManager.PERM_CAN_UPGRADE);
+            updatesGroup.setAttribute("value", addon.applyBackgroundUpdates);
+            privateButton.hidden = !(
+                addon.incognito != "not_allowed" &&
+                !!(addon.permissions & AddonManager.PERM_CAN_CHANGE_PRIVATEBROWSING_ACCESS)
+            );
+            setButtonState(addon, privateButton);
+            disableButton.setAttribute(
+                "label",
+                addon.userDisabled ? l10n["Enable Addon label"] : l10n["Disable Addon label"]
+            );
+            uninstallButton.hidden = viewSrcButton.hidden =
+                addon.isSystem || addon.isBuiltin || addon.temporarilyInstalled;
+            homePageButton.hidden = !(addon.homepageURL || addon.supportURL);
+        });
     }
 
     /**
@@ -542,7 +591,7 @@ class ExtensionOptionsWidget {
         let uri = makeURI(
             "data:text/css;charset=UTF=8," +
                 encodeURIComponent(
-                    `#eom-button{list-style-image:url('${this.config["Icon URL"]}');}#eom-mainView-panel-header{padding:8px 4px 4px 4px;min-height:44px;-moz-box-pack:center;-moz-box-align:center;}#eom-mainView-panel-header-span{font-weight:600;display:inline-block;text-align:center;overflow-wrap:break-word;}#widget-overflow #eom-mainView-panel-header,#widget-overflow #eom-mainView-panel-header + toolbarseparator{display:none;}.eom-addon-button{list-style-image:var(--extension-icon);}#PanelUI-eom .disabled label{opacity:.6;font-style:italic;}#eom-allow-auto-updates{padding-block:4px;}#eom-allow-auto-updates .radio-check{margin-block:0;}#eom-allow-auto-updates label{padding-bottom:1px;}#eom-allow-auto-updates-desc{margin-inline-end:8px;}#eom-allow-auto-updates .subviewradio{margin:0;margin-inline:2px;padding:0;background:none!important;}#eom-allow-auto-updates .radio-label-box{margin-inline-start:0;padding-block:0;}`
+                    `#eom-button{list-style-image:url('${this.config["Icon URL"]}');}#eom-mainView-panel-header{padding:8px 4px 4px 4px;min-height:44px;-moz-box-pack:center;-moz-box-align:center;}#eom-mainView-panel-header-span{font-weight:600;display:inline-block;text-align:center;overflow-wrap:break-word;}.panel-header ~ #eom-mainView-panel-header,.panel-header ~ #eom-mainView-panel-header + toolbarseparator{display:none;}.eom-addon-button{list-style-image:var(--extension-icon);}#PanelUI-eom .disabled label{opacity:.6;font-style:italic;}#eom-allow-auto-updates{padding-block:4px;}#eom-allow-auto-updates .radio-check{margin-block:0;}#eom-allow-auto-updates label{padding-bottom:1px;}#eom-allow-auto-updates-desc{margin-inline-end:8px;}#eom-allow-auto-updates .subviewradio{margin:0;margin-inline:2px;padding:0;background:none!important;}#eom-allow-auto-updates .radio-label-box{margin-inline-start:0;padding-block:0;}`
                 )
         );
         if (sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) return;
