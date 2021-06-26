@@ -472,6 +472,9 @@ Required for loading userChrome.au.css and userChrome.as.css. It will actually l
 ####   [Browser Toolbox Stylesheet Loader](/script/userChrome_devtools_module.uc.js):
 Required for loading stylesheets into browser toolbox windows. [See here](#styling-browser-toolbox-windows) for more info.
 
+####   [Misc. Mods](/script/miscMods.uc.js):
+Various tiny mods not worth making separate scripts for. Read the comments [inside the script](/script/miscMods.uc.js) for details.
+
 ## **Other useful links:**
 <details><summary><b><i>Click to expand...</i></b></summary>
 
