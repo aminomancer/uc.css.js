@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Extension Options Panel
-// @version        1.5
+// @version        1.6
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    This script creates a toolbar button that opens a popup panel where extensions can be configured, disabled, uninstalled, etc. Each extension gets its own button in the panel. Clicking an extension's button leads to a subview where you can jump to the extension's options, disable or enable the extension, uninstall it, configure automatic updates, disable/enable it in private browsing, view its source code in whatever program is associated with .xpi files, open the extension's homepage, or copy the extension's ID. The panel can also be opened from the App Menu, since the built-in "Add-ons and themes" button is replaced with an "Extensions" button that opens the panel, which in turn has an equivalent button inside it. Based on a similar script by xiaoxiaoflood, but will not be compatible with xiaoxiaoflood's loader. This one requires fx-autoconfig or Alice0775's loader. It opens a panel instead of a menupopup, for more consistency with other toolbar widgets. There are configuration options directly below.
@@ -105,12 +105,8 @@ class ExtensionOptionsWidget {
     }
 
     // where panelviews are hiding when we're not looking
-    get viewCache() {
-        return document.getElementById("appMenu-viewCache");
-    }
-
-    get toolbarButton() {
-        return CustomizableUI.getWidget("eom-button")?.forWindow(window)?.node;
+    viewCache(doc) {
+        return doc.getElementById("appMenu-viewCache");
     }
 
     constructor() {
@@ -172,7 +168,7 @@ class ExtensionOptionsWidget {
                         })
                     );
 
-                    this.swapAddonsButton();
+                    this.swapAddonsButton(aDoc);
                 },
                 // populate the panel before it's shown
                 onViewShowing: (event) => {
@@ -194,12 +190,13 @@ class ExtensionOptionsWidget {
         this.loadStylesheet(); // load the stylesheet
     }
 
-    async swapAddonsButton() {
+    async swapAddonsButton(aDoc) {
+        let win = aDoc.defaultView;
         this.l10n = await new Localization(["toolkit/about/aboutAddons.ftl"], true);
-        PanelUI._initialized || PanelUI.init(shouldSuppressPopupNotifications);
+        win.PanelUI._initialized || win.PanelUI.init(shouldSuppressPopupNotifications);
         this.setAttributes(
-            PanelUI.mainView.querySelector("#appMenu-extensions-themes-button") ||
-                PanelUI.mainView.querySelector("#appMenu-addons-button"),
+            win.PanelUI.mainView.querySelector("#appMenu-extensions-themes-button") ||
+                win.PanelUI.mainView.querySelector("#appMenu-addons-button"),
             {
                 "data-l10n-id": 0,
                 command: 0,
@@ -231,6 +228,8 @@ class ExtensionOptionsWidget {
     populatePanelBody(e, addons) {
         let prevState;
         let view = e?.target || this.panelview;
+        let win = view.ownerGlobal;
+        let doc = win.document;
         let body = view.querySelector(".panel-subview-body");
         let l10n = this.config.l10n;
         let enabledFirst = this.config["Show enabled extensions first"];
@@ -240,11 +239,11 @@ class ExtensionOptionsWidget {
 
         // clear all the panel items and subviews before rebuilding them.
         while (body.hasChildNodes()) body.removeChild(body.firstChild);
-        Array.from(this.viewCache.children).forEach((panel) => {
+        Array.from(this.viewCache(doc).children).forEach((panel) => {
             if (panel.id.includes("PanelUI-eom-addon-")) panel.remove();
         });
-        let appMenuMultiView = PanelMultiView.forNode(PanelUI.multiView);
-        if (PanelMultiView.forNode(view.closest("panelmultiview")) === appMenuMultiView)
+        let appMenuMultiView = win.PanelMultiView.forNode(PanelUI.multiView);
+        if (win.PanelMultiView.forNode(view.closest("panelmultiview")) === appMenuMultiView)
             Array.from(appMenuMultiView._viewStack.children).forEach((panel) => {
                 if (panel.id !== view.id && panel.id.includes("PanelUI-eom-addon-")) panel.remove();
             });
@@ -264,18 +263,20 @@ class ExtensionOptionsWidget {
                     (!addon.hidden || this.config["Show hidden extensions"]) &&
                     (!addon.userDisabled || showDisabled)
                 ) {
-                    // then get built into subviewbuttons...
+                    // then get built into subviewbuttons and corresponding subviews...
                     if (showDisabled && enabledFirst && prevState && addon.isActive != prevState)
-                        body.appendChild(document.createXULElement("toolbarseparator"));
+                        body.appendChild(doc.createXULElement("toolbarseparator"));
                     prevState = addon.isActive;
 
-                    let subviewbutton = this.create(document, "toolbarbutton", {
-                        label: addon.name + (showVersion ? " " + addon.version : ""),
-                        class: "subviewbutton subviewbutton-iconic subviewbutton-nav eom-addon-button",
-                        oncommand: "extensionOptionsPanel.showSubView(event, this)",
-                        closemenu: "none",
-                        "data-extensionid": addon.id,
-                    });
+                    let subviewbutton = body.appendChild(
+                        this.create(doc, "toolbarbutton", {
+                            label: addon.name + (showVersion ? " " + addon.version : ""),
+                            class: "subviewbutton subviewbutton-iconic subviewbutton-nav eom-addon-button",
+                            oncommand: "extensionOptionsPanel.showSubView(event, this)",
+                            closemenu: "none",
+                            "data-extensionid": addon.id,
+                        })
+                    );
                     // set the icon using CSS variables and list-style-image so that user stylesheets can override the icon URL.
                     subviewbutton.style.setProperty(
                         "--extension-icon",
@@ -284,37 +285,36 @@ class ExtensionOptionsWidget {
                     subviewbutton._Addon = addon;
 
                     this.setDisableStyle(subviewbutton, addon, false);
-
-                    body.appendChild(subviewbutton);
-                    this.buildSubView(addon, subviewbutton); // and subviews...
+                    this.buildSubView(addon, subviewbutton);
                 }
             });
 
         // if no addons are shown, display a "Download Addons" button that leads to AMO.
-        let getAddonsButton = this.create(document, "toolbarbutton", {
-            id: "eom-get-addons-button",
-            class: "subviewbutton subviewbutton-iconic",
-            label: l10n["Download Addons label"],
-            image: `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 68 68" style="border-radius:3px"><path fill="context-fill" fill-opacity="context-fill-opacity" d="M0 0v68h68V0H0zm61.8 49H49.5V32.4c0-5.1-1.7-7-5-7-4 0-5.6 2.9-5.6 6.9v10.2h3.9v6.4H30.5V32.4c0-5.1-1.7-7-5-7-4 0-5.6 2.9-5.6 6.9v10.2h5.6v6.4h-18v-6.4h3.9V26H7.5v-6.4h12.3V24c1.8-3.1 4.8-5 8.9-5 4.2 0 8.1 2 9.5 6.3 1.6-3.9 4.9-6.3 9.5-6.3 5.3 0 10.1 3.2 10.1 10.1v13.5h4V49z"/></svg>`,
-            oncommand: `switchToTabHavingURI(Services.urlFormatter.formatURLPref("extensions.getAddons.link.url"), true, {
+        let getAddonsButton = body.appendChild(
+            this.create(doc, "toolbarbutton", {
+                id: "eom-get-addons-button",
+                class: "subviewbutton subviewbutton-iconic",
+                label: l10n["Download Addons label"],
+                image: `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 68 68" style="border-radius:3px"><path fill="context-fill" fill-opacity="context-fill-opacity" d="M0 0v68h68V0H0zm61.8 49H49.5V32.4c0-5.1-1.7-7-5-7-4 0-5.6 2.9-5.6 6.9v10.2h3.9v6.4H30.5V32.4c0-5.1-1.7-7-5-7-4 0-5.6 2.9-5.6 6.9v10.2h5.6v6.4h-18v-6.4h3.9V26H7.5v-6.4h12.3V24c1.8-3.1 4.8-5 8.9-5 4.2 0 8.1 2 9.5 6.3 1.6-3.9 4.9-6.3 9.5-6.3 5.3 0 10.1 3.2 10.1 10.1v13.5h4V49z"/></svg>`,
+                oncommand: `switchToTabHavingURI(Services.urlFormatter.formatURLPref("extensions.getAddons.link.url"), true, {
                     inBackground: false,
                     triggeringPrincipal: Services.scriptSecurityManager.getSystemPrincipal(),
                 });`,
-        });
-        body.appendChild(getAddonsButton);
+            })
+        );
         getAddonsButton.hidden = body.children.length > 1;
 
         // make a footer button that leads to about:addons
         if (view.querySelector("#eom-allAddonsButton")) return;
-        view.appendChild(document.createXULElement("toolbarseparator"));
+        view.appendChild(doc.createXULElement("toolbarseparator"));
         view.appendChild(
-            this.create(document, "toolbarbutton", {
+            this.create(doc, "toolbarbutton", {
                 label: l10n["Addons Page label"],
                 id: "eom-allAddonsButton",
                 class: "subviewbutton subviewbutton-iconic panel-subview-footer-button",
                 image: this.config["Icon URL"],
                 key: "key_openAddons",
-                shortcut: ShortcutUtils.prettifyShortcut(key_openAddons),
+                shortcut: win.ShortcutUtils.prettifyShortcut(win.key_openAddons),
                 oncommand: `BrowserOpenAddonsMgr("addons://list/extension")`,
             })
         );
@@ -327,7 +327,7 @@ class ExtensionOptionsWidget {
      */
     showSubView(event, anchor) {
         if (!("_Addon" in anchor)) return;
-        PanelUI.showSubView(
+        event.target.ownerGlobal.PanelUI?.showSubView(
             "PanelUI-eom-addon-" + this.makeWidgetId(anchor._Addon.id),
             anchor,
             event
@@ -338,47 +338,86 @@ class ExtensionOptionsWidget {
      * for a given addon, build a panel subview
      * @param {object} addon (an addon object provided by the AddonManager, with all the data we need)
      */
-    buildSubView(addon) {
+    buildSubView(addon, subviewbutton) {
         let l10n = this.config.l10n;
-        let view = this.create(document, "panelview", {
-            id: "PanelUI-eom-addon-" + this.makeWidgetId(addon.id), // turn the extension ID into a DOM node ID
-            flex: "1",
-            class: "PanelUI-subView cui-widget-panelview",
-        });
-        this.viewCache.appendChild(view); // put it in the panel view cache, showSubView will pull it out later
+        let win = subviewbutton.ownerGlobal;
+        let doc = win.document;
+        let view = this.viewCache(doc).appendChild(
+            this.create(doc, "panelview", {
+                id: "PanelUI-eom-addon-" + this.makeWidgetId(addon.id), // turn the extension ID into a DOM node ID
+                flex: "1",
+                class: "PanelUI-subView cui-widget-panelview",
+            })
+        );
 
         // create options button
-        let optionsButton = this.create(document, "toolbarbutton", {
-            label: l10n["Addon Options label"],
-            class: "subviewbutton",
-        });
-        optionsButton.addEventListener("command", (e) => this.openAddonOptions(addon));
-        view.appendChild(optionsButton);
+        let optionsButton = view.appendChild(
+            this.create(doc, "toolbarbutton", {
+                label: l10n["Addon Options label"],
+                class: "subviewbutton",
+            })
+        );
+        optionsButton.addEventListener("command", (e) => this.openAddonOptions(addon, win));
 
         // manage button, when no options page exists
-        let manageButton = this.create(document, "toolbarbutton", {
-            label: l10n["Manage Addon label"],
-            class: "subviewbutton",
-        });
-        manageButton.addEventListener("command", (e) =>
-            BrowserOpenAddonsMgr("addons://detail/" + encodeURIComponent(addon.id))
+        let manageButton = view.appendChild(
+            this.create(doc, "toolbarbutton", {
+                label: l10n["Manage Addon label"],
+                class: "subviewbutton",
+            })
         );
-        view.appendChild(manageButton);
+        manageButton.addEventListener("command", (e) =>
+            win.BrowserOpenAddonsMgr("addons://detail/" + encodeURIComponent(addon.id))
+        );
+
+        // disable button
+        let disableButton = view.appendChild(
+            this.create(doc, "toolbarbutton", {
+                label: addon.userDisabled
+                    ? l10n["Enable Addon label"]
+                    : l10n["Disable Addon label"],
+                class: "subviewbutton",
+                closemenu: "none",
+            })
+        );
+        disableButton.addEventListener("command", (e) => {
+            if (addon.userDisabled) {
+                addon.enable();
+                disableButton.setAttribute("label", l10n["Disable Addon label"]);
+            } else {
+                addon.disable();
+                disableButton.setAttribute("label", l10n["Enable Addon label"]);
+            }
+        });
+
+        // uninstall button, and so on...
+        let uninstallButton = view.appendChild(
+            this.create(doc, "toolbarbutton", {
+                label: l10n["Uninstall Addon label"],
+                class: "subviewbutton",
+            })
+        );
+        uninstallButton.addEventListener("command", (e) => {
+            if (win.Services.prompt.confirm(null, null, `Delete ${addon.name} permanently?`))
+                addon.pendingOperations & win.AddonManager.PENDING_UNINSTALL
+                    ? addon.cancelUninstall()
+                    : addon.uninstall();
+        });
 
         // allow automatic updates
-        let updates = this.create(document, "hbox", {
+        let updates = this.create(doc, "hbox", {
             id: "eom-allow-auto-updates",
             align: "center",
             class: "subviewbutton",
         });
-        let updatesLabel = this.create(document, "label", {
+        let updatesLabel = this.create(doc, "label", {
             id: "eom-allow-auto-updates-desc",
             class: "toolbarbutton-text",
             flex: 1,
             wrap: true,
         });
         updatesLabel.textContent = l10n["Automatic Updates label"];
-        let updatesGroup = this.create(document, "radiogroup", {
+        let updatesGroup = this.create(doc, "radiogroup", {
             id: "eom-allow-auto-updates-group",
             value: addon.applyBackgroundUpdates,
             closemenu: "none",
@@ -389,17 +428,17 @@ class ExtensionOptionsWidget {
             "command",
             (e) => (addon.applyBackgroundUpdates = e.target.value)
         );
-        let setDefault = this.create(document, "radio", {
+        let setDefault = this.create(doc, "radio", {
             label: l10n.autoUpdate["Default label"],
             class: "subviewradio",
             value: 1,
         });
-        let on = this.create(document, "radio", {
+        let on = this.create(doc, "radio", {
             label: l10n.autoUpdate["On label"],
             class: "subviewradio",
             value: 2,
         });
-        let off = this.create(document, "radio", {
+        let off = this.create(doc, "radio", {
             label: l10n.autoUpdate["Off label"],
             class: "subviewradio",
             value: 0,
@@ -423,13 +462,15 @@ class ExtensionOptionsWidget {
             );
         };
 
-        let privateButton = this.create(document, "toolbarbutton", {
-            class: "subviewbutton",
-            closemenu: "none",
-        });
+        let privateButton = view.appendChild(
+            this.create(doc, "toolbarbutton", {
+                class: "subviewbutton",
+                closemenu: "none",
+            })
+        );
         setButtonState(addon, privateButton);
         privateButton.addEventListener("command", async (_e) => {
-            let policy = WebExtensionPolicy.getByID(addon.id);
+            let policy = win.WebExtensionPolicy.getByID(addon.id);
             await this.ExtensionPermissions[privateButton.permState ? "remove" : "add"](
                 addon.id,
                 {
@@ -440,78 +481,50 @@ class ExtensionOptionsWidget {
             );
             setButtonState(addon, privateButton);
         });
-        view.appendChild(privateButton);
 
-        // disable button
-        let disableButton = this.create(document, "toolbarbutton", {
-            label: addon.userDisabled ? l10n["Enable Addon label"] : l10n["Disable Addon label"],
-            class: "subviewbutton",
-            closemenu: "none",
-        });
-        disableButton.addEventListener("command", (e) => {
-            if (addon.userDisabled) {
-                addon.enable();
-                disableButton.setAttribute("label", l10n["Disable Addon label"]);
-            } else {
-                addon.disable();
-                disableButton.setAttribute("label", l10n["Enable Addon label"]);
-            }
-        });
-        view.appendChild(disableButton);
-
-        // uninstall button, and so on...
-        let uninstallButton = this.create(document, "toolbarbutton", {
-            label: l10n["Uninstall Addon label"],
-            class: "subviewbutton",
-        });
-        uninstallButton.addEventListener("command", (e) => {
-            if (Services.prompt.confirm(null, null, `Delete ${addon.name} permanently?`))
-                addon.pendingOperations & AddonManager.PENDING_UNINSTALL
-                    ? addon.cancelUninstall()
-                    : addon.uninstall();
-        });
-        view.appendChild(uninstallButton);
-
-        let viewSrcButton = this.create(document, "toolbarbutton", {
-            label: l10n["View Source label"],
-            class: "subviewbutton",
-        });
+        let viewSrcButton = view.appendChild(
+            this.create(doc, "toolbarbutton", {
+                label: l10n["View Source label"],
+                class: "subviewbutton",
+            })
+        );
         viewSrcButton.addEventListener("command", (e) => this.openArchive(addon));
-        view.appendChild(viewSrcButton);
 
-        let homePageButton = this.create(document, "toolbarbutton", {
-            label: l10n["Open Homepage label"],
-            class: "subviewbutton",
-        });
+        let homePageButton = view.appendChild(
+            this.create(doc, "toolbarbutton", {
+                label: l10n["Open Homepage label"],
+                class: "subviewbutton",
+            })
+        );
         homePageButton.addEventListener("command", (e) => {
-            switchToTabHavingURI(addon.homepageURL || addon.supportURL, true, {
+            win.switchToTabHavingURI(addon.homepageURL || addon.supportURL, true, {
                 inBackground: false,
-                triggeringPrincipal: Services.scriptSecurityManager.getSystemPrincipal(),
+                triggeringPrincipal: win.Services.scriptSecurityManager.getSystemPrincipal(),
             });
         });
-        view.appendChild(homePageButton);
 
-        let copyIdButton = this.create(document, "toolbarbutton", {
-            label: l10n["Copy ID label"],
-            class: "subviewbutton panel-subview-footer-button",
-            closemenu: "none",
-        });
+        let copyIdButton = view.appendChild(
+            this.create(doc, "toolbarbutton", {
+                label: l10n["Copy ID label"],
+                class: "subviewbutton panel-subview-footer-button",
+                closemenu: "none",
+            })
+        );
         copyIdButton.addEventListener("command", (e) => {
-            Cc["@mozilla.org/widget/clipboardhelper;1"]
-                .getService(Ci.nsIClipboardHelper)
+            win.Cc["@mozilla.org/widget/clipboardhelper;1"]
+                .getService(win.Ci.nsIClipboardHelper)
                 .copyString(addon.id);
-            window.CustomHint?.show(copyIdButton, "Copied");
+            win.CustomHint?.show(copyIdButton, "Copied");
         });
-        view.appendChild(copyIdButton);
 
         view.addEventListener("ViewShowing", (e) => {
             optionsButton.hidden = !addon.optionsURL;
             manageButton.hidden = !!addon.optionsURL;
-            updates.hidden = !(addon.permissions & AddonManager.PERM_CAN_UPGRADE);
+            updates.hidden = !(addon.permissions & win.AddonManager.PERM_CAN_UPGRADE);
             updatesGroup.setAttribute("value", addon.applyBackgroundUpdates);
             privateButton.hidden = !(
                 addon.incognito != "not_allowed" &&
-                !!(addon.permissions & AddonManager.PERM_CAN_CHANGE_PRIVATEBROWSING_ACCESS)
+                !!(addon.permissions & win.AddonManager.PERM_CAN_CHANGE_PRIVATEBROWSING_ACCESS)
             );
             setButtonState(addon, privateButton);
             disableButton.setAttribute(
@@ -542,21 +555,22 @@ class ExtensionOptionsWidget {
     /**
      * open a given addon's options page
      * @param {object} addon (an addon object)
+     * @param {object} win (the window from which this was invoked)
      */
-    openAddonOptions(addon) {
+    openAddonOptions(addon, win) {
         if (!addon.isActive || !addon.optionsURL) return;
 
         switch (Number(addon.optionsType)) {
             case 5:
-                BrowserOpenAddonsMgr(
-                    "addons://detail/" + encodeURIComponent(addon.id) + "/preferences"
+                win.BrowserOpenAddonsMgr(
+                    "addons://detail/" + win.encodeURIComponent(addon.id) + "/preferences"
                 );
                 break;
             case 3:
-                switchToTabHavingURI(addon.optionsURL, true);
+                win.switchToTabHavingURI(addon.optionsURL, true);
                 break;
             case 1:
-                let windows = Services.wm.getEnumerator(null);
+                let windows = win.Services.wm.getEnumerator(null);
                 while (windows.hasMoreElements()) {
                     let win2 = windows.getNext();
                     if (win2.closed) continue;
@@ -566,9 +580,9 @@ class ExtensionOptionsWidget {
                     }
                 }
                 let features = "chrome,titlebar,toolbar,centerscreen";
-                if (Services.prefs.getBoolPref("browser.preferences.instantApply"))
+                if (win.Services.prefs.getBoolPref("browser.preferences.instantApply"))
                     features += ",dialog=no";
-                openDialog(addon.optionsURL, addon.id, features);
+                win.openDialog(addon.optionsURL, addon.id, features);
         }
     }
 

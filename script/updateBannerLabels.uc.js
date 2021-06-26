@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Concise Update Banner Labels
-// @version        1.1
+// @version        1.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    This script simply changes the update banners in the hamburger button app menu to make the strings a bit more concise. Instead of "Update available — download now" it will show "Download Nightly update" for example.
@@ -40,8 +40,7 @@
 
     async function init() {
         window.gUpdateBanners = new UpdateBannerLabelProvider();
-        await sleep(1000); // wait a second just in case of unrelated errors on startup (probably not necessary if you don't use nightly, but shouldn't matter as firefox doesn't check for updates immediately after startup unless you open the about dialog)
-        // override the built-in method that sets the banner label
+        PanelUI._initialized || PanelUI.init(shouldSuppressPopupNotifications);
         PanelUI._showBannerItem = function _showBannerItem(notification) {
             if (!this._panelBannerItem) {
                 this._panelBannerItem = this.mainView.querySelector(".panel-banner-item");
