@@ -28,6 +28,7 @@ tooltip > description {
     padding: 2px 6px 4px 6px !important;
 }
 
+/* set browser.proton.places-tooltip.enabled to true, it'll look better tethered to the tab */
 .places-tooltip {
     background: transparent !important;
     background-color: transparent !important;
@@ -40,6 +41,10 @@ tooltip > description {
     border-radius: var(--tooltip-border-radius) !important;
     background-color: var(--tooltip-bgcolor) !important;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2) !important;
+}
+
+.places-tooltip > description {
+    display: none !important;
 }
 
 .places-tooltip-box > hbox {

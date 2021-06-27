@@ -146,6 +146,15 @@ I was a beta tester and they never shut the beta off for some reason so this sti
     list-style-image: url(chrome://userchrome/content/devtools/command-console.svg);
 }
 
+.tabbrowser-tab[label$="Violentmonkey"] .tab-icon-image {
+    animation: none !important;
+    background-image: url(chrome://userchrome/content/devtools/command-console.svg) !important;
+    display: block !important;
+    fill: currentColor !important;
+    padding-right: 16px !important;
+    box-sizing: border-box !important;
+}
+
 /* stylus, for injecting inline CSS into content windows.
 more useful than userContent.css when dealing with very complex websites that need elaborate/compiled stylesheets */
 :is(.webextension-browser-action, .eom-addon-button)[label="Stylus"] .toolbarbutton-icon,
