@@ -241,9 +241,7 @@ get chromeDir() {return traverseToMainProfile('UChrm')},
 <br/>
 
 ### **Script descriptions & links:**
-<small>(<i>Click a script's name to download it</i>)</small>
-
-<small><i>* &nbsp;means you definitely want to download the script if you use my theme</i></small>
+<p><small><super>(<i>Click a script's name to download it</i>)</br><i>* &nbsp;means you definitely want to download the script if you use my theme</i></super></small></p>
 
 #### [about:cfg](/script/aboutCfg.uc.js):
 
