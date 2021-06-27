@@ -1,0 +1,154 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+:host([scrolledtostart="true"])::part(overflow-start-indicator),
+:host([scrolledtoend="true"])::part(overflow-end-indicator),
+:host(:not([overflowing="true"])) > toolbarbutton {
+    visibility: collapse;
+}
+
+toolbarbutton {
+    color: inherit !important; /* override any color changes for toolbar buttons in e.g. disabled or hover states */
+    list-style-image: url("chrome://global/skin/icons/arrow-down-12.svg");
+    -moz-context-properties: fill, fill-opacity;
+    fill: currentColor;
+    fill-opacity: 1;
+    padding: 2px;
+}
+
+toolbarbutton[disabled="true"] {
+    fill-opacity: 0.4;
+}
+
+:host([orient="horizontal"]) > toolbarbutton {
+    list-style-image: url("chrome://global/skin/icons/arrow-left.svg");
+}
+
+#scrollbutton-up > .toolbarbutton-icon {
+    transform: scaleY(-1);
+}
+
+:host([orient="horizontal"]) > #scrollbutton-down:-moz-locale-dir(ltr) > .toolbarbutton-icon,
+:host([orient="horizontal"]) > #scrollbutton-up:-moz-locale-dir(rtl) > .toolbarbutton-icon {
+    transform: scaleX(-1);
+}
+
+toolbarbutton > .toolbarbutton-text {
+    display: none;
+}
+
+:host(:not([clicktoscroll="true"])) > toolbarbutton {
+    appearance: none;
+}
+
+/* menupopup scroll buttons */
+:host([overflowing="true"][orient="vertical"]) :is(#scrollbutton-up, #scrollbutton-down) {
+    visibility: visible !important;
+    position: absolute !important;
+    display: block !important;
+    will-change: opacity;
+}
+
+/* hide scrollbuttons when they're not overflowing */
+:host(:not([overflowing="true"])) :is(#scrollbutton-up, #scrollbutton-down) {
+    display: none !important;
+    visibility: collapse !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    opacity: 0 !important;
+}
+
+:host([overflowing="true"][orient="vertical"])
+    :is(#scrollbutton-up, #scrollbutton-down)
+    > .toolbarbutton-icon {
+    transform: none !important;
+}
+
+:host([overflowing="true"][orient="vertical"]) #scrollbutton-up > .toolbarbutton-icon {
+    margin-block: 0 !important;
+    height: 10px !important;
+}
+
+:host([overflowing="true"][orient="vertical"]) #scrollbutton-down > .toolbarbutton-icon {
+    height: 10px !important;
+}
+
+:host([overflowing="true"][orient="vertical"]) #scrollbutton-up,
+:host([overflowing="true"][orient="vertical"]) #scrollbutton-up:not([disabled="true"]):hover {
+    -moz-appearance: none;
+    position: absolute !important;
+    min-width: 21.5px !important;
+    padding-inline: 1px !important;
+    padding-block: 5px 6px !important;
+    margin-block: -4px -18px !important;
+    margin-inline: 5vw !important;
+    background-color: hsl(233, 28%, 24%) !important;
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.25), 0px 0px 5px -1px rgba(0, 0, 0, 0.125) !important;
+    border-bottom-left-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
+    transition: 0.2s ease-in-out opacity !important;
+    transform-style: flat !important;
+    backface-visibility: hidden !important;
+    -moz-context-properties: fill, fill-opacity !important;
+    fill-opacity: 1 !important;
+}
+
+:host([overflowing="true"][orient="vertical"]) #scrollbutton-down,
+:host([overflowing="true"][orient="vertical"]) #scrollbutton-down:not([disabled="true"]):hover {
+    -moz-appearance: none;
+    position: absolute !important;
+    min-width: 21.5px !important;
+    padding-inline: 1px !important;
+    padding-block: 6px !important;
+    margin-block: -18px -4px !important;
+    margin-inline: 5vw !important;
+    background-color: hsl(233, 28%, 24%) !important;
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.25), 0px 0px 5px -1px rgba(0, 0, 0, 0.125) !important;
+    border-top-left-radius: 5px !important;
+    border-top-right-radius: 5px !important;
+    transition: 0.2s ease-in-out opacity !important;
+    transform-style: flat !important;
+    backface-visibility: hidden !important;
+    -moz-context-properties: fill, fill-opacity !important;
+    fill-opacity: 1 !important;
+}
+
+:host([overflowing="true"][orient="vertical"])
+    #scrollbutton-up:not([hidden])
+    ~ .scrollbox-clip
+    > scrollbox {
+    will-change: scroll-position;
+}
+
+:host([overflowing="true"][orient="vertical"])
+    #scrollbutton-down:is(:not(:hover), [disabled="true"]) {
+    list-style-image: url(chrome://userchrome/content/scrollbutton-down.svg) !important;
+}
+
+:host([overflowing="true"][orient="vertical"]) #scrollbutton-down:not([disabled="true"]):hover {
+    list-style-image: url(chrome://userchrome/content/scrollbutton-down-hover.svg) !important;
+}
+
+:host([overflowing="true"][orient="vertical"])
+    #scrollbutton-up:is(:not(:hover), [disabled="true"]) {
+    list-style-image: url(chrome://userchrome/content/scrollbutton-up.svg) !important;
+}
+
+:host([overflowing="true"][orient="vertical"]) #scrollbutton-up:not([disabled="true"]):hover {
+    list-style-image: url(chrome://userchrome/content/scrollbutton-up-hover.svg) !important;
+}
+
+:host([overflowing="true"][orient="vertical"])
+    :is(#scrollbutton-up, #scrollbutton-down)[disabled="true"] {
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+:host([overflowing="true"][orient="vertical"])
+    :is(#scrollbutton-up, #scrollbutton-down):not([disabled="true"]):hover {
+    opacity: 1 !important;
+}

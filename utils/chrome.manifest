@@ -3,6 +3,7 @@ content userscripts ../script/
 content userchrome ../resources/
 resource content-accessible chrome://userchrome/content/layout/contentaccessible/ contentaccessible=yes
 override chrome://global/skin/dirListing/dirListing.css ../resources/layout/dirListing.css
+override chrome://global/skin/arrowscrollbox.css ../resources/layout/arrowscrollbox.css
 override chrome://browser/content/tabbrowser-tab.js ../resources/script-override/tabMods.uc.js
 override chrome://browser/content/preferences/findInPage.js ../resources/script-override/findInPage.js
 override chrome://global/skin/icons/defaultFavicon.svg ../resources/places/defaultFavicon.svg
