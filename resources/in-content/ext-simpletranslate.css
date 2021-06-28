@@ -50,8 +50,8 @@
     }
 
     body {
-        background-color: var(--arrowpanel-background) !important;
-        color: var(--arrowpanel-color) !important;
+        background-color: var(--uc-arrowpanel-background) !important;
+        color: var(--uc-arrowpanel-color) !important;
         border-radius: 3px !important;
     }
 
@@ -64,6 +64,10 @@
         .title {
             font-family: SF Pro Display, Segoe UI, sans-serif !important;
         }
+    }
+
+    button:not([disabled="true"], :disabled) {
+        display: flex;
     }
 
     .react-toggle--disabled {
@@ -86,14 +90,14 @@
     }
 
     :is(textarea, select) {
-        background-color: var(--lwt-toolbar-field-background-color) !important;
-        color: var(--lwt-toolbar-field-color) !important;
+        background-color: var(--search-box-color) !important;
+        color: var(--ui-text-100) !important;
         border: 1px solid transparent !important;
     }
 
     :is(textarea, select):focus-within {
-        background-color: var(--arrowpanel-dimmed-further) !important;
-        color: var(--lwt-toolbar-field-color) !important;
+        background-color: var(--search-box-focus) !important;
+        color: var(--ui-text-100) !important;
         border-color: var(--highlight) !important;
     }
 
@@ -108,22 +112,23 @@
     }
 
     select {
-        background-color: var(--lwt-toolbar-field-background-color) !important;
-        color: var(--lwt-toolbar-field-color) !important;
+        background-color: var(--search-box-color) !important;
+        color: var(--ui-text-100) !important;
         border-color: transparent !important;
     }
 
     #footer .selectWrap select:is(:focus-within, :hover) {
-        border-color: var(--highlight) !important;
+        background-color: var(--search-box-focus) !important;
+        border-color: transparent !important;
     }
 
     body hr {
-        border-color: var(--desaturate-dimmed-even-further) !important;
+        border-color: var(--uc-desaturate-dimmed-even-further) !important;
     }
 
     #resultArea {
-        background-color: var(--arrowpanel-background) !important;
-        color: var(--arrowpanel-color) !important;
+        background-color: transparent !important;
+        color: var(--uc-arrowpanel-color) !important;
     }
 
     .resultText,
@@ -131,7 +136,6 @@
     .mediaButtons,
     .mediaButtons * {
         background: none !important;
-        fill: var(--arrowpanel-color) !important;
     }
 
     .copy {

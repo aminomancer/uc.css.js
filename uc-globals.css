@@ -33,6 +33,8 @@ tooltip {
     --uc-accent-color: hsl(233, 61%, 8%);
     --uc-toolbar-bgcolor: hsl(233, 42%, 15%);
     --uc-toolbar-color: var(--ui-text-100);
+    --uc-arrowpanel-background: hsl(233, 36%, 11%);
+    --uc-arrowpanel-color: hsl(213, 43%, 89%);
     --arrowpanel-dimmed-menu-hover-solid: hsl(234, 27%, 23%);
     --button-solid-hover-background: hsl(232, 29%, 26%);
     --button-solid-active-background: hsl(234, 26%, 30%);
