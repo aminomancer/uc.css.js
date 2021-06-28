@@ -39,6 +39,7 @@ menuitem#sanitizeItem > .menu-text,
 #menu_openFile .menu-text,
 #context-pocket .menu-text,
 #context-take-screenshot .menu-text,
+#context-take-frame-screenshot .menu-text,
 #context-saveframe .menu-text,
 #context-viewimage .menu-text,
 #context-copy .menu-text,
@@ -309,6 +310,7 @@ menuitem#sanitizeItem:before,
 #menu_openFile:before,
 #context-pocket:before,
 #context-take-screenshot:before,
+#context-take-frame-screenshot:before,
 #context-viewimage:before,
 #context-copy:before,
 #context-copyimage-contents:before,
@@ -718,8 +720,9 @@ menuitem#sanitizeItem:before {
     background-image: url(chrome://userchrome/content/skin/pocket.svg);
 }
 
+#context-take-frame-screenshot:before,
 #context-take-screenshot:before {
-    background-image: url(chrome://userchrome/content/devtools/command-screenshot.svg);
+    background-image: var(--screenshot-icon);
 }
 
 #context-viewimage:before {
