@@ -5,6 +5,8 @@ notifications, specific favicons, fixing the white flash when loading pages,
 focus rings, text highlight colors, and compatibility adjustments for minBrowserNavBar.uc.js */
 
 /* tooltip stuff, pair with userChrome.as.css to cover all tooltips */
+/* I recommend using tooltipShadowSupport.uc.js if you want the thin border on all tooltips.
+If you don't want the border then set userChrome.css.remove-tooltip-borders to true in about:config */
 tooltip {
     -moz-default-appearance: none !important;
     display: -moz-popup;
@@ -19,17 +21,18 @@ tooltip {
     pointer-events: none !important;
 }
 
-tooltip > description {
+tooltip > description,
+tooltip .uc-tooltip-box {
     background-color: var(--tooltip-bgcolor) !important;
     color: var(--tooltip-color) !important;
-    border: none !important;
+    border: 1px solid var(--uc-menu-border-color) !important;
     border-radius: var(--tooltip-border-radius) !important;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2) !important;
     padding: 2px 6px 4px 6px !important;
     margin: 0 !important;
 }
 
-/* set browser.proton.places-tooltip.enabled to true, it'll look better tethered to the tab */
+/* set browser.proton.places-tooltip.enabled to true, it's less in the way when it's tethered to the tab */
 .places-tooltip {
     background: transparent !important;
     background-color: transparent !important;
@@ -38,7 +41,7 @@ tooltip > description {
 
 .places-tooltip-box {
     padding: 4px 6px 5px 6px !important;
-    border: none !important;
+    border: 1px solid var(--uc-menu-border-color) !important;
     border-radius: var(--tooltip-border-radius) !important;
     background-color: var(--tooltip-bgcolor) !important;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2) !important;
@@ -102,12 +105,16 @@ as the mouse would then be on top of the tooltip popup not the main window. */
     padding: 0 !important;
 }
 
-:is(#back-button-tooltip, #forward-button-tooltip) .tooltip-label[id]:not(:last-of-type) {
+:is(#back-button-tooltip, #forward-button-tooltip):not([shadow-support]) description {
+    border: none !important;
+}
+
+:is(#back-button-tooltip, #forward-button-tooltip):not([shadow-support]) .tooltip-label[id]:not(:last-of-type) {
     padding: 4px 6px 21px 6px !important;
     font-weight: 600;
 }
 
-:is(#back-button-tooltip, #forward-button-tooltip) .tooltip-label:last-of-type:not([id]) {
+:is(#back-button-tooltip, #forward-button-tooltip):not([shadow-support]) .tooltip-label:last-of-type:not([id]) {
     padding-block: 0 6px !important;
     margin-block-start: -20px !important;
     color: var(--panel-shortcut-color) !important;
@@ -124,6 +131,14 @@ as the mouse would then be on top of the tooltip popup not the main window. */
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2) !important;
     padding: 2px 6px 4px 6px !important;
     margin-block-start: 26px !important;
+}
+
+@supports -moz-bool-pref("userChrome.css.remove-tooltip-borders") {
+    tooltip > description,
+    tooltip .uc-tooltip-box,
+    .places-tooltip-box {
+        border: none !important;
+    }
 }
 
 progress {
@@ -323,16 +338,20 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
 
         /* for displaying larger font sizes */
         .panel-header,
-        #sidebar-header {
+        #sidebar-header,
+        .identity-popup-security-connection,
+        #PanelUI-whatsNew,
+        #protections-popup-message,
+        #protections-popup-no-trackers-found-description {
             font-family: SF Pro Display, Segoe UI, sans-serif !important;
             font-kerning: normal !important;
         }
 
-        :is(#back-button-tooltip, #forward-button-tooltip) .tooltip-label[id]:not(:last-of-type) {
+        :is(#back-button-tooltip, #forward-button-tooltip):not([shadow-support]) .tooltip-label[id]:not(:last-of-type) {
             padding: 3.5px 6px 18px 6px !important;
         }
 
-        :is(#back-button-tooltip, #forward-button-tooltip) .tooltip-label:last-of-type:not([id]) {
+        :is(#back-button-tooltip, #forward-button-tooltip):not([shadow-support]) .tooltip-label:last-of-type:not([id]) {
             margin-block-start: -17.5px !important;
         }
 
@@ -386,6 +405,15 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
         treechildren {
             font: message-box !important;
         }
+    }
+}
+
+/* remove menu borders if pref is enabled */
+@supports -moz-bool-pref("userChrome.css.remove-menu-borders") {
+    .menupopup-arrowscrollbox,
+    .tabmodalprompt-mainContainer,
+    :is(.content-prompt-dialog, .tab-prompt-dialog, #window-modal-dialog) .dialogFrame {
+        border: none !important;
     }
 }
 

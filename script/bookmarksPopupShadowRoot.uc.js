@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Bookmarks Popup Mods
-// @version        1.1
+// @version        1.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Implement smooth scrolling for all bookmarks popups that are tall enough to scroll. Add special click functions to their scroll buttons — hovering a scroll button will scroll at a constant rate, as normal. (though faster than vanilla) But clicking a scroll button will immediately jump to the top/bottom of the list. This no longer styles the scroll buttons, since I now style all arrowscrollbox scrollbuttons equally with resources/layout/arrowscrollbox.css. To do that requires chrome.manifest, line 6. This replaces the built-in arrowscrollbox.css with my version that makes the scrollbuttons look a lot prettier. If you want to customize them, just edit arrowscrollbox.css. This script still adds the custom classes though, in case you want to use them to style the elements in userChrome.css.
@@ -12,9 +12,9 @@ const bookmarksPopupShadowRoot = {
             setTimeout(() => {
                 this.checkPopups(e.target);
             }, 0);
-        let scrollbox = popup.scrollBox.scrollbox;
+        let scrollbox = e.target.scrollBox.scrollbox;
         let height = window.screen.availHeight;
-        let cls = popup.shadowRoot.querySelector(`hbox`)?.classList;
+        let cls = e.target.shadowRoot.querySelector(`hbox`)?.classList;
         if (scrollbox.scrollTopMax < height && scrollbox.clientHeight < height)
             cls.add("BMBsmallContentBox");
         else cls.remove("BMBsmallContentBox");

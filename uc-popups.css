@@ -4,11 +4,57 @@
 
 /* OS-styled javascript modal prompts */
 tabmodalprompt {
-    background-color: hsla(0, 0%, 4%, 0.5) !important;
+    background: none !important;
+    --in-content-page-background: transparent !important;
+    --in-content-page-color: var(--in-parent-page-color) !important;
+    --in-content-box-background: var(--dialog-box-bgcolor) !important;
+    --in-content-box-background-dim: var(--dialog-box-bgcolor-dim) !important;
+    --in-content-box-border-color: var(--dialog-box-border-color) !important;
+    --in-content-button-background: var(--arrowpanel-dimmed) !important;
+    --in-content-button-background-hover: var(--arrowpanel-dimmed-further) !important;
+    --in-content-button-background-active: var(--arrowpanel-dimmed-even-further) !important;
+    --in-content-item-selected: var(--purple-40) !important;
+    --in-content-border-highlight: var(--purple-40) !important;
+    --in-content-border-hover: var(--dialog-box-border-hover) !important;
+    --in-content-border-focus: var(--purple-40) !important;
+    --in-content-border-active: var(--purple-40) !important;
+    --in-content-border-active-shadow: var(--purple-40-a30) !important;
+    --in-content-category-outline-focus: 1px solid transparent !important;
+    --in-content-link-color: var(--purple-35) !important;
+    --in-content-link-color-hover: var(--purple-30) !important;
+    --in-content-link-color-active: var(--purple-30) !important;
+    --in-content-primary-button-background: var(--purple-40) !important;
+    --in-content-primary-button-background-hover: var(--purple-35) !important;
+    --in-content-primary-button-background-active: var(--purple-30) !important;
+    --in-content-primary-button-text-color: var(--in-content-page-color) !important;
+    --checkbox-border-color: var(--in-content-box-border-color) !important;
+    --checkbox-checked-border-color: transparent !important;
+    --checkbox-unchecked-bgcolor: var(--in-content-button-background) !important;
+    --checkbox-unchecked-hover-bgcolor: var(--in-content-button-background-hover) !important;
+    --checkbox-unchecked-active-bgcolor: var(--in-content-button-background-active) !important;
+    --checkbox-checked-bgcolor: var(--in-content-primary-button-background) !important;
+    --checkbox-checked-color: var(--in-content-primary-button-text-color) !important;
+    --checkbox-checked-hover-bgcolor: var(--in-content-primary-button-background-hover) !important;
+    --checkbox-checked-active-bgcolor: var(
+        --in-content-primary-button-background-active
+    ) !important;
+    --dropdown-bgcolor: var(--arrowpanel-background) !important;
+    --in-content-button-border-radius: var(--general-button-border-radius) !important;
+    --in-content-button-vertical-padding: 5px !important;
+    --in-content-focus-outline-color: var(--in-content-primary-button-background);
+    --tabmodalprompt-padding: var(--arrowpanel-padding) !important;
+}
+
+.tabmodalprompt-topContainer {
+    margin-inline: 4px !important;
+}
+
+.tabmodalprompt-buttonContainer {
+    margin-inline: 8px !important;
 }
 
 .tabmodalprompt-mainContainer {
-    border-radius: 4px !important;
+    border-radius: 5px !important;
 }
 
 .paymentDialogContainerFrame {
@@ -17,56 +63,130 @@ tabmodalprompt {
 }
 
 .tabmodalprompt-mainContainer {
-    background-color: var(--toolbar-bgcolor) !important;
-    border: none !important;
+    background-color: var(--dialog-bgcolor) !important;
+    background-image: var(--acrylic-texture) !important;
+    backdrop-filter: var(--acrylic-blur) !important;
+    border-color: var(--blurred-dialog-border-color) !important;
     color: var(--in-parent-page-color) !important;
     box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.25), 0px 0px 5px -1px rgba(0, 0, 0, 0.125) !important;
 }
 
 .tabmodalprompt-mainContainer textbox {
-    border-radius: 3px !important;
+    border-radius: var(--general-button-border-radius) !important;
 }
 
 .tabmodalprompt-buttonSpacer {
     display: none !important;
 }
 
+.tabmodalprompt-infoContainer,
+.tabmodalprompt-loginTextbox,
+.tabmodalprompt-loginLabel {
+    justify-self: revert !important;
+    margin: 2px 4px;
+    margin-block: 4px !important;
+}
+
 tabmodalprompt input {
     appearance: none !important;
     user-select: text !important;
     -moz-user-select: text !important;
-    background-color: var(--desaturate-dimmed) !important;
+    background: var(--in-content-box-background) !important;
     color: var(--in-parent-page-color) !important;
-    border: none !important;
-    padding: 2px 2px 3px;
-    padding-inline-start: 4px;
-    border-radius: 3px !important;
+    border-radius: var(--general-button-border-radius) !important;
 }
 
-tabmodalprompt input:focus-visible {
-    background-color: var(--desaturate-dimmed-further) !important;
+tabmodalprompt select:not([size], [multiple]) > option {
+    background-color: var(--dropdown-bgcolor) !important;
+}
+
+tabmodalprompt button,
+tabmodalprompt select,
+tabmodalprompt input[type="color"],
+tabmodalprompt menulist {
+    min-height: 28px !important;
+}
+
+tabmodalprompt input,
+tabmodalprompt textarea {
+    border: 1px solid var(--in-content-box-border-color) !important;
+    padding: 5px !important;
+}
+
+tabmodalprompt input:focus-visible,
+tabmodalprompt textarea:focus-visible,
+tabmodalprompt search-textbox[focused] {
+    border-color: var(--in-content-focus-outline-color) !important;
+}
+
+tabmodalprompt input::selection,
+tabmodalprompt textarea::selection {
+    background-color: var(--ui-selection-bgcolor) !important;
+    color: var(--ui-selection-color) !important;
+}
+
+tabmodalprompt input[type="number"] {
+    overflow: hidden !important;
+    overflow-clip-box: padding-box !important;
+    border-radius: var(--in-content-button-border-radius) !important;
+    background-clip: padding-box !important;
+    border-right: none !important;
+}
+
+tabmodalprompt input[type="number"]::-moz-number-spin-box {
+    border-top-right-radius: var(--in-content-button-border-radius) !important;
+    border-bottom-right-radius: var(--in-content-button-border-radius) !important;
+    border-right: 1px solid var(--in-content-box-border-color) !important;
+    border-left: none !important;
+    width: calc(1em + 0.67px) !important;
+}
+
+tabmodalprompt input[type="number"]:hover,
+tabmodalprompt input[type="number"]:hover::-moz-number-spin-box {
+    border-color: var(--in-content-border-hover) !important;
+}
+
+tabmodalprompt input[type="number"]:focus,
+tabmodalprompt input[type="number"]:focus::-moz-number-spin-box {
+    border-color: var(--in-content-focus-outline-color) !important;
+}
+
+tabmodalprompt #titleText {
+    font-weight: var(--uc-font-weight-bold) !important;
+    font-size: 1.1em !important;
+}
+
+.tabmodalprompt-buttonContainer {
+    display: flex;
+    justify-content: end;
+    gap: var(--tabmodalprompt-padding);
 }
 
 .tabmodalprompt-buttonContainer button {
     appearance: none !important;
     border-radius: 3px !important;
-    background-color: var(--desaturate-dimmed) !important;
-    max-width: -moz-fit-content !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    flex: auto !important;
+    background-color: var(--in-content-button-background) !important;
+    margin: revert !important;
     color: var(--in-parent-page-color) !important;
     padding: 2px !important;
+    flex-grow: 0.15 !important;
+    flex-wrap: nowrap !important;
+    justify-self: revert !important;
 }
 
-.tabmodalprompt-buttonContainer button:hover {
-    background-color: var(--desaturate-dimmed-further) !important;
-    flex: auto !important;
+.tabmodalprompt-buttonContainer button:is(:hover, :focus-visible) {
+    background-color: var(--in-content-button-background-hover) !important;
     color: var(--in-parent-page-color) !important;
 }
 
 .tabmodalprompt-buttonContainer button:hover:active {
-    background-color: var(--desaturate-dimmed-even-further) !important;
+    background-color: var(--in-content-button-background-active) !important;
+}
+
+tabmodalprompt button:is([autofocus], [type="submit"], .primary):enabled:is(:hover, :focus-visible),
+tabmodalprompt button:is([default], .primary):not([disabled="true"]):is(:hover, :focus-visible) {
+    background-color: var(--in-content-primary-button-background-hover) !important;
+    color: var(--in-content-primary-button-text-color-hover) !important;
 }
 
 .tabmodalprompt-buttonContainer .button-text {
@@ -84,24 +204,8 @@ tabmodalprompt input:focus-visible {
     border-top: none !important;
 }
 
-tabmodalprompt .checkbox-check {
-    appearance: none !important;
-    background-color: transparent !important;
-    border: none !important;
-    width: 14px !important;
-    -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity !important;
-    fill: currentColor !important;
-    padding: 1px !important;
-    opacity: 0.8 !important;
-    list-style-image: url(chrome://userchrome/content/monotone-checkbox.svg) !important;
-}
-
-tabmodalprompt checkbox:hover .checkbox-check {
-    opacity: 1 !important;
-}
-
-tabmodalprompt .checkbox-check[checked="true"] {
-    list-style-image: url(chrome://userchrome/content/monotone-checkbox-checked.svg) !important;
+tabmodalprompt checkbox {
+    margin-inline: 4px !important;
 }
 
 /* in-content autocomplete popup */
@@ -502,6 +606,7 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
     background-color: var(--dialog-bgcolor) !important;
     background-image: var(--acrylic-texture) !important;
     backdrop-filter: var(--acrylic-blur) !important;
+    border: 1px solid var(--blurred-dialog-border-color) !important;
 }
 
 /* hide the background overlay */
@@ -685,6 +790,12 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
         min-height: 28px !important;
     }
 
+    input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]),
+    textarea,
+    search-textbox {
+        border-radius: var(--general-button-border-radius) !important;
+    }
+
     input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"]),
     textarea {
         padding-block: 5px !important;
@@ -855,7 +966,11 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
     input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):focus-visible,
     textarea:focus-visible,
     search-textbox:focus-visible {
-        background-color: color-mix(in srgb, currentColor 3%, var(--in-content-box-background)) !important;
+        background-color: color-mix(
+            in srgb,
+            currentColor 3%,
+            var(--in-content-box-background)
+        ) !important;
     }
 
     menulist {

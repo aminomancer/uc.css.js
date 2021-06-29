@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           All Tabs Menu Expansion Pack
-// @version        1.6
+// @version        1.6.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Next to the "new tab" button in Firefox there's a V-shaped button that opens a big scrolling menu containing all the tabs. This script adds several new features to the "all tabs menu" to help it catch up to the functionality of the regular tabs bar.
@@ -605,7 +605,7 @@
 
         gTabsPanel.allTabsButton.setAttribute(
             "onmouseover",
-            `this.tooltipText = PluralForm.get(gBrowser.tabs.length, gNavigatorBundle.getString("ctrlTab.listAllTabs.label")).replace("#1", gBrowser.tabs.length).toLocaleLowerCase().replace(RTL_UI ? /.$/i : /^./i, function (letter) { return letter.toLocaleUpperCase(); }).trim() + " (" + ShortcutUtils.prettifyShortcut(key_showAllTabs) + ")";`
+            `this.tooltipText = (gBrowser.tabs.length > 1 ? PluralForm.get(gBrowser.tabs.length, gNavigatorBundle.getString("ctrlTab.listAllTabs.label")).replace("#1", gBrowser.tabs.length).toLocaleLowerCase().replace(RTL_UI ? /.$/i : /^./i, function (letter) {return letter.toLocaleUpperCase();}).trim() : this.label) + " (" + ShortcutUtils.prettifyShortcut(key_showAllTabs) + ")";`
         );
 
         gTabsPanel.allTabsView.addEventListener("ViewShowing", oneTimeSetup, { once: true });

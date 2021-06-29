@@ -28,10 +28,11 @@ menupopup {
     --lwt-toolbarbutton-icon-fill: #fff !important;
     --lwt-background-alignment: top !important;
     --lwt-background-tiling: repeat !important;
-    --arrowpanel-background: var(--uc-arrowpanel-background) !important;
     --menupopup-shadow: none !important;
     --panel-shadow: none !important;
+    --arrowpanel-background: var(--uc-arrowpanel-background) !important;
     --arrowpanel-color: var(--uc-arrowpanel-color) !important;
+    --arrowpanel-border-color: var(--uc-menu-border-color) !important;
     --arrowpanel-darker: var(--uc-arrowpanel-darker) !important;
     --arrowpanel-faint: var(--uc-arrowpanel-faint);
     --arrowpanel-dimmed: var(--uc-arrowpanel-dimmed) !important;
@@ -114,6 +115,7 @@ menupopup {
     --context-margin-inline: -14px 0px;
     --context-padding-inline: 27px 0px;
     --menu-color: var(--ui-text-80) !important;
+    --menu-border-color: var(--uc-menu-border-color) !important;
     --menupopup-background: transparent;
     --menu-background-color: var(--arrowpanel-background) !important;
     --menupopup-margin: 0px;

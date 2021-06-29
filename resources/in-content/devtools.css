@@ -23,18 +23,21 @@ and a few elements like checkboxes */
         --lwt-toolbarbutton-icon-fill: hsl(0, 0%, 100%) !important;
         --lwt-background-alignment: top !important;
         --lwt-background-tiling: repeat !important;
-        --arrowpanel-background: hsl(233, 36%, 11%) !important;
         --panel-shadow: 0 0 4px 0 hsla(0, 0%, 0%, 0.4) !important;
-        --arrowpanel-color: var(--lwt-text-color) !important;
-        --arrowpanel-darker: hsla(236, 70%, 73%, 0.17) !important;
-        --arrowpanel-faint: hsla(236, 100%, 83%, 0.1);
-        --arrowpanel-dimmed: hsla(236, 100%, 83%, 0.17) !important;
-        --arrowpanel-dimmed-further: hsla(236, 100%, 83%, 0.25) !important;
-        --arrowpanel-dimmed-even-further: hsla(236, 100%, 85%, 0.3) !important;
-        --desaturate-dimmed: hsla(236, 60%, 83%, 0.17) !important;
-        --desaturate-dimmed-further: hsla(236, 60%, 83%, 0.25) !important;
-        --desaturate-dimmed-even-further: hsla(236, 60%, 85%, 0.3) !important;
+        --arrowpanel-background: var(--uc-arrowpanel-background) !important;
+        --arrowpanel-color: var(--uc-arrowpanel-color) !important;
+        --arrowpanel-border-color: var(--uc-menu-border-color) !important;
+        --arrowpanel-darker: var(--uc-arrowpanel-darker) !important;
+        --arrowpanel-faint: var(--uc-arrowpanel-faint);
+        --arrowpanel-dimmed: var(--uc-arrowpanel-dimmed) !important;
+        --arrowpanel-dimmed-further: var(--uc-arrowpanel-dimmed-further) !important;
+        --arrowpanel-dimmed-even-further: var(--uc-arrowpanel-dimmed-even-further) !important;
+        --desaturate-faint: var(--uc-desaturate-faint);
+        --desaturate-dimmed: var(--uc-desaturate-dimmed);
+        --desaturate-dimmed-further: var(--uc-desaturate-dimmed-further);
+        --desaturate-dimmed-even-further: var(--uc-desaturate-dimmed-even-further);
         --panel-disabled-color: var(--context-menu-disabled-color) !important;
+        --panel-separator-color: var(--desaturate-dimmed) !important;
         --toolbarbutton-hover-background: hsla(236, 82%, 83%, 0.17) !important;
         --toolbarbutton-active-background: hsla(236, 82%, 83%, 0.22) !important;
         --toolbarbutton-checked-background: hsla(236, 82%, 83%, 0.13) !important;
@@ -88,6 +91,7 @@ and a few elements like checkboxes */
         --context-margin-inline: -14px 0px;
         --context-padding-inline: 27px 0px;
         --menu-color: var(--ui-text-80) !important;
+        --menu-border-color: var(--uc-menu-border-color) !important;
         --menupopup-background: transparent;
         --menu-background-color: var(--arrowpanel-background) !important;
         --menupopup-margin: 0px;
@@ -474,7 +478,6 @@ and a few elements like checkboxes */
     .menupopup-arrowscrollbox {
         background-color: var(--menu-background-color) !important;
         color: var(--menu-color) !important;
-        border: none !important;
         border-radius: var(--menupopup-border-radius) !important;
         box-shadow: var(--menupopup-shadow) !important;
     }
@@ -535,6 +538,12 @@ and a few elements like checkboxes */
             > :is(label, .menu-iconic-text, .menu-text) {
             font-family: SF Pro Text, Segoe UI, sans-serif !important;
             font-kerning: normal !important;
+        }
+    }
+
+    @supports -moz-bool-pref("userChrome.css.remove-menu-borders") {
+        .menupopup-arrowscrollbox {
+            border: none !important;
         }
     }
 }

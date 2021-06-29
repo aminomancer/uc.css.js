@@ -3,6 +3,8 @@ and in particular, tooltips and scrollbars. */
 
 @import url(uc-globals.css);
 /* tooltips */
+/* I recommend using tooltipShadowSupport.uc.js if you want the thin border on all tooltips.
+If you don't want the border then set userChrome.css.remove-tooltip-borders to true in about:config */
 tooltip[default][page] {
     -moz-default-appearance: none !important;
     display: -moz-popup;
@@ -20,16 +22,21 @@ tooltip[default][page] {
 tooltip[default][page] > description {
     background-color: var(--tooltip-bgcolor) !important;
     color: var(--tooltip-color) !important;
-    border: none !important;
+    border: 1px solid var(--uc-menu-border-color) !important;
     border-radius: var(--tooltip-border-radius) !important;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2) !important;
     padding: 2px 6px 4px 6px !important;
     margin: 0 !important;
 }
 
-@-moz-document url(chrome://browser/content/browser.xhtml)
-{
-    @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
+@supports -moz-bool-pref("userChrome.css.remove-tooltip-borders") {
+    tooltip[default][page] > description {
+        border: none !important;
+    }
+}
+
+@supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
+    @-moz-document url(chrome://browser/content/browser.xhtml) {
         tooltip[default][page] {
             font-family: SF Pro Text, Segoe UI, sans-serif !important;
             font-kerning: normal !important;

@@ -52,6 +52,7 @@ For best results, set density mode to `Normal` and theme to `Dark` in the custom
 | layout.css.xul-tree-pseudos.content.enabled | Boolean | true | |
 | reader.color_scheme | String | `dark` | |
 | mousewheel.autodir.enabled | Boolean | true | Allow mousewheel ⇅ to scroll ⇄-only scrollboxes |
+| prompts.contentPromptSubDialog | Boolean | true | Use the modern content dialog instead of modal prompts |
 | _svg.context-properties.content.enabled_ | Boolean | true | Required for making some icons white |
 | _toolkit.legacyUserProfileCustomizations.stylesheets_ | Boolean | true | Required, of course |
 | ui.IMERawInputBackground | String | `#000000` | This affects the appearance of IME overlays. e.g. when typing Hangul or Pinyin |
@@ -74,6 +75,8 @@ For best results, set density mode to `Normal` and theme to `Dark` in the custom
 | userChrome... | | | Several of my scripts use custom prefs beginning with `userChrome` for user customization. See the individual script files for details |
 | userChrome.bookmarks-toolbar.icons-only | Boolean | false | If true, bookmark buttons in the toolbar are just square icons |
 | userChrome.css.mac-ui-fonts | Boolean | true | Replace UI font with SF Pro, the system font for macOS. [Click here for details](#fonts) |
+| userChrome.css.remove-menu-borders | Boolean | false | If true, remove the thin border on context menus, panels, etc. |
+| userChrome.css.remove-tooltip-borders | Boolean | false | If true, remove the thin border on tooltips. If false, use [tooltipShadowSupport.uc.js](#tooltip-shadow-support) |
 | userChrome.tabs.all-tabs-menu.reverse-order | Boolean | true | Display all tabs menu in reverse order (newer tabs on top, like history) |
 | userChrome.tabs.new-loading-spinner-animation | Boolean | true | Replace the tab loading throbber with a spinning animation |
 | userChrome.tabs.pinned-tabs.close-buttons.disabled | Boolean | true | This controls whether close buttons are shown on pinned tabs |
@@ -513,6 +516,10 @@ Adds a hotkey (alt+M by default) that toggles the menubar on and off. Unlike jus
 #### [Toggle Tabs and Sidebar](/script/toggleTabsAndSidebarButton.uc.js):
 
 Made by request. Adds a new toolbar button that can toggle between hiding tabs and hiding the sidebar. Intended for use with TreeStyleTabs, but will still work the same without it. It toggles the sidebar on its own, but it hides tabs by setting an attribute on the document element, which you need to reference in your userChrome.css file, like this: `:root[toggle-hidden="tabs"] #TabsToolbar {...}`. There are various templates available online for hiding the tab bar, or you can ask on [/r/FirefoxCSS](https://www.reddit.com/r/FirefoxCSS/). Just use one of those, adding `:root[toggle-hidden="tabs"]` to the selectors.
+
+#### [Tooltip Shadow Support](/script/tooltipShadowSupport.uc.js):
+
+\* This script makes it easier to add box shadows and borders to tooltips without messing up some specific tooltips. <details><summary><i><b>More details...</b></i></summary><p>Some tooltips have an awkward structure, where multiple descriptions exist within a single container, with `display: -moz-popup`. This means the tooltip is displayed within a restricted popup area with dimensions equal to the container, and overflow completely hidden. Box shadows on the container therefore won't be visible, since they'll fall outside of the popup box — you'd have to use a window shadow instead, but those can't be styled in a precise way.</p><p>In tooltips with only 1 label we can just make the container transparent and put the background and box shadow on the label element. That way there can still be room within the popup for the box shadow to be visible. A box shadow with a 5px radius can fit well within a container with ~7px padding. Tooltips with a more elaborate structure with containers within containers, e.g. the tab tooltip, don't have this problem at all. But tooltips like the back and forward buttons' can only be given a shadow if you give each label a background color, and try to position and size them so that they perfectly overlap and create the illusion of being one element.</p><p>But if you also want rounded corners and borders, that won't be an option. A good way to fix this is just to put the tooltips inside of another container, so that's what this script does. Because generic tooltips are native-anonymous, they don't inherit variables from the main window. So if you want to customize the theme's tooltips, you have to edit [userChrome.as.css](/userChrome.as.css) directly to change some things. If you want to disable the borders, 1) don't use this script, and 2) go to about:config and set `userChrome.css.remove-tooltip-borders` to true.</p></details>
 
 #### [Undo Recently Closed Tabs in Tab Context Menu](/script/undoListInTabContextMenu.uc.js):
 

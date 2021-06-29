@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Misc. Mods
-// @version        1.1
+// @version        1.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Various tiny mods not worth making separate scripts for. Read the comments inside the script for details.
@@ -19,6 +19,9 @@
 
         // when you use the "move tab" hotkeys, e.g. Ctrl + Shift + PageUp, it only moves the active tab, even if you have multiple tabs selected. this is inconsistent with the keyboard shortcuts "move tab to end" or "move tab to start" and of course, inconsistent with the drag & drop behavior. this will change the hotkeys so they move all selected tabs.
         "Move all selected tabs with hotkeys": true,
+
+        // with browser.proton.places-tooltip.enabled, the bookmarks/history/tabs tooltip is improved and normally it gets anchored to the element that popped up the tooltip, i.e. the element you hovered. but for some reason menupopups are an exception. it does this on all relevant elements, including bookmarks in panels, just not on bookmarks menu popups. but I tested it and it works fine on menupopups so I'm removing the exception.
+        "Anchor bookmarks menu tooltip to bookmark": true,
     };
     class UCMiscMods {
         constructor() {
@@ -28,6 +31,7 @@
             if (config["Stop downloads panel auto-focusing the footer button"])
                 this.stopDownloadsPanelFocus();
             if (config["Move all selected tabs with hotkeys"]) this.moveTabKeysMoveSelectedTabs();
+            if (config["Anchor bookmarks menu tooltip to bookmark"]) this.anchorBookmarksTooltip();
         }
         stopDownloadsPanelFocus() {
             eval(
@@ -68,6 +72,14 @@
                         .toSource()
                         .replace(/moveTabBackward/, `moveTabsBackward`)
                         .replace(/moveTabForward/, `moveTabsForward`)
+            );
+        }
+        anchorBookmarksTooltip() {
+            eval(
+                `BookmarksEventHandler.fillInBHTooltip = ` +
+                    BookmarksEventHandler.fillInBHTooltip
+                        .toSource()
+                        .replace(/&&\s*\!tooltipNode\.closest\(\"menupopup\"\)/, ``)
             );
         }
     }

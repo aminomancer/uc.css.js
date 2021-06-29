@@ -11,13 +11,11 @@ radio[focused="true"] > .radio-label-box {
     box-shadow: var(--panel-shadow) !important;
     /* border-radius: var(--arrowpanel-border-radius) !important; */
     overflow: hidden !important;
-    border: none !important;
     margin-top: 4px;
 }
 
 :is(panel, menupopup)::part(content) {
     background: var(--panel-background, Menu);
-    border: revert;
 }
 
 #PopupSearchAutoComplete::part(content) {
@@ -51,6 +49,7 @@ menupopup::part(arrowscrollbox-scrollbox) {
 #BMB_bookmarksPopup menupopup::part(arrowscrollbox),
 #BMB_bookmarksPopup menupopup[placespopup="true"]::part(arrowscrollbox) {
     padding-block: 4px;
+    border: 1px solid var(--panel-border-color);
 }
 
 #BMB_bookmarksPopup::part(arrowcontent) {
@@ -139,7 +138,6 @@ menupopup::part(arrowscrollbox),
     visibility: collapse;
 }
 
-
 /* make unpinned tabs stretch to fill the whole tab bar */
 .tabbrowser-tab[fadein]:not([style*="max-width"]) {
     max-width: 100vw;
@@ -150,10 +148,10 @@ tab starts at 0 flex but instantly gets 100 flex as fadein attribute gets applie
 by transitioning this property we can make the instantaneous change happen more slowly,
 causing the tab to grow over 300ms from the time it's born.
 this way we don't animate tabs that were simply moved rather than created */
-#tabbrowser-tabs:not([movingtab]) .tabbrowser-tab:not([pinned], [justmoved], [tab-grouping], [tabdrop-samewindow]) {
-	-moz-box-flex: 0;
-    transition: min-width 200ms ease-out,
-        max-width 150ms ease-out,
+#tabbrowser-tabs:not([movingtab])
+    .tabbrowser-tab:not([pinned], [justmoved], [tab-grouping], [tabdrop-samewindow]) {
+    -moz-box-flex: 0;
+    transition: min-width 200ms ease-out, max-width 150ms ease-out,
         -moz-box-flex 300ms var(--uc-smooth-timing-function);
 }
 
@@ -194,7 +192,8 @@ opacity fades to 0 and the label shrinks slightly to 96% to create the illusion 
 }
 
 /* this is the animation that plays when the pinned last-visible-tab grows, e.g. when it becomes last-visible-tab */
-#tabbrowser-tabs:not([movingtab]) .tabbrowser-tab[pinned][last-visible-tab]:not([justmoved], [tab-grouping], [tabdrop-samewindow]) {
+#tabbrowser-tabs:not([movingtab])
+    .tabbrowser-tab[pinned][last-visible-tab]:not([justmoved], [tab-grouping], [tabdrop-samewindow]) {
     -moz-box-flex: 100;
     transition: min-width 300ms var(--uc-smooth-timing-function),
         max-width 300ms var(--uc-smooth-timing-function),
@@ -225,8 +224,7 @@ if the icon disappeared/appeared instantly it would disrupt the impression that 
 }
 
 /* label becomes visible on last-visible-tab, opacity and transform are the animated properties. */
-.tabbrowser-tab[pinned][last-visible-tab]
-    .tab-label-container {
+.tabbrowser-tab[pinned][last-visible-tab] .tab-label-container {
     opacity: 1;
     transform: none;
 }
@@ -249,14 +247,14 @@ if the icon disappeared/appeared instantly it would disrupt the impression that 
 
 /* protections popup panel's arrow style */
 #protections-popup[mainviewshowing][side="top"]::part(arrow) {
-    fill: var(--protection-header-arrow-color);
-    stroke: var(--protection-header-arrow-color) !important;
+    fill: var(--arrowpanel-background);
+    stroke: var(--panel-border-color);
 }
 
 /* other panel arrows */
 :is(panel, menupopup)::part(arrow) {
     fill: var(--arrowpanel-background);
-    stroke: var(--arrowpanel-background);
+    stroke: var(--panel-border-color);
 }
 
 @-moz-document regexp("^chrome:(?!\/\/(devtools|mozapps|browser\/content\/(sanitize|places\/places.xhtml)|global\/content\/commonDialog)).*") {
@@ -268,6 +266,19 @@ if the icon disappeared/appeared instantly it would disrupt the impression that 
 #customizationui-widget-panel[viewId^="PanelUI-webext-"]::part(content),
 #customizationui-widget-panel[viewId^="PanelUI-webext-"]::part(arrowcontent) {
     border-radius: var(--webextension-panel-border-radius, 5px) !important;
+    border: 0 !important;
+}
+
+#customizationui-widget-panel[viewId^="PanelUI-webext-"]::part(arrow) {
+    stroke: var(--arrowpanel-background);
+}
+
+#customizationui-widget-panel[viewId^="PanelUI-webext-"][side="top"]::part(arrow) {
+    margin-bottom: -4px;
+}
+
+#customizationui-widget-panel[viewId^="PanelUI-webext-"][side="bottom"]::part(arrow) {
+    margin-top: -4px;
 }
 
 #customization-panelWrapper {
@@ -276,14 +287,21 @@ if the icon disappeared/appeared instantly it would disrupt the impression that 
 }
 
 #customization-container,
-#customization-container menupopup::part(arrowscrollbox) {
+#customization-container :is(menupopup, panel)::part(arrowscrollbox) {
     --button-bgcolor: color-mix(in srgb, var(--toolbar-color) 7%, transparent);
     --button-hover-bgcolor: color-mix(in srgb, var(--toolbar-color) 12%, transparent);
     --button-active-bgcolor: color-mix(in srgb, var(--toolbar-color) 15%, transparent);
     --arrowpanel-dimmed: color-mix(in srgb, var(--toolbar-color) 7%, transparent);
     --arrowpanel-dimmed-further: color-mix(in srgb, var(--toolbar-color) 12%, transparent);
     --arrowpanel-dimmed-even-further: color-mix(in srgb, var(--toolbar-color) 15%, transparent);
-    --menu-background-color: var(--in-content-button-highlight-dark) !important;
+    --arrowpanel-background: var(--in-content-button-highlight-dark) !important;
+    --menu-background-color: var(--arrowpanel-background) !important;
+    --arrowpanel-border-color: color-mix(
+        in srgb,
+        currentColor 8%,
+        var(--in-content-button-highlight-dark)
+    ) !important;
+    --panel-border-color: var(--arrowpanel-border-color) !important;
     --uc-checkbox-unchecked-bgcolor: color-mix(in srgb, var(--toolbar-color) 7%, transparent);
     --uc-checkbox-unchecked-hover-bgcolor: color-mix(
         in srgb,
@@ -302,10 +320,9 @@ if the icon disappeared/appeared instantly it would disrupt the impression that 
     );
 }
 
-#customization-container panel::part(content),
+#customization-container :is(menupopup, panel)::part(content),
 #customization-panelWrapper > .panel-arrowcontent {
     border-radius: var(--arrowpanel-border-radius, 0);
-    border: none;
     box-shadow: var(--panel-shadow);
     margin-top: 12px;
     z-index: 250;
@@ -314,14 +331,8 @@ if the icon disappeared/appeared instantly it would disrupt the impression that 
 }
 
 #customization-panelWrapper > .panel-arrowbox {
-    z-index: 250 !important;
+    z-index: 251 !important;
     position: absolute;
-}
-
-#customization-container panel::part(arrow),
-#customization-panelWrapper > .panel-arrowbox > .panel-arrow[side="top"] {
-    stroke: var(--in-content-button-highlight-dark);
-    fill: var(--in-content-button-highlight-dark);
 }
 
 #customization-container {
@@ -372,21 +383,72 @@ if the icon disappeared/appeared instantly it would disrupt the impression that 
         display: -moz-inline-box;
     }
 
-    :is(panel, menupopup)[side="top"]::part(arrow),
-    #customization-panelWrapper > .panel-arrowbox > .panel-arrow[side="top"] {
-        margin-bottom: -4px;
-    }
-
     :is(#customization-lwtheme-menu, #customization-uidensity-menu)::part(arrowbox) {
         -moz-box-ordinal-group: 2;
     }
 
     :is(#customization-lwtheme-menu, #customization-uidensity-menu)::part(arrow) {
         transform: scaleY(-1);
-        margin-top: -5px;
         margin-bottom: revert;
         position: relative;
         margin-inline: 10px;
+        z-index: 250;
+    }
+
+    :is(#customization-lwtheme-menu, #customization-uidensity-menu)[side="top"]::part(arrow) {
+        margin-top: -4.5px;
+    }
+
+    :is(#customization-lwtheme-menu, #customization-uidensity-menu)[side="bottom"]::part(arrow) {
+        margin-bottom: -4.5px;
+    }
+
+    #customization-panelWrapper > .panel-arrowbox > .panel-arrow[side="top"] {
+        margin-top: 3px;
+    }
+}
+
+:is(panel, menupopup)[side="top"]::part(arrow) {
+    margin-bottom: -4.5px;
+}
+
+:is(panel, menupopup)[side="bottom"]::part(arrow) {
+    margin-top: -4.5px;
+}
+
+@supports -moz-bool-pref("userChrome.css.remove-menu-borders") {
+    :is(panel, menupopup)::part(content),
+    .menupopup-arrowscrollbox,
+    .tabmodalprompt-mainContainer,
+    :is(.content-prompt-dialog, .tab-prompt-dialog, #window-modal-dialog) .dialogFrame,
+    #customization-container panel::part(content),
+    #customization-panelWrapper > .panel-arrowcontent,
+    #BMB_bookmarksPopup::part(arrowscrollbox),
+    #BMB_bookmarksPopup menupopup::part(arrowscrollbox),
+    #BMB_bookmarksPopup menupopup[placespopup="true"]::part(arrowscrollbox) {
+        border: 0 !important;
+    }
+
+    :is(panel, menupopup)[side="top"]::part(arrow),
+    #customization-panelWrapper > .panel-arrowbox > .panel-arrow[side="top"] {
+        margin-bottom: -4px;
+    }
+
+    #customization-container panel::part(arrow),
+    #customization-panelWrapper > .panel-arrowbox > .panel-arrow[side="top"] {
+        stroke: var(--in-content-button-highlight-dark);
+    }
+
+    :is(#customization-lwtheme-menu, #customization-uidensity-menu)::part(arrow) {
+        margin-top: -4px;
+    }
+
+    #customization-panelWrapper > .panel-arrowbox > .panel-arrow[side="top"] {
+        margin-top: 2px;
+    }
+
+    #protections-popup[mainviewshowing][side="top"]::part(arrow) {
+        stroke: var(--protection-header-arrow-color) !important;
     }
 }
 

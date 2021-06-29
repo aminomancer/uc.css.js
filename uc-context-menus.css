@@ -21,7 +21,6 @@ menupopup:not(.PanelUI-subView) menu > menupopup {
 .menupopup-arrowscrollbox {
     background-color: var(--menu-background-color) !important;
     color: var(--menu-color) !important;
-    border: none !important;
     border-radius: var(--menupopup-border-radius) !important;
     box-shadow: var(--menupopup-shadow) !important;
 }

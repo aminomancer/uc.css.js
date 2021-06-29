@@ -27,7 +27,9 @@ tooltip {
     --uc-desaturate-dimmed-even-further: hsla(236, 60%, 85%, 0.3);
     --uc-panel-button-solid: hsl(234, 24%, 35%);
     --uc-panel-box-solid: hsl(233, 29%, 18%);
-    --uc-smooth-timing-function: cubic-bezier(.07,.78,.21,.95);
+    --uc-menu-border-color: hsl(233, 23%, 20%);
+    --blurred-dialog-border-color: hsla(240, 7%, 20%, 0.8);
+    --uc-smooth-timing-function: cubic-bezier(0.07, 0.78, 0.21, 0.95);
     --uc-content-text-a50: hsla(236, 100%, 85%, 0.5);
     --uc-content-text-a80: rgba(255, 255, 255, 0.8);
     --uc-accent-color: hsl(233, 61%, 8%);
@@ -57,7 +59,8 @@ tooltip {
     --acrylic-texture: url(chrome://userchrome/content/texture/lightnoise.png);
     --acrylic-blue: hsla(233.3, 39.1%, 9%, 0.58);
     --blur-bgcolor: var(--acrylic-blue);
-    --transparent-img-background: center/16px repeat hsla(0, 0%, 80%) url(chrome://userchrome/content/checker.svg);
+    --transparent-img-background: center/16px repeat hsla(0, 0%, 80%)
+        url(chrome://userchrome/content/checker.svg);
     --general-button-border-radius: 2.6px;
     --dialog-bgcolor: hsla(240, 5.9%, 6.7%, 0.85);
     --dialog-box-bgcolor: hsla(232, 100%, 75%, 8%);
@@ -137,7 +140,9 @@ tooltip {
     /* how long the scrolling one-offs slider should be. 8 means it's long enough for 8 buttons to be visible without scrolling. */
     --urlbar-one-offs-engines-per-scroll: 8;
     /* don't change this unless you know what you're doing. multiplies the one-off button width by the number per scroll to yield the total width */
-    --urlbar-one-offs-width: calc(var(--urlbar-one-offs-engine-width) * var(--urlbar-one-offs-engines-per-scroll)); 
+    --urlbar-one-offs-width: calc(
+        var(--urlbar-one-offs-engine-width) * var(--urlbar-one-offs-engines-per-scroll)
+    );
     --tab-throbber-fill: hsl(222, 100%, 75%);
     --sanitize-border-color: hsla(0, 0%, 5%, 0.2);
     --menu-separator-color: hsl(233, 25%, 23%);
@@ -285,6 +290,7 @@ popupnotification,
     --protections-popup-switch-off-hover-border-custom: hsl(233, 15%, 32%);
 }
 
+/* SF Pro is a bit heavier than Segoe UI so adjust font weights on certain elements */
 @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
     :root {
         --uc-font-weight-bold: 500;

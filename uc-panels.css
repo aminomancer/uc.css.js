@@ -661,7 +661,7 @@ popupnotification progress[paused]::-moz-progress-bar {
     min-height: 33.3px !important;
 }
 
-#identity-popup-security-button {
+#identity-popup-security-button[footerHidden="false"] {
     margin-bottom: revert !important;
 }
 
@@ -1282,10 +1282,6 @@ panel .header,
     margin-inline: 4px !important;
     margin-bottom: 4px !important;
     border-top: 1px solid var(--panel-separator-color);
-}
-
-#identity-popup-more-info-footer {
-    margin-top: 4px !important;
 }
 
 #identity-popup-security-button[footerHidden="true"] {
