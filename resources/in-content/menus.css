@@ -88,6 +88,13 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
     color: var(--ui-text-80) !important;
 }
 
+#ContentSelectDropdown > menupopup > menuitem[disabled="true"],
+menupopup.in-menulist > menuitem[disabled="true"] {
+    appearance: none !important;
+    color: var(--panel-disabled-color) !important;
+    background-color: initial !important;
+}
+
 #ContentSelectDropdown > menupopup,
 menupopup.in-menulist {
     appearance: none !important;
@@ -376,7 +383,7 @@ menupopup.in-menulist menuseparator:last-child {
 @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
     #ContentSelectDropdown,
     menupopup.in-menulist {
-        font-family: SF Pro, Segoe UI, sans-serif !important;
+        font-family: SF Pro Text, Segoe UI, sans-serif !important;
         font-kerning: normal !important;
     }
 
@@ -387,7 +394,7 @@ menupopup.in-menulist menuseparator:last-child {
     menupopup.in-menulist
         > :where(menucaption, menuitem)
         > :is(label, .menu-iconic-text, .menu-text) {
-            font-family: SF Pro, Segoe UI, sans-serif !important;
+            font-family: SF Pro Text, Segoe UI, sans-serif !important;
         font-kerning: normal !important;
     }
 }

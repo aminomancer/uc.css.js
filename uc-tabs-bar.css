@@ -588,3 +588,10 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
     opacity: 0.7 !important;
     margin-inline-start: -2px !important;
 }
+
+.all-tabs-item[dragpos]::before {
+    width: 100% !important;
+    border-image: linear-gradient(to right, transparent, var(--arrowpanel-dimmed-even-further) 1%, var(--arrowpanel-dimmed-even-further) 25%, transparent 90%) !important;
+    border-image-slice: 1 !important;
+    opacity: 1 !important;
+}

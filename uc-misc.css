@@ -26,6 +26,7 @@ tooltip > description {
     border-radius: var(--tooltip-border-radius) !important;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2) !important;
     padding: 2px 6px 4px 6px !important;
+    margin: 0 !important;
 }
 
 /* set browser.proton.places-tooltip.enabled to true, it'll look better tethered to the tab */
@@ -342,6 +343,10 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
 
         panel .panel-banner-item {
             font-weight: 500 !important;
+        }
+
+        tooltip > description {
+            padding: 3px 6px 4px 6px !important;
         }
 
         :is(#back-button-tooltip, #forward-button-tooltip) .tooltip-label[id] {

@@ -270,6 +270,13 @@ menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
     color: var(--ui-text-80) !important;
 }
 
+#ContentSelectDropdown > menupopup > menuitem[disabled="true"],
+menupopup.in-menulist > menuitem[disabled="true"] {
+    appearance: none !important;
+    color: var(--panel-disabled-color) !important;
+    background-color: initial !important;
+}
+
 #ContentSelectDropdown > menupopup {
     color: var(--ui-text-80) !important;
     background-image: unset !important;

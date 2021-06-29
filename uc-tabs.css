@@ -1,93 +1,5 @@
 /* controls the appearance of individual tabs and elements inside a tab. */
 
-/* make unpinned tabs stretch to fill the whole tab bar */
-.tabbrowser-tab[fadein]:not([style*="max-width"]) {
-    max-width: 100vw !important;
-}
-
-/* much better general tab animations.
-tab starts at 0 flex but instantly gets 100 flex as fadein attribute gets applied.
-by transitioning this property we can make the instantaneous change happen more slowly,
-causing the tab to grow over 300ms from the time it's born.
-this way we don't animate tabs that were simply moved rather than created */
-#tabbrowser-tabs:not([movingtab]) .tabbrowser-tab:not([pinned], [justmoved]) {
-	-moz-box-flex: 0 !important;
-    transition: min-width 200ms ease-out,
-        max-width 150ms ease-out,
-        -moz-box-flex 300ms var(--uc-smooth-timing-function) !important;
-}
-
-#tabbrowser-tabs:not([movingtab]) .tabbrowser-tab[fadein]:not([pinned], [justmoved]) {
-    -moz-box-flex: 100 !important;
-}
-
-/* if the final tab is pinned, it should stretch to fill the rest of the tab bar.
-instead of shrinking it, we add a little pin icon before the tab label to show it's pinned.
-since this only occurs when it's the final tab, it needs to animate its width when it's closed,
-or when a new tab is opened after it, etc. so we use the same kind of animation but a bit slower,
-since it needs to animate a much greater distance than normal tabs.
-this is the animation that plays when the pinned last-visible-tab shrinks, e.g. when it's no longer last-visible-tab. */
-.tabbrowser-tab[pinned] {
-    transition: min-width 300ms var(--animation-easing-function),
-        max-width 300ms var(--animation-easing-function),
-        -moz-box-flex 300ms var(--animation-easing-function) !important;
-}
-
-/* shrink pinned tabs */
-.tabbrowser-tab[pinned]:not([last-visible-tab]) {
-    min-width: var(--pinned-tab-width) !important;
-    max-width: var(--pinned-tab-width) !important;
-}
-
-/* make the label disappear on pinned tabs, but in a way that it can still be shown and animated on a pinned tab if it's [last-visible-tab]
-opacity fades to 0 and the label shrinks slightly to 96% to create the illusion that the whole tab is shrinking. */
-.tabbrowser-tab[pinned] .tab-label-container {
-    width: auto !important;
-    margin-inline-start: 5.5px;
-    transition: opacity 200ms ease-out, transform 100ms ease-out !important;
-    opacity: 0;
-    transform: scale(0.96);
-    transform-origin: left center;
-}
-
-/* this is the animation that plays when the pinned last-visible-tab grows, e.g. when it becomes last-visible-tab */
-.tabbrowser-tab[pinned][last-visible-tab] {
-    -moz-box-flex: 100;
-    transition: min-width 300ms var(--uc-smooth-timing-function),
-        max-width 300ms var(--uc-smooth-timing-function),
-        -moz-box-flex 300ms var(--uc-smooth-timing-function) !important;
-}
-
-/* orient the tab label horizontally so it can accommodate an icon */
-.tabbrowser-tab[pinned] .tab-label {
-    flex-wrap: nowrap !important;
-    display: flex;
-    -moz-box-orient: horizontal !important;
-    line-height: 16px !important;
-}
-
-/* pinned tab icon. it's technically present on all pinned tabs,
-but it's only visible on the last-visible-tab since there's no room in the tiny tab to show the label at all.
-this is intentional since we want to animate the opacity of the label when the last-visible-tab grows/shrinks into an ordinary pinned tab.
-if the icon disappeared/appeared instantly it would disrupt the impression that the tab is growing/shrinking gradually. */
-.tabbrowser-tab[pinned] .tab-label::before {
-    display: -moz-box;
-    content: "";
-    margin-right: 2px;
-    background: url(chrome://userchrome/content/skin/pin-tab.svg) no-repeat center/12px;
-    -moz-context-properties: fill, fill-opacity;
-    fill: currentColor;
-    width: 16px;
-    height: 16px;
-}
-
-/* label becomes visible on last-visible-tab, opacity and transform are the animated properties. */
-.tabbrowser-tab[pinned][last-visible-tab]
-    .tab-label-container {
-    opacity: 1;
-    transform: none;
-}
-
 /* different tab background colors in various states */
 .tabbrowser-tab:not([selected]):is(:hover, .keyboard-focused-tab) .tab-background {
     background: var(--tab-hover) !important;
@@ -455,6 +367,8 @@ they must have a 1px tall stripe at the bottom, the color of the bottom line (sh
     pointer-events: none;
 }
 
+#tabbrowser-tabs[movingtab] .tabbrowser-tab[pinned][last-visible-tab] .tab-loading-burst::before,
+.tabbrowser-tab[pinned][last-visible-tab]:is([justmoved], [tab-grouping], [tabdrop-samewindow]),
 .tabbrowser-tab:not([last-visible-tab]) .tab-loading-burst[pinned]::before {
     margin-inline-start: calc(
         (var(--pinned-tab-width) / 2) - (var(--pinned-tab-width) * 0.05)
@@ -662,7 +576,12 @@ so shadows are cast in both directions, unless the neighboring tab is selected o
     background-repeat: no-repeat;
 }
 
-.tabbrowser-tab:not([pinned]:not([last-visible-tab])):is(:hover, .keyboard-focused-tab)
+.tabbrowser-tab:not([pinned]):is(:hover, .keyboard-focused-tab)
+    .tab-close-button:not(:hover):not(:active),
+#tabbrowser-tabs[movingtab] .tabbrowser-tab[pinned][last-visible-tab]:is(:hover, .keyboard-focused-tab)
+    .tab-close-button:not(:hover):not(:active),
+    .tabbrowser-tab[pinned][last-visible-tab]:is([justmoved], [tab-grouping], [tabdrop-samewindow]) .tab-close-button,
+.tabbrowser-tab[pinned][last-visible-tab]:is([justmoved], [tab-grouping], [tabdrop-samewindow]):is(:hover, .keyboard-focused-tab)
     .tab-close-button:not(:hover):not(:active) {
     opacity: 0.6 !important;
 }
@@ -831,16 +750,27 @@ so in other words it won't show if audio is playing until you hover the general 
 /* hide the close button for pinned tabs. if the last visible tab is pinned, it doesn't hide the close button since the tab doesn't get shrunk in that case.
 this requires you to make a pref in about:config and set it to true: "userChrome.tabs.pinned-tabs.close-buttons.disabled" */
 @supports (-moz-bool-pref("userChrome.tabs.pinned-tabs.close-buttons.disabled")) {
+
     .tabbrowser-tab[pinned]:not([last-visible-tab]) .tab-close-button,
-    #tabbrowser-tabs[movingtab] .tabbrowser-tab[pinned]:not([last-visible-tab]) .tab-close-button {
+    #tabbrowser-tabs[movingtab] .tabbrowser-tab[pinned] .tab-close-button,
+    .tabbrowser-tab[pinned]:is([justmoved], [tab-grouping], [tabdrop-samewindow]) .tab-close-button {
         display: none !important;
     }
 
     #tabbrowser-tabs[movingtab]
-        .tabbrowser-tab[pinned]:not([last-visible-tab])[selected]
+        .tabbrowser-tab[pinned][selected]
         .tab-icon-image,
+    .tabbrowser-tab[pinned]:is([justmoved], [tab-grouping], [tabdrop-samewindow]) .tab-icon-image,
     .tabbrowser-tab[pinned]:not([last-visible-tab]) .tab-throbber[busy],
     .tabbrowser-tab[pinned]:not([busy], [last-visible-tab])
+        :is(.tab-icon-image, .tab-sharing-icon-overlay),
+    .tabbrowser-tab[pinned][last-visible-tab]:is([justmoved], [tab-grouping], [tabdrop-samewindow]) .tab-throbber[busy],
+    .tabbrowser-tab[pinned][last-visible-tab]:not([busy]):is([justmoved], [tab-grouping], [tabdrop-samewindow])
+        :is(.tab-icon-image, .tab-sharing-icon-overlay),
+    #tabbrowser-tabs[movingtab]
+        .tabbrowser-tab[pinned][last-visible-tab] .tab-throbber[busy],
+    #tabbrowser-tabs[movingtab]
+        .tabbrowser-tab[pinned][last-visible-tab]:not([busy])
         :is(.tab-icon-image, .tab-sharing-icon-overlay) {
         opacity: 1 !important;
         transform: none !important;
@@ -876,6 +806,8 @@ we restore the tab button with javascript & manifest so there's no need for it, 
     display: -moz-box !important;
 }
 
-.tabbrowser-tab[pinned]:not([last-visible-tab]) .tab-icon-sound {
+.tabbrowser-tab[pinned]:not([last-visible-tab]) .tab-icon-sound,
+#tabbrowser-tabs[movingtab] .tabbrowser-tab[pinned] .tab-icon-sound,
+.tabbrowser-tab[pinned]:is([justmoved], [tab-grouping], [tabdrop-samewindow]) .tab-icon-sound {
     display: none !important;
 }
