@@ -17,6 +17,7 @@ tooltip[default][page] {
     margin-inline-start: -5px !important;
     margin-block-start: 16px !important;
     pointer-events: none !important;
+    --uc-tooltip-inner-padding: 2px 6px 4px 6px;
 }
 
 tooltip[default][page] > description {
@@ -25,7 +26,7 @@ tooltip[default][page] > description {
     border: 1px solid var(--uc-menu-border-color) !important;
     border-radius: var(--tooltip-border-radius) !important;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2) !important;
-    padding: 2px 6px 4px 6px !important;
+    padding: var(--uc-tooltip-inner-padding, 2px 6px 4px 6px) !important;
     margin: 0 !important;
 }
 
@@ -41,10 +42,7 @@ tooltip[default][page] > description {
         tooltip[default][page] {
             font-family: SF Pro Text, Segoe UI, sans-serif !important;
             font-kerning: normal !important;
-        }
-
-        tooltip[default][page] > description {
-            padding: 3px 6px 4px 6px !important;
+            --uc-tooltip-inner-padding: 3px 6px 4px 6px;
         }
     }
 }

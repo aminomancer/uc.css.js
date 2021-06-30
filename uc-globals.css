@@ -51,6 +51,8 @@ tooltip {
     --tooltip-bgcolor: hsl(233, 36%, 11%);
     --tooltip-color: white;
     --tooltip-border-radius: 2px;
+    --tooltip-border-color: var(--uc-menu-border-color);
+    --tooltip-box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     --webextension-panel-border-radius: 5px;
 
     --statuspanel-color: hsla(0, 0%, 100%, 0.85);
@@ -169,9 +171,9 @@ tooltip {
     --download-button-hue: 236.86;
     --download-button-hover-bg: linear-gradient(
         to right,
-        hsla(var(--download-button-hue), 100%, 78.94%, 0.15) 7.1%,
-        hsla(var(--download-button-hue), 99%, 80.94%, 0.13) 20.9%,
-        hsla(var(--download-button-hue), 98%, 80.94%, 0.10) 34.1%,
+        hsla(var(--download-button-hue), 100%, 81%, 0.15) 7.1%,
+        hsla(var(--download-button-hue), 94%, 80%, 0.13) 20.9%,
+        hsla(var(--download-button-hue), 94%, 80%, 0.10) 34.1%,
         hsla(var(--download-button-hue), 97%, 78.94%, 0.07) 47.1%,
         hsla(var(--download-button-hue), 96%, 78.94%, 0.04) 60%,
         hsla(var(--download-button-hue), 95%, 76.94%, 0.02) 80%,

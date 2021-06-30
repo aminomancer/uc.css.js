@@ -101,15 +101,12 @@
                     if (tooltipNode) {
                         aEvent.target.setAttribute("position", "after_start");
                         aEvent.target.moveToAnchor(tooltipNode, "after_start");
-                    } else if (tree && cellCoords) {
+                    } else if (tree && cellCoords)
                         // anchor the tooltip to the tree cell
                         aEvent.target.moveTo(
                             cellCoords.left + tree.screenX,
                             cellCoords.bottom + tree.screenY
                         );
-                        // make sure the tooltip isn't any bigger than the tree
-                        aEvent.target.sizeTo(cellCoords.width, 0);
-                    }
                 }
                 let tooltipTitle = aEvent.target.querySelector(".places-tooltip-title");
                 tooltipTitle.hidden = !title || title == url;
@@ -119,12 +116,6 @@
                 if (!tooltipUrl.hidden) tooltipUrl.value = url;
                 return true;
             };
-            // eval(
-            //     `BookmarksEventHandler.fillInBHTooltip = ` +
-            //         BookmarksEventHandler.fillInBHTooltip
-            //             .toSource()
-            //             .replace(/&&\s*\!tooltipNode\.closest\(\"menupopup\"\)/, ``)
-            // );
         }
     }
 

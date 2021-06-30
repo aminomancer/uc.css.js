@@ -19,16 +19,18 @@ tooltip {
     margin-inline-start: -5px !important;
     margin-block-start: 16px !important;
     pointer-events: none !important;
+    --uc-tooltip-inner-padding: 2px 6px 4px 6px;
 }
 
 tooltip > description,
+.places-tooltip-box,
 tooltip .uc-tooltip-box {
     background-color: var(--tooltip-bgcolor) !important;
     color: var(--tooltip-color) !important;
-    border: 1px solid var(--uc-menu-border-color) !important;
+    border: 1px solid var(--tooltip-border-color) !important;
     border-radius: var(--tooltip-border-radius) !important;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2) !important;
-    padding: 2px 6px 4px 6px !important;
+    box-shadow: var(--tooltip-box-shadow) !important;
+    padding: var(--uc-tooltip-inner-padding, 2px 6px 4px 6px) !important;
     margin: 0 !important;
 }
 
@@ -39,12 +41,9 @@ tooltip .uc-tooltip-box {
     border: none !important;
 }
 
-.places-tooltip-box {
-    padding: 4px 6px 5px 6px !important;
-    border: 1px solid var(--uc-menu-border-color) !important;
-    border-radius: var(--tooltip-border-radius) !important;
-    background-color: var(--tooltip-bgcolor) !important;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2) !important;
+.places-tooltip-box,
+tooltip .uc-tooltip-box {
+    --uc-tooltip-inner-padding: 4px 6px 5px 6px !important;
 }
 
 .places-tooltip > description {
@@ -103,44 +102,45 @@ as the mouse would then be on top of the tooltip popup not the main window. */
 :is(#tracking-protection-icon-tooltip, #back-button-tooltip, #forward-button-tooltip)
     .tooltip-label:not([value], [id]) {
     padding: 0 !important;
+    border: none !important;
 }
 
 :is(#back-button-tooltip, #forward-button-tooltip):not([shadow-support]) description {
     border: none !important;
 }
 
-:is(#back-button-tooltip, #forward-button-tooltip):not([shadow-support])
+:is(#back-button-tooltip, #forward-button-tooltip)
     .tooltip-label[id]:not(:last-of-type) {
-    padding: 4px 6px 21px 6px !important;
     font-weight: 600;
 }
 
-:is(#back-button-tooltip, #forward-button-tooltip):not([shadow-support])
+:is(#back-button-tooltip, #forward-button-tooltip)
     .tooltip-label:last-of-type:not([id]) {
-    padding-block: 0 6px !important;
-    margin-block-start: -20px !important;
     color: var(--panel-shortcut-color) !important;
     box-shadow: none !important;
     background: none !important;
     font-size: 0.9em;
 }
 
+:is(#back-button-tooltip, #forward-button-tooltip):not([shadow-support])
+    .tooltip-label[id]:not(:last-of-type) {
+    padding: 4px 6px 21px 6px !important;
+}
+
+:is(#back-button-tooltip, #forward-button-tooltip):not([shadow-support])
+    .tooltip-label:last-of-type:not([id]) {
+    padding-block: 0 6px !important;
+    margin-block-start: -20px !important;
+}
+
 #tracking-protection-container tooltip {
     background-color: var(--ui-secondary-bg) !important;
     color: var(--tooltip-color) !important;
-    border: none !important;
+    border: 1px solid var(--tooltip-border-color) !important;
     border-radius: var(--tooltip-border-radius) !important;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2) !important;
-    padding: 2px 6px 4px 6px !important;
+    box-shadow: var(--tooltip-box-shadow) !important;
+    padding: var(--uc-tooltip-inner-padding) !important;
     margin-block-start: 26px !important;
-}
-
-@supports -moz-bool-pref("userChrome.css.remove-tooltip-borders") {
-    tooltip > description,
-    tooltip .uc-tooltip-box,
-    .places-tooltip-box {
-        border: none !important;
-    }
 }
 
 progress {
@@ -187,11 +187,11 @@ progress[paused]::-moz-progress-bar {
     background-color: var(--acrylic-blue) !important;
     background-image: var(--acrylic-texture) !important;
     backdrop-filter: var(--acrylic-blur) !important;
-    color: hsla(0, 0%, 100%, 0.85) !important;
-    border: none !important;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2) !important;
+    color: var(--ui-text-80) !important;
+    border-color: var(--tooltip-border-color) !important;
+    box-shadow: var(--tooltip-box-shadow) !important;
     opacity: 1;
-    padding: 6px 8px 6px !important;
+    padding: 5px 8px !important;
 }
 
 #statuspanel-inner {
@@ -200,15 +200,14 @@ progress[paused]::-moz-progress-bar {
     max-width: unset !important;
 }
 
-#statuspanel:not([mirror])
-    #statuspanel-inner:is(:dir(ltr), :-moz-locale-dir(ltr))
-    #statuspanel-label {
+#statuspanel:not([mirror]) > #statuspanel-inner > #statuspanel-label:-moz-locale-dir(ltr),
+#statuspanel[mirror] > #statuspanel-inner > #statuspanel-label:-moz-locale-dir(rtl) {
     border-top-left-radius: 0;
     border-top-right-radius: var(--tooltip-border-radius);
 }
 
-#statuspanel[mirror] #statuspanel-inner #statuspanel-label,
-#statuspanel #statuspanel-inner:is(:dir(rtl), :-moz-locale-dir(rtl)) #statuspanel-label {
+#statuspanel:not([mirror]) > #statuspanel-inner > #statuspanel-label:-moz-locale-dir(rtl),
+#statuspanel[mirror] > #statuspanel-inner > #statuspanel-label:-moz-locale-dir(ltr) {
     border-top-left-radius: var(--tooltip-border-radius);
     border-top-right-radius: 0;
 }
@@ -368,8 +367,8 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
             font-weight: 500 !important;
         }
 
-        tooltip > description {
-            padding: 3px 6px 4px 6px !important;
+        tooltip {
+            --uc-tooltip-inner-padding: 3px 6px 4px 6px;
         }
 
         :is(#back-button-tooltip, #forward-button-tooltip) .tooltip-label[id] {
@@ -431,6 +430,17 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
     }
 }
 
+/* remove tooltip borders if pref is enabled */
+@supports -moz-bool-pref("userChrome.css.remove-tooltip-borders") {
+    tooltip > description,
+    tooltip .uc-tooltip-box,
+    .places-tooltip-box,
+    #tracking-protection-container tooltip,
+    #statuspanel-label {
+        border: none !important;
+    }
+}
+
 /* reconciling the stylesheet with minBrowserNavbar.uc.js */
 :root[min-browser] {
     --min-toolbar-height: 39px;
@@ -470,9 +480,4 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
     > toolbarpaletteitem:first-child
     > :is(toolbarbutton, toolbaritem) {
     padding-inline-start: 2px !important;
-}
-
-/* i don't like the context menu share button */
-#context_shareTabURL {
-    display: none;
 }
