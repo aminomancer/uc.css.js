@@ -166,16 +166,16 @@ tooltip {
     however, gradients this dark and subtle may not look good on all monitors. it depends on a lot of factors.
     if you experience banding, (solid bands of color instead of a continuous smooth color transition)
     just override --download-button-hover-bg with a solid color variable, e.g. var(--arrowpanel-faint) */
-    --download-button-hue: 235.86;
+    --download-button-hue: 236.86;
     --download-button-hover-bg: linear-gradient(
         to right,
-        hsla(var(--download-button-hue), 100%, 82.94%, 0.092) 7.1%,
-        hsla(var(--download-button-hue), 100%, 82.94%, 0.075) 20.9%,
-        hsla(var(--download-button-hue), 100%, 82.94%, 0.069) 34.1%,
-        hsla(var(--download-button-hue), 100%, 82.94%, 0.04) 47.1%,
-        hsla(var(--download-button-hue), 100%, 82.94%, 0.025) 60%,
-        hsla(var(--download-button-hue), 95%, 76.94%, 0.02) 73%,
-        hsla(var(--download-button-hue), 90%, 73.94%, 0.015) 86.3%
+        hsla(var(--download-button-hue), 100%, 78.94%, 0.15) 7.1%,
+        hsla(var(--download-button-hue), 99%, 80.94%, 0.13) 20.9%,
+        hsla(var(--download-button-hue), 98%, 80.94%, 0.10) 34.1%,
+        hsla(var(--download-button-hue), 97%, 78.94%, 0.07) 47.1%,
+        hsla(var(--download-button-hue), 96%, 78.94%, 0.04) 60%,
+        hsla(var(--download-button-hue), 95%, 76.94%, 0.02) 80%,
+        hsla(var(--download-button-hue), 90%, 73.94%, 0.005) 96.3%
     );
 
     --pink-action: hsl(340, 73%, 58%);

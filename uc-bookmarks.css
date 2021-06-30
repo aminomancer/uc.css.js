@@ -190,7 +190,8 @@
     appearance: none !important;
     background-color: var(--ui-textbox-bgcolor) !important;
     line-height: normal;
-    padding: 2px;
+    padding-inline: 10px;
+    min-height: 24px;
     margin: 0 !important;
     color: #fff !important;
     border: none !important;

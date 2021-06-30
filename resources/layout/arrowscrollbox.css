@@ -47,7 +47,6 @@ toolbarbutton > .toolbarbutton-text {
 /* menupopup scroll buttons */
 :host([overflowing="true"][orient="vertical"]) :is(#scrollbutton-up, #scrollbutton-down) {
     visibility: visible !important;
-    position: absolute !important;
     display: block;
     will-change: opacity;
 }
@@ -78,50 +77,33 @@ toolbarbutton > .toolbarbutton-text {
 }
 
 :host([overflowing="true"][orient="vertical"]) #scrollbutton-up,
-:host([overflowing="true"][orient="vertical"]) #scrollbutton-up:not([disabled="true"]):hover {
+:host([overflowing="true"][orient="vertical"]) #scrollbutton-up:not([disabled="true"]):hover,
+:host([overflowing="true"][orient="vertical"]) #scrollbutton-down,
+:host([overflowing="true"][orient="vertical"]) #scrollbutton-down:not([disabled="true"]):hover {
     appearance: none !important;
-    position: absolute;
     min-width: 21.5px;
     padding-inline: 1px;
     padding-block: 6px;
-    margin-block: -4px -18px;
     margin-inline: 5vw;
     background-color: hsl(233, 28%, 24%);
     box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.25), 0px 0px 5px -1px rgba(0, 0, 0, 0.125);
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
     transition: 0.2s ease-in-out opacity;
-    transform-style: flat;
-    backface-visibility: hidden;
     -moz-context-properties: fill, fill-opacity;
     fill-opacity: 1;
+}
+
+:host([overflowing="true"][orient="vertical"]) #scrollbutton-up,
+:host([overflowing="true"][orient="vertical"]) #scrollbutton-up:not([disabled="true"]):hover {
+    margin-block: -4px -18px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 :host([overflowing="true"][orient="vertical"]) #scrollbutton-down,
 :host([overflowing="true"][orient="vertical"]) #scrollbutton-down:not([disabled="true"]):hover {
-    appearance: none !important;
-    position: absolute;
-    min-width: 21.5px;
-    padding-inline: 1px;
-    padding-block: 6px;
     margin-block: -18px -4px;
-    margin-inline: 5vw;
-    background-color: hsl(233, 28%, 24%);
-    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.25), 0px 0px 5px -1px rgba(0, 0, 0, 0.125);
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    transition: 0.2s ease-in-out opacity;
-    transform-style: flat;
-    backface-visibility: hidden;
-    -moz-context-properties: fill, fill-opacity;
-    fill-opacity: 1;
-}
-
-:host([overflowing="true"][orient="vertical"])
-    #scrollbutton-up:not([hidden])
-    ~ .scrollbox-clip
-    > scrollbox {
-    will-change: scroll-position;
 }
 
 :host([overflowing="true"][orient="vertical"])
@@ -151,4 +133,27 @@ toolbarbutton > .toolbarbutton-text {
 :host([overflowing="true"][orient="vertical"])
     :is(#scrollbutton-up, #scrollbutton-down):not([disabled="true"]):hover {
     opacity: 1;
+}
+
+:host([overflowing="true"][orient="vertical"])
+    #scrollbutton-up:not([hidden])
+    ~ .scrollbox-clip
+    > scrollbox {
+    will-change: scroll-position;
+}
+
+@supports not (-moz-bool-pref("userChrome.css.remove-menu-borders")) {
+    :host([overflowing="true"][orient="vertical"]) {
+        overflow: visible;
+    }
+
+    :host([overflowing="true"][orient="vertical"]) #scrollbutton-up,
+    :host([overflowing="true"][orient="vertical"]) #scrollbutton-up:not([disabled="true"]):hover {
+        margin-top: -5px;
+    }
+
+    :host([overflowing="true"][orient="vertical"]) #scrollbutton-down,
+    :host([overflowing="true"][orient="vertical"]) #scrollbutton-down:not([disabled="true"]):hover {
+        margin-bottom: -5px;
+    }
 }

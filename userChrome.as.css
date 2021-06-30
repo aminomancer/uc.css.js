@@ -36,7 +36,8 @@ tooltip[default][page] > description {
 }
 
 @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
-    @-moz-document url(chrome://browser/content/browser.xhtml) {
+    @-moz-document url(chrome://browser/content/browser.xhtml)
+    {
         tooltip[default][page] {
             font-family: SF Pro Text, Segoe UI, sans-serif !important;
             font-kerning: normal !important;
@@ -194,6 +195,13 @@ tooltip[default][page] > description {
 
 :not(select):not(hbox) > scrollbar[orient="horizontal"]:not(:hover) thumb:not(:active) {
     transform: scaleY(20%);
+}
+
+/* reduce the scrollbar edge padding on menupopup arrowscrollboxes
+(not the gutter — e.g. for a vertical scrollbox, reduce the padding-block) */
+scrollbox:not(select):not(hbox) > scrollbar[orient="horizontal"],
+scrollbox:not(select):not(hbox) > scrollbar[orient="vertical"] {
+    padding: 0 !important;
 }
 
 :not(select):not(hbox) > scrollbar thumb {

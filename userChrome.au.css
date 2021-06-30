@@ -34,13 +34,13 @@ panel[type="autocomplete-richlistbox"] {
 }
 
 .panel-subview-footer-button {
-    margin-bottom: 4px;
+    margin-bottom: var(--menupopup-inner-padding-magnitude);
 }
 
 /* use scrollbars instead of scroll buttons on most arrowscrollboxes */
 menupopup::part(arrowscrollbox-scrollbox) {
     overflow-y: auto !important;
-    padding-top: 0 !important;
+    padding-block: 0 !important;
     margin-block: 0 !important;
     scroll-behavior: smooth !important;
 }
@@ -48,7 +48,7 @@ menupopup::part(arrowscrollbox-scrollbox) {
 #BMB_bookmarksPopup::part(arrowscrollbox),
 #BMB_bookmarksPopup menupopup::part(arrowscrollbox),
 #BMB_bookmarksPopup menupopup[placespopup="true"]::part(arrowscrollbox) {
-    padding-block: 4px;
+    padding: var(--menupopup-inner-padding);
     border: 1px solid var(--panel-border-color);
 }
 

@@ -223,36 +223,36 @@ as well as the internal appearance of the built-in sidebars, e.g. bookmarks, his
     border-radius: var(--general-button-border-radius) !important;
     margin-inline: 8px !important;
     cursor: default !important;
+    min-height: 24px;
+}
+
+.sidebar-panel treechildren::-moz-tree-row(empty) {
+    min-height: 0 !important;
 }
 
 .sidebar-panel treechildren::-moz-tree-cell {
-    margin-inline: calc(var(--general-button-border-radius) + 8px) !important;
+    margin-inline: calc(8px) !important;
     cursor: default !important;
 }
 
-.sidebar-panel treechildren::-moz-tree-row(selected),
-.sidebar-panel treechildren::-moz-tree-cell(selected) {
+.sidebar-panel treechildren::-moz-tree-row(selected) {
     background-color: var(--places-cell-focus-bgcolor) !important;
     outline: none !important;
     border: none !important;
 }
 
 .sidebar-panel treechildren::-moz-tree-row(hover),
-.sidebar-panel treechildren::-moz-tree-cell(hover),
-.sidebar-panel treechildren::-moz-tree-row(selected, hover),
-.sidebar-panel treechildren::-moz-tree-cell(selected, hover) {
+.sidebar-panel treechildren::-moz-tree-row(selected, hover) {
     background-color: var(--places-cell-hover-bgcolor) !important;
     color: var(--lwt-text-color) !important;
     outline: none !important;
 }
 
-.sidebar-panel:-moz-window-inactive treechildren::-moz-tree-row(selected),
-.sidebar-panel:-moz-window-inactive treechildren::-moz-tree-cell(selected) {
+.sidebar-panel:-moz-window-inactive treechildren::-moz-tree-row(selected) {
     background-color: transparent !important;
 }
 
-.sidebar-panel:-moz-window-inactive treechildren::-moz-tree-row(selected, hover),
-.sidebar-panel:-moz-window-inactive treechildren::-moz-tree-cell(selected, hover) {
+.sidebar-panel:-moz-window-inactive treechildren::-moz-tree-row(selected, hover) {
     background-color: var(--places-cell-hover-bgcolor) !important;
     color: var(--lwt-text-color) !important;
     outline: none !important;
@@ -280,13 +280,9 @@ treechildren::-moz-tree-row(selected, current, focus) {
     background: none !important;
 }
 
-.sidebar-panel treechildren::-moz-tree-cell(primary, dropOn) {
-    background-color: var(--places-cell-focus-bgcolor) !important;
-}
-
 treechildren::-moz-tree-drop-feedback {
     background-color: transparent !important;
-    margin-inline-start: 8px !important;
+    margin-inline-start: -16px !important;
     pointer-events: none;
     background-image: url(chrome://userchrome/content/tree/tree-drop-indicator.svg) !important;
     background-repeat: no-repeat !important;
@@ -302,17 +298,20 @@ treechildren::-moz-tree-twisty {
 }
 
 .sidebar-placesTreechildren::-moz-tree-twisty {
-    margin-inline: -3px 3px !important;
+    margin-inline: 0 3px !important;
     padding-inline: 0 !important;
 }
 
-.sidebar-placesTreechildren::-moz-tree-twisty(sorted) {
+/* removes the empty space where the twisty (arrow) would go if the item was a folder.
+when the twisty icon isn't displayed, it still has width, creating an empty space to the left of the item.
+there are normally no twistys in sorted trees so it is relatively safe to collapse them. */
+/* .sidebar-placesTreechildren::-moz-tree-twisty(sorted) {
     width: 0 !important;
     margin-inline: 0 !important;
-}
+} */
 
 .sidebar-placesTreechildren::-moz-tree-image {
-    margin-inline-start: 0 !important;
+    margin-inline: 0 4px !important;
 }
 
 treechildren:-moz-locale-dir(rtl)::-moz-tree-twisty(closed) {
@@ -428,16 +427,18 @@ treechildren::-moz-tree-twisty(open) {
 
     .item-twisty-container,
     .item-icon-container {
-        margin-inline-start: 0 !important;
+        margin-inline: 3px 6px !important;
     }
 
     .item-tabs-list .item-icon-container {
-        margin-inline-start: 12px !important;
+        margin-inline: 13px 6px !important;
     }
 
     .item-title-container {
         border-radius: var(--general-button-border-radius) !important;
         margin-inline: 8px !important;
+        min-height: 24px;
+        box-sizing: border-box !important;
     }
 
     .item.selected > .item-title-container:not(:hover) {
@@ -454,6 +455,11 @@ treechildren::-moz-tree-twisty(open) {
         appearance: none !important;
         background-color: var(--places-cell-hover-bgcolor) !important;
         color: var(--lwt-text-color) !important;
+    }
+
+    .item.empty .item-title-container {
+        color: var(--context-menu-disabled-color) !important;
+        background: none !important;
     }
 
     .item.client.selected > .item-title-container:not(:hover) {

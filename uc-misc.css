@@ -58,12 +58,12 @@ tooltip .uc-tooltip-box {
     color: var(--panel-shortcut-color) !important;
 }
 
-.places-tooltip-title {
-    max-height: 2.7em !important;
-}
-
 .places-tooltip-uri {
     color: var(--panel-shortcut-color) !important;
+}
+
+.places-tooltip-title[hidden="true"] ~ .places-tooltip-uri {
+    color: inherit !important;
 }
 
 #places-tooltip-insecure-icon {
@@ -85,16 +85,16 @@ for that reason i disabled it but maybe someone else wants it. it does look kind
 /* the shadow on the tab tooltip must be removed since it blocks mouse hover from reaching the tab.
 which would mean when you hover a tab, it'd appear hovered, then the tooltip would show up and it would appear unhovered,
 as the mouse would then be on top of the tooltip popup not the main window. */
-#mainPopupSet > .places-tooltip {
-    margin: 0 !important;
+:is(#mainPopupSet, .sidebar-panel) > .places-tooltip {
     padding: 0 !important;
+    margin: 0 !important;
 }
 
-#mainPopupSet > .places-tooltip > .places-tooltip-box {
+:is(#mainPopupSet, .sidebar-panel) > .places-tooltip > .places-tooltip-box {
     box-shadow: none !important;
 }
 
-#mainPopupSet > #aHTMLTooltip description {
+:is(#mainPopupSet, .sidebar-panel) > #aHTMLTooltip description {
     overflow-wrap: anywhere !important;
     text-overflow: ellipsis !important;
 }
@@ -109,12 +109,14 @@ as the mouse would then be on top of the tooltip popup not the main window. */
     border: none !important;
 }
 
-:is(#back-button-tooltip, #forward-button-tooltip):not([shadow-support]) .tooltip-label[id]:not(:last-of-type) {
+:is(#back-button-tooltip, #forward-button-tooltip):not([shadow-support])
+    .tooltip-label[id]:not(:last-of-type) {
     padding: 4px 6px 21px 6px !important;
     font-weight: 600;
 }
 
-:is(#back-button-tooltip, #forward-button-tooltip):not([shadow-support]) .tooltip-label:last-of-type:not([id]) {
+:is(#back-button-tooltip, #forward-button-tooltip):not([shadow-support])
+    .tooltip-label:last-of-type:not([id]) {
     padding-block: 0 6px !important;
     margin-block-start: -20px !important;
     color: var(--panel-shortcut-color) !important;
@@ -347,11 +349,13 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
             font-kerning: normal !important;
         }
 
-        :is(#back-button-tooltip, #forward-button-tooltip):not([shadow-support]) .tooltip-label[id]:not(:last-of-type) {
+        :is(#back-button-tooltip, #forward-button-tooltip):not([shadow-support])
+            .tooltip-label[id]:not(:last-of-type) {
             padding: 3.5px 6px 18px 6px !important;
         }
 
-        :is(#back-button-tooltip, #forward-button-tooltip):not([shadow-support]) .tooltip-label:last-of-type:not([id]) {
+        :is(#back-button-tooltip, #forward-button-tooltip):not([shadow-support])
+            .tooltip-label:last-of-type:not([id]) {
             margin-block-start: -17.5px !important;
         }
 
@@ -384,6 +388,10 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
             font-weight: 300 !important;
         }
 
+        .places-tooltip-title[hidden="true"] ~ .places-tooltip-uri {
+            font-weight: inherit !important;
+        }
+
         #urlbar-zoom-button .toolbarbutton-text {
             height: revert !important;
             font-weight: 400 !important;
@@ -414,6 +422,12 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
     .tabmodalprompt-mainContainer,
     :is(.content-prompt-dialog, .tab-prompt-dialog, #window-modal-dialog) .dialogFrame {
         border: none !important;
+    }
+}
+
+@supports not (-moz-bool-pref("userChrome.css.remove-menu-borders")) {
+    .menupopup-arrowscrollbox[overflowing="true"][orient="vertical"] {
+        overflow: visible !important;
     }
 }
 
