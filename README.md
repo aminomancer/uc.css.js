@@ -77,6 +77,7 @@ For best results, set density mode to `Normal` and theme to `Dark` in the custom
 | userChrome.css.mac-ui-fonts | Boolean | true | Replace UI font with SF Pro, the system font for macOS. [Click here for details](#fonts) |
 | userChrome.css.remove-menu-borders | Boolean | false | If true, remove the thin border on context menus, panels, etc. |
 | userChrome.css.remove-tooltip-borders | Boolean | false | If true, remove the thin border on tooltips. If false, use [tooltipShadowSupport.uc.js](#tooltip-shadow-support) |
+| userChrome.css.ctrl-tab-backdrop-overlay | Boolean | true | If true, dim the whole screen behind the ctrl+tab panel, like Windows 10's alt+tab overlay |
 | userChrome.tabs.all-tabs-menu.reverse-order | Boolean | true | Display all tabs menu in reverse order (newer tabs on top, like history) |
 | userChrome.tabs.new-loading-spinner-animation | Boolean | true | Replace the tab loading throbber with a spinning animation |
 | userChrome.tabs.pinned-tabs.close-buttons.disabled | Boolean | true | This controls whether close buttons are shown on pinned tabs |

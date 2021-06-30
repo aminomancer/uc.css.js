@@ -1762,6 +1762,7 @@ toolbar[brighttext] #panic-button[open] {
 /* ctrl tab */
 #ctrlTab-panel::part(content) {
     -moz-box-orient: vertical;
-    background: none;
+    -moz-box-pack: center;
     color: inherit;
+    padding: 30px 30px 20px 30px;
 }

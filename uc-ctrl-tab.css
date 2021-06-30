@@ -10,13 +10,24 @@
 #ctrlTab-panel {
     appearance: none !important;
     border-style: none !important;
-    padding: 30px 20px 20px 20px !important;
-    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important; */
     font-weight: normal !important;
     text-shadow: 0 0 2px hsl(0, 0%, 8%), 0 0 2px hsl(0, 0%, 8%) !important;
     box-shadow: none !important;
-    background-color: var(--ctrlTab-bgcolor) !important;
-    border-radius: 5px !important;
+    background: none !important;
+    --panel-background: var(--ctrlTab-overlay-color) !important;
+    border-radius: 10px !important; 
+    overflow: hidden !important;
+}
+
+@supports -moz-bool-pref("userChrome.css.ctrl-tab-backdrop-overlay") {
+    #ctrlTab-panel {
+        margin-block: -50vh !important;
+        height: 100vh !important;
+        min-width: 200vw !important;
+        padding: 0 !important;
+        border-radius: 0 !important;
+        overflow: visible !important;
+    }
 }
 
 .ctrlTab-preview:not(#ctrlTab-showAll) > * > .ctrlTab-preview-inner {
@@ -45,7 +56,7 @@
 
 #ctrlTab-showAll {
     background-color: var(--ctrlTab-panel-bgcolor) !important;
-    border: 2px solid transparent;
+    border: 1px solid var(--blurred-dialog-border-color) !important;
 }
 
 #ctrlTab-showAll .button-box {
@@ -55,14 +66,14 @@
 #ctrlTab-showAll:focus,
 #ctrlTab-showAll:focus-within {
     background-color: var(--ctrlTab-panel-focused-bgcolor) !important;
-    border: 2px solid var(--attention-color) !important;
+    border-color: var(--attention-color) !important;
 }
 
 .ctrlTab-preview-inner {
     color: var(--ui-text-80) !important;
     margin: 0 !important;
     padding: 10px !important;
-    border: 2px solid transparent !important;
+    border: 1px solid var(--blurred-dialog-border-color) !important;
     border-radius: 5px !important;
     box-shadow: 0 0 4px -1px rgba(0, 0, 0, 0.2), 0 0 25px -2px rgba(0, 0, 0, 0.2) !important;
     background-color: var(--ctrlTab-panel-bgcolor) !important;
@@ -70,7 +81,7 @@
 
 .ctrlTab-preview:focus > .ctrlTab-preview-inner {
     background-color: var(--ctrlTab-panel-focused-bgcolor) !important;
-    border: 2px solid var(--attention-color) !important;
+    border-color: var(--attention-color) !important;
     box-shadow: 0 0 4px -1px rgba(0, 0, 0, 0.2), 0 0 25px -2px rgba(0, 0, 0, 0.2),
         inset 0 0 20px 5px hsla(0, 0%, 0%, 0.5) !important;
 }

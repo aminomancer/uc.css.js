@@ -422,6 +422,11 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
     :is(.content-prompt-dialog, .tab-prompt-dialog, #window-modal-dialog) .dialogFrame {
         border: none !important;
     }
+
+    #ctrlTab-showAll:not(:focus, :focus-within),
+    .ctrlTab-preview:not(:focus) > .ctrlTab-preview-inner {
+        border-color: transparent !important;
+    }
 }
 
 @supports not (-moz-bool-pref("userChrome.css.remove-menu-borders")) {
