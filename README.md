@@ -20,12 +20,12 @@ My personal Firefox theme/layout, plus some privileged scripts to add new behavi
 For best results, set density mode to `Normal` and theme to `Dark` in the customization menu. (right click on the navbar and click "Customize Toolbar...") I strongly recommend using this on [Firefox Nightly](https://www.mozilla.org/en-US/firefox/channel/desktop/#nightly) and updating the theme at least weekly. To that end, you might find it easier to clone the repo to your chrome folder so you can pull updates quickly. I also recommend setting the following prefs in about:config. There's a [user.js](/user.js) file in the root directory that will automatically set all the required prefs if you put it in your _profile_ folder. (not your chrome folder) That said, I recommend setting the preferences manually in about:config, since most should be kept regardless of the theme you use, and there are many other optional prefs you should consider setting in this list. The following are in alphabetical order, not in order of importance. Several are optional, but the few that are required are in italics and are marked in the Notes column.<details><summary>**_Click for a full list._**</summary>
 | Pref&nbsp;name | Type | Value | Notes&nbsp;(optional&nbsp;unless&nbsp;otherwise&nbsp;noted) |
 |- |- |- |- |
-| browser.anchor_color | String | `#5311ff` | |
-| browser.visited_color | String | `#753afc` | |
-| browser.display.focus_ring_style | Number | 0 | |
-| browser.display.focus_ring_width | Number | 0 | |
-| _browser.proton.enabled_ | Boolean | true | |
-| _browser.proton.places-tooltip.enabled_ | Boolean | true | |
+| browser.anchor\_color | String | `#5311ff` | |
+| browser.visited\_color | String | `#753afc` | |
+| browser.display.focus\_ring\_style | Number | 0 | |
+| browser.display.focus\_ring\_width | Number | 0 | |
+| <i>browser.proton.enabled</i> | Boolean | true | |
+| <i>browser.proton.places-tooltip.enabled</i> | Boolean | true | |
 | browser.startup.blankWindow | Boolean | false | These two settings eliminate the blank white window during startup |
 | browser.startup.preXulSkeletonUI | Boolean | false | |
 | browser.tabs.tabMinWidth | Number | 90 | User preference, but mine is 90 |
@@ -37,24 +37,24 @@ For best results, set density mode to `Normal` and theme to `Dark` in the custom
 | dom.forms.selectSearch | Boolean | true | |
 | findbar.highlightAll | Boolean | true | Stylesheet eliminates some rarely used findbar buttons. So I leave this set to true |
 | findbar.matchdiacritics | Number | 2 | |
-| gfx.font_rendering.cleartype_params.cleartype_level | Number | 100 | These settings are a major improvement to text rendering on Windows. I don't think they do anything on mac/linux |
-| gfx.font_rendering.cleartype_params.force_gdi_classic_for_families | String | `<empty>` | Leave the value completely empty |
-| gfx.font_rendering.cleartype_params.force_gdi_classic_max_size | Number | 6 | |
-| gfx.font_rendering.cleartype_params.pixel_structure | Number | 1 | |
-| gfx.font_rendering.cleartype_params.rendering_mode | Number | 5 | |
-| gfx.font_rendering.directwrite.use_gdi_table_loading | Boolean | false | |
-| _gfx.webrender.svg-images_ | Boolean | true | |
-| _layout.css.backdrop-filter.enabled_ | Boolean | true | Required for the acrylic/glass gaussian blur effect |
-| _layout.css.cached-scrollbar-styles.enabled_ | Boolean | false | Sort of required for scrollbar styles in userChrome.ag.css |
-| _layout.css.moz-document.content.enabled_ | Boolean | true | Required |
-| _layout.css.xul-box-display-values.content.enabled_ | Boolean | true | Required |
-| _layout.css.xul-display-values.content.enabled_ | Boolean | true | Required |
+| gfx.font\_rendering.cleartype\_params.cleartype\_level | Number | 100 | These settings are a major improvement to text rendering on Windows. I don't think they do anything on mac/linux |
+| gfx.font\_rendering.cleartype\_params.force\_gdi\_classic\_for\_families | String | `<empty>` | Leave the value completely empty |
+| gfx.font\_rendering.cleartype\_params.force\_gdi\_classic\_max\_size | Number | 6 | |
+| gfx.font\_rendering.cleartype\_params.pixel\_structure | Number | 1 | |
+| gfx.font\_rendering.cleartype\_params.rendering\_mode | Number | 5 | |
+| gfx.font\_rendering.directwrite.use\_gdi\_table\_loading | Boolean | false | |
+| <i>gfx.webrender.svg-images</i> | Boolean | true | |
+| <i>layout.css.backdrop-filter.enabled</i> | Boolean | true | Required for the acrylic/glass gaussian blur effect |
+| <i>layout.css.cached-scrollbar-styles.enabled</i> | Boolean | false | Sort of required for scrollbar styles in userChrome.ag.css |
+| <i>layout.css.moz-document.content.enabled</i> | Boolean | true | Required |
+| <i>layout.css.xul-box-display-values.content.enabled</i> | Boolean | true | Required |
+| <i>layout.css.xul-display-values.content.enabled</i> | Boolean | true | Required |
 | layout.css.xul-tree-pseudos.content.enabled | Boolean | true | |
-| reader.color_scheme | String | `dark` | |
+| reader.color\_scheme | String | `dark` | |
 | mousewheel.autodir.enabled | Boolean | true | Allow mousewheel ⇅ to scroll ⇄-only scrollboxes |
 | prompts.contentPromptSubDialog | Boolean | true | Use the modern content dialog instead of modal prompts |
-| _svg.context-properties.content.enabled_ | Boolean | true | Required for making some icons white |
-| _toolkit.legacyUserProfileCustomizations.stylesheets_ | Boolean | true | Required, of course |
+| <i>svg.context-properties.content.enabled</i> | Boolean | true | Required for making some icons white |
+| <i>toolkit.legacyUserProfileCustomizations.stylesheets</i> | Boolean | true | Required, of course |
 | ui.IMERawInputBackground | String | `#000000` | This affects the appearance of IME overlays. e.g. when typing Hangul or Pinyin |
 | ui.IMESelectedRawTextBackground | String | `#7755FF` | |
 | ui.key.menuAccessKeyFocuses | Boolean | false | Disable alt-key opening menubar if you use my alt+M hotkey |
@@ -64,7 +64,7 @@ For best results, set density mode to `Normal` and theme to `Dark` in the custom
 | ui.tooltipDelay | Number | 100 | |
 | ui.skipNavigatingDisabledMenuItem | Number | 1 | When focusing menuitems with arrow keys, skip disabled items |
 | ui.SpellCheckerUnderlineStyle | Number | 1 | Use dotted underline for spell checker |
-| _ui.systemUsesDarkTheme_ | Number | 1 | Currently required; working on a light mode |
+| <i>ui.systemUsesDarkTheme</i> | Number | 1 | Currently required; working on a light mode |
 | ui.textHighlightBackground | String | `#7755FF` | These prefs control the appearance of text highlighted by the findbar. I choose white text on purple/pink background |
 | ui.textHighlightForeground | String | `#FFFFFF` | |
 | ui.textSelectBackground | String | `#FFFFFF` | |
@@ -83,7 +83,7 @@ For best results, set density mode to `Normal` and theme to `Dark` in the custom
 | userChrome.tabs.pinned-tabs.close-buttons.disabled | Boolean | true | This controls whether close buttons are shown on pinned tabs |
 | userChrome.tabs.rounded-outer-corners.disabled | Boolean | false | This controls whether tabs have rounded bottom corners<br/><img src="preview/prev-tabcorners.webp" width="100%"/> |
 | userChrome.urlbar.hide-bookmarks-button-on-system-pages | Boolean | true | Hides the urlbar's bookmark button on system pages & new tab page |
-| userChrome.urlbar-results.disable_animation | Boolean | false | Toggle to `true` if you don't want urlbar animations |
+| userChrome.urlbar-results.disable\_animation | Boolean | false | Toggle to `true` if you don't want urlbar animations |
 | widget.content.allow-gtk-dark-theme | Boolean | true | Makes Linux theming more consistent |
 | widget.disable-native-theme-for-content | Boolean | true | Enables Firefox's custom appearance for elements like checkboxes. Skips the "native" appearance given by the OS stylesheets. |
 
@@ -161,13 +161,15 @@ If you're using fx-autoconfig like I recommended, then your scripts should go in
 After you've installed the files, the script loader will locate any scripts you place in the proper folder that end in .uc.js. Once you have all this set up you can download scripts, put them in the correct folder for your script loader, restart, and you should see the changes immediately. When updating scripts, be sure to clear your startup cache. With fx-autoconfig, you can click "Tools" in the menubar, then "userScripts," then "Restart now!" and it will clear the startup cache as it restarts. Without fx-autoconfig, there are still methods you can use from the browser console but they will cause Firefox to restart with the devtools still open, which is unstable. Instead, I'd recommend going to `about:profiles` and click the "Open Folder" button in your profile's local directory row. Then quit Firefox, and in the local directory delete the folder labeled `startupCache` before restarting the browser.
 
 #### **Special stylesheets:**
+
 In the main directory on this repo you might notice two files: [userChrome.ag.css](/userChrome.ag.css) and [userChrome.au.css](/userChrome.au.css). The _"ag"_ is an abbreviation for user _agent_ sheet, and _"au"_ is an abbreviation for _author_ sheet. They're used for rules that would not work if we put them in `userChrome.css`. But Firefox will not load these stylesheets on its own. These are loaded by the [Agent/Author Sheet Loader](#agentauthor-sheet-loader). The script does the same general thing as two of the files included with fx-autoconfig, but if you want the stylesheets to work in the devtools, (e.g. for context menus) you need the script from my repo. And since you don't want to load duplicate stylesheets, delete the scripts included in fx-autoconfig's JS folder.
 
 These agent/author sheets handle some of the most common and problematic elements like tooltips, scrollbars, etc. The main purposes for using special stylesheets are 1) to use CSS syntax that is forbidden to user sheets, such as the `::part(...)` pseudo-element; 2) to style native-anonymous content like default tooltips or scrollbars; or 3) to override the vanilla style rules without needing to use the `!important` tag. In particular, we can use the author sheet to make (or revert) general rules without affecting more specific rules in the built-in stylesheets, or dealing with a bunch of style conflicts and cascading confusion.
 
-\* *Other themes/loaders, including older versions of this theme, may use the file suffix `.as.css` for the agent sheet, instead of `.ag.css`. I've switched to "ag" for the sake of consistency with fx-autoconfig. If you have a `userChrome.as.css` file left over from something, you can just delete it and replace it with `userChrome.ag.css`. The [agent sheet loader](#agentauthor-sheet-loader) will ignore `.as.css` files.*
+\* _Other themes/loaders, including older versions of this theme, may use the file suffix `.as.css` for the agent sheet, instead of `.ag.css`. I've switched to "ag" for the sake of consistency with fx-autoconfig. If you have a `userChrome.as.css` file left over from something, you can just delete it and replace it with `userChrome.ag.css`. The [agent sheet loader](#agentauthor-sheet-loader) will ignore `.as.css` files._
 
 #### **Updating:**
+
 Firefox is updated every night, so my theme and scripts are updated on a regular basis to ensure compatibility with the latest build from [mozilla-central](https://hg.mozilla.org/mozilla-central/), which is distributed through the [Firefox Nightly](https://www.mozilla.org/en-US/firefox/channel/desktop/#nightly) branch. If you update Firefox and a script stops working, or your UI suddenly looks ugly, check the repo before you file a bug report or complain that something's broken. Compare the `@version` number at the top of a given file to the version of your copy. If you're sure you have the latest version, then remove it for now and wait a day or two. I use this theme and almost all of the scripts myself, and I use Firefox Nightly on a daily basis, so it's not like I'm going to leave something in my setup broken for longer than a day or two.
 
 If your problem is still not fixed after a couple days, or you think it might just be a detail I overlooked, (everyone has unique browsing habits, Firefox has a lot of interfaces that some users may never see, myself included) feel free to post in the [Issues](/../../issues/) or [Discussions](/../../discussions/) section. But please don't bother complaining if you're not using the Nightly branch. In order to make this work for the latest version of Firefox, I have no choice but to potentially make it incompatible with older versions of Firefox, stable or not. Just like Firefox updates can break our mods, updating our mods to keep up with Firefox can break them in older versions. I have no plans to make a second version for any Firefox version other than the latest Nightly release.
@@ -247,6 +249,7 @@ get chromeDir() {return traverseToMainProfile('UChrm')},
 <br/>
 
 ### **Script descriptions & links:**
+
 <p><small><super>(<i>Click a script's name to download it</i>)</br><i>* &nbsp;means you definitely want to download the script if you use my theme</i></super></small></p>
 
 #### [about:cfg](/script/aboutCfg.uc.js):
@@ -566,7 +569,7 @@ This script lets you cycle through urlbar results with mousewheel up/down, and i
 
 #### [Agent/Author Sheet Loader](/script/userChromeAgentAuthorSheetLoader.uc.js):
 
-\* Required for loading userChrome.au.css and userChrome.ag.css, and therefore pretty much a non-negotiable requirement for duskFox. It will actually load any file in the chrome folder that ends in `ag.css`, `au.css`, or `us.css`. Files ending in `au.css` will be loaded as author sheets, `ag.css` as agent sheets, and `us.css` as user sheets. User sheets are roughly equivalent to userChrome.css, so probably aren't necessary for anything, but the functionality is there in the unlikely event you ever need it. Make sure you remove the files that come with fx-autoconfig in the JS folder, they are redundant with this.
+\* Required for loading [userChrome.ag.css](/userChrome.ag.css) and [userChrome.au.css](/userChrome.au.css), and therefore pretty much a non-negotiable requirement for duskFox. This script will actually load any file in the chrome folder that ends in `ag.css`, `au.css`, or `us.css`. Files ending in `au.css` will be loaded as author sheets, `ag.css` as agent sheets, and `us.css` as user sheets. User sheets are roughly equivalent to userChrome.css, so probably aren't necessary for anything, but the functionality is there in the unlikely event you ever need it. So you may add your own stylesheets simply by putting them in the chrome folder — no need to `@import` them. Stylesheets should be loaded in alphabetical order. Make sure you remove the files that come with fx-autoconfig in the JS folder, or you'll end up loading redundant stylesheets.
 
 #### [Browser Toolbox Stylesheet Loader](/script/userChromeDevtoolsSheetLoader.uc.js):
 
