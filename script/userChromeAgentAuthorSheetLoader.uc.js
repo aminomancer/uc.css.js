@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name           Agent/Author Sheet Loader
-// @version        2.5
+// @version        2.6
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
-// @description    Load *.as.css files as agent sheets and *.au.css files as author sheets. Will also load *.us.css files as user sheets, in case you ever need that for some reason.
+// @description    Load *.ag.css files as agent sheets and *.au.css files as author sheets. Will also load *.us.css files as user sheets, in case you ever need that for some reason. This loader is capable of loading stylesheets into browser toolbox windows, but it will not try to load userChrome.css or userContent.css in the browser toolbox. For that you will need userChromeDevtoolsSheetLoader.uc.js instead.
 // @backgroundmodule
 // ==/UserScript==
 
@@ -31,7 +31,7 @@ let EXPORTED_SYMBOLS = [];
         let file = files.getNext().QueryInterface(Ci.nsIFile);
         let name = file.leafName;
         if (!file.isFile()) continue;
-        if (/\.(?:au||as||us)\.css$/i.test(name)) {
+        if (/\.(?:au||ag||us)\.css$/i.test(name)) {
             let typePrefix = name.split(".")[1];
             let type, typeString;
             switch (typePrefix) {
@@ -39,7 +39,7 @@ let EXPORTED_SYMBOLS = [];
                     type = sss.AUTHOR_SHEET;
                     typeString = "author sheet";
                     break;
-                case "as":
+                case "ag":
                     type = sss.AGENT_SHEET;
                     typeString = "agent sheet";
                     break;

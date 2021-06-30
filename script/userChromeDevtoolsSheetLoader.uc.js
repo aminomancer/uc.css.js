@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Browser Toolbox Stylesheet Loader
-// @version        2.0
+// @version        2.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Load userChrome and userContent stylesheets into Browser Toolbox windows
@@ -77,7 +77,7 @@ let EXPORTED_SYMBOLS = [];
             )
                 return;
             const path = this.getChromePath(win);
-            this.loadSheet(win, path, "userChrome.css", "AGENT_SHEET");
+            this.loadSheet(win, path, "userChrome.css", "AUTHOR_SHEET");
             this.loadSheet(win, path, "userContent.css", "USER_SHEET");
             win.addEventListener("uninit", this);
         }
@@ -91,7 +91,7 @@ let EXPORTED_SYMBOLS = [];
             )
                 return;
             const path = this.getChromePath(win);
-            this.unloadSheet(win, path, "userChrome.css", "AGENT_SHEET");
+            this.unloadSheet(win, path, "userChrome.css", "AUTHOR_SHEET");
             this.unloadSheet(win, path, "userContent.css", "USER_SHEET");
             win.removeEventListener("uninit", this);
         }

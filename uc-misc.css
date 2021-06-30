@@ -4,7 +4,7 @@ includes status bars, tooltips, confirmation hints and warnings,
 notifications, specific favicons, fixing the white flash when loading pages,
 focus rings, text highlight colors, and compatibility adjustments for minBrowserNavBar.uc.js */
 
-/* tooltip stuff, pair with userChrome.as.css to cover all tooltips */
+/* tooltip stuff, pair with userChrome.ag.css to cover all tooltips */
 /* I recommend using tooltipShadowSupport.uc.js if you want the thin border on all tooltips.
 If you don't want the border then set userChrome.css.remove-tooltip-borders to true in about:config */
 tooltip {
