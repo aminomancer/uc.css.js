@@ -234,6 +234,7 @@ menupopup,
     --arrowpanel-menuitem-inline-margin: 4px;
     --arrowpanel-menuitem-margin: 0px var(--arrowpanel-menuitem-inline-margin) !important;
     --arrowpanel-menuitem-padding: 8px !important;
+    --subviewbutton-height: 32px !important;
     --panel-subview-body-padding-magnitude: var(--arrowpanel-menuitem-inline-margin);
     --panel-subview-body-padding: var(--panel-subview-body-padding-magnitude) 0 !important;
 }

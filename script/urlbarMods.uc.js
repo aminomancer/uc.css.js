@@ -10,7 +10,7 @@
     class UrlbarMods {
         static config = {
             "restore one-offs context menu": false, // recently the context menu for the search engine one-off buttons in the urlbar results panel has been disabled. but the context menu for the one-off buttons in the searchbar is still enabled. I'm not sure why they did this, and it's a really minor thing, but it's not like right-clicking the buttons does anything else, (at least on windows) so you may want to restore the context menu.
-            "style identity icon drag box": true, // when you click & drag the identity box in the urlbar, it lets you drag and drop the URL into text fields, the tab bar, desktop, etc. while dragging it shows a little white box with the URL and favicon as the drag image. this can't be styled with CSS because it's drawn by the canvas 2D API. but we can easily change the function so that it sets the background and text colors equal to some CSS variables. it uses --tooltip-bgcolor and --tooltip-color, or if those don't exist, it uses the vanilla variables --arrowpanel-background and --arrowpanel-color. so if you use my theme duskFox it'll look similar to a tooltip. if you don't use my theme it'll look similar to a popup panel.
+            "style identity icon drag box": true, // when you click & drag the identity box in the urlbar, it lets you drag and drop the URL into text fields, the tab bar, desktop, etc. while dragging it shows a little white box with the URL and favicon as the drag image. this can't be styled with CSS because it's drawn by the canvas 2D API. but we can easily change the function so that it sets the background and text colors equal to some CSS variables. it uses --tooltip-bgcolor, --tooltip-color, and --tooltip-border-color, or if those don't exist, it uses the vanilla variables --arrowpanel-background, --arrowpanel-color, and --arrowpanel-border-color. so if you use my theme duskFox it'll look similar to a tooltip. if you don't use my theme it'll look similar to a popup panel.
         };
         constructor() {
             if (UrlbarMods.config["restore one-offs context menu"])
@@ -44,6 +44,35 @@
                 });
                 return "#" + rgb.join("");
             }
+            // draw a rectangle with rounded corners
+            function roundRect(ctx, x, y, width, height, radius = 5, fill, stroke) {
+                if (typeof radius === "number")
+                    radius = { tl: radius, tr: radius, br: radius, bl: radius };
+                else {
+                    let defaultRadius = { tl: 0, tr: 0, br: 0, bl: 0 };
+                    for (let side in defaultRadius)
+                        radius[side] = radius[side] || defaultRadius[side];
+                }
+                ctx.beginPath();
+                ctx.moveTo(x + radius.tl, y);
+                ctx.lineTo(x + width - radius.tr, y);
+                ctx.quadraticCurveTo(x + width, y, x + width, y + radius.tr);
+                ctx.lineTo(x + width, y + height - radius.br);
+                ctx.quadraticCurveTo(x + width, y + height, x + width - radius.br, y + height);
+                ctx.lineTo(x + radius.bl, y + height);
+                ctx.quadraticCurveTo(x, y + height, x, y + height - radius.bl);
+                ctx.lineTo(x, y + radius.tl);
+                ctx.quadraticCurveTo(x, y, x + radius.tl, y);
+                ctx.closePath();
+                if (fill) {
+                    ctx.fillStyle = fill;
+                    ctx.fill();
+                }
+                if (stroke) {
+                    ctx.strokeStyle = stroke;
+                    ctx.stroke();
+                }
+            }
             // override the internal dragstart callback so it uses variables instead of "white" and "black"
             eval(
                 `gIdentityHandler.onDragStart = function ` +
@@ -56,6 +85,11 @@
                         .replace(
                             /(let textColor = ).*;/,
                             `$1varToHex("var(--tooltip-color, var(--arrowpanel-color))");`
+                        )
+                        .replace(/ctx\.fillStyle = backgroundColor;/, ``)
+                        .replace(
+                            /ctx\.fillRect.*;/,
+                            `roundRect(ctx, 0, 0, totalWidth * scale, totalHeight * scale, 5, backgroundColor, varToHex("var(--tooltip-border-color, var(--arrowpanel-border-color))"));`
                         )
             );
         }

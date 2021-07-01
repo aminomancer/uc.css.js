@@ -9,13 +9,14 @@
 
 const bookmarksPopupShadowRoot = {
     handleEvent(e) {
+        if (!e.target.getAttribute("placespopup") || !e.target.scrollBox) return;
         if (!e.target.getAttribute("uc-init"))
             setTimeout(() => {
                 this.checkPopups(e.target);
             }, 0);
         let scrollbox = e.target.scrollBox.scrollbox;
         let height = window.screen.availHeight;
-        let cls = e.target.shadowRoot.querySelector(`hbox`)?.classList;
+        let cls = e.target.scrollBox.parentElement?.classList;
         if (scrollbox.scrollTopMax < height && scrollbox.clientHeight < height)
             cls.add("BMBsmallContentBox");
         else cls.remove("BMBsmallContentBox");
@@ -27,7 +28,7 @@ const bookmarksPopupShadowRoot = {
     },
 
     setUpScroll(popup) {
-        popup.shadowRoot?.querySelector(`hbox`).classList.add("BMB-special-innerbox");
+        popup.scrollBox.parentElement.classList.add("BMB-special-innerbox");
         popup.scrollBox.smoothScroll = true;
         popup.scrollBox._scrollIncrement = 150;
         popup.scrollBox._scrollButtonUp.classList.add("BMB-special-scrollbutton-up");
@@ -85,34 +86,19 @@ const bookmarksPopupShadowRoot = {
         box._arrowScrollAnim.requestHandle = animFrame;
     },
     init() {
-        document.getElementById("BMB_bookmarksPopup").addEventListener("popupshowing", this, true);
-        document.getElementById("bookmarksMenuPopup").addEventListener("popupshowing", this, true);
-        document.getElementById("PlacesChevronPopup").addEventListener("popupshowing", this, true);
+        addEventListener("popupshowing", this, true);
         CustomizableUI.removeListener(this);
-    },
-    onWidgetAfterDOMChange(aNode, _aNextNode, _aContainer, aWasRemoval) {
-        if (!aWasRemoval && aNode.ownerGlobal === window && aNode === BookmarkingUI.button)
-            this.init();
-    },
-    onWindowClosed(aWindow) {
-        try {
-            CustomizableUI.removeListener(aWindow.bookmarksPopupShadowRoot);
-        } catch (e) {}
-    },
-    addHandler() {
-        if (document.getElementById("bookmarks-menu-button")) this.init();
-        else CustomizableUI.addListener(this);
     },
 };
 
 (function () {
     if (gBrowserInit.delayedStartupFinished) {
-        bookmarksPopupShadowRoot.addHandler();
+        bookmarksPopupShadowRoot.init();
     } else {
         let delayedListener = (subject, topic) => {
             if (topic == "browser-delayed-startup-finished" && subject == window) {
                 Services.obs.removeObserver(delayedListener, topic);
-                bookmarksPopupShadowRoot.addHandler();
+                bookmarksPopupShadowRoot.init();
             }
         };
         Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");

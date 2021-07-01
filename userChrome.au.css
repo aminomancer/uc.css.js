@@ -6,26 +6,41 @@ radio[focused="true"] > .radio-label-box {
     outline: revert;
 }
 
-:is(panel, menupopup)[type="arrow"]::part(content) {
-    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2) !important;
-    box-shadow: var(--panel-shadow) !important;
-    /* border-radius: var(--arrowpanel-border-radius) !important; */
-    overflow: hidden !important;
-    margin-top: 4px;
-}
-
-:is(panel, menupopup)::part(content) {
-    background: var(--panel-background, Menu);
-}
-
-#PopupSearchAutoComplete::part(content) {
-    --panel-color: var(--ui-text-80);
-    --panel-background: none;
+panel,
+menupopup {
+	--panel-background: var(--arrowpanel-background);
+	--panel-color: var(--arrowpanel-color);
+	--panel-border-color: var(--arrowpanel-border-color);
+	--panel-border-radius: var(--arrowpanel-border-radius);
+	--panel-padding: var(--arrowpanel-padding);
 }
 
 panel[type="autocomplete-richlistbox"] {
-    --panel-color: var(--ui-text-80);
-    --panel-background: none;
+    --panel-padding: var(--menupopup-inner-padding);
+    --panel-background: var(--arrowpanel-background);
+    --panel-color: var(--menu-color);
+    --panel-border-radius: var(--menupopup-border-radius);
+}
+
+panel[type="autocomplete-richlistbox"][anchored-on-panel] {
+    --panel-background: var(--autocomplete-background);
+}
+
+:is(panel, menupopup)::part(content) {
+	display: -moz-box;
+	-moz-box-flex: 1;
+	padding: var(--panel-padding);
+	color: var(--panel-color);
+    background: var(--panel-background, Menu);
+	border-radius: var(--panel-border-radius);
+	border: 1px solid var(--panel-border-color);
+	width: var(--panel-width);
+}
+
+:is(panel, menupopup)[type="arrow"]::part(content) {
+    box-shadow: var(--panel-shadow);
+    overflow: hidden;
+    margin-top: 4px;
 }
 
 :not(.panel-subview-body) > toolbarseparator + .panel-subview-body,

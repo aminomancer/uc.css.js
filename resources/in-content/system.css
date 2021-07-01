@@ -377,6 +377,7 @@
             --bg-color: var(--content-principal-page-background) !important;
             --bg-color-float: var(--content-principal-box-background);
             --text-color: var(--ui-text-90) !important;
+            --secondary-text-color: var(--ui-text-60) !important;
             --text-color-2nd: var(--ui-text-60) !important;
             --text-color-3rd: var(--ui-text-50) !important;
             --border-color: var(--button-bg-active) !important;
@@ -391,12 +392,19 @@
             --category-background-hover: rgba(12, 12, 13, 0.1);
             --category-text: var(--plaintext-color) !important;
             --category-text-selected: var(--link-color-active) !important;
-            --link-color: hsl(251, 100%, 64%) !important;
-            --link-color-active: hsl(240, 100%, 72%) !important;
-            --link-color-hover: hsl(245, 100%, 68%) !important;
+            --link-color: hsl(243, 100%, 66%) !important;
+            --link-color-hover: hsl(245, 100%, 62%) !important;
+            --link-color-active: hsl(255, 100%, 55%) !important;
             --green-70: var(--green-50) !important;
             --grey-50: var(--text-color-3rd) !important;
             --grey-20: var(--card-separator-color) !important;
+            --button-background-color: var(--button-bg) !important;
+            --button-color: var(--ui-text-100) !important;
+            --button-hover-background-color: var(--button-bg-hover) !important;
+            --primary-button-color: var(--ui-text-100) !important;
+            --primary-button-background-color: var(--purple-40) !important;
+            --primary-button-hover-background-color: var(--purple-35) !important;
+            --primary-button-active-background-color: var(--purple-30) !important;
         }
 
         .card {
@@ -433,18 +441,6 @@
 
         .fieldpair__description {
             color: var(--text-color-2nd) !important;
-        }
-
-        .primary-button {
-            background-color: var(--link-color) !important;
-        }
-
-        .primary-button:hover {
-            background-color: var(--link-color-hover) !important;
-        }
-
-        .primary-button:hover:active {
-            background-color: var(--link-color-active) !important;
         }
 
         .sidebar__footer__support-help {

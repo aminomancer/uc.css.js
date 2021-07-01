@@ -643,6 +643,11 @@
     margin-inline-end: 8px !important;
 }
 
+.PanelUI-remotetabs-clientcontainer > label[itemtype="client"] {
+    padding: 4px;
+	font-size: 11px;
+}
+
 .panel-banner-item {
     padding: calc(var(--arrowpanel-menuitem-padding) + 2px) var(--arrowpanel-menuitem-padding) !important;
     margin: var(--arrowpanel-menuitem-margin) !important;

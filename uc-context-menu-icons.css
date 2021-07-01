@@ -17,7 +17,7 @@ menu#pageStyleMenu > .menu-text,
 #viewSidebarMenuMenu > .menu-text,
 #menu_showAllHistory > .menu-text,
 menuitem#sanitizeItem > .menu-text,
-#sync-tabs-menuitem > .menu-text,
+:is(#sync-tabs-menuitem, #syncedTabsRefresh, #syncedTabsRefreshFilter) > .menu-text,
 #historyRestoreLastSession > .menu-text,
 #hiddenTabsMenu > .menu-text,
 #context-sendpagetodevice > .menu-text,
@@ -61,12 +61,16 @@ menuitem#sanitizeItem > .menu-text,
 #context-openlinkincurrent .menu-text,
 #context-openlinkintab .menu-text,
 #context-openlinkinunloadedtab .menu-text,
-:is(#placesContext_open\:unloaded, #placesContext_openContainer\:unloaded, #placesContext_openLinks\:unloaded) .menu-text,
+:is(#placesContext_open\:unloaded, #placesContext_openContainer\:unloaded, #placesContext_openLinks\:unloaded, #syncedTabsOpenUnloaded, #syncedTabsOpenAllUnloaded) .menu-text,
 #placesContext_open\:newwindow .menu-text,
+#syncedTabsOpenSelectedInWindow .menu-text,
 #placesContext_open\:newprivatewindow .menu-text,
-:is(#placesContext_new\:bookmark, #placesContext_createBookmark) .menu-text,
+#syncedTabsOpenSelectedInPrivateWindow .menu-text,
+:is(#placesContext_new\:bookmark, #placesContext_createBookmark, #syncedTabsBookmarkSelected) .menu-text,
 #placesContext_new\:folder .menu-text,
 #placesContext_new\:separator .menu-text,
+:is(#placesContext_open\:container, #placesContext_openContainer\:container, #placesContext_openLinks\:container) > .menu-text,
+:is(#syncedTabsOpenAllInContainer, #syncedTabsOpenInContainer) > .menu-text,
 #bookmark-menu-container_robwu_nl-menuitem-_bookmark-menu-item:not(.menuitem-iconic) > .menu-text,
 #placesContext > :is(menu, menuitem)[label="Open in a New Container Tab"]:not(.menuitem-iconic) > .menu-text,
 #menu_FileQuitItem .menu-text,
@@ -96,6 +100,7 @@ menuitem#repair-text-encoding .menu-text,
 #menu_paste .menu-text,
 #context-delete .menu-text,
 #menu_delete .menu-text,
+#syncedTabsCopySelected .menu-text,
 :is(#placesContext_cut, #placesContext_copy, #placesContext_paste, #placesContext_paste_group) .menu-text,
 :is(#placesContext_deleteBookmark, #placesContext_deleteFolder, #placesContext_delete, #placesContext_delete_history) .menu-text,
 #placesContext_deleteHost .menu-text,
@@ -160,10 +165,13 @@ menuitem#menu_preferences .menu-text,
 #context_duplicateTab .menu-text,
 #context_duplicateTabs .menu-text,
 #menu_showAllTabs .menu-text,
+#syncedTabsOpenSelectedInTab .menu-text,
 #placesContext_open\:newtab .menu-text,
+#syncedTabsOpenSelected .menu-text,
 :is(#placesContext_openBookmarkContainer\:tabs, #placesContext_openBookmarkLinks\:tabs) .menu-text,
-:is(#placesContext_openContainer\:tabs, #placesContext_openLinks\:tabs) .menu-text,
+:is(#placesContext_openContainer\:tabs, #placesContext_openLinks\:tabs, #syncedTabsOpenAllInTabs) .menu-text,
 #placesContext_showAllBookmarks .menu-text,
+#syncedTabsManageDevices .menu-text,
 #context-markAsRead .menu-text,
 #context-markAsUnread .menu-text,
 #context_selectAllTabs .menu-text,
@@ -279,7 +287,7 @@ menuitem#menu_preferences:before,
 #viewSidebarMenuMenu:before,
 #menu_showAllHistory:before,
 menuitem#sanitizeItem:before,
-#sync-tabs-menuitem:before,
+:is(#sync-tabs-menuitem, #syncedTabsRefresh, #syncedTabsRefreshFilter):before,
 #historyRestoreLastSession:before,
 #hiddenTabsMenu:before,
 #context-sendpagetodevice:before,
@@ -320,6 +328,7 @@ menuitem#sanitizeItem:before,
 :is(#placesContext_show_bookmark\:info, #placesContext_show_folder\:info, #placesContext_show\:info):before,
 #menu_cut:before,
 #menu_paste:before,
+#syncedTabsCopySelected:before,
 :is(#placesContext_cut, #placesContext_copy, #placesContext_paste, #placesContext_paste_group):before,
 #context-delete:before,
 #menu_delete:before,
@@ -335,7 +344,7 @@ menuitem#sanitizeItem:before,
 #context-bookmarklink:before,
 #context-openlinkintab:before,
 #context-openlinkinunloadedtab:before,
-:is(#placesContext_open\:unloaded, #placesContext_openContainer\:unloaded, #placesContext_openLinks\:unloaded):before,
+:is(#placesContext_open\:unloaded, #placesContext_openContainer\:unloaded, #placesContext_openLinks\:unloaded, #syncedTabsOpenUnloaded, #syncedTabsOpenAllUnloaded):before,
 #menu_FileQuitItem:before,
 #context_openANewTab:before,
 #menu_newNavigatorTab:before,
@@ -348,6 +357,7 @@ menuitem#sanitizeItem:before,
 #context-openlink:before,
 #context-openframe:before,
 #context-openlinkprivate:before,
+#syncedTabsOpenSelectedInPrivateWindow:before,
 #menu_newPrivateWindow:before,
 #context-searchselect:before,
 #context-searchselect-private:before,
@@ -369,14 +379,20 @@ menuitem#repair-text-encoding:before,
 :is(#context_unpinTab, #context_unpinSelectedTabs):before,
 :is(#context_duplicateTab, #context_duplicateTabs, #menu_showAllTabs):before,
 #placesContext_open\:newtab:before,
+#syncedTabsOpenSelected:before,
+#syncedTabsOpenSelectedInTab:before,
 :is(#placesContext_openBookmarkContainer\:tabs, #placesContext_openBookmarkLinks\:tabs):before,
-:is(#placesContext_openContainer\:tabs, #placesContext_openLinks\:tabs):before,
+:is(#placesContext_openContainer\:tabs, #placesContext_openLinks\:tabs, #syncedTabsOpenAllInTabs):before,
 #placesContext_showAllBookmarks:before,
+#syncedTabsManageDevices:before,
 #placesContext_open\:newwindow:before,
+#syncedTabsOpenSelectedInWindow:before,
 #placesContext_open\:newprivatewindow:before,
-:is(#placesContext_new\:bookmark, #placesContext_createBookmark):before,
+:is(#placesContext_new\:bookmark, #placesContext_createBookmark, #syncedTabsBookmarkSelected):before,
 #placesContext_new\:folder:before,
 #placesContext_new\:separator:before,
+:is(#placesContext_open\:container, #placesContext_openContainer\:container, #placesContext_openLinks\:container):before,
+:is(#syncedTabsOpenAllInContainer, #syncedTabsOpenInContainer):before,
 #bookmark-menu-container_robwu_nl-menuitem-_bookmark-menu-item:not(.menuitem-iconic):before,
 #placesContext > :is(menu, menuitem)[label="Open in a New Container Tab"]:not(.menuitem-iconic):before,
 #context-markAsRead:before,
@@ -679,7 +695,7 @@ menuitem#sanitizeItem:before {
     background-image: url(chrome://userchrome/content/skin/forget.svg);
 }
 
-#sync-tabs-menuitem:before {
+:is(#sync-tabs-menuitem, #syncedTabsRefresh, #syncedTabsRefreshFilter):before {
     background-image: url(chrome://userchrome/content/skin/sync.svg);
 }
 
@@ -729,7 +745,7 @@ menuitem#sanitizeItem:before {
     background-image: url(chrome://userchrome/content/notifications/canvas.svg);
 }
 
-:is(#context-copyimage-contents, #context-copy, #menu_copy, #placesContext_copy):before,
+:is(#context-copyimage-contents, #context-copy, #menu_copy, #placesContext_copy, #syncedTabsCopySelected):before,
 .textbox-contextmenu menuitem[label="Copy"]:before,
 menuitem.customize-context-openCopyID:before {
     background-image: url(chrome://userchrome/content/skin/edit-copy.svg);
@@ -780,18 +796,20 @@ menuitem.customize-context-openCopyID:before {
     background-image: url(chrome://userchrome/content/material/places/folder-special.svg);
 }
 
-:is(#context-openframeintab, #context-openlinkintab, #context_openANewTab, #menu_newNavigatorTab, #placesContext_open\:newtab):before {
+:is(#context-openframeintab, #context-openlinkintab, #context_openANewTab, #menu_newNavigatorTab, #placesContext_open\:newtab, #syncedTabsOpenSelectedInTab):before {
     background-image: url(chrome://userchrome/content/skin/new-tab.svg);
 }
 
-:is(#context-openlinkinunloadedtab, #placesContext_open\:unloaded, #placesContext_openContainer\:unloaded, #placesContext_openLinks\:unloaded, #menu_FileQuitItem):before {
+:is(#context-openlinkinunloadedtab, #placesContext_open\:unloaded, #placesContext_openContainer\:unloaded, #placesContext_openLinks\:unloaded, #syncedTabsOpenUnloaded, #syncedTabsOpenAllUnloaded, #menu_FileQuitItem):before {
     background-image: url(chrome://userchrome/content/skin/quit.svg);
 }
 
-:is(#context-openlinkincurrent, #placesContext_open):before {
+:is(#context-openlinkincurrent, #placesContext_open, #syncedTabsOpenSelected):before {
     background-image: url(chrome://userchrome/content/skin/tab.svg);
 }
 
+:is(#placesContext_open\:container, #placesContext_openContainer\:container, #placesContext_openLinks\:container):before,
+:is(#syncedTabsOpenAllInContainer, #syncedTabsOpenInContainer):before,
 #bookmark-menu-container_robwu_nl-menuitem-_bookmark-menu-item:not(.menuitem-iconic):before,
 #placesContext > :is(menu, menuitem)[label="Open in a New Container Tab"]:not(.menuitem-iconic):before,
 #context-openlinkincontainertab:before {
@@ -802,15 +820,15 @@ menuitem.customize-context-openCopyID:before {
     background-image: url(chrome://userchrome/content/skin/container-go.svg);
 }
 
-:is(#context-openframe, #context-openlink, #placesContext_open\:newwindow):before {
+:is(#context-openframe, #context-openlink, #placesContext_open\:newwindow, #syncedTabsOpenSelectedInWindow):before {
     background-image: url(chrome://userchrome/content/skin/new-window.svg);
 }
 
-:is(#context-openlinkprivate, #context-searchselect-private, #menu_newPrivateWindow, #placesContext_open\:newprivatewindow):before {
+:is(#context-openlinkprivate, #context-searchselect-private, #menu_newPrivateWindow, #placesContext_open\:newprivatewindow, #syncedTabsOpenSelectedInPrivateWindow):before {
     background-image: url(chrome://userchrome/content/skin/privateBrowsing.svg);
 }
 
-:is(#placesContext_new\:bookmark, #placesContext_createBookmark):before {
+:is(#placesContext_new\:bookmark, #placesContext_createBookmark, #syncedTabsBookmarkSelected):before {
     background-image: url(chrome://userchrome/content/skin/add-bookmark.svg);
 }
 
@@ -820,6 +838,10 @@ menuitem.customize-context-openCopyID:before {
 
 #placesContext_new\:separator:before {
     background-image: url(chrome://userchrome/content/skin/add-separator.svg);
+}
+
+#syncedTabsManageDevices:before {
+    background-image: url(chrome://userchrome/content/fxa/add-device.svg);
 }
 
 :is(#context-searchselect, #menu_find):before {
@@ -885,7 +907,7 @@ menuitem#repair-text-encoding:before {
     background-image: url(chrome://userchrome/content/skin/unpin-tab.svg);
 }
 
-:is(#placesContext_openContainer\:tabs, #placesContext_openLinks\:tabs):before,
+:is(#placesContext_openContainer\:tabs, #placesContext_openLinks\:tabs, #syncedTabsOpenAllInTabs):before,
 :is(#context_duplicateTab, #context_duplicateTabs, #menu_showAllTabs):before {
     background-image: url(chrome://userchrome/content/skin/duplicate-tab.svg);
 }

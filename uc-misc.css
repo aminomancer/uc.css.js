@@ -333,7 +333,8 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
         /* for stuff that should be thin */
         #urlbar,
         #searchbar,
-        #PopupSearchAutoComplete {
+        #PopupSearchAutoComplete,
+        treechildren {
             font-family: SF Pro, Segoe UI, sans-serif !important;
         }
 
@@ -409,8 +410,11 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
             font-family: SF Pro !important;
         }
 
-        treechildren {
-            font: message-box !important;
+        @-moz-document url-prefix("chrome://browser/content/syncedtabs/sidebar.xhtml") {
+            body {
+                font-family: SF Pro, Segoe UI, sans-serif !important;
+                font-kerning: normal !important;
+            }
         }
     }
 }
