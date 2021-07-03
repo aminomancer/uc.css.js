@@ -628,13 +628,13 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
 }
 
 .all-tabs-item[pinned] > .all-tabs-button.subviewbutton > .toolbarbutton-text {
-    background: url(chrome://userchrome/content/skin/pin-tab.svg) no-repeat 6px/11px;
+    background: url(chrome://userchrome/content/skin/pin-tab.svg) no-repeat 6px/11px !important;
     padding-inline-start: 20px !important;
     -moz-context-properties: fill, fill-opacity;
     fill: currentColor;
 }
 
-#vertical-tabs-pane[unpinned] {
+#vertical-tabs-pane {
     border-color: var(--sidebar-border-color);
     border-block-style: none;
     border-inline-style: solid;
@@ -642,8 +642,12 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
     z-index: 2 !important;
 }
 
-#vertical-tabs-pane[unpinned][positionstart] {
+#vertical-tabs-pane[positionstart] {
     border-inline-width: 0 1px;
+}
+
+.sidebar-splitter#vertical-tabs-splitter {
+    border: none !important;
 }
 
 #vertical-tabs-buttons-row .subviewbutton:is(:focus-visible, [checked="true"]):not([disabled], [open], :hover, :active) {

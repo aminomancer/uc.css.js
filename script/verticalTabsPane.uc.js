@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Vertical Tabs Pane
-// @version        1.2
+// @version        1.2.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Create a vertical pane across from the sidebar that functions like the vertical tab pane in Microsoft Edge. It doesn't hide the tab bar since people have different preferences on how to do that, but it sets an attribute on the root element that you can use to hide the regular tab bar while the vertical pane is open, for example :root[vertical-tabs] #TabsToolbar... By default, the pane is resizable just like the sidebar is. And like the pane in Edge, you can press a button to collapse it, and it will hide the tab labels and become a thin strip that just shows the tabs' favicons. Hovering the collapsed pane will expand it without moving the browser content. As with the [vertical-tabs] attribute, this "unpinned" state is reflected on the root element, so you can select it like :root[vertical-tabs-unpinned]... Like the sidebar, the state of the pane is stored between windows and recorded in preferences. There's no need to edit these preferences directly, but there is one separate preference that's meant to be edited in about:config, userChrome.tabs.verticalTabsPane.reverse-order. This preference changes the direction of the pane so that newer tabs are displayed on top rather than on bottom. There are some other configuration and localization options below.
@@ -607,6 +607,21 @@
             clearTimeout(this.hoverTimer);
             this.hoverOutQueued = false;
             this.hoverQueued = false;
+            let popNode = document.popupNode;
+            if (popNode && this.pane.contains(popNode)) {
+                let contextDef = popNode.closest("[context]");
+                if (contextDef) {
+                    document.getElementById(contextDef.getAttribute("context"))?.addEventListener(
+                        "popuphidden",
+                        (e) => {
+                            if (!this.pane.matches(":is(:hover, :focus-within)"))
+                                this.pane.removeAttribute("expanded");
+                        },
+                        { once: true }
+                    );
+                    return;
+                }
+            }
             this.pane.removeAttribute("expanded");
         }
         _onButtonBlur(e) {
@@ -671,6 +686,12 @@
                 case "ArrowDown":
                     this.navigateButtons(false);
                     break;
+                case "Escape":
+                    if (this.pane.contains(document.activeElement)) {
+                        document.activeElement.blur();
+                        break;
+                    }
+                // fall through
                 default:
                     return;
             }
@@ -744,6 +765,23 @@
             this.hoverOutTimer = setTimeout(() => {
                 this.hoverOutQueued = false;
                 if (this.pane.matches(":is(:hover, :focus-within)")) return;
+                let popNode = document.popupNode;
+                if (popNode && this.pane.contains(popNode)) {
+                    let contextDef = popNode.closest("[context]");
+                    if (contextDef) {
+                        document
+                            .getElementById(contextDef.getAttribute("context"))
+                            ?.addEventListener(
+                                "popuphidden",
+                                (e) => {
+                                    if (!this.pane.matches(":is(:hover, :focus-within)"))
+                                        this.pane.removeAttribute("expanded");
+                                },
+                                { once: true }
+                            );
+                        return;
+                    }
+                }
                 this.pane.removeAttribute("expanded");
             }, this.hoverOutDelay);
         }
@@ -994,6 +1032,9 @@
         }
         registerSheet() {
             let css = `
+:root {
+    --vertical-tabs-padding: 4px;
+}
 #vertical-tabs-button {
     list-style-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="context-fill %230c0c0d"><path fill-opacity="context-fill-opacity" d="M2,7h3v6H2V7z"/><path d="M6,7v6H5V7H2V6h12v1H6z M13,1c1.657,0,3,1.343,3,3v8c0,1.657-1.343,3-3,3H3c-1.657,0-3-1.343-3-3V4c0-1.657,1.343-3,3-3H13z M3,3C2.448,3,2,3.448,2,4v8c0,0.6,0.4,1,1,1h10c0.6,0,1-0.4,1-1V4c0-0.6-0.4-1-1-1H3z"/></svg>');
     fill-opacity: 0.4;
@@ -1017,7 +1058,7 @@
 }
 #vertical-tabs-pane {
     background-color: var(--vertical-tabs-pane-background, var(--lwt-accent-color));
-    padding: 4px;
+    padding: var(--vertical-tabs-padding);
 }
 #vertical-tabs-pane:not([unpinned]) {
     min-width: 160px;
@@ -1032,9 +1073,9 @@
     position: relative;
     z-index: 1;
     margin-inline: 0;
-    max-width: 36px;
-    min-width: 36px;
-    width: 36px;
+    max-width: calc(16px + var(--vertical-tabs-padding) * 2 + var(--arrowpanel-menuitem-padding) * 2);
+    min-width: calc(16px + var(--vertical-tabs-padding) * 2 + var(--arrowpanel-menuitem-padding) * 2);
+    width: calc(16px + var(--vertical-tabs-padding) * 2 + var(--arrowpanel-menuitem-padding) * 2);
     height: 0;
     transition: 0.3s ease-in-out min-width, 0.3s ease-in-out max-width, 0.3s ease-in-out margin;
 }
@@ -1055,7 +1096,7 @@
 #vertical-tabs-inner-box {
     overflow: hidden;
     width: -moz-available;
-    min-width: 28px;
+    min-width: calc(16px + var(--arrowpanel-menuitem-padding) * 2);
 }
 #vertical-tabs-pane[unpinned] ~ #vertical-tabs-splitter {
     display: none;
@@ -1073,7 +1114,7 @@
     position: relative;
 }
 #vertical-tabs-pane[checked] toolbartabstop {
-	-moz-user-focus: normal;
+    -moz-user-focus: normal;
 }
 #vertical-tabs-list .all-tabs-item .all-tabs-button:not([disabled], [open]):focus {
     background: none;
@@ -1271,7 +1312,7 @@
     display: none;
 }
 #vertical-tabs-pane[unpinned]:not([expanded]) #vertical-tabs-buttons-row > toolbarbutton {
-    min-width: 28px !important;
+    min-width: calc(16px + var(--arrowpanel-menuitem-padding) * 2) !important;
 }
 #vertical-tabs-buttons-row {
     min-width: 0 !important;
@@ -1297,7 +1338,20 @@
     margin: var(--panel-separator-margin);
     margin-inline: 0;
     padding: 0;
-}            
+}
+#vertical-tabs-pane {
+    border-color: var(--sidebar-border-color);
+    border-block-style: none;
+    border-inline-style: solid;
+    border-inline-width: 1px 0;
+    z-index: 2;
+}
+#vertical-tabs-pane[positionstart] {
+    border-inline-width: 0 1px;
+}
+#vertical-tabs-splitter {
+    border: none;
+}
             `;
             let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
                 Ci.nsIStyleSheetService
