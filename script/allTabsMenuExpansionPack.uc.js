@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           All Tabs Menu Expansion Pack
-// @version        1.6.2
+// @version        1.6.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Next to the "new tab" button in Firefox there's a V-shaped button that opens a big scrolling menu containing all the tabs. This script adds several new features to the "all tabs menu" to help it catch up to the functionality of the regular tabs bar.
@@ -293,7 +293,7 @@
                 this._addTab(tab);
                 this.containerNode
                     .querySelector(".all-tabs-item[selected]")
-                    .scrollIntoView({ block: "center", behavior: "smooth" });
+                    .scrollIntoView({ block: "nearest", behavior: "smooth" });
             }
         };
         allTabs.handleEvent = function (e) {
@@ -350,7 +350,8 @@
                     break;
                 case "TabPinned":
                 case "TabUnpinned":
-                    this._tabAttrModified(e.target);
+                    if (!this.filterFn(e.target)) this._tabClose(e.target);
+                    else this._setRowAttributes(this.tabToElement.get(e.target), e.target);
                     break;
                 case "TabSelect":
                     if (this.listenersRegistered)
