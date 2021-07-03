@@ -1376,7 +1376,9 @@
     z-index: 1000;
     width: 100%;
 }
-#vertical-tabs-list:not([no-expand][unpinned]) .all-tabs-item[dragpos]::before {
+#vertical-tabs-pane:not([no-expand][unpinned])
+    #vertical-tabs-list
+    .all-tabs-item[dragpos]::before {
     border-image: linear-gradient(
         to right,
         transparent,

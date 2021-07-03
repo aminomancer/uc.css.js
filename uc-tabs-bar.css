@@ -612,19 +612,6 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
     margin-inline-start: -2px !important;
 }
 
-.all-tabs-item[dragpos]::before {
-    width: 100% !important;
-    border-image: linear-gradient(
-        to right,
-        transparent,
-        var(--arrowpanel-dimmed-even-further) 1%,
-        var(--arrowpanel-dimmed-even-further) 25%,
-        transparent 90%
-    ) !important;
-    border-image-slice: 1 !important;
-    opacity: 1 !important;
-}
-
 #vertical-tabs-pane[unpinned]:not([expanded])
     #vertical-tabs-list
     .all-tabs-item
