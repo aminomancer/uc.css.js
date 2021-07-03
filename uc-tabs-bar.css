@@ -572,6 +572,25 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
     margin-inline-start: -2px !important;
 }
 
+.all-tabs-item .all-tabs-secondary-button[activemedia-blocked] {
+    list-style-image: url(chrome://userchrome/content/glyph-play-12.svg) !important;
+    padding: 4px 4px 4px 5px !important;
+    transform: none !important;
+    opacity: 0.7 !important;
+    margin-inline-start: -2px !important;
+}
+
+.all-tabs-item:not(:hover, :focus-within) .all-tabs-secondary-button[pictureinpicture] {
+    list-style-image: url(chrome://userchrome/content/tab-picture-in-picture.svg) !important;
+    padding: 4px 4px 4px 5px !important;
+}
+
+.all-tabs-item .all-tabs-secondary-button[pictureinpicture] {
+    transform: none !important;
+    opacity: 0.7 !important;
+    margin-inline-start: -2px !important;
+}
+
 .all-tabs-secondary-button[close-button] {
     fill-opacity: 0 !important;
     transform: translateX(14px);

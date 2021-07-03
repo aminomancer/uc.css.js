@@ -282,7 +282,8 @@ Makes some minor modifications to the app menu. (the popup opened by clicking th
 7. Includes a preference `userChrome.tabs.all-tabs-menu.reverse-order` that lets you reverse the order of the tabs so that newer tabs are displayed on top rather than on bottom.
 8. Modifies the all tabs button's tooltip to display the number of tabs as well as the shortcut to open the all tabs menu, Ctrl+Shift+Tab.
 9. Allows the panel to display pinned tabs, and displays a pin icon on them.
-10. And a few other subtle improvements.
+10. Makes the sound icon show if the tab has blocked media or media in picture-in-picture, just like regular tabs.
+11. And a few other subtle improvements.
 
 All the relevant CSS for this script is already included in and loaded by the script. It's designed to look consistent with my theme as well as with the latest vanilla (proton) Firefox. If you need to change anything, see the "const css" line in here, or the end of uc-tabs-bar.css on my repo.
 
@@ -297,7 +298,12 @@ It doesn't hide the tab bar since people have different preferences on how to do
 
 By default, the pane is resizable just like the sidebar is. And like the pane in Edge, you can press a button to collapse it, and it will hide the tab labels and become a thin strip that just shows the tabs' favicons. Hovering the collapsed pane will expand it without moving the browser content. As with the `[vertical-tabs]` attribute, this "unpinned" state is reflected on the root element, so you can select it like `:root[vertical-tabs-unpinned]...`
 
-Like the sidebar, the state of the pane is stored between windows and recorded in preferences. There's no need to edit these preferences directly, but there is one separate preference that's meant to be edited in about:config. This preference changes the direction of the pane so that newer tabs are displayed on top rather than on bottom: `userChrome.tabs.verticalTabsPane.reverse-order`.
+Like the sidebar, the state of the pane is stored between windows and recorded in preferences. There's no need to edit these preferences directly, but there are a few other preferences that are meant to be edited in about:config. If you search `userChrome.tabs.verticalTabsPane` in about:config you'll find all of the preferences already set to their default values.
+
+- `reverse-order` changes the direction of the pane so that newer tabs are displayed on top rather than on bottom.
+- `no-expand-on-hover` prevents the pane from expanding on hover when it's collapsed. Normally the pane collapses and then temporarily expands if you hover it, after a delay of 100ms. Then when your mouse leaves the pane, it collapses again, after a delay of 100ms.
+- Both of these delays can be changed with the `hover-delay` and `hover-out-delay` prefs.
+- For languages other than English, the labels and tooltips can be modified directly in the `l10n` object in the script.
 
 All the relevant CSS for this script is already included in and loaded by the script. It's designed to look consistent with my theme as well as with the latest vanilla (proton) Firefox. If you need to change anything, scroll down to the `let css` line in the script to see the included stylesheet. Any rules you add with `!important` will override this stylesheet's rules.
 

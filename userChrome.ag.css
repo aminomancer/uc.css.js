@@ -113,36 +113,36 @@ and in particular, tooltips and scrollbars. */
 /* I recommend using tooltipShadowSupport.uc.js if you want the thin border on all tooltips.
 If you don't want the border then set userChrome.css.remove-tooltip-borders to true in about:config */
 tooltip {
-    -moz-default-appearance: none !important;
+    -moz-default-appearance: none;
     display: -moz-popup;
-    -moz-appearance: none !important;
-    appearance: none !important;
-    background-color: transparent !important;
-    color: var(--tooltip-color) !important;
-    border: none !important;
-    padding: 5px !important;
-    pointer-events: none !important;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: transparent;
+    color: var(--tooltip-color);
+    border: none;
+    padding: 5px;
+    pointer-events: none;
     --uc-tooltip-inner-padding: 2px 6px 4px 6px;
 }
 
 tooltip:not([position]) {
-    margin-block-start: 16px !important;
-    margin-inline-start: -5px !important;
+    margin-block-start: 16px;
+    margin-inline-start: -5px;
 }
 
 tooltip > description {
-    background-color: var(--tooltip-bgcolor) !important;
-    color: var(--tooltip-color) !important;
-    border: 1px solid var(--uc-menu-border-color) !important;
-    border-radius: var(--tooltip-border-radius) !important;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2) !important;
-    padding: var(--uc-tooltip-inner-padding, 2px 6px 4px 6px) !important;
-    margin: 0 !important;
+    background-color: var(--tooltip-bgcolor);
+    color: var(--tooltip-color);
+    border: 1px solid var(--uc-menu-border-color);
+    border-radius: var(--tooltip-border-radius);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    padding: var(--uc-tooltip-inner-padding, 2px 6px 4px 6px);
+    margin: 0;
 }
 
 @supports -moz-bool-pref("userChrome.css.remove-tooltip-borders") {
     tooltip > description {
-        border: none !important;
+        border: none;
     }
 }
 
@@ -150,8 +150,8 @@ tooltip > description {
     @-moz-document url(chrome://browser/content/browser.xhtml)
     {
         tooltip {
-            font-family: SF Pro Text, Segoe UI, sans-serif !important;
-            font-kerning: normal !important;
+            font-family: SF Pro Text, Segoe UI, sans-serif;
+            font-kerning: normal;
             --uc-tooltip-inner-padding: 3px 6px 4px 6px;
         }
     }

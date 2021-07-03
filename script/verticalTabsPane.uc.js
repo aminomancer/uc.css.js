@@ -1,15 +1,13 @@
 // ==UserScript==
 // @name           Vertical Tabs Pane
-// @version        1.2.1
+// @version        1.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
-// @description    Create a vertical pane across from the sidebar that functions like the vertical tab pane in Microsoft Edge. It doesn't hide the tab bar since people have different preferences on how to do that, but it sets an attribute on the root element that you can use to hide the regular tab bar while the vertical pane is open, for example :root[vertical-tabs] #TabsToolbar... By default, the pane is resizable just like the sidebar is. And like the pane in Edge, you can press a button to collapse it, and it will hide the tab labels and become a thin strip that just shows the tabs' favicons. Hovering the collapsed pane will expand it without moving the browser content. As with the [vertical-tabs] attribute, this "unpinned" state is reflected on the root element, so you can select it like :root[vertical-tabs-unpinned]... Like the sidebar, the state of the pane is stored between windows and recorded in preferences. There's no need to edit these preferences directly, but there is one separate preference that's meant to be edited in about:config, userChrome.tabs.verticalTabsPane.reverse-order. This preference changes the direction of the pane so that newer tabs are displayed on top rather than on bottom. There are some other configuration and localization options below.
+// @description    Create a vertical pane across from the sidebar that functions like the vertical tab pane in Microsoft Edge. It doesn't hide the tab bar since people have different preferences on how to do that, but it sets an attribute on the root element that you can use to hide the regular tab bar while the vertical pane is open, for example :root[vertical-tabs] #TabsToolbar... By default, the pane is resizable just like the sidebar is. And like the pane in Edge, you can press a button to collapse it, and it will hide the tab labels and become a thin strip that just shows the tabs' favicons. Hovering the collapsed pane will expand it without moving the browser content. As with the [vertical-tabs] attribute, this "unpinned" state is reflected on the root element, so you can select it like :root[vertical-tabs-unpinned]... Like the sidebar, the state of the pane is stored between windows and recorded in preferences. There's no need to edit these preferences directly, but there are a few other preferences that are meant to be edited in about:config. If you search "userChrome.tabs.verticalTabsPane" in about:config you'll find all of the preferences. "reverse-order" changes the direction of the pane so that newer tabs are displayed on top rather than on bottom. "no-expand-on-hover" prevents the pane from expanding on hover when it's collapsed. Normally the pane collapses and then temporarily expands if you hover it, after a delay of 100ms. Then when your mouse leaves the pane, it collapses again, after a delay of 100ms. Both of these delays can be changed with the "hover-delay" and "hover-out-delay" prefs. For languages other than English, the labels and tooltips can be modified directly in the l10n object below.
 // ==/UserScript==
 
 (function () {
     let config = {
-        "Hover delay": 100, // when the pane is unpinned and you hover it, how long to wait before expanding
-        "Hover out delay": 100, // when your mouse leaves the expanded pane, how long to wait before shrinking the pane.
         l10n: {
             "Button label": `Vertical Tabs`, // label and tooltip for the toolbar button
             "Button tooltip": `Toggle vertical tabs`,
@@ -21,8 +19,11 @@
     let prefSvc = Services.prefs;
     let closedPref = "userChrome.tabs.verticalTabsPane.closed";
     let unpinnedPref = "userChrome.tabs.verticalTabsPane.unpinned";
+    let noExpandPref = "userChrome.tabs.verticalTabsPane.no-expand-on-hover";
     let widthPref = "userChrome.tabs.verticalTabsPane.width";
     let reversePref = "userChrome.tabs.verticalTabsPane.reverse-order";
+    let hoverDelayPref = "userChrome.tabs.verticalTabsPane.hover-delay";
+    let hoverOutDelayPref = "userChrome.tabs.verticalTabsPane.hover-out-delay";
     let attributeFilter = ["pending", "notselectedsinceload"];
     let tabContext = document.getElementById("tabContextMenu");
     let contextActionTimer;
@@ -61,8 +62,11 @@
     class VerticalTabsPaneBase {
         constructor() {
             this.registerSheet();
-            this.hoverDelay = config["Hover delay"];
-            this.hoverOutDelay = config["Hover out delay"];
+            if (!window.E10SUtils)
+                XPCOMUtils.defineLazyModuleGetters(this, {
+                    E10SUtils: `resource://gre/modules/E10SUtils.jsm`,
+                });
+            else this.E10SUtils = window.E10SUtils;
             this.pane = document.getElementById("vertical-tabs-pane");
             this.splitter = document.getElementById("vertical-tabs-splitter");
             this.innerBox = this.pane.appendChild(
@@ -106,10 +110,20 @@
             this.containerNode = this.innerBox.appendChild(
                 create(document, "arrowscrollbox", {
                     id: "vertical-tabs-list",
+                    tooltip: "vertical-tabs-tooltip",
                     orient: "vertical",
                     flex: "1",
                 })
             );
+            let vanillaTooltip = document.getElementById("tabbrowser-tab-tooltip");
+            this.tabTooltip = vanillaTooltip.cloneNode(true);
+            vanillaTooltip.after(this.tabTooltip);
+            this.tabTooltip.id = "vertical-tabs-tooltip";
+            this.tabTooltip.setAttribute(
+                "onpopupshowing",
+                `verticalTabsPane.createTabTooltip(event)`
+            );
+            this.tabTooltip.setAttribute("position", "after_start");
             this.scrollboxTabStop = this.containerNode.appendChild(
                 create(document, "toolbartabstop", { "aria-hidden": true })
             );
@@ -117,8 +131,12 @@
             this.listenersRegistered = false;
             if (!prefSvc.prefHasUserValue(closedPref)) prefSvc.setBoolPref(closedPref, false);
             if (!prefSvc.prefHasUserValue(unpinnedPref)) prefSvc.setBoolPref(unpinnedPref, false);
+            if (!prefSvc.prefHasUserValue(noExpandPref)) prefSvc.setBoolPref(noExpandPref, false);
             if (!prefSvc.prefHasUserValue(widthPref)) prefSvc.setIntPref(widthPref, 350);
             if (!prefSvc.prefHasUserValue(reversePref)) prefSvc.setBoolPref(reversePref, false);
+            if (!prefSvc.prefHasUserValue(hoverDelayPref)) prefSvc.setIntPref(hoverDelayPref, 100);
+            if (!prefSvc.prefHasUserValue(hoverOutDelayPref))
+                prefSvc.setIntPref(hoverOutDelayPref, 100);
             prefSvc.addObserver("userChrome.tabs.verticalTabsPane", this);
             prefSvc.addObserver("privacy.userContext", this);
             XPCOMUtils.defineLazyPreferenceGetter(
@@ -133,6 +151,11 @@
             );
             this.l10nIfNeeded();
             this.addContextListeners();
+            this.observe(prefSvc, null, noExpandPref);
+            this.observe(prefSvc, null, hoverDelayPref);
+            this.observe(prefSvc, null, hoverOutDelayPref);
+            if (!this.hoverDelay) this.hoverDelay = 100;
+            if (!this.hoverOutDelay) this.hoverOutDelay = 100;
 
             gBrowser.tabContainer.addEventListener(
                 "SSTabRestoring",
@@ -149,9 +172,9 @@
                                 PrivateBrowsingUtils.isWindowPrivate(window)
                         )
                             if (this.adoptFromWindow(sourceWindow)) return;
-                    this.observe(prefSvc, null, closedPref);
-                    this.observe(prefSvc, null, unpinnedPref);
                     this.observe(prefSvc, null, widthPref);
+                    this.observe(prefSvc, null, unpinnedPref);
+                    this.observe(prefSvc, null, closedPref);
                 },
                 { once: true }
             );
@@ -351,6 +374,13 @@
                         : this.root.removeAttribute("vertical-tabs-unpinned");
                     this.resetPinnedTooltip();
                     break;
+                case noExpandPref:
+                    this.noExpand = value;
+                    value
+                        ? this.pane.setAttribute("no-expand", true)
+                        : this.pane.removeAttribute("no-expand");
+                    if (value) this.pane.removeAttribute("expanded");
+                    break;
                 case reversePref:
                     this.reversed = value;
                     if (this.isOpen) {
@@ -359,6 +389,11 @@
                         this._populate();
                     }
                     break;
+                case hoverDelayPref:
+                    this.hoverDelay = value ?? 100;
+                    break;
+                case hoverOutDelayPref:
+                    this.hoverOutDelay = value ?? 100;
                 case "privacy.userContext.enabled":
                 case "privacy.userContext.newTabContainerOnLeftClick.enabled":
                     this.handlePrivacyChange();
@@ -494,34 +529,35 @@
             row.addEventListener("mousedown", this);
             row.addEventListener("mouseup", this);
             row.addEventListener("click", this);
+            row.addEventListener("mouseover", this);
+            row.addEventListener("mouseout", this);
             this.tabToElement.set(tab, row);
 
-            let button = create(document, "toolbarbutton", {
-                class: "all-tabs-button subviewbutton subviewbutton-iconic",
-                flex: "1",
-                crop: "right",
-            });
+            let button = row.appendChild(
+                create(document, "toolbarbutton", {
+                    class: "all-tabs-button subviewbutton subviewbutton-iconic",
+                    flex: "1",
+                    crop: "right",
+                })
+            );
             button.tab = tab;
-            row.appendChild(button);
 
-            let secondaryButton = create(document, "toolbarbutton", {
-                class: "all-tabs-secondary-button subviewbutton subviewbutton-iconic",
-                closemenu: "none",
-                "toggle-mute": "true",
-            });
+            let secondaryButton = row.appendChild(
+                create(document, "toolbarbutton", {
+                    class: "all-tabs-secondary-button subviewbutton subviewbutton-iconic",
+                    closemenu: "none",
+                    "toggle-mute": "true",
+                })
+            );
             secondaryButton.tab = tab;
-            secondaryButton.addEventListener("mouseover", this);
-            secondaryButton.addEventListener("mouseout", this);
-            row.appendChild(secondaryButton);
 
-            let closeButton = create(document, "toolbarbutton", {
-                class: "all-tabs-secondary-button subviewbutton subviewbutton-iconic",
-                "close-button": "true",
-            });
+            let closeButton = row.appendChild(
+                create(document, "toolbarbutton", {
+                    class: "all-tabs-secondary-button subviewbutton subviewbutton-iconic",
+                    "close-button": "true",
+                })
+            );
             closeButton.tab = tab;
-            closeButton.addEventListener("mouseover", this);
-            closeButton.addEventListener("mouseout", this);
-            row.appendChild(closeButton);
 
             this._setRowAttributes(row, tab);
             return row;
@@ -561,8 +597,9 @@
             setAttributes(secondaryButton, {
                 muted: tab.muted,
                 soundplaying: tab.soundPlaying,
+                "activemedia-blocked": tab.activeMediaBlocked,
                 pictureinpicture: tab.pictureinpicture,
-                hidden: !(tab.muted || tab.soundPlaying),
+                hidden: !(tab.muted || tab.soundPlaying || tab.activeMediaBlocked),
             });
         }
         _setImageAttributes(row, tab) {
@@ -598,7 +635,8 @@
             clearTimeout(this.hoverTimer);
             this.hoverOutQueued = false;
             this.hoverQueued = false;
-            this.pane.setAttribute("expanded", true);
+            if (this.pane.getAttribute("unpinned") && !this.noExpand)
+                this.pane.setAttribute("expanded", true);
             if (e.target.tagName === "toolbartabstop") this._onTabStopFocus(e);
         }
         _onPaneBlur(e) {
@@ -607,6 +645,7 @@
             clearTimeout(this.hoverTimer);
             this.hoverOutQueued = false;
             this.hoverQueued = false;
+            if (this.noExpand) return this.pane.removeAttribute("expanded");
             let popNode = document.popupNode;
             if (popNode && this.pane.contains(popNode)) {
                 let contextDef = popNode.closest("[context]");
@@ -614,8 +653,10 @@
                     document.getElementById(contextDef.getAttribute("context"))?.addEventListener(
                         "popuphidden",
                         (e) => {
-                            if (!this.pane.matches(":is(:hover, :focus-within)"))
-                                this.pane.removeAttribute("expanded");
+                            setTimeout(() => {
+                                if (!this.pane.matches(":is(:hover, :focus-within)"))
+                                    this.pane.removeAttribute("expanded");
+                            }, 100);
                         },
                         { once: true }
                     );
@@ -750,6 +791,8 @@
         _onMouseEnter(e) {
             clearTimeout(this.hoverOutTimer);
             this.hoverOutQueued = false;
+            if (!this.pane.getAttribute("unpinned") || this.noExpand)
+                return this.pane.removeAttribute("expanded");
             if (this.hoverQueued) return;
             this.hoverQueued = true;
             this.hoverTimer = setTimeout(() => {
@@ -765,6 +808,7 @@
             this.hoverOutTimer = setTimeout(() => {
                 this.hoverOutQueued = false;
                 if (this.pane.matches(":is(:hover, :focus-within)")) return;
+                if (this.noExpand) return this.pane.removeAttribute("expanded");
                 let popNode = document.popupNode;
                 if (popNode && this.pane.contains(popNode)) {
                     let contextDef = popNode.closest("[context]");
@@ -774,8 +818,10 @@
                             ?.addEventListener(
                                 "popuphidden",
                                 (e) => {
-                                    if (!this.pane.matches(":is(:hover, :focus-within)"))
-                                        this.pane.removeAttribute("expanded");
+                                    setTimeout(() => {
+                                        if (!this.pane.matches(":is(:hover, :focus-within)"))
+                                            this.pane.removeAttribute("expanded");
+                                    }, 100);
                                 },
                                 { once: true }
                             );
@@ -959,44 +1005,92 @@
                     : item.removeAttribute("multiselected");
         }
         _setTooltip(e, tab) {
-            const { selectedTabs } = gBrowser;
+            if (e.target.hasAttribute("toggle-mute"))
+                this._overPlayingIcon = e.type === "mouseover" ? true : false;
+            else if (e.target.hasAttribute("close-button"))
+                this.mOverCloseButton = e.type === "mouseover" ? true : false;
+            SessionStore.speculativeConnectOnTabHover(tab);
+            if (this.mOverCloseButton) tab = gBrowser._findTabToBlurTo(tab);
+            gBrowser.warmupTab(tab);
+        }
+        createTabTooltip(e) {
+            e.stopPropagation();
+            let row = document.tooltipNode ? document.tooltipNode.closest(".all-tabs-item") : null;
+            let { tab } = row;
+            if (!row || !tab) return e.preventDefault();
+            let stringWithShortcut = (stringId, keyElemId, pluralCount) => {
+                let keyElem = document.getElementById(keyElemId);
+                let shortcut = ShortcutUtils.prettifyShortcut(keyElem);
+                return PluralForm.get(pluralCount, gTabBrowserBundle.GetStringFromName(stringId))
+                    .replace("%S", shortcut)
+                    .replace("#1", pluralCount);
+            };
+            let label;
+            const selectedTabs = gBrowser.selectedTabs;
             const contextTabInSelection = selectedTabs.includes(tab);
             const affectedTabsLength = contextTabInSelection ? selectedTabs.length : 1;
-            let label;
-            if (e.target.hasAttribute("toggle-mute"))
-                if (contextTabInSelection)
-                    label = PluralForm.get(
-                        affectedTabsLength,
-                        gTabBrowserBundle.GetStringFromName(
-                            tab.linkedBrowser.audioMuted
-                                ? "tabs.unmuteAudio2.tooltip"
-                                : "tabs.muteAudio2.tooltip"
-                        )
-                    )
-                        .replace("%S", ShortcutUtils.prettifyShortcut(key_toggleMute))
-                        .replace("#1", affectedTabsLength);
-                else
-                    label = PluralForm.get(
-                        affectedTabsLength,
-                        gTabBrowserBundle.GetStringFromName(
-                            tab.linkedBrowser.audioMuted
-                                ? "tabs.unmuteAudio2.background.tooltip"
-                                : "tabs.muteAudio2.background.tooltip"
-                        )
-                    ).replace("#1", affectedTabsLength);
-            else if (e.target.hasAttribute("close-button")) {
+            if (this.mOverCloseButton) {
+                let shortcut = ShortcutUtils.prettifyShortcut(key_close);
                 label = PluralForm.get(
                     affectedTabsLength,
                     gTabBrowserBundle.GetStringFromName("tabs.closeTabs.tooltip")
                 ).replace("#1", affectedTabsLength);
-                if (contextTabInSelection) {
-                    let shortcut = ShortcutUtils.prettifyShortcut(key_close);
-                    label = label.includes("%S")
-                        ? label.replace("%S", shortcut)
-                        : label + ` (${shortcut})`;
+                if (contextTabInSelection && shortcut) {
+                    if (label.includes("%S")) label = label.replace("%S", shortcut);
+                    else label = label + " (" + shortcut + ")";
                 }
-            } else return;
-            e.target.setAttribute("tooltiptext", label);
+            } else if (this._overPlayingIcon) {
+                let stringID;
+                if (contextTabInSelection) {
+                    stringID = tab.linkedBrowser.audioMuted
+                        ? "tabs.unmuteAudio2.tooltip"
+                        : "tabs.muteAudio2.tooltip";
+                    label = stringWithShortcut(stringID, "key_toggleMute", affectedTabsLength);
+                } else {
+                    if (tab.hasAttribute("activemedia-blocked"))
+                        stringID = "tabs.unblockAudio2.tooltip";
+                    else
+                        stringID = tab.linkedBrowser.audioMuted
+                            ? "tabs.unmuteAudio2.background.tooltip"
+                            : "tabs.muteAudio2.background.tooltip";
+                    label = PluralForm.get(
+                        affectedTabsLength,
+                        gTabBrowserBundle.GetStringFromName(stringID)
+                    ).replace("#1", affectedTabsLength);
+                }
+            } else {
+                label = tab._fullLabel || tab.getAttribute("label");
+                if (Services.prefs.getBoolPref("browser.tabs.tooltipsShowPidAndActiveness", false))
+                    if (tab.linkedBrowser) {
+                        let [contentPid, ...framePids] = this.E10SUtils.getBrowserPids(
+                            tab.linkedBrowser,
+                            gFissionBrowser
+                        );
+                        if (contentPid) {
+                            label += " (pid " + contentPid + ")";
+                            if (gFissionBrowser) {
+                                label += " [F";
+                                if (framePids.length) label += " " + framePids.join(", ");
+                                label += "]";
+                            }
+                        }
+                        if (tab.linkedBrowser.docShellIsActive) label += " [A]";
+                    }
+                if (tab.userContextId) {
+                    label = gTabBrowserBundle.formatStringFromName("tabs.containers.tooltip", [
+                        label,
+                        ContextualIdentityService.getUserContextLabel(tab.userContextId),
+                    ]);
+                }
+            }
+            if (!gProtonPlacesTooltip) return e.target.setAttribute("label", label);
+            e.target.moveToAnchor(row, "after_start");
+            let title = e.target.querySelector(".places-tooltip-title");
+            let url = e.target.querySelector(".places-tooltip-uri");
+            let icon = e.target.querySelector("#places-tooltip-insecure-icon");
+            title.textContent = label;
+            url.value = tab.linkedBrowser?.currentURI?.spec.replace(/^https:\/\//, "");
+            icon.hidden = !url.value.startsWith("http://");
         }
         handlePrivacyChange() {
             let containersEnabled =
@@ -1150,9 +1244,6 @@
 #vertical-tabs-list .all-tabs-item[multiselected]:not([selected]):is(:hover, [_moz-menuactive]) {
     background-color: var(--arrowpanel-dimmed-further) !important;
 }
-#vertical-tabs-list .all-tabs-item:not([selected]):is(:hover, [_moz-menuactive]):active {
-    background-color: var(--arrowpanel-dimmed-further) !important;
-}
 #vertical-tabs-list
     .all-tabs-item[pending]:not([selected]):is(:hover, :focus-within, [_moz-menuactive], [multiselected]) {
     background-color: var(
@@ -1227,6 +1318,24 @@
 }
 #vertical-tabs-list .all-tabs-item .all-tabs-secondary-button[muted] {
     list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='context-fill'><path d='M13 8a2.813 2.813 0 0 0-.465-1.535l-.744.744A1.785 1.785 0 0 1 12 8a2.008 2.008 0 0 1-1.4 1.848.5.5 0 0 0 .343.939A3 3 0 0 0 13 8z'/><path d='M13.273 5.727A3.934 3.934 0 0 1 14 8a3.984 3.984 0 0 1-2.742 3.775.5.5 0 0 0 .316.949A4.985 4.985 0 0 0 15 8a4.93 4.93 0 0 0-1.012-2.988z'/><path d='M8.67 13.717a.2.2 0 0 0 .33-.152V10l-2.154 2.154z'/><path d='M14.707 1.293a1 1 0 0 0-1.414 0L9 5.586V2.544a.25.25 0 0 0-.413-.19L5.5 5H4.191A2.191 2.191 0 0 0 2 7.191v1.618a2.186 2.186 0 0 0 1.659 2.118l-2.366 2.366a1 1 0 1 0 1.414 1.414l12-12a1 1 0 0 0 0-1.414z'/></svg>") !important;
+    transform: none !important;
+    opacity: 0.7;
+    margin-inline-start: -2px;
+}
+#vertical-tabs-list .all-tabs-item .all-tabs-secondary-button[activemedia-blocked] {
+    list-style-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12"><path fill="context-fill" d="M2.128.13A.968.968 0 0 0 .676.964v10.068a.968.968 0 0 0 1.452.838l8.712-5.034a.968.968 0 0 0 0-1.676L2.128.13z"/></svg>') !important;
+    padding: 4px 4px 4px 5px;
+    transform: none !important;
+    opacity: 0.7;
+    margin-inline-start: -2px;
+}
+#vertical-tabs-list
+    > .all-tabs-item:not(:hover, :focus-within)
+    .all-tabs-secondary-button[pictureinpicture] {
+    list-style-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 625.8 512"><path fill="context-fill" fill-opacity="context-fill-opacity" d="M568.9 0h-512C25.6 0 0 25 0 56.3v398.8C0 486.4 25.6 512 56.9 512h512c31.3 0 56.9-25.6 56.9-56.9V56.3C625.8 25 600.2 0 568.9 0zm-512 425.7V86c0-16.5 13.5-30 30-30h452c16.5 0 30 13.5 30 30v339.6c0 16.5-13.5 30-30 30h-452c-16.5.1-30-13.4-30-29.9zM482 227.6H314.4c-16.5 0-30 13.5-30 30v110.7c0 16.5 13.5 30 30 30H482c16.5 0 30-13.5 30-30V257.6c0-16.5-13.5-30-30-30z"/></svg>') !important;
+    padding: 4px 4px 4px 5px;
+}
+#vertical-tabs-list .all-tabs-item .all-tabs-secondary-button[pictureinpicture] {
     transform: none !important;
     opacity: 0.7;
     margin-inline-start: -2px;
@@ -1319,6 +1428,12 @@
 }
 #vertical-tabs-buttons-row > toolbarbutton {
     margin: 0 !important;
+}
+#vertical-tabs-pane[no-expand][unpinned] #vertical-tabs-buttons-row {
+	-moz-box-orient: vertical;
+}
+#vertical-tabs-pane[no-expand] {
+	transition: none !important;
 }
 #vertical-tabs-pane .subviewbutton-iconic > .toolbarbutton-icon {
     -moz-context-properties: fill, fill-opacity;
@@ -1427,6 +1542,29 @@
                     .replace(/(SidebarUI\.uninit\(\))/, `$1; verticalTabsPane.uninit()`)
         );
         window.onunload = gBrowserInit.onUnload.bind(gBrowserInit);
+        let gNextWindowID = 0;
+        let handleRequestSrc = PictureInPicture.handlePictureInPictureRequest.toSource();
+        if (!handleRequestSrc.includes("_tabAttrModified"))
+            eval(
+                `PictureInPicture.handlePictureInPictureRequest = async function ` +
+                    handleRequestSrc
+                        .replace(/async handlePictureInPictureRequest/, "")
+                        .replace(/\sServices\.telemetry.*\s*.*\s*.*\s*.*/, "")
+                        .replace(/gCurrentPlayerCount.*/g, "")
+                        .replace(
+                            /(tab\.setAttribute\(\"pictureinpicture\".*)/,
+                            ` parentWin.gBrowser._tabAttrModified(tab, ["pictureinpicture"]);`
+                        )
+            );
+        let clearIconSrc = PictureInPicture.clearPipTabIcon.toSource();
+        if (!clearIconSrc.includes("_tabAttrModified"))
+            eval(
+                `PictureInPicture.clearPipTabIcon = function ` +
+                    clearIconSrc.replace(
+                        /(tab\.removeAttribute\(\"pictureinpicture\".*)/,
+                        ` gBrowser._tabAttrModified(tab, ["pictureinpicture"]);`
+                    )
+            );
     }
 
     function makeWidget() {
