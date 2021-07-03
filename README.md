@@ -639,6 +639,8 @@ Various tiny mods not worth making separate scripts for. Read the comments [insi
 
 [Lepton](https://github.com/black7375/Firefox-UI-Fix): A Firefox theme that respects the vanilla Firefox UI "flavor" while fixing many of the biggest problems with Proton.
 
+[Adapting Firefox to Windows 10 accent colors](https://www.reddit.com/r/FirefoxCSS/comments/ocjsmr/my_almost_comprehensive_css_for_making_firefox/): A really handy guide and template on how to make Firefox's Proton UI consistent with your personalized Windows 10 color scheme.
+
 [MDN — Browser Toolbox](https://developer.mozilla.org/en-US/docs/Tools/Browser_Toolbox): The first tutorial to read if you're trying to get into modding Firefox, whether CSS or JavaScript.
 
 [MDN — Firefox's Code Modules](https://developer.mozilla.org/en-US/docs/Mozilla/JavaScript_code_modules): While there isn't any beginner's guide on making scripts for Firefox, this page has a lot of useful information about many higher-level Firefox components. If you're familiar with JS but not with Firefox's source code, this should be very helpful.
