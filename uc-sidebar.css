@@ -366,6 +366,17 @@ treechildren::-moz-tree-twisty(open) {
     display: none !important;
 }
 
+#sidebar-box {
+    border-color: var(--sidebar-border-color) !important;
+    border-block-style: none;
+    border-inline-style: solid;
+    border-inline-width: 0 1px;
+}
+
+#sidebar-box[positionend] {
+    border-inline-width: 1px 0;
+}
+
 @-moz-document url("chrome://browser/content/syncedtabs/sidebar.xhtml")
 {
     body {
@@ -470,7 +481,7 @@ treechildren::-moz-tree-twisty(open) {
 }
 
 #sidebar-box {
-    background-color: var(--ui-secondary-bg) !important;
+    --sidebar-background-color: var(--ui-secondary-bg) !important;
     top: calc(var(--urlbar-container-height) + var(--tab-min-height)) !important;
     bottom: 0 !important;
     display: flex !important;

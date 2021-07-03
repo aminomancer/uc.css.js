@@ -606,7 +606,7 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
     opacity: 1 !important;
 }
 
-#vertical-tabs-box[unpinned]:not([expanded])
+#vertical-tabs-pane[unpinned]:not([expanded])
     #vertical-tabs-list
     .all-tabs-item
     .all-tabs-secondary-button[toggle-mute] {
@@ -614,16 +614,16 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
     margin-inline: revert !important;
 }
 
-#vertical-tabs-box[unpinned]:not([expanded]) .all-tabs-item {
+#vertical-tabs-pane[unpinned]:not([expanded]) .all-tabs-item {
     min-width: 0 !important;
 }
 
-#vertical-tabs-box[unpinned]:not([expanded]) .all-tabs-item .all-tabs-button {
+#vertical-tabs-pane[unpinned]:not([expanded]) .all-tabs-item .all-tabs-button {
     margin: 0 !important;
     -moz-box-pack: start !important;
 }
 
-#vertical-tabs-box[unpinned]:not([expanded]) .all-tabs-button .toolbarbutton-text {
+#vertical-tabs-pane[unpinned]:not([expanded]) .all-tabs-button .toolbarbutton-text {
     opacity: 0 !important;
 }
 
@@ -632,4 +632,16 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
     padding-inline-start: 20px !important;
     -moz-context-properties: fill, fill-opacity;
     fill: currentColor;
+}
+
+#vertical-tabs-pane[unpinned] {
+    border-color: var(--sidebar-border-color);
+    border-block-style: none;
+    border-inline-style: solid;
+    border-inline-width: 1px 0;
+    z-index: 2 !important;
+}
+
+#vertical-tabs-pane[unpinned][positionstart] {
+    border-inline-width: 0 1px;
 }

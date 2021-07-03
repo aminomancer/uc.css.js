@@ -202,7 +202,7 @@ toolbar {
 }
 
 #browser {
-    --sidebar-border-color: transparent !important;
+    --sidebar-border-color: var(--uc-menu-border-color) !important;
 }
 
 .tab-throbber {
