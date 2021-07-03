@@ -281,12 +281,32 @@ Makes some minor modifications to the app menu. (the popup opened by clicking th
 6. Adds color stripes to multiselected tabs and container tabs in the "all tabs menu" so you can differentiate them from normal tabs.
 7. Includes a preference `userChrome.tabs.all-tabs-menu.reverse-order` that lets you reverse the order of the tabs so that newer tabs are displayed on top rather than on bottom.
 8. Modifies the all tabs button's tooltip to display the number of tabs as well as the shortcut to open the all tabs menu, Ctrl+Shift+Tab.
-9. And a few other subtle improvements.
+9. Allows the panel to display pinned tabs, and displays a pin icon on them.
+10. And a few other subtle improvements.
 
 All the relevant CSS for this script is already included in and loaded by the script. It's designed to look consistent with my theme as well as with the latest vanilla (proton) Firefox. If you need to change anything, see the "const css" line in here, or the end of uc-tabs-bar.css on my repo.
 
 </details>
 <img src="preview/prev-alltabs-xpac.webp"/>
+
+#### [Vertical Tabs Pane](/script/verticalTabsPane.uc.js):
+
+<details><summary>This script create a vertical pane across from the sidebar that functions like the vertical tabs pane in Microsoft Edge. <i><b>Click here for details.</b></i></summary>
+
+It doesn't hide the tab bar since people have different preferences on how to do that, but it sets an attribute on the root element that you can use to hide the regular tab bar while the vertical pane is open, for example `:root[vertical-tabs] #TabsToolbar...`
+
+By default, the pane is resizable just like the sidebar is. And like the pane in Edge, you can press a button to collapse it, and it will hide the tab labels and become a thin strip that just shows the tabs' favicons. Hovering the collapsed pane will expand it without moving the browser content. As with the `[vertical-tabs]` attribute, this "unpinned" state is reflected on the root element, so you can select it like `:root[vertical-tabs-unpinned]...`
+
+Like the sidebar, the state of the pane is stored between windows and recorded in preferences. There's no need to edit these preferences directly, but there is one separate preference that's meant to be edited in about:config. This preference changes the direction of the pane so that newer tabs are displayed on top rather than on bottom: `userChrome.tabs.verticalTabsPane.reverse-order`.
+
+All the relevant CSS for this script is already included in and loaded by the script. It's designed to look consistent with my theme as well as with the latest vanilla (proton) Firefox. If you need to change anything, scroll down to the `let css` line in the script to see the included stylesheet. Any rules you add with `!important` will override this stylesheet's rules.
+
+The pane's selector is `#vertical-tabs-pane`. While it's open, it will have attribute `[checked]`. While it's unpinned, `[unpinned]` and while expanded, `[expanded]`. So you can use those selectors the same way as in the built-in stylesheet. Although they're styled a little differently, the individual tab rows are structurally just like the rows in Firefox's built-in all tabs panel.
+
+In order to make the scrolling feel just like the built-in tabs bar, I used an `arrowscrollbox` element as the container. It has generally smooth scrolling irrespective of the pointing device, which is a nice feature for an element you expect to scroll frequently. But this means there isn't a visible scrollbar. I could make a config option in the script that switches from `arrowscrollbox` to a regular `vbox` element, which does show its scrollbar. But it would need to be tested extensively just like I did with the arrowscrollbox, so if anyone really wants this, let me know and I'll take it into consideration.
+
+</details>
+<img src="preview/prev-vertical-tabs-pane.webp"/>
 
 #### [Toolbox Button](/script/atoolboxButton.uc.js):
 

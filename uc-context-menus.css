@@ -452,3 +452,10 @@ menupopup:not(.PanelUI-subView) menuseparator:last-child {
 #placesContext_open {
     font-weight: normal !important;
 }
+
+/* this menuitem's localization is broken so its label goes missing routinely.
+amazing how much time firefox devs put into modding the UI,
+with how little time they spend responding to bug requests about basic features being broken */
+#context_shareTabURL {
+    display: none !important;
+}

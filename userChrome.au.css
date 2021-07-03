@@ -179,8 +179,11 @@ instead of shrinking it, we add a little pin icon before the tab label to show i
 since this only occurs when it's the final tab, it needs to animate its width when it's closed,
 or when a new tab is opened after it, etc. so we use the same kind of animation but a bit slower,
 since it needs to animate a much greater distance than normal tabs.
-this is the animation that plays when the pinned last-visible-tab shrinks, e.g. when it's no longer last-visible-tab. */
-.tabbrowser-tab[pinned]:not([justmoved], [tab-grouping], [tabdrop-samewindow]) {
+this is the animation that plays when the pinned last-visible-tab shrinks, e.g. when it's no longer last-visible-tab.
+we need to preface this with the [style*='padding-inline-start'] selector
+to avoid a pinned tab positioning bug caused by gBrowser.tabContainer._pinnedTabsLayoutCache */
+#tabbrowser-tabs[positionpinnedtabs][style*="padding-inline-start"]
+    .tabbrowser-tab[pinned]:not([justmoved], [tab-grouping], [tabdrop-samewindow]) {
     transition: min-width 300ms var(--animation-easing-function),
         max-width 300ms var(--animation-easing-function),
         -moz-box-flex 300ms var(--animation-easing-function);

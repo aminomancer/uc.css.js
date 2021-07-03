@@ -362,14 +362,6 @@ treechildren::-moz-tree-twisty(open) {
     color: var(--lwt-text-color) !important;
 }
 
-.sidebar-splitter {
-    border-inline-end-width: 1px !important;
-    border-inline-end-color: transparent !important;
-    position: relative !important;
-    z-index: 5 !important;
-    width: 4px !important;
-}
-
 #sidebar-splitter {
     display: none !important;
 }

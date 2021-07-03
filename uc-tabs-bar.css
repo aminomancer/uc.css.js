@@ -275,7 +275,9 @@ this sheet controls their appearance as well. */
 }
 
 /* macOS style window controls */
-:root:-moz-window-inactive:not([customizing]) :is(.titlebar-buttonbox, #window-controls) > toolbarbutton:not(:hover) {
+:root:-moz-window-inactive:not([customizing])
+    :is(.titlebar-buttonbox, #window-controls)
+    > toolbarbutton:not(:hover) {
     list-style-image: url(chrome://userchrome/content/window/inactive.svg) !important;
 }
 
@@ -424,7 +426,7 @@ this sheet controls their appearance as well. */
     margin-inline: 4px !important;
     min-height: 28px !important;
     -moz-box-align: center;
-    padding-inline-end: 2px !important;
+    padding-inline-end: 2px;
 }
 
 panelview .all-tabs-button:not([disabled], [open]):focus {
@@ -543,7 +545,8 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
     padding: 2px 2.5px 2px 0.5px !important;
     margin-inline-end: 8.5px !important;
     margin-inline-start: -27px !important;
-    transition: 0.25s cubic-bezier(.07,.78,.21,.95) transform, 0.2s cubic-bezier(.07,.74,.24,.95) margin, 0.075s linear opacity !important;
+    transition: 0.25s cubic-bezier(0.07, 0.78, 0.21, 0.95) transform,
+        0.2s cubic-bezier(0.07, 0.74, 0.24, 0.95) margin, 0.075s linear opacity !important;
     display: block !important;
 }
 
@@ -574,7 +577,8 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
     transform: translateX(14px);
     opacity: 0 !important;
     margin-inline-start: -27px !important;
-    transition: 0.25s cubic-bezier(.07,.78,.21,.95) transform, 0.2s cubic-bezier(.07,.74,.24,.95) margin, 0.075s linear opacity;
+    transition: 0.25s cubic-bezier(0.07, 0.78, 0.21, 0.95) transform,
+        0.2s cubic-bezier(0.07, 0.74, 0.24, 0.95) margin, 0.075s linear opacity;
     display: block !important;
     -moz-context-properties: fill, fill-opacity, stroke !important;
     fill: currentColor !important;
@@ -591,7 +595,41 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
 
 .all-tabs-item[dragpos]::before {
     width: 100% !important;
-    border-image: linear-gradient(to right, transparent, var(--arrowpanel-dimmed-even-further) 1%, var(--arrowpanel-dimmed-even-further) 25%, transparent 90%) !important;
+    border-image: linear-gradient(
+        to right,
+        transparent,
+        var(--arrowpanel-dimmed-even-further) 1%,
+        var(--arrowpanel-dimmed-even-further) 25%,
+        transparent 90%
+    ) !important;
     border-image-slice: 1 !important;
     opacity: 1 !important;
+}
+
+#vertical-tabs-box[unpinned]:not([expanded])
+    #vertical-tabs-list
+    .all-tabs-item
+    .all-tabs-secondary-button[toggle-mute] {
+    transform: none !important;
+    margin-inline: revert !important;
+}
+
+#vertical-tabs-box[unpinned]:not([expanded]) .all-tabs-item {
+    min-width: 0 !important;
+}
+
+#vertical-tabs-box[unpinned]:not([expanded]) .all-tabs-item .all-tabs-button {
+    margin: 0 !important;
+    -moz-box-pack: start !important;
+}
+
+#vertical-tabs-box[unpinned]:not([expanded]) .all-tabs-button .toolbarbutton-text {
+    opacity: 0 !important;
+}
+
+.all-tabs-item[pinned] > .all-tabs-button.subviewbutton > .toolbarbutton-text {
+    background: url(chrome://userchrome/content/skin/pin-tab.svg) no-repeat 6px/11px;
+    padding-inline-start: 20px !important;
+    -moz-context-properties: fill, fill-opacity;
+    fill: currentColor;
 }

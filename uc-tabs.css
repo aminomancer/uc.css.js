@@ -750,7 +750,6 @@ so in other words it won't show if audio is playing until you hover the general 
 /* hide the close button for pinned tabs. if the last visible tab is pinned, it doesn't hide the close button since the tab doesn't get shrunk in that case.
 this requires you to make a pref in about:config and set it to true: "userChrome.tabs.pinned-tabs.close-buttons.disabled" */
 @supports (-moz-bool-pref("userChrome.tabs.pinned-tabs.close-buttons.disabled")) {
-
     .tabbrowser-tab[pinned]:not([last-visible-tab]) .tab-close-button,
     #tabbrowser-tabs[movingtab] .tabbrowser-tab[pinned] .tab-close-button,
     .tabbrowser-tab[pinned]:is([justmoved], [tab-grouping], [tabdrop-samewindow]) .tab-close-button {

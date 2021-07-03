@@ -27,6 +27,13 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
     margin-block: 5px !important;
 }
 
+#wrapper-urlbar-container + toolbarpaletteitem > #search-container,
+#wrapper-search-container + toolbarpaletteitem > #urlbar-container,
+#nav-bar[customizing="true"] #urlbar-container + #search-container,
+#nav-bar[customizing="true"] #search-container + #urlbar-container {
+    margin-inline-start: -3px !important;
+}
+
 /* dim widgets when window is inactive, like tabs */
 :root:-moz-window-inactive:not([customizing])
     toolbar
@@ -303,6 +310,26 @@ toolbar .toolbarbutton-1:not([disabled])[checked]:hover > .toolbarbutton-icon {
     max-height: 0 !important;
     opacity: 0 !important;
     transform: translateY(-16px);
+}
+
+:root[inFullscreen]:not([macOSNativeFullscreen])
+    #PersonalToolbar:not([fullscreentoolbar="true"])
+    #personal-toolbar-empty-description
+    a,
+#PersonalToolbar[collapsed="true"] #personal-toolbar-empty-description a,
+:root:not([customizing])
+    > body
+    > box:not(:hover, [popup-status])
+    #PersonalToolbar:not(:focus-within, [tempopen="true"])
+    #personal-toolbar-empty-description
+    a,
+:root:not([customizing])
+    > body
+    > box[urlbar-status]
+    #PersonalToolbar
+    #personal-toolbar-empty-description
+    a {
+    display: none;
 }
 
 #personal-toolbar-empty-description,
