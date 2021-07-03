@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Vertical Tabs Pane
-// @version        1.1
+// @version        1.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Create a vertical pane across from the sidebar that functions like the vertical tab pane in Microsoft Edge. It doesn't hide the tab bar since people have different preferences on how to do that, but it sets an attribute on the root element that you can use to hide the regular tab bar while the vertical pane is open, for example :root[vertical-tabs] #TabsToolbar... By default, the pane is resizable just like the sidebar is. And like the pane in Edge, you can press a button to collapse it, and it will hide the tab labels and become a thin strip that just shows the tabs' favicons. Hovering the collapsed pane will expand it without moving the browser content. As with the [vertical-tabs] attribute, this "unpinned" state is reflected on the root element, so you can select it like :root[vertical-tabs-unpinned]... Like the sidebar, the state of the pane is stored between windows and recorded in preferences. There's no need to edit these preferences directly, but there is one separate preference that's meant to be edited in about:config, userChrome.tabs.verticalTabsPane.reverse-order. This preference changes the direction of the pane so that newer tabs are displayed on top rather than on bottom. There are some other configuration and localization options below.
@@ -71,6 +71,9 @@
             this.buttonsRow = this.innerBox.appendChild(
                 create(document, "hbox", { id: "vertical-tabs-buttons-row" })
             );
+            this.buttonsTabStop = this.buttonsRow.appendChild(
+                create(document, "toolbartabstop", { "aria-hidden": true })
+            );
             this.newTabButton = this.buttonsRow.appendChild(
                 document.getElementById("new-tab-button").cloneNode(true)
             );
@@ -106,6 +109,9 @@
                     orient: "vertical",
                     flex: "1",
                 })
+            );
+            this.scrollboxTabStop = this.containerNode.appendChild(
+                create(document, "toolbartabstop", { "aria-hidden": true })
             );
             this.tabToElement = new Map();
             this.listenersRegistered = false;
@@ -178,12 +184,19 @@
                 ])
             );
         }
+        get paneEvents() {
+            return (
+                this._paneEvents ||
+                (this._paneEvents = ["keydown", "mouseenter", "mouseleave", "focus"])
+            );
+        }
         get horizontalWalker() {
             if (this._horizontalWalker) return this._horizontalWalker;
             return (this._horizontalWalker = document.createTreeWalker(
                 this.pane,
                 NodeFilter.SHOW_ELEMENT,
                 (node) => {
+                    if (node.tagName == "toolbartabstop") return NodeFilter.FILTER_ACCEPT;
                     if (node.disabled || node.hidden) return NodeFilter.FILTER_REJECT;
                     if (
                         node.tagName == "button" ||
@@ -203,6 +216,7 @@
                 this.pane,
                 NodeFilter.SHOW_ELEMENT,
                 (node) => {
+                    if (node.tagName == "toolbartabstop") return NodeFilter.FILTER_ACCEPT;
                     if (node.disabled || node.hidden) return NodeFilter.FILTER_REJECT;
                     if (
                         node.tagName == "button" ||
@@ -411,22 +425,23 @@
             this.listenersRegistered = true;
             this.tabEvents.forEach((ev) => gBrowser.tabContainer.addEventListener(ev, this));
             this.dragEvents.forEach((ev) => this.containerNode.addEventListener(ev, this));
-            this.pane.addEventListener("keydown", this);
-            this.pane.addEventListener("mouseenter", this);
-            this.pane.addEventListener("mouseleave", this);
-            this.pane.addEventListener("focus", this, true);
+            this.paneEvents.forEach((ev) => this.pane.addEventListener(ev, this));
             this.pane.addEventListener("blur", this, true);
             gBrowser.addEventListener("TabMultiSelect", this, false);
+            for (let stop of this.pane.getElementsByTagName("toolbartabstop")) {
+                stop.setAttribute("aria-hidden", "true");
+                stop.addEventListener("focus", this);
+            }
         }
         _cleanupListeners() {
             this.tabEvents.forEach((ev) => gBrowser.tabContainer.removeEventListener(ev, this));
             this.dragEvents.forEach((ev) => this.containerNode.removeEventListener(ev, this));
-            this.pane.removeEventListener("keydown", this);
-            this.pane.removeEventListener("mouseenter", this);
-            this.pane.removeEventListener("mouseleave", this);
-            this.pane.removeEventListener("focus", this, true);
-            this.pane.removeEventListener("blur", this, true);
+            this.paneEvents.forEach((ev) => this.pane.removeEventListener(ev, this));
+            this.pane.addEventListener("blur", this, true);
             gBrowser.removeEventListener("TabMultiSelect", this, false);
+            for (let stop of this.pane.getElementsByTagName("toolbartabstop")) {
+                stop.removeEventListener("focus", this);
+            }
             this.listenersRegistered = false;
         }
         _tabAttrModified(tab) {
@@ -561,13 +576,17 @@
                 else image.classList.remove("tab-throbber-tabslist");
             }
         }
+        getNewFocus(walker, prev) {
+            return prev ? walker.previousNode() : walker.nextNode();
+        }
         navigateButtons(prev, horizontal) {
             let walker = horizontal ? this.horizontalWalker : this.verticalWalker;
             let oldFocus = document.activeElement;
             walker.currentNode = oldFocus;
-            let newFocus = prev ? walker.previousNode() : walker.nextNode();
-            if (!newFocus || newFocus.tagName == "toolbartabstop") return;
-            this._focusButton(newFocus);
+            let newFocus = this.getNewFocus(walker, prev);
+            while (newFocus && newFocus.tagName == "toolbartabstop")
+                newFocus = this.getNewFocus(walker, prev);
+            if (newFocus) this._focusButton(newFocus);
         }
         _focusButton(button) {
             button.setAttribute("tabindex", "-1");
@@ -580,9 +599,10 @@
             this.hoverOutQueued = false;
             this.hoverQueued = false;
             this.pane.setAttribute("expanded", true);
+            if (e.target.tagName === "toolbartabstop") this._onTabStopFocus(e);
         }
         _onPaneBlur(e) {
-            if (this.pane.matches(":hover")) return;
+            if (this.pane.matches(":is(:hover, :focus-within)")) return;
             clearTimeout(this.hoverOutTimer);
             clearTimeout(this.hoverTimer);
             this.hoverOutQueued = false;
@@ -594,8 +614,49 @@
             e.target.removeEventListener("blur", this);
             e.target.removeAttribute("tabindex");
         }
+        _onTabStopFocus(e) {
+            let walker = this.horizontalWalker;
+            let oldFocus = e.relatedTarget;
+            let isButton = (node) => node.tagName == "button" || node.tagName == "toolbarbutton";
+            if (oldFocus) {
+                this._isFocusMovingBackward =
+                    oldFocus.compareDocumentPosition(e.target) & Node.DOCUMENT_POSITION_PRECEDING;
+                if (this._isFocusMovingBackward && oldFocus && isButton(oldFocus)) {
+                    document.commandDispatcher.rewindFocus();
+                    return;
+                }
+            }
+            walker.currentNode = e.target;
+            let button = walker.nextNode();
+            if (!button || !isButton(button)) {
+                if (
+                    oldFocus &&
+                    this._isFocusMovingBackward &&
+                    !gNavToolbox.contains(oldFocus) &&
+                    !this.pane.contains(oldFocus)
+                ) {
+                    let allStops = Array.from(document.querySelectorAll("toolbartabstop"));
+                    let earlierVisibleStopIndex = allStops.indexOf(e.target) - 1;
+                    while (earlierVisibleStopIndex >= 0) {
+                        let stop = allStops[earlierVisibleStopIndex];
+                        let stopContainer = this.pane.contains(stop)
+                            ? this.pane
+                            : stop.closest("toolbar");
+                        if (window.windowUtils.getBoundsWithoutFlushing(stopContainer).height > 0)
+                            break;
+                        earlierVisibleStopIndex--;
+                    }
+                    if (earlierVisibleStopIndex == -1) this._isFocusMovingBackward = false;
+                }
+                if (this._isFocusMovingBackward) document.commandDispatcher.rewindFocus();
+                else document.commandDispatcher.advanceFocus();
+                return;
+            }
+            this._focusButton(button);
+        }
         _onKeyDown(e) {
-            if (e.altKey || e.controlKey || e.metaKey || e.shiftKey) return;
+            let accelKey = AppConstants.platform == "macosx" ? e.metaKey : e.ctrlKey;
+            if (e.altKey || e.shiftKey || accelKey) return;
             switch (e.key) {
                 case "ArrowLeft":
                     this.navigateButtons(!window.RTL_UI, true);
@@ -682,6 +743,7 @@
             this.hoverOutQueued = true;
             this.hoverOutTimer = setTimeout(() => {
                 this.hoverOutQueued = false;
+                if (this.pane.matches(":is(:hover, :focus-within)")) return;
                 this.pane.removeAttribute("expanded");
             }, this.hoverOutDelay);
         }
@@ -955,8 +1017,7 @@
 }
 #vertical-tabs-pane {
     background-color: var(--vertical-tabs-pane-background, var(--lwt-accent-color));
-    -moz-user-focus: normal !important;
-    padding-block: 4px;
+    padding: 4px;
 }
 #vertical-tabs-pane:not([unpinned]) {
     min-width: 160px;
@@ -994,6 +1055,7 @@
 #vertical-tabs-inner-box {
     overflow: hidden;
     width: -moz-available;
+    min-width: 28px;
 }
 #vertical-tabs-pane[unpinned] ~ #vertical-tabs-splitter {
     display: none;
@@ -1006,12 +1068,12 @@
     box-shadow: none;
     -moz-box-align: center;
     padding-inline-end: 2px;
-    margin-inline: 4px;
+    margin: 0;
     overflow-x: -moz-hidden-unscrollable;
     position: relative;
 }
-#vertical-tabs-list .all-tabs-item[selected="true"] {
-    -moz-user-focus: normal !important;
+#vertical-tabs-pane[checked] toolbartabstop {
+	-moz-user-focus: normal;
 }
 #vertical-tabs-list .all-tabs-item .all-tabs-button:not([disabled], [open]):focus {
     background: none;
@@ -1161,8 +1223,16 @@
     position: absolute;
     pointer-events: none;
     height: 0;
-    width: 30%;
     z-index: 1000;
+    width: 100%;
+    border-image: linear-gradient(
+        to right,
+        transparent,
+        var(--arrowpanel-dimmed-even-further) 1%,
+        var(--arrowpanel-dimmed-even-further) 25%,
+        transparent 90%
+    );
+    border-image-slice: 1;
 }
 #vertical-tabs-list .all-tabs-item[dragpos="before"]::before {
     inset-block-start: 0;
@@ -1205,7 +1275,6 @@
 }
 #vertical-tabs-buttons-row {
     min-width: 0 !important;
-    margin-inline: 4px !important;
 }
 #vertical-tabs-buttons-row > toolbarbutton {
     margin: 0 !important;
@@ -1226,6 +1295,7 @@
     border-top: 1px solid var(--panel-separator-color);
     border-bottom: none;
     margin: var(--panel-separator-margin);
+    margin-inline: 0;
     padding: 0;
 }            
             `;

@@ -420,7 +420,7 @@ this sheet controls their appearance as well. */
 }
 
 /* all tabs button popup */
-.all-tabs-item {
+#allTabsMenu-allTabsViewTabs .all-tabs-item {
     border-radius: var(--arrowpanel-menuitem-border-radius) !important;
     box-shadow: none !important;
     margin-inline: 4px !important;
@@ -644,4 +644,9 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
 
 #vertical-tabs-pane[unpinned][positionstart] {
     border-inline-width: 0 1px;
+}
+
+#vertical-tabs-buttons-row .subviewbutton:is(:focus-visible, [checked="true"]):not([disabled], [open], :hover, :active) {
+	background-color: var(--toolbarbutton-checked-background) !important;
+	transition: none !important;
 }
