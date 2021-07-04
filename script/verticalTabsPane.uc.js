@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Vertical Tabs Pane
-// @version        1.3.1
+// @version        1.3.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Create a vertical pane across from the sidebar that functions like the vertical tab pane in Microsoft Edge. It doesn't hide the tab bar since people have different preferences on how to do that, but it sets an attribute on the root element that you can use to hide the regular tab bar while the vertical pane is open, for example :root[vertical-tabs] #TabsToolbar... By default, the pane is resizable just like the sidebar is. And like the pane in Edge, you can press a button to collapse it, and it will hide the tab labels and become a thin strip that just shows the tabs' favicons. Hovering the collapsed pane will expand it without moving the browser content. As with the [vertical-tabs] attribute, this "unpinned" state is reflected on the root element, so you can select it like :root[vertical-tabs-unpinned]... Like the sidebar, the state of the pane is stored between windows and recorded in preferences. There's no need to edit these preferences directly, but there are a few other preferences that are meant to be edited in about:config. If you search "userChrome.tabs.verticalTabsPane" in about:config you'll find all of the preferences. "reverse-order" changes the direction of the pane so that newer tabs are displayed on top rather than on bottom. "no-expand-on-hover" prevents the pane from expanding on hover when it's collapsed. Normally the pane collapses and then temporarily expands if you hover it, after a delay of 100ms. Then when your mouse leaves the pane, it collapses again, after a delay of 100ms. Both of these delays can be changed with the "hover-delay" and "hover-out-delay" prefs. For languages other than English, the labels and tooltips can be modified directly in the l10n object below.
@@ -111,6 +111,7 @@
                 create(document, "arrowscrollbox", {
                     id: "vertical-tabs-list",
                     tooltip: "vertical-tabs-tooltip",
+                    context: "tabContextMenu",
                     orient: "vertical",
                     flex: "1",
                 })
@@ -300,8 +301,7 @@
                     this._onCommand(e, tab);
                     break;
                 case "mouseover":
-                case "mouseout":
-                    this._setTooltip(e, tab);
+                    this._warmupRowTab(e, tab);
                     break;
                 case "mouseenter":
                     this._onMouseEnter(e);
@@ -519,7 +519,6 @@
         _createRow(tab) {
             let row = create(document, "toolbaritem", {
                 class: "all-tabs-item",
-                context: "tabContextMenu",
                 draggable: true,
             });
             if (this.className) row.classList.add(this.className);
@@ -530,7 +529,6 @@
             row.addEventListener("mouseup", this);
             row.addEventListener("click", this);
             row.addEventListener("mouseover", this);
-            row.addEventListener("mouseout", this);
             this.tabToElement.set(tab, row);
 
             let button = row.appendChild(
@@ -775,6 +773,7 @@
         _onMouseUp(e, tab) {
             if (e.button === 2) return;
             if (e.button === 1) {
+                gBrowser.warmupTab(gBrowser._findTabToBlurTo(tab));
                 gBrowser.removeTab(tab, {
                     animate: true,
                     byMouse: false,
@@ -1004,13 +1003,11 @@
                     ? item.setAttribute("multiselected", true)
                     : item.removeAttribute("multiselected");
         }
-        _setTooltip(e, tab) {
-            if (e.target.hasAttribute("toggle-mute"))
-                this._overPlayingIcon = e.type === "mouseover" ? true : false;
-            else if (e.target.hasAttribute("close-button"))
-                this.mOverCloseButton = e.type === "mouseover" ? true : false;
+        _warmupRowTab(e, tab) {
+            let row = e.target.closest(".all-tabs-item");
             SessionStore.speculativeConnectOnTabHover(tab);
-            if (this.mOverCloseButton) tab = gBrowser._findTabToBlurTo(tab);
+            if (row.querySelector("[close-button]").matches(":hover"))
+                tab = gBrowser._findTabToBlurTo(tab);
             gBrowser.warmupTab(tab);
         }
         createTabTooltip(e) {
@@ -1029,7 +1026,7 @@
             const selectedTabs = gBrowser.selectedTabs;
             const contextTabInSelection = selectedTabs.includes(tab);
             const affectedTabsLength = contextTabInSelection ? selectedTabs.length : 1;
-            if (this.mOverCloseButton) {
+            if (row.querySelector("[close-button]").matches(":hover")) {
                 let shortcut = ShortcutUtils.prettifyShortcut(key_close);
                 label = PluralForm.get(
                     affectedTabsLength,
@@ -1039,7 +1036,7 @@
                     if (label.includes("%S")) label = label.replace("%S", shortcut);
                     else label = label + " (" + shortcut + ")";
                 }
-            } else if (this._overPlayingIcon) {
+            } else if (row.querySelector("[toggle-mute]").matches(":hover")) {
                 let stringID;
                 if (contextTabInSelection) {
                     stringID = tab.linkedBrowser.audioMuted
