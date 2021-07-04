@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Vertical Tabs Pane
-// @version        1.3.2
+// @version        1.3.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Create a vertical pane across from the sidebar that functions like the vertical tab pane in Microsoft Edge. It doesn't hide the tab bar since people have different preferences on how to do that, but it sets an attribute on the root element that you can use to hide the regular tab bar while the vertical pane is open, for example :root[vertical-tabs] #TabsToolbar... By default, the pane is resizable just like the sidebar is. And like the pane in Edge, you can press a button to collapse it, and it will hide the tab labels and become a thin strip that just shows the tabs' favicons. Hovering the collapsed pane will expand it without moving the browser content. As with the [vertical-tabs] attribute, this "unpinned" state is reflected on the root element, so you can select it like :root[vertical-tabs-unpinned]... Like the sidebar, the state of the pane is stored between windows and recorded in preferences. There's no need to edit these preferences directly, but there are a few other preferences that are meant to be edited in about:config. If you search "userChrome.tabs.verticalTabsPane" in about:config you'll find all of the preferences. "reverse-order" changes the direction of the pane so that newer tabs are displayed on top rather than on bottom. "no-expand-on-hover" prevents the pane from expanding on hover when it's collapsed. Normally the pane collapses and then temporarily expands if you hover it, after a delay of 100ms. Then when your mouse leaves the pane, it collapses again, after a delay of 100ms. Both of these delays can be changed with the "hover-delay" and "hover-out-delay" prefs. For languages other than English, the labels and tooltips can be modified directly in the l10n object below.
@@ -24,15 +24,6 @@
     let reversePref = "userChrome.tabs.verticalTabsPane.reverse-order";
     let hoverDelayPref = "userChrome.tabs.verticalTabsPane.hover-delay";
     let hoverOutDelayPref = "userChrome.tabs.verticalTabsPane.hover-out-delay";
-    let attributeFilter = ["pending", "notselectedsinceload"];
-    let tabContext = document.getElementById("tabContextMenu");
-    let contextActionTimer;
-    let observer = new MutationObserver((_mus) => {
-        for (const row of window.verticalTabsPane.rows)
-            for (const attr of attributeFilter)
-                row.toggleAttribute(attr, !!row.tab.getAttribute(attr));
-        delayedDisconnect();
-    });
     /**
      * create a DOM node with given parameters
      * @param {object} aDoc (which document to create the element in)
@@ -48,16 +39,16 @@
         }
         return el;
     }
-    function setAttributes(element, attrs) {
+    /**
+     * set or remove multiple attributes for a given node
+     * @param {object} el (a DOM node)
+     * @param {object} attrs (an object of attribute name/value pairs)
+     * @returns the DOM node
+     */
+    function setAttributes(el, attrs) {
         for (let [name, value] of Object.entries(attrs))
-            if (value) element.setAttribute(name, value);
-            else element.removeAttribute(name);
-    }
-    function delayedDisconnect() {
-        window.clearTimeout(contextActionTimer);
-        contextActionTimer = window.setTimeout(() => {
-            observer.disconnect();
-        }, 3000);
+            if (value) el.setAttribute(name, value);
+            else el.removeAttribute(name);
     }
     class VerticalTabsPaneBase {
         constructor() {
@@ -124,7 +115,6 @@
                 "onpopupshowing",
                 `verticalTabsPane.createTabTooltip(event)`
             );
-            this.tabTooltip.setAttribute("position", "after_start");
             this.scrollboxTabStop = this.containerNode.appendChild(
                 create(document, "toolbartabstop", { "aria-hidden": true })
             );
@@ -151,7 +141,6 @@
                 this.containerNode.shadowRoot.querySelector(id).remove()
             );
             this.l10nIfNeeded();
-            this.addContextListeners();
             this.observe(prefSvc, null, noExpandPref);
             this.observe(prefSvc, null, hoverDelayPref);
             this.observe(prefSvc, null, hoverOutDelayPref);
@@ -189,6 +178,9 @@
         get selectedRow() {
             return this.containerNode.querySelector(".all-tabs-item[selected]");
         }
+        get paneEvents() {
+            return this._paneEvents || (this._paneEvents = ["mouseenter", "mouseleave", "focus"]);
+        }
         get dragEvents() {
             return (
                 this._dragEvents ||
@@ -205,13 +197,8 @@
                     "TabPinned",
                     "TabUnpinned",
                     "TabSelect",
+                    "TabBrowserDiscarded",
                 ])
-            );
-        }
-        get paneEvents() {
-            return (
-                this._paneEvents ||
-                (this._paneEvents = ["keydown", "mouseenter", "mouseleave", "focus"])
             );
         }
         get horizontalWalker() {
@@ -310,6 +297,9 @@
                     this._onMouseLeave(e);
                     break;
                 case "TabAttrModified":
+                case "TabPinned":
+                case "TabUnpinned":
+                case "TabBrowserDiscarded":
                     this._tabAttrModified(e.target);
                     break;
                 case "TabClose":
@@ -344,10 +334,6 @@
                     break;
                 case "TabMultiSelect":
                     this._onTabMultiSelect();
-                    break;
-                case "TabPinned":
-                case "TabUnpinned":
-                    this._tabAttrModified(e.target);
                     break;
                 case "TabSelect":
                     if (this.isOpen)
@@ -461,6 +447,7 @@
             this.tabEvents.forEach((ev) => gBrowser.tabContainer.addEventListener(ev, this));
             this.dragEvents.forEach((ev) => this.containerNode.addEventListener(ev, this));
             this.paneEvents.forEach((ev) => this.pane.addEventListener(ev, this));
+            if (gToolbarKeyNavEnabled) this.pane.addEventListener("keydown", this);
             this.pane.addEventListener("blur", this, true);
             gBrowser.addEventListener("TabMultiSelect", this, false);
             for (let stop of this.pane.getElementsByTagName("toolbartabstop")) {
@@ -472,6 +459,7 @@
             this.tabEvents.forEach((ev) => gBrowser.tabContainer.removeEventListener(ev, this));
             this.dragEvents.forEach((ev) => this.containerNode.removeEventListener(ev, this));
             this.paneEvents.forEach((ev) => this.pane.removeEventListener(ev, this));
+            this.pane.removeEventListener("keydown", this);
             this.pane.addEventListener("blur", this, true);
             gBrowser.removeEventListener("TabMultiSelect", this, false);
             for (let stop of this.pane.getElementsByTagName("toolbartabstop")) {
@@ -522,7 +510,6 @@
                 draggable: true,
             });
             if (this.className) row.classList.add(this.className);
-
             row.tab = tab;
             row.addEventListener("command", this);
             row.addEventListener("mousedown", this);
@@ -597,7 +584,7 @@
                 soundplaying: tab.soundPlaying,
                 "activemedia-blocked": tab.activeMediaBlocked,
                 pictureinpicture: tab.pictureinpicture,
-                hidden: !(tab.muted || tab.soundPlaying || tab.activeMediaBlocked),
+                hidden: !(tab.muted || tab.soundPlaying || tab.activeMediaBlocked || tab.pictureinpicture),
             });
         }
         _setImageAttributes(row, tab) {
@@ -1023,6 +1010,7 @@
                     .replace("#1", pluralCount);
             };
             let label;
+            let align = true;
             const selectedTabs = gBrowser.selectedTabs;
             const contextTabInSelection = selectedTabs.includes(tab);
             const affectedTabsLength = contextTabInSelection ? selectedTabs.length : 1;
@@ -1036,6 +1024,7 @@
                     if (label.includes("%S")) label = label.replace("%S", shortcut);
                     else label = label + " (" + shortcut + ")";
                 }
+                align = false;
             } else if (row.querySelector("[toggle-mute]").matches(":hover")) {
                 let stringID;
                 if (contextTabInSelection) {
@@ -1055,6 +1044,7 @@
                         gTabBrowserBundle.GetStringFromName(stringID)
                     ).replace("#1", affectedTabsLength);
                 }
+                align = false;
             } else {
                 label = tab._fullLabel || tab.getAttribute("label");
                 if (Services.prefs.getBoolPref("browser.tabs.tooltipsShowPidAndActiveness", false))
@@ -1081,7 +1071,10 @@
                 }
             }
             if (!gProtonPlacesTooltip) return e.target.setAttribute("label", label);
-            e.target.moveToAnchor(row, "after_start");
+            if (align) {
+                e.target.setAttribute("position", "after_start");
+                e.target.moveToAnchor(row, "after_start");
+            }
             let title = e.target.querySelector(".places-tooltip-title");
             let url = e.target.querySelector(".places-tooltip-uri");
             let icon = e.target.querySelector("#places-tooltip-insecure-icon");
@@ -1291,8 +1284,12 @@
     background-color: var(--arrowpanel-dimmed-further) !important;
 }
 #vertical-tabs-list .all-tabs-item .all-tabs-secondary-button[toggle-mute] {
-    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='context-fill'><path d='M8.587 2.354L5.5 5H4.191A2.191 2.191 0 0 0 2 7.191v1.618A2.191 2.191 0 0 0 4.191 11H5.5l3.17 2.717a.2.2 0 0 0 .33-.152V2.544a.25.25 0 0 0-.413-.19z'/><path d='M11.575 3.275a.5.5 0 0 0-.316.949 3.97 3.97 0 0 1 0 7.551.5.5 0 0 0 .316.949 4.971 4.971 0 0 0 0-9.449z'/><path d='M13 8a3 3 0 0 0-2.056-2.787.5.5 0 1 0-.343.939A2.008 2.008 0 0 1 12 8a2.008 2.008 0 0 1-1.4 1.848.5.5 0 0 0 .343.939A3 3 0 0 0 13 8z'/></svg>") !important;
-    padding: 2px 2.5px 2px 0.5px;
+    list-style-image: none !important;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 18 18"><path fill="context-fill" d="M3.52,5.367c-1.332,0-2.422,1.09-2.422,2.422v2.422c0,1.332,1.09,2.422,2.422,2.422h1.516l4.102,3.633 V1.735L5.035,5.367H3.52z M12.059,9c0-0.727-0.484-1.211-1.211-1.211v2.422C11.574,10.211,12.059,9.727,12.059,9z M14.48,9 c0-1.695-1.211-3.148-2.785-3.512l-0.363,1.09C12.422,6.82,13.27,7.789,13.27,9c0,1.211-0.848,2.18-1.938,2.422l0.484,1.09 C13.27,12.148,14.48,10.695,14.48,9z M12.543,3.188l-0.484,1.09C14.238,4.883,15.691,6.82,15.691,9c0,2.18-1.453,4.117-3.512,4.601 l0.484,1.09c2.422-0.605,4.238-2.906,4.238-5.691C16.902,6.215,15.086,3.914,12.543,3.188z"/></svg>') !important;
+    background-size: 14px !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    padding: 0 !important;
     margin-inline-end: 8.5px;
     margin-inline-start: -27px;
     transition: 0.25s cubic-bezier(0.07, 0.78, 0.21, 0.95) transform,
@@ -1314,14 +1311,17 @@
     margin-inline-start: -2px;
 }
 #vertical-tabs-list .all-tabs-item .all-tabs-secondary-button[muted] {
-    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='context-fill'><path d='M13 8a2.813 2.813 0 0 0-.465-1.535l-.744.744A1.785 1.785 0 0 1 12 8a2.008 2.008 0 0 1-1.4 1.848.5.5 0 0 0 .343.939A3 3 0 0 0 13 8z'/><path d='M13.273 5.727A3.934 3.934 0 0 1 14 8a3.984 3.984 0 0 1-2.742 3.775.5.5 0 0 0 .316.949A4.985 4.985 0 0 0 15 8a4.93 4.93 0 0 0-1.012-2.988z'/><path d='M8.67 13.717a.2.2 0 0 0 .33-.152V10l-2.154 2.154z'/><path d='M14.707 1.293a1 1 0 0 0-1.414 0L9 5.586V2.544a.25.25 0 0 0-.413-.19L5.5 5H4.191A2.191 2.191 0 0 0 2 7.191v1.618a2.186 2.186 0 0 0 1.659 2.118l-2.366 2.366a1 1 0 1 0 1.414 1.414l12-12a1 1 0 0 0 0-1.414z'/></svg>") !important;
+    list-style-image: none !important;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 18 18"><path fill="context-fill" d="M3.52,5.367c-1.332,0-2.422,1.09-2.422,2.422v2.422c0,1.332,1.09,2.422,2.422,2.422h1.516l4.102,3.633V1.735L5.035,5.367H3.52z"/><path fill="context-fill" fill-rule="evenodd" d="M12.155,12.066l-1.138-1.138l4.872-4.872l1.138,1.138 L12.155,12.066z"/><path fill="context-fill" fill-rule="evenodd" d="M10.998,7.204l1.138-1.138l4.872,4.872l-1.138,1.138L10.998,7.204z"/></svg>') !important;
     transform: none !important;
     opacity: 0.7;
     margin-inline-start: -2px;
 }
 #vertical-tabs-list .all-tabs-item .all-tabs-secondary-button[activemedia-blocked] {
-    list-style-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12"><path fill="context-fill" d="M2.128.13A.968.968 0 0 0 .676.964v10.068a.968.968 0 0 0 1.452.838l8.712-5.034a.968.968 0 0 0 0-1.676L2.128.13z"/></svg>') !important;
-    padding: 4px 4px 4px 5px;
+    list-style-image: none !important;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12"><path fill="context-fill" d="M2.128.13A.968.968 0 0 0 .676.964v10.068a.968.968 0 0 0 1.452.838l8.712-5.034a.968.968 0 0 0 0-1.676L2.128.13z"/></svg>') !important;
+    background-size: 10px !important;
+    background-position: 4.5px center !important;
     transform: none !important;
     opacity: 0.7;
     margin-inline-start: -2px;
@@ -1329,8 +1329,9 @@
 #vertical-tabs-list
     > .all-tabs-item:not(:hover, :focus-within)
     .all-tabs-secondary-button[pictureinpicture] {
-    list-style-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 625.8 512"><path fill="context-fill" fill-opacity="context-fill-opacity" d="M568.9 0h-512C25.6 0 0 25 0 56.3v398.8C0 486.4 25.6 512 56.9 512h512c31.3 0 56.9-25.6 56.9-56.9V56.3C625.8 25 600.2 0 568.9 0zm-512 425.7V86c0-16.5 13.5-30 30-30h452c16.5 0 30 13.5 30 30v339.6c0 16.5-13.5 30-30 30h-452c-16.5.1-30-13.4-30-29.9zM482 227.6H314.4c-16.5 0-30 13.5-30 30v110.7c0 16.5 13.5 30 30 30H482c16.5 0 30-13.5 30-30V257.6c0-16.5-13.5-30-30-30z"/></svg>') !important;
-    padding: 4px 4px 4px 5px;
+    list-style-image: none !important;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 625.8 512"><path fill="context-fill" fill-opacity="context-fill-opacity" d="M568.9 0h-512C25.6 0 0 25 0 56.3v398.8C0 486.4 25.6 512 56.9 512h512c31.3 0 56.9-25.6 56.9-56.9V56.3C625.8 25 600.2 0 568.9 0zm-512 425.7V86c0-16.5 13.5-30 30-30h452c16.5 0 30 13.5 30 30v339.6c0 16.5-13.5 30-30 30h-452c-16.5.1-30-13.4-30-29.9zM482 227.6H314.4c-16.5 0-30 13.5-30 30v110.7c0 16.5 13.5 30 30 30H482c16.5 0 30-13.5 30-30V257.6c0-16.5-13.5-30-30-30z"/></svg>') !important;
+    border-radius: 0 !important;
 }
 #vertical-tabs-list .all-tabs-item .all-tabs-secondary-button[pictureinpicture] {
     transform: none !important;
@@ -1477,7 +1478,9 @@
             sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
         }
         l10nIfNeeded() {
-            let lazies = tabContext.querySelectorAll("[data-lazy-l10n-id]");
+            let lazies = document
+                .getElementById("tabContextMenu")
+                .querySelectorAll("[data-lazy-l10n-id]");
             if (lazies) {
                 MozXULElement.insertFTLIfNeeded("browser/tabContextMenu.ftl");
                 lazies.forEach((el) => {
@@ -1485,39 +1488,6 @@
                     el.removeAttribute("data-lazy-l10n-id");
                 });
             }
-        }
-        addContextListeners() {
-            tabContext.addEventListener(
-                "command",
-                () => {
-                    observer.disconnect();
-                    if (this.isOpen) {
-                        if (
-                            gBrowser.selectedTabs.length > 1 &&
-                            gBrowser.selectedTabs.includes(TabContextMenu.contextTab)
-                        )
-                            gBrowser.selectedTabs.forEach((tab) => {
-                                observer.observe(tab, {
-                                    attributes: true,
-                                    attributeFilter,
-                                });
-                            });
-                        else
-                            observer.observe(TabContextMenu.contextTab, {
-                                attributes: true,
-                                attributeFilter,
-                            });
-                    }
-                },
-                true
-            );
-            tabContext.addEventListener(
-                "popuphidden",
-                () => {
-                    delayedDisconnect();
-                },
-                false
-            );
         }
         uninit() {
             let enumerator = Services.wm.getEnumerator("navigator:browser");
@@ -1554,17 +1524,19 @@
                         .replace(/gCurrentPlayerCount.*/g, "")
                         .replace(
                             /(tab\.setAttribute\(\"pictureinpicture\".*)/,
-                            ` parentWin.gBrowser._tabAttrModified(tab, ["pictureinpicture"]);`
+                            `$1 parentWin.gBrowser._tabAttrModified(tab, ["pictureinpicture"]);`
                         )
             );
         let clearIconSrc = PictureInPicture.clearPipTabIcon.toSource();
         if (!clearIconSrc.includes("_tabAttrModified"))
             eval(
                 `PictureInPicture.clearPipTabIcon = function ` +
-                    clearIconSrc.replace(
-                        /(tab\.removeAttribute\(\"pictureinpicture\".*)/,
-                        ` gBrowser._tabAttrModified(tab, ["pictureinpicture"]);`
-                    )
+                    clearIconSrc
+                        .replace(/WINDOW\_TYPE/, `"Toolkit:PictureInPicture"`)
+                        .replace(
+                            /(tab\.removeAttribute\(\"pictureinpicture\".*)/,
+                            `$1 gBrowser._tabAttrModified(tab, ["pictureinpicture"]);`
+                        )
             );
     }
 

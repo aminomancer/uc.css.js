@@ -445,16 +445,16 @@ By default, private windows are opened to about:privatebrowsing, regardless of y
 }
 .tab-icon-sound[soundplaying],
 .tab-icon-sound[pictureinpicture][soundplaying]:hover {
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="context-fill" viewBox="0 0 16 16"><path d="M8.587 2.354L5.5 5H4.191A2.191 2.191 0 002 7.191v1.618A2.191 2.191 0 004.191 11H5.5l3.17 2.717a.2.2 0 00.33-.152V2.544a.25.25 0 00-.413-.19zM11.575 3.275a.5.5 0 00-.316.949 3.97 3.97 0 010 7.551.5.5 0 00.316.949 4.971 4.971 0 000-9.449z"/><path d="M13 8a3 3 0 00-2.056-2.787.5.5 0 10-.343.939A2.008 2.008 0 0112 8a2.008 2.008 0 01-1.4 1.848.5.5 0 00.343.939A3 3 0 0013 8z"/></svg>');
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 18 18"><path fill="context-fill" d="M3.52,5.367c-1.332,0-2.422,1.09-2.422,2.422v2.422c0,1.332,1.09,2.422,2.422,2.422h1.516l4.102,3.633 V1.735L5.035,5.367H3.52z M12.059,9c0-0.727-0.484-1.211-1.211-1.211v2.422C11.574,10.211,12.059,9.727,12.059,9z M14.48,9 c0-1.695-1.211-3.148-2.785-3.512l-0.363,1.09C12.422,6.82,13.27,7.789,13.27,9c0,1.211-0.848,2.18-1.938,2.422l0.484,1.09 C13.27,12.148,14.48,10.695,14.48,9z M12.543,3.188l-0.484,1.09C14.238,4.883,15.691,6.82,15.691,9c0,2.18-1.453,4.117-3.512,4.601 l0.484,1.09c2.422-0.605,4.238-2.906,4.238-5.691C16.902,6.215,15.086,3.914,12.543,3.188z"/></svg>');
     background-size: 12px;
-    background-position: 1.2px center;
+    background-position: center;
     margin-inline-start: 1px;
 }
 .tab-icon-sound[muted],
 .tab-icon-sound[pictureinpicture][muted]:hover {
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="context-fill" viewBox="0 0 16 16"><path d="M13 8a2.813 2.813 0 00-.465-1.535l-.744.744A1.785 1.785 0 0112 8a2.008 2.008 0 01-1.4 1.848.5.5 0 00.343.939A3 3 0 0013 8z"/><path d="M13.273 5.727A3.934 3.934 0 0114 8a3.984 3.984 0 01-2.742 3.775.5.5 0 00.316.949A4.985 4.985 0 0015 8a4.93 4.93 0 00-1.012-2.988zM8.67 13.717a.2.2 0 00.33-.152V10l-2.154 2.154zM14.707 1.293a1 1 0 00-1.414 0L9 5.586V2.544a.25.25 0 00-.413-.19L5.5 5H4.191A2.191 2.191 0 002 7.191v1.618a2.186 2.186 0 001.659 2.118l-2.366 2.366a1 1 0 101.414 1.414l12-12a1 1 0 000-1.414z"/></svg>');
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 18 18"><path fill="context-fill" d="M3.52,5.367c-1.332,0-2.422,1.09-2.422,2.422v2.422c0,1.332,1.09,2.422,2.422,2.422h1.516l4.102,3.633V1.735L5.035,5.367H3.52z"/><path fill="context-fill" fill-rule="evenodd" d="M12.155,12.066l-1.138-1.138l4.872-4.872l1.138,1.138 L12.155,12.066z"/><path fill="context-fill" fill-rule="evenodd" d="M10.998,7.204l1.138-1.138l4.872,4.872l-1.138,1.138L10.998,7.204z"/></svg>');
     background-size: 12px;
-    background-position: 1.2px center;
+    background-position: center;
     margin-inline-start: 1px;
 }
 .tab-icon-sound[activemedia-blocked] {

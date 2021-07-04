@@ -46,7 +46,7 @@ tooltip .uc-tooltip-box {
     --uc-tooltip-inner-padding: 4px 6px 5px 6px !important;
 }
 
-.places-tooltip > description {
+.places-tooltip description:not([value]:not([value=""]), [id]):empty {
     display: none !important;
 }
 
@@ -84,12 +84,12 @@ for that reason i disabled it but maybe someone else wants it. it does look kind
 /* the shadow on the tab tooltip must be removed since it blocks mouse hover from reaching the tab.
 which would mean when you hover a tab, it'd appear hovered, then the tooltip would show up and it would appear unhovered,
 as the mouse would then be on top of the tooltip popup not the main window. */
-:is(#mainPopupSet, .sidebar-panel) > .places-tooltip {
+.places-tooltip[position] {
     padding: 0 !important;
     margin: 0 !important;
 }
 
-:is(#mainPopupSet, .sidebar-panel) > .places-tooltip > .places-tooltip-box {
+.places-tooltip[position] > .places-tooltip-box {
     box-shadow: none !important;
 }
 
@@ -98,11 +98,9 @@ as the mouse would then be on top of the tooltip popup not the main window. */
     text-overflow: ellipsis !important;
 }
 
-.places-tooltip > description,
 :is(#tracking-protection-icon-tooltip, #back-button-tooltip, #forward-button-tooltip)
-    .tooltip-label:not([value], [id]) {
-    padding: 0 !important;
-    border: none !important;
+    description:not([value]:not([value=""]), [id]):empty {
+    display: none !important;
 }
 
 :is(#back-button-tooltip, #forward-button-tooltip):not([shadow-support]) description {

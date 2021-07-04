@@ -541,8 +541,12 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
 }
 
 .all-tabs-item .all-tabs-secondary-button[toggle-mute] {
-    list-style-image: url(chrome://userchrome/content/tab-audio-playing.svg) !important;
-    padding: 2px 2.5px 2px 0.5px !important;
+    list-style-image: none !important;
+    background-image: url(chrome://userchrome/content/audioUnmutedButton.svg) !important;
+    background-size: 14px !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    padding: 0 !important;
     margin-inline-end: 8.5px !important;
     margin-inline-start: -27px !important;
     transition: 0.25s cubic-bezier(0.07, 0.78, 0.21, 0.95) transform,
@@ -566,23 +570,27 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
 }
 
 .all-tabs-item .all-tabs-secondary-button[muted] {
-    list-style-image: url(chrome://userchrome/content/tab-audio-muted.svg) !important;
+    list-style-image: none !important;
+    background-image: url(chrome://userchrome/content/audioMutedButton.svg) !important;
     transform: none !important;
     opacity: 0.7 !important;
     margin-inline-start: -2px !important;
 }
 
 .all-tabs-item .all-tabs-secondary-button[activemedia-blocked] {
-    list-style-image: url(chrome://userchrome/content/glyph-play-12.svg) !important;
-    padding: 4px 4px 4px 5px !important;
+    list-style-image: none !important;
+    background-image: url(chrome://userchrome/content/glyph-play-12.svg) !important;
+    background-size: 10px !important;
+    background-position: 4.5px center !important;
     transform: none !important;
     opacity: 0.7 !important;
     margin-inline-start: -2px !important;
 }
 
 .all-tabs-item:not(:hover, :focus-within) .all-tabs-secondary-button[pictureinpicture] {
-    list-style-image: url(chrome://userchrome/content/tab-picture-in-picture.svg) !important;
-    padding: 4px 4px 4px 5px !important;
+    list-style-image: none !important;
+    background-image: url(chrome://userchrome/content/tab-picture-in-picture.svg) !important;
+    border-radius: 0 !important;
 }
 
 .all-tabs-item .all-tabs-secondary-button[pictureinpicture] {
@@ -656,7 +664,8 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
     border: none !important;
 }
 
-#vertical-tabs-buttons-row .subviewbutton:is(:focus-visible, [checked="true"]):not([disabled], [open], :hover, :active) {
-	background-color: var(--toolbarbutton-checked-background) !important;
-	transition: none !important;
+#vertical-tabs-buttons-row
+    .subviewbutton:is(:focus-visible, [checked="true"]):not([disabled], [open], :hover, :active) {
+    background-color: var(--toolbarbutton-checked-background) !important;
+    transition: none !important;
 }

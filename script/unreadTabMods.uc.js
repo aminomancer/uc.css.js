@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Unread Tab Mods
-// @version        1.1
+// @version        1.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Modifies some javascript methods so that unread tabs can be styled in CSS, and (optionally) adds new items to the tab context menu so you can manually mark tabs as read or unread. Normally when you open a new tab without it being selected, it gains the attribute "notselectedsinceload" which could be used to style it. But this attribute doesn't go away when you select the tab, so it doesn't actually mean "unread." It doesn't go away until you navigate to a new page in the tab. But we can change this so it will go away immediately as soon as you click it or otherwise select it. Also, normally the attribute isn't added until web progress has finished, so unread tab styling won't be applied until after it's finished loading a bit. This doesn't look as good so we're also changing it to add the attribute as soon as the tab is created. So now all you need to do to style unread tabs is add something like this to your userchrome.css file:
@@ -9,6 +9,18 @@
 // ==/UserScript==
 
 (function () {
+    /**
+     * set the "notselectedsinceload" attribute and the _notselectedsinceload property on a tab.
+     * @param {object} tab (a tab whose attribute to change)
+     * @param {boolean} on (whether to set the attribute to true or remove it)
+     */
+    function modulateAttr(tab, on = false) {
+        tab._notselectedsinceload = on;
+        on
+            ? tab.setAttribute("notselectedsinceload", on)
+            : tab.removeAttribute("notselectedsinceload");
+        gBrowser._tabAttrModified(tab, ["notselectedsinceload"]);
+    }
     class UnreadTabsBase {
         // user preferences and localization. change the strings to match your lanugage. write #1 where the number of tabs should go in the sentence.
         static config = {
@@ -27,8 +39,7 @@
                 let selectedTab = this.selectedItem;
                 if (this.getAttribute("overflow") == "true")
                     this.arrowScrollbox.ensureElementIsVisible(selectedTab, aInstant);
-                selectedTab._notselectedsinceload = false;
-                selectedTab.removeAttribute("notselectedsinceload");
+                modulateAttr(selectedTab);
             };
 
             gBrowser.tabContainer._handleNewTab = function (tab) {
@@ -38,8 +49,7 @@
                 this._updateCloseButtons();
                 if (tab.getAttribute("selected") == "true") this._handleTabSelect();
                 else {
-                    tab._notselectedsinceload = true;
-                    tab.setAttribute("notselectedsinceload", true);
+                    modulateAttr(tab, true);
                     if (!tab.hasAttribute("skipbackgroundnotify")) this._notifyBackgroundTab(tab);
                 }
                 this.arrowScrollbox._updateScrollButtonsDisabledState();
@@ -109,26 +119,17 @@
             });
         }
 
-        _onCommand(mode = "Read") {
+        _onCommand(mode = false) {
             let tab = TabContextMenu.contextTab;
-            if (tab.multiselected) {
-                let tabs = gBrowser.selectedTabs;
-                tabs.forEach((aTab) => {
-                    this[`markAs${mode}`](aTab);
+            if (tab.multiselected)
+                gBrowser.selectedTabs.forEach((aTab) => {
+                    if (aTab.getAttribute("pending") || aTab.selected) return;
+                    modulateAttr(aTab, mode);
                 });
-            } else this[`markAs${mode}`](tab);
-        }
-
-        markAsRead(tab) {
-            if (tab.getAttribute("pending") || tab.selected) return;
-            tab._notselectedsinceload = false;
-            tab.removeAttribute("notselectedsinceload");
-        }
-
-        markAsUnread(tab) {
-            if (tab.getAttribute("pending") || tab.selected) return;
-            tab._notselectedsinceload = true;
-            tab.setAttribute("notselectedsinceload", true);
+            else {
+                if (tab.getAttribute("pending") || tab.selected) return;
+                modulateAttr(tab, mode);
+            }
         }
 
         makeMenuItems(context) {
@@ -147,10 +148,7 @@
                 UnreadTabsBase.config["Mark Tab as Unread Label"]
             );
             this.markAsUnreadMenuitem.setAttribute("id", "context-markAsUnread");
-            this.markAsUnreadMenuitem.setAttribute(
-                "oncommand",
-                `unreadTabMods._onCommand("Unread")`
-            );
+            this.markAsUnreadMenuitem.setAttribute("oncommand", `unreadTabMods._onCommand(true)`);
             this.markAsReadMenuitem.after(this.markAsUnreadMenuitem);
 
             context.addEventListener("popupshowing", this, false);
