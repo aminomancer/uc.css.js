@@ -559,6 +559,7 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
 
 :is(.tab-prompt-dialog, #window-modal-dialog) :is(.dialogBox, .dialogFrame) {
     border-radius: 0 0 5px 5px !important;
+    border-top-style: none !important;
 }
 
 .content-prompt-dialog :is(.dialogBox, .dialogFrame) {
@@ -593,7 +594,7 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
     background-color: var(--dialog-bgcolor) !important;
     background-image: var(--acrylic-texture) !important;
     backdrop-filter: var(--acrylic-blur) !important;
-    border: 1px solid var(--blurred-dialog-border-color) !important;
+    border: 1px solid var(--blurred-dialog-border-color);
 }
 
 /* hide the background overlay */
@@ -1101,6 +1102,18 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
         --in-content-page-background: var(--content-principal-page-background) !important;
         --dropdown-bgcolor: var(--in-content-page-background) !important;
     }
+}
+
+link[href="chrome://global/content/printPagination.css"]
+    ~ .container
+    :is(.toolbarButton, .toolbarCenter) {
+    border-color: var(--menu-separator-color) !important;
+}
+
+link[href="chrome://global/content/printPagination.css"]
+    ~ .container {
+	box-shadow: 0 0 15px 0 hsla(0, 0%, 10%, 0.2) !important;
+    border-radius: 3px !important;
 }
 
 @-moz-document url-prefix("chrome://browser/content/sanitize.xhtml")

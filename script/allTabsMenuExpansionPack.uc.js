@@ -332,7 +332,12 @@
                 soundplaying: tab.soundPlaying,
                 "activemedia-blocked": tab.activeMediaBlocked,
                 pictureinpicture: tab.pictureinpicture,
-                hidden: !(tab.muted || tab.soundPlaying || tab.activeMediaBlocked || tab.pictureinpicture),
+                hidden: !(
+                    tab.muted ||
+                    tab.soundPlaying ||
+                    tab.activeMediaBlocked ||
+                    tab.pictureinpicture
+                ),
             });
         };
         allTabs._moveTab = function (tab) {

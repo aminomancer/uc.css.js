@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Vertical Tabs Pane
-// @version        1.3.3
+// @version        1.3.4
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Create a vertical pane across from the sidebar that functions like the vertical tab pane in Microsoft Edge. It doesn't hide the tab bar since people have different preferences on how to do that, but it sets an attribute on the root element that you can use to hide the regular tab bar while the vertical pane is open, for example :root[vertical-tabs] #TabsToolbar... By default, the pane is resizable just like the sidebar is. And like the pane in Edge, you can press a button to collapse it, and it will hide the tab labels and become a thin strip that just shows the tabs' favicons. Hovering the collapsed pane will expand it without moving the browser content. As with the [vertical-tabs] attribute, this "unpinned" state is reflected on the root element, so you can select it like :root[vertical-tabs-unpinned]... Like the sidebar, the state of the pane is stored between windows and recorded in preferences. There's no need to edit these preferences directly, but there are a few other preferences that are meant to be edited in about:config. If you search "userChrome.tabs.verticalTabsPane" in about:config you'll find all of the preferences. "reverse-order" changes the direction of the pane so that newer tabs are displayed on top rather than on bottom. "no-expand-on-hover" prevents the pane from expanding on hover when it's collapsed. Normally the pane collapses and then temporarily expands if you hover it, after a delay of 100ms. Then when your mouse leaves the pane, it collapses again, after a delay of 100ms. Both of these delays can be changed with the "hover-delay" and "hover-out-delay" prefs. For languages other than English, the labels and tooltips can be modified directly in the l10n object below.
@@ -51,13 +51,25 @@
             else el.removeAttribute(name);
     }
     class VerticalTabsPaneBase {
+        static preferences = [
+            { name: closedPref, value: false },
+            { name: unpinnedPref, value: false },
+            { name: noExpandPref, value: false },
+            { name: widthPref, value: 350 },
+            { name: reversePref, value: false },
+            { name: hoverDelayPref, value: 100 },
+            { name: hoverOutDelayPref, value: 100 },
+        ];
         constructor() {
+            this.preferences = VerticalTabsPaneBase.preferences;
             this.registerSheet();
+            // ensure E10SUtils are available. required for showing tab's process ID in its tooltip, if the pref for that is enabled.
             if (!window.E10SUtils)
                 XPCOMUtils.defineLazyModuleGetters(this, {
                     E10SUtils: `resource://gre/modules/E10SUtils.jsm`,
                 });
             else this.E10SUtils = window.E10SUtils;
+            // build the DOM
             this.pane = document.getElementById("vertical-tabs-pane");
             this.splitter = document.getElementById("vertical-tabs-splitter");
             this.innerBox = this.pane.appendChild(
@@ -66,6 +78,7 @@
             this.buttonsRow = this.innerBox.appendChild(
                 create(document, "hbox", { id: "vertical-tabs-buttons-row" })
             );
+            // tab stops let us focus elements in the tabs pane by hitting tab to cycle through toolbars, just as in vanilla firefox.
             this.buttonsTabStop = this.buttonsRow.appendChild(
                 create(document, "toolbartabstop", { "aria-hidden": true })
             );
@@ -107,6 +120,7 @@
                     flex: "1",
                 })
             );
+            // build a modified clone of the built-in tabs tooltip for use in the pane.
             let vanillaTooltip = document.getElementById("tabbrowser-tab-tooltip");
             this.tabTooltip = vanillaTooltip.cloneNode(true);
             vanillaTooltip.after(this.tabTooltip);
@@ -118,18 +132,20 @@
             this.scrollboxTabStop = this.containerNode.appendChild(
                 create(document, "toolbartabstop", { "aria-hidden": true })
             );
+            // this is a map of all the rows, and you can get a specific row from it by passing a tab (like a real <tab> element from the built-in tab bar)
             this.tabToElement = new Map();
             this.listenersRegistered = false;
-            if (!prefSvc.prefHasUserValue(closedPref)) prefSvc.setBoolPref(closedPref, false);
-            if (!prefSvc.prefHasUserValue(unpinnedPref)) prefSvc.setBoolPref(unpinnedPref, false);
-            if (!prefSvc.prefHasUserValue(noExpandPref)) prefSvc.setBoolPref(noExpandPref, false);
-            if (!prefSvc.prefHasUserValue(widthPref)) prefSvc.setIntPref(widthPref, 350);
-            if (!prefSvc.prefHasUserValue(reversePref)) prefSvc.setBoolPref(reversePref, false);
-            if (!prefSvc.prefHasUserValue(hoverDelayPref)) prefSvc.setIntPref(hoverDelayPref, 100);
-            if (!prefSvc.prefHasUserValue(hoverOutDelayPref))
-                prefSvc.setIntPref(hoverOutDelayPref, 100);
+            // set up preferences if they don't already exist
+            this.preferences.forEach((pref) => {
+                if (!prefSvc.prefHasUserValue(pref.name))
+                    prefSvc[`set${typeof pref.value === "number" ? "Int" : "Bool"}Pref`](
+                        pref.name,
+                        pref.value
+                    );
+            });
             prefSvc.addObserver("userChrome.tabs.verticalTabsPane", this);
             prefSvc.addObserver("privacy.userContext", this);
+            // re-initialize the sidebar's positionstart pref callback since we changed it earlier at the bottom to make it also move the vertical tabs pane.
             XPCOMUtils.defineLazyPreferenceGetter(
                 SidebarUI,
                 "_positionStart",
@@ -137,21 +153,26 @@
                 true,
                 SidebarUI.setPosition.bind(SidebarUI)
             );
+            // destroy the scrollbuttons.
             ["#scrollbutton-up", "#scrollbutton-down"].forEach((id) =>
                 this.containerNode.shadowRoot.querySelector(id).remove()
             );
             this.l10nIfNeeded();
-            this.observe(prefSvc, null, noExpandPref);
-            this.observe(prefSvc, null, hoverDelayPref);
-            this.observe(prefSvc, null, hoverOutDelayPref);
+            // the pref observer changes stuff in the script when the pref is changed.
+            // but when the script initially starts, the prefs haven't been changed so that logic isn't immediately invoked.
+            // we have to invoke it manually, as if the prefs had been changed.
+            let readPref = (pref) => this.observe(prefSvc, null, pref);
+            readPref(noExpandPref);
+            readPref(hoverDelayPref);
+            readPref(hoverOutDelayPref);
             if (!this.hoverDelay) this.hoverDelay = 100;
             if (!this.hoverOutDelay) this.hoverOutDelay = 100;
-
+            // some of the stuff we don't want to do until the first tab has been loaded.
             gBrowser.tabContainer.addEventListener(
                 "SSTabRestoring",
                 (e) => {
-                    this.observe(prefSvc, null, reversePref);
-                    this.observe(prefSvc, null, "privacy.userContext.enabled");
+                    readPref(reversePref);
+                    readPref("privacy.userContext.enabled");
                     // try to adopt from previous window, otherwise restore from prefs.
                     let sourceWindow = window.opener;
                     if (sourceWindow)
@@ -162,31 +183,37 @@
                                 PrivateBrowsingUtils.isWindowPrivate(window)
                         )
                             if (this.adoptFromWindow(sourceWindow)) return;
-                    this.observe(prefSvc, null, widthPref);
-                    this.observe(prefSvc, null, unpinnedPref);
-                    this.observe(prefSvc, null, closedPref);
+                    readPref(widthPref);
+                    readPref(unpinnedPref);
+                    readPref(closedPref);
                 },
                 { once: true }
             );
         }
+        // get the root element, e.g. what you'd select in CSS with :root
         get root() {
             return this._root || (this._root = document.documentElement);
         }
+        // return all the DOM nodes for tab rows in the pane.
         get rows() {
             return this.tabToElement.values();
         }
+        // return the row for the active/selected tab.
         get selectedRow() {
             return this.containerNode.querySelector(".all-tabs-item[selected]");
         }
+        // all of these events will be listened for on the pane itself
         get paneEvents() {
             return this._paneEvents || (this._paneEvents = ["mouseenter", "mouseleave", "focus"]);
         }
+        // these events target the containerNode — the arrowscrollbox
         get dragEvents() {
             return (
                 this._dragEvents ||
                 (this._dragEvents = ["dragstart", "dragleave", "dragover", "drop", "dragend"])
             );
         }
+        // these events target the vanilla tab bar, gBrowser.tabContainer
         get tabEvents() {
             return (
                 this._tabEvents ||
@@ -201,6 +228,10 @@
                 ])
             );
         }
+        // this creates (and caches) a tree walker. tree walkers are basically interfaces for finding nodes in order.
+        // we get to specify which direction we're looking in, forward or backward, and we get to specify a filter function that rules out types of elements.
+        // this one accepts tabstops, buttons, toolbarbuttons, and checkboxes, but rules out disabled or hidden nodes, and rules out everything else.
+        // this is what tells us which element to focus when pressing the right/left arrow keys.
         get horizontalWalker() {
             if (this._horizontalWalker) return this._horizontalWalker;
             return (this._horizontalWalker = document.createTreeWalker(
@@ -221,6 +252,9 @@
                 }
             ));
         }
+        // this one tells us which element to focus when pressing the up/down arrow keys.
+        // it's just like the other but it skips secondary buttons. (mute and close buttons)
+        // this way we can arrow up/down to navigate through tabs very quickly, and arrow left/right to focus the mute and close buttons.
         get verticalWalker() {
             if (this._verticalWalker) return this._verticalWalker;
             return (this._verticalWalker = document.createTreeWalker(
@@ -243,9 +277,21 @@
                 }
             ));
         }
+        /**
+         * this tells us which tabs to not make rows for. in this case we only exclude hidden tabs.
+         * tabs are normally only hidden by certain extensions, e.g. an addon that makes tab groups.
+         * @param {object} tab (a <tab> element from the vanilla tab bar)
+         * @returns {boolean} false if the tab should be excluded from the vertical tabs pane
+         */
         filterFn(tab) {
             return !tab.hidden;
         }
+
+        /**
+         * get the initial state for the pane from a previous window. this is what happens when you open a new window (not the first window of a session)
+         * @param {object} sourceWindow (a window object, the window from which the new window was opened)
+         * @returns {boolean} true if state was successfully restored from source window, false if state must be restored from preferences.
+         */
         adoptFromWindow(sourceWindow) {
             let sourceUI = sourceWindow.verticalTabsPane;
             if (!sourceUI || !sourceUI.pane) return false;
@@ -264,14 +310,25 @@
             sourceUI.pane.hidden ? this.close() : this.open();
             return true;
         }
+        /**
+         * for a given descendant of a tab row, return the actual tab row element.
+         * @param {object} el (a DOM node contained within a tab row)
+         * @returns the ancestor tab row
+         */
         findRow(el) {
             return el.classList.contains("all-tabs-item") ? el : el.closest(".all-tabs-item");
         }
+        // change the pin/unpin button's tooltip so it reflects the current state.
+        // if the pane is pinned, the button should say "Collapse pane" and if it's unpinned it should say "Pin pane"
         resetPinnedTooltip() {
             let newVal = this.pane.getAttribute("unpinned");
             this.pinPaneButton.tooltipText =
                 config.l10n[newVal ? "Pin button tooltip" : "Collapse button tooltip"];
         }
+        /**
+         * universal event handler — we generally pass the whole class to addEventListener and let this function decide which callback to invoke.
+         * @param {object} e (an event object)
+         */
         handleEvent(e) {
             let tab = e.target.tab;
             switch (e.type) {
@@ -341,6 +398,12 @@
                     break;
             }
         }
+        /**
+         * universal preference observer. when a preference is changed, do something about it.
+         * @param {object} sub (an object with nsIPrefBranch interface — reflects the preference branch we're watching, or just the root)
+         * @param {string} _top (the topic "nsPref:changed" is always passed to our observer, but we don't use it)
+         * @param {string} pref (the preference that changed)
+         */
         observe(sub, _top, pref) {
             let value = this.getPref(sub, pref);
             switch (pref) {
@@ -386,6 +449,12 @@
                     break;
             }
         }
+        /**
+         * for a given preference, get its value, regardless of the preference type.
+         * @param {object} root (an object with nsIPrefBranch interface — reflects the preference branch we're watching, or just the root)
+         * @param {string} pref (a preference string)
+         * @returns the preference's value
+         */
         getPref(root, pref) {
             switch (root.getPrefType(pref)) {
                 case root.PREF_BOOL:
@@ -409,16 +478,19 @@
             if (!this.listenersRegistered) this._populate();
         }
         close() {
+            if (this.pane.contains(document.activeElement)) document.activeElement.blur();
             this.pane.hidden = this.splitter.hidden = true;
             this.pane.removeAttribute("checked");
             this.isOpen = false;
             this.root.setAttribute("vertical-tabs", false);
             this._cleanup();
         }
+        // set the active tab
         _selectTab(tab) {
             if (gBrowser.selectedTab != tab) gBrowser.selectedTab = tab;
             else gBrowser.tabContainer._handleTabSelect();
         }
+        // fill the pane with tab rows
         _populate() {
             let fragment = document.createDocumentFragment();
             for (let tab of gBrowser.tabs)
@@ -429,9 +501,14 @@
             for (let row of this.rows) this._setImageAttributes(row, row.tab);
             this.selectedRow.scrollIntoView({ block: "nearest", behavior: "instant" });
         }
+        /**
+         * add an element to the tab container/arrowscrollbox
+         * @param {object} elementOrFragment (a DOM element or document fragment to add to the container)
+         */
         _addElement(elementOrFragment) {
             this.containerNode.insertBefore(elementOrFragment, this.insertBefore);
         }
+        // invoked when closing the pane. set everything back to default.
         _cleanup() {
             for (let item of this.rows) item.remove();
             this.tabToElement = new Map();
@@ -442,6 +519,8 @@
             this.hoverQueued = false;
             this.pane.removeAttribute("expanded");
         }
+        // invoked when opening the pane. add all the event listeners.
+        // this way the script is less wasteful when the pane is closed.
         _setupListeners() {
             this.listenersRegistered = true;
             this.tabEvents.forEach((ev) => gBrowser.tabContainer.addEventListener(ev, this));
@@ -455,6 +534,7 @@
                 stop.addEventListener("focus", this);
             }
         }
+        // invoked when closing the pane. clear all the aforementioned event listeners.
         _cleanupListeners() {
             this.tabEvents.forEach((ev) => gBrowser.tabContainer.removeEventListener(ev, this));
             this.dragEvents.forEach((ev) => this.containerNode.removeEventListener(ev, this));
@@ -467,6 +547,11 @@
             }
             this.listenersRegistered = false;
         }
+        /**
+         * callback when a tab attribute is modified. a response to the TabAttrModified custom event dispatched by gBrowser.
+         * this is what we use to update most of the tab attributes, like busy, soundplaying, etc.
+         * @param {object} tab (a tab element from the real tab bar)
+         */
         _tabAttrModified(tab) {
             let item = this.tabToElement.get(tab);
             if (item) {
@@ -474,6 +559,13 @@
                 else this._setRowAttributes(item, tab);
             } else if (this.filterFn(tab)) this._addTab(tab);
         }
+        /**
+         * the key implies that we're moving a tab, but this doesn't tell us where to move the tab to.
+         * in reality, this just removes a tab and adds it back. it simply gets called when a tab gets moved by other means,
+         * so we delete the row and _addTab places it in the same position as its corresponding tab.
+         * meaning we can't actually move a tab this way, this just helps the tabs pane mirror the real tab bar.
+         * @param {object} tab (a tab element)
+         */
         _moveTab(tab) {
             let item = this.tabToElement.get(tab);
             if (item) {
@@ -482,6 +574,11 @@
                 this.selectedRow.scrollIntoView({ block: "nearest" });
             }
         }
+        /**
+         * invoked by the above functions. if a tab's attributes change and it's somehow not in the pane already, add it.
+         * this adds a dom node for a given tab and places it in a position reflecting the tab's real position.
+         * @param {object} newTab (a tab element that's not already in the pane)
+         */
         _addTab(newTab) {
             if (!this.filterFn(newTab)) return;
             let newRow = this._createRow(newTab);
@@ -496,14 +593,28 @@
                 else this._addElement(newRow);
             }
         }
+        /**
+         * invoked when a tab is closed from outside the pane. since the tab no longer exists, remove it from the pane.
+         * @param {object} tab (a tab element)
+         */
         _tabClose(tab) {
             let item = this.tabToElement.get(tab);
             if (item) this._removeItem(item, tab);
         }
+        /**
+         * remove a tab/item pair from the map, and remove the item from the DOM.
+         * @param {object} item (a row element, e.g. with class all-tabs-item)
+         * @param {object} tab (a corresponding tab element — every all-tabs-item has a reference to its corresponding tab in property "tab")
+         */
         _removeItem(item, tab) {
             this.tabToElement.delete(tab);
             item.remove();
         }
+        /**
+         * for a given tab, create a row in the pane's container.
+         * @param {object} tab (a tab element)
+         * @returns a row element
+         */
         _createRow(tab) {
             let row = create(document, "toolbaritem", {
                 class: "all-tabs-item",
@@ -518,6 +629,7 @@
             row.addEventListener("mouseover", this);
             this.tabToElement.set(tab, row);
 
+            // main button
             let button = row.appendChild(
                 create(document, "toolbarbutton", {
                     class: "all-tabs-button subviewbutton subviewbutton-iconic",
@@ -527,15 +639,17 @@
             );
             button.tab = tab;
 
-            let secondaryButton = row.appendChild(
+            // audio button
+            let audioButton = row.appendChild(
                 create(document, "toolbarbutton", {
                     class: "all-tabs-secondary-button subviewbutton subviewbutton-iconic",
                     closemenu: "none",
                     "toggle-mute": "true",
                 })
             );
-            secondaryButton.tab = tab;
+            audioButton.tab = tab;
 
+            // close button
             let closeButton = row.appendChild(
                 create(document, "toolbarbutton", {
                     class: "all-tabs-secondary-button subviewbutton subviewbutton-iconic",
@@ -547,14 +661,24 @@
             this._setRowAttributes(row, tab);
             return row;
         }
+        /**
+         * for a given row/tab pair, set the row's attributes equal to the tab's.
+         * this gets invoked on various events whereupon we need to update a row's display
+         * @param {object} row (a row element)
+         * @param {object} tab (a tab element)
+         */
         _setRowAttributes(row, tab) {
+            // attributes to set on the row
             setAttributes(row, {
                 selected: tab.selected,
                 pinned: tab.pinned,
                 pending: tab.getAttribute("pending"),
                 multiselected: tab.getAttribute("multiselected"),
+                muted: tab.muted,
+                soundplaying: tab.soundPlaying,
                 notselectedsinceload: tab.getAttribute("notselectedsinceload"),
             });
+            // we need to use classes for the usercontext/container, since the built-in CSS that sets the identity color & icon uses classes, not attributes.
             if (tab.userContextId) {
                 let idColor = ContextualIdentityService.getPublicIdentityFromId(
                     tab.userContextId
@@ -568,6 +692,7 @@
                 row.removeAttribute("usercontextid");
             }
 
+            // set attributes on the main button, in particular the tab title and favicon.
             let busy = tab.getAttribute("busy");
             setAttributes(row.firstElementChild, {
                 busy,
@@ -578,15 +703,26 @@
 
             this._setImageAttributes(row, tab);
 
-            let secondaryButton = row.querySelector(".all-tabs-secondary-button");
-            setAttributes(secondaryButton, {
+            // decide which icon to display for the audio button, or whether it should be displayed at all.
+            let audioButton = row.querySelector(".all-tabs-secondary-button[toggle-mute]");
+            setAttributes(audioButton, {
                 muted: tab.muted,
                 soundplaying: tab.soundPlaying,
                 "activemedia-blocked": tab.activeMediaBlocked,
                 pictureinpicture: tab.pictureinpicture,
-                hidden: !(tab.muted || tab.soundPlaying || tab.activeMediaBlocked || tab.pictureinpicture),
+                hidden: !(
+                    tab.muted ||
+                    tab.soundPlaying ||
+                    tab.activeMediaBlocked ||
+                    tab.pictureinpicture
+                ),
             });
         }
+        /**
+         * show a throbber in place of the favicon while a tab is loading.
+         * @param {object} row (a row element)
+         * @param {object} tab (a row element)
+         */
         _setImageAttributes(row, tab) {
             let button = row.firstElementChild;
             let image = button.icon;
@@ -598,9 +734,20 @@
                 else image.classList.remove("tab-throbber-tabslist");
             }
         }
+        /**
+         * get the previous or next node for a given TreeWalker
+         * @param {object} walker (a TreeWalker object)
+         * @param {boolean} prev (whether to walk backwards or forwards)
+         * @returns the next eligible DOM node to focus
+         */
         getNewFocus(walker, prev) {
             return prev ? walker.previousNode() : walker.nextNode();
         }
+        /**
+         * cycle focus between buttons in the pane
+         * @param {boolean} prev (whether to go backwards or forwards)
+         * @param {boolean} horizontal (whether we're navigating with left/right or up/down)
+         */
         navigateButtons(prev, horizontal) {
             let walker = horizontal ? this.horizontalWalker : this.verticalWalker;
             let oldFocus = document.activeElement;
@@ -610,11 +757,22 @@
                 newFocus = this.getNewFocus(walker, prev);
             if (newFocus) this._focusButton(newFocus);
         }
+        /**
+         * make a DOM node focusable, focus it, and add a blur listener to it that'll revert its focusability when we're done focusing it.
+         * we have to do it this way since we don't want ALL the buttons to be focusable with tabs.
+         * it looks like you can focus them with tabs, but really you're just focusing the tab stops,
+         * which are set up to instantly focus the next/previous element. this way you only need to tab twice to get past the pane.
+         * if every button was tabbable then you'd have to press the tab key at least twice for every tab you have just to get to the browser content, perhaps hundreds of times.
+         * instead, tab only focuses the top buttons row and the lower tabs scrollbox. once one of those is focused, arrow keys cycle between buttons.
+         * @param {object} button (DOM node)
+         */
         _focusButton(button) {
             button.setAttribute("tabindex", "-1");
             button.focus();
             button.addEventListener("blur", this);
         }
+        // event callback when something is focused. prevent the pane from being collapsed while it's focused.
+        // also execute the tab stop behavior if a tab stop was focused.
         _onFocus(e) {
             clearTimeout(this.hoverOutTimer);
             clearTimeout(this.hoverTimer);
@@ -624,13 +782,15 @@
                 this.pane.setAttribute("expanded", true);
             if (e.target.tagName === "toolbartabstop") this._onTabStopFocus(e);
         }
+        // invoked on a blur event. if the pane is no longer focused or hovered, and it's unpinned, prepare to collapse it.
         _onPaneBlur(e) {
             if (this.pane.matches(":is(:hover, :focus-within)")) return;
             clearTimeout(this.hoverOutTimer);
             clearTimeout(this.hoverTimer);
             this.hoverOutQueued = false;
             this.hoverQueued = false;
-            if (this.noExpand) return this.pane.removeAttribute("expanded");
+            if (this.noExpand) return this.pane.removeAttribute("expanded"); // if the pane is set to not expand, forget about all this.
+            // if the pane was blurred because a context menu was opened, defer this behavior until the context menu is hidden.
             let popNode = document.popupNode;
             if (popNode && this.pane.contains(popNode)) {
                 let contextDef = popNode.closest("[context]");
@@ -650,11 +810,17 @@
             }
             this.pane.removeAttribute("expanded");
         }
+        // if a button was blurred, make it un-tabbable again.
         _onButtonBlur(e) {
             if (document.activeElement == e.target) return;
             e.target.removeEventListener("blur", this);
             e.target.removeAttribute("tabindex");
         }
+        // this one is pretty complicated. if a tab stop was focused, we need to pass focus to the next eligible element.
+        // the only truly focusable elements in the pane are tab stops. but the first button after a tab stop receives focus from the tab stop.
+        // then the buttons that come after it can be focused with arrow keys. but we also need to check if user is tabbing *out* of the pane,
+        // and pass focus to the next eligible button outside of the pane (probably a button)
+        // see browser-toolbarKeyNav.js for more details on this concept.
         _onTabStopFocus(e) {
             let walker = this.horizontalWalker;
             let oldFocus = e.relatedTarget;
@@ -695,6 +861,7 @@
             }
             this._focusButton(button);
         }
+        // when a key is pressed, navigate the focus (or remove it for esc key)
         _onKeyDown(e) {
             let accelKey = AppConstants.platform == "macosx" ? e.metaKey : e.ctrlKey;
             if (e.altKey || e.shiftKey || accelKey) return;
@@ -723,6 +890,8 @@
             }
             e.preventDefault();
         }
+        // when you left-click a tab, the first thing that happens is selection. this happens on mouse down, not on mouse up.
+        // if holding shift key or ctrl key, perform multiselection operations. otherwise, just select the clicked tab.
         _onMouseDown(e, tab) {
             if (e.button !== 0) return;
             let accelKey = AppConstants.platform == "macosx" ? e.metaKey : e.ctrlKey;
@@ -757,6 +926,8 @@
                 }
             }
         }
+        // when the mouse is released, clear the multiselection and perform some drag/drop cleanup.
+        // if middle mouse button was clicked, then close the tab, but first warm up the next tab that will be selected.
         _onMouseUp(e, tab) {
             if (e.button === 2) return;
             if (e.button === 1) {
@@ -774,6 +945,7 @@
             gBrowser.unlockClearMultiSelection();
             gBrowser.clearMultiSelectedTabs();
         }
+        // when mouse enters the pane, prepare to expand the pane after the specified delay.
         _onMouseEnter(e) {
             clearTimeout(this.hoverOutTimer);
             this.hoverOutQueued = false;
@@ -786,6 +958,7 @@
                 this.pane.setAttribute("expanded", true);
             }, this.hoverDelay);
         }
+        // when mouse leaves the pane, prepare to collapse the pane...
         _onMouseLeave(e) {
             clearTimeout(this.hoverTimer);
             this.hoverQueued = false;
@@ -795,6 +968,8 @@
                 this.hoverOutQueued = false;
                 if (this.pane.matches(":is(:hover, :focus-within)")) return;
                 if (this.noExpand) return this.pane.removeAttribute("expanded");
+                // again, don't collapse the pane yet if the mouse left because a context menu was opened on the pane.
+                // wait until the context menu is closed before collapsing the pane.
                 let popNode = document.popupNode;
                 if (popNode && this.pane.contains(popNode)) {
                     let contextDef = popNode.closest("[context]");
@@ -817,10 +992,13 @@
                 this.pane.removeAttribute("expanded");
             }, this.hoverOutDelay);
         }
+        // "click" events work kind of like "mouseup" events, but in this case we're only using this to prevent the click event yielding a command event.
         _onClick(e) {
             if (e.button !== 0 || e.target.classList.contains("all-tabs-secondary-button")) return;
             e.preventDefault();
         }
+        // "command" events happen on click or on spacebar/enter. we want the buttons to be keyboard accessible too.
+        // so this is how the mute button and close button work, and ultimately how you select a tab with the keyboard.
         _onCommand(e, tab) {
             if (e.target.hasAttribute("toggle-mute")) {
                 tab.multiselected
@@ -837,6 +1015,7 @@
                 if (tab !== gBrowser.selectedTab) this._selectTab(tab);
             delete tab.noCanvas;
         }
+        // invoked on "dragstart" event. first figure out what we're dragging and set a drag image.
         _onDragStart(e, tab) {
             let row = e.target;
             if (!tab || gBrowser.tabContainer._isCustomizing) return;
@@ -919,6 +1098,8 @@
             };
             e.stopPropagation();
         }
+        // invoked when we drag over an element inside the pane.
+        // decide whether to show the drag-over styling on a row, and whether to show the drag indicator above or below the row.
         _onDragOver(e) {
             let row = this.findRow(e.target);
             let dt = e.dataTransfer;
@@ -935,6 +1116,8 @@
             row.setAttribute("dragpos", position);
             e.preventDefault();
         }
+        // invoked when we drag over an element then leave it. clean up the dragpos attribute.
+        // we actually do this for every row (wasteful, I know) since these events are dispatched too slowly. I guess it's a firefox bug, idk.
         _onDragLeave(e) {
             let row = this.findRow(e.target);
             let dt = e.dataTransfer;
@@ -943,6 +1126,7 @@
                 .querySelectorAll("[dragpos]")
                 .forEach((item) => item.removeAttribute("dragpos"));
         }
+        // invoked when we finally release the dragged tab(s). figure out where to move the tab to, move it, do some cleanup.
         _onDrop(e) {
             let row = this.findRow(e.target);
             let dt = e.dataTransfer;
@@ -978,30 +1162,39 @@
             row.removeAttribute("dragpos");
             e.stopPropagation();
         }
+        // invoked when dragging ends, whether by dropping or by exiting. just cleans up after the other drag event handlers.
         _onDragEnd(e) {
             let draggedTab = e.dataTransfer.mozGetDataAt("all-tabs-item", 0);
             delete draggedTab._dragData;
             delete draggedTab.noCanvas;
             for (let row of this.rows) row.removeAttribute("dragpos");
         }
+        // callback function for the TabMultiSelect custom event. this event doesn't get dispatched to a specific tab,
+        // because multiple tabs can be multiselected by the same operation. so we can't use its target to specify which row's attributes to change.
+        // we therefore have to update the "multiselected" attribute for every row.
         _onTabMultiSelect() {
             for (let item of this.rows)
                 !!item.tab.multiselected
                     ? item.setAttribute("multiselected", true)
                     : item.removeAttribute("multiselected");
         }
+        // invoked when mousing over a row. we want to speculatively warm up a tab when the user hovers it since it's possible they will click it.
+        // there's a cache for this with a maximum limit, so if the user mouses over 3 tabs without clicking them, then a 4th, it will clear the 1st to make room.
+        // this is the same thing the built-in tab bar does so we're just mimicking vanilla behavior here. this can be disabled with browser.tabs.remote.warmup.enabled
         _warmupRowTab(e, tab) {
-            let row = e.target.closest(".all-tabs-item");
+            let row = this.findRow(e.target);
             SessionStore.speculativeConnectOnTabHover(tab);
             if (row.querySelector("[close-button]").matches(":hover"))
                 tab = gBrowser._findTabToBlurTo(tab);
             gBrowser.warmupTab(tab);
         }
+        // generate tooltip labels and decide where to anchor the tooltip. invoked when the vertical-tabs-tooltip is about to be shown.
         createTabTooltip(e) {
             e.stopPropagation();
-            let row = document.tooltipNode ? document.tooltipNode.closest(".all-tabs-item") : null;
+            let row = document.tooltipNode ? this.findRow(document.tooltipNode) : null;
             let { tab } = row;
             if (!row || !tab) return e.preventDefault();
+            // get a localized string, replace any plural variables with the passed number, and add a shortcut string (e.g. Ctrl+M) matching the passed key element ID.
             let stringWithShortcut = (stringId, keyElemId, pluralCount) => {
                 let keyElem = document.getElementById(keyElemId);
                 let shortcut = ShortcutUtils.prettifyShortcut(keyElem);
@@ -1010,10 +1203,11 @@
                     .replace("#1", pluralCount);
             };
             let label;
-            let align = true;
+            let align = true; // should we align to the tab or to the mouse? depends on which element was hovered.
             const selectedTabs = gBrowser.selectedTabs;
             const contextTabInSelection = selectedTabs.includes(tab);
             const affectedTabsLength = contextTabInSelection ? selectedTabs.length : 1;
+            // a bunch of localization
             if (row.querySelector("[close-button]").matches(":hover")) {
                 let shortcut = ShortcutUtils.prettifyShortcut(key_close);
                 label = PluralForm.get(
@@ -1047,6 +1241,7 @@
                 align = false;
             } else {
                 label = tab._fullLabel || tab.getAttribute("label");
+                // show the tab's process ID in the tooltip?
                 if (Services.prefs.getBoolPref("browser.tabs.tooltipsShowPidAndActiveness", false))
                     if (tab.linkedBrowser) {
                         let [contentPid, ...framePids] = this.E10SUtils.getBrowserPids(
@@ -1063,6 +1258,7 @@
                         }
                         if (tab.linkedBrowser.docShellIsActive) label += " [A]";
                     }
+                // add the container name to the tooltip?
                 if (tab.userContextId) {
                     label = gTabBrowserBundle.formatStringFromName("tabs.containers.tooltip", [
                         label,
@@ -1070,7 +1266,10 @@
                     ]);
                 }
             }
+            // browser.proton.places-tooltip.enabled should be set to true for best results.
+            // regular tab tooltip is pretty lame.
             if (!gProtonPlacesTooltip) return e.target.setAttribute("label", label);
+            // align to the row
             if (align) {
                 e.target.setAttribute("position", "after_start");
                 e.target.moveToAnchor(row, "after_start");
@@ -1080,8 +1279,10 @@
             let icon = e.target.querySelector("#places-tooltip-insecure-icon");
             title.textContent = label;
             url.value = tab.linkedBrowser?.currentURI?.spec.replace(/^https:\/\//, "");
-            icon.hidden = !url.value.startsWith("http://");
+            icon.hidden = !url.value.startsWith("http://"); // show an insecure lock icon if scheme is unencrypted
         }
+        // container tab settings affect what we need to show in the "New Tab" button's tooltip and context menu.
+        // so we need to observe this preference and respond accordingly.
         handlePrivacyChange() {
             let containersEnabled =
                 prefSvc.getBoolPref("privacy.userContext.enabled") &&
@@ -1114,6 +1315,7 @@
             gDynamicTooltipCache.delete("new-tab-button");
             this.newTabButton.tooltipText = GetDynamicShortcutTooltipText("new-tab-button");
         }
+        // load our stylesheet as an author sheet. override it with userChrome.css and !important rules.
         registerSheet() {
             let css = `
 :root {
@@ -1338,6 +1540,37 @@
     opacity: 0.7;
     margin-inline-start: -2px;
 }
+#vertical-tabs-pane[unpinned][no-expand]:not([expanded])
+    .all-tabs-item:is([muted], [soundplaying])
+    .all-tabs-button:after {
+    content: "";
+    display: block;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 14px;
+    height: 14px;
+    -moz-context-properties: fill, fill-opacity;
+    fill: currentColor;
+    fill-opacity: 0.7;
+}
+#vertical-tabs-pane[unpinned][no-expand]:not([expanded])
+    .all-tabs-item[soundplaying]
+    .all-tabs-button:after {
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 18 18"><path fill="context-fill" d="M3.52,5.367c-1.332,0-2.422,1.09-2.422,2.422v2.422c0,1.332,1.09,2.422,2.422,2.422h1.516l4.102,3.633 V1.735L5.035,5.367H3.52z M12.059,9c0-0.727-0.484-1.211-1.211-1.211v2.422C11.574,10.211,12.059,9.727,12.059,9z M14.48,9 c0-1.695-1.211-3.148-2.785-3.512l-0.363,1.09C12.422,6.82,13.27,7.789,13.27,9c0,1.211-0.848,2.18-1.938,2.422l0.484,1.09 C13.27,12.148,14.48,10.695,14.48,9z M12.543,3.188l-0.484,1.09C14.238,4.883,15.691,6.82,15.691,9c0,2.18-1.453,4.117-3.512,4.601 l0.484,1.09c2.422-0.605,4.238-2.906,4.238-5.691C16.902,6.215,15.086,3.914,12.543,3.188z"/></svg>') center/12px no-repeat;
+}
+#vertical-tabs-pane[unpinned][no-expand]:not([expanded])
+    .all-tabs-item[muted]
+    .all-tabs-button:after {
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 18 18"><path fill="context-fill" d="M3.52,5.367c-1.332,0-2.422,1.09-2.422,2.422v2.422c0,1.332,1.09,2.422,2.422,2.422h1.516l4.102,3.633V1.735L5.035,5.367H3.52z"/><path fill="context-fill" fill-rule="evenodd" d="M12.155,12.066l-1.138-1.138l4.872-4.872l1.138,1.138 L12.155,12.066z"/><path fill="context-fill" fill-rule="evenodd" d="M10.998,7.204l1.138-1.138l4.872,4.872l-1.138,1.138L10.998,7.204z"/></svg>') center/12px no-repeat;
+}
+#vertical-tabs-pane[unpinned][no-expand]:not([expanded])
+    .all-tabs-item:is([muted], [soundplaying])
+    .all-tabs-button
+    .toolbarbutton-icon {
+    mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><circle cx="100%" cy="100%" r="9"/></svg>') 0/100% 100%, linear-gradient(#fff, #fff);
+    mask-composite: exclude;
+}
 #vertical-tabs-list .all-tabs-item .all-tabs-secondary-button[close-button] {
     fill-opacity: 0;
     transform: translateX(14px);
@@ -1474,9 +1707,13 @@
                 Ci.nsIStyleSheetService
             );
             let uri = makeURI("data:text/css;charset=UTF=8," + encodeURIComponent(css));
-            if (sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) return;
+            if (sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) return; // avoid loading duplicate sheets on subsequent window launches.
             sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
         }
+        // there's a firefox bug where menuitems in the tab context menu don't have their localized labels initialized until the menu is opened on the *actual* tab bar.
+        // this bug actually affects the all-tabs menu but would affect anything trying to use the tab context menu that isn't the real tab bar.
+        // so we de-lazify the l10n IDs ourselves. lazy IDs are used for things that don't need to be managed at startup,
+        // but since we're increasing the number of elements that use this context menu, it's now pertinent to do this at startup.
         l10nIfNeeded() {
             let lazies = document
                 .getElementById("tabContextMenu")
@@ -1489,6 +1726,7 @@
                 });
             }
         }
+        // what to do when a window is closed. if it's the last window, record data about the pane's state to the xulStore and prefs.
         uninit() {
             let enumerator = Services.wm.getEnumerator("navigator:browser");
             if (!enumerator.hasMoreElements()) {
@@ -1503,17 +1741,21 @@
         }
     }
 
+    // invoked when delayed window startup has finished, in other words after important components have been fully inited.
     function init() {
-        window.verticalTabsPane = new VerticalTabsPaneBase();
-        SidebarUI.setPosition();
+        window.verticalTabsPane = new VerticalTabsPaneBase(); // instantiate our tabs pane
+        SidebarUI.setPosition(); // set the sidebar position again since we modified this function, probably after it already set the position
+        // change the onUnload function (invoked when window is closed) so that it calls our uninit function too.
         eval(
             `gBrowserInit.onUnload = function ` +
                 gBrowserInit.onUnload
                     .toSource()
                     .replace(/(SidebarUI\.uninit\(\))/, `$1; verticalTabsPane.uninit()`)
         );
-        window.onunload = gBrowserInit.onUnload.bind(gBrowserInit);
-        let gNextWindowID = 0;
+        window.onunload = gBrowserInit.onUnload.bind(gBrowserInit); // reset the event handler since it used the bind method, which creates an anonymous version of the function that we can't change. just re-bind our new version.
+        let gNextWindowID = 0; // required for the following functions
+        // make the PictureInPicture methods dispatch an event to the tab container informing us that a tab's "pictureinpicture" attribute has changed.
+        // this is how we capture all changes to the sound icon in real-time. this behavior isn't built-in, I guess for sake of brevity.
         let handleRequestSrc = PictureInPicture.handlePictureInPictureRequest.toSource();
         if (!handleRequestSrc.includes("_tabAttrModified"))
             eval(
@@ -1540,12 +1782,15 @@
             );
     }
 
+    // create the main button that goes in the tabs toolbar and opens the pane.
     function makeWidget() {
+        // if you create a widget in the first window, it will automatically be created in subsequent videos.
+        // so we stop the script from re-registering it on every subsequent window load.
         if (CustomizableUI.getPlacementOfWidget("vertical-tabs-button", true)) return;
         CustomizableUI.createWidget({
             id: "vertical-tabs-button",
             type: "button",
-            defaultArea: CustomizableUI.AREA_TABSTRIP,
+            defaultArea: CustomizableUI.AREA_TABSTRIP, // it should go in the tabs toolbar by default but can be moved to any customizable toolbar.
             label: config.l10n["Button label"],
             tooltiptext: config.l10n["Button tooltip"],
             localized: false,
@@ -1553,6 +1798,8 @@
                 e.target.ownerGlobal.verticalTabsPane.toggle();
             },
             onCreated(node) {
+                // an <observes> element is how we get the button to appear "checked" when the tabs pane is checked.
+                // it automatically sets its parent's specified attribute ("checked" and "positionstart") to match that of whatever it's observing.
                 let doc = node.ownerDocument;
                 node.appendChild(
                     create(doc, "observes", {
@@ -1570,6 +1817,7 @@
         });
     }
 
+    // make the main elements
     document.getElementById("sidebar-splitter").after(
         create(document, "splitter", {
             class: "chromeclass-extrachrome sidebar-splitter",
@@ -1613,6 +1861,7 @@
         if (content && content.updatePosition) content.updatePosition();
     };
 
+    // wait for delayed startup for some parts of the script to execute.
     if (gBrowserInit.delayedStartupFinished) init();
     else {
         let delayedListener = (subject, topic) => {

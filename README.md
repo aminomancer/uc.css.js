@@ -301,7 +301,8 @@ By default, the pane is resizable just like the sidebar is. And like the pane in
 Like the sidebar, the state of the pane is stored between windows and recorded in preferences. There's no need to edit these preferences directly, but there are a few other preferences that are meant to be edited in about:config. If you search `userChrome.tabs.verticalTabsPane` in about:config you'll find all of the preferences already set to their default values.
 
 - `reverse-order` changes the direction of the pane so that newer tabs are displayed on top rather than on bottom.
-- `no-expand-on-hover` prevents the pane from expanding on hover when it's collapsed. Normally the pane collapses and then temporarily expands if you hover it, after a delay of 100ms. Then when your mouse leaves the pane, it collapses again, after a delay of 100ms.
+- `no-expand-on-hover` prevents the pane from expanding on hover when it's collapsed. With this pref, the pane never shows tab labels since it remains very thin at all times. However, you can still see the tab's title, since it shows a tooltip when you hover a tab. It won't show the close button either, but you can close tabs in the pane by middle-clicking them. Nor will it show the mute/unmute button, but it will show an icon so you can see if a tab is muted or playing audio, and you can still toggle mute by right-clicking a tab to open the context menu.
+- Normally the pane collapses and then temporarily expands if you hover it, after a delay of 100ms. Then when your mouse leaves the pane, it collapses again, after a delay of 100ms.
 - Both of these delays can be changed with the `hover-delay` and `hover-out-delay` prefs.
 - For languages other than English, the labels and tooltips can be modified directly in the `l10n` object in the script.
 
