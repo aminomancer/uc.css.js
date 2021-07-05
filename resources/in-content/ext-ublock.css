@@ -6,11 +6,11 @@
         :root {
             --bg-1: hsla(250, 13%, 9%, 1) !important;
             --bg-1-border: hsla(250, 13%, 16%, 1) !important;
-            --bg-overlay-50: #0008 !important;
-            --link-ink: #bb86fc !important;
-            --checkbox-checked-ink: #bb86fc !important;
-            --dashboard-tab-active-ink: #bb86fc !important;
-            --fg-icon-info-lvl-0-dimmed: #888 !important;
+            --bg-overlay-50: hsla(0, 0%, 0%, 0.5) !important;
+            --link-ink: hsl(266.9, 95.2%, 75.7%) !important;
+            --checkbox-checked-ink: hsl(266.9, 95.2%, 75.7%) !important;
+            --dashboard-tab-active-ink: hsl(266.9, 95.2%, 75.7%) !important;
+            --fg-icon-info-lvl-0-dimmed: hsl(0, 0%, 53.3%) !important;
             --fg-icon-info-lvl-1-dimmed: hsla(258, 57%, 35%, 1) !important;
             --fg-icon-info-lvl-1: hsla(258, 66%, 48%, 1) !important;
             --fg-icon-info-lvl-3: hsla(16, 100%, 50%, 1) !important;
@@ -23,7 +23,7 @@
             --bg-popup-cell-block: hsla(0, 50%, 80%, 1) !important;
             --bg-popup-cell-block-own: hsla(0, 100%, 40%, 1) !important;
             --bg-popup-cell-label-mixed: hsla(45, 100%, 38%, 1) !important;
-            --popup-icon-x-ink: #e22850 !important;
+            --popup-icon-x-ink: hsl(347.1, 76.2%, 52.2%) !important;
             --default-ink: var(--light-gray-10) !important;
             --default-ink-a4: var(--light-gray-10-a4) !important;
             --default-ink-a50: var(--light-gray-30-a50) !important;
@@ -116,7 +116,7 @@
             }
         }
 
-        button:not(.disabled):not([disabled]) {
+        button:not(.disabled, [disabled]) {
             cursor: pointer !important;
         }
 

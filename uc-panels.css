@@ -305,7 +305,7 @@ panel[type="arrow"][side="top"] {
 }
 
 .popup-notification-button-container
-    > .popup-notification-primary-button:not([disabled]):not([disabled], :active):is(:hover, :focus-visible) {
+    > .popup-notification-primary-button:not([disabled], :active):is(:hover, :focus-visible) {
     background-color: var(--button-primary-hover-bgcolor) !important;
 }
 

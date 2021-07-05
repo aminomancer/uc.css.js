@@ -143,7 +143,8 @@
 }
 
 /* highlight unread tabs; requires italicizeUnreadTabs.uc.js */
-:root[italic-unread-tabs] .tabbrowser-tab[notselectedsinceload]:not([pending]:not([busy])) {
+:root[italic-unread-tabs] .tabbrowser-tab[notselectedsinceload]:not([pending]),
+:root[italic-unread-tabs] .tabbrowser-tab[notselectedsinceload][pending][busy] {
     font-style: italic !important;
 }
 
@@ -594,14 +595,14 @@ so shadows are cast in both directions, unless the neighboring tab is selected o
 }
 
 .tabbrowser-tab:not([pinned]):is(:hover, .keyboard-focused-tab)
-    .tab-close-button:not(:hover):not(:active),
+    .tab-close-button:not(:hover, :active),
 #tabbrowser-tabs[movingtab]
     .tabbrowser-tab[pinned][last-visible-tab]:is(:hover, .keyboard-focused-tab)
-    .tab-close-button:not(:hover):not(:active),
+    .tab-close-button:not(:hover, :active),
 .tabbrowser-tab[pinned][last-visible-tab]:is([justmoved], [tab-grouping], [tabdrop-samewindow])
     .tab-close-button,
 .tabbrowser-tab[pinned][last-visible-tab]:is([justmoved], [tab-grouping], [tabdrop-samewindow]):is(:hover, .keyboard-focused-tab)
-    .tab-close-button:not(:hover):not(:active) {
+    .tab-close-button:not(:hover, :active) {
     opacity: 0.6 !important;
 }
 

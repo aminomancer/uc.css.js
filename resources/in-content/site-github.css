@@ -206,3 +206,7 @@ which requires Stylus. don't use this stylesheet if you don't have that theme, i
         background: hsla(0, 0%, 100%, 0.9) !important;
     }
 }
+
+.gitzip-check-mark {
+    color: white !important;
+}

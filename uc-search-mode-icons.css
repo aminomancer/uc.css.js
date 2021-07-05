@@ -1,6 +1,24 @@
 /* this does nothing on its own — it requires searchModeIndicatorIcons.uc.js.
 when you switch to a one-off search engine in the urlbar, or otherwise enable search mode,
-this changes the identity icon to one matching the search engine. */
+this changes the identity icon to one matching the search engine.
+I recommend using this addon to add new search engines:
+https://addons.mozilla.org/en-US/firefox/addon/add-custom-search-engine */
+
+/* for search engines I haven't added icons for, use a search glass icon.
+if you want to request an icon for a search engine you use,
+send me the engine name (the name that shows up in the identity box label when you enter search mode with it)
+and the URL to the search engine so I can find a suitable icon and set a rule for it. */
+#urlbar[searchmode=""][pageproxystate="invalid"]
+    #identity-box
+    #identity-icon-box[engine="Other"]
+    #identity-icon,
+#urlbar[searchmode=""][pageproxystate="valid"]
+    #identity-box
+    #identity-icon-box[engine="Other"]
+    #identity-icon,
+#urlbar[searchmode=""] #identity-icon-box[engine="Other"] #identity-icon {
+    list-style-image: url(chrome://userchrome/content/search-glass.svg) !important;
+}
 
 /* built-in history, tabs, bookmarks pseudo-engines */
 #urlbar[pageproxystate="invalid"] #identity-box #identity-icon-box[engine="History"] #identity-icon,
@@ -32,21 +50,66 @@ this changes the identity icon to one matching the search engine. */
     list-style-image: url(chrome://userchrome/content/engines/google.svg) !important;
 }
 
-/* for google images */
-#urlbar[pageproxystate="invalid"] #identity-box #identity-icon-box[engine="Google Images"] #identity-icon,
-#urlbar[pageproxystate="valid"] #identity-box #identity-icon-box[engine="Google Images"] #identity-icon,
+/* duckduckgo */
+#urlbar[pageproxystate="invalid"]
+    #identity-box
+    #identity-icon-box:is([engine="DuckDuckGo"], [engine="DuckDuckGo Search"])
+    #identity-icon,
+#urlbar[pageproxystate="valid"]
+    #identity-box
+    #identity-icon-box:is([engine="DuckDuckGo"], [engine="DuckDuckGo Search"])
+    #identity-icon,
+#identity-icon-box:is([engine="DuckDuckGo"], [engine="DuckDuckGo Search"]) #identity-icon {
+    list-style-image: url(chrome://userchrome/content/engines/duckduckgo.svg) !important;
+}
+
+/* bing */
+#urlbar[pageproxystate="invalid"]
+    #identity-box
+    #identity-icon-box:is([engine="Bing"], [engine="Bing Search"])
+    #identity-icon,
+#urlbar[pageproxystate="valid"]
+    #identity-box
+    #identity-icon-box:is([engine="Bing"], [engine="Bing Search"])
+    #identity-icon,
+#identity-icon-box:is([engine="Bing"], [engine="Bing Search"]) #identity-icon {
+    list-style-image: url(chrome://userchrome/content/engines/bing.svg) !important;
+}
+
+/* baidu */
+#urlbar[pageproxystate="invalid"]
+    #identity-box
+    #identity-icon-box:is([engine="Baidu"], [engine="Baidu Search"], [engine="百度"])
+    #identity-icon,
+#urlbar[pageproxystate="valid"]
+    #identity-box
+    #identity-icon-box:is([engine="Baidu"], [engine="Baidu Search"], [engine="百度"])
+    #identity-icon,
+#identity-icon-box:is([engine="Baidu"], [engine="Baidu Search"], [engine="百度"]) #identity-icon {
+    list-style-image: url(chrome://userchrome/content/engines/baidu.svg) !important;
+}
+
+/* google images */
+#urlbar[pageproxystate="invalid"]
+    #identity-box
+    #identity-icon-box[engine="Google Images"]
+    #identity-icon,
+#urlbar[pageproxystate="valid"]
+    #identity-box
+    #identity-icon-box[engine="Google Images"]
+    #identity-icon,
 #identity-icon-box[engine="Google Images"] #identity-icon {
     list-style-image: url(chrome://userchrome/content/notifications/canvas.svg) !important;
 }
 
-/* for youtube */
+/* youtube */
 #urlbar[pageproxystate="invalid"] #identity-box #identity-icon-box[engine="YouTube"] #identity-icon,
 #urlbar[pageproxystate="valid"] #identity-box #identity-icon-box[engine="YouTube"] #identity-icon,
 #identity-icon-box[engine="YouTube"] #identity-icon {
     list-style-image: url(chrome://userchrome/content/engines/youtube.svg) !important;
 }
 
-/* for porn */
+/* porn */
 #urlbar[pageproxystate="invalid"] #identity-box #identity-icon-box[engine="XVIDEOS"] #identity-icon,
 #urlbar[pageproxystate="valid"] #identity-box #identity-icon-box[engine="XVIDEOS"] #identity-icon,
 #identity-icon-box[engine="XVIDEOS"] #identity-icon {

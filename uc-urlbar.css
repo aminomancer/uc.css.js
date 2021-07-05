@@ -155,7 +155,7 @@ toolbarpaletteitem[place="palette"] > #search-container {
 
 :not(.urlbar-icon-wrapper) > .urlbar-icon,
 .urlbar-icon-wrapper {
-	background-color: transparent !important;
+    background-color: transparent !important;
 }
 
 :not(.urlbar-icon-wrapper) > .urlbar-icon:not([disabled]):is(:hover, :focus-visible, [open]),
@@ -165,17 +165,20 @@ toolbarpaletteitem[place="palette"] > #search-container {
 }
 
 #star-button-box:not(:hover, :focus-visible, [open]) #star-button[starred] {
-	fill-opacity: var(--urlbar-icon-fill-opacity) !important;
-	fill: currentColor !important;
+    fill-opacity: var(--urlbar-icon-fill-opacity) !important;
+    fill: currentColor !important;
 }
 
 #star-button[starred][animate] {
     visibility: hidden;
 }
 
-#star-button-box:not(:hover, :focus-visible, [open]) #star-button[starred][animate] + #star-button-animatable-box > #star-button-animatable-image {
+#star-button-box:not(:hover, :focus-visible, [open])
+    #star-button[starred][animate]
+    + #star-button-animatable-box
+    > #star-button-animatable-image {
     opacity: var(--urlbar-icon-fill-opacity) !important;
-	fill: currentColor !important;
+    fill: currentColor !important;
     stroke: currentColor !important;
 }
 
@@ -199,9 +202,9 @@ but CSS hides it faster and avoids flickering.
 */
 @supports (-moz-bool-pref("userChrome.urlbar.hide-bookmarks-button-on-system-pages")) {
     #tracking-protection-icon-container:is([hidden], :not([aria-label]))
-    ~ #identity-box:not(.chromeUI)
-    ~ #page-action-buttons
-    > :is(#star-button-box, #pageAction-urlbar-screenshot) {
+        ~ #identity-box:not(.chromeUI)
+        ~ #page-action-buttons
+        > :is(#star-button-box, #pageAction-urlbar-screenshot) {
         visibility: collapse;
     }
 }
@@ -475,11 +478,18 @@ toolbarpaletteitem[removable="false"]
 }
 
 :root[hide-tp-icon-on-ntp]:not([customizing])
-    #urlbar:not([searchmode], [actiontype="switchtab"]:not([actionoverride="true"]))
+    #urlbar:not([searchmode], [actiontype="switchtab"])
     #tracking-protection-icon-container[hidden]
     ~ #identity-box:not(.chromeUI),
 :root[hide-tp-icon-on-ntp]:not([customizing])
-    #urlbar[pageproxystate="invalid"]:not([searchmode], [actiontype="switchtab"]:not([actionoverride="true"]))
+    #urlbar:not([searchmode])[actiontype="switchtab"][actionoverride="true"]
+    #tracking-protection-icon-container[hidden]
+    ~ #identity-box:not(.chromeUI),
+:root[hide-tp-icon-on-ntp]:not([customizing])
+    #urlbar[pageproxystate="invalid"]:not([searchmode], [actiontype="switchtab"])
+    #identity-box,
+:root[hide-tp-icon-on-ntp]:not([customizing])
+    #urlbar[pageproxystate="invalid"]:not([searchmode])[actiontype="switchtab"][actionoverride="true"]
     #identity-box {
     padding: 0 !important;
     margin: 0 !important;
@@ -488,24 +498,42 @@ toolbarpaletteitem[removable="false"]
 }
 
 :root[hide-tp-icon-on-ntp]:not([customizing])
-    #urlbar:not([searchmode], [actiontype="switchtab"]:not([actionoverride="true"]))
+    #urlbar:not([searchmode], [actiontype="switchtab"])
     #tracking-protection-icon-container[hidden]:not([view-source])
     ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage, .unknownIdentity)[pageproxystate="valid"]
     #identity-icon-box,
 :root[hide-tp-icon-on-ntp]:not([customizing])
-    #urlbar[pageproxystate="invalid"]:not([searchmode], [actiontype="switchtab"]:not([actionoverride="true"]))
+    #urlbar:not([searchmode])[actiontype="switchtab"][actionoverride="true"]
+    #tracking-protection-icon-container[hidden]:not([view-source])
+    ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage, .unknownIdentity)[pageproxystate="valid"]
+    #identity-icon-box,
+:root[hide-tp-icon-on-ntp]:not([customizing])
+    #urlbar[pageproxystate="invalid"]:not([searchmode], [actiontype="switchtab"])
+    #identity-box:not(.httpsOnlyErrorPage, .unknownIdentity)
+    #identity-icon-box,
+:root[hide-tp-icon-on-ntp]:not([customizing])
+    #urlbar[pageproxystate="invalid"]:not([searchmode])[actiontype="switchtab"][actionoverride="true"]
     #identity-box:not(.httpsOnlyErrorPage, .unknownIdentity)
     #identity-icon-box {
     pointer-events: none !important;
 }
 
 :root[hide-tp-icon-on-ntp]:not([customizing])
-    #urlbar:not([searchmode], [actiontype="switchtab"]:not([actionoverride="true"]))
+    #urlbar:not([searchmode], [actiontype="switchtab"])
     #tracking-protection-icon-container[hidden]
     ~ #identity-box:not(.chromeUI, .httpsOnlyErrorPage, .unknownIdentity)
     #identity-icon-box,
 :root[hide-tp-icon-on-ntp]:not([customizing])
-    #urlbar[pageproxystate="invalid"]:not([searchmode], [actiontype="switchtab"]:not([actionoverride="true"]))
+    #urlbar:not([searchmode])[actiontype="switchtab"][actionoverride="true"]
+    #tracking-protection-icon-container[hidden]
+    ~ #identity-box:not(.chromeUI, .httpsOnlyErrorPage, .unknownIdentity)
+    #identity-icon-box,
+:root[hide-tp-icon-on-ntp]:not([customizing])
+    #urlbar[pageproxystate="invalid"]:not([searchmode], [actiontype="switchtab"])
+    #identity-box:not(.httpsOnlyErrorPage, .unknownIdentity)
+    #identity-icon-box,
+:root[hide-tp-icon-on-ntp]:not([customizing])
+    #urlbar[pageproxystate="invalid"]:not([searchmode])[actiontype="switchtab"][actionoverride="true"]
     #identity-box:not(.httpsOnlyErrorPage, .unknownIdentity)
     #identity-icon-box {
     margin-inline: 2px -3px !important;
@@ -530,7 +558,7 @@ toolbarpaletteitem[removable="false"]
     ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage, .unknownIdentity)
     > #identity-icon-box
     ~ #notification-popup-box:not([open="true"])
-    > :is(image, stack):not(:hover, :focus-visible){
+    > :is(image, stack):not(:hover, :focus-visible) {
     fill-opacity: 0.4 !important;
 }
 
@@ -683,7 +711,7 @@ toolbarpaletteitem[removable="false"]
     ~ #identity-box[pageproxystate="valid"].notSecure:not(.chromeUI, .localResource)
     #identity-icon {
     fill-opacity: var(--urlbar-icon-fill-opacity) !important;
-    list-style-image: url(chrome://userchrome/content/engines/google.svg) !important;
+    list-style-image: var(--default-search-identity-icon) !important;
 }
 
 :root[customizing] #wrapper-urlbar-container[removable="false"] {
@@ -725,7 +753,8 @@ toolbarpaletteitem[removable="false"]
     display: none !important;
 }
 
-#urlbar #identity-box
+#urlbar
+    #identity-box
     :is(.sharing-icon, .notification-anchor-icon, #permissions-granted-icon, .blocked-permission-icon) {
     margin-inline-start: 5px !important;
 }
@@ -829,7 +858,7 @@ toolbarpaletteitem[removable="false"]
     fill-opacity: var(--urlbar-icon-fill-opacity) !important;
 }
 
-#identity-box:hover:not(.no-hover):not([open="true"]),
+#identity-box:hover:not(.no-hover, [open="true"]),
 #notification-popup-box:hover,
 #tracking-protection-icon-container:hover:not([open="true"]) {
     background-color: unset !important;

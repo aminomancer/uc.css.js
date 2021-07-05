@@ -491,7 +491,7 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
 #DateTimePickerPanel {
     --arrowpanel-background: var(--in-content-box-background) !important;
     --arrowpanel-color: var(--lwt-text-color) !important;
-    --arrowpanel-border-color: var(--in-content-box-background) !important;
+    --arrowpanel-border-color: var(--menu-border-color) !important;
 }
 
 @-moz-document url-prefix("chrome://global/content/timepicker.xhtml"),
@@ -499,11 +499,12 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
 {
     body {
         background-color: var(--in-content-box-background) !important;
+        color: var(--font-color) !important;
     }
 
     :root {
         --in-content-page-background: var(--toolbar-bgcolor) !important;
-        --font-color: var(--lwt-toolbar-field-color) !important;
+        --font-color: var(--content-principal-page-color) !important;
         --fill-color: var(--arrowpanel-dimmed) !important;
         --border: none !important;
         --border-active-color: var(--in-content-link-color-hover) !important;
@@ -512,6 +513,7 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
         --button-fill-color-active: var(--in-content-link-color) !important;
         --weekend-font-color: var(--urlbar-popup-action-color) !important;
         --today-fill-color: var(--arrowpanel-dimmed-further) !important;
+        --date-picker-item-height: 28px !important;
     }
 
     * {
@@ -520,6 +522,8 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
 
     .month-year {
         color: var(--font-color) !important;
+        height: var(--date-picker-item-height) !important;
+        border-radius: var(--general-button-border-radius) !important;
     }
 
     .month-year-view {
@@ -527,12 +531,45 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
         opacity: 1 !important;
     }
 
+    .month-year-view > .spinner-container {
+        margin: 1rem 0 !important;
+    }
+
+    button {
+        fill: currentColor !important;
+        -moz-context-properties: fill, fill-opacity !important;
+        color: var(--font-color) !important;
+    }
+
     .nav > button:is(.prev, .next) {
         fill-opacity: 0.6 !important;
+        width: var(--date-picker-item-height) !important;
+        height: var(--date-picker-item-height) !important;
+        border-radius: var(--general-button-border-radius);
     }
 
     .nav > button:is(.prev, .next):hover {
         fill-opacity: 1 !important;
+        background-color: var(--arrowpanel-dimmed) !important;
+    }
+
+    button.month-year::after {
+        position: absolute;
+        content: "";
+        width: 2.6rem;
+        height: 1.6rem;
+        background: url("chrome://global/skin/icons/arrow-down.svg") no-repeat 50% 50%;
+        -moz-context-properties: fill, fill-opacity;
+        fill-opacity: 0.5;
+        fill: currentColor !important;
+    }
+
+    button.month-year.active::after {
+        fill-opacity: 1 !important;
+    }
+
+    .spinner {
+        color: var(--font-color) !important;
     }
 
     .month-year-view .spinner > div {
@@ -1112,7 +1149,7 @@ link[href="chrome://global/content/printPagination.css"]
 
 link[href="chrome://global/content/printPagination.css"]
     ~ .container {
-	box-shadow: 0 0 15px 0 hsla(0, 0%, 10%, 0.2) !important;
+    box-shadow: 0 0 15px 0 hsla(0, 0%, 10%, 0.2) !important;
     border-radius: 3px !important;
 }
 

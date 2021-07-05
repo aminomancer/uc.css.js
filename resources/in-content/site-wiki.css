@@ -223,14 +223,14 @@ domain("wikimedia.org") {
     }
 
     html:root {
-        background: #19191a !important;
+        background: hsl(240, 2%, 10%) !important;
     }
 
     body {
         border: none !important;
         font-family: "Source Sans Pro", sans-serif !important;
         font-size: 18px !important;
-        background: #19191a !important;
+        background: hsl(240, 2%, 10%) !important;
     }
 
     #content {
@@ -240,15 +240,15 @@ domain("wikimedia.org") {
         font-size: 1rem !important;
         line-height: 80% !important;
         max-width: 1280px !important;
-        background: #19191a !important;
-        color: #ccc !important;
+        background: hsl(240, 2%, 10%) !important;
+        color: hsl(0, 0%, 80%) !important;
     }
 
     /* root variables */
     :root {
-        --blue: rgb(72, 117, 201);
-        --red: rgba(201, 72, 72, 1);
-        --green: rgb(83, 216, 83);
+        --blue: hsl(219.1, 54.4%, 53.5%);
+        --red: hsl(0, 54.4%, 53.5%);
+        --green: hsl(120, 63%, 58.6%);
     }
 
     a {
@@ -262,15 +262,14 @@ domain("wikimedia.org") {
     }
 
     #bodyContent table.multicol span {
-        color: #ddd !important;
+        color: hsl(0, 0%, 86.7%) !important;
     }
 
     /* top nav */
     #mw-page-base {
         height: 90px !important;
         margin: 0 auto !important;
-        background: #19191a !important;
-        /* background: #CAC8C4 !important; */
+        background: hsl(240, 2%, 10%) !important;
     }
 
     #mw-navigation {
@@ -345,7 +344,7 @@ domain("wikimedia.org") {
 
     #mw-head a,
     #mw-head a:visited {
-        color: #f0f0f0 !important;
+        color: hsl(0, 0%, 94.1%) !important;
     }
 
     #mw-head #searchform > div {
@@ -355,7 +354,7 @@ domain("wikimedia.org") {
         margin-top: 13px !important;
         margin-left: 15px !important;
         border: none !important;
-        background: #111113 !important;
+        background: hsl(240, 5.6%, 7.1%) !important;
         width: 345px !important;
         padding: 0 0 7px !important;
         border-radius: 3px !important;
@@ -374,7 +373,7 @@ domain("wikimedia.org") {
     #mw-head #searchform > div input#searchInput {
         padding: 4px 0 6px 8px !important;
         font-size: 1rem !important;
-        color: #ccc !important;
+        color: hsl(0, 0%, 80%) !important;
         background: none !important;
         border: none !important;
         margin: unset !important;
@@ -442,7 +441,7 @@ domain("wikimedia.org") {
         font-size: 28px !important;
         text-transform: uppercase !important;
         letter-spacing: 0px !important;
-        color: #eee !important;
+        color: hsl(0, 0%, 93.3%) !important;
     }
 
     /* left nav */
@@ -455,8 +454,8 @@ domain("wikimedia.org") {
         height: 100% !important;
         overflow-y: auto !important;
         padding: 0 0 0 100px !important;
-        background: #080808b4 !important;
-        box-shadow: 1px 0 3px rgba(0, 0, 0, 0.25) !important;
+        background: hsla(0, 0%, 3.1%, 0.7) !important;
+        box-shadow: 1px 0 3px hsla(0, 0%, 0%, 0.3) !important;
         transition: all 0.66s ease-in-out !important;
         opacity: 0 !important;
         pointer-events: auto !important;
@@ -474,7 +473,7 @@ domain("wikimedia.org") {
     }
 
     #mw-navigation #mw-panel a {
-        color: #eee !important;
+        color: hsl(0, 0%, 93.3%) !important;
     }
 
     #mw-navigation #p-navigation,
@@ -489,7 +488,7 @@ domain("wikimedia.org") {
     }
 
     #mw-panel > .portal > h3 {
-        color: rgb(255, 255, 255) !important;
+        color: #fff !important;
         font-size: 1rem !important;
         margin-left: 5px !important;
         padding-bottom: 0 !important;
@@ -522,7 +521,7 @@ domain("wikimedia.org") {
         outline: none !important;
     }
 
-    #mw-navigation > #mw-panel > div:not(#p-lang):not(#p-navigation):not(.first),
+    #mw-navigation > #mw-panel > div:not(#p-lang, #p-navigation, .first),
     #mw-navigation #p-lang .wbc-editpage {
         display: none !important;
     }
@@ -533,19 +532,19 @@ domain("wikimedia.org") {
 
     /* search language menu */
     .uls-menu {
-        box-shadow: 0 0 12px -2px rgba(0, 0, 0, 0.35) !important;
+        box-shadow: 0 0 12px -2px hsla(0, 0%, 0%, 0.4) !important;
     }
 
     .uls-menu,
     .uls-menu > *,
     .uls-menu .uls-filterinput {
-        background-color: rgb(35, 35, 36) !important;
+        background-color: hsl(240, 1.4%, 13.9%) !important;
         border-color: transparent !important;
-        color: rgb(204, 204, 204) !important;
+        color: hsl(0, 0%, 80%) !important;
     }
 
     .uls-menu .uls-search {
-        border-bottom-color: rgb(55, 55, 55) !important;
+        border-bottom-color: hsl(0, 0%, 21.6%) !important;
     }
 
     .uls-search:is(:hover, :focus-within) .uls-search-label {
@@ -567,7 +566,7 @@ domain("wikimedia.org") {
     .uls-menu .uls-search:focus-within .uls-filtersuggestion,
     .uls-menu .uls-search:hover .uls-filtersuggestion {
         opacity: 0.5 !important;
-        color: rgb(204, 204, 204) !important;
+        color: hsl(0, 0%, 80%) !important;
     }
 
     .uls-menu .uls-filterinput::placeholder {
@@ -590,13 +589,13 @@ domain("wikimedia.org") {
     }
 
     .uls-menu .uls-lcd-region-title {
-        color: rgb(204, 204, 204) !important;
+        color: hsl(0, 0%, 80%) !important;
         font-size: 16px !important;
         padding-left: 18px !important;
     }
 
     .uls-no-results-found-title {
-        color: rgb(204, 204, 204) !important;
+        color: hsl(0, 0%, 80%) !important;
         font-size: 16px !important;
         padding-left: 7px !important;
         margin-bottom: 10px !important;
@@ -607,10 +606,10 @@ domain("wikimedia.org") {
         position: absolute !important;
         background: none !important;
         float: right !important;
-        border-top: 1px solid rgb(55, 55, 55) !important;
-        border-left: 1px solid rgb(55, 55, 55) !important;
+        border-top: 1px solid hsl(0, 0%, 21.6%) !important;
+        border-left: 1px solid hsl(0, 0%, 21.6%) !important;
         border-radius: 3px !important;
-        color: rgb(204, 204, 204) !important;
+        color: hsl(0, 0%, 80%) !important;
         padding: 12px 12px 12px 12px !important;
         width: 58% !important;
         text-align: justify !important;
@@ -629,7 +628,7 @@ domain("wikimedia.org") {
     }
 
     .uls-language-block a {
-        color: rgb(138, 181, 229) !important;
+        color: hsl(211.6, 63.6%, 72%) !important;
         font-size: 16px !important;
     }
 
@@ -638,13 +637,13 @@ domain("wikimedia.org") {
     }
 
     .interlanguage-uls-menu.selector-left::before {
-        border-right: 10px solid rgba(0, 0, 0, 0.05) !important;
-        color: rgb(35, 35, 36) !important;
+        border-right: 10px solid hsla(0, 0%, 0%, 0.1) !important;
+        color: hsl(240, 1.4%, 13.9%) !important;
     }
 
     .interlanguage-uls-menu.selector-left::after {
-        border-right: 10px solid rgb(35, 35, 36) !important;
-        color: rgb(35, 35, 36) !important;
+        border-right: 10px solid hsl(240, 1.4%, 13.9%) !important;
+        color: hsl(240, 1.4%, 13.9%) !important;
     }
 
     /* article */
@@ -655,8 +654,8 @@ domain("wikimedia.org") {
         margin-top: -20px !important;
         padding-bottom: 5px !important;
         font-weight: normal !important;
-        text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5) !important;
-        color: #eee !important;
+        text-shadow: 0 1px 0 hsla(0, 0%, 0%, 0.5) !important;
+        color: hsl(0, 0%, 93.3%) !important;
     }
 
     #bodyContent h1,
@@ -669,8 +668,8 @@ domain("wikimedia.org") {
         margin-bottom: 10px !important;
         font-weight: normal !important;
         font-family: "Source Serif Pro", sans-serif !important;
-        text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5) !important;
-        color: #eee !important;
+        text-shadow: 0 1px 0 hsla(0, 0%, 0%, 0.5) !important;
+        color: hsl(0, 0%, 93.3%) !important;
     }
 
     #bodyContent h1 span.mw-editsection,
@@ -808,11 +807,10 @@ domain("wikimedia.org") {
     #bodyContent #coordinates {
         top: -3px !important;
         padding: 4px 6px 3px !important;
-        background: #080808b4 !important;
+        background: hsla(0, 0%, 3.1%, 0.7) !important;
         border-radius: 0px !important;
-        border: 1px solid #2c2f33 !important;
+        border: 1px solid hsl(214.3, 7.4%, 18.6%) !important;
         visibility: collapse !important;
-        /* box-shadow: inset 0 1px 0 rgba(255,255,255,0.75), 0 1px 1px rgba(0,0,0,0.25) !important; */
     }
 
     html[lang="de"] #bodyContent #coordinates
@@ -861,7 +859,7 @@ domain("wikimedia.org") {
     }
 
     #bodyContent a:not(.new) {
-        color: #8ab5e5 !important;
+        color: hsl(211.6, 63.6%, 72%) !important;
     }
 
     #mw-content-text a:not(.new) > span {
@@ -869,7 +867,7 @@ domain("wikimedia.org") {
     }
 
     #bodyContent a:not(.new):visited {
-        color: #dcb7ff !important;
+        color: hsl(270.8, 100%, 85.9%) !important;
     }
 
     #bodyContent a:hover {
@@ -883,7 +881,7 @@ domain("wikimedia.org") {
         padding: 0 !important;
         font-size: 14px !important;
         line-height: 22px !important;
-        color: #f0f0f0 !important;
+        color: hsl(0, 0%, 94.1%) !important;
     }
 
     #bodyContent #contentSub
@@ -892,7 +890,7 @@ domain("wikimedia.org") {
         margin: 5px 0 12px -5px !important;
         padding: 0 !important;
         font-size: 12px !important;
-        color: #ccc !important;
+        color: hsl(0, 0%, 80%) !important;
     }
 
     #bodyContent table.ambox,
@@ -907,7 +905,7 @@ domain("wikimedia.org") {
     }
 
     #bodyContent .references li {
-        color: #c0c0c0 !important;
+        color: hsl(0, 0%, 75.3%) !important;
         font-size: 14px !important;
         line-height: 17px !important;
     }
@@ -959,14 +957,14 @@ domain("wikimedia.org") {
     .noarticletext,
     .quotebox,
     .mw-code {
-        background-color: rgb(35, 35, 36) !important;
-        color: #ccc !important;
+        background-color: hsl(240, 1.4%, 13.9%) !important;
+        color: hsl(0, 0%, 80%) !important;
         font-size: 0.9rem !important;
         border-radius: 2px !important;
     }
 
     table {
-        background-color: rgb(35, 35, 36) !important;
+        background-color: hsl(240, 1.4%, 13.9%) !important;
     }
 
     .mw-parser-output > .wikitable[width] {
@@ -975,12 +973,12 @@ domain("wikimedia.org") {
 
     code {
         font-family: "Source Code Pro", monospace !important;
-        border-color: #151819 !important;
+        border-color: hsl(195, 8.7%, 9%) !important;
         margin: auto 2px !important;
     }
 
     #content .thumbinner {
-        border-color: #b9b9b9 !important;
+        border-color: hsl(0, 0%, 72.5%) !important;
     }
 
     .sidebar .sidebar-list-title {
@@ -1046,12 +1044,12 @@ domain("wikimedia.org") {
 
     .toctogglelabel:hover {
         text-decoration: none !important;
-        color: rgba(255, 255, 255, 0.9) !important;
+        color: hsla(0, 0%, 100%, 0.9) !important;
     }
 
     .toctogglelabel {
         cursor: pointer !important;
-        color: rgb(255, 255, 255, 0.75) !important;
+        color: hsla(0, 0%, 100%, 0.75) !important;
     }
 
     .toctogglespan {
@@ -1072,9 +1070,9 @@ domain("wikimedia.org") {
         opacity: 0 !important;
         overflow-y: auto !important;
         z-index: 9999 !important;
-        color: #ccc !important;
-        background: #080808b4 !important;
-        box-shadow: 1px 0 6px rgba(0, 0, 0, 0.25) !important;
+        color: hsl(0, 0%, 80%) !important;
+        background: hsla(0, 0%, 3.1%, 0.7) !important;
+        box-shadow: 1px 0 6px hsla(0, 0%, 0%, 0.25) !important;
     }
 
     #toc:hover {
@@ -1105,14 +1103,14 @@ domain("wikimedia.org") {
     #bodyContent #toc ul li a {
         font-size: 18px !important;
         line-height: 21px !important;
-        color: #eae9e8 !important;
+        color: hsl(30, 4.5%, 91.4%) !important;
         padding: 3px 0 4px !important;
     }
 
     #bodyContent #toc ul ul li a {
         font-size: 13px !important;
         line-height: 17px !important;
-        color: #eee !important;
+        color: hsl(0, 0%, 93.3%) !important;
         padding: 4px 6px !important;
     }
 
@@ -1122,7 +1120,7 @@ domain("wikimedia.org") {
 
     #bodyContent #toc ul li a .tocnumber {
         font-size: 15px !important;
-        color: #eee !important;
+        color: hsl(0, 0%, 93.3%) !important;
         margin-right: 0 !important;
         display: none !important;
     }
@@ -1166,7 +1164,7 @@ domain("wikimedia.org") {
 
     #bodyContent #toc li a {
         display: block !important;
-        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) !important;
+        text-shadow: 0 1px 3px hsla(0, 0%, 0%, 0.2) !important;
     }
 
     #bodyContent #toc li a:hover {
@@ -1175,7 +1173,7 @@ domain("wikimedia.org") {
     }
 
     #bodyContent #toc ul li:hover {
-        background: rgba(255, 255, 255, 0.025) !important;
+        background: hsla(0, 0%, 100%, 0) !important;
         border-radius: 3px !important;
     }
 
@@ -1196,7 +1194,7 @@ domain("wikimedia.org") {
     }
 
     #bodyContent #toc > ul > li > a:hover {
-        color: RGB(234, 233, 232) !important;
+        color: hsl(30, 4.5%, 91.4%) !important;
     }
 
     table.wikitable > tr > th,
@@ -1204,45 +1202,45 @@ domain("wikimedia.org") {
     table.wikitable > * > tr > th,
     table.wikitable > * > tr > td {
         font-size: 1rem !important;
-        color: #ccc !important;
-        border-color: rgba(162, 169, 177, 0.1) !important;
+        color: hsl(0, 0%, 80%) !important;
+        border-color: hsla(212, 8.8%, 66.5%, 0.1) !important;
     }
 
     table.wikitable > * > tr > th.headerSort {
         font-size: 1rem !important;
         color: #000 !important;
-        border-color: rgba(162, 169, 177, 0.1) !important;
+        border-color: hsla(212, 8.8%, 66.5%, 0.1) !important;
     }
 
     table.wikitable > tr > th,
     table.wikitable > * > tr > th {
-        background-color: #111113 !important;
+        background-color: hsl(240, 5.6%, 7.1%) !important;
     }
 
     .navbox,
     .navbox-subgroup {
-        background-color: #23272000 !important;
+        background-color: hsla(94.3, 9.9%, 13.9%, 0) !important;
     }
 
     .navbox-group,
     .navbox-title,
     .navbox-abovebelow {
-        background-color: #38445700 !important;
+        background-color: hsla(216.8, 21.7%, 28%, 0) !important;
     }
 
     tr + tr > .navbox-abovebelow,
     tr + tr > .navbox-group,
     tr + tr > .navbox-image,
     tr + tr > .navbox-list {
-        border-color: #2c2f3300 !important;
+        border-color: hsla(214.3, 7.4%, 18.6%, 0) !important;
     }
 
     .navbox-even {
-        background-color: #00000000 !important;
+        background-color: #0000 !important;
     }
 
     .navbox-odd {
-        background-color: #ffffff08 !important;
+        background-color: hsla(0, 0%, 100%, 0) !important;
     }
 
     /* footer */
@@ -1251,7 +1249,7 @@ domain("wikimedia.org") {
         right: 0 !important;
         margin: 0 !important;
         padding: 15px 0 !important;
-        background-color: #19191a !important;
+        background-color: hsl(240, 2%, 10%) !important;
     }
 
     #footer-info {
@@ -1291,14 +1289,14 @@ domain("wikimedia.org") {
     }
 
     #mwe-popups-settings {
-        background-color: #040404ff !important;
+        background-color: hsl(0, 0%, 1.6%) !important;
         border: none !important;
         border-radius: 4px !important;
-        color: #ffffffc9 !important;
+        color: hsla(0, 0%, 100%, 0.8) !important;
     }
 
     #mwe-popups-settings h1 {
-        color: #ffffffc9 !important;
+        color: hsla(0, 0%, 100%, 0.8) !important;
     }
 
     #mwe-popups-settings main {
@@ -1306,7 +1304,7 @@ domain("wikimedia.org") {
     }
 
     #mwe-popups-settings main form label > span {
-        color: #ffffffc9 !important;
+        color: hsla(0, 0%, 100%, 0.8) !important;
     }
 
     #mwe-popups-settings header {
@@ -1326,20 +1324,20 @@ domain("wikimedia.org") {
     }
 
     .save.mw-ui-button.mw-ui-progressive {
-        background-color: rgba(255, 255, 255, 0) !important;
-        color: rgba(255, 255, 255, 1) !important;
+        background-color: #fff0 !important;
+        color: #fff !important;
         border: none !important;
     }
 
     .save.mw-ui-button.mw-ui-progressive:hover,
     .save.mw-ui-button.mw-ui-progressive:active {
-        background-color: rgba(255, 255, 255, 0.95) !important;
-        color: rgb(0, 0, 0) !important;
+        background-color: hsla(0, 0%, 100%, 0.95) !important;
+        color: #000 !important;
         border: none !important;
     }
 
     .oo-ui-toolbar-bar {
-        background-color: rgb(35, 35, 36) !important;
+        background-color: hsl(240, 1.4%, 13.9%) !important;
         color: hsl(0, 0%, 80%) !important;
         fill: hsl(0, 0%, 80%) !important;
         border-radius: 2px !important;
@@ -1347,7 +1345,7 @@ domain("wikimedia.org") {
     }
 
     .oo-ui-toolbar-position-top > .oo-ui-toolbar-bar {
-        box-shadow: 0 0 7px -1px rgba(0, 0, 0, 0.05), 0 0 2px 1px rgba(0, 0, 0, 0.15) !important;
+        box-shadow: 0 0 7px -1px hsla(0, 0%, 0%, 0.1), 0 0 2px 1px hsla(0, 0%, 0%, 0.2) !important;
     }
 
     .oo-ui-toolbar-bar .oo-ui-toolbar-bar {
@@ -1509,7 +1507,7 @@ domain("wikimedia.org") {
     }
 
     .ve-ui-overlay a:not([role="button"]) {
-        color: #8ab5e5 !important;
+        color: hsl(211.6, 63.6%, 72%) !important;
     }
 
     .oo-ui-checkboxInputWidget.oo-ui-widget-enabled [type="checkbox"] + span {
@@ -1586,23 +1584,23 @@ domain("wikimedia.org") {
     }
 
     .oo-ui-windowManager-modal > .oo-ui-dialog {
-        background-color: rgba(0, 0, 0, 0.8) !important;
+        background-color: hsla(0, 0%, 0%, 0.8) !important;
     }
 
     .oo-ui-windowManager-modal.oo-ui-windowManager-floating > .oo-ui-dialog > .oo-ui-window-frame {
-        background-color: #040404ff !important;
+        background-color: hsl(0, 0%, 1.6%) !important;
         border: none !important;
         border-radius: 4px !important;
-        color: #ffffffc9 !important;
+        color: hsla(0, 0%, 100%, 0.8) !important;
     }
 
     .oo-ui-processDialog-actions-safe .oo-ui-labelElement-label {
-        color: rgb(34, 34, 34) !important;
+        color: hsl(0, 0%, 13.3%) !important;
     }
 
     .mwe-popups {
         background: unset !important;
-        box-shadow: 0 0 25px 2px rgba(0, 0, 0, 0.05), 0 0 5px 1px rgba(0, 0, 0, 0.25) !important;
+        box-shadow: 0 0 25px 2px hsla(0, 0%, 0%, 0.1), 0 0 5px 1px hsla(0, 0%, 0%, 0.25) !important;
         border-radius: 3px !important;
     }
 
@@ -1634,7 +1632,7 @@ domain("wikimedia.org") {
     }
 
     .mwe-popups .mwe-popups-extract {
-        color: rgba(255, 255, 255, 0.75) !important;
+        color: hsla(0, 0%, 100%, 0.75) !important;
         text-decoration: none !important;
         scrollbar-width: none !important;
     }
@@ -1758,7 +1756,7 @@ domain("wikimedia.org") {
         position: absolute !important;
         border: 8px solid transparent !important;
         border-top: 0 !important;
-        border-bottom: 8px solid rgba(5, 5, 5, 0.95) !important;
+        border-bottom: 8px solid hsla(0, 0%, 2%, 0.95) !important;
         top: -8px !important;
         left: 10px !important;
     }
@@ -1790,7 +1788,7 @@ domain("wikimedia.org") {
         position: absolute !important;
         border: 8px solid transparent !important;
         border-top: 0 !important;
-        border-bottom: 8px solid rgba(5, 5, 5, 0.95) !important;
+        border-bottom: 8px solid hsla(0, 0%, 2%, 0.95) !important;
         top: -8px !important;
         left: 10px !important;
         z-index: 111 !important;
@@ -1813,7 +1811,7 @@ domain("wikimedia.org") {
         position: absolute !important;
         border: 8px solid transparent !important;
         border-top: 0 !important;
-        border-bottom: 8px solid rgba(5, 5, 5, 0.95) !important;
+        border-bottom: 8px solid hsla(0, 0%, 2%, 0.95) !important;
         top: -8px !important;
         left: 294px !important;
     }
@@ -1845,7 +1843,7 @@ domain("wikimedia.org") {
         position: absolute !important;
         border: 7px solid transparent !important;
         border-top: 0 !important;
-        border-bottom: 7px solid rgba(5, 5, 5, 0.95) !important;
+        border-bottom: 7px solid hsla(0, 0%, 2%, 0.95) !important;
         top: -7px !important;
         left: 422px !important;
         z-index: 111 !important;
@@ -1865,7 +1863,7 @@ domain("wikimedia.org") {
         position: absolute !important;
         border: 8px solid transparent !important;
         border-bottom: 0 !important;
-        border-top: 8px solid rgba(5, 5, 5, 0.95) !important;
+        border-top: 8px solid hsla(0, 0%, 2%, 0.95) !important;
         bottom: -8px !important;
         left: 294px !important;
         z-index: 111 !important;
@@ -1892,7 +1890,7 @@ domain("wikimedia.org") {
         position: absolute !important;
         border: 7px solid transparent !important;
         border-bottom: 0 !important;
-        border-top: 7px solid rgba(5, 5, 5, 0.95) !important;
+        border-top: 7px solid hsla(0, 0%, 2%, 0.95) !important;
         bottom: -7px !important;
         left: 422px !important;
     }
@@ -1921,7 +1919,7 @@ domain("wikimedia.org") {
         position: absolute !important;
         border: 8px solid transparent !important;
         border-bottom: 0 !important;
-        border-top: 8px solid rgba(5, 5, 5, 0.95) !important;
+        border-top: 8px solid hsla(0, 0%, 2%, 0.95) !important;
         bottom: -8px !important;
         left: 10px !important;
     }
@@ -1931,7 +1929,7 @@ domain("wikimedia.org") {
         position: absolute !important;
         border: 11px solid transparent !important;
         border-bottom: 0 !important;
-        border-top: 11px solid rgba(5, 5, 5, 0.95) !important;
+        border-top: 11px solid hsla(0, 0%, 2%, 0.95) !important;
         bottom: -7px !important;
         left: 7px !important;
         visibility: collapse !important;
@@ -1953,13 +1951,13 @@ domain("wikimedia.org") {
     }
 
     .mwe-popups-settings-icon:hover {
-        background-color: rgba(255, 255, 255, 0) !important;
+        background-color: hsla(0, 0%, 100%, 0) !important;
         filter: brightness(10) !important;
         opacity: 0.95 !important;
     }
 
     .mwe-popups-settings-icon:active {
-        background-color: rgba(255, 255, 255, 0) !important;
+        background-color: hsla(0, 0%, 100%, 0) !important;
         filter: brightness(10) !important;
         opacity: 1 !important;
     }
@@ -2012,9 +2010,9 @@ domain("wikimedia.org") {
         width: 100% !important;
         height: 20px !important;
         background-color: transparent !important;
-        background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0), #ffffff) !important;
-        background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0), #ffffff) !important;
-        background-image: linear-gradient(rgba(255, 255, 255, 0), #ffffff) !important;
+        background-image: -webkit-linear-gradient(top, hsla(0, 0%, 100%, 0), #ffffff) !important;
+        background-image: -moz-linear-gradient(top, hsla(0, 0%, 100%, 0), #ffffff) !important;
+        background-image: linear-gradient(hsla(0, 0%, 100%, 0), #ffffff) !important;
         opacity: 0 !important;
         pointer-events: none !important;
         -webkit-transition: opacity 250ms ease !important;
@@ -2040,7 +2038,7 @@ domain("wikimedia.org") {
     }
 
     .mwe-popups-overlay {
-        background-color: rgba(255, 255, 255, 0.9) !important;
+        background-color: hsla(0, 0%, 100%, 0.9) !important;
         z-index: 999 !important;
         position: fixed !important;
         height: 100% !important;
@@ -2055,8 +2053,8 @@ domain("wikimedia.org") {
     }
 
     .mw-interlanguage-selector.mw-ui-button {
-        background-color: rgba(255, 255, 255, 0.075) !important;
-        color: rgba(255, 255, 255, 0.75) !important;
+        background-color: hsla(0, 0%, 100%, 0.075) !important;
+        color: hsla(0, 0%, 100%, 0.75) !important;
         border-color: transparent !important;
         border: none !important;
         filter: contrast(0%) brightness(180%) !important;
@@ -2068,25 +2066,25 @@ domain("wikimedia.org") {
 
     .mw-interlanguage-selector.mw-ui-button:hover,
     .mw-interlanguage-selector.mw-ui-button:active {
-        background-color: rgba(0, 0, 0, 0.175) !important;
-        color: rgba(255, 255, 255, 1) !important;
+        background-color: hsla(0, 0%, 0%, 0.2) !important;
+        color: #fff !important;
         border-color: transparent !important;
         border: none !important;
     }
 
     td.mbox-text {
-        color: #ffffffc9 !important;
+        color: hsla(0, 0%, 100%, 0.8) !important;
     }
 
     .rt-tooltip {
         position: absolute !important;
         z-index: 100 !important;
         max-width: 350px !important;
-        color: rgba(255, 255, 255, 0.75) !important;
+        color: hsla(0, 0%, 100%, 0.75) !important;
         font-size: 13px !important;
         line-height: 1.48em !important;
-        background: rgba(5, 5, 5, 0.95) !important;
-        box-shadow: 0 0 25px 2px rgba(0, 0, 0, 0.05), 0 0 5px 1px rgba(0, 0, 0, 0.25) !important;
+        background: hsla(0, 0%, 2%, 0.95) !important;
+        box-shadow: 0 0 25px 2px hsla(0, 0%, 0%, 0.1), 0 0 5px 1px hsla(0, 0%, 0%, 0.25) !important;
         border: none !important;
         overflow-wrap: break-word !important;
     }
@@ -2094,7 +2092,7 @@ domain("wikimedia.org") {
     .rt-tooltipTail {
         border: 9px solid transparent !important;
         border-bottom: 0 !important;
-        border-top: 9px solid rgba(5, 5, 5, 0.95) !important;
+        border-top: 9px solid hsla(0, 0%, 2%, 0.95) !important;
         background: transparent !important;
         transform: none !important;
         bottom: -9px !important;
@@ -2107,7 +2105,7 @@ domain("wikimedia.org") {
         content: "" !important;
         border: 9px solid transparent !important;
         border-top: 0 !important;
-        border-bottom: 9px solid rgba(5, 5, 5, 0.95) !important;
+        border-bottom: 9px solid hsla(0, 0%, 2%, 0.95) !important;
         background: transparent !important;
         transform: none !important;
         top: -9px !important;
@@ -2121,11 +2119,11 @@ domain("wikimedia.org") {
     }
 
     .rt-tooltipContent a:not(.new) {
-        color: #8ab5e5 !important;
+        color: hsl(211.6, 63.6%, 72%) !important;
     }
 
     .rt-tooltipContent a:not(.new):visited {
-        color: #dcb7ff !important;
+        color: hsl(270.8, 100%, 85.9%) !important;
     }
 
     .rt-tooltipContent a:hover {
@@ -2149,24 +2147,24 @@ domain("wikimedia.org") {
     }
 
     .rt-settingsLink:hover {
-        background-color: rgba(255, 255, 255, 0) !important;
+        background-color: hsla(0, 0%, 100%, 0) !important;
         filter: brightness(10) !important;
         opacity: 0.95 !important;
     }
 
     .rt-settingsLink:active {
-        background-color: rgba(255, 255, 255, 0) !important;
+        background-color: hsla(0, 0%, 100%, 0) !important;
         filter: brightness(10) !important;
         opacity: 1 !important;
     }
 
     .mwe-popups-overlay {
-        background-color: rgba(0, 0, 0, 0.8) !important;
+        background-color: hsla(0, 0%, 0%, 0.8) !important;
     }
 
     .mw-mmv-post-image {
-        color: rgba(255, 255, 255, 0.75) !important;
-        background-color: rgba(5, 5, 5, 0.9) !important;
+        color: hsla(0, 0%, 100%, 0.75) !important;
+        background-color: hsla(0, 0%, 2%, 0.9) !important;
     }
 
     .mw-mmv-image-metadata-column {
@@ -2175,7 +2173,7 @@ domain("wikimedia.org") {
 
     .mw-mmv-image-metadata {
         border-top: none !important;
-        background-color: rgba(19, 19, 19, 0.9) !important;
+        background-color: hsla(0, 0%, 7.5%, 0.9) !important;
         padding-top: 0px !important;
     }
 
@@ -2188,15 +2186,15 @@ domain("wikimedia.org") {
     }
 
     .mw-mmv-credit {
-        color: rgba(255, 255, 255, 0.75) !important;
+        color: hsla(0, 0%, 100%, 0.75) !important;
     }
 
     .mw-mmv-source-author a:not(.new) {
-        color: #8ab5e5 !important;
+        color: hsl(211.6, 63.6%, 72%) !important;
     }
 
     .mw-mmv-source-author a:not(.new):visited {
-        color: #dcb7ff !important;
+        color: hsl(270.8, 100%, 85.9%) !important;
     }
 
     .mw-mmv-ttf-ellipsis {
@@ -2223,8 +2221,8 @@ domain("wikimedia.org") {
 
     table.jquery-tablesorter thead tr th.headerSort,
     table.wikitable > tbody > tr > th {
-        background-color: rgb(11, 11, 12) !important;
-        color: rgb(250, 250, 250) !important;
+        background-color: hsl(240, 4.3%, 4.5%) !important;
+        color: hsl(0, 0%, 98%) !important;
         font-weight: normal !important;
         font-family: Patua One;
     }
@@ -2252,13 +2250,13 @@ domain("wikimedia.org") {
     table:not([class]) > tr > td,
     table:not([class]) > * > tr > th,
     table:not([class]) > * > tr > td {
-        border-color: rgba(162, 169, 177, 0.4) !important;
+        border-color: hsla(212, 8.8%, 66.5%, 0.4) !important;
     }
 
     table:not([class]) > tr > th,
     table:not([class]) > * > tr > th {
-        background-color: rgb(11, 11, 12) !important;
-        color: rgb(250, 250, 250) !important;
+        background-color: hsl(240, 4.3%, 4.5%) !important;
+        color: hsl(0, 0%, 98%) !important;
         font-weight: normal !important;
         font-family: Patua One;
     }
@@ -2273,11 +2271,11 @@ domain("wikimedia.org") {
     .vertical-navbox th,
     tbody tr,
     tbody tr td {
-        background-color: rgba(43, 47, 50, 0) !important;
+        background-color: hsla(205.7, 7.5%, 18.2%, 0) !important;
     }
 
     tbody tr td div[style*="background-color: lavender" i] {
-        background-color: rgba(43, 47, 50, 0) !important;
+        background-color: hsla(205.7, 7.5%, 18.2%, 0) !important;
     }
 
     #bodyContent div:not([class])[style*="background"] {
@@ -2310,7 +2308,7 @@ domain("wikimedia.org") {
     }
 
     .wikitable tbody tr td table tbody tr th {
-        background-color: rgb(35, 35, 36) !important;
+        background-color: hsl(240, 1.4%, 13.9%) !important;
     }
 
     .vertical-navbox > tbody tr td {
@@ -2319,7 +2317,7 @@ domain("wikimedia.org") {
 
     :is(th, tr, td)[style*="background:"]:not([style*="color:"]) {
         background-color: transparent !important;
-        color: rgb(204, 204, 204) !important;
+        color: hsl(0, 0%, 80%) !important;
     }
 
     #p-navigation.portal,
@@ -2332,7 +2330,7 @@ domain("wikimedia.org") {
     }
 
     .vertical-navbox ul {
-        background-color: rgb(32, 32, 33) !important;
+        background-color: hsl(240, 1.5%, 12.7%) !important;
         margin-left: 6px !important;
         margin-right: 6px !important;
         border-radius: 3px !important;
@@ -2342,8 +2340,8 @@ domain("wikimedia.org") {
         padding-top: 7px !important;
         padding-bottom: 7px !important;
         border-radius: 3px !important;
-        background-color: rgb(35, 35, 36) !important;
-        box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.05), 0 0 3px 1px rgba(0, 0, 0, 0.15) !important;
+        background-color: hsl(240, 1.4%, 13.9%) !important;
+        box-shadow: 0 0 15px 2px hsla(0, 0%, 0%, 0.1), 0 0 3px 1px hsla(0, 0%, 0%, 0.2) !important;
     }
 
     .plainlinks.hlist.navbar.mini ul {
@@ -2357,18 +2355,18 @@ domain("wikimedia.org") {
 
     #bodyContent div.thumb {
         border-radius: 3px !important;
-        background-color: rgb(35, 35, 36) !important;
-        box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.05), 0 0 3px 1px rgba(0, 0, 0, 0.15) !important;
+        background-color: hsl(240, 1.4%, 13.9%) !important;
+        box-shadow: 0 0 15px 2px hsla(0, 0%, 0%, 0.1), 0 0 3px 1px hsla(0, 0%, 0%, 0.2) !important;
         border: none !important;
     }
 
     #content .gallerybox div.thumb {
-        background-color: rgba(248, 249, 250, 0) !important;
+        background-color: hsla(210, 16.7%, 97.6%, 0) !important;
         box-shadow: none !important;
     }
 
     #content .infobox {
-        box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.05), 0 0 3px 1px rgba(0, 0, 0, 0.15) !important;
+        box-shadow: 0 0 15px 2px hsla(0, 0%, 0%, 0.1), 0 0 3px 1px hsla(0, 0%, 0%, 0.2) !important;
     }
 
     #content .thumbinner {
@@ -2376,19 +2374,19 @@ domain("wikimedia.org") {
     }
 
     .thumb.tright div.thumbinner {
-        background-color: rgb(35, 35, 36) !important;
+        background-color: hsl(240, 1.4%, 13.9%) !important;
         border-radius: 3px !important;
     }
 
     #bodyContent .portal ul {
         border-radius: 4px !important;
-        background-color: rgb(35, 35, 36) !important;
+        background-color: hsl(240, 1.4%, 13.9%) !important;
         color: #fff !important;
-        box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.05), 0 0 3px 1px rgba(0, 0, 0, 0.15) !important;
+        box-shadow: 0 0 15px 2px hsla(0, 0%, 0%, 0.1), 0 0 3px 1px hsla(0, 0%, 0%, 0.2) !important;
     }
 
     #bodyContent .portal a {
-        color: rgb(196, 199, 220) !important;
+        color: hsl(232.5, 25.5%, 81.6%) !important;
     }
 
     #mw-content-text .portal a:hover {
@@ -2406,7 +2404,7 @@ domain("wikimedia.org") {
     #mw-navigation .portal ul li:active,
     #mw-navigation .portal ul li:active {
         border-radius: 3px !important;
-        background-color: rgba(255, 255, 255, 0.075) !important;
+        background-color: hsla(0, 0%, 100%, 0.075) !important;
         color: #fff !important;
     }
 
@@ -2436,28 +2434,28 @@ domain("wikimedia.org") {
     }
 
     #content .gallery {
-        box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.05), 0 0 3px 1px rgba(0, 0, 0, 0.15) !important;
+        box-shadow: 0 0 15px 2px hsla(0, 0%, 0%, 0.1), 0 0 3px 1px hsla(0, 0%, 0%, 0.2) !important;
         display: inline-block !important;
     }
 
     .mw-editable.page-Fiction {
-        color: rgba(255, 255, 255, 0.75) !important;
+        color: hsla(0, 0%, 100%, 0.75) !important;
     }
 
     .mw-mmv-image-desc {
-        color: rgba(255, 255, 255, 0.75) !important;
+        color: hsla(0, 0%, 100%, 0.75) !important;
     }
 
     .mw-mmv-image-links li {
-        color: rgba(255, 255, 255, 0.75) !important;
+        color: hsla(0, 0%, 100%, 0.75) !important;
     }
 
     .mw-mmv-lightbox-open a {
-        color: rgba(138, 181, 229) !important;
+        color: hsl(211.6, 63.6%, 72%) !important;
     }
 
     .mw-mmv-lightbox-open a:hover {
-        color: rgba(255, 255, 255, 0.95) !important;
+        color: hsla(0, 0%, 100%, 0.95) !important;
     }
 
     .mw-mmv-image-links li::before {
@@ -2522,7 +2520,7 @@ domain("wikimedia.org") {
     }
 
     :is(.oo-ui-menuOptionWidget, .mw-indicators) a:not(.new) {
-        color: #8ab5e5 !important;
+        color: hsl(211.6, 63.6%, 72%) !important;
     }
 
     :is(.oo-ui-menuOptionWidget, .mw-indicators) a:not(.new) > span {
@@ -2530,7 +2528,7 @@ domain("wikimedia.org") {
     }
 
     :is(.oo-ui-menuOptionWidget, .mw-indicators) a:not(.new):visited {
-        color: #dcb7ff !important;
+        color: hsl(270.8, 100%, 85.9%) !important;
     }
 
     #mw-indicator-mw-helplink a {
@@ -2543,13 +2541,13 @@ domain("wikimedia.org") {
 
     #bodyContent .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button,
     .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button {
-        background-color: rgb(35, 35, 36) !important;
+        background-color: hsl(240, 1.4%, 13.9%) !important;
         color: inherit !important;
         border-color: transparent !important;
     }
 
     .mw-searchresults-has-iw .iw-resultset {
-        background-color: rgb(35, 35, 36) !important;
+        background-color: hsl(240, 1.4%, 13.9%) !important;
         color: inherit !important;
         border-color: transparent !important;
         border-radius: 2px !important;
@@ -2630,16 +2628,16 @@ domain("wikimedia.org") {
     }
 
     .mw-search-result-data {
-        color: #6fdd6f !important;
+        color: hsl(120, 61.8%, 65.1%) !important;
     }
 
     .results-info {
-        color: #777 !important;
+        color: hsl(0, 0%, 46.7%) !important;
     }
 
     .mw-advancedSearch-namespace-selection,
     .mw-advancedSearch-fieldContainer {
-        background: linear-gradient(rgba(0, 0, 0, 0.1), rgb(35, 35, 36) 0.5em) !important;
+        background: linear-gradient(hsla(0, 0%, 0%, 0.1), hsl(240, 1.4%, 13.9%) 0.5em) !important;
         border: solid 1px transparent !important;
     }
 
@@ -2651,7 +2649,7 @@ domain("wikimedia.org") {
         .oo-ui-labelElement
         > .oo-ui-fieldsetLayout-header
         > .oo-ui-labelElement-label {
-        background: rgb(35, 35, 36) !important;
+        background: hsl(240, 1.4%, 13.9%) !important;
         color: hsl(240, 1.4%, 75%) !important;
         height: 1em !important;
         top: -1em !important;
@@ -2693,7 +2691,7 @@ domain("wikimedia.org") {
     .oo-ui-dropdownInputWidget.oo-ui-widget-enabled,
     .oo-ui-dropdownWidget.oo-ui-widget-enabled.oo-ui-dropdownWidget-open
         .oo-ui-dropdownWidget-handle {
-        background-color: rgb(14, 15, 16) !important;
+        background-color: hsl(210, 6.7%, 5.9%) !important;
         border-radius: 2px !important;
         color: inherit !important;
     }
@@ -2704,7 +2702,7 @@ domain("wikimedia.org") {
     }
 
     .oo-ui-dropdownWidget.oo-ui-widget-enabled .oo-ui-dropdownWidget-handle:hover {
-        background-color: rgb(14, 15, 16) !important;
+        background-color: hsl(210, 6.7%, 5.9%) !important;
         color: inherit !important;
     }
 
@@ -2735,7 +2733,7 @@ domain("wikimedia.org") {
     }
 
     .oo-ui-tagMultiselectWidget.oo-ui-widget-enabled {
-        background-color: rgb(14, 15, 16) !important;
+        background-color: hsl(210, 6.7%, 5.9%) !important;
         color: inherit !important;
         border-radius: 2px !important;
     }
@@ -3079,7 +3077,7 @@ domain("wikimedia.org") {
     }
 
     .mwe-popups footer a {
-        color: rgba(138, 181, 229) !important;
+        color: hsl(211.6, 63.6%, 72%) !important;
     }
 
     .mwe-popups footer a:hover {
@@ -3100,7 +3098,7 @@ domain("wikimedia.org") {
     .catlinks,
     .hintergrundfarbe1,
     .navbox-inner {
-        box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.05), 0 0 3px 1px rgba(0, 0, 0, 0.15) !important;
+        box-shadow: 0 0 15px 2px hsla(0, 0%, 0%, 0.1), 0 0 3px 1px hsla(0, 0%, 0%, 0.2) !important;
     }
 
     body .ui-dialog .ttmlStyled {
@@ -3110,7 +3108,7 @@ domain("wikimedia.org") {
     body .ui-dialog-titlebar,
     .ui-widget-header.ui-corner-all.ui-helper-clearfix {
         border: none !important;
-        background: rgb(35, 35, 36) !important;
+        background: hsl(240, 1.4%, 13.9%) !important;
         color: #fff !important;
         font-family: "Source Sans Pro" !important;
         font-weight: normal !important;
@@ -3122,17 +3120,17 @@ domain("wikimedia.org") {
 
     body .ui-dialog {
         border: none !important;
-        background: rgb(35, 35, 36) !important;
+        background: hsl(240, 1.4%, 13.9%) !important;
         color: #fff !important;
         font-family: "Source Sans Pro" !important;
         font-size: 14px !important;
         padding: 5px !important;
         padding-left: 10px !important;
-        box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.15), 0 0 3px 1px rgba(0, 0, 0, 0.15) !important;
+        box-shadow: 0 0 15px 2px hsla(0, 0%, 0%, 0.2), 0 0 3px 1px hsla(0, 0%, 0%, 0.2) !important;
     }
 
     .ui-widget-overlay {
-        background: rgba(0, 0, 0, 0.7) !important;
+        background: hsla(0, 0%, 0%, 0.7) !important;
     }
 
     body .ui-dialog .ui-icon-closethick {
@@ -3177,7 +3175,7 @@ domain("wikimedia.org") {
 
     .ui-widget-header.ui-helper-clearfix.control-bar:not(.block) {
         border: none !important;
-        background: rgb(35, 35, 36) !important;
+        background: hsl(240, 1.4%, 13.9%) !important;
         background-image: none !important;
         color: #fff !important;
     }
@@ -3192,7 +3190,7 @@ domain("wikimedia.org") {
     .ui-widget-header.ui-helper-clearfix.control-bar:not(.block) .time-disp {
         float: left !important;
         position: relative !important;
-        color: #ffffffaa !important;
+        color: #fffa !important;
         bottom: 2px !important;
     }
 
@@ -3209,8 +3207,8 @@ domain("wikimedia.org") {
         width: 94%;
         bottom: 4px !important;
         border: none !important;
-        background: rgb(255, 255, 255, 0.2) !important;
-        box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.15), 0 0 2px 0px rgba(0, 0, 0, 0.15) !important;
+        background: hsla(0, 0%, 100%, 0.2) !important;
+        box-shadow: 0 0 10px 0px hsla(0, 0%, 0%, 0.2), 0 0 2px 0px hsla(0, 0%, 0%, 0.2) !important;
     }
 
     .ui-widget-header.ui-helper-clearfix.control-bar:not(.block) {
@@ -3218,7 +3216,7 @@ domain("wikimedia.org") {
     }
 
     .ui-widget-header.ui-helper-clearfix.control-bar:not(.block) .ui-slider-range-min {
-        background: rgb(255, 255, 255, 0.5) !important;
+        background: hsla(0, 0%, 100%, 0.5) !important;
     }
 
     .ui-widget-header:not(.block) .mw_buffer,
@@ -3233,18 +3231,18 @@ domain("wikimedia.org") {
         height: 9.5px !important;
         width: 9.5px !important;
         background-image: none !important;
-        background: rgb(205, 205, 205, 1) !important;
-        box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.1), 0 0 2px 0px rgba(0, 0, 0, 0.15) !important;
+        background: hsl(0, 0%, 80.4%) !important;
+        box-shadow: 0 0 10px 0px hsla(0, 0%, 0%, 0.1), 0 0 2px 0px hsla(0, 0%, 0%, 0.2) !important;
     }
 
     .ui-widget-header.ui-helper-clearfix.control-bar:not(.block) .ui-slider-handle:is(:hover) {
-        background: rgb(245, 245, 245, 1) !important;
-        box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.1), 0 0 2px 0px rgba(0, 0, 0, 0.15) !important;
+        background: hsl(0, 0%, 96.1%) !important;
+        box-shadow: 0 0 10px 0px hsla(0, 0%, 0%, 0.1), 0 0 2px 0px hsla(0, 0%, 0%, 0.2) !important;
     }
 
     .k-player,
     .mwPlayerContainer {
-        background-color: rgba(0, 0, 0, 0) !important;
+        background-color: #0000 !important;
     }
 
     /* recolor text that's styled with bold colors via html */
@@ -3278,21 +3276,18 @@ domain("wikimedia.org") {
     a .nowrap::-moz-selection,
     bdi::-moz-selection,
     abbr::selection {
-        color: rgb(85, 80, 137) !important;
+        color: hsl(245.3, 26.3%, 42.5%) !important;
         background-color: var(--content-selection-bgcolor) !important;
         border-radius: 2px !important;
     }
 
     img::-moz-selection {
-        background-color: rgba(255, 255, 255, 0) !important;
+        background-color: hsla(0, 0%, 100%, 0) !important;
     }
 
-    a.new {
-        color: rgb(201, 72, 72) !important;
-    }
-
+    a.new,
     a.new:hover {
-        color: rgb(201, 72, 72) !important;
+        color: hsl(0, 54.4%, 53.5%) !important;
     }
 
     #pt-notifications-alert .mw-echo-notifications-badge,
@@ -3306,13 +3301,13 @@ domain("wikimedia.org") {
 
     #pt-notifications-notice .mw-echo-notifications-badge.oo-ui-flaggedElement-unseen::after,
     #pt-notifications-notice .mw-echo-notifications-badge.mw-echo-unseen-notifications::after {
-        background-color: rgba(255, 255, 255, 0.3) !important;
+        background-color: hsla(0, 0%, 100%, 0.3) !important;
     }
 
     #pt-notifications-notice .mw-echo-notifications-badge.oo-ui-flaggedElement-unseen:hover::after,
     #pt-notifications-notice
         .mw-echo-notifications-badge.mw-echo-unseen-notifications:hover::after {
-        background-color: rgba(255, 255, 255, 0.4) !important;
+        background-color: hsla(0, 0%, 100%, 0.4) !important;
     }
 
     #pt-notifications-alert .mw-echo-notifications-badge::after,
@@ -3380,11 +3375,11 @@ domain("wikimedia.org") {
     .suggestions {
         border-bottom-left-radius: 3px !important;
         border-bottom-right-radius: 3px !important;
-        box-shadow: 0 0 25px 2px rgba(0, 0, 0, 0.05), 0 0 5px 1px rgba(0, 0, 0, 0.25) !important;
+        box-shadow: 0 0 25px 2px hsla(0, 0%, 0%, 0.1), 0 0 5px 1px hsla(0, 0%, 0%, 0.25) !important;
         z-index: 4 !important;
         margin-right: 0.5px !important;
         position: absolute !important;
-        background-color: #111113 !important;
+        background-color: hsl(240, 5.6%, 7.1%) !important;
     }
 
     .suggestions-results,
@@ -3394,12 +3389,12 @@ domain("wikimedia.org") {
     }
 
     .suggestions a.mw-searchSuggest-link {
-        color: rgb(204, 204, 204) !important;
+        color: hsl(0, 0%, 80%) !important;
     }
 
     .suggestions-result,
     .suggestions-special {
-        color: rgb(204, 204, 204) !important;
+        color: hsl(0, 0%, 80%) !important;
         padding-inline: 8px !important;
     }
 
@@ -3416,13 +3411,13 @@ domain("wikimedia.org") {
     }
 
     .suggestions-special .special-label {
-        color: rgb(184, 184, 184) !important;
+        color: hsl(0, 0%, 72.2%) !important;
     }
 
     .suggestions-special:hover,
     .suggestions-special:active,
     .suggestions-special:focus {
-        background-color: rgb(25, 26, 26) !important;
+        background-color: hsl(180, 2%, 10%) !important;
     }
 
     .suggestions-special:hover .special-query,
@@ -3433,15 +3428,15 @@ domain("wikimedia.org") {
     .suggestions-special:focus .special-label,
     .suggestions-result-current .special-query,
     .suggestions-result-current .special-label {
-        color: rgb(255, 255, 255) !important;
+        color: #fff !important;
     }
 
     .suggestions-result:hover,
     .suggestions-result:active,
     .suggestions-result:focus,
     .suggestions-result-current {
-        color: rgb(255, 255, 255) !important;
-        background-color: rgb(25, 26, 26) !important;
+        color: #fff !important;
+        background-color: hsl(180, 2%, 10%) !important;
         border-radius: 2px !important;
     }
 
@@ -3454,30 +3449,22 @@ domain("wikimedia.org") {
 
     /* media viewer colors, buttons and shit */
     .mw-mmv-permission-box .mw-mmv-permission-text .mw-mmv-permission-text-fader {
-        background-image: linear-gradient(
-            to bottom,
-            rgba(0, 0, 0, 0) 0%,
-            rgb(24, 24, 24) 100%
-        ) !important;
+        background-image: linear-gradient(to bottom, #0000 0%, hsl(0, 0%, 9.4%) 100%) !important;
     }
 
     .mw-mmv-info-box {
         border: 1px solid transparent !important;
-        background-color: rgb(24, 24, 24) !important;
+        background-color: hsl(0, 0%, 9.4%) !important;
     }
 
     .mw-mmv-info-box * {
-        color: rgba(255, 255, 255, 0.7) !important;
+        color: hsla(0, 0%, 100%, 0.7) !important;
     }
 
     .mw-mmv-permission-box .mw-mmv-permission-text .mw-mmv-permission-text-fader a {
         padding: 0px 0 0 2em !important;
         background-color: transparent !important;
-        background-image: linear-gradient(
-            to right,
-            rgba(0, 0, 0, 0) 0%,
-            rgb(24, 24, 24) 25%
-        ) !important;
+        background-image: linear-gradient(to right, #0000 0%, hsl(0, 0%, 9.4%) 25%) !important;
         font-size: 1em !important;
     }
 
@@ -3487,19 +3474,19 @@ domain("wikimedia.org") {
     }
 
     .mw-mmv-label {
-        background-color: rgba(134, 136, 140, 0.8) !important;
-        color: rgb(24, 24, 24) !important;
+        background-color: hsla(220, 2.5%, 53.7%, 0.8) !important;
+        color: hsl(0, 0%, 9.4%) !important;
         transition: 0.15s ease-in-out !important;
     }
 
     .mw-mmv-label:hover {
-        background-color: rgba(164, 166, 170, 1) !important;
-        color: rgb(14, 14, 14) !important;
+        background-color: hsl(220, 3.4%, 65.5%) !important;
+        color: hsl(0, 0%, 5.5%) !important;
     }
 
     .mw-ui-button.mw-ui-progressive {
-        background-color: rgb(44, 44, 44) !important;
-        color: rgb(255, 255, 255) !important;
+        background-color: hsl(0, 0%, 17.3%) !important;
+        color: #fff !important;
         border: 1px solid transparent !important;
         opacity: 0.7 !important;
         transition: 0.15s ease-in-out !important;
@@ -3510,8 +3497,8 @@ domain("wikimedia.org") {
     }
 
     .mw-ui-button.mw-ui-progressive:hover {
-        background-color: rgb(44, 44, 44) !important;
-        color: rgb(255, 255, 255) !important;
+        background-color: hsl(0, 0%, 17.3%) !important;
+        color: #fff !important;
         border: 1px solid transparent !important;
         opacity: 1 !important;
     }
@@ -3547,7 +3534,7 @@ domain("wikimedia.org") {
 
     /* clarification needed text */
     span.cleanup-needed-content {
-        color: #ccc !important;
+        color: hsl(0, 0%, 80%) !important;
         border: none !important;
         padding: unset !important;
         font-style: italic !important;
@@ -3626,19 +3613,19 @@ domain("wikimedia.org") {
 
     /* references formatting */
     #bodyContent span.reference-text span.tfd {
-        background-color: rgba(180, 185, 255, 0.125) !important;
+        background-color: hsla(236, 100%, 85.3%, 0.125) !important;
         border-radius: 3px !important;
         font-weight: normal !important;
         font-size: smaller !important;
         text-decoration: none !important;
-        text-decoration-color: #8ab5e5 !important;
+        text-decoration-color: hsl(211.6, 63.6%, 72%) !important;
     }
 
     #bodyContent span.reference-text span.tfd:hover {
-        background-color: rgba(180, 195, 255, 0.225) !important;
+        background-color: hsla(228, 100%, 85.3%, 0.225) !important;
         border-radius: 3px !important;
         text-decoration: none !important;
-        text-decoration-color: #8ab5e5 !important;
+        text-decoration-color: hsl(211.6, 63.6%, 72%) !important;
     }
 
     #bodyContent span.reference-text span.tfd a:hover {
@@ -3648,7 +3635,7 @@ domain("wikimedia.org") {
     ol.references li:target,
     sup.reference:target,
     .rt-target {
-        background-color: rgba(234, 243, 255, 0.1) !important;
+        background-color: hsla(214.3, 100%, 95.9%, 0.1) !important;
         border-radius: 3px !important;
         transition: 0.3s ease-in-out !important;
     }
@@ -3699,11 +3686,11 @@ domain("wikimedia.org") {
     }
 
     .tracklist * > tr:nth-of-type(odd) {
-        background-color: rgba(45, 44, 45, 1) !important;
+        background-color: hsl(300, 1.1%, 17.5%) !important;
     }
 
     .tracklist tr:nth-of-type(odd) > th {
-        background-color: rgba(45, 44, 45, 1) !important;
+        background-color: hsl(300, 1.1%, 17.5%) !important;
     }
 
     .tracklist * > tr:nth-of-type(even) {
@@ -3795,12 +3782,12 @@ domain("wikimedia.org") {
     .mw-highlight .cpf,
     .mw-highlight .c1,
     .mw-highlight .cs {
-        color: #73bbbb !important;
+        color: hsl(180, 34.6%, 59.2%) !important;
     }
 
     .mw-highlight .err,
     .mw-highlight .gr {
-        border: 1px solid #ff7a7a !important;
+        border: 1px solid hsl(0, 100%, 73.9%) !important;
     }
 
     .mw-highlight .k,
@@ -3809,7 +3796,7 @@ domain("wikimedia.org") {
     .mw-highlight .kn,
     .mw-highlight .kp,
     .mw-highlight .kr {
-        color: #6fdd6f !important;
+        color: hsl(120, 61.8%, 65.1%) !important;
     }
 
     .mw-highlight .o,
@@ -3819,41 +3806,41 @@ domain("wikimedia.org") {
     .mw-highlight .mh,
     .mw-highlight .mi,
     .mw-highlight .mo {
-        color: #cacaca !important;
+        color: hsl(0, 0%, 79.2%) !important;
     }
 
     .mw-highlight .cp {
-        color: #eebc60 !important;
+        color: hsl(38.9, 80.7%, 65.5%) !important;
     }
 
     .mw-highlight .gd {
-        color: #e09e9e !important;
+        color: hsl(0, 51.6%, 74.9%) !important;
     }
 
     .mw-highlight .gh,
     .mw-highlight .gp {
-        color: #6b6beb !important;
+        color: hsl(240, 76.2%, 67.1%) !important;
     }
 
     .mw-highlight .gi {
-        color: #a5e7a5 !important;
+        color: hsl(120, 57.9%, 77.6%) !important;
     }
 
     .mw-highlight .go,
     .mw-highlight .il {
-        color: #b6b6b6 !important;
+        color: hsl(0, 0%, 71.4%) !important;
     }
 
     .mw-highlight .gu {
-        color: #e0abe0 !important;
+        color: hsl(300, 46.1%, 77.5%) !important;
     }
 
     .mw-highlight .gt {
-        color: #8cafff !important;
+        color: hsl(221.7, 100%, 77.5%) !important;
     }
 
     .mw-highlight .kt {
-        color: #ff679f !important;
+        color: hsl(337.9, 100%, 70.2%) !important;
     }
 
     .mw-highlight .s,
@@ -3865,46 +3852,46 @@ domain("wikimedia.org") {
     .mw-highlight .s2,
     .mw-highlight .sh,
     .mw-highlight .s1 {
-        color: #f8c0c0 !important;
+        color: hsl(0, 80%, 86.3%) !important;
     }
 
     .mw-highlight .na {
-        color: #d2dba6 !important;
+        color: hsl(70.2, 42.4%, 75.5%) !important;
     }
 
     .mw-highlight .nb,
     .mw-highlight .nt,
     .mw-highlight .sx,
     .mw-highlight .bp {
-        color: #a1bda1 !important;
+        color: hsl(120, 17.5%, 68.6%) !important;
     }
 
     .mw-highlight .nc,
     .mw-highlight .nf,
     .mw-highlight .nn,
     .mw-highlight .fm {
-        color: #6361db !important;
+        color: hsl(241, 62.9%, 62%) !important;
     }
 
     .mw-highlight .no {
-        color: #b69494 !important;
+        color: hsl(0, 18.9%, 64.7%) !important;
     }
 
     .mw-highlight .nd,
     .mw-highlight .ow {
-        color: #dba1ff !important;
+        color: hsl(277, 100%, 81.6%) !important;
     }
 
     .mw-highlight .ni {
-        color: #e4e4e4 !important;
+        color: hsl(0, 0%, 89.4%) !important;
     }
 
     .mw-highlight .ne {
-        color: #ffd4d2 !important;
+        color: hsl(2.7, 100%, 91.2%) !important;
     }
 
     .mw-highlight .nl {
-        color: #ffffc3 !important;
+        color: hsl(60, 100%, 88.2%) !important;
     }
 
     .mw-highlight .nv,
@@ -3913,19 +3900,19 @@ domain("wikimedia.org") {
     .mw-highlight .vg,
     .mw-highlight .vi,
     .mw-highlight .vm {
-        color: #b6b6ff !important;
+        color: hsl(240, 100%, 85.7%) !important;
     }
 
     .mw-highlight .w {
-        color: #f1f1f1 !important;
+        color: hsl(0, 0%, 94.5%) !important;
     }
 
     .mw-highlight .se {
-        color: #d6bba6 !important;
+        color: hsl(26.3, 36.9%, 74.5%) !important;
     }
 
     .mw-highlight .si,
     .mw-highlight .sr {
-        color: #ffd5e6 !important;
+        color: hsl(335.7, 100%, 91.8%) !important;
     }
 }
