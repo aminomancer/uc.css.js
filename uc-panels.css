@@ -318,6 +318,10 @@ panel[type="arrow"][side="top"] {
     background-color: var(--arrowpanel-dimmed-even-further) !important;
 }
 
+#protections-popup-info-button {
+	margin-inline-end: 10px !important;
+}
+
 #protections-popup .panel-footer {
     gap: var(--vertical-section-padding) !important;
     margin-top: 4px !important;
@@ -589,6 +593,7 @@ popupnotification progress[paused]::-moz-progress-bar {
     fill-opacity: 0.8 !important;
 }
 
+.permission-popup-permission-label-subitem,
 #permission-popup-storage-access-permission-list-hint,
 #permission-popup-storage-access-permission-learn-more {
     margin-inline-start: 24px !important;

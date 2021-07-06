@@ -868,6 +868,19 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
         font-weight: 500 !important;
         font-size: 13px !important;
     }
+
+    @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
+        #commonDialogWindow {
+            font-family: SF Pro Text, Segoe UI, sans-serif !important;
+            font-kerning: normal !important;
+        }
+
+        #titleText {
+            font-weight: 400 !important;
+            font-size: 14px !important;
+            font-family: SF Pro Display, Segoe UI, sans-serif !important;
+        }
+    }
 }
 
 @-moz-document url("chrome://mozapps/content/handling/permissionDialog.xhtml"),
@@ -1129,6 +1142,20 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
 
         #description:not([hidden], :empty) ~ #description-extra {
             margin-top: -10px !important;
+        }
+    }
+
+    @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
+        :root,
+        window,
+        dialog {
+            font-family: SF Pro Text, Segoe UI, sans-serif !important;
+            font-kerning: normal !important;
+        }
+
+        #titleText {
+            font-weight: 400 !important;
+            font-family: SF Pro Display, Segoe UI, sans-serif !important;
         }
     }
 }

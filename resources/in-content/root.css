@@ -11,155 +11,157 @@
         color: var(--global-selection-color) !important;
     }
 
-    input,
-    select,
-    textarea,
-    button {
-        border-radius: var(--general-button-border-radius);
-        border: 1px solid var(--content-principal-border-hover);
-    }
+    @-moz-document regexp("^(http).*") {
+        input[type="text"],
+        select,
+        textarea,
+        button {
+            border-radius: var(--general-button-border-radius);
+            border: 1px solid var(--content-principal-border-hover);
+        }
 
-    select {
-        padding-block: 2px;
-    }
+        select {
+            padding-block: 2px;
+        }
 
-    input:not([type="color"], [type="range"]) {
-        padding: 2px 4px;
-    }
+        input[type="text"] {
+            padding: 2px 4px;
+        }
 
-    input[type="number"] {
-        -moz-appearance: none;
-        appearance: none;
-        padding-inline-end: 0;
-    }
+        input[type="number"] {
+            -moz-appearance: none;
+            appearance: none;
+            padding-inline-end: 0;
+        }
 
-    input[type="number"]::-moz-number-spin-box {
-        appearance: none;
-        min-width: 16px;
-        min-height: 100%;
-        margin: 0;
-        padding: 0;
-    }
+        input[type="number"]::-moz-number-spin-box {
+            appearance: none;
+            min-width: 16px;
+            min-height: 100%;
+            margin: 0;
+            padding: 0;
+        }
 
-    input[type="number"]::-moz-number-spin-up,
-    input[type="number"]::-moz-number-spin-down {
-        -moz-context-properties: fill, fill-opacity !important;
-        border: 0;
-        border-radius: 0;
-        background-image: url(chrome://userchrome/content/arrow-dropdown-16.svg);
-        background-size: 8px;
-        background-position: center 0px;
-        -moz-context-properties: fill;
-        fill: currentColor;
-        fill-opacity: 0.4;
-        appearance: none;
-    }
+        input[type="number"]::-moz-number-spin-up,
+        input[type="number"]::-moz-number-spin-down {
+            -moz-context-properties: fill, fill-opacity !important;
+            border: 0;
+            border-radius: 0;
+            background-image: url(chrome://userchrome/content/arrow-dropdown-16.svg);
+            background-size: 8px;
+            background-position: center 0px;
+            -moz-context-properties: fill;
+            fill: currentColor;
+            fill-opacity: 0.4;
+            appearance: none;
+        }
 
-    input[type="number"]::-moz-number-spin-up {
-        scale: 1 -1;
-    }
+        input[type="number"]::-moz-number-spin-up {
+            scale: 1 -1;
+        }
 
-    input[type="number"]::-moz-number-spin-down:hover,
-    input[type="number"]::-moz-number-spin-up:hover {
-        fill-opacity: 0.7;
-    }
+        input[type="number"]::-moz-number-spin-down:hover,
+        input[type="number"]::-moz-number-spin-up:hover {
+            fill-opacity: 0.7;
+        }
 
-    input[type="range"] {
-        appearance: none;
-        background: none;
-        border: none;
-    }
+        input[type="range"] {
+            appearance: none;
+            background: none;
+            border: none;
+        }
 
-    input[type="range"]::-moz-range-track {
-        background: linear-gradient(#2e2e2e 20%, #383838 55%, #454545 85%);
-        height: 7px;
-        border: 1px solid #444;
-        border-radius: 16px;
-        overflow: hidden;
-    }
+        input[type="range"]::-moz-range-track {
+            background: linear-gradient(#2e2e2e 20%, #383838 55%, #454545 85%);
+            height: 7px;
+            border: 1px solid #444;
+            border-radius: 16px;
+            overflow: hidden;
+        }
 
-    input[type="range"]::-moz-range-progress {
-        appearance: none;
-        background: linear-gradient(#616fb8 20%, #434bb1 55%, #3a3091 85%);
-        height: 7px;
-        border-radius: 16px;
-    }
+        input[type="range"]::-moz-range-progress {
+            appearance: none;
+            background: linear-gradient(#616fb8 20%, #434bb1 55%, #3a3091 85%);
+            height: 7px;
+            border-radius: 16px;
+        }
 
-    input[type="range"]::-moz-range-thumb {
-        appearance: none;
-        background: radial-gradient(#f0f0f0, #bbb);
-        border-color: transparent;
-        border-radius: 100%;
-    }
+        input[type="range"]::-moz-range-thumb {
+            appearance: none;
+            background: radial-gradient(#f0f0f0, #bbb);
+            border-color: transparent;
+            border-radius: 100%;
+        }
 
-    input[type="range"]:is(:hover, :focus-visible)::-moz-range-track {
-        background: linear-gradient(
-            hsl(230, 0%, 20%) 20%,
-            hsl(236, 0%, 24%) 55%,
-            hsl(246, 0%, 29%) 85%
-        );
-    }
+        input[type="range"]:is(:hover, :focus-visible)::-moz-range-track {
+            background: linear-gradient(
+                hsl(230, 0%, 20%) 20%,
+                hsl(236, 0%, 24%) 55%,
+                hsl(246, 0%, 29%) 85%
+            );
+        }
 
-    input[type="range"]:is(:hover, :focus-visible)::-moz-range-progress {
-        background: linear-gradient(
-            hsl(230, 38%, 58%) 20%,
-            hsl(236, 45%, 51%) 55%,
-            hsl(246, 50%, 41%) 85%
-        );
-    }
+        input[type="range"]:is(:hover, :focus-visible)::-moz-range-progress {
+            background: linear-gradient(
+                hsl(230, 38%, 58%) 20%,
+                hsl(236, 45%, 51%) 55%,
+                hsl(246, 50%, 41%) 85%
+            );
+        }
 
-    input[type="range"]:is(:hover, :focus-visible)::-moz-range-thumb:hover {
-        background: radial-gradient(#fff, #ccc);
-    }
+        input[type="range"]:is(:hover, :focus-visible)::-moz-range-thumb:hover {
+            background: radial-gradient(#fff, #ccc);
+        }
 
-    meter {
-        appearance: none;
-        border-radius: 45px;
-        overflow: hidden;
-        height: 16px;
-        background: linear-gradient(#494949, #444, #3f3f3f 20%, #333 45%, #303030 65%, #2d2d2d 75%);
-    }
+        meter {
+            appearance: none;
+            border-radius: 45px;
+            overflow: hidden;
+            height: 16px;
+            background: linear-gradient(#494949, #444, #3f3f3f 20%, #333 45%, #303030 65%, #2d2d2d 75%);
+        }
 
-    ::-moz-meter-bar {
-        appearance: none;
-    }
+        ::-moz-meter-bar {
+            appearance: none;
+        }
 
-    :-moz-meter-optimum::-moz-meter-bar {
-        background: linear-gradient(#529d43, #5eb34d, #72b365 20%, #448131 45%, #387326 65%);
-    }
+        :-moz-meter-optimum::-moz-meter-bar {
+            background: linear-gradient(#529d43, #5eb34d, #72b365 20%, #448131 45%, #387326 65%);
+        }
 
-    :-moz-meter-sub-optimum::-moz-meter-bar {
-        background: linear-gradient(#9d8143, #b3924d, #b39b65 20%, #816331 45%, #735526 65%);
-    }
+        :-moz-meter-sub-optimum::-moz-meter-bar {
+            background: linear-gradient(#9d8143, #b3924d, #b39b65 20%, #816331 45%, #735526 65%);
+        }
 
-    :-moz-meter-sub-sub-optimum::-moz-meter-bar {
-        background: linear-gradient(#9d4343, #b34d4d, #b36565 20%, #813136 45%, #73262b 65%);
-    }
+        :-moz-meter-sub-sub-optimum::-moz-meter-bar {
+            background: linear-gradient(#9d4343, #b34d4d, #b36565 20%, #813136 45%, #73262b 65%);
+        }
 
-    progress {
-        appearance: none;
-        border: 1px solid transparent;
-        border-radius: 100px;
-        height: 9px;
-        background-color: var(--content-principal-box-background-odd);
-        overflow: hidden;
-    }
+        progress {
+            appearance: none;
+            border: 1px solid transparent;
+            border-radius: 100px;
+            height: 9px;
+            background-color: var(--content-principal-box-background-odd);
+            overflow: hidden;
+        }
 
-    progress::-moz-progress-bar {
-        background: linear-gradient(#6572b3 20%, #3f46a6 55%, #362d86 85%);
-    }
+        progress::-moz-progress-bar {
+            background: linear-gradient(#6572b3 20%, #3f46a6 55%, #362d86 85%);
+        }
 
-    progress[paused]::-moz-progress-bar {
-        background: linear-gradient(#808080 20%, #595959 55%, #404040 85%);
-    }
+        progress[paused]::-moz-progress-bar {
+            background: linear-gradient(#808080 20%, #595959 55%, #404040 85%);
+        }
 
-    /* animate the bar when its progress is stalled or unknown. this vector file is in resources/layout/contentaccessible/ */
-    progress:not([value]):indeterminate::-moz-progress-bar {
-        background-image: url("resource://content-accessible/progress-bar-indeterminate.svg");
-    }
+        /* animate the bar when its progress is stalled or unknown. this vector file is in resources/layout/contentaccessible/ */
+        progress:not([value]):indeterminate::-moz-progress-bar {
+            background-image: url("resource://content-accessible/progress-bar-indeterminate.svg");
+        }
 
-    .videocontrols .controlBar {
-        background-color: var(--content-principal-box-background) !important;
+        .videocontrols .controlBar {
+            background-color: var(--content-principal-box-background) !important;
+        }
     }
 }
 

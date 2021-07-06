@@ -2282,6 +2282,10 @@ domain("wikimedia.org") {
         background: none !important;
     }
 
+    #bodyContent .plainlist[style*="background"] {
+        background: none !important;
+    }
+
     #bodyContent .wikitable :is(.mw-collapsible, .mw-collapsible-content) {
         background: revert !important;
     }
