@@ -71,23 +71,9 @@ and in particular, tooltips and scrollbars. */
 .hidehscroll-box scrollbar thumb:before {
     content: "";
     display: -moz-box;
-    border-radius: 5px;
     background-color: rgba(124, 124, 131, 1);
     -moz-box-flex: 1;
-    border-radius: 0px;
-    transition: border-radius 0.2s ease-in-out;
-}
-
-.hidevscroll-scrollbar:hover thumb:before,
-.hidehscroll-box scrollbar:hover thumb:before {
     border-radius: 5px;
-    transition: border-radius 0.15s ease-in-out;
-}
-
-.hidevscroll-scrollbar thumb:active:before,
-.hidehscroll-box scrollbar thumb:active:before {
-    border-radius: 5px;
-    transition: border-radius 0.1s ease-in-out;
 }
 
 .hidevscroll-scrollbar[orient="vertical"] thumb:before {
@@ -188,18 +174,7 @@ scrollbar thumb:before {
     display: -moz-box;
     background-color: rgba(124, 124, 131, 1);
     -moz-box-flex: 1;
-    border-radius: 0px;
-    transition: border-radius 0.2s ease-in-out;
-}
-
-scrollbar:hover thumb:before {
     border-radius: 5px;
-    transition: border-radius 0.15s ease-in-out;
-}
-
-scrollbar thumb:active:before {
-    border-radius: 5px;
-    transition: border-radius 0.1s ease-in-out;
 }
 
 scrollbar[orient="vertical"] thumb:before {
