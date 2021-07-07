@@ -28,10 +28,13 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
 }
 
 #wrapper-urlbar-container + toolbarpaletteitem > #search-container,
-#wrapper-search-container + toolbarpaletteitem > #urlbar-container,
-#nav-bar[customizing="true"] #urlbar-container + #search-container,
-#nav-bar[customizing="true"] #search-container + #urlbar-container {
+#nav-bar[customizing="true"] #urlbar-container + #search-container {
     margin-inline-start: -3px !important;
+}
+
+#wrapper-search-container + toolbarpaletteitem > #urlbar-container,
+#nav-bar[customizing="true"] #search-container + #urlbar-container {
+    margin-inline-start: 0 !important;
 }
 
 /* dim widgets when window is inactive, like tabs */

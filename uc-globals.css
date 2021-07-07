@@ -138,8 +138,7 @@ tooltip {
 
     --urlbar-base-font-weight: 400;
     --urlbar-result-strong-font-weight: 400;
-    --urlbar-results-bgcolor: hsl(233, 32%, 10%);
-    --urlbar-bookmark-icon-color: hsl(250, 100%, 64%);
+    --urlbar-results-bgcolor: var(--ui-secondary-bg);
     /* the width of a search one-off button in the urlbar */
     --urlbar-one-offs-engine-width: 28px;
     /* how long the scrolling one-offs slider should be. 8 means it's long enough for 8 buttons to be visible without scrolling. */

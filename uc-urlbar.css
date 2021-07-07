@@ -44,12 +44,12 @@ toolbarpaletteitem[place="palette"] > #search-container {
 #PopupSearchAutoComplete {
     margin-top: 0.5px !important;
     border: none !important;
-    background: var(--urlbar-results-bgcolor) !important;
-    border-radius: 0 !important;
-    border-bottom-left-radius: 4px !important;
-    border-bottom-right-radius: 4px !important;
-    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.2);
+    --panel-background: var(--urlbar-results-bgcolor) !important;
+    box-shadow: none;
     font-size: 1.15em !important;
+    padding: 0 15px 15px;
+    margin: -15px;
+    background: none;
 }
 
 #PopupSearchAutoComplete > * {

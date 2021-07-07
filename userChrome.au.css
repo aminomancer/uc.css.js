@@ -80,6 +80,12 @@ menupopup::part(arrowscrollbox-scrollbox) {
     margin-bottom: unset;
 }
 
+#PopupSearchAutoComplete::part(content) {
+    border: var(--searchbar-popup-border);
+    border-radius: var(--searchbar-popup-border-radius);
+    box-shadow: var(--searchbar-popup-box-shadow);
+}
+
 /* panel width */
 #customizationui-widget-multiview panelview:not([extension]) {
     width: unset;
