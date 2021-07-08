@@ -89,6 +89,7 @@ menuitem#sanitizeItem > .menu-text,
 menuitem#repair-text-encoding .menu-text,
 #context-viewpartialsource-selection .menu-text,
 #placesContext_sortBy\:name .menu-text,
+#context-viewsource-goToLine .menu-text,
 #context-undo .menu-text,
 #context-redo .menu-text,
 #menu_undo .menu-text,
@@ -366,6 +367,7 @@ menuitem#sanitizeItem:before,
 :is(menuitem#textfieldDirection-swap, #context-bidi-text-direction-toggle, #context-bidi-page-direction-toggle, #documentDirection-swap):before,
 menuitem#repair-text-encoding:before,
 #placesContext_sortBy\:name:before,
+#context-viewsource-goToLine:before,
 #context-undo:before,
 #context-redo:before,
 #menu_undo:before,
@@ -860,6 +862,7 @@ menuitem#repair-text-encoding:before {
     background-image: url(chrome://userchrome/content/skin/characterEncoding.svg);
 }
 
+#context-viewsource-goToLine:before,
 #placesContext_sortBy\:name:before {
     background-image: url(chrome://userchrome/content/skin/sort.svg);
 }

@@ -702,6 +702,10 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
         margin-block: 0 5px !important;
     }
 
+    #commonDialog[subdialog] #loginTextbox {
+        margin-block-start: 2px !important;
+    }
+
     .dialog-content-box:not([hidden]) + .dialog-button-box {
         margin-top: 5px;
     }

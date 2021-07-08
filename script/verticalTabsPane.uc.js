@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name           Vertical Tabs Pane
-// @version        1.3.6
+// @version        1.3.7
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
-// @description    Create a vertical pane across from the sidebar that functions like the vertical tab pane in Microsoft Edge. It doesn't hide the tab bar since people have different preferences on how to do that, but it sets an attribute on the root element that you can use to hide the regular tab bar while the vertical pane is open, for example :root[vertical-tabs] #TabsToolbar... By default, the pane is resizable just like the sidebar is. And like the pane in Edge, you can press a button to collapse it, and it will hide the tab labels and become a thin strip that just shows the tabs' favicons. Hovering the collapsed pane will expand it without moving the browser content. As with the [vertical-tabs] attribute, this "unpinned" state is reflected on the root element, so you can select it like :root[vertical-tabs-unpinned]... Like the sidebar, the state of the pane is stored between windows and recorded in preferences. There's no need to edit these preferences directly, but there are a few other preferences that are meant to be edited in about:config. If you search "userChrome.tabs.verticalTabsPane" in about:config you'll find all of the preferences. "reverse-order" changes the direction of the pane so that newer tabs are displayed on top rather than on bottom. "no-expand-on-hover" prevents the pane from expanding on hover when it's collapsed. Normally the pane collapses and then temporarily expands if you hover it, after a delay of 100ms. Then when your mouse leaves the pane, it collapses again, after a delay of 100ms. Both of these delays can be changed with the "hover-delay" and "hover-out-delay" prefs. For languages other than English, the labels and tooltips can be modified directly in the l10n object below.
+// @description    Create a vertical pane across from the sidebar that functions like the vertical tab pane in Microsoft Edge. It doesn't hide the tab bar since people have different preferences on how to do that, but it sets an attribute on the root element that you can use to hide the regular tab bar while the vertical pane is open, for example :root[vertical-tabs] #TabsToolbar... By default, the pane is resizable just like the sidebar is. And like the pane in Edge, you can press a button to collapse it, and it will hide the tab labels and become a thin strip that just shows the tabs' favicons. Hovering the collapsed pane will expand it without moving the browser content. As with the [vertical-tabs] attribute, this "unpinned" state is reflected on the root element, so you can select it like :root[vertical-tabs-unpinned]... Like the sidebar, the state of the pane is stored between windows and recorded in preferences. There's no need to edit these preferences directly. There are a few other preferences that can be edited in about:config, but they can all be changed on the fly by opening the context menu within the pane. The new tab button and the individual tabs all have their own context menus, but right-clicking anything else will open the pane's context menu, which has options for changing these preferences. "Move Pane to Right/Left" will change which side the pane (and by extension, the sidebar) is displayed on, relative to the browser content. Since the pane always mirrors the position of the sidebar, moving the pane to the right will move the sidebar to the left, and vice versa. "Reverse Tab Order" changes the direction of the pane so that newer tabs are displayed on top rather than on bottom. "Expand Pane on Hover/Focus" causes the pane to expand on hover when it's collapsed. When you collapse the pane with the unpin button, it collapses to a small width and then temporarily expands if you hover it, after a delay of 100ms. Then when your mouse leaves the pane, it collapses again, after a delay of 100ms. Both of these delays can be changed with the "Configure Hover Delay" and "Configure Hover Out Delay" options in the context menu, or in about:config. For languages other than English, the labels and tooltips can be modified directly in the l10n object below.
 // ==/UserScript==
 
 (function () {
@@ -13,6 +13,26 @@
             "Button tooltip": `Toggle vertical tabs`,
             "Collapse button tooltip": `Collapse pane`,
             "Pin button tooltip": `Pin pane`,
+            // labels for the context menu
+            context: {
+                "Move Pane to Right": "Move Pane to Right",
+                "Move Pane to Left": "Move Pane to Left",
+                "Expand Pane": "Expand Pane on Hover/Focus",
+                "Reverse Tab Order": "Reverse Tab Order",
+                "Configure Hover Delay": "Configure Hover Delay",
+                "Configure Hover Out Delay": "Configure Hover Out Delay",
+            },
+            // strings for the hover delay config prompt
+            prompt: {
+                "Hover delay title": "Hover delay (in milliseconds)",
+                "Hover delay description":
+                    "How long should the collapsed pane wait before expanding?",
+                "Hover out delay title": "Hover out delay (in milliseconds)",
+                "Hover out delay description":
+                    "How long should the expanded pane wait before collapsing?",
+                "Invalid": "Invalid input!",
+                "Invalid description": "This preference must be a positive integer.",
+            },
         },
     };
     if (location.href !== "chrome://browser/content/browser.xhtml") return;
@@ -72,11 +92,58 @@
             // build the DOM
             this.pane = document.getElementById("vertical-tabs-pane");
             this.splitter = document.getElementById("vertical-tabs-splitter");
+            this.contextMenu = document.getElementById("mainPopupSet").appendChild(
+                create(document, "menupopup", {
+                    id: "vertical-tabs-context-menu",
+                })
+            );
             this.innerBox = this.pane.appendChild(
-                create(document, "vbox", { id: "vertical-tabs-inner-box" })
+                create(document, "vbox", {
+                    id: "vertical-tabs-inner-box",
+                    context: "vertical-tabs-context-menu",
+                })
             );
             this.buttonsRow = this.innerBox.appendChild(
-                create(document, "hbox", { id: "vertical-tabs-buttons-row" })
+                create(document, "hbox", {
+                    id: "vertical-tabs-buttons-row",
+                })
+            );
+            this.contextMenu._menuitemPosition = this.contextMenu.appendChild(
+                create(document, "menuitem", {
+                    id: "vertical-tabs-context-position",
+                    label: config.l10n.context["Move Pane to Right"],
+                    oncommand: `Services.prefs.setBoolPref(SidebarUI.POSITION_START_PREF, true);`,
+                })
+            );
+            this.contextMenu._menuitemExpand = this.contextMenu.appendChild(
+                create(document, "menuitem", {
+                    id: "vertical-tabs-context-expand",
+                    label: config.l10n.context["Expand Pane"],
+                    type: "checkbox",
+                    oncommand: `Services.prefs.setBoolPref("userChrome.tabs.verticalTabsPane.no-expand-on-hover", !this.getAttribute("checked"));`,
+                })
+            );
+            this.contextMenu._menuitemReverse = this.contextMenu.appendChild(
+                create(document, "menuitem", {
+                    id: "vertical-tabs-context-reverse",
+                    label: config.l10n.context["Reverse Tab Order"],
+                    type: "checkbox",
+                    oncommand: `Services.prefs.setBoolPref("userChrome.tabs.verticalTabsPane.reverse-order", this.getAttribute("checked"));`,
+                })
+            );
+            this.contextMenu._menuitemHoverDelay = this.contextMenu.appendChild(
+                create(document, "menuitem", {
+                    id: "vertical-tabs-context-hover-delay",
+                    label: config.l10n.context["Configure Hover Delay"],
+                    oncommand: `verticalTabsPane.promptForIntPref("userChrome.tabs.verticalTabsPane.hover-delay")`,
+                })
+            );
+            this.contextMenu._menuitemHoverOutDelay = this.contextMenu.appendChild(
+                create(document, "menuitem", {
+                    id: "vertical-tabs-context-hover-out-delay",
+                    label: config.l10n.context["Configure Hover Out Delay"],
+                    oncommand: `verticalTabsPane.promptForIntPref("userChrome.tabs.verticalTabsPane.hover-out-delay")`,
+                })
             );
             // tab stops let us focus elements in the tabs pane by hitting tab to cycle through toolbars, just as in vanilla firefox.
             this.buttonsTabStop = this.buttonsRow.appendChild(
@@ -145,6 +212,7 @@
             });
             prefSvc.addObserver("userChrome.tabs.verticalTabsPane", this);
             prefSvc.addObserver("privacy.userContext", this);
+            prefSvc.addObserver(SidebarUI.POSITION_START_PREF, this);
             // re-initialize the sidebar's positionstart pref callback since we changed it earlier at the bottom to make it also move the vertical tabs pane.
             XPCOMUtils.defineLazyPreferenceGetter(
                 SidebarUI,
@@ -173,6 +241,7 @@
                 (e) => {
                     readPref(reversePref);
                     readPref("privacy.userContext.enabled");
+                    readPref(SidebarUI.POSITION_START_PREF);
                     // try to adopt from previous window, otherwise restore from prefs.
                     let sourceWindow = window.opener;
                     if (sourceWindow)
@@ -323,6 +392,41 @@
             this.pinPaneButton.tooltipText =
                 config.l10n[newVal ? "Pin button tooltip" : "Collapse button tooltip"];
         }
+        promptForIntPref(pref) {
+            let val, title, text;
+            switch (pref) {
+                case hoverDelayPref:
+                    val = this.hoverDelay ?? 100;
+                    title = config.l10n.prompt["Hover delay title"];
+                    text = config.l10n.prompt["Hover delay description"];
+                    break;
+                case hoverOutDelayPref:
+                    val = this.hoverOutDelay ?? 100;
+                    title = config.l10n.prompt["Hover out delay title"];
+                    text = config.l10n.prompt["Hover out delay description"];
+                    break;
+            }
+            let input = { value: val };
+            let win = Services.wm.getMostRecentWindow(null);
+            let ok = Services.prompt.prompt(win, title, text, input, null, { value: 0 });
+            if (!ok) return;
+            let int = parseInt(input.value, 10);
+            let onFail = () => {
+                Services.prompt.alert(
+                    win,
+                    config.l10n.prompt.Invalid,
+                    config.l10n.prompt["Invalid description"]
+                );
+                this.promptForIntPref(pref);
+            };
+            if (!(int >= 0)) return onFail();
+            else
+                try {
+                    prefSvc.setIntPref(pref, int);
+                } catch (e) {
+                    return onFail();
+                }
+        }
         /**
          * universal event handler — we generally pass the whole class to addEventListener and let this function decide which callback to invoke.
          * @param {object} e (an event object)
@@ -421,10 +525,14 @@
                     break;
                 case noExpandPref:
                     this.noExpand = value;
-                    value
-                        ? this.pane.setAttribute("no-expand", true)
-                        : this.pane.removeAttribute("no-expand");
-                    if (value) this.pane.removeAttribute("expanded");
+                    if (value) {
+                        this.pane.setAttribute("no-expand", true);
+                        this.pane.removeAttribute("expanded");
+                        this.contextMenu._menuitemExpand.removeAttribute("checked");
+                    } else {
+                        this.pane.removeAttribute("no-expand");
+                        this.contextMenu._menuitemExpand.setAttribute("checked", true);
+                    }
                     break;
                 case reversePref:
                     this.reversed = value;
@@ -433,6 +541,8 @@
                         this.tabToElement = new Map();
                         this._populate();
                     }
+                    if (value) this.contextMenu._menuitemReverse.setAttribute("checked", true);
+                    else this.contextMenu._menuitemReverse.removeAttribute("checked");
                     break;
                 case hoverDelayPref:
                     this.hoverDelay = value ?? 100;
@@ -442,6 +552,22 @@
                 case "privacy.userContext.enabled":
                 case "privacy.userContext.newTabContainerOnLeftClick.enabled":
                     this.handlePrivacyChange();
+                    break;
+                case SidebarUI.POSITION_START_PREF:
+                    let menuitem = this.contextMenu._menuitemPosition;
+                    if (value) {
+                        menuitem.label = config.l10n.context["Move Pane to Left"];
+                        menuitem.setAttribute(
+                            "oncommand",
+                            `Services.prefs.setBoolPref(SidebarUI.POSITION_START_PREF, false);`
+                        );
+                    } else {
+                        menuitem.label = config.l10n.context["Move Pane to Right"];
+                        menuitem.setAttribute(
+                            "oncommand",
+                            `Services.prefs.setBoolPref(SidebarUI.POSITION_START_PREF, true);`
+                        );
+                    }
                     break;
             }
         }
@@ -1246,7 +1372,7 @@
             } else {
                 label = tab._fullLabel || tab.getAttribute("label");
                 // show the tab's process ID in the tooltip?
-                if (Services.prefs.getBoolPref("browser.tabs.tooltipsShowPidAndActiveness", false))
+                if (prefSvc.getBoolPref("browser.tabs.tooltipsShowPidAndActiveness", false))
                     if (tab.linkedBrowser) {
                         let [contentPid, ...framePids] = this.E10SUtils.getBrowserPids(
                             tab.linkedBrowser,
