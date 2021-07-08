@@ -313,7 +313,7 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
 }
 
 @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
-    @-moz-document regexp("^chrome:(?!\/\/(devtools|mozapps|browser\/content\/(sanitize|places\/places.xhtml|pageinfo\/pageInfo.xhtml)|global\/content\/commonDialog)).*") {
+    @-moz-document regexp("^chrome:(?!\/\/(devtools|mozapps|browser\/content\/(places\/places.xhtml|pageinfo\/pageInfo.xhtml)|global\/content\/commonDialog)).*") {
         /* for most 12px stuff */
         html:root,
         window:root,

@@ -413,6 +413,17 @@ toolbarpaletteitem[removable="false"]
     fill-opacity: 1 !important;
 }
 
+#urlbar[pageproxystate="valid"]
+    #identity-box:is(.weakCipher, .mixedDisplayContent, .mixedDisplayContentLoadedActiveBlocked, .certUserOverridden, .certErrorPage) 
+    #identity-icon-box:is([open="true"], :focus-visible)
+    #identity-icon,
+#urlbar[pageproxystate="valid"]
+    #identity-box:is(.weakCipher, .mixedDisplayContent, .mixedDisplayContentLoadedActiveBlocked, .certUserOverridden, .certErrorPage) 
+    #identity-icon-box:is(:hover:active, :hover:not([open="true"]))
+    #identity-icon:hover {
+	fill: unset !important;
+}
+
 #identity-box[pageproxystate="valid"].chromeUI #identity-icon-label,
 #identity-box[pageproxystate="valid"].extensionPage #identity-icon-label {
     opacity: 0.6 !important;
@@ -500,20 +511,20 @@ toolbarpaletteitem[removable="false"]
 :root[hide-tp-icon-on-ntp]:not([customizing])
     #urlbar:not([searchmode], [actiontype="switchtab"])
     #tracking-protection-icon-container[hidden]:not([view-source])
-    ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage, .unknownIdentity)[pageproxystate="valid"]
+    ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage, .certErrorPage, .unknownIdentity)[pageproxystate="valid"]
     #identity-icon-box,
 :root[hide-tp-icon-on-ntp]:not([customizing])
     #urlbar:not([searchmode])[actiontype="switchtab"][actionoverride="true"]
     #tracking-protection-icon-container[hidden]:not([view-source])
-    ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage, .unknownIdentity)[pageproxystate="valid"]
+    ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage, .certErrorPage, .unknownIdentity)[pageproxystate="valid"]
     #identity-icon-box,
 :root[hide-tp-icon-on-ntp]:not([customizing])
     #urlbar[pageproxystate="invalid"]:not([searchmode], [actiontype="switchtab"])
-    #identity-box:not(.httpsOnlyErrorPage, .unknownIdentity)
+    #identity-box:not(.httpsOnlyErrorPage, .certErrorPage, .unknownIdentity)
     #identity-icon-box,
 :root[hide-tp-icon-on-ntp]:not([customizing])
     #urlbar[pageproxystate="invalid"]:not([searchmode])[actiontype="switchtab"][actionoverride="true"]
-    #identity-box:not(.httpsOnlyErrorPage, .unknownIdentity)
+    #identity-box:not(.httpsOnlyErrorPage, .certErrorPage, .unknownIdentity)
     #identity-icon-box {
     pointer-events: none !important;
 }
@@ -521,20 +532,20 @@ toolbarpaletteitem[removable="false"]
 :root[hide-tp-icon-on-ntp]:not([customizing])
     #urlbar:not([searchmode], [actiontype="switchtab"])
     #tracking-protection-icon-container[hidden]
-    ~ #identity-box:not(.chromeUI, .httpsOnlyErrorPage, .unknownIdentity)
+    ~ #identity-box:not(.chromeUI, .httpsOnlyErrorPage, .certErrorPage, .unknownIdentity)
     #identity-icon-box,
 :root[hide-tp-icon-on-ntp]:not([customizing])
     #urlbar:not([searchmode])[actiontype="switchtab"][actionoverride="true"]
     #tracking-protection-icon-container[hidden]
-    ~ #identity-box:not(.chromeUI, .httpsOnlyErrorPage, .unknownIdentity)
+    ~ #identity-box:not(.chromeUI, .httpsOnlyErrorPage, .certErrorPage, .unknownIdentity)
     #identity-icon-box,
 :root[hide-tp-icon-on-ntp]:not([customizing])
     #urlbar[pageproxystate="invalid"]:not([searchmode], [actiontype="switchtab"])
-    #identity-box:not(.httpsOnlyErrorPage, .unknownIdentity)
+    #identity-box:not(.httpsOnlyErrorPage, .certErrorPage, .unknownIdentity)
     #identity-icon-box,
 :root[hide-tp-icon-on-ntp]:not([customizing])
     #urlbar[pageproxystate="invalid"]:not([searchmode])[actiontype="switchtab"][actionoverride="true"]
-    #identity-box:not(.httpsOnlyErrorPage, .unknownIdentity)
+    #identity-box:not(.httpsOnlyErrorPage, .certErrorPage, .unknownIdentity)
     #identity-icon-box {
     margin-inline: 2px -3px !important;
 }
@@ -542,20 +553,20 @@ toolbarpaletteitem[removable="false"]
 :root[hide-tp-icon-on-ntp]:not([customizing])
     #urlbar:not([searchmode], [usertyping="true"], [focused="true"], [open="true"], :focus-within)
     #tracking-protection-icon-container[hidden]:not([view-source])
-    ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage, .unknownIdentity)
+    ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage, .certErrorPage, .unknownIdentity)
     > #identity-icon-box:not(:focus-visible)
     :is(#identity-icon, #remote-control-icon:not(:hover, :focus-visible)),
 :root[hide-tp-icon-on-ntp]:not([customizing])
     #urlbar:not([searchmode], [usertyping="true"], [focused="true"], [open="true"], :focus-within)
     #tracking-protection-icon-container[hidden]:not([view-source])
-    ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage, .unknownIdentity)
+    ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage, .certErrorPage, .unknownIdentity)
     > #identity-icon-box
     ~ #identity-permission-box:not(:focus-visible, [open="true"])
     image:not(:hover, :focus-visible),
 :root[hide-tp-icon-on-ntp]:not([customizing])
     #urlbar:not([searchmode], [usertyping="true"], [focused="true"], [open="true"], :focus-within)
     #tracking-protection-icon-container[hidden]:not([view-source])
-    ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage, .unknownIdentity)
+    ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage, .certErrorPage, .unknownIdentity)
     > #identity-icon-box
     ~ #notification-popup-box:not([open="true"])
     > :is(image, stack):not(:hover, :focus-visible) {

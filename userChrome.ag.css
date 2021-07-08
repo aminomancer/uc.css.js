@@ -3,6 +3,11 @@ and in particular, tooltips and scrollbars. */
 
 @import url(uc-globals.css);
 
+/* print preview background */
+::-moz-page-sequence {
+    background-image: linear-gradient(hsl(240, 4%, 12%), hsl(240, 4%, 20%));
+}
+
 /* tree scrollbars — these only show up in the firefox UI and system pages, e.g. bookmarks sidebar */
 .hidevscroll-scrollbar,
 .hidehscroll-box scrollbar {

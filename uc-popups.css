@@ -218,6 +218,7 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlis
     border-radius: var(--context-menuitem-border-radius) !important;
     min-height: 25px !important;
     padding-inline: 2px !important;
+    border: none !important;
 }
 
 panel#PopupAutoComplete[type="autocomplete-richlistbox"]
@@ -652,7 +653,8 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
 
 @-moz-document url(chrome://global/content/commonDialog.xhtml),
     url("chrome://mozapps/content/handling/permissionDialog.xhtml"),
-    url("chrome://mozapps/content/handling/appChooser.xhtml")
+    url("chrome://mozapps/content/handling/appChooser.xhtml"),
+    url-prefix("chrome://browser/content/sanitize.xhtml")
 {
     #commonDialogWindow,
     #commonDialogWindow * {
@@ -892,7 +894,8 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
     url("chrome://mozapps/content/handling/appChooser.xhtml"),
     url-prefix("chrome://global/content/print.html"),
     url("chrome://browser/content/places/bookmarkProperties.xhtml"),
-    url("chrome://browser/content/places/bookmarkProperties2.xhtml")
+    url("chrome://browser/content/places/bookmarkProperties2.xhtml"),
+    url-prefix("chrome://browser/content/sanitize.xhtml")
 {
     :root,
     window,
@@ -1133,6 +1136,34 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
         padding-inline-end: 6px !important;
     }
 
+    #SanitizeDialog {
+        padding-bottom: 6px !important;
+    }
+
+    #SanitizeDurationBox,
+    #sanitizeEverythingWarningBox {
+        margin-inline: 8px !important;
+        margin-top: 8px !important;
+    }
+
+    #SanitizeDialog groupbox {
+        margin-inline: 8px !important;
+    }
+
+    #sanitizeEverythingWarningBox {
+        border-color: transparent !important;
+        background-color: color-mix(in srgb, var(--dialog-bgcolor) 50%, hsla(0, 0%, 0%, 0.2)) !important;
+    }
+
+    #sanitizeEverythingWarningIcon {
+        list-style-image: url("chrome://global/skin/icons/warning.svg") !important;
+        width: 48px;
+        height: 48px;
+        -moz-context-properties: fill;
+        fill: currentColor;
+        color: hsl(44, 95%, 60%);
+    }
+
     @-moz-document url("chrome://mozapps/content/handling/permissionDialog.xhtml")
     {
         dialog > #description,
@@ -1158,6 +1189,8 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
             font-kerning: normal !important;
         }
 
+        h2,
+        h3,
         #titleText {
             font-weight: 400 !important;
             font-family: SF Pro Display, Segoe UI, sans-serif !important;
@@ -1183,16 +1216,6 @@ link[href="chrome://global/content/printPagination.css"]
     ~ .container {
     box-shadow: 0 0 15px 0 hsla(0, 0%, 10%, 0.2) !important;
     border-radius: 3px !important;
-}
-
-@-moz-document url-prefix("chrome://browser/content/sanitize.xhtml")
-{
-    #sanitizeEverythingWarningBox {
-        background-color: Window !important;
-        border: 1px solid ThreeDDarkShadow !important;
-        border-radius: 5px;
-        padding: 16px;
-    }
 }
 
 @-moz-document url("chrome://browser/content/webrtcIndicator.xul")

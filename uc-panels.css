@@ -635,7 +635,6 @@ popupnotification progress[paused]::-moz-progress-bar {
 .identity-popup-security-connection {
     /* background-position: 2em 40% !important; */
     background-size: 18px auto !important;
-    background-image: url(chrome://userchrome/content/connection-mixed-active-loaded.svg) !important;
     font-size: 1.1em;
 }
 
@@ -721,10 +720,21 @@ popupnotification progress[paused]::-moz-progress-bar {
     fill: var(--secure-color) !important;
 }
 
+#identity-popup[connection=secure-cert-user-overridden] .identity-popup-security-connection,
+#identity-popup[connection=cert-error-page] .identity-popup-security-connection {
+    background-image: url(chrome://global/skin/icons/security-warning.svg) !important;
+    fill: unset !important;
+    -moz-context-properties: fill !important;
+}
+
 #identity-popup[connection="extension"] .identity-popup-security-connection {
     background-image: url(chrome://userchrome/content/material/extension.svg) !important;
     background-size: 16px auto !important;
     fill: currentColor !important;
+}
+
+.identity-popup-connection-not-secure[when-connection~="secure-cert-user-overridden"] {
+    color: inherit !important;
 }
 
 /* url bar popups */
@@ -854,6 +864,7 @@ popupnotification progress[paused]::-moz-progress-bar {
     background-color: var(--arrowpanel-dimmed) !important;
     border-radius: 3px !important;
     padding: 0.15em 0.4em !important;
+    min-height: var(--subviewbutton-height) !important;
     align-self: center !important;
 }
 
@@ -882,6 +893,7 @@ popupnotification progress[paused]::-moz-progress-bar {
 
 #identity-popup-securityView-body > button {
     width: -moz-available;
+    min-height: var(--subviewbutton-height) !important;
 }
 
 #identity-popup-securityView-body > :is(description, label, button) {
