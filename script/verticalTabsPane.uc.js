@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Vertical Tabs Pane
-// @version        1.3.4
+// @version        1.3.5
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Create a vertical pane across from the sidebar that functions like the vertical tab pane in Microsoft Edge. It doesn't hide the tab bar since people have different preferences on how to do that, but it sets an attribute on the root element that you can use to hide the regular tab bar while the vertical pane is open, for example :root[vertical-tabs] #TabsToolbar... By default, the pane is resizable just like the sidebar is. And like the pane in Edge, you can press a button to collapse it, and it will hide the tab labels and become a thin strip that just shows the tabs' favicons. Hovering the collapsed pane will expand it without moving the browser content. As with the [vertical-tabs] attribute, this "unpinned" state is reflected on the root element, so you can select it like :root[vertical-tabs-unpinned]... Like the sidebar, the state of the pane is stored between windows and recorded in preferences. There's no need to edit these preferences directly, but there are a few other preferences that are meant to be edited in about:config. If you search "userChrome.tabs.verticalTabsPane" in about:config you'll find all of the preferences. "reverse-order" changes the direction of the pane so that newer tabs are displayed on top rather than on bottom. "no-expand-on-hover" prevents the pane from expanding on hover when it's collapsed. Normally the pane collapses and then temporarily expands if you hover it, after a delay of 100ms. Then when your mouse leaves the pane, it collapses again, after a delay of 100ms. Both of these delays can be changed with the "hover-delay" and "hover-out-delay" prefs. For languages other than English, the labels and tooltips can be modified directly in the l10n object below.
@@ -99,7 +99,7 @@
             this.pinPaneButton.addEventListener("command", (e) => {
                 this.pane.getAttribute("unpinned")
                     ? this.pane.removeAttribute("unpinned")
-                    : this.pane.setAttribute("unpinned", true);
+                    : this.unpin();
                 this.resetPinnedTooltip();
             });
             this.closePaneButton = this.buttonsRow.appendChild(
@@ -300,9 +300,7 @@
                 sourceUI.pane.width || sourceUI.pane.getBoundingClientRect().width
             );
             let sourcePinned = !!sourceUI.pane.getAttribute("unpinned");
-            sourcePinned
-                ? this.pane.setAttribute("unpinned", true)
-                : this.pane.removeAttribute("unpinned");
+            sourcePinned ? this.unpin() : this.pane.removeAttribute("unpinned");
             sourcePinned
                 ? this.root.setAttribute("vertical-tabs-unpinned", true)
                 : this.root.removeAttribute("vertical-tabs-unpinned");
@@ -415,9 +413,7 @@
                     value ? this.close() : this.open();
                     break;
                 case unpinnedPref:
-                    value
-                        ? this.pane.setAttribute("unpinned", true)
-                        : this.pane.removeAttribute("unpinned");
+                    value ? this.unpin() : this.pane.removeAttribute("unpinned");
                     value
                         ? this.root.setAttribute("vertical-tabs-unpinned", true)
                         : this.root.removeAttribute("vertical-tabs-unpinned");
@@ -992,6 +988,14 @@
                 this.pane.removeAttribute("expanded");
             }, this.hoverOutDelay);
         }
+        unpin() {
+            this.pane.setAttribute("unpinned", true);
+            this.pane.style.setProperty("--pane-width", this.pane.width + "px");
+            this.pane.style.setProperty(
+                "--pane-transition-duration",
+                (Math.sqrt(this.pane.width / 350) * 0.25).toFixed(2) + "s"
+            );
+        }
         // "click" events work kind of like "mouseup" events, but in this case we're only using this to prevent the click event yielding a command event.
         _onClick(e) {
             if (e.button !== 0 || e.target.classList.contains("all-tabs-secondary-button")) return;
@@ -1318,31 +1322,21 @@
         // load our stylesheet as an author sheet. override it with userChrome.css and !important rules.
         registerSheet() {
             let css = `
-#vertical-tabs-button {
-    list-style-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="context-fill %230c0c0d"><path fill-opacity="context-fill-opacity" d="M2,7h3v6H2V7z"/><path d="M6,7v6H5V7H2V6h12v1H6z M13,1c1.657,0,3,1.343,3,3v8c0,1.657-1.343,3-3,3H3c-1.657,0-3-1.343-3-3V4c0-1.657,1.343-3,3-3H13z M3,3C2.448,3,2,3.448,2,4v8c0,0.6,0.4,1,1,1h10c0.6,0,1-0.4,1-1V4c0-0.6-0.4-1-1-1H3z"/></svg>');
-    fill-opacity: 0.4;
-}
-#vertical-tabs-button:not([positionstart="true"]) .toolbarbutton-icon {
-    transform: scaleX(-1);
-}
-#vertical-tabs-button[checked],
-#vertical-tabs-close-button {
-    list-style-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="context-fill %230c0c0d"><path fill-opacity="context-fill-opacity" d="M2,3h12v3H2V3z"/><path d="M6,7v6H5V7H2V6h12v1H6z M13,1c1.657,0,3,1.343,3,3v8c0,1.657-1.343,3-3,3H3c-1.657,0-3-1.343-3-3V4c0-1.657,1.343-3,3-3H13z M3,3C2.448,3,2,3.448,2,4v8c0,0.6,0.4,1,1,1h10c0.6,0,1-0.4,1-1V4c0-0.6-0.4-1-1-1H3z"/></svg>');
-    fill-opacity: 0.4;
-}
-#vertical-tabs-new-tab-button {
-    list-style-image: url("chrome://browser/skin/new-tab.svg");
-}
-#vertical-tabs-pin-button {
-    list-style-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="context-fill" fill-opacity="context-fill-opacity" d="M11.414 10l2.293-2.293a1 1 0 0 0 0-1.414 4.418 4.418 0 0 0-.8-.622L11.425 7.15h.008l-4.3 4.3v-.017l-1.48 1.476a3.865 3.865 0 0 0 .692.834 1 1 0 0 0 1.37-.042L10 11.414l3.293 3.293a1 1 0 0 0 1.414-1.414zm3.293-8.707a1 1 0 0 0-1.414 0L9.7 4.882A2.382 2.382 0 0 1 8 2.586V2a1 1 0 0 0-1.707-.707l-5 5A1 1 0 0 0 2 8h.586a2.382 2.382 0 0 1 2.3 1.7l-3.593 3.593a1 1 0 1 0 1.414 1.414l12-12a1 1 0 0 0 0-1.414zm-9 6a4.414 4.414 0 0 0-1.571-1.015l2.143-2.142a4.4 4.4 0 0 0 1.013 1.571 4.191 4.191 0 0 0 .9.684l-1.8 1.8a4.2 4.2 0 0 0-.684-.898z"/></svg>');
-}
-#vertical-tabs-pane[unpinned] #vertical-tabs-pin-button {
-    list-style-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="context-fill" fill-opacity="context-fill-opacity" d="M14.707 13.293L11.414 10l2.293-2.293a1 1 0 0 0 0-1.414A4.384 4.384 0 0 0 10.586 5h-.172A2.415 2.415 0 0 1 8 2.586V2a1 1 0 0 0-1.707-.707l-5 5A1 1 0 0 0 2 8h.586A2.415 2.415 0 0 1 5 10.414v.169a4.036 4.036 0 0 0 1.337 3.166 1 1 0 0 0 1.37-.042L10 11.414l3.293 3.293a1 1 0 0 0 1.414-1.414zm-7.578-1.837A2.684 2.684 0 0 1 7 10.583v-.169a4.386 4.386 0 0 0-1.292-3.121 4.414 4.414 0 0 0-1.572-1.015l2.143-2.142a4.4 4.4 0 0 0 1.013 1.571A4.384 4.384 0 0 0 10.414 7h.172a2.4 2.4 0 0 1 .848.152z"/></svg>');
-}
 #vertical-tabs-pane {
     --vertical-tabs-padding: 4px;
+    --collapsed-pane-width: calc(
+        16px + var(--vertical-tabs-padding) * 2 + var(--arrowpanel-menuitem-padding) * 2
+    );
     background-color: var(--vertical-tabs-pane-background, var(--lwt-accent-color));
     padding: var(--vertical-tabs-padding);
+    border-color: var(--sidebar-border-color);
+    border-block-style: none;
+    border-inline-style: solid;
+    border-inline-width: 1px 0;
+    z-index: 2;
+}
+#vertical-tabs-pane[positionstart] {
+    border-inline-width: 0 1px;
 }
 #vertical-tabs-pane:not([unpinned]) {
     min-width: 160px;
@@ -1353,41 +1347,58 @@
     display: flex;
 }
 #vertical-tabs-pane[unpinned]:not([hidden]) {
-    display: flex;
     position: relative;
     z-index: 1;
     margin-inline: 0;
-    max-width: calc(16px + var(--vertical-tabs-padding) * 2 + var(--arrowpanel-menuitem-padding) * 2);
-    min-width: calc(16px + var(--vertical-tabs-padding) * 2 + var(--arrowpanel-menuitem-padding) * 2);
-    width: calc(16px + var(--vertical-tabs-padding) * 2 + var(--arrowpanel-menuitem-padding) * 2);
+    max-width: var(--collapsed-pane-width);
+    min-width: var(--collapsed-pane-width);
+    width: var(--collapsed-pane-width);
     height: 0;
-    transition: 0.3s ease-in-out min-width, 0.3s ease-in-out max-width, 0.3s ease-in-out margin;
-}
-#vertical-tabs-pane[unpinned][expanded] {
-    min-width: 350px;
-    width: 350px;
-    max-width: 350px;
-    margin-inline: 0 -314px;
+    transition-property: min-width, max-width, margin;
+    transition-timing-function: ease-in-out, ease-in-out, ease-in-out;
+    transition-duration: var(--pane-transition-duration), var(--pane-transition-duration), var(--pane-transition-duration);
 }
 #vertical-tabs-pane[unpinned]:not([positionstart="true"]) {
     left: auto;
     right: 0;
     margin-inline: 0;
 }
+#vertical-tabs-pane[unpinned][expanded] {
+    min-width: var(--pane-width, 350px);
+    width: var(--pane-width, 350px);
+    max-width: var(--pane-width, 350px);
+    margin-inline: 0 calc(36px - var(--pane-width, 350px));
+}
 #vertical-tabs-pane[unpinned][expanded]:not([positionstart="true"]) {
-    margin-inline: -314px 0;
+    margin-inline: calc(36px - var(--pane-width, 350px)) 0;
+}
+#vertical-tabs-pane[no-expand] {
+    transition: none !important;
+}
+#vertical-tabs-splitter {
+    border: none;
+}
+#vertical-tabs-pane[unpinned] ~ #vertical-tabs-splitter {
+    display: none;
 }
 #vertical-tabs-inner-box {
     overflow: hidden;
     width: -moz-available;
     min-width: calc(16px + var(--arrowpanel-menuitem-padding) * 2);
 }
-#vertical-tabs-pane[unpinned] ~ #vertical-tabs-splitter {
-    display: none;
+#vertical-tabs-buttons-row {
+    min-width: 0 !important;
 }
-#vertical-tabs-pane[unpinned]:not([expanded]) #vertical-tabs-list .all-tabs-item {
-    padding-inline-end: 0;
+#vertical-tabs-pane[no-expand][unpinned] #vertical-tabs-buttons-row {
+    -moz-box-orient: vertical;
 }
+#vertical-tabs-buttons-row > toolbarbutton {
+    margin: 0 !important;
+}
+#vertical-tabs-pane[unpinned]:not([expanded]) #vertical-tabs-buttons-row > toolbarbutton {
+    min-width: calc(16px + var(--arrowpanel-menuitem-padding) * 2) !important;
+}
+/* tabs */
 #vertical-tabs-list .all-tabs-item {
     border-radius: var(--arrowpanel-menuitem-border-radius);
     box-shadow: none;
@@ -1397,8 +1408,8 @@
     overflow-x: -moz-hidden-unscrollable;
     position: relative;
 }
-#vertical-tabs-pane[checked] toolbartabstop {
-    -moz-user-focus: normal;
+#vertical-tabs-pane[unpinned]:not([expanded]) #vertical-tabs-list .all-tabs-item {
+    padding-inline-end: 0;
 }
 #vertical-tabs-list .all-tabs-item .all-tabs-button:not([disabled], [open]):focus {
     background: none;
@@ -1555,18 +1566,22 @@
 #vertical-tabs-pane[unpinned][no-expand]:not([expanded])
     .all-tabs-item[soundplaying]
     .all-tabs-button:after {
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 18 18"><path fill="context-fill" d="M3.52,5.367c-1.332,0-2.422,1.09-2.422,2.422v2.422c0,1.332,1.09,2.422,2.422,2.422h1.516l4.102,3.633 V1.735L5.035,5.367H3.52z M12.059,9c0-0.727-0.484-1.211-1.211-1.211v2.422C11.574,10.211,12.059,9.727,12.059,9z M14.48,9 c0-1.695-1.211-3.148-2.785-3.512l-0.363,1.09C12.422,6.82,13.27,7.789,13.27,9c0,1.211-0.848,2.18-1.938,2.422l0.484,1.09 C13.27,12.148,14.48,10.695,14.48,9z M12.543,3.188l-0.484,1.09C14.238,4.883,15.691,6.82,15.691,9c0,2.18-1.453,4.117-3.512,4.601 l0.484,1.09c2.422-0.605,4.238-2.906,4.238-5.691C16.902,6.215,15.086,3.914,12.543,3.188z"/></svg>') center/12px no-repeat;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 18 18"><path fill="context-fill" d="M3.52,5.367c-1.332,0-2.422,1.09-2.422,2.422v2.422c0,1.332,1.09,2.422,2.422,2.422h1.516l4.102,3.633 V1.735L5.035,5.367H3.52z M12.059,9c0-0.727-0.484-1.211-1.211-1.211v2.422C11.574,10.211,12.059,9.727,12.059,9z M14.48,9 c0-1.695-1.211-3.148-2.785-3.512l-0.363,1.09C12.422,6.82,13.27,7.789,13.27,9c0,1.211-0.848,2.18-1.938,2.422l0.484,1.09 C13.27,12.148,14.48,10.695,14.48,9z M12.543,3.188l-0.484,1.09C14.238,4.883,15.691,6.82,15.691,9c0,2.18-1.453,4.117-3.512,4.601 l0.484,1.09c2.422-0.605,4.238-2.906,4.238-5.691C16.902,6.215,15.086,3.914,12.543,3.188z"/></svg>')
+        center/12px no-repeat;
 }
 #vertical-tabs-pane[unpinned][no-expand]:not([expanded])
     .all-tabs-item[muted]
     .all-tabs-button:after {
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 18 18"><path fill="context-fill" d="M3.52,5.367c-1.332,0-2.422,1.09-2.422,2.422v2.422c0,1.332,1.09,2.422,2.422,2.422h1.516l4.102,3.633V1.735L5.035,5.367H3.52z"/><path fill="context-fill" fill-rule="evenodd" d="M12.155,12.066l-1.138-1.138l4.872-4.872l1.138,1.138 L12.155,12.066z"/><path fill="context-fill" fill-rule="evenodd" d="M10.998,7.204l1.138-1.138l4.872,4.872l-1.138,1.138L10.998,7.204z"/></svg>') center/12px no-repeat;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 18 18"><path fill="context-fill" d="M3.52,5.367c-1.332,0-2.422,1.09-2.422,2.422v2.422c0,1.332,1.09,2.422,2.422,2.422h1.516l4.102,3.633V1.735L5.035,5.367H3.52z"/><path fill="context-fill" fill-rule="evenodd" d="M12.155,12.066l-1.138-1.138l4.872-4.872l1.138,1.138 L12.155,12.066z"/><path fill="context-fill" fill-rule="evenodd" d="M10.998,7.204l1.138-1.138l4.872,4.872l-1.138,1.138L10.998,7.204z"/></svg>')
+        center/12px no-repeat;
 }
 #vertical-tabs-pane[unpinned][no-expand]:not([expanded])
     .all-tabs-item:is([muted], [soundplaying])
     .all-tabs-button
     .toolbarbutton-icon {
-    mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><circle cx="100%" cy="100%" r="9"/></svg>') 0/100% 100%, linear-gradient(#fff, #fff);
+    mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><circle cx="100%" cy="100%" r="9"/></svg>')
+            0/100% 100%,
+        linear-gradient(#fff, #fff);
     mask-composite: exclude;
 }
 #vertical-tabs-list .all-tabs-item .all-tabs-secondary-button[close-button] {
@@ -1605,9 +1620,7 @@
     z-index: 1000;
     width: 100%;
 }
-#vertical-tabs-pane:not([no-expand][unpinned])
-    #vertical-tabs-list
-    .all-tabs-item[dragpos]::before {
+#vertical-tabs-pane:not([no-expand][unpinned]) #vertical-tabs-list .all-tabs-item[dragpos]::before {
     border-image: linear-gradient(
         to right,
         transparent,
@@ -1639,37 +1652,30 @@
     margin: 0 !important;
     -moz-box-pack: start !important;
 }
+#vertical-tabs-pane[unpinned]
+    #vertical-tabs-buttons-row
+    > toolbarbutton:not(#vertical-tabs-new-tab-button),
 #vertical-tabs-pane[unpinned] :is(.all-tabs-item, .subviewbutton) .toolbarbutton-text {
-    transition: 0.3s ease-in-out opacity;
+    transition-property: opacity;
+    transition-timing-function: ease-in-out;
+    transition-duration: var(--pane-transition-duration);
 }
 #vertical-tabs-pane[unpinned]:not([expanded]) .all-tabs-secondary-button {
     visibility: collapse;
 }
 #vertical-tabs-pane[unpinned]:not([expanded])
+    #vertical-tabs-buttons-row
+    > toolbarbutton:not(#vertical-tabs-new-tab-button),
+#vertical-tabs-pane[unpinned]:not([expanded])
     :is(.all-tabs-item, .subviewbutton)
     .toolbarbutton-text {
     opacity: 0 !important;
 }
-#vertical-tabs-pane .subviewbutton.no-label .toolbarbutton-text {
-    display: none;
-}
-#vertical-tabs-pane[unpinned]:not([expanded]) #vertical-tabs-buttons-row > toolbarbutton {
-    min-width: calc(16px + var(--arrowpanel-menuitem-padding) * 2) !important;
-}
-#vertical-tabs-buttons-row {
-    min-width: 0 !important;
-}
-#vertical-tabs-buttons-row > toolbarbutton {
-    margin: 0 !important;
-}
-#vertical-tabs-pane[no-expand][unpinned] #vertical-tabs-buttons-row {
-	-moz-box-orient: vertical;
-}
-#vertical-tabs-pane[no-expand] {
-	transition: none !important;
-}
 #vertical-tabs-pane .subviewbutton-iconic > .toolbarbutton-icon {
     -moz-context-properties: fill, fill-opacity;
+}
+#vertical-tabs-pane .subviewbutton.no-label .toolbarbutton-text {
+    display: none;
 }
 #vertical-tabs-pane .all-tabs-item[pinned] > .all-tabs-button.subviewbutton > .toolbarbutton-text {
     background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="context-fill" fill-opacity="context-fill-opacity" d="M14.707 13.293L11.414 10l2.293-2.293a1 1 0 0 0 0-1.414A4.384 4.384 0 0 0 10.586 5h-.172A2.415 2.415 0 0 1 8 2.586V2a1 1 0 0 0-1.707-.707l-5 5A1 1 0 0 0 2 8h.586A2.415 2.415 0 0 1 5 10.414v.169a4.036 4.036 0 0 0 1.337 3.166 1 1 0 0 0 1.37-.042L10 11.414l3.293 3.293a1 1 0 0 0 1.414-1.414zm-7.578-1.837A2.684 2.684 0 0 1 7 10.583v-.169a4.386 4.386 0 0 0-1.292-3.121 4.414 4.414 0 0 0-1.572-1.015l2.143-2.142a4.4 4.4 0 0 0 1.013 1.571A4.384 4.384 0 0 0 10.414 7h.172a2.4 2.4 0 0 1 .848.152z"/></svg>')
@@ -1687,18 +1693,31 @@
     margin-inline: 0;
     padding: 0;
 }
-#vertical-tabs-pane {
-    border-color: var(--sidebar-border-color);
-    border-block-style: none;
-    border-inline-style: solid;
-    border-inline-width: 1px 0;
-    z-index: 2;
+#vertical-tabs-pane[checked] toolbartabstop {
+    -moz-user-focus: normal;
 }
-#vertical-tabs-pane[positionstart] {
-    border-inline-width: 0 1px;
+/* the main toolbar button */
+#vertical-tabs-button {
+    list-style-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="context-fill %230c0c0d"><path fill-opacity="context-fill-opacity" d="M2,7h3v6H2V7z"/><path d="M6,7v6H5V7H2V6h12v1H6z M13,1c1.657,0,3,1.343,3,3v8c0,1.657-1.343,3-3,3H3c-1.657,0-3-1.343-3-3V4c0-1.657,1.343-3,3-3H13z M3,3C2.448,3,2,3.448,2,4v8c0,0.6,0.4,1,1,1h10c0.6,0,1-0.4,1-1V4c0-0.6-0.4-1-1-1H3z"/></svg>');
+    fill-opacity: 0.4;
 }
-#vertical-tabs-splitter {
-    border: none;
+/* buttons at the top of the pane */
+#vertical-tabs-button:not([positionstart="true"]) .toolbarbutton-icon {
+    transform: scaleX(-1);
+}
+#vertical-tabs-button[checked],
+#vertical-tabs-close-button {
+    list-style-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="context-fill %230c0c0d"><path fill-opacity="context-fill-opacity" d="M2,3h12v3H2V3z"/><path d="M6,7v6H5V7H2V6h12v1H6z M13,1c1.657,0,3,1.343,3,3v8c0,1.657-1.343,3-3,3H3c-1.657,0-3-1.343-3-3V4c0-1.657,1.343-3,3-3H13z M3,3C2.448,3,2,3.448,2,4v8c0,0.6,0.4,1,1,1h10c0.6,0,1-0.4,1-1V4c0-0.6-0.4-1-1-1H3z"/></svg>');
+    fill-opacity: 0.4;
+}
+#vertical-tabs-new-tab-button {
+    list-style-image: url("chrome://browser/skin/new-tab.svg");
+}
+#vertical-tabs-pin-button {
+    list-style-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="context-fill" fill-opacity="context-fill-opacity" d="M11.414 10l2.293-2.293a1 1 0 0 0 0-1.414 4.418 4.418 0 0 0-.8-.622L11.425 7.15h.008l-4.3 4.3v-.017l-1.48 1.476a3.865 3.865 0 0 0 .692.834 1 1 0 0 0 1.37-.042L10 11.414l3.293 3.293a1 1 0 0 0 1.414-1.414zm3.293-8.707a1 1 0 0 0-1.414 0L9.7 4.882A2.382 2.382 0 0 1 8 2.586V2a1 1 0 0 0-1.707-.707l-5 5A1 1 0 0 0 2 8h.586a2.382 2.382 0 0 1 2.3 1.7l-3.593 3.593a1 1 0 1 0 1.414 1.414l12-12a1 1 0 0 0 0-1.414zm-9 6a4.414 4.414 0 0 0-1.571-1.015l2.143-2.142a4.4 4.4 0 0 0 1.013 1.571 4.191 4.191 0 0 0 .9.684l-1.8 1.8a4.2 4.2 0 0 0-.684-.898z"/></svg>');
+}
+#vertical-tabs-pane[unpinned] #vertical-tabs-pin-button {
+    list-style-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="context-fill" fill-opacity="context-fill-opacity" d="M14.707 13.293L11.414 10l2.293-2.293a1 1 0 0 0 0-1.414A4.384 4.384 0 0 0 10.586 5h-.172A2.415 2.415 0 0 1 8 2.586V2a1 1 0 0 0-1.707-.707l-5 5A1 1 0 0 0 2 8h.586A2.415 2.415 0 0 1 5 10.414v.169a4.036 4.036 0 0 0 1.337 3.166 1 1 0 0 0 1.37-.042L10 11.414l3.293 3.293a1 1 0 0 0 1.414-1.414zm-7.578-1.837A2.684 2.684 0 0 1 7 10.583v-.169a4.386 4.386 0 0 0-1.292-3.121 4.414 4.414 0 0 0-1.572-1.015l2.143-2.142a4.4 4.4 0 0 0 1.013 1.571A4.384 4.384 0 0 0 10.414 7h.172a2.4 2.4 0 0 1 .848.152z"/></svg>');
 }
             `;
             let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
