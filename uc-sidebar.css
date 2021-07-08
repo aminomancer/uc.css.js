@@ -494,9 +494,7 @@ treechildren::-moz-tree-twisty(open) {
 }
 
 :root[sizemode="normal"] #sidebar-box {
-    top: calc(
-        var(--urlbar-container-height) + var(--tab-min-height) + var(--space-above-tabbar)
-    ) !important;
+    top: calc(var(--urlbar-container-height) + var(--tab-min-height)) !important;
 }
 
 #sidebar-box[hidden] {

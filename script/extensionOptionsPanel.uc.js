@@ -51,9 +51,9 @@ class ExtensionOptionsWidget {
 
             "Copy ID label": "Copy ID",
 
-            "Disable in Private Browsing label": "Disable in Private Browsing",
+            "Disable in Private Browsing label": "Disable in Private Windows",
 
-            "Enable in Private Browsing label": "Enable in Private Browsing",
+            "Enable in Private Browsing label": "Enable in Private Windows",
 
             "Automatic Updates label": "Automatic Updates:",
 
