@@ -786,6 +786,7 @@ domain("wikimedia.org") {
     #bodyContent .infobox {
         padding: 9px 16px 5px !important;
         margin-left: 30px !important;
+        border-collapse: revert !important;
     }
 
     #bodyContent table.infobox * table.infobox {
@@ -969,6 +970,10 @@ domain("wikimedia.org") {
 
     .mw-parser-output > .wikitable[width] {
         width: revert !important;
+    }
+
+    #bodyContent .mw-parser-output > :not([class], [id]) {
+        clear: revert !important;
     }
 
     code {

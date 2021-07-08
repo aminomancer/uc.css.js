@@ -135,8 +135,12 @@
         --in-content-box-background-dim: var(--content-principal-box-background-dim) !important;
         --in-content-box-border-color: var(--content-principal-box-border-color) !important;
         --in-content-button-background: var(--content-principal-button-background) !important;
-        --in-content-button-background-hover: var(--content-principal-button-background-hover) !important;
-        --in-content-button-background-active: var(--content-principal-button-background-active) !important;
+        --in-content-button-background-hover: var(
+            --content-principal-button-background-hover
+        ) !important;
+        --in-content-button-background-active: var(
+            --content-principal-button-background-active
+        ) !important;
         --in-content-button-background-solid: var(--content-principal-button-background-solid);
         --in-content-item-selected: var(--purple-40) !important;
         --in-content-border-highlight: var(--purple-40) !important;
@@ -160,8 +164,16 @@
         --newtab-text-primary-color: var(--in-content-page-color) !important;
         --lwt-sidebar-background-color: var(--in-content-box-background) !important;
         --lwt-sidebar-text-color: var(--in-content-page-color) !important;
-        --newtab-search-header-background-color: color-mix(in srgb, var(--content-principal-page-background) 70%, transparent) !important;
-        --newtab-search-header-background-intermediate: color-mix(in srgb, var(--content-principal-page-background) 80%, transparent) !important;
+        --newtab-search-header-background-color: color-mix(
+            in srgb,
+            var(--content-principal-page-background) 70%,
+            transparent
+        ) !important;
+        --newtab-search-header-background-intermediate: color-mix(
+            in srgb,
+            var(--content-principal-page-background) 80%,
+            transparent
+        ) !important;
         --newtab-seperator-line-color: var(--in-content-button-background-hover) !important;
         --newtab-modal-color: var(--in-content-box-background) !important;
         --newtab-focus-outline: var(--in-content-border-active-shadow) !important;

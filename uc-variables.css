@@ -19,8 +19,6 @@ menupopup {
     --lwt-popup-brighttext-url-color: var(--urlbar-popup-action-color) !important;
     --toolbarbutton-border-radius: var(--general-button-border-radius) !important;
     --toolbarbutton-icon-fill-opacity: 1 !important;
-    --menupopup-shadow: none !important;
-    --panel-shadow: none !important;
     --arrowpanel-background: var(--uc-arrowpanel-background) !important;
     --arrowpanel-color: var(--uc-arrowpanel-color) !important;
     --arrowpanel-border-color: var(--uc-menu-border-color) !important;
@@ -110,33 +108,14 @@ menupopup {
     --ui-solid-button-active-bgcolor: var(--arrowpanel-dimmed-even-further) !important;
     --ebmp-hover-bgcolor: hsl(233, 24%, 33%);
     --ebmp-focus-bgcolor: hsl(233, 24%, 38%);
-    
-    --context-margin-inline: -14px 0px;
-    --context-padding-inline: 27px 0px;
-    --menupopup-background: transparent;
+
     --menu-background-color: var(--arrowpanel-background) !important;
     --menu-color: var(--ui-text-80) !important;
-	--menuitem-hover-background-color: var(--arrowpanel-dimmed) !important;
-	--menuitem-disabled-hover-background-color: initial !important;
-	--menu-disabled-color: var(--panel-disabled-color) !important;
+    --menuitem-hover-background-color: var(--arrowpanel-dimmed) !important;
+    --menuitem-disabled-hover-background-color: initial !important;
+    --menu-disabled-color: var(--panel-disabled-color) !important;
     --menu-border-color: var(--uc-menu-border-color) !important;
-	--menu-icon-opacity: 1 !important;
-    --menupopup-margin: 0px;
-    --menupopup-child-margin-block-start: -4px;
-    --menupopup-child-margin-inline-start: 0px;
-    --menupopup-padding: 0px;
-    --menupopup-inner-padding-magnitude: 4px;
-    --menupopup-inner-padding: var(--menupopup-inner-padding-magnitude) 0;
-    --context-checkbox-margin: 6px 7px;
-    --context-iconic-margin: 5px 6px;
-    --context-iconic-special-margin: 4px -2px;
-    --menupopup-border-radius: 5px !important;
-    --context-menuitem-border-radius: var(--arrowpanel-menuitem-border-radius);
-    --menu-right-bg: none;
-    --menu-right-img: url(chrome://userchrome/content/menu-arrow.svg);
-    --menu-right-margin: 4px;
-    --menu-right-size: 14px;
-    --menu-separator-margin: 4px;
+    --menu-icon-opacity: 1 !important;
     --panel-separator-margin: 4px !important;
 
     --panelview-toolbarbutton-hover-bgcolor: var(--arrowpanel-dimmed) !important;

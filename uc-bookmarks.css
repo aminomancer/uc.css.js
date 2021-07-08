@@ -435,16 +435,12 @@ richlistbox:not(#categories) > richlistitem[selected] {
         fill-opacity: 0.5;
     }
 
-    menupopup {
-        --nested-margin: -4px !important;
-    }
-
     .panel-subview-footer.openintabs-menuitem {
         display: none !important;
     }
 
     #BMB_bookmarksPopup menupopup {
-        margin-block-start: var(--nested-margin) !important;
+        margin-block-start: var(--menupopup-child-margin-block-start) !important;
     }
 
     #BMB_bookmarksPopup :is(menu, menuitem) {

@@ -2,34 +2,14 @@
 
 #ContentSelectDropdown,
 menupopup.in-menulist {
-    --panel-font-size: 1em !important;
-    --menupopup-border-radius: 3px;
     --arrowpanel-menuitem-border-radius: 3px !important;
-    --context-menuitem-border-radius: var(--arrowpanel-menuitem-border-radius);
-    --menupopup-margin: 0px;
-    --menupopup-child-margin-block-start: -4px;
-    --menupopup-child-margin-inline-start: 0px;
-    --menupopup-padding: 0px;
-    --menupopup-inner-padding-magnitude: 4px;
-    --menupopup-inner-padding: var(--menupopup-inner-padding-magnitude) 0;
-    --context-padding-inline-magnitude: 27px;
-    --context-padding-inline: var(--context-padding-inline-magnitude) 0px;
-    --context-checkbox-margin: 6px 7px;
-    --context-iconic-margin: 5px 6px;
-    --context-iconic-special-margin: 4px -2px;
-    --arrowpanel-background: hsl(233, 36%, 11%);
-    --menupopup-background: transparent;
     --menu-background-color: var(--arrowpanel-background) !important;
     --menu-color: var(--ui-text-80) !important;
-	--menuitem-hover-background-color: var(--arrowpanel-dimmed) !important;
-	--menuitem-disabled-hover-background-color: initial !important;
-	--menu-disabled-color: var(--panel-disabled-color) !important;
+    --menuitem-hover-background-color: var(--arrowpanel-dimmed) !important;
+    --menuitem-disabled-hover-background-color: initial !important;
+    --menu-disabled-color: var(--panel-disabled-color) !important;
     --menu-border-color: var(--uc-menu-border-color) !important;
-	--menu-icon-opacity: 1 !important;
-    --menu-right-bg: none;
-    --menu-right-img: url(chrome://userchrome/content/menu-arrow.svg);
-    --menu-right-margin: 4px;
-    --menu-right-size: 14px;
+    --menu-icon-opacity: 1 !important;
     --arrowpanel-background: var(--uc-arrowpanel-background) !important;
     --arrowpanel-color: var(--uc-arrowpanel-color) !important;
     --arrowpanel-border-color: var(--uc-menu-border-color) !important;
@@ -49,7 +29,6 @@ menupopup.in-menulist {
     --panel-separator-color: var(--desaturate-dimmed) !important;
     --button-hover-bgcolor: var(--arrowpanel-dimmed) !important;
     --button-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
-    --menupopup-shadow: none !important;
 }
 
 #ContentSelectDropdown > menupopup > :where(menucaption, menuitem) > .menu-iconic-text,

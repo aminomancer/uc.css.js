@@ -5,15 +5,10 @@ and a few elements like checkboxes */
 {
     :root,
     menupopup {
-        --panel-font-size: 1em !important;
-        --toolbox-border-bottom-color: transparent !important;
-        --chrome-nav-bar-controls-border-color: transparent !important;
-        --chrome-content-separator-color: rgba(0, 0, 0, 0) !important;
-        --autocomplete-popup-highlight-background: var(--arrowpanel-dimmed-further) !important;
         --toolbarbutton-border-radius: var(--general-button-border-radius) !important;
         --urlbar-icon-border-radius: var(--general-button-border-radius) !important;
-        --lwt-accent-color: hsl(233, 61%, 8%) !important;
-        --lwt-text-color: hsl(213, 43%, 89%) !important;
+        --lwt-accent-color: var(--uc-accent-color) !important;
+        --lwt-text-color: var(--uc-arrowpanel-color) !important;
         --lwt-toolbar-field-background-color: hsla(233, 25%, 28%, 85%) !important;
         --lwt-toolbar-field-color: hsl(240, 60%, 99%);
         --lwt-toolbar-field-focus: hsla(233, 25%, 28%, 85%) !important;
@@ -21,9 +16,9 @@ and a few elements like checkboxes */
         --toolbar-bgcolor: hsl(233, 42%, 15%) !important;
         --toolbar-color: hsl(0, 0%, 100%) !important;
         --lwt-toolbarbutton-icon-fill: hsl(0, 0%, 100%) !important;
+        --lwt-toolbarbutton-icon-fill-attention: var(--attention-color) !important;
         --lwt-background-alignment: top !important;
         --lwt-background-tiling: repeat !important;
-        --panel-shadow: 0 0 4px 0 hsla(0, 0%, 0%, 0.4) !important;
         --arrowpanel-background: var(--uc-arrowpanel-background) !important;
         --arrowpanel-color: var(--uc-arrowpanel-color) !important;
         --arrowpanel-border-color: var(--uc-menu-border-color) !important;
@@ -54,7 +49,6 @@ and a few elements like checkboxes */
         --button-primary-hover-bgcolor: var(--purple-40) !important;
         --button-primary-active-bgcolor: var(--purple-35) !important;
         --button-primary-color: var(--button-color) !important;
-        --lwt-toolbarbutton-icon-fill-attention: var(--attention-color) !important;
         --focus-outline-color: var(--attention-color) !important;
         --focus-outline-width: 2px;
         --places-cell-focus-bgcolor: hsl(232, 30%, 19%) !important;
@@ -91,9 +85,6 @@ and a few elements like checkboxes */
         --urlbar-popup-action-color: hsl(340, 73%, 58%) !important;
         --lwt-popup-brighttext-url-color: var(--urlbar-popup-action-color) !important;
         --toolbarbutton-icon-fill-opacity: 1 !important;
-        --context-margin-inline: -14px 0px;
-        --context-padding-inline: 27px 0px;
-        --menupopup-background: transparent;
         --menu-background-color: var(--arrowpanel-background) !important;
         --menu-color: var(--ui-text-80) !important;
         --menuitem-hover-background-color: var(--arrowpanel-dimmed) !important;
@@ -101,23 +92,6 @@ and a few elements like checkboxes */
         --menu-disabled-color: var(--panel-disabled-color) !important;
         --menu-border-color: var(--uc-menu-border-color) !important;
         --menu-icon-opacity: 1 !important;
-        --menupopup-margin: 0px;
-        --menupopup-child-margin-block-start: -4px;
-        --menupopup-child-margin-inline-start: 0px;
-        --menupopup-padding: 0px;
-        --menupopup-inner-padding-magnitude: 4px;
-        --menupopup-inner-padding: var(--menupopup-inner-padding-magnitude) 0;
-        --context-checkbox-margin: 6px 7px;
-        --context-iconic-margin: 5px 6px;
-        --context-iconic-special-margin: 4px -2px;
-        --menupopup-shadow: none !important;
-        --menupopup-border-radius: 5px !important;
-        --panel-shadow: none !important;
-        --context-menuitem-border-radius: var(--arrowpanel-menuitem-border-radius);
-        --menu-right-bg: none;
-        --menu-right-img: url(chrome://userchrome/content/menu-arrow.svg);
-        --menu-right-margin: 4px;
-        --menu-right-size: 14px;
         --buttons-secondary-hover-bgcolor: var(--arrowpanel-dimmed) !important;
         --buttons-secondary-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
         --vpn-on-icon: url(chrome://userchrome/content/skin/vpn-on-light.svg);

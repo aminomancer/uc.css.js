@@ -12,7 +12,7 @@
     border: none !important;
     padding: unset !important;
     cursor: pointer !important;
-    background-color: hsl(244, 100%, 63%) !important;
+    background-color: var(--picture-in-picture-toggle-bgcolor) !important;
     max-height: 26px !important;
     border-top-left-radius: 2px !important;
     border-bottom-left-radius: 2px !important;

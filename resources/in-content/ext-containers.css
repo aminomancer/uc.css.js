@@ -3,14 +3,11 @@
 @-moz-document url-prefix("moz-extension://14960f03-eca3-472b-b4d2-0b7f831ebe41/pageActionPopup.html")
 {
     :root {
-        --arrowpanel-background: hsl(233, 36%, 11%);
-        --context-menuitem-border-radius: var(--arrowpanel-menuitem-border-radius);
+        --arrowpanel-background: var(--uc-arrowpanel-background);
         --panel-separator-margin: 0px 4px;
         --arrowpanel-menuitem-padding: 6px;
         --arrowpanel-padding: 12px !important;
         --arrowpanel-menuitem-border-radius: 3px;
-        --menupopup-inner-padding-magnitude: 4px;
-        --menupopup-inner-padding: var(--menupopup-inner-padding-magnitude) 0;
         background-color: var(--arrowpanel-background) !important;
         font-size: 12px !important;
         color: var(--uc-toolbar-color) !important;
@@ -101,17 +98,11 @@
 @-moz-document url-prefix("moz-extension://14960f03-eca3-472b-b4d2-0b7f831ebe41/popup.html")
 {
     :root {
-        --arrowpanel-background: hsl(233, 36%, 11%);
-        --context-menuitem-border-radius: var(--arrowpanel-menuitem-border-radius);
+        --arrowpanel-background: var(--uc-arrowpanel-background);
         --panel-separator-margin: 0px 4px;
         --arrowpanel-menuitem-padding: 6px;
         --arrowpanel-padding: 12px !important;
         --arrowpanel-menuitem-border-radius: 3px;
-        --menupopup-inner-padding-magnitude: 4px;
-        --menupopup-inner-padding: var(--menupopup-inner-padding-magnitude) 0;
-        --menu-right-img: url(chrome://userchrome/content/menu-arrow.svg);
-        --menu-right-margin: 4px;
-        --menu-right-size: 14px;
         background-color: var(--arrowpanel-background) !important;
         font-size: 12px !important;
         color: var(--uc-toolbar-color) !important;
