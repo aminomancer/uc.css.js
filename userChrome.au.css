@@ -76,6 +76,11 @@ menupopup::part(arrowscrollbox-scrollbox) {
     border: none;
 }
 
+#BMB_bookmarksPopup menupopup[placespopup="true"]::part(content) {
+	box-shadow: var(--windows-panel-box-shadow);
+	margin: revert;
+}
+
 #BMB_bookmarksPopup .panel-subview-footer-button {
     margin-bottom: unset;
 }
