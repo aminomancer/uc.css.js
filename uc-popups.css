@@ -873,6 +873,11 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
         #commonDialogWindow {
             font-family: SF Pro Text, Segoe UI, sans-serif !important;
             font-kerning: normal !important;
+            padding-block: 2px !important;
+        }
+
+        .sizeDetermined {
+            padding-block: 14px !important;
         }
 
         #titleText {

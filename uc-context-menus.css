@@ -27,7 +27,7 @@ menupopup:not(.PanelUI-subView) menu > menupopup {
 
 menupopup:not(.PanelUI-subView) :is(menuitem, menu) {
     appearance: none !important;
-    color: var(--ui-text-80) !important;
+    color: var(--menu-color) !important;
     padding: 0 !important;
     min-height: var(--menuitem-height) !important;
     border-radius: var(--context-menuitem-border-radius);
@@ -39,7 +39,7 @@ menupopup:not(.PanelUI-subView) :is(menuitem, menu) {
 
 menupopup:not(.PanelUI-subView) :is(menuitem, menu)[disabled="true"] {
     appearance: none !important;
-    color: var(--panel-disabled-color) !important;
+    color: var(--menu-disabled-color) !important;
     background-color: initial !important;
 }
 
@@ -98,7 +98,7 @@ menupopup:not(.PanelUI-subView) menu[disabled="true"] > .menu-right {
 
 menupopup:not(.PanelUI-subView) :is(menu, menuitem)[_moz-menuactive="true"]:not([disabled="true"]) {
     appearance: none !important;
-    background-color: var(--arrowpanel-dimmed) !important;
+    background-color: var(--menuitem-hover-background-color) !important;
 }
 
 menupopup:not(.PanelUI-subView) :is(menu, menuitem)[_moz-menuactive="true"][disabled="true"] {
@@ -107,11 +107,11 @@ menupopup:not(.PanelUI-subView) :is(menu, menuitem)[_moz-menuactive="true"][disa
 }
 
 .subviewbutton[_moz-menuactive="true"][disabled="true"] {
-    color: var(--panel-disabled-color) !important;
+    color: var(--menu-disabled-color) !important;
 }
 
 menu.subviewbutton:not([disabled="true"])[_moz-menuactive="true"]:active {
-    background: var(--arrowpanel-dimmed) !important;
+    background: var(--menuitem-hover-background-color) !important;
     box-shadow: none !important;
 }
 
@@ -266,18 +266,18 @@ menupopup.in-menulist > :where(menucaption, menuitem) > .menu-iconic-text {
 #ContentSelectDropdown > menupopup > menuitem:not([_moz-menuactive="true"]),
 menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
     background-color: transparent !important;
-    color: var(--ui-text-80) !important;
+    color: var(--menu-color) !important;
 }
 
 #ContentSelectDropdown > menupopup > menuitem[disabled="true"],
 menupopup.in-menulist > menuitem[disabled="true"] {
     appearance: none !important;
-    color: var(--panel-disabled-color) !important;
+    color: var(--menu-disabled-color) !important;
     background-color: initial !important;
 }
 
 #ContentSelectDropdown > menupopup {
-    color: var(--ui-text-80) !important;
+    color: var(--menu-color) !important;
     background-image: unset !important;
 }
 
@@ -287,7 +287,7 @@ menupopup.in-menulist {
     border-radius: var(--menupopup-border-radius) !important;
     margin: var(--menupopup-margin) !important;
     overflow: hidden !important;
-    color: var(--ui-text-80) !important;
+    color: var(--menu-color) !important;
     background-image: unset !important;
     --menu-background-color: var(--ui-secondary-bg) !important;
 }
@@ -300,7 +300,7 @@ menupopup.in-menulist {
     margin-block: 0 !important;
     margin-inline: var(--menupopup-inner-padding-magnitude) !important;
     padding-inline-start: 3px !important;
-    background-color: var(--arrowpanel-dimmed) !important;
+    background-color: var(--menuitem-hover-background-color) !important;
     padding-block: 0 !important;
     transition: 300ms background-color !important;
     min-height: var(--menuitem-height) !important;
@@ -390,8 +390,10 @@ menupopup:not(.PanelUI-subView) menuseparator:last-child {
 }
 
 #context-navigation .menuitem-iconic {
-    min-width: 34px;
-    height: 36px;
+    flex-grow: 1 !important;
+    width: unset !important;
+    min-width: 36px;
+    height: 38px;
     padding: 0 !important;
     padding-bottom: 2px !important;
 }
@@ -401,7 +403,7 @@ menupopup:not(.PanelUI-subView) menuseparator:last-child {
 }
 
 #context-navigation .menu-iconic-left {
-    height: 34px;
+    height: 38px;
     padding: 0 !important;
     -moz-box-flex: 1;
     border-radius: var(--arrowpanel-menuitem-border-radius);
@@ -410,7 +412,7 @@ menupopup:not(.PanelUI-subView) menuseparator:last-child {
 #context-navigation
     .menuitem-iconic[_moz-menuactive="true"]:not([disabled="true"])
     .menu-iconic-left {
-    background: var(--arrowpanel-dimmed);
+    background: var(--menuitem-hover-background-color);
 }
 
 #context-navigation .menu-iconic-icon {

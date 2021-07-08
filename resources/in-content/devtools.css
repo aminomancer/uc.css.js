@@ -36,6 +36,9 @@ and a few elements like checkboxes */
         --desaturate-dimmed: var(--uc-desaturate-dimmed);
         --desaturate-dimmed-further: var(--uc-desaturate-dimmed-further);
         --desaturate-dimmed-even-further: var(--uc-desaturate-dimmed-even-further);
+        --panel-description-color: hsl(235, 48%, 89%, 70%) !important;
+        --panel-shortcut-color: hsl(235, 27%, 73%, 70%) !important;
+        --panel-shortcut-focus: hsl(235, 32%, 75%, 90%) !important;
         --panel-disabled-color: var(--context-menu-disabled-color) !important;
         --panel-separator-color: var(--desaturate-dimmed) !important;
         --toolbarbutton-hover-background: hsla(236, 82%, 83%, 0.17) !important;
@@ -90,10 +93,14 @@ and a few elements like checkboxes */
         --toolbarbutton-icon-fill-opacity: 1 !important;
         --context-margin-inline: -14px 0px;
         --context-padding-inline: 27px 0px;
-        --menu-color: var(--ui-text-80) !important;
-        --menu-border-color: var(--uc-menu-border-color) !important;
         --menupopup-background: transparent;
         --menu-background-color: var(--arrowpanel-background) !important;
+        --menu-color: var(--ui-text-80) !important;
+        --menuitem-hover-background-color: var(--arrowpanel-dimmed) !important;
+        --menuitem-disabled-hover-background-color: initial !important;
+        --menu-disabled-color: var(--panel-disabled-color) !important;
+        --menu-border-color: var(--uc-menu-border-color) !important;
+        --menu-icon-opacity: 1 !important;
         --menupopup-margin: 0px;
         --menupopup-child-margin-block-start: -4px;
         --menupopup-child-margin-inline-start: 0px;
@@ -137,9 +144,6 @@ and a few elements like checkboxes */
         --panel-subview-body-padding-magnitude: var(--arrowpanel-menuitem-inline-margin);
         --panel-subview-body-padding: var(--panel-subview-body-padding-magnitude) 0 !important;
         --arrowpanel-menuitem-border-radius: 3px !important;
-        --panel-description-color: hsl(235, 48%, 89%, 70%) !important;
-        --panel-shortcut-color: hsl(235, 27%, 73%, 70%) !important;
-        --panel-shortcut-focus: hsl(235, 32%, 75%, 90%) !important;
         --error-text-color: var(--warning-color) !important;
         --buttons-primary-button-bgcolor: var(--in-parent-primary-button-background) !important;
         --buttons-primary-button-hover-bgcolor: var(
@@ -242,7 +246,7 @@ and a few elements like checkboxes */
 
     :is(menuitem, menu) {
         appearance: none !important;
-        color: var(--ui-text-80) !important;
+        color: var(--menu-color) !important;
         padding: 5px 0 !important;
         min-height: var(--menuitem-height) !important;
         border-radius: var(--context-menuitem-border-radius);
@@ -250,7 +254,7 @@ and a few elements like checkboxes */
 
     :is(menuitem, menu)[disabled="true"] {
         appearance: none !important;
-        color: var(--panel-disabled-color) !important;
+        color: var(--menu-disabled-color) !important;
         background-color: initial !important;
     }
 
@@ -292,7 +296,7 @@ and a few elements like checkboxes */
 
     :is(menu, menuitem)[_moz-menuactive="true"]:not([disabled="true"]) {
         appearance: none !important;
-        background-color: var(--arrowpanel-dimmed) !important;
+        background-color: var(--menuitem-hover-background-color) !important;
     }
 
     :is(menu, menuitem)[_moz-menuactive="true"][disabled="true"] {
@@ -301,11 +305,11 @@ and a few elements like checkboxes */
     }
 
     .subviewbutton:is(:hover, :focus-visible, [_moz-menuactive="true"])[disabled="true"] {
-        color: var(--panel-disabled-color) !important;
+        color: var(--menu-disabled-color) !important;
     }
 
     menu.subviewbutton:not([disabled="true"])[_moz-menuactive="true"]:active {
-        background: var(--arrowpanel-dimmed) !important;
+        background: var(--menuitem-hover-background-color) !important;
         box-shadow: none !important;
     }
 
@@ -415,20 +419,20 @@ and a few elements like checkboxes */
     #ContentSelectDropdown > menupopup {
         background-color: transparent !important;
         --content-select-background-image: none !important;
-        color: var(--ui-text-80) !important;
+        color: var(--menu-color) !important;
         background-image: unset !important;
     }
 
     #ContentSelectDropdown > menupopup > menuitem:not([_moz-menuactive="true"]),
     menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
         background-color: transparent !important;
-        color: var(--ui-text-80) !important;
+        color: var(--menu-color) !important;
     }
 
     #ContentSelectDropdown > menupopup > menuitem[disabled="true"],
     menupopup.in-menulist > menuitem[disabled="true"] {
         appearance: none !important;
-        color: var(--panel-disabled-color) !important;
+        color: var(--menu-disabled-color) !important;
         background-color: initial !important;
     }
 
@@ -438,7 +442,7 @@ and a few elements like checkboxes */
         border-radius: var(--menupopup-border-radius) !important;
         margin: var(--menupopup-margin) !important;
         overflow: hidden !important;
-        color: var(--ui-text-80) !important;
+        color: var(--menu-color) !important;
         background-image: unset !important;
         --menu-background-color: var(--ui-secondary-bg) !important;
     }
@@ -450,7 +454,7 @@ and a few elements like checkboxes */
         margin-block: 0 !important;
         margin-inline: var(--menupopup-inner-padding-magnitude) !important;
         padding-inline-start: 3px !important;
-        background-color: var(--arrowpanel-dimmed) !important;
+        background-color: var(--menuitem-hover-background-color) !important;
         padding-block: 0 !important;
         transition: 300ms background-color !important;
         min-height: var(--menuitem-height) !important;

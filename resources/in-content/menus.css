@@ -18,10 +18,14 @@ menupopup.in-menulist {
     --context-iconic-margin: 5px 6px;
     --context-iconic-special-margin: 4px -2px;
     --arrowpanel-background: hsl(233, 36%, 11%);
-    --menu-color: var(--ui-text-80) !important;
-    --menu-border-color: var(--uc-menu-border-color) !important;
     --menupopup-background: transparent;
     --menu-background-color: var(--arrowpanel-background) !important;
+    --menu-color: var(--ui-text-80) !important;
+	--menuitem-hover-background-color: var(--arrowpanel-dimmed) !important;
+	--menuitem-disabled-hover-background-color: initial !important;
+	--menu-disabled-color: var(--panel-disabled-color) !important;
+    --menu-border-color: var(--uc-menu-border-color) !important;
+	--menu-icon-opacity: 1 !important;
     --menu-right-bg: none;
     --menu-right-img: url(chrome://userchrome/content/menu-arrow.svg);
     --menu-right-margin: 4px;
@@ -38,6 +42,9 @@ menupopup.in-menulist {
     --desaturate-dimmed: var(--uc-desaturate-dimmed);
     --desaturate-dimmed-further: var(--uc-desaturate-dimmed-further);
     --desaturate-dimmed-even-further: var(--uc-desaturate-dimmed-even-further);
+    --panel-description-color: hsl(235, 48%, 89%, 70%) !important;
+    --panel-shortcut-color: hsl(235, 27%, 73%, 70%) !important;
+    --panel-shortcut-focus: hsl(235, 32%, 75%, 90%) !important;
     --panel-disabled-color: var(--context-menu-disabled-color) !important;
     --panel-separator-color: var(--desaturate-dimmed) !important;
     --button-hover-bgcolor: var(--arrowpanel-dimmed) !important;
@@ -96,13 +103,13 @@ menupopup.in-menulist > menucaption:first-child > :is(label, .menu-iconic-text, 
 #ContentSelectDropdown > menupopup > menuitem:not([_moz-menuactive="true"]),
 menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
     background-color: transparent !important;
-    color: var(--ui-text-80) !important;
+    color: var(--menu-color) !important;
 }
 
 #ContentSelectDropdown > menupopup > menuitem[disabled="true"],
 menupopup.in-menulist > menuitem[disabled="true"] {
     appearance: none !important;
-    color: var(--panel-disabled-color) !important;
+    color: var(--menu-disabled-color) !important;
     background-color: initial !important;
 }
 
@@ -114,7 +121,7 @@ menupopup.in-menulist {
     border-radius: var(--menupopup-border-radius) !important;
     margin: var(--menupopup-margin) !important;
     overflow: hidden !important;
-    color: var(--ui-text-80) !important;
+    color: var(--menu-color) !important;
     background-image: unset !important;
     --menu-background-color: var(--ui-secondary-bg) !important;
     padding: var(--menupopup-padding) !important;
@@ -159,7 +166,7 @@ menupopup.in-menulist menu > menupopup {
 #ContentSelectDropdown > menupopup :is(menu, menuitem, menucaption),
 menupopup.in-menulist :is(menu, menuitem, menucaption) {
     appearance: none !important;
-    color: var(--ui-text-80) !important;
+    color: var(--menu-color) !important;
     border-radius: var(--context-menuitem-border-radius);
     border: none !important;
     min-height: var(--menuitem-height) !important;
@@ -168,7 +175,7 @@ menupopup.in-menulist :is(menu, menuitem, menucaption) {
 #ContentSelectDropdown > menupopup :is(menu, menuitem, menucaption)[disabled="true"],
 menupopup.in-menulist :is(menu, menuitem, menucaption)[disabled="true"] {
     appearance: none !important;
-    color: var(--panel-disabled-color) !important;
+    color: var(--menu-disabled-color) !important;
     background-color: initial !important;
 }
 
@@ -230,7 +237,7 @@ menupopup.in-menulist :is(menu, menuitem)[_moz-menuactive="true"][disabled="true
     .subviewbutton:is(:hover, :focus-visible, [_moz-menuactive="true"])[disabled="true"],
 menupopup.in-menulist
     .subviewbutton:is(:hover, :focus-visible, [_moz-menuactive="true"])[disabled="true"] {
-    color: var(--panel-disabled-color) !important;
+    color: var(--menu-disabled-color) !important;
 }
 
 #ContentSelectDropdown

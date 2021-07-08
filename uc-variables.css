@@ -33,6 +33,9 @@ menupopup {
     --desaturate-dimmed: var(--uc-desaturate-dimmed);
     --desaturate-dimmed-further: var(--uc-desaturate-dimmed-further);
     --desaturate-dimmed-even-further: var(--uc-desaturate-dimmed-even-further);
+    --panel-description-color: hsl(235, 48%, 89%, 70%) !important;
+    --panel-shortcut-color: hsl(235, 27%, 73%, 70%) !important;
+    --panel-shortcut-focus: hsl(235, 32%, 75%, 90%) !important;
     --panel-disabled-color: var(--context-menu-disabled-color) !important;
     --panel-separator-color: var(--desaturate-dimmed) !important;
     --toolbarbutton-hover-background: hsla(236, 82%, 83%, 0.17) !important;
@@ -110,10 +113,14 @@ menupopup {
     
     --context-margin-inline: -14px 0px;
     --context-padding-inline: 27px 0px;
-    --menu-color: var(--ui-text-80) !important;
-    --menu-border-color: var(--uc-menu-border-color) !important;
     --menupopup-background: transparent;
     --menu-background-color: var(--arrowpanel-background) !important;
+    --menu-color: var(--ui-text-80) !important;
+	--menuitem-hover-background-color: var(--arrowpanel-dimmed) !important;
+	--menuitem-disabled-hover-background-color: initial !important;
+	--menu-disabled-color: var(--panel-disabled-color) !important;
+    --menu-border-color: var(--uc-menu-border-color) !important;
+	--menu-icon-opacity: 1 !important;
     --menupopup-margin: 0px;
     --menupopup-child-margin-block-start: -4px;
     --menupopup-child-margin-inline-start: 0px;
@@ -154,9 +161,6 @@ menupopup {
     --arrowpanel-border-radius: var(--menupopup-border-radius) !important;
     --panelui-subview-transition-duration: 200ms !important;
 
-    --panel-description-color: hsl(235, 48%, 89%, 70%) !important;
-    --panel-shortcut-color: hsl(235, 27%, 73%, 70%) !important;
-    --panel-shortcut-focus: hsl(235, 32%, 75%, 90%) !important;
     --error-text-color: var(--warning-color) !important;
     --buttons-primary-button-bgcolor: var(--in-parent-primary-button-background) !important;
     --buttons-primary-button-hover-bgcolor: var(
