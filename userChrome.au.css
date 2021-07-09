@@ -78,7 +78,7 @@ menupopup::part(arrowscrollbox-scrollbox) {
 
 #BMB_bookmarksPopup menupopup[placespopup="true"]::part(content) {
     box-shadow: var(--panel-shadow);
-	margin: revert;
+    margin: var(--menupopup-inner-box-margin);
 }
 
 #BMB_bookmarksPopup .panel-subview-footer-button {

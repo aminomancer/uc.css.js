@@ -18,11 +18,19 @@ menupopup:not(.PanelUI-subView) menu > menupopup {
     margin-block-start: var(--menupopup-child-margin-block-start) !important;
 }
 
+menupopup:not([height], .in-menulist) {
+    --menupopup-overflowing-inner-box-margin: 0;
+}
+
 .menupopup-arrowscrollbox {
     background-color: var(--menu-background-color) !important;
     color: var(--menu-color) !important;
     border-radius: var(--menupopup-border-radius) !important;
     box-shadow: var(--menupopup-shadow) !important;
+}
+
+.menupopup-arrowscrollbox[orient="vertical"][overflowing="true"] {
+    margin-block: var(--menupopup-overflowing-inner-box-margin, var(--menupopup-inner-box-margin)) !important;
 }
 
 menupopup:not(.PanelUI-subView) :is(menuitem, menu) {
