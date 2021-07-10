@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Open Bookmark in Container Tab (context menu)
-// @version        1.0
+// @version        1.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Adds a new menu to context menus prompted by right-clicking bookmarks, history entries, etc. that allows you to open them in a container tab. This does basically the same thing as the similarly-named addon by Rob Wu, just by a different method. By doing this with an autoconfig script, we can make the menu appear in a logical order towards the top of the context menu rather than at the very bottom, where context menu items from addons always go.
@@ -37,7 +37,7 @@ class OpenPlacesInContainerTabMenu {
         let openPopup = this.placesMenuOpenInContainer.appendChild(
             document.createXULElement("menupopup")
         );
-        openPopup.addEventListener("command", (e) => this.openLinkInContainer(e));
+        openPopup.addEventListener("command", (e) => this.openLinkInContainer(e, openPopup));
         popups.push(openPopup);
 
         this.placesMenuOpenAllInContainer = this.create(document, "menu", {
@@ -51,7 +51,9 @@ class OpenPlacesInContainerTabMenu {
         let openAllPopup = this.placesMenuOpenAllInContainer.appendChild(
             document.createXULElement("menupopup")
         );
-        openAllPopup.addEventListener("command", (e) => this.openSelectedInContainer(e));
+        openAllPopup.addEventListener("command", (e) =>
+            this.openSelectedInContainer(e, openAllPopup)
+        );
         popups.push(openAllPopup);
 
         this.placesMenuOpenAllLinksInContainer = this.create(document, "menu", {
@@ -65,7 +67,9 @@ class OpenPlacesInContainerTabMenu {
         let openAllLinksPopup = this.placesMenuOpenAllLinksInContainer.appendChild(
             document.createXULElement("menupopup")
         );
-        openAllLinksPopup.addEventListener("command", (e) => this.openSelectedInContainer(e));
+        openAllLinksPopup.addEventListener("command", (e) =>
+            this.openSelectedInContainer(e, openAllLinksPopup)
+        );
         popups.push(openAllLinksPopup);
 
         this.placesContextMenu.addEventListener("popupshowing", this);
@@ -84,7 +88,9 @@ class OpenPlacesInContainerTabMenu {
             let syncedOpenAllPopup = this.syncedMenuOpenAllInContainer.appendChild(
                 document.createXULElement("menupopup")
             );
-            syncedOpenAllPopup.addEventListener("command", (e) => this.openAllSyncedFromDevice(e));
+            syncedOpenAllPopup.addEventListener("command", (e) =>
+                this.openAllSyncedFromDevice(e, syncedOpenAllPopup)
+            );
             popups.push(syncedOpenAllPopup);
 
             this.syncedMenuOpenInContainer = this.create(document, "menu", {
@@ -98,7 +104,9 @@ class OpenPlacesInContainerTabMenu {
             let syncedOpenPopup = this.syncedMenuOpenInContainer.appendChild(
                 document.createXULElement("menupopup")
             );
-            syncedOpenPopup.addEventListener("command", (e) => this.openSyncedTab(e));
+            syncedOpenPopup.addEventListener("command", (e) =>
+                this.openSyncedTab(e, syncedOpenPopup)
+            );
             popups.push(syncedOpenPopup);
 
             this.syncedContextMenu.addEventListener("popupshowing", this);
@@ -112,9 +120,6 @@ class OpenPlacesInContainerTabMenu {
                 })
             )
         );
-    }
-    get activePlacesView() {
-        return PlacesUIUtils.getViewForNode(document.popupNode);
     }
     get placesContextMenu() {
         return (
@@ -214,6 +219,10 @@ class OpenPlacesInContainerTabMenu {
         for (let prop in props) el.setAttribute(prop, props[prop]);
         return el;
     }
+    getActivePlacesView(popup) {
+        if (!popup.triggerNode) return false;
+        return PlacesUIUtils.getViewForNode(popup.triggerNode);
+    }
     handleEvent(e) {
         switch (e.target) {
             case this.placesContextMenu:
@@ -253,11 +262,16 @@ class OpenPlacesInContainerTabMenu {
         this.syncedMenuOpenInContainer.disabled = this.syncedMenuOpenTab?.disabled;
         this.syncedMenuOpenInContainer.hidden = this.syncedMenuOpenTab?.hidden;
     }
-    openLinkInContainer(e, item = this.activePlacesView.selectedNode, params = {}) {
+    openLinkInContainer(e, popup, item) {
         let win = window.gBrowser ? window : BrowserWindowTracker.getTopWindow();
         if (!win) return;
         let { gBrowser, Services } = win;
         let urls = [];
+        if (!item) {
+            let view = this.getActivePlacesView(popup);
+            if (!view) return;
+            item = view.selectedNode;
+        }
         if (item instanceof Array)
             item.forEach((node) => {
                 let url = typeof node === "object" ? node.url || node.uri : node;
@@ -271,11 +285,10 @@ class OpenPlacesInContainerTabMenu {
             triggeringPrincipal: Services.scriptSecurityManager.getSystemPrincipal(),
         });
     }
-    openSelectedInContainer(e, folder) {
-        if (!folder) {
-            let view = this.activePlacesView;
-            folder = view.selectedNode || view.selectedNodes || view.result.root;
-        }
+    openSelectedInContainer(e, popup) {
+        let view = this.getActivePlacesView(popup);
+        if (!view) return;
+        let folder = view.selectedNode || view.selectedNodes || view.result.root;
         let items = [];
         if (PlacesUtils.nodeIsContainer(folder)) {
             let root = PlacesUtils.getContainerNodeWithOptions(folder, false, true);
@@ -284,17 +297,17 @@ class OpenPlacesInContainerTabMenu {
                 if (PlacesUtils.nodeIsURI(child)) items.push({ url: child.uri });
             }
         } else items = folder;
-        this.openLinkInContainer(e, items);
+        this.openLinkInContainer(e, popup, items);
     }
-    openSyncedTab(e) {
+    openSyncedTab(e, popup) {
         if (!this.syncedContextMenuInited) return;
-        if (document.popupNode?.closest(".tabs-container"))
-            this.openLinkInContainer(e, this.selectedSyncedTab, { syncedTabs: true });
+        if (popup.triggerNode?.closest(".tabs-container"))
+            this.openLinkInContainer(e, popup, this.selectedSyncedTab);
     }
-    openAllSyncedFromDevice(e) {
+    openAllSyncedFromDevice(e, popup) {
         if (!this.syncedContextMenuInited) return;
-        if (document.popupNode?.closest(".tabs-container"))
-            this.openLinkInContainer(e, this.selectedSyncedRow.tabs, { syncedTabs: true });
+        if (popup.triggerNode?.closest(".tabs-container"))
+            this.openLinkInContainer(e, popup, this.selectedSyncedRow.tabs);
     }
     loadSheet() {
         const css = `.identity-color-blue{--identity-tab-color:#37adff;--identity-icon-color:#37adff;}.identity-color-turquoise{--identity-tab-color:#00c79a;--identity-icon-color:#00c79a;}.identity-color-green{--identity-tab-color:#51cd00;--identity-icon-color:#51cd00;}.identity-color-yellow{--identity-tab-color:#ffcb00;--identity-icon-color:#ffcb00;}.identity-color-orange{--identity-tab-color:#ff9f00;--identity-icon-color:#ff9f00;}.identity-color-red{--identity-tab-color:#ff613d;--identity-icon-color:#ff613d;}.identity-color-pink{--identity-tab-color:#ff4bda;--identity-icon-color:#ff4bda;}.identity-color-purple{--identity-tab-color:#af51f5;--identity-icon-color:#af51f5;}.identity-color-toolbar{--identity-tab-color:var(--lwt-toolbar-field-color,FieldText);--identity-icon-color:var(--lwt-toolbar-field-color,FieldText);}.identity-icon-fence{--identity-icon:url("resource://usercontext-content/fence.svg");}.identity-icon-fingerprint{--identity-icon:url("resource://usercontext-content/fingerprint.svg");}.identity-icon-briefcase{--identity-icon:url("resource://usercontext-content/briefcase.svg");}.identity-icon-dollar{--identity-icon:url("resource://usercontext-content/dollar.svg");}.identity-icon-cart{--identity-icon:url("resource://usercontext-content/cart.svg");}.identity-icon-circle{--identity-icon:url("resource://usercontext-content/circle.svg");}.identity-icon-vacation{--identity-icon:url("resource://usercontext-content/vacation.svg");}.identity-icon-gift{--identity-icon:url("resource://usercontext-content/gift.svg");}.identity-icon-food{--identity-icon:url("resource://usercontext-content/food.svg");}.identity-icon-fruit{--identity-icon:url("resource://usercontext-content/fruit.svg");}.identity-icon-pet{--identity-icon:url("resource://usercontext-content/pet.svg");}.identity-icon-tree{--identity-icon:url("resource://usercontext-content/tree.svg");}.identity-icon-chill{--identity-icon:url("resource://usercontext-content/chill.svg");}.menuitem-iconic[data-usercontextid]{list-style-image:var(--identity-icon);-moz-context-properties:fill;fill:var(--identity-icon-color);}`;

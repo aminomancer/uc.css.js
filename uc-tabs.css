@@ -668,7 +668,7 @@ so shadows are cast in both directions, unless the neighboring tab is selected o
 }
 
 .tab-throbber::before {
-    fill: var(--tab-throbber-fill) !important;
+    fill: var(--loading-throbber-fill) !important;
 }
 
 .tab-throbber[busy]::before {
@@ -703,7 +703,7 @@ so shadows are cast in both directions, unless the neighboring tab is selected o
 
     .tab-throbber-tabslist[progress] {
         list-style-image: url(chrome://userchrome/content/loading-spinner.svg) !important;
-        fill: var(--tab-throbber-fill) !important;
+        fill: var(--loading-throbber-fill) !important;
         opacity: 0.8 !important;
     }
 }

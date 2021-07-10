@@ -124,6 +124,7 @@ menuitem#menu_preferences .menu-text,
 #context-frameOsPid .menu-text,
 #context-reloadframe .menu-text,
 #context-reloadimage .menu-text,
+menuitem:not(.menuitem-iconic)[oncommand="_ucUtils.restart(true)"] .menu-text,
 #context-showonlythisframe .menu-text,
 #contentAreaContextMenu #frame > .menu-text,
 #context-video-saveimage .menu-text,
@@ -263,6 +264,7 @@ menuitem.customize-context-reportExtension > .menu-text {
 #menu_importFromAnotherBrowser:before,
 #context-frameOsPid:before,
 #context-reloadimage:before,
+menuitem:not(.menuitem-iconic)[oncommand="_ucUtils.restart(true)"]:before,
 #context-reloadframe:before,
 #context-inspect:before,
 #context-inspect-a11y:before,
@@ -564,7 +566,7 @@ menuitem.customize-context-reportExtension:before {
     background-image: url(chrome://userchrome/content/devtools/tool-memory.svg);
 }
 
-:is(#context-reloadframe, #context-reloadimage):before {
+:is(#context-reloadframe, #context-reloadimage, menuitem:not(.menuitem-iconic)[oncommand="_ucUtils.restart(true)"]):before {
     background-image: url(chrome://userchrome/content/skin/reload.svg);
 }
 

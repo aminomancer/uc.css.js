@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Restore pre-Proton Tab Sound Button
-// @version        2.1
+// @version        2.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Proton makes really big changes to tabs, in particular removing the tab sound button in favor of the overlay button and a whole row of text. This script keeps the new tab tooltip enabled by the pref "browser.proton.places-tooltip.enabled" but allows it to work with the old .tab-icon-sound. So you get the nice parts of the proton tab changes without the second row of text about the audio playing. Instead it will show the mute/unmute tooltip inside the normal tab tooltip. It also changes the tooltip a bit so that it's always anchored to the tab rather than floating around tethered to the exact mouse position. This makes it easier to modify the tooltip appearance without the tooltip getting in your way. This script *requires* that you either 1) use my theme, complete with chrome.manifest and the resources folder, or 2) download resources/script-override/tabMods.uc.js and put it in the same location in your chrome folder, then edit your utils/chrome.manifest file to add the following line (without the "//"):
@@ -13,11 +13,11 @@
     let uri = makeURI("data:text/css;charset=UTF=8," + encodeURIComponent(css));
     if (!sss.sheetRegistered(uri, sss.AUTHOR_SHEET))
         sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
-    gBrowser.createTooltip = function (event) {
-        event.stopPropagation();
-        let tab = document.tooltipNode ? document.tooltipNode.closest("tab") : null;
+    gBrowser.createTooltip = function (e) {
+        e.stopPropagation();
+        let tab = e.target.triggerNode ? e.target.triggerNode.closest("tab") : null;
         if (!tab) {
-            event.preventDefault();
+            e.preventDefault();
             return;
         }
 
@@ -74,20 +74,20 @@
         } else label = this.getTabTooltip(tab);
 
         if (!gProtonPlacesTooltip) {
-            event.target.setAttribute("label", label);
+            e.target.setAttribute("label", label);
             return;
         }
 
         if (align) {
-            event.target.setAttribute("position", "after_start");
-            event.target.moveToAnchor(tab, "after_start");
+            e.target.setAttribute("position", "after_start");
+            e.target.moveToAnchor(tab, "after_start");
         }
 
-        let title = event.target.querySelector(".places-tooltip-title");
+        let title = e.target.querySelector(".places-tooltip-title");
         title.textContent = label;
-        let url = event.target.querySelector(".places-tooltip-uri");
+        let url = e.target.querySelector(".places-tooltip-uri");
         url.value = tab.linkedBrowser?.currentURI?.spec.replace(/^https:\/\//, "");
-        let icon = event.target.querySelector("#places-tooltip-insecure-icon");
+        let icon = e.target.querySelector("#places-tooltip-insecure-icon");
         icon.hidden = !url.value.startsWith("http://");
     };
 })();

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Fullscreen Nav-bar
-// @version        1.2
+// @version        1.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    In fullscreen, the navbar hides automatically when you're not using it. But it doesn't have a very smooth animation, and there are certain situations where the navbar should be visible but isn't. This sets up its own logic to allow CSS transitions to cover the animation, and allows you to show the navbar only when hovering/focusing the navbar, or when a popup is opened that is anchored to something on the navbar, e.g. an extension popup. Also allows hiding the bookmarks toolbar under the same circumstances, fullscreen or not. My preferred CSS transitions are in the stylesheets on my repo (see uc-fullscreen.css) but you can also do your own thing with selectors like box[popup-status="true"] > #navigator-toolbox > whatever
@@ -59,7 +59,7 @@
                     if (targ.hasAttribute("menu-api")) return;
             }
             if (targ.getAttribute("nopreventnavboxhide")) return;
-            let popNode = document.popupNode;
+            let popNode = targ.triggerNode;
             if (
                 targ.className === "urlbarView" ||
                 (event.target.parentElement.tagName === "menu" && !targ.closest("menubar"))

@@ -152,8 +152,7 @@ menupopup menuitem:is([type="checkbox"], [type="radio"])::before {
 }
 
 menupopup .unified-nav-current[type="radio"][checked="true"] {
-    font-weight: 600 !important;
-    color: var(--ui-text-100) !important;
+    font-weight: var(--uc-font-weight-bold, 600) !important;
 }
 
 menupopup .unified-nav-current[type="radio"][checked="true"]::before {
@@ -173,6 +172,15 @@ menupopup
     menuitem[class^="unified-nav"][type="radio"]:not([checked="true"])
     :is(.menu-iconic-left, .menu-iconic-icon) {
     display: -moz-box !important;
+}
+
+menupopup menuitem[class^="unified-nav"] .menu-iconic-accel:not([value]):empty {
+    margin-inline: 4px !important;
+}
+
+menupopup menuitem[class^="unified-nav"][type="radio"][_moz-menuactive="true"]:before {
+    background-image: url("chrome://browser/skin/reload.svg") !important;
+    background-size: 12px !important;
 }
 
 menupopup menuitem[type="checkbox"]::before {

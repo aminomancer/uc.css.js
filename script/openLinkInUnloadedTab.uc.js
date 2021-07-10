@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Open Link in Unloaded Tab (context menu item)
-// @version        1.4
+// @version        1.5
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Add a new menu item to context menus prompted by right/accel-clicking on links or other link-like affordances. The menu item will open the link in a new background tab without loading the page. So the tab will start unloaded or "discarded." The context menu entry appears in the content area context menu when right-clicking a link; and in every menu where bookmarks, history, and synced tabs can be interacted with — sidebar, menubar, toolbar, toolbar button popup, and library window. Script is a remake of "Open in Unloaded Tab" by xiaoxiaoflood, but intended for use with fx-autoconfig by MrOtherGuy. It should still work with other loaders that load user scripts per-window, such as alice0775's loader, but is not compatible with older loaders or those like xiaoxiaoflood's loader. The difference is that those loaders run scripts in the global execution context, and simply call a global function when a window is launched, (the global function takes the window as a parameter) whereas fx-autoconfig loads normal scripts entirely within the window context, unless explicitly told to do otherwise. When you open a bookmark or history item in an unloaded tab, the tab draws its title from the entry in the places database. But when you open a link in an unloaded tab, there is no preexisting title. Normally when opening a link in a tab, the title is updated as the tab loads, but since we're opening the tab unloaded from the beginning, Firefox is less likely to know what the document's final title is. By default, the script works around this by generating a temporary title for the tab based on the text of the link that was opened. So if you click a hyperlink "https://mozilla.org" whose label text says "Mozilla" the title will be set to Mozilla until the tab is loaded. But if you click a hyperlink whose label text is the same as the URL itself, the title will simply be the URL. There's a user preference for this, however. If you just want to use the URL for the title no matter what, toggle this pref to false in about:config: "userChrome.openLinkInUnloadedTab.use_link_text_as_tab_title_when_unknown"
@@ -40,7 +40,7 @@ const unloadedTabMenuL10n = {
                 accesskey: unloadedTabMenuL10n.accessKey,
                 disabled: true,
                 hidden: true,
-                oncommand: `unloadedTabMenu.openTab(unloadedTabMenu.activePlacesView.selectedNode)`,
+                oncommand: `unloadedTabMenu.openTab(unloadedTabMenu.getActivePlacesView(this.parentElement).selectedNode)`,
             });
             this.placesMenuOpenNewTab.after(this.placesMenuOpenUnloaded);
 
@@ -50,7 +50,7 @@ const unloadedTabMenuL10n = {
                 accesskey: unloadedTabMenuL10n.accessKey,
                 disabled: true,
                 hidden: true,
-                oncommand: `unloadedTabMenu.openSelectedTabs()`,
+                oncommand: `unloadedTabMenu.openSelectedTabs(this.parentElement)`,
             });
             this.placesMenuOpenContainer?.after(this.placesMenuOpenAllUnloaded);
 
@@ -60,7 +60,7 @@ const unloadedTabMenuL10n = {
                 accesskey: unloadedTabMenuL10n.accessKey,
                 disabled: true,
                 hidden: true,
-                oncommand: `unloadedTabMenu.openSelectedTabs()`,
+                oncommand: `unloadedTabMenu.openSelectedTabs(this.parentElement)`,
             });
             this.placesMenuOpenAllLinks.after(this.placesMenuOpenAllLinksUnloaded);
 
@@ -74,7 +74,7 @@ const unloadedTabMenuL10n = {
                 accesskey: unloadedTabMenuL10n.accessKey,
                 disabled: true,
                 hidden: true,
-                oncommand: `unloadedTabMenu.openAllSyncedFromDevice()`,
+                oncommand: `unloadedTabMenu.openAllSyncedFromDevice(this.parentElement)`,
             });
             this.syncedMenuOpenAll.after(this.syncedMenuOpenAllUnloaded);
 
@@ -84,7 +84,7 @@ const unloadedTabMenuL10n = {
                 accesskey: unloadedTabMenuL10n.accessKey,
                 disabled: true,
                 hidden: true,
-                oncommand: `unloadedTabMenu.openSyncedTabUnloaded()`,
+                oncommand: `unloadedTabMenu.openSyncedTabUnloaded(this.parentElement)`,
             });
             this.syncedMenuOpenTab.after(this.syncedMenuOpenUnloaded);
 
@@ -101,7 +101,6 @@ const unloadedTabMenuL10n = {
             this.contentContextMenu.addEventListener("popupshowing", this);
             this.contentContextMenu.addEventListener("popuphidden", this, false);
         }
-
         create(doc, tag, props, isHTML = false) {
             let el = isHTML ? doc.createElement(tag) : doc.createXULElement(tag);
             for (let prop in props) {
@@ -109,7 +108,6 @@ const unloadedTabMenuL10n = {
             }
             return el;
         }
-
         handleEvent(e) {
             switch (e.type) {
                 case "popuphidden":
@@ -134,7 +132,6 @@ const unloadedTabMenuL10n = {
                     break;
             }
         }
-
         onPlacesContextMenuShowing(_e) {
             this.placesMenuOpenAllUnloaded.disabled =
                 this.placesMenuOpenContainer?.disabled &&
@@ -149,7 +146,6 @@ const unloadedTabMenuL10n = {
             this.placesMenuOpenUnloaded.disabled = this.placesMenuOpenNewTab?.disabled;
             this.placesMenuOpenUnloaded.hidden = this.placesMenuOpenNewTab?.hidden;
         }
-
         onSyncedContextMenuShowing(_e) {
             this.syncedContextMenuInited = true;
             this.syncedMenuOpenAllUnloaded.disabled = this.syncedMenuOpenAll?.disabled;
@@ -157,52 +153,39 @@ const unloadedTabMenuL10n = {
             this.syncedMenuOpenUnloaded.disabled = this.syncedMenuOpenTab?.disabled;
             this.syncedMenuOpenUnloaded.hidden = this.syncedMenuOpenTab?.hidden;
         }
-
         initPref(pref, bool) {
             if (!Services.prefs.prefHasUserValue(pref)) Services.prefs.setBoolPref(pref, bool);
         }
-
         get useLinkAsTabTitle() {
             return Services.prefs.getBoolPref(this.useLinkPref, true);
         }
-
         get placesContextMenu() {
             return (
                 this._placesContextMenu ||
                 (this._placesContextMenu = document.getElementById("placesContext"))
             );
         }
-
         get contentContextMenu() {
             return (
                 this._contentContextMenu ||
                 (this._contentContextMenu = document.getElementById("contentAreaContextMenu"))
             );
         }
-
         get syncedContextMenu() {
             return (
                 this._syncedContextMenu ||
                 (this._syncedContextMenu = document.getElementById("SyncedTabsSidebarContext"))
             );
         }
-
-        get activePlacesView() {
-            return PlacesUIUtils.getViewForNode(document.popupNode);
-        }
-
         get syncedTabsStore() {
             return sidebar.syncedTabsDeckComponent._syncedTabsListStore;
         }
-
         get selectedSyncedRow() {
             return this.syncedTabsStore.data[this.syncedTabsStore._selectedRow[0]];
         }
-
         get selectedSyncedTab() {
             return this.selectedSyncedRow.tabs?.[this.syncedTabsStore._selectedRow[1]];
         }
-
         get placesMenuOpenContainer() {
             return (
                 this._placesMenuOpenContainer ||
@@ -211,7 +194,6 @@ const unloadedTabMenuL10n = {
                 ))
             );
         }
-
         get placesMenuOpenBookmarkContainer() {
             return (
                 this._placesMenuOpenBookmarkContainer ||
@@ -220,7 +202,6 @@ const unloadedTabMenuL10n = {
                 ))
             );
         }
-
         get placesMenuOpenBookmarkLinks() {
             return (
                 this._placesMenuOpenBookmarkLinks ||
@@ -229,7 +210,6 @@ const unloadedTabMenuL10n = {
                 ))
             );
         }
-
         get placesMenuOpenAllLinks() {
             return (
                 this._placesMenuOpenAllLinks ||
@@ -238,14 +218,12 @@ const unloadedTabMenuL10n = {
                 ))
             );
         }
-
         get placesMenuOpenNewTab() {
             return (
                 this._placesMenuOpenNewTab ||
                 (this._placesMenuOpenNewTab = document.getElementById("placesContext_open:newtab"))
             );
         }
-
         get syncedMenuOpenAll() {
             return (
                 this._syncedMenuOpenAll ||
@@ -254,7 +232,6 @@ const unloadedTabMenuL10n = {
                 ))
             );
         }
-
         get syncedMenuOpenTab() {
             return (
                 this._syncedMenuOpenTab ||
@@ -263,19 +240,19 @@ const unloadedTabMenuL10n = {
                 ))
             );
         }
-
         get contentMenuOpenLink() {
             return (
                 this._contentMenuOpenLink ||
                 (this._contentMenuOpenLink = document.getElementById("context-openlinkintab"))
             );
         }
-
-        openSelectedTabs(folder) {
-            if (!folder) {
-                let view = this.activePlacesView;
-                folder = view.selectedNode || view.selectedNodes || view.result.root;
-            }
+        getActivePlacesView(popup) {
+            if (!popup.triggerNode) return false;
+            return PlacesUIUtils.getViewForNode(popup.triggerNode);
+        }
+        openSelectedTabs(popup) {
+            let view = this.getActivePlacesView(popup);
+            let folder = view.selectedNode || view.selectedNodes || view.result.root;
             let items = [];
             if (PlacesUtils.nodeIsContainer(folder)) {
                 let root = PlacesUtils.getContainerNodeWithOptions(folder, false, true);
@@ -292,21 +269,18 @@ const unloadedTabMenuL10n = {
             } else items = folder;
             items.forEach((item) => this.openTab(item, { bulkOpen: true }));
         }
-
-        openSyncedTabUnloaded() {
+        openSyncedTabUnloaded(popup) {
             if (!this.syncedContextMenuInited) return;
-            if (document.popupNode?.closest(".tabs-container"))
+            if (popup.triggerNode?.closest(".tabs-container"))
                 this.openTab(this.selectedSyncedTab, { syncedTabs: true });
         }
-
-        openAllSyncedFromDevice() {
+        openAllSyncedFromDevice(popup) {
             if (!this.syncedContextMenuInited) return;
-            if (document.popupNode?.closest(".tabs-container"))
+            if (popup.triggerNode?.closest(".tabs-container"))
                 this.selectedSyncedRow.tabs.forEach((item) =>
                     this.openTab(item, { bulkOpen: true, syncedTabs: true })
                 );
         }
-
         async openTab(item, params = {}) {
             let url = typeof item === "object" ? item.url || item.uri : item;
             let win = window.gBrowser ? window : BrowserWindowTracker.getTopWindow();
@@ -403,11 +377,9 @@ const unloadedTabMenuL10n = {
                 reader.readAsDataURL(blob);
             }
         }
-
         maybeSetIcon(tab, iconURL, isReady, principal) {
             if (iconURL && isReady) tab.ownerGlobal.gBrowser.setIcon(tab, iconURL, null, principal);
         }
-
         getInfoFromHistory(aURI, aQueryType) {
             let options = PlacesUtils.history.getNewQueryOptions();
             options.queryType = aQueryType;
@@ -433,17 +405,15 @@ const unloadedTabMenuL10n = {
             };
         }
     }
-
     function init() {
         window.unloadedTabMenu = new UnloadedTabMenuBase();
     }
-
     if (
         location.href !== `chrome://browser/content/browser.xhtml` ||
         gBrowserInit.delayedStartupFinished
-    ) {
+    )
         init();
-    } else {
+    else {
         let delayedListener = (subject, topic) => {
             if (topic == "browser-delayed-startup-finished" && subject == window) {
                 Services.obs.removeObserver(delayedListener, topic);

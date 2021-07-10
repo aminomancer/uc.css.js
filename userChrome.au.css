@@ -158,11 +158,38 @@ menupopup::part(arrowscrollbox),
 }
 
 /* hide tab bar's arrow buttons and spacers */
-#tabbrowser-arrowscrollbox::part(scrollbutton-up),
-#tabbrowser-arrowscrollbox::part(scrollbutton-down),
 #tabbrowser-arrowscrollbox::part(overflow-start-indicator),
-#tabbrowser-arrowscrollbox::part(overflow-end-indicator) {
+#tabbrowser-arrowscrollbox::part(overflow-end-indicator),
+#tabbrowser-tabs:not([movingtab]) #tabbrowser-arrowscrollbox::part(scrollbutton-up),
+#tabbrowser-tabs:not([movingtab]) #tabbrowser-arrowscrollbox::part(scrollbutton-down) {
     visibility: collapse;
+}
+
+#tabbrowser-arrowscrollbox::part(scrollbutton-up),
+#tabbrowser-arrowscrollbox::part(scrollbutton-down) {
+    border: none;
+    border-radius: 0;
+    z-index: 23;
+    position: absolute;
+    display: block;
+    -moz-context-properties: fill, fill-opacity;
+    padding-inline: 2px;
+    width: 16px;
+    background: var(--lwt-accent-color);
+    list-style-image: url(chrome://userchrome/content/menu-arrow-left-big.svg);
+}
+
+#tabbrowser-arrowscrollbox::part(scrollbutton-up) {
+    margin-inline: 0 -16px;
+}
+
+#tabbrowser-arrowscrollbox::part(scrollbutton-down) {
+    margin-inline: -16px 0;
+}
+
+#tabbrowser-arrowscrollbox[scrolledtostart="true"]::part(scrollbutton-up),
+#tabbrowser-arrowscrollbox[scrolledtoend="true"]::part(scrollbutton-down) {
+    opacity: 1;
 }
 
 /* make unpinned tabs stretch to fill the whole tab bar */

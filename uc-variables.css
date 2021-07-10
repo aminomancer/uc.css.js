@@ -184,10 +184,6 @@ toolbar {
     --sidebar-border-color: var(--uc-menu-border-color) !important;
 }
 
-.tab-throbber {
-    --tab-loading-fill: var(--tab-throbber-fill) !important;
-}
-
 .tab-loading-burst {
     --tab-loading-fill: var(--lwt-toolbarbutton-icon-fill-attention) !important;
 }

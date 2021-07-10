@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Misc. Mods
-// @version        1.4
+// @version        1.5
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Various tiny mods not worth making separate scripts for. Read the comments inside the script for details.
@@ -83,8 +83,9 @@
                 var node;
                 var cropped = false;
                 var targetURI;
-                if (aDocument.tooltipNode.localName == "treechildren") {
-                    var tree = aDocument.tooltipNode.parentNode;
+                let tooltip = aEvent.target;
+                if (tooltip.triggerNode.localName == "treechildren") {
+                    var tree = tooltip.triggerNode.parentNode;
                     var cell = tree.getCellAt(aEvent.clientX, aEvent.clientY);
                     if (cell.row == -1) return false;
                     node = tree.view.nodeForTreeIndex(cell.row);
@@ -92,7 +93,7 @@
                     // get coordinates for the cell in a tree.
                     var cellCoords = tree.getCoordsForCellItem(cell.row, cell.col, "cell");
                 } else {
-                    var tooltipNode = aDocument.tooltipNode;
+                    var tooltipNode = tooltip.triggerNode;
                     if (tooltipNode._placesNode) node = tooltipNode._placesNode;
                     else targetURI = tooltipNode.getAttribute("targetURI");
                 }
@@ -102,10 +103,9 @@
                 if (targetURI || PlacesUtils.nodeIsURI(node)) url = targetURI || node.uri;
                 if (!cropped && !url) return false;
                 if (gProtonPlacesTooltip) {
-                    if (tooltipNode) {
-                        aEvent.target.setAttribute("position", "after_start");
-                        aEvent.target.moveToAnchor(tooltipNode, "after_start");
-                    } else if (tree && cellCoords)
+                    aEvent.target.setAttribute("position", "after_start");
+                    if (tooltipNode) aEvent.target.moveToAnchor(tooltipNode, "after_start");
+                    else if (tree && cellCoords)
                         // anchor the tooltip to the tree cell
                         aEvent.target.moveTo(
                             cellCoords.left + tree.screenX,

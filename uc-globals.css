@@ -171,7 +171,7 @@ tooltip {
     --urlbar-one-offs-width: calc(
         var(--urlbar-one-offs-engine-width) * var(--urlbar-one-offs-engines-per-scroll)
     );
-    --tab-throbber-fill: hsl(222, 100%, 75%);
+    --loading-throbber-fill: hsl(222, 100%, 75%);
     --sanitize-border-color: hsla(0, 0%, 5%, 0.2);
     --menu-separator-color: hsl(233, 25%, 23%);
     --user-urlbar-container-height: 38px;
@@ -181,13 +181,9 @@ tooltip {
     --findbar-height: 22px;
     --urlbar-element-top-adjust-magnitude: 0.6px;
     --default-identity-icon: url(chrome://userchrome/content/info-filled.svg);
+    /* icon used for screenshot buttons. I prefer the second one, but use the first one it if you prefer the vanilla icon */
     /* --screenshot-icon: url(chrome://userchrome/content/skin/screenshot.svg); */
     --screenshot-icon: url(chrome://userchrome/content/devtools/command-screenshot.svg);
-    /* I prefer the second one, but use the one above it if you prefer the vanilla icon */
-    --protection-header-gradient-color-1: hsl(318, 73%, 69%);
-    --protection-header-gradient-color-2: hsl(265, 100%, 69%);
-    --protection-header-gradient-color-3: hsl(217, 90%, 39%);
-    --protection-header-arrow-color: var(--arrowpanel-background);
 
     /* download items in the downloads panel have a gradient background on hover rather than a solid color.
     since they're so big, a solid color would look a little jarring unless it was very dim.

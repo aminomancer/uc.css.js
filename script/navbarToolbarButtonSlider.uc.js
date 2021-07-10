@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Nav-bar Toolbar Button Slider
-// @version        2.6
+// @version        2.7
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Wrap all toolbar buttons in a scrollable div. It can scroll horizontally through the buttons by scrolling up/down with a mousewheel, like the tab bar. By default, it wraps all toolbar buttons that come after the urlbar. (to the right of the urlbar, normally) You can edit userChrome.toolbarSlider.wrapButtonsRelativeToUrlbar in about:config to change this: a value of "before" will wrap all buttons that come before the urlbar, and "all" will wrap all buttons. You can change userChrome.toolbarSlider.width to make the container wider or smaller. If you choose 12, it'll be 12 buttons long. When the window gets *really* small, the slider disappears and the toolbar buttons are placed into the normal widget overflow panel. You can specify more buttons to exclude from the slider by adding their IDs (in quotes, separated by commas) to userChrome.toolbarSlider.excludeButtons in about:config. For example you might type ["bookmarks-menu-button", "downloads-button"] if you want those to stay outside of the slider. You can also decide whether to exclude flexible space springs from the slider by toggling userChrome.toolbarSlider.excludeFlexibleSpace in about:config. By default, springs are excluded. To scroll faster you can add a multiplier right before scrollByPixels is called, like scrollAmount = scrollAmount * 1.5 or something like that. Doesn't handle touch events yet since I don't have a touchpad to test it on. Let me know if you have any ideas though.
@@ -290,17 +290,14 @@
                 if (!button || button.parentElement !== inner) {
                     moveToPanel.setAttribute(
                         "oncommand",
-                        "gCustomizeMode.addToPanel(document.popupNode, 'toolbar-context-menu')"
+                        "gCustomizeMode.addToPanel(this.parentNode.triggerNode, 'toolbar-context-menu')"
                     );
                     removeFromToolbar.setAttribute(
                         "oncommand",
-                        "gCustomizeMode.removeFromArea(document.popupNode, 'toolbar-context-menu')"
+                        "gCustomizeMode.removeFromArea(this.parentNode.triggerNode, 'toolbar-context-menu')"
                     );
                     return;
                 }
-
-                this.popupNode = button;
-
                 // if a non-removable system button got into the slider somehow, then disable these commands
                 let movable = button && button.id && CustomizableUI.isWidgetRemovable(button);
                 if (movable) {
@@ -316,11 +313,11 @@
                 // override the commands
                 moveToPanel.setAttribute(
                     "oncommand",
-                    "sliderContextHandler.addToPanel(sliderContextHandler.popupNode, 'toolbar-context-menu')"
+                    "sliderContextHandler.addToPanel(sliderContextHandler.validWidget(this.parentNode), 'toolbar-context-menu')"
                 );
                 removeFromToolbar.setAttribute(
                     "oncommand",
-                    "sliderContextHandler.removeFromArea(sliderContextHandler.popupNode, 'toolbar-context-menu')"
+                    "sliderContextHandler.removeFromArea(sliderContextHandler.validWidget(this.parentNode), 'toolbar-context-menu')"
                 );
             },
 

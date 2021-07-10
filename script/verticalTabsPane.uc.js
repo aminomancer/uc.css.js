@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Vertical Tabs Pane
-// @version        1.3.7
+// @version        1.4
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Create a vertical pane across from the sidebar that functions like the vertical tab pane in Microsoft Edge. It doesn't hide the tab bar since people have different preferences on how to do that, but it sets an attribute on the root element that you can use to hide the regular tab bar while the vertical pane is open, for example :root[vertical-tabs] #TabsToolbar... By default, the pane is resizable just like the sidebar is. And like the pane in Edge, you can press a button to collapse it, and it will hide the tab labels and become a thin strip that just shows the tabs' favicons. Hovering the collapsed pane will expand it without moving the browser content. As with the [vertical-tabs] attribute, this "unpinned" state is reflected on the root element, so you can select it like :root[vertical-tabs-unpinned]... Like the sidebar, the state of the pane is stored between windows and recorded in preferences. There's no need to edit these preferences directly. There are a few other preferences that can be edited in about:config, but they can all be changed on the fly by opening the context menu within the pane. The new tab button and the individual tabs all have their own context menus, but right-clicking anything else will open the pane's context menu, which has options for changing these preferences. "Move Pane to Right/Left" will change which side the pane (and by extension, the sidebar) is displayed on, relative to the browser content. Since the pane always mirrors the position of the sidebar, moving the pane to the right will move the sidebar to the left, and vice versa. "Reverse Tab Order" changes the direction of the pane so that newer tabs are displayed on top rather than on bottom. "Expand Pane on Hover/Focus" causes the pane to expand on hover when it's collapsed. When you collapse the pane with the unpin button, it collapses to a small width and then temporarily expands if you hover it, after a delay of 100ms. Then when your mouse leaves the pane, it collapses again, after a delay of 100ms. Both of these delays can be changed with the "Configure Hover Delay" and "Configure Hover Out Delay" options in the context menu, or in about:config. For languages other than English, the labels and tooltips can be modified directly in the l10n object below.
@@ -178,6 +178,9 @@
             );
             this.closePaneButton.addEventListener("command", (e) => this.toggle());
             this.innerBox.appendChild(create(document, "toolbarseparator"));
+            this.scrollboxTabStop = this.innerBox.appendChild(
+                create(document, "toolbartabstop", { "aria-hidden": true })
+            );
             this.containerNode = this.innerBox.appendChild(
                 create(document, "arrowscrollbox", {
                     id: "vertical-tabs-list",
@@ -195,9 +198,6 @@
             this.tabTooltip.setAttribute(
                 "onpopupshowing",
                 `verticalTabsPane.createTabTooltip(event)`
-            );
-            this.scrollboxTabStop = this.containerNode.appendChild(
-                create(document, "toolbartabstop", { "aria-hidden": true })
             );
             // this is a map of all the rows, and you can get a specific row from it by passing a tab (like a real <tab> element from the built-in tab bar)
             this.tabToElement = new Map();
@@ -345,6 +345,23 @@
                     return NodeFilter.FILTER_SKIP;
                 }
             ));
+        }
+        get contextMenus() {
+            let menus = [];
+            Array.from(this.pane.querySelectorAll("[context]")).forEach((node) => {
+                let menu = document.getElementById(node.getAttribute("context"));
+                if (menus.indexOf(menu) === -1) menus.push(menu);
+            });
+            return menus;
+        }
+        get openMenu() {
+            let menus = this.contextMenus;
+            if (!menus.length) return false;
+            let openMenu = false;
+            menus.forEach((menu) => {
+                if (menu.triggerNode) openMenu = menu;
+            });
+            return openMenu;
         }
         /**
          * this tells us which tabs to not make rows for. in this case we only exclude hidden tabs.
@@ -913,22 +930,14 @@
             this.hoverQueued = false;
             if (this.noExpand) return this.pane.removeAttribute("expanded"); // if the pane is set to not expand, forget about all this.
             // if the pane was blurred because a context menu was opened, defer this behavior until the context menu is hidden.
-            let popNode = document.popupNode;
-            if (popNode && this.pane.contains(popNode)) {
-                let contextDef = popNode.closest("[context]");
-                if (contextDef) {
-                    document.getElementById(contextDef.getAttribute("context"))?.addEventListener(
-                        "popuphidden",
-                        (e) => {
-                            setTimeout(() => {
-                                if (!this.pane.matches(":is(:hover, :focus-within)"))
-                                    this.pane.removeAttribute("expanded");
-                            }, 100);
-                        },
-                        { once: true }
-                    );
-                    return;
-                }
+            let openMenu = this.openMenu;
+            if (openMenu) {
+                openMenu.addEventListener(
+                    "popuphidden",
+                    (e) => setTimeout(() => this._onPaneBlur(e), 100),
+                    { once: true }
+                );
+                return;
             }
             this.pane.removeAttribute("expanded");
         }
@@ -1015,6 +1024,7 @@
         // when you left-click a tab, the first thing that happens is selection. this happens on mouse down, not on mouse up.
         // if holding shift key or ctrl key, perform multiselection operations. otherwise, just select the clicked tab.
         _onMouseDown(e, tab) {
+            console.log(e);
             if (e.button !== 0) return;
             let accelKey = AppConstants.platform == "macosx" ? e.metaKey : e.ctrlKey;
             if (e.shiftKey) {
@@ -1092,24 +1102,14 @@
                 if (this.noExpand) return this.pane.removeAttribute("expanded");
                 // again, don't collapse the pane yet if the mouse left because a context menu was opened on the pane.
                 // wait until the context menu is closed before collapsing the pane.
-                let popNode = document.popupNode;
-                if (popNode && this.pane.contains(popNode)) {
-                    let contextDef = popNode.closest("[context]");
-                    if (contextDef) {
-                        document
-                            .getElementById(contextDef.getAttribute("context"))
-                            ?.addEventListener(
-                                "popuphidden",
-                                (e) => {
-                                    setTimeout(() => {
-                                        if (!this.pane.matches(":is(:hover, :focus-within)"))
-                                            this.pane.removeAttribute("expanded");
-                                    }, 100);
-                                },
-                                { once: true }
-                            );
-                        return;
-                    }
+                let openMenu = this.openMenu;
+                if (openMenu) {
+                    openMenu.addEventListener(
+                        "popuphidden",
+                        (e) => setTimeout(() => this._onMouseLeave(e), 100),
+                        { once: true }
+                    );
+                    return;
                 }
                 this.pane.removeAttribute("expanded");
             }, this.hoverOutDelay);
@@ -1321,7 +1321,7 @@
         // generate tooltip labels and decide where to anchor the tooltip. invoked when the vertical-tabs-tooltip is about to be shown.
         createTabTooltip(e) {
             e.stopPropagation();
-            let row = document.tooltipNode ? this.findRow(document.tooltipNode) : null;
+            let row = e.target.triggerNode ? this.findRow(e.target.triggerNode) : null;
             let { tab } = row;
             if (!row || !tab) return e.preventDefault();
             // get a localized string, replace any plural variables with the passed number, and add a shortcut string (e.g. Ctrl+M) matching the passed key element ID.

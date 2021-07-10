@@ -36,9 +36,9 @@
 
     h3.title {
         line-height: normal !important;
-        block-size: var(--menuitem-height) !important;
-        min-height: var(--menuitem-height) !important;
-        padding-block: 4px !important;
+        padding-block: calc((34px - 1.1em) / 2) !important;
+        block-size: 34px !important;
+        min-height: 34px !important;
         white-space: nowrap !important;
         padding-inline: 10px 16px !important;
         font-weight: normal !important;
@@ -50,12 +50,11 @@
     }
 
     hr {
-        margin: 0 !important;
-        padding-block: 0 !important;
+        padding: 0 !important;
+        margin: var(--menupopup-inner-padding) !important;
     }
 
     .identities-list {
-        padding-block: var(--menupopup-inner-padding) !important;
         margin: 0 !important;
     }
 
@@ -241,6 +240,10 @@
     .info-icon:is(:hover, :focus-visible) {
         fill-opacity: 1;
         background-color: var(--uc-arrowpanel-faint);
+    }
+
+    .info-icon:hover:active {
+        background-color: var(--uc-arrowpanel-dimmed);
     }
 
     .info-icon img {

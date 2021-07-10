@@ -651,13 +651,22 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
     -moz-box-pack: center;
 }
 
-@-moz-document url(chrome://global/content/commonDialog.xhtml),
+@-moz-document url("chrome://global/content/commonDialog.xhtml"),
     url("chrome://mozapps/content/handling/permissionDialog.xhtml"),
     url("chrome://mozapps/content/handling/appChooser.xhtml"),
     url-prefix("chrome://browser/content/sanitize.xhtml")
 {
-    #commonDialogWindow,
-    #commonDialogWindow * {
+    /* use this selector to exclude null-window prompts, which open in their own windows and don't inherit styles from the chrome window.
+    we don't want to apply theme styles to these prompts because no matter what we do, we can't control the titlebar.
+    it'll always be white with a red button on windows, without OS-level intervention. so don't bother with them.
+    we just use scripts to try to make all dialogs open as either modal dialogs which attach to existing chrome windows or browsing contexts,
+    or as windowed dialogs with the titlebars hidden. that can only happen at the programming level, in javascript or C++.
+    we can't do anything about the prompts opened by C++ so we just have to hope mozilla gets rid of them,
+    but fortunately mozilla has caught on and is gradually converting these dialogs to modals which pass the window or browsing context as the first parameter. e.g. try submitting this in console:
+    Services.prompt.confirmEx(window, "title", "text", 1, "1", "2", "3", "checkbox", {value: false})
+    then try changing the first parameter window to null and you'll see it opens as a regular null-window dialog instead. */
+    #commonDialogWindow[dialogroot],
+    #commonDialogWindow[dialogroot] * {
         --in-content-page-background: transparent !important;
         --in-content-page-color: var(--in-parent-page-color) !important;
         --in-content-box-background: var(--dialog-box-bgcolor) !important;
@@ -720,36 +729,6 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
         flex-wrap: nowrap;
     }
 
-    /* .dialog-button-box > button[dlgtype="cancel"][default="true"]:is(:enabled, :not([disabled="true"])) {
-        background-color: var(--in-content-button-background) !important;
-    }
-
-    .dialog-button-box > button[dlgtype="cancel"][default="true"]:is(:enabled, :not([disabled="true"])):hover {
-        background-color: var(--in-content-button-background-hover) !important;
-    }
-
-    .dialog-button-box
-        > button[dlgtype="cancel"][default="true"]:is(:enabled, :not([disabled="true"])):hover:active,
-    .dialog-button-box > button[dlgtype="cancel"][default="true"][open],
-    .dialog-button-box > button[dlgtype="cancel"][default="true"][open]:hover {
-        background-color: var(--in-content-primary-button-background-active) !important;
-    }
-
-    .dialog-button-box > button[dlgtype="accept"]:is(:enabled, :not([disabled="true"])) {
-        background-color: var(--in-content-primary-button-background) !important;
-    }
-
-    .dialog-button-box > button[dlgtype="accept"]:is(:enabled, :not([disabled="true"])):hover {
-        background-color: var(--in-content-primary-button-background-hover) !important;
-    }
-
-    .dialog-button-box
-        > button[dlgtype="accept"]:is(:enabled, :not([disabled="true"])):hover:active,
-    .dialog-button-box > button[dlgtype="accept"][open],
-    .dialog-button-box > button[dlgtype="accept"][open]:hover {
-        background-color: var(--in-content-primary-button-background-active) !important;
-    } */
-
     dialog input:-moz-focusring,
     button:-moz-focusring {
         box-shadow: none !important;
@@ -759,27 +738,6 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
         margin-inline-start: 4px !important;
         margin-top: 4px !important;
     }
-
-    /*     input[type="checkbox"]:checked {
-        background-image: url(chrome://userchrome/content/check.svg) !important;
-        background-size: contain !important;
-    }
-
-    checkbox[checked] > .checkbox-check,
-    input[type="checkbox"]:checked {
-        color: var(--in-content-page-color) !important;
-        background-color: var(--purple-40) !important;
-    }
-
-    checkbox:not([disabled="true"])[checked]:hover > .checkbox-check,
-    input[type="checkbox"]:enabled:checked:hover {
-        background-color: var(--purple-35) !important;
-    }
-
-    checkbox:not([disabled="true"])[checked]:hover:active > .checkbox-check,
-    input[type="checkbox"]:enabled:checked:hover:active {
-        background-color: var(--purple-30) !important;
-    } */
 
     richlistbox {
         background-color: var(--in-content-box-background-dim) !important;
@@ -876,7 +834,7 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
     }
 
     @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
-        #commonDialogWindow {
+        #commonDialogWindow[dialogroot] {
             font-family: SF Pro Text, Segoe UI, sans-serif !important;
             font-kerning: normal !important;
             padding-block: 2px !important;
@@ -1295,6 +1253,95 @@ link[href="chrome://global/content/printPagination.css"]
 
     #webRTC-sharingScreen-menu {
         list-style-image: url(chrome://userchrome/content/notifications/screen.svg) !important;
+    }
+}
+
+/* about firefox dialog */
+@-moz-document url("chrome://browser/content/aboutDialog.xhtml")
+{
+    #leftBox {
+        background-image: url(chrome://branding/content/about-logo.svg) !important;
+    }
+
+    #aboutDialogContainer {
+        border: 0 !important;
+        background-color: var(--arrowpanel-background) !important;
+        background-image: radial-gradient(
+            circle at 19% 40%,
+            hsla(255, 80%, 90%, 0.3),
+            transparent 50%
+        );
+        background-blend-mode: overlay !important;
+        color: var(--ui-text-100) !important;
+    }
+
+    #bottomBox {
+        background: hsla(0, 0%, 0%, 0.15) !important;
+    }
+
+    button {
+        appearance: none;
+        background: var(--button-bgcolor);
+        color: var(--button-color) !important;
+        padding: 8px 10px;
+        border-radius: var(--general-button-border-radius);
+    }
+
+    button:is(:hover, :focus-visible) {
+        background: var(--button-hover-bgcolor);
+    }
+
+    button:hover:active {
+        background: var(--button-active-bgcolor);
+    }
+
+    /* replace the raster loading animation with a vector animation.
+    we can't replace the image's src attribute without javascript,
+    but we can simply push the image content outside the element's bounding box
+    by setting "box-sizing: border-box" and "padding-left: 16px"
+    since the element is only 16px wide, the padding fills it completely,
+    and image content can't be displayed inside the padding box, but background-image can,
+    due to "background-clip: border-box" */
+    .update-throbber {
+        background-image: url(chrome://userchrome/content/loading-spinner.svg) !important;
+        padding-left: 16px !important;
+        box-sizing: border-box !important;
+        -moz-context-properties: fill, fill-opacity !important;
+        fill: currentColor !important;
+        color: var(--loading-throbber-fill) !important;
+    }
+
+    #updateDeck button {
+        background: var(--buttons-primary-button-bgcolor);
+    }
+
+    #updateDeck button:is(:hover, :focus-visible) {
+        background: var(--buttons-primary-button-hover-bgcolor);
+    }
+
+    #updateDeck button:hover:active {
+        background: var(--buttons-primary-button-active-bgcolor);
+    }
+
+    #update-available-whats-new,
+    .text-link {
+        color: var(--in-parent-link-color) !important;
+        text-decoration: none !important;
+    }
+    
+    #version {
+        -moz-user-focus: none !important;
+    }
+    
+    #update-available-whats-new:is(:hover, :focus-visible),
+    .text-link:is(:hover, :focus-visible) {
+        color: var(--in-parent-link-color-hover) !important;
+        text-decoration: underline !important;
+    }
+
+    #update-available-whats-new:hover:active,
+    .text-link:hover:active {
+        color: var(--in-parent-link-color-active) !important;
     }
 }
 
