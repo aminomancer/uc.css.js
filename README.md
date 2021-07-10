@@ -323,7 +323,7 @@ Adds a new toolbar button for devtools features. Probably the single most valuab
 
 Press backspace to navigate back/forward in popup panels. (e.g. the main hamburger menu, the history toolbar button popup, the "all tabs" menu, etc.) If a subview is open, backspace will go back to the previous view. If the mainview is open, pressing backspace will close the popup the same way pressing escape would.
 
-#### [~~Better "Save to Pocket"~~](/script/betterSaveToPocket.uc.js):
+#### [~~Better "Save to Pocket"~~](/script/betterSaveToPocket.uc.js): (deprecated)
 
 <details><summary><i><b>Doesn't work since Fx91...</b></i></summary>The Pocket page action was removed, so this script has nothing to improve. I can recreate the page action but since everything's in constant flux right now, I'm gonna hold off a while. The browser context menu has a button to save the current page to Pocket. By default, this opens a page action panel in the urlbar which tells you the page was saved and gives you an option to remove it or view the list of saved pages. This script overrides the saving function so that, rather than opening a panel, it immediately saves the link to Pocket and only creates a brief confirmation hint that fades after a few seconds. The confirmation hint is of the same type as the hint that pops up when you save a bookmark. It also turns the Pocket button red, the same as saving to Pocket does without the script.</details>
 
