@@ -1024,7 +1024,6 @@
         // when you left-click a tab, the first thing that happens is selection. this happens on mouse down, not on mouse up.
         // if holding shift key or ctrl key, perform multiselection operations. otherwise, just select the clicked tab.
         _onMouseDown(e, tab) {
-            console.log(e);
             if (e.button !== 0) return;
             let accelKey = AppConstants.platform == "macosx" ? e.metaKey : e.ctrlKey;
             if (e.shiftKey) {
