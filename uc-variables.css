@@ -136,7 +136,7 @@ menupopup {
     --arrowpanel-padding: 12px !important;
     --panel-subview-body-padding-magnitude: var(--arrowpanel-menuitem-inline-margin);
     --panel-subview-body-padding: var(--panel-subview-body-padding-magnitude) 0 !important;
-    --arrowpanel-menuitem-border-radius: 3px !important;
+    --arrowpanel-menuitem-border-radius: var(--context-menuitem-border-radius) !important;
     --arrowpanel-border-radius: var(--menupopup-border-radius) !important;
     --panelui-subview-transition-duration: 200ms !important;
 

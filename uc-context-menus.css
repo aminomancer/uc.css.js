@@ -51,6 +51,11 @@ menupopup:not(.PanelUI-subView) :is(menuitem, menu)[disabled="true"] {
     background-color: initial !important;
 }
 
+.menu-iconic-left {
+    -moz-context-properties: fill, fill-opacity;
+    fill: currentColor;
+}
+
 menupopup:not(.PanelUI-subView) :is(menuitem, menu) .menu-iconic-left {
     padding: 0 !important;
     appearance: none !important;

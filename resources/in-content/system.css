@@ -375,6 +375,11 @@
         ) !important;
         --message-bar-text-color: var(--text-color) !important;
     }
+
+    menulist {
+        -moz-context-properties: fill, fill-opacity;
+        fill: currentColor;
+    }
 }
 
 @-moz-document url("about:processes") {

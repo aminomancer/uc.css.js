@@ -58,7 +58,7 @@ tooltip {
     --context-iconic-margin: 5px 6px;
     --context-iconic-special-margin: 4px -2px;
     --menupopup-border-radius: 5px;
-    --context-menuitem-border-radius: var(--arrowpanel-menuitem-border-radius);
+    --context-menuitem-border-radius: 3px;
     --menu-right-bg: none;
     --menu-right-img: url(chrome://userchrome/content/menu-arrow.svg);
     --menu-right-margin: 4px;

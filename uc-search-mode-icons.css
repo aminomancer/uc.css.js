@@ -125,13 +125,13 @@ and the URL to the search engine so I can find a suitable icon and set a rule fo
 
 #urlbar[pageproxystate="invalid"]
     #identity-box
-    #identity-icon-box[engine="Wikipedia"]
+    #identity-icon-box[engine^="Wikipedia"]
     #identity-icon,
-#urlbar[pageproxystate="valid"] #identity-box #identity-icon-box[engine="Wikipedia"] #identity-icon,
+#urlbar[pageproxystate="valid"] #identity-box #identity-icon-box[engine^="Wikipedia"] #identity-icon,
 #urlbar[searchmode]
     > #urlbar-input-container
     > #identity-box
-    #identity-icon-box[engine="Wikipedia"]
+    #identity-icon-box[engine^="Wikipedia"]
     #identity-icon {
     width: 20px !important;
     padding-inline: 1px !important;
@@ -140,9 +140,9 @@ and the URL to the search engine so I can find a suitable icon and set a rule fo
     list-style-image: url(chrome://userchrome/content/engines/wiki.svg) !important;
 }
 
-#urlbar[pageproxystate="invalid"] #identity-box #identity-icon-box[engine="Amazon"] #identity-icon,
-#urlbar[pageproxystate="valid"] #identity-box #identity-icon-box[engine="Amazon"] #identity-icon,
-#identity-icon-box[engine="Amazon"] #identity-icon {
+#urlbar[pageproxystate="invalid"] #identity-box #identity-icon-box:is([engine="Amazon"], [engine="Amazon.com"]) #identity-icon,
+#urlbar[pageproxystate="valid"] #identity-box #identity-icon-box:is([engine="Amazon"], [engine="Amazon.com"]) #identity-icon,
+#identity-icon-box:is([engine="Amazon"], [engine="Amazon.com"]) #identity-icon {
     margin-top: 1.4px !important;
     list-style-image: url(chrome://userchrome/content/engines/amazon.svg) !important;
 }
@@ -154,6 +154,13 @@ and the URL to the search engine so I can find a suitable icon and set a rule fo
 #urlbar[pageproxystate="valid"] #identity-box #identity-icon-box[engine="DoorDash"] #identity-icon,
 #identity-icon-box[engine="DoorDash"] #identity-icon {
     list-style-image: url(chrome://userchrome/content/engines/doordash.svg) !important;
+}
+
+#urlbar[pageproxystate="invalid"] #identity-box #identity-icon-box[engine="eBay"] #identity-icon,
+#urlbar[pageproxystate="valid"] #identity-box #identity-icon-box[engine="eBay"] #identity-icon,
+#identity-icon-box[engine="eBay"] #identity-icon {
+    height: 18px !important;
+    list-style-image: url(chrome://userchrome/content/engines/ebay.svg) !important;
 }
 
 #urlbar[pageproxystate="invalid"] #identity-box #identity-icon-box[engine="Netflix"] #identity-icon,

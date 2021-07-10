@@ -158,6 +158,12 @@ menupopup.in-menulist :is(menu, menuitem, menucaption)[disabled="true"] {
     background-color: initial !important;
 }
 
+#ContentSelectDropdown > menupopup .menu-iconic-left,
+menupopup.in-menulist .menu-iconic-left {
+    -moz-context-properties: fill, fill-opacity;
+    fill: currentColor;
+}
+
 #ContentSelectDropdown > menupopup :is(menu, menuitem, menucaption):not([image]) .menu-iconic-left,
 menupopup.in-menulist :is(menu, menuitem, menucaption):not([image]) .menu-iconic-left {
     display: none;

@@ -336,7 +336,8 @@
 .urlbarView-row[type="tabtosearch"] .urlbarView-title,
 .urlbarView-row[has-action] .urlbarView-title strong,
 .urlbarView-row[has-action] .urlbarView-title[isurl],
-.urlbarView-row[has-url] .urlbarView-title {
+.urlbarView-row[has-url] .urlbarView-title,
+.urlbarView-row:not([has-url]) .urlbarView-title[data-l10n-id="urlbar-result-action-search-w-engine"] {
     font-weight: var(--urlbar-result-strong-font-weight, 500) !important;
     font-style: normal !important;
     color: var(--panel-shortcut-color);
@@ -351,6 +352,7 @@
 .urlbarView-row[has-action][selected] .urlbarView-title strong,
 .urlbarView-row[has-action][selected] .urlbarView-title[isurl],
 .urlbarView-row[has-url][selected] .urlbarView-title,
+.urlbarView-row[selected]:not([has-url]) .urlbarView-title[data-l10n-id="urlbar-result-action-search-w-engine"],
 .urlbarView-row-inner[selected] .urlbarView-dynamic-calculator-input,
 .urlbarView-row-inner[selected] .urlbarView-dynamic-unitConversion-output {
     color: var(--panel-shortcut-focus);
