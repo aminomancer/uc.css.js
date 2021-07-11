@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Vertical Tabs Pane
-// @version        1.4
+// @version        1.4.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Create a vertical pane across from the sidebar that functions like the vertical tab pane in Microsoft Edge. It doesn't hide the tab bar since people have different preferences on how to do that, but it sets an attribute on the root element that you can use to hide the regular tab bar while the vertical pane is open, for example :root[vertical-tabs] #TabsToolbar... By default, the pane is resizable just like the sidebar is. And like the pane in Edge, you can press a button to collapse it, and it will hide the tab labels and become a thin strip that just shows the tabs' favicons. Hovering the collapsed pane will expand it without moving the browser content. As with the [vertical-tabs] attribute, this "unpinned" state is reflected on the root element, so you can select it like :root[vertical-tabs-unpinned]... Like the sidebar, the state of the pane is stored between windows and recorded in preferences. There's no need to edit these preferences directly. There are a few other preferences that can be edited in about:config, but they can all be changed on the fly by opening the context menu within the pane. The new tab button and the individual tabs all have their own context menus, but right-clicking anything else will open the pane's context menu, which has options for changing these preferences. "Move Pane to Right/Left" will change which side the pane (and by extension, the sidebar) is displayed on, relative to the browser content. Since the pane always mirrors the position of the sidebar, moving the pane to the right will move the sidebar to the left, and vice versa. "Reverse Tab Order" changes the direction of the pane so that newer tabs are displayed on top rather than on bottom. "Expand Pane on Hover/Focus" causes the pane to expand on hover when it's collapsed. When you collapse the pane with the unpin button, it collapses to a small width and then temporarily expands if you hover it, after a delay of 100ms. Then when your mouse leaves the pane, it collapses again, after a delay of 100ms. Both of these delays can be changed with the "Configure Hover Delay" and "Configure Hover Out Delay" options in the context menu, or in about:config. For languages other than English, the labels and tooltips can be modified directly in the l10n object below.
@@ -8,6 +8,7 @@
 
 (function () {
     let config = {
+        // localization strings. change these if your UI is not in english.
         l10n: {
             "Button label": `Vertical Tabs`, // label and tooltip for the toolbar button
             "Button tooltip": `Toggle vertical tabs`,
@@ -33,6 +34,12 @@
                 "Invalid": "Invalid input!",
                 "Invalid description": "This preference must be a positive integer.",
             },
+        },
+        // settings for the hotkey
+        hotkey: {
+            enabled: true, // set to false if you don't want any hotkey
+            modifiers: "accel alt", // valid modifiers are "alt", "shift", "ctrl", "meta" and "accel". accel is equal to ctrl on windows and linux, but meta (cmd ⌘) on macOS. meta is the windows key on windows. it's variable on linux.
+            key: "V", // the actual key. valid keys are letters, the hyphen key - and F1-F12. digits and F13-F24 are not supported by firefox.
         },
     };
     if (location.href !== "chrome://browser/content/browser.xhtml") return;
@@ -85,10 +92,18 @@
             this.registerSheet();
             // ensure E10SUtils are available. required for showing tab's process ID in its tooltip, if the pref for that is enabled.
             if (!window.E10SUtils)
-                XPCOMUtils.defineLazyModuleGetters(this, {
-                    E10SUtils: `resource://gre/modules/E10SUtils.jsm`,
-                });
+                XPCOMUtils.defineLazyModuleGetters(
+                    this,
+                    "E10SUtils",
+                    `resource://gre/modules/E10SUtils.jsm`
+                );
             else this.E10SUtils = window.E10SUtils;
+            // get some localized strings for the tooltip
+            XPCOMUtils.defineLazyGetter(this, "l10n", function () {
+                return new Localization(["browser/browser.ftl"], true);
+            });
+            this.formatFluentStrings();
+            Services.obs.addObserver(this, "vertical-tabs-pane-toggle");
             // build the DOM
             this.pane = document.getElementById("vertical-tabs-pane");
             this.splitter = document.getElementById("vertical-tabs-splitter");
@@ -98,10 +113,7 @@
                 })
             );
             this.innerBox = this.pane.appendChild(
-                create(document, "vbox", {
-                    id: "vertical-tabs-inner-box",
-                    context: "vertical-tabs-context-menu",
-                })
+                create(document, "vbox", { id: "vertical-tabs-inner-box" })
             );
             this.buttonsRow = this.innerBox.appendChild(
                 create(document, "hbox", {
@@ -176,6 +188,10 @@
                     tooltiptext: config.l10n["Button tooltip"],
                 })
             );
+            if (key_toggleVerticalTabs)
+                this.closePaneButton.tooltipText += ` (${ShortcutUtils.prettifyShortcut(
+                    key_toggleVerticalTabs
+                )})`;
             this.closePaneButton.addEventListener("command", (e) => this.toggle());
             this.innerBox.appendChild(create(document, "toolbarseparator"));
             this.scrollboxTabStop = this.innerBox.appendChild(
@@ -229,35 +245,35 @@
             // the pref observer changes stuff in the script when the pref is changed.
             // but when the script initially starts, the prefs haven't been changed so that logic isn't immediately invoked.
             // we have to invoke it manually, as if the prefs had been changed.
-            let readPref = (pref) => this.observe(prefSvc, null, pref);
+            let readPref = (pref) => this.observe(prefSvc, "nsPref:read", pref);
             readPref(noExpandPref);
             readPref(hoverDelayPref);
             readPref(hoverOutDelayPref);
             if (!this.hoverDelay) this.hoverDelay = 100;
             if (!this.hoverOutDelay) this.hoverOutDelay = 100;
-            // some of the stuff we don't want to do until the first tab has been loaded.
-            gBrowser.tabContainer.addEventListener(
-                "SSTabRestoring",
-                (e) => {
-                    readPref(reversePref);
-                    readPref("privacy.userContext.enabled");
-                    readPref(SidebarUI.POSITION_START_PREF);
-                    // try to adopt from previous window, otherwise restore from prefs.
-                    let sourceWindow = window.opener;
-                    if (sourceWindow)
-                        if (
-                            !sourceWindow.closed &&
-                            sourceWindow.location.protocol == "chrome:" &&
-                            PrivateBrowsingUtils.isWindowPrivate(sourceWindow) ===
-                                PrivateBrowsingUtils.isWindowPrivate(window)
-                        )
-                            if (this.adoptFromWindow(sourceWindow)) return;
-                    readPref(widthPref);
-                    readPref(unpinnedPref);
-                    readPref(closedPref);
-                },
-                { once: true }
-            );
+            // we don't want to read some of these prefs until we know whether the window was opened by another window with a pane,
+            // because instead of reading from prefs we can adopt the pane state from the previous window.
+            // normally in my scripts I update prefs like this every time they're changed, which would mean, for example,
+            // changing the pane's width in one window would instantly update the pane's width in every other window.
+            // that's not how firefox's built-in sidebar works, though. when you open a window, the sidebar state is taken from the previous window.
+            // but changing the sidebar in that window won't affect the sidebar in the previous window.
+            // sidebar state isn't permanently stored anywhere until the last window is closed. (basically, when the app has been closed)
+            // so to keep this consistent with the sidebar we're gonna use the previous window as the main source of state, and use prefs as a fallback.
+            // the prefs will be set when the last window is closed (see the uninit function at the bottom)
+            SessionStore.promiseInitialized.then(() => {
+                if (window.closed) return;
+                readPref(reversePref);
+                readPref("privacy.userContext.enabled");
+                readPref(SidebarUI.POSITION_START_PREF);
+                // try to adopt from previous window, otherwise restore from prefs.
+                let sourceWindow = window.opener;
+                if (sourceWindow)
+                    if (!sourceWindow.closed && sourceWindow.location.protocol == "chrome:")
+                        if (this.adoptFromWindow(sourceWindow)) return;
+                readPref(widthPref);
+                readPref(unpinnedPref);
+                readPref(closedPref);
+            });
         }
         // get the root element, e.g. what you'd select in CSS with :root
         get root() {
@@ -346,22 +362,48 @@
                 }
             ));
         }
+        // make an array containing all the context menus that can be opened by right-clicking something inside the pane.
         get contextMenus() {
             let menus = [];
-            Array.from(this.pane.querySelectorAll("[context]")).forEach((node) => {
+            let contextDefs = Array.from(this.pane.querySelectorAll("[context]"));
+            contextDefs.push(this.pane);
+            contextDefs.forEach((node) => {
                 let menu = document.getElementById(node.getAttribute("context"));
                 if (menus.indexOf(menu) === -1) menus.push(menu);
             });
             return menus;
         }
+        // we want to prevent the pane from collapsing when a context menu is opened from inside it.
+        // since document.popupNode was recently removed, we have to manually locate every context menu,
+        // and check if it's open by checking the triggerNode property. if the triggerNode is inside the pane,
+        // we prevent the pane from collapsing and instead add a popuphidden event listener,
+        // so it instead collapses once the pane has been closed.
+        // imo this is a good reason to bring document.popupNode back, but I don't have any power over that.
         get openMenu() {
             let menus = this.contextMenus;
             if (!menus.length) return false;
             let openMenu = false;
             menus.forEach((menu) => {
-                if (menu.triggerNode) openMenu = menu;
+                if (menu.triggerNode && this.pane.contains(menu.triggerNode)) openMenu = menu;
             });
             return openMenu;
+        }
+        // grab the localized strings for the built-in tab sound pseudo-tooltip, e.g. "PLAYING" or "AUTOPLAY BLOCKED".
+        // we lowercase these and append them to the end of the tooltip title if the sound overlay is hovered.
+        async formatFluentStrings() {
+            let [playingString, mutedString, blockedString, pipString] =
+                await this.l10n.formatValues([
+                    "browser-tab-audio-playing2",
+                    "browser-tab-audio-muted2",
+                    "browser-tab-audio-blocked",
+                    "browser-tab-audio-pip",
+                ]);
+            this.fluentStrings = {
+                playingString,
+                mutedString,
+                blockedString,
+                pipString,
+            };
         }
         /**
          * this tells us which tabs to not make rows for. in this case we only exclude hidden tabs.
@@ -409,6 +451,13 @@
             this.pinPaneButton.tooltipText =
                 config.l10n[newVal ? "Pin button tooltip" : "Collapse button tooltip"];
         }
+        /**
+         * launch a modal prompt (attached to the window) asking the user to set the hover/hover out delay.
+         * the prompt has an input box containing the current value. it will accept any positive integer.
+         * this is invoked by the "configure hover delay" context menu items.
+         * @param {string} pref (which pref the prompt should change)
+         * @returns an error prompt if the input is invalid, which returns back to this input prompt
+         */
         promptForIntPref(pref) {
             let val, title, text;
             switch (pref) {
@@ -518,12 +567,46 @@
             }
         }
         /**
+         * notification observer. used to receive notifications about prefs changing, or notifications telling us to toggle the pane
+         * @param {object} subject (the subject of the notification)
+         * @param {string} topic (the topic "nsPref:changed" is passed to our observer when a pref is changed. we use "vertical-tabs-pane-toggle" to toggle the pane)
+         * @param {string} data (additional data is often passed, e.g. the name of the preference that changed)
+         */
+        observe(subject, topic, data) {
+            switch (topic) {
+                case "vertical-tabs-pane-toggle":
+                    if (subject === window) this.toggle();
+                    break;
+                case "nsPref:changed":
+                case "nsPref:read":
+                    this._onPrefChanged(subject, data);
+                    break;
+            }
+        }
+        /**
+         * for a given preference, get its value, regardless of the preference type.
+         * @param {object} root (an object with nsIPrefBranch interface — reflects the preference branch we're watching, or just the root)
+         * @param {string} pref (a preference string)
+         * @returns the preference's value
+         */
+        getPref(root, pref) {
+            switch (root.getPrefType(pref)) {
+                case root.PREF_BOOL:
+                    return root.getBoolPref(pref);
+                case root.PREF_INT:
+                    return root.getIntPref(pref);
+                case root.PREF_STRING:
+                    return root.getStringPref(pref);
+                default:
+                    return null;
+            }
+        }
+        /**
          * universal preference observer. when a preference is changed, do something about it.
          * @param {object} sub (an object with nsIPrefBranch interface — reflects the preference branch we're watching, or just the root)
-         * @param {string} _top (the topic "nsPref:changed" is always passed to our observer, but we don't use it)
          * @param {string} pref (the preference that changed)
          */
-        observe(sub, _top, pref) {
+        _onPrefChanged(sub, pref) {
             let value = this.getPref(sub, pref);
             switch (pref) {
                 case widthPref:
@@ -586,24 +669,6 @@
                         );
                     }
                     break;
-            }
-        }
-        /**
-         * for a given preference, get its value, regardless of the preference type.
-         * @param {object} root (an object with nsIPrefBranch interface — reflects the preference branch we're watching, or just the root)
-         * @param {string} pref (a preference string)
-         * @returns the preference's value
-         */
-        getPref(root, pref) {
-            switch (root.getPrefType(pref)) {
-                case root.PREF_BOOL:
-                    return root.getBoolPref(pref);
-                case root.PREF_INT:
-                    return root.getIntPref(pref);
-                case root.PREF_STRING:
-                    return root.getStringPref(pref);
-                default:
-                    return null;
             }
         }
         toggle() {
@@ -710,7 +775,7 @@
             if (item) {
                 this._removeItem(item, tab);
                 this._addTab(tab);
-                this.selectedRow.scrollIntoView({ block: "nearest" });
+                this.selectedRow.scrollIntoView({ block: "nearest", behavior: "instant" });
             }
         }
         /**
@@ -769,33 +834,39 @@
             this.tabToElement.set(tab, row);
 
             // main button
-            let button = row.appendChild(
+            row.mainButton = row.appendChild(
                 create(document, "toolbarbutton", {
                     class: "all-tabs-button subviewbutton subviewbutton-iconic",
                     flex: "1",
                     crop: "right",
                 })
             );
-            button.tab = tab;
+            row.mainButton.tab = tab;
 
             // audio button
-            let audioButton = row.appendChild(
+            row.audioButton = row.appendChild(
                 create(document, "toolbarbutton", {
                     class: "all-tabs-secondary-button subviewbutton subviewbutton-iconic",
                     closemenu: "none",
                     "toggle-mute": "true",
                 })
             );
-            audioButton.tab = tab;
+            row.audioButton.tab = tab;
 
             // close button
-            let closeButton = row.appendChild(
+            row.closeButton = row.appendChild(
                 create(document, "toolbarbutton", {
                     class: "all-tabs-secondary-button subviewbutton subviewbutton-iconic",
                     "close-button": "true",
                 })
             );
-            closeButton.tab = tab;
+            row.closeButton.tab = tab;
+
+            // sound overlay — it only shows when the pane is collapsed
+            row.soundOverlay = row.appendChild(
+                create(document, "image", { class: "sound-overlay" }, true)
+            );
+            row.soundOverlay.tab = tab;
 
             this._setRowAttributes(row, tab);
             return row;
@@ -815,6 +886,8 @@
                 multiselected: tab.getAttribute("multiselected"),
                 muted: tab.muted,
                 soundplaying: tab.soundPlaying,
+                "activemedia-blocked": tab.activeMediaBlocked,
+                pictureinpicture: tab.pictureinpicture,
                 notselectedsinceload: tab.getAttribute("notselectedsinceload"),
             });
             // we need to use classes for the usercontext/container, since the built-in CSS that sets the identity color & icon uses classes, not attributes.
@@ -833,7 +906,7 @@
 
             // set attributes on the main button, in particular the tab title and favicon.
             let busy = tab.getAttribute("busy");
-            setAttributes(row.firstElementChild, {
+            setAttributes(row.mainButton, {
                 busy,
                 label: tab.label,
                 image: !busy && tab.getAttribute("image"),
@@ -843,8 +916,7 @@
             this._setImageAttributes(row, tab);
 
             // decide which icon to display for the audio button, or whether it should be displayed at all.
-            let audioButton = row.querySelector(".all-tabs-secondary-button[toggle-mute]");
-            setAttributes(audioButton, {
+            setAttributes(row.audioButton, {
                 muted: tab.muted,
                 soundplaying: tab.soundPlaying,
                 "activemedia-blocked": tab.activeMediaBlocked,
@@ -863,8 +935,7 @@
          * @param {object} tab (a row element)
          */
         _setImageAttributes(row, tab) {
-            let button = row.firstElementChild;
-            let image = button.icon;
+            let image = row.mainButton.icon;
             if (image) {
                 let busy = tab.getAttribute("busy");
                 let progress = tab.getAttribute("progress");
@@ -1313,16 +1384,16 @@
         _warmupRowTab(e, tab) {
             let row = this.findRow(e.target);
             SessionStore.speculativeConnectOnTabHover(tab);
-            if (row.querySelector("[close-button]").matches(":hover"))
-                tab = gBrowser._findTabToBlurTo(tab);
+            if (row.closeButton.matches(":hover")) tab = gBrowser._findTabToBlurTo(tab);
             gBrowser.warmupTab(tab);
         }
         // generate tooltip labels and decide where to anchor the tooltip. invoked when the vertical-tabs-tooltip is about to be shown.
         createTabTooltip(e) {
             e.stopPropagation();
             let row = e.target.triggerNode ? this.findRow(e.target.triggerNode) : null;
+            if (!row) return e.preventDefault();
             let { tab } = row;
-            if (!row || !tab) return e.preventDefault();
+            if (!tab) return e.preventDefault();
             // get a localized string, replace any plural variables with the passed number, and add a shortcut string (e.g. Ctrl+M) matching the passed key element ID.
             let stringWithShortcut = (stringId, keyElemId, pluralCount) => {
                 let keyElem = document.getElementById(keyElemId);
@@ -1337,7 +1408,7 @@
             const contextTabInSelection = selectedTabs.includes(tab);
             const affectedTabsLength = contextTabInSelection ? selectedTabs.length : 1;
             // a bunch of localization
-            if (row.querySelector("[close-button]").matches(":hover")) {
+            if (row.closeButton.matches(":hover")) {
                 let shortcut = ShortcutUtils.prettifyShortcut(key_close);
                 label = PluralForm.get(
                     affectedTabsLength,
@@ -1348,7 +1419,7 @@
                     else label = label + " (" + shortcut + ")";
                 }
                 align = false;
-            } else if (row.querySelector("[toggle-mute]").matches(":hover")) {
+            } else if (row.audioButton.matches(":hover")) {
                 let stringID;
                 if (contextTabInSelection) {
                     stringID = tab.linkedBrowser.audioMuted
@@ -1388,12 +1459,21 @@
                         if (tab.linkedBrowser.docShellIsActive) label += " [A]";
                     }
                 // add the container name to the tooltip?
-                if (tab.userContextId) {
+                if (tab.userContextId)
                     label = gTabBrowserBundle.formatStringFromName("tabs.containers.tooltip", [
                         label,
                         ContextualIdentityService.getUserContextLabel(tab.userContextId),
                     ]);
-                }
+                // if hovering the sound overlay, show the current media state of the tab, after the tab title.
+                // "playing" or "muted" or "media blocked"
+                if (row.soundOverlay.matches(":hover"))
+                    label += ` (${this.fluentStrings[
+                        tab.hasAttribute("activemedia-blocked")
+                            ? "blockedString"
+                            : tab.linkedBrowser.audioMuted
+                            ? "mutedString"
+                            : "playingString"
+                    ].toLowerCase()})`;
             }
             // browser.proton.places-tooltip.enabled should be set to true for best results.
             // regular tab tooltip is pretty lame.
@@ -1492,10 +1572,10 @@
     min-width: var(--pane-width, 350px);
     width: var(--pane-width, 350px);
     max-width: var(--pane-width, 350px);
-    margin-inline: 0 calc(36px - var(--pane-width, 350px));
+    margin-inline: 0 calc(var(--collapsed-pane-width) - var(--pane-width, 350px));
 }
 #vertical-tabs-pane[unpinned][expanded]:not([positionstart="true"]) {
-    margin-inline: calc(36px - var(--pane-width, 350px)) 0;
+    margin-inline: calc(var(--collapsed-pane-width) - var(--pane-width, 350px)) 0;
 }
 #vertical-tabs-pane[no-expand] {
     transition: none !important;
@@ -1509,6 +1589,7 @@
 #vertical-tabs-inner-box {
     overflow: hidden;
     width: -moz-available;
+    height: min-content;
     min-width: calc(16px + var(--arrowpanel-menuitem-padding) * 2);
 }
 #vertical-tabs-buttons-row {
@@ -1584,6 +1665,7 @@
 :root[italic-unread-tabs] .all-tabs-item[notselectedsinceload][pending] > .all-tabs-button[busy] {
     font-style: italic;
 }
+/* secondary buttons inside a tab row */
 #vertical-tabs-list .all-tabs-item .all-tabs-secondary-button {
     max-width: 18px;
     max-height: 18px;
@@ -1619,9 +1701,10 @@
     .all-tabs-secondary-button[close-button]:hover:active:not([disabled]) {
     background-color: var(--arrowpanel-dimmed-further) !important;
 }
+/* audio button */
 #vertical-tabs-list .all-tabs-item .all-tabs-secondary-button[toggle-mute] {
     list-style-image: none !important;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 18 18"><path fill="context-fill" d="M3.52,5.367c-1.332,0-2.422,1.09-2.422,2.422v2.422c0,1.332,1.09,2.422,2.422,2.422h1.516l4.102,3.633 V1.735L5.035,5.367H3.52z M12.059,9c0-0.727-0.484-1.211-1.211-1.211v2.422C11.574,10.211,12.059,9.727,12.059,9z M14.48,9 c0-1.695-1.211-3.148-2.785-3.512l-0.363,1.09C12.422,6.82,13.27,7.789,13.27,9c0,1.211-0.848,2.18-1.938,2.422l0.484,1.09 C13.27,12.148,14.48,10.695,14.48,9z M12.543,3.188l-0.484,1.09C14.238,4.883,15.691,6.82,15.691,9c0,2.18-1.453,4.117-3.512,4.601 l0.484,1.09c2.422-0.605,4.238-2.906,4.238-5.691C16.902,6.215,15.086,3.914,12.543,3.188z"/></svg>') !important;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 18 18"><path fill-opacity="context-fill-opacity" fill="context-fill" d="M3.52,5.367c-1.332,0-2.422,1.09-2.422,2.422v2.422c0,1.332,1.09,2.422,2.422,2.422h1.516l4.102,3.633 V1.735L5.035,5.367H3.52z M12.059,9c0-0.727-0.484-1.211-1.211-1.211v2.422C11.574,10.211,12.059,9.727,12.059,9z M14.48,9 c0-1.695-1.211-3.148-2.785-3.512l-0.363,1.09C12.422,6.82,13.27,7.789,13.27,9c0,1.211-0.848,2.18-1.938,2.422l0.484,1.09 C13.27,12.148,14.48,10.695,14.48,9z M12.543,3.188l-0.484,1.09C14.238,4.883,15.691,6.82,15.691,9c0,2.18-1.453,4.117-3.512,4.601 l0.484,1.09c2.422-0.605,4.238-2.906,4.238-5.691C16.902,6.215,15.086,3.914,12.543,3.188z"/></svg>') !important;
     background-size: 14px !important;
     background-repeat: no-repeat !important;
     background-position: center !important;
@@ -1648,14 +1731,14 @@
 }
 #vertical-tabs-list .all-tabs-item .all-tabs-secondary-button[muted] {
     list-style-image: none !important;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 18 18"><path fill="context-fill" d="M3.52,5.367c-1.332,0-2.422,1.09-2.422,2.422v2.422c0,1.332,1.09,2.422,2.422,2.422h1.516l4.102,3.633V1.735L5.035,5.367H3.52z"/><path fill="context-fill" fill-rule="evenodd" d="M12.155,12.066l-1.138-1.138l4.872-4.872l1.138,1.138 L12.155,12.066z"/><path fill="context-fill" fill-rule="evenodd" d="M10.998,7.204l1.138-1.138l4.872,4.872l-1.138,1.138L10.998,7.204z"/></svg>') !important;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 18 18"><path fill-opacity="context-fill-opacity" fill="context-fill" d="M3.52,5.367c-1.332,0-2.422,1.09-2.422,2.422v2.422c0,1.332,1.09,2.422,2.422,2.422h1.516l4.102,3.633V1.735L5.035,5.367H3.52z"/><path fill="context-fill" fill-rule="evenodd" d="M12.155,12.066l-1.138-1.138l4.872-4.872l1.138,1.138 L12.155,12.066z"/><path fill="context-fill" fill-rule="evenodd" d="M10.998,7.204l1.138-1.138l4.872,4.872l-1.138,1.138L10.998,7.204z"/></svg>') !important;
     transform: none !important;
     opacity: 0.7;
     margin-inline-start: -2px;
 }
 #vertical-tabs-list .all-tabs-item .all-tabs-secondary-button[activemedia-blocked] {
     list-style-image: none !important;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12"><path fill="context-fill" d="M2.128.13A.968.968 0 0 0 .676.964v10.068a.968.968 0 0 0 1.452.838l8.712-5.034a.968.968 0 0 0 0-1.676L2.128.13z"/></svg>') !important;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12"><path fill-opacity="context-fill-opacity" fill="context-fill" d="M2.128.13A.968.968 0 0 0 .676.964v10.068a.968.968 0 0 0 1.452.838l8.712-5.034a.968.968 0 0 0 0-1.676L2.128.13z"/></svg>') !important;
     background-size: 10px !important;
     background-position: 4.5px center !important;
     transform: none !important;
@@ -1674,41 +1757,71 @@
     opacity: 0.7;
     margin-inline-start: -2px;
 }
-#vertical-tabs-pane[unpinned][no-expand]:not([expanded])
-    .all-tabs-item:is([muted], [soundplaying])
-    .all-tabs-button:after {
-    content: "";
+/* sound overlay on the favicon */
+#vertical-tabs-pane .sound-overlay {
+    display: none;
+}
+#vertical-tabs-pane
+    .all-tabs-item:is([muted], [soundplaying], [activemedia-blocked])
+    .sound-overlay {
     display: block;
     position: absolute;
-    right: 0;
-    bottom: 0;
+    left: calc(var(--arrowpanel-menuitem-padding) + 8px);
+    top: calc(var(--arrowpanel-menuitem-padding) + 8px);
     width: 14px;
     height: 14px;
     -moz-context-properties: fill, fill-opacity;
     fill: currentColor;
     fill-opacity: 0.7;
+    opacity: 0;
+    pointer-events: none;
+    transition-property: opacity;
+    transition-timing-function: ease-in-out;
+    transition-duration: var(--pane-transition-duration);
 }
-#vertical-tabs-pane[unpinned][no-expand]:not([expanded])
-    .all-tabs-item[soundplaying]
-    .all-tabs-button:after {
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 18 18"><path fill="context-fill" d="M3.52,5.367c-1.332,0-2.422,1.09-2.422,2.422v2.422c0,1.332,1.09,2.422,2.422,2.422h1.516l4.102,3.633 V1.735L5.035,5.367H3.52z M12.059,9c0-0.727-0.484-1.211-1.211-1.211v2.422C11.574,10.211,12.059,9.727,12.059,9z M14.48,9 c0-1.695-1.211-3.148-2.785-3.512l-0.363,1.09C12.422,6.82,13.27,7.789,13.27,9c0,1.211-0.848,2.18-1.938,2.422l0.484,1.09 C13.27,12.148,14.48,10.695,14.48,9z M12.543,3.188l-0.484,1.09C14.238,4.883,15.691,6.82,15.691,9c0,2.18-1.453,4.117-3.512,4.601 l0.484,1.09c2.422-0.605,4.238-2.906,4.238-5.691C16.902,6.215,15.086,3.914,12.543,3.188z"/></svg>')
+#vertical-tabs-pane[unpinned]:not([expanded])
+    .all-tabs-item:is([muted], [soundplaying], [activemedia-blocked])
+    .sound-overlay {
+    opacity: 1;
+    pointer-events: auto;
+}
+#vertical-tabs-pane[unpinned] .all-tabs-item[selected] .sound-overlay {
+    fill-opacity: inherit;
+}
+#vertical-tabs-pane[unpinned] .all-tabs-item[soundplaying] .sound-overlay {
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 18 18"><path fill-opacity="context-fill-opacity" fill="context-fill" d="M3.52,5.367c-1.332,0-2.422,1.09-2.422,2.422v2.422c0,1.332,1.09,2.422,2.422,2.422h1.516l4.102,3.633 V1.735L5.035,5.367H3.52z M12.059,9c0-0.727-0.484-1.211-1.211-1.211v2.422C11.574,10.211,12.059,9.727,12.059,9z M14.48,9 c0-1.695-1.211-3.148-2.785-3.512l-0.363,1.09C12.422,6.82,13.27,7.789,13.27,9c0,1.211-0.848,2.18-1.938,2.422l0.484,1.09 C13.27,12.148,14.48,10.695,14.48,9z M12.543,3.188l-0.484,1.09C14.238,4.883,15.691,6.82,15.691,9c0,2.18-1.453,4.117-3.512,4.601 l0.484,1.09c2.422-0.605,4.238-2.906,4.238-5.691C16.902,6.215,15.086,3.914,12.543,3.188z"/></svg>')
         center/12px no-repeat;
 }
-#vertical-tabs-pane[unpinned][no-expand]:not([expanded])
-    .all-tabs-item[muted]
-    .all-tabs-button:after {
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 18 18"><path fill="context-fill" d="M3.52,5.367c-1.332,0-2.422,1.09-2.422,2.422v2.422c0,1.332,1.09,2.422,2.422,2.422h1.516l4.102,3.633V1.735L5.035,5.367H3.52z"/><path fill="context-fill" fill-rule="evenodd" d="M12.155,12.066l-1.138-1.138l4.872-4.872l1.138,1.138 L12.155,12.066z"/><path fill="context-fill" fill-rule="evenodd" d="M10.998,7.204l1.138-1.138l4.872,4.872l-1.138,1.138L10.998,7.204z"/></svg>')
+#vertical-tabs-pane[unpinned] .all-tabs-item[muted] .sound-overlay {
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 18 18"><path fill-opacity="context-fill-opacity" fill="context-fill" d="M3.52,5.367c-1.332,0-2.422,1.09-2.422,2.422v2.422c0,1.332,1.09,2.422,2.422,2.422h1.516l4.102,3.633V1.735L5.035,5.367H3.52z"/><path fill="context-fill" fill-rule="evenodd" d="M12.155,12.066l-1.138-1.138l4.872-4.872l1.138,1.138 L12.155,12.066z"/><path fill="context-fill" fill-rule="evenodd" d="M10.998,7.204l1.138-1.138l4.872,4.872l-1.138,1.138L10.998,7.204z"/></svg>')
         center/12px no-repeat;
 }
-#vertical-tabs-pane[unpinned][no-expand]:not([expanded])
-    .all-tabs-item:is([muted], [soundplaying])
+#vertical-tabs-pane[unpinned] .all-tabs-item[activemedia-blocked] .sound-overlay {
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 12 12" fill-opacity="context-fill-opacity" fill="context-fill"><path d="M2.128.13A.968.968 0 0 0 .676.964v10.068a.968.968 0 0 0 1.452.838l8.712-5.034a.968.968 0 0 0 0-1.676L2.128.13z"/></svg>')
+        3px 3px/9px no-repeat;
+}
+/* take a chunk out of the favicon so the overlay is more visible */
+#vertical-tabs-pane[unpinned]
+    .all-tabs-item:is([muted], [soundplaying], [activemedia-blocked])
     .all-tabs-button
     .toolbarbutton-icon {
     mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><circle cx="100%" cy="100%" r="9"/></svg>')
-            0/100% 100%,
+            exclude 0/100% 100% no-repeat,
         linear-gradient(#fff, #fff);
-    mask-composite: exclude;
+    mask-position: 8px 8px;
+    transition-property: mask;
+    transition-timing-function: ease-in-out;
+    transition-duration: calc(var(--pane-transition-duration) / 2);
 }
+#vertical-tabs-pane[unpinned]:not([expanded])
+    .all-tabs-item:is([muted], [soundplaying], [activemedia-blocked])
+    .all-tabs-button
+    .toolbarbutton-icon {
+    mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><circle cx="100%" cy="100%" r="9"/></svg>')
+            exclude 0/100% 100% no-repeat,
+        linear-gradient(#fff, #fff);
+}
+/* close button */
 #vertical-tabs-list .all-tabs-item .all-tabs-secondary-button[close-button] {
     fill-opacity: 0;
     transform: translateX(14px);
@@ -1730,6 +1843,7 @@
     opacity: 0.7;
     margin-inline-start: -2px;
 }
+/* drag/drop indicator */
 #vertical-tabs-list .all-tabs-item[dragpos] {
     background-color: color-mix(
         in srgb,
@@ -1802,6 +1916,7 @@
 #vertical-tabs-pane .subviewbutton.no-label .toolbarbutton-text {
     display: none;
 }
+/* pinned indicator */
 #vertical-tabs-pane .all-tabs-item[pinned] > .all-tabs-button.subviewbutton > .toolbarbutton-text {
     background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="context-fill" fill-opacity="context-fill-opacity" d="M14.707 13.293L11.414 10l2.293-2.293a1 1 0 0 0 0-1.414A4.384 4.384 0 0 0 10.586 5h-.172A2.415 2.415 0 0 1 8 2.586V2a1 1 0 0 0-1.707-.707l-5 5A1 1 0 0 0 2 8h.586A2.415 2.415 0 0 1 5 10.414v.169a4.036 4.036 0 0 0 1.337 3.166 1 1 0 0 0 1.37-.042L10 11.414l3.293 3.293a1 1 0 0 0 1.414-1.414zm-7.578-1.837A2.684 2.684 0 0 1 7 10.583v-.169a4.386 4.386 0 0 0-1.292-3.121 4.414 4.414 0 0 0-1.572-1.015l2.143-2.142a4.4 4.4 0 0 0 1.013 1.571A4.384 4.384 0 0 0 10.414 7h.172a2.4 2.4 0 0 1 .848.152z"/></svg>')
         no-repeat 6px/11px;
@@ -1895,9 +2010,9 @@
                     .replace(/(SidebarUI\.uninit\(\))/, `$1; verticalTabsPane.uninit()`)
         );
         window.onunload = gBrowserInit.onUnload.bind(gBrowserInit); // reset the event handler since it used the bind method, which creates an anonymous version of the function that we can't change. just re-bind our new version.
-        let gNextWindowID = 0; // required for the following functions
+        let gNextWindowID = 0; // looks unread but this is required for the following functions
         // make the PictureInPicture methods dispatch an event to the tab container informing us that a tab's "pictureinpicture" attribute has changed.
-        // this is how we capture all changes to the sound icon in real-time. this behavior isn't built-in, I guess for sake of brevity.
+        // this is how we capture all changes to the sound icon in real-time. obviously this behavior isn't built-in, I guess for sake of brevity.
         let handleRequestSrc = PictureInPicture.handlePictureInPictureRequest.toSource();
         if (!handleRequestSrc.includes("_tabAttrModified"))
             eval(
@@ -1937,7 +2052,7 @@
             tooltiptext: config.l10n["Button tooltip"],
             localized: false,
             onCommand(e) {
-                e.target.ownerGlobal.verticalTabsPane.toggle();
+                Services.obs.notifyObservers(e.target.ownerGlobal, "vertical-tabs-pane-toggle");
             },
             onCreated(node) {
                 // an <observes> element is how we get the button to appear "checked" when the tabs pane is checked.
@@ -1955,9 +2070,24 @@
                         "attribute": "positionstart",
                     })
                 );
+                if (key_toggleVerticalTabs)
+                    node.tooltipText += ` (${ShortcutUtils.prettifyShortcut(
+                        key_toggleVerticalTabs
+                    )})`;
             },
         });
     }
+
+    // make the hotkey (ctrl + alt + V)
+    if (config.hotkey.enabled)
+        _ucUtils.registerHotkey(
+            {
+                id: "key_toggleVerticalTabs",
+                modifiers: config.hotkey.modifiers,
+                key: config.hotkey.key,
+            },
+            (win, key) => Services.obs.notifyObservers(win, "vertical-tabs-pane-toggle")
+        );
 
     // make the main elements
     document.getElementById("sidebar-splitter").after(
@@ -1971,6 +2101,7 @@
         create(document, "vbox", {
             class: "chromeclass-extrachrome",
             id: "vertical-tabs-pane",
+            context: "vertical-tabs-context-menu",
             hidden: true,
         })
     );

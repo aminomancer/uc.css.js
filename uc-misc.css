@@ -380,7 +380,10 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
         }
 
         .places-tooltip-title {
+            font-size: 12px !important;
             font-weight: 400 !important;
+            line-height: 13.5px !important;
+            max-height: 27px !important;
         }
 
         .places-tooltip-uri {

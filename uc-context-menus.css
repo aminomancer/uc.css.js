@@ -51,7 +51,7 @@ menupopup:not(.PanelUI-subView) :is(menuitem, menu)[disabled="true"] {
     background-color: initial !important;
 }
 
-.menu-iconic-left {
+.menuitem-iconic {
     -moz-context-properties: fill, fill-opacity;
     fill: currentColor;
 }
@@ -382,7 +382,7 @@ menupopup > :is(menuitem, menu, menucaption, menugroup, menuseparator, search-te
     margin-inline: var(--menupopup-inner-padding-magnitude);
 }
 
-:not(.subviewbutton) > .menu-text {
+.menu-text {
     padding-inline: var(--context-padding-inline) !important;
 }
 

@@ -29,6 +29,7 @@ menupopup.in-menulist {
     --panel-separator-color: var(--desaturate-dimmed) !important;
     --button-hover-bgcolor: var(--arrowpanel-dimmed) !important;
     --button-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
+    -moz-user-select: none !important;
 }
 
 #ContentSelectDropdown > menupopup > :where(menucaption, menuitem) > .menu-iconic-text,
@@ -102,7 +103,7 @@ menupopup.in-menulist {
     overflow: hidden !important;
     color: var(--menu-color) !important;
     background-image: unset !important;
-    --menu-background-color: var(--ui-secondary-bg) !important;
+    /* --menu-background-color: var(--ui-secondary-bg) !important; */
     padding: var(--menupopup-padding) !important;
     border-color: transparent !important;
 }
@@ -158,8 +159,8 @@ menupopup.in-menulist :is(menu, menuitem, menucaption)[disabled="true"] {
     background-color: initial !important;
 }
 
-#ContentSelectDropdown > menupopup .menu-iconic-left,
-menupopup.in-menulist .menu-iconic-left {
+#ContentSelectDropdown > menupopup .menuitem-iconic,
+menupopup.in-menulist .menuitem-iconic {
     -moz-context-properties: fill, fill-opacity;
     fill: currentColor;
 }
@@ -380,6 +381,51 @@ menupopup.in-menulist menuseparator:not([id]) {
 #ContentSelectDropdown > menupopup menuseparator:last-child,
 menupopup.in-menulist menuseparator:last-child {
     display: none;
+}
+
+menulist {
+    -moz-context-properties: fill, fill-opacity;
+    fill: currentColor;
+}
+
+#ContentSelectDropdown > menupopup menuitem > .menu-iconic-left,
+menupopup.in-menulist menuitem > .menu-iconic-left {
+    margin-inline: 0 !important;
+}
+
+#ContentSelectDropdown > menupopup > :where(menucaption, menuitem)[image] > :is(label, .menu-iconic-text, .menu-text),
+menupopup.in-menulist :where(menucaption, menuitem)[image] > :is(label, .menu-iconic-text, .menu-text) {
+    padding-inline-start: 0 !important;
+}
+
+menulist[indicator="true"] > menupopup.in-menulist menuitem:not([image]) > .menu-iconic-left {
+    display: -moz-box;
+    min-width: unset !important;
+    margin-inline-end: unset !important;
+}
+
+menulist[indicator="true"] > menupopup.in-menulist menuitem:not([image]) > .menu-iconic-left > .menu-iconic-icon {
+    width: 16px !important;
+    height: 16px !important;
+}
+
+menulist[indicator="true"]
+> menupopup.in-menulist
+menuitem[indicator="true"]:not([image])
+> .menu-iconic-left
+> .menu-iconic-icon {
+    list-style-image: url(chrome://userchrome/content/indicator-tab-attention.svg) !important;
+    filter: hue-rotate(55deg);
+    width: 16px !important;
+    height: 16px !important;
+}
+
+menulist[indicator="true"]
+menupopup.in-menulist
+> :where(menucaption, menuitem)
+> :is(label, .menu-iconic-text, .menu-text) {
+    padding-inline: 0 !important;
+    margin-inline: 0 !important;
 }
 
 @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {

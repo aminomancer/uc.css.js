@@ -482,6 +482,19 @@
     fill: var(--arrowpanel-color);
 }
 
+:root[fxastatus="signedin"] #fxa-manage-account-button:after {
+    content: "";
+    display: -moz-inline-box;
+    width: 28px;
+    height: 28px;
+    -moz-box-ordinal-group: 2;
+    margin-inline: 8px 2px;
+    background: var(--avatar-image-url) center/contain no-repeat;
+    -moz-context-properties: fill, fill-opacity;
+    fill: var(--arrowpanel-color);
+    border-radius: 100%;
+}
+
 :root[fxastatus="signedin"] #fxa-menu-avatar,
 :root[fxastatus="signedin"] #fxa-avatar-image {
     border-radius: 50%;

@@ -463,7 +463,7 @@ and a few elements like checkboxes */
         width: 4px !important;
     }
 
-    :not(.subviewbutton) > .menu-text {
+    .menu-text {
         padding-inline: var(--context-padding-inline) !important;
     }
 

@@ -128,6 +128,16 @@ menuitem:not(.menuitem-iconic)[oncommand="_ucUtils.restart(true)"] .menu-text,
 #context-showonlythisframe .menu-text,
 #contentAreaContextMenu #frame > .menu-text,
 #context-video-saveimage .menu-text,
+.downloadPauseMenuItem .menu-text,
+.downloadResumeMenuItem .menu-text,
+.downloadUnblockMenuItem .menu-text,
+.downloadUseSystemDefaultMenuItem .menu-text,
+.downloadShowMenuItem .menu-text,
+menuitem[command="downloadsCmd_openReferrer"] .menu-text,
+menuitem[command="downloadsCmd_copyLocation"] .menu-text,
+.downloadRemoveFromHistoryMenuItem .menu-text,
+menuitem[command="downloadsCmd_clearList"] .menu-text,
+menuitem[command="downloadsCmd_clearDownloads"] .menu-text,
 #context-media-pause .menu-text,
 #context-media-play .menu-text,
 #context-media-mute .menu-text,
@@ -434,6 +444,16 @@ menuitem#enableDeveloperTools:before,
 :is(#spell-add-to-dictionary, #spell-add-dictionaries, #spell-add-dictionaries-main, #spell-dictionaries):before,
 #context-showonlythisframe:before,
 #contentAreaContextMenu #frame:before,
+.downloadPauseMenuItem:before,
+.downloadResumeMenuItem:before,
+.downloadUnblockMenuItem:before,
+.downloadUseSystemDefaultMenuItem:before,
+.downloadShowMenuItem:before,
+menuitem[command="downloadsCmd_openReferrer"]:before,
+menuitem[command="downloadsCmd_copyLocation"]:before,
+.downloadRemoveFromHistoryMenuItem:before,
+menuitem[command="downloadsCmd_clearList"]:before,
+menuitem[command="downloadsCmd_clearDownloads"]:before,
 #context-media-pause:before,
 #context-media-play:before,
 #context-media-mute:before,
@@ -503,12 +523,47 @@ menuitem.customize-context-reportExtension:before {
     background-image: url(chrome://userchrome/content/notifications/canvas.svg);
 }
 
+.downloadPauseMenuItem:before,
 #context-media-pause:before {
     background-image: url(chrome://userchrome/content/pauseButton.svg);
 }
 
+.downloadResumeMenuItem:before,
 #context-media-play:before {
     background-image: url(chrome://userchrome/content/playButton.svg);
+}
+
+.downloadUnblockMenuItem:before {
+    background-image: url(chrome://userchrome/content/downloads/downloads.svg);
+}
+
+.downloadUseSystemDefaultMenuItem:before {
+    background-image: url(chrome://userchrome/content/skin/device-desktop.svg);
+}
+
+.downloadShowMenuItem:before {
+    background-image: url(chrome://userchrome/content/material/places/folder-open.svg);
+}
+
+menuitem[command="downloadsCmd_openReferrer"]:before {
+    background-image: url(chrome://userchrome/content/notifications/indexedDB.svg);
+}
+
+menuitem[command="downloadsCmd_copyLocation"]:before {
+    background-image: url(chrome://userchrome/content/skin/link.svg);
+}
+
+.downloadRemoveFromHistoryMenuItem:before {
+    background-image: url(chrome://userchrome/content/skin/forget.svg);
+}
+
+menuitem[command="downloadsCmd_clearList"]:before {
+    background-image: url(chrome://userchrome/content/skin/stop.svg);
+    background-size: 15px;
+}
+
+menuitem[command="downloadsCmd_clearDownloads"]:before {
+    background-image: url(chrome://userchrome/content/delete.svg);
 }
 
 #context-media-mute:before {
@@ -956,6 +1011,7 @@ menuitem#repair-text-encoding:before {
 
 :is(#context_closeTab, #menu_closeWindow):before {
     background-image: url(chrome://userchrome/content/skin/stop.svg);
+    background-size: 15px;
 }
 
 menuitem#menu_devToolbox:not([checked="true"]):before {

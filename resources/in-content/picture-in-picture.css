@@ -46,6 +46,11 @@
         font-family: SF Pro, Segoe UI, sans-serif !important;
         font-kerning: normal !important;
     }
+
+    .pictureInPictureOverlay {
+        font-family: SF Pro Display, Segoe UI, sans-serif !important;
+        font-kerning: normal !important;
+    }
 }
 
 #pictureInPictureToggle .pip-label {

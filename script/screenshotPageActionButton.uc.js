@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Screenshot Page Action Button
-// @version        1.1
+// @version        1.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Creates a screenshot button in the page actions area (the right side of the urlbar) that works just like the screenshot toolbar button.
@@ -87,7 +87,7 @@
          */
         setButtonState(disabled) {
             if (!this.node) return;
-            // while taking a screenshot, block pointer events on the button and set fill opacity to 40%.
+            // while taking a screenshot,
             disabled
                 ? this.node.setAttribute("shooting", true)
                 : this.node.removeAttribute("shooting");
@@ -113,7 +113,10 @@
          */
         onCommand(_e, buttonNode) {
             if (buttonNode === this.node)
-                buttonNode.ownerGlobal.Services.obs.notifyObservers(null, "menuitem-screenshot");
+                buttonNode.ownerGlobal.Services.obs.notifyObservers(
+                    null,
+                    "menuitem-screenshot-extension"
+                );
         },
         /**
          * Set up the screenshot extension listener and localization strings when a window is launched.
