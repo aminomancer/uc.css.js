@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Vertical Tabs Pane
-// @version        1.4.3
+// @version        1.4.4
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Create a vertical pane across from the sidebar that functions like the vertical tab pane in Microsoft Edge. It doesn't hide the tab bar since people have different preferences on how to do that, but it sets an attribute on the root element that you can use to hide the regular tab bar while the vertical pane is open, for example :root[vertical-tabs] #TabsToolbar... By default, the pane is resizable just like the sidebar is. And like the pane in Edge, you can press a button to collapse it, and it will hide the tab labels and become a thin strip that just shows the tabs' favicons. Hovering the collapsed pane will expand it without moving the browser content. As with the [vertical-tabs] attribute, this "unpinned" state is reflected on the root element, so you can select it like :root[vertical-tabs-unpinned]... Like the sidebar, the state of the pane is stored between windows and recorded in preferences. There's no need to edit these preferences directly. There are a few other preferences that can be edited in about:config, but they can all be changed on the fly by opening the context menu within the pane. The new tab button and the individual tabs all have their own context menus, but right-clicking anything else will open the pane's context menu, which has options for changing these preferences. "Move Pane to Right/Left" will change which side the pane (and by extension, the sidebar) is displayed on, relative to the browser content. Since the pane always mirrors the position of the sidebar, moving the pane to the right will move the sidebar to the left, and vice versa. "Reverse Tab Order" changes the direction of the pane so that newer tabs are displayed on top rather than on bottom. "Expand Pane on Hover/Focus" causes the pane to expand on hover when it's collapsed. When you collapse the pane with the unpin button, it collapses to a small width and then temporarily expands if you hover it, after a delay of 100ms. Then when your mouse leaves the pane, it collapses again, after a delay of 100ms. Both of these delays can be changed with the "Configure Hover Delay" and "Configure Hover Out Delay" options in the context menu, or in about:config. For languages other than English, the labels and tooltips can be modified directly in the l10n object below.
@@ -1589,8 +1589,9 @@
 #vertical-tabs-inner-box {
     overflow: hidden;
     width: -moz-available;
-    height: min-content;
     min-width: calc(16px + var(--arrowpanel-menuitem-padding) * 2);
+    height: min-content;
+    max-height: 100%;
 }
 #vertical-tabs-buttons-row {
     min-width: 0 !important;
