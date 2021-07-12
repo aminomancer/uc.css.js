@@ -20,7 +20,7 @@
         d="M14.56 5.37l-1.73 1s-.87.5-1.37-.37c-.5-.87.37-1.37.37-1.37l1.73-1s.87-.5 1.37.37c.5.87-.37 1.37-.37 1.37z" />
     <path opacity=".23"
         d="M9.64 3.1l.98-1.66s.5-.874 1.37-.37c.87.5.37 1.37.37 1.37l-1 1.73s-.5.87-1.37.37c-.87-.5-.37-1.37-.37-1.37z" />
-    <animateTransform attributeType="xml" attributeName="transform" type="rotate" dur="0.5s" repeatCount="indefinite"
+    <animateTransform attributeType="xml" attributeName="transform" type="rotate" dur="0.85s" repeatCount="indefinite"
         calcMode="discrete"
         values="0 0 0; 30 0 0; 60 0 0; 90 0 0; 120 0 0; 150 0 0; 180 0 0; 210 0 0; 240 0 0; 270 0 0; 300 0 0; 330 0 0" />
 </svg>

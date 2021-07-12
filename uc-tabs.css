@@ -655,7 +655,7 @@ so shadows are cast in both directions, unless the neighboring tab is selected o
     transform: translateX(25px) scale(0.5) !important;
 }
 
-.tabbrowser-tab .tab-throbber:not([busy]) {
+.tabbrowser-tab .tab-throbber:not([busy], [progress]) {
     opacity: 0 !important;
     pointer-events: none !important;
     transform: translateX(-15px) scale(0.5) !important;
@@ -667,12 +667,14 @@ so shadows are cast in both directions, unless the neighboring tab is selected o
     transform: translateX(25px) scale(0.5) !important;
 }
 
-.tab-throbber::before {
-    fill: var(--loading-throbber-fill) !important;
-}
-
 .tab-throbber[busy]::before {
     opacity: 0.8 !important;
+    fill: var(--busy-throbber-fill) !important;
+}
+
+.tab-throbber[progress]::before {
+    opacity: 1 !important;
+    fill: var(--loading-throbber-fill) !important;
 }
 
 /* this pref enables a special loading throbber animation that spins instead of bouncing horizontally */
@@ -688,7 +690,6 @@ so shadows are cast in both directions, unless the neighboring tab is selected o
         background-position: center !important;
         background-repeat: no-repeat !important;
         -moz-context-properties: fill, fill-opacity !important;
-        opacity: 0.7 !important;
         width: 16px !important;
         height: 16px !important;
         animation: none !important;
@@ -697,14 +698,14 @@ so shadows are cast in both directions, unless the neighboring tab is selected o
 
     .tab-throbber-tabslist[busy] {
         list-style-image: url(chrome://userchrome/content/loading-spinner.svg) !important;
-        opacity: 0.6 !important;
-        fill: currentColor !important;
+        opacity: 0.8 !important;
+        fill: var(--busy-throbber-fill) !important;
     }
 
     .tab-throbber-tabslist[progress] {
         list-style-image: url(chrome://userchrome/content/loading-spinner.svg) !important;
+        opacity: 1 !important;
         fill: var(--loading-throbber-fill) !important;
-        opacity: 0.8 !important;
     }
 }
 

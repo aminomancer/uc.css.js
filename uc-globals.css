@@ -171,7 +171,8 @@ tooltip {
     --urlbar-one-offs-width: calc(
         var(--urlbar-one-offs-engine-width) * var(--urlbar-one-offs-engines-per-scroll)
     );
-    --loading-throbber-fill: hsl(222, 100%, 75%);
+    --loading-throbber-fill: hsl(225, 100%, 75%);
+    --busy-throbber-fill: hsl(218, 90%, 85%);
     --sanitize-border-color: hsla(0, 0%, 5%, 0.2);
     --menu-separator-color: hsl(233, 25%, 23%);
     --user-urlbar-container-height: 38px;
