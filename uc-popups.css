@@ -787,7 +787,7 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
 
     input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"]),
     textarea {
-        padding-block: 5px !important;
+        padding: 5px !important;
     }
 
     input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):focus,

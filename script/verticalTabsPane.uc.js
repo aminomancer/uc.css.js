@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Vertical Tabs Pane
-// @version        1.4.4
+// @version        1.4.5
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Create a vertical pane across from the sidebar that functions like the vertical tab pane in Microsoft Edge. It doesn't hide the tab bar since people have different preferences on how to do that, but it sets an attribute on the root element that you can use to hide the regular tab bar while the vertical pane is open, for example :root[vertical-tabs] #TabsToolbar... By default, the pane is resizable just like the sidebar is. And like the pane in Edge, you can press a button to collapse it, and it will hide the tab labels and become a thin strip that just shows the tabs' favicons. Hovering the collapsed pane will expand it without moving the browser content. As with the [vertical-tabs] attribute, this "unpinned" state is reflected on the root element, so you can select it like :root[vertical-tabs-unpinned]... Like the sidebar, the state of the pane is stored between windows and recorded in preferences. There's no need to edit these preferences directly. There are a few other preferences that can be edited in about:config, but they can all be changed on the fly by opening the context menu within the pane. The new tab button and the individual tabs all have their own context menus, but right-clicking anything else will open the pane's context menu, which has options for changing these preferences. "Move Pane to Right/Left" will change which side the pane (and by extension, the sidebar) is displayed on, relative to the browser content. Since the pane always mirrors the position of the sidebar, moving the pane to the right will move the sidebar to the left, and vice versa. "Reverse Tab Order" changes the direction of the pane so that newer tabs are displayed on top rather than on bottom. "Expand Pane on Hover/Focus" causes the pane to expand on hover when it's collapsed. When you collapse the pane with the unpin button, it collapses to a small width and then temporarily expands if you hover it, after a delay of 100ms. Then when your mouse leaves the pane, it collapses again, after a delay of 100ms. Both of these delays can be changed with the "Configure Hover Delay" and "Configure Hover Out Delay" options in the context menu, or in about:config. For languages other than English, the labels and tooltips can be modified directly in the l10n object below.
@@ -51,6 +51,8 @@
     let reversePref = "userChrome.tabs.verticalTabsPane.reverse-order";
     let hoverDelayPref = "userChrome.tabs.verticalTabsPane.hover-delay";
     let hoverOutDelayPref = "userChrome.tabs.verticalTabsPane.hover-out-delay";
+    let userContextPref = "privacy.userContext.enabled";
+    let containerOnClickPref = "privacy.userContext.newTabContainerOnLeftClick.enabled";
     /**
      * create a DOM node with given parameters
      * @param {object} aDoc (which document to create the element in)
@@ -263,7 +265,7 @@
             SessionStore.promiseInitialized.then(() => {
                 if (window.closed) return;
                 readPref(reversePref);
-                readPref("privacy.userContext.enabled");
+                readPref(userContextPref);
                 readPref(SidebarUI.POSITION_START_PREF);
                 // try to adopt from previous window, otherwise restore from prefs.
                 let sourceWindow = window.opener;
@@ -513,13 +515,16 @@
                     this._onCommand(e, tab);
                     break;
                 case "mouseover":
-                    this._warmupRowTab(e, tab);
+                    this.warmupRowTab(e, tab);
                     break;
                 case "mouseenter":
                     this._onMouseEnter(e);
                     break;
                 case "mouseleave":
                     this._onMouseLeave(e);
+                    break;
+                case "deactivate":
+                    this._onDeactivate(e);
                     break;
                 case "TabAttrModified":
                 case "TabPinned":
@@ -649,8 +654,8 @@
                     break;
                 case hoverOutDelayPref:
                     this.hoverOutDelay = value ?? 100;
-                case "privacy.userContext.enabled":
-                case "privacy.userContext.newTabContainerOnLeftClick.enabled":
+                case userContextPref:
+                case containerOnClickPref:
                     this.handlePrivacyChange();
                     break;
                 case SidebarUI.POSITION_START_PREF:
@@ -727,28 +732,27 @@
         // this way the script is less wasteful when the pane is closed.
         _setupListeners() {
             this.listenersRegistered = true;
+            window.addEventListener("deactivate", this);
             this.tabEvents.forEach((ev) => gBrowser.tabContainer.addEventListener(ev, this));
             this.dragEvents.forEach((ev) => this.containerNode.addEventListener(ev, this));
             this.paneEvents.forEach((ev) => this.pane.addEventListener(ev, this));
             if (gToolbarKeyNavEnabled) this.pane.addEventListener("keydown", this);
             this.pane.addEventListener("blur", this, true);
             gBrowser.addEventListener("TabMultiSelect", this, false);
-            for (let stop of this.pane.getElementsByTagName("toolbartabstop")) {
-                stop.setAttribute("aria-hidden", "true");
+            for (let stop of this.pane.getElementsByTagName("toolbartabstop"))
                 stop.addEventListener("focus", this);
-            }
         }
         // invoked when closing the pane. clear all the aforementioned event listeners.
         _cleanupListeners() {
+            window.removeEventListener("deactivate", this);
             this.tabEvents.forEach((ev) => gBrowser.tabContainer.removeEventListener(ev, this));
             this.dragEvents.forEach((ev) => this.containerNode.removeEventListener(ev, this));
             this.paneEvents.forEach((ev) => this.pane.removeEventListener(ev, this));
             this.pane.removeEventListener("keydown", this);
-            this.pane.addEventListener("blur", this, true);
+            this.pane.removeEventListener("blur", this, true);
             gBrowser.removeEventListener("TabMultiSelect", this, false);
-            for (let stop of this.pane.getElementsByTagName("toolbartabstop")) {
+            for (let stop of this.pane.getElementsByTagName("toolbartabstop"))
                 stop.removeEventListener("focus", this);
-            }
             this.listenersRegistered = false;
         }
         /**
@@ -944,6 +948,9 @@
                 else image.classList.remove("tab-throbber-tabslist");
             }
         }
+        get mouseTargetRect() {
+            return windowUtils.getBoundsWithoutFlushing(this.pane);
+        }
         /**
          * get the previous or next node for a given TreeWalker
          * @param {object} walker (a TreeWalker object)
@@ -1003,11 +1010,9 @@
             // if the pane was blurred because a context menu was opened, defer this behavior until the context menu is hidden.
             let openMenu = this.openMenu;
             if (openMenu) {
-                openMenu.addEventListener(
-                    "popuphidden",
-                    (e) => setTimeout(() => this._onPaneBlur(e), 100),
-                    { once: true }
-                );
+                openMenu.addEventListener("popuphidden", (e) => this._onPaneBlur(e), {
+                    once: true,
+                });
                 return;
             }
             this.pane.removeAttribute("expanded");
@@ -1069,11 +1074,11 @@
             if (e.altKey || e.shiftKey || accelKey) return;
             switch (e.key) {
                 case "ArrowLeft":
-                    this.navigateButtons(!window.RTL_UI, true);
+                    this.navigateButtons(!window.RTL_UI, !this.noExpand);
                     break;
                 case "ArrowRight":
                     // Previous if UI is RTL, next if UI is LTR.
-                    this.navigateButtons(window.RTL_UI, true);
+                    this.navigateButtons(window.RTL_UI, !this.noExpand);
                     break;
                 case "ArrowUp":
                     this.navigateButtons(true);
@@ -1161,7 +1166,7 @@
             }, this.hoverDelay);
         }
         // when mouse leaves the pane, prepare to collapse the pane...
-        _onMouseLeave(e) {
+        _onMouseLeave(e, delay) {
             clearTimeout(this.hoverTimer);
             this.hoverQueued = false;
             if (this.hoverOutQueued) return;
@@ -1169,20 +1174,31 @@
             this.hoverOutTimer = setTimeout(() => {
                 this.hoverOutQueued = false;
                 if (this.pane.matches(":is(:hover, :focus-within)")) return;
+                if (e.type === "popuphidden" && Services.focus.activeWindow === window) {
+                    let rect = this.mouseTargetRect;
+                    let { _x, _y } = MousePosTracker;
+                    if (_x >= rect.left && _x <= rect.right && _y >= rect.top && _y <= rect.bottom)
+                        return;
+                }
                 if (this.noExpand) return this.pane.removeAttribute("expanded");
                 // again, don't collapse the pane yet if the mouse left because a context menu was opened on the pane.
                 // wait until the context menu is closed before collapsing the pane.
                 let openMenu = this.openMenu;
                 if (openMenu) {
-                    openMenu.addEventListener(
-                        "popuphidden",
-                        (e) => setTimeout(() => this._onMouseLeave(e), 100),
-                        { once: true }
-                    );
+                    openMenu.addEventListener("popuphidden", (e) => this._onMouseLeave(e, 0), {
+                        once: true,
+                    });
                     return;
                 }
                 this.pane.removeAttribute("expanded");
-            }, this.hoverOutDelay);
+            }, delay ?? this.hoverOutDelay);
+        }
+        _onDeactivate(e) {
+            clearTimeout(this.hoverTimer);
+            clearTimeout(this.hoverOutTimer);
+            this.hoverQueued = false;
+            this.hoverOutQueued = false;
+            this.pane.removeAttribute("expanded");
         }
         unpin() {
             this.pane.setAttribute("unpinned", true);
@@ -1381,7 +1397,7 @@
         // invoked when mousing over a row. we want to speculatively warm up a tab when the user hovers it since it's possible they will click it.
         // there's a cache for this with a maximum limit, so if the user mouses over 3 tabs without clicking them, then a 4th, it will clear the 1st to make room.
         // this is the same thing the built-in tab bar does so we're just mimicking vanilla behavior here. this can be disabled with browser.tabs.remote.warmup.enabled
-        _warmupRowTab(e, tab) {
+        warmupRowTab(e, tab) {
             let row = this.findRow(e.target);
             SessionStore.speculativeConnectOnTabHover(tab);
             if (row.closeButton.matches(":hover")) tab = gBrowser._findTabToBlurTo(tab);
@@ -1494,11 +1510,9 @@
         // so we need to observe this preference and respond accordingly.
         handlePrivacyChange() {
             let containersEnabled =
-                prefSvc.getBoolPref("privacy.userContext.enabled") &&
+                prefSvc.getBoolPref(userContextPref) &&
                 !PrivateBrowsingUtils.isWindowPrivate(window);
-            const newTabLeftClickOpensContainersMenu = prefSvc.getBoolPref(
-                "privacy.userContext.newTabContainerOnLeftClick.enabled"
-            );
+            const newTabLeftClickOpensContainersMenu = prefSvc.getBoolPref(containerOnClickPref);
             let parent = this.newTabButton;
             parent.removeAttribute("type");
             if (parent.menupopup) parent.menupopup.remove();
@@ -2080,7 +2094,7 @@
     }
 
     // make the hotkey (ctrl + alt + V)
-    if (config.hotkey.enabled)
+    if (config.hotkey.enabled && _ucUtils?.registerHotkey)
         _ucUtils.registerHotkey(
             {
                 id: "key_toggleVerticalTabs",
