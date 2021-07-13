@@ -514,3 +514,32 @@ treechildren::-moz-tree-twisty(open) {
     min-width: -moz-available !important;
     flex-grow: 1 !important;
 }
+
+/* vertical tabs pane shadow */
+#vertical-tabs-pane[unpinned] {
+    box-shadow: 0px 0px 8px -4px hsla(240, 4%, 0%, 0.6), 0px 0px 15px 0px hsla(0, 0%, 0%, 0.2) !important;
+}
+
+#vertical-tabs-pane:not([unpinned]) ~ #vertical-tabs-splitter {
+    position: absolute;
+    z-index: 2; /* draw above the app content */
+    width: 38px !important; /* we have to make it bigger so we can add negative spread to the shadow. so it matches the sidebar shadow */
+    margin-inline-start: -38px !important;
+    box-shadow: 0px 0px 8px -4px hsla(240, 4%, 0%, 0.6), 0px 0px 15px 0px hsla(0, 0%, 0%, 0.2);
+    /* we need to use clip-path for a few reasons...
+       1) stop the shadow from drawing on the pane (the splitter is above the pane in z-dimension)
+       2) we made the splitter bigger for the sake of the shadow. but it's supposed to be 4px wide, that's the resizable area.
+          so we need to clip off 34px from the left side of the pane. this clips the shadow as well as the splitter itself,
+          so it's effectively 4px wide in terms of clickable area but 38px wide for purposes of the shadow.
+       3) we also need to keep the shadow from projecting onto the navbar above it.
+          you'll notice we use clip-path for shadows very frequently,
+          where we want to make the projecting object look like it's below something that it's actually above. */
+    clip-path: inset(0 -250px 0 34px);
+}
+
+/* since we get rid of the focus ring, we'll highlight focused buttons with background-color, as we do on the toolbar */
+#vertical-tabs-buttons-row
+    .subviewbutton:is(:focus-visible, [checked="true"]):not([disabled], [open], :hover, :active) {
+    background-color: var(--toolbarbutton-checked-background) !important;
+    transition: none !important;
+}

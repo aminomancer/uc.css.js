@@ -102,6 +102,7 @@ tooltip {
     --identity-box-solid-bg: hsl(235, 33%, 23%);
     --identity-box-hover-bg: hsl(234, 30%, 26%);
     --secure-color: hsl(119, 80%, 60%);
+    --secure-text-color: hsl(129, 100%, 70%);
     --insecure-text-color: hsla(0, 100%, 50%, 0.867);
     --warning-color: hsl(355, 100%, 66%);
     --uc-warning-background: hsla(2, 100%, 66%, 25%);
@@ -175,8 +176,9 @@ tooltip {
     --busy-throbber-fill: hsl(218, 90%, 85%);
     --sanitize-border-color: hsla(0, 0%, 5%, 0.2);
     --menu-separator-color: hsl(233, 25%, 23%);
-    --user-urlbar-container-height: 38px;
-    --user-menubar-searchbar-width: 256px;
+    --uc-urlbar-container-height: 38px;
+    --uc-menubar-searchbar-width: 256px;
+    --uc-tab-min-height: 35px;
     --menuitem-height: 26px;
     --subviewbutton-height: 28px;
     --findbar-height: 22px;

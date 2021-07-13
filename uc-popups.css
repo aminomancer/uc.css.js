@@ -1317,6 +1317,7 @@ link[href="chrome://global/content/printPagination.css"]
 
     #updateDeck button {
         background: var(--buttons-primary-button-bgcolor);
+        padding: 8px 10px !important;
     }
 
     #updateDeck button:is(:hover, :focus-visible) {

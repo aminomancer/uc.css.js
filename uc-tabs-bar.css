@@ -141,7 +141,7 @@ this sheet controls their appearance as well. */
     padding: 0 !important;
     margin: 0 2px !important;
     min-height: 0 !important;
-    min-width: var(--user-menubar-searchbar-width) !important;
+    min-width: var(--uc-menubar-searchbar-width) !important;
     resize: horizontal !important;
     height: 100% !important;
     box-sizing: border-box !important;
@@ -618,54 +618,4 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
     transform: none !important;
     opacity: 0.7 !important;
     margin-inline-start: -2px !important;
-}
-
-#vertical-tabs-pane[unpinned]:not([expanded])
-    #vertical-tabs-list
-    .all-tabs-item
-    .all-tabs-secondary-button[toggle-mute] {
-    transform: none !important;
-    margin-inline: revert !important;
-}
-
-#vertical-tabs-pane[unpinned]:not([expanded]) .all-tabs-item {
-    min-width: 0 !important;
-}
-
-#vertical-tabs-pane[unpinned]:not([expanded]) .all-tabs-item .all-tabs-button {
-    margin: 0 !important;
-    -moz-box-pack: start !important;
-}
-
-#vertical-tabs-pane[unpinned]:not([expanded]) .all-tabs-button .toolbarbutton-text {
-    opacity: 0 !important;
-}
-
-.all-tabs-item[pinned] > .all-tabs-button.subviewbutton > .toolbarbutton-text {
-    background: url(chrome://userchrome/content/skin/pin-tab.svg) no-repeat 6px/11px !important;
-    padding-inline-start: 20px !important;
-    -moz-context-properties: fill, fill-opacity;
-    fill: currentColor;
-}
-
-#vertical-tabs-pane {
-    border-color: var(--sidebar-border-color);
-    border-block-style: none;
-    border-inline-style: solid;
-    border-inline-width: 1px 0;
-    z-index: 2 !important;
-}
-
-#vertical-tabs-pane[positionstart] {
-    border-inline-width: 0 1px;
-}
-
-.sidebar-splitter#vertical-tabs-splitter {
-    border: none !important;
-}
-
-#vertical-tabs-buttons-row
-    .subviewbutton:is(:focus-visible, [checked="true"]):not([disabled], [open], :hover, :active) {
-    background-color: var(--toolbarbutton-checked-background) !important;
-    transition: none !important;
 }

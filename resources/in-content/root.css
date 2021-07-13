@@ -12,22 +12,6 @@
     }
 
     @-moz-document regexp("^(http).*") {
-        input[type="text"],
-        select,
-        textarea,
-        button {
-            border-radius: var(--general-button-border-radius);
-            border: 1px solid var(--content-principal-border-hover);
-        }
-
-        select {
-            padding-block: 2px;
-        }
-
-        input[type="text"] {
-            padding: 2px 4px;
-        }
-
         input[type="number"] {
             -moz-appearance: none;
             appearance: none;

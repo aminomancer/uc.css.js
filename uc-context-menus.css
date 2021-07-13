@@ -303,13 +303,10 @@ menupopup.in-menulist > menuitem[disabled="true"] {
 }
 
 menupopup.in-menulist {
-    appearance: none !important;
-    border: none !important;
-    border-radius: var(--menupopup-border-radius) !important;
-    margin: var(--menupopup-margin) !important;
-    overflow: hidden !important;
-    color: var(--menu-color) !important;
     background-image: unset !important;
+}
+
+panel menupopup.in-menulist {
     --menu-background-color: var(--ui-secondary-bg) !important;
 }
 

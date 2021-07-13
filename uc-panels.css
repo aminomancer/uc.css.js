@@ -720,11 +720,15 @@ popupnotification progress[paused]::-moz-progress-bar {
     fill: var(--secure-color) !important;
 }
 
-#identity-popup[connection=secure-cert-user-overridden] .identity-popup-security-connection,
-#identity-popup[connection=cert-error-page] .identity-popup-security-connection {
+#identity-popup[connection="secure-cert-user-overridden"] .identity-popup-security-connection {
     background-image: url(chrome://global/skin/icons/security-warning.svg) !important;
     fill: unset !important;
     -moz-context-properties: fill !important;
+}
+
+#identity-popup[connection="cert-error-page"] .identity-popup-security-connection,
+#identity-popup[connection="net-error-page"] .identity-popup-security-connection {
+	background-image: url(chrome://userchrome/content/error.svg) !important;
 }
 
 #identity-popup[connection="extension"] .identity-popup-security-connection {
@@ -733,8 +737,13 @@ popupnotification progress[paused]::-moz-progress-bar {
     fill: currentColor !important;
 }
 
-.identity-popup-connection-not-secure[when-connection~="secure-cert-user-overridden"] {
+.identity-button .identity-popup-connection-not-secure,
+#identity-popup[connection="secure-cert-user-overridden"] [when-connection~="secure-cert-user-overridden"] {
     color: inherit !important;
+}
+
+#identity-popup[connection="secure"] .identity-popup-connection-secure.security-view[when-connection~="secure"] {
+    color: var(--secure-text-color) !important;
 }
 
 /* url bar popups */
@@ -1307,10 +1316,6 @@ panel .header,
 
 #identity-popup:is([connection="file"], [connection="chrome"]) #identity-popup-security-button {
     margin-bottom: 6px !important;
-}
-
-#identity-popup-security-httpsonlymode > label {
-    margin-top: 0 !important;
 }
 
 #identity-popup-security-httpsonlymode-menulist,
