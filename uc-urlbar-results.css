@@ -424,6 +424,7 @@
     font-weight: initial !important;
 }
 
+/* change some remote page favicons in the urlbar results to match our search engine icons */
 .urlbarView-favicon:is([src="page-icon:https://www.google.com/"],
     [src="page-icon:http://google.com/"],
     [src^="page-icon:https://www.google.com/search?"],
@@ -436,8 +437,7 @@
     padding-left: 16px;
 }
 
-.urlbarView-favicon[src="moz-extension://cd4aad93-9726-49dd-a5cd-9e5f5c4d76f4/favicon.ico"]
-{
+.urlbarView-favicon[src="moz-extension://cd4aad93-9726-49dd-a5cd-9e5f5c4d76f4/favicon.ico"] {
     box-sizing: border-box !important;
     background: url(chrome://userchrome/content/engines/google.svg) no-repeat !important;
     width: 16px !important;
@@ -445,10 +445,33 @@
     padding-left: 16px;
 }
 
-.urlbarView-row:not([type="search"]) .urlbarView-favicon[src^="page-icon:https://en.wikipedia.org/"]
+.urlbarView-row:not([type="search"])
+    .urlbarView-favicon:is([src^="page-icon:https://en.wikipedia.org/"], [src^="page-icon:http://en.wikipedia.org/"])
 {
     box-sizing: border-box !important;
     background: url(chrome://userchrome/content/engines/wiki.svg) no-repeat center/contain !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 16px;
+    fill-opacity: 1 !important;
+}
+
+.urlbarView-row:not([type="search"])
+    .urlbarView-favicon:is([src^="page-icon:https://www.amazon.com/"], [src^="page-icon:http://www.amazon.com/"])
+{
+    box-sizing: border-box !important;
+    background: url(chrome://userchrome/content/engines/amazon.svg) no-repeat center/contain !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 16px;
+    fill-opacity: 1 !important;
+}
+
+.urlbarView-row:not([type="search"])
+    .urlbarView-favicon:is([src^="page-icon:https://gatherer.wizards.com/"], [src^="page-icon:http://gatherer.wizards.com/"])
+{
+    box-sizing: border-box !important;
+    background: url(chrome://userchrome/content/engines/gatherer.svg) no-repeat center/contain !important;
     width: 16px !important;
     height: 16px !important;
     padding-left: 16px;

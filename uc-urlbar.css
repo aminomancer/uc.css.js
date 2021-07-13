@@ -424,11 +424,6 @@ toolbarpaletteitem[removable="false"]
 	fill: unset !important;
 }
 
-#identity-box[pageproxystate="valid"].chromeUI #identity-icon-label,
-#identity-box[pageproxystate="valid"].extensionPage #identity-icon-label {
-    opacity: 0.6 !important;
-}
-
 #urlbar[pageproxystate="valid"] #identity-box.chromeUI #identity-icon {
     list-style-image: url(chrome://userchrome/content/identity-icons-brand.svg) !important;
 }
@@ -445,18 +440,7 @@ toolbarpaletteitem[removable="false"]
     #identity-box.chromeUI
     #identity-icon-box:is([open="true"], :focus-visible)
     > #identity-icon {
-    list-style-image: url(chrome://userchrome/content/about-logo.png) !important;
-    filter: var(--lwt-raster-icon-filter);
-}
-
-:root {
-    --lwt-raster-icon-filter: none;
-}
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        --lwt-raster-icon-filter: brightness(1.1) contrast(0.9) saturate(0.9);
-    }
+    list-style-image: url(chrome://branding/content/about-logo.png) !important;
 }
 
 #urlbar[pageproxystate="valid"] #identity-box.chromeUI {
@@ -479,7 +463,7 @@ toolbarpaletteitem[removable="false"]
     #identity-box.chromeUI
     #identity-icon-box:is([open="true"], :focus-visible)
     > #identity-icon-label {
-    opacity: 1 !important;
+    opacity: 0.8 !important;
 }
 
 :root[hide-tp-icon-on-ntp]:not([customizing])
@@ -747,10 +731,6 @@ toolbarpaletteitem[removable="false"]
 
 :root[customizing] #tracking-protection-icon-container {
     display: -moz-box !important;
-}
-
-#urlbar[searchmode] #identity-box #identity-icon-box #identity-icon {
-    fill-opacity: 0.6 !important;
 }
 
 #identity-box.extensionPage #identity-icon-box,
@@ -1021,7 +1001,7 @@ use 0.6 instead of 1 since 1 will end up being shown as like 1.4px for some wind
 #urlbar-search-mode-indicator-title,
 #urlbar-label-switchtab {
     color: var(--lwt-toolbar-field-color, black) !important;
-    opacity: 0.6 !important;
+    opacity: var(--identity-box-label-opacity) !important;
     padding-inline: 0px !important;
     font-size: inherit !important;
     font-weight: 400;
