@@ -153,14 +153,14 @@ toolbarpaletteitem[place="palette"] > #search-container {
     background-color: var(--urlbar-input-bgcolor-even-brighter) !important;
 }
 
-:not(.urlbar-icon-wrapper) > .urlbar-icon,
-.urlbar-icon-wrapper {
+:not(.urlbar-page-action) > .urlbar-icon,
+.urlbar-page-action {
     background-color: transparent !important;
 }
 
-:not(.urlbar-icon-wrapper) > .urlbar-icon:not([disabled]):is(:hover, :focus-visible, [open]),
+:not(.urlbar-page-action) > .urlbar-icon:not([disabled]):is(:hover, :focus-visible, [open]),
 #pageAction-urlbar-screenshot[shooting]:not(:hover) .urlbar-icon,
-.urlbar-icon-wrapper:not([disabled]):is(:hover, :focus-visible, [open]) .urlbar-icon {
+.urlbar-page-action:not([disabled]):is(:hover, :focus-visible, [open]) .urlbar-icon {
     fill-opacity: 1 !important;
 }
 
@@ -209,16 +209,13 @@ but CSS hides it faster and avoids flickering.
     }
 }
 
-/* just looks slightly better imo */
-#reader-mode-button .urlbar-icon {
-    padding-inline: 6.5px !important;
+.urlbar-page-action {
+    -moz-box-pack: center !important;
 }
 
-#page-action-buttons > :not([hidden], toolbartabstop) ~ #pageActionSeparator {
-    visibility: collapse !important;
-    margin-left: 4px !important;
-    margin-right: 4px !important;
-    opacity: 0.5 !important;
+/* just looks slightly better imo */
+#reader-mode-button-icon {
+    width: 15px !important;
 }
 
 .urlbar-history-dropmarker {
