@@ -699,11 +699,9 @@ popupnotification progress[paused]::-moz-progress-bar {
 
 #identity-popup-security-description {
     font-size: 12px !important;
-    padding-block: 3px !important;
 }
 
 #identity-popup-security-description > description {
-    padding-block: 0 !important;
     height: -moz-fit-content !important;
 }
 
@@ -831,7 +829,7 @@ popupnotification progress[paused]::-moz-progress-bar {
 #identity-popup-security-description > :is(description, label, button) {
     margin-inline: 34px !important;
     padding-inline: 0 !important;
-    margin-block: 2px !important;
+    margin-block: 4px !important;
 }
 
 #identity-popup-security-description > .identity-popup-warning-box {
