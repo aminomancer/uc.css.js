@@ -275,6 +275,15 @@ this sheet controls their appearance as well. */
 }
 
 /* macOS style window controls */
+:root:not([inFullscreen]) .titlebar-button {
+    display: -moz-box !important;
+}
+
+:root:not([sizemode="maximized"]) .titlebar-restore,
+:root[sizemode="maximized"] .titlebar-max {
+    display: none !important;
+}
+
 :root:-moz-window-inactive:not([customizing])
     :is(.titlebar-buttonbox, #window-controls)
     > toolbarbutton:not(:hover) {
