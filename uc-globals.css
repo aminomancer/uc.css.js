@@ -180,6 +180,7 @@ tooltip {
     --uc-urlbar-container-height: 38px;
     --uc-menubar-searchbar-width: 256px;
     --uc-tab-min-height: 35px;
+    --tab-max-width: 100vw;
     --menuitem-height: 26px;
     --subviewbutton-height: 28px;
     --findbar-height: 22px;

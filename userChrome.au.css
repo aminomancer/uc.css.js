@@ -194,7 +194,7 @@ menupopup::part(arrowscrollbox),
 
 /* make unpinned tabs stretch to fill the whole tab bar */
 .tabbrowser-tab[fadein]:not([style*="max-width"]) {
-    max-width: 100vw;
+    max-width: var(--tab-max-width, 225px);
 }
 
 /* much better general tab animations.
