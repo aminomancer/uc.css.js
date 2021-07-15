@@ -805,26 +805,7 @@ so we make the mask size constant. */
     --tab-label-mask-size: 2em !important;
 }
 
-/* hide the secondary sound label that says "PLAYING" "MUTED" etc.
-we restore the tab button with javascript & manifest so there's no need for it, it just wastes space. */
-.tab-icon-sound-label {
-    display: none !important;
-}
-
-.tab-secondary-label {
-    display: none !important;
-}
-
-.tab-background,
-.tabbrowser-tab:not([pinned]) {
-    min-height: 0 !important;
-    margin: 0 !important;
-}
-
-.tab-icon-sound {
-    display: -moz-box !important;
-}
-
+/* hide the sound icon while moving a pinned. does nothing without restoreTabSoundButton.uc.js */
 .tabbrowser-tab[pinned]:not([last-visible-tab]) .tab-icon-sound,
 #tabbrowser-tabs[movingtab] .tabbrowser-tab[pinned] .tab-icon-sound,
 .tabbrowser-tab[pinned]:is([justmoved], [tab-grouping], [tabdrop-samewindow]) .tab-icon-sound {

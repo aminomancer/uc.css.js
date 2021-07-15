@@ -3,24 +3,25 @@ it also controls the all tabs panel since the all tabs button is within the tab 
 since the window controls and main menu bar are normally part of the titlebar,
 this sheet controls their appearance as well. */
 
-.tabbrowser-tab {
-    min-height: var(--tab-min-height) !important;
-}
-
-#tabs-newtab-button {
-    display: none !important;
-}
-
-#new-tab-button {
-    display: -moz-box !important;
+#toolbar-menubar[inactive="true"] ~ #TabsToolbar,
+#toolbar-menubar:not([inactive="true"]) {
+    padding-inline-end: 6px !important;
 }
 
 .titlebar-spacer[type="pre-tabs"] {
     display: none;
 }
 
-.titlebar-spacer[type="post-tabs"] {
-    width: 15.6px !important;
+.titlebar-spacer[type="post-tabs"],
+#toolbar-menubar > spacer {
+    width: var(--titlebar-spacer-width, 40px) !important;
+    display: -moz-box !important;
+}
+
+/* split the width in half to center the menubar between the tabs and the titlebar buttons */
+#toolbar-menubar:not([inactive="true"]) + #TabsToolbar .titlebar-spacer,
+#toolbar-menubar:not([inactive="true"]) > spacer {
+    width: calc(var(--titlebar-spacer-width, 40px) / 2) !important;
 }
 
 :root:is([privatebrowsingmode], [accessibilitymode]) .titlebar-spacer[type="post-tabs"] {
@@ -79,10 +80,7 @@ this sheet controls their appearance as well. */
     right: 0 !important;
     z-index: 20 !important;
     top: calc((var(--tab-min-height) / 2) - (15.3px / 2)) !important;
-}
-
-:root[inFullscreen] #toolbar-menubar[inactive] ~ #TabsToolbar #window-controls {
-    margin-left: 15.6px !important;
+    padding-inline-end: 6px !important;
 }
 
 :root[inDOMFullscreen] #toolbar-menubar[inactive] ~ #TabsToolbar #window-controls {
@@ -90,29 +88,22 @@ this sheet controls their appearance as well. */
 }
 
 :root[inFullscreen] #titlebar {
-    background-image: var(--titlebar-gradient);
-    background-color: var(--lwt-accent-color);
+    background: var(--titlebar-background);
 }
 
 :root:not([inFullscreen])
     #toolbar-menubar[autohide="true"][inactive="true"]:not([customizing="true"])
     ~ #TabsToolbar {
-    background-image: var(--titlebar-gradient);
-    background-color: var(--lwt-accent-color);
+    background: var(--titlebar-background);
 }
 
 :root:not([inFullscreen]) #toolbar-menubar:not([inactive="true"]) {
-    background-image: var(--titlebar-gradient);
-    background-color: var(--lwt-accent-color);
+    background: var(--titlebar-background);
 }
 
 /* menubar buttons */
 #toolbar-menubar #menubar-items {
     -moz-box-pack: center !important;
-}
-
-#toolbar-menubar > spacer {
-    margin-left: 5.8px;
 }
 
 #toolbar-menubar #main-menubar > menu {
@@ -164,6 +155,14 @@ this sheet controls their appearance as well. */
 #toolbar-menubar #searchbar .search-go-button {
     border-radius: 0 !important;
     margin: 0 !important;
+}
+
+#tabs-newtab-button {
+    display: none !important;
+}
+
+#new-tab-button {
+    display: -moz-box !important;
 }
 
 /* get rid of drop shadow drawn on leftmost visible tab */
@@ -297,13 +296,6 @@ this sheet controls their appearance as well. */
 
 .titlebar-buttonbox {
     appearance: none !important;
-    margin-right: 6px !important;
-    margin-left: 0 !important;
-}
-
-#window-controls {
-    margin-right: 6px !important;
-    margin-left: 0 !important;
 }
 
 .titlebar-min,
