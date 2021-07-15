@@ -699,6 +699,7 @@ popupnotification progress[paused]::-moz-progress-bar {
 
 #identity-popup-security-description {
     font-size: 12px !important;
+    padding-block: 3px !important;
 }
 
 #identity-popup-security-description > description {
@@ -744,6 +745,15 @@ popupnotification progress[paused]::-moz-progress-bar {
 
 #identity-popup[connection="secure"] .identity-popup-connection-secure.security-view[when-connection~="secure"] {
     color: var(--secure-text-color) !important;
+}
+
+#identity-popup[ciphers="weak"]
+    .identity-popup-security-connection
+    .identity-popup-connection-not-secure.security-view[when-connection~="not-secure"],
+#identity-popup[mixedcontent~="passive-loaded"][isbroken]
+    .identity-popup-security-connection
+    .identity-popup-connection-not-secure.security-view[when-connection~="not-secure"] {
+    color: var(--low-warning-text-color) !important;
 }
 
 /* url bar popups */
@@ -818,8 +828,17 @@ popupnotification progress[paused]::-moz-progress-bar {
     border: none !important;
 }
 
+#identity-popup-security-description > :is(description, label, button) {
+    margin-inline: 34px !important;
+    padding-inline: 0 !important;
+    margin-block: 2px !important;
+}
+
+#identity-popup-security-description > .identity-popup-warning-box {
+    font-weight: 400 !important;
+}
+
 #identity-popup-mainView .identity-popup-warning-box {
-    font-weight: 500 !important;
     font-size: 1em !important;
 }
 
@@ -827,7 +846,20 @@ popupnotification progress[paused]::-moz-progress-bar {
     font-weight: 400 !important;
     background: var(--uc-warning-background);
     padding: 4px !important;
+    margin-inline: 24px 1px !important;
     border-radius: 3px;
+}
+
+#identity-popup-securityView-body > .identity-popup-warning-box.identity-popup-warning-yellow {
+    background: var(--low-warning-background);
+}
+
+#identity-popup-securityView-body > .identity-popup-warning-box.identity-popup-warning-gray {
+    background: var(--arrowpanel-faint);
+}
+
+:root[lwt-popup-brighttext] panel .identity-popup-warning-yellow .text-link {
+	color: var(--low-warning-text-color) !important;
 }
 
 .identity-popup-section {
@@ -923,11 +955,6 @@ popupnotification progress[paused]::-moz-progress-bar {
 #identity-popup-securityView-body > description#identity-popup-content-supplemental {
     margin-top: revert !important;
     padding-inline-start: 16px;
-}
-
-#identity-popup-security-description > :is(description, label, button) {
-    padding-inline: 30px !important;
-    margin-inline-start: 0 !important;
 }
 
 panel .header,

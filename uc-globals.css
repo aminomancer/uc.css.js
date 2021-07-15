@@ -108,6 +108,7 @@ tooltip {
     --uc-warning-background: hsla(2, 100%, 66%, 25%);
     --low-warning-background: hsla(48, 100%, 66%, 0.2);
     --low-warning-color: hsl(40, 100%, 57%);
+    --low-warning-text-color: hsl(40, 100%, 70%);
     --low-warning-border-color: hsla(35, 70%, 76%, 0.2);
     --protection-idle-color: hsl(205, 100%, 67%);
     --protection-active-color: hsl(358, 98%, 66%);
