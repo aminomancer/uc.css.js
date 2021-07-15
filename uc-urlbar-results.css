@@ -617,7 +617,7 @@
 }
 
 .urlbarView-row-inner {
-    padding: 7px 8px !important;
+    padding-block: 7px !important;
     border-radius: var(--arrowpanel-menuitem-border-radius) !important;
     align-items: center !important;
     fill-opacity: 0.6;
@@ -646,106 +646,28 @@
     padding: 0.4px 1px !important;
 }
 
-/* handle overflowing urlbar result rows. requires multiLineUrlbarResults.uc.js */
-.urlbarView-row-inner.overflown {
-    flex-flow: column nowrap !important;
-    align-items: start !important;
-    justify-content: center !important;
+.urlbarView-results[wrap] > .urlbarView-row[has-url] > .urlbarView-row-inner > .urlbarView-url:-moz-locale-dir(ltr) {
+    padding-left: calc(var(--urlbarView-item-inline-padding) + 0.5px + 16px) !important;
 }
 
-.urlbarView-row-inner.overflown .urlbarView-url {
-    max-width: -moz-available !important;
-    margin-inline-end: calc(var(--urlbar-icon-padding) + 2px);
-}
-
-.urlbarView-row-inner.overflown .urlbarView-url[overflow] {
-    mask-image: linear-gradient(to left, transparent, black 2em);
-}
-
-/* override firefox's built-in text wrapping */
-.urlbarView-results[overflow-handler="userChromeJS"][wrap]
-    > .urlbarView-row
-    > .urlbarView-row-inner {
-    flex-wrap: nowrap !important;
-}
-
-.urlbarView-results[overflow-handler="userChromeJS"][wrap]
-    > .urlbarView-row
-    > .urlbarView-row-inner
-    > .urlbarView-no-wrap {
-    flex-basis: unset !important;
-}
-
-.urlbarView-results[overflow-handler="userChromeJS"][wrap]
-    > .urlbarView-row[has-url]
-    > .urlbarView-row-inner
-    > .urlbarView-url {
-    margin-top: 0 !important;
-}
-
-.urlbarView-results[overflow-handler="userChromeJS"][wrap]
-    > .urlbarView-row[has-url]
+.urlbarView-results[wrap]
+    > .urlbarView-row[has-url]:is([type="switchtab"], [type="bookmark"], [type="remotetab"], [type="dynamic"], [pinned])
     > .urlbarView-row-inner
     > .urlbarView-url:-moz-locale-dir(ltr) {
-    padding-left: unset !important;
+    padding-left: calc(var(--urlbarView-item-inline-padding) + 0.5px + 16px + calc(var(--urlbar-icon-padding) + 2px) + 16px) !important;
 }
 
-.urlbarView-results[overflow-handler="userChromeJS"][wrap]
-    > .urlbarView-row[has-url]
-    > .urlbarView-row-inner
-    > .urlbarView-url:-moz-locale-dir(rtl) {
-    padding-right: unset !important;
+.urlbarView-results[wrap] .urlbarView-row:is([type="remotetab"], [sponsored]):not([selected], :hover) > .urlbarView-row-inner > .urlbarView-url {
+    visibility: visible !important;
 }
 
-.urlbarView-results[overflow-handler="userChromeJS"][wrap]
-    > .urlbarView-row[type="tabtosearch"]
-    > .urlbarView-row-inner
-    > .urlbarView-no-wrap {
-    flex-wrap: nowrap !important;
+.urlbarView-results[wrap]
+.urlbarView-row[has-url]:is([type="remotetab"], [sponsored]) > .urlbarView-row-inner > .urlbarView-no-wrap > .urlbarView-action {
+    display: -moz-box !important;
 }
 
-.urlbarView-results[overflow-handler="userChromeJS"][wrap]
-    > .urlbarView-row[type="tabtosearch"]
-    > .urlbarView-row-inner
-    > .urlbarView-no-wrap
-    > .urlbarView-action {
-    flex-basis: unset !important;
-    margin-inline: 0 6px !important;
-}
-
-.urlbarView-results[overflow-handler="userChromeJS"][wrap]
-    > .urlbarView-row[type="tip"]
-    > .urlbarView-row-inner {
-    flex-wrap: nowrap !important;
-}
-.urlbarView-results[overflow-handler="userChromeJS"]
-    .urlbarView-row:is([type="remotetab"], [sponsored])
-    > .urlbarView-row-inner {
-    flex-flow: column nowrap !important;
-    align-items: start !important;
-    justify-content: center !important;
-}
-
-.urlbarView-results[overflow-handler="userChromeJS"]
-    .urlbarView-row:is([type="remotetab"], [sponsored])
-    > .urlbarView-row-inner
-    .urlbarView-url {
-    max-width: -moz-available !important;
-    margin-inline-end: calc(var(--urlbar-icon-padding) + 2px);
-}
-
-.urlbarView-results[overflow-handler="userChromeJS"]
-    .urlbarView-row:is([type="remotetab"], [sponsored]):not([selected], :hover)
-    > .urlbarView-row-inner
-    > .urlbarView-url {
-    visibility: hidden !important;
-}
-
-.urlbarView-results[overflow-handler="userChromeJS"]
-    .urlbarView-row:is([type="remotetab"], [sponsored]):not([selected], :hover)
-    > .urlbarView-row-inner
-    .urlbarView-action {
-    position: absolute;
-    margin-top: 30px !important;
-    margin-inline-start: 48px !important;
+.urlbarView:not([actionoverride])
+.urlbarView-results[wrap]
+.urlbarView-row[has-url]:is([type="remotetab"], [sponsored]) > .urlbarView-row-inner > .urlbarView-url {
+    display: none !important;
 }

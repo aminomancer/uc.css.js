@@ -859,9 +859,8 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
     url("chrome://browser/content/places/bookmarkProperties2.xhtml"),
     url-prefix("chrome://browser/content/sanitize.xhtml")
 {
-    :root,
-    window,
-    dialog {
+    window[dialogroot],
+    window[dialogroot] dialog {
         --in-content-page-background: transparent !important;
         --in-content-page-color: var(--in-parent-page-color) !important;
         --in-content-box-background: var(--dialog-box-bgcolor) !important;
@@ -903,13 +902,13 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
         --in-content-button-vertical-padding: 5px !important;
     }
 
-    input[type="checkbox"]:checked {
+    window[dialogroot] input[type="checkbox"]:checked {
         background-image: url(chrome://userchrome/content/check.svg) !important;
         background-size: contain !important;
     }
 
-    input[type="radio"],
-    .radio-check {
+    window[dialogroot] input[type="radio"],
+    window[dialogroot] .radio-check {
         appearance: none;
         border: 1px solid var(--in-content-box-border-color);
         border-radius: 100%;
@@ -922,46 +921,47 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
         flex-shrink: 0;
     }
 
-    select:not([size], [multiple]) > option {
+    window[dialogroot] select:not([size], [multiple]) > option {
         background-color: var(--dropdown-bgcolor) !important;
     }
 
-    #editBMPanel_tagsSelector {
+    window[dialogroot] #editBMPanel_tagsSelector {
         margin-inline: 4px !important;
     }
 
-    #editBookmarkPanelRows {
+    window[dialogroot] #editBookmarkPanelRows {
         padding-inline: 0 !important;
         padding-block: 0 8px !important;
     }
 
     button,
+    window[dialogroot] :is(
     select,
     input[type="color"],
-    menulist {
-        min-height: 26px !important;
-        line-height: 26px !important;
+    menulist) {
+        min-height: var(--menuitem-height) !important;
+        line-height: var(--menuitem-height) !important;
     }
 
-    input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"]),
-    textarea {
+    window[dialogroot] input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"]),
+    window[dialogroot] textarea {
         padding-block: 5px !important;
     }
 
-    input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):focus,
-    textarea:focus,
-    search-textbox[focused] {
+    window[dialogroot] input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):focus,
+    window[dialogroot] textarea:focus,
+    window[dialogroot] search-textbox[focused] {
         border-color: var(--in-content-focus-outline-color) !important;
     }
 
-    input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"])::selection,
-    textarea::selection {
+    window[dialogroot] input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"])::selection,
+    window[dialogroot] textarea::selection {
         background-color: var(--ui-selection-bgcolor) !important;
         color: var(--ui-selection-color) !important;
     }
 
-    menulist,
-    input[type="text"] {
+    window[dialogroot] menulist,
+    window[dialogroot] input[type="text"] {
         margin-inline: 4px !important;
         padding-block: 0 !important;
         padding-inline: 6px !important;
@@ -971,9 +971,9 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
         border-radius: var(--toolbarbutton-border-radius) !important;
     }
 
-    input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):focus-visible,
-    textarea:focus-visible,
-    search-textbox:focus-visible {
+    window[dialogroot] input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):focus-visible:not(:active),
+    window[dialogroot] textarea:focus-visible:not(:active),
+    window[dialogroot] search-textbox:focus-visible:not(:active) {
         background-color: color-mix(
             in srgb,
             currentColor 3%,
@@ -981,19 +981,19 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
         ) !important;
     }
 
-    menulist {
+    window[dialogroot] menulist {
         padding-inline: 4px 2px !important;
     }
 
-    richlistbox {
+    window[dialogroot] richlistbox {
         border-radius: var(--toolbarbutton-border-radius) !important;
     }
 
-    tree {
+    window[dialogroot] tree {
         margin-inline: 4px !important;
     }
 
-    treecols {
+    window[dialogroot] treecols {
         border: none !important;
     }
 
@@ -1001,31 +1001,32 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
         border-radius: var(--toolbarbutton-border-radius) !important;
     }
 
-    .expander-up,
-    .expander-down {
+    window[dialogroot] .expander-up,
+    window[dialogroot] .expander-down {
         min-height: 25px !important;
         min-width: 25px !important;
         margin-inline: 4px !important;
     }
 
-    :is(.expander-up, .expander-down, .panel-button, button[dlgtype]:not([default])):is(:hover, :focus-visible) {
+    button[dlgtype]:not([default]):is(:hover, :focus-visible):not(:active),
+    window[dialogroot] :is(.expander-up, .expander-down, .panel-button):is(:hover, :focus-visible):not(:active) {
         background-color: var(--in-content-button-background-hover) !important;
         color: var(--in-content-button-text-color-hover) !important;
         border-color: transparent;
     }
 
-    menulist:not([disabled="true"]):focus-visible {
+    window[dialogroot] menulist:not([disabled="true"]):focus-visible:not(:active) {
         background-color: var(--in-content-button-background-hover) !important;
         color: var(--in-content-button-text-color-hover) !important;
     }
 
-    button:is([autofocus], [type="submit"], .primary):enabled:is(:hover, :focus-visible),
-    button:is([default], .primary):not([disabled="true"]):is(:hover, :focus-visible) {
+    button:is([autofocus], [type="submit"], .primary):enabled:is(:hover, :focus-visible):not(:active),
+    button:is([default], .primary):not([disabled="true"]):is(:hover, :focus-visible):not(:active) {
         background-color: var(--in-content-primary-button-background-hover) !important;
         color: var(--in-content-primary-button-text-color-hover) !important;
     }
 
-    input[type="number"] {
+    window[dialogroot] input[type="number"] {
         overflow: hidden !important;
         overflow-clip-box: padding-box !important;
         border-radius: var(--in-content-button-border-radius) !important;
@@ -1033,7 +1034,7 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
         border-right: none !important;
     }
 
-    input[type="number"]::-moz-number-spin-box {
+    window[dialogroot] input[type="number"]::-moz-number-spin-box {
         border-top-right-radius: var(--in-content-button-border-radius) !important;
         border-bottom-right-radius: var(--in-content-button-border-radius) !important;
         border-right: 1px solid var(--in-content-box-border-color) !important;
@@ -1041,83 +1042,87 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
         width: calc(1em + 0.67px) !important;
     }
 
-    input[type="number"]:hover,
-    input[type="number"]:hover::-moz-number-spin-box {
+    window[dialogroot] input[type="number"]:hover,
+    window[dialogroot] input[type="number"]:hover::-moz-number-spin-box {
         border-color: var(--in-content-border-hover) !important;
     }
 
-    input[type="number"]:focus,
-    input[type="number"]:focus::-moz-number-spin-box {
+    window[dialogroot] input[type="number"]:hover:active::-moz-number-spin-box {
+        border-color: var(--in-content-border-active) !important;
+    }
+
+    window[dialogroot] input[type="number"]:focus,
+    window[dialogroot] input[type="number"]:focus::-moz-number-spin-box {
         border-color: var(--in-content-focus-outline-color) !important;
     }
 
-    #titleText {
+    window[dialogroot] #titleText {
         font-size: 16px !important;
         line-height: 16px !important;
         font-weight: 500 !important;
     }
 
-    #titleContainer {
+    window[dialogroot] #titleContainer {
         align-items: center !important;
         justify-content: center !important;
         margin: 0 !important;
     }
 
-    #titleContainer:not([noicon]) > #titleCropper {
+    window[dialogroot] #titleContainer:not([noicon]) > #titleCropper {
         translate: none !important;
     }
 
-    #handling > #description {
+    window[dialogroot] #handling > #description {
         font-size: 1.15em !important;
         font-weight: 600 !important;
     }
 
-    #chooser {
+    window[dialogroot] #chooser {
         margin-bottom: 10px !important;
     }
 
-    #remember-text {
+    window[dialogroot] #remember-text {
         margin-top: 4px !important;
         color: var(--in-content-deemphasized-text);
         margin-left: 24px !important;
     }
 
-    #rememberContainer > .toggle-container-with-text {
+    window[dialogroot] #rememberContainer > .toggle-container-with-text {
         color: inherit !important;
     }
 
-    #bookmarkpropertiesdialog #editBookmarkPanelContent label[control] {
+    window[dialogroot] #bookmarkpropertiesdialog #editBookmarkPanelContent label[control] {
         margin-inline: 0 !important;
     }
 
-    #bookmarkpropertiesdialog {
+    window[dialogroot] #bookmarkpropertiesdialog {
         -moz-box-align: center !important;
     }
 
-    #bookmarkpropertiesdialog .titleIcon {
+    window[dialogroot] #bookmarkpropertiesdialog .titleIcon {
         padding-inline-end: 6px !important;
     }
 
-    #SanitizeDialog {
+    #SanitizeDialog[dialogroot] {
         padding-bottom: 6px !important;
     }
 
-    #SanitizeDurationBox,
-    #sanitizeEverythingWarningBox {
+    #SanitizeDialog[dialogroot] #SanitizeDurationBox,
+    #SanitizeDialog[dialogroot] #sanitizeEverythingWarningBox {
         margin-inline: 8px !important;
         margin-top: 8px !important;
     }
 
-    #SanitizeDialog groupbox {
+    #SanitizeDialog[dialogroot] groupbox {
         margin-inline: 8px !important;
     }
 
-    #sanitizeEverythingWarningBox {
+    #SanitizeDialog[dialogroot] #sanitizeEverythingWarningBox {
         border-color: transparent !important;
         background-color: color-mix(in srgb, var(--dialog-bgcolor) 50%, hsla(0, 0%, 0%, 0.2)) !important;
     }
 
-    #sanitizeEverythingWarningIcon {
+    #SanitizeDialog[dialogroot] #sanitizeEverythingWarningIcon {
         list-style-image: url("chrome://global/skin/icons/warning.svg") !important;
         width: 48px;
         height: 48px;
@@ -1128,32 +1133,32 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
 
     @-moz-document url("chrome://mozapps/content/handling/permissionDialog.xhtml")
     {
-        dialog > #description,
-        dialog > #description-box > #description {
+        window[dialogroot] dialog > #description,
+        window[dialogroot] dialog > #description-box > #description {
             font-size: 1.15em !important;
             font-weight: 600 !important;
         }
 
-        #description-box {
+        window[dialogroot] #description-box {
             margin-bottom: 10px !important;
         }
 
-        #description:not([hidden], :empty) ~ #description-extra {
+        window[dialogroot] #description:not([hidden], :empty) ~ #description-extra {
             margin-top: -10px !important;
         }
     }
 
     @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
-        :root,
-        window,
-        dialog {
+        window[dialogroot],
+        window[dialogroot] dialog {
             font-family: SF Pro Text, Segoe UI, sans-serif !important;
             font-kerning: normal !important;
         }
 
+        window[dialogroot] :is(
         h2,
         h3,
-        #titleText {
+        #titleText) {
             font-weight: 400 !important;
             font-family: SF Pro Display, Segoe UI, sans-serif !important;
         }

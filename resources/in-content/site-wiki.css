@@ -1367,9 +1367,17 @@ domain("wikimedia.org") {
         background-color: hsl(240, 1.4%, 19%) !important;
     }
 
-    :is(.oo-ui-toolbar-bar, .ve-ce-branchNode-slug) .oo-ui-iconElement-icon,
-    :is(.oo-ui-toolbar-bar, .ve-ce-branchNode-slug) .oo-ui-indicatorElement-indicator {
-        filter: invert(1) !important;
+    :is(.oo-ui-toolbar-bar, .ve-ce-branchNode-slug, .toolbar.section-main) .oo-ui-iconElement-icon,
+    :is(.oo-ui-toolbar-bar, .ve-ce-branchNode-slug, .toolbar.section-main) .oo-ui-indicatorElement-indicator {
+        filter: invert();
+    }
+
+    .wikiEditor-ui-toolbar .tabs span.tab a::before {
+        filter: invert();
+    }
+
+    .oo-ui-checkboxInputWidget-checkIcon {
+        filter: none !important;
     }
 
     :is(.oo-ui-popupToolGroup-active, .oo-ui-popupToolGroup-active-tools)
@@ -1601,6 +1609,68 @@ domain("wikimedia.org") {
 
     .oo-ui-processDialog-actions-safe .oo-ui-labelElement-label {
         color: hsl(0, 0%, 13.3%) !important;
+    }
+
+    .oo-ui-popupWidget-popup {
+        background-color: hsl(240, 1.4%, 19%) !important;
+        border-color: hsl(240, 1.4%, 29%) !important;
+    }
+
+    .oo-ui-popupWidget-anchored-top .oo-ui-popupWidget-anchor::after {
+        border-bottom-color: hsl(240, 1.4%, 19%) !important;
+    }
+
+    .oo-ui-popupWidget-anchored-top .oo-ui-popupWidget-anchor::before {
+        border-bottom-color: hsl(240, 1.4%, 29%) !important;
+    }
+
+    .wikiEditor-ui-toolbar,
+    .wikiEditor-ui-controls,
+    .editOptions {
+        background-color: hsl(240, 4.3%, 8.5%) !important;
+        color: hsl(0, 0%, 80%) !important;
+    }
+
+    .wikiEditor-ui-toolbar .group,
+    .wikiEditor-ui .wikiEditor-ui-view,
+    .wikiEditor-ui .wikiEditor-ui-top,
+    div#editpage-specialchars,
+    .editOptions {
+        border-color: hsl(240, 1.4%, 19%) !important;
+    }
+
+    .wikiEditor-ui-text textarea {
+        background-color: hsl(240, 4.3%, 8.5%) !important;
+        color: hsl(0, 0%, 80%) !important;
+    }
+
+    select {
+        appearance: none;
+        background: hsl(240, 4.3%, 8.5%) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="context-fill" viewBox="0 0 16 16"><path d="M12.085 4.943L8.05 8.803l-3.947-3.86L3.05 5.996l5 5 5-5z"/></svg>') right 4px center no-repeat;
+        -moz-context-properties: fill;
+        color: hsl(0, 0%, 80%);
+        fill: currentColor;
+        border: 1px solid hsl(240, 1.4%, 19%);
+        border-radius: 3px;
+        padding: 5px;
+    }
+
+    select:focus {
+        background-color: hsl(240, 4.3%, 6.5%);
+    }
+
+    #editpage-specialchars a {
+        background-color: transparent !important;
+        border-color: transparent !important;
+    }
+
+    #editpage-specialchars p {
+        font-size: 0 !important;
+    }
+
+    #editpage-specialchars :is(a, b) {
+        font-size: initial !important;
+        padding-inline: 6px !important;
     }
 
     .mwe-popups {
@@ -2606,6 +2676,7 @@ domain("wikimedia.org") {
     .mw-ui-icon-close::before {
         color: inherit !important;
         fill: currentColor !important;
+        filter: none !important;
         -moz-context-properties: fill, fill-opacity !important;
         background-image: linear-gradient(transparent, transparent),
             url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 fill=%22context-fill%22 fill-opacity=%22context-fill-opacity%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E%3Ctitle%3Eclose%3C/title%3E%3Cpath d=%22M4.34 2.93l12.73 12.73-1.41 1.41L2.93 4.35z%22/%3E%3Cpath d=%22M17.07 4.34L4.34 17.07l-1.41-1.41L15.66 2.93z%22/%3E%3C/svg%3E") !important;
@@ -2614,6 +2685,7 @@ domain("wikimedia.org") {
     .oo-ui-indicator-down {
         color: inherit !important;
         fill: currentColor !important;
+        filter: none !important;
         -moz-context-properties: fill, fill-opacity !important;
         background-image: linear-gradient(transparent, transparent),
             url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 fill=%22context-fill%22 fill-opacity=%22context-fill-opacity%22 width=%2212%22 height=%2212%22 viewBox=%220 0 12 12%22%3E%3Ctitle%3Edown%3C/title%3E%3Cpath d=%22M10.085 2.943L6.05 6.803l-3.947-3.86L1.05 3.996l5 5 5-5z%22/%3E%3C/svg%3E") !important;
@@ -2623,6 +2695,7 @@ domain("wikimedia.org") {
     .mw-ui-icon-menu::before {
         color: inherit !important;
         fill: currentColor !important;
+        filter: none !important;
         -moz-context-properties: fill, fill-opacity !important;
         background-size: 16px !important;
         width: 16px !important;
@@ -2697,12 +2770,16 @@ domain("wikimedia.org") {
         display: block !important;
     }
 
-    .oo-ui-dropdownInputWidget.oo-ui-widget-enabled,
-    .oo-ui-dropdownWidget.oo-ui-widget-enabled.oo-ui-dropdownWidget-open
+    .oo-ui-dropdownInputWidget,
+    .oo-ui-dropdownWidget.oo-ui-dropdownWidget-open
         .oo-ui-dropdownWidget-handle {
         background-color: hsl(210, 6.7%, 5.9%) !important;
         border-radius: 2px !important;
         color: inherit !important;
+    }
+
+    .oo-ui-dropdownInputWidget.oo-ui-widget-disabled {
+        background-color: hsl(210, 6.7%, 5.9%) !important;
     }
 
     .oo-ui-dropdownWidget.oo-ui-widget-enabled .oo-ui-dropdownWidget-handle:focus {
@@ -2715,10 +2792,19 @@ domain("wikimedia.org") {
         color: inherit !important;
     }
 
-    .oo-ui-dropdownWidget.oo-ui-widget-enabled .oo-ui-dropdownWidget-handle {
+    .oo-ui-dropdownWidget.oo-ui-widget-enabled .oo-ui-dropdownWidget-handle,
+    .oo-ui-dropdownWidget.oo-ui-widget-disabled .oo-ui-dropdownWidget-handle {
         color: inherit !important;
         background: none !important;
         border: none !important;
+    }
+
+    .oo-ui-dropdownWidget.oo-ui-widget-disabled .oo-ui-dropdownWidget-handle {
+        text-shadow: 0 1px 1px #000 !important;
+    }
+
+    .oo-ui-dropdownWidget.oo-ui-widget-disabled .oo-ui-dropdownWidget-handle :is(.oo-ui-indicatorElement-indicator, .oo-ui-iconElement-icon, .oo-ui-labelElement-label) {
+        opacity: 0.5 !important;
     }
 
     .oo-ui-tagMultiselectWidget-handle {

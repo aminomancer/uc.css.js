@@ -320,6 +320,16 @@ if the icon disappeared/appeared instantly it would disrupt the impression that 
     }
 }
 
+#PanelUI-whatsNew .whatsNew-message-title,
+#protections-popup-message .whatsNew-message-title,
+#contextual-feature-recommendation-notification[data-notification-category="icon_and_message"]
+    .popup-notification-description,
+menulist:not([native])::part(label-box),
+#cfr-notification-header-label,
+#PopupAutoComplete > richlistbox > richlistitem[originaltype="insecureWarning"] > .ac-title .ac-emphasize-text-title {
+    font-weight: var(--uc-font-weight-bold, 600);
+}
+
 #customizationui-widget-panel[viewId^="PanelUI-webext-"]::part(content),
 #customizationui-widget-panel[viewId^="PanelUI-webext-"]::part(arrowcontent) {
     border-radius: var(--webextension-panel-border-radius, 5px) !important;

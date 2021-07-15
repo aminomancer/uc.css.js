@@ -62,6 +62,7 @@ menupopup {
     --identity-box-label-opacity: var(--urlbar-icon-fill-opacity) !important;
     --urlbar-popup-url-color: var(--purple-35) !important;
     --urlbar-popup-action-color: var(--pink-action) !important;
+    --urlbarView-item-inline-padding: 8px !important;
     --tab-min-height: var(--uc-tab-min-height) !important;
     --tab-block-margin: 0px !important;
     --pinned-tab-width: 36px;
