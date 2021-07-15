@@ -82,6 +82,7 @@ For best results, set density mode to `Normal` and theme to `Dark` in the custom
 | userChrome.urlbar-results.disable\_animation | Boolean | false | Toggle to `true` if you don't want urlbar animations |
 | widget.content.allow-gtk-dark-theme | Boolean | true | Makes Linux theming more consistent |
 | widget.disable-native-theme-for-content | Boolean | true | Enables Firefox's custom appearance for elements like checkboxes. Skips the "native" appearance given by the OS stylesheets. |
+| <i>widget.macos.native-context-menus</i> | Boolean | false | Required to use some of my scripts on macOS, and for context menu styles on macOS |
 
 </details>
 
