@@ -28,7 +28,7 @@ this sheet controls their appearance as well. */
     margin-left: -2px !important;
 }
 
-:root:not([chromehidden~="menubar"])
+:root:not([chromehidden~="menubar"], [operatingsystem="linux"], [operatingsystem="macosx"])
     #toolbar-menubar:not([inactive])
     + #TabsToolbar
     .titlebar-spacer {
@@ -60,7 +60,7 @@ this sheet controls their appearance as well. */
     visibility: visible !important;
 }
 
-:root:not([chromehidden~="menubar"])
+:root:not([chromehidden~="menubar"], [operatingsystem="linux"], [operatingsystem="macosx"])
     #toolbar-menubar:not([inactive])
     + #TabsToolbar
     > .titlebar-buttonbox-container,
