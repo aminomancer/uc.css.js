@@ -363,6 +363,7 @@ menupopup.in-menulist menuitem[disabled="true"] :is(.menu-accel, .menu-iconic-ac
 
 #ContentSelectDropdown > menupopup menuseparator,
 menupopup.in-menulist menuseparator {
+    appearance: none !important;
     border-color: var(--menu-separator-color) !important;
     margin-inline: var(--menupopup-inner-padding-magnitude) !important;
 }

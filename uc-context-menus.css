@@ -129,6 +129,7 @@ menu.subviewbutton:not([disabled="true"])[_moz-menuactive="true"]:active {
 }
 
 menupopup:not(.PanelUI-subView) menuseparator {
+    appearance: none !important;
     border-color: var(--menu-separator-color) !important;
     margin: var(--menu-separator-margin) !important;
     margin-inline: var(--menupopup-inner-padding-magnitude) !important;

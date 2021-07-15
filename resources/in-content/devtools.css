@@ -481,6 +481,7 @@ and a few elements like checkboxes */
     }
 
     menuseparator {
+        appearance: none !important;
         border-color: var(--menu-separator-color) !important;
         margin-inline: var(--menupopup-inner-padding-magnitude) !important;
     }
