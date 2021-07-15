@@ -68,6 +68,7 @@ menupopup {
     --pinned-tab-width: 36px;
     --inline-tab-padding: 10px !important;
     --tab-shadow-max-size: 0px !important;
+    --tabs-navbar-shadow-size: 0 !important;
     --autocomplete-popup-background: var(--arrowpanel-background) !important;
     --autocomplete-popup-color: var(--lwt-text-color) !important;
     --autocomplete-popup-separator-color: var(--panel-separator-color) !important;

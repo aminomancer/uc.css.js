@@ -183,20 +183,6 @@ this sheet controls their appearance as well. */
     width: 20px !important;
 }
 
-#toolbar-menubar:not([inactive]) ~ #TabsToolbar #TabsToolbar-customization-target::before {
-    position: relative !important;
-    display: block !important;
-    content: "" !important;
-    pointer-events: none !important;
-    box-shadow: 7px 0px 7px 0px rgba(0, 0, 0, 0.1) !important;
-    background-color: transparent !important;
-    width: 20px !important;
-    margin-left: -20px !important;
-    height: 46px !important;
-    margin-block: -8px !important;
-    z-index: 11 !important;
-}
-
 #tabbrowser-tabs::after {
     position: relative !important;
     display: block !important;
@@ -211,11 +197,18 @@ this sheet controls their appearance as well. */
     z-index: 11 !important;
 }
 
-#new-tab-button,
 #tabs-newtab-button {
     padding-left: 4px !important;
     z-index: 1 !important;
     position: relative !important;
+}
+
+#tabbrowser-tabs {
+    margin-inline-end: 2px !important;
+}
+
+:is(toolbarbutton, toolbaritem) + #tabbrowser-tabs {
+    margin-inline-start: 2px !important;
 }
 
 /* non-overflowing tabs shouldn't draw shadows on new tab button since overflowing tabs don't draw shadows on the special new tab button */
