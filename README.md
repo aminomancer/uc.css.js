@@ -259,7 +259,7 @@ Adds an about:config shortcut button to the main app menu panel, under the built
 
 #### [App Menu Mods](/script/appMenuMods.uc.js):
 
-Makes some minor modifications to the app menu, aka the hamburger menu. It adds a restart button to the app menu (this part of the script requires fx-autoconfig), changes the "Add-ons and Themes" button to say "Extensions" (or whatever the equivalent is in your language, since the strings are localized automatically) and it adds a separator under the "Manage Account" button in the profile/account panel. I'll continue adding more mods to this script as I think of them.
+Makes some minor modifications to the app menu, aka the hamburger menu. It adds a restart button to the app menu, as long as you're using fx-autoconfig to load the script. Holding Shift or Ctrl/Cmd while clicking it will also clear the startup cache while restarting. Additionally, it changes the "Add-ons and Themes" button to say "Extensions" (or whatever the equivalent is in your language, since the strings are localized automatically) and it adds a separator under the "Manage Account" button in the profile/account panel. I'll continue adding more mods to this script as I think of them.
 
 #### [All Tabs Menu Expansion Pack](/script/allTabsMenuExpansionPack.uc.js):
 
