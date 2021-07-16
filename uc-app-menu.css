@@ -383,6 +383,10 @@
     list-style-image: url(chrome://userchrome/content/skin/quit.svg);
 }
 
+#appMenu-restart-button2 {
+    list-style-image: url(chrome://userchrome/content/skin/reload.svg);
+}
+
 #appmenu-developer-tools-view toolbarbutton .toolbarbutton-icon {
     width: 16px !important;
     height: 16px !important;
@@ -531,6 +535,7 @@
 #appMenu-advanced-settings-button > .toolbarbutton-text,
 #appmenu-moreTools-button > .toolbarbutton-text,
 #appMenu-quit-button2 > .toolbarbutton-text,
+#appMenu-restart-button2 > .toolbarbutton-text,
 #appMenu-zoom-controls2 > .toolbarbutton-text,
 #appMenu-fxa-status2 #appMenu-header-description,
 #appmenu-developer-tools-view toolbarbutton .toolbarbutton-text {

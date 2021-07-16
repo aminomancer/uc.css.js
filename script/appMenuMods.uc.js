@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name           App Menu Mods
-// @version        1.0
+// @version        1.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
-// @description    Makes some minor modifications to the app menu. (the popup opened by clicking the hamburger button on the far right of the navbar) Currently, it changes the "Add-ons and Themes" button to say "Extensions" (or whatever the equivalent is in your language, since the strings are localized automatically) and it adds a separator under the "Manage Account" button in the profile/account panel. I'll continue adding more mods to this script as I think of them.
+// @description    Makes some minor modifications to the app menu. (the popup opened by clicking the hamburger button on the far right of the navbar) It adds a restart button to the app menu (only if you're using fx-autoconfig), changes the "Add-ons and Themes" button to say "Extensions" (or whatever the equivalent is in your language, since the strings are localized automatically) and it adds a separator under the "Manage Account" button in the profile/account panel. I'll continue adding more mods to this script as I think of them.
 // ==/UserScript==
 
 (function () {
@@ -17,16 +17,22 @@
             return new Promise((resolve) => setTimeout(resolve, ms));
         }
         async generateStrings() {
-            this.addonStrings = await new Localization(["toolkit/about/aboutAddons.ftl"], true);
+            if (!this.strings)
+                this.strings = await new Localization(
+                    ["toolkit/about/aboutAddons.ftl", "toolkit/about/aboutSupport.ftl"],
+                    true
+                );
+            return this.strings;
         }
         get fxaPanelView() {
             return PanelMultiView.getViewNode(document, "PanelUI-fxa");
         }
         async handleEvent(_e) {
-            await this.generateStrings();
+            let strings = await this.generateStrings();
             await AppMenuMods.sleep(1);
             document.getElementById("appMenu-extensions-themes-button").label =
-                await this.addonStrings.formatValue(["addon-category-extension"]);
+                await strings.formatValue(["addon-category-extension"]);
+            this.addRestartButton(strings);
         }
         addSeparatorToAccountPanel() {
             this.manageAccountSeparator =
@@ -34,6 +40,18 @@
             this.fxaPanelView
                 .querySelector("#fxa-manage-account-button")
                 .after(this.manageAccountSeparator);
+        }
+        async addRestartButton(strings) {
+            if (!_ucUtils) return;
+            let exitButton = document.getElementById("appMenu-quit-button2");
+            exitButton.before(
+                _ucUtils.createElement(document, "toolbarbutton", {
+                    id: "appMenu-restart-button2",
+                    class: exitButton.className,
+                    label: await strings.formatValue(["restart-button-label"]),
+                    oncommand: `_ucUtils.restart(event.shiftKey || (AppConstants.platform == "macosx" ? event.metaKey : event.ctrlKey))`,
+                })
+            );
         }
     }
 
