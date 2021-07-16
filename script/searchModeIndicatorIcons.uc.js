@@ -1,18 +1,30 @@
 // ==UserScript==
 // @name           Search Mode Indicator Icons
-// @version        1.0
+// @version        1.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
-// @description    A way to put dynamic icons in the urlbar reflecting the current search engine. Automatically add indicator attributes to the identity icon in the urlbar in response to changing one-off search engines. If you have google set to "goo" and type in goo then hit spacebar, the identity icon will gain an attribute reflecting that, so you can change its icon accordingly with a CSS rule like : #identity-icon[engine="Tabs"] {list-style-image: url("chrome://browser/skin/tab.svg") !important;} Doesn't change anything else about the layout so you may want to tweak some things in your stylesheet. For example I have mine set up so the tracking protection icon disappears while the user is typing in the urlbar, and so a little box appears behind the identity icon while in one-off search mode. This way the icon appears to the left of the label, like it does on about:preferences and other UI pages. I recommend testing my stylesheets so you can see it and get an idea of what you can do, since it's not easily described in words.
-// @version        2.0 => now that i've decided it's safe, this version uses attributes instead of classes. so that means you don't need to change the script or restart the browser if you add a new search engine. you just need to add a rule for [engine="your new engine"] to your stylesheet, which can be done in the browser toolbox without restarting.
+// @description    Automatically replace the urlbar's identity icon with the current search engine's icon. This also adds an [engine] attribute to the identity icon so you can customize the icons yourself if you don't like a search engine's icon, or want to adjust its dimensions. If you have google set to "goo" and type in goo then hit spacebar, the identity icon will change to a google icon. And it'll also gain an attribute reflecting that, so you can change its icon further with a CSS rule like: #identity-icon[engine="Tabs"] {list-style-image: url("chrome://browser/skin/tab.svg") !important;} This doesn't change anything about the layout so you may want to tweak some things in your stylesheet. For example I have mine set up so the tracking protection icon disappears while the user is typing in the urlbar, and so a little box appears behind the identity icon while in one-off search mode. This way the icon appears to the left of the label, like it does on about:preferences and other UI pages.
 // ==/UserScript==
 
 (() => {
     function init() {
-        const searchModeIndicatorFocused = this.gURLBar._searchModeIndicatorTitle;
-        const urlbar = this.gURLBar.textbox;
-        const identityIcon = this.gURLBar._identityBox.firstElementChild;
-        const buttons = this.gURLBar.view.oneOffSearchButtons.buttons;
+        const defaultIcon = `chrome://global/skin/icons/search-glass.svg`;
+        const searchModeIndicatorFocused = gURLBar._searchModeIndicatorTitle;
+        const urlbar = gURLBar.textbox;
+        const identityIcon = gURLBar._identityBox.firstElementChild;
+        const oneOffs = gURLBar.view.oneOffSearchButtons;
+        const buttons = oneOffs.buttons;
+
+        // use an author sheet to set the identity icon equal to the search engine icon when in search mode
+        function registerSheet() {
+            let css = `#urlbar[searchmode=""][pageproxystate="invalid"] #identity-box > #identity-icon-box > #identity-icon, #urlbar[searchmode=""][pageproxystate="valid"] #identity-box > #identity-icon-box > #identity-icon, #urlbar[searchmode=""] #identity-icon-box > #identity-icon, #urlbar[pageproxystate="invalid"] #identity-box > #identity-icon-box[engine] > #identity-icon, #urlbar[pageproxystate="valid"] #identity-box > #identity-icon-box[engine] > #identity-icon, #urlbar #identity-icon-box[engine] > #identity-icon {list-style-image: var(--search-engine-icon, url("${defaultIcon}"));}`;
+            let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
+                Ci.nsIStyleSheetService
+            );
+            let uri = makeURI("data:text/css;charset=UTF=8," + encodeURIComponent(css));
+            if (sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) return;
+            sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
+        }
 
         function searchModeCallback(mus, _observer) {
             for (let mu of mus) {
@@ -22,17 +34,32 @@
                     mu.target === urlbar ||
                     buttons.contains(mu.target)
                 ) {
-                    let engineStr = // a string representing the current engine
-                        searchModeIndicatorFocused.textContent || // if the indicator label has any text, use that (this is almost always the case when we're actually in search mode)
+                    // a string representing the current engine
+                    let engineStr =
+                        // if the indicator label has any text, use that (this is almost always the case when we're actually in search mode)
+                        searchModeIndicatorFocused.textContent ||
                         (urlbar.getAttribute("actiontype") === "switchtab" &&
                         urlbar.getAttribute("actionoverride") !== "true"
                             ? "Tabs"
-                            : "Other"); // if not, then it's possible we're in switchtab mode, which you may never run into depending on your prefs. if certain prefs are enabled, then you'll occasionally get regular search results telling you to switch tabs. so we'll honor that, but the browser also overrides the action of these results when holding down shift or ctrl. (that's what "actionoverride" represents) so we're going to honor that and only use the Tabs string if we're explicitly in search mode, or if we're in switchtab mode and not holding down a modifier key. for any other case, we just use a placeholder string "Other" which can be styled. just make sure to use [pageproxystate="invalid"] or you'll fuck up the actual security identity icons. (the ones that look like locks)
-                    identityIcon.setAttribute("engine", engineStr); // now actually set the attribute equal to the temporary string
+                            : null);
+                    // if not, then it's possible we're in switchtab mode, which you may never run into depending on your prefs. if certain prefs are enabled, then you'll occasionally get regular search results telling you to switch tabs. so we'll honor that, but the browser also overrides the action of these results when holding down shift or ctrl. (that's what "actionoverride" represents) so we're going to honor that and only use the Tabs string if we're explicitly in search mode, or if we're in switchtab mode and not holding down a modifier key. for any other case, we just remove the engine attribute, which can be styled by :not([engine]).
+
+                    if (engineStr === null) identityIcon.removeAttribute("engine");
+                    else identityIcon.setAttribute("engine", engineStr); // now actually set the attribute equal to the temporary string
+
+                    // set a variable var(--search-engine-icon) equal to the engine's icon, as a fallback if the user doesn't have CSS for the engine.
+                    // we prefer to set the icon with CSS because it allows the user to adjust it and use a better icon than might be included with the engine.
+                    // so use the [engine="engine name"] attribute wherever possible, but the following will handle any situations where you don't have a rule for the engine.
+                    let engine = oneOffs._engineInfo.engines.find(
+                        (engine) => engine._name === gURLBar.searchMode?.engineName
+                    );
+                    let url = `url("${(engine && engine._iconURI?.spec) || defaultIcon}")`; // use the default icon if there is no engine.
+                    urlbar.style.setProperty("--search-engine-icon", url); // set a CSS property instead of setting icon directly so user can modify it with userChrome.css
                 }
             }
         }
 
+        registerSheet();
         new MutationObserver(searchModeCallback).observe(urlbar, {
             childList: true,
             subtree: true,

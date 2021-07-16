@@ -10,27 +10,29 @@ send me the engine name (the name that shows up in the identity box label when y
 and the URL to the search engine so I can find a suitable icon and set a rule for it. */
 #urlbar[searchmode=""][pageproxystate="invalid"]
     #identity-box
-    #identity-icon-box[engine="Other"]
-    #identity-icon,
-#urlbar[searchmode=""][pageproxystate="valid"]
+    > #identity-icon-box
+    > #identity-icon,
+#urlbar[searchmode=""][pageproxystate="valid"] #identity-box > #identity-icon-box > #identity-icon,
+#urlbar[searchmode=""] #identity-icon-box > #identity-icon,
+#urlbar[pageproxystate="invalid"]
     #identity-box
-    #identity-icon-box[engine="Other"]
-    #identity-icon,
-#urlbar[searchmode=""] #identity-icon-box[engine="Other"] #identity-icon {
-    list-style-image: url(chrome://userchrome/content/search-glass.svg) !important;
+    > #identity-icon-box[engine]:not([engine="Other"])
+    > #identity-icon,
+#urlbar[pageproxystate="valid"]
+    #identity-box
+    > #identity-icon-box[engine]:not([engine="Other"])
+    > #identity-icon,
+#urlbar #identity-icon-box[engine]:not([engine="Other"]) > #identity-icon {
+    list-style-image: var(--search-engine-icon, url(chrome://userchrome/content/search-glass.svg)) !important;
 }
 
 /* built-in history, tabs, bookmarks pseudo-engines */
-#urlbar[pageproxystate="invalid"] #identity-box #identity-icon-box[engine="History"] #identity-icon,
-#urlbar[pageproxystate="valid"] #identity-box #identity-icon-box[engine="History"] #identity-icon,
-#identity-icon-box[engine="History"] #identity-icon {
-    list-style-image: url(chrome://userchrome/content/skin/history.svg) !important;
+#identity-icon-box[engine="History"] {
+    --search-engine-icon: url(chrome://userchrome/content/skin/history.svg) !important;
 }
 
-#urlbar[pageproxystate="invalid"] #identity-box #identity-icon-box[engine="Tabs"] #identity-icon,
-#urlbar[pageproxystate="valid"] #identity-box #identity-icon-box[engine="Tabs"] #identity-icon,
-#identity-icon-box[engine="Tabs"] #identity-icon {
-    list-style-image: url(chrome://userchrome/content/skin/tab.svg) !important;
+#identity-icon-box[engine="Tabs"] {
+    --search-engine-icon: url(chrome://userchrome/content/skin/tab.svg) !important;
 }
 
 #urlbar[pageproxystate="invalid"]
@@ -39,95 +41,58 @@ and the URL to the search engine so I can find a suitable icon and set a rule fo
     #identity-icon,
 #urlbar[pageproxystate="valid"] #identity-box #identity-icon-box[engine="Bookmarks"] #identity-icon,
 #identity-icon-box[engine="Bookmarks"] #identity-icon {
-    list-style-image: url(chrome://userchrome/content/skin/bookmark.svg) !important;
+    --search-engine-icon: url(chrome://userchrome/content/skin/bookmark.svg) !important;
     margin-top: -0.6px !important;
 }
 
 /* for google */
-#urlbar[pageproxystate="invalid"] #identity-box #identity-icon-box[engine="Google"] #identity-icon,
-#urlbar[pageproxystate="valid"] #identity-box #identity-icon-box[engine="Google"] #identity-icon,
-#identity-icon-box[engine="Google"] #identity-icon {
-    list-style-image: url(chrome://userchrome/content/engines/google.svg) !important;
+#identity-icon-box[engine="Google"] {
+    --search-engine-icon: url(chrome://userchrome/content/engines/google.svg) !important;
 }
 
 /* duckduckgo */
-#urlbar[pageproxystate="invalid"]
-    #identity-box
-    #identity-icon-box:is([engine="DuckDuckGo"], [engine="DuckDuckGo Search"])
-    #identity-icon,
-#urlbar[pageproxystate="valid"]
-    #identity-box
-    #identity-icon-box:is([engine="DuckDuckGo"], [engine="DuckDuckGo Search"])
-    #identity-icon,
-#identity-icon-box:is([engine="DuckDuckGo"], [engine="DuckDuckGo Search"]) #identity-icon {
-    list-style-image: url(chrome://userchrome/content/engines/duckduckgo.svg) !important;
+#identity-icon-box:is([engine="DuckDuckGo"], [engine="DuckDuckGo Search"]) {
+    --search-engine-icon: url(chrome://userchrome/content/engines/duckduckgo.svg) !important;
 }
 
 /* bing */
-#urlbar[pageproxystate="invalid"]
-    #identity-box
-    #identity-icon-box:is([engine="Bing"], [engine="Bing Search"])
-    #identity-icon,
-#urlbar[pageproxystate="valid"]
-    #identity-box
-    #identity-icon-box:is([engine="Bing"], [engine="Bing Search"])
-    #identity-icon,
-#identity-icon-box:is([engine="Bing"], [engine="Bing Search"]) #identity-icon {
-    list-style-image: url(chrome://userchrome/content/engines/bing.svg) !important;
+#identity-icon-box:is([engine="Bing"], [engine="Bing Search"]) {
+    --search-engine-icon: url(chrome://userchrome/content/engines/bing.svg) !important;
 }
 
 /* baidu */
-#urlbar[pageproxystate="invalid"]
-    #identity-box
-    #identity-icon-box:is([engine="Baidu"], [engine="Baidu Search"], [engine="百度"])
-    #identity-icon,
-#urlbar[pageproxystate="valid"]
-    #identity-box
-    #identity-icon-box:is([engine="Baidu"], [engine="Baidu Search"], [engine="百度"])
-    #identity-icon,
-#identity-icon-box:is([engine="Baidu"], [engine="Baidu Search"], [engine="百度"]) #identity-icon {
-    list-style-image: url(chrome://userchrome/content/engines/baidu.svg) !important;
+#identity-icon-box:is([engine="Baidu"], [engine="Baidu Search"], [engine="百度"]) {
+    --search-engine-icon: url(chrome://userchrome/content/engines/baidu.svg) !important;
 }
 
 /* google images */
-#urlbar[pageproxystate="invalid"]
-    #identity-box
-    #identity-icon-box[engine="Google Images"]
-    #identity-icon,
-#urlbar[pageproxystate="valid"]
-    #identity-box
-    #identity-icon-box[engine="Google Images"]
-    #identity-icon,
-#identity-icon-box[engine="Google Images"] #identity-icon {
-    list-style-image: url(chrome://userchrome/content/notifications/canvas.svg) !important;
+#identity-icon-box[engine="Google Images"] {
+    --search-engine-icon: url(chrome://userchrome/content/notifications/canvas.svg) !important;
 }
 
 /* youtube */
-#urlbar[pageproxystate="invalid"] #identity-box #identity-icon-box[engine="YouTube"] #identity-icon,
-#urlbar[pageproxystate="valid"] #identity-box #identity-icon-box[engine="YouTube"] #identity-icon,
-#identity-icon-box[engine="YouTube"] #identity-icon {
-    list-style-image: url(chrome://userchrome/content/engines/youtube.svg) !important;
+#identity-icon-box[engine="YouTube"] {
+    --search-engine-icon: url(chrome://userchrome/content/engines/youtube.svg) !important;
 }
 
 /* porn */
-#urlbar[pageproxystate="invalid"] #identity-box #identity-icon-box[engine="XVIDEOS"] #identity-icon,
-#urlbar[pageproxystate="valid"] #identity-box #identity-icon-box[engine="XVIDEOS"] #identity-icon,
-#identity-icon-box[engine="XVIDEOS"] #identity-icon {
-    list-style-image: url(chrome://userchrome/content/engines/xxx.svg) !important;
+#identity-icon-box[engine="XVIDEOS"] {
+    --search-engine-icon: url(chrome://userchrome/content/engines/xxx.svg) !important;
 }
 
 /* etc... */
-#urlbar[pageproxystate="invalid"] #identity-box #identity-icon-box[engine="GitHub"] #identity-icon,
-#urlbar[pageproxystate="valid"] #identity-box #identity-icon-box[engine="GitHub"] #identity-icon,
-#identity-icon-box[engine="GitHub"] #identity-icon {
-    list-style-image: url(chrome://userchrome/content/engines/github.svg) !important;
+#identity-icon-box[engine="GitHub"] {
+    --search-engine-icon: url(chrome://userchrome/content/engines/github.svg) !important;
 }
 
 #urlbar[pageproxystate="invalid"]
     #identity-box
     #identity-icon-box[engine^="Wikipedia"]
     #identity-icon,
-#urlbar[pageproxystate="valid"] #identity-box #identity-icon-box[engine^="Wikipedia"] #identity-icon,
+#urlbar[pageproxystate="valid"]
+    #identity-box
+    #identity-icon-box[engine^="Wikipedia"]
+    #identity-icon,
 #urlbar[searchmode]
     > #urlbar-input-container
     > #identity-box
@@ -137,37 +102,35 @@ and the URL to the search engine so I can find a suitable icon and set a rule fo
     padding-inline: 1px !important;
     margin-inline: -2px !important;
     margin-block: 1px 0 !important;
-    list-style-image: url(chrome://userchrome/content/engines/wiki.svg) !important;
-}
-
-#urlbar[pageproxystate="invalid"] #identity-box #identity-icon-box:is([engine="Amazon"], [engine="Amazon.com"]) #identity-icon,
-#urlbar[pageproxystate="valid"] #identity-box #identity-icon-box:is([engine="Amazon"], [engine="Amazon.com"]) #identity-icon,
-#identity-icon-box:is([engine="Amazon"], [engine="Amazon.com"]) #identity-icon {
-    margin-top: 1.4px !important;
-    list-style-image: url(chrome://userchrome/content/engines/amazon.svg) !important;
+    --search-engine-icon: url(chrome://userchrome/content/engines/wiki.svg) !important;
 }
 
 #urlbar[pageproxystate="invalid"]
     #identity-box
-    #identity-icon-box[engine="DoorDash"]
+    #identity-icon-box:is([engine="Amazon"], [engine="Amazon.com"])
     #identity-icon,
-#urlbar[pageproxystate="valid"] #identity-box #identity-icon-box[engine="DoorDash"] #identity-icon,
-#identity-icon-box[engine="DoorDash"] #identity-icon {
-    list-style-image: url(chrome://userchrome/content/engines/doordash.svg) !important;
+#urlbar[pageproxystate="valid"]
+    #identity-box
+    #identity-icon-box:is([engine="Amazon"], [engine="Amazon.com"])
+    #identity-icon,
+#identity-icon-box:is([engine="Amazon"], [engine="Amazon.com"]) #identity-icon {
+    margin-top: 1.4px !important;
+    --search-engine-icon: url(chrome://userchrome/content/engines/amazon.svg) !important;
 }
 
-#urlbar[pageproxystate="invalid"] #identity-box #identity-icon-box[engine="eBay"] #identity-icon,
-#urlbar[pageproxystate="valid"] #identity-box #identity-icon-box[engine="eBay"] #identity-icon,
-#identity-icon-box[engine="eBay"] #identity-icon {
-    height: 18px !important;
-    list-style-image: url(chrome://userchrome/content/engines/ebay.svg) !important;
+#identity-icon-box[engine="DoorDash"] {
+    --search-engine-icon: url(chrome://userchrome/content/engines/doordash.svg) !important;
+}
+
+#identity-icon-box[engine="eBay"] {
+    --search-engine-icon: url(chrome://userchrome/content/engines/ebay.svg) !important;
 }
 
 #urlbar[pageproxystate="invalid"] #identity-box #identity-icon-box[engine="Netflix"] #identity-icon,
 #urlbar[pageproxystate="valid"] #identity-box #identity-icon-box[engine="Netflix"] #identity-icon,
 #identity-icon-box[engine="Netflix"] #identity-icon {
     height: 18px !important;
-    list-style-image: url(chrome://userchrome/content/engines/netflix.svg) !important;
+    --search-engine-icon: url(chrome://userchrome/content/engines/netflix.svg) !important;
 }
 
 #urlbar[pageproxystate="invalid"]
@@ -180,50 +143,25 @@ and the URL to the search engine so I can find a suitable icon and set a rule fo
     #identity-icon,
 #identity-icon-box[engine="Google Maps"] #identity-icon {
     height: 17px !important;
-    list-style-image: url(chrome://userchrome/content/engines/maps.svg) !important;
+    --search-engine-icon: url(chrome://userchrome/content/engines/maps.svg) !important;
 }
 
-#urlbar[pageproxystate="invalid"]
-    #identity-box
-    #identity-icon-box[engine="Google Drive"]
-    #identity-icon,
-#urlbar[pageproxystate="valid"]
-    #identity-box
-    #identity-icon-box[engine="Google Drive"]
-    #identity-icon,
-#identity-icon-box[engine="Google Drive"] #identity-icon {
-    list-style-image: url(chrome://userchrome/content/engines/drive.svg) !important;
+#identity-icon-box[engine="Google Drive"] {
+    --search-engine-icon: url(chrome://userchrome/content/engines/drive.svg) !important;
 }
 
-#urlbar[pageproxystate="invalid"] #identity-box #identity-icon-box[engine="Gmail"] #identity-icon,
-#urlbar[pageproxystate="valid"] #identity-box #identity-icon-box[engine="Gmail"] #identity-icon,
-#identity-icon-box[engine="Gmail"] #identity-icon {
-    list-style-image: url(chrome://userchrome/content/engines/mail.svg) !important;
+#identity-icon-box[engine="Gmail"] {
+    --search-engine-icon: url(chrome://userchrome/content/engines/mail.svg) !important;
 }
 
-#urlbar[pageproxystate="invalid"]
-    #identity-box
-    #identity-icon-box[engine="Gatherer"]
-    #identity-icon,
-#urlbar[pageproxystate="valid"] #identity-box #identity-icon-box[engine="Gatherer"] #identity-icon,
-#identity-icon-box[engine="Gatherer"] #identity-icon {
-    list-style-image: url(chrome://userchrome/content/engines/gatherer.svg) !important;
+#identity-icon-box[engine="Gatherer"] {
+    --search-engine-icon: url(chrome://userchrome/content/engines/gatherer.svg) !important;
 }
 
-#urlbar[pageproxystate="invalid"]
-    #identity-box
-    #identity-icon-box[engine="Scryfall"]
-    #identity-icon,
-#urlbar[pageproxystate="valid"] #identity-box #identity-icon-box[engine="Scryfall"] #identity-icon,
-#identity-icon-box[engine="Scryfall"] #identity-icon {
-    list-style-image: url(chrome://userchrome/content/engines/scryfall.svg) !important;
+#identity-icon-box[engine="Scryfall"] {
+    --search-engine-icon: url(chrome://userchrome/content/engines/scryfall.svg) !important;
 }
 
-#urlbar[pageproxystate="invalid"]
-    #identity-box
-    #identity-icon-box[engine="Searchfox"]
-    #identity-icon,
-#urlbar[pageproxystate="valid"] #identity-box #identity-icon-box[engine="Searchfox"] #identity-icon,
-#identity-icon-box[engine="Searchfox"] #identity-icon {
-    list-style-image: url(chrome://userchrome/content/engines/searchfox.svg) !important;
+#identity-icon-box[engine="Searchfox"] {
+    --search-engine-icon: url(chrome://userchrome/content/engines/searchfox.svg) !important;
 }

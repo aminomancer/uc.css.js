@@ -517,9 +517,11 @@ Creates a screenshot button in the page actions area (the right side of the urlb
 
 #### [Search Mode Indicator Icons](/script/searchModeIndicatorIcons.uc.js):
 
-\* This allows you to add an icon to the search engine indicator that appears on the left side of the url bar when you're using a one-off search engine. If you invoke the Amazon search engine, for example, the identity icon (normally a lock icon) will gain an attribute called `engine` with a value of "Amazon" which you can select in CSS. With a selector like this, you can change the identity icon to something specific to the search engine: `#identity-icon-box[engine="Amazon"]`
+\* Automatically replace the urlbar's identity icon with the current search engine's icon. [(Click for a preview)](preview/prev-search.gif) This also adds an `[engine]` attribute to the identity icon so you can customize the icons yourself if you don't like a search engine's icon, or want to adjust its dimensions. If you have google set to "goo" and type in goo then hit spacebar, the identity icon will change to a google icon. And it'll also gain an attribute reflecting that, so you can change its icon further with a CSS rule like: `#identity-icon[engine="Tabs"] {color: red}`
 
-I've already added a bunch in [uc-search-mode-icons.css](/uc-search-mode-icons.css), which gets its icon files from the [resources/engines](/resources/engines) folder. This is mostly an aesthetic feature in my theme, but if you added icons for all your search engines, you could actually hide the text indicator altogether. The icon could then basically replace the search engine's text label as the primary indicator of the search engine mode.
+This doesn't change anything about the layout so you may want to tweak some things in your stylesheet. For example I have mine set up so the tracking protection icon disappears while the user is typing in the urlbar, and so a little box appears behind the identity icon while in one-off search mode. This way the icon appears to the left of the label, like it does on about:preferences and other UI pages.
+
+Without any additional CSS, the script will use the same icon that shows in the search engine's one-off button in the urlbar results. But as I mentioned before, you can use the `[engine]` attribute to customize it further. I have a bunch of customize search engine icons in [uc-search-mode-icons.css](/uc-search-mode-icons.css), which gets its icon files from the [resources/engines](/resources/engines) folder.
 
 #### [Search Selection Keyboard Shortcut](/script/searchSelectionShortcut.uc.js):
 
