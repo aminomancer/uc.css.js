@@ -551,7 +551,7 @@ Adds new menus to the context menu that appears when you right-click a tab (in t
 
 #### [Unread Tab Mods](/script/unreadTabMods.uc.js):
 
-Modifies some tab functions so that unread tabs can be styled differently from other tabs, and (optionally) adds new items to the tab context menu so you can manually mark tabs as read or unread. When opening a new tab without selecting it, the tab will gain an attribute `notselectedsinceload`. It will lose this attribute when the tab becomes selected or becomes discarded/unloaded. The CSS for styling unread tabs is already included in duskFox. (the CSS theme on this repo) If you don't use my theme, you can style unread tabs yourself with CSS like `.tabbrowser-tab[notselectedsinceload]:not([pending]:not([busy])) { font-style: italic !important; }`
+Modifies some tab functions so that unread tabs can be styled differently from other tabs, and (optionally) adds new items to the tab context menu so you can manually mark tabs as read or unread. When opening a new tab without selecting it, the tab will gain an attribute `notselectedsinceload`. It will lose this attribute when the tab becomes selected or becomes discarded/unloaded. The CSS for styling unread tabs is already included in duskFox. (the CSS theme on this repo) If you don't use my theme, you can style unread tabs yourself with CSS like this: `.tabbrowser-tab[notselectedsinceload]:not([pending]), .tabbrowser-tab[notselectedsinceload][pending][busy] {font-style:italic!important;}`
 
 #### [Update Notification Slayer](/script/updateNotificationSlayer.uc.js):
 
