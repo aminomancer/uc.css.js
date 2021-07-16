@@ -478,6 +478,17 @@
     fill-opacity: 1 !important;
 }
 
+.urlbarView-row:not([type="search"])
+    .urlbarView-favicon:is([src^="page-icon:https://reelgood.com/"], [src^="page-icon:http://reelgood.com/"])
+{
+    box-sizing: border-box !important;
+    background: url(chrome://userchrome/content/engines/reelgood.svg) no-repeat center/contain !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 16px;
+    fill-opacity: 1 !important;
+}
+
 .urlbarView-action {
     padding: 0 !important;
     margin-inline: 0 6px !important;

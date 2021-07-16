@@ -83,6 +83,10 @@ moz-input-box > menupopup .context-menu-add-engine > .menu-iconic-left::after {
     margin-top: -13px !important;
 }
 
+moz-input-box > menupopup .context-menu-add-engine:not([image]) .menu-iconic-icon {
+    list-style-image: url(chrome://userchrome/content/search-glass.svg);
+}
+
 menupopup:not(.PanelUI-subView) menugroup {
     padding: 0 !important;
     background-color: transparent !important;
