@@ -1349,7 +1349,7 @@ panel .header,
 }
 
 #identity-popup:is([connection="file"], [connection="chrome"]) #identity-popup-security-button {
-    margin-bottom: 6px !important;
+    margin-bottom: 2px !important;
 }
 
 #identity-popup-security-httpsonlymode-menulist,
