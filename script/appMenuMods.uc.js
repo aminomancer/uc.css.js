@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           App Menu Mods
-// @version        1.1
+// @version        1.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Makes some minor modifications to the app menu. (the popup opened by clicking the hamburger button on the far right of the navbar) It adds a restart button to the app menu (only if you're using fx-autoconfig), changes the "Add-ons and Themes" button to say "Extensions" (or whatever the equivalent is in your language, since the strings are localized automatically) and it adds a separator under the "Manage Account" button in the profile/account panel. I'll continue adding more mods to this script as I think of them.
@@ -50,6 +50,7 @@
                     class: exitButton.className,
                     label: await strings.formatValue(["restart-button-label"]),
                     oncommand: `_ucUtils.restart(event.shiftKey || (AppConstants.platform == "macosx" ? event.metaKey : event.ctrlKey))`,
+                    onclick: `if (event.button == 0) return; _ucUtils.restart(true); event.preventDefault();`,
                 })
             );
         }

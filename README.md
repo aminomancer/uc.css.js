@@ -259,7 +259,7 @@ Adds an about:config shortcut button to the main app menu panel, under the built
 
 #### [App Menu Mods](/script/appMenuMods.uc.js):
 
-Makes some minor modifications to the app menu, aka the hamburger menu. It adds a restart button to the app menu, as long as you're using fx-autoconfig to load the script. Holding Shift or Ctrl/Cmd while clicking it will also clear the startup cache while restarting. Additionally, it changes the "Add-ons and Themes" button to say "Extensions" (or whatever the equivalent is in your language, since the strings are localized automatically) and it adds a separator under the "Manage Account" button in the profile/account panel. I'll continue adding more mods to this script as I think of them.
+Makes some minor modifications to the app menu, aka the hamburger menu. It adds a restart button to the app menu, as long as you're using fx-autoconfig to load the script. Right-clicking the button or holding Shift or Ctrl/Cmd while left-clicking it will also clear the startup cache while restarting. Additionally, it changes the "Add-ons and Themes" button to say "Extensions" (or whatever the equivalent is in your language, since the strings are localized automatically) and it adds a separator under the "Manage Account" button in the profile/account panel. I'll continue adding more mods to this script as I think of them.
 
 #### [All Tabs Menu Expansion Pack](/script/allTabsMenuExpansionPack.uc.js):
 
@@ -569,7 +569,13 @@ Allows the urlbar to autofill full subdirectories instead of just host names. Fo
 
 #### [Urlbar Mods](/script/urlbarMods.uc.js):
 
-\* Makes some minor modifications to the urlbar. When you click & drag the identity box in the urlbar, it lets you drag and drop the URL into text fields, the tab bar, desktop, etc. while dragging it shows a little white box with the URL and favicon as the drag image. This script changes the colors of that drag box so they use CSS variables instead, and therefore fit much better with the browser theme, light or dark. This script can also be configured to restore the context menu that used to appear when right-clicking a search engine one-off button in the urlbar results panel. (The context menu was disabled recently) I'll continue to add to this script as I think of more urlbar mods that are too small to deserve their own dedicated script.
+\* Makes some minor (optional) modifications to the urlbar, urlbar results, and search engine one-off buttons. When you click & drag the identity box in the urlbar, it lets you drag and drop the URL into text fields, the tab bar, desktop, etc. while dragging it shows a little white box with the URL and favicon as the drag image. This script changes the colors of that drag box so they use CSS variables instead, and therefore fit much more consistently with the browser theme, whether light or dark.
+
+When you have syncing enabled, typing `%` in the urlbar will show tabs that were synced from your other devices. Normally, the only indication that a result is a synced tab is the "action text" that shows the name of the device from which the tab was synced. duskFox (the CSS theme) adds a little type indicator icon to urlbar results like bookmarks, open tabs, pinned results, and synced tabs. duskFox's indicator for synced tabs is normally a little sync icon.
+
+But with this script, it will show a device icon instead, such as a phone or a laptop, to match the device from which the tab came. So if the tab was synced from an iPhone, you'll see a phone icon next to the row's favicon. If it came from an iPad, you'll see a tablet icon, and so on. This is meant to match how the "send tab to device" buttons look in the app menu. It doesn't require duskFox, but duskFox makes urlbar results' type icons look a lot better in my opinion, and it adds type icons for several types of results that don't normally have them.
+
+This script can also be configured to restore the context menu that used to appear when right-clicking a search engine one-off button in the urlbar results panel. This feature is disabled by default, since the context menu has very few options in it. But you can enable it by toggling a config value at the top of the script. I'll continue to add to this script as I think of more urlbar mods that are too small to deserve their own dedicated script.
 
 #### [Add [open] Status to Urlbar Notification Icons](/script/urlbarNotificationIconsOpenStatus.uc.js):
 
