@@ -209,26 +209,29 @@ tabmodalprompt checkbox {
 }
 
 /* in-content autocomplete popup */
-panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox {
+panel[type="autocomplete-richlistbox"] > richlistbox {
     background: none !important;
     color: inherit !important;
-}
-
-panel#PopupAutoComplete[type="autocomplete-richlistbox"] > richlistbox > richlistitem {
-    border-radius: var(--context-menuitem-border-radius) !important;
-    min-height: 25px !important;
-    padding-inline: 2px !important;
     border: none !important;
 }
 
-panel#PopupAutoComplete[type="autocomplete-richlistbox"]
+panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem {
+    appearance: none !important;
+    color: var(--menu-color) !important;
+    padding: 0 8px !important;
+    border: none !important;
+    min-height: var(--menuitem-height) !important;
+    border-radius: var(--context-menuitem-border-radius);
+}
+
+panel[type="autocomplete-richlistbox"]
     > richlistbox
-    > richlistitem[selected]:not([disabled]) {
+    > richlistitem:is([selected], :hover):not([disabled]) {
     background-color: var(--arrowpanel-dimmed) !important;
     color: var(--menu-color) !important;
 }
 
-panel#PopupAutoComplete[type="autocomplete-richlistbox"]
+panel[type="autocomplete-richlistbox"]
     richlistitem:is([originaltype="generatedPassword"], [originaltype="loginWithOrigin"], [originaltype="login"])
     .ac-site-icon {
     fill: currentColor !important;
@@ -237,17 +240,17 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
     margin-inline-end: 6px !important;
 }
 
-panel#PopupAutoComplete[type="autocomplete-richlistbox"]
+panel[type="autocomplete-richlistbox"]
     > richlistbox
     > richlistitem[originaltype="generatedPassword"]
     > .two-line-wrapper
     > .labels-wrapper
     > .generated-password-autosave,
-panel#PopupAutoComplete[type="autocomplete-richlistbox"]
+panel[type="autocomplete-richlistbox"]
     > richlistbox
     > richlistitem[originaltype="importableLearnMore"]
     > .ac-title,
-panel#PopupAutoComplete[type="autocomplete-richlistbox"]
+panel[type="autocomplete-richlistbox"]
     > richlistbox
     > richlistitem
     > .two-line-wrapper
@@ -257,7 +260,7 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
     color: var(--panel-shortcut-color) !important;
 }
 
-panel#PopupAutoComplete[type="autocomplete-richlistbox"]
+panel[type="autocomplete-richlistbox"]
     > richlistbox
     > richlistitem[originaltype="loginsFooter"] {
     color: inherit !important;
@@ -266,20 +269,20 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
     background-color: var(--arrowpanel-dimmed) !important;
 }
 
-panel#PopupAutoComplete[type="autocomplete-richlistbox"]
+panel[type="autocomplete-richlistbox"]
     > richlistbox
     > richlistitem[originaltype="loginsFooter"]
     .ac-title {
     margin-inline: 0 !important;
 }
 
-panel#PopupAutoComplete[type="autocomplete-richlistbox"]
+panel[type="autocomplete-richlistbox"]
     > richlistbox
     > richlistitem[originaltype="loginsFooter"]:is(:hover, [selected]) {
     background-color: var(--arrowpanel-dimmed-further) !important;
 }
 
-panel#PopupAutoComplete[type="autocomplete-richlistbox"]
+panel[type="autocomplete-richlistbox"]
     > richlistbox
     > richlistitem[originaltype="loginsFooter"]:hover[selected] {
     background-color: var(--arrowpanel-dimmed-even-further) !important;
@@ -739,32 +742,32 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
         margin-top: 4px !important;
     }
 
-    richlistbox {
+    richlistbox[id] {
         background-color: var(--in-content-box-background-dim) !important;
     }
 
-    richlistitem[selected="true"] {
+    richlistbox[id] richlistitem[selected="true"] {
         background-color: var(--arrowpanel-dimmed) !important;
         color: var(--in-content-page-color) !important;
     }
 
-    richlistitem > button[label] {
+    richlistbox[id] richlistitem > button[label] {
         background-color: var(--in-content-primary-button-background) !important;
     }
 
-    richlistitem:not([disabled="true"])
+    richlistbox[id] richlistitem:not([disabled="true"])
         > button[label]:is(:enabled, :not([disabled="true"])):hover {
         background-color: var(--in-content-primary-button-background-hover) !important;
     }
 
-    richlistitem:not([disabled="true"])
+    richlistbox[id] richlistitem:not([disabled="true"])
         > button[label]:is(:enabled, :not([disabled="true"])):hover:active,
-    richlistitem > button[label][open],
-    richlistitem > button[label][open]:hover {
+    richlistbox[id] richlistitem > button[label][open],
+    richlistbox[id] richlistitem > button[label][open]:hover {
         background-color: var(--in-content-primary-button-background-active) !important;
     }
 
-    richlistitem[selected="true"] > button[label] {
+    richlistbox[id] richlistitem[selected="true"] > button[label] {
         border-color: var(--in-content-box-border-color) !important;
     }
 
@@ -985,7 +988,7 @@ panel#PopupAutoComplete[type="autocomplete-richlistbox"]
         padding-inline: 4px 2px !important;
     }
 
-    window[dialogroot] richlistbox {
+    window[dialogroot] richlistbox[id] {
         border-radius: var(--toolbarbutton-border-radius) !important;
     }
 

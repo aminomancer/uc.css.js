@@ -8,11 +8,11 @@ radio[focused="true"] > .radio-label-box {
 
 panel,
 menupopup {
-	--panel-background: var(--arrowpanel-background);
-	--panel-color: var(--arrowpanel-color);
-	--panel-border-color: var(--arrowpanel-border-color);
-	--panel-border-radius: var(--arrowpanel-border-radius);
-	--panel-padding: var(--arrowpanel-padding);
+    --panel-background: var(--arrowpanel-background);
+    --panel-color: var(--arrowpanel-color);
+    --panel-border-color: var(--arrowpanel-border-color);
+    --panel-border-radius: var(--arrowpanel-border-radius);
+    --panel-padding: var(--arrowpanel-padding);
 }
 
 panel[type="autocomplete-richlistbox"] {
@@ -20,21 +20,28 @@ panel[type="autocomplete-richlistbox"] {
     --panel-background: var(--arrowpanel-background);
     --panel-color: var(--menu-color);
     --panel-border-radius: var(--menupopup-border-radius);
+    border: none;
+    background: none;
 }
 
-panel[type="autocomplete-richlistbox"][anchored-on-panel] {
+panel[type="autocomplete-richlistbox"][anchored-on-panel],
+panel popupset panel[type="autocomplete-richlistbox"] {
     --panel-background: var(--autocomplete-background);
 }
 
+#editBookmarkPanel menulist menupopup::part(content) {
+    border: none;
+}
+
 :is(panel, menupopup)::part(content) {
-	display: -moz-box;
-	-moz-box-flex: 1;
-	padding: var(--panel-padding);
-	color: var(--panel-color);
+    display: -moz-box;
+    -moz-box-flex: 1;
+    padding: var(--panel-padding);
+    color: var(--panel-color);
     background: var(--panel-background, Menu);
-	border-radius: var(--panel-border-radius);
-	border: 1px solid var(--panel-border-color);
-	width: var(--panel-width);
+    border-radius: var(--panel-border-radius);
+    border: 1px solid var(--panel-border-color);
+    width: var(--panel-width);
 }
 
 :is(panel, menupopup)[type="arrow"]::part(content) {
@@ -326,7 +333,11 @@ if the icon disappeared/appeared instantly it would disrupt the impression that 
     .popup-notification-description,
 menulist:not([native])::part(label-box),
 #cfr-notification-header-label,
-#PopupAutoComplete > richlistbox > richlistitem[originaltype="insecureWarning"] > .ac-title .ac-emphasize-text-title {
+panel[type="autocomplete-richlistbox"]
+    > richlistbox
+    > richlistitem[originaltype="insecureWarning"]
+    > .ac-title
+    .ac-emphasize-text-title {
     font-weight: var(--uc-font-weight-bold, 600);
 }
 
@@ -1767,8 +1778,8 @@ of the animations. */
 }
 
 #star-button[starred][animate]:-moz-locale-dir(rtl)
-+ #star-button-animatable-box
-> #star-button-animatable-image {
+    + #star-button-animatable-box
+    > #star-button-animatable-image {
     scale: -1 1;
 }
 

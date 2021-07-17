@@ -137,7 +137,7 @@ and a few elements like checkboxes */
     }
 
     menupopup > :is(menuitem, menu, menucaption, menugroup, menuseparator, search-textbox),
-    #PopupAutoComplete > richlistbox > richlistitem {
+    panel > richlistbox > richlistitem {
         margin-inline: var(--menupopup-inner-padding-magnitude);
     }
 
@@ -229,18 +229,23 @@ and a few elements like checkboxes */
     }
 
     .menupopup-arrowscrollbox[orient="vertical"][overflowing="true"] {
-        margin-block: var(--menupopup-overflowing-inner-box-margin, var(--menupopup-inner-box-margin)) !important;
+        margin-block: var(
+            --menupopup-overflowing-inner-box-margin,
+            var(--menupopup-inner-box-margin)
+        ) !important;
     }
 
-    :is(menuitem, menu) {
+    :is(menuitem, menu),
+    panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem {
         appearance: none !important;
         color: var(--menu-color) !important;
-        padding: 5px 0 !important;
+        padding: 0 !important;
         min-height: var(--menuitem-height) !important;
         border-radius: var(--context-menuitem-border-radius);
     }
 
-    :is(menuitem, menu)[disabled="true"] {
+    :is(menuitem, menu)[disabled="true"],
+    panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem[disabled="true"] {
         appearance: none !important;
         color: var(--menu-disabled-color) !important;
         background-color: initial !important;
@@ -254,6 +259,14 @@ and a few elements like checkboxes */
 
     :is(menuitem, menu) .menu-iconic-icon {
         margin-inline: var(--context-iconic-margin);
+    }
+
+    panel[type="autocomplete-richlistbox"]
+        > richlistbox
+        > richlistitem
+        :is(.ac-site-icon, .ac-type-icon) {
+        margin-inline: var(--context-iconic-margin) !important;
+        margin-inline-start: 0 !important;
     }
 
     menugroup {
@@ -367,8 +380,11 @@ and a few elements like checkboxes */
     }
 
     :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
-        :is(menu, menuitem, menucaption) {
+        :is(menu, menuitem, menucaption),
+    panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem {
         padding-inline: 8px !important;
+        min-height: var(--menuitem-height) !important;
+        border: none !important;
     }
 
     :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
@@ -456,6 +472,11 @@ and a few elements like checkboxes */
 
     #ContentSelectDropdown > menupopup .contentSelectDropdown-searchbox + :is(menu, menuitem) {
         margin-top: 4px;
+    }
+
+    panel[type="autocomplete-richlistbox"] > richlistbox {
+        background: none !important;
+        color: var(--menu-color) !important;
     }
 
     .grid-element-width-resizer {

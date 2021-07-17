@@ -23,6 +23,10 @@ individual extensions' popups and other content documents are styled in userCont
     --pageAction-image-32px: url(chrome://userchrome/content/skin/container-go.svg) !important;
 }
 
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="sort-bookmarks@heftig"] .toolbarbutton-icon {
+    list-style-image: url(chrome://userchrome/content/skin/sort.svg);
+}
+
 /* hide gitzip page action since it's pretty useless */
 #page-action-buttons > #pageAction-urlbar-gitzip-firefox-addons_gitzip_org {
     display: none !important;
@@ -198,6 +202,24 @@ more useful than userContent.css when dealing with very complex websites that ne
     content: "Download (multi-threaded)";
     display: -moz-inline-box;
     -moz-box-flex: 1;
+}
+
+/* sort bookmarks menu icon */
+:is(.menu-iconic, .menuitem-iconic)[id^="sort-bookmarks_heftig-menuitem"] .menu-iconic-left::before {
+    width: 16px;
+    height: 16px;
+    margin-inline: var(--context-iconic-margin);
+    fill: currentColor;
+    -moz-context-properties: fill, fill-opacity, stroke;
+    content: "";
+    display: -moz-inline-box;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url(chrome://userchrome/content/skin/sort.svg);
+}
+
+:is(.menu-iconic, .menuitem-iconic)[id^="sort-bookmarks_heftig-menuitem"] .menu-iconic-icon {
+    display: none;
 }
 
 /* simple translate context menu icon */

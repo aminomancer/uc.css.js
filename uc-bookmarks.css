@@ -88,7 +88,7 @@
     font-weight: var(--uc-font-weight-thin);
 }
 
-#editBookmarkPanel richlistbox {
+#editBookmarkPanel richlistbox[id] {
     border-radius: 2px !important;
     overflow: hidden !important;
     margin: 0 !important;
@@ -290,8 +290,8 @@
     display: none !important;
 }
 
-#editBookmarkPanel richlistbox,
-#editBookmarkPanel richlistitem {
+#editBookmarkPanel richlistbox[id],
+#editBookmarkPanel richlistbox[id] richlistitem {
     appearance: none !important;
     -moz-user-select: text !important;
     user-select: text !important;
@@ -303,17 +303,17 @@
     padding: revert !important;
 }
 
-:is(#bookmarkpropertiesdialog, #editBookmarkPanel) richlistitem {
+:is(#bookmarkpropertiesdialog, #editBookmarkPanel) richlistbox[id] richlistitem {
     padding-inline-start: 2px !important;
     padding-top: 1px !important;
 }
 
-#bookmarkpropertiesdialog richlistitem {
+#bookmarkpropertiesdialog richlistbox[id] richlistitem {
     margin-bottom: revert !important;
     padding-block: 2.5px !important;
 }
 
-:is(#bookmarkpropertiesdialog, #editBookmarkPanel) richlistitem image {
+:is(#bookmarkpropertiesdialog, #editBookmarkPanel) richlistbox[id] richlistitem image {
     appearance: none !important;
     background-color: transparent !important;
     border: none !important;
@@ -326,11 +326,14 @@
     list-style-image: url(chrome://userchrome/content/monotone-checkbox.svg);
 }
 
-:is(#bookmarkpropertiesdialog, #editBookmarkPanel) richlistitem label {
+:is(#bookmarkpropertiesdialog, #editBookmarkPanel) richlistbox[id] richlistitem label {
     margin-inline: 6px 5px !important;
 }
 
-:is(#bookmarkpropertiesdialog, #editBookmarkPanel) richlistitem[checked="true"] image {
+:is(#bookmarkpropertiesdialog, #editBookmarkPanel)
+    richlistbox[id]
+    richlistitem[checked="true"]
+    image {
     appearance: none !important;
     background-color: transparent !important;
     border: none !important;
@@ -339,7 +342,7 @@
     list-style-image: url(chrome://userchrome/content/monotone-checkbox-checked.svg) !important;
 }
 
-:is(#bookmarkpropertiesdialog, #editBookmarkPanel) richlistitem:hover > image {
+:is(#bookmarkpropertiesdialog, #editBookmarkPanel) richlistbox[id] richlistitem:hover > image {
     opacity: 1 !important;
 }
 
@@ -388,18 +391,20 @@
     margin: 0 !important;
 }
 
-#editBookmarkPanel richlistitem:is(:hover, [selected="true"], [current="true"]) {
+#editBookmarkPanel richlistbox[id] richlistitem:is(:hover, [selected="true"], [current="true"]) {
     background-color: hsl(232, 21%, 40%) !important;
 }
 
-richlistbox:not(#categories) > richlistitem[selected] {
+richlistbox[id]:not(#categories) > richlistitem[selected] {
     --in-content-button-background: revert !important;
     --in-content-button-background-hover: revert !important;
     --in-content-button-background-active: revert !important;
     --in-content-button-text-color-hover: revert !important;
 }
 
-#bookmarkpropertiesdialog richlistitem:is(:hover, [selected="true"], [current="true"]) {
+#bookmarkpropertiesdialog
+    richlistbox[id]
+    richlistitem:is(:hover, [selected="true"], [current="true"]) {
     background-color: var(--in-content-button-background) !important;
 }
 

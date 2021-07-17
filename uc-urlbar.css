@@ -62,6 +62,7 @@ toolbarpaletteitem[place="palette"] > #search-container {
 
 #PopupSearchAutoComplete .autocomplete-richlistitem {
     padding-block: 6px !important;
+    margin-inline: 0 !important;
     min-height: 32px;
     border-radius: var(--arrowpanel-menuitem-border-radius) !important;
 }
@@ -110,8 +111,15 @@ toolbarpaletteitem[place="palette"] > #search-container {
     padding-inline: 0 16px !important;
 }
 
-#searchbar .urlbar-icon {
+#searchbar .search-go-container {
     margin-right: 2px !important;
+}
+
+#searchbar .search-go-button {
+    box-sizing: border-box !important;
+	width: calc(var(--urlbar-min-height) - 2px - 2 * var(--urlbar-container-padding)) !important;
+	height: calc(var(--urlbar-min-height) - 2px - 2 * var(--urlbar-container-padding)) !important;
+	padding: var(--urlbar-icon-padding) !important;
 }
 
 #searchbar .searchbar-search-icon {

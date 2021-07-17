@@ -29,6 +29,7 @@ menupopup.in-menulist {
     --panel-separator-color: var(--desaturate-dimmed) !important;
     --button-hover-bgcolor: var(--arrowpanel-dimmed) !important;
     --button-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
+    user-select: none !important;
     -moz-user-select: none !important;
 }
 
@@ -394,8 +395,13 @@ menupopup.in-menulist menuitem > .menu-iconic-left {
     margin-inline: 0 !important;
 }
 
-#ContentSelectDropdown > menupopup > :where(menucaption, menuitem)[image] > :is(label, .menu-iconic-text, .menu-text),
-menupopup.in-menulist :where(menucaption, menuitem)[image] > :is(label, .menu-iconic-text, .menu-text) {
+#ContentSelectDropdown
+    > menupopup
+    > :where(menucaption, menuitem)[image]
+    > :is(label, .menu-iconic-text, .menu-text),
+menupopup.in-menulist
+    :where(menucaption, menuitem)[image]
+    > :is(label, .menu-iconic-text, .menu-text) {
     padding-inline-start: 0 !important;
 }
 
@@ -405,16 +411,20 @@ menulist[indicator="true"] > menupopup.in-menulist menuitem:not([image]) > .menu
     margin-inline-end: unset !important;
 }
 
-menulist[indicator="true"] > menupopup.in-menulist menuitem:not([image]) > .menu-iconic-left > .menu-iconic-icon {
+menulist[indicator="true"]
+    > menupopup.in-menulist
+    menuitem:not([image])
+    > .menu-iconic-left
+    > .menu-iconic-icon {
     width: 16px !important;
     height: 16px !important;
 }
 
 menulist[indicator="true"]
-> menupopup.in-menulist
-menuitem[indicator="true"]:not([image])
-> .menu-iconic-left
-> .menu-iconic-icon {
+    > menupopup.in-menulist
+    menuitem[indicator="true"]:not([image])
+    > .menu-iconic-left
+    > .menu-iconic-icon {
     list-style-image: url(chrome://userchrome/content/indicator-tab-attention.svg) !important;
     filter: hue-rotate(55deg);
     width: 16px !important;
@@ -422,9 +432,9 @@ menuitem[indicator="true"]:not([image])
 }
 
 menulist[indicator="true"]
-menupopup.in-menulist
-> :where(menucaption, menuitem)
-> :is(label, .menu-iconic-text, .menu-text) {
+    menupopup.in-menulist
+    > :where(menucaption, menuitem)
+    > :is(label, .menu-iconic-text, .menu-text) {
     padding-inline: 0 !important;
     margin-inline: 0 !important;
 }
