@@ -464,6 +464,8 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
 
 .popup-notification-checkbox > .checkbox-label-box > .checkbox-label {
     margin-block: 0 !important;
+    opacity: revert !important;
+    color: var(--panel-description-color);
 }
 
 .subviewradio {
@@ -574,7 +576,7 @@ popupnotification progress[paused]::-moz-progress-bar {
     border-width: 0;
     min-width: 0;
     padding: 2px !important;
-    background-color: var(--ui-solid-button-bgcolor) !important;
+	background-color: var(--button-bgcolor) !important;
     color: inherit !important;
     opacity: 1 !important;
     outline: none !important;
@@ -590,11 +592,11 @@ popupnotification progress[paused]::-moz-progress-bar {
 }
 
 .permission-popup-permission-remove-button:is(:hover, :focus-visible) {
-    background-color: var(--ui-solid-button-hover-bgcolor) !important;
+	background-color: var(--button-hover-bgcolor) !important;
 }
 
-.permission-popup-permission-remove-button:is(:hover, :focus-visible):active {
-    background-color: var(--ui-solid-button-active-bgcolor) !important;
+.permission-popup-permission-remove-button:hover:active {
+	background-color: var(--button-active-bgcolor) !important;
 }
 
 .permission-popup-permission-item > .popup-subitem {
@@ -673,7 +675,7 @@ popupnotification progress[paused]::-moz-progress-bar {
     min-height: 33.3px !important;
 }
 
-#identity-popup-security-button[footerHidden="false"] {
+#identity-popup-security-button {
     margin-bottom: revert !important;
 }
 
@@ -786,12 +788,12 @@ popupnotification progress[paused]::-moz-progress-bar {
 
 #PanelUI-whatsNew .whatsNew-message-title,
 #protections-popup-message .whatsNew-message-title {
-    font-weight: var(--uc-font-weight-bold) !important;
+    font-weight: var(--uc-font-weight-bold, 600) !important;
 }
 
 #protections-popup-message .text-link {
     color: var(--lwt-popup-brighttext-url-color) !important;
-    font-weight: var(--uc-font-weight-bold) !important;
+    font-weight: var(--uc-font-weight-bold, 600) !important;
 }
 
 .protections-popup-tp-switch:not([enabled]) {
@@ -837,11 +839,11 @@ popupnotification progress[paused]::-moz-progress-bar {
 #identity-popup-security-description > :is(description, label, button) {
     margin-inline: 34px !important;
     padding-inline: 0 !important;
-    margin-block: 4px !important;
+    margin-block: 3px 6px !important;
 }
 
 #identity-popup-security-description > .identity-popup-warning-box {
-    font-weight: 400 !important;
+    font-weight: var(--uc-font-weight-semibold, 500) !important;
 }
 
 #identity-popup-mainView .identity-popup-warning-box {
@@ -849,11 +851,12 @@ popupnotification progress[paused]::-moz-progress-bar {
 }
 
 #identity-popup-securityView-body > .identity-popup-warning-box {
-    font-weight: 400 !important;
+    font-weight: var(--uc-font-weight-semibold, 500) !important;
     background: var(--uc-warning-background);
     padding: 4px !important;
     margin-inline: 24px 1px !important;
     border-radius: 3px;
+    font-size: 1.1em !important
 }
 
 #identity-popup-securityView-body > .identity-popup-warning-box.identity-popup-warning-yellow {
@@ -936,6 +939,8 @@ popupnotification progress[paused]::-moz-progress-bar {
     display: flex;
     flex-flow: column nowrap;
     gap: 8px;
+    font-weight: var(--uc-font-weight-thin, 400);
+    font-size: 12px;
 }
 
 #identity-popup-securityView-body > button {
@@ -965,7 +970,7 @@ popupnotification progress[paused]::-moz-progress-bar {
 
 panel .header,
 #identity-popup-security-description > description {
-    font-weight: var(--uc-font-weight-bold) !important;
+    font-weight: var(--uc-font-weight-bold, 600) !important;
 }
 
 .panel-view-body-unscrollable {
@@ -1343,10 +1348,6 @@ panel .header,
     border-top: 1px solid var(--panel-separator-color);
 }
 
-#identity-popup-security-button[footerHidden="true"] {
-    margin-bottom: 4px !important;
-}
-
 #identity-popup:is([connection="file"], [connection="chrome"]) #identity-popup-security-button {
     margin-bottom: 6px !important;
 }
@@ -1386,13 +1387,18 @@ panel .header,
 }
 
 #eom-mainView-panel-header,
-#identity-popup-mainView-panel-header,
 #permission-popup-mainView-panel-header,
 #protections-popup-mainView-panel-header {
     min-height: 44px !important;
     font-size: 1.05em !important;
     line-height: 1.05em !important;
-    font-weight: var(--uc-font-weight-bold) !important;
+    font-weight: var(--uc-font-weight-bold, 600) !important;
+}
+
+#identity-popup-mainView-panel-header {
+    font-size: 1.05em !important;
+    line-height: 1.05em !important;
+    font-weight: var(--uc-font-weight-bold, 600) !important;
 }
 
 #eom-mainView-panel-header label,
@@ -1405,7 +1411,7 @@ panel .header,
 .panel-header > h1 {
     font-size: 1.05em !important;
     line-height: 1.05em !important;
-    font-weight: var(--uc-font-weight-bold) !important;
+    font-weight: var(--uc-font-weight-bold, 600) !important;
 }
 
 .popup-notification-description {

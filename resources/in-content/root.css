@@ -102,7 +102,14 @@
             border-radius: 45px;
             overflow: hidden;
             height: 16px;
-            background: linear-gradient(#494949, #444, #3f3f3f 20%, #333 45%, #303030 65%, #2d2d2d 75%);
+            background: linear-gradient(
+                #494949,
+                #444,
+                #3f3f3f 20%,
+                #333 45%,
+                #303030 65%,
+                #2d2d2d 75%
+            );
         }
 
         ::-moz-meter-bar {

@@ -85,7 +85,7 @@
     border-radius: 2px !important;
     overflow: hidden !important;
     margin: 0 !important;
-    font-weight: var(--uc-font-weight-thin);
+    font-weight: var(--uc-font-weight-thin, 400);
 }
 
 #editBookmarkPanel richlistbox[id] {

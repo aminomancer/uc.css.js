@@ -63,7 +63,7 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
     height: 10.5px !important;
     vertical-align: center !important;
     font-size: 9px !important;
-    font-weight: 600 !important;
+    font-weight: var(--uc-font-weight-bold, 600) !important;
     line-height: 10px !important;
     filter: none !important;
     margin: -6px -6px 0 -6px !important;
@@ -642,7 +642,7 @@ link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infob
 link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-content .notification-button-container > .notification-button.small
 {
     margin: 0 !important;
-    font-weight: var(--uc-font-weight-bold) !important;
+    font-weight: var(--uc-font-weight-bold, 600) !important;
 }
 
 link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar > .icon

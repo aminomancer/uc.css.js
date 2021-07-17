@@ -1368,7 +1368,8 @@ domain("wikimedia.org") {
     }
 
     :is(.oo-ui-toolbar-bar, .ve-ce-branchNode-slug, .toolbar.section-main) .oo-ui-iconElement-icon,
-    :is(.oo-ui-toolbar-bar, .ve-ce-branchNode-slug, .toolbar.section-main) .oo-ui-indicatorElement-indicator {
+    :is(.oo-ui-toolbar-bar, .ve-ce-branchNode-slug, .toolbar.section-main)
+        .oo-ui-indicatorElement-indicator {
         filter: invert();
     }
 
@@ -1646,7 +1647,9 @@ domain("wikimedia.org") {
 
     select {
         appearance: none;
-        background: hsl(240, 4.3%, 8.5%) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="context-fill" viewBox="0 0 16 16"><path d="M12.085 4.943L8.05 8.803l-3.947-3.86L3.05 5.996l5 5 5-5z"/></svg>') right 4px center no-repeat;
+        background: hsl(240, 4.3%, 8.5%)
+            url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="context-fill" viewBox="0 0 16 16"><path d="M12.085 4.943L8.05 8.803l-3.947-3.86L3.05 5.996l5 5 5-5z"/></svg>')
+            right 4px center no-repeat;
         -moz-context-properties: fill;
         color: hsl(0, 0%, 80%);
         fill: currentColor;
@@ -2771,8 +2774,7 @@ domain("wikimedia.org") {
     }
 
     .oo-ui-dropdownInputWidget,
-    .oo-ui-dropdownWidget.oo-ui-dropdownWidget-open
-        .oo-ui-dropdownWidget-handle {
+    .oo-ui-dropdownWidget.oo-ui-dropdownWidget-open .oo-ui-dropdownWidget-handle {
         background-color: hsl(210, 6.7%, 5.9%) !important;
         border-radius: 2px !important;
         color: inherit !important;
@@ -2803,7 +2805,9 @@ domain("wikimedia.org") {
         text-shadow: 0 1px 1px #000 !important;
     }
 
-    .oo-ui-dropdownWidget.oo-ui-widget-disabled .oo-ui-dropdownWidget-handle :is(.oo-ui-indicatorElement-indicator, .oo-ui-iconElement-icon, .oo-ui-labelElement-label) {
+    .oo-ui-dropdownWidget.oo-ui-widget-disabled
+        .oo-ui-dropdownWidget-handle
+        :is(.oo-ui-indicatorElement-indicator, .oo-ui-iconElement-icon, .oo-ui-labelElement-label) {
         opacity: 0.5 !important;
     }
 
@@ -3869,6 +3873,11 @@ domain("wikimedia.org") {
     .mw-highlight pre {
         background: hsl(250, 0%, 7%) !important;
         border: none !important;
+    }
+
+    .mw-content-ltr.mw-highlight-lines pre,
+    .mw-content-ltr.content .mw-highlight-lines pre {
+        box-shadow: inset 2.75em 0 0 rgb(25, 25, 26) !important;
     }
 
     .mw-highlight .c,

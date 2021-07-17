@@ -50,6 +50,11 @@ panel popupset panel[type="autocomplete-richlistbox"] {
     margin-top: 4px;
 }
 
+#identity-popup::part(content) {
+    --panel-padding: var(--menupopup-inner-padding);
+    padding: var(--panel-padding);
+}
+
 :not(.panel-subview-body) > toolbarseparator + .panel-subview-body,
 :not(.panel-subview-body) > .subview-subheader + .panel-subview-body {
     padding-bottom: var(--panel-subview-body-padding-magnitude);
@@ -57,6 +62,18 @@ panel popupset panel[type="autocomplete-richlistbox"] {
 
 .panel-subview-footer-button {
     margin-bottom: var(--menupopup-inner-padding-magnitude);
+}
+
+#identity-popup .panel-subview-footer-button {
+    margin-bottom: revert;
+}
+
+#identity-popup-mainView-panel-header-span {
+	margin-top: 2px;
+}
+
+#identity-popup-mainView-panel-header {
+	padding: 0;
 }
 
 /* use scrollbars instead of scroll buttons on most arrowscrollboxes */

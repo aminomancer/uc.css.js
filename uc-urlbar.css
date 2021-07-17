@@ -68,7 +68,7 @@ toolbarpaletteitem[place="palette"] > #search-container {
 }
 
 #PopupSearchAutoComplete .autocomplete-richlistitem .ac-title-text {
-    font-weight: var(--urlbar-base-font-weight) !important;
+    font-weight: var(--urlbar-base-font-weight, 400) !important;
     font-style: normal !important;
     color: var(--panel-shortcut-color);
 }
@@ -999,7 +999,7 @@ use 0.6 instead of 1 since 1 will end up being shown as like 1.4px for some wind
 }
 
 #identity-icon-label {
-    font-weight: 400;
+    font-weight: var(--urlbar-base-font-weight, 400);
 }
 
 #urlbar-label-box .urlbar-label,
@@ -1009,7 +1009,7 @@ use 0.6 instead of 1 since 1 will end up being shown as like 1.4px for some wind
     opacity: var(--identity-box-label-opacity) !important;
     padding-inline: 0px !important;
     font-size: inherit !important;
-    font-weight: 400;
+    font-weight: var(--urlbar-base-font-weight, 400);
 }
 
 /* shorten "Switch to tab:" urlbar indicator to "Tabs" */
@@ -1018,7 +1018,7 @@ use 0.6 instead of 1 since 1 will end up being shown as like 1.4px for some wind
     display: -moz-inline-box;
     color: var(--lwt-toolbar-field-color, hsl(0, 0%, 0%));
     opacity: 0.6;
-    font-weight: 400;
+    font-weight: var(--urlbar-base-font-weight, 400);
 }
 
 #urlbar-label-switchtab {

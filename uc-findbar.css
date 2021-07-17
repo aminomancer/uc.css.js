@@ -140,7 +140,7 @@ findbar .matches-indicator {
 
 @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
     findbar .matches-indicator {
-        font-weight: 300 !important;
+        font-weight: var(--uc-font-weight-thin, 300) !important;
         line-height: 23px !important;
     }
 }

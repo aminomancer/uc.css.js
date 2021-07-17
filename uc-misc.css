@@ -111,7 +111,7 @@ as the mouse would then be on top of the tooltip popup not the main window. */
 }
 
 :is(#back-button-tooltip, #forward-button-tooltip) .tooltip-label[id]:not(:last-of-type) {
-    font-weight: 600;
+    font-weight: var(--uc-font-weight-bold, 600);
 }
 
 :is(#back-button-tooltip, #forward-button-tooltip) .tooltip-label:last-of-type:not([id]) {
@@ -364,7 +364,7 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
         }
 
         panel .panel-banner-item {
-            font-weight: 500 !important;
+            font-weight: var(--uc-font-weight-bold, 500) !important;
         }
 
         tooltip {
@@ -372,22 +372,22 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
         }
 
         :is(#back-button-tooltip, #forward-button-tooltip) .tooltip-label[id] {
-            font-weight: 400 !important;
+            font-weight: var(--uc-font-weight-semibold, 400) !important;
         }
 
         :is(#back-button-tooltip, #forward-button-tooltip) .tooltip-label:not([id]) {
-            font-weight: 300 !important;
+            font-weight: var(--uc-font-weight-thin, 300) !important;
         }
 
         .places-tooltip-title {
             font-size: 12px !important;
-            font-weight: 400 !important;
+            font-weight: var(--uc-font-weight-semibold, 400) !important;
             line-height: 13.5px !important;
             max-height: 27px !important;
         }
 
         .places-tooltip-uri {
-            font-weight: 300 !important;
+            font-weight: var(--uc-font-weight-thin, 300) !important;
         }
 
         .places-tooltip-title[hidden="true"] ~ .places-tooltip-uri {
@@ -396,12 +396,12 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
 
         #urlbar-zoom-button .toolbarbutton-text {
             height: revert !important;
-            font-weight: 400 !important;
+            font-weight: var(--uc-font-weight-semibold, 400) !important;
         }
 
         toolbar:not(#PersonalToolbar) #zoom-controls > #zoom-reset-button > .toolbarbutton-text {
             padding-block: 2px !important;
-            font-weight: 400 !important;
+            font-weight: var(--uc-font-weight-semibold, 400) !important;
         }
 
         #appMenu-zoomReset-button2 .toolbarbutton-text {

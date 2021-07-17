@@ -152,7 +152,7 @@ tabmodalprompt input[type="number"]:focus::-moz-number-spin-box {
 }
 
 tabmodalprompt #titleText {
-    font-weight: var(--uc-font-weight-bold) !important;
+    font-weight: var(--uc-font-weight-bold, 600) !important;
     font-size: 1.1em !important;
 }
 
@@ -832,7 +832,7 @@ panel[type="autocomplete-richlistbox"]
     }
 
     #titleText {
-        font-weight: 500 !important;
+        font-weight: var(--uc-font-weight-semibold, 500) !important;
         font-size: 13px !important;
     }
 
@@ -848,7 +848,7 @@ panel[type="autocomplete-richlistbox"]
         }
 
         #titleText {
-            font-weight: 400 !important;
+            font-weight: var(--uc-font-weight-semibold, 400) !important;
             font-size: 14px !important;
             font-family: SF Pro Display, Segoe UI, sans-serif !important;
         }
@@ -1062,7 +1062,7 @@ panel[type="autocomplete-richlistbox"]
     window[dialogroot] #titleText {
         font-size: 16px !important;
         line-height: 16px !important;
-        font-weight: 500 !important;
+        font-weight: var(--uc-font-weight-semibold, 500) !important;
     }
 
     window[dialogroot] #titleContainer {
@@ -1077,7 +1077,7 @@ panel[type="autocomplete-richlistbox"]
 
     window[dialogroot] #handling > #description {
         font-size: 1.15em !important;
-        font-weight: 600 !important;
+        font-weight: var(--uc-font-weight-bold, 600) !important;
     }
 
     window[dialogroot] #chooser {
@@ -1139,7 +1139,7 @@ panel[type="autocomplete-richlistbox"]
         window[dialogroot] dialog > #description,
         window[dialogroot] dialog > #description-box > #description {
             font-size: 1.15em !important;
-            font-weight: 600 !important;
+            font-weight: var(--uc-font-weight-bold, 600) !important;
         }
 
         window[dialogroot] #description-box {
@@ -1162,7 +1162,7 @@ panel[type="autocomplete-richlistbox"]
         h2,
         h3,
         #titleText) {
-            font-weight: 400 !important;
+            font-weight: var(--uc-font-weight-semibold, 400) !important;
             font-family: SF Pro Display, Segoe UI, sans-serif !important;
         }
     }

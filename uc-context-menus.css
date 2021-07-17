@@ -287,7 +287,7 @@ panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem {
 :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
     menucaption
     > :is(label, .menu-iconic-text, .menu-text) {
-    font-weight: 600 !important;
+    font-weight: var(--uc-font-weight-bold, 600) !important;
 }
 
 :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)

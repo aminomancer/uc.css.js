@@ -4,6 +4,7 @@ and in particular, tooltips and scrollbars. */
 @import url(uc-globals.css);
 
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+@namespace html url(http://www.w3.org/1999/xhtml);
 
 /* browser scrollbars */
 scrollbar {

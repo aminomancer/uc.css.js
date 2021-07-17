@@ -45,6 +45,7 @@ tooltip {
     --menupopup-inner-box-margin: 0px;
     --menupopup-shadow: none;
     --panel-shadow: none;
+    --webextension-panel-border-radius: 5px;
     --menupopup-margin: calc(0px - var(--menupopup-inner-box-margin));
     --menupopup-background: transparent;
     --menupopup-child-margin-block-start: calc(-4px - var(--menupopup-inner-box-margin));
@@ -66,6 +67,7 @@ tooltip {
     --menu-separator-margin: 4px;
 
     --uc-font-weight-bold: 600;
+    --uc-font-weight-semibold: 500;
     --uc-font-weight-thin: 400;
     --subdialog-font-size: 1em !important;
 
@@ -76,7 +78,11 @@ tooltip {
     --tooltip-border-radius: 2px;
     --tooltip-border-color: var(--uc-menu-border-color);
     --tooltip-box-shadow: 0 0 5px hsla(0, 0%, 0%, 0.2);
-    --webextension-panel-border-radius: 5px;
+    --global-focus-shadow-color: var(--purple-40-a30);
+    --global-focus-outline-color: var(--purple-40);
+    --global-focus-ring: 2px solid var(--global-focus-shadow-color);
+    --global-focus-shadow: 0 0 0 3px var(--global-focus-shadow-color),
+        0 0 0 1px var(--global-focus-outline-color);
 
     --statuspanel-color: hsla(0, 0%, 100%, 0.85);
     --noise-texture: url(chrome://userchrome/content/texture/lightnoise.png);
@@ -327,6 +333,7 @@ popupnotification,
 @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
     :root {
         --uc-font-weight-bold: 500;
+        --uc-font-weight-semibold: 400;
         --uc-font-weight-thin: 300;
     }
 }
