@@ -76,14 +76,6 @@ panel popupset panel[type="autocomplete-richlistbox"] {
 	padding: 0;
 }
 
-/* use scrollbars instead of scroll buttons on most arrowscrollboxes */
-menupopup::part(arrowscrollbox-scrollbox) {
-    overflow-y: auto !important;
-    padding-block: 0 !important;
-    margin-block: 0 !important;
-    scroll-behavior: smooth !important;
-}
-
 #BMB_bookmarksPopup::part(arrowscrollbox),
 #BMB_bookmarksPopup menupopup::part(arrowscrollbox),
 #BMB_bookmarksPopup menupopup[placespopup="true"]::part(arrowscrollbox) {
