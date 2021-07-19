@@ -54,7 +54,7 @@ this works best with the overlay scrollbars from userChrome.ag.css */
 }
 
 /* reveal the vertical scrollbar */
-:host([orient="vertical"])::part(scrollbox) {
+:host(.menupopup-arrowscrollbox[orient="vertical"])::part(scrollbox) {
     overflow-y: auto;
     padding-block: 0;
     margin-block: 0 !important;
