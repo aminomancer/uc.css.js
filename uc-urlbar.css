@@ -98,16 +98,12 @@ toolbarpaletteitem[place="palette"] > #search-container {
 
 #PopupSearchAutoComplete .search-panel-current-engine {
     padding: 6px 12px !important;
-}
-
-#PopupSearchAutoComplete .search-panel-current-engine > label {
-    color: var(--panel-shortcut-color) !important;
-    opacity: 1 !important;
+    color: var(--panel-description-color) !important;
 }
 
 #PopupSearchAutoComplete .searchbar-engine-image[src="moz-extension://cd4aad93-9726-49dd-a5cd-9e5f5c4d76f4/favicon.ico"]
 {
-    background-image: url(chrome://userchrome/content/engines/google-color.svg) !important;
+    background-image: url(chrome://userchrome/content/engines/google.svg) !important;
     padding-inline: 0 16px !important;
 }
 

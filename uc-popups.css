@@ -221,7 +221,7 @@ panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem {
     padding: 0 8px !important;
     border: none !important;
     min-height: var(--menuitem-height) !important;
-    border-radius: var(--context-menuitem-border-radius);
+    border-radius: var(--context-menuitem-border-radius) !important;
 }
 
 panel[type="autocomplete-richlistbox"]

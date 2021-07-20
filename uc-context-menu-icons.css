@@ -525,7 +525,7 @@ menuitem.customize-context-reportExtension:before {
 
 .downloadPauseMenuItem:before,
 #context-media-pause:before {
-    background-image: url(chrome://userchrome/content/pauseButton.svg);
+    background-image: url(chrome://userchrome/content/material/pause.svg);
 }
 
 .downloadResumeMenuItem:before,
@@ -952,11 +952,15 @@ menuitem#repair-text-encoding:before {
 }
 
 :is(#context_toggleMuteTab, #context_toggleMuteSelectedTabs):before {
-    background-image: url(chrome://userchrome/content/tab-audio-muted.svg);
+    background-image: url(chrome://userchrome/content/audioMutedButton.svg);
 }
 
 :is(#context_toggleMuteTab, #context_toggleMuteSelectedTabs)[muted="true"]:before {
-    background-image: url(chrome://userchrome/content/tab-audio-playing.svg);
+    background-image: url(chrome://userchrome/content/audioUnmutedButton.svg);
+}
+
+:is(#context_toggleMuteTab, #context_toggleMuteSelectedTabs)[label^="Play Tab"i]:before {
+    background-image: url(chrome://userchrome/content/playButton.svg);
 }
 
 :is(#context_pinTab, #context_pinSelectedTabs):before {
