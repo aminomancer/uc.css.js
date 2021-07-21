@@ -20,13 +20,8 @@
 }
 
 @supports -moz-bool-pref("userChrome.css.ctrl-tab-backdrop-overlay") {
-    #ctrlTab-panel {
-        margin-block: -50vh !important;
-        height: 100vh !important;
-        min-width: 200vw !important;
-        padding: 0 !important;
-        border-radius: 0 !important;
-        overflow: visible !important;
+    :root[ctrlTab-panel-open] :is(#browser .browserContainer, #navigator-toolbox toolbar, #mainPopupSet menupopup) {
+        filter: contrast(0.95) brightness(0.6);
     }
 }
 

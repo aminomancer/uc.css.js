@@ -292,12 +292,22 @@ toolbar .toolbarbutton-1:not([disabled])[checked]:hover > .toolbarbutton-icon {
 
 #PersonalToolbar {
     padding-inline: 2px !important;
+    min-height: 32px !important;
     z-index: 2 !important;
+    transition: min-height 200ms ease-in-out, max-height 200ms ease-in-out,
+        opacity 200ms ease-in-out, transform 200ms ease-in-out !important;
+    overflow-y: visible !important;
+}
+
+#PersonalToolbar:not([customizing]) {
+    padding-block: 0 var(--bookmark-block-padding) !important;
     position: absolute !important;
     display: flex !important;
     flex-flow: row nowrap !important;
-    transition: min-height 200ms ease-in-out, max-height 200ms ease-in-out,
-        opacity 200ms ease-in-out, transform 200ms ease-in-out !important;
+}
+
+:root:not([inFullscreen]) #PersonalToolbar:not([collapsed="true"], [customizing]) + * {
+    display: none !important;
 }
 
 :root[inFullscreen]:not([macOSNativeFullscreen]) #PersonalToolbar:not([fullscreentoolbar="true"]),
@@ -315,33 +325,33 @@ toolbar .toolbarbutton-1:not([disabled])[checked]:hover > .toolbarbutton-icon {
     transform: translateY(-16px);
 }
 
-:root[inFullscreen]:not([macOSNativeFullscreen])
-    #PersonalToolbar:not([fullscreentoolbar="true"])
-    #personal-toolbar-empty-description
-    a,
-#PersonalToolbar[collapsed="true"] #personal-toolbar-empty-description a,
-:root:not([customizing])
-    > body
-    > box:not(:hover, [popup-status])
-    #PersonalToolbar:not(:focus-within, [tempopen="true"])
-    #personal-toolbar-empty-description
-    a,
-:root:not([customizing])
-    > body
-    > box[urlbar-status]
-    #PersonalToolbar
-    #personal-toolbar-empty-description
-    a {
-    display: none;
-}
-
-#personal-toolbar-empty-description,
+#personal-toolbar-empty,
 #PersonalToolbar .toolbarbutton-1,
 toolbarbutton.bookmark-item:not(.subviewbutton) {
-    margin-block: 0 3.5px !important;
+    margin-block: 0 !important;
     padding: var(--bookmark-block-padding) 4px;
     min-height: 28px !important;
     min-width: 28px !important;
+    -moz-box-align: center !important;
+}
+
+#personal-toolbar-empty-description, #PersonalToolbar .toolbarbutton-1, toolbarbutton.bookmark-item:not(.subviewbutton) {
+	margin: 2px;
+	padding: var(--bookmark-block-padding) 4px;
+}
+
+#personal-toolbar-empty-description {
+	min-height: 0 !important;
+    margin: 0 var(--bookmark-block-padding) !important;
+    padding: 0 !important;
+}
+
+#PersonalToolbar a {
+    color: var(--in-parent-link-color) !important;
+}
+
+#PersonalToolbar a:is(:active, :focus-visible) {
+    color: var(--in-parent-link-color-active) !important;
 }
 
 @supports -moz-bool-pref("userChrome.bookmarks-toolbar.icons-only") {
@@ -414,10 +424,6 @@ toolbarbutton.bookmark-item:not(.subviewbutton) {
 
 #PersonalToolbar[mode="icons"] #import-button > .toolbarbutton-text {
     display: none !important;
-}
-
-#PersonalToolbar {
-    overflow-y: visible !important;
 }
 
 #PlacesToolbarDropIndicator {
@@ -637,6 +643,10 @@ link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infob
     justify-content: end !important;
     justify-items: end !important;
     gap: 4px !important;
+}
+
+link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar button {
+    border-radius: var(--in-content-button-border-radius) !important;
 }
 
 link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-content .notification-button-container > .notification-button.small

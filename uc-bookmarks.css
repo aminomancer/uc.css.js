@@ -596,6 +596,10 @@ menuitem#menu_bookmarkThisPage[data-l10n-id="menu-bookmark-edit"]:before {
     fill-opacity: 0.5;
 }
 
+menupopup[emptyplacesresult="true"] #BMB_viewBookmarksToolbar + menuseparator {
+    display: none;
+}
+
 menupopup .openintabs-menuitem:not(.menuitem-iconic, .menu-iconic):before {
     content: "" !important;
     position: relative !important;
