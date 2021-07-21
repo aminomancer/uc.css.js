@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Private Tabs
-// @version        1.0
+// @version        1.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    An fx-autoconfig port of Private Tab by xiaoxiaoflood. Adds buttons and menu items allowing you to open a "private tab" in nearly any circumstance in which you'd be able to open a normal tab. Instead of opening a link in a private window, you can open it in a private tab instead. This will use a special container and prevent history storage, depending on user configuration. You can also toggle tabs back and forth between private and normal mode. This script adds two hotkeys: Ctrl+alt+P to open a new private tab, and ctrl+alt+T to toggle private mode for the active tab. These hotkeys can be configured along with several other options at the top of the script file.
@@ -402,7 +402,7 @@ class PrivateTabManager {
             // the tab to duplicate may have already been closed. In that case we
             // only have access to the <xul:browser>.
             let options = { includePrivateData: true };
-            this.TabState.copyFromCache(browser, tabState, options);
+            this.TabState.copyFromCache(browser.permanentKey, tabState, options);
 
             tabState.index += 0;
             tabState.index = Math.max(1, Math.min(tabState.index, tabState.entries.length));
