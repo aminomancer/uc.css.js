@@ -21,6 +21,7 @@ override chrome://global/skin/icons/delete.svg ../resources/material/delete.svg
 override chrome://global/skin/icons/add.svg ../resources/add.svg
 override chrome://global/skin/icons/edit.svg ../resources/edit.svg
 override chrome://global/skin/icons/help.svg ../resources/help.svg
+override chrome://global/skin/icons/lightbulb.svg ../resources/skin/tip.svg
 override chrome://global/skin/icons/defaultFavicon.svg ../resources/places/defaultFavicon.svg
 override chrome://global/skin/icons/info.svg ../resources/info.svg
 override chrome://global/skin/icons/search-glass.svg ../resources/search-glass.svg

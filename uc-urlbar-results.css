@@ -330,13 +330,23 @@
 .urlbarView-row[type="tip"] > .urlbarView-row-inner > .urlbarView-favicon {
     min-width: 16px !important;
     max-width: 16px !important;
-    height: 16px !important;
-    margin-inline-end: 8px !important;
-    margin-block-end: 1px !important;
-    margin-block-start: unset !important;
-    flex-basis: 24px;
-    flex-grow: 0;
-    flex-shrink: 0;
+	width: 16px !important;
+	height: 16px !important;
+    margin: 0 !important;
+}
+
+.urlbarView-row[type="tip"] > .urlbarView-row-inner > .urlbarView-favicon,
+.urlbarView-row[type="tip"] > .urlbarView-row-inner > .urlbarView-title,
+.urlbarView-row[type="tip"] > .urlbarView-row-inner > .urlbarView-help,
+.urlbarView-tip-button {
+	margin-block-end: revert !important;
+}
+
+.urlbarView-row[type="tip"] > .urlbarView-row-inner > .urlbarView-title {
+	white-space: normal;
+	flex-basis: revert !important;
+	flex-grow: 0 !important;
+	flex-shrink: 0 !important;
 }
 
 .urlbarView-title-separator,

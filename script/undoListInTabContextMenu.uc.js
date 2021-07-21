@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Undo Recently Closed Tabs in Tab Context Menu
-// @version        1.3
+// @version        1.4
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Adds new menus to the context menu that appears when you right-click a tab (in the tab bar or in the TreeStyleTabs sidebar): one lists recently closed tabs so you can restore them, and another lists recently closed windows. These are basically the same functions that exist in the history toolbar button's popup, but I think the tab context menu is a more convenient location for them. An updated script that does basically the same thing as UndoListInTabmenuToo by Alice0775, but for current versions of Firefox and with TST support. The original broke around version 86 or 87 I think.
@@ -347,7 +347,8 @@
         ) {
             let element = aDocument.createXULElement(aTagName);
             element.setAttribute("label", aMenuLabel);
-            if (aClosedTab.image) this.setImage(aClosedTab, element);
+            if (aClosedTab.image)
+                RecentlyClosedTabsAndWindowsMenuUtils.setImage(aClosedTab, element);
             if (!aIsWindowsFragment) element.setAttribute("value", aIndex);
             if (aTagName == "menuitem")
                 element.setAttribute(
@@ -388,7 +389,7 @@
             restoreAllElements.classList.add("restoreallitem");
             restoreAllElements.setAttribute(
                 "label",
-                this.strings.formatValueSync(aRestoreAllLabel)
+                RecentlyClosedTabsAndWindowsMenuUtils.strings.formatValueSync(aRestoreAllLabel)
             );
             restoreAllElements.setAttribute(
                 "oncommand",
@@ -415,12 +416,14 @@
             let doc = aWindow.document;
             let fragment = doc.createDocumentFragment();
             if (closedWindowData.length) {
-                let menuLabelString = this.navigatorBundle.GetStringFromName(
-                    "menuUndoCloseWindowLabel"
-                );
-                let menuLabelStringSingleTab = this.navigatorBundle.GetStringFromName(
-                    "menuUndoCloseWindowSingleTabLabel"
-                );
+                let menuLabelString =
+                    RecentlyClosedTabsAndWindowsMenuUtils.navigatorBundle.GetStringFromName(
+                        "menuUndoCloseWindowLabel"
+                    );
+                let menuLabelStringSingleTab =
+                    RecentlyClosedTabsAndWindowsMenuUtils.navigatorBundle.GetStringFromName(
+                        "menuUndoCloseWindowSingleTabLabel"
+                    );
 
                 for (let i = 0; i < closedWindowData.length; i++) {
                     let undoItem = closedWindowData[i];
@@ -437,7 +440,7 @@
                     let selectedTab = undoItem.tabs[undoItem.selected - 1];
 
                     if (!undoItem.isPopup || config["Include popup windows"] || !forContext)
-                        this.createEntry(
+                        RecentlyClosedTabsAndWindowsMenuUtils.createEntry(
                             aTagName,
                             true,
                             i,
@@ -449,7 +452,7 @@
                         );
                 }
 
-                this.createRestoreAllEntry(
+                RecentlyClosedTabsAndWindowsMenuUtils.createRestoreAllEntry(
                     doc,
                     fragment,
                     aPrefixRestoreAll,
@@ -473,7 +476,7 @@
             if (undoTabMenu.ss.getClosedTabCount(aWindow) != 0) {
                 let closedTabs = undoTabMenu.ss.getClosedTabData(aWindow, false);
                 for (let i = 0; i < closedTabs.length; i++) {
-                    this.createEntry(
+                    RecentlyClosedTabsAndWindowsMenuUtils.createEntry(
                         aTagName,
                         false,
                         i,
@@ -484,7 +487,7 @@
                         forContext
                     );
                 }
-                this.createRestoreAllEntry(
+                RecentlyClosedTabsAndWindowsMenuUtils.createRestoreAllEntry(
                     doc,
                     fragment,
                     aPrefixRestoreAll,

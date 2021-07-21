@@ -261,13 +261,13 @@ panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem {
     padding-inline: 8px !important;
     min-height: var(--menuitem-height) !important;
     border: none !important;
+    font: menu !important;
 }
 
 :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
     :where(menu, menuitem, menucaption)
     > :is(label, .menu-iconic-text, .menu-text) {
     padding-inline: 0 !important;
-    font: menu !important;
 }
 
 :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup) menucaption {
@@ -422,6 +422,21 @@ menupopup:not(.PanelUI-subView) menuseparator:last-child {
 #contentAreaContextMenu
     menuseparator[id]:not(#context-sep-open, #context-media-sep-commands, #context-sep-copylink, #spell-suggestions-separator, #context-sep-selectall) {
     display: none !important;
+}
+
+#ContentSelectDropdown
+    menupopup.in-menulist
+    menuitem:is([label=" "], [label=""], :not([label]))[value="0"]
+    label {
+    display: none !important;
+}
+
+#ContentSelectDropdown
+    menupopup.in-menulist
+    menuitem:is([label=" "], [label=""], :not([label]))[value="0"]:after {
+    content: "(Empty)";
+    display: -moz-box;
+    color: var(--menu-disabled-color);
 }
 
 @-moz-document url(chrome://browser/content/browser.xhtml)

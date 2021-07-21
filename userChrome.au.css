@@ -163,7 +163,8 @@ menupopup::part(drop-indicator) {
 
 /* padding and margins for context menus */
 menupopup::part(arrowscrollbox),
-#ContentSelectDropdown > menupopup::part(arrowscrollbox) {
+#ContentSelectDropdown > menupopup::part(arrowscrollbox),
+#PlacesToolbar menupopup::part(content) {
     padding: var(--menupopup-inner-padding);
     margin: var(--menupopup-inner-box-margin);
 }
@@ -171,6 +172,12 @@ menupopup::part(arrowscrollbox),
 #BMB_bookmarksPopup::part(arrowscrollbox),
 #BMB_bookmarksPopup menupopup[placespopup="true"]::part(arrowscrollbox) {
     padding-inline: 0 !important;
+}
+
+menupopup::part(arrowscrollbox),
+#ContentSelectDropdown > menupopup::part(arrowscrollbox) {
+	padding: var(--menupopup-inner-padding);
+	margin: var(--menupopup-inner-box-margin);
 }
 
 /* hide tab bar's arrow buttons and spacers */

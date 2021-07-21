@@ -459,6 +459,10 @@ richlistbox[id]:not(#categories) > richlistitem[selected] {
     --panel-separator-color: var(--desaturate-dimmed) !important;
 }
 
+#BMB_bookmarksPopup .subviewbutton > .menu-iconic-text {
+    padding-inline-start: 2px !important;
+}
+
 #BMB_bookmarksPopup .subviewbutton:not(.menuitem-iconic, .menu-iconic) .menu-text {
     padding-inline-start: 22px !important;
 }
@@ -467,12 +471,8 @@ richlistbox[id]:not(#categories) > richlistitem[selected] {
     margin-inline-end: 6px !important;
 }
 
-#BMB_bookmarksShowAll {
-    display: none !important;
-}
-
 #BMB_bookmarksPopup :is(.menu-accel, .menu-iconic-accel)[value] {
-    margin-inline: 10px 4px !important;
+    margin-inline-end: 4px !important;
     padding-block: 0 !important;
 }
 
@@ -480,8 +480,12 @@ richlistbox[id]:not(#categories) > richlistitem[selected] {
     list-style-image: url(chrome://userchrome/content/skin/sidebars-right.svg) !important;
 }
 
+#BMB_bookmarksPopup .subviewbutton > .menu-iconic-text,
+#PlacesToolbar menu > .menu-iconic-text,
+#PlacesToolbar menuitem > .menu-iconic-text,
+menuitem.subviewbutton-iconic > .toolbarbutton-text,
 #BMB_bookmarksPopup #BMB_viewBookmarksSidebar:not(.menuitem-iconic, .menu-iconic) .menu-text {
-    padding-inline-start: 2px !important;
+    padding-inline-start: 0 !important;
 }
 
 #BMB_viewBookmarksSidebar:not(.menuitem-iconic, .menu-iconic):before {
@@ -491,7 +495,7 @@ richlistbox[id]:not(#categories) > richlistitem[selected] {
     width: 16px !important;
     height: 16px !important;
     padding-inline: 0 !important;
-    margin-inline: 0 4px !important;
+    margin-inline: 0 6px !important;
     fill: currentColor !important;
     background-image: url(chrome://userchrome/content/skin/sidebars-right.svg) !important;
     transform: scaleX(-1);
@@ -506,8 +510,12 @@ richlistbox[id]:not(#categories) > richlistitem[selected] {
     list-style-image: url(chrome://userchrome/content/skin/bookmark.svg) !important;
 }
 
+#BMB_bookmarksShowAll {
+    display: none !important;
+}
+
 #BMB_bookmarksPopup #BMB_bookmarksShowAllTop .menu-text {
-    padding-inline-start: 2px !important;
+    padding-inline-start: 0 !important;
 }
 
 #BMB_bookmarksShowAllTop:before {
@@ -517,19 +525,19 @@ richlistbox[id]:not(#categories) > richlistitem[selected] {
     width: 16px !important;
     height: 16px !important;
     padding-inline: 0 !important;
-    margin-inline: 0 4px !important;
+    margin-inline: 0 6px !important;
     fill: currentColor !important;
     background-image: url(chrome://userchrome/content/skin/library.svg) !important;
     transform: scaleX(-1);
     -moz-context-properties: fill, fill-opacity, stroke !important;
 }
 
-menuitem#bookmarksShowAllTop .menu-text,
+menuitem#bookmarksShowAll .menu-text,
 menuitem#menu_bookmarkThisPage .menu-text {
     padding-inline-start: 0 !important;
 }
 
-menuitem#bookmarksShowAllTop:before {
+menuitem#bookmarksShowAll:before {
     content: "" !important;
     position: relative !important;
     display: -moz-inline-box !important;
@@ -568,7 +576,7 @@ menuitem#menu_bookmarkThisPage[data-l10n-id="menu-bookmark-edit"]:before {
     width: 16px !important;
     height: 16px !important;
     padding-inline: 0 !important;
-    margin-inline: 0 4px !important;
+    margin-inline: 0 6px !important;
     fill: currentColor !important;
     background-image: url("chrome://global/skin/icons/folder.svg") !important;
     -moz-context-properties: fill, fill-opacity, stroke !important;
@@ -586,7 +594,7 @@ menuitem#menu_bookmarkThisPage[data-l10n-id="menu-bookmark-edit"]:before {
     width: 16px !important;
     height: 16px !important;
     padding-inline: 0 !important;
-    margin-inline: 0 4px !important;
+    margin-inline: 0 6px !important;
     fill: currentColor !important;
     background-image: url("chrome://browser/skin/places/bookmarksToolbar.svg") !important;
     -moz-context-properties: fill, fill-opacity, stroke !important;
@@ -618,7 +626,7 @@ menupopup .openintabs-menuitem:not(.menuitem-iconic, .menu-iconic) .menu-text {
 }
 
 #BMB_bookmarksPopup .openintabs-menuitem:not(.menuitem-iconic, .menu-iconic):before {
-    margin-inline: 0 4px !important;
+    margin-inline: 0 6px !important;
 }
 
 #BMB_bookmarksPopup .openintabs-menuitem:not(.menuitem-iconic, .menu-iconic) .menu-text {

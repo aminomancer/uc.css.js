@@ -235,14 +235,6 @@ panel[type="arrow"][side="top"] {
     min-height: 30px !important;
 }
 
-.protections-popup-category::after {
-    content: url(chrome://userchrome/content/menu-arrow.svg) !important;
-    scale: none !important;
-    translate: none !important;
-    transform: translateX(2px) !important;
-    display: -moz-inline-box;
-}
-
 .protections-popup-category[disabled="true"] {
     background: none !important;
 }

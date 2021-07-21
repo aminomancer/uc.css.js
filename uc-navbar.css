@@ -270,6 +270,10 @@ toolbar .toolbarbutton-1:not([disabled])[open]:hover > .toolbarbutton-icon {
     background-color: var(--toolbarbutton-active-background) !important;
 }
 
+#PlacesToolbar toolbarbutton.bookmark-item {
+    padding-inline: var(--toolbarbutton-inner-padding) !important;
+}
+
 #PersonalToolbar
     .toolbarbutton-1:is(:focus-visible, [checked="true"]):not([disabled], [open], :hover, :active),
 toolbarbutton.bookmark-item:not(.subviewbutton):is(:focus-visible, [checked="true"]):not([disabled], [open], :hover, :active),
@@ -358,6 +362,10 @@ toolbarbutton.bookmark-item:not(.subviewbutton) {
     #PersonalToolbar toolbarbutton.bookmark-item:not(.subviewbutton, [id]) {
         margin-inline: 2px !important;
         padding: 0 !important;
+    }
+
+    #PlacesToolbar toolbarbutton.bookmark-item[id] {
+        padding-inline: var(--toolbarbutton-inner-padding) !important;
     }
 
     #PersonalToolbar toolbarbutton.bookmark-item:not(.subviewbutton, [id]) .toolbarbutton-icon {
