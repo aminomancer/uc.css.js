@@ -12,7 +12,7 @@ scrollbar {
     position: relative;
     background-color: transparent;
     background-image: none;
-    z-index: 20;
+    z-index: 1;
     padding: 0px;
 }
 
@@ -104,7 +104,7 @@ scrollbar gripper {
     position: relative;
     background-color: transparent;
     padding: 0px;
-    z-index: 20;
+    z-index: 1;
 }
 
 .hidevscroll-scrollbar[orient="vertical"] {
