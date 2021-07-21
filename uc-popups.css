@@ -974,9 +974,9 @@ panel[type="autocomplete-richlistbox"]
         border-radius: var(--toolbarbutton-border-radius) !important;
     }
 
-    window[dialogroot] input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):focus-visible:not(:active),
-    window[dialogroot] textarea:focus-visible:not(:active),
-    window[dialogroot] search-textbox:focus-visible:not(:active) {
+    window[dialogroot] input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):focus-visible,
+    window[dialogroot] textarea:focus-visible,
+    window[dialogroot] search-textbox:focus-visible {
         background-color: color-mix(
             in srgb,
             currentColor 3%,

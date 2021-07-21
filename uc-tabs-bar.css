@@ -245,14 +245,6 @@ this sheet controls their appearance as well. */
     border-left: none !important;
 }
 
-#tabbrowser-tabs[movingtab] > .tabbrowser-tab[beforeselected]:not([last-visible-tab])::after,
-.tabbrowser-tab:not([selected], [afterselected-visible], [afterhovered], [first-visible-tab], :hover)::before,
-#tabbrowser-tabs:not([overflow])
-    > .tabbrowser-tab[last-visible-tab]:not([selected], [beforehovered], :hover)::after {
-    content: unset !important;
-    display: unset !important;
-}
-
 /* toolbar buttons */
 #TabsToolbar .toolbarbutton-1 > :is(.toolbarbutton-icon, .toolbarbutton-badge-stack) {
     min-height: 16px !important;

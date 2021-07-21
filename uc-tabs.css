@@ -401,8 +401,7 @@ they must have a 1px tall stripe at the bottom, the color of the bottom line (sh
 
 /* default position is for tabs to be stacked on top of the tab to their left.
 so shadows are cast to the left but not to the right. */
-#tabbrowser-tabs:not([movingtab]) .tabbrowser-tab:not([justmoved]),
-#tabbrowser-tabs:not([movingtab]) .tabbrowser-tab:not([pinned], [justmoved])[multiselected="true"] {
+.tabbrowser-tab {
     position: relative;
 }
 
@@ -757,10 +756,6 @@ so in other words it won't show if audio is playing until you hover the general 
     z-index: 1 !important;
     visibility: visible !important;
     opacity: 0.6 !important;
-}
-
-#tabbrowser-tabs[movingtab] .tabbrowser-tab[selected]::before {
-    display: none !important;
 }
 
 #TabsToolbar .tabbrowser-tab {

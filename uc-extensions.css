@@ -245,7 +245,7 @@ more useful than userContent.css when dealing with very complex websites that ne
 /* hide simple translate menu item in sidebars (e.g. TST, sidebery) */
 @-moz-document regexp("chrome://browser/content/webext-panels.xhtml")
 {
-    #simple-translate_sienori-menuitem-_translatePageOnTab {
+    :is(menu, menuitem):is([label="To Google Translate"], [label^="Translate this page"], [label="Translate selected link"], [label="Translate selected text"], [label="Simple Translate"]) {
         display: none;
     }
 }
