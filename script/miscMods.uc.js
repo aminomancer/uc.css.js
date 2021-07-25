@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Misc. Mods
-// @version        1.5
+// @version        1.5.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Various tiny mods not worth making separate scripts for. Read the comments inside the script for details.
@@ -23,8 +23,8 @@
         // with browser.proton.places-tooltip.enabled, the bookmarks/history/tabs tooltip is improved and normally it gets anchored to the element that popped up the tooltip, i.e. the element you hovered. but for some reason menupopups are an exception. it does this on all relevant elements, including bookmarks in panels, just not on bookmarks menu popups. but I tested it and it works fine on menupopups so I'm removing the exception. there also isn't any anchoring inside sidebars, because the bookmarks/history items in the sidebar aren't actual DOM elements. there's just one node, the tree, and the individual items are drawn inside it. so they're kind of like virtual nodes. we can't anchor to them the normal way since they're not elements, but we can get their screen coordinates and constrain the tooltip popup within those coordinates. so this will implement the proton places tooltip behavior everywhere, rather than it being restricted to panels and the tab bar.
         "Anchor bookmarks menu tooltip to bookmark": true,
 
-        // by default, when you hit ctrl+tab it waits 200ms before opening the panel. I understand the purpose but it makes the browser feel less responsive and could even give the user the misconception that the browser is lagging due to performance issues. I'll cut it to 25%
-        "Reduce ctrl+tab delay": true,
+        // by default, when you hit ctrl+tab it waits 200ms before opening the panel. if you replace the 200 with another number, it will wait that long in milliseconds instead.
+        "Reduce ctrl+tab delay": 200,
     };
     class UCMiscMods {
         constructor() {
@@ -35,7 +35,7 @@
                 this.stopDownloadsPanelFocus();
             if (config["Move all selected tabs with hotkeys"]) this.moveTabKeysMoveSelectedTabs();
             if (config["Anchor bookmarks menu tooltip to bookmark"]) this.anchorBookmarksTooltip();
-            if (config["Reduce ctrl+tab delay"]) this.reduceCtrlTabDelay();
+            this.reduceCtrlTabDelay(config["Reduce ctrl+tab delay"]);
         }
         stopDownloadsPanelFocus() {
             eval(
@@ -121,7 +121,8 @@
                 return true;
             };
         }
-        reduceCtrlTabDelay() {
+        reduceCtrlTabDelay(delay) {
+            if (delay === 200) return;
             ctrlTab.open = function () {
                 if (this.isOpen) return;
                 this.canvasWidth = Math.ceil((screen.availWidth * 0.85) / this.maxTabPreviews);
@@ -132,7 +133,7 @@
                 this._timer = setTimeout(() => {
                     this._timer = null;
                     this._openPanel();
-                }, 50);
+                }, delay);
             };
         }
     }

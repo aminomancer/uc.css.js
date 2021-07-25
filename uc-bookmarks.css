@@ -436,6 +436,7 @@ richlistbox[id]:not(#categories) > richlistitem[selected] {
     }
 
     #BMB_bookmarksPopup menupopup {
+        margin-inline-start: var(--menupopup-child-margin-inline-start) !important;
         margin-block-start: var(--menupopup-child-margin-block-start) !important;
     }
 
@@ -480,6 +481,10 @@ richlistbox[id]:not(#categories) > richlistitem[selected] {
     list-style-image: url(chrome://userchrome/content/skin/sidebars-right.svg) !important;
 }
 
+#BMB_viewBookmarksSidebar[positionend="true"] {
+    list-style-image: url(chrome://userchrome/content/skin/sidebars-right.svg) !important;
+}
+
 #BMB_bookmarksPopup .subviewbutton > .menu-iconic-text,
 #PlacesToolbar menu > .menu-iconic-text,
 #PlacesToolbar menuitem > .menu-iconic-text,
@@ -497,9 +502,12 @@ menuitem.subviewbutton-iconic > .toolbarbutton-text,
     padding-inline: 0 !important;
     margin-inline: 0 6px !important;
     fill: currentColor !important;
-    background-image: url(chrome://userchrome/content/skin/sidebars-right.svg) !important;
-    transform: scaleX(-1);
+    background-image: url(chrome://userchrome/content/skin/sidebars.svg) !important;
     -moz-context-properties: fill, fill-opacity, stroke !important;
+}
+
+#BMB_viewBookmarksSidebar:not(.menuitem-iconic, .menu-iconic)[positionend="true"]:before {
+    background-image: url(chrome://userchrome/content/skin/sidebars-right.svg) !important;
 }
 
 #BMB_bookmarkThisPage[data-l10n-id="bookmarks-current-tab"] {
@@ -518,7 +526,8 @@ menuitem.subviewbutton-iconic > .toolbarbutton-text,
     padding-inline-start: 0 !important;
 }
 
-#BMB_bookmarksShowAllTop:before {
+#BMB_bookmarksShowAllTop:before,
+menuitem#bookmarksShowAll:before {
     content: "" !important;
     position: relative !important;
     display: -moz-inline-box !important;
@@ -538,17 +547,7 @@ menuitem#menu_bookmarkThisPage .menu-text {
 }
 
 menuitem#bookmarksShowAll:before {
-    content: "" !important;
-    position: relative !important;
-    display: -moz-inline-box !important;
-    width: 16px !important;
-    height: 16px !important;
-    padding-inline: 0 !important;
     margin-inline: 6px !important;
-    fill: currentColor !important;
-    background-image: url(chrome://userchrome/content/skin/library.svg) !important;
-    transform: scaleX(-1);
-    -moz-context-properties: fill, fill-opacity, stroke !important;
 }
 
 menuitem#menu_bookmarkThisPage:before {
@@ -561,7 +560,6 @@ menuitem#menu_bookmarkThisPage:before {
     margin-inline: 6px !important;
     fill: currentColor !important;
     background-image: url(chrome://userchrome/content/skin/bookmark-hollow.svg) !important;
-    transform: scaleX(-1);
     -moz-context-properties: fill, fill-opacity, stroke !important;
 }
 

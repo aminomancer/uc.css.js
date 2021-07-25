@@ -51,9 +51,7 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
 }
 
 /* toolbar button badges */
-:is(#nav-bar-customization-target, #widget-overflow)
-    :is(toolbarbutton, toolbaritem):not([attention])
-    .toolbarbutton-badge {
+.customization-target :is(toolbarbutton, toolbaritem):not([attention]) .toolbarbutton-badge {
     background-color: var(--badge-color-light) !important;
     color: var(--toolbar-color, currentColor) !important;
     box-shadow: 0 1px 1px -1px hsla(0, 0%, 100%, 0.3) inset,
@@ -69,9 +67,7 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
     margin: -6px -6px 0 -6px !important;
 }
 
-:is(#nav-bar-customization-target, #widget-overflow)
-    #downloads-button[attention]
-    .toolbarbutton-badge {
+.customization-target #downloads-button[attention] .toolbarbutton-badge {
     margin-right: -5.5px !important;
     margin-top: -5.5px !important;
     width: 10px !important;
@@ -83,17 +79,13 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
     background-repeat: no-repeat !important;
 }
 
-:is(#nav-bar-customization-target, #widget-overflow)
-    #downloads-button[attention="warning"]
-    .toolbarbutton-badge {
+.customization-target #downloads-button[attention="warning"] .toolbarbutton-badge {
     fill: hsl(44, 95%, 60%) !important;
     background-color: hsl(32, 52%, 35%) !important;
     border-radius: 50% !important;
 }
 
-:is(#nav-bar-customization-target, #widget-overflow)
-    #downloads-button[attention="severe"]
-    .toolbarbutton-badge {
+.customization-target #downloads-button[attention="severe"] .toolbarbutton-badge {
     fill: hsl(358, 86%, 63%) !important;
     background-color: hsl(354, 69%, 30%) !important;
     border-radius: 50% !important;
@@ -290,8 +282,39 @@ toolbar
     background: none !important;
 }
 
-toolbar .toolbarbutton-1:not([disabled])[checked]:hover > .toolbarbutton-icon {
+toolbar .toolbarbutton-1:not([disabled], [open])[checked] > :is(.toolbarbutton-icon, .toolbarbutton-badge-stack) {
+    background-color: var(--toolbarbutton-checked-background) !important;
+    transition: none !important;
+}
+
+toolbar .toolbarbutton-1:not([disabled], [open])[checked]:hover > .toolbarbutton-icon {
     background-color: var(--toolbarbutton-hover-background) !important;
+}
+
+toolbar .toolbarbutton-1:not([disabled], [open])[checked]:hover:active > .toolbarbutton-icon {
+    background-color: var(--toolbarbutton-active-background) !important;
+}
+
+.widget-overflow-list .toolbarbutton-1:not([disabled], [open])[checked] {
+    background-color: var(--button-bgcolor) !important;
+}
+
+.widget-overflow-list .toolbarbutton-1:not([disabled], [open])[checked]:is(:hover, :focus-visible) {
+    background-color: var(--button-hover-bgcolor) !important;
+}
+
+.widget-overflow-list .toolbarbutton-1:not([disabled], [open])[checked]:hover:active {
+    background-color: var(--button-active-bgcolor) !important;
+}
+
+.widget-overflow-list .toolbarbutton-1:not([disabled], [open])[checked]:after {
+    content: "";
+    display: -moz-inline-box;
+    background: url(chrome://userchrome/content/check.svg) no-repeat center/contain;
+    fill: currentColor;
+    width: 16px;
+    height: 16px;
+    margin-inline-start: 6px;
 }
 
 #PersonalToolbar {

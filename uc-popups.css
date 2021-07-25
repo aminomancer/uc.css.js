@@ -105,6 +105,7 @@ tabmodalprompt select,
 tabmodalprompt input[type="color"],
 tabmodalprompt menulist {
     min-height: 28px !important;
+    border-radius: var(--in-content-button-border-radius) !important;
 }
 
 tabmodalprompt input,
@@ -557,7 +558,7 @@ panel[type="autocomplete-richlistbox"]
         background-color: var(--arrowpanel-dimmed) !important;
     }
 
-    button.month-year::after {
+    button.month-year:after {
         position: absolute;
         content: "";
         width: 2.6rem;
@@ -568,7 +569,7 @@ panel[type="autocomplete-richlistbox"]
         fill: currentColor !important;
     }
 
-    button.month-year.active::after {
+    button.month-year.active:after {
         fill-opacity: 1 !important;
     }
 
@@ -780,6 +781,7 @@ panel[type="autocomplete-richlistbox"]
     input[type="color"],
     menulist {
         min-height: 28px !important;
+        border-radius: var(--in-content-button-border-radius) !important;
     }
 
     input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]),
@@ -944,6 +946,7 @@ panel[type="autocomplete-richlistbox"]
     menulist) {
         min-height: var(--menuitem-height) !important;
         line-height: var(--menuitem-height) !important;
+        border-radius: var(--in-content-button-border-radius) !important;
     }
 
     window[dialogroot] input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"]),

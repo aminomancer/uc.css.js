@@ -49,7 +49,7 @@ tooltip {
     --menupopup-margin: calc(0px - var(--menupopup-inner-box-margin));
     --menupopup-background: transparent;
     --menupopup-child-margin-block-start: calc(-4px - var(--menupopup-inner-box-margin));
-    --menupopup-child-margin-inline-start: var(--menupopup-margin);
+    --menupopup-child-margin-inline-start: calc(2px - var(--menupopup-inner-box-margin));
     --menupopup-padding: 0px;
     --menupopup-inner-padding-magnitude: 4px;
     --menupopup-inner-padding: var(--menupopup-inner-padding-magnitude) 0;

@@ -541,3 +541,44 @@
         margin-inline-start: calc(var(--inline-padding) * 2) !important;
     }
 }
+
+/* firefox screenshots addon overlay */
+@-moz-document url("moz-extension://bc8fcf05-0a6f-40d5-a068-b452be394b53/blank.html") {
+    .all-buttons-container {
+        background-color: var(--content-principal-box-background) !important;
+        height: 88px !important;
+    }
+
+    .all-buttons-container button {
+        color: var(--content-principal-page-color) !important;
+        background-color: transparent !important;
+        border-radius: var(--general-button-border-radius) !important;
+        padding: 54px 5px 5px !important;
+    }
+
+    .all-buttons-container button:hover {
+        background-color: var(--content-principal-button-background) !important;
+        border: 1px solid var(--content-principal-button-background) !important;
+    }
+
+    .hover-highlight {
+        background: rgba(255, 255, 255, 0.1) !important;;
+        z-index: 2147483646 !important;
+    }
+
+    .pixel-dimensions {
+        margin-block-start: -5px;
+        margin-inline-start: -5px;
+        z-index: 2147483647 !important;
+        color: #fff !important;
+        text-shadow: 0.5px 0.5px 0.5px black, 0 0 1px black, 0 0 1px black !important;
+    }
+
+    @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
+        .pixel-dimensions {
+            font-weight: var(--uc-font-weight-bold) !important;
+            font-family: -apple-system, BlinkMacSystemFont, SF Pro, "segoe ui", "helvetica neue", helvetica, ubuntu, roboto, noto, arial, sans-serif !important;
+            font-size: normal !important;
+        }
+    }
+}

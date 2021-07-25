@@ -146,7 +146,7 @@ panel[type="arrow"][side="top"] {
     );
 }
 
-.panel-footer > button:not([disabled]):is(:hover, :focus-visible):active {
+.panel-footer > button:not([disabled]):hover:active {
     background-color: var(
         --button-active-bgcolor,
         color-mix(in srgb, currentColor 30%, transparent)
@@ -170,9 +170,9 @@ panel[type="arrow"][side="top"] {
     margin-inline-start: 6px !important;
 }
 
-.protections-popup-category:focus-visible:not(:active),
-.protections-popup-footer-button:focus-visible:not(:active),
-#protections-popup-show-report-stack:focus-visible:not(:active) > .protections-popup-footer-button {
+.protections-popup-category:focus-visible,
+.protections-popup-footer-button:focus-visible,
+#protections-popup-show-report-stack:focus-visible > .protections-popup-footer-button {
     background-color: var(--button-hover-bgcolor) !important;
 }
 
@@ -528,6 +528,7 @@ popupnotification progress:not([value="0"])::-moz-progress-bar {
 
 popupnotification progress::-moz-progress-bar {
     background-color: var(--toolbarbutton-icon-fill-attention);
+    background-image: none;
 }
 
 popupnotification progress[paused]::-moz-progress-bar {
@@ -621,8 +622,8 @@ popupnotification progress[paused]::-moz-progress-bar {
     fill-opacity: 0.6;
 }
 
-.panel-header > .subviewbutton-back:hover,
-.panel-header > .subviewbutton-back:hover > .toolbarbutton-icon {
+.panel-header > .subviewbutton-back:is(:hover, :focus-visible),
+.panel-header > .subviewbutton-back:is(:hover, :focus-visible) > .toolbarbutton-icon {
     fill-opacity: 0.8;
 }
 
@@ -808,11 +809,11 @@ popupnotification progress[paused]::-moz-progress-bar {
     background: var(--protections-popup-switch-on-hover-background-custom) !important;
 }
 
-.protections-popup-tp-switch:not([enabled]):is(:hover, :focus-visible):active {
+.protections-popup-tp-switch:not([enabled]):hover:active {
     background: var(--protections-popup-switch-off-active-background-custom) !important;
 }
 
-.protections-popup-tp-switch[enabled]:is(:hover, :focus-visible):active {
+.protections-popup-tp-switch[enabled]:hover:active {
     background: var(--protections-popup-switch-on-active-background-custom) !important;
 }
 
@@ -892,11 +893,11 @@ popupnotification progress[paused]::-moz-progress-bar {
 }
 
 .identity-popup-expander:is(:hover, :focus-visible) .button-box {
-    background-color: var(--arrowpanel-dimmed);
+    background-color: var(--panelview-toolbarbutton-hover-bgcolor);
 }
 
-.identity-popup-expander:is(:hover, :focus-visible):active .button-box {
-    background-color: var(--arrowpanel-dimmed-further);
+.identity-popup-expander:hover:active .button-box {
+    background-color: var(--panelview-toolbarbutton-active-bgcolor);
 }
 
 #identity-popup-multiView .panel-button {
@@ -914,7 +915,7 @@ popupnotification progress[paused]::-moz-progress-bar {
     background-color: var(--arrowpanel-dimmed-even-further) !important;
 }
 
-#identity-popup-multiView .panel-button:not([disabled]):hover {
+#identity-popup-multiView .panel-button:not([disabled]):is(:hover, :focus-visible) {
     background-color: var(--arrowpanel-dimmed-further) !important;
 }
 
@@ -1108,10 +1109,7 @@ panel .header,
     background: var(--arrowpanel-dimmed) !important;
 }
 
-#downloadsListBox
-    > .download-state
-    > .downloadButton:is(:hover, :focus-visible):active
-    .button-box {
+#downloadsListBox > .download-state > .downloadButton:hover:active .button-box {
     background: var(--arrowpanel-dimmed-further) !important;
 }
 
@@ -1160,6 +1158,7 @@ panel .header,
 
 .downloadProgress::-moz-progress-bar {
     background-color: var(--toolbarbutton-icon-fill-attention) !important;
+    background-image: none !important;
 }
 
 .downloadProgress[paused]::-moz-progress-bar {

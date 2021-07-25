@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Bookmarks Menu & Button Shortcuts
-// @version        1.2
+// @version        1.2.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Adds some shortcuts for bookmarking pages. First, middle-clicking the bookmarks or library toolbar button will bookmark the current tab, or un-bookmark it if it's already bookmarked. Second, a menu item is added to the bookmarks toolbar button's popup, which bookmarks the current tab, or, if the page is already bookmarked, opens the bookmark editor popup. These are added primarily so that bookmarks can be added or removed with a single click, and can still be quickly added even if the bookmark page action is hidden for whatever reason. Third, another menu item is added to replicate the "Search bookmarks" button in the app menu's bookmarks panel. Clicking it will open the urlbar in bookmarks search mode.
@@ -26,8 +26,9 @@ const ucBookmarksShortcuts = {
     },
 
     addMenuitems(popup) {
-        this.bookmarkTab = popup.ownerDocument.createXULElement("menuitem");
-        this.bookmarkTab = this.create(popup.ownerDocument, "menuitem", {
+        let doc = popup.ownerDocument;
+        this.bookmarkTab = doc.createXULElement("menuitem");
+        this.bookmarkTab = this.create(doc, "menuitem", {
             id: "BMB_bookmarkThisPage",
             label: "",
             class: "menuitem-iconic subviewbutton",
@@ -44,7 +45,7 @@ const ucBookmarksShortcuts = {
         );
 
         this.searchBookmarks = popup.querySelector("#BMB_viewBookmarksSidebar").after(
-            this.create(popup.ownerDocument, "menuitem", {
+            this.create(doc, "menuitem", {
                 id: "BMB_searchBookmarks",
                 class: "menuitem-iconic subviewbutton",
                 "data-l10n-id": "bookmarks-search",
@@ -101,6 +102,16 @@ const ucBookmarksShortcuts = {
         PlacesUtils.observers.addListener(
             ["bookmark-added", "bookmark-removed"],
             this.handlePlacesEvents.bind(this)
+        );
+
+        // set the "positionend" attribute on the view bookmarks sidebar menuitem.
+        // this way we can swap between the left/right sidebar icons based on which side the sidebar is on,
+        // like the sidebar toolbar widget does.
+        document.getElementById("BMB_viewBookmarksSidebar").appendChild(
+            this.create(document, "observes", {
+                "element": "sidebar-box",
+                "attribute": "positionend",
+            })
         );
     },
 

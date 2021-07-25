@@ -102,21 +102,28 @@ this sheet controls their appearance as well. */
 }
 
 /* menubar buttons */
+#main-menubar {
+    -moz-box-flex: 1 !important;
+}
+
 #toolbar-menubar #menubar-items {
     -moz-box-pack: center !important;
 }
 
+#main-menubar > menu > menupopup {
+    margin-block-start: -5px !important;
+}
+
 #toolbar-menubar #main-menubar > menu {
     appearance: none !important;
-    min-height: 2em !important;
     background-color: transparent !important;
-    padding-inline: 1px;
+    padding-inline: 2px;
 }
 
 #toolbar-menubar #main-menubar > menu > label {
     -moz-box-flex: 1000 !important;
     margin: 0 !important;
-    padding: 3px 6px 4px !important;
+    padding: 4px 6px 5px 6px !important;
     border-radius: var(--toolbarbutton-border-radius) !important;
 }
 

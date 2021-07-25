@@ -19,7 +19,9 @@ we also need to adjust window controls, the main menu bar, and the bookmarks too
 
 :root[inFullscreen] #navigator-toolbox {
     max-height: 0 !important;
-    margin-top: calc(0.5px - var(--urlbar-container-height) - var(--tab-min-height)) !important;
+    margin-top: calc(
+        0.5px - var(--urlbar-container-height, 40px) - var(--tab-min-height, 36px)
+    ) !important;
     transition: all 0.25s ease-in-out 0s !important;
     transition-delay: 0s !important;
     opacity: 0 !important;
@@ -59,7 +61,9 @@ requires fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-statu
 } */
 
 :root[inFullscreen] #navigator-toolbox {
-    margin-bottom: calc(0px - var(--urlbar-container-height) - var(--tab-min-height)) !important;
+    margin-bottom: calc(
+        0px - var(--urlbar-container-height, 40px) - var(--tab-min-height, 36px)
+    ) !important;
 }
 
 :root[inFullscreen]:not([customizing]) #sidebar-box {
@@ -77,9 +81,9 @@ requires fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-statu
 }
 
 :root[inFullscreen]:not([customizing]) #sidebar-box {
-    top: calc(var(--urlbar-container-height) + var(--tab-min-height)) !important;
-    padding-top: calc(var(--urlbar-container-height) + var(--tab-min-height)) !important;
-    margin-top: calc(0px - var(--urlbar-container-height) - var(--tab-min-height)) !important;
+    top: calc(var(--urlbar-container-height, 40px) + var(--tab-min-height, 36px)) !important;
+    padding-top: calc(var(--urlbar-container-height, 40px) + var(--tab-min-height, 36px)) !important;
+    margin-top: calc(0px - var(--urlbar-container-height, 40px) - var(--tab-min-height, 36px)) !important;
     transition: all 0.25s cubic-bezier(.26,1,.8,1) 0s !important;
     transform-style: flat !important;
     backface-visibility: hidden !important;
@@ -88,8 +92,12 @@ requires fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-statu
 :root[inFullscreen]:not([customizing]) #browser findbar {
     top: 8px !important;
     transition: all 0.25s ease-in-out 0s !important;
-    padding-top: calc(var(--urlbar-container-height) + var(--tab-min-height)) !important;
-    margin-top: calc(0px - var(--urlbar-container-height) - var(--tab-min-height)) !important;
+    padding-top: calc(
+        var(--urlbar-container-height, 40px) + var(--tab-min-height, 36px)
+    ) !important;
+    margin-top: calc(
+        0px - var(--urlbar-container-height, 40px) - var(--tab-min-height, 36px)
+    ) !important;
 }
 
 :root[inFullscreen]:not([customizing])
@@ -114,7 +122,7 @@ requires fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-statu
 }
 
 :root[customizing][inFullscreen] #customization-container > #customization-content-container {
-    margin-top: calc(var(--urlbar-container-height) + var(--tab-min-height)) !important;
+    margin-top: calc(var(--urlbar-container-height, 40px) + var(--tab-min-height, 36px)) !important;
     z-index: 2147483647 !important;
 }
 

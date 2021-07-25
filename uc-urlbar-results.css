@@ -18,6 +18,10 @@
     display: none;
 }
 
+.urlbarView-tags:empty {
+    display: none !important;
+}
+
 .urlbarView-row[selected] > .urlbarView-row-inner,
 .urlbarView-row:is([dynamicType="calculator"], [has-help="true"]) > .urlbarView-row-inner[selected],
 .urlbarView-help[selected] {
@@ -169,15 +173,6 @@
     color: inherit;
 }
 
-.urlbarView-row[type="dynamic"][dynamicType="unitConversion"]
-    .urlbarView-dynamic-unitConversion-output
-    + .urlbarView-dynamic-unitConversion-action,
-.urlbarView-row[type="dynamic"][dynamicType="calculator"]
-    .urlbarView-dynamic-calculator-input
-    + .urlbarView-dynamic-calculator-action {
-    margin-inline-start: 6px;
-}
-
 .urlbarView[actionoverride] .urlbarView-row[type="switchtab"] .urlbarView-type-icon {
     background: url(chrome://userchrome/content/skin/forward.svg) no-repeat !important;
     background-size: 90% !important;
@@ -228,6 +223,19 @@
     align-items: end;
     justify-content: start;
     column-gap: calc(var(--urlbar-icon-padding) + 2px);
+}
+
+.urlbarView-action,
+.urlbarView-url,
+.urlbarView-tags,
+.urlbarView-dynamic-calculator-action,
+.urlbarView-dynamic-unitConversion-action {
+    margin-inline: 8px 0 !important;
+}
+
+.urlbarView-action {
+    padding: 0 !important;
+    margin-inline-end: 6px !important;
 }
 
 :root[lwt-toolbar-field-brighttext]
@@ -350,16 +358,16 @@
 }
 
 .urlbarView-title-separator,
-.urlbarView-dynamic-calculator-action::before,
-.urlbarView-dynamic-unitConversion-action::before {
+.urlbarView-dynamic-calculator-action:before,
+.urlbarView-dynamic-unitConversion-action:before {
     -moz-box-align: center;
     display: -moz-box;
     display: none !important;
 }
 
-.urlbarView-title-separator::before,
-.urlbarView-dynamic-calculator-action::before,
-.urlbarView-dynamic-unitConversion-action::before {
+.urlbarView-title-separator:before,
+.urlbarView-dynamic-calculator-action:before,
+.urlbarView-dynamic-unitConversion-action:before {
     content: "" !important;
     width: 15px;
     height: 2px;
@@ -384,9 +392,9 @@
     font-weight: inherit !important;
 }
 
-.urlbarView-row[selected] .urlbarView-title-separator::before,
-.urlbarView-row-inner[selected] .urlbarView-dynamic-calculator-action::before,
-.urlbarView-dynamic-unitConversion-action::before {
+.urlbarView-row[selected] .urlbarView-title-separator:before,
+.urlbarView-row-inner[selected] .urlbarView-dynamic-calculator-action:before,
+.urlbarView-dynamic-unitConversion-action:before {
     color: hsla(0, 0%, 100%, 0.6);
 }
 
@@ -552,11 +560,6 @@
     fill-opacity: 1 !important;
 }
 
-.urlbarView-action {
-    padding: 0 !important;
-    margin-inline: 0 6px !important;
-}
-
 .urlbarView-row[type="tabtosearch"]:not([selected], [show-action-text], :hover)
     > .urlbarView-row-inner
     > .urlbarView-no-wrap
@@ -691,7 +694,8 @@
 }
 
 .urlbarView-row-inner {
-    padding-block: 7px !important;
+    padding-block: 0 !important;
+    min-height: 34px !important;
     border-radius: var(--arrowpanel-menuitem-border-radius) !important;
     align-items: center !important;
     fill-opacity: 0.6;

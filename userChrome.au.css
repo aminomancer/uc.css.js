@@ -121,7 +121,6 @@ panelview
 .toolbaritem-combined-buttons:is(:not([cui-areatype="toolbar"]), [overflowedItem="true"])
     > toolbarbutton:not([disabled], [open]):focus-visible {
     background-color: var(--panelview-toolbarbutton-hover-bgcolor);
-    color: var(--panelview-toolbarbutton-hover-color);
 }
 
 panelview
@@ -130,7 +129,6 @@ panelview
 .toolbaritem-combined-buttons:is(:not([cui-areatype="toolbar"]), [overflowedItem="true"])
     > toolbarbutton:not([disabled], [open]):focus-visible:active {
     background-color: var(--panelview-toolbarbutton-active-bgcolor);
-    color: var(--panelview-toolbarbutton-active-color);
 }
 
 .panel-footer > button:not([disabled], :active):is(:hover, :focus-visible) {
