@@ -1,4 +1,4 @@
-// @version        1.1
+// @version        1.2
 
 // by adding a line to chrome.manifest this can be used to completely override the tab element template, markup and class methods:
 // override chrome://browser/content/tabbrowser-tab.js ../resources/script-override/tabMods.uc.js
@@ -278,6 +278,24 @@
 
     updateLastAccessed(aDate) {
       this._lastAccessed = this.selected ? Infinity : aDate || Date.now();
+    }
+
+    updateLastUnloadedByTabUnloader() {
+      this._lastUnloaded = Date.now();
+      Services.telemetry.scalarAdd("browser.engagement.tab_unload_count", 1);
+    }
+
+    recordTimeFromUnloadToReload() {
+      if (!this._lastUnloaded) {
+        return;
+      }
+
+      const diff_in_msec = Date.now() - this._lastUnloaded;
+      Services.telemetry
+        .getHistogramById("TAB_UNLOAD_TO_RELOAD")
+        .add(diff_in_msec / 1000);
+      Services.telemetry.scalarAdd("browser.engagement.tab_reload_count", 1);
+      delete this._lastUnloaded;
     }
 
     on_mouseover(event) {
