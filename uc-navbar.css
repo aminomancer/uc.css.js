@@ -91,6 +91,22 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
     border-radius: 50% !important;
 }
 
+.customization-target #fxa-toolbar-menu-button[badge-status="login_failed"] .toolbarbutton-badge {
+    background: url(chrome://userchrome/content/skin/controlcenter/warning.svg) no-repeat
+        center/contain !important;
+    stroke: hsl(32, 52%, 35%) !important;
+    fill: hsl(44, 95%, 60%) !important;
+    -moz-context-properties: fill, stroke !important;
+    margin: -7px 0 0 !important;
+    margin-inline-end: -6px !important;
+    filter: none !important;
+}
+
+:root:not([customizing]) .customization-target #fxa-toolbar-menu-button[badge-status="login_failed"] .toolbarbutton-badge:-moz-window-inactive {
+    fill: hsl(227, 19%, 48%) !important;
+    stroke: transparent !important;
+}
+
 toolbar .toolbaritem-combined-buttons.chromeclass-toolbar-additional {
     margin-inline: 0 !important;
 }
