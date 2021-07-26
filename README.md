@@ -73,6 +73,7 @@ For best results, set density mode to `Normal` and theme to `Dark` in the custom
 | userChrome.css.menupopup-shadows | Boolean | true | Add a shadow behind context menus and panels |
 | userChrome.css.remove-menu-borders | Boolean | false | If true, remove the thin border on context menus, panels, etc. |
 | userChrome.css.remove-tooltip-borders | Boolean | false | If true, remove the thin border on tooltips. If false, use [tooltipShadowSupport.uc.js](#tooltip-shadow-support) |
+| userChrome.css.titlebar-buttons-on-left | Boolean | false | If true, move the titlebar buttons (close/min/max) to the left side of the window |
 | userChrome.css.ctrl-tab-backdrop-overlay | Boolean | true | If true, dim the whole screen behind the Ctrl+tab panel, like Windows 10's Alt+tab overlay |
 | userChrome.tabs.all-tabs-menu.reverse-order | Boolean | true | Display all tabs menu in reverse order (newer tabs on top, like history) |
 | userChrome.tabs.new-loading-spinner-animation | Boolean | true | Replace the tab loading throbber with a spinning animation |

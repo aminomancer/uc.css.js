@@ -612,3 +612,153 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
     opacity: 0.7 !important;
     margin-inline-start: -2px !important;
 }
+
+/* move titlebar buttons to the left on macOS and linux */
+:root:is([operatingsystem="macosx"], [operatingsystem="linux"]) .titlebar-buttonbox-container,
+:root:is([operatingsystem="macosx"], [operatingsystem="linux"]) #window-controls,
+:root:is([operatingsystem="macosx"], [operatingsystem="linux"]) #toolbar-menubar > .titlebar-buttonbox-container {
+    -moz-box-ordinal-group: 0 !important;
+}
+
+:root:is([operatingsystem="macosx"], [operatingsystem="linux"]) #toolbar-menubar > spacer,
+:root:is([operatingsystem="macosx"], [operatingsystem="linux"]) .titlebar-spacer[type="pre-tabs"] {
+    -moz-box-ordinal-group: 1 !important;
+}
+
+:root:is([operatingsystem="macosx"], [operatingsystem="linux"]) #toolbar-menubar > * {
+    -moz-box-ordinal-group: 2 !important;
+}
+
+:root:is([operatingsystem="macosx"], [operatingsystem="linux"]) #toolbar-menubar {
+    -moz-box-ordinal-group: 0 !important;
+}
+
+:root:is([operatingsystem="macosx"], [operatingsystem="linux"]) #TabsToolbar,
+:root:is([operatingsystem="macosx"], [operatingsystem="linux"]) #toolbar-menubar[inactive="true"] ~ #TabsToolbar {
+	padding-inline: 4px 3px !important;
+}
+
+:root:is([operatingsystem="macosx"], [operatingsystem="linux"]) #toolbar-menubar:not([inactive="true"]) {
+	padding-inline: 4px !important;
+}
+
+:root:is([operatingsystem="macosx"], [operatingsystem="linux"]) #toolbar-menubar > spacer,
+:root:is([operatingsystem="macosx"], [operatingsystem="linux"]) .titlebar-spacer[type="pre-tabs"] {
+	width: 8px !important;
+	display: -moz-box !important;
+}
+
+:root:is([operatingsystem="macosx"], [operatingsystem="linux"]) .titlebar-spacer[type="post-tabs"] {
+    display: none !important;
+}
+
+:root:is([operatingsystem="macosx"], [operatingsystem="linux"]) #toolbar-menubar:not([inactive="true"]) > spacer {
+	width: 8px !important;
+}
+
+:root:is([operatingsystem="macosx"], [operatingsystem="linux"]) #toolbar-menubar:not([inactive="true"]) + #TabsToolbar .titlebar-spacer[type="pre-tabs"] {
+    display: none !important;
+}
+
+:root:is([operatingsystem="macosx"], [operatingsystem="linux"])[inFullscreen] #toolbar-menubar:not([inactive]) ~ #TabsToolbar #window-controls {
+	left: 4px !important;
+    right: auto !important;
+}
+
+:root:is([operatingsystem="macosx"], [operatingsystem="linux"])[inFullscreen] #toolbar-menubar:not([inactive]) {
+	margin-left: 87.9px !important;
+    margin-right: 0 !important;
+}
+
+:root:is([operatingsystem="macosx"], [operatingsystem="linux"]) {
+    --titlebar-gradient: radial-gradient(
+        circle at 0% 0%,
+        hsl(231, 48%, 12%),
+        var(--uc-accent-color) 200px
+    );
+    --titlebar-background: var(--lwt-accent-color) var(--titlebar-gradient);
+}
+
+:root:is([operatingsystem="macosx"], [operatingsystem="linux"]):not([inFullscreen]) #toolbar-menubar[inactive="true"] ~ #TabsToolbar {
+	background: var(--titlebar-background) !important;
+}
+
+:root:is([operatingsystem="macosx"], [operatingsystem="linux"]):not([inFullscreen]) #toolbar-menubar:not([inactive="true"]) {
+	background: var(--titlebar-background);
+}
+
+/* move titlebar buttons to the left if user sets the preference for it */
+@supports -moz-bool-pref("userChrome.css.titlebar-buttons-on-left") {
+    .titlebar-buttonbox-container,
+    #window-controls,
+    #toolbar-menubar > .titlebar-buttonbox-container {
+        -moz-box-ordinal-group: 0 !important;
+    }
+
+    #toolbar-menubar > spacer,
+    .titlebar-spacer[type="pre-tabs"] {
+        -moz-box-ordinal-group: 1 !important;
+    }
+
+    #toolbar-menubar > * {
+        -moz-box-ordinal-group: 2 !important;
+    }
+
+    #toolbar-menubar {
+        -moz-box-ordinal-group: 0 !important;
+    }
+
+    #TabsToolbar,
+    #toolbar-menubar[inactive="true"] ~ #TabsToolbar {
+        padding-inline: 4px 3px !important;
+    }
+
+    #toolbar-menubar:not([inactive="true"]) {
+        padding-inline: 4px !important;
+    }
+
+    #toolbar-menubar > spacer,
+    .titlebar-spacer[type="pre-tabs"] {
+        width: 8px !important;
+        display: -moz-box !important;
+    }
+
+    .titlebar-spacer[type="post-tabs"] {
+        display: none !important;
+    }
+
+    #toolbar-menubar:not([inactive="true"]) > spacer {
+        width: 8px !important;
+    }
+
+    #toolbar-menubar:not([inactive="true"]) + #TabsToolbar .titlebar-spacer[type="pre-tabs"] {
+        display: none !important;
+    }
+
+    :root[inFullscreen] #toolbar-menubar:not([inactive]) ~ #TabsToolbar #window-controls {
+        left: 4px !important;
+        right: auto !important;
+    }
+
+    :root[inFullscreen] #toolbar-menubar:not([inactive]) {
+        margin-left: 87.9px !important;
+        margin-right: 0 !important;
+    }
+
+    :root {
+        --titlebar-gradient: radial-gradient(
+            circle at 0% 0%,
+            hsl(231, 48%, 12%),
+            var(--uc-accent-color) 200px
+        );
+        --titlebar-background: var(--lwt-accent-color) var(--titlebar-gradient);
+    }
+
+    :root:not([inFullscreen]) #toolbar-menubar[inactive="true"] ~ #TabsToolbar {
+        background: var(--titlebar-background) !important;
+    }
+
+    :root:not([inFullscreen]) #toolbar-menubar:not([inactive="true"]) {
+        background: var(--titlebar-background);
+    }
+}
