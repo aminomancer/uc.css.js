@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           All Tabs Menu Expansion Pack
-// @version        1.7
+// @version        1.7.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Next to the "new tab" button in Firefox there's a V-shaped button that opens a big scrolling menu containing all the tabs. This script adds several new features to the "all tabs menu" to help it catch up to the functionality of the regular tabs bar.
@@ -579,6 +579,7 @@
             if (!dt.types.includes("all-tabs-item") || !row || row.tab.multiselected) return;
             let draggedTab = dt.mozGetDataAt("all-tabs-item", 0);
             if (row.tab === draggedTab) return;
+            if (row.tab.pinned !== draggedTab.pinned) return;
             // whether a tab will be placed before or after the drop target depends on 1) whether the drop target is above or below the dragged tab, and 2) whether the order of the tab list is reversed.
             function getPosition() {
                 return prefSvc.getBoolPref(reversePref)
@@ -624,12 +625,13 @@
             if (draggedTab) {
                 let newIndex = row.tab._tPos;
                 const dir = newIndex < movingTabs[0]._tPos;
-                movingTabs.forEach((tab) =>
+                movingTabs.forEach((tab) => {
+                    if (tab.pinned !== row.tab.pinned) return;
                     this.gBrowser.moveTabTo(
                         dt.dropEffect == "copy" ? this.gBrowser.duplicateTab(tab) : tab,
                         dir ? newIndex++ : newIndex
-                    )
-                );
+                    );
+                });
             }
             row.removeAttribute("dragpos");
             e.stopPropagation();

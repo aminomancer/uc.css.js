@@ -491,18 +491,27 @@ domain("wikimedia.org") {
         color: #fff !important;
         font-size: 1rem !important;
         margin-left: 5px !important;
-        padding-bottom: 0 !important;
-        background-image: linear-gradient(
+        padding-bottom: 1px !important;
+        /* background-image: linear-gradient(
             to right,
-            transparent 0,
-            white 20%,
+            hsla(0, 0%, 100%, 0.05) 0,
+            hsla(0, 0%, 100%, 0.2) 10%,
             transparent 100%
         ) !important;
-        background-size: 100% 0.85px !important;
+        background-size: 100% 0.5px !important; */
+        background: none !important;
+        border-bottom: 1px solid transparent !important;
+        border-image: linear-gradient(
+            to right,
+            hsla(0, 0%, 100%, 0.05) 0,
+            hsla(0, 0%, 100%, 0.2) 10%,
+            transparent 100%
+        ) !important;
+        border-image-slice: 1 !important;
     }
 
     #mw-panel > .portal .vector-menu-content-list {
-        padding-top: 3px !important;
+        padding-top: 2px !important;
     }
 
     #mw-panel .portal-first h3 {
@@ -850,9 +859,9 @@ domain("wikimedia.org") {
         letter-spacing: -0.1px !important;
     }
 
-    #bodyContent p,
-    #bodyContent li,
-    #bodyContent div.hatnote {
+    #mw-content-text p,
+    #mw-content-text li,
+    #mw-content-text div.hatnote {
         font-size: 16px !important;
         line-height: 26px !important;
         font-family: "Source Sans Pro" !important;
@@ -1102,6 +1111,17 @@ domain("wikimedia.org") {
         margin: 0 !important;
     }
 
+    #bodyContent #toc li a {
+        display: flow-root !important;
+        text-shadow: 0 1px 3px hsla(0, 0%, 0%, 0.2) !important;
+        border-radius: 3px !important;
+        text-decoration: none !important;
+    }
+
+    #bodyContent #toc li a:hover {
+        background: hsl(0, 0%, 100%, 0.05) !important;
+    }
+
     #bodyContent #toc > ul > li:first-child {
         border-top: none !important;
     }
@@ -1113,9 +1133,15 @@ domain("wikimedia.org") {
 
     #bodyContent #toc ul li a {
         font-size: 18px !important;
-        line-height: 21px !important;
+        line-height: normal !important;
         color: hsl(30, 4.5%, 91.4%) !important;
-        padding: 3px 0 4px !important;
+        padding: 4px 6px 4px 6px !important;
+        position: relative;
+    }
+
+    #bodyContent #toc .toclevel-1 ul {
+        padding-top: 0 !important;
+        padding-right: 0 !important;
     }
 
     #bodyContent #toc ul ul li a {
@@ -1129,27 +1155,36 @@ domain("wikimedia.org") {
         display: none !important;
     }
 
+    #bodyContent #toc #toctitle {
+        display: none !important;
+    }
+
     #bodyContent #toc ul li a .tocnumber {
-        font-size: 15px !important;
+        font-size: 0.8em !important;
         color: hsl(0, 0%, 93.3%) !important;
         margin-right: 0 !important;
-        display: none !important;
+        padding-inline-end: 0.35em !important;
+        border-right: 1px solid hsla(0, 0%, 100%, 0.5);
+        opacity: 0.5;
     }
 
-    #bodyContent #toc ul li a .tocnumber:after {
-        content: "." !important;
+    #bodyContent #toc ul li a {
+        gap: 0.35em;
+        display: flex !important;
+        flex-flow: row nowrap;
+        align-items: center !important;
     }
 
-    #bodyContent #toc ul ul li a .tocnumber {
-        display: none !important;
-    }
+    /*     #bodyContent #toc ul li a .tocnumber:after {
+        content: "\00a0)" !important;
+    } */
 
-    #bodyContent #toc ul > li {
-        padding: 0 2px 0 0 !important;
+    #bodyContent #toc li {
+        padding: 0 !important;
     }
 
     #bodyContent #toc > ul > li {
-        padding: 3px 3px 3px 13px !important;
+        padding-inline: 3px !important;
     }
 
     #bodyContent #toc li a[href="#See_also"],
@@ -1173,31 +1208,8 @@ domain("wikimedia.org") {
         display: none !important;
     }
 
-    #bodyContent #toc li a {
-        display: block !important;
-        text-shadow: 0 1px 3px hsla(0, 0%, 0%, 0.2) !important;
-    }
-
-    #bodyContent #toc li a:hover {
-        text-decoration: none !important;
-        color: #fff !important;
-    }
-
-    #bodyContent #toc ul li:hover {
-        background: hsla(0, 0%, 100%, 0) !important;
-        border-radius: 3px !important;
-    }
-
-    #bodyContent #toc #toctitle {
-        display: none !important;
-    }
-
     #bodyContent #toc > ul > li {
         width: 92.5% !important;
-    }
-
-    #bodyContent #toc > ul > li > ul li {
-        width: -moz-fit-content !important;
     }
 
     #bodyContent #toc > ul > li > ul > li ul {
@@ -1530,6 +1542,24 @@ domain("wikimedia.org") {
         color: hsl(211.6, 63.6%, 72%) !important;
     }
 
+    .oo-ui-messageDialog-title {
+        color: white !important;
+    }
+
+    .oo-ui-messageDialog-message {
+        font-size: 1.1em;
+        color: hsl(0, 0%, 60%) !important;
+        text-align: left;
+    }
+
+    .oo-ui-messageDialog-actions-horizontal .oo-ui-actionWidget {
+        border-color: hsl(240, 1.4%, 29%) !important;
+    }
+
+    .oo-ui-messageDialog-content > .oo-ui-window-foot {
+        outline-color: hsl(240, 1.4%, 29%) !important;
+    }
+
     .oo-ui-checkboxInputWidget.oo-ui-widget-enabled [type="checkbox"] + span {
         background-color: hsl(240, 1.4%, 30%) !important;
         border: none !important;
@@ -1589,11 +1619,6 @@ domain("wikimedia.org") {
         outline: none !important;
     }
 
-    .oo-ui-processDialog-actions-safe .oo-ui-iconElement-icon {
-        filter: invert(1) !important;
-        opacity: 0.75 !important;
-    }
-
     .oo-ui-processDialog-actions-safe .oo-ui-buttonElement-button {
         background-color: transparent !important;
         border: none !important;
@@ -1608,9 +1633,10 @@ domain("wikimedia.org") {
     }
 
     .oo-ui-windowManager-modal.oo-ui-windowManager-floating > .oo-ui-dialog > .oo-ui-window-frame {
-        background-color: hsl(0, 0%, 1.6%) !important;
+        background-color: hsl(0, 0%, 3.6%) !important;
         border: none !important;
         border-radius: 4px !important;
+        overflow: clip;
         color: hsla(0, 0%, 100%, 0.8) !important;
     }
 
@@ -2598,12 +2624,12 @@ domain("wikimedia.org") {
 
     .oo-ui-menuOptionWidget.oo-ui-optionWidget-selected,
     .oo-ui-menuOptionWidget.oo-ui-optionWidget-selected.oo-ui-optionWidget-highlighted {
-        background-color: hsl(215, 6%, 8%) !important;
+        background-color: hsl(0, 0%, 8%) !important;
         color: hsl(0, 0%, 90%) !important;
     }
 
     .oo-ui-menuOptionWidget.oo-ui-optionWidget-highlighted {
-        background-color: hsl(215, 6%, 6%) !important;
+        background-color: hsl(0, 0%, 6%) !important;
         color: hsl(0, 0%, 90%) !important;
     }
 
@@ -2865,7 +2891,7 @@ domain("wikimedia.org") {
 
     .oo-ui-textInputWidget .oo-ui-inputWidget-input {
         appearance: none !important;
-        background-color: hsl(215, 6%, 6%) !important;
+        background-color: hsl(0, 0%, 6%) !important;
         color: hsl(0, 0%, 60%) !important;
         border: none !important;
         box-shadow: none !important;
@@ -2874,7 +2900,7 @@ domain("wikimedia.org") {
     .mw-mmv-share-pane
         .oo-ui-buttonElement-framed.oo-ui-widget-enabled
         > .oo-ui-buttonElement-button {
-        background-color: hsl(215, 6%, 6%) !important;
+        background-color: hsl(0, 0%, 6%) !important;
         color: hsl(0, 0%, 60%) !important;
         border: none !important;
         cursor: default !important;
@@ -2883,7 +2909,7 @@ domain("wikimedia.org") {
     .mw-mmv-share-pane
         .oo-ui-buttonElement-framed.oo-ui-widget-enabled
         > .oo-ui-buttonElement-button:hover {
-        background-color: hsl(215, 6%, 6%) !important;
+        background-color: hsl(0, 0%, 6%) !important;
         color: hsl(0, 0%, 60%) !important;
         border: none !important;
     }
@@ -3036,7 +3062,7 @@ domain("wikimedia.org") {
     }
 
     .mw-mmv-reuse-dialog .oo-ui-dropdownWidget.oo-ui-widget-enabled .oo-ui-dropdownWidget-handle {
-        background-color: hsl(215, 6%, 8%) !important;
+        background-color: hsl(0, 0%, 8%) !important;
         color: hsl(0, 0%, 90%) !important;
         border: none !important;
         box-shadow: none !important;

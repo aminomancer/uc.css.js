@@ -1323,6 +1323,10 @@ toolbar[brighttext] #panic-button[open] {
     fill: #ef4056;
 }
 
+.subviewbutton-back {
+    margin: 0 0 0 4px;
+}
+
 .panel-header > .subviewbutton-back {
     list-style-image: url(chrome://userchrome/content/menu-arrow-left-big.svg);
 }

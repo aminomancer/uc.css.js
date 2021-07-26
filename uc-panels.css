@@ -765,18 +765,39 @@ popupnotification progress[paused]::-moz-progress-bar {
     -moz-context-properties: fill, fill-opacity, opacity, stroke, stroke-opacity !important;
 }
 
-#protections-popup-mainView-panel-header-section + toolbarseparator {
-    margin-block-start: 0 !important;
+#protections-popup-mainView-panel-header {
+    min-height: 44px !important;
+    padding-block: 8px 4px !important;
+}
+
+#protections-popup-main-header-label {
+    display: -moz-box !important;
+    height: auto !important;
+    -moz-box-align: center !important;
+    -moz-box-pack: center !important;
+}
+
+#protections-popup-mainView-panel-header-span {
+    margin-inline-start: 24px !important;
+    margin-block: 0 !important;
 }
 
 #protections-popup #messaging-system-message-container {
-    margin-inline: var(--panel-separator-margin);
-    transition: margin-bottom 0.25s, border-color 0.25s !important;
+    margin: var(--panel-separator-margin) !important;
+    margin-bottom: 0 !important;
 }
 
 #protections-popup #messaging-system-message-container[disabled] {
-    border-top-color: transparent !important;
-    transition: margin-bottom 0.25s, border-color 0.5s !important;
+	margin-bottom: -259px !important;
+}
+
+#protections-popup-mainView-panel-header-section + toolbarseparator {
+    margin-top: 0 !important;
+    transition: border-color 0.25s !important;
+}
+
+#protections-popup:not([infoMessageShowing]) #protections-popup-mainView-panel-header-section + toolbarseparator {
+    border-color: transparent !important;
 }
 
 #PanelUI-whatsNew .whatsNew-message-title,
