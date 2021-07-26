@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Nav-bar Toolbar Button Slider
-// @version        2.7
+// @version        2.7.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Wrap all toolbar buttons in a scrollable div. It can scroll horizontally through the buttons by scrolling up/down with a mousewheel, like the tab bar. By default, it wraps all toolbar buttons that come after the urlbar. (to the right of the urlbar, normally) You can edit userChrome.toolbarSlider.wrapButtonsRelativeToUrlbar in about:config to change this: a value of "before" will wrap all buttons that come before the urlbar, and "all" will wrap all buttons. You can change userChrome.toolbarSlider.width to make the container wider or smaller. If you choose 12, it'll be 12 buttons long. When the window gets *really* small, the slider disappears and the toolbar buttons are placed into the normal widget overflow panel. You can specify more buttons to exclude from the slider by adding their IDs (in quotes, separated by commas) to userChrome.toolbarSlider.excludeButtons in about:config. For example you might type ["bookmarks-menu-button", "downloads-button"] if you want those to stay outside of the slider. You can also decide whether to exclude flexible space springs from the slider by toggling userChrome.toolbarSlider.excludeFlexibleSpace in about:config. By default, springs are excluded. To scroll faster you can add a multiplier right before scrollByPixels is called, like scrollAmount = scrollAmount * 1.5 or something like that. Doesn't handle touch events yet since I don't have a touchpad to test it on. Let me know if you have any ideas though.
@@ -139,10 +139,11 @@
                 if (!outer.ready) return;
                 let maxWidth = 0;
                 if (kids.length) {
-                    if (array)
-                        array
-                            .slice(0, this.widthInButtons)
-                            .forEach((el) => (maxWidth += parseWidth(el)));
+                    let arr = array || Array.from(kids);
+                    if (arr)
+                        arr.slice(0, this.widthInButtons).forEach(
+                            (el) => (maxWidth += parseWidth(el))
+                        );
                     else {
                         let widgetArray = await cuiArray();
                         widgetArray
@@ -362,7 +363,7 @@
             async addToPanel(aNode, aReason) {
                 this.onBeforeCommand(aNode);
                 await gCustomizeMode.addToPanel(aNode, aReason);
-                prefHandler.setMaxWidth(Array.from(kids));
+                prefHandler.setMaxWidth();
             },
 
             /**
@@ -373,7 +374,7 @@
             async removeFromArea(aNode, aReason) {
                 this.onBeforeCommand(aNode);
                 await gCustomizeMode.removeFromArea(aNode, aReason);
-                prefHandler.setMaxWidth(Array.from(kids));
+                prefHandler.setMaxWidth();
             },
 
             attachListeners() {
@@ -505,10 +506,11 @@
             if (outer.nextElementSibling) pickUpOrphans(outer.nextElementSibling);
         }
 
-        async function slowCleanUp() {
+        async function oddCleanup() {
             let array = await convertToArray(widgets);
             if (array.length) wrapAll(array, inner);
             reOrder();
+            prefHandler.setMaxWidth();
         }
 
         /* like pickUpOrphans, but moves ALL nodes rather than only nodes which triggered onWidgetAfterDOMChange. we only use this once, after delayed startup.
@@ -701,12 +703,11 @@
             prefHandler.attachListeners();
             sliderContextHandler.attachListeners();
             cleanUp();
-            await prefHandler.setMaxWidth(array);
         }
 
         init();
         CustomizableUI.addListener(cuiListen);
-        setTimeout(slowCleanUp, 1000);
+        setTimeout(oddCleanup, 0);
     }
 
     // for this script we want to do everything as quickly as possible so there isn't a jarring transition during startup.
