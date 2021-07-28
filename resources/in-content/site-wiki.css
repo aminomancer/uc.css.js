@@ -859,9 +859,9 @@ domain("wikimedia.org") {
         letter-spacing: -0.1px !important;
     }
 
-    #mw-content-text p,
-    #mw-content-text li,
-    #mw-content-text div.hatnote {
+    .mw-body-content p,
+    .mw-body-content li,
+    .mw-body-content div.hatnote {
         font-size: 16px !important;
         line-height: 26px !important;
         font-family: "Source Sans Pro" !important;

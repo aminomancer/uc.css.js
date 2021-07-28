@@ -192,6 +192,7 @@ menuitem[command="downloadsCmd_clearDownloads"] .menu-text,
 #context_moveTabOptions > .menu-text,
 #context_sendTabToDevice > .menu-text,
 #context_shareTabURL > .menu-text,
+menuitem.share-tab-url-item > .menu-text,
 #context_closeTabOptions > .menu-text,
 #context_undoCloseTab .menu-text,
 #context_closeTab .menu-text,
@@ -416,6 +417,7 @@ menuitem#repair-text-encoding:before,
 #context_moveTabOptions:before,
 #context_sendTabToDevice:before,
 #context_shareTabURL:before,
+menuitem.share-tab-url-item:before,
 #context_closeTabOptions:before,
 #context_undoCloseTab:before,
 #context_closeTab:before,
@@ -1004,7 +1006,8 @@ menuitem#repair-text-encoding:before {
     background-image: url(chrome://userchrome/content/skin/send-to-device.svg);
 }
 
-#context_shareTabURL:before {
+#context_shareTabURL:before,
+menuitem.share-tab-url-item:before {
     background-image: url(chrome://userchrome/content/skin/share.svg);
     scale: 0.9;
 }

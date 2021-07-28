@@ -449,64 +449,11 @@
     list-style-image: url(chrome://userchrome/content/mozilla-logo.svg) !important;
 }
 
-/* #appMenu-fxa-label2:before {
-        -moz-context-properties: fill, fill-opacity;
-        content: "";
-        background-image:  var(--avatar-image-url);
-        background-size: contain;
-        background-position: center;
-        border-radius: 16px;
-        width: 16px;
-        height: 16px;
-        fill: currentColor;
-        display: -moz-box;
-    } */
-
 #appMenu-fxa-label2:before {
     -moz-context-properties: fill, fill-opacity;
     content: url(chrome://userchrome/content/fxa/avatar-big.svg);
     fill: currentColor;
     display: -moz-box;
-}
-
-#fxa-manage-account-button {
-    padding-block: 0 !important;
-    min-height: 43px !important;
-    box-sizing: border-box;
-}
-
-#fxa-manage-account-button #fxa-menu-avatar {
-    list-style-image: var(--avatar-image-url);
-    display: -moz-inline-box;
-    -moz-box-ordinal-group: 2;
-    margin-inline-start: 8px;
-    height: 28px !important;
-    width: 28px !important;
-    -moz-context-properties: fill, fill-opacity;
-    fill: var(--arrowpanel-color);
-}
-
-:root[fxastatus="signedin"] #fxa-manage-account-button:after {
-    content: "";
-    display: -moz-inline-box;
-    width: 28px;
-    height: 28px;
-    -moz-box-ordinal-group: 2;
-    margin-inline: 8px 2px;
-    background: var(--avatar-image-url) center/contain no-repeat;
-    -moz-context-properties: fill, fill-opacity;
-    fill: var(--arrowpanel-color);
-    border-radius: 100%;
-}
-
-:root[fxastatus="signedin"] #fxa-menu-avatar,
-:root[fxastatus="signedin"] #fxa-avatar-image {
-    border-radius: 50%;
-}
-
-#fxa-menu-header-description,
-#fxa-menu-header-title {
-    margin-block: 0 !important;
 }
 
 #appMenu-save-file-button2 > .toolbarbutton-text,
@@ -542,8 +489,8 @@
     padding-inline-start: 8px !important;
 }
 
-#appMenu-zoom-controls2::before {
-    content: "" !important;
+#appMenu-zoom-controls2:before {
+    content: "";
     display: block;
     width: 16px;
     height: 16px;
@@ -651,7 +598,7 @@
     font-size: 1em !important;
 }
 
-#appMenu-fxa-status2:not([fxastatus]) > #appMenu-fxa-label2::before {
+#appMenu-fxa-status2:not([fxastatus]) > #appMenu-fxa-label2:before {
     display: none !important;
 }
 
@@ -659,12 +606,91 @@
     padding: 0 !important;
 }
 
-#appMenu-fxa-status2:not([fxastatus])::before {
+#appMenu-fxa-status2:not([fxastatus]):before {
     -moz-context-properties: fill, fill-opacity;
     content: url(chrome://userchrome/content/fxa/avatar-big.svg);
     fill: currentColor;
     display: -moz-box;
     margin-inline-end: 8px !important;
+}
+
+#fxa-manage-account-button {
+    padding-block: 0 !important;
+    padding-inline: 8px !important;
+    min-height: 43px !important;
+    box-sizing: border-box;
+}
+
+#fxa-manage-account-button #fxa-menu-avatar {
+    list-style-image: var(--avatar-image-url);
+    display: -moz-inline-box;
+    -moz-box-ordinal-group: 2;
+    margin-inline-start: 8px;
+    height: 28px !important;
+    width: 28px !important;
+    -moz-context-properties: fill, fill-opacity;
+    fill: var(--arrowpanel-color);
+}
+
+:root[fxastatus="signedin"] #fxa-manage-account-button:after {
+    content: "";
+    display: -moz-inline-box;
+    width: 28px;
+    height: 28px;
+    margin-inline: 8px 0;
+    background: var(--avatar-image-url) center/contain no-repeat;
+    -moz-context-properties: fill, fill-opacity;
+    fill: var(--arrowpanel-color);
+    border-radius: 100%;
+}
+
+:root[fxastatus="signedin"] #fxa-menu-avatar,
+:root[fxastatus="signedin"] #fxa-avatar-image {
+    border-radius: 50%;
+}
+
+#fxa-menu-header-description,
+#fxa-menu-header-title {
+    margin-block: 0 !important;
+}
+
+#PanelUI-fxa-menu-syncnow-button label,
+#PanelUI-fxa-menu-setup-sync-button .toolbarbutton-text,
+#PanelUI-fxa-menu-connect-device-button .toolbarbutton-text,
+#PanelUI-fxa-menu-sendtab-button .toolbarbutton-text,
+#PanelUI-fxa-menu-sync-prefs-button .toolbarbutton-text,
+#PanelUI-fxa-menu-account-signout-button .toolbarbutton-text {
+    padding-inline-start: 8px !important;
+}
+
+#PanelUI-fxa-menu-syncnow-button image {
+    list-style-image: url(chrome://userchrome/content/skin/sync.svg) !important;
+    -moz-box-ordinal-group: unset !important;
+    visibility: unset !important;
+    transition: fill 0.8s var(--uc-smooth-timing-function);
+    transform-style: preserve-3d;
+}
+
+#PanelUI-fxa-menu-setup-sync-button {
+    list-style-image: url(chrome://userchrome/content/skin/sync.svg);
+}
+
+#PanelUI-fxa-menu-connect-device-button .toolbarbutton-icon {
+    list-style-image: url(chrome://userchrome/content/fxa/add-device.svg);
+    width: 16px;
+    height: 16px;
+}
+
+#PanelUI-fxa-menu-sendtab-button {
+    list-style-image: url(chrome://userchrome/content/skin/send-to-device.svg);
+}
+
+#PanelUI-fxa-menu-sync-prefs-button {
+    list-style-image: url(chrome://userchrome/content/settings.svg);
+}
+
+#PanelUI-fxa-menu-account-signout-button {
+    list-style-image: url(chrome://userchrome/content/fxa/sign-out.svg);
 }
 
 .PanelUI-remotetabs-clientcontainer > label[itemtype="client"] {
