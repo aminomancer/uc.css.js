@@ -103,13 +103,6 @@ menupopup {
     --in-content-primary-button-background: var(--purple-40) !important;
     --in-content-primary-button-background-hover: var(--purple-35) !important;
     --in-content-primary-button-background-active: var(--purple-30) !important;
-    --ui-textbox-bgcolor: hsl(233, 24%, 28%) !important;
-    --ui-textbox-focus-bgcolor: hsl(232, 22%, 34%) !important;
-    --ui-solid-button-bgcolor: var(--arrowpanel-dimmed) !important;
-    --ui-solid-button-hover-bgcolor: var(--arrowpanel-dimmed-further) !important;
-    --ui-solid-button-active-bgcolor: var(--arrowpanel-dimmed-even-further) !important;
-    --ebmp-hover-bgcolor: hsl(233, 24%, 33%);
-    --ebmp-focus-bgcolor: hsl(233, 24%, 38%);
 
     --menu-background-color: var(--arrowpanel-background) !important;
     --menu-color: var(--ui-text-80) !important;

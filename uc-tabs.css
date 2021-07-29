@@ -693,6 +693,19 @@ so shadows are cast in both directions, unless the neighboring tab is selected o
         height: 16px !important;
         animation: none !important;
         display: -moz-box !important;
+
+        /* if you want to adjust the speed of the animation you can use this static version instead,
+        and control the animation with CSS. I use the above version with the animation embedded in the SVG,
+        because it handles transitions more smoothly and seems to be more performant. */
+
+        /* background-image: url(chrome://userchrome/content/loading-spinner-static.svg) !important;
+        animation: 0.85s steps(12, end) uc-tab-throbber-spinner infinite !important; */
+    }
+
+    @keyframes uc-tab-throbber-spinner {
+        to {
+            rotate: 360deg;
+        }
     }
 
     .tab-throbber-tabslist[busy] {

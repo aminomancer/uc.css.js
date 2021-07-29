@@ -255,6 +255,13 @@ tooltip {
     --in-parent-primary-button-background-hover: var(--purple-35);
     --in-parent-primary-button-background-active: var(--purple-30);
     --in-parent-primary-button-text-color: var(--in-parent-page-color);
+    --ui-textbox-bgcolor: hsl(233, 24%, 28%);
+    --ui-textbox-focus-bgcolor: hsl(232, 22%, 34%);
+    --ui-solid-button-bgcolor: var(--arrowpanel-dimmed);
+    --ui-solid-button-hover-bgcolor: var(--arrowpanel-dimmed-further);
+    --ui-solid-button-active-bgcolor: var(--arrowpanel-dimmed-even-further);
+    --ebmp-hover-bgcolor: hsl(233, 24%, 33%);
+    --ebmp-focus-bgcolor: hsl(233, 24%, 38%);
 
     --content-principal-page-background: hsl(270, 3%, 12%);
     --content-principal-page-color: var(--in-parent-page-color);

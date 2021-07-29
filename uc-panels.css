@@ -319,7 +319,7 @@ panel[type="arrow"][side="top"] {
 }
 
 #protections-popup-info-button {
-	margin-inline-end: 10px !important;
+    margin-inline-end: 10px !important;
 }
 
 #protections-popup .panel-footer {
@@ -569,7 +569,7 @@ popupnotification progress[paused]::-moz-progress-bar {
     border-width: 0;
     min-width: 0;
     padding: 2px !important;
-	background-color: var(--button-bgcolor) !important;
+    background-color: var(--button-bgcolor) !important;
     color: inherit !important;
     opacity: 1 !important;
     outline: none !important;
@@ -585,11 +585,11 @@ popupnotification progress[paused]::-moz-progress-bar {
 }
 
 .permission-popup-permission-remove-button:is(:hover, :focus-visible) {
-	background-color: var(--button-hover-bgcolor) !important;
+    background-color: var(--button-hover-bgcolor) !important;
 }
 
 .permission-popup-permission-remove-button:hover:active {
-	background-color: var(--button-active-bgcolor) !important;
+    background-color: var(--button-active-bgcolor) !important;
 }
 
 .permission-popup-permission-item > .popup-subitem {
@@ -730,7 +730,7 @@ popupnotification progress[paused]::-moz-progress-bar {
 
 #identity-popup[connection="cert-error-page"] .identity-popup-security-connection,
 #identity-popup[connection="net-error-page"] .identity-popup-security-connection {
-	background-image: url(chrome://userchrome/content/error.svg) !important;
+    background-image: url(chrome://userchrome/content/error.svg) !important;
 }
 
 #identity-popup[connection="extension"] .identity-popup-security-connection {
@@ -740,11 +740,13 @@ popupnotification progress[paused]::-moz-progress-bar {
 }
 
 .identity-button .identity-popup-connection-not-secure,
-#identity-popup[connection="secure-cert-user-overridden"] [when-connection~="secure-cert-user-overridden"] {
+#identity-popup[connection="secure-cert-user-overridden"]
+    [when-connection~="secure-cert-user-overridden"] {
     color: inherit !important;
 }
 
-#identity-popup[connection="secure"] .identity-popup-connection-secure.security-view[when-connection~="secure"] {
+#identity-popup[connection="secure"]
+    .identity-popup-connection-secure.security-view[when-connection~="secure"] {
     color: var(--secure-text-color) !important;
 }
 
@@ -785,19 +787,40 @@ popupnotification progress[paused]::-moz-progress-bar {
 #protections-popup #messaging-system-message-container {
     margin: var(--panel-separator-margin) !important;
     margin-bottom: 0 !important;
+    transition: margin-bottom 0.35s !important;
 }
 
 #protections-popup #messaging-system-message-container[disabled] {
-	margin-bottom: -259px !important;
+    margin-bottom: -259px !important;
 }
 
 #protections-popup-mainView-panel-header-section + toolbarseparator {
     margin-top: 0 !important;
-    transition: border-color 0.25s !important;
+    transition: border-color 0.35s !important;
 }
 
-#protections-popup:not([infoMessageShowing]) #protections-popup-mainView-panel-header-section + toolbarseparator {
+#protections-popup:not([infoMessageShowing])
+    #protections-popup-mainView-panel-header-section
+    + toolbarseparator {
     border-color: transparent !important;
+}
+
+#protections-popup-message {
+    height: calc(100% - 10px) !important;
+    transition: mask 0.35s, opacity 0.2s !important;
+    mask-image: linear-gradient(0deg, transparent, black 12px);
+    mask-position: center calc(100% + 0px) !important;
+    margin-bottom: 0 !important;
+}
+
+#protections-popup #messaging-system-message-container[disabled] #protections-popup-message {
+    mask-size: 260px !important;
+    mask-position: center calc(100% - 259px) !important;
+    transition: mask 0.35s, opacity 0.75s !important;
+}
+
+#protections-popup-message .whatsNew-message-body {
+    margin-bottom: calc(10px + var(--vertical-section-padding)) !important;
 }
 
 #PanelUI-whatsNew .whatsNew-message-title,
@@ -870,7 +893,7 @@ popupnotification progress[paused]::-moz-progress-bar {
     padding: 4px !important;
     margin-inline: 24px 1px !important;
     border-radius: 3px;
-    font-size: 1.1em !important
+    font-size: 1.1em !important;
 }
 
 #identity-popup-securityView-body > .identity-popup-warning-box.identity-popup-warning-yellow {
@@ -882,7 +905,7 @@ popupnotification progress[paused]::-moz-progress-bar {
 }
 
 :root[lwt-popup-brighttext] panel .identity-popup-warning-yellow .text-link {
-	color: var(--low-warning-text-color) !important;
+    color: var(--low-warning-text-color) !important;
 }
 
 .identity-popup-section {
@@ -928,6 +951,7 @@ popupnotification progress[paused]::-moz-progress-bar {
     background-color: var(--arrowpanel-dimmed) !important;
     border-radius: 3px !important;
     padding: 0.15em 0.4em !important;
+    margin-inline: 24px 1px !important;
     min-height: var(--subviewbutton-height) !important;
     align-self: center !important;
 }

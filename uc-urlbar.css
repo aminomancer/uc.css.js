@@ -113,9 +113,9 @@ toolbarpaletteitem[place="palette"] > #search-container {
 
 #searchbar .search-go-button {
     box-sizing: border-box !important;
-	width: calc(var(--urlbar-min-height) - 2px - 2 * var(--urlbar-container-padding)) !important;
-	height: calc(var(--urlbar-min-height) - 2px - 2 * var(--urlbar-container-padding)) !important;
-	padding: var(--urlbar-icon-padding) !important;
+    width: calc(var(--urlbar-min-height) - 2px - 2 * var(--urlbar-container-padding)) !important;
+    height: calc(var(--urlbar-min-height) - 2px - 2 * var(--urlbar-container-padding)) !important;
+    padding: var(--urlbar-icon-padding) !important;
 }
 
 #searchbar .searchbar-search-icon {
@@ -157,9 +157,10 @@ toolbarpaletteitem[place="palette"] > #search-container {
     background-color: var(--urlbar-input-bgcolor-even-brighter) !important;
 }
 
-:not(.urlbar-page-action) > .urlbar-icon,
+.urlbar-icon,
 .urlbar-page-action {
     background-color: transparent !important;
+    filter: none !important;
 }
 
 :not(.urlbar-page-action) > .urlbar-icon:not([disabled]):is(:hover, :focus-visible, [open]),
@@ -184,12 +185,6 @@ toolbarpaletteitem[place="palette"] > #search-container {
     opacity: var(--urlbar-icon-fill-opacity) !important;
     fill: currentColor !important;
     stroke: currentColor !important;
-}
-
-/* urlbar buttons */
-.urlbar-page-action,
-.urlbar-icon {
-    filter: none !important;
 }
 
 #urlbar-go-button {
@@ -415,14 +410,14 @@ toolbarpaletteitem[removable="false"]
 }
 
 #urlbar[pageproxystate="valid"]
-    #identity-box:is(.weakCipher, .mixedDisplayContent, .mixedDisplayContentLoadedActiveBlocked, .certUserOverridden, .certErrorPage) 
+    #identity-box:is(.weakCipher, .mixedDisplayContent, .mixedDisplayContentLoadedActiveBlocked, .certUserOverridden, .certErrorPage)
     #identity-icon-box:is([open="true"], :focus-visible)
     #identity-icon,
 #urlbar[pageproxystate="valid"]
-    #identity-box:is(.weakCipher, .mixedDisplayContent, .mixedDisplayContentLoadedActiveBlocked, .certUserOverridden, .certErrorPage) 
+    #identity-box:is(.weakCipher, .mixedDisplayContent, .mixedDisplayContentLoadedActiveBlocked, .certUserOverridden, .certErrorPage)
     #identity-icon-box:is(:hover:active, :hover:not([open="true"]))
     #identity-icon:hover {
-	fill: unset !important;
+    fill: unset !important;
 }
 
 #urlbar[pageproxystate="valid"] #identity-box.chromeUI #identity-icon {

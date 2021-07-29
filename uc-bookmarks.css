@@ -305,7 +305,8 @@
 
 :is(#bookmarkpropertiesdialog, #editBookmarkPanel) richlistbox[id] richlistitem {
     padding-inline-start: 2px !important;
-    padding-top: 1px !important;
+    -moz-box-align: center !important;
+    min-height: 22px !important;
 }
 
 #bookmarkpropertiesdialog richlistbox[id] richlistitem {
@@ -315,84 +316,90 @@
 
 :is(#bookmarkpropertiesdialog, #editBookmarkPanel) richlistbox[id] richlistitem image {
     appearance: none !important;
-    background-color: transparent !important;
-    border: none !important;
-    -moz-context-properties: fill, fill-opacity !important;
-    fill: currentColor !important;
-    width: 12px !important;
-    padding: 1px !important;
-    opacity: 0.8 !important;
-    margin-right: 0 !important;
-    list-style-image: url(chrome://userchrome/content/monotone-checkbox.svg);
+    display: -moz-inline-box;
+    width: 14px;
+    height: 14px;
+    padding: 0 !important;
+    margin-inline: var(--context-checkbox-margin) !important;
+    fill: currentColor;
+    -moz-context-properties: fill, fill-opacity, stroke;
+    border: 1px solid var(--checkbox-border-color) !important;
+    border-radius: 2px;
+    background-color: var(--checkbox-unchecked-bgcolor) !important;
+    color: var(--in-parent-primary-button-text-color) !important;
 }
 
 :is(#bookmarkpropertiesdialog, #editBookmarkPanel) richlistbox[id] richlistitem label {
-    margin-inline: 6px 5px !important;
+    margin-inline: 0 5px !important;
+    display: -moz-box !important;
 }
 
 :is(#bookmarkpropertiesdialog, #editBookmarkPanel)
     richlistbox[id]
     richlistitem[checked="true"]
     image {
-    appearance: none !important;
-    background-color: transparent !important;
-    border: none !important;
-    width: 12px !important;
-    padding: 1px !important;
-    list-style-image: url(chrome://userchrome/content/monotone-checkbox-checked.svg) !important;
+    background-color: var(--checkbox-checked-bgcolor) !important;
+    border-color: var(--checkbox-checked-border-color) !important;
+    list-style-image: url(chrome://userchrome/content/check.svg) !important;
+}
+
+:is(#bookmarkpropertiesdialog, #editBookmarkPanel)
+    richlistbox[id]
+    richlistitem[checked="true"]
+    image {
+    background-color: var(--checkbox-checked-bgcolor) !important;
+    border-color: var(--checkbox-checked-border-color) !important;
+    list-style-image: url(chrome://userchrome/content/check.svg) !important;
+}
+
+#editBookmarkPanel richlistbox[id] richlistitem:hover image {
+    background-color: var(--checkbox-unchecked-hover-bgcolor) !important;
+}
+
+#editBookmarkPanel
+    richlistbox[id]
+    richlistitem:is(:hover:active, [selected="true"], [current="true"])
+    image {
+    background-color: var(--checkbox-unchecked-active-bgcolor) !important;
+}
+
+#editBookmarkPanel richlistbox[id] richlistitem[checked="true"]:hover image {
+    background-color: var(--checkbox-checked-hover-bgcolor) !important;
+}
+
+#editBookmarkPanel
+    richlistbox[id]
+    richlistitem[checked="true"]:is(:hover:active, [selected="true"], [current="true"])
+    image {
+    background-color: var(--checkbox-checked-active-bgcolor) !important;
 }
 
 :is(#bookmarkpropertiesdialog, #editBookmarkPanel) richlistbox[id] richlistitem:hover > image {
     opacity: 1 !important;
 }
 
+#editBookmarkPanel richlistbox[id] richlistitem:is(:hover, [selected="true"], [current="true"]) {
+    background-color: var(--arrowpanel-faint) !important;
+}
+
 :is(#bookmarkpropertiesdialog, #editBookmarkPanel) checkbox {
-    margin-inline-start: 0 !important;
+    margin-inline-start: 4px !important;
 }
 
 :is(#bookmarkpropertiesdialog, #editBookmarkPanel) checkbox .checkbox-check {
-    appearance: none !important;
-    min-width: 10px !important;
-    min-height: 10px !important;
-    width: 14px !important;
-    height: 14px !important;
-    margin-inline: 4px !important;
-    border: 1px solid var(--in-content-box-border-color) !important;
-    border-radius: 2px !important;
-    background-color: var(--arrowpanel-dimmed) !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-    background-size: contain !important;
-    line-height: 20px !important;
-    box-shadow: none !important;
-}
-
-:is(#bookmarkpropertiesdialog, #editBookmarkPanel) checkbox .checkbox-check[checked] {
-    background-image: url(chrome://userchrome/content/check.svg) !important;
-    -moz-context-properties: fill, fill-opacity !important;
-    fill: currentColor !important;
-    color: hsl(0, 0%, 100%) !important;
-    background-color: var(--purple-35) !important;
+    margin-inline-end: 6px !important;
 }
 
 :is(#bookmarkpropertiesdialog, #editBookmarkPanel)
-    checkbox:is(:hover, :focus-visible)
-    .checkbox-check:not(:disabled) {
-    background-color: var(--arrowpanel-dimmed-further) !important;
+    checkbox:focus-visible:not(:active)
+    .checkbox-check {
+    background-color: var(--checkbox-unchecked-hover-bgcolor) !important;
 }
 
 :is(#bookmarkpropertiesdialog, #editBookmarkPanel)
-    checkbox:is(:hover, :focus-visible)
-    .checkbox-check[checked]:not(:disabled) {
-    background-color: var(--purple-45) !important;
-}
-
-:is(#bookmarkpropertiesdialog, #editBookmarkPanel) .checkbox-label {
-    margin: 0 !important;
-}
-
-#editBookmarkPanel richlistbox[id] richlistitem:is(:hover, [selected="true"], [current="true"]) {
-    background-color: hsl(232, 21%, 40%) !important;
+    checkbox:focus-visible:not(:active)
+    .checkbox-check[checked] {
+    background-color: var(--checkbox-checked-hover-bgcolor) !important;
 }
 
 richlistbox[id]:not(#categories) > richlistitem[selected] {
