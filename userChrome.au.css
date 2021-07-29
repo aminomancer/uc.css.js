@@ -69,11 +69,11 @@ panel popupset panel[type="autocomplete-richlistbox"] {
 }
 
 #identity-popup-mainView-panel-header-span {
-	margin-top: 2px;
+    margin-top: 2px;
 }
 
 #identity-popup-mainView-panel-header {
-	padding: 0;
+    padding: 0;
 }
 
 #BMB_bookmarksPopup::part(arrowscrollbox),
@@ -174,8 +174,8 @@ menupopup::part(arrowscrollbox),
 
 menupopup::part(arrowscrollbox),
 #ContentSelectDropdown > menupopup::part(arrowscrollbox) {
-	padding: var(--menupopup-inner-padding);
-	margin: var(--menupopup-inner-box-margin);
+    padding: var(--menupopup-inner-padding);
+    margin: var(--menupopup-inner-box-margin);
 }
 
 /* hide tab bar's arrow buttons and spacers */
@@ -214,7 +214,7 @@ menupopup::part(arrowscrollbox),
 }
 
 /* make unpinned tabs stretch to fill the whole tab bar */
-.tabbrowser-tab[fadein]:not([style*="max-width"]) {
+:root[sessionrestored] .tabbrowser-tab[fadein]:not([style*="max-width"]) {
     max-width: var(--tab-max-width, 225px);
 }
 
@@ -223,14 +223,17 @@ tab starts at 0 flex but instantly gets 100 flex as fadein attribute gets applie
 by transitioning this property we can make the instantaneous change happen more slowly,
 causing the tab to grow over 300ms from the time it's born.
 this way we don't animate tabs that were simply moved rather than created */
-#tabbrowser-tabs:not([movingtab])
+:root[sessionrestored]
+    #tabbrowser-tabs:not([movingtab])
     .tabbrowser-tab:not([pinned], [justmoved], [tab-grouping], [tabdrop-samewindow]) {
     -moz-box-flex: 0;
     transition: min-width 200ms ease-out, max-width 150ms ease-out,
         -moz-box-flex 300ms var(--uc-smooth-timing-function);
 }
 
-#tabbrowser-tabs:not([movingtab]) .tabbrowser-tab[fadein]:not([pinned], [justmoved]) {
+:root[sessionrestored]
+    #tabbrowser-tabs:not([movingtab])
+    .tabbrowser-tab[fadein]:not([pinned], [justmoved]) {
     -moz-box-flex: 100;
 }
 
@@ -242,7 +245,8 @@ since it needs to animate a much greater distance than normal tabs.
 this is the animation that plays when the pinned last-visible-tab shrinks, e.g. when it's no longer last-visible-tab.
 we need to preface this with the [style*='padding-inline-start'] selector
 to avoid a pinned tab positioning bug caused by gBrowser.tabContainer._pinnedTabsLayoutCache */
-#tabbrowser-tabs[positionpinnedtabs][style*="padding-inline-start"]
+:root[sessionrestored]
+    #tabbrowser-tabs[positionpinnedtabs][style*="padding-inline-start"]
     .tabbrowser-tab[pinned]:not([justmoved], [tab-grouping], [tabdrop-samewindow]) {
     transition: min-width 300ms var(--animation-easing-function),
         max-width 300ms var(--animation-easing-function),
@@ -251,9 +255,10 @@ to avoid a pinned tab positioning bug caused by gBrowser.tabContainer._pinnedTab
 }
 
 /* shrink pinned tabs */
-.tabbrowser-tab[pinned]:not([last-visible-tab]),
-#tabbrowser-tabs[movingtab] .tabbrowser-tab[pinned],
-.tabbrowser-tab[pinned]:is([justmoved], [tab-grouping], [tabdrop-samewindow]) {
+:root[sessionrestored] .tabbrowser-tab[pinned]:not([last-visible-tab]),
+:root[sessionrestored] #tabbrowser-tabs[movingtab] .tabbrowser-tab[pinned],
+:root[sessionrestored]
+    .tabbrowser-tab[pinned]:is([justmoved], [tab-grouping], [tabdrop-samewindow]) {
     min-width: var(--pinned-tab-width);
     max-width: var(--pinned-tab-width);
 }
@@ -270,7 +275,8 @@ opacity fades to 0 and the label shrinks slightly to 96% to create the illusion 
 }
 
 /* this is the animation that plays when the pinned last-visible-tab grows, e.g. when it becomes last-visible-tab */
-#tabbrowser-tabs:not([movingtab])
+:root[sessionrestored]
+    #tabbrowser-tabs:not([movingtab])
     .tabbrowser-tab[pinned][last-visible-tab]:not([justmoved], [tab-grouping], [tabdrop-samewindow]) {
     -moz-box-flex: 100;
     transition: min-width 300ms var(--uc-smooth-timing-function),
@@ -305,6 +311,10 @@ if the icon disappeared/appeared instantly it would disrupt the impression that 
 .tabbrowser-tab[pinned][last-visible-tab] .tab-label-container {
     opacity: 1;
     transform: none;
+}
+
+#tabbrowser-tabs[haspinnedtabs]:not([positionpinnedtabs]) > #tabbrowser-arrowscrollbox > .tabbrowser-tab[first-visible-unpinned-tab] {
+	margin-inline-start: revert !important;
 }
 
 /* devtools highlighter */

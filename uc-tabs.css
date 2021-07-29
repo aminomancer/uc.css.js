@@ -407,13 +407,13 @@ so shadows are cast to the left but not to the right. */
 
 /* hovered tabs stack on top of normal tabs in either direction.
 so shadows are cast in both directions, unless the neighboring tab is selected or something. */
-.tabbrowser-tab:not([selected], [pinned], [multiselected]):is(:hover, .keyboard-focused-tab) {
+.tabbrowser-tab:not([visuallyselected="true"], [pinned], [multiselected]):is(:hover, .keyboard-focused-tab) {
     z-index: 3 !important;
 }
 
 /* selected tabs stack over hovered tabs */
-.tabbrowser-tab[selected] {
-    z-index: 5 !important;
+.tabbrowser-tab[visuallyselected="true"] {
+    z-index: 8 !important;
 }
 
 /* multiselected tabs do too, but lower than selected tabs */
@@ -422,37 +422,36 @@ so shadows are cast in both directions, unless the neighboring tab is selected o
 }
 
 /* multiselected gets 1 extra point for being hovered */
-.tabbrowser-tab[multiselected]:not([selected], [pinned]):is(:hover, .keyboard-focused-tab) {
+.tabbrowser-tab[multiselected]:not([visuallyselected="true"], [pinned]):is(:hover, .keyboard-focused-tab) {
     z-index: 5 !important;
 }
 
-/* 2 points for being selected */
-.tabbrowser-tab[multiselected][selected] {
-    z-index: 6 !important;
-}
-
-/* pinned tabs stack over everything */
-.tabbrowser-tab[pinned] {
-    z-index: 7 !important;
-}
-
-/* and the same formula applies to them too */
-.tabbrowser-tab[pinned]:not([selected], [multiselected]):is(:hover, .keyboard-focused-tab) {
+.tabbrowser-tab[multiselected][visuallyselected="true"] {
     z-index: 8 !important;
 }
 
-.tabbrowser-tab[pinned][selected],
+/* pinned tabs stack over everything except selected tabs */
+.tabbrowser-tab[pinned] {
+    z-index: 6 !important;
+}
+
+/* and the same formula applies to them too */
+.tabbrowser-tab[pinned]:not([visuallyselected="true"], [multiselected]):is(:hover, .keyboard-focused-tab) {
+    z-index: 7 !important;
+}
+
+.tabbrowser-tab[pinned][visuallyselected="true"],
 .tabbrowser-tab[pinned][multiselected] {
+    z-index: 8 !important;
+}
+
+.tabbrowser-tab[pinned][multiselected]:not([visuallyselected="true"]):is(:hover, .keyboard-focused-tab) {
     z-index: 9 !important;
 }
 
-.tabbrowser-tab[pinned][multiselected]:not([selected]):is(:hover, .keyboard-focused-tab) {
-    z-index: 10 !important;
-}
-
 /* the pinnacle of z-index, the pinned, selected, multiselected tab lol */
-.tabbrowser-tab[pinned][selected][multiselected] {
-    z-index: 11 !important;
+.tabbrowser-tab[pinned][visuallyselected="true"][multiselected] {
+    z-index: 10 !important;
 }
 
 /* pinned tabs should style just like regular tabs except without labels and buttons */

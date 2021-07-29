@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Urlbar Mods
-// @version        1.3
+// @version        1.3.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Makes some minor modifications to the urlbar. When you click & drag the identity box in the urlbar, it lets you drag and drop the URL into text fields, the tab bar, desktop, etc. while dragging it shows a little white box with the URL and favicon as the drag image. This script changes the colors of that drag box so they use CSS variables instead. This script can also be configured to restore the context menu that used to appear when right-clicking a search engine one-off button in the urlbar results panel. (The context menu was disabled recently) I'll continue to add to this script as I think of more urlbar mods that are too small to deserve their own dedicated script.
@@ -61,26 +61,33 @@
             ].properties.clientType = {
                 type: "string",
             };
-            eval(
-                `provider.startQuery = async function ` +
-                    provider.startQuery
-                        .toSource()
-                        .replace(/async startQuery/, ``)
-                        .replace(/(device\: client\.name\,)/, `$1 clientType: client.clientType,`)
-            );
-            eval(
-                `gURLBar.view._updateRow = function ` +
-                    gURLBar.view._updateRow
-                        .toSource()
-                        .replace(
-                            /(item\.removeAttribute\(\"stale\"\)\;)/,
-                            `$1 item.removeAttribute("clientType");`
-                        )
-                        .replace(
-                            /(item\.setAttribute\(\"type\"\, \"remotetab\"\)\;)/,
-                            `$1 if (result.payload.clientType) item.setAttribute("clientType", result.payload.clientType);`
-                        )
-            );
+            let src1 = provider.startQuery.toSource();
+            let src2 = gURLBar.view._updateRow.toSource();
+            if (!src1.includes("client.clientType"))
+                eval(
+                    `provider.startQuery = async function ` +
+                        provider.startQuery
+                            .toSource()
+                            .replace(/async startQuery/, ``)
+                            .replace(
+                                /(device\: client\.name\,)/,
+                                `$1 clientType: client.clientType,`
+                            )
+                );
+            if (!src2.includes("result.payload.clientType"))
+                eval(
+                    `gURLBar.view._updateRow = function ` +
+                        gURLBar.view._updateRow
+                            .toSource()
+                            .replace(
+                                /(item\.removeAttribute\(\"stale\"\)\;)/,
+                                `$1 item.removeAttribute("clientType");`
+                            )
+                            .replace(
+                                /(item\.setAttribute\(\"type\"\, \"remotetab\"\)\;)/,
+                                `$1 if (result.payload.clientType) item.setAttribute("clientType", result.payload.clientType);`
+                            )
+                );
             let css = `.urlbarView-row[type="remotetab"] .urlbarView-type-icon{background:var(--device-icon,url("chrome://browser/skin/sync.svg")) center/contain no-repeat;}.urlbarView-row[type="remotetab"][clientType="phone"]{--device-icon:url("chrome://browser/skin/device-phone.svg");}.urlbarView-row[type="remotetab"][clientType="tablet"]{--device-icon:url("chrome://browser/skin/device-tablet.svg");}.urlbarView-row[type="remotetab"][clientType="desktop"]{--device-icon:url("chrome://browser/skin/device-desktop.svg");}.urlbarView-row[type="remotetab"][clientType="tv"]{--device-icon:url("chrome://browser/skin/device-tv.svg");}.urlbarView-row[type="remotetab"][clientType="vr"]{--device-icon:url("chrome://browser/skin/device-vr.svg");}`;
             let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
                 Ci.nsIStyleSheetService
