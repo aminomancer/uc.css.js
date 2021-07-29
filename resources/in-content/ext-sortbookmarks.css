@@ -1,0 +1,213 @@
+/* popup content styles for the addon Sort Bookmarks */
+
+@-moz-document url-prefix("moz-extension://18d76235-7e4d-46e3-961a-2bce21e96472/popup.html")
+{
+    body {
+        background: var(--uc-arrowpanel-background) !important;
+        color: var(--uc-arrowpanel-color) !important;
+        margin: 0 !important;
+        font-size: inherit !important;
+        box-sizing: border-box !important;
+    }
+
+    :root {
+        font-family: sans-serif;
+        font-size: 12px !important;
+        user-select: none;
+    }
+
+    #context {
+        box-sizing: border-box !important;
+        margin-block: 0 !important;
+        min-width: 200px !important;
+        user-select: none;
+        text-align: center !important;
+        line-height: normal !important;
+        padding-block: calc((44px - 1.1em) / 2) !important;
+        block-size: 44px !important;
+        min-height: 44px !important;
+        white-space: nowrap !important;
+        margin-inline: 16px !important;
+        font-weight: normal !important;
+        font-size: 1.1em !important;
+        color: inherit !important;
+        letter-spacing: inherit !important;
+    }
+
+    #sort-form {
+        margin: var(--menupopup-inner-padding-magnitude) !important;
+        padding-block: var(--menupopup-inner-padding-magnitude) !important;
+        border-top: 1px solid var(--uc-desaturate-dimmed) !important;
+    }
+
+    #sort-form p {
+        margin: var(--menupopup-inner-padding-magnitude) 6px !important;
+    }
+
+    select {
+        appearance: none;
+        border-radius: var(--general-button-border-radius);
+        margin: 0;
+        border: none !important;
+        padding: 4px 20px 4px 3px !important;
+        background: var(--uc-arrowpanel-dimmed)
+            url(chrome://userchrome/content/arrow-dropdown-12.svg) no-repeat center right 5px/12px !important;
+        color: inherit !important;
+        fill: currentColor;
+        -moz-context-properties: fill, fill-opacity;
+        font: inherit;
+    }
+
+    select:is(:hover, :focus, :active) {
+        appearance: none;
+        border-radius: var(--general-button-border-radius);
+        margin: 0;
+        border: none !important;
+        padding: 4px 20px 4px 3px !important;
+        background-color: var(--uc-arrowpanel-dimmed-further) !important;
+    }
+
+    fieldset {
+        margin-inline: 6px !important;
+        margin-block: 10px !important;
+        border: none !important;
+        background-color: var(--uc-panel-box-solid) !important;
+        border-radius: 5px;
+        padding: 6px 8px 8px !important;
+    }
+
+    fieldset > legend {
+        background-color: var(--uc-panel-box-solid) !important;
+        padding: 3px 8px !important;
+        border-radius: 5px;
+    }
+
+    input:is([type="checkbox"], [type="radio"]) {
+        appearance: none !important;
+        margin: 0 !important;
+        width: 14px;
+        height: 14px;
+        fill: currentColor;
+        -moz-context-properties: fill, fill-opacity, stroke;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        border: 1px solid var(--uc-checkbox-border-color);
+        background-color: var(--uc-checkbox-unchecked-bgcolor);
+        color: var(--in-parent-primary-button-text-color);
+    }
+
+    input[type="checkbox"] {
+        border-radius: 2px;
+        margin-inline: 4px;
+        margin-block: 3px 2px;
+    }
+
+    .devtools-checkbox-label:not([hidden]) {
+        display: flex;
+        align-items: center;
+    }
+
+    .devtools-checkbox-label input[type="checkbox"] {
+        margin-block: 3px;
+    }
+
+    input:is([type="checkbox"], [type="radio"]):is(:hover, :focus-visible) {
+        background-color: var(--uc-checkbox-unchecked-hover-bgcolor);
+    }
+
+    input:is([type="checkbox"], [type="radio"]):is(:hover, :focus-visible):active {
+        background-color: var(--uc-checkbox-unchecked-active-bgcolor);
+    }
+
+    input:is([type="checkbox"], [type="radio"]):is([checked="true"], :checked):is(:hover, :focus-visible) {
+        background-color: var(--uc-checkbox-checked-hover-bgcolor);
+    }
+
+    input:is([type="checkbox"], [type="radio"]):is([checked="true"], :checked):is(:hover, :focus-visible):active {
+        background-color: var(--uc-checkbox-checked-active-bgcolor);
+    }
+
+    input[type="checkbox"]:is([checked="true"], :checked) {
+        background-image: url(chrome://userchrome/content/check.svg);
+        border-color: var(--uc-checkbox-checked-border-color);
+        background-color: var(--uc-checkbox-checked-bgcolor);
+    }
+
+    input[type="radio"] {
+        border-radius: 100%;
+        margin-inline: 4px;
+    }
+
+    input[type="radio"]:is([checked="true"], :checked) {
+        background-image: url(chrome://userchrome/content/radio.svg);
+        border-color: var(--uc-checkbox-checked-border-color);
+        background-color: var(--uc-checkbox-checked-bgcolor);
+    }
+
+    #sort-form p,
+    fieldset div {
+        align-items: center !important;
+        display: flex !important;
+        flex-flow: row nowrap !important;
+    }
+
+    input:is([type="radio"], [type="checkbox"]) ~ label {
+        padding-inline-start: 6px;
+        padding-block: 2px;
+    }
+
+    #sort-form p select {
+        margin-inline-start: 6px;
+    }
+
+    #autosort {
+        margin-inline-start: 4px !important;
+    }
+
+    button[type="submit"] {
+        appearance: none;
+        border-radius: var(--context-menuitem-border-radius) !important;
+        height: revert !important;
+        line-height: 28px !important;
+        min-height: 28px !important;
+        width: 100% !important;
+        inline-size: -moz-available !important;
+        margin-top: var(--menupopup-inner-padding-magnitude);
+        margin-inline: 6px;
+        padding-inline-start: 8px !important;
+        border: 1px solid var(--uc-arrowpanel-dimmed) !important;
+        color: inherit;
+        background-color: transparent !important;
+    }
+
+    button[type="submit"][disabled] {
+        background-color: var(--uc-desaturate-dimmed) !important;
+        border-color: transparent !important;
+        opacity: 0.6 !important;
+    }
+
+    button[type="submit"]:is(:hover, :focus-visible, :-moz-focusring):not([disabled]) {
+        background-color: var(--uc-arrowpanel-dimmed) !important;
+        border-color: transparent !important;
+    }
+
+    button[type="submit"]:is(:hover, :focus-visible, :-moz-focusring):active:not([disabled]) {
+        background-color: var(--uc-arrowpanel-dimmed-further) !important;
+        border-color: transparent !important;
+    }
+
+    :-moz-focusring {
+        outline: none !important;
+    }
+
+    @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
+        * {
+            font-family: -apple-system, BlinkMacSystemFont, SF Pro Text, "segoe ui",
+                "helvetica neue", helvetica, ubuntu, roboto, noto, arial, sans-serif;
+        }
+        #context {
+            font-weight: var(--uc-font-weight-bold) !important;
+        }
+    }
+}

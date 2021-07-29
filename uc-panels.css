@@ -74,7 +74,6 @@ panel[viewId="PanelUI-eom"] .panel-viewcontainer[panelopen] {
 
 #widget-overflow panelview[extension] {
     max-width: revert !important;
-    min-width: revert !important;
 }
 
 #widget-overflow .webextension-popup-browser {
@@ -1211,6 +1210,10 @@ panel .header,
 }
 
 /* overflow menu */
+#widget-overflow {
+    --arrowpanel-border-color: unset !important;
+}
+
 #widget-overflow-mainView .panel-subview-body {
     padding-bottom: 0 !important;
 }

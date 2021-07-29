@@ -373,6 +373,42 @@ panel[type="autocomplete-richlistbox"]
     margin-top: -4px;
 }
 
+#customizationui-widget-panel[viewId="PanelUI-webext-sort-bookmarks_heftig-browser-action-view"]::part(content),
+#customizationui-widget-panel[viewId="PanelUI-webext-_testpilot-containers-browser-action-view"]::part(content),
+#customizationui-widget-panel[viewId="PanelUI-webext-addon_darkreader_org-browser-action-view"]::part(content),
+#customizationui-widget-panel[viewId="PanelUI-webext-nordvpnproxy_nordvpn_com-browser-action-view"]::part(content),
+#customizationui-widget-panel[viewId="PanelUI-webext-simple-translate_sienori-browser-action-view"]::part(content) {
+    border: 1px solid var(--panel-border-color) !important;
+}
+
+#customizationui-widget-panel[viewId="PanelUI-webext-sort-bookmarks_heftig-browser-action-view"]::part(arrow),
+#customizationui-widget-panel[viewId="PanelUI-webext-_testpilot-containers-browser-action-view"]::part(arrow),
+#customizationui-widget-panel[viewId="PanelUI-webext-addon_darkreader_org-browser-action-view"]::part(arrow),
+#customizationui-widget-panel[viewId="PanelUI-webext-nordvpnproxy_nordvpn_com-browser-action-view"]::part(arrow),
+#customizationui-widget-panel[viewId="PanelUI-webext-simple-translate_sienori-browser-action-view"]::part(arrow) {
+    stroke: var(--panel-border-color);
+}
+
+#customizationui-widget-panel[viewId="PanelUI-webext-sort-bookmarks_heftig-browser-action-view"][side="top"]::part(arrow),
+#customizationui-widget-panel[viewId="PanelUI-webext-_testpilot-containers-browser-action-view"][side="top"]::part(arrow),
+#customizationui-widget-panel[viewId="PanelUI-webext-addon_darkreader_org-browser-action-view"][side="top"]::part(arrow),
+#customizationui-widget-panel[viewId="PanelUI-webext-nordvpnproxy_nordvpn_com-browser-action-view"][side="top"]::part(arrow),
+#customizationui-widget-panel[viewId="PanelUI-webext-simple-translate_sienori-browser-action-view"][side="top"]::part(arrow) {
+    margin-bottom: -4.5px;
+}
+
+#customizationui-widget-panel[viewId="PanelUI-webext-sort-bookmarks_heftig-browser-action-view"][side="bottom"]::part(arrow),
+#customizationui-widget-panel[viewId="PanelUI-webext-_testpilot-containers-browser-action-view"][side="bottom"]::part(arrow),
+#customizationui-widget-panel[viewId="PanelUI-webext-addon_darkreader_org-browser-action-view"][side="bottom"]::part(arrow),
+#customizationui-widget-panel[viewId="PanelUI-webext-nordvpnproxy_nordvpn_com-browser-action-view"][side="bottom"]::part(arrow),
+#customizationui-widget-panel[viewId="PanelUI-webext-simple-translate_sienori-browser-action-view"][side="bottom"]::part(arrow) {
+    margin-top: -4.5px;
+}
+
+#customizationui-widget-panel[viewId="PanelUI-webext-nordvpnproxy_nordvpn_com-browser-action-view"] {
+    --panel-border-color: var(--content-principal-box-background-odd) !important;
+}
+
 #customization-panelWrapper {
     margin-top: -12px;
     min-width: 29em;

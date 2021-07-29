@@ -12,10 +12,12 @@
 @import url(resources/in-content/ext-ublock.css);
 @import url(resources/in-content/ext-simpletranslate.css);
 @import url(resources/in-content/ext-tabnotes.css);
+@import url(resources/in-content/ext-sortbookmarks.css);
 @import url(resources/in-content/site-google.css);
 @import url(resources/in-content/site-youtube.css);
 @import url(resources/in-content/site-wiki.css);
 @import url(resources/in-content/site-github.css);
 @import url(resources/in-content/site-reddit.css);
 @import url(resources/in-content/site-subscene.css);
+@import url(resources/in-content/misc.css);
 @import url(resources/in-content/custom-content.css);

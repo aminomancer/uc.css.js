@@ -111,7 +111,7 @@ menupopup#viewSidebarMenu
 /* dark reader's popup, corresponds to colors set in userContent.css */
 #customizationui-widget-panel[viewId="PanelUI-webext-addon_darkreader_org-browser-action-view"] {
     --arrowpanel-background: var(--tooltip-bgcolor) !important;
-    --arrowpanel-border-color: var(--tooltip-bgcolor) !important;
+    --arrowpanel-border-color: var(--tooltip-border-color) !important;
 }
 
 /* uBlock origin */

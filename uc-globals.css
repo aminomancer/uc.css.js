@@ -238,10 +238,10 @@ tooltip {
     --in-parent-box-background-dim: var(--dialog-box-bgcolor-dim);
     --in-parent-box-border-color: var(--dialog-box-border-color);
     --in-parent-button-background: var(--arrowpanel-faint);
-    --in-parent-button-background-hover: var(--arrowpanel-dimmed);
-    --in-parent-button-background-active: var(--arrowpanel-dimmed-further);
+    --in-parent-button-background-hover: var(--uc-arrowpanel-dimmed);
+    --in-parent-button-background-active: var(--uc-arrowpanel-dimmed-further);
     --in-parent-item-selected: var(--purple-40);
-    --in-parent-item-hover: var(--arrowpanel-dimmed);
+    --in-parent-item-hover: var(--uc-arrowpanel-dimmed);
     --in-parent-border-highlight: var(--purple-40);
     --in-parent-border-hover: var(--dialog-box-border-hover);
     --in-parent-border-focus: var(--purple-40);
@@ -257,9 +257,9 @@ tooltip {
     --in-parent-primary-button-text-color: var(--in-parent-page-color);
     --ui-textbox-bgcolor: hsl(233, 24%, 28%);
     --ui-textbox-focus-bgcolor: hsl(232, 22%, 34%);
-    --ui-solid-button-bgcolor: var(--arrowpanel-dimmed);
-    --ui-solid-button-hover-bgcolor: var(--arrowpanel-dimmed-further);
-    --ui-solid-button-active-bgcolor: var(--arrowpanel-dimmed-even-further);
+    --ui-solid-button-bgcolor: var(--uc-arrowpanel-dimmed);
+    --ui-solid-button-hover-bgcolor: var(--uc-arrowpanel-dimmed-further);
+    --ui-solid-button-active-bgcolor: var(--uc-arrowpanel-dimmed-even-further);
     --ebmp-hover-bgcolor: hsl(233, 24%, 33%);
     --ebmp-focus-bgcolor: hsl(233, 24%, 38%);
 
