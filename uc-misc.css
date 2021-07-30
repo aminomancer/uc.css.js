@@ -70,17 +70,71 @@ tooltip .uc-tooltip-box {
     min-width: 1em !important;
 }
 
-/* the following makes the lock icon visible on ALL tab tooltips.
+/* the following rule makes the lock icon visible on ALL tab tooltips.
 by default, it only shows an insecure lock on pages connected by http or with invalid certificates.
 this rule makes it show a secure lock on all other pages.
 but it's a little silly because 1) CSS on the tooltip can't differentiate between secure pages and pages with mixed content...
 and 2) we can't differentiate between secure pages and local pages, system pages, etc. so the lock icon could be misleading.
 for that reason i disabled it but maybe someone else wants it. it does look kinda cool i guess. */
-
-/* #places-tooltip-insecure-icon[hidden] {
+#places-tooltip-insecure-icon {
     display: -moz-inline-box !important;
-	list-style-image: url(chrome://userchrome/content/skin/connection-secure.svg) !important;
-} */
+}
+
+/* the next several rulesets require restoreTabSoundButton.uc.js to set the necessary attributes based on tab security state. */
+
+/* secure pages. just a regular lock. */
+#places-tooltip-insecure-icon[type="secure"] {
+	list-style-image: url(chrome://global/skin/icons/security.svg) !important;
+}
+
+/* insecure pages. the default, built-in icon, a lock with a red strikethrough. */
+#places-tooltip-insecure-icon[type="insecure"] {
+	list-style-image: url(chrome://global/skin/icons/security-broken.svg) !important;
+}
+
+/* tooltip icon for https pages with mixed passive content.
+a lock with a yellow warning icon overlapping it. intended to match the identity icon.
+mixed active content still shows the normal lock with red strikethrough. */
+#places-tooltip-insecure-icon[type="mixed-passive"] {
+    list-style-image: url(chrome://global/skin/icons/security-warning.svg) !important;
+}
+
+/* about:* pages. */
+#places-tooltip-insecure-icon[type="about-page"] {
+	list-style-image: url(chrome://userchrome/content/identity-icons-brand.svg) !important;
+}
+
+/* local pages, e.g. file:/// or resource:// or chrome:// */
+#places-tooltip-insecure-icon[type="local-page"] {
+	list-style-image: url(chrome://userchrome/content/notifications/persistent-storage.svg) !important;
+}
+
+/* extension pages, namely moz-extension:// */
+#places-tooltip-insecure-icon[type="extension-page"] {
+	list-style-image: url(chrome://browser/content/extension.svg) !important;
+}
+
+/* new tab or home page */
+#places-tooltip-insecure-icon[type="home-page"] {
+	list-style-image: url(chrome://browser/skin/tab.svg) !important;
+}
+
+/* tooltip icon for tabs loading error pages, e.g. network error, certificate error, https-only error. */
+#places-tooltip-insecure-icon[type="error-page"] {
+    list-style-image: url(chrome://userchrome/content/warning.svg) !important;
+
+    /* alternate style, with colored icon */
+    /* list-style-image: url(chrome://userchrome/content/skin/controlcenter/warning.svg) !important;
+    stroke: var(--low-warning-icon-detail) !important;
+    fill: var(--low-warning-icon-background) !important;
+    -moz-context-properties: fill, stroke !important; */
+}
+
+/* show nothing on unloaded tabs, since determining which icon to show requires accessing the browser in session storage,
+which lazy loads the browser and thereby wastes memory and computation */
+#places-tooltip-insecure-icon[pending] {
+    display: none !important;
+}
 
 /* the shadow on the tab tooltip must be removed since it blocks mouse hover from reaching the tab.
 which would mean when you hover a tab, it'd appear hovered, then the tooltip would show up and it would appear unhovered,
@@ -238,6 +292,14 @@ notification[value="keyword-uri-fixup"] {
 :is(.unified-nav-forward, .unified-nav-back):not([_moz-menuactive="true"])[uri^="file:///"],
 .tabbrowser-tab:is([label^="/A:/"i], [label^="/B:/"i], [label^="/C:/"i], [label^="/D:/"i], [label^="/E:/"i], [label^="/F:/"i], [label^="/G:/"i], [label^="/H:/"i], [label^="/I:/"i]) .tab-icon-image:not([src]) {
     list-style-image: url(chrome://userchrome/content/notifications/persistent-storage.svg) !important;
+}
+
+.tabbrowser-tab[image="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8%2F9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAjFJREFUeNqsU8uOElEQPffR3XQ3ONASdBJCSBxHos5%2B3Bg3rvkCv8PElS78gPkO%2FATjQoUdO2ftrJiRh6aneTb9sOpC4weMN6lcuFV16pxDIfI8x12OYIDhcPiu2Wx%2B%2FHF5CW1Z6Jyegt%2FTNEWSJIjjGFEUIQxDrFYrWFSzXC4%2FdLvd95pRKpXKy%2BpRFZ7nwaWo1%2BsGnQG2260BKJfLKJVKGI1GEEJw7ateryd0v993W63WEwjgxfn5obGYzgCbzcaEbdsIggDj8Riu6z6iUk9SYZMSx8W0LMsM%2FSKK75xnJlIq80anQXdbEp0OhcPJ0eiaJnGRMEyyPDsAKKUM9clkYoDo3SZJzzSdp0VSKYmfV1co%2Bz580kw5KDIM8RbRfEnUf1HzxtQyMAGcaGruTKczMzEIaqhKifV6jd%2BzGQQB5llunF%2FM52BizC2K5sYPYvZcu653tjOM9O93wnYc08gmkgg4VAxixfqFUJT36AYBZGd6PJkFCZnnlBxMp38gqIgLpZB0y4Nph18lyWh5FFbrOSxbl3V4G%2BVB7T4ajYYxTyuLtO%2BCvWGgJE1Mc7JNsJEhvgw%2FQV4fo%2F24nbEsX2u1d5sVyn8sJO0ZAQiIYnFh%2BxrfLz%2Fj29cBS%2FO14zg3i8XigW3ZkErDtmKoeM%2BAJGRMnXeEPGKf0nCD1ydvkDzU9Jbc6OpR7WIw6L8lQ%2B4pQ1%2FlPF0RGM9Ns91Wmptk0GfB4EJkt77vXYj%2F8m%2B8y%2FkrwABHbz2H9V68DQAAAABJRU5ErkJggg%3D%3D"] .tab-icon-image {
+    padding-right: 16px !important;
+    background: url(chrome://userchrome/content/notifications/persistent-storage.svg) center/contain !important;
+    -moz-context-properties: fill, fill-opacity !important;
+    animation: none !important;
+    fill: currentColor !important;
 }
 
 :is(.unified-nav-forward, .unified-nav-back):not([_moz-menuactive="true"])[uri^="file:///"]:is([uri$=".svg"i], [uri$=".png"i], [uri$=".jpg"i], [uri$=".jpeg"i], [uri$=".gif"i]),

@@ -80,22 +80,22 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
 }
 
 .customization-target #downloads-button[attention="warning"] .toolbarbutton-badge {
-    fill: hsl(44, 95%, 60%) !important;
-    background-color: hsl(32, 52%, 35%) !important;
+    background-color: var(--low-warning-icon-detail) !important;
+    fill: var(--low-warning-icon-background) !important;
     border-radius: 50% !important;
 }
 
 .customization-target #downloads-button[attention="severe"] .toolbarbutton-badge {
-    fill: hsl(358, 86%, 63%) !important;
-    background-color: hsl(354, 69%, 30%) !important;
+    background-color: var(--warning-icon-detail) !important;
+    fill: var(--warning-icon-background) !important;
     border-radius: 50% !important;
 }
 
 .customization-target #fxa-toolbar-menu-button[badge-status="login_failed"] .toolbarbutton-badge {
     background: url(chrome://userchrome/content/skin/controlcenter/warning.svg) no-repeat
         center/contain !important;
-    stroke: hsl(32, 52%, 35%) !important;
-    fill: hsl(44, 95%, 60%) !important;
+    stroke: var(--low-warning-icon-detail) !important;
+    fill: var(--low-warning-icon-background) !important;
     -moz-context-properties: fill, stroke !important;
     margin: -7px 0 0 !important;
     margin-inline-end: -6px !important;

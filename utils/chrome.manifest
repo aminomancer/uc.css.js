@@ -32,6 +32,7 @@ override chrome://mozapps/skin/extensions/extensionGeneric.svg ../resources/mate
 override chrome://browser/content/extension.svg ../resources/material/extension.svg
 override chrome://browser/skin/history.svg ../resources/skin/history.svg
 override chrome://browser/skin/tab.svg ../resources/skin/tab.svg
+override chrome://browser/skin/new-tab.svg ../resources/skin/new-tab.svg
 override chrome://browser/skin/window.svg ../resources/skin/window.svg
 override chrome://browser/skin/reader-mode.svg ../resources/skin/reader-mode.svg
 override chrome://browser/skin/forward.svg ../resources/skin/forward.svg

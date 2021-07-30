@@ -703,10 +703,6 @@ popupnotification progress[paused]::-moz-progress-bar {
     font-size: 12px !important;
 }
 
-#identity-popup-security-description > description {
-    height: -moz-fit-content !important;
-}
-
 #identity-popup[connection="chrome"] .identity-popup-security-connection {
     background-image: url(chrome://branding/content/about-logo.png) !important;
 }
@@ -727,9 +723,10 @@ popupnotification progress[paused]::-moz-progress-bar {
     -moz-context-properties: fill !important;
 }
 
+#identity-popup[connection="https-only-error-page"] .identity-popup-security-connection,
 #identity-popup[connection="cert-error-page"] .identity-popup-security-connection,
 #identity-popup[connection="net-error-page"] .identity-popup-security-connection {
-    background-image: url(chrome://userchrome/content/error.svg) !important;
+    background-image: url(chrome://userchrome/content/warning.svg) !important;
 }
 
 #identity-popup[connection="extension"] .identity-popup-security-connection {

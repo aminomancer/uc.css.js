@@ -368,17 +368,20 @@ toolbarpaletteitem[removable="false"]
 #identity-box[pageproxystate="valid"].weakCipher #identity-icon,
 #identity-box[pageproxystate="valid"].mixedDisplayContent #identity-icon,
 #identity-box[pageproxystate="valid"].mixedDisplayContentLoadedActiveBlocked #identity-icon,
-#identity-box[pageproxystate="valid"].certUserOverridden #identity-icon,
-#identity-box[pageproxystate="valid"].certErrorPage #identity-icon {
+#identity-box[pageproxystate="valid"].certUserOverridden #identity-icon {
     list-style-image: url(chrome://userchrome/content/connection-mixed-passive-loaded.svg) !important;
     fill: unset !important;
 }
 
 #identity-box[pageproxystate="valid"].notSecure #identity-icon,
-#identity-box[pageproxystate="valid"].mixedActiveContent #identity-icon,
-#identity-box[pageproxystate="valid"].httpsOnlyErrorPage #identity-icon {
+#identity-box[pageproxystate="valid"].mixedActiveContent #identity-icon {
     list-style-image: url(chrome://userchrome/content/connection-mixed-active-loaded.svg) !important;
     fill: unset !important;
+}
+
+#identity-box[pageproxystate="valid"].certErrorPage #identity-icon,
+#identity-box[pageproxystate="valid"].httpsOnlyErrorPage #identity-icon {
+    list-style-image: url(chrome://userchrome/content/warning.svg) !important;
 }
 
 #identity-box:is(:hover:active, [open="true"], :hover:not([open="true"])),
@@ -418,6 +421,18 @@ toolbarpaletteitem[removable="false"]
     #identity-icon-box:is(:hover:active, :hover:not([open="true"]))
     #identity-icon:hover {
     fill: unset !important;
+}
+
+#urlbar[pageproxystate="valid"]
+    #identity-box:is(.httpsOnlyErrorPage, .certErrorPage)
+    #identity-icon-box:is([open="true"], :focus-visible)
+    #identity-icon,
+#urlbar[pageproxystate="valid"]
+    #identity-box:is(.httpsOnlyErrorPage, .certErrorPage)
+    #identity-icon-box:is(:hover:active, :hover:not([open="true"]))
+    #identity-icon:hover {
+    fill: var(--low-warning-color) !important;
+    fill-opacity: 1 !important;
 }
 
 #urlbar[pageproxystate="valid"] #identity-box.chromeUI #identity-icon {

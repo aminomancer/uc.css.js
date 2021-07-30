@@ -113,10 +113,10 @@
 }
 
 #PanelUI-menu-button[badge-status^="update"] > .toolbarbutton-badge-stack > .toolbarbutton-badge {
-    background: hsl(125, 81%, 57%) url(chrome://userchrome/content/update-icon-inverted.svg)
+    background: var(--update-badge-bg) url(chrome://userchrome/content/update-icon-inverted.svg)
         no-repeat center/contain !important;
     background-clip: border-box !important;
-    fill: hsl(118, 89%, 24%) !important;
+    fill: var(--update-badge-color) !important;
     border: 1px solid transparent !important;
     border-radius: 100% !important;
     -moz-context-properties: fill !important;
@@ -130,15 +130,15 @@
     > .toolbarbutton-badge-stack
     > .toolbarbutton-badge:-moz-window-inactive {
     fill: transparent !important;
-    background-color: hsl(227, 19%, 48%) !important;
+    background-color: var(--update-badge-inactive) !important;
 }
 
 :root:not([customizing])
     #PanelUI-menu-button[badge-status^="update"]:is(:hover, [open])
     > .toolbarbutton-badge-stack
     > .toolbarbutton-badge:-moz-window-inactive {
-    background-color: hsl(125, 81%, 57%) !important;
-    fill: hsl(118, 89%, 24%) !important;
+    background-color: var(--update-badge-bg) !important;
+    fill: var(--update-badge-color) !important;
 }
 
 .panel-banner-item[notificationid^="update"]::after {
@@ -146,10 +146,10 @@
 }
 
 .panel-banner-item[notificationid^="update"] > .toolbarbutton-icon {
-    background: hsl(125, 81%, 57%) url(chrome://userchrome/content/update-icon-inverted.svg)
+    background: var(--update-badge-bg) url(chrome://userchrome/content/update-icon-inverted.svg)
         no-repeat center/contain !important;
     background-clip: border-box !important;
-    fill: hsl(118, 89%, 24%) !important;
+    fill: var(--update-badge-color) !important;
     border: 1px solid transparent;
     border-radius: 100% !important;
     -moz-context-properties: fill !important;
@@ -173,9 +173,9 @@
 #PanelUI-menu-button[badge-status="update-restart"]
     > .toolbarbutton-badge-stack
     > .toolbarbutton-badge {
-    background: hsl(125, 81%, 57%) url(chrome://userchrome/content/check.svg) no-repeat
+    background: var(--update-badge-bg) url(chrome://userchrome/content/check.svg) no-repeat
         center/contain !important;
-    fill: hsl(118, 89%, 24%) !important;
+    fill: var(--update-badge-color) !important;
     transform: none !important;
 }
 
@@ -186,9 +186,9 @@
 #PanelUI-menu-button[badge-status="update-unsupported"]:is(:hover, [open])
     > .toolbarbutton-badge-stack
     > .toolbarbutton-badge:-moz-window-inactive {
-    background: hsl(44, 95%, 60%) url(chrome://userchrome/content/check-partial.svg) no-repeat
+    background: var(--low-warning-icon-background) url(chrome://userchrome/content/check-partial.svg) no-repeat
         center/contain !important;
-    fill: hsl(32, 52%, 35%) !important;
+    fill: var(--low-warning-icon-detail) !important;
     transform: none !important;
 }
 
@@ -201,8 +201,8 @@
     > .toolbarbutton-badge {
     background: url(chrome://userchrome/content/skin/controlcenter/warning.svg) no-repeat
         center/contain !important;
-    stroke: hsl(32, 52%, 35%) !important;
-    fill: hsl(44, 95%, 60%) !important;
+    stroke: var(--low-warning-icon-detail) !important;
+    fill: var(--low-warning-icon-background) !important;
     -moz-context-properties: fill, stroke !important;
     margin: -7px 0 0 !important;
     margin-inline-end: -6px !important;
@@ -212,8 +212,8 @@
     > .toolbarbutton-badge-stack
     > .toolbarbutton-badge {
     background: url(chrome://userchrome/content/material/extension.svg) no-repeat center/contain !important;
-    stroke: hsl(32, 52%, 35%) !important;
-    fill: hsl(44, 95%, 60%) !important;
+    stroke: var(--low-warning-icon-detail) !important;
+    fill: var(--low-warning-icon-background) !important;
     -moz-context-properties: fill, stroke !important;
     margin: -8px 0 0 !important;
     margin-inline-end: -6px !important;
@@ -232,14 +232,14 @@
     #PanelUI-menu-button[badge-status="addon-alert"]:not(:hover, [open])
     > .toolbarbutton-badge-stack
     > .toolbarbutton-badge:-moz-window-inactive {
-    fill: hsl(227, 19%, 48%) !important;
+    fill: var(--update-badge-inactive) !important;
 }
 
 :root:not([customizing])
     #PanelUI-menu-button[badge-status="fxa-needs-authentication"]:not(:hover, [open])
     > .toolbarbutton-badge-stack
     > .toolbarbutton-badge:-moz-window-inactive {
-    fill: hsl(227, 19%, 48%) !important;
+    fill: var(--update-badge-inactive) !important;
     stroke: transparent !important;
 }
 
@@ -399,11 +399,15 @@
     border-radius: 2px;
 }
 
-#appmenu-developer-tools-view toolbarbutton[checked="true"]:is(:hover, :focus-visible):not([open]) .toolbarbutton-icon {
+#appmenu-developer-tools-view
+    toolbarbutton[checked="true"]:is(:hover, :focus-visible):not([open])
+    .toolbarbutton-icon {
     background-color: var(--checkbox-checked-hover-bgcolor);
 }
 
-#appmenu-developer-tools-view toolbarbutton[checked="true"]:is(:hover:active, [open]) .toolbarbutton-icon {
+#appmenu-developer-tools-view
+    toolbarbutton[checked="true"]:is(:hover:active, [open])
+    .toolbarbutton-icon {
     background-color: var(--checkbox-checked-active-bgcolor);
 }
 
@@ -566,7 +570,7 @@
 
 #appMenu-fxa-status2 > #appMenu-fxa-label2 {
     padding-block: 4px !important;
-    min-height: calc(var(--subviewbutton-height) + 6px) !important;
+    min-height: 40px !important;
     font-weight: inherit !important;
 }
 
@@ -695,13 +699,14 @@
 
 .PanelUI-remotetabs-clientcontainer > label[itemtype="client"] {
     padding: 4px;
-	font-size: 11px;
+    font-size: 11px;
 }
 
 .panel-banner-item {
     padding: calc(var(--arrowpanel-menuitem-padding) + 2px) var(--arrowpanel-menuitem-padding) !important;
     margin: var(--arrowpanel-menuitem-margin) !important;
     font-weight: inherit !important;
+    min-height: 40px !important;
 }
 
 #appMenu-proton-update-banner {
@@ -732,8 +737,4 @@
 .addon-banner-item > .toolbarbutton-icon,
 .panel-banner-item > .toolbarbutton-icon {
     -moz-box-ordinal-group: 0 !important;
-}
-
-.panel-banner-item[notificationid^="update"] > .toolbarbutton-text {
-    line-height: 18px !important;
 }
