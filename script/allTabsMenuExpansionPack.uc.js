@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           All Tabs Menu Expansion Pack
-// @version        1.7.1
+// @version        1.7.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Next to the "new tab" button in Firefox there's a V-shaped button that opens a big scrolling menu containing all the tabs. This script adds several new features to the "all tabs menu" to help it catch up to the functionality of the regular tabs bar.
@@ -235,7 +235,74 @@
             let icon = e.target.querySelector("#places-tooltip-insecure-icon");
             title.textContent = label;
             url.value = tab.linkedBrowser?.currentURI?.spec.replace(/^https:\/\//, "");
-            icon.hidden = !url.value.startsWith("http://");
+            // show a lock icon to show tab security/encryption
+            if (tab.getAttribute("pending")) {
+                icon.hidden = true;
+                icon.removeAttribute("type");
+                icon.setAttribute("pending", true);
+                return;
+            } else icon.removeAttribute("pending");
+            let docURI = tab.linkedBrowser?.documentURI;
+            if (docURI) {
+                let homePage = new RegExp(
+                    `(${BROWSER_NEW_TAB_URL}|${HomePage.get(window)})`,
+                    "i"
+                ).test(docURI.spec);
+                if (homePage) {
+                    icon.setAttribute("type", "home-page");
+                    icon.hidden = false;
+                    return;
+                }
+                switch (docURI.scheme) {
+                    case "file":
+                    case "resource":
+                    case "chrome":
+                        icon.setAttribute("type", "local-page");
+                        icon.hidden = false;
+                        return;
+                    case "about":
+                        let pathQueryRef = docURI?.pathQueryRef;
+                        if (
+                            pathQueryRef &&
+                            /^(neterror|certerror|httpsonlyerror)/.test(pathQueryRef)
+                        ) {
+                            icon.setAttribute("type", "error-page");
+                            icon.hidden = false;
+                            return;
+                        }
+                        icon.setAttribute("type", "about-page");
+                        icon.hidden = false;
+                        return;
+                    case "moz-extension":
+                        icon.setAttribute("type", "extension-page");
+                        icon.hidden = false;
+                        return;
+                }
+            }
+            let prog = Ci.nsIWebProgressListener;
+            let state = tab.linkedBrowser?.securityUI?.state;
+            if (typeof state != "number" || state & prog.STATE_IS_SECURE) {
+                icon.hidden = true;
+                icon.setAttribute("type", "secure");
+                return;
+            }
+            if (state & prog.STATE_IS_INSECURE) {
+                icon.setAttribute("type", "insecure");
+                icon.hidden = false;
+                return;
+            }
+            if (state & prog.STATE_IS_BROKEN) {
+                if (state & prog.STATE_LOADED_MIXED_ACTIVE_CONTENT) {
+                    icon.hidden = false;
+                    icon.setAttribute("type", "insecure");
+                } else {
+                    icon.setAttribute("type", "mixed-passive");
+                    icon.hidden = false;
+                }
+                return;
+            }
+            icon.hidden = true;
+            icon.setAttribute("type", "secure");
         };
         allTabs._setupListeners = function () {
             this.listenersRegistered = true;
@@ -576,7 +643,11 @@
         allTabs._onDragOver = function (e) {
             let row = findRow(e.target);
             let dt = e.dataTransfer;
-            if (!dt.types.includes("all-tabs-item") || !row || row.tab.multiselected) return;
+            if (!dt.types.includes("all-tabs-item") || !row || row.tab.multiselected) {
+                dt.mozCursor = "auto";
+                return;
+            }
+            dt.mozCursor = "default";
             let draggedTab = dt.mozGetDataAt("all-tabs-item", 0);
             if (row.tab === draggedTab) return;
             if (row.tab.pinned !== draggedTab.pinned) return;
@@ -594,6 +665,7 @@
         allTabs._onDragLeave = function (e) {
             let row = findRow(e.target);
             let dt = e.dataTransfer;
+            dt.mozCursor = "auto";
             if (!dt.types.includes("all-tabs-item") || !row) return;
             this.containerNode
                 .querySelectorAll("[dragpos]")
