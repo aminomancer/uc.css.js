@@ -878,20 +878,15 @@ panel[type="autocomplete-richlistbox"]
     list-style-image: url(chrome://userchrome/content/skin/forward.svg);
 }
 
-:where(#reload-button, #stop-button) > .toolbarbutton-icon {
+.customization-target :is(#reload-button, #stop-button) > .toolbarbutton-icon {
     padding: var(--toolbarbutton-inner-padding) !important;
 }
 
-:where(#reload-button, #stop-button) > .toolbarbutton-animatable-box {
+:is(#reload-button, #stop-button) > .toolbarbutton-animatable-box {
     translate: revert;
 }
 
-:is(#reload-button, #stop-button) > .toolbarbutton-animatable-box {
-    display: none;
-}
-
-#nav-bar-customization-target
-    > #stop-reload-button
+#stop-reload-button
     > :is(#reload-button, #stop-button)
     > .toolbarbutton-animatable-box {
     display: block;
@@ -920,8 +915,7 @@ panel[type="autocomplete-richlistbox"]
     }
 }
 
-#stop-reload-button[animate] > #reload-button,
-#stop-reload-button[animate] > #stop-button {
+#stop-reload-button {
     position: relative;
 }
 

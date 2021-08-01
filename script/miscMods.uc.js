@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Misc. Mods
-// @version        1.5.1
+// @version        1.6.0
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Various tiny mods not worth making separate scripts for. Read the comments inside the script for details.
@@ -25,6 +25,12 @@
 
         // by default, when you hit ctrl+tab it waits 200ms before opening the panel. if you replace the 200 with another number, it will wait that long in milliseconds instead.
         "Reduce ctrl+tab delay": 200,
+
+        // normally, firefox only animates the stop/reload button when it's in the main customizable navbar. if you enter customize mode and move the button to the tabs toolbar, menu bar, or personal/bookmarks toolbar, the animated transition between the stop icon to the reload icon disappears. the icon just instantly changes. I suspect this is done in order to avoid potential problems with density modes, but it doesn't seem necessary. as long as you provide some CSS it works fine:
+        // #stop-reload-button {position: relative;}
+        // #stop-reload-button > :is(#reload-button, #stop-button) > .toolbarbutton-animatable-box {display: block;}
+        // :is(#reload-button, #stop-button) > .toolbarbutton-icon {padding: var(--toolbarbutton-inner-padding) !important;}
+        "Allow stop/reload button to animate in other toolbars": true,
     };
     class UCMiscMods {
         constructor() {
@@ -36,6 +42,8 @@
             if (config["Move all selected tabs with hotkeys"]) this.moveTabKeysMoveSelectedTabs();
             if (config["Anchor bookmarks menu tooltip to bookmark"]) this.anchorBookmarksTooltip();
             this.reduceCtrlTabDelay(config["Reduce ctrl+tab delay"]);
+            if (config["Allow stop/reload button to animate in other toolbars"])
+                this.stopReloadAnimations();
         }
         stopDownloadsPanelFocus() {
             eval(
@@ -135,6 +143,22 @@
                     this._openPanel();
                 }, delay);
             };
+        }
+        stopReloadAnimations() {
+            eval(
+                `CombinedStopReload.switchToStop = function ` +
+                    CombinedStopReload.switchToStop
+                        .toSource()
+                        .replace(/switchToStop/, "")
+                        .replace(/#nav-bar-customization-target/, `.customization-target`)
+            );
+            eval(
+                `CombinedStopReload.switchToReload = function ` +
+                    CombinedStopReload.switchToReload
+                        .toSource()
+                        .replace(/switchToReload/, "")
+                        .replace(/#nav-bar-customization-target/, `.customization-target`)
+            );
         }
     }
 

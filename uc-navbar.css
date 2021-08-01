@@ -255,7 +255,7 @@ i haven't tested this on every scaling factor, if it makes things worse on your 
 }
 
 :root:not([uidensity="compact"])
-    :is(#nav-bar-customization-target, #TabsToolbar-customization-target)
+    .customization-target
     > :is(#stop-reload-button, #wrapper-stop-reload-button) {
     margin-inline: -2px !important;
 }
