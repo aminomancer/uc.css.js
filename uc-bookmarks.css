@@ -214,8 +214,8 @@
     min-width: unset !important;
 }
 
-#editBookmarkPanel .panel-footer > button.editBookmarkPanelBottomButton {
-    border: none !important;
+#editBookmarkPanel .panel-footer > button {
+    border: 1px solid transparent !important;
     flex-grow: 5 !important;
     margin: 0 !important;
     padding-inline: 0 !important;
@@ -223,8 +223,32 @@
     border-radius: var(--arrowpanel-menuitem-border-radius) !important;
 }
 
-#editBookmarkPanel .panel-footer > button.editBookmarkPanelBottomButton[default] {
+#editBookmarkPanel .panel-footer > button:not([default]) {
+    background-color: transparent !important;
+    border-color: var(--button-hover-bgcolor) !important;
+}
+
+#editBookmarkPanel .panel-footer > button:not([default], [disabled], :active):is(:hover, :focus-visible) {
+    background-color: var(--button-hover-bgcolor) !important;
+    border-color: transparent !important;
+}
+
+#editBookmarkPanel .panel-footer > button:not([default], [disabled]):is(:hover:active, [open]) {
+    background-color: var(--button-active-bgcolor) !important;
+    border-color: transparent !important;
+}
+
+#editBookmarkPanel .panel-footer > button[default] {
     flex-grow: 3 !important;
+    background-color: var(--button-hover-bgcolor) !important;
+}
+
+#editBookmarkPanel .panel-footer > button[default]:not([disabled], :active):is(:hover, :focus-visible) {
+    background-color: var(--button-primary-hover-bgcolor) !important;
+}
+
+#editBookmarkPanel .panel-footer > button[default]:not([disabled]):is(:hover:active, [open]) {
+    background-color: var(--button-primary-active-bgcolor) !important;
 }
 
 #editBMPanel_tagsField {

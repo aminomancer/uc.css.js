@@ -528,20 +528,17 @@
         background-color: var(--uc-arrowpanel-dimmed-further) !important;
     }
 
-    .panel-footer > .button.secondary:not([disabled]),
-    #delete-container-button {
+    .panel-footer > .button.secondary:not([disabled]) {
         background-color: transparent !important;
         border-color: var(--uc-arrowpanel-dimmed) !important;
     }
 
-    .panel-footer > .button.secondary:not([disabled], :active):is(:hover, :focus-visible),
-    #delete-container-button:is(:hover, :focus-visible, :-moz-focusring) {
+    .panel-footer > .button.secondary:not([disabled], :active):is(:hover, :focus-visible) {
         background-color: var(--uc-arrowpanel-dimmed) !important;
         border-color: transparent !important;
     }
 
-    .panel-footer > .button.secondary:not([disabled]):is(:hover:active, [open]),
-    #delete-container-button:is(:hover, :focus-visible, :-moz-focusring):active {
+    .panel-footer > .button.secondary:not([disabled]):is(:hover:active, [open]) {
         background-color: var(--uc-arrowpanel-dimmed-further) !important;
         border-color: transparent !important;
     }
@@ -552,6 +549,18 @@
 
     .panel-footer > .button.primary:is(:hover, :focus-visible, :-moz-focusring):active {
         background-color: var(--in-parent-primary-button-background-hover) !important;
+    }
+
+    #delete-container-button {
+        background-color: hsla(2, 70%, 56%, 45%) !important;
+    }
+
+    #delete-container-button:is(:hover, :focus-visible, :-moz-focusring) {
+        background-color: hsla(358, 70%, 50%, 85%) !important;
+    }
+
+    #delete-container-button:is(:hover, :focus-visible, :-moz-focusring):active {
+        background-color: hsl(353, 90%, 50%) !important;
     }
 
     [type="radio"]:checked + [data-identity-color="grey"] {

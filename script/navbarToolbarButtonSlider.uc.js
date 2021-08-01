@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Nav-bar Toolbar Button Slider
-// @version        2.7.1
+// @version        2.7.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Wrap all toolbar buttons in a scrollable div. It can scroll horizontally through the buttons by scrolling up/down with a mousewheel, like the tab bar. By default, it wraps all toolbar buttons that come after the urlbar. (to the right of the urlbar, normally) You can edit userChrome.toolbarSlider.wrapButtonsRelativeToUrlbar in about:config to change this: a value of "before" will wrap all buttons that come before the urlbar, and "all" will wrap all buttons. You can change userChrome.toolbarSlider.width to make the container wider or smaller. If you choose 12, it'll be 12 buttons long. When the window gets *really* small, the slider disappears and the toolbar buttons are placed into the normal widget overflow panel. You can specify more buttons to exclude from the slider by adding their IDs (in quotes, separated by commas) to userChrome.toolbarSlider.excludeButtons in about:config. For example you might type ["bookmarks-menu-button", "downloads-button"] if you want those to stay outside of the slider. You can also decide whether to exclude flexible space springs from the slider by toggling userChrome.toolbarSlider.excludeFlexibleSpace in about:config. By default, springs are excluded. To scroll faster you can add a multiplier right before scrollByPixels is called, like scrollAmount = scrollAmount * 1.5 or something like that. Doesn't handle touch events yet since I don't have a touchpad to test it on. Let me know if you have any ideas though.
@@ -549,7 +549,7 @@
             outer.id = "nav-bar-toolbarbutton-slider-container";
             // the crucial parts here are scroll-behavior: smooth, overflow: hidden. without this, smooth horizontal scrolling won't work.
             outer.style.cssText =
-                "display: -moz-box; -moz-box-align: center; scrollbar-width: none; box-sizing: border-box; scroll-behavior: smooth; overflow: hidden; transition: max-width 0.2s ease-out;";
+                "display: -moz-box; -moz-box-align: center; -moz-box-orient: vertical; scrollbar-width: none; box-sizing: border-box; scroll-behavior: smooth; overflow: hidden; transition: max-width 0.2s ease-out;";
             outer.ready = true;
             inner.className = "slider-inner-container";
             inner.id = "nav-bar-toolbarbutton-slider";
@@ -705,9 +705,60 @@
             cleanUp();
         }
 
+        /**
+         * for a given node, find its scrollable parent and return true if the node is scrolled out of view
+         * @param {object} node (the potential anchor node)
+         * @returns {boolean} true if the node is scrolled out of view
+         */
+        function scrolledOutOfView(node) {
+            let scrollBox = node.closest(".slider-container, arrowscrollbox");
+            if (!scrollBox) return false;
+            let ordinals =
+                scrollBox.getAttribute("orient") === "horizontal"
+                    ? ["left", "right", "width"]
+                    : ["top", "bottom", "height"];
+            let nodeRect = node.getBoundingClientRect();
+            let scrollRect = scrollBox.getBoundingClientRect();
+            return (
+                scrollRect[ordinals[0]] > nodeRect[ordinals[0]] + nodeRect[ordinals[2]] / 2 ||
+                scrollRect[ordinals[1]] + nodeRect[ordinals[2]] / 2 < nodeRect[ordinals[1]]
+            );
+        }
+
         init();
         CustomizableUI.addListener(cuiListen);
         setTimeout(oddCleanup, 0);
+        // don't show the confirmation hint on the bookmarks menu or library button if they're scrolled out of view
+        setTimeout(() => {
+            // don't change this method if we're using restorePreProtonLibraryButton.uc.js, since that script also changes it
+            if (!LibraryUI)
+                StarUI.showConfirmation = function () {
+                    const HINT_COUNT_PREF =
+                        "browser.bookmarks.editDialog.confirmationHintShowCount";
+                    const HINT_COUNT = Services.prefs.getIntPref(HINT_COUNT_PREF, 0);
+                    if (HINT_COUNT >= 3) return;
+                    Services.prefs.setIntPref(HINT_COUNT_PREF, HINT_COUNT + 1);
+
+                    let anchor;
+                    if (window.toolbar.visible)
+                        for (let id of ["library-button", "bookmarks-menu-button"]) {
+                            let element = document.getElementById(id);
+                            if (
+                                element &&
+                                element.getAttribute("cui-areatype") != "menu-panel" &&
+                                element.getAttribute("overflowedItem") != "true" &&
+                                isElementVisible(element) &&
+                                !scrolledOutOfView(element)
+                            ) {
+                                anchor = element;
+                                break;
+                            }
+                        }
+
+                    if (!anchor) anchor = document.getElementById("PanelUI-menu-button");
+                    ConfirmationHint.show(anchor, "pageBookmarked2");
+                };
+        }, 100);
     }
 
     // for this script we want to do everything as quickly as possible so there isn't a jarring transition during startup.

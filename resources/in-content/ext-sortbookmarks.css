@@ -176,24 +176,24 @@
         margin-top: var(--menupopup-inner-padding-magnitude);
         margin-inline: 6px;
         padding-inline-start: 8px !important;
-        border: 1px solid var(--uc-arrowpanel-dimmed) !important;
+        border: 1px solid transparent !important;
         color: inherit;
-        background-color: transparent !important;
+        background-color: var(--uc-arrowpanel-dimmed) !important;
     }
 
     button[type="submit"][disabled] {
-        background-color: var(--uc-desaturate-dimmed) !important;
-        border-color: transparent !important;
+        background-color: transparent !important;
+        border-color: var(--uc-arrowpanel-dimmed) !important;
         opacity: 0.6 !important;
     }
 
     button[type="submit"]:is(:hover, :focus-visible, :-moz-focusring):not([disabled]) {
-        background-color: var(--uc-arrowpanel-dimmed) !important;
+        background-color: var(--in-parent-primary-button-background) !important;
         border-color: transparent !important;
     }
 
     button[type="submit"]:is(:hover, :focus-visible, :-moz-focusring):active:not([disabled]) {
-        background-color: var(--uc-arrowpanel-dimmed-further) !important;
+        background-color: var(--in-parent-primary-button-background-hover) !important;
         border-color: transparent !important;
     }
 
