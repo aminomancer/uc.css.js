@@ -70,14 +70,20 @@ tooltip .uc-tooltip-box {
     min-width: 1em !important;
 }
 
-/* the following rule makes the lock icon visible on ALL tab tooltips.
+#places-tooltip-insecure-icon[hidden] {
+    display: none;
+}
+
+/* the following rule can make the lock icon in the tab tooltip visible on all tabs except pending/unloaded tabs.
 by default, it only shows an insecure lock on pages connected by http or with invalid certificates.
 this rule makes it show a secure lock on all other pages.
 but it's a little silly because 1) CSS on the tooltip can't differentiate between secure pages and pages with mixed content...
 and 2) we can't differentiate between secure pages and local pages, system pages, etc. so the lock icon could be misleading.
 for that reason i disabled it but maybe someone else wants it. it does look kinda cool i guess. */
-#places-tooltip-insecure-icon {
-    display: -moz-inline-box !important;
+@supports -moz-bool-pref("userChrome.tabs.tooltip.always-show-lock-icon") {
+    #places-tooltip-insecure-icon {
+        display: -moz-inline-box !important;
+    }
 }
 
 /* the next several rulesets require restoreTabSoundButton.uc.js to set the necessary attributes based on tab security state. */

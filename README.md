@@ -79,6 +79,7 @@ For best results, set density mode to `Normal` and theme to `Dark` in the custom
 | userChrome.tabs.new-loading-spinner-animation | Boolean | true | Replace the tab loading throbber with a spinning animation |
 | userChrome.tabs.pinned-tabs.close-buttons.disabled | Boolean | true | This controls whether close buttons are shown on pinned tabs |
 | userChrome.tabs.rounded-outer-corners.disabled | Boolean | false | This controls whether tabs have rounded bottom corners<br/><img src="preview/prev-tabcorners.webp" width="100%"/> |
+| userChrome.tabs.tooltip.always-show-lock-icon | Boolean | false | There's an icon in the tab tooltip representing page security. Always show it, or hide it on secure pages? |
 | userChrome.urlbar.hide-bookmarks-button-on-system-pages | Boolean | true | Hides the urlbar's bookmark button on system pages & new tab page |
 | userChrome.urlbar-results.disable\_animation | Boolean | false | Toggle to `true` if you don't want urlbar animations |
 | widget.content.allow-gtk-dark-theme | Boolean | true | Makes Linux theming more consistent |
