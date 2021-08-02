@@ -1712,6 +1712,16 @@ domain("wikimedia.org") {
         background: unset !important;
         box-shadow: 0 0 25px 2px hsla(0, 0%, 0%, 0.1), 0 0 5px 1px hsla(0, 0%, 0%, 0.25) !important;
         border-radius: 3px !important;
+        border: 1px solid hsla(230, 3.9%, 18%, 0.5) !important;
+        background-image: var(--acrylic-texture) !important;
+        backdrop-filter: blur(7px) !important;
+        background-color: hsla(230, 3.9%, 2%, 0.8) !important;
+        margin-block: -6px -9px !important;
+        overflow: hidden !important;
+    }
+
+    .mwe-popups .mwe-popups-container {
+        background-color: transparent !important;
     }
 
     .mwe-popups .mw-ui-icon {
@@ -1726,10 +1736,6 @@ domain("wikimedia.org") {
     .mwe-popups .mw-ui-icon-preview-generic {
         margin: 21px 0 8px 0 !important;
         opacity: 0.25 !important;
-    }
-
-    .mwe-popups .mwe-popups-container {
-        background-color: hsla(0, 0%, 2%, 0.95) !important;
     }
 
     .mwe-popups .mwe-popups-container footer {
@@ -1808,6 +1814,10 @@ domain("wikimedia.org") {
         scrollbar-width: none !important;
         margin-block: 25px !important;
         padding-block: 0 !important;
+    }
+
+    .mwe-popups-extract {
+        padding-block: unset !important;
     }
 
     .mwe-popups:is(.flipped-y, .flipped-x-y) .mwe-popups-extract {
@@ -4050,5 +4060,12 @@ domain("wikimedia.org") {
     .mw-highlight .si,
     .mw-highlight .sr {
         color: hsl(335.7, 100%, 91.8%) !important;
+    }
+
+    .mw-parser-output .unsolved {
+        border-color: hsla(212, 8.8%, 66.5%, 0.1) !important;
+        background-color: hsl(240, 5.6%, 7.1%) !important;
+        border-width: 1px !important;
+        border-radius: 3px !important;
     }
 }
