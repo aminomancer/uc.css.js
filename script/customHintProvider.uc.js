@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Custom Hint Provider
-// @version        1.1
+// @version        1.1.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    A utility script for other scripts to take advantage of. Sets up a global object (on the chrome window) for showing confirmation hints with custom messages. The built-in confirmation hint component can only show a few messages built into the browser's localization system. It only accepts l10n IDs, so if your script wants to show a custom message with some specific string, it won't work. This works just like the built-in confirmation hint, and uses the built-in confirmation hint element, but it accepts an arbitrary string as a parameter. So you can open a confirmation hint with *any* message, e.g. CustomHint.show(anchorNode, "This is my custom message", {hideArrow: true, hideCheck: true, description: "Awesome.", duration: 3000})
@@ -75,25 +75,9 @@ window.CustomHint = {
             { once: true }
         );
 
-        let { width, height, left, top } = windowUtils.getBoundsWithoutFlushing(anchor);
-        let alignX;
-        if (typeof options.alignX === "number") alignX = options.alignX;
-        else
-            switch (options.alignX) {
-                case "left":
-                    alignX = 0;
-                    break;
-                case "right":
-                    alignX = width;
-                    break;
-                case "center":
-                default:
-                    alignX = width / 2;
-                    break;
-            }
-        let x = anchor.screenX || left + screenX;
-        let y = anchor.screenY || top + screenY;
-        this._panel.openPopupAtScreen(x + alignX, y + height, false, options.event);
+        let { position, x, y } = options;
+        this._panel.openPopup(null, { position, triggerEvent: options.event });
+        this._panel.moveToAnchor(anchor, position, x, y);
     },
 
     _reset() {
@@ -187,25 +171,9 @@ window.CustomHint = {
             );
             this._panel.addEventListener("popuphidden", () => this._reset(), { once: true });
 
-            let { width, height, left, top } = windowUtils.getBoundsWithoutFlushing(anchor);
-            let alignX;
-            if (typeof options.alignX === "number") alignX = options.alignX;
-            else
-                switch (options.alignX) {
-                    case "left":
-                        alignX = 0;
-                        break;
-                    case "right":
-                        alignX = width;
-                        break;
-                    case "center":
-                    default:
-                        alignX = width / 2;
-                        break;
-                }
-            let x = anchor.screenX || left + screenX;
-            let y = anchor.screenY || top + screenY;
-            this._panel.openPopupAtScreen(x + alignX, y + height, false, options.event);
+            let { position, x, y } = options;
+            this._panel.openPopup(null, { position, triggerEvent: options.event });
+            this._panel.moveToAnchor(anchor, position, x, y);
         };
     }
     if (gBrowserInit.delayedStartupFinished) init();

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Copy Current URL Hotkey
-// @version        1.1
+// @version        1.1.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Adds a new hotkey (Ctrl+Alt+C by default) that copies whatever is in the urlbar, even when it's not in focus.
@@ -27,7 +27,10 @@
                 if (win === window && gURLBar.value) {
                     this.clipboardHelper.copyString(gURLBar.value);
                     this.showHint &&
-                        win.CustomHint?.show(gURLBar.inputField, "Copied", { alignX: 25 });
+                        win.CustomHint?.show(gURLBar.inputField, "Copied", {
+                            position: "after_start",
+                            x: 16,
+                        });
                 }
             });
             if (CopyCurrentURL.config["context menu shortcut hint"]) this.shortcutHint();
