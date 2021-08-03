@@ -772,10 +772,29 @@ popupnotification progress[paused]::-moz-progress-bar {
 }
 
 #protections-popup-main-header-label {
-    display: -moz-box !important;
+    display: -moz-box;
     height: auto !important;
     -moz-box-align: center !important;
     -moz-box-pack: center !important;
+}
+
+#protections-popup[toast] #protections-popup-mainView > :not(#protections-popup-mainView-panel-header-section),
+#protections-popup[toast] #protections-popup-main-header-label {
+	display: none;
+}
+
+#protections-popup[toast] #messaging-system-message-container {
+	border: none !important;
+}
+
+#protections-popup[toast] {
+    --arrowpanel-background: var(--confirmation-hint-bgcolor);
+    --arrowpanel-border-color: var(--confirmation-hint-border-color);
+    --arrowpanel-color: var(--confirmation-hint-color);
+}
+
+#protections-popup[toast] #protections-popup-mainView-panel-header {
+	min-height: 30px !important;
 }
 
 #protections-popup-mainView-panel-header-span {
