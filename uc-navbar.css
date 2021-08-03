@@ -195,15 +195,6 @@ toolbar:not(#PersonalToolbar) #zoom-controls separator {
     display: none !important;
 }
 
-#back-button,
-#forward-button,
-#stop-reload-button {
-    appearance: none !important;
-    margin: 0 !important;
-    padding: 0 var(--toolbarbutton-outer-padding) !important;
-    -moz-box-pack: center !important;
-}
-
 :root:not([customizing]) #stop-reload-button > .toolbarbutton-1 {
     opacity: 1 !important;
 }

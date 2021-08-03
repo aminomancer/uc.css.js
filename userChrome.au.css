@@ -661,6 +661,11 @@ panel[type="autocomplete-richlistbox"]
     padding-block: 0;
 }
 
+#nav-bar-customization-target > :is(toolbarbutton, toolbaritem):first-child,
+#nav-bar-customization-target > toolbarpaletteitem:first-child > :is(toolbarbutton, toolbaritem) {
+    padding: 0 var(--toolbarbutton-outer-padding);
+}
+
 /* prevent hiding the close button when audio is playing. undoes an irritating rule in the proton update */
 #navigator-toolbox:not(:hover)
     .tab-icon-overlay:not([pinned], [sharing], [crashed]):is([soundplaying], [muted], [activemedia-blocked]),
