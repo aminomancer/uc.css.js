@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name           Fluent Reveal Tabs
-// @version        1.0
+// @version        1.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
-// @description    Adds a visual effect to tabs similar to the spotlight gradient effect on Windows 10's start menu tiles. When hovering a tab, a subtle radial gradient is applied under the mouse. Also applies to tabs in the "All tabs menu," and is fully compatible with my All Tabs Menu Expansion Pack. Inspired by the proof of concept here: https://www.reddit.com/r/FirefoxCSS/comments/ng5lnt/proof_of_concept_legacy_edge_like_interaction/
+// @description    Adds a visual effect to tabs similar to the spotlight gradient effect on Windows 10's start menu tiles. When hovering a tab, a subtle radial gradient is applied under the mouse. Inspired by the proof of concept here: https://www.reddit.com/r/FirefoxCSS/comments/ng5lnt/proof_of_concept_legacy_edge_like_interaction/
 // ==/UserScript==
 
 (function () {
@@ -12,11 +12,8 @@
         static options = {
             showOnSelectedTab: false, // whether to show the effect if the tab is selected. this doesn't look good with my theme so I set it to false.
             showOnPinnedTab: false, // whether to show the effect on pinned tabs. likewise, doesn't look good with my theme but may work with yours.
-            showInAllTabsMenu: true,
             lightColor: "hsla(224, 100%, 80%, 0.05)", // the color of the gradient. default is sort of a faint baby blue. you may prefer just white, e.g. hsla(0, 0%, 100%, 0.05)
             gradientSize: 50, // how wide the radial gradient is. 50px looks best with my theme, but default proton tabs are larger so you may want to try 60 or even 70.
-            allTabsLightColor: "hsla(224, 100%, 80%, 0.07)", // same as above but for the all tabs menu. I prefer brighter and larger in the all tabs menu.
-            allTabsGradientSize: 80,
             clickEffect: false, // whether to show an additional light burst when clicking a tab. I don't recommend this since it doesn't play nicely with dragging & dropping if you release while your mouse is outside the tab box. I can probably fix this issue but I don't think it's a great fit for tabs anyway.
         };
 
@@ -38,39 +35,6 @@
             gBrowser.tabs.forEach((tab) =>
                 this.applyEffect(tab.querySelector(".tab-content"), true)
             );
-
-            if (this._options.showInAllTabsMenu) this.setUpAllTabsMenu();
-        }
-
-        // if options.showInAllTabsMenu is true, modify the all tabs menu's method for creating rows so it invokes applyEffect on tab items as it creates them.
-        async setUpAllTabsMenu() {
-            gTabsPanel.init(); // the method won't exist at startup until the all tabs menu is first opened, so we have to either initialize it or modify the file directly, and this is easier.
-            let allTabsXPac = false;
-            // determine if the user is using my "All Tabs Menu Expansion Pack" script. we need to do this because that script modifies the same function. we don't want the scripts to break each other.
-            if (_ucUtils)
-                allTabsXPac = !!_ucUtils
-                    .getScriptData()
-                    .find(
-                        (script) =>
-                            script.name === "All Tabs Menu Expansion Pack" &&
-                            script.author === "aminomancer"
-                    );
-
-            if (allTabsXPac) await FluentRevealEffect.sleep(100); // if the all tabs expansion script is found, wait 100ms for the script to load. maybe there's a cleaner way of waiting for the script, but currently it looks like the other options would force me to delay the entire script.
-            eval(
-                `gTabsPanel.allTabsPanel._createRow = function ` +
-                    gTabsPanel.allTabsPanel._createRow
-                        .toSource()
-                        .replace(/\_createRow/, "")
-                        .replace(/^\(function /, "")
-                        .replace(/\}\)/, `}`)
-                        .replace(
-                            /let button \= doc.createXULElement\(\"toolbarbutton\"\)\;/,
-                            `let button = doc.createXULElement(\"toolbarbutton\"); fluentRevealFx.applyEffect(` +
-                                (allTabsXPac ? "row" : "button") +
-                                `, false, {gradientSize: "${this._options.allTabsGradientSize}", lightColor: "${this._options.allTabsLightColor}"});`
-                        )
-            ); // if the other script is found, toSource() will return its modified version of the function. so we don't need to do anything different, just wait for it to load. but because that script also changes the styling a bit, causing the background to be drawn on the all tabs item rather than on its first button child, we invoke applyEffect() on a different element if the other script is installed. in other words, if all tabs xpac is not installed, we apply the effect to the button child of each all tabs item. if it IS installed, then we apply the effect to the all tabs item itself, aka "row."
         }
 
         /**
@@ -85,7 +49,7 @@
 
             switch (e.type) {
                 case "mousemove":
-                    if (this.shouldClear(e.currentTarget)) return this.clearEffect(e.currentTarget); // if the element is a tab or all tabs item, check if it's selected or pinned and check if the user options hide the effect on selected or pinned tabs. determines if we should avoid showing the effect on the element at the current time.
+                    if (this.shouldClear(e.currentTarget)) return this.clearEffect(e.currentTarget); // if the element is a tab, check if it's selected or pinned and check if the user options hide the effect on selected or pinned tabs. determines if we should avoid showing the effect on the element at the current time.
                     if (clickEffect && e.currentTarget.fluentRevealState.is_pressed)
                         // mousemove events still trigger while the element is clicked. so if the click effect is enabled and the element is pressed, we want to apply a different effect than we normally would.
                         this.drawEffect(
@@ -271,7 +235,7 @@
         window.fluentRevealFx = new FluentRevealEffect(); // instantiate the class on a global property to share the methods with other scripts if desired.
     }
 
-    // wait for the chrome window to finish starting up. we apply the effect to tabs by modifying class methods of objects like gTabsPanel.allTabsPanel and gBrowser.tabContainer. those modules must load before we can modify them. when startup finishes it sets delayedStartupFinished to true. so if it's already finished by the time this script executes we can just init() immediately.
+    // wait for the chrome window to finish starting up. we apply the effect to tabs by modifying class methods of gBrowser.tabContainer. those modules must load before we can modify them. when startup finishes it sets delayedStartupFinished to true. so if it's already finished by the time this script executes we can just init() immediately.
     if (gBrowserInit.delayedStartupFinished) init();
     else {
         // otherwise, we need to hook up an observer so we can wait and be informed when startup finishes.
