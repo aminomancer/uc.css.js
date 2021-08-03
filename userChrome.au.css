@@ -214,7 +214,7 @@ menupopup::part(arrowscrollbox),
 }
 
 /* make unpinned tabs stretch to fill the whole tab bar */
-:root[sessionrestored] .tabbrowser-tab[fadein]:not([style*="max-width"]) {
+.tabbrowser-tab[fadein]:not([style*="max-width"]) {
     max-width: var(--tab-max-width, 225px);
 }
 
