@@ -103,7 +103,6 @@ panel[viewId="PanelUI-eom"] .panel-viewcontainer[panelopen] {
     margin-top: -3px !important;
 }
 
-#BMB_bookmarksPopup,
 #downloadsPanel,
 #widget-overflow,
 #appMenu-popup,
@@ -132,6 +131,11 @@ panel[type="arrow"][side="top"] {
 
 #confirmation-hint {
     margin-top: -9px;
+}
+
+
+#BMB_bookmarksPopup {
+    margin-top: -12px !important;
 }
 
 .subviewbutton {

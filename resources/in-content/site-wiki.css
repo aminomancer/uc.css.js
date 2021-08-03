@@ -4062,10 +4062,21 @@ domain("wikimedia.org") {
         color: hsl(335.7, 100%, 91.8%) !important;
     }
 
+    .mw-parser-output .spoken-wikipedia,
     .mw-parser-output .unsolved {
         border-color: hsla(212, 8.8%, 66.5%, 0.1) !important;
         background-color: hsl(240, 5.6%, 7.1%) !important;
         border-width: 1px !important;
         border-radius: 3px !important;
+    }
+
+    .mw-parser-output .spoken-wikipedia-files {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .mw-parser-output .vanchor > :target ~ .vanchor-text {
+        background-color: var(--purple-35) !important;
     }
 }
