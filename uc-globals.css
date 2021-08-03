@@ -173,7 +173,9 @@ tooltip {
     --search-box-focus: hsl(229, 27%, 27%);
     --search-box-null: hsl(230, 30%, 20%);
     --textbox-button-hidden: hsla(240, 100%, 89%, 0);
+    --confirmation-hint-color: var(--ui-text-100);
     --confirmation-hint-bgcolor: hsl(240, 60%, 59%);
+    --confirmation-hint-border-color: hsl(240, 60%, 59%);
     --picture-in-picture-toggle-bgcolor: hsl(244, 100%, 63%);
 
     --urlbar-base-font-weight: 400;

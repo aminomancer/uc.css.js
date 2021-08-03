@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Custom Hint Provider
-// @version        1.0
+// @version        1.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    A utility script for other scripts to take advantage of. Sets up a global object (on the chrome window) for showing confirmation hints with custom messages. The built-in confirmation hint component can only show a few messages built into the browser's localization system. It only accepts l10n IDs, so if your script wants to show a custom message with some specific string, it won't work. This works just like the built-in confirmation hint, and uses the built-in confirmation hint element, but it accepts an arbitrary string as a parameter. So you can open a confirmation hint with *any* message, e.g. CustomHint.show(anchorNode, "This is my custom message", {hideArrow: true, hideCheck: true, description: "Awesome.", duration: 3000})
@@ -25,6 +25,9 @@ window.CustomHint = {
      *         - hideCheck (boolean): Optionally hide the checkmark.
      *         - description (string): Show description text.
      *         - duration (numeric): How long the hint should stick around.
+     *         - alignX (number or string): Where to align the hint relative to the anchor. (horizontally)
+     *                                      An integer value will be taken as an offset (in pixels) from the left of the anchor.
+     *                                      A string can be "left" "center" or "right" but uses "center" if this property is omitted.
      *
      */
     show(anchor, message, options = {}) {
@@ -72,10 +75,25 @@ window.CustomHint = {
             { once: true }
         );
 
-        this._panel.openPopup(anchor, {
-            position: "bottomcenter topleft",
-            triggerEvent: options.event,
-        });
+        let { width, height, left, top } = windowUtils.getBoundsWithoutFlushing(anchor);
+        let alignX;
+        if (typeof options.alignX === "number") alignX = options.alignX;
+        else
+            switch (options.alignX) {
+                case "left":
+                    alignX = 0;
+                    break;
+                case "right":
+                    alignX = width;
+                    break;
+                case "center":
+                default:
+                    alignX = width / 2;
+                    break;
+            }
+        let x = anchor.screenX || left + screenX;
+        let y = anchor.screenY || top + screenY;
+        this._panel.openPopupAtScreen(x + alignX, y + height, false, options.event);
     },
 
     _reset() {
@@ -127,3 +145,77 @@ window.CustomHint = {
         }
     },
 };
+
+(function () {
+    function init() {
+        // when the confirmation hint was created, openPopup worked differently.
+        // it didn't set the "open" attribute on the anchor directly.
+        // that was up to the function calling openPopup to handle.
+        // which worked well for the confirmation hint, since it shouldn't set the "open" attribute at all.
+        // the confirmation hint isn't a popup or a panel in terms of function, it's more like a tooltip.
+        // so it shouldn't show the [open] style on buttons it's anchored to,
+        // nor should it stifle scrolling while it's open.
+        // since setting the attribute is now built into the binary code,
+        // we can only stop it by using openPopupAtScreen instead of openPopup.
+        // this is why I tried to get mozilla to revert this change to openPopup but nobody has ever responded.
+        // so for now I'm just gonna fix it with a script. it will get the coordinates via javascript instead of C++
+        ConfirmationHint.show = function show(anchor, messageId, options = {}) {
+            this._reset();
+            this._message.textContent = gBrowserBundle.GetStringFromName(
+                `confirmationHint.${messageId}.label`
+            );
+            if (options.showDescription) {
+                this._description.textContent = gBrowserBundle.GetStringFromName(
+                    `confirmationHint.${messageId}.description`
+                );
+                this._description.hidden = false;
+                this._panel.classList.add("with-description");
+            } else {
+                this._description.hidden = true;
+                this._panel.classList.remove("with-description");
+            }
+            if (options.hideArrow) this._panel.setAttribute("hidearrow", "true");
+            this._panel.setAttribute("data-message-id", messageId);
+            const DURATION = options.showDescription ? 4000 : 1500;
+            this._panel.addEventListener(
+                "popupshown",
+                () => {
+                    this._animationBox.setAttribute("animate", "true");
+                    this._timerID = setTimeout(() => this._panel.hidePopup(true), DURATION + 120);
+                },
+                { once: true }
+            );
+            this._panel.addEventListener("popuphidden", () => this._reset(), { once: true });
+
+            let { width, height, left, top } = windowUtils.getBoundsWithoutFlushing(anchor);
+            let alignX;
+            if (typeof options.alignX === "number") alignX = options.alignX;
+            else
+                switch (options.alignX) {
+                    case "left":
+                        alignX = 0;
+                        break;
+                    case "right":
+                        alignX = width;
+                        break;
+                    case "center":
+                    default:
+                        alignX = width / 2;
+                        break;
+                }
+            let x = anchor.screenX || left + screenX;
+            let y = anchor.screenY || top + screenY;
+            this._panel.openPopupAtScreen(x + alignX, y + height, false, options.event);
+        };
+    }
+    if (gBrowserInit.delayedStartupFinished) init();
+    else {
+        let delayedListener = (subject, topic) => {
+            if (topic == "browser-delayed-startup-finished" && subject == window) {
+                Services.obs.removeObserver(delayedListener, topic);
+                init();
+            }
+        };
+        Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
+    }
+})();

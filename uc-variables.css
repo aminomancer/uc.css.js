@@ -172,7 +172,8 @@ toolbar {
 
 #confirmation-hint {
     --arrowpanel-background: var(--confirmation-hint-bgcolor) !important;
-    --arrowpanel-border-color: var(--confirmation-hint-bgcolor) !important;
+    --arrowpanel-color: var(--confirmation-hint-color) !important;
+    --arrowpanel-border-color: var(--confirmation-hint-border-color) !important;
 }
 
 #browser {

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Toolbox Button
-// @version        1.2.1
+// @version        1.2.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Adds a new toolbar button that 1) opens the content toolbox on left click; 2) opens the browser toolbox on right click; 3) toggles "Popup Auto-Hide" on middle click. Left click will open the toolbox for the active tab, or close it if it's already open. Right click will open the elevated browser toolbox if it's not already open. If it is already open, then instead of trying to start a new process and spawning an irritating dialog, it'll just show a brief notification saying the toolbox is already open. The button also shows a badge while a toolbox window is open. Middle click will toggle the preference for popup auto-hide: "ui.popup.disable_autohide". This does the same thing as the "Disable Popup Auto-Hide" option in the menu at the top right of the browser toolbox, prevents popups from closing so you can debug them. If you want to change which mouse buttons execute which functions, search for "userChrome.toolboxButton.mouseConfig" in about:config. Change the 0, 1, and 2 values. 0 = left click, 1 = middle, and 2 = right. By default, when you open a browser toolbox window, the script will disable popup auto-hide, and then re-enable it when you close the toolbox. I find that I usually want popup auto-hide disabled when I'm using the toolbox, and never want it disabled when I'm not using the toolbox, so I made it automatic, instead of having to right click and then immediately middle click every time. If you don't like this automatic feature, you can turn it off by setting "userChrome.toolboxButton.popupAutohide.toggle-on-toolbox-launch" to false in about:config. When you middle click, the button will show a notification telling you the current status of popup auto-hide, e.g. "Holding popups open." This is just so that people who use the feature a lot won't lose track of whether it's on or off, and won't need to open a popup and try to close it to test it. (The toolbar button also changes appearance while popup auto-hide is disabled. It becomes blue like the downloads button and the icon changes into a popup icon. This change is animated, as long as the user doesn't have reduced motion enabled) All of these notifications use the native confirmation hint custom element, since it looks nice. That's the one that appears when you save a bookmark, #confirmation-hint. So you can customize them with that selector.
@@ -82,6 +82,9 @@ const toolboxButtonL10n = {
                      *         - hideCheck (boolean): Optionally hide the checkmark.
                      *         - description (string): Show description text.
                      *         - duration (numeric): How long the hint should stick around.
+                     *         - alignX (number or string): Where to align the hint relative to the anchor. (horizontally)
+                     *                                      An integer value will be taken as an offset (in pixels) from the left of the anchor.
+                     *                                      A string can be "left" "center" or "right" but uses "center" if this property is omitted.
                      *
                      */
                     show(anchor, message, options = {}) {
@@ -129,10 +132,25 @@ const toolboxButtonL10n = {
                             { once: true }
                         );
 
-                        this._panel.openPopup(anchor, {
-                            position: "bottomcenter topleft",
-                            triggerEvent: options.event,
-                        });
+                        let { width, height, left, top } = windowUtils.getBoundsWithoutFlushing(anchor);
+                        let alignX;
+                        if (typeof options.alignX === "number") alignX = options.alignX;
+                        else
+                            switch (options.alignX) {
+                                case "left":
+                                    alignX = 0;
+                                    break;
+                                case "right":
+                                    alignX = width;
+                                    break;
+                                case "center":
+                                default:
+                                    alignX = width / 2;
+                                    break;
+                            }
+                        let x = anchor.screenX || left + screenX;
+                        let y = anchor.screenY || top + screenY;
+                        this._panel.openPopupAtScreen(x + alignX, y + height, false, options.event);
                     },
 
                     _reset() {
