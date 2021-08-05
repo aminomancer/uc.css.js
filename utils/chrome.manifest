@@ -1,5 +1,5 @@
 content userchromejs ./
-content userscripts ../script/
+content userscripts ../JS/
 content userchrome ../resources/
 resource content-accessible chrome://userchrome/content/layout/contentaccessible/ contentaccessible=yes
 override chrome://global/skin/dirListing/dirListing.css ../resources/layout/dirListing.css
