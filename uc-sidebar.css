@@ -219,46 +219,51 @@ as well as the internal appearance of the built-in sidebars, e.g. bookmarks, his
     background-color: var(--arrowpanel-dimmed-further) !important;
 }
 
-.sidebar-panel treechildren::-moz-tree-row {
+.sidebar-placesTreechildren::-moz-tree-cell {
     border-radius: var(--general-button-border-radius) !important;
     margin-inline: 8px !important;
     cursor: default !important;
-    min-height: 24px;
 }
 
-.sidebar-panel treechildren::-moz-tree-row(empty) {
+.sidebar-placesTreechildren::-moz-tree-row {
+    min-height: 26px !important;
+    background: none !important;
+    padding-block: 1px !important;
+}
+
+.sidebar-placesTreechildren::-moz-tree-row(empty) {
     min-height: 0 !important;
 }
 
-.sidebar-panel treechildren::-moz-tree-cell {
-    margin-inline: calc(8px) !important;
-    cursor: default !important;
-}
-
-.sidebar-panel treechildren::-moz-tree-row(selected) {
+.sidebar-placesTreechildren::-moz-tree-cell(selected) {
     background-color: var(--places-cell-focus-bgcolor) !important;
     outline: none !important;
     border: none !important;
 }
 
-.sidebar-panel treechildren::-moz-tree-row(hover),
-.sidebar-panel treechildren::-moz-tree-row(selected, hover) {
+.sidebar-placesTreechildren::-moz-tree-cell(hover),
+.sidebar-placesTreechildren::-moz-tree-cell(selected, hover) {
     background-color: var(--places-cell-hover-bgcolor) !important;
     color: var(--lwt-text-color) !important;
     outline: none !important;
 }
 
-.sidebar-panel:-moz-window-inactive treechildren::-moz-tree-row(selected) {
+.sidebar-panel:-moz-window-inactive .sidebar-placesTreechildren::-moz-tree-cell(selected) {
     background-color: transparent !important;
 }
 
-.sidebar-panel:-moz-window-inactive treechildren::-moz-tree-row(selected, hover) {
+.sidebar-panel:-moz-window-inactive .sidebar-placesTreechildren::-moz-tree-cell(selected, hover) {
     background-color: var(--places-cell-hover-bgcolor) !important;
     color: var(--lwt-text-color) !important;
     outline: none !important;
 }
 
-.sidebar-panel .sidebar-placesTree {
+.sidebar-panel .sidebar-placesTreechildren::-moz-tree-cell(cutting, selected),
+.sidebar-panel .sidebar-placesTreechildren::-moz-tree-cell(cutting, hover) {
+    background-color: color-mix(in srgb, transparent 50%, var(--places-cell-hover-bgcolor)) !important;
+}
+
+.sidebar-placesTree {
     background-color: var(--ui-secondary-bg) !important;
 }
 
@@ -266,21 +271,21 @@ as well as the internal appearance of the built-in sidebars, e.g. bookmarks, his
     stroke: var(--arrowpanel-background) !important;
 } */
 
-treechildren::-moz-tree-row,
-treechildren::-moz-tree-row(current, focus),
-treechildren::-moz-tree-row(selected, current, focus) {
+.sidebar-placesTreechildren::-moz-tree-row,
+.sidebar-placesTreechildren::-moz-tree-row(current, focus),
+.sidebar-placesTreechildren::-moz-tree-row(selected, current, focus) {
     border: none !important;
 }
 
-treechildren::-moz-tree-row(selected, current, focus) {
+.sidebar-placesTreechildren::-moz-tree-row(selected, current, focus) {
     border: none !important;
 }
 
-.sidebar-panel treechildren::-moz-tree-cell-text(primary, dropOn) {
+.sidebar-placesTreechildren::-moz-tree-cell-text(primary, dropOn) {
     background: none !important;
 }
 
-treechildren::-moz-tree-drop-feedback {
+.sidebar-placesTreechildren::-moz-tree-drop-feedback {
     background-color: transparent !important;
     margin-inline-start: -16px !important;
     pointer-events: none;
@@ -290,16 +295,41 @@ treechildren::-moz-tree-drop-feedback {
     height: 14px !important;
 }
 
-treechildren::-moz-tree-twisty {
+.sidebar-placesTreechildren::-moz-tree-twisty {
     width: 16px !important;
     height: auto !important;
     list-style-image: url(chrome://userchrome/content/tree/tree-twisty-right.svg) !important;
     -moz-context-properties: fill, fill-opacity;
-}
-
-.sidebar-placesTreechildren::-moz-tree-twisty {
     margin-inline: 0 3px !important;
     padding-inline: 0 !important;
+}
+
+.sidebar-placesTreechildren::-moz-tree-separator {
+    border-bottom: none !important;
+    border-color: var(--panel-separator-color) !important;
+    height: 1px !important;
+    margin-inline: 0 8px !important;
+}
+
+.sidebar-placesTreechildren::-moz-tree-separator(hover),
+.sidebar-placesTreechildren:not(:-moz-window-inactive)::-moz-tree-separator(selected),
+.sidebar-placesTreechildren:not(:-moz-window-inactive)::-moz-tree-separator(hover, selected) {
+    border-color: color-mix(in srgb, var(--panel-shortcut-color) 30%, var(--panel-separator-color)) !important;
+}
+
+.sidebar-placesTreechildren:not(:-moz-window-inactive)::-moz-tree-separator(cutting) {
+    border-top-style: dashed !important;
+}
+
+.sidebar-placesTreechildren::-moz-tree-cell(separator),
+.sidebar-panel:-moz-window-inactive .sidebar-placesTreechildren::-moz-tree-cell(separator) {
+    background: none !important;
+    margin-block: 0 1px !important;
+}
+
+.sidebar-placesTreechildren::-moz-tree-twisty(separator) {
+    width: 0 !important;
+    margin: 0 !important;
 }
 
 /* removes the empty space where the twisty (arrow) would go if the item was a folder.
@@ -314,11 +344,11 @@ there are normally no twistys in sorted trees so it is relatively safe to collap
     margin-inline: 0 4px !important;
 }
 
-treechildren:-moz-locale-dir(rtl)::-moz-tree-twisty(closed) {
+.sidebar-placesTreechildren:-moz-locale-dir(rtl)::-moz-tree-twisty(closed) {
     list-style-image: url(chrome://userchrome/content/tree/tree-twisty-left.svg) !important;
 }
 
-treechildren::-moz-tree-twisty(open) {
+.sidebar-placesTreechildren::-moz-tree-twisty(open) {
     list-style-image: url(chrome://userchrome/content/tree/tree-twisty-down.svg) !important;
 }
 
@@ -351,6 +381,10 @@ treechildren::-moz-tree-twisty(open) {
 .sidebar-placesTreechildren::-moz-tree-twisty {
     color: var(--lwt-text-color) !important;
     cursor: default !important;
+}
+
+.sidebar-placesTreechildren::-moz-tree-cell-text(cutting) {
+    opacity: 0.5 !important;
 }
 
 .sidebar-placesTreechildren::-moz-tree-indentation {
