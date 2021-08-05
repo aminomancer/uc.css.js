@@ -144,6 +144,8 @@ If you use any of my scripts, please disable telemetry by going to `about:prefer
 
 ### **Installation:**
 
+_*If you plan to install scripts in a **new** profile, make sure you run Firefox with that profile at least once before installing any scripts. If you're installing scripts on an existing profile that you've already used, then don't worry about this. When you first create a profile, Firefox needs to set some things up during runtime. Although CSS is fine, you don't want any third-party javascript running during this process. So launch Firefox with the appropriate profile, log into your Firefox account, (if you have one) then quit, install the scripts, and restart the application._
+
 You first need to find your Firefox installation folder. On Windows that's `C:/Program Files/Firefox Nightly/`. On Linux it should be `usr/lib/firefox/`. On macOS this is more complicated. You need to open the application file itself, probably in `Macintosh HD/Applications/`. It's the file you double-click to open Firefox, but it's actually a package, not a binary. If you right click it, there will be an option in the context menu labeled "Show Package Contents." Clicking this takes you to the app constants. From there, navigate to `Contents/Resources/` to reach the root directory. So whichever OS you're on, you should end up with...
 
 1. &nbsp; a file called `config.js` in your Firefox installation's root directory;
