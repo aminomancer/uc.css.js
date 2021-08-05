@@ -94,7 +94,8 @@ menupopup#viewSidebarMenu
 :is(.webextension-browser-action, .eom-addon-button)[data-extensionid="{446900e4-71c2-419f-a6a7-df9c091e268b}"] .toolbarbutton-icon,
 menupopup#viewSidebarMenu
     menuitem.menuitem-iconic.webextension-menuitem#menu__446900e4-71c2-419f-a6a7-df9c091e268b_-sidebar-action[style]:is([type="checkbox"], [type="radio"]):not([checked="true"]) {
-    list-style-image: url(chrome://userchrome/content/notifications/webauthn.svg) !important;
+    /* list-style-image: url(chrome://userchrome/content/material/fingerprint-large.svg) !important; */
+    list-style-image: url(chrome://userchrome/content/material/bitwarden.svg) !important;
 }
 
 /* simple translate and "to google translate" */
@@ -387,7 +388,8 @@ there's no need for a context menu item except when right-clicking something par
     display: -moz-inline-box;
     background-position: center;
     background-repeat: no-repeat;
-    background-image: url(chrome://userchrome/content/material/fingerprint-large.svg);
+    /* background-image: url(chrome://userchrome/content/material/fingerprint-large.svg); */
+    background-image: url(chrome://userchrome/content/material/bitwarden.svg);
 }
 
 #contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"] .menu-iconic-icon {

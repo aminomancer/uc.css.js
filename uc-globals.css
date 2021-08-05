@@ -28,7 +28,6 @@ tooltip {
     --uc-panel-button-solid: hsl(234, 24%, 35%);
     --uc-panel-box-solid: hsl(233, 29%, 18%);
     --uc-menu-border-color: hsl(233, 23%, 20%);
-    --blurred-dialog-border-color: hsla(240, 7%, 20%, 0.8);
     --uc-smooth-timing-function: cubic-bezier(0.07, 0.78, 0.21, 0.95);
     --uc-content-text-a50: hsla(236, 100%, 85%, 0.5);
     --uc-content-text-a80: rgba(255, 255, 255, 0.8);
@@ -37,7 +36,6 @@ tooltip {
     --uc-toolbar-color: var(--ui-text-100);
     --uc-arrowpanel-background: hsl(233, 36%, 11%);
     --uc-arrowpanel-color: hsl(213, 43%, 89%);
-    --arrowpanel-dimmed-menu-hover-solid: hsl(234, 27%, 23%);
     --button-solid-hover-background: hsl(232, 29%, 26%);
     --button-solid-active-background: hsl(234, 26%, 30%);
     --button-solid-checked-background: hsl(232, 31%, 23%);
@@ -98,6 +96,7 @@ tooltip {
     --dialog-box-bgcolor-dim: hsla(240, 100%, 70%, 3%);
     --dialog-box-border-color: hsla(232, 100%, 85%, 0.2);
     --dialog-box-border-hover: hsla(232, 100%, 85%, 0.3);
+    --blurred-dialog-border-color: hsla(240, 7%, 20%, 0.8);
     --alertbox-bgcolor: hsla(0, 0%, 14%, 0.97);
     --notification-menu-color: var(--in-parent-page-color);
     --context-menu-disabled-color: hsla(213, 43%, 89%, 0.5);
@@ -197,6 +196,9 @@ tooltip {
     --uc-menubar-searchbar-width: 256px;
     --uc-tab-min-height: 35px;
     --tab-max-width: 100vw;
+    /* how round should tab buttons be? e.g. the close button or the sound icon.
+    2px yields a rounded square. 50% yields a circle. it used to be 50% but I changed my mind. */
+    --tab-button-border-radius: 2px;
     --menuitem-height: 26px;
     --subviewbutton-height: 28px;
     --findbar-height: 22px;
@@ -243,7 +245,7 @@ tooltip {
     --in-parent-box-background: var(--dialog-box-bgcolor);
     --in-parent-box-background-dim: var(--dialog-box-bgcolor-dim);
     --in-parent-box-border-color: var(--dialog-box-border-color);
-    --in-parent-button-background: var(--arrowpanel-faint);
+    --in-parent-button-background: var(--uc-arrowpanel-faint);
     --in-parent-button-background-hover: var(--uc-arrowpanel-dimmed);
     --in-parent-button-background-active: var(--uc-arrowpanel-dimmed-further);
     --in-parent-item-selected: var(--purple-40);

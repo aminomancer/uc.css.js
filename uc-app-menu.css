@@ -1,108 +1,6 @@
 /* this stylesheet focuses on the app menu.
 (the menu opened by the PanelUI hamburger button at the far right end of the toolbar) */
 
-/* add icons to non-iconized appmenu items (pre-proton) */
-#appMenu-save-file-button {
-    list-style-image: url(chrome://userchrome/content/skin/save.svg);
-}
-
-#appMenu-save-file-button > .toolbarbutton-text {
-    padding: 0 !important;
-    padding-inline-start: 8px !important;
-}
-
-#appMenu-open-file-button {
-    list-style-image: url(chrome://userchrome/content/skin/open.svg);
-}
-
-#appMenu-open-file-button > .toolbarbutton-text {
-    padding: 0 !important;
-    padding-inline-start: 8px !important;
-}
-
-#appMenu-more-button {
-    list-style-image: url(chrome://userchrome/content/devtools/tool-application.svg);
-}
-
-#appMenu-more-button > .toolbarbutton-text {
-    padding: 0 !important;
-    padding-inline-start: 8px !important;
-}
-
-#appMenu-developer-button {
-    list-style-image: url(chrome://userchrome/content/devtools/tool-webconsole.svg);
-}
-
-#appMenu-developer-button > .toolbarbutton-text {
-    padding: 0 !important;
-    padding-inline-start: 8px !important;
-}
-
-#appMenu-characterencoding-button {
-    list-style-image: url(chrome://userchrome/content/skin/characterEncoding.svg);
-}
-
-#appMenu-characterencoding-button > .toolbarbutton-text {
-    padding: 0 !important;
-    padding-inline-start: 8px !important;
-}
-
-#appMenu-workoffline-button {
-    list-style-image: url(chrome://userchrome/content/skin/readerMode.svg);
-}
-
-#appMenu-workoffline-button > .toolbarbutton-text {
-    padding: 0 !important;
-    padding-inline-start: 8px !important;
-}
-
-#appMenu-help-button {
-    list-style-image: url(chrome://userchrome/content/skin/tip.svg) !important;
-}
-
-/* appmenu text encoding */
-#PanelUI-characterEncodingView toolbarbutton[checked="true"] {
-    color: currentColor !important;
-}
-
-/* appmenu disabled buttons */
-#appMenu-edit-controls toolbarbutton[disabled="true"] {
-    opacity: 0.4 !important;
-    color: inherit !important;
-}
-
-#appMenu-zoomReduce-button,
-#appMenu-zoomEnlarge-button {
-    border-radius: 50% !important;
-    min-width: 24px !important;
-    width: 24px !important;
-    height: 24px !important;
-}
-
-#appMenu-zoomReset-button {
-    border-radius: 100px !important;
-    border-color: var(--arrowpanel-dimmed) !important;
-    min-height: 20px !important;
-    height: 20px !important;
-}
-
-#appMenu-zoomReset-button:not([disabled]):is(:hover, :focus) {
-    border-color: transparent !important;
-}
-
-/* separator between the navbar widgets and the panelUI hamburger button, if you want it */
-/* :root:not([uidensity="compact"], [chromehidden~="toolbar"]) #PanelUI-button {
-    margin-inline-start: 3px;
-    border-inline-start: 1px solid;
-    border-image: linear-gradient( transparent 5px, var(--toolbarseparator-color) 5px, var(--toolbarseparator-color) calc(100% - 5px), transparent calc(100% - 5px) );
-    border-image-slice: 1;
-    padding-inline-start: 3px;
-}
-
-:root:not([chromehidden~="toolbar"]) #PanelUI-button {
-    border-image-source: linear-gradient(transparent 4px, var(--toolbarseparator-color, hsla(240, 100%, 89%, 0.2)) 40%, var(--toolbarseparator-color, hsla(240, 100%, 89%, 0.2)) 60%, transparent calc(100% - 4px)) !important;
-} */
-
 #PanelUI-menu-button {
     padding-inline: var(--toolbarbutton-outer-padding) !important;
     margin-inline-end: 3px !important;
@@ -251,6 +149,7 @@
     > .toolbarbutton-badge {
     display: none;
 }
+
 #appMenu-multiView
     :is(.toolbarbutton-1, toolbarbutton.subviewbutton, .navigable.subviewbutton):not([disabled], [open]):focus,
 .widget-overflow-list .toolbarbutton-1:not([disabled], [open]):focus,

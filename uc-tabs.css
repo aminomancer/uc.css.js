@@ -480,7 +480,7 @@ so shadows are cast in both directions, unless the neighboring tab is selected o
     opacity: 0 !important;
     fill: white !important;
     fill-opacity: 0 !important;
-    border-radius: 50% !important;
+    border-radius: var(--tab-button-border-radius, 2px) !important;
 }
 
 .tab-close-button:hover {
@@ -564,10 +564,10 @@ so shadows are cast in both directions, unless the neighboring tab is selected o
 .tabbrowser-tab .tab-icon-sound[pictureinpicture][muted],
 .tabbrowser-tab .tab-icon-sound[pictureinpicture]:hover {
     background-size: 12px !important;
-    background-position: 1.2px center !important;
+    background-position: center !important;
     background-repeat: no-repeat !important;
     list-style-image: none !important;
-    border-radius: 50% !important;
+    border-radius: var(--tab-button-border-radius, 2px) !important;
 }
 
 .tabbrowser-tab .tab-icon-sound[pictureinpicture]:hover {

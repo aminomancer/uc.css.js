@@ -308,7 +308,7 @@
     margin-inline-end: 13px !important;
     height: 16.5px !important;
     width: 16.5px !important;
-    border-radius: 50% !important;
+    border-radius: var(--tab-button-border-radius, 2px) !important;
     opacity: 1 !important;
     fill-opacity: 1 !important;
     color: var(--urlbar-popup-action-color) !important;

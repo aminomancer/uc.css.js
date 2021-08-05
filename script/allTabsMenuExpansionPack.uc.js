@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           All Tabs Menu Expansion Pack
-// @version        1.7.2
+// @version        1.7.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Next to the "new tab" button in Firefox there's a V-shaped button that opens a big scrolling menu containing all the tabs. This script adds several new features to the "all tabs menu" to help it catch up to the functionality of the regular tabs bar.
@@ -828,7 +828,7 @@
 #allTabsMenu-allTabsViewTabs > .all-tabs-item .all-tabs-secondary-button {
     max-width: 18px;
     max-height: 18px;
-    border-radius: 100%;
+    border-radius: var(--tab-button-border-radius, 2px);
     color: inherit;
     background-color: transparent !important;
     opacity: 0.7;
@@ -930,7 +930,7 @@
     -moz-context-properties: fill, fill-opacity, stroke;
     fill: currentColor;
     fill-opacity: 0;
-    border-radius: 50%;
+    border-radius: var(--tab-button-border-radius, 2px);
     list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20'><rect fill='context-fill' fill-opacity='context-fill-opacity' width='20' height='20' rx='2' ry='2'/><path fill='context-fill' fill-opacity='context-stroke-opacity' d='M11.06 10l3.47-3.47a.75.75 0 00-1.06-1.06L10 8.94 6.53 5.47a.75.75 0 10-1.06 1.06L8.94 10l-3.47 3.47a.75.75 0 101.06 1.06L10 11.06l3.47 3.47a.75.75 0 001.06-1.06z'/></svg>");
 }
 #allTabsMenu-allTabsViewTabs

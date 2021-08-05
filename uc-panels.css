@@ -577,13 +577,28 @@ popupnotification progress[paused]::-moz-progress-bar {
     outline: none !important;
     box-shadow: none !important;
     border-radius: var(--context-menuitem-border-radius) !important;
+    -moz-box-pack: center !important;
+    -moz-box-align: center !important;
+}
+
+.permission-popup-permission-remove-button > .button-box {
+    margin-inline: 1px !important;
+    border-radius: 2px;
+    width: 16px;
+    height: 16px;
+}
+
+.permission-popup-permission-remove-button:is(:hover, :focus-visible) > .button-box {
+    background-color: var(--arrowpanel-dimmed);
 }
 
 .permission-popup-permission-remove-button > .button-box > .button-icon {
-    margin-inline-end: 3px !important;
-    width: 14px !important;
-    height: 14px !important;
-    list-style-image: url(chrome://userchrome/content/close.svg) !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding: 0 !important;
+    list-style-image: url(chrome://userchrome/content/textbox-clear.svg) !important;
+    -moz-context-properties: fill, fill-opacity !important;
+    fill-opacity: 0 !important;
 }
 
 .permission-popup-permission-remove-button:is(:hover, :focus-visible) {
@@ -1162,7 +1177,6 @@ panel .header,
     width: auto !important;
     box-sizing: content-box !important;
     padding: 0px !important;
-    border-radius: 100% !important;
     -moz-box-align: center !important;
     background: none !important;
     -moz-box-pack: center !important;
@@ -1375,19 +1389,9 @@ panel .header,
 #permission-popup,
 #protections-popup {
     --panel-separator-margin: 4px !important;
-    line-height: 1.1em !important;
-    font-size: var(--panel-font-size) !important;
-    --panel-font-size: 1.1em;
-}
-
-#identity-popup,
-#protections-popup,
-#permission-popup {
-    --popup-width: 375px !important;
 }
 
 #protections-popup-no-trackers-found-description {
-    font-size: 1.18em !important;
     margin: 3em 5em !important;
 }
 
@@ -1438,9 +1442,13 @@ panel .header,
     padding-block: 4px;
 }
 
+#permission-popup-mainView-panel-header, #identity-popup-mainView-panel-header, #protections-popup-mainView-panel-header {
+	min-height: 44px !important;
+}
+
 .popup-notification-description {
-    font-size: 1.05em !important;
-    line-height: 1.05em !important;
+    font-size: 1.1em !important;
+    line-height: 1.1em !important;
     font-weight: normal !important;
 }
 
@@ -1448,27 +1456,18 @@ panel .header,
 #permission-popup-mainView-panel-header,
 #protections-popup-mainView-panel-header {
     min-height: 44px !important;
-    font-size: 1.05em !important;
-    line-height: 1.05em !important;
-    font-weight: var(--uc-font-weight-bold, 600) !important;
 }
 
-#identity-popup-mainView-panel-header {
-    font-size: 1.05em !important;
-    line-height: 1.05em !important;
+:is(#identity-popup-mainView-panel-header, #eom-mainView-panel-header, #permission-popup-mainView-panel-header, #protections-popup-mainView-panel-header) :is(label, description) {
+    font-size: 1.1em !important;
+    line-height: 1.1em !important;
     font-weight: var(--uc-font-weight-bold, 600) !important;
-}
-
-#eom-mainView-panel-header label,
-#identity-popup-mainView-panel-header label,
-#permission-popup-mainView-panel-header label,
-#protections-popup-mainView-panel-header label {
     margin: 0 !important;
 }
 
 .panel-header > h1 {
-    font-size: 1.05em !important;
-    line-height: 1.05em !important;
+    font-size: 1.1em !important;
+    line-height: 1.1em !important;
     font-weight: var(--uc-font-weight-bold, 600) !important;
 }
 
@@ -1505,6 +1504,12 @@ panel .header,
 .permission-popup-section,
 .protections-popup-section {
     margin-inline: 4px;
+}
+
+#geo-access-indicator-item {
+	font-size: 0.9em !important;
+    font-weight: var(--uc-font-weight-thin) !important;
+    min-height: 20px !important;
 }
 
 #protections-popup-sendReportView-heading,

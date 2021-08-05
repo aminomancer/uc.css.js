@@ -36,9 +36,9 @@
 
     h3.title {
         line-height: normal !important;
-        padding-block: calc((34px - 1.1em) / 2) !important;
+        padding-block: calc((44px - 1.1em) / 2) !important;
         block-size: 34px !important;
-        min-height: 34px !important;
+        min-height: 44px !important;
         white-space: nowrap !important;
         padding-inline: 10px 16px !important;
         font-weight: normal !important;
@@ -451,12 +451,12 @@
 
     .edit-container-panel legend,
     .options-header {
-        font-size: 1.05em !important;
+        font-size: 1.1em !important;
         margin-block: -4px 2px !important;
     }
 
     .options-header {
-        font-size: 1.05em !important;
+        font-size: 1.1em !important;
         margin-block: 8px !important;
     }
 

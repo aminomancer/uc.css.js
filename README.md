@@ -427,7 +427,7 @@ By default, private windows are opened to about:privatebrowsing, regardless of y
     padding: 0;
     -moz-context-properties: fill;
     fill: currentColor;
-    border-radius: 50%;
+    border-radius: var(--tab-button-border-radius, 2px);
     list-style-image: none;
     background-repeat: no-repeat;
 }

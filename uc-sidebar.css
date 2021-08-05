@@ -101,14 +101,14 @@ as well as the internal appearance of the built-in sidebars, e.g. bookmarks, his
         width: 16.5px !important;
         height: 16.5px !important;
         min-height: 1px !important;
-        border-radius: 100% !important;
+        border-radius: var(--tab-button-border-radius, 2px) !important;
         margin: 0 3px 0 0 !important;
         padding: 0 !important;
     }
 
     .textbox-search-clear:is(:hover, :active) {
         fill: rgba(255, 255, 255, 1) !important;
-        background-color: var(--arrowpanel-dimmed-further) !important;
+        background-color: var(--arrowpanel-dimmed) !important;
     }
 
     .textbox-search-sign {
