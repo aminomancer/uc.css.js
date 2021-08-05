@@ -755,6 +755,12 @@ toolbarpaletteitem[removable="false"]
     display: none !important;
 }
 
+.notification-anchor-icon,
+.blocked-permission-icon {
+    width: 16px;
+    height: 16px;
+}
+
 #urlbar
     #identity-box
     :is(.sharing-icon, .notification-anchor-icon, #permissions-granted-icon, .blocked-permission-icon) {
@@ -1029,4 +1035,10 @@ use 0.6 instead of 1 since 1 will end up being shown as like 1.4px for some wind
 
 #urlbar-label-switchtab {
     display: none;
+}
+
+@supports -moz-bool-pref("userChrome.urlbar.hide-pointless-icons") {
+    #eme-notification-icon {
+        display: none;
+    }
 }

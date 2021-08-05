@@ -296,6 +296,19 @@ domain("wikimedia.org") {
         background-image: none !important;
     }
 
+    .vector-menu-dropdown h3 {
+        color: hsla(0, 0%, 100%, 0.4) !important;
+        opacity: 1 !important;
+    }
+
+    .vector-menu-dropdown h3::after {
+        background-image: url(chrome://userchrome/content/in-content/wiki-arrow-down.svg) !important;
+        -moz-context-properties: fill, fill-opacity;
+        fill: currentColor;
+        fill-opacity: 0.5;
+        opacity: 1 !important;
+    }
+
     #mw-head a,
     #mw-head ul,
     #mw-head li,
@@ -331,13 +344,13 @@ domain("wikimedia.org") {
         font-size: 14px !important;
     }
 
-    #mw-head li {
+    #mw-head li,
+    #mw-head nav {
         opacity: 0 !important;
         transition: all 0.45s ease-out !important;
     }
 
-    #mw-head:hover li,
-    #mw-head:focus-within li {
+    #mw-head:is(:hover, :focus-within) :is(li, nav) {
         opacity: 1 !important;
         transition: all 0.13s ease-in !important;
     }
@@ -373,7 +386,7 @@ domain("wikimedia.org") {
     #mw-head #searchform > div input#searchInput {
         padding: 4px 0 6px 8px !important;
         font-size: 1rem !important;
-        color: hsl(0, 0%, 80%) !important;
+        color: inherit !important;
         background: none !important;
         border: none !important;
         margin: unset !important;
@@ -391,12 +404,17 @@ domain("wikimedia.org") {
         display: none !important;
     }
 
+    #mw-head #searchform {
+        color: hsl(0, 0%, 80%) !important;
+    }
+
     #mw-head #searchform #searchButton {
         -moz-context-properties: fill, fill-opacity !important;
         opacity: 1 !important;
         fill: currentColor !important;
         fill-opacity: 0.67 !important;
         background-image: url(chrome://userchrome/content/preferences/category-search.svg) !important;
+        color: inherit !important;
     }
 
     .oo-ui-icon-search,
@@ -425,6 +443,10 @@ domain("wikimedia.org") {
 
     #mw-head #searchform #searchButton:hover {
         fill-opacity: 1 !important;
+    }
+
+    .vector-menu-tabs li a span {
+        filter: invert(1) hue-rotate(180deg) brightness(0.7) contrast(2) !important;
     }
 
     /* logo */
@@ -2820,6 +2842,12 @@ domain("wikimedia.org") {
         background-color: hsl(210, 6.7%, 5.9%) !important;
         border-radius: 2px !important;
         color: inherit !important;
+    }
+
+    .vector-menu-dropdown .vector-menu-content {
+        background-color: hsl(210, 6.7%, 5.9%) !important;
+        border-color: transparent !important;
+        border-radius: 2px !important;
     }
 
     .oo-ui-dropdownInputWidget.oo-ui-widget-disabled {

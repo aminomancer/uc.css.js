@@ -81,6 +81,7 @@ For best results, set density mode to `Normal` and theme to `Dark` in the custom
 | userChrome.tabs.rounded-outer-corners.disabled | Boolean | false | This controls whether tabs have rounded bottom corners<br/><img src="preview/prev-tabcorners.webp" width="100%"/> |
 | userChrome.tabs.tooltip.always-show-lock-icon | Boolean | false | There's an icon in the tab tooltip representing page security. Always show it, or hide it on secure pages? |
 | userChrome.urlbar.hide-bookmarks-button-on-system-pages | Boolean | true | Hides the urlbar's bookmark button on system pages & new tab page |
+| userChrome.urlbar.hide-pointless-icons | Boolean | true | Hide urlbar notification icons that do nothing (e.g. DRM icon) |
 | userChrome.urlbar-results.disable\_animation | Boolean | false | Toggle to `true` if you don't want urlbar animations |
 | widget.content.allow-gtk-dark-theme | Boolean | true | Makes Linux theming more consistent |
 | widget.disable-native-theme-for-content | Boolean | true | Enables Firefox's custom appearance for elements like checkboxes. Skips the "native" appearance given by the OS stylesheets. |
