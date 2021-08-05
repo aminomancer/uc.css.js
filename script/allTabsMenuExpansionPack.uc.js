@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           All Tabs Menu Expansion Pack
-// @version        1.7.3
+// @version        1.7.4
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Next to the "new tab" button in Firefox there's a V-shaped button that opens a big scrolling menu containing all the tabs. This script adds several new features to the "all tabs menu" to help it catch up to the functionality of the regular tabs bar.
@@ -145,13 +145,6 @@
             `gTabsPanel.allTabsPanel.createTabTooltip(event)`
         );
         allTabs.tabTooltip.setAttribute("position", "after_end");
-        allTabs._warmupRowTab = function (e, tab) {
-            let row = e.target.closest(".all-tabs-item");
-            SessionStore.speculativeConnectOnTabHover(tab);
-            if (row.querySelector("[close-button]").matches(":hover"))
-                tab = gBrowser._findTabToBlurTo(tab);
-            gBrowser.warmupTab(tab);
-        };
         allTabs.createTabTooltip = function (e) {
             e.stopPropagation();
             let row = e.target.triggerNode ? e.target.triggerNode.closest(".all-tabs-item") : null;
@@ -715,16 +708,16 @@
             delete draggedTab.noCanvas;
             for (let row of this.rows) row.removeAttribute("dragpos");
         };
+        allTabs._onTabMultiSelect = function () {
+            for (let item of this.rows)
+                item.toggleAttribute("multiselected", !!item.tab.multiselected);
+        };
         allTabs._warmupRowTab = function (e, tab) {
             let row = e.target.closest(".all-tabs-item");
             SessionStore.speculativeConnectOnTabHover(tab);
             if (row.querySelector("[close-button]").matches(":hover"))
                 tab = gBrowser._findTabToBlurTo(tab);
             gBrowser.warmupTab(tab);
-        };
-        allTabs._onTabMultiSelect = function () {
-            for (let item of this.rows)
-                item.toggleAttribute("multiselected", !!item.tab.multiselected);
         };
 
         gTabsPanel.allTabsButton.setAttribute(
