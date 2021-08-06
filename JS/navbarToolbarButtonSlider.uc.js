@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name           Nav-bar Toolbar Button Slider
+// @name           Navbar Toolbar Button Slider
 // @version        2.7.4
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer

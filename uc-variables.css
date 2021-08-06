@@ -1,5 +1,9 @@
 /* this is where we override firefox's built-in variables.
-often we'll make our own variable in uc-globals and override a built-in variable to equal the custom variable. */
+often we'll make our own variable in uc-globals, with a prefix like --uc-
+and override a built-in variable to reference the new custom variable.
+this way we get to share all the variables with content stylesheets.
+otherwise you might want to use --arrowpanel-dimmed in a webextension popup,
+but find that it's missing because docs do not inherit from <browser> elements. */
 
 :root,
 menupopup {
@@ -49,10 +53,6 @@ menupopup {
     --button-primary-hover-bgcolor: var(--purple-40) !important;
     --button-primary-active-bgcolor: var(--purple-35) !important;
     --button-primary-color: var(--button-color) !important;
-    --urlbar-input-bgcolor: hsl(233, 24%, 26%) !important;
-    --urlbar-input-bgcolor-brighter: hsl(233, 23%, 27.2%) !important;
-    --urlbar-input-bgcolor-even-brighter: hsl(233, 21%, 31%) !important;
-    --urlbar-input-bgcolor-disabled: hsla(233, 24%, 26%, 0.5) !important;
     --urlbar-toolbar-height: var(--uc-urlbar-container-height) !important;
     --urlbar-container-height: var(--uc-urlbar-container-height) !important;
     --urlbar-height: calc(var(--urlbar-container-height) - 6px) !important;

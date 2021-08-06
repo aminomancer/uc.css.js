@@ -366,19 +366,21 @@ panel[type="autocomplete-richlistbox"] > richlistbox {
 {
     panel menulist {
         appearance: none !important;
-        background-color: var(--ui-textbox-bgcolor) !important;
+        background-color: var(--button-bgcolor) !important;
         padding: 2px 2px 2px 8px !important;
-        min-height: var(--menuitem-height) !important;
+        min-height: 24px !important;
         color: inherit !important;
         fill: currentColor !important;
-        border: none !important;
-        outline: none !important;
-        box-shadow: none !important;
+        outline-offset: unset !important;
         border-radius: var(--context-menuitem-border-radius) !important;
     }
 
-    panel menulist:is(:focus-visible, [open="true"]) {
-        background-color: var(--ui-textbox-focus-bgcolor) !important;
+    panel menulist:is(:focus-visible, :hover) {
+        background-color: var(--button-hover-bgcolor) !important;
+    }
+
+    panel menulist[open="true"] {
+        background-color: var(--button-active-bgcolor) !important;
     }
 }
 

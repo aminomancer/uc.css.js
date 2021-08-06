@@ -104,8 +104,8 @@ tooltip {
     /* this url is for the icon that displays in the identity box when entering text in the urlbar, and on the new tab page.
     you can replace it with chrome://userchrome/content/search-glass.svg if you don't use google */
     --default-search-identity-icon: url(chrome://userchrome/content/engines/google.svg);
-    --identity-box-solid-bg: hsl(235, 33%, 23%);
-    --identity-box-hover-bg: hsl(234, 30%, 26%);
+    --identity-box-solid-bg: hsl(233, 34%, 22%);
+    --identity-box-focus-bg: hsl(234, 34%, 23%);
     --secure-color: hsl(119, 80%, 60%);
     --secure-text-color: hsl(129, 100%, 70%);
     --insecure-text-color: hsla(0, 100%, 50%, 0.867);
@@ -192,6 +192,9 @@ tooltip {
     --busy-throbber-fill: hsl(218, 90%, 85%);
     --sanitize-border-color: hsla(0, 0%, 5%, 0.2);
     --menu-separator-color: hsl(233, 25%, 23%);
+    --urlbar-input-bgcolor: hsl(233, 28%, 25%);
+    --urlbar-input-bgcolor-brighter: hsl(233, 26%, 27%);
+    --urlbar-input-bgcolor-disabled: hsl(233, 30%, 21%);
     --uc-urlbar-container-height: 38px;
     --uc-menubar-searchbar-width: 256px;
     --uc-tab-min-height: 35px;

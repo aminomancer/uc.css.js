@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name           Auto-hide Nav-bar Support
+// @name           Auto-hide Navbar Support
 // @version        1.0
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer

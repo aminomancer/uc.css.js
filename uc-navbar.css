@@ -28,13 +28,10 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
 }
 
 #wrapper-urlbar-container + toolbarpaletteitem > #search-container,
-#nav-bar[customizing="true"] #urlbar-container + #search-container {
-    margin-inline-start: -3px !important;
-}
-
+#nav-bar[customizing="true"] #urlbar-container + #search-container,
 #wrapper-search-container + toolbarpaletteitem > #urlbar-container,
 #nav-bar[customizing="true"] #search-container + #urlbar-container {
-    margin-inline-start: 0 !important;
+    margin-inline-start: 1px !important;
 }
 
 /* dim widgets when window is inactive, like tabs */
@@ -102,7 +99,10 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
     filter: none !important;
 }
 
-:root:not([customizing]) .customization-target #fxa-toolbar-menu-button[badge-status="login_failed"] .toolbarbutton-badge:-moz-window-inactive {
+:root:not([customizing])
+    .customization-target
+    #fxa-toolbar-menu-button[badge-status="login_failed"]
+    .toolbarbutton-badge:-moz-window-inactive {
     fill: hsl(227, 19%, 48%) !important;
     stroke: transparent !important;
 }
@@ -245,12 +245,6 @@ i haven't tested this on every scaling factor, if it makes things worse on your 
     margin-inline-start: 2px !important;
 }
 
-:root:not([uidensity="compact"])
-    .customization-target
-    > :is(#stop-reload-button, #wrapper-stop-reload-button) {
-    margin-inline: -2px !important;
-}
-
 #stop-reload-button {
     pointer-events: none !important;
 }
@@ -289,7 +283,9 @@ toolbar
     background: none !important;
 }
 
-toolbar .toolbarbutton-1:not([disabled], [open])[checked] > :is(.toolbarbutton-icon, .toolbarbutton-badge-stack) {
+toolbar
+    .toolbarbutton-1:not([disabled], [open])[checked]
+    > :is(.toolbarbutton-icon, .toolbarbutton-badge-stack) {
     background-color: var(--toolbarbutton-checked-background) !important;
     transition: none !important;
 }
@@ -369,13 +365,15 @@ toolbarbutton.bookmark-item:not(.subviewbutton) {
     -moz-box-align: center !important;
 }
 
-#personal-toolbar-empty-description, #PersonalToolbar .toolbarbutton-1, toolbarbutton.bookmark-item:not(.subviewbutton) {
-	margin: 2px;
-	padding: var(--bookmark-block-padding) 4px;
+#personal-toolbar-empty-description,
+#PersonalToolbar .toolbarbutton-1,
+toolbarbutton.bookmark-item:not(.subviewbutton) {
+    margin: 2px;
+    padding: var(--bookmark-block-padding) 4px;
 }
 
 #personal-toolbar-empty-description {
-	min-height: 0 !important;
+    min-height: 0 !important;
     margin: 0 var(--bookmark-block-padding) !important;
     padding: 0 !important;
 }
@@ -620,14 +618,14 @@ notifications are translucent with acrylic effect. enable layout.css.backdrop-fi
 .notificationbox-stack notification {
     align-items: center !important;
     position: relative !important;
-	border-radius: 0 !important;
+    border-radius: 0 !important;
     color: inherit !important;
-	background-color: var(--acrylic-blue) !important;
-	overflow: hidden !important;
-	background-image: var(--acrylic-texture) !important;
-	backdrop-filter: var(--acrylic-blur) !important;
-	padding-inline: 4px !important;
-	align-items: center !important;
+    background-color: var(--acrylic-blue) !important;
+    overflow: hidden !important;
+    background-image: var(--acrylic-texture) !important;
+    backdrop-filter: var(--acrylic-blur) !important;
+    padding-inline: 4px !important;
+    align-items: center !important;
     font-size: inherit !important;
     flex-shrink: 0 !important;
     flex-grow: 0 !important;
@@ -705,9 +703,7 @@ link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infob
     > named-deck
     > .notificationbox-stack
     > notification-message[style*="opacity: 0;"],
-#navigator-toolbox
-    .global-notificationbox
-    notification-message[style*="opacity: 0;"] {
+#navigator-toolbox .global-notificationbox notification-message[style*="opacity: 0;"] {
     margin-top: -32px !important;
     max-width: 1px !important;
     transition: margin-top 100ms linear, max-width 100ms ease-in-out, opacity 100ms ease-in-out !important;
@@ -746,7 +742,8 @@ link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infob
 }
 
 .notificationbox-stack notification :is(button, toolbarbutton),
-link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar button {
+link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar button
+{
     border-radius: var(--in-content-button-border-radius) !important;
 }
 
@@ -768,11 +765,11 @@ link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infob
 }
 
 notification .messageCloseButton:hover {
-	background-color: var(--notification-button-background-hover) !important;
+    background-color: var(--notification-button-background-hover) !important;
 }
 
 notification .messageCloseButton:hover:active {
-	background-color: var(--notification-button-background-active) !important;
+    background-color: var(--notification-button-background-active) !important;
 }
 
 notification .messageCloseButton {

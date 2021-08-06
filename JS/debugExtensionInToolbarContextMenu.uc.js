@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Debug Extension in Toolbar Context Menu
-// @version        1.2
+// @version        1.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Adds a new context menu when right-clicking an add-on's button in the toolbar or urlbar, any time the "Manage Extension" and "Remove Extension" items are available. The new "Debug Extension" menu contains 7 items: "Extension Manifest" opens the extension's manifest directly in a new tab. Aside from reading the manifest, from there you can also see the whole contents of the extension by removing "/manifest.json" from the URL. "Popup Document" opens the extension's popup URL (if it has one) in a regular browser window. The popup URL is whatever document it displays in its panel view. "Options Document" opens the document that the extension displays in its submenu on about:addons, also in a regular browser window. "Inspect Extension" opens a devtools tab targeting the extension background. This is the same page you'd get if you opened about:debugging and clicked the "Inspect" button next to an extension. "View Source" opens the addon's .xpi archive. And, as you'd expect, "Copy ID" copies the extension's ID to your clipboard, while "Copy URL" copies the extension's base URL, so it can be used in CSS rules like @-moz-document. The menu items' labels are not localized automatically since Firefox doesn't include any similar strings. If you need to change the language or anything, modify the strings below under "static config." As usual, icons for the new menu are included in uc-context-menu-icons.css
@@ -25,12 +25,20 @@ class DebugExtension {
             label: "Extension Manifest",
             accesskey: "M",
         },
-        Popup: {
-            label: "Popup Document",
+        ViewDocs: {
+            label: "View Documents",
+            accesskey: "D",
+        },
+        BrowserAction: {
+            label: "Browser Action",
+            accesskey: "B",
+        },
+        PageAction: {
+            label: "Page Action",
             accesskey: "P",
         },
         Options: {
-            label: "Options Document",
+            label: "Extension Options",
             accesskey: "O",
         },
         Inspector: {
@@ -53,8 +61,7 @@ class DebugExtension {
     // end user configuration
     static menuitems = [
         "Manifest",
-        "Popup",
-        "Options",
+        { name: "ViewDocs", children: ["BrowserAction", "PageAction", "Options"] },
         "Inspector",
         "ViewSource",
         "CopyID",
@@ -62,30 +69,27 @@ class DebugExtension {
     ];
     constructor() {
         this.setupUpdate();
-        this.toolbarMenu = this.makeMenu(this.toolbarContext);
+        this.toolbarMenu = this.makeMainMenu(this.toolbarContext);
         this.toolbarMenupopup = this.toolbarMenu.appendChild(
             document.createXULElement("menupopup")
         );
         this.toolbarMenupopup.addEventListener("popupshowing", this);
-        this.overflowMenu = this.makeMenu(this.overflowContext);
+        this.overflowMenu = this.makeMainMenu(this.overflowContext);
         this.overflowMenupopup = this.overflowMenu.appendChild(
             document.createXULElement("menupopup")
         );
         this.overflowMenupopup.addEventListener("popupshowing", this);
-        this.pageActionMenu = this.makeMenu(this.pageActionContext);
+        this.pageActionMenu = this.makeMainMenu(this.pageActionContext);
         this.pageActionMenupopup = this.pageActionMenu.appendChild(
             document.createXULElement("menupopup")
         );
         this.pageActionMenupopup.addEventListener("popupshowing", this);
         // make a menu item for each type of page within each context
         DebugExtension.menuitems.forEach((type) =>
-            ["toolbar", "overflow", "pageAction"].forEach(
-                (context) =>
-                    (this[`${context}${type}Menuitem`] = this.makeMenuitem(
-                        type,
-                        this[`${context}Menupopup`]
-                    ))
-            )
+            ["toolbar", "overflow", "pageAction"].forEach((context) => {
+                if (typeof type === "string") this.makeMenuitem(type, this[`${context}Menupopup`]);
+                else if (typeof type === "object") this.makeMenu(type, this[`${context}Menupopup`]);
+            })
         );
     }
     /**
@@ -123,16 +127,25 @@ class DebugExtension {
         let id = this.getExtensionId(popup);
         if (!id) return;
         let extension = WebExtensionPolicy.getByID(id).extension;
-        popup.querySelector(".customize-context-openPopup").disabled =
-            !extension.manifest.browser_action?.default_popup;
-        popup.querySelector(".customize-context-openOptions").disabled =
-            !extension.manifest.options_ui?.page;
-        popup.querySelector(".customize-context-openViewSource").disabled =
-            extension.addonData.isSystem ||
-            extension.addonData.builtIn ||
-            extension.addonData.temporarilyInstalled;
+        if (e.target.className.includes("Submenu-Popup")) {
+            popup.querySelector(".customize-context-BrowserAction").disabled =
+                !extension.manifest.browser_action?.default_popup;
+            popup.querySelector(".customize-context-PageAction").disabled =
+                !extension.manifest.page_action?.default_popup;
+            popup.querySelector(".customize-context-Options").disabled =
+                !extension.manifest.options_ui?.page;
+        } else {
+            popup.querySelector(".customize-context-ViewDocs-Submenu").disabled =
+                !extension.manifest.browser_action?.default_popup &&
+                !extension.manifest.page_action?.default_popup &&
+                !extension.manifest.options_ui?.page;
+            popup.querySelector(".customize-context-ViewSource").disabled =
+                extension.addonData.isSystem ||
+                extension.addonData.builtIn ||
+                extension.addonData.temporarilyInstalled;
+        }
     }
-    makeMenu(popup) {
+    makeMainMenu(popup) {
         let menu = document.createXULElement("menu");
         this.maybeSetAttributes(menu, {
             class: "customize-context-debugExtension",
@@ -151,24 +164,48 @@ class DebugExtension {
     }
     /**
      * make a menu item that opens a given type of page, with label & accesskey corresponding to those defined in the "config" static property
-     * @param {string} type (equal to "Manifest", "Popup", or "Options")
+     * @param {string} type (which menuitem to make)
+     * @param {object} popup (where to put the menuitem)
      * @returns a menuitem DOM node
      */
     makeMenuitem(type, popup) {
         let item = document.createXULElement("menuitem");
         this.maybeSetAttributes(item, {
-            class: `customize-context-open${type}`,
+            class: `customize-context-${type}`,
             label: DebugExtension.config[type].label,
             accesskey: DebugExtension.config[type].accesskey,
             oncommand: `debugExtensionMenu.onCommand(event, this.parentElement, "${type}")`,
-            contexttype: popup === this.pageActionMenupopup ? void 0 : "toolbaritem",
+            contexttype: popup.closest("#pageActionContextMenu") ? void 0 : "toolbaritem",
         });
         popup.appendChild(item);
         return item;
     }
+    /**
+     * make a submenu in a given popup
+     * @param {string} type (which menu to make)
+     * @param {object} popup (where to put the menuitem)
+     * @returns a menu DOM node
+     */
+    makeMenu(type, popup) {
+        let { name, children } = type;
+        if (!name || !children) return;
+        let menu = document.createXULElement("menu");
+        this.maybeSetAttributes(menu, {
+            class: `customize-context-${name}-Submenu`,
+            label: DebugExtension.config[name].label,
+            accesskey: DebugExtension.config[name].accesskey,
+            contexttype: popup.closest("#pageActionContextMenu") ? void 0 : "toolbaritem",
+        });
+        let menupopup = menu.appendChild(document.createXULElement("menupopup"));
+        menupopup.className = `customize-context-${name}-Submenu-Popup`;
+        menupopup.addEventListener("popupshowing", this);
+        children.forEach((item) => this.makeMenuitem(item, menupopup));
+        popup.appendChild(menu);
+        return menu;
+    }
     // get the ID for the button the context menu was opened on
     getExtensionId(popup) {
-        if (popup === this.pageActionMenupopup || popup === this.pageActionContext)
+        if (popup.closest("#pageActionContextMenu"))
             return BrowserPageActions.actionForNode(popup.triggerNode).extensionID;
         else return ToolbarContextMenu._getExtensionId(popup);
     }
@@ -184,8 +221,11 @@ class DebugExtension {
             case "Manifest":
                 url = extension.baseURL + `manifest.json`;
                 break;
-            case "Popup":
+            case "BrowserAction":
                 url = extension.manifest.browser_action?.default_popup;
+                break;
+            case "PageAction":
+                url = extension.manifest.page_action?.default_popup;
                 break;
             case "Options":
                 url = extension.manifest.options_ui?.page;

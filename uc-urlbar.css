@@ -23,37 +23,40 @@ toolbarpaletteitem[place="palette"] > #search-container {
 
 #nav-bar-customization-target #search-container {
     padding-block: 0 !important;
+    margin-inline: 3px !important;
     height: var(--urlbar-container-height) !important;
     min-height: var(--urlbar-container-height) !important;
-    margin-inline: 0 !important;
 }
 
 #nav-bar-customization-target #searchbar {
+    position: relative !important;
     box-shadow: none !important;
     -moz-box-align: center;
-    border-radius: 5px !important;
-    background-clip: content-box !important;
-    border: 3px solid transparent !important;
+    border-radius: var(--toolbarbutton-border-radius) !important;
+    outline: none !important;
+    border: none !important;
 }
 
 #urlbar-search-splitter {
-    min-width: 3px !important;
-    margin-inline: -3px !important;
+    min-width: 12px !important;
+    margin-inline: -7px !important;
 }
 
 #PopupSearchAutoComplete {
-    margin-top: 0.5px !important;
+    margin-top: calc((var(--urlbar-container-height) - var(--urlbar-height) - 1px) / 2) !important;
     border: none !important;
     --panel-background: var(--urlbar-results-bgcolor) !important;
     box-shadow: none;
-    font-size: 1.15em !important;
+    font-size: 1.196em !important;
     padding: 0 15px 15px;
     margin: -15px;
+    margin-inline: -18px !important;
     background: none;
 }
 
-#PopupSearchAutoComplete > * {
-    font-size: 1.04em !important;
+.searchbar-engine-name,
+#PopupSearchAutoComplete > richlistbox > richlistitem {
+    font-size: inherit !important;
 }
 
 #PopupSearchAutoComplete .search-panel-tree {
@@ -154,7 +157,41 @@ toolbarpaletteitem[place="palette"] > #search-container {
 
 #urlbar:is([focused="true"], :focus-within) > #urlbar-input-container,
 #searchbar:is(:focus-within, :focus-visible) {
-    background-color: var(--urlbar-input-bgcolor-even-brighter) !important;
+    background-color: var(--urlbar-input-bgcolor-brighter) !important;
+}
+
+#urlbar[disabled="true"] > #urlbar-input-container,
+toolbarpaletteitem > #urlbar-container #urlbar-input-container,
+toolbar toolbarpaletteitem > #search-container #searchbar {
+    background-color: var(--urlbar-input-bgcolor-disabled) !important;
+}
+
+toolbarpaletteitem > #search-container #searchbar,
+toolbarpaletteitem > #urlbar-container #urlbar-input-container,
+toolbarpaletteitem > #stop-reload-button .toolbarbutton-icon {
+    transition: transform var(--drag-drop-transition-duration) cubic-bezier(0.6, 2, 0.75, 1.5),
+        background-color var(--drag-drop-transition-duration) var(--uc-smooth-timing-function) !important;
+}
+
+toolbarpaletteitem[mousedown] > #search-container {
+    transform: none !important;
+}
+
+toolbarpaletteitem[mousedown] > #urlbar-container #urlbar-input-container,
+toolbarpaletteitem[mousedown] > #search-container #searchbar {
+    transform: scale(1.04) !important;
+    background-color: var(--urlbar-input-bgcolor) !important;
+}
+
+toolbarpaletteitem[mousedown] > #stop-reload-button .toolbarbutton-icon {
+    transform: scale(1.3) !important;
+}
+
+toolbarpaletteitem[mousedown] > #search-container > #searchbar,
+toolbarpaletteitem[mousedown] > #urlbar-container > #urlbar > #urlbar-background {
+    outline: none !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 1) !important;
+    box-shadow: none !important;
 }
 
 .urlbar-icon,
@@ -732,10 +769,6 @@ toolbarpaletteitem[removable="false"]
     fill-opacity: 0.3 !important;
 }
 
-:root[customizing] #wrapper-urlbar-container #urlbar-input-container {
-    background-color: var(--urlbar-input-bgcolor-disabled) !important;
-}
-
 :root[customizing] #urlbar #identity-box #identity-icon {
     list-style-image: url(chrome://global/skin/icons/security.svg) !important;
 }
@@ -952,7 +985,7 @@ use 0.6 instead of 1 since 1 will end up being shown as like 1.4px for some wind
 
 #urlbar[focused="true"],
 #urlbar-input-container:focus-within {
-    --identity-box-solid-bg: var(--identity-box-hover-bg);
+    --identity-box-solid-bg: var(--identity-box-focus-bg);
 }
 
 #urlbar-label-box,
@@ -968,6 +1001,7 @@ use 0.6 instead of 1 since 1 will end up being shown as like 1.4px for some wind
     border: none !important;
     border-right: 1px solid var(--desaturate-dimmed) !important;
     pointer-events: auto !important;
+    fill: currentColor !important;
 }
 
 #urlbar-search-mode-indicator-close {

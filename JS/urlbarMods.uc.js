@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Urlbar Mods
-// @version        1.3.1
+// @version        1.3.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Makes some minor modifications to the urlbar. When you click & drag the identity box in the urlbar, it lets you drag and drop the URL into text fields, the tab bar, desktop, etc. while dragging it shows a little white box with the URL and favicon as the drag image. This script changes the colors of that drag box so they use CSS variables instead. This script can also be configured to restore the context menu that used to appear when right-clicking a search engine one-off button in the urlbar results panel. (The context menu was disabled recently) I'll continue to add to this script as I think of more urlbar mods that are too small to deserve their own dedicated script.
@@ -10,9 +10,14 @@
     class UrlbarMods {
         static config = {
             "restore one-offs context menu": false, // recently the context menu for the search engine one-off buttons in the urlbar results panel has been disabled. but the context menu for the one-off buttons in the searchbar is still enabled. I'm not sure why they did this, and it's a really minor thing, but it's not like right-clicking the buttons does anything else, (at least on windows) so you may want to restore the context menu.
+
             "style identity icon drag box": true, // when you click & drag the identity box in the urlbar, it lets you drag and drop the URL into text fields, the tab bar, desktop, etc. while dragging it shows a little white box with the URL and favicon as the drag image. this can't be styled with CSS because it's drawn by the canvas 2D API. but we can easily change the function so that it sets the background and text colors equal to some CSS variables. it uses --tooltip-bgcolor, --tooltip-color, and --tooltip-border-color, or if those don't exist, it uses the vanilla variables --arrowpanel-background, --arrowpanel-color, and --arrowpanel-border-color. so if you use my theme duskFox it'll look similar to a tooltip. if you don't use my theme it'll look similar to a popup panel.
+
             "show device icon in remote tab urlbar results": true, // my theme increases the prominence of the "type icon" in urlbar results. for bookmarks, this is a star. for open tabs, it's a tab icon. for remote tabs, aka synced tabs, it's a sync icon. with this option enabled, however, instead of showing a sync icon it will show a device icon specific to the type of device. so if the tab was synced from a cell phone, the type icon will show a phone. if it was synced from a laptop, it'll show a laptop, etc. the script will add some CSS to set the icons, but it won't change the way type icons are layed out. that's particular to my theme and it's purely a CSS issue, so I don't want the script to get involved in that. my urlbar-results.css file makes the type icon look basically like a 2nd favicon. it goes next to the favicon, rather than displaying on top of it. the script's CSS just changes the icon, so it'll fit with however you have type icons styled. if you don't use my theme but you want type icons to look more prominent, see urlbar-results.css and search "type-icon"
+
             "disable urlbar intervention tips": true, // normally, when you type something like "firefox install" or "clear cookies" in the urlbar, it suggests an "intervention" or "tip" which acts as a kind of shortcut to various settings and profile operations that some beginners might have a hard time finding. this is a fine feature for people who are new to firefox. but people who use firefox a lot use the urlbar quickly and could very easily accidentally hit enter on one of those results. I decided to add this option to the script because I very nearly wiped my entire profile due to the tip that lets you "Restore default settings and remove old add-ons for optimal performance." From my point of view, these results just waste space while presenting a major hazard to the user, which makes them far more of a liability than an asset. Therefore, they will be removed entirely by this setting.
+
+            "underline whitespace results": true, // when you type nothing but space or tab characters in the urlbar, the first result will have an empty title. consecutive whitespace characters don't add to the displayed node width so it ends up looking basically empty. we can change this by setting it to use non-breaking spaces instead of space characters, and adding an attribute "all-whitespace" to the title element. then your CSS can underline it. this is already done in uc-urlbar-results.css but if you wanna do it yourself: .urlbarView-title[all-whitespace] {text-decoration: underline}
         };
         constructor() {
             if (UrlbarMods.config["restore one-offs context menu"])
@@ -22,6 +27,7 @@
                 this.urlbarResultsDeviceIcon();
             if (UrlbarMods.config["disable urlbar intervention tips"])
                 this.disableUrlbarInterventions();
+            if (UrlbarMods.config["underline whitespace results"]) this.underlineSpaceResults();
         }
         get urlbarOneOffs() {
             return this._urlbarOneOffs || (this._urlbarOneOffs = gURLBar.view.oneOffSearchButtons);
@@ -171,6 +177,33 @@
                     (provider) => provider.name === "UrlbarProviderInterventions"
                 )
             );
+        }
+        underlineSpaceResults() {
+            gURLBar.view._addTextContentWithHighlights = function (node, text, highlights) {
+                node.textContent = "";
+                if (!text) return;
+                if (/^\s{2,}$/.test(text) && !highlights.length) {
+                    text = text.replace(/\s/g, `\u00A0`);
+                    node.setAttribute("all-whitespace", true);
+                } else node.removeAttribute("all-whitespace");
+                highlights = (highlights || []).concat([[text.length, 0]]);
+                let index = 0;
+                for (let [highlightIndex, highlightLength] of highlights) {
+                    if (highlightIndex - index > 0)
+                        node.appendChild(
+                            this.document.createTextNode(text.substring(index, highlightIndex))
+                        );
+                    if (highlightLength > 0) {
+                        let strong = this._createElement("strong");
+                        strong.textContent = text.substring(
+                            highlightIndex,
+                            highlightIndex + highlightLength
+                        );
+                        node.appendChild(strong);
+                    }
+                    index = highlightIndex + highlightLength;
+                }
+            };
         }
     }
 
