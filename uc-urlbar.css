@@ -918,17 +918,17 @@ toolbarpaletteitem[removable="false"]
     fill-opacity: 1 !important;
 }
 
-/* some permission icons are too big relative to their viewbox.
+/* depending on window scaling factor, some permission icons may appear too big relative to their viewbox.
 urlbar icons that display frequently like the tracking icon or the identity icon have a max width/height of 14px but a viewbox of 16px and are drawn to 16px.
 so they have at least 1px of virtual "padding" on every side. we could replace all the svg icons and maybe I will, but this is a lot easier.
 use 0.6 instead of 1 since 1 will end up being shown as like 1.4px for some window scaling factors.*/
-#blocked-permissions-container
-    :is(.desktop-notification-icon, .screen-icon, .popup-icon, .autoplay-media-icon, .canvas-icon, .install-icon),
+/* #blocked-permissions-container
+    :is(.screen-icon, .popup-icon, .autoplay-media-icon, .canvas-icon, .install-icon),
 #notification-popup-box
-    :is(.drm-icon, .autoplay-media-icon, .install-icon, #canvas-notification-icon, .canvas-icon, .indexedDB-icon, .desktop-notification-icon, .screen-icon, .translation-icon, .storage-access-icon),
+    :is(.drm-icon, .autoplay-media-icon, .install-icon, #canvas-notification-icon, .canvas-icon, .indexedDB-icon, .screen-icon, .translation-icon, .storage-access-icon),
 #webrtc-sharing-icon[sharing="screen"] {
     padding: 0.6px;
-}
+} */
 
 .notification-anchor-icon#default-notification-icon {
     list-style-image: url(chrome://userchrome/content/material/notification.svg) !important;
@@ -939,6 +939,10 @@ use 0.6 instead of 1 since 1 will end up being shown as like 1.4px for some wind
 .popup-notification-icon[popupid="addon-install-blocked"],
 .popup-notification-icon[popupid="addon-install-origin-blocked"] {
     list-style-image: url(chrome://userchrome/content/material/extension-blocked.svg) !important;
+}
+
+#blocked-permissions-container > .popup-icon {
+	transform: none !important;
 }
 
 #urlbar[searchmode] #tracking-protection-icon-container,

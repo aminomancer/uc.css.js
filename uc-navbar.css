@@ -582,8 +582,7 @@ notifications are translucent with acrylic effect. enable layout.css.backdrop-fi
     max-width: 100vh !important;
     height: 32px !important;
     transition: margin-top 100ms linear, max-width 100ms ease-in-out !important;
-    flex-basis: 10% !important;
-    flex-grow: 0.15;
+    flex-basis: min-content !important;
     pointer-events: auto !important;
     --in-content-button-background: var(--desaturate-dimmed) !important;
     --in-content-button-background-hover: var(--desaturate-dimmed-further) !important;
@@ -649,7 +648,7 @@ notifications are translucent with acrylic effect. enable layout.css.backdrop-fi
     notification-message[type="critical"],
 #navigator-toolbox > named-deck > .notificationbox-stack notification-message[type="critical"],
 #navigator-toolbox .global-notificationbox notification-message[type="critical"] {
-    flex-grow: 0.15 !important;
+    flex-shrink: 0.25 !important;
 }
 
 #navigator-toolbox
@@ -657,7 +656,7 @@ notifications are translucent with acrylic effect. enable layout.css.backdrop-fi
     notification-message[type="warning"],
 #navigator-toolbox > named-deck > .notificationbox-stack notification-message[type="warning"],
 #navigator-toolbox .global-notificationbox notification-message[type="warning"] {
-    flex-grow: 0.03 !important;
+    flex-shrink: 0.5 !important;
 }
 
 #navigator-toolbox
@@ -665,7 +664,7 @@ notifications are translucent with acrylic effect. enable layout.css.backdrop-fi
     notification-message[type="info"],
 #navigator-toolbox > named-deck > .notificationbox-stack notification-message[type="info"],
 #navigator-toolbox .global-notificationbox notification-message[type="info"] {
-    flex-grow: 0.01 !important;
+    flex-shrink: 0.75 !important;
 }
 
 link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar
@@ -678,6 +677,7 @@ link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infob
     padding-inline: 4px !important;
     align-items: center !important;
     flex-grow: 1 !important;
+    text-overflow: ellipsis !important;
 }
 
 .container.infobar::before {
@@ -716,12 +716,16 @@ link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infob
     display: flex !important;
     white-space: nowrap !important;
     text-overflow: ellipsis !important;
+    overflow: hidden !important;
 }
 
 link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-content .notification-message
 {
     padding-block: 0 !important;
     min-height: auto !important;
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
+    margin-inline-end: 8px !important;
 }
 
 link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar > .spacer

@@ -165,7 +165,7 @@ panel[type="arrow"][side="top"] {
     border-radius: var(--arrowpanel-menuitem-border-radius) !important;
     margin: 0 !important;
     padding-inline: 6px !important;
-    min-height: 28px !important;
+    min-height: var(--subviewbutton-height) !important;
 }
 
 .protections-popup-category-label {
@@ -214,6 +214,10 @@ panel[type="arrow"][side="top"] {
     outline: none !important;
     padding: 3.75px 4px !important;
     height: revert !important;
+}
+
+#protections-popup-not-blocking-section-why:hover {
+    color: var(--panel-color);
 }
 
 :is(#protections-popup-not-blocking-section-description, #protections-popup-not-blocking-section-why, #protections-popup-blocking-section-header, #protections-popup-not-found-section-header):not([hidden="true"]) {
@@ -404,7 +408,7 @@ popupnotificationcontent {
 #password-notification-username-dropmarker {
     height: 100% !important;
     margin: 0 !important;
-    width: 28px !important;
+    width: var(--subviewbutton-height) !important;
     opacity: 0.6 !important;
     -moz-box-pack: center !important;
 }
@@ -666,6 +670,7 @@ popupnotification progress[paused]::-moz-progress-bar {
 #identity-popup-securityView .identity-popup-security-connection {
     background-position: 5px center !important;
     padding-block: 4px !important;
+    margin-block: 5px 0 !important;
     margin-inline: 3px !important;
 }
 
@@ -675,14 +680,12 @@ popupnotification progress[paused]::-moz-progress-bar {
 
 #identity-popup-mainView .identity-popup-security-connection {
     background-position: 5px center !important;
+    min-height: 34px !important;
+    -moz-box-pack: center !important;
 }
 
 #identity-popup .subviewbutton-nav {
     padding-block: 0 !important;
-}
-
-#identity-popup .subviewbutton-nav > vbox {
-    min-height: 33.3px !important;
 }
 
 #identity-popup-security-button {
@@ -1439,7 +1442,7 @@ panel .header,
 }
 
 #identity-popup-securityView-body {
-    padding-block: 4px;
+    padding-block: 4px 8px;
 }
 
 #permission-popup-mainView-panel-header, #identity-popup-mainView-panel-header, #protections-popup-mainView-panel-header {
@@ -1506,10 +1509,17 @@ panel .header,
     margin-inline: 4px;
 }
 
-#geo-access-indicator-item {
+#geo-access-indicator-item,
+#blocked-popup-indicator-item {
 	font-size: 0.9em !important;
     font-weight: var(--uc-font-weight-thin) !important;
     min-height: 20px !important;
+    background: url(chrome://userchrome/content/notifications/popup-subitem.svg) left center no-repeat;
+    margin-inline-start: 22px !important;
+    padding-inline-start: 12px !important;
+    -moz-context-properties: fill, fill-opacity;
+    fill: currentColor !important;
+    color: var(--panel-description-color) !important;
 }
 
 #protections-popup-sendReportView-heading,
@@ -1544,3 +1554,48 @@ panel .header,
     color: var(--warning-color) !important;
     margin-top: 12px !important;
 }
+
+/* add icons to some panel subviewbuttons */
+#identity-popup-clear-sitedata-button {
+    list-style-image: url(chrome://userchrome/content/skin/forget.svg);
+    /* list-style-image: url(chrome://userchrome/content/skin/3rdpartycookies-disabled.svg); */
+    padding-inline-start: 7.5px !important;
+}
+
+#identity-popup-more-info {
+    list-style-image: url(chrome://userchrome/content/info-filled.svg);
+    padding-inline-start: 7.5px !important;
+}
+
+#identity-popup-clear-sitedata-button .toolbarbutton-icon,
+#identity-popup-more-info .toolbarbutton-icon {
+    width: 18px;
+    height: 18px;
+}
+
+#identity-popup-clear-sitedata-button .toolbarbutton-text,
+#identity-popup-more-info .toolbarbutton-text {
+    padding-inline-start: 8px !important;
+}
+
+#protections-popup-settings-button {
+    list-style-image: url(chrome://userchrome/content/settings.svg);
+}
+
+#protections-popup-show-report-button {
+    list-style-image: url(chrome://userchrome/content/skin/dashboard.svg);
+}
+
+#protections-popup-settings-button .protections-popup-footer-icon,
+#protections-popup-show-report-button .protections-popup-footer-icon {
+    width: 16px;
+    height: 16px;
+}
+
+#protections-popup-settings-button .protections-popup-footer-button-label,
+#protections-popup-show-report-button .protections-popup-footer-button-label {
+    padding-inline-start: 8px !important;
+}
+
+
+
