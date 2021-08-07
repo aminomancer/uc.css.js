@@ -416,7 +416,6 @@
         filterFn(tab) {
             return !tab.hidden;
         }
-
         /**
          * get the initial state for the pane from a previous window. this is what happens when you open a new window (not the first window of a session)
          * @param {object} sourceWindow (a window object, the window from which the new window was opened)

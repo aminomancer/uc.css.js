@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Urlbar Mods
-// @version        1.3.2
+// @version        1.3.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Makes some minor modifications to the urlbar. When you click & drag the identity box in the urlbar, it lets you drag and drop the URL into text fields, the tab bar, desktop, etc. while dragging it shows a little white box with the URL and favicon as the drag image. This script changes the colors of that drag box so they use CSS variables instead. This script can also be configured to restore the context menu that used to appear when right-clicking a search engine one-off button in the urlbar results panel. (The context menu was disabled recently) I'll continue to add to this script as I think of more urlbar mods that are too small to deserve their own dedicated script.
@@ -172,11 +172,10 @@
         }
         disableUrlbarInterventions() {
             let manager = gURLBar.controller.manager;
-            manager.unregisterProvider(
-                manager.providers.find(
-                    (provider) => provider.name === "UrlbarProviderInterventions"
-                )
+            let interventions = manager.providers.find(
+                (provider) => provider.name === "UrlbarProviderInterventions"
             );
+            if (interventions) manager.unregisterProvider(interventions);
         }
         underlineSpaceResults() {
             gURLBar.view._addTextContentWithHighlights = function (node, text, highlights) {
