@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Undo Recently Closed Tabs in Tab Context Menu
-// @version        1.4.1
+// @version        1.4.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Adds new menus to the context menu that appears when you right-click a tab (in the tab bar or in the TreeStyleTabs sidebar): one lists recently closed tabs so you can restore them, and another lists recently closed windows. These are basically the same functions that exist in the history toolbar button's popup, but I think the tab context menu is a more convenient location for them. An updated script that does basically the same thing as UndoListInTabmenuToo by Alice0775, but for current versions of Firefox and with TST support. The original broke around version 86 or 87 I think.
@@ -18,12 +18,6 @@
 
         "Windows access key": "", // just like the previous preference, but for the "Recently Closed Windows" menu. in English this is "W" by default. if you use this or the "New Tab" item's access key a lot you may want to change it, since they both use "W" as their access key. when two menu items have the same accesskey, pressing it will just cycle between the two without activating either. this item was added after I wrote the script, and I can't really change it because the access key is calculated automatically, based on the first letter of the last word.
     };
-
-    ChromeUtils.defineModuleGetter(
-        this,
-        "SessionWorkerCache",
-        "resource:///modules/sessionstore/SessionWorkerCache.jsm"
-    );
 
     class UndoListInTabmenu {
         constructor() {
@@ -336,10 +330,8 @@
         RecentlyClosedTabsAndWindowsMenuUtils.navigatorBundle = Services.strings.createBundle(
             "chrome://browser/locale/browser.properties"
         );
-        RecentlyClosedTabsAndWindowsMenuUtils.setImage = function (tabData, aElement) {
-            let iconURL = SessionWorkerCache.getById(tabData.image);
-            if (!iconURL && typeof tabData.image == "string") iconURL = tabData.image;
-            if (!iconURL) return;
+        RecentlyClosedTabsAndWindowsMenuUtils.setImage = function (aItem, aElement) {
+            let iconURL = aItem.image;
             if (/^https?:/.test(iconURL)) iconURL = "moz-anno:favicon:" + iconURL;
             aElement.setAttribute("image", iconURL);
         };
@@ -355,7 +347,8 @@
         ) {
             let element = aDocument.createXULElement(aTagName);
             element.setAttribute("label", aMenuLabel);
-            RecentlyClosedTabsAndWindowsMenuUtils.setImage(aClosedTab, element);
+            if (aClosedTab.image)
+                RecentlyClosedTabsAndWindowsMenuUtils.setImage(aClosedTab, element);
             if (!aIsWindowsFragment) element.setAttribute("value", aIndex);
             if (aTagName == "menuitem")
                 element.setAttribute(

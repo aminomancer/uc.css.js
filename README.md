@@ -656,6 +656,8 @@ Various tiny mods not worth making separate scripts for. Read the comments [insi
 
 [Violentmonkey](https://addons.mozilla.org/en-US/firefox/addon/violentmonkey/): An addon for running JavaScript in browser tabs. If you need to modify a particular website, this is the best way. This is overall the best GreaseMonkey-like addon for Firefox, in my opinion.
 
+[SVG Gobbler](https://www.svggobbler.com/): A new browser extension that can locate and retrieve all the SVG images/icons on a webpage. Very useful for CSS ricing, especially if you use a dark theme since you'll often need to turn dark icons into light icons. You don't strictly need this but it'll speed up the process.
+
 [Sidebar Always Loaded](https://github.com/thepante/SAL-Firefox): A very cool script that makes the sidebar more permanent and less intrusive. It's similar to my Floating Sidebar script but 100% standalone, 50% more elegant, and has ~25% more features. Compatible with [fx-autoconfig](https://github.com/MrOtherGuy/fx-autoconfig) or [Alice0775's loader](https://github.com/alice0775/userChrome.js/tree/master/72).
 
 [NsCDE](https://github.com/NsCDE/NsCDE): A really cool Unix desktop environment package that integrates with Firefox and many other applications to produce remarkably consistent user interfaces.

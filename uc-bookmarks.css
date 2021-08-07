@@ -661,7 +661,3 @@ menupopup .openintabs-menuitem:not(.menuitem-iconic, .menu-iconic) .menu-text {
 #BMB_bookmarksPopup .openintabs-menuitem:not(.menuitem-iconic, .menu-iconic) .menu-text {
     padding-inline-start: 0 !important;
 }
-
-#bookmarksMenuPopup > menuseparator.small-separator {
-    display: none;
-}

@@ -701,6 +701,14 @@
 
 .urlbarView-row[label] {
     overflow: revert !important;
+    margin-block-start: revert !important;
+}
+
+.urlbarView-row[label]::before {
+    display: none !important;
+    top: -1.3em !important;
+    opacity: 1 !important;
+    color: var(--panel-description-color) !important;
 }
 
 .urlbarView-row-inner {

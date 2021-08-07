@@ -825,6 +825,21 @@ toolbarpaletteitem[removable="false"]
     display: none !important;
 }
 
+#urlbar #identity-box.chromeUI #notification-popup-box {
+    display: flex !important;
+    position: absolute !important;
+    left: 8px !important;
+    min-height: 100% !important;
+    align-items: center !important;
+    margin: 0 !important;
+}
+
+#urlbar #identity-box.chromeUI #notification-popup-box .notification-anchor-icon {
+    width: 0 !important;
+    min-height: 16px !important;
+    margin: 0 0 0 8px !important;
+}
+
 #identity-permission-box:not([open]) #webrtc-sharing-icon,
 .permission-popup-permission-icon.in-use:is(.camera-icon, .microphone-icon, .screen-icon) {
     fill: currentColor !important;

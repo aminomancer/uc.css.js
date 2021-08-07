@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Search Selection Keyboard Shortcut
-// @version        1.1
+// @version        1.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Adds a new keyboard shortcut (ctrl+shift+F) that searches your default search engine for whatever text you currently have highlighted. This does basically the same thing as the context menu option "Search {Engine} for {Selection}" except that if you highlight a URL, instead of searching for the selection it will navigate directly to the URL.
@@ -73,9 +73,21 @@
                         ? "current"
                         : "tab";
 
-                    if (/^(chrome|file|about)\:\/\//.test(text))
-                        return openLinkIn(text, where, options);
-                    if (linkURL) {
+                    if (/^((chrome|resource|file|moz-extension)\:\/\/|about:).+/.test(text)) {
+                        if (/^moz-extension\:\/\/.+/.test(text)) {
+                            let host = Services.io.newURI(text)?.host;
+                            let policy = WebExtensionPolicy.getByHostname(host);
+                            let extPrincipal = policy && policy.extension.principal;
+                            if (extPrincipal) {
+                                options.triggeringPrincipal = extPrincipal;
+                                return openLinkIn(text, where, options);
+                            }
+                        } else {
+                            options.triggeringPrincipal =
+                                Services.scriptSecurityManager.getSystemPrincipal();
+                            return openLinkIn(text, where, options);
+                        }
+                    } else if (linkURL) {
                         let fixup, fixable;
                         try {
                             fixup = Services.uriFixup.getFixupURIInfo(

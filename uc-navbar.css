@@ -336,6 +336,10 @@ toolbar .toolbarbutton-1:not([disabled], [open])[checked]:hover:active > .toolba
     flex-flow: row nowrap !important;
 }
 
+#PersonalToolbar #personal-bookmarks {
+    flex-grow: 1;
+}
+
 :root:not([inFullscreen]) #PersonalToolbar:not([collapsed="true"], [customizing]) + * {
     display: none !important;
 }

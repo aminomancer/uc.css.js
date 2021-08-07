@@ -8,6 +8,12 @@ individual extensions' popups and other content documents are styled in userCont
 
 /* extension icon appearance */
 
+/* SVG gobbler */
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="{7962ff4a-5985-4cf2-9777-4bb642ad05b8}"i]
+    .toolbarbutton-icon {
+    list-style-image: url(chrome://userchrome/content/material/svg-gobbler.svg) !important;
+}
+
 /* mendeley web importer */
 :is(.webextension-browser-action, .eom-addon-button)[data-extensionid="webapps@mendeley.com"i]
     .toolbarbutton-icon {
