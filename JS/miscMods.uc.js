@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Misc. Mods
-// @version        1.6.0
+// @version        1.7.0
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Various tiny mods not worth making separate scripts for. Read the comments inside the script for details.
@@ -31,6 +31,10 @@
         // #stop-reload-button > :is(#reload-button, #stop-button) > .toolbarbutton-animatable-box {display: block;}
         // :is(#reload-button, #stop-button) > .toolbarbutton-icon {padding: var(--toolbarbutton-inner-padding) !important;}
         "Allow stop/reload button to animate in other toolbars": true,
+
+        // the toast popup that opens when you enable/disable tracking protection on a site has a bug where it doesn't fade out when it closes.
+        // see here: https://bugzilla.mozilla.org/show_bug.cgi?id=1724622
+        "Fix missing tracking protection toast popup fade animation": true,
     };
     class UCMiscMods {
         constructor() {
@@ -44,6 +48,8 @@
             this.reduceCtrlTabDelay(config["Reduce ctrl+tab delay"]);
             if (config["Allow stop/reload button to animate in other toolbars"])
                 this.stopReloadAnimations();
+            if (config["Fix missing tracking protection toast popup fade animation"])
+                this.fixProtectionsToast();
         }
         stopDownloadsPanelFocus() {
             eval(
@@ -158,6 +164,17 @@
                         .toSource()
                         .replace(/switchToReload/, "")
                         .replace(/#nav-bar-customization-target/, `.customization-target`)
+            );
+        }
+        fixProtectionsToast() {
+            eval(
+                `gProtectionsHandler.showProtectionsPopup = function ` +
+                    gProtectionsHandler.showProtectionsPopup
+                        .toSource()
+                        .replace(
+                            /PanelMultiView\.hidePopup\(this\.\_protectionsPopup\)/,
+                            `this._protectionsPopup.hidePopup(true)`
+                        )
             );
         }
     }
