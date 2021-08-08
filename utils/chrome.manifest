@@ -38,6 +38,7 @@ override chrome://browser/skin/reader-mode.svg ../resources/skin/reader-mode.svg
 override chrome://browser/skin/forward.svg ../resources/skin/forward.svg
 override chrome://browser/skin/back.svg ../resources/skin/back.svg
 override chrome://browser/skin/reload.svg ../resources/skin/reload.svg
+override chrome://global/skin/icons/reload.svg ../resources/skin/reload.svg
 override chrome://browser/skin/login.svg ../resources/skin/login.svg
 override chrome://browser/skin/home.svg ../resources/skin/home.svg
 override chrome://browser/skin/privateBrowsing.svg ../resources/skin/privateBrowsing.svg
