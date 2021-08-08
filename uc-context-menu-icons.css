@@ -594,7 +594,7 @@ menuitem.customize-context-reportExtension:before {
 }
 
 menuitem[command="downloadsCmd_openReferrer"]:before {
-    background-image: url(chrome://userchrome/content/notifications/indexedDB.svg);
+    background-image: url(chrome://userchrome/content/document.svg);
 }
 
 menuitem[command="downloadsCmd_copyLocation"]:before {
