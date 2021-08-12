@@ -526,14 +526,8 @@ so by default we hide the border on extension panels (see userChrome.au.css) */
 #customizationui-widget-panel[viewId="PanelUI-webext-nordvpnproxy_nordvpn_com-browser-action-view"],
 #customizationui-widget-panel[viewId="PanelUI-webext-simple-translate_sienori-browser-action-view"] {
     --customized-webextension-panel-border: 1px solid var(--panel-border-color) !important;
-}
-
-#customizationui-widget-panel[viewId="PanelUI-webext-sort-bookmarks_heftig-browser-action-view"],
-#customizationui-widget-panel[viewId="PanelUI-webext-_testpilot-containers-browser-action-view"],
-#customizationui-widget-panel[viewId="PanelUI-webext-addon_darkreader_org-browser-action-view"],
-#customizationui-widget-panel[viewId="PanelUI-webext-nordvpnproxy_nordvpn_com-browser-action-view"],
-#customizationui-widget-panel[viewId="PanelUI-webext-simple-translate_sienori-browser-action-view"] {
     --customized-webextension-panel-stroke: var(--panel-border-color);
+    --arrowpanel-border-color: var(--uc-menu-border-color) !important;
 }
 
 #customizationui-widget-panel[viewId="PanelUI-webext-sort-bookmarks_heftig-browser-action-view"][side="top"],

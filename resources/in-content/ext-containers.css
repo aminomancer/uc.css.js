@@ -25,6 +25,7 @@
         color: inherit !important;
         letter-spacing: inherit !important;
         padding: var(--menupopup-inner-padding-magnitude) !important;
+        padding-top: 0 !important;
     }
 
     @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {

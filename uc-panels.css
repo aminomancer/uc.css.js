@@ -1102,8 +1102,8 @@ panel .header,
     margin: 0 var(--arrowpanel-menuitem-inline-margin) !important;
     border-top: 1px solid var(--panel-separator-color) !important;
     gap: var(--arrowpanel-menuitem-inline-margin) !important;
-    --button-hover-bgcolor: var(--in-content-button-background-hover);
-    --button-active-bgcolor: var(--in-content-button-background-active);
+    --button-hover-bgcolor: var(--in-content-button-background);
+    --button-active-bgcolor: var(--in-content-button-background-hover);
 }
 
 #downloadsFooterButtons > toolbarseparator {
@@ -1254,13 +1254,12 @@ richlistitem.download-state > .downloadButton .button-box .button-icon {
 /* just for downloads in the places organizer */
 @-moz-document url-prefix("chrome://browser/content/places/places.xhtml")
 {
-    .downloadProgress {
-        --arrowpanel-dimmed: var(--in-content-button-background-hover) !important;
-        --desaturate-dimmed: var(--in-content-button-background-disabled) !important;
+    richlistitem.download-state:is(:hover, :focus-within) {
+        background: hsl(230, 5%, 18%) !important;
     }
 
     richlistitem.download-state[selected]:not(:hover, :focus-within) {
-        background: hsla(230, 8%, 80%, 0.08) !important;
+        background: hsl(230, 5%, 15%) !important;
     }
 }
 

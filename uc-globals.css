@@ -145,16 +145,15 @@ tooltip {
 
     --tab-background: var(--lwt-accent-color);
     --tab-selected: var(--toolbar-bgcolor);
-    --tab-hover: linear-gradient(180deg, hsl(231, 49%, 11%), hsl(233, 55%, 8%));
-    --tab-pinned: linear-gradient(0deg, var(--toolbar-bgcolor), var(--lwt-accent-color));
-    --tab-multi: linear-gradient(180deg, hsl(231, 50%, 11%), hsl(233, 53%, 8%));
-    --tab-multi-hover: linear-gradient(180deg, hsl(231, 47%, 13%), hsl(233, 51%, 10%));
+    --tab-hover: linear-gradient(hsl(231, 49%, 11%), hsl(233, 55%, 8%));
+    --tab-pinned: linear-gradient(var(--lwt-accent-color), var(--toolbar-bgcolor));
+    --tab-multi: linear-gradient(hsl(231, 50%, 11%), hsl(233, 53%, 8%));
+    --tab-multi-hover: linear-gradient(hsl(231, 47%, 13%), hsl(233, 51%, 10%));
     --tab-pinned-hover: var(--toolbar-bgcolor);
-    --tab-focused-highlight: hsl(231, 36%, 24%);
+    --tab-focused-highlight: hsl(231, 36%, 22%);
     --tab-focused-hover: linear-gradient(
-        0deg,
-        var(--toolbar-bgcolor),
-        color-mix(in srgb, var(--tab-focused-highlight) 50%, var(--toolbar-bgcolor))
+        color-mix(in srgb, var(--tab-focused-highlight) 50%, var(--toolbar-bgcolor)),
+        var(--toolbar-bgcolor)
     );
     --multiselected-color: hsl(241, 50%, 51%);
 

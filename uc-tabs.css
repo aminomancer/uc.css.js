@@ -1,5 +1,10 @@
 /* controls the appearance of individual tabs and elements inside a tab. */
 
+#TabsToolbar .tabbrowser-tab {
+    background-color: var(--lwt-accent-color) !important;
+    padding: 0 !important;
+}
+
 /* different tab background colors in various states */
 .tabbrowser-tab:not([selected]):is(:hover, .keyboard-focused-tab) .tab-background {
     background: var(--tab-hover) !important;
@@ -28,18 +33,13 @@
 }
 
 .tabbrowser-tab[multiselected]:not([selected], [pinned], :hover, .keyboard-focused-tab)
-    :is(.tab-background, .tab-background-inner) {
+    .tab-background {
     background: var(--tab-multi) !important;
 }
 
 .tabbrowser-tab[multiselected]:not([selected], [pinned]):is(:hover, .keyboard-focused-tab)
     .tab-background {
     background: var(--tab-multi-hover) !important;
-}
-
-.tab-background[multiselected="true"]:not([selected="true"]) > .tab-background-inner {
-    background: initial !important;
-    opacity: initial !important;
 }
 
 /* optimize tab drag/drop  movement */
@@ -289,6 +289,10 @@ or else they'll end up being covered up or showing through things they shouldn't
     z-index: 6;
 }
 
+.tab-icon-stack {
+    z-index: -1;
+}
+
 /* hide the corners on first/last visible tabs, just like we unround the top corners */
 #tabbrowser-tabs:not([movingtab], [using-closing-tabs-spacer])
     .tabbrowser-tab[first-visible-tab]:not([justmoved], [style*="transform"])
@@ -491,21 +495,19 @@ so shadows are cast in both directions, unless the neighboring tab is selected o
     padding: 0 !important;
 }
 
-.tab-icon-sound:is([soundplaying], [muted], [pictureinpicture], [activemedia-blocked]) {
+.tab-icon-sound {
+    display: -moz-inline-box !important;
     width: 16px !important;
     height: 16px !important;
-}
-
-.tab-icon-sound {
-    -moz-context-properties: fill !important;
-    -moz-box-ordinal-group: 2 !important;
-    fill: currentColor !important;
     list-style-image: none !important;
     background-image: url(chrome://userchrome/content/audioUnmutedButton.svg) !important;
     background-size: 12px !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
     list-style-image: none !important;
+    -moz-context-properties: fill !important;
+    -moz-box-ordinal-group: 2 !important;
+    fill: currentColor !important;
 }
 
 .tab-icon-sound[muted] {
@@ -518,8 +520,6 @@ so shadows are cast in both directions, unless the neighboring tab is selected o
 
 .tab-icon-sound[activemedia-blocked],
 .tab-icon-sound[activemedia-blocked]:hover {
-    width: 16px !important;
-    height: 16px !important;
     padding: 0 !important;
     background-image: url(chrome://userchrome/content/glyph-play-12.svg) !important;
     background-size: 8px !important;
@@ -585,11 +585,71 @@ so shadows are cast in both directions, unless the neighboring tab is selected o
     background-image: url(chrome://userchrome/content/audioMutedButton.svg) !important;
 }
 
+#tabbrowser-tabs:not([movingtab])
+    .tabbrowser-tab:not([tabdrop-samewindow], [justmoved])
+    .tab-content
+    > .tab-icon-sound {
+    transition: 0.12s transform ease-in-out, 0.12s opacity ease-in-out, 0.12s margin ease-in-out !important;
+}
+
+#tabbrowser-tabs
+    .tab-content
+    > .tab-icon-sound:not([soundplaying], [muted], [activemedia-blocked], [pictureinpicture]) {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: translateX(16px) scale(0.5) !important;
+    margin-right: -16px !important;
+}
+
+/* uncomment the line below if you want to hide the sound button on the selected tab
+until the tab container is hovered. e.g. if your tab min size is small and you want more room to see the tab title.
+by default the tab sound button shows on every tab if sound is playing or muted.
+with the following line uncommented, the tab sound button shows on every non-selected tab if sound is playing or muted,
+but only shows on the selected tab if 1) the tab is muted, or 2) the tabs area is hovered.
+so in other words it won't show if audio is playing until you hover the general area of the tabs, but will show if audio is muted. */
+
+/* #tabbrowser-tabs:not(:hover, :focus-within, :focus) .tabbrowser-tab[visuallyselected] .tab-content > .tab-icon-sound:not([pictureinpicture], [muted]), */
+#tabbrowser-tabs:not(:hover, :focus-within, :focus)
+    .tab-content
+    > .tab-icon-sound:not([soundplaying], [muted], [activemedia-blocked], [pictureinpicture]) {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: translateX(16px) scale(0.5) !important;
+    margin-right: -16px !important;
+}
+
+/* when tab is being dragged/dropped, style it like it's hovered */
+#tabbrowser-tabs[movingtab] .tabbrowser-tab[selected] .tab-icon-image {
+    opacity: 0 !important;
+}
+
+#tabbrowser-tabs[movingtab] .tabbrowser-tab[selected] .tab-close-button {
+    -moz-box-ordinal-group: 0 !important;
+    display: -moz-box !important;
+    position: relative !important;
+    margin-right: -16px !important;
+    z-index: 1 !important;
+    visibility: visible !important;
+    opacity: 0.6 !important;
+}
+
 .tabbrowser-tab:is([image], [pinned]) > .tab-stack > .tab-content[attention]:not([selected="true"]),
 .tabbrowser-tab > .tab-stack > .tab-content[pinned][titlechanged]:not([selected="true"]) {
     background-image: url(chrome://userchrome/content/indicator-tab-attention.svg);
     background-position: right 6px top 4px !important;
     background-repeat: no-repeat;
+}
+
+.tab-close-button {
+    -moz-box-ordinal-group: 0;
+    display: block !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    position: relative;
+    margin-inline: 0 -16px !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding: 0 !important;
+    list-style-image: url(chrome://userchrome/content/textbox-clear.svg) !important;
 }
 
 .tabbrowser-tab:not([pinned]):is(:hover, .keyboard-focused-tab)
@@ -606,22 +666,6 @@ so shadows are cast in both directions, unless the neighboring tab is selected o
 
 .tab-icon-image {
     display: block !important;
-}
-
-.tab-close-button {
-    -moz-box-ordinal-group: 0;
-    display: block !important;
-    -moz-context-properties: fill, fill-opacity, stroke !important;
-    position: relative;
-    margin-inline: 0 -16px !important;
-    width: 16px !important;
-    height: 16px !important;
-    padding: 0 !important;
-    list-style-image: url(chrome://userchrome/content/textbox-clear.svg) !important;
-}
-
-.tab-icon-stack {
-    z-index: -1;
 }
 
 /* tab buttons are animated with opacity and transformation */
@@ -720,61 +764,6 @@ so shadows are cast in both directions, unless the neighboring tab is selected o
     }
 }
 
-#tabbrowser-tabs:not([movingtab])
-    .tabbrowser-tab:not([tabdrop-samewindow], [justmoved])
-    .tab-content
-    > .tab-icon-sound {
-    transition: 0.12s transform ease-in-out, 0.12s opacity ease-in-out, 0.12s margin ease-in-out !important;
-}
-
-#tabbrowser-tabs
-    .tab-content
-    > .tab-icon-sound:not([soundplaying], [muted], [activemedia-blocked], [pictureinpicture]) {
-    list-style-image: url(chrome://userchrome/content/audioUnmutedButton.svg) !important;
-    display: -moz-inline-box !important;
-    opacity: 0 !important;
-    pointer-events: none !important;
-    transform: translateX(16px) scale(0.5) !important;
-    margin-right: -16px !important;
-}
-
-/* uncomment the line below if you want to hide the sound button on the selected tab
-until the tab container is hovered. e.g. if your tab min size is small and you want more room to see the tab title.
-by default the tab sound button shows on every tab if sound is playing or muted.
-with the following line uncommented, the tab sound button shows on every non-selected tab if sound is playing or muted,
-but only shows on the selected tab if 1) the tab is muted, or 2) the tabs area is hovered.
-so in other words it won't show if audio is playing until you hover the general area of the tabs, but will show if audio is muted. */
-
-/* #tabbrowser-tabs:not(:hover, :focus-within, :focus) .tabbrowser-tab[visuallyselected] .tab-content > .tab-icon-sound:not([pictureinpicture], [muted]), */
-#tabbrowser-tabs:not(:hover, :focus-within, :focus)
-    .tab-content
-    > .tab-icon-sound:not([soundplaying], [muted], [activemedia-blocked], [pictureinpicture]) {
-    opacity: 0 !important;
-    pointer-events: none !important;
-    transform: translateX(16px) scale(0.5) !important;
-    margin-right: -16px !important;
-}
-
-/* when tab is being dragged/dropped, style it like it's hovered */
-#tabbrowser-tabs[movingtab] .tabbrowser-tab[selected] .tab-icon-image {
-    opacity: 0 !important;
-}
-
-#tabbrowser-tabs[movingtab] .tabbrowser-tab[selected] .tab-close-button {
-    -moz-box-ordinal-group: 0 !important;
-    display: -moz-box !important;
-    position: relative !important;
-    margin-right: -16px !important;
-    z-index: 1 !important;
-    visibility: visible !important;
-    opacity: 0.6 !important;
-}
-
-#TabsToolbar .tabbrowser-tab {
-    background-color: var(--lwt-accent-color) !important;
-    padding: 0 !important;
-}
-
 /* hide the close button for pinned tabs. if the last visible tab is pinned, it doesn't hide the close button since the tab doesn't get shrunk in that case.
 this requires you to make a pref in about:config and set it to true: "userChrome.tabs.pinned-tabs.close-buttons.disabled" */
 @supports (-moz-bool-pref("userChrome.tabs.pinned-tabs.close-buttons.disabled")) {
@@ -812,7 +801,8 @@ so we make the mask size constant. */
     --tab-label-mask-size: 2em !important;
 }
 
-/* hide the sound icon while moving a pinned. does nothing without restoreTabSoundButton.uc.js */
+/* hide the sound icon while moving a pinned tab.
+does nothing without restoreTabSoundButton.uc.js since sound icon no longer exists in vanilla firefox. */
 .tabbrowser-tab[pinned]:not([last-visible-tab]) .tab-icon-sound,
 #tabbrowser-tabs[movingtab] .tabbrowser-tab[pinned] .tab-icon-sound,
 .tabbrowser-tab[pinned]:is([justmoved], [tab-grouping], [tabdrop-samewindow]) .tab-icon-sound {
