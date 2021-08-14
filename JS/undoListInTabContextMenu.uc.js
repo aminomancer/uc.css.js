@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Undo Recently Closed Tabs in Tab Context Menu
-// @version        1.4.2
+// @version        1.4.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Adds new menus to the context menu that appears when you right-click a tab (in the tab bar or in the TreeStyleTabs sidebar): one lists recently closed tabs so you can restore them, and another lists recently closed windows. These are basically the same functions that exist in the history toolbar button's popup, but I think the tab context menu is a more convenient location for them. An updated script that does basically the same thing as UndoListInTabmenuToo by Alice0775, but for current versions of Firefox and with TST support. The original broke around version 86 or 87 I think.
@@ -357,7 +357,7 @@
                 );
             element.setAttribute(
                 "oncommand",
-                "undoClose" + (aIsWindowsFragment ? "Window" : "Tab") + "(" + aIndex + ");"
+                `undoClose${aIsWindowsFragment ? "Window" : "Tab"}(${aIndex});`
             );
             let tabData;
             tabData = aIsWindowsFragment ? aClosedTab : aClosedTab.state;
@@ -369,11 +369,14 @@
                     "click",
                     RecentlyClosedTabsAndWindowsMenuUtils._undoCloseMiddleClick
                 );
-            if (aIndex == 0 && !forContext)
-                element.setAttribute(
-                    "key",
-                    "key_undoClose" + (aIsWindowsFragment ? "Window" : "Tab")
-                );
+            if (!forContext && aTagName != "menuitem") {
+                element.setAttribute("tooltip", "bhTooltip");
+                if (aIndex == 0)
+                    element.setAttribute(
+                        "key",
+                        "key_undoClose" + (aIsWindowsFragment ? "Window" : "Tab")
+                    );
+            }
             aFragment.appendChild(element);
         };
         RecentlyClosedTabsAndWindowsMenuUtils.createRestoreAllEntry = function (
