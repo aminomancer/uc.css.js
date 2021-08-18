@@ -198,6 +198,7 @@ tooltip {
     --uc-menubar-searchbar-width: 256px;
     --uc-tab-min-height: 35px;
     --tab-max-width: 100vw;
+    --tabbrowser-arrowscrollbox-display: none;
     /* how round should tab buttons be? e.g. the close button or the sound icon.
     2px yields a rounded square. 50% yields a circle. it used to be 50% but I changed my mind. */
     --tab-button-border-radius: 2px;
@@ -360,5 +361,14 @@ popupnotification,
         --menupopup-inner-box-margin: 8px !important;
         --menupopup-shadow: var(--tooltip-box-shadow) !important;
         --panel-shadow: var(--tooltip-box-shadow) !important;
+    }
+}
+
+/* you can remove the following rule if you want to be able to drag tabs across the whole strip.
+but doing so causes some minor visual bugs with rounded outside tab corners which really bother me for some reason.
+if you do this, you might want to disable rounded outside corners by setting userChrome.tabs.rounded-outer-corners.disabled to false. */
+@supports -moz-bool-pref("userChrome.tabs.rounded-outer-corners.disabled") {
+    :root {
+        --tabbrowser-arrowscrollbox-display: block;
     }
 }

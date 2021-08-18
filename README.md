@@ -71,7 +71,6 @@ For best results, set density mode to `Normal` and theme to `Dark` in the custom
 | userChrome.bookmarks-toolbar.icons-only | Boolean | false | If true, bookmark buttons in the toolbar are just square icons |
 | userChrome.css.mac-ui-fonts | Boolean | true | Replace UI font with SF Pro, the system font for macOS. [Click here for details](#fonts) |
 | userChrome.css.menupopup-shadows | Boolean | true | Add a shadow behind context menus and panels |
-| userChrome.css.remove-menu-borders | Boolean | false | If true, remove the thin border on context menus, panels, etc. |
 | userChrome.css.remove-tooltip-borders | Boolean | false | If true, remove the thin border on tooltips. If false, use [tooltipShadowSupport.uc.js](#tooltip-shadow-support) |
 | userChrome.css.titlebar-buttons-on-left | Boolean | false | If true, move the titlebar buttons (close/min/max) to the left side of the window |
 | userChrome.css.ctrl-tab-backdrop-overlay | Boolean | true | If true, dim the whole screen behind the Ctrl+tab panel, like Windows 10's Alt+tab overlay |

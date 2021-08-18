@@ -13,6 +13,7 @@ menupopup {
     --panel-border-color: var(--arrowpanel-border-color);
     --panel-border-radius: var(--arrowpanel-border-radius);
     --panel-padding: var(--arrowpanel-padding);
+    --uc-panel-border: 1px solid var(--panel-border-color);
 }
 
 panel[type="autocomplete-richlistbox"] {
@@ -40,7 +41,7 @@ panel popupset panel[type="autocomplete-richlistbox"] {
     color: var(--panel-color);
     background: var(--panel-background, Menu);
     border-radius: var(--panel-border-radius);
-    border: 1px solid var(--panel-border-color);
+    border: var(--uc-panel-border);
     width: var(--panel-width);
 }
 
@@ -80,7 +81,7 @@ panel popupset panel[type="autocomplete-richlistbox"] {
 #BMB_bookmarksPopup menupopup::part(arrowscrollbox),
 #BMB_bookmarksPopup menupopup[placespopup="true"]::part(arrowscrollbox) {
     padding: var(--menupopup-inner-padding);
-    border: 1px solid var(--panel-border-color);
+    border: var(--uc-panel-border);
 }
 
 #BMB_bookmarksPopup::part(arrowcontent) {
@@ -193,7 +194,8 @@ menupopup::part(arrowscrollbox),
     border-radius: 0;
     z-index: 23;
     position: absolute;
-    display: block;
+    /* visibility of scrollbuttons is tied to userChrome.tabs.rounded-outer-corners.disabled */
+    display: var(--tabbrowser-arrowscrollbox-display, none);
     -moz-context-properties: fill, fill-opacity;
     padding-inline: 2px;
     width: 16px;
@@ -519,42 +521,6 @@ panel[type="autocomplete-richlistbox"]
 
 :is(panel, menupopup)[side="bottom"]::part(arrow) {
     margin-top: -4.5px;
-}
-
-@supports -moz-bool-pref("userChrome.css.remove-menu-borders") {
-    :is(panel, menupopup)::part(content),
-    .menupopup-arrowscrollbox,
-    .tabmodalprompt-mainContainer,
-    :is(.content-prompt-dialog, .tab-prompt-dialog, #window-modal-dialog) .dialogFrame,
-    #customization-container panel::part(content),
-    #customization-panelWrapper > .panel-arrowcontent,
-    #BMB_bookmarksPopup::part(arrowscrollbox),
-    #BMB_bookmarksPopup menupopup::part(arrowscrollbox),
-    #BMB_bookmarksPopup menupopup[placespopup="true"]::part(arrowscrollbox) {
-        border: 0 !important;
-    }
-
-    :is(panel, menupopup)[side="top"]::part(arrow),
-    #customization-panelWrapper > .panel-arrowbox > .panel-arrow[side="top"] {
-        margin-bottom: -4px;
-    }
-
-    #customization-container panel::part(arrow),
-    #customization-panelWrapper > .panel-arrowbox > .panel-arrow[side="top"] {
-        stroke: var(--in-content-button-highlight-dark);
-    }
-
-    :is(#customization-lwtheme-menu, #customization-uidensity-menu)::part(arrow) {
-        margin-top: -4px;
-    }
-
-    #customization-panelWrapper > .panel-arrowbox > .panel-arrow[side="top"] {
-        margin-top: 2px;
-    }
-
-    #protections-popup[mainviewshowing][side="top"]::part(arrow) {
-        stroke: var(--protection-header-arrow-color) !important;
-    }
 }
 
 #identity-icon {

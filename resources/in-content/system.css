@@ -506,6 +506,23 @@
         --selected-background: var(--attention-color) !important;
         --link-foreground: #5311ff !important;
         --visited-link-foreground: #823afc !important;
+        --proportional-width: calc(100% - (122.5em - (var(--content-width, 60em) * 2)));
+        --final-content-width: max(var(--content-width, 60em), var(--proportional-width, var(--content-width, 60em)));
+    }
+
+    .container {
+        margin-inline-start: calc(3% + 65px) !important;
+        max-width: var(--final-content-width) !important;
+    }
+
+    .toolbar-container {
+        top: 50% !important;
+        margin-inline-start: -15px !important;
+    }
+
+    .toolbar {
+        transform: translateY(-50%) !important;
+        margin-inline-start: 0 !important;
     }
 
     input:not([type="file"], [type="image"]):focus-visible,
@@ -515,30 +532,6 @@
         outline-color: var(--purple-35) !important;
         outline-style: solid !important;
         outline-width: 2px !important;
-    }
-
-    .container {
-        margin: 25px 25px 25px 75px !important;
-        max-width: 2400px !important;
-        column-width: 600px !important;
-        column-gap: 40px !important;
-        column-count: 2 !important;
-    }
-
-    .toolbar-container {
-        top: calc(40% - 40px) !important;
-    }
-
-    .reader-toolbar,
-    .close-button:not(:hover),
-    .style-button:not(:hover) {
-        background-color: inherit !important;
-    }
-
-    .toolbar-container .toolbar {
-        border-color: var(--toolbar-border) !important;
-        box-shadow: 0 0 8px hsl(0, 0%, 6.3%) !important;
-        margin-inline-start: calc(var(--inline-padding) * 2) !important;
     }
 }
 

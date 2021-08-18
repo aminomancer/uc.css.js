@@ -90,12 +90,12 @@ for that reason i disabled it but maybe someone else wants it. it does look kind
 
 /* secure pages. just a regular lock. */
 #places-tooltip-insecure-icon[type="secure"] {
-	list-style-image: url(chrome://global/skin/icons/security.svg) !important;
+    list-style-image: url(chrome://global/skin/icons/security.svg) !important;
 }
 
 /* insecure pages. the default, built-in icon, a lock with a red strikethrough. */
 #places-tooltip-insecure-icon[type="insecure"] {
-	list-style-image: url(chrome://global/skin/icons/security-broken.svg) !important;
+    list-style-image: url(chrome://global/skin/icons/security-broken.svg) !important;
 }
 
 /* tooltip icon for https pages with mixed passive content.
@@ -107,22 +107,22 @@ mixed active content still shows the normal lock with red strikethrough. */
 
 /* about:* pages. */
 #places-tooltip-insecure-icon[type="about-page"] {
-	list-style-image: url(chrome://userchrome/content/identity-icons-brand.svg) !important;
+    list-style-image: url(chrome://userchrome/content/identity-icons-brand.svg) !important;
 }
 
 /* local pages, e.g. file:/// or resource:// or chrome:// */
 #places-tooltip-insecure-icon[type="local-page"] {
-	list-style-image: url(chrome://userchrome/content/notifications/persistent-storage.svg) !important;
+    list-style-image: url(chrome://userchrome/content/notifications/persistent-storage.svg) !important;
 }
 
 /* extension pages, namely moz-extension:// */
 #places-tooltip-insecure-icon[type="extension-page"] {
-	list-style-image: url(chrome://browser/content/extension.svg) !important;
+    list-style-image: url(chrome://browser/content/extension.svg) !important;
 }
 
 /* new tab or home page */
 #places-tooltip-insecure-icon[type="home-page"] {
-	list-style-image: url(chrome://browser/skin/tab.svg) !important;
+    list-style-image: url(chrome://browser/skin/tab.svg) !important;
 }
 
 /* tooltip icon for tabs loading error pages, e.g. network error, certificate error, https-only error. */
@@ -300,7 +300,8 @@ notification[value="keyword-uri-fixup"] {
     list-style-image: url(chrome://userchrome/content/notifications/persistent-storage.svg) !important;
 }
 
-.tabbrowser-tab[image="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8%2F9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAjFJREFUeNqsU8uOElEQPffR3XQ3ONASdBJCSBxHos5%2B3Bg3rvkCv8PElS78gPkO%2FATjQoUdO2ftrJiRh6aneTb9sOpC4weMN6lcuFV16pxDIfI8x12OYIDhcPiu2Wx%2B%2FHF5CW1Z6Jyegt%2FTNEWSJIjjGFEUIQxDrFYrWFSzXC4%2FdLvd95pRKpXKy%2BpRFZ7nwaWo1%2BsGnQG2260BKJfLKJVKGI1GEEJw7ateryd0v993W63WEwjgxfn5obGYzgCbzcaEbdsIggDj8Riu6z6iUk9SYZMSx8W0LMsM%2FSKK75xnJlIq80anQXdbEp0OhcPJ0eiaJnGRMEyyPDsAKKUM9clkYoDo3SZJzzSdp0VSKYmfV1co%2Bz580kw5KDIM8RbRfEnUf1HzxtQyMAGcaGruTKczMzEIaqhKifV6jd%2BzGQQB5llunF%2FM52BizC2K5sYPYvZcu653tjOM9O93wnYc08gmkgg4VAxixfqFUJT36AYBZGd6PJkFCZnnlBxMp38gqIgLpZB0y4Nph18lyWh5FFbrOSxbl3V4G%2BVB7T4ajYYxTyuLtO%2BCvWGgJE1Mc7JNsJEhvgw%2FQV4fo%2F24nbEsX2u1d5sVyn8sJO0ZAQiIYnFh%2BxrfLz%2Fj29cBS%2FO14zg3i8XigW3ZkErDtmKoeM%2BAJGRMnXeEPGKf0nCD1ydvkDzU9Jbc6OpR7WIw6L8lQ%2B4pQ1%2FlPF0RGM9Ns91Wmptk0GfB4EJkt77vXYj%2F8m%2B8y%2FkrwABHbz2H9V68DQAAAABJRU5ErkJggg%3D%3D"] .tab-icon-image {
+.tabbrowser-tab[image="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8%2F9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAjFJREFUeNqsU8uOElEQPffR3XQ3ONASdBJCSBxHos5%2B3Bg3rvkCv8PElS78gPkO%2FATjQoUdO2ftrJiRh6aneTb9sOpC4weMN6lcuFV16pxDIfI8x12OYIDhcPiu2Wx%2B%2FHF5CW1Z6Jyegt%2FTNEWSJIjjGFEUIQxDrFYrWFSzXC4%2FdLvd95pRKpXKy%2BpRFZ7nwaWo1%2BsGnQG2260BKJfLKJVKGI1GEEJw7ateryd0v993W63WEwjgxfn5obGYzgCbzcaEbdsIggDj8Riu6z6iUk9SYZMSx8W0LMsM%2FSKK75xnJlIq80anQXdbEp0OhcPJ0eiaJnGRMEyyPDsAKKUM9clkYoDo3SZJzzSdp0VSKYmfV1co%2Bz580kw5KDIM8RbRfEnUf1HzxtQyMAGcaGruTKczMzEIaqhKifV6jd%2BzGQQB5llunF%2FM52BizC2K5sYPYvZcu653tjOM9O93wnYc08gmkgg4VAxixfqFUJT36AYBZGd6PJkFCZnnlBxMp38gqIgLpZB0y4Nph18lyWh5FFbrOSxbl3V4G%2BVB7T4ajYYxTyuLtO%2BCvWGgJE1Mc7JNsJEhvgw%2FQV4fo%2F24nbEsX2u1d5sVyn8sJO0ZAQiIYnFh%2BxrfLz%2Fj29cBS%2FO14zg3i8XigW3ZkErDtmKoeM%2BAJGRMnXeEPGKf0nCD1ydvkDzU9Jbc6OpR7WIw6L8lQ%2B4pQ1%2FlPF0RGM9Ns91Wmptk0GfB4EJkt77vXYj%2F8m%2B8y%2FkrwABHbz2H9V68DQAAAABJRU5ErkJggg%3D%3D"]
+    .tab-icon-image {
     padding-right: 16px !important;
     background: url(chrome://userchrome/content/notifications/persistent-storage.svg) center/contain !important;
     -moz-context-properties: fill, fill-opacity !important;
@@ -490,30 +491,9 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
     }
 }
 
-/* remove menu borders if pref is enabled */
-@supports -moz-bool-pref("userChrome.css.remove-menu-borders") {
-    .menupopup-arrowscrollbox,
-    .tabmodalprompt-mainContainer,
-    :is(.content-prompt-dialog, .tab-prompt-dialog, #window-modal-dialog) .dialogFrame,
-    #sidebar-box,
-    #vertical-tabs-pane {
-        border: none !important;
-    }
-
-    #ctrlTab-showAll:not(:focus, :focus-within),
-    .ctrlTab-preview:not(:focus) > .ctrlTab-preview-inner {
-        border-color: transparent !important;
-    }
-
-    #browser {
-        --sidebar-border-color: transparent !important;
-    }
-}
-
-@supports not (-moz-bool-pref("userChrome.css.remove-menu-borders")) {
-    .menupopup-arrowscrollbox[overflowing="true"][orient="vertical"] {
-        overflow: visible !important;
-    }
+/* allow scrollbuttons to flow onto the menupopup border */
+.menupopup-arrowscrollbox[overflowing="true"][orient="vertical"] {
+    overflow: visible !important;
 }
 
 /* remove tooltip borders if pref is enabled */
@@ -528,7 +508,10 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
 }
 
 /* hide the acceltext for the bookmarks toolbar shortcut when floatingSidebarResizer.uc.js changes the hotkey */
-#toolbar-context-menu[bmb-command-disabled="true"] menuitem[key="viewBookmarksToolbarKb"] .menu-accel-container label {
+#toolbar-context-menu[bmb-command-disabled="true"]
+    menuitem[key="viewBookmarksToolbarKb"]
+    .menu-accel-container
+    label {
     width: 0 !important;
     visibility: hidden !important;
 }
