@@ -1223,6 +1223,10 @@ richlistitem.download-state > .downloadButton .button-box .button-icon {
     list-style-image: url(chrome://userchrome/content/skin/reload.svg) !important;
 }
 
+richlistitem.download-state > .downloadButton.downloadIconCancel .button-box .button-icon {
+    width: 21px !important;
+}
+
 .downloadProgress {
     appearance: none !important;
     margin: 3px 0 -2px 0 !important;

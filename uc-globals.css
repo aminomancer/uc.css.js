@@ -211,12 +211,9 @@ tooltip {
     /* --screenshot-icon: url(chrome://userchrome/content/skin/screenshot.svg); */
     --screenshot-icon: url(chrome://userchrome/content/devtools/command-screenshot.svg);
 
-    /* download items in the downloads panel have a gradient background on hover rather than a solid color.
-    since they're so big, a solid color would look a little jarring unless it was very dim.
-    however, gradients this dark and subtle may not look good on all monitors. it depends on a lot of factors.
-    if you experience banding, (solid bands of color instead of a continuous smooth color transition)
-    just override --download-button-hover-bg with a solid color variable, e.g. var(--arrowpanel-faint) */
-    --download-button-hue: 236.86;
+    --download-button-hover-bg: var(--button-hover-bgcolor);
+    /* if you prefer the old downloads panel highlight/hover gradient effect, uncomment this: */
+    /* --download-button-hue: 236.86;
     --download-button-hover-bg: linear-gradient(
         to right,
         hsla(var(--download-button-hue), 100%, 81%, 0.15) 7.1%,
@@ -226,7 +223,7 @@ tooltip {
         hsla(var(--download-button-hue), 96%, 78.94%, 0.04) 60%,
         hsla(var(--download-button-hue), 95%, 76.94%, 0.02) 80%,
         hsla(var(--download-button-hue), 90%, 73.94%, 0.005) 96.3%
-    );
+    ); */
 
     --pink-action: hsl(340, 73%, 58%);
     --purple-30: hsl(244, 100%, 70%) !important;

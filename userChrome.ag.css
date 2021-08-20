@@ -16,6 +16,12 @@ scrollbar {
     padding: 0px;
 }
 
+panelview scrollbar[disabled="true"] {
+    visibility: collapse !important;
+    pointer-events: none !important;
+    margin: 0 !important;
+}
+
 scrollbar[orient="vertical"] {
     -moz-margin-start: -11px;
     min-width: 11px;
