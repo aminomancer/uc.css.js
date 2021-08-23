@@ -12,7 +12,7 @@ scrollbar {
     position: relative;
     background-color: transparent;
     background-image: none;
-    z-index: 1;
+    z-index: 3;
     padding: 0px;
 }
 
@@ -104,7 +104,7 @@ scrollbar gripper {
     position: relative;
     background-color: transparent;
     padding: 0px;
-    z-index: 1;
+    z-index: 3;
 }
 
 .hidevscroll-scrollbar[orient="vertical"] {
@@ -193,11 +193,7 @@ select > scrollbar > thumb {
     margin-top: 0 !important;
 }
 
-scrollbar[disabled="true"] {
-    margin: 0 !important;
-}
-
-scrollbar thumb[collapsed="true"] {
+panelview scrollbar thumb[collapsed="true"] {
     visibility: collapse;
 }
 

@@ -944,15 +944,19 @@ domain("wikimedia.org") {
         line-height: 17px !important;
     }
 
-    .mw-body-content blockquote {
+    .vector-body blockquote {
         border-left: 3px double hsl(220, 5%, 18%) !important;
         padding: 6px 16px !important;
     }
 
-    .mw-parser-output .flexquote {
+    .vector-body .flexquote {
         background-color: hsla(0, 0%, 32%, 0.1) !important;
         border-left: 3px double hsl(220, 5%, 18%) !important;
         border-radius: 0 3px 3px 0 !important;
+    }
+
+    .mw-body-content blockquote blockquote {
+        border: none !important;
     }
 
     /* boxes */
