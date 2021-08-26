@@ -363,21 +363,21 @@ Adds a toolbar button that implements the color picker without launching the dev
 
 #### [Findbar Mods](/JS/findbarMods.uc.js):
 
-\* This script adds several improvements and modifications for the findbar.
+\* This script adds several improvements and modifications for the findbar, and (optionally) makes it much more horizontally compact and concise by removing wasted space and unnecessary words.
 <details><summary><i><b>Click here for details.</b></i></summary>
 
 1. Make a custom context menu for the findbar that lets you permanently configure findbar-related settings. You can set `Highlight All` and `Whole Words` just like you can with the built-in checkboxes, but this context menu also lets you choose _any_ setting for the `Match Case` and `Match Diacritics` options.
 
-   The built-in checkboxes for these settings only let you choose between states 1 and 0, true and false. There's actually a third state which enables a more useful and intuitive mode that I personally prefer. Read the notes in the `l10n` section inside the script for more info.
+   The built-in checkboxes for these settings only let you choose between states 1 and 0, true and false. There's actually a third state that enables a more useful and intuitive mode. Read the notes in the `l10n` section inside the script for more info on how this setting works.
 
-   Additionally, most of Firefox's built-in findbar checkboxes are only temporary. They only apply to the current browser. This can be useful, but since a context menu requires more intention to reach, its actions should be more permanent. Instead of just setting the browser state, the context menu sets the user preferences just like you could in `about:config`.
+   Additionally, most of Firefox's built-in findbar checkboxes are only temporary. They only apply to the current browser/tab. This can be useful, but since a context menu requires more intention to reach, its actions should be more permanent. Instead of just setting the browser state, the context menu sets the user preferences just like you could in `about:config`.
 2. Set up a hotkey system that allows you to close the findbar by pressing Escape or Ctrl+F while the findbar is focused. Normally, Ctrl+F only opens the findbar. With this script, Ctrl+F acts more like a toggle.
 
    As normal, when the findbar is closed, Ctrl+F will open it. When the findbar is open but not focused, Ctrl+F will focus it and select all text in the input box. From there, pressing Ctrl+F once more will close it. If you're in 'find as you type' mode, ctrl+f switches to regular find mode.
 3. _(Optional)_ Miniaturize the findbar matches label and the `Match Case` and `Whole Words` buttons. Instead of "1 of 500 matches" this one says "1/500" and floats inside the input box. Remove the checkbox labels and replace the checkboxes with recognizable icons. Together this makes the findbar drastically more compact.
 
    This feature is enabled by default by the `usingDuskfox` setting in the script. It's mainly intended for people who use CSS themes that make the findbar much more compact, like my theme [duskFox](#theme-css).  If you don't use one of these themes already, you can grab the relevant code from [uc-findbar.css](/uc-findbar.css) on my repo, or if you like having a big findbar, you can just set `usingDuskfox` to false in the script.
-   
+
    For those interested in customizing this with CSS, the mini matches indicator can be styled with the selector `.matches-indicator`. It's the next sibling of the findbar input box. See [uc-findbar.css](/uc-findbar.css) in this repo for how I styled it. Specific methods used are documented in more detail in the script's code comments.
 
 </details>
