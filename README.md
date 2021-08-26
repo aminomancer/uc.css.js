@@ -361,9 +361,26 @@ This script creates a toolbar button that opens a popup panel where extensions c
 
 Adds a toolbar button that implements the color picker without launching the devtools or opening any popups. That is, you can click the button and then immediately click anywhere inside the content window to copy the color of that pixel to your clipboard. Similar to the menu item in the "More Tools" and "Tools > Browser Tools" menus, only this one can be placed directly on your toolbar. The script also adds a customizable hotkey that does the same thing — by default, it's Ctrl+Shift+Y. (or Cmd+Shift+Y on macOS) The color format is determined by `devtools.defaultColorUnit`. For example, changing this preference to "hsl" will give you results like `hsl(25, 75%, 50%)`.
 
-#### [Mini Findbar Matches Label](/JS/findbarMatchesLabel.uc.js):
+#### [Findbar Mods](/JS/findbarMods.uc.js):
 
-\* Makes the label for findbar matches way more concise, miniaturizes the "Match Case" and "Whole Words" buttons, and also adds a Ctrl+F hotkey to close the findbar if you already have it focused. Instead of "1 of 500 matches" this one says "1/500" and floats inside the input box. Requires some CSS from [uc-findbar.css](/uc-findbar.css) or at least some tinkering with your own styles. And you'll want to hide the long-winded built-in matches label, naturally. I just added the hotkey because I don't like reaching over to the escape key. This makes Ctrl+F more of a findbar toggle than a key that strictly opens the findbar.
+\* This script adds several improvements and modifications for the findbar.
+<details><summary><i><b>Click here for details.</b></i></summary>
+
+1. Make a custom context menu for the findbar that lets you permanently configure findbar-related settings. You can set `Highlight All` and `Whole Words` just like you can with the built-in checkboxes, but this context menu also lets you choose _any_ setting for the `Match Case` and `Match Diacritics` options.
+
+   The built-in checkboxes for these settings only let you choose between states 1 and 0, true and false. There's actually a third state which enables a more useful and intuitive mode that I personally prefer. Read the notes in the `l10n` section inside the script for more info.
+
+   Additionally, most of Firefox's built-in findbar checkboxes are only temporary. They only apply to the current browser. This can be useful, but since a context menu requires more intention to reach, its actions should be more permanent. Instead of just setting the browser state, the context menu sets the user preferences just like you could in `about:config`.
+2. Set up a hotkey system that allows you to close the findbar by pressing Escape or Ctrl+F while the findbar is focused. Normally, Ctrl+F only opens the findbar. With this script, Ctrl+F acts more like a toggle.
+
+   As normal, when the findbar is closed, Ctrl+F will open it. When the findbar is open but not focused, Ctrl+F will focus it and select all text in the input box. From there, pressing Ctrl+F once more will close it. If you're in 'find as you type' mode, ctrl+f switches to regular find mode.
+3. _(Optional)_ Miniaturize the findbar matches label and the `Match Case` and `Whole Words` buttons. Instead of "1 of 500 matches" this one says "1/500" and floats inside the input box. Remove the checkbox labels and replace the checkboxes with recognizable icons. Together this makes the findbar drastically more compact.
+
+   This feature is enabled by default by the `usingDuskfox` setting in the script. It's mainly intended for people who use CSS themes that make the findbar much more compact, like my theme [duskFox](#theme-css).  If you don't use one of these themes already, you can grab the relevant code from [uc-findbar.css](/uc-findbar.css) on my repo, or if you like having a big findbar, you can just set `usingDuskfox` to false in the script.
+   
+   For those interested in customizing this with CSS, the mini matches indicator can be styled with the selector `.matches-indicator`. It's the next sibling of the findbar input box. See [uc-findbar.css](/uc-findbar.css) in this repo for how I styled it. Specific methods used are documented in more detail in the script's code comments.
+
+</details>
 
 #### [Floating Sidebar Resizer](/JS/floatingSidebarResizer.uc.js):
 

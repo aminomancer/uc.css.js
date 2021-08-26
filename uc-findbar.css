@@ -132,7 +132,7 @@ findbar[hidden] {
 
 findbar .matches-indicator {
     background-color: var(--search-box-color);
-    transition: 300ms;
+    transition: 300ms background-color;
     mask-image: linear-gradient(to right, transparent 0px, black 20px);
     line-height: var(--findbar-height) !important;
     height: var(--findbar-height) !important;
@@ -181,7 +181,7 @@ findbar .matches-indicator {
     opacity: 0.5 !important;
 }
 
-.findbar-container toolbarbutton[disabled] {
+.findbar-container toolbarbutton:is([disabled], [hidden]) {
     pointer-events: none !important;
 }
 
@@ -196,23 +196,23 @@ findbar .matches-indicator {
     list-style-image: url(chrome://userchrome/content/menu-arrow-tiny.svg) !important;
 }
 
-:is(.findbar-find-previous, .findbar-find-next):not([disabled]):is(:hover, :focus-visible)
+:is(.findbar-find-previous, .findbar-find-next):not([disabled], [hidden]):is(:hover, :focus-visible)
     > .toolbarbutton-icon {
     background: none !important;
     opacity: 1 !important;
 }
 
-:is(.findbar-entire-word, .findbar-case-sensitive):not([disabled]):is(:hover, :focus-visible, [checked])
+:is(.findbar-entire-word, .findbar-case-sensitive):not([disabled], [hidden]):is(:hover, :focus-visible, [checked])
     :is(.toolbarbutton-icon, .checkbox-icon) {
     background: none !important;
     opacity: 0.8 !important;
 }
 
-:is(.findbar-find-previous, .findbar-find-next, .findbar-entire-word, .findbar-case-sensitive):not([disabled]):hover:active {
+:is(.findbar-find-previous, .findbar-find-next, .findbar-entire-word, .findbar-case-sensitive):not([disabled], [hidden]):hover:active {
     box-shadow: none !important;
 }
 
-:is(.findbar-find-previous, .findbar-find-next, .findbar-entire-word, .findbar-case-sensitive):not([disabled]):is([checked]:hover, [checked]:focus-visible, :hover:active, :focus-visible:hover)
+:is(.findbar-find-previous, .findbar-find-next, .findbar-entire-word, .findbar-case-sensitive):not([disabled], [hidden]):is([checked]:hover, [checked]:focus-visible, :hover:active, :focus-visible:hover)
     :is(.toolbarbutton-icon, .checkbox-icon) {
     background: none !important;
     opacity: 1 !important;
@@ -221,7 +221,7 @@ findbar .matches-indicator {
 .findbar-textbox[status="notfound"]
     ~ :is(.findbar-find-previous, .findbar-find-next)
     > .toolbarbutton-icon,
-:is(.findbar-find-previous, .findbar-find-next, .findbar-entire-word, .findbar-case-sensitive)[disabled="true"]
+:is(.findbar-find-previous, .findbar-find-next, .findbar-entire-word, .findbar-case-sensitive):is([disabled="true"], [hidden])
     :is(.toolbarbutton-icon, .checkbox-icon) {
     fill: rgba(255, 255, 255, 1) !important;
     pointer-events: none !important;
@@ -255,6 +255,11 @@ findbar .matches-indicator {
     fill: hsl(0, 0%, 100%) !important;
     transition: 300ms !important;
     border-radius: 0 !important;
+    display: -moz-box !important;
+}
+
+[anonid="findbar-textbox-wrapper"] checkbox[hidden] {
+    pointer-events: none !important;
 }
 
 .findbar-entire-word {
@@ -297,6 +302,11 @@ findbar .matches-indicator {
 .findbar-container {
     -moz-box-orient: horizontal !important;
     height: var(--findbar-height) !important;
+    min-width: revert !important;
+}
+
+#findbar-close-container {
+    display: none !important;
 }
 
 .findbar-find-status,
