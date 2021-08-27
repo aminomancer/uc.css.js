@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Findbar Mods
-// @version        1.2.1
+// @version        1.2.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    1) Make a custom context menu for the findbar that lets you permanently configure findbar-related settings. You can set "Highlight All" and "Whole Words" just like you can with the built-in checkboxes, but this also lets you choose any setting for "Match Case" and "Match Diacritics." The built-in checkboxes for these settings only let you choose between states 1 and 0, true and false. There's actually a 2 state which enables a more useful and intuitive mode. Read the notes in the "l10n" section below for more info. Additionally, most of the built-in checkboxes are only temporary. They only apply to the current browser. This can be useful, but since a context menu requires more intention to reach, its actions should be more permanent. Instead of just setting the browser state, the context menu sets the user preferences just like you could in about:config. 2) Set up a hotkey system that allows you to close the findbar by pressing Escape or Ctrl+F while the findbar is focused. Normally, Ctrl+F only opens the findbar. With this script, Ctrl+F acts more like a toggle. As normal, when the findbar is closed, Ctrl+F will open it. When the findbar is open but not focused, Ctrl+F will focus it and select all text in the input box. From there, pressing Ctrl+F once more will close it. If you're in 'find as you type' mode, ctrl+f switches to regular find mode. 3) (Optional) Miniaturize the findbar matches label and the "Match case" and "Whole words" buttons. Instead of "1 of 500 matches" this one says "1/500" and floats inside the input box. This is enabled by default by the "usingDuskfox" setting below. It's mainly intended for people who use CSS themes that make the findbar much more compact, like my theme duskFox. If you don't use one of these themes already, you can grab the relevant code from uc-findbar.css on my repo, or if you like having a big findbar, you can just set "usingDuskfox" to false below. For those interested in customizing this with CSS, the mini matches indicator can be styled with the selector .matches-indicator. It's the next sibling of the findbar input box. See uc-findbar.css in this repo for how I styled it. Specific methods used are documented in more detail in the code comments below.
@@ -365,7 +365,8 @@
         setLabelPosition(findbar) {
             let getBounds = window.windowUtils.getBoundsWithoutFlushing;
             let distanceFromEdge =
-                getBounds(findbar).right - getBounds(findbar._caseSensitiveButton).left;
+                getBounds(findbar).right -
+                getBounds(findbar.querySelector(".findbar-case-sensitive")).left;
             findbar._tinyIndicator.style.right = `${distanceFromEdge + 1}px`;
         }
         // when a new tab is opened and the findbar somehow activated, a new findbar is born.

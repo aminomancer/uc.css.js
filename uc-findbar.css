@@ -260,6 +260,7 @@ findbar .matches-indicator {
 
 [anonid="findbar-textbox-wrapper"] checkbox[hidden] {
     pointer-events: none !important;
+    -moz-user-focus: none !important;
 }
 
 .findbar-entire-word {
