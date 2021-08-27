@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Findbar Mods
-// @version        1.2
+// @version        1.2.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    1) Make a custom context menu for the findbar that lets you permanently configure findbar-related settings. You can set "Highlight All" and "Whole Words" just like you can with the built-in checkboxes, but this also lets you choose any setting for "Match Case" and "Match Diacritics." The built-in checkboxes for these settings only let you choose between states 1 and 0, true and false. There's actually a 2 state which enables a more useful and intuitive mode. Read the notes in the "l10n" section below for more info. Additionally, most of the built-in checkboxes are only temporary. They only apply to the current browser. This can be useful, but since a context menu requires more intention to reach, its actions should be more permanent. Instead of just setting the browser state, the context menu sets the user preferences just like you could in about:config. 2) Set up a hotkey system that allows you to close the findbar by pressing Escape or Ctrl+F while the findbar is focused. Normally, Ctrl+F only opens the findbar. With this script, Ctrl+F acts more like a toggle. As normal, when the findbar is closed, Ctrl+F will open it. When the findbar is open but not focused, Ctrl+F will focus it and select all text in the input box. From there, pressing Ctrl+F once more will close it. If you're in 'find as you type' mode, ctrl+f switches to regular find mode. 3) (Optional) Miniaturize the findbar matches label and the "Match case" and "Whole words" buttons. Instead of "1 of 500 matches" this one says "1/500" and floats inside the input box. This is enabled by default by the "usingDuskfox" setting below. It's mainly intended for people who use CSS themes that make the findbar much more compact, like my theme duskFox. If you don't use one of these themes already, you can grab the relevant code from uc-findbar.css on my repo, or if you like having a big findbar, you can just set "usingDuskfox" to false below. For those interested in customizing this with CSS, the mini matches indicator can be styled with the selector .matches-indicator. It's the next sibling of the findbar input box. See uc-findbar.css in this repo for how I styled it. Specific methods used are documented in more detail in the code comments below.
@@ -257,6 +257,52 @@
             if (usingDuskfox) this.miniaturize(findbar);
         }
         miniaturize(findbar) {
+            function onKey(e) {
+                if (this.hasMenu() && this.open) return;
+                // handle arrow key focus navigation
+                else {
+                    if (
+                        e.keyCode == KeyEvent.DOM_VK_UP ||
+                        (e.keyCode == KeyEvent.DOM_VK_LEFT &&
+                            document.defaultView.getComputedStyle(this.parentNode).direction ==
+                                "ltr") ||
+                        (e.keyCode == KeyEvent.DOM_VK_RIGHT &&
+                            document.defaultView.getComputedStyle(this.parentNode).direction ==
+                                "rtl")
+                    ) {
+                        e.preventDefault();
+                        window.document.commandDispatcher.rewindFocus();
+                        return;
+                    }
+                    if (
+                        e.keyCode == KeyEvent.DOM_VK_DOWN ||
+                        (e.keyCode == KeyEvent.DOM_VK_RIGHT &&
+                            document.defaultView.getComputedStyle(this.parentNode).direction ==
+                                "ltr") ||
+                        (e.keyCode == KeyEvent.DOM_VK_LEFT &&
+                            document.defaultView.getComputedStyle(this.parentNode).direction ==
+                                "rtl")
+                    ) {
+                        e.preventDefault();
+                        window.document.commandDispatcher.advanceFocus();
+                        return;
+                    }
+                }
+                // handle access keys
+                if (!e.charCode || e.charCode <= 32 || e.altKey || e.ctrlKey || e.metaKey) return;
+                const charLower = String.fromCharCode(e.charCode).toLowerCase();
+                if (this.accessKey.toLowerCase() == charLower) {
+                    this.click();
+                    return;
+                }
+                // check against accesskeys of siblings and activate them if matched
+                for (const el of Object.values(this.parentElement.children))
+                    if (el.accessKey.toLowerCase() === charLower) {
+                        el.focus();
+                        el.click();
+                        return;
+                    }
+            }
             // the new mini indicator that will read something like 1/27 instead of 1 of 27 matches.
             findbar._tinyIndicator = document.createElement("label");
             let caseSensitiveButton = findbar.querySelector(".findbar-case-sensitive");
@@ -349,53 +395,6 @@
                     }
                     e.preventDefault();
                 }
-            }
-
-            function onKey(e) {
-                if (this.hasMenu() && this.open) return;
-                // handle arrow key focus navigation
-                else {
-                    if (
-                        e.keyCode == KeyEvent.DOM_VK_UP ||
-                        (e.keyCode == KeyEvent.DOM_VK_LEFT &&
-                            document.defaultView.getComputedStyle(this.parentNode).direction ==
-                                "ltr") ||
-                        (e.keyCode == KeyEvent.DOM_VK_RIGHT &&
-                            document.defaultView.getComputedStyle(this.parentNode).direction ==
-                                "rtl")
-                    ) {
-                        e.preventDefault();
-                        window.document.commandDispatcher.rewindFocus();
-                        return;
-                    }
-                    if (
-                        e.keyCode == KeyEvent.DOM_VK_DOWN ||
-                        (e.keyCode == KeyEvent.DOM_VK_RIGHT &&
-                            document.defaultView.getComputedStyle(this.parentNode).direction ==
-                                "ltr") ||
-                        (e.keyCode == KeyEvent.DOM_VK_LEFT &&
-                            document.defaultView.getComputedStyle(this.parentNode).direction ==
-                                "rtl")
-                    ) {
-                        e.preventDefault();
-                        window.document.commandDispatcher.advanceFocus();
-                        return;
-                    }
-                }
-                // handle access keys
-                if (!e.charCode || e.charCode <= 32 || e.altKey || e.ctrlKey || e.metaKey) return;
-                const charLower = String.fromCharCode(e.charCode).toLowerCase();
-                if (this.accessKey.toLowerCase() == charLower) {
-                    this.click();
-                    return;
-                }
-                // check against accesskeys of siblings and activate them if matched
-                for (const el of Object.values(this.parentElement.children))
-                    if (el.accessKey.toLowerCase() === charLower) {
-                        el.focus();
-                        el.click();
-                        return;
-                    }
             }
 
             this.domSetup(findbar);
