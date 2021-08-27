@@ -73,11 +73,11 @@ findbar[hidden] {
     -moz-context-properties: fill, fill-opacity, stroke !important;
 }
 
-.findbar-closebutton:is(:hover, :focus-visible) .toolbarbutton-icon {
+.findbar-closebutton:is(:hover, :focus-visible):not([disabled]) .toolbarbutton-icon {
     background-color: var(--toolbarbutton-hover-background) !important;
 }
 
-.findbar-closebutton:is(:hover, :focus-visible):active .toolbarbutton-icon {
+.findbar-closebutton:is(:hover, :focus-visible):not([disabled]):active .toolbarbutton-icon {
     background-color: var(--toolbarbutton-active-background) !important;
 }
 
@@ -165,8 +165,7 @@ findbar .matches-indicator {
 .findbar-find-previous,
 .findbar-find-next {
     border: none !important;
-    padding-inline: 2px !important;
-    padding-block: 0 !important;
+    padding: 0 !important;
     background: var(--search-box-color) !important;
     fill: rgba(255, 255, 255, 1) !important;
     transition: 300ms !important;
@@ -174,25 +173,22 @@ findbar .matches-indicator {
 
 .findbar-find-previous > .toolbarbutton-icon,
 .findbar-find-next > .toolbarbutton-icon {
-    background-color: var(--textbox-button-hidden) !important;
     background: none !important;
-    padding: 2px !important;
-    width: 16px !important;
+    padding: 0 !important;
+    width: 12px !important;
+    margin-inline: 2px !important;
     opacity: 0.5 !important;
 }
 
-.findbar-container toolbarbutton:is([disabled], [hidden]) {
-    pointer-events: none !important;
-}
-
 .findbar-find-previous {
-    padding-inline: 0 1px !important;
+    padding-inline: 0 !important;
+    margin-inline: 0 !important;
     list-style-image: url(chrome://userchrome/content/menu-arrow-left-tiny.svg) !important;
 }
 
 .findbar-find-next {
-    padding-inline: 1px 0 !important;
-    margin-left: -2px !important;
+    padding-inline: 0 !important;
+    margin-inline: 0 !important;
     list-style-image: url(chrome://userchrome/content/menu-arrow-tiny.svg) !important;
 }
 
@@ -212,7 +208,7 @@ findbar .matches-indicator {
     box-shadow: none !important;
 }
 
-:is(.findbar-find-previous, .findbar-find-next, .findbar-entire-word, .findbar-case-sensitive):not([disabled], [hidden]):is([checked]:hover, [checked]:focus-visible, :hover:active, :focus-visible:hover)
+:is(.findbar-find-previous, .findbar-find-next, .findbar-entire-word, .findbar-case-sensitive):not([disabled], [hidden]):where([checked]:hover, [checked]:focus-visible, :hover:active, :focus-visible:hover)
     :is(.toolbarbutton-icon, .checkbox-icon) {
     background: none !important;
     opacity: 1 !important;
@@ -221,15 +217,13 @@ findbar .matches-indicator {
 .findbar-textbox[status="notfound"]
     ~ :is(.findbar-find-previous, .findbar-find-next)
     > .toolbarbutton-icon,
+.findbar-textbox[status="notfound"]
+    ~ :is(.findbar-find-previous, .findbar-find-next)
+    > .toolbarbutton-icon,
 :is(.findbar-find-previous, .findbar-find-next, .findbar-entire-word, .findbar-case-sensitive):is([disabled="true"], [hidden])
     :is(.toolbarbutton-icon, .checkbox-icon) {
     fill: rgba(255, 255, 255, 1) !important;
-    pointer-events: none !important;
     opacity: 0.25 !important;
-}
-
-.findbar-textbox[status="notfound"] ~ :is(.findbar-find-previous, .findbar-find-next) {
-    pointer-events: none !important;
 }
 
 .findbar-textbox:focus
@@ -258,7 +252,11 @@ findbar .matches-indicator {
     display: -moz-box !important;
 }
 
-[anonid="findbar-textbox-wrapper"] checkbox[hidden] {
+[anonid="findbar-textbox-wrapper"] checkbox {
+    opacity: 1 !important;
+}
+
+[anonid="findbar-textbox-wrapper"] checkbox[hidden]:not([disabled]) {
     pointer-events: none !important;
     -moz-user-focus: none !important;
 }
