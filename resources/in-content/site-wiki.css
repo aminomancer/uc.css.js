@@ -3278,7 +3278,7 @@ domain("wikimedia.org") {
     .infobox,
     .vertical-navbox,
     .mergedtoprow,
-    .metadata:not(.ambox),
+    .metadata:not(.ambox, .audiolinkinfo),
     .mbox-small,
     .quotebox,
     .portal,
@@ -3709,9 +3709,13 @@ domain("wikimedia.org") {
     }
 
     /* fix audio pronunciation images */
-    span.unicode.haudio span.fn span a img {
+    span.unicode.haudio img {
         filter: invert(1) !important;
         opacity: 0.93 !important;
+    }
+
+    span.unicode.haudio > span > span:not([style]) img {
+        margin-right: .25em !important;
     }
 
     img[src*="Speaker_Icon.svg"] {

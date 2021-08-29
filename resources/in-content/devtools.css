@@ -504,7 +504,9 @@ and a few elements like checkboxes */
     menuseparator {
         appearance: none !important;
         border-color: var(--menu-separator-color) !important;
+        margin: var(--menu-separator-margin) !important;
         margin-inline: var(--menupopup-inner-padding-magnitude) !important;
+        padding: 0 !important;
     }
 
     menuseparator[id]:not(#context-sep-open, #context-media-sep-commands, #context-sep-copylink, #spell-suggestions-separator, #context-sep-selectall) {

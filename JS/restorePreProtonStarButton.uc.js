@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Restore pre-Proton Star Button
-// @version        1.1
+// @version        1.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    The bookmark page action button used to have a pretty cool starburst animation. That's been removed but it's not too difficult to restore. This version of the script requires fx-autoconfig, userChrome.au.css, and the resources folder from my repo. If you don't want to use all that stuff, grab the standalone version instead. FYI not to state the obvious but this script will have no effect if your browser/OS has prefers-reduced-motion enabled.
@@ -25,7 +25,7 @@
         BookmarkingUI.onStarCommand = function onStarCommand(aEvent) {
             // Ignore non-left clicks on the star, or if we are updating its state.
             if (!this._pendingUpdate && (aEvent.type != "click" || aEvent.button == 0)) {
-                if (!this._itemGuids.size > 0) {
+                if (!(this._itemGuids.size > 0)) {
                     BrowserUIUtils.setToolbarButtonHeightProperty(this.star);
                     document.getElementById("star-button-animatable-box").addEventListener(
                         "animationend",

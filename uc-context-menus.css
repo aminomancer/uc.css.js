@@ -150,6 +150,7 @@ menupopup:not(.PanelUI-subView) menuseparator {
     border-color: var(--menu-separator-color) !important;
     margin: var(--menu-separator-margin) !important;
     margin-inline: var(--menupopup-inner-padding-magnitude) !important;
+    padding: 0 !important;
 }
 
 :is(.menu-accel, .menu-iconic-accel)[value] {
