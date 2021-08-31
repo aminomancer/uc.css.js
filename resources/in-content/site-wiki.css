@@ -1248,7 +1248,7 @@ domain("wikimedia.org") {
     }
 
     table.wikitable {
-        border-color: hsl(212, 8.8%, 15.5%) !important;
+        border-color: hsl(212, 8.8%, 17.5%) !important;
     }
 
     table.wikitable > tr > th,
@@ -1257,13 +1257,13 @@ domain("wikimedia.org") {
     table.wikitable > * > tr > td {
         font-size: 1rem !important;
         color: hsl(0, 0%, 80%) !important;
-        border-color: hsl(212, 8.8%, 15.5%) !important;
+        border-color: hsl(212, 8.8%, 17.5%) !important;
     }
 
     table.wikitable > * > tr > th.headerSort {
         font-size: 1rem !important;
         color: #000 !important;
-        border-color: hsl(212, 8.8%, 15.5%) !important;
+        border-color: hsl(212, 8.8%, 17.5%) !important;
     }
 
     table.wikitable > tr > th,
@@ -2422,7 +2422,7 @@ domain("wikimedia.org") {
     .vertical-navbox th,
     tbody tr,
     tbody tr td {
-        background-color: hsla(205.7, 7.5%, 18.2%, 0) !important;
+        background-color: transparent !important;
     }
 
     .mw-parser-output .srn-white-background {
@@ -2431,7 +2431,7 @@ domain("wikimedia.org") {
 
     .mw-parser-output .static-row-numbers.wikitable tr::before {
         background-color: hsl(240, 5.6%, 7.1%) !important;
-        border-color: hsl(212, 8.8%, 15.5%) !important;
+        border-color: hsl(212, 8.8%, 17.5%) !important;
     }
 
     tbody tr td div[style*="background-color: lavender" i] {
@@ -4128,5 +4128,18 @@ domain("wikimedia.org") {
 
     .mw-parser-output .vanchor > :target ~ .vanchor-text {
         background-color: var(--purple-35) !important;
+    }
+    
+    .mw-parser-output .thumbinner > table {
+        border: 0 !important;
+    }
+
+    .mw-parser-output .chess-board > img {
+        filter: invert(1) contrast(0.9) hue-rotate(180deg) sepia(0.8) brightness(0.8) !important;
+    }
+
+    .mw-parser-output .chess-board > div {
+        background-color: transparent !important;
+        border-radius: revert !important;
     }
 }

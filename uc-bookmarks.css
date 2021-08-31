@@ -611,7 +611,9 @@ menuitem#menu_bookmarkThisPage[data-l10n-id="menu-bookmark-edit"]:before {
     -moz-context-properties: fill, fill-opacity, stroke !important;
 }
 
-#BMB_bookmarksPopup .bookmark-item[container]:not(.menuitem-iconic, .menu-iconic) .menu-text {
+#BMB_bookmarksPopup .bookmark-item[container]:not(.menuitem-iconic, .menu-iconic) .menu-text,
+#BMB_bookmarksPopup
+    :is(#bookmarksToolbarFolderMenu, #BMB_bookmarksToolbar, #panelMenu_bookmarksToolbar, #BMB_viewBookmarksToolbar) .menu-text {
     padding-inline-start: 0 !important;
 }
 
