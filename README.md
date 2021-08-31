@@ -19,8 +19,8 @@ For best results, set density mode to `Normal` and theme to `Dark` in the custom
 | browser.visited\_color | String | `#753afc` | |
 | browser.display.focus\_ring\_style | Number | 0 | |
 | browser.display.focus\_ring\_width | Number | 0 | |
-| <i>browser.proton.enabled</i> | Boolean | true | |
-| <i>browser.proton.places-tooltip.enabled</i> | Boolean | true | |
+| <i>browser.proton.enabled</i> | Boolean | true | Required |
+| <i>browser.proton.places-tooltip.enabled</i> | Boolean | true | Recommended |
 | browser.startup.blankWindow | Boolean | false | These two settings eliminate the blank white window during startup |
 | browser.startup.preXulSkeletonUI | Boolean | false | |
 | browser.tabs.tabMinWidth | Number | 90 | User preference, but mine is 90 |
@@ -29,18 +29,14 @@ For best results, set density mode to `Normal` and theme to `Dark` in the custom
 | browser.urlbar.richSuggestions.tail | Boolean | false | |
 | browser.urlbar.searchTips | Boolean | false | |
 | browser.urlbar.trimURLs | Boolean | false | |
-| dom.forms.selectSearch | Boolean | true | |
-| findbar.highlightAll | Boolean | true | Stylesheet eliminates some rarely used findbar buttons. So I leave this set to true |
-| findbar.matchdiacritics | Number | 2 | |
-| gfx.font\_rendering.cleartype\_params.cleartype\_level | Number | 100 | These settings are a major improvement to text rendering on Windows. I don't think they do anything on mac/linux |
+| gfx.font\_rendering.cleartype\_params.cleartype\_level | Number | 100 | These settings are a major improvement to text rendering on Windows imo. They shouldn't do anything on Mac/Linux |
 | gfx.font\_rendering.cleartype\_params.force\_gdi\_classic\_for\_families | String | `<empty>` | Leave the value completely empty |
 | gfx.font\_rendering.cleartype\_params.force\_gdi\_classic\_max\_size | Number | 6 | |
 | gfx.font\_rendering.cleartype\_params.pixel\_structure | Number | 1 | |
 | gfx.font\_rendering.cleartype\_params.rendering\_mode | Number | 5 | |
 | gfx.font\_rendering.directwrite.use\_gdi\_table\_loading | Boolean | false | |
-| <i>gfx.webrender.svg-images</i> | Boolean | true | |
 | <i>layout.css.backdrop-filter.enabled</i> | Boolean | true | Required for the acrylic/glass gaussian blur effect |
-| <i>layout.css.cached-scrollbar-styles.enabled</i> | Boolean | false | Sort of required for scrollbar styles in userChrome.ag.css |
+| <i>layout.css.cached-scrollbar-styles.enabled</i> | Boolean | false | Recommended for the scrollbar styles in userChrome.ag.css |
 | <i>layout.css.moz-document.content.enabled</i> | Boolean | true | Required |
 | <i>layout.css.xul-box-display-values.content.enabled</i> | Boolean | true | Required |
 | <i>layout.css.xul-display-values.content.enabled</i> | Boolean | true | Required |
@@ -54,12 +50,12 @@ For best results, set density mode to `Normal` and theme to `Dark` in the custom
 | ui.IMESelectedRawTextBackground | String | `#7755FF` | |
 | ui.key.menuAccessKeyFocuses | Boolean | false | Disable Alt-key opening menubar if you use my Alt+M hotkey |
 | ui.SpellCheckerUnderline | String | `#E2467A` | |
-| ui.prefersReducedMotion | Number | 0 | |
-| ui.submenuDelay | Number | 100 | These aren't required, but feel more responsive imo |
-| ui.tooltipDelay | Number | 100 | |
-| ui.skipNavigatingDisabledMenuItem | Number | 1 | When focusing menuitems with arrow keys, skip disabled items |
-| ui.SpellCheckerUnderlineStyle | Number | 1 | Use dotted underline for spell checker |
-| <i>ui.systemUsesDarkTheme</i> | Number | 1 | Currently required; working on a light mode |
+| ui.prefersReducedMotion | Number | 0 | Make sure this pref is 0 or doesn't exist if you want animations |
+| ui.submenuDelay | Number | 100 | How long before a context menu's submenu opens. 300 default, 100 feels more responsive imo |
+| ui.tooltipDelay | Number | 300 | How long before a tooltip opens. The default 300 works for me |
+| ui.skipNavigatingDisabledMenuItem | Number | 1 | When focusing menuitems with arrow keys, skip past disabled items |
+| ui.SpellCheckerUnderlineStyle | Number | 1 | Use dotted underline for spell checker. The default groove can get cut off for some fonts |
+| <i>ui.systemUsesDarkTheme</i> | Number | 1 | Currently required since there's no light mode yet |
 | ui.textHighlightBackground | String | `#7755FF` | These prefs control the appearance of text highlighted by the findbar. I choose white text on purple/pink background |
 | ui.textHighlightForeground | String | `#FFFFFF` | |
 | ui.textSelectBackground | String | `#FFFFFF` | |
@@ -67,22 +63,22 @@ For best results, set density mode to `Normal` and theme to `Dark` in the custom
 | ui.textSelectBackgroundDisabled | String | `#000000` | |
 | ui.textSelectForegroundAttention | String | `#000000` | |
 | ui.textSelectForegroundCustom | String | `#7755FF` | |
-| userChrome... | | | Several of my scripts use custom prefs beginning with `userChrome` for user customization. See the individual script files for details |
+| userChrome... | | | Several of my scripts use custom prefs beginning with `userChrome` for user customization. See the individual script files for details. The stylesheets also use the following: |
 | userChrome.bookmarks-toolbar.icons-only | Boolean | false | If true, bookmark buttons in the toolbar are just square icons |
 | userChrome.css.mac-ui-fonts | Boolean | true | Replace UI font with SF Pro, the system font for macOS. [Click here for details](#fonts) |
 | userChrome.css.menupopup-shadows | Boolean | true | Add a shadow behind context menus and panels |
 | userChrome.css.remove-tooltip-borders | Boolean | false | If true, remove the thin border on tooltips. If false, use [tooltipShadowSupport.uc.js](#tooltip-shadow-support) |
 | userChrome.css.titlebar-buttons-on-left | Boolean | false | If true, move the titlebar buttons (close/min/max) to the left side of the window |
-| userChrome.css.ctrl-tab-backdrop-overlay | Boolean | true | If true, dim the whole screen behind the Ctrl+tab panel, like Windows 10's Alt+tab overlay |
-| userChrome.tabs.all-tabs-menu.reverse-order | Boolean | true | Display all tabs menu in reverse order (newer tabs on top, like history) |
+| userChrome.css.ctrl-tab-backdrop-overlay | Boolean | true | If true, dim the rectangular area behind the Ctrl+tab panel to increase contrast |
+| userChrome.tabs.all-tabs-menu.reverse-order | Boolean | true | Display the all tabs menu in reverse order (newer tabs on top, like history) |
 | userChrome.tabs.new-loading-spinner-animation | Boolean | true | Replace the tab loading throbber with a spinning animation |
 | userChrome.tabs.pinned-tabs.close-buttons.disabled | Boolean | true | This controls whether close buttons are shown on pinned tabs |
 | userChrome.tabs.rounded-outer-corners.disabled | Boolean | false | This controls whether tabs have rounded bottom corners<br/><img src="preview/prev-tabcorners.webp" width="100%"/> |
-| userChrome.tabs.tooltip.always-show-lock-icon | Boolean | false | There's an icon in the tab tooltip representing page security. Always show it, or hide it on secure pages? |
+| userChrome.tabs.tooltip.always-show-lock-icon | Boolean | false | There's an icon in the tab tooltip representing page security. It's expanded by [this script](/JS/restoreTabSoundButton.uc.js) to show many security types. But by default, the icon is hidden on fully secure pages. Setting this pref to true reverses that |
 | userChrome.urlbar.hide-bookmarks-button-on-system-pages | Boolean | true | Hides the urlbar's bookmark button on system pages & new tab page |
-| userChrome.urlbar.hide-pointless-icons | Boolean | true | Hide urlbar notification icons that do nothing (e.g. DRM icon) |
-| userChrome.urlbar-results.disable\_animation | Boolean | false | Toggle to `true` if you don't want urlbar animations |
-| widget.content.allow-gtk-dark-theme | Boolean | true | Makes Linux theming more consistent |
+| userChrome.urlbar.hide-pointless-icons | Boolean | true | Hide urlbar notification icons that don't offer any action (e.g. DRM icon) |
+| userChrome.urlbar-results.disable\_animation | Boolean | false | Toggle to true if you don't want the urlbar results to animate as they pop up |
+| widget.content.allow-gtk-dark-theme | Boolean | true | May style some in-content elements consistently with Linux themes |
 | widget.disable-native-theme-for-content | Boolean | true | Enables Firefox's custom appearance for elements like checkboxes. Skips the "native" appearance given by the OS stylesheets. |
 | <i>widget.macos.native-context-menus</i> | Boolean | false | Required to use some of my scripts on macOS, and for context menu styles on macOS |
 

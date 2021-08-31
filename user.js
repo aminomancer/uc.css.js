@@ -16,8 +16,6 @@ user_pref("layout.css.backdrop-filter.enabled", true);
 user_pref("layout.css.cached-scrollbar-styles.enabled", false);
 // the theme doesn't have a light mode as of yet
 user_pref("ui.systemUsesDarkTheme", 1);
-// svg optimizations
-user_pref("gfx.webrender.svg-images", true);
 // allow stylesheets to modify trees in system pages viewed in regular tabs
 user_pref("layout.css.xul-tree-pseudos.content.enabled", true);
 // allow the color-mix() CSS function
