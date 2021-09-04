@@ -439,13 +439,6 @@ there's no need for a context menu item except when right-clicking something par
     display: none !important;
 }
 
-/* hide the icon when not right-clicking a text input field */
-#contentAreaContextMenu
-    #context-cut[hidden]
-    ~ :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"] {
-    display: none;
-}
-
 /* toolbar context menu item */
 #_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root:not(.menuitem-iconic, .menu-iconic):before {
     background-image: url(chrome://userchrome/content/material/bitwarden.svg);

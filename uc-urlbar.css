@@ -206,6 +206,17 @@ toolbarpaletteitem[mousedown] > #urlbar-container > #urlbar > #urlbar-background
     fill-opacity: 1 !important;
 }
 
+.urlbar-addon-page-action:not(#pageAction-urlbar-_testpilot-containers, #pageAction-urlbar-jid1-xufzosoflzsoxg_jetpack)
+    .urlbar-icon {
+    opacity: var(--urlbar-icon-fill-opacity);
+    fill-opacity: 1 !important;
+}
+
+.urlbar-addon-page-action:not(#pageAction-urlbar-_testpilot-containers, #pageAction-urlbar-jid1-xufzosoflzsoxg_jetpack):not([disabled]):is(:hover, :focus-visible, [open])
+    .urlbar-icon {
+    opacity: 1;
+}
+
 #star-button-box:not(:hover, :focus-visible, [open]) #star-button[starred] {
     fill-opacity: var(--urlbar-icon-fill-opacity) !important;
     fill: currentColor !important;
@@ -238,9 +249,10 @@ but CSS hides it faster and avoids flickering.
 */
 @supports (-moz-bool-pref("userChrome.urlbar.hide-bookmarks-button-on-system-pages")) {
     #tracking-protection-icon-container:is([hidden], :not([aria-label]))
-        ~ #identity-box:not(.chromeUI)
+        ~ #identity-box:not(.chromeUI, .localResource)
         ~ #page-action-buttons
-        > :is(#star-button-box, #pageAction-urlbar-screenshot) {
+        > #reader-mode-button[hidden]
+        ~ :is(#star-button-box, #pageAction-urlbar-screenshot) {
         visibility: collapse;
     }
 }
@@ -957,7 +969,7 @@ use 0.6 instead of 1 since 1 will end up being shown as like 1.4px for some wind
 }
 
 #blocked-permissions-container > .popup-icon {
-	transform: none !important;
+    transform: none !important;
 }
 
 #urlbar[searchmode] #tracking-protection-icon-container,

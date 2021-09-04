@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Copy Current URL Hotkey
-// @version        1.1.1
+// @version        1.1.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Adds a new hotkey (Ctrl+Alt+C by default) that copies whatever is in the urlbar, even when it's not in focus.
@@ -35,7 +35,6 @@
             });
             if (CopyCurrentURL.config["context menu shortcut hint"]) this.shortcutHint();
         }
-
         get clipboardHelper() {
             return (
                 this._clipboardHelper ||
@@ -44,34 +43,28 @@
                 ))
             );
         }
-
         get contextMenu() {
-            return (
-                this._contextMenu ||
-                (this._contextMenu = gURLBar.querySelector("moz-input-box")?.menupopup)
-            );
+            return gURLBar.querySelector("moz-input-box")?.menupopup;
         }
-
-        handleEvent(e) {
-            this.contextMenu
-                .querySelector(`[cmd="cmd_copy"]`)
-                .setAttribute("key", CopyCurrentURL.config.shortcut.id);
+        handleEvent(_e) {
+            let menu = this.contextMenu;
+            if (menu)
+                menu.querySelector(`[cmd="cmd_copy"]`).setAttribute(
+                    "key",
+                    CopyCurrentURL.config.shortcut.id
+                );
+            else this.setupHint();
         }
-
-        setAccelText() {
-            if (this.hotkey) {
-                if (this.contextMenu?.getAttribute("hasbeenopened") === "true") this.handleEvent();
-                else gURLBar.addEventListener("contextmenu", this, { once: true });
-            }
+        setupHint() {
+            gURLBar.addEventListener("contextmenu", this, { once: true });
         }
-
         shortcutHint() {
-            if (gBrowserInit.delayedStartupFinished) this.setAccelText();
+            if (gBrowserInit.delayedStartupFinished) this.setupHint();
             else {
                 let delayedListener = (subject, topic) => {
                     if (topic == "browser-delayed-startup-finished" && subject == window) {
                         Services.obs.removeObserver(delayedListener, topic);
-                        this.setAccelText();
+                        this.setupHint();
                     }
                 };
                 Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");

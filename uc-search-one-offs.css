@@ -392,13 +392,16 @@ toolbarpaletteitem > #urlbar-container :is(#page-action-buttons, #search-one-off
     opacity: 0 !important;
 }
 
-#urlbar:not([usertyping], [searchmode], [open][pageproxystate="invalid"]) #pageActionButton {
+#urlbar:not([usertyping], [searchmode], [open][pageproxystate="invalid"])
+    #pageActionButton:not([hidden]) {
     display: -moz-inline-box !important;
 }
 
-#urlbar:not([usertyping], [searchmode], [open][pageproxystate="invalid"]) #star-button-box {
+#urlbar:not([usertyping], [searchmode], [open][pageproxystate="invalid"])
+    #star-button-box:not([hidden]) {
     display: -moz-box !important;
 }
+
 #urlbar:is([usertyping], [searchmode], [open][pageproxystate="invalid"])
     .searchbar-engine-one-off-item,
 #urlbar:is([usertyping], [searchmode], [open][pageproxystate="invalid"]) .search-one-offs *,
@@ -474,8 +477,7 @@ toolbarpaletteitem > #urlbar-container :is(#page-action-buttons, #search-one-off
 }
 
 .searchbar-engine-one-off-item:is([image="chrome://userchrome/content/engines/wiki.svg"], [image="moz-extension://19649ec6-a7ee-4eeb-bff8-84c72584edba/favicon.svg"])
-    .button-icon
-{
+    .button-icon {
     width: 19px !important;
     height: 19px !important;
     margin-left: -0.3px !important;
@@ -483,8 +485,7 @@ toolbarpaletteitem > #urlbar-container :is(#page-action-buttons, #search-one-off
 }
 
 .searchbar-engine-one-off-item:is([image="chrome://userchrome/content/engines/amazon.svg"], [image="moz-extension://c2a6335f-fd4d-4206-bae7-b755cc686f59/favicon.svg"])
-    .button-icon
-{
+    .button-icon {
     margin-top: 0.7px !important;
 }
 

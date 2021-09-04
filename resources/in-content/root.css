@@ -1,14 +1,25 @@
 /* fundamental content styles, e.g. plaintext pages. */
 
 @media (prefers-color-scheme: dark) {
-    ::selection {
+    ::selection,
+    ::-moz-selection {
         background-color: var(--global-selection-bgcolor) !important;
         color: var(--global-selection-color) !important;
     }
 
-    ::-moz-selection {
-        background-color: var(--global-selection-bgcolor) !important;
-        color: var(--global-selection-color) !important;
+    /* pdf viewer: selection, findbar highlights */
+    .pdfViewer .textLayer .highlight {
+        background-color: var(--pdf-selection-bgcolor) !important;
+    }
+
+    .pdfViewer .textLayer .highlight.selected {
+        background-color: var(--pdf-highlight-bgcolor) !important;
+    }
+
+    .pdfViewer .textLayer ::selection,
+    .pdfViewer .textLayer ::-moz-selection {
+        background-color: var(--pdf-selection-bgcolor) !important;
+        color: revert !important;
     }
 }
 
@@ -51,11 +62,7 @@
             background-color: transparent !important;
         }
 
-        ::selection {
-            color: var(--content-selection-color) !important;
-            background-color: var(--content-selection-bgcolor) !important;
-        }
-
+        ::selection,
         ::-moz-selection {
             color: var(--content-selection-color) !important;
             background-color: var(--content-selection-bgcolor) !important;

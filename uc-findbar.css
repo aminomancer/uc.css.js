@@ -85,6 +85,7 @@ findbar[hidden] {
     border-radius: var(--toolbarbutton-border-radius) !important;
     overflow: hidden !important;
     height: var(--findbar-height) !important;
+    -moz-box-flex: 1 !important;
 }
 
 .findbar-textbox {
@@ -95,6 +96,7 @@ findbar[hidden] {
     outline: none !important;
     max-height: var(--findbar-height) !important;
     padding-inline: 6px !important;
+    -moz-box-flex: 1 !important;
 }
 
 .findbar-textbox input > .anonymous-div {
@@ -151,15 +153,11 @@ findbar .matches-indicator {
 
 .findbar-textbox[status="notfound"] ~ .matches-indicator {
     background-color: var(--search-box-null);
-    transition: 400ms;
+    transition-duration: 400ms;
 }
 
 [anonid="findbar-textbox-wrapper"]:focus-within .findbar-textbox:not([status="notfound"]) ~ .matches-indicator {
     background-color: var(--search-box-focus);
-}
-
-.matches-indicator[empty] {
-    background-color: transparent !important;
 }
 
 .findbar-find-previous,

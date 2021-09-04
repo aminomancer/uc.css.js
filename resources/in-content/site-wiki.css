@@ -1273,13 +1273,17 @@ domain("wikimedia.org") {
 
     .navbox,
     .navbox-subgroup {
-        background-color: hsla(94.3, 9.9%, 13.9%, 0) !important;
+        background-color: hsl(240, 1.4%, 13.9%) !important;
     }
 
     .navbox-group,
     .navbox-title,
     .navbox-abovebelow {
-        background-color: hsla(216.8, 21.7%, 28%, 0) !important;
+        background-color: hsl(240, 1.4%, 13.9%) !important;
+    }
+
+    .sidebar-heading[style*="background"] {
+        background-color: hsl(240, 1%, 16.9%) !important;
     }
 
     tr + tr > .navbox-abovebelow,
@@ -4141,5 +4145,9 @@ domain("wikimedia.org") {
     .mw-parser-output .chess-board > div {
         background-color: transparent !important;
         border-radius: revert !important;
+    }
+
+    .ve-ce-mwEntityNode-nbsp {
+        background-color: hsl(240, 2%, 20%) !important;
     }
 }

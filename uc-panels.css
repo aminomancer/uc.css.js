@@ -1171,8 +1171,18 @@ richlistitem.download-state[verdict]:hover {
     background-color: unset !important;
 }
 
-richlistitem.download-state:is(:hover, :focus-within) {
+richlistitem.download-state[state="1"][exists]:is(:hover, :focus-within),
+richlistitem.download-state:is([verdict], .openWhenFinished):is(:hover, :focus-within) {
     background: var(--download-button-hover-bg) !important;
+}
+
+panel richlistitem.download-state[state="1"]:not([exists]) .downloadTarget {
+    color: var(--panel-description-color);
+}
+
+panel richlistitem.download-state .downloadDetails {
+    opacity: 1 !important;
+    color: var(--panel-description-color);
 }
 
 #downloadsListBox .downloadContainer {
@@ -1264,6 +1274,15 @@ richlistitem.download-state > .downloadButton.downloadIconCancel .button-box .bu
 
     richlistitem.download-state[selected]:not(:hover, :focus-within) {
         background: hsl(230, 5%, 15%) !important;
+    }
+
+    richlistitem.download-state[state="1"]:not([exists]) .downloadTarget {
+        color: var(--organizer-deemphasized-color);
+    }
+
+    richlistitem.download-state .downloadDetails {
+        opacity: 1 !important;
+        color: var(--organizer-deemphasized-color);
     }
 }
 

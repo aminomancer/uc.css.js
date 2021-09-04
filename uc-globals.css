@@ -134,6 +134,8 @@ tooltip {
     --ui-selection-color: hsl(236, 20%, 16%);
     --content-selection-bgcolor: var(--ui-text-80);
     --content-selection-color: hsl(240, 4%, 10%);
+    --pdf-selection-bgcolor: hsl(245, 100%, 46.7%) !important;
+    --pdf-highlight-bgcolor: hsl(345, 100%, 40%) !important;
 
     /* controls the color of the search highlights in about:preferences */
     --solid-selection-bgcolor: var(--pink-action);
