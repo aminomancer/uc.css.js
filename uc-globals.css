@@ -294,6 +294,11 @@ tooltip {
     --uc-checkbox-checked-color: var(--in-parent-primary-button-text-color);
     --uc-checkbox-checked-hover-bgcolor: var(--in-parent-primary-button-background-hover);
     --uc-checkbox-checked-active-bgcolor: var(--in-parent-primary-button-background-active);
+
+    --switch-off-background: hsl(233, 15%, 32%);
+    --switch-off-hover-background: hsl(233, 18%, 27%);
+    --switch-off-active-background: hsl(233, 19%, 24.5%);
+    --switch-off-hover-border: hsl(233, 15%, 32%);
 }
 
 menupopup,
@@ -340,10 +345,10 @@ popupnotification,
 }
 
 :root[lwt-popup-brighttext] #protections-popup {
-    --protections-popup-switch-off-background: hsl(233, 15%, 32%);
-    --protections-popup-switch-off-hover-background-custom: hsl(233, 18%, 27%);
-    --protections-popup-switch-off-active-background-custom: hsl(233, 19%, 24.5%);
-    --protections-popup-switch-off-hover-border-custom: hsl(233, 15%, 32%);
+    --protections-popup-switch-off-background: var(--switch-off-background);
+    --protections-popup-switch-off-hover-background-custom: var(--switch-off-hover-background);
+    --protections-popup-switch-off-active-background-custom: var(--switch-off-active-background);
+    --protections-popup-switch-off-hover-border-custom: var(--switch-off-hover-border);
 }
 
 /* SF Pro is a bit heavier than Segoe UI so adjust font weights on certain elements */

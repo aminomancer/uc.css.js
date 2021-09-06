@@ -525,6 +525,23 @@ and a few elements like checkboxes */
         display: none !important;
     }
 
+    .CodeMirror-dialog.CodeMirror-dialog-top {
+        display: flex !important;
+        flex-flow: row nowrap;
+        align-items: center !important;
+        padding-inline: 6px !important;
+    }
+
+    .CodeMirror-dialog.CodeMirror-dialog-top .CodeMirror-search-field {
+        width: auto !important;
+        flex-grow: 1 !important;
+        flex-shrink: 1 !important;
+    }
+
+    .CodeMirror-search-hint {
+        margin-inline-end: 4px !important;
+    }
+
     #style-editor-chrome-window
         .stylesheet-name
         label:is([value^="uc-"], [value^="userChrome"], [value^="userContent"]),

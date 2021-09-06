@@ -1,23 +1,31 @@
 // ==UserScript==
 // @name           Urlbar Mods
-// @version        1.3.3
+// @version        1.4.0
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
-// @description    Makes some minor modifications to the urlbar. When you click & drag the identity box in the urlbar, it lets you drag and drop the URL into text fields, the tab bar, desktop, etc. while dragging it shows a little white box with the URL and favicon as the drag image. This script changes the colors of that drag box so they use CSS variables instead. This script can also be configured to restore the context menu that used to appear when right-clicking a search engine one-off button in the urlbar results panel. (The context menu was disabled recently) I'll continue to add to this script as I think of more urlbar mods that are too small to deserve their own dedicated script.
+// @description    Makes some minor modifications to the urlbar. See the code comments below for more details.
 // ==/UserScript==
 
 (function () {
     class UrlbarMods {
         static config = {
-            "restore one-offs context menu": false, // recently the context menu for the search engine one-off buttons in the urlbar results panel has been disabled. but the context menu for the one-off buttons in the searchbar is still enabled. I'm not sure why they did this, and it's a really minor thing, but it's not like right-clicking the buttons does anything else, (at least on windows) so you may want to restore the context menu.
+            // recently the context menu for the search engine one-off buttons in the urlbar results panel has been disabled. but the context menu for the one-off buttons in the searchbar is still enabled. I'm not sure why they did this, and it's a really minor thing, but it's not like right-clicking the buttons does anything else, (at least on windows) so you may want to restore the context menu.
+            "restore one-offs context menu": false,
 
-            "style identity icon drag box": true, // when you click & drag the identity box in the urlbar, it lets you drag and drop the URL into text fields, the tab bar, desktop, etc. while dragging it shows a little white box with the URL and favicon as the drag image. this can't be styled with CSS because it's drawn by the canvas 2D API. but we can easily change the function so that it sets the background and text colors equal to some CSS variables. it uses --tooltip-bgcolor, --tooltip-color, and --tooltip-border-color, or if those don't exist, it uses the vanilla variables --arrowpanel-background, --arrowpanel-color, and --arrowpanel-border-color. so if you use my theme duskFox it'll look similar to a tooltip. if you don't use my theme it'll look similar to a popup panel.
+            // when you click & drag the identity box in the urlbar, it lets you drag and drop the URL into text fields, the tab bar, desktop, etc. while dragging it shows a little white box with the URL and favicon as the drag image. this can't be styled with CSS because it's drawn by the canvas 2D API. but we can easily change the function so that it sets the background and text colors equal to some CSS variables. it uses --tooltip-bgcolor, --tooltip-color, and --tooltip-border-color, or if those don't exist, it uses the vanilla variables --arrowpanel-background, --arrowpanel-color, and --arrowpanel-border-color. so if you use my theme duskFox it'll look similar to a tooltip. if you don't use my theme it'll look similar to a popup panel.
+            "style identity icon drag box": true,
 
-            "show device icon in remote tab urlbar results": true, // my theme increases the prominence of the "type icon" in urlbar results. for bookmarks, this is a star. for open tabs, it's a tab icon. for remote tabs, aka synced tabs, it's a sync icon. with this option enabled, however, instead of showing a sync icon it will show a device icon specific to the type of device. so if the tab was synced from a cell phone, the type icon will show a phone. if it was synced from a laptop, it'll show a laptop, etc. the script will add some CSS to set the icons, but it won't change the way type icons are layed out. that's particular to my theme and it's purely a CSS issue, so I don't want the script to get involved in that. my urlbar-results.css file makes the type icon look basically like a 2nd favicon. it goes next to the favicon, rather than displaying on top of it. the script's CSS just changes the icon, so it'll fit with however you have type icons styled. if you don't use my theme but you want type icons to look more prominent, see urlbar-results.css and search "type-icon"
+            // my theme increases the prominence of the "type icon" in urlbar results. for bookmarks, this is a star. for open tabs, it's a tab icon. for remote tabs, aka synced tabs, it's a sync icon. with this option enabled, however, instead of showing a sync icon it will show a device icon specific to the type of device. so if the tab was synced from a cell phone, the type icon will show a phone. if it was synced from a laptop, it'll show a laptop, etc. the script will add some CSS to set the icons, but it won't change the way type icons are layed out. that's particular to my theme and it's purely a CSS issue, so I don't want the script to get involved in that. my urlbar-results.css file makes the type icon look basically like a 2nd favicon. it goes next to the favicon, rather than displaying on top of it. the script's CSS just changes the icon, so it'll fit with however you have type icons styled. if you don't use my theme but you want type icons to look more prominent, see urlbar-results.css and search "type-icon"
+            "show device icon in remote tab urlbar results": true,
 
-            "disable urlbar intervention tips": true, // normally, when you type something like "firefox install" or "clear cookies" in the urlbar, it suggests an "intervention" or "tip" which acts as a kind of shortcut to various settings and profile operations that some beginners might have a hard time finding. this is a fine feature for people who are new to firefox. but people who use firefox a lot use the urlbar quickly and could very easily accidentally hit enter on one of those results. I decided to add this option to the script because I very nearly wiped my entire profile due to the tip that lets you "Restore default settings and remove old add-ons for optimal performance." From my point of view, these results just waste space while presenting a major hazard to the user, which makes them far more of a liability than an asset. Therefore, they will be removed entirely by this setting.
+            // normally, when you type something like "firefox install" or "clear cookies" in the urlbar, it suggests an "intervention" or "tip" which acts as a kind of shortcut to various settings and profile operations that some beginners might have a hard time finding. this is a fine feature for people who are new to firefox. but people who use firefox a lot use the urlbar quickly and could very easily accidentally hit enter on one of those results. I decided to add this option to the script because I very nearly wiped my entire profile due to the tip that lets you "Restore default settings and remove old add-ons for optimal performance." From my point of view, these results just waste space while presenting a major hazard to the user, which makes them far more of a liability than an asset. Therefore, they will be removed entirely by this setting.
+            "disable urlbar intervention tips": true,
 
-            "underline whitespace results": true, // when you type nothing but space or tab characters in the urlbar, the first result will have an empty title. consecutive whitespace characters don't add to the displayed node width so it ends up looking basically empty. we can change this by setting it to use non-breaking spaces instead of space characters, and adding an attribute "all-whitespace" to the title element. then your CSS can underline it. this is already done in uc-urlbar-results.css but if you wanna do it yourself: .urlbarView-title[all-whitespace] {text-decoration: underline}
+            // by default, urlbar results are not sorted consistently between regular mode and search mode. when you use the urlbar normally, the order of urlbar results is determined by a pref. (browser.urlbar.showSearchSuggestionsFirst) it's true by default, so search suggestions are shown at the top of the list. when you enter "search mode," e.g. by clicking a one-off search engine button in the urlbar results panel, this pref is no longer used. suggestions are shown at the top of the list no matter what — it's hard-coded into the urlbar muxer's sort function. if you don't change the pref this shouldn't matter, since they both show suggestions at the top of the list. but if you set the pref to false, (e.g. if you want top or recent site URLs to appear at the top of the list so you don't have to hit Tab so many times to reach them) you'll get URLs at the top of the list in regular mode, and URLs at the bottom of the list in search mode. this inconsistent, unintuitive behavior makes no sense, but for some reason prominent developers are defending this status quo. I have twice offered to fix it for them and, instead of leaving it waiting for someone to eventually solve it, my whole complaint was dismissed as if it was invalid. (see https://bugzilla.mozilla.org/show_bug.cgi?id=1727904 for more details) there seems to be an increasing number of bizarre and almost user-hostile design choices incorporated into firefox, with an incredible degree of resistance to user feedback. so, as I have done like 80 times by now, I'm releasing this (debatable) bug fix as a third-party javascript mod.
+            "sort urlbar results consistently": true,
+
+            // when you type nothing but space or tab characters in the urlbar, the first result will have an empty title. consecutive whitespace characters don't add to the displayed node width so it ends up looking basically empty. we can change this by setting it to use non-breaking spaces instead of space characters, and adding an attribute "all-whitespace" to the title element. then your CSS can underline it. this is already done in uc-urlbar-results.css but if you wanna do it yourself: .urlbarView-title[all-whitespace] {text-decoration: underline}
+            "underline whitespace results": true,
         };
         constructor() {
             if (UrlbarMods.config["restore one-offs context menu"])
@@ -27,6 +35,7 @@
                 this.urlbarResultsDeviceIcon();
             if (UrlbarMods.config["disable urlbar intervention tips"])
                 this.disableUrlbarInterventions();
+            if (UrlbarMods.config["sort urlbar results consistently"]) this.urlbarResultsSorting();
             if (UrlbarMods.config["underline whitespace results"]) this.underlineSpaceResults();
         }
         get urlbarOneOffs() {
@@ -176,6 +185,24 @@
                 (provider) => provider.name === "UrlbarProviderInterventions"
             );
             if (interventions) manager.unregisterProvider(interventions);
+        }
+        urlbarResultsSorting() {
+            let UnifiedComplete = gURLBar.view.controller.manager.muxers.get("UnifiedComplete");
+            let sortSrc = UnifiedComplete.sort.toSource();
+            if (!sortSrc.includes("getLogger"))
+                eval(
+                    `UnifiedComplete.sort = function ` +
+                        sortSrc
+                            .replace(/sort/, ``)
+                            .replace(
+                                /logger/,
+                                `UrlbarUtils.getLogger({ prefix: "MuxerUnifiedComplete" })`
+                            )
+                            .replace(
+                                /showSearchSuggestionsFirst\: true/,
+                                `showSearchSuggestionsFirst: UrlbarPrefs.get("showSearchSuggestionsFirst")`
+                            )
+                );
         }
         underlineSpaceResults() {
             gURLBar.view._addTextContentWithHighlights = function (node, text, highlights) {

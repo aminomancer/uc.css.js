@@ -3,15 +3,14 @@
 @-moz-document url(moz-extension://482959ea-7a4a-4baa-900a-86fb03b08903/popup/index.html)
 {
     :root {
-        --sub-text: rgba(255, 255, 255, 0.6) !important;
-        --highlight: rgba(130, 152, 255, 0.9) !important;
         border-radius: 3px !important;
         background: none !important;
     }
-
-    html {
-        border-radius: 3px !important;
-        background: none !important;
+    
+    :root,
+    body {
+        --sub-text: var(--ui-text-60) !important;
+        --highlight: var(--in-parent-link-color) !important;
     }
 
     body {
@@ -35,17 +34,6 @@
         display: flex;
     }
 
-    .react-toggle--disabled {
-        cursor: not-allowed;
-        opacity: 1 !important;
-        -webkit-transition: all 0.25s;
-        transition: all 0.25s;
-    }
-
-    .react-toggle-thumb {
-        border-color: transparent !important;
-    }
-
     #header {
         background: none !important;
     }
@@ -54,10 +42,11 @@
         color: var(--arrowpanel-color) !important;
     }
 
-    :is(textarea, select) {
+    textarea, select {
         background-color: var(--search-box-color) !important;
         color: var(--ui-text-100) !important;
         border: 1px solid transparent !important;
+        outline: none !important;
     }
 
     :is(textarea, select):focus-within {
@@ -76,19 +65,12 @@
         border-color: white !important;
     }
 
-    select {
-        background-color: var(--search-box-color) !important;
-        color: var(--ui-text-100) !important;
-        border-color: transparent !important;
-    }
-
     #footer .selectWrap select:is(:focus-within, :hover) {
         background-color: var(--search-box-focus) !important;
-        border-color: transparent !important;
     }
 
     body hr {
-        border-color: var(--uc-desaturate-dimmed-even-further) !important;
+        border-color: var(--uc-desaturate-dimmed) !important;
     }
 
     #resultArea {
@@ -105,6 +87,51 @@
 
     .copy {
         display: none !important;
+    }
+
+    a {
+        color: var(--in-parent-link-color) !important;
+    }
+
+    a:is(:hover, :focus-visible) {
+        color: var(--in-parent-link-color-hover) !important;
+    }
+
+    a:hover:active {
+        color: var(--in-parent-link-color-active) !important;
+    }
+
+    .react-toggle .react-toggle-track {
+        background-color: var(--sub-text) !important;
+    }
+
+    .react-toggle:is(:hover, :focus-within):not(.react-toggle--disabled) .react-toggle-track {
+        background-color: color-mix(in srgb, black 20%, var(--sub-text)) !important;
+    }
+
+    .react-toggle--checked .react-toggle-track {
+        background-color: var(--in-parent-link-color) !important;
+    }
+
+    .react-toggle--checked:is(:hover, :focus-within):not(.react-toggle--disabled) .react-toggle-track {
+        background-color: var(--in-parent-link-color-hover) !important;
+    }
+
+    .react-toggle--disabled {
+        cursor: not-allowed !important;
+    }
+
+    .react-toggle-thumb {
+        border-color: transparent !important;
+    }
+
+    #header .rightButtons .settingsButton:is(:hover, :focus-visible) svg {
+        fill: var(--highlight) !important;
+        transform: rotate(90deg) !important;
+    }
+
+    #header .rightButtons .heartButton:is(:hover, :focus-visible) svg {
+        fill: var(--confirm) !important;
     }
 }
 
