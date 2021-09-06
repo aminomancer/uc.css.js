@@ -598,7 +598,7 @@ Allows the urlbar to autofill full subdirectories instead of just host names. Fo
 
 #### [Urlbar Mods](/JS/urlbarMods.uc.js):
 
-\* Makes several optional modifications to the urlbar, urlbar results, search engines UI, and other subtle or complicated urlbar-related systems. I'm gradually adding more features to this script, so it's worth updating from time to time.
+\* Makes several optional modifications to the urlbar, urlbar results, search engines UI, and other subtle or complicated urlbar-related systems. I'll continue adding more features to this script, so it's worth updating from time to time.
 
 <details><summary><i><b>Click here for details.</b></i></summary>
 
