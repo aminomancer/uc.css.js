@@ -93,18 +93,12 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
         center/contain !important;
     stroke: var(--low-warning-icon-detail) !important;
     fill: var(--low-warning-icon-background) !important;
+    box-shadow: none !important;
     -moz-context-properties: fill, stroke !important;
+    padding: 0 !important;
     margin: -7px 0 0 !important;
     margin-inline-end: -6px !important;
     filter: none !important;
-}
-
-:root:not([customizing])
-    .customization-target
-    #fxa-toolbar-menu-button[badge-status="login_failed"]
-    .toolbarbutton-badge:-moz-window-inactive {
-    fill: hsl(227, 19%, 48%) !important;
-    stroke: transparent !important;
 }
 
 toolbar .toolbaritem-combined-buttons.chromeclass-toolbar-additional {
@@ -831,23 +825,5 @@ link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infob
 }
 
 #fxa-toolbar-menu-button .toolbarbutton-icon {
-    list-style-image: url(chrome://userchrome/content/fxa/avatar-big.svg);
-}
-
-:is(toolbar, panel) #fxa-toolbar-menu-button .toolbarbutton-icon {
-    justify-self: center !important;
-    align-self: center !important;
-    list-style-image: url(chrome://userchrome/content/fxa/avatar.svg);
-    width: 19px !important;
-    height: 19px !important;
-}
-
-:is(toolbar, panel) #fxa-toolbar-menu-button .toolbarbutton-badge-stack {
-    padding: 0 !important;
-    width: calc(16px + var(--toolbarbutton-inner-padding) * 2) !important;
-    height: calc(16px + var(--toolbarbutton-inner-padding) * 2) !important;
-}
-
-:root[fxastatus="not_configured"] :is(toolbar, panel) #fxa-toolbar-menu-button .toolbarbutton-icon {
-    list-style-image: url(chrome://userchrome/content/fxa/avatar-empty.svg);
+    list-style-image: var(--fxa-ui-img, url(chrome://userchrome/content/fxa/avatar-big.svg));
 }

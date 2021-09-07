@@ -796,13 +796,15 @@ popupnotification progress[paused]::-moz-progress-bar {
     -moz-box-pack: center !important;
 }
 
-#protections-popup[toast] #protections-popup-mainView > :not(#protections-popup-mainView-panel-header-section),
+#protections-popup[toast]
+    #protections-popup-mainView
+    > :not(#protections-popup-mainView-panel-header-section),
 #protections-popup[toast] #protections-popup-main-header-label {
-	display: none;
+    display: none;
 }
 
 #protections-popup[toast] #messaging-system-message-container {
-	border: none !important;
+    border: none !important;
 }
 
 #protections-popup[toast] {
@@ -812,7 +814,7 @@ popupnotification progress[paused]::-moz-progress-bar {
 }
 
 #protections-popup[toast] #protections-popup-mainView-panel-header {
-	min-height: 30px !important;
+    min-height: 30px !important;
 }
 
 #protections-popup-mainView-panel-header-span {
@@ -1074,6 +1076,7 @@ panel .header,
 }
 
 #downloadsPanel-mainView {
+    min-width: revert !important;
     width: revert !important;
 }
 
@@ -1088,7 +1091,7 @@ panel .header,
 
 #emptyDownloads {
     padding-block: 1.25em !important;
-    padding-inline: 16px !important;
+    padding-inline: 16px 20px !important;
 }
 
 #downloadsPanel-mainView {
@@ -1165,7 +1168,7 @@ richlistitem.download-state {
 }
 
 richlistitem.download-state .downloadMainArea {
-	padding-inline: 12px 4px !important;
+    padding-inline: 12px 4px !important;
 }
 
 .downloadsPanelFooterButton:hover {
@@ -1495,8 +1498,10 @@ richlistitem.download-state > .downloadButton.downloadIconCancel .button-box .bu
     padding-block: 4px 8px;
 }
 
-#permission-popup-mainView-panel-header, #identity-popup-mainView-panel-header, #protections-popup-mainView-panel-header {
-	min-height: 44px !important;
+#permission-popup-mainView-panel-header,
+#identity-popup-mainView-panel-header,
+#protections-popup-mainView-panel-header {
+    min-height: 44px !important;
 }
 
 .popup-notification-description {
@@ -1511,7 +1516,8 @@ richlistitem.download-state > .downloadButton.downloadIconCancel .button-box .bu
     min-height: 44px !important;
 }
 
-:is(#identity-popup-mainView-panel-header, #eom-mainView-panel-header, #permission-popup-mainView-panel-header, #protections-popup-mainView-panel-header) :is(label, description) {
+:is(#identity-popup-mainView-panel-header, #eom-mainView-panel-header, #permission-popup-mainView-panel-header, #protections-popup-mainView-panel-header)
+    :is(label, description) {
     font-size: 1.1em !important;
     line-height: 1.1em !important;
     font-weight: var(--uc-font-weight-bold, 600) !important;
@@ -1561,10 +1567,11 @@ richlistitem.download-state > .downloadButton.downloadIconCancel .button-box .bu
 
 #geo-access-indicator-item,
 #blocked-popup-indicator-item {
-	font-size: 0.9em !important;
+    font-size: 0.9em !important;
     font-weight: var(--uc-font-weight-thin) !important;
     min-height: 20px !important;
-    background: url(chrome://userchrome/content/notifications/popup-subitem.svg) left center no-repeat;
+    background: url(chrome://userchrome/content/notifications/popup-subitem.svg) left center
+        no-repeat;
     margin-inline-start: 22px !important;
     padding-inline-start: 12px !important;
     -moz-context-properties: fill, fill-opacity;
@@ -1646,6 +1653,3 @@ richlistitem.download-state > .downloadButton.downloadIconCancel .button-box .bu
 #protections-popup-show-report-button .protections-popup-footer-button-label {
     padding-inline-start: 8px !important;
 }
-
-
-

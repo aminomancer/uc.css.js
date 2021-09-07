@@ -353,10 +353,16 @@
 }
 
 #appMenu-fxa-label2:before {
-    -moz-context-properties: fill, fill-opacity;
-    content: url(chrome://userchrome/content/fxa/avatar-big.svg);
-    fill: currentColor;
     display: -moz-box;
+    content: "";
+    background-image: var(--fxa-ui-img, url(chrome://userchrome/content/fxa/avatar-big.svg));
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    fill: currentColor;
+    width: 16px;
+    height: 16px;
+    -moz-context-properties: fill, fill-opacity;
 }
 
 #appMenu-save-file-button2 > .toolbarbutton-text,
@@ -482,6 +488,10 @@
     margin-block: 1px 2px !important;
 }
 
+#appMenu-fxa-status2 > #appMenu-fxa-label2 label:not([hidden="true"]) + label {
+    color: var(--panel-shortcut-color);
+}
+
 @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
     #appMenu-fxa-text,
     #appMenu-fxa-status2[fxastatus] > #appMenu-fxa-label2 > vbox > #appMenu-header-description,
@@ -496,7 +506,7 @@
 }
 
 #appMenu-fxa-status2:not([fxastatus]) > #appMenu-fxa-label2 {
-    padding: 5px 7px !important;
+    padding: 5px 12px !important;
     min-height: 29px !important;
     font-size: 1em !important;
 }
@@ -514,7 +524,6 @@
     content: url(chrome://userchrome/content/fxa/avatar-big.svg);
     fill: currentColor;
     display: -moz-box;
-    margin-inline-end: 8px !important;
 }
 
 #fxa-manage-account-button {

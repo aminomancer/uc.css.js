@@ -58,6 +58,7 @@
                 "UrlbarResult",
                 "resource:///modules/UrlbarResult.jsm"
             );
+            // these variables look unused but they're for the functions that will be modified dynamically and evaluated later like provider.startQuery.toSource()
             let showRemoteIconsPref = this.showRemoteIconsPref;
             let UrlbarResult = this.UrlbarResult;
             let gUniqueIdSerial = 1;

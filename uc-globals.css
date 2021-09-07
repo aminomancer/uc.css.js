@@ -212,6 +212,7 @@ tooltip {
     /* icon used for screenshot buttons. I prefer the second one, but use the first one it if you prefer the vanilla icon */
     /* --screenshot-icon: url(chrome://userchrome/content/skin/screenshot.svg); */
     --screenshot-icon: url(chrome://userchrome/content/devtools/command-screenshot.svg);
+    --fxa-ui-img: url(chrome://userchrome/content/fxa/avatar-big.svg);
 
     --download-button-hover-bg: var(--button-hover-bgcolor);
     /* if you prefer the old downloads panel highlight/hover gradient effect, uncomment this: */
@@ -299,6 +300,15 @@ tooltip {
     --switch-off-hover-background: hsl(233, 18%, 27%);
     --switch-off-active-background: hsl(233, 19%, 24.5%);
     --switch-off-hover-border: hsl(233, 15%, 32%);
+}
+
+:root[fxastatus="not_configured"] {
+    --fxa-ui-img: url(chrome://userchrome/content/fxa/avatar-empty-big.svg);
+}
+
+:root[fxastatus="login-failed"],
+:root[fxastatus="unverified"] {
+    --fxa-ui-img: url(chrome://userchrome/content/fxa/avatar-alert-big.svg);
 }
 
 menupopup,
