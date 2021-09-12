@@ -542,13 +542,11 @@ and a few elements like checkboxes */
         margin-inline-end: 4px !important;
     }
 
+    /* highlight stylesheets owned by the user so they're easier to find */
     #style-editor-chrome-window
         .stylesheet-name
-        label:is([value^="uc-"], [value^="userChrome"], [value^="userContent"]),
-    #style-editor-chrome-window .stylesheet-name label:is([value^="ext-"], [value^="site-"]),
-    #style-editor-chrome-window
-        .stylesheet-name
-        label:is([value="devtools.css"], [value="library.css"], [value="menus.css"], [value="root.css"], [value="picture-in-picture.css"], [value="system.css"]) {
+        label:is([value^="uc-"], [value^="userChrome"], [value^="userContent"], [value="custom-chrome.css"], [value="custom-content.css"], [tooltiptext^="chrome://userchrome/"], [tooltiptext^="file://"])
+    {
         text-decoration: underline !important;
         color: var(--attention-color) !important;
     }

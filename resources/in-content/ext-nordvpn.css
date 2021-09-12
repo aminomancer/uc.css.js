@@ -14,7 +14,7 @@
 
     body,
     .Container {
-        background-color: color-mix(in srgb, white 3%, var(--in-content-page-background)) !important;
+        background-color: var(--in-content-page-background) !important;
         color: var(--in-content-page-color) !important;
     }
 
@@ -23,18 +23,22 @@
         color: var(--ui-text-80) !important;
     }
 
-    .TopBar .py-5 > div > .SVG-wrapper::before {
-        display: block;
-        content: "";
-        height: 24px;
-        -moz-context-properties: fill, stroke;
-        stroke: var(--in-content-primary-button-background-hover);
-        fill: var(--in-content-page-color);
-        content: url(chrome://userchrome/content/in-content/nordvpn-logo.svg) !important;
+    .text-grey-darkest {
+        color: var(--ui-text-90) !important;
     }
 
-    .TopBar .py-5 > div > .SVG-wrapper > .SVG {
-        display: none !important;
+    .text-black {
+        color: var(--ui-text-100) !important;
+    }
+
+    .TopBar .py-5 > .nord-image {
+        stroke: var(--in-content-primary-button-background-hover);
+        fill: var(--in-content-page-color);
+        background-image: url(chrome://userchrome/content/in-content/nordvpn-logo.svg) !important;
+        background-size: contain;
+        background-repeat: no-repeat;
+        padding-top: 31px;
+        -moz-context-properties: fill, stroke;
     }
 
     .c-bw-14 * {
@@ -49,22 +53,26 @@
         min-height: 32px !important;
     }
 
-    .Button--blue {
+    .Button--blue,
+    .nord-button--v-contained.nord-button--c-blue {
         background-color: var(--in-content-primary-button-background) !important;
         border-color: transparent !important;
     }
 
-    .Button--blue:hover {
+    .Button--blue:hover,
+    .nord-button--v-contained.nord-button--c-blue:is(:hover, :focus-visible):not([disabled]) {
         background-color: var(--in-content-primary-button-background-active) !important;
         border-color: transparent !important;
     }
 
-    .Link--alt {
+    .Link--alt,
+    .text-blue {
         color: var(--purple-35) !important;
     }
 
     .Link--alt.Link--active,
-    .Link--alt:hover {
+    .Link--alt:hover,
+    .text-blue:hover {
         color: color-mix(in srgb, var(--attention-color) 50%, var(--purple-30)) !important;
     }
 
@@ -94,41 +102,38 @@
         height: 0 !important;
     }
 
-    .Toggle-track {
-        background-color: var(--in-content-box-background-odd) !important;
+    .Toggle__track {
+        background-color: var(--in-content-button-background-hover) !important;
     }
 
-    .Toggle:hover:not(.Toggle--disabled) .Toggle-track {
-        background-color: color-mix(
-            in srgb,
-            currentColor 5%,
-            var(--in-content-box-background-odd)
-        ) !important;
+    .Toggle:hover:not(.Toggle--disabled) .Toggle__track {
+        background-color: var(--in-content-button-background-active) !important;
     }
 
-    .Toggle-thumb {
-        background-color: color-mix(
-            in srgb,
-            currentColor 35%,
-            var(--in-content-box-background)
-        ) !important;
+    .Toggle__thumb {
+        background-color: var(--ui-text-80) !important;
         border-color: transparent !important;
         background-clip: content-box !important;
     }
 
-    .Toggle--checked .Toggle-track {
+    .Toggle:hover:not(.Toggle--disabled) .Toggle__thumb {
+        background-color: var(--ui-text-100) !important;
+    }
+
+    .Toggle--checked .Toggle__track {
         background-color: var(--in-content-primary-button-background) !important;
     }
 
-    .Toggle--checked:hover:not(.Toggle--disabled) .Toggle-track {
+    .Toggle--checked:hover:not(.Toggle--disabled) .Toggle__track {
         background-color: var(--in-content-primary-button-background-hover) !important;
     }
 
-    .Toggle--checked .Toggle-thumb {
-        background-color: var(--ui-text-80) !important;
+    .Toggle--checked .Toggle__thumb {
+        background-color: var(--ui-text-100) !important;
     }
 
-    .Button--destructive.Button--outline {
+    .Button--destructive.Button--outline,
+    .nord-button.text-red {
         border-color: transparent !important;
     }
 
@@ -136,16 +141,27 @@
         background-color: var(--in-content-button-background) !important;
     }
 
-    .form-control {
+    .nord-button.text-red:not(:hover) {
         background-color: var(--in-content-button-background) !important;
     }
 
-    .TextField__element {
+    .nord-button.text-red:hover {
+        background-color: var(--in-content-button-background-hover) !important;
+    }
+
+    .form-control,
+    .nord-input {
+        background-color: var(--in-content-button-background) !important;
+    }
+
+    .TextField__element,
+    .nord-input {
         border-color: var(--in-content-box-border-color) !important;
     }
 
     .form-control:focus,
-    .TextField__element:focus {
+    .TextField__element:focus,
+    .nord-input:focus {
         border-color: var(--in-content-border-focus) !important;
     }
 }

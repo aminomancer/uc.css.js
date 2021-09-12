@@ -125,6 +125,12 @@ tooltip {
     --update-badge-color: hsl(118, 89%, 24%);
     --update-badge-inactive: hsl(227, 19%, 48%);
     --attention-color: hsl(224, 100%, 71%);
+    --eom-warning-bg: hsla(48, 100%, 66%, 0.15);
+    --eom-warning-bg-hover: hsla(48, 100%, 75%, 0.23);
+    --eom-warning-bg-active: hsla(48, 100%, 80%, 0.27);
+    --eom-error-bg: hsla(2, 100%, 66%, 0.15);
+    --eom-error-bg-hover: hsla(2, 100%, 76%, 0.23);
+    --eom-error-bg-active: hsla(2, 100%, 80%, 0.27);
 
     --global-selection-bgcolor: hsla(245, 100%, 76%, 0.5);
     --global-selection-color: white;
@@ -242,6 +248,9 @@ tooltip {
     --purple-60: hsl(258, 95%, 40%) !important;
     --purple-70: hsl(256, 97%, 30%) !important;
     --purple-80: hsl(254, 100%, 20%) !important;
+    --pink-40: hsl(340, 73%, 60%);
+    --pink-35: hsl(340, 73%, 65%);
+    --pink-30: hsl(340, 73%, 70%);
 
     --in-parent-page-background: transparent;
     --in-parent-page-color: hsl(212, 43%, 90%);

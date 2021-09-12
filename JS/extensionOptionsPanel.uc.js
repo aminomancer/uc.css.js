@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Extension Options Panel
-// @version        1.6
+// @version        1.7
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    This script creates a toolbar button that opens a popup panel where extensions can be configured, disabled, uninstalled, etc. Each extension gets its own button in the panel. Clicking an extension's button leads to a subview where you can jump to the extension's options, disable or enable the extension, uninstall it, configure automatic updates, disable/enable it in private browsing, view its source code in whatever program is associated with .xpi files, open the extension's homepage, or copy the extension's ID. The panel can also be opened from the App Menu, since the built-in "Add-ons and themes" button is replaced with an "Extensions" button that opens the panel, which in turn has an equivalent button inside it. Based on a similar script by xiaoxiaoflood, but will not be compatible with xiaoxiaoflood's loader. This one requires fx-autoconfig or Alice0775's loader. It opens a panel instead of a menupopup, for more consistency with other toolbar widgets. There are configuration options directly below.
@@ -9,9 +9,13 @@
 class ExtensionOptionsWidget {
     // user configuration. change the value to the right of the colon.
     static config = {
+        "Replace addons button": true, // this script replaces the "Addons & Themes" button in the app menu with an "Extensions" button that opens our new panel instead of opening about:addons. set to false if you want to leave this button alone
+
         "Show header": true, // set to false if you don't want the "Extension options" title to be displayed at the top of the panel
 
         "Show version": false, // show the addon version next to its name in the list
+
+        "Show addon messages": true, // about:addons shows you when an addon has a warning or error, e.g. it's unsigned or blocked. if this is set to true, we'll show the same information in the panel
 
         "Show hidden extensions": false, // show system extensions?
 
@@ -21,7 +25,7 @@ class ExtensionOptionsWidget {
 
         "Addon ID blacklist": [], // put addon IDs in this list, separated by commas, to exclude them from the list, e.g. ["screenshots@mozilla.org", "dark-theme@mozilla.org"]
 
-        "Icon URL": `chrome://browser/content/extension.svg`, // if you want to change the button's icon for some reason, you can replace this string with any URL or data URL that leads to an image.
+        "Icon URL": `chrome://mozapps/skin/extensions/extension.svg`, // if you want to change the button's icon for some reason, you can replace this string with any URL or data URL that leads to an image.
 
         // localization strings
         l10n: {
@@ -47,6 +51,8 @@ class ExtensionOptionsWidget {
 
             "View Source label": "View Source",
 
+            "Manage Shortcuts label": "Manage Shortcuts",
+
             "Open Homepage label": "Open Homepage",
 
             "Copy ID label": "Copy ID",
@@ -64,6 +70,20 @@ class ExtensionOptionsWidget {
                 "On label": "On",
 
                 "Off label": "Off",
+            },
+
+            // labels for addon buttons that have a warning or error,
+            // e.g. addon automatically disabled because it's on a blocklist or unsigned
+            addonMessages: {
+                "Blocked": "Blocked",
+
+                "Signature Required": "Signature Required",
+
+                "Incompatible": "Incompatible",
+
+                "Unverified": "Unverified",
+
+                "Insecure": "Insecure",
             },
         },
     };
@@ -104,6 +124,38 @@ class ExtensionOptionsWidget {
         return id.replace(/[^a-z0-9_-]/g, "_");
     }
 
+    /**
+     * for a given addon ID, get the Extension object from the addon policy
+     * @param {string} id (an addon's ID)
+     * @returns the Extension object
+     */
+    extensionForAddonId(id) {
+        let policy = WebExtensionPolicy.getByID(id);
+        return policy && policy.extension;
+    }
+
+    /**
+     * find out if an addon has a valid signature
+     * @param {object} addon (an Addon object, retrieved by AddonManager.getAddonsByTypes)
+     * @returns true if signed, false if unsigned or invalid
+     */
+    isCorrectlySigned(addon) {
+        // Add-ons without an "isCorrectlySigned" property are correctly signed as they aren't the correct type for signing.
+        return addon.isCorrectlySigned !== false;
+    }
+
+    /**
+     * find out if an addon has been automatically disabled from the xpi database
+     * because it lacked a valid signature and user had xpinstall.signatures.required = true
+     * @param {object} addon (an Addon object)
+     * @returns true if the addon was auto-disabled
+     */
+    isDisabledUnsigned(addon) {
+        let signingRequired =
+            addon.type == "locale" ? this.LANGPACKS_REQUIRE_SIGNING : this.REQUIRE_SIGNING;
+        return signingRequired && !this.isCorrectlySigned(addon);
+    }
+
     // where panelviews are hiding when we're not looking
     viewCache(doc) {
         return doc.getElementById("appMenu-viewCache");
@@ -114,6 +166,23 @@ class ExtensionOptionsWidget {
             this,
             "ExtensionPermissions",
             "resource://gre/modules/ExtensionPermissions.jsm"
+        );
+        XPCOMUtils.defineLazyGetter(this, "extBundle", function () {
+            return Services.strings.createBundle(
+                "chrome://mozapps/locale/extensions/extensions.properties"
+            );
+        });
+        XPCOMUtils.defineLazyPreferenceGetter(
+            this,
+            "REQUIRE_SIGNING",
+            "xpinstall.signatures.required",
+            false
+        );
+        XPCOMUtils.defineLazyPreferenceGetter(
+            this,
+            "LANGPACKS_REQUIRE_SIGNING",
+            "extensions.langpacks.signatures.required",
+            false
         );
         this.viewId = "PanelUI-eom";
         this.config = ExtensionOptionsWidget.config;
@@ -168,7 +237,7 @@ class ExtensionOptionsWidget {
                         })
                     );
 
-                    this.swapAddonsButton(aDoc);
+                    if (this.config["Replace addons button"]) this.swapAddonsButton(aDoc);
                 },
                 // populate the panel before it's shown
                 onViewShowing: (event) => {
@@ -190,9 +259,14 @@ class ExtensionOptionsWidget {
         this.loadStylesheet(); // load the stylesheet
     }
 
+    /**
+     * this script replaces the built-in "Addons & Themes" button in the app menu
+     * with a new "Extensions" button that opens our new panel instead of opening about:addons
+     * @param {object} aDoc (the document our widget has been created within)
+     */
     async swapAddonsButton(aDoc) {
         let win = aDoc.defaultView;
-        this.l10n = await new Localization(["toolkit/about/aboutAddons.ftl"], true);
+        this.aboutAddonsL10n = await new Localization(["toolkit/about/aboutAddons.ftl"], true);
         win.PanelUI._initialized || win.PanelUI.init(shouldSuppressPopupNotifications);
         this.setAttributes(
             win.PanelUI.mainView.querySelector("#appMenu-extensions-themes-button") ||
@@ -205,7 +279,7 @@ class ExtensionOptionsWidget {
                 class: "subviewbutton subviewbutton-nav",
                 oncommand: "PanelUI.showSubView('PanelUI-eom', this);",
                 closemenu: "none",
-                label: await this.l10n.formatValue(["addon-category-extension"]),
+                label: await this.aboutAddonsL10n.formatValue(["addon-category-extension"]),
             }
         );
     }
@@ -284,8 +358,10 @@ class ExtensionOptionsWidget {
                     );
                     subviewbutton._Addon = addon;
 
-                    this.setDisableStyle(subviewbutton, addon, false);
-                    this.buildSubView(addon, subviewbutton);
+                    this.setDisableStyle(subviewbutton, addon);
+                    if (this.config["Show addon messages"])
+                        this.setAddonMessage(subviewbutton, addon);
+                    this.buildSubView(subviewbutton, addon);
                 }
             });
 
@@ -321,6 +397,71 @@ class ExtensionOptionsWidget {
     }
 
     /**
+     * for a given button made for an addon, find out if it has a message (blocked, unverified, etc.) and if so, display it
+     * @param {object} subviewbutton (an addon button in the panel)
+     * @param {object} addon (an Addon object)
+     */
+    setAddonMessage(subviewbutton, addon) {
+        const l10n = this.config.l10n;
+        const { name } = addon;
+        const appName = gBrandBundle.GetStringFromName("brandShortName");
+        const { STATE_BLOCKED, STATE_SOFTBLOCKED } = Ci.nsIBlocklistService;
+        const formatString = (name, args) =>
+            this.extBundle.formatStringFromName(`details.notification.${name}`, args, args.length);
+
+        let message = null;
+        if (addon.blocklistState === STATE_BLOCKED)
+            message = {
+                label: l10n.addonMessages["Blocked"],
+                detail: formatString("blocked", [name]),
+                type: "error",
+            };
+        else if (this.isDisabledUnsigned(addon))
+            message = {
+                label: l10n.addonMessages["Signature Required"],
+                detail: formatString("unsignedAndDisabled", [name, appName]),
+                type: "error",
+            };
+        else if (
+            !addon.isCompatible &&
+            (AddonManager.checkCompatibility || addon.blocklistState !== STATE_SOFTBLOCKED)
+        )
+            message = {
+                label: l10n.addonMessages["Incompatible"],
+                detail: formatString("incompatible", [name, appName, Services.appinfo.version]),
+                type: "warning",
+            };
+        else if (!this.isCorrectlySigned(addon))
+            message = {
+                label: l10n.addonMessages["Unverified"],
+                detail: formatString("unsigned", [name, appName]),
+                type: "warning",
+            };
+        else if (addon.blocklistState === STATE_SOFTBLOCKED)
+            message = {
+                label: l10n.addonMessages["Insecure"],
+                detail: formatString("softblocked", [name]),
+                type: "warning",
+            };
+        if (subviewbutton._addonMessage) {
+            subviewbutton.removeAttribute("message-type");
+            subviewbutton.removeAttribute("tooltiptext");
+            subviewbutton.querySelector(".eom-message-label")?.remove();
+            delete subviewbutton._addonMessage;
+        }
+        if (message) {
+            subviewbutton.setAttribute("message-type", message?.type);
+            subviewbutton.setAttribute("tooltiptext", message?.detail);
+            subviewbutton.appendChild(
+                this.create(document, "h", {
+                    class: "toolbarbutton-text eom-message-label",
+                })
+            ).textContent = `(${message.label})`;
+        }
+        subviewbutton._addonMessage = message;
+    }
+
+    /**
      * show the subview for a given extension
      * @param {object} event (a triggering command/click event)
      * @param {object} anchor (the subviewbutton that was clicked — dictates the title of the subview)
@@ -336,9 +477,10 @@ class ExtensionOptionsWidget {
 
     /**
      * for a given addon, build a panel subview
+     * @param {object} subviewbutton (the button you click to enter the subview, corresponding to the addon)
      * @param {object} addon (an addon object provided by the AddonManager, with all the data we need)
      */
-    buildSubView(addon, subviewbutton) {
+    buildSubView(subviewbutton, addon) {
         let l10n = this.config.l10n;
         let win = subviewbutton.ownerGlobal;
         let doc = win.document;
@@ -461,7 +603,6 @@ class ExtensionOptionsWidget {
                     : l10n["Enable in Private Browsing label"]
             );
         };
-
         let privateButton = view.appendChild(
             this.create(doc, "toolbarbutton", {
                 class: "subviewbutton",
@@ -470,17 +611,27 @@ class ExtensionOptionsWidget {
         );
         setButtonState(addon, privateButton);
         privateButton.addEventListener("command", async (_e) => {
-            let policy = win.WebExtensionPolicy.getByID(addon.id);
+            let extension = this.extensionForAddonId(addon.id);
             await this.ExtensionPermissions[privateButton.permState ? "remove" : "add"](
                 addon.id,
                 {
                     permissions: ["internal:privateBrowsingAllowed"],
                     origins: [],
                 },
-                policy && policy.extension
+                extension
             );
             setButtonState(addon, privateButton);
         });
+
+        let shortcutsButton = view.appendChild(
+            this.create(doc, "toolbarbutton", {
+                label: l10n["Manage Shortcuts label"],
+                class: "subviewbutton",
+            })
+        );
+        shortcutsButton.addEventListener("command", (e) =>
+            win.BrowserOpenAddonsMgr("addons://shortcuts/shortcuts")
+        );
 
         let viewSrcButton = view.appendChild(
             this.create(doc, "toolbarbutton", {
@@ -527,6 +678,8 @@ class ExtensionOptionsWidget {
                 !!(addon.permissions & win.AddonManager.PERM_CAN_CHANGE_PRIVATEBROWSING_ACCESS)
             );
             setButtonState(addon, privateButton);
+            shortcutsButton.hidden = !this.extensionForAddonId(addon.id).shortcuts?.manifestCommands
+                ?.size;
             disableButton.setAttribute(
                 "label",
                 addon.userDisabled ? l10n["Enable Addon label"] : l10n["Disable Addon label"]
@@ -587,7 +740,7 @@ class ExtensionOptionsWidget {
     }
 
     /**
-     * open a given addon's source xpi file
+     * open a given addon's source xpi file in the user's associated program, e.g. 7-zip
      * @param {object} addon (an addon object)
      */
     openArchive(addon) {
@@ -605,7 +758,7 @@ class ExtensionOptionsWidget {
         let uri = makeURI(
             "data:text/css;charset=UTF=8," +
                 encodeURIComponent(
-                    `#eom-button{list-style-image:url('${this.config["Icon URL"]}');}#eom-mainView-panel-header{padding:8px 4px 4px 4px;min-height:44px;-moz-box-pack:center;-moz-box-align:center;}#eom-mainView-panel-header-span{font-weight:600;display:inline-block;text-align:center;overflow-wrap:break-word;}.panel-header ~ #eom-mainView-panel-header,.panel-header ~ #eom-mainView-panel-header + toolbarseparator{display:none;}.eom-addon-button{list-style-image:var(--extension-icon);}#PanelUI-eom .disabled label{opacity:.6;font-style:italic;}#eom-allow-auto-updates{padding-block:4px;}#eom-allow-auto-updates .radio-check{margin-block:0;}#eom-allow-auto-updates label{padding-bottom:1px;}#eom-allow-auto-updates-desc{margin-inline-end:8px;}#eom-allow-auto-updates .subviewradio{margin:0;margin-inline:2px;padding:0;background:none!important;}#eom-allow-auto-updates .radio-label-box{margin-inline-start:0;padding-block:0;}`
+                    `#eom-button{list-style-image:url('${this.config["Icon URL"]}');}#eom-mainView-panel-header{padding:8px 4px 4px 4px;min-height:44px;-moz-box-pack:center;-moz-box-align:center;}#eom-mainView-panel-header-span{font-weight:600;display:inline-block;text-align:center;overflow-wrap:break-word;}.panel-header ~ #eom-mainView-panel-header,.panel-header ~ #eom-mainView-panel-header + toolbarseparator{display:none;}.eom-addon-button{list-style-image:var(--extension-icon);}#PanelUI-eom .disabled label{opacity:.6;font-style:italic;}#PanelUI-eom .eom-message-label{opacity:.6;margin-inline-start:8px;font-style:italic;}.eom-addon-button[message-type="warning"]{background-color:var(--eom-warning-bg,hsla(48,100%,66%,.15));}.eom-addon-button[message-type="warning"]:not([disabled],[open],:active):is(:hover){background-color:var(--eom-warning-bg-hover,color-mix(in srgb,currentColor 8%,hsla(48,100%,66%,.18)));}.eom-addon-button[message-type="warning"]:not([disabled]):is([open],:hover:active){background-color:var(--eom-warning-bg-active,color-mix(in srgb,currentColor 15%,hsla(48,100%,66%,.2)));}.eom-addon-button[message-type="error"]{background-color:var(--eom-error-bg,hsla(2,100%,66%,.15));}.eom-addon-button[message-type="error"]:not([disabled],[open],:active):is(:hover){background-color:var(--eom-error-bg-hover,color-mix(in srgb,currentColor 8%,hsla(2,100%,66%,.18)));}.eom-addon-button[message-type="error"]:not([disabled]):is([open],:hover:active){background-color:var(--eom-error-bg-active,color-mix(in srgb,currentColor 15%,hsla(2,100%,66%,.2)));}#eom-allow-auto-updates{padding-block:4px;}#eom-allow-auto-updates .radio-check{margin-block:0;}#eom-allow-auto-updates label{padding-bottom:1px;}#eom-allow-auto-updates-desc{margin-inline-end:8px;}#eom-allow-auto-updates .subviewradio{margin:0;margin-inline:2px;padding:0;background:none!important;}#eom-allow-auto-updates .radio-label-box{margin-inline-start:0;padding-block:0;}`
                 )
         );
         if (sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) return;

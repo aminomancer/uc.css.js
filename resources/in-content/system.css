@@ -2,14 +2,6 @@
 
 @import url(library.css);
 
-@-moz-document url("about:blank") {
-    @media (prefers-color-scheme: dark) {
-        :root {
-            background-color: var(--in-content-bg-dark);
-        }
-    }
-}
-
 @-moz-document regexp("view-source:.*") {
     @font-face {
         font-family: "Overpass Mono";
@@ -152,6 +144,9 @@
         --in-content-link-color: var(--purple-35) !important;
         --in-content-link-color-hover: var(--purple-30) !important;
         --in-content-link-color-active: var(--purple-30) !important;
+        --in-content-link-visited-color: var(--pink-40) !important;
+        --in-content-link-visited-color-hover: var(--pink-35) !important;
+        --in-content-link-visited-color-active: var(--pink-30) !important;
         --in-content-primary-button-background: var(--purple-40) !important;
         --in-content-primary-button-background-hover: var(--purple-35) !important;
         --in-content-primary-button-background-active: var(--purple-30) !important;
@@ -504,7 +499,7 @@
         --tooltip-background: color-mix(in srgb, black 40%, var(--in-content-bg-dark)) !important;
         --active-color: var(--purple-35) !important;
         --selected-background: var(--attention-color) !important;
-        --link-foreground: #5311ff !important;
+        --link-foreground: var(--in-content-link-color) !important;
         --visited-link-foreground: #823afc !important;
         --proportional-width: calc(100% - (122.5em - (var(--content-width, 60em) * 2)));
         --final-content-width: max(var(--content-width, 60em), var(--proportional-width, var(--content-width, 60em)));
@@ -516,13 +511,31 @@
     }
 
     .toolbar-container {
-        top: 50% !important;
+        top: var(--body-padding) !important;
         margin-inline-start: -15px !important;
     }
 
     .toolbar {
-        transform: translateY(-50%) !important;
         margin-inline-start: 0 !important;
+        transition-property: border-color, box-shadow, background-color !important;
+        transition-timing-function: linear !important;
+        transition-duration: 0.2s !important;
+    }
+
+    .toolbar {
+        border-color: var(--in-content-box-border-color) !important;
+        background-color: var(--in-content-box-background-dim) !important;
+        box-shadow: 0 0 12px hsla(0, 0%, 0%, 0.4) !important;
+    }
+
+    .toolbar-container.scrolled .toolbar:not(:hover, :focus-within) {
+        background-color: transparent !important;
+        border-color: transparent !important;
+        box-shadow: 0 2px 8px transparent !important;
+    }
+
+    .toolbar-container.scrolled .toolbar:not(:hover, :focus-within) .button {
+        opacity: 0.4 !important;
     }
 
     input:not([type="file"], [type="image"]):focus-visible,
@@ -532,6 +545,30 @@
         outline-color: var(--purple-35) !important;
         outline-style: solid !important;
         outline-width: 2px !important;
+    }
+
+    .moz-reader-content a:link {
+        color: var(--in-content-link-color) !important;
+    }
+
+    .moz-reader-content a:link:hover {
+        color: var(--in-content-link-color-hover) !important;
+    }
+
+    .moz-reader-content a:link:hover:active {
+        color: var(--in-content-link-color-active) !important;
+    }
+
+    .moz-reader-content a:visited {
+        color: var(--in-content-link-visited-color) !important;
+    }
+
+    .moz-reader-content a:visited:hover {
+        color: var(--in-content-link-visited-color-hover) !important;
+    }
+
+    .moz-reader-content a:visited:hover:active {
+        color: var(--in-content-link-visited-color-active) !important;
     }
 }
 

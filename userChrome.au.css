@@ -666,6 +666,19 @@ panel[type="autocomplete-richlistbox"]
     list-style-image: url(chrome://userchrome/content/skin/back.svg);
 }
 
+panelview .toolbarbutton-1:not([disabled]):is([open], :hover:active),
+toolbarbutton.subviewbutton:not([disabled]):is([open], :hover:active),
+.navigable.subviewbutton:not([disabled]):is([open], :hover:active),
+menu.subviewbutton:not([disabled])[_moz-menuactive]:active,
+#PlacesToolbar menuitem:not([disabled])[_moz-menuactive]:active,
+#PlacesToolbar menu:not([disabled])[_moz-menuactive]:active,
+menuitem.subviewbutton:not([disabled])[_moz-menuactive]:active,
+.widget-overflow-list .toolbarbutton-1:not([disabled]):is([open], :hover:active),
+.toolbaritem-combined-buttons:is(:not([cui-areatype="toolbar"]), [overflowedItem="true"])
+    > toolbarbutton:not([disabled]):is([open], :hover:active) {
+    box-shadow: revert;
+}
+
 /* the following animations require restorePreProtonDownloadsButton.uc.js, fx-autoconfig, and the resources/downloads folder */
 :root[pre-proton-downloads-button]
     #downloads-button

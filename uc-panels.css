@@ -12,14 +12,20 @@ panelview {
 }
 
 /* allow panel height to flex and animate */
-.panel-viewstack,
-.panel-viewcontainer {
-    min-height: revert !important;
-}
+@supports -moz-bool-pref("userChrome.panels.allow-height-flex") {
+    .panel-viewstack,
+    .panel-viewcontainer {
+        min-height: revert !important;
+    }
 
-/* make the animation smoother */
-.panel-viewcontainer[panelopen] {
-    transition-timing-function: var(--uc-smooth-timing-function) !important;
+    /* make the animation smoother */
+    .panel-viewcontainer[panelopen] {
+        transition-timing-function: var(--uc-smooth-timing-function) !important;
+    }
+
+    panel[panelopen] .panel-viewcontainer {
+        will-change: min-height, contents !important;
+    }
 }
 
 /* without this, the last button in the panel will typically be touching the edge of the panel,
@@ -62,14 +68,6 @@ this connects with .panel-subview-body rules in userChrome.au.css */
 
 /* .panel-subview-body + toolbarseparator {
     margin-top: 0 !important;
-} */
-
-/* #identity-popup-multiView > .panel-viewcontainer {
-    min-height: revert !important;
-}
-
-panel[viewId="PanelUI-eom"] .panel-viewcontainer[panelopen] {
-    min-height: revert !important;
 } */
 
 #widget-overflow panelview[extension] {
@@ -1610,6 +1608,22 @@ richlistitem.download-state > .downloadButton.downloadIconCancel .button-box .bu
 #PanelUI-panic-warning {
     color: var(--warning-color) !important;
     margin-top: 12px !important;
+}
+
+.eom-addon-button[message-type="warning"]:not([disabled], [open]):is(:hover, :focus-visible) {
+    background-color: var(--eom-warning-bg-hover) !important;
+}
+
+.eom-addon-button[message-type="warning"]:not([disabled]):is([open], :hover:active) {
+    background-color: var(--eom-warning-bg-active) !important;
+}
+
+.eom-addon-button[message-type="error"]:not([disabled], [open]):is(:hover, :focus-visible) {
+    background-color: var(--eom-error-bg-hover) !important;
+}
+
+.eom-addon-button[message-type="error"]:not([disabled]):is([open], :hover:active) {
+    background-color: var(--eom-error-bg-active) !important;
 }
 
 /* add icons to some panel subviewbuttons */

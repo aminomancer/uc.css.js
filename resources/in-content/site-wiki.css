@@ -986,7 +986,6 @@ domain("wikimedia.org") {
     .messagebox,
     #catlinks,
     .infobox,
-    .infobox td,
     table.infobox th,
     #bodyContent div.thumb,
     .thumbinner,
@@ -1046,10 +1045,6 @@ domain("wikimedia.org") {
 
     #content .thumbinner {
         border-color: hsl(0, 0%, 72.5%) !important;
-    }
-
-    .sidebar .sidebar-list-title {
-        background: unset !important;
     }
 
     #toc,
@@ -1294,11 +1289,32 @@ domain("wikimedia.org") {
         background-color: var(--uc-wiki-box-bg) !important;
     }
 
-    .navbox-group,
+    .sidebar .sidebar-list-title {
+        background: unset !important;
+        border-color: hsl(240, 1%, 16.9%) !important;
+        background-color: hsl(240, 1%, 16.9%) !important;
+    }
+
+    .sidebar .navbox-list {
+        border-color: transparent !important;
+    }
+
+    .sidebar-list .mw-collapsible-toggle {
+        line-height: 25px !important;
+        width: 40px !important;
+    }
+
     .navbox-title,
     .navbox-abovebelow,
     .navbox-subgroup {
         background-color: transparent !important;
+        box-shadow: none !important;
+    }
+
+    th.navbox-group {
+        border-radius: 2px !important;
+        background-color: var(--uc-wiki-popup-bg) !important;
+        box-shadow: none !important;
     }
 
     .sidebar-heading[style*="background"] {
@@ -2393,6 +2409,13 @@ domain("wikimedia.org") {
         display: none !important;
     }
 
+    .mw-mmv-author span[style*="background"] {
+        background: var(--uc-wiki-box-bg) !important;
+        border-radius: 2px !important;
+        border: inherit !important;
+        color: inherit !important;
+    }
+
     table.jquery-tablesorter thead tr th.headerSort,
     table.wikitable > tbody > tr > th {
         background: var(--uc-wiki-table-header-bg) !important;
@@ -2457,9 +2480,7 @@ domain("wikimedia.org") {
         background-position: center right !important;
     }
 
-    .vertical-navbox th,
-    tbody tr,
-    tbody tr td {
+    .vertical-navbox th {
         background-color: transparent !important;
     }
 
@@ -2525,7 +2546,7 @@ domain("wikimedia.org") {
         border-radius: 0px !important;
     }
 
-    :where(th, tr, td)[style*="background:"]:not([style*="color:"]) {
+    :where(th, tr)[style*="background:"]:not([style*="color:"], .infobox-subheader) {
         background-color: transparent !important;
         color: var(--uc-wiki-text-80) !important;
     }
@@ -2537,6 +2558,7 @@ domain("wikimedia.org") {
 
     .navbox-list {
         border-radius: 0px !important;
+        border-color: transparent !important;
     }
 
     .vertical-navbox ul {
@@ -2561,6 +2583,15 @@ domain("wikimedia.org") {
 
     .vertical-navbox tbody {
         border-radius: 3px !important;
+    }
+
+    .navbox-title {
+        box-shadow: revert !important;
+        color: inherit !important;
+    }
+    
+    .navbar-mini a abbr {
+        color: inherit !important;
     }
 
     #bodyContent div.thumb {
@@ -3346,7 +3377,7 @@ domain("wikimedia.org") {
 
     .catlinks,
     .navbox {
-        padding-inline: 10px !important;
+        padding: 8px !important;
     }
 
     body .ui-dialog .ttmlStyled {
@@ -3782,6 +3813,10 @@ domain("wikimedia.org") {
     img[src*="Speaker_Icon.svg"] {
         filter: invert(1) brightness(4) !important;
         opacity: 0.9 !important;
+    }
+    
+    a[title="Edit this at Wikidata"] > img {
+        filter: invert(1) hue-rotate(170deg) saturate(0.7) brightness(1.2) !important;
     }
 
     /* clarification needed text */

@@ -86,6 +86,14 @@ individual extensions' popups and other content documents are styled in userCont
     list-style-image: url(chrome://userchrome/content/skin/3rdpartycookies-disabled.svg);
 }
 
+/* i don't care about cookies */
+:is(.webextension-browser-action, .eom-addon-button)[label="I don't care about cookies"]
+    .toolbarbutton-icon,
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="jid1-KKzOGWgsW3Ao4Q@jetpack"i]
+    .toolbarbutton-icon {
+    list-style-image: url(chrome://userchrome/content/skin/3rdpartycookies.svg);
+}
+
 /* pushbullet, an extension for controlling, sharing stuff with, and receiving notifications from your phone */
 #sidebarMenu-popup
     #button__6540f1c5-ab3d-4eff-9ad2-79a95aec93d5_-sidebar-action:not([checked="true"]),
