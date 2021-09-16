@@ -170,7 +170,7 @@ toolbar:not(#PersonalToolbar) #zoom-controls > #zoom-reset-button {
 
 toolbar:not(#PersonalToolbar)
     #zoom-controls
-    > #zoom-reset-button:not([disabled]):is(:hover, :focus)
+    > #zoom-reset-button:not([disabled]):is(:hover, :focus-visible)
     > .toolbarbutton-text {
     border-color: transparent;
 }

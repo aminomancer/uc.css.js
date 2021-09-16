@@ -830,7 +830,7 @@ domain("wikimedia.org") {
 
     /* article */
     #bodyContent .infobox {
-        padding: 9px 16px 5px !important;
+        padding: 5px 16px !important;
         margin-left: 30px !important;
         overflow: clip !important;
     }
@@ -968,13 +968,13 @@ domain("wikimedia.org") {
     }
 
     .vector-body blockquote {
-        border-left: 3px double hsl(220, 5%, 18%) !important;
+        border-left: 3px double hsl(0, 1%, 24%) !important;
         padding: 6px 16px !important;
     }
 
     .vector-body .flexquote {
         background-color: hsla(0, 0%, 32%, 0.1) !important;
-        border-left: 3px double hsl(220, 5%, 18%) !important;
+        border-left: 3px double hsl(0, 1%, 24%) !important;
         border-radius: 0 3px 3px 0 !important;
     }
 
@@ -986,7 +986,6 @@ domain("wikimedia.org") {
     .messagebox,
     #catlinks,
     .infobox,
-    table.infobox th,
     #bodyContent div.thumb,
     .thumbinner,
     div.thumb div,
@@ -1025,12 +1024,36 @@ domain("wikimedia.org") {
         border-radius: 3px !important;
     }
 
+    table,
+    table.ib-chembox {
+        border-style: hidden !important;
+    }
+
+    table.infobox th,
+    table.infobox .summary,
+    table.infobox td:not([class], [id]) {
+        background: none !important;
+    }
+
+    .infobox-subheader {
+        background: none !important;
+        font-weight: bold !important;
+        padding-bottom: 4px !important;
+    }
+
+    .mw-parser-output table:is(.wikitable, .sidebar),
+    table.ib-chembox {
+        overflow: hidden !important;
+        border-collapse: collapse !important;
+        border-radius: 3px !important;
+    }
+
     .mw-parser-output > .wikitable[width] {
         width: revert !important;
     }
 
-    table {
-        border: none !important;
+    table:is([style*="background:none"], [style*="background-color:transparent"]:not([style*="background-image"])) {
+        background: none !important;
     }
 
     #bodyContent .mw-parser-output > :not([class], [id]) {
@@ -1290,9 +1313,14 @@ domain("wikimedia.org") {
     }
 
     .sidebar .sidebar-list-title {
-        background: unset !important;
-        border-color: hsl(240, 1%, 16.9%) !important;
+        background-image: revert !important;
         background-color: hsl(240, 1%, 16.9%) !important;
+    }
+
+    .sidebar .sidebar-content .sidebar-list-title,
+    .infobox-header {
+        background-color: transparent !important;
+        color: revert !important;
     }
 
     .sidebar .navbox-list {
@@ -1302,6 +1330,29 @@ domain("wikimedia.org") {
     .sidebar-list .mw-collapsible-toggle {
         line-height: 25px !important;
         width: 40px !important;
+    }
+
+    .sidebar-list-content,
+    .sidebar-list-title {
+        text-align: start !important;
+        border-top: none !important;
+        border-bottom: 1px solid var(--uc-wiki-popup-border-color) !important;
+    }
+
+    .sidebar-list-content {
+        padding: 0 0.6em;
+    }
+
+    .sidebar-list-content dl {
+        border-bottom: 1px solid var(--uc-wiki-popup-border-color);
+    }
+
+    .sidebar-list-content dl ~ ul {
+        padding: 0 0.3em !important;
+    }
+
+    .sidebar-list-content > ul > li:only-of-type > a {
+        white-space: revert !important;
     }
 
     .navbox-title,
@@ -1317,7 +1368,8 @@ domain("wikimedia.org") {
         box-shadow: none !important;
     }
 
-    .sidebar-heading[style*="background"] {
+    .sidebar-heading[style*="background"],
+    table.ib-chembox td[style*="background"] {
         background-color: hsl(240, 1%, 16.9%) !important;
     }
 
@@ -2354,11 +2406,14 @@ domain("wikimedia.org") {
 
     .mw-mmv-post-image {
         color: hsla(0, 0%, 100%, 0.75) !important;
-        background-color: hsla(0, 0%, 2%, 0.9) !important;
+        background-color: hsla(0, 0%, 0%, 0.9) !important;
+        background-image: var(--acrylic-texture) !important;
+        backdrop-filter: blur(7px) !important;
     }
 
-    .mw-mmv-image-metadata-column {
-        margin-bottom: 8px !important;
+    .mw-mmv-post-image.mw-mmv-untruncated,
+    .jq-fullscreened .mw-mmv-post-image {
+        box-shadow: 0 0 12px hsla(0, 0%, 0%, 0.15), 0 0 2px hsla(0, 0%, 0%, 0.2) !important;
     }
 
     .mw-mmv-image-metadata {
@@ -2369,6 +2424,14 @@ domain("wikimedia.org") {
 
     .mw-mmv-untruncated .mw-mmv-image-metadata {
         background: none !important;
+    }
+
+    .mw-mmv-image-metadata-column {
+        margin-bottom: 8px !important;
+    }
+
+    .mw-mmv-untruncated .mw-mmv-image-metadata-links-column {
+        text-align: right !important;
     }
 
     .metadata-panel-is-closed .mw-mmv-image-metadata-links-column {
@@ -2451,8 +2514,22 @@ domain("wikimedia.org") {
     table:not([class]) > tr > td,
     table:not([class]) > * > tr > th,
     table:not([class]) > * > tr > td,
-    .infobox.bordered td, .infobox.bordered th {
+    .thumbborder,
+    .infobox.bordered td, .infobox.bordered th,
+    .mw-parser-output .ib-country td,
+    .mw-parser-output .ib-country th,
+    table:is(.infobox, .sidebar)
+        :is(td, th):not([class], [id], [style*="border"][style*="transparent"]),
+    table:is(.infobox, .sidebar)
+        .sidebar-content:not([style*="border"][style*="transparent"]),
+    .mw-parser-output
+        .ib-chembox
+        :is(td, th):not([style*="border"][style*="transparent"]) {
         border-color: hsla(212, 8.8%, 66.5%, 0.4) !important;
+    }
+    
+    table.infobox .thumbborder {
+        border-color: transparent !important;
     }
 
     .mw-parser-output table.clade td.clade-label,
@@ -2494,7 +2571,7 @@ domain("wikimedia.org") {
     }
 
     tbody tr td div[style*="background-color: lavender" i] {
-        background-color: hsla(205.7, 7.5%, 18.2%, 0) !important;
+        background-color: transparent !important;
     }
 
     #bodyContent div:not([class])[style*="background"] {
@@ -4036,6 +4113,14 @@ domain("wikimedia.org") {
 
     #siteNotice {
         display: none !important;
+    }
+
+    .mw-parser-output .sidebar-pretitle {
+        padding: 0.4em !important;
+    }
+
+    .mw-parser-output .sidebar-pretitle[style*="background"] {
+        background-color: var(--uc-wiki-table-header-bg) !important;
     }
 
     /* phylogeny daggers */

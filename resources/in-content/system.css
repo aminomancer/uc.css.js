@@ -35,7 +35,6 @@
 
         html:root {
             color: var(--plaintext-color);
-            background-color: var(--in-content-bg-dark);
             background: none !important;
         }
 

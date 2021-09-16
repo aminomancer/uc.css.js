@@ -1,4 +1,16 @@
 @-moz-document domain("reddit.com") {
+    #alert_message {
+        z-index: 2147483647 !important;
+    }
+
+    #header {
+        z-index: 2147483646 !important;
+    }
+
+    .author-tooltip {
+        display: none !important;
+    }
+
     @media (prefers-color-scheme: dark) {
         .ListingLayout-backgroundContainer {
             --pseudo-before-background: rgb(15, 18, 23, 1) !important;
@@ -14,9 +26,5 @@
         #quickMessageDialogBody {
             color: #4a4a4f !important;
         }
-    }
-
-    .author-tooltip {
-        display: none !important;
     }
 }

@@ -445,7 +445,7 @@ menupopup:not(.PanelUI-subView) menuseparator:last-child {
     }
 }
 
-#context-navigation .menuitem-iconic {
+:is(#context-navigation, #tab-context-navigation) .menuitem-iconic {
     flex-grow: 1 !important;
     width: unset !important;
     min-width: 36px;
@@ -454,24 +454,24 @@ menupopup:not(.PanelUI-subView) menuseparator:last-child {
     padding-bottom: 2px !important;
 }
 
-#context-navigation .menuitem-iconic[_moz-menuactive="true"]:not([disabled="true"]) {
+:is(#context-navigation, #tab-context-navigation) .menuitem-iconic[_moz-menuactive="true"]:not([disabled="true"]) {
     background: none !important;
 }
 
-#context-navigation .menu-iconic-left {
+:is(#context-navigation, #tab-context-navigation) .menu-iconic-left {
     height: 38px;
     padding: 0 !important;
     -moz-box-flex: 1;
     border-radius: var(--arrowpanel-menuitem-border-radius);
 }
 
-#context-navigation
+:is(#context-navigation, #tab-context-navigation)
     .menuitem-iconic[_moz-menuactive="true"]:not([disabled="true"])
     .menu-iconic-left {
     background: var(--menuitem-hover-background-color);
 }
 
-#context-navigation .menu-iconic-icon {
+:is(#context-navigation, #tab-context-navigation) .menu-iconic-icon {
     margin: 0 !important;
     width: 16px !important;
     height: 16px !important;
@@ -479,15 +479,18 @@ menupopup:not(.PanelUI-subView) menuseparator:last-child {
     background: none !important;
 }
 
-#context-sep-navigation {
+#context-sep-navigation,
+#tab-context-sep-navigation {
     display: none;
 }
 
-#context-back {
+#context-back,
+#tab-context-back {
     list-style-image: url(chrome://userchrome/content/skin/back.svg) !important;
 }
 
-#context-forward {
+#context-forward,
+#tab-context-forward {
     list-style-image: url(chrome://userchrome/content/skin/forward.svg) !important;
 }
 
@@ -495,7 +498,8 @@ menupopup:not(.PanelUI-subView) menuseparator:last-child {
     list-style-image: url(chrome://userchrome/content/skin/stop.svg) !important;
 }
 
-#context-reload {
+#context-reload,
+#tab-context-reload {
     list-style-image: url(chrome://userchrome/content/skin/reload.svg) !important;
 }
 
@@ -505,6 +509,10 @@ menupopup:not(.PanelUI-subView) menuseparator:last-child {
 
 #context-bookmarkpage[starred="true"] {
     list-style-image: url(chrome://userchrome/content/skin/bookmark.svg) !important;
+}
+
+#tab-context-bookmark {
+    list-style-image: url(chrome://userchrome/content/skin/add-bookmark.svg) !important;
 }
 
 #placesContext_open {

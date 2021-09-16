@@ -150,25 +150,6 @@
     display: none;
 }
 
-#appMenu-multiView
-    :is(.toolbarbutton-1, toolbarbutton.subviewbutton, .navigable.subviewbutton):not([disabled], [open]):focus,
-.widget-overflow-list .toolbarbutton-1:not([disabled], [open]):focus,
-.toolbaritem-combined-buttons:is(:not([cui-areatype="toolbar"]), [overflowedItem="true"])
-    > toolbarbutton:not([disabled], [open]):focus {
-    box-shadow: var(--panelview-toolbarbutton-focus-box-shadow);
-    background-color: var(--panelview-toolbarbutton-hover-bgcolor) !important;
-    color: var(--panelview-toolbarbutton-hover-color) !important;
-}
-
-#appMenu-multiView
-    :is(.toolbarbutton-1, toolbarbutton.subviewbutton, .navigable.subviewbutton):not([disabled], [open]):focus:active,
-.widget-overflow-list .toolbarbutton-1:not([disabled], [open]):focus:active,
-.toolbaritem-combined-buttons:is(:not([cui-areatype="toolbar"]), [overflowedItem="true"])
-    > toolbarbutton:not([disabled], [open]):focus:active {
-    background-color: var(--panelview-toolbarbutton-active-bgcolor) !important;
-    color: var(--panelview-toolbarbutton-active-color) !important;
-}
-
 .PanelUI-subView .subviewbutton-nav::after {
     color: var(--panel-shortcut-color) !important;
     fill-opacity: 1 !important;
@@ -422,7 +403,7 @@
 }
 
 #appMenu-zoom-controls2
-    :is(#appMenu-zoomReduce-button2, #appMenu-zoomEnlarge-button2, #appMenu-fullscreen-button2, #appMenu-zoomReset-button2):not([disabled], [open]):is(:hover, :focus) {
+    :is(#appMenu-zoomReduce-button2, #appMenu-zoomEnlarge-button2, #appMenu-fullscreen-button2, #appMenu-zoomReset-button2):not([disabled], [open]):is(:hover, :focus-visible) {
     background-color: var(--arrowpanel-dimmed) !important;
     border-color: transparent !important;
 }

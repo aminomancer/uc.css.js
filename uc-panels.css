@@ -464,19 +464,6 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
     color: var(--panel-description-color);
 }
 
-.subviewradio {
-    padding-inline-start: 0 !important;
-}
-
-.subviewradio:not([disabled], [open], [selected], :active):is(:hover, :focus) {
-    background-color: var(--button-bgcolor) !important;
-}
-
-.subviewradio[selected],
-.subviewradio:not([disabled]):is([open], :hover:active) {
-    background-color: var(--button-hover-bgcolor) !important;
-}
-
 #eom-allow-auto-updates .subviewradio {
     background: none !important;
 }
@@ -494,19 +481,19 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
     -moz-context-properties: fill, fill-opacity;
 }
 
-.subviewradio:is(:hover, :focus) .radio-check {
+.subviewradio:is(:hover, [focused="true"]) .radio-check {
     background-color: var(--uc-checkbox-unchecked-hover-bgcolor) !important;
 }
 
-.subviewradio:not(:focus):hover:active .radio-check {
+.subviewradio:not([focused="true"]):hover:active .radio-check {
     background-color: var(--uc-checkbox-unchecked-active-bgcolor) !important;
 }
 
-.subviewradio:is(:hover, :focus) .radio-check[selected] {
+.subviewradio:is(:hover, [focused="true"]) .radio-check[selected] {
     background-color: var(--uc-checkbox-checked-hover-bgcolor) !important;
 }
 
-.subviewradio:not(:focus):hover:active .radio-check[selected] {
+.subviewradio:not([focused="true"]):hover:active .radio-check[selected] {
     background-color: var(--uc-checkbox-checked-active-bgcolor) !important;
 }
 
