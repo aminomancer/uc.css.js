@@ -1379,25 +1379,6 @@ richlistitem.download-state > .downloadButton.downloadIconCancel .button-box .bu
     margin-inline-end: 0px !important;
 } */
 
-/* specific widget menus */
-#PanelUI-webext-_63d150c4-394c-4275-bc32-c464e76a891c_-browser-action-view {
-    min-width: 550px !important;
-}
-
-#PanelUI-webext-_bee8b1f2-823a-424c-959c-f8f76c8b2306_-browser-action-view {
-    min-width: 200px !important;
-    width: 230px !important;
-}
-
-#PanelUI-webext-multithreaded-download-manager_qw_linux-2g64_local-browser-action-view
-    .webextension-popup-browser {
-    min-height: 230px !important;
-}
-
-#PanelUI-webext-_a6c4a591-f1b2-4f03-b3ff-767e5bedf4e7_-browser-action-view {
-    min-width: 700px !important;
-}
-
 /* urlbar page action menu */
 #pageActionPanel panelview {
     min-width: 18em !important;

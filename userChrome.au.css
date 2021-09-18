@@ -188,6 +188,10 @@ menupopup::part(arrowscrollbox),
     margin: var(--menupopup-inner-box-margin);
 }
 
+.tab-label {
+    line-height: revert;
+}
+
 /* hide tab bar's arrow buttons and spacers */
 #tabbrowser-arrowscrollbox::part(overflow-start-indicator),
 #tabbrowser-arrowscrollbox::part(overflow-end-indicator),
@@ -344,6 +348,17 @@ if the icon disappeared/appeared instantly it would disrupt the impression that 
 /* undo window inactive tab text opacity */
 :root[tabsintitlebar] .tab-label:-moz-window-inactive {
     opacity: revert;
+}
+
+/* dim unloaded/discarded tabs */
+.tabbrowser-tab[pending] .tab-content :is(.tab-icon-image, .tab-label, .tab-sharing-icon-overlay) {
+    opacity: 0.7;
+}
+
+.tabbrowser-tab[pending]:is(:hover, .keyboard-focused-tab)
+    .tab-content
+    :is(.tab-icon-image, .tab-label, .tab-sharing-icon-overlay) {
+    opacity: 0.8;
 }
 
 /* protections popup panel's arrow style */

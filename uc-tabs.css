@@ -131,17 +131,6 @@
     background-repeat: unset !important;
 }
 
-/* dim unloaded/discarded tabs */
-.tabbrowser-tab[pending] .tab-content :is(.tab-icon-image, .tab-label, .tab-sharing-icon-overlay) {
-    opacity: 0.7;
-}
-
-.tabbrowser-tab[pending]:is(:hover, .keyboard-focused-tab)
-    .tab-content
-    :is(.tab-icon-image, .tab-label, .tab-sharing-icon-overlay) {
-    opacity: 0.8;
-}
-
 /* highlight unread tabs; requires italicizeUnreadTabs.uc.js */
 :root[italic-unread-tabs] .tabbrowser-tab[notselectedsinceload]:not([pending]),
 :root[italic-unread-tabs] .tabbrowser-tab[notselectedsinceload][pending][busy] {

@@ -747,9 +747,18 @@ panel[type="autocomplete-richlistbox"]
         background-color: var(--in-content-box-background-dim) !important;
     }
 
+    richlistbox[id] richlistitem {
+        min-height: 32px !important;
+    }
+
     richlistbox[id] richlistitem[selected="true"] {
         background-color: var(--arrowpanel-dimmed) !important;
         color: var(--in-content-page-color) !important;
+    }
+
+    richlistbox[id] richlistitem > button {
+        padding-block: 0 !important;
+        min-height: 24px !important;
     }
 
     richlistbox[id] richlistitem > button[label] {
@@ -838,6 +847,10 @@ panel[type="autocomplete-richlistbox"]
         font-size: 13px !important;
     }
 
+    #chooser #item-choose {
+        padding-inline-start: 32px !important;
+    }
+
     @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
         #commonDialogWindow[dialogroot] {
             font-family: SF Pro Text, Segoe UI, sans-serif !important;
@@ -864,8 +877,8 @@ panel[type="autocomplete-richlistbox"]
     url("chrome://browser/content/places/bookmarkProperties2.xhtml"),
     url-prefix("chrome://browser/content/sanitize.xhtml")
 {
-    window[dialogroot],
-    window[dialogroot] dialog {
+    :root[dialogroot],
+    :root[dialogroot] dialog {
         --in-content-page-background: transparent !important;
         --in-content-page-color: var(--in-parent-page-color) !important;
         --in-content-box-background: var(--dialog-box-bgcolor) !important;
@@ -907,13 +920,13 @@ panel[type="autocomplete-richlistbox"]
         --in-content-button-vertical-padding: 5px !important;
     }
 
-    window[dialogroot] input[type="checkbox"]:checked {
+    :root[dialogroot] input[type="checkbox"]:checked {
         background-image: url(chrome://userchrome/content/check.svg) !important;
         background-size: contain !important;
     }
 
-    window[dialogroot] input[type="radio"],
-    window[dialogroot] .radio-check {
+    :root[dialogroot] input[type="radio"],
+    :root[dialogroot] .radio-check {
         appearance: none;
         border: 1px solid var(--in-content-box-border-color);
         border-radius: 100%;
@@ -926,21 +939,21 @@ panel[type="autocomplete-richlistbox"]
         flex-shrink: 0;
     }
 
-    window[dialogroot] select:not([size], [multiple]) > option {
+    :root[dialogroot] select:not([size], [multiple]) > option {
         background-color: var(--dropdown-bgcolor) !important;
     }
 
-    window[dialogroot] #editBMPanel_tagsSelector {
+    :root[dialogroot] #editBMPanel_tagsSelector {
         margin-inline: 4px !important;
     }
 
-    window[dialogroot] #editBookmarkPanelRows {
+    :root[dialogroot] #editBookmarkPanelRows {
         padding-inline: 0 !important;
         padding-block: 0 8px !important;
     }
 
     button,
-    window[dialogroot] :is(
+    :root[dialogroot] :is(
     select,
     input[type="color"],
     menulist) {
@@ -949,25 +962,25 @@ panel[type="autocomplete-richlistbox"]
         border-radius: var(--in-content-button-border-radius) !important;
     }
 
-    window[dialogroot] input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"]),
-    window[dialogroot] textarea {
+    :root[dialogroot] input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"]),
+    :root[dialogroot] textarea {
         padding-block: 5px !important;
     }
 
-    window[dialogroot] input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):focus,
-    window[dialogroot] textarea:focus,
-    window[dialogroot] search-textbox[focused] {
+    :root[dialogroot] input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):focus,
+    :root[dialogroot] textarea:focus,
+    :root[dialogroot] search-textbox[focused] {
         border-color: var(--in-content-focus-outline-color) !important;
     }
 
-    window[dialogroot] input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"])::selection,
-    window[dialogroot] textarea::selection {
+    :root[dialogroot] input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"])::selection,
+    :root[dialogroot] textarea::selection {
         background-color: var(--ui-selection-bgcolor) !important;
         color: var(--ui-selection-color) !important;
     }
 
-    window[dialogroot] menulist,
-    window[dialogroot] input[type="text"] {
+    :root[dialogroot] menulist,
+    :root[dialogroot] input[type="text"] {
         margin-inline: 4px !important;
         padding-block: 0 !important;
         padding-inline: 6px !important;
@@ -977,9 +990,9 @@ panel[type="autocomplete-richlistbox"]
         border-radius: var(--toolbarbutton-border-radius) !important;
     }
 
-    window[dialogroot] input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):focus-visible,
-    window[dialogroot] textarea:focus-visible,
-    window[dialogroot] search-textbox:focus-visible {
+    :root[dialogroot] input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):focus-visible,
+    :root[dialogroot] textarea:focus-visible,
+    :root[dialogroot] search-textbox:focus-visible {
         background-color: color-mix(
             in srgb,
             currentColor 3%,
@@ -987,19 +1000,19 @@ panel[type="autocomplete-richlistbox"]
         ) !important;
     }
 
-    window[dialogroot] menulist {
+    :root[dialogroot] menulist {
         padding-inline: 4px 2px !important;
     }
 
-    window[dialogroot] richlistbox[id] {
+    :root[dialogroot] richlistbox[id] {
         border-radius: var(--toolbarbutton-border-radius) !important;
     }
 
-    window[dialogroot] tree {
+    :root[dialogroot] tree {
         margin-inline: 4px !important;
     }
 
-    window[dialogroot] treecols {
+    :root[dialogroot] treecols {
         border: none !important;
     }
 
@@ -1007,21 +1020,21 @@ panel[type="autocomplete-richlistbox"]
         border-radius: var(--toolbarbutton-border-radius) !important;
     }
 
-    window[dialogroot] .expander-up,
-    window[dialogroot] .expander-down {
+    :root[dialogroot] .expander-up,
+    :root[dialogroot] .expander-down {
         min-height: 25px !important;
         min-width: 25px !important;
         margin-inline: 4px !important;
     }
 
     button[dlgtype]:not([default]):is(:hover, :focus-visible):not(:active),
-    window[dialogroot] :is(.expander-up, .expander-down, .panel-button):is(:hover, :focus-visible):not(:active) {
+    :root[dialogroot] :is(.expander-up, .expander-down, .panel-button):is(:hover, :focus-visible):not(:active) {
         background-color: var(--in-content-button-background-hover) !important;
         color: var(--in-content-button-text-color-hover) !important;
         border-color: transparent;
     }
 
-    window[dialogroot] menulist:not([disabled="true"]):focus-visible:not(:active) {
+    :root[dialogroot] menulist:not([disabled="true"]):focus-visible:not(:active) {
         background-color: var(--in-content-button-background-hover) !important;
         color: var(--in-content-button-text-color-hover) !important;
     }
@@ -1032,7 +1045,7 @@ panel[type="autocomplete-richlistbox"]
         color: var(--in-content-primary-button-text-color-hover) !important;
     }
 
-    window[dialogroot] input[type="number"] {
+    :root[dialogroot] input[type="number"] {
         overflow: hidden !important;
         overflow-clip-box: padding-box !important;
         border-radius: var(--in-content-button-border-radius) !important;
@@ -1040,7 +1053,7 @@ panel[type="autocomplete-richlistbox"]
         border-right: none !important;
     }
 
-    window[dialogroot] input[type="number"]::-moz-number-spin-box {
+    :root[dialogroot] input[type="number"]::-moz-number-spin-box {
         border-top-right-radius: var(--in-content-button-border-radius) !important;
         border-bottom-right-radius: var(--in-content-button-border-radius) !important;
         border-right: 1px solid var(--in-content-box-border-color) !important;
@@ -1048,64 +1061,64 @@ panel[type="autocomplete-richlistbox"]
         width: calc(1em + 0.67px) !important;
     }
 
-    window[dialogroot] input[type="number"]:hover,
-    window[dialogroot] input[type="number"]:hover::-moz-number-spin-box {
+    :root[dialogroot] input[type="number"]:hover,
+    :root[dialogroot] input[type="number"]:hover::-moz-number-spin-box {
         border-color: var(--in-content-border-hover) !important;
     }
 
-    window[dialogroot] input[type="number"]:hover:active::-moz-number-spin-box {
+    :root[dialogroot] input[type="number"]:hover:active::-moz-number-spin-box {
         border-color: var(--in-content-border-active) !important;
     }
 
-    window[dialogroot] input[type="number"]:focus,
-    window[dialogroot] input[type="number"]:focus::-moz-number-spin-box {
+    :root[dialogroot] input[type="number"]:focus,
+    :root[dialogroot] input[type="number"]:focus::-moz-number-spin-box {
         border-color: var(--in-content-focus-outline-color) !important;
     }
 
-    window[dialogroot] #titleText {
+    :root[dialogroot] #titleText {
         font-size: 16px !important;
         line-height: 16px !important;
         font-weight: var(--uc-font-weight-semibold, 500) !important;
     }
 
-    window[dialogroot] #titleContainer {
+    :root[dialogroot] #titleContainer {
         align-items: center !important;
         justify-content: center !important;
         margin: 0 !important;
     }
 
-    window[dialogroot] #titleContainer:not([noicon]) > #titleCropper {
+    :root[dialogroot] #titleContainer:not([noicon]) > #titleCropper {
         translate: none !important;
     }
 
-    window[dialogroot] #handling > #description {
+    :root[dialogroot] #handling > #description {
         font-size: 1.15em !important;
         font-weight: var(--uc-font-weight-bold, 600) !important;
     }
 
-    window[dialogroot] #chooser {
+    :root[dialogroot] #chooser {
         margin-bottom: 10px !important;
     }
 
-    window[dialogroot] #remember-text {
+    :root[dialogroot] #remember-text {
         margin-top: 4px !important;
         color: var(--in-content-deemphasized-text);
         margin-left: 24px !important;
     }
 
-    window[dialogroot] #rememberContainer > .toggle-container-with-text {
+    :root[dialogroot] #rememberContainer > .toggle-container-with-text {
         color: inherit !important;
     }
 
-    window[dialogroot] #bookmarkpropertiesdialog #editBookmarkPanelContent label[control] {
+    :root[dialogroot] #bookmarkpropertiesdialog #editBookmarkPanelContent label[control] {
         margin-inline: 0 !important;
     }
 
-    window[dialogroot] #bookmarkpropertiesdialog {
+    :root[dialogroot] #bookmarkpropertiesdialog {
         -moz-box-align: center !important;
     }
 
-    window[dialogroot] #bookmarkpropertiesdialog .titleIcon {
+    :root[dialogroot] #bookmarkpropertiesdialog .titleIcon {
         padding-inline-end: 6px !important;
     }
 
@@ -1139,29 +1152,29 @@ panel[type="autocomplete-richlistbox"]
 
     @-moz-document url("chrome://mozapps/content/handling/permissionDialog.xhtml")
     {
-        window[dialogroot] dialog > #description,
-        window[dialogroot] dialog > #description-box > #description {
+        :root[dialogroot] dialog > #description,
+        :root[dialogroot] dialog > #description-box > #description {
             font-size: 1.15em !important;
             font-weight: var(--uc-font-weight-bold, 600) !important;
         }
 
-        window[dialogroot] #description-box {
+        :root[dialogroot] #description-box {
             margin-bottom: 10px !important;
         }
 
-        window[dialogroot] #description:not([hidden], :empty) ~ #description-extra {
+        :root[dialogroot] #description:not([hidden], :empty) ~ #description-extra {
             margin-top: -10px !important;
         }
     }
 
     @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
-        window[dialogroot],
-        window[dialogroot] dialog {
+        :root[dialogroot],
+        :root[dialogroot] dialog {
             font-family: SF Pro Text, Segoe UI, sans-serif !important;
             font-kerning: normal !important;
         }
 
-        window[dialogroot] :is(
+        :root[dialogroot] :is(
         h2,
         h3,
         #titleText) {

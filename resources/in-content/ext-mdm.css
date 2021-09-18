@@ -2,6 +2,71 @@
 
 @-moz-document url-prefix("moz-extension://0163b722-07ea-4fbd-80d6-7b5de657bb9e")
 {
+    :root {
+        --selected-bg: color-mix(in srgb, hsla(200, 40%, 70%, 0.25) 60%, var(--purple-35));
+    }
+
+    body {
+        background-color: var(--in-content-page-background) !important;
+        color: var(--in-content-page-color) !important;
+    }
+
+    #toolbar {
+        background-color: var(--in-content-box-background) !important;
+        display: flex !important;
+        flex-flow: row nowrap !important;
+        column-gap: 3px !important;
+        padding: 3px !important;
+    }
+
+    #toolbar > button,
+    .summary-row > button {
+        background-color: transparent !important;
+        margin: 0 !important;
+        border-radius: var(--general-button-border-radius) !important;
+        outline: 0 !important;
+    }
+
+    #toolbar > button:not([disabled]):hover,
+    .summary-row > button:not([disabled]):hover {
+        background-color: var(--in-content-button-background-hover) !important;
+    }
+
+    #toolbar > button:not([disabled]):focus-visible,
+    .summary-row > button:not([disabled]):focus-visible {
+        outline: var(--global-focus-ring) !important;
+        box-shadow: var(--global-focus-shadow) !important;
+    }
+
+    #toolbar > button:not([disabled]):hover:active,
+    .summary-row > button:not([disabled]):hover:active {
+        background-color: var(--in-content-button-background-active) !important;
+    }
+
+    #tasks-wrapper {
+        min-height: 100px !important;
+    }
+
+    #tasks:empty + #empty-tasks {
+        height: 100px !important;
+        display: flex !important;
+        flex-flow: column nowrap !important;
+        justify-content: center !important;
+        align-content: center !important;
+    }
+
+    .task {
+        border-color: var(--in-content-box-border-color) !important;
+    }
+
+    :root[data-path="panel/panel"] .task.selected {
+        background-color: var(--selected-bg) !important;
+    }
+
+    .progress-canvas {
+        border-radius: 100px !important;
+    }
+
     .warning-bar,
     .error-bar {
         background-color: rgb(22, 21, 22) !important;

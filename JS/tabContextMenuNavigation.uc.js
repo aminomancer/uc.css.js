@@ -114,7 +114,7 @@ class TabContextMenuNavigation {
     onPopupShowing(e) {
         if (e.target !== this.tabContext) return;
         let l10n = this.config.l10n;
-        if (this.contextTab.multiselected) {
+        if (this.contextTab?.multiselected) {
             this.contextBack.disabled = !gBrowser.selectedTabs.some(
                 (tab) => gBrowser.getBrowserForTab(tab).webNavigation.canGoBack
             );
@@ -137,7 +137,7 @@ class TabContextMenuNavigation {
         }
     }
     goBack() {
-        if (this.contextTab.multiselected)
+        if (this.contextTab?.multiselected)
             gBrowser.selectedTabs.forEach((tab) => {
                 let browser = gBrowser.getBrowserForTab(tab);
                 if (browser.webNavigation.canGoBack) browser.goBack();
@@ -145,7 +145,7 @@ class TabContextMenuNavigation {
         else gBrowser.getBrowserForTab(this.contextTab).goBack();
     }
     goForward() {
-        if (this.contextTab.multiselected)
+        if (this.contextTab?.multiselected)
             gBrowser.selectedTabs.forEach((tab) => {
                 let browser = gBrowser.getBrowserForTab(tab);
                 if (browser.webNavigation.canGoForward) browser.goForward();
@@ -153,12 +153,12 @@ class TabContextMenuNavigation {
         else gBrowser.getBrowserForTab(this.contextTab).goForward();
     }
     reload() {
-        if (this.contextTab.multiselected) gBrowser.reloadMultiSelectedTabs();
+        if (this.contextTab?.multiselected) gBrowser.reloadMultiSelectedTabs();
         else gBrowser.reloadTab(this.contextTab);
     }
     bookmark() {
         PlacesUIUtils.showBookmarkPagesDialog(
-            this.contextTab.multiselected
+            this.contextTab?.multiselected
                 ? PlacesCommandHook.uniqueSelectedPages
                 : PlacesCommandHook.getUniquePages([this.contextTab])
         );

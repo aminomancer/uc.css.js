@@ -1,4 +1,4 @@
-/* a stylesheet for adding miscellaneous rules */
+/* a stylesheet for adding miscellaneous rules during runtime, they can be divided into specific stylesheets later */
 
 /* add a dummy rule so this will be loaded by the style editor on any page. */
 :root {

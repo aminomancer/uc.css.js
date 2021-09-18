@@ -1029,9 +1029,9 @@ domain("wikimedia.org") {
         border-style: hidden !important;
     }
 
-    table.infobox th,
-    table.infobox .summary,
-    table.infobox td:not([class], [id]) {
+    :root table.infobox th,
+    :root table.infobox .summary,
+    :root table.infobox td:not([class], [id]) {
         background: none !important;
     }
 
@@ -1318,11 +1318,13 @@ domain("wikimedia.org") {
     }
 
     .sidebar .sidebar-content .sidebar-list-title,
-    .infobox-header {
+    .infobox-header,
+    .sidebar-above {
         background-color: transparent !important;
         color: revert !important;
     }
 
+    .sidebar-navbar,
     .sidebar .navbox-list {
         border-color: transparent !important;
     }
@@ -1337,6 +1339,19 @@ domain("wikimedia.org") {
         text-align: start !important;
         border-top: none !important;
         border-bottom: 1px solid var(--uc-wiki-popup-border-color) !important;
+    }
+
+    .sidebar-above {
+        border-bottom: 1px solid var(--uc-wiki-popup-border-color) !important;
+    }
+
+    .sidebar-below {
+        border-top: 1px solid var(--uc-wiki-popup-border-color) !important;
+    }
+
+    .mw-parser-output .sidebar-collapse .sidebar-above,
+    .mw-parser-output .sidebar-collapse .sidebar-below {
+        border-color: var(--uc-wiki-popup-border-color) !important;
     }
 
     .sidebar-list-content {
@@ -1363,7 +1378,7 @@ domain("wikimedia.org") {
     }
 
     th.navbox-group {
-        border-radius: 2px !important;
+        border-radius: 0 !important;
         background-color: var(--uc-wiki-popup-bg) !important;
         box-shadow: none !important;
     }
@@ -2543,11 +2558,17 @@ domain("wikimedia.org") {
     }
 
     table:not([class]) > tr > th,
-    table:not([class]) > * > tr > th {
+    table:not([class]) > * > tr > th,
+    table caption {
         background-color: var(--uc-wiki-table-header-bg) !important;
         color: hsl(0, 0%, 98%) !important;
         font-weight: normal !important;
         font-family: Patua One;
+        border-radius: revert !important;
+    }
+    
+    table caption {
+        border: none !important;
     }
 
     table.wikitable.sortable.jquery-tablesorter thead tr th.headerSort {
@@ -2683,9 +2704,13 @@ domain("wikimedia.org") {
         box-shadow: none !important;
     }
 
-    #content .infobox,
-    #bodyContent table.ambox {
+    #content :where(.infobox),
+    #bodyContent :where(table.ambox) {
         box-shadow: 0 0 15px 2px hsla(0, 0%, 0%, 0.1), 0 0 3px 1px hsla(0, 0%, 0%, 0.2) !important;
+    }
+
+    #bodyContent table :is(table, .infobox, .thumb) {
+        box-shadow: none !important;
     }
 
     #content .thumbinner {
@@ -3433,7 +3458,7 @@ domain("wikimedia.org") {
     .infobox,
     .vertical-navbox,
     .mergedtoprow,
-    .metadata:not(.ambox, .audiolinkinfo),
+    .metadata:not(.ambox, .audiolinkinfo, .asbox),
     .mbox-small,
     .quotebox,
     .portal,
@@ -3442,9 +3467,13 @@ domain("wikimedia.org") {
     .navbox {
         box-shadow: 0 0 15px 2px hsla(0, 0%, 0%, 0.1), 0 0 3px 1px hsla(0, 0%, 0%, 0.2) !important;
     }
-    
+
     table .mergedtoprow {
         box-shadow: revert !important;
+    }
+
+    .asbox table {
+        background: transparent !important;
     }
 
     .navbox {
@@ -3929,7 +3958,6 @@ domain("wikimedia.org") {
     .image[href*="/wiki/File:Braille" i]:is([href$=".svg"], [href$=".png"]) > img,
     .svg:not(.mw-mmv-final-image),
     .thumbimage[src*=".svg"][alt*="line drawing" i],
-    .fullImageLink [src*=".svg"],
     .mw-parser-output a[href$=".svg"] > img[src$=".svg"],
     img[alt="<?>"] {
         filter: contrast(0.85) invert(1) hue-rotate(180deg);
