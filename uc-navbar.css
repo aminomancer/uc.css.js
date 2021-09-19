@@ -317,7 +317,7 @@ toolbar .toolbarbutton-1:not([disabled], [open])[checked]:hover:active > .toolba
 #PersonalToolbar {
     padding-inline: 2px !important;
     min-height: 32px !important;
-    z-index: 2 !important;
+    z-index: 3 !important;
     transition: min-height 200ms ease-in-out, max-height 200ms ease-in-out,
         opacity 200ms ease-in-out, transform 200ms ease-in-out !important;
     overflow-y: visible !important;
@@ -496,7 +496,7 @@ toolbarbutton.bookmark-item:not(.subviewbutton) {
 }
 
 #PersonalToolbar[customizing][draggingover] {
-    z-index: 3 !important;
+    z-index: 4 !important;
 }
 
 #customization-header {
@@ -504,11 +504,11 @@ toolbarbutton.bookmark-item:not(.subviewbutton) {
 }
 
 #customization-panel-container {
-    z-index: 2 !important;
+    z-index: 3 !important;
 }
 
 #navigator-toolbox {
-    z-index: 2 !important;
+    z-index: 3 !important;
 }
 
 #nav-bar {

@@ -816,6 +816,12 @@ panel[type="autocomplete-richlistbox"]
         color: var(--ui-selection-color) !important;
     }
 
+    window[role="dialog"] ::selection,
+    window[role="dialog"] textarea::selection {
+        background-color: var(--global-selection-bgcolor) !important;
+        color: var(--global-selection-color) !important;
+    }
+
     input[type="number"] {
         overflow: hidden !important;
         overflow-clip-box: padding-box !important;

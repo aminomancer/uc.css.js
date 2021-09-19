@@ -555,7 +555,7 @@ there are normally no twistys in sorted trees so it is relatively safe to collap
 }
 
 #vertical-tabs-pane:not([unpinned]) ~ #vertical-tabs-splitter {
-    position: absolute;
+    position: absolute !important;
     z-index: 2; /* draw above the app content */
     width: 38px !important; /* we have to make it bigger so we can add negative spread to the shadow. so it matches the sidebar shadow */
     margin-inline-start: -38px !important;
