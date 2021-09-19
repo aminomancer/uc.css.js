@@ -81,6 +81,7 @@ menuitem#sanitizeItem > .menu-text,
     > .menu-text,
 #menu_FileQuitItem .menu-text,
 #context_openANewTab .menu-text,
+#toolbar-context-openANewTab .menu-text,
 #menu_newNavigatorTab .menu-text,
 #placesContext_open .menu-text,
 #context-openlinkinusercontext-menu > .menu-text,
@@ -177,6 +178,8 @@ menuitem[command="downloadsCmd_clearDownloads"] .menu-text,
 #context_reopenInContainer > .menu-text,
 #context_reloadTab .menu-text,
 #context_reloadSelectedTabs .menu-text,
+#toolbar-context-reloadSelectedTab .menu-text,
+#toolbar-context-reloadSelectedTabs .menu-text,
 #context_toggleMuteTab .menu-text,
 #context_toggleMuteSelectedTabs .menu-text,
 #context_pinTab .menu-text,
@@ -196,15 +199,18 @@ menuitem[command="downloadsCmd_clearDownloads"] .menu-text,
 #syncedTabsManageDevices .menu-text,
 #context-markAsRead .menu-text,
 #context-markAsUnread .menu-text,
-#context_selectAllTabs .menu-text,
+:is(#context_selectAllTabs, #toolbar-context-selectAllTabs) .menu-text,
 #context_bookmarkTab .menu-text,
 #context_bookmarkSelectedTabs .menu-text,
+#toolbar-context-bookmarkSelectedTab .menu-text,
+#toolbar-context-bookmarkSelectedTabs .menu-text,
 #context_moveTabOptions > .menu-text,
 #context_sendTabToDevice > .menu-text,
 #context_shareTabURL > .menu-text,
 menuitem.share-tab-url-item > .menu-text,
 #context_closeTabOptions > .menu-text,
 #context_undoCloseTab .menu-text,
+#toolbar-context-undoCloseTab .menu-text,
 #context_closeTab .menu-text,
 #menu_close .menu-text,
 #menu_closeWindow .menu-text,
@@ -220,12 +226,15 @@ menuitem#menu_pageSource .menu-text,
 menuitem#extensionsForDevelopers .menu-text,
 menuitem#enableDeveloperTools .menu-text,
 #discardTab .menu-text,
-#historyUndoWindowMenu3 > .menu-text,
 #historyUndoWindowMenu > .menu-text,
 #historyUndoMenu > .menu-text,
+#historyUndoWindowMenu3 > .menu-text,
+#tabContextMenu-historyUndoWindowMenu3 > .menu-text,
+#toolbar-context-menu-historyUndoWindowMenu3 > .menu-text,
 #tabContextUndoList > .menu-text,
-#ContextUndoList > .menu-text,
-#tabContextMenu menuitem[label^="Restore All"] .menu-text,
+#tabContextMenu-tabContextUndoList > .menu-text,
+#toolbar-context-menu-tabContextUndoList > .menu-text,
+#tabContextMenu menuitem.restoreallitem .menu-text,
 :is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
     .sendtab-target:is([clientType="phone"], [clientType="mobile"], [clientType="desktop"])
     .menu-text,
@@ -391,6 +400,7 @@ menuitem#sanitizeItem:before,
 :is(#placesContext_open\:unloaded, #placesContext_openContainer\:unloaded, #placesContext_openLinks\:unloaded, #syncedTabsOpenUnloaded, #syncedTabsOpenAllUnloaded):before,
 #menu_FileQuitItem:before,
 #context_openANewTab:before,
+#toolbar-context-openANewTab:before,
 #menu_newNavigatorTab:before,
 #placesContext_open:before,
 #context-openlinkincontainertab:before,
@@ -418,7 +428,7 @@ menuitem#repair-text-encoding:before,
 :is(#undobookmarksmenuUndo, #undobookmarksmenuRedo):before,
 #context-keywordfield:before,
 #context_reopenInContainer:before,
-:is(#context_reloadTab, #context_reloadSelectedTabs):before,
+:is(#context_reloadTab, #context_reloadSelectedTabs, #toolbar-context-reloadSelectedTab, #toolbar-context-reloadSelectedTabs):before,
 :is(#context_toggleMuteTab, #context_toggleMuteSelectedTabs):before,
 :is(#context_pinTab, #context_pinSelectedTabs):before,
 :is(#context_unpinTab, #context_unpinSelectedTabs):before,
@@ -443,14 +453,15 @@ menuitem#repair-text-encoding:before,
     > :is(menu, menuitem)[label="Open in a New Container Tab"]:not(.menuitem-iconic):before,
 #context-markAsRead:before,
 #context-markAsUnread:before,
-:is(#context_bookmarkTab, #context_bookmarkSelectedTabs):before,
-#context_selectAllTabs:before,
+:is(#context_bookmarkTab, #context_bookmarkSelectedTabs, #toolbar-context-bookmarkSelectedTab, #toolbar-context-bookmarkSelectedTabs):before,
+:is(#context_selectAllTabs, #toolbar-context-selectAllTabs):before,
 #context_moveTabOptions:before,
 #context_sendTabToDevice:before,
 #context_shareTabURL:before,
 menuitem.share-tab-url-item:before,
 #context_closeTabOptions:before,
 #context_undoCloseTab:before,
+#toolbar-context-undoCloseTab:before,
 #context_closeTab:before,
 #menu_close:before,
 #menu_closeWindow:before,
@@ -466,12 +477,15 @@ menuitem#menu_pageSource:before,
 menuitem#extensionsForDevelopers:before,
 menuitem#enableDeveloperTools:before,
 #discardTab:before,
-#historyUndoWindowMenu3:before,
 #historyUndoWindowMenu:before,
 #historyUndoMenu:before,
+#historyUndoWindowMenu3:before,
+#tabContextMenu-historyUndoWindowMenu3:before,
+#toolbar-context-menu-historyUndoWindowMenu3:before,
 #tabContextUndoList:before,
-#ContextUndoList:before,
-#tabContextMenu menuitem[label^="Restore All"]:before,
+#tabContextMenu-tabContextUndoList:before,
+#toolbar-context-menu-tabContextUndoList:before,
+#tabContextMenu menuitem.restoreallitem:before,
 :is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
     .sendtab-target:is([clientType="phone"], [clientType="mobile"], [clientType="desktop"]):before,
 :is(#spell-add-to-dictionary, #spell-add-dictionaries, #spell-add-dictionaries-main, #spell-dictionaries):before,
@@ -905,7 +919,7 @@ menuitem.customize-context-CopyID:before {
     background-image: url(chrome://userchrome/content/material/places/folder-special.svg);
 }
 
-:is(#context-openframeintab, #context-openlinkintab, #context_openANewTab, #menu_newNavigatorTab, #placesContext_open\:newtab, #syncedTabsOpenSelectedInTab):before {
+:is(#context-openframeintab, #context-openlinkintab, #context_openANewTab, #toolbar-context-openANewTab, #menu_newNavigatorTab, #placesContext_open\:newtab, #syncedTabsOpenSelectedInTab):before {
     background-image: url(chrome://userchrome/content/skin/new-tab.svg);
 }
 
@@ -975,7 +989,7 @@ menuitem#repair-text-encoding:before {
     background-image: url(chrome://userchrome/content/skin/sort.svg);
 }
 
-:is(#context-undo, #context_undoCloseTab, #menu_undo, #undobookmarksmenuUndo):before,
+:is(#context-undo, #context_undoCloseTab, #toolbar-context-undoCloseTab, #menu_undo, #undobookmarksmenuUndo):before,
 .textbox-contextmenu menuitem[label="Undo"]:before {
     background-image: url(chrome://userchrome/content/undo.svg);
 }
@@ -998,7 +1012,7 @@ menuitem#repair-text-encoding:before {
     background-image: url(chrome://userchrome/content/skin/container-go.svg);
 }
 
-:is(#context_reloadTab, #context_reloadSelectedTabs):before {
+:is(#context_reloadTab, #context_reloadSelectedTabs, #toolbar-context-reloadSelectedTab, #toolbar-context-reloadSelectedTabs):before {
     background-image: url(chrome://userchrome/content/skin/reload.svg);
 }
 
@@ -1039,11 +1053,11 @@ menuitem#repair-text-encoding:before {
     background-image: url(chrome://userchrome/content/skin/mark-tab-read.svg);
 }
 
-#context_selectAllTabs:before {
+:is(#context_selectAllTabs, #toolbar-context-selectAllTabs):before {
     background-image: url(chrome://userchrome/content/devtools/tool-styleeditor.svg);
 }
 
-:is(#context_bookmarkTab, #context_bookmarkSelectedTabs):before {
+:is(#context_bookmarkTab, #context_bookmarkSelectedTabs, #toolbar-context-bookmarkSelectedTab, #toolbar-context-bookmarkSelectedTabs):before {
     background-image: url(chrome://userchrome/content/skin/add-bookmark.svg);
 }
 
@@ -1127,17 +1141,20 @@ menuitem#enableDeveloperTools:before {
 }
 
 #historyUndoWindowMenu:before,
-#historyUndoWindowMenu3:before {
+#historyUndoWindowMenu3:before,
+#tabContextMenu-historyUndoWindowMenu3:before,
+#toolbar-context-menu-historyUndoWindowMenu3:before {
     background-image: url(chrome://userchrome/content/skin/window.svg);
 }
 
 #historyUndoMenu:before,
 #tabContextUndoList:before,
-#ContextUndoList:before {
+#tabContextMenu-tabContextUndoList:before,
+#toolbar-context-menu-tabContextUndoList:before {
     background-image: url(chrome://userchrome/content/skin/tab.svg);
 }
 
-#tabContextMenu menuitem[label^="Restore All"]:before {
+#tabContextMenu menuitem.restoreallitem:before {
     background-image: url(chrome://userchrome/content/skin/restore-session.svg);
 }
 

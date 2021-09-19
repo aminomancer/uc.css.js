@@ -235,7 +235,9 @@ tooltip {
     ); */
 
     --pink-action: hsl(340, 73%, 58%);
-    --purple-30: hsl(244, 100%, 70%) !important;
+    --purple-20: hsl(240, 100%, 80%) !important;
+    --purple-25: hsl(240, 100%, 75%) !important;
+    --purple-30: hsl(239, 100%, 70%) !important;
     --purple-30-a50: hsla(240, 100%, 70%, 0.5) !important;
     --purple-35: hsl(245, 100%, 65%) !important;
     --purple-40: hsl(250, 100%, 60%) !important;

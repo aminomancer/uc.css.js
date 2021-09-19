@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Undo Recently Closed Tabs in Tab Context Menu
-// @version        1.4.3
+// @version        1.5.0
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Adds new menus to the context menu that appears when you right-click a tab (in the tab bar or in the TreeStyleTabs sidebar): one lists recently closed tabs so you can restore them, and another lists recently closed windows. These are basically the same functions that exist in the history toolbar button's popup, but I think the tab context menu is a more convenient location for them. An updated script that does basically the same thing as UndoListInTabmenuToo by Alice0775, but for current versions of Firefox and with TST support. The original broke around version 86 or 87 I think.
@@ -20,9 +20,24 @@
     };
 
     class UndoListInTabmenu {
+        /**
+         * create a DOM node with given parameters
+         * @param {object} aDoc (which doc to create the element in)
+         * @param {string} tag (an HTML tag name, like "button" or "p")
+         * @param {object} props (an object containing attribute name/value pairs, e.g. class: ".bookmark-item")
+         * @param {boolean} isHTML (if true, create an HTML element. if omitted or false, create a XUL element. generally avoid HTML when modding the UI, most UI elements are actually XUL elements.)
+         * @returns the created DOM node
+         */
+        create(aDoc, tag, props, isHTML = false) {
+            let el = isHTML ? aDoc.createElement(tag) : aDoc.createXULElement(tag);
+            for (let prop in props) el.setAttribute(prop, props[prop]);
+            return el;
+        }
+
         constructor() {
             this.attachSidebarListener(); // set up context menu for TST, if it's installed. it'll set up even if TST is disabled, since otherwise we'd have to listen for addon disabling/enabling, and it's too much work to set up an addon manager listener. but that doesn't matter, since if TST is disabled, its sidebar will never be opened, and most of the setup is triggered by the sidebar opening.
             this.makePopups(document.getElementById("tabContextMenu")); // set up the built-in tabs bar context menu.
+            this.makePopups(document.getElementById("toolbar-context-menu")); // this context menu shows when you right-click an empty area in the tab strip.
         }
 
         // memoize session store, maybe handle some earlier versions
@@ -96,18 +111,18 @@
                     // the sidebar context menu is showing, so we should hide/show the menus depending on whether they're empty
                     // closed tab list is empty so should be hidden
                     if (this.ss.getClosedTabCount(window) == 0) {
-                        this.sidebarTabMenu.setAttribute("hidden", true);
+                        this.sidebarTabMenu.hidden = true;
                         this.sidebarTabMenu.style.removeProperty("display");
                     } else {
-                        this.sidebarTabMenu.removeAttribute("hidden");
+                        this.sidebarTabMenu.hidden = false;
                         this.sidebarTabMenu.style.display = "-moz-box";
                     }
                     // closed window list is empty so should be hidden
                     if (this.shouldHideWindows) {
-                        this.sidebarWindowMenu.setAttribute("hidden", true);
+                        this.sidebarWindowMenu.hidden = true;
                         this.sidebarWindowMenu.style.removeProperty("display");
                     } else {
-                        this.sidebarWindowMenu.removeAttribute("hidden");
+                        this.sidebarWindowMenu.hidden = false;
                         this.sidebarWindowMenu.style.display = "-moz-box";
                     }
                     break;
@@ -139,38 +154,67 @@
          * @param {object} context (the context menu to add menus to)
          */
         makePopups(context) {
-            // Recently Closed Tabs
-            let tabMenu = document.createXULElement("menu");
-            tabMenu.setAttribute("id", "tabContextUndoList");
-            tabMenu.setAttribute("data-l10n-id", "menu-history-undo-menu"); // localized "Recently Closed Tabs"
-            context.appendChild(tabMenu);
-
-            this.tabContextUndoListPopup = tabMenu.appendChild(
-                document.createXULElement("menupopup")
-            );
-            this.tabContextUndoListPopup.setAttribute(
-                "onpopupshowing",
-                `undoTabMenu.populateSubmenu(this, "Tab");`
-            );
+            let undoItem = context.querySelector(`[id*="undoCloseTab"]`);
 
             // Recently Closed Windows
-            let windowMenu = document.createXULElement("menu");
-            windowMenu.setAttribute("id", "historyUndoWindowMenu3");
-            windowMenu.setAttribute("data-l10n-id", "menu-history-undo-window-menu"); // localized "Recently Closed Windows"
-            context.appendChild(windowMenu);
-
-            this.historyUndoWindowPopup3 = windowMenu.appendChild(
-                document.createXULElement("menupopup")
+            let windowMenu = this.create(document, "menu", {
+                id: context.id + "-historyUndoWindowMenu3",
+                class: "recently-closed-windows-menu",
+                "data-l10n-id": "menu-history-undo-window-menu",
+            });
+            undoItem.after(windowMenu);
+            windowMenu.appendChild(
+                this.create(document, "menupopup", {
+                    onpopupshowing: `undoTabMenu.populateSubmenu(this, "Window");`,
+                })
             );
-            this.historyUndoWindowPopup3.setAttribute(
-                "onpopupshowing",
-                `undoTabMenu.populateSubmenu(this, "Window");`
+
+            // Recently Closed Tabs
+            let tabMenu = this.create(document, "menu", {
+                id: context.id + "-tabContextUndoList",
+                class: "recently-closed-tabs-menu",
+                "data-l10n-id": "menu-history-undo-menu",
+            });
+            undoItem.after(tabMenu);
+            tabMenu.appendChild(
+                this.create(document, "menupopup", {
+                    onpopupshowing: `undoTabMenu.populateSubmenu(this, "Tab");`,
+                })
             );
 
             // every time the context menu opens, handle access keys and enabling/disabling of the menus. menus need to be hidden if there aren't any recently closed tabs/windows in sessionstore, or else the menus will be awkwardly empty.
             context.addEventListener(
                 "popupshowing",
-                function (_e) {
+                function (e) {
+                    if (e.target !== context) return;
+                    // if you right-click an empty area in the tab strip, (e.g. if there aren't enough tabs to overflow the strip)
+                    // you get a different context menu. this is the same context menu you get when you right-click a toolbar button in the navbar.
+                    // so we have to add separate menuitems to this context menu. and since this context menu doesn't only relate to tabs,
+                    // we have to hide the new menuitems in other circumstances, like when right-clicking a toolbar button.
+                    if (e.target.id === "toolbar-context-menu") {
+                        let toolbarItem = e.target.triggerNode;
+                        if (toolbarItem && toolbarItem.localName == "toolbarpaletteitem")
+                            toolbarItem = toolbarItem.firstElementChild;
+                        else if (toolbarItem && toolbarItem.localName != "toolbar")
+                            while (toolbarItem && toolbarItem.parentElement) {
+                                let parent = toolbarItem.parentElement;
+                                if (
+                                    (parent.classList &&
+                                        parent.classList.contains("customization-target")) ||
+                                    parent.getAttribute("overflowfortoolbar") || // Needs to work in the overflow list as well.
+                                    parent.localName == "toolbarpaletteitem" ||
+                                    parent.localName == "toolbar"
+                                )
+                                    break;
+                                toolbarItem = parent;
+                            }
+                        else toolbarItem = null;
+                        if (toolbarItem.id !== "tabbrowser-tabs") {
+                            tabMenu.hidden = true;
+                            windowMenu.hidden = true;
+                            return;
+                        }
+                    }
                     let winWords = windowMenu.label.split(" ");
                     windowMenu.accessKey =
                         config["Windows access key"] ||
@@ -186,13 +230,9 @@
                             : tabWords[tabWords.length - 1]?.substr(0, 1) || "T");
 
                     // closed tab list is empty so should be hidden
-                    if (undoTabMenu.ss.getClosedTabCount(window) == 0)
-                        tabMenu.setAttribute("hidden", true);
-                    else tabMenu.removeAttribute("hidden");
-
+                    tabMenu.hidden = !!(undoTabMenu.ss.getClosedTabCount(window) == 0);
                     // closed window list is empty so should be hidden
-                    if (undoTabMenu.shouldHideWindows) windowMenu.setAttribute("hidden", true);
-                    else windowMenu.removeAttribute("hidden");
+                    windowMenu.hidden = !!undoTabMenu.shouldHideWindows;
                 },
                 false
             );
@@ -205,43 +245,41 @@
         makeSidebarPopups(context) {
             let doc = context.ownerDocument;
             // Recently Closed Tabs
-            this.sidebarTabMenu = doc.createXULElement("menu");
-            this.sidebarTabMenu.setAttribute("id", "sidebarTabContextUndoList");
-            this.sidebarTabMenu.setAttribute("label", this.closedTabsLabel); // localized "Recently Closed Tabs"
             let tabWords = this.closedTabsLabel.split(" ");
-            this.sidebarTabMenu.accessKey =
-                config["Tabs access key"] ||
-                (RTL_UI
-                    ? this.closedTabsLabel.substr(0, 1)
-                    : tabWords[tabWords.length - 1]?.substr(0, 1) || "T");
+            this.sidebarTabMenu = this.create(doc, "menu", {
+                id: "sidebarTabContextUndoList",
+                label: this.closedTabsLabel,
+                accesskey:
+                    config["Tabs access key"] ||
+                    (RTL_UI
+                        ? this.closedTabsLabel.substr(0, 1)
+                        : tabWords[tabWords.length - 1]?.substr(0, 1) || "T"),
+            });
             context.appendChild(this.sidebarTabMenu);
 
             this.sidebarContextUndoListPopup = this.sidebarTabMenu.appendChild(
-                doc.createXULElement("menupopup")
-            );
-            this.sidebarContextUndoListPopup.setAttribute(
-                "onpopupshowing",
-                `window.top.undoTabMenu.populateSidebarSubmenu(this, "Tab")`
+                this.create(doc, "menupopup", {
+                    onpopupshowing: `window.top.undoTabMenu.populateSidebarSubmenu(this, "Tab")`,
+                })
             );
 
             // Recently Closed Windows
-            this.sidebarWindowMenu = doc.createXULElement("menu");
-            this.sidebarWindowMenu.setAttribute("id", "sidebarHistoryUndoWindowMenu3");
-            this.sidebarWindowMenu.setAttribute("label", this.closedWindowsLabel); // localized "Recently Closed Windows"
             let winWords = this.closedWindowsLabel.split(" ");
-            this.sidebarWindowMenu.accessKey =
-                config["Windows access key"] ||
-                (RTL_UI
-                    ? this.closedWindowsLabel.substr(0, 1)
-                    : winWords[winWords.length - 1]?.substr(0, 1) || "W");
+            this.sidebarWindowMenu = this.create(doc, "menu", {
+                id: "sidebarHistoryUndoWindowMenu3",
+                label: this.closedWindowsLabel,
+                accesskey:
+                    config["Windows access key"] ||
+                    (RTL_UI
+                        ? this.closedWindowsLabel.substr(0, 1)
+                        : winWords[winWords.length - 1]?.substr(0, 1) || "W"),
+            });
             context.appendChild(this.sidebarWindowMenu);
 
             this.sidebarUndoWindowPopup = this.sidebarWindowMenu.appendChild(
-                doc.createXULElement("menupopup")
-            );
-            this.sidebarUndoWindowPopup.setAttribute(
-                "onpopupshowing",
-                `window.top.undoTabMenu.populateSidebarSubmenu(this, "Window")`
+                this.create(doc, "menupopup", {
+                    onpopupshowing: `window.top.undoTabMenu.populateSidebarSubmenu(this, "Window")`,
+                })
             );
         }
 
@@ -264,9 +302,9 @@
 
             // list is empty so should be hidden
             if (this.ss[`getClosed${type}Count`](window) == 0) {
-                popup.parentNode.setAttribute("hidden", true);
+                popup.parentNode.hidden = true;
                 return;
-            } else popup.parentNode.removeAttribute("hidden"); // enable menu if it's not empty
+            } else popup.parentNode.hidden = false; // enable menu if it's not empty
 
             // make the list of menuitems
             fragment = RecentlyClosedTabsAndWindowsMenuUtils[`get${type}sFragment`](
@@ -292,9 +330,9 @@
 
             // list is empty so should be hidden
             if (this.ss[`getClosed${type}Count`](window) == 0) {
-                popup.parentNode.setAttribute("hidden", true);
+                popup.parentNode.hidden = true;
                 return;
-            } else popup.parentNode.removeAttribute("hidden"); // enable menu if it's not empty
+            } else popup.parentNode.hidden = false; // enable menu if it's not empty
 
             // make a temporary list of menuitems
             fragment = RecentlyClosedTabsAndWindowsMenuUtils[`get${type}sFragment`](

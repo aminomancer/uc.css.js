@@ -1,4 +1,12 @@
-/* my personal wikipedia dark mode theme. */
+/* my personal wikipedia dark mode theme.
+enable/disable by setting this pref in about:config:
+userChrome.css.wikipedia.dark-theme-enabled */
+
+@-moz-document domain("wikipedia.org"), domain("wikimedia.org") {
+    :root {
+        --wiki-dummy-variable: initial;
+    }
+}
 
 @supports -moz-bool-pref("userChrome.css.wikipedia.dark-theme-enabled") {
 @-moz-document domain("wikipedia.org"), domain("wikimedia.org") {

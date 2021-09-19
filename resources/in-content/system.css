@@ -140,9 +140,9 @@
         --in-content-border-active: var(--purple-40) !important;
         --in-content-border-active-shadow: var(--purple-40-a30) !important;
         --in-content-category-outline-focus: 1px solid transparent !important;
-        --in-content-link-color: var(--purple-35) !important;
-        --in-content-link-color-hover: var(--purple-30) !important;
-        --in-content-link-color-active: var(--purple-30) !important;
+        --in-content-link-color: var(--purple-30) !important;
+        --in-content-link-color-hover: var(--purple-25) !important;
+        --in-content-link-color-active: var(--purple-20) !important;
         --in-content-link-visited-color: var(--pink-40) !important;
         --in-content-link-visited-color-hover: var(--pink-35) !important;
         --in-content-link-visited-color-active: var(--pink-30) !important;
