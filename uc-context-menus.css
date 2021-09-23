@@ -454,7 +454,8 @@ menupopup:not(.PanelUI-subView) menuseparator:last-child {
     padding-bottom: 2px !important;
 }
 
-:is(#context-navigation, #tab-context-navigation) .menuitem-iconic[_moz-menuactive="true"]:not([disabled="true"]) {
+:is(#context-navigation, #tab-context-navigation)
+    .menuitem-iconic[_moz-menuactive="true"]:not([disabled="true"]) {
     background: none !important;
 }
 

@@ -50,6 +50,10 @@
     font-size: 1.04em !important;
 }
 
+.urlbarView .urlbarView-body-inner {
+    border-top: none !important;
+}
+
 #urlbarView-results,
 #urlbar-results {
     border-bottom-left-radius: 4px !important;
@@ -189,6 +193,12 @@
     background-position: 0px 1.5px !important;
 }
 
+.urlbarView[actionoverride]
+    .urlbarView-row[type="switchtab"]
+    .urlbarView-type-icon:-moz-locale-dir(rtl) {
+    background: url(chrome://userchrome/content/skin/back.svg) no-repeat !important;
+}
+
 .urlbarView-row:is([type="switchtab"], [type="remotetab"])
     > .urlbarView-row-inner
     > .urlbarView-no-wrap
@@ -235,7 +245,6 @@
     column-gap: calc(var(--urlbar-icon-padding) + 2px);
 }
 
-.urlbarView-action,
 .urlbarView-url,
 .urlbarView-tags,
 .urlbarView-dynamic-calculator-action,
@@ -245,7 +254,7 @@
 
 .urlbarView-action {
     padding: 0 !important;
-    margin-inline-end: 6px !important;
+    margin-inline: 8px 6px !important;
 }
 
 :root[lwt-toolbar-field-brighttext]
@@ -720,15 +729,66 @@
     fill: var(--panel-description-color);
 }
 
-.urlbarView-help {
-    margin-inline: 3.4px 0 !important;
-    box-shadow: none !important;
-    fill: var(--panel-description-color);
-    background-image: url(chrome://userchrome/content/help.svg) !important;
+.urlbarView-row[has-help] > .urlbarView-row-inner {
+    width: -moz-available !important;
+    flex-grow: 1 !important;
 }
 
-.urlbarView .urlbarView-body-inner {
-    border-top: none !important;
+.urlbarView-row[firefox-suggest-sponsored] > .urlbarView-row-inner > .urlbarView-no-wrap {
+    flex-wrap: nowrap !important;
+}
+
+.urlbarView-help {
+    box-shadow: none !important;
+    outline: none !important;
+    fill: var(--panel-description-color) !important;
+    fill-opacity: 0.6 !important;
+    background-image: url(chrome://userchrome/content/help.svg) !important;
+    margin-inline: -31px 0 !important;
+    width: 27px !important;
+    height: 27px !important;
+    box-sizing: border-box !important;
+}
+
+@supports -moz-bool-pref("userChrome.urlbar-results.hide-help-button") {
+    .urlbarView-help {
+        display: none !important;
+    }
+}
+
+.urlbarView-row[has-help]:is([selected], :hover) .urlbarView-help,
+.urlbarView-row[has-help] .urlbarView-row-inner[selected] ~ .urlbarView-help {
+    fill-opacity: 1 !important;
+}
+
+.urlbarView-help:is([selected], :hover) {
+    fill-opacity: 1 !important;
+    fill: inherit !important;
+}
+
+.urlbarView-row[firefox-suggest-sponsored]
+    > .urlbarView-row-inner
+    > .urlbarView-no-wrap
+    > .urlbarView-favicon {
+    margin-top: revert !important;
+}
+
+.urlbarView-row[firefox-suggest-sponsored]
+    > .urlbarView-row-inner
+    > .urlbarView-no-wrap
+    > .urlbarView-title {
+    margin-block: revert !important;
+}
+
+.urlbarView-row[firefox-suggest-sponsored]
+    > .urlbarView-row-inner
+    > .urlbarView-no-wrap
+    > .urlbarView-action {
+    flex-basis: revert !important;
+    margin-block: revert !important;
+    margin-inline: 8px 6px !important;
+    font-size: 0.85em !important;
+    color: var(--urlbar-popup-action-color) !important;
 }
 
 .urlbarView #urlbar-results {

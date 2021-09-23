@@ -51,11 +51,15 @@ tooltip {
     --menupopup-padding: 0px;
     --menupopup-inner-padding-magnitude: 4px;
     --menupopup-inner-padding: var(--menupopup-inner-padding-magnitude) 0;
-    --context-margin-inline: -14px 0px;
-    --context-padding-inline: 27px 0px;
     --context-checkbox-margin: 6px 7px;
-    --context-iconic-margin: 5px 6px;
-    --context-iconic-special-margin: 4px -2px;
+    --context-iconic-margin-start: 5px;
+    --context-iconic-margin-end: 6px;
+    --context-iconic-margin: var(--context-iconic-margin-start, 5px)
+        var(--context-iconic-margin-end, 6px);
+    --context-iconic-composite-width: calc(
+        16px + var(--context-iconic-margin-start) + var(--context-iconic-margin-end)
+    );
+    --context-padding-inline: var(--context-iconic-composite-width) 0px;
     --menupopup-border-radius: 5px;
     --context-menuitem-border-radius: 3px;
     --menu-right-bg: none;
@@ -208,12 +212,13 @@ tooltip {
     --tab-max-width: 100vw;
     --tabbrowser-arrowscrollbox-display: none;
     /* how round should tab buttons be? e.g. the close button or the sound icon.
-    2px yields a rounded square. 50% yields a circle. it used to be 50% but I changed my mind. */
-    --tab-button-border-radius: 2px;
+    2px yields a rounded square. 50% yields a circle. this affects actual tab buttons,
+    as well as buttons in tab-like elements like the all-tabs menu and my vertical tabs pane script.
+    personally I've settled on circles for small buttons, rounded squares for big buttons. */
+    --tab-button-border-radius: 50%;
     --menuitem-height: 26px;
     --subviewbutton-height: 28px;
     --findbar-height: 22px;
-    --urlbar-element-top-adjust-magnitude: 0.6px;
     --default-identity-icon: url(chrome://userchrome/content/info-filled.svg);
     /* icon used for screenshot buttons. I prefer the second one, but use the first one it if you prefer the vanilla icon */
     /* --screenshot-icon: url(chrome://userchrome/content/skin/screenshot.svg); */
@@ -391,7 +396,9 @@ popupnotification,
 
 /* you can remove the following rule if you want to be able to drag tabs across the whole strip.
 but doing so causes some minor visual bugs with rounded outside tab corners which really bother me for some reason.
-if you do this, you might want to disable rounded outside corners by setting userChrome.tabs.rounded-outer-corners.disabled to false. */
+if you need to be able to autoscroll while dragging, and the visual bugs bother you, then instead of deleting this rule,
+you can simply disable rounded outside corners by setting userChrome.tabs.rounded-outer-corners.disabled to false.
+this will mean only the top corners are rounded, but it'll bring back the scroll buttons without any visual bugs. */
 @supports -moz-bool-pref("userChrome.tabs.rounded-outer-corners.disabled") {
     :root {
         --tabbrowser-arrowscrollbox-display: block;

@@ -80,6 +80,7 @@ For best results, set density mode to `Normal` and theme to `Dark` in the custom
 | userChrome.urlbar.hide-bookmarks-button-on-system-pages | Boolean | true | Hides the urlbar's bookmark button on system pages & new tab page |
 | userChrome.urlbar.hide-pointless-icons | Boolean | true | Hide urlbar notification icons that don't offer any action (e.g. DRM icon) |
 | userChrome.urlbar-results.disable\_animation | Boolean | false | Toggle to true if you don't want the urlbar results to animate as they pop up |
+| userChrome.urlbar-results.hide-help-button | Boolean | true | New "Firefox Suggest" urlbar results have little help buttons. This will hide them |
 | widget.content.allow-gtk-dark-theme | Boolean | true | May style some in-content elements consistently with Linux themes |
 | widget.disable-native-theme-for-content | Boolean | true | Enables Firefox's custom appearance for elements like checkboxes. Skips the "native" appearance given by the OS stylesheets. |
 | <i>widget.macos.native-context-menus</i> | Boolean | false | Required to use some of my scripts on macOS, and for context menu styles on macOS |

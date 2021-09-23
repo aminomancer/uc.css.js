@@ -44,12 +44,28 @@ menupopup.in-menulist > :where(menucaption, menuitem) {
     -moz-box-align: center !important;
 }
 
+#ContentSelectDropdown > menupopup .menu-text,
+menupopup.in-menulist .menu-text,
+#ContentSelectDropdown
+    > menupopup
+    > :where(menucaption, menuitem)
+    > :where(.menu-text, .menu-iconic-text, .menu-iconic-highlightable-text),
+menupopup.in-menulist
+    > :where(menucaption, menuitem)
+    > :where(.menu-text, .menu-iconic-text, .menu-iconic-highlightable-text) {
+    padding-inline: var(--context-padding-inline) !important;
+}
+
+.searchengine-menuitem > .menu-iconic-text,
+.actionsMenu > menupopup > menuitem > .menu-iconic-text {
+    padding-inline-start: 0 !important;
+}
+
 #ContentSelectDropdown
     > menupopup
     :where(menucaption, menuitem)
     > :is(label, .menu-iconic-text, .menu-text),
 menupopup.in-menulist > :where(menucaption, menuitem) > :is(label, .menu-iconic-text, .menu-text) {
-    padding-inline: 8px !important;
     font: menu !important;
 }
 
@@ -151,6 +167,7 @@ menupopup.in-menulist :is(menu, menuitem, menucaption) {
     border-radius: var(--context-menuitem-border-radius);
     border: none !important;
     min-height: var(--menuitem-height) !important;
+    padding-block: 0 !important;
 }
 
 #ContentSelectDropdown > menupopup :is(menu, menuitem, menucaption)[disabled="true"],
@@ -164,11 +181,6 @@ menupopup.in-menulist :is(menu, menuitem, menucaption)[disabled="true"] {
 menupopup.in-menulist .menuitem-iconic {
     -moz-context-properties: fill, fill-opacity;
     fill: currentColor;
-}
-
-#ContentSelectDropdown > menupopup :is(menu, menuitem, menucaption):not([image]) .menu-iconic-left,
-menupopup.in-menulist :is(menu, menuitem, menucaption):not([image]) .menu-iconic-left {
-    display: none;
 }
 
 #ContentSelectDropdown > menupopup :is(menu, menuitem, menucaption) .menu-iconic-icon,
@@ -330,11 +342,6 @@ menupopup.in-menulist > :is(menuitem, menu, menucaption, menugroup, menuseparato
     margin-inline: var(--menupopup-inner-padding-magnitude);
 }
 
-#ContentSelectDropdown > menupopup .menu-text,
-menupopup.in-menulist .menu-text {
-    padding-inline: 8px !important;
-}
-
 link[href="chrome://global/skin/global.css"] ~ .menupopup-arrowscrollbox
 {
     background-color: var(--menu-background-color) !important;
@@ -397,16 +404,6 @@ menupopup.in-menulist menuitem > .menu-iconic-left {
     margin-inline: 0 !important;
 }
 
-#ContentSelectDropdown
-    > menupopup
-    > :where(menucaption, menuitem)[image]
-    > :is(label, .menu-iconic-text, .menu-text),
-menupopup.in-menulist
-    :where(menucaption, menuitem)[image]
-    > :is(label, .menu-iconic-text, .menu-text) {
-    padding-inline-start: 0 !important;
-}
-
 menulist[indicator="true"] > menupopup.in-menulist menuitem:not([image]) > .menu-iconic-left {
     display: -moz-box;
     min-width: unset !important;
@@ -436,7 +433,7 @@ menulist[indicator="true"]
 menulist[indicator="true"]
     menupopup.in-menulist
     > :where(menucaption, menuitem)
-    > :is(label, .menu-iconic-text, .menu-text) {
+    > :is(label, .menu-iconic-text, .menu-text, .menu-iconic-highlightable-text) {
     padding-inline: 0 !important;
     margin-inline: 0 !important;
 }
@@ -451,10 +448,10 @@ menulist[indicator="true"]
     #ContentSelectDropdown
         > menupopup
         :where(menucaption, menuitem)
-        > :is(label, .menu-iconic-text, .menu-text),
+        > :is(label, .menu-iconic-text, .menu-text, .menu-iconic-highlightable-text),
     menupopup.in-menulist
         > :where(menucaption, menuitem)
-        > :is(label, .menu-iconic-text, .menu-text) {
+        > :is(label, .menu-iconic-text, .menu-text, .menu-iconic-highlightable-text) {
         font-family: SF Pro Text, Segoe UI, sans-serif !important;
         font-kerning: normal !important;
     }

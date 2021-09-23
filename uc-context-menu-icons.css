@@ -209,6 +209,7 @@ menuitem[command="downloadsCmd_clearDownloads"] .menu-text,
 #context_shareTabURL > .menu-text,
 menuitem.share-tab-url-item > .menu-text,
 #context_closeTabOptions > .menu-text,
+:is(#context_closeTabsToTheStart, #context_closeTabsToTheEnd, #context_closeOtherTabs) .menu-text,
 #context_undoCloseTab .menu-text,
 #toolbar-context-undoCloseTab .menu-text,
 #context_closeTab .menu-text,
@@ -460,6 +461,7 @@ menuitem#repair-text-encoding:before,
 #context_shareTabURL:before,
 menuitem.share-tab-url-item:before,
 #context_closeTabOptions:before,
+:is(#context_closeTabsToTheStart, #context_closeTabsToTheEnd, #context_closeOtherTabs):before,
 #context_undoCloseTab:before,
 #toolbar-context-undoCloseTab:before,
 #context_closeTab:before,
@@ -569,11 +571,13 @@ menuitem.customize-context-reportExtension:before {
     background-repeat: no-repeat;
 }
 
-#context_moveToStart:before {
+#context_moveToStart:before,
+#context_moveToEnd:-moz-locale-dir(rtl):before {
     background-image: url(chrome://userchrome/content/skin/back.svg);
 }
 
-#context_moveToEnd:before {
+#context_moveToEnd:before,
+#context_moveToStart:-moz-locale-dir(rtl):before {
     background-image: url(chrome://userchrome/content/skin/forward.svg);
 }
 
@@ -831,10 +835,6 @@ menuitem#sanitizeItem:before {
     background-image: url(chrome://userchrome/content/hide-password.svg);
 }
 
-:is(#context-sendlinktodevice, #context-sendpagetodevice):before {
-    background-image: url(chrome://userchrome/content/skin/send-to-device.svg);
-}
-
 :is(#context-selectall, #menu_selectAll):before,
 .textbox-contextmenu menuitem[label="Select All"]:before {
     background-image: url(chrome://userchrome/content/glyph-highlights-16.svg);
@@ -989,15 +989,9 @@ menuitem#repair-text-encoding:before {
     background-image: url(chrome://userchrome/content/skin/sort.svg);
 }
 
-:is(#context-undo, #context_undoCloseTab, #toolbar-context-undoCloseTab, #menu_undo, #undobookmarksmenuUndo):before,
-.textbox-contextmenu menuitem[label="Undo"]:before {
+:is(#context-undo, #context_undoCloseTab, #toolbar-context-undoCloseTab, #menu_undo, #undobookmarksmenuUndo, #context-redo, #menu_redo, #undobookmarksmenuRedo):before,
+.textbox-contextmenu menuitem:is([label="Undo"], [label="Redo"]):before {
     background-image: url(chrome://userchrome/content/undo.svg);
-}
-
-:is(#context-redo, #menu_redo, #undobookmarksmenuRedo):before,
-.textbox-contextmenu menuitem[label="Redo"]:before {
-    background-image: url(chrome://userchrome/content/undo.svg);
-    transform: rotate(180deg);
 }
 
 #placesContext_deleteHost:before {
@@ -1065,18 +1059,30 @@ menuitem#repair-text-encoding:before {
     background-image: url(chrome://userchrome/content/skin/move-tab.svg);
 }
 
-#context_sendTabToDevice:before {
+:is(#context_sendTabToDevice, #context-sendlinktodevice, #context-sendpagetodevice):before {
     background-image: url(chrome://userchrome/content/skin/send-to-device.svg);
 }
 
-#context_shareTabURL:before,
-menuitem.share-tab-url-item:before {
-    background-image: url(chrome://userchrome/content/skin/share.svg);
-    scale: 0.9;
+:is(#context_shareTabURL, menuitem.share-tab-url-item):before {
+    background-image: url(chrome://userchrome/content/skin/share-menu-icon.svg);
 }
 
 :is(#context_closeTabOptions, #menu_close):before {
     background-image: url(chrome://userchrome/content/skin/close-tabs.svg);
+}
+
+#context_closeTabsToTheStart:before,
+#context_closeTabsToTheEnd:-moz-locale-dir(rtl):before {
+    background-image: url(chrome://userchrome/content/skin/select-left.svg);
+}
+
+#context_closeTabsToTheEnd:before,
+#context_closeTabsToTheStart:-moz-locale-dir(rtl):before {
+    background-image: url(chrome://userchrome/content/skin/select-right.svg);
+}
+
+#context_closeOtherTabs:before {
+    background-image: url(chrome://userchrome/content/skin/select-around.svg);
 }
 
 :is(#context_closeTab, #menu_closeWindow):before {
@@ -1233,8 +1239,7 @@ menuitem.viewCustomizeToolbar:before {
     background-image: url(chrome://browser/skin/customize.svg);
 }
 
-menuitem.customize-context-removeFromToolbar:before,
-menuitem.customize-context-removeFromPanel:before {
+menuitem:is(.customize-context-removeFromToolbar, .customize-context-removeFromPanel):before {
     background-image: url(chrome://userchrome/content/undo.svg);
 }
 
@@ -1246,8 +1251,7 @@ menuitem.customize-context-moveToPanel:before {
     background-image: url(chrome://userchrome/content/skin/pin-tab.svg);
 }
 
-menuitem.customize-context-manageExtension:before,
-menuitem.pageActionContextMenuItem.manageExtensionItem:before {
+menuitem:is(.customize-context-manageExtension, .pageActionContextMenuItem.manageExtensionItem):before {
     background-image: url(chrome://userchrome/content/skin/developer.svg);
 }
 
@@ -1283,11 +1287,28 @@ menuitem.customize-context-Options:before {
     background-image: url(chrome://userchrome/content/material/tune.svg);
 }
 
-menuitem.customize-context-removeExtension:before,
-menuitem.pageActionContextMenuItem.removeExtensionItem:before {
+menuitem:is(.customize-context-removeExtension, .pageActionContextMenuItem.removeExtensionItem):before {
     background-image: url(chrome://userchrome/content/material/extension-blocked.svg);
 }
 
 menuitem.customize-context-reportExtension:before {
     background-image: url(chrome://devtools/skin/images/alert.svg);
+}
+
+/* mirror some of the icons for RTL languages/layouts, e.g. icons with arrows or other directional implications */
+:is(#context-reloadframe, #context-reloadimage, menuitem:not(.menuitem-iconic)[oncommand="_ucUtils.restart(true)"]):-moz-locale-dir(rtl):before,
+:is(#context_sendTabToDevice, #context-sendlinktodevice, #context-sendpagetodevice):-moz-locale-dir(rtl):before,
+:is(#context_shareTabURL, menuitem.share-tab-url-item):-moz-locale-dir(rtl):before,
+:is(#context-undo, #context_undoCloseTab, #toolbar-context-undoCloseTab, #menu_undo, #undobookmarksmenuUndo):-moz-locale-dir(rtl):before,
+:is(#context_reloadTab, #context_reloadSelectedTabs, #toolbar-context-reloadSelectedTab, #toolbar-context-reloadSelectedTabs):-moz-locale-dir(rtl):before,
+:is(#context-redo, #menu_redo, #undobookmarksmenuRedo):-moz-locale-dir(ltr):before,
+menuitem:is(.customize-context-removeFromToolbar, .customize-context-removeFromPanel):-moz-locale-dir(rtl):before,
+.textbox-contextmenu
+    menuitem:is([label="Paste and Go"], [label="Paste & Search"]):-moz-locale-dir(rtl):before,
+.textbox-contextmenu menuitem[label="Undo"]:-moz-locale-dir(rtl):before,
+.textbox-contextmenu menuitem[label="Redo"]:-moz-locale-dir(ltr):before,
+#placesContext_deleteHost:-moz-locale-dir(rtl):before,
+menuitem#sanitizeItem:-moz-locale-dir(rtl):before,
+.downloadRemoveFromHistoryMenuItem:-moz-locale-dir(rtl):before {
+    transform: scaleX(-1);
 }

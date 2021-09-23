@@ -84,8 +84,8 @@
 #PanelUI-menu-button[badge-status="update-unsupported"]:is(:hover, [open])
     > .toolbarbutton-badge-stack
     > .toolbarbutton-badge:-moz-window-inactive {
-    background: var(--low-warning-icon-background) url(chrome://userchrome/content/check-partial.svg) no-repeat
-        center/contain !important;
+    background: var(--low-warning-icon-background)
+        url(chrome://userchrome/content/check-partial.svg) no-repeat center/contain !important;
     fill: var(--low-warning-icon-detail) !important;
     transform: none !important;
 }
@@ -237,6 +237,10 @@
 
 #appMenuClearRecentHistory {
     list-style-image: url(chrome://userchrome/content/skin/forget.svg);
+}
+
+#appMenuClearRecentHistory:-moz-locale-dir(rtl) .toolbarbutton-icon {
+    transform: scaleX(-1);
 }
 
 #appMenuRestoreLastSession {
@@ -576,6 +580,10 @@
 
 #PanelUI-fxa-menu-sendtab-button {
     list-style-image: url(chrome://userchrome/content/skin/send-to-device.svg);
+}
+
+#PanelUI-fxa-menu-sendtab-button:-moz-locale-dir(rtl) .toolbarbutton-icon {
+    transform: scaleX(-1);
 }
 
 #PanelUI-fxa-menu-sync-prefs-button {

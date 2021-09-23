@@ -964,19 +964,18 @@ userChrome.css.wikipedia.dark-theme-enabled */
         line-height: 17px !important;
     }
 
-    .vector-body blockquote {
-        border-left: 3px double hsl(0, 1%, 24%) !important;
-        padding: 6px 16px !important;
-    }
-
+    .vector-body blockquote,
     .vector-body .flexquote {
+        padding: 6px 16px !important;
         background-color: hsla(0, 0%, 32%, 0.1) !important;
+        border: none !important;
         border-left: 3px double hsl(0, 1%, 24%) !important;
         border-radius: 0 3px 3px 0 !important;
     }
 
     .mw-body-content blockquote blockquote {
         border: none !important;
+        background: none !important;
     }
 
     /* boxes */
@@ -985,7 +984,6 @@ userChrome.css.wikipedia.dark-theme-enabled */
     .infobox,
     #bodyContent div.thumb,
     .thumbinner,
-    div.thumb div,
     code,
     pre,
     .thumbcaption,
@@ -1021,6 +1019,10 @@ userChrome.css.wikipedia.dark-theme-enabled */
         border-radius: 3px !important;
     }
 
+    .thumbinner .thumbimage {
+        background-color: transparent !important;
+    }
+
     table,
     table.ib-chembox {
         border-style: hidden !important;
@@ -1051,10 +1053,6 @@ userChrome.css.wikipedia.dark-theme-enabled */
 
     table:is([style*="background:none"], [style*="background-color:transparent"]:not([style*="background-image"])) {
         background: none !important;
-    }
-
-    #bodyContent .mw-parser-output > :not([class], [id]) {
-        clear: revert !important;
     }
 
     code {
@@ -1664,6 +1662,11 @@ userChrome.css.wikipedia.dark-theme-enabled */
 
     .ve-ui-mwSaveDialog-summary {
         background-color: transparent !important;
+    }
+
+    .ve-ui-mwSaveDialog-editSummary-count {
+        color: inherit !important;
+        border-color: var(--uc-wiki-popup-border-color) !important;
     }
 
     .ve-ui-overlay a:not([role="button"]) {
@@ -3631,7 +3634,7 @@ userChrome.css.wikipedia.dark-theme-enabled */
         height: 9.5px !important;
         width: 9.5px !important;
         background-image: none !important;
-        background: hsl(0, 0%, 80.4%) !important;
+        /*! background: hsl(0, 0%, 80.4%) !important; */
         box-shadow: 0 0 10px 0px hsla(0, 0%, 0%, 0.1), 0 0 2px 0px hsla(0, 0%, 0%, 0.2) !important;
     }
 
