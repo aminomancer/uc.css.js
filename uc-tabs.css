@@ -42,12 +42,6 @@
     background: var(--tab-multi-hover) !important;
 }
 
-/* optimize tab drag/drop  movement */
-#tabbrowser-tabs[movingtab] .tabbrowser-tab[selected],
-#tabbrowser-tabs .tabbrowser-tab[justmoved] {
-    will-change: transform;
-}
-
 /* block our animations while tabs are being dragged & dropped */
 #tabbrowser-tabs[movingtab] .tabbrowser-tab *,
 #tabbrowser-tabs .tabbrowser-tab[justmoved] * {
@@ -207,6 +201,14 @@ because in this condition tabs are prevented from flexing to the end by the clos
     border-top-left-radius: 0 !important;
 }
 
+#TabsToolbar
+    #tabbrowser-tabs
+    #tabbrowser-arrowscrollbox:not([overflowing="true"])
+    .tabbrowser-tab[last-visible-tab][pinned]
+    :is(.tab-stack, .tab-background, .tab-content, .tab-loading-burst) {
+    border-top-right-radius: 5px !important;
+}
+
 /* set rounded outside corners on tabs so they look like folder labels.
 you can disable this by making a new pref in about:config and setting it to true: "userChrome.tabs.rounded-outer-corners.disabled"
 this CSS is complicated because the outside corner needs to take on the color of the tab,
@@ -290,6 +292,14 @@ or else they'll end up being covered up or showing through things they shouldn't
     .tabbrowser-tab[last-visible-tab]:not([justmoved], [style*="transform"])
     .tab-stack:after {
     display: none;
+}
+
+#TabsToolbar
+    #tabbrowser-tabs
+    #tabbrowser-arrowscrollbox:not([overflowing="true"])
+    .tabbrowser-tab[last-visible-tab][pinned]
+    .tab-stack:after {
+    display: block;
 }
 
 /* how the background color is applied. it's not as convoluted as it looks,
@@ -377,15 +387,6 @@ they must have a 1px tall stripe at the bottom, the color of the bottom line (sh
     pointer-events: none;
 }
 
-#tabbrowser-tabs[movingtab] .tabbrowser-tab[pinned][last-visible-tab] .tab-loading-burst::before,
-.tabbrowser-tab[pinned][last-visible-tab]:is([justmoved], [tab-grouping], [tabdrop-samewindow]),
-.tabbrowser-tab:not([last-visible-tab]) .tab-loading-burst[pinned]::before {
-    margin-inline-start: calc(
-        (var(--pinned-tab-width) / 2) - (var(--pinned-tab-width) * 0.05)
-    ) !important;
-    width: calc(var(--pinned-tab-width) * 0.05) !important;
-}
-
 #TabsToolbar .tab-loading-burst::before {
     backface-visibility: hidden;
 }
@@ -406,7 +407,7 @@ so shadows are cast in both directions, unless the neighboring tab is selected o
 
 /* selected tabs stack over hovered tabs */
 .tabbrowser-tab[visuallyselected="true"] {
-    z-index: 8 !important;
+    z-index: 6 !important;
 }
 
 /* multiselected tabs do too, but lower than selected tabs */
@@ -420,31 +421,30 @@ so shadows are cast in both directions, unless the neighboring tab is selected o
 }
 
 .tabbrowser-tab[multiselected][visuallyselected="true"] {
-    z-index: 8 !important;
+    z-index: 6 !important;
 }
 
 /* pinned tabs stack over everything except selected tabs */
 .tabbrowser-tab[pinned] {
-    z-index: 6 !important;
+    z-index: 7 !important;
 }
 
 /* and the same formula applies to them too */
 .tabbrowser-tab[pinned]:not([visuallyselected="true"], [multiselected]):is(:hover, .keyboard-focused-tab) {
-    z-index: 7 !important;
-}
-
-.tabbrowser-tab[pinned][visuallyselected="true"],
-.tabbrowser-tab[pinned][multiselected] {
     z-index: 8 !important;
 }
 
-.tabbrowser-tab[pinned][multiselected]:not([visuallyselected="true"]):is(:hover, .keyboard-focused-tab) {
+.tabbrowser-tab[pinned][multiselected] {
     z-index: 9 !important;
 }
 
-/* the pinnacle of z-index, the pinned, selected, multiselected tab lol */
-.tabbrowser-tab[pinned][visuallyselected="true"][multiselected] {
+.tabbrowser-tab[pinned][multiselected]:not([visuallyselected="true"]):is(:hover, .keyboard-focused-tab) {
     z-index: 10 !important;
+}
+
+.tabbrowser-tab[pinned][visuallyselected="true"],
+.tabbrowser-tab[pinned][multiselected][visuallyselected="true"] {
+    z-index: 11 !important;
 }
 
 /* pinned tabs should style just like regular tabs except without labels and buttons */
@@ -574,10 +574,7 @@ so shadows are cast in both directions, unless the neighboring tab is selected o
     background-image: url(chrome://userchrome/content/audioMutedButton.svg) !important;
 }
 
-#tabbrowser-tabs:not([movingtab])
-    .tabbrowser-tab:not([tabdrop-samewindow], [justmoved])
-    .tab-content
-    > .tab-icon-sound {
+.tab-icon-sound {
     transition: 0.12s transform ease-in-out, 0.12s opacity ease-in-out, 0.12s margin ease-in-out !important;
 }
 
@@ -608,11 +605,11 @@ so in other words it won't show if audio is playing until you hover the general 
 }
 
 /* when tab is being dragged/dropped, style it like it's hovered */
-#tabbrowser-tabs[movingtab] .tabbrowser-tab[selected] .tab-icon-image {
+#tabbrowser-tabs[movingtab] .tabbrowser-tab[selected]:not([pinned]) .tab-icon-image {
     opacity: 0 !important;
 }
 
-#tabbrowser-tabs[movingtab] .tabbrowser-tab[selected] .tab-close-button {
+#tabbrowser-tabs[movingtab] .tabbrowser-tab[selected]:not([pinned]) .tab-close-button {
     -moz-box-ordinal-group: 0 !important;
     display: -moz-box !important;
     position: relative !important;
@@ -642,13 +639,6 @@ so in other words it won't show if audio is playing until you hover the general 
 }
 
 .tabbrowser-tab:not([pinned]):is(:hover, .keyboard-focused-tab)
-    .tab-close-button:not(:hover, :active),
-#tabbrowser-tabs[movingtab]
-    .tabbrowser-tab[pinned][last-visible-tab]:is(:hover, .keyboard-focused-tab)
-    .tab-close-button:not(:hover, :active),
-.tabbrowser-tab[pinned][last-visible-tab]:is([justmoved], [tab-grouping], [tabdrop-samewindow])
-    .tab-close-button,
-.tabbrowser-tab[pinned][last-visible-tab]:is([justmoved], [tab-grouping], [tabdrop-samewindow]):is(:hover, .keyboard-focused-tab)
     .tab-close-button:not(:hover, :active) {
     opacity: 0.6 !important;
 }
@@ -756,26 +746,12 @@ so in other words it won't show if audio is playing until you hover the general 
 /* hide the close button for pinned tabs. if the last visible tab is pinned, it doesn't hide the close button since the tab doesn't get shrunk in that case.
 this requires you to make a pref in about:config and set it to true: "userChrome.tabs.pinned-tabs.close-buttons.disabled" */
 @supports (-moz-bool-pref("userChrome.tabs.pinned-tabs.close-buttons.disabled")) {
-    .tabbrowser-tab[pinned]:not([last-visible-tab]) .tab-close-button,
-    #tabbrowser-tabs[movingtab] .tabbrowser-tab[pinned] .tab-close-button,
-    .tabbrowser-tab[pinned]:is([justmoved], [tab-grouping], [tabdrop-samewindow])
-        .tab-close-button {
+    .tabbrowser-tab[pinned] .tab-close-button {
         display: none !important;
     }
 
-    #tabbrowser-tabs[movingtab] .tabbrowser-tab[pinned][selected] .tab-icon-image,
-    .tabbrowser-tab[pinned]:is([justmoved], [tab-grouping], [tabdrop-samewindow]) .tab-icon-image,
-    .tabbrowser-tab[pinned]:not([last-visible-tab]) .tab-throbber[busy],
-    .tabbrowser-tab[pinned]:not([busy], [last-visible-tab])
-        :is(.tab-icon-image, .tab-sharing-icon-overlay),
-    .tabbrowser-tab[pinned][last-visible-tab]:is([justmoved], [tab-grouping], [tabdrop-samewindow])
-        .tab-throbber[busy],
-    .tabbrowser-tab[pinned][last-visible-tab]:not([busy]):is([justmoved], [tab-grouping], [tabdrop-samewindow])
-        :is(.tab-icon-image, .tab-sharing-icon-overlay),
-    #tabbrowser-tabs[movingtab] .tabbrowser-tab[pinned][last-visible-tab] .tab-throbber[busy],
-    #tabbrowser-tabs[movingtab]
-        .tabbrowser-tab[pinned][last-visible-tab]:not([busy])
-        :is(.tab-icon-image, .tab-sharing-icon-overlay) {
+    .tabbrowser-tab[pinned] .tab-throbber[busy],
+    .tabbrowser-tab[pinned]:not([busy]) :is(.tab-icon-image, .tab-sharing-icon-overlay) {
         opacity: 1 !important;
         transform: none !important;
     }
@@ -792,8 +768,6 @@ so we make the mask size constant. */
 
 /* hide the sound icon while moving a pinned tab.
 does nothing without restoreTabSoundButton.uc.js since sound icon no longer exists in vanilla firefox. */
-.tabbrowser-tab[pinned]:not([last-visible-tab]) .tab-icon-sound,
-#tabbrowser-tabs[movingtab] .tabbrowser-tab[pinned] .tab-icon-sound,
-.tabbrowser-tab[pinned]:is([justmoved], [tab-grouping], [tabdrop-samewindow]) .tab-icon-sound {
+.tabbrowser-tab[pinned] .tab-icon-sound {
     display: none !important;
 }

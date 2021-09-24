@@ -297,27 +297,6 @@ this sheet controls their appearance as well. */
     appearance: none !important;
 }
 
-.titlebar-min,
-#minimize-button {
-    appearance: none !important;
-    padding: 0px !important;
-    padding-left: 7px !important;
-    padding-right: 7px !important;
-    margin-left: 0px !important;
-    margin-right: 0px !important;
-    margin-top: 0px !important;
-    margin-bottom: 0px !important;
-    background-color: transparent !important;
-    list-style-image: url(chrome://userchrome/content/window/minimize.svg) !important;
-    grid-column: 2 !important;
-    order: 2 !important;
-}
-
-.titlebar-min:hover,
-#minimize-button:hover {
-    list-style-image: url(chrome://userchrome/content/window/minimize-hover.svg) !important;
-}
-
 .titlebar-max,
 .titlebar-restore,
 #restore-button {
@@ -333,7 +312,7 @@ this sheet controls their appearance as well. */
     list-style-image: url(chrome://userchrome/content/window/maximize.svg) !important;
     grid-column: 1 !important;
     order: 1 !important;
-    -moz-box-ordinal-group: 0 !important;
+    -moz-box-ordinal-group: 1 !important;
 }
 
 .titlebar-max:hover {
@@ -344,6 +323,26 @@ this sheet controls their appearance as well. */
 .titlebar-restore:hover,
 #restore-button:hover {
     list-style-image: url(chrome://userchrome/content/window/maximize-restore.svg) !important;
+}
+
+.titlebar-min,
+#minimize-button {
+    appearance: none !important;
+    padding: 0px !important;
+    padding-left: 7px !important;
+    padding-right: 7px !important;
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+    background-color: transparent !important;
+    list-style-image: url(chrome://userchrome/content/window/minimize.svg) !important;
+    -moz-box-ordinal-group: 2 !important;
+}
+
+.titlebar-min:hover,
+#minimize-button:hover {
+    list-style-image: url(chrome://userchrome/content/window/minimize-hover.svg) !important;
 }
 
 .titlebar-close,
@@ -358,8 +357,7 @@ this sheet controls their appearance as well. */
     margin-bottom: 0px !important;
     background-color: transparent !important;
     list-style-image: url(chrome://userchrome/content/window/close.svg) !important;
-    grid-column: 3 !important;
-    order: 3 !important;
+    -moz-box-ordinal-group: 3 !important;
 }
 
 .titlebar-close:hover,
@@ -633,6 +631,18 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
     -moz-box-ordinal-group: 0 !important;
 }
 
+:root:is([operatingsystem="macosx"], [operatingsystem="linux"]) :is(.titlebar-min, #minimize-button) {
+    -moz-box-ordinal-group: 2 !important;
+}
+
+:root:is([operatingsystem="macosx"], [operatingsystem="linux"]) :is(.titlebar-max, .titlebar-restore, #restore-button) {
+    -moz-box-ordinal-group: 3 !important;
+}
+
+:root:is([operatingsystem="macosx"], [operatingsystem="linux"]) :is(.titlebar-close, #close-button) {
+    -moz-box-ordinal-group: 1 !important;
+}
+
 :root:is([operatingsystem="macosx"], [operatingsystem="linux"]) #TabsToolbar,
 :root:is([operatingsystem="macosx"], [operatingsystem="linux"]) #toolbar-menubar[inactive="true"] ~ #TabsToolbar {
 	padding-inline: 4px 3px !important;
@@ -693,6 +703,22 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
     #window-controls,
     #toolbar-menubar > .titlebar-buttonbox-container {
         -moz-box-ordinal-group: 0 !important;
+    }
+
+    .titlebar-min,
+    #minimize-button {
+        -moz-box-ordinal-group: 2 !important;
+    }
+
+    .titlebar-max,
+    .titlebar-restore,
+    #restore-button {
+        -moz-box-ordinal-group: 3 !important;
+    }
+
+    .titlebar-close,
+    #close-button {
+        -moz-box-ordinal-group: 1 !important;
     }
 
     #toolbar-menubar > spacer,
