@@ -45,6 +45,17 @@ findbar[hidden] {
     transform: translateY(-2em);
 }
 
+@supports -moz-bool-pref("userChrome.findbar.hide-on-unfocus") {
+    findbar:not(:focus-within) {
+        margin-bottom: auto !important;
+        visibility: visible !important;
+        transition: all 0.2s ease-in-out 0s !important;
+        pointer-events: none;
+        transform: translateY(-2em);
+        opacity: 0;
+    }
+}
+
 #sidebar-box[hidden="true"] ~ #appcontent findbar,
 #sidebar-box:not([positionend="true"]) ~ #appcontent findbar {
     left: auto !important;

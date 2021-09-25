@@ -71,6 +71,7 @@ For best results, set density mode to `Normal` and theme to `Dark` in the custom
 | userChrome.css.titlebar-buttons-on-left | Boolean | false | If true, move the titlebar buttons (close/min/max) to the left side of the window |
 | userChrome.css.ctrl-tab-backdrop-overlay | Boolean | true | If true, dim the rectangular area behind the Ctrl+tab panel to increase contrast |
 | userChrome.css.wikipedia.dark-theme-enabled | Boolean | true | Enable the custom dark theme for Wikipedia.org |
+| userChrome.findbar.hide-on-unfocus | Boolean | false | Automatically hide the findbar when you blur (unfocus) it |
 | userChrome.panels.allow-height-flex | Boolean | false | If true, allow panels to flex down in height. Will cause stutters on weaker hardware |
 | userChrome.tabs.all-tabs-menu.reverse-order | Boolean | true | Display the all tabs menu in reverse order (newer tabs on top, like history) |
 | userChrome.tabs.new-loading-spinner-animation | Boolean | true | Replace the tab loading throbber with a spinning animation |
