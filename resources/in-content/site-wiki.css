@@ -967,7 +967,7 @@ userChrome.css.wikipedia.dark-theme-enabled */
     .vector-body blockquote,
     .vector-body .flexquote {
         padding: 6px 16px !important;
-        background-color: hsla(0, 0%, 32%, 0.1) !important;
+        background-color: var(--uc-wiki-box-bg) !important;
         border: none !important;
         border-left: 3px double hsl(0, 1%, 24%) !important;
         border-radius: 0 3px 3px 0 !important;
@@ -976,6 +976,12 @@ userChrome.css.wikipedia.dark-theme-enabled */
     .mw-body-content blockquote blockquote {
         border: none !important;
         background: none !important;
+    }
+
+    .quotebox blockquote {
+        border: none !important;
+        background: none !important;
+        padding: 0 !important;
     }
 
     /* boxes */
@@ -3653,11 +3659,13 @@ userChrome.css.wikipedia.dark-theme-enabled */
         color: var(--blue) !important;
     }
 
-    span[style="color:red"] {
+    span[style="color:red"],
+    .example-bad {
         color: var(--red) !important;
     }
 
-    span[style="color:green"] {
+    span[style="color:green"],
+    .example:not(.example-bad)[style*="color: #006400"] {
         color: var(--green) !important;
     }
 

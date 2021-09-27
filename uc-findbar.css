@@ -63,12 +63,12 @@ findbar[hidden] {
 }
 
 .findbar-closebutton {
-    padding: 0 4px !important;
+    padding: 0 0 0 4px !important;
     margin-inline: 3px 0 !important;
     margin-block: 0 !important;
     background: none !important;
     -moz-box-ordinal-group: 2 !important;
-    /* I use findbarMatchesLabel.uc.js to actually move the icon to the right side, so the tab index will be correct.
+    /* I use findbarMods.uc.js to actually move the icon to the right side, so the tab index will be correct.
     But -moz-box-ordinal-group is a decent, (purely visual) alternative if you don't use scripts. */
 }
 
@@ -154,7 +154,7 @@ findbar .matches-indicator {
 @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
     findbar .matches-indicator {
         font-weight: var(--uc-font-weight-thin, 300) !important;
-        line-height: 23px !important;
+        line-height: var(--findbar-height, 22px) !important;
     }
 }
 
@@ -167,7 +167,9 @@ findbar .matches-indicator {
     transition-duration: 400ms;
 }
 
-[anonid="findbar-textbox-wrapper"]:focus-within .findbar-textbox:not([status="notfound"]) ~ .matches-indicator {
+[anonid="findbar-textbox-wrapper"]:focus-within
+    .findbar-textbox:not([status="notfound"])
+    ~ .matches-indicator {
     background-color: var(--search-box-focus);
 }
 
@@ -289,6 +291,15 @@ findbar .matches-indicator {
     opacity: 0.4 !important;
     appearance: none !important;
     display: -moz-inline-box !important;
+}
+
+.findbar-textbox.minimal
+    ~ :is(.findbar-case-sensitive, .findbar-entire-word, .findbar-find-previous, .findbar-find-next) {
+    display: none !important;
+}
+
+.findbar-textbox.minimal ~ .matches-indicator {
+    margin-inline-end: 6px !important;
 }
 
 :is(.findbar-entire-word, .findbar-case-sensitive) :is(.checkbox-check, .checkbox-label) {
