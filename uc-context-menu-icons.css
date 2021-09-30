@@ -245,20 +245,24 @@ menu#fill-login > .menu-text,
 menuitem#manage-saved-logins > .menu-text,
 menuitem#fill-login-generated-password > .menu-text,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
-    :is(menu, menuitem)[label="Bitwarden"]
-    :is(menu, menuitem)[label="Auto-fill"]
+    #_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root
+    :is(menu, menuitem)[id$="-menuitem-_autofill"]
     > .menu-text,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
-    :is(menu, menuitem)[label="Bitwarden"]
-    :is(menu, menuitem)[label="Copy Username"]
+    #_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root
+    :is(menu, menuitem)[id$="-menuitem-_copy-username"]
     > .menu-text,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
-    :is(menu, menuitem)[label="Bitwarden"]
-    :is(menu, menuitem)[label="Copy Password"]
+    #_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root
+    :is(menu, menuitem)[id$="-menuitem-_copy-password"]
     > .menu-text,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
-    :is(menu, menuitem)[label="Bitwarden"]
-    :is(menu, menuitem)[label*="Generate Password"]
+    #_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root
+    :is(menu, menuitem)[id$="-menuitem-_generate-password"]
+    > .menu-text,
+:is(#contentAreaContextMenu, #toolbar-context-menu)
+    #_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root
+    :is(menu, menuitem)[id$="-menuitem-_copy-identifier"]
     > .menu-text,
 #_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root:not(.menuitem-iconic, .menu-iconic)
     > .menu-text,
@@ -290,6 +294,7 @@ menuitem.customize-context-Manifest > .menu-text,
 menu.customize-context-ViewDocs-Submenu > .menu-text,
 menuitem.customize-context-BrowserAction > .menu-text,
 menuitem.customize-context-PageAction > .menu-text,
+menuitem.customize-context-SidebarAction > .menu-text,
 menuitem.customize-context-Options > .menu-text,
 menuitem.pageActionContextMenuItem.manageExtensionItem > .menu-text,
 menuitem.customize-context-removeExtension > .menu-text,
@@ -517,17 +522,20 @@ menu#fill-login:before,
 menuitem#manage-saved-logins:before,
 menuitem#fill-login-generated-password:before,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
-    :is(menu, menuitem)[label="Bitwarden"]
-    :is(menu, menuitem)[label="Auto-fill"]:before,
+    #_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root
+    :is(menu, menuitem)[id$="-menuitem-_autofill"]:before,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
-    :is(menu, menuitem)[label="Bitwarden"]
-    :is(menu, menuitem)[label="Copy Username"]:before,
+    #_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root
+    :is(menu, menuitem)[id$="-menuitem-_copy-username"]:before,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
-    :is(menu, menuitem)[label="Bitwarden"]
-    :is(menu, menuitem)[label="Copy Password"]:before,
+    #_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root
+    :is(menu, menuitem)[id$="-menuitem-_copy-password"]:before,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
-    :is(menu, menuitem)[label="Bitwarden"]
-    :is(menu, menuitem)[label*="Generate Password"]:before,
+    #_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root
+    :is(menu, menuitem)[id$="-menuitem-_generate-password"]:before,
+:is(#contentAreaContextMenu, #toolbar-context-menu)
+    #_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root
+    :is(menu, menuitem)[id$="-menuitem-_copy-identifier"]:before,
 #_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root:not(.menuitem-iconic, .menu-iconic):before,
 #_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-manager:not(.menuitem-iconic, .menu-iconic):before,
 #_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-options:not(.menuitem-iconic, .menu-iconic):before,
@@ -552,6 +560,7 @@ menuitem.customize-context-Manifest:before,
 menu.customize-context-ViewDocs-Submenu:before,
 menuitem.customize-context-BrowserAction:before,
 menuitem.customize-context-PageAction:before,
+menuitem.customize-context-SidebarAction:before,
 menuitem.customize-context-Options:before,
 menuitem.pageActionContextMenuItem.manageExtensionItem:before,
 menuitem.customize-context-removeExtension:before,
@@ -1175,30 +1184,36 @@ menuitem#enableDeveloperTools:before {
 }
 
 :is(#contentAreaContextMenu, #toolbar-context-menu)
-    :is(menu, menuitem)[label="Bitwarden"]
-    :is(menu, menuitem)[label="Auto-fill"]:before {
+    #_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root
+    :is(menu, menuitem)[id$="-menuitem-_autofill"]:before {
     background-image: url(chrome://userchrome/content/formfill.svg);
 }
 
 menuitem#manage-saved-logins:before,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
-    :is(menu, menuitem)[label="Bitwarden"]
-    :is(menu, menuitem)[label="Copy Username"]:before {
+    #_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root
+    :is(menu, menuitem)[id$="-menuitem-_copy-username"]:before {
     background-image: url(chrome://userchrome/content/fxa/avatar-empty.svg);
 }
 
 menu#fill-login:before,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
-    :is(menu, menuitem)[label="Bitwarden"]
-    :is(menu, menuitem)[label="Copy Password"]:before {
+    #_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root
+    :is(menu, menuitem)[id$="-menuitem-_copy-password"]:before {
     background-image: url(chrome://userchrome/content/skin/login.svg);
 }
 
 menuitem#fill-login-generated-password:before,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
-    :is(menu, menuitem)[label="Bitwarden"]
-    :is(menu, menuitem)[label*="Generate Password"]:before {
+    #_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root
+    :is(menu, menuitem)[id$="-menuitem-_generate-password"]:before {
     background-image: url(chrome://userchrome/content/generate-password.svg);
+}
+
+:is(#contentAreaContextMenu, #toolbar-context-menu)
+    #_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root
+    :is(menu, menuitem)[id$="-menuitem-_copy-identifier"]:before {
+    background-image: url(chrome://userchrome/content/devtools/tool-dom.svg);
 }
 
 :is(menu, menuitem)[id^="multithreaded-download-manager"]:is([label="Open in new tab"], [label="Open in new window"], [label="Open in sidebar"])
@@ -1281,6 +1296,10 @@ menuitem.customize-context-BrowserAction:before {
 
 menuitem.customize-context-PageAction:before {
     background-image: url(chrome://userchrome/content/skin/readerMode.svg);
+}
+
+menuitem.customize-context-SidebarAction:before {
+    background-image: url(chrome://userchrome/content/skin/sidebars.svg);
 }
 
 menuitem.customize-context-Options:before {
