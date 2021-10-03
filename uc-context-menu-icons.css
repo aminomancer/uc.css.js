@@ -276,6 +276,8 @@ menuitem#fill-login-generated-password > .menu-text,
     > .menu-text,
 #ublock0_raymondhill_net-menuitem-_uBlock0-blockElement:not(.menuitem-iconic, .menu-iconic)
     > .menu-text,
+#ublock0_raymondhill_net-menuitem-_uBlock0-blockElementInFrame:not(.menuitem-iconic, .menu-iconic)
+    > .menu-text,
 :is(menu, menuitem)[id^="multithreaded-download-manager"]:is([label="Open in new tab"], [label="Open in new window"], [label="Open in sidebar"])
     > .menu-iconic-text,
 #menu_customizeToolbars .menu-text,
@@ -543,6 +545,7 @@ menuitem#fill-login-generated-password:before,
 #toolbar-context-menu
     :is(menu, menuitem)[id^="jid1-bycqofyfmbmd9a_jetpack-menuitem"]:not(.menuitem-iconic, .menu-iconic):before,
 #ublock0_raymondhill_net-menuitem-_uBlock0-blockElement:not(.menuitem-iconic, .menu-iconic):before,
+#ublock0_raymondhill_net-menuitem-_uBlock0-blockElementInFrame:not(.menuitem-iconic, .menu-iconic):before,
 :is(menu, menuitem)[id^="multithreaded-download-manager"]:is([label="Open in new tab"], [label="Open in new window"], [label="Open in sidebar"]):before,
 #menu_customizeToolbars:before,
 menuitem.viewCustomizeToolbar:before,

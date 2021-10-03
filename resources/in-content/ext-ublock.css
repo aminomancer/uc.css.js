@@ -4,9 +4,6 @@
 {
     @media (prefers-color-scheme: dark) {
         :root {
-            --bg-1: hsla(250, 13%, 9%, 1) !important;
-            --bg-1-border: hsla(250, 13%, 16%, 1) !important;
-            --bg-overlay-50: hsla(0, 0%, 0%, 0.5) !important;
             --link-ink: hsl(266.9, 95.2%, 75.7%) !important;
             --checkbox-checked-ink: hsl(266.9, 95.2%, 75.7%) !important;
             --dashboard-tab-active-ink: hsl(266.9, 95.2%, 75.7%) !important;
@@ -87,6 +84,7 @@
             --cm-selection-ink: var(--default-ink) !important;
             --button-surface: var(--light-gray-10-a12) !important;
             --button-ink: var(--default-ink) !important;
+            --sf-keyword-ink: var(--purple-25) !important;
             --button-surface-hover: var(--dark-gray-30) !important;
             --button-active-surface: var(--light-gray-70) !important;
             --button-important-surface: var(--dark-gray-30) !important;
@@ -102,7 +100,7 @@
             --checkbox-hover-ink: hsl(266.9, 35.2%, 35.7%) !important;
         }
 
-        body {
+        :root:not([#ublock0-epicker]) body {
             background-color: hsl(250, 13%, 9%) !important;
         }
 
@@ -172,7 +170,6 @@
 
         select {
             appearance: none !important;
-            appearance: none !important;
             background-color: var(--dark-gray-30) !important;
             color: var(--default-ink) !important;
             border: none !important;
@@ -183,17 +180,33 @@
 
         select > option {
             appearance: none !important;
-            appearance: none !important;
             background-color: var(--dark-gray-30) !important;
             color: var(--default-ink) !important;
             border: none !important;
         }
 
+        input[type="number"],
+        input[type="search"] {
+            appearance: none !important;
+            background-color: var(--dark-gray-30) !important;
+            color: var(--default-ink) !important;
+            border: none !important;
+            border-radius: 3px !important;
+            padding-block: 3px !important;
+            padding-inline: 3px !important;
+        }
+
         .cm-search-widget .fa-icon:not(.fa-icon-ro):hover {
             fill: white !important;
         }
+
         .cm-search-widget .cm-search-widget-button:hover {
             color: white !important;
+        }
+
+        #diff,
+        #advancedSettings {
+            border-color: var(--cm-gutter-border) !important;
         }
     }
 }

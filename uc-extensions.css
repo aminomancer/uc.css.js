@@ -438,6 +438,11 @@ there's no need for a context menu item except when right-clicking something par
     background-image: url(chrome://userchrome/content/hide-password.svg);
 }
 
+#ublock0_raymondhill_net-menuitem-_uBlock0-blockElementInFrame:not(.menuitem-iconic, .menu-iconic):before {
+    fill-opacity: 0.3;
+    background-image: url(chrome://userchrome/content/devtools/command-frames.svg);
+}
+
 /* bitwarden context menu icon */
 #contentAreaContextMenu
     :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"]

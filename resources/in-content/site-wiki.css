@@ -466,10 +466,6 @@ userChrome.css.wikipedia.dark-theme-enabled */
         fill-opacity: 1 !important;
     }
 
-    .vector-menu-tabs li a span {
-        filter: invert(1) hue-rotate(180deg) brightness(0.7) contrast(2) !important;
-    }
-
     /* logo */
     #mw-head:before {
         position: relative !important;
