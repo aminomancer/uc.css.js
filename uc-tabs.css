@@ -707,7 +707,7 @@ so in other words it won't show if audio is playing until you hover the general 
 
     .tab-throbber::before {
         content: "" !important;
-        background-image: url(chrome://userchrome/content/loading-spinner.svg) !important;
+        background-image: url(chrome://userchrome/content/loading-spinner-css.svg) !important;
         background-position: center !important;
         background-repeat: no-repeat !important;
         -moz-context-properties: fill, fill-opacity !important;
@@ -731,13 +731,13 @@ so in other words it won't show if audio is playing until you hover the general 
     }
 
     .tab-throbber-tabslist[busy] {
-        list-style-image: url(chrome://userchrome/content/loading-spinner.svg) !important;
+        list-style-image: url(chrome://userchrome/content/loading-spinner-css.svg) !important;
         opacity: 0.8 !important;
         fill: var(--busy-throbber-fill) !important;
     }
 
     .tab-throbber-tabslist[progress] {
-        list-style-image: url(chrome://userchrome/content/loading-spinner.svg) !important;
+        list-style-image: url(chrome://userchrome/content/loading-spinner-css.svg) !important;
         opacity: 1 !important;
         fill: var(--loading-throbber-fill) !important;
     }

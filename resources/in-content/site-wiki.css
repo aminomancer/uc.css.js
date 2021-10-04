@@ -244,6 +244,7 @@ userChrome.css.wikipedia.dark-theme-enabled */
         --uc-wiki-box-bg: hsl(240, 1.4%, 13.9%);
         --uc-wiki-panel-bg: hsla(0, 0%, 3.1%, 0.7);
         --uc-wiki-table-header-bg: hsl(240, 5.6%, 7.1%);
+        --uc-wiki-table-border-color: hsl(240, 1.4%, 19%);
         --uc-wiki-popup-bg: hsl(240, 1.4%, 19%);
         --uc-wiki-popup-border-color: hsl(240, 1.4%, 29%);
         --uc-wiki-link-color: hsl(211.6, 63.6%, 72%);
@@ -1057,6 +1058,10 @@ userChrome.css.wikipedia.dark-theme-enabled */
         background: none !important;
     }
 
+    .table-na {
+        background-color: var(--uc-wiki-popup-bg) !important;
+    }
+
     code {
         font-family: "Source Code Pro", monospace !important;
         border-color: hsl(195, 8.7%, 9%) !important;
@@ -1073,7 +1078,6 @@ userChrome.css.wikipedia.dark-theme-enabled */
     .infobox,
     .vertical-navbox,
     .mergedtoprow,
-    table.infobox > tbody:first-child > tr:first-child > th,
     .metadata:not(.ambox),
     .mbox-small,
     .quotebox,
@@ -1278,7 +1282,7 @@ userChrome.css.wikipedia.dark-theme-enabled */
     }
 
     table.wikitable {
-        border-color: hsl(212, 8.8%, 17.5%) !important;
+        border-color: var(--uc-wiki-table-border-color) !important;
     }
 
     table.wikitable > tr > th,
@@ -1287,13 +1291,13 @@ userChrome.css.wikipedia.dark-theme-enabled */
     table.wikitable > * > tr > td {
         font-size: 1rem !important;
         color: var(--uc-wiki-text-80) !important;
-        border-color: hsl(212, 8.8%, 17.5%) !important;
+        border-color: var(--uc-wiki-table-border-color) !important;
     }
 
     table.wikitable > * > tr > th.headerSort {
         font-size: 1rem !important;
         color: #000 !important;
-        border-color: hsl(212, 8.8%, 17.5%) !important;
+        border-color: var(--uc-wiki-table-border-color) !important;
     }
 
     table.wikitable > tr > th,
@@ -1342,9 +1346,26 @@ userChrome.css.wikipedia.dark-theme-enabled */
         border-top: 1px solid var(--uc-wiki-popup-border-color) !important;
     }
 
-    .mw-parser-output .sidebar-collapse .sidebar-above,
-    .mw-parser-output .sidebar-collapse .sidebar-below {
+    .mw-parser-output .sidebar-collapse :where(.sidebar-above, .sidebar-below) {
         border-color: var(--uc-wiki-popup-border-color) !important;
+        display: flex !important;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: center;
+        width: -moz-available !important;
+    }
+
+    .mw-parser-output .sidebar-collapse :where(.sidebar-above, .sidebar-below)[style*="background"] {
+        background: var(--uc-wiki-popup-bg) !important;
+        color: inherit !important;
+    }
+
+    .mw-parser-output .sidebar-collapse .sidebar-above {
+        margin-bottom: 4px !important;
+    }
+
+    .mw-parser-output .sidebar-collapse .sidebar-below {
+        margin-top: 4px !important;
     }
 
     .sidebar-list-content {
@@ -2598,7 +2619,7 @@ userChrome.css.wikipedia.dark-theme-enabled */
 
     .mw-parser-output .static-row-numbers.wikitable tr::before {
         background-color: var(--uc-wiki-table-header-bg) !important;
-        border-color: hsl(212, 8.8%, 17.5%) !important;
+        border-color: var(--uc-wiki-table-border-color) !important;
     }
 
     tbody tr td div[style*="background-color: lavender" i] {
@@ -4174,6 +4195,10 @@ userChrome.css.wikipedia.dark-theme-enabled */
         padding: 0.4em !important;
     }
 
+    .mw-parser-output .sidebar-title-with-pretitle {
+        padding: 0 0.4em 0.4em !important;
+    }
+
     .mw-parser-output .sidebar-pretitle[style*="background"] {
         background-color: var(--uc-wiki-table-header-bg) !important;
     }
@@ -4382,6 +4407,27 @@ userChrome.css.wikipedia.dark-theme-enabled */
 
     .ve-ce-mwEntityNode-nbsp {
         background-color: hsl(240, 2%, 20%) !important;
+    }
+
+    ul.mw-gallery-packed-hover li.gallerybox:hover div.gallerytextwrapper,
+    ul.mw-gallery-packed-overlay li.gallerybox div.gallerytextwrapper,
+    ul.mw-gallery-packed-hover li.gallerybox.mw-gallery-focused div.gallerytextwrapper {
+        left: 5px !important;
+        bottom: 5px !important;
+        margin: 0 5px !important;
+        padding: 5px !important;
+        background: none !important;
+    }
+
+    ul.mw-gallery-packed-hover div.gallerytextwrapper .gallerytext {
+        background: none !important;
+        color: inherit !important;
+        border-radius: 3px !important;
+        margin: 0 -5px !important;
+        border: 1px solid hsla(230, 3.9%, 18%, 0.5) !important;
+        background-image: var(--acrylic-texture) !important;
+        backdrop-filter: blur(7px) !important;
+        background-color: hsla(230, 3.9%, 2%, 0.8) !important;
     }
 }
 }
