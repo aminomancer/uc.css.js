@@ -108,13 +108,11 @@
 
     .dropdown__list__item {
         background-color: var(--uc-panel-box-solid) !important;
-        border-radius: 0.65rem;
     }
 
     .mobile .theme-preset-picker .dropdown__list,
     .preview .theme-preset-picker .dropdown__list {
         border: none;
-        border-radius: 0.75rem;
         box-shadow: 0 0 0 0.125rem var(--uc-panel-button-solid),
             0 0 0.25rem 0.1875rem hsla(0, 0%, 0%, 0.5) !important;
     }
@@ -158,6 +156,28 @@
 
     .darkreader-version {
         opacity: 0.4;
-        margin-bottom: 10px !important;
+        margin-bottom: -4px !important;
+    }
+
+    .news-section {
+        background: none !important;
+    }
+
+    .news-section__main-link {
+        font-weight: initial !important;
+        color: var(--in-content-link-color) !important;
+    }
+
+    .news-section__main-link:is(:hover, :focus-visible) {
+        color: var(--in-content-link-color-hover) !important;
+    }
+
+    .news-section__main-link:active {
+        color: var(--in-content-link-color-active) !important;
+    }
+
+    .m-donate-button__text {
+        transform: none !important;
+        font-style: italic !important;
     }
 }

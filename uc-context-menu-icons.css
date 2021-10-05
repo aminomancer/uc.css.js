@@ -11,6 +11,7 @@ menupopup
 #context-viewbgimage .menu-text,
 #context-savepage .menu-text,
 menu#pageStyleMenu > .menu-text,
+#addon_darkreader_org-menuitem-_DarkReader-addSite .menu-text,
 #viewFullZoomMenu > .menu-text,
 :is(#menu_zoomEnlarge, #menu_zoomReduce, #menu_zoomReset) .menu-text,
 #viewToolbarsMenu > .menu-text,
@@ -126,6 +127,7 @@ menuitem#repair-text-encoding .menu-text,
 #context-viewframeinfo .menu-text,
 menuitem#menu_openDownloads .menu-text,
 menuitem#menu_openAddons .menu-text,
+#addon_darkreader_org-menuitem-_DarkReader-toggle .menu-text,
 #menu_pageInfo .menu-text,
 menuitem:is(#sync-setup, #sync-unverifieditem, #sync-reauthitem) .menu-text,
 menuitem:is(#sync-enable, #sync-syncnowitem) .menu-text,
@@ -282,6 +284,7 @@ menuitem#fill-login-generated-password > .menu-text,
     > .menu-iconic-text,
 #menu_customizeToolbars .menu-text,
 menuitem.viewCustomizeToolbar > .menu-text,
+#addon_darkreader_org-menuitem-_DarkReader-switchEngine .menu-text,
 menuitem.customize-context-removeFromToolbar > .menu-text,
 menuitem.customize-context-removeFromPanel > .menu-text,
 menuitem.customize-context-moveToToolbar > .menu-text,
@@ -334,6 +337,7 @@ menuitem:not(.menuitem-iconic)[oncommand="_ucUtils.restart(true)"]:before,
 #context-viewframeinfo:before,
 menuitem#menu_openDownloads:before,
 menuitem#menu_openAddons:before,
+#addon_darkreader_org-menuitem-_DarkReader-toggle:before,
 #menu_pageInfo:before,
 menuitem:is(#sync-setup, #sync-unverifieditem, #sync-reauthitem):before,
 menuitem:is(#sync-enable, #sync-syncnowitem):before,
@@ -341,7 +345,7 @@ menu#webDeveloperMenu:not(.menu-iconic):before,
 menuitem#menu_preferences:before,
 #context-viewbgimage:before,
 #context-setDesktopBackground:before,
-:is(#context-savepage, menu#pageStyleMenu):before,
+:is(#context-savepage, menu#pageStyleMenu, #addon_darkreader_org-menuitem-_DarkReader-addSite):before,
 #viewFullZoomMenu:before,
 :is(#menu_zoomEnlarge, #menu_zoomReduce, #menu_zoomReset):before,
 #viewToolbarsMenu:before,
@@ -549,6 +553,7 @@ menuitem#fill-login-generated-password:before,
 :is(menu, menuitem)[id^="multithreaded-download-manager"]:is([label="Open in new tab"], [label="Open in new window"], [label="Open in sidebar"]):before,
 #menu_customizeToolbars:before,
 menuitem.viewCustomizeToolbar:before,
+#addon_darkreader_org-menuitem-_DarkReader-switchEngine:before,
 menuitem.customize-context-removeFromToolbar:before,
 menuitem.customize-context-removeFromPanel:before,
 menuitem.customize-context-moveToToolbar:before,
@@ -732,7 +737,8 @@ menuitem#menu_openDownloads:before {
     background-image: url(chrome://userchrome/content/downloads/downloads.svg);
 }
 
-menuitem#menu_openAddons:before {
+menuitem#menu_openAddons:before,
+#addon_darkreader_org-menuitem-_DarkReader-toggle:before {
     background-image: url(chrome://browser/content/extension.svg);
 }
 
@@ -764,7 +770,7 @@ menuitem#menu_preferences:before {
     background-image: url(chrome://userchrome/content/notifications/canvas.svg);
 }
 
-:is(#context-savepage, menu#pageStyleMenu):before {
+:is(#context-savepage, menu#pageStyleMenu, #addon_darkreader_org-menuitem-_DarkReader-addSite):before {
     background-image: url(chrome://userchrome/content/document.svg);
 }
 
@@ -1253,7 +1259,8 @@ menuitem#fill-login-generated-password:before,
 }
 
 #menu_customizeToolbars:before,
-menuitem.viewCustomizeToolbar:before {
+menuitem.viewCustomizeToolbar:before,
+#addon_darkreader_org-menuitem-_DarkReader-switchEngine:before {
     background-image: url(chrome://browser/skin/customize.svg);
 }
 

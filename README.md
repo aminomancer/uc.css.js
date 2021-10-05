@@ -15,10 +15,13 @@ My personal Firefox theme/layout, plus some privileged scripts to add new behavi
 For best results, set density mode to `Normal` and theme to `Dark` in the customization menu. (right click on the navbar and click "Customize Toolbar...") I strongly recommend using this on [Firefox Nightly](https://www.mozilla.org/en-US/firefox/channel/desktop/#nightly) and updating the theme at least weekly. To that end, you might find it easier to clone the repo to your chrome folder so you can pull updates quickly. I also recommend setting the following prefs in about:config. There's a [user.js](/user.js) file in the root directory that will automatically set all the required prefs if you put it in your _profile_ folder. (not your chrome folder) That said, I recommend setting the preferences manually in about:config, since most should be kept regardless of the theme you use, and there are many other optional prefs you should consider setting in this list. There are also OS-specific prefs that are not in user.js, so it won't necessarily handle everything for you. The following are in alphabetical order, not in order of importance. Several are optional, but the few that are required are in italics and are marked in the Notes column.<details><summary>**_Click for a full list._**</summary>
 | Pref&nbsp;name | Type | Value | Notes&nbsp;(optional&nbsp;unless&nbsp;otherwise&nbsp;noted) |
 |- |- |- |- |
-| browser.anchor\_color | String | `#5311ff` | |
-| browser.visited\_color | String | `#753afc` | |
+| browser.anchor\_color | String | `#6669ff` | |
+| browser.active\_color | String | `#9999ff` | |
+| browser.visited\_color | String | `#e34f80` | |
+| browser.display.use\_system\_colors | Boolean | false | |
 | browser.display.focus\_ring\_style | Number | 0 | |
 | browser.display.focus\_ring\_width | Number | 0 | |
+| browser.display.windows.non_native_menus | Number | 1 | |
 | <i>browser.proton.enabled</i> | Boolean | true | Required |
 | <i>browser.proton.places-tooltip.enabled</i> | Boolean | true | Recommended |
 | browser.startup.blankWindow | Boolean | false | These two settings eliminate the blank white window during startup |

@@ -469,6 +469,25 @@ there's no need for a context menu item except when right-clicking something par
     background-image: url(chrome://userchrome/content/material/bitwarden.svg);
 }
 
+#contentAreaContextMenu
+    #addon_darkreader_org-menuitem-_DarkReader-top
+    .menu-iconic-left:before {
+    width: 16px;
+    height: 16px;
+    margin-inline: var(--context-iconic-margin);
+    fill: currentColor;
+    -moz-context-properties: fill, fill-opacity, stroke;
+    content: "";
+    display: -moz-inline-box;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url(chrome://userchrome/content/material/darkmode.svg);
+}
+
+#contentAreaContextMenu #addon_darkreader_org-menuitem-_DarkReader-top .menu-iconic-icon {
+    display: none !important;
+}
+
 /* stylus context menu items */
 #_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-manager:not(.menuitem-iconic, .menu-iconic):before {
     background-image: url(chrome://userchrome/content/devtools/tool-styleeditor.svg);
