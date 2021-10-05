@@ -256,12 +256,6 @@ tooltip > description {
     background-image: linear-gradient(hsl(240, 4%, 12%), hsl(240, 4%, 20%));
 }
 
-html|input[type="number"] {
-    -moz-appearance: none;
-    appearance: none;
-    padding-inline-end: 0;
-}
-
 html|input[type="number"]::-moz-number-spin-box {
     appearance: none;
     min-width: 16px;
