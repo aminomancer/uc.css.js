@@ -462,6 +462,12 @@ so shadows are cast in both directions, unless the neighboring tab is selected o
     border: none !important;
 }
 
+/* hide the sound icon while moving a pinned tab.
+does nothing without restoreTabSoundButton.uc.js since sound icon no longer exists in vanilla firefox. */
+.tabbrowser-tab[pinned] .tab-icon-sound {
+    display: none !important;
+}
+
 /* we don't need the icon overlay since we restore the sound icon with javascript & manifest */
 .tab-icon-overlay {
     display: none !important;
@@ -700,44 +706,95 @@ so in other words it won't show if audio is playing until you hover the general 
 
 /* this pref enables a special loading throbber animation that spins instead of bouncing horizontally */
 @supports (-moz-bool-pref("userChrome.tabs.new-loading-spinner-animation")) {
-    .tab-throbber {
-        display: block !important;
-        position: relative !important;
-    }
-
-    .tab-throbber::before {
-        content: "" !important;
-        background-image: url(chrome://userchrome/content/loading-spinner-css.svg) !important;
-        background-position: center !important;
-        background-repeat: no-repeat !important;
-        -moz-context-properties: fill, fill-opacity !important;
-        width: 16px !important;
-        height: 16px !important;
-        animation: none !important;
-        display: -moz-box !important;
-
-        /* if you want to adjust the speed of the animation you can use this static version instead,
-        and control the animation with CSS. I use the above version with the animation embedded in the SVG,
-        because it handles transitions more smoothly and seems to be more performant. */
-
-        /* background-image: url(chrome://userchrome/content/loading-spinner-static.svg) !important;
-        animation: 0.85s steps(12, end) uc-tab-throbber-spinner infinite !important; */
-    }
-
     @keyframes uc-tab-throbber-spinner {
         to {
             rotate: 360deg;
         }
     }
 
+    .tab-throbber {
+        display: block !important;
+        position: relative !important;
+    }
+
+    /* the handling of SVG animations seems to be in constant flux.
+    sometimes CSS animations embedded in SVGs with the <style> tag stop working in certain icons.
+    other times, the animateTransform or animate tags seem to break.
+    I believe this is because of changes in how elements are assumed to be "active" in various documents.
+    SVG documents need to be treated differently from XUL and HTML documents and I guess this is an area of vigorous development.
+    so sometimes it seems like components of SVG documents are treated as inactive elements,
+    and the animation doesn't repaint automatically at a calculated or specified framerate.
+    instead the animation only refreshes when you interact with it with your mouse or something.
+    this isn't normal obviously, and shouldn't be a problem in any release builds of firefox.
+    but if you use Nightly, as I recommend you do if you're using this theme, you may run into this problem on certain nightly builds.
+    so far I've seen it 3 times and with 3 different scenarios, so there's nothing really predictable about it.
+    it's always been fixed very quickly, but just in case you get stuck on a version with broken animations,
+    I'm leaving multiple rule options in here. I made different versions of this animation to circumvent the issue.
+    I've never seen all 3 of these methods broken at the same time.
+    uncomment one of the 2 alternate rules below if you run into problems.
+    you can do the same thing with the all-tabs-menu loading icons in the next ruleset below. */
+    .tab-throbber::before {
+        content: "" !important;
+        display: -moz-box !important;
+        -moz-context-properties: fill, fill-opacity !important;
+        width: 16px !important;
+        height: 16px !important;
+        animation: none !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+
+        /* ANIMATION METHOD #1:
+        this version of the animation is implemented by an <animateTransform> tag.
+        it's the most efficient method but it has broken once for a couple days due to an erroneous nightly patch. */
+
+        background-image: url(chrome://userchrome/content/loading-spinner.svg) !important;
+
+        /* ---------------------------------- */
+
+        /* ANIMATION METHOD #2:
+        the animation is written in a <style> tag embedded inside the SVG code.
+        it's visually identical to method #1, but in terms of performance it is slightly less efficient.
+        the animation is applied to the compound vector path via the inline style attribute,
+        giving the element a CSS property "animation" that references the animation in the style tag.
+        use this if method #1 randomly breaks, *temporarily*. mozilla should patch such a bug quickly. */
+
+        /* background-image: url(chrome://userchrome/content/loading-spinner-css.svg) !important; */
+
+        /* ---------------------------------- */
+
+        /* ANIMATION METHOD #3:
+        use this if neither method #1 nor #2 works; or if you want to adjust the speed or other properties of the animation.
+        in this version, the SVG image itself is not animated at all. it's completely static.
+        instead, the entire animation is added post hoc via CSS in this user stylesheet. therefore, it should never break.
+        I believe this method is significantly less efficient than the two aforementioned methods,
+        because you don't get to use optimizations that stop SVG animations playing when they're not active.
+        my understanding is the animation is basically running 24/7 even when the spinner isn't visible,
+        because the spinner technically is always visible in order to support the sliding tab-hover transitions.
+        you can't see it but it's not hidden in the DOM sense. so I think that makes this method a last resort. */
+
+        /* background-image: url(chrome://userchrome/content/loading-spinner-static.svg) !important;
+        animation: 0.85s steps(12, end) uc-tab-throbber-spinner infinite !important; */
+    }
+
+    /* all tabs menu & vertical tabs pane (script) */
+    .tab-throbber-tabslist:is([busy], [progress]) {
+        /* METHOD #1: */
+        list-style-image: url(chrome://userchrome/content/loading-spinner.svg) !important;
+
+        /* METHOD #2: */
+        /* list-style-image: url(chrome://userchrome/content/loading-spinner-css.svg) !important; */
+
+        /* METHOD #3: */
+        /* animation: 0.85s steps(12, end) uc-tab-throbber-spinner infinite !important;
+        list-style-image: url(chrome://userchrome/content/loading-spinner-static.svg) !important; */
+    }
+
     .tab-throbber-tabslist[busy] {
-        list-style-image: url(chrome://userchrome/content/loading-spinner-css.svg) !important;
         opacity: 0.8 !important;
         fill: var(--busy-throbber-fill) !important;
     }
 
     .tab-throbber-tabslist[progress] {
-        list-style-image: url(chrome://userchrome/content/loading-spinner-css.svg) !important;
         opacity: 1 !important;
         fill: var(--loading-throbber-fill) !important;
     }
@@ -764,10 +821,4 @@ meaning it doesn't overlap with the right side of the label at all, which is whe
 so we make the mask size constant. */
 .tabbrowser-tab {
     --tab-label-mask-size: 2em !important;
-}
-
-/* hide the sound icon while moving a pinned tab.
-does nothing without restoreTabSoundButton.uc.js since sound icon no longer exists in vanilla firefox. */
-.tabbrowser-tab[pinned] .tab-icon-sound {
-    display: none !important;
 }

@@ -561,7 +561,8 @@ so by default we hide the border on extension panels (see userChrome.au.css) */
 #customizationui-widget-panel[viewId="PanelUI-webext-_testpilot-containers-browser-action-view"],
 #customizationui-widget-panel[viewId="PanelUI-webext-addon_darkreader_org-browser-action-view"],
 #customizationui-widget-panel[viewId="PanelUI-webext-nordvpnproxy_nordvpn_com-browser-action-view"],
-#customizationui-widget-panel[viewId="PanelUI-webext-simple-translate_sienori-browser-action-view"] {
+#customizationui-widget-panel[viewId="PanelUI-webext-simple-translate_sienori-browser-action-view"],
+#customizationui-widget-panel[viewId^="PanelUI-webext-multithreaded-download-manager"] {
     --customized-webextension-panel-border: 1px solid var(--panel-border-color) !important;
     --customized-webextension-panel-stroke: var(--panel-border-color);
     --arrowpanel-border-color: var(--uc-menu-border-color) !important;
@@ -571,18 +572,21 @@ so by default we hide the border on extension panels (see userChrome.au.css) */
 #customizationui-widget-panel[viewId="PanelUI-webext-_testpilot-containers-browser-action-view"][side="top"],
 #customizationui-widget-panel[viewId="PanelUI-webext-addon_darkreader_org-browser-action-view"][side="top"],
 #customizationui-widget-panel[viewId="PanelUI-webext-nordvpnproxy_nordvpn_com-browser-action-view"][side="top"],
-#customizationui-widget-panel[viewId="PanelUI-webext-simple-translate_sienori-browser-action-view"][side="top"] {
-    --customized-webextension-panel-margin-bottom: -4.5px;
+#customizationui-widget-panel[viewId="PanelUI-webext-simple-translate_sienori-browser-action-view"][side="top"],
+#customizationui-widget-panel[viewId^="PanelUI-webext-multithreaded-download-manager"][side="top"] {
+    --customized-webextension-panel-margin-bottom: -5px;
 }
 
 #customizationui-widget-panel[viewId="PanelUI-webext-sort-bookmarks_heftig-browser-action-view"][side="bottom"],
 #customizationui-widget-panel[viewId="PanelUI-webext-_testpilot-containers-browser-action-view"][side="bottom"],
 #customizationui-widget-panel[viewId="PanelUI-webext-addon_darkreader_org-browser-action-view"][side="bottom"],
 #customizationui-widget-panel[viewId="PanelUI-webext-nordvpnproxy_nordvpn_com-browser-action-view"][side="bottom"],
-#customizationui-widget-panel[viewId="PanelUI-webext-simple-translate_sienori-browser-action-view"][side="bottom"] {
-    --customized-webextension-panel-margin-top: -4.5px;
+#customizationui-widget-panel[viewId="PanelUI-webext-simple-translate_sienori-browser-action-view"][side="bottom"],
+#customizationui-widget-panel[viewId^="PanelUI-webext-multithreaded-download-manager"][side="bottom"] {
+    --customized-webextension-panel-margin-top: -5px;
 }
 
-#customizationui-widget-panel[viewId="PanelUI-webext-nordvpnproxy_nordvpn_com-browser-action-view"] {
+#customizationui-widget-panel[viewId="PanelUI-webext-nordvpnproxy_nordvpn_com-browser-action-view"],
+#customizationui-widget-panel[viewId^="PanelUI-webext-multithreaded-download-manager"] {
     --panel-border-color: var(--content-principal-box-background-odd) !important;
 }
