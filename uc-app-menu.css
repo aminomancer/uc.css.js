@@ -600,7 +600,7 @@
 }
 
 .panel-banner-item {
-    padding: calc(var(--arrowpanel-menuitem-padding) + 2px) var(--arrowpanel-menuitem-padding) !important;
+    padding: calc(var(--arrowpanel-menuitem-padding-block) + 2px) var(--arrowpanel-menuitem-padding-inline) !important;
     margin: var(--arrowpanel-menuitem-margin) !important;
     font-weight: inherit !important;
     min-height: 40px !important;

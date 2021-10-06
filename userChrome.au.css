@@ -550,6 +550,10 @@ panel[type="autocomplete-richlistbox"]
     padding-block: 0;
 }
 
+panel button {
+    border: revert;
+}
+
 #nav-bar-customization-target > :is(toolbarbutton, toolbaritem):first-child,
 #nav-bar-customization-target > toolbarpaletteitem:first-child > :is(toolbarbutton, toolbaritem) {
     padding: 0 var(--toolbarbutton-outer-padding);

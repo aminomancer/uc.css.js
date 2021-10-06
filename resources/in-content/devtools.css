@@ -113,7 +113,8 @@ and a few elements like checkboxes */
         --panel-banner-item-active-bgcolor: hsla(109.9, 90.9%, 47.3%, 0.2);
         --arrowpanel-menuitem-inline-margin: 4px;
         --arrowpanel-menuitem-margin: 0px var(--arrowpanel-menuitem-inline-margin) !important;
-        --arrowpanel-menuitem-padding: 6px !important;
+        --arrowpanel-menuitem-padding-block: 6px !important;
+        --arrowpanel-menuitem-padding-inline: 6px !important;
         --arrowpanel-padding: 12px !important;
         --panel-subview-body-padding-magnitude: var(--arrowpanel-menuitem-inline-margin);
         --panel-subview-body-padding: var(--panel-subview-body-padding-magnitude) 0 !important;

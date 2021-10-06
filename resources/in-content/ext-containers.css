@@ -5,7 +5,8 @@
     :root {
         --arrowpanel-background: var(--uc-arrowpanel-background);
         --panel-separator-margin: 0px 4px;
-        --arrowpanel-menuitem-padding: 6px;
+        --arrowpanel-menuitem-padding-block: 6px;
+        --arrowpanel-menuitem-padding-inline: 6px;
         --arrowpanel-padding: 12px !important;
         --arrowpanel-menuitem-border-radius: 3px;
         background-color: var(--arrowpanel-background) !important;
@@ -100,7 +101,8 @@
     :root {
         --arrowpanel-background: var(--uc-arrowpanel-background);
         --panel-separator-margin: 0px 4px;
-        --arrowpanel-menuitem-padding: 6px;
+        --arrowpanel-menuitem-padding-block: 6px;
+        --arrowpanel-menuitem-padding-inline: 6px;
         --arrowpanel-padding: 12px !important;
         --arrowpanel-menuitem-border-radius: 3px;
         background-color: var(--arrowpanel-background) !important;

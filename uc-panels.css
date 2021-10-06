@@ -1548,7 +1548,7 @@ richlistitem.download-state > .downloadButton.downloadIconCancel .button-box .bu
 #protections-popup-sendReportView-heading,
 #protections-popup-sendReportView-body {
     margin: var(--arrowpanel-menuitem-margin) !important;
-    padding-inline: calc(var(--arrowpanel-menuitem-padding) * 2) !important;
+    padding-inline: calc(var(--arrowpanel-menuitem-padding-inline) * 2) !important;
 }
 
 /* panic button panel */

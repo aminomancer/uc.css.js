@@ -474,7 +474,7 @@ richlistbox[id]:not(#categories) > richlistitem[selected] {
     #BMB_bookmarksPopup :is(menu, menuitem) {
         margin: var(--arrowpanel-menuitem-margin) !important;
         min-height: var(--subviewbutton-height) !important;
-        padding: 0 var(--arrowpanel-menuitem-padding) !important;
+        padding: 0 var(--arrowpanel-menuitem-padding-inline) !important;
         border-radius: var(--arrowpanel-menuitem-border-radius) !important;
     }
 
