@@ -593,10 +593,6 @@
     border-radius: var(--toolbarbutton-border-radius);
 }
 
-#urlbar {
-    background: none !important;
-}
-
 #urlbar[breakout][breakout-extend],
 #urlbar[breakout][breakout-extend-disabled][open] {
     top: calc((var(--urlbar-toolbar-height) - var(--urlbar-height)) / 2) !important;

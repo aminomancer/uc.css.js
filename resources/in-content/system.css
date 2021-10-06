@@ -175,11 +175,16 @@
         --newtab-focus-border-selected: var(--purple-30) !important;
         --newtab-textbox-background-color: var(--in-content-button-background) !important;
         --newtab-textbox-focus-color: var(--in-content-border-focus) !important;
-        --newtab-primary-action-background: var(
-            --in-content-primary-button-background-hover
-        ) !important;
+        --newtab-primary-action-background: var(--in-content-primary-button-background-hover) !important;
+        --newtab-primary-action-background-hover: color-mix(in srgb, var(--purple-30) 60%, var(--newtab-primary-action-background)) !important;
+        --newtab-primary-action-background-active: color-mix(in srgb, var(--purple-25) 60%, var(--newtab-primary-action-background)) !important;
+        --newtab-primary-element-text-color: var(--ui-text-80) !important;
+        --newtab-element-secondary-color: var(--in-content-button-background-hover) !important;
+        --newtab-element-secondary-color-hover: color-mix(in srgb, var(--ui-text-40) 50%, var(--in-content-button-background-solid)) !important;
+        --newtab-element-secondary-color-active: color-mix(in srgb, var(--ui-text-50) 50%, var(--in-content-button-background-solid)) !important;
         --newtab-button-primary-color: var(--in-content-primary-button-background-hover) !important;
         --newtab-border-primary-color: var(--in-content-button-background-active) !important;
+        --newtab-background-color-secondary: var(--in-content-button-background-solid) !important;
         --newtab-card-active-outline-color: var(--in-content-button-background) !important;
         --newtab-link-primary-color: var(--in-content-link-color-active) !important;
         --newtab-link-secondary-color: var(--in-content-link-color) !important;
@@ -368,6 +373,31 @@
             var(--uc-warning-background)
         ) !important;
         --message-bar-text-color: var(--text-color) !important;
+    }
+
+    .home-section .section .selector {
+        background-color: var(--newtab-element-secondary-color) !important;
+        border-color: transparent !important;
+        background-size: 12px !important;
+        padding-inline: 10px 12px !important;
+    }
+
+    .home-section .section :is(.sponsored-checkbox, .slider, .selector):is(:hover, :focus-visible) {
+        background-color: var(--newtab-element-secondary-color-hover) !important;
+    }
+
+    .home-section .section :is(.sponsored-checkbox, .slider, .selector):active {
+        background-color: var(--newtab-element-secondary-color-active) !important;
+    }
+
+    .home-section .section .sponsored-checkbox:checked:is(:hover, :focus-visible),
+    .home-section .section input:checked + .slider:is(:hover, :focus-visible) {
+        background-color: var(--newtab-primary-action-background-hover) !important;
+    }
+
+    .home-section .section .sponsored-checkbox:checked:active,
+    .home-section .section input:checked + .slider:active {
+        background-color: var(--newtab-primary-action-background-active) !important;
     }
 }
 

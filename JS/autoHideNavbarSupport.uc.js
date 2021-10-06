@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Auto-hide Navbar Support
-// @version        1.0
+// @version        1.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    In fullscreen, the navbar hides automatically when you're not using it. But it doesn't have a very smooth animation, and there are certain situations where the navbar should be visible but isn't. This sets up its own logic to allow CSS transitions to cover the animation, and allows you to show the navbar only when hovering/focusing the navbar, or when a popup is opened that is anchored to something on the navbar, e.g. an extension popup. Also allows hiding the bookmarks toolbar under the same circumstances, fullscreen or not. You can use this for any toolbar, whether in fullscreen or not. duskFox just uses it for the bookmarks/personal toolbar, as well as for the navbar while in fullscreen, but your CSS can use it under any circumstances with popup-status="true". My preferred CSS transitions are in the stylesheets on my repo (see uc-fullscreen.css) but you can also do your own thing with selectors like box[popup-status="true"] > #navigator-toolbox > whatever
@@ -9,6 +9,9 @@
 (function () {
     class AutoHideHandler {
         constructor() {
+            let autohidePref = "browser.fullscreen.autohide";
+            this.observe(Services.prefs, "nsPref:read", autohidePref);
+            Services.prefs.addObserver(autohidePref, this);
             this.observer = new MutationObserver(() => {
                 if (gURLBar.view.isOpen || gURLBar.focused)
                     this.navBlock.setAttribute("urlbar-status", true);
@@ -75,6 +78,37 @@
                     if (targ !== panel && panel?.getAttribute("panelopen")) return;
                     this.navBlock.removeAttribute("popup-status");
                     break;
+            }
+        }
+        getPref(root, pref, def) {
+            switch (root.getPrefType(pref)) {
+                case root.PREF_BOOL:
+                    return root.getBoolPref(pref, def);
+                case root.PREF_INT:
+                    return root.getIntPref(pref, def);
+                case root.PREF_STRING:
+                    return root.getStringPref(pref, def);
+                default:
+                    return null;
+            }
+        }
+        observe(sub, topic, data) {
+            switch (topic) {
+                case "nsPref:changed":
+                case "nsPref:read":
+                    this._onPrefChanged(sub, data);
+                    break;
+                default:
+            }
+        }
+        _onPrefChanged(sub, pref) {
+            switch (pref) {
+                case "browser.fullscreen.autohide":
+                    let value = this.getPref(sub, pref, true);
+                    if (value) document.documentElement.setAttribute("fullscreen-autohide", value);
+                    else document.documentElement.removeAttribute("fullscreen-autohide");
+                    break;
+                default:
             }
         }
     }
