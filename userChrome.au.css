@@ -128,7 +128,7 @@ panelview
 .widget-overflow-list .toolbarbutton-1:not([disabled], [open]):focus-visible,
 .toolbaritem-combined-buttons:is(:not([cui-areatype="toolbar"]), [overflowedItem="true"])
     > toolbarbutton:not([disabled], [open]):focus-visible {
-    background-color: var(--panelview-toolbarbutton-hover-bgcolor);
+    background-color: var(--panel-item-hover-bgcolor);
 }
 
 panelview
@@ -136,7 +136,7 @@ panelview
 .widget-overflow-list .toolbarbutton-1:not([disabled], [open]):focus-visible:active,
 .toolbaritem-combined-buttons:is(:not([cui-areatype="toolbar"]), [overflowedItem="true"])
     > toolbarbutton:not([disabled], [open]):focus-visible:active {
-    background-color: var(--panelview-toolbarbutton-active-bgcolor);
+    background-color: var(--panel-item-active-bgcolor);
 }
 
 .panel-footer > button:not([disabled], :active):is(:hover, :focus-visible) {
@@ -353,6 +353,8 @@ panel[type="autocomplete-richlistbox"]
     --button-bgcolor: var(--arrowpanel-dimmed);
     --button-hover-bgcolor: var(--arrowpanel-dimmed-further);
     --button-active-bgcolor: var(--arrowpanel-dimmed-even-further);
+    --panel-item-hover-bgcolor: var(--arrowpanel-dimmed);
+    --panel-item-active-bgcolor: var(--arrowpanel-dimmed-further);
     --menu-background-color: var(--arrowpanel-background);
     --menuitem-hover-background-color: var(--button-hover-bgcolor);
     --menu-disabled-color: var(--ui-text-40);
@@ -1812,4 +1814,71 @@ of the animations. */
     -moz-box-pack: center;
     color: inherit;
     padding: 30px 30px 20px 30px;
+}
+
+/* confirmation hint */
+@keyframes confirmation-hint-checkmark-animation {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-252px);
+    }
+}
+
+@keyframes confirmation-hint-checkmark-animation-rtl {
+    from {
+        transform: translateX(252px);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+#confirmation-hint-checkmark-animation-container[animate] > #confirmation-hint-checkmark-image {
+    -moz-context-properties: fill;
+    background-image: url(chrome://userchrome/content/skin/success-animation.svg);
+    display: block;
+    position: absolute;
+    background-repeat: no-repeat;
+    min-width: 266px;
+    max-width: 266px;
+    min-height: 14px;
+    max-height: 14px;
+    animation-name: confirmation-hint-checkmark-animation;
+    animation-fill-mode: forwards;
+    animation-timing-function: steps(18);
+}
+
+#confirmation-hint-checkmark-animation-container[animate] > #confirmation-hint-checkmark-image:-moz-locale-dir(rtl) {
+    animation-name: confirmation-hint-checkmark-animation-rtl;
+    transform: translateX(252px);
+}
+
+#confirmation-hint-message {
+    margin-inline: 7px 0;
+}
+
+#confirmation-hint.with-description #confirmation-hint-message {
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    #confirmation-hint-checkmark-animation-container[animate] > #confirmation-hint-checkmark-image {
+        animation-duration: 300ms;
+        animation-delay: 0ms;
+    }
+
+    #confirmation-hint-message-container {
+        transform: scale(.8);
+        opacity: 0;
+        transition: transform 120ms cubic-bezier(.25,1.27,.35,1.18),
+            opacity 60ms linear;
+    }
+
+    #confirmation-hint-checkmark-animation-container[animate] + #confirmation-hint-message-container {
+        transform: scale(1);
+        opacity: 1;
+    }
 }

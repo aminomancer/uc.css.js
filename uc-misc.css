@@ -286,6 +286,10 @@ notification[value="keyword-uri-fixup"] {
     margin-inline: 0 !important;
 }
 
+#confirmation-hint-checkmark-animation-container[animate] > #confirmation-hint-checkmark-image {
+    fill: currentColor !important;
+}
+
 /* remove white flash and make default unloaded background dark gray (matching my new tab page addon, message u/MotherStylus on reddit for a download link) */
 #tabbrowser-tabpanels,
 #webextpanels-window,

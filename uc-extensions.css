@@ -185,8 +185,13 @@ I was a beta tester and they never shut the beta off for some reason so this sti
 }
 
 /* firefox private network enabled */
-:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="secure-proxy@mozilla.com"i][label="Firefox Private Network is On"] {
+.webextension-browser-action[data-extensionid="secure-proxy@mozilla.com"i][label="Firefox Private Network is On"] {
     list-style-image: var(--vpn-on-icon) !important;
+}
+
+/* firefox private network inactive/error */
+.webextension-browser-action[data-extensionid="secure-proxy@mozilla.com"i][label="Firefox Private Network is inactive"] {
+    fill: var(--warning-color) !important;
 }
 
 /* violentmonkey, for injecting scripts into content windows */

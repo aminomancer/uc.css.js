@@ -173,6 +173,7 @@ it also changes the appearance of the one-offs in the searchbar. */
     padding: 0 !important;
     margin-inline: 0 !important;
     background: none !important;
+    border: none !important;
     position: relative !important;
     background-color: transparent !important;
     pointer-events: none !important;

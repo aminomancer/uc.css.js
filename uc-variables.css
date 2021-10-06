@@ -113,8 +113,10 @@ menupopup {
     --menu-icon-opacity: 1 !important;
     --panel-separator-margin: 4px !important;
 
-    --panelview-toolbarbutton-hover-bgcolor: var(--arrowpanel-dimmed) !important;
-    --panelview-toolbarbutton-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
+    --panel-item-hover-bgcolor: var(--arrowpanel-dimmed) !important;
+    --panel-item-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
+    --panelview-toolbarbutton-hover-bgcolor: var(--panel-item-hover-bgcolor) !important;
+    --panelview-toolbarbutton-active-bgcolor: var(--panel-item-active-bgcolor) !important;
     --panelview-toolbarbutton-focus-box-shadow: none !important;
     --buttons-destructive-bgcolor: hsl(350.1, 82%, 56.2%) !important;
     --buttons-destructive-hover-bgcolor: hsl(346, 86%, 46.6%) !important;
