@@ -25,6 +25,10 @@
     }
 }
 
+.ctrlTab-preview {
+    background: none !important;
+}
+
 .ctrlTab-preview:not(#ctrlTab-showAll) > * > .ctrlTab-preview-inner {
     margin: -10px -10px 0 !important;
 }
@@ -69,7 +73,7 @@
     margin: 0 !important;
     padding: 10px !important;
     border: 1px solid var(--blurred-dialog-border-color) !important;
-    border-radius: 5px !important;
+    border-radius: 7px !important;
     box-shadow: 0 0 4px -1px rgba(0, 0, 0, 0.2), 0 0 25px -2px rgba(0, 0, 0, 0.2) !important;
     background-color: var(--ctrlTab-panel-bgcolor) !important;
 }
