@@ -290,7 +290,7 @@ notification[value="keyword-uri-fixup"] {
     fill: currentColor !important;
 }
 
-/* remove white flash and make default unloaded background dark gray (matching my new tab page addon, message u/MotherStylus on reddit for a download link) */
+/* remove white flash and make default unloaded background dark gray */
 #tabbrowser-tabpanels,
 #webextpanels-window,
 #webext-panels-stack,
@@ -299,28 +299,48 @@ notification[value="keyword-uri-fixup"] {
 }
 
 /* change default favicon for local files */
-:is(.unified-nav-forward, .unified-nav-back):not([_moz-menuactive="true"])[uri^="file:///"],
-.tabbrowser-tab:is([label^="/A:/"i], [label^="/B:/"i], [label^="/C:/"i], [label^="/D:/"i], [label^="/E:/"i], [label^="/F:/"i], [label^="/G:/"i], [label^="/H:/"i], [label^="/I:/"i]) .tab-icon-image:not([src]) {
+/* :is(.unified-nav-forward, .unified-nav-back):not([_moz-menuactive="true"]):is([uri^="file:///A:/"i], [uri^="file:///B:/"i], [uri^="file:///C:/"i], [uri^="file:///D:/"i], [uri^="file:///E:/"i], [uri^="file:///F:/"i], [uri^="file:///G:/"i], [uri^="file:///H:/"i], [uri^="file:///I:/"i]),
+:is(.tabbrowser-tab, .all-tabs-button):is([label^="/A:/"i], [label^="/B:/"i], [label^="/C:/"i], [label^="/D:/"i], [label^="/E:/"i], [label^="/F:/"i], [label^="/G:/"i], [label^="/H:/"i], [label^="/I:/"i]) :is(.tab-icon-image, .toolbarbutton-icon):not([src]) {
     list-style-image: url(chrome://userchrome/content/notifications/persistent-storage.svg) !important;
 }
 
-.tabbrowser-tab[image="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8%2F9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAjFJREFUeNqsU8uOElEQPffR3XQ3ONASdBJCSBxHos5%2B3Bg3rvkCv8PElS78gPkO%2FATjQoUdO2ftrJiRh6aneTb9sOpC4weMN6lcuFV16pxDIfI8x12OYIDhcPiu2Wx%2B%2FHF5CW1Z6Jyegt%2FTNEWSJIjjGFEUIQxDrFYrWFSzXC4%2FdLvd95pRKpXKy%2BpRFZ7nwaWo1%2BsGnQG2260BKJfLKJVKGI1GEEJw7ateryd0v993W63WEwjgxfn5obGYzgCbzcaEbdsIggDj8Riu6z6iUk9SYZMSx8W0LMsM%2FSKK75xnJlIq80anQXdbEp0OhcPJ0eiaJnGRMEyyPDsAKKUM9clkYoDo3SZJzzSdp0VSKYmfV1co%2Bz580kw5KDIM8RbRfEnUf1HzxtQyMAGcaGruTKczMzEIaqhKifV6jd%2BzGQQB5llunF%2FM52BizC2K5sYPYvZcu653tjOM9O93wnYc08gmkgg4VAxixfqFUJT36AYBZGd6PJkFCZnnlBxMp38gqIgLpZB0y4Nph18lyWh5FFbrOSxbl3V4G%2BVB7T4ajYYxTyuLtO%2BCvWGgJE1Mc7JNsJEhvgw%2FQV4fo%2F24nbEsX2u1d5sVyn8sJO0ZAQiIYnFh%2BxrfLz%2Fj29cBS%2FO14zg3i8XigW3ZkErDtmKoeM%2BAJGRMnXeEPGKf0nCD1ydvkDzU9Jbc6OpR7WIw6L8lQ%2B4pQ1%2FlPF0RGM9Ns91Wmptk0GfB4EJkt77vXYj%2F8m%2B8y%2FkrwABHbz2H9V68DQAAAABJRU5ErkJggg%3D%3D"]
-    .tab-icon-image {
-    padding-right: 16px !important;
-    background: url(chrome://userchrome/content/notifications/persistent-storage.svg) center/contain !important;
-    -moz-context-properties: fill, fill-opacity !important;
-    animation: none !important;
-    fill: currentColor !important;
-}
-
-:is(.unified-nav-forward, .unified-nav-back):not([_moz-menuactive="true"])[uri^="file:///"]:is([uri$=".svg"i], [uri$=".png"i], [uri$=".jpg"i], [uri$=".jpeg"i], [uri$=".gif"i]),
+:is(.unified-nav-forward, .unified-nav-back):not([_moz-menuactive="true"]):is([uri^="file:///A:/"i], [uri^="file:///B:/"i], [uri^="file:///C:/"i], [uri^="file:///D:/"i], [uri^="file:///E:/"i], [uri^="file:///F:/"i], [uri^="file:///G:/"i], [uri^="file:///H:/"i], [uri^="file:///I:/"i]):is([uri$=".svg"i], [uri$=".png"i], [uri$=".jpg"i], [uri$=".jpeg"i], [uri$=".gif"i]),
 .tabbrowser-tab[label*="Image, "][label$=" pixels)"] .tab-icon-image:not([src]),
-.tabbrowser-tab:is([label^="/A:/"i], [label^="/B:/"i], [label^="/C:/"i], [label^="/D:/"i], [label^="/E:/"i], [label^="/F:/"i], [label^="/G:/"i], [label^="/H:/"i], [label^="/I:/"i]):is([label$=".svg"i], [label$=".png"i], [label$=".jpg"i], [label$=".jpeg"i], [label$=".gif"i]) .tab-icon-image:not([src]) {
+:is(.tabbrowser-tab, .all-tabs-button):is([label^="/A:/"i], [label^="/B:/"i], [label^="/C:/"i], [label^="/D:/"i], [label^="/E:/"i], [label^="/F:/"i], [label^="/G:/"i], [label^="/H:/"i], [label^="/I:/"i]):is([label$=".svg"i], [label$=".png"i], [label$=".jpg"i], [label$=".jpeg"i], [label$=".gif"i]) :is(.tab-icon-image, .toolbarbutton-icon):not([src]) {
     list-style-image: url(chrome://userchrome/content/notifications/canvas.svg) !important;
 }
 
+.bookmark-item[scheme="file"] .toolbarbutton-icon {
+    display: none !important;
+}
+
+.bookmark-item[scheme="file"]::before {
+    content: "";
+    position: relative;
+    display: -moz-inline-box;
+    width: 16px;
+    height: 16px;
+    padding-inline: 0px;
+    fill: currentColor;
+    -moz-context-properties: fill, fill-opacity, stroke;
+    background-position: center;
+    background-size: 16px;
+    background-repeat: no-repeat;
+    background-image: url(chrome://userchrome/content/notifications/persistent-storage.svg) !important;
+}
+
+.bookmark-item[scheme="file"][label*="Image, "][label$=" pixels)"]::before {
+    background-image: url(chrome://userchrome/content/notifications/canvas.svg) !important;
+} */
+
 :is(.unified-nav-forward, .unified-nav-back)[_moz-menuactive="true"] .menu-iconic-icon {
     padding: 1px;
+}
+
+:is(.tabbrowser-tab, .all-tabs-button)[image="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8%2F9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAjFJREFUeNqsU8uOElEQPffR3XQ3ONASdBJCSBxHos5%2B3Bg3rvkCv8PElS78gPkO%2FATjQoUdO2ftrJiRh6aneTb9sOpC4weMN6lcuFV16pxDIfI8x12OYIDhcPiu2Wx%2B%2FHF5CW1Z6Jyegt%2FTNEWSJIjjGFEUIQxDrFYrWFSzXC4%2FdLvd95pRKpXKy%2BpRFZ7nwaWo1%2BsGnQG2260BKJfLKJVKGI1GEEJw7ateryd0v993W63WEwjgxfn5obGYzgCbzcaEbdsIggDj8Riu6z6iUk9SYZMSx8W0LMsM%2FSKK75xnJlIq80anQXdbEp0OhcPJ0eiaJnGRMEyyPDsAKKUM9clkYoDo3SZJzzSdp0VSKYmfV1co%2Bz580kw5KDIM8RbRfEnUf1HzxtQyMAGcaGruTKczMzEIaqhKifV6jd%2BzGQQB5llunF%2FM52BizC2K5sYPYvZcu653tjOM9O93wnYc08gmkgg4VAxixfqFUJT36AYBZGd6PJkFCZnnlBxMp38gqIgLpZB0y4Nph18lyWh5FFbrOSxbl3V4G%2BVB7T4ajYYxTyuLtO%2BCvWGgJE1Mc7JNsJEhvgw%2FQV4fo%2F24nbEsX2u1d5sVyn8sJO0ZAQiIYnFh%2BxrfLz%2Fj29cBS%2FO14zg3i8XigW3ZkErDtmKoeM%2BAJGRMnXeEPGKf0nCD1ydvkDzU9Jbc6OpR7WIw6L8lQ%2B4pQ1%2FlPF0RGM9Ns91Wmptk0GfB4EJkt77vXYj%2F8m%2B8y%2FkrwABHbz2H9V68DQAAAABJRU5ErkJggg%3D%3D"]
+    :is(.tab-icon-image, .toolbarbutton-icon) {
+    padding-right: 16px !important;
+    background: url(chrome://userchrome/content/notifications/persistent-storage.svg) center/contain !important;
 }
 
 :is(#mainPopupSet, #browser, #navigator-toolbox) textbox {

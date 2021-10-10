@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Misc. Mods
-// @version        1.7.0
+// @version        1.7.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Various tiny mods not worth making separate scripts for. Read the comments inside the script for details.
@@ -35,6 +35,12 @@
         // the toast popup that opens when you enable/disable tracking protection on a site has a bug where it doesn't fade out when it closes.
         // see here: https://bugzilla.mozilla.org/show_bug.cgi?id=1724622
         "Fix missing tracking protection toast popup fade animation": true,
+
+        // When you open a private window, it shows a little private browsing icon in the top of the navbar, next to the window control buttons.
+        // It doesn't have a tooltip for some reason, so if you don't already recognize the private browsing icon, you won't know what it means.
+        // This simply gives it a localized tooltip like "You're in a Private Window" in English.
+        // The exact string is drawn from Firefox's fluent files, so it depends on your language.
+        "Give the private browsing indicator a tooltip": true,
     };
     class UCMiscMods {
         constructor() {
@@ -50,6 +56,8 @@
                 this.stopReloadAnimations();
             if (config["Fix missing tracking protection toast popup fade animation"])
                 this.fixProtectionsToast();
+            if (config["Give the private browsing indicator a tooltip"])
+                this.addPrivateBrowsingTooltip();
         }
         stopDownloadsPanelFocus() {
             eval(
@@ -176,6 +184,14 @@
                             `this._protectionsPopup.hidePopup(true)`
                         )
             );
+        }
+        async addPrivateBrowsingTooltip() {
+            this.privateL10n = await new Localization(["browser/aboutPrivateBrowsing.ftl"], true);
+            let l10nId = PrivateBrowsingUtils.isWindowPrivate(window)
+                ? "about-private-browsing-info-title"
+                : "about-private-browsing-not-private";
+            document.querySelector(".private-browsing-indicator").tooltipText =
+                await this.privateL10n.formatValue([l10nId]);
         }
     }
 

@@ -649,10 +649,6 @@ so in other words it won't show if audio is playing until you hover the general 
     opacity: 0.6 !important;
 }
 
-.tab-icon-image {
-    display: block !important;
-}
-
 /* tab buttons are animated with opacity and transformation */
 .tabbrowser-tab:not(:hover, .keyboard-focused-tab, [tabdrop-samewindow]) .tab-close-button {
     transform: translateX(-15px) scale(0.5) !important;

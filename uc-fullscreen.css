@@ -12,10 +12,6 @@ we also need to adjust window controls, the main menu bar, and the bookmarks too
     margin-top: revert !important;
 }
 
-:root:not([sizemode="normal"]) :-moz-any(#TabsToolbar, #nav-bar, #PersonalToolbar) {
-    -moz-window-dragging: no-drag !important;
-}
-
 :root[fullscreen-autohide][inFullscreen] #navigator-toolbox {
     max-height: 0 !important;
     margin-top: calc(

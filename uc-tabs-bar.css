@@ -380,12 +380,13 @@ this sheet controls their appearance as well. */
 }
 
 .accessibility-indicator {
-    background-image: none !important;
+    background: none !important;
     width: 32px !important;
     -moz-box-align: center !important;
     -moz-box-pack: center !important;
     margin: 0 !important;
     padding-inline: 2px !important;
+    border: 0 !important;
     outline: 0;
 }
 
@@ -406,7 +407,7 @@ this sheet controls their appearance as well. */
     background-color: var(--arrowpanel-dimmed) !important;
 }
 
-.accessibility-indicator:is(:active, [open]) > .button-box {
+.accessibility-indicator:is(:hover:active, [open]) > .button-box {
     background-color: var(--arrowpanel-dimmed-further) !important;
 }
 
