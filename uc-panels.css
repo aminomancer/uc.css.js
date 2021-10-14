@@ -571,7 +571,7 @@ popupnotification progress[paused]::-moz-progress-bar {
 }
 
 .permission-popup-permission-remove-button > .button-box {
-    margin-inline: 1px !important;
+    margin: 1px !important;
     border-radius: 2px;
     width: 16px;
     height: 16px;
@@ -579,6 +579,10 @@ popupnotification progress[paused]::-moz-progress-bar {
 
 .permission-popup-permission-remove-button:is(:hover, :focus-visible) > .button-box {
     background-color: var(--arrowpanel-dimmed);
+}
+
+.permission-popup-permission-remove-button > label {
+    margin-block: 0 !important;
 }
 
 .permission-popup-permission-remove-button > .button-box > .button-icon {

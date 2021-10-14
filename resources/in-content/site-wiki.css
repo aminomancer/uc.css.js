@@ -245,6 +245,7 @@ userChrome.css.wikipedia.dark-theme-enabled */
         --uc-wiki-panel-bg: hsla(0, 0%, 3.1%, 0.7);
         --uc-wiki-table-header-bg: hsl(240, 5.6%, 7.1%);
         --uc-wiki-table-border-color: hsl(240, 1.4%, 19%);
+        --uc-wiki-table-border-bold: hsla(212, 8.8%, 66.5%, 0.4);
         --uc-wiki-popup-bg: hsl(240, 1.4%, 19%);
         --uc-wiki-popup-border-color: hsl(240, 1.4%, 29%);
         --uc-wiki-link-color: hsl(211.6, 63.6%, 72%);
@@ -1020,6 +1021,29 @@ userChrome.css.wikipedia.dark-theme-enabled */
         color: var(--uc-wiki-text-80) !important;
         font-size: 0.9rem !important;
         border-radius: 3px !important;
+    }
+
+    figure,
+    figcaption {
+        background-color: var(--uc-wiki-box-bg) !important;
+        border-color: var(--uc-wiki-table-border-color) !important;
+    }
+
+    figure {
+        border-radius: 3px 3px 0 0 !important;
+        border-style: hidden !important;
+    }
+
+    figure > :not(:first-child) {
+        border-radius: 0 0 3px 3px !important;
+        border-style: hidden !important;
+    }
+
+    figure > :first-child > img {
+        border-style: hidden !important;
+        border-radius: 3px !important;
+        background-color: transparent !important;
+        margin: 5px !important;
     }
 
     .thumbinner .thumbimage {
@@ -2571,7 +2595,7 @@ userChrome.css.wikipedia.dark-theme-enabled */
         :is(td, th):not([class], [id], [style*="border"][style*="transparent"]),
     table:is(.infobox, .sidebar) .sidebar-content:not([style*="border"][style*="transparent"]),
     .mw-parser-output .ib-chembox :is(td, th):not([style*="border"][style*="transparent"]) {
-        border-color: hsla(212, 8.8%, 66.5%, 0.4) !important;
+        border-color: var(--uc-wiki-table-border-bold) !important;
     }
 
     table.infobox .thumbborder {
@@ -2580,12 +2604,20 @@ userChrome.css.wikipedia.dark-theme-enabled */
 
     .mw-parser-output table.clade td.clade-label,
     .mw-parser-output table.clade td.clade-slabel {
-        border-color: hsla(212, 8.8%, 66.5%, 0.4) !important;
+        border-color: var(--uc-wiki-table-border-bold) !important;
     }
 
     table.infobox.geography :is(td, th, tr) {
-        border-color: hsla(212, 8.8%, 66.5%, 0.4) !important;
+        border-color: var(--uc-wiki-table-border-bold) !important;
         border-radius: revert !important;
+    }
+
+    table.infobox hr {
+        background-color: var(--uc-wiki-table-border-bold) !important;
+    }
+
+    table.infobox td[style*="border"][style*="dotted"] {
+        border-color: #aaa !important;
     }
 
     table:not([class]) > tr > th,

@@ -747,12 +747,18 @@ link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infob
 link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar button
 {
     border-radius: var(--in-content-button-border-radius) !important;
+    font-weight: inherit !important;
 }
 
 link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-content .notification-button-container > .notification-button.small
 {
     margin: 0 !important;
     font-weight: var(--uc-font-weight-bold, 600) !important;
+}
+
+link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar button .button-text
+{
+    margin-block: 2px 1px !important;
 }
 
 notification .messageImage {
