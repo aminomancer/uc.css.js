@@ -24,6 +24,10 @@ this sheet controls their appearance as well. */
     width: calc(var(--titlebar-spacer-width, 40px) / 2) !important;
 }
 
+#toolbar-menubar[autohide="true"]:not([inactive]) + #TabsToolbar > .titlebar-buttonbox-container {
+	visibility: collapse !important;
+}
+
 :root:is([privatebrowsingmode], [accessibilitymode]) .titlebar-spacer[type="post-tabs"] {
     width: 0px !important;
     margin-left: -2px !important;
@@ -573,6 +577,14 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
     transform: none !important;
     opacity: 0.7 !important;
     margin-inline-start: -2px !important;
+}
+
+.subviewbutton[command="Browser:OpenAboutContainers"]:not(.subviewbutton-iconic, [image]) {
+    list-style-image: url(chrome://userchrome/content/settings.svg) !important;
+}
+
+.subviewbutton[command="Browser:OpenAboutContainers"]:not(.subviewbutton-iconic, [image]) > .toolbarbutton-text {
+    padding-inline-start: 8px !important;
 }
 
 /* move titlebar buttons to the left on macOS and linux */

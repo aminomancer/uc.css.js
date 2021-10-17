@@ -438,12 +438,16 @@
     padding: 0 4px !important;
     height: 20px !important;
     min-height: 20px !important;
+	min-width: calc(6ch + 8px) !important;
+    -moz-box-align: center !important;
+    -moz-box-pack: center !important;
 }
 
 #appMenu-zoom-controls2 #appMenu-zoomReset-button2 .toolbarbutton-text {
     margin-block: 1px !important;
     margin-inline: 6px !important;
     background: none !important;
+	text-align: center !important;
 }
 
 #appMenu-zoomEnlarge-button2 {

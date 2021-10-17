@@ -131,7 +131,7 @@ menuitem#menu_openAddons .menu-text,
 #menu_pageInfo .menu-text,
 menuitem:is(#sync-setup, #sync-unverifieditem, #sync-reauthitem) .menu-text,
 menuitem:is(#sync-enable, #sync-syncnowitem) .menu-text,
-menu#webDeveloperMenu:not(.menu-iconic) > .menu-text,
+menu#browserToolsMenu:not(.menu-iconic) > .menu-text,
 menuitem#menu_preferences .menu-text,
 #context-frameOsPid .menu-text,
 #context-reloadframe .menu-text,
@@ -341,7 +341,7 @@ menuitem#menu_openAddons:before,
 #menu_pageInfo:before,
 menuitem:is(#sync-setup, #sync-unverifieditem, #sync-reauthitem):before,
 menuitem:is(#sync-enable, #sync-syncnowitem):before,
-menu#webDeveloperMenu:not(.menu-iconic):before,
+menu#browserToolsMenu:not(.menu-iconic):before,
 menuitem#menu_preferences:before,
 #context-viewbgimage:before,
 #context-setDesktopBackground:before,
@@ -754,7 +754,7 @@ menuitem:is(#sync-enable, #sync-syncnowitem):before {
     background-image: url(chrome://userchrome/content/skin/sync.svg);
 }
 
-menu#webDeveloperMenu:not(.menu-iconic):before {
+menu#browserToolsMenu:not(.menu-iconic):before {
     background-image: url(chrome://userchrome/content/skin/developer.svg);
 }
 
