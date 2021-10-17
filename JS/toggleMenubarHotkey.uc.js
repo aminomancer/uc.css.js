@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Toggle Menubar Hotkey
-// @version        1.0
+// @version        1.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Press alt+M to toggle the menubar.
@@ -43,7 +43,7 @@
             for (let toolbar of toolbarNodes) {
                 if (!toolbar.hasAttribute("toolbarname")) continue;
 
-                if (toolbar.id == "PersonalToolbar" && gBookmarksToolbar2h2020) {
+                if (toolbar.id == "PersonalToolbar") {
                     let menu = BookmarkingUI.buildBookmarksToolbarSubmenu(toolbar);
                     popup.insertBefore(menu, firstMenuItem);
                 } else {
@@ -98,9 +98,8 @@
                 });
             let menuSeparator = document.getElementById("toolbarItemsMenuSeparator");
             menuSeparator.hidden = false;
-            document.getElementById(
-                "toolbarNavigatorItemsMenuSeparator"
-            ).hidden = !showTabStripItems;
+            document.getElementById("toolbarNavigatorItemsMenuSeparator").hidden =
+                !showTabStripItems;
             if (
                 !CustomizationHandler.isCustomizing() &&
                 CustomizableUI.isSpecialWidget(toolbarItem?.id || "")
@@ -111,21 +110,16 @@
             }
             if (showTabStripItems) {
                 let multipleTabsSelected = !!gBrowser.multiSelectedTabsCount;
-                document.getElementById(
-                    "toolbar-context-bookmarkSelectedTabs"
-                ).hidden = !multipleTabsSelected;
-                document.getElementById(
-                    "toolbar-context-bookmarkSelectedTab"
-                ).hidden = multipleTabsSelected;
-                document.getElementById(
-                    "toolbar-context-reloadSelectedTabs"
-                ).hidden = !multipleTabsSelected;
-                document.getElementById(
-                    "toolbar-context-reloadSelectedTab"
-                ).hidden = multipleTabsSelected;
-                document.getElementById(
-                    "toolbar-context-selectAllTabs"
-                ).disabled = gBrowser.allTabsSelected();
+                document.getElementById("toolbar-context-bookmarkSelectedTabs").hidden =
+                    !multipleTabsSelected;
+                document.getElementById("toolbar-context-bookmarkSelectedTab").hidden =
+                    multipleTabsSelected;
+                document.getElementById("toolbar-context-reloadSelectedTabs").hidden =
+                    !multipleTabsSelected;
+                document.getElementById("toolbar-context-reloadSelectedTab").hidden =
+                    multipleTabsSelected;
+                document.getElementById("toolbar-context-selectAllTabs").disabled =
+                    gBrowser.allTabsSelected();
                 document.getElementById("toolbar-context-undoCloseTab").disabled =
                     SessionStore.getClosedTabCount(window) == 0;
                 return;

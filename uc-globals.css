@@ -39,6 +39,15 @@ tooltip {
     --button-solid-hover-background: hsl(232, 29%, 26%);
     --button-solid-active-background: hsl(234, 26%, 30%);
     --button-solid-checked-background: hsl(232, 31%, 23%);
+    --uc-toolbarbutton-hover-background: hsla(236, 82%, 83%, 0.17);
+    --uc-toolbarbutton-active-background: hsla(236, 82%, 83%, 0.22);
+    --uc-toolbarbutton-checked-background: hsla(236, 82%, 83%, 0.13);
+    --uc-desaturate-hover-background: hsla(236, 60%, 83%, 0.17);
+    --uc-desaturate-active-background: hsla(236, 60%, 83%, 0.22);
+    --uc-desaturate-checked-background: hsla(236, 60%, 83%, 0.13);
+    --uc-panel-description-color: hsl(235, 48%, 89%, 70%);
+    --uc-panel-shortcut-color: hsl(235, 27%, 73%, 70%);
+    --uc-panel-shortcut-focus: hsl(235, 32%, 75%, 90%);
 
     --menupopup-inner-box-margin: 0px;
     --menupopup-shadow: none;

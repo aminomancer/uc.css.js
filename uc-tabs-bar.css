@@ -61,43 +61,15 @@ this sheet controls their appearance as well. */
     visibility: visible !important;
 }
 
-:root:not([chromehidden~="menubar"], [operatingsystem="linux"], [operatingsystem="macosx"])
-    #toolbar-menubar:not([inactive])
-    + #TabsToolbar
-    > .titlebar-buttonbox-container,
-:root[inFullscreen] #toolbar-menubar:not([inactive]) > .titlebar-buttonbox-container {
-    display: none !important;
-}
-
-:root[inFullscreen] #toolbar-menubar:not([inactive]) {
-    margin-right: 91.9px !important;
-}
-
-:root[inFullscreen] #toolbar-menubar:not([inactive]) ~ #TabsToolbar #window-controls {
-    position: absolute !important;
-    display: flex !important;
-    flex-flow: row nowrap !important;
-    right: 0 !important;
-    z-index: 20 !important;
-    top: calc((var(--tab-min-height) / 2) - (15.3px / 2)) !important;
-    padding-inline-end: 6px !important;
-}
-
-:root[inDOMFullscreen] #toolbar-menubar[inactive] ~ #TabsToolbar #window-controls {
-    display: -moz-box !important;
-}
-
 :root[inFullscreen] #titlebar {
     background: var(--titlebar-background);
 }
 
-:root:not([inFullscreen])
-    #toolbar-menubar[autohide="true"][inactive="true"]:not([customizing="true"])
-    ~ #TabsToolbar {
+#toolbar-menubar[autohide="true"][inactive="true"]:not([customizing="true"]) ~ #TabsToolbar {
     background: var(--titlebar-background);
 }
 
-:root:not([inFullscreen]) #toolbar-menubar:not([inactive="true"]) {
+#toolbar-menubar:not([inactive="true"]) {
     background: var(--titlebar-background);
 }
 
@@ -266,27 +238,24 @@ this sheet controls their appearance as well. */
 }
 
 /* macOS style window controls */
-:root:not([inFullscreen]) .titlebar-button {
+.titlebar-button {
     display: -moz-box !important;
 }
 
-:root:not([sizemode="maximized"]) .titlebar-restore,
-:root[sizemode="maximized"] .titlebar-max {
+:root:not([sizemode="maximized"], [inFullscreen]) .titlebar-restore,
+:root:is([sizemode="maximized"], [inFullscreen]) .titlebar-max {
     display: none !important;
 }
 
-:root:-moz-window-inactive:not([customizing])
-    :is(.titlebar-buttonbox, #window-controls)
-    > toolbarbutton:not(:hover) {
+:root:-moz-window-inactive:not([customizing]) .titlebar-buttonbox > toolbarbutton:not(:hover) {
     list-style-image: url(chrome://userchrome/content/window/inactive.svg) !important;
 }
 
-:is(.titlebar-buttonbox, #window-controls) .toolbarbutton-icon {
+.titlebar-buttonbox .toolbarbutton-icon {
     opacity: 1 !important;
 }
 
-.titlebar-button > .toolbarbutton-icon,
-#window-controls > toolbarbutton > .toolbarbutton-icon {
+.titlebar-button > .toolbarbutton-icon {
     appearance: none !important;
     width: 15.3px !important;
     height: 15.3px !important;
@@ -298,8 +267,7 @@ this sheet controls their appearance as well. */
 }
 
 .titlebar-max,
-.titlebar-restore,
-#restore-button {
+.titlebar-restore {
     appearance: none !important;
     padding: 0px !important;
     padding-left: 7px !important;
@@ -319,14 +287,12 @@ this sheet controls their appearance as well. */
     list-style-image: url(chrome://userchrome/content/window/maximize-hover.svg) !important;
 }
 
-:root[sizemode="maximized"] .titlebar-max:hover,
-.titlebar-restore:hover,
-#restore-button:hover {
+:root:is([sizemode="maximized"], [inFullscreen]) .titlebar-max:hover,
+.titlebar-restore:hover {
     list-style-image: url(chrome://userchrome/content/window/maximize-restore.svg) !important;
 }
 
-.titlebar-min,
-#minimize-button {
+.titlebar-min {
     appearance: none !important;
     padding: 0px !important;
     padding-left: 7px !important;
@@ -340,13 +306,11 @@ this sheet controls their appearance as well. */
     -moz-box-ordinal-group: 2 !important;
 }
 
-.titlebar-min:hover,
-#minimize-button:hover {
+.titlebar-min:hover {
     list-style-image: url(chrome://userchrome/content/window/minimize-hover.svg) !important;
 }
 
-.titlebar-close,
-#close-button {
+.titlebar-close {
     appearance: none !important;
     padding: 0px !important;
     padding-left: 7px !important;
@@ -360,8 +324,7 @@ this sheet controls their appearance as well. */
     -moz-box-ordinal-group: 3 !important;
 }
 
-.titlebar-close:hover,
-#close-button:hover {
+.titlebar-close:hover {
     list-style-image: url(chrome://userchrome/content/window/close-hover.svg) !important;
 }
 
@@ -614,7 +577,6 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
 
 /* move titlebar buttons to the left on macOS and linux */
 :root:is([operatingsystem="macosx"], [operatingsystem="linux"]) .titlebar-buttonbox-container,
-:root:is([operatingsystem="macosx"], [operatingsystem="linux"]) #window-controls,
 :root:is([operatingsystem="macosx"], [operatingsystem="linux"]) #toolbar-menubar > .titlebar-buttonbox-container {
     -moz-box-ordinal-group: 0 !important;
 }
@@ -671,16 +633,6 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
     display: none !important;
 }
 
-:root:is([operatingsystem="macosx"], [operatingsystem="linux"])[inFullscreen] #toolbar-menubar:not([inactive]) ~ #TabsToolbar #window-controls {
-	left: 4px !important;
-    right: auto !important;
-}
-
-:root:is([operatingsystem="macosx"], [operatingsystem="linux"])[inFullscreen] #toolbar-menubar:not([inactive]) {
-	margin-left: 87.9px !important;
-    margin-right: 0 !important;
-}
-
 :root:is([operatingsystem="macosx"], [operatingsystem="linux"]) {
     --titlebar-gradient: radial-gradient(
         circle at 0% 0%,
@@ -701,7 +653,6 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
 /* move titlebar buttons to the left if user sets the preference for it */
 @supports -moz-bool-pref("userChrome.css.titlebar-buttons-on-left") {
     .titlebar-buttonbox-container,
-    #window-controls,
     #toolbar-menubar > .titlebar-buttonbox-container {
         -moz-box-ordinal-group: 0 !important;
     }
@@ -760,16 +711,6 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
 
     #toolbar-menubar:not([inactive="true"]) + #TabsToolbar .titlebar-spacer[type="pre-tabs"] {
         display: none !important;
-    }
-
-    :root[inFullscreen] #toolbar-menubar:not([inactive]) ~ #TabsToolbar #window-controls {
-        left: 4px !important;
-        right: auto !important;
-    }
-
-    :root[inFullscreen] #toolbar-menubar:not([inactive]) {
-        margin-left: 87.9px !important;
-        margin-right: 0 !important;
     }
 
     :root {

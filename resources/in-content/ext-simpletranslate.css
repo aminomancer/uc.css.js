@@ -6,15 +6,17 @@
         border-radius: 3px !important;
         background: none !important;
     }
-    
-    :root,
+
     body {
-        --sub-text: var(--ui-text-60) !important;
+        --main-text: var(--uc-arrowpanel-color) !important;
+        --line: transparent !important;
+        --main-bg: var(--uc-arrowpanel-background) !important;
+        --sub-text: var(--uc-panel-description-color) !important;
         --highlight: var(--in-parent-link-color) !important;
+        user-select: none;
     }
 
     body {
-        background-color: var(--uc-arrowpanel-background) !important;
         color: var(--uc-arrowpanel-color) !important;
         border-radius: 3px !important;
     }
@@ -34,14 +36,6 @@
         display: flex;
     }
 
-    #header {
-        background: none !important;
-    }
-
-    .title {
-        color: var(--arrowpanel-color) !important;
-    }
-
     textarea, select {
         background-color: var(--search-box-color) !important;
         color: var(--ui-text-100) !important;
@@ -55,14 +49,30 @@
         border-color: var(--highlight) !important;
     }
 
-    #footer .selectWrap::before {
-        background: none !important;
-        color: var(--uc-toolbar-color) !important;
-        fill: var(--uc-toolbar-color) !important;
+    #footer .selectWrap select {
+        padding-block: 5px !important;
+        height: auto !important;
+        min-height: auto !important;
     }
 
-    #footer .selectWrap:hover::before {
-        border-color: white !important;
+    #footer .selectWrap::before {
+        background: none !important;
+        color: var(--sub-text) !important;
+        fill: currentColor !important;
+        transform: none !important;
+        border: none !important;
+        width: 16px !important;
+        height: 16px !important;
+        -moz-context-properties: fill, fill-opacity !important;
+        background-image: url(chrome://userchrome/content/menu-arrow-down.svg) !important;
+        background-size: contain !important;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+        top: 6px !important;
+    }
+
+    #footer .selectWrap:focus-within::before {
+        color: var(--ui-text-100) !important;
     }
 
     #footer .selectWrap select:is(:focus-within, :hover) {
