@@ -399,6 +399,36 @@
     .home-section .section input:checked + .slider:active {
         background-color: var(--newtab-primary-action-background-active) !important;
     }
+
+    @-moz-document regexp("^about:blocked.*") {
+        html:root,
+        html:root * {
+            --in-content-button-background: transparent !important;
+            --in-content-button-background-hover: #5a0002 !important;
+            --in-content-button-background-active: #3e0200 !important;
+            --in-content-button-border-color: white !important;
+            --in-content-primary-button-background: var(--ui-text-90) !important;
+            --in-content-primary-button-background-hover: var(--ui-text-80) !important;
+            --in-content-primary-button-background-active: var(--ui-text-70) !important;
+            --in-content-primary-button-text-color: black !important;
+        }
+
+        body {
+            background: var(--warning-icon-detail) !important;
+        }
+
+        #errorPageContainer .button-container button {
+            border-color: var(--ui-text-70) !important;
+        }
+
+        #errorPageContainer .button-container button:hover {
+            border-color: transparent !important;
+        }
+
+        #errorPageContainer .button-container button.primary {
+            border-color: transparent !important;
+        }
+    }
 }
 
 @-moz-document url("about:processes") {

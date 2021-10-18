@@ -396,40 +396,53 @@ toolbarpaletteitem[removable="false"]
     list-style-image: url(chrome://userchrome/content/identity-icon.svg) !important;
 }
 
+/* on a system page such as about:preferences */
 #identity-box[pageproxystate="valid"].chromeUI #identity-icon {
     list-style-image: url(chrome://userchrome/content/identity-icons-brand.svg) !important;
 }
 
+/* opening a local file i.e. file:///C:/Users/you/Downloads/text-file.txt
+for some stupid reason this doesn't show when opening PDFs in firefox with the PDF viewer.
+the localResource class is assigned according to gIdentityHandler._isPotentiallyTrustworthy
+and this test inexplicably *intentionally* returns false for PDFs.
+so there must be some issue with the PDF viewer that I don't know about. */
 #identity-box[pageproxystate="valid"].localResource #identity-icon {
     list-style-image: url(chrome://userchrome/content/notifications/persistent-storage.svg) !important;
 }
 
+/* on an extension page e.g. moz-extension://{guid}/options.html */
 #urlbar[actiontype="extension"] > #urlbar-input-container > #identity-box #identity-icon,
 #identity-box.extensionPage[pageproxystate="valid"] #identity-icon {
     list-style-image: url(chrome://userchrome/content/material/extension-identity.svg) !important;
 }
 
-#identity-box[pageproxystate="valid"].verifiedDomain #identity-icon,
-#identity-box[pageproxystate="valid"].mixedActiveBlocked #identity-icon {
-    list-style-image: url(chrome://userchrome/content/skin/connection-secure.svg) !important;
+/* connection is secure. some elements or requests from unencrypted connections may have been blocked according to user preferences, such as scripts. */
+#identity-box[pageproxystate="valid"]:is(.verifiedDomain, .mixedActiveBlocked) #identity-icon {
+    list-style-image: url(chrome://global/skin/icons/security.svg) !important;
 }
 
-#identity-box[pageproxystate="valid"].weakCipher #identity-icon,
-#identity-box[pageproxystate="valid"].mixedDisplayContent #identity-icon,
-#identity-box[pageproxystate="valid"].mixedDisplayContentLoadedActiveBlocked #identity-icon,
-#identity-box[pageproxystate="valid"].certUserOverridden #identity-icon {
-    list-style-image: url(chrome://userchrome/content/connection-mixed-passive-loaded.svg) !important;
+/* secure page but something is unusual. could be mixed passive content, like media files loaded over unencrypted connections.
+or it could be that the connection is encrypted but the SSL certificate is not from a known/trusted issuer or is not recognized by the CA,
+or the SSL certificate is from a known issuer but the cipher used to encrypt the connection is deprecated or has a security flaw.
+additionally this also shows if the site was originally blocked for lacking a valid certificate and you chose to connect anyway. */
+#identity-box[pageproxystate="valid"]:is(.mixedDisplayContent, .mixedDisplayContentLoadedActiveBlocked, .certUserOverridden, .weakCipher) #identity-icon {
+    list-style-image: url(chrome://global/skin/icons/security-warning.svg) !important;
     fill: unset !important;
 }
 
-#identity-box[pageproxystate="valid"].notSecure #identity-icon,
-#identity-box[pageproxystate="valid"].mixedActiveContent #identity-icon {
-    list-style-image: url(chrome://userchrome/content/connection-mixed-active-loaded.svg) !important;
+/* insecure page. this happens on unencrypted connections and encrypted connections where active resources are loaded over unencrypted connections.
+that includes scripts, link elements e.g. stylesheets, iframes, and resources loaded by stylesheets or by scripts. */
+#identity-box[pageproxystate="valid"]:is(.notSecure, .mixedActiveContent) #identity-icon {
+    list-style-image: url(chrome://global/skin/icons/security-broken.svg) !important;
     fill: unset !important;
 }
 
-#identity-box[pageproxystate="valid"].certErrorPage #identity-icon,
-#identity-box[pageproxystate="valid"].httpsOnlyErrorPage #identity-icon {
+/* custom identity icon for error pages. by default firefox just uses the broken or warning icon for the cert error and https only error.
+the about:blocked and about:neterror pages don't get a special icon for some reason. they just use the default i for info symbol.
+a custom icon for these states can't be added with pure CSS since they just get marked as unknownIdentity.
+my script, urlbarMods.uc.js assigns them custom classes .aboutBlockedPage and .aboutNetErrorPage
+so you can use those classes to set the icon. */
+#identity-box[pageproxystate="valid"]:is(.certErrorPage, .httpsOnlyErrorPage, .aboutBlockedPage, .aboutNetErrorPage) #identity-icon {
     list-style-image: url(chrome://userchrome/content/warning.svg) !important;
 }
 
@@ -1076,12 +1089,15 @@ use 0.6 instead of 1 since 1 will end up being shown as like 1.4px for some wind
 }
 
 #identity-icon-label {
+    color: var(--lwt-toolbar-field-color, black) !important;
+    opacity: var(--identity-box-label-opacity) !important;
+    font-weight: var(--urlbar-base-font-weight, 400);
+    font-size: inherit !important;
     font-weight: var(--urlbar-base-font-weight, 400);
 }
 
 #urlbar-label-box .urlbar-label,
-#urlbar-search-mode-indicator-title,
-#urlbar-label-switchtab {
+#urlbar-search-mode-indicator-title {
     color: var(--lwt-toolbar-field-color, black) !important;
     opacity: var(--identity-box-label-opacity) !important;
     padding-inline: 0px !important;

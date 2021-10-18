@@ -648,7 +648,7 @@ popupnotification progress[paused]::-moz-progress-bar {
 .identity-popup-security-connection {
     /* background-position: 2em 40% !important; */
     background-size: 18px auto !important;
-    font-size: 1.1em;
+    font-size: 1.15em;
 }
 
 #identity-popup-securityView .identity-popup-connection-secure.security-view,
@@ -673,12 +673,20 @@ popupnotification progress[paused]::-moz-progress-bar {
     -moz-box-pack: center !important;
 }
 
+#identity-popup-mainView #identity-popup-security-button[disabled] .identity-popup-security-connection {
+    min-height: 18px !important;
+}
+
 #identity-popup .subviewbutton-nav {
     padding-block: 0 !important;
 }
 
 #identity-popup-security-button {
     margin-bottom: revert !important;
+}
+
+#identity-popup-security-button[disabled] {
+    margin-bottom: 2px !important;
 }
 
 .identity-popup-security-connection.identity-button {
@@ -1434,10 +1442,6 @@ richlistitem.download-state > .downloadButton.downloadIconCancel .button-box .bu
     margin-inline: 4px !important;
     margin-bottom: 4px !important;
     border-top: 1px solid var(--panel-separator-color);
-}
-
-#identity-popup:is([connection="file"], [connection="chrome"]) #identity-popup-security-button {
-    margin-bottom: 2px !important;
 }
 
 #identity-popup-security-httpsonlymode-menulist,
