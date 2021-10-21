@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Extension Options Panel
-// @version        1.7
+// @version        1.7.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    This script creates a toolbar button that opens a popup panel where extensions can be configured, disabled, uninstalled, etc. Each extension gets its own button in the panel. Clicking an extension's button leads to a subview where you can jump to the extension's options, disable or enable the extension, uninstall it, configure automatic updates, disable/enable it in private browsing, view its source code in whatever program is associated with .xpi files, open the extension's homepage, or copy the extension's ID. The panel can also be opened from the App Menu, since the built-in "Add-ons and themes" button is replaced with an "Extensions" button that opens the panel, which in turn has an equivalent button inside it. Based on a similar script by xiaoxiaoflood, but will not be compatible with xiaoxiaoflood's loader. This one requires fx-autoconfig or Alice0775's loader. It opens a panel instead of a menupopup, for more consistency with other toolbar widgets. There are configuration options directly below.
@@ -678,8 +678,8 @@ class ExtensionOptionsWidget {
                 !!(addon.permissions & win.AddonManager.PERM_CAN_CHANGE_PRIVATEBROWSING_ACCESS)
             );
             setButtonState(addon, privateButton);
-            shortcutsButton.hidden = !this.extensionForAddonId(addon.id).shortcuts?.manifestCommands
-                ?.size;
+            shortcutsButton.hidden = !this.extensionForAddonId(addon.id)?.shortcuts
+                ?.manifestCommands?.size;
             disableButton.setAttribute(
                 "label",
                 addon.userDisabled ? l10n["Enable Addon label"] : l10n["Disable Addon label"]
