@@ -95,6 +95,8 @@ I also recommend setting the following prefs in `about:config`. There's a [user.
 
 </details>
 
+Because most of the scripts and stylesheets here are tethered to the Nightly release channel, I also recommend disabling automatic updates in your Firefox preferences and downloading [my update alert system](#update-notification-slayer) that lets you choose when to update and notifies you unobtrusively when an update is available. Rather than flashing a popup window that requires you to click something to dismiss it, updates will just add a green update badge to the app menu "hamburger" button. To update you can just click the hamburger button, then click the update banner at the top of the app menu.
+
 ## **Theme: (CSS)**
 
 ### **Setup:**
