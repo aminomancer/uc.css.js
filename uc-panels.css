@@ -1643,3 +1643,11 @@ richlistitem.download-state > .downloadButton.downloadIconCancel .button-box .bu
 #protections-popup-show-report-button .protections-popup-footer-button-label {
     padding-inline-start: 8px !important;
 }
+
+#downloads-button-autohide-panel {
+    --arrowpanel-padding: 8px 12px 8px 8px !important;
+}
+
+#downloads-button-autohide-panel:is(:dir(rtl), :-moz-locale-dir(rtl)) {
+    --arrowpanel-padding: 8px 8px 8px 12px !important;
+}

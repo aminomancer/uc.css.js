@@ -426,6 +426,11 @@ panel[type="autocomplete-richlistbox"]
     color: var(--toolbar-color);
 }
 
+#customization-toolbar-visibility-button,
+#customization-uidensity-button {
+	padding-inline-start: 8px;
+}
+
 #customization-done-button {
     font-weight: 500;
     border-color: transparent;

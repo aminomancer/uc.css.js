@@ -292,6 +292,8 @@ menuitem.customize-context-removeFromToolbar > .menu-text,
 menuitem.customize-context-removeFromPanel > .menu-text,
 menuitem.customize-context-moveToToolbar > .menu-text,
 menuitem.customize-context-moveToPanel > .menu-text,
+menuitem.customize-context-addToPanel > .menu-text,
+menuitem.customize-context-addToToolbar > .menu-text,
 menuitem.customize-context-manageExtension > .menu-text,
 menu.customize-context-debugExtension > .menu-text,
 menuitem.customize-context-CopyID > .menu-text,
@@ -563,6 +565,8 @@ menuitem.customize-context-removeFromToolbar:before,
 menuitem.customize-context-removeFromPanel:before,
 menuitem.customize-context-moveToToolbar:before,
 menuitem.customize-context-moveToPanel:before,
+menuitem.customize-context-addToPanel:before,
+menuitem.customize-context-addToToolbar:before,
 menuitem.customize-context-manageExtension:before,
 menu.customize-context-debugExtension:before,
 menuitem.customize-context-CopyID:before,
@@ -1279,6 +1283,14 @@ menuitem.customize-context-moveToToolbar:before {
 
 menuitem.customize-context-moveToPanel:before {
     background-image: url(chrome://userchrome/content/skin/pin-tab.svg);
+}
+
+menuitem.customize-context-addToToolbar:before {
+    background-image: url(chrome://userchrome/content/add.svg);
+}
+
+menuitem.customize-context-addToPanel:before {
+    background-image: url(chrome://userchrome/content/chevron.svg);
 }
 
 menuitem:is(.customize-context-manageExtension, .pageActionContextMenuItem.manageExtensionItem):before {
