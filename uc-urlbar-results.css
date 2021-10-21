@@ -6,7 +6,6 @@
 
 .urlbarView-no-wrap {
     min-width: 0 !important;
-    max-width: 100% !important;
 }
 
 .urlbarView-no-wrap > span:not([title], [label]):empty,

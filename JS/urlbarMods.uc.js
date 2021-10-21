@@ -3,7 +3,7 @@
 // @version        1.5.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
-// @description    Makes some minor modifications to the urlbar. See the code comments below for more details.
+// @description    Make some minor modifications to the urlbar. See the code comments below for more details.
 // ==/UserScript==
 
 class UrlbarMods {
@@ -352,7 +352,22 @@ class UrlbarMods {
     underlineSpaceResults() {
         gURLBar.view._addTextContentWithHighlights = function (node, text, highlights) {
             node.textContent = "";
+            node.removeAttribute("no-highlights");
             if (!text) return;
+            // add an extra attribute to the text node when there are no highlights and the text is short.
+            // I was experimenting it but decided not to use it in duskFox. but you can use it in your own CSS.
+            // for example .urlbarView-row[has-url]:not([has-action]) .urlbarView-title[no-highlights] {color: #FF0022}
+            // will highlight these titles when the row would otherwise seem kind of dull and empty.
+            // the problem with doing that is it kind of obfuscates the meaning otherwise conveyed by the text colors.
+            // firefox doesn't really make much use of that by default but duskFox ascribes
+            // very specific meanings to the 5 different colors used in urlbar result titles.
+            // applying one of them to titles just because they're otherwise empty could mess that up, and it runs the risk of confusing users.
+            // so I didn't use it but I left the option open in this script for user customization.
+            if (!highlights.length && text.length < 30) node.setAttribute("no-highlights", true);
+            // if the string contains nothing but 2 or more whitespace characters,
+            // replace them all with a non-breaking space character and set an attribute.
+            // CSS can then use .urlbarView-title[all-whitespace] to underline these titles
+            // so the otherwise invisible space characters will be visible.
             if (/^\s{2,}$/.test(text) && !highlights.length) {
                 text = text.replace(/\s/g, `\u00A0`);
                 node.setAttribute("all-whitespace", true);
