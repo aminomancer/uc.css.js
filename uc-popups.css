@@ -98,6 +98,7 @@ tabmodalprompt input {
 
 tabmodalprompt select:not([size], [multiple]) > option {
     background-color: var(--dropdown-bgcolor) !important;
+    color: var(--ui-text-80) !important;
 }
 
 tabmodalprompt button,
@@ -783,6 +784,7 @@ panel[type="autocomplete-richlistbox"]
 
     select:not([size], [multiple]) > option {
         background-color: var(--dropdown-bgcolor) !important;
+        color: var(--ui-text-80) !important;
     }
 
     button,
@@ -947,6 +949,7 @@ panel[type="autocomplete-richlistbox"]
 
     :root[dialogroot] select:not([size], [multiple]) > option {
         background-color: var(--dropdown-bgcolor) !important;
+        color: var(--ui-text-80) !important;
     }
 
     :root[dialogroot] #editBMPanel_tagsSelector {
