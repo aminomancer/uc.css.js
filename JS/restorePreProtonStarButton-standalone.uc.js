@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Restore pre-Proton Star Button
-// @version        1.2
+// @version        1.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    The bookmark page action button used to have a pretty cool starburst animation. That's been removed but it's not too difficult to restore. This standalone version of the script doesn't require any additional CSS or icon downloads. If you use my other stylesheets or icons, you will probably want the non-standalone version instead.
@@ -63,9 +63,13 @@
             this.star.removeEventListener("mouseover", this);
             this._uninitView();
             if (this._hasBookmarksObserver) {
-                PlacesUtils.bookmarks.removeObserver(this);
                 PlacesUtils.observers.removeListener(
-                    ["bookmark-added", "bookmark-removed"],
+                    [
+                        "bookmark-added",
+                        "bookmark-removed",
+                        "bookmark-moved",
+                        "bookmark-url-changed",
+                    ],
                     this.handlePlacesEvents
                 );
             }
@@ -85,7 +89,7 @@
                 if (starred) element.setAttribute("starred", "true");
                 else element.removeAttribute("starred");
             }
-            if (!this.star) {
+            if (!this.starBox) {
                 this.updateBookmarkPageMenuItem(true);
                 return;
             }
@@ -94,7 +98,7 @@
                 shortcut: ShortcutUtils.prettifyShortcut(shortcut),
             };
             document.l10n.setAttributes(
-                this.star,
+                this.starBox,
                 starred ? "urlbar-star-edit-bookmark" : "urlbar-star-add-bookmark",
                 l10nArgs
             );
@@ -106,7 +110,7 @@
             );
         };
 
-        BookmarkingUI.star.addEventListener("mouseover", BookmarkingUI, {
+        BookmarkingUI.starBox.addEventListener("mouseover", BookmarkingUI, {
             once: true,
         });
 

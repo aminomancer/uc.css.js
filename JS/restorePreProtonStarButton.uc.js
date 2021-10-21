@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Restore pre-Proton Star Button
-// @version        1.2
+// @version        1.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    The bookmark page action button used to have a pretty cool starburst animation. That's been removed but it's not too difficult to restore. This version of the script requires fx-autoconfig, userChrome.au.css, and the resources folder from my repo. If you don't want to use all that stuff, grab the standalone version instead. FYI not to state the obvious but this script will have no effect if your browser/OS has prefers-reduced-motion enabled.
@@ -60,9 +60,13 @@
             this.star.removeEventListener("mouseover", this);
             this._uninitView();
             if (this._hasBookmarksObserver) {
-                PlacesUtils.bookmarks.removeObserver(this);
                 PlacesUtils.observers.removeListener(
-                    ["bookmark-added", "bookmark-removed"],
+                    [
+                        "bookmark-added",
+                        "bookmark-removed",
+                        "bookmark-moved",
+                        "bookmark-url-changed",
+                    ],
                     this.handlePlacesEvents
                 );
             }
@@ -82,7 +86,7 @@
                 if (starred) element.setAttribute("starred", "true");
                 else element.removeAttribute("starred");
             }
-            if (!this.star) {
+            if (!this.starBox) {
                 this.updateBookmarkPageMenuItem(true);
                 return;
             }
@@ -91,7 +95,7 @@
                 shortcut: ShortcutUtils.prettifyShortcut(shortcut),
             };
             document.l10n.setAttributes(
-                this.star,
+                this.starBox,
                 starred ? "urlbar-star-edit-bookmark" : "urlbar-star-add-bookmark",
                 l10nArgs
             );
@@ -103,7 +107,7 @@
             );
         };
 
-        BookmarkingUI.star.addEventListener("mouseover", BookmarkingUI, {
+        BookmarkingUI.starBox.addEventListener("mouseover", BookmarkingUI, {
             once: true,
         });
     }

@@ -493,6 +493,11 @@ there's no need for a context menu item except when right-clicking something par
     display: none !important;
 }
 
+menupopup:not(#contentAreaContextMenu)
+    > #addon_darkreader_org-menuitem-_DarkReader-top:not(.menuitem-iconic, .menu-iconic):before {
+    background-image: url(chrome://userchrome/content/material/darkmode.svg);
+}
+
 /* stylus context menu items */
 #_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-manager:not(.menuitem-iconic, .menu-iconic):before {
     background-image: url(chrome://userchrome/content/devtools/tool-styleeditor.svg);

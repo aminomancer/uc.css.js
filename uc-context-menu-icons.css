@@ -285,6 +285,9 @@ menuitem#fill-login-generated-password > .menu-text,
 #menu_customizeToolbars .menu-text,
 menuitem.viewCustomizeToolbar > .menu-text,
 #addon_darkreader_org-menuitem-_DarkReader-switchEngine .menu-text,
+menupopup:not(#contentAreaContextMenu)
+    > #addon_darkreader_org-menuitem-_DarkReader-top:not(.menuitem-iconic, .menu-iconic)
+    > .menu-text,
 menuitem.customize-context-removeFromToolbar > .menu-text,
 menuitem.customize-context-removeFromPanel > .menu-text,
 menuitem.customize-context-moveToToolbar > .menu-text,
@@ -554,6 +557,8 @@ menuitem#fill-login-generated-password:before,
 #menu_customizeToolbars:before,
 menuitem.viewCustomizeToolbar:before,
 #addon_darkreader_org-menuitem-_DarkReader-switchEngine:before,
+menupopup:not(#contentAreaContextMenu)
+    > #addon_darkreader_org-menuitem-_DarkReader-top:not(.menuitem-iconic, .menu-iconic):before,
 menuitem.customize-context-removeFromToolbar:before,
 menuitem.customize-context-removeFromPanel:before,
 menuitem.customize-context-moveToToolbar:before,
