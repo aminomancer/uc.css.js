@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Misc. Mods
-// @version        1.7.1
+// @version        1.8.0
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Various tiny mods not worth making separate scripts for. Read the comments inside the script for details.
@@ -41,6 +41,9 @@
         // This simply gives it a localized tooltip like "You're in a Private Window" in English.
         // The exact string is drawn from Firefox's fluent files, so it depends on your language.
         "Give the private browsing indicator a tooltip": true,
+
+        // The location where your bookmarks are saved by default is defined in the preference browser.bookmarks.defaultLocation. This pref is updated every time you manually change a bookmark's folder in the urlbar star button's edit bookmark panel. So if you want to save to toolbar by default, but you just added a bookmark to a different folder with the panel, that different folder now becomes your default location. So the next time you go to add a bookmark, instead of saving it to your toolbar it'll save it to the most recent folder you chose in the edit bookmark panel. This can be kind of annoying if you have a main bookmarks folder and a bunch of smaller subfolders. So I added this option to eliminate this updating behavior. This will stop Firefox from automatically updating the preference every time you use the edit bookmark panel. So whatever that pref is set to at the time you enable this setting will permanently remain your default location. You can still change the default location by modifying the preference directly or by temporarily disabling the script or this setting. This just means the pref will not automatically change while this setting is enabled.
+        "Preserve your default bookmarks folder": false,
     };
     class UCMiscMods {
         constructor() {
@@ -58,6 +61,8 @@
                 this.fixProtectionsToast();
             if (config["Give the private browsing indicator a tooltip"])
                 this.addPrivateBrowsingTooltip();
+            if (config["Preserve your default bookmarks folder"])
+                this.makeDefaultBookmarkFolderPermanent();
         }
         stopDownloadsPanelFocus() {
             eval(
@@ -192,6 +197,18 @@
                 : "about-private-browsing-not-private";
             document.querySelector(".private-browsing-indicator").tooltipText =
                 await this.privateL10n.formatValue([l10nId]);
+        }
+        makeDefaultBookmarkFolderPermanent() {
+            eval(
+                `StarUI._storeRecentlyUsedFolder = async function ` +
+                    StarUI._storeRecentlyUsedFolder
+                        .toSource()
+                        .replace(/^async \_storeRecentlyUsedFolder/, "")
+                        .replace(
+                            /\s*if \(didChangeFolder\) \{\s*Services\.prefs\.setCharPref\(\s*\"browser\.bookmarks\.defaultLocation\"\,\s*selectedFolderGuid\s*\)\;\s*\}/,
+                            ""
+                        )
+            );
         }
     }
 

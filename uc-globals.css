@@ -7,6 +7,8 @@ but other than that these variables should be available everywhere. */
 
 :root,
 tooltip {
+    --ui-text-10: rgba(255, 255, 255, 0.1);
+    --ui-text-20: rgba(255, 255, 255, 0.2);
     --ui-text-30: rgba(255, 255, 255, 0.3);
     --ui-text-40: rgba(255, 255, 255, 0.4);
     --ui-text-50: rgba(255, 255, 255, 0.5);

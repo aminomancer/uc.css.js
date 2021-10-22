@@ -86,6 +86,24 @@
     overflow: hidden !important;
     margin: 0 !important;
     font-weight: var(--uc-font-weight-thin, 400);
+    --edit-bm-panel-overflow: hidden;
+}
+
+.tree-input[type="text"] {
+    background-color: var(--ebmp-focus-bgcolor) !important;
+    border-radius: 2px !important;
+    border: none !important;
+    padding: 1px 3px !important;
+    margin-top: -1px !important;
+    margin-inline-end: 3px !important;
+    margin-left: -3px !important;
+    width: auto !important;
+    max-width: -moz-available !important;
+}
+
+.tree-input[type="text"]::selection {
+    background-color: var(--ui-selection-bgcolor) !important;
+    color: var(--ui-selection-color) !important;
 }
 
 #editBookmarkPanel richlistbox[id] {
@@ -195,7 +213,9 @@
     margin: 0 !important;
     color: #fff !important;
     border: none !important;
-    border-radius: 2px !important;
+    border-radius: var(--general-button-border-radius) !important;
+    font-size: inherit !important;
+    font-weight: inherit !important;
 }
 
 #editBookmarkPanel #editBookmarkPanelContent button:is(:hover, :focus-visible) {
@@ -255,37 +275,12 @@
     display: -moz-inline-box !important;
 }
 
-#editBookmarkPanel #editBookmarkPanelContent .expander-up,
-#editBookmarkPanel #editBookmarkPanelContent .expander-down {
-    appearance: none !important;
-    background-color: var(--ui-textbox-bgcolor) !important;
-    padding: 0 !important;
+#editBookmarkPanel #editBookmarkPanelContent :is(.expander-up, .expander-down) {
     min-width: 24px !important;
     min-height: 24px !important;
-    box-sizing: border-box !important;
     margin-left: 6px !important;
     color: #fff !important;
-    border: none !important;
-    transform: none !important;
-}
-
-#editBookmarkPanel #editBookmarkPanelContent :is(.expander-up, .expander-down) .button-box {
-    padding: 0 !important;
-}
-
-#editBookmarkPanel .expander-down image {
-    list-style-image: url(chrome://userchrome/content/devtools/arrowhead-down.svg) !important;
-    width: 17px !important;
-}
-
-#editBookmarkPanel .expander-up image {
-    list-style-image: url(chrome://userchrome/content/devtools/arrowhead-up.svg) !important;
-    width: 17px !important;
-}
-
-#editBookmarkPanel :is(menu, menuitem) {
-    padding-left: 0 !important;
-    padding-block: 2px !important;
+    border-radius: 2px !important;
 }
 
 #editBookmarkPanel .in-menulist :is(menu, menuitem) {

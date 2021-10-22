@@ -552,6 +552,17 @@ and a few elements like checkboxes */
         color: var(--attention-color) !important;
     }
 
+    /* make the highlighting on unsaved stylesheets more obvious */
+    #style-editor-chrome-window li.unsaved:not(.splitview-active) {
+        background-color: var(--content-principal-box-background) !important;
+    }
+
+    #style-editor-chrome-window li.unsaved > hgroup .stylesheet-name label,
+    #style-editor-chrome-window li.unsaved > hgroup .stylesheet-name::before, 
+    #style-editor-chrome-window li.unsaved > hgroup .stylesheet-name::after {
+        color: var(--low-warning-text-color) !important;
+    }
+
     @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
         menupopup {
             font-family: SF Pro Text, Segoe UI, sans-serif !important;

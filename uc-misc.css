@@ -415,6 +415,7 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
         panel,
         popupnotification,
         tooltip,
+        treechildren,
         panelview,
         #BMB_bookmarksPopup,
         #main-menubar,
@@ -426,8 +427,7 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
         /* for stuff that should be thin */
         #urlbar,
         #searchbar,
-        #PopupSearchAutoComplete,
-        treechildren {
+        #PopupSearchAutoComplete {
             font-family: SF Pro, Segoe UI, sans-serif !important;
         }
 
@@ -504,6 +504,13 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
 
         .popup-notification-body input[type="password"] {
             font-family: SF Pro !important;
+        }
+
+        :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
+        :where(menu, menuitem, menucaption),
+        panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem {
+            font-family: SF Pro Text, Segoe UI, sans-serif !important;
+            font-kerning: normal !important;
         }
 
         @-moz-document url-prefix("chrome://browser/content/syncedtabs/sidebar.xhtml")
