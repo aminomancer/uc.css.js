@@ -305,10 +305,6 @@
     background-color: hsl(232, 24%, 32%) !important;
 }
 
-#editBookmarkPanel :is(toolbarseparator, menuseparator) {
-    display: none !important;
-}
-
 #editBookmarkPanel richlistbox[id],
 #editBookmarkPanel richlistbox[id] richlistitem {
     appearance: none !important;
@@ -603,7 +599,7 @@ menuitem#menu_bookmarkThisPage[data-l10n-id="menu-bookmark-edit"]:before {
     padding-inline: 0 !important;
     margin-inline: 0 8px !important;
     fill: currentColor !important;
-    background-image: url("chrome://global/skin/icons/folder.svg") !important;
+    background-image: url(chrome://global/skin/icons/folder.svg) !important;
     -moz-context-properties: fill, fill-opacity, stroke !important;
 }
 
@@ -623,7 +619,7 @@ menuitem#menu_bookmarkThisPage[data-l10n-id="menu-bookmark-edit"]:before {
     padding-inline: 0 !important;
     margin-inline: 0 8px !important;
     fill: currentColor !important;
-    background-image: url("chrome://browser/skin/places/bookmarksToolbar.svg") !important;
+    background-image: url(chrome://browser/skin/places/bookmarksToolbar.svg) !important;
     -moz-context-properties: fill, fill-opacity, stroke !important;
 }
 
@@ -644,7 +640,7 @@ menupopup .openintabs-menuitem:not(.menuitem-iconic, .menu-iconic):before {
     padding-inline: 0 !important;
     margin-inline: var(--context-iconic-margin) !important;
     fill: currentColor !important;
-    background-image: url("chrome://userchrome/content/skin/duplicate-tab.svg") !important;
+    background-image: url(chrome://userchrome/content/skin/duplicate-tab.svg) !important;
     -moz-context-properties: fill, fill-opacity, stroke !important;
 }
 

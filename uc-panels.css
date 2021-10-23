@@ -554,11 +554,6 @@ popupnotification progress[paused]::-moz-progress-bar {
 }
 
 .permission-popup-permission-remove-button {
-    appearance: none;
-    margin: 0;
-    margin-inline-start: 2px;
-    border-width: 0;
-    min-width: 0;
     padding: 2px !important;
     background-color: var(--button-bgcolor) !important;
     color: inherit !important;
@@ -570,9 +565,18 @@ popupnotification progress[paused]::-moz-progress-bar {
     -moz-box-align: center !important;
 }
 
+.permission-popup-permission-remove-button[disabled="true"] {
+    opacity: 0.6 !important;
+    pointer-events: none !important;
+}
+
+.permission-popup-permission-remove-button[disabled="true"] > .button-box {
+    visibility: collapse !important;
+}
+
 .permission-popup-permission-remove-button > .button-box {
     margin: 1px !important;
-    border-radius: 2px;
+    border-radius: 500px;
     width: 16px;
     height: 16px;
 }
@@ -582,7 +586,9 @@ popupnotification progress[paused]::-moz-progress-bar {
 }
 
 .permission-popup-permission-remove-button > label {
-    margin-block: 0 !important;
+    margin: 1px 6px !important;
+    height: 16px !important;
+    line-height: 16px !important;
 }
 
 .permission-popup-permission-remove-button > .button-box > .button-icon {
@@ -612,14 +618,32 @@ popupnotification progress[paused]::-moz-progress-bar {
     margin-inline-start: 24px !important;
 }
 
-/* hides update popups. i use a script for this now, updateNotificationSlayer.uc.js. use that instead, it's MUCH better. */
-/* #appMenu-notification-popup {
-    display: none !important;
-} */
+#permission-popup-permissions-content {
+    padding-inline: 12px 4px !important;
+    padding-block: 4px 0 !important;
+    padding: 4px 8px 0 12px !important;
+}
 
-/* popupnotification:is([popupid="update-available"]) {
-    display: none !important;
-} */
+.permission-popup-permission-item {
+	margin-block: 4px !important;
+}
+
+#permission-popup-storage-access-permission-list-header {
+    margin-block: 4px 0 !important;
+}
+
+.permission-popup-section {
+    padding-bottom: 8px !important;
+}
+
+#permission-popup-permission-reload-hint,
+#permission-popup-permission-empty-hint {
+	margin-top: 4px !important;
+}
+
+.permission-popup-permission-list-anchor[anchorfor="3rdPartyStorage"] > vbox + .permission-popup-permission-item {
+	margin-top: 0 !important;
+}
 
 .subviewbutton-back > .toolbarbutton-icon {
     width: 16px;
@@ -1460,22 +1484,14 @@ richlistitem.download-state > .downloadButton.downloadIconCancel .button-box .bu
     margin-block: 0 !important;
 }
 
-.permission-popup-section {
-    padding-bottom: 8px !important;
-}
-
-#permission-popup-permissions-content {
-    padding-inline: 12px 4px !important;
-}
-
 #identity-popup-securityView-body {
     padding-block: 4px 8px;
 }
 
-#permission-popup-mainView-panel-header,
-#identity-popup-mainView-panel-header,
-#protections-popup-mainView-panel-header {
-    min-height: 44px !important;
+.panel-header > h1 {
+    font-size: 1.1em !important;
+    line-height: 1.1em !important;
+    font-weight: var(--uc-font-weight-bold, 600) !important;
 }
 
 .popup-notification-description {
@@ -1484,10 +1500,12 @@ richlistitem.download-state > .downloadButton.downloadIconCancel .button-box .bu
     font-weight: normal !important;
 }
 
-#eom-mainView-panel-header,
 #permission-popup-mainView-panel-header,
-#protections-popup-mainView-panel-header {
-    min-height: 44px !important;
+#identity-popup-mainView-panel-header,
+#protections-popup-mainView-panel-header,
+#eom-mainView-panel-header,
+#editBookmarkPanel > .panel-header {
+    height: 44px !important;
 }
 
 :is(#identity-popup-mainView-panel-header, #eom-mainView-panel-header, #permission-popup-mainView-panel-header, #protections-popup-mainView-panel-header)
@@ -1498,10 +1516,24 @@ richlistitem.download-state > .downloadButton.downloadIconCancel .button-box .bu
     margin: 0 !important;
 }
 
-.panel-header > h1 {
-    font-size: 1.1em !important;
-    line-height: 1.1em !important;
-    font-weight: var(--uc-font-weight-bold, 600) !important;
+#editBookmarkPanel > .panel-header {
+    padding: 0 !important;
+}
+
+#editBookmarkPanelTitle {
+    margin-block: 4px 0 !important;
+}
+
+#editBookmarkPanel toolbarseparator {
+    margin: var(--menu-separator-margin) !important;
+}
+
+#editBookmarkSeparator {
+    display: none !important;
+}
+
+#editBookmarkPanelInfoArea {
+    padding-block: 0 !important;
 }
 
 .popup-notification-description {
@@ -1522,14 +1554,6 @@ richlistitem.download-state > .downloadButton.downloadIconCancel .button-box .bu
 
 #eom-mainView-panel-header-span {
     font-weight: inherit !important;
-}
-
-#editBookmarkPanelTitle {
-    font-size: 14px !important;
-}
-
-#editBookmarkPanel > .panel-header {
-    padding-block: 6px 1px !important;
 }
 
 #identity-popup-securityView .identity-popup-security-content,

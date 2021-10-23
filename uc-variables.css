@@ -20,7 +20,8 @@ menupopup {
     --lwt-toolbarbutton-icon-fill-attention: var(--attention-color) !important;
     --lwt-background-alignment: top !important;
     --lwt-background-tiling: repeat !important;
-    --lwt-popup-brighttext-url-color: var(--urlbar-popup-action-color) !important;
+    --lwt-brighttext-url-color: var(--pink-action) !important;
+    --lwt-popup-brighttext-url-color: var(--lwt-brighttext-url-color) !important;
     --toolbarbutton-border-radius: var(--general-button-border-radius) !important;
     --toolbarbutton-icon-fill-opacity: 1 !important;
     --arrowpanel-background: var(--uc-arrowpanel-background) !important;

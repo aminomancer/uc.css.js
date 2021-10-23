@@ -144,23 +144,23 @@
 }
 
 .urlbarView-row[type="remotetab"][clientType="phone"] {
-    --device-icon: url("chrome://browser/skin/device-phone.svg");
+    --device-icon: url(chrome://browser/skin/device-phone.svg);
 }
 
 .urlbarView-row[type="remotetab"][clientType="tablet"] {
-    --device-icon: url("chrome://browser/skin/device-tablet.svg");
+    --device-icon: url(chrome://browser/skin/device-tablet.svg);
 }
 
 .urlbarView-row[type="remotetab"][clientType="desktop"] {
-    --device-icon: url("chrome://browser/skin/device-desktop.svg");
+    --device-icon: url(chrome://browser/skin/device-desktop.svg);
 }
 
 .urlbarView-row[type="remotetab"][clientType="tv"] {
-    --device-icon: url("chrome://browser/skin/device-tv.svg");
+    --device-icon: url(chrome://browser/skin/device-tv.svg);
 }
 
 .urlbarView-row[type="remotetab"][clientType="vr"] {
-    --device-icon: url("chrome://browser/skin/device-vr.svg");
+    --device-icon: url(chrome://browser/skin/device-vr.svg);
 }
 
 .urlbarView-row[type="dynamic"][dynamicType="calculator"] .urlbarView-favicon {

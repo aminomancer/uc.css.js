@@ -463,34 +463,38 @@ panel[type="autocomplete-richlistbox"]
 
 @-moz-document url("chrome://global/content/pictureinpicture/player.xhtml")
 {
-    #controls.playing #playpause {
-        background-size: 80% !important;
-        background-position: center !important;
-        -moz-context-properties: fill, fill-opacity !important;
-        fill: var(--ui-text-100) !important;
-        fill-opacity: 0.8 !important;
-        background-image: url(chrome://userchrome/content/pip-pause.svg) !important;
-    }
-
-    #controls #audio {
-        background-size: 80% !important;
-        background-position: 35% center !important;
+    .control-item {
+        backdrop-filter: blur(8px) !important;
+        background-color: var(--btn-bg-color) !important;
+        background-image: var(--acrylic-texture), var(--pip-icon) !important;
+        fill: currentColor !important;
+        -moz-context-properties: fill !important;
+        color: var(--player-control-icon-fill) !important;
     }
 
     #close {
-        background-color: var(--btn-bg-color) !important;
-        fill: currentColor !important;
-        -moz-context-properties: fill, fill-opacity !important;
-        color: var(--ui-text-100) !important;
-        background-image: url(chrome://userchrome/content/close.svg) !important;
-        fill-opacity: 1 !important;
-        background-size: 100% !important;
-        background-position: center !important;
-        background-repeat: no-repeat !important;
+        background-size: 80% !important;
+        --pip-icon: url(chrome://global/skin/icons/close.svg);
     }
 
-    #close:hover {
-        opacity: 1 !important;
+    #controls.playing #playpause {
+        --pip-icon: url(chrome://global/skin/media/pause-fill.svg);
+    }
+
+    #controls:not(.playing) #playpause {
+        --pip-icon: url(chrome://global/skin/media/play-fill.svg);
+    }
+
+    #controls.muted #audio {
+        --pip-icon: url(chrome://global/skin/media/audio-muted.svg);
+    }
+
+    #controls:not(.muted) #audio {
+        --pip-icon: url(chrome://global/skin/media/audio.svg);
+    }
+
+    #unpip {
+        --pip-icon: url(chrome://global/skin/media/picture-in-picture-closed.svg);
     }
 }
 
@@ -564,7 +568,7 @@ panel[type="autocomplete-richlistbox"]
         content: "";
         width: 2.6rem;
         height: 1.6rem;
-        background: url("chrome://global/skin/icons/arrow-down.svg") no-repeat 50% 50%;
+        background: url(chrome://global/skin/icons/arrow-down.svg) no-repeat 50% 50%;
         -moz-context-properties: fill, fill-opacity;
         fill-opacity: 0.5;
         fill: currentColor !important;
@@ -1151,7 +1155,7 @@ panel[type="autocomplete-richlistbox"]
     }
 
     #SanitizeDialog[dialogroot] #sanitizeEverythingWarningIcon {
-        list-style-image: url("chrome://global/skin/icons/warning.svg") !important;
+        list-style-image: url(chrome://global/skin/icons/warning.svg) !important;
         width: 48px;
         height: 48px;
         -moz-context-properties: fill;

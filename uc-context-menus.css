@@ -203,7 +203,7 @@ menupopup menuitem[class^="unified-nav"] .menu-iconic-accel:not([value]):empty {
 }
 
 menupopup menuitem[class^="unified-nav"][type="radio"][_moz-menuactive="true"]:before {
-    background-image: url("chrome://browser/skin/reload.svg") !important;
+    background-image: url(chrome://browser/skin/reload.svg) !important;
     background-size: 12px !important;
 }
 

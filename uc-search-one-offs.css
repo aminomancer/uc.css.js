@@ -148,7 +148,7 @@ it also changes the appearance of the one-offs in the searchbar. */
 #PopupSearchAutoComplete .search-setting-button .button-icon {
     width: 16px !important;
     height: 16px !important;
-    list-style-image: url("chrome://global/skin/icons/settings.svg");
+    list-style-image: url(chrome://global/skin/icons/settings.svg);
     -moz-context-properties: fill, fill-opacity;
     fill: currentColor;
     fill-opacity: var(--urlbar-icon-fill-opacity);
