@@ -139,7 +139,7 @@ To modify the main window UI (as you'd do with userChrome.css) make a file in th
 
 #### **Updating:**
 
-[Release packages](/../../releases/) are available as a courtesy, but since the theme and scripts are updated on a daily basis to keep up with Nightly, the latest release package may not be completely up to date. If you want the very latest stylesheets/scripts, you should either [clone the repo](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository-from-github/cloning-a-repository) directly to your profile's `chrome` folder, (use [GitHub Desktop](https://desktop.github.com/) if all of this sounds like gibberish to you) or download individual folders with [GitZip](https://addons.mozilla.org/en-US/firefox/addon/gitzip/) or [Refined GitHub](https://addons.mozilla.org/en-US/firefox/addon/refined-github-/).
+[Release packages](/../../tags/) are available as a courtesy, but since the theme and scripts are updated on a daily basis to keep up with Nightly, the latest release package may not be completely up to date. If you want the very latest stylesheets/scripts, you should either [clone the repo](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository-from-github/cloning-a-repository) directly to your profile's `chrome` folder, (use [GitHub Desktop](https://desktop.github.com/) if all of this sounds like gibberish to you) or download individual folders with [GitZip](https://addons.mozilla.org/en-US/firefox/addon/gitzip/) or [Refined GitHub](https://addons.mozilla.org/en-US/firefox/addon/refined-github-/).
 
 ## **Scripts:**
 
