@@ -156,6 +156,7 @@ menuitem[command="downloadsCmd_clearDownloads"] .menu-text,
 #context-media-unmute .menu-text,
 #context-video-fullscreen .menu-text,
 #context-leave-dom-fullscreen .menu-text,
+menuitem[data-l10n-id="full-screen-exit"] .menu-text,
 #context-media-playbackrate > .menu-text,
 #context-media-showcontrols .menu-text,
 #context-media-hidecontrols .menu-text,
@@ -525,6 +526,7 @@ menuitem[command="downloadsCmd_clearDownloads"]:before,
 #context-media-unmute:before,
 #context-video-fullscreen:before,
 #context-leave-dom-fullscreen:before,
+menuitem[data-l10n-id="full-screen-exit"]:before,
 #context_moveToStart:before,
 #context_moveToEnd:before,
 #userScriptsMenu:before,
@@ -672,6 +674,10 @@ menuitem[command="downloadsCmd_clearDownloads"]:before {
 
 #context-leave-dom-fullscreen:before {
     background-image: url(chrome://userchrome/content/fullscreenExitButton.svg);
+}
+
+menuitem[data-l10n-id="full-screen-exit"]:before {
+    background-image: url(chrome://userchrome/content/skin/fullscreen-exit.svg);
 }
 
 #context-media-playbackrate:before {
@@ -850,8 +856,12 @@ menuitem#sanitizeItem:before {
     background-image: url(chrome://userchrome/content/skin/forget.svg);
 }
 
-:is(#sync-tabs-menuitem, #syncedTabsRefresh, #syncedTabsRefreshFilter):before {
+:is(#syncedTabsRefresh, #syncedTabsRefreshFilter):before {
     background-image: url(chrome://userchrome/content/skin/sync.svg);
+}
+
+#sync-tabs-menuitem:before {
+    background-image: url(chrome://userchrome/content/skin/synced-tabs.svg);
 }
 
 #historyRestoreLastSession:before {
@@ -950,8 +960,8 @@ menuitem.customize-context-CopyID:before {
     background-image: url(chrome://userchrome/content/skin/new-tab.svg);
 }
 
-:is(#context-openlinkinunloadedtab, #placesContext_open\:unloaded, #placesContext_openContainer\:unloaded, #placesContext_openLinks\:unloaded, #syncedTabsOpenUnloaded, #syncedTabsOpenAllUnloaded, #menu_FileQuitItem):before {
-    background-image: url(chrome://userchrome/content/skin/quit.svg);
+:is(#context-openlinkinunloadedtab, #placesContext_open\:unloaded, #placesContext_openContainer\:unloaded, #placesContext_openLinks\:unloaded, #syncedTabsOpenUnloaded):before {
+    background-image: url(chrome://userchrome/content/skin/new-unloaded.svg);
 }
 
 :is(#context-openlinkincurrent, #placesContext_open, #syncedTabsOpenSelected):before {
@@ -975,8 +985,8 @@ menuitem.customize-context-CopyID:before {
     background-image: url(chrome://userchrome/content/skin/new-window.svg);
 }
 
-:is(#context-openlinkprivate, #context-searchselect-private, #menu_newPrivateWindow, #placesContext_open\:newprivatewindow, #syncedTabsOpenSelectedInPrivateWindow):before {
-    background-image: url(chrome://userchrome/content/skin/privateBrowsing.svg);
+:is(#context-openlinkprivate, #menu_newPrivateWindow, #placesContext_open\:newprivatewindow, #syncedTabsOpenSelectedInPrivateWindow):before {
+    background-image: url(chrome://userchrome/content/skin/new-private.svg);
 }
 
 :is(#placesContext_new\:bookmark, #placesContext_createBookmark, #syncedTabsBookmarkSelected):before {
@@ -995,7 +1005,7 @@ menuitem.customize-context-CopyID:before {
     background-image: url(chrome://userchrome/content/fxa/add-device.svg);
 }
 
-:is(#context-searchselect, #menu_find):before {
+:is(#context-searchselect, #context-searchselect-private, #menu_find):before {
     background-image: url(chrome://userchrome/content/search-glass.svg);
 }
 
@@ -1094,8 +1104,12 @@ menuitem#repair-text-encoding:before {
     background-image: url(chrome://userchrome/content/skin/share-menu-icon.svg);
 }
 
-:is(#context_closeTabOptions, #menu_close):before {
+:is(#context_closeTab, #menu_close):before {
     background-image: url(chrome://userchrome/content/skin/close-tabs.svg);
+}
+
+#context_closeTabOptions:before {
+    background-image: url(chrome://userchrome/content/skin/close-tabs-mult.svg);
 }
 
 #context_closeTabsToTheStart:before,
@@ -1112,9 +1126,8 @@ menuitem#repair-text-encoding:before {
     background-image: url(chrome://userchrome/content/skin/select-around.svg);
 }
 
-:is(#context_closeTab, #menu_closeWindow):before {
-    background-image: url(chrome://userchrome/content/skin/stop.svg);
-    background-size: 15px;
+#menu_closeWindow:before {
+    background-image: url(chrome://userchrome/content/skin/close-window.svg);
 }
 
 menuitem#menu_devToolbox:not([checked="true"]):before {
@@ -1169,7 +1182,9 @@ menuitem#enableDeveloperTools:before {
     background-image: url(chrome://userchrome/content/skin/developer.svg);
 }
 
-#discardTab:before {
+#discardTab:before,
+#menu_FileQuitItem:before,
+#syncedTabsOpenAllUnloaded:before {
     background-image: url(chrome://userchrome/content/skin/quit.svg);
 }
 

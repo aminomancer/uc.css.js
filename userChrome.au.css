@@ -954,7 +954,7 @@ menuitem.subviewbutton:not([disabled])[_moz-menuactive]:active,
     > #sidebar-header
     > #sidebar-switcher-target
     > #sidebar-icon {
-    list-style-image: url(chrome://userchrome/content/skin/tab.svg);
+    list-style-image: url(chrome://userchrome/content/skin/synced-tabs.svg);
 }
 
 #characterencoding-button {
@@ -979,7 +979,7 @@ menuitem.subviewbutton:not([disabled])[_moz-menuactive]:active,
 }
 
 #privatebrowsing-button {
-    list-style-image: url(chrome://userchrome/content/skin/privateBrowsing.svg);
+    list-style-image: url(chrome://userchrome/content/skin/new-private.svg);
 }
 
 #find-button {

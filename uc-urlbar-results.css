@@ -140,7 +140,7 @@
 }
 
 .urlbarView-row[type="remotetab"] .urlbarView-type-icon {
-    background: var(--device-icon, url(chrome://userchrome/content/skin/sync.svg)) center/contain no-repeat !important;
+    background: var(--device-icon, url(chrome://userchrome/content/skin/synced-tabs.svg)) center/contain no-repeat !important;
 }
 
 .urlbarView-row[type="remotetab"][clientType="phone"] {

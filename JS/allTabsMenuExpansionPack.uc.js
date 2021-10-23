@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           All Tabs Menu Expansion Pack
-// @version        1.7.4
+// @version        1.7.5
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Next to the "new tab" button in Firefox there's a V-shaped button that opens a big scrolling menu containing all the tabs. This script adds several new features to the "all tabs menu" to help it catch up to the functionality of the regular tabs bar.
@@ -810,6 +810,10 @@
         --arrowpanel-faint,
         color-mix(in srgb, var(--arrowpanel-dimmed) 60%, transparent)
     ) !important;
+}
+#allTabsMenu-allTabsViewTabs
+    > .all-tabs-item[pending][multiselected]:not([selected]):is(:hover, [_moz-menuactive]) {
+    background-color: var(--arrowpanel-dimmed) !important;
 }
 #allTabsMenu-allTabsViewTabs > .all-tabs-item[pending] > .all-tabs-button {
     opacity: 0.6;
