@@ -952,7 +952,6 @@ popupnotification progress[paused]::-moz-progress-bar {
     padding: 4px !important;
     margin-inline: 24px 1px !important;
     border-radius: 3px;
-    font-size: 1.1em !important;
 }
 
 #identity-popup-securityView-body > .identity-popup-warning-box.identity-popup-warning-yellow {
