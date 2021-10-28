@@ -743,7 +743,7 @@ so in other words it won't show if audio is playing until you hover the general 
         this version of the animation is implemented by an <animateTransform> tag.
         it's the most efficient method but it has broken once for a couple days due to an erroneous nightly patch. */
 
-        background-image: url(chrome://userchrome/content/loading-spinner.svg) !important;
+        /* background-image: url(chrome://userchrome/content/loading-spinner.svg) !important; */
 
         /* ---------------------------------- */
 
@@ -754,7 +754,7 @@ so in other words it won't show if audio is playing until you hover the general 
         giving the element a CSS property "animation" that references the animation in the style tag.
         use this if method #1 randomly breaks, *temporarily*. mozilla should patch such a bug quickly. */
 
-        /* background-image: url(chrome://userchrome/content/loading-spinner-css.svg) !important; */
+        background-image: url(chrome://userchrome/content/loading-spinner-css.svg) !important;
 
         /* ---------------------------------- */
 
@@ -775,10 +775,10 @@ so in other words it won't show if audio is playing until you hover the general 
     /* all tabs menu & vertical tabs pane (script) */
     .tab-throbber-tabslist:is([busy], [progress]) {
         /* METHOD #1: */
-        list-style-image: url(chrome://userchrome/content/loading-spinner.svg) !important;
+        /* list-style-image: url(chrome://userchrome/content/loading-spinner.svg) !important; */
 
         /* METHOD #2: */
-        /* list-style-image: url(chrome://userchrome/content/loading-spinner-css.svg) !important; */
+        list-style-image: url(chrome://userchrome/content/loading-spinner-css.svg) !important;
 
         /* METHOD #3: */
         /* animation: 0.85s steps(12, end) uc-tab-throbber-spinner infinite !important;

@@ -1061,6 +1061,10 @@ userChrome.css.wikipedia.dark-theme-enabled */
         background: none !important;
     }
 
+    .infobox-above {
+        color: inherit !important;
+    }
+
     .infobox-subheader {
         background: none !important;
         font-weight: bold !important;

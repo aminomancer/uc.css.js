@@ -315,6 +315,7 @@ toolbar .toolbarbutton-1:not([disabled], [open])[checked]:hover:active > .toolba
 }
 
 #PersonalToolbar {
+    visibility: visible !important;
     padding-inline: 2px !important;
     min-height: 32px !important;
     z-index: 3 !important;
@@ -334,18 +335,13 @@ toolbar .toolbarbutton-1:not([disabled], [open])[checked]:hover:active > .toolba
     flex-grow: 1;
 }
 
-:root:not([inFullscreen]) #PersonalToolbar:not([collapsed="true"], [customizing]) + * {
-    display: none !important;
-}
-
-:root[inFullscreen]:not([macOSNativeFullscreen]) #PersonalToolbar:not([fullscreentoolbar="true"]),
+:root[inFullscreen]:not([macOSNativeFullscreen], [customizing]) #PersonalToolbar:not([fullscreentoolbar="true"]),
 #PersonalToolbar[collapsed="true"],
 :root:not([customizing])
     > body
     > box:not(:hover, [popup-status])
     #PersonalToolbar:not(:focus-within, [tempopen="true"]),
 :root:not([customizing]) > body > box[urlbar-status] #PersonalToolbar {
-    visibility: visible !important;
     overflow-y: clip !important;
     min-height: 0 !important;
     max-height: 0 !important;
@@ -594,6 +590,11 @@ notifications are translucent with acrylic effect. enable layout.css.backdrop-fi
     --notification-button-background-active: var(--desaturate-dimmed-even-further) !important;
 }
 
+/* hide notifications when the bookmarks toolbar is visible */
+:root:not([inFullscreen]) #PersonalToolbar:not([collapsed="true"], [customizing]) + * {
+    display: none !important;
+}
+
 .notificationbox-stack[notificationside="top"] > :is(notification, notification-message) {
     border-radius: 0 !important;
     overflow: hidden !important;
@@ -617,16 +618,27 @@ notifications are translucent with acrylic effect. enable layout.css.backdrop-fi
     position: relative !important;
     border-radius: 0 !important;
     color: inherit !important;
-    background-color: var(--acrylic-blue) !important;
     overflow: hidden !important;
-    background-image: var(--acrylic-texture) !important;
-    backdrop-filter: var(--acrylic-blur) !important;
+    background-color: var(--notification-box-bgcolor) !important;
+    background-image: var(--notification-box-bgimage) !important;
+    backdrop-filter: var(--notification-box-filter) !important;
     padding-inline: 4px !important;
     align-items: center !important;
     font-size: inherit !important;
     flex-shrink: 0 !important;
     flex-grow: 0 !important;
     flex-basis: auto !important;
+}
+
+:root {
+    --notification-box-bgcolor: var(--acrylic-blue) !important;
+    --notification-box-bgimage: var(--acrylic-texture) !important;
+    --notification-box-filter: var(--acrylic-blur) !important;
+}
+
+:root[inFullscreen] {
+    --notification-box-bgcolor: var(--arrowpanel-background) !important;
+    --notification-box-filter: none !important;
 }
 
 .notificationbox-stack notification .notification-button {
@@ -668,10 +680,10 @@ notifications are translucent with acrylic effect. enable layout.css.backdrop-fi
 link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar
 {
     border-radius: 0 !important;
-    background-color: var(--acrylic-blue) !important;
     overflow: hidden !important;
-    background-image: var(--acrylic-texture) !important;
-    backdrop-filter: var(--acrylic-blur) !important;
+    background-color: var(--notification-box-bgcolor) !important;
+    background-image: var(--notification-box-bgimage) !important;
+    backdrop-filter: var(--notification-box-filter) !important;
     padding-inline: 4px !important;
     align-items: center !important;
     flex-grow: 1 !important;
@@ -741,6 +753,11 @@ link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infob
     justify-content: end !important;
     justify-items: end !important;
     gap: 4px !important;
+}
+
+link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-content .notification-button
+{
+    margin: revert !important;
 }
 
 .notificationbox-stack notification :is(button, toolbarbutton),
@@ -817,6 +834,16 @@ link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infob
 {
     transform: none !important;
     opacity: 1 !important;
+}
+
+link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar button.ghost-button:not(.semi-transparent):enabled:hover
+{
+    background-color: var(--in-content-button-background) !important;
+}
+
+link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar button.ghost-button:not(.semi-transparent):enabled:hover:active
+{
+    background-color: var(--in-content-button-background-hover) !important;
 }
 
 notification:hover .messageImage,
