@@ -41,6 +41,10 @@ tooltip .uc-tooltip-box {
     border: none !important;
 }
 
+#tab-nav-popup {
+    --tooltip-border-radius: 3px !important;
+}
+
 .places-tooltip-box,
 tooltip .uc-tooltip-box {
     --uc-tooltip-inner-padding: 4px 6px 5px 6px !important;
@@ -89,44 +93,52 @@ for that reason i disabled it but maybe someone else wants it. it does look kind
 /* the next several rulesets require restoreTabSoundButton.uc.js to set the necessary attributes based on tab security state. */
 
 /* secure pages. just a regular lock. */
-#places-tooltip-insecure-icon[type="secure"] {
+#places-tooltip-insecure-icon[type="secure"],
+#tab-nav-tooltip-insecure-icon[type="secure"] {
     list-style-image: url(chrome://global/skin/icons/security.svg) !important;
 }
 
 /* insecure pages. the default, built-in icon, a lock with a red strikethrough. */
-#places-tooltip-insecure-icon[type="insecure"] {
+#places-tooltip-insecure-icon[type="insecure"],
+#tab-nav-tooltip-insecure-icon[type="insecure"] {
     list-style-image: url(chrome://global/skin/icons/security-broken.svg) !important;
 }
 
 /* tooltip icon for https pages with mixed passive content.
 a lock with a yellow warning icon overlapping it. intended to match the identity icon.
 mixed active content still shows the normal lock with red strikethrough. */
-#places-tooltip-insecure-icon[type="mixed-passive"] {
+#places-tooltip-insecure-icon[type="mixed-passive"],
+#tab-nav-tooltip-insecure-icon[type="mixed-passive"] {
     list-style-image: url(chrome://global/skin/icons/security-warning.svg) !important;
 }
 
 /* about:* pages. */
-#places-tooltip-insecure-icon[type="about-page"] {
+#places-tooltip-insecure-icon[type="about-page"],
+#tab-nav-tooltip-insecure-icon[type="about-page"] {
     list-style-image: url(chrome://userchrome/content/identity-icons-brand.svg) !important;
 }
 
 /* local pages, e.g. file:/// or resource:// or chrome:// */
-#places-tooltip-insecure-icon[type="local-page"] {
+#places-tooltip-insecure-icon[type="local-page"],
+#tab-nav-tooltip-insecure-icon[type="local-page"] {
     list-style-image: url(chrome://userchrome/content/notifications/persistent-storage.svg) !important;
 }
 
 /* extension pages, namely moz-extension:// */
-#places-tooltip-insecure-icon[type="extension-page"] {
+#places-tooltip-insecure-icon[type="extension-page"],
+#tab-nav-tooltip-insecure-icon[type="extension-page"] {
     list-style-image: url(chrome://browser/content/extension.svg) !important;
 }
 
 /* new tab or home page */
-#places-tooltip-insecure-icon[type="home-page"] {
+#places-tooltip-insecure-icon[type="home-page"],
+#tab-nav-tooltip-insecure-icon[type="home-page"] {
     list-style-image: url(chrome://browser/skin/tab.svg) !important;
 }
 
 /* tooltip icon for tabs loading error pages, e.g. network error, certificate error, https-only error. */
-#places-tooltip-insecure-icon[type="error-page"] {
+#places-tooltip-insecure-icon[type="error-page"],
+#tab-nav-tooltip-insecure-icon[type="error-page"] {
     list-style-image: url(chrome://userchrome/content/warning.svg) !important;
 
     /* alternate style, with colored icon */
@@ -138,7 +150,8 @@ mixed active content still shows the normal lock with red strikethrough. */
 
 /* show nothing on unloaded tabs, since determining which icon to show requires accessing the browser in session storage,
 which lazy loads the browser and thereby wastes memory and computation */
-#places-tooltip-insecure-icon[pending] {
+#places-tooltip-insecure-icon[pending],
+#tab-nav-tooltip-insecure-icon[pending] {
     display: none !important;
 }
 
@@ -507,7 +520,7 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
         }
 
         :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
-        :where(menu, menuitem, menucaption),
+            :where(menu, menuitem, menucaption),
         panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem {
             font-family: SF Pro Text, Segoe UI, sans-serif !important;
             font-kerning: normal !important;
@@ -546,4 +559,22 @@ link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
     label {
     width: 0 !important;
     visibility: hidden !important;
+}
+
+/* styles for perTabNavButtons.uc.js */
+#tab-nav-popup-mainView .toolbarbutton-1 {
+    background: none !important;
+    outline: none !important;
+}
+
+#tab-nav-tooltip-textbox {
+    padding: 4px 6px !important;
+    border: 0 !important;
+}
+
+#tab-nav-popup-mainView
+    .toolbarbutton-1:focus-visible:not([disabled], [open], :hover, :active)
+    > .toolbarbutton-icon {
+    background-color: var(--toolbarbutton-checked-background) !important;
+    transition: none !important;
 }

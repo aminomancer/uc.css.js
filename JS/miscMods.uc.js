@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Misc. Mods
-// @version        1.8.0
+// @version        1.8.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Various tiny mods not worth making separate scripts for. Read the comments inside the script for details.
@@ -43,7 +43,7 @@
         "Give the private browsing indicator a tooltip": true,
 
         // The location where your bookmarks are saved by default is defined in the preference browser.bookmarks.defaultLocation. This pref is updated every time you manually change a bookmark's folder in the urlbar star button's edit bookmark panel. So if you want to save to toolbar by default, but you just added a bookmark to a different folder with the panel, that different folder now becomes your default location. So the next time you go to add a bookmark, instead of saving it to your toolbar it'll save it to the most recent folder you chose in the edit bookmark panel. This can be kind of annoying if you have a main bookmarks folder and a bunch of smaller subfolders. So I added this option to eliminate this updating behavior. This will stop Firefox from automatically updating the preference every time you use the edit bookmark panel. So whatever that pref is set to at the time you enable this setting will permanently remain your default location. You can still change the default location by modifying the preference directly or by temporarily disabling the script or this setting. This just means the pref will not automatically change while this setting is enabled.
-        "Preserve your default bookmarks folder": false,
+        "Preserve your default bookmarks folder": true,
     };
     class UCMiscMods {
         constructor() {
@@ -63,6 +63,7 @@
                 this.addPrivateBrowsingTooltip();
             if (config["Preserve your default bookmarks folder"])
                 this.makeDefaultBookmarkFolderPermanent();
+            this.randomTinyStuff();
         }
         stopDownloadsPanelFocus() {
             eval(
@@ -209,6 +210,18 @@
                             ""
                         )
             );
+        }
+        randomTinyStuff() {
+            gProtectionsHandler._initializePopup();
+            let etpView = PanelMultiView.getViewNode(document, "protections-popup-mainView");
+            let setEtpPopupInfoTooltip = (e) => {
+                let infoButton = e.target.querySelector("#protections-popup-info-button");
+                let ariaLabel = infoButton.getAttribute("aria-label");
+                if (ariaLabel) infoButton.setAttribute("tooltiptext", ariaLabel);
+                else if (infoButton.getAttribute("data-l10n-id")) return;
+                etpView.removeEventListener("ViewShowing", setEtpPopupInfoTooltip);
+            };
+            etpView.addEventListener("ViewShowing", setEtpPopupInfoTooltip);
         }
     }
 

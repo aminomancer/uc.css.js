@@ -283,7 +283,7 @@ this way we don't animate tabs that were simply moved rather than created */
     opacity: 0.7;
 }
 
-.tabbrowser-tab[pending]:is(:hover, .keyboard-focused-tab)
+.tabbrowser-tab[pending]:is(:hover, .keyboard-focused-tab, [open])
     .tab-content
     :is(.tab-icon-image, .tab-label, .tab-sharing-icon-overlay) {
     opacity: 0.8;
@@ -428,7 +428,7 @@ panel[type="autocomplete-richlistbox"]
 
 #customization-toolbar-visibility-button,
 #customization-uidensity-button {
-	padding-inline-start: 8px;
+    padding-inline-start: 8px;
 }
 
 #customization-done-button {
@@ -1859,7 +1859,8 @@ of the animations. */
     animation-timing-function: steps(18);
 }
 
-#confirmation-hint-checkmark-animation-container[animate] > #confirmation-hint-checkmark-image:-moz-locale-dir(rtl) {
+#confirmation-hint-checkmark-animation-container[animate]
+    > #confirmation-hint-checkmark-image:-moz-locale-dir(rtl) {
     animation-name: confirmation-hint-checkmark-animation-rtl;
     transform: translateX(252px);
 }
@@ -1880,13 +1881,13 @@ of the animations. */
     }
 
     #confirmation-hint-message-container {
-        transform: scale(.8);
+        transform: scale(0.8);
         opacity: 0;
-        transition: transform 120ms cubic-bezier(.25,1.27,.35,1.18),
-            opacity 60ms linear;
+        transition: transform 120ms cubic-bezier(0.25, 1.27, 0.35, 1.18), opacity 60ms linear;
     }
 
-    #confirmation-hint-checkmark-animation-container[animate] + #confirmation-hint-message-container {
+    #confirmation-hint-checkmark-animation-container[animate]
+        + #confirmation-hint-message-container {
         transform: scale(1);
         opacity: 1;
     }

@@ -214,16 +214,20 @@ panel[type="arrow"][side="top"] {
     height: revert !important;
 }
 
-#protections-popup-not-blocking-section-why:hover {
-    color: var(--panel-color);
-}
-
 :is(#protections-popup-not-blocking-section-description, #protections-popup-not-blocking-section-why, #protections-popup-blocking-section-header, #protections-popup-not-found-section-header):not([hidden="true"]) {
     display: flex !important;
 }
 
 #protections-popup-not-blocking-section-why {
     border-radius: var(--arrowpanel-menuitem-border-radius) !important;
+}
+
+#protections-popup-not-blocking-section-why:hover {
+    color: var(--panel-color);
+}
+
+#protections-popup-not-blocking-section-why:hover:active {
+    background-color: var(--panel-item-hover-bgcolor) !important;
 }
 
 #protections-popup-siteNotWorkingView-body,
@@ -625,7 +629,7 @@ popupnotification progress[paused]::-moz-progress-bar {
 }
 
 .permission-popup-permission-item {
-	margin-block: 4px !important;
+    margin-block: 4px !important;
 }
 
 #permission-popup-storage-access-permission-list-header {
@@ -638,11 +642,13 @@ popupnotification progress[paused]::-moz-progress-bar {
 
 #permission-popup-permission-reload-hint,
 #permission-popup-permission-empty-hint {
-	margin-top: 4px !important;
+    margin-top: 4px !important;
 }
 
-.permission-popup-permission-list-anchor[anchorfor="3rdPartyStorage"] > vbox + .permission-popup-permission-item {
-	margin-top: 0 !important;
+.permission-popup-permission-list-anchor[anchorfor="3rdPartyStorage"]
+    > vbox
+    + .permission-popup-permission-item {
+    margin-top: 0 !important;
 }
 
 .subviewbutton-back > .toolbarbutton-icon {
@@ -697,7 +703,9 @@ popupnotification progress[paused]::-moz-progress-bar {
     -moz-box-pack: center !important;
 }
 
-#identity-popup-mainView #identity-popup-security-button[disabled] .identity-popup-security-connection {
+#identity-popup-mainView
+    #identity-popup-security-button[disabled]
+    .identity-popup-security-connection {
     min-height: 18px !important;
 }
 
