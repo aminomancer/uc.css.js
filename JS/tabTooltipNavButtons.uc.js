@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Tab Tooltip Navigation Buttons
-// @version        1.0
+// @version        1.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    This script turns the tab tooltip into a mini navigation popup with back, forward, and reload buttons. It still shows the tab's title and URL, and also shows its favicon. So it's similar to the vanilla tooltip, except it's interactive. When you hover a tab for 500 milliseconds (the actual delay depends on ui.tooltipDelay when opening, and userChrome.tabs.tabTooltipNavButtons.hover-out-delay when closing, both of which you can set in about:config) the navigation popup will open attached to that tab. Clicking the back button will navigate *that tab* back one step, rather than only navigating the currently active tab. So this means you can navigate background tabs. The buttons work very much like the back, forward, and reload buttons on your toolbar. So a regular left click will go back or forward or reload, while a middle click or ctrl+click will duplicate the tab while going back or forward or reloading. A shift click will duplicate the tab in a new window instead. Basically all the same features that are present in the built-in toolbar buttons. The key difference (aside from navigating the hovered tab rather than the active tab) is that the buttons can navigate multiple tabs at once. If you multiselect tabs, e.g., by shift or ctrl+clicking them, and then hover one of the multiselected tabs, all the buttons in the popup will navigate all the multiselected tabs at once. So if you right-click a tab and click "Select all Tabs" in the context menu, then hover a tab and click the reload button in the popup, it will reload every tab you have open. If you have tabs multiselected but you hover one of the non-selected tabs, then the popup will only affect the hovered tab, not the multiselected tabs.
@@ -295,6 +295,8 @@ class TabTooltipNav {
         switch (this.config["Modifier key"]) {
             case undefined:
             case null:
+            case false:
+            case 0:
                 return true;
             case "ctrl":
                 return e.ctrlKey;
