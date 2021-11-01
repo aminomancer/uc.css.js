@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Tab Tooltip Navigation Buttons
-// @version        1.1
+// @version        1.1.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    This script turns the tab tooltip into a mini navigation popup with back, forward, and reload buttons. It still shows the tab's title and URL, and also shows its favicon. So it's similar to the vanilla tooltip, except it's interactive. When you hover a tab for 500 milliseconds (the actual delay depends on ui.tooltipDelay when opening, and userChrome.tabs.tabTooltipNavButtons.hover-out-delay when closing, both of which you can set in about:config) the navigation popup will open attached to that tab. Clicking the back button will navigate *that tab* back one step, rather than only navigating the currently active tab. So this means you can navigate background tabs. The buttons work very much like the back, forward, and reload buttons on your toolbar. So a regular left click will go back or forward or reload, while a middle click or ctrl+click will duplicate the tab while going back or forward or reloading. A shift click will duplicate the tab in a new window instead. Basically all the same features that are present in the built-in toolbar buttons. The key difference (aside from navigating the hovered tab rather than the active tab) is that the buttons can navigate multiple tabs at once. If you multiselect tabs, e.g., by shift or ctrl+clicking them, and then hover one of the multiselected tabs, all the buttons in the popup will navigate all the multiselected tabs at once. So if you right-click a tab and click "Select all Tabs" in the context menu, then hover a tab and click the reload button in the popup, it will reload every tab you have open. If you have tabs multiselected but you hover one of the non-selected tabs, then the popup will only affect the hovered tab, not the multiselected tabs.
@@ -137,30 +137,26 @@ class TabTooltipNav {
             aria-labelledby="tab-nav-tooltip-label" onpopupshowing="tabNavButtons.onPopupShowing(event);"
             onpopupshown="tabNavButtons.onPopupShown(event);" onpopuphidden="tabNavButtons.onPopupHidden(event);"
             onmouseleave="tabNavButtons.onMouseleave(event);" consumeoutsideclicks="never">
-            <panelmultiview id="tab-nav-popup-multiView" disablekeynav="true" mainViewId="tab-nav-popup-mainView">
-                <panelview id="tab-nav-popup-mainView" class="PanelUI-subView" descriptionheightworkaround="true">
-                    <hbox id="tab-nav-popup-body" class="panel-subview-body">
-                        <toolbarbutton id="tab-nav-back" class="toolbarbutton-1" tooltiptext='${l10n["Go Back (Single Tab)"]}'
-                            oncommand="tabNavButtons.goBack(event)" onclick="checkForMiddleClick(this, event);"/>
-                        <toolbarbutton id="tab-nav-forward" class="toolbarbutton-1" tooltiptext='${l10n["Go Forward (Single Tab)"]}'
-                            oncommand="tabNavButtons.goForward(event)" onclick="checkForMiddleClick(this, event);"/>
-                        <toolbarbutton id="tab-nav-reload" class="toolbarbutton-1" tooltiptext='${l10n["Reload (Single Tab)"]}'
-                            oncommand="tabNavButtons.reloadOrDuplicate(event)" onclick="checkForMiddleClick(this, event);"/>
-                        <separator id="tab-nav-separator" orient="vertical"/>
-                        <hbox id="tab-nav-tooltip-box" align="center">
-                            <box id="tab-nav-favicon-box">
-                                <image id="tab-nav-tooltip-favicon"></image>
-                            </box>
-                            <vbox id="tab-nav-tooltip-textbox" class="places-tooltip-box" flex="1">
-                                <description id="tab-nav-tooltip-label" class="tooltip-label places-tooltip-title"/>
-                                <hbox id="tab-nav-tooltip-uri-box">
-                                    <description id="tab-nav-tooltip-uri" crop="center" class="tooltip-label places-tooltip-uri uri-element"/>
-                                </hbox>
-                            </vbox>
+            <hbox id="tab-nav-popup-body" class="panel-subview-body">
+                <toolbarbutton id="tab-nav-back" class="toolbarbutton-1" tooltiptext='${l10n["Go Back (Single Tab)"]}'
+                    oncommand="tabNavButtons.goBack(event)" onclick="checkForMiddleClick(this, event);"/>
+                <toolbarbutton id="tab-nav-forward" class="toolbarbutton-1" tooltiptext='${l10n["Go Forward (Single Tab)"]}'
+                    oncommand="tabNavButtons.goForward(event)" onclick="checkForMiddleClick(this, event);"/>
+                <toolbarbutton id="tab-nav-reload" class="toolbarbutton-1" tooltiptext='${l10n["Reload (Single Tab)"]}'
+                    oncommand="tabNavButtons.reloadOrDuplicate(event)" onclick="checkForMiddleClick(this, event);"/>
+                <separator id="tab-nav-separator" orient="vertical"/>
+                <hbox id="tab-nav-tooltip-box" align="center">
+                    <box id="tab-nav-favicon-box">
+                        <image id="tab-nav-tooltip-favicon"></image>
+                    </box>
+                    <vbox id="tab-nav-tooltip-textbox" class="places-tooltip-box" flex="1">
+                        <description id="tab-nav-tooltip-label" class="tooltip-label places-tooltip-title"/>
+                        <hbox id="tab-nav-tooltip-uri-box">
+                            <description id="tab-nav-tooltip-uri" crop="center" class="tooltip-label places-tooltip-uri uri-element"/>
                         </hbox>
-                    </hbox>
-                </panelview>
-            </panelmultiview>
+                    </vbox>
+                </hbox>
+            </hbox>
         </panel>`;
         window.mainPopupSet.appendChild(MozXULElement.parseXULToFragment(this.markup));
         this.navPopup.removeAttribute("position");
@@ -281,7 +277,7 @@ class TabTooltipNav {
             return this.closePopup();
         }
         if (this.triggerTab.matches(":hover"))
-            PanelMultiView.openPopup(this.navPopup, this.triggerTab, {
+            this.navPopup.openPopup(this.triggerTab, {
                 position: "after_start",
                 triggerEvent: e,
             });
@@ -503,41 +499,39 @@ class TabTooltipNav {
         #tab-nav-popup-body {
             padding: var(--tab-nav-popup-padding, 2px 4px);
         }
-        #tab-nav-popup-mainView {
-            background: none;
-        }
-        #tab-nav-popup-mainView .toolbarbutton-1 {
+        #tab-nav-popup .toolbarbutton-1 {
+            appearance: none;
             margin: 0;
             padding: 0 var(--toolbarbutton-outer-padding);
             -moz-box-pack: center;
             background: none !important;
             outline: none !important;
         }
-        #tab-nav-popup-mainView .toolbarbutton-1 > .toolbarbutton-icon {
+        #tab-nav-popup .toolbarbutton-1 > .toolbarbutton-icon {
             width: calc(2 * var(--toolbarbutton-inner-padding) + 16px);
             height: calc(2 * var(--toolbarbutton-inner-padding) + 16px);
             padding: var(--toolbarbutton-inner-padding);
             border-radius: var(--toolbarbutton-border-radius);
         }
-        #tab-nav-popup-mainView
+        #tab-nav-popup
             .toolbarbutton-1:not([disabled="true"], [checked], [open], :active):hover
             > .toolbarbutton-icon {
             background-color: var(--toolbarbutton-hover-background);
             color: inherit;
         }
-        #tab-nav-popup-mainView
+        #tab-nav-popup
             .toolbarbutton-1:not([disabled="true"]):is([open], [checked], :hover:active)
             > .toolbarbutton-icon {
             background-color: var(--toolbarbutton-active-background);
             color: inherit;
         }
-        #tab-nav-popup-mainView .toolbarbutton-1:-moz-focusring > .toolbarbutton-icon {
+        #tab-nav-popup .toolbarbutton-1:-moz-focusring > .toolbarbutton-icon {
             color: inherit;
             outline: var(--toolbarbutton-focus-outline);
             outline-offset: calc(var(--focus-outline-width) * -1);
         }
         :root[uidensity="compact"]
-            #tab-nav-popup-mainView
+            #tab-nav-popup
             .toolbarbutton-1:-moz-focusring
             > .toolbarbutton-icon {
             outline-offset: calc(var(--focus-outline-width) * -1 - 1px);
