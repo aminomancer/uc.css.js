@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Tab Tooltip Navigation Buttons
-// @version        1.1.1
+// @version        1.2.0
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    This script turns the tab tooltip into a mini navigation popup with back, forward, and reload buttons. It still shows the tab's title and URL, and also shows its favicon. So it's similar to the vanilla tooltip, except it's interactive. When you hover a tab for 500 milliseconds (the actual delay depends on ui.tooltipDelay when opening, and userChrome.tabs.tabTooltipNavButtons.hover-out-delay when closing, both of which you can set in about:config) the navigation popup will open attached to that tab. Clicking the back button will navigate *that tab* back one step, rather than only navigating the currently active tab. So this means you can navigate background tabs. The buttons work very much like the back, forward, and reload buttons on your toolbar. So a regular left click will go back or forward or reload, while a middle click or ctrl+click will duplicate the tab while going back or forward or reloading. A shift click will duplicate the tab in a new window instead. Basically all the same features that are present in the built-in toolbar buttons. The key difference (aside from navigating the hovered tab rather than the active tab) is that the buttons can navigate multiple tabs at once. If you multiselect tabs, e.g., by shift or ctrl+clicking them, and then hover one of the multiselected tabs, all the buttons in the popup will navigate all the multiselected tabs at once. So if you right-click a tab and click "Select all Tabs" in the context menu, then hover a tab and click the reload button in the popup, it will reload every tab you have open. If you have tabs multiselected but you hover one of the non-selected tabs, then the popup will only affect the hovered tab, not the multiselected tabs.
@@ -18,6 +18,14 @@ class TabTooltipNav {
         // if you want no tooltip to show at all unless the modifier key is pressed, set this to false.
         // it will have no effect if "Modifier key" is not set to one of the valid string values listed above.
         "Show vanilla tooltip if modifier is not pressed": true,
+
+        // When you right click one of the back or forward buttons, it opens a little context menu
+        // that shows up to 15 items in that tab's history. when you mouse over them, the popup's tooltip
+        // will be temporarily updated to show that history item's title, URL, and favicon.
+        // this is similar to how the built-in back/forward buttons' menu works, where hovering a menuitem
+        // causes the URL to display in the status bar at the bottom of the screen.
+        // if you don't need this behavior or find it annoying, set this pref to false.
+        "Update tooltip when hovering in the history menu": true,
 
         l10n: {
             "Go Back (Single Tab)": "Navigate tab back one page",
@@ -63,6 +71,9 @@ class TabTooltipNav {
             if (value) element.setAttribute(name, value);
             else element.removeAttribute(name);
     }
+    // if there are multiple tabs selected and the trigger tab (the hovered one) is one of them,
+    // return the full array of selected tabs. if the trigger tab is not one of them,
+    // or if only one tab is selected, return an array containing just the trigger tab.
     get tabs() {
         if (!this.triggerTab) return [];
         if (this.triggerTab.multiselected) return gBrowser.selectedTabs;
@@ -70,6 +81,12 @@ class TabTooltipNav {
     }
     get navPopup() {
         return this._navPopup || (this._navPopup = document.querySelector("#tab-nav-popup"));
+    }
+    get tabBackForwardMenu() {
+        return (
+            this._tabBackForwardMenu ||
+            (this._tabBackForwardMenu = document.querySelector("#tabBackForwardMenu"))
+        );
     }
     get tooltipBox() {
         return (
@@ -115,7 +132,6 @@ class TabTooltipNav {
     constructor() {
         this.config = TabTooltipNav.config;
         let l10n = this.config.l10n;
-        MozXULElement.insertFTLIfNeeded("browser/tabContextMenu.ftl");
         XPCOMUtils.defineLazyPreferenceGetter(
             this,
             "popupDelay",
@@ -139,9 +155,9 @@ class TabTooltipNav {
             onmouseleave="tabNavButtons.onMouseleave(event);" consumeoutsideclicks="never">
             <hbox id="tab-nav-popup-body" class="panel-subview-body">
                 <toolbarbutton id="tab-nav-back" class="toolbarbutton-1" tooltiptext='${l10n["Go Back (Single Tab)"]}'
-                    oncommand="tabNavButtons.goBack(event)" onclick="checkForMiddleClick(this, event);"/>
+                    oncommand="tabNavButtons.goBack(event)" onclick="checkForMiddleClick(this, event);" context="tabBackForwardMenu"/>
                 <toolbarbutton id="tab-nav-forward" class="toolbarbutton-1" tooltiptext='${l10n["Go Forward (Single Tab)"]}'
-                    oncommand="tabNavButtons.goForward(event)" onclick="checkForMiddleClick(this, event);"/>
+                    oncommand="tabNavButtons.goForward(event)" onclick="checkForMiddleClick(this, event);" context="tabBackForwardMenu"/>
                 <toolbarbutton id="tab-nav-reload" class="toolbarbutton-1" tooltiptext='${l10n["Reload (Single Tab)"]}'
                     oncommand="tabNavButtons.reloadOrDuplicate(event)" onclick="checkForMiddleClick(this, event);"/>
                 <separator id="tab-nav-separator" orient="vertical"/>
@@ -157,7 +173,9 @@ class TabTooltipNav {
                     </vbox>
                 </hbox>
             </hbox>
-        </panel>`;
+        </panel>
+        <menupopup id="tabBackForwardMenu" onpopupshowing="return tabNavButtons.fillHistoryMenu(event.target);"
+            onpopuphidden="tabNavButtons.onContextHidden();" oncommand="tabNavButtons.gotoHistoryIndex(event); event.stopPropagation();"/>`;
         window.mainPopupSet.appendChild(MozXULElement.parseXULToFragment(this.markup));
         this.navPopup.removeAttribute("position");
         this.navPopup.removeAttribute("side");
@@ -206,6 +224,7 @@ class TabTooltipNav {
             default:
         }
     }
+    // when the popup initially shows, set the labels, tooltips, and button states
     onPopupShowing(e) {
         this.isOpen = true;
         let l10n = this.config.l10n;
@@ -231,9 +250,17 @@ class TabTooltipNav {
         this.isOpen = false;
         this.knownWidth = null;
     }
+    // called when the context menu is closed for whatever reason. we need to hide the whole
+    // nav popup if the context menu closes and the mouse is now outside the valid bounds.
+    onContextHidden(e) {
+        this.menuOpen = false;
+        this.onMouseleave();
+    }
+    // main trigger for opening the nav popup
     onMousemove(e) {
         clearTimeout(this.openTimer);
         clearTimeout(this.closeTimer);
+        if (this.menuOpen) return;
         let tab = e.target.closest("tab");
         if (this.isOpen) {
             if (this.triggerTab === tab) return this.handleTooltip(e);
@@ -242,12 +269,16 @@ class TabTooltipNav {
         this.triggerTab = tab;
         if (tab) this.openTimer = setTimeout(() => this.openPopup(e), this.popupDelay);
     }
+    // main trigger for closing it
     onMouseleave() {
         clearTimeout(this.openTimer);
         clearTimeout(this.closeTimer);
+        if (this.menuOpen) return;
         if (this.navPopup.matches(":hover") || this.triggerTab?.matches(":hover")) return;
         this.closeTimer = setTimeout(() => this.closePopup(), this.popupDelay);
     }
+    // on navigation, update back/forward buttons and update the tooltip if the navigation involved
+    // the trigger tab or multiselected tabs (provided the trigger tab is also multiselected)
     onLocationChange(browser, progress) {
         if (!progress.isTopLevel || !this.isOpen || !this.triggerTab) return;
         let tab = gBrowser.getTabForBrowser(browser);
@@ -255,19 +286,24 @@ class TabTooltipNav {
         if (tabs.indexOf(tab) > -1) this.updateButtonsState(tabs);
         if (tab === this.triggerTab) this.handleTooltip();
     }
+    // update the nav popup tooltip if attributes of the trigger tab changed.
     onTabAttrModified(e) {
         if (e.target === this.triggerTab) this.handleTooltip();
     }
+    // if the native tab tooltip is about to show, either suppress it
+    // or allow it and prevent the nav popup from opening.
     onTooltipShowing(e) {
         if (this.isOpen || this.modifierPressed(e)) {
             e.preventDefault();
             return;
         } else this.interrupt();
     }
+    // close all popups and bail out of any scheduled popup actions.
     interrupt() {
         clearTimeout(this.openTimer);
         clearTimeout(this.closeTimer);
         this.closePopup();
+        this.tabBackForwardMenu.hidePopup();
     }
     openPopup(e) {
         if (this.isOpen || !this.modifierPressed(e)) return;
@@ -287,6 +323,8 @@ class TabTooltipNav {
         this.navPopup.hidePopup(true);
         this.triggerTab = null;
     }
+    // return true if the user's configured modifier key is pressed in the passed event.
+    // return true if the user has the modifier key setting disabled.
     modifierPressed(e) {
         switch (this.config["Modifier key"]) {
             case undefined:
@@ -328,6 +366,26 @@ class TabTooltipNav {
             });
         else this.duplicateTabsIn(tabs, where, 1);
     }
+    // used by the back/forward context menu items. navigates a given browser's history
+    gotoHistoryIndex(e) {
+        e = getRootEvent(e);
+        let index = e.target.getAttribute("index");
+        if (!index) return false;
+        let where = whereToOpenLink(e);
+        if (where == "current") {
+            try {
+                this.triggerTab.linkedBrowser.gotoIndex(index);
+            } catch (ex) {
+                return false;
+            }
+            return true;
+        }
+        let historyindex = e.target.getAttribute("historyindex");
+        duplicateTabIn(this.triggerTab, where, Number(historyindex));
+        return true;
+    }
+    // called when pressing the reload button. depending on modifier keys pressed,
+    // either reload the tab in place or reload it in a new tab or window.
     reloadOrDuplicate(e) {
         e = getRootEvent(e);
         let { tabs } = this;
@@ -350,6 +408,8 @@ class TabTooltipNav {
     duplicateTabsIn(tabs, where, i) {
         tabs.forEach((tab) => duplicateTabIn(tab, where, i));
     }
+    // for a given set of tabs, reload their linked browsers with the passed (binary) flags.
+    // we only use the bypass proxy & cache flags. this is the same as when you press ctrl+shift+R.
     browserReloadWithFlags(tabs, flags) {
         let unchangedRemoteness = [];
         tabs.forEach((tab) => {
@@ -399,6 +459,7 @@ class TabTooltipNav {
             );
         }
     }
+    // enable/disable the back and forward buttons according to whether the selected tabs can go back/forward
     updateButtonsState(tabs = this.tabs) {
         this.backButton.disabled = !tabs.some(
             (tab) => gBrowser.getBrowserForTab(tab).webNavigation?.canGoBack
@@ -407,6 +468,7 @@ class TabTooltipNav {
             (tab) => gBrowser.getBrowserForTab(tab).webNavigation?.canGoForward
         );
     }
+    // set the tooltip (tab title and url) in the nav popup to match the trigger tab
     handleTooltip() {
         let tab = this.triggerTab;
         if (!tab) return;
@@ -421,7 +483,7 @@ class TabTooltipNav {
         const selectedTabs = gBrowser.selectedTabs;
         const contextTabInSelection = selectedTabs.includes(tab);
         const affectedTabsLength = contextTabInSelection ? selectedTabs.length : 1;
-        this.setIcon(tab);
+        this.setFavicon(tab);
         if (tab.mOverCloseButton) {
             let shortcut = ShortcutUtils.prettifyShortcut(key_close);
             label = PluralForm.get(
@@ -459,7 +521,8 @@ class TabTooltipNav {
         url.value = tab.linkedBrowser?.currentURI?.spec.replace(/^https:\/\//, "");
         if (this.knownWidth) this.captureKnownWidth();
     }
-    setIcon(tab) {
+    // sets the main favicon in the nav popup to match the trigger tab
+    setFavicon(tab) {
         let busy = tab.getAttribute("busy");
         let progress = tab.getAttribute("progress");
         let { favicon } = this;
@@ -489,6 +552,125 @@ class TabTooltipNav {
         if (!rect) return;
         if (this.knownWidth && this.knownWidth > rect.width) return;
         this.knownWidth = rect.width;
+    }
+    // called when the back/forward context menu is open. fills it with navigation history entries.
+    fillHistoryMenu(menupopup) {
+        // if this setting is enabled, set up a listener for selection of items in the context menu.
+        // this way when an item is "hovered" in the context menu, its title, url, and favicon
+        // can be temporarily shown in the main nav popup, functioning like a tooltip or status bar.
+        if (
+            !menupopup.hasStatusListener &&
+            this.config["Update tooltip when hovering in the history menu"]
+        ) {
+            menupopup.addEventListener("DOMMenuItemActive", (e) => {
+                if (e.target.hasAttribute("checked")) this.handleTooltip();
+                else {
+                    let uri = e.target.getAttribute("uri");
+                    let title = this.navPopup.querySelector(".places-tooltip-title");
+                    let urlLabel = this.navPopup.querySelector(".places-tooltip-uri");
+                    let { favicon } = this;
+                    title.value = e.target.getAttribute("label");
+                    urlLabel.value = uri.replace(/^https:\/\//, "");
+                    this.setAttributes(favicon, {
+                        busy: false,
+                        progress: false,
+                        src: `page-icon:${uri}`,
+                    });
+                    favicon.classList.remove("tab-throbber-tabslist");
+                    if (this.knownWidth) this.captureKnownWidth();
+                }
+            });
+            menupopup.addEventListener("DOMMenuItemInactive", () => this.handleTooltip());
+            menupopup.hasStatusListener = true;
+        }
+
+        let children = menupopup.children;
+        for (let i = children.length - 1; i >= 0; --i)
+            if (children[i].hasAttribute("index")) menupopup.removeChild(children[i]);
+
+        const MAX_HISTORY_MENU_ITEMS = 15;
+        const tooltipBack = gNavigatorBundle.getString("tabHistory.goBack");
+        const tooltipCurrent = gNavigatorBundle.getString("tabHistory.current");
+        const tooltipForward = gNavigatorBundle.getString("tabHistory.goForward");
+
+        function updateSessionHistory(sessionHistory, initial, ssInParent) {
+            let count = ssInParent ? sessionHistory.count : sessionHistory.entries.length;
+            if (!initial) {
+                if (count <= 1) {
+                    menupopup.hidePopup();
+                    return;
+                } else if (menupopup.id != "tabBackForwardMenu" && !menupopup.parentNode.open) {
+                    menupopup.parentNode.open = true;
+                    this.menuOpen = true;
+                    return;
+                }
+            }
+            let { index } = sessionHistory;
+            let half_length = Math.floor(MAX_HISTORY_MENU_ITEMS / 2);
+            let start = Math.max(index - half_length, 0);
+            let end = Math.min(
+                start == 0 ? MAX_HISTORY_MENU_ITEMS : index + half_length + 1,
+                count
+            );
+            if (end == count) start = Math.max(count - MAX_HISTORY_MENU_ITEMS, 0);
+            let existingIndex = 0;
+            for (let j = end - 1; j >= start; j--) {
+                let entry = ssInParent
+                    ? sessionHistory.getEntryAtIndex(j)
+                    : sessionHistory.entries[j];
+                if (
+                    BrowserUtils.navigationRequireUserInteraction &&
+                    entry.hasUserInteraction === false &&
+                    j != end - 1 &&
+                    j != start
+                )
+                    continue;
+                let uri = ssInParent ? entry.URI.spec : entry.url;
+                let item =
+                    existingIndex < children.length
+                        ? children[existingIndex]
+                        : document.createXULElement("menuitem");
+                item.setAttribute("uri", uri);
+                item.setAttribute("label", entry.title || uri);
+                item.setAttribute("index", j);
+                item.setAttribute("historyindex", j - index);
+                if (j != index) item.style.listStyleImage = `url(page-icon:${uri})`;
+                if (j < index) {
+                    item.className = "unified-nav-back menuitem-iconic menuitem-with-favicon";
+                    item.setAttribute("tooltiptext", tooltipBack);
+                } else if (j == index) {
+                    item.setAttribute("type", "radio");
+                    item.setAttribute("checked", "true");
+                    item.className = "unified-nav-current";
+                    item.setAttribute("tooltiptext", tooltipCurrent);
+                } else {
+                    item.className = "unified-nav-forward menuitem-iconic menuitem-with-favicon";
+                    item.setAttribute("tooltiptext", tooltipForward);
+                }
+                if (!item.parentNode) menupopup.appendChild(item);
+                existingIndex++;
+            }
+            if (!initial) {
+                let existingLength = children.length;
+                while (existingIndex < existingLength) {
+                    menupopup.removeChild(menupopup.lastElementChild);
+                    existingIndex++;
+                }
+            }
+        }
+        if (this.triggerTab.multiselected) return false;
+        let { browsingContext } = this.triggerTab.linkedBrowser;
+        if (!browsingContext) return false;
+        let { sessionHistory } = browsingContext;
+        if (sessionHistory?.count) {
+            if (sessionHistory.count <= 1) return false;
+            updateSessionHistory(sessionHistory, true, true);
+        } else {
+            sessionHistory = SessionStore.getSessionHistory(this.triggerTab, updateSessionHistory);
+            updateSessionHistory(sessionHistory, true, false);
+        }
+        this.menuOpen = true;
+        return true;
     }
     registerSheet() {
         let css = `#tab-nav-popup {
