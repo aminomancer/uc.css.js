@@ -500,6 +500,14 @@ panel[type="autocomplete-richlistbox"]
         padding-inline: 6px;
     }
 
+    :root[dialogroot] select:not([size], [multiple]) {
+        background-position: right 6px center;
+    }
+
+    #printer-picker {
+        background-position: right 6px center, left 8px center;
+    }
+
     :is(panel, dialog) menulist::part(dropmarker-icon) {
         appearance: none;
         list-style-image: url(chrome://userchrome/content/select-drop-marker.svg);

@@ -274,17 +274,27 @@ html|input[type="number"]::-moz-number-spin-down {
     background-position: center 0px;
     -moz-context-properties: fill;
     fill: currentColor;
-    fill-opacity: 0.4;
+    fill-opacity: 0.6;
     appearance: none;
 }
 
 html|input[type="number"]::-moz-number-spin-up {
-    scale: 1 -1;
+    background-image: url(chrome://userchrome/content/arrow-dropdown-16-up.svg);
 }
 
 html|input[type="number"]::-moz-number-spin-down:hover,
 html|input[type="number"]::-moz-number-spin-up:hover {
-    fill-opacity: 0.7;
+    fill-opacity: 0.9;
+}
+
+html|input[type="number"] {
+    cursor: default;
+}
+
+html|input[type="number"]::-moz-text-control-editing-root,
+html|input[type="number"]::placeholder,
+html|input[type="number"]::-moz-text-control-preview {
+    cursor: text;
 }
 
 /* this looks nice on unstyled ranges but looks ugly on sites that don't reset properties, like amazon prime video. sigh */
