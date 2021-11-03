@@ -50,7 +50,7 @@ this works best with the overlay scrollbars from userChrome.ag.css */
 :host([orient="vertical"]) > #scrollbutton-down,
 :host([orient="vertical"])::part(overflow-end-indicator),
 :host([orient="vertical"])::part(overflow-start-indicator) {
-    display: none;
+    visibility: collapse;
 }
 
 /* reveal the vertical scrollbar */
