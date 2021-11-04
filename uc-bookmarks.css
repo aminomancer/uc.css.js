@@ -167,7 +167,6 @@
 #editBookmarkPanel menuitem,
 #editBookmarkPanel menu {
     appearance: none !important;
-    background-color: hsl(232, 24%, 32%) !important;
     line-height: normal !important;
     padding-bottom: 3px;
     padding-inline-start: 2px !important;
@@ -181,7 +180,6 @@
 #editBookmarkPanel menupopup {
     padding: 0px !important;
     appearance: none !important;
-    background-color: hsl(232, 24%, 32%) !important;
     line-height: normal !important;
     color: #fff !important;
     border: none !important;
@@ -283,6 +281,12 @@
     border-radius: 2px !important;
 }
 
+#editBookmarkPanel .in-menulist {
+    --menu-background-color: var(--ebp-menulist-background-color) !important;
+    --menuitem-hover-background-color: var(--ebp-menulist-menuitem-hover-background-color) !important;
+    --menu-separator-color: var(--ebp-menulist-separator-color) !important;
+}
+
 #editBookmarkPanel .in-menulist :is(menu, menuitem) {
     min-height: 24px !important;
     height: 24px !important;
@@ -293,16 +297,9 @@
     padding-inline: 0 !important;
 }
 
-#editBookmarkPanel .in-menulist :is(menu, menuitem)[_moz-menuactive="true"]:not([disabled="true"]) {
-    appearance: none !important;
-    background-color: hsl(232, 21%, 40%) !important;
-    color: #fff !important;
-    border: none !important;
-}
-
 #editBookmarkPanel menulist:is(:focus-visible, [open="true"]) {
     appearance: none !important;
-    background-color: hsl(232, 24%, 32%) !important;
+    background-color: var(--ebp-menulist-background-color) !important;
 }
 
 #editBookmarkPanel richlistbox[id],
@@ -417,6 +414,10 @@
     background-color: var(--checkbox-checked-hover-bgcolor) !important;
 }
 
+#editBookmarkPanel_persistLastLocation {
+    padding-inline: 4px !important;
+}
+
 richlistbox[id]:not(#categories) > richlistitem[selected] {
     --in-content-button-background: revert !important;
     --in-content-button-background-hover: revert !important;
@@ -440,7 +441,7 @@ richlistbox[id]:not(#categories) > richlistitem[selected] {
     width: 32px;
     height: 32px;
     padding: 5px;
-    background: hsla(232, 24%, 26%, 50%) !important;
+    background-color: var(--ebp-favicon-background-color) !important;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.05) !important;
     border-radius: 3px !important;
     margin-top: 10px;

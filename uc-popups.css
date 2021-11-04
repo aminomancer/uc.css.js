@@ -1353,16 +1353,18 @@ link[href="chrome://global/content/printPagination.css"]
     }
 
     #updateDeck button {
-        background: var(--buttons-primary-button-bgcolor);
+        background: var(--buttons-primary-button-bgcolor) !important;
         padding: 8px 10px !important;
+        margin-inline-start: 0 !important;
+        border: 0 !important;
     }
 
     #updateDeck button:is(:hover, :focus-visible) {
-        background: var(--buttons-primary-button-hover-bgcolor);
+        background: var(--buttons-primary-button-hover-bgcolor) !important;
     }
 
     #updateDeck button:hover:active {
-        background: var(--buttons-primary-button-active-bgcolor);
+        background: var(--buttons-primary-button-active-bgcolor) !important;
     }
 
     #update-available-whats-new,

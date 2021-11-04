@@ -84,7 +84,8 @@ tooltip {
     --uc-font-weight-thin: 400;
     --subdialog-font-size: 1em !important;
 
-    --autocomplete-background: hsl(233, 33%, 17%);
+    --popup-on-popup-contrast-bg: hsl(233, 33%, 17%);
+    --autocomplete-background: var(--popup-on-popup-contrast-bg);
     --ui-secondary-bg: hsl(234, 39%, 10%);
     --tooltip-bgcolor: hsl(233, 36%, 11%);
     --tooltip-color: white;
@@ -295,6 +296,10 @@ tooltip {
     --in-parent-primary-button-text-color: var(--in-parent-page-color);
     --ui-textbox-bgcolor: hsl(233, 24%, 28%);
     --ui-textbox-focus-bgcolor: hsl(232, 22%, 34%);
+    --ebp-menulist-background-color: hsl(232, 24%, 32%);
+    --ebp-menulist-menuitem-hover-background-color: hsl(232, 21%, 40%);
+    --ebp-menulist-separator-color: hsl(232, 21%, 43%);
+    --ebp-favicon-background-color: var(--dialog-bgcolor);
     --ui-solid-button-bgcolor: var(--uc-arrowpanel-dimmed);
     --ui-solid-button-hover-bgcolor: var(--uc-arrowpanel-dimmed-further);
     --ui-solid-button-active-bgcolor: var(--uc-arrowpanel-dimmed-even-further);

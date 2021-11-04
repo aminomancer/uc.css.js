@@ -68,16 +68,6 @@ as well as the internal appearance of the built-in sidebars, e.g. bookmarks, his
     padding-inline-start: 13px !important;
 }
 
-#sidebar-search-container #viewButton {
-    padding-inline: 7px 5px !important;
-    margin-inline-start: 6px !important;
-    border-radius: var(--general-button-border-radius) !important;
-}
-
-#sidebar-search-container #viewButton > .button-box > dropmarker {
-    margin-inline-start: 4px !important;
-}
-
 /* search-textbox icons (magnifying glass and clear input button) */
 @-moz-document url("chrome://browser/content/browser.xhtml"), regexp(".*Sidebar.*"), regexp(".*sidebar.*")
 {
@@ -108,7 +98,7 @@ as well as the internal appearance of the built-in sidebars, e.g. bookmarks, his
 
     .textbox-search-clear:is(:hover, :active) {
         fill: rgba(255, 255, 255, 1) !important;
-        background-color: var(--arrowpanel-dimmed) !important;
+        background-color: var(--button-hover-bgcolor) !important;
     }
 
     .textbox-search-sign {
@@ -140,21 +130,29 @@ as well as the internal appearance of the built-in sidebars, e.g. bookmarks, his
     transition: 300ms !important;
 }
 
+#viewButton {
+    padding-inline: 7px 5px !important;
+    margin-inline-start: 6px !important;
+    border-radius: var(--general-button-border-radius) !important;
+    border: 0 !important;
+    background: transparent !important;
+}
+
+#viewButton > .button-box > dropmarker {
+    margin-inline-start: 4px !important;
+}
+
 #viewButton:hover {
-    background-color: var(--arrowpanel-dimmed) !important;
+    background-color: var(--button-hover-bgcolor) !important;
 }
 
 #viewButton:is(:active, [open]) {
-    background-color: var(--arrowpanel-dimmed-further) !important;
+    background-color: var(--button-active-bgcolor) !important;
 }
 
 #sidebarMenu-popup {
-    --arrowpanel-background: var(--toolbar-bgcolor);
+    --arrowpanel-background: var(--popup-on-popup-contrast-bg);
     margin-top: 0 !important;
-}
-
-#sidebarMenu-popup > .subviewbutton[checked="true"] {
-    background: none !important;
 }
 
 #sidebarMenu-popup > .subviewbutton[checked="true"] > .toolbarbutton-icon {
@@ -164,14 +162,6 @@ as well as the internal appearance of the built-in sidebars, e.g. bookmarks, his
     background-color: var(--uc-checkbox-checked-bgcolor);
     background-size: contain;
     border-radius: 100%;
-}
-
-#sidebarMenu-popup > .subviewbutton[checked="true"]:not([disabled], [open]):hover {
-    background-color: var(--arrowpanel-faint) !important;
-}
-
-#sidebarMenu-popup > .subviewbutton[checked="true"]:not([disabled], [open]):hover:active {
-    background-color: var(--arrowpanel-dimmed) !important;
 }
 
 #sidebarMenu-popup > .subviewbutton > .toolbarbutton-text {
@@ -192,11 +182,11 @@ as well as the internal appearance of the built-in sidebars, e.g. bookmarks, his
 }
 
 #sidebar-switcher-target:is(:hover, :focus-visible) {
-    background: var(--arrowpanel-dimmed) !important;
+    background: var(--button-hover-bgcolor) !important;
 }
 
 #sidebar-switcher-target.active {
-    background: var(--arrowpanel-dimmed-further) !important;
+    background: var(--button-active-bgcolor) !important;
 }
 
 #sidebar-close {
@@ -211,12 +201,12 @@ as well as the internal appearance of the built-in sidebars, e.g. bookmarks, his
 }
 
 #sidebar-close:is(:hover, :focus-visible) {
-    background-color: var(--arrowpanel-dimmed) !important;
+    background-color: var(--button-hover-bgcolor) !important;
     fill-opacity: 1 !important;
 }
 
 #sidebar-close:is(:hover, :focus-visible):active {
-    background-color: var(--arrowpanel-dimmed-further) !important;
+    background-color: var(--button-active-bgcolor) !important;
 }
 
 .sidebar-placesTreechildren::-moz-tree-cell {

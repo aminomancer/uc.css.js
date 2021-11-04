@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Misc. Mods
-// @version        1.8.2
+// @version        1.8.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Various tiny mods not worth making separate scripts for. Read the comments inside the script for details.
@@ -42,7 +42,7 @@
         // The exact string is drawn from Firefox's fluent files, so it depends on your language.
         "Give the private browsing indicator a tooltip": true,
 
-        // The location where your bookmarks are saved by default is defined in the preference browser.bookmarks.defaultLocation. This pref is updated every time you manually change a bookmark's folder in the urlbar star button's edit bookmark panel. So if you want to save to toolbar by default, but you just added a bookmark to a different folder with the panel, that different folder now becomes your default location. So the next time you go to add a bookmark, instead of saving it to your toolbar it'll save it to the most recent folder you chose in the edit bookmark panel. This can be kind of annoying if you have a main bookmarks folder and a bunch of smaller subfolders. So I added this option to eliminate this updating behavior. This will stop Firefox from automatically updating the preference every time you use the edit bookmark panel. So whatever that pref is set to at the time you enable this setting will permanently remain your default location. You can still change the default location by modifying the preference directly or by temporarily disabling the script or this setting. This just means the pref will not automatically change while this setting is enabled.
+        // The location where your bookmarks are saved by default is defined in the preference browser.bookmarks.defaultLocation. This pref is updated every time you manually change a bookmark's folder in the urlbar star button's edit bookmark panel. So if you want to save to toolbar by default, but you just added a bookmark to a different folder with the panel, that different folder now becomes your default location. So the next time you go to add a bookmark, instead of saving it to your toolbar it'll save it to the most recent folder you chose in the edit bookmark panel. This can be kind of annoying if you have a main bookmarks folder and a bunch of smaller subfolders. So I added this option to eliminate this updating behavior. This will stop Firefox from automatically updating the preference every time you use the edit bookmark panel. Once you install the script there will be a new checkbox in the edit bookmark panel, once you expand the "location" section. If you uncheck this checkbox, Firefox will stop updating the default bookmark location. So whatever the default location is set to at the time you uncheck the checkbox will permanently remain your default location. You can still change the default location by modifying the preference directly or by temporarily checking that checkbox. It just means the default location will only automatically change when the checkbox is checked.
         "Preserve your default bookmarks folder": true,
     };
     class UCMiscMods {
@@ -200,28 +200,61 @@
                 await this.privateL10n.formatValue([l10nId]);
         }
         makeDefaultBookmarkFolderPermanent() {
+            let { panel } = StarUI;
+            let checkbox = panel.querySelector("#editBMPanel_newFolderBox").appendChild(
+                _ucUtils.createElement(document, "checkbox", {
+                    id: "editBookmarkPanel_persistLastLocation",
+                    label: "Remember last location",
+                    accesskey: "R",
+                    tooltip:
+                        "Update the default bookmark folder when you change it. If unchecked, the last folder chosen when this was checked will be the default folder.",
+                    oncommand: `Services.prefs.setBoolPref("userChrome.bookmarks.editDialog.persistLastLocation", this.checked)`,
+                    checked: Services.prefs.getBoolPref(
+                        "userChrome.bookmarks.editDialog.persistLastLocation",
+                        true
+                    ),
+                })
+            );
+            panel.addEventListener("popupshowing", (e) => {
+                if (e.target !== panel) return;
+                let pref = Services.prefs.getBoolPref(
+                    "userChrome.bookmarks.editDialog.persistLastLocation",
+                    true
+                );
+                if (pref !== checkbox.checked) checkbox.checked = pref;
+            });
             eval(
                 `StarUI._storeRecentlyUsedFolder = async function ` +
                     StarUI._storeRecentlyUsedFolder
                         .toSource()
                         .replace(/^async \_storeRecentlyUsedFolder/, "")
                         .replace(
-                            /\s*if \(didChangeFolder\) \{\s*Services\.prefs\.setCharPref\(\s*\"browser\.bookmarks\.defaultLocation\"\,\s*selectedFolderGuid\s*\)\;\s*\}/,
-                            ""
+                            /if \(didChangeFolder\)/,
+                            `if (
+                                didChangeFolder &&
+                                Services.prefs.getBoolPref(
+                                    "userChrome.bookmarks.editDialog.persistLastLocation",
+                                    true
+                                )
+                            )`
                         )
             );
         }
         randomTinyStuff() {
-            gProtectionsHandler._initializePopup();
-            let etpView = PanelMultiView.getViewNode(document, "protections-popup-mainView");
+            let etpPanel = document
+                .getElementById("template-protections-popup")
+                ?.content.querySelector("#protections-popup");
             let setEtpPopupInfoTooltip = (e) => {
                 let infoButton = e.target.querySelector("#protections-popup-info-button");
                 let ariaLabel = infoButton.getAttribute("aria-label");
-                if (ariaLabel) infoButton.setAttribute("tooltiptext", ariaLabel);
-                else if (infoButton.getAttribute("data-l10n-id")) return;
-                etpView.removeEventListener("ViewShowing", setEtpPopupInfoTooltip);
+                if (ariaLabel) {
+                    infoButton.removeAttribute("data-l10n-id");
+                    infoButton.setAttribute("tooltiptext", ariaLabel);
+                } else if (infoButton.getAttribute("data-l10n-id"))
+                    return document.l10n.translateElements([infoButton]);
+                etpPanel.removeEventListener("popupshowing", setEtpPopupInfoTooltip);
             };
-            etpView.addEventListener("ViewShowing", setEtpPopupInfoTooltip);
+            if (etpPanel) etpPanel.addEventListener("popupshowing", setEtpPopupInfoTooltip);
         }
     }
 

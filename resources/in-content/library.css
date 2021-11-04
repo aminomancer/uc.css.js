@@ -45,4 +45,21 @@
         outline: 2px solid var(--organizer-outline-color) !important;
         outline-offset: -1px !important;
     }
+
+    #contentView treecol {
+        box-shadow: inset 0 -1px var(--organizer-border-color);
+    }
+
+    treecol, treecolpicker {
+        background-color: var(--organizer-pane-background) !important;
+        border-color: var(--organizer-border-color) !important;
+    }
+
+    :is(treecol, treecolpicker):where(:hover) {
+        background-color: var(--organizer-hover-background) !important;
+    }
+
+    :is(treecol, treecolpicker):where(:hover:active) {
+        background-color: var(--organizer-selected-background) !important;
+    }
 }
