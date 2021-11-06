@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Window Drag Hotkey
-// @version        1.0
+// @version        1.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Hold down the Alt and Shift keys and click & drag any part of a toolbar to drag the entire window. Normally you can only drag the window in empty spaces. Clicking and dragging a button, a tab, an input field, etc. will not drag the window. With this script, while you hold down the Alt and Shift keys, ANY element in a toolbar basically becomes a drag space. Alt and Shift were chosen because there aren't any Alt+Shift+Click functions, as far as I know. Upon releasing the keys, everything will go back to normal.
@@ -9,16 +9,19 @@
 class WindowDragHotkey {
     constructor() {
         this.registerSheet();
-        ["keydown", "keyup", "keypress"].forEach((ev) => document.addEventListener(ev, this, true));
+        ["keydown", "keyup"].forEach((ev) => document.addEventListener(ev, this, true));
     }
     handleEvent(e) {
+        if (e.repeat) return;
         switch (e.type) {
             case "keydown":
                 this.onDown(e);
                 break;
-            case "keypress":
             case "keyup":
                 this.onUp();
+                break;
+            case "mouseout":
+                this.onOut(e);
                 break;
         }
     }
@@ -35,10 +38,16 @@ class WindowDragHotkey {
                 return;
         }
         document.documentElement.setAttribute("force-drag", true);
+        window.addEventListener("mouseout", this);
         e.preventDefault();
     }
     onUp() {
         document.documentElement.removeAttribute("force-drag");
+    }
+    onOut(e) {
+        if (e.shiftKey && e.altKey) return;
+        document.documentElement.removeAttribute("force-drag");
+        window.removeEventListener("mouseout", this);
     }
     registerSheet() {
         let css = `:root[force-drag] toolbar *{-moz-window-dragging:drag!important;}`;
