@@ -1,0 +1,63 @@
+// ==UserScript==
+// @name           Window Drag Hotkey
+// @version        1.0
+// @author         aminomancer
+// @homepage       https://github.com/aminomancer/uc.css.js
+// @description    Hold down the Alt and Shift keys and click & drag any part of a toolbar to drag the entire window. Normally you can only drag the window in empty spaces. Clicking and dragging a button, a tab, an input field, etc. will not drag the window. With this script, while you hold down the Alt and Shift keys, ANY element in a toolbar basically becomes a drag space. Alt and Shift were chosen because there aren't any Alt+Shift+Click functions, as far as I know. Upon releasing the keys, everything will go back to normal.
+// ==/UserScript==
+
+class WindowDragHotkey {
+    constructor() {
+        this.registerSheet();
+        ["keydown", "keyup", "keypress"].forEach((ev) => document.addEventListener(ev, this, true));
+    }
+    handleEvent(e) {
+        switch (e.type) {
+            case "keydown":
+                this.onDown(e);
+                break;
+            case "keypress":
+            case "keyup":
+                this.onUp();
+                break;
+        }
+    }
+    onDown(e) {
+        switch (e.key) {
+            case "Alt":
+                if (!e.shiftKey) return;
+                break;
+            case "Shift":
+                if (!e.altKey) return;
+                break;
+            default:
+                document.documentElement.removeAttribute("force-drag");
+                return;
+        }
+        document.documentElement.setAttribute("force-drag", true);
+        e.preventDefault();
+    }
+    onUp() {
+        document.documentElement.removeAttribute("force-drag");
+    }
+    registerSheet() {
+        let css = `:root[force-drag] toolbar *{-moz-window-dragging:drag!important;}`;
+        let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
+            Ci.nsIStyleSheetService
+        );
+        let uri = makeURI("data:text/css;charset=UTF=8," + encodeURIComponent(css));
+        if (sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) return; // avoid loading duplicate sheets on subsequent window launches.
+        sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
+    }
+}
+
+if (gBrowserInit.delayedStartupFinished) new WindowDragHotkey();
+else {
+    let delayedListener = (subject, topic) => {
+        if (topic == "browser-delayed-startup-finished" && subject == window) {
+            Services.obs.removeObserver(delayedListener, topic);
+            new WindowDragHotkey();
+        }
+    };
+    Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
+}

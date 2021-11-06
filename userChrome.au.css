@@ -510,9 +510,8 @@ panel[type="autocomplete-richlistbox"]
 
     :is(panel, dialog) menulist::part(dropmarker-icon) {
         appearance: none;
-        list-style-image: url(chrome://userchrome/content/select-drop-marker.svg);
+        list-style-image: url(chrome://userchrome/content/arrow-dropdown-16.svg);
         margin-block: 0 !important;
-        width: 10px !important;
         fill-opacity: 0.6;
     }
 
@@ -526,7 +525,7 @@ panel[type="autocomplete-richlistbox"]
     }
 
     :is(panel, dialog) menulist::part(dropmarker) {
-        margin-inline-start: 6px;
+        margin-inline: 4px;
     }
 
     :is(panel, dialog) menulist::part(icon),
