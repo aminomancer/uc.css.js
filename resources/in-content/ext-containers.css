@@ -21,12 +21,15 @@
 
     body {
         --hr-grey: var(--uc-desaturate-dimmed) !important;
-        inline-size: min-content !important;
         font-size: 12px !important;
         color: inherit !important;
         letter-spacing: inherit !important;
         padding: var(--menupopup-inner-padding-magnitude) !important;
         padding-top: 0 !important;
+        min-inline-size: 0px !important;
+        inline-size: calc(var(--overflow-size) + 199px) !important;
+        max-inline-size: 300px !important;
+        box-sizing: border-box !important;
     }
 
     @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
@@ -67,7 +70,7 @@
         display: flex !important;
         flex-flow: row nowrap;
         padding-inline: 3px !important;
-        min-height: var(--menuitem-height) !important;
+        min-height: var(--subviewbutton-height) !important;
         user-select: none !important;
     }
 
@@ -87,12 +90,13 @@
 
     .menu-item td {
         align-items: center !important;
-        margin-inline-end: 30px !important;
+        overflow: clip !important;
     }
 
     .menu-icon {
         margin: 0 !important;
         margin-inline-end: 3px !important;
+        min-inline-size: 23px !important;
     }
 }
 
@@ -141,7 +145,7 @@
     input[type="text"] {
         background-color: var(--uc-desaturate-faint) !important;
         border-color: var(--uc-desaturate-dimmed) !important;
-        min-height: 28px !important;
+        min-height: var(--subviewbutton-height) !important;
         block-size: unset !important;
         height: auto !important;
     }
@@ -269,7 +273,7 @@
     }
 
     .panel {
-        min-block-size: unset !important;
+        min-block-size: 100px !important;
     }
 
     .scrollable {
@@ -284,6 +288,19 @@
         padding-bottom: var(--menupopup-inner-padding-magnitude) !important;
     }
 
+    table[hidden]:empty {
+        display: flex !important;
+        flex-flow: row nowrap !important;
+        min-height: var(--subviewbutton-height) !important;
+        padding-inline: 12px !important;
+        align-items: center !important;
+        color: var(--context-menu-disabled-color) !important;
+    }
+
+    table[hidden]:empty:before {
+        content: "(empty)" !important;
+    }
+
     #edit-container-assignments > .scrollable {
         padding-bottom: var(--menupopup-inner-padding-magnitude) !important;
     }
@@ -295,8 +312,8 @@
     .bottom-btn {
         position: relative !important;
         height: revert !important;
-        line-height: 28px !important;
-        min-height: 28px !important;
+        line-height: var(--subviewbutton-height) !important;
+        min-height: var(--subviewbutton-height) !important;
         margin: var(--menupopup-inner-padding-magnitude) !important;
         padding-inline-start: 8px !important;
         cursor: default !important;
@@ -309,13 +326,15 @@
     .menu-item {
         cursor: default !important;
         border-radius: var(--context-menuitem-border-radius) !important;
-        min-height: 28px !important;
-        line-height: 28px !important;
-        height: 28px !important;
+        min-height: var(--subviewbutton-height) !important;
+        line-height: var(--subviewbutton-height) !important;
+        height: var(--subviewbutton-height) !important;
         user-select: none !important;
-        inline-size: -moz-available !important;
+        max-width: -moz-available !important;
         margin-inline: var(--menupopup-inner-padding-magnitude) !important;
-        display: block !important;
+        display: flex !important;
+        flex-flow: row nowrap !important;
+        overflow: clip !important;
     }
 
     .identities-list .menu-item {
@@ -341,8 +360,12 @@
     }
 
     .menu-text {
-        flex-grow: 1;
-        line-height: inherit !important;
+        flex-grow: 1 !important;
+        word-break: break-all !important;
+        align-self: start !important;
+        line-height: var(--subviewbutton-height) !important;
+        text-overflow: ellipsis !important;
+        overflow: hidden !important;
     }
 
     .menu-icon {
@@ -351,6 +374,15 @@
         margin-block: 0 !important;
         inline-size: 16px !important;
         background-color: transparent !important;
+    }
+
+    tr > td > .trash-button {
+        visibility: hidden !important;
+        display: block !important;
+    }
+
+    tr:hover > td > .trash-button {
+        visibility: visible !important;
     }
 
     .menu-icon.hover-highlight:is(:hover, :focus, :focus-visible),
@@ -427,6 +459,7 @@
 
     .menu-item td {
         border: none !important;
+        flex-grow: 1;
     }
 
     .menu-item.drag-over td {
@@ -443,7 +476,7 @@
 
     .move-button {
         background-image: url(chrome://browser/skin/notification-icons/drag-indicator.svg);
-        background-size: 14px 28px !important;
+        background-size: 14px var(--subviewbutton-height) !important;
         background-position: center !important;
         background-repeat: no-repeat !important;
         -moz-context-properties: fill, fill-opacity;
@@ -512,8 +545,8 @@
         appearance: none !important;
         border-radius: var(--context-menuitem-border-radius) !important;
         height: revert !important;
-        line-height: 28px !important;
-        min-height: 28px !important;
+        line-height: var(--subviewbutton-height) !important;
+        min-height: var(--subviewbutton-height) !important;
         width: 100% !important;
         inline-size: -moz-available !important;
         margin-block-start: var(--menupopup-inner-padding-magnitude) !important;

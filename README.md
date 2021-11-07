@@ -700,6 +700,10 @@ A utility script for other scripts to take advantage of. Sets up a global object
 
 Various tiny mods not worth making separate scripts for. Read the comments [inside the script](/JS/miscMods.uc.js) for details.
 
+## **Thanks to my sponsors for [supporting](https://github.com/sponsors/aminomancer) this project:**
+
+- [Henry Xu](https://github.com/henryxrl)
+
 ## **Other useful links:**
 
 <details><summary><b><i>Click to expand...</i></b></summary>
