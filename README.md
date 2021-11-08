@@ -709,8 +709,10 @@ A utility script for other scripts to take advantage of. Sets up a global object
 Various tiny mods not worth making separate scripts for. Read the comments [inside the script](/JS/miscMods.uc.js) for details.
 
 ## **Thanks to my sponsors for [supporting](https://github.com/sponsors/aminomancer) this project:**
-#### <img src="https://avatars.githubusercontent.com/u/57239407?v=4" width="14"/> <a href="https://github.com/KleinByte">Jordyn Kleinheksel (KleinByte)</a>
-#### <img src="https://avatars.githubusercontent.com/u/7662954?v=4" width="14"/> <a href="https://github.com/KleinByte">Henry Xu (henryxrl)</a>
+<ul>
+    <li><a href="https://github.com/KleinByte"><img src="https://avatars.githubusercontent.com/u/57239407?v=4" width="14"/> Jordyn Kleinheksel (KleinByte)</a></li>
+    <li><a href="https://github.com/KleinByte"><img src="https://avatars.githubusercontent.com/u/7662954?v=4" width="14"/> Henry Xu (henryxrl)</a></li>
+</ul>
 
 ## **Other useful links:**
 
