@@ -710,9 +710,10 @@ Various tiny mods not worth making separate scripts for. Read the comments [insi
 
 ## **Thanks to my sponsors for [supporting](https://github.com/sponsors/aminomancer) this project:**
 
-### <img src="https://avatars.githubusercontent.com/u/57239407?v=4" width="14"/> <a href="https://github.com/KleinByte">Jordyn Kleinheksel (KleinByte)</a>
-
-### <img src="https://avatars.githubusercontent.com/u/7662954?v=4" width="14"/> <a href="https://github.com/KleinByte">Henry Xu (henryxrl)</a>
+<ul>
+    <li><h3><img src="https://avatars.githubusercontent.com/u/57239407?v=4" width="14"/> <a href="https://github.com/KleinByte">Jordyn Kleinheksel (KleinByte)</a></h3></li>
+    <li><h3><img src="https://avatars.githubusercontent.com/u/7662954?v=4" width="14"/> <a href="https://github.com/KleinByte">Henry Xu (henryxrl)</a></h3></li>
+</ul>
 
 ## **Other useful links:**
 
