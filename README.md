@@ -688,7 +688,9 @@ Hold down the Alt and Shift keys and click & drag any part of a toolbar to drag 
 
 #### [OS Detector](/JS/osDetector.uc.js):
 
-\* This tiny setup script adds an attribute on the document element representing the operating system, so we can select it with CSS. For example `:root[operatingsystem="macosx"]` would select the root element only on macOS. There are already ways to select different windows versions and a less reliable way to target linux, but the existing CSS options for selecting macOS are very sloppy. If you use the theme on macOS or linux you will definitely want to download this so your titlebar buttons will show up correctly.
+\* This tiny setup script adds an attribute on the document element representing the operating system, so we can select it with CSS. For example `:root[operatingsystem="macosx"]` would select the root element only on macOS. There are already ways to select different windows versions and a less reliable way to target linux, but the existing CSS options for selecting macOS are very sloppy. This is because Firefox differentiates between operating systems during the build and install processes. A given end user's `browser.css` will contain different rules depending on their operating system, obviating the need for a convenient media query but neglecting the customization angle.
+
+Since media queries aren't available, and I don't want to create and manage 3+ different versions of this theme, the stylesheets can only distinguish between operating systems when this script is running. Since I develop this on Windows 10, the theme expects Windows 10 by default. If you use Windows 10, you don't need this script, since all the default rules will be targeted for your OS. If you use the theme on macOS or linux, however, you will definitely want to download this, as it will enable the special OS-specific rules targeting your OS.
 
 #### [Custom Hint Provider](/JS/customHintProvider.uc.js):
 
