@@ -433,6 +433,12 @@ Adds a new menu to context menus prompted by right-clicking bookmarks, history e
 
 The menu will be present in *all* context menus where you'd be able to open a bookmark, history entry, or synced tab, including menus, popups, panels, and even the Library/Bookmarks Manager window. However, for synced tabs, it will only be present in the sidebar, not in the profile panel, because the profile panel lacks a context menu in the first place. Right-clicking a synced tab in the profile panel simply opens the synced tab rather than opening a context menu.
 
+Update: The developers of Firefox Multi-Account Containers have implemented an optional setting that creates a similar menu when right-clicking bookmarks. However, this has all the same problems as the addon previously mentioned. It doesn't work on history entries or synced tabs, it puts the menu item at the bottom of the context menu instead of with the other "open x in tab" menu items, and it doesn't apply the correct colors to the container icons.
+
+That is, the "Personal" container is set to blue by default. It shows up as blue in all the native interfaces and in the extension pages & popups. But because extensions can't control context menu CSS, it isn't blue in the extension's optional bookmark context menu. All the icons in the extension menu are just black.
+
+So for several reasons, this script is still the best solution. If you use this script, turn off the redundant extension menus in `about:addons` > Firefox Multi-Account Containers > Options > "Enable Bookmark Menus"
+
 #### [Open Link in Unloaded Tab (context menu item)](/JS/openLinkInUnloadedTab.uc.js):
 
 Add a new context menu item that can open links in tabs without loading them. The item will appear in all context menus that are prompted by right-clicking on links or other link-like affordances. The menu item will open the link in a new background tab, which will start unloaded or "discarded." Specifically, the context menu entry appears in the content area context menu when right-clicking a link; and in every context menu where bookmarks, history, or synced tabs can be interacted with — sidebar, menubar, toolbar, toolbar button popup, and library window.

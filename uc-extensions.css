@@ -355,7 +355,9 @@ there's no need for a context menu item except when right-clicking something par
 /* multi-account containers menu icon */
 #contentAreaContextMenu
     :is(.menu-iconic, .menuitem-iconic)[label="Firefox Multi-Account Containers"]
-    .menu-iconic-left:before {
+    .menu-iconic-left:before,
+#_testpilot-containers-menuitem-_open-bookmark-in-container-tab
+    > .menu-iconic-left:before {
     width: 16px;
     height: 16px;
     margin-inline: var(--context-iconic-margin);
@@ -370,8 +372,16 @@ there's no need for a context menu item except when right-clicking something par
 
 #contentAreaContextMenu
     :is(.menu-iconic, .menuitem-iconic)[label="Firefox Multi-Account Containers"]
+    .menu-iconic-icon,
+#_testpilot-containers-menuitem-_open-bookmark-in-container-tab
+    > .menu-iconic-left
     .menu-iconic-icon {
     display: none;
+}
+
+#_testpilot-containers-menuitem-_open-bookmark-in-container-tab
+    > .menu-iconic-left:before {
+    background-image: url(chrome://userchrome/content/skin/container-go.svg);
 }
 
 /* shorten the multi-account containers label */
@@ -384,7 +394,7 @@ there's no need for a context menu item except when right-clicking something par
 #contentAreaContextMenu
     :is(.menu-iconic, .menuitem-iconic)[label="Firefox Multi-Account Containers"]
     .menu-iconic-left::after {
-    content: "Account Containers";
+    content: "Multi-Account Containers";
     display: -moz-inline-box;
     -moz-box-flex: 1;
 }
@@ -393,6 +403,11 @@ there's no need for a context menu item except when right-clicking something par
     :is(.menu-iconic, .menuitem-iconic)[label="Firefox Multi-Account Containers"]
     .menu-iconic-text {
     display: none;
+}
+
+#_testpilot-containers-menuitem-_open-bookmark-in-container-tab menupopup .menu-iconic-icon {
+    filter: invert(1);
+    opacity: 0.8;
 }
 
 /* zotero menu icon */

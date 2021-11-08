@@ -11,7 +11,7 @@
         --arrowpanel-menuitem-border-radius: 3px;
         background-color: var(--arrowpanel-background) !important;
         font-size: 12px !important;
-        color: var(--uc-toolbar-color) !important;
+        color: var(--uc-arrowpanel-color) !important;
         letter-spacing: 0 !important;
     }
 
@@ -111,9 +111,17 @@
         --arrowpanel-menuitem-border-radius: 3px;
         background-color: var(--arrowpanel-background) !important;
         font-size: 12px !important;
-        color: var(--uc-toolbar-color) !important;
+        color: var(--uc-arrowpanel-color) !important;
         letter-spacing: 0 !important;
         scrollbar-width: none !important;
+    }
+
+    [data-identity-color="grey"] {
+        --identity-icon-color: var(--uc-arrowpanel-color) !important;
+    }
+
+    [type="radio"]:checked + [data-identity-color="grey"] {
+        --identity-icon-color: var(--uc-arrowpanel-background) !important;
     }
 
     svg:root {
@@ -122,6 +130,7 @@
 
     body {
         --hr-grey: var(--uc-desaturate-dimmed) !important;
+        --text-grey: var(--uc-arrowpanel-color) !important;
         font-size: 12px !important;
         color: inherit !important;
         letter-spacing: inherit !important;
@@ -323,6 +332,27 @@
         background-color: transparent !important;
     }
 
+    #manage-containers-link:not([hidden]) {
+        display: flex !important;
+        align-content: center !important;
+        align-items: center !important;
+        padding-inline-start: 0 !important;
+    }
+
+    #manage-containers-link:before {
+        content: "";
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        margin-inline: var(--context-iconic-margin) !important;
+        background-image: url(chrome://global/skin/icons/settings.svg);
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        -moz-context-properties: fill, fill-opacity;
+        fill: currentColor;
+    }
+
     .menu-item {
         cursor: default !important;
         border-radius: var(--context-menuitem-border-radius) !important;
@@ -374,6 +404,22 @@
         margin-block: 0 !important;
         inline-size: 16px !important;
         background-color: transparent !important;
+        filter: none !important;
+        fill: currentColor;
+        -moz-context-properties: fill, fill-opacity;
+    }
+
+    .menu-icon img {
+        filter: none !important;
+    }
+
+    .menu-icon[src="/img/container-openin-16.svg"] {
+        padding-left: 16px !important;
+        background-image: url(chrome://userchrome/content/skin/container-go.svg) !important;
+    }
+
+    .radio-choice > .radio-container > [type="radio"]:checked + label {
+        background: var(--uc-arrowpanel-color) !important;
     }
 
     tr > td > .trash-button {
@@ -599,10 +645,6 @@
         background-color: hsl(353, 90%, 50%) !important;
     }
 
-    [type="radio"]:checked + [data-identity-color="grey"] {
-        --identity-icon-color: var(--in-content-bg-dark) !important;
-    }
-
     .panel-content.delete-container-confirm {
         padding-block: var(--menupopup-inner-padding-magnitude) 0 !important;
         padding-inline: 16px 0 !important;
@@ -617,5 +659,29 @@
 
     #delete-container-tab-warning:empty {
         display: none !important;
+    }
+}
+
+/* little message that pops up on top of pages when you use "always open in x container" */
+body > .container-notification:before {
+    content: "";
+    display: inline-block;
+    block-size: 16px;
+    inline-size: 16px;
+    margin-inline-end: 3px;
+    background-image: url(chrome://userchrome/content/skin/container-plus.svg);
+    -moz-context-properties: fill, fill-opacity !important;
+    fill: currentColor !important;
+    color: inherit !important;
+}
+
+body > .container-notification img {
+    display: none !important;
+}
+
+@media (prefers-color-scheme: dark) {
+    body > .container-notification {
+        background: var(--in-content-button-highlight-dark) !important;
+        color: var(--plaintext-color) !important;
     }
 }
