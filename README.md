@@ -711,7 +711,7 @@ Various tiny mods not worth making separate scripts for. Read the comments [insi
 ## **Thanks to my sponsors for [supporting](https://github.com/sponsors/aminomancer) this project:**
 <ul>
     <li><a href="https://github.com/KleinByte"><img src="https://avatars.githubusercontent.com/u/57239407?v=4" width="14"/> Jordyn Kleinheksel (KleinByte)</a></li>
-    <li><a href="https://github.com/KleinByte"><img src="https://avatars.githubusercontent.com/u/7662954?v=4" width="14"/> Henry Xu (henryxrl)</a></li>
+    <li><a href="https://github.com/henryxrl"><img src="https://avatars.githubusercontent.com/u/7662954?v=4" width="14"/> Henry Xu (henryxrl)</a></li>
 </ul>
 
 ## **Other useful links:**
