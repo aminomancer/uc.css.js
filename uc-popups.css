@@ -637,7 +637,7 @@ panel[type="autocomplete-richlistbox"]
 }
 
 /* blur backdrop filter */
-:is(.content-prompt-dialog, .tab-prompt-dialog, #window-modal-dialog) > .dialogOverlay[style] .dialogFrame {
+.content-prompt-dialog > .dialogOverlay[style] .dialogFrame {
     background-color: var(--dialog-bgcolor) !important;
     background-image: var(--acrylic-texture) !important;
     backdrop-filter: var(--acrylic-blur) !important;
@@ -653,6 +653,19 @@ panel[type="autocomplete-richlistbox"]
 /* make the box shadow even, i hate offset drop shadows */
 :is(.content-prompt-dialog, .tab-prompt-dialog, #window-modal-dialog) .dialogBox {
     box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1), 0 0 8px 2px rgba(0, 0, 0, 0.1) !important;
+}
+
+#window-modal-dialog,
+.tab-prompt-dialog {
+    --chrome-offset: calc(0.5px + var(--urlbar-container-height, 40px) + var(--tab-min-height, 36px)) !important;
+    clip-path: inset(
+        0 -100% -100% -100%
+    );
+}
+
+:is(#window-modal-dialog, .tab-prompt-dialog) > .dialogOverlay[style] .dialogFrame {
+    background-color: var(--ui-tertiary-bg) !important;
+    border: 1px solid var(--arrowpanel-border-color);
 }
 
 /* center text in any dialog box */

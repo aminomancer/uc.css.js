@@ -66,10 +66,11 @@ I also recommend setting the following prefs in `about:config`. There's a [user.
 | ui.textHighlightBackground | String | `#7755FF` | These prefs control the appearance of text highlighted by the findbar. I choose white text on purple/pink background |
 | ui.textHighlightForeground | String | `#FFFFFF` | |
 | ui.textSelectBackground | String | `#FFFFFF` | |
-| ui.textSelectBackgroundAttention | String | `#FF3388` | |
-| ui.textSelectBackgroundDisabled | String | `#000000` | |
-| ui.textSelectForegroundAttention | String | `#000000` | |
-| ui.textSelectForegroundCustom | String | `#7755FF` | |
+| ui.textSelectAttentionBackground | String | `#FF3388` | For Fx > v96 |
+| ui.textSelectAttentionForeground | String | `#FFFFFF` | For Fx > v96 |
+| ui.textSelectDisabledBackground | String | `#7755FF` | For Fx > v96 |
+| ui.textSelectBackgroundAttention | String | `#FF3388` | For Fx ≤ v96 |
+| ui.textSelectBackgroundDisabled | String | `#7755FF` | For Fx ≤ v96 |
 | userChrome... | | | Several of my scripts use custom prefs beginning with `userChrome` for user customization. See the individual script files for details. The stylesheets also use the following: |
 | userChrome.bookmarks-toolbar.icons-only | Boolean | false | If true, bookmark buttons in the toolbar are just square icons |
 | userChrome.css.mac-ui-fonts | Boolean | true | Replace UI font with SF Pro, the system font for macOS. [Click here for details](#fonts) |

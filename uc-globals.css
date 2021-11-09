@@ -87,6 +87,7 @@ tooltip {
     --popup-on-popup-contrast-bg: hsl(233, 33%, 17%);
     --autocomplete-background: var(--popup-on-popup-contrast-bg);
     --ui-secondary-bg: hsl(234, 39%, 10%);
+    --ui-tertiary-bg: hsl(233, 39%, 8.5%);
     --tooltip-bgcolor: hsl(233, 36%, 11%);
     --tooltip-color: white;
     --tooltip-border-radius: 2px;
