@@ -52,6 +52,7 @@ menuitem#sanitizeItem > .menu-text,
 #menu_copy .menu-text,
 :is(#placesContext_show_bookmark\:info, #placesContext_show_folder\:info, #placesContext_show\:info)
     .menu-text,
+#placesContext_showInFolder .menu-text,
 #menu_openLocation .menu-text,
 #context-copyvideourl .menu-text,
 #context-bookmarkframe .menu-text,
@@ -397,6 +398,7 @@ menuitem#sanitizeItem:before,
 #context-paste:before,
 #menu_copy:before,
 :is(#placesContext_show_bookmark\:info, #placesContext_show_folder\:info, #placesContext_show\:info):before,
+#placesContext_showInFolder:before,
 #menu_cut:before,
 #menu_paste:before,
 #syncedTabsCopySelected:before,
@@ -914,6 +916,10 @@ menuitem.customize-context-CopyID:before {
 
 :is(#placesContext_show_bookmark\:info, #placesContext_show_folder\:info, #placesContext_show\:info):before {
     background-image: url(chrome://userchrome/content/edit.svg);
+}
+
+#placesContext_showInFolder:before {
+    background-image: url(chrome://userchrome/content/material/places/folder-special.svg);
 }
 
 :is(#context-cut, #menu_cut, #placesContext_cut):before,

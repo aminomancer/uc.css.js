@@ -1,7 +1,5 @@
 /* this adjusts popup dialogs and modal popups */
 
-@import url(resources/in-content/library.css);
-
 /* OS-styled javascript modal prompts */
 tabmodalprompt {
     background: none !important;
