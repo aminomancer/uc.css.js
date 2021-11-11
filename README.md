@@ -248,13 +248,13 @@ function traverseToMainProfile(str){
 }
 ```
 
-9. Go to what should now be line 79 (used to be line 66, this line starts with `BASE_FILEURI:`) and replace the entire line with this:
+9. Go to what should now be line 79 (used to be line 66 — this line starts with `BASE_FILEURI:`) and replace the entire line with this:
 
 ```
 BASE_FILEURI: Services.io.getProtocolHandler('file').QueryInterface(Ci.nsIFileProtocolHandler).getURLSpecFromDir(traverseToMainProfile('UChrm')),
 ```
 
-10. Go to what should now be line 83 (used to be line 70), this line starts with `get chromeDir()`) and replace the entire line with this:
+10. Go to what should now be line 83 (used to be line 70 — this line starts with `get chromeDir()`) and replace the entire line with this:
 
 ```
 get chromeDir() {return traverseToMainProfile('UChrm')},
