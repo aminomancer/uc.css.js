@@ -332,9 +332,15 @@ but CSS hides it faster and avoids flickering.
 }
 
 /* urlbar input highlight/selection color */
-#urlbar input::selection {
-    background-color: var(--ui-selection-bgcolor) !important;
-    color: var(--ui-selection-color) !important;
+#urlbar-input:-moz-lwtheme::selection,
+.searchbar-textbox:-moz-lwtheme::selection {
+    background-color: var(--lwt-toolbar-field-highlight, Highlight) !important;
+    color: var(--lwt-toolbar-field-highlight-text, HighlightText) !important;
+}
+
+#urlbar-input:not(:focus):-moz-lwtheme::selection,
+.searchbar-textbox:not(:focus-within):-moz-lwtheme::selection {
+    background-color: var(--lwt-toolbar-field-highlight-disabled, text-select-disabled-background) !important;
 }
 
 #tracking-protection-icon-box

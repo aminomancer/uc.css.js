@@ -99,16 +99,12 @@ tabmodalprompt select:not([size], [multiple]) > option {
     color: var(--ui-text-80) !important;
 }
 
-tabmodalprompt button,
-tabmodalprompt select,
-tabmodalprompt input[type="color"],
-tabmodalprompt menulist {
+tabmodalprompt :is(button, select, input[type="color"], menulist) {
     min-height: 28px !important;
     border-radius: var(--in-content-button-border-radius) !important;
 }
 
-tabmodalprompt input,
-tabmodalprompt textarea {
+tabmodalprompt :is(input, textarea) {
     border: 1px solid var(--in-content-box-border-color) !important;
     padding: 5px !important;
 }
@@ -119,10 +115,13 @@ tabmodalprompt search-textbox[focused] {
     border-color: var(--in-content-focus-outline-color) !important;
 }
 
-tabmodalprompt input::selection,
-tabmodalprompt textarea::selection {
+tabmodalprompt :is(input, textarea)::selection {
     background-color: var(--ui-selection-bgcolor) !important;
     color: var(--ui-selection-color) !important;
+}
+
+tabmodalprompt :is(input, textarea):not(:focus, :focus-within):-moz-lwtheme::selection {
+    background-color: var(--ui-selection-bgcolor-disabled, text-select-disabled-background) !important;
 }
 
 tabmodalprompt input[type="number"] {
@@ -833,10 +832,20 @@ panel[type="autocomplete-richlistbox"]
         color: var(--ui-selection-color) !important;
     }
 
+    input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):not(:focus, :focus-within):-moz-lwtheme::selection,
+    textarea:not(:focus, :focus-within):-moz-lwtheme::selection {
+        background-color: var(--ui-selection-bgcolor-disabled, text-select-disabled-background) !important;
+    }
+
     window[role="dialog"] ::selection,
     window[role="dialog"] textarea::selection {
         background-color: var(--global-selection-bgcolor) !important;
         color: var(--global-selection-color) !important;
+    }
+
+    window[role="dialog"] :not(:focus, :focus-within):-moz-lwtheme::selection,
+    window[role="dialog"] textarea:not(:focus, :focus-within):-moz-lwtheme::selection {
+        background-color: var(--global-selection-bgcolor-disabled, text-select-disabled-background) !important;
     }
 
     input[type="number"] {
@@ -1001,6 +1010,11 @@ panel[type="autocomplete-richlistbox"]
     :root[dialogroot] textarea::selection {
         background-color: var(--ui-selection-bgcolor) !important;
         color: var(--ui-selection-color) !important;
+    }
+
+    :root[dialogroot] input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):not(:focus, :focus-within):-moz-lwtheme::selection,
+    :root[dialogroot] textarea:not(:focus, :focus-within):-moz-lwtheme::selection {
+        background-color: var(--ui-selection-bgcolor-disabled, text-select-disabled-background) !important;
     }
 
     :root[dialogroot] menulist,

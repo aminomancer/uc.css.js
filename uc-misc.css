@@ -416,21 +416,6 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
     outline-offset: unset !important;
 }
 
-:is(#mainPopupSet, #browser, #navigator-toolbox, .sidebar-panel) ::selection,
-link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
-{
-    background-color: var(--ui-selection-bgcolor) !important;
-    color: var(--ui-selection-color) !important;
-}
-
-@-moz-document url-prefix("chrome://")
-{
-    ::selection {
-        background-color: var(--url-selection-bgcolor) !important;
-        color: var(--url-selection-color) !important;
-    }
-}
-
 @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
     /* @-moz-document regexp("^chrome:(?!\/\/(devtools|mozapps|browser\/content\/(places\/places.xhtml|pageinfo\/pageInfo.xhtml)|global\/content\/commonDialog)).*") { */
     @-moz-document regexp("^chrome:(?!\/\/devtools).*") {

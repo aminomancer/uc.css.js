@@ -13,6 +13,9 @@ menupopup {
     --lwt-toolbar-field-color: hsl(240, 60%, 99%);
     --lwt-toolbar-field-focus: hsla(233, 25%, 28%, 85%) !important;
     --lwt-toolbar-field-focus-color: #fff !important;
+    --lwt-toolbar-field-highlight: var(--ui-selection-bgcolor) !important;
+    --lwt-toolbar-field-highlight-text: var(--ui-selection-color) !important;
+    --lwt-toolbar-field-highlight-disabled: var(--ui-selection-bgcolor-disabled) !important;
     --toolbar-bgcolor: var(--uc-toolbar-bgcolor) !important;
     --toolbar-bgimage: none;
     --toolbar-color: var(--uc-toolbar-color) !important;

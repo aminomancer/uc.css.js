@@ -84,16 +84,24 @@ as well as the internal appearance of the built-in sidebars, e.g. bookmarks, his
     }
 
     .textbox-search-clear {
-        list-style-image: url(chrome://userchrome/content/textbox-clear.svg) !important;
+        background-image: url(chrome://userchrome/content/textbox-clear.svg) !important;
+        background-size: contain !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
         fill: var(--ui-text-80) !important;
         -moz-context-properties: fill, fill-opacity !important;
         fill-opacity: 0 !important;
-        width: 16.5px !important;
-        height: 16.5px !important;
+        width: 16px !important;
+        height: 16px !important;
         min-height: 1px !important;
         border-radius: var(--tab-button-border-radius, 2px) !important;
         margin: 0 3px 0 0 !important;
         padding: 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    .textbox-search-clear[src]:not([src=""]) {
+        padding-inline-start: 16px !important;
     }
 
     .textbox-search-clear:is(:hover, :active) {
@@ -494,13 +502,13 @@ there are normally no twistys in sorted trees so it is relatively safe to collap
         color: inherit !important;
     }
 
-    /* .client .item.tab > .item-title-container {
-        padding-inline-start: 26px;
-    } */
-
     ::selection {
-        background-color: rgba(255, 255, 255, 0.9) !important;
-        color: hsl(236, 20%, 16%) !important;
+        background-color: var(--ui-selection-bgcolor) !important;
+        color: var(--ui-selection-color) !important;
+    }
+
+    :where(input, textarea):not(:focus, :focus-within):-moz-lwtheme::selection {
+        background-color: var(--ui-selection-bgcolor-disabled, text-select-disabled-background) !important;
     }
 }
 

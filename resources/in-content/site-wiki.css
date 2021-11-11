@@ -1383,7 +1383,9 @@ userChrome.css.wikipedia.dark-theme-enabled */
         width: -moz-available !important;
     }
 
-    .mw-parser-output .sidebar-collapse :where(.sidebar-above, .sidebar-below)[style*="background"] {
+    .mw-parser-output
+        .sidebar-collapse
+        :where(.sidebar-above, .sidebar-below)[style*="background"] {
         background: var(--uc-wiki-popup-bg) !important;
         color: inherit !important;
     }

@@ -43,9 +43,8 @@
             background-color: var(--content-selection-bgcolor) !important;
         }
 
-        ::-moz-selection {
-            color: var(--content-selection-color) !important;
-            background-color: var(--content-selection-bgcolor) !important;
+        :where(input, textarea, [contenteditable="true"]):not(:focus, :focus-within)::selection {
+            background-color: var(--content-selection-bgcolor-disabled) !important;
         }
 
         .attribute-name {
@@ -175,13 +174,31 @@
         --newtab-focus-border-selected: var(--purple-30) !important;
         --newtab-textbox-background-color: var(--in-content-button-background) !important;
         --newtab-textbox-focus-color: var(--in-content-border-focus) !important;
-        --newtab-primary-action-background: var(--in-content-primary-button-background-hover) !important;
-        --newtab-primary-action-background-hover: color-mix(in srgb, var(--purple-30) 60%, var(--newtab-primary-action-background)) !important;
-        --newtab-primary-action-background-active: color-mix(in srgb, var(--purple-25) 60%, var(--newtab-primary-action-background)) !important;
+        --newtab-primary-action-background: var(
+            --in-content-primary-button-background-hover
+        ) !important;
+        --newtab-primary-action-background-hover: color-mix(
+            in srgb,
+            var(--purple-30) 60%,
+            var(--newtab-primary-action-background)
+        ) !important;
+        --newtab-primary-action-background-active: color-mix(
+            in srgb,
+            var(--purple-25) 60%,
+            var(--newtab-primary-action-background)
+        ) !important;
         --newtab-primary-element-text-color: var(--ui-text-80) !important;
         --newtab-element-secondary-color: var(--in-content-button-background-hover) !important;
-        --newtab-element-secondary-color-hover: color-mix(in srgb, var(--ui-text-40) 50%, var(--in-content-button-background-solid)) !important;
-        --newtab-element-secondary-color-active: color-mix(in srgb, var(--ui-text-50) 50%, var(--in-content-button-background-solid)) !important;
+        --newtab-element-secondary-color-hover: color-mix(
+            in srgb,
+            var(--ui-text-40) 50%,
+            var(--in-content-button-background-solid)
+        ) !important;
+        --newtab-element-secondary-color-active: color-mix(
+            in srgb,
+            var(--ui-text-50) 50%,
+            var(--in-content-button-background-solid)
+        ) !important;
         --newtab-button-primary-color: var(--in-content-primary-button-background-hover) !important;
         --newtab-border-primary-color: var(--in-content-button-background-active) !important;
         --newtab-background-color-secondary: var(--in-content-button-background-solid) !important;
@@ -561,7 +578,10 @@
         --link-foreground: var(--in-content-link-color) !important;
         --visited-link-foreground: #823afc !important;
         --proportional-width: calc(100% - (122.5em - (var(--content-width, 60em) * 2)));
-        --final-content-width: max(var(--content-width, 60em), var(--proportional-width, var(--content-width, 60em)));
+        --final-content-width: max(
+            var(--content-width, 60em),
+            var(--proportional-width, var(--content-width, 60em))
+        );
     }
 
     .container {
@@ -632,7 +652,8 @@
 }
 
 /* firefox screenshots addon overlay */
-@-moz-document url("moz-extension://bc8fcf05-0a6f-40d5-a068-b452be394b53/blank.html") {
+@-moz-document url("moz-extension://bc8fcf05-0a6f-40d5-a068-b452be394b53/blank.html")
+{
     .all-buttons-container {
         background-color: var(--content-principal-box-background) !important;
         height: 88px !important;
@@ -651,7 +672,7 @@
     }
 
     .hover-highlight {
-        background: rgba(255, 255, 255, 0.1) !important;;
+        background: rgba(255, 255, 255, 0.1) !important;
         z-index: 2147483646 !important;
     }
 
@@ -666,7 +687,8 @@
     @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
         .pixel-dimensions {
             font-weight: var(--uc-font-weight-bold) !important;
-            font-family: -apple-system, BlinkMacSystemFont, SF Pro, "segoe ui", "helvetica neue", helvetica, ubuntu, roboto, noto, arial, sans-serif !important;
+            font-family: -apple-system, BlinkMacSystemFont, SF Pro, "segoe ui", "helvetica neue",
+                helvetica, ubuntu, roboto, noto, arial, sans-serif !important;
             font-size: normal !important;
         }
     }

@@ -10,6 +10,28 @@ the last 75% or so of this stylesheet is dedicated to restoring pre-proton conte
     --avatar-image-url: url(chrome://userchrome/content/fxa/avatar-empty-big.svg);
 }
 
+:is(#mainPopupSet, #browser, #navigator-toolbox, .sidebar-panel) ::selection,
+link[href="chrome://global/skin/search-textbox.css"] ~ ::selection {
+    background-color: var(--ui-selection-bgcolor);
+    color: var(--ui-selection-color);
+}
+
+:is(#mainPopupSet, #browser, #navigator-toolbox, .sidebar-panel) :where(input, textarea):not(:focus, :focus-within):-moz-lwtheme::selection,
+link[href="chrome://global/skin/search-textbox.css"] ~ :where(input, textarea):not(:focus, :focus-within):-moz-lwtheme::selection {
+    background-color: var(--ui-selection-bgcolor-disabled, text-select-disabled-background);
+}
+
+@-moz-document url-prefix("chrome://") {
+    ::selection {
+        background-color: var(--global-selection-bgcolor);
+        color: var(--global-selection-color);
+    }
+
+    :where(input, textarea):not(:focus, :focus-within):-moz-lwtheme::selection {
+        background-color: var(--global-selection-bgcolor-disabled, text-select-disabled-background);
+    }
+}
+
 radio[focused="true"] > .radio-label-box {
     outline: revert;
 }

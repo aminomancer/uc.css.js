@@ -151,12 +151,13 @@ tooltip {
 
     --global-selection-bgcolor: hsla(245, 100%, 76%, 0.5);
     --global-selection-color: white;
-    --url-selection-bgcolor: hsla(245, 100%, 76%, 0.5);
-    --url-selection-color: white;
+    --global-selection-bgcolor-disabled: hsla(245, 30%, 70%, 0.4);
     --ui-selection-bgcolor: hsla(0, 0%, 100%, 0.9);
     --ui-selection-color: hsl(236, 20%, 16%);
-    --content-selection-bgcolor: var(--ui-text-80);
+    --ui-selection-bgcolor-disabled: hsla(0, 0%, 100%, 0.7);
+    --content-selection-bgcolor: hsla(0, 0%, 100%, 0.8);
     --content-selection-color: hsl(240, 4%, 10%);
+    --content-selection-bgcolor-disabled: hsla(0, 0%, 100%, 0.7);
     --pdf-selection-bgcolor: hsl(245, 100%, 46.7%) !important;
     --pdf-highlight-bgcolor: hsl(345, 100%, 40%) !important;
 

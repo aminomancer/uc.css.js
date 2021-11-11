@@ -1,10 +1,13 @@
 /* fundamental content styles, e.g. plaintext pages. */
 
 @media (prefers-color-scheme: dark) {
-    ::selection,
-    ::-moz-selection {
+    ::selection {
         background-color: var(--global-selection-bgcolor) !important;
         color: var(--global-selection-color) !important;
+    }
+
+    :where(input, textarea, [contenteditable="true"]):not(:focus, :focus-within)::selection {
+        background-color: var(--global-selection-bgcolor-disabled) !important;
     }
 
     /* pdf viewer: selection, findbar highlights */
@@ -16,15 +19,14 @@
         background-color: var(--pdf-highlight-bgcolor) !important;
     }
 
-    .pdfViewer .textLayer ::selection,
-    .pdfViewer .textLayer ::-moz-selection {
+    .pdfViewer .textLayer ::selection {
         background-color: var(--pdf-selection-bgcolor) !important;
         color: revert !important;
     }
 }
 
 :read-only:-moz-focusring,
-:not(textarea, [contenteditable]:read-write, input[type=text], input[type=password], input[type=date], input[type=datetime-local], input[type=email], input[type=month], input[type=number], input[type=search], input[type=tel], input[type=time], input[type=url], input[type=week]):-moz-focusring {
+:not(textarea, [contenteditable]:read-write, input[type="text"], input[type="password"], input[type="date"], input[type="datetime-local"], input[type="email"], input[type="month"], input[type="number"], input[type="search"], input[type="tel"], input[type="time"], input[type="url"], input[type="week"]):-moz-focusring {
     outline: unset;
     outline-offset: unset;
 }
@@ -63,10 +65,13 @@
             background-color: transparent !important;
         }
 
-        ::selection,
-        ::-moz-selection {
+        ::selection {
             color: var(--content-selection-color) !important;
             background-color: var(--content-selection-bgcolor) !important;
+        }
+
+        :where(input, textarea, [contenteditable="true"]):not(:focus, :focus-within)::selection {
+            background-color: var(--content-selection-bgcolor-disabled) !important;
         }
     }
 }
