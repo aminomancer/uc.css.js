@@ -417,6 +417,10 @@
         background-color: var(--newtab-primary-action-background-active) !important;
     }
 
+    #engineList treechildren::-moz-tree-image {
+        fill: currentColor !important;
+    }
+
     @-moz-document regexp("^about:blocked.*") {
         html:root,
         html:root * {

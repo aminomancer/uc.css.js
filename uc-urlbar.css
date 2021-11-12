@@ -28,6 +28,10 @@ toolbarpaletteitem[place="palette"] > #search-container {
     min-height: var(--urlbar-container-height) !important;
 }
 
+:root[chromehidden~="toolbar"] #urlbar-container {
+    margin-inline-start: 2px !important;
+}
+
 #nav-bar-customization-target #searchbar {
     position: relative !important;
     box-shadow: none !important;

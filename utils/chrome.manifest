@@ -27,6 +27,8 @@ override chrome://global/skin/icons/info.svg ../resources/info.svg
 override chrome://global/skin/icons/search-glass.svg ../resources/search-glass.svg
 override chrome://global/skin/icons/settings.svg ../resources/settings.svg
 override chrome://global/skin/icons/folder.svg ../resources/material/places/folder.svg
+override chrome://global/skin/icons/plugin.svg ../resources/plugin.svg
+override chrome://global/skin/icons/highlights.svg ../resources/glyph-highlights-16.svg
 override chrome://mozapps/skin/extensions/extension.svg ../resources/material/extension.svg
 override chrome://mozapps/skin/extensions/extensionGeneric.svg ../resources/material/extensionGeneric.svg
 override chrome://browser/content/extension.svg ../resources/material/extension.svg
@@ -60,5 +62,8 @@ override chrome://browser/skin/preferences/category-general.svg ../resources/pre
 override chrome://browser/skin/preferences/category-privacy-security.svg ../resources/preferences/category-privacy-security.svg
 override chrome://browser/skin/preferences/category-search.svg ../resources/preferences/category-search.svg
 override chrome://browser/skin/preferences/category-sync.svg ../resources/preferences/category-sync.svg
+override chrome://mozapps/skin/extensions/category-extensions.svg ../resources/preferences/category-extensions.svg
+override chrome://mozapps/skin/extensions/category-plugins.svg ../resources/preferences/category-plugins.svg
+override chrome://mozapps/skin/extensions/category-discover.svg ../resources/preferences/category-discover.svg
 override chrome://activity-stream/content/data/content/assets/glyph-highlights-16.svg ../resources/glyph-highlights-16.svg
 override chrome://activity-stream/content/data/content/assets/glyph-info-16.svg ../resources/glyph-info-16.svg

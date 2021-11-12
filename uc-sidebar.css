@@ -497,11 +497,6 @@ there are normally no twistys in sorted trees so it is relatively safe to collap
         background: none !important;
     }
 
-    .item.client.selected > .item-title-container:not(:hover) {
-        background: none !important;
-        color: inherit !important;
-    }
-
     ::selection {
         background-color: var(--ui-selection-bgcolor) !important;
         color: var(--ui-selection-color) !important;
