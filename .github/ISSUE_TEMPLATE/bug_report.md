@@ -28,11 +28,11 @@ If applicable, add screenshots to help explain your problem.
 
 **Desktop (please complete the following information):**
  - OS: [e.g. Windows 10, Ubuntu 21]
- - Firefox update channel [should be Nightly]
- - Version [e.g. 96.0a1]
- - Build ID:
-     - Search for extensions.lastAppBuildId in about:config and put the value here
-     - Or you can type Services.appinfo.platformBuildID in the browser toolbox console and hit enter
+ - Firefox update channel: [should be Nightly]
+ - Version: [e.g. 96.0a1]
+ - Build ID: [e.g. 20211111045525]
+<!-- Search for extensions.lastAppBuildId in about:config and copy + paste the value here.
+Or you can type Services.appinfo.platformBuildID in the browser toolbox console and hit enter -->
 
 **Additional context**
 Add any other context about the problem here.
