@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Open Bookmarks, History, etc. in New Tabs
-// @version        1.0
+// @version        1.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    In vanilla Firefox, browser.tabs.loadBookmarksInTabs only affects bookmark items. When you enable this pref and left-click a bookmark (e.g., in the bookmarks toolbar or menu) it opens in a new tab instead of in the current tab. But if you left-click a history entry or a synced tab, it will still open in the current tab. So you'd have to middle click or ctrl+click to avoid losing your current tab's navigation state. This script just makes that preference apply to history and synced tabs too. It's relatively easy to do this because there isn't any technical reason it doesn't work for history or synced tabs. For whatever reason, the command handler for clicking these places nodes just intentionally checks if it's a bookmark and opens it in a new tab only if it passes the check. I guess this is probably because the preference was called "loadBookmarksInTabs" a long time ago, so making it affect other items might be confusing, but changing the name of a longstanding pref would also be confusing. So I guess Firefox is just stuck with the ramifications of a minor mistake somebody ostensibly made years ago, which is a perfect use case for an autoconfig script.
@@ -47,6 +47,56 @@
                         });
                     }
                 };
+                proto._onClick = function (e) {
+                    let modifKey =
+                        AppConstants.platform == "macosx"
+                            ? e.metaKey || e.shiftKey
+                            : e.ctrlKey || e.shiftKey;
+                    if (e.button == 2 || (e.button == 0 && !modifKey)) return;
+                    let target = e.originalTarget;
+                    let tag = target.tagName;
+                    if (PlacesUIUtils.openInTabClosesMenu && (tag == "menuitem" || tag == "menu"))
+                        closeMenus(e.target);
+                    if (e.button == 1 && !(tag == "menuitem" || tag == "menu")) this.onCommand(e);
+                };
+                proto._onMouseUp = function (e) {
+                    if (e.button == 2 || PlacesUIUtils.openInTabClosesMenu) return;
+                    let target = e.originalTarget;
+                    if (target.tagName != "menuitem") return;
+                    let modifKey = AppConstants.platform === "macosx" ? e.metaKey : e.ctrlKey;
+                    if (modifKey || e.button == 1) {
+                        target.setAttribute("closemenu", "none");
+                        let menupopup = target.parentNode;
+                        menupopup.addEventListener(
+                            "popuphidden",
+                            () => target.removeAttribute("closemenu"),
+                            { once: true }
+                        );
+                    } else target.removeAttribute("closemenu");
+                };
+                let popup = document.getElementById("historyMenuPopup");
+                popup.setAttribute("onclick", `this.parentNode._placesView._onClick(event);`);
+                popup.setAttribute("onmouseup", `this.parentNode._placesView._onMouseUp(event);`);
+                proto._hasBeenModifiedForOBHNT = true;
+            }
+        }
+        if (window.PlacesPanelview) {
+            let proto = PlacesPanelview.prototype;
+            if (!proto._hasBeenModifiedForOBHNT) {
+                eval(
+                    `proto._onCommand = function ` +
+                        proto._onCommand
+                            .toSource()
+                            .replace(/_onCommand/, "")
+                            .replace(
+                                /(button\.parentNode\.id == \"panelMenu_bookmarksMenu\")/,
+                                `$1 || button.parentNode.id == "appMenu_historyMenu"`
+                            )
+                            .replace(
+                                /(button\.parentNode\.id != \"panelMenu_bookmarksMenu\")/,
+                                `($1 && button.parentNode.id != "appMenu_historyMenu")`
+                            )
+                );
                 proto._hasBeenModifiedForOBHNT = true;
             }
         }
@@ -58,10 +108,10 @@
                         proto._createSyncedTabElement
                             .toSource()
                             .replace(/_createSyncedTabElement/, "")
-                            .replace(/document\.defaultView\.whereToOpenLink\(e\)/, "where")
+                            .replace(/document\.defaultView\.whereToOpenLink\(e\)/, "preWhere")
                             .replace(
                                 /document\.defaultView\.openUILink\(tabInfo\.url, e,/,
-                                `let where = document.defaultView.whereToOpenLink(e, false, true);\n      if (document.defaultView.PlacesUIUtils.loadBookmarksInTabs) {\n        if (where == "current") where = "tab";\n        if (where == "tab" && document.defaultView.gBrowser.selectedTab.isEmpty) where = "current";\n      }\n      document.defaultView.openUILinkIn(tabInfo.url, where,`
+                                `let where = document.defaultView.whereToOpenLink(e, false, true);\n      let preWhere = where;\n      if (document.defaultView.PlacesUIUtils.loadBookmarksInTabs) {\n        if (where == "current") where = "tab";\n        if (where == "tab" && document.defaultView.gBrowser.selectedTab.isEmpty) where = "current";\n      }\n      document.defaultView.openUILinkIn(tabInfo.url, where,`
                             )
                 );
                 proto._hasBeenModifiedForOBHNT = true;
