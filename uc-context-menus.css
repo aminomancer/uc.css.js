@@ -211,22 +211,28 @@ menupopup menuitem[type="checkbox"]:before {
     border-radius: 2px;
 }
 
-menupopup menuitem:is([type="checkbox"], [type="radio"])[_moz-menuactive="true"]:before {
+menupopup
+    menuitem:is([type="checkbox"], [type="radio"])[_moz-menuactive="true"]:not([disabled="true"]):before {
     background-color: var(--checkbox-unchecked-hover-bgcolor);
 }
 
-menupopup menuitem:is([type="checkbox"], [type="radio"])[_moz-menuactive="true"]:active:before {
+menupopup
+    menuitem:is([type="checkbox"], [type="radio"])[_moz-menuactive="true"]:not([disabled="true"]):active:before {
     background-color: var(--checkbox-unchecked-active-bgcolor);
 }
 
 menupopup
-    menuitem:is([type="checkbox"], [type="radio"])[checked="true"][_moz-menuactive="true"]:before {
+    menuitem:is([type="checkbox"], [type="radio"])[checked="true"][_moz-menuactive="true"]:not([disabled="true"]):before {
     background-color: var(--checkbox-checked-hover-bgcolor);
 }
 
 menupopup
-    menuitem:is([type="checkbox"], [type="radio"])[checked="true"][_moz-menuactive="true"]:active:before {
+    menuitem:is([type="checkbox"], [type="radio"])[checked="true"][_moz-menuactive="true"]:not([disabled="true"]):active:before {
     background-color: var(--checkbox-checked-active-bgcolor);
+}
+
+menupopup menuitem:is([type="checkbox"], [type="radio"])[disabled="true"]:before {
+    opacity: var(--ui-disabled-alpha);
 }
 
 menupopup menuitem[type="checkbox"][checked="true"]:before {

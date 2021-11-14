@@ -19,6 +19,7 @@ tooltip {
     --ui-text-100: #fff;
 
     --uc-arrowpanel-darker: hsla(236, 70%, 73%, 0.17);
+    --uc-arrowpanel-very-faint: hsla(236, 100%, 83%, 0.05);
     --uc-arrowpanel-faint: hsla(236, 100%, 83%, 0.1);
     --uc-arrowpanel-dimmed: hsla(236, 100%, 83%, 0.17);
     --uc-arrowpanel-dimmed-further: hsla(236, 100%, 83%, 0.25);
@@ -50,6 +51,8 @@ tooltip {
     --uc-panel-description-color: hsl(235, 48%, 89%, 70%);
     --uc-panel-shortcut-color: hsl(235, 27%, 73%, 70%);
     --uc-panel-shortcut-focus: hsl(235, 32%, 75%, 90%);
+    --uc-places-cell-focus-bgcolor: hsl(232, 30%, 19%);
+    --uc-places-cell-hover-bgcolor: hsl(232, 30%, 23%);
 
     --menupopup-inner-box-margin: 0px;
     --menupopup-shadow: none;
@@ -107,6 +110,8 @@ tooltip {
     --blur-bgcolor: var(--acrylic-blue);
     --transparent-img-background: center/16px repeat hsla(0, 0%, 80%)
         url(chrome://userchrome/content/checker.svg);
+    --transparent-img-background-context: center/16px repeat
+        url(chrome://userchrome/content/checker-context.svg);
     --general-button-border-radius: 2.6px;
     --dialog-bgcolor: hsla(240, 5.9%, 6.7%, 0.85);
     --dialog-box-bgcolor: hsla(232, 100%, 75%, 8%);
@@ -116,7 +121,8 @@ tooltip {
     --blurred-dialog-border-color: hsla(240, 7%, 20%, 0.8);
     --alertbox-bgcolor: hsla(0, 0%, 14%, 0.97);
     --notification-menu-color: var(--in-parent-page-color);
-    --context-menu-disabled-color: hsla(213, 43%, 89%, 0.5);
+    --ui-disabled-alpha: 0.5;
+    --context-menu-disabled-color: hsla(213, 43%, 89%, var(--ui-disabled-alpha, 0.5));
 
     /* this url is for the icon that displays in the identity box when entering text in the urlbar, and on the new tab page.
     you can replace it with chrome://userchrome/content/search-glass.svg if you don't use google */

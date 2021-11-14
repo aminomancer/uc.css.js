@@ -1512,7 +1512,7 @@ richlistitem.download-state > .downloadButton.downloadIconCancel .button-box .bu
 #protections-popup-mainView-panel-header,
 #eom-mainView-panel-header,
 #editBookmarkPanel > .panel-header {
-    height: 44px !important;
+    min-height: 44px !important;
 }
 
 :is(#identity-popup-mainView-panel-header, #eom-mainView-panel-header, #permission-popup-mainView-panel-header, #protections-popup-mainView-panel-header)
@@ -1521,6 +1521,7 @@ richlistitem.download-state > .downloadButton.downloadIconCancel .button-box .bu
     line-height: 1.1em !important;
     font-weight: var(--uc-font-weight-bold, 600) !important;
     margin: 0 !important;
+    height: auto !important;
 }
 
 #editBookmarkPanel > .panel-header {

@@ -121,7 +121,10 @@ tabmodalprompt :is(input, textarea)::selection {
 }
 
 tabmodalprompt :is(input, textarea):not(:focus, :focus-within):-moz-lwtheme::selection {
-    background-color: var(--ui-selection-bgcolor-disabled, text-select-disabled-background) !important;
+    background-color: var(
+        --ui-selection-bgcolor-disabled,
+        text-select-disabled-background
+    ) !important;
 }
 
 tabmodalprompt input[type="number"] {
@@ -259,9 +262,7 @@ panel[type="autocomplete-richlistbox"]
     color: var(--panel-shortcut-color) !important;
 }
 
-panel[type="autocomplete-richlistbox"]
-    > richlistbox
-    > richlistitem[originaltype="loginsFooter"] {
+panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem[originaltype="loginsFooter"] {
     color: inherit !important;
     border: none !important;
     margin-top: 4px;
@@ -654,10 +655,10 @@ panel[type="autocomplete-richlistbox"]
 
 #window-modal-dialog,
 .tab-prompt-dialog {
-    --chrome-offset: calc(0.5px + var(--urlbar-container-height, 40px) + var(--tab-min-height, 36px)) !important;
-    clip-path: inset(
-        0 -100% -100% -100%
-    );
+    --chrome-offset: calc(
+        0.5px + var(--urlbar-container-height, 40px) + var(--tab-min-height, 36px)
+    ) !important;
+    clip-path: inset(0 -100% -100% -100%);
 }
 
 :is(#window-modal-dialog, .tab-prompt-dialog) > .dialogOverlay[style] .dialogFrame {
@@ -780,12 +781,14 @@ panel[type="autocomplete-richlistbox"]
         background-color: var(--in-content-primary-button-background) !important;
     }
 
-    richlistbox[id] richlistitem:not([disabled="true"])
+    richlistbox[id]
+        richlistitem:not([disabled="true"])
         > button[label]:is(:enabled, :not([disabled="true"])):hover {
         background-color: var(--in-content-primary-button-background-hover) !important;
     }
 
-    richlistbox[id] richlistitem:not([disabled="true"])
+    richlistbox[id]
+        richlistitem:not([disabled="true"])
         > button[label]:is(:enabled, :not([disabled="true"])):hover:active,
     richlistbox[id] richlistitem > button[label][open],
     richlistbox[id] richlistitem > button[label][open]:hover {
@@ -834,7 +837,10 @@ panel[type="autocomplete-richlistbox"]
 
     input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):not(:focus, :focus-within):-moz-lwtheme::selection,
     textarea:not(:focus, :focus-within):-moz-lwtheme::selection {
-        background-color: var(--ui-selection-bgcolor-disabled, text-select-disabled-background) !important;
+        background-color: var(
+            --ui-selection-bgcolor-disabled,
+            text-select-disabled-background
+        ) !important;
     }
 
     window[role="dialog"] ::selection,
@@ -845,7 +851,10 @@ panel[type="autocomplete-richlistbox"]
 
     window[role="dialog"] :not(:focus, :focus-within):-moz-lwtheme::selection,
     window[role="dialog"] textarea:not(:focus, :focus-within):-moz-lwtheme::selection {
-        background-color: var(--global-selection-bgcolor-disabled, text-select-disabled-background) !important;
+        background-color: var(
+            --global-selection-bgcolor-disabled,
+            text-select-disabled-background
+        ) !important;
     }
 
     input[type="number"] {
@@ -986,35 +995,39 @@ panel[type="autocomplete-richlistbox"]
     }
 
     button,
-    :root[dialogroot] :is(
-    select,
-    input[type="color"],
-    menulist) {
+    :root[dialogroot] :is(select, input[type="color"], menulist) {
         min-height: var(--menuitem-height) !important;
         line-height: var(--menuitem-height) !important;
         border-radius: var(--in-content-button-border-radius) !important;
     }
 
-    :root[dialogroot] input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"]),
+    :root[dialogroot]
+        input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"]),
     :root[dialogroot] textarea {
         padding-block: 5px !important;
     }
 
-    :root[dialogroot] input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):focus,
+    :root[dialogroot]
+        input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):focus,
     :root[dialogroot] textarea:focus,
     :root[dialogroot] search-textbox[focused] {
         border-color: var(--in-content-focus-outline-color) !important;
     }
 
-    :root[dialogroot] input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"])::selection,
+    :root[dialogroot]
+        input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"])::selection,
     :root[dialogroot] textarea::selection {
         background-color: var(--ui-selection-bgcolor) !important;
         color: var(--ui-selection-color) !important;
     }
 
-    :root[dialogroot] input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):not(:focus, :focus-within):-moz-lwtheme::selection,
+    :root[dialogroot]
+        input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):not(:focus, :focus-within):-moz-lwtheme::selection,
     :root[dialogroot] textarea:not(:focus, :focus-within):-moz-lwtheme::selection {
-        background-color: var(--ui-selection-bgcolor-disabled, text-select-disabled-background) !important;
+        background-color: var(
+            --ui-selection-bgcolor-disabled,
+            text-select-disabled-background
+        ) !important;
     }
 
     :root[dialogroot] menulist,
@@ -1028,7 +1041,8 @@ panel[type="autocomplete-richlistbox"]
         border-radius: var(--toolbarbutton-border-radius) !important;
     }
 
-    :root[dialogroot] input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):focus-visible,
+    :root[dialogroot]
+        input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):focus-visible,
     :root[dialogroot] textarea:focus-visible,
     :root[dialogroot] search-textbox:focus-visible {
         background-color: color-mix(
@@ -1066,7 +1080,8 @@ panel[type="autocomplete-richlistbox"]
     }
 
     button[dlgtype]:not([default]):is(:hover, :focus-visible):not(:active),
-    :root[dialogroot] :is(.expander-up, .expander-down, .panel-button):is(:hover, :focus-visible):not(:active) {
+    :root[dialogroot]
+        :is(.expander-up, .expander-down, .panel-button):is(:hover, :focus-visible):not(:active) {
         background-color: var(--in-content-button-background-hover) !important;
         color: var(--in-content-button-text-color-hover) !important;
         border-color: transparent;
@@ -1176,7 +1191,11 @@ panel[type="autocomplete-richlistbox"]
 
     #SanitizeDialog[dialogroot] #sanitizeEverythingWarningBox {
         border-color: transparent !important;
-        background-color: color-mix(in srgb, var(--dialog-bgcolor) 50%, hsla(0, 0%, 0%, 0.2)) !important;
+        background-color: color-mix(
+            in srgb,
+            var(--dialog-bgcolor) 50%,
+            hsla(0, 0%, 0%, 0.2)
+        ) !important;
     }
 
     #SanitizeDialog[dialogroot] #sanitizeEverythingWarningIcon {
@@ -1212,10 +1231,7 @@ panel[type="autocomplete-richlistbox"]
             font-kerning: normal !important;
         }
 
-        :root[dialogroot] :is(
-        h2,
-        h3,
-        #titleText) {
+        :root[dialogroot] :is(h2, h3, #titleText) {
             font-weight: var(--uc-font-weight-semibold, 400) !important;
             font-family: SF Pro Display, Segoe UI, sans-serif !important;
         }
@@ -1397,11 +1413,11 @@ link[href="chrome://global/content/printPagination.css"]
         color: var(--in-parent-link-color) !important;
         text-decoration: none !important;
     }
-    
+
     #version {
         -moz-user-focus: none !important;
     }
-    
+
     #update-available-whats-new:is(:hover, :focus-visible),
     .text-link:is(:hover, :focus-visible) {
         color: var(--in-parent-link-color-hover) !important;
@@ -1415,49 +1431,323 @@ link[href="chrome://global/content/printPagination.css"]
 }
 
 /* page info popup. kinda lame */
-/* @-moz-document url(chrome://browser/content/pageinfo/pageInfo.xhtml){
-    #main-window,
-    #topBar{
+@-moz-document url(chrome://browser/content/pageinfo/pageInfo.xhtml)
+{
+    #main-window {
         background-color: var(--arrowpanel-background) !important;
         color: var(--arrowpanel-color) !important;
     }
-    
-    #topBar radio {
-        color: var(--arrowanel-color) !important;
+
+    #topBar {
+        padding: 0 !important;
+        background-color: var(--ui-secondary-bg) !important;
+        border-color: var(--button-solid-active-background) !important;
     }
-    
+
+    #viewGroup {
+        padding-inline-start: 4px !important;
+    }
+
+    #viewGroup > radio {
+        margin: 4px 0 !important;
+        padding: 2px !important;
+        color: var(--arrowanel-color) !important;
+        background: none !important;
+        fill: currentColor;
+        -moz-image-region: initial !important;
+        -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity;
+    }
+
+    #viewGroup > radio > .radio-label-box {
+        -moz-box-orient: initial !important;
+        -moz-box-pack: center !important;
+        min-height: var(--subviewbutton-height) !important;
+        border-radius: var(--general-button-border-radius);
+    }
+
+    #viewGroup > radio:hover .radio-label-box {
+        background-color: var(--uc-places-cell-focus-bgcolor) !important;
+    }
+
+    #viewGroup > radio[selected="true"] .radio-label-box,
+    #viewGroup > radio:hover:active .radio-label-box {
+        background-color: var(--uc-places-cell-hover-bgcolor) !important;
+    }
+
+    #viewGroup > radio .radio-icon {
+        width: 16px !important;
+        height: 16px !important;
+        margin-inline-end: 6px !important;
+    }
+
+    #generalTab {
+        list-style-image: url(chrome://userchrome/content/document.svg) !important;
+    }
+
+    #mediaTab {
+        list-style-image: url(chrome://userchrome/content/notifications/canvas.svg) !important;
+    }
+
+    #permTab {
+        list-style-image: url(chrome://userchrome/content/skin/permissions.svg) !important;
+    }
+
+    #securityTab {
+        list-style-image: url(chrome://userchrome/content/privacy-security.svg) !important;
+    }
+
+    #securityTab:hover,
+    #securityTab[selected="true"] {
+        -moz-image-region: rect(32px, 160px, 64px, 128px);
+    }
+
     input[readonly],
-    textbox{ color: var(--lwt-toolbar-field-color) !important; }
+    textbox {
+        color: var(--lwt-toolbar-field-color) !important;
+    }
 
     richlistbox,
     treecol,
-    button,
-    #permList{
+    treecolpicker,
+    button {
         appearance: none !important;
         background-color: var(--arrowpanel-dimmed) !important;
         color: var(--arrowpanel-color) !important;
+        border-color: var(--button-solid-active-background) !important;
     }
-    tree{
+
+    tree,
+    richlistbox,
+    #permList {
         appearance: none !important;
         background: var(--ui-secondary-bg) !important;
         color: var(--arrowpanel-color) !important;
+        border-radius: var(--general-button-border-radius) !important;
+        overflow: clip !important;
+        border: 1px solid var(--button-solid-active-background) !important;
     }
-    treecol:not([hideheader]){ height: 24px; }
-    treecol:hover{ background-color: var(--arrowpanel-dimmed-further) !important; }
-    treechildren{ background-color: transparent !important; }
-    treechildren::-moz-tree-row(multicol, odd){ background-color: rgba(0,0,0,0.2) !important; }
+
+    .permission {
+        border-bottom: 1px solid var(--button-solid-active-background) !important;
+    }
+
+    treecol,
+    treecolpicker {
+        box-shadow: inset 0 -1px var(--button-solid-active-background) !important;
+    }
+
+    :is(treecol, treecolpicker):not([hideheader]) {
+        height: 24px;
+    }
+
+    :is(treecol, treecolpicker):where(:hover) {
+        background-color: var(--arrowpanel-dimmed-further) !important;
+    }
+
+    treechildren {
+        background-color: transparent !important;
+    }
+
+    treechildren::-moz-tree-row(multicol, odd) {
+        background-color: var(--uc-arrowpanel-very-faint) !important;
+    }
+
     treechildren::-moz-tree-row(hover),
-    button:hover,
-    radiogroup > radio:hover,
-    #permList > .permission:hover{
-        background-color: var(--places-cell-focus-bgcolor) !important;
+    #permList > .permission:hover {
+        background-color: var(--uc-places-cell-focus-bgcolor) !important;
     }
-    treechildren::-moz-tree-row(selected),
-    radiogroup > radio[selected]{
-        background-color: var(--places-cell-hover-bgcolor) !important;
+
+    treechildren::-moz-tree-row(selected) {
+        background-color: var(--uc-places-cell-hover-bgcolor) !important;
         color: var(--arrowpanel-color) !important;
     }
+
+    treechildren::-moz-tree-row(selected) {
+        outline: none !important;
+        border: none !important;
+    }
+
     treechildren::-moz-tree-cell-text {
         color: var(--arrowpanel-color) !important;
     }
-} */
+
+    button {
+        border-radius: var(--general-button-border-radius);
+        padding: 4px 5px !important;
+        background-color: var(--button-bgcolor) !important;
+        border-color: transparent !important;
+    }
+
+    button:is(:hover, :focus-visible) {
+        background-color: var(--button-hover-bgcolor) !important;
+    }
+
+    button:hover:active {
+        background-color: var(--button-active-bgcolor) !important;
+    }
+
+    .checkbox-check,
+    .radio-check {
+        appearance: none !important;
+        --checkbox-border-color: var(--uc-checkbox-border-color) !important;
+        --checkbox-checked-border-color: var(--uc-checkbox-checked-border-color) !important;
+        --checkbox-unchecked-bgcolor: var(--uc-checkbox-unchecked-bgcolor) !important;
+        --checkbox-unchecked-hover-bgcolor: var(--uc-checkbox-unchecked-hover-bgcolor) !important;
+        --checkbox-unchecked-active-bgcolor: var(--uc-checkbox-unchecked-active-bgcolor) !important;
+        --checkbox-checked-bgcolor: var(--uc-checkbox-checked-bgcolor) !important;
+        --checkbox-checked-color: var(--uc-checkbox-checked-color) !important;
+        --checkbox-checked-hover-bgcolor: var(--uc-checkbox-checked-hover-bgcolor) !important;
+        --checkbox-checked-active-bgcolor: var(--uc-checkbox-checked-active-bgcolor) !important;
+    }
+
+    .radio-check {
+        appearance: none;
+        color: var(--checkbox-border-color, ThreeDDarkShadow);
+        background-color: var(--checkbox-unchecked-bgcolor, Field);
+        border: 1px solid currentColor;
+        border-radius: 50%;
+        -moz-box-align: center;
+        min-width: 13px;
+        min-height: 13px;
+    }
+
+    .radio-check[selected] {
+        border-color: var(--checkbox-checked-border-color, transparent);
+        background-color: var(--checkbox-checked-bgcolor, -moz-accent-color);
+        background-image: url("chrome://global/skin/icons/radio.svg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        -moz-context-properties: fill;
+        fill: currentColor;
+        color: var(--checkbox-checked-color, -moz-accent-color-foreground);
+        color-adjust: exact;
+    }
+
+    radio:not([disabled="true"]):hover:active > .radio-check[selected] {
+        background-color: var(
+            --checkbox-checked-active-bgcolor,
+            color-mix(in srgb, currentColor 25%, -moz-accent-color)
+        );
+    }
+
+    radio:not([disabled="true"]):hover > .radio-check[selected] {
+        background-color: var(
+            --checkbox-checked-hover-bgcolor,
+            color-mix(in srgb, currentColor 12.5%, -moz-accent-color)
+        );
+    }
+
+    radio:not([disabled="true"]):hover:active > .radio-check {
+        background-color: var(
+            --checkbox-unchecked-active-bgcolor,
+            color-mix(in srgb, -moz-accent-color 8%, Field)
+        );
+    }
+
+    radio:not([disabled="true"]):hover > .radio-check {
+        background-color: var(
+            --checkbox-unchecked-hover-bgcolor,
+            color-mix(in srgb, -moz-accent-color 4%, Field)
+        );
+    }
+
+    radio[disabled="true"] {
+        color: var(--context-menu-disabled-color) !important;
+    }
+
+    #imagecontainerbox {
+        background: var(--transparent-img-background-context) !important;
+        background-color: var(--arrowpanel-faint) !important;
+        color: var(--arrowpanel-darker);
+        fill: currentColor;
+        fill-opacity: 0.6;
+        border: 1px solid var(--button-solid-active-background) !important;
+        border-radius: var(--general-button-border-radius);
+        -moz-context-properties: fill, fill-opacity;
+    }
+
+    #imagecontainerbox > * {
+        color: initial;
+        fill: white;
+        stroke: white;
+        -moz-context-properties: fill, stroke;
+    }
+
+    .permissionLabel {
+        margin-inline-start: 7px !important;
+        margin-block: 0 4px !important;
+        padding-block: 2px !important;
+        padding-inline-start: 22px !important;
+        background-repeat: no-repeat;
+        background-size: 16px;
+        background-position-y: center;
+        background-position-x: 0;
+        fill: currentColor;
+        -moz-context-properties: fill, fill-opacity;
+    }
+
+    #perm-xr-row .permissionLabel {
+        background-image: url(chrome://userchrome/content/notifications/xr.svg);
+    }
+
+    #perm-geo-row .permissionLabel {
+        background-image: url(chrome://userchrome/content/notifications/geo.svg);
+    }
+
+    #perm-autoplay-media-row .permissionLabel {
+        background-image: url(chrome://userchrome/content/notifications/autoplay-media.svg);
+        background-size: 14px;
+        background-position-x: 1px;
+    }
+
+    #perm-install-row .permissionLabel {
+        background-image: url(chrome://userchrome/content/material/extension.svg);
+        background-size: 14px;
+        background-position-x: 1px;
+    }
+
+    #perm-popup-row .permissionLabel {
+        background-image: url(chrome://userchrome/content/skin/window.svg);
+        background-size: 14px;
+        background-position-x: 1px;
+    }
+
+    #perm-shortcuts-row .permissionLabel {
+        background-image: url(chrome://userchrome/content/material/keyboard-command.svg);
+    }
+
+    #perm-desktop-notification-row .permissionLabel {
+        background-image: url(chrome://userchrome/content/notifications/desktop-notification.svg);
+        background-size: 14px;
+        background-position-x: 1px;
+    }
+
+    #perm-cookie-row .permissionLabel {
+        background-image: url(chrome://userchrome/content/skin/3rdpartycookies.svg);
+        background-size: 14px;
+        background-position-x: 1px;
+    }
+
+    #perm-screen-row .permissionLabel {
+        background-image: url(chrome://userchrome/content/notifications/screen.svg);
+        background-size: 14px;
+        background-position-x: 1px;
+    }
+
+    #perm-persistent-storage-row .permissionLabel {
+        background-image: url(chrome://userchrome/content/notifications/persistent-storage.svg);
+    }
+
+    #perm-focus-tab-by-prompt-row .permissionLabel {
+        background-image: url(chrome://userchrome/content/skin/tab.svg);
+    }
+
+    #perm-camera-row .permissionLabel {
+        background-image: url(chrome://userchrome/content/notifications/camera.svg);
+    }
+
+    #perm-microphone-row .permissionLabel {
+        background-image: url(chrome://userchrome/content/notifications/microphone.svg);
+    }
+}

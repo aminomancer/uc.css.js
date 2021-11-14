@@ -952,6 +952,10 @@ userChrome.css.wikipedia.dark-theme-enabled */
         line-height: 22px !important;
     }
 
+    #bodyContent :is(table.ambox, #disambigbox) + table.ambox {
+        margin-top: 6px !important;
+    }
+
     #bodyContent #disambigbox {
         margin: 25px 0 !important;
     }
@@ -2641,10 +2645,20 @@ userChrome.css.wikipedia.dark-theme-enabled */
     }
 
     table.wikitable.sortable.jquery-tablesorter thead tr th.headerSort {
-        background-image: linear-gradient(transparent, transparent),
-            url(chrome://userchrome/content/in-content/wiki-sort.svg) !important;
+        background-image: var(--wiki-sort-img) !important;
         background-repeat: no-repeat !important;
         background-position: center right !important;
+        --wiki-sort-img: url(chrome://userchrome/content/in-content/wiki-sort.svg);
+        -moz-context-properties: fill;
+        fill: currentColor;
+    }
+
+    table.wikitable.sortable.jquery-tablesorter thead tr th.headerSortUp {
+        --wiki-sort-img: url(chrome://userchrome/content/in-content/wiki-sort-up.svg);
+    }
+
+    table.wikitable.sortable.jquery-tablesorter thead tr th.headerSortDown {
+        --wiki-sort-img: url(chrome://userchrome/content/in-content/wiki-sort-down.svg);
     }
 
     .vertical-navbox th {
@@ -2775,7 +2789,7 @@ userChrome.css.wikipedia.dark-theme-enabled */
 
     #content :where(.infobox),
     #bodyContent :where(table.ambox) {
-        box-shadow: 0 0 15px 2px hsla(0, 0%, 0%, 0.1), 0 0 3px 1px hsla(0, 0%, 0%, 0.2) !important;
+        box-shadow: 0 0 8px hsla(0, 0%, 0%, 0.08), 0 0 3px 1px hsla(0, 0%, 0%, 0.05) !important;
     }
 
     #bodyContent table :is(table, .infobox, .thumb) {

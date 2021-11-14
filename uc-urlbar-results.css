@@ -474,6 +474,12 @@
     text-decoration: underline !important;
 }
 
+.urlbarView-url {
+    overflow: hidden;
+    color: var(--urlbar-popup-url-color);
+    line-height: 1.4;
+}
+
 .urlbarView-row[has-action]:not([selected]) .urlbarView-title[isurl] {
     color: var(--urlbar-popup-url-color) !important;
 }
