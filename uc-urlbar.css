@@ -309,7 +309,10 @@ but CSS hides it faster and avoids flickering.
 #urlbar-zoom-button:is(:hover, :focus-visible) {
     background-color: var(--desaturate-dimmed) !important;
     border-color: transparent !important;
-    mix-blend-mode: normal !important;
+}
+
+#urlbar-zoom-button:hover:active {
+    background-color: var(--desaturate-dimmed-further) !important;
 }
 
 #urlbar-zoom-button[animate="true"] {

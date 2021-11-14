@@ -902,6 +902,10 @@ userChrome.css.wikipedia.dark-theme-enabled */
         letter-spacing: -0.3px !important;
     }
 
+    .mw-body-content p sub {
+        font-family: "Source Sans Pro" !important;
+    }
+
     .mw-body-content .hlist[role="navigation"] {
         background-color: hsl(240, 2%, 20%) !important;
         color: inherit !important;
@@ -4164,6 +4168,15 @@ userChrome.css.wikipedia.dark-theme-enabled */
         width: 9px;
         height: 13.5px;
         content: "";
+    }
+
+    .clarify-content {
+        color: var(--low-warning-text-color) !important;
+        border: none !important;
+        padding: revert !important;
+        text-decoration: underline;
+        text-decoration-style: dotted;
+        cursor: help;
     }
 
     .tracklist span {
