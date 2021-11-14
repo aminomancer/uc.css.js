@@ -1916,3 +1916,460 @@ of the animations. */
         opacity: 1;
     }
 }
+
+@-moz-document url("chrome://mozapps/content/downloads/unknownContentType.xhtml")
+{
+    :root {
+        --in-content-page-color: rgb(21, 20, 26);
+        --in-content-page-background: #fff;
+        --in-content-text-color: var(--in-content-page-color);
+        --in-content-box-background: #fff;
+        --in-content-box-background-odd: rgba(12, 12, 13, 0.05); /* grey 90 a05 */
+        --in-content-box-border-color: color-mix(in srgb, currentColor 41%, transparent);
+        --in-content-box-info-background: #f0f0f4;
+        --in-content-item-hover: color-mix(
+            in srgb,
+            var(--in-content-primary-button-background) 20%,
+            transparent
+        );
+        --in-content-item-hover-text: var(--in-content-page-color);
+        --in-content-item-selected: var(--in-content-primary-button-background);
+        --in-content-item-selected-text: var(--in-content-primary-button-text-color);
+        --in-content-icon-color: rgb(91, 91, 102);
+        --in-content-accent-color: #0a84ff;
+        --in-content-accent-color-active: #0060df;
+        --in-content-border-hover: var(--grey-90-a50);
+        --in-content-border-invalid: var(--red-50);
+        --in-content-border-color: #d7d7db;
+        --in-content-error-text-color: #c50042;
+        --in-content-link-color: var(--blue-60);
+        --in-content-link-color-hover: var(--blue-70);
+        --in-content-link-color-active: var(--blue-80);
+        --in-content-link-color-visited: var(--blue-60);
+        --in-content-button-text-color: var(--in-content-text-color);
+        --in-content-button-text-color-hover: var(--in-content-text-color);
+        --in-content-button-text-color-active: var(--in-content-button-text-color-hover);
+        --in-content-button-background: rgba(207, 207, 216, 0.33);
+        --in-content-button-background-hover: rgba(207, 207, 216, 0.66);
+        --in-content-button-background-active: rgb(207, 207, 216);
+        --in-content-button-border-color: transparent;
+        --in-content-button-border-color-hover: transparent;
+        --in-content-button-border-color-active: var(--in-content-button-border-color-hover);
+        --in-content-primary-button-text-color: rgb(251, 251, 254);
+        --in-content-primary-button-text-color-hover: var(--in-content-primary-button-text-color);
+        --in-content-primary-button-background: #0061e0;
+        --in-content-primary-button-background-hover: #0250bb;
+        --in-content-primary-button-background-active: #053e94;
+        --in-content-primary-button-border-color: transparent;
+        --in-content-primary-button-border-hover: transparent;
+        --in-content-focus-outline-color: var(--in-content-primary-button-background);
+        --in-content-table-background: #f8f8fa;
+        --in-content-table-border-color: var(--in-content-box-border-color);
+        --in-content-table-header-background: var(--in-content-primary-button-background);
+        --in-content-table-header-color: var(--in-content-primary-button-text-color);
+        --checkbox-border-color: var(--in-content-box-border-color);
+        --checkbox-unchecked-bgcolor: var(--in-content-button-background);
+        --checkbox-unchecked-hover-bgcolor: var(--in-content-button-background-hover);
+        --checkbox-unchecked-active-bgcolor: var(--in-content-button-background-active);
+        --checkbox-checked-bgcolor: var(--in-content-primary-button-background);
+        --checkbox-checked-color: var(--in-content-primary-button-text-color);
+        --checkbox-checked-border-color: transparent;
+        --checkbox-checked-hover-bgcolor: var(--in-content-primary-button-background-hover);
+        --checkbox-checked-active-bgcolor: var(--in-content-primary-button-background-active);
+        --blue-40: #45a1ff;
+        --blue-50: #0a84ff;
+        --blue-60: #0060df;
+        --blue-70: #003eaa;
+        --blue-80: #002275;
+        --grey-30: #d7d7db;
+        --grey-60: #4a4a4f;
+        --grey-90-a10: rgba(12, 12, 13, 0.1);
+        --grey-90-a20: rgba(12, 12, 13, 0.2);
+        --grey-90-a30: rgba(12, 12, 13, 0.3);
+        --grey-90-a50: rgba(12, 12, 13, 0.5);
+        --grey-90-a60: rgba(12, 12, 13, 0.6);
+        --green-50: #30e60b;
+        --green-60: #12bc00;
+        --green-70: #058b00;
+        --green-80: #006504;
+        --green-90: #003706;
+        --orange-50: #ff9400;
+        --red-40: #ff4f5e;
+        --red-50: #ff0039;
+        --red-60: #d70022;
+        --red-70: #a4000f;
+        --red-80: #5a0002;
+        --red-90: #3e0200;
+        --yellow-50: #ffe900;
+        --yellow-60: #d7b600;
+        --yellow-60-a30: rgba(215, 182, 0, 0.3);
+        --yellow-70: #a47f00;
+        --yellow-80: #715100;
+        --yellow-90: #3e2800;
+        --shadow-10: 0 1px 4px var(--grey-90-a10);
+        --shadow-30: 0 4px 16px var(--grey-90-a10);
+        accent-color: var(--in-content-accent-color);
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --in-content-page-background: rgb(28, 27, 34);
+            --in-content-page-color: rgb(251, 251, 254);
+            --in-content-box-background: rgb(35, 34, 43);
+            --in-content-box-background-odd: rgba(249, 249, 250, 0.05);
+            --in-content-box-info-background: rgba(249, 249, 250, 0.15);
+            --in-content-border-color: rgba(249, 249, 250, 0.2);
+            --in-content-border-hover: rgba(249, 249, 250, 0.3);
+            --in-content-border-invalid: rgb(255, 132, 139);
+            --in-content-button-background: rgb(43, 42, 51);
+            --in-content-button-background-hover: rgb(82, 82, 94);
+            --in-content-button-background-active: rgb(91, 91, 102);
+            --in-content-icon-color: rgb(251, 251, 254);
+            --in-content-primary-button-text-color: rgb(43, 42, 51);
+            --in-content-primary-button-background: rgb(0, 221, 255);
+            --in-content-primary-button-background-hover: rgb(128, 235, 255);
+            --in-content-primary-button-background-active: rgb(170, 242, 255);
+            --in-content-table-background: rgb(35, 34, 43);
+            --in-content-accent-color: var(--in-content-primary-button-background);
+            --in-content-accent-color-active: var(--in-content-primary-button-background-hover);
+            --in-content-link-color: var(--in-content-primary-button-background);
+            --in-content-link-color-hover: var(--in-content-primary-button-background-hover);
+            --in-content-link-color-active: var(--in-content-primary-button-background-active);
+            --in-content-link-color-visited: var(--in-content-link-color);
+            --checkbox-border-color: var(--uc-checkbox-border-color);
+            --checkbox-checked-border-color: var(--uc-checkbox-checked-border-color);
+            --checkbox-unchecked-bgcolor: var(--uc-checkbox-unchecked-bgcolor);
+            --checkbox-unchecked-hover-bgcolor: var(--uc-checkbox-unchecked-hover-bgcolor);
+            --checkbox-unchecked-active-bgcolor: var(--uc-checkbox-unchecked-active-bgcolor);
+            --checkbox-checked-bgcolor: var(--uc-checkbox-checked-bgcolor);
+            --checkbox-checked-color: var(--uc-checkbox-checked-color);
+            --checkbox-checked-hover-bgcolor: var(--uc-checkbox-checked-hover-bgcolor);
+            --checkbox-checked-active-bgcolor: var(--uc-checkbox-checked-active-bgcolor);
+        }
+    }
+
+    :root {
+        background-color: var(--in-content-page-background);
+        color: var(--in-content-page-color);
+    }
+
+    menulist {
+        appearance: none;
+        min-height: 28px;
+        color: var(--in-content-button-text-color);
+        border: 1px solid var(--in-content-button-border-color);
+        border-radius: 4px;
+        background-color: var(--in-content-button-background);
+        font-weight: 400;
+        padding-inline: 7px;
+        text-decoration: none;
+        margin: 4px 8px;
+        font-size: 1em;
+    }
+
+    menulist:not([disabled="true"]):hover {
+        background-color: var(--in-content-button-background-hover);
+        color: var(--in-content-button-text-color-hover);
+        border-color: var(--in-content-button-border-color-hover);
+    }
+
+    menulist[open="true"]:not([disabled="true"]) {
+        background-color: var(--in-content-button-background-active);
+        color: var(--in-content-button-text-color-active);
+        border-color: var(--in-content-button-border-color-active);
+    }
+
+    menulist[disabled="true"] {
+        opacity: 0.4;
+    }
+
+    menulist[image]::part(icon) {
+        margin-inline-end: 5px;
+    }
+
+    menulist::part(dropmarker) {
+        appearance: none;
+        padding: 0;
+        border: none;
+        background-color: transparent;
+        list-style-image: url("chrome://global/skin/icons/arrow-down-12.svg");
+        -moz-context-properties: fill;
+        fill: currentColor;
+    }
+
+    menulist::part(dropmarker-icon) {
+        width: 12px;
+        height: 12px;
+    }
+
+    a,
+    .text-link {
+        color: var(--in-content-link-color);
+        text-decoration: none;
+    }
+
+    a:hover,
+    .text-link:hover,
+    button.text-link:not([disabled="true"]):hover {
+        color: var(--in-content-link-color-hover);
+        text-decoration: underline;
+    }
+
+    a:visited {
+        color: var(--in-content-link-color-visited);
+    }
+
+    a:hover:active,
+    .text-link:hover:active,
+    button.text-link:not([disabled="true"]):hover:active {
+        color: var(--in-content-link-color-active);
+        text-decoration: none;
+    }
+
+    a:-moz-focusring,
+    .text-link:-moz-focusring {
+        outline: 2px solid var(--in-content-focus-outline-color);
+        outline-offset: 1px;
+        border-radius: 4px;
+    }
+
+    button.text-link {
+        background-color: transparent !important;
+        padding: 0;
+        border: 0;
+        font-weight: normal;
+        min-height: 0;
+        min-width: 0;
+    }
+
+    select[size][multiple],
+    listheader,
+    richlistbox {
+        appearance: none;
+        margin-inline: 0;
+        background-color: var(--in-content-box-background);
+        border: 1px solid var(--in-content-box-border-color);
+        border-radius: 4px;
+        color: var(--in-content-text-color);
+    }
+
+    listheader {
+        border-bottom: none;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        padding-bottom: 1px;
+        box-shadow: inset 0 -1px var(--in-content-border-color);
+        overflow: clip;
+    }
+
+    listheader + richlistbox {
+        margin-top: 0;
+        border-top: none;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+    select[size][multiple] > option,
+    treechildren::-moz-tree-row {
+        padding: 0.3em;
+        margin: 0;
+        border: none;
+        border-radius: 0;
+        background-image: none;
+    }
+
+    treechildren::-moz-tree-row(multicol, odd) {
+        background-color: var(--in-content-box-background-odd);
+    }
+
+    select[size][multiple] > option:hover,
+    treechildren::-moz-tree-row(hover) {
+        background-color: var(--in-content-item-hover);
+        color: var(--in-content-item-hover-text);
+    }
+
+    richlistbox > richlistitem[selected],
+    treechildren::-moz-tree-row(selected) {
+        background-color: var(--in-content-item-selected);
+        color: var(--in-content-item-selected-text);
+    }
+
+    richlistbox:not(#categories) > richlistitem[selected] {
+        --in-content-button-background: color-mix(in srgb, currentColor 15%, transparent);
+        --in-content-button-background-hover: color-mix(in srgb, currentColor 30%, transparent);
+        --in-content-button-background-active: color-mix(in srgb, currentColor 45%, transparent);
+        --in-content-button-text-color: var(--in-content-item-selected-text);
+        --in-content-button-text-color-hover: var(--in-content-item-selected-text);
+        --in-content-button-text-color-active: var(--in-content-button-text-color-hover);
+        --in-content-focus-outline-color: var(--in-content-item-selected-text);
+    }
+
+    richlistitem[selected] menulist:focus-visible {
+        outline-offset: -2px;
+    }
+
+    @media (prefers-contrast) {
+        treechildren::-moz-tree-row(selected) {
+            border: 2px solid currentColor;
+            border-radius: 4px;
+        }
+    }
+
+    panel[type="autocomplete-richlistbox"] {
+        background-color: var(--in-content-box-background);
+        border: 1px solid var(--in-content-box-border-color);
+        color: var(--in-content-text-color);
+    }
+
+    tree {
+        appearance: none;
+        font-size: 1em;
+        border: 1px solid var(--in-content-box-border-color);
+        border-radius: 4px;
+        background-color: var(--in-content-box-background);
+        color: inherit;
+        margin: 0;
+    }
+
+    treecols {
+        appearance: none;
+        border: none;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        border-bottom: 1px solid var(--in-content-border-color);
+        overflow: clip;
+        padding: 0;
+    }
+
+    treecol:not([hideheader="true"]),
+    treecolpicker {
+        appearance: none;
+        border: none;
+        background-color: var(--in-content-button-background);
+        color: var(--in-content-button-text-color, inherit);
+        padding: 5px 10px;
+    }
+
+    treecol:not([hideheader="true"], [sortable="false"]):hover,
+    treecolpicker:hover {
+        background-color: var(--in-content-button-background-hover);
+        color: var(--in-content-button-text-color-hover);
+    }
+
+    treecol:not([hideheader="true"], [sortable="false"]):hover:active,
+    treecolpicker:hover:active {
+        background-color: var(--in-content-button-background-active);
+    }
+
+    treecol:not([hideheader="true"], :first-child),
+    treecolpicker {
+        border-inline-start-width: 1px;
+        border-inline-start-style: solid;
+        border-image: linear-gradient(
+                transparent 0%,
+                transparent 20%,
+                var(--in-content-box-border-color) 20%,
+                var(--in-content-box-border-color) 80%,
+                transparent 80%,
+                transparent 100%
+            )
+            1 1;
+    }
+
+    treecol[sortDirection]:not([hideheader="true"]) > *.treecol-sortdirection {
+        list-style-image: url("chrome://global/skin/icons/sort-arrow.svg");
+        -moz-context-properties: fill;
+        fill: currentColor;
+        width: 18px;
+        height: 18px;
+    }
+
+    treecol[sortDirection="ascending"]:not([hideheader="true"]) > *.treecol-sortdirection {
+        transform: scaleY(-1);
+    }
+
+    treechildren::-moz-tree-row {
+        min-height: 2em;
+    }
+
+    treechildren::-moz-tree-cell-text(hover),
+    treechildren::-moz-tree-twisty(hover),
+    treechildren::-moz-tree-image(hover) {
+        color: var(--in-content-item-hover-text);
+    }
+
+    treechildren::-moz-tree-cell-text(selected),
+    treechildren::-moz-tree-twisty(selected),
+    treechildren::-moz-tree-image(selected) {
+        color: var(--in-content-item-selected-text);
+    }
+
+    .checkbox-check,
+    .checkbox-check[native],
+    .radio-check {
+        appearance: none;
+        min-width: 13px;
+        min-height: 13px;
+        margin-inline-end: 5px;
+    }
+
+    .radio-label-box {
+        margin-inline-start: 0;
+        padding-bottom: 1px;
+        padding-inline-start: 1px;
+    }
+
+    .radio-check {
+        appearance: none;
+        color: var(--checkbox-border-color, ThreeDDarkShadow);
+        background-color: var(--checkbox-unchecked-bgcolor, Field);
+        border: 1px solid currentColor;
+        border-radius: 50%;
+        -moz-box-align: center;
+    }
+
+    .radio-check[selected] {
+        border-color: var(--checkbox-checked-border-color, transparent);
+        background-color: var(--checkbox-checked-bgcolor, -moz-accent-color);
+        background-image: url("chrome://global/skin/icons/radio.svg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        -moz-context-properties: fill;
+        fill: currentColor;
+        color: var(--checkbox-checked-color, -moz-accent-color-foreground);
+        color-adjust: exact;
+    }
+
+    radio:not([disabled="true"]):hover:active > .radio-check[selected] {
+        background-color: var(
+            --checkbox-checked-active-bgcolor,
+            color-mix(in srgb, currentColor 25%, -moz-accent-color)
+        );
+    }
+
+    radio:not([disabled="true"]):hover > .radio-check[selected] {
+        background-color: var(
+            --checkbox-checked-hover-bgcolor,
+            color-mix(in srgb, currentColor 12.5%, -moz-accent-color)
+        );
+    }
+
+    radio:not([disabled="true"]):hover:active > .radio-check {
+        background-color: var(
+            --checkbox-unchecked-active-bgcolor,
+            color-mix(in srgb, -moz-accent-color 8%, Field)
+        );
+    }
+
+    radio:not([disabled="true"]):hover > .radio-check {
+        background-color: var(
+            --checkbox-unchecked-hover-bgcolor,
+            color-mix(in srgb, -moz-accent-color 4%, Field)
+        );
+    }
+
+    radio[disabled="true"] {
+        color: var(--context-menu-disabled-color);
+    }
+}

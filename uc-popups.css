@@ -455,10 +455,6 @@ panel[type="autocomplete-richlistbox"]
     }
 }
 
-#fullscreen-warning {
-    background-color: var(--urlbarView-bgcolor) !important;
-}
-
 @-moz-document url("chrome://global/content/pictureinpicture/player.xhtml")
 {
     .control-item {
@@ -588,6 +584,46 @@ panel[type="autocomplete-richlistbox"]
     }
 }
 
+.pointerlockfswarning {
+    align-items: center;
+    background: rgba(45, 62, 72, 0.9);
+    border: 2px solid currentColor;
+    box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    color: #fafafa;
+    padding: 24px 16px;
+    font: message-box;
+    background-color: var(--dialog-bgcolor) !important;
+    background-image: var(--acrylic-texture) !important;
+    backdrop-filter: var(--acrylic-blur) !important;
+    border: 1px solid var(--blurred-dialog-border-color) !important;
+    color: var(--arrowpanel-color) !important;
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.25), 0px 0px 5px -1px rgba(0, 0, 0, 0.125) !important;
+    transition-property: transform, opacity !important;
+    transition-timing-function: cubic-bezier(0.43, 0, 0.38, 1), cubic-bezier(0.43, 0, 0.38, 1) !important;
+    transition-duration: 0.5s, 0.4s !important;
+    opacity: 0 !important;
+}
+
+.pointerlockfswarning:is([onscreen], [ontop]) {
+    opacity: 1 !important;
+    transition-timing-function: cubic-bezier(0.13, 0.25, 0.25, 0.92), cubic-bezier(0.43, 0, 0.38, 1) !important;
+    transition-duration: 0.4s, 0.35s !important;
+}
+
+.pointerlockfswarning button {
+    --content-principal-box-border-color: hsla(270, 7%, 98%, 0.1);
+    --content-principal-button-background: hsla(0, 20%, 90%, 0.08);
+    --content-principal-button-background-hover: hsla(0, 20%, 90%, 0.15);
+    --content-principal-button-background-active: hsla(0, 20%, 90%, 0.19);
+    appearance: none !important;
+    background-color: var(--content-principal-button-background) !important;
+    border: 1px solid var(--content-principal-box-border-color) !important;
+    border-radius: var(--general-button-border-radius);
+    padding: 4px 8px !important;
+    min-height: var(--menuitem-height) !important;
+}
+
 #pictureInPictureToggleContextMenu {
     display: none !important;
 }
@@ -674,6 +710,7 @@ panel[type="autocomplete-richlistbox"]
 @-moz-document url("chrome://global/content/commonDialog.xhtml"),
     url("chrome://mozapps/content/handling/permissionDialog.xhtml"),
     url("chrome://mozapps/content/handling/appChooser.xhtml"),
+    url("chrome://mozapps/content/downloads/unknownContentType.xhtml"),
     url-prefix("chrome://browser/content/sanitize.xhtml")
 {
     /* use this selector to exclude null-window prompts, which open in their own windows and don't inherit styles from the chrome window.
@@ -686,7 +723,8 @@ panel[type="autocomplete-richlistbox"]
     Services.prompt.confirmEx(window, "title", "text", 1, "1", "2", "3", "checkbox", {value: false})
     then try changing the first parameter window to null and you'll see it opens as a regular null-window dialog instead. */
     #commonDialogWindow[dialogroot],
-    #commonDialogWindow[dialogroot] * {
+    #commonDialogWindow[dialogroot] *,
+    .dialog-button-box {
         --in-content-page-background: transparent !important;
         --in-content-page-color: var(--in-parent-page-color) !important;
         --in-content-box-background: var(--dialog-box-bgcolor) !important;
@@ -709,6 +747,7 @@ panel[type="autocomplete-richlistbox"]
         --in-content-primary-button-background-hover: var(--purple-35) !important;
         --in-content-primary-button-background-active: var(--purple-30) !important;
         --in-content-primary-button-text-color: var(--in-content-page-color) !important;
+        --in-content-primary-button-text-color-hover: white !important;
         --checkbox-border-color: var(--in-content-box-border-color) !important;
         --checkbox-checked-border-color: transparent !important;
         --checkbox-unchecked-bgcolor: var(--in-content-button-background) !important;
@@ -747,6 +786,63 @@ panel[type="autocomplete-richlistbox"]
     .dialog-button-box > button {
         flex-grow: 0.15;
         flex-wrap: nowrap;
+    }
+
+    .dialog-button-box > button {
+        appearance: none !important;
+        min-height: 32px !important;
+        color: var(--in-content-button-text-color) !important;
+        border: 1px solid var(--in-content-button-border-color) !important;
+        border-radius: 4px !important;
+        background-color: var(--in-content-button-background) !important;
+        font-weight: 400 !important;
+        padding: 7px !important;
+        text-decoration: none !important;
+        margin: 4px 8px !important;
+        font-size: 1em !important;
+    }
+
+    .dialog-button-box > button:not([disabled="true"]):hover {
+        background-color: var(--in-content-button-background-hover) !important;
+        color: var(--in-content-button-text-color-hover) !important;
+        border-color: var(--in-content-button-border-color-hover) !important;
+    }
+
+    .dialog-button-box > button:not([disabled="true"]):hover:active,
+    .dialog-button-box > button[open],
+    .dialog-button-box > button[open]:hover {
+        background-color: var(--in-content-button-background-active) !important;
+        color: var(--in-content-button-text-color-active) !important;
+        border-color: var(--in-content-button-border-color-active) !important;
+    }
+
+    .dialog-button-box > button[disabled="true"] {
+        opacity: 0.4 !important;
+    }
+
+    .dialog-button-box > button[autofocus],
+    .dialog-button-box > button[type="submit"],
+    .dialog-button-box > button[default],
+    .dialog-button-box > button.primary {
+        background-color: var(--in-content-primary-button-background) !important;
+        color: var(--in-content-primary-button-text-color) !important;
+        border-color: var(--in-content-primary-button-border-color) !important;
+    }
+
+    .dialog-button-box > button[autofocus]:not([disabled="true"]):hover,
+    .dialog-button-box > button[type="submit"]:not([disabled="true"]):hover,
+    .dialog-button-box > button[default]:not([disabled="true"]):hover,
+    .dialog-button-box > button.primary:not([disabled="true"]):hover {
+        background-color: var(--in-content-primary-button-background-hover) !important;
+        color: var(--in-content-primary-button-text-color-hover) !important;
+        border-color: var(--in-content-primary-button-border-hover) !important;
+    }
+
+    .dialog-button-box > button[autofocus]:not([disabled="true"]):hover:active,
+    .dialog-button-box > button[type="submit"]:not([disabled="true"]):hover:active,
+    .dialog-button-box > button[default]:not([disabled="true"]):hover:active,
+    .dialog-button-box > button.primary:not([disabled="true"]):hover:active {
+        background-color: var(--in-content-primary-button-background-active) !important;
     }
 
     dialog input:-moz-focusring,
@@ -907,6 +1003,49 @@ panel[type="autocomplete-richlistbox"]
             font-weight: var(--uc-font-weight-semibold, 400) !important;
             font-size: 14px !important;
             font-family: SF Pro Display, Segoe UI, sans-serif !important;
+        }
+    }
+}
+
+@-moz-document url("chrome://mozapps/content/downloads/unknownContentType.xhtml")
+{
+    #unknownContentType {
+        padding: 10px !important;
+    }
+
+    #intro {
+        margin-top: 5px !important;
+    }
+
+    .header {
+        margin-bottom: 5px !important;
+    }
+
+    radiogroup radio {
+        margin-block: 5px !important;
+    }
+
+    radiogroup deck menulist {
+        margin-block: 0 !important;
+    }
+
+    separator.thin:not([orient="vertical"]) {
+        height: 5px !important;
+    }
+
+    .dialog-button-box:not([hidden]) {
+        column-gap: 10px !important;
+    }
+
+    .dialog-button-box button {
+        margin: 0 !important;
+    }
+
+    @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
+        .header,
+        #location {
+            font-weight: var(--uc-font-weight-extrabold, 500) !important;
+            font-family: SF Pro, Segoe UI, sans-serif !important;
         }
     }
 }

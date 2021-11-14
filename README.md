@@ -34,6 +34,10 @@ I also recommend setting the following prefs in `about:config`. There's a [user.
 | browser.urlbar.richSuggestions.tail | Boolean | false | |
 | browser.urlbar.searchTips | Boolean | false | |
 | browser.urlbar.trimURLs | Boolean | false | |
+| full-screen-api.transition-duration.enter | String | `0 0` | Remove the fade in/out transition when switching to/from fullscreen |
+| full-screen-api.transition-duration.leave | String | `0 0` | |
+| full-screen-api.warning.delay | Number | -1 | Remove the warning when switching to/from fullscreen |
+| full-screen-api.warning.timeout | Number | 0 | |
 | gfx.font\_rendering.cleartype\_params.cleartype\_level | Number | 100 | These settings are a major improvement to text rendering on Windows imo. They shouldn't do anything on Mac/Linux |
 | gfx.font\_rendering.cleartype\_params.force\_gdi\_classic\_for\_families | String | `<empty>` | Leave the value completely empty |
 | gfx.font\_rendering.cleartype\_params.force\_gdi\_classic\_max\_size | Number | 6 | |
