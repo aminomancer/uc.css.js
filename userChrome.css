@@ -4,7 +4,7 @@
 @author         aminomancer
 @homepage       https://github.com/aminomancer
 @description    A dark indigo theme integrated with extensive functional and visual scripts.
-                This stylesheet is just used to load all the other parent-process stylesheets into the chrome window.
+                This stylesheet is just used to load all the individual parent-process stylesheets into chrome windows.
 */
 
 @import url(uc-globals.css);

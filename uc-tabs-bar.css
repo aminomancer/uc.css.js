@@ -242,12 +242,18 @@ this sheet controls their appearance as well. */
 }
 
 /* macOS style window controls */
-.titlebar-button {
+.titlebar-button,
+.uc-titlebar-button {
     display: -moz-box !important;
+	border: none;
+	margin: 0 !important;
+	padding: 8px 17px;
+	-moz-context-properties: stroke;
+	stroke: currentColor;
 }
 
-:root:not([sizemode="maximized"], [inFullscreen]) .titlebar-restore,
-:root:is([sizemode="maximized"], [inFullscreen]) .titlebar-max {
+:root:not([sizemode="maximized"], [inFullscreen]) :is(.titlebar-restore, .uc-titlebar-restore),
+:root:is([sizemode="maximized"], [inFullscreen]) :is(.titlebar-max, .uc-titlebar-max) {
     display: none !important;
 }
 
@@ -259,7 +265,7 @@ this sheet controls their appearance as well. */
     opacity: 1 !important;
 }
 
-.titlebar-button > .toolbarbutton-icon {
+:is(.titlebar-button, .uc-titlebar-button) > .toolbarbutton-icon {
     appearance: none !important;
     width: 15.3px !important;
     height: 15.3px !important;
@@ -271,7 +277,9 @@ this sheet controls their appearance as well. */
 }
 
 .titlebar-max,
-.titlebar-restore {
+.uc-titlebar-max,
+.titlebar-restore,
+.uc-titlebar-restore {
     appearance: none !important;
     padding: 0px !important;
     padding-left: 7px !important;
@@ -287,16 +295,16 @@ this sheet controls their appearance as well. */
     -moz-box-ordinal-group: 1 !important;
 }
 
-.titlebar-max:hover {
+:is(.titlebar-max, .uc-titlebar-max):hover {
     list-style-image: url(chrome://userchrome/content/window/maximize-hover.svg) !important;
 }
 
-:root:is([sizemode="maximized"], [inFullscreen]) .titlebar-max:hover,
-.titlebar-restore:hover {
+:root:is([sizemode="maximized"], [inFullscreen]) :is(.titlebar-max, .uc-titlebar-max):hover,
+:is(.titlebar-restore, .uc-titlebar-restore):hover {
     list-style-image: url(chrome://userchrome/content/window/maximize-restore.svg) !important;
 }
 
-.titlebar-min {
+:is(.titlebar-min, .uc-titlebar-min) {
     appearance: none !important;
     padding: 0px !important;
     padding-left: 7px !important;
@@ -310,11 +318,12 @@ this sheet controls their appearance as well. */
     -moz-box-ordinal-group: 2 !important;
 }
 
-.titlebar-min:hover {
+:is(.titlebar-min, .uc-titlebar-min):hover {
     list-style-image: url(chrome://userchrome/content/window/minimize-hover.svg) !important;
 }
 
-.titlebar-close {
+.titlebar-close,
+.uc-titlebar-close {
     appearance: none !important;
     padding: 0px !important;
     padding-left: 7px !important;
@@ -328,7 +337,7 @@ this sheet controls their appearance as well. */
     -moz-box-ordinal-group: 3 !important;
 }
 
-.titlebar-close:hover {
+:is(.titlebar-close, .uc-titlebar-close):hover {
     list-style-image: url(chrome://userchrome/content/window/close-hover.svg) !important;
 }
 
@@ -606,15 +615,15 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
     -moz-box-ordinal-group: 0 !important;
 }
 
-:root:is([operatingsystem="macosx"], [operatingsystem="linux"]) :is(.titlebar-min, #minimize-button) {
+:root:is([operatingsystem="macosx"], [operatingsystem="linux"]) :is(.titlebar-min, .uc-titlebar-min) {
     -moz-box-ordinal-group: 2 !important;
 }
 
-:root:is([operatingsystem="macosx"], [operatingsystem="linux"]) :is(.titlebar-max, .titlebar-restore, #restore-button) {
+:root:is([operatingsystem="macosx"], [operatingsystem="linux"]) :is(.titlebar-max, .uc-titlebar-max, .titlebar-restore, .uc-titlebar-restore) {
     -moz-box-ordinal-group: 3 !important;
 }
 
-:root:is([operatingsystem="macosx"], [operatingsystem="linux"]) :is(.titlebar-close, #close-button) {
+:root:is([operatingsystem="macosx"], [operatingsystem="linux"]) :is(.titlebar-close, .uc-titlebar-close) {
     -moz-box-ordinal-group: 1 !important;
 }
 
@@ -670,18 +679,19 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
     }
 
     .titlebar-min,
-    #minimize-button {
+    .uc-titlebar-min {
         -moz-box-ordinal-group: 2 !important;
     }
 
     .titlebar-max,
+    .uc-titlebar-max,
     .titlebar-restore,
-    #restore-button {
+    .uc-titlebar-restore {
         -moz-box-ordinal-group: 3 !important;
     }
 
     .titlebar-close,
-    #close-button {
+    .uc-titlebar-close {
         -moz-box-ordinal-group: 1 !important;
     }
 

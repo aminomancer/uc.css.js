@@ -462,6 +462,10 @@
     list-style-image: url(chrome://userchrome/content/skin/fullscreen.svg) !important;
 }
 
+#appMenu-fullscreen-button2[checked] {
+    list-style-image: url(chrome://userchrome/content/skin/fullscreen-exit.svg) !important;
+}
+
 #appMenu-fxa-status2 > #appMenu-fxa-label2 {
     padding-block: 4px !important;
     min-height: 40px !important;

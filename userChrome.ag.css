@@ -5,6 +5,7 @@ and in particular, tooltips and scrollbars. */
 
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @namespace html url(http://www.w3.org/1999/xhtml);
+@namespace parsererror url(http://www.mozilla.org/newlayout/xml/parsererror.xml);
 
 /* browser scrollbars */
 scrollbar {
@@ -393,4 +394,9 @@ html|progress:not([value]):indeterminate::-moz-progress-bar {
 
 html|*.videocontrols .controlBar {
     background-color: var(--content-principal-box-background);
+}
+
+parsererror|parsererror {
+    color: var(--plaintext-color) !important;
+    background-color: var(--in-content-bg-dark) !important;
 }
