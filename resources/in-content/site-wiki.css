@@ -250,6 +250,9 @@ userChrome.css.wikipedia.dark-theme-enabled */
         --uc-wiki-popup-border-color: hsl(240, 1.4%, 29%);
         --uc-wiki-link-color: hsl(211.6, 63.6%, 72%);
         --uc-wiki-link-color-visited: hsl(270.8, 100%, 85.9%);
+        --uc-wiki-popup-input-bg-color: hsl(0, 0%, 6%);
+        --uc-wiki-stripe-color: hsl(0, 0%, 12%);
+        --uc-wiki-stripe-bg-color: hsl(0, 0%, 3%);
     }
 
     html:root {
@@ -979,6 +982,12 @@ userChrome.css.wikipedia.dark-theme-enabled */
         border-radius: 0 3px 3px 0 !important;
     }
 
+    .vector-body pre {
+        background-color: var(--uc-wiki-box-bg) !important;
+        border-color: hsl(0, 1%, 24%) !important;
+        border-radius: 3px !important;
+    }
+
     .mw-body-content blockquote blockquote {
         border: none !important;
         background: none !important;
@@ -1035,6 +1044,10 @@ userChrome.css.wikipedia.dark-theme-enabled */
     figcaption {
         background-color: var(--uc-wiki-box-bg) !important;
         border-color: var(--uc-wiki-table-border-color) !important;
+    }
+
+    hr {
+        background-color: var(--uc-wiki-table-border-bold) !important;
     }
 
     figure {
@@ -1594,7 +1607,19 @@ userChrome.css.wikipedia.dark-theme-enabled */
     :is(.oo-ui-popupToolGroup-active, .oo-ui-popupToolGroup-active-tools)
         .oo-ui-iconElement-icon {
         opacity: 1 !important;
-        filter: invert(1) hue-rotate(190deg) brightness(1) !important;
+        filter: invert(1) hue-rotate(190deg) !important;
+    }
+
+    .oo-ui-outlineControlsWidget
+        .oo-ui-iconElement
+        .oo-ui-iconElement-icon,
+    .oo-ui-icon-parameter,
+    .oo-ui-icon-puzzle,
+    .mw-ui-icon-puzzle::before,
+    .oo-ui-icon-wikiText,
+    .mw-ui-icon-wikiText::before,
+    .oo-ui-indicator-required {
+        filter: invert(1) hue-rotate(190deg) !important;
     }
 
     :is(.oo-ui-popupToolGroup-active, .oo-ui-popupToolGroup-active-tools)
@@ -1672,9 +1697,24 @@ userChrome.css.wikipedia.dark-theme-enabled */
         color: var(--uc-wiki-text-90) !important;
     }
 
-    .oo-ui-outlineOptionWidget.oo-ui-optionWidget-highlighted:not(.oo-ui-optionWidget-selected) {
+    .oo-ui-optionWidget-highlighted:not(.oo-ui-optionWidget-selected) {
         background-color: hsl(240, 1.4%, 25%) !important;
         color: var(--uc-wiki-text-80) !important;
+    }
+
+    .ve-ui-mwParameterResultWidget-description,
+    .ve-ui-mwTemplatePage-description,
+    .ve-ui-mwTemplateDialog .oo-ui-outlineOptionWidget.oo-ui-flaggedElement-empty .oo-ui-labelElement-label {
+        color: hsla(0, 0%, 100%, 0.5) !important;
+    }
+
+    .ve-ui-mwParameterResultWidget-name {
+        padding: 0.1em 0.25em;
+        margin-left: 0.5em;
+        color: var(--uc-wiki-text-90) !important;
+        background-color: hsla(240, 1.4%, 38%, 0.4) !important;
+        border: 1px solid hsla(240, 1.4%, 38%, 0.5) !important;
+        border-radius: 2px;
     }
 
     .ve-ui-specialCharacterPage-character {
@@ -1855,7 +1895,8 @@ userChrome.css.wikipedia.dark-theme-enabled */
 
     .wikiEditor-ui-toolbar,
     .wikiEditor-ui-controls,
-    .editOptions {
+    .editOptions,
+    .oo-ui-outlineControlsWidget {
         background-color: hsl(240, 4.3%, 8.5%) !important;
         color: var(--uc-wiki-text-80) !important;
     }
@@ -1864,8 +1905,19 @@ userChrome.css.wikipedia.dark-theme-enabled */
     .wikiEditor-ui .wikiEditor-ui-view,
     .wikiEditor-ui .wikiEditor-ui-top,
     div#editpage-specialchars,
-    .editOptions {
+    .editOptions,
+    .oo-ui-outlineControlsWidget,
+    .oo-ui-bookletLayout > .oo-ui-menuLayout-menu,
+    .oo-ui-searchWidget-query,
+    .ve-ui-mwTransclusionDialog-addParameterFieldset .ve-ui-mwParameterSearchWidget {
         border-color: var(--uc-wiki-popup-bg) !important;
+    }
+    
+    .oo-ui-outlineControlsWidget {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        height: 48px !important;
     }
 
     .wikiEditor-ui-text textarea {
@@ -2932,7 +2984,7 @@ userChrome.css.wikipedia.dark-theme-enabled */
     .oo-ui-menuSelectWidget {
         overflow: hidden !important;
         color: var(--uc-wiki-text-60) !important;
-        background-color: hsl(215, 8%, 3.5%) !important;
+        background-color: hsl(4, 2%, 2.5%) !important;
         border: none !important;
         border-radius: 3px !important;
         box-shadow: 0 0px 5px -1px hsla(0, 0%, 0%, 0.25) !important;
@@ -2949,7 +3001,7 @@ userChrome.css.wikipedia.dark-theme-enabled */
     }
 
     .oo-ui-menuOptionWidget.oo-ui-optionWidget-highlighted {
-        background-color: hsl(0, 0%, 6%) !important;
+        background-color: var(--uc-wiki-popup-input-bg-color) !important;
         color: var(--uc-wiki-text-90) !important;
     }
 
@@ -3107,6 +3159,11 @@ userChrome.css.wikipedia.dark-theme-enabled */
         -moz-context-properties: fill, fill-opacity !important;
     }
 
+    .oo-ui-buttonElement-frameless.oo-ui-widget-disabled > .oo-ui-buttonElement-button,
+    .oo-ui-buttonElement-frameless.oo-ui-widget-enabled > .oo-ui-buttonElement-button {
+        color: revert !important;
+    }
+
     .oo-ui-fieldLayout-help {
         min-width: 32px !important;
         min-height: 32px !important;
@@ -3220,16 +3277,30 @@ userChrome.css.wikipedia.dark-theme-enabled */
 
     .oo-ui-textInputWidget .oo-ui-inputWidget-input {
         appearance: none !important;
-        background-color: hsl(0, 0%, 6%) !important;
+        background-color: var(--uc-wiki-popup-input-bg-color) !important;
         color: var(--uc-wiki-text-60) !important;
         border: none !important;
         box-shadow: none !important;
+        line-height: 26px !important;
+    }
+
+    .oo-ui-pendingElement-pending {
+        background-image: linear-gradient(
+            135deg,
+            var(--uc-wiki-stripe-color) 25%,
+            var(--uc-wiki-stripe-bg-color) 25%,
+            var(--uc-wiki-stripe-bg-color) 50%,
+            var(--uc-wiki-stripe-color) 50%,
+            var(--uc-wiki-stripe-color) 75%,
+            var(--uc-wiki-stripe-bg-color) 75%,
+            var(--uc-wiki-stripe-bg-color)
+        ) !important;
     }
 
     .mw-mmv-share-pane
         .oo-ui-buttonElement-framed.oo-ui-widget-enabled
         > .oo-ui-buttonElement-button {
-        background-color: hsl(0, 0%, 6%) !important;
+        background-color: var(--uc-wiki-popup-input-bg-color) !important;
         color: var(--uc-wiki-text-60) !important;
         border: none !important;
         cursor: default !important;
@@ -3238,7 +3309,7 @@ userChrome.css.wikipedia.dark-theme-enabled */
     .mw-mmv-share-pane
         .oo-ui-buttonElement-framed.oo-ui-widget-enabled
         > .oo-ui-buttonElement-button:hover {
-        background-color: hsl(0, 0%, 6%) !important;
+        background-color: var(--uc-wiki-popup-input-bg-color) !important;
         color: var(--uc-wiki-text-60) !important;
         border: none !important;
     }

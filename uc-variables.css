@@ -84,6 +84,9 @@ menupopup {
     --focus-outline-width: 2px;
     --places-cell-focus-bgcolor: var(--uc-places-cell-focus-bgcolor) !important;
     --places-cell-hover-bgcolor: var(--uc-places-cell-hover-bgcolor) !important;
+    --download-progress-fill-color: var(--toolbarbutton-icon-fill-attention) !important;
+    --download-progress-paused-color: var(--desaturate-dimmed-further) !important;
+    --download-progress-flare-color: var(--purple-40) !important;
     --ctrlTab-overlay-color: hsla(240, 3%, 4%, 0.5) !important;
     --ctrlTab-panel-disabled-bgcolor: hsla(240, 2%, 9%, 0.8) !important;
     --ctrlTab-panel-disabled-focused-bgcolor: hsla(240, 8%, 3%, 0.9) !important;

@@ -717,8 +717,9 @@ popupnotification progress[paused]::-moz-progress-bar {
     margin-bottom: revert !important;
 }
 
-#identity-popup-security-button[disabled] {
+#identity-popup-security-button[disabled="true"] {
     margin-bottom: 2px !important;
+    color: var(--panel-description-color) !important;
 }
 
 .identity-popup-security-connection.identity-button {
@@ -785,24 +786,24 @@ popupnotification progress[paused]::-moz-progress-bar {
     fill: currentColor !important;
 }
 
-.identity-button .identity-popup-connection-not-secure,
-#identity-popup[connection="secure-cert-user-overridden"]
-    [when-connection~="secure-cert-user-overridden"] {
-    color: inherit !important;
-}
-
-#identity-popup[connection="secure"]
+#identity-popup:where([connection="secure"])
     .identity-popup-connection-secure.security-view[when-connection~="secure"] {
     color: var(--secure-text-color) !important;
 }
 
-#identity-popup[ciphers="weak"]
+#identity-popup:where([ciphers="weak"])
     .identity-popup-security-connection
     .identity-popup-connection-not-secure.security-view[when-connection~="not-secure"],
-#identity-popup[mixedcontent~="passive-loaded"][isbroken]
+#identity-popup:where([mixedcontent~="passive-loaded"][isbroken])
     .identity-popup-security-connection
     .identity-popup-connection-not-secure.security-view[when-connection~="not-secure"] {
     color: var(--low-warning-text-color) !important;
+}
+
+#identity-popup[connection="not-secure"]
+    .identity-popup-security-connection
+    .identity-popup-connection-not-secure.security-view[when-connection~="not-secure"] {
+    color: var(--warning-color) !important;
 }
 
 /* url bar popups */
@@ -943,7 +944,7 @@ popupnotification progress[paused]::-moz-progress-bar {
 #identity-popup-security-description > :is(description, label, button) {
     margin-inline: 34px !important;
     padding-inline: 0 !important;
-    margin-block: 3px 6px !important;
+    margin-block: 3px 12px !important;
 }
 
 #identity-popup-security-description > .identity-popup-warning-box {
@@ -1281,7 +1282,7 @@ richlistitem.download-state > .downloadButton.downloadIconCancel .button-box .bu
     appearance: none !important;
     margin: 3px 0 -2px 0 !important;
     border: 1px solid transparent !important;
-    border-radius: 100px !important;
+    border-radius: 16px !important;
     height: 8px !important;
     background-color: var(--arrowpanel-dimmed) !important;
     overflow: hidden !important;
@@ -1291,18 +1292,27 @@ richlistitem.download-state > .downloadButton.downloadIconCancel .button-box .bu
     background-color: var(--desaturate-dimmed) !important;
 }
 
+.downloadProgress::-moz-progress-bar {
+    background-image: none !important;
+    animation: none !important;
+}
+
 .downloadProgress:not([value="0"])::-moz-progress-bar {
     margin: 0 !important;
     height: 100% !important;
+    border-radius: 16px !important;
 }
 
-.downloadProgress::-moz-progress-bar {
-    background-color: var(--toolbarbutton-icon-fill-attention) !important;
-    background-image: none !important;
+.downloadProgress:indeterminate::-moz-progress-bar {
+    border-radius: 0 !important;
+	background-image: linear-gradient(90deg, transparent 0%, var(--download-progress-flare-color) 25%, transparent 50%, var(--download-progress-flare-color) 75%, transparent 100%) !important;
 }
 
-.downloadProgress[paused]::-moz-progress-bar {
-    background-color: var(--desaturate-dimmed-further) !important;
+.downloadProgress[paused]:indeterminate::-moz-progress-bar {
+	background-color: transparent !important;
+	background-image: none !important;
+    animation: none !important;
+    animation-play-state: paused !important;
 }
 
 /* just for downloads in the places organizer */

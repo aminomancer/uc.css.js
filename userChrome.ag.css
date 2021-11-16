@@ -392,6 +392,10 @@ html|progress:not([value]):indeterminate::-moz-progress-bar {
     background-image: url("resource://content-accessible/progress-bar-indeterminate.svg");
 }
 
+html|progress[paused]:not([value]):indeterminate::-moz-progress-bar {
+    background: transparent;
+}
+
 html|*.videocontrols .controlBar {
     background-color: var(--content-principal-box-background);
 }
