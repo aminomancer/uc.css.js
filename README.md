@@ -14,7 +14,7 @@ My personal Firefox theme/layout, plus some privileged scripts to add new behavi
 
 For best results, set density mode to `Normal` and theme to `Dark` in the customization menu. (right click on the navbar and click "Customize Toolbar...") I strongly recommend using this on [Firefox Nightly](https://www.mozilla.org/en-US/firefox/channel/desktop/#nightly) and updating the theme at least weekly. To that end, you might find it easier to clone the repo to your chrome folder so you can pull updates quickly.
 
-I also recommend setting the following prefs in `about:config`. There's a [user.js](/user.js) file in the root directory that will automatically set all the required prefs if you put it in your _profile_ folder, not your chrome folder. There are also OS-specific prefs that are not in user.js, so it won't necessarily handle everything for you. The following are in alphabetical order, not in order of importance. Several are optional, but the few that are required are in italics and are marked in the Notes column.<details><summary>**_Click for a full list._**</summary>
+I also recommend setting the following prefs in `about:config`. There are two preset user.js files in the [prefs directory](/prefs) that can automatically set the prefs for you and prevent Firefox from changing them on update. Just choose one, rename it to user.js, and move it to your _profile_ folder, not your chrome folder. The first of these files, [required.js](/prefs/required.js) contains just the bare minimum prefs to ensure functionality, omitting most of the prefs that represent aesthetic choices. The second, [recommended.js](/prefs/recommended.js), includes the required prefs and some other more subjective prefs that compliment the theme — this is the preset I would personally recommend. There are also OS-specific prefs that are not in either file, so you should still check the list below. The following are in alphabetical order, not in order of importance. Most are optional, but the few that are required are in italics and are marked in the Notes column.<details><summary>**_Click for a full list._**</summary>
 | Pref&nbsp;name | Type | Value | Notes&nbsp;(optional&nbsp;unless&nbsp;otherwise&nbsp;noted) |
 |- |- |- |- |
 | browser.anchor\_color | String | `#6669ff` | |
@@ -23,17 +23,17 @@ I also recommend setting the following prefs in `about:config`. There's a [user.
 | browser.display.use\_system\_colors | Boolean | false | |
 | browser.display.focus\_ring\_style | Number | 0 | |
 | browser.display.focus\_ring\_width | Number | 0 | |
-| browser.display.windows.non_native_menus | Number | 1 | |
+| <i>browser.display.windows.non_native_menus</i> | Number | 1 | |
 | <i>browser.proton.enabled</i> | Boolean | true | Required |
 | <i>browser.proton.places-tooltip.enabled</i> | Boolean | true | Recommended |
 | browser.startup.blankWindow | Boolean | false | These two settings eliminate the blank white window during startup |
 | browser.startup.preXulSkeletonUI | Boolean | false | |
 | browser.tabs.tabMinWidth | Number | 90 | User preference, but mine is 90 |
 | browser.tabs.tabmanager.enabled | Boolean | true | Enables "all tabs menu" |
-| browser.urlbar.accessibility.tabToSearch.announceResults | Boolean | false | |
+| browser.urlbar.accessibility.tabToSearch.announceResults | Boolean | false | Hide irritating urlbar results |
 | browser.urlbar.richSuggestions.tail | Boolean | false | |
 | browser.urlbar.searchTips | Boolean | false | |
-| browser.urlbar.trimURLs | Boolean | false | |
+| browser.urlbar.trimURLs | Boolean | false | Don't hide `http://` in the urlbar |
 | full-screen-api.transition-duration.enter | String | `0 0` | Remove the fade in/out transition when switching to/from fullscreen |
 | full-screen-api.transition-duration.leave | String | `0 0` | |
 | full-screen-api.warning.delay | Number | -1 | Remove the warning when switching to/from fullscreen |
@@ -51,18 +51,18 @@ I also recommend setting the following prefs in `about:config`. There's a [user.
 | <i>layout.css.xul-display-values.content.enabled</i> | Boolean | true | Required |
 | layout.css.xul-tree-pseudos.content.enabled | Boolean | true | |
 | reader.color\_scheme | String | `dark` | |
-| mousewheel.autodir.enabled | Boolean | true | Allow mousewheel ⇅ to scroll ⇄-only scrollboxes |
+| mousewheel.autodir.enabled | Boolean | false | Allow mousewheel ⇅ to scroll ⇄-only scrollboxes |
 | prompts.contentPromptSubDialog | Boolean | true | Use the modern content dialog instead of modal prompts |
 | <i>svg.context-properties.content.enabled</i> | Boolean | true | Required for making some icons white |
 | <i>toolkit.legacyUserProfileCustomizations.stylesheets</i> | Boolean | true | Required, of course |
 | ui.IMERawInputBackground | String | `#000000` | This affects the appearance of IME overlays. e.g. when typing Hangul or Pinyin |
 | ui.IMESelectedRawTextBackground | String | `#7755FF` | |
 | ui.key.menuAccessKeyFocuses | Boolean | false | Disable Alt-key opening menubar if you use my Alt+M hotkey |
-| ui.SpellCheckerUnderline | String | `#E2467A` | |
 | ui.prefersReducedMotion | Number | 0 | Make sure this pref is 0 or doesn't exist if you want animations |
 | ui.submenuDelay | Number | 100 | How long before a context menu's submenu opens. 300 default, 100 feels more responsive imo |
 | ui.tooltipDelay | Number | 300 | How long before a tooltip opens. The default 300 works for me |
 | ui.skipNavigatingDisabledMenuItem | Number | 1 | When focusing menuitems with arrow keys, skip past disabled items |
+| ui.SpellCheckerUnderline | String | `#E2467A` | |
 | ui.SpellCheckerUnderlineStyle | Number | 1 | Use dotted underline for spell checker. The default groove can get cut off for some fonts |
 | <i>ui.systemUsesDarkTheme</i> | Number | 1 | Currently required since there's no light mode yet |
 | <i>ui.selecteditem</i> | String | `#2F3456` | Background for selected `<option>` elements and others |
@@ -78,7 +78,7 @@ I also recommend setting the following prefs in `about:config`. There's a [user.
 | userChrome... | | | Several of my scripts use custom prefs beginning with `userChrome` for user customization. See the individual script files for details. The stylesheets also use the following: |
 | userChrome.bookmarks-toolbar.icons-only | Boolean | false | If true, bookmark buttons in the toolbar are just square icons |
 | userChrome.css.mac-ui-fonts | Boolean | true | Replace UI font with SF Pro, the system font for macOS. [Click here for details](#fonts) |
-| userChrome.css.menupopup-shadows | Boolean | true | Add a shadow behind context menus and panels |
+| userChrome.css.menupopup-shadows | Boolean | false | Add a shadow behind context menus and panels |
 | userChrome.css.remove-tooltip-borders | Boolean | false | If true, remove the thin border on tooltips. If false, use [tooltipShadowSupport.uc.js](#tooltip-shadow-support) |
 | userChrome.css.titlebar-buttons-on-left | Boolean | false | If true, move the titlebar buttons (close/min/max) to the left side of the window |
 | userChrome.css.ctrl-tab-backdrop-overlay | Boolean | true | If true, dim the rectangular area behind the Ctrl+tab panel to increase contrast |
@@ -106,7 +106,7 @@ Because most of the scripts and stylesheets here are tethered to the Nightly rel
 
 ### **Setup:**
 
-As with any CSS theme, you need to make a `chrome` folder in your profile's root directory (which can be found in `about:profiles`) and place the files from this repo into it. For user stylesheets to work you also need to enable some of the prefs described above, or download the [user.js](/user.js) file and place it in your profile's root directory. This will allow the basic userChrome and userContent stylesheets to take effect, but some additional steps are required beyond that.
+As with any CSS theme, you need to make a `chrome` folder in your profile's root directory (which can be found in `about:profiles`) and place the files from this repo into it. For user stylesheets to work you also need to enable some of the prefs described above, or download one of the [prefs files](/prefs), rename it to user.js, and place it in your profile's root directory. This will allow the basic userChrome and userContent stylesheets to take effect, but some additional steps are required beyond that.
 
 This theme requires more technical setup than most because it changes a lot of lower-level stuff like javascript methods and icon/animation source code, but if you follow the instructions fully it'll work for anyone on any modern desktop OS, regardless of background knowledge. It requires [**fx-autoconfig**](https://github.com/MrOtherGuy/fx-autoconfig) to register the icon package and replace some of Firefox's lower-level stylesheets. Instructions for setting up fx-autoconfig are [below](#installation). To be clear, this _specific_ loader is required, unless you know how to register your own manifest from scratch.
 
