@@ -84,7 +84,7 @@ panel[type="autocomplete-richlistbox"]
     -moz-context-properties: fill, fill-opacity, stroke;
 }
 
-moz-input-box > menupopup .context-menu-add-engine > .menu-iconic-left:after {
+moz-input-box > menupopup .context-menu-add-engine > .menu-iconic-left::after {
     background: url(chrome://userchrome/content/skin/search-indicator-badge-add.svg) no-repeat
         center/contain !important;
     -moz-context-properties: fill, fill-opacity, stroke !important;
@@ -158,7 +158,7 @@ menupopup:not(.PanelUI-subView) menuseparator {
     padding-block: 0 !important;
 }
 
-menupopup menuitem:is([type="checkbox"], [type="radio"]):before {
+menupopup menuitem:is([type="checkbox"], [type="radio"])::before {
     position: relative;
     display: -moz-inline-box;
     width: 14px;
@@ -179,7 +179,7 @@ menupopup .unified-nav-current[type="radio"][checked="true"] {
     font-weight: var(--uc-font-weight-bold, 600) !important;
 }
 
-menupopup .unified-nav-current[type="radio"][checked="true"]:before {
+menupopup .unified-nav-current[type="radio"][checked="true"]::before {
     width: 16px;
     height: 16px;
     margin-inline: var(--context-iconic-margin);
@@ -188,7 +188,7 @@ menupopup .unified-nav-current[type="radio"][checked="true"]:before {
     fill-opacity: 1;
 }
 
-menupopup menuitem[class^="unified-nav"][type="radio"]:not([checked="true"]):before {
+menupopup menuitem[class^="unified-nav"][type="radio"]:not([checked="true"])::before {
     display: none;
 }
 
@@ -202,52 +202,52 @@ menupopup menuitem[class^="unified-nav"] .menu-iconic-accel:not([value]):empty {
     margin-inline: 4px !important;
 }
 
-menupopup menuitem[class^="unified-nav"][type="radio"][_moz-menuactive="true"]:before {
+menupopup menuitem[class^="unified-nav"][type="radio"][_moz-menuactive="true"]::before {
     background-image: url(chrome://browser/skin/reload.svg) !important;
     background-size: 12px !important;
 }
 
-menupopup menuitem[type="checkbox"]:before {
+menupopup menuitem[type="checkbox"]::before {
     border-radius: 2px;
 }
 
 menupopup
-    menuitem:is([type="checkbox"], [type="radio"])[_moz-menuactive="true"]:not([disabled="true"]):before {
+    menuitem:is([type="checkbox"], [type="radio"])[_moz-menuactive="true"]:not([disabled="true"])::before {
     background-color: var(--checkbox-unchecked-hover-bgcolor);
 }
 
 menupopup
-    menuitem:is([type="checkbox"], [type="radio"])[_moz-menuactive="true"]:not([disabled="true"]):active:before {
+    menuitem:is([type="checkbox"], [type="radio"])[_moz-menuactive="true"]:not([disabled="true"]):active::before {
     background-color: var(--checkbox-unchecked-active-bgcolor);
 }
 
 menupopup
-    menuitem:is([type="checkbox"], [type="radio"])[checked="true"][_moz-menuactive="true"]:not([disabled="true"]):before {
+    menuitem:is([type="checkbox"], [type="radio"])[checked="true"][_moz-menuactive="true"]:not([disabled="true"])::before {
     background-color: var(--checkbox-checked-hover-bgcolor);
 }
 
 menupopup
-    menuitem:is([type="checkbox"], [type="radio"])[checked="true"][_moz-menuactive="true"]:not([disabled="true"]):active:before {
+    menuitem:is([type="checkbox"], [type="radio"])[checked="true"][_moz-menuactive="true"]:not([disabled="true"]):active::before {
     background-color: var(--checkbox-checked-active-bgcolor);
 }
 
-menupopup menuitem:is([type="checkbox"], [type="radio"])[disabled="true"]:before {
+menupopup menuitem:is([type="checkbox"], [type="radio"])[disabled="true"]::before {
     opacity: var(--ui-disabled-alpha);
 }
 
-menupopup menuitem[type="checkbox"][checked="true"]:before {
+menupopup menuitem[type="checkbox"][checked="true"]::before {
     background-image: url(chrome://userchrome/content/check.svg);
     border-color: var(--checkbox-checked-border-color);
     background-color: var(--checkbox-checked-bgcolor);
 }
 
-menupopup menuitem[type="radio"]:before,
-#main-menubar #viewSidebarMenu menuitem[type="checkbox"]:before {
+menupopup menuitem[type="radio"]::before,
+#main-menubar #viewSidebarMenu menuitem[type="checkbox"]::before {
     border-radius: 100%;
 }
 
-menupopup menuitem[type="radio"][checked="true"]:before,
-#main-menubar #viewSidebarMenu menuitem[checked="true"]:before {
+menupopup menuitem[type="radio"][checked="true"]::before,
+#main-menubar #viewSidebarMenu menuitem[checked="true"]::before {
     background-image: url(chrome://userchrome/content/radio.svg);
     border-color: var(--checkbox-checked-border-color);
     background-color: var(--checkbox-checked-bgcolor);
@@ -444,7 +444,7 @@ menupopup:not(.PanelUI-subView) menuseparator:last-child {
 
 #ContentSelectDropdown
     menupopup.in-menulist
-    menuitem:is([label=" "], [label=""], :not([label]))[value="0"]:after {
+    menuitem:is([label=" "], [label=""], :not([label]))[value="0"]::after {
     content: "(Empty)";
     display: -moz-box;
     color: var(--menu-disabled-color);

@@ -74,7 +74,7 @@ scrollbar[orient="vertical"]:not(:hover) thumb:not(:active) {
     transform: scaleX(20%);
 }
 
-scrollbar thumb:before {
+scrollbar thumb::before {
     content: "";
     display: -moz-box;
     background-color: rgba(124, 124, 131, 1);
@@ -82,12 +82,12 @@ scrollbar thumb:before {
     border-radius: 5px;
 }
 
-scrollbar[orient="vertical"] thumb:before {
+scrollbar[orient="vertical"] thumb::before {
     margin-inline-end: 2px;
     min-width: 9px;
 }
 
-scrollbar[orient="horizontal"] thumb:before {
+scrollbar[orient="horizontal"] thumb::before {
     margin-block-end: 2px;
     min-height: 9px;
 }
@@ -161,8 +161,8 @@ scrollbar gripper {
     transform: scaleY(20%);
 }
 
-.hidevscroll-scrollbar thumb:before,
-.hidehscroll-box scrollbar thumb:before {
+.hidevscroll-scrollbar thumb::before,
+.hidehscroll-box scrollbar thumb::before {
     content: "";
     display: -moz-box;
     background-color: rgba(124, 124, 131, 1);
@@ -170,12 +170,12 @@ scrollbar gripper {
     border-radius: 5px;
 }
 
-.hidevscroll-scrollbar[orient="vertical"] thumb:before {
+.hidevscroll-scrollbar[orient="vertical"] thumb::before {
     margin-inline-end: 2px;
     min-width: 9px;
 }
 
-.hidehscroll-box scrollbar[orient="horizontal"] thumb:before {
+.hidehscroll-box scrollbar[orient="horizontal"] thumb::before {
     margin-block-end: 2px;
     min-height: 9px;
 }
@@ -403,4 +403,8 @@ html|*.videocontrols .controlBar {
 parsererror|parsererror {
     color: var(--plaintext-color) !important;
     background-color: var(--in-content-bg-dark) !important;
+}
+
+:-moz-native-anonymous .eye-dropper-color-value {
+    color: var(--in-content-bg-dark);
 }

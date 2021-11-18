@@ -259,6 +259,19 @@ but CSS hides it faster and avoids flickering.
         ~ :is(#star-button-box, #pageAction-urlbar-screenshot) {
         visibility: collapse;
     }
+
+    :root[hide-tp-icon-on-ntp]
+        #tracking-protection-icon-container:is([hidden], :not([aria-label]))
+        ~ #identity-box:not(.chromeUI, .localResource)
+        ~ #page-action-buttons
+        > #userContext-icons:not([hidden])
+        ~ #reader-mode-button[hidden]
+        ~ #star-button-box {
+        visibility: hidden;
+        width: 0 !important;
+        min-width: 0 !important;
+        margin-inline-end: 2px !important;
+    }
 }
 
 .urlbar-page-action {
@@ -270,9 +283,8 @@ but CSS hides it faster and avoids flickering.
     width: 15px !important;
 }
 
-.urlbar-history-dropmarker {
-    list-style-image: none !important;
-    background: url(chrome://userchrome/content/arrow-dropdown-16.svg) center/18.5px no-repeat !important;
+#userContext-indicator {
+    margin-inline-start: 6px !important;
 }
 
 /* iffy modification to center urlbar buttons not contained in page action button box */

@@ -304,7 +304,7 @@ toolbar .toolbarbutton-1:not([disabled], [open])[checked]:hover:active > .toolba
     background-color: var(--button-active-bgcolor) !important;
 }
 
-.widget-overflow-list .toolbarbutton-1:not([disabled], [open])[checked]:after {
+.widget-overflow-list .toolbarbutton-1:not([disabled], [open])[checked]::after {
     content: "";
     display: -moz-inline-box;
     background: url(chrome://userchrome/content/check.svg) no-repeat center/contain;

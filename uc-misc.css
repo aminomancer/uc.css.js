@@ -599,3 +599,13 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
     background-color: var(--toolbarbutton-checked-background) !important;
     transition: none !important;
 }
+
+/* highlight container tabs in the recently closed tabs/windows menus. requires recentlyClosedTabsContextMenu.uc.js */
+.recently-closed-item[usercontextid] {
+    background-image: linear-gradient(
+        to right,
+        var(--identity-tab-color, transparent) 0,
+        var(--identity-tab-color, transparent) 3px,
+        transparent 3px
+    ) !important;
+}

@@ -44,7 +44,7 @@ it also changes the appearance of the one-offs in the searchbar. */
     flex-shrink: 0 !important;
 }
 
-#PopupSearchAutoComplete .search-panel-one-offs-header:before {
+#PopupSearchAutoComplete .search-panel-one-offs-header::before {
     content: "Search with:";
     display: inline-block;
     margin-block: 2px 3px;
@@ -215,7 +215,7 @@ it also changes the appearance of the one-offs in the searchbar. */
     opacity: 0.6 !important;
 }
 
-.searchbar-engine-one-off-add-engine > .button-box:after {
+.searchbar-engine-one-off-add-engine > .button-box::after {
     background: url(chrome://userchrome/content/skin/search-indicator-badge-add.svg) no-repeat
         center/contain !important;
     -moz-context-properties: fill, fill-opacity, stroke !important;
@@ -237,7 +237,7 @@ it also changes the appearance of the one-offs in the searchbar. */
     display: none;
 }
 
-.searchbar-engine-one-off-item[image="moz-extension://cd4aad93-9726-49dd-a5cd-9e5f5c4d76f4/favicon.ico"] .button-box:before
+.searchbar-engine-one-off-item[image="moz-extension://cd4aad93-9726-49dd-a5cd-9e5f5c4d76f4/favicon.ico"] .button-box::before
 {
     content: url(chrome://userchrome/content/engines/google.svg);
     display: block;

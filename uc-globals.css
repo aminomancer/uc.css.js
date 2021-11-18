@@ -247,6 +247,7 @@ tooltip {
     --fxa-ui-img: url(chrome://userchrome/content/fxa/avatar-big.svg);
 
     --download-button-hover-bg: var(--button-hover-bgcolor);
+    --download-button-active-bg: var(--button-active-bgcolor);
     /* if you prefer the old downloads panel highlight/hover gradient effect, uncomment this: */
     /* --download-button-hue: 236.86;
     --download-button-hover-bg: linear-gradient(
@@ -258,6 +259,16 @@ tooltip {
         hsla(var(--download-button-hue), 96%, 78.94%, 0.04) 60%,
         hsla(var(--download-button-hue), 95%, 76.94%, 0.02) 80%,
         hsla(var(--download-button-hue), 90%, 73.94%, 0.005) 96.3%
+    );
+    --download-button-active-bg: linear-gradient(
+        to right,
+        hsla(var(--download-button-hue), 100%, 84%, 0.18) 7.1%,
+        hsla(var(--download-button-hue), 94%, 83%, 0.16) 20.9%,
+        hsla(var(--download-button-hue), 94%, 83%, 0.13) 34.1%,
+        hsla(var(--download-button-hue), 97%, 81.94%, 0.1) 47.1%,
+        hsla(var(--download-button-hue), 96%, 81.94%, 0.07) 60%,
+        hsla(var(--download-button-hue), 95%, 79.94%, 0.05) 80%,
+        hsla(var(--download-button-hue), 90%, 76.94%, 0.01) 96.3%
     ); */
 
     --pink-action: hsl(340, 73%, 58%);

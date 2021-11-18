@@ -419,7 +419,7 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
     padding-inline-start: 8px;
 }
 
-.all-tabs-item:is([selected], [multiselected], [usercontextid]:hover) .all-tabs-button {
+.all-tabs-item:is([selected], [multiselected], [usercontextid]) .all-tabs-button {
     background-image: linear-gradient(
         to right,
         var(--main-stripe-color) 0,

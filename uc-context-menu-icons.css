@@ -204,6 +204,7 @@ menuitem[data-l10n-id="full-screen-exit"] .menu-text,
 #context-markAsRead .menu-text,
 #context-markAsUnread .menu-text,
 :is(#context_selectAllTabs, #toolbar-context-selectAllTabs) .menu-text,
+#menu_bookmarkAllTabs .menu-text,
 #context_bookmarkTab .menu-text,
 #context_bookmarkSelectedTabs .menu-text,
 #toolbar-context-bookmarkSelectedTab .menu-text,
@@ -240,6 +241,12 @@ menuitem#enableDeveloperTools .menu-text,
 #tabContextMenu-tabContextUndoList > .menu-text,
 #toolbar-context-menu-tabContextUndoList > .menu-text,
 #tabContextMenu menuitem.restoreallitem .menu-text,
+#recently-closed-restore > .menu-text,
+#recently-closed-restore-in-new-window > .menu-text,
+#recently-closed-restore-in-new-private-window > .menu-text,
+#recently-closed-remove-from-list > .menu-text,
+#recently-closed-remove-from-history > .menu-text,
+#recently-closed-bookmark > .menu-text,
 :is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
     .sendtab-target:is([clientType="phone"], [clientType="mobile"], [clientType="desktop"])
     .menu-text,
@@ -317,276 +324,283 @@ menuitem.customize-context-reportExtension > .menu-text {
     padding-inline: 0 2px !important;
 }
 
-#context_openTabInWindow:before,
-#menu_newNavigator:before,
-#context-video-saveimage:before,
-#context-media-playbackrate:before,
-#context-viewvideo:before,
-#context-media-showcontrols:before,
-#context-media-hidecontrols:before,
-#context-printframe:before,
-#context-print-selection:before,
-#menu_print:before,
-#menu_printPreview:before,
-:is(#menu_printSetup, #menu_readerModeItem):before,
-#menu_importFromAnotherBrowser:before,
-#context-frameOsPid:before,
-#context-reloadimage:before,
-menuitem:not(.menuitem-iconic)[oncommand="_ucUtils.restart(true)"]:before,
-#context-reloadframe:before,
-#context-inspect:before,
-#context-inspect-a11y:before,
-#context-viewsource:before,
-#context-viewpartialsource-selection:before,
-#context-viewframesource:before,
-#context-viewinfo:before,
-#context-viewimageinfo:before,
-#context-viewframeinfo:before,
-menuitem#menu_openDownloads:before,
-menuitem#menu_openAddons:before,
-#addon_darkreader_org-menuitem-_DarkReader-toggle:before,
-#menu_pageInfo:before,
-menuitem:is(#sync-setup, #sync-unverifieditem, #sync-reauthitem):before,
-menuitem:is(#sync-enable, #sync-syncnowitem):before,
-menu#browserToolsMenu:not(.menu-iconic):before,
-menuitem#menu_preferences:before,
-#context-viewbgimage:before,
-#context-setDesktopBackground:before,
-:is(#context-savepage, menu#pageStyleMenu, #addon_darkreader_org-menuitem-_DarkReader-addSite):before,
-#viewFullZoomMenu:before,
-:is(#menu_zoomEnlarge, #menu_zoomReduce, #menu_zoomReset):before,
-#viewToolbarsMenu:before,
-#viewSidebarMenuMenu:before,
-#menu_showAllHistory:before,
-menuitem#sanitizeItem:before,
-:is(#sync-tabs-menuitem, #syncedTabsRefresh, #syncedTabsRefreshFilter):before,
-#historyRestoreLastSession:before,
-#hiddenTabsMenu:before,
-#context-sendpagetodevice:before,
-#context-sendlinktodevice:before,
-#context-selectall:before,
-#menu_selectAll:before,
-.textbox-contextmenu menuitem[label="Select All"]:before,
-.textbox-contextmenu menuitem[label="Copy"]:before,
-.textbox-contextmenu menuitem[label="Cut"]:before,
-.textbox-contextmenu menuitem[label="Paste"]:before,
-.textbox-contextmenu menuitem[label="Paste & Search"]:before,
-.textbox-contextmenu menuitem[label="Paste and Go"]:before,
-.textbox-contextmenu menuitem[label="Delete"]:before,
-.textbox-contextmenu menuitem[label="Undo"]:before,
-.textbox-contextmenu menuitem[label="Redo"]:before,
-.searchbar-clear-history:before,
-#context-sendimage:before,
-#context-sendvideo:before,
-#menu_sendLink:before,
-#context-sendaudio:before,
-#context-saveaudio:before,
-#context-saveframe:before,
-#context-saveimage:before,
-#context-savelink:before,
-#context-savevideo:before,
-#context-savelinktopocket:before,
-#menu_savePage:before,
-#menu_openFile:before,
-#context-pocket:before,
-#context-take-screenshot:before,
-#context-take-frame-screenshot:before,
-#context-viewimage:before,
-#context-copy:before,
-#context-copyimage-contents:before,
-#context-cut:before,
-#context-paste:before,
-#menu_copy:before,
-:is(#placesContext_show_bookmark\:info, #placesContext_show_folder\:info, #placesContext_show\:info):before,
-#placesContext_showInFolder:before,
-#menu_cut:before,
-#menu_paste:before,
-#syncedTabsCopySelected:before,
-:is(#placesContext_cut, #placesContext_copy, #placesContext_paste, #placesContext_paste_group):before,
-#context-delete:before,
-#menu_delete:before,
-:is(#placesContext_deleteBookmark, #placesContext_deleteFolder, #placesContext_delete, #placesContext_delete_history):before,
-#placesContext_deleteHost:before,
-#context-copyemail:before,
-#context-copyaudiourl:before,
-#context-copyimage:before,
-#context-copylink:before,
-#menu_openLocation:before,
-#context-copyvideourl:before,
-#context-bookmarkframe:before,
-#context-bookmarklink:before,
-#context-openlinkintab:before,
-#context-openlinkinunloadedtab:before,
-:is(#placesContext_open\:unloaded, #placesContext_openContainer\:unloaded, #placesContext_openLinks\:unloaded, #syncedTabsOpenUnloaded, #syncedTabsOpenAllUnloaded):before,
-#menu_FileQuitItem:before,
-#context_openANewTab:before,
-#toolbar-context-openANewTab:before,
-#menu_newNavigatorTab:before,
-#placesContext_open:before,
-#context-openlinkincontainertab:before,
-#context-openlinkinusercontext-menu:before,
-#menu_newUserContext:before,
-#context-openframeintab:before,
-#context-openlinkincurrent:before,
-#context-openlink:before,
-#context-openframe:before,
-#context-openlinkprivate:before,
-#syncedTabsOpenSelectedInPrivateWindow:before,
-#menu_newPrivateWindow:before,
-#context-searchselect:before,
-#context-searchselect-private:before,
-#menu_find:before,
-#menu_findAgain:before,
-:is(menuitem#textfieldDirection-swap, #context-bidi-text-direction-toggle, #context-bidi-page-direction-toggle, #documentDirection-swap):before,
-menuitem#repair-text-encoding:before,
-#placesContext_sortBy\:name:before,
-#context-viewsource-goToLine:before,
-#context-undo:before,
-#context-redo:before,
-#menu_undo:before,
-#menu_redo:before,
-:is(#undobookmarksmenuUndo, #undobookmarksmenuRedo):before,
-#context-keywordfield:before,
-#context_reopenInContainer:before,
-:is(#context_reloadTab, #context_reloadSelectedTabs, #toolbar-context-reloadSelectedTab, #toolbar-context-reloadSelectedTabs):before,
-:is(#context_toggleMuteTab, #context_toggleMuteSelectedTabs):before,
-:is(#context_pinTab, #context_pinSelectedTabs):before,
-:is(#context_unpinTab, #context_unpinSelectedTabs):before,
-:is(#context_duplicateTab, #context_duplicateTabs, #menu_showAllTabs):before,
-#placesContext_open\:newtab:before,
-#syncedTabsOpenSelected:before,
-#syncedTabsOpenSelectedInTab:before,
-:is(#placesContext_openBookmarkContainer\:tabs, #placesContext_openBookmarkLinks\:tabs):before,
-:is(#placesContext_openContainer\:tabs, #placesContext_openLinks\:tabs, #syncedTabsOpenAllInTabs):before,
-#placesContext_showAllBookmarks:before,
-#syncedTabsManageDevices:before,
-#placesContext_open\:newwindow:before,
-#syncedTabsOpenSelectedInWindow:before,
-#placesContext_open\:newprivatewindow:before,
-:is(#placesContext_new\:bookmark, #placesContext_createBookmark, #syncedTabsBookmarkSelected):before,
-#placesContext_new\:folder:before,
-#placesContext_new\:separator:before,
-:is(#placesContext_open\:container, #placesContext_openContainer\:container, #placesContext_openLinks\:container):before,
-:is(#syncedTabsOpenAllInContainer, #syncedTabsOpenInContainer):before,
-#bookmark-menu-container_robwu_nl-menuitem-_bookmark-menu-item:not(.menuitem-iconic):before,
+#context_openTabInWindow::before,
+#menu_newNavigator::before,
+#context-video-saveimage::before,
+#context-media-playbackrate::before,
+#context-viewvideo::before,
+#context-media-showcontrols::before,
+#context-media-hidecontrols::before,
+#context-printframe::before,
+#context-print-selection::before,
+#menu_print::before,
+#menu_printPreview::before,
+:is(#menu_printSetup, #menu_readerModeItem)::before,
+#menu_importFromAnotherBrowser::before,
+#context-frameOsPid::before,
+#context-reloadimage::before,
+menuitem:not(.menuitem-iconic)[oncommand="_ucUtils.restart(true)"]::before,
+#context-reloadframe::before,
+#context-inspect::before,
+#context-inspect-a11y::before,
+#context-viewsource::before,
+#context-viewpartialsource-selection::before,
+#context-viewframesource::before,
+#context-viewinfo::before,
+#context-viewimageinfo::before,
+#context-viewframeinfo::before,
+menuitem#menu_openDownloads::before,
+menuitem#menu_openAddons::before,
+#addon_darkreader_org-menuitem-_DarkReader-toggle::before,
+#menu_pageInfo::before,
+menuitem:is(#sync-setup, #sync-unverifieditem, #sync-reauthitem)::before,
+menuitem:is(#sync-enable, #sync-syncnowitem)::before,
+menu#browserToolsMenu:not(.menu-iconic)::before,
+menuitem#menu_preferences::before,
+#context-viewbgimage::before,
+#context-setDesktopBackground::before,
+:is(#context-savepage, menu#pageStyleMenu, #addon_darkreader_org-menuitem-_DarkReader-addSite)::before,
+#viewFullZoomMenu::before,
+:is(#menu_zoomEnlarge, #menu_zoomReduce, #menu_zoomReset)::before,
+#viewToolbarsMenu::before,
+#viewSidebarMenuMenu::before,
+#menu_showAllHistory::before,
+menuitem#sanitizeItem::before,
+:is(#sync-tabs-menuitem, #syncedTabsRefresh, #syncedTabsRefreshFilter)::before,
+#historyRestoreLastSession::before,
+#hiddenTabsMenu::before,
+#context-sendpagetodevice::before,
+#context-sendlinktodevice::before,
+#context-selectall::before,
+#menu_selectAll::before,
+.textbox-contextmenu menuitem[label="Select All"]::before,
+.textbox-contextmenu menuitem[label="Copy"]::before,
+.textbox-contextmenu menuitem[label="Cut"]::before,
+.textbox-contextmenu menuitem[label="Paste"]::before,
+.textbox-contextmenu menuitem[label="Paste & Search"]::before,
+.textbox-contextmenu menuitem[label="Paste and Go"]::before,
+.textbox-contextmenu menuitem[label="Delete"]::before,
+.textbox-contextmenu menuitem[label="Undo"]::before,
+.textbox-contextmenu menuitem[label="Redo"]::before,
+.searchbar-clear-history::before,
+#context-sendimage::before,
+#context-sendvideo::before,
+#menu_sendLink::before,
+#context-sendaudio::before,
+#context-saveaudio::before,
+#context-saveframe::before,
+#context-saveimage::before,
+#context-savelink::before,
+#context-savevideo::before,
+#context-savelinktopocket::before,
+#menu_savePage::before,
+#menu_openFile::before,
+#context-pocket::before,
+#context-take-screenshot::before,
+#context-take-frame-screenshot::before,
+#context-viewimage::before,
+#context-copy::before,
+#context-copyimage-contents::before,
+#context-cut::before,
+#context-paste::before,
+#menu_copy::before,
+:is(#placesContext_show_bookmark\:info, #placesContext_show_folder\:info, #placesContext_show\:info)::before,
+#placesContext_showInFolder::before,
+#menu_cut::before,
+#menu_paste::before,
+#syncedTabsCopySelected::before,
+:is(#placesContext_cut, #placesContext_copy, #placesContext_paste, #placesContext_paste_group)::before,
+#context-delete::before,
+#menu_delete::before,
+:is(#placesContext_deleteBookmark, #placesContext_deleteFolder, #placesContext_delete, #placesContext_delete_history)::before,
+#placesContext_deleteHost::before,
+#context-copyemail::before,
+#context-copyaudiourl::before,
+#context-copyimage::before,
+#context-copylink::before,
+#menu_openLocation::before,
+#context-copyvideourl::before,
+#context-bookmarkframe::before,
+#context-bookmarklink::before,
+#context-openlinkintab::before,
+#context-openlinkinunloadedtab::before,
+:is(#placesContext_open\:unloaded, #placesContext_openContainer\:unloaded, #placesContext_openLinks\:unloaded, #syncedTabsOpenUnloaded, #syncedTabsOpenAllUnloaded)::before,
+#menu_FileQuitItem::before,
+#context_openANewTab::before,
+#toolbar-context-openANewTab::before,
+#menu_newNavigatorTab::before,
+#placesContext_open::before,
+#context-openlinkincontainertab::before,
+#context-openlinkinusercontext-menu::before,
+#menu_newUserContext::before,
+#context-openframeintab::before,
+#context-openlinkincurrent::before,
+#context-openlink::before,
+#context-openframe::before,
+#context-openlinkprivate::before,
+#syncedTabsOpenSelectedInPrivateWindow::before,
+#menu_newPrivateWindow::before,
+#context-searchselect::before,
+#context-searchselect-private::before,
+#menu_find::before,
+#menu_findAgain::before,
+:is(menuitem#textfieldDirection-swap, #context-bidi-text-direction-toggle, #context-bidi-page-direction-toggle, #documentDirection-swap)::before,
+menuitem#repair-text-encoding::before,
+#placesContext_sortBy\:name::before,
+#context-viewsource-goToLine::before,
+#context-undo::before,
+#context-redo::before,
+#menu_undo::before,
+#menu_redo::before,
+:is(#undobookmarksmenuUndo, #undobookmarksmenuRedo)::before,
+#context-keywordfield::before,
+#context_reopenInContainer::before,
+:is(#context_reloadTab, #context_reloadSelectedTabs, #toolbar-context-reloadSelectedTab, #toolbar-context-reloadSelectedTabs)::before,
+:is(#context_toggleMuteTab, #context_toggleMuteSelectedTabs)::before,
+:is(#context_pinTab, #context_pinSelectedTabs)::before,
+:is(#context_unpinTab, #context_unpinSelectedTabs)::before,
+:is(#context_duplicateTab, #context_duplicateTabs, #menu_showAllTabs)::before,
+#placesContext_open\:newtab::before,
+#syncedTabsOpenSelected::before,
+#syncedTabsOpenSelectedInTab::before,
+:is(#placesContext_openBookmarkContainer\:tabs, #placesContext_openBookmarkLinks\:tabs)::before,
+:is(#placesContext_openContainer\:tabs, #placesContext_openLinks\:tabs, #syncedTabsOpenAllInTabs)::before,
+#placesContext_showAllBookmarks::before,
+#syncedTabsManageDevices::before,
+#placesContext_open\:newwindow::before,
+#syncedTabsOpenSelectedInWindow::before,
+#placesContext_open\:newprivatewindow::before,
+:is(#placesContext_new\:bookmark, #placesContext_createBookmark, #syncedTabsBookmarkSelected)::before,
+#placesContext_new\:folder::before,
+#placesContext_new\:separator::before,
+:is(#placesContext_open\:container, #placesContext_openContainer\:container, #placesContext_openLinks\:container)::before,
+:is(#syncedTabsOpenAllInContainer, #syncedTabsOpenInContainer)::before,
+#bookmark-menu-container_robwu_nl-menuitem-_bookmark-menu-item:not(.menuitem-iconic)::before,
 #placesContext
-    > :is(menu, menuitem)[label="Open in a New Container Tab"]:not(.menuitem-iconic):before,
-#context-markAsRead:before,
-#context-markAsUnread:before,
-:is(#context_bookmarkTab, #context_bookmarkSelectedTabs, #toolbar-context-bookmarkSelectedTab, #toolbar-context-bookmarkSelectedTabs):before,
-:is(#context_selectAllTabs, #toolbar-context-selectAllTabs):before,
-#context_moveTabOptions:before,
-#context_sendTabToDevice:before,
-#context_shareTabURL:before,
-menuitem.share-tab-url-item:before,
-#context_closeTabOptions:before,
-:is(#context_closeTabsToTheStart, #context_closeTabsToTheEnd, #context_closeOtherTabs):before,
-#context_undoCloseTab:before,
-#toolbar-context-undoCloseTab:before,
-#context_closeTab:before,
-#menu_close:before,
-#menu_closeWindow:before,
-menuitem#menu_devToolbox:not([checked="true"]):before,
-menuitem#menu_taskManager:before,
-menuitem#menu_devtools_remotedebugging:before,
-menuitem#menu_browserToolbox:before,
-menuitem#menu_browserContentToolbox:before,
-menuitem#menu_browserConsole:before,
-menuitem#menu_responsiveUI:not([checked="true"]):before,
-menuitem#menu_eyedropper:before,
-menuitem#menu_pageSource:before,
-menuitem#extensionsForDevelopers:before,
-menuitem#enableDeveloperTools:before,
-#discardTab:before,
-#historyUndoWindowMenu:before,
-#historyUndoMenu:before,
-#historyUndoWindowMenu3:before,
-#tabContextMenu-historyUndoWindowMenu3:before,
-#toolbar-context-menu-historyUndoWindowMenu3:before,
-#tabContextUndoList:before,
-#tabContextMenu-tabContextUndoList:before,
-#toolbar-context-menu-tabContextUndoList:before,
-#tabContextMenu menuitem.restoreallitem:before,
+    > :is(menu, menuitem)[label="Open in a New Container Tab"]:not(.menuitem-iconic)::before,
+#context-markAsRead::before,
+#context-markAsUnread::before,
+:is(#context_bookmarkTab, #context_bookmarkSelectedTabs, #toolbar-context-bookmarkSelectedTab, #toolbar-context-bookmarkSelectedTabs)::before,
+:is(#context_selectAllTabs, #toolbar-context-selectAllTabs)::before,
+#menu_bookmarkAllTabs::before,
+#context_moveTabOptions::before,
+#context_sendTabToDevice::before,
+#context_shareTabURL::before,
+menuitem.share-tab-url-item::before,
+#context_closeTabOptions::before,
+:is(#context_closeTabsToTheStart, #context_closeTabsToTheEnd, #context_closeOtherTabs)::before,
+#context_undoCloseTab::before,
+#toolbar-context-undoCloseTab::before,
+#context_closeTab::before,
+#menu_close::before,
+#menu_closeWindow::before,
+menuitem#menu_devToolbox:not([checked="true"])::before,
+menuitem#menu_taskManager::before,
+menuitem#menu_devtools_remotedebugging::before,
+menuitem#menu_browserToolbox::before,
+menuitem#menu_browserContentToolbox::before,
+menuitem#menu_browserConsole::before,
+menuitem#menu_responsiveUI:not([checked="true"])::before,
+menuitem#menu_eyedropper::before,
+menuitem#menu_pageSource::before,
+menuitem#extensionsForDevelopers::before,
+menuitem#enableDeveloperTools::before,
+#discardTab::before,
+#historyUndoWindowMenu::before,
+#historyUndoMenu::before,
+#historyUndoWindowMenu3::before,
+#tabContextMenu-historyUndoWindowMenu3::before,
+#toolbar-context-menu-historyUndoWindowMenu3::before,
+#tabContextUndoList::before,
+#tabContextMenu-tabContextUndoList::before,
+#toolbar-context-menu-tabContextUndoList::before,
+#tabContextMenu menuitem.restoreallitem::before,
+#recently-closed-restore::before,
+#recently-closed-restore-in-new-window::before,
+#recently-closed-restore-in-new-private-window::before,
+#recently-closed-remove-from-list::before,
+#recently-closed-remove-from-history::before,
+#recently-closed-bookmark::before,
 :is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
-    .sendtab-target:is([clientType="phone"], [clientType="mobile"], [clientType="desktop"]):before,
-:is(#spell-add-to-dictionary, #spell-add-dictionaries, #spell-add-dictionaries-main, #spell-dictionaries):before,
-#context-showonlythisframe:before,
-#contentAreaContextMenu #frame:before,
-.downloadPauseMenuItem:before,
-.downloadResumeMenuItem:before,
-.downloadUnblockMenuItem:before,
-.downloadUseSystemDefaultMenuItem:before,
-.downloadShowMenuItem:before,
-menuitem[command="downloadsCmd_openReferrer"]:before,
-menuitem[command="downloadsCmd_copyLocation"]:before,
-.downloadRemoveFromHistoryMenuItem:before,
-menuitem[command="downloadsCmd_clearList"]:before,
-menuitem[command="downloadsCmd_clearDownloads"]:before,
-#context-media-pause:before,
-#context-media-play:before,
-#context-media-mute:before,
-#context-media-unmute:before,
-#context-video-fullscreen:before,
-#context-leave-dom-fullscreen:before,
-menuitem[data-l10n-id="full-screen-exit"]:before,
-#context_moveToStart:before,
-#context_moveToEnd:before,
-#userScriptsMenu:before,
-#toggle_PersonalToolbar:before,
-menu#fill-login:before,
-menuitem#manage-saved-logins:before,
-menuitem#fill-login-generated-password:before,
+    .sendtab-target:is([clientType="phone"], [clientType="mobile"], [clientType="desktop"])::before,
+:is(#spell-add-to-dictionary, #spell-add-dictionaries, #spell-add-dictionaries-main, #spell-dictionaries)::before,
+#context-showonlythisframe::before,
+#contentAreaContextMenu #frame::before,
+.downloadPauseMenuItem::before,
+.downloadResumeMenuItem::before,
+.downloadUnblockMenuItem::before,
+.downloadUseSystemDefaultMenuItem::before,
+.downloadShowMenuItem::before,
+menuitem[command="downloadsCmd_openReferrer"]::before,
+menuitem[command="downloadsCmd_copyLocation"]::before,
+.downloadRemoveFromHistoryMenuItem::before,
+menuitem[command="downloadsCmd_clearList"]::before,
+menuitem[command="downloadsCmd_clearDownloads"]::before,
+#context-media-pause::before,
+#context-media-play::before,
+#context-media-mute::before,
+#context-media-unmute::before,
+#context-video-fullscreen::before,
+#context-leave-dom-fullscreen::before,
+menuitem[data-l10n-id="full-screen-exit"]::before,
+#context_moveToStart::before,
+#context_moveToEnd::before,
+#userScriptsMenu::before,
+#toggle_PersonalToolbar::before,
+menu#fill-login::before,
+menuitem#manage-saved-logins::before,
+menuitem#fill-login-generated-password::before,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
     #_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root
-    :is(menu, menuitem)[id$="-menuitem-_autofill"]:before,
+    :is(menu, menuitem)[id$="-menuitem-_autofill"]::before,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
     #_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root
-    :is(menu, menuitem)[id$="-menuitem-_copy-username"]:before,
+    :is(menu, menuitem)[id$="-menuitem-_copy-username"]::before,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
     #_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root
-    :is(menu, menuitem)[id$="-menuitem-_copy-password"]:before,
+    :is(menu, menuitem)[id$="-menuitem-_copy-password"]::before,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
     #_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root
-    :is(menu, menuitem)[id$="-menuitem-_generate-password"]:before,
+    :is(menu, menuitem)[id$="-menuitem-_generate-password"]::before,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
     #_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root
-    :is(menu, menuitem)[id$="-menuitem-_copy-identifier"]:before,
-#_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root:not(.menuitem-iconic, .menu-iconic):before,
-#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-manager:not(.menuitem-iconic, .menu-iconic):before,
-#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-options:not(.menuitem-iconic, .menu-iconic):before,
-#simple-translate_sienori-menuitem-_translatePage:not(.menuitem-iconic, .menu-iconic):before,
+    :is(menu, menuitem)[id$="-menuitem-_copy-identifier"]::before,
+#_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root:not(.menuitem-iconic, .menu-iconic)::before,
+#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-manager:not(.menuitem-iconic, .menu-iconic)::before,
+#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-options:not(.menuitem-iconic, .menu-iconic)::before,
+#simple-translate_sienori-menuitem-_translatePage:not(.menuitem-iconic, .menu-iconic)::before,
 #toolbar-context-menu
-    :is(menu, menuitem)[id^="jid1-bycqofyfmbmd9a_jetpack-menuitem"]:not(.menuitem-iconic, .menu-iconic):before,
-#ublock0_raymondhill_net-menuitem-_uBlock0-blockElement:not(.menuitem-iconic, .menu-iconic):before,
-#ublock0_raymondhill_net-menuitem-_uBlock0-blockElementInFrame:not(.menuitem-iconic, .menu-iconic):before,
-:is(menu, menuitem)[id^="multithreaded-download-manager"]:is([label="Open in new tab"], [label="Open in new window"], [label="Open in sidebar"]):before,
-#menu_customizeToolbars:before,
-menuitem.viewCustomizeToolbar:before,
-#addon_darkreader_org-menuitem-_DarkReader-switchEngine:before,
+    :is(menu, menuitem)[id^="jid1-bycqofyfmbmd9a_jetpack-menuitem"]:not(.menuitem-iconic, .menu-iconic)::before,
+#ublock0_raymondhill_net-menuitem-_uBlock0-blockElement:not(.menuitem-iconic, .menu-iconic)::before,
+#ublock0_raymondhill_net-menuitem-_uBlock0-blockElementInFrame:not(.menuitem-iconic, .menu-iconic)::before,
+:is(menu, menuitem)[id^="multithreaded-download-manager"]:is([label="Open in new tab"], [label="Open in new window"], [label="Open in sidebar"])::before,
+#menu_customizeToolbars::before,
+menuitem.viewCustomizeToolbar::before,
+#addon_darkreader_org-menuitem-_DarkReader-switchEngine::before,
 menupopup:not(#contentAreaContextMenu)
-    > #addon_darkreader_org-menuitem-_DarkReader-top:not(.menuitem-iconic, .menu-iconic):before,
-menuitem.customize-context-removeFromToolbar:before,
-menuitem.customize-context-removeFromPanel:before,
-menuitem.customize-context-moveToToolbar:before,
-menuitem.customize-context-moveToPanel:before,
-menuitem.customize-context-addToPanel:before,
-menuitem.customize-context-addToToolbar:before,
-menuitem.customize-context-manageExtension:before,
-menu.customize-context-debugExtension:before,
-menuitem.customize-context-CopyID:before,
-menuitem.customize-context-CopyURL:before,
-menuitem.customize-context-Inspector:before,
-menuitem.customize-context-ViewSource:before,
-menuitem.customize-context-Manifest:before,
-menu.customize-context-ViewDocs-Submenu:before,
-menuitem.customize-context-BrowserAction:before,
-menuitem.customize-context-PageAction:before,
-menuitem.customize-context-SidebarAction:before,
-menuitem.customize-context-Options:before,
-menuitem.pageActionContextMenuItem.manageExtensionItem:before,
-menuitem.customize-context-removeExtension:before,
-menuitem.pageActionContextMenuItem.removeExtensionItem:before,
-menuitem.customize-context-reportExtension:before {
+    > #addon_darkreader_org-menuitem-_DarkReader-top:not(.menuitem-iconic, .menu-iconic)::before,
+menuitem.customize-context-removeFromToolbar::before,
+menuitem.customize-context-removeFromPanel::before,
+menuitem.customize-context-moveToToolbar::before,
+menuitem.customize-context-moveToPanel::before,
+menuitem.customize-context-addToPanel::before,
+menuitem.customize-context-addToToolbar::before,
+menuitem.customize-context-manageExtension::before,
+menu.customize-context-debugExtension::before,
+menuitem.customize-context-CopyID::before,
+menuitem.customize-context-CopyURL::before,
+menuitem.customize-context-Inspector::before,
+menuitem.customize-context-ViewSource::before,
+menuitem.customize-context-Manifest::before,
+menu.customize-context-ViewDocs-Submenu::before,
+menuitem.customize-context-BrowserAction::before,
+menuitem.customize-context-PageAction::before,
+menuitem.customize-context-SidebarAction::before,
+menuitem.customize-context-Options::before,
+menuitem.pageActionContextMenuItem.manageExtensionItem::before,
+menuitem.customize-context-removeExtension::before,
+menuitem.pageActionContextMenuItem.removeExtensionItem::before,
+menuitem.customize-context-reportExtension::before {
     content: "";
     position: relative;
     display: -moz-inline-box;
@@ -601,131 +615,131 @@ menuitem.customize-context-reportExtension:before {
     background-repeat: no-repeat;
 }
 
-#context_moveToStart:before,
-#context_moveToEnd:-moz-locale-dir(rtl):before {
+#context_moveToStart::before,
+#context_moveToEnd:-moz-locale-dir(rtl)::before {
     background-image: url(chrome://userchrome/content/skin/back.svg);
 }
 
-#context_moveToEnd:before,
-#context_moveToStart:-moz-locale-dir(rtl):before {
+#context_moveToEnd::before,
+#context_moveToStart:-moz-locale-dir(rtl)::before {
     background-image: url(chrome://userchrome/content/skin/forward.svg);
 }
 
-:is(#context_openTabInWindow, #menu_newNavigator):before {
+:is(#context_openTabInWindow, #menu_newNavigator)::before {
     background-image: url(chrome://userchrome/content/skin/new-window.svg);
 }
 
-#context-video-saveimage:before {
+#context-video-saveimage::before {
     background-image: url(chrome://userchrome/content/notifications/canvas.svg);
 }
 
-.downloadPauseMenuItem:before,
-#context-media-pause:before {
+.downloadPauseMenuItem::before,
+#context-media-pause::before {
     background-image: url(chrome://userchrome/content/material/pause.svg);
 }
 
-.downloadResumeMenuItem:before,
-#context-media-play:before {
+.downloadResumeMenuItem::before,
+#context-media-play::before {
     background-image: url(chrome://userchrome/content/playButton.svg);
 }
 
-.downloadUnblockMenuItem:before {
+.downloadUnblockMenuItem::before {
     background-image: url(chrome://userchrome/content/downloads/downloads.svg);
 }
 
-.downloadUseSystemDefaultMenuItem:before {
+.downloadUseSystemDefaultMenuItem::before {
     background-image: url(chrome://userchrome/content/skin/device-desktop.svg);
 }
 
-.downloadShowMenuItem:before {
+.downloadShowMenuItem::before {
     background-image: url(chrome://userchrome/content/material/places/folder-open.svg);
 }
 
-menuitem[command="downloadsCmd_openReferrer"]:before {
+menuitem[command="downloadsCmd_openReferrer"]::before {
     background-image: url(chrome://userchrome/content/document.svg);
 }
 
-menuitem[command="downloadsCmd_copyLocation"]:before {
+menuitem[command="downloadsCmd_copyLocation"]::before {
     background-image: url(chrome://userchrome/content/skin/link.svg);
 }
 
-.downloadRemoveFromHistoryMenuItem:before {
+.downloadRemoveFromHistoryMenuItem::before {
     background-image: url(chrome://userchrome/content/skin/forget.svg);
 }
 
-menuitem[command="downloadsCmd_clearList"]:before {
+menuitem[command="downloadsCmd_clearList"]::before {
     background-image: url(chrome://userchrome/content/skin/stop.svg);
     background-size: 15px;
 }
 
-menuitem[command="downloadsCmd_clearDownloads"]:before {
+menuitem[command="downloadsCmd_clearDownloads"]::before {
     background-image: url(chrome://userchrome/content/delete.svg);
 }
 
-#context-media-mute:before {
+#context-media-mute::before {
     background-image: url(chrome://userchrome/content/audioMutedButton.svg);
 }
 
-#context-media-unmute:before {
+#context-media-unmute::before {
     background-image: url(chrome://userchrome/content/audioUnmutedButton.svg);
 }
 
-#context-video-fullscreen:before {
+#context-video-fullscreen::before {
     background-image: url(chrome://userchrome/content/fullscreenEnterButton.svg);
 }
 
-#context-leave-dom-fullscreen:before {
+#context-leave-dom-fullscreen::before {
     background-image: url(chrome://userchrome/content/fullscreenExitButton.svg);
 }
 
-menuitem[data-l10n-id="full-screen-exit"]:before {
+menuitem[data-l10n-id="full-screen-exit"]::before {
     background-image: url(chrome://userchrome/content/skin/fullscreen-exit.svg);
 }
 
-#context-media-playbackrate:before {
+#context-media-playbackrate::before {
     background-image: url(chrome://userchrome/content/performance.svg);
 }
 
-#context-viewvideo:before {
+#context-viewvideo::before {
     background-image: url(chrome://userchrome/content/skin/tab-play.svg);
 }
 
-:is(#context-media-showcontrols, #context-media-hidecontrols):before {
+:is(#context-media-showcontrols, #context-media-hidecontrols)::before {
     background-image: url(chrome://userchrome/content/material/tune.svg);
 }
 
-#context-showonlythisframe:before,
-#contentAreaContextMenu #frame:before {
+#context-showonlythisframe::before,
+#contentAreaContextMenu #frame::before {
     fill-opacity: 0.3;
     background-image: url(chrome://userchrome/content/devtools/command-frames.svg);
 }
 
-:is(#context-printframe, #context-print-selection, #menu_print):before {
+:is(#context-printframe, #context-print-selection, #menu_print)::before {
     background-image: url(chrome://userchrome/content/print.svg);
 }
 
-#menu_printPreview:before {
+#menu_printPreview::before {
     background-image: url(chrome://userchrome/content/show-password.svg);
 }
 
-:is(#menu_printSetup, #menu_readerModeItem):before {
+:is(#menu_printSetup, #menu_readerModeItem)::before {
     background-image: url(chrome://userchrome/content/skin/readerMode.svg);
     background-size: 14.8px 16px;
 }
 
-#menu_importFromAnotherBrowser:before {
+#menu_importFromAnotherBrowser::before {
     background-image: url(chrome://userchrome/content/skin/import.svg);
 }
 
-#context-frameOsPid:before {
+#context-frameOsPid::before {
     background-image: url(chrome://userchrome/content/devtools/tool-memory.svg);
 }
 
-:is(#context-reloadframe, #context-reloadimage, menuitem:not(.menuitem-iconic)[oncommand="_ucUtils.restart(true)"]):before {
+:is(#context-reloadframe, #context-reloadimage, menuitem:not(.menuitem-iconic)[oncommand="_ucUtils.restart(true)"])::before {
     background-image: url(chrome://userchrome/content/skin/reload.svg);
 }
 
-#context-inspect:before {
+#context-inspect::before {
     background-image: url(chrome://userchrome/content/devtools/tool-inspector.svg);
 }
 
@@ -735,7 +749,7 @@ menuitem[data-l10n-id="full-screen-exit"]:before {
 }
 
 /* or just shorten the label */
-#context-inspect-a11y:before {
+#context-inspect-a11y::before {
     background-position: left center;
     content: "Inspect Accessibility";
     padding-inline-start: 22px;
@@ -746,72 +760,72 @@ menuitem[data-l10n-id="full-screen-exit"]:before {
     visibility: collapse;
 }
 
-:is(#context-viewframesource, #context-viewpartialsource-selection, #context-viewsource):before {
+:is(#context-viewframesource, #context-viewpartialsource-selection, #context-viewsource)::before {
     background-image: url(chrome://userchrome/content/devtools/tool-dom.svg);
 }
 
-menuitem#menu_openDownloads:before {
+menuitem#menu_openDownloads::before {
     background-image: url(chrome://userchrome/content/downloads/downloads.svg);
 }
 
-menuitem#menu_openAddons:before,
-#addon_darkreader_org-menuitem-_DarkReader-toggle:before {
+menuitem#menu_openAddons::before,
+#addon_darkreader_org-menuitem-_DarkReader-toggle::before {
     background-image: url(chrome://browser/content/extension.svg);
 }
 
-menuitem:is(#sync-setup, #sync-unverifieditem):before {
+menuitem:is(#sync-setup, #sync-unverifieditem)::before {
     background-image: url(chrome://userchrome/content/fxa/avatar.svg);
 }
 
-menuitem#sync-reauthitem:before {
+menuitem#sync-reauthitem::before {
     background-image: url(chrome://userchrome/content/fxa/avatar-alert.svg);
 }
 
-menuitem:is(#sync-enable, #sync-syncnowitem):before {
+menuitem:is(#sync-enable, #sync-syncnowitem)::before {
     background-image: url(chrome://userchrome/content/skin/sync.svg);
 }
 
-menu#browserToolsMenu:not(.menu-iconic):before {
+menu#browserToolsMenu:not(.menu-iconic)::before {
     background-image: url(chrome://userchrome/content/skin/developer.svg);
 }
 
-:is(#context-viewframeinfo, #context-viewinfo, #context-viewimageinfo, #menu_pageInfo):before {
+:is(#context-viewframeinfo, #context-viewinfo, #context-viewimageinfo, #menu_pageInfo)::before {
     background-image: url(chrome://userchrome/content/info-filled.svg);
 }
 
-menuitem#menu_preferences:before {
+menuitem#menu_preferences::before {
     background-image: url(chrome://userchrome/content/settings.svg);
 }
 
-:is(#context-setDesktopBackground, #context-viewbgimage):before {
+:is(#context-setDesktopBackground, #context-viewbgimage)::before {
     background-image: url(chrome://userchrome/content/notifications/canvas.svg);
 }
 
-:is(#context-savepage, menu#pageStyleMenu, #addon_darkreader_org-menuitem-_DarkReader-addSite):before {
+:is(#context-savepage, menu#pageStyleMenu, #addon_darkreader_org-menuitem-_DarkReader-addSite)::before {
     background-image: url(chrome://userchrome/content/document.svg);
 }
 
-#viewFullZoomMenu:before {
+#viewFullZoomMenu::before {
     background-image: url(chrome://userchrome/content/fxa/add-device.svg);
 }
 
-#menu_zoomEnlarge:before {
+#menu_zoomEnlarge::before {
     background-image: url(chrome://userchrome/content/skin/zoom-in.svg);
 }
 
-#menu_zoomReduce:before {
+#menu_zoomReduce::before {
     background-image: url(chrome://userchrome/content/skin/zoom-out.svg);
 }
 
-#menu_zoomReset:before {
+#menu_zoomReset::before {
     background-image: url(chrome://userchrome/content/devtools/command-rulers.svg);
 }
 
-#viewToolbarsMenu:before {
+#viewToolbarsMenu::before {
     background-image: url(chrome://userchrome/content/skin/controlcenter/dashboard.svg);
 }
 
-#viewSidebarMenuMenu:before {
+#viewSidebarMenuMenu::before {
     background-image: url(chrome://userchrome/content/skin/sidebars-right.svg);
 }
 
@@ -831,7 +845,7 @@ menupopup#viewSidebarMenu
 }
 
 menupopup#viewSidebarMenu
-    menuitem:is([type="checkbox"], [type="radio"]):not([checked="true"], .webextension-menuitem:not(.menuitem-iconic)):before {
+    menuitem:is([type="checkbox"], [type="radio"]):not([checked="true"], .webextension-menuitem:not(.menuitem-iconic))::before {
     display: none;
 }
 
@@ -850,321 +864,325 @@ menupopup#viewSidebarMenu
     list-style-image: url(chrome://userchrome/content/skin/tab.svg) !important;
 }
 
-#menu_showAllHistory:before {
+#menu_showAllHistory::before {
     background-image: url(chrome://userchrome/content/skin/history.svg);
 }
 
-menuitem#sanitizeItem:before {
+menuitem#sanitizeItem::before {
     background-image: url(chrome://userchrome/content/skin/forget.svg);
 }
 
-:is(#syncedTabsRefresh, #syncedTabsRefreshFilter):before {
+:is(#syncedTabsRefresh, #syncedTabsRefreshFilter)::before {
     background-image: url(chrome://userchrome/content/skin/sync.svg);
 }
 
-#sync-tabs-menuitem:before {
+#sync-tabs-menuitem::before {
     background-image: url(chrome://userchrome/content/skin/synced-tabs.svg);
 }
 
-#historyRestoreLastSession:before {
+#historyRestoreLastSession::before {
     background-image: url(chrome://userchrome/content/skin/restore-session.svg);
 }
 
-#hiddenTabsMenu:before {
+#hiddenTabsMenu::before {
     background-image: url(chrome://userchrome/content/hide-password.svg);
 }
 
-:is(#context-selectall, #menu_selectAll):before,
-.textbox-contextmenu menuitem[label="Select All"]:before {
+:is(#context-selectall, #menu_selectAll)::before,
+.textbox-contextmenu menuitem[label="Select All"]::before {
     background-image: url(chrome://userchrome/content/glyph-highlights-16.svg);
 }
 
-:is(#context-sendaudio, #context-sendimage, #context-sendvideo, #menu_sendLink):before {
+:is(#context-sendaudio, #context-sendimage, #context-sendvideo, #menu_sendLink)::before {
     background-image: url(chrome://userchrome/content/skin/mail.svg);
 }
 
-:is(#context-savevideo, #context-saveaudio, #context-saveframe, #context-saveimage, #context-savelink, #menu_savePage):before {
+:is(#context-savevideo, #context-saveaudio, #context-saveframe, #context-saveimage, #context-savelink, #menu_savePage)::before {
     background-image: url(chrome://userchrome/content/material/places/folder-save.svg);
 }
 
-#menu_openFile:before {
+#menu_openFile::before {
     background-image: url(chrome://userchrome/content/material/places/folder-open.svg);
 }
 
-#context-savelinktopocket:before {
+#context-savelinktopocket::before {
     background-image: url(chrome://userchrome/content/skin/pocket.svg);
 }
 
-#context-pocket:before {
+#context-pocket::before {
     background-image: url(chrome://userchrome/content/skin/pocket.svg);
 }
 
-#context-take-frame-screenshot:before,
-#context-take-screenshot:before {
+#context-take-frame-screenshot::before,
+#context-take-screenshot::before {
     background-image: var(--screenshot-icon);
 }
 
-#context-viewimage:before {
+#context-viewimage::before {
     background-image: url(chrome://userchrome/content/notifications/canvas.svg);
 }
 
-:is(#context-copyimage-contents, #context-copy, #menu_copy, #placesContext_copy, #syncedTabsCopySelected):before,
-.textbox-contextmenu menuitem[label="Copy"]:before,
-menuitem.customize-context-CopyID:before {
+:is(#context-copyimage-contents, #context-copy, #menu_copy, #placesContext_copy, #syncedTabsCopySelected)::before,
+.textbox-contextmenu menuitem[label="Copy"]::before,
+menuitem.customize-context-CopyID::before {
     background-image: url(chrome://userchrome/content/skin/edit-copy.svg);
 }
 
-:is(#placesContext_show_bookmark\:info, #placesContext_show_folder\:info, #placesContext_show\:info):before {
+:is(#placesContext_show_bookmark\:info, #placesContext_show_folder\:info, #placesContext_show\:info)::before {
     background-image: url(chrome://userchrome/content/edit.svg);
 }
 
-#placesContext_showInFolder:before {
+#placesContext_showInFolder::before {
     background-image: url(chrome://userchrome/content/material/places/folder-special.svg);
 }
 
-:is(#context-cut, #menu_cut, #placesContext_cut):before,
-.textbox-contextmenu menuitem[label="Cut"]:before {
+:is(#context-cut, #menu_cut, #placesContext_cut)::before,
+.textbox-contextmenu menuitem[label="Cut"]::before {
     background-image: url(chrome://userchrome/content/skin/edit-cut.svg);
 }
 
-:is(#context-paste, #menu_paste, #placesContext_paste, #placesContext_paste_group):before,
-.textbox-contextmenu menuitem[label="Paste"]:before {
+:is(#context-paste, #menu_paste, #placesContext_paste, #placesContext_paste_group)::before,
+.textbox-contextmenu menuitem[label="Paste"]::before {
     background-image: url(chrome://userchrome/content/skin/edit-paste.svg);
 }
 
-.textbox-contextmenu menuitem:is([label="Paste and Go"], [label="Paste & Search"]):before {
+.textbox-contextmenu menuitem:is([label="Paste and Go"], [label="Paste & Search"])::before {
     background-image: url(chrome://userchrome/content/skin/edit-paste-and-go.svg);
 }
 
-:is(#placesContext_deleteBookmark, #placesContext_deleteFolder, #placesContext_delete, #placesContext_delete_history):before,
-:is(#context-delete, #menu_delete):before,
-.textbox-contextmenu menuitem[label="Delete"]:before {
+:is(#placesContext_deleteBookmark, #placesContext_deleteFolder, #placesContext_delete, #placesContext_delete_history)::before,
+:is(#context-delete, #menu_delete)::before,
+.textbox-contextmenu menuitem[label="Delete"]::before {
     background-image: url(chrome://userchrome/content/delete.svg);
 }
 
-.searchbar-clear-history:before {
+.searchbar-clear-history::before {
     background-image: url(chrome://userchrome/content/devtools/clear.svg);
 }
 
-#context-copyemail:before {
+#context-copyemail::before {
     background-image: url(chrome://userchrome/content/skin/mail.svg);
 }
 
-:is(#context-copyvideourl, #context-copyaudiourl, #context-copyimage, #context-copylink, #menu_openLocation, menuitem.customize-context-CopyURL):before {
+:is(#context-copyvideourl, #context-copyaudiourl, #context-copyimage, #context-copylink, #menu_openLocation, menuitem.customize-context-CopyURL)::before {
     background-image: url(chrome://userchrome/content/skin/link.svg);
 }
 
-:is(#context-bookmarkframe, #context-bookmarklink):before {
+:is(#context-bookmarkframe, #context-bookmarklink)::before {
     background-image: url(chrome://userchrome/content/skin/add-bookmark.svg);
 }
 
-:is(#placesContext_openBookmarkContainer\:tabs, #placesContext_openBookmarkLinks\:tabs):before {
+:is(#placesContext_openBookmarkContainer\:tabs, #placesContext_openBookmarkLinks\:tabs)::before {
     background-image: url(chrome://userchrome/content/material/places/folder-special.svg);
 }
 
-:is(#context-openframeintab, #context-openlinkintab, #context_openANewTab, #toolbar-context-openANewTab, #menu_newNavigatorTab, #placesContext_open\:newtab, #syncedTabsOpenSelectedInTab):before {
+:is(#context-openframeintab, #context-openlinkintab, #context_openANewTab, #toolbar-context-openANewTab, #menu_newNavigatorTab, #placesContext_open\:newtab, #syncedTabsOpenSelectedInTab)::before {
     background-image: url(chrome://userchrome/content/skin/new-tab.svg);
 }
 
-:is(#context-openlinkinunloadedtab, #placesContext_open\:unloaded, #placesContext_openContainer\:unloaded, #placesContext_openLinks\:unloaded, #syncedTabsOpenUnloaded):before {
+:is(#context-openlinkinunloadedtab, #placesContext_open\:unloaded, #placesContext_openContainer\:unloaded, #placesContext_openLinks\:unloaded, #syncedTabsOpenUnloaded)::before {
     background-image: url(chrome://userchrome/content/skin/new-unloaded.svg);
 }
 
-:is(#context-openlinkincurrent, #placesContext_open, #syncedTabsOpenSelected):before {
+:is(#context-openlinkincurrent, #placesContext_open, #syncedTabsOpenSelected)::before {
     background-image: url(chrome://userchrome/content/skin/tab.svg);
 }
 
-:is(#placesContext_open\:container, #placesContext_openContainer\:container, #placesContext_openLinks\:container):before,
-:is(#syncedTabsOpenAllInContainer, #syncedTabsOpenInContainer):before,
-#bookmark-menu-container_robwu_nl-menuitem-_bookmark-menu-item:not(.menuitem-iconic):before,
+:is(#placesContext_open\:container, #placesContext_openContainer\:container, #placesContext_openLinks\:container)::before,
+:is(#syncedTabsOpenAllInContainer, #syncedTabsOpenInContainer)::before,
+#bookmark-menu-container_robwu_nl-menuitem-_bookmark-menu-item:not(.menuitem-iconic)::before,
 #placesContext
-    > :is(menu, menuitem)[label="Open in a New Container Tab"]:not(.menuitem-iconic):before,
-#context-openlinkincontainertab:before {
+    > :is(menu, menuitem)[label="Open in a New Container Tab"]:not(.menuitem-iconic)::before,
+#context-openlinkincontainertab::before {
     background-image: url(chrome://userchrome/content/skin/container-go.svg);
 }
 
-:is(#context-openlinkinusercontext-menu, #menu_newUserContext):before {
+:is(#context-openlinkinusercontext-menu, #menu_newUserContext)::before {
     background-image: url(chrome://userchrome/content/skin/container-go.svg);
 }
 
-:is(#context-openframe, #context-openlink, #placesContext_open\:newwindow, #syncedTabsOpenSelectedInWindow):before {
+:is(#context-openframe, #context-openlink, #placesContext_open\:newwindow, #syncedTabsOpenSelectedInWindow)::before {
     background-image: url(chrome://userchrome/content/skin/new-window.svg);
 }
 
-:is(#context-openlinkprivate, #menu_newPrivateWindow, #placesContext_open\:newprivatewindow, #syncedTabsOpenSelectedInPrivateWindow):before {
+:is(#context-openlinkprivate, #menu_newPrivateWindow, #placesContext_open\:newprivatewindow, #syncedTabsOpenSelectedInPrivateWindow)::before {
     background-image: url(chrome://userchrome/content/skin/new-private.svg);
 }
 
-:is(#placesContext_new\:bookmark, #placesContext_createBookmark, #syncedTabsBookmarkSelected):before {
+:is(#placesContext_new\:bookmark, #placesContext_createBookmark, #syncedTabsBookmarkSelected)::before {
     background-image: url(chrome://userchrome/content/skin/add-bookmark.svg);
 }
 
-#placesContext_new\:folder:before {
+#placesContext_new\:folder::before {
     background-image: url(chrome://userchrome/content/material/places/folder-add.svg);
 }
 
-#placesContext_new\:separator:before {
+#placesContext_new\:separator::before {
     background-image: url(chrome://userchrome/content/skin/add-separator.svg);
 }
 
-#syncedTabsManageDevices:before {
+#syncedTabsManageDevices::before {
     background-image: url(chrome://userchrome/content/fxa/add-device.svg);
 }
 
-:is(#context-searchselect, #context-searchselect-private, #menu_find):before {
+:is(#context-searchselect, #context-searchselect-private, #menu_find)::before {
     background-image: url(chrome://userchrome/content/search-glass.svg);
 }
 
-#menu_findAgain:before {
+#menu_findAgain::before {
     background-image: url(chrome://userchrome/content/find-next-arrow.svg);
 }
 
-:is(menuitem#textfieldDirection-swap, #context-bidi-text-direction-toggle, #context-bidi-page-direction-toggle, #documentDirection-swap):before {
+:is(menuitem#textfieldDirection-swap, #context-bidi-text-direction-toggle, #context-bidi-page-direction-toggle, #documentDirection-swap)::before {
     background-image: url(chrome://userchrome/content/material/textdirection.svg);
 }
 
-menuitem#repair-text-encoding:before {
+menuitem#repair-text-encoding::before {
     background-image: url(chrome://userchrome/content/skin/characterEncoding.svg);
 }
 
-#context-viewsource-goToLine:before,
-#placesContext_sortBy\:name:before {
+#context-viewsource-goToLine::before,
+#placesContext_sortBy\:name::before {
     background-image: url(chrome://userchrome/content/skin/sort.svg);
 }
 
-:is(#context-undo, #context_undoCloseTab, #toolbar-context-undoCloseTab, #menu_undo, #undobookmarksmenuUndo, #context-redo, #menu_redo, #undobookmarksmenuRedo):before,
-.textbox-contextmenu menuitem:is([label="Undo"], [label="Redo"]):before {
+:is(#context-undo, #context_undoCloseTab, #toolbar-context-undoCloseTab, #menu_undo, #undobookmarksmenuUndo, #context-redo, #menu_redo, #undobookmarksmenuRedo)::before,
+.textbox-contextmenu menuitem:is([label="Undo"], [label="Redo"])::before {
     background-image: url(chrome://userchrome/content/undo.svg);
 }
 
-#placesContext_deleteHost:before {
+#placesContext_deleteHost::before {
     background-image: url(chrome://userchrome/content/skin/forget.svg);
 }
 
-#context-keywordfield:before {
+#context-keywordfield::before {
     background-image: url(chrome://userchrome/content/devtools/filter.svg);
 }
 
-#context_reopenInContainer:before {
+#context_reopenInContainer::before {
     background-image: url(chrome://userchrome/content/skin/container-go.svg);
 }
 
-:is(#context_reloadTab, #context_reloadSelectedTabs, #toolbar-context-reloadSelectedTab, #toolbar-context-reloadSelectedTabs):before {
+:is(#context_reloadTab, #context_reloadSelectedTabs, #toolbar-context-reloadSelectedTab, #toolbar-context-reloadSelectedTabs)::before {
     background-image: url(chrome://userchrome/content/skin/reload.svg);
 }
 
-:is(#context_toggleMuteTab, #context_toggleMuteSelectedTabs):before {
+:is(#context_toggleMuteTab, #context_toggleMuteSelectedTabs)::before {
     background-image: url(chrome://userchrome/content/audioMutedButton.svg);
 }
 
-:is(#context_toggleMuteTab, #context_toggleMuteSelectedTabs)[muted="true"]:before {
+:is(#context_toggleMuteTab, #context_toggleMuteSelectedTabs)[muted="true"]::before {
     background-image: url(chrome://userchrome/content/audioUnmutedButton.svg);
 }
 
-:is(#context_toggleMuteTab, #context_toggleMuteSelectedTabs)[label^="Play Tab"i]:before {
+:is(#context_toggleMuteTab, #context_toggleMuteSelectedTabs)[label^="Play Tab"i]::before {
     background-image: url(chrome://userchrome/content/playButton.svg);
 }
 
-:is(#context_pinTab, #context_pinSelectedTabs):before {
+:is(#context_pinTab, #context_pinSelectedTabs)::before {
     background-image: url(chrome://userchrome/content/skin/pin-tab.svg);
 }
 
-:is(#context_unpinTab, #context_unpinSelectedTabs):before {
+:is(#context_unpinTab, #context_unpinSelectedTabs)::before {
     background-image: url(chrome://userchrome/content/skin/unpin-tab.svg);
 }
 
-:is(#placesContext_openContainer\:tabs, #placesContext_openLinks\:tabs, #syncedTabsOpenAllInTabs):before,
-:is(#context_duplicateTab, #context_duplicateTabs, #menu_showAllTabs):before {
+:is(#placesContext_openContainer\:tabs, #placesContext_openLinks\:tabs, #syncedTabsOpenAllInTabs)::before,
+:is(#context_duplicateTab, #context_duplicateTabs, #menu_showAllTabs)::before {
     background-image: url(chrome://userchrome/content/skin/duplicate-tab.svg);
 }
 
-#placesContext_showAllBookmarks:before {
+#placesContext_showAllBookmarks::before {
     background-image: url(chrome://userchrome/content/skin/library.svg);
 }
 
-#context-markAsUnread:before {
+#context-markAsUnread::before {
     background-image: url(chrome://userchrome/content/skin/mark-tab-unread.svg);
 }
 
-#context-markAsRead:before {
+#context-markAsRead::before {
     background-image: url(chrome://userchrome/content/skin/mark-tab-read.svg);
 }
 
-:is(#context_selectAllTabs, #toolbar-context-selectAllTabs):before {
+:is(#context_selectAllTabs, #toolbar-context-selectAllTabs)::before {
     background-image: url(chrome://userchrome/content/devtools/tool-styleeditor.svg);
 }
 
-:is(#context_bookmarkTab, #context_bookmarkSelectedTabs, #toolbar-context-bookmarkSelectedTab, #toolbar-context-bookmarkSelectedTabs):before {
+#menu_bookmarkAllTabs::before {
+    background-image: url(chrome://userchrome/content/glyph-highlights-16.svg);
+}
+
+:is(#context_bookmarkTab, #context_bookmarkSelectedTabs, #toolbar-context-bookmarkSelectedTab, #toolbar-context-bookmarkSelectedTabs)::before {
     background-image: url(chrome://userchrome/content/skin/add-bookmark.svg);
 }
 
-#context_moveTabOptions:before {
+#context_moveTabOptions::before {
     background-image: url(chrome://userchrome/content/skin/move-tab.svg);
 }
 
-:is(#context_sendTabToDevice, #context-sendlinktodevice, #context-sendpagetodevice):before {
+:is(#context_sendTabToDevice, #context-sendlinktodevice, #context-sendpagetodevice)::before {
     background-image: url(chrome://userchrome/content/skin/send-to-device.svg);
 }
 
-:is(#context_shareTabURL, menuitem.share-tab-url-item):before {
+:is(#context_shareTabURL, menuitem.share-tab-url-item)::before {
     background-image: url(chrome://userchrome/content/skin/share-menu-icon.svg);
 }
 
-:is(#context_closeTab, #menu_close):before {
+:is(#context_closeTab, #menu_close)::before {
     background-image: url(chrome://userchrome/content/skin/close-tabs.svg);
 }
 
-#context_closeTabOptions:before {
+#context_closeTabOptions::before {
     background-image: url(chrome://userchrome/content/skin/close-tabs-mult.svg);
 }
 
-#context_closeTabsToTheStart:before,
-#context_closeTabsToTheEnd:-moz-locale-dir(rtl):before {
+#context_closeTabsToTheStart::before,
+#context_closeTabsToTheEnd:-moz-locale-dir(rtl)::before {
     background-image: url(chrome://userchrome/content/skin/select-left.svg);
 }
 
-#context_closeTabsToTheEnd:before,
-#context_closeTabsToTheStart:-moz-locale-dir(rtl):before {
+#context_closeTabsToTheEnd::before,
+#context_closeTabsToTheStart:-moz-locale-dir(rtl)::before {
     background-image: url(chrome://userchrome/content/skin/select-right.svg);
 }
 
-#context_closeOtherTabs:before {
+#context_closeOtherTabs::before {
     background-image: url(chrome://userchrome/content/skin/select-around.svg);
 }
 
-#menu_closeWindow:before {
+#menu_closeWindow::before {
     background-image: url(chrome://userchrome/content/skin/close-window.svg);
 }
 
-menuitem#menu_devToolbox:not([checked="true"]):before {
+menuitem#menu_devToolbox:not([checked="true"])::before {
     background-image: url(chrome://userchrome/content/devtools/debugging-workers.svg) !important;
     background-color: transparent !important;
     border: none !important;
     border-radius: revert !important;
 }
 
-menuitem#menu_taskManager:before {
+menuitem#menu_taskManager::before {
     background-image: url(chrome://userchrome/content/devtools/tool-profiler.svg);
 }
 
-menuitem#menu_devtools_remotedebugging:before {
+menuitem#menu_devtools_remotedebugging::before {
     background-image: url(chrome://userchrome/content/material/remote.svg);
 }
 
-menuitem#menu_browserToolbox:before {
+menuitem#menu_browserToolbox::before {
     background-image: url(chrome://userchrome/content/skin/toolbox.svg);
 }
 
-menuitem#menu_browserContentToolbox:before {
+menuitem#menu_browserContentToolbox::before {
     background-image: url(chrome://userchrome/content/devtools/command-frames.svg);
     fill-opacity: 0;
 }
 
-menuitem#menu_browserConsole:before {
+menuitem#menu_browserConsole::before {
     background-image: url(chrome://userchrome/content/devtools/command-console.svg);
 }
 
-menuitem#menu_responsiveUI:not([checked="true"]):before {
+menuitem#menu_responsiveUI:not([checked="true"])::before {
     background-image: url(chrome://userchrome/content/devtools/command-responsivemode.svg) !important;
     background-color: transparent !important;
     fill-opacity: 0 !important;
@@ -1172,86 +1190,113 @@ menuitem#menu_responsiveUI:not([checked="true"]):before {
     border-radius: revert !important;
 }
 
-menuitem#menu_eyedropper:before {
+menuitem#menu_eyedropper::before {
     background-image: url(chrome://userchrome/content/devtools/command-eyedropper.svg);
 }
 
-menuitem#menu_pageSource:before {
+menuitem#menu_pageSource::before {
     background-image: url(chrome://userchrome/content/devtools/tool-dom.svg);
 }
 
-menuitem#extensionsForDevelopers:before {
+menuitem#extensionsForDevelopers::before {
     background-image: url(chrome://userchrome/content/mozilla-logo.svg);
 }
 
-menuitem#enableDeveloperTools:before {
+menuitem#enableDeveloperTools::before {
     background-image: url(chrome://userchrome/content/skin/developer.svg);
 }
 
-#discardTab:before,
-#menu_FileQuitItem:before,
-#syncedTabsOpenAllUnloaded:before {
+#discardTab::before,
+#menu_FileQuitItem::before,
+#syncedTabsOpenAllUnloaded::before {
     background-image: url(chrome://userchrome/content/skin/quit.svg);
 }
 
-#historyUndoWindowMenu:before,
-#historyUndoWindowMenu3:before,
-#tabContextMenu-historyUndoWindowMenu3:before,
-#toolbar-context-menu-historyUndoWindowMenu3:before {
+/* menuitems added by recentlyClosedTabsContextMenu.uc.js */
+/* these are for the tab context menu's submenus */
+#historyUndoWindowMenu::before,
+#historyUndoWindowMenu3::before,
+#tabContextMenu-historyUndoWindowMenu3::before,
+#toolbar-context-menu-historyUndoWindowMenu3::before {
     background-image: url(chrome://userchrome/content/skin/window.svg);
 }
 
-#historyUndoMenu:before,
-#tabContextUndoList:before,
-#tabContextMenu-tabContextUndoList:before,
-#toolbar-context-menu-tabContextUndoList:before {
+#historyUndoMenu::before,
+#tabContextUndoList::before,
+#tabContextMenu-tabContextUndoList::before,
+#toolbar-context-menu-tabContextUndoList::before {
     background-image: url(chrome://userchrome/content/skin/tab.svg);
 }
 
-#tabContextMenu menuitem.restoreallitem:before {
+#tabContextMenu menuitem.restoreallitem::before {
     background-image: url(chrome://userchrome/content/skin/restore-session.svg);
 }
 
+#recently-closed-restore {
+    background-image: url(chrome://userchrome/content/skin/restore-session.svg);
+}
+
+/* for the context menu that appears when you right-click a recently closed tab/window item in the history panel */
+#recently-closed-restore-in-new-window {
+    background-image: url(chrome://userchrome/content/skin/new-window.svg);
+}
+
+#recently-closed-restore-in-new-private-window {
+    background-image: url(chrome://userchrome/content/skin/new-private.svg);
+}
+
+#recently-closed-remove-from-list {
+    background-image: url(chrome://userchrome/content/delete.svg);
+}
+
+#recently-closed-remove-from-history {
+    background-image: url(chrome://userchrome/content/skin/forget.svg);
+}
+
+#recently-closed-bookmark {
+    background-image: url(chrome://userchrome/content/skin/add-bookmark.svg);
+}
+
 :is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
-    .sendtab-target:is([clientType="phone"], [clientType="mobile"]):before {
+    .sendtab-target:is([clientType="phone"], [clientType="mobile"])::before {
     background-image: url(chrome://userchrome/content/skin/device-phone.svg);
 }
 
 :is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
-    .sendtab-target[clientType="desktop"]:before {
+    .sendtab-target[clientType="desktop"]::before {
     background-image: url(chrome://userchrome/content/skin/device-desktop.svg);
 }
 
 :is(#contentAreaContextMenu, #toolbar-context-menu)
     #_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root
-    :is(menu, menuitem)[id$="-menuitem-_autofill"]:before {
+    :is(menu, menuitem)[id$="-menuitem-_autofill"]::before {
     background-image: url(chrome://userchrome/content/formfill.svg);
 }
 
-menuitem#manage-saved-logins:before,
+menuitem#manage-saved-logins::before,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
     #_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root
-    :is(menu, menuitem)[id$="-menuitem-_copy-username"]:before {
+    :is(menu, menuitem)[id$="-menuitem-_copy-username"]::before {
     background-image: url(chrome://userchrome/content/fxa/avatar-empty.svg);
 }
 
-menu#fill-login:before,
+menu#fill-login::before,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
     #_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root
-    :is(menu, menuitem)[id$="-menuitem-_copy-password"]:before {
+    :is(menu, menuitem)[id$="-menuitem-_copy-password"]::before {
     background-image: url(chrome://userchrome/content/skin/login.svg);
 }
 
-menuitem#fill-login-generated-password:before,
+menuitem#fill-login-generated-password::before,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
     #_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root
-    :is(menu, menuitem)[id$="-menuitem-_generate-password"]:before {
+    :is(menu, menuitem)[id$="-menuitem-_generate-password"]::before {
     background-image: url(chrome://userchrome/content/generate-password.svg);
 }
 
 :is(#contentAreaContextMenu, #toolbar-context-menu)
     #_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root
-    :is(menu, menuitem)[id$="-menuitem-_copy-identifier"]:before {
+    :is(menu, menuitem)[id$="-menuitem-_copy-identifier"]::before {
     background-image: url(chrome://userchrome/content/devtools/tool-dom.svg);
 }
 
@@ -1260,122 +1305,122 @@ menuitem#fill-login-generated-password:before,
     display: none;
 }
 
-:is(menu, menuitem)[id^="multithreaded-download-manager"][label="Open in new tab"]:before {
+:is(menu, menuitem)[id^="multithreaded-download-manager"][label="Open in new tab"]::before {
     background-image: url(chrome://userchrome/content/skin/tab.svg);
 }
 
-:is(menu, menuitem)[id^="multithreaded-download-manager"][label="Open in new window"]:before {
+:is(menu, menuitem)[id^="multithreaded-download-manager"][label="Open in new window"]::before {
     background-image: url(chrome://userchrome/content/skin/window.svg);
 }
 
-:is(menu, menuitem)[id^="multithreaded-download-manager"][label="Open in sidebar"]:before {
+:is(menu, menuitem)[id^="multithreaded-download-manager"][label="Open in sidebar"]::before {
     background-image: url(chrome://userchrome/content/skin/sidebars-right.svg);
 }
 
-#userScriptsMenu:before {
+#userScriptsMenu::before {
     background-image: url(chrome://userchrome/content/material/javascript.svg);
 }
 
-#toggle_PersonalToolbar:before {
+#toggle_PersonalToolbar::before {
     background-image: url(chrome://browser/skin/places/bookmarksToolbar.svg);
 }
 
-:is(#spell-add-to-dictionary, #spell-add-dictionaries, #spell-add-dictionaries-main):before {
+:is(#spell-add-to-dictionary, #spell-add-dictionaries, #spell-add-dictionaries-main)::before {
     background-image: url(chrome://userchrome/content/skin/readerMode.svg);
 }
 
-#spell-dictionaries:before {
+#spell-dictionaries::before {
     background-image: url(chrome://userchrome/content/places/defaultFavicon.svg);
 }
 
-#menu_customizeToolbars:before,
-menuitem.viewCustomizeToolbar:before,
-#addon_darkreader_org-menuitem-_DarkReader-switchEngine:before {
+#menu_customizeToolbars::before,
+menuitem.viewCustomizeToolbar::before,
+#addon_darkreader_org-menuitem-_DarkReader-switchEngine::before {
     background-image: url(chrome://browser/skin/customize.svg);
 }
 
-menuitem:is(.customize-context-removeFromToolbar, .customize-context-removeFromPanel):before {
+menuitem:is(.customize-context-removeFromToolbar, .customize-context-removeFromPanel)::before {
     background-image: url(chrome://userchrome/content/undo.svg);
 }
 
-menuitem.customize-context-moveToToolbar:before {
+menuitem.customize-context-moveToToolbar::before {
     background-image: url(chrome://userchrome/content/skin/unpin-tab.svg);
 }
 
-menuitem.customize-context-moveToPanel:before {
+menuitem.customize-context-moveToPanel::before {
     background-image: url(chrome://userchrome/content/skin/pin-tab.svg);
 }
 
-menuitem.customize-context-addToToolbar:before {
+menuitem.customize-context-addToToolbar::before {
     background-image: url(chrome://userchrome/content/add.svg);
 }
 
-menuitem.customize-context-addToPanel:before {
+menuitem.customize-context-addToPanel::before {
     background-image: url(chrome://userchrome/content/chevron.svg);
 }
 
-menuitem:is(.customize-context-manageExtension, .pageActionContextMenuItem.manageExtensionItem):before {
+menuitem:is(.customize-context-manageExtension, .pageActionContextMenuItem.manageExtensionItem)::before {
     background-image: url(chrome://userchrome/content/skin/developer.svg);
 }
 
-menu.customize-context-debugExtension:before {
+menu.customize-context-debugExtension::before {
     background-image: url(chrome://userchrome/content/devtools/debugging-workers.svg);
 }
 
-menuitem.customize-context-Manifest:before {
+menuitem.customize-context-Manifest::before {
     background-image: url(chrome://userchrome/content/devtools/tool-styleeditor.svg);
 }
 
-menuitem.customize-context-Inspector:before {
+menuitem.customize-context-Inspector::before {
     background-image: url(chrome://userchrome/content/devtools/tool-inspector.svg);
 }
 
-menuitem.customize-context-ViewSource:before {
+menuitem.customize-context-ViewSource::before {
     background-image: url(chrome://userchrome/content/material/places/folder-source.svg);
 }
 
-menu.customize-context-ViewDocs-Submenu:before {
+menu.customize-context-ViewDocs-Submenu::before {
     background-image: url(chrome://userchrome/content/document.svg);
 }
 
-menuitem.customize-context-BrowserAction:before {
+menuitem.customize-context-BrowserAction::before {
     background-image: url(chrome://userchrome/content/devtools/command-noautohide.svg);
 }
 
-menuitem.customize-context-PageAction:before {
+menuitem.customize-context-PageAction::before {
     background-image: url(chrome://userchrome/content/skin/readerMode.svg);
 }
 
-menuitem.customize-context-SidebarAction:before {
+menuitem.customize-context-SidebarAction::before {
     background-image: url(chrome://userchrome/content/skin/sidebars.svg);
 }
 
-menuitem.customize-context-Options:before {
+menuitem.customize-context-Options::before {
     background-image: url(chrome://userchrome/content/material/tune.svg);
 }
 
-menuitem:is(.customize-context-removeExtension, .pageActionContextMenuItem.removeExtensionItem):before {
+menuitem:is(.customize-context-removeExtension, .pageActionContextMenuItem.removeExtensionItem)::before {
     background-image: url(chrome://userchrome/content/material/extension-blocked.svg);
 }
 
-menuitem.customize-context-reportExtension:before {
+menuitem.customize-context-reportExtension::before {
     background-image: url(chrome://devtools/skin/images/alert.svg);
 }
 
 /* mirror some of the icons for RTL languages/layouts, e.g. icons with arrows or other directional implications */
-:is(#context-reloadframe, #context-reloadimage, menuitem:not(.menuitem-iconic)[oncommand="_ucUtils.restart(true)"]):-moz-locale-dir(rtl):before,
-:is(#context_sendTabToDevice, #context-sendlinktodevice, #context-sendpagetodevice):-moz-locale-dir(rtl):before,
-:is(#context_shareTabURL, menuitem.share-tab-url-item):-moz-locale-dir(rtl):before,
-:is(#context-undo, #context_undoCloseTab, #toolbar-context-undoCloseTab, #menu_undo, #undobookmarksmenuUndo):-moz-locale-dir(rtl):before,
-:is(#context_reloadTab, #context_reloadSelectedTabs, #toolbar-context-reloadSelectedTab, #toolbar-context-reloadSelectedTabs):-moz-locale-dir(rtl):before,
-:is(#context-redo, #menu_redo, #undobookmarksmenuRedo):-moz-locale-dir(ltr):before,
-menuitem:is(.customize-context-removeFromToolbar, .customize-context-removeFromPanel):-moz-locale-dir(rtl):before,
+:is(#context-reloadframe, #context-reloadimage, menuitem:not(.menuitem-iconic)[oncommand="_ucUtils.restart(true)"]):-moz-locale-dir(rtl)::before,
+:is(#context_sendTabToDevice, #context-sendlinktodevice, #context-sendpagetodevice):-moz-locale-dir(rtl)::before,
+:is(#context_shareTabURL, menuitem.share-tab-url-item):-moz-locale-dir(rtl)::before,
+:is(#context-undo, #context_undoCloseTab, #toolbar-context-undoCloseTab, #menu_undo, #undobookmarksmenuUndo):-moz-locale-dir(rtl)::before,
+:is(#context_reloadTab, #context_reloadSelectedTabs, #toolbar-context-reloadSelectedTab, #toolbar-context-reloadSelectedTabs):-moz-locale-dir(rtl)::before,
+:is(#context-redo, #menu_redo, #undobookmarksmenuRedo):-moz-locale-dir(ltr)::before,
+menuitem:is(.customize-context-removeFromToolbar, .customize-context-removeFromPanel):-moz-locale-dir(rtl)::before,
 .textbox-contextmenu
-    menuitem:is([label="Paste and Go"], [label="Paste & Search"]):-moz-locale-dir(rtl):before,
-.textbox-contextmenu menuitem[label="Undo"]:-moz-locale-dir(rtl):before,
-.textbox-contextmenu menuitem[label="Redo"]:-moz-locale-dir(ltr):before,
-#placesContext_deleteHost:-moz-locale-dir(rtl):before,
-menuitem#sanitizeItem:-moz-locale-dir(rtl):before,
-.downloadRemoveFromHistoryMenuItem:-moz-locale-dir(rtl):before {
+    menuitem:is([label="Paste and Go"], [label="Paste & Search"]):-moz-locale-dir(rtl)::before,
+.textbox-contextmenu menuitem[label="Undo"]:-moz-locale-dir(rtl)::before,
+.textbox-contextmenu menuitem[label="Redo"]:-moz-locale-dir(ltr)::before,
+#placesContext_deleteHost:-moz-locale-dir(rtl)::before,
+menuitem#sanitizeItem:-moz-locale-dir(rtl)::before,
+.downloadRemoveFromHistoryMenuItem:-moz-locale-dir(rtl)::before {
     transform: scaleX(-1);
 }

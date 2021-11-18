@@ -472,7 +472,7 @@ userChrome.css.wikipedia.dark-theme-enabled */
     }
 
     /* logo */
-    #mw-head:before {
+    #mw-head::before {
         position: relative !important;
         width: 120px !important;
         height: 120px !important;
@@ -762,17 +762,17 @@ userChrome.css.wikipedia.dark-theme-enabled */
         counter-reset: headingOne !important;
     }
 
-    #toctitle h2:before {
+    #toctitle h2::before {
         content: "" !important;
         counter-reset: headingOne !important;
         padding-right: 0 !important;
     }
 
-    #bodyContent h2:before,
-    #bodyContent h3:before,
-    #bodyContent h4:before,
-    #bodyContent h5:before,
-    #bodyContent h6:before {
+    #bodyContent h2::before,
+    #bodyContent h3::before,
+    #bodyContent h4::before,
+    #bodyContent h5::before,
+    #bodyContent h6::before {
         padding-right: 9px !important;
         font-family: "Lora", serif !important;
         text-shadow: none !important;
@@ -782,7 +782,7 @@ userChrome.css.wikipedia.dark-theme-enabled */
         counter-reset: headingTwo !important;
     }
 
-    #bodyContent h2:before {
+    #bodyContent h2::before {
         counter-increment: headingOne !important;
         content: counter(headingOne) !important;
         font-size: 16px !important;
@@ -792,7 +792,7 @@ userChrome.css.wikipedia.dark-theme-enabled */
         counter-reset: headingThree !important;
     }
 
-    #bodyContent h3:before {
+    #bodyContent h3::before {
         counter-increment: headingTwo !important;
         content: counter(headingOne) "." counter(headingTwo) !important;
         font-size: 15px !important;
@@ -802,7 +802,7 @@ userChrome.css.wikipedia.dark-theme-enabled */
         counter-reset: headingFour !important;
     }
 
-    #bodyContent h4:before {
+    #bodyContent h4::before {
         counter-increment: headingThree !important;
         content: counter(headingOne) "." counter(headingTwo) "." counter(headingThree) !important;
         font-size: 14px !important;
@@ -812,7 +812,7 @@ userChrome.css.wikipedia.dark-theme-enabled */
         counter-reset: headingFive !important;
     }
 
-    #bodyContent h5:before {
+    #bodyContent h5::before {
         counter-increment: headingFour !important;
         content: counter(headingOne) "." counter(headingTwo) "." counter(headingThree) "."
             counter(headingFour) !important;
@@ -823,7 +823,7 @@ userChrome.css.wikipedia.dark-theme-enabled */
         counter-reset: headingSix !important;
     }
 
-    #bodyContent h6:before {
+    #bodyContent h6::before {
         counter-increment: headingFive !important;
         content: counter(headingOne) "." counter(headingTwo) "." counter(headingThree) "."
             counter(headingFour) "." counter(headingFive) !important;
@@ -1265,7 +1265,7 @@ userChrome.css.wikipedia.dark-theme-enabled */
         padding: 4px 6px !important;
     }
 
-    #bodyContent #toc h2:before {
+    #bodyContent #toc h2::before {
         display: none !important;
     }
 
@@ -1976,7 +1976,7 @@ userChrome.css.wikipedia.dark-theme-enabled */
         font-size: 16px !important;
     }
 
-    .mwe-popups .mw-ui-icon:before {
+    .mwe-popups .mw-ui-icon::before {
         background-size: 20px !important;
     }
 
@@ -2005,7 +2005,7 @@ userChrome.css.wikipedia.dark-theme-enabled */
         text-decoration: none !important;
     }
 
-    .mwe-popups .mwe-popups-extract:after {
+    .mwe-popups .mwe-popups-extract::after {
         content: " " !important;
         position: absolute !important;
         bottom: 0 !important;
@@ -2015,12 +2015,12 @@ userChrome.css.wikipedia.dark-theme-enabled */
         pointer-events: none !important;
     }
 
-    .mwe-popups .mwe-popups-extract[dir="ltr"]:after {
+    .mwe-popups .mwe-popups-extract[dir="ltr"]::after {
         right: 0 !important;
         background-image: none !important;
     }
 
-    .mwe-popups .mwe-popups-extract[dir="rtl"]:after {
+    .mwe-popups .mwe-popups-extract[dir="rtl"]::after {
         left: 0 !important;
         background-image: none !important;
     }
@@ -2119,7 +2119,7 @@ userChrome.css.wikipedia.dark-theme-enabled */
         font-size: 12px !important;
     }
 
-    .mwe-popups.mwe-popups-no-image-pointer:before {
+    .mwe-popups.mwe-popups-no-image-pointer::before {
         content: "" !important;
         position: absolute !important;
         border: 8px solid transparent !important;
@@ -2129,7 +2129,7 @@ userChrome.css.wikipedia.dark-theme-enabled */
         left: 10px !important;
     }
 
-    .mwe-popups.mwe-popups-no-image-pointer:after {
+    .mwe-popups.mwe-popups-no-image-pointer::after {
         content: "" !important;
         position: absolute !important;
         border: 11px solid transparent !important;
@@ -2140,18 +2140,18 @@ userChrome.css.wikipedia.dark-theme-enabled */
         visibility: collapse !important;
     }
 
-    .mwe-popups.flipped-x.mwe-popups-no-image-pointer:before {
+    .mwe-popups.flipped-x.mwe-popups-no-image-pointer::before {
         left: auto !important;
         right: 10px !important;
     }
 
-    .mwe-popups.flipped-x.mwe-popups-no-image-pointer:after {
+    .mwe-popups.flipped-x.mwe-popups-no-image-pointer::after {
         left: auto !important;
         right: 7px !important;
         visibility: collapse !important;
     }
 
-    .mwe-popups.mwe-popups-image-pointer:before {
+    .mwe-popups.mwe-popups-image-pointer::before {
         content: "" !important;
         position: absolute !important;
         border: 8px solid transparent !important;
@@ -2162,7 +2162,7 @@ userChrome.css.wikipedia.dark-theme-enabled */
         z-index: 111 !important;
     }
 
-    .mwe-popups.mwe-popups-image-pointer:after {
+    .mwe-popups.mwe-popups-image-pointer::after {
         content: "" !important;
         position: absolute !important;
         border: 12px solid transparent !important;
@@ -2174,7 +2174,7 @@ userChrome.css.wikipedia.dark-theme-enabled */
         visibility: collapse !important;
     }
 
-    .mwe-popups.mwe-popups-image-pointer.flipped-x:before {
+    .mwe-popups.mwe-popups-image-pointer.flipped-x::before {
         content: "" !important;
         position: absolute !important;
         border: 8px solid transparent !important;
@@ -2184,7 +2184,7 @@ userChrome.css.wikipedia.dark-theme-enabled */
         left: 294px !important;
     }
 
-    .mwe-popups.mwe-popups-image-pointer.flipped-x:after {
+    .mwe-popups.mwe-popups-image-pointer.flipped-x::after {
         content: "" !important;
         position: absolute !important;
         border: 12px solid transparent !important;
@@ -2206,7 +2206,7 @@ userChrome.css.wikipedia.dark-theme-enabled */
         min-height: 242px !important;
     }
 
-    .mwe-popups.flipped-x.mwe-popups-is-tall:before {
+    .mwe-popups.flipped-x.mwe-popups-is-tall::before {
         content: "" !important;
         position: absolute !important;
         border: 7px solid transparent !important;
@@ -2226,7 +2226,7 @@ userChrome.css.wikipedia.dark-theme-enabled */
         right: 0 !important;
     }
 
-    .mwe-popups.flipped-x-y:before {
+    .mwe-popups.flipped-x-y::before {
         content: "" !important;
         position: absolute !important;
         border: 8px solid transparent !important;
@@ -2237,7 +2237,7 @@ userChrome.css.wikipedia.dark-theme-enabled */
         z-index: 111 !important;
     }
 
-    .mwe-popups.flipped-x-y:after {
+    .mwe-popups.flipped-x-y::after {
         content: "" !important;
         position: absolute !important;
         border: 12px solid transparent !important;
@@ -2253,7 +2253,7 @@ userChrome.css.wikipedia.dark-theme-enabled */
         min-height: 242px !important;
     }
 
-    .mwe-popups.flipped-x-y.mwe-popups-is-tall:before {
+    .mwe-popups.flipped-x-y.mwe-popups-is-tall::before {
         content: "" !important;
         position: absolute !important;
         border: 7px solid transparent !important;
@@ -2263,7 +2263,7 @@ userChrome.css.wikipedia.dark-theme-enabled */
         left: 422px !important;
     }
 
-    .mwe-popups.flipped-x-y.mwe-popups-is-tall:after {
+    .mwe-popups.flipped-x-y.mwe-popups-is-tall::after {
         content: "" !important;
         position: absolute !important;
         border: 12px solid transparent !important;
@@ -2282,7 +2282,7 @@ userChrome.css.wikipedia.dark-theme-enabled */
         right: 0 !important;
     }
 
-    .mwe-popups.flipped-y:before {
+    .mwe-popups.flipped-y::before {
         content: "" !important;
         position: absolute !important;
         border: 8px solid transparent !important;
@@ -2292,7 +2292,7 @@ userChrome.css.wikipedia.dark-theme-enabled */
         left: 10px !important;
     }
 
-    .mwe-popups.flipped-y:after {
+    .mwe-popups.flipped-y::after {
         content: "" !important;
         position: absolute !important;
         border: 11px solid transparent !important;
@@ -2359,7 +2359,7 @@ userChrome.css.wikipedia.dark-theme-enabled */
 
     .mwe-popups.mwe-popups-type-reference
         .mwe-popups-title
-        .mw-ui-icon.mw-ui-icon-element:before {
+        .mw-ui-icon.mw-ui-icon-element::before {
         margin: 0 !important;
     }
 
@@ -2375,7 +2375,7 @@ userChrome.css.wikipedia.dark-theme-enabled */
         min-height: 20px !important;
     }
 
-    .mwe-popups.mwe-popups-type-reference .mwe-popups-extract:after {
+    .mwe-popups.mwe-popups-type-reference .mwe-popups-extract::after {
         display: none !important;
     }
 
@@ -2494,7 +2494,7 @@ userChrome.css.wikipedia.dark-theme-enabled */
         margin-left: -16px !important;
     }
 
-    .rt-tooltipTail:after {
+    .rt-tooltipTail::after {
         display: none !important;
     }
 
@@ -4221,7 +4221,7 @@ userChrome.css.wikipedia.dark-theme-enabled */
         border: unset !important;
     }
 
-    span.citation-needed-content:before {
+    span.citation-needed-content::before {
         background-image: url(chrome://userchrome/content/in-content/wiki-pre-quote.svg);
         background-size: 7px 7px;
         background-repeat: no-repeat !important;
@@ -4231,7 +4231,7 @@ userChrome.css.wikipedia.dark-theme-enabled */
         content: "";
     }
 
-    span.citation-needed-content:after {
+    span.citation-needed-content::after {
         background-image: url(chrome://userchrome/content/in-content/wiki-post-quote.svg);
         background-size: 10px 7px;
         background-repeat: no-repeat !important;

@@ -106,9 +106,8 @@ class EyedropperButton {
             "web-developer-tools-view-showing"
         );
         this.makeWidget();
-        if (this.mainMenuItem) {
-            this.setShortcutLabel();
-        } else {
+        if (this.mainMenuItem) this.setShortcutLabel();
+        else {
             this.observer = new MutationObserver(() => {
                 if (this.devToolsMenu.querySelector("#menu_eyedropper")) {
                     this.setShortcutLabel();

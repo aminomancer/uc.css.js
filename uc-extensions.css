@@ -262,7 +262,7 @@ more useful than userContent.css when dealing with very complex websites that ne
 }
 
 /* sort bookmarks menu icon */
-:is(.menu-iconic, .menuitem-iconic)[id^="sort-bookmarks_heftig-menuitem"] .menu-iconic-left:before {
+:is(.menu-iconic, .menuitem-iconic)[id^="sort-bookmarks_heftig-menuitem"] .menu-iconic-left::before {
     width: 16px;
     height: 16px;
     margin-inline: var(--context-iconic-margin);
@@ -281,7 +281,7 @@ more useful than userContent.css when dealing with very complex websites that ne
 
 /* simple translate context menu icon */
 :is(.menu-iconic, .menuitem-iconic):is([label="To Google Translate"], [label^="Translate this page"], [label="Translate selected link"], [label="Translate selected text"], [label="Simple Translate"])
-    .menu-iconic-left:before {
+    .menu-iconic-left::before {
     width: 16px;
     height: 16px;
     margin-inline: var(--context-iconic-margin);
@@ -299,7 +299,7 @@ more useful than userContent.css when dealing with very complex websites that ne
     display: none;
 }
 
-#simple-translate_sienori-menuitem-_translatePage:not(.menuitem-iconic, .menu-iconic):before {
+#simple-translate_sienori-menuitem-_translatePage:not(.menuitem-iconic, .menu-iconic)::before {
     background-image: url(chrome://userchrome/content/material/translate-small.svg);
 }
 
@@ -321,7 +321,7 @@ more useful than userContent.css when dealing with very complex websites that ne
 /* pushbullet context menu icon */
 #contentAreaContextMenu
     :is(.menu-iconic, .menuitem-iconic)[label="Pushbullet"]
-    .menu-iconic-left:before {
+    .menu-iconic-left::before {
     width: 16px;
     height: 16px;
     margin-inline: var(--context-iconic-margin);
@@ -339,7 +339,7 @@ more useful than userContent.css when dealing with very complex websites that ne
 }
 
 #toolbar-context-menu
-    :is(menu, menuitem)[id^="jid1-bycqofyfmbmd9a_jetpack-menuitem"]:not(.menuitem-iconic, .menu-iconic):before {
+    :is(menu, menuitem)[id^="jid1-bycqofyfmbmd9a_jetpack-menuitem"]:not(.menuitem-iconic, .menu-iconic)::before {
     background-image: url(chrome://userchrome/content/material/pushbullet-solid.svg);
 }
 
@@ -355,9 +355,9 @@ there's no need for a context menu item except when right-clicking something par
 /* multi-account containers menu icon */
 #contentAreaContextMenu
     :is(.menu-iconic, .menuitem-iconic)[label="Firefox Multi-Account Containers"]
-    .menu-iconic-left:before,
+    .menu-iconic-left::before,
 #_testpilot-containers-menuitem-_open-bookmark-in-container-tab
-    > .menu-iconic-left:before {
+    > .menu-iconic-left::before {
     width: 16px;
     height: 16px;
     margin-inline: var(--context-iconic-margin);
@@ -380,7 +380,7 @@ there's no need for a context menu item except when right-clicking something par
 }
 
 #_testpilot-containers-menuitem-_open-bookmark-in-container-tab
-    > .menu-iconic-left:before {
+    > .menu-iconic-left::before {
     background-image: url(chrome://userchrome/content/skin/container-go.svg);
 }
 
@@ -413,7 +413,7 @@ there's no need for a context menu item except when right-clicking something par
 /* zotero menu icon */
 #contentAreaContextMenu
     :is(.menu-iconic, .menuitem-iconic)[label="Zotero Connector"]
-    .menu-iconic-left:before {
+    .menu-iconic-left::before {
     width: 16px;
     height: 16px;
     margin-inline: var(--context-iconic-margin);
@@ -435,7 +435,7 @@ there's no need for a context menu item except when right-clicking something par
 /* ublock origin context menu icon */
 #contentAreaContextMenu
     :is(.menu-iconic, .menuitem-iconic):is([label="Block element..."], [label="uBlock Origin"])
-    .menu-iconic-left:before {
+    .menu-iconic-left::before {
     width: 16px;
     height: 16px;
     margin-inline: var(--context-iconic-margin);
@@ -454,11 +454,11 @@ there's no need for a context menu item except when right-clicking something par
     display: none;
 }
 
-#ublock0_raymondhill_net-menuitem-_uBlock0-blockElement:not(.menuitem-iconic, .menu-iconic):before {
+#ublock0_raymondhill_net-menuitem-_uBlock0-blockElement:not(.menuitem-iconic, .menu-iconic)::before {
     background-image: url(chrome://userchrome/content/hide-password.svg);
 }
 
-#ublock0_raymondhill_net-menuitem-_uBlock0-blockElementInFrame:not(.menuitem-iconic, .menu-iconic):before {
+#ublock0_raymondhill_net-menuitem-_uBlock0-blockElementInFrame:not(.menuitem-iconic, .menu-iconic)::before {
     fill-opacity: 0.3;
     background-image: url(chrome://userchrome/content/devtools/command-frames.svg);
 }
@@ -466,7 +466,7 @@ there's no need for a context menu item except when right-clicking something par
 /* bitwarden context menu icon */
 #contentAreaContextMenu
     :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"]
-    .menu-iconic-left:before {
+    .menu-iconic-left::before {
     width: 16px;
     height: 16px;
     margin-inline: var(--context-iconic-margin);
@@ -485,13 +485,13 @@ there's no need for a context menu item except when right-clicking something par
 }
 
 /* toolbar context menu item */
-#_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root:not(.menuitem-iconic, .menu-iconic):before {
+#_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root:not(.menuitem-iconic, .menu-iconic)::before {
     background-image: url(chrome://userchrome/content/material/bitwarden.svg);
 }
 
 #contentAreaContextMenu
     #addon_darkreader_org-menuitem-_DarkReader-top
-    .menu-iconic-left:before {
+    .menu-iconic-left::before {
     width: 16px;
     height: 16px;
     margin-inline: var(--context-iconic-margin);
@@ -509,16 +509,16 @@ there's no need for a context menu item except when right-clicking something par
 }
 
 menupopup:not(#contentAreaContextMenu)
-    > #addon_darkreader_org-menuitem-_DarkReader-top:not(.menuitem-iconic, .menu-iconic):before {
+    > #addon_darkreader_org-menuitem-_DarkReader-top:not(.menuitem-iconic, .menu-iconic)::before {
     background-image: url(chrome://userchrome/content/material/darkmode.svg);
 }
 
 /* stylus context menu items */
-#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-manager:not(.menuitem-iconic, .menu-iconic):before {
+#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-manager:not(.menuitem-iconic, .menu-iconic)::before {
     background-image: url(chrome://userchrome/content/devtools/tool-styleeditor.svg);
 }
 
-#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-options:not(.menuitem-iconic, .menu-iconic):before {
+#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-options:not(.menuitem-iconic, .menu-iconic)::before {
     background-image: url(chrome://userchrome/content/settings.svg);
 }
 
@@ -529,7 +529,7 @@ menupopup:not(#contentAreaContextMenu)
 }
 
 #_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-options[label="Options"]:not(.menuitem-iconic, .menu-iconic)
-    > .menu-accel-container:before {
+    > .menu-accel-container::before {
     content: "Stylus Options";
     display: -moz-inline-box;
     -moz-box-flex: 1;

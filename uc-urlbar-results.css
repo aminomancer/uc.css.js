@@ -376,16 +376,16 @@
 }
 
 .urlbarView-title-separator,
-.urlbarView-dynamic-calculator-action:before,
-.urlbarView-dynamic-unitConversion-action:before {
+.urlbarView-dynamic-calculator-action::before,
+.urlbarView-dynamic-unitConversion-action::before {
     -moz-box-align: center;
     display: -moz-box;
     display: none !important;
 }
 
-.urlbarView-title-separator:before,
-.urlbarView-dynamic-calculator-action:before,
-.urlbarView-dynamic-unitConversion-action:before {
+.urlbarView-title-separator::before,
+.urlbarView-dynamic-calculator-action::before,
+.urlbarView-dynamic-unitConversion-action::before {
     content: "" !important;
     width: 15px;
     height: 2px;
@@ -410,9 +410,9 @@
     font-weight: inherit !important;
 }
 
-.urlbarView-row[selected] .urlbarView-title-separator:before,
-.urlbarView-row-inner[selected] .urlbarView-dynamic-calculator-action:before,
-.urlbarView-dynamic-unitConversion-action:before {
+.urlbarView-row[selected] .urlbarView-title-separator::before,
+.urlbarView-row-inner[selected] .urlbarView-dynamic-calculator-action::before,
+.urlbarView-dynamic-unitConversion-action::before {
     color: hsla(0, 0%, 100%, 0.6);
 }
 

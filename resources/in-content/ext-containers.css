@@ -265,7 +265,7 @@
         display: none;
     }
 
-    .info-icon:before {
+    .info-icon::before {
         content: "";
         display: block;
         width: 16px;
@@ -306,7 +306,7 @@
         color: var(--context-menu-disabled-color) !important;
     }
 
-    table[hidden]:empty:before {
+    table[hidden]:empty::before {
         content: "(empty)" !important;
     }
 
@@ -339,7 +339,7 @@
         padding-inline-start: 0 !important;
     }
 
-    #manage-containers-link:before {
+    #manage-containers-link::before {
         content: "";
         display: inline-block;
         width: 16px;
@@ -457,7 +457,7 @@
         display: none;
     }
 
-    .menu-arrow:after {
+    .menu-arrow::after {
         content: "";
         background-image: var(--menu-right-img);
         background-position: center;
@@ -663,7 +663,7 @@
 }
 
 /* little message that pops up on top of pages when you use "always open in x container" */
-body > .container-notification:before {
+body > .container-notification::before {
     content: "";
     display: inline-block;
     block-size: 16px;

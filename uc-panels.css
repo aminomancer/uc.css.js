@@ -1215,6 +1215,11 @@ richlistitem.download-state:is([verdict], .openWhenFinished):is(:hover, :focus-w
     background: var(--download-button-hover-bg) !important;
 }
 
+richlistitem.download-state[state="1"][exists]:hover:active,
+richlistitem.download-state:is([verdict], .openWhenFinished):hover:active {
+    background: var(--download-button-active-bg) !important;
+}
+
 panel richlistitem.download-state[state="1"]:not([exists]) .downloadTarget {
     color: var(--panel-description-color);
 }

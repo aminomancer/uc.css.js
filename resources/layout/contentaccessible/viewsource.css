@@ -32,8 +32,8 @@ pre {
   white-space: inherit;
   margin: 0 0 0 5ch;
 }
-pre[id]:before,
-span[id]:before {
+pre[id]::before,
+span[id]::before {
   content: counter(line) " ";
   counter-increment: line;
   user-select: none;

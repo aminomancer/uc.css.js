@@ -661,6 +661,7 @@
     .all-buttons-container {
         background-color: var(--content-principal-box-background) !important;
         height: 88px !important;
+        box-shadow: 0 0 0 1px rgba(12, 12, 13, 0.1), 0 0 8px rgba(12, 12, 13, 0.1) !important;
     }
 
     .all-buttons-container button {
@@ -668,6 +669,10 @@
         background-color: transparent !important;
         border-radius: var(--general-button-border-radius) !important;
         padding: 54px 5px 5px !important;
+        stroke: hsl(236, 40%, 56%) !important;
+        fill: hsl(0, 0%, 93%) !important;
+        appearance: none !important;
+        -moz-context-properties: fill, stroke !important;
     }
 
     .all-buttons-container button:hover {

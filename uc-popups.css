@@ -561,7 +561,7 @@ panel[type="autocomplete-richlistbox"]
         background-color: var(--arrowpanel-dimmed) !important;
     }
 
-    button.month-year:after {
+    button.month-year::after {
         position: absolute;
         content: "";
         width: 2.6rem;
@@ -572,7 +572,7 @@ panel[type="autocomplete-richlistbox"]
         fill: currentColor !important;
     }
 
-    button.month-year.active:after {
+    button.month-year.active::after {
         fill-opacity: 1 !important;
     }
 
@@ -1210,6 +1210,7 @@ panel[type="autocomplete-richlistbox"]
 
     :root[dialogroot] tree {
         margin-inline: 4px !important;
+        border-radius: var(--toolbarbutton-border-radius) !important;
     }
 
     :root[dialogroot] treecols {

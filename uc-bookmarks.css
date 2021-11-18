@@ -313,6 +313,7 @@
 
 #bookmarkpropertiesdialog #editBMPanel_tagsSelector {
     padding: revert !important;
+    border-color: var(--in-content-box-border-color) !important;
 }
 
 :is(#bookmarkpropertiesdialog, #editBookmarkPanel) richlistbox[id] richlistitem {
@@ -513,7 +514,7 @@ menuitem.subviewbutton-iconic > .toolbarbutton-text,
     padding-inline-start: 0 !important;
 }
 
-#BMB_viewBookmarksSidebar:not(.menuitem-iconic, .menu-iconic):before {
+#BMB_viewBookmarksSidebar:not(.menuitem-iconic, .menu-iconic)::before {
     content: "" !important;
     position: relative !important;
     display: -moz-inline-box !important;
@@ -526,7 +527,7 @@ menuitem.subviewbutton-iconic > .toolbarbutton-text,
     -moz-context-properties: fill, fill-opacity, stroke !important;
 }
 
-#BMB_viewBookmarksSidebar:not(.menuitem-iconic, .menu-iconic)[positionend="true"]:before {
+#BMB_viewBookmarksSidebar:not(.menuitem-iconic, .menu-iconic)[positionend="true"]::before {
     background-image: url(chrome://userchrome/content/skin/sidebars-right.svg) !important;
 }
 
@@ -546,8 +547,8 @@ menuitem.subviewbutton-iconic > .toolbarbutton-text,
     padding-inline-start: 0 !important;
 }
 
-#BMB_bookmarksShowAllTop:before,
-menuitem#bookmarksShowAll:before {
+#BMB_bookmarksShowAllTop::before,
+menuitem#bookmarksShowAll::before {
     content: "" !important;
     position: relative !important;
     display: -moz-inline-box !important;
@@ -561,7 +562,7 @@ menuitem#bookmarksShowAll:before {
     -moz-context-properties: fill, fill-opacity, stroke !important;
 }
 
-#BMB_bookmarksShowAllTop:before {
+#BMB_bookmarksShowAllTop::before {
     margin-inline-end: 8px !important;
 }
 
@@ -570,28 +571,28 @@ menuitem#menu_bookmarkThisPage .menu-text {
     padding-inline-start: 0 !important;
 }
 
-menuitem#bookmarksShowAll:before {
-    margin-inline: 6px !important;
+menuitem#bookmarksShowAll::before {
+    margin-inline: var(--context-iconic-margin) !important;
 }
 
-menuitem#menu_bookmarkThisPage:before {
+menuitem#menu_bookmarkThisPage::before {
     content: "" !important;
     position: relative !important;
     display: -moz-inline-box !important;
     width: 16px !important;
     height: 16px !important;
     padding-inline: 0 !important;
-    margin-inline: 6px !important;
+    margin-inline: var(--context-iconic-margin) !important;
     fill: currentColor !important;
     background-image: url(chrome://userchrome/content/skin/bookmark-hollow.svg) !important;
     -moz-context-properties: fill, fill-opacity, stroke !important;
 }
 
-menuitem#menu_bookmarkThisPage[data-l10n-id="menu-bookmark-edit"]:before {
+menuitem#menu_bookmarkThisPage[data-l10n-id="menu-bookmark-edit"]::before {
     background-image: url(chrome://userchrome/content/skin/bookmark.svg) !important;
 }
 
-#BMB_bookmarksPopup .bookmark-item[container]:not(.menuitem-iconic, .menu-iconic):before {
+#BMB_bookmarksPopup .bookmark-item[container]:not(.menuitem-iconic, .menu-iconic)::before {
     content: "" !important;
     position: relative !important;
     display: -moz-inline-box !important;
@@ -611,7 +612,7 @@ menuitem#menu_bookmarkThisPage[data-l10n-id="menu-bookmark-edit"]:before {
 }
 
 #BMB_bookmarksPopup
-    :is(#bookmarksToolbarFolderMenu, #BMB_bookmarksToolbar, #panelMenu_bookmarksToolbar, #BMB_viewBookmarksToolbar):not(.menuitem-iconic, .menu-iconic):before {
+    :is(#bookmarksToolbarFolderMenu, #BMB_bookmarksToolbar, #panelMenu_bookmarksToolbar, #BMB_viewBookmarksToolbar):not(.menuitem-iconic, .menu-iconic)::before {
     content: "" !important;
     position: relative !important;
     display: -moz-inline-box !important;
@@ -624,7 +625,7 @@ menuitem#menu_bookmarkThisPage[data-l10n-id="menu-bookmark-edit"]:before {
     -moz-context-properties: fill, fill-opacity, stroke !important;
 }
 
-#BMB_viewBookmarksToolbar:not(.menuitem-iconic, .menu-iconic)[data-l10n-args*='{"isVisible":true}']:before {
+#BMB_viewBookmarksToolbar:not(.menuitem-iconic, .menu-iconic)[data-l10n-args*='{"isVisible":true}']::before {
     fill-opacity: 0.5;
 }
 
@@ -632,7 +633,7 @@ menupopup[emptyplacesresult="true"] #BMB_viewBookmarksToolbar + menuseparator {
     display: none;
 }
 
-menupopup .openintabs-menuitem:not(.menuitem-iconic, .menu-iconic):before {
+menupopup .openintabs-menuitem:not(.menuitem-iconic, .menu-iconic)::before {
     content: "" !important;
     position: relative !important;
     display: -moz-inline-box !important;
@@ -649,7 +650,7 @@ menupopup .openintabs-menuitem:not(.menuitem-iconic, .menu-iconic) .menu-text {
     padding-inline-start: 0 !important;
 }
 
-#BMB_bookmarksPopup .openintabs-menuitem:not(.menuitem-iconic, .menu-iconic):before {
+#BMB_bookmarksPopup .openintabs-menuitem:not(.menuitem-iconic, .menu-iconic)::before {
     margin-inline: 0 8px !important;
 }
 

@@ -83,24 +83,12 @@
     margin-bottom: 0 !important;
 }
 
-.tabbrowser-tab[usercontextid] .tab-context-line {
-    opacity: 0 !important;
-    transition: none !important;
-}
-
-.tabbrowser-tab[usercontextid]:is(:hover, [selected], [multiselected], .keyboard-focused-tab, [open])
-    .tab-context-line {
-    transform: none;
-    opacity: 1 !important;
-}
-
 /* purple line on multiselected tabs */
 #TabsToolbar .tabbrowser-tab[multiselected="true"] .tab-context-line {
     min-height: 1px !important;
     background-color: var(--multiselected-color) !important;
 }
 
-.tabbrowser-tab .tab-line,
 .tabbrowser-tab .tab-context-line {
     display: -moz-box !important;
     -moz-box-ordinal-group: 2 !important;
@@ -110,7 +98,6 @@
     transition: none !important;
 }
 
-.tabbrowser-tab:not([multiselected]) .tab-line,
 .tabbrowser-tab:not([usercontextid], [multiselected]) .tab-context-line {
     display: none !important;
 }
@@ -222,8 +209,8 @@ otherwise they won't overlap with other tabs, they'll just push tabs 10px away f
     overflow: visible;
 }
 
-.tabbrowser-tab .tab-stack:before,
-.tabbrowser-tab .tab-stack:after {
+.tabbrowser-tab .tab-stack::before,
+.tabbrowser-tab .tab-stack::after {
     bottom: 0;
     content: "";
     display: block;
@@ -234,27 +221,25 @@ otherwise they won't overlap with other tabs, they'll just push tabs 10px away f
     z-index: 2;
 }
 
-.tabbrowser-tab .tab-stack:before {
+.tabbrowser-tab .tab-stack::before {
     mask: url(chrome://userchrome/content/skin/tab-corner-mask-left.svg) 0/100% 100%,
         linear-gradient(#fff, #fff);
     mask-composite: exclude;
     left: -5px;
 }
 
-.tabbrowser-tab .tab-stack:after {
+.tabbrowser-tab .tab-stack::after {
     mask: url(chrome://userchrome/content/skin/tab-corner-mask-right.svg) 0/100% 100%,
         linear-gradient(#fff, #fff);
     mask-composite: exclude;
     right: -5px;
 }
 
-.tabbrowser-tab[usercontextid]:is(:hover, .keyboard-focused-tab, [selected], [visuallyselected], [open]):not([multiselected])
-    .tab-stack:before {
+.tabbrowser-tab[usercontextid]:not([multiselected]) .tab-stack::before {
     left: -4.6px;
 }
 
-.tabbrowser-tab[usercontextid]:is(:hover, .keyboard-focused-tab, [selected], [visuallyselected], [open]):not([multiselected])
-    .tab-stack:after {
+.tabbrowser-tab[usercontextid]:not([multiselected]) .tab-stack::after {
     right: -4.6px;
 }
 
@@ -263,7 +248,7 @@ to create the impression that tabs are layering on top of each other, with right
 this is the normal state but hovering, selecting, pinning, etc. needs to change the z-index so tabs can "pop out" of the stack.
 so because z-index is being modulated so heavily we need to do the same with our outside corners,
 or else they'll end up being covered up or showing through things they shouldn't. */
-.tabbrowser-tab :is(.tab-line, .tab-context-line) {
+.tabbrowser-tab .tab-context-line {
     z-index: 3;
     position: relative !important;
 }
@@ -276,8 +261,8 @@ or else they'll end up being covered up or showing through things they shouldn't
     z-index: 1;
 }
 
-.tabbrowser-tab[pinned] .tab-stack:before,
-.tabbrowser-tab[pinned] .tab-stack:after {
+.tabbrowser-tab[pinned] .tab-stack::before,
+.tabbrowser-tab[pinned] .tab-stack::after {
     z-index: 6;
 }
 
@@ -288,10 +273,10 @@ or else they'll end up being covered up or showing through things they shouldn't
 /* hide the corners on first/last visible tabs, just like we unround the top corners */
 #tabbrowser-tabs:not([movingtab], [using-closing-tabs-spacer])
     .tabbrowser-tab[first-visible-tab]:not([justmoved], [style*="transform"])
-    .tab-stack:before,
+    .tab-stack::before,
 #tabbrowser-tabs:not([movingtab], [using-closing-tabs-spacer])
     .tabbrowser-tab[last-visible-tab]:not([justmoved], [style*="transform"])
-    .tab-stack:after {
+    .tab-stack::after {
     display: none;
 }
 
@@ -299,7 +284,7 @@ or else they'll end up being covered up or showing through things they shouldn't
     #tabbrowser-tabs
     #tabbrowser-arrowscrollbox:not([overflowing="true"])
     .tabbrowser-tab[last-visible-tab][pinned]
-    .tab-stack:after {
+    .tab-stack::after {
     display: block;
 }
 
@@ -307,18 +292,18 @@ or else they'll end up being covered up or showing through things they shouldn't
 it needs to be a gradient image because the bottom line .tab-context-line overlaps with the outside corners.
 we want the corners to take on the color of the bottom line, but the corners are taller than the bottom line, so they can't be fully the same color as the line.
 they must have a 1px tall stripe at the bottom, the color of the bottom line (should it exist), with the remaining 4px being the current bg color of the tab. */
-.tabbrowser-tab:not([selected], [multiselected]) .tab-stack:after,
-.tabbrowser-tab:not([selected], [multiselected]) .tab-stack:before {
+.tabbrowser-tab:not([selected], [multiselected]) .tab-stack::after,
+.tabbrowser-tab:not([selected], [multiselected]) .tab-stack::before {
     background-image: linear-gradient(var(--tab-bg-current), var(--tab-bg-current));
 }
 
-.tabbrowser-tab[selected] .tab-stack:after,
-.tabbrowser-tab[selected] .tab-stack:before {
+.tabbrowser-tab[selected] .tab-stack::after,
+.tabbrowser-tab[selected] .tab-stack::before {
     background-image: linear-gradient(var(--tab-bg-current), var(--tab-bg-current));
 }
 
-.tabbrowser-tab[multiselected] .tab-stack:after,
-.tabbrowser-tab[multiselected] .tab-stack:before {
+.tabbrowser-tab[multiselected] .tab-stack::after,
+.tabbrowser-tab[multiselected] .tab-stack::before {
     background-image: linear-gradient(
         0deg,
         var(--multiselected-color) 0px,
@@ -327,10 +312,8 @@ they must have a 1px tall stripe at the bottom, the color of the bottom line (sh
     );
 }
 
-.tabbrowser-tab[usercontextid]:is([selected], :hover, .keyboard-focused-tab, [open])
-    .tab-stack:after,
-.tabbrowser-tab[usercontextid]:is([selected], :hover, .keyboard-focused-tab, [open])
-    .tab-stack:before {
+.tabbrowser-tab[usercontextid] .tab-stack::after,
+.tabbrowser-tab[usercontextid] .tab-stack::before {
     background-image: linear-gradient(
         0deg,
         var(--identity-tab-color) 0px,
@@ -339,8 +322,8 @@ they must have a 1px tall stripe at the bottom, the color of the bottom line (sh
     );
 }
 
-.tabbrowser-tab[usercontextid][multiselected] .tab-stack:after,
-.tabbrowser-tab[usercontextid][multiselected] .tab-stack:before {
+.tabbrowser-tab[usercontextid][multiselected] .tab-stack::after,
+.tabbrowser-tab[usercontextid][multiselected] .tab-stack::before {
     background-image: linear-gradient(
         0deg,
         var(--multiselected-color) 0px,
@@ -348,6 +331,12 @@ they must have a 1px tall stripe at the bottom, the color of the bottom line (sh
         var(--tab-bg-current) 1px
     );
 }
+
+/* a bunch of rules I might revisit in the future. minified since this is really just a backup.
+these make it so that the tab highlight line on container tabs only shows when the tab strip (or the tab itself) is being hovered.
+I used these rules for a long time but I realized although it might be aesthetically less jarring, it makes it harder to find your container tabs,
+which could represent a security risk if you accidentally use the wrong container because you couldn't find the tab you were looking for. */
+/* .tabbrowser-tab[usercontextid] .tab-context-line{opacity:0!important;transition:none!important;}#tabbrowser-tabs:is(:hover,:focus-within) .tabbrowser-tab[usercontextid] .tab-context-line,.tabbrowser-tab[usercontextid]:is(:hover,[selected],[multiselected],.keyboard-focused-tab,[open]) .tab-context-line{transform:none;opacity:1!important;}#tabbrowser-tabs:is(:hover,:focus-within) .tabbrowser-tab[usercontextid]:not([multiselected]) .tab-stack::before,.tabbrowser-tab[usercontextid]:is(:hover,.keyboard-focused-tab,[selected],[visuallyselected],[open]):not([multiselected]) .tab-stack::before{left:-4.6px;}#tabbrowser-tabs:is(:hover,:focus-within) .tabbrowser-tab[usercontextid]:not([multiselected]) .tab-stack::after,.tabbrowser-tab[usercontextid]:is(:hover,.keyboard-focused-tab,[selected],[visuallyselected],[open]):not([multiselected]) .tab-stack::after{right:-4.6px;}#tabbrowser-tabs:is(:hover,:focus-within) .tabbrowser-tab[usercontextid]:not([multiselected]) .tab-stack::after,#tabbrowser-tabs:is(:hover,:focus-within) .tabbrowser-tab[usercontextid]:not([multiselected]) .tab-stack::before,.tabbrowser-tab[usercontextid]:is([selected],:hover,.keyboard-focused-tab,[open]) .tab-stack::after,.tabbrowser-tab[usercontextid]:is([selected],:hover,.keyboard-focused-tab,[open]) .tab-stack::before{background-image:linear-gradient(0deg,var(--identity-tab-color) 0,var(--identity-tab-color) 1px,var(--tab-bg-current) 1px);} */
 
 /* the corners inherit these variables from the tab, just like they do with --identity-tab-color */
 .tabbrowser-tab:not([selected], [pinned]) {
@@ -373,8 +362,8 @@ they must have a 1px tall stripe at the bottom, the color of the bottom line (sh
 
 /* disable the corners if the pref is enabled */
 @supports -moz-bool-pref("userChrome.tabs.rounded-outer-corners.disabled") {
-    .tabbrowser-tab .tab-stack:before,
-    .tabbrowser-tab .tab-stack:after {
+    .tabbrowser-tab .tab-stack::before,
+    .tabbrowser-tab .tab-stack::after {
         display: none;
     }
 

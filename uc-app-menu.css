@@ -243,7 +243,7 @@
     transform: scaleX(-1);
 }
 
-#appMenuRestoreLastSession {
+#appMenu-restoreSession {
     list-style-image: url(chrome://userchrome/content/skin/restore-session.svg);
 }
 
@@ -337,7 +337,7 @@
     list-style-image: url(chrome://userchrome/content/mozilla-logo.svg) !important;
 }
 
-#appMenu-fxa-label2:before {
+#appMenu-fxa-label2::before {
     display: -moz-box;
     content: "";
     background-image: var(--fxa-ui-img, url(chrome://userchrome/content/fxa/avatar-big.svg));
@@ -370,7 +370,7 @@
 #PanelUI-fxa-menu-remotetabs-button > .toolbarbutton-text,
 #appMenuRecentlyClosedTabs > .toolbarbutton-text,
 #appMenuClearRecentHistory > .toolbarbutton-text,
-#appMenuRestoreLastSession > .toolbarbutton-text,
+#appMenu-restoreSession > .toolbarbutton-text,
 #appMenuRecentlyClosedWindows > .toolbarbutton-text,
 #appMenu-settings-button > .toolbarbutton-text,
 #appMenu-advanced-settings-button > .toolbarbutton-text,
@@ -383,7 +383,7 @@
     padding-inline-start: 8px !important;
 }
 
-#appMenu-zoom-controls2:before {
+#appMenu-zoom-controls2::before {
     content: "";
     display: block;
     width: 16px;
@@ -504,7 +504,7 @@
     font-size: 1em !important;
 }
 
-#appMenu-fxa-status2:not([fxastatus]) > #appMenu-fxa-label2:before {
+#appMenu-fxa-status2:not([fxastatus]) > #appMenu-fxa-label2::before {
     display: none !important;
 }
 
@@ -512,7 +512,7 @@
     padding: 0 !important;
 }
 
-#appMenu-fxa-status2:not([fxastatus]):before {
+#appMenu-fxa-status2:not([fxastatus])::before {
     -moz-context-properties: fill, fill-opacity;
     content: url(chrome://userchrome/content/fxa/avatar-big.svg);
     fill: currentColor;
@@ -537,7 +537,7 @@
     fill: var(--arrowpanel-color);
 }
 
-:root[fxastatus="signedin"] #fxa-manage-account-button:after {
+:root[fxastatus="signedin"] #fxa-manage-account-button::after {
     content: "";
     display: -moz-inline-box;
     width: 28px;
