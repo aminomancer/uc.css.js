@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Urlbar Tab URL Indicator
-// @version        1.0
+// @version        1.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Upon hovering a tab, replace the urlbar's text (at least, appear to do so) with the hovered tab's URL instead of showing a normal tab tooltip. This is actually a mod of the tab tooltip, so the urlbar's text remains intact. If we changed the urlbar's text directly it would massively increase the complexity of the script and make it more prone to bugs or future breakdowns. So instead we just change how the tab tooltip works and looks so that it is indistinguishable from the urlbar's text.
@@ -13,6 +13,9 @@
             padding: 0;
             margin: 0;
             font-size: 1.15em;
+            width: min-content;
+            max-width: min-content;
+            min-width: 0px;
         }
         :root[tab-tooltip-visible] .urlbar-input-box input {
             visibility: hidden !important;
