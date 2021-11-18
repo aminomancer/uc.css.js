@@ -714,6 +714,7 @@ panel[type="autocomplete-richlistbox"]
 @-moz-document url("chrome://global/content/commonDialog.xhtml"),
     url("chrome://mozapps/content/handling/permissionDialog.xhtml"),
     url("chrome://mozapps/content/handling/appChooser.xhtml"),
+    url("chrome://global/content/appPicker.xhtml"),
     url("chrome://mozapps/content/downloads/unknownContentType.xhtml"),
     url-prefix("chrome://browser/content/sanitize.xhtml")
 {
@@ -868,7 +869,7 @@ panel[type="autocomplete-richlistbox"]
     }
 
     richlistbox[id] richlistitem[selected="true"] {
-        background-color: var(--arrowpanel-dimmed) !important;
+        background-color: var(--in-content-button-background) !important;
         color: var(--in-content-page-color) !important;
     }
 
@@ -1011,8 +1012,48 @@ panel[type="autocomplete-richlistbox"]
     }
 }
 
-@-moz-document url("chrome://mozapps/content/downloads/unknownContentType.xhtml")
+@-moz-document url("chrome://mozapps/content/downloads/unknownContentType.xhtml"),
+    url("chrome://global/content/appPicker.xhtml")
 {
+    :root,
+    :root dialog {
+        --in-content-page-background: var(--content-principal-page-background) !important;
+        --in-content-page-color: var(--content-principal-page-color) !important;
+        --in-content-box-background: var(--content-principal-box-background) !important;
+        --in-content-box-background-odd: var(--content-principal-box-background-odd) !important;
+        --in-content-box-background-dim: var(--content-principal-box-background-dim) !important;
+        --in-content-box-border-color: var(--content-principal-box-border-color) !important;
+        --in-content-button-background: var(--content-principal-button-background) !important;
+        --in-content-button-background-hover: var(
+            --content-principal-button-background-hover
+        ) !important;
+        --in-content-button-background-active: var(
+            --content-principal-button-background-active
+        ) !important;
+        --in-content-button-background-solid: var(--content-principal-button-background-solid);
+        --in-content-item-selected: var(--purple-40) !important;
+        --in-content-border-highlight: var(--purple-40) !important;
+        --in-content-border-hover: var(--content-principal-border-hover) !important;
+        --in-content-border-focus: var(--purple-40) !important;
+        --in-content-border-active: var(--purple-40) !important;
+        --in-content-border-active-shadow: var(--purple-40-a30) !important;
+        --in-content-category-outline-focus: 1px solid transparent !important;
+        --in-content-link-color: var(--purple-30) !important;
+        --in-content-link-color-hover: var(--purple-25) !important;
+        --in-content-link-color-active: var(--purple-20) !important;
+        --in-content-link-visited-color: var(--pink-40) !important;
+        --in-content-link-visited-color-hover: var(--pink-35) !important;
+        --in-content-link-visited-color-active: var(--pink-30) !important;
+        --in-content-primary-button-background: var(--purple-40) !important;
+        --in-content-primary-button-background-hover: var(--purple-35) !important;
+        --in-content-primary-button-background-active: var(--purple-30) !important;
+        --in-content-primary-button-text-color: var(--in-content-page-color) !important;
+        --in-content-button-border-radius: var(--general-button-border-radius) !important;
+        --in-content-accent-color: var(--purple-35) !important;
+        --in-content-table-background: var(--in-content-box-background) !important;
+        --in-content-table-header-background: var(--purple-40-a30) !important;
+    }
+
     #unknownContentType {
         padding: 10px !important;
     }
@@ -1048,6 +1089,11 @@ panel[type="autocomplete-richlistbox"]
     .dialog-button-box button {
         margin: 0 !important;
         min-height: var(--menuitem-height) !important;
+    }
+
+    richlistbox[id] {
+        background-color: var(--in-content-box-background) !important;
+        border-radius: var(--general-button-border-radius);
     }
 
     @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {

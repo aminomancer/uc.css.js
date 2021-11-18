@@ -1917,7 +1917,8 @@ of the animations. */
     }
 }
 
-@-moz-document url("chrome://mozapps/content/downloads/unknownContentType.xhtml")
+@-moz-document url("chrome://mozapps/content/downloads/unknownContentType.xhtml"),
+    url("chrome://global/content/appPicker.xhtml")
 {
     :root {
         --in-content-page-color: rgb(21, 20, 26);

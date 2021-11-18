@@ -129,6 +129,7 @@ menuitem#repair-text-encoding .menu-text,
 menuitem#menu_openDownloads .menu-text,
 menuitem#menu_openAddons .menu-text,
 #addon_darkreader_org-menuitem-_DarkReader-toggle .menu-text,
+#private-relay_firefox_com-menuitem-_fx-private-relay-generate-alias > .menu-text,
 #menu_pageInfo .menu-text,
 menuitem:is(#sync-setup, #sync-unverifieditem, #sync-reauthitem) .menu-text,
 menuitem:is(#sync-enable, #sync-syncnowitem) .menu-text,
@@ -352,6 +353,7 @@ menuitem:not(.menuitem-iconic)[oncommand="_ucUtils.restart(true)"]::before,
 menuitem#menu_openDownloads::before,
 menuitem#menu_openAddons::before,
 #addon_darkreader_org-menuitem-_DarkReader-toggle::before,
+#private-relay_firefox_com-menuitem-_fx-private-relay-generate-alias::before,
 #menu_pageInfo::before,
 menuitem:is(#sync-setup, #sync-unverifieditem, #sync-reauthitem)::before,
 menuitem:is(#sync-enable, #sync-syncnowitem)::before,
@@ -771,6 +773,12 @@ menuitem#menu_openDownloads::before {
 menuitem#menu_openAddons::before,
 #addon_darkreader_org-menuitem-_DarkReader-toggle::before {
     background-image: url(chrome://browser/content/extension.svg);
+}
+
+#private-relay_firefox_com-menuitem-_fx-private-relay-generate-alias::before {
+    /* background-image: url(chrome://userchrome/content/material/address-sign.svg);
+    stroke: currentColor; */
+    background-image: url(chrome://userchrome/content/material/contact-mail.svg);
 }
 
 menuitem:is(#sync-setup, #sync-unverifieditem)::before {
