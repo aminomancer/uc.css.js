@@ -416,7 +416,7 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
 }
 
 :is(#allTabsMenu-containerTabsButton, #allTabsMenu-searchTabs) .toolbarbutton-text {
-    padding-inline-start: 8px;
+    padding-inline-start: var(--arrowpanel-subviewbutton-iconic-gap, 8px);
 }
 
 .all-tabs-item:is([selected], [multiselected], [usercontextid]) .all-tabs-button {
@@ -593,7 +593,7 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
 }
 
 .subviewbutton[command="Browser:OpenAboutContainers"]:not(.subviewbutton-iconic, [image]) > .toolbarbutton-text {
-    padding-inline-start: 8px !important;
+    padding-inline-start: var(--arrowpanel-subviewbutton-iconic-gap, 8px) !important;
 }
 
 /* move titlebar buttons to the left on macOS and linux */

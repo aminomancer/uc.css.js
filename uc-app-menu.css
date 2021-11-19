@@ -251,6 +251,14 @@
     list-style-image: url(chrome://userchrome/content/skin/window.svg);
 }
 
+:is(#appMenu-library-recentlyClosedTabs, #appMenu-library-recentlyClosedWindows) .restoreallitem {
+    list-style-image: url(chrome://userchrome/content/skin/restore-session.svg);
+}
+
+#PanelUI-historyMore {
+    list-style-image: url(chrome://userchrome/content/skin/sort.svg);
+}
+
 #appMenu-settings-button {
     list-style-image: url(chrome://userchrome/content/settings.svg);
 }
@@ -350,6 +358,44 @@
     -moz-context-properties: fill, fill-opacity;
 }
 
+#appMenu_menu_openHelp {
+    list-style-image: url(chrome://userchrome/content/help-solid.svg);
+}
+
+#appMenu_feedbackPage {
+    list-style-image: url(chrome://userchrome/content/material/rate.svg);
+}
+
+#appMenu_helpSafeMode {
+    list-style-image: url(chrome://userchrome/content/material/auto-fix.svg);
+}
+
+#appMenu_troubleShooting {
+    list-style-image: url(chrome://userchrome/content/material/drugs.svg);
+}
+
+#appMenu_help_reportSiteIssue {
+    list-style-image: url(chrome://userchrome/content/material/bug.svg);
+}
+
+#appMenu_menu_HelpPopup_reportPhishingtoolmenu .toolbarbutton-icon {
+    list-style-image: url(chrome://userchrome/content/material/phishing.svg);
+    stroke: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+}
+
+#appMenu_menu_HelpPopup_reportPhishingErrortoolmenu {
+    list-style-image: url(chrome://userchrome/content/material/verified.svg);
+}
+
+#appMenu_aboutName {
+    list-style-image: url(chrome://userchrome/content/info-filled.svg);
+}
+
+#appMenu_helpPolicySupport::before {
+    background-image: url(chrome://userchrome/content/help-square.svg);
+}
+
 #appMenu-save-file-button2 > .toolbarbutton-text,
 #appMenu-more-button2 > .toolbarbutton-text,
 #appMenu-help-button2 > .toolbarbutton-text,
@@ -372,6 +418,10 @@
 #appMenuClearRecentHistory > .toolbarbutton-text,
 #appMenu-restoreSession > .toolbarbutton-text,
 #appMenuRecentlyClosedWindows > .toolbarbutton-text,
+:is(#appMenu-library-recentlyClosedTabs, #appMenu-library-recentlyClosedWindows)
+    .restoreallitem
+    > .toolbarbutton-text,
+#PanelUI-historyMore > .toolbarbutton-text,
 #appMenu-settings-button > .toolbarbutton-text,
 #appMenu-advanced-settings-button > .toolbarbutton-text,
 #appmenu-moreTools-button > .toolbarbutton-text,
@@ -379,8 +429,17 @@
 #appMenu-restart-button2 > .toolbarbutton-text,
 #appMenu-zoom-controls2 > .toolbarbutton-text,
 #appMenu-fxa-status2 :is(label, div),
-#appmenu-developer-tools-view toolbarbutton .toolbarbutton-text {
-    padding-inline-start: 8px !important;
+#appmenu-developer-tools-view toolbarbutton .toolbarbutton-text,
+#appMenu_menu_openHelp > .toolbarbutton-text,
+#appMenu_feedbackPage > .toolbarbutton-text,
+#appMenu_helpSafeMode > .toolbarbutton-text,
+#appMenu_troubleShooting > .toolbarbutton-text,
+#appMenu_help_reportSiteIssue > .toolbarbutton-text,
+#appMenu_menu_HelpPopup_reportPhishingtoolmenu > .toolbarbutton-text,
+#appMenu_menu_HelpPopup_reportPhishingErrortoolmenu > .toolbarbutton-text,
+#appMenu_aboutName > .toolbarbutton-text,
+#appMenu_helpPolicySupport > .toolbarbutton-text {
+    padding-inline-start: var(--arrowpanel-subviewbutton-iconic-gap, 8px) !important;
 }
 
 #appMenu-zoom-controls2::before {
@@ -530,7 +589,7 @@
     list-style-image: var(--avatar-image-url);
     display: -moz-inline-box;
     -moz-box-ordinal-group: 2;
-    margin-inline-start: 8px;
+    margin-inline-start: var(--arrowpanel-subviewbutton-iconic-gap, 8px);
     height: 28px !important;
     width: 28px !important;
     -moz-context-properties: fill, fill-opacity;
@@ -542,7 +601,7 @@
     display: -moz-inline-box;
     width: 28px;
     height: 28px;
-    margin-inline: 8px 0;
+    margin-inline: var(--arrowpanel-subviewbutton-iconic-gap, 8px) 0;
     background: var(--avatar-image-url) center/contain no-repeat;
     -moz-context-properties: fill, fill-opacity;
     fill: var(--arrowpanel-color);
@@ -565,7 +624,7 @@
 #PanelUI-fxa-menu-sendtab-button .toolbarbutton-text,
 #PanelUI-fxa-menu-sync-prefs-button .toolbarbutton-text,
 #PanelUI-fxa-menu-account-signout-button .toolbarbutton-text {
-    padding-inline-start: 8px !important;
+    padding-inline-start: var(--arrowpanel-subviewbutton-iconic-gap, 8px) !important;
 }
 
 #PanelUI-fxa-menu-syncnow-button image {

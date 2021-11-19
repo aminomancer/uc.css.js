@@ -432,10 +432,24 @@
             --in-content-primary-button-background-hover: var(--ui-text-80) !important;
             --in-content-primary-button-background-active: var(--ui-text-70) !important;
             --in-content-primary-button-text-color: black !important;
+            --in-content-link-color: var(--in-content-primary-button-background) !important;
+            --in-content-link-color-hover: var(--in-content-primary-button-background-hover) !important;
+            --in-content-link-color-active: var(--in-content-primary-button-background-active) !important;
+            --in-content-link-visited-color: var(--ui-text-70) !important;
+            --in-content-link-visited-color-hover: var(--ui-text-60) !important;
+            --in-content-link-visited-color-active: var(--ui-text-50) !important;
         }
 
         body {
             background: var(--warning-icon-detail) !important;
+        }
+
+        #errorPageContainer .title {
+            min-height: 1.6em !important;
+        }
+
+        #errorPageContainer .title-text {
+            padding-block: 0.2em !important;
         }
 
         #errorPageContainer .button-container button {

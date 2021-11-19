@@ -134,7 +134,16 @@ menuitem#menu_openAddons .menu-text,
 menuitem:is(#sync-setup, #sync-unverifieditem, #sync-reauthitem) .menu-text,
 menuitem:is(#sync-enable, #sync-syncnowitem) .menu-text,
 menu#browserToolsMenu:not(.menu-iconic) > .menu-text,
-menuitem#menu_preferences .menu-text,
+menuitem#menu_preferences > .menu-text,
+menuitem#menu_openHelp > .menu-text,
+menuitem#feedbackPage > .menu-text,
+menuitem#helpSafeMode > .menu-text,
+menuitem#troubleShooting > .menu-text,
+menuitem#help_reportSiteIssue > .menu-text,
+menuitem#menu_HelpPopup_reportPhishingtoolmenu > .menu-text,
+menuitem#menu_HelpPopup_reportPhishingErrortoolmenu > .menu-text,
+menuitem#aboutName > .menu-text,
+menuitem#helpPolicySupport > .menu-text,
 #context-frameOsPid .menu-text,
 #context-reloadframe .menu-text,
 #context-reloadimage .menu-text,
@@ -235,13 +244,9 @@ menuitem#enableDeveloperTools .menu-text,
 #discardTab .menu-text,
 #historyUndoWindowMenu > .menu-text,
 #historyUndoMenu > .menu-text,
-#historyUndoWindowMenu3 > .menu-text,
-#tabContextMenu-historyUndoWindowMenu3 > .menu-text,
-#toolbar-context-menu-historyUndoWindowMenu3 > .menu-text,
-#tabContextUndoList > .menu-text,
-#tabContextMenu-tabContextUndoList > .menu-text,
-#toolbar-context-menu-tabContextUndoList > .menu-text,
-#tabContextMenu menuitem.restoreallitem .menu-text,
+.recently-closed-windows-menu > .menu-text,
+.recently-closed-tabs-menu > .menu-text,
+:is(.recently-closed-windows-menu, .recently-closed-tabs-menu, #historyUndoMenu, #historyUndoWindowMenu) menuitem.restoreallitem .menu-text,
 #recently-closed-restore > .menu-text,
 #recently-closed-restore-in-new-window > .menu-text,
 #recently-closed-restore-in-new-private-window > .menu-text,
@@ -359,6 +364,15 @@ menuitem:is(#sync-setup, #sync-unverifieditem, #sync-reauthitem)::before,
 menuitem:is(#sync-enable, #sync-syncnowitem)::before,
 menu#browserToolsMenu:not(.menu-iconic)::before,
 menuitem#menu_preferences::before,
+menuitem#menu_openHelp::before,
+menuitem#feedbackPage::before,
+menuitem#helpSafeMode::before,
+menuitem#troubleShooting::before,
+menuitem#help_reportSiteIssue::before,
+menuitem#menu_HelpPopup_reportPhishingtoolmenu::before,
+menuitem#menu_HelpPopup_reportPhishingErrortoolmenu::before,
+menuitem#aboutName::before,
+menuitem#helpPolicySupport::before,
 #context-viewbgimage::before,
 #context-setDesktopBackground::before,
 :is(#context-savepage, menu#pageStyleMenu, #addon_darkreader_org-menuitem-_DarkReader-addSite)::before,
@@ -510,13 +524,9 @@ menuitem#enableDeveloperTools::before,
 #discardTab::before,
 #historyUndoWindowMenu::before,
 #historyUndoMenu::before,
-#historyUndoWindowMenu3::before,
-#tabContextMenu-historyUndoWindowMenu3::before,
-#toolbar-context-menu-historyUndoWindowMenu3::before,
-#tabContextUndoList::before,
-#tabContextMenu-tabContextUndoList::before,
-#toolbar-context-menu-tabContextUndoList::before,
-#tabContextMenu menuitem.restoreallitem::before,
+.recently-closed-windows-menu::before,
+.recently-closed-tabs-menu::before,
+:is(.recently-closed-windows-menu, .recently-closed-tabs-menu, #historyUndoMenu, #historyUndoWindowMenu) menuitem.restoreallitem::before,
 #recently-closed-restore::before,
 #recently-closed-restore-in-new-window::before,
 #recently-closed-restore-in-new-private-window::before,
@@ -803,6 +813,45 @@ menu#browserToolsMenu:not(.menu-iconic)::before {
 
 menuitem#menu_preferences::before {
     background-image: url(chrome://userchrome/content/settings.svg);
+}
+
+/* menu bar > help menu */
+menuitem#menu_openHelp::before {
+    background-image: url(chrome://userchrome/content/help-solid.svg);
+}
+
+menuitem#feedbackPage::before {
+    background-image: url(chrome://userchrome/content/material/rate.svg);
+}
+
+menuitem#helpSafeMode::before {
+    background-image: url(chrome://userchrome/content/material/auto-fix.svg);
+}
+
+menuitem#troubleShooting::before {
+    background-image: url(chrome://userchrome/content/material/drugs.svg);
+}
+
+menuitem#help_reportSiteIssue::before {
+    background-image: url(chrome://userchrome/content/material/bug.svg);
+}
+
+menuitem#menu_HelpPopup_reportPhishingtoolmenu::before {
+    background-image: url(chrome://userchrome/content/material/phishing.svg);
+    stroke: currentColor !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+}
+
+menuitem#menu_HelpPopup_reportPhishingErrortoolmenu::before {
+    background-image: url(chrome://userchrome/content/material/verified.svg);
+}
+
+menuitem#aboutName::before {
+    background-image: url(chrome://userchrome/content/info-filled.svg);
+}
+
+menuitem#helpPolicySupport::before {
+    background-image: url(chrome://userchrome/content/help-square.svg);
 }
 
 :is(#context-setDesktopBackground, #context-viewbgimage)::before {
@@ -1223,20 +1272,16 @@ menuitem#enableDeveloperTools::before {
 /* menuitems added by recentlyClosedTabsContextMenu.uc.js */
 /* these are for the tab context menu's submenus */
 #historyUndoWindowMenu::before,
-#historyUndoWindowMenu3::before,
-#tabContextMenu-historyUndoWindowMenu3::before,
-#toolbar-context-menu-historyUndoWindowMenu3::before {
+.recently-closed-windows-menu::before {
     background-image: url(chrome://userchrome/content/skin/window.svg);
 }
 
 #historyUndoMenu::before,
-#tabContextUndoList::before,
-#tabContextMenu-tabContextUndoList::before,
-#toolbar-context-menu-tabContextUndoList::before {
+.recently-closed-tabs-menu::before {
     background-image: url(chrome://userchrome/content/skin/tab.svg);
 }
 
-#tabContextMenu menuitem.restoreallitem::before {
+:is(.recently-closed-windows-menu, .recently-closed-tabs-menu, #historyUndoMenu, #historyUndoWindowMenu) menuitem.restoreallitem::before {
     background-image: url(chrome://userchrome/content/skin/restore-session.svg);
 }
 

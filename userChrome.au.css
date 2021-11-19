@@ -207,6 +207,23 @@ menupopup::part(arrowscrollbox),
     line-height: revert;
 }
 
+:is(.tab-throbber, .tab-icon-pending, .tab-icon-image, .tab-sharing-icon-overlay, .tab-icon-overlay):not([pinned]) {
+	margin-inline-end: 6px;
+}
+
+/* panel icon margin */
+#BMB_bookmarksPopup .subviewbutton > .menu-iconic-text,
+#PlacesToolbar menu > .menu-iconic-text,
+#PlacesToolbar menuitem > .menu-iconic-text,
+.addon-banner-item > .toolbarbutton-text,
+.subviewbutton-iconic > .toolbarbutton-text,
+.subviewbutton[image] > .toolbarbutton-text,
+.subviewbutton[targetURI] > .toolbarbutton-text,
+.subviewbutton.bookmark-item > .toolbarbutton-text,
+.subviewbutton[checked="true"] > .toolbarbutton-text {
+	padding-inline-start: var(--arrowpanel-subviewbutton-iconic-gap, 8px);
+}
+
 /* hide tab bar's arrow buttons and spacers */
 #tabbrowser-arrowscrollbox::part(overflow-start-indicator),
 #tabbrowser-arrowscrollbox::part(overflow-end-indicator),

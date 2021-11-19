@@ -1672,7 +1672,7 @@ richlistitem.download-state > .downloadButton.downloadIconCancel .button-box .bu
 
 #identity-popup-clear-sitedata-button .toolbarbutton-text,
 #identity-popup-more-info .toolbarbutton-text {
-    padding-inline-start: 8px !important;
+    padding-inline-start: var(--arrowpanel-subviewbutton-iconic-gap, 8px) !important;
 }
 
 #protections-popup-settings-button {
@@ -1691,7 +1691,7 @@ richlistitem.download-state > .downloadButton.downloadIconCancel .button-box .bu
 
 #protections-popup-settings-button .protections-popup-footer-button-label,
 #protections-popup-show-report-button .protections-popup-footer-button-label {
-    padding-inline-start: 8px !important;
+    padding-inline-start: var(--arrowpanel-subviewbutton-iconic-gap, 8px) !important;
 }
 
 #downloads-button-autohide-panel {
