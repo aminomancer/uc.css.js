@@ -1285,28 +1285,28 @@ menuitem#enableDeveloperTools::before {
     background-image: url(chrome://userchrome/content/skin/restore-session.svg);
 }
 
-#recently-closed-restore {
+#recently-closed-restore::before {
     background-image: url(chrome://userchrome/content/skin/restore-session.svg);
 }
 
 /* for the context menu that appears when you right-click a recently closed tab/window item in the history panel */
-#recently-closed-restore-in-new-window {
+#recently-closed-restore-in-new-window::before {
     background-image: url(chrome://userchrome/content/skin/new-window.svg);
 }
 
-#recently-closed-restore-in-new-private-window {
+#recently-closed-restore-in-new-private-window::before {
     background-image: url(chrome://userchrome/content/skin/new-private.svg);
 }
 
-#recently-closed-remove-from-list {
+#recently-closed-remove-from-list::before {
     background-image: url(chrome://userchrome/content/delete.svg);
 }
 
-#recently-closed-remove-from-history {
+#recently-closed-remove-from-history::before {
     background-image: url(chrome://userchrome/content/skin/forget.svg);
 }
 
-#recently-closed-bookmark {
+#recently-closed-bookmark::before {
     background-image: url(chrome://userchrome/content/skin/add-bookmark.svg);
 }
 

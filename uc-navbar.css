@@ -2,7 +2,7 @@
 if it's visible in the row beneath the tabs then it's probably in here. */
 
 /* remove line under navigation toolbar */
-#navigator-toolbox:-moz-lwtheme,
+#navigator-toolbox,
 :root:not([sizemode="normal"]) #navigator-toolbox {
     border: none !important;
 }
@@ -335,7 +335,8 @@ toolbar .toolbarbutton-1:not([disabled], [open])[checked]:hover:active > .toolba
     flex-grow: 1;
 }
 
-:root[inFullscreen]:not([macOSNativeFullscreen], [customizing]) #PersonalToolbar:not([fullscreentoolbar="true"]),
+:root[inFullscreen]:not([macOSNativeFullscreen], [customizing])
+    #PersonalToolbar:not([fullscreentoolbar="true"]),
 #PersonalToolbar[collapsed="true"],
 :root:not([customizing])
     > body

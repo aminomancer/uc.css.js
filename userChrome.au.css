@@ -10,16 +10,12 @@ the last 75% or so of this stylesheet is dedicated to restoring pre-proton conte
     --avatar-image-url: url(chrome://userchrome/content/fxa/avatar-empty-big.svg);
 }
 
-:is(#mainPopupSet, #browser, #navigator-toolbox, .sidebar-panel) ::selection,
-link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
-{
+:is(#mainPopupSet, #browser, #navigator-toolbox, .sidebar-panel) ::selection {
     background-color: var(--ui-selection-bgcolor);
     color: var(--ui-selection-color);
 }
 
-:is(#mainPopupSet, #browser, #navigator-toolbox, .sidebar-panel) :where(input, textarea):not(:focus, :focus-within):-moz-lwtheme::selection,
-link[href="chrome://global/skin/search-textbox.css"] ~ :where(input, textarea):not(:focus, :focus-within):-moz-lwtheme::selection
-{
+:is(#mainPopupSet, #browser, #navigator-toolbox, .sidebar-panel) :-moz-window-inactive::selection {
     background-color: var(--ui-selection-bgcolor-disabled, text-select-disabled-background);
 }
 
@@ -30,7 +26,7 @@ link[href="chrome://global/skin/search-textbox.css"] ~ :where(input, textarea):n
         color: var(--global-selection-color);
     }
 
-    :where(input, textarea):not(:focus, :focus-within):-moz-lwtheme::selection {
+    :-moz-window-inactive::selection {
         background-color: var(--global-selection-bgcolor-disabled, text-select-disabled-background);
     }
 }
@@ -455,7 +451,7 @@ panel[type="autocomplete-richlistbox"]
     background-color: var(--button-active-bgcolor);
 }
 
-.customizationmode-checkbox:not(:-moz-lwtheme, [disabled]),
+.customizationmode-checkbox:not([disabled]),
 .customizationmode-button {
     color: var(--toolbar-color);
 }

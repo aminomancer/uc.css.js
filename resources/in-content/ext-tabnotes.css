@@ -9,7 +9,8 @@ which you can download from the extensions folder in the main directory. */
         background-color: var(--content-selection-bgcolor) !important;
     }
 
-    :where(textarea, input):not(:focus, :focus-within)::selection {
+    textarea:-moz-window-inactive::selection,
+    :-moz-window-inactive::selection {
         background-color: var(--content-selection-bgcolor-disabled) !important;
     }
 }

@@ -582,7 +582,7 @@ menupopup menuitem[class^="unified-nav"][uri="moz-extension://e158f52d-b5db-4594
 }
 
 /* invert github's black icon */
-:is(.menu-iconic-icon, .toolbarbutton-icon, .urlbarView-favicon):-moz-lwtheme-brighttext:is([src^="page-icon:https://github.com"], [src^="page-icon:http://github.com"])
+:is(.menu-iconic-icon, .toolbarbutton-icon, .urlbarView-favicon)-brighttext:is([src^="page-icon:https://github.com"], [src^="page-icon:http://github.com"])
 {
     filter: invert(1) brightness(10);
 }

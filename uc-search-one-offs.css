@@ -331,11 +331,6 @@ it also changes the appearance of the one-offs in the searchbar. */
     transform: none !important;
 }
 
-#userContext-icons,
-#userContext-icons > * {
-    pointer-events: none !important;
-}
-
 /* #page-action-buttons,
 #urlbar-input-container > .urlbar-icon {
     pointer-events: none !important;

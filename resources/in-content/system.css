@@ -43,7 +43,7 @@
             background-color: var(--content-selection-bgcolor) !important;
         }
 
-        :where(input, textarea, [contenteditable="true"]):not(:focus, :focus-within)::selection {
+        :-moz-window-inactive::selection {
             background-color: var(--content-selection-bgcolor-disabled) !important;
         }
 
@@ -433,8 +433,12 @@
             --in-content-primary-button-background-active: var(--ui-text-70) !important;
             --in-content-primary-button-text-color: black !important;
             --in-content-link-color: var(--in-content-primary-button-background) !important;
-            --in-content-link-color-hover: var(--in-content-primary-button-background-hover) !important;
-            --in-content-link-color-active: var(--in-content-primary-button-background-active) !important;
+            --in-content-link-color-hover: var(
+                --in-content-primary-button-background-hover
+            ) !important;
+            --in-content-link-color-active: var(
+                --in-content-primary-button-background-active
+            ) !important;
             --in-content-link-visited-color: var(--ui-text-70) !important;
             --in-content-link-visited-color-hover: var(--ui-text-60) !important;
             --in-content-link-visited-color-active: var(--ui-text-50) !important;

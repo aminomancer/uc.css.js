@@ -6,7 +6,7 @@
         color: var(--global-selection-color) !important;
     }
 
-    :where(input, textarea, [contenteditable="true"]):not(:focus, :focus-within)::selection {
+    :-moz-window-inactive::selection {
         background-color: var(--global-selection-bgcolor-disabled) !important;
     }
 
@@ -70,7 +70,7 @@
             background-color: var(--content-selection-bgcolor) !important;
         }
 
-        :where(input, textarea, [contenteditable="true"]):not(:focus, :focus-within)::selection {
+        :-moz-window-inactive::selection {
             background-color: var(--content-selection-bgcolor-disabled) !important;
         }
     }

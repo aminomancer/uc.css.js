@@ -502,7 +502,7 @@ there are normally no twistys in sorted trees so it is relatively safe to collap
         color: var(--ui-selection-color) !important;
     }
 
-    :where(input, textarea):not(:focus, :focus-within):-moz-lwtheme::selection {
+    :-moz-window-inactive::selection {
         background-color: var(--ui-selection-bgcolor-disabled, text-select-disabled-background) !important;
     }
 }

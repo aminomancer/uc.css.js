@@ -120,7 +120,7 @@ tabmodalprompt :is(input, textarea)::selection {
     color: var(--ui-selection-color) !important;
 }
 
-tabmodalprompt :is(input, textarea):not(:focus, :focus-within):-moz-lwtheme::selection {
+tabmodalprompt :-moz-window-inactive::selection {
     background-color: var(
         --ui-selection-bgcolor-disabled,
         text-select-disabled-background
@@ -936,8 +936,8 @@ panel[type="autocomplete-richlistbox"]
         color: var(--ui-selection-color) !important;
     }
 
-    input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):not(:focus, :focus-within):-moz-lwtheme::selection,
-    textarea:not(:focus, :focus-within):-moz-lwtheme::selection {
+    input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):-moz-window-inactive::selection,
+    textarea:-moz-window-inactive::selection {
         background-color: var(
             --ui-selection-bgcolor-disabled,
             text-select-disabled-background
@@ -950,8 +950,8 @@ panel[type="autocomplete-richlistbox"]
         color: var(--global-selection-color) !important;
     }
 
-    window[role="dialog"] :not(:focus, :focus-within):-moz-lwtheme::selection,
-    window[role="dialog"] textarea:not(:focus, :focus-within):-moz-lwtheme::selection {
+    window[role="dialog"] :-moz-window-inactive::selection,
+    window[role="dialog"] textarea:-moz-window-inactive::selection {
         background-color: var(
             --global-selection-bgcolor-disabled,
             text-select-disabled-background
@@ -1216,8 +1216,8 @@ panel[type="autocomplete-richlistbox"]
     }
 
     :root[dialogroot]
-        input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):not(:focus, :focus-within):-moz-lwtheme::selection,
-    :root[dialogroot] textarea:not(:focus, :focus-within):-moz-lwtheme::selection {
+        input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):-moz-window-inactive::selection,
+    :root[dialogroot] textarea:-moz-window-inactive::selection {
         background-color: var(
             --ui-selection-bgcolor-disabled,
             text-select-disabled-background

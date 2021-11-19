@@ -312,6 +312,16 @@ progress[paused]:indeterminate::-moz-progress-bar {
     -moz-box-align: center !important;
 }
 
+/* selection */
+link[href="chrome://global/skin/search-textbox.css"] ~ ::selection {
+    background-color: var(--ui-selection-bgcolor);
+    color: var(--ui-selection-color);
+}
+
+link[href="chrome://global/skin/search-textbox.css"] ~ :-moz-window-inactive::selection {
+    background-color: var(--ui-selection-bgcolor-disabled, text-select-disabled-background);
+}
+
 /* hide keyword fixup notification */
 notification[value="keyword-uri-fixup"] {
     display: none !important;

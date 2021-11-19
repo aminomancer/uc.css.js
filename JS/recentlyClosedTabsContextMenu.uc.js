@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Undo Recently Closed Tabs in Tab Context Menu
-// @version        2.0.0
+// @version        2.0.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Adds new menus to the context menu that appears when you right-click a tab (in the tab bar or in the TreeStyleTabs sidebar): one lists recently closed tabs so you can restore them, and another lists recently closed windows. These are basically the same functions that exist in the history toolbar button's popup, but I think the tab context menu is a more convenient location for them. Also optionally adds a context menu to the history panel's subview pages for "Recently closed tabs" and "Recently closed windows" with various functions for interacting with the closed tabs and their session history. You can right-click a closed tab item to open the context menu, then click "Remove from List" to get rid of it. You can click "Remove from History" to not only remove the closed tab item, but also forget all of the tab's history — that is, every page it navigated to. The same can be done with recently closed windows. From this menu you can also restore a tab in a new window or private window, bookmark a closed tab/window, and more.
@@ -385,16 +385,17 @@ class UndoListInTabmenu {
                     "menuitem-iconic bookmark-item menuitem-with-favicon"
                 );
             element.classList.add("recently-closed-item");
-            element.setAttribute(
-                "oncommand",
-                `undoClose${aIsWindowsFragment ? "Window" : "Tab"}(${aIndex});`
-            );
+            let cmdCallback =
+                !aIsWindowsFragment && aTagName == "menuitem"
+                    ? `undoCloseTab(${aIndex});if(event.button === 1){gBrowser.moveTabToEnd()};`
+                    : `undoClose${aIsWindowsFragment ? "Window" : "Tab"}(${aIndex});`;
+            element.setAttribute("oncommand", cmdCallback);
             let tabData;
             tabData = aIsWindowsFragment ? aClosedTab : aClosedTab.state;
             let activeIndex = (tabData.index || tabData.entries.length) - 1;
             if (activeIndex >= 0 && tabData.entries[activeIndex])
                 element.setAttribute("targetURI", tabData.entries[activeIndex].url);
-            if (!aIsWindowsFragment)
+            if (!aIsWindowsFragment && aTagName != "menuitem")
                 element.addEventListener(
                     "click",
                     RecentlyClosedTabsAndWindowsMenuUtils._undoCloseMiddleClick
@@ -409,7 +410,9 @@ class UndoListInTabmenu {
                         "key_undoClose" + (aIsWindowsFragment ? "Window" : "Tab")
                     );
             }
-            let identity = ContextualIdentityService?.getPublicIdentityFromId(tabData.userContextId);
+            let identity = ContextualIdentityService?.getPublicIdentityFromId(
+                tabData.userContextId
+            );
             if (identity && identity.color) {
                 element.setAttribute("usercontextid", identity.userContextId);
                 element.classList.add("identity-color-" + identity.color);
@@ -685,10 +688,14 @@ class RecentlyClosedPanelContext {
         }
     }
     observe(subject, topic, data) {
-        let sel =
-            "panelview[visible]:is(#appMenu-library-recentlyClosedTabs, #appMenu-library-recentlyClosedWindows, #PanelUI-history)";
         if (topic === "sessionstore-closed-objects-changed")
-            setTimeout(() => this.updatePanel(document.querySelector(sel)), 15);
+            setTimeout(() => {
+                let sel =
+                    "panelview[visible]:is(#appMenu-library-recentlyClosedTabs, #appMenu-library-recentlyClosedWindows, #PanelUI-history)";
+                let el = document.querySelector(sel);
+                if (!el) return;
+                this.updatePanel(el);
+            }, 15);
     }
     onPopupShowing(e) {
         let button = this.menupopup.triggerNode;

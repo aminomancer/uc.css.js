@@ -115,8 +115,7 @@ findbar[hidden] {
     opacity: 1 !important;
 }
 
-.findbar-textbox,
-.findbar-textbox:-moz-lwtheme {
+.findbar-textbox {
     background-color: var(--search-box-color) !important;
     color: var(--ui-text-80) !important;
 }

@@ -278,11 +278,6 @@ but CSS hides it faster and avoids flickering.
     -moz-box-pack: center !important;
 }
 
-/* just looks slightly better imo */
-#reader-mode-button-icon {
-    width: 15px !important;
-}
-
 #userContext-indicator {
     margin-inline-start: 6px !important;
 }
@@ -309,7 +304,7 @@ but CSS hides it faster and avoids flickering.
     height: 20px !important;
     border-radius: 10px !important;
     border: 1px solid var(--desaturate-dimmed) !important;
-    background: rgb(0, 0, 0, 0.09) !important;
+    background: hsla(0, 0%, 0%, 0.09) !important;
     margin-inline: 4px !important;
     padding: 1px 8px !important;
 }
@@ -351,14 +346,14 @@ but CSS hides it faster and avoids flickering.
 }
 
 /* urlbar input highlight/selection color */
-.urlbar-input-box input:-moz-lwtheme::selection,
-.searchbar-textbox:-moz-lwtheme::selection {
+.urlbar-input-box input::selection,
+.searchbar-textbox::selection {
     background-color: var(--lwt-toolbar-field-highlight, Highlight) !important;
     color: var(--lwt-toolbar-field-highlight-text, HighlightText) !important;
 }
 
-.urlbar-input-box input:not(:focus):-moz-lwtheme::selection,
-.searchbar-textbox:not(:focus-within):-moz-lwtheme::selection {
+.urlbar-input-box input:not(:focus)::selection,
+.searchbar-textbox:not(:focus-within)::selection {
     background-color: var(--lwt-toolbar-field-highlight-disabled, text-select-disabled-background) !important;
 }
 
