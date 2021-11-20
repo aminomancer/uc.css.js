@@ -11,7 +11,7 @@ menupopup
 #context-viewbgimage .menu-text,
 #context-savepage .menu-text,
 menu#pageStyleMenu > .menu-text,
-#addon_darkreader_org-menuitem-_DarkReader-addSite .menu-text,
+#addon_darkreader_org-menuitem-_DarkReader-addSite:not(.menuitem-iconic) .menu-text,
 #viewFullZoomMenu > .menu-text,
 :is(#menu_zoomEnlarge, #menu_zoomReduce, #menu_zoomReset) .menu-text,
 #viewToolbarsMenu > .menu-text,
@@ -128,8 +128,8 @@ menuitem#repair-text-encoding .menu-text,
 #context-viewframeinfo .menu-text,
 menuitem#menu_openDownloads .menu-text,
 menuitem#menu_openAddons .menu-text,
-#addon_darkreader_org-menuitem-_DarkReader-toggle .menu-text,
-#private-relay_firefox_com-menuitem-_fx-private-relay-generate-alias > .menu-text,
+#addon_darkreader_org-menuitem-_DarkReader-toggle:not(.menuitem-iconic) .menu-text,
+#private-relay_firefox_com-menuitem-_fx-private-relay-generate-alias:not(.menuitem-iconic) > .menu-text,
 #menu_pageInfo .menu-text,
 menuitem:is(#sync-setup, #sync-unverifieditem, #sync-reauthitem) .menu-text,
 menuitem:is(#sync-enable, #sync-syncnowitem) .menu-text,
@@ -262,26 +262,26 @@ menu#fill-login > .menu-text,
 menuitem#manage-saved-logins > .menu-text,
 menuitem#fill-login-generated-password > .menu-text,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
-    #_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root
+    menu[label="Bitwarden"]
     :is(menu, menuitem)[id$="-menuitem-_autofill"]
     > .menu-text,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
-    #_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root
+    menu[label="Bitwarden"]
     :is(menu, menuitem)[id$="-menuitem-_copy-username"]
     > .menu-text,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
-    #_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root
+    menu[label="Bitwarden"]
     :is(menu, menuitem)[id$="-menuitem-_copy-password"]
     > .menu-text,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
-    #_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root
+    menu[label="Bitwarden"]
     :is(menu, menuitem)[id$="-menuitem-_generate-password"]
     > .menu-text,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
-    #_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root
+    menu[label="Bitwarden"]
     :is(menu, menuitem)[id$="-menuitem-_copy-identifier"]
     > .menu-text,
-#_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root:not(.menuitem-iconic, .menu-iconic)
+menu[label="Bitwarden"]:not(.menuitem-iconic, .menu-iconic)
     > .menu-text,
 #_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-manager:not(.menuitem-iconic, .menu-iconic)
     > .menu-text,
@@ -299,7 +299,7 @@ menuitem#fill-login-generated-password > .menu-text,
     > .menu-iconic-text,
 #menu_customizeToolbars .menu-text,
 menuitem.viewCustomizeToolbar > .menu-text,
-#addon_darkreader_org-menuitem-_DarkReader-switchEngine .menu-text,
+#addon_darkreader_org-menuitem-_DarkReader-switchEngine:not(.menuitem-iconic) .menu-text,
 menupopup:not(#contentAreaContextMenu)
     > #addon_darkreader_org-menuitem-_DarkReader-top:not(.menuitem-iconic, .menu-iconic)
     > .menu-text,
@@ -357,8 +357,8 @@ menuitem:not(.menuitem-iconic)[oncommand="_ucUtils.restart(true)"]::before,
 #context-viewframeinfo::before,
 menuitem#menu_openDownloads::before,
 menuitem#menu_openAddons::before,
-#addon_darkreader_org-menuitem-_DarkReader-toggle::before,
-#private-relay_firefox_com-menuitem-_fx-private-relay-generate-alias::before,
+#addon_darkreader_org-menuitem-_DarkReader-toggle:not(.menuitem-iconic)::before,
+#private-relay_firefox_com-menuitem-_fx-private-relay-generate-alias:not(.menuitem-iconic)::before,
 #menu_pageInfo::before,
 menuitem:is(#sync-setup, #sync-unverifieditem, #sync-reauthitem)::before,
 menuitem:is(#sync-enable, #sync-syncnowitem)::before,
@@ -375,7 +375,7 @@ menuitem#aboutName::before,
 menuitem#helpPolicySupport::before,
 #context-viewbgimage::before,
 #context-setDesktopBackground::before,
-:is(#context-savepage, menu#pageStyleMenu, #addon_darkreader_org-menuitem-_DarkReader-addSite)::before,
+:is(#context-savepage, menu#pageStyleMenu, #addon_darkreader_org-menuitem-_DarkReader-addSite:not(.menuitem-iconic))::before,
 #viewFullZoomMenu::before,
 :is(#menu_zoomEnlarge, #menu_zoomReduce, #menu_zoomReset)::before,
 #viewToolbarsMenu::before,
@@ -563,21 +563,21 @@ menu#fill-login::before,
 menuitem#manage-saved-logins::before,
 menuitem#fill-login-generated-password::before,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
-    #_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root
+    menu[label="Bitwarden"]
     :is(menu, menuitem)[id$="-menuitem-_autofill"]::before,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
-    #_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root
+    menu[label="Bitwarden"]
     :is(menu, menuitem)[id$="-menuitem-_copy-username"]::before,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
-    #_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root
+    menu[label="Bitwarden"]
     :is(menu, menuitem)[id$="-menuitem-_copy-password"]::before,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
-    #_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root
+    menu[label="Bitwarden"]
     :is(menu, menuitem)[id$="-menuitem-_generate-password"]::before,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
-    #_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root
+    menu[label="Bitwarden"]
     :is(menu, menuitem)[id$="-menuitem-_copy-identifier"]::before,
-#_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root:not(.menuitem-iconic, .menu-iconic)::before,
+menu[label="Bitwarden"]:not(.menuitem-iconic, .menu-iconic)::before,
 #_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-manager:not(.menuitem-iconic, .menu-iconic)::before,
 #_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-options:not(.menuitem-iconic, .menu-iconic)::before,
 #simple-translate_sienori-menuitem-_translatePage:not(.menuitem-iconic, .menu-iconic)::before,
@@ -588,7 +588,7 @@ menuitem#fill-login-generated-password::before,
 :is(menu, menuitem)[id^="multithreaded-download-manager"]:is([label="Open in new tab"], [label="Open in new window"], [label="Open in sidebar"])::before,
 #menu_customizeToolbars::before,
 menuitem.viewCustomizeToolbar::before,
-#addon_darkreader_org-menuitem-_DarkReader-switchEngine::before,
+#addon_darkreader_org-menuitem-_DarkReader-switchEngine:not(.menuitem-iconic)::before,
 menupopup:not(#contentAreaContextMenu)
     > #addon_darkreader_org-menuitem-_DarkReader-top:not(.menuitem-iconic, .menu-iconic)::before,
 menuitem.customize-context-removeFromToolbar::before,
@@ -781,11 +781,11 @@ menuitem#menu_openDownloads::before {
 }
 
 menuitem#menu_openAddons::before,
-#addon_darkreader_org-menuitem-_DarkReader-toggle::before {
+#addon_darkreader_org-menuitem-_DarkReader-toggle:not(.menuitem-iconic)::before {
     background-image: url(chrome://browser/content/extension.svg);
 }
 
-#private-relay_firefox_com-menuitem-_fx-private-relay-generate-alias::before {
+#private-relay_firefox_com-menuitem-_fx-private-relay-generate-alias:not(.menuitem-iconic)::before {
     /* background-image: url(chrome://userchrome/content/material/address-sign.svg);
     stroke: currentColor; */
     background-image: url(chrome://userchrome/content/material/contact-mail.svg);
@@ -858,7 +858,7 @@ menuitem#helpPolicySupport::before {
     background-image: url(chrome://userchrome/content/notifications/canvas.svg);
 }
 
-:is(#context-savepage, menu#pageStyleMenu, #addon_darkreader_org-menuitem-_DarkReader-addSite)::before {
+:is(#context-savepage, menu#pageStyleMenu, #addon_darkreader_org-menuitem-_DarkReader-addSite:not(.menuitem-iconic))::before {
     background-image: url(chrome://userchrome/content/document.svg);
 }
 
@@ -1321,34 +1321,34 @@ menuitem#enableDeveloperTools::before {
 }
 
 :is(#contentAreaContextMenu, #toolbar-context-menu)
-    #_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root
+    menu[label="Bitwarden"]
     :is(menu, menuitem)[id$="-menuitem-_autofill"]::before {
     background-image: url(chrome://userchrome/content/formfill.svg);
 }
 
 menuitem#manage-saved-logins::before,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
-    #_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root
+    menu[label="Bitwarden"]
     :is(menu, menuitem)[id$="-menuitem-_copy-username"]::before {
     background-image: url(chrome://userchrome/content/fxa/avatar-empty.svg);
 }
 
 menu#fill-login::before,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
-    #_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root
+    menu[label="Bitwarden"]
     :is(menu, menuitem)[id$="-menuitem-_copy-password"]::before {
     background-image: url(chrome://userchrome/content/skin/login.svg);
 }
 
 menuitem#fill-login-generated-password::before,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
-    #_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root
+    menu[label="Bitwarden"]
     :is(menu, menuitem)[id$="-menuitem-_generate-password"]::before {
     background-image: url(chrome://userchrome/content/generate-password.svg);
 }
 
 :is(#contentAreaContextMenu, #toolbar-context-menu)
-    #_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root
+    menu[label="Bitwarden"]
     :is(menu, menuitem)[id$="-menuitem-_copy-identifier"]::before {
     background-image: url(chrome://userchrome/content/devtools/tool-dom.svg);
 }
@@ -1388,7 +1388,7 @@ menuitem#fill-login-generated-password::before,
 
 #menu_customizeToolbars::before,
 menuitem.viewCustomizeToolbar::before,
-#addon_darkreader_org-menuitem-_DarkReader-switchEngine::before {
+#addon_darkreader_org-menuitem-_DarkReader-switchEngine:not(.menuitem-iconic)::before {
     background-image: url(chrome://browser/skin/customize.svg);
 }
 

@@ -430,11 +430,6 @@ menupopup:not(.PanelUI-subView) menuseparator:last-child {
     display: none;
 }
 
-#contentAreaContextMenu
-    menuseparator[id]:not(#context-sep-open, #context-media-sep-commands, #context-sep-copylink, #spell-suggestions-separator, #context-sep-selectall) {
-    display: none !important;
-}
-
 #ContentSelectDropdown
     menupopup.in-menulist
     menuitem:is([label=" "], [label=""], :not([label]))[value="0"]
@@ -450,10 +445,18 @@ menupopup:not(.PanelUI-subView) menuseparator:last-child {
     color: var(--menu-disabled-color);
 }
 
-@-moz-document url(chrome://browser/content/browser.xhtml)
-{
-    #contentAreaContextMenu menuseparator:not([id]) {
-        display: -moz-box !important;
+/* a way to reduce the number of menuseparators in the context menu, if they feel excessive */
+@supports -moz-bool-pref("userChrome.contextmenu.reduce-menuseparators") {
+    #contentAreaContextMenu
+    > menuseparator[id]:not(#context-sep-open, #context-media-sep-commands, #context-sep-copylink, #spell-suggestions-separator, #context-sep-selectall) {
+        display: none !important;
+    }
+
+    @-moz-document url(chrome://browser/content/browser.xhtml)
+        {
+            #contentAreaContextMenu menuseparator:not([id]) {
+                display: -moz-box !important;
+            }
     }
 }
 

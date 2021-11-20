@@ -227,12 +227,31 @@ more useful than userContent.css when dealing with very complex websites that ne
     list-style-image: url(chrome://userchrome/content/material/notepad-large.svg) !important;
 }
 
+:is(.menu-iconic, .menuitem-iconic)#notes_mozilla_com-menuitem-_send-to-notes
+    .menu-iconic-left::before {
+    width: 16px;
+    height: 16px;
+    margin-inline: var(--context-iconic-margin);
+    fill: currentColor;
+    -moz-context-properties: fill, fill-opacity, stroke;
+    content: "";
+    display: -moz-inline-box;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url(chrome://userchrome/content/material/notepad-large.svg);
+}
+
+:is(.menu-iconic, .menuitem-iconic)#notes_mozilla_com-menuitem-_send-to-notes
+    .menu-iconic-icon {
+    display: none;
+}
+
 /* Firefox Relay */
 :is(.webextension-browser-action, .eom-addon-button)[data-extensionid="private-relay@firefox.com"i] {
     list-style-image: url(chrome://userchrome/content/material/firefox-relay.svg) !important;
 }
 
-:is(.menu-iconic, .menuitem-iconic)[id^="private-relay_firefox_com-menuitem-18294"][ext-type="top-level-menu"]
+:is(.menu-iconic, .menuitem-iconic)[id^="private-relay_firefox_com-menuitem-"]
     .menu-iconic-left::before {
     width: 16px;
     height: 16px;
@@ -246,7 +265,7 @@ more useful than userContent.css when dealing with very complex websites that ne
     background-image: url(chrome://userchrome/content/material/firefox-relay.svg);
 }
 
-:is(.menu-iconic, .menuitem-iconic)[id^="private-relay_firefox_com-menuitem-18294"][ext-type="top-level-menu"]
+:is(.menu-iconic, .menuitem-iconic)[id^="private-relay_firefox_com-menuitem-"]
     .menu-iconic-icon {
     display: none;
 }

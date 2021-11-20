@@ -77,6 +77,7 @@ I also recommend setting the following prefs in `about:config`. There are two pr
 | ui.textSelectBackgroundDisabled | String | `#7755FF` | For Fx ≤ v96 |
 | userChrome... | | | Several of my scripts use custom prefs beginning with `userChrome` for user customization. See the individual script files for details. The stylesheets also use the following: |
 | userChrome.bookmarks-toolbar.icons-only | Boolean | false | If true, bookmark buttons in the toolbar are just square icons |
+| userChrome.contextmenu.reduce-menuseparators | Boolean | false | If true, hide some of the separators in the main context menu to reduce clutter |
 | userChrome.css.mac-ui-fonts | Boolean | true | Replace UI font with SF Pro, the system font for macOS. [Click here for details](#fonts) |
 | userChrome.css.menupopup-shadows | Boolean | false | Add a shadow behind context menus and panels |
 | userChrome.css.remove-tooltip-borders | Boolean | false | If true, remove the thin border on tooltips. If false, use [tooltipShadowSupport.uc.js](#tooltip-shadow-support) |
