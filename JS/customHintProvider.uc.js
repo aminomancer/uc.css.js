@@ -15,19 +15,32 @@ window.CustomHint = {
      * successful and potentially provide extra context.
      *
      * @param  anchor (DOM node, required)
-     *         The anchor for the panel.
+     *         The anchor for the panel. A value of null will anchor to the viewpoint (see options.x below)
      * @param  message (string, required)
      *         The message to be shown.
      * @param  options (object, optional)
-     *         An object with the following optional properties:
+     *         An object with any number of the following optional properties:
      *         - event (DOM event): The event that triggered the feedback.
      *         - hideArrow (boolean): Optionally hide the arrow.
      *         - hideCheck (boolean): Optionally hide the checkmark.
-     *         - description (string): Show description text.
-     *         - duration (numeric): How long the hint should stick around.
-     *         - alignX (number or string): Where to align the hint relative to the anchor. (horizontally)
-     *                                      An integer value will be taken as an offset (in pixels) from the left of the anchor.
-     *                                      A string can be "left" "center" or "right" but uses "center" if this property is omitted.
+     *         - description (string): If provided, show a more detailed description/subtitle with the passed text.
+     *         - duration (numeric): How long the hint should stick around, in milliseconds. Default is 1500 — 1.5 seconds.
+     *         - position (string): One of a number of strings representing how the anchor point of the popup
+     *                              is aligned relative to the anchor point of the anchor node.
+     *                              Possible values for position are:
+     *                                  before_start, before_end, after_start, after_end,
+     *                                  start_before, start_after, end_before, end_after,
+     *                                  overlap, after_pointer
+     *                              For example, after_start means the anchor node's bottom left corner will
+     *                              be aligned with the popup node's top left corner. overlap means their
+     *                              top left corners will be lined up exactly, so they will overlap.
+     *         - x (number): Horizontal offset in pixels, relative to the anchor.
+     *                       If no anchor is provided, relative to the viewport.
+     *         - y (number): Vertical offset in pixels, relative to the anchor.
+     *                       Negative values may also be used to move to the left and upwards respectively.
+     *                       Unanchored popups may be created by supplying null as the anchor node.
+     *                       An unanchored popup appears at the position specified by x and y, relative to the
+     *                       viewport of the document containing the popup node. (ignoring the anchor parameter)
      *
      */
     show(anchor, message, options = {}) {

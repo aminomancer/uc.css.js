@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Toolbox Button
-// @version        1.2.3
+// @version        1.2.4
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Adds a new toolbar button that 1) opens the content toolbox on left click; 2) opens the browser toolbox on right click; 3) toggles "Popup Auto-Hide" on middle click. Left click will open the toolbox for the active tab, or close it if it's already open. Right click will open the elevated browser toolbox if it's not already open. If it is already open, then instead of trying to start a new process and spawning an irritating dialog, it'll just show a brief notification saying the toolbox is already open. The button also shows a badge while a toolbox window is open. Middle click will toggle the preference for popup auto-hide: "ui.popup.disable_autohide". This does the same thing as the "Disable Popup Auto-Hide" option in the menu at the top right of the browser toolbox, prevents popups from closing so you can debug them. If you want to change which mouse buttons execute which functions, search for "userChrome.toolboxButton.mouseConfig" in about:config. Change the 0, 1, and 2 values. 0 = left click, 1 = middle, and 2 = right. By default, when you open a browser toolbox window, the script will disable popup auto-hide, and then re-enable it when you close the toolbox. I find that I usually want popup auto-hide disabled when I'm using the toolbox, and never want it disabled when I'm not using the toolbox, so I made it automatic, instead of having to right click and then immediately middle click every time. If you don't like this automatic feature, you can turn it off by setting "userChrome.toolboxButton.popupAutohide.toggle-on-toolbox-launch" to false in about:config. When you middle click, the button will show a notification telling you the current status of popup auto-hide, e.g. "Holding popups open." This is just so that people who use the feature a lot won't lose track of whether it's on or off, and won't need to open a popup and try to close it to test it. (The toolbar button also changes appearance while popup auto-hide is disabled. It becomes blue like the downloads button and the icon changes into a popup icon. This change is animated, as long as the user doesn't have reduced motion enabled) All of these notifications use the native confirmation hint custom element, since it looks nice. That's the one that appears when you save a bookmark, #confirmation-hint. So you can customize them with that selector.
@@ -72,19 +72,32 @@ const toolboxButtonL10n = {
                      * successful and potentially provide extra context.
                      *
                      * @param  anchor (DOM node, required)
-                     *         The anchor for the panel.
+                     *         The anchor for the panel. A value of null will anchor to the viewpoint (see options.x below)
                      * @param  message (string, required)
                      *         The message to be shown.
                      * @param  options (object, optional)
-                     *         An object with the following optional properties:
+                     *         An object with any number of the following optional properties:
                      *         - event (DOM event): The event that triggered the feedback.
                      *         - hideArrow (boolean): Optionally hide the arrow.
                      *         - hideCheck (boolean): Optionally hide the checkmark.
-                     *         - description (string): Show description text.
-                     *         - duration (numeric): How long the hint should stick around.
-                     *         - alignX (number or string): Where to align the hint relative to the anchor. (horizontally)
-                     *                                      An integer value will be taken as an offset (in pixels) from the left of the anchor.
-                     *                                      A string can be "left" "center" or "right" but uses "center" if this property is omitted.
+                     *         - description (string): If provided, show a more detailed description/subtitle with the passed text.
+                     *         - duration (numeric): How long the hint should stick around, in milliseconds. Default is 1500 — 1.5 seconds.
+                     *         - position (string): One of a number of strings representing how the anchor point of the popup
+                     *                              is aligned relative to the anchor point of the anchor node.
+                     *                              Possible values for position are:
+                     *                                  before_start, before_end, after_start, after_end,
+                     *                                  start_before, start_after, end_before, end_after,
+                     *                                  overlap, after_pointer
+                     *                              For example, after_start means the anchor node's bottom left corner will
+                     *                              be aligned with the popup node's top left corner. overlap means their
+                     *                              top left corners will be lined up exactly, so they will overlap.
+                     *         - x (number): Horizontal offset in pixels, relative to the anchor.
+                     *                       If no anchor is provided, relative to the viewport.
+                     *         - y (number): Vertical offset in pixels, relative to the anchor.
+                     *                       Negative values may also be used to move to the left and upwards respectively.
+                     *                       Unanchored popups may be created by supplying null as the anchor node.
+                     *                       An unanchored popup appears at the position specified by x and y, relative to the
+                     *                       viewport of the document containing the popup node. (ignoring the anchor parameter)
                      *
                      */
                     show(anchor, message, options = {}) {
@@ -231,8 +244,12 @@ const toolboxButtonL10n = {
                 let mouseConfig = "userChrome.toolboxButton.mouseConfig";
 
                 let onClick = function (e) {
-                    if (e.getModifierState("Accel")) return;
-                    switch (e.button) {
+                    let { button } = e;
+                    if (e.getModifierState("Accel")) {
+                        if (button == 2) return;
+                        if (button == 0 && AppConstants.platform == "macosx") button = 2;
+                    }
+                    switch (button) {
                         case this.mouseConfig.contentToolbox:
                             aDoc.defaultView.key_toggleToolbox.click(); // toggle the content toolbox
                             break;
@@ -245,18 +262,13 @@ const toolboxButtonL10n = {
                                 : aDoc.defaultView.key_browserToolbox.click(); // if not, launch a new one
                             break;
                         case this.mouseConfig.popupHide:
-                            this.popupAutoHide // check autohide pref state to dictate hint content
-                                ? CustomHint.show(
-                                      toolbarbutton,
-                                      toolboxButtonL10n.lettingCloseMsg,
-                                      {
-                                          event: e,
-                                          hideCheck: true,
-                                      }
-                                  )
-                                : CustomHint.show(toolbarbutton, toolboxButtonL10n.holdingOpenMsg, {
-                                      event: e,
-                                  });
+                            CustomHint.show(
+                                toolbarbutton,
+                                toolboxButtonL10n[
+                                    this.popupAutoHide ? "lettingCloseMsg" : "holdingOpenMsg"
+                                ],
+                                { event: e, hideCheck: this.popupAutoHide }
+                            );
                             prefSvc.setBoolPref(autoHide, !this.popupAutoHide); // toggle the pref
                             this.triggerAnimation(); // animate the icon transformation
                             break;

@@ -1343,6 +1343,10 @@ userChrome.css.wikipedia.dark-theme-enabled */
         border-color: var(--uc-wiki-table-border-color) !important;
     }
 
+    table.wikitable tr td {
+        background-color: transparent !important;
+    }
+
     table.wikitable > * > tr > th.headerSort {
         font-size: 1rem !important;
         color: #000 !important;
@@ -1814,16 +1818,36 @@ userChrome.css.wikipedia.dark-theme-enabled */
         border: 1px solid hsl(228.9, 100%, 74%) !important;
     }
 
+    .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button {
+        background-color: var(--uc-wiki-box-bg) !important;
+        color: inherit !important;
+        border-color: transparent !important;
+    }
+
+    .oo-ui-processDialog-actions-safe .oo-ui-widget-enabled.oo-ui-iconElement:not(.oo-ui-labelElement) > .oo-ui-buttonElement-button:not(:hover, :active) {
+        background-color: transparent !important;
+        border-right-color: transparent !important;
+    }
+
     .oo-ui-processDialog-actions-primary > .oo-ui-buttonElement > .oo-ui-buttonElement-button {
         background-color: hsl(228.9, 100%, 68%) !important;
         border: none !important;
     }
 
+    .oo-ui-widget:not(.oo-ui-widget-disabled) .oo-ui-buttonElement-button:hover {
+        background-color: hsl(240, 1.4%, 28%) !important;
+    }
+
     .oo-ui-processDialog-actions-primary
-        > .oo-ui-buttonElement
+        > .oo-ui-buttonElement:not(.oo-ui-widget-disabled)
         > .oo-ui-buttonElement-button:hover {
         background-color: hsl(228.9, 93%, 62%) !important;
         border: none !important;
+    }
+
+    #bodyContent .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button,
+    .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button {
+        color: inherit !important;
     }
 
     .oo-ui-processDialog-content .oo-ui-window-head,
@@ -1860,6 +1884,12 @@ userChrome.css.wikipedia.dark-theme-enabled */
         .oo-ui-buttonElement-button:hover
         > .oo-ui-iconElement-icon {
         opacity: 1 !important;
+    }
+
+    .oo-ui-buttonElement-framed.oo-ui-widget-disabled > .oo-ui-buttonElement-button {
+        border-color: transparent !important;
+        background-color: hsl(240, 5.4%, 19%) !important;
+        opacity: 0.5 !important;
     }
 
     .oo-ui-windowManager-modal > .oo-ui-dialog {
@@ -3025,13 +3055,6 @@ userChrome.css.wikipedia.dark-theme-enabled */
         -moz-context-properties: fill, fill-opacity !important;
     }
 
-    #bodyContent .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button,
-    .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button {
-        background-color: var(--uc-wiki-box-bg) !important;
-        color: inherit !important;
-        border-color: transparent !important;
-    }
-
     .mw-searchresults-has-iw .iw-resultset {
         background-color: var(--uc-wiki-box-bg) !important;
         color: inherit !important;
@@ -3073,10 +3096,6 @@ userChrome.css.wikipedia.dark-theme-enabled */
     #bodyContent .oo-ui-widget .oo-ui-buttonElement-button {
         color: inherit !important;
         box-sizing: border-box !important;
-    }
-
-    .oo-ui-widget .oo-ui-buttonElement-button:hover {
-        background-color: hsl(240, 1.4%, 28%) !important;
     }
 
     .oo-ui-icon-close,

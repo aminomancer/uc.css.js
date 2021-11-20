@@ -24,6 +24,7 @@ override chrome://global/skin/icons/help.svg ../resources/help.svg
 override chrome://global/skin/icons/lightbulb.svg ../resources/skin/tip.svg
 override chrome://global/skin/icons/defaultFavicon.svg ../resources/places/defaultFavicon.svg
 override chrome://global/skin/icons/info.svg ../resources/info.svg
+override chrome://global/skin/icons/info-filled.svg ../resources/info-filled.svg
 override chrome://global/skin/icons/search-glass.svg ../resources/search-glass.svg
 override chrome://global/skin/icons/settings.svg ../resources/settings.svg
 override chrome://global/skin/icons/folder.svg ../resources/material/places/folder.svg
