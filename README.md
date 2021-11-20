@@ -557,6 +557,12 @@ By default, private windows are opened to about:privatebrowsing, regardless of y
 
 </details>
 
+#### [Restore pre-Proton Arrowpanels](/JS/restorePreProtonArrowpanels.uc.js):
+
+\* The mother of all proton reversals. Probably my least favorite "feature" of the UI refresh has been the removal of arrows from arrowpanels. I'd call it misguided, except I can't comprehend what guided it in the first place. I mean — they're called _arrowpanels_, and that should really say it all. The point of arrows is to point at something. In this case, to point at the node to which the panel is anchored. Some might think it's enough that the popup simply be anchored to the node. That might be true for small elements like tooltips. But panels are big enough that they can be lined up with many nodes, especially when they're opened on a toolbar that's full of other buttons.
+
+It's not like there aren't other ways to see where the panel is anchored, but why give the user less information? Moreover, don't the arrows look good? This change, more than any of the other ones, feels like change for change's sake. Stripping things down merely for the sake of simplifying them. Anyway, this script will basically restore a bunch of stuff that was removed in Nightly 96.0a1 — the CSS, JS, and markup. So in this sense it's a complete package and does not require duskFox, but you will probably want it if you use my theme. Arrowpanels' glory days are not behind them, not if I have anything to say about it...
+
 #### [Restore pre-Proton Downloads Button](/JS/restorePreProtonDownloadsButton.uc.js):
 
 \* Restores the pre-proton downloads button icons and animations. I kept the new progress animation, but I made it thicker. If you use my theme or my icons you'll definitely want this for the sake of consistency. If you don't use my theme or icons but you still want the old downloads button back, download the [_standalone_](/JS/restorePreProtonDownloadsButton-standalone.uc.js) version instead. The standalone version has the stylesheet and icons built-in, so doesn't require anything else except a script loader. This version requires [userChrome.au.css](/userChrome.au.css) and the [resources/downloads](/resources/downloads) folder.

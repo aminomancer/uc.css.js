@@ -48,7 +48,7 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
 }
 
 /* toolbar button badges */
-.customization-target :is(toolbarbutton, toolbaritem):not([attention]) .toolbarbutton-badge {
+:is(.customization-target, .widget-overflow-list) :is(toolbarbutton, toolbaritem):not([attention]) .toolbarbutton-badge {
     background-color: var(--badge-color-light) !important;
     color: var(--toolbar-color, currentColor) !important;
     box-shadow: 0 1px 1px -1px hsla(0, 0%, 100%, 0.3) inset,
@@ -64,7 +64,7 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
     margin: -6px -6px 0 -6px !important;
 }
 
-.customization-target #downloads-button[attention] .toolbarbutton-badge {
+:is(.customization-target, .widget-overflow-list) #downloads-button[attention] .toolbarbutton-badge {
     margin-right: -5.5px !important;
     margin-top: -5.5px !important;
     width: 10px !important;
@@ -76,19 +76,19 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
     background-repeat: no-repeat !important;
 }
 
-.customization-target #downloads-button[attention="warning"] .toolbarbutton-badge {
+:is(.customization-target, .widget-overflow-list) #downloads-button[attention="warning"] .toolbarbutton-badge {
     background-color: var(--low-warning-icon-detail) !important;
     fill: var(--low-warning-icon-background) !important;
     border-radius: 50% !important;
 }
 
-.customization-target #downloads-button[attention="severe"] .toolbarbutton-badge {
+:is(.customization-target, .widget-overflow-list) #downloads-button[attention="severe"] .toolbarbutton-badge {
     background-color: var(--warning-icon-detail) !important;
     fill: var(--warning-icon-background) !important;
     border-radius: 50% !important;
 }
 
-.customization-target #fxa-toolbar-menu-button[badge-status="login_failed"] .toolbarbutton-badge {
+:is(.customization-target, .widget-overflow-list) #fxa-toolbar-menu-button[badge-status="login_failed"] .toolbarbutton-badge {
     background: url(chrome://userchrome/content/skin/controlcenter/warning.svg) no-repeat
         center/contain !important;
     stroke: var(--low-warning-icon-detail) !important;
@@ -99,6 +99,23 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
     margin: -7px 0 0 !important;
     margin-inline-end: -6px !important;
     filter: none !important;
+}
+
+.widget-overflow-list .toolbarbutton-1 > .toolbarbutton-text {
+	padding-inline-start: var(--arrowpanel-subviewbutton-iconic-gap, 8px) !important;
+}
+
+.widget-overflow-list .toolbaritem-combined-buttons .toolbarbutton-1 > .toolbarbutton-text {
+    padding-inline-end: 4px !important;
+}
+
+.widget-overflow-list #zoom-controls[cui-areatype="toolbar"] > #zoom-reset-button > .toolbarbutton-text {
+	min-width: calc(5ch + 4px) !important;
+    padding-inline: 0 !important;
+}
+
+.widget-overflow-list .toolbaritem-combined-buttons {
+	margin-inline: 0 !important;
 }
 
 toolbar .toolbaritem-combined-buttons.chromeclass-toolbar-additional {
@@ -162,6 +179,10 @@ toolbar:not(#PersonalToolbar)
     height: 20px !important;
     width: 20px !important;
     padding: 4px !important;
+}
+
+#zoom-in-button > .toolbarbutton-icon {
+	padding-inline-start: 0 !important;
 }
 
 toolbar:not(#PersonalToolbar) #zoom-controls > #zoom-reset-button {

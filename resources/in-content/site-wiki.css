@@ -266,7 +266,8 @@ userChrome.css.wikipedia.dark-theme-enabled */
         background: var(--uc-wiki-main-bg) !important;
     }
 
-    #content {
+    .mw-body {
+        position: relative !important;
         margin: 0 auto !important;
         border: none !important;
         font-family: "Source Sans Pro" !important;
@@ -275,6 +276,7 @@ userChrome.css.wikipedia.dark-theme-enabled */
         max-width: 1280px !important;
         background: var(--uc-wiki-main-bg) !important;
         color: var(--uc-wiki-text-80) !important;
+        padding: 1.5em 1.5em 1em !important;
     }
 
     a {
@@ -306,20 +308,35 @@ userChrome.css.wikipedia.dark-theme-enabled */
         pointer-events: none !important;
         user-select: none !important;
         -moz-user-select: -moz-none !important;
+        max-width: 1280px !important;
+        margin: 0 auto !important;
+        padding: 0 1.5em !important;
+    }
+
+    #mw-panel,
+    #content {
+        z-index: 1 !important;
     }
 
     #mw-head {
         position: relative !important;
-        max-width: 1225px !important;
+        float: none !important;
         height: 90px !important;
-        margin: 0 auto !important;
         pointer-events: auto !important;
+        box-sizing: content-box !important;
+        display: flex !important;
+        flex-flow: column nowrap !important;
     }
 
     .vector-menu-tabs,
     .vector-menu-tabs a,
     #mw-head .vector-menu-dropdown h3 {
         background-image: none !important;
+    }
+
+    .vector-menu-tabs li a {
+        padding: 4px !important;
+        height: auto !important;
     }
 
     .vector-menu-dropdown h3 {
@@ -342,32 +359,46 @@ userChrome.css.wikipedia.dark-theme-enabled */
     #mw-head .vectorTabs {
         background: none !important;
         border: none !important;
+        white-space: nowrap !important;
     }
 
     #mw-head > * {
-        position: absolute !important;
+        position: relative !important;
         font-size: 16px !important;
         margin: 0 !important;
         padding: 0 !important;
     }
 
     #mw-head #left-navigation {
-        top: 50px !important;
-        left: -30px !important;
+        top: 36px !important;
         padding: 0 !important;
+        float: left !important;
+        align-self: start !important;
     }
 
     #mw-head #right-navigation {
-        top: 50px !important;
-        right: 0px !important;
+        top: -4px !important;
         padding: 0 !important;
+        align-self: end !important;
+    }
+
+    #mw-head #p-views {
+        float: right !important;
+        position: relative !important;
     }
 
     #mw-head #p-personal {
         top: 0px !important;
-        right: -30px !important;
         padding: 5px 0px 0 0 !important;
         font-size: 14px !important;
+        width: min-content !important;
+        flex-wrap: nowrap !important;
+        align-self: end !important;
+    }
+
+    #p-personal .vector-menu-content-list {
+        width: min-content !important;
+        flex-wrap: nowrap !important;
     }
 
     #mw-head li,
@@ -388,10 +419,8 @@ userChrome.css.wikipedia.dark-theme-enabled */
 
     #mw-head #searchform > div {
         position: absolute !important;
-        top: -32px !important;
-        right: -29.5px !important;
-        margin-top: 13px !important;
-        margin-left: 15px !important;
+        top: -28px !important;
+        right: 0 !important;
         border: none !important;
         background: var(--uc-wiki-table-header-bg) !important;
         width: 345px !important;
@@ -432,6 +461,7 @@ userChrome.css.wikipedia.dark-theme-enabled */
 
     #mw-head #searchform {
         color: var(--uc-wiki-text-80) !important;
+        margin: 0 !important;
     }
 
     #mw-head #searchform #searchButton {
@@ -472,12 +502,10 @@ userChrome.css.wikipedia.dark-theme-enabled */
     }
 
     /* logo */
-    #mw-head::before {
-        position: relative !important;
-        width: 120px !important;
-        height: 120px !important;
-        top: 30px !important;
-        left: -25px !important;
+    #content::before {
+        position: absolute !important;
+        top: -49px !important;
+        left: 27px !important;
         content: "Wikipedia" !important;
         font-family: "Source Serif Pro", serif !important;
         /*font-style: italic !important;*/
@@ -486,6 +514,7 @@ userChrome.css.wikipedia.dark-theme-enabled */
         text-transform: uppercase !important;
         letter-spacing: 0px !important;
         color: hsl(0, 0%, 93.3%) !important;
+        pointer-events: none !important;
     }
 
     /* left nav */
@@ -498,7 +527,9 @@ userChrome.css.wikipedia.dark-theme-enabled */
         height: 100% !important;
         overflow-y: auto !important;
         padding: 0 0 0 100px !important;
-        background: var(--uc-wiki-panel-bg) !important;
+        background-color: var(--uc-wiki-panel-bg) !important;
+        background-image: var(--acrylic-texture) !important;
+        backdrop-filter: blur(8px);
         box-shadow: 1px 0 3px hsla(0, 0%, 0%, 0.3) !important;
         transition: all 0.66s ease-in-out !important;
         opacity: 0 !important;
@@ -1117,7 +1148,7 @@ userChrome.css.wikipedia.dark-theme-enabled */
         margin: auto 2px !important;
     }
 
-    #content .thumbinner {
+    .mw-body .thumbinner {
         border-color: hsl(0, 0%, 72.5%) !important;
     }
 
@@ -1137,7 +1168,7 @@ userChrome.css.wikipedia.dark-theme-enabled */
         border: none !important;
     }
 
-    #content .thumbinner {
+    .mw-body .thumbinner {
         padding: 7px !important;
     }
 
@@ -1206,6 +1237,8 @@ userChrome.css.wikipedia.dark-theme-enabled */
         z-index: 9999 !important;
         color: var(--uc-wiki-text-80) !important;
         background: var(--uc-wiki-panel-bg) !important;
+        background-image: var(--acrylic-texture) !important;
+        backdrop-filter: blur(8px);
         box-shadow: 1px 0 6px hsla(0, 0%, 0%, 0.25) !important;
     }
 
@@ -1362,6 +1395,16 @@ userChrome.css.wikipedia.dark-theme-enabled */
         background-color: var(--uc-wiki-box-bg) !important;
     }
 
+    .mw-parser-output .module-shortcutboxplain {
+        border-color: var(--uc-wiki-table-border-color) !important;
+        background-color: var(--uc-wiki-box-bg) !important;
+        border-radius: 3px !important;
+    }
+
+    .mw-parser-output .module-shortcutlist {
+        border-color: var(--uc-wiki-popup-border-color) !important;
+    }
+
     .sidebar .sidebar-list-title {
         background-image: revert !important;
         background-color: hsl(240, 1%, 16.9%) !important;
@@ -1450,6 +1493,10 @@ userChrome.css.wikipedia.dark-theme-enabled */
         border-radius: 0 !important;
         background-color: var(--uc-wiki-popup-bg) !important;
         box-shadow: none !important;
+    }
+
+    .hlist.nowraplinks .navbox-group {
+        border-radius: var(--general-button-border-radius) !important;
     }
 
     .sidebar-heading[style*="background"],
@@ -2868,12 +2915,12 @@ userChrome.css.wikipedia.dark-theme-enabled */
         border: none !important;
     }
 
-    #content .gallerybox div.thumb {
+    .mw-body .gallerybox div.thumb {
         background-color: hsla(210, 16.7%, 97.6%, 0) !important;
         box-shadow: none !important;
     }
 
-    #content :where(.infobox),
+    .mw-body :where(.infobox),
     #bodyContent :where(table.ambox) {
         box-shadow: 0 0 8px hsla(0, 0%, 0%, 0.08), 0 0 3px 1px hsla(0, 0%, 0%, 0.05) !important;
     }
@@ -2882,7 +2929,7 @@ userChrome.css.wikipedia.dark-theme-enabled */
         box-shadow: none !important;
     }
 
-    #content .thumbinner {
+    .mw-body .thumbinner {
         padding: 8px !important;
     }
 
@@ -2946,7 +2993,7 @@ userChrome.css.wikipedia.dark-theme-enabled */
         filter: contrast(60%) brightness(150%) grayscale(100%) !important;
     }
 
-    #content .gallery {
+    .mw-body .gallery {
         box-shadow: 0 0 15px 2px hsla(0, 0%, 0%, 0.1), 0 0 3px 1px hsla(0, 0%, 0%, 0.2) !important;
         display: inline-block !important;
     }
@@ -3942,11 +3989,6 @@ userChrome.css.wikipedia.dark-theme-enabled */
         border-color: unset !important;
     }
 
-    #p-views {
-        right: -30% !important;
-        position: relative !important;
-    }
-
     .suggestions {
         border-bottom-left-radius: 3px !important;
         border-bottom-right-radius: 3px !important;
@@ -4334,11 +4376,11 @@ userChrome.css.wikipedia.dark-theme-enabled */
         border: none !important;
     }
 
-    #content .mw-parser-output > ul.gallery {
+    .mw-body .mw-parser-output > ul.gallery {
         width: -moz-fit-content !important;
     }
 
-    #content .mw-parser-output > ul.gallery .gallerybox {
+    .mw-body .mw-parser-output > ul.gallery .gallerybox {
         padding: 3px !important;
     }
 

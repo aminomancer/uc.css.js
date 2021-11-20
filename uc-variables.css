@@ -8,6 +8,7 @@ but find that it's missing because docs do not inherit from <browser> elements. 
 :root,
 menupopup {
     --lwt-accent-color: var(--uc-accent-color) !important;
+    --lwt-frame: var(--uc-frame-color) !important;
     --lwt-text-color: var(--uc-arrowpanel-color) !important;
     --lwt-toolbar-field-background-color: hsla(233, 25%, 28%, 85%) !important;
     --lwt-toolbar-field-color: hsl(240, 60%, 99%);

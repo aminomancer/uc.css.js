@@ -35,6 +35,7 @@ tooltip {
     --uc-content-text-a50: hsla(236, 100%, 85%, 0.5);
     --uc-content-text-a80: rgba(255, 255, 255, 0.8);
     --uc-accent-color: hsl(233, 61%, 8%);
+    --uc-frame-color: var(--uc-accent-color);
     --uc-toolbar-bgcolor: hsl(233, 42%, 15%);
     --uc-toolbar-color: var(--ui-text-100);
     --uc-arrowpanel-background: hsl(233, 36%, 11%);
