@@ -47,7 +47,7 @@ toolbarpaletteitem[place="palette"] > #search-container {
 }
 
 #PopupSearchAutoComplete {
-    margin-top: calc((var(--urlbar-container-height) - var(--urlbar-height) - 1px) / 2) !important;
+    margin-top: calc((var(--urlbar-container-height) - var(--urlbar-height)) / 2) !important;
     border: none !important;
     --panel-background: var(--urlbar-results-bgcolor) !important;
     box-shadow: none;
@@ -68,10 +68,15 @@ toolbarpaletteitem[place="palette"] > #search-container {
 }
 
 #PopupSearchAutoComplete .autocomplete-richlistitem {
-    padding-block: 6px !important;
+    min-height: 34px !important;
     margin-inline: 0 !important;
-    min-height: 32px;
+    padding: 0 var(--urlbarView-item-inline-padding) !important;
     border-radius: var(--arrowpanel-menuitem-border-radius) !important;
+    align-items: center !important;
+}
+
+#PopupSearchAutoComplete .autocomplete-richlistitem :is(.ac-site-icon, .ac-type-icon) {
+    margin-inline: 0 calc(var(--urlbar-icon-padding) + 2px) !important;
 }
 
 #PopupSearchAutoComplete .autocomplete-richlistitem .ac-title-text {
@@ -239,8 +244,40 @@ toolbarpaletteitem[mousedown] > #urlbar-container > #urlbar > #urlbar-background
     stroke: currentColor !important;
 }
 
-#urlbar-go-button {
-    display: none !important;
+#urlbar[usertyping]:is([focused], [open]) > #urlbar-input-container > #urlbar-go-button {
+    display: -moz-inline-box !important;
+}
+
+#urlbar[textoverflow="both"] > #urlbar-input-container > .urlbar-input-box > #urlbar-input {
+    mask-image: linear-gradient(
+        to right,
+        transparent,
+        black 3ch,
+        black calc(100% - 3ch),
+        transparent
+    );
+}
+
+#urlbar[textoverflow="right"] > #urlbar-input-container > .urlbar-input-box > #urlbar-input {
+    mask-image: linear-gradient(to left, transparent, black 3ch);
+}
+
+#urlbar[textoverflow="left"] > #urlbar-input-container > .urlbar-input-box > #urlbar-input {
+    mask-image: linear-gradient(to right, transparent, black 3ch);
+}
+
+#urlbar[textoverflow="both"][usertyping="true"] #urlbar-input {
+    mask-image: linear-gradient(
+        to right,
+        transparent,
+        black 3ch,
+        black calc(100% - 55px),
+        transparent calc(100% - 5px)
+    ) !important;
+}
+
+#urlbar[textoverflow="right"][usertyping="true"] #urlbar-input {
+    mask-image: linear-gradient(to left, transparent 5px, black 55px) !important;
 }
 
 /*

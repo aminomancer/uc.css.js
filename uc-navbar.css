@@ -13,7 +13,7 @@ if it's visible in the row beneath the tabs then it's probably in here. */
 }
 
 toolbarpaletteitem > toolbarspring {
-    margin-block: 3px !important;
+    margin-block: calc((var(--urlbar-container-height) - var(--urlbar-height)) / 2) !important;
     outline: none !important;
     border: 1px solid var(--arrowpanel-dimmed-even-further) !important;
     outline-offset: 0 !important;
@@ -21,8 +21,8 @@ toolbarpaletteitem > toolbarspring {
 }
 
 toolbarpaletteitem[place="palette"] > toolbarspring {
-    min-height: 32px !important;
-    max-height: 32px !important;
+    min-height: var(--urlbar-height) !important;
+    max-height: var(--urlbar-height) !important;
     padding-block: 0 !important;
     margin-block: 5px !important;
 }
@@ -338,7 +338,7 @@ toolbar .toolbarbutton-1:not([disabled], [open])[checked]:hover:active > .toolba
 #PersonalToolbar {
     visibility: visible !important;
     padding-inline: 2px !important;
-    min-height: 32px !important;
+    min-height: var(--urlbar-height) !important;
     z-index: 3 !important;
     transition: min-height 200ms ease-in-out, max-height 200ms ease-in-out,
         opacity 200ms ease-in-out, transform 200ms ease-in-out !important;
@@ -358,12 +358,7 @@ toolbar .toolbarbutton-1:not([disabled], [open])[checked]:hover:active > .toolba
 
 :root[inFullscreen]:not([macOSNativeFullscreen], [customizing])
     #PersonalToolbar:not([fullscreentoolbar="true"]),
-#PersonalToolbar[collapsed="true"],
-:root:not([customizing])
-    > body
-    > box:not(:hover, [popup-status])
-    #PersonalToolbar:not(:focus-within, [tempopen="true"]),
-:root:not([customizing]) > body > box[urlbar-status] #PersonalToolbar {
+#PersonalToolbar[collapsed="true"] {
     overflow-y: clip !important;
     min-height: 0 !important;
     max-height: 0 !important;
@@ -376,8 +371,8 @@ toolbar .toolbarbutton-1:not([disabled], [open])[checked]:hover:active > .toolba
 toolbarbutton.bookmark-item:not(.subviewbutton) {
     margin-block: 0 !important;
     padding: var(--bookmark-block-padding) 4px;
-    min-height: 28px !important;
-    min-width: 28px !important;
+    min-height: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
+    min-width: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
     -moz-box-align: center !important;
 }
 

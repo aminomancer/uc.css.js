@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Restore pre-Proton Arrowpanels
-// @version        1.0.1
+// @version        1.0.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    The mother of all proton reversals. Probably my least favorite "feature" of the UI refresh has been the removal of arrows from arrowpanels. I'd call it misguided, except I can't comprehend what guided it in the first place. I mean — they're called arrowpanels, and that should really say it all. The point of arrows is to point at something. In this case, to point at the node to which the panel is anchored. Some might think it's enough that the popup simply be anchored to the node. That might be true for small elements like tooltips. But panels are big enough that they can be lined up with many nodes, especially when they're opened on a toolbar that's full of other buttons. It's not like there aren't other ways to see where the panel is anchored, but why give the user less information? Moreover, don't the arrows look good? This change, more than any of the other ones, feels like change for change's sake. Stripping things down merely for the sake of simplifying them. Anyway, this script will basically restore a bunch of stuff that was removed in Nightly 96.0a1. Arrowpanels' glory days are not behind them, not if I have anything to say about it...
@@ -37,6 +37,8 @@
                     )
                 );
                 container = this.shadowRoot.querySelector(".panel-arrowcontainer");
+                delete this._scrollBox;
+                delete this.__indicatorBar;
                 this.initializeAttributeInheritance();
             }
             let arrowbox = this.shadowRoot.querySelector(".panel-arrowbox");
@@ -176,6 +178,9 @@
                     )
                 );
                 container = this.shadowRoot.querySelector(".panel-arrowcontainer");
+                arrow = this.shadowRoot.querySelector(".panel-arrow");
+                delete this._scrollBox;
+                delete this.__indicatorBar;
                 this.initializeAttributeInheritance();
             }
             let arrowbox = this.shadowRoot.querySelector(".panel-arrowbox");

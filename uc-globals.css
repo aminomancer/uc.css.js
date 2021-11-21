@@ -58,6 +58,9 @@ tooltip {
     --menupopup-inner-box-margin: 0px;
     --menupopup-shadow: none;
     --panel-shadow: none;
+    --searchbar-popup-border: none;
+    --searchbar-popup-border-radius: 0 0 4px 4px;
+    --searchbar-popup-box-shadow: 0 0 10px 3px hsla(0, 0%, 0%, 0.15);
     --webextension-panel-border-radius: 5px;
     --menupopup-margin: calc(0px - var(--menupopup-inner-box-margin));
     --menupopup-background: transparent;

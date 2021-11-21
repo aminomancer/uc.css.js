@@ -357,9 +357,12 @@ userChrome.css.wikipedia.dark-theme-enabled */
     #mw-head li,
     #mw-head span,
     #mw-head .vectorTabs {
-        background: none !important;
         border: none !important;
         white-space: nowrap !important;
+    }
+
+    .vector-menu-tabs li {
+        background: none !important;
     }
 
     #mw-head > * {
@@ -388,9 +391,11 @@ userChrome.css.wikipedia.dark-theme-enabled */
     }
 
     #mw-head #p-personal {
-        top: 0px !important;
-        padding: 5px 0px 0 0 !important;
-        font-size: 14px !important;
+        top: revert !important;
+        right: revert !important;
+        padding: 0 !important;
+        margin-top: 6px !important;
+        font-size: 0.85em !important;
         width: min-content !important;
         flex-wrap: nowrap !important;
         align-self: end !important;
@@ -419,7 +424,7 @@ userChrome.css.wikipedia.dark-theme-enabled */
 
     #mw-head #searchform > div {
         position: absolute !important;
-        top: -28px !important;
+        top: -30px !important;
         right: 0 !important;
         border: none !important;
         background: var(--uc-wiki-table-header-bg) !important;
@@ -499,6 +504,83 @@ userChrome.css.wikipedia.dark-theme-enabled */
 
     #mw-head #searchform #searchButton:hover {
         fill-opacity: 1 !important;
+    }
+
+    #p-personal {
+        margin-inline-end: -0.3em !important;
+    }
+
+    #p-personal li {
+        height: 16px !important;
+        box-sizing: border-box !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        order: 1 !important;
+    }
+    
+    #p-personal li a {
+        padding: 0.375em !important;
+    }
+
+    #p-personal #pt-notifications-alert,
+    #p-personal #pt-notifications-notice {
+        order: 0 !important;
+    }
+
+    #p-personal #pt-notifications-alert a,
+    #p-personal #pt-notifications-notice a {
+        margin: 0 !important;
+    }
+
+    #pt-notifications-alert .mw-echo-notifications-badge,
+    #pt-notifications-notice .mw-echo-notifications-badge {
+        width: 16px !important;
+        height: 16px !important;
+        top: -1px !important;
+        box-sizing: content-box !important;
+        background-size: 16px !important;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+        -moz-context-properties: fill, fill-opacity;
+        fill: currentColor;
+    }
+
+    #mw-head .oo-ui-icon-bell {
+        background-image: url(chrome://userchrome/content/material/notification.svg) !important;
+        --notification-icon-left-offset: 57%;
+    }
+
+    #mw-head .oo-ui-icon-tray {
+        background-image: url(chrome://userchrome/content/in-content/wiki-tray.svg) !important;
+    }
+
+    #pt-notifications-alert .mw-echo-notifications-badge::after,
+    #pt-notifications-notice .mw-echo-notifications-badge::after {
+        top: -2px !important;
+        left: var(--notification-icon-left-offset, 65%) !important;
+        font-size: 0.7em !important;
+        font-weight: normal !important;
+        font-family: sans-serif !important;
+        padding: 0 0.2em !important;
+        border: 1px solid #888 !important;
+        background-color: #666 !important;
+        color: #fff !important;
+    }
+
+    #pt-notifications-alert .mw-echo-notifications-badge span,
+    #pt-notifications-notice .mw-echo-notifications-badge span {
+        visibility: collapse !important;
+    }
+
+    .vector-user-menu-legacy #pt-anonuserpage,
+    .vector-user-menu-legacy #pt-userpage a {
+        background-image: url(chrome://userchrome/content/fxa/avatar.svg) !important;
+        padding-left: 2em !important;
+        background-size: 16px !important;
+        background-repeat: no-repeat !important;
+        background-position: left 0.375em center !important;
+        -moz-context-properties: fill, fill-opacity;
+        fill: currentColor;
     }
 
     /* logo */
@@ -3909,84 +3991,6 @@ userChrome.css.wikipedia.dark-theme-enabled */
     a.new,
     a.new:hover {
         color: hsl(0, 54.4%, 53.5%) !important;
-    }
-
-    #pt-notifications-alert .mw-echo-notifications-badge,
-    #pt-notifications-notice .mw-echo-notifications-badge {
-        top: 0px !important;
-    }
-
-    .mw-echo-notifications-badge-all-read {
-        display: none !important;
-    }
-
-    #pt-notifications-notice .mw-echo-notifications-badge.oo-ui-flaggedElement-unseen::after,
-    #pt-notifications-notice .mw-echo-notifications-badge.mw-echo-unseen-notifications::after {
-        background-color: hsla(0, 0%, 100%, 0.3) !important;
-    }
-
-    #pt-notifications-notice
-        .mw-echo-notifications-badge.oo-ui-flaggedElement-unseen:hover::after,
-    #pt-notifications-notice
-        .mw-echo-notifications-badge.mw-echo-unseen-notifications:hover::after {
-        background-color: hsla(0, 0%, 100%, 0.4) !important;
-    }
-
-    #pt-notifications-alert .mw-echo-notifications-badge::after,
-    #pt-notifications-notice .mw-echo-notifications-badge::after {
-        top: 15% !important;
-        left: 15% !important;
-        /*         font-size: 0.88em !important; */
-    }
-
-    #pt-notifications-alert .mw-echo-notifications-badge::after,
-    #pt-notifications-notice .mw-echo-notifications-badge::after {
-        visibility: visible !important;
-        padding-inline: 2.5px !important;
-        padding-block: 0px !important;
-        line-height: 12.5px !important;
-        margin-block: -0.7px !important;
-    }
-
-    :is(#pt-notifications-notice, #pt-notifications-alert) .mw-echo-notifications-badge {
-        margin-inline: 0 !important;
-    }
-
-    #p-personal #pt-notifications-alert,
-    #p-personal #pt-notifications-notice {
-        margin-right: 0em !important;
-        margin-top: -0.35em !important;
-        margin-inline: 0 !important;
-        top: -3px !important;
-    }
-
-    #p-personal #pt-notifications-alert {
-        right: -2px !important;
-        position: relative !important;
-        float: none !important;
-    }
-
-    #p-personal #pt-notifications-notice {
-        right: 2px !important;
-        position: relative !important;
-        float: none !important;
-    }
-
-    #p-personal #pt-userpage {
-        position: relative !important;
-        margin-left: 0px !important;
-        margin-right: 0px !important;
-        float: none !important;
-    }
-
-    #pt-notifications-alert .mw-echo-notifications-badge:focus,
-    #pt-notifications-notice .mw-echo-notifications-badge:focus {
-        box-shadow: none !important;
-    }
-
-    #pt-notifications-alert .mw-echo-notifications-badge:focus::after,
-    #pt-notifications-notice .mw-echo-notifications-badge:focus::after {
-        border-color: unset !important;
     }
 
     .suggestions {

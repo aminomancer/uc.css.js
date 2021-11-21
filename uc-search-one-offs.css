@@ -163,11 +163,7 @@ it also changes the appearance of the one-offs in the searchbar. */
     display: none !important;
 }
 
-/* .urlbarView .search-one-offs-context-menu {
-    display: none !important;
-} */
-
-.urlbarView :is(.searchbar-engine-one-off-item, .addengine-item) {
+.urlbarView :is(.searchbar-engine-one-off-item, .addengine-item)  {
     min-width: var(--urlbar-one-offs-engine-width) !important;
     height: var(--urlbar-one-offs-engine-width) !important;
     padding: 0 !important;
@@ -182,10 +178,12 @@ it also changes the appearance of the one-offs in the searchbar. */
     fill-opacity: 1 !important;
 }
 
-#nav-bar:not([overflowing="true"])
-    .urlbarView
-    :is(.searchbar-engine-one-off-item, .addengine-item) {
-    fill-opacity: var(--urlbar-icon-fill-opacity) !important;
+.urlbarView :is(.searchbar-engine-one-off-item, .addengine-item),
+#PopupSearchAutoComplete :is(.searchbar-engine-one-off-item, .addengine-item) {
+    min-width: 32px !important;
+    height: 32px !important;
+    padding: 2px !important;
+    color: var(--panel-description-color) !important;
 }
 
 :root:not([customizing])
@@ -195,8 +193,8 @@ it also changes the appearance of the one-offs in the searchbar. */
 }
 
 .urlbarView :is(.searchbar-engine-one-off-item, .addengine-item) > .button-box {
-    min-width: 28px !important;
-    height: 28px !important;
+    min-width: var(--urlbar-one-offs-engine-width) !important;
+    height: var(--urlbar-one-offs-engine-width) !important;
     padding: 0 !important;
     border-radius: var(--toolbarbutton-border-radius) !important;
 }
@@ -253,7 +251,6 @@ it also changes the appearance of the one-offs in the searchbar. */
     max-width: var(--urlbar-one-offs-width) !important;
     padding: 0 !important;
     top: calc(-3px - var(--urlbar-height)) !important;
-    right: 5px !important;
     scroll-behavior: smooth !important;
     box-sizing: border-box !important;
     border: none !important;
@@ -264,47 +261,6 @@ it also changes the appearance of the one-offs in the searchbar. */
     flex-wrap: nowrap !important;
 }
 
-#urlbar:is([usertyping], [searchmode], [open][pageproxystate="invalid"]) #urlbar-input {
-    margin-right: var(--urlbar-one-offs-width) !important;
-}
-
-#urlbar[textoverflow]:is([usertyping], [searchmode], [open][pageproxystate="invalid"])
-    #urlbar-input {
-    margin-right: 258px !important;
-}
-
-#urlbar[textoverflow="both"] > #urlbar-input-container > .urlbar-input-box > #urlbar-input {
-    mask-image: linear-gradient(
-        to right,
-        transparent,
-        black 3ch,
-        black calc(100% - 3ch),
-        transparent
-    );
-}
-
-#urlbar[textoverflow="right"] > #urlbar-input-container > .urlbar-input-box > #urlbar-input {
-    mask-image: linear-gradient(to left, transparent, black 3ch);
-}
-
-#urlbar[textoverflow="left"] > #urlbar-input-container > .urlbar-input-box > #urlbar-input {
-    mask-image: linear-gradient(to right, transparent, black 3ch);
-}
-
-#urlbar[textoverflow="both"][usertyping="true"] #urlbar-input {
-    mask-image: linear-gradient(
-        to right,
-        transparent,
-        black 3ch,
-        black calc(100% - 55px),
-        transparent calc(100% - 5px)
-    ) !important;
-}
-
-#urlbar[textoverflow="right"][usertyping="true"] #urlbar-input {
-    mask-image: linear-gradient(to left, transparent 5px, black 55px) !important;
-}
-
 #urlbar .search-one-offs:not([scrolledtostart], [scrolledtoend]) {
     mask-image: linear-gradient(to right, transparent 10px, black 30px);
 }
@@ -312,156 +268,31 @@ it also changes the appearance of the one-offs in the searchbar. */
 #urlbar .search-panel-one-offs {
     min-height: var(--urlbar-height);
     align-items: center;
-    transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out !important;
-    opacity: 0 !important;
-    transform: translateX(90px) !important;
-    transform-style: preserve-3d !important;
-    backface-visibility: hidden !important;
-    transform-origin: right !important;
-    pointer-events: none !important;
 }
 
-#urlbar .search-one-offs,
-#urlbar .search-one-offs * {
-    pointer-events: none !important;
-}
-
-#urlbar:is([usertyping], [searchmode], [open][pageproxystate="invalid"]) .search-panel-one-offs {
-    opacity: 1 !important;
-    transform: none !important;
-}
-
-/* #page-action-buttons,
-#urlbar-input-container > .urlbar-icon {
-    pointer-events: none !important;
-    transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out !important;
-} */
-
-#urlbar:is([usertyping], [searchmode], [open][pageproxystate="invalid"]) #page-action-buttons,
-#urlbar:is([usertyping], [searchmode], [open][pageproxystate="invalid"])
-    #urlbar-input-container
-    > .urlbar-icon {
-    /* opacity: 0 !important;
-    pointer-events: none !important;
-    transform-style: flat !important;
-    backface-visibility: hidden !important;
-    transform: translateX(50px) scale(0.5) !important;
-    transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out !important; */
-    display: none;
-}
-
-#urlbar #page-action-buttons,
-#urlbar #urlbar-input-container > .urlbar-icon {
-    animation: slideinUrlbar 0.1s linear 0s;
-    transform-style: preserve-3d !important;
-    backface-visibility: hidden !important;
-    transform-origin: right !important;
-}
-
-:root[customizing="true"] #urlbar :is(#page-action-buttons, #search-one-offs),
-:root[customizing="true"] #urlbar #urlbar-input-container > .urlbar-icon,
-toolbarpaletteitem > #urlbar-container :is(#page-action-buttons, #search-one-offs) {
-    animation: none !important;
-    transition: none !important;
-}
-
-@keyframes slideinUrlbar {
-    from {
-        opacity: 0;
-        transform: translateX(100%);
-    }
-    to {
-        opacity: 1;
-        transform: none;
-    }
-}
-
-#page-action-buttons > *:not([hidden]) {
-    display: -moz-inline-box !important;
-}
-
-#urlbar[searchmode] #page-action-buttons * {
-    pointer-events: none !important;
-}
-
-#urlbar[searchmode] #page-action-buttons {
-    opacity: 0 !important;
-}
-
-#urlbar:not([usertyping], [searchmode], [open][pageproxystate="invalid"])
-    #pageActionButton:not([hidden]) {
-    display: -moz-inline-box !important;
-}
-
-#urlbar:not([usertyping], [searchmode], [open][pageproxystate="invalid"])
-    #star-button-box:not([hidden]) {
-    display: -moz-box !important;
-}
-
-#urlbar:is([usertyping], [searchmode], [open][pageproxystate="invalid"])
-    .searchbar-engine-one-off-item,
-#urlbar:is([usertyping], [searchmode], [open][pageproxystate="invalid"]) .search-one-offs *,
-#urlbar:is([usertyping], [searchmode], [open][pageproxystate="invalid"]) .search-one-offs {
-    pointer-events: auto !important;
-}
-
-#nav-bar:not([overflowing="true"]) #urlbar:not([open][breakout="true"]) > .urlbarView {
-    display: block !important;
-}
-
-#urlbar:not([open][breakout="true"]) .urlbarView-results {
-    display: none !important;
-}
-
-#nav-bar[overflowing="true"] #urlbar .search-one-offs {
+#urlbar .search-one-offs {
     position: static !important;
     max-width: unset !important;
     clip-path: inset(0 2px 0 2px);
     mask-image: none !important;
-    --desaturate-dimmed: var(--arrowpanel-dimmed);
-    --desaturate-dimmed-further: var(--arrowpanel-dimmed-further);
 }
 
-#nav-bar[overflowing="true"] #urlbar .search-one-offs * {
+#urlbar .search-one-offs * {
     opacity: 1 !important;
     transition: none !important;
     pointer-events: auto !important;
     transform: none !important;
 }
 
-#nav-bar[overflowing="true"] :is(.searchbar-engine-one-off-item, .addengine-item) {
-    min-width: 32px !important;
-    height: 32px !important;
-    padding: 2px !important;
-    color: var(--panel-description-color) !important;
+:is(.searchbar-engine-one-off-item, .addengine-item):hover
+    > .button-box {
+    background-color: var(--toolbarbutton-hover-background) !important;
 }
 
-#nav-bar[overflowing="true"]
-    :is(.searchbar-engine-one-off-item, .addengine-item):not([selected]):hover
+:is(.searchbar-engine-one-off-item, .addengine-item)[selected]
     > .button-box {
-    background-color: var(--arrowpanel-dimmed) !important;
-}
-
-#nav-bar[overflowing="true"]
-    :is(.searchbar-engine-one-off-item, .addengine-item)[selected]
-    > .button-box {
-    background-color: var(--arrowpanel-faint) !important;
+    background-color: var(--toolbarbutton-active-background) !important;
     color: var(--lwt-text-color) !important;
-}
-
-#nav-bar[overflowing="true"] #urlbar #page-action-buttons,
-#nav-bar[overflowing="true"] #urlbar #urlbar-input-container > .urlbar-icon {
-    animation: none;
-    display: -moz-box;
-}
-
-#nav-bar[overflowing="true"]
-    #urlbar[textoverflow]:is([usertyping], [searchmode], [open][pageproxystate="invalid"])
-    #urlbar-input,
-#nav-bar[overflowing="true"]
-    #urlbar:is([usertyping], [searchmode], [open][pageproxystate="invalid"])
-    #urlbar-input {
-    margin-right: unset !important;
 }
 
 /* individual search one off adjustments */
@@ -483,8 +314,4 @@ toolbarpaletteitem > #urlbar-container :is(#page-action-buttons, #search-one-off
 .searchbar-engine-one-off-item:is([image="chrome://userchrome/content/engines/amazon.svg"], [image="moz-extension://c2a6335f-fd4d-4206-bae7-b755cc686f59/favicon.svg"])
     .button-icon {
     margin-top: 0.7px !important;
-}
-
-:root[lwt-toolbar-field-brighttext] :is(.searchbar-engine-one-off-item, .addengine-item) {
-    color: var(--lwt-toolbarbutton-icon-fill) !important;
 }

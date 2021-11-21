@@ -277,6 +277,10 @@ panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem[image] {
     padding-inline: 0 8px !important;
 }
 
+panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem[image] :is(.ac-site-icon, .ac-type-icon) {
+    margin-inline: var(--context-iconic-margin) !important;
+}
+
 :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
     :where(menu, menuitem, menucaption)
     > :is(label, .menu-iconic-text, .menu-text) {
