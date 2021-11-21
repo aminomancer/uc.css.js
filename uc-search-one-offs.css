@@ -159,10 +159,6 @@ it also changes the appearance of the one-offs in the searchbar. */
         var(--arrowpanel-menuitem-inline-margin) !important;
 }
 
-.urlbarView .search-panel-header {
-    display: none !important;
-}
-
 .urlbarView :is(.searchbar-engine-one-off-item, .addengine-item)  {
     min-width: var(--urlbar-one-offs-engine-width) !important;
     height: var(--urlbar-one-offs-engine-width) !important;
@@ -243,22 +239,17 @@ it also changes the appearance of the one-offs in the searchbar. */
     height: 16px;
 }
 
-/* search one-offs in urlbar */
 .urlbarView .search-one-offs {
     position: absolute !important;
     z-index: 12;
     min-height: var(--urlbar-height) !important;
     max-width: var(--urlbar-one-offs-width) !important;
-    padding: 0 !important;
+    padding: 2px !important;
     top: calc(-3px - var(--urlbar-height)) !important;
     scroll-behavior: smooth !important;
     box-sizing: border-box !important;
     border: none !important;
-    /* clip-path: inset(0 2px 0 0); */
-}
-
-.urlbarView .search-panel-one-offs {
-    flex-wrap: nowrap !important;
+    flex-flow: row nowrap !important;
 }
 
 #urlbar .search-one-offs:not([scrolledtostart], [scrolledtoend]) {
@@ -266,14 +257,50 @@ it also changes the appearance of the one-offs in the searchbar. */
 }
 
 #urlbar .search-panel-one-offs {
+    flex-wrap: nowrap !important;
     min-height: var(--urlbar-height);
     align-items: center;
+}
+
+#urlbar .search-panel-one-offs-container {
+	min-width: unset !important;
+    margin-inline-end: -4px !important;
+}
+
+#urlbar-search-one-offs-separator {
+    width: calc(100% - 4px) !important;
+    -moz-box-align: center !important;
+    margin: 2px !important;
+}
+
+#nav-bar:not([overflowing="true"]) #urlbar-search-one-offs-separator {
+    display: none !important;
+}
+
+.urlbarView .search-panel-one-offs-header {
+	min-width: -moz-fit-content !important;
+	flex-grow: 0 !important;
+	flex-shrink: 0 !important;
+    min-height: var(--urlbar-height) !important;
+    align-items: center;
+}
+
+.urlbarView .search-panel-one-offs-header-label {
+    padding-inline: 8px !important;
+    display: none !important;
+}
+
+.urlbarView .search-panel-one-offs-header::before {
+	content: "Search with:";
+	display: inline-block;
+	margin-block: 2px 3px;
+	margin-inline: 8px 4px;
+	color: var(--panel-shortcut-color);
 }
 
 #urlbar .search-one-offs {
     position: static !important;
     max-width: unset !important;
-    clip-path: inset(0 2px 0 2px);
     mask-image: none !important;
 }
 

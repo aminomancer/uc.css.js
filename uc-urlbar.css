@@ -28,6 +28,66 @@ toolbarpaletteitem[place="palette"] > #search-container {
     min-height: var(--urlbar-container-height) !important;
 }
 
+.widget-overflow-list #search-container {
+    padding: 0 !important;
+    margin: var(--arrowpanel-menuitem-margin) !important;
+}
+
+.widget-overflow-list #searchbar {
+    box-shadow: none !important;
+    outline: none !important;
+    min-height: var(--subviewbutton-height) !important;
+    font-size: revert !important;
+}
+
+.widget-overflow-list #searchbar:not(:focus-within) {
+    background: transparent !important;
+}
+
+.widget-overflow-list #searchbar:hover {
+    background: var(--panel-item-hover-bgcolor) !important;
+}
+
+.widget-overflow-list #searchbar:focus-within {
+    background: var(--panel-item-active-bgcolor) !important;
+}
+
+.widget-overflow-list #searchbar:not(:focus-within) input {
+    cursor: default !important;
+}
+
+.widget-overflow-list #searchbar .searchbar-textbox {
+    min-height: unset !important;
+}
+
+.widget-overflow-list #searchbar .searchbar-textbox::placeholder {
+	opacity: 1 !important;
+	color: var(--lwt-text-color) !important;
+}
+
+.widget-overflow-list #searchbar .search-go-button {
+	box-sizing: border-box !important;
+	width: calc(var(--subviewbutton-height) - 2px) !important;
+	height: calc(var(--subviewbutton-height) - 2px) !important;
+	padding: calc((var(--subviewbutton-height) - 16px) / 2) !important;
+}
+
+.widget-overflow-list #searchbar:not([disabled]) .searchbar-search-icon,
+.widget-overflow-list #searchbar:not([disabled]):is(:hover, :focus-within) .searchbar-search-icon{
+	fill-opacity: 1 !important;
+    fill: var(--toolbarbutton-icon-fill) !important;
+}
+
+.widget-overflow-list #searchbar[disabled] .searchbar-search-icon {
+	fill-opacity: 1 !important;
+	fill: var(--context-menu-disabled-color) !important;
+}
+
+.widget-overflow-list #searchbar .searchbar-search-icon {
+	margin-inline: 6px 8px !important;
+	padding: 0.6px !important;
+}
+
 :root[chromehidden~="toolbar"] #urlbar-container {
     margin-inline-start: 2px !important;
 }
@@ -47,14 +107,15 @@ toolbarpaletteitem[place="palette"] > #search-container {
 }
 
 #PopupSearchAutoComplete {
-    margin-top: calc((var(--urlbar-container-height) - var(--urlbar-height)) / 2) !important;
     border: none !important;
     --panel-background: var(--urlbar-results-bgcolor) !important;
     box-shadow: none;
     font-size: 1.196em !important;
-    padding: 0 15px 15px;
-    margin: -15px;
-    margin-inline: -18px !important;
+    padding: 0 var(--searchbar-popup-box-shadow-size, 15px)
+        var(--searchbar-popup-box-shadow-size, 15px);
+    margin: calc((var(--urlbar-container-height) - var(--urlbar-height)) / 2)
+        calc(-4px - var(--searchbar-popup-box-shadow-size, 15px))
+        calc(0px - var(--searchbar-popup-box-shadow-size, 15px)) !important;
     background: none;
 }
 
@@ -77,6 +138,8 @@ toolbarpaletteitem[place="palette"] > #search-container {
 
 #PopupSearchAutoComplete .autocomplete-richlistitem :is(.ac-site-icon, .ac-type-icon) {
     margin-inline: 0 calc(var(--urlbar-icon-padding) + 2px) !important;
+    width: 16px !important;
+    height: 16px !important;
 }
 
 #PopupSearchAutoComplete .autocomplete-richlistitem .ac-title-text {
@@ -391,7 +454,10 @@ but CSS hides it faster and avoids flickering.
 
 .urlbar-input-box input:not(:focus)::selection,
 .searchbar-textbox:not(:focus-within)::selection {
-    background-color: var(--lwt-toolbar-field-highlight-disabled, text-select-disabled-background) !important;
+    background-color: var(
+        --lwt-toolbar-field-highlight-disabled,
+        text-select-disabled-background
+    ) !important;
 }
 
 #tracking-protection-icon-box
@@ -482,7 +548,8 @@ so there must be some issue with the PDF viewer that I don't know about. */
 or it could be that the connection is encrypted but the SSL certificate is not from a known/trusted issuer or is not recognized by the CA,
 or the SSL certificate is from a known issuer but the cipher used to encrypt the connection is deprecated or has a security flaw.
 additionally this also shows if the site was originally blocked for lacking a valid certificate and you chose to connect anyway. */
-#identity-box[pageproxystate="valid"]:is(.mixedDisplayContent, .mixedDisplayContentLoadedActiveBlocked, .certUserOverridden, .weakCipher) #identity-icon {
+#identity-box[pageproxystate="valid"]:is(.mixedDisplayContent, .mixedDisplayContentLoadedActiveBlocked, .certUserOverridden, .weakCipher)
+    #identity-icon {
     list-style-image: url(chrome://global/skin/icons/security-warning.svg) !important;
     fill: unset !important;
 }
@@ -499,7 +566,8 @@ the about:blocked and about:neterror pages don't get a special icon for some rea
 a custom icon for these states can't be added with pure CSS since they just get marked as unknownIdentity.
 my script, urlbarMods.uc.js assigns them custom classes .aboutBlockedPage and .aboutNetErrorPage
 so you can use those classes to set the icon. */
-#identity-box[pageproxystate="valid"]:is(.certErrorPage, .httpsOnlyErrorPage, .aboutBlockedPage, .aboutNetErrorPage) #identity-icon {
+#identity-box[pageproxystate="valid"]:is(.certErrorPage, .httpsOnlyErrorPage, .aboutBlockedPage, .aboutNetErrorPage)
+    #identity-icon {
     list-style-image: url(chrome://userchrome/content/warning.svg) !important;
 }
 

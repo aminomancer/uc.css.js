@@ -480,15 +480,6 @@
     line-height: 1.4;
 }
 
-.urlbarView-row[has-action]:not([selected]) .urlbarView-title[isurl] {
-    color: var(--urlbar-popup-url-color) !important;
-}
-
-.urlbarView-row[has-action]:not([selected]) .urlbarView-title[isurl] strong {
-    color: var(--urlbar-popup-url-color) !important;
-    text-decoration: underline !important;
-}
-
 .urlbarView-action[data-l10n-id="urlbar-result-action-visit"] {
     display: none;
 }
@@ -612,8 +603,8 @@
 .urlbarView {
     margin: 0 !important;
     padding: 2px !important;
-    width: calc(100% + 6px) !important;
-    left: -3px !important;
+    width: calc(100% + 8px) !important;
+    left: -4px !important;
     position: relative !important;
     overflow: visible !important;
     top: calc((var(--urlbar-container-height) - var(--urlbar-height)) / 2) !important;
@@ -648,7 +639,7 @@
 }
 
 #urlbar-background {
-    width: calc(100% + 6px) !important;
+    width: calc(100% + 8px) !important;
     top: var(--urlbar-container-height) !important;
     border: var(--searchbar-popup-border) !important;
     background: var(--urlbar-results-bgcolor) !important;
@@ -662,7 +653,7 @@
     transform-origin: top !important;
     transform-style: flat !important;
     backface-visibility: hidden !important;
-    margin: -3px !important;
+    margin: -3px -4px !important;
     box-shadow: var(--searchbar-popup-box-shadow) !important;
     clip-path: inset(
         0 -100% -100% -100%
@@ -724,7 +715,8 @@ so you might wanna turn the animation off. I might even make it off by default. 
 }
 
 .urlbarView-row-inner {
-    padding-block: 0 !important;
+    padding-block: 2px !important;
+    box-sizing: border-box !important;
     min-height: 34px !important;
     border-radius: var(--arrowpanel-menuitem-border-radius) !important;
     align-items: center !important;
@@ -802,7 +794,7 @@ so you might wanna turn the animation off. I might even make it off by default. 
     background: none !important;
     border-bottom-left-radius: 4px !important;
     border-bottom-right-radius: 4px !important;
-    padding: 0.4px 1px !important;
+    padding: 2px !important;
 }
 
 .urlbarView-results[wrap]
@@ -810,16 +802,20 @@ so you might wanna turn the animation off. I might even make it off by default. 
     > .urlbarView-row-inner
     > .urlbarView-url:-moz-locale-dir(ltr) {
     padding-left: calc(var(--urlbarView-item-inline-padding) + 0.5px + 16px) !important;
+    margin-inline-start: 0 !important;
 }
 
 .urlbarView-results[wrap]
     > .urlbarView-row[has-url]:is([type="switchtab"], [type="bookmark"], [type="remotetab"], [type="dynamic"], [pinned])
     > .urlbarView-row-inner
     > .urlbarView-url:-moz-locale-dir(ltr) {
-    padding-left: calc(
+    padding-left: calc(var(--urlbarView-item-inline-padding) + 0.5px + 16px) !important;
+    margin-inline-start: 0 !important;
+    /* the following will anchor the url to the text, even when there are 2 icons. it doesn't look as good as it sounds. */
+    /* padding-left: calc(
         var(--urlbarView-item-inline-padding) + 0.5px + 16px +
             calc(var(--urlbar-icon-padding) + 2px) + 16px
-    ) !important;
+    ) !important; */
 }
 
 .urlbarView-results[wrap]

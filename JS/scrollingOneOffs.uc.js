@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Scrolling Search One-offs
-// @version        1.1
+// @version        1.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    This is for my own personal stylesheet, which moves the one-off search engine buttons to the right side of the url bar when the user is typing into the url bar. The script allows the search one-offs box to be scrolled with mousewheel up/down. It also adds a minor improvement to the one-offs in the searchbar results popup: if the one-offs are overflowing and you switch to a search engine that is overflown off the popup, it will automatically scroll to the selected one-off button, just like the urlbar one-offs does with oneClickOneOffSearchButtons.uc.js.
@@ -21,8 +21,7 @@
     }
 
     function setUpScroll(oneOffs, mask = false) {
-        let isSearchBar = oneOffs.container.parentElement.id === "PopupSearchAutoComplete";
-        let container = isSearchBar ? oneOffs.buttons.parentElement : oneOffs.container;
+        let container = oneOffs.buttons.parentElement;
         let buttons = oneOffs.buttons;
         let buttonsList = buttons.children;
         container.maskDisabled = !mask;
@@ -39,20 +38,6 @@
         container._destination = 0;
         container._direction = 0;
         container._prevMouseScrolls = [null, null];
-        container.cachedScroll;
-        container.frames = [
-            {
-                maskPositionX: "0px",
-                maskSize: "100%",
-                maskImage:
-                    "linear-gradient(to right, transparent 10px, rgb(0, 0, 0) 30px, rgb(0, 0, 0) 100%)",
-            },
-            {
-                maskPositionX: "-30px",
-                maskSize: "1000%",
-                maskImage: "none",
-            },
-        ];
 
         container.scrollByPixels = function (aPixels, aInstant) {
             let scrollOptions = { behavior: aInstant ? "instant" : "auto" };
@@ -66,53 +51,14 @@
                 : 30;
         };
 
-        container.maskAnim = function () {
-            if (this.cachedScroll === this.scrollLeft) {
-                return (this.cachedScroll = this.scrollLeft);
-            }
-            this.cachedScroll = this.scrollLeft;
-            if (this.scrollLeft === 0 || this.scrollLeft === this.scrollLeftMax) {
-                if (this.getAttribute("scrolledtostart")) return;
-                this.animation = this.animate(this.frames, {
-                    id: "mask_bwd",
-                    direction: "normal",
-                    duration: 200,
-                    iterations: 1,
-                    easing: "ease-in-out",
-                });
-            } else {
-                if (this.getAttribute("scrolledtostart"))
-                    this.animation = this.animate(this.frames, {
-                        id: "mask_fwd",
-                        direction: "reverse",
-                        duration: 200,
-                        iterations: 1,
-                        easing: "ease-in-out",
-                    });
-            }
-        };
-
-        container.scrolledToStart = function () {
-            if (this.maskDisabled) return;
-            if (this.scrollLeft === 0 || this.scrollLeft === this.scrollLeftMax) {
-                this.maskAnim();
-                this.setAttribute("scrolledtostart", true);
-            } else {
-                this.maskAnim();
-                this.removeAttribute("scrolledtostart");
-            }
-        };
-
         container.on_Scroll = function (_e) {
             this._isScrolling = true;
-            this.scrolledToStart();
         };
 
         container.on_Scrollend = function (_e) {
             this._isScrolling = false;
             this._destination = 0;
             this._direction = 0;
-            this.scrolledToStart();
         };
 
         container.on_Wheel = function (e) {
@@ -161,35 +107,34 @@
         container.addEventListener("wheel", container.on_Wheel);
         container.addEventListener("scroll", container.on_Scroll);
         container.addEventListener("scrollend", container.on_Scrollend);
-        container.scrolledToStart();
 
-        if (isSearchBar) {
-            container.style.paddingInline = `4px`;
-            container.style.clipPath = `inset(0 4px 0 4px)`;
-            oneOffs.scrollToButton = function (el) {
-                if (!el) el = buttons.firstElementChild;
-                let slider = el.parentElement;
-                let buttonX = rectX(el) - rectX(slider);
-                let buttonWidth = parseWidth(el);
-                let midpoint = slider.parentElement.clientWidth / 2;
-                slider.parentElement.scrollTo({
-                    left: buttonX + buttonWidth / 2 - midpoint,
-                    behavior: "auto",
-                });
-            };
-            oneOffs.on_SelectedOneOffButtonChanged = function (_e) {
-                oneOffs.scrollToButton(oneOffs.selectedButton);
-            };
-            oneOffs.addEventListener(
-                "SelectedOneOffButtonChanged",
-                oneOffs.on_SelectedOneOffButtonChanged,
-                false
-            );
-        }
+        container.style.paddingInline = `4px`;
+        container.style.clipPath = `inset(0 4px 0 4px)`;
+        oneOffs.scrollToButton = function (el) {
+            if (!el) el = buttons.firstElementChild;
+            let slider = el.parentElement;
+            let buttonX = rectX(el) - rectX(slider);
+            let buttonWidth = parseWidth(el);
+            let midpoint = slider.parentElement.clientWidth / 2;
+            slider.parentElement.scrollTo({
+                left: buttonX + buttonWidth / 2 - midpoint,
+                behavior: "auto",
+            });
+        };
+        oneOffs.on_SelectedOneOffButtonChanged = function (_e) {
+            oneOffs.scrollToButton(oneOffs.selectedButton);
+        };
+        oneOffs.addEventListener(
+            "SelectedOneOffButtonChanged",
+            oneOffs.on_SelectedOneOffButtonChanged,
+            false
+        );
     }
 
     function init() {
-        setUpScroll(gURLBar.view.oneOffSearchButtons, true);
+        setTimeout(() => {
+            setUpScroll(gURLBar.view.oneOffSearchButtons, true);
+        }, 100);
         document
             .getElementById("PopupSearchAutoComplete")
             .addEventListener(

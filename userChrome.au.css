@@ -179,7 +179,7 @@ panel[type="arrow"][side="right"] {
     border: var(--searchbar-popup-border);
     border-radius: var(--searchbar-popup-border-radius);
     box-shadow: var(--searchbar-popup-box-shadow);
-    width: calc(var(--panel-width) + 6px);
+    width: calc(var(--panel-width) + 8px);
 }
 
 /* panel width */

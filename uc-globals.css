@@ -61,6 +61,7 @@ tooltip {
     --searchbar-popup-border: none;
     --searchbar-popup-border-radius: 0 0 4px 4px;
     --searchbar-popup-box-shadow: 0 0 10px 3px hsla(0, 0%, 0%, 0.15);
+    --searchbar-popup-box-shadow-size: 15px; /* if you increase the blur or spread values in the variable above, increase this variable commensurately */
     --webextension-panel-border-radius: 5px;
     --menupopup-margin: calc(0px - var(--menupopup-inner-box-margin));
     --menupopup-background: transparent;
