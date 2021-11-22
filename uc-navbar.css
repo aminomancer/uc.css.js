@@ -546,11 +546,6 @@ toolbarbutton.bookmark-item:not(.subviewbutton) {
     background-color: var(--toolbarbutton-active-background) !important;
 }
 
-#navigator-toolbox,
-#navigator-toolbox > * {
-    width: -moz-available;
-}
-
 /* fix a bug that occurs when pre-proton downloads button is installed along with navbar toolbarbutton slider script */
 #nav-bar-toolbarbutton-slider {
     overflow: -moz-hidden-unscrollable !important;

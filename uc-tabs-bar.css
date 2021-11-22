@@ -54,11 +54,7 @@ this sheet controls their appearance as well. */
 }
 
 #toolbar-menubar[autohide="true"][inactive="true"]:not([customizing="true"]) {
-    max-width: 0 !important;
-    min-width: 0 !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    opacity: 0 !important;
+    visibility: collapse !important;
 }
 
 :root[inFullscreen] #toolbar-menubar {
