@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           App Menu Mods
-// @version        1.3
+// @version        1.3.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Makes some minor modifications to the app menu. (the popup opened by clicking the hamburger button on the far right of the navbar) It adds a restart button to the app menu (only if you're using fx-autoconfig), changes the "Add-ons and Themes" button to say "Extensions" (or whatever the equivalent is in your language, since the strings are localized automatically) and it adds a separator under the "Manage Account" button in the profile/account panel. I'll continue adding more mods to this script as I think of them.
@@ -12,6 +12,7 @@
             PanelUI._initialized || PanelUI.init(shouldSuppressPopupNotifications);
             PanelUI.mainView.addEventListener("ViewShowing", this, { once: true });
             this.addSeparatorToAccountPanel();
+            this.fixSyncSubviewButtonAlignment();
         }
         static sleep(ms) {
             return new Promise((resolve) => setTimeout(resolve, ms));
@@ -53,6 +54,15 @@
             let exitButton = document.getElementById("appMenu-quit-button2");
             if (exitButton) exitButton.before(restartButton);
             else PanelUI.mainView.querySelector(".panel-subview-body").appendChild(restartButton);
+        }
+        fixSyncSubviewButtonAlignment() {
+            eval(
+                `gSync.populateSendTabToDevicesView = function ` +
+                    gSync.populateSendTabToDevicesView
+                        .toSource()
+                        .replace(/^populateSendTabToDevicesView/, ``)
+                        .replace(/item.setAttribute\(\"align\", \"start\"\);/, ``)
+            );
         }
     }
 

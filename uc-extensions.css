@@ -367,6 +367,14 @@ more useful than userContent.css when dealing with very complex websites that ne
     background-image: url(chrome://userchrome/content/material/translate-small.svg);
 }
 
+#simple-translate_sienori-menuitem-_translateLink:not(.menuitem-iconic, .menu-iconic)::before {
+    background-image: url(chrome://userchrome/content/skin/link.svg);
+}
+
+#simple-translate_sienori-menuitem-_translateText:not(.menuitem-iconic, .menu-iconic)::before {
+    background-image: url(chrome://userchrome/content/skin/case-sensitive.svg);
+}
+
 /* hide simple translate menu item in sidebars (e.g. TST, sidebery) */
 @-moz-document regexp("chrome://browser/content/webext-panels.xhtml")
 {
