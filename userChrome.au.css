@@ -1048,6 +1048,24 @@ menuitem.subviewbutton:not([disabled])[_moz-menuactive]:active,
     list-style-image: url(chrome://userchrome/content/skin/synced-tabs.svg);
 }
 
+/* check for the english label in case user doesn't have my script miscMods.uc.js
+obviously that will only work for english firefox, so if you use another language,
+you should download miscMods.uc.js since it will dynamically set a universal attribute
+that we can select irrespective of target language. */
+#sidebar-reverse-position:is([label="Move Sidebar to Left"], [to-position="left"]) .toolbarbutton-icon {
+    list-style-image: url(chrome://userchrome/content/skin/back.svg);
+    padding: 1px !important;
+}
+
+#sidebar-reverse-position:is([label="Move Sidebar to Right"], [to-position="right"]) .toolbarbutton-icon {
+    list-style-image: url(chrome://userchrome/content/skin/forward.svg);
+    padding: 1px !important;
+}
+
+#sidebarMenu-popup .subviewbutton[oncommand="SidebarUI.hide()"][data-l10n-id="sidebar-menu-close"] {
+    list-style-image: url(chrome://userchrome/content/close-big.svg);
+}
+
 #characterencoding-button {
     list-style-image: url(chrome://userchrome/content/skin/characterEncoding.svg);
 }

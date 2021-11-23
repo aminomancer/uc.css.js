@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Misc. Mods
-// @version        1.8.3
+// @version        1.8.4
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Various tiny mods not worth making separate scripts for. Read the comments inside the script for details.
@@ -241,6 +241,7 @@
             );
         }
         randomTinyStuff() {
+            // give the tracking protection popup's info button a tooltip
             let etpPanel = document
                 .getElementById("template-protections-popup")
                 ?.content.querySelector("#protections-popup");
@@ -255,6 +256,32 @@
                 etpPanel.removeEventListener("popupshowing", setEtpPopupInfoTooltip);
             };
             if (etpPanel) etpPanel.addEventListener("popupshowing", setEtpPopupInfoTooltip);
+
+            // support icons for the "move sidebar to left" and "move sidebar to right" buttons
+            // in the sidebar switcher dropdown menu that appear when you click the sidebar switcher:
+            // #sidebar-reverse-position[to-position="left"] {
+            //     list-style-image: url(chrome://browser/skin/back.svg);
+            // }
+            // #sidebar-reverse-position[to-position="right"] {
+            //     list-style-image: url(chrome://browser/skin/forward.svg);
+            // }
+            SidebarUI.showSwitcherPanel = function () {
+                this._ensureShortcutsShown();
+                this._switcherPanel.addEventListener(
+                    "popuphiding",
+                    () => this._switcherTarget.classList.remove("active"),
+                    { once: true }
+                );
+                let onRight = this._positionStart == RTL_UI;
+                let label = onRight
+                    ? gNavigatorBundle.getString("sidebar.moveToLeft")
+                    : gNavigatorBundle.getString("sidebar.moveToRight");
+                this._reversePositionButton.setAttribute("label", label);
+                this._reversePositionButton.setAttribute("to-position", onRight ? "left" : "right");
+                this._switcherPanel.hidden = false;
+                this._switcherPanel.openPopup(this._icon);
+                this._switcherTarget.classList.add("active");
+            };
         }
     }
 

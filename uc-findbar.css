@@ -19,23 +19,25 @@
     border-top: none !important;
     box-shadow: 0px 0px 7px -2px hsla(240, 4%, 0%, 0.6), 0px 0px 15px 0px hsla(0, 0%, 0%, 0.2) !important;
     background-image: none !important;
-    transition-property: margin-top, opacity, width, left, right !important;
+    transition-property: transform, opacity, width, left, right !important;
     transition-duration: 0.2s, 0.3s, 0.2s, 0.2s, 0.2s !important;
     transition-delay: 0s, 0s, 0s, 0s, 0s !important;
-    transition-timing-function: ease-in-out, ease-in-out, ease-in-out !important;
+    transition-timing-function: ease-in-out, ease-in-out, ease-in-out, ease-in-out, ease-in-out !important;
     z-index: 1 !important;
     animation: 0.3s ease-in-out findbar-down;
     overflow: hidden !important;
+    transform-style: preserve-3d !important;
+    backface-visibility: hidden !important;
 }
 
 @keyframes findbar-down {
     0% {
         opacity: 0;
-        margin-top: calc(0px - var(--findbar-height) - 16px);
+        transform: translateY(calc(0px - var(--findbar-height) - 16px));
     }
     66.6% {
         opacity: 0.666;
-        margin-top: 0;
+        transform: translateY(0);
     }
     100% {
         opacity: 1;
@@ -43,7 +45,7 @@
 }
 
 findbar[hidden] {
-    margin-block: calc(0px - var(--findbar-height) - 16px) auto !important;
+    transform: translateY(calc(0px - var(--findbar-height) - 16px));
     pointer-events: none;
     opacity: 0 !important;
     transition-duration: 0.3s, 0.2s, 0.2s, 0.2s, 0.2s !important;
@@ -51,7 +53,7 @@ findbar[hidden] {
 
 @supports -moz-bool-pref("userChrome.findbar.hide-on-unfocus") {
     findbar:not(:focus-within) {
-        margin-block: calc(0px - var(--findbar-height) - 16px) auto !important;
+        transform: translateY(calc(0px - var(--findbar-height) - 16px));
         pointer-events: none;
         opacity: 0;
         transition-duration: 0.3s, 0.2s, 0.2s, 0.2s, 0.2s !important;

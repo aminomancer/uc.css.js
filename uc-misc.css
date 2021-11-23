@@ -584,7 +584,7 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
 }
 
 /* hide the acceltext for the bookmarks toolbar shortcut when floatingSidebarResizer.uc.js changes the hotkey */
-#toolbar-context-menu[bmb-command-disabled="true"]
+menupopup[bmb-command-disabled="true"]
     menuitem[key="viewBookmarksToolbarKb"]
     .menu-accel-container
     label {

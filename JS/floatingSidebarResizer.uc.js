@@ -92,11 +92,14 @@
                 menuSwitch.setAttribute("key", csB); // show ctrl+shift+B as the shortcut for view > sidebar > bookmarks
                 sidebarSwitch.setAttribute("key", csB); // show ctrl+shift+B as the shortcut in the sidebar switcher menu
                 if (BMB_viewBookmarksSidebar) BMB_viewBookmarksSidebar.setAttribute("key", csB); // same for bookmarks toolbar button popup
-                SidebarUI.updateShortcut({ button: sidebarSwitch }); // this generates the shortcut label from the key attribute. better to do it this way so it'll correctly show the modifier key depending on your settings and OS. like if accel key is cmd/meta then it'll say so, if you set it to alt for some reason it should say that as well. although it won't dynamically update if you change your accel key setting during runtime, since that would be extremely rare.
-                nodeToShortcutMap["bookmarks-menu-button"] = csB; // change the hotkey in the bookmarks toolbar button's tooltip to reflect the bookmarks sidebar hotkey rather than the bookmarks manager hotkey, since the history toolbar button shows its sidebar hotkey. it's just to clear up a minor inconsistency.
-                document
-                    .getElementById("toolbar-context-menu")
-                    .setAttribute("bmb-command-disabled", true); // when right-clicking the toolbar there's a "bookmarks toolbar" menu, where the ctrl+shift+B command is shown in the acceltext of the menuitems. we'll use CSS to hide it, since the acceltext is applied dynamically and it's a bitch to change that.
+                // this generates the shortcut label from the key attribute. better to do it this way so it'll correctly show the modifier key depending on your settings and OS. like if accel key is cmd/meta then it'll say so, if you set it to alt for some reason it should say that as well. although it won't dynamically update if you change your accel key setting during runtime, since that would be extremely rare.
+                SidebarUI.updateShortcut({ button: sidebarSwitch });
+                // change the hotkey in the bookmarks toolbar button's tooltip to reflect the bookmarks sidebar hotkey rather than the bookmarks manager hotkey, since the history toolbar button shows its sidebar hotkey. it's just to clear up a minor inconsistency.
+                nodeToShortcutMap["bookmarks-menu-button"] = csB;
+                // when right-clicking a toolbar there's a "bookmarks toolbar" menu, where the ctrl+shift+B command is shown in the acceltext of the menuitems. we'll use CSS to hide it, since the acceltext is applied dynamically and it's a bitch to change that.
+                ["toolbar-context-menu", "placesContext"].forEach((id) =>
+                    document.getElementById(id).setAttribute("bmb-command-disabled", true)
+                );
             } else {
                 // (mostly) factory reset
                 sidebarCmd.setAttribute("oncommand", "SidebarUI.toggle('viewBookmarksSidebar');");
@@ -109,9 +112,9 @@
                 if (BMB_viewBookmarksSidebar) BMB_viewBookmarksSidebar.setAttribute("key", cB);
                 SidebarUI.updateShortcut({ button: sidebarSwitch });
                 nodeToShortcutMap["bookmarks-menu-button"] = cB;
-                document
-                    .getElementById("toolbar-context-menu")
-                    .removeAttribute("bmb-command-disabled");
+                ["toolbar-context-menu", "placesContext"].forEach((id) =>
+                    document.getElementById(id).removeAttribute("bmb-command-disabled")
+                );
             }
             CustomizableUI.getWidget("sidebar-button")
                 .forWindow(window)

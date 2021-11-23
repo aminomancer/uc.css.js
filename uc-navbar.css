@@ -347,9 +347,6 @@ toolbar .toolbarbutton-1:not([disabled], [open])[checked]:hover:active > .toolba
 
 #PersonalToolbar:not([customizing]) {
     padding-block: 0 var(--bookmark-block-padding) !important;
-    position: absolute !important;
-    display: flex !important;
-    flex-flow: row nowrap !important;
 }
 
 #PersonalToolbar #personal-bookmarks {
