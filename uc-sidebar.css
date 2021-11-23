@@ -258,7 +258,11 @@ as well as the internal appearance of the built-in sidebars, e.g. bookmarks, his
 
 .sidebar-panel .sidebar-placesTreechildren::-moz-tree-cell(cutting, selected),
 .sidebar-panel .sidebar-placesTreechildren::-moz-tree-cell(cutting, hover) {
-    background-color: color-mix(in srgb, transparent 50%, var(--places-cell-hover-bgcolor)) !important;
+    background-color: color-mix(
+        in srgb,
+        transparent 50%,
+        var(--places-cell-hover-bgcolor)
+    ) !important;
 }
 
 .sidebar-placesTree {
@@ -312,7 +316,11 @@ as well as the internal appearance of the built-in sidebars, e.g. bookmarks, his
 .sidebar-placesTreechildren::-moz-tree-separator(hover),
 .sidebar-placesTreechildren:not(:-moz-window-inactive)::-moz-tree-separator(selected),
 .sidebar-placesTreechildren:not(:-moz-window-inactive)::-moz-tree-separator(hover, selected) {
-    border-color: color-mix(in srgb, var(--panel-shortcut-color) 30%, var(--panel-separator-color)) !important;
+    border-color: color-mix(
+        in srgb,
+        var(--panel-shortcut-color) 30%,
+        var(--panel-separator-color)
+    ) !important;
 }
 
 .sidebar-placesTreechildren:not(:-moz-window-inactive)::-moz-tree-separator(cutting) {
@@ -503,7 +511,10 @@ there are normally no twistys in sorted trees so it is relatively safe to collap
     }
 
     :-moz-window-inactive::selection {
-        background-color: var(--ui-selection-bgcolor-disabled, text-select-disabled-background) !important;
+        background-color: var(
+            --ui-selection-bgcolor-disabled,
+            text-select-disabled-background
+        ) !important;
     }
 }
 

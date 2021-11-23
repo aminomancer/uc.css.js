@@ -589,6 +589,45 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
     margin-inline-start: -2px !important;
 }
 
+#vertical-tabs-pane[unpinned] .all-tabs-item[pinned]:not([muted], [soundplaying], [activemedia-blocked]) .all-tabs-button .toolbarbutton-icon {
+	mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><circle cx="100%" cy="100%" r="9"/></svg>') exclude 0/100% 100% no-repeat, linear-gradient(#fff, #fff);
+	mask-position: 8px 8px;
+	transition-property: mask;
+	transition-timing-function: ease-in-out;
+	transition-duration: calc(var(--pane-transition-duration) / 2);
+}
+
+#vertical-tabs-pane[unpinned]:not([expanded]) .all-tabs-item[pinned] .all-tabs-button .toolbarbutton-icon {
+	mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><circle cx="100%" cy="100%" r="9"/></svg>') exclude 0/100% 100% no-repeat, linear-gradient(#fff, #fff);
+}
+
+#vertical-tabs-pane[unpinned] .all-tabs-item[pinned]:not([muted], [soundplaying], [activemedia-blocked]) .sound-overlay {
+    display: block !important;
+    position: absolute;
+    left: calc(var(--arrowpanel-menuitem-padding-inline) + 7px) !important;
+    top: calc(var(--arrowpanel-menuitem-padding-block) + 8px) !important;
+    width: 14px;
+    height: 14px;
+    -moz-context-properties: fill, fill-opacity;
+    fill: currentColor;
+    fill-opacity: 0.7 !important;
+    opacity: 0;
+    pointer-events: none;
+    transition-property: opacity;
+    transition-timing-function: ease-in-out;
+    transition-duration: var(--pane-transition-duration);
+	background: url(chrome://userchrome/content/material/pin-45.svg) center/11px no-repeat !important;
+}
+
+#vertical-tabs-pane[unpinned]:not([expanded]) .all-tabs-item[pinned]:not([muted], [soundplaying], [activemedia-blocked]) .sound-overlay {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+#vertical-tabs-pane[unpinned] .all-tabs-item[selected][pinned]:not([muted], [soundplaying], [activemedia-blocked]) .sound-overlay {
+    fill-opacity: inherit !important;
+}
+
 .subviewbutton[command="Browser:OpenAboutContainers"]:not(.subviewbutton-iconic, [image]) {
     list-style-image: url(chrome://userchrome/content/settings.svg) !important;
 }
