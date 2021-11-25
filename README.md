@@ -12,6 +12,31 @@ My personal Firefox theme/layout, plus some privileged scripts to add new behavi
 <img src="preview/prev-search.gif"/>
 </p>
 
+## **Index:**
+
+- [💾 Release packages](/../../releases/)
+- [⚙️ Recommended settings](#recommended-settings)
+- [🎨 Theme (CSS)](#️theme-css)
+  - [🚀 Setup](#setup)
+    - [📦 Resources & manifest](#resources--manifest)
+  - [📖 Details](#details)
+    - [🆎 Fonts](#fonts)
+    - [🧪 Further modification](#further-modification)
+    - [📥 Updating](#updating)
+- [📜 Scripts](#scripts)
+  - [🔧 Installation](#installation)
+  - [💻 Usage](#usage)
+    - [📑 Special stylesheets](#special-stylesheets)
+    - [🧰 Styling browser toolbox windows](#styling-browser-toolbox-windows)
+  - [🏷 Script descriptions & links](#script-descriptions--links)
+- [💝 Sponsors](#thanks-to-my-sponsors-for-supporting-this-project)
+- [🔗 Other useful links](#️other-useful-links)
+- [🔔 Report issues](/../../issues/)
+- [💬 Discussions](/../../discussions/)
+- [🎫 License](/LICENSE)
+
+## **Recommended settings:**
+
 For best results, set density mode to `Normal` and theme to `Dark` in the customization menu. (right click on the navbar and click "Customize Toolbar...") I strongly recommend using this on [Firefox Nightly](https://www.mozilla.org/en-US/firefox/channel/desktop/#nightly) and updating the theme at least weekly. To that end, you might find it easier to clone the repo to your chrome folder so you can pull updates quickly.
 
 I also recommend setting the following prefs in `about:config`. There are two preset user.js files in the [prefs directory](/prefs) that can automatically set the prefs for you and prevent Firefox from changing them on update. Just choose one, rename it to user.js, and move it to your _profile_ folder, not your chrome folder. The first of these files, [required.js](/prefs/required.js) contains just the bare minimum prefs to ensure functionality, omitting most of the prefs that represent aesthetic choices. The second, [recommended.js](/prefs/recommended.js), includes the required prefs and some other more subjective prefs that compliment the theme — this is the preset I would personally recommend. There are also OS-specific prefs that are not in either file, so you should still check the list below. The following are in alphabetical order, not in order of importance. Most are optional, but the few that are required are in italics and are marked in the Notes column.<details><summary>**_Click for a full list._**</summary>
@@ -145,7 +170,7 @@ To modify the main window UI (as you'd do with userChrome.css) make a file in th
 
 #### **Updating:**
 
-[Release packages](/../../tags/) are available as a courtesy, but since the theme and scripts are updated on a daily basis to keep up with Nightly, the latest release package may not be completely up to date. If you want the very latest stylesheets/scripts, you should either [clone the repo](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository-from-github/cloning-a-repository) directly to your profile's `chrome` folder, (use [GitHub Desktop](https://desktop.github.com/) if all of this sounds like gibberish to you) or download individual folders with [GitZip](https://addons.mozilla.org/en-US/firefox/addon/gitzip/) or [Refined GitHub](https://addons.mozilla.org/en-US/firefox/addon/refined-github-/).
+[Release packages](/../../releases/) are available as a courtesy, but since the theme and scripts are updated on a daily basis to keep up with Nightly, the latest release package may not be completely up to date. If you want the very latest stylesheets/scripts, you should either [clone the repo](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository-from-github/cloning-a-repository) directly to your profile's `chrome` folder, (use [GitHub Desktop](https://desktop.github.com/) if all of this sounds like gibberish to you) or download individual folders with [GitZip](https://addons.mozilla.org/en-US/firefox/addon/gitzip/) or [Refined GitHub](https://addons.mozilla.org/en-US/firefox/addon/refined-github-/).
 
 ## **Scripts:**
 
@@ -182,6 +207,8 @@ _\* Older versions of this theme required users to rename the `JS` folder to `sc
 
 After you've installed the files, the script loader will locate any scripts you place in the proper folder that end in .uc.js. Once you have all this set up you can download scripts, put them in the correct folder for your script loader, restart, and you should see the changes immediately. When updating scripts, be sure to clear your startup cache. With fx-autoconfig, you can click "Tools" in the menubar, then "userScripts," then "Restart now!" and it will clear the startup cache as it restarts. Without fx-autoconfig, there are still methods you can use from the browser console but they will cause Firefox to restart with the devtools still open, which is unstable. Instead, I'd recommend going to `about:profiles` and click the "Open Folder" button in your profile's local directory row. Then quit Firefox, and in the local directory delete the folder labeled `startupCache` before restarting the browser.
 
+Firefox is updated every night, so my theme and scripts are updated on a regular basis to ensure compatibility with the latest build from [mozilla-central](https://hg.mozilla.org/mozilla-central/), which is distributed through the [Firefox Nightly](https://www.mozilla.org/en-US/firefox/channel/desktop/#nightly) branch. This means that files on this repo are not expected to be compatible with every Stable, ESR, Beta, or Developer Edition release of Firefox — only _Nightly_. If you update Firefox and a script stops working, or your UI suddenly looks ugly, check the repo to make sure your scripts are up to date. Compare the `@version` number at the top of a given file to the version of your copy. If your problem is still present, feel free to post in the [Issues](/../../issues/) section.
+
 #### **Special stylesheets:**
 
 In the main directory on this repo you might notice two files: [userChrome.ag.css](/userChrome.ag.css) and [userChrome.au.css](/userChrome.au.css). The _"ag"_ is an abbreviation for user _agent_ sheet, and _"au"_ is an abbreviation for _author_ sheet. They're used for rules that would not work if we put them in `userChrome.css`. But Firefox will not load these stylesheets on its own. These are loaded by the [Agent/Author Sheet Loader](#agentauthor-sheet-loader). The script does the same general thing as two of the files included with fx-autoconfig, but if you want the stylesheets to work in the devtools, (e.g. for context menus) you need the script from my repo. And since you don't want to load duplicate stylesheets, delete the scripts included in fx-autoconfig's JS folder.
@@ -190,13 +217,7 @@ These agent/author sheets handle some of the most common and problematic element
 
 \* _Other themes/loaders, including older versions of this theme, may use the file suffix `.as.css` for the agent sheet, instead of `.ag.css`. I've switched to "ag" for the sake of consistency with fx-autoconfig. If you have a `userChrome.as.css` file left over from something, you can just delete it and replace it with `userChrome.ag.css`. The [agent sheet loader](#agentauthor-sheet-loader) will ignore `.as.css` files._
 
-#### **Updating:**
-
-Firefox is updated every night, so my theme and scripts are updated on a regular basis to ensure compatibility with the latest build from [mozilla-central](https://hg.mozilla.org/mozilla-central/), which is distributed through the [Firefox Nightly](https://www.mozilla.org/en-US/firefox/channel/desktop/#nightly) branch. If you update Firefox and a script stops working, or your UI suddenly looks ugly, check the repo before you file a bug report or complain that something's broken. Compare the `@version` number at the top of a given file to the version of your copy. If you're sure you have the latest version, then remove it for now and wait a day or two. I use this theme and almost all of the scripts myself, and I use Firefox Nightly on a daily basis, so it's not like I'm going to leave something in my setup broken for longer than a day or two.
-
-If your problem is still not fixed after a couple days, or you think it might just be a detail I overlooked, (everyone has unique browsing habits, Firefox has a lot of interfaces that some users may never see, myself included) feel free to post in the [Issues](/../../issues/) or [Discussions](/../../discussions/) section. But please don't bother complaining if you're not using the Nightly branch. In order to make this work for the latest version of Firefox, I have no choice but to potentially make it incompatible with older versions of Firefox, stable or not. Just like Firefox updates can break our mods, updating our mods to keep up with Firefox can break them in older versions. I have no plans to make a second version for any Firefox version other than the latest Nightly release.
-
-#### **Styling Browser Toolbox Windows:**
+#### **Styling browser toolbox windows:**
 
 There's another script called [Browser Toolbox Stylesheet Loader](#browser-toolbox-stylesheet-loader) which is necessary if you want the theme to apply to elements in browser toolbox windows. My theme mainly uses this to make all context menus and scrollbars in the devtools consistent with the context menus and scrollbars in the main chrome window. It doesn't load a special stylesheet like the other module, it just loads userChrome and userContent.css into the devtools.
 

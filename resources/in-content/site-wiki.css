@@ -748,6 +748,7 @@ You can use greasemonkey or any other form of monkey that supports the document-
     }
 
     #mw-navigation :focus {
+        box-shadow: none !important;
         outline: none !important;
     }
 
