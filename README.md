@@ -16,7 +16,7 @@ My personal Firefox theme/layout, plus some privileged scripts to add new behavi
 
 - [💾 Release packages](/../../releases/)
 - [⚙️ Recommended settings](#recommended-settings)
-- [🎨 Theme (CSS)](#️theme-css)
+- [🎨 Theme (CSS)](#theme-css)
   - [🚀 Setup](#setup)
     - [📦 Resources & manifest](#resources--manifest)
   - [📖 Details](#details)
