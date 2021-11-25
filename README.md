@@ -30,7 +30,7 @@ My personal Firefox theme/layout, plus some privileged scripts to add new behavi
     - [🧰 Styling browser toolbox windows](#styling-browser-toolbox-windows)
   - [🏷 Script descriptions & links](#script-descriptions--links)
 - [💝 Sponsors](#thanks-to-my-sponsors-for-supporting-this-project)
-- [🔗 Other useful links](#️other-useful-links)
+- [🔗 Other useful links](#other-useful-links)
 - [🔔 Report issues](/../../issues/)
 - [💬 Discussions](/../../discussions/)
 - [🎫 License](/LICENSE)
