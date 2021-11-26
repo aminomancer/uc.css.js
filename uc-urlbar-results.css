@@ -101,6 +101,7 @@
 .urlbarView-type-icon {
     margin-inline: 0px !important;
     position: relative !important;
+    align-self: center !important;
     min-width: 16px !important;
     width: 16px !important;
     height: 16px !important;
@@ -111,12 +112,12 @@
 .urlbarView-row:is([type="switchtab"], [type="bookmark"], [type="remotetab"], [type="dynamic"], [pinned])
     .urlbarView-type-icon {
     fill-opacity: inherit !important;
-    margin-bottom: 1px !important;
+    margin-block: 0 !important;
     display: -moz-box !important;
 }
 
 .urlbarView-row[pinned] .urlbarView-type-icon {
-    background: url(chrome://userchrome/content/material/pin.svg) no-repeat !important;
+    background: url(chrome://userchrome/content/material/pin-45.svg) no-repeat !important;
 }
 
 .urlbarView-row[type="bookmark"] .urlbarView-type-icon {
@@ -535,7 +536,7 @@
     .urlbarView-favicon:is([src^="page-icon:https://en.wikipedia.org/"], [src^="page-icon:http://en.wikipedia.org/"])
 {
     box-sizing: border-box !important;
-    background: url(chrome://userchrome/content/engines/wiki.svg) no-repeat center/contain !important;
+    background: url(chrome://userchrome/content/engines/wikipedia.svg) no-repeat center/contain !important;
     width: 16px !important;
     height: 16px !important;
     padding-left: 16px;

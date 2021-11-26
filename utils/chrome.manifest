@@ -20,6 +20,7 @@ override chrome://global/skin/icons/close.svg ../resources/close.svg
 override chrome://global/skin/icons/delete.svg ../resources/material/delete.svg
 override chrome://global/skin/icons/add.svg ../resources/add.svg
 override chrome://global/skin/icons/edit.svg ../resources/edit.svg
+override chrome://global/skin/icons/reload.svg ../resources/skin/reload.svg
 override chrome://global/skin/icons/help.svg ../resources/help.svg
 override chrome://global/skin/icons/lightbulb.svg ../resources/skin/tip.svg
 override chrome://global/skin/icons/defaultFavicon.svg ../resources/places/defaultFavicon.svg
@@ -30,6 +31,8 @@ override chrome://global/skin/icons/settings.svg ../resources/settings.svg
 override chrome://global/skin/icons/folder.svg ../resources/material/places/folder.svg
 override chrome://global/skin/icons/plugin.svg ../resources/plugin.svg
 override chrome://global/skin/icons/highlights.svg ../resources/glyph-highlights-16.svg
+override chrome://global/skin/icons/pocket.svg ../resources/skin/pocket.svg
+override chrome://global/skin/icons/pocket-outline.svg ../resources/skin/pocket-outline.svg
 override chrome://mozapps/skin/extensions/extension.svg ../resources/material/extension.svg
 override chrome://mozapps/skin/extensions/extensionGeneric.svg ../resources/material/extensionGeneric.svg
 override chrome://browser/content/extension.svg ../resources/material/extension.svg
@@ -43,7 +46,7 @@ override chrome://browser/skin/reader-mode.svg ../resources/skin/reader-mode.svg
 override chrome://browser/skin/forward.svg ../resources/skin/forward.svg
 override chrome://browser/skin/back.svg ../resources/skin/back.svg
 override chrome://browser/skin/reload.svg ../resources/skin/reload.svg
-override chrome://global/skin/icons/reload.svg ../resources/skin/reload.svg
+override chrome://browser/skin/forget.svg ../resources/skin/forget.svg
 override chrome://browser/skin/login.svg ../resources/skin/login.svg
 override chrome://browser/skin/home.svg ../resources/skin/home.svg
 override chrome://browser/skin/privateBrowsing.svg ../resources/skin/privateBrowsing.svg

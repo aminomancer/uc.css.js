@@ -159,7 +159,7 @@ it also changes the appearance of the one-offs in the searchbar. */
         var(--arrowpanel-menuitem-inline-margin) !important;
 }
 
-.urlbarView :is(.searchbar-engine-one-off-item, .addengine-item)  {
+.urlbarView :is(.searchbar-engine-one-off-item, .addengine-item) {
     min-width: var(--urlbar-one-offs-engine-width) !important;
     height: var(--urlbar-one-offs-engine-width) !important;
     padding: 0 !important;
@@ -263,7 +263,7 @@ it also changes the appearance of the one-offs in the searchbar. */
 }
 
 #urlbar .search-panel-one-offs-container {
-	min-width: unset !important;
+    min-width: unset !important;
     margin-inline-end: -4px !important;
 }
 
@@ -278,9 +278,9 @@ it also changes the appearance of the one-offs in the searchbar. */
 }
 
 .urlbarView .search-panel-one-offs-header {
-	min-width: -moz-fit-content !important;
-	flex-grow: 0 !important;
-	flex-shrink: 0 !important;
+    min-width: -moz-fit-content !important;
+    flex-grow: 0 !important;
+    flex-shrink: 0 !important;
     min-height: var(--urlbar-height) !important;
     align-items: center;
 }
@@ -291,11 +291,11 @@ it also changes the appearance of the one-offs in the searchbar. */
 }
 
 .urlbarView .search-panel-one-offs-header::before {
-	content: "Search with:";
-	display: inline-block;
-	margin-block: 2px 3px;
-	margin-inline: 8px 4px;
-	color: var(--panel-shortcut-color);
+    content: "Search with:";
+    display: inline-block;
+    margin-block: 2px 3px;
+    margin-inline: 8px 4px;
+    color: var(--panel-shortcut-color);
 }
 
 #urlbar .search-one-offs {
@@ -311,13 +311,11 @@ it also changes the appearance of the one-offs in the searchbar. */
     transform: none !important;
 }
 
-:is(.searchbar-engine-one-off-item, .addengine-item):hover
-    > .button-box {
+:is(.searchbar-engine-one-off-item, .addengine-item):hover > .button-box {
     background-color: var(--toolbarbutton-hover-background) !important;
 }
 
-:is(.searchbar-engine-one-off-item, .addengine-item)[selected]
-    > .button-box {
+:is(.searchbar-engine-one-off-item, .addengine-item)[selected] > .button-box {
     background-color: var(--toolbarbutton-active-background) !important;
     color: var(--lwt-text-color) !important;
 }
@@ -330,7 +328,7 @@ it also changes the appearance of the one-offs in the searchbar. */
     height: 17.5px !important;
 }
 
-.searchbar-engine-one-off-item:is([image="chrome://userchrome/content/engines/wiki.svg"], [image="moz-extension://19649ec6-a7ee-4eeb-bff8-84c72584edba/favicon.svg"])
+.searchbar-engine-one-off-item:is([image="chrome://userchrome/content/engines/wikipedia.svg"], [image="moz-extension://19649ec6-a7ee-4eeb-bff8-84c72584edba/favicon.svg"])
     .button-icon {
     width: 19px !important;
     height: 19px !important;

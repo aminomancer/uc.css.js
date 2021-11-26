@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Urlbar Mods
-// @version        1.5.2
+// @version        1.5.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Make some minor modifications to the urlbar. See the code comments below for more details.
@@ -154,6 +154,8 @@ class UrlbarMods {
             } else if (this._isPotentiallyTrustworthy) {
                 this._identityBox.className = "localResource";
                 tooltip = this._fluentStrings.localResource;
+                if (this._uri.spec.startsWith("about:reader?"))
+                    this._identityBox.classList.add("readerMode");
             } else {
                 let warnOnInsecure =
                     this._insecureConnectionIconEnabled ||

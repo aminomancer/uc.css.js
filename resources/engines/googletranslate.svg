@@ -1,0 +1,17 @@
+<!-- This Source Code Form is subject to the terms of the Creative Commons
+   - Attribution-NonCommercial-ShareAlike International License, v. 4.0.
+   - If a copy of the CC BY-NC-SA 4.0 was not distributed with this
+   - file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/
+   - or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="context-fill"
+    fill-opacity="context-fill-opacity">
+    <path d="M14.4,2.4H7.104L6.4,0H1.6C0.72,0,0,0.72,0,1.6V12c0,0.88,0.72,1.6,1.6,1.6h5.6L8,16h6.4
+	c0.88,0,1.6-0.72,1.6-1.6V4C16,3.12,15.28,2.4,14.4,2.4z M4.136,10.072c-1.8,0-3.272-1.464-3.272-3.272s1.464-3.272,3.272-3.272
+	c0.832,0,1.592,0.296,2.192,0.856l0.056,0.048L5.4,5.376l-0.048-0.04C5.12,5.12,4.728,4.864,4.136,4.864
+	c-1.048,0-1.904,0.872-1.904,1.936s0.856,1.936,1.904,1.936c1.096,0,1.568-0.696,1.696-1.168H4.064v-1.24h3.16l0.008,0.056
+	c0.032,0.168,0.04,0.32,0.04,0.488C7.272,8.752,5.984,10.072,4.136,10.072z M8.96,8.704c0.264,0.48,0.592,0.944,0.952,1.36
+	L9.48,10.488C9.48,10.488,8.96,8.704,8.96,8.704z M9.576,8.096H8.784L8.536,7.264h3.192c0,0-0.272,1.048-1.248,2.192
+	C10.064,8.96,9.768,8.472,9.576,8.096z M15.2,14.4c0,0.44-0.36,0.8-0.8,0.8H8.8l1.6-1.6l-0.648-2.216l0.736-0.736l2.144,2.152
+	l0.584-0.584l-2.168-2.144c0.72-0.824,1.28-1.8,1.536-2.808H13.6V6.432h-2.912V5.6H9.856v0.832H8.288L7.344,3.2H14.4
+	c0.44,0,0.8,0.36,0.8,0.8V14.4z" />
+</svg>

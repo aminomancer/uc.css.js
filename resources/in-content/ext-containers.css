@@ -19,7 +19,8 @@
         background: none !important;
     }
 
-    html, body {
+    html,
+    body {
         min-block-size: 0 !important;
     }
 
@@ -132,7 +133,8 @@
         background: none !important;
     }
 
-    html, body {
+    html,
+    body {
         min-block-size: 0 !important;
     }
 
@@ -250,10 +252,12 @@
     }
 
     h3.proxy-panel-title {
-        padding-bottom: calc(((44px - 1.1em) / 2) + var(--menupopup-inner-padding-magnitude)) !important;
+        padding-bottom: calc(
+            ((44px - 1.1em) / 2) + var(--menupopup-inner-padding-magnitude)
+        ) !important;
         min-height: 48.5px !important;
         margin-inline: var(--menupopup-inner-padding-magnitude) !important;
-        inline-size: calc(100% -  (var(--menupopup-inner-padding-magnitude) * 2)) !important;
+        inline-size: calc(100% - (var(--menupopup-inner-padding-magnitude) * 2)) !important;
     }
 
     h4 {
@@ -670,11 +674,11 @@
     #manage-assigned-sites-list:is(:hover, :focus-visible, :-moz-focusring) {
         text-decoration: underline !important;
     }
-    
+
     #edit-container-options {
         padding-block: 4px !important;
     }
-    
+
     .container-options {
         margin-inline: 2px 8px !important;
     }
@@ -687,7 +691,9 @@
     .slider {
         --protections-popup-switch-off-background: var(--switch-off-background);
         --protections-popup-switch-off-hover-background-custom: var(--switch-off-hover-background);
-        --protections-popup-switch-off-active-background-custom: var(--switch-off-active-background);
+        --protections-popup-switch-off-active-background-custom: var(
+            --switch-off-active-background
+        );
         --protections-popup-switch-off-hover-border-custom: var(--switch-off-hover-border);
         background-color: var(--switch-off-background) !important;
         border-radius: 14px !important;
@@ -803,7 +809,8 @@
 
     .delete-btn {
         background-color: hsla(2, 70%, 56%, 45%) !important;
-        margin-block: var(--menupopup-inner-padding-magnitude) calc(var(--menupopup-inner-padding-magnitude) * 2) !important;
+        margin-block: var(--menupopup-inner-padding-magnitude)
+            calc(var(--menupopup-inner-padding-magnitude) * 2) !important;
         margin-inline: calc(var(--menupopup-inner-padding-magnitude) * 2) !important;
         justify-content: inherit !important;
         align-content: center !important;
@@ -850,7 +857,8 @@
         transition: none !important;
     }
 
-    .moz-vpn-content, .moz-vpn-controller-content {
+    .moz-vpn-content,
+    .moz-vpn-controller-content {
         min-block-size: 0 !important;
         box-shadow: none !important;
         border-top: 1px solid var(--hr-grey) !important;
@@ -872,7 +880,8 @@
         transition: none !important;
     }
 
-    .moz-vpn-logo, .moz-vpn-logotype {
+    .moz-vpn-logo,
+    .moz-vpn-logotype {
         background-image: url("chrome://userchrome/content/material/firefox-vpn.svg") !important;
         color: inherit !important;
         font-family: inherit !important;

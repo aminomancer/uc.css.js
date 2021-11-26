@@ -61,31 +61,31 @@ toolbarpaletteitem[place="palette"] > #search-container {
 }
 
 .widget-overflow-list #searchbar .searchbar-textbox::placeholder {
-	opacity: 1 !important;
-	color: var(--lwt-text-color) !important;
+    opacity: 1 !important;
+    color: var(--lwt-text-color) !important;
 }
 
 .widget-overflow-list #searchbar .search-go-button {
-	box-sizing: border-box !important;
-	width: calc(var(--subviewbutton-height) - 2px) !important;
-	height: calc(var(--subviewbutton-height) - 2px) !important;
-	padding: calc((var(--subviewbutton-height) - 16px) / 2) !important;
+    box-sizing: border-box !important;
+    width: calc(var(--subviewbutton-height) - 2px) !important;
+    height: calc(var(--subviewbutton-height) - 2px) !important;
+    padding: calc((var(--subviewbutton-height) - 16px) / 2) !important;
 }
 
 .widget-overflow-list #searchbar:not([disabled]) .searchbar-search-icon,
-.widget-overflow-list #searchbar:not([disabled]):is(:hover, :focus-within) .searchbar-search-icon{
-	fill-opacity: 1 !important;
+.widget-overflow-list #searchbar:not([disabled]):is(:hover, :focus-within) .searchbar-search-icon {
+    fill-opacity: 1 !important;
     fill: var(--toolbarbutton-icon-fill) !important;
 }
 
 .widget-overflow-list #searchbar[disabled] .searchbar-search-icon {
-	fill-opacity: 1 !important;
-	fill: var(--context-menu-disabled-color) !important;
+    fill-opacity: 1 !important;
+    fill: var(--context-menu-disabled-color) !important;
 }
 
 .widget-overflow-list #searchbar .searchbar-search-icon {
-	margin-inline: 6px 8px !important;
-	padding: 0.6px !important;
+    margin-inline: 6px 8px !important;
+    padding: 0.6px !important;
 }
 
 :root[chromehidden~="toolbar"] #urlbar-container {
@@ -533,6 +533,11 @@ so there must be some issue with the PDF viewer that I don't know about. */
     list-style-image: url(chrome://userchrome/content/notifications/persistent-storage.svg) !important;
 }
 
+#identity-box[pageproxystate="valid"].readerMode #identity-icon {
+    list-style-image: url(chrome://userchrome/content/skin/readerMode.svg) !important;
+    padding: 1px !important;
+}
+
 /* on an extension page e.g. moz-extension://{guid}/options.html */
 #urlbar[actiontype="extension"] > #urlbar-input-container > #identity-box #identity-icon,
 #identity-box.extensionPage[pageproxystate="valid"] #identity-icon {
@@ -686,7 +691,7 @@ so you can use those classes to set the icon. */
     #identity-box {
     padding: 0 !important;
     margin: 0 !important;
-    margin-inline: 0 2px !important;
+    margin-inline: 0 3px !important;
     padding-inline: 6px 2px !important;
 }
 
@@ -901,7 +906,10 @@ so you can use those classes to set the icon. */
     ~ #identity-box[pageproxystate="valid"].notSecure:not(.chromeUI, .localResource)
     #identity-icon {
     fill-opacity: var(--urlbar-icon-fill-opacity) !important;
-    list-style-image: var(--default-search-identity-icon) !important;
+    list-style-image: var(
+        --default-search-identity-icon,
+        url("chrome://userchrome/content/search-glass.svg")
+    ) !important;
 }
 
 :root[customizing] #wrapper-urlbar-container[removable="false"] {

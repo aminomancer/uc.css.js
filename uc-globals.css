@@ -131,8 +131,20 @@ tooltip {
     --context-menu-disabled-color: hsla(213, 43%, 89%, var(--ui-disabled-alpha, 0.5));
 
     /* this url is for the icon that displays in the identity box when entering text in the urlbar, and on the new tab page.
-    you can replace it with chrome://userchrome/content/search-glass.svg if you don't use google */
-    --default-search-identity-icon: url(chrome://userchrome/content/engines/google.svg);
+    my script searchModeIndicatorIcons.uc.js detects your default engine and looks for a matching icon in chrome/resources/engines/
+    so for example if your default engine is Google, it'll find google.svg in that folder (it comes with this theme)
+    and dynamically set this variable to the url for google.svg. if you set your default engine to something that
+    doesn't have a matching icon included with the theme, you can add your own icon to this folder.
+    just make sure the file ends in .svg, .png, .jpg, or .jpeg and matches the name of the default engine.
+    the name of the engine is whatever appears in the search shortcuts list in about:preferences#search.
+    so let's say you download an engine for amazon, and the name that appears in the list is "Search with Amazon".
+    technically, the script is capable of reducing "Search with Amazon" to "amazon" and linking it to the included amazon icon.
+    but if you want to add an icon for a search engine that has spaces in its name, write it out in lowercase without spaces.
+    so "Search with Amazon" would become "searchwithamazon" and "Duck Duck Go" would become "duckduckgo" for example.
+    if your search engine is displayed in non-latin characters then use exactly those characters when naming the icon file.
+    if the script still doesn't work, you can override this directly in custom-chrome.css by adding this rule:
+    :root{--default-search-identity-icon:url(chrome://userchrome/content/engines/my-engine-icon.svg)!important; */
+    --default-search-identity-icon: url(chrome://userchrome/content/search-glass.svg);
     --identity-box-solid-bg: hsl(233, 34%, 22%);
     --identity-box-focus-bg: hsl(234, 34%, 23%);
     --secure-color: hsl(119, 80%, 60%);

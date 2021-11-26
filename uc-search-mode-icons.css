@@ -102,7 +102,7 @@ and the URL to the search engine so I can find a suitable icon and set a rule fo
     padding-inline: 1px !important;
     margin-inline: -2px !important;
     margin-block: 1px 0 !important;
-    --search-engine-icon: url(chrome://userchrome/content/engines/wiki.svg) !important;
+    --search-engine-icon: url(chrome://userchrome/content/engines/wikipedia.svg) !important;
 }
 
 #urlbar[pageproxystate="invalid"]
@@ -143,15 +143,15 @@ and the URL to the search engine so I can find a suitable icon and set a rule fo
     #identity-icon,
 #identity-icon-box[engine="Google Maps"] #identity-icon {
     height: 17px !important;
-    --search-engine-icon: url(chrome://userchrome/content/engines/maps.svg) !important;
+    --search-engine-icon: url(chrome://userchrome/content/engines/googlemaps.svg) !important;
 }
 
 #identity-icon-box[engine="Google Drive"] {
-    --search-engine-icon: url(chrome://userchrome/content/engines/drive.svg) !important;
+    --search-engine-icon: url(chrome://userchrome/content/engines/googledrive.svg) !important;
 }
 
 #identity-icon-box[engine="Gmail"] {
-    --search-engine-icon: url(chrome://userchrome/content/engines/mail.svg) !important;
+    --search-engine-icon: url(chrome://userchrome/content/engines/gmail.svg) !important;
 }
 
 #identity-icon-box[engine="Gatherer"] {
