@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Search Mode Indicator Icons
-// @version        1.4
+// @version        1.4.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Automatically replace the urlbar's identity icon with the current search engine's icon. Optionally replace the searchglass icon in regular search mode by dynamically retrieving icons from your chrome/resources/engines/ folder. That means on the new tab page or when typing in the urlbar, instead of showing a searchglass icon it will show a Google icon if your default engine is Google; a Bing icon if your default engine is Bing; etc. Read the comments in the config section below for more details on adding your own engine icons. Also optionally show any engine name in the urlbar placeholder, even if the engine was installed by an addon. By default, Firefox only shows your default engine's name in the placeholder if the engine was built into Firefox. With this script, the placeholder will include the name of your engine. This can be disabled and configured/restricted in the config section below. The main feature (setting the identity icon to match the current engine in one-off search mode) also adds an [engine] attribute to the identity icon so you can customize the icons yourself if you don't like a search engine's icon, or want to adjust its dimensions. If you have google set to "goo" and type in goo then hit spacebar, the identity icon will change to a google icon. And it'll also gain an attribute reflecting that, so you can change its icon further with a CSS rule like: #identity-icon[engine="Tabs"] {list-style-image: url("chrome://browser/skin/tab.svg") !important;} This doesn't change anything about the layout so you may want to tweak some things in your stylesheet. For example I have mine set up so the tracking protection icon disappears while the user is typing in the urlbar, and so a little box appears behind the identity icon while in one-off search mode. This way the icon appears to the left of the label, like it does on about:preferences and other UI pages.
@@ -119,16 +119,18 @@
             return false;
         };
         function handleDefaultEngine() {
-            eval(
-                "BrowserSearch._setURLBarPlaceholder = function " +
-                    BrowserSearch._setURLBarPlaceholder
-                        .toSource()
-                        .replace(/^_setURLBarPlaceholder/, "")
-                        .replace(
-                            /\}$/,
-                            `  let icon = findEngineIcon(name);\n    if (icon) document.documentElement.style.setProperty("--default-search-identity-icon", icon);\n    else document.documentElement.style.removeProperty("--default-search-identity-icon");\n}`
-                        )
-            );
+            if (config["Try to replace searchglass icon with engine icon in normal mode"]) {
+                eval(
+                    "BrowserSearch._setURLBarPlaceholder = function " +
+                        BrowserSearch._setURLBarPlaceholder
+                            .toSource()
+                            .replace(/^_setURLBarPlaceholder/, "")
+                            .replace(
+                                /\}$/,
+                                `  let icon = findEngineIcon(name);\n    if (icon) document.documentElement.style.setProperty("--default-search-identity-icon", icon);\n    else document.documentElement.style.removeProperty("--default-search-identity-icon");\n}`
+                            )
+                );
+            }
             if (config["Show engine name in placeholder"]) {
                 let placeholderString = `engine`;
                 if (config["Engine name character limit"] > 0)
