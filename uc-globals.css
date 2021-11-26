@@ -80,7 +80,7 @@ tooltip {
     );
     --context-padding-inline: var(--context-iconic-composite-width) 0px;
     --menupopup-border-radius: 5px;
-    --context-menuitem-border-radius: 3px;
+    --context-menuitem-border-radius: 2.6px;
     --menu-right-bg: none;
     --menu-right-img: url(chrome://userchrome/content/menu-arrow.svg);
     --menu-right-margin: 4px;

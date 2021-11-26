@@ -127,72 +127,58 @@
     overflow: hidden;
 }
 
-#TabsToolbar .tabbrowser-tab[selected],
-#TabsToolbar
-    .tabbrowser-tab[selected]
-    :is(.tab-stack, .tab-background, .tab-content, .tab-loading-burst) {
-    border-top-right-radius: 5px !important;
-    border-top-left-radius: 5px !important;
-}
-
-#TabsToolbar .tabbrowser-tab[multiselected]:not([pinned]),
-#TabsToolbar
-    .tabbrowser-tab[multiselected]:not([pinned])
-    :is(.tab-stack, .tab-background, .tab-content, .tab-loading-burst) {
-    border-top-left-radius: 5px !important;
-    border-top-right-radius: 5px !important;
-}
-
-#TabsToolbar .tabbrowser-tab:not([selected]):is(:hover, .keyboard-focused-tab, [open]),
-#TabsToolbar
-    .tabbrowser-tab:not([selected]):is(:hover, .keyboard-focused-tab, [open])
-    :is(.tab-stack, .tab-background, .tab-content, .tab-loading-burst) {
-    border-top-right-radius: 5px !important;
-}
-
 /* unround top left/right corner for first/last tab.
-this is complicated because we don't want to unround a tab unless it's really in place as the first/last tab.
-that means we don't unround tabs when 1) a tab is being dragged/dropped, 2) a tab is being moved by an animation,
-or 3) tabs are being closed from the end and the mouse is still in the navbar,
-because in this condition tabs are prevented from flexing to the end by the closing tabs spacer, until mouse leaves the navbar. */
+this is complicated because we don't want to unround a tab unless it's really in place as the first/last tab,
+and is stuck up against the left/right edge of the tab strip. that means we don't unround tabs when
+1) a tab is being dragged/dropped, 2) a tab is being moved by an animation,
+or 3) tabs are being closed from the end via mouse, and the mouse is still in the navbar,
+because tabs are prevented from flexing to the end until the user's mouse leaves the navbar. */
 #TabsToolbar
     #tabbrowser-tabs:not([using-closing-tabs-spacer])
     .tabbrowser-tab[last-visible-tab]:not([justmoved], [style*="transform"]),
 #TabsToolbar
     #tabbrowser-tabs:not([using-closing-tabs-spacer])
     .tabbrowser-tab[last-visible-tab]:not([justmoved], [style*="transform"])
-    :is(.tab-stack, .tab-background, .tab-content, .tab-loading-burst),
-#TabsToolbar
-    #tabbrowser-tabs:not([using-closing-tabs-spacer])
-    .tabbrowser-tab[last-visible-tab]:not([justmoved], [style*="transform"]):is(:hover, .keyboard-focused-tab, [open]),
-#TabsToolbar
-    #tabbrowser-tabs:not([using-closing-tabs-spacer])
-    .tabbrowser-tab[last-visible-tab]:not([justmoved], [style*="transform"]):is(:hover, .keyboard-focused-tab, [open])
     :is(.tab-stack, .tab-background, .tab-content, .tab-loading-burst) {
     border-top-right-radius: 0 !important;
 }
 
+/* remove the first tab's rounded top left corner */
 #TabsToolbar
     #tabbrowser-tabs:not([using-closing-tabs-spacer])
     .tabbrowser-tab[first-visible-tab]:not([justmoved], [style*="transform"]),
 #TabsToolbar
     #tabbrowser-tabs:not([using-closing-tabs-spacer])
     .tabbrowser-tab[first-visible-tab]:not([justmoved], [style*="transform"])
-    :is(.tab-stack, .tab-background, .tab-content, .tab-loading-burst),
-#TabsToolbar
-    #tabbrowser-tabs:not([using-closing-tabs-spacer])
-    .tabbrowser-tab[first-visible-tab]:not([justmoved], [style*="transform"]):is(:hover, .keyboard-focused-tab, [open]),
-#TabsToolbar
-    #tabbrowser-tabs:not([using-closing-tabs-spacer])
-    .tabbrowser-tab[first-visible-tab]:not([justmoved], [style*="transform"]):is(:hover, .keyboard-focused-tab, [open])
     :is(.tab-stack, .tab-background, .tab-content, .tab-loading-burst) {
     border-top-left-radius: 0 !important;
 }
 
+/* when there are no unpinned tabs and the tab strip is not overflowing,
+the tab strip won't be filled since they don't flex to fill the tab strip.
+so the last tab should have a rounded corner since it won't be touching the end of the tab strip. */
 #TabsToolbar
     #tabbrowser-tabs
     #tabbrowser-arrowscrollbox:not([overflowing="true"])
     .tabbrowser-tab[last-visible-tab][pinned]
+    :is(.tab-stack, .tab-background, .tab-content, .tab-loading-burst),
+/* when the last tab has its max-width property set, it means tab sizing
+has been set to some value less than what would fill the tab strip,
+by _lockTabSizing in tabbrowser-tabs.js. this prevents the tabs from snapping
+to fill the space when the user closes tabs with the mouse, in order to keep
+the close button under the mouse. if the tab strip is overflowing, this is achieved
+by adding a spacer (using-closing-tabs-spacer) at the end of the tab strip.
+if it's not overflowing, this is achieved by setting the max-width of every tab
+to the current width of the tab that was just closed. this way the tabs don't expand
+when a tab is removed, until the user's mouse has moved out of the tab strip.
+since the tabs no longer fill the entire tab strip, we give the final tab a rounded top-right corner.
+you can see this at work by making a new tab and opening 5 tabs. select the first tab,
+then close tab 2 by clicking its close button. then close tabs 3 and 4 without moving the mouse.
+the tabs' width will not expand until you move your mouse out of the tab strip. */
+#TabsToolbar
+    #tabbrowser-tabs
+    #tabbrowser-arrowscrollbox:not([overflowing="true"])
+    .tabbrowser-tab[last-visible-tab][style*="max-width"]
     :is(.tab-stack, .tab-background, .tab-content, .tab-loading-burst) {
     border-top-right-radius: 5px !important;
 }
@@ -280,6 +266,15 @@ or else they'll end up being covered up or showing through things they shouldn't
     display: none;
 }
 
+/* we can't apply the rounded outside corner to the last tab when tabs' max-width is manually set
+to prevent tabs from flexing, while the user is closing tabs with the mouse button.
+it's kinda complicated but basically the outside corner would add 5px to the last tab,
+which would make the tab strip overflow for like 1ms which changes the way tabbrowser-tabs.js works.
+if we apply the corner in this situation when closing a tab to the right of the active tab,
+while the tab strip is not overflowing, then there'll be no animation when the tab closes.
+which would look very ugly so it's not worth it. this means there'll be rounded inside corners
+on the last tab when it's not stretching to the right edge of the tab strip,
+but unfortunately it won't have rounded outside corners unless the tab strip is overflowing. */
 #TabsToolbar
     #tabbrowser-tabs
     #tabbrowser-arrowscrollbox:not([overflowing="true"])
@@ -364,12 +359,12 @@ which could represent a security risk if you accidentally use the wrong containe
 @supports -moz-bool-pref("userChrome.tabs.rounded-outer-corners.disabled") {
     .tabbrowser-tab .tab-stack::before,
     .tabbrowser-tab .tab-stack::after {
-        display: none;
+        display: none !important;
     }
 
     #TabsToolbar .tabbrowser-tab,
     #TabsToolbar .tabbrowser-tab .tab-stack {
-        overflow: hidden;
+        overflow: hidden !important;
     }
 }
 

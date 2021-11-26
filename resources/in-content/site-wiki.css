@@ -1783,6 +1783,12 @@ You can use greasemonkey or any other form of monkey that supports the document-
         box-shadow: none !important;
     }
 
+    .wikiEditor-ui-toolbar .page-table table {
+        background: none !important;
+        border-collapse: collapse !important;
+        border-radius: 0 !important;
+    }
+
     .oo-ui-menuToolGroup {
         border-left: 1px solid var(--uc-wiki-popup-bg) !important;
         border-right: 1px solid var(--uc-wiki-popup-bg) !important;
@@ -1793,9 +1799,9 @@ You can use greasemonkey or any other form of monkey that supports the document-
         background-color: var(--uc-wiki-popup-bg) !important;
     }
 
-    :is(.oo-ui-toolbar-bar, .ve-ce-branchNode-slug, .toolbar.section-main)
+    :is(.oo-ui-toolbar-bar, .ve-ce-branchNode-slug, .toolbar.section-main, .wikiEditor-ui-toolbar)
         .oo-ui-iconElement-icon,
-    :is(.oo-ui-toolbar-bar, .ve-ce-branchNode-slug, .toolbar.section-main)
+    :is(.oo-ui-toolbar-bar, .ve-ce-branchNode-slug, .toolbar.section-main, .wikiEditor-ui-toolbar)
         .oo-ui-indicatorElement-indicator {
         filter: invert();
     }
@@ -1830,6 +1836,100 @@ You can use greasemonkey or any other form of monkey that supports the document-
     .mw-ui-icon-wikiText::before,
     .oo-ui-indicator-required {
         filter: invert(1) hue-rotate(190deg) !important;
+    }
+
+    .wikiEditor-ui-toolbar .page-characters div span {
+        color: inherit !important;
+        border: 1px solid var(--uc-wiki-table-border-color) !important;
+        border-radius: var(--general-button-border-radius) !important;
+        line-height: normal !important;
+    }
+
+    .wikiEditor-ui-toolbar .page-characters div span:hover {
+        background-color: var(--content-principal-button-background-hover) !important;
+        border-color: transparent !important;
+    }
+
+    .wikiEditor-ui-toolbar .booklet > .index > :hover {
+        background-color: var(--content-principal-button-background-hover) !important;
+    }
+
+    .wikiEditor-ui-toolbar .booklet > .index > .current {
+        background-color: var(--content-principal-button-background-active) !important;
+        color: var(--attention-color) !important;
+    }
+
+    .wikiEditor-ui-toolbar .sections .section {
+        float: left;
+        width: 100%;
+        border-color: var(--uc-wiki-table-border-color) !important;
+    }
+
+    .wikiEditor-ui-toolbar .page-table th {
+        color: var(--uc-wiki-text-80) !important;
+    }
+
+    .wikiEditor-ui-toolbar .page-table td {
+        color: var(--uc-wiki-text-90) !important;
+        border-color: var(--content-principal-border-hover) !important;
+    }
+
+    #bodyContent .wikiEditor-ui-toolbar :is(h1, h2, h3, h4, h5) {
+        margin-block: 0px !important;
+        padding-block: 0 !important;
+    }
+
+    .wikiEditor-ui-toolbar .group .label {
+        color: var(--uc-wiki-text-60) !important;
+    }
+    
+    .wikiEditor-ui-toolbar .group .tool-select .label::after {
+        background-image: url(chrome://userchrome/content/in-content/wiki-arrow-down.svg) !important;
+        -moz-context-properties: fill, fill-opacity;
+        fill: var(--uc-wiki-text-90) !important;
+    }
+
+    .wikiEditor-ui-toolbar .tabs span.tab a::before {
+        background-image: url(chrome://userchrome/content/in-content/wiki-arrow-down.svg) !important;
+        -moz-context-properties: fill, fill-opacity;
+        fill: var(--uc-wiki-text-90) !important;
+        filter: none !important;
+    }
+
+    .wikiEditor-ui-toolbar .group .tool-select {
+        position: relative !important;
+    }
+
+    .wikiEditor-ui-toolbar .group .tool-select:hover {
+        background-color: var(--uc-wiki-popup-bg) !important;
+        border-color: var(--uc-wiki-popup-border-color) !important;
+    }
+
+    .wikiEditor-ui-toolbar .group .tool-select .options {
+        position: absolute;
+        display: none;
+        margin-top: 22px;
+        margin-left: -0.6px !important;
+        width: 100% !important;
+        border: 1px solid var(--uc-wiki-popup-border-color) !important;
+        border-radius: 0 0 4px 4px !important;
+        background-color: #fff;
+        z-index: 1;
+        background-color: var(--uc-wiki-popup-bg) !important;
+        overflow: auto !important;
+    }
+
+    #bodyContent .wikiEditor-ui-toolbar .group .tool-select a {
+        text-decoration: none !important;
+        color: inherit !important;
+    }
+
+    .wikiEditor-ui-toolbar .group .tool-select .menu .options {
+        box-shadow: 0 2px 2px 0 hsla(0, 0%, 0%, 0.03) !important;
+    }
+
+    .wikiEditor-ui-toolbar .group .tool-select .menu .options .option:hover {
+        background-color: var(--content-principal-button-background-hover) !important;
     }
 
     :is(.oo-ui-popupToolGroup-active, .oo-ui-popupToolGroup-active-tools)

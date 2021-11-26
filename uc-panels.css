@@ -929,10 +929,6 @@ popupnotification progress[paused]::-moz-progress-bar {
     background: var(--protections-popup-switch-on-active-background-custom) !important;
 }
 
-#identity-popup-mainView .subviewbutton-nav[disabled="true"]::after {
-    display: none !important;
-}
-
 #identity-popup .subviewbutton-nav::after {
     margin-inline-end: 2px !important;
 }

@@ -234,6 +234,28 @@ menupopup::part(drop-indicator) {
     padding-inline: 0 6px;
 }
 
+#protections-popup-mainView .subviewbutton-nav:not(.notFound)::after,
+#identity-popup-mainView .subviewbutton-nav::after,
+.widget-overflow-list .subviewbutton-nav::after,
+.PanelUI-subView .subviewbutton-nav::after {
+	-moz-context-properties: fill;
+	fill: var(--panel-shortcut-color);
+	fill-opacity: 1;
+}
+
+#protections-popup-mainView .subviewbutton-nav[disabled="true"]:not(.notFound)::after,
+#identity-popup-mainView .subviewbutton-nav[disabled="true"]::after,
+.widget-overflow-list .subviewbutton-nav[disabled="true"]::after,
+.PanelUI-subView .subviewbutton-nav[disabled="true"]::after {
+	-moz-context-properties: fill, fill-opacity;
+	fill: var(--panel-disabled-color);
+    fill-opacity: 0.5;
+}
+
+#identity-popup-mainView .subviewbutton-nav[disabled="true"]::after {
+    display: none;
+}
+
 /* padding and margins for context menus */
 menupopup::part(arrowscrollbox),
 #ContentSelectDropdown > menupopup::part(arrowscrollbox),
@@ -265,7 +287,6 @@ menupopup::part(arrowscrollbox),
 #BMB_bookmarksPopup .subviewbutton > .menu-iconic-text,
 #PlacesToolbar menu > .menu-iconic-text,
 #PlacesToolbar menuitem > .menu-iconic-text,
-.addon-banner-item > .toolbarbutton-text,
 .subviewbutton-iconic > .toolbarbutton-text,
 .subviewbutton[image] > .toolbarbutton-text,
 .subviewbutton[targetURI] > .toolbarbutton-text,

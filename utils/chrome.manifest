@@ -33,6 +33,8 @@ override chrome://global/skin/icons/highlights.svg ../resources/glyph-highlights
 override chrome://mozapps/skin/extensions/extension.svg ../resources/material/extension.svg
 override chrome://mozapps/skin/extensions/extensionGeneric.svg ../resources/material/extensionGeneric.svg
 override chrome://browser/content/extension.svg ../resources/material/extension.svg
+override chrome://browser/skin/menu.svg ../resources/skin/menu.svg
+override chrome://browser/skin/menu-badged.svg ../resources/skin/menu-badged.svg
 override chrome://browser/skin/history.svg ../resources/skin/history.svg
 override chrome://browser/skin/tab.svg ../resources/skin/tab.svg
 override chrome://browser/skin/new-tab.svg ../resources/skin/new-tab.svg

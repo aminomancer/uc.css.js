@@ -257,6 +257,19 @@ tooltip > description {
     background-image: linear-gradient(hsl(240, 4%, 12%), hsl(240, 4%, 20%));
 }
 
+html|*.videocontrols .controlBar {
+    background-color: var(--content-principal-box-background);
+}
+
+parsererror|parsererror {
+    color: var(--plaintext-color) !important;
+    background-color: var(--in-content-bg-dark) !important;
+}
+
+:-moz-native-anonymous .eye-dropper-color-value {
+    color: var(--in-content-bg-dark);
+}
+
 html|input[type="number"]::-moz-number-spin-box {
     appearance: none;
     min-width: 16px;
@@ -346,7 +359,35 @@ html|input[type="range"]:is(:hover, :focus-visible)::-moz-range-thumb:hover {
     background: radial-gradient(#fff, #ccc);
 } */
 
-html|meter {
+/* the indeterminate progress vector file is in resources/layout/contentaccessible/ */
+/* breaks netflix's weird position indicators in the episode flyout menu */
+/* html|progress {
+    appearance: none;
+    border: 1px solid transparent;
+    border-radius: 100px;
+    height: 9px;
+    background-color: var(--content-principal-box-background-odd);
+    overflow: hidden;
+}
+
+html|progress::-moz-progress-bar {
+    background: linear-gradient(#6572b3 20%, #3f46a6 55%, #362d86 85%);
+}
+
+html|progress[paused]::-moz-progress-bar {
+    background: linear-gradient(#808080 20%, #595959 55%, #404040 85%);
+}
+
+html|progress:not([value]):indeterminate::-moz-progress-bar {
+    background-image: url("resource://content-accessible/progress-bar-indeterminate.svg");
+}
+
+html|progress[paused]:not([value]):indeterminate::-moz-progress-bar {
+    background: transparent;
+} */
+
+/* i assume it breaks something */
+/* html|meter {
     appearance: none;
     border-radius: 45px;
     overflow: hidden;
@@ -368,43 +409,4 @@ html|*:-moz-meter-sub-optimum::-moz-meter-bar {
 
 html|*:-moz-meter-sub-sub-optimum::-moz-meter-bar {
     background: linear-gradient(#9d4343, #b34d4d, #b36565 20%, #813136 45%, #73262b 65%);
-}
-
-html|progress {
-    appearance: none;
-    border: 1px solid transparent;
-    border-radius: 100px;
-    height: 9px;
-    background-color: var(--content-principal-box-background-odd);
-    overflow: hidden;
-}
-
-html|progress::-moz-progress-bar {
-    background: linear-gradient(#6572b3 20%, #3f46a6 55%, #362d86 85%);
-}
-
-html|progress[paused]::-moz-progress-bar {
-    background: linear-gradient(#808080 20%, #595959 55%, #404040 85%);
-}
-
-/* animate the bar when its progress is stalled or unknown. this vector file is in resources/layout/contentaccessible/ */
-html|progress:not([value]):indeterminate::-moz-progress-bar {
-    background-image: url("resource://content-accessible/progress-bar-indeterminate.svg");
-}
-
-html|progress[paused]:not([value]):indeterminate::-moz-progress-bar {
-    background: transparent;
-}
-
-html|*.videocontrols .controlBar {
-    background-color: var(--content-principal-box-background);
-}
-
-parsererror|parsererror {
-    color: var(--plaintext-color) !important;
-    background-color: var(--in-content-bg-dark) !important;
-}
-
-:-moz-native-anonymous .eye-dropper-color-value {
-    color: var(--in-content-bg-dark);
-}
+} */

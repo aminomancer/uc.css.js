@@ -19,6 +19,10 @@
         background: none !important;
     }
 
+    html, body {
+        min-block-size: 0 !important;
+    }
+
     body {
         --hr-grey: var(--uc-desaturate-dimmed) !important;
         font-size: 12px !important;
@@ -30,6 +34,7 @@
         inline-size: calc(var(--overflow-size) + 199px) !important;
         max-inline-size: 300px !important;
         box-sizing: border-box !important;
+        background: none !important;
     }
 
     @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
@@ -46,6 +51,7 @@
         min-height: 44px !important;
         white-space: nowrap !important;
         padding-inline: 10px 16px !important;
+        font-family: inherit !important;
         font-weight: normal !important;
         font-size: 1.1em !important;
         text-align: start !important;
@@ -59,8 +65,14 @@
         margin: var(--menupopup-inner-padding) !important;
     }
 
+    .scrollable,
     .identities-list {
         margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .menu {
+        padding-block: revert !important;
     }
 
     .menu-item {
@@ -69,7 +81,7 @@
         inline-size: unset !important;
         display: flex !important;
         flex-flow: row nowrap;
-        padding-inline: 3px !important;
+        padding-inline: 0 8px !important;
         min-height: var(--subviewbutton-height) !important;
         user-select: none !important;
     }
@@ -95,8 +107,8 @@
 
     .menu-icon {
         margin: 0 !important;
-        margin-inline-end: 3px !important;
-        min-inline-size: 23px !important;
+        margin-inline: 6px 8px !important;
+        inline-size: 16px !important;
     }
 }
 
@@ -116,16 +128,12 @@
         scrollbar-width: none !important;
     }
 
-    [data-identity-color="grey"] {
-        --identity-icon-color: var(--uc-arrowpanel-color) !important;
-    }
-
-    [type="radio"]:checked + [data-identity-color="grey"] {
-        --identity-icon-color: var(--uc-arrowpanel-background) !important;
-    }
-
     svg:root {
         background: none !important;
+    }
+
+    html, body {
+        min-block-size: 0 !important;
     }
 
     body {
@@ -134,6 +142,7 @@
         font-size: 12px !important;
         color: inherit !important;
         letter-spacing: inherit !important;
+        background: none !important;
     }
 
     @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
@@ -157,12 +166,19 @@
         min-height: var(--subviewbutton-height) !important;
         block-size: unset !important;
         height: auto !important;
+        border-radius: var(--context-menuitem-border-radius) !important;
+        padding-block: 0 !important;
+    }
+
+    .edit-container-panel input[type="text"] {
+        margin-inline: 2px !important;
     }
 
     :focus-visible,
     :-moz-focusring,
     :focus + label {
         outline: none !important;
+        box-shadow: none !important;
     }
 
     input[type="text"]:focus-visible {
@@ -214,18 +230,30 @@
         background-color: var(--uc-checkbox-checked-active-bgcolor) !important;
     }
 
-    h3.title {
+    h3.title,
+    .proxy-panel-title {
+        background: none !important;
         line-height: normal !important;
         padding-block: calc((44px - 1.1em) / 2) !important;
         block-size: 44px !important;
+        max-block-size: unset !important;
         min-height: 44px !important;
         white-space: nowrap !important;
         padding-inline: 9px 16px !important;
+        font-family: inherit !important;
         font-weight: normal !important;
         font-size: 1.1em !important;
         user-select: none;
         color: inherit !important;
         letter-spacing: inherit !important;
+        box-shadow: none !important;
+    }
+
+    h3.proxy-panel-title {
+        padding-bottom: calc(((44px - 1.1em) / 2) + var(--menupopup-inner-padding-magnitude)) !important;
+        min-height: 48.5px !important;
+        margin-inline: var(--menupopup-inner-padding-magnitude) !important;
+        inline-size: calc(100% -  (var(--menupopup-inner-padding-magnitude) * 2)) !important;
     }
 
     h4 {
@@ -233,8 +261,14 @@
         font-size: 1.1em !important;
     }
 
+    .sub-header-wrapper {
+        margin: revert !important;
+        color: inherit !important;
+    }
+
     .sub-header {
-        padding-inline: 12px !important;
+        padding-inline: 10px !important;
+        color: inherit !important;
     }
 
     .info-icon {
@@ -282,7 +316,15 @@
     }
 
     .panel {
-        min-block-size: 100px !important;
+        min-block-size: 0 !important;
+        transition: none !important;
+        background: none !important;
+    }
+
+    .scrollable,
+    .identities-list {
+        margin: 0 !important;
+        padding: 0 !important;
     }
 
     .scrollable {
@@ -290,7 +332,6 @@
     }
 
     .identities-list {
-        margin: 0 !important;
         margin-inline: var(--menupopup-inner-padding-magnitude) !important;
         inline-size: unset !important;
         max-block-size: 600px !important;
@@ -300,8 +341,9 @@
     table[hidden]:empty {
         display: flex !important;
         flex-flow: row nowrap !important;
-        min-height: var(--subviewbutton-height) !important;
-        padding-inline: 12px !important;
+        height: 20px !important;
+        margin-bottom: 4px !important;
+        padding-inline: 10px !important;
         align-items: center !important;
         color: var(--context-menu-disabled-color) !important;
     }
@@ -318,7 +360,16 @@
         border-bottom: 1px solid var(--uc-desaturate-dimmed) !important;
     }
 
+    v-padding-hack-footer {
+        display: none !important;
+    }
+
+    v-padding-hack-4 {
+        display: none !important;
+    }
+
     .bottom-btn {
+        appearance: none !important;
         position: relative !important;
         height: revert !important;
         line-height: var(--subviewbutton-height) !important;
@@ -330,6 +381,9 @@
         inline-size: unset !important;
         border-radius: var(--context-menuitem-border-radius) !important;
         background-color: transparent !important;
+        font-family: inherit !important;
+        font-size: inherit !important;
+        color: inherit !important;
     }
 
     #manage-containers-link:not([hidden]) {
@@ -344,13 +398,17 @@
         display: inline-block;
         width: 16px;
         height: 16px;
-        margin-inline: var(--context-iconic-margin) !important;
+        margin-inline: 6px 8px !important;
         background-image: url(chrome://global/skin/icons/settings.svg);
         background-size: contain;
         background-position: center;
         background-repeat: no-repeat;
         -moz-context-properties: fill, fill-opacity;
         fill: currentColor;
+    }
+
+    .menu {
+        padding-block: revert !important;
     }
 
     .menu-item {
@@ -362,6 +420,7 @@
         user-select: none !important;
         max-width: -moz-available !important;
         margin-inline: var(--menupopup-inner-padding-magnitude) !important;
+        padding-inline-end: 6px !important;
         display: flex !important;
         flex-flow: row nowrap !important;
         overflow: clip !important;
@@ -380,12 +439,14 @@
         color: inherit !important;
     }
 
-    .hover-highlight:is(:hover, :focus-visible) {
+    .hover-highlight:is(:hover, :focus-visible),
+    .bottom-btn:is(:hover, :focus-visible) {
         color: inherit !important;
         background: var(--uc-arrowpanel-dimmed) !important;
     }
 
-    .hover-highlight:is(:hover, :focus-visible):active {
+    .hover-highlight:hover:active,
+    .bottom-btn:hover:active {
         background: var(--uc-arrowpanel-dimmed-further) !important;
     }
 
@@ -400,7 +461,7 @@
 
     .menu-icon {
         display: block;
-        margin-inline: 5px 6px !important;
+        margin-inline: 6px 8px !important;
         margin-block: 0 !important;
         inline-size: 16px !important;
         background-color: transparent !important;
@@ -422,9 +483,39 @@
         background: var(--uc-arrowpanel-color) !important;
     }
 
+    #edit-container-panel-choose-icon .radio-container:hover .usercontext-icon::before {
+        fill: inherit !important;
+    }
+
+    .radio-container:active .usercontext-icon::before {
+        transform: scale(0.85) !important;
+    }
+
+    [data-identity-color="grey"] {
+        --identity-icon-color: var(--uc-arrowpanel-color) !important;
+    }
+
+    [type="radio"]:checked + [data-identity-color="grey"] {
+        --identity-icon-color: var(--uc-arrowpanel-background) !important;
+    }
+
+    .sub-header:empty {
+        display: none;
+    }
+
     tr > td > .trash-button {
         visibility: hidden !important;
         display: block !important;
+        background-image: url(chrome://userchrome/content/close.svg) !important;
+        filter: none !important;
+        fill: currentColor !important;
+        -moz-context-properties: fill, fill-opacity;
+        max-width: 16px !important;
+        width: 16px !important;
+        height: 16px !important;
+        padding-inline: 16px 0 !important;
+        margin-inline: 2px !important;
+        margin-block: 0 !important;
     }
 
     tr:hover > td > .trash-button {
@@ -473,7 +564,13 @@
         display: none !important;
     }
 
+    .controller,
+    .hover-highlight {
+        transition: none !important;
+    }
+
     .btn-return {
+        background-color: transparent !important;
         background-image: url(chrome://userchrome/content/menu-arrow-left-big.svg) !important;
         background-size: 16px !important;
         background-position: center !important;
@@ -533,8 +630,8 @@
 
     .edit-container-panel legend,
     .options-header {
-        font-size: 1.1em !important;
-        margin-block: -4px 2px !important;
+        margin-block: 0 4px !important;
+        margin-inline: 2px !important;
     }
 
     .options-header {
@@ -542,12 +639,22 @@
         margin-block: 8px !important;
     }
 
+    fieldset,
+    .options-header {
+        padding-block-end: 8px !important;
+    }
+
     #edit-container-panel > .edit-form {
+        padding: calc(var(--menupopup-inner-padding-magnitude) * 2) !important;
         padding-block: var(--menupopup-inner-padding-magnitude) 2px !important;
     }
 
     #edit-container-options > .container-options > input[type="checkbox"] {
         inset-inline-start: 20px;
+    }
+
+    .radio-choice > .radio-container {
+        block-size: 28px !important;
     }
 
     .options-label {
@@ -563,18 +670,66 @@
     #manage-assigned-sites-list:is(:hover, :focus-visible, :-moz-focusring) {
         text-decoration: underline !important;
     }
+    
+    #edit-container-options {
+        padding-block: 4px !important;
+    }
+    
+    .container-options {
+        margin-inline: 2px 8px !important;
+    }
 
-    .delete-container {
-        background-color: transparent !important;
-        margin-inline: var(--menupopup-inner-padding-magnitude) !important;
-        padding: var(--menupopup-inner-padding-magnitude) !important;
-        padding-block: 0 calc(var(--menupopup-inner-padding-magnitude) * 2) !important;
-        border-block-start: 0 !important;
-        block-size: unset !important;
-        display: flex;
-        height: auto !important;
-        inline-size: revert !important;
-        justify-content: space-between;
+    .switch {
+        block-size: 14px !important;
+        inline-size: 28px !important;
+    }
+
+    .slider {
+        --protections-popup-switch-off-background: var(--switch-off-background);
+        --protections-popup-switch-off-hover-background-custom: var(--switch-off-hover-background);
+        --protections-popup-switch-off-active-background-custom: var(--switch-off-active-background);
+        --protections-popup-switch-off-hover-border-custom: var(--switch-off-hover-border);
+        background-color: var(--switch-off-background) !important;
+        border-radius: 14px !important;
+        inset-block-end: 0;
+        box-shadow: none !important;
+        inset-inline-start: 0;
+        position: absolute;
+        inset-inline-end: 0;
+        inset-block-start: 0;
+        transition: 0.1s ease-in-out;
+    }
+
+    .slider:hover {
+        background-color: var(--switch-off-hover-background) !important;
+    }
+
+    .slider:hover:active {
+        background-color: var(--switch-off-active-background) !important;
+    }
+
+    .slider::before {
+        background-color: #fff;
+        inset-block-end: 2px !important;
+        block-size: 10px !important;
+        inset-inline-start: 2px !important;
+        inline-size: 10px !important;
+    }
+
+    input:checked + .slider::before {
+        transform: translateX(14px) !important;
+    }
+
+    input:checked + .slider {
+        background-color: var(--purple-40) !important;
+    }
+
+    input:checked + .slider:hover {
+        background-color: var(--purple-50) !important;
+    }
+
+    input:checked + .slider:hover:active {
+        background-color: var(--purple-55) !important;
     }
 
     .panel-footer {
@@ -586,12 +741,19 @@
         column-gap: 4px;
     }
 
+    .alert-text {
+        font-family: inherit !important;
+        text-align: inherit !important;
+    }
+
     .panel-footer > .button,
-    #delete-container-button {
+    .primary-cta,
+    .delete-btn {
         appearance: none !important;
         border-radius: var(--context-menuitem-border-radius) !important;
         height: revert !important;
-        line-height: var(--subviewbutton-height) !important;
+        block-size: 0 !important;
+        line-height: normal !important;
         min-height: var(--subviewbutton-height) !important;
         width: 100% !important;
         inline-size: -moz-available !important;
@@ -600,13 +762,15 @@
         cursor: default !important;
         background-color: var(--uc-arrowpanel-dimmed) !important;
         border: 1px solid transparent !important;
+        transition: none !important;
+        box-shadow: none !important;
     }
 
     .panel-footer > .button:is(:hover, :focus-visible, :-moz-focusring) {
         background-color: var(--uc-arrowpanel-dimmed) !important;
     }
 
-    .panel-footer > .button:is(:hover, :focus-visible, :-moz-focusring):active {
+    .panel-footer > .button:hover:active {
         background-color: var(--uc-arrowpanel-dimmed-further) !important;
     }
 
@@ -625,23 +789,34 @@
         border-color: transparent !important;
     }
 
-    .panel-footer > .button.primary:is(:hover, :focus-visible, :-moz-focusring) {
+    .panel-footer > .button.primary:is(:hover, :focus-visible, :-moz-focusring),
+    .primary-cta:is(:hover, :focus-visible, :-moz-focusring),
+    .advanced-proxy-settings-btn:is(:hover, :focus-visible, :-moz-focusring) {
         background-color: var(--in-parent-primary-button-background) !important;
     }
 
-    .panel-footer > .button.primary:is(:hover, :focus-visible, :-moz-focusring):active {
+    .panel-footer > .button.primary:hover:active,
+    .primary-cta:hover:active,
+    .advanced-proxy-settings-btn:hover:active {
         background-color: var(--in-parent-primary-button-background-hover) !important;
     }
 
-    #delete-container-button {
+    .delete-btn {
         background-color: hsla(2, 70%, 56%, 45%) !important;
+        margin-block: var(--menupopup-inner-padding-magnitude) calc(var(--menupopup-inner-padding-magnitude) * 2) !important;
+        margin-inline: calc(var(--menupopup-inner-padding-magnitude) * 2) !important;
+        justify-content: inherit !important;
+        align-content: center !important;
+        align-items: center !important;
+        line-height: normal !important;
+        block-size: 0 !important;
     }
 
-    #delete-container-button:is(:hover, :focus-visible, :-moz-focusring) {
+    .delete-btn:is(:hover, :focus-visible, :-moz-focusring) {
         background-color: hsla(358, 70%, 50%, 85%) !important;
     }
 
-    #delete-container-button:is(:hover, :focus-visible, :-moz-focusring):active {
+    .delete-btn:is(:hover, :focus-visible, :-moz-focusring):active {
         background-color: hsl(353, 90%, 50%) !important;
     }
 
@@ -659,6 +834,147 @@
 
     #delete-container-tab-warning:empty {
         display: none !important;
+    }
+
+    .blue-link,
+    .blue-link span {
+        cursor: pointer !important;
+        color: var(--purple-30) !important;
+        transition: none !important;
+    }
+
+    .blue-link:hover,
+    .blue-link:hover span {
+        color: var(--purple-25) !important;
+        text-decoration: underline !important;
+        transition: none !important;
+    }
+
+    .moz-vpn-content, .moz-vpn-controller-content {
+        min-block-size: 0 !important;
+        box-shadow: none !important;
+        border-top: 1px solid var(--hr-grey) !important;
+        margin: var(--menupopup-inner-padding-magnitude) 0 !important;
+        padding-block: 8px 0 !important;
+        transition: none !important;
+    }
+
+    .collapsible-content,
+    .add-bg-color {
+        background-color: transparent !important;
+    }
+
+    .collapsible-content {
+        max-block-size: 0;
+        opacity: 0;
+        visibility: hidden;
+        background-color: var(--bgColor);
+        transition: none !important;
+    }
+
+    .moz-vpn-logo, .moz-vpn-logotype {
+        background-image: url("chrome://userchrome/content/material/firefox-vpn.svg") !important;
+        color: inherit !important;
+        font-family: inherit !important;
+        fill: currentColor !important;
+        -moz-context-properties: fill, fill-opacity;
+        font-size: 1.1em !important;
+    }
+
+    .moz-vpn-cta {
+        block-size: var(--subviewbutton-height) !important;
+        margin-block: 6px 0 !important;
+        margin-inline: calc(var(--menupopup-inner-padding-magnitude) * 2) !important;
+        text-align: inherit !important;
+        line-height: normal !important;
+    }
+
+    .advanced-proxy-settings-btn {
+        appearance: none !important;
+        border-radius: var(--context-menuitem-border-radius) !important;
+        min-height: var(--subviewbutton-height) !important;
+        background-color: var(--uc-arrowpanel-dimmed) !important;
+        transition: none !important;
+        block-size: var(--subviewbutton-height) !important;
+        min-block-size: revert !important;
+        box-shadow: none !important;
+        border: 1px solid transparent !important;
+        margin-block: var(--menupopup-inner-padding-magnitude) !important;
+        margin-inline: calc(var(--menupopup-inner-padding-magnitude) * 2) !important;
+        line-height: normal !important;
+        text-align: initial !important;
+        padding-inline-start: 30px !important;
+        background-image: url(chrome://userchrome/content/settings.svg), var(--iconArrowRight) !important;
+        -moz-context-properties: fill, fill-opacity;
+        fill: currentColor !important;
+        background-position: 6px center, calc(100% - 10px) center !important;
+        background-size: 16px 16px, 9px !important;
+    }
+
+    .collapsible-content > .flx-row.flx-space-between {
+        inline-size: calc(100% - ((var(--menupopup-inner-padding-magnitude) * 2) * 2)) !important;
+        padding-block-start: 8px !important;
+    }
+
+    .button-wrapper {
+        margin-inline: calc(var(--menupopup-inner-padding-magnitude) * 2) !important;
+    }
+
+    .advanced-proxy-panel-content {
+        padding-block: calc(var(--menupopup-inner-padding-magnitude) + 4px) !important;
+        padding-inline: calc(var(--menupopup-inner-padding-magnitude) + 6px) !important;
+        margin-block-start: 48.5px !important;
+    }
+
+    .advanced-proxy-input-wrapper {
+        margin-block: var(--menupopup-inner-padding-magnitude) !important;
+    }
+
+    .apply-to-container {
+        block-size: var(--subviewbutton-height) !important;
+        margin-block: var(--menupopup-inner-padding-magnitude) !important;
+        line-height: normal !important;
+    }
+
+    #clear-advanced-proxy-input {
+        inset-inline-end: 6px !important;
+        inset-block-start: 6px !important;
+        background-image: url(chrome://userchrome/content/textbox-clear.svg) !important;
+        background-color: transparent !important;
+        background-size: contain !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        fill: currentColor !important;
+        color: inherit !important;
+        -moz-context-properties: fill, fill-opacity !important;
+        fill-opacity: 0 !important;
+        width: 16px !important;
+        height: 16px !important;
+        min-height: 1px !important;
+        border-radius: var(--tab-button-border-radius, 2px) !important;
+        margin: 0 3px 0 0 !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    #clear-advanced-proxy-input:hover {
+        background-color: var(--uc-arrowpanel-dimmed) !important;
+    }
+
+    .proxy-validity {
+        position: absolute;
+        inset-block-start: 30px !important;
+        inset-inline-start: 10px !important;
+        pointer-events: none !important;
+        background-color: var(--warning-icon-background) !important;
+        border-radius: var(--general-button-border-radius) !important;
+        padding-block: 3px !important;
+        padding-inline: 5px !important;
+    }
+
+    .proxy-validity::after {
+        background-color: var(--warning-icon-background) !important;
+        inset-inline-start: 8px !important;
     }
 }
 

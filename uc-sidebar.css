@@ -104,7 +104,7 @@ as well as the internal appearance of the built-in sidebars, e.g. bookmarks, his
         padding-inline-start: 16px !important;
     }
 
-    .textbox-search-clear:is(:hover, :active) {
+    .textbox-search-clear:hover {
         fill: rgba(255, 255, 255, 1) !important;
         background-color: var(--button-hover-bgcolor) !important;
     }

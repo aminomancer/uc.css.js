@@ -131,6 +131,7 @@ menupopup {
     --panel-banner-item-background-color: hsla(109.9, 90.9%, 47.3%, 0.1);
     --panel-banner-item-hover-bgcolor: hsla(109.9, 90.9%, 47.3%, 0.15);
     --panel-banner-item-active-bgcolor: hsla(109.9, 90.9%, 47.3%, 0.2);
+    --panel-banner-item-info-icon-bgcolor: var(--arrowpanel-color) !important;
 
     --arrowpanel-menuitem-inline-margin: 4px;
     --arrowpanel-menuitem-margin: 0px var(--arrowpanel-menuitem-inline-margin) !important;
@@ -175,6 +176,10 @@ toolbar {
     --toolbarbutton-checked-background: hsla(236, 82%, 83%, 0.13) !important;
 }
 
+panel {
+    --warning-icon-bgcolor: var(--low-warning-icon-background) !important;
+}
+
 #urlbar {
     --urlbar-height: calc(var(--urlbar-container-height) - 6px) !important;
 }
@@ -212,11 +217,7 @@ menupopup,
 }
 
 #appMenu-multiView {
-    --arrowpanel-menuitem-inline-margin: 4px;
-    --arrowpanel-menuitem-margin: 0px var(--arrowpanel-menuitem-inline-margin) !important;
-    --arrowpanel-menuitem-padding-block: 8px !important;
-    --arrowpanel-menuitem-padding-inline: 8px !important;
     --subviewbutton-height: 32px !important;
-    --panel-subview-body-padding-magnitude: var(--arrowpanel-menuitem-inline-margin);
-    --panel-subview-body-padding: var(--panel-subview-body-padding-magnitude) 0 !important;
+    --arrowpanel-menuitem-padding-inline: 8px !important;
+    --arrowpanel-menuitem-padding: var(--arrowpanel-menuitem-padding-block) var(--arrowpanel-menuitem-padding-inline) !important;
 }
