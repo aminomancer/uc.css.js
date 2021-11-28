@@ -168,7 +168,6 @@ it also changes the appearance of the one-offs in the searchbar. */
     border: none !important;
     position: relative !important;
     background-color: transparent !important;
-    pointer-events: none !important;
     -moz-context-properties: fill, fill-opacity;
     fill: currentColor;
     fill-opacity: 1 !important;
@@ -182,10 +181,9 @@ it also changes the appearance of the one-offs in the searchbar. */
     color: var(--panel-description-color) !important;
 }
 
-:root:not([customizing])
-    .urlbarView
-    :is(.searchbar-engine-one-off-item, .addengine-item):not(:hover, [selected]):-moz-window-inactive {
-    opacity: 0.7 !important;
+.search-setting-button > .button-box > .button-icon {
+	fill: currentColor !important;
+	fill-opacity: inherit !important;
 }
 
 .urlbarView :is(.searchbar-engine-one-off-item, .addengine-item) > .button-box {
@@ -240,20 +238,12 @@ it also changes the appearance of the one-offs in the searchbar. */
 }
 
 .urlbarView .search-one-offs {
-    position: absolute !important;
-    z-index: 12;
     min-height: var(--urlbar-height) !important;
-    max-width: var(--urlbar-one-offs-width) !important;
     padding: 2px !important;
-    top: calc(-3px - var(--urlbar-height)) !important;
     scroll-behavior: smooth !important;
     box-sizing: border-box !important;
     border: none !important;
     flex-flow: row nowrap !important;
-}
-
-#urlbar .search-one-offs:not([scrolledtostart], [scrolledtoend]) {
-    mask-image: linear-gradient(to right, transparent 10px, black 30px);
 }
 
 #urlbar .search-panel-one-offs {
@@ -296,19 +286,6 @@ it also changes the appearance of the one-offs in the searchbar. */
     margin-block: 2px 3px;
     margin-inline: 8px 4px;
     color: var(--panel-shortcut-color);
-}
-
-#urlbar .search-one-offs {
-    position: static !important;
-    max-width: unset !important;
-    mask-image: none !important;
-}
-
-#urlbar .search-one-offs * {
-    opacity: 1 !important;
-    transition: none !important;
-    pointer-events: auto !important;
-    transform: none !important;
 }
 
 :is(.searchbar-engine-one-off-item, .addengine-item):hover > .button-box {
