@@ -4811,5 +4811,10 @@ You can use greasemonkey or any other form of monkey that supports the document-
         backdrop-filter: blur(7px) !important;
         background-color: hsla(230, 3.9%, 2%, 0.8) !important;
     }
+
+    .boilerplate {
+        background: var(--uc-wiki-box-bg) !important;
+        border-color: transparent !important;
+    }
 }
 }

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Urlbar Mods
-// @version        1.5.3
+// @version        1.5.4
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Make some minor modifications to the urlbar. See the code comments below for more details.
@@ -28,9 +28,6 @@ class UrlbarMods {
 
         // when you type nothing but space or tab characters in the urlbar, the first result will have an empty title. consecutive whitespace characters don't add to the displayed node width so it ends up looking basically empty. we can change this by setting it to use non-breaking spaces instead of space characters, and adding an attribute "all-whitespace" to the title element. then your CSS can underline it. this is already done in uc-urlbar-results.css but if you wanna do it yourself: .urlbarView-title[all-whitespace] {text-decoration: underline}
         "underline whitespace results": true,
-
-        // simply add a separator between the urlbar results and the one-off search buttons, like the searchbar's popup has.
-        "add separator above one-off search buttons": true,
     };
     constructor() {
         if (UrlbarMods.config["add new tooltips and classes for identity icon"])
@@ -43,8 +40,6 @@ class UrlbarMods {
             this.disableUrlbarInterventions();
         if (UrlbarMods.config["sort urlbar results consistently"]) this.urlbarResultsSorting();
         if (UrlbarMods.config["underline whitespace results"]) this.underlineSpaceResults();
-        if (UrlbarMods.config["add separator above one-off search buttons"])
-            this.oneOffsSeparator();
     }
     get urlbarOneOffs() {
         return this._urlbarOneOffs || (this._urlbarOneOffs = gURLBar.view.oneOffSearchButtons);
@@ -397,14 +392,6 @@ class UrlbarMods {
                 index = highlightIndex + highlightLength;
             }
         };
-    }
-    oneOffsSeparator() {
-        document.querySelector(".urlbarView-body-outer").after(
-            _ucUtils.createElement(document, "menuseparator", {
-                class: "searchbar-separator",
-                id: "urlbar-search-one-offs-separator",
-            })
-        );
     }
 }
 

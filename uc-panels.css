@@ -135,6 +135,10 @@ panel[type="arrow"][side="top"] {
     margin-top: -12px !important;
 }
 
+#editBookmarkPanel[on-toolbar-button] {
+    margin-top: -12px;
+}
+
 .subviewbutton {
     min-height: var(--subviewbutton-height) !important;
 }
