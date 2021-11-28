@@ -55,9 +55,12 @@ I also recommend setting the following prefs in `about:config`. There are two pr
 | browser.startup.preXulSkeletonUI | Boolean | false | |
 | browser.tabs.tabMinWidth | Number | 90 | User preference, but mine is 90 |
 | browser.tabs.tabmanager.enabled | Boolean | true | Enables "all tabs menu" |
-| browser.urlbar.accessibility.tabToSearch.announceResults | Boolean | false | Hide irritating urlbar results |
+| browser.urlbar.accessibility.tabToSearch.announceResults | Boolean | false | The following hide irritating urlbar results |
+| browser.urlbar.quicksuggest.enabled | Boolean | false | |
 | browser.urlbar.richSuggestions.tail | Boolean | false | |
 | browser.urlbar.searchTips | Boolean | false | |
+| browser.urlbar.suggest.quicksuggest.sponsored | Boolean | false | |
+| browser.urlbar.tabToSearch.onboard.interactionsLeft | Number | 0 | |
 | browser.urlbar.trimURLs | Boolean | false | Don't hide `http://` in the urlbar |
 | full-screen-api.transition-duration.enter | String | `0 0` | Remove the fade in/out transition when switching to/from fullscreen |
 | full-screen-api.transition-duration.leave | String | `0 0` | |
