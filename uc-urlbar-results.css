@@ -68,6 +68,12 @@
     position: relative;
 }
 
+.urlbarView-tags,
+.urlbarView-url,
+.urlbarView-title:not(:empty) ~ .urlbarView-action {
+    font-size: .85em;
+}
+
 .urlbarView-row {
     padding: 6px 6.5px !important;
 }
@@ -185,6 +191,52 @@
     .urlbarView-row-inner[selected]
     .urlbarView-dynamic-calculator-action {
     color: inherit;
+}
+
+.urlbarView-row[dynamicType="onboardTabToSearch"]
+    > .urlbarView-row-inner
+    > .urlbarView-no-wrap
+    > .urlbarView-favicon {
+	min-width: 16px !important;
+	height: 16px !important;
+    fill: currentColor !important;
+    fill-opacity: 1 !important;
+    color: var(--attention-color) !important;
+}
+
+.urlbarView-row[dynamicType="onboardTabToSearch"] > .urlbarView-row-inner {
+	min-height: 0 !important;
+    padding-block: 6px !important;
+}
+
+.urlbarView-dynamic-onboardTabToSearch-first-row-container {
+    align-items: center !important;
+}
+
+.urlbarView-row[dynamicType="onboardTabToSearch"] .urlbarView-title {
+    line-height: normal !important;
+}
+
+.urlbarView-dynamic-onboardTabToSearch-description {
+	margin-block: 0 !important;
+    font-size: .85em !important;
+}
+
+.urlbarView-row[dynamicType="onboardTabToSearch"]
+> .urlbarView-row-inner:not([selected])
+.urlbarView-dynamic-onboardTabToSearch-description {
+	opacity: 1 !important;
+    color: var(--panel-shortcut-color) !important;
+}
+
+.urlbarView-row[dynamicType="onboardTabToSearch"]
+    .urlbarView-action.urlbarView-dynamic-onboardTabToSearch-action {
+    margin-inline-start: 10px !important;
+}
+
+.urlbarView-row[dynamicType="onboardTabToSearch"]:not([selected], [show-action-text], :hover)
+    .urlbarView-action {
+    display: none !important;
 }
 
 .urlbarView[actionoverride] .urlbarView-row[type="switchtab"] .urlbarView-type-icon {
@@ -485,6 +537,7 @@
     display: none;
 }
 
+/* I think the slide-in animation looks pretty corny honestly */
 .urlbarView-action[slide-in] {
     animation: none !important;
 }
@@ -540,7 +593,6 @@
     width: 16px !important;
     height: 16px !important;
     padding-left: 16px;
-    fill-opacity: 1 !important;
 }
 
 .urlbarView-row:not([type="search"])
@@ -551,7 +603,6 @@
     width: 16px !important;
     height: 16px !important;
     padding-left: 16px;
-    fill-opacity: 1 !important;
 }
 
 .urlbarView-row:not([type="search"])
@@ -562,7 +613,6 @@
     width: 16px !important;
     height: 16px !important;
     padding-left: 16px;
-    fill-opacity: 1 !important;
 }
 
 .urlbarView-row:not([type="search"])
@@ -573,7 +623,6 @@
     width: 16px !important;
     height: 16px !important;
     padding-left: 16px;
-    fill-opacity: 1 !important;
 }
 
 .urlbarView-row[type="tabtosearch"]:not([selected], [show-action-text], :hover)
@@ -721,7 +770,7 @@ so you might wanna turn the animation off. I might even make it off by default. 
     min-height: 34px !important;
     border-radius: var(--arrowpanel-menuitem-border-radius) !important;
     align-items: center !important;
-    fill-opacity: 0.6;
+    fill-opacity: 0.8;
     fill: var(--panel-description-color);
 }
 

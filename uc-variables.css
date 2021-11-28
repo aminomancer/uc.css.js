@@ -10,10 +10,13 @@ menupopup {
     --lwt-accent-color: var(--uc-accent-color) !important;
     --lwt-frame: var(--uc-frame-color) !important;
     --lwt-text-color: var(--uc-arrowpanel-color) !important;
+    --toolbar-field-focus: hsla(233, 25%, 28%, 85%) !important;
+    --toolbar-field-color: var(--uc-toolbar-field-color) !important;
+    --toolbar-field-focus-color: var(--uc-toolbar-field-color) !important;
     --lwt-toolbar-field-background-color: hsla(233, 25%, 28%, 85%) !important;
-    --lwt-toolbar-field-color: hsl(240, 60%, 99%);
-    --lwt-toolbar-field-focus: hsla(233, 25%, 28%, 85%) !important;
-    --lwt-toolbar-field-focus-color: #fff !important;
+    --lwt-toolbar-field-color: var(--uc-toolbar-field-color) !important;
+    --lwt-toolbar-field-focus: var(--toolbar-field-focus) !important;
+    --lwt-toolbar-field-focus-color: var(--uc-toolbar-color) !important;
     --lwt-toolbar-field-highlight: var(--ui-selection-bgcolor) !important;
     --lwt-toolbar-field-highlight-text: var(--ui-selection-color) !important;
     --lwt-toolbar-field-highlight-disabled: var(--ui-selection-bgcolor-disabled) !important;

@@ -533,6 +533,10 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
             font-size: 11.5px !important;
         }
 
+        .urlbarView-row[dynamicType="onboardTabToSearch"] .urlbarView-title strong.urlbarView-dynamic-onboardTabToSearch-titleStrong {
+            font-family: SF Pro Text !important;
+        }
+
         .popup-notification-body input[type="password"] {
             font-family: SF Pro !important;
         }
