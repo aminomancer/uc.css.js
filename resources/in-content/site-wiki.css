@@ -1,4 +1,4 @@
-/* my personal wikipedia dark mode theme.
+/* my personal wikipedia dark mode theme. use this with dark reader for best results.
 enable/disable by setting this pref in about:config:
 userChrome.css.wikipedia.dark-theme-enabled
 
@@ -619,6 +619,10 @@ You can use greasemonkey or any other form of monkey that supports the document-
             url(chrome://userchrome/content/hide-password.svg) !important;
     }
 
+    .ve-activated .vector-menu-tabs .selected {
+        box-shadow: none !important;
+    }
+
     /* logo */
     #content::before {
         position: absolute !important;
@@ -812,11 +816,6 @@ You can use greasemonkey or any other form of monkey that supports the document-
     .uls-menu .uls-search:focus-within .uls-languagefilter,
     .uls-menu .uls-search:hover .uls-languagefilter {
         opacity: 1 !important;
-    }
-
-    .uls-menu .uls-search-label,
-    .uls-languagefilter-clear {
-        filter: invert(1) !important;
     }
 
     .uls-menu .uls-lcd-region-title {
@@ -1799,17 +1798,6 @@ You can use greasemonkey or any other form of monkey that supports the document-
         background-color: var(--uc-wiki-popup-bg) !important;
     }
 
-    :is(.oo-ui-toolbar-bar, .ve-ce-branchNode-slug, .toolbar.section-main, .wikiEditor-ui-toolbar)
-        .oo-ui-iconElement-icon,
-    :is(.oo-ui-toolbar-bar, .ve-ce-branchNode-slug, .toolbar.section-main, .wikiEditor-ui-toolbar)
-        .oo-ui-indicatorElement-indicator {
-        filter: invert();
-    }
-
-    .wikiEditor-ui-toolbar .tabs span.tab a::before {
-        filter: invert();
-    }
-
     .oo-ui-checkboxInputWidget-checkIcon {
         filter: none !important;
     }
@@ -1823,19 +1811,6 @@ You can use greasemonkey or any other form of monkey that supports the document-
     :is(.oo-ui-popupToolGroup-active, .oo-ui-popupToolGroup-active-tools)
         .oo-ui-iconElement-icon {
         opacity: 1 !important;
-        filter: invert(1) hue-rotate(190deg) !important;
-    }
-
-    .oo-ui-outlineControlsWidget
-        .oo-ui-iconElement
-        .oo-ui-iconElement-icon,
-    .oo-ui-icon-parameter,
-    .oo-ui-icon-puzzle,
-    .mw-ui-icon-puzzle::before,
-    .oo-ui-icon-wikiText,
-    .mw-ui-icon-wikiText::before,
-    .oo-ui-indicator-required {
-        filter: invert(1) hue-rotate(190deg) !important;
     }
 
     .wikiEditor-ui-toolbar .page-characters div span {
@@ -3647,7 +3622,6 @@ You can use greasemonkey or any other form of monkey that supports the document-
         .oo-ui-buttonElement-framed.oo-ui-widget-enabled
         > .oo-ui-buttonElement-button
         > .oo-ui-indicatorElement-indicator:not(.oo-ui-image-invert) {
-        filter: invert(1) !important;
         opacity: 0.2 !important;
         cursor: pointer !important;
     }
@@ -3758,7 +3732,6 @@ You can use greasemonkey or any other form of monkey that supports the document-
         .oo-ui-buttonElement-framed.oo-ui-widget-enabled
         > .oo-ui-buttonElement-button
         > .oo-ui-indicatorElement-indicator:not(.oo-ui-image-invert) {
-        filter: invert(1) !important;
         opacity: 0.3 !important;
         cursor: pointer !important;
     }
@@ -3802,7 +3775,6 @@ You can use greasemonkey or any other form of monkey that supports the document-
         .oo-ui-dropdownWidget.oo-ui-widget-enabled
         .oo-ui-dropdownWidget-handle
         .oo-ui-indicator-down {
-        filter: invert(1) !important;
         opacity: 0.4 !important;
         transform: scaleY(-1) !important;
     }
@@ -3913,10 +3885,6 @@ You can use greasemonkey or any other form of monkey that supports the document-
 
     .mw-ui-icon:hover {
         filter: contrast(0%) brightness(10000%) grayscale(0%) !important;
-    }
-
-    .mw-ui-icon.mw-ui-icon-preview-generic {
-        filter: invert() !important;
     }
 
     .mwe-popups footer {
@@ -4816,5 +4784,48 @@ You can use greasemonkey or any other form of monkey that supports the document-
         background: var(--uc-wiki-box-bg) !important;
         border-color: transparent !important;
     }
+
+/*     unnecessary if you use this with dark reader (which you probably should) */
+/*     .uls-menu .uls-search-label,
+    .uls-languagefilter-clear,
+    :is(.oo-ui-toolbar-bar, .ve-ce-branchNode-slug, .toolbar.section-main, .wikiEditor-ui-toolbar)
+        .oo-ui-iconElement-icon,
+    :is(.oo-ui-toolbar-bar, .ve-ce-branchNode-slug, .toolbar.section-main, .wikiEditor-ui-toolbar)
+        .oo-ui-indicatorElement-indicator,
+    .wikiEditor-ui-toolbar .tabs span.tab a::before,
+    :is(.oo-ui-popupToolGroup-active, .oo-ui-popupToolGroup-active-tools)
+        .oo-ui-iconElement-icon,
+    .oo-ui-outlineControlsWidget
+        .oo-ui-iconElement
+        .oo-ui-iconElement-icon,
+    .oo-ui-icon-parameter,
+    .oo-ui-icon-puzzle,
+    .mw-ui-icon-puzzle::before,
+    .oo-ui-icon-wikiText,
+    .mw-ui-icon-wikiText::before,
+    .oo-ui-indicator-required,
+    .mw-mmv-share-pane
+        .oo-ui-buttonElement-framed.oo-ui-widget-enabled
+        > .oo-ui-buttonElement-button
+        > .oo-ui-iconElement-icon:not(.oo-ui-image-invert),
+    .mw-mmv-share-pane
+        .oo-ui-buttonElement-framed.oo-ui-widget-enabled
+        > .oo-ui-buttonElement-button
+        > .oo-ui-indicatorElement-indicator:not(.oo-ui-image-invert),
+    .mw-mmv-embed-pane
+        .oo-ui-buttonElement-framed.oo-ui-widget-enabled
+        > .oo-ui-buttonElement-button
+        > .oo-ui-iconElement-icon:not(.oo-ui-image-invert),
+    .mw-mmv-embed-pane
+        .oo-ui-buttonElement-framed.oo-ui-widget-enabled
+        > .oo-ui-buttonElement-button
+        > .oo-ui-indicatorElement-indicator:not(.oo-ui-image-invert),
+    .mw-mmv-reuse-dialog
+        .oo-ui-dropdownWidget.oo-ui-widget-enabled
+        .oo-ui-dropdownWidget-handle
+        .oo-ui-indicator-down,
+    .mw-ui-icon.mw-ui-icon-preview-generic {
+        filter: invert() !important;
+    } */
 }
 }

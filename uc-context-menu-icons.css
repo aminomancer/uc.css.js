@@ -305,6 +305,8 @@ menuitem.viewCustomizeToolbar > .menu-text,
 menupopup:not(#contentAreaContextMenu)
     > #addon_darkreader_org-menuitem-_DarkReader-top:not(.menuitem-iconic, .menu-iconic)
     > .menu-text,
+#_testpilot-containers-menuitem-_hide-container:not(.menuitem-iconic, .menu-iconic) > .menu-text,
+#_testpilot-containers-menuitem-_move-to-new-window-container:not(.menuitem-iconic, .menu-iconic) > .menu-text,
 menuitem.customize-context-removeFromToolbar > .menu-text,
 menuitem.customize-context-removeFromPanel > .menu-text,
 menuitem.customize-context-moveToToolbar > .menu-text,
@@ -595,6 +597,8 @@ menuitem.viewCustomizeToolbar::before,
 #addon_darkreader_org-menuitem-_DarkReader-switchEngine:not(.menuitem-iconic)::before,
 menupopup:not(#contentAreaContextMenu)
     > #addon_darkreader_org-menuitem-_DarkReader-top:not(.menuitem-iconic, .menu-iconic)::before,
+#_testpilot-containers-menuitem-_hide-container:not(.menuitem-iconic, .menu-iconic)::before,
+#_testpilot-containers-menuitem-_move-to-new-window-container:not(.menuitem-iconic, .menu-iconic)::before,
 menuitem.customize-context-removeFromToolbar::before,
 menuitem.customize-context-removeFromPanel::before,
 menuitem.customize-context-moveToToolbar::before,
@@ -1394,6 +1398,14 @@ menuitem#fill-login-generated-password::before,
 menuitem.viewCustomizeToolbar::before,
 #addon_darkreader_org-menuitem-_DarkReader-switchEngine:not(.menuitem-iconic)::before {
     background-image: url(chrome://browser/skin/customize.svg);
+}
+
+#_testpilot-containers-menuitem-_hide-container:not(.menuitem-iconic, .menu-iconic)::before {
+    background-image: url(chrome://userchrome/content/hide-password.svg);
+}
+
+#_testpilot-containers-menuitem-_move-to-new-window-container:not(.menuitem-iconic, .menu-iconic)::before {
+    background-image: url(chrome://userchrome/content/skin/new-window.svg);
 }
 
 menuitem:is(.customize-context-removeFromToolbar, .customize-context-removeFromPanel)::before {
