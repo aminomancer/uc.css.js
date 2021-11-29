@@ -189,7 +189,7 @@ tooltip {
     /* controls the color of the search highlights in about:preferences */
     --solid-selection-bgcolor: var(--pink-action);
     /* controls the color of the little tooltips that appear on search highlighted buttons in about:preferences */
-    --aboutPrefs-find-tags: var(--purple-35);
+    --aboutPrefs-find-tags: var(--pink-action);
 
     --badge-color-dark: hsl(236, 13%, 42%);
     --badge-color-light: var(--lwt-toolbarbutton-icon-fill-attention);

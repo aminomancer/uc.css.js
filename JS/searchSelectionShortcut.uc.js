@@ -1,35 +1,37 @@
 // ==UserScript==
 // @name           Search Selection Keyboard Shortcut
-// @version        1.3.0
+// @version        1.3.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Adds a new keyboard shortcut (ctrl+shift+F) that searches your default search engine for whatever text you currently have highlighted. This does basically the same thing as the context menu option "Search {Engine} for {Selection}" except that if you highlight a URL, instead of searching for the selection it will navigate directly to the URL. Since v1.3 this script supports Fission by using JSActors instead of Message Managers. Normally JSActors require multiple files — a parent script and a child script, to communicate between the content frame and the parent process. And to instantiate them would require a third file, the autoconfig script. An autoconfig script requiring multiple additional files doesn't make for a very user-friendly experience. So this script automatically generates its own subscript files in your chrome folder and cleans them up when you quit Firefox. I had a lot of fun figuring this out. If you're trying to learn how to make these kinds of mods, this is a good subject to research since JSActors are really powerful. It's also cool to see how a standalone autoconfig script can be made to create its own little network of temp files to work in a more vanilla-style manner.
+// @include        main
+// @onlyonce
 // ==/UserScript==
 
 class SearchSelectionShortcut {
     constructor() {
         this.setup();
     }
+    sleep(ms) {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+    }
     async setup() {
-        const Cm = Components.manager;
         // the component registrar — this is the interface that lets us make custom URIs with chrome:// protocols.
-        const registrar = Cm.QueryInterface(Ci.nsIComponentRegistrar);
-        // the {profile}/chrome/ folder! where all your mods are located.
-        let UChrm = Services.dirsvc.get("UChrm", Ci.nsIFile);
+        const registrar = Components.manager.QueryInterface(Ci.nsIComponentRegistrar);
         // a temp directory we're making in the chrome folder.
         // I tried making this folder in the *actual* Temp directory, but I guess it has a permissions issue or something.
         // when we try that, the hotkey works on system pages, but not on regular webpages. very strange, never figured out why.
         // so just make it a dotfile so it won't get in the way. that should hide the folder on linux unless showing hidden files is enabled.
         // not sure about macOS. somebody let me know if it's hidden or not.
-        let path = await OS.Path.join(UChrm.path, ".SearchSelectionShortcut");
-        await OS.File.makeDir(path, { ignoreExisting: true });
-        this.tempPath = path;
-        UChrm.append(".SearchSelectionShortcut");
+        let tempDir = FileUtils.getFile("UChrm", [".SearchSelectionShortcut"]);
+        let { path } = tempDir;
+        await IOUtils.makeDirectory(path, { ignoreExisting: true });
         // hide the temp dir on windows so it doesn't get in the way of user activities or prevent its eventual deletion.
-        OS.File.setPermissions(UChrm.path, { winAttributes: { hidden: true } });
+        OS.File.setPermissions(path, { winAttributes: { hidden: true } });
+        this.tempPath = path;
 
         // create a manifest file that registers a URI for chrome://uc-searchselectionshortcut/content/
-        this.manifest = await this.createTempFile(`content uc-searchselectionshortcut ./`, {
+        this.manifestFile = await this.createTempFile(`content uc-searchselectionshortcut ./`, {
             name: "ucsss.manifest",
         });
         // JSActors require parent files and child files. see: https://firefox-source-docs.mozilla.org/dom/ipc/jsactors.html
@@ -52,9 +54,18 @@ class SearchSelectionShortcut {
         );
 
         // find the manifest in the temp directory and register it with the component registrar.
-        UChrm.append("ucsss.manifest");
-        if (UChrm.exists()) registrar.autoRegister(UChrm);
+        let manifest = FileUtils.getFile("UChrm", [".SearchSelectionShortcut", "ucsss.manifest"]);
+        // some problem with IOUtils writing methods makes autoRegister unable to read them until they've been read by OS.File.
+        // I'm guessing it has something to do with their asynchrony. but it makes no sense because they are supposed to resolve a promise
+        // when they're finished writing. apparently they resolve before they're truly finished, or something.
+        // waiting for OS.File.stat works, but OS.File will be removed eventually.
+        // at that point this can be substituted for just waiting for like 50ms.
+        await OS.File.stat(manifest.path);
+        // registering the manifest gives the temp folder a chrome:// URI that we can reference below
+        if (manifest.exists()) registrar.autoRegister(manifest);
         else return;
+        this.registrar = registrar;
+        this.manifest = manifest;
 
         // register the JSActor, passing the temporary files' chrome:// URLs.
         // includeChrome, allFrames, and messageManagerGroups are specified to ensure this works in every frame.
@@ -83,27 +94,8 @@ class SearchSelectionShortcut {
      */
     async createTempFile(contents, options = {}) {
         let { path = null, name = "uc-temp" } = options;
-        if (!path) {
-            const basePath = OS.Path.join(
-                Services.dirsvc.get("UChrm", Ci.nsIFile).path,
-                ".SearchSelectionShortcut",
-                name
-            );
-            const file = await OS.File.open(
-                basePath,
-                { write: true, read: true },
-                { humanReadable: true }
-            );
-            const stat = await file.stat();
-            path = stat.path;
-            await file.close();
-        }
-        let encoder = new TextEncoder();
-        let array = encoder.encode(contents);
-        await OS.File.writeAtomic(path, array, {
-            encoding: "utf-8",
-            tmpPath: path + ".tmp",
-        });
+        if (!path) path = FileUtils.getFile("UChrm", [".SearchSelectionShortcut", name]).path;
+        await IOUtils.writeUTF8(path, contents);
         let url = "chrome://uc-searchselectionshortcut/content/" + name;
         return { name, url };
     }
@@ -119,7 +111,10 @@ class SearchSelectionShortcut {
     }
     // remove the temp directory when firefox's main process ends
     async cleanup() {
-        await OS.File.removeDir(this.tempPath, { ignoreAbsent: true });
+        await IOUtils.remove(this.tempPath, {
+            ignoreAbsent: true,
+            recursive: true,
+        });
     }
 }
 
