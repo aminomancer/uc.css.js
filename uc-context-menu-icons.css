@@ -1121,7 +1121,7 @@ menuitem#repair-text-encoding::before {
 }
 
 #context-keywordfield::before {
-    background-image: url(chrome://userchrome/content/devtools/filter.svg);
+    background-image: url(chrome://userchrome/content/material/filter-css.svg);
 }
 
 #context_reopenInContainer::before {

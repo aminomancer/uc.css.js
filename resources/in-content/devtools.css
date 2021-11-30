@@ -583,3 +583,37 @@ and a few elements like checkboxes */
         }
     }
 }
+
+@-moz-document url-prefix("about:devtools-toolbox") {
+    /* replace icons for devtools tabs added by extensions with dark mode responsive icons.
+    e.g., react devtools, angular devtools, angular state inspector. */
+    .devtools-tab[data-extension-id="@react-devtools"] > img {
+        padding-inline: 0 16px !important;
+        max-width: 16px !important;
+        box-sizing: border-box !important;
+        background-image: url(chrome://userchrome/content/devtools/sources/react.svg);
+        background-size: 16px;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .devtools-tab[data-extension-id="angular-devtools@aminomancer"] > img {
+        padding-inline: 0 16px !important;
+        max-width: 16px !important;
+        box-sizing: border-box !important;
+        background-image: url(chrome://userchrome/content/devtools/sources/angular.svg);
+        background-size: 16px;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .devtools-tab[data-extension-id="{8c161eb2-86b5-49e8-8e49-c789821be12e}"] > img {
+        padding-inline: 0 16px !important;
+        max-width: 16px !important;
+        box-sizing: border-box !important;
+        background-image: url(chrome://userchrome/content/devtools/sources/angular-state.svg);
+        background-size: 16px;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+}

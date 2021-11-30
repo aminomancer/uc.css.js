@@ -27,6 +27,13 @@ menupopup#viewSidebarMenu
     list-style-image: url(chrome://userchrome/content/material/svg-gobbler.svg) !important;
 }
 
+/* return youtube dislikes */
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="{762f9885-5a13-4abd-9c77-433dcd38b8fd}"]
+    .toolbarbutton-icon {
+    list-style-image: url(chrome://userchrome/content/skin/controlcenter/socialblock.svg) !important;
+    transform: scaleX(-1);
+}
+
 /* mendeley web importer */
 :is(.webextension-browser-action, .eom-addon-button)[data-extensionid="webapps@mendeley.com"i]
     .toolbarbutton-icon {
@@ -282,18 +289,9 @@ more useful than userContent.css when dealing with very complex websites that ne
 }
 
 /* invert some icons in the extension options panel */
-:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="sponsorBlocker@ajay.app"]
-    .toolbarbutton-icon,
-:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="@react-devtools"]
-    .toolbarbutton-icon,
-:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="hide-files-on-github@sindresorhus.com"]
-    .toolbarbutton-icon,
-:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="bypasspaywalls@bypasspaywalls"]
-    .toolbarbutton-icon,
 .eom-addon-button[data-extensionid="FirefoxColor@mozilla.com"] .toolbarbutton-icon,
 .eom-addon-button[data-extensionid="default-bookmark-folder@gustiaux.com"] .toolbarbutton-icon,
 .eom-addon-button[data-extensionid="{63d150c4-394c-4275-bc32-c464e76a891c}"] .toolbarbutton-icon,
-.eom-addon-button[data-extensionid="{3c078156-979c-498b-8990-85f7987dd929}"] .toolbarbutton-icon,
 .eom-addon-button[data-extensionid="bookmark-menu-container@robwu.nl"] .toolbarbutton-icon,
 .eom-addon-button[data-extensionid="octolinker@stefanbuck.com"] .toolbarbutton-icon,
 .eom-addon-button[data-extensionid="gitzip-firefox-addons@gitzip.org"] .toolbarbutton-icon,
@@ -301,9 +299,68 @@ more useful than userContent.css when dealing with very complex websites that ne
     filter: grayscale(1) invert(1) brightness(3) !important;
 }
 
+/* sidebery */
+.eom-addon-button[data-extensionid="{3c078156-979c-498b-8990-85f7987dd929}"] .toolbarbutton-icon {
+    list-style-image: url(chrome://userchrome/content/material/sidebery.svg);
+}
+
+/* my youtube search engine addon */
+.eom-addon-button[data-extensionid="youtube@aminomancer"] .toolbarbutton-icon {
+    list-style-image: url(chrome://userchrome/content/engines/youtube.svg);
+}
+
+/* sponsorblock */
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="sponsorBlocker@ajay.app"]
+    .toolbarbutton-icon {
+    list-style-image: url(chrome://userchrome/content/material/sponsorblock.svg);
+}
+
+/* hide files on github */
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="hide-files-on-github@sindresorhus.com"]
+    .toolbarbutton-icon {
+    list-style-image: url(chrome://userchrome/content/material/hide-files-on-github.svg);
+}
+
+/* bypass paywalls */
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="bypasspaywalls@bypasspaywalls"]
+    .toolbarbutton-icon {
+    list-style-image: url(chrome://userchrome/content/material/bypass-paywalls.svg);
+}
+
+/* react devtools */
 :is(.webextension-browser-action, .eom-addon-button)[data-extensionid="@react-devtools"]
     .toolbarbutton-icon {
-    list-style-image: url(chrome://devtools/content/debugger/images/sources/react.svg);
+    list-style-image: url(chrome://userchrome/content/devtools/sources/react.svg);
+}
+
+/* angular devtools. a chrome mod you can install in firefox with minor mods */
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="angular-devtools@aminomancer"]
+    .toolbarbutton-icon {
+    list-style-image: url(chrome://userchrome/content/devtools/sources/angular.svg);
+}
+
+/* angular state inspector */
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="{8c161eb2-86b5-49e8-8e49-c789821be12e}"]
+    .toolbarbutton-icon {
+    list-style-image: url(chrome://userchrome/content/devtools/sources/angular-state.svg);
+}
+
+/* bing to google */
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="bingtogoogle@louisgrasset.fr"]
+    .toolbarbutton-icon {
+    list-style-image: url(chrome://userchrome/content/engines/bing-to-google.svg);
+}
+
+/* reddit enhancement suite */
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="jid1-xUfzOsOFlzSOXg@jetpack"]
+    .toolbarbutton-icon {
+    list-style-image: url(chrome://userchrome/content/material/filter-css.svg);
+}
+
+/* view image - reimplements the view image button on google */
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="{287dcf75-bec6-4eec-b4f6-71948a2eea29}"]
+    .toolbarbutton-icon {
+    list-style-image: url(chrome://userchrome/content/material/google-view-image.svg);
 }
 
 /* context menu stuff */
