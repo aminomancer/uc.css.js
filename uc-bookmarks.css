@@ -415,6 +415,10 @@
     background-color: var(--checkbox-checked-hover-bgcolor) !important;
 }
 
+#editBookmarkPanel .checkbox-label-box > .checkbox-label {
+	opacity: revert !important;
+}
+
 #editBookmarkPanel_persistLastLocation {
     padding-inline: 4px !important;
 }

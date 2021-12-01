@@ -257,6 +257,7 @@ tooltip {
     --tab-button-border-radius: 50%;
     --menuitem-height: 26px;
     --subviewbutton-height: 28px;
+    --subview-subheader-padding: 5px 3px;
     --findbar-height: 22px;
     --default-identity-icon: url(chrome://userchrome/content/info-filled.svg);
     /* icon used for screenshot buttons. I prefer the second one, but use the first one it if you prefer the vanilla icon */

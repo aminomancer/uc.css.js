@@ -139,8 +139,88 @@ panel[type="arrow"][side="top"] {
     margin-top: -12px;
 }
 
+/* protect the arrowpanel animations from future updates */
+@supports -moz-bool-pref("xul.panel-animations.enabled") {
+    @media (prefers-reduced-motion: no-preference) {
+        :root[operatingsystem="macosx"] panel[type="arrow"]:not([animate="false"]),
+        :root[operatingsystem="macosx"] #BMB_bookmarksPopup:not([animate="false"]) {
+            transition-property: -moz-window-transform, -moz-window-opacity !important;
+            transition-duration: 0.18s, 0.18s !important;
+            transition-timing-function: var(--animation-easing-function), ease-out !important;
+        }
+
+        @media (-moz-mac-big-sur-theme: 0) {
+            :root[operatingsystem="macosx"] panel[type="arrow"]:not([animate="false"]),
+            :root[operatingsystem="macosx"] #BMB_bookmarksPopup:not([animate="false"]) {
+                -moz-window-opacity: 0 !important;
+                -moz-window-transform: translateY(-70px) !important;
+            }
+
+            :root[operatingsystem="macosx"]
+                panel[type="arrow"][side="bottom"]:not([animate="false"]),
+            :root[operatingsystem="macosx"]
+                #BMB_bookmarksPopup[side="bottom"]:not([animate="false"]) {
+                -moz-window-transform: translateY(70px) !important;
+            }
+        }
+
+        :root[operatingsystem="macosx"] panel[type="arrow"][animate][animate="open"],
+        :root[operatingsystem="macosx"] #BMB_bookmarksPopup[animate][animate="open"] {
+            -moz-window-opacity: 1 !important;
+            transition-duration: 0.18s, 0.18s !important;
+            -moz-window-transform: none !important;
+            transition-timing-function: var(--animation-easing-function), ease-in-out !important;
+        }
+
+        :root[operatingsystem="macosx"] panel[type="arrow"][animate][animate="cancel"],
+        :root[operatingsystem="macosx"] #BMB_bookmarksPopup[animate][animate="cancel"] {
+            -moz-window-opacity: 0 !important;
+            -moz-window-transform: none !important;
+        }
+
+        :root[operatingsystem]:not([operatingsystem="macosx"])
+            panel[type="arrow"]:not([animate="false"]),
+        :root[operatingsystem]:not([operatingsystem="macosx"])
+            #BMB_bookmarksPopup:not([animate="false"]) {
+            opacity: 0 !important;
+            transform: translateY(-70px) !important;
+            transition-property: transform, opacity !important;
+            transition-duration: 0.18s, 0.18s !important;
+            transition-timing-function: var(--animation-easing-function), ease-out !important;
+        }
+
+        :root[operatingsystem]:not([operatingsystem="macosx"])
+            panel[type="arrow"][side="bottom"]:not([animate="false"]),
+        :root[operatingsystem]:not([operatingsystem="macosx"])
+            #BMB_bookmarksPopup[side="bottom"]:not([animate="false"]) {
+            transform: translateY(70px) !important;
+        }
+
+        :root[operatingsystem]:not([operatingsystem="macosx"])
+            panel[type="arrow"][animate][animate="open"],
+        :root[operatingsystem]:not([operatingsystem="macosx"])
+            #BMB_bookmarksPopup[animate][animate="open"] {
+            opacity: 1 !important;
+            transition-duration: 0.18s, 0.18s !important;
+            transform: none !important;
+            transition-timing-function: var(--animation-easing-function), ease-in-out !important;
+        }
+
+        :root[operatingsystem]:not([operatingsystem="macosx"])
+            panel[type="arrow"][animate][animate="cancel"],
+        :root[operatingsystem]:not([operatingsystem="macosx"])
+            #BMB_bookmarksPopup[animate][animate="cancel"] {
+            transform: none !important;
+        }
+    }
+}
+
 .subviewbutton {
     min-height: var(--subviewbutton-height) !important;
+}
+
+.subview-subheader {
+    padding-block: var(--subview-subheader-padding, 4px) !important;
 }
 
 .panel-footer > button:not([disabled]):is(:hover, :focus-visible) {
@@ -474,7 +554,7 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
     color: var(--panel-description-color);
 }
 
-#eom-allow-auto-updates .subviewradio {
+.eom-radio-group .subviewradio {
     background: none !important;
 }
 
