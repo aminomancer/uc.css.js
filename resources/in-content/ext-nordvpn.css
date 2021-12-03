@@ -18,6 +18,14 @@
         color: var(--in-content-page-color) !important;
     }
 
+    .Container {
+        min-height: auto !important;
+    }
+
+    .Container__wrapper {
+        min-height: 350px !important;
+    }
+
     .c-bw-12,
     .CountryItem .Text {
         color: var(--ui-text-80) !important;
@@ -151,7 +159,7 @@
 
     .form-control,
     .nord-input {
-        background-color: var(--in-content-button-background) !important;
+        background-color: var(--in-content-box-background) !important;
     }
 
     .TextField__element,
