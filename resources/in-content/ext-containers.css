@@ -32,30 +32,22 @@
         padding: var(--menupopup-inner-padding-magnitude) !important;
         padding-top: 0 !important;
         min-inline-size: 0px !important;
-        inline-size: calc(var(--overflow-size) + 199px) !important;
+        inline-size: calc(var(--overflow-size) + 249px) !important;
         max-inline-size: 300px !important;
         box-sizing: border-box !important;
         background: none !important;
     }
 
-    @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
-        body {
-            font-family: SF Pro Text, Segoe UI, sans-serif !important;
-            font-kerning: normal !important;
-        }
-    }
-
     h3.title {
-        line-height: normal !important;
-        padding-block: calc((44px - 1.1em) / 2) !important;
-        block-size: 34px !important;
-        min-height: 44px !important;
+        padding-block: 8px 4px !important;
+        block-size: 40px !important;
+        min-height: 40px !important;
         white-space: nowrap !important;
-        padding-inline: 10px 16px !important;
         font-family: inherit !important;
         font-weight: normal !important;
         font-size: 1.1em !important;
-        text-align: start !important;
+        line-height: 28px !important;
+        text-align: center !important;
         user-select: none;
         color: inherit !important;
         letter-spacing: inherit !important;
@@ -87,6 +79,11 @@
         user-select: none !important;
     }
 
+    .controller,
+    .hover-highlight {
+        transition: none !important;
+    }
+
     .hover-highlight:is(:focus):not(:hover, :focus-visible) {
         background: revert !important;
         color: inherit !important;
@@ -110,6 +107,20 @@
         margin: 0 !important;
         margin-inline: 6px 8px !important;
         inline-size: 16px !important;
+    }
+
+    @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
+        body {
+            font-family: SF Pro Text, Segoe UI, sans-serif !important;
+            font-kerning: normal !important;
+        }
+
+        h3.title {
+            font-family: SF Pro Display, Segoe UI, sans-serif !important;
+            font-kerning: normal !important;
+            font-size: 1.1em !important;
+            font-weight: var(--uc-font-weight-bold, 600) !important;
+        }
     }
 }
 
@@ -145,17 +156,6 @@
         color: inherit !important;
         letter-spacing: inherit !important;
         background: none !important;
-    }
-
-    @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
-        body {
-            font-family: SF Pro Text, Segoe UI, sans-serif !important;
-            font-kerning: normal !important;
-        }
-
-        h4 {
-            font-weight: 500 !important;
-        }
     }
 
     div {
@@ -235,16 +235,17 @@
     h3.title,
     .proxy-panel-title {
         background: none !important;
-        line-height: normal !important;
-        padding-block: calc((44px - 1.1em) / 2) !important;
-        block-size: 44px !important;
+        padding-block: 8px 4px !important;
+        block-size: 40px !important;
         max-block-size: unset !important;
-        min-height: 44px !important;
+        min-height: 40px !important;
         white-space: nowrap !important;
-        padding-inline: 9px 16px !important;
+        padding-inline: 16px !important;
         font-family: inherit !important;
         font-weight: normal !important;
         font-size: 1.1em !important;
+        line-height: 28px !important;
+        text-align: center !important;
         user-select: none;
         color: inherit !important;
         letter-spacing: inherit !important;
@@ -253,9 +254,9 @@
 
     h3.proxy-panel-title {
         padding-bottom: calc(
-            ((44px - 1.1em) / 2) + var(--menupopup-inner-padding-magnitude)
+            ((40px - 1.1em) / 2) + var(--menupopup-inner-padding-magnitude)
         ) !important;
-        min-height: 48.5px !important;
+        min-height: 44.5px !important;
         margin-inline: var(--menupopup-inner-padding-magnitude) !important;
         inline-size: calc(100% - (var(--menupopup-inner-padding-magnitude) * 2)) !important;
     }
@@ -575,7 +576,7 @@
 
     .btn-return {
         background-color: transparent !important;
-        background-image: url(chrome://userchrome/content/menu-arrow-left-big.svg) !important;
+        background-image: url(chrome://userchrome/content/menu-arrow-left.svg) !important;
         background-size: 16px !important;
         background-position: center !important;
         background-repeat: no-repeat !important;
@@ -583,15 +584,17 @@
         fill: currentColor;
         color: inherit;
         fill-opacity: 0.6;
-        padding: 8px !important;
+        padding: var(--uc-toolbarbutton-inner-padding, 8px) !important;
         margin: 0 !important;
         top: 8px !important;
         left: 8px !important;
-        min-height: 32px !important;
-        min-width: 32px !important;
+        min-height: var(--subviewbutton-height) !important;
+        min-width: var(--subviewbutton-height) !important;
+        block-size: var(--subviewbutton-height) !important;
+        inline-size: var(--subviewbutton-height) !important;
         filter: none !important;
         cursor: default !important;
-        border-radius: var(--arrowpanel-menuitem-border-radius) !important;
+        border-radius: var(--context-menuitem-border-radius) !important;
         background-color: transparent;
     }
 
@@ -984,6 +987,25 @@
     .proxy-validity::after {
         background-color: var(--warning-icon-background) !important;
         inset-inline-start: 8px !important;
+    }
+
+    @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
+        body {
+            font-family: SF Pro Text, Segoe UI, sans-serif !important;
+            font-kerning: normal !important;
+        }
+
+        h3.title,
+        .proxy-panel-title {
+            font-family: SF Pro Display, Segoe UI, sans-serif !important;
+            font-kerning: normal !important;
+            font-size: 1.1em !important;
+            font-weight: var(--uc-font-weight-bold, 600) !important;
+        }
+
+        h4 {
+            font-weight: 500 !important;
+        }
     }
 }
 

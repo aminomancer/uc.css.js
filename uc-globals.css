@@ -63,6 +63,7 @@ tooltip {
     --searchbar-popup-border-radius: 0 0 4px 4px;
     --searchbar-popup-box-shadow: 0 0 10px 3px hsla(0, 0%, 0%, 0.15);
     --searchbar-popup-box-shadow-size: 15px; /* if you increase the blur or spread values in the variable above, increase this variable commensurately */
+    --uc-toolbarbutton-inner-padding: 6px;
     --webextension-panel-border-radius: 5px;
     --menupopup-margin: calc(0px - var(--menupopup-inner-box-margin));
     --menupopup-background: transparent;
@@ -71,11 +72,15 @@ tooltip {
     --menupopup-padding: 0px;
     --menupopup-inner-padding-magnitude: 4px;
     --menupopup-inner-padding: var(--menupopup-inner-padding-magnitude) 0;
-    --context-checkbox-margin: 6px 7px;
+    --arrowpanel-subviewbutton-iconic-gap: 8px;
     --context-iconic-margin-start: 5px;
     --context-iconic-margin-end: 6px;
     --context-iconic-margin: var(--context-iconic-margin-start, 5px)
         var(--context-iconic-margin-end, 6px);
+    --context-checkbox-margin-start: calc(1px + var(--context-iconic-margin-start, 5px));
+    --context-checkbox-margin-end: calc(1px + var(--context-iconic-margin-end, 6px));
+    --context-checkbox-margin: var(--context-checkbox-margin-start, 6px)
+        var(--context-checkbox-margin-end, 7px);
     --context-iconic-composite-width: calc(
         16px + var(--context-iconic-margin-start) + var(--context-iconic-margin-end)
     );
@@ -173,6 +178,10 @@ tooltip {
     --eom-error-bg: hsla(2, 100%, 66%, 0.15);
     --eom-error-bg-hover: hsla(2, 100%, 76%, 0.23);
     --eom-error-bg-active: hsla(2, 100%, 80%, 0.27);
+    --uc-destructive-bgcolor: hsl(350.1, 82%, 56.2%);
+    --uc-destructive-hover-bgcolor: hsl(346, 86%, 46.6%);
+    --uc-destructive-active-bgcolor: hsl(345.8, 90%, 40%);
+    --uc-destructive-color: var(--ui-text-100);
 
     --global-selection-bgcolor: hsla(245, 100%, 76%, 0.5);
     --global-selection-color: white;
@@ -183,8 +192,8 @@ tooltip {
     --content-selection-bgcolor: hsla(0, 0%, 100%, 0.8);
     --content-selection-color: hsl(240, 4%, 10%);
     --content-selection-bgcolor-disabled: hsla(0, 0%, 100%, 0.7);
-    --pdf-selection-bgcolor: hsl(245, 100%, 46.7%) !important;
-    --pdf-highlight-bgcolor: hsl(345, 100%, 40%) !important;
+    --pdf-selection-bgcolor: hsl(245, 100%, 46.7%);
+    --pdf-highlight-bgcolor: hsl(345, 100%, 40%);
 
     /* controls the color of the search highlights in about:preferences */
     --solid-selection-bgcolor: var(--pink-action);
@@ -435,6 +444,7 @@ popupnotification,
 /* SF Pro is a bit heavier than Segoe UI so adjust font weights on certain elements */
 @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
     :root {
+        --uc-font-weight-extrabold: 600;
         --uc-font-weight-bold: 500;
         --uc-font-weight-semibold: 400;
         --uc-font-weight-thin: 300;

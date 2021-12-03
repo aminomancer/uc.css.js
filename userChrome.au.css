@@ -238,17 +238,17 @@ menupopup::part(drop-indicator) {
 #identity-popup-mainView .subviewbutton-nav::after,
 .widget-overflow-list .subviewbutton-nav::after,
 .PanelUI-subView .subviewbutton-nav::after {
-	-moz-context-properties: fill;
-	fill: var(--panel-shortcut-color);
-	fill-opacity: 1;
+    -moz-context-properties: fill;
+    fill: var(--panel-shortcut-color);
+    fill-opacity: 1;
 }
 
 #protections-popup-mainView .subviewbutton-nav[disabled="true"]:not(.notFound)::after,
 #identity-popup-mainView .subviewbutton-nav[disabled="true"]::after,
 .widget-overflow-list .subviewbutton-nav[disabled="true"]::after,
 .PanelUI-subView .subviewbutton-nav[disabled="true"]::after {
-	-moz-context-properties: fill, fill-opacity;
-	fill: var(--panel-disabled-color);
+    -moz-context-properties: fill, fill-opacity;
+    fill: var(--panel-disabled-color);
     fill-opacity: 0.5;
 }
 
@@ -1073,12 +1073,14 @@ menuitem.subviewbutton:not([disabled])[_moz-menuactive]:active,
 obviously that will only work for english firefox, so if you use another language,
 you should download miscMods.uc.js since it will dynamically set a universal attribute
 that we can select irrespective of target language. */
-#sidebar-reverse-position:is([label="Move Sidebar to Left"], [to-position="left"]) .toolbarbutton-icon {
+#sidebar-reverse-position:is([label="Move Sidebar to Left"], [to-position="left"])
+    .toolbarbutton-icon {
     list-style-image: url(chrome://userchrome/content/skin/back.svg);
     padding: 1px !important;
 }
 
-#sidebar-reverse-position:is([label="Move Sidebar to Right"], [to-position="right"]) .toolbarbutton-icon {
+#sidebar-reverse-position:is([label="Move Sidebar to Right"], [to-position="right"])
+    .toolbarbutton-icon {
     list-style-image: url(chrome://userchrome/content/skin/forward.svg);
     padding: 1px !important;
 }
@@ -1408,11 +1410,12 @@ toolbar[brighttext] #panic-button[open] {
 }
 
 .subviewbutton-back {
-    margin: 0 0 0 4px;
+    margin: 0 0 0 var(--arrowpanel-menuitem-inline-margin);
 }
 
 .panel-header > .subviewbutton-back {
-    list-style-image: url(chrome://userchrome/content/menu-arrow-left-big.svg);
+    list-style-image: url(chrome://userchrome/content/menu-arrow-left.svg);
+    padding: var(--toolbarbutton-inner-padding, 8px);
 }
 
 .notification-anchor-icon {

@@ -129,7 +129,8 @@ menuitem#repair-text-encoding .menu-text,
 menuitem#menu_openDownloads .menu-text,
 menuitem#menu_openAddons .menu-text,
 #addon_darkreader_org-menuitem-_DarkReader-toggle:not(.menuitem-iconic) .menu-text,
-#private-relay_firefox_com-menuitem-_fx-private-relay-generate-alias:not(.menuitem-iconic) > .menu-text,
+#private-relay_firefox_com-menuitem-_fx-private-relay-generate-alias:not(.menuitem-iconic)
+    > .menu-text,
 #menu_pageInfo .menu-text,
 menuitem:is(#sync-setup, #sync-unverifieditem, #sync-reauthitem) .menu-text,
 menuitem:is(#sync-enable, #sync-syncnowitem) .menu-text,
@@ -176,15 +177,15 @@ menuitem[data-l10n-id="full-screen-exit"] .menu-text,
 #context_moveToEnd .menu-text,
 #context_openTabInWindow .menu-text,
 #menu_newNavigator .menu-text,
-.textbox-contextmenu menuitem[label="Undo"] .menu-text,
-.textbox-contextmenu menuitem[label="Redo"] .menu-text,
-.textbox-contextmenu menuitem[label="Cut"] .menu-text,
-.textbox-contextmenu menuitem[label="Copy"] .menu-text,
-.textbox-contextmenu menuitem[label="Paste"] .menu-text,
-.textbox-contextmenu menuitem[label="Paste & Search"] .menu-text,
-.textbox-contextmenu menuitem[label="Paste and Go"] .menu-text,
-.textbox-contextmenu menuitem[label="Delete"] .menu-text,
-.textbox-contextmenu menuitem[label="Select All"] .menu-text,
+.textbox-contextmenu menuitem[data-l10n-id="text-action-undo"] .menu-text,
+.textbox-contextmenu menuitem[data-l10n-id="text-action-redo"] .menu-text,
+.textbox-contextmenu menuitem[data-l10n-id="text-action-cut"] .menu-text,
+.textbox-contextmenu menuitem[data-l10n-id="text-action-copy"] .menu-text,
+.textbox-contextmenu menuitem[data-l10n-id="text-action-paste"] .menu-text,
+.textbox-contextmenu menuitem.searchbar-paste-and-search .menu-text,
+.textbox-contextmenu menuitem:is([anonid="paste-and-go"], #paste-and-go) .menu-text,
+.textbox-contextmenu menuitem[data-l10n-id="text-action-delete"] .menu-text,
+.textbox-contextmenu menuitem[data-l10n-id="text-action-select-all"] .menu-text,
 .searchbar-clear-history .menu-text,
 #spell-check-enabled .menu-iconic-text,
 :is(#spell-add-to-dictionary, #spell-add-dictionaries, #spell-add-dictionaries-main, #spell-dictionaries)
@@ -196,6 +197,8 @@ menuitem[data-l10n-id="full-screen-exit"] .menu-text,
 #toolbar-context-reloadSelectedTabs .menu-text,
 #context_toggleMuteTab .menu-text,
 #context_toggleMuteSelectedTabs .menu-text,
+#context_playTab .menu-text,
+#context_playSelectedTabs .menu-text,
 #context_pinTab .menu-text,
 #context_pinSelectedTabs .menu-text,
 #context_unpinTab .menu-text,
@@ -221,7 +224,6 @@ menuitem[data-l10n-id="full-screen-exit"] .menu-text,
 #toolbar-context-bookmarkSelectedTabs .menu-text,
 #context_moveTabOptions > .menu-text,
 #context_sendTabToDevice > .menu-text,
-#context_shareTabURL > .menu-text,
 menuitem.share-tab-url-item > .menu-text,
 #context_closeTabOptions > .menu-text,
 :is(#context_closeTabsToTheStart, #context_closeTabsToTheEnd, #context_closeOtherTabs) .menu-text,
@@ -246,7 +248,9 @@ menuitem#enableDeveloperTools .menu-text,
 #historyUndoMenu > .menu-text,
 .recently-closed-windows-menu > .menu-text,
 .recently-closed-tabs-menu > .menu-text,
-:is(.recently-closed-windows-menu, .recently-closed-tabs-menu, #historyUndoMenu, #historyUndoWindowMenu) menuitem.restoreallitem .menu-text,
+:is(.recently-closed-windows-menu, .recently-closed-tabs-menu, #historyUndoMenu, #historyUndoWindowMenu)
+    menuitem.restoreallitem
+    .menu-text,
 #recently-closed-restore > .menu-text,
 #recently-closed-restore-in-new-window > .menu-text,
 #recently-closed-restore-in-new-private-window > .menu-text,
@@ -281,8 +285,7 @@ menuitem#fill-login-generated-password > .menu-text,
     menu[label="Bitwarden"]
     :is(menu, menuitem)[id$="-menuitem-_copy-identifier"]
     > .menu-text,
-menu[label="Bitwarden"]:not(.menuitem-iconic, .menu-iconic)
-    > .menu-text,
+menu[label="Bitwarden"]:not(.menuitem-iconic, .menu-iconic) > .menu-text,
 #_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-manager:not(.menuitem-iconic, .menu-iconic)
     > .menu-text,
 #_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-options:not(.menuitem-iconic, .menu-iconic)
@@ -306,7 +309,8 @@ menupopup:not(#contentAreaContextMenu)
     > #addon_darkreader_org-menuitem-_DarkReader-top:not(.menuitem-iconic, .menu-iconic)
     > .menu-text,
 #_testpilot-containers-menuitem-_hide-container:not(.menuitem-iconic, .menu-iconic) > .menu-text,
-#_testpilot-containers-menuitem-_move-to-new-window-container:not(.menuitem-iconic, .menu-iconic) > .menu-text,
+#_testpilot-containers-menuitem-_move-to-new-window-container:not(.menuitem-iconic, .menu-iconic)
+    > .menu-text,
 menuitem.customize-context-removeFromToolbar > .menu-text,
 menuitem.customize-context-removeFromPanel > .menu-text,
 menuitem.customize-context-moveToToolbar > .menu-text,
@@ -393,15 +397,15 @@ menuitem#sanitizeItem::before,
 #context-sendlinktodevice::before,
 #context-selectall::before,
 #menu_selectAll::before,
-.textbox-contextmenu menuitem[label="Select All"]::before,
-.textbox-contextmenu menuitem[label="Copy"]::before,
-.textbox-contextmenu menuitem[label="Cut"]::before,
-.textbox-contextmenu menuitem[label="Paste"]::before,
-.textbox-contextmenu menuitem[label="Paste & Search"]::before,
-.textbox-contextmenu menuitem[label="Paste and Go"]::before,
-.textbox-contextmenu menuitem[label="Delete"]::before,
-.textbox-contextmenu menuitem[label="Undo"]::before,
-.textbox-contextmenu menuitem[label="Redo"]::before,
+.textbox-contextmenu menuitem[data-l10n-id="text-action-select-all"]::before,
+.textbox-contextmenu menuitem[data-l10n-id="text-action-copy"]::before,
+.textbox-contextmenu menuitem[data-l10n-id="text-action-cut"]::before,
+.textbox-contextmenu menuitem[data-l10n-id="text-action-paste"]::before,
+.textbox-contextmenu menuitem.searchbar-paste-and-search::before,
+.textbox-contextmenu menuitem:is([anonid="paste-and-go"], #paste-and-go)::before,
+.textbox-contextmenu menuitem[data-l10n-id="text-action-delete"]::before,
+.textbox-contextmenu menuitem[data-l10n-id="text-action-undo"]::before,
+.textbox-contextmenu menuitem[data-l10n-id="text-action-redo"]::before,
 .searchbar-clear-history::before,
 #context-sendimage::before,
 #context-sendvideo::before,
@@ -477,6 +481,7 @@ menuitem#repair-text-encoding::before,
 #context_reopenInContainer::before,
 :is(#context_reloadTab, #context_reloadSelectedTabs, #toolbar-context-reloadSelectedTab, #toolbar-context-reloadSelectedTabs)::before,
 :is(#context_toggleMuteTab, #context_toggleMuteSelectedTabs)::before,
+:is(#context_playTab, #context_playSelectedTabs)::before,
 :is(#context_pinTab, #context_pinSelectedTabs)::before,
 :is(#context_unpinTab, #context_unpinSelectedTabs)::before,
 :is(#context_duplicateTab, #context_duplicateTabs, #menu_showAllTabs)::before,
@@ -505,7 +510,6 @@ menuitem#repair-text-encoding::before,
 #menu_bookmarkAllTabs::before,
 #context_moveTabOptions::before,
 #context_sendTabToDevice::before,
-#context_shareTabURL::before,
 menuitem.share-tab-url-item::before,
 #context_closeTabOptions::before,
 :is(#context_closeTabsToTheStart, #context_closeTabsToTheEnd, #context_closeOtherTabs)::before,
@@ -530,7 +534,8 @@ menuitem#enableDeveloperTools::before,
 #historyUndoMenu::before,
 .recently-closed-windows-menu::before,
 .recently-closed-tabs-menu::before,
-:is(.recently-closed-windows-menu, .recently-closed-tabs-menu, #historyUndoMenu, #historyUndoWindowMenu) menuitem.restoreallitem::before,
+:is(.recently-closed-windows-menu, .recently-closed-tabs-menu, #historyUndoMenu, #historyUndoWindowMenu)
+    menuitem.restoreallitem::before,
 #recently-closed-restore::before,
 #recently-closed-restore-in-new-window::before,
 #recently-closed-restore-in-new-private-window::before,
@@ -954,7 +959,7 @@ menuitem#sanitizeItem::before {
 }
 
 :is(#context-selectall, #menu_selectAll)::before,
-.textbox-contextmenu menuitem[label="Select All"]::before {
+.textbox-contextmenu menuitem[data-l10n-id="text-action-select-all"]::before {
     background-image: url(chrome://userchrome/content/glyph-highlights-16.svg);
 }
 
@@ -988,7 +993,7 @@ menuitem#sanitizeItem::before {
 }
 
 :is(#context-copyimage-contents, #context-copy, #menu_copy, #placesContext_copy, #syncedTabsCopySelected)::before,
-.textbox-contextmenu menuitem[label="Copy"]::before,
+.textbox-contextmenu menuitem[data-l10n-id="text-action-copy"]::before,
 menuitem.customize-context-CopyID::before {
     background-image: url(chrome://userchrome/content/skin/edit-copy.svg);
 }
@@ -1002,22 +1007,23 @@ menuitem.customize-context-CopyID::before {
 }
 
 :is(#context-cut, #menu_cut, #placesContext_cut)::before,
-.textbox-contextmenu menuitem[label="Cut"]::before {
+.textbox-contextmenu menuitem[data-l10n-id="text-action-cut"]::before {
     background-image: url(chrome://userchrome/content/skin/edit-cut.svg);
 }
 
 :is(#context-paste, #menu_paste, #placesContext_paste, #placesContext_paste_group)::before,
-.textbox-contextmenu menuitem[label="Paste"]::before {
+.textbox-contextmenu menuitem[data-l10n-id="text-action-paste"]::before {
     background-image: url(chrome://userchrome/content/skin/edit-paste.svg);
 }
 
-.textbox-contextmenu menuitem:is([label="Paste and Go"], [label="Paste & Search"])::before {
+.textbox-contextmenu
+    menuitem:is([anonid="paste-and-go"], #paste-and-go, .searchbar-paste-and-search)::before {
     background-image: url(chrome://userchrome/content/skin/edit-paste-and-go.svg);
 }
 
 :is(#placesContext_deleteBookmark, #placesContext_deleteFolder, #placesContext_delete, #placesContext_delete_history)::before,
 :is(#context-delete, #menu_delete)::before,
-.textbox-contextmenu menuitem[label="Delete"]::before {
+.textbox-contextmenu menuitem[data-l10n-id="text-action-delete"]::before {
     background-image: url(chrome://userchrome/content/delete.svg);
 }
 
@@ -1112,7 +1118,8 @@ menuitem#repair-text-encoding::before {
 }
 
 :is(#context-undo, #context_undoCloseTab, #toolbar-context-undoCloseTab, #menu_undo, #undobookmarksmenuUndo, #context-redo, #menu_redo, #undobookmarksmenuRedo)::before,
-.textbox-contextmenu menuitem:is([label="Undo"], [label="Redo"])::before {
+.textbox-contextmenu
+    menuitem:is([data-l10n-id="text-action-undo"], [data-l10n-id="text-action-redo"])::before {
     background-image: url(chrome://userchrome/content/undo.svg);
 }
 
@@ -1140,7 +1147,7 @@ menuitem#repair-text-encoding::before {
     background-image: url(chrome://userchrome/content/audioUnmutedButton.svg);
 }
 
-:is(#context_toggleMuteTab, #context_toggleMuteSelectedTabs)[label^="Play Tab"i]::before {
+:is(#context_playTab, #context_playSelectedTabs)::before {
     background-image: url(chrome://userchrome/content/playButton.svg);
 }
 
@@ -1189,8 +1196,8 @@ menuitem#repair-text-encoding::before {
     background-image: url(chrome://userchrome/content/skin/send-to-device.svg);
 }
 
-:is(#context_shareTabURL, menuitem.share-tab-url-item)::before {
-    background-image: url(chrome://userchrome/content/skin/share-menu-icon.svg);
+menuitem.share-tab-url-item::before {
+    background-image: url(chrome://userchrome/content/skin/share.svg);
 }
 
 :is(#context_closeTab, #menu_close)::before {
@@ -1289,7 +1296,8 @@ menuitem#enableDeveloperTools::before {
     background-image: url(chrome://userchrome/content/skin/tab.svg);
 }
 
-:is(.recently-closed-windows-menu, .recently-closed-tabs-menu, #historyUndoMenu, #historyUndoWindowMenu) menuitem.restoreallitem::before {
+:is(.recently-closed-windows-menu, .recently-closed-tabs-menu, #historyUndoMenu, #historyUndoWindowMenu)
+    menuitem.restoreallitem::before {
     background-image: url(chrome://userchrome/content/skin/restore-session.svg);
 }
 
@@ -1479,15 +1487,14 @@ menuitem.customize-context-reportExtension::before {
 /* mirror some of the icons for RTL languages/layouts, e.g. icons with arrows or other directional implications */
 :is(#context-reloadframe, #context-reloadimage, menuitem:not(.menuitem-iconic)[oncommand="_ucUtils.restart(true)"]):-moz-locale-dir(rtl)::before,
 :is(#context_sendTabToDevice, #context-sendlinktodevice, #context-sendpagetodevice):-moz-locale-dir(rtl)::before,
-:is(#context_shareTabURL, menuitem.share-tab-url-item):-moz-locale-dir(rtl)::before,
 :is(#context-undo, #context_undoCloseTab, #toolbar-context-undoCloseTab, #menu_undo, #undobookmarksmenuUndo):-moz-locale-dir(rtl)::before,
 :is(#context_reloadTab, #context_reloadSelectedTabs, #toolbar-context-reloadSelectedTab, #toolbar-context-reloadSelectedTabs):-moz-locale-dir(rtl)::before,
 :is(#context-redo, #menu_redo, #undobookmarksmenuRedo):-moz-locale-dir(ltr)::before,
 menuitem:is(.customize-context-removeFromToolbar, .customize-context-removeFromPanel):-moz-locale-dir(rtl)::before,
 .textbox-contextmenu
-    menuitem:is([label="Paste and Go"], [label="Paste & Search"]):-moz-locale-dir(rtl)::before,
-.textbox-contextmenu menuitem[label="Undo"]:-moz-locale-dir(rtl)::before,
-.textbox-contextmenu menuitem[label="Redo"]:-moz-locale-dir(ltr)::before,
+    menuitem:is([anonid="paste-and-go"], #paste-and-go, .searchbar-paste-and-search):-moz-locale-dir(rtl)::before,
+.textbox-contextmenu menuitem[data-l10n-id="text-action-undo"]:-moz-locale-dir(rtl)::before,
+.textbox-contextmenu menuitem[data-l10n-id="text-action-redo"]:-moz-locale-dir(ltr)::before,
 #placesContext_deleteHost:-moz-locale-dir(rtl)::before,
 menuitem#sanitizeItem:-moz-locale-dir(rtl)::before,
 .downloadRemoveFromHistoryMenuItem:-moz-locale-dir(rtl)::before {

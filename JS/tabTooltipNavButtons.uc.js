@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Tab Tooltip Navigation Buttons
-// @version        1.2.0
+// @version        1.2.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    This script turns the tab tooltip into a mini navigation popup with back, forward, and reload buttons. It still shows the tab's title and URL, and also shows its favicon. So it's similar to the vanilla tooltip, except it's interactive. When you hover a tab for 500 milliseconds (the actual delay depends on ui.tooltipDelay when opening, and userChrome.tabs.tabTooltipNavButtons.hover-out-delay when closing, both of which you can set in about:config) the navigation popup will open attached to that tab. Clicking the back button will navigate *that tab* back one step, rather than only navigating the currently active tab. So this means you can navigate background tabs. The buttons work very much like the back, forward, and reload buttons on your toolbar. So a regular left click will go back or forward or reload, while a middle click or ctrl+click will duplicate the tab while going back or forward or reloading. A shift click will duplicate the tab in a new window instead. Basically all the same features that are present in the built-in toolbar buttons. The key difference (aside from navigating the hovered tab rather than the active tab) is that the buttons can navigate multiple tabs at once. If you multiselect tabs, e.g., by shift or ctrl+clicking them, and then hover one of the multiselected tabs, all the buttons in the popup will navigate all the multiselected tabs at once. So if you right-click a tab and click "Select all Tabs" in the context menu, then hover a tab and click the reload button in the popup, it will reload every tab you have open. If you have tabs multiselected but you hover one of the non-selected tabs, then the popup will only affect the hovered tab, not the multiselected tabs.
@@ -203,10 +203,10 @@ class TabTooltipNav {
     handleEvent(e) {
         switch (e.type) {
             case "mousemove":
-                this.onMousemove(e);
+                requestAnimationFrame(() => requestAnimationFrame(() => this.onMousemove(e)));
                 break;
             case "mouseleave":
-                this.onMouseleave();
+                requestAnimationFrame(() => requestAnimationFrame(() => this.onMouseleave(e)));
                 break;
             case "TabClose":
             case "TabMove":
@@ -225,13 +225,13 @@ class TabTooltipNav {
         }
     }
     // when the popup initially shows, set the labels, tooltips, and button states
-    onPopupShowing(e) {
+    onPopupShowing() {
         this.isOpen = true;
         let l10n = this.config.l10n;
         let { multiselected } = this.triggerTab;
         let tabs = this.tabs;
         this.updateButtonsState(tabs);
-        this.handleTooltip(e);
+        this.handleTooltip();
         this.backButton.tooltipText = multiselected
             ? l10n["Go Back (Multiselected)"]
             : l10n["Go Back (Single Tab)"];
@@ -245,10 +245,12 @@ class TabTooltipNav {
     onPopupShown(e) {
         this.isOpen = true;
         this.captureKnownWidth();
+        this.clearTimers();
     }
     onPopupHidden(e) {
         this.isOpen = false;
         this.knownWidth = null;
+        this.clearTimers();
     }
     // called when the context menu is closed for whatever reason. we need to hide the whole
     // nav popup if the context menu closes and the mouse is now outside the valid bounds.
@@ -256,23 +258,28 @@ class TabTooltipNav {
         this.menuOpen = false;
         this.onMouseleave();
     }
-    // main trigger for opening the nav popup
-    onMousemove(e) {
+    clearTimers() {
         clearTimeout(this.openTimer);
         clearTimeout(this.closeTimer);
+        this.openTimer = null;
+        this.closeTimer = null;
+    }
+    // main trigger for opening the nav popup
+    onMousemove(e) {
+        this.clearTimers();
         if (this.menuOpen) return;
         let tab = e.target.closest("tab");
-        if (this.isOpen) {
-            if (this.triggerTab === tab) return this.handleTooltip(e);
-            else this.closePopup();
+        if (this.isOpen || this.openTimer || this.closeTimer) {
+            if (this.triggerTab === tab) return this.handleTooltip();
+            else if (tab) return this.movePopup(e, tab) || this.onMouseleave();
+            else return this.onMouseleave();
         }
         this.triggerTab = tab;
         if (tab) this.openTimer = setTimeout(() => this.openPopup(e), this.popupDelay);
     }
     // main trigger for closing it
     onMouseleave() {
-        clearTimeout(this.openTimer);
-        clearTimeout(this.closeTimer);
+        this.clearTimers();
         if (this.menuOpen) return;
         if (this.navPopup.matches(":hover") || this.triggerTab?.matches(":hover")) return;
         this.closeTimer = setTimeout(() => this.closePopup(), this.popupDelay);
@@ -280,7 +287,7 @@ class TabTooltipNav {
     // on navigation, update back/forward buttons and update the tooltip if the navigation involved
     // the trigger tab or multiselected tabs (provided the trigger tab is also multiselected)
     onLocationChange(browser, progress) {
-        if (!progress.isTopLevel || !this.isOpen || !this.triggerTab) return;
+        if (!progress.isTopLevel || !(this.isOpen || this.openTimer) || !this.triggerTab) return;
         let tab = gBrowser.getTabForBrowser(browser);
         let { tabs } = this;
         if (tabs.indexOf(tab) > -1) this.updateButtonsState(tabs);
@@ -293,23 +300,19 @@ class TabTooltipNav {
     // if the native tab tooltip is about to show, either suppress it
     // or allow it and prevent the nav popup from opening.
     onTooltipShowing(e) {
-        if (this.isOpen || this.modifierPressed(e)) {
-            e.preventDefault();
-            return;
-        } else this.interrupt();
+        if ((this.isOpen || this.openTimer) && !this.closeTimer) return e.preventDefault();
+        this.interrupt();
     }
     // close all popups and bail out of any scheduled popup actions.
     interrupt() {
-        clearTimeout(this.openTimer);
-        clearTimeout(this.closeTimer);
-        this.closePopup();
+        this.clearTimers();
         this.tabBackForwardMenu.hidePopup();
+        this.closePopup();
     }
     openPopup(e) {
-        if (this.isOpen || !this.modifierPressed(e)) return;
+        if (this.isOpen || !this.modifierPressed(e)) return this.clearTimers();
         if (gBrowser.tabContainer.hasAttribute("movingtab")) {
-            clearTimeout(this.openTimer);
-            clearTimeout(this.closeTimer);
+            this.clearTimers();
             return this.closePopup();
         }
         if (this.triggerTab.matches(":hover"))
@@ -318,9 +321,27 @@ class TabTooltipNav {
                 triggerEvent: e,
             });
     }
+    movePopup(e, tab) {
+        if (!this.modifierPressed(e)) return this.onMouseleave();
+        if (gBrowser.tabContainer.hasAttribute("movingtab")) {
+            this.clearTimers();
+            this.closePopup();
+            return true;
+        }
+        if (gBrowser.tabContainer.matches(":hover")) {
+            if (this.triggerTab) this.triggerTab.removeAttribute("open");
+            this.triggerTab = tab;
+            this.knownWidth = null;
+            this.onPopupShowing();
+            this.navPopup.moveToAnchor(this.triggerTab, "after_start");
+            this.triggerTab.setAttribute("open", true);
+            return true;
+        }
+        return false;
+    }
     closePopup() {
-        this.isOpen = false;
         this.navPopup.hidePopup(true);
+        if (this.triggerTab) this.triggerTab.removeAttribute("open");
         this.triggerTab = null;
     }
     // return true if the user's configured modifier key is pressed in the passed event.
@@ -333,15 +354,17 @@ class TabTooltipNav {
             case 0:
                 return true;
             case "ctrl":
-                return e.ctrlKey;
+                return e.getModifierState("Control");
             case "shift":
-                return e.shiftKey;
+                return e.getModifierState("Shift");
             case "alt":
-                return e.altKey;
+                return e.getModifierState("Alt");
             case "meta":
-                return e.metaKey;
+                return e.getModifierState("Meta");
             case "accel":
-                return AppConstants.platform == "macosx" ? e.metaKey : e.ctrlKey;
+                return e.getModifierState("Accel");
+            default:
+                return true;
         }
     }
     goBack(e) {
@@ -593,7 +616,7 @@ class TabTooltipNav {
         const tooltipCurrent = gNavigatorBundle.getString("tabHistory.current");
         const tooltipForward = gNavigatorBundle.getString("tabHistory.goForward");
 
-        function updateSessionHistory(sessionHistory, initial, ssInParent) {
+        let updateSessionHistory = (sessionHistory, initial, ssInParent) => {
             let count = ssInParent ? sessionHistory.count : sessionHistory.entries.length;
             if (!initial) {
                 if (count <= 1) {
@@ -657,7 +680,7 @@ class TabTooltipNav {
                     existingIndex++;
                 }
             }
-        }
+        };
         if (this.triggerTab.multiselected) return false;
         let { browsingContext } = this.triggerTab.linkedBrowser;
         if (!browsingContext) return false;

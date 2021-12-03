@@ -94,7 +94,6 @@ and a few elements like checkboxes */
         --menu-icon-opacity: 1 !important;
         --buttons-secondary-hover-bgcolor: var(--arrowpanel-dimmed) !important;
         --buttons-secondary-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
-        --vpn-on-icon: url(chrome://userchrome/content/skin/vpn-on-light.svg);
         --checkbox-border-color: var(--uc-checkbox-border-color) !important;
         --checkbox-checked-border-color: var(--uc-checkbox-checked-border-color) !important;
         --checkbox-unchecked-bgcolor: var(--uc-checkbox-unchecked-bgcolor) !important;

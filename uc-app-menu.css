@@ -447,11 +447,6 @@
     background-image: url(chrome://userchrome/content/fxa/add-device.svg);
 }
 
-/* appmenu buttons border radius */
-.subviewbutton-back {
-    border-radius: var(--arrowpanel-menuitem-border-radius) !important;
-}
-
 :is(#appMenu-zoomReduce-button2, #appMenu-zoomEnlarge-button2, #appMenu-fullscreen-button2)
     > .toolbarbutton-icon {
     background-color: unset !important;
@@ -492,7 +487,7 @@
     padding: 0 4px !important;
     height: 20px !important;
     min-height: 20px !important;
-	min-width: calc(6ch + 8px) !important;
+    min-width: calc(6ch + 8px) !important;
     -moz-box-align: center !important;
     -moz-box-pack: center !important;
 }
@@ -501,7 +496,7 @@
     margin-block: 1px !important;
     margin-inline: 6px !important;
     background: none !important;
-	text-align: center !important;
+    text-align: center !important;
 }
 
 #appMenu-zoomEnlarge-button2 {
@@ -683,7 +678,8 @@ toolbarseparator.proton-zap {
 }
 
 .panel-banner-item {
-    padding: calc(var(--arrowpanel-menuitem-padding-block) + 2px) var(--arrowpanel-menuitem-padding-inline) !important;
+    padding: calc(var(--arrowpanel-menuitem-padding-block) + 2px)
+        var(--arrowpanel-menuitem-padding-inline) !important;
     margin: var(--arrowpanel-menuitem-margin) !important;
     font-weight: inherit !important;
     min-height: 40px !important;
@@ -691,10 +687,11 @@ toolbarseparator.proton-zap {
 }
 
 .addon-banner-item {
-    padding: calc(var(--arrowpanel-menuitem-padding-block) + 2px) var(--arrowpanel-menuitem-padding-inline) !important;
+    padding: calc(var(--arrowpanel-menuitem-padding-block) + 2px)
+        var(--arrowpanel-menuitem-padding-inline) !important;
     margin: var(--arrowpanel-menuitem-margin) !important;
-	margin-bottom: 4px !important;
-	-moz-box-align: center !important;
+    margin-bottom: 4px !important;
+    -moz-box-align: center !important;
     font-weight: inherit !important;
     border-radius: var(--arrowpanel-menuitem-border-radius) !important;
     min-height: 40px !important;

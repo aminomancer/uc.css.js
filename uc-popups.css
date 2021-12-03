@@ -228,7 +228,7 @@ panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem {
 
 panel[type="autocomplete-richlistbox"]
     > richlistbox
-    > richlistitem:is([selected], :hover):not([disabled]) {
+    > richlistitem:is([selected], :hover):not([disabled="true"]) {
     background-color: var(--arrowpanel-dimmed) !important;
     color: var(--menu-color) !important;
 }
@@ -798,7 +798,7 @@ panel[type="autocomplete-richlistbox"]
         min-height: var(--menuitem-height) !important;
         color: var(--in-content-button-text-color) !important;
         border: 1px solid var(--in-content-button-border-color) !important;
-        border-radius: 4px !important;
+        border-radius: var(--in-content-button-border-radius) !important;
         background-color: var(--in-content-button-background) !important;
         font-weight: 400 !important;
         padding: 5px 7px !important;
@@ -825,28 +825,21 @@ panel[type="autocomplete-richlistbox"]
         opacity: 0.4 !important;
     }
 
-    .dialog-button-box > button[autofocus],
-    .dialog-button-box > button[type="submit"],
-    .dialog-button-box > button[default],
-    .dialog-button-box > button.primary {
+    .dialog-button-box > button:is([autofocus], [type="submit"], [default], .primary) {
         background-color: var(--in-content-primary-button-background) !important;
         color: var(--in-content-primary-button-text-color) !important;
         border-color: var(--in-content-primary-button-border-color) !important;
     }
 
-    .dialog-button-box > button[autofocus]:not([disabled="true"]):hover,
-    .dialog-button-box > button[type="submit"]:not([disabled="true"]):hover,
-    .dialog-button-box > button[default]:not([disabled="true"]):hover,
-    .dialog-button-box > button.primary:not([disabled="true"]):hover {
+    .dialog-button-box
+        > button:is([autofocus], [type="submit"], [default], .primary):not([disabled="true"]):hover {
         background-color: var(--in-content-primary-button-background-hover) !important;
         color: var(--in-content-primary-button-text-color-hover) !important;
         border-color: var(--in-content-primary-button-border-hover) !important;
     }
 
-    .dialog-button-box > button[autofocus]:not([disabled="true"]):hover:active,
-    .dialog-button-box > button[type="submit"]:not([disabled="true"]):hover:active,
-    .dialog-button-box > button[default]:not([disabled="true"]):hover:active,
-    .dialog-button-box > button.primary:not([disabled="true"]):hover:active {
+    .dialog-button-box
+        > button:is([autofocus], [type="submit"], [default], .primary):not([disabled="true"]):hover:active {
         background-color: var(--in-content-primary-button-background-active) !important;
     }
 
@@ -1288,9 +1281,9 @@ panel[type="autocomplete-richlistbox"]
         margin-inline: 4px !important;
     }
 
-    button[dlgtype]:not([default]):is(:hover, :focus-visible):not(:active),
+    button[dlgtype]:is(:hover, :focus-visible):not(:active, [disabled="true"], [default]),
     :root[dialogroot]
-        :is(.expander-up, .expander-down, .panel-button):is(:hover, :focus-visible):not(:active) {
+        :is(.expander-up, .expander-down, .panel-button):is(:hover, :focus-visible):not(:active, [disabled="true"]) {
         background-color: var(--in-content-button-background-hover) !important;
         color: var(--in-content-button-text-color-hover) !important;
         border-color: transparent;
@@ -1301,8 +1294,8 @@ panel[type="autocomplete-richlistbox"]
         color: var(--in-content-button-text-color-hover) !important;
     }
 
-    button:is([autofocus], [type="submit"], .primary):enabled:is(:hover, :focus-visible):not(:active),
-    button:is([default], .primary):not([disabled="true"]):is(:hover, :focus-visible):not(:active) {
+    button:is([autofocus], [type="submit"], .primary):enabled:is(:hover, :focus-visible):not(:active, [disabled="true"]),
+    button:is([default], .primary):is(:hover, :focus-visible):not(:active, [disabled="true"]) {
         background-color: var(--in-content-primary-button-background-hover) !important;
         color: var(--in-content-primary-button-text-color-hover) !important;
     }

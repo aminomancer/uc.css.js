@@ -223,6 +223,27 @@ panel[type="arrow"][side="top"] {
     padding-block: var(--subview-subheader-padding, 4px) !important;
 }
 
+.subviewbutton-back {
+    min-height: revert !important;
+    border-radius: var(--arrowpanel-menuitem-border-radius) !important;
+}
+
+.subviewbutton-back > .toolbarbutton-icon {
+    width: 16px;
+    height: 16px;
+}
+
+.panel-header > .subviewbutton-back,
+.panel-header > .subviewbutton-back > .toolbarbutton-icon {
+    -moz-context-properties: fill, fill-opacity !important;
+    fill-opacity: 0.6;
+}
+
+.panel-header > .subviewbutton-back:is(:hover, :focus-visible),
+.panel-header > .subviewbutton-back:is(:hover, :focus-visible) > .toolbarbutton-icon {
+    fill-opacity: 0.8;
+}
+
 .panel-footer > button:not([disabled]):is(:hover, :focus-visible) {
     background-color: var(
         --button-hover-bgcolor,
@@ -510,23 +531,8 @@ panel {
 }
 
 popupnotification checkbox .checkbox-check {
-    appearance: none !important;
-    min-width: 10px !important;
-    min-height: 10px !important;
-    width: 14px !important;
-    height: 14px !important;
-    margin-inline-end: 4px !important;
-    padding: 0.5px;
+    margin-inline-end: var(--context-checkbox-margin-end) !important;
     border-radius: 2px !important;
-    margin: 0;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-popupnotification checkbox .checkbox-check[checked] {
-    background-image: url(chrome://userchrome/content/check.svg);
-    -moz-context-properties: fill, fill-opacity !important;
-    fill: currentColor !important;
 }
 
 .addon-installed-notification-content > checkbox,
@@ -534,33 +540,21 @@ popupnotification .popup-notification-body > .popup-notification-checkbox {
     margin-inline-start: 0 !important;
 }
 
-popupnotification .popup-notification-checkbox .checkbox-check {
-    width: 14px !important;
-    height: 14px !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-    background-size: contain !important;
-}
-
-popupnotification .popup-notification-checkbox .checkbox-check[checked] {
-    background-image: url(chrome://userchrome/content/check.svg) !important;
-    -moz-context-properties: fill, fill-opacity !important;
-    fill: currentColor !important;
-}
-
-.popup-notification-checkbox > .checkbox-label-box > .checkbox-label {
-    margin-block: 0 !important;
-    opacity: revert !important;
-    color: var(--panel-description-color);
-}
-
-.eom-radio-group .subviewradio {
-    background: none !important;
+.subviewradio {
+    padding-inline-start: 0 !important;
+    min-height: var(--menuitem-height) !important;
+    border: 0 !important;
 }
 
 .subviewradio > .radio-check {
     border-color: var(--uc-checkbox-border-color) !important;
     background-color: var(--uc-checkbox-unchecked-bgcolor) !important;
+    margin-inline: var(--context-iconic-margin) !important;
+}
+
+.subviewradio > .radio-label-box {
+    margin: 0 !important;
+    padding-block: 0 !important;
 }
 
 .subviewradio > .radio-check[selected] {
@@ -585,6 +579,19 @@ popupnotification .popup-notification-checkbox .checkbox-check[checked] {
 
 .subviewradio:not([focused="true"]):hover:active .radio-check[selected] {
     background-color: var(--uc-checkbox-checked-active-bgcolor) !important;
+}
+
+.eom-radio-group .subviewradio {
+    background: none !important;
+    border: 1px solid transparent !important;
+}
+
+.eom-radio-group .subviewradio .radio-check {
+    margin-inline: 5px !important;
+}
+
+.eom-radio-group .radio-label {
+    padding: 0 !important;
 }
 
 popupnotification progress {
@@ -737,22 +744,6 @@ popupnotification progress[paused]::-moz-progress-bar {
     margin-top: 0 !important;
 }
 
-.subviewbutton-back > .toolbarbutton-icon {
-    width: 16px;
-    height: 16px;
-}
-
-.panel-header > .subviewbutton-back,
-.panel-header > .subviewbutton-back > .toolbarbutton-icon {
-    -moz-context-properties: fill, fill-opacity !important;
-    fill-opacity: 0.6;
-}
-
-.panel-header > .subviewbutton-back:is(:hover, :focus-visible),
-.panel-header > .subviewbutton-back:is(:hover, :focus-visible) > .toolbarbutton-icon {
-    fill-opacity: 0.8;
-}
-
 #plugins-notification-icon[extraAttr="inactive"] > .plugin-icon {
     fill: currentColor !important;
 }
@@ -762,30 +753,27 @@ popupnotification progress[paused]::-moz-progress-bar {
 }
 
 .identity-popup-security-connection {
-    /* background-position: 2em 40% !important; */
-    background-size: 18px auto !important;
-    font-size: 1.15em;
+    background-size: 16px auto !important;
 }
 
 #identity-popup-securityView .identity-popup-connection-secure.security-view,
 #identity-popup-securityView .identity-popup-connection-not-secure.security-view {
-    margin-inline-start: 28px !important;
+    margin-inline-start: calc(16px + var(--arrowpanel-subviewbutton-iconic-gap, 8px)) !important;
 }
 
 #identity-popup-securityView .identity-popup-security-connection {
-    background-position: 5px center !important;
-    padding-block: 4px !important;
-    margin-block: 5px 0 !important;
-    margin-inline: 3px !important;
+    background-position: left center !important;
+    padding: 0 !important;
+    margin: var(--arrowpanel-menuitem-padding) !important;
+    margin-bottom: 0 !important;
 }
 
 #identity-popup-securityView .identity-popup-security-connection description {
-    margin-inline-start: 28px !important;
+    margin-inline-start: calc(16px + var(--arrowpanel-subviewbutton-iconic-gap, 8px)) !important;
 }
 
 #identity-popup-mainView .identity-popup-security-connection {
-    background-position: 5px center !important;
-    min-height: 34px !important;
+    background-position: 0 center !important;
     -moz-box-pack: center !important;
 }
 
@@ -795,12 +783,9 @@ popupnotification progress[paused]::-moz-progress-bar {
     min-height: 18px !important;
 }
 
-#identity-popup .subviewbutton-nav {
-    padding-block: 0 !important;
-}
-
 #identity-popup-security-button {
     margin-bottom: revert !important;
+    padding: var(--arrowpanel-menuitem-padding) !important;
 }
 
 #identity-popup-security-button[disabled="true"] {
@@ -818,11 +803,11 @@ popupnotification progress[paused]::-moz-progress-bar {
     flex-flow: column nowrap !important;
     justify-content: center !important; */
     -moz-box-align: center !important;
-    margin-inline: 3px !important;
+    margin-inline: 0 !important;
 }
 
 #identity-popup-mainView .identity-popup-security-connection description {
-    margin-inline-start: 28px !important;
+    margin-inline-start: calc(16px + var(--arrowpanel-subviewbutton-iconic-gap, 8px)) !important;
 }
 
 #identity-popup-mainView .identity-popup-security-connection .upgraded {
@@ -901,7 +886,7 @@ popupnotification progress[paused]::-moz-progress-bar {
 }
 
 #protections-popup-mainView-panel-header {
-    min-height: 44px !important;
+    min-height: 40px !important;
     padding-block: 8px 4px !important;
 }
 
@@ -1013,10 +998,6 @@ popupnotification progress[paused]::-moz-progress-bar {
 
 .protections-popup-tp-switch[enabled]:hover:active {
     background: var(--protections-popup-switch-on-active-background-custom) !important;
-}
-
-#identity-popup .subviewbutton-nav::after {
-    margin-inline-end: 2px !important;
 }
 
 #identity-popup-security-expander > .button-box {
@@ -1137,7 +1118,7 @@ popupnotification progress[paused]::-moz-progress-bar {
 
 #identity-popup-securityView-body > :is(description, label, button) {
     margin-block: 0 !important;
-    margin-inline-start: 28px !important;
+    margin-inline-start: calc(16px + var(--arrowpanel-subviewbutton-iconic-gap, 8px)) !important;
 }
 
 #identity-popup-securityView-body > description#identity-popup-content-verifier {
@@ -1601,31 +1582,35 @@ richlistitem.download-state > .downloadButton.downloadIconCancel .button-box .bu
 
 .panel-header > h1 {
     font-size: 1.1em !important;
-    line-height: 1.1em !important;
+    line-height: normal !important;
     font-weight: var(--uc-font-weight-bold, 600) !important;
 }
 
 .popup-notification-description {
-    font-size: 1.1em !important;
-    line-height: 1.1em !important;
+    font-size: 1.075em !important;
+    line-height: normal !important;
     font-weight: normal !important;
+}
+
+.popup-notification-description b {
+    font-weight: var(--uc-font-weight-extrabold, 600) !important;
 }
 
 #permission-popup-mainView-panel-header,
 #identity-popup-mainView-panel-header,
 #protections-popup-mainView-panel-header,
 #eom-mainView-panel-header {
-    min-height: 44px !important;
+    min-height: 40px !important;
 }
 
 #editBookmarkPanel > .panel-header {
-    height: 44px !important;
+    height: 40px !important;
 }
 
 :is(#identity-popup-mainView-panel-header, #eom-mainView-panel-header, #permission-popup-mainView-panel-header, #protections-popup-mainView-panel-header)
     :is(label, description) {
     font-size: 1.1em !important;
-    line-height: 1.1em !important;
+    line-height: normal !important;
     font-weight: var(--uc-font-weight-bold, 600) !important;
     margin: 0 !important;
     height: auto !important;
@@ -1651,10 +1636,6 @@ richlistitem.download-state > .downloadButton.downloadIconCancel .button-box .bu
     padding-block: 0 !important;
 }
 
-.popup-notification-description {
-    margin-block: 1px 8px !important;
-}
-
 #addon-webext-perm-list,
 #addon-webext-perm-single-entry {
     margin-block-start: 6px !important;
@@ -1675,7 +1656,7 @@ richlistitem.download-state > .downloadButton.downloadIconCancel .button-box .bu
 .identity-popup-section,
 .permission-popup-section,
 .protections-popup-section {
-    margin-inline: 4px;
+    margin-inline: var(--arrowpanel-menuitem-inline-margin);
 }
 
 #geo-access-indicator-item,
@@ -1715,7 +1696,13 @@ richlistitem.download-state > .downloadButton.downloadIconCancel .button-box .bu
     margin-bottom: 6px !important;
 }
 
+#PanelUI-panic-actionlist-main-label {
+    color: var(--panel-description-color);
+    font-size: revert !important;
+}
+
 .PanelUI-panic-actionlist {
+    color: var(--panel-shortcut-focus) !important;
     margin-bottom: 4px !important;
     filter: brightness(1.5);
 }
@@ -1745,18 +1732,16 @@ richlistitem.download-state > .downloadButton.downloadIconCancel .button-box .bu
 #identity-popup-clear-sitedata-button {
     list-style-image: url(chrome://userchrome/content/skin/forget.svg);
     /* list-style-image: url(chrome://userchrome/content/skin/3rdpartycookies-disabled.svg); */
-    padding-inline-start: 7.5px !important;
 }
 
 #identity-popup-more-info {
     list-style-image: url(chrome://userchrome/content/info-filled.svg);
-    padding-inline-start: 7.5px !important;
 }
 
-#identity-popup-clear-sitedata-button .toolbarbutton-icon,
-#identity-popup-more-info .toolbarbutton-icon {
-    width: 18px;
-    height: 18px;
+#identity-popup-clear-sitedata-button .toolbarbutton-icon {
+    padding: 0.5px !important;
+    width: 16px !important;
+    height: 16px !important;
 }
 
 #identity-popup-clear-sitedata-button .toolbarbutton-text,

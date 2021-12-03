@@ -126,11 +126,11 @@ menupopup {
     --panelview-toolbarbutton-hover-bgcolor: var(--panel-item-hover-bgcolor) !important;
     --panelview-toolbarbutton-active-bgcolor: var(--panel-item-active-bgcolor) !important;
     --panelview-toolbarbutton-focus-box-shadow: none !important;
-    --buttons-destructive-bgcolor: hsl(350.1, 82%, 56.2%) !important;
-    --buttons-destructive-hover-bgcolor: hsl(346, 86%, 46.6%) !important;
-    --buttons-destructive-active-bgcolor: hsl(345.8, 90%, 40%) !important;
-    --buttons-destructive-color: #fff !important;
-    --panel-banner-item-color: HSL(240, 9.1%, 97.8%);
+    --buttons-destructive-bgcolor: var(--uc-destructive-bgcolor) !important;
+    --buttons-destructive-hover-bgcolor: var(--uc-destructive-hover-bgcolor) !important;
+    --buttons-destructive-active-bgcolor: var(--uc-destructive-active-bgcolor) !important;
+    --buttons-destructive-color: var(--uc-destructive-color) !important;
+    --panel-banner-item-color: hsl(240, 9.1%, 97.8%);
     --panel-banner-item-background-color: hsla(109.9, 90.9%, 47.3%, 0.1);
     --panel-banner-item-hover-bgcolor: hsla(109.9, 90.9%, 47.3%, 0.15);
     --panel-banner-item-active-bgcolor: hsla(109.9, 90.9%, 47.3%, 0.2);
@@ -145,8 +145,7 @@ menupopup {
     --panel-subview-body-padding: var(--panel-subview-body-padding-magnitude) 0 !important;
     --arrowpanel-menuitem-border-radius: var(--context-menuitem-border-radius) !important;
     --arrowpanel-border-radius: var(--menupopup-border-radius) !important;
-    --arrowpanel-subviewbutton-iconic-gap: 8px !important;
-    --panelui-subview-transition-duration: 200ms !important;
+    --panelui-subview-transition-duration: 150ms;
 
     --error-text-color: var(--warning-color) !important;
     --buttons-primary-button-bgcolor: var(--in-parent-primary-button-background) !important;
@@ -208,9 +207,8 @@ panel {
 }
 
 :root,
-menupopup,
 #TabsToolbar {
-    --toolbarbutton-inner-padding: 6px !important;
+    --toolbarbutton-inner-padding: var(--uc-toolbarbutton-inner-padding, 8px) !important;
 }
 
 #urlbar-container,
@@ -222,5 +220,10 @@ menupopup,
 #appMenu-multiView {
     --subviewbutton-height: 32px !important;
     --arrowpanel-menuitem-padding-inline: 8px !important;
-    --arrowpanel-menuitem-padding: var(--arrowpanel-menuitem-padding-block) var(--arrowpanel-menuitem-padding-inline) !important;
+    --arrowpanel-menuitem-padding: var(--arrowpanel-menuitem-padding-block)
+        var(--arrowpanel-menuitem-padding-inline) !important;
+}
+
+#identity-popup {
+    --subviewbutton-height: 30px !important;
 }

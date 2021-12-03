@@ -311,8 +311,9 @@ You can use greasemonkey or any other form of monkey that supports the document-
         left: 0 !important;
         right: 0 !important;
         pointer-events: none !important;
-        user-select: none !important;
         -moz-user-select: -moz-none !important;
+        -webkit-user-select: none !important;
+        user-select: none !important;
         max-width: 1280px !important;
         margin: 0 auto !important;
         padding: 0 1.5em !important;
@@ -527,7 +528,7 @@ You can use greasemonkey or any other form of monkey that supports the document-
         padding: 0 !important;
         order: 1 !important;
     }
-    
+
     #p-personal li a {
         padding: 0.375em !important;
     }
@@ -787,8 +788,6 @@ You can use greasemonkey or any other form of monkey that supports the document-
     }
 
     .skin-vector .uls-search-label {
-        -webkit-transition: none !important;
-        -moz-transition: none !important;
         transition: none !important;
     }
 
@@ -853,7 +852,7 @@ You can use greasemonkey or any other form of monkey that supports the document-
         background: none !important;
         margin-left: 3px !important;
         padding-left: 25px !important;
-        width: -moz-min-content !important;
+        width: min-content !important;
         padding-right: 25px !important;
     }
 
@@ -880,40 +879,35 @@ You can use greasemonkey or any other form of monkey that supports the document-
     /* headlines */
     #firstHeading {
         font-family: "Source Serif Pro", sans-serif !important;
-        font-size: 2.7em !important;
+        font-size: 2.5em !important;
         margin-top: -20px !important;
-        padding-bottom: 5px !important;
         font-weight: normal !important;
         text-shadow: 0 1px 0 hsla(0, 0%, 0%, 0.5) !important;
         color: hsl(0, 0%, 93.3%) !important;
         border-color: hsl(212, 8.8%, 25.5%) !important;
     }
 
-    #bodyContent h1,
-    #bodyContent h2,
-    #bodyContent h3,
-    #bodyContent h4,
-    #bodyContent h5,
-    #bodyContent h6 {
-        margin-top: 40px !important;
-        margin-bottom: 10px !important;
+    #bodyContent :is(h1, h2, h3, h4, h5, h6) {
+        margin-block: 1em 0.25em !important;
+        padding-block: 0 !important;
+        line-height: 1.3 !important;
         font-weight: normal !important;
         font-family: "Source Serif Pro", sans-serif !important;
         text-shadow: 0 1px 0 hsla(0, 0%, 0%, 0.5) !important;
         color: hsl(0, 0%, 93.3%) !important;
         border-color: hsl(212, 8.8%, 25.5%) !important;
+        display: flex;
+        align-items: center;
     }
 
-    #bodyContent h1 span.mw-editsection,
-    #bodyContent h2 span.mw-editsection,
-    #bodyContent h3 span.mw-editsection,
-    #bodyContent h4 span.mw-editsection,
-    #bodyContent h5 span.mw-editsection,
-    #bodyContent h6 span.mw-editsection {
-        float: right !important;
-        margin-top: 12px !important;
+    #bodyContent :is(h1, h2, h3, h4, h5, h6) .mw-headline {
+        flex: 1;
+    }
+
+    #bodyContent :is(h1, h2, h3, h4, h5, h6) span.mw-editsection {
         font-family: "Source Sans Pro", sans-serif !important;
-        text-shadow: none !important;
+        text-shadow: none;
+        letter-spacing: normal;
     }
 
     span.mw-editsection span.mw-editsection-bracket {
@@ -940,8 +934,6 @@ You can use greasemonkey or any other form of monkey that supports the document-
         font-size: 20px !important;
     }
 
-    /* numbering of the headings */
-    /* via http://userstyles.org/styles/56739/wikipedia-readable-hyphenation */
     body {
         counter-reset: headingOne !important;
     }
@@ -952,14 +944,12 @@ You can use greasemonkey or any other form of monkey that supports the document-
         padding-right: 0 !important;
     }
 
-    #bodyContent h2::before,
-    #bodyContent h3::before,
-    #bodyContent h4::before,
-    #bodyContent h5::before,
-    #bodyContent h6::before {
-        padding-right: 9px !important;
-        font-family: "Lora", serif !important;
+    #bodyContent :where(h2, h3, h4, h5, h6)::before {
+        margin-right: 0.75em !important;
+        font-family: serif !important;
         text-shadow: none !important;
+        opacity: 0.7;
+        letter-spacing: normal;
     }
 
     #bodyContent h2 {
@@ -1028,7 +1018,7 @@ You can use greasemonkey or any other form of monkey that supports the document-
 
     #bodyContent .center {
         max-width: max-content;
-        max-width: -moz-fit-content;
+        max-width: fit-content;
     }
 
     #bodyContent #siteSub,
@@ -1082,7 +1072,8 @@ You can use greasemonkey or any other form of monkey that supports the document-
 
     .mw-body-content p,
     .mw-body-content li,
-    .mw-body-content div.hatnote {
+    .mw-body-content div.hatnote,
+    #bodyContent :where(#contentSub, #contentSub2) {
         font-size: 16px !important;
         line-height: 26px !important;
         font-family: "Source Sans Pro" !important;
@@ -1093,11 +1084,15 @@ You can use greasemonkey or any other form of monkey that supports the document-
         font-family: "Source Sans Pro" !important;
     }
 
+    .mw-body-content div.hatnote {
+        line-height: normal !important;
+    }
+
     .mw-body-content .hlist[role="navigation"] {
         background-color: hsl(240, 2%, 20%) !important;
         color: inherit !important;
         border: none !important;
-        width: -moz-fit-content !important;
+        width: fit-content !important;
         margin-inline: auto !important;
         padding-inline: 10px !important;
         border-radius: 3px !important;
@@ -1105,6 +1100,7 @@ You can use greasemonkey or any other form of monkey that supports the document-
 
     #bodyContent a:not(.new) {
         color: var(--uc-wiki-link-color) !important;
+        --uc-wiki-current-color: var(--uc-wiki-link-color) !important;
     }
 
     #mw-content-text a:not(.new) > span {
@@ -1113,10 +1109,70 @@ You can use greasemonkey or any other form of monkey that supports the document-
 
     #bodyContent a:not(.new):visited {
         color: var(--uc-wiki-link-color-visited) !important;
+        --uc-wiki-current-color: var(--uc-wiki-link-color-visited) !important;
     }
 
     #bodyContent a:hover {
         text-decoration: underline !important;
+    }
+
+    ::selection {
+        color: var(--content-selection-color) !important;
+        background-color: var(--content-selection-bgcolor) !important;
+        border-radius: 2px !important;
+    }
+
+    p::selection {
+        color: var(--content-selection-color) !important;
+        background-color: var(--content-selection-bgcolor) !important;
+        border-radius: 2px !important;
+    }
+
+    a::selection,
+    a b::selection,
+    a i::selection,
+    a .nowrap::selection,
+    bdi::selection,
+    abbr::selection {
+        color: var(--uc-wiki-computed-color, hsl(245.3, 26.3%, 42.5%)) !important;
+        background-color: var(--content-selection-bgcolor) !important;
+        border-radius: 2px !important;
+    }
+
+    @supports (color: color-mix(in srgb, white, black)) {
+        #bodyContent .mw-redirectedfrom a.mw-redirect {
+            color: color-mix(in srgb, transparent 40%, var(--uc-wiki-link-color)) !important;
+        }
+
+        #bodyContent .mw-redirectedfrom a.mw-redirect:not(.new):visited {
+            color: color-mix(
+                in srgb,
+                transparent 40%,
+                var(--uc-wiki-link-color-visited)
+            ) !important;
+        }
+
+        a::selection,
+        a b::selection,
+        a i::selection,
+        a .nowrap::selection,
+        bdi::selection,
+        abbr::selection {
+            --uc-wiki-computed-color: color-mix(
+                in xyz,
+                var(--content-selection-color) 80%,
+                var(--uc-wiki-current-color)
+            ) !important;
+        }
+    }
+
+    img::selection {
+        background-color: hsla(0, 0%, 100%, 0) !important;
+    }
+
+    a.new,
+    a.new:hover {
+        color: hsl(0, 54.4%, 53.5%) !important;
     }
 
     #bodyContent .dablink,
@@ -1129,11 +1185,22 @@ You can use greasemonkey or any other form of monkey that supports the document-
         color: var(--uc-wiki-text-90) !important;
     }
 
-    #bodyContent #contentSub {
-        margin: 5px 0 12px -5px !important;
+    #bodyContent :is(#contentSub, #contentSub2) {
+        margin: 0.5em 0 !important;
         padding: 0 !important;
-        font-size: 12px !important;
+        padding: 0 0.8em !important;
         color: var(--uc-wiki-text-80) !important;
+        line-height: normal !important;
+    }
+
+    #bodyContent .mw-redirectedfrom,
+    #bodyContent #redirectsub {
+        font-style: italic !important;
+        color: var(--uc-wiki-text-60) !important;
+    }
+
+    #bodyContent .mw-redirectedfrom {
+        margin-inline-start: -5px !important;
     }
 
     #bodyContent table.ambox,
@@ -1157,8 +1224,8 @@ You can use greasemonkey or any other form of monkey that supports the document-
         line-height: 17px !important;
     }
 
-    .vector-body blockquote,
-    .vector-body .flexquote {
+    #bodyContent blockquote,
+    #bodyContent .flexquote {
         padding: 6px 16px !important;
         background-color: var(--uc-wiki-box-bg) !important;
         border: none !important;
@@ -1166,7 +1233,7 @@ You can use greasemonkey or any other form of monkey that supports the document-
         border-radius: 0 3px 3px 0 !important;
     }
 
-    .vector-body pre {
+    #bodyContent pre {
         background-color: var(--uc-wiki-box-bg) !important;
         border-color: hsl(0, 1%, 24%) !important;
         border-radius: 3px !important;
@@ -1300,7 +1367,7 @@ You can use greasemonkey or any other form of monkey that supports the document-
         border-color: hsl(195, 8.7%, 9%) !important;
         margin: auto 2px !important;
     }
-    
+
     .wpbs-inner.outercollapse {
         background: none !important;
         border: none !important;
@@ -1705,8 +1772,6 @@ You can use greasemonkey or any other form of monkey that supports the document-
 
     #mwe-popups-settings .mwe-ui-icon-popups-close {
         opacity: 0.87 !important;
-        -webkit-transition: opacity 100ms !important;
-        -moz-transition: opacity 100ms !important;
         transition: opacity 100ms !important;
     }
 
@@ -1808,8 +1873,7 @@ You can use greasemonkey or any other form of monkey that supports the document-
         color: var(--uc-wiki-text-90) !important;
     }
 
-    :is(.oo-ui-popupToolGroup-active, .oo-ui-popupToolGroup-active-tools)
-        .oo-ui-iconElement-icon {
+    :is(.oo-ui-popupToolGroup-active, .oo-ui-popupToolGroup-active-tools) .oo-ui-iconElement-icon {
         opacity: 1 !important;
     }
 
@@ -1857,7 +1921,7 @@ You can use greasemonkey or any other form of monkey that supports the document-
     .wikiEditor-ui-toolbar .group .label {
         color: var(--uc-wiki-text-60) !important;
     }
-    
+
     .wikiEditor-ui-toolbar .group .tool-select .label::after {
         background-image: url(chrome://userchrome/content/in-content/wiki-arrow-down.svg) !important;
         -moz-context-properties: fill, fill-opacity;
@@ -1989,7 +2053,9 @@ You can use greasemonkey or any other form of monkey that supports the document-
 
     .ve-ui-mwParameterResultWidget-description,
     .ve-ui-mwTemplatePage-description,
-    .ve-ui-mwTemplateDialog .oo-ui-outlineOptionWidget.oo-ui-flaggedElement-empty .oo-ui-labelElement-label {
+    .ve-ui-mwTemplateDialog
+        .oo-ui-outlineOptionWidget.oo-ui-flaggedElement-empty
+        .oo-ui-labelElement-label {
         color: hsla(0, 0%, 100%, 0.5) !important;
     }
 
@@ -2105,7 +2171,9 @@ You can use greasemonkey or any other form of monkey that supports the document-
         border-color: transparent !important;
     }
 
-    .oo-ui-processDialog-actions-safe .oo-ui-widget-enabled.oo-ui-iconElement:not(.oo-ui-labelElement) > .oo-ui-buttonElement-button:not(:hover, :active) {
+    .oo-ui-processDialog-actions-safe
+        .oo-ui-widget-enabled.oo-ui-iconElement:not(.oo-ui-labelElement)
+        > .oo-ui-buttonElement-button:not(:hover, :active) {
         background-color: transparent !important;
         border-right-color: transparent !important;
     }
@@ -2161,9 +2229,7 @@ You can use greasemonkey or any other form of monkey that supports the document-
         border: none !important;
     }
 
-    .oo-ui-processDialog-actions-safe
-        .oo-ui-buttonElement-button:hover
-        > .oo-ui-iconElement-icon {
+    .oo-ui-processDialog-actions-safe .oo-ui-buttonElement-button:hover > .oo-ui-iconElement-icon {
         opacity: 1 !important;
     }
 
@@ -2177,9 +2243,7 @@ You can use greasemonkey or any other form of monkey that supports the document-
         background-color: hsla(0, 0%, 0%, 0.8) !important;
     }
 
-    .oo-ui-windowManager-modal.oo-ui-windowManager-floating
-        > .oo-ui-dialog
-        > .oo-ui-window-frame {
+    .oo-ui-windowManager-modal.oo-ui-windowManager-floating > .oo-ui-dialog > .oo-ui-window-frame {
         background-color: hsl(0, 0%, 3.6%) !important;
         border: none !important;
         border-radius: 4px !important;
@@ -2223,7 +2287,7 @@ You can use greasemonkey or any other form of monkey that supports the document-
     .ve-ui-mwTransclusionDialog-addParameterFieldset .ve-ui-mwParameterSearchWidget {
         border-color: var(--uc-wiki-popup-bg) !important;
     }
-    
+
     .oo-ui-outlineControlsWidget {
         display: flex !important;
         align-items: center !important;
@@ -2668,9 +2732,7 @@ You can use greasemonkey or any other form of monkey that supports the document-
         width: 1.5em !important;
     }
 
-    .mwe-popups.mwe-popups-type-reference
-        .mwe-popups-title
-        .mw-ui-icon.mw-ui-icon-element::before {
+    .mwe-popups.mwe-popups-type-reference .mwe-popups-title .mw-ui-icon.mw-ui-icon-element::before {
         margin: 0 !important;
     }
 
@@ -2695,23 +2757,13 @@ You can use greasemonkey or any other form of monkey that supports the document-
         width: 100% !important;
         height: 20px !important;
         background-color: transparent !important;
-        background-image: -webkit-linear-gradient(
-            top,
-            hsla(0, 0%, 100%, 0),
-            #ffffff
-        ) !important;
-        background-image: -moz-linear-gradient(top, hsla(0, 0%, 100%, 0), #ffffff) !important;
         background-image: linear-gradient(hsla(0, 0%, 100%, 0), #ffffff) !important;
         opacity: 0 !important;
         pointer-events: none !important;
-        -webkit-transition: opacity 250ms ease !important;
-        -moz-transition: opacity 250ms ease !important;
         transition: opacity 250ms ease !important;
     }
 
-    .mwe-popups.mwe-popups-type-reference
-        .mwe-popups-extract.mwe-popups-fade-out
-        .mwe-popups-fade {
+    .mwe-popups.mwe-popups-type-reference .mwe-popups-extract.mwe-popups-fade-out .mwe-popups-fade {
         opacity: 1 !important;
     }
 
@@ -3285,10 +3337,7 @@ You can use greasemonkey or any other form of monkey that supports the document-
         color: var(--uc-wiki-text-60) !important;
     }
 
-    .mw-mmv-download-pane
-        .mw-mmv-download-attribution:hover
-        .mw-mmv-download-attribution-cta
-        * {
+    .mw-mmv-download-pane .mw-mmv-download-attribution:hover .mw-mmv-download-attribution-cta * {
         color: var(--uc-wiki-text-90) !important;
     }
 
@@ -3426,10 +3475,7 @@ You can use greasemonkey or any other form of monkey that supports the document-
 
     .mw-advancedSearch-namespace-selection,
     .mw-advancedSearch-fieldContainer {
-        background: linear-gradient(
-            hsla(0, 0%, 0%, 0.1),
-            var(--uc-wiki-box-bg) 0.5em
-        ) !important;
+        background: linear-gradient(hsla(0, 0%, 0%, 0.1), var(--uc-wiki-box-bg) 0.5em) !important;
         border: solid 1px transparent !important;
     }
 
@@ -3654,9 +3700,7 @@ You can use greasemonkey or any other form of monkey that supports the document-
         box-shadow: none !important;
     }
 
-    .mw-mmv-embed-select
-        .oo-ui-buttonElement.oo-ui-labelElement
-        > input.oo-ui-buttonElement-button,
+    .mw-mmv-embed-select .oo-ui-buttonElement.oo-ui-labelElement > input.oo-ui-buttonElement-button,
     .mw-mmv-embed-select
         .oo-ui-buttonElement.oo-ui-labelElement
         > .oo-ui-buttonElement-button
@@ -3761,9 +3805,7 @@ You can use greasemonkey or any other form of monkey that supports the document-
         font-size: 13px !important;
     }
 
-    .mw-mmv-reuse-dialog
-        .oo-ui-dropdownWidget.oo-ui-widget-enabled
-        .oo-ui-dropdownWidget-handle {
+    .mw-mmv-reuse-dialog .oo-ui-dropdownWidget.oo-ui-widget-enabled .oo-ui-dropdownWidget-handle {
         background-color: hsl(0, 0%, 8%) !important;
         color: var(--uc-wiki-text-90) !important;
         border: none !important;
@@ -3859,8 +3901,6 @@ You can use greasemonkey or any other form of monkey that supports the document-
         background-image: none !important;
         width: 11px !important;
         height: 11px !important;
-        -webkit-transform: rotate(-45deg);
-        -moz-transform: rotate(-45deg);
         transform: scale(85%) rotate(-45deg);
     }
 
@@ -3928,7 +3968,8 @@ You can use greasemonkey or any other form of monkey that supports the document-
         box-shadow: 0 0 15px 2px hsla(0, 0%, 0%, 0.1), 0 0 3px 1px hsla(0, 0%, 0%, 0.2) !important;
     }
 
-    table.tmbox-protection, table.tmbox-notice {
+    table.tmbox-protection,
+    table.tmbox-notice {
         border-collapse: revert !important;
         border: 1px solid var(--uc-wiki-table-border-color) !important;
     }
@@ -4110,38 +4151,6 @@ You can use greasemonkey or any other form of monkey that supports the document-
         color: var(--green) !important;
     }
 
-    ::-moz-selection {
-        color: var(--content-selection-color) !important;
-        background-color: var(--content-selection-bgcolor) !important;
-        border-radius: 2px !important;
-    }
-
-    p::-moz-selection {
-        color: var(--content-selection-color) !important;
-        background-color: var(--content-selection-bgcolor) !important;
-        border-radius: 2px !important;
-    }
-
-    a::-moz-selection,
-    a b::-moz-selection,
-    a i::-moz-selection,
-    a .nowrap::-moz-selection,
-    bdi::-moz-selection,
-    abbr::selection {
-        color: hsl(245.3, 26.3%, 42.5%) !important;
-        background-color: var(--content-selection-bgcolor) !important;
-        border-radius: 2px !important;
-    }
-
-    img::-moz-selection {
-        background-color: hsla(0, 0%, 100%, 0) !important;
-    }
-
-    a.new,
-    a.new:hover {
-        color: hsl(0, 54.4%, 53.5%) !important;
-    }
-
     .suggestions {
         border-bottom-left-radius: 3px !important;
         border-bottom-right-radius: 3px !important;
@@ -4219,11 +4228,7 @@ You can use greasemonkey or any other form of monkey that supports the document-
 
     /* media viewer colors, buttons and shit */
     .mw-mmv-permission-box .mw-mmv-permission-text .mw-mmv-permission-text-fader {
-        background-image: linear-gradient(
-            to bottom,
-            #0000 0%,
-            hsl(0, 0%, 9.4%) 100%
-        ) !important;
+        background-image: linear-gradient(to bottom, #0000 0%, hsl(0, 0%, 9.4%) 100%) !important;
     }
 
     .mw-mmv-info-box {
@@ -4372,8 +4377,8 @@ You can use greasemonkey or any other form of monkey that supports the document-
 
     /* translate page arrow */
     img[src*="Translation_to_english_arrow"] {
-        filter: invert(1) hue-rotate(190deg) brightness(0.8) brightness(0.8) contrast(2)
-            saturate(2) brightness(1.6);
+        filter: invert(1) hue-rotate(190deg) brightness(0.8) brightness(0.8) contrast(2) saturate(2)
+            brightness(1.6);
     }
 
     /* pdf external link */
@@ -4785,8 +4790,8 @@ You can use greasemonkey or any other form of monkey that supports the document-
         border-color: transparent !important;
     }
 
-/*     unnecessary if you use this with dark reader (which you probably should) */
-/*     .uls-menu .uls-search-label,
+    /*     unnecessary if you use this with dark reader (which you probably should) */
+    /*     .uls-menu .uls-search-label,
     .uls-languagefilter-clear,
     :is(.oo-ui-toolbar-bar, .ve-ce-branchNode-slug, .toolbar.section-main, .wikiEditor-ui-toolbar)
         .oo-ui-iconElement-icon,
