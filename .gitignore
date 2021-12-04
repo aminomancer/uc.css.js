@@ -1,5 +1,8 @@
+*.psd
 *.prproj
-/video/
 custom-*.css
 boot.jsm
 resources/in-content/custom-content.css
+node_modules
+package-lock.json
+package.json
