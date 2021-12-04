@@ -1,12 +1,12 @@
 # **uc.css.js**
 
-<a href="/../../archive/HEAD.zip" title="Download the latest release package" aria-label="Download the latest release package"><img src=".readme/download.png" alt="Download" height="26"></a>
-<a href="/../../subscription" title="Get update notifications" aria-label="Get update notifications"><img src=".readme/watch.png" alt="Watch" height="26"></a>
-<a href="/../../issues/new/choose" title="Report a bug or request a new feature" aria-label="Report a bug or request a new feature"><img src=".readme/issue.png" alt="Issue" height="26"></a>
-<a href="/../../discussions" title="Ask a question or discuss with other users" aria-label="Ask a question or discuss with other users"><img src=".readme/discuss.png" alt="Discuss" height="26"></a>
-<a href="/../../fork" title="Make your own copy of this project" aria-label="Make your own copy of this project"><img src=".readme/fork.png" alt="Fork" height="26"></a>
-<a href="https://github.com/aminomancer" title="Follow my work" aria-label="Follow my work"><img src=".readme/follow.png" alt="Follow" height="26"></a>
-<a href="https://github.com/sponsors/aminomancer" title="Become a sponsor" aria-label="Become a sponsor"><img src=".readme/sponsor.png" alt="Sponsor" height="26"></a>
+<a href="/../../archive/HEAD.zip" title="Download the latest release package" aria-label="Download the latest release package"><img src=".readme/download.png" alt="Download" height="28"></a>
+<a href="/../../subscription" title="Get update notifications" aria-label="Get update notifications"><img src=".readme/watch.png" alt="Watch" height="28"></a>
+<a href="/../../issues/new/choose" title="Report a bug or request a new feature" aria-label="Report a bug or request a new feature"><img src=".readme/issue.png" alt="Issue" height="28"></a>
+<a href="/../../discussions" title="Ask a question or discuss with other users" aria-label="Ask a question or discuss with other users"><img src=".readme/discuss.png" alt="Discuss" height="28"></a>
+<a href="/../../fork" title="Make your own copy of this project" aria-label="Make your own copy of this project"><img src=".readme/fork.png" alt="Fork" height="28"></a>
+<a href="https://github.com/aminomancer" title="Follow my work" aria-label="Follow my work"><img src=".readme/follow.png" alt="Follow" height="28"></a>
+<a href="https://github.com/sponsors/aminomancer" title="Become a sponsor" aria-label="Become a sponsor"><img src=".readme/sponsor.png" alt="Sponsor" height="28"></a>
 
 My personal Firefox theme/layout, plus some privileged scripts to add new behaviors and functions.
 
