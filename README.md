@@ -6,10 +6,9 @@
 <a href="/../../discussions" title="Ask a question or discuss with other users" aria-label="Ask a question or discuss with other users"><img src=".readme/discuss.png" alt="Discuss" height="30"></a>
 <a href="/../../fork" title="Make your own copy of this project" aria-label="Make your own copy of this project"><img src=".readme/fork.png" alt="Fork" height="30"></a>
 <a href="https://github.com/aminomancer" title="Follow my work" aria-label="Follow my work"><img src=".readme/follow.png" alt="Follow" height="30"></a>
-<a href="https://github.com/sponsors/aminomancer" title="Become a sponsor" aria-label="Become a sponsor"><img src=".readme/sponsor.png" alt="Sponsor" height="30"></a>
-</p>
-
+<a href="https://github.com/sponsors/aminomancer" title="Become a sponsor" aria-label="Become a sponsor"><img src=".readme/sponsor.png" alt="Sponsor" height="30"></a></br>
 My personal Firefox theme/layout, plus some privileged scripts to add new behaviors and functions.
+</p>
 
 <p>
 <img src="preview/prev-window-small.webp">
