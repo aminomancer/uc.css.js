@@ -19,7 +19,7 @@ tooltip {
     margin-inline-start: -5px !important;
     margin-block-start: 16px !important;
     pointer-events: none !important;
-    --uc-tooltip-inner-padding: 2px 6px 4px 6px;
+    --uc-tooltip-inner-padding: 4px 7px 6px 7px;
 }
 
 tooltip > description,
@@ -30,7 +30,7 @@ tooltip .uc-tooltip-box {
     border: 1px solid var(--tooltip-border-color) !important;
     border-radius: var(--tooltip-border-radius) !important;
     box-shadow: var(--tooltip-box-shadow) !important;
-    padding: var(--uc-tooltip-inner-padding, 2px 6px 4px 6px) !important;
+    padding: var(--uc-tooltip-inner-padding, 4px 7px 6px 7px) !important;
     margin: 0 !important;
 }
 
@@ -47,7 +47,7 @@ tooltip .uc-tooltip-box {
 
 .places-tooltip-box,
 tooltip .uc-tooltip-box {
-    --uc-tooltip-inner-padding: 4px 6px 5px 6px !important;
+    --uc-tooltip-inner-padding: 5px 7px 6px 7px !important;
 }
 
 .places-tooltip description:not([value], [id]):empty,
@@ -179,10 +179,6 @@ as the mouse would then be on top of the tooltip popup not the main window. */
     display: none !important;
 }
 
-:is(#back-button-tooltip, #forward-button-tooltip):not([shadow-support]) description {
-    border: none !important;
-}
-
 :is(#back-button-tooltip, #forward-button-tooltip) .tooltip-label[id]:not(:last-of-type) {
     font-weight: var(--uc-font-weight-bold, 600);
 }
@@ -191,18 +187,19 @@ as the mouse would then be on top of the tooltip popup not the main window. */
     color: var(--panel-shortcut-color) !important;
     box-shadow: none !important;
     background: none !important;
+    border: none !important;
     font-size: 0.9em;
 }
 
 :is(#back-button-tooltip, #forward-button-tooltip):not([shadow-support])
     .tooltip-label[id]:not(:last-of-type) {
-    padding: 4px 6px 21px 6px !important;
+    padding: 5.5px 8px 20px 8px !important;
 }
 
 :is(#back-button-tooltip, #forward-button-tooltip):not([shadow-support])
-    .tooltip-label:last-of-type:not([id]) {
-    padding-block: 0 6px !important;
-    margin-block-start: -20px !important;
+.tooltip-label:last-of-type:not([id]) {
+    padding: 0 8px 8px 8px !important;
+    margin-block-start: -19.5px !important;
 }
 
 #tracking-protection-container tooltip {
@@ -483,16 +480,6 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
             font-kerning: normal !important;
         }
 
-        :is(#back-button-tooltip, #forward-button-tooltip):not([shadow-support])
-            .tooltip-label[id]:not(:last-of-type) {
-            padding: 3.5px 6px 18px 6px !important;
-        }
-
-        :is(#back-button-tooltip, #forward-button-tooltip):not([shadow-support])
-            .tooltip-label:last-of-type:not([id]) {
-            margin-block-start: -17.5px !important;
-        }
-
         #fxa-menu-header-description {
             color: var(--panel-description-color);
             font-weight: inherit !important;
@@ -503,7 +490,7 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
         }
 
         tooltip {
-            --uc-tooltip-inner-padding: 3px 6px 4px 6px;
+            --uc-tooltip-inner-padding: 5px 8px 6px 8px;
         }
 
         :is(#back-button-tooltip, #forward-button-tooltip) .tooltip-label[id] {

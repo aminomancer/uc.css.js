@@ -217,7 +217,7 @@ tooltip {
     border: none;
     padding: 5px;
     pointer-events: none;
-    --uc-tooltip-inner-padding: 2px 6px 4px 6px;
+    --uc-tooltip-inner-padding: 4px 7px 6px 7px;
 }
 
 tooltip:not([position]) {
@@ -231,7 +231,7 @@ tooltip > description {
     border: 1px solid var(--uc-menu-border-color);
     border-radius: var(--tooltip-border-radius);
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    padding: var(--uc-tooltip-inner-padding, 2px 6px 4px 6px);
+    padding: var(--uc-tooltip-inner-padding, 4px 7px 6px 7px);
     margin: 0;
 }
 
@@ -247,7 +247,7 @@ tooltip > description {
         tooltip {
             font-family: SF Pro Text, Segoe UI, sans-serif;
             font-kerning: normal;
-            --uc-tooltip-inner-padding: 3px 6px 4px 6px;
+            --uc-tooltip-inner-padding: 5px 8px 6px 8px;
         }
     }
 }
