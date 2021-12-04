@@ -14,23 +14,18 @@ this sheet controls their appearance as well. */
 
 .titlebar-spacer[type="post-tabs"],
 #toolbar-menubar > spacer {
-    width: var(--titlebar-spacer-width, 40px) !important;
+    width: var(--titlebar-spacer-width, 32px) !important;
     display: -moz-box !important;
 }
 
 /* split the width in half to center the menubar between the tabs and the titlebar buttons */
 #toolbar-menubar:not([inactive="true"]) + #TabsToolbar .titlebar-spacer,
 #toolbar-menubar:not([inactive="true"]) > spacer {
-    width: calc(var(--titlebar-spacer-width, 40px) / 2) !important;
+    width: calc(var(--titlebar-spacer-width, 32px) / 2) !important;
 }
 
 #toolbar-menubar[autohide="true"]:not([inactive]) + #TabsToolbar > .titlebar-buttonbox-container {
 	visibility: collapse !important;
-}
-
-:root:is([privatebrowsingmode], [accessibilitymode]) .titlebar-spacer[type="post-tabs"] {
-    width: 0px !important;
-    margin-left: -2px !important;
 }
 
 :root:not([chromehidden~="menubar"], [operatingsystem="linux"], [operatingsystem="macosx"])
@@ -229,16 +224,9 @@ this sheet controls their appearance as well. */
     border-left: none !important;
 }
 
-/* toolbar buttons */
-#TabsToolbar .toolbarbutton-1 > :is(.toolbarbutton-icon, .toolbarbutton-badge-stack) {
-    min-height: 16px !important;
-    padding-block: 6px !important;
-    border-radius: var(--toolbarbutton-border-radius) !important;
-}
-
 #TabsToolbar
     .toolbarbutton-1
-    > :is(.toolbarbutton-icon, .toolbarbutton-text .toolbarbutton-badge-stack) {
+    > :is(.toolbarbutton-icon, .toolbarbutton-text, .toolbarbutton-badge-stack) {
     border-radius: var(--toolbarbutton-border-radius) !important;
 }
 
@@ -345,46 +333,56 @@ this sheet controls their appearance as well. */
 /* private browsing indicator next to window controls */
 .accessibility-indicator,
 .private-browsing-indicator {
-    width: 16px !important;
-    height: 16px !important;
-    -moz-context-properties: fill, fill-opacity !important;
+    height: auto !important;
+    width: auto !important;
+    padding: 0 var(--toolbarbutton-outer-padding) !important;
+    margin: 0 !important;
+    background: none !important;
+    border: 0 !important;
+    outline: 0;
     fill: currentColor !important;
-    margin-inline: 8px !important;
+    -moz-context-properties: fill, fill-opacity !important;
+    -moz-box-align: center !important;
+    -moz-box-pack: center !important;
 }
 
 .private-browsing-indicator {
-    background-image: url(chrome://userchrome/content/skin/privateBrowsing.svg) !important;
+    background: none !important;
 }
 
-.accessibility-indicator {
-    background: none !important;
-    width: 32px !important;
-    -moz-box-align: center !important;
-    -moz-box-pack: center !important;
-    margin: 0 !important;
-    padding-inline: 2px !important;
-    border: 0 !important;
-    outline: 0;
+.private-browsing-indicator::before {
+    content: "";
+    display: -moz-box;
+	width: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
+	height: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
+    background-image: url(chrome://userchrome/content/skin/privateBrowsing.svg) !important;
+    background-size: 16px !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+	padding: var(--toolbarbutton-inner-padding) !important;
+	border-radius: var(--toolbarbutton-border-radius) !important;
+}
+
+.accessibility-indicator > .button-box {
+	width: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
+	height: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
+	padding: var(--toolbarbutton-inner-padding) !important;
+	border-radius: var(--toolbarbutton-border-radius) !important;
 }
 
 .accessibility-indicator > .button-box > .button-icon {
-    max-width: 16px !important;
+    width: 16px !important;
     height: 16px !important;
     list-style-image: url(chrome://userchrome/content/devtools/tool-accessibility.svg) !important;
 }
 
-.accessibility-indicator > .button-box {
-    height: 28px !important;
-    width: 28px !important;
-    padding: 0 !important;
-    border-radius: var(--toolbarbutton-border-radius) !important;
-}
-
-.accessibility-indicator:is(:hover, :focus-visible) > .button-box {
+.accessibility-indicator:is(:hover, :focus-visible) > .button-box,
+button.private-browsing-indicator:is(:hover, :focus-visible)::before {
     background-color: var(--arrowpanel-dimmed) !important;
 }
 
-.accessibility-indicator:is(:hover:active, [open]) > .button-box {
+.accessibility-indicator:is(:hover:active, [open]) > .button-box,
+button.private-browsing-indicator:is(:hover:active, [open])::before {
     background-color: var(--arrowpanel-dimmed-further) !important;
 }
 

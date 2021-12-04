@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Misc. Mods
-// @version        1.8.4
+// @version        1.8.5
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Various tiny mods not worth making separate scripts for. Read the comments inside the script for details.
@@ -44,6 +44,9 @@
 
         // The location where your bookmarks are saved by default is defined in the preference browser.bookmarks.defaultLocation. This pref is updated every time you manually change a bookmark's folder in the urlbar star button's edit bookmark panel. So if you want to save to toolbar by default, but you just added a bookmark to a different folder with the panel, that different folder now becomes your default location. So the next time you go to add a bookmark, instead of saving it to your toolbar it'll save it to the most recent folder you chose in the edit bookmark panel. This can be kind of annoying if you have a main bookmarks folder and a bunch of smaller subfolders. So I added this option to eliminate this updating behavior. This will stop Firefox from automatically updating the preference every time you use the edit bookmark panel. Once you install the script there will be a new checkbox in the edit bookmark panel, once you expand the "location" section. If you uncheck this checkbox, Firefox will stop updating the default bookmark location. So whatever the default location is set to at the time you uncheck the checkbox will permanently remain your default location. You can still change the default location by modifying the preference directly or by temporarily checking that checkbox. It just means the default location will only automatically change when the checkbox is checked.
         "Preserve your default bookmarks folder": true,
+
+        // By default, the private browsing indicator is just an inert <hbox> that sits next to the window control buttons. Hovering it reveals a tooltip, but that's it. Without any hover styles it seems kind of out of place. But giving something hover styles when it has no actual function seems like a bad idea. So instead of doing nothing, clicking the indicator will open a support page with info about private browsing. Better than nothing, and I didn't want to make it a redundant "new private window" button.
+        "Turn private browsing indicator into button": true,
     };
     class UCMiscMods {
         constructor() {
@@ -63,6 +66,8 @@
                 this.addPrivateBrowsingTooltip();
             if (config["Preserve your default bookmarks folder"])
                 this.makeDefaultBookmarkFolderPermanent();
+            if (config["Turn private browsing indicator into button"])
+                this.privateBrowsingIndicatorButton();
             this.randomTinyStuff();
         }
         stopDownloadsPanelFocus() {
@@ -239,6 +244,14 @@
                             )`
                         )
             );
+        }
+        privateBrowsingIndicatorButton() {
+            let indicator = document.querySelector(".private-browsing-indicator");
+            let tooltiptext = indicator.getAttribute("tooltiptext");
+            let markup = `<button class="private-browsing-indicator" aria-live="polite"
+                tooltiptext="${tooltiptext}" style="appearance:none;min-width:revert"
+                oncommand="openHelpLink('private-browsing-myths')" />`;
+            indicator.replaceWith(MozXULElement.parseXULToFragment(markup));
         }
         randomTinyStuff() {
             // give the tracking protection popup's info button a tooltip

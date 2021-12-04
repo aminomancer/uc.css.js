@@ -720,3 +720,12 @@
         }
     }
 }
+
+@-moz-document regexp("^(about:|chrome:\/\/).*") {
+    @supports -moz-bool-pref("userChrome.css.hide-promotion") {
+        .promo,
+        .vpn-banner {
+            display: none !important;
+        }
+    }
+}

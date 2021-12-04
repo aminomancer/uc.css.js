@@ -447,6 +447,7 @@ panel[type="arrow"][side="top"] {
     flex: 1 !important;
     font-weight: normal !important;
     border-inline: 0 !important;
+    margin: revert !important;
 }
 
 .panel-footer.popup-notification-button-container

@@ -200,12 +200,6 @@ panel {
     --tab-loading-fill: var(--lwt-toolbarbutton-icon-fill-attention) !important;
 }
 
-/* fluent reveal toolbar buttons */
-:root[fluent-reveal-hover] #navigator-toolbox :is(.toolbarbutton-1, .bookmark-item) {
-    --toolbarbutton-hover-background: hsla(236, 82%, 83%, 0.05) !important;
-    --toolbarbutton-active-background: hsla(236, 82%, 83%, 0.1) !important;
-}
-
 :root,
 #TabsToolbar {
     --toolbarbutton-inner-padding: var(--uc-toolbarbutton-inner-padding, 8px) !important;
@@ -226,4 +220,10 @@ panel {
 
 #identity-popup {
     --subviewbutton-height: 30px !important;
+}
+
+/* fluent reveal toolbar buttons */
+:root[fluent-reveal-hover] #navigator-toolbox :is(.toolbarbutton-1, .bookmark-item) {
+    --toolbarbutton-hover-background: hsla(236, 82%, 83%, 0.05) !important;
+    --toolbarbutton-active-background: hsla(236, 82%, 83%, 0.1) !important;
 }

@@ -50,6 +50,7 @@ override chrome://browser/skin/forget.svg ../resources/skin/forget.svg
 override chrome://browser/skin/login.svg ../resources/skin/login.svg
 override chrome://browser/skin/home.svg ../resources/skin/home.svg
 override chrome://browser/skin/privateBrowsing.svg ../resources/skin/privateBrowsing.svg
+override chrome://browser/skin/privatebrowsing/favicon.svg ../resources/skin/privateBrowsing.svg
 override chrome://browser/skin/sidebars.svg ../resources/skin/sidebars.svg
 override chrome://browser/skin/sidebars-right.svg ../resources/skin/sidebars-right.svg
 override chrome://browser/skin/library.svg ../resources/skin/library.svg

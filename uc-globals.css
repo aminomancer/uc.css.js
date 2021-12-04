@@ -217,8 +217,12 @@ tooltip {
     );
     --multiselected-color: hsl(241, 50%, 51%);
 
-    /* width of the spacer between the tabs and the window control buttons */
-    --titlebar-spacer-width: 40px;
+    /* width of the spacer between the tabs and the window control buttons.
+    this is basically the only drag space left, so treat it conservatively.
+    I design this theme based on my own use, and I very rarely move browser windows
+    by dragging them. so I can afford to make the spacers very small.
+    you might prefer a larger spacer width. override this in custom-chrome.css. */
+    --titlebar-spacer-width: 32px;
     /* subtle gradient drawn behind the window control buttons. */
     --titlebar-gradient: radial-gradient(
         circle at 100% 0%,
