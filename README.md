@@ -190,7 +190,7 @@ The files in the [JS folder](/JS) are not content scripts like you'd load in Tam
 
 These scripts need to be loaded by an autoconfig script loader. I recommend [**fx-autoconfig by MrOtherGuy**](https://github.com/MrOtherGuy/fx-autoconfig) which is robust and uses the safest method I'm aware of. Some of my scripts are not fully compatible with loaders other than MrOtherGuy's. In particular, most will be incompatible with xiaoxiaoflood's loader, and a few will be incompatible with Alice0775's loader.
 
-If you use any of my scripts, please disable telemetry by going to `about:preferences#privacy` and unticking the box towards the bottom that says "Allow Nightly to send technical and interaction data to Mozilla." Because we're modifying the way the browser's internal systems work, sending Mozilla data about your interactions is not only useless but actively confounding. Any interaction data emitted by functions that we modify with these scripts have the potential to confuse and mislead Firefox developers and waste valuable time.
+If you use any of my scripts, please disable telemetry by going to `about:preferences#privacy` and unticking the boxes towards the bottom that say "Allow Nightly to send technical and interaction data to Mozilla" and "Allow Nightly to install and run studies." Because we're modifying the way the browser's internal systems work, sending Mozilla data about your browser environment is useless and may actually confound the data. Any interaction data emitted by functions that we modify with these scripts has the potential to confuse and mislead Firefox developers and waste valuable time.
 
 ### **Installation:**
 
