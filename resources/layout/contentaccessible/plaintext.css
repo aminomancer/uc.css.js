@@ -15,6 +15,10 @@ html:not([dir]) pre {
 }
 
 @-moz-document unobservable-document() {
+    :root {
+        color-scheme: light dark;
+    }
+
     @media (prefers-color-scheme: dark) {
         :root {
             background-color: var(--in-content-bg-dark);

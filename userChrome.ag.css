@@ -249,6 +249,24 @@ tooltip > description {
             --uc-tooltip-inner-padding: 5px 8px 6px 8px;
         }
     }
+
+    parsererror|parsererror {
+        font-family: SF Pro Display, Segoe UI, sans-serif;
+        font-kerning: normal;
+        font-weight: 500;
+    }
+}
+
+/* this appears when you open a file that firefox tries to read as XML,
+but it's either invalid or not XML. for example when opening an XHTML file. */
+parsererror|parsererror {
+    color: var(--plaintext-color) !important;
+    background-color: var(--in-content-bg-dark) !important;
+}
+
+parsererror|sourcetext {
+    font-family: Overpass Mono, -moz-fixed;
+    font-weight: bold;
 }
 
 /* print preview background */
@@ -258,11 +276,6 @@ tooltip > description {
 
 html|*.videocontrols .controlBar {
     background-color: var(--content-principal-box-background);
-}
-
-parsererror|parsererror {
-    color: var(--plaintext-color) !important;
-    background-color: var(--in-content-bg-dark) !important;
 }
 
 :-moz-native-anonymous .eye-dropper-color-value {

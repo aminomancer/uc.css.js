@@ -680,11 +680,10 @@ You can use greasemonkey or any other form of monkey that supports the document-
         position: fixed !important;
         font-size: 18px !important;
         top: 0px !important;
-        left: -255px !important;
-        width: 160px !important;
         height: 100% !important;
         overflow-y: auto !important;
-        padding: 0 0 0 100px !important;
+        padding: 0 !important;
+        transform: translateX(calc(-100% + 12px)) !important;
         background-color: var(--uc-wiki-panel-bg) !important;
         background-image: var(--acrylic-texture) !important;
         backdrop-filter: blur(8px);
@@ -700,30 +699,23 @@ You can use greasemonkey or any other form of monkey that supports the document-
     }
 
     #mw-navigation #mw-panel:hover {
-        left: -100px !important;
-        transition: all 0.2s ease-in-out !important;
+        transform: none !important;
         opacity: 1 !important;
+        transition-duration: 0.25s !important;
     }
 
     #mw-navigation #mw-panel a {
         color: hsl(0, 0%, 93.3%) !important;
     }
 
-    #mw-navigation #p-navigation,
-    #mw-navigation .first {
-        margin-bottom: 0 !important;
-        margin-top: 7px !important;
-    }
-
     #mw-panel > .portal {
-        display: inline-block !important;
-        box-shadow: none !important;
+        margin-inline: 5px !important;
     }
 
     #mw-panel > .portal > h3 {
         color: #fff !important;
         font-size: 1rem !important;
-        margin-left: 5px !important;
+        margin-inline: 7px !important;
         padding-bottom: 1px !important;
         background: none !important;
         border-bottom: 1px solid transparent !important;
@@ -736,6 +728,10 @@ You can use greasemonkey or any other form of monkey that supports the document-
         border-image-slice: 1 !important;
     }
 
+    #mw-panel > .portal .vector-menu-content {
+        margin-inline: 0 !important;
+    }
+
     #mw-panel > .portal .vector-menu-content-list {
         padding-top: 2px !important;
     }
@@ -746,10 +742,6 @@ You can use greasemonkey or any other form of monkey that supports the document-
 
     #mw-navigation #p-lang #p-lang-label {
         display: block !important;
-    }
-
-    #mw-navigation #p-lang .uls-settings-trigger {
-        display: none !important;
     }
 
     #mw-navigation :focus {
@@ -1420,6 +1412,7 @@ You can use greasemonkey or any other form of monkey that supports the document-
 
     .toc .toctitle {
         margin-top: 20px !important;
+        cursor: default !important;
     }
 
     #toc #toctitle h2 {
@@ -1452,10 +1445,11 @@ You can use greasemonkey or any other form of monkey that supports the document-
         display: block !important;
         position: fixed !important;
         bottom: 0 !important;
+        left: 0 !important;
         height: 100% !important;
-        left: -150px !important;
-        width: 245px !important;
-        border: none !important;
+        max-width: 30% !important;
+        min-width: 200px !important;
+        transform: translateX(calc(-100% + 72px)) !important;
         transition: all 0.66s ease-in-out !important;
         opacity: 0 !important;
         overflow-y: auto !important;
@@ -1464,17 +1458,21 @@ You can use greasemonkey or any other form of monkey that supports the document-
         background: var(--uc-wiki-panel-bg) !important;
         background-image: var(--acrylic-texture) !important;
         backdrop-filter: blur(8px);
+        border: none !important;
         box-shadow: 1px 0 6px hsla(0, 0%, 0%, 0.25) !important;
     }
 
     #toc:hover {
-        left: 0px !important;
-        transition: all 0.15s ease-in-out !important;
+        transform: none !important;
         opacity: 1 !important;
-        z-index: 9999 !important;
+        transition-duration: 0.25s !important;
     }
 
-    #bodyContent #toc ul,
+    #bodyContent #toc li ul {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
     #bodyContent #toc li {
         padding-top: 6px !important;
         padding-bottom: 6px !important;
@@ -1486,7 +1484,7 @@ You can use greasemonkey or any other form of monkey that supports the document-
     #bodyContent #toc li a {
         display: flow-root !important;
         text-shadow: 0 1px 3px hsla(0, 0%, 0%, 0.2) !important;
-        border-radius: 3px !important;
+        border-radius: var(--general-button-border-radius) !important;
         text-decoration: none !important;
     }
 
@@ -1504,23 +1502,32 @@ You can use greasemonkey or any other form of monkey that supports the document-
     }
 
     #bodyContent #toc ul li a {
-        font-size: 18px !important;
+        font-size: 16px !important;
         line-height: normal !important;
-        color: hsl(30, 4.5%, 91.4%) !important;
+        color: hsl(0, 0%, 93.3%) !important;
         padding: 4px 6px 4px 6px !important;
         position: relative;
+        border: 1px solid transparent !important;
     }
 
-    #bodyContent #toc .toclevel-1 ul {
-        padding-top: 0 !important;
-        padding-right: 0 !important;
+    #bodyContent #toc > ul > li > a:not(:only-child, :hover) {
+        border-radius: 0 !important;
+        border-bottom: 1px solid transparent !important;
+        border-image: linear-gradient( to right, hsla(0, 0%, 100%, 0.05) 0, hsla(0, 0%, 100%, 0.2) 10%, transparent 100% ) !important;
+        border-image-slice: 100%;
+        border-image-slice: 0 0 1 0 !important;
     }
 
     #bodyContent #toc ul ul li a {
-        font-size: 13px !important;
+        font-size: 14px !important;
         line-height: 17px !important;
-        color: hsl(0, 0%, 93.3%) !important;
-        padding: 4px 6px !important;
+        padding-inline-start: 14px !important;
+    }
+
+    #bodyContent #toc ul ul ul li a {
+        font-size: 13px !important;
+        line-height: 16px !important;
+        padding-inline-start: 22px !important;
     }
 
     #bodyContent #toc h2::before {
@@ -1536,7 +1543,6 @@ You can use greasemonkey or any other form of monkey that supports the document-
         color: hsl(0, 0%, 93.3%) !important;
         margin-right: 0 !important;
         padding-inline-end: 0.35em !important;
-        border-right: 1px solid hsla(0, 0%, 100%, 0.5);
         opacity: 0.5;
     }
 
@@ -1552,33 +1558,28 @@ You can use greasemonkey or any other form of monkey that supports the document-
     }
 
     #bodyContent #toc > ul > li {
-        padding-inline: 3px !important;
+        padding-inline: 12px !important;
     }
 
-    #bodyContent #toc li a[href="#See_also"],
-    #bodyContent #toc li a[href="#Notes"],
-    #bodyContent #toc li a[href="#References"],
-    #bodyContent #toc li a[href="#Bibliography"],
-    #bodyContent #toc li a[href="#Further_reading"],
-    #bodyContent #toc li a[href="#Documentaries"],
-    #bodyContent #toc li a[href="#External_links"] {
-        margin: -3px 0 !important;
+    /* #bodyContent #toc
+        li
+        a:is([href="#See_also"], [href="#See_also"], [href="#Notes"], [href="#References"], [href="#Bibliography"], [href="#Further_reading"], [href="#Documentaries"], [href="#External_links"]) {
         font-size: 14px !important;
     }
 
-    #bodyContent #toc li a[href="#See_also"] .tocnumber,
-    #bodyContent #toc li a[href="#Notes"] .tocnumber,
-    #bodyContent #toc li a[href="#References"] .tocnumber,
-    #bodyContent #toc li a[href="#Bibliography"] .tocnumber,
-    #bodyContent #toc li a[href="#Further_reading"] .tocnumber,
-    #bodyContent #toc li a[href="#Documentaries"] .tocnumber,
-    #bodyContent #toc li a[href="#External_links"] .tocnumber {
-        display: none !important;
+    #bodyContent #toc
+        > ul
+        > li
+        > a:is([href="#See_also"], [href="#See_also"], [href="#Notes"], [href="#References"], [href="#Bibliography"], [href="#Further_reading"], [href="#Documentaries"], [href="#External_links"]) {
+        border-color: transparent !important;
     }
 
-    #bodyContent #toc > ul > li {
-        width: 92.5% !important;
-    }
+    #bodyContent #toc
+        li
+        a:is([href="#See_also"], [href="#See_also"], [href="#Notes"], [href="#References"], [href="#Bibliography"], [href="#Further_reading"], [href="#Documentaries"], [href="#External_links"])
+        .tocnumber {
+        display: none !important;
+    } */
 
     #bodyContent #toc > ul > li > ul > li ul {
         padding-top: 0px !important;
@@ -3151,11 +3152,6 @@ You can use greasemonkey or any other form of monkey that supports the document-
         color: var(--uc-wiki-text-80) !important;
     }
 
-    #p-navigation.portal,
-    #p-lang.portal {
-        box-shadow: none !important;
-    }
-
     .navbox-list {
         border-radius: 0px !important;
         border-color: transparent !important;
@@ -3261,18 +3257,28 @@ You can use greasemonkey or any other form of monkey that supports the document-
         width: min-content !important;
         text-overflow: clip !important;
         white-space: nowrap !important;
-        padding: 2px 4.5px 2.5px 3.5px !important;
-    }
-
-    #p-lang.portal button.uls-settings-trigger:hover {
-        filter: contrast(0%) brightness(10000%) grayscale(100%) !important;
+        padding: 3px 8px 3.5px 8px !important;
+        width: -moz-available !important;
+        margin-inline: 7px !important;
     }
 
     #p-lang.portal button.uls-settings-trigger {
-        filter: contrast(0%) brightness(160%) grayscale(100%) !important;
-        position: absolute !important;
-        top: 12.3em !important;
-        left: 17.35em !important;
+        margin-top: 15px !important;
+        margin-inline: 8px !important;
+        background-image: url(chrome://userchrome/content/settings.svg) !important;
+        background-size: 14px !important;
+        background-position: center !important;
+        -moz-context-properties: fill, fill-opacity !important;
+        fill: currentColor !important;
+        fill-opacity: 0.6 !important;
+    }
+
+    #p-lang.portal button.uls-settings-trigger:hover {
+        fill-opacity: 1 !important;
+    }
+
+    #p-navigation-label:not([hidden]) {
+        display: revert !important;
     }
 
     table.infobox.biota span.plainlinks a img {

@@ -1,11 +1,20 @@
+# Replace some of Firefox's internal files with our own versions. In order of startup priority.
+
+# Instantiate fx-autoconfig's main directories.
+# Where this file and the script loader exist.
 content userchromejs ./
+# Where your scripts exist and are loaded from.
 content userscripts ../JS/
+# Where icons and content stylesheets and other stuff exist.
 content userchrome ../resources/
-resource content-accessible chrome://userchrome/content/layout/contentaccessible/ contentaccessible=yes
-override chrome://global/skin/dirListing/dirListing.css ../resources/layout/dirListing.css
+
+# Override the built-in styles for arrowscrollboxes, mainly to replace scrollbuttons with scrollbars.
 override chrome://global/skin/arrowscrollbox.css ../resources/layout/arrowscrollbox.css
+
+# Override the tab element to restore the tab sound button and move the close button, among other things.
 override chrome://browser/content/tabbrowser-tab.js ../resources/script-override/tabMods.uc.js
-override chrome://browser/content/preferences/findInPage.js ../resources/script-override/findInPage.js
+
+# Override a bunch of icons that appear all over the browser.
 override chrome://global/skin/icons/check.svg ../resources/check.svg
 override chrome://global/skin/icons/success.svg ../resources/check.svg
 override chrome://global/skin/icons/check-partial.svg ../resources/check-partial.svg
@@ -76,3 +85,14 @@ override chrome://mozapps/skin/extensions/category-plugins.svg ../resources/pref
 override chrome://mozapps/skin/extensions/category-discover.svg ../resources/preferences/category-discover.svg
 override chrome://activity-stream/content/data/content/assets/glyph-highlights-16.svg ../resources/glyph-highlights-16.svg
 override chrome://activity-stream/content/data/content/assets/glyph-info-16.svg ../resources/glyph-info-16.svg
+
+# Basic content stylesheets, e.g., for plain text and "view source" documents.
+resource content-accessible chrome://userchrome/content/layout/contentaccessible/ contentaccessible=yes
+# Directory listing stylesheet, kind of like a file explorer.
+# Used when navigating to a folder e.g., file:///C: or resource://gre
+override chrome://global/skin/dirListing/dirListing.css ../resources/layout/dirListing.css
+# XML document stylesheet. Used when opening an XML file or response.
+override chrome://global/content/xml/XMLPrettyPrint.css ../resources/layout/XMLPrettyPrint.css
+# The script for the searchbar on about:preferences.
+# Its highlight color doesn't match the theme, so I changed how it works.
+override chrome://browser/content/preferences/findInPage.js ../resources/script-override/findInPage.js
