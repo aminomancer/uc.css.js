@@ -1467,6 +1467,20 @@ link[href="chrome://global/content/printPagination.css"]
     }
 }
 
+@-moz-document url("chrome://browser/content/webrtcLegacyIndicator.xhtml") {
+    button {
+        min-width: 28px !important;
+    }
+
+    #firefoxButton {
+        background-size: 20px !important;
+    }
+
+    window[sharingaudio][sharingvideo] > #audioVideoButton {
+        min-width: 46px !important;
+    }
+}
+
 @-moz-document url("chrome://browser/content/webrtcIndicator.xhtml")
 {
     :root {

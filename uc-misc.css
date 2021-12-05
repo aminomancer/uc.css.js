@@ -493,22 +493,15 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
             --uc-tooltip-inner-padding: 5px 8px 6px 8px;
         }
 
+        .places-tooltip-title,
         :is(#back-button-tooltip, #forward-button-tooltip) .tooltip-label[id] {
-            font-weight: var(--uc-font-weight-semibold, 400) !important;
+            font-family: SF Pro Display, Segoe UI, sans-serif !important;
+            font-kerning: normal !important;
+            font-weight: var(--uc-font-weight-semibold, 500) !important;
         }
 
+        .places-tooltip-uri,
         :is(#back-button-tooltip, #forward-button-tooltip) .tooltip-label:not([id]) {
-            font-weight: var(--uc-font-weight-thin, 300) !important;
-        }
-
-        .places-tooltip-title {
-            font-size: 12px !important;
-            font-weight: var(--uc-font-weight-semibold, 400) !important;
-            line-height: 13.5px !important;
-            max-height: 27px !important;
-        }
-
-        .places-tooltip-uri {
             font-weight: var(--uc-font-weight-thin, 300) !important;
         }
 
@@ -533,15 +526,15 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
         .urlbarView-row[dynamicType="onboardTabToSearch"]
             .urlbarView-title
             strong.urlbarView-dynamic-onboardTabToSearch-titleStrong {
-            font-family: SF Pro Text !important;
+            font-family: SF Pro Text, Segoe UI, sans-serif !important;
         }
 
         .popup-notification-body input[type="password"] {
-            font-family: SF Pro !important;
+            font-family: SF Pro, Segoe UI, sans-serif !important;
         }
 
         .popup-notification-description b {
-            font-family: SF Pro Display !important;
+            font-family: SF Pro Display, Segoe UI, sans-serif !important;
             font-kerning: auto !important;
         }
 

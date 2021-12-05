@@ -1012,7 +1012,7 @@ so you can use those classes to set the icon. */
     }
     33.33%,
     66.66% {
-        color: hsl(3.7, 77.1%, 49.6%);
+        color: var(--warning-color);
         fill-opacity: 1;
     }
 }

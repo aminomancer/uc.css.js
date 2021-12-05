@@ -242,8 +242,7 @@ tooltip > description {
 }
 
 @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
-    @-moz-document url(chrome://browser/content/browser.xhtml)
-    {
+    @-moz-document regexp("^(about:|chrome:\/\/|resource:\/\/).*") {
         tooltip {
             font-family: SF Pro Text, Segoe UI, sans-serif;
             font-kerning: normal;

@@ -624,6 +624,10 @@ popupnotification progress[paused]::-moz-progress-bar {
     background-color: var(--desaturate-dimmed-further);
 }
 
+popupnotificationcontent label[control]:not([hidden]) + menulist {
+    margin-top: 4px !important;
+}
+
 /* "downloading and verifying add-on..." goes above the addon install progress bar */
 #addon-progress-notification .popup-notification-origin.header + .popup-notification-description {
     margin-block: 3px !important;
@@ -717,21 +721,12 @@ popupnotification progress[paused]::-moz-progress-bar {
 }
 
 #permission-popup-permissions-content {
-    padding-inline: 12px 4px !important;
-    padding-block: 4px 0 !important;
     padding: 4px 8px 0 12px !important;
 }
 
-.permission-popup-permission-item {
-    margin-block: 4px !important;
-}
-
-#permission-popup-storage-access-permission-list-header {
-    margin-block: 4px 0 !important;
-}
-
-.permission-popup-section {
-    padding-bottom: 8px !important;
+.permission-popup-permission-label,
+.permission-popup-permission-header-label {
+	margin-inline-start: var(--arrowpanel-subviewbutton-iconic-gap) !important;
 }
 
 #permission-popup-permission-reload-hint,
@@ -1665,10 +1660,10 @@ richlistitem.download-state > .downloadButton.downloadIconCancel .button-box .bu
     font-size: 0.9em !important;
     font-weight: var(--uc-font-weight-thin) !important;
     min-height: 20px !important;
-    background: url(chrome://userchrome/content/notifications/popup-subitem.svg) left center
+    background: url(chrome://userchrome/content/notifications/popup-subitem.svg) left center/16px
         no-repeat;
     margin-inline-start: 22px !important;
-    padding-inline-start: 12px !important;
+    padding-inline-start: 16px !important;
     -moz-context-properties: fill, fill-opacity;
     fill: currentColor !important;
     color: var(--panel-description-color) !important;

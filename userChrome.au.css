@@ -280,7 +280,45 @@ menupopup::part(arrowscrollbox),
 }
 
 :is(.tab-throbber, .tab-icon-pending, .tab-icon-image, .tab-sharing-icon-overlay, .tab-icon-overlay):not([pinned]) {
+    margin-inline-end: 0;
+}
+
+.tab-icon-stack {
     margin-inline-end: 6px;
+}
+
+.tab-sharing-icon-overlay {
+    fill: var(--warning-color);
+}
+
+.tab-icon-image[sharing]:not([selected]),
+.tab-sharing-icon-overlay {
+    animation: 3s linear uc-tab-sharing-icon-pulse infinite;
+}
+
+/* without this, when hovering a tab, the sharing icon
+and tab icon will just instantly disappear without transition.
+this is because opacity is animated by the built-in sharing pulse animation,
+but it's also the property animated for the transition from hover to no-hover,
+used to hide the icon/image to reveal the close button, and vice versa.
+you can't animate and transit the same property at the same time.
+by using filter: opacity() instead of <property:> opacity,
+we can continue using opacity as the transition property. */
+@keyframes uc-tab-sharing-icon-pulse {
+    0%,
+    16.66%,
+    83.33%,
+    100% {
+        filter: opacity(0);
+    }
+    33.33%,
+    66.66% {
+        filter: opacity(1);
+    }
+}
+
+.tab-icon-image[sharing]:not([selected]) {
+    animation-delay: -1.5s;
 }
 
 /* panel icon margin */
