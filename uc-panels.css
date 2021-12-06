@@ -131,6 +131,11 @@ panel[type="arrow"][side="top"] {
     margin-top: -9px;
 }
 
+#confirmation-hint,
+#protections-popup[toast] {
+    --arrowpanel-border-radius: var(--panel-border-radius-mini, 3px) !important;
+}
+
 #BMB_bookmarksPopup {
     margin-top: -12px !important;
 }
@@ -389,7 +394,8 @@ panel[type="arrow"][side="top"] {
 .popup-notification-button-container > button {
     background-color: var(--button-hover-bgcolor) !important;
     border: 1px solid transparent !important;
-    padding: 7.25px 16px !important;
+    padding: 6px 16px !important;
+    min-height: var(--subviewbutton-height, 28px) !important;
 }
 
 .popup-notification-button-container > button[disabled] {
@@ -541,6 +547,10 @@ popupnotification .popup-notification-body > .popup-notification-checkbox {
     margin-inline-start: 0 !important;
 }
 
+.popup-notification-checkbox > .checkbox-label-box > .checkbox-label {
+    opacity: revert !important;
+}
+
 .subviewradio {
     padding-inline-start: 0 !important;
     min-height: var(--menuitem-height) !important;
@@ -683,9 +693,9 @@ popupnotificationcontent label[control]:not([hidden]) + menulist {
     height: 16px;
 }
 
-.permission-popup-permission-remove-button:is(:hover, :focus-visible) > .button-box {
+/* .permission-popup-permission-remove-button:is(:hover, :focus-visible) > .button-box {
     background-color: var(--arrowpanel-dimmed);
-}
+} */
 
 .permission-popup-permission-remove-button > label {
     margin: 1px 6px !important;
@@ -726,7 +736,7 @@ popupnotificationcontent label[control]:not([hidden]) + menulist {
 
 .permission-popup-permission-label,
 .permission-popup-permission-header-label {
-	margin-inline-start: var(--arrowpanel-subviewbutton-iconic-gap) !important;
+    margin-inline-start: var(--arrowpanel-subviewbutton-iconic-gap) !important;
 }
 
 #permission-popup-permission-reload-hint,
@@ -776,7 +786,7 @@ popupnotificationcontent label[control]:not([hidden]) + menulist {
 #identity-popup-mainView
     #identity-popup-security-button[disabled]
     .identity-popup-security-connection {
-    min-height: 18px !important;
+    min-height: 16px !important;
 }
 
 #identity-popup-security-button {
@@ -1165,11 +1175,13 @@ panel .header,
 
 #downloadsPanel-mainView {
     min-width: revert !important;
-    width: revert !important;
+    padding: 0 !important;
 }
 
 #downloadsListBox {
-    width: 56ch !important;
+    width: revert !important;
+    min-width: 35em !important;
+    max-width: 48em !important;
     margin: var(--arrowpanel-menuitem-inline-margin) 0 !important;
 }
 
@@ -1180,10 +1192,6 @@ panel .header,
 #emptyDownloads {
     padding-block: 1.25em !important;
     padding-inline: 16px 20px !important;
-}
-
-#downloadsPanel-mainView {
-    padding: 0 !important;
 }
 
 #downloadsFooterButtons:not([hidden]) {
@@ -1235,6 +1243,7 @@ richlistitem.download-state > toolbarseparator {
 }
 
 richlistitem.download-state {
+    position: relative !important;
     border-radius: var(--arrowpanel-menuitem-border-radius) !important;
     margin: 0 !important;
     padding: 0 !important;
@@ -1244,23 +1253,51 @@ richlistitem.download-state {
     background: none !important;
 }
 
-richlistitem.download-state {
-    min-height: 60px !important;
-    height: 60px !important;
-    -moz-box-align: center !important;
-    border: none !important;
-}
-
 .downloadMainArea {
     border-radius: var(--arrowpanel-menuitem-border-radius) !important;
 }
 
 richlistitem.download-state .downloadMainArea {
-    padding-inline: 12px 4px !important;
+    padding-inline: 4px !important;
 }
 
 .downloadsPanelFooterButton:hover {
     outline: none !important;
+}
+
+panel richlistitem.download-state[state="1"]:not([exists]) :is(.downloadTarget, .downloadDetails) {
+    color: var(--panel-disabled-color);
+}
+
+richlistitem.download-state[state="1"]:not([exists]) .downloadTypeIcon {
+    opacity: 0.6;
+}
+
+panel richlistitem.download-state .downloadDetails {
+    opacity: 1 !important;
+    color: var(--panel-description-color);
+}
+
+#downloadsListBox richlistitem.download-state .downloadTypeIcon {
+    width: 28px !important;
+    height: 28px !important;
+}
+
+richlistitem.download-state > .downloadButton {
+    height: auto !important;
+    min-height: auto !important;
+    width: auto !important;
+    min-width: auto !important;
+    box-sizing: content-box !important;
+    margin: 0 !important;
+    background: none !important;
+    border-radius: 0 !important;
+    -moz-box-align: center !important;
+    -moz-box-pack: center !important;
+}
+
+#downloadsListBox richlistitem.download-state > .downloadButton {
+    padding: 8px !important;
 }
 
 richlistitem.download-state[state="1"][exists] .downloadMainArea:hover,
@@ -1279,50 +1316,25 @@ richlistitem.download-state:is([verdict], .openWhenFinished):hover:active {
     background: var(--download-button-active-bg) !important;
 }
 
-panel richlistitem.download-state[state="1"]:not([exists]) .downloadTarget {
-    color: var(--panel-description-color);
-}
-
-panel richlistitem.download-state .downloadDetails {
-    opacity: 1 !important;
-    color: var(--panel-description-color);
-}
-
-#downloadsListBox .downloadContainer {
-    min-height: 60px !important;
-}
-
-richlistitem.download-state > .downloadButton {
-    min-height: 60px !important;
-    min-width: 60px !important;
-    height: auto !important;
-    width: auto !important;
-    box-sizing: content-box !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    background: none !important;
-    border-radius: 0 !important;
-    -moz-box-align: center !important;
-    -moz-box-pack: center !important;
-}
-
-richlistitem.download-state > .downloadButton:is(:hover, :focus-visible) .button-box {
+richlistitem.download-state:not([verdict])
+    > .downloadButton:is(:hover, :focus-visible)
+    .button-box {
     background: var(--in-content-button-background-hover) !important;
 }
 
-richlistitem.download-state > .downloadButton:hover:active .button-box {
+richlistitem.download-state:not([verdict]) > .downloadButton:hover:active .button-box {
     background: var(--in-content-button-background-active) !important;
 }
 
 richlistitem.download-state > .downloadButton .button-box {
-    max-width: 34px !important;
-    height: 34px !important;
+    width: 32px !important;
+    height: 32px !important;
     border-radius: var(--arrowpanel-menuitem-border-radius) !important;
     padding: 0 !important;
 }
 
 richlistitem.download-state > .downloadButton .button-box .button-icon {
-    width: 19px !important;
+    width: 18px !important;
     height: auto !important;
 }
 
@@ -1389,7 +1401,11 @@ richlistitem.download-state > .downloadButton.downloadIconCancel .button-box .bu
 /* just for downloads in the places organizer */
 @-moz-document url-prefix("chrome://browser/content/places/places.xhtml")
 {
-    richlistitem.download-state:is(:hover, :focus-within) {
+    richlistitem.download-state:is(:hover, :focus-within),
+    richlistitem.download-state[state="1"][exists]:is(:hover, :focus-within),
+    richlistitem.download-state:is([verdict], .openWhenFinished):is(:hover, :focus-within),
+    richlistitem.download-state[state="1"][exists]:hover:active,
+    richlistitem.download-state:is([verdict], .openWhenFinished):hover:active {
         background: hsl(230, 5%, 18%) !important;
     }
 

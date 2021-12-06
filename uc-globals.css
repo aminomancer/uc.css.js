@@ -86,6 +86,7 @@ tooltip {
     );
     --context-padding-inline: var(--context-iconic-composite-width) 0px;
     --menupopup-border-radius: 5px;
+    --panel-border-radius-mini: 3px;
     --context-menuitem-border-radius: 2.6px;
     --menu-right-bg: none;
     --menu-right-img: url(chrome://userchrome/content/menu-arrow.svg);
@@ -268,6 +269,7 @@ tooltip {
     as well as buttons in tab-like elements like the all-tabs menu and my vertical tabs pane script.
     personally I've settled on circles for small buttons, rounded squares for big buttons. */
     --tab-button-border-radius: 50%;
+    --tree-row-height: 24px;
     --menuitem-height: 26px;
     --subviewbutton-height: 28px;
     --subview-subheader-padding: 5px 3px;

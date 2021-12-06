@@ -689,6 +689,10 @@ panel[type="autocomplete-richlistbox"]
     #editBMPanel_folderMenuList::part(icon) {
         margin-inline: 2px 3px;
     }
+
+    #editBookmarkPanel menulist::part(dropmarker-icon) {
+        list-style-image: url(chrome://userchrome/content/menu-arrow-down-big.svg);
+    }
 }
 
 .popup-notification-learnmore-link {
