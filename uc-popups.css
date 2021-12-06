@@ -24,7 +24,7 @@ tabmodalprompt {
     --in-content-primary-button-background: var(--purple-40) !important;
     --in-content-primary-button-background-hover: var(--purple-35) !important;
     --in-content-primary-button-background-active: var(--purple-30) !important;
-    --in-content-primary-button-text-color: var(--in-content-page-color) !important;
+    --in-content-primary-button-text-color: var(--light-on-dark-button-text-color) !important;
     --checkbox-border-color: var(--in-content-box-border-color) !important;
     --checkbox-checked-border-color: transparent !important;
     --checkbox-unchecked-bgcolor: var(--in-content-button-background) !important;
@@ -751,7 +751,7 @@ panel[type="autocomplete-richlistbox"]
         --in-content-primary-button-background: var(--purple-40) !important;
         --in-content-primary-button-background-hover: var(--purple-35) !important;
         --in-content-primary-button-background-active: var(--purple-30) !important;
-        --in-content-primary-button-text-color: var(--in-content-page-color) !important;
+        --in-content-primary-button-text-color: var(--light-on-dark-button-text-color) !important;
         --in-content-primary-button-text-color-hover: white !important;
         --checkbox-border-color: var(--in-content-box-border-color) !important;
         --checkbox-checked-border-color: transparent !important;
@@ -1054,7 +1054,7 @@ panel[type="autocomplete-richlistbox"]
         --in-content-primary-button-background: var(--purple-40) !important;
         --in-content-primary-button-background-hover: var(--purple-35) !important;
         --in-content-primary-button-background-active: var(--purple-30) !important;
-        --in-content-primary-button-text-color: var(--in-content-page-color) !important;
+        --in-content-primary-button-text-color: var(--light-on-dark-button-text-color) !important;
         --in-content-button-border-radius: var(--general-button-border-radius) !important;
         --in-content-accent-color: var(--purple-35) !important;
         --in-content-table-background: var(--in-content-box-background) !important;
@@ -1143,7 +1143,7 @@ panel[type="autocomplete-richlistbox"]
         --in-content-primary-button-background: var(--purple-40) !important;
         --in-content-primary-button-background-hover: var(--purple-35) !important;
         --in-content-primary-button-background-active: var(--purple-30) !important;
-        --in-content-primary-button-text-color: var(--in-content-page-color) !important;
+        --in-content-primary-button-text-color: var(--light-on-dark-button-text-color) !important;
         --checkbox-border-color: var(--in-content-box-border-color) !important;
         --checkbox-checked-border-color: transparent !important;
         --checkbox-unchecked-bgcolor: var(--in-content-button-background) !important;

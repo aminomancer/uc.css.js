@@ -55,6 +55,7 @@ tooltip {
     --uc-panel-shortcut-focus: hsl(235, 32%, 75%, 90%);
     --uc-places-cell-focus-bgcolor: hsl(232, 30%, 19%);
     --uc-places-cell-hover-bgcolor: hsl(232, 30%, 23%);
+    --light-on-dark-button-text-color: #fff;
 
     --menupopup-inner-box-margin: 0px;
     --menupopup-shadow: none;

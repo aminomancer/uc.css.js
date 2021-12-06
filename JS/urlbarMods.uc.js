@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Urlbar Mods
-// @version        1.5.4
+// @version        1.5.5
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Make some minor modifications to the urlbar. See the code comments below for more details.
@@ -93,12 +93,14 @@ class UrlbarMods {
             let icon_label = "";
             let tooltip = "";
             if (this._isSecureInternalUI) {
-                this._identityBox.className = "chromeUI";
+                this._identityBox.className = isInitialPage(this._uri) ? "initialPage" : "chromeUI";
                 let brandBundle = document.getElementById("bundle_brand");
                 icon_label = brandBundle.getString("brandShorterName");
                 tooltip = this._fluentStrings.chromeUI;
             } else if (this._pageExtensionPolicy) {
-                this._identityBox.className = "extensionPage";
+                this._identityBox.className = isInitialPage(this._uri)
+                    ? "initialPage"
+                    : "extensionPage";
                 let extensionName = this._pageExtensionPolicy.name;
                 icon_label = gNavigatorBundle.getFormattedString("identity.extension.label", [
                     extensionName,
@@ -147,7 +149,9 @@ class UrlbarMods {
                 this._identityBox.className = "aboutBlockedPage unknownIdentity";
                 tooltip = gNavigatorBundle.getString("identity.notSecure.tooltip");
             } else if (this._isPotentiallyTrustworthy) {
-                this._identityBox.className = "localResource";
+                this._identityBox.className = isInitialPage(this._uri)
+                    ? "initialPage"
+                    : "localResource";
                 tooltip = this._fluentStrings.localResource;
                 if (this._uri.spec.startsWith("about:reader?"))
                     this._identityBox.classList.add("readerMode");

@@ -648,7 +648,6 @@ so you can use those classes to set the icon. */
 
 #urlbar[pageproxystate="valid"] #identity-box.chromeUI {
     padding-inline: 8px !important;
-    margin: 0 !important;
     border: none !important;
     background-color: var(--identity-box-solid-bg) !important;
     border-right: 1px solid var(--desaturate-dimmed) !important;
@@ -714,6 +713,7 @@ so you can use those classes to set the icon. */
     #identity-box:not(.httpsOnlyErrorPage, .certErrorPage, .unknownIdentity)
     #identity-icon-box {
     pointer-events: none !important;
+    -moz-user-focus: ignore !important;
 }
 
 :root[hide-tp-icon-on-ntp]:not([customizing])
@@ -784,11 +784,6 @@ so you can use those classes to set the icon. */
 .urlbar-input-box input {
     padding-left: 4px !important;
     height: var(--urlbar-height) !important;
-}
-
-#urlbar[searchmode] .urlbar-input-box input,
-#identity-box.chromeUI[pageproxystate="valid"] ~ .urlbar-input-box input {
-    padding-left: 7px !important;
 }
 
 .urlbar-input-box input::placeholder,
@@ -900,6 +895,7 @@ so you can use those classes to set the icon. */
     fill: var(--protection-active-color) !important;
 }
 
+#identity-box.initialPage #identity-icon,
 #identity-box.extensionPage #identity-icon[tooltiptext="Loaded by extension: Tab Notes"],
 #urlbar[pageproxystate="invalid"] #identity-box #identity-icon,
 #tracking-protection-icon-container[hidden]
@@ -1167,7 +1163,7 @@ use 0.6 instead of 1 since 1 will end up being shown as like 1.4px for some wind
     background-color: var(--identity-box-solid-bg) !important;
     border-radius: 0 !important;
     outline: none !important;
-    margin-inline: -24px 0 !important;
+    margin-inline: -24px 3px !important;
     font-size: inherit !important;
     min-width: 16px !important;
     height: var(--urlbar-height) !important;

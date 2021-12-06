@@ -1,4 +1,13 @@
 // required prefs
+// disable telemetry since we're modding firefox
+user_pref("toolkit.telemetry.enabled", false);
+user_pref("browser.discovery.enabled", false);
+user_pref("app.shield.optoutstudies.enabled", false);
+user_pref("datareporting.healthreport.documentServerURI", "http://%(server)s/healthreport/");
+user_pref("datareporting.healthreport.uploadEnabled", false);
+user_pref("datareporting.policy.dataSubmissionPolicyBypassNotification", true);
+user_pref("browser.crashReports.unsubmittedCheck.autoSubmit2", false);
+// make the theme work properly
 user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
 user_pref("browser.proton.enabled", true);
 user_pref("browser.proton.places-tooltip.enabled", true);
