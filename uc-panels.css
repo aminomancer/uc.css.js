@@ -396,6 +396,8 @@ panel[type="arrow"][side="top"] {
     border: 1px solid transparent !important;
     padding: 6px 16px !important;
     min-height: var(--subviewbutton-height, 28px) !important;
+    -moz-box-align: center !important;
+    -moz-box-pack: center !important;
 }
 
 .popup-notification-button-container > button[disabled] {
@@ -1795,4 +1797,57 @@ richlistitem.download-state > .downloadButton.downloadIconCancel .button-box .bu
 
 #downloads-button-autohide-panel:is(:dir(rtl), :-moz-locale-dir(rtl)) {
     --arrowpanel-padding: 8px 8px 8px 12px !important;
+}
+
+#contextual-feature-recommendation-notification[data-notification-bucket="CFR_MILESTONE_MESSAGE"]:not([hidden]) {
+    display: flex !important;
+    align-items: center !important;
+    background: none !important;
+}
+
+#contextual-feature-recommendation-notification[data-notification-bucket="CFR_MILESTONE_MESSAGE"]
+    description {
+    transform: none !important;
+}
+
+#contextual-feature-recommendation-notification[data-notification-bucket="CFR_MILESTONE_MESSAGE"]
+    .popup-notification-button-container {
+    float: inline-end;
+    background-color: transparent;
+    flex-direction: row-reverse;
+    margin: 0 !important;
+    gap: 0 !important;
+}
+
+#contextual-feature-recommendation-notification[data-notification-bucket="CFR_MILESTONE_MESSAGE"]
+    .popup-notification-button.popup-notification-secondary-button {
+    margin: 0 !important;
+    height: 22px !important;
+    width: 22px !important;
+    padding: 0 !important;
+    align-self: center !important;
+    flex: none !important;
+    min-height: revert !important;
+    min-width: revert !important;
+    order: 1 !important;
+}
+
+#contextual-feature-recommendation-notification[data-notification-bucket="CFR_MILESTONE_MESSAGE"]
+    .popup-notification-button.popup-notification-primary-button {
+    margin: 4px !important;
+    padding: 3px 6px 3px 12px !important;
+    flex: 1 !important;
+    min-height: revert !important;
+    min-width: revert !important;
+    order: 0 !important;
+}
+
+#contextual-feature-recommendation-notification[data-notification-bucket="CFR_MILESTONE_MESSAGE"]
+    .popup-notification-button.popup-notification-primary-button::after {
+    margin-inline-start: 4px !important;
+}
+
+#contextual-feature-recommendation-notification[data-notification-category="icon_and_message"]
+    .popup-notification-body-container {
+    padding-bottom: calc(var(--arrowpanel-padding) / 2) !important;
 }

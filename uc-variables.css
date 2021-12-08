@@ -169,6 +169,11 @@ menupopup {
 
     --vertical-tabs-pane-background: var(--ui-secondary-bg) !important;
     --vpn-on-icon: url(chrome://userchrome/content/skin/vpn-on-light.svg);
+
+    --cfr-animation-duration: 0.35s;
+    --cfr-button-addons-icon: url(chrome://userchrome/content/material/extension.svg) !important;
+    --cfr-button-features-icon: url(chrome://userchrome/content/skin/tip.svg) !important;
+    --cfr-button-highlights-icon: url(chrome://global/skin/icons/highlights.svg) !important;
 }
 
 :root[lwthemetextcolor="bright"] {
@@ -217,6 +222,13 @@ panel {
 #urlbar {
     --urlbar-toolbar-height: var(--uc-urlbar-container-height) !important;
     --urlbar-container-height: var(--uc-urlbar-container-height) !important;
+}
+
+#urlbar,
+#searchbar {
+    --urlbar-box-focus-bgcolor: var(--desaturate-faint) !important;
+    --urlbar-box-hover-bgcolor: var(--desaturate-dimmed) !important;
+    --urlbar-box-active-bgcolor: var(--desaturate-dimmed-further) !important;
 }
 
 #appMenu-multiView {

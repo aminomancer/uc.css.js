@@ -260,6 +260,7 @@ tooltip {
     --urlbar-input-bgcolor: hsl(233, 28%, 25%);
     --urlbar-input-bgcolor-brighter: hsl(233, 26%, 27%);
     --urlbar-input-bgcolor-disabled: hsl(233, 30%, 21%);
+    --urlbar-zoom-button-bgcolor: hsla(0, 0%, 0%, 0.09);
     --uc-urlbar-container-height: 38px;
     --uc-menubar-searchbar-width: 256px;
     --uc-tab-min-height: 35px;

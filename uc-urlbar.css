@@ -271,8 +271,15 @@ toolbarpaletteitem[mousedown] > #urlbar-container > #urlbar > #urlbar-background
     filter: none !important;
 }
 
+.urlbar-page-action {
+    -moz-box-pack: center !important;
+}
+
+:is(.urlbar-page-action:not([disabled]), #urlbar-go-button, .search-go-button):not([disabled], :hover, [open]):focus-visible {
+    background-color: var(--urlbar-box-focus-bgcolor) !important;
+}
+
 :not(.urlbar-page-action) > .urlbar-icon:not([disabled]):is(:hover, :focus-visible, [open]),
-#pageAction-urlbar-screenshot[shooting]:not(:hover) .urlbar-icon,
 .urlbar-page-action:not([disabled]):is(:hover, :focus-visible, [open]) .urlbar-icon {
     fill-opacity: 1 !important;
 }
@@ -286,6 +293,48 @@ toolbarpaletteitem[mousedown] > #urlbar-container > #urlbar > #urlbar-background
 .urlbar-addon-page-action:not(#pageAction-urlbar-_testpilot-containers, #pageAction-urlbar-jid1-xufzosoflzsoxg_jetpack):not([disabled]):is(:hover, :focus-visible, [open])
     .urlbar-icon {
     opacity: 1;
+}
+
+#contextual-feature-recommendation {
+    --cfr-active-color: var(--button-hover-bgcolor) !important;
+}
+
+#cfr-label-container {
+    border-radius: var(--toolbarbutton-border-radius) !important;
+    font-size: 0.85em !important;
+    border: 1px solid transparent !important;
+    margin-block: 1px !important;
+}
+
+#urlbar:not([cfr-recommendation-state="expanded"]) #cfr-button {
+    transform: translateX(-2px);
+}
+
+#cfr-label-container:is(:hover, :focus-visible) {
+    filter: brightness(1.1) saturate(1.2);
+    border-color: var(--button-hover-bgcolor) !important;
+}
+
+#cfr-label-container:hover:active {
+    filter: brightness(1.2) saturate(1.4);
+    border-color: var(--button-active-bgcolor) !important;
+}
+
+#cfr-label {
+    padding-block: 0 !important;
+    padding-inline: 0 10px !important;
+}
+
+#cfr-button {
+    margin-block: 0 !important;
+}
+
+#urlbar[cfr-recommendation-state="expanded"] #cfr-button {
+    pointer-events: none !important;
+}
+
+#urlbar[cfr-recommendation-state="expanded"] #cfr-button .urlbar-icon {
+    fill-opacity: inherit !important;
 }
 
 #urlbar[usertyping]:is([focused], [open]) > #urlbar-input-container > #urlbar-go-button {
@@ -355,10 +404,6 @@ but CSS hides it faster and avoids flickering.
     }
 }
 
-.urlbar-page-action {
-    -moz-box-pack: center !important;
-}
-
 #userContext-indicator {
     margin-inline-start: 6px !important;
 }
@@ -385,7 +430,7 @@ but CSS hides it faster and avoids flickering.
     height: 20px !important;
     border-radius: 10px !important;
     border: 1px solid var(--desaturate-dimmed) !important;
-    background: hsla(0, 0%, 0%, 0.09) !important;
+    background: var(--urlbar-zoom-button-bgcolor, hsla(0, 0%, 0%, 0.09)) !important;
     margin-inline: 4px !important;
     padding: 1px 8px !important;
 }
