@@ -1,3 +1,9 @@
+<!-- This Source Code Form is subject to the terms of the Creative Commons
+* Attribution-NonCommercial-ShareAlike International License, v. 4.0.
+* If a copy of the CC BY-NC-SA 4.0 was not distributed with this
+* file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/
+* or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA. -->
+
 # **uc.css.js**
 <p align="center">
 <a href="/../../archive/HEAD.zip" title="Download the latest release package" aria-label="Download the latest release package"><img src=".readme/download.png" alt="Download" height="32"></a>

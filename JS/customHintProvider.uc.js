@@ -4,6 +4,7 @@
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    A utility script for other scripts to take advantage of. Sets up a global object (on the chrome window) for showing confirmation hints with custom messages. The built-in confirmation hint component can only show a few messages built into the browser's localization system. It only accepts l10n IDs, so if your script wants to show a custom message with some specific string, it won't work. This works just like the built-in confirmation hint, and uses the built-in confirmation hint element, but it accepts an arbitrary string as a parameter. So you can open a confirmation hint with *any* message, e.g. CustomHint.show(anchorNode, "This is my custom message", {hideArrow: true, hideCheck: true, description: "Awesome.", duration: 3000})
+// @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
 window.CustomHint = {

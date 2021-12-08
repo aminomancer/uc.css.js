@@ -4,6 +4,7 @@
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    In fullscreen, the navbar hides automatically when you're not using it. But it doesn't have a very smooth animation, and there are certain situations where the navbar should be visible but isn't. This sets up its own logic to allow CSS transitions to cover the animation, and allows you to show the navbar only when hovering/focusing the navbar, or when a popup is opened that is anchored to something on the navbar, e.g. an extension popup. Also allows hiding the bookmarks toolbar under the same circumstances, fullscreen or not. You can use this for any toolbar, whether in fullscreen or not. duskFox just uses it for the bookmarks/personal toolbar, as well as for the navbar while in fullscreen, but your CSS can use it under any circumstances with popup-status="true". My preferred CSS transitions are in the stylesheets on my repo (see uc-fullscreen.css) but you can also do your own thing with selectors like box[popup-status="true"] > #navigator-toolbox > whatever
+// @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
 (function () {

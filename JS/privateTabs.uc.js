@@ -4,6 +4,7 @@
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    An fx-autoconfig port of Private Tab by xiaoxiaoflood. Adds buttons and menu items allowing you to open a "private tab" in nearly any circumstance in which you'd be able to open a normal tab. Instead of opening a link in a private window, you can open it in a private tab instead. This will use a special container and prevent history storage, depending on user configuration. You can also toggle tabs back and forth between private and normal mode. This script adds two hotkeys: Ctrl+alt+P to open a new private tab, and ctrl+alt+T to toggle private mode for the active tab. These hotkeys can be configured along with several other options at the top of the script file.
+// @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // @include        main
 // @include        chrome://browser/content/places/bookmarksSidebar.xhtml
 // @include        chrome://browser/content/places/historySidebar.xhtml

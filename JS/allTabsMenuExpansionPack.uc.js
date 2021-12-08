@@ -21,6 +21,7 @@
 // 10. Makes the sound icon show if the tab has blocked media or media in picture-in-picture, just like regular tabs.
 // 11. And a few other subtle improvements.
 // All the relevant CSS for this is already included in and loaded by the script. It's designed to look consistent with my theme as well as with the latest vanilla (proton) Firefox. If you need to change anything, see the "const css" line in here, or the end of uc-tabs-bar.css on my repo.
+// @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 (function () {
     let prefSvc = Services.prefs;

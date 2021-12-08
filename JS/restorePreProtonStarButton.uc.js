@@ -4,6 +4,7 @@
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    The bookmark page action button used to have a pretty cool starburst animation. That's been removed but it's not too difficult to restore. This version of the script requires fx-autoconfig, userChrome.au.css, and the resources folder from my repo. If you don't want to use all that stuff, grab the standalone version instead. FYI not to state the obvious but this script will have no effect if your browser/OS has prefers-reduced-motion enabled.
+// @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
 (function () {
