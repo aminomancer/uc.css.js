@@ -1393,11 +1393,8 @@ panel[type="autocomplete-richlistbox"]
 
     #SanitizeDialog[dialogroot] #sanitizeEverythingWarningBox {
         border-color: transparent !important;
-        background-color: color-mix(
-            in srgb,
-            var(--dialog-bgcolor) 50%,
-            hsla(0, 0%, 0%, 0.2)
-        ) !important;
+        background-color: transparent !important;
+        font-size: 1.1em !important;
     }
 
     #SanitizeDialog[dialogroot] #sanitizeEverythingWarningIcon {

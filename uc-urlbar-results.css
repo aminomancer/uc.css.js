@@ -281,6 +281,15 @@
     flex-shrink: 3 !important;
 }
 
+.urlbarView[actionoverride] .urlbarView-row[has-url] > .urlbarView-row-inner > .urlbarView-no-wrap,
+.urlbarView-row[has-url]:not([type$="tab"]) > .urlbarView-row-inner > .urlbarView-no-wrap,
+.urlbarView-row[has-url]:is([type="remotetab"], [sponsored]):is(:hover, [selected])
+    > .urlbarView-row-inner
+    > .urlbarView-no-wrap {
+    flex-shrink: 3 !important;
+    max-width: revert !important;
+}
+
 .urlbarView-row:is([type="switchtab"], [type="remotetab"])
     > .urlbarView-row-inner
     > .urlbarView-no-wrap
@@ -586,7 +595,7 @@
 }
 
 .urlbarView-row:not([type="search"])
-    .urlbarView-favicon:is([src^="page-icon:https://en.wikipedia.org/"], [src^="page-icon:http://en.wikipedia.org/"])
+    .urlbarView-favicon[src^="page-icon:http"][src*="://en.wikipedia.org/"]
 {
     box-sizing: border-box !important;
     background: url(chrome://userchrome/content/engines/wikipedia.svg) no-repeat center/contain !important;
@@ -596,7 +605,37 @@
 }
 
 .urlbarView-row:not([type="search"])
-    .urlbarView-favicon:is([src^="page-icon:https://www.amazon.com/"], [src^="page-icon:http://www.amazon.com/"])
+    .urlbarView-favicon[src^="page-icon:http"][src*="://en.wiktionary.org/"]
+{
+    box-sizing: border-box !important;
+    background: url(chrome://userchrome/content/engines/wiktionary.svg) no-repeat center/contain !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 16px;
+}
+
+.urlbarView-row:not([type="search"])
+    .urlbarView-favicon[src^="page-icon:http"][src*="://www.youtube.com/"]
+{
+    box-sizing: border-box !important;
+    background: url(chrome://userchrome/content/engines/youtube.svg) no-repeat center/contain !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 16px;
+}
+
+.urlbarView-row:not([type="search"])
+    .urlbarView-favicon[src^="page-icon:http"][src*="://www.netflix.com/"]
+{
+    box-sizing: border-box !important;
+    background: url(chrome://userchrome/content/engines/netflix.svg) no-repeat center/contain !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-left: 16px;
+}
+
+.urlbarView-row:not([type="search"])
+    .urlbarView-favicon[src^="page-icon:http"][src*="://www.amazon.com/"]
 {
     box-sizing: border-box !important;
     background: url(chrome://userchrome/content/engines/amazon.svg) no-repeat center/contain !important;
@@ -606,7 +645,7 @@
 }
 
 .urlbarView-row:not([type="search"])
-    .urlbarView-favicon:is([src^="page-icon:https://gatherer.wizards.com/"], [src^="page-icon:http://gatherer.wizards.com/"])
+    .urlbarView-favicon[src^="page-icon:http"][src*="://gatherer.wizards.com/"]
 {
     box-sizing: border-box !important;
     background: url(chrome://userchrome/content/engines/gatherer.svg) no-repeat center/contain !important;
@@ -616,7 +655,7 @@
 }
 
 .urlbarView-row:not([type="search"])
-    .urlbarView-favicon:is([src^="page-icon:https://reelgood.com/"], [src^="page-icon:http://reelgood.com/"])
+    .urlbarView-favicon[src^="page-icon:http"][src*="://reelgood.com/"]
 {
     box-sizing: border-box !important;
     background: url(chrome://userchrome/content/engines/reelgood.svg) no-repeat center/contain !important;
@@ -890,3 +929,4 @@ so you might wanna turn the animation off. I might even make it off by default. 
     > .urlbarView-url {
     display: none !important;
 }
+

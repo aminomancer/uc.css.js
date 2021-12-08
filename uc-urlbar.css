@@ -268,7 +268,6 @@ toolbarpaletteitem[mousedown] > #urlbar-container > #urlbar > #urlbar-background
 
 .urlbar-icon,
 .urlbar-page-action {
-    background-color: transparent !important;
     filter: none !important;
 }
 
@@ -287,24 +286,6 @@ toolbarpaletteitem[mousedown] > #urlbar-container > #urlbar > #urlbar-background
 .urlbar-addon-page-action:not(#pageAction-urlbar-_testpilot-containers, #pageAction-urlbar-jid1-xufzosoflzsoxg_jetpack):not([disabled]):is(:hover, :focus-visible, [open])
     .urlbar-icon {
     opacity: 1;
-}
-
-#star-button-box:not(:hover, :focus-visible, [open]) #star-button[starred] {
-    fill-opacity: var(--urlbar-icon-fill-opacity) !important;
-    fill: currentColor !important;
-}
-
-#star-button[starred][animate] {
-    visibility: hidden;
-}
-
-#star-button-box:not(:hover, :focus-visible, [open])
-    #star-button[starred][animate]
-    + #star-button-animatable-box
-    > #star-button-animatable-image {
-    opacity: var(--urlbar-icon-fill-opacity) !important;
-    fill: currentColor !important;
-    stroke: currentColor !important;
 }
 
 #urlbar[usertyping]:is([focused], [open]) > #urlbar-input-container > #urlbar-go-button {

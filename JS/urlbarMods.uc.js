@@ -290,9 +290,7 @@ class UrlbarMods {
         function getUniqueId(prefix) {
             return prefix + (gUniqueIdSerial++ % 9999);
         }
-        let provider = gURLBar.view.controller.manager.providers.find(
-            (provider) => provider.name === "RemoteTabs"
-        );
+        let provider = gURLBar.view.controller.manager.getProvider("RemoteTabs");
         UrlbarUtils.RESULT_PAYLOAD_SCHEMA[
             UrlbarUtils.RESULT_TYPE.REMOTE_TAB
         ].properties.clientType = {
