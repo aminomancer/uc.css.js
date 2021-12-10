@@ -741,10 +741,10 @@
     border-radius: var(--searchbar-popup-border-radius) !important;
 }
 
-#urlbar[breakout][breakout-extend][breakout-extend-animate] #urlbar-background {
-    animation-duration: 100ms !important;
+#urlbar[breakout][breakout-extend] #urlbar-background {
     animation-name: urlbar-grow-bg !important;
     animation-timing-function: var(--animation-easing-function) !important;
+    animation-duration: .1s !important;
     transform-origin: top !important;
     transform-style: flat !important;
     backface-visibility: hidden !important;
@@ -759,27 +759,27 @@
     so in order to create the illusion that it's under the nav-bar we cut the shadow off at the boundary of the nav-bar. */
 }
 
-#urlbar[breakout][breakout-extend][breakout-extend-animate] .urlbarView {
-    animation-duration: 300ms !important;
+#urlbar[breakout][breakout-extend] .urlbarView {
     animation-name: urlbar-grow-results !important;
     animation-timing-function: var(--animation-easing-function) !important;
+    animation-duration: 0.3s !important;
     transform-origin: top !important;
     transform-style: preserve-3d !important;
-    backface-visibility: hidden !important;
+    backface-visibility: visible !important;
 }
 
 /* the animation's framerate can stall when loading really heavy pages.
 so you might wanna turn the animation off. I might even make it off by default. */
 @supports -moz-bool-pref("userChrome.urlbar-results.disable_animation") {
-    #urlbar[breakout][breakout-extend][breakout-extend-animate] .urlbarView,
-    #urlbar[breakout][breakout-extend][breakout-extend-animate] #urlbar-background {
+    #urlbar[breakout][breakout-extend] .urlbarView,
+    #urlbar[breakout][breakout-extend] #urlbar-background {
         animation: none !important;
     }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    #urlbar[breakout][breakout-extend][breakout-extend-animate] .urlbarView,
-    #urlbar[breakout][breakout-extend][breakout-extend-animate] #urlbar-background {
+    #urlbar[breakout][breakout-extend] .urlbarView,
+    #urlbar[breakout][breakout-extend] #urlbar-background {
         animation: none !important;
     }
 }

@@ -31,8 +31,8 @@
     }
 }
 
-:read-only:-moz-focusring,
-:not(textarea, [contenteditable]:read-write, input[type="text"], input[type="password"], input[type="date"], input[type="datetime-local"], input[type="email"], input[type="month"], input[type="number"], input[type="search"], input[type="tel"], input[type="time"], input[type="url"], input[type="week"]):-moz-focusring {
+:read-only:focus:not(:focus-visible),
+:not(textarea, [contenteditable]:read-write, input[type="text"], input[type="password"], input[type="date"], input[type="datetime-local"], input[type="email"], input[type="month"], input[type="number"], input[type="search"], input[type="tel"], input[type="time"], input[type="url"], input[type="week"]):focus:not(:focus-visible) {
     outline: unset;
     outline-offset: unset;
 }

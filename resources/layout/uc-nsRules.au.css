@@ -1,0 +1,306 @@
+/* rules that only work in a chrome:// path.
+I don't register userChrome.au.css that way because
+it would mean I can't live-edit and save the stylesheet
+from the style editor in the browser toolbox. */
+
+#back-button,
+.unified-nav-back[_moz-menuactive="true"]:-moz-locale-dir(ltr),
+.unified-nav-forward[_moz-menuactive="true"]:-moz-locale-dir(rtl) {
+    list-style-image: url(chrome://userchrome/content/skin/back.svg);
+}
+
+#forward-button,
+#urlbar-go-button,
+.search-go-button,
+.unified-nav-forward[_moz-menuactive="true"]:-moz-locale-dir(ltr),
+.unified-nav-back[_moz-menuactive="true"]:-moz-locale-dir(rtl) {
+    list-style-image: url(chrome://userchrome/content/skin/forward.svg);
+}
+
+#sidebar-button {
+    list-style-image: url(chrome://userchrome/content/skin/sidebars-right.svg);
+}
+
+#sidebar-button:-moz-locale-dir(ltr):not([positionend]),
+#sidebar-button:-moz-locale-dir(rtl)[positionend] {
+    list-style-image: url(chrome://userchrome/content/skin/sidebars.svg);
+}
+
+#library-animatable-box {
+    display: none;
+}
+
+#library-animatable-box[animate] {
+    display: block;
+}
+
+#library-button {
+    list-style-image: url(chrome://userchrome/content/skin/library.svg);
+}
+
+#library-button[scaling] {
+    list-style-image: url(chrome://userchrome/content/skin/library-scaling-fix.svg);
+}
+
+@keyframes library-bookmark-animation {
+    from {
+        transform: translateX(0);
+        fill: inherit;
+    }
+    25% {
+        fill: inherit;
+    }
+    50% {
+        fill: var(--toolbarbutton-icon-fill-attention);
+        fill-opacity: 1;
+    }
+    to {
+        transform: translateX(-1056px);
+        fill: var(--toolbarbutton-icon-fill-attention);
+        fill-opacity: 1;
+    }
+}
+
+@keyframes library-bookmark-animation-rtl {
+    from {
+        transform: translateX(1056px);
+        fill: inherit;
+    }
+    25% {
+        fill: inherit;
+    }
+    50% {
+        fill: var(--toolbarbutton-icon-fill-attention);
+        fill-opacity: 1;
+    }
+    to {
+        transform: translateX(0);
+        fill: var(--toolbarbutton-icon-fill-attention);
+        fill-opacity: 1;
+    }
+}
+
+@keyframes library-bookmark-fade {
+    from {
+        fill: var(--toolbarbutton-icon-fill-attention);
+        fill-opacity: 1;
+    }
+    to {
+        fill: inherit;
+    }
+}
+
+#library-button[animate] > .toolbarbutton-icon {
+    fill: transparent;
+}
+
+#library-animatable-box[animate] {
+    /* Position the sprite at the y-position of the library-button, then adjust
+    based on the size difference between half of the button height and half
+    of the sprite height. */
+    top: calc(var(--library-button-height) / 2 - 27px);
+    /* Set a margin relative to the difference in widths of the .toolbarbutton-icon
+    and the .toolbar-animatable-box. This is correct even in RTL because the item
+    is positioned using `left`. */
+    left: calc(var(--library-icon-x) + (16px + 2 * var(--toolbarbutton-inner-padding) - 22px) / 2);
+    width: 22px; /* Width of each frame within the SVG sprite */
+    height: 54px; /* Height of each frame within the SVG sprite */
+}
+
+#library-animatable-box[animate] > .toolbarbutton-animatable-image {
+    min-height: 54px; /* Minimum height must be equal to the height of the SVG sprite */
+    width: 1078px;
+    animation-duration: 800ms;
+    animation-timing-function: steps(48);
+}
+
+#library-animatable-box[animate][fade] > .toolbarbutton-animatable-image {
+    animation-duration: 2s;
+    animation-timing-function: ease-out;
+}
+
+#library-animatable-box[animate="bookmark"] > .toolbarbutton-animatable-image {
+    background-image: url(chrome://userchrome/content/skin/library-bookmark-animation.svg);
+    animation-name: library-bookmark-animation;
+    -moz-context-properties: fill, fill-opacity, stroke;
+    stroke: var(--toolbarbutton-icon-fill-attention);
+}
+
+#library-animatable-box[animate="bookmark"]:-moz-locale-dir(rtl) > .toolbarbutton-animatable-image {
+    animation-name: library-bookmark-animation-rtl;
+}
+
+#library-animatable-box[animate="bookmark"][fade] > .toolbarbutton-animatable-image {
+    animation-name: library-bookmark-fade;
+}
+
+@keyframes bookmark-animation {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-627px);
+    }
+}
+
+#star-button-box {
+    position: relative;
+    padding: 0;
+}
+
+#star-button {
+    width: calc(var(--urlbar-min-height) - 2px - 2 * var(--urlbar-container-padding));
+    height: calc(var(--urlbar-min-height) - 2px - 2 * var(--urlbar-container-padding));
+    padding: var(--urlbar-icon-padding);
+}
+
+/* Preload the bookmark animations to prevent a flicker during the first playing
+of the animations. */
+#star-button[preloadanimations] + #star-button-animatable-box > #star-button-animatable-image {
+    background-image: url(chrome://userchrome/content/skin/bookmark-animation.svg),
+        url(chrome://userchrome/content/skin/library-bookmark-animation.svg);
+    background-size: 0, 0;
+}
+
+#star-button[starred][animate] {
+    fill: transparent;
+    position: relative;
+}
+
+#star-button[starred][animate] + #star-button-animatable-box {
+    display: block;
+    position: absolute;
+    overflow: hidden;
+    top: calc(50% - 16.5px); /* 16.5px is half the height of the sprite */
+    /* .urlbar-icon has width 28px. Each frame is 33px wide. Set margin-inline-start
+    to be half the difference, -2.5px. */
+    margin-inline-start: -2.5px;
+    width: 33px; /* Width of each frame within the SVG sprite */
+    height: 33px; /* Height of each frame within the SVG sprite */
+}
+
+:root[uidensity="compact"] #star-button[starred][animate] + #star-button-animatable-box {
+    /* .urlbar-icon has width 24px in this case */
+    margin-inline-start: -4.5px;
+}
+
+:root[uidensity="touch"] #star-button[starred][animate] + #star-button-animatable-box {
+    /* .urlbar-icon has width 30px in this case */
+    margin-inline-start: -1.5px;
+}
+
+#star-button[starred][animate] + #star-button-animatable-box > #star-button-animatable-image {
+    background-image: url(chrome://userchrome/content/skin/bookmark-animation.svg);
+    background-size: auto;
+    list-style-image: none;
+    height: var(--toolbarbutton-height);
+    min-height: 33px; /* Minimum height must be equal to the height of the SVG sprite */
+    animation-name: bookmark-animation;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+    animation-timing-function: steps(19);
+    animation-duration: 317ms;
+    width: 660px;
+    -moz-context-properties: fill, stroke;
+    stroke: var(--toolbarbutton-icon-fill-attention);
+}
+
+#star-button[starred][animate]:-moz-locale-dir(rtl)
+    + #star-button-animatable-box
+    > #star-button-animatable-image {
+    scale: -1 1;
+}
+
+.open-protocol-handler-icon {
+    list-style-image: url(chrome://userchrome/content/open-in-new.svg);
+}
+
+.open-protocol-handler-icon:-moz-locale-dir(rtl) {
+    transform: scaleX(-1);
+}
+
+.popup-icon {
+    list-style-image: url(chrome://userchrome/content/notifications/popup.svg);
+}
+
+.popup-subitem {
+    list-style-image: url(chrome://userchrome/content/notifications/popup-subitem.svg);
+    margin-inline-start: 42px;
+    width: 16px;
+    height: 16px;
+    -moz-context-properties: fill, fill-opacity;
+    fill: currentColor;
+    fill-opacity: 0.6;
+}
+
+.popup-subitem:-moz-locale-dir(rtl) {
+    transform: scaleX(-1);
+}
+
+/* confirmation hint */
+@keyframes confirmation-hint-checkmark-animation {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-252px);
+    }
+}
+
+@keyframes confirmation-hint-checkmark-animation-rtl {
+    from {
+        transform: translateX(252px);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+#confirmation-hint-checkmark-animation-container[animate] > #confirmation-hint-checkmark-image {
+    -moz-context-properties: fill;
+    background-image: url(chrome://userchrome/content/skin/success-animation.svg);
+    display: block;
+    position: absolute;
+    background-repeat: no-repeat;
+    min-width: 266px;
+    max-width: 266px;
+    min-height: 14px;
+    max-height: 14px;
+    animation-name: confirmation-hint-checkmark-animation;
+    animation-fill-mode: forwards;
+    animation-timing-function: steps(18);
+}
+
+#confirmation-hint-checkmark-animation-container[animate]
+    > #confirmation-hint-checkmark-image:-moz-locale-dir(rtl) {
+    animation-name: confirmation-hint-checkmark-animation-rtl;
+    transform: translateX(252px);
+}
+
+#confirmation-hint-message {
+    margin-inline: 7px 0;
+}
+
+#confirmation-hint.with-description #confirmation-hint-message {
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    #confirmation-hint-checkmark-animation-container[animate] > #confirmation-hint-checkmark-image {
+        animation-duration: 300ms;
+        animation-delay: 0ms;
+    }
+
+    #confirmation-hint-message-container {
+        transform: scale(0.8);
+        opacity: 0;
+        transition: transform 120ms cubic-bezier(0.25, 1.27, 0.35, 1.18), opacity 60ms linear;
+    }
+
+    #confirmation-hint-checkmark-animation-container[animate]
+        + #confirmation-hint-message-container {
+        transform: scale(1);
+        opacity: 1;
+    }
+}

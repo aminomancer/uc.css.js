@@ -418,13 +418,8 @@ checkbox .checkbox-check {
     outline: unset !important;
 }
 
-:-moz-focusring,
-:focus,
-button::-moz-focus-inner,
-:-moz-focusring *,
-:focus *,
-:-moz-focusring:focus:not(:focus-visible),
-:-moz-focusring:focus:not(:focus-visible) > * {
+:focus:not(:focus-visible),
+:focus:not(:focus-visible) > * {
     outline: unset !important;
     outline-offset: unset !important;
     -moz-outline-radius: unset !important;
@@ -440,7 +435,10 @@ findbar toolbarbutton.tabbable:focus-visible,
 toolbarbutton.bookmark-item:not(.subviewbutton):focus-visible,
 toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-icon,
 toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-text,
-toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-badge-stack {
+toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-badge-stack,
+.urlbar-page-action:focus-visible,
+#appMenu-zoomReduce-button2:focus-visible > .toolbarbutton-icon,
+#appMenu-zoomEnlarge-button2:focus-visible > .toolbarbutton-icon {
     color: inherit;
     outline: unset !important;
     -moz-outline-radius: unset !important;

@@ -19,6 +19,7 @@
     align-items: center;
     top: 0 !important;
     left: 1.5em;
+    background-color: var(--ui-tertiary-bg) !important;
     border: 0px solid transparent !important;
     border-bottom-left-radius: 5px !important;
     border-bottom-right-radius: 5px !important;
