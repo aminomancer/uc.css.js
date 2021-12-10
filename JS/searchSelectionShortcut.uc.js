@@ -13,10 +13,10 @@ class SearchSelectionShortcut {
     // these are all the prefs the script uses for configuration, with their default values.
     // this particular property is only used for setting the prefs on first install.
     // the window actor has its own way of retrieving these prefs.
-    static prefs = [
-        { name: "userChrome.searchSelectionShortcut.keycode", def: "KeyF" },
-        { name: "userChrome.searchSelectionShortcut.match-engine-to-current-tab", def: false },
-    ];
+    static prefs = new Map([
+        ["userChrome.searchSelectionShortcut.keycode", "KeyF"],
+        ["userChrome.searchSelectionShortcut.match-engine-to-current-tab", false],
+    ]);
     constructor() {
         this.makePrefs();
         this.setup();
@@ -28,9 +28,8 @@ class SearchSelectionShortcut {
             Services.prefs.clearUserPref(oldPref);
             firstRun = true;
         }
-        for (let pref of SearchSelectionShortcut.prefs) {
+        SearchSelectionShortcut.prefs.forEach((def, name) => {
             let type;
-            let { name, def } = pref;
             // determine the pref type (boolean, number, string).
             // there are a couple more but we won't ever use them.
             switch (typeof def) {
@@ -51,7 +50,7 @@ class SearchSelectionShortcut {
                 Services.prefs[`set${type}Pref`](name, def);
                 firstRun = true;
             }
-        }
+        });
         // if it's the first time installing v1.5,
         // make a splash menu to reveal the new prefs
         // and offer an affordance to change them.

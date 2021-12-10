@@ -23,7 +23,6 @@
                 if (e.type === "unload") {
                     window.removeEventListener("unload", this, false);
                     prefsvc.removeObserver(branch, this);
-                    gURLBar.inputField.removeEventListener("keydown", this, false);
                     return;
                 }
             },

@@ -813,10 +813,14 @@ panel[type="autocomplete-richlistbox"]
         font-size: 1em !important;
     }
 
-    .dialog-button-box > button:not([disabled="true"]):hover {
+    .dialog-button-box > button:not([disabled="true"]):is(:hover, :focus-visible) {
         background-color: var(--in-content-button-background-hover) !important;
         color: var(--in-content-button-text-color-hover) !important;
         border-color: var(--in-content-button-border-color-hover) !important;
+    }
+
+    .dialog-button-box > button:not([disabled="true"]):focus-visible {
+        outline-style: auto !important;
     }
 
     .dialog-button-box > button:not([disabled="true"]):hover:active,
@@ -838,7 +842,7 @@ panel[type="autocomplete-richlistbox"]
     }
 
     .dialog-button-box
-        > button:is([autofocus], [type="submit"], [default], .primary):not([disabled="true"]):hover {
+        > button:is([autofocus], [type="submit"], [default], .primary):not([disabled="true"]):is(:hover, :focus-visible) {
         background-color: var(--in-content-primary-button-background-hover) !important;
         color: var(--in-content-primary-button-text-color-hover) !important;
         border-color: var(--in-content-primary-button-border-hover) !important;
@@ -883,7 +887,7 @@ panel[type="autocomplete-richlistbox"]
 
     richlistbox[id]
         richlistitem:not([disabled="true"])
-        > button[label]:is(:enabled, :not([disabled="true"])):hover {
+        > button[label]:is(:enabled, :not([disabled="true"])):is(:hover, :focus-visible) {
         background-color: var(--in-content-primary-button-background-hover) !important;
     }
 

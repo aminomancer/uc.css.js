@@ -738,8 +738,12 @@ popupnotificationcontent label[control]:not([hidden]) + menulist {
     margin-inline-start: 24px !important;
 }
 
+.permission-popup-section {
+	padding-bottom: 8px !important;
+}
+
 #permission-popup-permissions-content {
-    padding: 4px 8px 0 12px !important;
+    padding: 4px 8px 0 8px !important;
 }
 
 .permission-popup-permission-label,
@@ -1856,4 +1860,13 @@ richlistitem.download-state > .downloadButton.downloadIconCancel .button-box .bu
 #contextual-feature-recommendation-notification[data-notification-category="icon_and_message"]
     .popup-notification-body-container {
     padding-bottom: calc(var(--arrowpanel-padding) / 2) !important;
+}
+
+#protections-popup-milestones-separator {
+    margin-top: 0 !important;
+}
+
+#protections-popup-milestones,
+#protections-popup-milestones-content {
+    background: none !important;
 }

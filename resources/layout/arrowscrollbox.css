@@ -59,4 +59,5 @@ this works best with the overlay scrollbars from userChrome.ag.css */
     padding-block: 0;
     margin-block: 0 !important;
     scroll-behavior: smooth;
+    scrollbar-width: thin;
 }

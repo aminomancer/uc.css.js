@@ -52,7 +52,8 @@ menupopup#viewSidebarMenu
     list-style-image: url(chrome://userchrome/content/skin/container-base.svg);
 }
 
-#pageAction-urlbar-_testpilot-containers {
+#pageAction-urlbar-_testpilot-containers,
+#pageAction-panel-_testpilot-containers {
     --pageAction-image-16px: url(chrome://userchrome/content/skin/container-go.svg) !important;
     --pageAction-image-32px: url(chrome://userchrome/content/skin/container-go.svg) !important;
 }
@@ -63,7 +64,7 @@ menupopup#viewSidebarMenu
 }
 
 /* hide gitzip page action since it's pretty useless */
-#page-action-buttons > #pageAction-urlbar-gitzip-firefox-addons_gitzip_org {
+#pageAction-urlbar-gitzip-firefox-addons_gitzip_org {
     display: none !important;
 }
 
@@ -693,11 +694,12 @@ we need to invert the icon differently since we don't want to invert the backgro
 }
 
 /* reddit enhancement suite urlbar page action button */
-#pageAction-urlbar-jid1-xufzosoflzsoxg_jetpack {
+#pageAction-urlbar-jid1-xufzosoflzsoxg_jetpack,
+#pageAction-panel-jid1-xufzosoflzsoxg_jetpack {
     list-style-image: url(chrome://userchrome/content/material/filter-css.svg) !important;
 }
 
-#pageAction-urlbar-jid1-xufzosoflzsoxg_jetpack[tooltiptext="Subreddit Style Off"] {
+:is(#pageAction-urlbar-jid1-xufzosoflzsoxg_jetpack, #pageAction-panel-jid1-xufzosoflzsoxg_jetpack)[tooltiptext="Subreddit Style Off"] {
     list-style-image: url(chrome://userchrome/content/material/filter-css-blocked.svg) !important;
 }
 
