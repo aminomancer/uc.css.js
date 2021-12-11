@@ -16,10 +16,21 @@ You can use greasemonkey or any other form of monkey that supports the document-
     :root {
         --wiki-dummy-variable: initial;
     }
+
+    .minerva-header .branding-box {
+        opacity: revert !important;
+    }
+
+    .minerva-header .branding-box
+        img[src="/static/images/mobile/copyright/wikipedia-wordmark-en.svg"] {
+        filter: invert(1);
+    }
 }
 
 @supports -moz-bool-pref("userChrome.css.wikipedia.dark-theme-enabled") {
-@-moz-document domain("wikipedia.org"), domain("wikimedia.org") {
+@-moz-document /* domain("wikipedia.org"), domain("wikimedia.org"), */
+    /* exclude the mobile version since it already looks pretty good w/ dark reader */
+    regexp("^https?:\/\/(?!m\.)(?:[a-zA-Z]{1,3}\-)?(?:[a-zA-Z]{1,3}\.)?(?:wikipedia|wikimedia)\.org.*$") {
     /* latin-ext */
     @font-face {
         font-family: "Source Code Pro";

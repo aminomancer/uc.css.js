@@ -42,6 +42,8 @@ user_pref("widget.non-native-theme.win.scrollbar.use-system-size", false);
 user_pref("widget.content.allow-gtk-dark-theme", true);
 // keep "all tabs" menu available at all times, useful for all tabs menu expansion pack
 user_pref("browser.tabs.tabmanager.enabled", true);
+// Selection background, among others
+user_pref("ui.highlight", "hsla(245, 100%, 66%, .55)");
 // Background for selected <option> elements and others
 user_pref("ui.selecteditem", "#2F3456");
 // Text color for selected <option> elements and others

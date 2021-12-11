@@ -86,3 +86,7 @@
 menupopup {
     --in-content-category-outline-focus: transparent !important;
 }
+
+.controlsContainer {
+    --control-focus-outline: 2px solid var(--purple-30) !important;
+}

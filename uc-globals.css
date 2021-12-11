@@ -191,9 +191,9 @@ tooltip {
     --uc-destructive-active-bgcolor: hsl(345.8, 90%, 40%);
     --uc-destructive-color: var(--ui-text-100);
 
-    --global-selection-bgcolor: hsla(245, 100%, 76%, 0.5);
+    --global-selection-bgcolor: hsla(245, 100%, 70%, 0.55);
     --global-selection-color: white;
-    --global-selection-bgcolor-disabled: hsla(245, 30%, 70%, 0.4);
+    --global-selection-bgcolor-disabled: hsla(243, 35%, 65%, 0.45);
     --ui-selection-bgcolor: hsla(0, 0%, 100%, 0.9);
     --ui-selection-color: hsl(236, 20%, 16%);
     --ui-selection-bgcolor-disabled: hsla(0, 0%, 100%, 0.7);
@@ -399,6 +399,8 @@ tooltip {
     --switch-off-hover-background: hsl(233, 18%, 27%);
     --switch-off-active-background: hsl(233, 19%, 24.5%);
     --switch-off-hover-border: hsl(233, 15%, 32%);
+
+    accent-color: var(--in-parent-border-focus);
 }
 
 :root[fxastatus="not_configured"] {

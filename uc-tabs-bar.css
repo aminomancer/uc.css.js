@@ -475,14 +475,14 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
 }
 
 .all-tabs-item .all-tabs-secondary-button {
-    max-width: 18px;
-    max-height: 18px;
+    width: 18px;
+    height: 18px;
     border-radius: var(--tab-button-border-radius, 2px) !important;
     color: white !important;
     background-color: transparent !important;
     opacity: 0.7 !important;
-    min-height: 0 !important;
-    min-width: 0 !important;
+    min-height: revert !important;
+    min-width: revert !important;
     padding: 0 !important;
 }
 

@@ -151,6 +151,10 @@ panel[type="arrow"][side="right"] {
     padding-bottom: var(--panel-subview-body-padding-magnitude);
 }
 
+.subviewbutton {
+    min-height: var(--subviewbutton-height);
+}
+
 .panel-subview-footer-button {
     margin-bottom: var(--menupopup-inner-padding-magnitude);
 }

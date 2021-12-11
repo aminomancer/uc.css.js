@@ -121,6 +121,7 @@ I also recommend setting the following prefs in `about:config`. There are two pr
 | ui.SpellCheckerUnderlineStyle | Number | 1 | Use dotted underline for spell checker. The default groove can get cut off for some fonts |
 | <i>ui.systemUsesDarkTheme</i> | Number | 1 | Currently required since there's no light mode yet |
 | <i>ui.selecteditem</i> | String | `#2F3456` | Background for selected `<option>` elements and others |
+| <i>ui.highlight</i> | String | `hsla(245, 100%, 66%, .55)` | Selection background, among others |
 | <i>ui.selecteditemtext</i> | String | `#FFFFFFCC` | Text color for selected `<option>` elements and others |
 | ui.textHighlightBackground | String | `#7755FF` | These prefs control the appearance of text highlighted by the findbar. I choose white text on purple/pink background |
 | ui.textHighlightForeground | String | `#FFFFFF` | |
