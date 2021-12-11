@@ -700,6 +700,7 @@
     border: 1px solid transparent !important;
     border-top-width: 0 !important;
     padding: 2px !important;
+    padding-top: 1px !important;
     width: calc(100% + 10px) !important;
     left: -5px !important;
     position: relative !important;
@@ -713,26 +714,6 @@
 
 #urlbar:not([open]) .urlbarView {
     padding-block: 0 !important;
-}
-
-@keyframes urlbar-grow-bg {
-    0% {
-        transform: scaleX(0.95) scaleY(0.5);
-    }
-    100% {
-        transform: none;
-    }
-}
-
-@keyframes urlbar-grow-results {
-    0% {
-        transform: scaleY(0.95);
-        opacity: 0;
-    }
-    100% {
-        transform: none;
-        opacity: 1;
-    }
 }
 
 #urlbar-background {
@@ -771,12 +752,36 @@
     backface-visibility: visible !important;
 }
 
+@keyframes urlbar-grow-bg {
+    0% {
+        transform: scaleX(0.95) scaleY(0.5);
+        opacity: 0;
+    }
+    100% {
+        transform: none;
+        opacity: 1;
+    }
+}
+
+@keyframes urlbar-grow-results {
+    0% {
+        transform: scaleY(0.95);
+        opacity: 0;
+    }
+    100% {
+        transform: none;
+        opacity: 1;
+    }
+}
+
 /* the animation's framerate can stall when loading really heavy pages.
 so you might wanna turn the animation off. I might even make it off by default. */
 @supports -moz-bool-pref("userChrome.urlbar-results.disable_animation") {
     #urlbar[breakout][breakout-extend] .urlbarView,
     #urlbar[breakout][breakout-extend] #urlbar-background {
         animation: none !important;
+        transform-style: flat !important;
+        backface-visibility: hidden !important;
     }
 }
 
@@ -888,7 +893,6 @@ so you might wanna turn the animation off. I might even make it off by default. 
     display: flex;
     flex-flow: column nowrap;
     align-items: stretch;
-    gap: 0px;
     background: none !important;
     border-bottom-left-radius: 4px !important;
     border-bottom-right-radius: 4px !important;
