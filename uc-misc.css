@@ -203,7 +203,7 @@ as the mouse would then be on top of the tooltip popup not the main window. */
 }
 
 :is(#back-button-tooltip, #forward-button-tooltip):not([shadow-support])
-.tooltip-label:last-of-type:not([id]) {
+    .tooltip-label:last-of-type:not([id]) {
     padding: 0 8px 8px 8px !important;
     margin-block-start: -19.5px !important;
 }
@@ -426,6 +426,7 @@ checkbox .checkbox-check {
 }
 
 toolbarbutton:focus-visible,
+.popup-notification-button:focus-visible,
 .keyboard-focused-tab > .tab-stack > .tab-background,
 .tabbrowser-tab:focus:not([aria-activedescendant]) > .tab-stack > .tab-background,
 .identity-box-button:not(:active):focus-visible,
@@ -476,7 +477,6 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
         .panel-header,
         .popup-notification-description,
         #sidebar-header,
-        .identity-popup-security-connection,
         #PanelUI-whatsNew,
         #protections-popup-message,
         #protections-popup-no-trackers-found-description {

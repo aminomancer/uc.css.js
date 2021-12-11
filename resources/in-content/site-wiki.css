@@ -1224,11 +1224,14 @@ You can use greasemonkey or any other form of monkey that supports the document-
 
     #bodyContent blockquote,
     #bodyContent .flexquote {
-        padding: 6px 16px !important;
+        padding: 12px 22px !important;
         background-color: var(--uc-wiki-box-bg) !important;
         border: none !important;
         border-left: 3px double hsl(0, 1%, 24%) !important;
         border-radius: 0 3px 3px 0 !important;
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 8px;
     }
 
     #bodyContent pre {
@@ -1237,12 +1240,16 @@ You can use greasemonkey or any other form of monkey that supports the document-
         border-radius: 3px !important;
     }
 
-    .mw-body-content blockquote blockquote {
+    #bodyContent :is(blockquote blockquote, blockquote .quotebox) {
         border: none !important;
         background: none !important;
+        box-shadow: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
     }
 
-    .quotebox blockquote {
+    .quotebox blockquote,
+    blockquote .quotebox {
         border: none !important;
         background: none !important;
         padding: 0 !important;

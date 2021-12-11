@@ -185,9 +185,10 @@ panel[type="arrow"][side="right"] {
 
 #PopupSearchAutoComplete::part(content) {
     border: var(--searchbar-popup-border);
+    border-top-width: 0;
     border-radius: var(--searchbar-popup-border-radius);
     box-shadow: var(--searchbar-popup-box-shadow);
-    width: calc(var(--panel-width) + 8px);
+    width: calc(var(--panel-width) + 10px);
 }
 
 /* panel width */
@@ -1329,12 +1330,16 @@ toolbar[brighttext] #panic-button[open] {
 }
 
 .subviewbutton-back {
-    margin: 0 0 0 var(--arrowpanel-menuitem-inline-margin);
+    margin: var(--arrowpanel-menuitem-margin);
 }
 
 .panel-header > .subviewbutton-back {
     list-style-image: url(chrome://userchrome/content/menu-arrow-left.svg);
     padding: var(--toolbarbutton-inner-padding, 8px);
+}
+
+.panel-header > .subviewbutton-back + h1 {
+    margin-inline: 4px 40px;
 }
 
 .notification-anchor-icon {

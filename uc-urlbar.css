@@ -120,7 +120,7 @@ toolbarpaletteitem[place="palette"] > #search-container {
     padding: 0 var(--searchbar-popup-box-shadow-size, 15px)
         var(--searchbar-popup-box-shadow-size, 15px);
     margin: calc((var(--urlbar-container-height) - var(--urlbar-height)) / 2)
-        calc(-4px - var(--searchbar-popup-box-shadow-size, 15px))
+        calc(-5px - var(--searchbar-popup-box-shadow-size, 15px))
         calc(0px - var(--searchbar-popup-box-shadow-size, 15px)) !important;
     background: none;
 }

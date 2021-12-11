@@ -135,6 +135,7 @@ menupopup {
     --menu-icon-opacity: 1 !important;
     --panel-separator-margin: 4px !important;
 
+    --panel-item-bgcolor: var(--arrowpanel-faint);
     --panel-item-hover-bgcolor: var(--arrowpanel-dimmed) !important;
     --panel-item-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
     --panelview-toolbarbutton-hover-bgcolor: var(--panel-item-hover-bgcolor) !important;

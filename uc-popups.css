@@ -1474,7 +1474,8 @@ link[href="chrome://global/content/printPagination.css"]
     }
 }
 
-@-moz-document url("chrome://browser/content/webrtcLegacyIndicator.xhtml") {
+@-moz-document url("chrome://browser/content/webrtcLegacyIndicator.xhtml")
+{
     button {
         min-width: 28px !important;
     }
@@ -1596,6 +1597,11 @@ link[href="chrome://global/content/printPagination.css"]
         background: var(--button-hover-bgcolor);
     }
 
+    button:focus-visible {
+        outline: var(--global-focus-ring) !important;
+        box-shadow: var(--global-focus-shadow) !important;
+    }
+
     button:hover:active {
         background: var(--button-active-bgcolor);
     }
@@ -1656,6 +1662,18 @@ link[href="chrome://global/content/printPagination.css"]
 /* page info popup. kinda lame */
 @-moz-document url(chrome://browser/content/pageinfo/pageInfo.xhtml)
 {
+    :root {
+        --focus-outline-color: var(--global-focus-outline-color) !important;
+    }
+
+    input:not([type="file"], [type="image"]):focus-visible,
+    select:focus-visible,
+    button:focus-visible,
+    textarea:focus-visible,
+    button:focus-visible {
+        outline: 2px solid var(--focus-outline-color) !important;
+    }
+
     #main-window {
         background-color: var(--arrowpanel-background) !important;
         color: var(--arrowpanel-color) !important;
