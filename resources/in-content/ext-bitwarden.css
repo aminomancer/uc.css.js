@@ -19,3 +19,57 @@
         }
     }
 }
+
+@-moz-document url-prefix("moz-extension://c1ea5f85-7682-4d41-86cf-4946657a717e/notification/bar.html")
+{
+    body {
+        background: var(--in-content-box-background) !important;
+        color: var(--plaintext-color) !important;
+    }
+
+    .outer-wrapper {
+        border-color: var(--in-content-border-color-dim) !important;
+    }
+
+    button.link,
+    button.neutral {
+        color: var(--in-content-link-color) !important;
+    }
+
+    button:not(.neutral, .link) {
+        background-color: var(--in-content-primary-button-background) !important;
+    }
+
+    button:not(.neutral, .link):hover {
+        background-color: var(--in-content-primary-button-background-hover) !important;
+    }
+
+    button:not(.neutral, .link):hover:active {
+        background-color: var(--in-content-primary-button-background-active) !important;
+    }
+
+    #close-button {
+        padding: 5px !important;
+        float: right !important;
+        fill-opacity: 0.6;
+    }
+
+    #close-button #close {
+        display: none !important;
+    }
+
+    #close-button::before {
+        content: "";
+        background: url(chrome://userchrome/content/close.svg) center/contain no-repeat !important;
+        width: 20px;
+        height: 20px;
+        display: block;
+        -moz-context-properties: fill, fill-opacity;
+        fill: currentColor;
+        color: var(--plaintext-color);
+    }
+
+    #close-button:hover {
+        fill-opacity: 1;
+    }
+}
