@@ -492,11 +492,6 @@ but CSS hides it faster and avoids flickering.
     ) !important;
 }
 
-#tracking-protection-icon-box
-    > :is(#tracking-protection-icon-animatable-box, #tracking-protection-icon) {
-    margin-inline-start: 0px !important;
-}
-
 toolbarpaletteitem[removable="false"]
     #tracking-protection-icon-container:is(:hover, [open="true"])
     #tracking-protection-icon-box:not([animate="true"])
@@ -532,6 +527,7 @@ toolbarpaletteitem[removable="false"]
 
 #tracking-protection-icon {
     display: -moz-box !important;
+    margin: 0px !important;
     list-style-image: url(chrome://userchrome/content/material/tracking.svg) !important;
 }
 
@@ -803,8 +799,8 @@ so you can use those classes to set the icon. */
 }
 
 #tracking-protection-icon-container {
-    margin-inline: 6px 7px !important;
-    padding-inline: 1.5px 1px !important;
+    margin-inline: 8px 1.5px !important;
+    padding-inline: 0 !important;
     border: none !important;
     background: none !important;
 }
@@ -854,14 +850,10 @@ so you can use those classes to set the icon. */
     pointer-events: none !important;
 }
 
-#identity-box:is(:not(.chromeUI), [pageproxystate="invalid"]) {
-    margin-inline-start: -8px !important;
+#identity-box:not(.chromeUI),
+#identity-box[pageproxystate="invalid"] {
+    margin-inline-start: 1.5px !important;
     padding-inline-start: 0px !important;
-}
-
-#identity-box:not(.chromeUI) #identity-icon-box {
-    margin-inline-start: 2px !important;
-    margin-inline-end: -3px !important;
 }
 
 #identity-box.unknownIdentity #identity-icon-box {
@@ -873,7 +865,7 @@ so you can use those classes to set the icon. */
 }
 
 #identity-icon-box {
-    margin-inline-end: 0 !important;
+    margin-inline: 0 !important;
     padding-inline: 0 !important;
     max-width: unset !important;
     border-radius: 0 !important;
@@ -882,7 +874,7 @@ so you can use those classes to set the icon. */
 }
 
 .identity-box-button {
-    padding-inline: unset !important;
+    padding-inline: 0 !important;
 }
 
 #identity-box,
@@ -979,28 +971,19 @@ so you can use those classes to set the icon. */
 
 #urlbar
     #identity-box
-    :is(.sharing-icon, .notification-anchor-icon, #permissions-granted-icon, .blocked-permission-icon) {
+    :is(.sharing-icon, .notification-anchor-icon, .blocked-permission-icon) {
     margin-inline-start: 5px !important;
-}
-
-#tracking-protection-icon {
-    margin-inline-start: 6px !important;
-}
-
-#identity-permission-box {
-    margin-inline: 2px -2px !important;
 }
 
 #permissions-granted-icon {
     list-style-image: url(chrome://userchrome/content/formfill.svg) !important;
     margin-top: 1px;
+    margin-inline: 6px 1px !important;
 }
 
 #notification-popup-box {
-    padding-inline: 0 !important;
-    padding-block: 0 !important;
-    margin-block: 0 !important;
-    margin-inline: 2px -2px !important;
+    margin: 0 !important;
+    padding: 0 !important;
     background: none !important;
 }
 
@@ -1199,7 +1182,7 @@ use 0.6 instead of 1 since 1 will end up being shown as like 1.4px for some wind
     font-size: inherit !important;
     min-width: 16px !important;
     height: var(--urlbar-height) !important;
-    padding-inline: 28px 8px !important;
+    padding-inline: 30px 8px !important;
     border: none !important;
     border-right: 1px solid var(--desaturate-dimmed) !important;
     pointer-events: auto !important;
@@ -1249,6 +1232,7 @@ use 0.6 instead of 1 since 1 will end up being shown as like 1.4px for some wind
 }
 
 #identity-icon-label {
+    padding-inline-start: 6px !important;
     color: var(--lwt-toolbar-field-color, black) !important;
     opacity: var(--identity-box-label-opacity) !important;
     font-weight: var(--urlbar-base-font-weight, 400);

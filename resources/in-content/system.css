@@ -447,6 +447,10 @@
         fill: currentColor !important;
     }
 
+    #handlersView {
+        word-wrap: anywhere;
+    }
+
     @-moz-document regexp("^about:blocked.*") {
         html:root,
         html:root * {

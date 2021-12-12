@@ -787,6 +787,7 @@ link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infob
 {
     border-radius: var(--in-content-button-border-radius) !important;
     font-weight: inherit !important;
+    padding-block: 0 !important;
 }
 
 link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-content .notification-button-container > .notification-button.small
