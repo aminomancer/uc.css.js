@@ -60,6 +60,10 @@ which requires Stylus. don't use this stylesheet if you don't have that theme, i
     .container-xl {
         max-width: 75% !important;
     }
+
+    virtual-list#tree-finder-results {
+        overflow-y: auto !important;
+    }
 }
 
 /* fix a bug on github1s.com */
