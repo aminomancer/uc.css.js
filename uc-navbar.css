@@ -557,7 +557,7 @@ toolbarbutton.bookmark-item:not(.subviewbutton) {
 /* proton stuff, primarily notifications. imo this is about as sexy as a "your plugin crashed" notification can get.
 you can test them by pasting this in the browser console and hitting enter:
 
-{let notificationTest = gBrowser.getNotificationBox(gBrowser.selectedBrowser); notificationTest.appendNotification("This is a demo notification", null, null, notificationTest.PRIORITY_INFO_HIGH);}
+{let notificationTest=gBrowser.getNotificationBox(gBrowser.selectedBrowser);notificationTest.appendNotification(null,{label:"This is a demo notification",priority:notificationTest.PRIORITY_INFO_HIGH},[{label:"Button 1"},{label:"Link 1",supportPage:"https://github.com/aminomancer/uc.css.js"}])}
 
 these are the notifications that appear permanently (until closed) under the navbar, shaped like long bars.
 by default they stack vertically and push the browser content down which is quite a waste.
@@ -645,7 +645,8 @@ notifications are translucent with acrylic effect. enable layout.css.backdrop-fi
     flex-basis: auto !important;
 }
 
-:root {
+/* temporarily disabled due to backdrop-filter being disabled. see https://bugzilla.mozilla.org/show_bug.cgi?id=1741779 */
+/* :root {
     --notification-box-bgcolor: var(--acrylic-blue) !important;
     --notification-box-bgimage: var(--acrylic-texture) !important;
     --notification-box-filter: var(--acrylic-blur) !important;
@@ -653,6 +654,12 @@ notifications are translucent with acrylic effect. enable layout.css.backdrop-fi
 
 :root[inFullscreen] {
     --notification-box-bgcolor: var(--arrowpanel-background) !important;
+    --notification-box-filter: none !important;
+} */
+
+:root {
+    --notification-box-bgcolor: var(--arrowpanel-background) !important;
+    --notification-box-bgimage: none !important;
     --notification-box-filter: none !important;
 }
 

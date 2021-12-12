@@ -25,6 +25,10 @@ tooltip {
     margin-inline-start: -5px !important;
     margin-block-start: 16px !important;
     pointer-events: none !important;
+}
+
+tooltip,
+#statuspanel {
     --uc-tooltip-inner-padding: 4px 7px 6px 7px;
 }
 
@@ -267,14 +271,19 @@ progress[paused]:indeterminate::-moz-progress-bar {
 }
 
 #statuspanel {
-    margin-top: calc(0px - var(--menuitem-height)) !important;
+    /* temporarily disabled due to backdrop-filter being disabled. see https://bugzilla.mozilla.org/show_bug.cgi?id=1741779 */
+    /* color: var(--ui-text-80) !important;
     background-color: var(--acrylic-blue) !important;
     background-image: var(--acrylic-texture) !important;
-    backdrop-filter: var(--acrylic-blur) !important;
+    backdrop-filter: var(--acrylic-blur) !important; */
+
     border: 1px none var(--tooltip-border-color) !important;
     border-top-style: solid !important;
     box-shadow: var(--tooltip-box-shadow) !important;
-    color: var(--ui-text-80) !important;
+    margin-top: calc(0px - var(--menuitem-height)) !important;
+
+    background-color: var(--tooltip-bgcolor) !important;
+    color: var(--tooltip-color) !important;
 }
 
 :root[inDOMFullscreen] #statuspanel {
@@ -295,27 +304,27 @@ progress[paused]:indeterminate::-moz-progress-bar {
     color: inherit !important;
     box-shadow: none !important;
     opacity: revert !important;
-    padding: 0 8px !important;
-    margin: 0 0 1px !important;
+    padding: var(--uc-tooltip-inner-padding, 4px 7px 6px 7px) !important;
+    margin: 0 !important;
     border: none !important;
 }
 
 #statuspanel:not([mirror]):-moz-locale-dir(ltr),
 #statuspanel[mirror]:-moz-locale-dir(rtl) {
     border-top-left-radius: 0 !important;
-    border-top-right-radius: var(--general-button-border-radius) !important;
+    border-top-right-radius: var(--tooltip-border-radius) !important;
     border-right-style: solid !important;
 }
 
 #statuspanel:not([mirror]):-moz-locale-dir(rtl),
 #statuspanel[mirror]:-moz-locale-dir(ltr) {
-    border-top-left-radius: var(--general-button-border-radius) !important;
+    border-top-left-radius: var(--tooltip-border-radius) !important;
     border-top-right-radius: 0 !important;
     border-left-style: solid !important;
 }
 
 #statuspanel-inner {
-    height: var(--menuitem-height) !important;
+    height: revert !important;
     width: auto !important;
     min-width: unset !important;
     max-width: unset !important;
@@ -493,7 +502,8 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
             font-weight: var(--uc-font-weight-bold, 500) !important;
         }
 
-        tooltip {
+        tooltip,
+        #statuspanel {
             --uc-tooltip-inner-padding: 5px 8px 6px 8px;
         }
 

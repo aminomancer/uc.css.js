@@ -234,14 +234,34 @@
     }
 
     body:not(.inline-onboarding) .fixed-search .search-wrapper {
-        background-image: linear-gradient(
+        /* temporarily disabled due to backdrop-filter being disabled. see https://bugzilla.mozilla.org/show_bug.cgi?id=1741779 */
+
+        /* background-image: linear-gradient(
             180deg,
             var(--in-content-page-background) 0%,
             var(--newtab-search-header-background-intermediate) 50%,
             var(--newtab-search-header-background-color) 100%
         ) !important;
         background-color: transparent !important;
-        backdrop-filter: blur(12px);
+        backdrop-filter: blur(12px); */
+
+        background-image: linear-gradient(
+            180deg,
+            var(--in-content-page-background) 0%,
+            color-mix(
+                    in srgb,
+                    var(--content-principal-page-background) 80%,
+                    var(--in-content-page-background)
+                )
+                50%,
+            color-mix(
+                    in srgb,
+                    var(--content-principal-page-background) 70%,
+                    var(--in-content-page-background)
+                )
+                100%
+        ) !important;
+        background-color: transparent !important;
     }
 
     body:not(.inline-onboarding) .fixed-search.newtab-experience .search-handoff-button {

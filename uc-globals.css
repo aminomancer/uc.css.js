@@ -66,7 +66,7 @@ tooltip {
     --menupopup-inner-box-margin: 0px;
     --menupopup-shadow: none;
     --panel-shadow: none;
-    --searchbar-popup-border: 1px solid var(--arrowpanel-border-color);
+    --searchbar-popup-border: 1px solid var(--uc-menu-border-color);
     --searchbar-popup-border-radius: 0 0 4px 4px;
     --searchbar-popup-box-shadow: 0 0 10px 3px hsla(0, 0%, 0%, 0.15);
     --searchbar-popup-box-shadow-size: 15px; /* if you increase the blur or spread values in the variable above, increase this variable commensurately */
@@ -95,6 +95,7 @@ tooltip {
     --menupopup-border-radius: 5px;
     --panel-border-radius-mini: 3px;
     --context-menuitem-border-radius: 2.6px;
+    --general-button-border-radius: 2.6px;
     --menu-right-bg: none;
     --menu-right-img: url(chrome://userchrome/content/menu-arrow.svg);
     --menu-right-margin: 4px;
@@ -111,6 +112,7 @@ tooltip {
     --autocomplete-background: var(--popup-on-popup-contrast-bg);
     --ui-secondary-bg: hsl(234, 39%, 10%);
     --ui-tertiary-bg: hsl(233, 39%, 8.5%);
+    --ui-quaternary-bg: hsl(233, 34%, 8.5%);
     --tooltip-bgcolor: hsl(233, 36%, 11%);
     --tooltip-color: white;
     --tooltip-border-radius: 2px;
@@ -122,17 +124,14 @@ tooltip {
     --global-focus-shadow: 0 0 0 3px var(--global-focus-shadow-color),
         0 0 0 1px var(--global-focus-outline-color);
 
-    --statuspanel-color: hsla(0, 0%, 100%, 0.85);
-    --noise-texture: url(chrome://userchrome/content/texture/lightnoise.png);
-    --acrylic-blur: blur(15px);
-    --acrylic-texture: url(chrome://userchrome/content/texture/lightnoise.png);
-    --acrylic-blue: hsla(233.3, 39.1%, 9%, 0.58);
-    --blur-bgcolor: var(--acrylic-blue);
     --transparent-img-background: center/16px repeat hsla(0, 0%, 80%)
         url(chrome://userchrome/content/checker.svg);
     --transparent-img-background-context: center/16px repeat
         url(chrome://userchrome/content/checker-context.svg);
-    --general-button-border-radius: 2.6px;
+
+    --acrylic-blur: blur(15px);
+    --acrylic-texture: url(chrome://userchrome/content/texture/lightnoise.png);
+    --acrylic-blue: hsla(233.3, 39.1%, 9%, 0.58);
     --dialog-bgcolor: hsla(240, 5.9%, 6.7%, 0.85);
     --dialog-box-bgcolor: hsla(232, 100%, 75%, 8%);
     --dialog-box-bgcolor-dim: hsla(240, 100%, 70%, 3%);

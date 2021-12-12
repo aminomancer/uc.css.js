@@ -67,10 +67,16 @@ tabmodalprompt {
 }
 
 .tabmodalprompt-mainContainer {
-    background-color: var(--dialog-bgcolor) !important;
+    /* temporarily disabled due to backdrop-filter being disabled. see https://bugzilla.mozilla.org/show_bug.cgi?id=1741779 */
+
+    /* background-color: var(--dialog-bgcolor) !important;
     background-image: var(--acrylic-texture) !important;
     backdrop-filter: var(--acrylic-blur) !important;
-    border-color: var(--blurred-dialog-border-color) !important;
+    border-color: var(--blurred-dialog-border-color) !important; */
+
+    background-color: var(--ui-quaternary-bg) !important;
+    border-color: var(--uc-menu-border-color) !important;
+
     color: var(--in-parent-page-color) !important;
     box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.25), 0px 0px 5px -1px rgba(0, 0, 0, 0.125) !important;
 }
@@ -603,10 +609,17 @@ panel[type="autocomplete-richlistbox"]
     color: #fafafa;
     padding: 24px 16px;
     font: message-box;
-    background-color: var(--dialog-bgcolor) !important;
+
+    /* temporarily disabled due to backdrop-filter being disabled. see https://bugzilla.mozilla.org/show_bug.cgi?id=1741779 */
+
+    /* background-color: var(--dialog-bgcolor) !important;
     background-image: var(--acrylic-texture) !important;
     backdrop-filter: var(--acrylic-blur) !important;
-    border: 1px solid var(--blurred-dialog-border-color) !important;
+    border: 1px solid var(--blurred-dialog-border-color) !important; */
+
+    background-color: var(--ui-tertiary-bg) !important;
+    border: 1px solid var(--uc-menu-border-color) !important;
+
     color: var(--arrowpanel-color) !important;
     box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.25), 0px 0px 5px -1px rgba(0, 0, 0, 0.125) !important;
     transition-property: transform, opacity !important;
@@ -682,10 +695,15 @@ panel[type="autocomplete-richlistbox"]
 
 /* blur backdrop filter */
 .content-prompt-dialog > .dialogOverlay[style] .dialogFrame {
-    background-color: var(--dialog-bgcolor) !important;
+    /* temporarily disabled due to backdrop-filter being disabled. see https://bugzilla.mozilla.org/show_bug.cgi?id=1741779 */
+
+    /* background-color: var(--dialog-bgcolor) !important;
     background-image: var(--acrylic-texture) !important;
     backdrop-filter: var(--acrylic-blur) !important;
-    border: 1px solid var(--blurred-dialog-border-color);
+    border: 1px solid var(--blurred-dialog-border-color); */
+
+    background-color: var(--ui-quaternary-bg) !important;
+    border: 1px solid var(--arrowpanel-border-color);
 }
 
 /* hide the background overlay */
@@ -708,7 +726,7 @@ panel[type="autocomplete-richlistbox"]
 }
 
 :is(#window-modal-dialog, .tab-prompt-dialog) > .dialogOverlay[style] .dialogFrame {
-    background-color: var(--ui-tertiary-bg) !important;
+    background-color: var(--ui-quaternary-bg) !important;
     border: 1px solid var(--arrowpanel-border-color);
 }
 
