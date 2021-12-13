@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Misc. Mods
-// @version        1.8.5
+// @version        1.8.6
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Various tiny mods not worth making separate scripts for. Read the comments inside the script for details.
@@ -212,13 +212,10 @@
                     id: "editBookmarkPanel_persistLastLocation",
                     label: "Remember last location",
                     accesskey: "R",
-                    tooltip:
+                    tooltiptext:
                         "Update the default bookmark folder when you change it. If unchecked, the last folder chosen when this was checked will be the default folder.",
                     oncommand: `Services.prefs.setBoolPref("userChrome.bookmarks.editDialog.persistLastLocation", this.checked)`,
-                    checked: Services.prefs.getBoolPref(
-                        "userChrome.bookmarks.editDialog.persistLastLocation",
-                        true
-                    ),
+                    checked: false,
                 })
             );
             panel.addEventListener("popupshowing", (e) => {
@@ -236,13 +233,7 @@
                         .replace(/^async \_storeRecentlyUsedFolder/, "")
                         .replace(
                             /if \(didChangeFolder\)/,
-                            `if (
-                                didChangeFolder &&
-                                Services.prefs.getBoolPref(
-                                    "userChrome.bookmarks.editDialog.persistLastLocation",
-                                    true
-                                )
-                            )`
+                            `if (didChangeFolder && Services.prefs.getBoolPref("userChrome.bookmarks.editDialog.persistLastLocation", true))`
                         )
             );
         }
