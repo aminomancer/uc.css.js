@@ -92,7 +92,7 @@ I also recommend setting the following prefs in `about:config`. There are two pr
 | full-screen-api.transition-duration.leave | String | `0 0` | |
 | full-screen-api.warning.delay | Number | -1 | Remove the warning when switching to/from fullscreen |
 | full-screen-api.warning.timeout | Number | 0 | |
-| gfx.color\_management.mode | Number | 0 | Disable [color management](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/browserSettings/colorManagement). Use a [color calibrator](https://spyderx.datacolor.com/shop-products/display-calibration/) for best results. |
+| gfx.color\_management.mode | Number | 0 | Disable [color management](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/browserSettings/colorManagement). Use a [color calibrator](https://spyderx.datacolor.com/shop-products/display-calibration) for best results. |
 | gfx.font\_rendering.cleartype\_params.cleartype\_level | Number | 100 | These settings are a major improvement to text rendering on Windows imo. They shouldn't do anything on Mac/Linux |
 | gfx.font\_rendering.cleartype\_params.force\_gdi\_classic\_for\_families | String | `<empty>` | Leave the value completely empty |
 | gfx.font\_rendering.cleartype\_params.force\_gdi\_classic\_max\_size | Number | 6 | |
@@ -189,7 +189,7 @@ The `userContent.css` file handles stuff like the devtools, some UI pages and co
 
 So `userContent.css` isn't strictly required for the rest of the theme to work, but without it you'll find some elements look inconsistent with the theme, and it also takes care of some issues that make the fabled global dark mode harder to realize. If you already have a `userContent` file, I'd suggest changing its name to `custom-content.css` and placing it in the [resources/in-content](/resources/in-content) folder. The theme doesn't include this file, since it's purely intended for end-user modifications, but it automatically loads the file if it exists. It loads last and therefore wins any conflicts of equal priority & specificity. You can also delete any of the [content stylesheets](/resources/in-content) you don't want to use, or remove their `@import` rules from userContent.css.
 
-I've bundled some of my addons in this repo as well. They are in the [extensions](extensions) folder. My custom new tab page is signed (it's a modded fork of [Tab Notes](https://addons.mozilla.org/firefox/addon/tab-notes) by wildsky) but you will still need to "install addon from file" in `about:addons` since you're not downloading the extension package from a Mozilla domain. There are a few search engine addons in the [extensions/search-extensions](extensions/search-extensions) folder. These simply add one-off search engines for Google Images, Amazon, and Wikipedia, and include search suggestions/autocomplete. Firefox already comes with Amazon and Wikipedia addons, but they have ugly icons and unnecessarily long labels. Mine are simply called Amazon and Wikipedia, and have icons that match the theme. Some of Firefox's built-in search engines also lack search suggestions. The [YouTube search engine](https://addons.mozilla.org/firefox/addon/youtube-opensearch-engine) and [Google Translate search engine](https://addons.mozilla.org/firefox/addon/google-translate-engine) can be downloaded on AMO but there are signed .xpi versions hosted here too.
+I've bundled some of my addons in this repo as well. They are in the [extensions](extensions) folder. My custom new tab page is signed (it's a modded fork of [Tab Notes](https://addons.mozilla.org/firefox/addon/tab-notes) by wildsky) but you will still need to "install addon from file" in `about:addons` since you're not downloading the extension package from a Mozilla domain. There are a few search engine addons in the [extensions/search-extensions](extensions/search-extensions) folder. These simply add one-off search engines for Google Images, Amazon, and Wikipedia, and include search suggestions/autocomplete. Firefox already comes with Amazon and Wikipedia addons, but they have ugly icons and unnecessarily long labels. Mine are simply called Amazon and Wikipedia, and have icons that match the theme. Some of Firefox's built-in search engines also lack search suggestions. Some are signed and hosted on AMO, but others remain unsigned due to [an AMO bug](https://github.com/mozilla/addons-linter/issues/3911). You can download the following from AMO: [YouTube](https://addons.mozilla.org/firefox/addon/youtube-opensearch-engine); [Google Translate](https://addons.mozilla.org/firefox/addon/google-translate-engine); [Bugzilla](https://addons.mozilla.org/en-US/firefox/addon/bugzilla-engine); [MDN Web Docs](https://addons.mozilla.org/en-US/firefox/addon/mdn-engine).
 
 #### **Fonts:**
 
@@ -207,7 +207,7 @@ Normally in Firefox, the default search icon in the urlbar is a magnifying glass
 
 #### **Updating:**
 
-[Release packages](/../../releases/) are available as a courtesy, but since the theme and scripts are updated on a daily basis to keep up with Nightly, the latest release package may not be completely up to date. If you want the very latest stylesheets/scripts, you should either [download the repo]("/../../archive/HEAD.zip") and drag its contents to your profile's `chrome` folder, [clone the repo](https://docs.github.com/repositories/creating-and-managing-repositories/cloning-a-repository) directly to your `chrome` folder, (use [GitHub Desktop](https://desktop.github.com) if all of this sounds like gibberish to you) or download individual folders with [GitZip](https://addons.mozilla.org/firefox/addon/gitzip) or [Refined GitHub](https://addons.mozilla.org/firefox/addon/refined-github-).
+[Release packages](/../../releases/) are available as a courtesy, but since the theme and scripts are updated on a daily basis to keep up with Nightly, the latest release package may not be completely up to date. If you want the very latest stylesheets/scripts, you should either [download the source code](/../../archive/HEAD.zip) and drag its contents to your profile's `chrome` folder, [clone the repo](https://docs.github.com/repositories/creating-and-managing-repositories/cloning-a-repository) directly to your `chrome` folder, (use [GitHub Desktop](https://desktop.github.com) if all of this sounds like gibberish to you) or download individual folders with [GitZip](https://addons.mozilla.org/firefox/addon/gitzip) or [Refined GitHub](https://addons.mozilla.org/firefox/addon/refined-github-).
 
 ## **Scripts:**
 
@@ -824,7 +824,7 @@ Various tiny mods not worth making separate scripts for. Read the comments [insi
 
 [userChrome.org](https://www.userchrome.org): A site hosted by Jefferson Scher with a lot of [information](https://www.userchrome.org/what-is-userchrome-css.html), [guides](https://www.userchrome.org/how-create-userchrome-css.html), [tools](https://www.userchrome.org/firefox-89-styling-proton-ui.html), and other [resources](https://www.userchrome.org/help-with-userchrome-css.html) for modding Firefox, [setting up autoconfig](https://www.userchrome.org/what-is-userchrome-js.html), etc.
 
-[firefox-csshacks](https://github.com/MrOtherGuy/firefox-csshacks/): A huge collection of CSS snippets (big and small) and information about CSS theming, by the author of fx-autoconfig. If there's something you're trying but struggling to do with CSS, this is a good place to start.
+[firefox-csshacks](https://github.com/MrOtherGuy/firefox-csshacks): A huge collection of CSS snippets (big and small) and information about CSS theming, by the author of fx-autoconfig. If there's something you're trying but struggling to do with CSS, this is a good place to start.
 
 [Alice0775 scripts](https://github.com/alice0775/userChrome.js): Another repo full of Firefox scripts. Most of these should be compatible with fx-autoconfig. There's another autoconfig loader on this repo, but some of my scripts require fx-autoconfig specifically.
 
@@ -834,9 +834,9 @@ Various tiny mods not worth making separate scripts for. Read the comments [insi
 
 [mozlz4-edit](https://addons.mozilla.org/firefox/addon/mozlz4-edit): An addon that can read, edit, and save .lz4/.mozlz4 files. Mozilla uses the LZ4 algorithm to compress all sorts of things from caches to databases, but in particular your one-off search engines. The addon above should be sufficient for most people, but if you need to make changes to a search engine you already created and don't want to redo it (or forgot how) this will let you. Just open the search.json.mozlz4 file in your profile folder.
 
-[Violentmonkey](https://addons.mozilla.org/firefox/addon/violentmonkey/): An addon for running JavaScript in browser tabs. If you need to modify a particular website, this is the best way. This is overall the best GreaseMonkey-like addon for Firefox, in my opinion.
+[Violentmonkey](https://addons.mozilla.org/firefox/addon/violentmonkey): An addon for running JavaScript in browser tabs. If you need to modify a particular website, this is the best way. This is overall the best GreaseMonkey-like addon for Firefox, in my opinion.
 
-[SVG Gobbler](https://www.svggobbler.com/): A new browser extension that can locate and retrieve all the SVG images/icons on a webpage. Very useful for CSS ricing, especially if you use a dark theme since you'll often need to turn dark icons into light icons. You don't strictly need this but it'll speed up the process.
+[SVG Gobbler](https://www.svggobbler.com): A new browser extension that can locate and retrieve all the SVG images/icons on a webpage. Very useful for CSS ricing, especially if you use a dark theme since you'll often need to turn dark icons into light icons. You don't strictly need this but it'll speed up the process.
 
 [Sidebar Always Loaded](https://github.com/thepante/SAL-Firefox): A very cool script that makes the sidebar more permanent and less intrusive. It's similar to my Floating Sidebar script but 100% standalone, 50% more elegant, and has ~25% more features. Compatible with [fx-autoconfig](https://github.com/MrOtherGuy/fx-autoconfig) or [Alice0775's loader](https://github.com/alice0775/userChrome.js/tree/master/72).
 
@@ -844,12 +844,12 @@ Various tiny mods not worth making separate scripts for. Read the comments [insi
 
 [Lepton](https://github.com/black7375/Firefox-UI-Fix): A Firefox theme that respects the vanilla Firefox UI "flavor" while fixing many of the biggest problems with Proton.
 
-[Adapting Firefox to Windows 10 accent colors](https://www.reddit.com/r/FirefoxCSS/comments/ocjsmr/my_almost_comprehensive_css_for_making_firefox/): A really handy guide and template on how to make Firefox's Proton UI consistent with your personalized Windows 10 color scheme.
+[Adapting Firefox to Windows 10 accent colors](https://www.reddit.com/r/FirefoxCSS/comments/ocjsmr/my_almost_comprehensive_css_for_making_firefox): A really handy guide and template on how to make Firefox's Proton UI consistent with your personalized Windows 10 color scheme.
 
 [MDN — Browser Toolbox](https://developer.mozilla.org/docs/Tools/Browser_Toolbox): The first tutorial to read if you're trying to get into modding Firefox, whether CSS or JavaScript.
 
 [MDN — CSS Cascade](https://developer.mozilla.org/docs/Web/CSS/Cascade): If your CSS background is limited to reading posts on r/FirefoxCSS and experimenting in the browser toolbox, learning some of the quirks of CSS may be very helpful. You can save a lot of trial & error time by knowing beforehand that something won't work.
 
-[JavaScript — Understanding the weird parts](https://www.udemy.com/course/understand-javascript/): A really good course if you're trying to learn JavaScript from scratch. It doesn't concern the many internal APIs/components that you'd use in Firefox scripts, like XPCOM, but you definitely want to know most of this stuff beforehand to avoid wasting a lot of time.
+[JavaScript — Understanding the weird parts](https://www.udemy.com/course/understand-javascript): A really good course if you're trying to learn JavaScript from scratch. It doesn't concern the many internal APIs/components that you'd use in Firefox scripts, like XPCOM, but you definitely want to know most of this stuff beforehand to avoid wasting a lot of time.
 
 </details>
