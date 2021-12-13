@@ -1374,6 +1374,14 @@ toolbar[brighttext] #panic-button[open] {
 
 /* INDIVIDUAL NOTIFICATIONS */
 
+#urlbar #identity-box :is(.sharing-icon, .notification-anchor-icon, .blocked-permission-icon) {
+    margin-inline-start: 5px;
+}
+
+.notification-anchor-icon#default-notification-icon {
+    list-style-image: url(chrome://userchrome/content/material/notification.svg);
+}
+
 .focus-tab-by-prompt-icon {
     list-style-image: url(chrome://userchrome/content/notifications/focus-tab-by-prompt.svg);
 }
@@ -1508,6 +1516,10 @@ toolbar[brighttext] #panic-button[open] {
 
 .screen-icon.blocked-permission-icon {
     list-style-image: url(chrome://userchrome/content/notifications/screen-blocked.svg);
+}
+
+.speaker-icon {
+    list-style-image: url(chrome://userchrome/content/audioUnmutedButton.svg);
 }
 
 .midi-icon,

@@ -969,12 +969,6 @@ so you can use those classes to set the icon. */
     height: 16px;
 }
 
-#urlbar
-    #identity-box
-    :is(.sharing-icon, .notification-anchor-icon, .blocked-permission-icon) {
-    margin-inline-start: 5px !important;
-}
-
 #permissions-granted-icon {
     list-style-image: url(chrome://userchrome/content/formfill.svg) !important;
     margin-top: 1px;
@@ -1103,16 +1097,10 @@ so you can use those classes to set the icon. */
 urlbar icons that display frequently like the tracking icon or the identity icon have a max width/height of 14px but a viewbox of 16px and are drawn to 16px.
 so they have at least 1px of virtual "padding" on every side. we could replace all the svg icons and maybe I will, but this is a lot easier.
 use 0.6 instead of 1 since 1 will end up being shown as like 1.4px for some window scaling factors.*/
-/* #blocked-permissions-container
-    :is(.screen-icon, .popup-icon, .autoplay-media-icon, .canvas-icon, .install-icon),
-#notification-popup-box
-    :is(.drm-icon, .autoplay-media-icon, .install-icon, #canvas-notification-icon, .canvas-icon, .indexedDB-icon, .screen-icon, .translation-icon, .storage-access-icon),
+#identity-box
+    :is(.desktop-notification-icon, .screen-icon, .popup-icon, .autoplay-media-icon, .canvas-icon, .install-icon, .drm-icon, .autoplay-media-icon, .install-icon, #canvas-notification-icon, .canvas-icon, .indexedDB-icon, .screen-icon, .translation-icon, .storage-access-icon, .midi-icon),
 #webrtc-sharing-icon[sharing="screen"] {
-    padding: 0.6px;
-} */
-
-.notification-anchor-icon#default-notification-icon {
-    list-style-image: url(chrome://userchrome/content/material/notification.svg) !important;
+    padding: 0.6px !important;
 }
 
 .install-icon.blocked-permission-icon,
