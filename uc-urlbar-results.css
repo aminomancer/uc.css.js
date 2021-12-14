@@ -621,36 +621,6 @@
 }
 
 .urlbarView-row:not([type="search"])
-    .urlbarView-favicon[src^="page-icon:http"][src*="://www.youtube.com/"]
-{
-    box-sizing: border-box !important;
-    background: url(chrome://userchrome/content/engines/youtube.svg) no-repeat center/contain !important;
-    width: 16px !important;
-    height: 16px !important;
-    padding-left: 16px;
-}
-
-.urlbarView-row:not([type="search"])
-    .urlbarView-favicon[src^="page-icon:http"][src*="://www.netflix.com/"]
-{
-    box-sizing: border-box !important;
-    background: url(chrome://userchrome/content/engines/netflix.svg) no-repeat center/contain !important;
-    width: 16px !important;
-    height: 16px !important;
-    padding-left: 16px;
-}
-
-.urlbarView-row:not([type="search"])
-    .urlbarView-favicon[src^="page-icon:http"][src*="://www.amazon.com/"]
-{
-    box-sizing: border-box !important;
-    background: url(chrome://userchrome/content/engines/amazon.svg) no-repeat center/contain !important;
-    width: 16px !important;
-    height: 16px !important;
-    padding-left: 16px;
-}
-
-.urlbarView-row:not([type="search"])
     .urlbarView-favicon[src^="page-icon:http"][src*="://gatherer.wizards.com/"]
 {
     box-sizing: border-box !important;

@@ -246,6 +246,7 @@ tooltip {
     --search-box-color: hsl(229, 32%, 23%);
     --search-box-focus: hsl(229, 27%, 27%);
     --search-box-null: hsl(230, 30%, 20%);
+    --search-box-focus-outline-color: var(--purple-30);
     --textbox-button-hidden: hsla(240, 100%, 89%, 0);
     --confirmation-hint-color: var(--ui-text-100);
     --confirmation-hint-bgcolor: hsl(240, 60%, 59%);

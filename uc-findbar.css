@@ -258,6 +258,10 @@ findbar .matches-indicator {
     transition: 400ms !important;
 }
 
+.findbar-textbox[status="notfound"] ~ :is(.findbar-find-previous, .findbar-find-next) {
+    -moz-user-focus: ignore !important;
+}
+
 .findbar-entire-word,
 .findbar-case-sensitive {
     -moz-context-properties: fill, fill-opacity;
@@ -289,10 +293,6 @@ findbar .matches-indicator {
     list-style-image: url(chrome://userchrome/content/material/case-sensitive.svg);
 }
 
-.findbar-case-sensitive :is(.toolbarbutton-icon, .checkbox-icon) {
-    transform: translateY(0.5px);
-}
-
 :is(.findbar-entire-word, .findbar-case-sensitive) :is(.toolbarbutton-icon, .checkbox-icon) {
     margin: 0 !important;
     background: none !important;
@@ -320,6 +320,18 @@ findbar .matches-indicator {
     ~ :is(.findbar-find-previous, .findbar-find-next, .findbar-entire-word, .findbar-case-sensitive) {
     background-color: var(--search-box-focus) !important;
     transition: 300ms !important;
+}
+
+[anonid="findbar-textbox-wrapper"] {
+    outline-style: solid !important;
+    outline-width: 0 !important;
+    outline-color: transparent !important;
+}
+
+[anonid="findbar-textbox-wrapper"]:focus-within {
+    outline: 2px solid var(--search-box-focus-outline-color, -moz-accent-color) !important;
+    outline-offset: 0 !important;
+    transition: 70ms !important;
 }
 
 .browserContainer > findbar {
