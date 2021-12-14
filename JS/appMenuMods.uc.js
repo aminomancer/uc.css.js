@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           App Menu Mods
-// @version        1.3.2
+// @version        1.3.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Makes some minor modifications to the app menu. (the popup opened by clicking the hamburger button on the far right of the navbar) It adds a restart button to the app menu (only if you're using fx-autoconfig), changes the "Add-ons and Themes" button to say "Extensions" (or whatever the equivalent is in your language, since the strings are localized automatically) and it adds a separator under the "Manage Account" button in the profile/account panel. I'll continue adding more mods to this script as I think of them.
@@ -49,8 +49,8 @@
                 id: "appMenu-restart-button2",
                 class: "subviewbutton",
                 label: await strings.formatValue(["restart-button-label"]),
-                oncommand: `let clearCache = event.shiftKey || (AppConstants.platform == "macosx" ? event.metaKey : event.ctrlKey); setTimeout(() => _ucUtils.restart(clearCache), 300); this.closest("panel").hidePopup(true); event.preventDefault();`,
-                onclick: `if (event.button === 0) return; setTimeout(() => _ucUtils.restart(true), 300); this.closest("panel").hidePopup(true); event.preventDefault();`,
+                oncommand: `if (event.shiftKey || (AppConstants.platform == "macosx" ? event.metaKey : event.ctrlKey)) Services.appinfo.invalidateCachesOnRestart(); setTimeout(() => Services.startup.quit(Ci.nsIAppStartup.eRestart | Ci.nsIAppStartup.eAttemptQuit), 300); this.closest("panel").hidePopup(true); event.preventDefault();`,
+                onclick: `if (event.button === 0) return; Services.appinfo.invalidateCachesOnRestart(); setTimeout(() => Services.startup.quit(Ci.nsIAppStartup.eRestart | Ci.nsIAppStartup.eAttemptQuit), 300); this.closest("panel").hidePopup(true); event.preventDefault();`,
             });
             let exitButton = document.getElementById("appMenu-quit-button2");
             if (exitButton) exitButton.before(restartButton);
