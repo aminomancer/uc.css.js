@@ -102,8 +102,7 @@ this connects with .panel-subview-body rules in userChrome.au.css */
     margin-inline: -20.4px !important;
 }
 
-#permission-popup[type="arrow"][side="top"],
-#permission-popup[type="arrow"][side="bottom"] {
+#permission-popup {
     margin-inline: -18px !important;
 }
 
