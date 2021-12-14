@@ -21,12 +21,13 @@
     box-shadow: none !important;
     background: none !important;
     --panel-background: var(--ctrlTab-overlay-color) !important;
-    border-radius: 10px !important; 
+    border-radius: 10px !important;
     overflow: hidden !important;
 }
 
 @supports -moz-bool-pref("userChrome.css.ctrl-tab-backdrop-overlay") {
-    :root[ctrlTab-panel-open] :is(#browser .browserContainer, #navigator-toolbox toolbar, #mainPopupSet menupopup) {
+    :root[ctrlTab-panel-open]
+        :is(#browser .browserContainer, #navigator-toolbox toolbar, #mainPopupSet menupopup) {
         filter: contrast(0.95) brightness(0.6);
     }
 }

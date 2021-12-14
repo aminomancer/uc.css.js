@@ -1433,6 +1433,10 @@ toolbar[brighttext] #panic-button[open] {
     list-style-image: url(chrome://userchrome/content/notifications/xr.svg);
 }
 
+.popup-icon.blocked-permission-icon {
+    list-style-image: url(chrome://userchrome/content/notifications/popup.svg);
+}
+
 .autoplay-media-icon {
     list-style-image: url(chrome://userchrome/content/notifications/autoplay-media.svg);
 }
