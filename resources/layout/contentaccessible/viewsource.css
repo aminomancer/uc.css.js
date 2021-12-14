@@ -17,7 +17,6 @@
 }
 *|*:root {
     font-family: Overpass Mono, -moz-fixed;
-    font-size: 12;
     background-color: white;
     color: black;
     direction: ltr;
@@ -61,7 +60,6 @@ xmp,
 pre,
 plaintext {
     font-family: Overpass Mono, -moz-fixed;
-    font-size: 12;
 }
 .highlight .start-tag {
     color: purple;

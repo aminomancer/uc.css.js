@@ -527,7 +527,7 @@ toolbarpaletteitem[removable="false"]
 
 #tracking-protection-icon {
     display: -moz-box !important;
-    margin: 0px !important;
+    margin: 0 !important;
     list-style-image: url(chrome://userchrome/content/material/tracking.svg) !important;
 }
 
@@ -719,7 +719,28 @@ so you can use those classes to set the icon. */
     padding: 0 !important;
     margin: 0 !important;
     margin-inline: 0 3px !important;
-    padding-inline: 6px 2px !important;
+    padding-inline: 6px 0 !important;
+}
+
+:root[hide-tp-icon-on-ntp]:not([customizing])
+    #urlbar:not([searchmode], [actiontype="switchtab"])
+    #tracking-protection-icon-container[hidden]
+    ~ #identity-box:not(.chromeUI)
+    #identity-icon-box,
+:root[hide-tp-icon-on-ntp]:not([customizing])
+    #urlbar:not([searchmode])[actiontype="switchtab"][actionoverride="true"]
+    #tracking-protection-icon-container[hidden]
+    ~ #identity-box:not(.chromeUI)
+    #identity-icon-box,
+:root[hide-tp-icon-on-ntp]:not([customizing])
+    #urlbar[pageproxystate="invalid"]:not([searchmode], [actiontype="switchtab"])
+    #identity-box
+    #identity-icon-box,
+:root[hide-tp-icon-on-ntp]:not([customizing])
+    #urlbar[pageproxystate="invalid"]:not([searchmode])[actiontype="switchtab"][actionoverride="true"]
+    #identity-box
+    #identity-icon-box {
+    margin-inline: 2px 0 !important;
 }
 
 :root[hide-tp-icon-on-ntp]:not([customizing])
@@ -745,27 +766,6 @@ so you can use those classes to set the icon. */
 }
 
 :root[hide-tp-icon-on-ntp]:not([customizing])
-    #urlbar:not([searchmode], [actiontype="switchtab"])
-    #tracking-protection-icon-container[hidden]
-    ~ #identity-box:not(.chromeUI, .httpsOnlyErrorPage, .certErrorPage, .unknownIdentity)
-    #identity-icon-box,
-:root[hide-tp-icon-on-ntp]:not([customizing])
-    #urlbar:not([searchmode])[actiontype="switchtab"][actionoverride="true"]
-    #tracking-protection-icon-container[hidden]
-    ~ #identity-box:not(.chromeUI, .httpsOnlyErrorPage, .certErrorPage, .unknownIdentity)
-    #identity-icon-box,
-:root[hide-tp-icon-on-ntp]:not([customizing])
-    #urlbar[pageproxystate="invalid"]:not([searchmode], [actiontype="switchtab"])
-    #identity-box:not(.httpsOnlyErrorPage, .certErrorPage, .unknownIdentity)
-    #identity-icon-box,
-:root[hide-tp-icon-on-ntp]:not([customizing])
-    #urlbar[pageproxystate="invalid"]:not([searchmode])[actiontype="switchtab"][actionoverride="true"]
-    #identity-box:not(.httpsOnlyErrorPage, .certErrorPage, .unknownIdentity)
-    #identity-icon-box {
-    margin-inline: 2px -3px !important;
-}
-
-:root[hide-tp-icon-on-ntp]:not([customizing])
     #urlbar:not([searchmode], [usertyping="true"], [focused="true"], [open="true"], :focus-within)
     #tracking-protection-icon-container[hidden]:not([view-source])
     ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage, .certErrorPage, .unknownIdentity)
@@ -786,6 +786,19 @@ so you can use those classes to set the icon. */
     ~ #notification-popup-box:not([open="true"])
     > :is(image, stack):not(:hover, :focus-visible) {
     fill-opacity: 0.4 !important;
+}
+
+:root:not([hide-tp-icon-on-ntp]) #tracking-protection-icon-container[hidden] {
+    display: -moz-box !important;
+    pointer-events: none !important;
+    -moz-user-focus: ignore !important;
+    fill-opacity: 0.3 !important;
+}
+
+:root:not([hide-tp-icon-on-ntp])
+    #tracking-protection-icon-container[hidden]
+    #tracking-protection-icon {
+	list-style-image: url(chrome://userchrome/content/material/tracking-disabled.svg) !important;
 }
 
 #identity-box.notSecureText #identity-icon-label {
@@ -845,19 +858,10 @@ so you can use those classes to set the icon. */
     visibility: visible !important;
 }
 
-:root:not([hide-tp-icon-on-ntp]) #tracking-protection-icon-container[hidden] {
-    display: -moz-box !important;
-    pointer-events: none !important;
-}
-
 #identity-box:not(.chromeUI),
 #identity-box[pageproxystate="invalid"] {
     margin-inline-start: 1.5px !important;
     padding-inline-start: 0px !important;
-}
-
-#identity-box.unknownIdentity #identity-icon-box {
-    margin-inline-end: -3px !important;
 }
 
 #identity-box {
@@ -950,12 +954,6 @@ so you can use those classes to set the icon. */
 
 :root[customizing] #tracking-protection-icon-container {
     display: -moz-box !important;
-}
-
-#identity-box.extensionPage #identity-icon-box,
-#urlbar[pageproxystate="invalid"] #identity-box #identity-icon-box {
-    margin-inline-start: 2px !important;
-    margin-inline-end: -3px !important;
 }
 
 #urlbar[pageproxystate="valid"] #tracking-protection-icon-container.chromeUI,

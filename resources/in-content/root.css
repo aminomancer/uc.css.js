@@ -47,14 +47,12 @@
 
     :root {
         font-family: Overpass Mono, -moz-fixed;
-        font-size: 12;
     }
 
     xmp,
     pre,
     plaintext {
         font-family: Overpass Mono, -moz-fixed;
-        font-size: 12;
     }
 
     img.transparent {

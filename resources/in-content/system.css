@@ -18,14 +18,12 @@
 
     :root {
         font-family: Overpass Mono, -moz-fixed;
-        font-size: 12;
     }
 
     xmp,
     pre,
     plaintext {
         font-family: Overpass Mono, -moz-fixed;
-        font-size: 12;
     }
 
     @media (prefers-color-scheme: dark) {
@@ -53,54 +51,54 @@
             background-color: var(--content-selection-bgcolor-disabled) !important;
         }
 
-        .attribute-name {
+        .highlight .attribute-name {
             color: lightskyblue !important;
         }
 
-        .attribute-name::selection {
+        .highlight .attribute-name::selection {
             color: darkcyan !important;
         }
 
-        .attribute-value {
+        .highlight .attribute-value {
             color: lightgreen !important;
         }
 
-        .attribute-value::selection {
+        .highlight .attribute-value::selection {
             color: darkgreen !important;
         }
 
-        .start-tag {
+        .highlight .start-tag {
             color: tan !important;
         }
 
-        .start-tag::selection {
+        .highlight .start-tag::selection {
             color: darkgoldenrod !important;
         }
 
-        .end-tag {
+        .highlight .end-tag {
             color: indianred !important;
         }
 
-        .end-tag::selection {
+        .highlight .end-tag::selection {
             color: sienna !important;
         }
 
-        .error {
+        .highlight .error {
             color: white !important;
             background-color: rgba(178, 34, 34, 0.5) !important;
         }
 
-        .error::selection,
-        .error > *::selection {
+        .highlight .error::selection,
+        .highlight .error > *::selection {
             color: firebrick !important;
             background-color: var(--content-selection-bgcolor) !important;
         }
 
-        .entity {
+        .highlight .entity {
             color: mediumorchid !important;
         }
 
-        .entity::selection {
+        .highlight .entity::selection {
             color: darkorchid !important;
         }
     }
