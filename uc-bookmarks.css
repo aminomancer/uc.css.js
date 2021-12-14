@@ -10,8 +10,6 @@
     background-color: var(--ui-textbox-focus-bgcolor) !important;
 }
 
-#main-window #editBMPanel_tagsField,
-#main-window #editBMPanel_namePicker,
 #editBookmarkPanel input {
     appearance: none !important;
     -moz-user-select: text !important;
@@ -51,6 +49,11 @@
 #editBookmarkPanelRows > vbox {
     margin-block: 0 !important;
     padding-block: 8px 0 !important;
+}
+
+#editBookmarkPanel :focus-visible,
+#editBookmarkPanel checkbox:focus-visible > .checkbox-check {
+    outline: none !important;
 }
 
 #editBookmarkPanel menulist {
@@ -122,8 +125,7 @@
     height: var(--tree-row-height, 24px);
 }
 
-#editBookmarkPanel treechildren::-moz-tree-row(hover),
-#editBookmarkPanel treechildren::-moz-tree-cell(hover) {
+#editBookmarkPanel treechildren::-moz-tree-row(hover) {
     appearance: none !important;
     background-color: var(--ebmp-hover-bgcolor) !important;
     line-height: normal;
@@ -131,8 +133,7 @@
     border: none !important;
 }
 
-#editBookmarkPanel treechildren::-moz-tree-row(selected),
-#editBookmarkPanel treechildren::-moz-tree-cell(selected) {
+#editBookmarkPanel treechildren::-moz-tree-row(selected) {
     appearance: none !important;
     background-color: var(--ebmp-focus-bgcolor) !important;
     line-height: normal;
@@ -141,8 +142,11 @@
     outline: none !important;
 }
 
-#editBookmarkPanel treechildren::-moz-tree-row(selected):hover,
-#editBookmarkPanel treechildren::-moz-tree-cell(selected):hover {
+#editBookmarkPanel tree:focus-visible {
+	outline: 2px solid var(--focus-outline-color, -moz-accent-color) !important;
+}
+
+#editBookmarkPanel treechildren::-moz-tree-row(selected):hover {
     appearance: none !important;
     background-color: var(--ebmp-focus-bgcolor) !important;
     line-height: normal;
@@ -163,7 +167,7 @@
 #editBookmarkPanel treechildren::-moz-tree-image(selected),
 #editBookmarkPanel treechildren::-moz-tree-twisty(selected) {
     appearance: none !important;
-    background-color: var(--ebmp-focus-bgcolor) !important;
+    background-color: transparent !important;
     line-height: normal;
     color: var(--toolbar-color) !important;
     border: none !important;
