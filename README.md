@@ -472,6 +472,8 @@ For linting/formatting, I use [Prettier](https://prettier.io/), [ESLint](https:/
 
 ### **Script descriptions & links:**
 
+<details><summary>🏷 <b><i>A full list of all scripts, with download links and descriptions (click to expand)</i></b></summary>
+
 <p><small><super>(<i>Click a script's name to download it</i>)<br/>✨&nbsp;<i>means you definitely want to download the script if you use my theme</i></super></small></p>
 
 #### [about:cfg](/JS/aboutCfg.uc.js):
@@ -944,6 +946,8 @@ A utility script for other scripts to take advantage of. Sets up a global object
 #### [Misc. Mods](/JS/miscMods.uc.js):
 
 Various tiny mods not worth making separate scripts for. Read the comments [inside the script](/JS/miscMods.uc.js) for details.
+
+</details>
 
 ## **Thanks to my sponsors for [supporting](https://github.com/sponsors/aminomancer) this project:**
 <ul>
