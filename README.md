@@ -33,6 +33,7 @@ My personal Firefox theme/layout, plus some privileged scripts to add new behavi
 - [🎨 Theme (CSS)](#theme-css)
   - [💾 Setup](#setup)
     - [📦 Resources & manifest](#resources--manifest)
+  - [📐 Design conventions](#design-conventions)
   - [🔍 Details](#details)
     - [🆎 Fonts](#fonts)
     - [🧪 Further modification](#further-modification)
@@ -42,6 +43,7 @@ My personal Firefox theme/layout, plus some privileged scripts to add new behavi
   - [💻 Usage](#usage)
     - [✨ Special stylesheets](#special-stylesheets)
     - [🧰 Styling browser toolbox windows](#styling-browser-toolbox-windows)
+  - [📚 Script conventions](#script-conventions)
   - [🏷 Script descriptions & links](#script-descriptions--links)
 - [💝 Sponsors](#thanks-to-my-sponsors-for-supporting-this-project)
 - [🔗 Other useful links](#other-useful-links)
@@ -182,6 +184,30 @@ In particular, it replaces some icons and modifies some internal scripts and sty
 For example, menupopup scrollbuttons are contained in shadow trees within shadow trees. There is no way to select them with any kind of specificity except to use javascript to give them custom classes/attributes, _or_ to inject stylesheets into the shadow trees. I used to use the latter method but now that we use the manifest so liberally (and still judiciously) it makes more sense to modify arrowscrollbox.css with the manifest. So now we can make blanket changes to how these elements are styled without losing the ability to select attributes or classes on the shadow host.
 
 The manifest also makes it _much_ easier to change icons, and makes it possible to customize some icons that would be simply impossible to change otherwise. For example you would not be able to change the icon for an element like `<image src="chrome://global/skin/icons/icon.svg">` because `src` is not a CSS property. But with the manifest, we can change which icon actually exists at that URL. For all these reasons, the manifest has become a central part of this theme and is one of my go-to solutions for difficult problems because it's so clean.
+
+### **Design conventions:**
+
+<details><summary>📐 <b><i>The CSS theme's basic design philosophy... (click to expand)</i></b></summary>
+
+This is a standard theme, not a "high-contrast theme" or a "compact theme." I aim for compactness similar to [Firefox's Photon UI](https://design.firefox.com/photon/). I designed this theme for my own use, so the colors are oriented toward my own displays. These are color-grading monitors so the color profile is created by a [color calibrator](https://spyderx.datacolor.com/shop-products/display-calibration) based on Rec709-Rec1886. This is why I recommend setting `gfx.color\_management.mode` to `0`.
+
+The basic aim of this theme's colors can be summed up as "dark mode." I think dark gray is a little boring and overdone, so I went with dark indigo and slate colors in the UI, and dark gray in content. As everything revolves around "dark mode," any instance of a big white interface is jarring and creates a negative user experience. So the theme modifies every parent process interface and even many content interfaces to eliminate these light vestiges. It includes stylesheets for some specific websites, but by and large you're expected to use [Dark Reader](https://addons.mozilla.org/firefox/addon/darkreader) if you want consistent dark content. It also includes stylesheets for several extension pages, since Dark Reader can't style most of them.
+
+One of the biggest changes in Proton had to do with icons. Large swathes of icons were removed and many basic icons were redesigned with much thinner strokes. I don't think this was a wise change. For one, the new icon style doesn't look as good or as distinctively "Mozilla" as the previous icon style. But it has created an enormouse amount of work for Mozilla that isn't even being tackled. Even Firefox itself hasn't updated every icon to the new "thin" style. Many icons are mismatched. But if you look at virtually any other Mozilla product you'll see they're still using the old icons.
+
+On every page of [addons.mozilla.org](https://addons.mozilla.org/en-US/firefox/) you can see the old style of icons. Sometimes it's just a minor visual difference, but other times you can hardly identify the new icon with the old icon. This is especially problematic for icons like [tab.svg](/resources/skin/tab.svg) whose shapes were dramatically changed. So now all these products and webpages will need to be updated with the new icons. By the time that gets finished, Firefox will probably have already moved on to yet another new icon style.
+
+So, one of the objectives of this theme is to restore all the icons to their pre-Proton style. And it does that pretty successfully by using a [component manifest](#resources--manifest) to replace the icons just upstream of the IO level. Another objective is to add icons back to menus. I think Proton is generally an improvement over Photon, but many people would agree that Proton often looks for minimalism in the wrong places. To create clean, simple menus evocative of Google Chrome, Firefox has removed icons from virtually every menu, and in doing so, has fallen behind Microsoft Edge in visual clarity. The worst part is that Firefox extensions still add icons to these menus, creating a glaring inconsistency.
+
+I spent hundreds of hours reconstructing these [menu icons](/uc-context-menu-icons.css). I think part of the reasoning behind removing these icons was that not all of the menus had icons in the first place, and too many reused icons. They were inconsistent from the start, because apparently Mozilla doesn't have enough illustrators. So in restoring menu icons, I often had to source new icons, but Mozilla's pre-Proton icons are very distinctive. So I have designed dozens of new icons to adhere to the pre-Proton visual style. It's been a long-running effort but essentially every menu item in the main UI has icons. If any are missing, please post an [issue](/../../issues/new/choose) so I can resolve it.
+
+I said before that this is not a "compact theme," but I think my idea of "normal density" is a bit more compact than the Proton designers'. So, one of the principles is to compactify anything that is superfluously large. For example, Firefox's Findbar has always been needlessly huge, filling an arbitrarily large amount of horizontal space with emptiness, while simultaneously wasting vertical space. One of the very first things I did with this theme was to turn the Findbar into a floating panel of about 400 x 40px. It floats on top of the content rather than pushing it up or down. I turned all the buttons and checkboxes into icons. It wound up looking very much like VS Code's findbar, so I decided to use VS Code's icons for it.
+
+Proton also removed most of Firefox's UI animations. This should make Firefox more responsive on low-end hardware, so it's a fine decision. But this repo is not intended for low-end hardware, so we can get away with using lots of animations. The theme and some of the scripts restore animations that were built into Firefox prior to Proton. In other cases, they create new animations and transitions to make things feel smoother. I try to avoid what I consider excessive animations, but everyone has different tastes. By my estimate, the theme is in the middle of that spectrum.
+
+For linting/formatting, I use [Prettier](https://prettier.io/), [Stylelint](https://stylelint.io/) and [the Stylelint VS Code extension](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint), with [stylelint-config-airbnb](https://www.npmjs.com/package/stylelint-config-airbnb) for base rules and [stylelint-config-prettier](https://www.npmjs.com/package/stylelint-config-prettier) for compatibility.
+
+</details>
 
 ### **Details:**
 
@@ -330,7 +356,119 @@ get chromeDir() {return traverseToMainProfile('UChrm')},
 11. Save `boot.jsm` and exit.
 12. That's it! The scripts that are in your main profile folder should now run in browser toolbox windows, even though they're not in the `chrome_debugger_profile` folder. Make sure you download the [Browser Toolbox Stylesheet Loader](#browser-toolbox-stylesheet-loader) so stylesheets will be loaded too.
 </details>
-<br/>
+
+### **Script conventions:**
+
+<details><summary>📚 <b><i>The scripts' basic design philosophy... (click to expand)</i></b></summary>
+
+Using autoconfig places some constraints on design. We can't always write these scripts in exactly the same style that Firefox components are written, because Firefox scripts are executed in a different way. And the way the scripts are loaded encourages a procedural style. Some might prefer this from the outset for various reasons. I do use a procedural style for the shortest scripts that are least likely to change or be extended. But for the most part you'll notice a more object-oriented style in these scripts, which might seem weird. A lot of scripts have classes that are only instantiated once per script execution, for example.
+
+The main reason I use this style in spite of the subscript loader is because it makes it a lot easier to hook into the scripts from outside. My goal in doing that isn't encapsulation, it's just creating little modules that other scripts can access and modify without re-instantiating them, that can be modified or debugged from the browser console. This is why I will often define a script's class instance on a property of the global object, even though everything in the script references it with `this`.
+
+Another reason is because, at least in my opinion, the bulk of Firefox's JavaScript component code is object-oriented, not necessarily by choice but because of other constraints on component code. For example, [JSActors](https://firefox-source-docs.mozilla.org/dom/ipc/jsactors.html) _must_ use classes, by design. And custom element definitions always use classes or function factories because custom elements are object-oriented by definition.
+
+One way or another, something like half of these scripts are modifying object-oriented components, and nearly another half are creating new object-oriented components. Keeping in lockstep with Firefox's JavaScript conventions makes everything easier, from initial design to debugging and to updating. So that's why I do it even if it's not as concise and performant as a more procedural style would be.
+
+Even within a given script, I will often use object properties instead of block scoped variables even though they're only referenced in one block. This is because I may need to write another script to be compatible with it, so another script may need to access that state. I also may need to mutate it from the browser console in the process of debugging. And it doesn't work to write the script in one style for debugging, then refactor it for release. Nothing is ever final on this repo, because it's all anchored to Firefox Nightly. Firefox is updated daily, so these scripts need to be updated regularly too.
+
+Another goal is to make every script as "standalone" and "portable" as possible. I don't want to write scripts with a bunch of dependencies. So my intention is that each script is a single file and requires nothing else except Firefox and fx-autoconfig, the script loader. Some of the scripts are written primarily to extend duskFox (the CSS theme) so those scripts will obviously require the theme as well. But to get one of the scripts below to work, you shouldn't need to download other files.
+
+There are a few exceptions. [Restore pre-Proton Tab Sound Button](#restore-pre-proton-tab-sound-button) is listed as an autoconfig script, but the bulk of that mod is actually a replacement of [tabbrowser-tab.js](https://searchfox.org/mozilla-central/source/browser/base/content/tabbrowser-tab.js). As mentioned earlier, that kind of replacement can only be done through the component registrar, by using the `override` syntax in [chrome.manifest](#resources--manifest). And it also requires restoring CSS for the removed elements. So those who use duskFox will already have that replacement and the necessary CSS. The script is just for dealing with tooltips on the sound & close tab buttons. So in that sense, it's not standalone. Non-duskFox users will need to download additional files, as discussed in the script description.
+
+Some of the scripts, like [Restore pre-Proton Star Button](#restore-pre-proton-star-button), come in two versions — a duskFox version and a standalone version. The difference is simply whether the script includes the necessary CSS. duskFox already includes all the CSS for those scripts, because it's easier to read in stylesheet form. So if you want to modify it, you can. But we don't want to load a bunch of redundant CSS, so I made versions of these scripts that simply have the CSS removed. That means these versions are not standalone, but they're only intended for those who are using or plan to use duskFox.
+
+Every script is either localized or localizable. That means that some scripts will use Firefox's built-in localization systems to retrieve strings (text) from language packages. In other words, buttons, labels, tooltips, and menus added by these scripts will be automatically translated into other languages. However, Firefox only has so many translations. Sometimes I can take advantage of phrases that already exist in Firefox, but in other cases the phrases I need to use are totally novel and have no corollaries in Firefox. In those cases (see [this script](/JS/debugExtensionInToolbarContextMenu.uc.js) for example), there will be an object near the top of the script labeled `config` or `l10n` where the strings are defined. So if your Firefox installation is in a language other than English, you can translate the phrases yourself and replace them there.
+
+Initially, I tried to make these scripts compatible with as many script loaders as possible. But it dawned on me that I couldn't do that with certain scripts, and maybe shouldn't try at all. So I only design these scripts with fx-autoconfig in mind. That doesn't mean that none of them are compatible with other script loaders, but it does mean I don't know which ones are or are not, since I only test with fx-autoconfig.
+
+For linting/formatting, I use [Prettier](https://prettier.io/), [ESLint](https://eslint.org/) and [the ESLint VS Code extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint), with  [eslint-config-airbnb](https://www.npmjs.com/package/eslint-config-airbnb) for base rules and [eslint-config-prettier](https://www.npmjs.com/package/eslint-config-prettier) for compatibility.<details><summary>📋 <i><b>Here are the contents of the project's ESLint config...</b></i></summary>
+```
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": ["airbnb-base", "prettier"],
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "rules": {
+        "indent": "off",
+        "max-len": "off",
+        "quotes": [
+            "error",
+            "double",
+            {
+                "avoidEscape": true,
+                "allowTemplateLiterals": true
+            }
+        ],
+        "curly": ["error", "multi-or-nest"],
+        "camelcase": [
+            "error",
+            {
+                "properties": "never",
+                "ignoreDestructuring": false,
+                "ignoreGlobals": true
+            }
+        ],
+        "max-classes-per-file": "off",
+        "no-cond-assign": ["error", "except-parens"],
+        "no-unused-vars": [
+            "error",
+            {
+                "vars": "local",
+                "args": "after-used"
+            }
+        ],
+        "no-use-before-define": [
+            "error",
+            {
+                "functions": false,
+                "classes": false
+            }
+        ],
+        "no-fallthrough": [
+            "error",
+            {
+                "commentPattern": "break[\\s\\w]*omitted"
+            }
+        ],
+        "no-unused-expressions": [
+            "error",
+            {
+                "allowTernary": true,
+                "allowTaggedTemplates": true
+            }
+        ],
+        "default-param-last": "off",
+        "no-promise-executor-return": "off",
+        "no-param-reassign": "off",
+        "no-return-assign": "off",
+        "prefer-destructuring": "off",
+        "no-underscore-dangle": "off",
+        "no-restricted-syntax": [
+            "error",
+            {
+                "selector": "ForInStatement",
+                "message": "for..in loops iterate over the entire prototype chain, which is virtually never what you want. Use Object.{keys,values,entries}, and iterate over the resulting array."
+            },
+            {
+                "selector": "LabeledStatement",
+                "message": "Labels are a form of GOTO; using them makes code confusing and hard to maintain and understand."
+            },
+            {
+                "selector": "WithStatement",
+                "message": "`with` is disallowed in strict mode because it makes code impossible to predict and optimize."
+            }
+        ]
+    }
+}
+```
+</details>
+
+</details>
 
 ### **Script descriptions & links:**
 
@@ -350,7 +488,7 @@ Makes some minor modifications to the app menu, aka the hamburger menu. It adds 
 
 #### [All Tabs Menu Expansion Pack](/JS/allTabsMenuExpansionPack.uc.js):
 
-<details><summary>This script adds several new features to the "all tabs menu" to help it catch up to the functionality of the regular tabs bar.<i><b><br/>💬 Click here for details.</b></i></summary>
+<details><summary>This script adds several new features to the "all tabs menu" to help it catch up to the functionality of the regular tabs bar.<br/>💬 <i><b>Click here for details.</b></i></summary>
 
 1. Allows you to drag and drop tabs in the all tabs menu.
 2. Adds an animated close button for every tab in this menu.
@@ -377,7 +515,7 @@ All the relevant CSS for this script is already included in and loaded by the sc
 
 #### [Vertical Tabs Pane](/JS/verticalTabsPane.uc.js):
 
-<details><summary>This script create a vertical pane across from the sidebar that functions like the vertical tabs pane in Microsoft Edge.<i><b><br/>💬 Click here for details.</b></i></summary>
+<details><summary>This script create a vertical pane across from the sidebar that functions like the vertical tabs pane in Microsoft Edge.<br/>💬 <i><b>Click here for details.</b></i></summary>
 
 It doesn't hide the tab bar since people have different preferences on how to do that, but it sets an attribute on the root element that you can use to hide the regular tab bar while the vertical pane is open, for example `:root[vertical-tabs] #TabsToolbar...`
 
@@ -536,7 +674,7 @@ By default, private windows are opened to about:privatebrowsing, regardless of y
 
 #### [Restore pre-Proton Tab Sound Button](/JS/restoreTabSoundButton.uc.js):
 
-✨ Proton removes the tab sound button and (imo) makes the tab sound tooltip look silly. This restores both, but requires some extra steps and CSS. If you want to use my sound icon styles, see [uc-tabs.css](/uc-tabs.css#L503). This script _requires_ that you either 1) use my theme, complete with [chrome.manifest](/utils/chrome.manifest) and the [resources](/resources) folder, (in which case you'll already have all of the following files) or 2) download [this file](/resources/script-override/tabMods.uc.js) and put it in `<your profile>/chrome/resources/script-override/`, then edit the [utils/chrome.manifest](/utils/chrome.manifest) file that comes with fx-autoconfig to add the following line (at the bottom):<p>`override chrome://browser/content/tabbrowser-tab.js ../resources/tabMods.uc.js`</p><p>For those who are curious, this will override the tab markup template and some methods relevant to the sound & overlay icons. We can't use a normal script to do this because, by the time a script can change anything, browser.xhtml has already loaded tabbrowser-tab.js, the tab custom element has already been defined, and tabs have already been created with the wrong markup. This wasn't required in the past because `.tab-icon-sound` wasn't fully removed, just hidden. But as of June 06, 2021, the sound button is entirely gone in vanilla Firefox 91. So [tabMods.uc.js](/resources/script-override/tabMods.uc.js) restores the markup and class methods; [restoreTabSoundButton.uc.js](/JS/restoreTabSoundButton.uc.js) restores and improves the tooltip; and [uc-tabs.css](/uc-tabs.css#L503) rebuilds the visual appearance.</p><details><summary>If you don't use my theme, restoring the sound button will also require some CSS.<i><b><br/>💬 Click to expand...</b></i></summary>
+✨ Proton removes the tab sound button and (imo) makes the tab sound tooltip look silly. This restores both, but requires some extra steps and CSS. If you want to use my sound icon styles, see [uc-tabs.css](/uc-tabs.css#L503). This script _requires_ that you either 1) use my theme, complete with [chrome.manifest](/utils/chrome.manifest) and the [resources](/resources) folder, (in which case you'll already have all of the following files) or 2) download [this file](/resources/script-override/tabMods.uc.js) and put it in `<your profile>/chrome/resources/script-override/`, then edit the [utils/chrome.manifest](/utils/chrome.manifest) file that comes with fx-autoconfig to add the following line (at the bottom):<p>`override chrome://browser/content/tabbrowser-tab.js ../resources/tabMods.uc.js`</p><p>For those who are curious, this will override the tab markup template and some methods relevant to the sound & overlay icons. We can't use a normal script to do this because, by the time a script can change anything, browser.xhtml has already loaded tabbrowser-tab.js, the tab custom element has already been defined, and tabs have already been created with the wrong markup. This wasn't required in the past because `.tab-icon-sound` wasn't fully removed, just hidden. But as of June 06, 2021, the sound button is entirely gone in vanilla Firefox 91. So [tabMods.uc.js](/resources/script-override/tabMods.uc.js) restores the markup and class methods; [restoreTabSoundButton.uc.js](/JS/restoreTabSoundButton.uc.js) restores and improves the tooltip; and [uc-tabs.css](/uc-tabs.css#L503) rebuilds the visual appearance.</p><details><summary>If you don't use my theme, restoring the sound button will also require some CSS.<br/>📋 <i><b>Click to expand...</b></i></summary>
 
 ```
 .tab-icon-sound {
