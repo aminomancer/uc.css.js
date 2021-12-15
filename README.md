@@ -367,7 +367,8 @@ Makes some minor modifications to the app menu, aka the hamburger menu. It adds 
 8. Modifies the all tabs button's tooltip to display the number of tabs as well as the shortcut to open the all tabs menu, Ctrl+Shift+Tab.
 9. Allows the panel to display pinned tabs, and displays a pin icon on them.
 10. Makes the sound icon show if the tab has blocked media or media in picture-in-picture, just like regular tabs.
-11. And a few other subtle improvements.
+11. Adds an optional preference `userChrome.ctrlTab.skip-show-all-button` that lets you skip past the "List All x Tabs" button when hitting Ctrl+Tab.
+12. And a few other subtle improvements.
 
 All the relevant CSS for this script is already included in and loaded by the script. It's designed to look consistent with my theme as well as with the latest vanilla (proton) Firefox. If you need to change anything, see the "const css" line in here, or the end of uc-tabs-bar.css on my repo.
 
