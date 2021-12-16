@@ -1259,6 +1259,16 @@ panel[type="autocomplete-richlistbox"]
         ) !important;
     }
 
+    :root[dialogroot] details > summary {
+        border-radius: 0.01px;
+    }
+
+    :root[dialogroot] details > summary:focus-visible {
+        box-shadow: none;
+        outline: 2px solid var(--in-content-focus-outline-color);
+        outline-offset: 5px;
+    }
+
     :root[dialogroot] menulist,
     :root[dialogroot] input[type="text"] {
         margin-inline: 4px !important;
@@ -1481,7 +1491,6 @@ link[href="chrome://global/content/printPagination.css"]
 
 link[href="chrome://global/content/printPagination.css"]
     ~ .container {
-    box-shadow: 0 0 15px 0 hsla(0, 0%, 10%, 0.2) !important;
     border-radius: 3px !important;
 }
 

@@ -249,6 +249,11 @@ panel {
     --subviewbutton-height: 30px !important;
 }
 
+printpreview-pagination {
+    --shadow-30: 0 0 15px 0 hsla(0, 0%, 10%, 0.2) !important;
+    --border-active-shadow: var(--global-focus-outline-color) !important;
+}
+
 /* fluent reveal toolbar buttons */
 :root[fluent-reveal-hover] #navigator-toolbox :is(.toolbarbutton-1, .bookmark-item) {
     --toolbarbutton-hover-background: hsla(236, 82%, 83%, 0.05) !important;
