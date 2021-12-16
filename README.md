@@ -192,7 +192,7 @@ The manifest also makes it _much_ easier to change icons, and makes it possible 
 </details>
 
 ### **Design conventions:**
-<details><summary>📐 <b><i>The CSS theme's basic design philosophy... (click to expand)</i></b></summary>
+&nbsp;<details><summary>📐 <b><i>The CSS theme's basic design philosophy... (click to expand)</i></b></summary>
 
 This is a standard theme, not a "high-contrast theme" or a "compact theme." I aim for compactness similar to [Firefox's Photon UI](https://design.firefox.com/photon/). I designed this theme for my own use, so the colors are oriented toward my own displays. These are color-grading monitors so the color profile is created by a [color calibrator](https://spyderx.datacolor.com/shop-products/display-calibration) based on Rec709-Rec1886. This is why I recommend setting `gfx.color_management.mode` to `0`.
 
