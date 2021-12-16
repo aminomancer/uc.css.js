@@ -602,6 +602,8 @@ _"Inspect Extension"_ opens a devtools tab targeting the extension background. T
 
 <img src="preview/prev-debug-ext.webp" width="386"/>
 
+</details>
+
 #### [Extension Options Panel](/JS/extensionOptionsPanel.uc.js):
 
 This script creates a toolbar button that opens a popup panel where extensions can be configured, disabled, uninstalled, etc.<details><summary>💬 <i><b>More details...</b></i></summary>
