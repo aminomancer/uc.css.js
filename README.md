@@ -181,9 +181,7 @@ The theme is tightly integrated with some (though not all) of the scripts on thi
 
 #### **Resources & manifest:**
 
-If you haven't already, download the [resources](/resources) folder and place it in your `chrome` folder, along with the CSS files. fx-autoconfig will automatically register this folder to the path `chrome://userchrome/content/`. This theme also requires downloading [utils/chrome.manifest](/utils/chrome.manifest). Most of the theme will work without it, but it's crucial for certain things.
-
-<details><summary>📦 <b><i>Here's why... (click to expand)</i></b></summary>
+If you haven't already, download the [resources](/resources) folder and place it in your `chrome` folder, along with the CSS files. fx-autoconfig will automatically register this folder to the path `chrome://userchrome/content/`. This theme also requires downloading [utils/chrome.manifest](/utils/chrome.manifest). Most of the theme will work without it, but it's crucial for certain things.<details><summary>📦 <b><i>Here's why... (click to expand)</i></b></summary>
 
 In particular, it replaces some icons and modifies some internal scripts and stylesheets that would be very hard to override with either CSS or javascript. Simply replace the chrome.manifest file from fx-autoconfig with my version. This will strictly redirect some `chrome://` URIs from the vanilla files to files from this theme, so the changes will apply globally. Without this, it would be very difficult to do certain things. We use this to restore the pre-Proton tab sound icons, to change the appearance of plaintext files and other lower-level internal pages, and to change the styling for very hard-to-reach elements.
 
@@ -194,7 +192,6 @@ The manifest also makes it _much_ easier to change icons, and makes it possible 
 </details>
 
 ### **Design conventions:**
-
 <details><summary>📐 <b><i>The CSS theme's basic design philosophy... (click to expand)</i></b></summary>
 
 This is a standard theme, not a "high-contrast theme" or a "compact theme." I aim for compactness similar to [Firefox's Photon UI](https://design.firefox.com/photon/). I designed this theme for my own use, so the colors are oriented toward my own displays. These are color-grading monitors so the color profile is created by a [color calibrator](https://spyderx.datacolor.com/shop-products/display-calibration) based on Rec709-Rec1886. This is why I recommend setting `gfx.color_management.mode` to `0`.
