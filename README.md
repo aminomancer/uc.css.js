@@ -53,6 +53,8 @@ My personal Firefox theme/layout, plus some privileged scripts to add new behavi
 
 <details><summary>📌 <b><i>If you don't have much experience with modding Firefox, click to expand...</i></b></summary>
 
+<br/>
+
 Installing this theme is a bit more involved and requires more decisions than pure CSS themes. So, I'm going to explain what this is, introduce the major moving parts, and define some jargon to ensure that anyone can follow the instructions, regardless of prior experience or knowledge. More advanced users can just skip ahead to [Recommended settings](#recommended-settings).
 
 Because [theme addons](https://developer.mozilla.org/docs/Mozilla/Add-ons/WebExtensions/manifest.json/theme) are restricted to changing colors and other variables, many Firefox users continue to use other, unsupported approaches to customizing the browser. By far the most common is [userChrome customization](https://www.userchrome.org/what-is-userchrome-css.html), wherein you use [CSS files](https://developer.mozilla.org/docs/Web/CSS) to customize the browser visually. To be clear, a CSS file is called a _stylesheet_, not a script. ***For the purposes of this theme, a stylesheet is a file ending in `.css`***. However, just like theme addons are restricted by the theme API, userChrome customization is restricted by the CSS language, which only allows us to _style_ existing elements.
@@ -194,7 +196,9 @@ The manifest also makes it _much_ easier to change icons, and makes it possible 
 ### **Design conventions:**
 
 <details><summary>📐 <b><i>The CSS theme's basic design philosophy... (click to expand)</i></b></summary>
+
 <br/>
+
 This is a standard theme, not a "high-contrast theme" or a "compact theme." I aim for compactness similar to [Firefox's Photon UI](https://design.firefox.com/photon/). I designed this theme for my own use, so the colors are oriented toward my own displays. These are color-grading monitors so the color profile is created by a [color calibrator](https://spyderx.datacolor.com/shop-products/display-calibration) based on Rec709-Rec1886. This is why I recommend setting `gfx.color_management.mode` to `0`.
 
 The basic aim of this theme's colors can be summed up as "dark mode." I think dark gray is a little boring and overdone, so I went with dark indigo and slate colors in the UI, and dark gray in content. As everything revolves around "dark mode," any instance of a big white interface is jarring and creates a negative user experience. So the theme modifies every parent process interface and even many content interfaces to eliminate these light vestiges. It includes stylesheets for some specific websites, but by and large you're expected to use [Dark Reader](https://addons.mozilla.org/firefox/addon/darkreader) if you want consistent dark content. It also includes stylesheets for several extension pages, since Dark Reader can't style most of them.
@@ -218,6 +222,8 @@ For linting/formatting, I use [Prettier](https://prettier.io/), [Stylelint](http
 ### **Details:**
 
 <details><summary>🔍 <b><i>Explanation of the major files on this repo... (click to expand)</i></b></summary>
+
+<br/>
 
 The `userContent.css` file handles stuff like the devtools, some UI pages and context menus, plaintext pages, browser background color while pages are loading, and the built-in HTML video player. It also includes some reskins for specific websites and extensions, like my personal dark mode layout for Wikipedia, or [Dark Reader's](https://addons.mozilla.org/firefox/addon/darkreader) popup. The Firefox UI is increasingly integrated with content browsers, so it's not feasible to make a theme so dramatically different from vanilla Firefox without userContent.css. The big content area isn't the only browser, there are tiny ones all over the place. For example, several modal dialogs that appear to be part of the parent process are actually content.
 
