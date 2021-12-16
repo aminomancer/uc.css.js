@@ -13,7 +13,7 @@
 <a href="/../../fork" title="Make your own copy of this project" aria-label="Make your own copy of this project"><img src=".readme/fork.png" alt="Fork" height="32"></a>
 <a href="https://github.com/aminomancer" title="Follow my work" aria-label="Follow my work"><img src=".readme/follow.png" alt="Follow" height="32"></a>
 <a href="https://github.com/sponsors/aminomancer" title="Become a sponsor" aria-label="Become a sponsor"><img src=".readme/sponsor.png" alt="Sponsor" height="32"></a><br/>
-My personal Firefox theme/layout, plus some privileged scripts to add new behaviors and functions.
+A Firefox theme (duskFox) and a variety of privileged scripts to add new behaviors and functions.
 </p>
 
 <p>
@@ -41,7 +41,7 @@ My personal Firefox theme/layout, plus some privileged scripts to add new behavi
 - [📜 Scripts](#scripts)
   - [🔌 Installation](#installation)
   - [💻 Usage](#usage)
-    - [✨ Special stylesheets](#special-stylesheets)
+    - [🏆 Special stylesheets](#special-stylesheets)
     - [🧰 Styling browser toolbox windows](#styling-browser-toolbox-windows)
   - [📚 Script conventions](#script-conventions)
   - [🏷 Script descriptions & links](#script-descriptions--links)
@@ -173,7 +173,7 @@ Because most of the scripts and stylesheets here are tethered to the Nightly rel
 
 ### **Setup:**
 
-As with any CSS theme, you need to make a `chrome` folder in your profile's root directory (which can be found in `about:profiles`) and place the files from this repo into it. For user stylesheets to work you also need to enable some of the prefs described above, or download one of the [prefs files](/prefs), rename it to user.js, and place it in your profile's root directory. This will allow the basic userChrome and userContent stylesheets to take effect, but some additional steps are required beyond that.
+As with any CSS theme, to use duskFox, you need to make a `chrome` folder in your profile's root directory (which can be found in `about:profiles`) and place the files from this repo into it. For user stylesheets to work you also need to enable some of the prefs described above, or download one of the [prefs files](/prefs), rename it to user.js, and place it in your profile's root directory. This will allow the basic userChrome and userContent stylesheets to take effect, but some additional steps are required beyond that.
 
 This theme requires more technical setup than most because it changes a lot of lower-level stuff like javascript methods and icon/animation source code, but if you follow the instructions fully it'll work for anyone on any modern desktop OS, regardless of background knowledge. It requires [**fx-autoconfig**](https://github.com/MrOtherGuy/fx-autoconfig) to register the icon package and replace some of Firefox's lower-level stylesheets. Instructions for setting up fx-autoconfig are [below](#installation). To be clear, this _specific_ loader is required, unless you know how to register your own manifest from scratch.
 
@@ -312,11 +312,15 @@ Users can't disable the crash reporter at the profile level. The user.js files w
 
 #### **Special stylesheets:**
 
+The first script you need to download if you plan to use duskFox is the [Agent/Author Sheet Loader](#agentauthor-sheet-loader). This loads the special stylesheets [userChrome.ag.css](/userChrome.ag.css) and [userChrome.au.css](/userChrome.au.css), which the theme absolutely relies on.<details><summary>🏆 <b><i>If you want to know why... (click to expand)</i></b></summary>
+
 In the main directory on this repo you might notice two files: [userChrome.ag.css](/userChrome.ag.css) and [userChrome.au.css](/userChrome.au.css). The _"ag"_ is an abbreviation for user _agent_ sheet, and _"au"_ is an abbreviation for _author_ sheet. They're used for rules that would not work if we put them in `userChrome.css`. But Firefox will not load these stylesheets on its own. These are loaded by the [Agent/Author Sheet Loader](#agentauthor-sheet-loader). The script does the same general thing as two of the files included with fx-autoconfig, but if you want the stylesheets to work in the devtools, (e.g. for context menus) you need the script from my repo. And since you don't want to load duplicate stylesheets, delete the scripts included in fx-autoconfig's `JS` folder.
 
-These agent/author sheets handle some of the most common and problematic elements like tooltips, scrollbars, etc. The main purposes for using special stylesheets are 1) to use CSS syntax that is forbidden to user sheets, such as the `::part(...)` pseudo-element; 2) to style native-anonymous content like default tooltips or scrollbars; or 3) to override the vanilla style rules without needing to use the `!important` tag. In particular, we can use the author sheet to make (or revert) general rules without affecting more specific rules in the built-in stylesheets, or dealing with a bunch of style conflicts and cascading confusion.
+These agent/author sheets handle some of the most common and problematic elements like tooltips, scrollbars, etc. The main purposes for using special stylesheets are 1) to use CSS syntax that is forbidden to user sheets, such as the `::part(...)` pseudo-element; 2) to style native-anonymous content like default tooltips or scrollbars; or 3) to override the vanilla style rules without needing to use the `!important` tag. In particular, we can use the author sheet to make (or revert) general rules without affecting more specific rules in the built-in stylesheets, or being forced to deal with a bunch of style conflicts and cascading confusion.
 
 ⚠️ _Other themes/loaders, including older versions of this theme, may use the file suffix `.as.css` for the agent sheet, instead of `.ag.css`. I've switched to "ag" for the sake of consistency with fx-autoconfig. If you have a `userChrome.as.css` file left over from something, you can just delete it and replace it with `userChrome.ag.css`. The [agent sheet loader](#agentauthor-sheet-loader) will ignore `.as.css` files._
+
+</details>
 
 #### **Styling browser toolbox windows:**
 
@@ -324,7 +328,7 @@ There's another script called [Browser Toolbox Stylesheet Loader](#browser-toolb
 
 But by itself it doesn't do anything. It only works in conjunction with modifications I made to fx-autoconfig. I won't upload the modified script loader since it's not my original work, but you can either 1) follow the instructions below to modify it yourself; or 2) just copy all the contents of your `chrome` folder into `{your profile folder}/chrome_debugger_profile/chrome/`.
 
-The problem with copying everything to `chrome_debugger_profile` is that you may need to reset the debugger profile from time to time. That's why I worked out a method for dynamically loading the main profile's scripts and stylesheets into toolbox processes without modifying the debugger profile.<details><summary>💬 <i><b>Here's how if you want to do the same: (it's pretty fast)</b></i></summary>
+The problem with copying everything to `chrome_debugger_profile` is that you may need to reset the debugger profile from time to time. That's why I worked out a method for dynamically loading the main profile's scripts and stylesheets into toolbox processes without modifying the debugger profile.<details><summary>🧰 <i><b>Here's how if you want to do the same: (it's pretty fast)</b></i></summary>
 
 1. Download and install [fx-autoconfig](https://github.com/MrOtherGuy/fx-autoconfig) as normal.
 2. Open `config.js` from your Firefox installation folder, in a text editor.
