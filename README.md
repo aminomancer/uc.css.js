@@ -237,6 +237,8 @@ I've bundled some of my addons in this repo as well. They are in the [extensions
 
 <details><summary>🆎 <b><i>How to use a better font... (click to expand)</i></b></summary>
 
+<br/>
+
 `userChrome.css` doesn't require any fonts, but there's an optional preference in about:config which lets you replace fonts in the UI (not in-content) with [SF Pro](https://developer.apple.com/fonts), macOS's system font, on Windows or Linux. You can enable this by [downloading the font](https://devimages-cdn.apple.com/design/resources/download/SF-Pro.dmg), unpacking it with 7-Zip, installing it as normal, and setting `userChrome.css.mac-ui-fonts` to `true` in about:config. This requires a local copy of all variants of the font, including "SF Pro," "SF Pro Display," "SF Pro Text," and "SF Pro Rounded." Additionally, `userContent.css` can use [Overpass Mono](https://fonts.google.com/specimen/Overpass+Mono) for plaintext files, if you have it installed. Otherwise it just uses your default monospace font.
 
 </details>
@@ -244,6 +246,8 @@ I've bundled some of my addons in this repo as well. They are in the [extensions
 #### **Further modification:**
 
 <details><summary>🧪 <b><i>How to customize the theme yourself... (click to expand)</i></b></summary>
+
+<br/>
 
 If you want the functional features shown in the animations, you'll need to install some of the scripts. The stylesheets do not strictly require installing any scripts, but some scripts are designed to solve problems that CSS can't, so I recommend reading the full list of [script descriptions](#script-descriptions). Since the theme itself already requires fx-autoconfig, installing the scripts doesn't require any extra time or setup. Most scripts do not require installing the CSS theme either, but the few exceptions are noted in the descriptions and at the top of each script file. Instructions and explanations for the scripts are [below](#installation).
 
@@ -258,6 +262,8 @@ Normally in Firefox, the default search icon in the urlbar is a magnifying glass
 #### **Updating:**
 
 <details><summary>📥 <b><i>How to update... (click to expand)</i></b></summary>
+
+<br/>
 
 [Release packages](/../../releases/) are available as a courtesy, but since the theme and scripts are updated on a daily basis to keep up with Nightly, the latest release package may not be completely up to date. If you want the very latest stylesheets/scripts, you should either [download the source code](/../../archive/HEAD.zip) and drag its contents to your profile's `chrome` folder, [clone the repo](https://docs.github.com/repositories/creating-and-managing-repositories/cloning-a-repository) directly to your `chrome` folder, (use [GitHub Desktop](https://desktop.github.com) if all of this sounds like gibberish to you) or download individual folders with [GitZip](https://addons.mozilla.org/firefox/addon/gitzip) or [Refined GitHub](https://addons.mozilla.org/firefox/addon/refined-github-).
 
@@ -387,6 +393,8 @@ get chromeDir() {return traverseToMainProfile('UChrm')},
 
 <details><summary>📚 <b><i>The scripts' basic design philosophy... (click to expand)</i></b></summary>
 
+<br/>
+
 Using autoconfig places some constraints on design. We can't always write these scripts in exactly the same style that Firefox components are written, because Firefox scripts are executed in a different way. And the way the scripts are loaded encourages a procedural style. Some might prefer this from the outset for various reasons. I do use a procedural style for the shortest scripts that are least likely to change or be extended. But for the most part you'll notice a more object-oriented style in these scripts, which might seem weird. A lot of scripts have classes that are only instantiated once per script execution, for example.
 
 The main reason I use this style in spite of the subscript loader is because it makes it a lot easier to hook into the scripts from outside. My goal in doing that isn't encapsulation, it's just creating little modules that other scripts can access and modify without re-instantiating them, that can be modified or debugged from the browser console. This is why I will often define a script's class instance on a property of the global object, even though everything in the script references it with `this`.
@@ -407,9 +415,7 @@ Every script is either localized or localizable. That means that some scripts wi
 
 Initially, I tried to make these scripts compatible with as many script loaders as possible. But it dawned on me that I couldn't do that with certain scripts, and maybe shouldn't try at all. So I only design these scripts with fx-autoconfig in mind. That doesn't mean that none of them are compatible with other script loaders, but it does mean I don't know which ones are or are not, since I only test with fx-autoconfig.
 
-For linting/formatting, I use [Prettier](https://prettier.io/), [ESLint](https://eslint.org/) and [the ESLint VS Code extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint), with  [eslint-config-airbnb](https://www.npmjs.com/package/eslint-config-airbnb) for base rules and [eslint-config-prettier](https://www.npmjs.com/package/eslint-config-prettier) for compatibility.
-
-<details><summary>📋 <i><b>Here are the contents of the project's ESLint config...</b></i></summary>
+For linting/formatting, I use [Prettier](https://prettier.io/), [ESLint](https://eslint.org/) and [the ESLint VS Code extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint), with  [eslint-config-airbnb](https://www.npmjs.com/package/eslint-config-airbnb) for base rules and [eslint-config-prettier](https://www.npmjs.com/package/eslint-config-prettier) for compatibility.<details><summary>📋 <i><b>Here are the contents of the project's ESLint config...</b></i></summary>
 
 ```
 {
@@ -1032,9 +1038,7 @@ Gives all context menus the same opening animation that panel popups like the ap
 
 #### [Undo Recently Closed Tabs in Tab Context Menu](/JS/recentlyClosedTabsContextMenu.uc.js):
 
-Adds new menus for restoring recently closed tabs/windows to the tab context menu. Also adds a context menu for right-clicking recently closed tab/window items in the history menu.
-
-<details><summary>💬 <i><b>More details...</b></i></summary>
+Adds new menus for restoring recently closed tabs/windows to the tab context menu. Also adds a context menu for right-clicking recently closed tab/window items in the history menu.<details><summary>💬 <i><b>More details...</b></i></summary>
 
 Adds new menus to the context menu that appears when you right-click a tab (in the tab bar or in the Tree Style Tab sidebar): one lists recently closed tabs so you can restore them, and another lists recently closed windows. These are basically the same functions that exist in the history toolbar button's popup, but I think the tab context menu is a more convenient location for them.
 
@@ -1231,6 +1235,8 @@ Various tiny mods not worth making separate scripts for. Read the comments [insi
 ## **Other useful links:**
 
 <details><summary>🔗 <b><i>Click to expand...</i></b></summary>
+
+<br/>
 
 [Searchfox](https://searchfox.org): A search engine for Firefox's source code. This is what I use to write most of my scripts. For example, if you wanted to make a button that adds a bookmark, you could find something in the UI that already does that, copy its ID, and search for it on Searchfox. From there you could track down its callback function, copy something from that and search for it, and ultimately find what you need. It indexes several repositories, including multiple versions of Firefox. You can permanently add this search engine to Firefox with [this extension](https://addons.mozilla.org/firefox/addon/add-custom-search-engine), which makes writing code for Firefox immensely faster.
 
