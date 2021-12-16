@@ -314,9 +314,7 @@ There's another script called [Browser Toolbox Stylesheet Loader](#browser-toolb
 
 But by itself it doesn't do anything. It only works in conjunction with modifications I made to fx-autoconfig. I won't upload the modified script loader since it's not my original work, but you can either 1) follow the instructions below to modify it yourself; or 2) just copy all the contents of your `chrome` folder into `{your profile folder}/chrome_debugger_profile/chrome/`.
 
-The problem with copying everything to `chrome_debugger_profile` is that you may need to reset the debugger profile from time to time. That's why I worked out a method for dynamically loading the main profile's scripts and stylesheets into toolbox processes without modifying the debugger profile.
-
-<details><summary>💬 <i><b>Here's how if you want to do the same: (it's pretty fast)</b></i></summary>
+The problem with copying everything to `chrome_debugger_profile` is that you may need to reset the debugger profile from time to time. That's why I worked out a method for dynamically loading the main profile's scripts and stylesheets into toolbox processes without modifying the debugger profile.<details><summary>💬 <i><b>Here's how if you want to do the same: (it's pretty fast)</b></i></summary>
 
 1. Download and install [fx-autoconfig](https://github.com/MrOtherGuy/fx-autoconfig) as normal.
 2. Open `config.js` from your Firefox installation folder, in a text editor.
