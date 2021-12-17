@@ -168,17 +168,16 @@ this sheet controls their appearance as well. */
 }
 
 #tabbrowser-tabs::after {
-    position: relative !important;
-    display: block !important;
-    content: "" !important;
-    pointer-events: none !important;
-    box-shadow: -7px 0px 7px 0px rgba(0, 0, 0, 0.1) !important;
-    background-color: transparent !important;
-    width: 20px !important;
-    margin-right: -20px !important;
-    height: 46px !important;
-    margin-block: -8px !important;
-    z-index: 11 !important;
+    position: relative;
+    display: block;
+    content: "";
+    pointer-events: none;
+    box-shadow: 0 0px 14px 0px hsla(0, 0%, 0%, 0.32);
+    width: 20px;
+    margin-right: -20px;
+    height: var(--tab-min-height);
+    z-index: 11;
+    clip-path: inset(-100% 20px -100% -100%);
 }
 
 #tabs-newtab-button {

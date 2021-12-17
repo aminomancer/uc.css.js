@@ -1191,6 +1191,10 @@ panel[type="autocomplete-richlistbox"][anchored-on-panel] {
 
 Hold down the Alt and Shift keys and click & drag any part of a toolbar to drag the entire window. Normally you can only drag the window in empty spaces. Clicking and dragging a button, a tab, an input field, etc. will not drag the window. With this script, while you hold down the Alt and Shift keys, ANY element in a toolbar basically becomes a drag space. Alt and Shift were chosen because there aren't any Alt+Shift+Click functions, as far as I know. Upon releasing the keys, everything will go back to normal.
 
+#### [Pin Tab Hotkey](/JS/pinTabHotkey.uc.js):
+
+Press Ctrl+Alt+P (or Cmd+Alt+P on macOS) to pin/unpin selected tab(s). Configured by editing values in the script.
+
 #### [OS Detector](/JS/osDetector.uc.js):
 
 ✨ Strongly recommended if you want to use duskFox on macOS or Linux. Might also be useful to other people developing CSS themes for Firefox, since it lets you select for operating systems with 100% accuracy.<details><summary>💬 <i><b>More details...</b></i></summary>
