@@ -1158,11 +1158,11 @@ menuitem#repair-text-encoding::before {
 }
 
 :is(#context_pinTab, #context_pinSelectedTabs)::before {
-    background-image: url(chrome://userchrome/content/skin/pin-tab.svg);
+    background-image: url(chrome://userchrome/content/material/pin-315.svg);
 }
 
 :is(#context_unpinTab, #context_unpinSelectedTabs)::before {
-    background-image: url(chrome://userchrome/content/skin/unpin-tab.svg);
+    background-image: url(chrome://userchrome/content/material/unpin-315.svg);
 }
 
 :is(#placesContext_openContainer\:tabs, #placesContext_openLinks\:tabs, #syncedTabsOpenAllInTabs)::before,
@@ -1427,11 +1427,11 @@ menuitem:is(.customize-context-removeFromToolbar, .customize-context-removeFromP
 }
 
 menuitem.customize-context-moveToToolbar::before {
-    background-image: url(chrome://userchrome/content/skin/unpin-tab.svg);
+    background-image: url(chrome://userchrome/content/material/unpin-315.svg);
 }
 
 menuitem.customize-context-moveToPanel::before {
-    background-image: url(chrome://userchrome/content/skin/pin-tab.svg);
+    background-image: url(chrome://userchrome/content/material/pin-315.svg);
 }
 
 menuitem.customize-context-addToToolbar::before {

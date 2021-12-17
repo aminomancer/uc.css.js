@@ -592,7 +592,7 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
     margin-inline-start: -2px !important;
 }
 
-#vertical-tabs-pane[unpinned]
+#vertical-tabs-pane
     .all-tabs-item[pinned]:not([muted], [soundplaying], [activemedia-blocked])
     .all-tabs-button
     .toolbarbutton-icon {
@@ -645,6 +645,18 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
     .all-tabs-item[selected][pinned]:not([muted], [soundplaying], [activemedia-blocked])
     .sound-overlay {
     fill-opacity: inherit !important;
+}
+
+.all-tabs-item[pinned] > .all-tabs-button.subviewbutton > .toolbarbutton-text {
+    background: url(chrome://userchrome/content/material/pin-45.svg) no-repeat 5px/12px !important;
+}
+
+#vertical-tabs-pin-button {
+    list-style-image: url(chrome://userchrome/content/material/unpin-315.svg) !important;
+}
+
+#vertical-tabs-pane[unpinned] #vertical-tabs-pin-button {
+    list-style-image: url(chrome://userchrome/content/material/pin-315.svg) !important;
 }
 
 .subviewbutton[command="Browser:OpenAboutContainers"]:not(.subviewbutton-iconic, [image]) {

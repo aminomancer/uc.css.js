@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Vertical Tabs Pane
-// @version        1.5.2
+// @version        1.5.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Create a vertical pane across from the sidebar that functions like the vertical
@@ -1653,7 +1653,7 @@
         }
         // load our stylesheet as an author sheet. override it with userChrome.css and !important rules.
         registerSheet() {
-            let css = `
+            let css = /* css */ `
 #vertical-tabs-pane {
     --vertical-tabs-padding: 4px;
     --collapsed-pane-width: calc(
@@ -1932,7 +1932,7 @@
         3px 3px/9px no-repeat;
 }
 /* take a chunk out of the favicon so the overlay is more visible */
-#vertical-tabs-pane[unpinned]
+#vertical-tabs-pane
     .all-tabs-item:is([muted], [soundplaying], [activemedia-blocked])
     .all-tabs-button
     .toolbarbutton-icon {
