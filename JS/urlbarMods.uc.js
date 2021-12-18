@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Urlbar Mods
-// @version        1.5.5
+// @version        1.5.6
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Make some minor modifications to the urlbar. See the code comments below for more details.
@@ -89,6 +89,18 @@ class UrlbarMods {
             aboutNetErrorPage,
             httpsOnlyErrorPage,
         };
+        gIdentityHandler._localPDF = function () {
+            if (!this._isPDFViewer) return false;
+            switch (gBrowser.selectedBrowser.documentURI?.scheme) {
+                case "chrome":
+                case "file":
+                case "resource":
+                case "about":
+                    return true;
+                default:
+                    return false;
+            }
+        };
         // Extend the built-in method that sets the identity icon's tooltip and class.
         gIdentityHandler._refreshIdentityIcons = function () {
             let icon_label = "";
@@ -149,7 +161,7 @@ class UrlbarMods {
                 // A rare connection state, not really sure how to reproduce this in the wild.
                 this._identityBox.className = "aboutBlockedPage unknownIdentity";
                 tooltip = gNavigatorBundle.getString("identity.notSecure.tooltip");
-            } else if (this._isPotentiallyTrustworthy) {
+            } else if (this._isPotentiallyTrustworthy || this._localPDF()) {
                 this._identityBox.className = isInitialPage(this._uri)
                     ? "initialPage"
                     : "localResource";

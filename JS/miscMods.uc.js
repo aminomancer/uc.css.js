@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Misc. Mods
-// @version        1.8.7
+// @version        1.8.8
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Various tiny mods not worth making separate scripts for. Read the comments inside the script for details.
@@ -256,19 +256,20 @@
                 `gPermissionPanel._openPopup = function ` +
                     gPermissionPanel._openPopup
                         .toSource()
-                        .replace(/openPopup/, "")
-                        .replace(/_identityPermissionBox/, `_permissionGrantedIcon`)
+                        .replace(/_openPopup/, "")
+                        .replace(/\"bottomcenter/, `"bottomleft`)
+                        .replace(
+                            /(PanelMultiView\.openPopup)/,
+                            `let bounds = windowUtils.getBoundsWithoutFlushing;\n    let anchorBounds = bounds(this._permissionGrantedIcon);\n    let diff = anchorBounds.left - bounds(this._identityPermissionBox).left + (anchorBounds.width / 2);\n    this._permissionPopup.style.setProperty("--uc-panel-left-offset", diff + "px");\n\n    $1`
+                        )
             );
-            let { _permissionPopup, _permissionGrantedIcon } = gPermissionPanel;
+            let { _permissionPopup } = gPermissionPanel;
             _permissionPopup.setAttribute("anchor-to-icon", true);
-            _permissionGrantedIcon.setAttribute("anchor-to-icon", true);
             // we want the icon to be the same height as the container. normally it's only 16px which affects the popup positioning.
             // we can increase the height but it's just an image element. so, doing so would mean the icon must have explicit width/height attributes.
             // otherwise the image will be resized vertically by a lot. the icon does have explicit values, but some users may use custom icons.
             // so to ensure this doesn't happen, set block padding equal to half the difference between the icon height and the urlbar height, minus the urlbar padding.
-            _permissionPopup.style.marginInline = "-20px";
-            _permissionGrantedIcon.style.height = "100%";
-            _permissionGrantedIcon.style.paddingBlock = `calc(((var(--urlbar-height, 32px) - 16px) / 2) - 1px - var(--urlbar-container-padding, 1px))`;
+            _permissionPopup.style.marginInline = `calc(-20px + var(--uc-panel-left-offset, 0px))`;
         }
         randomTinyStuff() {
             // give the tracking protection popup's info button a tooltip

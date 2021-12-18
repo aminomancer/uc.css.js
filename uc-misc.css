@@ -638,10 +638,5 @@ menupopup[bmb-command-disabled="true"]
 /* this is for miscMods.uc.js' setting "Anchor permissions popup to granted permission icon"
 adjust the popup and icon dimensions commensurately */
 #permission-popup[anchor-to-icon] {
-    margin-inline-start: -20px !important;
-}
-
-#permissions-granted-icon[anchor-to-icon] {
-    height: var(--urlbar-height) !important;
-    padding-block: revert !important;
+    margin-inline: calc(-20px + var(--uc-panel-left-offset, 0px)) !important;
 }

@@ -323,15 +323,15 @@ findbar .matches-indicator {
 }
 
 [anonid="findbar-textbox-wrapper"] {
-    outline-style: solid !important;
-    outline-width: 0 !important;
-    outline-color: transparent !important;
+    outline: 0 solid transparent !important;
+    transition: 100ms outline ease-in !important;
 }
 
 [anonid="findbar-textbox-wrapper"]:focus-within {
-    outline: 2px solid var(--search-box-focus-outline-color, -moz-accent-color) !important;
-    outline-offset: 0 !important;
-    transition: 70ms !important;
+    outline-width: 2px !important;
+    outline-color: var(--search-box-focus-outline-color, -moz-accent-color) !important;
+    transition-duration: 60ms !important;
+    transition-timing-function: ease-out !important;
 }
 
 .browserContainer > findbar {

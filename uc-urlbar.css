@@ -1091,6 +1091,11 @@ so you can use those classes to set the icon. */
     fill-opacity: 1 !important;
 }
 
+.blocked-permission-icon:focus-visible,
+.notification-anchor-icon:focus-visible {
+	outline: none !important;
+}
+
 /* depending on window scaling factor, some permission icons may appear too big relative to their viewbox.
 urlbar icons that display frequently like the tracking icon or the identity icon have a max width/height of 14px but a viewbox of 16px and are drawn to 16px.
 so they have at least 1px of virtual "padding" on every side. we could replace all the svg icons and maybe I will, but this is a lot easier.

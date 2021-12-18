@@ -81,6 +81,10 @@ this connects with .panel-subview-body rules in userChrome.au.css */
     padding: 16px !important;
 }
 
+.protections-popup-list.empty image {
+    color: var(--panel-description-color);
+}
+
 /* .panel-subview-body + toolbarseparator {
     margin-top: 0 !important;
 } */
@@ -945,10 +949,8 @@ popupnotificationcontent label[control]:not([hidden]) + menulist {
 }
 
 #protections-popup-main-header-label {
-    display: -moz-box;
     height: auto !important;
-    -moz-box-align: center !important;
-    -moz-box-pack: center !important;
+    padding-inline: 15px !important;
 }
 
 #protections-popup[toast]
@@ -1669,6 +1671,7 @@ richlistitem.download-state > .downloadButton.downloadIconCancel .button-box .bu
 #protections-popup-mainView-panel-header,
 #eom-mainView-panel-header {
     min-height: 40px !important;
+    word-break: break-word !important;
 }
 
 #editBookmarkPanel > .panel-header {
