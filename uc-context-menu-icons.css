@@ -844,11 +844,11 @@ menuitem#feedbackPage::before {
 }
 
 menuitem#helpSafeMode::before {
-    background-image: url(chrome://userchrome/content/material/auto-fix.svg);
+    background-image: url(chrome://userchrome/content/material/diagnostic.svg);
 }
 
 menuitem#troubleShooting::before {
-    background-image: url(chrome://userchrome/content/material/drugs.svg);
+    background-image: url(chrome://userchrome/content/material/system-report.svg);
 }
 
 menuitem#help_reportSiteIssue::before {
@@ -866,7 +866,7 @@ menuitem#menu_HelpPopup_reportPhishingErrortoolmenu::before {
 }
 
 menuitem#aboutName::before {
-    background-image: url(chrome://userchrome/content/info-filled.svg);
+    background-image: url(chrome://userchrome/content/identity-icons-brand.svg);
 }
 
 menuitem#helpPolicySupport::before {

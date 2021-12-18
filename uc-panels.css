@@ -1802,7 +1802,6 @@ richlistitem.download-state > .downloadButton.downloadIconCancel .button-box .bu
 /* add icons to some panel subviewbuttons */
 #identity-popup-clear-sitedata-button {
     list-style-image: url(chrome://userchrome/content/skin/forget.svg);
-    /* list-style-image: url(chrome://userchrome/content/skin/3rdpartycookies-disabled.svg); */
 }
 
 #identity-popup-more-info {
@@ -1825,7 +1824,7 @@ richlistitem.download-state > .downloadButton.downloadIconCancel .button-box .bu
 }
 
 #protections-popup-show-report-button {
-    list-style-image: url(chrome://userchrome/content/skin/dashboard.svg);
+    list-style-image: url(chrome://userchrome/content/skin/controlcenter/dashboard.svg);
 }
 
 .subviewbutton[data-l10n-id="protections-panel-content-blocking-manage-settings"]

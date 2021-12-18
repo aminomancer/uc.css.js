@@ -155,8 +155,11 @@
         --in-content-primary-button-text-color: var(--light-on-dark-button-text-color) !important;
         --in-content-button-border-radius: var(--general-button-border-radius) !important;
         --in-content-accent-color: var(--purple-35) !important;
+        --in-content-item-hover: color-mix(in srgb, var(--purple-30) 45%, transparent) !important;
+        --in-content-item-hover-text: var(--light-on-dark-button-text-color) !important;
         --in-content-table-background: var(--in-content-box-background) !important;
         --in-content-table-header-background: var(--purple-40-a30) !important;
+        --in-content-box-info-background: var(--in-content-button-background-solid) !important;
         --newtab-background-color: var(--in-content-page-background) !important;
         --newtab-text-primary-color: var(--in-content-page-color) !important;
         --lwt-sidebar-background-color: var(--in-content-box-background) !important;
@@ -288,7 +291,7 @@
     }
 
     #category-experimental > .category-icon {
-        list-style-image: url(chrome://userchrome/content/material/potion-large.svg) !important;
+        list-style-image: url(chrome://userchrome/content/material/test-tube-45-large.svg) !important;
     }
 
     .top-site-outer {
@@ -439,6 +442,18 @@
     .home-section .section .sponsored-checkbox:checked:active,
     .home-section .section input:checked + .slider:active {
         background-color: var(--newtab-primary-action-background-active) !important;
+    }
+
+    .info-box-container > :is(.sync-engines-list, label) {
+        padding-inline: 4px;
+    }
+
+    listheader {
+        padding-bottom: revert !important;
+    }
+
+    :is(listheader, treecols) > treecol {
+        box-shadow: none !important;
     }
 
     #engineList treechildren::-moz-tree-image {
@@ -621,7 +636,7 @@
 
 @-moz-document url-prefix("about:reader") {
     body.dark {
-        --main-background: var(--in-content-bg-dark) !important;
+        --main-background: var(--in-content-page-background) !important;
         --tooltip-background: color-mix(in srgb, black 40%, var(--in-content-bg-dark)) !important;
         --active-color: var(--purple-35) !important;
         --selected-background: var(--attention-color) !important;
@@ -652,9 +667,22 @@
     }
 
     .toolbar {
+        box-shadow: 0 0 12px hsla(0, 0%, 0%, 0.4) !important;
+    }
+
+    body.dark .toolbar {
         border-color: var(--in-content-box-border-color) !important;
         background-color: var(--in-content-box-background-dim) !important;
-        box-shadow: 0 0 12px hsla(0, 0%, 0%, 0.4) !important;
+    }
+
+    body > .container > .header > .domain {
+        border: none !important;
+    }
+
+    body.dark hr,
+    body.dark > .container > .header > .domain {
+        border-color: var(--in-content-button-background-active) !important;
+        border-block-width: 0 1px !important;
     }
 
     .toolbar-container.scrolled .toolbar:not(:hover, :focus-within) {

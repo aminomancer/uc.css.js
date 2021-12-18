@@ -36,7 +36,7 @@ menupopup#viewSidebarMenu
 /* return youtube dislikes */
 :is(.webextension-browser-action, .eom-addon-button)[data-extensionid="{762f9885-5a13-4abd-9c77-433dcd38b8fd}"]
     .toolbarbutton-icon {
-    list-style-image: url(chrome://userchrome/content/skin/controlcenter/socialblock.svg) !important;
+    list-style-image: url(chrome://userchrome/content/material/dislike.svg) !important;
     transform: scaleX(-1);
 }
 
@@ -110,7 +110,7 @@ menupopup#viewSidebarMenu
     .toolbarbutton-icon,
 :is(.webextension-browser-action, .eom-addon-button)[data-extensionid="{3507f56d-2ef5-45c1-b6d7-5297a0ba7642}"i]
     .toolbarbutton-icon {
-    list-style-image: url(chrome://userchrome/content/skin/3rdpartycookies-disabled.svg);
+    list-style-image: url(chrome://userchrome/content/skin/controlcenter/3rdpartycookies-disabled.svg);
 }
 
 /* i don't care about cookies */
@@ -118,7 +118,7 @@ menupopup#viewSidebarMenu
     .toolbarbutton-icon,
 :is(.webextension-browser-action, .eom-addon-button)[data-extensionid="jid1-KKzOGWgsW3Ao4Q@jetpack"i]
     .toolbarbutton-icon {
-    list-style-image: url(chrome://userchrome/content/skin/3rdpartycookies.svg);
+    list-style-image: url(chrome://userchrome/content/skin/controlcenter/3rdpartycookies.svg);
 }
 
 /* pushbullet, an extension for controlling, sharing stuff with, and receiving notifications from your phone */

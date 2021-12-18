@@ -1992,7 +1992,7 @@ link[href="chrome://global/content/printPagination.css"]
     }
 
     #perm-cookie-row .permissionLabel {
-        background-image: url(chrome://userchrome/content/skin/3rdpartycookies.svg);
+        background-image: url(chrome://userchrome/content/skin/controlcenter/3rdpartycookies.svg);
         background-size: 14px;
         background-position-x: 1px;
     }

@@ -1437,7 +1437,8 @@ toolbar[brighttext] #panic-button[open] {
     list-style-image: url(chrome://userchrome/content/notifications/popup.svg);
 }
 
-.autoplay-media-icon {
+.autoplay-media-icon,
+.autoplay-icon {
     list-style-image: url(chrome://userchrome/content/notifications/autoplay-media.svg);
 }
 
@@ -1733,8 +1734,9 @@ toolbar[brighttext] #panic-button[open] {
     list-style-image: url(chrome://userchrome/content/skin/controlcenter/tracker-image.svg);
 }
 
+.socialblock-icon,
 .protections-popup-category-icon.socialblock-icon {
-    list-style-image: url(chrome://userchrome/content/skin/controlcenter/socialblock.svg);
+    list-style-image: url(chrome://userchrome/content/material/dislike.svg);
 }
 
 .protections-popup-category-icon.thirdpartycookies-icon {
@@ -1760,11 +1762,11 @@ toolbar[brighttext] #panic-button[open] {
 }
 
 .protections-popup-socialblockView-icon {
-    list-style-image: url(chrome://userchrome/content/skin/controlcenter/socialblock-disabled.svg);
+    list-style-image: url(chrome://userchrome/content/material/dislike-disabled.svg);
 }
 
 .protections-popup-socialblockView-icon.allowed {
-    list-style-image: url(chrome://userchrome/content/skin/controlcenter/socialblock.svg);
+    list-style-image: url(chrome://userchrome/content/material/dislike.svg);
 }
 
 .protections-popup-cookiesView-icon {

@@ -76,6 +76,8 @@ override chrome://browser/skin/places/history.svg ../resources/skin/history.svg
 override chrome://browser/skin/downloads/downloads.svg ../resources/downloads/downloads.svg
 override chrome://browser/skin/fullscreen.svg ../resources/skin/fullscreen.svg
 override chrome://browser/skin/fullscreen-exit.svg ../resources/skin/fullscreen-exit.svg
+override chrome://browser/skin/controlcenter/socialblock.svg ../resources/material/dislike.svg
+override chrome://browser/skin/controlcenter/3rdpartycookies.svg ../resources/skin/controlcenter/3rdpartycookies.svg
 override chrome://browser/skin/preferences/android-menu.svg ../resources/preferences/android-menu.svg
 override chrome://browser/skin/preferences/category-general.svg ../resources/preferences/category-general.svg
 override chrome://browser/skin/preferences/category-privacy-security.svg ../resources/preferences/category-privacy-security.svg

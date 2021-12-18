@@ -373,16 +373,17 @@ tooltip {
     --ebmp-hover-bgcolor: hsl(233, 24%, 33%);
     --ebmp-focus-bgcolor: hsl(233, 24%, 38%);
 
-    --content-principal-page-background: hsl(270, 3%, 12%);
+    --content-principal-page-background: var(--in-content-bg-dark);
+    --content-principal-page-background-light: hsl(240, 3%, 12%);
     --content-principal-page-color: var(--in-parent-page-color);
-    --content-principal-box-background: hsl(300, 2%, 16%);
-    --content-principal-box-background-odd: hsl(320, 3%, 21%);
-    --content-principal-box-background-dim: hsl(300, 2%, 12%);
-    --content-principal-box-border-color: hsla(270, 7%, 98%, 0.1);
-    --content-principal-button-background: hsla(0, 20%, 90%, 0.08);
-    --content-principal-button-background-hover: hsla(0, 20%, 90%, 0.15);
-    --content-principal-button-background-active: hsla(0, 20%, 90%, 0.19);
-    --content-principal-button-background-solid: hsl(270, 2%, 20%);
+    --content-principal-box-background: hsl(240, 2%, 14%);
+    --content-principal-box-background-odd: hsl(260, 3%, 19%);
+    --content-principal-box-background-dim: hsl(240, 2%, 12%);
+    --content-principal-box-border-color: hsla(240, 7%, 98%, 0.1);
+    --content-principal-button-background: hsla(240, 6%, 70%, 0.1);
+    --content-principal-button-background-hover: hsla(240, 7%, 70%, 0.15);
+    --content-principal-button-background-active: hsla(240, 8%, 70%, 0.19);
+    --content-principal-button-background-solid: hsl(240, 4%, 18%);
     --content-principal-border-hover: var(--content-principal-button-background-hover);
 
     --uc-checkbox-border-color: var(--in-parent-box-border-color);

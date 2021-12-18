@@ -368,11 +368,11 @@
 }
 
 #appMenu_helpSafeMode {
-    list-style-image: url(chrome://userchrome/content/material/auto-fix.svg);
+    list-style-image: url(chrome://userchrome/content/material/diagnostic.svg);
 }
 
 #appMenu_troubleShooting {
-    list-style-image: url(chrome://userchrome/content/material/drugs.svg);
+    list-style-image: url(chrome://userchrome/content/material/system-report.svg);
 }
 
 #appMenu_help_reportSiteIssue {
@@ -390,7 +390,7 @@
 }
 
 #appMenu_aboutName {
-    list-style-image: url(chrome://userchrome/content/info-filled.svg);
+    list-style-image: url(chrome://userchrome/content/identity-icons-brand.svg);
 }
 
 #appMenu_helpPolicySupport::before {
