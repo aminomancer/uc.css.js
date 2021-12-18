@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Misc. Mods
-// @version        1.8.8
+// @version        1.8.9
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Various tiny mods not worth making separate scripts for. Read the comments inside the script for details.
@@ -49,8 +49,11 @@
         // By default, the private browsing indicator is just an inert <hbox> that sits next to the window control buttons. Hovering it reveals a tooltip, but that's it. Without any hover styles it seems kind of out of place. But giving something hover styles when it has no actual function seems like a bad idea. So instead of doing nothing, clicking the indicator will open a support page with info about private browsing. Better than nothing, and I didn't want to make it a redundant "new private window" button.
         "Turn private browsing indicator into button": true,
 
-        // by default, the permissions popup anchors to the center of the permissions box. but this box can have anywhere from 1 to 20 icons visible at one time. so the permission winds up appearing like it's just floating in space rather than anchored to something in particular. this mod will change the method so that it anchors to the permission granted icon instead. that's the first icon in the box. so it will appear left-aligned rather than center aligned.
+        // By default, the permissions popup anchors to the center of the permissions box. But this box can have anywhere from 1 to 20 icons visible at one time. So the permission winds up appearing like it's just floating in space rather than anchored to something in particular. This mod will change the method so that it anchors to the permission granted icon instead. That's the first icon in the box. So it will appear left-aligned rather than center aligned.
         "Anchor permissions popup to granted permission icon": true,
+
+        // When you click and drag a tab, Firefox displays a small thumbnail preview of the tab's content next to your mouse cursor (provided you have `nglayout.enable_drag_images` set to true). This preview has a white background, so it will display as a 160x90px white rectangle until the thumbnail loads. If you use "dark mode" a lot, this will pretty consistently result in an unsightly white flash every time you click and drag a tab. Unfortunately the white color is set at the Canvas level so can't be overridden with CSS. But with JavaScript we can change the method that sets the background color. Instead of using a fixed color value, this setting calculates the effective value of a CSS variable, --in-content-bg-dark. This variable is already set by duskFox so you don't need to set it yourself if you use my CSS theme. If you don't, then make sure you add `:root{--in-content-bg-dark: #000}` to your userChrome.css, or it will fall back to white.
+        "Customize tab drag preview background color": true,
     };
     class UCMiscMods {
         constructor() {
@@ -74,6 +77,7 @@
                 this.privateBrowsingIndicatorButton();
             if (config["Anchor permissions popup to granted permission icon"])
                 this.anchorPermissionsPopup();
+            if (config["Customize tab drag preview background color"]) this.tabDragPreview();
             this.randomTinyStuff();
         }
         stopDownloadsPanelFocus() {
@@ -270,6 +274,20 @@
             // otherwise the image will be resized vertically by a lot. the icon does have explicit values, but some users may use custom icons.
             // so to ensure this doesn't happen, set block padding equal to half the difference between the icon height and the urlbar height, minus the urlbar padding.
             _permissionPopup.style.marginInline = `calc(-20px + var(--uc-panel-left-offset, 0px))`;
+        }
+        tabDragPreview() {
+            let { tabContainer } = gBrowser;
+            if (tabContainer.hasOwnProperty("on_dragstart")) return;
+            eval(
+                `tabContainer.on_dragstart = function ` +
+                    tabContainer.on_dragstart
+                        .toSource()
+                        .replace(/on_dragstart/, "")
+                        .replace(
+                            /\"white\"/,
+                            `getComputedStyle(this).getPropertyValue("--in-content-bg-dark").trim() || "white"`
+                        )
+            );
         }
         randomTinyStuff() {
             // give the tracking protection popup's info button a tooltip
