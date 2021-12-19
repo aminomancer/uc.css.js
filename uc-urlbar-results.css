@@ -181,7 +181,7 @@
     background: url(chrome://userchrome/content/material/function.svg) no-repeat !important;
     width: 16px !important;
     height: 16px !important;
-    padding-left: 16px;
+    padding-inline-start: 16px;
 }
 
 .urlbarView-row[type="dynamic"][dynamicType="unitConversion"]
@@ -589,7 +589,7 @@
     background: url(chrome://userchrome/content/engines/google-color.svg) no-repeat !important;
     width: 16px !important;
     height: 16px !important;
-    padding-left: 16px;
+    padding-inline-start: 16px;
 }
 
 .urlbarView-favicon[src="moz-extension://cd4aad93-9726-49dd-a5cd-9e5f5c4d76f4/favicon.ico"]
@@ -598,7 +598,7 @@
     background: url(chrome://userchrome/content/engines/google.svg) no-repeat !important;
     width: 16px !important;
     height: 16px !important;
-    padding-left: 16px;
+    padding-inline-start: 16px;
 }
 
 .urlbarView-row:not([type="search"])
@@ -608,7 +608,7 @@
     background: url(chrome://userchrome/content/engines/wikipedia.svg) no-repeat center/contain !important;
     width: 16px !important;
     height: 16px !important;
-    padding-left: 16px;
+    padding-inline-start: 16px;
 }
 
 .urlbarView-row:not([type="search"])
@@ -618,7 +618,7 @@
     background: url(chrome://userchrome/content/engines/wiktionary.svg) no-repeat center/contain !important;
     width: 16px !important;
     height: 16px !important;
-    padding-left: 16px;
+    padding-inline-start: 16px;
 }
 
 .urlbarView-row:not([type="search"])
@@ -628,7 +628,7 @@
     background: url(chrome://userchrome/content/engines/gatherer.svg) no-repeat center/contain !important;
     width: 16px !important;
     height: 16px !important;
-    padding-left: 16px;
+    padding-inline-start: 16px;
 }
 
 .urlbarView-row:not([type="search"])
@@ -638,7 +638,7 @@
     background: url(chrome://userchrome/content/engines/reelgood.svg) no-repeat center/contain !important;
     width: 16px !important;
     height: 16px !important;
-    padding-left: 16px;
+    padding-inline-start: 16px;
 }
 
 .urlbarView-row[type="tabtosearch"]:not([selected], [show-action-text], :hover)
@@ -658,7 +658,8 @@
 #urlbar[breakout][breakout-extend],
 #urlbar[breakout][breakout-extend-disabled][open] {
     top: calc((var(--urlbar-toolbar-height) - var(--urlbar-height)) / 2) !important;
-    left: 0px !important;
+    left: 0 !important;
+    right: 0 !important;
     width: -moz-available !important;
     overflow: visible;
     box-shadow: none !important;
@@ -674,6 +675,7 @@
     padding-top: 1px !important;
     width: calc(100% + 10px) !important;
     left: -5px !important;
+    right: -5px !important;
     position: relative !important;
     overflow: visible !important;
     top: calc((var(--urlbar-container-height) - var(--urlbar-height)) / 2) !important;

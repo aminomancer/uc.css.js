@@ -220,7 +220,7 @@ I was a beta tester and they never shut the beta off for some reason so this sti
     background-image: url(chrome://userchrome/content/devtools/command-console.svg) !important;
     display: block !important;
     fill: currentColor !important;
-    padding-right: 16px !important;
+    padding-inline-end: 16px !important;
     box-sizing: border-box !important;
 }
 
@@ -687,8 +687,7 @@ we need to invert the icon differently since we don't want to invert the backgro
         background-size: 16px !important;
         background-repeat: no-repeat !important;
         background-position: center !important;
-        padding-left: 28px !important;
-        padding-right: 0 !important;
+        padding-inline: 28px 0 !important;
         filter: none !important;
     }
 }

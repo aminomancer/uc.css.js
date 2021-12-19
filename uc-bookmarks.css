@@ -103,8 +103,7 @@
     border: none !important;
     padding: 1px 3px !important;
     margin-top: -1px !important;
-    margin-inline-end: 3px !important;
-    margin-left: -3px !important;
+    margin-inline: -3px 3px !important;
     width: auto !important;
     max-width: -moz-available !important;
 }
@@ -182,11 +181,9 @@
 #editBookmarkPanel menu {
     appearance: none !important;
     line-height: normal !important;
-    padding-bottom: 3px;
-    padding-inline-start: 2px !important;
-    padding-left: 0px !important;
-    padding-right: 2px;
-    padding-top: 2px;
+    padding-block: 2px 3px;
+    padding-inline-start: 0px !important;
+    padding-inline-end: 2px;
     color: var(--toolbar-color) !important;
     border: none !important;
 }
@@ -286,7 +283,7 @@
 #editBookmarkPanel #editBookmarkPanelContent :is(.expander-up, .expander-down) {
     min-width: 24px !important;
     min-height: 24px !important;
-    margin-left: 6px !important;
+    margin-inline-start: 6px !important;
     padding: 0 !important;
     color: var(--lwt-toolbarbutton-icon-fill) !important;
     border-radius: var(--general-button-border-radius) !important;

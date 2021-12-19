@@ -86,6 +86,9 @@ override chrome://browser/skin/preferences/category-sync.svg ../resources/prefer
 override chrome://mozapps/skin/extensions/category-extensions.svg ../resources/preferences/category-extensions.svg
 override chrome://mozapps/skin/extensions/category-plugins.svg ../resources/preferences/category-plugins.svg
 override chrome://mozapps/skin/extensions/category-discover.svg ../resources/preferences/category-discover.svg
+override chrome://mozapps/skin/extensions/category-sitepermission.svg ../resources/places/defaultFavicon.svg
+override chrome://mozapps/skin/extensions/category-available.svg ../resources/material/verified-update.svg
+override chrome://mozapps/skin/extensions/category-recent.svg ../resources/material/verified.svg
 override chrome://activity-stream/content/data/content/assets/glyph-highlights-16.svg ../resources/glyph-highlights-16.svg
 override chrome://activity-stream/content/data/content/assets/glyph-info-16.svg ../resources/glyph-info-16.svg
 

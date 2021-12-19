@@ -678,7 +678,7 @@ so you can use those classes to set the icon. */
     padding-inline: 8px !important;
     border: none !important;
     background-color: var(--identity-box-solid-bg) !important;
-    border-right: 1px solid var(--desaturate-dimmed) !important;
+    border-inline-end: 1px solid var(--desaturate-dimmed) !important;
 }
 
 #urlbar[pageproxystate="valid"]
@@ -823,8 +823,12 @@ so you can use those classes to set the icon. */
 }
 
 .urlbar-input-box input {
-    padding-left: 4px !important;
+    padding-inline: 4px 0 !important;
     height: var(--urlbar-height) !important;
+}
+
+.urlbar-input-box input:-moz-locale-dir(rtl) {
+    padding-inline: 0 4px !important;
 }
 
 .urlbar-input-box input::placeholder,
@@ -990,6 +994,11 @@ so you can use those classes to set the icon. */
     min-height: 100% !important;
     align-items: center !important;
     margin: 0 !important;
+}
+
+#urlbar #identity-box.chromeUI #notification-popup-box:-moz-locale-dir(rtl) {
+    left: revert !important;
+    right: 8px !important;
 }
 
 #urlbar #identity-box.chromeUI #notification-popup-box .notification-anchor-icon {
@@ -1175,7 +1184,7 @@ use 0.6 instead of 1 since 1 will end up being shown as like 1.4px for some wind
     height: var(--urlbar-height) !important;
     padding-inline: 30px 8px !important;
     border: none !important;
-    border-right: 1px solid var(--desaturate-dimmed) !important;
+    border-inline-end: 1px solid var(--desaturate-dimmed) !important;
     pointer-events: auto !important;
     fill: currentColor !important;
 }
@@ -1192,6 +1201,7 @@ use 0.6 instead of 1 since 1 will end up being shown as like 1.4px for some wind
     -moz-context-properties: fill, fill-opacity, stroke-opacity !important;
     z-index: 1;
     left: 7px;
+    right: 7px;
     opacity: 0;
     pointer-events: none;
     border-radius: 50px !important;
