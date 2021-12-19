@@ -113,9 +113,10 @@ I also recommend setting the following prefs in `about:config`. There are two pr
 | <i>layout.css.xul-box-display-values.content.enabled</i> | Boolean | true | Required |
 | <i>layout.css.xul-display-values.content.enabled</i> | Boolean | true | Required |
 | layout.css.xul-tree-pseudos.content.enabled | Boolean | true | |
-| reader.color\_scheme | String | `dark` | |
 | mousewheel.autodir.enabled | Boolean | false | Allow mousewheel ⇅ to scroll ⇄-only scrollboxes |
 | prompts.contentPromptSubDialog | Boolean | true | Use the modern content dialog instead of modal prompts |
+| reader.color\_scheme | String | `dark` | |
+| slider.snapMultiplier | Number | 0 | When dragging a scrollbar, if the mouse moves too far from the scrollbar, the scrollbar will snap back to the top. Disable this. |
 | <i>svg.context-properties.content.enabled</i> | Boolean | true | Required for making some icons white |
 | <i>toolkit.legacyUserProfileCustomizations.stylesheets</i> | Boolean | true | Required, of course |
 | ui.IMERawInputBackground | String | `#000000` | This affects the appearance of IME overlays. e.g. when typing Hangul or Pinyin |
