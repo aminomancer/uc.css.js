@@ -316,6 +316,14 @@ more useful than userContent.css when dealing with very complex websites that ne
     list-style-image: url(chrome://userchrome/content/engines/youtube.svg);
 }
 
+.eom-addon-button[data-extensionid="bugzilla@aminomancer"] .toolbarbutton-icon {
+    list-style-image: url(chrome://userchrome/content/engines/bugzilla.svg);
+}
+
+.eom-addon-button[data-extensionid="mdnwebdocs@aminomancer"] .toolbarbutton-icon {
+    list-style-image: url(chrome://userchrome/content/engines/mdnwebdocs.svg);
+}
+
 /* sponsorblock */
 :is(.webextension-browser-action, .eom-addon-button)[data-extensionid="sponsorBlocker@ajay.app"]
     .toolbarbutton-icon {
