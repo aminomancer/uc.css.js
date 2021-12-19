@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Search Selection Keyboard Shortcut
-// @version        1.6.0
+// @version        1.6.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Adds a new keyboard shortcut (Ctrl+Shift+F) that searches your default search engine for whatever text you currently have highlighted. This does basically the same thing as the context menu option "Search {Engine} for {Selection}" except that if you highlight a URL, instead of searching for the selection it will navigate directly to the URL.
@@ -80,12 +80,16 @@ class SearchSelectionShortcut {
         let { path } = tempDir;
         await IOUtils.makeDirectory(path, { ignoreExisting: true });
         // hide the temp dir on windows so it doesn't get in the way of user activities or prevent its eventual deletion.
-        OS.File.setPermissions(path, { winAttributes: { hidden: true } });
+        if (AppConstants.platform === "win") {
+            if ("setWindowsAttributes" in IOUtils)
+                await IOUtils.setWindowsAttributes(path, { hidden: true });
+        }
         this.tempPath = path;
 
         // create a manifest file that registers a URI for chrome://uc-searchselectionshortcut/content/
         this.manifestFile = await this.createTempFile(`content uc-searchselectionshortcut ./`, {
-            name: "ucsss.manifest",
+            name: "ucsss",
+            type: "manifest",
         });
         // JSActors require parent files and child files. see: https://firefox-source-docs.mozilla.org/dom/ipc/jsactors.html
         // this parent file listens for messages from the child file. when it gets a message, it triggers a search or link navigation.
@@ -96,30 +100,24 @@ class SearchSelectionShortcut {
         // it assumes you don't want to keep an empty tab around, so it'll open the search/link in the current tab.
         this.parentFile = await this.createTempFile(
             `"use strict";const EXPORTED_SYMBOLS=["SearchSelectionShortcutParent"];const{Services}=ChromeUtils.import("resource://gre/modules/Services.jsm");const{XPCOMUtils}=ChromeUtils.import("resource://gre/modules/XPCOMUtils.jsm");XPCOMUtils.defineLazyModuleGetters(this,{BrowserWindowTracker:"resource:///modules/BrowserWindowTracker.jsm",PrivateBrowsingUtils:"resource://gre/modules/PrivateBrowsingUtils.jsm",E10SUtils:"resource://gre/modules/E10SUtils.jsm"});const{WebExtensionPolicy}=Cu.getGlobalForObject(Cu);const schemes=/^http|https|ftp$/;const base=host=>{let domain;try{domain=Services.eTLD.getBaseDomainFromHost(host)}catch(e){}return domain};class SearchSelectionShortcutParent extends JSWindowActorParent{get browser(){return this.browsingContext.top.embedderElement}getEngineTemplate(e){const engineURL=e._getURLOfType("text/html");return engineURL.params.length>0?e._searchForm:engineURL.template}async getMatchingEngine(match,url,host,check=true){if(!match)return null;let preferred;let uri=Services.io.newURI(url);if(check){if(url in CUSTOM_MATCHES)preferred=CUSTOM_MATCHES[url];if(!preferred&&host in CUSTOM_MATCHES)preferred=CUSTOM_MATCHES[host];if(!preferred&&!host){try{preferred=CUSTOM_MATCHES[uri.prePath+uri.filePath]}catch(e){}}if(preferred){const engine=Services.search.getEngineByName(preferred);if(engine&&!engine.hidden)return engine}}const visibleEngines=await Services.search.getVisibleEngines();let originalHost;if(preferred&&/.+\\..+/.test(preferred)){originalHost=host;host=preferred}let engines=visibleEngines.filter((engine=>engine.getResultDomain()==host));if(!engines.length){const baseHost=base(host);if(baseHost||!preferred)engines=visibleEngines.filter((engine=>base(engine.getResultDomain())==baseHost))}if(originalHost&&!engines.length){try{let fixup=Services.uriFixup.getFixupURIInfo(preferred,Ci.nsIURIFixup.FIXUP_FLAG_FIX_SCHEME_TYPOS);uri=fixup.fixedURI;engines=visibleEngines.filter((engine=>engine.getResultDomain()==uri.host))}catch(e){}if(!engines.length)return this.getMatchingEngine(match,url,originalHost,false)}if(engines.length>1){engines.sort(((a,b)=>{const uriA=Services.io.newURI(this.getEngineTemplate(a)),uriB=Services.io.newURI(this.getEngineTemplate(b)),cmnA=this.commonLength(uri,uriA),cmnB=this.commonLength(uri,uriB);return cmnB.host-cmnA.host||cmnB.path-cmnA.path||cmnB.query-cmnA.query}))}return engines[0]}commonLength(x,y){if(!(x?.spec&&y?.spec))return 0;let xh="",yh="";try{xh=x.host}catch(e){}try{yh=y.host}catch(e){}let xf=x.filePath,yf=y.filePath,xs=x.scheme,ys=y.scheme||"https",xq=x.query,yq=y.query,i=0,k=0,len=xh.length,sq="";if(xs!=ys&&!(schemes.test(xs)&&schemes.test(ys)))return 0;while(k<len&&xh.charAt(len-k)===yh.charAt(yh.length-k))k++;while(i<xf.length&&xf.charAt(i)===yf.charAt(i))i++;if(xq&&yq){let xa=xq.split("&"),ya=yq.split("&"),qp;ya=ya.filter((p=>{if(p.endsWith("{searchTerms}")){qp=p.replace(/{searchTerms}/,"");return}return true}));xa=xa.filter((p=>!(qp&&p.startsWith(qp))));sq=xa.filter((p=>ya.includes(p)))}return{host:xh.substring(len-k,len).length,path:xf.substring(0,i).length,query:sq.length}}stripURLPrefix(str){let match=/^[a-z]+:(?:\\/){0,2}/i.exec(str);if(!match)return["",str];let prefix=match[0];if(prefix.length<str.length&&str[prefix.length]==" ")return["",str];return[prefix,str.substr(prefix.length)]}getFixupInfo(text){let fixupInfo,fixupError;try{let flags=Ci.nsIURIFixup.FIXUP_FLAG_FIX_SCHEME_TYPOS|Ci.nsIURIFixup.FIXUP_FLAG_ALLOW_KEYWORD_LOOKUP;let info=Services.uriFixup.getFixupURIInfo(text,flags);if(PrivateBrowsingUtils.isWindowPrivate(this.browser.ownerGlobal))flags|=Ci.nsIURIFixup.FIXUP_FLAG_PRIVATE_CONTEXT;fixupInfo={uri:info.fixedURI,href:info.fixedURI.spec,isSearch:!!info.keywordAsSent}}catch(e){fixupError=e.result}return{info:fixupInfo,error:fixupError}}parseURL(text){try{let str=Services.textToSubURI.unEscapeURIForUI(text);let[prefix,suffix]=this.stripURLPrefix(str);if(!suffix&&prefix)return null;let fixup=this.getFixupInfo(text);if(fixup.error)return null;if(!fixup.info?.href||fixup.info?.isSearch)return null;let{uri}=fixup.info;let url=new URL(fixup.info.href);let hostExpected=["http:","https:","ftp:","chrome:"].includes(url.protocol);if(hostExpected&&!url.host)return null;return{uri,url,href:url.toString()}}catch(e){return null}}async receiveMessage(msg){const browser=this.manager.rootFrameLoader.ownerElement,win=browser.ownerGlobal,{data,target}=msg,{windowContext,browsingContext}=target;if(browsingContext.topChromeWindow!==BrowserWindowTracker.getTopWindow())return;let{text,locationURL,locationHost,match}=data;const csp=E10SUtils.deserializeCSP(data.csp),principal=windowContext.documentPrincipal||Services.scriptSecurityManager.createNullPrincipal({userContextId:win.gBrowser.selectedBrowser.getAttribute("userContextId")});let options={inBackground:Services.prefs.getBoolPref("browser.search.context.loadInBackground"),triggeringPrincipal:principal,relatedToCurrent:true};const where=locationURL.startsWith(win.BROWSER_NEW_TAB_URL)?"current":"tab";if(!match){const parsed=this.parseURL(text);if(parsed){let canon=true;let{uri}=parsed;let host="";try{host=uri.host}catch(e){}switch(uri.scheme){case"moz-extension":const policy=WebExtensionPolicy.getByHostname(host);if(policy){const extPrincipal=policy&&policy.extension.principal;if(extPrincipal)options.triggeringPrincipal=extPrincipal}else canon=false;break;case"about":canon=E10SUtils.getAboutModule(uri);break;case"chrome":case"resource":if(!host){canon=false;break}case"file":options.triggeringPrincipal=Services.scriptSecurityManager.getSystemPrincipal();break;case"data":if(!uri.filePath.includes(",")){canon=false;break}options.triggeringPrincipal=Services.scriptSecurityManager.createNullPrincipal({userContextId:win.gBrowser.selectedBrowser.getAttribute("userContextId")});break;case"javascript":canon=false;break;default:}if(!!canon)return win.openLinkIn(parsed.href,where,options)}}let engine=await this.getMatchingEngine(match,locationURL,locationHost);win.BrowserSearch._loadSearch(text,where,false,null,principal,csp,options.inBackground,engine)}}XPCOMUtils.defineLazyPreferenceGetter(this,"CUSTOM_MATCHES","userChrome.searchSelectionShortcut.custom-matches","{}",null,(val=>JSON.parse(val)));`,
-            { name: "SearchSelectionShortcutParent.jsm" }
+            { name: "SearchSelectionShortcutParent", type: "jsm" }
         );
         // the child actor is where the hotkey itself is set up. it listens for the Ctrl+Shift+F hotkey,
         // and if text is selected within the actor's frame at the time the hotkey is pressed,
         // it will send a message containing the aforementioned properties back up to the parent actor.
         this.childFile = await this.createTempFile(
             `"use strict";const EXPORTED_SYMBOLS=["SearchSelectionShortcutChild"];const{Services}=ChromeUtils.import("resource://gre/modules/Services.jsm");const{XPCOMUtils}=ChromeUtils.import("resource://gre/modules/XPCOMUtils.jsm");XPCOMUtils.defineLazyModuleGetters(this,{SelectionUtils:"resource://gre/modules/SelectionUtils.jsm",E10SUtils:"resource://gre/modules/E10SUtils.jsm"});class SearchSelectionShortcutChild extends JSWindowActorChild{getKeyState(e){if(e.code!==KEYCODE||e.repeat)return false;let alt=e.getModifierState("Alt");let shift=e.getModifierState("Shift");if(e.getModifierState("Accel")){if(MATCH_ENGINE_TO_TAB&&!shift&&alt)return"match";if(shift&&!alt)return"default"}return false}handleEvent(e){let match=false;switch(this.getKeyState(e)){case"default":break;case"match":match=true;break;default:return}let selection=SelectionUtils.getSelectionDetails(this.contentWindow);if(selection&&selection.text&&!selection.docSelectionIsCollapsed){let msg={csp:E10SUtils.serializeCSP(e.originalTarget.ownerDocument.csp),text:selection.text,locationURL:this.contentWindow.location.href,locationHost:this.contentWindow.location.hostname,match};this.sendAsyncMessage("ctrl-shift-f",msg);e.stopPropagation();e.stopImmediatePropagation();e.preventDefault()}}}XPCOMUtils.defineLazyPreferenceGetter(this,"KEYCODE","userChrome.searchSelectionShortcut.keycode","KeyF");XPCOMUtils.defineLazyPreferenceGetter(this,"MATCH_ENGINE_TO_TAB","userChrome.searchSelectionShortcut.match-engine-to-current-tab",false);`,
-            { name: "SearchSelectionShortcutChild.jsm" }
+            { name: "SearchSelectionShortcutChild", type: "jsm" }
         );
 
         // find the manifest in the temp directory and register it with the component registrar.
-        let manifest = FileUtils.getFile("UChrm", [".SearchSelectionShortcut", "ucsss.manifest"]);
-        // some problem with IOUtils writing methods makes autoRegister unable to read them until they've been read by OS.File.
-        // I'm guessing it has something to do with their asynchrony. but it makes no sense because they are supposed to resolve a promise
-        // when they're finished writing. apparently they resolve before they're truly finished, or something.
-        // waiting for OS.File.stat works, but OS.File will be removed eventually.
-        // at that point this can be substituted for just waiting for like 50ms.
-        await OS.File.stat(manifest.path);
+        let manifest = FileUtils.getFile("UChrm", [
+            ".SearchSelectionShortcut",
+            this.manifestFile.name,
+        ]);
         // registering the manifest gives the temp folder a chrome:// URI that we can reference below
         if (manifest.exists()) registrar.autoRegister(manifest);
         else return;
-        this.registrar = registrar;
-        this.manifest = manifest;
-
         // register the JSActor, passing the temporary files' chrome:// URLs.
         // includeChrome, allFrames, and messageManagerGroups are specified to ensure this works in every frame.
         // this means it'll work on ANY page in ANY browser. it will even work in addon pages loaded in webextension popup panels.
@@ -146,7 +144,12 @@ class SearchSelectionShortcut {
      * @returns {object} { name, url } (an object containing the filename and a chrome:// URL leading to the file)
      */
     async createTempFile(contents, options = {}) {
-        let { path = null, name = "uc-temp" } = options;
+        let { path = null, name = "uc-temp", type = "txt" } = options;
+        const uuid = Cc["@mozilla.org/uuid-generator;1"]
+            .getService(Ci.nsIUUIDGenerator)
+            .generateUUID()
+            .toString();
+        name += "-" + uuid + "." + type;
         if (!path) path = FileUtils.getFile("UChrm", [".SearchSelectionShortcut", name]).path;
         await IOUtils.writeUTF8(path, contents);
         let url = "chrome://uc-searchselectionshortcut/content/" + name;
