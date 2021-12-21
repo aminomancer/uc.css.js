@@ -823,7 +823,7 @@ so you can use those classes to set the icon. */
 }
 
 .urlbar-input-box input {
-    padding-inline: 4px 0 !important;
+    padding-inline: 4px !important;
     height: var(--urlbar-height) !important;
 }
 

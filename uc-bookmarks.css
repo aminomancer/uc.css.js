@@ -43,7 +43,7 @@
 
 #editBookmarkPanelBottomContent {
     padding-inline: 10px !important;
-    padding-block: 6px 8px !important;
+    padding-block: 8px !important;
 }
 
 #editBookmarkPanelRows > vbox {
@@ -174,7 +174,7 @@
 }
 
 #editBMPanel_newFolderBox {
-    margin-block: 6px 0 !important;
+    margin-block: 8px 0 !important;
 }
 
 #editBookmarkPanel menuitem,
@@ -257,7 +257,7 @@
 }
 
 #editBookmarkPanel .panel-footer > button:not([default], [disabled]):is(:hover:active, [open]) {
-    background-color: var(--button-active-bgcolor) !important;
+    background-color: var(--ebmp-focus-bgcolor) !important;
     border-color: transparent !important;
 }
 
@@ -283,7 +283,7 @@
 #editBookmarkPanel #editBookmarkPanelContent :is(.expander-up, .expander-down) {
     min-width: 24px !important;
     min-height: 24px !important;
-    margin-inline-start: 6px !important;
+    margin-inline-start: 8px !important;
     padding: 0 !important;
     color: var(--lwt-toolbarbutton-icon-fill) !important;
     border-radius: var(--general-button-border-radius) !important;
