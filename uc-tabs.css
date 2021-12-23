@@ -112,13 +112,6 @@
     font-weight: unset !important;
 }
 
-.tabbrowser-tab:is([image], [pinned]) > .tab-stack > .tab-content[attention]:not([selected="true"]),
-.tabbrowser-tab > .tab-stack > .tab-content[pinned][titlechanged]:not([selected="true"]) {
-    background-image: unset !important;
-    background-position: unset !important;
-    background-repeat: unset !important;
-}
-
 /* highlight unread tabs; requires italicizeUnreadTabs.uc.js */
 :root[italic-unread-tabs] .tabbrowser-tab[notselectedsinceload]:not([pending]),
 :root[italic-unread-tabs] .tabbrowser-tab[notselectedsinceload][pending][busy] {
@@ -621,11 +614,33 @@ so in other words it won't show if audio is playing until you hover the general 
     opacity: 0.6 !important;
 }
 
+/* attention indicator */
 .tabbrowser-tab:is([image], [pinned]) > .tab-stack > .tab-content[attention]:not([selected="true"]),
 .tabbrowser-tab > .tab-stack > .tab-content[pinned][titlechanged]:not([selected="true"]) {
-    background-image: url(chrome://userchrome/content/indicator-tab-attention.svg);
-    background-position: right 6px top 4px !important;
+    background-image: url(chrome://userchrome/content/indicator-tab-attention.svg) !important;
+    background-position: right 4px top 4px !important;
+    background-size: 10px !important;
     background-repeat: no-repeat;
+}
+
+/* tab crashed indicator */
+.tabbrowser-tab[crashed] > .tab-stack > .tab-content::after {
+    top: 4px;
+    right: 4px;
+    content: "";
+    display: block;
+    position: absolute;
+    pointer-events: none;
+    width: 10px;
+    height: 10px;
+    z-index: 2;
+    -moz-context-properties: fill, stroke;
+    stroke: var(--warning-icon-detail);
+    fill: var(--warning-icon-background);
+    background-image: url(chrome://userchrome/content/devtools/error-small-two-tone.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .tab-close-button {

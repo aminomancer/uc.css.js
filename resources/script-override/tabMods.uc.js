@@ -1,11 +1,18 @@
-// @version        1.2
-// @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
-
+// ==UserScript==
+// @name           Tab Mods — tabbrowser-tab class definition mods
+// @version        1.3
+// @author         aminomancer
+// @homepage       https://github.com/aminomancer/uc.css.js
+// @description    Restore the tab sound button and other aspects of the tab that (imo) were better before Proton.
 // by adding a line to chrome.manifest this can be used to completely override the tab element template, markup and class methods:
 // override chrome://browser/content/tabbrowser-tab.js ../resources/script-override/tabMods.uc.js
+// @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
+// ==/UserScript==
 
 "use strict";
 
+// This is loaded into chrome windows with the subscript loader. Wrap in
+// a block to prevent accidentally leaking globals onto `window`.
 {
   class MozTabbrowserTab extends MozElements.MozTab {
     static markup = `
@@ -237,15 +244,10 @@
     }
 
     get _overPlayingIcon() {
-      // TODO (bug 1702652): Simplify this getter during Proton cleanup
-      let iconVisible =
-        this.soundPlaying || this.muted || this.activeMediaBlocked;
-
-      let soundPlayingIcon = this.soundPlayingIcon;
-      let overlayIcon = this.overlayIcon;
       return (
-        (soundPlayingIcon && soundPlayingIcon.matches(":hover")) ||
-        (overlayIcon && overlayIcon.matches(":hover") && iconVisible)
+        this.soundPlayingIcon?.matches(":hover") ||
+        (this.overlayIcon?.matches(":hover") &&
+          (this.soundPlaying || this.muted || this.activeMediaBlocked))
       );
     }
 
@@ -424,31 +426,34 @@
         return;
       }
 
-      if (
-        gBrowser.multiSelectedTabsCount > 0 &&
-        !event.target.classList.contains("tab-close-button") &&
-        !event.target.classList.contains("tab-icon-sound") &&
-        !event.target.classList.contains("tab-icon-overlay")
-      ) {
+      let onClose = event.target.classList.contains("tab-close-button");
+      let onSound = event.target.classList.contains("tab-icon-sound");
+      let onOverlay = event.target.classList.contains("tab-icon-overlay");
+
+      if (gBrowser.multiSelectedTabsCount > 0 && !onClose && !onSound && !onOverlay) {
         // Tabs were previously multi-selected and user clicks on a tab
         // without holding Ctrl/Cmd Key
         gBrowser.clearMultiSelectedTabs();
       }
 
-      if (
-       event.target.classList.contains("tab-icon-sound") ||
-       (event.target.classList.contains("tab-icon-overlay") &&
-         (this.soundPlaying || this.muted || this.activeMediaBlocked))
-     ) {
-        if (this.multiselected) {
-          gBrowser.toggleMuteAudioOnMultiSelectedTabs(this);
-        } else {
-          this.toggleMuteAudio();
+      if (onSound || onOverlay) {
+        if (this.activeMediaBlocked) {
+          if (this.multiselected) {
+            gBrowser.resumeDelayedMediaOnMultiSelectedTabs(this);
+          } else {
+            this.resumeDelayedMedia();
+          }
+        } else if (onSound || this.soundPlaying || this.muted) {
+          if (this.multiselected) {
+            gBrowser.toggleMuteAudioOnMultiSelectedTabs(this);
+          } else {
+            this.toggleMuteAudio();
+          }
         }
         return;
       }
 
-      if (event.target.classList.contains("tab-close-button")) {
+      if (onClose) {
         if (this.multiselected) {
           gBrowser.removeMultiSelectedTabs();
         } else {
@@ -631,21 +636,24 @@
         TelemetryStopwatch.finish("HOVER_UNTIL_UNSELECTED_TAB_OPENED", this);
       }
     }
+ 
+    resumeDelayedMedia() {
+      if (this.activeMediaBlocked) {
+        Services.telemetry
+          .getHistogramById("TAB_AUDIO_INDICATOR_USED")
+          .add(3 /* unblockByClickingIcon */);
+        this.removeAttribute("activemedia-blocked");
+        this.linkedBrowser.resumeMedia();
+        gBrowser._tabAttrModified(this, ["activemedia-blocked"]);
+      }
+    }
 
     toggleMuteAudio(aMuteReason) {
       let browser = this.linkedBrowser;
-      let modifiedAttrs = [];
       let hist = Services.telemetry.getHistogramById(
         "TAB_AUDIO_INDICATOR_USED"
       );
 
-      if (this.activeMediaBlocked) {
-        this.removeAttribute("activemedia-blocked");
-        modifiedAttrs.push("activemedia-blocked");
-
-        browser.resumeMedia();
-        hist.add(3 /* unblockByClickingIcon */);
-      } else {
         if (browser.audioMuted) {
           if (this.linkedPanel) {
             // "Lazy Browser" should not invoke its unmute method
@@ -662,9 +670,8 @@
           hist.add(0 /* mute */);
         }
         this.muteReason = aMuteReason || null;
-        modifiedAttrs.push("muted");
-      }
-      gBrowser._tabAttrModified(this, modifiedAttrs);
+ 
+        gBrowser._tabAttrModified(this, ["muted"]);
     }
 
     setUserContextId(aUserContextId) {

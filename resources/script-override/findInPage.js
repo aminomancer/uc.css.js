@@ -1,12 +1,11 @@
-/* This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this file,
- * You can obtain one at http://mozilla.org/MPL/2.0/. */
- 
- /* This Source Code Form is subject to the terms of the Creative Commons
- * Attribution-NonCommercial-ShareAlike International License, v. 4.0.
- * If a copy of the CC BY-NC-SA 4.0 was not distributed with this
- * file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/
- * or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA. */
+// ==UserScript==
+// @name           about:preferences Find in Page Highlight Mod
+// @version        1.1
+// @author         aminomancer
+// @homepage       https://github.com/aminomancer/uc.css.js
+// @description    Make the searchbar result highlighting in about:preferences adapt to user's CSS variables. Allows us to change the highlight color of search results to be more consistent with the theme.
+// @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
+// ==/UserScript==
 
 /* import-globals-from extensionControlled.js */
 /* import-globals-from preferences.js */
@@ -40,7 +39,6 @@ var gSearchResultsPane = {
   subItems: new Map(),
 
   init() {
-      
     if (this.inited) {
       return;
     }
@@ -54,21 +52,33 @@ var gSearchResultsPane = {
       this.searchInput.addEventListener("command", this);
       window.addEventListener("DOMContentLoaded", () => {
         this.searchInput.focus();
+        // Initialize other panes in an idle callback.
+        window.requestIdleCallback(() => this.initializeCategories());
       });
-      // Initialize other panes in an idle callback.
-      window.requestIdleCallback(() => this.initializeCategories());
     }
     let helpUrl =
       Services.urlFormatter.formatURLPref("app.support.baseURL") +
       "preferences";
     let helpContainer = document.getElementById("need-help");
     helpContainer.querySelector("a").href = helpUrl;
+    ensureScrollPadding();
   },
 
   async handleEvent(event) {
     // Ensure categories are initialized if idle callback didn't run sooo enough.
     await this.initializeCategories();
     this.searchFunction(event);
+  },
+
+  /**
+   * This stops the search input from moving, when typing in it
+   * changes which items in the prefs are visible.
+   */
+  fixInputPosition() {
+    let innerContainer = document.querySelector(".sticky-inner-container");
+    let width = window.windowUtils.getBoundsWithoutFlushing(innerContainer)
+      .width;
+    innerContainer.style.maxWidth = width + "px";
   },
 
   /**
@@ -233,15 +243,17 @@ var gSearchResultsPane = {
    *   The window object points to frame's window
    */
   getFindSelection(win) {
-      let docShell = win.docShell;
-      let controller = docShell
-          .QueryInterface(Ci.nsIInterfaceRequestor)
-          .getInterface(Ci.nsISelectionDisplay)
-          .QueryInterface(Ci.nsISelectionController);
-      let selection = controller.getSelection(Ci.nsISelectionController.SELECTION_FIND);
+    // Yuck. See bug 138068.
+    let docShell = win.docShell;
 
-      selection.setColors("white", this.hex, "white", this.hex);
-      return selection;
+    let controller = docShell
+      .QueryInterface(Ci.nsIInterfaceRequestor)
+      .getInterface(Ci.nsISelectionDisplay)
+      .QueryInterface(Ci.nsISelectionController);
+    let selection = controller.getSelection(Ci.nsISelectionController.SELECTION_FIND);
+
+    selection.setColors("white", this.hex, "white", this.hex);
+    return selection;
   },
 
   /**
@@ -256,6 +268,8 @@ var gSearchResultsPane = {
       return;
     }
 
+    let firstQuery = !this.query && query;
+    let endQuery = !query && this.query;
     let subQuery = this.query && query.includes(this.query);
     this.query = query;
 
@@ -272,6 +286,10 @@ var gSearchResultsPane = {
     let srHeader = document.getElementById("header-searchResults");
     let noResultsEl = document.getElementById("no-results-message");
     if (this.query) {
+      // If this is the first query, fix the search input in place.
+      if (firstQuery) {
+        this.fixInputPosition();
+      }
       // Showing the Search Results Tag
       await gotoPref("paneSearchResults");
       srHeader.hidden = false;
@@ -374,6 +392,11 @@ var gSearchResultsPane = {
         }
       }
     } else {
+      if (endQuery) {
+        document
+          .querySelector(".sticky-inner-container")
+          .style.removeProperty("max-width");
+      }
       noResultsEl.hidden = true;
       document.getElementById("sorry-message-query").textContent = "";
       // Going back to General when cleared
@@ -566,9 +589,14 @@ var gSearchResultsPane = {
         this.listSearchTooltips.add(nodeObject);
       }
 
-      // If this is a node for an experimental feature option, add it to the list
-      // of subitems. The items that don't match the search term will be hidden.
-      if (child instanceof Element && child.classList.contains("featureGate")) {
+      // If this is a node for an experimental feature option or a Mozilla product item,
+      // add it to the list of subitems. The items that don't match the search term
+      // will be hidden.
+      if (
+        child instanceof Element &&
+        (child.classList.contains("featureGate") ||
+          child.classList.contains("mozilla-product-item"))
+      ) {
         this.subItems.set(child, result);
       }
     }

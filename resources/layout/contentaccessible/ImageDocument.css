@@ -9,30 +9,23 @@
 */
 
 body {
-  /* To give the image access to our document's full viewport, we need to
+    /* To give the image access to our document's full viewport, we need to
      override the margin that the html.css UA stylesheet would otherwise apply
      to our body. */
-  margin: 0;
+    margin: 0;
 }
 
 @media not print {
-  .shrinkToFit {
-    cursor: zoom-in;
-  }
+    .shrinkToFit {
+        cursor: zoom-in;
+    }
 
-  .overflowingVertical, .overflowingHorizontalOnly {
-    cursor: zoom-out;
-  }
+    .overflowingVertical,
+    .overflowingHorizontalOnly {
+        cursor: zoom-out;
+    }
 }
 
-@media print {
-  /* We must declare the image as a block element. If we stay as
-  an inline element, our parent LineBox will be inline too and
-  ignore the available height during reflow.
-  This is bad during printing, it means tall image frames won't know
-  the size of the paper and cannot break into continuations along
-  multiple pages. */
-  img {
+img {
     display: block;
-  }
 }

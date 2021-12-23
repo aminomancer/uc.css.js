@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Vertical Tabs Pane
-// @version        1.5.3
+// @version        1.5.4
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Create a vertical pane across from the sidebar that functions like the vertical
@@ -392,7 +392,7 @@
         // make an array containing all the context menus that can be opened by right-clicking something inside the pane.
         get contextMenus() {
             let menus = [];
-            let contextDefs = Array.from(this.pane.querySelectorAll("[context]"));
+            let contextDefs = [...this.pane.querySelectorAll("[context]")];
             contextDefs.push(this.pane);
             contextDefs.forEach((node) => {
                 let menu = document.getElementById(node.getAttribute("context"));
@@ -1073,7 +1073,7 @@
                     !gNavToolbox.contains(oldFocus) &&
                     !this.pane.contains(oldFocus)
                 ) {
-                    let allStops = Array.from(document.querySelectorAll("toolbartabstop"));
+                    let allStops = [...document.querySelectorAll("toolbartabstop")];
                     let earlierVisibleStopIndex = allStops.indexOf(e.target) - 1;
                     while (earlierVisibleStopIndex >= 0) {
                         let stop = allStops[earlierVisibleStopIndex];
