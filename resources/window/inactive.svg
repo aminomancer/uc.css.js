@@ -1,1 +1,3 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 114 114"><circle transform="rotate(-86.438 56.99 56.99) scale(1.00003)" cx="57" cy="57" fill="hsl(227, 19%, 48%)" r="57"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 114 114" width="16" height="16">
+    <circle cx="57" cy="57" fill="context-fill hsl(227, 19%, 48%)" r="57" />
+</svg>

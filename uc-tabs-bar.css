@@ -241,8 +241,9 @@ this sheet controls their appearance as well. */
     border: none;
     margin: 0 !important;
     padding: 8px 17px;
-    -moz-context-properties: stroke;
-    stroke: currentColor;
+    -moz-context-properties: fill, stroke !important;
+    stroke: none !important;
+    fill: none !important;
 }
 
 :root:not([sizemode="maximized"], [inFullscreen]) :is(.titlebar-restore, .uc-titlebar-restore),
@@ -262,7 +263,7 @@ this sheet controls their appearance as well. */
     appearance: none !important;
     width: 15.3px !important;
     height: 15.3px !important;
-    stroke: none !important;
+    stroke: inherit !important;
 }
 
 .titlebar-buttonbox {

@@ -74,39 +74,38 @@ findbar[hidden] {
 }
 
 .findbar-closebutton {
-    padding: 0 0 0 4px !important;
-    margin-inline: 3px 0 !important;
+    padding: 0 !important;
+    margin-inline: 7px 0 !important;
     margin-block: 0 !important;
-    background: none !important;
+    height: var(--findbar-height, 22px) !important;
+    width: var(--findbar-height, 22px) !important;
+    border-radius: var(--toolbarbutton-border-radius) !important;
     -moz-box-ordinal-group: 2 !important;
     /* I use findbarMods.uc.js to actually move the icon to the right side, so the tab index will be correct.
     But -moz-box-ordinal-group is a decent, (purely visual) alternative if you don't use scripts. */
 }
 
 .findbar-closebutton .toolbarbutton-icon {
-    border-radius: var(--toolbarbutton-border-radius) !important;
     fill-opacity: 0 !important;
-    width: var(--findbar-height, 22px);
-    height: var(--findbar-height, 22px);
-    padding: 5px;
+    width: 12px !important;
+    height: 12px !important;
     /* list-style-image: url(chrome://userchrome/content/textbox-clear.svg) !important; */
     list-style-image: url(chrome://userchrome/content/window-controls/close.svg) !important;
     stroke: white !important;
     -moz-context-properties: fill, fill-opacity, stroke !important;
 }
 
-.findbar-closebutton:is(:hover, :focus-visible):not([disabled]) .toolbarbutton-icon {
+.findbar-closebutton:is(:hover, :focus-visible):not([disabled]) {
     background-color: var(--toolbarbutton-hover-background) !important;
 }
 
-.findbar-closebutton:is(:hover, :focus-visible):not([disabled]):active .toolbarbutton-icon {
+.findbar-closebutton:is(:hover, :focus-visible):not([disabled]):active {
     background-color: var(--toolbarbutton-active-background) !important;
 }
 
 [anonid="findbar-textbox-wrapper"] {
     border-radius: var(--toolbarbutton-border-radius) !important;
     overflow: hidden !important;
-    height: var(--findbar-height, 22px) !important;
     -moz-box-flex: 1 !important;
 }
 
@@ -116,7 +115,7 @@ findbar[hidden] {
     width: -moz-available !important;
     border-radius: 0 !important;
     outline: none !important;
-    max-height: var(--findbar-height, 22px) !important;
+    height: var(--findbar-height, 22px) !important;
     padding-inline: 6px !important;
     -moz-box-flex: 1 !important;
 }
@@ -198,6 +197,10 @@ findbar .matches-indicator {
     width: 12px !important;
     margin-inline: 2px !important;
     opacity: 0.5 !important;
+}
+
+[anonid="findbar-textbox-wrapper"] > :last-child > .toolbarbutton-icon {
+    margin-inline-end: calc((var(--findbar-height) - 16px) / 3) !important;
 }
 
 .findbar-find-previous {

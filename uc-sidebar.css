@@ -530,14 +530,14 @@ there are normally no twistys in sorted trees so it is relatively safe to collap
 
 #sidebar-box {
     --sidebar-background-color: var(--ui-secondary-bg) !important;
+    display: flex !important;
+    position: absolute !important;
     top: 0 !important;
     bottom: 0 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    position: absolute !important;
-    z-index: 1 !important;
     left: 0 !important;
     right: auto !important;
+    z-index: 1 !important;
+    flex-direction: column !important;
     box-shadow: 0px 0px 8px -4px hsla(240, 4%, 0%, 0.6), 0px 0px 15px 0px hsla(0, 0%, 0%, 0.2) !important;
 }
 
