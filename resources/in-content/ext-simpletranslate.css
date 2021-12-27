@@ -19,7 +19,6 @@
         --main-bg: var(--uc-arrowpanel-background) !important;
         --sub-text: var(--uc-panel-description-color) !important;
         --highlight: var(--in-parent-link-color) !important;
-        user-select: none;
     }
 
     body {
@@ -99,6 +98,10 @@
     .mediaButtons,
     .mediaButtons * {
         background: none !important;
+    }
+
+    .mediaButtons {
+        user-select: none;
     }
 
     .copy {

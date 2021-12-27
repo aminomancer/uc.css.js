@@ -49,7 +49,6 @@ menupopup {
     --arrowpanel-background: var(--uc-arrowpanel-background) !important;
     --arrowpanel-color: var(--uc-arrowpanel-color) !important;
     --arrowpanel-border-color: var(--uc-menu-border-color) !important;
-    --arrowpanel-darker: var(--uc-arrowpanel-darker) !important;
     --arrowpanel-faint: var(--uc-arrowpanel-faint);
     --arrowpanel-dimmed: var(--uc-arrowpanel-dimmed) !important;
     --arrowpanel-dimmed-further: var(--uc-arrowpanel-dimmed-further) !important;
@@ -63,12 +62,10 @@ menupopup {
     --panel-shortcut-focus: var(--uc-panel-shortcut-focus) !important;
     --panel-disabled-color: var(--context-menu-disabled-color) !important;
     --panel-separator-color: var(--desaturate-dimmed) !important;
+    --toolbarbutton-checked-background: var(--uc-toolbarbutton-checked-background) !important;
     --toolbarbutton-hover-background: var(--uc-toolbarbutton-hover-background) !important;
     --toolbarbutton-active-background: var(--uc-toolbarbutton-active-background) !important;
-    --toolbarbutton-checked-background: var(--uc-toolbarbutton-checked-background) !important;
-    --desaturate-hover-background: var(--uc-desaturate-hover-background);
-    --desaturate-active-background: var(--uc-desaturate-active-background);
-    --desaturate-checked-background: var(--uc-desaturate-checked-background);
+    --toolbarbutton-checked-active-background: var(--uc-toolbarbutton-checked-active-background);
     --button-bgcolor: var(--in-parent-button-background) !important;
     --button-hover-bgcolor: var(--in-parent-button-background-hover) !important;
     --button-active-bgcolor: var(--in-parent-button-background-active) !important;
@@ -82,16 +79,14 @@ menupopup {
     --urlbar-container-padding: 1px !important;
     --urlbar-icon-border-radius: var(--general-button-border-radius) !important;
     --urlbar-icon-fill-opacity: 0.6 !important;
-    --identity-box-label-opacity: var(--urlbar-icon-fill-opacity) !important;
     --urlbar-popup-url-color: var(--purple-35) !important;
     --urlbar-popup-action-color: var(--pink-action) !important;
     --urlbarView-item-inline-padding: 8px !important;
     --tab-min-height: var(--uc-tab-min-height) !important;
     --tab-block-margin: 0px !important;
-    --pinned-tab-width: 36px;
     --inline-tab-padding: 10px !important;
     --tab-shadow-max-size: 0px !important;
-    --tabs-navbar-shadow-size: 0 !important;
+    --tabs-navbar-shadow-size: 0px !important;
     --autocomplete-popup-background: var(--arrowpanel-background) !important;
     --autocomplete-popup-color: var(--lwt-text-color) !important;
     --autocomplete-popup-separator-color: var(--panel-separator-color) !important;
@@ -103,6 +98,10 @@ menupopup {
     --download-progress-fill-color: var(--toolbarbutton-icon-fill-attention) !important;
     --download-progress-paused-color: var(--desaturate-dimmed-further) !important;
     --download-progress-flare-color: var(--purple-40) !important;
+    --downloads-item-height: 5.5em;
+    --downloads-item-font-size-factor: 1 !important;
+    --downloads-item-details-opacity: 0.6;
+    --downloads-item-disabled-opacity: 0.6;
     --ctrlTab-overlay-color: hsla(240, 3%, 4%, 0.5) !important;
     --ctrlTab-panel-disabled-bgcolor: hsla(240, 2%, 9%, 0.8) !important;
     --ctrlTab-panel-disabled-focused-bgcolor: hsla(240, 8%, 3%, 0.9) !important;
@@ -115,11 +114,6 @@ menupopup {
     --in-content-button-background-active: var(--arrowpanel-dimmed-even-further) !important;
     --in-content-button-border-radius: var(--general-button-border-radius) !important;
     --in-content-item-selected: var(--purple-40) !important;
-    --in-content-border-highlight: var(--purple-40) !important;
-    --in-content-border-focus: var(--purple-40) !important;
-    --in-content-border-active: var(--purple-40) !important;
-    --in-content-border-active-shadow: var(--purple-40-a30) !important;
-    --in-content-category-outline-focus: 1px solid transparent !important;
     --in-content-link-color: var(--purple-35) !important;
     --in-content-link-color-hover: var(--purple-30) !important;
     --in-content-link-color-active: var(--purple-30) !important;
@@ -134,7 +128,7 @@ menupopup {
     --menu-disabled-color: var(--panel-disabled-color) !important;
     --menu-border-color: var(--uc-menu-border-color) !important;
     --menu-icon-opacity: 1 !important;
-    --panel-separator-margin: 4px !important;
+    --panel-separator-margin: var(--uc-panel-separator-margin) !important;
 
     --panel-item-bgcolor: var(--arrowpanel-faint);
     --panel-item-hover-bgcolor: var(--arrowpanel-dimmed) !important;
@@ -152,11 +146,12 @@ menupopup {
     --panel-banner-item-active-bgcolor: hsla(109.9, 90.9%, 47.3%, 0.2);
     --panel-banner-item-info-icon-bgcolor: var(--arrowpanel-color) !important;
 
-    --arrowpanel-menuitem-inline-margin: 4px;
+    --arrowpanel-menuitem-inline-margin: var(--uc-arrowpanel-menuitem-inline-margin, 4px) !important;
     --arrowpanel-menuitem-margin: 0px var(--arrowpanel-menuitem-inline-margin) !important;
-    --arrowpanel-menuitem-padding-block: 6px !important;
-    --arrowpanel-menuitem-padding-inline: 6px !important;
-    --arrowpanel-padding: 12px !important;
+    --arrowpanel-menuitem-padding-block: var(--uc-arrowpanel-menuitem-padding-block, 6px) !important;
+    --arrowpanel-menuitem-padding-inline: var(--uc-arrowpanel-menuitem-padding-inline, 6px) !important;
+    --arrowpanel-menuitem-padding: var(--arrowpanel-menuitem-padding-block) var(--arrowpanel-menuitem-padding-inline) !important;
+    --arrowpanel-padding: var(--uc-arrowpanel-root-padding, 12px) !important;
     --panel-subview-body-padding-magnitude: var(--arrowpanel-menuitem-inline-margin);
     --panel-subview-body-padding: var(--panel-subview-body-padding-magnitude) 0 !important;
     --arrowpanel-menuitem-border-radius: var(--context-menuitem-border-radius) !important;

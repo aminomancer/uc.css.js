@@ -8,33 +8,13 @@
 
 #ContentSelectDropdown,
 menupopup.in-menulist {
-    --arrowpanel-menuitem-border-radius: 3px !important;
-    --menu-background-color: var(--arrowpanel-background) !important;
+    --menu-background-color: var(--uc-arrowpanel-background) !important;
     --menu-color: var(--ui-text-80) !important;
-    --menuitem-hover-background-color: var(--arrowpanel-dimmed) !important;
+    --menuitem-hover-background-color: var(--uc-arrowpanel-dimmed) !important;
     --menuitem-disabled-hover-background-color: initial !important;
-    --menu-disabled-color: var(--panel-disabled-color) !important;
+    --menu-disabled-color: var(--context-menu-disabled-color) !important;
     --menu-border-color: var(--uc-menu-border-color) !important;
     --menu-icon-opacity: 1 !important;
-    --arrowpanel-background: var(--uc-arrowpanel-background) !important;
-    --arrowpanel-color: var(--uc-arrowpanel-color) !important;
-    --arrowpanel-border-color: var(--uc-menu-border-color) !important;
-    --arrowpanel-darker: var(--uc-arrowpanel-darker) !important;
-    --arrowpanel-faint: var(--uc-arrowpanel-faint);
-    --arrowpanel-dimmed: var(--uc-arrowpanel-dimmed) !important;
-    --arrowpanel-dimmed-further: var(--uc-arrowpanel-dimmed-further) !important;
-    --arrowpanel-dimmed-even-further: var(--uc-arrowpanel-dimmed-even-further) !important;
-    --desaturate-faint: var(--uc-desaturate-faint);
-    --desaturate-dimmed: var(--uc-desaturate-dimmed);
-    --desaturate-dimmed-further: var(--uc-desaturate-dimmed-further);
-    --desaturate-dimmed-even-further: var(--uc-desaturate-dimmed-even-further);
-    --panel-description-color: hsl(235, 48%, 89%, 70%) !important;
-    --panel-shortcut-color: hsl(235, 27%, 73%, 70%) !important;
-    --panel-shortcut-focus: hsl(235, 32%, 75%, 90%) !important;
-    --panel-disabled-color: var(--context-menu-disabled-color) !important;
-    --panel-separator-color: var(--desaturate-dimmed) !important;
-    --button-hover-bgcolor: var(--arrowpanel-dimmed) !important;
-    --button-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
     user-select: none !important;
     -moz-user-select: none !important;
 }
@@ -139,7 +119,7 @@ menupopup.in-menulist .contentSelectDropdown-searchbox {
     margin-block: 0 !important;
     margin-inline: var(--menupopup-inner-padding-magnitude) !important;
     padding-inline-start: 3px !important;
-    background-color: var(--arrowpanel-dimmed) !important;
+    background-color: var(--uc-arrowpanel-dimmed) !important;
     padding-block: 0 !important;
     transition: 300ms background-color !important;
     min-height: var(--menuitem-height) !important;
@@ -228,7 +208,7 @@ menupopup.in-menulist menu[disabled="true"] > .menu-right {
     :is(menu, menuitem)[_moz-menuactive="true"]:not([disabled="true"]),
 menupopup.in-menulist :is(menu, menuitem)[_moz-menuactive="true"]:not([disabled="true"]) {
     appearance: none !important;
-    background-color: var(--arrowpanel-dimmed) !important;
+    background-color: var(--uc-arrowpanel-dimmed) !important;
 }
 
 #ContentSelectDropdown > menupopup :is(menu, menuitem)[_moz-menuactive="true"][disabled="true"],
@@ -249,7 +229,7 @@ menupopup.in-menulist
     > menupopup
     menu.subviewbutton:not([disabled="true"])[_moz-menuactive="true"]:active,
 menupopup.in-menulist menu.subviewbutton:not([disabled="true"])[_moz-menuactive="true"]:active {
-    background: var(--arrowpanel-dimmed) !important;
+    background: var(--uc-arrowpanel-dimmed) !important;
     box-shadow: none !important;
 }
 
@@ -353,7 +333,7 @@ link[href="chrome://global/skin/global.css"] ~ .menupopup-arrowscrollbox
     background-color: var(--menu-background-color) !important;
     color: var(--menu-color) !important;
     border-radius: var(--menupopup-border-radius) !important;
-    box-shadow: var(--menupopup-shadow) !important;
+    box-shadow: var(--uc-menupopup-shadow) !important;
 }
 
 #ContentSelectDropdown > menupopup :is(.menu-accel, .menu-iconic-accel)[value],
@@ -367,7 +347,7 @@ menupopup.in-menulist :is(.menu-accel, .menu-iconic-accel)[value] {
     menuitem:not([disabled="true"])
     :is(.menu-accel, .menu-iconic-accel),
 menupopup.in-menulist menuitem:not([disabled="true"]) :is(.menu-accel, .menu-iconic-accel) {
-    color: var(--panel-shortcut-color);
+    color: var(--uc-panel-shortcut-color);
 }
 
 #ContentSelectDropdown > menupopup menuitem[disabled="true"] :is(.menu-accel, .menu-iconic-accel),

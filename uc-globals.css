@@ -24,22 +24,6 @@ tooltip {
     --ui-text-90: rgba(255, 255, 255, 0.9);
     --ui-text-100: #fff;
 
-    --uc-arrowpanel-darker: hsla(236, 70%, 73%, 0.17);
-    --uc-arrowpanel-very-faint: hsla(236, 100%, 83%, 0.05);
-    --uc-arrowpanel-faint: hsla(236, 100%, 83%, 0.1);
-    --uc-arrowpanel-dimmed: hsla(236, 100%, 83%, 0.17);
-    --uc-arrowpanel-dimmed-further: hsla(236, 100%, 83%, 0.25);
-    --uc-arrowpanel-dimmed-even-further: hsla(236, 100%, 85%, 0.3);
-    --uc-desaturate-faint: hsla(236, 60%, 83%, 0.1);
-    --uc-desaturate-dimmed: hsla(236, 60%, 83%, 0.17);
-    --uc-desaturate-dimmed-further: hsla(236, 60%, 83%, 0.25);
-    --uc-desaturate-dimmed-even-further: hsla(236, 60%, 85%, 0.3);
-    --uc-panel-button-solid: hsl(234, 24%, 35%);
-    --uc-panel-box-solid: hsl(233, 29%, 18%);
-    --uc-menu-border-color: hsl(233, 23%, 20%);
-    --uc-smooth-timing-function: cubic-bezier(0.07, 0.78, 0.21, 0.95);
-    --uc-content-text-a50: hsla(236, 100%, 85%, 0.5);
-    --uc-content-text-a80: rgba(255, 255, 255, 0.8);
     --uc-accent-color: hsl(233, 59%, 8%);
     --uc-frame-color: var(--uc-accent-color);
     --uc-toolbar-bgcolor: hsl(233, 42%, 15%);
@@ -47,15 +31,28 @@ tooltip {
     --uc-toolbar-field-color: hsl(240, 60%, 99%);
     --uc-arrowpanel-background: hsl(233, 36%, 11%);
     --uc-arrowpanel-color: hsl(213, 43%, 89%);
+    --uc-arrowpanel-very-faint: hsla(236, 100%, 83%, 0.05);
+    --uc-arrowpanel-faint: hsla(236, 100%, 83%, 0.1);
+    --uc-arrowpanel-dimmed: hsla(236, 100%, 83%, 0.17);
+    --uc-arrowpanel-dimmed-further: hsla(234, 100%, 83%, 0.25);
+    --uc-arrowpanel-dimmed-even-further: hsla(232, 100%, 85%, 0.3);
+    --uc-desaturate-faint: hsla(236, 60%, 83%, 0.1);
+    --uc-desaturate-dimmed: hsla(236, 60%, 83%, 0.17);
+    --uc-desaturate-dimmed-further: hsla(234, 60%, 83%, 0.25);
+    --uc-desaturate-dimmed-even-further: hsla(232, 60%, 85%, 0.3);
+    --uc-menu-border-color: hsl(233, 23%, 20%);
+    --uc-content-text-a50: hsla(236, 100%, 85%, 0.5);
+    --uc-content-text-a80: hsla(0, 0%, 100%, 0.8);
+    --uc-panel-button-solid: hsl(234, 24%, 35%);
+    --uc-panel-box-solid: hsl(233, 29%, 18%);
     --button-solid-hover-background: hsl(232, 29%, 26%);
     --button-solid-active-background: hsl(234, 26%, 30%);
     --button-solid-checked-background: hsl(232, 31%, 23%);
-    --uc-toolbarbutton-hover-background: hsla(236, 82%, 83%, 0.17);
-    --uc-toolbarbutton-active-background: hsla(236, 82%, 83%, 0.22);
     --uc-toolbarbutton-checked-background: hsla(236, 82%, 83%, 0.13);
-    --uc-desaturate-hover-background: hsla(236, 60%, 83%, 0.17);
-    --uc-desaturate-active-background: hsla(236, 60%, 83%, 0.22);
-    --uc-desaturate-checked-background: hsla(236, 60%, 83%, 0.13);
+    --uc-toolbarbutton-hover-background: hsla(236, 82%, 83%, 0.17);
+    --uc-toolbarbutton-active-background: hsla(234, 82%, 83%, 0.22);
+    --uc-toolbarbutton-checked-active-background: hsla(232, 82%, 83%, 0.27);
+    --uc-toolbarbutton-badge-bgcolor: var(--lwt-toolbarbutton-icon-fill-attention);
     --uc-panel-description-color: hsl(235, 48%, 89%, 70%);
     --uc-panel-shortcut-color: hsl(235, 27%, 73%, 70%);
     --uc-panel-shortcut-focus: hsl(235, 32%, 75%, 90%);
@@ -64,8 +61,8 @@ tooltip {
     --light-on-dark-button-text-color: #fff;
 
     --menupopup-inner-box-margin: 0px;
-    --menupopup-shadow: none;
-    --panel-shadow: none;
+    --uc-menupopup-shadow: none;
+    --uc-panel-shadow: none;
     --searchbar-popup-border: 1px solid var(--uc-menu-border-color);
     --searchbar-popup-border-radius: 0 0 4px 4px;
     --searchbar-popup-box-shadow: 0 0 10px 3px hsla(0, 0%, 0%, 0.15);
@@ -79,6 +76,13 @@ tooltip {
     --menupopup-padding: 0px;
     --menupopup-inner-padding-magnitude: 4px;
     --menupopup-inner-padding: var(--menupopup-inner-padding-magnitude) 0;
+    --uc-panel-separator-margin-vertical: 4px;
+    --uc-panel-separator-margin-horizontal: 4px;
+    --uc-panel-separator-margin: var(--uc-panel-separator-margin-vertical) var(--uc-panel-separator-margin-horizontal);
+    --uc-arrowpanel-menuitem-inline-margin: 4px;
+    --uc-arrowpanel-menuitem-padding-block: 6px;
+    --uc-arrowpanel-menuitem-padding-inline: 6px;
+    --uc-arrowpanel-root-padding: 12px;
     --arrowpanel-subviewbutton-iconic-gap: 8px;
     --context-iconic-margin-start: 5px;
     --context-iconic-margin-end: 6px;
@@ -92,6 +96,8 @@ tooltip {
         16px + var(--context-iconic-margin-start) + var(--context-iconic-margin-end)
     );
     --context-padding-inline: var(--context-iconic-composite-width) 0px;
+    --panel-menulist-padding: 4px 6px;
+    --menulist-dropmarker-margin: 10px 0;
     --menupopup-border-radius: 5px;
     --panel-border-radius-mini: 3px;
     --context-menuitem-border-radius: 2.6px;
@@ -106,7 +112,6 @@ tooltip {
     --uc-font-weight-bold: 600;
     --uc-font-weight-semibold: 500;
     --uc-font-weight-thin: 400;
-    --subdialog-font-size: 1em !important;
 
     --popup-on-popup-contrast-bg: hsl(233, 33%, 17%);
     --autocomplete-background: var(--popup-on-popup-contrast-bg);
@@ -156,15 +161,17 @@ tooltip {
     so "Search with Amazon" would become "searchwithamazon" and "Duck Duck Go" would become "duckduckgo" for example.
     if your search engine is displayed in non-latin characters then use exactly those characters when naming the icon file.
     if the script still doesn't work, you can override this directly in custom-chrome.css by adding this rule:
-    :root{--default-search-identity-icon:url(chrome://userchrome/content/engines/my-engine-icon.svg)!important; */
+    :root{--default-search-identity-icon:url(chrome://userchrome/content/engines/my-engine-icon.svg)!important;} */
     --default-search-identity-icon: url(chrome://userchrome/content/search-glass.svg);
     --identity-box-solid-bg: hsl(233, 34%, 22%);
     --identity-box-focus-bg: hsl(234, 34%, 23%);
+    --identity-box-label-opacity: var(--urlbar-icon-fill-opacity);
     --secure-color: hsl(119, 80%, 60%);
     --secure-text-color: hsl(129, 100%, 70%);
     --insecure-text-color: hsla(0, 100%, 50%, 0.867);
     --warning-color: hsl(355, 100%, 66%);
     --uc-warning-background: hsla(2, 100%, 66%, 25%);
+    --warning-text-color: hsl(355, 100%, 70%);
     --warning-icon-background: hsl(358, 86%, 63%);
     --warning-icon-detail: hsl(354, 69%, 30%);
     --low-warning-background: hsla(48, 100%, 66%, 0.2);
@@ -207,20 +214,17 @@ tooltip {
     /* controls the color of the little tooltips that appear on search highlighted buttons in about:preferences */
     --aboutPrefs-find-tags: var(--pink-action);
 
-    --badge-color-dark: hsl(236, 13%, 42%);
-    --badge-color-light: var(--lwt-toolbarbutton-icon-fill-attention);
-
-    --tab-background: var(--lwt-accent-color);
-    --tab-selected: var(--toolbar-bgcolor);
-    --tab-hover: linear-gradient(hsl(231, 49%, 11%), hsl(233, 55%, 8%));
-    --tab-pinned: linear-gradient(var(--lwt-accent-color), var(--toolbar-bgcolor));
-    --tab-multi: linear-gradient(hsl(231, 50%, 11%), hsl(233, 53%, 8%));
-    --tab-multi-hover: linear-gradient(hsl(231, 47%, 13%), hsl(233, 51%, 10%));
-    --tab-pinned-hover: var(--toolbar-bgcolor);
-    --tab-focused-highlight: hsl(231, 36%, 22%);
-    --tab-focused-hover: linear-gradient(
-        color-mix(in srgb, var(--tab-focused-highlight) 50%, var(--toolbar-bgcolor)),
-        var(--toolbar-bgcolor)
+    --uc-tab-background: var(--lwt-accent-color);
+    --uc-tab-selected: var(--uc-toolbar-bgcolor);
+    --uc-tab-hover: linear-gradient(hsl(231, 49%, 11%), hsl(233, 55%, 8%));
+    --uc-tab-pinned: linear-gradient(var(--lwt-accent-color), var(--uc-toolbar-bgcolor));
+    --uc-tab-multi: linear-gradient(hsl(231, 50%, 11%), hsl(233, 53%, 8%));
+    --uc-tab-multi-hover: linear-gradient(hsl(231, 47%, 13%), hsl(233, 51%, 10%));
+    --uc-tab-pinned-hover: var(--uc-toolbar-bgcolor);
+    --uc-tab-focused-highlight: hsl(231, 36%, 22%);
+    --uc-tab-focused-hover: linear-gradient(
+        color-mix(in srgb, var(--uc-tab-focused-highlight) 50%, var(--uc-toolbar-bgcolor)),
+        var(--uc-toolbar-bgcolor)
     );
     --multiselected-color: hsl(241, 50%, 51%);
 
@@ -276,6 +280,7 @@ tooltip {
     --uc-menubar-searchbar-width: 256px;
     --uc-tab-min-height: 35px;
     --tab-max-width: 100vw;
+    --pinned-tab-width: 36px;
     --tabbrowser-arrowscrollbox-display: none;
     /* how round should tab buttons be? e.g. the close button or the sound icon.
     2px yields a rounded square. 50% yields a circle. this affects actual tab buttons,
@@ -287,11 +292,15 @@ tooltip {
     --subviewbutton-height: 28px;
     --subview-subheader-padding: 5px 3px;
     --findbar-height: 22px;
+    --findbar-textbox-outline-transition-duration: 100ms;
+    --findbar-textbox-bg-transition-duration: 200ms;
+    --findbar-textbox-bg-notfound-transition-duration: 300ms;
     --default-identity-icon: url(chrome://userchrome/content/info-filled.svg);
     /* icon used for screenshot buttons. I prefer the second one, but use the first one it if you prefer the vanilla icon */
     /* --screenshot-icon: url(chrome://userchrome/content/skin/screenshot.svg); */
     --screenshot-icon: url(chrome://userchrome/content/devtools/command-screenshot.svg);
     --fxa-ui-img: url(chrome://userchrome/content/fxa/avatar-big.svg);
+    --uc-smooth-timing-function: cubic-bezier(0.07, 0.78, 0.21, 0.95);
 
     --download-button-hover-bg: var(--button-hover-bgcolor);
     --download-button-active-bg: var(--button-active-bgcolor);
@@ -319,21 +328,21 @@ tooltip {
     ); */
 
     --pink-action: hsl(340, 73%, 58%);
-    --purple-20: hsl(240, 100%, 80%) !important;
-    --purple-25: hsl(240, 100%, 75%) !important;
-    --purple-30: hsl(239, 100%, 70%) !important;
-    --purple-30-a50: hsla(240, 100%, 70%, 0.5) !important;
-    --purple-35: hsl(245, 100%, 65%) !important;
-    --purple-40: hsl(250, 100%, 60%) !important;
-    --purple-40-a10: hsla(250, 100%, 60%, 0.1) !important;
-    --purple-40-a30: hsla(250, 100%, 60%, 0.5) !important;
-    --purple-45: hsl(250, 87%, 55%) !important;
+    --purple-20: hsl(240, 100%, 80%);
+    --purple-25: hsl(240, 100%, 75%);
+    --purple-30: hsl(239, 100%, 70%);
+    --purple-30-a50: hsla(240, 100%, 70%, 0.5);
+    --purple-35: hsl(245, 100%, 65%);
+    --purple-40: hsl(250, 100%, 60%);
+    --purple-40-a10: hsla(250, 100%, 60%, 0.1);
+    --purple-40-a30: hsla(250, 100%, 60%, 0.5);
+    --purple-45: hsl(250, 87%, 55%);
     --purple-50: hsl(256, 87%, 50%) !important;
-    --purple-55: hsl(256, 87%, 45%) !important;
-    --purple-50-a30: hsla(256, 87%, 50%, 0.3) !important;
+    --purple-55: hsl(256, 87%, 45%);
+    --purple-50-a30: hsla(256, 87%, 50%, 0.3);
     --purple-60: hsl(258, 95%, 40%) !important;
-    --purple-70: hsl(256, 97%, 30%) !important;
-    --purple-80: hsl(254, 100%, 20%) !important;
+    --purple-70: hsl(256, 97%, 30%);
+    --purple-80: hsl(254, 100%, 20%);
     --pink-40: hsl(340, 73%, 60%);
     --pink-35: hsl(340, 73%, 65%);
     --pink-30: hsl(340, 73%, 70%);
@@ -396,10 +405,10 @@ tooltip {
     --uc-checkbox-checked-hover-bgcolor: var(--in-parent-primary-button-background-hover);
     --uc-checkbox-checked-active-bgcolor: var(--in-parent-primary-button-background-active);
 
-    --switch-off-background: hsl(233, 15%, 32%);
-    --switch-off-hover-background: hsl(233, 18%, 27%);
-    --switch-off-active-background: hsl(233, 19%, 24.5%);
-    --switch-off-hover-border: hsl(233, 15%, 32%);
+    --uc-switch-off-background: hsl(233, 15%, 32%);
+    --uc-switch-off-hover-background: hsl(233, 18%, 27%);
+    --uc-switch-off-active-background: hsl(233, 19%, 24.5%);
+    --uc-switch-off-hover-border: hsl(233, 15%, 32%);
 
     accent-color: var(--in-parent-border-focus);
 }
@@ -457,10 +466,10 @@ popupnotification,
 }
 
 :root[lwt-popup-brighttext] #protections-popup {
-    --protections-popup-switch-off-background: var(--switch-off-background);
-    --protections-popup-switch-off-hover-background-custom: var(--switch-off-hover-background);
-    --protections-popup-switch-off-active-background-custom: var(--switch-off-active-background);
-    --protections-popup-switch-off-hover-border-custom: var(--switch-off-hover-border);
+    --protections-popup-switch-off-background: var(--uc-switch-off-background);
+    --protections-popup-switch-off-hover-background-custom: var(--uc-switch-off-hover-background);
+    --protections-popup-switch-off-active-background-custom: var(--uc-switch-off-active-background);
+    --protections-popup-switch-off-hover-border-custom: var(--uc-switch-off-hover-border);
 }
 
 /* SF Pro is a bit heavier than Segoe UI so adjust font weights on certain elements */
@@ -476,8 +485,8 @@ popupnotification,
 @supports -moz-bool-pref("userChrome.css.menupopup-shadows") {
     :root {
         --menupopup-inner-box-margin: 8px !important;
-        --menupopup-shadow: var(--tooltip-box-shadow) !important;
-        --panel-shadow: var(--tooltip-box-shadow) !important;
+        --uc-menupopup-shadow: var(--tooltip-box-shadow) !important;
+        --uc-panel-shadow: var(--tooltip-box-shadow) !important;
     }
 }
 

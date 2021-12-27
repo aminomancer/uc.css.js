@@ -137,12 +137,7 @@
         ) !important;
         --in-content-button-background-solid: var(--content-principal-button-background-solid);
         --in-content-item-selected: var(--purple-40) !important;
-        --in-content-border-highlight: var(--purple-40) !important;
         --in-content-border-hover: var(--content-principal-border-hover) !important;
-        --in-content-border-focus: var(--purple-40) !important;
-        --in-content-border-active: var(--purple-40) !important;
-        --in-content-border-active-shadow: var(--purple-40-a30) !important;
-        --in-content-category-outline-focus: 1px solid transparent !important;
         --in-content-link-color: var(--purple-30) !important;
         --in-content-link-color-hover: var(--purple-25) !important;
         --in-content-link-color-active: var(--purple-20) !important;
@@ -160,6 +155,7 @@
         --in-content-table-background: var(--in-content-box-background) !important;
         --in-content-table-header-background: var(--purple-40-a30) !important;
         --in-content-box-info-background: var(--in-content-button-background-solid) !important;
+        --focus-outline-offset: 2px !important;
         --newtab-background-color: var(--in-content-page-background) !important;
         --newtab-text-primary-color: var(--in-content-page-color) !important;
         --lwt-sidebar-background-color: var(--in-content-box-background) !important;
@@ -176,11 +172,11 @@
         ) !important;
         --newtab-seperator-line-color: var(--in-content-button-background-hover) !important;
         --newtab-modal-color: var(--in-content-box-background) !important;
-        --newtab-focus-outline: var(--in-content-border-active-shadow) !important;
-        --newtab-focus-border: var(--in-content-border-focus) !important;
+        --newtab-focus-outline: var(--purple-40-a30) !important;
+        --newtab-focus-border: var(--purple-40) !important;
         --newtab-focus-border-selected: var(--purple-30) !important;
         --newtab-textbox-background-color: var(--in-content-button-background) !important;
-        --newtab-textbox-focus-color: var(--in-content-border-focus) !important;
+        --newtab-textbox-focus-color: var(--purple-40) !important;
         --newtab-primary-action-background: var(
             --in-content-primary-button-background-hover
         ) !important;
@@ -232,6 +228,29 @@
         --newtab-search-text-color: var(--ui-text-70) !important;
         --newtab-search-first-shadow: rgba(21, 20, 26, 0.5);
         --newtab-search-second-shadow: rgba(21, 20, 26, 0.75);
+    }
+
+    html:not([role="dialog"]) richlistitem[selected] * {
+        --in-content-button-background: inherit !important;
+        --in-content-button-background-hover: inherit !important;
+        --in-content-button-background-active: inherit !important;
+        --in-content-button-text-color: inherit !important;
+        --in-content-button-text-color-hover: inherit !important;
+        --in-content-button-text-color-active: inherit !important;
+        --in-content-focus-outline-color: inherit !important;
+        --in-content-button-background: var(--purple-50) !important;
+        --in-content-button-background-hover: var(--purple-55) !important;
+        --in-content-button-background-active: var(--purple-60) !important;
+        --in-content-button-text-color: var(--in-content-item-selected-text) !important;
+        --in-content-button-text-color-hover: var(--in-content-item-selected-text) !important;
+        --in-content-button-text-color-active: var(--in-content-button-text-color-hover) !important;
+        --in-content-focus-outline-color: var(--in-content-item-selected-text) !important;
+    }
+
+    richlistitem menulist {
+        border-radius: 0 !important;
+        outline-offset: var(--focus-outline-offset, 2px) !important;
+        outline: none !important;
     }
 
     body:not(.inline-onboarding) .fixed-search .search-wrapper {

@@ -121,6 +121,19 @@ menupopup#viewSidebarMenu
     list-style-image: url(chrome://userchrome/content/skin/controlcenter/3rdpartycookies.svg);
 }
 
+.webextension-browser-action:is([data-extensionid="jid1-KKzOGWgsW3Ao4Q@jetpack"i], [label="I don't care about cookies"])[badge="⛔"] .toolbarbutton-badge {
+    background-color: transparent !important;
+    background-image: url(chrome://userchrome/content/error.svg) !important;
+    background-size: 12px !important;
+    width: 12px !important;
+    height: 12px !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    fill: var(--warning-color) !important;
+    box-shadow: none !important;
+    color: transparent !important;
+}
+
 /* pushbullet, an extension for controlling, sharing stuff with, and receiving notifications from your phone */
 #sidebarMenu-popup
     #button__6540f1c5-ab3d-4eff-9ad2-79a95aec93d5_-sidebar-action:not([checked="true"]),

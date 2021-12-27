@@ -13,39 +13,39 @@
 
 /* different tab background colors in various states */
 .tabbrowser-tab:not([selected]):is(:hover, .keyboard-focused-tab, [open]) .tab-background {
-    background: var(--tab-hover) !important;
+    background: var(--uc-tab-hover) !important;
 }
 
 .tabbrowser-tab:is([visuallyselected], [selected]) .tab-background {
-    background: var(--tab-selected) !important;
+    background: var(--uc-tab-selected) !important;
 }
 
 .tabbrowser-tab:focus:not([aria-activedescendant]) > .tab-stack > .tab-background,
 .tabbrowser-tab.keyboard-focused-tab[selected] > .tab-stack > .tab-background {
-    background: var(--tab-focused-hover) !important;
+    background: var(--uc-tab-focused-hover) !important;
 }
 
 .tabbrowser-tab:not([selected])[pinned]:is(:hover, .keyboard-focused-tab, [open]) .tab-background {
-    background: var(--tab-pinned-hover) !important;
+    background: var(--uc-tab-pinned-hover) !important;
 }
 
 .tabbrowser-tab:not([selected], [pinned], [multiselected], :hover, .keyboard-focused-tab, [open])
     .tab-background {
-    background: var(--tab-background) !important;
+    background: var(--uc-tab-background) !important;
 }
 
 .tabbrowser-tab:not([selected])[pinned] .tab-background {
-    background: var(--tab-pinned) !important;
+    background: var(--uc-tab-pinned) !important;
 }
 
 .tabbrowser-tab[multiselected]:not([selected], [pinned], :hover, .keyboard-focused-tab, [open])
     .tab-background {
-    background: var(--tab-multi) !important;
+    background: var(--uc-tab-multi) !important;
 }
 
 .tabbrowser-tab[multiselected]:not([selected], [pinned]):is(:hover, .keyboard-focused-tab, [open])
     .tab-background {
-    background: var(--tab-multi-hover) !important;
+    background: var(--uc-tab-multi-hover) !important;
 }
 
 /* block our animations while tabs are being dragged & dropped */

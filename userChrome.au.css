@@ -82,7 +82,7 @@ panel popupset panel[type="autocomplete-richlistbox"] {
 }
 
 :is(panel, menupopup)[type="arrow"]::part(content) {
-    box-shadow: var(--panel-shadow);
+    box-shadow: var(--uc-panel-shadow);
     overflow: hidden;
     margin-top: 4px;
 }
@@ -179,7 +179,7 @@ panel[type="arrow"][side="right"] {
 }
 
 #BMB_bookmarksPopup menupopup[placespopup="true"]::part(content) {
-    box-shadow: var(--panel-shadow);
+    box-shadow: var(--uc-panel-shadow);
     margin: var(--menupopup-inner-box-margin);
 }
 
@@ -408,8 +408,8 @@ this way we don't animate tabs that were simply moved rather than created */
 
 /* shrink pinned tabs */
 :root[sessionrestored] .tabbrowser-tab[pinned] {
-    min-width: var(--pinned-tab-width);
-    max-width: var(--pinned-tab-width);
+    min-width: var(--pinned-tab-width, 36px);
+    max-width: var(--pinned-tab-width, 36px);
 }
 
 #tabbrowser-tabs[haspinnedtabs]:not([positionpinnedtabs])
@@ -542,7 +542,7 @@ panel[type="autocomplete-richlistbox"]
 #customization-container :is(menupopup, panel)::part(content),
 #customization-panelWrapper > .panel-arrowcontent {
     border-radius: var(--arrowpanel-border-radius, 0);
-    box-shadow: var(--panel-shadow);
+    box-shadow: var(--uc-panel-shadow);
     margin-top: 12px;
     z-index: 250;
     position: absolute;
@@ -664,34 +664,30 @@ panel[type="autocomplete-richlistbox"]
         background-position: right 6px center, left 8px center;
     }
 
-    :is(panel, dialog) menulist::part(dropmarker-icon) {
-        appearance: none;
-        list-style-image: url(chrome://userchrome/content/arrow-dropdown-16.svg);
-        margin-block: 0 !important;
-        fill-opacity: 0.6;
+    :is(panel, dialog) menulist {
+        --menulist-dropmarker-opacity: 0.6;
+        padding: var(--panel-menulist-padding, 4px 6px);
     }
 
-    :is(panel, dialog) menulist:is(:hover)::part(dropmarker-icon) {
-        fill-opacity: 0.8;
+    :is(panel, dialog) menulist:where(:hover) {
+        --menulist-dropmarker-opacity: 0.8;
     }
 
-    :is(panel, dialog)
-        menulist:is(:focus-visible, :hover:active, [open="true"])::part(dropmarker-icon) {
-        fill-opacity: 1;
+    :is(panel, dialog) menulist:is(:focus-visible, :hover:active, [open="true"]) {
+        --menulist-dropmarker-opacity: 1;
     }
 
-    :is(panel, dialog) menulist::part(dropmarker) {
-        margin-inline: 4px;
+    #permission-popup-menulist,
+    #permission-popup-menulist > menupopup {
+        min-width: 6.525em;
     }
 
-    :is(panel, dialog) menulist::part(icon),
-    :is(panel, dialog) menulist::part(dropmarker),
-    :is(panel, dialog) menulist::part(dropmarker-icon) {
+    :is(panel, dialog) menulist::part(icon) {
         -moz-context-properties: fill, fill-opacity;
     }
 
-    :is(panel, dialog) menulist::part(label) {
-        font-weight: normal;
+    :is(panel, dialog) menulist[image]::part(icon) {
+        margin-inline-end: var(--context-iconic-margin-end, 6px);
     }
 
     menulist::part(label) {
@@ -699,8 +695,28 @@ panel[type="autocomplete-richlistbox"]
         margin-block: 0;
     }
 
+    :is(panel, dialog) menulist::part(label) {
+        font-weight: normal;
+        margin: 1px 0;
+    }
+
+    :is(panel, dialog) menulist::part(dropmarker) {
+        margin-inline: var(--menulist-dropmarker-margin, 10px 0);
+        -moz-box-align: center;
+        -moz-box-pack: center;
+        -moz-context-properties: fill, fill-opacity;
+    }
+
+    :is(panel, dialog) menulist::part(dropmarker-icon) {
+        appearance: none;
+        list-style-image: url(chrome://userchrome/content/arrow-dropdown-16.svg);
+        margin-block: 0 !important;
+        fill-opacity: var(--menulist-dropmarker-opacity, 0.6);
+        -moz-context-properties: revert;
+    }
+
     #editBMPanel_folderMenuList::part(icon) {
-        margin-inline: 2px 3px;
+        margin-inline: 1px 6px;
     }
 
     #editBookmarkPanel menulist::part(dropmarker-icon) {
@@ -1547,11 +1563,6 @@ toolbar[brighttext] #panic-button[open] {
 #webauthn-notification-icon,
 .popup-notification-icon[popupid^="webauthn-prompt-"] {
     list-style-image: url(chrome://userchrome/content/notifications/webauthn.svg);
-}
-
-#permission-popup-menulist,
-#permission-popup-menulist > menupopup {
-    min-width: 6.5em;
 }
 
 /* EME */

@@ -176,6 +176,6 @@
     .form-control:focus,
     .TextField__element:focus,
     .nord-input:focus {
-        border-color: var(--in-content-border-focus) !important;
+        border-color: var(--purple-40) !important;
     }
 }

@@ -486,8 +486,21 @@ panel[type="arrow"][side="top"] {
     background-color: var(--button-primary-active-bgcolor) !important;
 }
 
-.panel-info-button[checked]:not([disabled]):is(:hover, :focus-visible) {
-    background-color: var(--arrowpanel-dimmed-even-further) !important;
+.panel-info-button:not(:hover)[checked] {
+	background-color: var(--toolbarbutton-checked-background) !important;
+}
+
+.panel-info-button:not([disabled]):is(:hover, :focus-visible) {
+    background-color: var(--toolbarbutton-hover-background) !important;
+}
+
+.panel-info-button[checked]:not([disabled]):is(:hover, :focus-visible),
+.panel-info-button:not([disabled]):is([open], :hover:active) {
+	background-color: var(--toolbarbutton-active-background) !important;
+}
+
+.panel-info-button[checked]:not([disabled]):is([open], :hover:active) {
+	background-color: var(--toolbarbutton-checked-active-background) !important;
 }
 
 #protections-popup-info-button {
@@ -718,7 +731,8 @@ popupnotificationcontent label[control]:not([hidden]) + menulist {
 }
 
 .permission-popup-permission-remove-button {
-    padding: 2px !important;
+    padding: var(--panel-menulist-padding, 4px 6px) !important;
+    min-height: 24px !important;
     background-color: var(--button-bgcolor) !important;
     color: inherit !important;
     opacity: 1 !important;
@@ -731,7 +745,6 @@ popupnotificationcontent label[control]:not([hidden]) + menulist {
 
 .permission-popup-permission-remove-button[disabled="true"] {
     opacity: 0.6 !important;
-    pointer-events: none !important;
 }
 
 .permission-popup-permission-remove-button[disabled="true"] > .button-box {
@@ -739,37 +752,45 @@ popupnotificationcontent label[control]:not([hidden]) + menulist {
 }
 
 .permission-popup-permission-remove-button > .button-box {
-    margin: 1px !important;
-    border-radius: 500px;
-    width: 16px;
-    height: 16px;
+    margin-block: 1px !important;
+    margin-inline: var(--menulist-dropmarker-margin, 10px 0) !important;
+    width: 12px;
+    max-width: 12px;
+    height: 12px;
 }
 
-/* .permission-popup-permission-remove-button:is(:hover, :focus-visible) > .button-box {
-    background-color: var(--arrowpanel-dimmed);
-} */
-
 .permission-popup-permission-remove-button > label {
-    margin: 1px 6px !important;
-    height: 16px !important;
-    line-height: 16px !important;
+    margin: 1px 0 !important;
+    text-align: revert !important;
 }
 
 .permission-popup-permission-remove-button > .button-box > .button-icon {
-    width: 16px !important;
-    height: 16px !important;
+    width: 12px !important;
+    height: 12px !important;
     padding: 0 !important;
-    list-style-image: url(chrome://userchrome/content/textbox-clear.svg) !important;
+    list-style-image: url(chrome://userchrome/content/close-big.svg) !important;
+    fill-opacity: inherit;
     -moz-context-properties: fill, fill-opacity !important;
-    fill-opacity: 0 !important;
 }
 
-.permission-popup-permission-remove-button:is(:hover, :focus-visible) {
+.permission-popup-permission-remove-button:not([disabled="true"]):is(:hover, :focus-visible) {
     background-color: var(--button-hover-bgcolor) !important;
 }
 
-.permission-popup-permission-remove-button:hover:active {
+.permission-popup-permission-remove-button:not([disabled="true"]):hover:active {
     background-color: var(--button-active-bgcolor) !important;
+}
+
+.permission-popup-permission-remove-button {
+    fill-opacity: 0.6;
+}
+
+.permission-popup-permission-remove-button:not([disabled="true"]):where(:hover) {
+    fill-opacity: 0.8;
+}
+
+.permission-popup-permission-remove-button:not([disabled="true"]):is(:focus-visible, :hover:active) {
+    fill-opacity: 1;
 }
 
 .permission-popup-permission-item > .popup-subitem {
@@ -804,6 +825,10 @@ popupnotificationcontent label[control]:not([hidden]) + menulist {
     > vbox
     + .permission-popup-permission-item {
     margin-top: 0 !important;
+}
+
+.permission-popup-section menulist {
+    margin-block: 0 !important;
 }
 
 #plugins-notification-icon[extraAttr="inactive"] > .plugin-icon {
@@ -1205,10 +1230,6 @@ panel .header {
     font-weight: var(--uc-font-weight-bold, 600) !important;
 }
 
-.panel-view-body-unscrollable {
-    overflow-y: scroll !important;
-}
-
 #notification-popup menulist {
     color: var(--notification-menu-color) !important;
 }
@@ -1231,7 +1252,9 @@ panel .header {
     margin-block: 0 4px !important;
 }
 
-#downloadsPanel-mainView {
+/* downloads panel */
+#downloadsPanel-mainView,
+#downloadsPanel-blockedSubview {
     min-width: revert !important;
     padding: 0 !important;
 }
@@ -1300,10 +1323,10 @@ richlistitem.download-state > toolbarseparator {
     visibility: collapse !important;
 }
 
-richlistitem.download-state {
+richlistitem.download-state,
+#downloadsSummary {
     position: relative !important;
     border-radius: var(--arrowpanel-menuitem-border-radius) !important;
-    margin: 0 !important;
     padding: 0 !important;
     margin: 0 var(--arrowpanel-menuitem-inline-margin) !important;
     border: 0 !important;
@@ -1311,12 +1334,61 @@ richlistitem.download-state {
     background: none !important;
 }
 
+#downloadsSummary {
+    border-radius: var(--arrowpanel-menuitem-border-radius) !important;
+    margin: 0 var(--arrowpanel-menuitem-inline-margin) !important;
+    margin-inline-end: 52px !important;
+    padding: 8px 4px !important;
+    border: 0 !important;
+    outline: 0 !important;
+    background: none !important;
+}
+
+#downloadsPanel-blockedSubview > vbox {
+    margin: var(--arrowpanel-menuitem-margin) !important;
+}
+
+.downloadsPanel-blockedSubview-title-box {
+    margin-block: 10px 0 !important;
+}
+
+#downloadsPanel-blockedSubview-title {
+	margin-bottom: 10px !important;
+    -moz-box-ordinal-group: 2 !important;
+    margin-inline: 0 !important;
+}
+
+#downloadsPanel-blockedSubview[verdict="Insecure"] #downloadsPanel-blockedSubview-title,
+#downloadsPanel-blockedSubview[verdict="Malware"] #downloadsPanel-blockedSubview-title {
+	color: var(--warning-text-color) !important;
+}
+
+#downloadsPanel-blockedSubview-details1,
+#downloadsPanel-blockedSubview-details2 {
+    margin-bottom: 6px !important;
+}
+
+#downloadsPanel-blockedSubview > .panel-footer {
+    margin: 12px !important;
+}
+
+#downloadsPanel-blockedSubview > #downloadsPanel-blockedSubview-buttons {
+    margin-top: 8px !important;
+}
+
+.downloadsPanel-blockedSubview-image {
+    width: 18px !important;
+    background-size: contain !important;
+    background-repeat: no-repeat;
+    margin-inline: 6px 5px !important;
+}
+
 .downloadMainArea {
     border-radius: var(--arrowpanel-menuitem-border-radius) !important;
 }
 
 richlistitem.download-state .downloadMainArea {
-    padding-inline: 4px !important;
+    padding: 8px 4px !important;
 }
 
 .downloadsPanelFooterButton:hover {
@@ -1331,14 +1403,10 @@ richlistitem.download-state[state="1"]:not([exists]) .downloadTypeIcon {
     opacity: 0.6;
 }
 
-panel richlistitem.download-state .downloadDetails {
+panel richlistitem.download-state .downloadDetails,
+#downloadsSummaryDetails {
     opacity: 1 !important;
     color: var(--panel-description-color);
-}
-
-#downloadsListBox richlistitem.download-state .downloadTypeIcon {
-    width: 28px !important;
-    height: 28px !important;
 }
 
 richlistitem.download-state > .downloadButton {
@@ -1349,6 +1417,7 @@ richlistitem.download-state > .downloadButton {
     box-sizing: content-box !important;
     margin: 0 !important;
     background: none !important;
+    border: 0 !important;
     border-radius: 0 !important;
     -moz-box-align: center !important;
     -moz-box-pack: center !important;
@@ -1374,13 +1443,13 @@ richlistitem.download-state:is([verdict], .openWhenFinished):hover:active {
     background: var(--download-button-active-bg) !important;
 }
 
-richlistitem.download-state:not([verdict])
+richlistitem.download-state
     > .downloadButton:is(:hover, :focus-visible)
     .button-box {
     background: var(--in-content-button-background-hover) !important;
 }
 
-richlistitem.download-state:not([verdict]) > .downloadButton:hover:active .button-box {
+richlistitem.download-state > .downloadButton:hover:active .button-box {
     background: var(--in-content-button-background-active) !important;
 }
 
@@ -1400,6 +1469,10 @@ richlistitem.download-state > .downloadButton .button-box .button-icon {
     list-style-image: url(chrome://userchrome/content/material/places/folder.svg) !important;
 }
 
+:root[operatingsystem="macosx"] .downloadIconShow .button-box .button-icon {
+    list-style-image: url(chrome://userchrome/content/search-glass.svg) !important;
+}
+
 .downloadIconCancel .button-box .button-icon {
     list-style-image: url(chrome://userchrome/content/close-big.svg) !important;
 }
@@ -1408,16 +1481,62 @@ richlistitem.download-state > .downloadButton .button-box .button-icon {
     list-style-image: url(chrome://userchrome/content/skin/reload.svg) !important;
 }
 
-richlistitem.download-state > .downloadButton.downloadIconCancel .button-box .button-icon {
+.downloadIconSubviewArrow .button-box .button-icon {
+    list-style-image: url(chrome://userchrome/content/arrow-left.svg) !important;
+}
+
+.downloadIconSubviewArrow > .button-box > .button-icon:-moz-locale-dir(ltr) {
+    transform: scaleX(-1);
+}
+
+richlistitem.download-state > .downloadButton:is(.downloadIconCancel, .downloadIconSubviewArrow) .button-box .button-icon {
     width: 21px !important;
+}
+
+#downloadsSummaryDescription {
+    color: var(--attention-color) !important;
+}
+
+.downloadBlockedBadge {
+    background-size: contain !important;
+	width: 18px !important;
+	height: 18px !important;
+	margin-inline: 4px 0 !important;
+}
+
+#downloadsPanel-blockedSubview[verdict="Insecure"] .downloadsPanel-blockedSubview-image,
+#downloadsPanel-blockedSubview[verdict="Malware"] .downloadsPanel-blockedSubview-image,
+#downloadsListBox > richlistitem[verdict="Insecure"] .downloadBlockedBadge,
+#downloadsListBox > richlistitem[verdict="Malware"] .downloadBlockedBadge {
+  background-image: url(chrome://userchrome/content/error.svg) !important;
+  fill: var(--warning-color) !important;
+}
+
+#downloadsPanel-blockedSubview[verdict="Uncommon"] .downloadsPanel-blockedSubview-image,
+#downloadsListBox > richlistitem[verdict="Uncommon"] .downloadBlockedBadge {
+    background-image: url(chrome://userchrome/content/info-filled.svg) !important;
+    fill: var(--attention-color) !important;
+}
+
+#downloadsPanel-blockedSubview[verdict="PotentiallyUnwanted"] .downloadsPanel-blockedSubview-image,
+#downloadsPanel-blockedSubview[verdict="DownloadSpam"] .downloadsPanel-blockedSubview-image,
+#downloadsListBox > richlistitem[verdict="PotentiallyUnwanted"] .downloadBlockedBadge,
+#downloadsListBox > richlistitem[verdict="DownloadSpam"] .downloadBlockedBadge  {
+    background-image: url(chrome://userchrome/content/warning-big.svg) !important;
+    fill: var(--low-warning-icon-background) !important;
+}
+
+#downloadsListBox > richlistitem[verdict="Insecure"] .downloadDetails,
+#downloadsListBox > richlistitem[verdict="Malware"] .downloadDetails {
+    color: var(--warning-text-color) !important;
 }
 
 .downloadProgress {
     appearance: none !important;
     margin: 3px 0 -2px 0 !important;
     border: 1px solid transparent !important;
-    border-radius: 16px !important;
-    height: 8px !important;
+    border-radius: 14px !important;
+    height: 7px !important;
     background-color: var(--arrowpanel-dimmed) !important;
     overflow: hidden !important;
 }
@@ -1434,7 +1553,13 @@ richlistitem.download-state > .downloadButton.downloadIconCancel .button-box .bu
 .downloadProgress:not([value="0"])::-moz-progress-bar {
     margin: 0 !important;
     height: 100% !important;
-    border-radius: 16px !important;
+    border-radius: 0 !important;
+}
+
+.downloadProgress:not(:indeterminate)::-moz-progress-bar {
+    mask: linear-gradient(#fff, #fff), url(chrome://userchrome/content/layout/contentaccessible/progress-bar-mask.svg) center right/14px;
+    mask-repeat: no-repeat;
+    mask-composite: subtract;
 }
 
 .downloadProgress:indeterminate::-moz-progress-bar {
@@ -1732,16 +1857,19 @@ richlistitem.download-state > .downloadButton.downloadIconCancel .button-box .bu
 
 #geo-access-indicator-item,
 #blocked-popup-indicator-item {
-    font-size: 0.9em !important;
-    font-weight: var(--uc-font-weight-thin) !important;
     min-height: 20px !important;
     background: url(chrome://userchrome/content/notifications/popup-subitem.svg) left center/16px
         no-repeat;
+    margin-block: -2px 0.4em !important;
     margin-inline-start: 22px !important;
-    padding-inline-start: 16px !important;
+    padding-inline-start: 13px !important;
     -moz-context-properties: fill, fill-opacity;
     fill: currentColor !important;
     color: var(--panel-description-color) !important;
+}
+
+:is(#geo-access-indicator-item, #blocked-popup-indicator-item) > .permission-popup-permission-label {
+    margin-block: 0 !important;
 }
 
 #protections-popup-sendReportView-heading,

@@ -9,13 +9,7 @@
 @-moz-document url-prefix("moz-extension://14960f03-eca3-472b-b4d2-0b7f831ebe41/pageActionPopup.html")
 {
     :root {
-        --arrowpanel-background: var(--uc-arrowpanel-background);
-        --panel-separator-margin: 0px 4px;
-        --arrowpanel-menuitem-padding-block: 6px;
-        --arrowpanel-menuitem-padding-inline: 6px;
-        --arrowpanel-padding: 12px !important;
-        --arrowpanel-menuitem-border-radius: 3px;
-        background-color: var(--arrowpanel-background) !important;
+        background-color: var(--uc-arrowpanel-background) !important;
         font-size: 12px !important;
         color: var(--uc-arrowpanel-color) !important;
         letter-spacing: 0 !important;
@@ -133,13 +127,7 @@
 @-moz-document url-prefix("moz-extension://14960f03-eca3-472b-b4d2-0b7f831ebe41/popup.html")
 {
     :root {
-        --arrowpanel-background: var(--uc-arrowpanel-background);
-        --panel-separator-margin: 0px 4px;
-        --arrowpanel-menuitem-padding-block: 6px;
-        --arrowpanel-menuitem-padding-inline: 6px;
-        --arrowpanel-padding: 12px !important;
-        --arrowpanel-menuitem-border-radius: 3px;
-        background-color: var(--arrowpanel-background) !important;
+        background-color: var(--uc-arrowpanel-background) !important;
         font-size: 12px !important;
         color: var(--uc-arrowpanel-color) !important;
         letter-spacing: 0 !important;
@@ -698,13 +686,7 @@
     }
 
     .slider {
-        --protections-popup-switch-off-background: var(--switch-off-background);
-        --protections-popup-switch-off-hover-background-custom: var(--switch-off-hover-background);
-        --protections-popup-switch-off-active-background-custom: var(
-            --switch-off-active-background
-        );
-        --protections-popup-switch-off-hover-border-custom: var(--switch-off-hover-border);
-        background-color: var(--switch-off-background) !important;
+        background-color: var(--uc-switch-off-background) !important;
         border-radius: 14px !important;
         inset-block-end: 0;
         box-shadow: none !important;
@@ -716,11 +698,11 @@
     }
 
     .slider:hover {
-        background-color: var(--switch-off-hover-background) !important;
+        background-color: var(--uc-switch-off-hover-background) !important;
     }
 
     .slider:hover:active {
-        background-color: var(--switch-off-active-background) !important;
+        background-color: var(--uc-switch-off-active-background) !important;
     }
 
     .slider::before {

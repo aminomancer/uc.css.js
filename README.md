@@ -77,6 +77,7 @@ For best results, set density mode to `Normal` and theme to `Dark` in the custom
 I also recommend setting the following prefs in `about:config`. There are two preset user.js files in the [prefs directory](/prefs) that can automatically set the prefs for you and prevent Firefox from changing them on update. Just choose one, rename it to user.js, and move it to your _profile_ folder, not your `chrome` folder. The first of these files, [required.js](/prefs/required.js) contains just the bare minimum prefs to ensure functionality, omitting most of the prefs that represent aesthetic choices. The second, [recommended.js](/prefs/recommended.js), includes the required prefs and some other more subjective prefs that compliment the theme — this is the preset I would personally recommend. There are also OS-specific prefs that are not in either file, so you should still check the list below. The following are in alphabetical order, not in order of importance. Most are optional, but the few that are required are in italics and are marked in the Notes column.<details><summary>⚙ **_Click for a full list._**</summary>
 | Pref&nbsp;name | Type | Value | Notes&nbsp;(optional&nbsp;unless&nbsp;otherwise&nbsp;noted) |
 |- |- |- |- |
+| accessibility.mouse\_focuses\_formcontrol | Number | 0 | Don't focus elements on click, only on tab. Helps to eliminate ugly 1px dotted outline |
 | browser.anchor\_color | String | `#6669ff` | |
 | browser.active\_color | String | `#9999ff` | |
 | browser.visited\_color | String | `#e34f80` | |
@@ -653,6 +654,16 @@ _"Page Action"_ opens the extension's page action popup URL in the same manner. 
 _"Inspect Extension"_ opens a devtools tab targeting the extension background. This is the same page you'd get if you opened about:debugging and clicked the "Inspect" button next to an extension. _"View Source"_ opens the addon's .xpi archive. And, as you'd expect, _"Copy ID"_ copies the extension's ID to your clipboard, while _"Copy URL"_ copies the extension's base URL, so it can be used in CSS rules like `@-moz-document`
 
 <img src="preview/prev-debug-ext.webp" width="386"/>
+
+</details>
+
+#### [Downloads Delete File Command](/JS/downloadsDeleteFileCommand.uc.js):
+
+Adds a new "Delete" menuitem when right-clicking a download in the downloads panel or the downloads manager. This will delete the downloaded file from disk. <details><summary>💬 <i><b>More details...</b></i></summary>
+
+It's important since the ability to "temporarily" download files with Firefox is being removed as part of [bug 1733587](https://bugzilla.mozilla.org/show_bug.cgi?id=1733587) to reduce the risk of data loss. When you choose to "open" a file instead of "save" it, Firefox will no longer save the file in your _Temp_ folder and schedule the file for deletion when you quit Firefox or exit private browsing mode. Instead it will save the file in your chosen _Downloads_ folder. So, being able to clean up these files from the context menu is a nice feature.
+
+This will most likely be released in Firefox \(see [bug 1745624](https://bugzilla.mozilla.org/show_bug.cgi?id=1745624)\), but I did a lot of the testing for it with an autoconfig script. So, it isn't any extra work to publish this here, at least until [the patch](/experimental/downloads%20context%20delete%20file%20patch) makes it into a release build. When you download a version of Firefox that includes the menuitem, you can just delete this script from your JS folder.
 
 </details>
 

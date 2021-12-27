@@ -11,95 +11,17 @@ and a few elements like checkboxes */
 {
     :root,
     menupopup {
-        --toolbarbutton-border-radius: var(--general-button-border-radius) !important;
-        --urlbar-icon-border-radius: var(--general-button-border-radius) !important;
-        --lwt-accent-color: var(--uc-accent-color) !important;
-        --lwt-text-color: var(--uc-arrowpanel-color) !important;
-        --lwt-toolbar-field-background-color: hsla(233, 25%, 28%, 85%) !important;
-        --lwt-toolbar-field-color: hsl(240, 60%, 99%);
-        --lwt-toolbar-field-focus: hsla(233, 25%, 28%, 85%) !important;
-        --lwt-toolbar-field-focus-color: rgb(255, 255, 255) !important;
-        --toolbar-bgcolor: hsl(233, 42%, 15%) !important;
-        --toolbar-color: hsl(0, 0%, 100%) !important;
-        --lwt-toolbarbutton-icon-fill: hsl(0, 0%, 100%) !important;
-        --lwt-toolbarbutton-icon-fill-attention: var(--attention-color) !important;
-        --lwt-background-alignment: top !important;
-        --lwt-background-tiling: repeat !important;
-        --arrowpanel-background: var(--uc-arrowpanel-background) !important;
-        --arrowpanel-color: var(--uc-arrowpanel-color) !important;
-        --arrowpanel-border-color: var(--uc-menu-border-color) !important;
-        --arrowpanel-darker: var(--uc-arrowpanel-darker) !important;
-        --arrowpanel-faint: var(--uc-arrowpanel-faint);
-        --arrowpanel-dimmed: var(--uc-arrowpanel-dimmed) !important;
-        --arrowpanel-dimmed-further: var(--uc-arrowpanel-dimmed-further) !important;
-        --arrowpanel-dimmed-even-further: var(--uc-arrowpanel-dimmed-even-further) !important;
-        --desaturate-faint: var(--uc-desaturate-faint);
-        --desaturate-dimmed: var(--uc-desaturate-dimmed);
-        --desaturate-dimmed-further: var(--uc-desaturate-dimmed-further);
-        --desaturate-dimmed-even-further: var(--uc-desaturate-dimmed-even-further);
-        --panel-description-color: hsl(235, 48%, 89%, 70%) !important;
-        --panel-shortcut-color: hsl(235, 27%, 73%, 70%) !important;
-        --panel-shortcut-focus: hsl(235, 32%, 75%, 90%) !important;
-        --panel-disabled-color: var(--context-menu-disabled-color) !important;
-        --panel-separator-color: var(--desaturate-dimmed) !important;
-        --toolbarbutton-hover-background: hsla(236, 82%, 83%, 0.17) !important;
-        --toolbarbutton-active-background: hsla(236, 82%, 83%, 0.22) !important;
-        --toolbarbutton-checked-background: hsla(236, 82%, 83%, 0.13) !important;
-        --desaturate-hover-background: hsla(236, 60%, 83%, 0.17) !important;
-        --desaturate-active-background: hsla(236, 60%, 83%, 0.22) !important;
-        --desaturate-checked-background: hsla(236, 60%, 83%, 0.13) !important;
-        --button-bgcolor: var(--arrowpanel-dimmed) !important;
-        --button-hover-bgcolor: var(--arrowpanel-dimmed-further) !important;
-        --button-active-bgcolor: var(--arrowpanel-dimmed-even-further) !important;
-        --button-primary-bgcolor: var(--purple-45) !important;
-        --button-primary-hover-bgcolor: var(--purple-40) !important;
-        --button-primary-active-bgcolor: var(--purple-35) !important;
-        --button-primary-color: var(--button-color) !important;
-        --focus-outline-color: var(--attention-color) !important;
+        --focus-outline-color: var(--purple-30) !important;
         --focus-outline-width: 2px;
-        --places-cell-focus-bgcolor: hsl(232, 30%, 19%) !important;
-        --places-cell-hover-bgcolor: hsl(232, 30%, 23%) !important;
-        --in-content-box-background: hsl(232, 32%, 14%) !important;
-        --in-content-box-border-color: rgba(249, 249, 250, 0.1) !important;
-        --in-content-button-background: var(--arrowpanel-dimmed) !important;
-        --in-content-button-background-hover: var(--arrowpanel-dimmed-further) !important;
-        --in-content-button-background-active: var(--arrowpanel-dimmed-even-further) !important;
-        --in-content-button-border-radius: var(--general-button-border-radius) !important;
-        --in-content-item-selected: var(--purple-40) !important;
-        --in-content-border-highlight: var(--purple-40) !important;
-        --in-content-border-focus: var(--purple-40) !important;
-        --in-content-border-active: var(--purple-40) !important;
-        --in-content-border-active-shadow: var(--purple-40-a30) !important;
-        --in-content-category-outline-focus: 1px solid transparent !important;
-        --in-content-link-color: var(--purple-35) !important;
-        --in-content-link-color-hover: var(--purple-30) !important;
-        --in-content-link-color-active: var(--purple-30) !important;
-        --in-content-primary-button-background: var(--purple-40) !important;
-        --in-content-primary-button-background-hover: var(--purple-35) !important;
-        --in-content-primary-button-background-active: var(--purple-30) !important;
-        --autocomplete-popup-background: var(--arrowpanel-background) !important;
-        --autocomplete-popup-color: var(--lwt-text-color) !important;
-        --autocomplete-popup-separator-color: var(--panel-separator-color) !important;
-        --ui-textbox-bgcolor: hsl(233, 24%, 28%) !important;
-        --ui-textbox-focus-bgcolor: hsl(232, 22%, 34%) !important;
-        --ui-solid-button-bgcolor: var(--arrowpanel-dimmed) !important;
-        --ui-solid-button-hover-bgcolor: var(--arrowpanel-dimmed-further) !important;
-        --ui-solid-button-active-bgcolor: var(--arrowpanel-dimmed-even-further) !important;
-        --ebmp-hover-bgcolor: hsl(233, 24%, 33%) !important;
-        --ebmp-focus-bgcolor: hsl(233, 24%, 38%) !important;
-        --urlbar-popup-url-color: hsl(251, 100%, 64%) !important;
-        --urlbar-popup-action-color: hsl(340, 73%, 58%) !important;
-        --lwt-popup-brighttext-url-color: var(--urlbar-popup-action-color) !important;
-        --toolbarbutton-icon-fill-opacity: 1 !important;
-        --menu-background-color: var(--arrowpanel-background) !important;
+        --menu-background-color: var(--uc-arrowpanel-background) !important;
         --menu-color: var(--ui-text-80) !important;
-        --menuitem-hover-background-color: var(--arrowpanel-dimmed) !important;
+        --menuitem-hover-background-color: var(--uc-arrowpanel-dimmed) !important;
         --menuitem-disabled-hover-background-color: initial !important;
-        --menu-disabled-color: var(--panel-disabled-color) !important;
+        --menu-disabled-color: var(--context-menu-disabled-color) !important;
         --menu-border-color: var(--uc-menu-border-color) !important;
+        --arrowpanel-border-color: var(--uc-menu-border-color) !important;
         --menu-icon-opacity: 1 !important;
-        --buttons-secondary-hover-bgcolor: var(--arrowpanel-dimmed) !important;
-        --buttons-secondary-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
+        --panel-separator-margin: var(--uc-panel-separator-margin) !important;
         --checkbox-border-color: var(--uc-checkbox-border-color) !important;
         --checkbox-checked-border-color: var(--uc-checkbox-checked-border-color) !important;
         --checkbox-unchecked-bgcolor: var(--uc-checkbox-unchecked-bgcolor) !important;
@@ -109,30 +31,7 @@ and a few elements like checkboxes */
         --checkbox-checked-color: var(--uc-checkbox-checked-color) !important;
         --checkbox-checked-hover-bgcolor: var(--uc-checkbox-checked-hover-bgcolor) !important;
         --checkbox-checked-active-bgcolor: var(--uc-checkbox-checked-active-bgcolor) !important;
-        --panelview-toolbarbutton-hover-bgcolor: var(--arrowpanel-dimmed) !important;
-        --panelview-toolbarbutton-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
-        --panelview-toolbarbutton-focus-box-shadow: none !important;
-        --panel-banner-item-color: HSL(240, 9.1%, 97.8%);
-        --panel-banner-item-background-color: hsla(109.9, 90.9%, 47.3%, 0.1);
-        --panel-banner-item-hover-bgcolor: hsla(109.9, 90.9%, 47.3%, 0.15);
-        --panel-banner-item-active-bgcolor: hsla(109.9, 90.9%, 47.3%, 0.2);
-        --arrowpanel-menuitem-inline-margin: 4px;
-        --arrowpanel-menuitem-margin: 0px var(--arrowpanel-menuitem-inline-margin) !important;
-        --arrowpanel-menuitem-padding-block: 6px !important;
-        --arrowpanel-menuitem-padding-inline: 6px !important;
-        --arrowpanel-padding: 12px !important;
-        --panel-subview-body-padding-magnitude: var(--arrowpanel-menuitem-inline-margin);
-        --panel-subview-body-padding: var(--panel-subview-body-padding-magnitude) 0 !important;
-        --arrowpanel-menuitem-border-radius: 3px !important;
         --error-text-color: var(--warning-color) !important;
-        --buttons-primary-button-bgcolor: var(--in-parent-primary-button-background) !important;
-        --buttons-primary-button-hover-bgcolor: var(
-            --in-parent-primary-button-background-hover
-        ) !important;
-        --buttons-primary-button-active-bgcolor: var(
-            --in-parent-primary-button-background-active
-        ) !important;
-        --buttons-primary-button-color: var(--in-parent-primary-button-text-color) !important;
     }
 
     .theme-light {
@@ -231,7 +130,7 @@ and a few elements like checkboxes */
         background-color: var(--menu-background-color) !important;
         color: var(--menu-color) !important;
         border-radius: var(--menupopup-border-radius) !important;
-        box-shadow: var(--menupopup-shadow) !important;
+        box-shadow: var(--uc-menupopup-shadow) !important;
     }
 
     .menupopup-arrowscrollbox[orient="vertical"][overflowing="true"] {
@@ -500,7 +399,7 @@ and a few elements like checkboxes */
     }
 
     menuitem:not([disabled="true"]) :is(.menu-accel, .menu-iconic-accel) {
-        color: var(--panel-shortcut-color);
+        color: var(--uc-panel-shortcut-color);
     }
 
     menuitem[disabled="true"] :is(.menu-accel, .menu-iconic-accel) {

@@ -32,7 +32,7 @@ menupopup:not([height], .in-menulist) {
     background-color: var(--menu-background-color) !important;
     color: var(--menu-color) !important;
     border-radius: var(--menupopup-border-radius) !important;
-    box-shadow: var(--menupopup-shadow) !important;
+    box-shadow: var(--uc-menupopup-shadow) !important;
 }
 
 .menupopup-arrowscrollbox[orient="vertical"][overflowing="true"] {
@@ -390,11 +390,12 @@ panel[type="autocomplete-richlistbox"] > richlistbox {
     panel menulist {
         appearance: none !important;
         background-color: var(--button-bgcolor) !important;
-        padding: 2px 2px 2px 8px !important;
+        padding: var(--panel-menulist-padding, 4px 6px) !important;
         min-height: 24px !important;
         color: inherit !important;
         fill: currentColor !important;
         outline-offset: unset !important;
+        outline: revert !important;
         border-radius: var(--context-menuitem-border-radius) !important;
     }
 

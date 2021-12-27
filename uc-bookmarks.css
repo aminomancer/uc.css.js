@@ -61,7 +61,7 @@
     background-color: var(--ui-textbox-bgcolor) !important;
     line-height: normal;
     padding-block: 2px !important;
-    padding-inline: 3px 5px !important;
+    padding-inline: var(--panel-menulist-padding) !important;
     color: var(--toolbar-color) !important;
     border: none !important;
     border-radius: var(--general-button-border-radius) !important;

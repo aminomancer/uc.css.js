@@ -13,9 +13,6 @@
         --in-content-button-background-hover: hsla(0, 20%, 90%, 0.15) !important;
         --in-content-button-background-active: hsla(0, 20%, 90%, 0.19) !important;
         --in-content-border-hover: var(--dialog-box-border-hover) !important;
-        --in-content-border-focus: var(--purple-40) !important;
-        --in-content-border-active: var(--purple-40) !important;
-        --in-content-border-active-shadow: var(--purple-40-a30) !important;
         --organizer-color: var(--plaintext-color) !important;
         --organizer-deemphasized-color: color-mix(
             in srgb,
@@ -27,7 +24,7 @@
         --organizer-content-background: var(--in-content-bg-dark) !important;
         --organizer-hover-background: var(--in-content-button-background-hover) !important;
         --organizer-selected-background: var(--in-content-button-background-active) !important;
-        --organizer-outline-color: var(--in-content-border-active) !important;
+        --organizer-outline-color: var(--purple-40) !important;
         --organizer-border-color: var(--in-content-border-color-dim) !important;
         --organizer-toolbar-field-background: var(--in-content-bg-dark) !important;
         --organizer-toolbar-field-background-focused: var(--in-content-box-bg-dark) !important;

@@ -55,6 +55,7 @@ user_pref("ui.selecteditemtext", "#FFFFFFCC");
 // recommended prefs
 // functionality oriented prefs
 user_pref("browser.display.use_system_colors", false);
+user_pref("accessibility.mouse_focuses_formcontrol", 0);
 user_pref("browser.display.focus_ring_style", 0);
 user_pref("browser.display.focus_ring_width", 0);
 user_pref("browser.startup.blankWindow", false);

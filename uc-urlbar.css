@@ -1235,7 +1235,7 @@ use 0.6 instead of 1 since 1 will end up being shown as like 1.4px for some wind
 #identity-icon-label {
     padding-inline-start: 6px !important;
     color: var(--lwt-toolbar-field-color, black) !important;
-    opacity: var(--identity-box-label-opacity) !important;
+    opacity: var(--identity-box-label-opacity, 0.6) !important;
     font-weight: var(--urlbar-base-font-weight, 400);
     font-size: inherit !important;
     font-weight: var(--urlbar-base-font-weight, 400);
@@ -1244,7 +1244,7 @@ use 0.6 instead of 1 since 1 will end up being shown as like 1.4px for some wind
 #urlbar-label-box .urlbar-label,
 #urlbar-search-mode-indicator-title {
     color: var(--lwt-toolbar-field-color, black) !important;
-    opacity: var(--identity-box-label-opacity) !important;
+    opacity: var(--identity-box-label-opacity, 0.6) !important;
     padding-inline: 0px !important;
     font-size: inherit !important;
     font-weight: var(--urlbar-base-font-weight, 400);

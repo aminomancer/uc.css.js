@@ -111,7 +111,7 @@ findbar[hidden] {
 
 .findbar-textbox {
     border: none !important;
-    transition: 300ms !important;
+    transition: var(--findbar-textbox-bg-transition-duration, 200ms) background-color !important;
     width: -moz-available !important;
     border-radius: 0 !important;
     outline: none !important;
@@ -137,24 +137,23 @@ findbar[hidden] {
 .findbar-textbox:focus {
     background-color: var(--search-box-focus) !important;
     color: var(--lwt-toolbar-field-color) !important;
-    transition: 300ms !important;
 }
 
 .findbar-textbox[status="notfound"] {
     background-color: var(--search-box-null) !important;
     color: var(--ui-text-80) !important;
-    transition: 400ms !important;
+    transition-duration: var(--findbar-textbox-bg-notfound-transition-duration, 300ms) !important;
+    transition-timing-function: ease-out !important;
 }
 
 [anonid="findbar-textbox-wrapper"]:focus-within .findbar-textbox:not([status="notfound"]) {
     background-color: var(--search-box-focus) !important;
     color: var(--lwt-toolbar-field-color) !important;
-    transition: 300ms !important;
 }
 
 findbar .matches-indicator {
     background-color: var(--search-box-color);
-    transition: 300ms background-color;
+    transition: var(--findbar-textbox-bg-transition-duration, 200ms) background-color;
     mask-image: linear-gradient(to right, transparent 0px, black 20px);
     line-height: var(--findbar-height, 22px) !important;
     height: var(--findbar-height, 22px) !important;
@@ -172,7 +171,8 @@ findbar .matches-indicator {
 
 .findbar-textbox[status="notfound"] ~ .matches-indicator {
     background-color: var(--search-box-null);
-    transition-duration: 400ms;
+    transition-duration: var(--findbar-textbox-bg-notfound-transition-duration, 300ms);
+    transition-timing-function: ease-out;
 }
 
 [anonid="findbar-textbox-wrapper"]:focus-within
@@ -187,7 +187,7 @@ findbar .matches-indicator {
     padding: 0 !important;
     background: var(--search-box-color) !important;
     fill: rgba(255, 255, 255, 1) !important;
-    transition: 300ms !important;
+    transition: var(--findbar-textbox-bg-transition-duration, 200ms) background-color !important;
 }
 
 .findbar-find-previous > .toolbarbutton-icon,
@@ -252,17 +252,21 @@ findbar .matches-indicator {
 .findbar-textbox:focus
     ~ :is(.findbar-find-previous, .findbar-find-next, .findbar-entire-word, .findbar-case-sensitive) {
     background-color: var(--search-box-focus) !important;
-    transition: 300ms !important;
 }
 
 .findbar-textbox[status="notfound"]
     ~ :is(.findbar-find-previous, .findbar-find-next, .findbar-entire-word, .findbar-case-sensitive) {
     background-color: var(--search-box-null) !important;
-    transition: 400ms !important;
+    transition: var(--findbar-textbox-bg-notfound-transition-duration, 300ms) !important;
+    transition-timing-function: ease-out !important;
 }
 
 .findbar-textbox[status="notfound"] ~ :is(.findbar-find-previous, .findbar-find-next) {
     -moz-user-focus: ignore !important;
+}
+
+.findbar-find-previous, .findbar-find-next, .findbar-entire-word, .findbar-case-sensitive {
+    transition: var(--findbar-textbox-bg-transition-duration, 200ms) background-color !important;
 }
 
 .findbar-entire-word,
@@ -274,7 +278,6 @@ findbar .matches-indicator {
     margin: 0 !important;
     background: var(--search-box-color) !important;
     fill: hsl(0, 0%, 100%) !important;
-    transition: 300ms !important;
     border-radius: 0 !important;
     display: -moz-box !important;
 }
@@ -322,18 +325,18 @@ findbar .matches-indicator {
     .findbar-textbox:not([status="notfound"])
     ~ :is(.findbar-find-previous, .findbar-find-next, .findbar-entire-word, .findbar-case-sensitive) {
     background-color: var(--search-box-focus) !important;
-    transition: 300ms !important;
+    transition: var(--findbar-textbox-bg-transition-duration, 200ms) background-color !important;
 }
 
 [anonid="findbar-textbox-wrapper"] {
     outline: 0 solid transparent !important;
-    transition: 100ms outline ease-in !important;
+    transition: var(--findbar-textbox-outline-transition-duration, 100ms) outline ease-in !important;
 }
 
 [anonid="findbar-textbox-wrapper"]:focus-within {
     outline-width: 2px !important;
     outline-color: var(--search-box-focus-outline-color, -moz-accent-color) !important;
-    transition-duration: 60ms !important;
+    transition-duration: calc(var(--findbar-textbox-outline-transition-duration, 100ms) * 0.6) !important;
     transition-timing-function: ease-out !important;
 }
 

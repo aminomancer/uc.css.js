@@ -163,11 +163,11 @@ menuitem:not(.menuitem-iconic)[oncommand="_ucUtils.restart(true)"] .menu-text,
 .downloadUnblockMenuItem .menu-text,
 .downloadUseSystemDefaultMenuItem .menu-text,
 .downloadShowMenuItem .menu-text,
-menuitem[command="downloadsCmd_openReferrer"] .menu-text,
-menuitem[command="downloadsCmd_copyLocation"] .menu-text,
+menuitem[data-l10n-id="downloads-cmd-go-to-download-page"] .menu-text,
+menuitem[data-l10n-id="downloads-cmd-copy-download-link"] .menu-text,
 .downloadRemoveFromHistoryMenuItem .menu-text,
-menuitem[command="downloadsCmd_clearList"] .menu-text,
-menuitem[command="downloadsCmd_clearDownloads"] .menu-text,
+menuitem[data-l10n-id="downloads-cmd-clear-list"] .menu-text,
+menuitem[data-l10n-id="downloads-cmd-clear-downloads"] .menu-text,
 #context-media-pause .menu-text,
 #context-media-play .menu-text,
 #context-media-mute .menu-text,
@@ -558,11 +558,11 @@ menuitem#enableDeveloperTools::before,
 .downloadUnblockMenuItem::before,
 .downloadUseSystemDefaultMenuItem::before,
 .downloadShowMenuItem::before,
-menuitem[command="downloadsCmd_openReferrer"]::before,
-menuitem[command="downloadsCmd_copyLocation"]::before,
+menuitem[data-l10n-id="downloads-cmd-go-to-download-page"]::before,
+menuitem[data-l10n-id="downloads-cmd-copy-download-link"]::before,
 .downloadRemoveFromHistoryMenuItem::before,
-menuitem[command="downloadsCmd_clearList"]::before,
-menuitem[command="downloadsCmd_clearDownloads"]::before,
+menuitem[data-l10n-id="downloads-cmd-clear-list"]::before,
+menuitem[data-l10n-id="downloads-cmd-clear-downloads"]::before,
 #context-media-pause::before,
 #context-media-play::before,
 #context-media-mute::before,
@@ -686,11 +686,11 @@ menuitem.customize-context-reportExtension::before {
     background-image: url(chrome://userchrome/content/material/places/folder-open.svg);
 }
 
-menuitem[command="downloadsCmd_openReferrer"]::before {
+menuitem[data-l10n-id="downloads-cmd-go-to-download-page"]::before {
     background-image: url(chrome://userchrome/content/document.svg);
 }
 
-menuitem[command="downloadsCmd_copyLocation"]::before {
+menuitem[data-l10n-id="downloads-cmd-copy-download-link"]::before {
     background-image: url(chrome://userchrome/content/skin/link.svg);
 }
 
@@ -698,12 +698,12 @@ menuitem[command="downloadsCmd_copyLocation"]::before {
     background-image: url(chrome://userchrome/content/skin/forget.svg);
 }
 
-menuitem[command="downloadsCmd_clearList"]::before {
+menuitem[data-l10n-id="downloads-cmd-clear-list"]::before {
     background-image: url(chrome://userchrome/content/skin/stop.svg);
     background-size: 15px;
 }
 
-menuitem[command="downloadsCmd_clearDownloads"]::before {
+menuitem[data-l10n-id="downloads-cmd-clear-downloads"]::before {
     background-image: url(chrome://userchrome/content/delete.svg);
 }
 

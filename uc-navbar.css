@@ -57,7 +57,7 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
 :is(.customization-target, .widget-overflow-list)
     :is(toolbarbutton, toolbaritem):not([attention])
     .toolbarbutton-badge {
-    background-color: var(--badge-color-light, hsl(0, 100%, 42.5%)) !important;
+    background-color: var(--uc-toolbarbutton-badge-bgcolor, hsl(0, 100%, 42.5%)) !important;
     color: var(--toolbar-color, white) !important;
     box-shadow: 0 1px 1px -1px #ffffff4d inset, 0 -1px 1px -1px #00000080 inset, 0 1px 1px #1e1e2026,
         0 1px 3px #1e1e2033 !important;
