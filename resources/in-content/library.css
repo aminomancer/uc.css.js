@@ -82,4 +82,8 @@
         background-color: var(--organizer-hover-background) !important;
         color: var(--organizer-hover-color) !important;
     }
+
+    #downloadsRichListBox {
+        border: none !important;
+    }
 }

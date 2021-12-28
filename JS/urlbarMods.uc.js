@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Urlbar Mods
-// @version        1.5.6
+// @version        1.5.7
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Make some minor modifications to the urlbar. See the code comments below for more details.
@@ -255,25 +255,107 @@ class UrlbarMods {
                 ctx.stroke();
             }
         }
+        function fontString(style, scale) {
+            let { fontWeight, fontFamily, fontSize } = style;
+            return `${fontWeight} ${parseFloat(fontSize) * scale}px ${fontFamily}`;
+        }
         // override the internal dragstart callback so it uses variables instead of "white" and "black"
-        eval(
-            `gIdentityHandler.onDragStart = function ` +
-                gIdentityHandler.onDragStart
-                    .toSource()
-                    .replace(
-                        /(let backgroundColor = ).*;/,
-                        `$1varToHex("var(--tooltip-bgcolor, var(--arrowpanel-background))");`
-                    )
-                    .replace(
-                        /(let textColor = ).*;/,
-                        `$1varToHex("var(--tooltip-color, var(--arrowpanel-color))");`
-                    )
-                    .replace(/ctx\.fillStyle = backgroundColor;/, ``)
-                    .replace(
-                        /ctx\.fillRect.*;/,
-                        `roundRect(ctx, 0, 0, totalWidth * scale, totalHeight * scale, 5, backgroundColor, varToHex("var(--tooltip-border-color, var(--arrowpanel-border-color))"));`
-                    )
-        );
+        gIdentityHandler.onDragStart = function (event) {
+            const inputStyle = getComputedStyle(gURLBar.inputField);
+            const identityStyle = getComputedStyle(gURLBar._identityBox);
+            const iconStyle = getComputedStyle(document.getElementById("identity-icon"));
+            const IMAGE_SIZE = parseFloat(iconStyle.width);
+            const INPUT_HEIGHT = parseFloat(inputStyle.height);
+            const SPACING = (INPUT_HEIGHT - IMAGE_SIZE) / 2;
+
+            if (gURLBar.getAttribute("pageproxystate") != "valid") return;
+
+            let value = gBrowser.currentURI.displaySpec;
+            let urlString = value + "\n" + gBrowser.contentTitle;
+            let htmlString = '<a href="' + value + '">' + value + "</a>";
+
+            let windowUtils = window.windowUtils;
+            let scale = windowUtils.screenPixelsPerCSSPixel / windowUtils.fullZoom;
+            let canvas = document.createElementNS("http://www.w3.org/1999/xhtml", "canvas");
+            canvas.width = 600 * scale;
+            let ctx = canvas.getContext("2d");
+            ctx.font = fontString(inputStyle, scale);
+            let tabIcon = gBrowser.selectedTab.iconImage;
+            let image = new Image();
+            image.src = tabIcon.src;
+            let textWidth = ctx.measureText(value).width / scale;
+            let imageHorizontalOffset = SPACING;
+            let imageVerticalOffset = SPACING;
+            let textHorizontalOffset = image.width
+                ? IMAGE_SIZE +
+                  SPACING +
+                  parseFloat(identityStyle.marginInlineEnd) +
+                  parseFloat(inputStyle.paddingInlineStart)
+                : SPACING;
+            let textVerticalOffset = (INPUT_HEIGHT - parseInt(inputStyle.fontSize) + 1) / 2;
+            let backgroundColor = varToHex("var(--tooltip-bgcolor, var(--arrowpanel-background))");
+            let textColor = varToHex("var(--tooltip-color, var(--arrowpanel-color))");
+            let totalWidth = image.width
+                ? textWidth + IMAGE_SIZE + 3 * SPACING
+                : textWidth + 2 * SPACING;
+            let totalHeight = INPUT_HEIGHT;
+            roundRect(
+                ctx,
+                0,
+                0,
+                totalWidth * scale,
+                totalHeight * scale,
+                5,
+                backgroundColor,
+                varToHex("var(--tooltip-border-color, var(--arrowpanel-border-color))")
+            );
+            ctx.fillStyle = textColor;
+            ctx.textBaseline = "top";
+            ctx.fillText(`${value}`, textHorizontalOffset * scale, textVerticalOffset * scale);
+            try {
+                ctx.drawImage(
+                    image,
+                    imageHorizontalOffset * scale,
+                    imageVerticalOffset * scale,
+                    IMAGE_SIZE * scale,
+                    IMAGE_SIZE * scale
+                );
+            } catch (e) {
+                // Sites might specify invalid data URIs favicons that
+                // will result in errors when trying to draw, we can
+                // just ignore this case and not paint any favicon.
+            }
+
+            let dt = event.dataTransfer;
+            dt.setData("text/x-moz-url", urlString);
+            dt.setData("text/uri-list", value);
+            dt.setData("text/plain", value);
+            dt.setData("text/html", htmlString);
+            dt.setDragImage(canvas, 16, 16);
+
+            // Don't cover potential drop targets on the toolbars or in content.
+            gURLBar.view.close();
+        };
+        // below is a less extreme, old version. the above adapts to many CSS styled aspects of the urlbar and identity box,
+        // to make the drag box look like a more accurate "copy" of the urlbar contents.
+        // eval(
+        //     `gIdentityHandler.onDragStart = function ` +
+        //         gIdentityHandler.onDragStart
+        //             .toSource()
+        //             .replace(
+        //                 /(let backgroundColor = ).*;/,
+        //                 `$1varToHex("var(--tooltip-bgcolor, var(--arrowpanel-background))");`
+        //             )
+        //             .replace(
+        //                 /(let textColor = ).*;/,
+        //                 `$1varToHex("var(--tooltip-color, var(--arrowpanel-color))");`
+        //             )
+        //             .replace(/ctx\.fillStyle = backgroundColor;/, ``)
+        //             .replace(
+        //                 /ctx\.fillRect.*;/,
+        //                 `roundRect(ctx, 0, 0, totalWidth * scale, totalHeight * scale, 5, backgroundColor, varToHex("var(--tooltip-border-color, var(--arrowpanel-border-color))"));`
+        //             )
+        // );
     }
     restoreOneOffsContextMenu() {
         const urlbarOneOffsProto = Object.getPrototypeOf(this.urlbarOneOffs);

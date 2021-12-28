@@ -148,6 +148,7 @@ I also recommend setting the following prefs in `about:config`. There are two pr
 | userChrome.css.hide-promotion | Boolean | false | If true, hide official ads on system pages, e.g. for Mozilla VPN |
 | userChrome.css.mac-ui-fonts | Boolean | true | Replace UI font with SF Pro, the system font for macOS. [Click here for details](#fonts) |
 | userChrome.css.menupopup-shadows | Boolean | false | Add a shadow behind context menus and panels |
+| userChrome.css.overlay-scrollbars.in-content | Boolean | false | Overlay scrollbars are already enabled in the chrome UI. This pref enables them in web content |
 | userChrome.css.remove-tooltip-borders | Boolean | false | If true, remove the thin border on tooltips. If false, use [tooltipShadowSupport.uc.js](#tooltip-shadow-support) |
 | userChrome.css.titlebar-buttons-on-left | Boolean | false | If true, move the titlebar buttons (close/min/max) to the left side of the window |
 | userChrome.css.ctrl-tab-backdrop-overlay | Boolean | true | If true, dim the rectangular area behind the Ctrl+tab panel to increase contrast |

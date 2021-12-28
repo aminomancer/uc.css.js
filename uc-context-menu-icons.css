@@ -168,6 +168,7 @@ menuitem[data-l10n-id="downloads-cmd-copy-download-link"] .menu-text,
 .downloadRemoveFromHistoryMenuItem .menu-text,
 menuitem[data-l10n-id="downloads-cmd-clear-list"] .menu-text,
 menuitem[data-l10n-id="downloads-cmd-clear-downloads"] .menu-text,
+menuitem[command="downloadsCmd_deleteFile"] .menu-text,
 #context-media-pause .menu-text,
 #context-media-play .menu-text,
 #context-media-mute .menu-text,
@@ -563,6 +564,7 @@ menuitem[data-l10n-id="downloads-cmd-copy-download-link"]::before,
 .downloadRemoveFromHistoryMenuItem::before,
 menuitem[data-l10n-id="downloads-cmd-clear-list"]::before,
 menuitem[data-l10n-id="downloads-cmd-clear-downloads"]::before,
+menuitem[command="downloadsCmd_deleteFile"]::before,
 #context-media-pause::before,
 #context-media-play::before,
 #context-media-mute::before,
@@ -687,7 +689,7 @@ menuitem.customize-context-reportExtension::before {
 }
 
 menuitem[data-l10n-id="downloads-cmd-go-to-download-page"]::before {
-    background-image: url(chrome://userchrome/content/document.svg);
+    background-image: url(chrome://userchrome/content/skin/new-tab.svg);
 }
 
 menuitem[data-l10n-id="downloads-cmd-copy-download-link"]::before {
@@ -698,13 +700,13 @@ menuitem[data-l10n-id="downloads-cmd-copy-download-link"]::before {
     background-image: url(chrome://userchrome/content/skin/forget.svg);
 }
 
-menuitem[data-l10n-id="downloads-cmd-clear-list"]::before {
-    background-image: url(chrome://userchrome/content/skin/stop.svg);
-    background-size: 15px;
+menuitem[data-l10n-id="downloads-cmd-clear-list"]::before,
+menuitem[data-l10n-id="downloads-cmd-clear-downloads"]::before {
+    background-image: url(chrome://userchrome/content/skin/close-window.svg);
 }
 
-menuitem[data-l10n-id="downloads-cmd-clear-downloads"]::before {
-    background-image: url(chrome://userchrome/content/delete.svg);
+menuitem[command="downloadsCmd_deleteFile"]::before {
+    background-image: url(chrome://userchrome/content/delete-file.svg);
 }
 
 #context-media-mute::before {

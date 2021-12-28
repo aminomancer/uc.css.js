@@ -14,23 +14,30 @@ and in particular, tooltips and scrollbars. */
 @namespace parsererror url(http://www.mozilla.org/newlayout/xml/parsererror.xml);
 
 /* browser scrollbars */
-scrollbar {
+*|* {
+    scrollbar-width: thin;
+}
+
+/* overlay scrollbars in browser chrome.
+the * at the beginning basically means "only select this scrollbar if it has a XUL ancestor"
+so the purpose is to exclude scrollbars with HTML ancestors. */
+* scrollbar {
     appearance: none !important;
     position: relative;
     background-color: transparent;
     background-image: none;
-    z-index: 3;
+    z-index: 999;
     padding: 0px;
 }
 
-scrollbar[orient="vertical"] {
+* scrollbar[orient="vertical"] {
     -moz-margin-start: -11px;
     min-width: 11px;
     max-width: 11px;
     padding-block: 2px;
 }
 
-scrollbar[orient="horizontal"] {
+* scrollbar[orient="horizontal"] {
     margin-top: -11px;
     min-height: 11px;
     max-height: 11px;
@@ -39,12 +46,12 @@ scrollbar[orient="horizontal"] {
 
 /* reduce the scrollbar edge padding on menupopup arrowscrollboxes
 (not the gutter — e.g. for a vertical scrollbox, reduce the padding-block) */
-scrollbox > scrollbar[orient="horizontal"],
-scrollbox > scrollbar[orient="vertical"] {
+* scrollbox > scrollbar[orient="horizontal"],
+* scrollbox > scrollbar[orient="vertical"] {
     padding: 0;
 }
 
-scrollbar thumb {
+* scrollbar thumb {
     appearance: none !important;
     border-width: 0px;
     background-color: transparent;
@@ -52,35 +59,35 @@ scrollbar thumb {
     transition: opacity 0.4s ease-in-out, transform 0.2s ease-in-out;
 }
 
-scrollbar[orient="vertical"] thumb {
+* scrollbar[orient="vertical"] thumb {
     min-height: 20px;
     transform-origin: right;
 }
 
-scrollbar[orient="horizontal"] thumb {
+* scrollbar[orient="horizontal"] thumb {
     min-width: 20px;
     transform-origin: bottom;
 }
 
-scrollbar:hover thumb {
+* scrollbar:hover thumb {
     opacity: 0.5;
     transition: opacity 0.1s ease-in-out, transform 0.15s ease-in-out;
 }
 
-scrollbar thumb:active {
+* scrollbar thumb:active {
     opacity: 0.9;
     transition: opacity 0.06s ease-in-out, transform 0.1s ease-in-out;
 }
 
-scrollbar[orient="horizontal"]:not(:hover) thumb:not(:active) {
+* scrollbar[orient="horizontal"]:not(:hover) thumb:not(:active) {
     transform: scaleY(20%);
 }
 
-scrollbar[orient="vertical"]:not(:hover) thumb:not(:active) {
+* scrollbar[orient="vertical"]:not(:hover) thumb:not(:active) {
     transform: scaleX(20%);
 }
 
-scrollbar thumb::before {
+* scrollbar thumb::before {
     content: "";
     display: -moz-box;
     background-color: rgba(124, 124, 131, 1);
@@ -88,46 +95,46 @@ scrollbar thumb::before {
     border-radius: 5px;
 }
 
-scrollbar[orient="vertical"] thumb::before {
+* scrollbar[orient="vertical"] thumb::before {
     margin-inline-end: 2px;
     min-width: 9px;
 }
 
-scrollbar[orient="horizontal"] thumb::before {
+* scrollbar[orient="horizontal"] thumb::before {
     margin-block-end: 2px;
     min-height: 9px;
 }
 
-scrollbar scrollbarbutton,
-scrollbar gripper {
+* scrollbar scrollbarbutton,
+* scrollbar gripper {
     display: none;
 }
 
 /* tree scrollbars — these only show up in the firefox UI and system pages, e.g. bookmarks sidebar */
-.hidevscroll-scrollbar,
-.hidehscroll-box scrollbar {
+* .hidevscroll-scrollbar,
+* .hidehscroll-box scrollbar {
     appearance: none !important;
     border: none;
     position: relative;
     background-color: transparent;
     padding: 0px;
-    z-index: 3;
+    z-index: 999;
 }
 
-.hidevscroll-scrollbar[orient="vertical"] {
+* .hidevscroll-scrollbar[orient="vertical"] {
     -moz-margin-start: -11px;
     min-width: 11px;
     padding-block: 2px;
 }
 
-.hidehscroll-box scrollbar[orient="horizontal"] {
+* .hidehscroll-box scrollbar[orient="horizontal"] {
     margin-block-start: -11px;
     min-height: 11px;
     padding-inline: 2px;
 }
 
-.hidevscroll-scrollbar thumb,
-.hidehscroll-box scrollbar thumb {
+* .hidevscroll-scrollbar thumb,
+* .hidehscroll-box scrollbar thumb {
     appearance: none !important;
     border-width: 0px;
     background-color: transparent;
@@ -135,40 +142,40 @@ scrollbar gripper {
     transition: opacity 0.4s ease-in-out, transform 0.2s ease-in-out;
 }
 
-.hidevscroll-scrollbar[orient="vertical"] thumb {
+* .hidevscroll-scrollbar[orient="vertical"] thumb {
     min-height: 20px;
     transform-origin: right;
 }
 
-.hidehscroll-box scrollbar[orient="horizontal"] thumb {
+* .hidehscroll-box scrollbar[orient="horizontal"] thumb {
     min-width: 20px;
     transform-origin: bottom;
 }
 
-.hidevscroll-scrollbar:hover thumb,
-.hidehscroll-box scrollbar:hover thumb {
+* .hidevscroll-scrollbar:hover thumb,
+* .hidehscroll-box scrollbar:hover thumb {
     background-color: transparent;
     opacity: 0.5;
     transition: opacity 0.1s ease-in-out, transform 0.15s ease-in-out;
 }
 
-.hidevscroll-scrollbar thumb:active,
-.hidehscroll-box scrollbar thumb:active {
+* .hidevscroll-scrollbar thumb:active,
+* .hidehscroll-box scrollbar thumb:active {
     background-color: transparent;
     opacity: 0.9;
     transition: opacity 0.06s ease-in-out, transform 0.1s ease-in-out;
 }
 
-.hidevscroll-scrollbar[orient="vertical"]:not(:hover) thumb:not(:active) {
+* .hidevscroll-scrollbar[orient="vertical"]:not(:hover) thumb:not(:active) {
     transform: scaleX(20%);
 }
 
-.hidehscroll-box scrollbar[orient="horizontal"]:not(:hover) thumb:not(:active) {
+* .hidehscroll-box scrollbar[orient="horizontal"]:not(:hover) thumb:not(:active) {
     transform: scaleY(20%);
 }
 
-.hidevscroll-scrollbar thumb::before,
-.hidehscroll-box scrollbar thumb::before {
+* .hidevscroll-scrollbar thumb::before,
+* .hidehscroll-box scrollbar thumb::before {
     content: "";
     display: -moz-box;
     background-color: rgba(124, 124, 131, 1);
@@ -176,38 +183,246 @@ scrollbar gripper {
     border-radius: 5px;
 }
 
-.hidevscroll-scrollbar[orient="vertical"] thumb::before {
+* .hidevscroll-scrollbar[orient="vertical"] thumb::before {
     margin-inline-end: 2px;
     min-width: 9px;
 }
 
-.hidehscroll-box scrollbar[orient="horizontal"] thumb::before {
+* .hidehscroll-box scrollbar[orient="horizontal"] thumb::before {
     margin-block-end: 2px;
     min-height: 9px;
 }
 
-.hidevscroll-scrollbar scrollbarbutton,
-.hidevscroll-scrollbar gripper,
-.hidehscroll-box scrollbar scrollbarbutton,
-.hidehscroll-box scrollbar gripper {
+* .hidevscroll-scrollbar scrollbarbutton,
+* .hidevscroll-scrollbar gripper,
+* .hidehscroll-box scrollbar scrollbarbutton,
+* .hidehscroll-box scrollbar gripper {
     display: none;
 }
 
-select > scrollbar,
-select > scrollbar > thumb {
+* select > scrollbar,
+* select > scrollbar > thumb {
     appearance: initial !important;
     -moz-margin-start: 0 !important;
     margin-top: 0 !important;
 }
 
-panelview scrollbar thumb[collapsed="true"] {
+* panelview scrollbar thumb[collapsed="true"] {
     visibility: collapse;
 }
 
-panelview scrollbar[disabled="true"] {
+* panelview scrollbar[disabled="true"] {
     visibility: collapse;
     pointer-events: none;
     margin: 0 !important;
+}
+
+/* overlay scrollbars in HTML content, if the pref is enabled.
+previously this theme implemented overlay scrollbars everywhere.
+but they can cause problems on certain websites where multiple scrollable divs
+are nested inside each other or directly overlapping each other.
+for example, a scrollable chat box anchored to the right side of the page
+will not be scrollable because its scrollbar overlaps with the page's scrollbar.
+there isn't an easy way to fix this because all this stuff is implemented in C++ and
+it can be pretty burdensome. the clear solution is to just not use overlay scrollbars
+wherever they might overlap. so I created a pref to ensure users can disable it in web content.
+due to the way -moz-bool-pref works it's cleaner to make this pref opt-in than opt-out. */
+@supports -moz-bool-pref("userChrome.css.overlay-scrollbars.in-content") {
+    scrollbar {
+        appearance: none !important;
+        position: relative;
+        background-color: transparent;
+        background-image: none;
+        z-index: 999;
+        padding: 0px;
+    }
+
+    scrollbar[orient="vertical"] {
+        -moz-margin-start: -11px;
+        min-width: 11px;
+        max-width: 11px;
+        padding-block: 2px;
+    }
+
+    scrollbar[orient="horizontal"] {
+        margin-top: -11px;
+        min-height: 11px;
+        max-height: 11px;
+        padding-inline: 2px;
+    }
+
+    /* reduce the scrollbar edge padding on menupopup arrowscrollboxes
+(not the gutter — e.g. for a vertical scrollbox, reduce the padding-block) */
+    scrollbox > scrollbar[orient="horizontal"],
+    scrollbox > scrollbar[orient="vertical"] {
+        padding: 0;
+    }
+
+    scrollbar thumb {
+        appearance: none !important;
+        border-width: 0px;
+        background-color: transparent;
+        opacity: 0.3;
+        transition: opacity 0.4s ease-in-out, transform 0.2s ease-in-out;
+    }
+
+    scrollbar[orient="vertical"] thumb {
+        min-height: 20px;
+        transform-origin: right;
+    }
+
+    scrollbar[orient="horizontal"] thumb {
+        min-width: 20px;
+        transform-origin: bottom;
+    }
+
+    scrollbar:hover thumb {
+        opacity: 0.5;
+        transition: opacity 0.1s ease-in-out, transform 0.15s ease-in-out;
+    }
+
+    scrollbar thumb:active {
+        opacity: 0.9;
+        transition: opacity 0.06s ease-in-out, transform 0.1s ease-in-out;
+    }
+
+    scrollbar[orient="horizontal"]:not(:hover) thumb:not(:active) {
+        transform: scaleY(20%);
+    }
+
+    scrollbar[orient="vertical"]:not(:hover) thumb:not(:active) {
+        transform: scaleX(20%);
+    }
+
+    scrollbar thumb::before {
+        content: "";
+        display: -moz-box;
+        background-color: rgba(124, 124, 131, 1);
+        -moz-box-flex: 1;
+        border-radius: 5px;
+    }
+
+    scrollbar[orient="vertical"] thumb::before {
+        margin-inline-end: 2px;
+        min-width: 9px;
+    }
+
+    scrollbar[orient="horizontal"] thumb::before {
+        margin-block-end: 2px;
+        min-height: 9px;
+    }
+
+    scrollbar scrollbarbutton,
+    scrollbar gripper {
+        display: none;
+    }
+
+    /* tree scrollbars — these only show up in the firefox UI and system pages, e.g. bookmarks sidebar */
+    .hidevscroll-scrollbar,
+    .hidehscroll-box scrollbar {
+        appearance: none !important;
+        border: none;
+        position: relative;
+        background-color: transparent;
+        padding: 0px;
+        z-index: 999;
+    }
+
+    .hidevscroll-scrollbar[orient="vertical"] {
+        -moz-margin-start: -11px;
+        min-width: 11px;
+        padding-block: 2px;
+    }
+
+    .hidehscroll-box scrollbar[orient="horizontal"] {
+        margin-block-start: -11px;
+        min-height: 11px;
+        padding-inline: 2px;
+    }
+
+    .hidevscroll-scrollbar thumb,
+    .hidehscroll-box scrollbar thumb {
+        appearance: none !important;
+        border-width: 0px;
+        background-color: transparent;
+        opacity: 0.3;
+        transition: opacity 0.4s ease-in-out, transform 0.2s ease-in-out;
+    }
+
+    .hidevscroll-scrollbar[orient="vertical"] thumb {
+        min-height: 20px;
+        transform-origin: right;
+    }
+
+    .hidehscroll-box scrollbar[orient="horizontal"] thumb {
+        min-width: 20px;
+        transform-origin: bottom;
+    }
+
+    .hidevscroll-scrollbar:hover thumb,
+    .hidehscroll-box scrollbar:hover thumb {
+        background-color: transparent;
+        opacity: 0.5;
+        transition: opacity 0.1s ease-in-out, transform 0.15s ease-in-out;
+    }
+
+    .hidevscroll-scrollbar thumb:active,
+    .hidehscroll-box scrollbar thumb:active {
+        background-color: transparent;
+        opacity: 0.9;
+        transition: opacity 0.06s ease-in-out, transform 0.1s ease-in-out;
+    }
+
+    .hidevscroll-scrollbar[orient="vertical"]:not(:hover) thumb:not(:active) {
+        transform: scaleX(20%);
+    }
+
+    .hidehscroll-box scrollbar[orient="horizontal"]:not(:hover) thumb:not(:active) {
+        transform: scaleY(20%);
+    }
+
+    .hidevscroll-scrollbar thumb::before,
+    .hidehscroll-box scrollbar thumb::before {
+        content: "";
+        display: -moz-box;
+        background-color: rgba(124, 124, 131, 1);
+        -moz-box-flex: 1;
+        border-radius: 5px;
+    }
+
+    .hidevscroll-scrollbar[orient="vertical"] thumb::before {
+        margin-inline-end: 2px;
+        min-width: 9px;
+    }
+
+    .hidehscroll-box scrollbar[orient="horizontal"] thumb::before {
+        margin-block-end: 2px;
+        min-height: 9px;
+    }
+
+    .hidevscroll-scrollbar scrollbarbutton,
+    .hidevscroll-scrollbar gripper,
+    .hidehscroll-box scrollbar scrollbarbutton,
+    .hidehscroll-box scrollbar gripper {
+        display: none;
+    }
+
+    select > scrollbar,
+    select > scrollbar > thumb {
+        appearance: initial !important;
+        -moz-margin-start: 0 !important;
+        margin-top: 0 !important;
+    }
+
+    panelview scrollbar thumb[collapsed="true"] {
+        visibility: collapse;
+    }
+
+    panelview scrollbar[disabled="true"] {
+        visibility: collapse;
+        pointer-events: none;
+        margin: 0 !important;
+    }
 }
 
 /* tooltips */

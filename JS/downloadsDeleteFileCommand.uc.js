@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Downloads Delete File Command
-// @version        1.0
+// @version        1.0.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Adds a new "Delete" menuitem when right-clicking a download in the downloads panel or the downloads manager. This will delete the downloaded file from disk. It's important since the ability to "temporarily" download files with Firefox is being removed as part of bug 1733587 to reduce the risk of data loss. When you choose to "open" a file instead of "save" it, Firefox will no longer save the file in your Temp folder, but rather in your chosen Downloads folder. So, being able to clean up these files from the context menu is a nice feature. This will most likely be released in Firefox (see bug 1745624), but I did a lot of the testing for it with an autoconfig script, so it isn't any extra work to publish this here, at least until it makes it into a release build. When you download a version of Firefox that includes the menuitem, you can just delete this script.
@@ -31,37 +31,46 @@
         );
 
         // Add the class method for the command.
-        DownloadsViewUI.DownloadElementShell.prototype.downloadsCmd_deleteFile =
-            async function downloadsCmd_deleteFile() {
-                let { download } = this;
-                let { path } = download.target;
-                let indicator = DownloadsCommon.getIndicatorData(this.element.ownerGlobal);
-                // Remove the download view.
-                try {
-                    await PlacesUtils.history.remove(download.source.url);
-                } catch (ex) {
-                    Cu.reportError(ex);
-                }
-                let list = await Downloads.getList(Downloads.ALL);
-                await list.remove(download);
-                if (download.succeeded) {
-                    // Temp files are made "read-only" by DownloadIntegration.downloadDone, so reset the permission bits to read/write.
-                    // This won't be necessary after 1733587 since Downloads won't ever be temporary.
-                    let info = await IOUtils.stat(path);
-                    await IOUtils.setPermissions(path, 0o660);
-                    await IOUtils.remove(path, {
-                        ignoreAbsent: true,
-                        recursive: info.type === "directory",
-                    });
-                } else {
-                    // Bail out of download and remove partial data or final file.
-                    download.cancel().catch(() => {});
-                    await download.finalize(true);
-                }
-                if (!indicator._hasDownloads) indicator.attention = DownloadsCommon.ATTENTION_NONE;
-            };
+        if (
+            !DownloadsViewUI.DownloadElementShell.prototype.hasOwnProperty(
+                "downloadsCmd_deleteFile"
+            )
+        )
+            DownloadsViewUI.DownloadElementShell.prototype.downloadsCmd_deleteFile =
+                async function downloadsCmd_deleteFile() {
+                    let { download } = this;
+                    let { path } = download.target;
+                    let indicator = DownloadsCommon.getIndicatorData(this.element.ownerGlobal);
+                    // Remove the download view.
+                    try {
+                        await PlacesUtils.history.remove(download.source.url);
+                    } catch (ex) {
+                        Cu.reportError(ex);
+                    }
+                    let list = await Downloads.getList(Downloads.ALL);
+                    await list.remove(download);
+                    if (download.succeeded) {
+                        // Temp files are made "read-only" by DownloadIntegration.downloadDone, so reset the permission bits to read/write.
+                        // This won't be necessary after 1733587 since Downloads won't ever be temporary.
+                        let info = await IOUtils.stat(path);
+                        await IOUtils.setPermissions(path, 0o660);
+                        await IOUtils.remove(path, {
+                            ignoreAbsent: true,
+                            recursive: info.type === "directory",
+                        });
+                    } else {
+                        // Bail out of download and remove partial data or final file.
+                        download.cancel().catch(() => {});
+                        await download.finalize(true);
+                    }
+                    if (!indicator._hasDownloads)
+                        indicator.attention = DownloadsCommon.ATTENTION_NONE;
+                };
         // Add a class method for the panel's class (extends the class above) to handle a special case.
-        if (location.href === AppConstants.BROWSER_CHROME_URL) {
+        if (
+            "DownloadsViewItem" in window &&
+            !DownloadsViewItem.prototype.hasOwnProperty("downloadsCmd_deleteFile")
+        ) {
             DownloadsViewItem.prototype.downloadsCmd_deleteFile =
                 async function downloadsCmd_deleteFile() {
                     await DownloadsViewUI.DownloadElementShell.prototype.downloadsCmd_deleteFile.call(

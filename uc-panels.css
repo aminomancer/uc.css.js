@@ -1316,7 +1316,7 @@ panel .header {
 }
 
 #clearDownloadsPanel {
-    list-style-image: url(chrome://userchrome/content/delete.svg);
+    list-style-image: url(chrome://userchrome/content/skin/close-window.svg);
 }
 
 richlistitem.download-state > toolbarseparator {
@@ -1418,6 +1418,7 @@ richlistitem.download-state > .downloadButton {
     margin: 0 !important;
     background: none !important;
     border: 0 !important;
+    outline: none !important;
     border-radius: 0 !important;
     -moz-box-align: center !important;
     -moz-box-pack: center !important;
