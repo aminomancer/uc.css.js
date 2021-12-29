@@ -873,6 +873,7 @@ panel[type="autocomplete-richlistbox"]
 
     richlistbox[id] {
         background-color: var(--in-content-box-background-dim) !important;
+        border-color: var(--in-content-box-border-color) !important;
     }
 
     richlistbox[id] richlistitem {

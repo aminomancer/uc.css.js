@@ -208,10 +208,6 @@ panel {
     --arrowpanel-border-color: var(--confirmation-hint-border-color) !important;
 }
 
-#browser {
-    --sidebar-border-color: var(--uc-menu-border-color) !important;
-}
-
 .tab-loading-burst {
     --tab-loading-fill: var(--lwt-toolbarbutton-icon-fill-attention) !important;
 }

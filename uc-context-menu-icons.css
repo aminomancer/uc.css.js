@@ -968,7 +968,7 @@ menuitem#sanitizeItem::before {
 
 :is(#context-selectall, #menu_selectAll)::before,
 .textbox-contextmenu menuitem[data-l10n-id="text-action-select-all"]::before {
-    background-image: url(chrome://userchrome/content/glyph-highlights-16.svg);
+    background-image: url(chrome://userchrome/content/devtools/tool-styleeditor.svg);
 }
 
 :is(#context-sendaudio, #context-sendimage, #context-sendvideo, #menu_sendLink)::before {
@@ -1029,10 +1029,13 @@ menuitem.customize-context-CopyID::before {
     background-image: url(chrome://userchrome/content/skin/edit-paste-and-go.svg);
 }
 
-:is(#placesContext_deleteBookmark, #placesContext_deleteFolder, #placesContext_delete, #placesContext_delete_history)::before,
+:is(#placesContext_deleteBookmark, #placesContext_deleteFolder, #placesContext_delete, #placesContext_delete_history)::before {
+    background-image: url(chrome://userchrome/content/delete.svg);
+}
+
 :is(#context-delete, #menu_delete)::before,
 .textbox-contextmenu menuitem[data-l10n-id="text-action-delete"]::before {
-    background-image: url(chrome://userchrome/content/delete.svg);
+    background-image: url(chrome://userchrome/content/material/backspace-solid.svg);
 }
 
 .searchbar-clear-history::before {
@@ -1109,7 +1112,7 @@ menuitem.customize-context-CopyID::before {
 }
 
 #menu_findAgain::before {
-    background-image: url(chrome://userchrome/content/find-next-arrow.svg);
+    background-image: url(chrome://userchrome/content/skin/forward.svg);
 }
 
 :is(menuitem#textfieldDirection-swap, #context-bidi-text-direction-toggle, #context-bidi-page-direction-toggle, #documentDirection-swap)::before {

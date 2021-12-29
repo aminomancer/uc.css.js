@@ -156,6 +156,7 @@
         --in-content-table-header-background: var(--purple-40-a30) !important;
         --in-content-box-info-background: var(--in-content-button-background-solid) !important;
         --focus-outline-offset: 2px !important;
+        --default-focusring: var(--default-focusring-width) solid var(--in-parent-border-focus) !important;
         --newtab-background-color: var(--in-content-page-background) !important;
         --newtab-text-primary-color: var(--in-content-page-color) !important;
         --lwt-sidebar-background-color: var(--in-content-box-background) !important;
@@ -469,6 +470,11 @@
 
     listheader {
         padding-bottom: revert !important;
+    }
+
+    treechildren::-moz-tree-row(current, focus) {
+        outline: revert !important;
+        outline-offset: revert !important;
     }
 
     :is(listheader, treecols) > treecol {

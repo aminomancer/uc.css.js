@@ -250,7 +250,10 @@ more useful than userContent.css when dealing with very complex websites that ne
 #sidebar-box[sidebarcommand="notes_mozilla_com-sidebar-action"]
     #sidebar-switcher-target
     > #sidebar-icon,
-#sidebarMenu-popup #button_notes_mozilla_com-sidebar-action:not([checked="true"]) {
+#sidebarMenu-popup #button_notes_mozilla_com-sidebar-action:not([checked="true"]),
+menupopup#viewSidebarMenu
+    menuitem.menuitem-iconic.webextension-menuitem#menu_notes_mozilla_com-sidebar-action[style]:is([type="checkbox"], [type="radio"]):not([checked="true"])
+    .menu-iconic-left {
     list-style-image: url(chrome://userchrome/content/material/notepad-large.svg) !important;
 }
 
@@ -767,3 +770,24 @@ so by default we hide the border on extension panels (see userChrome.au.css) */
 #customizationui-widget-panel[viewId^="PanelUI-webext-multithreaded-download-manager"] {
     --panel-border-color: var(--content-principal-box-background-odd) !important;
 }
+
+/* a possible way to make sidebar border more theme responsive */
+/* #sidebar-box:not([sidebarcommand="viewBookmarksSidebar"], [sidebarcommand="viewHistorySidebar"], [sidebarcommand="viewTabsSidebar"], [sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]) {
+    --sidebar-border-color: var(--content-principal-box-background-odd) !important;
+}
+
+#sidebar-header {
+    border-width: 1px;
+    border-inline-style: solid none;
+    border-color: var(--uc-menu-border-color);
+}
+
+#sidebar {
+    border-width: 1px;
+    border-inline-style: solid none;
+    border-color: var(--sidebar-border-color);
+}
+
+#sidebar-box {
+    border: none !important;
+} */

@@ -56,8 +56,6 @@ user_pref("ui.selecteditemtext", "#FFFFFFCC");
 // functionality oriented prefs
 user_pref("browser.display.use_system_colors", false);
 user_pref("accessibility.mouse_focuses_formcontrol", 0);
-user_pref("browser.display.focus_ring_style", 0);
-user_pref("browser.display.focus_ring_width", 0);
 user_pref("browser.startup.blankWindow", false);
 user_pref("browser.startup.preXulSkeletonUI", false);
 user_pref("browser.tabs.tabMinWidth", 90);
@@ -78,9 +76,7 @@ user_pref("ui.key.menuAccessKeyFocuses", false);
 
 // style oriented prefs
 user_pref("reader.color_scheme", "dark");
-user_pref("browser.anchor_color", "#6669ff");
-user_pref("browser.active_color", "#9999ff");
-user_pref("browser.visited_color", "#e34f80");
+user_pref("browser.display.background_color.dark", "#19191b");
 user_pref("ui.textHighlightBackground", "#7755FF");
 user_pref("ui.textHighlightForeground", "#FFFFFF");
 user_pref("ui.textSelectBackground", "#FFFFFF");
