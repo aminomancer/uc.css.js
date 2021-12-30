@@ -1,17 +1,60 @@
 // ==UserScript==
 // @name           Toolbox Button
-// @version        1.2.5
+// @version        1.2.6
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
-// @description    Adds a new toolbar button that 1) opens the content toolbox on left click; 2) opens the browser toolbox on right click; 3) toggles "Popup Auto-Hide" on middle click. Left click will open the toolbox for the active tab, or close it if it's already open. Right click will open the elevated browser toolbox if it's not already open. If it is already open, then instead of trying to start a new process and spawning an irritating dialog, it'll just show a brief notification saying the toolbox is already open. The button also shows a badge while a toolbox window is open. Middle click will toggle the preference for popup auto-hide: "ui.popup.disable_autohide". This does the same thing as the "Disable Popup Auto-Hide" option in the menu at the top right of the browser toolbox, prevents popups from closing so you can debug them. If you want to change which mouse buttons execute which functions, search for "userChrome.toolboxButton.mouseConfig" in about:config. Change the 0, 1, and 2 values. 0 = left click, 1 = middle, and 2 = right. By default, when you open a browser toolbox window, the script will disable popup auto-hide, and then re-enable it when you close the toolbox. I find that I usually want popup auto-hide disabled when I'm using the toolbox, and never want it disabled when I'm not using the toolbox, so I made it automatic, instead of having to right click and then immediately middle click every time. If you don't like this automatic feature, you can turn it off by setting "userChrome.toolboxButton.popupAutohide.toggle-on-toolbox-launch" to false in about:config. When you middle click, the button will show a notification telling you the current status of popup auto-hide, e.g. "Holding popups open." This is just so that people who use the feature a lot won't lose track of whether it's on or off, and won't need to open a popup and try to close it to test it. (The toolbar button also changes appearance while popup auto-hide is disabled. It becomes blue like the downloads button and the icon changes into a popup icon. This change is animated, as long as the user doesn't have reduced motion enabled) All of these notifications use the native confirmation hint custom element, since it looks nice. That's the one that appears when you save a bookmark, #confirmation-hint. So you can customize them with that selector.
+// @description    Adds a new toolbar button that 1) opens the content toolbox on left click;
+// 2) opens the browser toolbox on right click; 3) toggles "Popup Auto-Hide" on middle click.
+// Left click will open the toolbox for the active tab, or close it if it's already open. Right click
+// will open the elevated browser toolbox if it's not already open. If it is already open, then
+// instead of trying to start a new process and spawning an irritating dialog, it'll just show a
+// brief notification saying the toolbox is already open. The button also shows a badge while a
+// toolbox window is open. Middle click will toggle the preference for popup auto-hide:
+// "ui.popup.disable_autohide". This does the same thing as the "Disable Popup Auto-Hide" option in
+// the menu at the top right of the browser toolbox, prevents popups from closing so you can debug
+// them. If you want to change which mouse buttons execute which functions, search for
+// "userChrome.toolboxButton.mouseConfig" in about:config. Change the 0, 1, and 2 values. 0 = left
+// click, 1 = middle, and 2 = right. By default, when you open a browser toolbox window, the script
+// will disable popup auto-hide, and then re-enable it when you close the toolbox. I find that I
+// usually want popup auto-hide disabled when I'm using the toolbox, and never want it disabled when
+// I'm not using the toolbox, so I made it automatic, instead of having to right click and then
+// immediately middle click every time. If you don't like this automatic feature, you can turn it
+// off by setting "userChrome.toolboxButton.popupAutohide.toggle-on-toolbox-launch" to false in
+// about:config. When you middle click, the button will show a notification telling you the current
+// status of popup auto-hide, e.g. "Holding popups open." This is just so that people who use the
+// feature a lot won't lose track of whether it's on or off, and won't need to open a popup and try
+// to close it to test it. (The toolbar button also changes appearance while popup auto-hide is
+// disabled. It becomes blue like the downloads button and the icon changes into a popup icon. This
+// change is animated, as long as the user doesn't have reduced motion enabled) All of these
+// notifications use the native confirmation hint custom element, since it looks nice. That's the
+// one that appears when you save a bookmark, #confirmation-hint. So you can customize them with
+// that selector.
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
-// Modify these strings for easy localization. I tried to use built-in strings for this so it would automatically localize itself, but I found that every reference to the "Browser Toolbox" throughout the entire firefox UI is derived from a single message in a single localization file, which doesn't follow the standard format. It can only be parsed by the devtools' own special l10n module, which itself can only be imported by a CJS module. Requiring CJS just for a button seems ridiculous, plus there really aren't any localized strings that work for these confirmation messages anyway, or even the tooltip. So if your UI language isn't English you can modify all the strings created by this script in the following object:
+// Modify these strings for easy localization. I tried to use built-in strings for this so it would
+// automatically localize itself, but I found that every reference to the "Browser Toolbox"
+// throughout the entire firefox UI is derived from a single message in a single localization file,
+// which doesn't follow the standard format. It can only be parsed by the devtools' own special l10n
+// module, which itself can only be imported by a CJS module. Requiring CJS just for a button seems
+// ridiculous, plus there really aren't any localized strings that work for these confirmation
+// messages anyway, or even the tooltip. So if your UI language isn't English you can modify all the
+// strings created by this script in the following object:
 const toolboxButtonL10n = {
-    alreadyOpenMsg: "Browser Toolbox is already open.", // Confirmation hint. You receive this message when you right click the toolbox button, but a toolbox process for the window is already open. You can only have one toolbox open per-window. So if I have 3 windows open, and I right-click the toolbox button in window 1, then it'll launch a browser toolbox for window 1. If I then right-click the toolbox button in window 2, it'll launch a browser toolbox for window 2. But if I go back to window 1 and right-click the toolbox button a second time, it will do nothing except show a brief confirmation hint to explain the lack of action.
-    holdingOpenMsg: "Holding popups open.", // Confirmation hint. This appears when you first middle-click the toolbox button. It signifies that popups are being kept open. That is, "popup auto-hide" has been temporarily disabled.
-    lettingCloseMsg: "Letting popups close.", // Confirmation hint. This appears when you middle-click the toolbox button a second time, toggling "popup auto-hide" back on, thereby allowing popups to close on their own.
+    // Confirmation hint. You receive this message when you right click the toolbox button, but a
+    // toolbox process for the window is already open. You can only have one toolbox open
+    // per-window. So if I have 3 windows open, and I right-click the toolbox button in window 1,
+    // then it'll launch a browser toolbox for window 1. If I then right-click the toolbox button in
+    // window 2, it'll launch a browser toolbox for window 2. But if I go back to window 1 and
+    // right-click the toolbox button a second time, it will do nothing except show a brief
+    // confirmation hint to explain the lack of action.
+    alreadyOpenMsg: "Browser Toolbox is already open.",
+    // Confirmation hint. This appears when you first middle-click the toolbox button. It signifies
+    // that popups are being kept open. That is, "popup auto-hide" has been temporarily disabled.
+    holdingOpenMsg: "Holding popups open.",
+    // Confirmation hint. This appears when you middle-click the toolbox button a second time,
+    // toggling "popup auto-hide" back on, thereby allowing popups to close on their own.
+    lettingCloseMsg: "Letting popups close.",
     menuBundle: Services.strings.createBundle("chrome://devtools/locale/menus.properties"),
     toolboxBundle: Services.strings.createBundle("chrome://devtools/locale/toolbox.properties"),
     getString(name, where) {
@@ -68,12 +111,13 @@ const toolboxButtonL10n = {
                     _timerID: null,
 
                     /**
-                     * Shows a transient, non-interactive confirmation hint anchored to an
-                     * element, usually used in response to a user action to reaffirm that it was
-                     * successful and potentially provide extra context.
+                     * Shows a transient, non-interactive confirmation hint anchored to an element,
+                     * usually used in response to a user action to reaffirm that it was successful
+                     * and potentially provide extra context.
                      *
                      * @param  anchor (DOM node, required)
-                     *         The anchor for the panel. A value of null will anchor to the viewpoint (see options.x below)
+                     *         The anchor for the panel. A value of null will anchor to the
+                     *         viewpoint (see options.x below)
                      * @param  message (string, required)
                      *         The message to be shown.
                      * @param  options (object, optional)
@@ -81,8 +125,10 @@ const toolboxButtonL10n = {
                      *         - event (DOM event): The event that triggered the feedback.
                      *         - hideArrow (boolean): Optionally hide the arrow.
                      *         - hideCheck (boolean): Optionally hide the checkmark.
-                     *         - description (string): If provided, show a more detailed description/subtitle with the passed text.
-                     *         - duration (numeric): How long the hint should stick around, in milliseconds. Default is 1500 — 1.5 seconds.
+                     *         - description (string): If provided, show a more detailed
+                     *                                 description/subtitle with the passed text.
+                     *         - duration (numeric): How long the hint should stick around, in
+                     *                               milliseconds. Default is 1500 — 1.5 seconds.
                      *         - position (string): One of a number of strings representing how the anchor point of the popup
                      *                              is aligned relative to the anchor point of the anchor node.
                      *                              Possible values for position are:
@@ -94,11 +140,12 @@ const toolboxButtonL10n = {
                      *                              top left corners will be lined up exactly, so they will overlap.
                      *         - x (number): Horizontal offset in pixels, relative to the anchor.
                      *                       If no anchor is provided, relative to the viewport.
-                     *         - y (number): Vertical offset in pixels, relative to the anchor.
-                     *                       Negative values may also be used to move to the left and upwards respectively.
-                     *                       Unanchored popups may be created by supplying null as the anchor node.
-                     *                       An unanchored popup appears at the position specified by x and y, relative to the
-                     *                       viewport of the document containing the popup node. (ignoring the anchor parameter)
+                     *         - y (number): Vertical offset in pixels, relative to the anchor. Negative
+                     *                       values may also be used to move to the left and upwards respectively.
+                     *                       Unanchored popups may be created by supplying null as the
+                     *                       anchor node. An unanchored popup appears at the position
+                     *                       specified by x and y, relative to the viewport of the document
+                     *                       containing the popup node. (ignoring the anchor parameter)
                      *
                      */
                     show(anchor, message, options = {}) {
@@ -252,7 +299,8 @@ const toolboxButtonL10n = {
                     }
                     switch (button) {
                         case this.mouseConfig.contentToolbox:
-                            aDoc.defaultView.key_toggleToolbox.click(); // toggle the content toolbox
+                            // toggle the content toolbox
+                            aDoc.defaultView.key_toggleToolbox.click();
                             break;
                         case this.mouseConfig.browserToolbox:
                             toolboxLauncher.getBrowserToolboxSessionState() // check if a browser toolbox window is already open
@@ -270,8 +318,10 @@ const toolboxButtonL10n = {
                                 ],
                                 { event: e, hideCheck: this.popupAutoHide }
                             );
-                            prefSvc.setBoolPref(autoHide, !this.popupAutoHide); // toggle the pref
-                            this.triggerAnimation(); // animate the icon transformation
+                            // toggle the pref
+                            prefSvc.setBoolPref(autoHide, !this.popupAutoHide);
+                            // animate the icon transformation
+                            this.triggerAnimation();
                             break;
                         default:
                             return;
@@ -318,11 +368,15 @@ const toolboxButtonL10n = {
                             if (value === null) value = false;
                             toolbarbutton.popupAutoHide = value;
                             if (value) {
-                                toolbarbutton.setAttribute("icon", "autohide"); // change icon src to popup icon
-                                icon.style.fill = "var(--toolbarbutton-icon-fill-attention)"; // highlight color
+                                // change icon src to popup icon
+                                toolbarbutton.setAttribute("icon", "autohide");
+                                // highlight color
+                                icon.style.fill = "var(--toolbarbutton-icon-fill-attention)";
                             } else {
-                                toolbarbutton.setAttribute("icon", "toolbox"); // change icon src to toolbox icon
-                                icon.style.removeProperty("fill"); // un-highlight color
+                                // change icon src to toolbox icon
+                                toolbarbutton.setAttribute("icon", "toolbox");
+                                // un-highlight color
+                                icon.style.removeProperty("fill");
                             }
                             break;
                         case autoTogglePopups:
@@ -346,8 +400,10 @@ const toolboxButtonL10n = {
                  * listen for toolboxes opening and closing
                  */
                 function toolboxObserver(sub, _top, _data) {
-                    let state = toolboxLauncher.getBrowserToolboxSessionState(); // whether a toolbox is open
-                    badgeLabel.textContent = state ? 1 : ""; // set toolbar button's badge content
+                    // whether a toolbox is open
+                    let state = toolboxLauncher.getBrowserToolboxSessionState();
+                    // set toolbar button's badge content
+                    badgeLabel.textContent = state ? 1 : "";
                     // if toolbox is open and autohide is not already enabled, enable it
                     if (sub === "initial-load" || !toolbarbutton.autoTogglePopups) return;
                     if (state && !toolbarbutton.popupAutoHide) prefSvc.setBoolPref(autoHide, true);
@@ -405,10 +461,10 @@ const toolboxButtonL10n = {
                         `{"contentToolbox": 0, "browserToolbox": 2, "popupHide": 1}`
                     );
                 window.addEventListener("unload", uninit, false);
-                prefSvc.addObserver(autoHide, prefObserver); // listen for pref changes
+                prefSvc.addObserver(autoHide, prefObserver);
                 prefSvc.addObserver(toolboxBranch, prefObserver);
-                obSvc.addObserver(toolboxObserver, "devtools:loader:destroy"); // listen for toolbox process closing
-                obSvc.addObserver(toolboxObserver, "devtools-thread-ready"); // listen for toolbox process launching
+                obSvc.addObserver(toolboxObserver, "devtools:loader:destroy");
+                obSvc.addObserver(toolboxObserver, "devtools-thread-ready");
                 if (gBrowserInit.delayedStartupFinished) {
                     toolboxInit();
                 } else {

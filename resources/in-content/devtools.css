@@ -353,7 +353,6 @@ and a few elements like checkboxes */
         overflow: hidden !important;
         color: var(--menu-color) !important;
         background-image: unset !important;
-        --menu-background-color: var(--ui-secondary-bg) !important;
     }
 
     #ContentSelectDropdown > menupopup .contentSelectDropdown-searchbox {

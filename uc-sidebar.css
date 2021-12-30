@@ -25,7 +25,7 @@ as well as the internal appearance of the built-in sidebars, e.g. bookmarks, his
 
 #sidebar-header {
     appearance: none !important;
-    padding: 7px !important;
+    padding: 6px !important;
     border-bottom: 0px solid transparent !important;
     background-color: var(--ui-secondary-bg) !important;
     color: #fff !important;
@@ -33,17 +33,18 @@ as well as the internal appearance of the built-in sidebars, e.g. bookmarks, his
 }
 
 #sidebar-switcher-target {
-    min-height: 27px !important;
-    min-width: 27px !important;
-    padding-inline: 5px !important;
+    min-height: 28px !important;
+    min-width: 28px !important;
+    padding-inline: 6px !important;
 }
 
 #sidebar-switcher-target #sidebar-title {
-    padding-inline: 6px 4px !important;
+    padding-inline: 6px !important;
 }
 
 #sidebar-search-container {
     padding-block: 0 var(--menupopup-inner-padding-magnitude) !important;
+    padding-inline: 6px !important;
 }
 
 .sidebar-search-container .tabsFilter {
@@ -61,6 +62,7 @@ as well as the internal appearance of the built-in sidebars, e.g. bookmarks, his
     transition: 300ms !important;
     color: currentColor !important;
     min-height: 25px !important;
+    margin: 0 !important;
 }
 
 .sidebar-search-container .search-box,
@@ -225,7 +227,7 @@ as well as the internal appearance of the built-in sidebars, e.g. bookmarks, his
 
 .sidebar-placesTreechildren::-moz-tree-cell {
     border-radius: var(--general-button-border-radius) !important;
-    margin-inline: 8px !important;
+    margin-inline: 6px !important;
     cursor: default !important;
 }
 
@@ -283,10 +285,12 @@ as well as the internal appearance of the built-in sidebars, e.g. bookmarks, his
 .sidebar-placesTreechildren::-moz-tree-row(current, focus),
 .sidebar-placesTreechildren::-moz-tree-row(selected, current, focus) {
     border: none !important;
+    outline: none !important;
 }
 
 .sidebar-placesTreechildren::-moz-tree-row(selected, current, focus) {
     border: none !important;
+    outline: none !important;
 }
 
 .sidebar-placesTreechildren::-moz-tree-cell-text(primary, dropOn) {
@@ -433,8 +437,6 @@ there are normally no twistys in sorted trees so it is relatively safe to collap
 
     .content-header {
         appearance: none !important;
-        padding-inline: 1px !important;
-        margin-top: -4px !important;
         border-bottom: 0px solid transparent !important;
         background-color: var(--ui-secondary-bg) !important;
         color: #fff !important;
@@ -450,8 +452,7 @@ there are normally no twistys in sorted trees so it is relatively safe to collap
     }
 
     .sidebar-search-container {
-        padding-inline-start: 3px !important;
-        padding-inline-end: 3px !important;
+        padding: 0 6px 6px !important;
     }
 
     .sidebar-search-container .search-box input {
@@ -485,7 +486,7 @@ there are normally no twistys in sorted trees so it is relatively safe to collap
 
     .item-title-container {
         border-radius: var(--general-button-border-radius) !important;
-        margin-inline: 8px !important;
+        margin-inline: 6px !important;
         min-height: 24px;
         box-sizing: border-box !important;
     }

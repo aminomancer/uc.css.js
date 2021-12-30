@@ -222,6 +222,11 @@ as the mouse would then be on top of the tooltip popup not the main window. */
     margin-block-start: 26px !important;
 }
 
+/* eliminate --default-focusring */
+treechildren::-moz-tree-row(selected, current, focus) {
+    outline: none !important;
+}
+
 progress {
     appearance: none;
     border: 1px solid transparent;

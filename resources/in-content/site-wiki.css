@@ -2380,10 +2380,9 @@ You can use greasemonkey or any other form of monkey that supports the document-
         background-size: 20px !important;
     }
 
-    .mwe-popups .mw-ui-icon-preview-disambiguation,
-    .mwe-popups .mw-ui-icon-preview-generic {
-        margin: 21px 0 8px 0 !important;
-        opacity: 0.25 !important;
+    .mwe-popups .mw-ui-icon-preview-disambiguation {
+        background: none !important;
+        margin: 4px !important;
     }
 
     .mwe-popups .mwe-popups-container footer {
@@ -2395,10 +2394,24 @@ You can use greasemonkey or any other form of monkey that supports the document-
         left: 0 !important;
     }
 
+    .mwe-popups.mwe-popups-is-not-tall footer {
+        width: 290px !important;
+    }
+
+    .mwe-popups-read-link,
+    .mwe-popups footer {
+        display: none !important;
+    }
+
     .mwe-popups .mwe-popups-extract {
         color: hsla(0, 0%, 100%, 0.75) !important;
         text-decoration: none !important;
         scrollbar-width: none !important;
+    }
+        
+    .mwe-popups.mwe-popups-type-generic .mwe-popups-extract,
+    .mwe-popups.mwe-popups-type-disambiguation .mwe-popups-extract {
+        color: var(--uc-wiki-link-color) !important;
     }
 
     .mwe-popups .mwe-popups-extract:hover {
@@ -2408,6 +2421,7 @@ You can use greasemonkey or any other form of monkey that supports the document-
     .mwe-popups .mwe-popups-extract::after {
         content: " " !important;
         position: absolute !important;
+        display: none !important;
         bottom: 0 !important;
         width: 25% !important;
         height: 20px !important;
@@ -2500,10 +2514,6 @@ You can use greasemonkey or any other form of monkey that supports the document-
         padding-top: 0px !important;
         margin-top: 16px !important;
         margin-bottom: 16px !important;
-    }
-
-    .mwe-popups.mwe-popups-is-not-tall footer {
-        width: 290px !important;
     }
 
     .mwe-popups.mwe-popups-type-generic .mwe-popups-extract,
@@ -2799,10 +2809,6 @@ You can use greasemonkey or any other form of monkey that supports the document-
 
     .mwe-popups.mwe-popups-type-reference .mwe-popups-read-link {
         font-size: 12px !important;
-    }
-
-    .mwe-popups-read-link {
-        display: none !important;
     }
 
     .mwe-popups-overlay {
@@ -3955,10 +3961,6 @@ You can use greasemonkey or any other form of monkey that supports the document-
 
     .mw-ui-icon:hover {
         filter: contrast(0%) brightness(10000%) grayscale(0%) !important;
-    }
-
-    .mwe-popups footer {
-        display: none !important;
     }
 
     .mwe-popups .mw-ui-icon::before {

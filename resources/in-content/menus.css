@@ -106,7 +106,6 @@ menupopup.in-menulist {
     overflow: hidden !important;
     color: var(--menu-color) !important;
     background-image: unset !important;
-    /* --menu-background-color: var(--ui-secondary-bg) !important; */
     padding: var(--menupopup-padding) !important;
     border-color: transparent !important;
 }
@@ -119,7 +118,7 @@ menupopup.in-menulist .contentSelectDropdown-searchbox {
     margin-block: 0 !important;
     margin-inline: var(--menupopup-inner-padding-magnitude) !important;
     padding-inline-start: 3px !important;
-    background-color: var(--uc-arrowpanel-dimmed) !important;
+    background-color: var(--menuitem-hover-background-color) !important;
     padding-block: 0 !important;
     transition: 300ms background-color !important;
     min-height: var(--menuitem-height) !important;
@@ -208,7 +207,7 @@ menupopup.in-menulist menu[disabled="true"] > .menu-right {
     :is(menu, menuitem)[_moz-menuactive="true"]:not([disabled="true"]),
 menupopup.in-menulist :is(menu, menuitem)[_moz-menuactive="true"]:not([disabled="true"]) {
     appearance: none !important;
-    background-color: var(--uc-arrowpanel-dimmed) !important;
+    background-color: var(--menuitem-hover-background-color) !important;
 }
 
 #ContentSelectDropdown > menupopup :is(menu, menuitem)[_moz-menuactive="true"][disabled="true"],
@@ -229,7 +228,7 @@ menupopup.in-menulist
     > menupopup
     menu.subviewbutton:not([disabled="true"])[_moz-menuactive="true"]:active,
 menupopup.in-menulist menu.subviewbutton:not([disabled="true"])[_moz-menuactive="true"]:active {
-    background: var(--uc-arrowpanel-dimmed) !important;
+    background: var(--menuitem-hover-background-color) !important;
     box-shadow: none !important;
 }
 

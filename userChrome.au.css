@@ -524,9 +524,9 @@ panel[type="autocomplete-richlistbox"]
 
 #customization-container,
 #customization-container :is(menupopup, panel)::part(arrowscrollbox) {
-    --arrowpanel-dimmed: color-mix(in srgb, var(--toolbar-color) 7%, transparent);
-    --arrowpanel-dimmed-further: color-mix(in srgb, var(--toolbar-color) 12%, transparent);
-    --arrowpanel-dimmed-even-further: color-mix(in srgb, var(--toolbar-color) 15%, transparent);
+    --arrowpanel-dimmed: color-mix(in srgb, var(--uc-toolbar-color) 7%, transparent);
+    --arrowpanel-dimmed-further: color-mix(in srgb, var(--uc-toolbar-color) 12%, transparent);
+    --arrowpanel-dimmed-even-further: color-mix(in srgb, var(--uc-toolbar-color) 15%, transparent);
     --arrowpanel-background: var(--in-content-button-highlight-dark);
     --button-bgcolor: var(--arrowpanel-dimmed);
     --button-hover-bgcolor: var(--arrowpanel-dimmed-further);
@@ -559,6 +559,56 @@ panel[type="autocomplete-richlistbox"]
         currentColor 4%,
         var(--in-content-button-highlight-dark)
     );
+}
+
+/* dark gray context menus/menulists in system pages with gray theme */
+@-moz-document url-prefix("chrome://browser/content/places/places.xhtml"),
+    url("chrome://mozapps/content/downloads/unknownContentType.xhtml"),
+    regexp("^about:.*$") {
+    :is(menupopup)::part(content) {
+        --arrowpanel-dimmed: color-mix(in srgb, var(--uc-toolbar-color) 7%, transparent);
+        --arrowpanel-dimmed-further: color-mix(in srgb, var(--uc-toolbar-color) 12%, transparent);
+        --arrowpanel-dimmed-even-further: color-mix(
+            in srgb,
+            var(--uc-toolbar-color) 15%,
+            transparent
+        );
+        --arrowpanel-background: var(--in-content-button-highlight-dark);
+        --button-bgcolor: var(--arrowpanel-dimmed);
+        --button-hover-bgcolor: var(--arrowpanel-dimmed-further);
+        --button-active-bgcolor: var(--arrowpanel-dimmed-even-further);
+        --search-box-focus: var(--button-active-bgcolor);
+        --panel-item-hover-bgcolor: var(--arrowpanel-dimmed);
+        --panel-item-active-bgcolor: var(--arrowpanel-dimmed-further);
+        --menu-background-color: var(--arrowpanel-background);
+        --menuitem-hover-background-color: var(--button-hover-bgcolor);
+        --menu-disabled-color: var(--ui-text-40);
+        --panel-shortcut-color: var(--ui-text-40);
+        --uc-panel-shortcut-color: var(--ui-text-40);
+        --arrowpanel-border-color: color-mix(
+            in srgb,
+            currentColor 8%,
+            var(--in-content-button-highlight-dark)
+        ) !important;
+        --panel-border-color: var(--arrowpanel-border-color) !important;
+        --menu-separator-color: var(--arrowpanel-border-color) !important;
+        --uc-checkbox-unchecked-bgcolor: color-mix(in srgb, var(--toolbar-color) 7%, transparent);
+        --uc-checkbox-unchecked-hover-bgcolor: color-mix(
+            in srgb,
+            var(--toolbar-color) 12%,
+            transparent
+        );
+        --uc-checkbox-unchecked-active-bgcolor: color-mix(
+            in srgb,
+            var(--toolbar-color) 15%,
+            transparent
+        );
+        --urlbar-input-bgcolor: color-mix(
+            in srgb,
+            currentColor 4%,
+            var(--in-content-button-highlight-dark)
+        );
+    }
 }
 
 #customization-container :is(menupopup, panel)::part(content),

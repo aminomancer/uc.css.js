@@ -78,7 +78,8 @@ tooltip {
     --menupopup-inner-padding: var(--menupopup-inner-padding-magnitude) 0;
     --uc-panel-separator-margin-vertical: 4px;
     --uc-panel-separator-margin-horizontal: 4px;
-    --uc-panel-separator-margin: var(--uc-panel-separator-margin-vertical) var(--uc-panel-separator-margin-horizontal);
+    --uc-panel-separator-margin: var(--uc-panel-separator-margin-vertical)
+        var(--uc-panel-separator-margin-horizontal);
     --uc-arrowpanel-menuitem-inline-margin: 4px;
     --uc-arrowpanel-menuitem-padding-block: 6px;
     --uc-arrowpanel-menuitem-padding-inline: 6px;
@@ -470,6 +471,20 @@ popupnotification,
     --protections-popup-switch-off-hover-background-custom: var(--uc-switch-off-hover-background);
     --protections-popup-switch-off-active-background-custom: var(--uc-switch-off-active-background);
     --protections-popup-switch-off-hover-border-custom: var(--uc-switch-off-hover-border);
+}
+
+/* dark gray tooltips for some system pages */
+@-moz-document url-prefix("chrome://browser/content/places/places.xhtml")
+{
+    :root,
+    tooltip {
+        --tooltip-bgcolor: var(--in-content-button-highlight-dark) !important;
+        --tooltip-border-color: color-mix(
+            in srgb,
+            currentColor 8%,
+            var(--in-content-button-highlight-dark)
+        ) !important;
+    }
 }
 
 /* SF Pro is a bit heavier than Segoe UI so adjust font weights on certain elements */
