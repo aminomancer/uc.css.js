@@ -37,6 +37,7 @@ tooltip {
     --uc-arrowpanel-dimmed-further: hsla(234, 100%, 83%, 0.25);
     --uc-arrowpanel-dimmed-even-further: hsla(232, 100%, 85%, 0.3);
     --uc-desaturate-faint: hsla(236, 60%, 83%, 0.1);
+    --uc-desaturate-semi-faint: hsla(236, 60%, 83%, 0.13);
     --uc-desaturate-dimmed: hsla(236, 60%, 83%, 0.17);
     --uc-desaturate-dimmed-further: hsla(234, 60%, 83%, 0.25);
     --uc-desaturate-dimmed-even-further: hsla(232, 60%, 85%, 0.3);
@@ -276,7 +277,7 @@ tooltip {
     --urlbar-input-bgcolor: hsl(233, 28%, 25%);
     --urlbar-input-bgcolor-brighter: hsl(233, 26%, 27%);
     --urlbar-input-bgcolor-disabled: hsl(233, 30%, 21%);
-    --urlbar-zoom-button-bgcolor: hsla(0, 0%, 0%, 0.09);
+    --urlbar-dim-button-bgcolor: hsla(0, 0%, 0%, 0.09);
     --uc-urlbar-container-height: 38px;
     --uc-menubar-searchbar-width: 256px;
     --uc-tab-min-height: 35px;

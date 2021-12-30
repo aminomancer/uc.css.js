@@ -41,14 +41,8 @@ and the URL to the search engine so I can find a suitable icon and set a rule fo
     --search-engine-icon: url(chrome://userchrome/content/skin/tab.svg) !important;
 }
 
-#urlbar[pageproxystate="invalid"]
-    #identity-box
-    #identity-icon-box[engine="Bookmarks"]
-    #identity-icon,
-#urlbar[pageproxystate="valid"] #identity-box #identity-icon-box[engine="Bookmarks"] #identity-icon,
-#identity-icon-box[engine="Bookmarks"] #identity-icon {
+#identity-icon-box[engine="Bookmarks"] {
     --search-engine-icon: url(chrome://userchrome/content/skin/bookmark.svg) !important;
-    margin-top: -0.6px !important;
 }
 
 /* for google */
@@ -81,37 +75,16 @@ and the URL to the search engine so I can find a suitable icon and set a rule fo
     --search-engine-icon: url(chrome://userchrome/content/engines/youtube.svg) !important;
 }
 
+/* etc... */
 #identity-icon-box[engine="Google Translate"] {
     --search-engine-icon: url(chrome://userchrome/content/engines/googletranslate.svg) !important;
 }
 
-/* porn */
-#identity-icon-box[engine="XVIDEOS"] {
-    --search-engine-icon: url(chrome://userchrome/content/engines/xxx.svg) !important;
-}
-
-/* etc... */
 #identity-icon-box[engine="GitHub"] {
     --search-engine-icon: url(chrome://userchrome/content/engines/github.svg) !important;
 }
 
-#urlbar[pageproxystate="invalid"]
-    #identity-box
-    #identity-icon-box[engine^="Wikipedia"]
-    #identity-icon,
-#urlbar[pageproxystate="valid"]
-    #identity-box
-    #identity-icon-box[engine^="Wikipedia"]
-    #identity-icon,
-#urlbar[searchmode]
-    > #urlbar-input-container
-    > #identity-box
-    #identity-icon-box[engine^="Wikipedia"]
-    #identity-icon {
-    width: 20px !important;
-    padding-inline: 1px !important;
-    margin-inline: -2px !important;
-    margin-block: 1px 0 !important;
+#identity-icon-box[engine^="Wikipedia"] {
     --search-engine-icon: url(chrome://userchrome/content/engines/wikipedia.svg) !important;
 }
 
@@ -119,16 +92,7 @@ and the URL to the search engine so I can find a suitable icon and set a rule fo
     --search-engine-icon: url(chrome://userchrome/content/engines/wiktionary.svg) !important;
 }
 
-#urlbar[pageproxystate="invalid"]
-    #identity-box
-    #identity-icon-box:is([engine="Amazon"], [engine="Amazon.com"])
-    #identity-icon,
-#urlbar[pageproxystate="valid"]
-    #identity-box
-    #identity-icon-box:is([engine="Amazon"], [engine="Amazon.com"])
-    #identity-icon,
-#identity-icon-box:is([engine="Amazon"], [engine="Amazon.com"]) #identity-icon {
-    margin-top: 1.4px !important;
+#identity-icon-box:is([engine="Amazon"], [engine="Amazon.com"]) {
     --search-engine-icon: url(chrome://userchrome/content/engines/amazon.svg) !important;
 }
 
@@ -140,23 +104,11 @@ and the URL to the search engine so I can find a suitable icon and set a rule fo
     --search-engine-icon: url(chrome://userchrome/content/engines/ebay.svg) !important;
 }
 
-#urlbar[pageproxystate="invalid"] #identity-box #identity-icon-box[engine="Netflix"] #identity-icon,
-#urlbar[pageproxystate="valid"] #identity-box #identity-icon-box[engine="Netflix"] #identity-icon,
-#identity-icon-box[engine="Netflix"] #identity-icon {
-    height: 18px !important;
+#identity-icon-box[engine="Netflix"] {
     --search-engine-icon: url(chrome://userchrome/content/engines/netflix.svg) !important;
 }
 
-#urlbar[pageproxystate="invalid"]
-    #identity-box
-    #identity-icon-box[engine="Google Maps"]
-    #identity-icon,
-#urlbar[pageproxystate="valid"]
-    #identity-box
-    #identity-icon-box[engine="Google Maps"]
-    #identity-icon,
-#identity-icon-box[engine="Google Maps"] #identity-icon {
-    height: 17px !important;
+#identity-icon-box[engine="Google Maps"] {
     --search-engine-icon: url(chrome://userchrome/content/engines/googlemaps.svg) !important;
 }
 

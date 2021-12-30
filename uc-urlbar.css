@@ -435,8 +435,8 @@ but CSS hides it faster and avoids flickering.
 #urlbar-zoom-button {
     height: 20px !important;
     border-radius: 10px !important;
-    border: 1px solid var(--desaturate-dimmed) !important;
-    background: var(--urlbar-zoom-button-bgcolor, hsla(0, 0%, 0%, 0.09)) !important;
+    border: 1px solid var(--urlbar-box-hover-bgcolor) !important;
+    background: var(--urlbar-box-bgcolor, hsla(0, 0%, 0%, 0.09)) !important;
     margin-inline: 4px !important;
     padding: 1px 8px !important;
 }
@@ -445,13 +445,18 @@ but CSS hides it faster and avoids flickering.
     height: 20px !important;
 }
 
-#urlbar-zoom-button:is(:hover, :focus-visible) {
-    background-color: var(--desaturate-dimmed) !important;
+#urlbar-zoom-button:focus-visible {
+    background-color: var(--urlbar-box-focus-bgcolor) !important;
+    border-color: transparent !important;
+}
+
+#urlbar-zoom-button:hover {
+    background-color: var(--urlbar-box-hover-bgcolor) !important;
     border-color: transparent !important;
 }
 
 #urlbar-zoom-button:hover:active {
-    background-color: var(--desaturate-dimmed-further) !important;
+    background-color: var(--urlbar-box-active-bgcolor) !important;
 }
 
 #urlbar-zoom-button[animate="true"] {
@@ -601,7 +606,7 @@ my script, urlbarMods.uc.js assigns them custom classes .aboutBlockedPage and .a
 so you can use those classes to set the icon. */
 #identity-box[pageproxystate="valid"]:is(.certErrorPage, .httpsOnlyErrorPage, .aboutBlockedPage, .aboutNetErrorPage)
     #identity-icon {
-    list-style-image: url(chrome://userchrome/content/warning.svg) !important;
+    list-style-image: url(chrome://userchrome/content/warning-big.svg) !important;
 }
 
 #identity-box:is(:hover:active, [open="true"], :hover:not([open="true"])),
@@ -653,47 +658,6 @@ so you can use those classes to set the icon. */
     #identity-icon:hover {
     fill: var(--low-warning-color) !important;
     fill-opacity: 1 !important;
-}
-
-#urlbar[pageproxystate="valid"] #identity-box.chromeUI #identity-icon {
-    list-style-image: url(chrome://userchrome/content/identity-icons-brand.svg) !important;
-}
-
-#urlbar[pageproxystate="valid"]
-    #identity-box.chromeUI:hover
-    #identity-icon-box:not([open="true"])
-    > #identity-icon,
-#urlbar[pageproxystate="valid"]
-    #identity-box.chromeUI:hover:active
-    #identity-icon-box
-    > #identity-icon,
-#urlbar[pageproxystate="valid"]
-    #identity-box.chromeUI
-    #identity-icon-box:is([open="true"], :focus-visible)
-    > #identity-icon {
-    list-style-image: url(chrome://branding/content/about-logo.png) !important;
-}
-
-#urlbar[pageproxystate="valid"] #identity-box.chromeUI {
-    padding-inline: 8px !important;
-    border: none !important;
-    background-color: var(--identity-box-solid-bg) !important;
-    border-inline-end: 1px solid var(--desaturate-dimmed) !important;
-}
-
-#urlbar[pageproxystate="valid"]
-    #identity-box.chromeUI:hover
-    #identity-icon-box:not([open="true"])
-    > #identity-icon-label,
-#urlbar[pageproxystate="valid"]
-    #identity-box.chromeUI:hover:active
-    #identity-icon-box
-    > #identity-icon-label,
-#urlbar[pageproxystate="valid"]
-    #identity-box.chromeUI
-    #identity-icon-box:is([open="true"], :focus-visible)
-    > #identity-icon-label {
-    opacity: 0.8 !important;
 }
 
 :root[hide-tp-icon-on-ntp]:not([customizing])
@@ -1173,6 +1137,45 @@ use 0.6 instead of 1 since 1 will end up being shown as like 1.4px for some wind
     --identity-box-solid-bg: var(--identity-box-focus-bg);
 }
 
+#urlbar[pageproxystate="valid"]
+    #identity-box.chromeUI:hover
+    #identity-icon-box:not([open="true"])
+    > #identity-icon,
+#urlbar[pageproxystate="valid"]
+    #identity-box.chromeUI:hover:active
+    #identity-icon-box
+    > #identity-icon,
+#urlbar[pageproxystate="valid"]
+    #identity-box.chromeUI
+    #identity-icon-box:is([open="true"], :focus-visible)
+    > #identity-icon {
+    /* list-style-image: url(chrome://userchrome/content/about-logo.png) !important; */
+    -moz-context-properties: fill !important;
+    list-style-image: url(chrome://userchrome/content/nightly-logo-gradient.svg) !important;
+}
+
+#urlbar[pageproxystate="valid"] #identity-box.chromeUI {
+    padding-inline: 8px !important;
+    border: none !important;
+    background-color: var(--identity-box-solid-bg) !important;
+    border-inline-end: 1px solid var(--desaturate-dimmed) !important;
+}
+
+#urlbar[pageproxystate="valid"]
+    #identity-box.chromeUI:hover
+    #identity-icon-box:not([open="true"])
+    > #identity-icon-label,
+#urlbar[pageproxystate="valid"]
+    #identity-box.chromeUI:hover:active
+    #identity-icon-box
+    > #identity-icon-label,
+#urlbar[pageproxystate="valid"]
+    #identity-box.chromeUI
+    #identity-icon-box:is([open="true"], :focus-visible)
+    > #identity-icon-label {
+    opacity: 0.8 !important;
+}
+
 #urlbar-label-box,
 #urlbar-search-mode-indicator {
     background-color: var(--identity-box-solid-bg) !important;
@@ -1182,7 +1185,7 @@ use 0.6 instead of 1 since 1 will end up being shown as like 1.4px for some wind
     font-size: inherit !important;
     min-width: 16px !important;
     height: var(--urlbar-height) !important;
-    padding-inline: 30px 8px !important;
+    padding-inline: 31px 8px !important;
     border: none !important;
     border-inline-end: 1px solid var(--desaturate-dimmed) !important;
     pointer-events: auto !important;
@@ -1233,7 +1236,8 @@ use 0.6 instead of 1 since 1 will end up being shown as like 1.4px for some wind
 }
 
 #identity-icon-label {
-    padding-inline-start: 6px !important;
+    margin: 0 !important;
+    padding-inline-start: 7px !important;
     color: var(--lwt-toolbar-field-color, black) !important;
     opacity: var(--identity-box-label-opacity, 0.6) !important;
     font-weight: var(--urlbar-base-font-weight, 400);

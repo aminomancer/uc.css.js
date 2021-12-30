@@ -54,6 +54,7 @@ menupopup {
     --arrowpanel-dimmed-further: var(--uc-arrowpanel-dimmed-further) !important;
     --arrowpanel-dimmed-even-further: var(--uc-arrowpanel-dimmed-even-further) !important;
     --desaturate-faint: var(--uc-desaturate-faint);
+    --desaturate-semi-faint: var(--uc-desaturate-semi-faint);
     --desaturate-dimmed: var(--uc-desaturate-dimmed);
     --desaturate-dimmed-further: var(--uc-desaturate-dimmed-further);
     --desaturate-dimmed-even-further: var(--uc-desaturate-dimmed-even-further);
@@ -225,9 +226,12 @@ panel {
 
 #urlbar,
 #searchbar {
+    --urlbar-box-bgcolor: var(--urlbar-dim-button-bgcolor) !important;
     --urlbar-box-focus-bgcolor: var(--desaturate-faint) !important;
-    --urlbar-box-hover-bgcolor: var(--desaturate-dimmed) !important;
-    --urlbar-box-active-bgcolor: var(--desaturate-dimmed-further) !important;
+    --urlbar-box-hover-bgcolor: var(--desaturate-semi-faint) !important;
+    --urlbar-box-active-bgcolor: var(--desaturate-dimmed) !important;
+    --urlbar-box-text-color: inherit !important;
+    --urlbar-box-hover-text-color: var(--urlbar-box-text-color) !important;
 }
 
 #appMenu-multiView {

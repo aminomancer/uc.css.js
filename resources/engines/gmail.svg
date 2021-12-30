@@ -1,1 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 38 30"><path d="M34 0H4C1.8 0 0 1.8 0 4v22c0 2.2 1.8 4 4 4h30c2.2 0 4-1.8 4-4V4c0-2.2-1.8-4-4-4zm-2 4L18.6 16.6l-.1.1-.1-.1L5.7 4H32zM4 26V8l11.5 11.4c.6.6 1.6 1.5 2.9 1.5h.1c1.3 0 2.3-.8 2.9-1.4L34 7.6V26H4z" fill="context-fill" fill-opacity="context-fill-opacity"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="context-fill"
+	fill-opacity="context-fill-opacity">
+	<path opacity="0.67" d="M0,12.911c0,0.604,0.489,1.091,1.091,1.091h2.545V7.82L0,5.092V12.911z" />
+	<path opacity="0.5" d="M12.364,14.002h2.545c0.604,0,1.091-0.489,1.091-1.091V5.092L12.364,7.82V14.002z" />
+	<path opacity="0.83" d="M13.382,2.329l-1.018,0.764V7.82L16,5.092V3.638C16,2.289,14.46,1.52,13.382,2.329z" />
+	<polygon points="8,6.365 3.636,3.092 3.636,7.82 8,11.092 12.364,7.82 12.364,3.092 " />
+	<path opacity="0.5" d="M2.618,2.329C1.538,1.52,0,2.289,0,3.638v1.455L3.636,7.82V3.092L2.618,2.329z" />
+</svg>
