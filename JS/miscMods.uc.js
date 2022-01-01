@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Misc. Mods
-// @version        1.9.0
+// @version        1.9.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Various tiny mods not worth making separate scripts for. Read the comments inside the script for details.
@@ -287,9 +287,8 @@
                     label: "Remember last location",
                     accesskey: "R",
                     tooltiptext:
-                        "Update the default bookmark folder when you change it. If unchecked, the last folder chosen when this was checked will be the default folder.",
+                        "Update the default bookmark folder when you change it. If unchecked, the folder chosen when this was checked will remain the default folder indefinitely.",
                     oncommand: `Services.prefs.setBoolPref("userChrome.bookmarks.editDialog.persistLastLocation", this.checked)`,
-                    checked: false,
                 })
             );
             panel.addEventListener("popupshowing", (e) => {
@@ -298,7 +297,7 @@
                     "userChrome.bookmarks.editDialog.persistLastLocation",
                     true
                 );
-                if (pref !== checkbox.checked) checkbox.checked = pref;
+                checkbox.checked = pref;
             });
             eval(
                 `StarUI._storeRecentlyUsedFolder = async function ` +
