@@ -132,20 +132,12 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
     padding-inline: 0 !important;
 }
 
-.widget-overflow-list .toolbaritem-combined-buttons {
-    margin-inline: 0 !important;
-}
-
 toolbar .toolbaritem-combined-buttons.chromeclass-toolbar-additional {
     margin-inline: 0 !important;
 }
 
 toolbar :not(toolbarpaletteitem) > .toolbaritem-combined-buttons.chromeclass-toolbar-additional {
-    margin-inline: 0 !important;
-    max-height: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
-    margin-block: calc(
-        (var(--urlbar-container-height) - calc(2 * var(--toolbarbutton-inner-padding) + 16px)) / 2
-    );
+    -moz-box-align: stretch !important;
 }
 
 toolbar .toolbaritem-combined-buttons.chromeclass-toolbar-additional:not(:hover) > separator {
@@ -163,7 +155,7 @@ toolbar .toolbaritem-combined-buttons.chromeclass-toolbar-additional:not(:hover)
 
 toolbar .toolbarbutton-combined-buttons-dropmarker,
 #PersonalToolbar .toolbaritem-combined-buttons .toolbarbutton-combined-buttons-dropmarker {
-    min-height: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
+    margin-block: var(--toolbarbutton-inner-padding) !important;
 }
 
 toolbar .toolbarbutton-combined-buttons-dropmarker > .toolbarbutton-icon {
@@ -184,7 +176,7 @@ toolbar #profiler-button > #profiler-button-dropmarker {
 }
 
 toolbar:not(#PersonalToolbar) #zoom-controls > :is(#zoom-out-button, #zoom-in-button) {
-    min-height: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
+    margin-block: var(--toolbarbutton-inner-padding) !important;
     width: unset !important;
     padding: 0 !important;
     padding-inline: 2px !important;
@@ -204,7 +196,7 @@ toolbar:not(#PersonalToolbar)
 }
 
 toolbar:not(#PersonalToolbar) #zoom-controls > #zoom-reset-button {
-    min-height: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
+    margin-block: var(--toolbarbutton-inner-padding) !important;
 }
 
 toolbar:not(#PersonalToolbar)

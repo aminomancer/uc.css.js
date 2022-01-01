@@ -99,7 +99,7 @@ tooltip {
     );
     --context-padding-inline: var(--context-iconic-composite-width) 0px;
     --panel-menulist-padding: 4px 6px;
-    --menulist-dropmarker-margin: 10px 0;
+    --menulist-dropmarker-margin: 8px 0;
     --menupopup-border-radius: 5px;
     --panel-border-radius-mini: 3px;
     --context-menuitem-border-radius: 2.6px;
@@ -371,7 +371,7 @@ tooltip {
     --in-parent-primary-button-background: var(--purple-40);
     --in-parent-primary-button-background-hover: var(--purple-35);
     --in-parent-primary-button-background-active: var(--purple-30);
-    --in-parent-primary-button-text-color: var(--in-parent-page-color);
+    --in-parent-primary-button-text-color: #fff;
     --ui-textbox-bgcolor: hsl(233, 24%, 28%);
     --ui-textbox-focus-bgcolor: hsl(232, 22%, 34%);
     --ebp-menulist-background-color: hsl(232, 24%, 32%);

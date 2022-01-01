@@ -753,7 +753,7 @@ popupnotificationcontent label[control]:not([hidden]) + menulist {
 
 .permission-popup-permission-remove-button > .button-box {
     margin-block: 1px !important;
-    margin-inline: var(--menulist-dropmarker-margin, 10px 0) !important;
+    margin-inline: var(--menulist-dropmarker-margin, 8px 0) !important;
     width: 12px;
     max-width: 12px;
     height: 12px;
@@ -1910,6 +1910,82 @@ richlistitem.download-state > .downloadButton:is(.downloadIconCancel, .downloadI
 #PanelUI-panic-warning {
     color: var(--warning-color) !important;
     margin-top: 12px !important;
+}
+
+/* profiler panel */
+#PanelUI-profiler-header-bar {
+    min-height: 40px !important;
+    -moz-box-align: center !important;
+    border-bottom: 1px solid var(--panel-separator-color) !important;
+    margin: 0 var(--panel-separator-margin) !important;
+}
+
+#PanelUI-profiler-header {
+	background: none !important;
+	color: var(--panel-color) !important;
+	--arrowpanel-dimmed: var(--uc-arrowpanel-dimmed) !important;
+	--arrowpanel-dimmed-further: var(--uc-arrowpanel-dimmed-further) !important;
+	--panel-item-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
+}
+
+#PanelUI-profiler-header-bar label {
+	margin-inline-start: 28px !important;
+    padding: 0 8px !important;
+    margin-block: 0 !important;
+    word-break: break-word !important;
+	font-weight: var(--uc-font-weight-bold, 600) !important;
+}
+
+.PanelUI-profiler-description-title,
+.PanelUI-profiler-content-label {
+	font-weight: var(--uc-font-weight-bold, 600) !important;
+}
+
+.PanelUI-profiler-toolbarbutton-container {
+	margin-inline: revert !important;
+}
+
+.PanelUI-profiler-button-link {
+    padding-inline: 0 !important;
+    background: none !important;
+    text-decoration: none !important;
+	color: var(--lwt-popup-brighttext-url-color) !important;
+	font-weight: var(--uc-font-weight-bold, 600) !important;
+    outline: revert !important;
+    box-shadow: revert !important;
+}
+
+.PanelUI-profiler-button-link:is(:hover, :focus-visible) {
+    text-decoration: underline !important;
+}
+
+#PanelUI-profiler-content {
+    background: var(--panel-background) !important;
+}
+
+.PanelUI-profiler-shortcut {
+	opacity: revert !important;
+    color: var(--panel-shortcut-color) !important;
+}
+
+.PanelUI-profiler-button-primary {
+	background-color: var(--in-parent-primary-button-background) !important;
+	color: var(--in-parent-primary-button-text-color) !important;
+    box-shadow: revert !important;
+}
+
+.PanelUI-profiler-button-primary:hover {
+	background-color: var(--in-parent-primary-button-background-hover) !important;
+}
+
+.PanelUI-profiler-button-primary:hover:active {
+	background-color: var(--in-parent-primary-button-background-active) !important;
+}
+
+.PanelUI-profiler-button:focus-visible {
+	box-shadow: 0 0 0 1px var(--in-parent-primary-button-background-hover) inset,
+        0 0 0 1px var(--in-parent-primary-button-background-hover),
+        0 0 0 4px var(--global-focus-shadow-color) !important;
 }
 
 .eom-addon-button[message-type="warning"]:not([disabled], [open]):is(:hover, :focus-visible) {

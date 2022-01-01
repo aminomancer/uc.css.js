@@ -493,6 +493,8 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
         #sidebar-header,
         #PanelUI-whatsNew,
         #protections-popup-message,
+        #PanelUI-profiler-info,
+        .PanelUI-profiler-button-link,
         #protections-popup-no-trackers-found-description {
             font-family: SF Pro Display, Segoe UI, sans-serif !important;
             font-kerning: normal !important;

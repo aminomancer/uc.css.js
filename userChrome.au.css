@@ -750,8 +750,9 @@ panel[type="autocomplete-richlistbox"]
     }
 
     #permission-popup-menulist,
-    #permission-popup-menulist > menupopup {
-        min-width: 6.525em;
+    #permission-popup-menulist > menupopup,
+    .permission-popup-permission-remove-button {
+        min-width: 77px;
     }
 
     :is(panel, dialog) menulist::part(icon) {
@@ -773,7 +774,7 @@ panel[type="autocomplete-richlistbox"]
     }
 
     :is(panel, dialog) menulist::part(dropmarker) {
-        margin-inline: var(--menulist-dropmarker-margin, 10px 0);
+        margin-inline: var(--menulist-dropmarker-margin, 8px 0);
         -moz-box-align: center;
         -moz-box-pack: center;
         -moz-context-properties: fill, fill-opacity;
