@@ -111,8 +111,6 @@ user_pref("userChrome.tabs.pinned-tabs.close-buttons.disabled", true);
 user_pref("userChrome.urlbar-results.hide-help-button", true);
 
 // these are more subjective prefs, but they're important ones
-// add a drop shadow on menupopup and panel elements (context menus, addons' popup panels, etc.)
-user_pref("userChrome.css.menupopup-shadows", true);
 // display the all tabs menu in reverse order (newer tabs on top, like history)
 // user_pref("userChrome.tabs.all-tabs-menu.reverse-order", true);
 
@@ -123,6 +121,11 @@ user_pref("userChrome.css.menupopup-shadows", true);
 // recommended for all operating systems, but not required.
 // must have the fonts installed. check the repo's readme for more details.
 // user_pref("userChrome.css.mac-ui-fonts", true);
+
+// add a drop shadow on menupopup and panel elements (context menus, addons' popup panels, etc.)
+// the 8px drop shadow area around the menupopup can't be clicked through.
+// this might bother some people so it's disabled by default.
+// user_pref("userChrome.css.menupopup-shadows", true);
 
 // custom wikipedia dark mode theme
 // user_pref("userChrome.css.wikipedia.dark-theme-enabled", true);
