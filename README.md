@@ -138,6 +138,8 @@ I also recommend setting the following prefs in `about:config`. There are two pr
 | ui.textSelectDisabledBackground | String | `#7755FF` | For Fx > v96 |
 | ui.textSelectBackgroundAttention | String | `#FF3388` | For Fx ≤ v96 |
 | ui.textSelectBackgroundDisabled | String | `#7755FF` | For Fx ≤ v96 |
+| <i>ui.infobackground</i> | String | `hsl(233, 36%, 11%)` | Tooltip background color (fallback if CSS doesn't apply) |
+| <i>ui.infotext</i> | String | `#FFFFFF` | Tooltip color (fallback) |
 | userChrome... | | | Several of my scripts use custom prefs beginning with `userChrome` for user customization. See the individual script files for details. The stylesheets also use the following: |
 | userChrome.bookmarks-toolbar.icons-only | Boolean | false | If true, bookmark buttons in the toolbar are just square icons |
 | userChrome.contextmenu.reduce-menuseparators | Boolean | false | If true, hide some of the separators in the main context menu to reduce clutter |
@@ -682,8 +684,9 @@ Adds a toolbar button that implements the color picker without launching the dev
 
 #### [Findbar Mods](/JS/findbarMods.uc.js):
 
-✨ This script adds several improvements and modifications for the findbar, and (optionally) makes it much more horizontally compact and concise by removing wasted space and unnecessary words.
-<details><summary>💬 <i><b>More details...</b></i></summary>
+✨ This script adds several improvements and modifications for the findbar, and (optionally) makes it much more horizontally compact and concise by removing wasted space and unnecessary words.<details><summary>💬 <i><b>More details...</b></i></summary>
+
+<img src="preview/findbar.webp"/>
 
 1. Make a custom context menu for the findbar that lets you permanently configure findbar-related settings. You can set `Highlight All` and `Whole Words` just like you can with the built-in checkboxes, but this context menu also lets you choose _any_ setting for the `Match Case` and `Match Diacritics` options.
 

@@ -6,10 +6,11 @@
 
 :root,
 tooltip {
-    --in-content-bg-dark: rgb(25, 25, 27);
+    --in-content-bg-dark: #19191b;
+    --in-content-bg-darker: #151517;
     --in-content-box-bg-dark: hsl(240, 4%, 13%);
     --in-content-button-highlight-dark: hsl(240, 4%, 15%);
     --in-content-separator-dim: hsl(240, 4%, 26%);
     --in-content-border-color-dim: hsl(240, 4%, 21%);
-    --plaintext-color: rgba(255, 255, 255, 0.932);
+    --plaintext-color: hsla(0, 0%, 100%, 0.932);
 }

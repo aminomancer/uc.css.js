@@ -40,6 +40,9 @@ user_pref("ui.highlight", "hsla(245, 100%, 66%, .55)");
 user_pref("ui.selecteditem", "#2F3456");
 // Text color for selected <option> elements and others
 user_pref("ui.selecteditemtext", "#FFFFFFCC");
+// Tooltip colors (only relevant if userChrome.ag.css somehow fails to apply, but doesn't hurt)
+user_pref("ui.infotext", "#FFFFFF");
+user_pref("ui.infobackground", "#hsl(233, 36%, 11%)");
 
 // REQUIRED on macOS
 // user_pref("widget.macos.native-context-menus", false);

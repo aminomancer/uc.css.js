@@ -12,7 +12,7 @@ but other than that these variables should be available everywhere. */
 @import url(chrome://userchrome/content/layout/uc-low-globals.css);
 
 :root,
-tooltip {
+tooltip:-moz-native-anonymous {
     --ui-text-10: rgba(255, 255, 255, 0.1);
     --ui-text-20: rgba(255, 255, 255, 0.2);
     --ui-text-30: rgba(255, 255, 255, 0.3);
@@ -472,20 +472,6 @@ popupnotification,
     --protections-popup-switch-off-hover-background-custom: var(--uc-switch-off-hover-background);
     --protections-popup-switch-off-active-background-custom: var(--uc-switch-off-active-background);
     --protections-popup-switch-off-hover-border-custom: var(--uc-switch-off-hover-border);
-}
-
-/* dark gray tooltips for some system pages */
-@-moz-document url-prefix("chrome://browser/content/places/places.xhtml")
-{
-    :root,
-    tooltip {
-        --tooltip-bgcolor: var(--in-content-button-highlight-dark) !important;
-        --tooltip-border-color: color-mix(
-            in srgb,
-            currentColor 8%,
-            var(--in-content-button-highlight-dark)
-        ) !important;
-    }
 }
 
 /* SF Pro is a bit heavier than Segoe UI so adjust font weights on certain elements */
