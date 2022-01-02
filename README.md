@@ -145,9 +145,9 @@ I also recommend setting the following prefs in `about:config`. There are two pr
 | userChrome.contextmenu.reduce-menuseparators | Boolean | false | If true, hide some of the separators in the main context menu to reduce clutter |
 | userChrome.css.hide-promotion | Boolean | false | If true, hide official ads on system pages, e.g. for Mozilla VPN |
 | userChrome.css.mac-ui-fonts | Boolean | true | Replace UI font with SF Pro, the system font for macOS. [Click here for details](#fonts) |
-| userChrome.css.menupopup-shadows | Boolean | false | Add a shadow behind context menus and panels |
+| userChrome.css.menupopup-shadows | Boolean | true | Add a shadow behind context menus and panels |
 | userChrome.css.overlay-scrollbars.in-content | Boolean | false | Overlay scrollbars are already enabled in the chrome UI. This pref enables them in web content |
-| userChrome.css.remove-tooltip-borders | Boolean | false | If true, remove the thin border on tooltips. If false, use [tooltipShadowSupport.uc.js](#tooltip-shadow-support) |
+| userChrome.css.remove-tooltip-borders | Boolean | false | Remove the thin border on tooltips. Not recommended |
 | userChrome.css.titlebar-buttons-on-left | Boolean | false | If true, move the titlebar buttons (close/min/max) to the left side of the window |
 | userChrome.css.ctrl-tab-backdrop-overlay | Boolean | true | If true, dim the rectangular area behind the Ctrl+tab panel to increase contrast |
 | userChrome.css.wikipedia.dark-theme-enabled | Boolean | true | Enable the custom dark theme for Wikipedia.org |
@@ -158,15 +158,15 @@ I also recommend setting the following prefs in `about:config`. There are two pr
 | userChrome.tabs.new-loading-spinner-animation | Boolean | true | Replace the tab loading throbber with a spinning animation |
 | userChrome.tabs.pinned-tabs.close-buttons.disabled | Boolean | true | This controls whether close buttons are shown on pinned tabs |
 | userChrome.tabs.rounded-outer-corners.disabled | Boolean | false | This controls whether tabs have rounded bottom corners<br/><img src="preview/prev-tabcorners.webp" width="100%"/> |
-| userChrome.tabs.tooltip.always-show-lock-icon | Boolean | false | There's an icon in the tab tooltip representing page security. It's expanded by [this script](/JS/restoreTabSoundButton.uc.js) to show many security types. But by default, the icon is hidden on fully secure pages. Setting this pref to true reverses that |
-| userChrome.urlbar.hide-bookmarks-button-on-system-pages | Boolean | true | Hides the urlbar's bookmark button on system pages & new tab page |
+| userChrome.tabs.tooltip.always-show-lock-icon | Boolean | false | There's an icon in the tab tooltip representing page security. It's expanded by [this script](/JS/restoreTabSoundButton.uc.js) to show many security types. But by default, the icon is hidden on fully secure web pages. Setting this pref to true shows the icon on ALL pages |
+| userChrome.urlbar.hide-bookmarks-button-on-system-pages | Boolean | true | Hides the urlbar's bookmark button on about:blank & new tab page |
 | userChrome.urlbar.hide-pointless-icons | Boolean | true | Hide urlbar notification icons that don't offer any action (e.g. DRM icon) |
 | userChrome.urlbar-results.disable\_animation | Boolean | false | Toggle to true if you don't want the urlbar results to animate as they pop up |
 | userChrome.urlbar-results.hide-help-button | Boolean | true | New "Firefox Suggest" urlbar results have little help buttons. This will hide them |
 | widget.content.allow-gtk-dark-theme | Boolean | true | May style some in-content elements consistently with Linux themes |
 | widget.disable-native-theme-for-content | Boolean | true | Enables Firefox's custom appearance for elements like checkboxes. Skips the "native" appearance given by the OS stylesheets. |
 | <i>widget.macos.native-context-menus</i> | Boolean | false | Required to use some of my scripts on macOS, and for context menu styles on macOS |
-| devtools.inspector.showAllAnonymousContent | Boolean | true | Show native anonymous content and user agent shadow roots in the inspector |
+| devtools.inspector.showAllAnonymousContent | Boolean | true | Show native anonymous content (like scrollbars or tooltips) and user agent shadow roots (like the components of an `<input>` element) in the inspector |
 | devtools.inspector.showUserAgentStyles | Boolean | true | Show user agent styles in the inspector |
 
 </details>

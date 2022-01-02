@@ -11,8 +11,7 @@ but other than that these variables should be available everywhere. */
 
 @import url(chrome://userchrome/content/layout/uc-low-globals.css);
 
-:root,
-tooltip:-moz-native-anonymous {
+:root {
     --ui-text-10: rgba(255, 255, 255, 0.1);
     --ui-text-20: rgba(255, 255, 255, 0.2);
     --ui-text-30: rgba(255, 255, 255, 0.3);
@@ -41,7 +40,6 @@ tooltip:-moz-native-anonymous {
     --uc-desaturate-dimmed: hsla(236, 60%, 83%, 0.17);
     --uc-desaturate-dimmed-further: hsla(234, 60%, 83%, 0.25);
     --uc-desaturate-dimmed-even-further: hsla(232, 60%, 85%, 0.3);
-    --uc-menu-border-color: hsl(233, 23%, 20%);
     --uc-content-text-a50: hsla(236, 100%, 85%, 0.5);
     --uc-content-text-a80: hsla(0, 0%, 100%, 0.8);
     --uc-panel-button-solid: hsl(234, 24%, 35%);
@@ -120,11 +118,6 @@ tooltip:-moz-native-anonymous {
     --ui-secondary-bg: hsl(234, 39%, 10%);
     --ui-tertiary-bg: hsl(233, 39%, 8.5%);
     --ui-quaternary-bg: hsl(233, 34%, 8.5%);
-    --tooltip-bgcolor: hsl(233, 36%, 11%);
-    --tooltip-color: white;
-    --tooltip-border-radius: 2px;
-    --tooltip-border-color: var(--uc-menu-border-color);
-    --tooltip-box-shadow: 0 0 5px hsla(0, 0%, 0%, 0.2);
     --global-focus-shadow-color: var(--purple-40-a30);
     --global-focus-outline-color: var(--purple-40);
     --global-focus-ring: 2px solid var(--global-focus-shadow-color);

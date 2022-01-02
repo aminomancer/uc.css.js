@@ -473,7 +473,6 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
         treechildren,
         panelview,
         #BMB_bookmarksPopup,
-        #main-menubar,
         .sidebar-search-container,
         .pointerlockfswarning {
             font-family: SF Pro Text, Segoe UI, sans-serif !important;
@@ -498,6 +497,19 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
         #protections-popup-no-trackers-found-description {
             font-family: SF Pro Display, Segoe UI, sans-serif !important;
             font-kerning: normal !important;
+        }
+
+        #main-menubar {
+            font-family: SF Pro Display, Segoe UI, sans-serif !important;
+            font-kerning: normal !important;
+        }
+
+        #toolbar-menubar #main-menubar > menu > label {
+            padding: 5px 8px 6px 8px !important;
+        }
+
+        #main-menubar > menu > menupopup {
+            margin-block: calc(0px - var(--menupopup-inner-box-margin) - (var(--tab-min-height) - 14px - 5px - 6px) / 2) !important;
         }
 
         #fxa-menu-header-description {

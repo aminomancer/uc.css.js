@@ -89,7 +89,8 @@ this sheet controls their appearance as well. */
 }
 
 #main-menubar > menu > menupopup {
-    margin-block-start: -5px !important;
+    margin-block: calc(0px - var(--menupopup-inner-box-margin) - (var(--tab-min-height) - 16px - 4px - 5px) / 2) !important;
+    margin-inline: calc(0px - var(--menupopup-inner-box-margin) + 2px) !important;
 }
 
 #toolbar-menubar #main-menubar > menu {
@@ -101,7 +102,7 @@ this sheet controls their appearance as well. */
 #toolbar-menubar #main-menubar > menu > label {
     -moz-box-flex: 1000 !important;
     margin: 0 !important;
-    padding: 4px 6px 5px 6px !important;
+    padding: 4px 8px 5px 8px !important;
     border-radius: var(--toolbarbutton-border-radius) !important;
 }
 

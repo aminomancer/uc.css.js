@@ -211,8 +211,8 @@ so the purpose is to exclude scrollbars with HTML ancestors. */
     visibility: collapse;
 }
 
-* panelview scrollbar[disabled="true"] {
-    visibility: collapse;
+scrollbar[disabled="true"] {
+    appearance: none !important;
     pointer-events: none;
     margin: 0 !important;
 }
@@ -413,16 +413,6 @@ due to the way -moz-bool-pref works it's cleaner to make this pref opt-in than o
         -moz-margin-start: 0 !important;
         margin-top: 0 !important;
     }
-
-    panelview scrollbar thumb[collapsed="true"] {
-        visibility: collapse;
-    }
-
-    panelview scrollbar[disabled="true"] {
-        visibility: collapse;
-        pointer-events: none;
-        margin: 0 !important;
-    }
 }
 
 /* tooltips */
@@ -463,12 +453,10 @@ tooltip > description {
 }
 
 @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
-    @-moz-document regexp("^(about:|chrome:\/\/|resource:\/\/).*") {
-        tooltip {
-            font-family: SF Pro Text, Segoe UI, sans-serif;
-            font-kerning: normal;
-            --uc-tooltip-inner-padding: 5px 8px 6px 8px;
-        }
+    tooltip {
+        font-family: SF Pro Text, Segoe UI, sans-serif;
+        font-kerning: normal;
+        --uc-tooltip-inner-padding: 5px 8px 6px 8px;
     }
 
     parsererror|parsererror {

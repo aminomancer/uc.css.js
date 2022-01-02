@@ -111,6 +111,8 @@ user_pref("userChrome.tabs.pinned-tabs.close-buttons.disabled", true);
 user_pref("userChrome.urlbar-results.hide-help-button", true);
 
 // these are more subjective prefs, but they're important ones
+// add a drop shadow on menupopup and panel elements (context menus, addons' popup panels, etc.)
+user_pref("userChrome.css.menupopup-shadows", true);
 // display the all tabs menu in reverse order (newer tabs on top, like history)
 // user_pref("userChrome.tabs.all-tabs-menu.reverse-order", true);
 
