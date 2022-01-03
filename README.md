@@ -126,7 +126,8 @@ I also recommend setting the following prefs in `about:config`. There are two pr
 | ui.skipNavigatingDisabledMenuItem | Number | 1 | When focusing menuitems with arrow keys, skip past disabled items |
 | ui.SpellCheckerUnderline | String | `#E2467A` | |
 | ui.SpellCheckerUnderlineStyle | Number | 1 | Use dotted underline for spell checker. The default groove can get cut off for some fonts |
-| <i>ui.systemUsesDarkTheme</i> | Number | 1 | Currently required since there's no light mode yet |
+| <i>ui.systemUsesDarkTheme</i> | Number | 1 | Enable _browser_ dark scheme |
+| <i>layout.css.prefers-color-scheme.content-override</i> | Number | 0 | Enable _content_ dark scheme |
 | <i>ui.selecteditem</i> | String | `#2F3456` | Background for selected `<option>` elements and others |
 | <i>ui.highlight</i> | String | `hsla(245, 100%, 66%, .55)` | Selection background, among others |
 | <i>ui.selecteditemtext</i> | String | `#FFFFFFCC` | Text color for selected `<option>` elements and others |

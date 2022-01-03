@@ -264,7 +264,9 @@ You can use greasemonkey or any other form of monkey that supports the document-
         --uc-wiki-text-100: hsl(0, 0%, 100%);
         --uc-wiki-main-bg: hsl(240, 2%, 10%);
         --uc-wiki-box-bg: hsl(240, 1.4%, 13.9%);
-        --uc-wiki-panel-bg: hsla(0, 0%, 3.1%, 0.7);
+/*         backdrop filter has been temporarily disabled by mozilla */
+/*         --uc-wiki-panel-bg: hsla(0, 0%, 3.1%, 0.7); */
+        --uc-wiki-panel-bg: hsl(240, 4%, 5%);
         --uc-wiki-table-header-bg: hsl(240, 5.6%, 7.1%);
         --uc-wiki-table-border-color: hsl(240, 1.4%, 19%);
         --uc-wiki-table-border-bold: hsla(212, 8.8%, 66.5%, 0.4);
@@ -2363,7 +2365,9 @@ You can use greasemonkey or any other form of monkey that supports the document-
         border: 1px solid hsla(230, 3.9%, 18%, 0.5) !important;
         background-image: var(--acrylic-texture) !important;
         backdrop-filter: blur(7px) !important;
-        background-color: hsla(230, 3.9%, 2%, 0.8) !important;
+/*         backdrop filter has been temporarily disabled by mozilla */
+/*         background-color: hsla(230, 3.9%, 2%, 0.8) !important; */
+        background-color: hsl(240, 4%, 5%) !important;
         margin-block: -6px -9px !important;
         overflow: hidden !important;
     }
@@ -2938,7 +2942,9 @@ You can use greasemonkey or any other form of monkey that supports the document-
 
     .mw-mmv-post-image {
         color: hsla(0, 0%, 100%, 0.75) !important;
-        background-color: hsla(0, 0%, 0%, 0.9) !important;
+/*         backdrop filter has been temporarily disabled by mozilla */
+/*         background-color: hsla(0, 0%, 0%, 0.9) !important; */
+        background-color: hsl(240, 4%, 5%) !important;
         background-image: var(--acrylic-texture) !important;
         backdrop-filter: blur(7px) !important;
     }
@@ -4818,7 +4824,9 @@ You can use greasemonkey or any other form of monkey that supports the document-
         border: 1px solid hsla(230, 3.9%, 18%, 0.5) !important;
         background-image: var(--acrylic-texture) !important;
         backdrop-filter: blur(7px) !important;
-        background-color: hsla(230, 3.9%, 2%, 0.8) !important;
+/*         backdrop filter has been temporarily disabled by mozilla */
+/*         background-color: hsla(230, 3.9%, 2%, 0.8) !important; */
+        background-color: hsl(240, 4%, 5%) !important;
     }
 
     .boilerplate {

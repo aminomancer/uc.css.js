@@ -20,7 +20,10 @@ user_pref("svg.context-properties.content.enabled", true);
 user_pref("layout.css.backdrop-filter.enabled", true);
 // prevent bugs that would otherwise be caused by the custom scrollbars in the user-agent sheet
 user_pref("layout.css.cached-scrollbar-styles.enabled", false);
+// enable browser dark mode
 user_pref("ui.systemUsesDarkTheme", 1);
+// enable content dark mode
+user_pref("layout.css.prefers-color-scheme.content-override", 0);
 // allow stylesheets to modify trees in system pages viewed in regular tabs
 user_pref("layout.css.xul-tree-pseudos.content.enabled", true);
 // allow the color-mix() CSS function
