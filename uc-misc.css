@@ -474,7 +474,9 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
         panelview,
         #BMB_bookmarksPopup,
         .sidebar-search-container,
-        .pointerlockfswarning {
+        .pointerlockfswarning,
+        :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup) :is(menu, menuitem, menucaption),
+        panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem {
             font-family: SF Pro Text, Segoe UI, sans-serif !important;
             font-kerning: normal !important;
         }
@@ -494,7 +496,8 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
         #protections-popup-message,
         #PanelUI-profiler-info,
         .PanelUI-profiler-button-link,
-        #protections-popup-no-trackers-found-description {
+        #protections-popup-no-trackers-found-description,
+        #PopupAutoComplete > richlistbox > richlistitem > .ac-title {
             font-family: SF Pro Display, Segoe UI, sans-serif !important;
             font-kerning: normal !important;
         }

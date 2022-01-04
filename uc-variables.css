@@ -185,10 +185,6 @@ menupopup {
     --vpn-on-icon: url(chrome://userchrome/content/skin/vpn-on-dark.svg);
 }
 
-:root:-moz-window-inactive:not([customizing]) {
-    --urlbar-icon-fill-opacity: 0.4 !important;
-}
-
 toolbar {
     --toolbarbutton-hover-background: hsla(236, 82%, 83%, 0.17) !important;
     --toolbarbutton-active-background: hsla(236, 82%, 83%, 0.22) !important;

@@ -291,6 +291,10 @@ panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem[image] :is(.
     margin-inline: var(--context-iconic-margin) !important;
 }
 
+#PopupAutoComplete > richlistbox > richlistitem[originaltype="insecureWarning"] > .ac-site-icon {
+	fill: currentColor !important;
+}
+
 :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
     :where(menu, menuitem, menucaption)
     > :is(label, .menu-iconic-text, .menu-text) {

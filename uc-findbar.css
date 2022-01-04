@@ -369,6 +369,7 @@ findbar .matches-indicator {
     height: var(--findbar-height, 22px) !important;
     min-width: revert !important;
     width: 100% !important;
+    overflow: revert !important;
 }
 
 #findbar-close-container {

@@ -850,9 +850,9 @@ popupnotificationcontent label[control]:not([hidden]) + menulist {
 
 #identity-popup-securityView .identity-popup-security-connection {
     background-position: left center !important;
-    padding: 0 !important;
-    margin: var(--arrowpanel-menuitem-padding) !important;
-    margin-bottom: 0 !important;
+    padding: var(--arrowpanel-menuitem-padding-block) 0 !important;
+    margin: 0 var(--arrowpanel-menuitem-padding-inline) !important;
+    margin-bottom: calc(0px - var(--arrowpanel-menuitem-padding-block)) !important;
 }
 
 #identity-popup-securityView .identity-popup-security-connection description {
@@ -872,7 +872,11 @@ popupnotificationcontent label[control]:not([hidden]) + menulist {
 
 #identity-popup-security-button {
     margin-bottom: revert !important;
-    padding: var(--arrowpanel-menuitem-padding) !important;
+    padding: 0 var(--arrowpanel-menuitem-padding-inline) !important;
+}
+
+#identity-popup-security-button > .identity-button {
+    padding-block: var(--arrowpanel-menuitem-padding-block) !important;
 }
 
 #identity-popup-security-button[disabled="true"] {
@@ -922,16 +926,21 @@ popupnotificationcontent label[control]:not([hidden]) + menulist {
     fill: var(--secure-color) !important;
 }
 
+#identity-popup[ciphers=weak] .identity-popup-security-connection,
+#identity-popup[mixedcontent~=passive-loaded][isbroken] .identity-popup-security-connection,
+#identity-popup[connection=secure-cert-user-overridden] .identity-popup-security-connection,
+#identity-popup[connection=cert-error-page] .identity-popup-security-connection,
 #identity-popup[connection="secure-cert-user-overridden"] .identity-popup-security-connection {
-    background-image: url(chrome://global/skin/icons/security-warning.svg) !important;
+    background-image: url(chrome://global/skin/icons/security-warning.svg);
+	-moz-context-properties: fill, stroke !important;
     fill: unset !important;
-    -moz-context-properties: fill !important;
+    stroke: var(--low-warning-icon-stroke) !important;
 }
 
 #identity-popup[connection="https-only-error-page"] .identity-popup-security-connection,
 #identity-popup[connection="cert-error-page"] .identity-popup-security-connection,
 #identity-popup[connection="net-error-page"] .identity-popup-security-connection {
-    background-image: url(chrome://userchrome/content/warning.svg) !important;
+    background-image: url(chrome://userchrome/content/warning-big.svg) !important;
 }
 
 #identity-popup[connection="extension"] .identity-popup-security-connection {
@@ -945,6 +954,12 @@ popupnotificationcontent label[control]:not([hidden]) + menulist {
     color: var(--secure-text-color) !important;
 }
 
+#identity-popup:where([connection="not-secure"])
+    .identity-popup-security-connection
+    .identity-popup-connection-not-secure.security-view[when-connection~="not-secure"] {
+    color: var(--warning-color) !important;
+}
+
 #identity-popup:where([ciphers="weak"])
     .identity-popup-security-connection
     .identity-popup-connection-not-secure.security-view[when-connection~="not-secure"],
@@ -952,12 +967,6 @@ popupnotificationcontent label[control]:not([hidden]) + menulist {
     .identity-popup-security-connection
     .identity-popup-connection-not-secure.security-view[when-connection~="not-secure"] {
     color: var(--low-warning-text-color) !important;
-}
-
-#identity-popup[connection="not-secure"]
-    .identity-popup-security-connection
-    .identity-popup-connection-not-secure.security-view[when-connection~="not-secure"] {
-    color: var(--warning-color) !important;
 }
 
 /* url bar popups */

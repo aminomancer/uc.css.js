@@ -536,11 +536,6 @@ does nothing without restoreTabSoundButton.uc.js since sound icon no longer exis
     opacity: 0.6 !important;
 }
 
-:root:not([customizing])
-    .tab-icon-sound:is([soundplaying], [muted], [activemedia-blocked], [pictureinpicture]):not(:hover):-moz-window-inactive {
-    opacity: 0.5 !important;
-}
-
 .tabbrowser-tab:is(:hover, .keyboard-focused-tab, [open])
     .tab-icon-sound[pictureinpicture][soundplaying],
 .tabbrowser-tab .tab-icon-sound[pictureinpicture][muted],

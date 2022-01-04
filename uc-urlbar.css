@@ -589,14 +589,20 @@ additionally this also shows if the site was originally blocked for lacking a va
 #identity-box[pageproxystate="valid"]:is(.mixedDisplayContent, .mixedDisplayContentLoadedActiveBlocked, .certUserOverridden, .weakCipher)
     #identity-icon {
     list-style-image: url(chrome://global/skin/icons/security-warning.svg) !important;
+    -moz-context-properties: fill, stroke, fill-opacity, stroke-opacity !important;
     fill: unset !important;
+    stroke: var(--low-warning-icon-stroke) !important;
+    stroke-opacity: 1 !important;
 }
 
 /* insecure page. this happens on unencrypted connections and encrypted connections where active resources are loaded over unencrypted connections.
 that includes scripts, link elements e.g. stylesheets, iframes, and resources loaded by stylesheets or by scripts. */
 #identity-box[pageproxystate="valid"]:is(.notSecure, .mixedActiveContent) #identity-icon {
     list-style-image: url(chrome://global/skin/icons/security-broken.svg) !important;
+    -moz-context-properties: fill, stroke, fill-opacity, stroke-opacity !important;
     fill: unset !important;
+    stroke: var(--warning-icon-stroke) !important;
+    stroke-opacity: 1 !important;
 }
 
 /* custom identity icon for error pages. by default firefox just uses the broken or warning icon for the cert error and https only error.
@@ -767,6 +773,8 @@ so you can use those classes to set the icon. */
 
 #identity-box.notSecureText #identity-icon-label {
     color: var(--warning-color) !important;
+    opacity: 1 !important;
+    padding-inline-start: 6px !important;
 }
 
 /* uncomment the first line if you want the "not secure" label */
@@ -1239,7 +1247,7 @@ use 0.6 instead of 1 since 1 will end up being shown as like 1.4px for some wind
     margin: 0 !important;
     padding-inline-start: 7px !important;
     color: var(--lwt-toolbar-field-color, black) !important;
-    opacity: var(--identity-box-label-opacity, 0.6) !important;
+    opacity: var(--urlbar-icon-fill-opacity, 0.6) !important;
     font-weight: var(--urlbar-base-font-weight, 400);
     font-size: inherit !important;
     font-weight: var(--urlbar-base-font-weight, 400);
@@ -1248,7 +1256,7 @@ use 0.6 instead of 1 since 1 will end up being shown as like 1.4px for some wind
 #urlbar-label-box .urlbar-label,
 #urlbar-search-mode-indicator-title {
     color: var(--lwt-toolbar-field-color, black) !important;
-    opacity: var(--identity-box-label-opacity, 0.6) !important;
+    opacity: var(--urlbar-icon-fill-opacity, 0.6) !important;
     padding-inline: 0px !important;
     font-size: inherit !important;
     font-weight: var(--urlbar-base-font-weight, 400);

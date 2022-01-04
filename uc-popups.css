@@ -227,7 +227,7 @@ panel[type="autocomplete-richlistbox"] > richlistbox {
 panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem {
     appearance: none !important;
     color: var(--menu-color) !important;
-    padding: 0 8px !important;
+    padding: 4px 8px !important;
     border: none !important;
     min-height: var(--menuitem-height) !important;
     border-radius: var(--context-menuitem-border-radius) !important;
@@ -267,6 +267,10 @@ panel[type="autocomplete-richlistbox"]
     > .line2-label {
     opacity: 1 !important;
     color: var(--panel-shortcut-color) !important;
+}
+
+#PopupAutoComplete > richlistbox > richlistitem[originaltype="insecureWarning"] > .ac-title > description > .ac-title-text {
+    padding-inline: 0 8px !important;
 }
 
 panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem[originaltype="loginsFooter"] {
