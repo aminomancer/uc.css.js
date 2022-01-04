@@ -1280,7 +1280,7 @@ Various tiny mods not worth making separate scripts for. Read the comments [insi
 
 <br/>
 
-[Searchfox](https://searchfox.org): A search engine for Firefox's source code. This is what I use to write most of my scripts. For example, if you wanted to make a button that adds a bookmark, you could find something in the UI that already does that, copy its ID, and search for it on Searchfox. From there you could track down its callback function, copy something from that and search for it, and ultimately find what you need. It indexes several repositories, including multiple versions of Firefox. You can permanently add this search engine to Firefox with [this extension](https://addons.mozilla.org/firefox/addon/add-custom-search-engine), which makes writing code for Firefox immensely faster.
+[Searchfox](https://searchfox.org): A search engine for Firefox's source code. This is what I use to write most of my scripts. For example, if you wanted to make a button that adds a bookmark, you could find something in the UI that already does that, copy its ID, and search for it on Searchfox. From there you could track down its callback function, copy something from that and search for it, and ultimately find what you need. It indexes several repositories, including multiple versions of Firefox. You can permanently add this search engine to Firefox by installing [this addon](extensions/search-extensions/searchfox.zip), which makes writing code for Firefox immensely faster.
 
 [FirefoxCSS Subreddit](https://www.reddit.com/r/FirefoxCSS): Where to bring questions about modding Firefox.
 

@@ -396,18 +396,19 @@ menupopup#viewSidebarMenu
 
 /* context menu stuff */
 
-/* make multithreaded download manager context menu label smaller */
-#multithreaded-download-manager_qw_linux-2g64_local-menuitem-_link-context-menu .menu-iconic-left {
+/* make multithreaded download manager context menu item's English label smaller.
+do nothing for other languages since idk if the item is too long in other languages. */
+#multithreaded-download-manager_qw_linux-2g64_local-menuitem-_link-context-menu[label="Download with Multithreaded Download Manager"] .menu-iconic-left {
     -moz-box-flex: 1;
 }
 
-#multithreaded-download-manager_qw_linux-2g64_local-menuitem-_link-context-menu .menu-iconic-text {
+#multithreaded-download-manager_qw_linux-2g64_local-menuitem-_link-context-menu[label="Download with Multithreaded Download Manager"] .menu-iconic-text {
     display: none;
 }
 
-#multithreaded-download-manager_qw_linux-2g64_local-menuitem-_link-context-menu
+#multithreaded-download-manager_qw_linux-2g64_local-menuitem-_link-context-menu[label="Download with Multithreaded Download Manager"]
     .menu-iconic-left::after {
-    content: "Download (multi-threaded)";
+    content: "Download (Multithreaded)";
     display: -moz-inline-box;
     -moz-box-flex: 1;
 }
@@ -688,6 +689,30 @@ menupopup:not(#contentAreaContextMenu)
     content: "Stylus Options";
     display: -moz-inline-box;
     -moz-box-flex: 1;
+}
+
+/* View Image extension's context menu item "Search by image"
+I would recommend disabling the context menu in the extension's settings,
+since its casing is inconsistent with context menu norms. */
+#_287dcf75-bec6-4eec-b4f6-71948a2eea29_-menuitem-_ViewImage-SearchByImage .menu-iconic-left::before {
+    width: 16px;
+    height: 16px;
+    margin-inline: var(--context-iconic-margin);
+    fill: currentColor;
+    -moz-context-properties: fill, fill-opacity, stroke;
+    content: "";
+    display: -moz-inline-box;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#_287dcf75-bec6-4eec-b4f6-71948a2eea29_-menuitem-_ViewImage-SearchByImage .menu-iconic-icon {
+    display: none !important;
+}
+
+#_287dcf75-bec6-4eec-b4f6-71948a2eea29_-menuitem-_ViewImage-SearchByImage .menu-iconic-left::before,
+#_287dcf75-bec6-4eec-b4f6-71948a2eea29_-menuitem-_ViewImage-SearchByImage:not(.menuitem-iconic, .menu-iconic)::before {
+    background-image: url(chrome://userchrome/content/material/google-view-image.svg);
 }
 
 /* tab notes favicon isn't displayed properly in the back/forward menu */
