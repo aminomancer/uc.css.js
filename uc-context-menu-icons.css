@@ -311,6 +311,7 @@ menu[label="Bitwarden"]:not(.menuitem-iconic, .menu-iconic) > .menu-text,
     > .menu-iconic-text,
 #_287dcf75-bec6-4eec-b4f6-71948a2eea29_-menuitem-_ViewImage-SearchByImage:not(.menuitem-iconic, .menu-iconic)
     > .menu-text,
+#invert-element_aminomancer-menuitem-_menuitem-invert:not(.menuitem-iconic, .menu-iconic) > .menu-text,
 #menu_customizeToolbars .menu-text,
 menuitem.viewCustomizeToolbar > .menu-text,
 #addon_darkreader_org-menuitem-_DarkReader-switchEngine:not(.menuitem-iconic) .menu-text,
@@ -342,7 +343,6 @@ menuitem.pageActionContextMenuItem.manageExtensionItem > .menu-text,
 menuitem.customize-context-removeExtension > .menu-text,
 menuitem.pageActionContextMenuItem.removeExtensionItem > .menu-text,
 menuitem.customize-context-reportExtension > .menu-text {
-    display: -moz-inline-box !important;
     margin-inline: 0 !important;
     padding-inline: 0 2px !important;
 }
@@ -601,6 +601,7 @@ menu[label="Bitwarden"]:not(.menuitem-iconic, .menu-iconic)::before,
 #_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-options:not(.menuitem-iconic, .menu-iconic)::before,
 #simple-translate_sienori-menuitem-_translatePage:not(.menuitem-iconic, .menu-iconic)::before,
 #_287dcf75-bec6-4eec-b4f6-71948a2eea29_-menuitem-_ViewImage-SearchByImage:not(.menuitem-iconic, .menu-iconic)::before,
+#invert-element_aminomancer-menuitem-_menuitem-invert:not(.menuitem-iconic, .menu-iconic)::before,
 #simple-translate_sienori-menuitem-_translateLink:not(.menuitem-iconic, .menu-iconic)::before,
 #simple-translate_sienori-menuitem-_translateText:not(.menuitem-iconic, .menu-iconic)::before,
 #toolbar-context-menu

@@ -413,6 +413,32 @@ do nothing for other languages since idk if the item is too long in other langua
     -moz-box-flex: 1;
 }
 
+/* fix inconsistent string casing of menuitems in Multithreaded Download Manager */
+:is(menu, menuitem)[id^="multithreaded-download-manager"][label="Open in new tab"] > label,
+:is(menu, menuitem)[id^="multithreaded-download-manager"][label="Open in new window"] > label,
+:is(menu, menuitem)[id^="multithreaded-download-manager"][label="Open in sidebar"] > label {
+    display: none !important;
+}
+
+:is(menu, menuitem)[id^="multithreaded-download-manager"][label="Open in new tab"] > .menu-accel-container::before,
+:is(menu, menuitem)[id^="multithreaded-download-manager"][label="Open in new window"] > .menu-accel-container::before,
+:is(menu, menuitem)[id^="multithreaded-download-manager"][label="Open in sidebar"] > .menu-accel-container::before {
+    display: -moz-inline-box;
+    -moz-box-flex: 1;
+}
+
+:is(menu, menuitem)[id^="multithreaded-download-manager"][label="Open in new tab"] > .menu-accel-container::before {
+    content: "Open in New Tab";
+}
+
+:is(menu, menuitem)[id^="multithreaded-download-manager"][label="Open in new window"] > .menu-accel-container::before {
+    content: "Open in New Window";
+}
+
+:is(menu, menuitem)[id^="multithreaded-download-manager"][label="Open in sidebar"] > .menu-accel-container::before {
+    content: "Open in Sidebar";
+}
+
 /* sort bookmarks menu icon */
 :is(.menu-iconic, .menuitem-iconic)[id^="sort-bookmarks_heftig-menuitem"]
     .menu-iconic-left::before {
@@ -430,6 +456,20 @@ do nothing for other languages since idk if the item is too long in other langua
 
 :is(.menu-iconic, .menuitem-iconic)[id^="sort-bookmarks_heftig-menuitem"] .menu-iconic-icon {
     display: none;
+}
+
+/* fix inconsistent string casing of menuitems in Sort Bookmarks */
+menuitem[id^="sort-bookmarks_heftig-menuitem"][label="Sort this folder…"] > label {
+    display: none !important;
+}
+
+menuitem[id^="sort-bookmarks_heftig-menuitem"][label="Sort this folder…"] > .menu-accel-container::before {
+    display: -moz-inline-box;
+    -moz-box-flex: 1;
+}
+
+menuitem[id^="sort-bookmarks_heftig-menuitem"][label="Sort this folder…"] > .menu-accel-container::before {
+    content: "Sort this Folder…";
 }
 
 /* simple translate context menu icon */
@@ -452,7 +492,7 @@ do nothing for other languages since idk if the item is too long in other langua
     display: none;
 }
 
-#simple-translate_sienori-menuitem-_translatePage:not(.menuitem-iconic, .menu-iconic)::before {
+:is(#simple-translate_sienori-menuitem-_translatePage, #simple-translate_sienori-menuitem-_translatePageOnTab):not(.menuitem-iconic, .menu-iconic)::before {
     background-image: url(chrome://userchrome/content/material/translate-small.svg);
 }
 
@@ -470,6 +510,35 @@ do nothing for other languages since idk if the item is too long in other langua
     :is(menu, menuitem):is([label="To Google Translate"], [label^="Translate this page"], [label="Translate selected link"], [label="Translate selected text"], [label="Simple Translate"]) {
         display: none;
     }
+}
+
+/* fix inconsistent string casing of menuitems in Simple Translate */
+:is(#simple-translate_sienori-menuitem-_translatePage, #simple-translate_sienori-menuitem-_translatePageOnTab)[label^="Translate this page"]
+    > label,
+#simple-translate_sienori-menuitem-_translateLink[label="Translate selected link"] > label,
+#simple-translate_sienori-menuitem-_translateText[label="Translate selected text"] > label {
+    display: none !important;
+}
+
+:is(#simple-translate_sienori-menuitem-_translatePage, #simple-translate_sienori-menuitem-_translatePageOnTab)[label^="Translate this page"]
+    > .menu-accel-container::before,
+#simple-translate_sienori-menuitem-_translateLink[label="Translate selected link"] > .menu-accel-container::before,
+#simple-translate_sienori-menuitem-_translateText[label="Translate selected text"] > .menu-accel-container::before {
+    display: -moz-inline-box;
+    -moz-box-flex: 1;
+}
+
+:is(#simple-translate_sienori-menuitem-_translatePage, #simple-translate_sienori-menuitem-_translatePageOnTab)[label^="Translate this page"]
+    > .menu-accel-container::before {
+    content: "Translate this Page";
+}
+
+#simple-translate_sienori-menuitem-_translateLink[label="Translate selected link"] > .menu-accel-container::before {
+    content: "Translate Selected Link";
+}
+
+#simple-translate_sienori-menuitem-_translateText[label="Translate selected text"] > .menu-accel-container::before {
+    content: "Translate Selected Text";
 }
 
 /* hide translate this page when right-clicking text input */
@@ -622,6 +691,17 @@ there's no need for a context menu item except when right-clicking something par
     background-image: url(chrome://userchrome/content/devtools/command-frames.svg);
 }
 
+/* fix the inconsistent casing for uBlock Origin's "Block element..." menuitem (in English) */
+#ublock0_raymondhill_net-menuitem-_uBlock0-blockElement[label="Block element..."] > label {
+    display: none !important;
+}
+
+#ublock0_raymondhill_net-menuitem-_uBlock0-blockElement[label="Block element..."] > .menu-accel-container::before {
+    content: "Block Element…";
+    display: -moz-inline-box;
+    -moz-box-flex: 1;
+}
+
 /* bitwarden context menu icon */
 #contentAreaContextMenu
     :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"]
@@ -669,6 +749,32 @@ menupopup:not(#contentAreaContextMenu)
     background-image: url(chrome://userchrome/content/material/darkmode.svg);
 }
 
+/* fix inconsistent string casing of menuitems in Dark Reader */
+#addon_darkreader_org-menuitem-_DarkReader-toggle[label="Toggle extension"] > label,
+#addon_darkreader_org-menuitem-_DarkReader-addSite[label="Toggle current site"] > label,
+#addon_darkreader_org-menuitem-_DarkReader-switchEngine[label="Theme generation mode"] > label {
+    display: none !important;
+}
+
+#addon_darkreader_org-menuitem-_DarkReader-toggle[label="Toggle extension"] > .menu-accel-container::before,
+#addon_darkreader_org-menuitem-_DarkReader-addSite[label="Toggle current site"] > .menu-accel-container::before,
+#addon_darkreader_org-menuitem-_DarkReader-switchEngine[label="Theme generation mode"] > .menu-accel-container::before {
+    display: -moz-inline-box;
+    -moz-box-flex: 1;
+}
+
+#addon_darkreader_org-menuitem-_DarkReader-toggle[label="Toggle extension"] > .menu-accel-container::before {
+    content: "Toggle Extension";
+}
+
+#addon_darkreader_org-menuitem-_DarkReader-addSite[label="Toggle current site"] > .menu-accel-container::before {
+    content: "Toggle Current Site";
+}
+
+#addon_darkreader_org-menuitem-_DarkReader-switchEngine[label="Theme generation mode"] > .menu-accel-container::before {
+    content: "Theme Generation Mode";
+}
+
 /* stylus context menu items */
 #_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-manager:not(.menuitem-iconic, .menu-iconic)::before {
     background-image: url(chrome://userchrome/content/devtools/tool-styleeditor.svg);
@@ -676,6 +782,31 @@ menupopup:not(#contentAreaContextMenu)
 
 #_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-options:not(.menuitem-iconic, .menu-iconic)::before {
     background-image: url(chrome://userchrome/content/settings.svg);
+}
+
+#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_show-badge[label="Show active style count"] > label,
+#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_disableAll[label="Turn all styles off"] > label,
+#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-manager[label="Open styles manager"] > label {
+    display: none !important;
+}
+
+#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_show-badge[label="Show active style count"] > .menu-accel-container::before,
+#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_disableAll[label="Turn all styles off"] > .menu-accel-container::before,
+#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-manager[label="Open styles manager"] > .menu-accel-container::before {
+    display: -moz-inline-box;
+    -moz-box-flex: 1;
+}
+
+#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_show-badge[label="Show active style count"] > .menu-accel-container::before {
+    content: "Active Style Count";
+}
+
+#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_disableAll[label="Turn all styles off"] > .menu-accel-container::before {
+    content: "Disable All Styles";
+}
+
+#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-manager[label="Open styles manager"] > .menu-accel-container::before {
+    content: "Open Style Manager";
 }
 
 /* make the "Options" menuitem's label more specific */
@@ -713,6 +844,33 @@ since its casing is inconsistent with context menu norms. */
 #_287dcf75-bec6-4eec-b4f6-71948a2eea29_-menuitem-_ViewImage-SearchByImage .menu-iconic-left::before,
 #_287dcf75-bec6-4eec-b4f6-71948a2eea29_-menuitem-_ViewImage-SearchByImage:not(.menuitem-iconic, .menu-iconic)::before {
     background-image: url(chrome://userchrome/content/material/google-view-image.svg);
+}
+
+/* my "Invert Element" context menu extension */
+#invert-element_aminomancer-menuitem-_menuitem-invert .menu-iconic-left::before {
+    width: 16px;
+    height: 16px;
+    margin-inline: var(--context-iconic-margin);
+    fill: currentColor;
+    -moz-context-properties: fill, fill-opacity, stroke;
+    content: "";
+    display: -moz-inline-box;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#invert-element_aminomancer-menuitem-_menuitem-invert .menu-iconic-icon {
+    display: none !important;
+}
+
+#invert-element_aminomancer-menuitem-_menuitem-invert[label="Invert Element"] .menu-iconic-left::before,
+#invert-element_aminomancer-menuitem-_menuitem-invert[label="Invert Element"]:not(.menuitem-iconic, .menu-iconic)::before {
+    background-image: url(chrome://userchrome/content/material/invert.svg);
+}
+
+#invert-element_aminomancer-menuitem-_menuitem-invert[label="Uninvert Element"] .menu-iconic-left::before,
+#invert-element_aminomancer-menuitem-_menuitem-invert[label="Uninvert Element"]:not(.menuitem-iconic, .menu-iconic)::before {
+    background-image: url(chrome://userchrome/content/material/invert-off.svg);
 }
 
 /* tab notes favicon isn't displayed properly in the back/forward menu */
