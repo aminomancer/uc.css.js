@@ -17,7 +17,7 @@ iframe#bit-notification-bar-iframe[src^="moz-extension://"] {
     @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
         body,
         input {
-            font-family: SF Pro, Segoe UI, sans-serif !important;
+            font-family: SF Pro, SF Arabic, Segoe UI, sans-serif !important;
         }
 
         header .search .fa {

@@ -79,27 +79,27 @@
     @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
         :root,
         body {
-            --ck-font-face: SF Pro, Segoe UI, sans-serif !important;
+            --ck-font-face: SF Pro, SF Arabic, Segoe UI, sans-serif !important;
             font-kerning: normal !important;
         }
 
         button,
         ::file-selector-button,
         input:is([type="reset"], [type="button"], [type="submit"]) {
-            font-family: SF Pro Text, Segoe UI, sans-serif !important;
+            font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
         }
 
         header {
-            font-family: SF Pro Display, Segoe UI, sans-serif !important;
+            font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
         }
 
         .listView ul li button p {
-            font-family: SF Pro Display, Segoe UI, sans-serif !important;
+            font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
             font-weight: 300 !important;
         }
 
         .listView ul li button p strong {
-            font-family: SF Pro Display, Segoe UI, sans-serif !important;
+            font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
             font-weight: 500 !important;
         }
     }

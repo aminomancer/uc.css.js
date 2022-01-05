@@ -49,12 +49,12 @@
 
 @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
     #pictureInPictureToggle .pip-icon-label {
-        font-family: SF Pro, Segoe UI, sans-serif !important;
+        font-family: SF Pro, SF Arabic, Segoe UI, sans-serif !important;
         font-kerning: normal !important;
     }
 
     .pictureInPictureOverlay {
-        font-family: SF Pro Display, Segoe UI, sans-serif !important;
+        font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
         font-kerning: normal !important;
     }
 }

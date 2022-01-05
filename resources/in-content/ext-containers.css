@@ -111,12 +111,12 @@
 
     @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
         body {
-            font-family: SF Pro Text, Segoe UI, sans-serif !important;
+            font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
             font-kerning: normal !important;
         }
 
         h3.title {
-            font-family: SF Pro Display, Segoe UI, sans-serif !important;
+            font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
             font-kerning: normal !important;
             font-size: 1.1em !important;
             font-weight: var(--uc-font-weight-bold, 600) !important;
@@ -979,13 +979,13 @@
 
     @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
         body {
-            font-family: SF Pro Text, Segoe UI, sans-serif !important;
+            font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
             font-kerning: normal !important;
         }
 
         h3.title,
         .proxy-panel-title {
-            font-family: SF Pro Display, Segoe UI, sans-serif !important;
+            font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
             font-kerning: normal !important;
             font-size: 1.1em !important;
             font-weight: var(--uc-font-weight-bold, 600) !important;

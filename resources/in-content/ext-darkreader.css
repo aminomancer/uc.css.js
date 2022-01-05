@@ -21,7 +21,7 @@
         body,
         button,
         * {
-            font-family: SF Pro Display, Segoe UI, sans-serif;
+            font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif;
             font-kerning: normal;
             font-weight: 300;
         }

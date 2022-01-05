@@ -426,7 +426,7 @@ menulist[indicator="true"]
 @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
     #ContentSelectDropdown,
     menupopup.in-menulist {
-        font-family: SF Pro Text, Segoe UI, sans-serif !important;
+        font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
         font-kerning: normal !important;
     }
 
@@ -437,7 +437,7 @@ menulist[indicator="true"]
     menupopup.in-menulist
         > :where(menucaption, menuitem)
         > :is(label, .menu-iconic-text, .menu-text, .menu-iconic-highlightable-text) {
-        font-family: SF Pro Text, Segoe UI, sans-serif !important;
+        font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
         font-kerning: normal !important;
     }
 }

@@ -477,7 +477,7 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
         .pointerlockfswarning,
         :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup) :is(menu, menuitem, menucaption),
         panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem {
-            font-family: SF Pro Text, Segoe UI, sans-serif !important;
+            font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
             font-kerning: normal !important;
         }
 
@@ -485,7 +485,8 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
         #urlbar,
         #searchbar,
         #PopupSearchAutoComplete {
-            font-family: SF Pro, Segoe UI, sans-serif !important;
+            font-family: SF Pro, SF Arabic, Segoe UI, sans-serif !important;
+            font-kerning: normal !important;
         }
 
         /* for displaying larger font sizes */
@@ -498,12 +499,12 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
         .PanelUI-profiler-button-link,
         #protections-popup-no-trackers-found-description,
         #PopupAutoComplete > richlistbox > richlistitem > .ac-title {
-            font-family: SF Pro Display, Segoe UI, sans-serif !important;
+            font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
             font-kerning: normal !important;
         }
 
         #main-menubar {
-            font-family: SF Pro Display, Segoe UI, sans-serif !important;
+            font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
             font-kerning: normal !important;
         }
 
@@ -531,7 +532,7 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
 
         .places-tooltip-title,
         :is(#back-button-tooltip, #forward-button-tooltip) .tooltip-label[id] {
-            font-family: SF Pro Display, Segoe UI, sans-serif !important;
+            font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
             font-kerning: normal !important;
             font-weight: var(--uc-font-weight-semibold, 500) !important;
         }
@@ -562,22 +563,22 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
         .urlbarView-row[dynamicType="onboardTabToSearch"]
             .urlbarView-title
             strong.urlbarView-dynamic-onboardTabToSearch-titleStrong {
-            font-family: SF Pro Text, Segoe UI, sans-serif !important;
+            font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
         }
 
         .popup-notification-body input[type="password"] {
-            font-family: SF Pro, Segoe UI, sans-serif !important;
+            font-family: SF Pro, SF Arabic, Segoe UI, sans-serif !important;
         }
 
         .popup-notification-description b {
-            font-family: SF Pro Display, Segoe UI, sans-serif !important;
+            font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
             font-kerning: auto !important;
         }
 
         :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
             :where(menu, menuitem, menucaption),
         panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem {
-            font-family: SF Pro Text, Segoe UI, sans-serif !important;
+            font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
             font-kerning: normal !important;
         }
 
@@ -591,13 +592,13 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
         }
 
         .dialog-button-box button {
-            font-family: SF Pro Text, Segoe UI, sans-serif !important;
+            font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
         }
 
         @-moz-document url-prefix("chrome://browser/content/syncedtabs/sidebar.xhtml")
         {
             body {
-                font-family: SF Pro, Segoe UI, sans-serif !important;
+                font-family: SF Pro, SF Arabic, Segoe UI, sans-serif !important;
                 font-kerning: normal !important;
             }
         }

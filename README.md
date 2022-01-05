@@ -244,7 +244,9 @@ I've bundled some of my addons in this repo as well. They are in the [extensions
 
 <br/>
 
-`userChrome.css` doesn't require any fonts, but there's an optional preference in about:config which lets you replace fonts in the UI (not in-content) with [SF Pro](https://developer.apple.com/fonts), macOS's system font, on Windows or Linux. You can enable this by [downloading the font](https://devimages-cdn.apple.com/design/resources/download/SF-Pro.dmg), unpacking it with 7-Zip, installing it as normal, and setting `userChrome.css.mac-ui-fonts` to `true` in about:config. This requires a local copy of all variants of the font, including "SF Pro," "SF Pro Display," "SF Pro Text," and "SF Pro Rounded." Additionally, `userContent.css` can use [Overpass Mono](https://fonts.google.com/specimen/Overpass+Mono) for plaintext files, if you have it installed. Otherwise it just uses your default monospace font.
+`userChrome.css` doesn't require any fonts, but there's an optional preference in about:config which lets you replace fonts in the UI (not in-content) with [SF Pro](https://developer.apple.com/fonts), macOS's system font, on Windows or Linux. You can enable this by [downloading the font](https://devimages-cdn.apple.com/design/resources/download/SF-Pro.dmg) and opening it in 7-Zip. From here, double click the `.pkg` file, then `Payload~`, then `.`, `Library`, and `Fonts`. From here you can drag all the files to a working folder, select all of them, then right click and click "Install for all users."
+
+After that, you just need to toggle `userChrome.css.mac-ui-fonts` to `true` in about:config. Currently, this setting requires a local copy of three variants of the font: SF Pro, SF Pro Display, and SF Pro Text (all from [SF-Pro.dmg](https://devimages-cdn.apple.com/design/resources/download/SF-Pro.dmg)). If you use the Arabic abjad, download SF Arabic too since the theme now uses it too. Additionally, `userContent.css` can use [Overpass Mono](https://fonts.google.com/specimen/Overpass+Mono) for plaintext files, if you have it installed. Otherwise it just uses your default monospace font.
 
 </details>
 

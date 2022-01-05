@@ -454,13 +454,13 @@ tooltip > description {
 
 @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
     tooltip {
-        font-family: SF Pro Text, Segoe UI, sans-serif;
+        font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif;
         font-kerning: normal;
         --uc-tooltip-inner-padding: 5px 8px 6px 8px;
     }
 
     parsererror|parsererror {
-        font-family: SF Pro Display, Segoe UI, sans-serif;
+        font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif;
         font-kerning: normal;
         font-weight: 500;
     }
