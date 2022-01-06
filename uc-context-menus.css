@@ -283,11 +283,11 @@ panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem {
 
 :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
     :where(menu, menuitem, menucaption).menuitem-iconic,
-panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem[image] {
+panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem:is([originaltype="insecureWarning"], [image]:not([image=""], [image="null"])) {
     padding-inline: 0 8px !important;
 }
 
-panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem[image] :is(.ac-site-icon, .ac-type-icon) {
+panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem:is([originaltype="insecureWarning"], [image]:not([image=""], [image="null"])) :is(.ac-site-icon, .ac-type-icon):not([type="null"]) {
     margin-inline: var(--context-iconic-margin) !important;
 }
 
