@@ -1302,6 +1302,8 @@ Various tiny mods not worth making separate scripts for. Read the comments [insi
 
 [Violentmonkey](https://addons.mozilla.org/firefox/addon/violentmonkey): An addon for running JavaScript in browser tabs. If you need to modify a particular website, this is the best way. This is overall the best GreaseMonkey-like addon for Firefox, in my opinion.
 
+[Invert Element Context Menu Item](https://addons.mozilla.org/addon/invert-element-menuitem): Add a new "Invert Element" context menu item. If you right click an element (for example an image) and click the menu item, it will invert the element's colors. I made this addon mainly for Dark Reader users. Sometimes Dark Reader will invert something to make it dark, but make it difficult to see in the process. Or sometimes I just wanna know what something looks like inverted. So, this can invert or uninvert any element.
+
 [SVG Gobbler](https://www.svggobbler.com): A new browser extension that can locate and retrieve all the SVG images/icons on a webpage. Very useful for CSS ricing, especially if you use a dark theme since you'll often need to turn dark icons into light icons. You don't strictly need this but it'll speed up the process.
 
 [Sidebar Always Loaded](https://github.com/thepante/SAL-Firefox): A very cool script that makes the sidebar more permanent and less intrusive. It's similar to my Floating Sidebar script but 100% standalone, 50% more elegant, and has ~25% more features. Compatible with [fx-autoconfig](https://github.com/MrOtherGuy/fx-autoconfig) or [Alice0775's loader](https://github.com/alice0775/userChrome.js/tree/master/72).
