@@ -469,16 +469,24 @@ panel[type="autocomplete-richlistbox"]
 @-moz-document url("chrome://global/content/pictureinpicture/player.xhtml")
 {
     .control-item {
-        backdrop-filter: blur(8px) !important;
+        /* backdrop-filter has been temporarily disabled by mozilla */
+        /* backdrop-filter: blur(8px) !important;
         background-color: var(--btn-bg-color) !important;
-        background-image: var(--acrylic-texture), var(--pip-icon) !important;
+        background-image: var(--acrylic-texture), var(--pip-icon) !important; */
+        background-color: var(--in-content-button-highlight-dark) !important;
         fill: currentColor !important;
         -moz-context-properties: fill !important;
         color: var(--player-control-icon-fill) !important;
+        border-radius: 3px !important;
     }
 
     body:not(:fullscreen) #controls:hover .control-item {
         opacity: 1 !important;
+    }
+
+    #controls[keying] button:focus-visible {
+        outline-style: auto !important;
+        box-shadow: 1px 2px 5px #000;
     }
 
     #close {

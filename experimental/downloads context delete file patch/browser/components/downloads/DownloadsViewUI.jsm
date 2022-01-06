@@ -226,8 +226,9 @@ var DownloadsViewUI = {
     let { preferredAction, useSystemDefault } = mimeInfo ? mimeInfo : {};
 
     // Hide the "Delete" item if there's no file data to delete.
-    contextMenu.querySelector(".downloadDeleteFileMenuItem").hidden =
-      !(download.target.exists || download.target.partFileExists);
+    contextMenu.querySelector(".downloadDeleteFileMenuItem").hidden = !(
+      download.target.exists || download.target.partFileExists
+    );
 
     // Hide the "use system viewer" and "always use system viewer" items
     // if the feature is disabled or this download doesn't support it:
@@ -976,10 +977,12 @@ DownloadsViewUI.DownloadElementShell.prototype = {
       case "downloadsCmd_alwaysOpenSimilarFiles":
         // This property is false if the download did not succeed.
         return this.download.target.exists;
+
       case "downloadsCmd_show":
       case "downloadsCmd_deleteFile":
         let { target } = this.download;
         return target.exists || target.partFileExists;
+
       case "downloadsCmd_delete":
       case "cmd_delete":
         // We don't want in-progress downloads to be removed accidentally.
@@ -1072,16 +1075,12 @@ DownloadsViewUI.DownloadElementShell.prototype = {
   async downloadsCmd_deleteFile() {
     let { download } = this;
     let { path } = download.target;
+    let { succeeded } = download;
     let indicator = DownloadsCommon.getIndicatorData(this.element.ownerGlobal);
-    // Remove the download view.
-    try {
-      await PlacesUtils.history.remove(download.source.url);
-    } catch (ex) {
-      Cu.reportError(ex);
-    }
-    let list = await Downloads.getList(Downloads.ALL);
-    await list.remove(download);
-    if (download.succeeded) {
+    // Remove the download from the session and history downloads, delete part files.
+    await DownloadsCommon.deleteDownload(download);
+    // Delete final files.
+    if (succeeded) {
       // Temp files are made "read-only" by DownloadIntegration.downloadDone, so reset the permission bits to read/write.
       // This won't be necessary after 1733587 since Downloads won't ever be temporary.
       let info = await IOUtils.stat(path);
@@ -1090,12 +1089,10 @@ DownloadsViewUI.DownloadElementShell.prototype = {
         ignoreAbsent: true,
         recursive: info.type === "directory",
       });
-    } else {
-      // Bail out of download and remove partial data or final file.
-      download.cancel().catch(() => {});
-      await download.finalize(true);
     }
-    if (!indicator._hasDownloads) indicator.attention = DownloadsCommon.ATTENTION_NONE;
+    if (!indicator._hasDownloads) {
+      indicator.attention = DownloadsCommon.ATTENTION_NONE;
+    }
   },
 
   downloadsCmd_openInSystemViewer() {

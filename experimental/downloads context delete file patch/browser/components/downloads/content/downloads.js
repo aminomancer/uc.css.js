@@ -1235,7 +1235,7 @@ class DownloadsViewItem extends DownloadsViewUI.DownloadElementShell {
     }
     // Don't use DownloadsPanel.hidePanel for this method because it will remove
     // the view item from the list, which is already sufficient feedback.
-  };
+  }
 
   downloadsCmd_showBlockedInfo() {
     DownloadsBlockedSubview.toggle(
