@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Custom Hint Provider
-// @version        1.1.1
+// @version        1.1.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    A utility script for other scripts to take advantage of. Sets up a global object (on the chrome window) for showing confirmation hints with custom messages. The built-in confirmation hint component can only show a few messages built into the browser's localization system. It only accepts l10n IDs, so if your script wants to show a custom message with some specific string, it won't work. This works just like the built-in confirmation hint, and uses the built-in confirmation hint element, but it accepts an arbitrary string as a parameter. So you can open a confirmation hint with *any* message, e.g. CustomHint.show(anchorNode, "This is my custom message", {hideArrow: true, hideCheck: true, description: "Awesome.", duration: 3000})
@@ -25,7 +25,9 @@ window.CustomHint = {
      *         - hideArrow (boolean): Optionally hide the arrow.
      *         - hideCheck (boolean): Optionally hide the checkmark.
      *         - description (string): If provided, show a more detailed description/subtitle with the passed text.
-     *         - duration (numeric): How long the hint should stick around, in milliseconds. Default is 1500 — 1.5 seconds.
+     *         - duration (numeric): How long the hint should stick around, in milliseconds.
+     *                               Default is 1500 — 1.5 seconds. Pass -1 to make the hint stay open
+     *                               indefinitely, until the user clicks out of it, presses Escape, etc.
      *         - position (string): One of a number of strings representing how the anchor point of the popup
      *                              is aligned relative to the anchor point of the anchor node.
      *                              Possible values for position are:
@@ -72,10 +74,13 @@ window.CustomHint = {
             "popupshown",
             () => {
                 this._animationBox.setAttribute("animate", "true");
-                this._timerID = setTimeout(() => {
-                    this._panel.hidePopup(true);
-                    this._animationBox.removeAttribute("hidden");
-                }, DURATION + 120);
+                this._timerID =
+                    DURATION > 0
+                        ? setTimeout(() => {
+                              this._panel.hidePopup(true);
+                              this._animationBox.removeAttribute("hidden");
+                          }, DURATION + 120)
+                        : 1;
             },
             { once: true }
         );
