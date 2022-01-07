@@ -89,7 +89,9 @@ this sheet controls their appearance as well. */
 }
 
 #main-menubar > menu > menupopup {
-    margin-block: calc(0px - var(--menupopup-inner-box-margin) - (var(--tab-min-height) - 16px - 4px - 5px) / 2) !important;
+    margin-block: calc(
+        0px - var(--menupopup-inner-box-margin) - ((var(--tab-min-height) - 16px - 4px - 5px) / 2)
+    ) !important;
     margin-inline: calc(0px - var(--menupopup-inner-box-margin) + 2px) !important;
 }
 

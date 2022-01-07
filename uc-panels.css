@@ -487,7 +487,7 @@ panel[type="arrow"][side="top"] {
 }
 
 .panel-info-button:not(:hover)[checked] {
-	background-color: var(--toolbarbutton-checked-background) !important;
+    background-color: var(--toolbarbutton-checked-background) !important;
 }
 
 .panel-info-button:not([disabled]):is(:hover, :focus-visible) {
@@ -496,11 +496,11 @@ panel[type="arrow"][side="top"] {
 
 .panel-info-button[checked]:not([disabled]):is(:hover, :focus-visible),
 .panel-info-button:not([disabled]):is([open], :hover:active) {
-	background-color: var(--toolbarbutton-active-background) !important;
+    background-color: var(--toolbarbutton-active-background) !important;
 }
 
 .panel-info-button[checked]:not([disabled]):is([open], :hover:active) {
-	background-color: var(--toolbarbutton-checked-active-background) !important;
+    background-color: var(--toolbarbutton-checked-active-background) !important;
 }
 
 #protections-popup-info-button {
@@ -926,13 +926,13 @@ popupnotificationcontent label[control]:not([hidden]) + menulist {
     fill: var(--secure-color) !important;
 }
 
-#identity-popup[ciphers=weak] .identity-popup-security-connection,
-#identity-popup[mixedcontent~=passive-loaded][isbroken] .identity-popup-security-connection,
-#identity-popup[connection=secure-cert-user-overridden] .identity-popup-security-connection,
-#identity-popup[connection=cert-error-page] .identity-popup-security-connection,
+#identity-popup[ciphers="weak"] .identity-popup-security-connection,
+#identity-popup[mixedcontent~="passive-loaded"][isbroken] .identity-popup-security-connection,
+#identity-popup[connection="secure-cert-user-overridden"] .identity-popup-security-connection,
+#identity-popup[connection="cert-error-page"] .identity-popup-security-connection,
 #identity-popup[connection="secure-cert-user-overridden"] .identity-popup-security-connection {
     background-image: url(chrome://global/skin/icons/security-warning.svg);
-	-moz-context-properties: fill, stroke !important;
+    -moz-context-properties: fill, stroke !important;
     fill: unset !important;
     stroke: var(--low-warning-icon-stroke) !important;
 }
@@ -1362,14 +1362,14 @@ richlistitem.download-state,
 }
 
 #downloadsPanel-blockedSubview-title {
-	margin-bottom: 10px !important;
+    margin-bottom: 10px !important;
     -moz-box-ordinal-group: 2 !important;
     margin-inline: 0 !important;
 }
 
 #downloadsPanel-blockedSubview[verdict="Insecure"] #downloadsPanel-blockedSubview-title,
 #downloadsPanel-blockedSubview[verdict="Malware"] #downloadsPanel-blockedSubview-title {
-	color: var(--warning-text-color) !important;
+    color: var(--warning-text-color) !important;
 }
 
 #downloadsPanel-blockedSubview-details1,
@@ -1453,9 +1453,7 @@ richlistitem.download-state:is([verdict], .openWhenFinished):hover:active {
     background: var(--download-button-active-bg) !important;
 }
 
-richlistitem.download-state
-    > .downloadButton:is(:hover, :focus-visible)
-    .button-box {
+richlistitem.download-state > .downloadButton:is(:hover, :focus-visible) .button-box {
     background: var(--in-content-button-background-hover) !important;
 }
 
@@ -1499,7 +1497,10 @@ richlistitem.download-state > .downloadButton .button-box .button-icon {
     transform: scaleX(-1);
 }
 
-richlistitem.download-state > .downloadButton:is(.downloadIconCancel, .downloadIconSubviewArrow) .button-box .button-icon {
+richlistitem.download-state
+    > .downloadButton:is(.downloadIconCancel, .downloadIconSubviewArrow)
+    .button-box
+    .button-icon {
     width: 21px !important;
 }
 
@@ -1509,17 +1510,17 @@ richlistitem.download-state > .downloadButton:is(.downloadIconCancel, .downloadI
 
 .downloadBlockedBadge {
     background-size: contain !important;
-	width: 18px !important;
-	height: 18px !important;
-	margin-inline: 4px 0 !important;
+    width: 18px !important;
+    height: 18px !important;
+    margin-inline: 4px 0 !important;
 }
 
 #downloadsPanel-blockedSubview[verdict="Insecure"] .downloadsPanel-blockedSubview-image,
 #downloadsPanel-blockedSubview[verdict="Malware"] .downloadsPanel-blockedSubview-image,
 #downloadsListBox > richlistitem[verdict="Insecure"] .downloadBlockedBadge,
 #downloadsListBox > richlistitem[verdict="Malware"] .downloadBlockedBadge {
-  background-image: url(chrome://userchrome/content/error.svg) !important;
-  fill: var(--warning-color) !important;
+    background-image: url(chrome://userchrome/content/error.svg) !important;
+    fill: var(--warning-color) !important;
 }
 
 #downloadsPanel-blockedSubview[verdict="Uncommon"] .downloadsPanel-blockedSubview-image,
@@ -1531,7 +1532,7 @@ richlistitem.download-state > .downloadButton:is(.downloadIconCancel, .downloadI
 #downloadsPanel-blockedSubview[verdict="PotentiallyUnwanted"] .downloadsPanel-blockedSubview-image,
 #downloadsPanel-blockedSubview[verdict="DownloadSpam"] .downloadsPanel-blockedSubview-image,
 #downloadsListBox > richlistitem[verdict="PotentiallyUnwanted"] .downloadBlockedBadge,
-#downloadsListBox > richlistitem[verdict="DownloadSpam"] .downloadBlockedBadge  {
+#downloadsListBox > richlistitem[verdict="DownloadSpam"] .downloadBlockedBadge {
     background-image: url(chrome://userchrome/content/warning-big.svg) !important;
     fill: var(--low-warning-icon-background) !important;
 }
@@ -1567,7 +1568,9 @@ richlistitem.download-state > .downloadButton:is(.downloadIconCancel, .downloadI
 }
 
 .downloadProgress:not(:indeterminate)::-moz-progress-bar {
-    mask: linear-gradient(#fff, #fff), url(chrome://userchrome/content/layout/contentaccessible/progress-bar-mask.svg) center right/14px;
+    mask: linear-gradient(#fff, #fff),
+        url(chrome://userchrome/content/layout/contentaccessible/progress-bar-mask.svg) center
+            right/14px;
     mask-repeat: no-repeat;
     mask-composite: subtract;
 }
@@ -1878,7 +1881,8 @@ richlistitem.download-state > .downloadButton:is(.downloadIconCancel, .downloadI
     color: var(--panel-description-color) !important;
 }
 
-:is(#geo-access-indicator-item, #blocked-popup-indicator-item) > .permission-popup-permission-label {
+:is(#geo-access-indicator-item, #blocked-popup-indicator-item)
+    > .permission-popup-permission-label {
     margin-block: 0 !important;
 }
 
@@ -1930,36 +1934,36 @@ richlistitem.download-state > .downloadButton:is(.downloadIconCancel, .downloadI
 }
 
 #PanelUI-profiler-header {
-	background: none !important;
-	color: var(--panel-color) !important;
-	--arrowpanel-dimmed: var(--uc-arrowpanel-dimmed) !important;
-	--arrowpanel-dimmed-further: var(--uc-arrowpanel-dimmed-further) !important;
-	--panel-item-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
+    background: none !important;
+    color: var(--panel-color) !important;
+    --arrowpanel-dimmed: var(--uc-arrowpanel-dimmed) !important;
+    --arrowpanel-dimmed-further: var(--uc-arrowpanel-dimmed-further) !important;
+    --panel-item-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
 }
 
 #PanelUI-profiler-header-bar label {
-	margin-inline-start: 28px !important;
+    margin-inline-start: 28px !important;
     padding: 0 8px !important;
     margin-block: 0 !important;
     word-break: break-word !important;
-	font-weight: var(--uc-font-weight-bold, 600) !important;
+    font-weight: var(--uc-font-weight-bold, 600) !important;
 }
 
 .PanelUI-profiler-description-title,
 .PanelUI-profiler-content-label {
-	font-weight: var(--uc-font-weight-bold, 600) !important;
+    font-weight: var(--uc-font-weight-bold, 600) !important;
 }
 
 .PanelUI-profiler-toolbarbutton-container {
-	margin-inline: revert !important;
+    margin-inline: revert !important;
 }
 
 .PanelUI-profiler-button-link {
     padding-inline: 0 !important;
     background: none !important;
     text-decoration: none !important;
-	color: var(--lwt-popup-brighttext-url-color) !important;
-	font-weight: var(--uc-font-weight-bold, 600) !important;
+    color: var(--lwt-popup-brighttext-url-color) !important;
+    font-weight: var(--uc-font-weight-bold, 600) !important;
     outline: revert !important;
     box-shadow: revert !important;
 }
@@ -1973,26 +1977,26 @@ richlistitem.download-state > .downloadButton:is(.downloadIconCancel, .downloadI
 }
 
 .PanelUI-profiler-shortcut {
-	opacity: revert !important;
+    opacity: revert !important;
     color: var(--panel-shortcut-color) !important;
 }
 
 .PanelUI-profiler-button-primary {
-	background-color: var(--in-parent-primary-button-background) !important;
-	color: var(--in-parent-primary-button-text-color) !important;
+    background-color: var(--in-parent-primary-button-background) !important;
+    color: var(--in-parent-primary-button-text-color) !important;
     box-shadow: revert !important;
 }
 
 .PanelUI-profiler-button-primary:hover {
-	background-color: var(--in-parent-primary-button-background-hover) !important;
+    background-color: var(--in-parent-primary-button-background-hover) !important;
 }
 
 .PanelUI-profiler-button-primary:hover:active {
-	background-color: var(--in-parent-primary-button-background-active) !important;
+    background-color: var(--in-parent-primary-button-background-active) !important;
 }
 
 .PanelUI-profiler-button:focus-visible {
-	box-shadow: 0 0 0 1px var(--in-parent-primary-button-background-hover) inset,
+    box-shadow: 0 0 0 1px var(--in-parent-primary-button-background-hover) inset,
         0 0 0 1px var(--in-parent-primary-button-background-hover),
         0 0 0 4px var(--global-focus-shadow-color) !important;
 }

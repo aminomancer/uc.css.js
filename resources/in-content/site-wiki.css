@@ -21,7 +21,8 @@ You can use greasemonkey or any other form of monkey that supports the document-
         opacity: revert !important;
     }
 
-    .minerva-header .branding-box
+    .minerva-header
+        .branding-box
         img[src="/static/images/mobile/copyright/wikipedia-wordmark-en.svg"] {
         filter: invert(1);
     }
@@ -264,8 +265,8 @@ You can use greasemonkey or any other form of monkey that supports the document-
         --uc-wiki-text-100: hsl(0, 0%, 100%);
         --uc-wiki-main-bg: hsl(240, 2%, 10%);
         --uc-wiki-box-bg: hsl(240, 1.4%, 13.9%);
-/*         backdrop filter has been temporarily disabled by mozilla */
-/*         --uc-wiki-panel-bg: hsla(0, 0%, 3.1%, 0.7); */
+        /* backdrop filter has been temporarily disabled by mozilla */
+        /* --uc-wiki-panel-bg: hsla(0, 0%, 3.1%, 0.7); */
         --uc-wiki-panel-bg: hsl(240, 4%, 5%);
         --uc-wiki-table-header-bg: hsl(240, 5.6%, 7.1%);
         --uc-wiki-table-border-color: hsl(240, 1.4%, 19%);
@@ -1539,7 +1540,12 @@ You can use greasemonkey or any other form of monkey that supports the document-
     #bodyContent #toc > ul > li > a:not(:only-child, :hover) {
         border-radius: 0 !important;
         border-bottom: 1px solid transparent !important;
-        border-image: linear-gradient( to right, hsla(0, 0%, 100%, 0.05) 0, hsla(0, 0%, 100%, 0.2) 10%, transparent 100% ) !important;
+        border-image: linear-gradient(
+            to right,
+            hsla(0, 0%, 100%, 0.05) 0,
+            hsla(0, 0%, 100%, 0.2) 10%,
+            transparent 100%
+        ) !important;
         border-image-slice: 100%;
         border-image-slice: 0 0 1 0 !important;
     }
@@ -2365,8 +2371,8 @@ You can use greasemonkey or any other form of monkey that supports the document-
         border: 1px solid hsla(230, 3.9%, 18%, 0.5) !important;
         background-image: var(--acrylic-texture) !important;
         backdrop-filter: blur(7px) !important;
-/*         backdrop filter has been temporarily disabled by mozilla */
-/*         background-color: hsla(230, 3.9%, 2%, 0.8) !important; */
+        /* backdrop filter has been temporarily disabled by mozilla */
+        /* background-color: hsla(230, 3.9%, 2%, 0.8) !important; */
         background-color: hsl(240, 4%, 5%) !important;
         margin-block: -6px -9px !important;
         overflow: hidden !important;
@@ -2412,7 +2418,7 @@ You can use greasemonkey or any other form of monkey that supports the document-
         text-decoration: none !important;
         scrollbar-width: none !important;
     }
-        
+
     .mwe-popups.mwe-popups-type-generic .mwe-popups-extract,
     .mwe-popups.mwe-popups-type-disambiguation .mwe-popups-extract {
         color: var(--uc-wiki-link-color) !important;
@@ -2942,8 +2948,8 @@ You can use greasemonkey or any other form of monkey that supports the document-
 
     .mw-mmv-post-image {
         color: hsla(0, 0%, 100%, 0.75) !important;
-/*         backdrop filter has been temporarily disabled by mozilla */
-/*         background-color: hsla(0, 0%, 0%, 0.9) !important; */
+        /* backdrop filter has been temporarily disabled by mozilla */
+        /* background-color: hsla(0, 0%, 0%, 0.9) !important; */
         background-color: hsl(240, 4%, 5%) !important;
         background-image: var(--acrylic-texture) !important;
         backdrop-filter: blur(7px) !important;
@@ -4824,8 +4830,8 @@ You can use greasemonkey or any other form of monkey that supports the document-
         border: 1px solid hsla(230, 3.9%, 18%, 0.5) !important;
         background-image: var(--acrylic-texture) !important;
         backdrop-filter: blur(7px) !important;
-/*         backdrop filter has been temporarily disabled by mozilla */
-/*         background-color: hsla(230, 3.9%, 2%, 0.8) !important; */
+        /* backdrop filter has been temporarily disabled by mozilla */
+        /* background-color: hsla(230, 3.9%, 2%, 0.8) !important; */
         background-color: hsl(240, 4%, 5%) !important;
     }
 
@@ -4834,8 +4840,8 @@ You can use greasemonkey or any other form of monkey that supports the document-
         border-color: transparent !important;
     }
 
-    /*     unnecessary if you use this with dark reader (which you probably should) */
-    /*     .uls-menu .uls-search-label,
+    /* unnecessary if you use this with dark reader (which you probably should) */
+    /* .uls-menu .uls-search-label,
     .uls-languagefilter-clear,
     :is(.oo-ui-toolbar-bar, .ve-ce-branchNode-slug, .toolbar.section-main, .wikiEditor-ui-toolbar)
         .oo-ui-iconElement-icon,

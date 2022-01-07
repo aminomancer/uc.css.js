@@ -41,7 +41,8 @@
         display: flex;
     }
 
-    textarea, select {
+    textarea,
+    select {
         background-color: var(--search-box-color) !important;
         color: var(--ui-text-100) !important;
         border: 1px solid transparent !important;
@@ -132,7 +133,8 @@
         background-color: var(--in-parent-link-color) !important;
     }
 
-    .react-toggle--checked:is(:hover, :focus-within):not(.react-toggle--disabled) .react-toggle-track {
+    .react-toggle--checked:is(:hover, :focus-within):not(.react-toggle--disabled)
+        .react-toggle-track {
         background-color: var(--in-parent-link-color-hover) !important;
     }
 

@@ -121,7 +121,8 @@ menupopup#viewSidebarMenu
     list-style-image: url(chrome://userchrome/content/skin/controlcenter/3rdpartycookies.svg);
 }
 
-.webextension-browser-action:is([data-extensionid="jid1-KKzOGWgsW3Ao4Q@jetpack"i], [label="I don't care about cookies"])[badge="⛔"] .toolbarbutton-badge {
+.webextension-browser-action:is([data-extensionid="jid1-KKzOGWgsW3Ao4Q@jetpack"i], [label="I don't care about cookies"])[badge="⛔"]
+    .toolbarbutton-badge {
     background-color: transparent !important;
     background-image: url(chrome://userchrome/content/error.svg) !important;
     background-size: 12px !important;
@@ -271,8 +272,7 @@ menupopup#viewSidebarMenu
     background-image: url(chrome://userchrome/content/material/notepad-large.svg);
 }
 
-:is(.menu-iconic, .menuitem-iconic)#notes_mozilla_com-menuitem-_send-to-notes
-    .menu-iconic-icon {
+:is(.menu-iconic, .menuitem-iconic)#notes_mozilla_com-menuitem-_send-to-notes .menu-iconic-icon {
     display: none;
 }
 
@@ -295,8 +295,7 @@ menupopup#viewSidebarMenu
     background-image: url(chrome://userchrome/content/material/firefox-relay.svg);
 }
 
-:is(.menu-iconic, .menuitem-iconic)[id^="private-relay_firefox_com-menuitem-"]
-    .menu-iconic-icon {
+:is(.menu-iconic, .menuitem-iconic)[id^="private-relay_firefox_com-menuitem-"] .menu-iconic-icon {
     display: none;
 }
 
@@ -398,11 +397,13 @@ menupopup#viewSidebarMenu
 
 /* make multithreaded download manager context menu item's English label smaller.
 do nothing for other languages since idk if the item is too long in other languages. */
-#multithreaded-download-manager_qw_linux-2g64_local-menuitem-_link-context-menu[label="Download with Multithreaded Download Manager"] .menu-iconic-left {
+#multithreaded-download-manager_qw_linux-2g64_local-menuitem-_link-context-menu[label="Download with Multithreaded Download Manager"]
+    .menu-iconic-left {
     -moz-box-flex: 1;
 }
 
-#multithreaded-download-manager_qw_linux-2g64_local-menuitem-_link-context-menu[label="Download with Multithreaded Download Manager"] .menu-iconic-text {
+#multithreaded-download-manager_qw_linux-2g64_local-menuitem-_link-context-menu[label="Download with Multithreaded Download Manager"]
+    .menu-iconic-text {
     display: none;
 }
 
@@ -414,28 +415,29 @@ do nothing for other languages since idk if the item is too long in other langua
 }
 
 /* fix inconsistent string casing of menuitems in Multithreaded Download Manager */
-:is(menu, menuitem)[id^="multithreaded-download-manager"][label="Open in new tab"] > label,
-:is(menu, menuitem)[id^="multithreaded-download-manager"][label="Open in new window"] > label,
-:is(menu, menuitem)[id^="multithreaded-download-manager"][label="Open in sidebar"] > label {
+:is(menu, menuitem)[id^="multithreaded-download-manager"]:is([label="Open in new tab"], [label="Open in new window"], [label="Open in sidebar"])
+    > label {
     display: none !important;
 }
 
-:is(menu, menuitem)[id^="multithreaded-download-manager"][label="Open in new tab"] > .menu-accel-container::before,
-:is(menu, menuitem)[id^="multithreaded-download-manager"][label="Open in new window"] > .menu-accel-container::before,
-:is(menu, menuitem)[id^="multithreaded-download-manager"][label="Open in sidebar"] > .menu-accel-container::before {
+:is(menu, menuitem)[id^="multithreaded-download-manager"]:is([label="Open in new tab"], [label="Open in new window"], [label="Open in sidebar"])
+    > .menu-accel-container::before {
     display: -moz-inline-box;
     -moz-box-flex: 1;
 }
 
-:is(menu, menuitem)[id^="multithreaded-download-manager"][label="Open in new tab"] > .menu-accel-container::before {
+:is(menu, menuitem)[id^="multithreaded-download-manager"][label="Open in new tab"]
+    > .menu-accel-container::before {
     content: "Open in New Tab";
 }
 
-:is(menu, menuitem)[id^="multithreaded-download-manager"][label="Open in new window"] > .menu-accel-container::before {
+:is(menu, menuitem)[id^="multithreaded-download-manager"][label="Open in new window"]
+    > .menu-accel-container::before {
     content: "Open in New Window";
 }
 
-:is(menu, menuitem)[id^="multithreaded-download-manager"][label="Open in sidebar"] > .menu-accel-container::before {
+:is(menu, menuitem)[id^="multithreaded-download-manager"][label="Open in sidebar"]
+    > .menu-accel-container::before {
     content: "Open in Sidebar";
 }
 
@@ -463,12 +465,14 @@ menuitem[id^="sort-bookmarks_heftig-menuitem"][label="Sort this folder…"] > la
     display: none !important;
 }
 
-menuitem[id^="sort-bookmarks_heftig-menuitem"][label="Sort this folder…"] > .menu-accel-container::before {
+menuitem[id^="sort-bookmarks_heftig-menuitem"][label="Sort this folder…"]
+    > .menu-accel-container::before {
     display: -moz-inline-box;
     -moz-box-flex: 1;
 }
 
-menuitem[id^="sort-bookmarks_heftig-menuitem"][label="Sort this folder…"] > .menu-accel-container::before {
+menuitem[id^="sort-bookmarks_heftig-menuitem"][label="Sort this folder…"]
+    > .menu-accel-container::before {
     content: "Sort this Folder…";
 }
 
@@ -522,8 +526,10 @@ menuitem[id^="sort-bookmarks_heftig-menuitem"][label="Sort this folder…"] > .m
 
 :is(#simple-translate_sienori-menuitem-_translatePage, #simple-translate_sienori-menuitem-_translatePageOnTab)[label^="Translate this page"]
     > .menu-accel-container::before,
-#simple-translate_sienori-menuitem-_translateLink[label="Translate selected link"] > .menu-accel-container::before,
-#simple-translate_sienori-menuitem-_translateText[label="Translate selected text"] > .menu-accel-container::before {
+#simple-translate_sienori-menuitem-_translateLink[label="Translate selected link"]
+    > .menu-accel-container::before,
+#simple-translate_sienori-menuitem-_translateText[label="Translate selected text"]
+    > .menu-accel-container::before {
     display: -moz-inline-box;
     -moz-box-flex: 1;
 }
@@ -533,11 +539,13 @@ menuitem[id^="sort-bookmarks_heftig-menuitem"][label="Sort this folder…"] > .m
     content: "Translate this Page";
 }
 
-#simple-translate_sienori-menuitem-_translateLink[label="Translate selected link"] > .menu-accel-container::before {
+#simple-translate_sienori-menuitem-_translateLink[label="Translate selected link"]
+    > .menu-accel-container::before {
     content: "Translate Selected Link";
 }
 
-#simple-translate_sienori-menuitem-_translateText[label="Translate selected text"] > .menu-accel-container::before {
+#simple-translate_sienori-menuitem-_translateText[label="Translate selected text"]
+    > .menu-accel-container::before {
     content: "Translate Selected Text";
 }
 
@@ -696,7 +704,8 @@ there's no need for a context menu item except when right-clicking something par
     display: none !important;
 }
 
-#ublock0_raymondhill_net-menuitem-_uBlock0-blockElement[label="Block element..."] > .menu-accel-container::before {
+#ublock0_raymondhill_net-menuitem-_uBlock0-blockElement[label="Block element..."]
+    > .menu-accel-container::before {
     content: "Block Element…";
     display: -moz-inline-box;
     -moz-box-flex: 1;
@@ -756,22 +765,28 @@ menupopup:not(#contentAreaContextMenu)
     display: none !important;
 }
 
-#addon_darkreader_org-menuitem-_DarkReader-toggle[label="Toggle extension"] > .menu-accel-container::before,
-#addon_darkreader_org-menuitem-_DarkReader-addSite[label="Toggle current site"] > .menu-accel-container::before,
-#addon_darkreader_org-menuitem-_DarkReader-switchEngine[label="Theme generation mode"] > .menu-accel-container::before {
+#addon_darkreader_org-menuitem-_DarkReader-toggle[label="Toggle extension"]
+    > .menu-accel-container::before,
+#addon_darkreader_org-menuitem-_DarkReader-addSite[label="Toggle current site"]
+    > .menu-accel-container::before,
+#addon_darkreader_org-menuitem-_DarkReader-switchEngine[label="Theme generation mode"]
+    > .menu-accel-container::before {
     display: -moz-inline-box;
     -moz-box-flex: 1;
 }
 
-#addon_darkreader_org-menuitem-_DarkReader-toggle[label="Toggle extension"] > .menu-accel-container::before {
+#addon_darkreader_org-menuitem-_DarkReader-toggle[label="Toggle extension"]
+    > .menu-accel-container::before {
     content: "Toggle Extension";
 }
 
-#addon_darkreader_org-menuitem-_DarkReader-addSite[label="Toggle current site"] > .menu-accel-container::before {
+#addon_darkreader_org-menuitem-_DarkReader-addSite[label="Toggle current site"]
+    > .menu-accel-container::before {
     content: "Toggle Current Site";
 }
 
-#addon_darkreader_org-menuitem-_DarkReader-switchEngine[label="Theme generation mode"] > .menu-accel-container::before {
+#addon_darkreader_org-menuitem-_DarkReader-switchEngine[label="Theme generation mode"]
+    > .menu-accel-container::before {
     content: "Theme Generation Mode";
 }
 
@@ -784,28 +799,36 @@ menupopup:not(#contentAreaContextMenu)
     background-image: url(chrome://userchrome/content/settings.svg);
 }
 
-#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_show-badge[label="Show active style count"] > label,
+#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_show-badge[label="Show active style count"]
+    > label,
 #_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_disableAll[label="Turn all styles off"] > label,
-#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-manager[label="Open styles manager"] > label {
+#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-manager[label="Open styles manager"]
+    > label {
     display: none !important;
 }
 
-#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_show-badge[label="Show active style count"] > .menu-accel-container::before,
-#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_disableAll[label="Turn all styles off"] > .menu-accel-container::before,
-#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-manager[label="Open styles manager"] > .menu-accel-container::before {
+#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_show-badge[label="Show active style count"]
+    > .menu-accel-container::before,
+#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_disableAll[label="Turn all styles off"]
+    > .menu-accel-container::before,
+#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-manager[label="Open styles manager"]
+    > .menu-accel-container::before {
     display: -moz-inline-box;
     -moz-box-flex: 1;
 }
 
-#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_show-badge[label="Show active style count"] > .menu-accel-container::before {
+#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_show-badge[label="Show active style count"]
+    > .menu-accel-container::before {
     content: "Active Style Count";
 }
 
-#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_disableAll[label="Turn all styles off"] > .menu-accel-container::before {
+#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_disableAll[label="Turn all styles off"]
+    > .menu-accel-container::before {
     content: "Disable All Styles";
 }
 
-#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-manager[label="Open styles manager"] > .menu-accel-container::before {
+#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-manager[label="Open styles manager"]
+    > .menu-accel-container::before {
     content: "Open Style Manager";
 }
 
@@ -825,7 +848,8 @@ menupopup:not(#contentAreaContextMenu)
 /* View Image extension's context menu item "Search by image"
 I would recommend disabling the context menu in the extension's settings,
 since its casing is inconsistent with context menu norms. */
-#_287dcf75-bec6-4eec-b4f6-71948a2eea29_-menuitem-_ViewImage-SearchByImage .menu-iconic-left::before {
+#_287dcf75-bec6-4eec-b4f6-71948a2eea29_-menuitem-_ViewImage-SearchByImage
+    .menu-iconic-left::before {
     width: 16px;
     height: 16px;
     margin-inline: var(--context-iconic-margin);
@@ -863,12 +887,14 @@ since its casing is inconsistent with context menu norms. */
     display: none !important;
 }
 
-#invert-element_aminomancer-menuitem-_menuitem-invert[label="Invert Element"] .menu-iconic-left::before,
+#invert-element_aminomancer-menuitem-_menuitem-invert[label="Invert Element"]
+    .menu-iconic-left::before,
 #invert-element_aminomancer-menuitem-_menuitem-invert[label="Invert Element"]:not(.menuitem-iconic, .menu-iconic)::before {
     background-image: url(chrome://userchrome/content/material/invert.svg);
 }
 
-#invert-element_aminomancer-menuitem-_menuitem-invert[label="Uninvert Element"] .menu-iconic-left::before,
+#invert-element_aminomancer-menuitem-_menuitem-invert[label="Uninvert Element"]
+    .menu-iconic-left::before,
 #invert-element_aminomancer-menuitem-_menuitem-invert[label="Uninvert Element"]:not(.menuitem-iconic, .menu-iconic)::before {
     background-image: url(chrome://userchrome/content/material/invert-off.svg);
 }
@@ -925,6 +951,7 @@ so by default we hide the border on extension panels (see userChrome.au.css) */
 #customizationui-widget-panel[viewId="PanelUI-webext-addon_darkreader_org-browser-action-view"],
 #customizationui-widget-panel[viewId="PanelUI-webext-nordvpnproxy_nordvpn_com-browser-action-view"],
 #customizationui-widget-panel[viewId="PanelUI-webext-simple-translate_sienori-browser-action-view"],
+#customizationui-widget-panel[viewId="PanelUI-webext-ublock0_raymondhill_net-browser-action-view"],
 #customizationui-widget-panel[viewId^="PanelUI-webext-multithreaded-download-manager"] {
     --customized-webextension-panel-border: 1px solid var(--panel-border-color) !important;
     --customized-webextension-panel-stroke: var(--panel-border-color);
@@ -936,6 +963,7 @@ so by default we hide the border on extension panels (see userChrome.au.css) */
 #customizationui-widget-panel[viewId="PanelUI-webext-addon_darkreader_org-browser-action-view"][side="top"],
 #customizationui-widget-panel[viewId="PanelUI-webext-nordvpnproxy_nordvpn_com-browser-action-view"][side="top"],
 #customizationui-widget-panel[viewId="PanelUI-webext-simple-translate_sienori-browser-action-view"][side="top"],
+#customizationui-widget-panel[viewId="PanelUI-webext-ublock0_raymondhill_net-browser-action-view"][side="top"],
 #customizationui-widget-panel[viewId^="PanelUI-webext-multithreaded-download-manager"][side="top"] {
     --customized-webextension-panel-margin-bottom: -5px;
 }
@@ -945,13 +973,15 @@ so by default we hide the border on extension panels (see userChrome.au.css) */
 #customizationui-widget-panel[viewId="PanelUI-webext-addon_darkreader_org-browser-action-view"][side="bottom"],
 #customizationui-widget-panel[viewId="PanelUI-webext-nordvpnproxy_nordvpn_com-browser-action-view"][side="bottom"],
 #customizationui-widget-panel[viewId="PanelUI-webext-simple-translate_sienori-browser-action-view"][side="bottom"],
+#customizationui-widget-panel[viewId="PanelUI-webext-ublock0_raymondhill_net-browser-action-view"][side="bottom"],
 #customizationui-widget-panel[viewId^="PanelUI-webext-multithreaded-download-manager"][side="bottom"] {
     --customized-webextension-panel-margin-top: -5px;
 }
 
 #customizationui-widget-panel[viewId="PanelUI-webext-nordvpnproxy_nordvpn_com-browser-action-view"],
+#customizationui-widget-panel[viewId="PanelUI-webext-ublock0_raymondhill_net-browser-action-view"],
 #customizationui-widget-panel[viewId^="PanelUI-webext-multithreaded-download-manager"] {
-    --panel-border-color: var(--content-principal-box-background-odd) !important;
+    --panel-border-color: var(--in-content-border-color-dim) !important;
 }
 
 /* a possible way to make sidebar border more theme responsive */

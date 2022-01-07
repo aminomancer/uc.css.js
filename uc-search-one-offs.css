@@ -188,8 +188,8 @@ it also changes the appearance of the one-offs in the searchbar. */
 }
 
 .search-setting-button > .button-box > .button-icon {
-	fill: currentColor !important;
-	fill-opacity: inherit !important;
+    fill: currentColor !important;
+    fill-opacity: inherit !important;
 }
 
 .urlbarView :is(.searchbar-engine-one-off-item, .addengine-item) > .button-box {

@@ -269,7 +269,12 @@ panel[type="autocomplete-richlistbox"]
     color: var(--panel-shortcut-color) !important;
 }
 
-#PopupAutoComplete > richlistbox > richlistitem[originaltype="insecureWarning"] > .ac-title > description > .ac-title-text {
+#PopupAutoComplete
+    > richlistbox
+    > richlistitem[originaltype="insecureWarning"]
+    > .ac-title
+    > description
+    > .ac-title-text {
     padding-inline: 0 8px !important;
 }
 

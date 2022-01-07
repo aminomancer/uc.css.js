@@ -496,12 +496,11 @@ this way we don't animate tabs that were simply moved rather than created */
         .popup-notification-description,
     menulist:not([native])::part(label-box),
     #cfr-notification-header-label,
-    panel[type="autocomplete-richlistbox"]
+    panel:is([type="autocomplete-richlistbox"], #PopupAutoComplete)
         > richlistbox
         > richlistitem[originaltype="insecureWarning"]
         > .ac-title
-        .ac-emphasize-text-title,
-    #PopupAutoComplete > richlistbox > richlistitem[originaltype="insecureWarning"] > .ac-title .ac-emphasize-text-title {
+        .ac-emphasize-text-title {
         font-weight: var(--uc-font-weight-bold, 600);
     }
 

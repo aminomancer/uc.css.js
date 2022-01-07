@@ -13,12 +13,13 @@
 class WikiMods {
     constructor() {
         this.logo = this.makeLogo();
-        if (this.logo === "hidden") document.addEventListener('visibilitychange', this);
+        if (this.logo === "hidden") document.addEventListener("visibilitychange", this);
     }
     handleEvent(e) {
         if (!document.hidden) {
             this.logo = this.makeLogo();
-            if (typeof this.logo === "object") document.removeEventListener('visibilitychange', this);
+            if (typeof this.logo === "object")
+                document.removeEventListener("visibilitychange", this);
         }
     }
     // add a custom logo, intended to be used in conjunction with my wikipedia dark mode theme:

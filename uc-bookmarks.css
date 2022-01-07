@@ -142,7 +142,7 @@
 }
 
 #editBookmarkPanel tree:focus-visible {
-	outline: 2px solid var(--focus-outline-color, -moz-accent-color) !important;
+    outline: 2px solid var(--focus-outline-color, -moz-accent-color) !important;
 }
 
 #editBookmarkPanel treechildren::-moz-tree-row(selected):hover {

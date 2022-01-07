@@ -768,7 +768,7 @@ so you can use those classes to set the icon. */
 :root:not([hide-tp-icon-on-ntp])
     #tracking-protection-icon-container[hidden]
     #tracking-protection-icon {
-	list-style-image: url(chrome://userchrome/content/material/tracking-disabled.svg) !important;
+    list-style-image: url(chrome://userchrome/content/material/tracking-disabled.svg) !important;
 }
 
 #identity-box.notSecureText #identity-icon-label {
@@ -1074,7 +1074,7 @@ so you can use those classes to set the icon. */
 
 .blocked-permission-icon:focus-visible,
 .notification-anchor-icon:focus-visible {
-	outline: none !important;
+    outline: none !important;
 }
 
 /* depending on window scaling factor, some permission icons may appear too big relative to their viewbox.

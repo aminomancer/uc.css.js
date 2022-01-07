@@ -461,7 +461,7 @@ and a few elements like checkboxes */
     }
 
     #style-editor-chrome-window li.unsaved > hgroup .stylesheet-name label,
-    #style-editor-chrome-window li.unsaved > hgroup .stylesheet-name::before, 
+    #style-editor-chrome-window li.unsaved > hgroup .stylesheet-name::before,
     #style-editor-chrome-window li.unsaved > hgroup .stylesheet-name::after {
         color: var(--low-warning-text-color) !important;
     }

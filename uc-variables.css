@@ -147,11 +147,21 @@ menupopup {
     --panel-banner-item-active-bgcolor: hsla(109.9, 90.9%, 47.3%, 0.2);
     --panel-banner-item-info-icon-bgcolor: var(--arrowpanel-color) !important;
 
-    --arrowpanel-menuitem-inline-margin: var(--uc-arrowpanel-menuitem-inline-margin, 4px) !important;
+    --arrowpanel-menuitem-inline-margin: var(
+        --uc-arrowpanel-menuitem-inline-margin,
+        4px
+    ) !important;
     --arrowpanel-menuitem-margin: 0px var(--arrowpanel-menuitem-inline-margin) !important;
-    --arrowpanel-menuitem-padding-block: var(--uc-arrowpanel-menuitem-padding-block, 6px) !important;
-    --arrowpanel-menuitem-padding-inline: var(--uc-arrowpanel-menuitem-padding-inline, 6px) !important;
-    --arrowpanel-menuitem-padding: var(--arrowpanel-menuitem-padding-block) var(--arrowpanel-menuitem-padding-inline) !important;
+    --arrowpanel-menuitem-padding-block: var(
+        --uc-arrowpanel-menuitem-padding-block,
+        6px
+    ) !important;
+    --arrowpanel-menuitem-padding-inline: var(
+        --uc-arrowpanel-menuitem-padding-inline,
+        6px
+    ) !important;
+    --arrowpanel-menuitem-padding: var(--arrowpanel-menuitem-padding-block)
+        var(--arrowpanel-menuitem-padding-inline) !important;
     --arrowpanel-padding: var(--uc-arrowpanel-root-padding, 12px) !important;
     --panel-subview-body-padding-magnitude: var(--arrowpanel-menuitem-inline-margin);
     --panel-subview-body-padding: var(--panel-subview-body-padding-magnitude) 0 !important;

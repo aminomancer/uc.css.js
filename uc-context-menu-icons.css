@@ -311,7 +311,8 @@ menu[label="Bitwarden"]:not(.menuitem-iconic, .menu-iconic) > .menu-text,
     > .menu-iconic-text,
 #_287dcf75-bec6-4eec-b4f6-71948a2eea29_-menuitem-_ViewImage-SearchByImage:not(.menuitem-iconic, .menu-iconic)
     > .menu-text,
-#invert-element_aminomancer-menuitem-_menuitem-invert:not(.menuitem-iconic, .menu-iconic) > .menu-text,
+#invert-element_aminomancer-menuitem-_menuitem-invert:not(.menuitem-iconic, .menu-iconic)
+    > .menu-text,
 #menu_customizeToolbars .menu-text,
 menuitem.viewCustomizeToolbar > .menu-text,
 #addon_darkreader_org-menuitem-_DarkReader-switchEngine:not(.menuitem-iconic) .menu-text,

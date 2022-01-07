@@ -265,7 +265,10 @@ findbar .matches-indicator {
     -moz-user-focus: ignore !important;
 }
 
-.findbar-find-previous, .findbar-find-next, .findbar-entire-word, .findbar-case-sensitive {
+.findbar-find-previous,
+.findbar-find-next,
+.findbar-entire-word,
+.findbar-case-sensitive {
     transition: var(--findbar-textbox-bg-transition-duration, 200ms) background-color !important;
 }
 
@@ -336,7 +339,9 @@ findbar .matches-indicator {
 [anonid="findbar-textbox-wrapper"]:focus-within {
     outline-width: 2px !important;
     outline-color: var(--search-box-focus-outline-color, -moz-accent-color) !important;
-    transition-duration: calc(var(--findbar-textbox-outline-transition-duration, 100ms) * 0.6) !important;
+    transition-duration: calc(
+        var(--findbar-textbox-outline-transition-duration, 100ms) * 0.6
+    ) !important;
     transition-timing-function: ease-out !important;
 }
 

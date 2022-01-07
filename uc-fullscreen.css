@@ -109,7 +109,8 @@ requires fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-statu
     transition-property: transform, opacity, width, left, right, padding-top, margin-top !important;
     transition-duration: 0.2s, 0.3s, 0.2s, 0.2s, 0.2s, 0.25s, 0.25s !important;
     transition-delay: 0s, 0s, 0s, 0s, 0s, 0s, 0s !important;
-    transition-timing-function: ease-in-out, ease-in-out, ease-in-out, ease-in-out, ease-in-out, ease-in-out, ease-in-out !important;
+    transition-timing-function: ease-in-out, ease-in-out, ease-in-out, ease-in-out, ease-in-out,
+        ease-in-out, ease-in-out !important;
 }
 
 :root[fullscreen-autohide][inFullscreen]:not([customizing])
@@ -123,10 +124,13 @@ requires fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-statu
     findbar {
     margin-top: 0 !important;
     transition-duration: 0.2s, 0.3s, 0.2s, 0.2s, 0.2s, 0.25s, 0.25s !important;
-    transition-timing-function: ease-in-out, ease-in-out, ease-in-out, ease-in-out, ease-in-out, cubic-bezier(0.26, 1, 0.8, 1), cubic-bezier(0.26, 1, 0.8, 1) !important;
+    transition-timing-function: ease-in-out, ease-in-out, ease-in-out, ease-in-out, ease-in-out,
+        cubic-bezier(0.26, 1, 0.8, 1), cubic-bezier(0.26, 1, 0.8, 1) !important;
 }
 
-:root[fullscreen-autohide][customizing][inFullscreen] #customization-container > #customization-content-container {
+:root[fullscreen-autohide][customizing][inFullscreen]
+    #customization-container
+    > #customization-content-container {
     margin-top: calc(var(--urlbar-container-height, 40px) + var(--tab-min-height, 36px)) !important;
     z-index: 2147483647 !important;
 }

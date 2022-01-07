@@ -475,7 +475,8 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
         #BMB_bookmarksPopup,
         .sidebar-search-container,
         .pointerlockfswarning,
-        :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup) :is(menu, menuitem, menucaption),
+        :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
+            :is(menu, menuitem, menucaption),
         panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem {
             font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
             font-kerning: normal !important;
@@ -513,7 +514,10 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
         }
 
         #main-menubar > menu > menupopup {
-            margin-block: calc(0px - var(--menupopup-inner-box-margin) - (var(--tab-min-height) - 14px - 5px - 6px) / 2) !important;
+            margin-block: calc(
+                0px - var(--menupopup-inner-box-margin) -
+                    ((var(--tab-min-height) - 14px - 5px - 6px) / 2)
+            ) !important;
         }
 
         #fxa-menu-header-description {

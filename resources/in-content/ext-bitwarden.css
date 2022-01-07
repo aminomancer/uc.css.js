@@ -6,10 +6,10 @@
 
 /* bitwarden */
 
-iframe#bit-notification-bar-iframe[src^="moz-extension://"] {
+iframe#bit-notification-bar-iframe[src^="moz-extension://"]
+{
     filter: none !important;
-    box-shadow: 0 3px 8px hsla(0, 0%, 0%, 0.1),
-        0 0 2px hsla(0, 0%, 0%, 0.3) !important;
+    box-shadow: 0 3px 8px hsla(0, 0%, 0%, 0.1), 0 0 2px hsla(0, 0%, 0%, 0.3) !important;
 }
 
 @-moz-document url-prefix("moz-extension://c1ea5f85-7682-4d41-86cf-4946657a717e/popup/index.html")
@@ -78,7 +78,8 @@ iframe#bit-notification-bar-iframe[src^="moz-extension://"] {
         display: block;
         width: 26px;
         height: 26px;
-        background: var(--in-content-primary-button-background) url(chrome://userchrome/content/material/bitwarden.svg) center/18px no-repeat;
+        background: var(--in-content-primary-button-background)
+            url(chrome://userchrome/content/material/bitwarden.svg) center/18px no-repeat;
         -moz-context-properties: fill, fill-opacity;
         fill: white;
         border-radius: var(--general-button-border-radius);
