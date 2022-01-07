@@ -10,20 +10,20 @@
 
 @-moz-document regexp("view-source:.*") {
     @font-face {
-        font-family: "Overpass Mono";
+        font-family: "Fira Code";
         font-style: normal;
-        font-weight: 100;
-        src: local("Overpass Mono"), local("Overpass Mono Light"), local("OverpassMono-Light");
+        font-weight: 300;
+        src: local("Fira Code"), local("Fira Code Light"), local("FiraCode-Light");
     }
 
     :root {
-        font-family: Overpass Mono, -moz-fixed;
+        font-family: Fira Code, SF Mono, -moz-fixed, monospace;
     }
 
     xmp,
     pre,
     plaintext {
-        font-family: Overpass Mono, -moz-fixed;
+        font-family: Fira Code, SF Mono, -moz-fixed, monospace;
     }
 
     @media (prefers-color-scheme: dark) {
@@ -755,15 +755,15 @@
 }
 
 /* firefox screenshots addon overlay */
-@-moz-document url("moz-extension://bc8fcf05-0a6f-40d5-a068-b452be394b53/blank.html")
+@-moz-document url("^moz-extension://.*/blank.html.*")
 {
-    .all-buttons-container {
+    :root[uc-extension-id="screenshots@mozilla.org"] .all-buttons-container {
         background-color: var(--content-principal-box-background) !important;
         height: 88px !important;
         box-shadow: 0 0 0 1px rgba(12, 12, 13, 0.1), 0 0 8px rgba(12, 12, 13, 0.1) !important;
     }
 
-    .all-buttons-container button {
+    :root[uc-extension-id="screenshots@mozilla.org"] .all-buttons-container button {
         color: var(--content-principal-page-color) !important;
         background-color: transparent !important;
         border-radius: var(--general-button-border-radius) !important;
@@ -774,17 +774,17 @@
         -moz-context-properties: fill, stroke !important;
     }
 
-    .all-buttons-container button:hover {
+    :root[uc-extension-id="screenshots@mozilla.org"] .all-buttons-container button:hover {
         background-color: var(--content-principal-button-background) !important;
         border: 1px solid var(--content-principal-button-background) !important;
     }
 
-    .hover-highlight {
+    :root[uc-extension-id="screenshots@mozilla.org"] .hover-highlight {
         background: rgba(255, 255, 255, 0.1) !important;
         z-index: 2147483646 !important;
     }
 
-    .pixel-dimensions {
+    :root[uc-extension-id="screenshots@mozilla.org"] .pixel-dimensions {
         margin-block-start: -5px;
         margin-inline-start: -5px;
         z-index: 2147483647 !important;
@@ -793,7 +793,7 @@
     }
 
     @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
-        .pixel-dimensions {
+        :root[uc-extension-id="screenshots@mozilla.org"] .pixel-dimensions {
             font-weight: var(--uc-font-weight-bold) !important;
             font-family: -apple-system, BlinkMacSystemFont, SF Pro, "segoe ui", "helvetica neue",
                 helvetica, ubuntu, roboto, noto, arial, sans-serif !important;

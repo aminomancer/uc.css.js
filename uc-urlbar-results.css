@@ -592,8 +592,8 @@
     padding-inline-start: 16px;
 }
 
-.urlbarView-favicon[src="moz-extension://cd4aad93-9726-49dd-a5cd-9e5f5c4d76f4/favicon.ico"]
-{
+.urlbarView-row[engine="Google"]
+    .urlbarView-favicon:not([src="chrome://global/skin/icons/search-glass.svg"], [src="chrome://browser/skin/history.svg"], [src="chrome://global/skin/icons/lightbulb.svg"]) {
     box-sizing: border-box !important;
     background: url(chrome://userchrome/content/engines/google.svg) no-repeat !important;
     width: 16px !important;

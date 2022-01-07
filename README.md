@@ -246,7 +246,7 @@ I've bundled some of my addons in this repo as well. They are in the [extensions
 
 `userChrome.css` doesn't require any fonts, but there's an optional preference in about:config which lets you replace fonts in the UI (not in-content) with [SF Pro](https://developer.apple.com/fonts), macOS's system font, on Windows or Linux. You can enable this by [downloading the font](https://devimages-cdn.apple.com/design/resources/download/SF-Pro.dmg) and opening it in 7-Zip. From here, double click the `.pkg` file, then `Payload~`, then `.`, `Library`, and `Fonts`. From here you can drag all the files to a working folder, select all of them, then right click and click "Install for all users."
 
-After that, you just need to toggle `userChrome.css.mac-ui-fonts` to `true` in about:config. Currently, this setting requires a local copy of three variants of the font: SF Pro, SF Pro Display, and SF Pro Text (all from [SF-Pro.dmg](https://devimages-cdn.apple.com/design/resources/download/SF-Pro.dmg)). If you use the Arabic abjad, download SF Arabic too since the theme now uses it too. Additionally, `userContent.css` can use [Overpass Mono](https://fonts.google.com/specimen/Overpass+Mono) for plaintext files, if you have it installed. Otherwise it just uses your default monospace font.
+After that, you just need to toggle `userChrome.css.mac-ui-fonts` to `true` in about:config. Currently, this setting requires a local copy of three variants of the font: SF Pro, SF Pro Display, and SF Pro Text (all from [SF-Pro.dmg](https://devimages-cdn.apple.com/design/resources/download/SF-Pro.dmg)). If you use the Arabic abjad, download SF Arabic too since the theme now uses it too. Additionally, `userContent.css` can use [Fira Code](https://github.com/tonsky/FiraCode) or [SF Mono](https://developer.apple.com/fonts/) for plaintext files, if you have one of them installed. Otherwise it just uses your default monospace font. I'd recommend Fira Code.
 
 </details>
 
@@ -678,6 +678,16 @@ Each extension gets its own button in the panel. Clicking an extension's button 
 <img src="preview/prev-ext-opt-panel.webp"/>
 
 </details>
+
+#### [Extension Stylesheet Loader](/JS/extensionStylesheetLoader.uc.js):
+
+✨ This script is required if you want my "dark mode" themes for various addons like uBlock Origin, Dark Reader, etc. It allows loading CSS rules in addon documents based on ID (which is static), rather than by addon URL (which is random).<details><summary>💬 <i><b>More details...</b></i></summary>
+
+Normally if you want to style an addon's docs with userContent.css, you need to use `@-moz-document url("moz-extension://c1ea5f85-7682-4d41-86cf-4946657a712e/popup.html")` to avoid styling unintended documents. But this isn't ideal since that URL is generated randomly when you install the addon. It's unique for every installation for every user. So if you have been using duskFox, you've been downloading my extension stylesheets even though they don't work on your installation. Well, no longer!
+
+Now we can style an addon like this: `:root[uc-extension-id="uBlock0@raymondhill.net"] body {...}` and the stylesheet will work for everyone who has uBlock Origin, out of the box. That means when you use duskFox you'll get all my addon content themes too. And it also means you can use this method in your own [custom-content.css](/resources/in-content/custom-content.css) file. You just need to find the extension's ID, either via my [Debug Extension in Toolbar Context Menu](#debug-extension-in-toolbar-context-menu) script or by locating the extension in `about:debugging#/runtime/this-firefox`.
+
+For other Firefox modders and theme developers, you can use this script to distribute your addon content themes and ensure they work on your users' installations. It will work in all places where addons can display their content, namely popups and sidebars. Just direct your users to download [fx-autoconfig](https://github.com/MrOtherGuy/fx-autoconfig) and this script, and then, instead of using `@-moz-document`, use `:root[uc-extension-id="example@author"]`. See one of my [addon stylesheets](/resources/in-content/ext-containers.css) for example.
 
 </details>
 

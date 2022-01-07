@@ -496,7 +496,7 @@ parsererror|parsererror {
 }
 
 parsererror|sourcetext {
-    font-family: Overpass Mono, -moz-fixed;
+    font-family: Fira Code, SF Mono, -moz-fixed;
     font-weight: bold;
 }
 

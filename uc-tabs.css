@@ -108,6 +108,10 @@
     display: none !important;
 }
 
+.tab-label-container {
+    height: revert !important;
+}
+
 .tab-label[attention]:not([selected="true"]) {
     font-weight: unset !important;
 }

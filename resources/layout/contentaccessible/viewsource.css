@@ -10,13 +10,14 @@
 @namespace url(http://www.w3.org/1999/xhtml); /* set default namespace to HTML */
 
 @font-face {
-    font-family: "Overpass Mono";
+    font-family: "Fira Code";
     font-style: normal;
-    font-weight: 100;
-    src: local("Overpass Mono"), local("Overpass Mono Light"), local("OverpassMono-Light");
+    font-weight: 300;
+    src: local("Fira Code"), local("Fira Code Light"), local("FiraCode-Light");
 }
 *|*:root {
-    font-family: Overpass Mono, -moz-fixed;
+    font-family: Fira Code, SF Mono, -moz-fixed, monospace;
+    font-weight: 300;
     background-color: white;
     color: black;
     direction: ltr;
@@ -24,8 +25,8 @@
     height: 100%;
 }
 #viewsource {
-    font-family: Overpass Mono, -moz-fixed;
-    font-weight: normal;
+    font-family: Fira Code, SF Mono, -moz-fixed, monospace;
+    font-weight: 300;
     white-space: pre;
     counter-reset: line;
     height: 100%;
@@ -53,13 +54,13 @@ span[id]::before {
     margin: 0 0 0 -5ch;
     text-align: right;
     color: #ccc;
-    font-weight: normal;
+    font-weight: 300;
     font-style: normal;
 }
 xmp,
 pre,
 plaintext {
-    font-family: Overpass Mono, -moz-fixed;
+    font-family: Fira Code, SF Mono, -moz-fixed, monospace;
 }
 .highlight .start-tag {
     color: purple;

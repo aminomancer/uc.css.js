@@ -182,8 +182,7 @@ toolbarpaletteitem[place="palette"] > #search-container {
     color: var(--panel-description-color) !important;
 }
 
-#PopupSearchAutoComplete .searchbar-engine-image[src="moz-extension://cd4aad93-9726-49dd-a5cd-9e5f5c4d76f4/favicon.ico"]
-{
+#PopupSearchAutoComplete[engine="Google"] .searchbar-engine-image {
     background-image: url(chrome://userchrome/content/engines/google.svg) !important;
     padding-inline: 0 16px !important;
 }

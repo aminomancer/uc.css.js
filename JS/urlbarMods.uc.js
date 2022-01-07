@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Urlbar Mods
-// @version        1.5.8
+// @version        1.5.9
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Make some minor modifications to the urlbar. See the code comments below for more details.
@@ -58,19 +58,22 @@ class UrlbarMods {
         // other error pages — with the triangular warning sign.
         "add new tooltips and classes for identity icon": true,
 
-        // my theme increases the prominence of the "type icon" in urlbar results. for bookmarks,
-        // this is a star. for open tabs, it's a tab icon. for remote tabs, aka synced tabs, it's a
-        // sync icon. with this option enabled, however, instead of showing a sync icon it will show
-        // a device icon specific to the type of device. so if the tab was synced from a cell phone,
-        // the type icon will show a phone. if it was synced from a laptop, it'll show a laptop,
-        // etc. the script will add some CSS to set the icons, but it won't change the way type
-        // icons are layed out. that's particular to my theme and it's purely a CSS issue, so I
-        // don't want the script to get involved in that. my urlbar-results.css file makes the type
-        // icon look basically like a 2nd favicon. it goes next to the favicon, rather than
-        // displaying on top of it. the script's CSS just changes the icon, so it'll fit with
-        // however you have type icons styled. if you don't use my theme but you want type icons to
-        // look more prominent, see urlbar-results.css and search "type-icon"
-        "show device icon in remote tab urlbar results": true,
+        // this sets attributes on each urlbar result according to 1) its corresponding search
+        // engine; and 2) its source device, if it's a remote tab. this allows CSS to give them
+        // unique icons, or to replace a search engine urlbar result's icon. my theme increases the
+        // prominence of the "type icon" in urlbar results. for bookmarks, this is a star. for open
+        // tabs, it's a tab icon. for remote tabs, aka synced tabs, it's a sync icon. with this
+        // option enabled, however, instead of showing a sync icon it will show a device icon
+        // specific to the type of device. so if the tab was synced from a cell phone, the type icon
+        // will show a phone. if it was synced from a laptop, it'll show a laptop, etc. the script
+        // will add some CSS to set the icons, but it won't change the way type icons are layed out.
+        // that's particular to my theme and it's purely a CSS issue, so I don't want the script to
+        // get involved in that. my urlbar-results.css file makes the type icon look basically like
+        // a 2nd favicon. it goes next to the favicon, rather than displaying on top of it. the
+        // script's CSS just changes the icon, so it'll fit with however you have type icons styled.
+        // if you don't use my theme but you want type icons to look more prominent, see
+        // urlbar-results.css and search "type-icon"
+        "show detailed icons in urlbar results": true,
 
         // normally, when you type something like "firefox install" or "clear cookies" in the
         // urlbar, it suggests an "intervention" or "tip" which acts as a kind of shortcut to
@@ -114,8 +117,8 @@ class UrlbarMods {
             this.extendIdentityIcons();
         if (UrlbarMods.config["style identity icon drag box"]) this.styleIdentityIconDragBox();
         if (UrlbarMods.config["restore one-offs context menu"]) this.restoreOneOffsContextMenu();
-        if (UrlbarMods.config["show device icon in remote tab urlbar results"])
-            this.urlbarResultsDeviceIcon();
+        if (UrlbarMods.config["show detailed icons in urlbar results"])
+            this.urlbarResultsDetailedIcons();
         if (UrlbarMods.config["disable urlbar intervention tips"])
             this.disableUrlbarInterventions();
         if (UrlbarMods.config["sort urlbar results consistently"]) this.urlbarResultsSorting();
@@ -442,7 +445,7 @@ class UrlbarMods {
         const oneOffsBase = Object.getPrototypeOf(urlbarOneOffsProto);
         this.urlbarOneOffs._on_contextmenu = oneOffsBase._on_contextmenu;
     }
-    urlbarResultsDeviceIcon() {
+    urlbarResultsDetailedIcons() {
         XPCOMUtils.defineLazyPreferenceGetter(
             this,
             "showRemoteIconsPref",
@@ -488,11 +491,19 @@ class UrlbarMods {
                     gURLBar.view._updateRow
                         .toSource()
                         .replace(
-                            /(item\.removeAttribute\(\"stale\"\)\;)/,
-                            `$1 item.removeAttribute("clientType");`
+                            /(item\.removeAttribute\(\"stale\"\);)/,
+                            `$1 item.removeAttribute("clientType"); item.removeAttribute("engine");`
                         )
                         .replace(
-                            /(item\.setAttribute\(\"type\"\, \"remotetab\"\)\;)/,
+                            /(item\.setAttribute\(\"type\", \"search\"\);)/,
+                            `$1 if (result.payload.engine) item.setAttribute("engine", result.payload.engine);`
+                        )
+                        .replace(
+                            /(item\.setAttribute\(\"type\", \"TabToSearch\"\);)/,
+                            `$1 if (result.payload.engine) item.setAttribute("engine", result.payload.engine);`
+                        )
+                        .replace(
+                            /(item\.setAttribute\(\"type\"\, \"remotetab\"\);)/,
                             `$1 if (result.payload.clientType) item.setAttribute("clientType", result.payload.clientType);`
                         )
             );

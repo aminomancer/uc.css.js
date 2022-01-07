@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Misc. Mods
-// @version        1.9.1
+// @version        1.9.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Various tiny mods not worth making separate scripts for. Read the comments inside the script for details.
@@ -398,6 +398,24 @@
                 this._switcherPanel.openPopup(this._icon);
                 this._switcherTarget.classList.add("active");
             };
+
+            // add an "engine" attribute to the searchbar autocomplete popup, so we can replace the
+            // engine icon with CSS without needing to use the (random) icon URL as a selector. this
+            // way, my replacing the built-in Google engine's icon with a nicer-looking one will
+            // work for everyone. otherwise we'd have problems since the URL is randomly generated
+            // for everyone. my selector wouldn't work for you. but here, we can make it universal:
+            // #PopupSearchAutoComplete[engine="Google"] .searchbar-engine-image
+            // see uc-urlbar.css for the implementation in duskFox.
+            eval(
+                `PopupSearchAutoComplete.updateHeader = async function ` +
+                    PopupSearchAutoComplete.updateHeader
+                        .toSource()
+                        .replace(/async updateHeader/, "")
+                        .replace(
+                            /(let uri = engine.iconURI;)/,
+                            `engine.name ? this.setAttribute("engine", engine.name) : this.removeAttribute("engine");\n      $1`
+                        )
+            );
         }
     }
 

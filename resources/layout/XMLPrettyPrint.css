@@ -17,7 +17,8 @@ the location URL doesn't reflect that this stylesheet is used. */
     :root,
     :host {
         color-scheme: light dark;
-        font-family: Overpass Mono, -moz-fixed;
+        font-family: Fira Code, SF Mono, -moz-fixed;
+        font-weight: 300;
     }
 }
 
@@ -71,6 +72,7 @@ the location URL doesn't reflect that this stylesheet is used. */
 }
 
 .comment {
-    font-family: monospace;
+    font-family: Fira Code, SF Mono, -moz-fixed, monospace;
+    font-weight: 300;
     white-space: pre;
 }

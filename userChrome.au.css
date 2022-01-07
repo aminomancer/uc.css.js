@@ -310,6 +310,10 @@ the last 75% or so of this stylesheet is dedicated to restoring pre-proton conte
         margin: var(--menupopup-inner-box-margin);
     }
 
+    #tabbrowser-tabs:not([secondarytext-unsupported]) .tab-label-container {
+        height: revert;
+    }
+
     .tab-label {
         line-height: revert;
     }

@@ -231,12 +231,12 @@ it also changes the appearance of the one-offs in the searchbar. */
 
 /* replace google search icon with CSS since you can't replace
 the built-in google engine without changing the engine's name */
-.searchbar-engine-one-off-item[image="moz-extension://cd4aad93-9726-49dd-a5cd-9e5f5c4d76f4/favicon.ico"] .button-icon
+:is(#urlbar-engine-one-off-item-Google, #searchbar-engine-one-off-item-Google) .button-icon
 {
     display: none;
 }
 
-.searchbar-engine-one-off-item[image="moz-extension://cd4aad93-9726-49dd-a5cd-9e5f5c4d76f4/favicon.ico"] .button-box::before
+:is(#urlbar-engine-one-off-item-Google, #searchbar-engine-one-off-item-Google) .button-box::before
 {
     content: url(chrome://userchrome/content/engines/google.svg);
     display: block;

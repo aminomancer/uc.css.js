@@ -6,13 +6,10 @@
 
 /* uBlock Origin dark theme */
 
-@-moz-document regexp("moz-extension://8d413415-fec4-4612-9717-941c64de177b/.*")
+@-moz-document regexp("^moz-extension://.*/.*")
 {
     @media (prefers-color-scheme: dark) {
-        :root {
-            --link-ink: hsl(266.9, 95.2%, 75.7%) !important;
-            --checkbox-checked-ink: hsl(266.9, 95.2%, 75.7%) !important;
-            --dashboard-tab-active-ink: hsl(266.9, 95.2%, 75.7%) !important;
+        :root[uc-extension-id="uBlock0@raymondhill.net"] {
             --fg-icon-info-lvl-0-dimmed: hsl(0, 0%, 53.3%) !important;
             --fg-icon-info-lvl-1-dimmed: hsla(258, 57%, 35%, 1) !important;
             --fg-icon-info-lvl-1: hsla(258, 66%, 48%, 1) !important;
@@ -48,7 +45,7 @@
             --fg-0-40: hsla(0, 0%, 53%, 0.4) !important;
             --fg-0-30: hsla(0, 0%, 53%, 0.3) !important;
             --fg-0-20: hsla(0, 0%, 53%, 0.2) !important;
-            --link-ink: hsl(266.9, 95.2%, 75.7%) !important;
+            --link-ink: var(--in-content-link-color) !important;
             --fieldset-header-surface: transparent !important;
             --fieldset-header-ink: var(--light-gray-30) !important;
             --hr-ink: var(--dark-gray-50) !important;
@@ -59,7 +56,7 @@
             --button-disabled-surface: var(--dark-gray-50) !important;
             --bg-transient-notice: var(--dark-gray-50) !important;
             --dashboard-bar-shadow: 0px 0px 0px 1px var(--default-ink-a4) !important;
-            --dashboard-tab-active-ink: hsl(266.9, 95.2%, 75.7%) !important;
+            --dashboard-tab-active-ink: var(--in-content-link-color) !important;
             --dashboard-tab-surface-hover: var(--default-surface-hover) !important;
             --fg-icon-info-lvl-0-dimmed: hsl(0, 0%, 53.3%) !important;
             --fg-icon-info-lvl-0: inherit !important;
@@ -109,15 +106,15 @@
             --button-preferred-ink: var(--light-gray-70) !important;
             --checkbox-size: calc(var(--font-size) + 2px) !important;
             --checkbox-ink: var(--default-ink) !important;
-            --checkbox-checked-ink: hsl(266.9, 95.2%, 75.7%) !important;
-            --checkbox-hover-ink: hsl(266.9, 35.2%, 35.7%) !important;
+            --checkbox-checked-ink: var(--in-content-link-color) !important;
+            --checkbox-hover-ink: var(--purple-40-a30) !important;
         }
 
-        :root:not(#ublock0-epicker) body {
+        :root[uc-extension-id="uBlock0@raymondhill.net"]:not(#ublock0-epicker) body {
             background-color: var(--bg-1) !important;
         }
 
-        #uBO-popup-panel body {
+        #uBO-popup-panel[uc-extension-id="uBlock0@raymondhill.net"] body {
             --font-size: 12px !important;
             --popup-gap: 10px !important;
             --popup-gap-thin: 5px !important;
@@ -125,102 +122,121 @@
             --checkbox-size: calc(var(--font-size) + 2px) !important;
         }
 
-        #uBO-popup-panel #main {
+        #uBO-popup-panel[uc-extension-id="uBlock0@raymondhill.net"] #main {
             max-width: 280px !important;
         }
 
-        #uBO-popup-panel #basicStats > [data-i18n] {
+        #uBO-popup-panel[uc-extension-id="uBlock0@raymondhill.net"] #basicStats > [data-i18n] {
             font-size: var(--font-size) !important;
         }
 
-        #uBO-popup-panel #basicStats > [data-i18n] + span {
+        #uBO-popup-panel[uc-extension-id="uBlock0@raymondhill.net"]
+            #basicStats
+            > [data-i18n]
+            + span {
             font-size: calc(var(--font-size) + 1px) !important;
         }
 
-        #uBO-popup-panel .toolRibbon {
+        #uBO-popup-panel[uc-extension-id="uBlock0@raymondhill.net"] .toolRibbon {
             display: flex !important;
             flex-flow: row nowrap !important;
         }
 
-        #uBO-popup-panel .toolRibbon .tool {
+        #uBO-popup-panel[uc-extension-id="uBlock0@raymondhill.net"] .toolRibbon .tool {
             font-size: calc(var(--font-size) + 4px) !important;
             flex-grow: 1 !important;
         }
 
-        #uBO-popup-panel body:not([data-more~="a"]) [data-more="a"],
-        #uBO-popup-panel body:not([data-more~="b"]) [data-more="b"],
-        #uBO-popup-panel body:not([data-more~="c"]) [data-more="c"],
-        #uBO-popup-panel body:not([data-more~="d"]) [data-more="d"],
-        #uBO-popup-panel body:not([data-more~="f"]) [data-more="f"] {
+        #uBO-popup-panel[uc-extension-id="uBlock0@raymondhill.net"]
+            body:not([data-more~="a"])
+            [data-more="a"],
+        #uBO-popup-panel[uc-extension-id="uBlock0@raymondhill.net"]
+            body:not([data-more~="b"])
+            [data-more="b"],
+        #uBO-popup-panel[uc-extension-id="uBlock0@raymondhill.net"]
+            body:not([data-more~="c"])
+            [data-more="c"],
+        #uBO-popup-panel[uc-extension-id="uBlock0@raymondhill.net"]
+            body:not([data-more~="d"])
+            [data-more="d"],
+        #uBO-popup-panel[uc-extension-id="uBlock0@raymondhill.net"]
+            body:not([data-more~="f"])
+            [data-more="f"] {
             border: none !important;
         }
 
         @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
-            body {
+            :root[uc-extension-id="uBlock0@raymondhill.net"] body {
                 font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
             }
 
-            #hostname > span + span {
+            :root[uc-extension-id="uBlock0@raymondhill.net"] #hostname > span + span {
                 font-weight: 500 !important;
             }
         }
 
-        button:not(.disabled, [disabled]) {
+        :root[uc-extension-id="uBlock0@raymondhill.net"] button:not(.disabled, [disabled]) {
             cursor: pointer !important;
         }
 
-        #cloudWidget {
-            background-color: hsl(246.7, 11.7%, 15.1%) !important;
+        :root[uc-extension-id="uBlock0@raymondhill.net"] #cloudWidget {
+            background-color: var(--in-content-button-highlight-dark) !important;
         }
 
-        #actions,
-        #sticky {
+        :root[uc-extension-id="uBlock0@raymondhill.net"] #actions,
+        :root[uc-extension-id="uBlock0@raymondhill.net"] #sticky {
             background-color: var(--bg-1) !important;
         }
 
-        .CodeMirror-cursor {
+        :root[uc-extension-id="uBlock0@raymondhill.net"] .CodeMirror-cursor {
             caret-color: white !important;
             color: white !important;
             border-color: white !important;
         }
 
-        .CodeMirror-selected {
+        :root[uc-extension-id="uBlock0@raymondhill.net"] .CodeMirror-selected {
             background: var(--dark-gray-70) !important;
         }
 
-        .CodeMirror-focused .CodeMirror-selected {
+        :root[uc-extension-id="uBlock0@raymondhill.net"] .CodeMirror-focused .CodeMirror-selected {
             background: var(--dark-gray-50) !important;
         }
 
-        a:hover {
-            color: hsl(266.9, 99.2%, 85.7%) !important;
+        :root[uc-extension-id="uBlock0@raymondhill.net"] a:hover {
+            --link-ink: var(--in-content-link-color-hover) !important;
         }
 
-        #cloudCapacity {
+        :root[uc-extension-id="uBlock0@raymondhill.net"] #cloudCapacity {
             background-color: var(--dark-gray-30) !important;
         }
 
-        .CodeMirror-activeline-background {
+        :root[uc-extension-id="uBlock0@raymondhill.net"] .CodeMirror-activeline-background {
             background: var(--dark-gray-70) !important;
         }
 
-        .checkbox > input[type="checkbox"] + svg {
+        :root[uc-extension-id="uBlock0@raymondhill.net"] .checkbox > input[type="checkbox"] + svg {
             border: 1.5px solid var(--checkbox-ink) !important;
         }
 
-        .checkbox > input[type="checkbox"]:checked + svg {
+        :root[uc-extension-id="uBlock0@raymondhill.net"]
+            .checkbox
+            > input[type="checkbox"]:checked
+            + svg {
             background-color: var(--checkbox-checked-ink);
             border-color: var(--checkbox-checked-ink) !important;
             stroke: var(--default-surface);
         }
 
-        .checkbox > input[type="checkbox"]:not(:checked):hover + svg {
+        :root[uc-extension-id="uBlock0@raymondhill.net"]
+            .checkbox
+            > input[type="checkbox"]:not(:checked):hover
+            + svg {
             border-color: var(--checkbox-checked-ink) !important;
             background-color: var(--checkbox-hover-ink) !important;
             stroke: transparent !important;
         }
 
-        select {
+        :root[uc-extension-id="uBlock0@raymondhill.net"] select {
             appearance: none !important;
             background-color: var(--dark-gray-30) !important;
             color: var(--default-ink) !important;
@@ -230,15 +246,15 @@
             padding-inline: 3px !important;
         }
 
-        select > option {
+        :root[uc-extension-id="uBlock0@raymondhill.net"] select > option {
             appearance: none !important;
             background-color: var(--dark-gray-30) !important;
             color: var(--default-ink) !important;
             border: none !important;
         }
 
-        input[type="number"],
-        input[type="search"] {
+        :root[uc-extension-id="uBlock0@raymondhill.net"]
+            input:is([type="number"], [type="search"]) {
             appearance: none !important;
             background-color: var(--dark-gray-30) !important;
             color: var(--default-ink) !important;
@@ -248,16 +264,20 @@
             padding-inline: 3px !important;
         }
 
-        .cm-search-widget .fa-icon:not(.fa-icon-ro):hover {
+        :root[uc-extension-id="uBlock0@raymondhill.net"]
+            .cm-search-widget
+            .fa-icon:not(.fa-icon-ro):hover {
             fill: white !important;
         }
 
-        .cm-search-widget .cm-search-widget-button:hover {
+        :root[uc-extension-id="uBlock0@raymondhill.net"]
+            .cm-search-widget
+            .cm-search-widget-button:hover {
             color: white !important;
         }
 
-        #diff,
-        #advancedSettings {
+        :root[uc-extension-id="uBlock0@raymondhill.net"] #diff,
+        :root[uc-extension-id="uBlock0@raymondhill.net"] #advancedSettings {
             border-color: var(--cm-gutter-border) !important;
         }
     }

@@ -6,25 +6,25 @@
 
 /* firefox multi-account containers extension */
 
-@-moz-document url-prefix("moz-extension://14960f03-eca3-472b-b4d2-0b7f831ebe41/pageActionPopup.html")
+@-moz-document regexp("^moz-extension://.*/pageActionPopup.html.*")
 {
-    :root {
+    :root[uc-extension-id="@testpilot-containers"] {
         background-color: var(--uc-arrowpanel-background) !important;
         font-size: 12px !important;
         color: var(--uc-arrowpanel-color) !important;
         letter-spacing: 0 !important;
     }
 
-    svg:root {
+    svg:root[uc-extension-id="@testpilot-containers"] {
         background: none !important;
     }
 
-    html,
-    body {
+    html:root[uc-extension-id="@testpilot-containers"],
+    :root[uc-extension-id="@testpilot-containers"] body {
         min-block-size: 0 !important;
     }
 
-    body {
+    :root[uc-extension-id="@testpilot-containers"] body {
         --hr-grey: var(--uc-desaturate-dimmed) !important;
         font-size: 12px !important;
         color: inherit !important;
@@ -38,7 +38,7 @@
         background: none !important;
     }
 
-    h3.title {
+    :root[uc-extension-id="@testpilot-containers"] h3.title {
         padding-block: 8px 4px !important;
         block-size: 40px !important;
         min-height: 40px !important;
@@ -53,22 +53,22 @@
         letter-spacing: inherit !important;
     }
 
-    hr {
+    :root[uc-extension-id="@testpilot-containers"] hr {
         padding: 0 !important;
         margin: var(--menupopup-inner-padding) !important;
     }
 
-    .scrollable,
-    .identities-list {
+    :root[uc-extension-id="@testpilot-containers"] .scrollable,
+    :root[uc-extension-id="@testpilot-containers"] .identities-list {
         margin: 0 !important;
         padding: 0 !important;
     }
 
-    .menu {
+    :root[uc-extension-id="@testpilot-containers"] .menu {
         padding-block: revert !important;
     }
 
-    .menu-item {
+    :root[uc-extension-id="@testpilot-containers"] .menu-item {
         cursor: default !important;
         border-radius: var(--context-menuitem-border-radius) !important;
         inline-size: unset !important;
@@ -79,43 +79,45 @@
         user-select: none !important;
     }
 
-    .controller,
-    .hover-highlight {
+    :root[uc-extension-id="@testpilot-containers"] .controller,
+    :root[uc-extension-id="@testpilot-containers"] .hover-highlight {
         transition: none !important;
     }
 
-    .hover-highlight:is(:focus):not(:hover, :focus-visible) {
+    :root[uc-extension-id="@testpilot-containers"]
+        .hover-highlight:is(:focus):not(:hover, :focus-visible) {
         background: revert !important;
         color: inherit !important;
     }
 
-    .hover-highlight:is(:hover, :focus-visible) {
+    :root[uc-extension-id="@testpilot-containers"] .hover-highlight:is(:hover, :focus-visible) {
         color: inherit !important;
         background: var(--uc-arrowpanel-dimmed) !important;
     }
 
-    .hover-highlight:is(:hover, :focus-visible):active {
+    :root[uc-extension-id="@testpilot-containers"]
+        .hover-highlight:is(:hover, :focus-visible):active {
         background: var(--uc-arrowpanel-dimmed-further) !important;
     }
 
-    .menu-item td {
+    :root[uc-extension-id="@testpilot-containers"] .menu-item td {
         align-items: center !important;
         overflow: clip !important;
     }
 
-    .menu-icon {
+    :root[uc-extension-id="@testpilot-containers"] .menu-icon {
         margin: 0 !important;
         margin-inline: 6px 8px !important;
         inline-size: 16px !important;
     }
 
     @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
-        body {
+        :root[uc-extension-id="@testpilot-containers"] body {
             font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
             font-kerning: normal !important;
         }
 
-        h3.title {
+        :root[uc-extension-id="@testpilot-containers"] h3.title {
             font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
             font-kerning: normal !important;
             font-size: 1.1em !important;
@@ -124,9 +126,9 @@
     }
 }
 
-@-moz-document url-prefix("moz-extension://14960f03-eca3-472b-b4d2-0b7f831ebe41/popup.html")
+@-moz-document regexp("^moz-extension://.*/popup.html.*")
 {
-    :root {
+    :root[uc-extension-id="@testpilot-containers"] {
         background-color: var(--uc-arrowpanel-background) !important;
         font-size: 12px !important;
         color: var(--uc-arrowpanel-color) !important;
@@ -134,16 +136,16 @@
         scrollbar-width: none !important;
     }
 
-    svg:root {
+    svg:root[uc-extension-id="@testpilot-containers"] {
         background: none !important;
     }
 
-    html,
-    body {
+    html[uc-extension-id="@testpilot-containers"],
+    :root[uc-extension-id="@testpilot-containers"] body {
         min-block-size: 0 !important;
     }
 
-    body {
+    :root[uc-extension-id="@testpilot-containers"] body {
         --hr-grey: var(--uc-desaturate-dimmed) !important;
         --text-grey: var(--uc-arrowpanel-color) !important;
         font-size: 12px !important;
@@ -152,11 +154,11 @@
         background: none !important;
     }
 
-    div {
+    :root[uc-extension-id="@testpilot-containers"] div {
         user-select: none;
     }
 
-    input[type="text"] {
+    :root[uc-extension-id="@testpilot-containers"] input[type="text"] {
         background-color: var(--uc-desaturate-faint) !important;
         border-color: var(--uc-desaturate-dimmed) !important;
         min-height: var(--subviewbutton-height) !important;
@@ -166,18 +168,17 @@
         padding-block: 0 !important;
     }
 
-    .edit-container-panel input[type="text"] {
+    :root[uc-extension-id="@testpilot-containers"] .edit-container-panel input[type="text"] {
         margin-inline: 2px !important;
     }
 
-    :focus-visible,
-    :-moz-focusring,
-    :focus + label {
+    :root[uc-extension-id="@testpilot-containers"]
+        :where(:focus-visible, :-moz-focusring, :focus + label) {
         outline: none !important;
         box-shadow: none !important;
     }
 
-    input[type="text"]:focus-visible {
+    :root[uc-extension-id="@testpilot-containers"] input[type="text"]:focus-visible {
         border-color: transparent !important;
         outline-style: solid !important;
         outline-width: 1.5px !important;
@@ -185,7 +186,7 @@
         box-shadow: 0 0 0 3.5px var(--in-parent-border-active-shadow);
     }
 
-    input[type="checkbox"] {
+    :root[uc-extension-id="@testpilot-containers"] input[type="checkbox"] {
         appearance: none !important;
         min-width: 10px !important;
         min-height: 10px !important;
@@ -204,30 +205,34 @@
         background-color: var(--uc-arrowpanel-faint) !important;
     }
 
-    input[type="checkbox"]:is(:hover, :focus-visible) {
+    :root[uc-extension-id="@testpilot-containers"]
+        input[type="checkbox"]:is(:hover, :focus-visible) {
         background-color: var(--uc-arrowpanel-dimmed) !important;
     }
 
-    input[type="checkbox"]:is(:hover, :focus-visible):active {
+    :root[uc-extension-id="@testpilot-containers"]
+        input[type="checkbox"]:is(:hover, :focus-visible):active {
         background-color: var(--uc-arrowpanel-dimmed-further) !important;
     }
 
-    input[type="checkbox"]:is([checked="true"], :checked) {
+    :root[uc-extension-id="@testpilot-containers"]
+        input[type="checkbox"]:is([checked="true"], :checked) {
         background-image: url(chrome://userchrome/content/check.svg) !important;
         border-color: var(--uc-checkbox-checked-border-color) !important;
         background-color: var(--uc-checkbox-checked-bgcolor) !important;
     }
 
-    input[type="checkbox"]:is([checked="true"], :checked):is(:hover, :focus-visible) {
+    :root[uc-extension-id="@testpilot-containers"]
+        input[type="checkbox"]:is([checked="true"], :checked):is(:hover, :focus-visible) {
         background-color: var(--uc-checkbox-checked-hover-bgcolor) !important;
     }
 
-    input[type="checkbox"]:is([checked="true"], :checked):is(:hover, :focus-visible):active {
+    :root[uc-extension-id="@testpilot-containers"]
+        input[type="checkbox"]:is([checked="true"], :checked):is(:hover, :focus-visible):active {
         background-color: var(--uc-checkbox-checked-active-bgcolor) !important;
     }
 
-    h3.title,
-    .proxy-panel-title {
+    :root[uc-extension-id="@testpilot-containers"] :where(h3.title, .proxy-panel-title) {
         background: none !important;
         padding-block: 8px 4px !important;
         block-size: 40px !important;
@@ -246,7 +251,7 @@
         box-shadow: none !important;
     }
 
-    h3.proxy-panel-title {
+    :root[uc-extension-id="@testpilot-containers"] h3.proxy-panel-title {
         padding-bottom: calc(
             ((40px - 1.1em) / 2) + var(--menupopup-inner-padding-magnitude)
         ) !important;
@@ -255,22 +260,22 @@
         inline-size: calc(100% - (var(--menupopup-inner-padding-magnitude) * 2)) !important;
     }
 
-    h4 {
+    :root[uc-extension-id="@testpilot-containers"] h4 {
         font-weight: 400;
         font-size: 1.1em !important;
     }
 
-    .sub-header-wrapper {
+    :root[uc-extension-id="@testpilot-containers"] .sub-header-wrapper {
         margin: revert !important;
         color: inherit !important;
     }
 
-    .sub-header {
+    :root[uc-extension-id="@testpilot-containers"] .sub-header {
         padding-inline: 10px !important;
         color: inherit !important;
     }
 
-    .info-icon {
+    :root[uc-extension-id="@testpilot-containers"] .info-icon {
         fill-opacity: 0.8;
         -moz-context-properties: fill, fill-opacity;
         fill: var(--ui-text-80);
@@ -285,20 +290,20 @@
         right: 10.5px !important;
     }
 
-    .info-icon:is(:hover, :focus-visible) {
+    :root[uc-extension-id="@testpilot-containers"] .info-icon:is(:hover, :focus-visible) {
         fill-opacity: 1;
         background-color: var(--uc-arrowpanel-dimmed);
     }
 
-    .info-icon:hover:active {
+    :root[uc-extension-id="@testpilot-containers"] .info-icon:hover:active {
         background-color: var(--uc-arrowpanel-dimmed-further);
     }
 
-    .info-icon img {
+    :root[uc-extension-id="@testpilot-containers"] .info-icon img {
         display: none;
     }
 
-    .info-icon::before {
+    :root[uc-extension-id="@testpilot-containers"] .info-icon::before {
         content: "";
         display: block;
         width: 16px;
@@ -309,35 +314,34 @@
         background-repeat: no-repeat;
     }
 
-    hr {
+    :root[uc-extension-id="@testpilot-containers"] hr {
         margin: var(--menupopup-inner-padding-magnitude) !important;
         padding-block: 0 !important;
     }
 
-    .panel {
+    :root[uc-extension-id="@testpilot-containers"] .panel {
         min-block-size: 0 !important;
         transition: none !important;
         background: none !important;
     }
 
-    .scrollable,
-    .identities-list {
+    :root[uc-extension-id="@testpilot-containers"] :where(.scrollable, .identities-list) {
         margin: 0 !important;
         padding: 0 !important;
     }
 
-    .scrollable {
+    :root[uc-extension-id="@testpilot-containers"] .scrollable {
         scrollbar-width: auto !important;
     }
 
-    .identities-list {
+    :root[uc-extension-id="@testpilot-containers"] .identities-list {
         margin-inline: var(--menupopup-inner-padding-magnitude) !important;
         inline-size: unset !important;
         max-block-size: 600px !important;
         padding-bottom: var(--menupopup-inner-padding-magnitude) !important;
     }
 
-    table[hidden]:empty {
+    :root[uc-extension-id="@testpilot-containers"] table[hidden]:empty {
         display: flex !important;
         flex-flow: row nowrap !important;
         height: 20px !important;
@@ -347,27 +351,27 @@
         color: var(--context-menu-disabled-color) !important;
     }
 
-    table[hidden]:empty::before {
+    :root[uc-extension-id="@testpilot-containers"] table[hidden]:empty::before {
         content: "(empty)" !important;
     }
 
-    #edit-container-assignments > .scrollable {
+    :root[uc-extension-id="@testpilot-containers"] #edit-container-assignments > .scrollable {
         padding-bottom: var(--menupopup-inner-padding-magnitude) !important;
     }
 
-    #container-panel .identities-list {
+    :root[uc-extension-id="@testpilot-containers"] #container-panel .identities-list {
         border-bottom: 1px solid var(--uc-desaturate-dimmed) !important;
     }
 
-    v-padding-hack-footer {
+    :root[uc-extension-id="@testpilot-containers"] v-padding-hack-footer {
         display: none !important;
     }
 
-    v-padding-hack-4 {
+    :root[uc-extension-id="@testpilot-containers"] v-padding-hack-4 {
         display: none !important;
     }
 
-    .bottom-btn {
+    :root[uc-extension-id="@testpilot-containers"] .bottom-btn {
         appearance: none !important;
         position: relative !important;
         height: revert !important;
@@ -385,14 +389,14 @@
         color: inherit !important;
     }
 
-    #manage-containers-link:not([hidden]) {
+    :root[uc-extension-id="@testpilot-containers"] #manage-containers-link:not([hidden]) {
         display: flex !important;
         align-content: center !important;
         align-items: center !important;
         padding-inline-start: 0 !important;
     }
 
-    #manage-containers-link::before {
+    :root[uc-extension-id="@testpilot-containers"] #manage-containers-link::before {
         content: "";
         display: inline-block;
         width: 16px;
@@ -406,11 +410,11 @@
         fill: currentColor;
     }
 
-    .menu {
+    :root[uc-extension-id="@testpilot-containers"] .menu {
         padding-block: revert !important;
     }
 
-    .menu-item {
+    :root[uc-extension-id="@testpilot-containers"] .menu-item {
         cursor: default !important;
         border-radius: var(--context-menuitem-border-radius) !important;
         min-height: var(--subviewbutton-height) !important;
@@ -425,31 +429,33 @@
         overflow: clip !important;
     }
 
-    .identities-list .menu-item {
+    :root[uc-extension-id="@testpilot-containers"] .identities-list .menu-item {
         margin-inline: 0 !important;
     }
 
-    .menu-item :is(td, .menu-item-name, .menu-right-float) {
+    :root[uc-extension-id="@testpilot-containers"]
+        .menu-item
+        :is(td, .menu-item-name, .menu-right-float) {
         align-items: center;
     }
 
-    .hover-highlight:is(:focus):not(:hover, :focus-visible) {
+    :root[uc-extension-id="@testpilot-containers"]
+        .hover-highlight:is(:focus):not(:hover, :focus-visible) {
         background: revert !important;
         color: inherit !important;
     }
 
-    .hover-highlight:is(:hover, :focus-visible),
-    .bottom-btn:is(:hover, :focus-visible) {
+    :root[uc-extension-id="@testpilot-containers"]
+        :is(.hover-highlight, .bottom-btn):is(:hover, :focus-visible) {
         color: inherit !important;
         background: var(--uc-arrowpanel-dimmed) !important;
     }
 
-    .hover-highlight:hover:active,
-    .bottom-btn:hover:active {
+    :root[uc-extension-id="@testpilot-containers"] :is(.hover-highlight, .bottom-btn):hover:active {
         background: var(--uc-arrowpanel-dimmed-further) !important;
     }
 
-    .menu-text {
+    :root[uc-extension-id="@testpilot-containers"] .menu-text {
         flex-grow: 1 !important;
         word-break: break-all !important;
         align-self: start !important;
@@ -458,7 +464,7 @@
         overflow: hidden !important;
     }
 
-    .menu-icon {
+    :root[uc-extension-id="@testpilot-containers"] .menu-icon {
         display: block;
         margin-inline: 6px 8px !important;
         margin-block: 0 !important;
@@ -469,40 +475,51 @@
         -moz-context-properties: fill, fill-opacity;
     }
 
-    .menu-icon img {
+    :root[uc-extension-id="@testpilot-containers"] .menu-icon img {
         filter: none !important;
     }
 
-    .menu-icon[src="/img/container-openin-16.svg"] {
+    :root[uc-extension-id="@testpilot-containers"] .menu-icon[src="/img/container-openin-16.svg"] {
         padding-left: 16px !important;
         background-image: url(chrome://userchrome/content/skin/container-go.svg) !important;
     }
 
-    .radio-choice > .radio-container > [type="radio"]:checked + label {
+    :root[uc-extension-id="@testpilot-containers"]
+        .radio-choice
+        > .radio-container
+        > [type="radio"]:checked
+        + label {
         background: var(--uc-arrowpanel-color) !important;
     }
 
-    #edit-container-panel-choose-icon .radio-container:hover .usercontext-icon::before {
+    :root[uc-extension-id="@testpilot-containers"]
+        #edit-container-panel-choose-icon
+        .radio-container:hover
+        .usercontext-icon::before {
         fill: inherit !important;
     }
 
-    .radio-container:active .usercontext-icon::before {
+    :root[uc-extension-id="@testpilot-containers"]
+        .radio-container:active
+        .usercontext-icon::before {
         transform: scale(0.85) !important;
     }
 
-    [data-identity-color="grey"] {
+    :root[uc-extension-id="@testpilot-containers"] [data-identity-color="grey"] {
         --identity-icon-color: var(--uc-arrowpanel-color) !important;
     }
 
-    [type="radio"]:checked + [data-identity-color="grey"] {
+    :root[uc-extension-id="@testpilot-containers"]
+        [type="radio"]:checked
+        + [data-identity-color="grey"] {
         --identity-icon-color: var(--uc-arrowpanel-background) !important;
     }
 
-    .sub-header:empty {
+    :root[uc-extension-id="@testpilot-containers"] .sub-header:empty {
         display: none;
     }
 
-    tr > td > .trash-button {
+    :root[uc-extension-id="@testpilot-containers"] tr > td > .trash-button {
         visibility: hidden !important;
         display: block !important;
         background-image: url(chrome://userchrome/content/close.svg) !important;
@@ -517,22 +534,24 @@
         margin-block: 0 !important;
     }
 
-    tr:hover > td > .trash-button {
+    :root[uc-extension-id="@testpilot-containers"] tr:hover > td > .trash-button {
         visibility: visible !important;
     }
 
-    .menu-icon.hover-highlight:is(:hover, :focus, :focus-visible),
-    .menu-icon.hover-highlight:is(:hover, :focus, :focus-visible):active {
+    :root[uc-extension-id="@testpilot-containers"]
+        .menu-icon.hover-highlight:is(:hover, :focus, :focus-visible),
+    :root[uc-extension-id="@testpilot-containers"]
+        .menu-icon.hover-highlight:is(:hover, :focus, :focus-visible):active {
         background-color: transparent !important;
     }
 
-    .menu-right-float {
+    :root[uc-extension-id="@testpilot-containers"] .menu-right-float {
         display: flex;
         flex-flow: row nowrap;
         justify-content: end;
     }
 
-    .menu-arrow {
+    :root[uc-extension-id="@testpilot-containers"] .menu-arrow {
         padding: 0px !important;
         margin-right: var(--menu-right-margin) !important;
         min-width: 0 !important;
@@ -543,11 +562,11 @@
         fill: currentColor;
     }
 
-    .menu-arrow img {
+    :root[uc-extension-id="@testpilot-containers"] .menu-arrow img {
         display: none;
     }
 
-    .menu-arrow::after {
+    :root[uc-extension-id="@testpilot-containers"] .menu-arrow::after {
         content: "";
         background-image: var(--menu-right-img);
         background-position: center;
@@ -558,17 +577,17 @@
         display: block;
     }
 
-    .identities-list .menu-arrow,
-    #sort-containers-link .menu-arrow {
+    :root[uc-extension-id="@testpilot-containers"]
+        :is(.identities-list, #sort-containers-link)
+        .menu-arrow {
         display: none !important;
     }
 
-    .controller,
-    .hover-highlight {
+    :root[uc-extension-id="@testpilot-containers"] :is(.controller, .hover-highlight) {
         transition: none !important;
     }
 
-    .btn-return {
+    :root[uc-extension-id="@testpilot-containers"] .btn-return {
         background-color: transparent !important;
         background-image: url(chrome://userchrome/content/menu-arrow-left.svg) !important;
         background-size: 16px !important;
@@ -592,21 +611,23 @@
         background-color: transparent;
     }
 
-    .btn-return:is(:hover, :focus-visible, :-moz-focusring) {
+    :root[uc-extension-id="@testpilot-containers"]
+        .btn-return:is(:hover, :focus-visible, :-moz-focusring) {
         background-color: var(--uc-arrowpanel-dimmed) !important;
         fill-opacity: 0.8;
     }
 
-    .btn-return:is(:hover, :focus-visible, :-moz-focusring):active {
+    :root[uc-extension-id="@testpilot-containers"]
+        .btn-return:is(:hover, :focus-visible, :-moz-focusring):active {
         background-color: var(--uc-arrowpanel-dimmed-further) !important;
     }
 
-    .menu-item td {
+    :root[uc-extension-id="@testpilot-containers"] .menu-item td {
         border: none !important;
         flex-grow: 1;
     }
 
-    .menu-item.drag-over td {
+    :root[uc-extension-id="@testpilot-containers"] .menu-item.drag-over td {
         background-image: linear-gradient(
             180deg,
             var(--uc-desaturate-dimmed-even-further) 1.5px,
@@ -614,11 +635,11 @@
         ) !important;
     }
 
-    .move-button img {
+    :root[uc-extension-id="@testpilot-containers"] .move-button img {
         display: none;
     }
 
-    .move-button {
+    :root[uc-extension-id="@testpilot-containers"] .move-button {
         background-image: url(chrome://browser/skin/notification-icons/drag-indicator.svg);
         background-size: 14px var(--subviewbutton-height) !important;
         background-position: center !important;
@@ -629,63 +650,66 @@
         height: 16px !important;
     }
 
-    .edit-container-panel legend,
-    .options-header {
+    :root[uc-extension-id="@testpilot-containers"] .edit-container-panel legend,
+    :root[uc-extension-id="@testpilot-containers"] .options-header {
         margin-block: 0 4px !important;
         margin-inline: 2px !important;
     }
 
-    .options-header {
+    :root[uc-extension-id="@testpilot-containers"] .options-header {
         font-size: 1.1em !important;
         margin-block: 8px !important;
     }
 
-    fieldset,
-    .options-header {
+    :root[uc-extension-id="@testpilot-containers"] :is(fieldset, .options-header) {
         padding-block-end: 8px !important;
     }
 
-    #edit-container-panel > .edit-form {
+    :root[uc-extension-id="@testpilot-containers"] #edit-container-panel > .edit-form {
         padding: calc(var(--menupopup-inner-padding-magnitude) * 2) !important;
         padding-block: var(--menupopup-inner-padding-magnitude) 2px !important;
     }
 
-    #edit-container-options > .container-options > input[type="checkbox"] {
+    :root[uc-extension-id="@testpilot-containers"]
+        #edit-container-options
+        > .container-options
+        > input[type="checkbox"] {
         inset-inline-start: 20px;
     }
 
-    .radio-choice > .radio-container {
+    :root[uc-extension-id="@testpilot-containers"] .radio-choice > .radio-container {
         block-size: 28px !important;
     }
 
-    .options-label {
+    :root[uc-extension-id="@testpilot-containers"] .options-label {
         cursor: default !important;
     }
 
-    .manage-assigned-sites-list {
+    :root[uc-extension-id="@testpilot-containers"] .manage-assigned-sites-list {
         cursor: pointer !important;
         width: max-content !important;
         color: var(--in-content-link-color-hover) !important;
     }
 
-    #manage-assigned-sites-list:is(:hover, :focus-visible, :-moz-focusring) {
+    :root[uc-extension-id="@testpilot-containers"]
+        #manage-assigned-sites-list:is(:hover, :focus-visible, :-moz-focusring) {
         text-decoration: underline !important;
     }
 
-    #edit-container-options {
+    :root[uc-extension-id="@testpilot-containers"] #edit-container-options {
         padding-block: 4px !important;
     }
 
-    .container-options {
+    :root[uc-extension-id="@testpilot-containers"] .container-options {
         margin-inline: 2px 8px !important;
     }
 
-    .switch {
+    :root[uc-extension-id="@testpilot-containers"] .switch {
         block-size: 14px !important;
         inline-size: 28px !important;
     }
 
-    .slider {
+    :root[uc-extension-id="@testpilot-containers"] .slider {
         background-color: var(--uc-switch-off-background) !important;
         border-radius: 14px !important;
         inset-block-end: 0;
@@ -697,15 +721,15 @@
         transition: 0.1s ease-in-out;
     }
 
-    .slider:hover {
+    :root[uc-extension-id="@testpilot-containers"] .slider:hover {
         background-color: var(--uc-switch-off-hover-background) !important;
     }
 
-    .slider:hover:active {
+    :root[uc-extension-id="@testpilot-containers"] .slider:hover:active {
         background-color: var(--uc-switch-off-active-background) !important;
     }
 
-    .slider::before {
+    :root[uc-extension-id="@testpilot-containers"] .slider::before {
         background-color: #fff;
         inset-block-end: 2px !important;
         block-size: 10px !important;
@@ -713,23 +737,23 @@
         inline-size: 10px !important;
     }
 
-    input:checked + .slider::before {
+    :root[uc-extension-id="@testpilot-containers"] input:checked + .slider::before {
         transform: translateX(14px) !important;
     }
 
-    input:checked + .slider {
+    :root[uc-extension-id="@testpilot-containers"] input:checked + .slider {
         background-color: var(--purple-40) !important;
     }
 
-    input:checked + .slider:hover {
+    :root[uc-extension-id="@testpilot-containers"] input:checked + .slider:hover {
         background-color: var(--purple-50) !important;
     }
 
-    input:checked + .slider:hover:active {
+    :root[uc-extension-id="@testpilot-containers"] input:checked + .slider:hover:active {
         background-color: var(--purple-55) !important;
     }
 
-    .panel-footer {
+    :root[uc-extension-id="@testpilot-containers"] .panel-footer {
         padding: calc(var(--menupopup-inner-padding-magnitude) * 2) !important;
         padding-top: var(--menupopup-inner-padding-magnitude) !important;
         background: none !important;
@@ -738,14 +762,13 @@
         column-gap: 4px;
     }
 
-    .alert-text {
+    :root[uc-extension-id="@testpilot-containers"] .alert-text {
         font-family: inherit !important;
         text-align: inherit !important;
     }
 
-    .panel-footer > .button,
-    .primary-cta,
-    .delete-btn {
+    :root[uc-extension-id="@testpilot-containers"] .panel-footer > .button,
+    :root[uc-extension-id="@testpilot-containers"] :where(.primary-cta, .delete-btn) {
         appearance: none !important;
         border-radius: var(--context-menuitem-border-radius) !important;
         height: revert !important;
@@ -763,42 +786,54 @@
         box-shadow: none !important;
     }
 
-    .panel-footer > .button:is(:hover, :focus-visible, :-moz-focusring) {
+    :root[uc-extension-id="@testpilot-containers"]
+        .panel-footer
+        > .button:is(:hover, :focus-visible, :-moz-focusring) {
         background-color: var(--uc-arrowpanel-dimmed) !important;
     }
 
-    .panel-footer > .button:hover:active {
+    :root[uc-extension-id="@testpilot-containers"] .panel-footer > .button:hover:active {
         background-color: var(--uc-arrowpanel-dimmed-further) !important;
     }
 
-    .panel-footer > .button.secondary:not([disabled]) {
+    :root[uc-extension-id="@testpilot-containers"]
+        .panel-footer
+        > .button.secondary:not([disabled]) {
         background-color: transparent !important;
         border-color: var(--uc-arrowpanel-dimmed) !important;
     }
 
-    .panel-footer > .button.secondary:not([disabled], :active):is(:hover, :focus-visible) {
+    :root[uc-extension-id="@testpilot-containers"]
+        .panel-footer
+        > .button.secondary:not([disabled], :active):is(:hover, :focus-visible) {
         background-color: var(--uc-arrowpanel-dimmed) !important;
         border-color: transparent !important;
     }
 
-    .panel-footer > .button.secondary:not([disabled]):is(:hover:active, [open]) {
+    :root[uc-extension-id="@testpilot-containers"]
+        .panel-footer
+        > .button.secondary:not([disabled]):is(:hover:active, [open]) {
         background-color: var(--uc-arrowpanel-dimmed-further) !important;
         border-color: transparent !important;
     }
 
-    .panel-footer > .button.primary:is(:hover, :focus-visible, :-moz-focusring),
-    .primary-cta:is(:hover, :focus-visible, :-moz-focusring),
-    .advanced-proxy-settings-btn:is(:hover, :focus-visible, :-moz-focusring) {
+    :root[uc-extension-id="@testpilot-containers"]
+        .panel-footer
+        > .button.primary:is(:hover, :focus-visible, :-moz-focusring),
+    :root[uc-extension-id="@testpilot-containers"]
+        .primary-cta:is(:hover, :focus-visible, :-moz-focusring),
+    :root[uc-extension-id="@testpilot-containers"]
+        .advanced-proxy-settings-btn:is(:hover, :focus-visible, :-moz-focusring) {
         background-color: var(--in-parent-primary-button-background) !important;
     }
 
-    .panel-footer > .button.primary:hover:active,
-    .primary-cta:hover:active,
-    .advanced-proxy-settings-btn:hover:active {
+    :root[uc-extension-id="@testpilot-containers"] .panel-footer > .button.primary:hover:active,
+    :root[uc-extension-id="@testpilot-containers"] .primary-cta:hover:active,
+    :root[uc-extension-id="@testpilot-containers"] .advanced-proxy-settings-btn:hover:active {
         background-color: var(--in-parent-primary-button-background-hover) !important;
     }
 
-    .delete-btn {
+    :root[uc-extension-id="@testpilot-containers"] .delete-btn {
         background-color: hsla(2, 70%, 56%, 45%) !important;
         margin-block: var(--menupopup-inner-padding-magnitude)
             calc(var(--menupopup-inner-padding-magnitude) * 2) !important;
@@ -810,15 +845,17 @@
         block-size: 0 !important;
     }
 
-    .delete-btn:is(:hover, :focus-visible, :-moz-focusring) {
+    :root[uc-extension-id="@testpilot-containers"]
+        .delete-btn:is(:hover, :focus-visible, :-moz-focusring) {
         background-color: hsla(358, 70%, 50%, 85%) !important;
     }
 
-    .delete-btn:is(:hover, :focus-visible, :-moz-focusring):active {
+    :root[uc-extension-id="@testpilot-containers"]
+        .delete-btn:is(:hover, :focus-visible, :-moz-focusring):active {
         background-color: hsl(353, 90%, 50%) !important;
     }
 
-    .panel-content.delete-container-confirm {
+    :root[uc-extension-id="@testpilot-containers"] .panel-content.delete-container-confirm {
         padding-block: var(--menupopup-inner-padding-magnitude) 0 !important;
         padding-inline: 16px 0 !important;
         display: flex;
@@ -826,30 +863,30 @@
         row-gap: 8px !important;
     }
 
-    .panel-content.delete-container-confirm > * {
+    :root[uc-extension-id="@testpilot-containers"] .panel-content.delete-container-confirm > * {
         padding-block: revert !important;
     }
 
-    #delete-container-tab-warning:empty {
+    :root[uc-extension-id="@testpilot-containers"] #delete-container-tab-warning:empty {
         display: none !important;
     }
 
-    .blue-link,
-    .blue-link span {
+    :root[uc-extension-id="@testpilot-containers"] .blue-link,
+    :root[uc-extension-id="@testpilot-containers"] .blue-link span {
         cursor: pointer !important;
         color: var(--purple-30) !important;
         transition: none !important;
     }
 
-    .blue-link:hover,
-    .blue-link:hover span {
+    :root[uc-extension-id="@testpilot-containers"] .blue-link:hover,
+    :root[uc-extension-id="@testpilot-containers"] .blue-link:hover span {
         color: var(--purple-25) !important;
         text-decoration: underline !important;
         transition: none !important;
     }
 
-    .moz-vpn-content,
-    .moz-vpn-controller-content {
+    :root[uc-extension-id="@testpilot-containers"]
+        :is(.moz-vpn-content, .moz-vpn-controller-content) {
         min-block-size: 0 !important;
         box-shadow: none !important;
         border-top: 1px solid var(--hr-grey) !important;
@@ -858,12 +895,11 @@
         transition: none !important;
     }
 
-    .collapsible-content,
-    .add-bg-color {
+    :root[uc-extension-id="@testpilot-containers"] :is(.collapsible-content, .add-bg-color) {
         background-color: transparent !important;
     }
 
-    .collapsible-content {
+    :root[uc-extension-id="@testpilot-containers"] .collapsible-content {
         max-block-size: 0;
         opacity: 0;
         visibility: hidden;
@@ -871,8 +907,7 @@
         transition: none !important;
     }
 
-    .moz-vpn-logo,
-    .moz-vpn-logotype {
+    :root[uc-extension-id="@testpilot-containers"] :is(.moz-vpn-logo, .moz-vpn-logotype) {
         background-image: url("chrome://userchrome/content/material/firefox-vpn.svg") !important;
         color: inherit !important;
         font-family: inherit !important;
@@ -881,7 +916,7 @@
         font-size: 1.1em !important;
     }
 
-    .moz-vpn-cta {
+    :root[uc-extension-id="@testpilot-containers"] .moz-vpn-cta {
         block-size: var(--subviewbutton-height) !important;
         margin-block: 6px 0 !important;
         margin-inline: calc(var(--menupopup-inner-padding-magnitude) * 2) !important;
@@ -889,7 +924,7 @@
         line-height: normal !important;
     }
 
-    .advanced-proxy-settings-btn {
+    :root[uc-extension-id="@testpilot-containers"] .advanced-proxy-settings-btn {
         appearance: none !important;
         border-radius: var(--context-menuitem-border-radius) !important;
         min-height: var(--subviewbutton-height) !important;
@@ -911,32 +946,34 @@
         background-size: 16px 16px, 9px !important;
     }
 
-    .collapsible-content > .flx-row.flx-space-between {
+    :root[uc-extension-id="@testpilot-containers"]
+        .collapsible-content
+        > .flx-row.flx-space-between {
         inline-size: calc(100% - ((var(--menupopup-inner-padding-magnitude) * 2) * 2)) !important;
         padding-block-start: 8px !important;
     }
 
-    .button-wrapper {
+    :root[uc-extension-id="@testpilot-containers"] .button-wrapper {
         margin-inline: calc(var(--menupopup-inner-padding-magnitude) * 2) !important;
     }
 
-    .advanced-proxy-panel-content {
+    :root[uc-extension-id="@testpilot-containers"] .advanced-proxy-panel-content {
         padding-block: calc(var(--menupopup-inner-padding-magnitude) + 4px) !important;
         padding-inline: calc(var(--menupopup-inner-padding-magnitude) + 6px) !important;
         margin-block-start: 48.5px !important;
     }
 
-    .advanced-proxy-input-wrapper {
+    :root[uc-extension-id="@testpilot-containers"] .advanced-proxy-input-wrapper {
         margin-block: var(--menupopup-inner-padding-magnitude) !important;
     }
 
-    .apply-to-container {
+    :root[uc-extension-id="@testpilot-containers"] .apply-to-container {
         block-size: var(--subviewbutton-height) !important;
         margin-block: var(--menupopup-inner-padding-magnitude) !important;
         line-height: normal !important;
     }
 
-    #clear-advanced-proxy-input {
+    :root[uc-extension-id="@testpilot-containers"] #clear-advanced-proxy-input {
         inset-inline-end: 6px !important;
         inset-block-start: 6px !important;
         background-image: url(chrome://userchrome/content/textbox-clear.svg) !important;
@@ -957,11 +994,11 @@
         box-sizing: border-box !important;
     }
 
-    #clear-advanced-proxy-input:hover {
+    :root[uc-extension-id="@testpilot-containers"] #clear-advanced-proxy-input:hover {
         background-color: var(--uc-arrowpanel-dimmed) !important;
     }
 
-    .proxy-validity {
+    :root[uc-extension-id="@testpilot-containers"] .proxy-validity {
         position: absolute;
         inset-block-start: 30px !important;
         inset-inline-start: 10px !important;
@@ -972,26 +1009,25 @@
         padding-inline: 5px !important;
     }
 
-    .proxy-validity::after {
+    :root[uc-extension-id="@testpilot-containers"] .proxy-validity::after {
         background-color: var(--warning-icon-background) !important;
         inset-inline-start: 8px !important;
     }
 
     @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
-        body {
+        :root[uc-extension-id="@testpilot-containers"] body {
             font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
             font-kerning: normal !important;
         }
 
-        h3.title,
-        .proxy-panel-title {
+        :root[uc-extension-id="@testpilot-containers"] :is(h3.title, .proxy-panel-title) {
             font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
             font-kerning: normal !important;
             font-size: 1.1em !important;
             font-weight: var(--uc-font-weight-bold, 600) !important;
         }
 
-        h4 {
+        :root[uc-extension-id="@testpilot-containers"] h4 {
             font-weight: 500 !important;
         }
     }

@@ -11,8 +11,10 @@ which requires Stylus. don't use this stylesheet if you don't have that theme, i
     .rgh-monospace-textareas #merge_title_field,
     .rgh-monospace-textareas #commit-summary-input,
     .rgh-monospace-textareas textarea {
-        font-family: Overpass Mono, -moz-fixed !important;
-        font-weight: 100 !important;
+        font-family: Fira Code, SF Mono, ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas,
+            Liberation Mono, monospace !important;
+        font-weight: 300 !important;
+        font-size: 14px !important;
     }
 
     .blob-code-inner,
@@ -31,6 +33,10 @@ which requires Stylus. don't use this stylesheet if you don't have that theme, i
         word-break: break-word !important;
         overflow-wrap: break-word !important;
         display: block !important;
+        font-family: Fira Code, SF Mono, ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas,
+            Liberation Mono, monospace !important;
+        font-weight: 300 !important;
+        font-size: 14px !important;
     }
 
     body:not(.nowrap) td.blob-code-inner {

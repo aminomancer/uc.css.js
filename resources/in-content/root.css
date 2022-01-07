@@ -39,20 +39,20 @@
 
 @-moz-document plain-text-document(), media-document(all) {
     @font-face {
-        font-family: "Overpass Mono";
+        font-family: "Fira Code";
         font-style: normal;
-        font-weight: 100;
-        src: local("Overpass Mono"), local("Overpass Mono Light"), local("OverpassMono-Light");
+        font-weight: 300;
+        src: local("Fira Code"), local("Fira Code Light"), local("FiraCode-Light");
     }
 
     :root {
-        font-family: Overpass Mono, -moz-fixed;
+        font-family: Fira Code, SF Mono, -moz-fixed, monospace;
     }
 
     xmp,
     pre,
     plaintext {
-        font-family: Overpass Mono, -moz-fixed;
+        font-family: Fira Code, SF Mono, -moz-fixed, monospace;
     }
 
     img.transparent {

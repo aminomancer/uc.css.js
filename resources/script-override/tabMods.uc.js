@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Tab Mods — tabbrowser-tab class definition mods
-// @version        1.3
+// @version        1.3.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Restore the tab sound button and other aspects of the tab that (imo) were better before Proton.
@@ -34,6 +34,7 @@
                 onoverflow="this.setAttribute('textoverflow', 'true');"
                 onunderflow="this.removeAttribute('textoverflow');"
                 align="start"
+                pack="center"
                 flex="1">
             <label class="tab-text tab-label" role="presentation"/>
             <hbox class="tab-secondary-label">
