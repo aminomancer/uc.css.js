@@ -458,12 +458,6 @@ tooltip > description {
         font-kerning: normal;
         --uc-tooltip-inner-padding: 5px 8px 6px 8px;
     }
-
-    parsererror|parsererror {
-        font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif;
-        font-kerning: normal;
-        font-weight: 500;
-    }
 }
 
 /* dark gray tooltips for some system pages */
@@ -493,10 +487,12 @@ but it's either invalid or not XML. for example when opening an XHTML file. */
 parsererror|parsererror {
     color: var(--plaintext-color) !important;
     background-color: var(--in-content-bg-dark) !important;
+    font-family: Fira Code UC, Fira Code, SF Mono, -moz-fixed;
+    font-weight: 400;
 }
 
 parsererror|sourcetext {
-    font-family: Fira Code, SF Mono, -moz-fixed;
+    font-family: Fira Code UC, Fira Code, SF Mono, -moz-fixed;
     font-weight: bold;
 }
 

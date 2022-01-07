@@ -9,21 +9,16 @@
 @import url(library.css);
 
 @-moz-document regexp("view-source:.*") {
-    @font-face {
-        font-family: "Fira Code";
-        font-style: normal;
-        font-weight: 300;
-        src: local("Fira Code"), local("Fira Code Light"), local("FiraCode-Light");
-    }
-
     :root {
-        font-family: Fira Code, SF Mono, -moz-fixed, monospace;
+        font-family: Fira Code UC, Fira Code, SF Mono, -moz-fixed, monospace;
+        font-weight: 300;
     }
 
     xmp,
     pre,
     plaintext {
-        font-family: Fira Code, SF Mono, -moz-fixed, monospace;
+        font-family: Fira Code UC, Fira Code, SF Mono, -moz-fixed, monospace;
+        font-weight: 300;
     }
 
     @media (prefers-color-scheme: dark) {

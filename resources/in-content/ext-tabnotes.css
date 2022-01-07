@@ -19,11 +19,4 @@ which you can download from the extensions folder in the main directory. */
     :root[uc-extension-id="note-tab@aminomancer"] :-moz-window-inactive::selection {
         background-color: var(--content-selection-bgcolor-disabled) !important;
     }
-
-    :root[uc-extension-id="note-tab@aminomancer"] :is(#note-content, .list-inner),
-    :root[uc-extension-id="note-tab@aminomancer"] .list-inner :is(ul, li, span) {
-        font-family: Fira Code !important;
-        font-weight: 300 !important;
-        font-size: 16px !important;
-    }
 }

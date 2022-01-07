@@ -10,13 +10,13 @@
 @namespace url(http://www.w3.org/1999/xhtml); /* set default namespace to HTML */
 
 @font-face {
-    font-family: "Fira Code";
+    font-family: "Fira Code UC";
     font-style: normal;
-    font-weight: 300;
-    src: local("Fira Code"), local("Fira Code Light"), local("FiraCode-Light");
+    src: local("Fira Code"), local("Fira Code Light"), url(../fonts/FiraCode-VF.woff);
 }
+
 *|*:root {
-    font-family: Fira Code, SF Mono, -moz-fixed, monospace;
+    font-family: Fira Code UC, Fira Code, SF Mono, -moz-fixed, monospace;
     font-weight: 300;
     background-color: white;
     color: black;
@@ -25,7 +25,7 @@
     height: 100%;
 }
 #viewsource {
-    font-family: Fira Code, SF Mono, -moz-fixed, monospace;
+    font-family: Fira Code UC, Fira Code, SF Mono, -moz-fixed, monospace;
     font-weight: 300;
     white-space: pre;
     counter-reset: line;
@@ -60,7 +60,8 @@ span[id]::before {
 xmp,
 pre,
 plaintext {
-    font-family: Fira Code, SF Mono, -moz-fixed, monospace;
+    font-family: Fira Code UC, Fira Code, SF Mono, -moz-fixed, monospace;
+    font-weight: 300;
 }
 .highlight .start-tag {
     color: purple;

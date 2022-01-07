@@ -6,6 +6,36 @@
 
 /* CSS styles fixes for various mozilla sites */
 
+@-moz-document domain("firefox-source-docs.mozilla.org") {
+    /* make search highlight color match the selection color */
+    .rst-content .highlighted {
+        background-color: var(--global-selection-bgcolor) !important;
+        color: var(--global-selection-color) !important;
+        background-image: none;
+        box-shadow: var(--global-selection-bgcolor) 0px 0px 0px 2px !important;
+    }
+}
+
+@-moz-document domain("phabricator.services.mozilla.com") {
+    /* use Fira Code for code. you can also set the default monospace font in about:preferences, but that can cause issues */
+    .platform-windows .PhabricatorMonospaced,
+    .platform-windows .phabricator-remarkup .remarkup-code-block .remarkup-code {
+        font-family: Fira Code UC, Fira Code, SF Mono, Menlo, Consolas, Monaco, monospace !important;
+        font-weight: 300 !important;
+    }
+}
+
+@-moz-document domain("searchfox.org") {
+    tt,
+    code,
+    kbd,
+    samp,
+    .results td > a {
+        font-family: Fira Code UC, Fira Code, SF Mono, Menlo, Consolas, Monaco, monospace;
+        font-weight: 300;
+    }
+}
+
 @-moz-document domain("addons.mozilla.org") {
     /* invert an icon that darkreader can't invert correctly. */
     :root[data-darkreader-mode="dynamic"][data-darkreader-scheme="dark"]

@@ -11,6 +11,12 @@ but other than that these variables should be available everywhere. */
 
 @import url(chrome://userchrome/content/layout/uc-low-globals.css);
 
+@font-face {
+    font-family: "Fira Code UC";
+    font-style: normal;
+    src: local("Fira Code"), local("Fira Code Light"), url(../fonts/FiraCode-VF.woff);
+}
+
 :root {
     --ui-text-10: rgba(255, 255, 255, 0.1);
     --ui-text-20: rgba(255, 255, 255, 0.2);
