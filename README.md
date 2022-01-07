@@ -679,6 +679,8 @@ Each extension gets its own button in the panel. Clicking an extension's button 
 
 </details>
 
+</details>
+
 #### [Extension Stylesheet Loader](/JS/extensionStylesheetLoader.uc.js):
 
 ✨ This script is required if you want my "dark mode" themes for various addons like uBlock Origin, Dark Reader, etc. It allows loading CSS rules in addon documents based on ID (which is static), rather than by addon URL (which is random).<details><summary>💬 <i><b>More details...</b></i></summary>
