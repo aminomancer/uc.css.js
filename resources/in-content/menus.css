@@ -26,7 +26,7 @@ menupopup.in-menulist > :where(menucaption, menuitem) > .menu-iconic-text {
 
 #ContentSelectDropdown > menupopup :where(menucaption, menuitem),
 menupopup.in-menulist > :where(menucaption, menuitem) {
-    padding-inline: 0 8px !important;
+    padding-inline: 8px !important;
     -moz-box-align: center !important;
 }
 
@@ -39,7 +39,7 @@ menupopup.in-menulist .menu-text,
 menupopup.in-menulist
     > :where(menucaption, menuitem)
     > :where(.menu-text, .menu-iconic-text, .menu-iconic-highlightable-text) {
-    padding-inline: var(--context-padding-inline) !important;
+    padding-inline: 0 !important;
 }
 
 .searchengine-menuitem > .menu-iconic-text,
@@ -58,29 +58,17 @@ menupopup.in-menulist > :where(menucaption, menuitem) > :is(label, .menu-iconic-
 #ContentSelectDropdown > menupopup menucaption,
 menupopup.in-menulist > menucaption {
     font-weight: inherit !important;
-    min-height: 22px !important;
-    border-bottom: 1px solid var(--menu-separator-color) !important;
-    margin-block: 1px 2px;
-    padding-inline: 5px !important;
-}
-
-#ContentSelectDropdown > menupopup menucaption:first-child,
-menupopup.in-menulist > menucaption:first-child {
-    margin-bottom: 2px !important;
-    border-bottom: 1px solid var(--menu-separator-color) !important;
+    min-height: 26px !important;
+    padding-block: 1px 2px !important;
+    padding-inline: 0 !important;
+    color: var(--panel-description-color) !important;
 }
 
 #ContentSelectDropdown > menupopup menucaption > :is(label, .menu-iconic-text, .menu-text),
 menupopup.in-menulist > menucaption > :is(label, .menu-iconic-text, .menu-text) {
-    font-weight: 600 !important;
-}
-
-#ContentSelectDropdown
-    > menupopup
-    menucaption:first-child
-    > :is(label, .menu-iconic-text, .menu-text),
-menupopup.in-menulist > menucaption:first-child > :is(label, .menu-iconic-text, .menu-text) {
-    margin-block: -3px 0 !important;
+    padding: 4px 5px !important;
+    border-bottom: 1px solid var(--menu-separator-color) !important;
+    font-weight: var(--uc-font-weight-bold, 600) !important;
 }
 
 #ContentSelectDropdown > menupopup > menuitem:not([_moz-menuactive="true"]),
@@ -387,6 +375,10 @@ menulist {
 #ContentSelectDropdown > menupopup menuitem > .menu-iconic-left,
 menupopup.in-menulist menuitem > .menu-iconic-left {
     margin-inline: 0 !important;
+}
+
+menulist > menupopup > :where(menuitem, menucaption, menu) > .menu-iconic-left {
+  display: none;
 }
 
 menulist[indicator="true"] > menupopup.in-menulist menuitem:not([image]) > .menu-iconic-left {

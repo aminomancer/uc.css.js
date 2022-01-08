@@ -551,6 +551,8 @@ this way we don't animate tabs that were simply moved rather than created */
         --menuitem-hover-background-color: var(--button-hover-bgcolor);
         --menu-disabled-color: var(--ui-text-40);
         --panel-shortcut-color: var(--ui-text-40);
+        --panel-description-color: var(--ui-text-40);
+        --uc-panel-description-color: var(--ui-text-40);
         --arrowpanel-border-color: color-mix(
             in srgb,
             currentColor 12%,
@@ -603,6 +605,8 @@ this way we don't animate tabs that were simply moved rather than created */
             --menu-disabled-color: var(--ui-text-40);
             --panel-shortcut-color: var(--ui-text-40);
             --uc-panel-shortcut-color: var(--ui-text-40);
+            --panel-description-color: var(--ui-text-40);
+            --uc-panel-description-color: var(--ui-text-40);
             --arrowpanel-border-color: color-mix(
                 in srgb,
                 currentColor 12%,

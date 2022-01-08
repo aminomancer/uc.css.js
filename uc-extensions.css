@@ -121,6 +121,19 @@ menupopup#viewSidebarMenu
     list-style-image: url(chrome://userchrome/content/skin/controlcenter/3rdpartycookies.svg);
 }
 
+/* Tab Stash */
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="tab-stash@condordes.net"i]
+    .toolbarbutton-icon,
+#sidebar-box[sidebarcommand="tab-stash_condordes_net-sidebar-action"]
+    #sidebar-switcher-target
+    > #sidebar-icon,
+#sidebarMenu-popup
+    #button_tab-stash_condordes_net-sidebar-action:not([checked="true"]),
+menupopup#viewSidebarMenu
+    menuitem.menuitem-iconic.webextension-menuitem#menu_tab-stash_condordes_net-sidebar-action[style]:is([type="checkbox"], [type="radio"]):not([checked="true"]) {
+    list-style-image: url(chrome://userchrome/content/material/tabstash-logo.svg) !important;
+}
+
 .webextension-browser-action:is([data-extensionid="jid1-KKzOGWgsW3Ao4Q@jetpack"i], [label="I don't care about cookies"])[badge="⛔"]
     .toolbarbutton-badge {
     background-color: transparent !important;
@@ -307,6 +320,25 @@ menupopup#viewSidebarMenu
 /* hide the separator after it too */
 #private-relay_firefox_com-menuitem-_fx-private-relay-get-unlimited-aliases:first-child
     + menuseparator {
+    display: none;
+}
+
+/* Tab Stash menuitem icon */
+:is(.menu-iconic, .menuitem-iconic)[id^="tab-stash_condordes_net-menuitem-"][image]
+    .menu-iconic-left::before {
+    width: 16px;
+    height: 16px;
+    margin-inline: var(--context-iconic-margin);
+    fill: currentColor;
+    -moz-context-properties: fill, fill-opacity, stroke;
+    content: "";
+    display: -moz-inline-box;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url(chrome://userchrome/content/material/tabstash-logo.svg);
+}
+
+:is(.menu-iconic, .menuitem-iconic)[id^="tab-stash_condordes_net-menuitem-"][image] .menu-iconic-icon {
     display: none;
 }
 

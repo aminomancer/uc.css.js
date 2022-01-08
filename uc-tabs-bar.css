@@ -395,7 +395,7 @@ button.private-browsing-indicator:is(:hover:active, [open])::before {
 }
 
 /* all tabs button popup */
-#allTabsMenu-allTabsViewTabs .all-tabs-item {
+.panel-subview-body > .all-tabs-item {
     border-radius: var(--arrowpanel-menuitem-border-radius) !important;
     box-shadow: none !important;
     margin-inline: 4px !important;
@@ -408,7 +408,8 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
     background: none !important;
 }
 
-#allTabsMenu-allTabsViewTabs {
+#allTabsMenu-allTabsViewTabs,
+#allTabsMenu-hiddenTabsView > .panel-subview-body {
     margin: var(--panel-subview-body-padding) !important;
     margin-top: 0 !important;
     padding-block: 0 !important;

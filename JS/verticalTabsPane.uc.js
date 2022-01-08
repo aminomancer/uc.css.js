@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Vertical Tabs Pane
-// @version        1.5.4
+// @version        1.5.5
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Create a vertical pane across from the sidebar that functions like the vertical
@@ -333,6 +333,8 @@
                     "TabAttrModified",
                     "TabClose",
                     "TabMove",
+                    "TabHide",
+                    "TabShow",
                     "TabPinned",
                     "TabUnpinned",
                     "TabSelect",
@@ -524,7 +526,7 @@
          * @param {object} e (an event object)
          */
         handleEvent(e) {
-            let tab = e.target.tab;
+            let { tab } = e.target;
             switch (e.type) {
                 case "mousedown":
                     this._onMouseDown(e, tab);
@@ -550,9 +552,11 @@
                 case "deactivate":
                     this._onDeactivate(e);
                     break;
-                case "TabAttrModified":
+                case "TabHide":
+                case "TabShow":
                 case "TabPinned":
                 case "TabUnpinned":
+                case "TabAttrModified":
                 case "TabBrowserDiscarded":
                     this._tabAttrModified(e.target);
                     break;

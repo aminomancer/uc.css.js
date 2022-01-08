@@ -1590,13 +1590,18 @@ link[href="chrome://global/content/printPagination.css"]
         background-image: url(chrome://branding/content/about-logo.svg) !important;
     }
 
+    #aboutDialog {
+        width: auto !important;
+        max-width: 1000px !important;
+    }
+
     #aboutDialogContainer {
         border: 0 !important;
         background-color: var(--arrowpanel-background) !important;
         background-image: radial-gradient(
-            circle at 19% 40%,
+            circle at calc((210px / 2) + 30px) calc(20% + 20px + 52px),
             hsla(255, 80%, 90%, 0.3),
-            transparent 50%
+            transparent 35%
         );
         background-blend-mode: overlay !important;
         color: var(--ui-text-100) !important;
