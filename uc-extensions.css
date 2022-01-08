@@ -134,6 +134,10 @@ menupopup#viewSidebarMenu
     list-style-image: url(chrome://userchrome/content/material/tabstash-logo.svg) !important;
 }
 
+#pageAction-urlbar-tab-stash_condordes_net {
+    list-style-image: url(chrome://userchrome/content/material/tabstash-one.svg) !important;
+}
+
 .webextension-browser-action:is([data-extensionid="jid1-KKzOGWgsW3Ao4Q@jetpack"i], [label="I don't care about cookies"])[badge="⛔"]
     .toolbarbutton-badge {
     background-color: transparent !important;
