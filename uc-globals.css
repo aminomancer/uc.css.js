@@ -15,6 +15,8 @@ but other than that these variables should be available everywhere. */
     font-family: "Fira Code UC";
     font-style: normal;
     src: local("Fira Code"), local("Fira Code Light"), url(../fonts/FiraCode-VF.woff);
+    font-feature-settings: "ss01", "ss02", "cv19", "ss05", "ss07", "ss08", "cv14", "cv25", "cv28",
+        "cv32";
 }
 
 :root {

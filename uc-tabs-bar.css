@@ -423,7 +423,12 @@ panelview .all-tabs-button:not([disabled], [open]):focus {
     list-style-image: url(chrome://userchrome/content/skin/container-plus.svg);
 }
 
-:is(#allTabsMenu-containerTabsButton, #allTabsMenu-searchTabs) .toolbarbutton-text {
+#allTabsMenu-hiddenTabsButton {
+    list-style-image: url(chrome://userchrome/content/hide-password.svg);
+}
+
+:is(#allTabsMenu-containerTabsButton, #allTabsMenu-searchTabs, #allTabsMenu-hiddenTabsButton)
+    .toolbarbutton-text {
     padding-inline-start: var(--arrowpanel-subviewbutton-iconic-gap, 8px);
 }
 
