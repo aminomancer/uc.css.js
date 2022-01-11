@@ -81,8 +81,13 @@ user_pref("ui.key.menuAccessKeyFocuses", false);
 // style oriented prefs
 // use GTK style for in-content scrollbars
 user_pref("widget.non-native-theme.scrollbar.style", 2);
-user_pref("reader.color_scheme", "dark");
+// set the scrollbar width
+user_pref("widget.non-native-theme.win.scrollbar.use-system-size", false);
+user_pref("widget.non-native-theme.scrollbar.size.override", 11);
+user_pref("widget.non-native-theme.gtk.scrollbar.thumb-size", 0.818);
+// set the default background color for color-scheme: dark. see it for example on about:blank
 user_pref("browser.display.background_color.dark", "#19191b");
+// findbar highlight and selection colors
 user_pref("ui.textHighlightBackground", "#7755FF");
 user_pref("ui.textHighlightForeground", "#FFFFFF");
 user_pref("ui.textSelectBackground", "#FFFFFF");
@@ -91,10 +96,14 @@ user_pref("ui.textSelectAttentionForeground", "#FFFFFF");
 user_pref("ui.textSelectDisabledBackground", "#7755FF");
 user_pref("ui.textSelectBackgroundAttention", "#FF3388");
 user_pref("ui.textSelectBackgroundDisabled", "#7755FF");
+// spell check style
 user_pref("ui.SpellCheckerUnderline", "#E2467A");
 user_pref("ui.SpellCheckerUnderlineStyle", 1);
+// IME style (for example when typing pinyin or hangul)
 user_pref("ui.IMERawInputBackground", "#000000");
 user_pref("ui.IMESelectedRawTextBackground", "#7755FF");
+// about:reader dark mode
+user_pref("reader.color_scheme", "dark");
 
 // windows font settings - does nothing on macOS or linux
 user_pref("gfx.font_rendering.cleartype_params.cleartype_level", 100);
