@@ -13,11 +13,6 @@ and in particular, tooltips and scrollbars. */
 @namespace html url(http://www.w3.org/1999/xhtml);
 @namespace parsererror url(http://www.mozilla.org/newlayout/xml/parsererror.xml);
 
-/* browser scrollbars */
-*|* {
-    scrollbar-width: thin;
-}
-
 /* overlay scrollbars in browser chrome.
 the * at the beginning basically means "only select this scrollbar if it has a XUL ancestor"
 so the purpose is to exclude scrollbars with HTML ancestors. */
