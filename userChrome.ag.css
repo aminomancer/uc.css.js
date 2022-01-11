@@ -217,16 +217,17 @@ scrollbar[disabled="true"] {
     margin: 0 !important;
 }
 
-/* overlay scrollbars in HTML content, if the pref is enabled.
-previously this theme implemented overlay scrollbars everywhere.
-but they can cause problems on certain websites where multiple scrollable divs
-are nested inside each other or directly overlapping each other.
-for example, a scrollable chat box anchored to the right side of the page
-will not be scrollable because its scrollbar overlaps with the page's scrollbar.
-there isn't an easy way to fix this because all this stuff is implemented in C++ and
-it can be pretty burdensome. the clear solution is to just not use overlay scrollbars
-wherever they might overlap. so I created a pref to ensure users can disable it in web content.
-due to the way -moz-bool-pref works it's cleaner to make this pref opt-in than opt-out. */
+/* overlay scrollbars in content, if the pref is enabled. I don't recommend using this pref because
+overlay scrollbars can cause problems on certain websites where multiple scrollable divs are nested
+inside each other or directly overlapping each other. for example, a scrollable chat box anchored to
+the right side of the page will not be scrollable because its scrollbar overlaps with the page's
+scrollbar. there isn't an easy way to fix this because all this stuff is implemented in C++ and it
+can be pretty burdensome. the clear solution is to just not use overlay scrollbars wherever they
+might overlap. you can get visually good results (not overlay but still pretty) by just setting
+widget.non-native-theme.scrollbar.style to 2. you might want to try different settings. 0 is the
+default, and 1 through 5 enable macOS, GTK, android, win10, win11 respectively. I prefer the GTK
+style (2) but macOS (1) and android (3) are very similar. some might prefer the win11 style (5).
+probably nobody is going to want win10 (4) lol. */
 @supports -moz-bool-pref("userChrome.css.overlay-scrollbars.in-content") {
     scrollbar {
         appearance: none !important;

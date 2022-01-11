@@ -32,8 +32,6 @@ user_pref("layout.css.color-mix.enabled", true);
 user_pref("layout.css.moz-outline-radius.enabled", true);
 // avoid native styling
 user_pref("browser.display.windows.non_native_menus", 1);
-user_pref("widget.disable-native-theme-for-content", true);
-user_pref("widget.non-native-theme.win.scrollbar.use-system-size", false);
 user_pref("widget.content.allow-gtk-dark-theme", true);
 // keep "all tabs" menu available at all times, useful for all tabs menu expansion pack
 user_pref("browser.tabs.tabmanager.enabled", true);
@@ -48,4 +46,4 @@ user_pref("ui.infotext", "#FFFFFF");
 user_pref("ui.infobackground", "#hsl(233, 36%, 11%)");
 
 // REQUIRED on macOS
-// user_pref("widget.macos.native-context-menus", false);
+user_pref("widget.macos.native-context-menus", false);

@@ -148,6 +148,7 @@ I also recommend setting the following prefs in `about:config`. There are two pr
 | userChrome.css.mac-ui-fonts | Boolean | true | Replace UI font with SF Pro, the system font for macOS. [Click here for details](#fonts) |
 | userChrome.css.menupopup-shadows | Boolean | false | Add a shadow behind context menus and panels |
 | userChrome.css.overlay-scrollbars.in-content | Boolean | false | Overlay scrollbars are already enabled in the chrome UI. This pref enables them in web content |
+| widget.non-native-theme.scrollbar.style | Number | 2 | Enable the GTK scrollbar style in web content, regardless of your OS. Supports: 0 (default), 1 (macOS), 2 (GTK), 3 (android), 4 (win10), 5 (win11) |
 | userChrome.css.remove-tooltip-borders | Boolean | false | Remove the thin border on tooltips. Not recommended |
 | userChrome.css.titlebar-buttons-on-left | Boolean | false | If true, move the titlebar buttons (close/min/max) to the left side of the window |
 | userChrome.css.ctrl-tab-backdrop-overlay | Boolean | true | If true, dim the rectangular area behind the Ctrl+tab panel to increase contrast |
@@ -165,7 +166,6 @@ I also recommend setting the following prefs in `about:config`. There are two pr
 | userChrome.urlbar-results.disable\_animation | Boolean | false | Toggle to true if you don't want the urlbar results to animate as they pop up |
 | userChrome.urlbar-results.hide-help-button | Boolean | true | New "Firefox Suggest" urlbar results have little help buttons. This will hide them |
 | widget.content.allow-gtk-dark-theme | Boolean | true | May style some in-content elements consistently with Linux themes |
-| widget.disable-native-theme-for-content | Boolean | true | Enables Firefox's custom appearance for elements like checkboxes. Skips the "native" appearance given by the OS stylesheets. |
 | <i>widget.macos.native-context-menus</i> | Boolean | false | Required to use some of my scripts on macOS, and for context menu styles on macOS |
 | devtools.inspector.showAllAnonymousContent | Boolean | true | Show native anonymous content (like scrollbars or tooltips) and user agent shadow roots (like the components of an `<input>` element) in the inspector |
 | devtools.inspector.showUserAgentStyles | Boolean | true | Show user agent styles in the inspector |

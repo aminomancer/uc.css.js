@@ -6,7 +6,8 @@
 
 /* for the places organizer, e.g. "Manage Bookmarks" */
 
-@-moz-document url-prefix("chrome://browser/content/places/places.xhtml")
+@-moz-document url-prefix("chrome://browser/content/places/places.xhtml"),
+    url-prefix("about:downloads")
 {
     :root {
         --in-content-button-background-disabled: hsla(0, 20%, 80%, 0.12);
@@ -81,9 +82,5 @@
     menubar > menu[_moz-menuactive="true"]:not([disabled="true"]) {
         background-color: var(--organizer-hover-background) !important;
         color: var(--organizer-hover-color) !important;
-    }
-
-    #downloadsRichListBox {
-        border: none !important;
     }
 }

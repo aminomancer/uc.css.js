@@ -106,16 +106,12 @@ menupopup#viewSidebarMenu
 }
 
 /* cookie remover */
-:is(.webextension-browser-action, .eom-addon-button)[label="Remove cookies for this site"]
-    .toolbarbutton-icon,
 :is(.webextension-browser-action, .eom-addon-button)[data-extensionid="{3507f56d-2ef5-45c1-b6d7-5297a0ba7642}"i]
     .toolbarbutton-icon {
     list-style-image: url(chrome://userchrome/content/skin/controlcenter/3rdpartycookies-disabled.svg);
 }
 
 /* i don't care about cookies */
-:is(.webextension-browser-action, .eom-addon-button)[label="I don't care about cookies"]
-    .toolbarbutton-icon,
 :is(.webextension-browser-action, .eom-addon-button)[data-extensionid="jid1-KKzOGWgsW3Ao4Q@jetpack"i]
     .toolbarbutton-icon {
     list-style-image: url(chrome://userchrome/content/skin/controlcenter/3rdpartycookies.svg);
@@ -138,18 +134,29 @@ menupopup#viewSidebarMenu
     list-style-image: url(chrome://userchrome/content/material/tabstash-one.svg) !important;
 }
 
-.webextension-browser-action:is([data-extensionid="jid1-KKzOGWgsW3Ao4Q@jetpack"i], [label="I don't care about cookies"])[badge="⛔"]
+:is(.customization-target, .widget-overflow-list)
+    .webextension-browser-action[data-extensionid="jid1-KKzOGWgsW3Ao4Q@jetpack"i]
     .toolbarbutton-badge {
     background-color: transparent !important;
-    background-image: url(chrome://userchrome/content/error.svg) !important;
     background-size: 12px !important;
     width: 12px !important;
     height: 12px !important;
     background-repeat: no-repeat !important;
     background-position: center !important;
-    fill: var(--warning-color) !important;
     box-shadow: none !important;
     color: transparent !important;
+}
+
+.webextension-browser-action[data-extensionid="jid1-KKzOGWgsW3Ao4Q@jetpack"i][badge="⛔"]
+    .toolbarbutton-badge {
+    background-image: url(chrome://userchrome/content/error.svg) !important;
+    fill: var(--warning-color) !important;
+}
+
+.webextension-browser-action[data-extensionid="jid1-KKzOGWgsW3Ao4Q@jetpack"i][badge="✅"]
+    .toolbarbutton-badge {
+    background-image: url(chrome://userchrome/content/material/verified.svg) !important;
+    fill: var(--update-badge-bg) !important;
 }
 
 /* pushbullet, an extension for controlling, sharing stuff with, and receiving notifications from your phone */

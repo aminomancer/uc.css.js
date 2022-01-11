@@ -281,6 +281,10 @@ panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem {
     font: menu !important;
 }
 
+#ContentSelectDropdown menucaption {
+	background: none !important;
+}
+
 :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
     :where(menu, menuitem, menucaption).menuitem-iconic,
 panel[type="autocomplete-richlistbox"]
