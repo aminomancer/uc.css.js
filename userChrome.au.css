@@ -219,6 +219,10 @@ the last 75% or so of this stylesheet is dedicated to restoring pre-proton conte
         background-color: var(--panel-item-active-bgcolor);
     }
 
+    .panel-footer > button {
+        border-radius: var(--general-button-border-radius);
+    }
+
     .panel-footer > button:not([disabled], :active):is(:hover, :focus-visible) {
         background-color: var(
             --button-hover-bgcolor,
@@ -913,154 +917,22 @@ this way we don't animate tabs that were simply moved rather than created */
         box-shadow: revert;
     }
 
-    /* the following animations require restorePreProtonDownloadsButton.uc.js, fx-autoconfig, and the resources/downloads folder */
-    :root[pre-proton-downloads-button]
-        #downloads-button
+    #downloads-button
         > .toolbarbutton-badge-stack
         > #downloads-indicator-progress-outer {
-        visibility: hidden;
-        top: calc(50% - 8.5px);
-        left: calc(50% - 8.5px);
-        width: 17px;
-        height: 16.5px;
-        border-radius: 100%;
-        border-width: 2px;
-    }
-
-    :root[pre-proton-downloads-button]
-        #downloads-button[progress]:not([notification], [animate])
-        > .toolbarbutton-badge-stack
-        > #downloads-indicator-progress-outer {
-        visibility: visible;
-    }
-
-    :root[pre-proton-downloads-button]
-        #downloads-button[progress]:not([notification], [animate])
-        > .toolbarbutton-badge-stack
-        > #downloads-indicator-anchor
-        > #downloads-indicator-icon {
-        visibility: hidden !important;
-    }
-
-    :root[pre-proton-downloads-button] #downloads-indicator-progress-inner {
-        position: relative;
-        background: conic-gradient(
-            var(--toolbarbutton-icon-fill-attention) var(--download-progress-pcent),
-            transparent var(--download-progress-pcent)
-        );
-        border-radius: 100%;
+        top: calc(50% - 10px);
+        left: calc(50% - 10px);
+        width: 20px;
+        height: 20px;
+        border-radius: 0;
+        border: none;
+        background-image: url(chrome://userchrome/content/downloads/progress-circle.svg);
+        background-position: center;
+        background-size: 20px;
     }
 
     :root[pre-proton-downloads-button] #downloads-indicator-anchor {
         list-style-image: url(chrome://userchrome/content/downloads/download-icons.svg#arrow-with-bar);
-    }
-
-    @keyframes downloadsIndicatorStartDip {
-        0% {
-            transform: translateY(0);
-            animation-timing-function: linear;
-        }
-        50% {
-            transform: translateY(0);
-            animation-timing-function: ease-out;
-        }
-        88% {
-            transform: translateY(3px);
-            animation-timing-function: ease-out;
-        }
-        100% {
-            transform: translateY(0);
-        }
-    }
-
-    @keyframes downloadsIndicatorFinishPulse {
-        from {
-            transform: scale(1);
-        }
-        37.5% {
-            transform: scale(1.4);
-            animation-timing-function: ease-out;
-        }
-        to {
-            transform: scale(1);
-            animation-timing-function: ease-in;
-        }
-    }
-
-    :root[pre-proton-downloads-button] #downloads-indicator-icon {
-        visibility: visible !important;
-    }
-
-    :root[pre-proton-downloads-button]
-        #downloads-button[notification="start"]
-        > .toolbarbutton-badge-stack
-        > #downloads-indicator-anchor
-        > #downloads-indicator-icon {
-        animation-name: downloadsIndicatorStartDip;
-        animation-duration: 360ms;
-        animation-delay: 100ms;
-        animation-iteration-count: 1;
-    }
-
-    :root[pre-proton-downloads-button]
-        #downloads-button[notification="finish"]
-        > .toolbarbutton-badge-stack
-        > #downloads-indicator-anchor
-        > #downloads-indicator-icon {
-        animation-name: downloadsIndicatorFinishPulse;
-        animation-delay: 250ms;
-        animation-duration: 300ms;
-        animation-iteration-count: 2;
-    }
-
-    :root[pre-proton-downloads-button] #downloads-indicator-finish-box {
-        display: none !important;
-    }
-
-    :root[pre-proton-downloads-button]
-        #downloads-button
-        > .toolbarbutton-badge-stack
-        > #downloads-indicator-start-box {
-        pointer-events: none;
-        -moz-context-properties: fill, fill-opacity, stroke;
-        grid-area: initial;
-        top: -4px !important;
-        left: calc(50% - 10px);
-        z-index: 0;
-        height: 48px;
-    }
-
-    :root[pre-proton-downloads-button] #downloads-indicator-start-image {
-        min-width: 658px;
-        height: 48px;
-        list-style-image: none;
-    }
-
-    @keyframes downloadsIndicatorNotificationStart {
-        from {
-            transform: translateX(0);
-            fill: var(--toolbarbutton-icon-fill);
-            fill-opacity: var(--toolbarbutton-icon-fill-opacity);
-        }
-        to {
-            transform: translateX(-637.7px);
-            fill: var(--toolbarbutton-icon-fill-attention);
-            fill-opacity: 1;
-        }
-    }
-
-    :root[pre-proton-downloads-button]
-        #downloads-button[animate][notification="start"]
-        > .toolbarbutton-badge-stack
-        > #downloads-indicator-start-box
-        > #downloads-indicator-start-image {
-        --anim-steps: 31 !important;
-        list-style-image: url(chrome://userchrome/content/downloads/notification-start-animation.svg);
-        animation-name: downloadsIndicatorNotificationStart;
-        animation-duration: 540ms;
-        transform: translateX(0px);
-        animation-delay: 64ms;
-        animation-timing-function: steps(31);
     }
 
     .customization-target :is(#reload-button, #stop-button) > .toolbarbutton-icon {

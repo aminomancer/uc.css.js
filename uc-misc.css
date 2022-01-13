@@ -529,6 +529,10 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
             font-weight: var(--uc-font-weight-bold, 500) !important;
         }
 
+        strong {
+            font-weight: var(--uc-font-weight-extrabold, 600);
+        }
+
         tooltip,
         #statuspanel {
             --uc-tooltip-inner-padding: 5px 8px 6px 8px;
@@ -597,6 +601,12 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
 
         .dialog-button-box button {
             font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
+        }
+
+        #protections-popup-milestones-text {
+            font-weight: var(--uc-font-weight-bold, 600) !important;
+            font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
+            font-size: 1.1em !important;
         }
 
         @-moz-document url-prefix("chrome://browser/content/syncedtabs/sidebar.xhtml")

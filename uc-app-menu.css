@@ -96,7 +96,7 @@
     transform: none !important;
 }
 
-#PanelUI-menu-button[badge-status] .toolbarbutton-badge {
+#PanelUI-menu-button[badge-status] > .toolbarbutton-badge-stack > .toolbarbutton-badge {
     filter: none !important;
 }
 

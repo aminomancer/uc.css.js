@@ -121,6 +121,7 @@ menupopup {
     --in-content-primary-button-background: var(--purple-40) !important;
     --in-content-primary-button-background-hover: var(--purple-35) !important;
     --in-content-primary-button-background-active: var(--purple-30) !important;
+    --in-content-primary-button-text-color: var(--light-on-dark-button-text-color) !important;
 
     --menu-background-color: var(--arrowpanel-background) !important;
     --menu-color: var(--ui-text-80) !important;

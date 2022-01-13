@@ -616,7 +616,7 @@ so in other words it won't show if audio is playing until you hover the general 
 /* attention indicator */
 .tabbrowser-tab:is([image], [pinned]) > .tab-stack > .tab-content[attention]:not([selected="true"]),
 .tabbrowser-tab > .tab-stack > .tab-content[pinned][titlechanged]:not([selected="true"]) {
-    background-image: url(chrome://userchrome/content/indicator-tab-attention.svg) !important;
+    background-image: url(chrome://userchrome/content/indicator-tab-attention-purple.svg) !important;
     background-position: right 4px top 4px !important;
     background-size: 10px !important;
     background-repeat: no-repeat;

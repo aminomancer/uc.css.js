@@ -136,7 +136,8 @@ menupopup#viewSidebarMenu
 
 :is(.customization-target, .widget-overflow-list)
     .webextension-browser-action[data-extensionid="jid1-KKzOGWgsW3Ao4Q@jetpack"i]
-    .toolbarbutton-badge {
+    > .toolbarbutton-badge-stack
+    > .toolbarbutton-badge {
     background-color: transparent !important;
     background-size: 12px !important;
     width: 12px !important;

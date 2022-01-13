@@ -172,6 +172,7 @@ I also recommend setting the following prefs in `about:config`. There are two pr
 | <i>widget.macos.native-context-menus</i> | Boolean | false | Required to use some of my scripts on macOS, and for context menu styles on macOS |
 | devtools.inspector.showAllAnonymousContent | Boolean | true | Show native anonymous content (like scrollbars or tooltips) and user agent shadow roots (like the components of an `<input>` element) in the inspector |
 | devtools.inspector.showUserAgentStyles | Boolean | true | Show user agent styles in the inspector |
+| browser.newtabpage.activity-stream.asrouter.devtoolsEnabled | Boolean | true | Enable [ASRouter Devtools](https://firefox-source-docs.mozilla.org/browser/components/newtab/content-src/asrouter/docs/index.html) at about:newtab#devtools (useful if you're making your own CSS theme) |
 
 </details>
 
@@ -664,11 +665,9 @@ _"Inspect Extension"_ opens a devtools tab targeting the extension background. T
 
 #### [Downloads Delete File Command](/JS/downloadsDeleteFileCommand.uc.js):
 
-Adds a new "Delete" menuitem when right-clicking a download in the downloads panel or the downloads manager. This will delete the downloaded file from disk. <details><summary>💬 <i><b>More details...</b></i></summary>
+⚠️ _This feature is included in Firefox v98 (as of 12 Jan 2022), so you don't need this script unless you use an old version of Firefox._ Adds a new "Delete" menuitem when right-clicking a download in the downloads panel or the downloads manager. This will delete the downloaded file from disk. <details><summary>💬 <i><b>More details...</b></i></summary>
 
 It's important since the ability to "temporarily" download files with Firefox is being removed as part of [bug 1733587](https://bugzilla.mozilla.org/show_bug.cgi?id=1733587) to reduce the risk of data loss. When you choose to "open" a file instead of "save" it, Firefox will no longer save the file in your _Temp_ folder and schedule the file for deletion when you quit Firefox or exit private browsing mode. Instead it will save the file in your chosen _Downloads_ folder. So, being able to clean up these files from the context menu is a nice feature.
-
-This will most likely be released in Firefox \(see [bug 1745624](https://bugzilla.mozilla.org/show_bug.cgi?id=1745624)\), but I did a lot of the testing for it with an autoconfig script. So, it isn't any extra work to publish this here, at least until [the patch](/experimental/downloads%20context%20delete%20file%20patch) makes it into a release build. When you download a version of Firefox that includes the menuitem, you can just delete this script from your JS folder.
 
 </details>
 
@@ -965,11 +964,35 @@ It's not like there aren't other ways to see where the panel is anchored, but wh
 
 </details>
 
-#### [Restore pre-Proton Downloads Button](/JS/restorePreProtonDownloadsButton.uc.js):
+#### Restore pre-Proton Downloads Button:
 
-✨ Restores the pre-Proton downloads button icons and animations.<details><summary>💬 <i><b>More details...</b></i></summary>
+⚠️ _This script has been made obsolete by new animations I made for v3.1.1 (13 Jan 2022). If you had `restorePreProtonDownloadsButton.uc.js` or `restorePreProtonDownloadsButton-standalone.uc.js` installed, delete it._ Restores the pre-Proton downloads button icon and animations. <details><summary>💬 <i><b>If you don't use duskFox...</b></i></summary>
 
-I kept the new progress animation, but I made it thicker. If you use my theme or my icons you'll definitely want this for the sake of consistency. If you don't use my theme or icons but you still want the old downloads button back, download the [_standalone_](/JS/restorePreProtonDownloadsButton-standalone.uc.js) version instead. The standalone version has the stylesheet and icons built-in, so doesn't require anything else except a script loader. This version requires [userChrome.au.css](/userChrome.au.css) and the [resources/downloads](/resources/downloads) folder.
+You're going to need the [resources/downloads](/resources/downloads) folder, so download that. Then, (with fx-autoconfig installed) add these three lines to utils/chrome.manifest:
+
+```
+override chrome://browser/skin/downloads/downloads.svg ../resources/downloads/downloads.svg
+override chrome://browser/skin/downloads/notification-start-animation.svg ../resources/downloads/notification-start-animation.svg
+override chrome://browser/skin/downloads/notification-finish-animation.svg ../resources/downloads/notification-finish-animation.svg
+```
+
+With the resources out of the way, add this to userChrome.css:
+
+```
+#downloads-button
+    > .toolbarbutton-badge-stack
+    > #downloads-indicator-progress-outer {
+    top: calc(50% - 10px) !important;
+    left: calc(50% - 10px) !important;
+    width: 20px !important;
+    height: 20px !important;
+    border-radius: 0 !important;
+    border: none !important;
+    background-image: url(chrome://userchrome/content/downloads/progress-circle.svg) !important;
+    background-position: center !important;
+    background-size: 20px !important;
+}
+```
 
 </details>
 

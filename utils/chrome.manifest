@@ -74,6 +74,8 @@ override chrome://browser/skin/places/folder-smart.svg ../resources/material/pla
 override chrome://browser/skin/places/tag.svg ../resources/material/places/tag.svg
 override chrome://browser/skin/places/history.svg ../resources/skin/history.svg
 override chrome://browser/skin/downloads/downloads.svg ../resources/downloads/downloads.svg
+override chrome://browser/skin/downloads/notification-start-animation.svg ../resources/downloads/notification-start-animation.svg
+override chrome://browser/skin/downloads/notification-finish-animation.svg ../resources/downloads/notification-finish-animation.svg
 override chrome://browser/skin/fullscreen.svg ../resources/skin/fullscreen.svg
 override chrome://browser/skin/fullscreen-exit.svg ../resources/skin/fullscreen-exit.svg
 override chrome://browser/skin/controlcenter/socialblock.svg ../resources/material/dislike.svg

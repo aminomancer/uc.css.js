@@ -270,7 +270,7 @@
     #downloadsPanel-blockedSubview[verdict="Uncommon"] .downloadsPanel-blockedSubview-image,
     #downloadsListBox > richlistitem[verdict="Uncommon"] .downloadBlockedBadge {
         background-image: url(chrome://userchrome/content/info-filled.svg) !important;
-        fill: var(--attention-color) !important;
+        fill: var(--purple-25) !important;
     }
 
     #downloadsPanel-blockedSubview[verdict="PotentiallyUnwanted"]

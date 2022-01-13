@@ -136,9 +136,12 @@ this connects with .panel-subview-body rules in userChrome.au.css */
     margin-top: revert !important;
 }
 
-#extension-notification-panel,
-#notification-popup {
+#extension-notification-panel {
     margin-top: -1px !important;
+}
+
+#notification-popup {
+    margin-top: calc(-1px - var(--uc-panel-top-offset, 0px)) !important;
 }
 
 panel[type="arrow"][side="top"] {
@@ -1773,7 +1776,23 @@ panel .header {
     margin-top: 0 !important;
 }
 
-#protections-popup-milestones,
-#protections-popup-milestones-content {
+#protections-popup-milestones {
+    margin: var(--arrowpanel-menuitem-inline-margin) !important;
+    margin-top: 0 !important;
+    padding: 0 !important;
     background: none !important;
+}
+
+#protections-popup-milestones-content {
+	padding: var(--arrowpanel-menuitem-padding) !important;
+	background-color: var(--arrowpanel-faint) !important;
+    border-radius: var(--panel-border-radius-mini) !important;
+}
+
+#protections-popup-milestones-content:is(:hover, :focus-visible) {
+	background-color: var(--arrowpanel-dimmed) !important;
+}
+
+#protections-popup-milestones-text {
+    margin-inline: 4px !important;
 }

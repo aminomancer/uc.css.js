@@ -43,7 +43,8 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
 /* toolbar button badges */
 :is(.customization-target, .widget-overflow-list)
     :is(toolbarbutton, toolbaritem):not([attention])
-    .toolbarbutton-badge {
+    > .toolbarbutton-badge-stack
+    > .toolbarbutton-badge {
     background-color: var(--uc-toolbarbutton-badge-bgcolor, hsl(0, 100%, 42.5%)) !important;
     color: var(--toolbar-color, white) !important;
     box-shadow: 0 1px 1px -1px #ffffff4d inset, 0 -1px 1px -1px #00000080 inset, 0 1px 1px #1e1e2026,
@@ -60,7 +61,8 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
 
 :is(.customization-target, .widget-overflow-list)
     #downloads-button[attention]
-    .toolbarbutton-badge {
+    > .toolbarbutton-badge-stack
+    > .toolbarbutton-badge {
     margin-right: -5.5px !important;
     margin-top: -5.5px !important;
     width: 10px !important;
@@ -73,8 +75,19 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
 }
 
 :is(.customization-target, .widget-overflow-list)
+    #downloads-button[attention="info"]
+    > .toolbarbutton-badge-stack
+    > .toolbarbutton-badge {
+    background-color: transparent !important;
+    -moz-context-properties: none !important;
+    border-radius: revert !important;
+    background-image: url(chrome://userchrome/content/indicator-tab-attention-purple.svg) !important;
+}
+
+:is(.customization-target, .widget-overflow-list)
     #downloads-button[attention="warning"]
-    .toolbarbutton-badge {
+    > .toolbarbutton-badge-stack
+    > .toolbarbutton-badge {
     background-color: var(--low-warning-icon-detail) !important;
     fill: var(--low-warning-icon-background) !important;
     border-radius: 50% !important;
@@ -82,7 +95,8 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
 
 :is(.customization-target, .widget-overflow-list)
     #downloads-button[attention="severe"]
-    .toolbarbutton-badge {
+    > .toolbarbutton-badge-stack
+    > .toolbarbutton-badge {
     background-color: var(--warning-icon-detail) !important;
     fill: var(--warning-icon-background) !important;
     border-radius: 50% !important;
@@ -90,7 +104,8 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
 
 :is(.customization-target, .widget-overflow-list)
     #fxa-toolbar-menu-button[badge-status="login_failed"]
-    .toolbarbutton-badge {
+    > .toolbarbutton-badge-stack
+    > .toolbarbutton-badge {
     background: url(chrome://userchrome/content/skin/controlcenter/warning.svg) no-repeat
         center/contain !important;
     stroke: var(--low-warning-icon-detail) !important;
@@ -581,12 +596,31 @@ notifications are translucent with acrylic effect. enable layout.css.backdrop-fi
     --in-content-button-background-hover: var(--desaturate-dimmed-further) !important;
     --in-content-button-background-active: var(--desaturate-dimmed-even-further) !important;
     --in-content-button-border-radius: var(--general-button-border-radius) !important;
-    --in-content-link-color: var(--in-parent-link-color) !important;
-    --in-content-link-color-hover: var(--in-parent-link-color-hover) !important;
-    --in-content-link-color-active: var(--in-parent-link-color-active) !important;
+    --in-content-link-color: var(--purple-35) !important;
+    --in-content-link-color-hover: var(--purple-30) !important;
+    --in-content-link-color-active: var(--purple-30) !important;
     --notification-button-background: var(--desaturate-dimmed) !important;
     --notification-button-background-hover: var(--desaturate-dimmed-further) !important;
     --notification-button-background-active: var(--desaturate-dimmed-even-further) !important;
+    --in-content-primary-button-background: var(--purple-40) !important;
+    --in-content-primary-button-background-hover: var(--purple-35) !important;
+    --in-content-primary-button-background-active: var(--purple-30) !important;
+    --in-content-primary-button-text-color: var(--light-on-dark-button-text-color) !important;
+    --in-content-item-selected: var(--purple-40) !important;
+    --in-content-border-hover: var(--dialog-box-border-hover) !important;
+    --checkbox-border-color: var(--in-content-box-border-color) !important;
+    --checkbox-checked-border-color: transparent !important;
+    --checkbox-unchecked-bgcolor: var(--in-content-button-background) !important;
+    --checkbox-unchecked-hover-bgcolor: var(--in-content-button-background-hover) !important;
+    --checkbox-unchecked-active-bgcolor: var(--in-content-button-background-active) !important;
+    --checkbox-checked-bgcolor: var(--in-content-primary-button-background) !important;
+    --checkbox-checked-color: var(--in-content-primary-button-text-color) !important;
+    --checkbox-checked-hover-bgcolor: var(--in-content-primary-button-background-hover) !important;
+    --checkbox-checked-active-bgcolor: var(
+        --in-content-primary-button-background-active
+    ) !important;
+    --dropdown-bgcolor: var(--arrowpanel-background) !important;
+    --in-content-button-vertical-padding: 5px !important;
 }
 
 /* hide notifications when the bookmarks toolbar is visible */
@@ -610,6 +644,12 @@ notifications are translucent with acrylic effect. enable layout.css.backdrop-fi
 
 .notificationbox-stack :is(notification, notification-message) {
     min-height: revert !important;
+}
+
+.notificationbox-stack notification-message[type="system"] {
+    --uc-notification-message-close-button-opacity: 1 !important;
+    --uc-notification-message-close-button-transform: none !important;
+    --uc-notification-message-content-margin-inline-start: 30px !important;
 }
 
 .notificationbox-stack notification {
@@ -733,6 +773,7 @@ link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infob
     white-space: nowrap !important;
     text-overflow: ellipsis !important;
     overflow: hidden !important;
+    margin-inline-start: var(--uc-notification-message-content-margin-inline-start, 8px) !important;
 }
 
 link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-content .notification-message
@@ -832,8 +873,8 @@ link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infob
     height: 20px !important;
     margin: 0 4px !important;
     position: absolute !important;
-    opacity: 0 !important;
-    transform: translateX(-15px) scale(0.5) !important;
+    opacity: var(--uc-notification-message-close-button-opacity, 0) !important;
+    transform: var(--uc-notification-message-close-button-transform, translateX(-15px) scale(0.5)) !important;
 }
 
 notification:hover .messageCloseButton,

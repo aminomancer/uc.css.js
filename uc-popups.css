@@ -671,11 +671,12 @@ panel[type="autocomplete-richlistbox"]
 :is(.tab-prompt-dialog, #window-modal-dialog) .dialogBox {
     margin-top: 0px !important; /* tab-prompt-dialogs are anchored to the top of the browser content area.
     this makes them look like they emerge from under the navbar. */
+    border: 1px solid var(--arrowpanel-border-color);
 }
 
 :is(.tab-prompt-dialog, #window-modal-dialog) :is(.dialogBox, .dialogFrame) {
     border-radius: 0 0 5px 5px !important;
-    border-top-style: none !important;
+    border-top-width: 0 !important;
 }
 
 .content-prompt-dialog :is(.dialogBox, .dialogFrame) {
@@ -739,7 +740,6 @@ panel[type="autocomplete-richlistbox"]
 
 :is(#window-modal-dialog, .tab-prompt-dialog) > .dialogOverlay[style] .dialogFrame {
     background-color: var(--ui-quaternary-bg) !important;
-    border: 1px solid var(--arrowpanel-border-color);
 }
 
 /* center text in any dialog box */
@@ -1148,7 +1148,8 @@ panel[type="autocomplete-richlistbox"]
     url-prefix("chrome://global/content/print.html"),
     url("chrome://browser/content/places/bookmarkProperties.xhtml"),
     url("chrome://browser/content/places/bookmarkProperties2.xhtml"),
-    url-prefix("chrome://browser/content/sanitize.xhtml")
+    url-prefix("chrome://browser/content/sanitize.xhtml"),
+    url("chrome://browser/content/spotlight.html")
 {
     :root[dialogroot],
     :root[dialogroot] dialog {
