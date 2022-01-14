@@ -8,8 +8,10 @@ user_pref("datareporting.healthreport.uploadEnabled", false);
 user_pref("datareporting.policy.dataSubmissionPolicyBypassNotification", true);
 user_pref("browser.crashReports.unsubmittedCheck.autoSubmit2", false);
 // allow installing the unsigned search extensions.
-// the localized search extensions currently can't be signed because of https://github.com/mozilla/addons-linter/issues/3911
-// so to use them, we must disable the signature requirement and go to about:addons > gear icon > install addon from file > find the .zip file
+// the localized search extensions currently can't be signed because of
+// https://github.com/mozilla/addons-linter/issues/3911 so to use them, we must
+// disable the signature requirement and go to about:addons > gear icon >
+// install addon from file > find the .zip file
 user_pref("xpinstall.signatures.required", false);
 user_pref("extensions.autoDisableScopes", 0);
 // eliminate some nuisances
@@ -22,6 +24,9 @@ user_pref("browser.proton.places-tooltip.enabled", true);
 user_pref("layout.css.moz-document.content.enabled", true);
 user_pref("layout.css.xul-box-display-values.content.enabled", true);
 user_pref("layout.css.xul-display-values.content.enabled", true);
+// eliminate the blank white window during startup
+user_pref("browser.startup.blankWindow", false);
+user_pref("browser.startup.preXulSkeletonUI", false);
 // required for icons with data URLs
 user_pref("svg.context-properties.content.enabled", true);
 // required for acrylic gaussian blur

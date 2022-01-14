@@ -83,8 +83,8 @@ I also recommend setting the following prefs in `about:config`. There are two pr
 | <i>browser.display.windows.non_native_menus</i> | Number | 1 | |
 | <i>browser.proton.enabled</i> | Boolean | true | Required |
 | <i>browser.proton.places-tooltip.enabled</i> | Boolean | true | Recommended |
-| browser.startup.blankWindow | Boolean | false | These two settings eliminate the blank white window during startup |
-| browser.startup.preXulSkeletonUI | Boolean | false | |
+| <i>browser.startup.blankWindow</i> | Boolean | false | These two settings eliminate the blank white window during startup |
+| <i>browser.startup.preXulSkeletonUI</i> | Boolean | false | |
 | browser.tabs.tabMinWidth | Number | 90 | User preference, but mine is 90 |
 | browser.tabs.tabmanager.enabled | Boolean | true | Enables "all tabs menu" |
 | browser.urlbar.accessibility.tabToSearch.announceResults | Boolean | false | The following hide irritating urlbar results |

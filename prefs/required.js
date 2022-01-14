@@ -14,6 +14,9 @@ user_pref("browser.proton.places-tooltip.enabled", true);
 user_pref("layout.css.moz-document.content.enabled", true);
 user_pref("layout.css.xul-box-display-values.content.enabled", true);
 user_pref("layout.css.xul-display-values.content.enabled", true);
+// eliminate the blank white window during startup
+user_pref("browser.startup.blankWindow", false);
+user_pref("browser.startup.preXulSkeletonUI", false);
 // required for icons with data URLs
 user_pref("svg.context-properties.content.enabled", true);
 // required for acrylic gaussian blur
