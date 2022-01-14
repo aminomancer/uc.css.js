@@ -256,7 +256,6 @@
         background-size: contain !important;
         width: 18px !important;
         height: 18px !important;
-        margin-inline: 4px 0 !important;
     }
 
     #downloadsPanel-blockedSubview[verdict="Insecure"] .downloadsPanel-blockedSubview-image,

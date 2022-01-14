@@ -45,7 +45,6 @@ override chrome://global/skin/icons/pocket.svg ../resources/skin/pocket.svg
 override chrome://global/skin/icons/pocket-outline.svg ../resources/skin/pocket-outline.svg
 override chrome://mozapps/skin/extensions/extension.svg ../resources/material/extension.svg
 override chrome://mozapps/skin/extensions/extensionGeneric.svg ../resources/material/extensionGeneric.svg
-override chrome://browser/content/extension.svg ../resources/material/extension.svg
 override chrome://browser/skin/menu.svg ../resources/skin/menu.svg
 override chrome://browser/skin/menu-badged.svg ../resources/skin/menu-badged.svg
 override chrome://browser/skin/history.svg ../resources/skin/history.svg
@@ -93,6 +92,8 @@ override chrome://mozapps/skin/extensions/category-available.svg ../resources/ma
 override chrome://mozapps/skin/extensions/category-recent.svg ../resources/material/verified.svg
 override chrome://activity-stream/content/data/content/assets/glyph-highlights-16.svg ../resources/glyph-highlights-16.svg
 override chrome://activity-stream/content/data/content/assets/glyph-info-16.svg ../resources/glyph-info-16.svg
+override chrome://activity-stream/content/data/content/assets/glyph-webextension-16.svg ../resources/material/extension.svg
+override chrome://devtools/content/debugger/images/sources/extension.svg ../resources/material/extension.svg
 
 # Basic content stylesheets, e.g., for plain text and "view source" documents.
 resource content-accessible chrome://userchrome/content/layout/contentaccessible/ contentaccessible=yes

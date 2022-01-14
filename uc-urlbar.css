@@ -496,6 +496,59 @@ but CSS hides it faster and avoids flickering.
     ) !important;
 }
 
+#urlbar > #urlbar-input-container {
+    border: none !important;
+}
+
+#urlbar > #urlbar-input-container > #identity-box[pageproxystate="invalid"] {
+    display: -moz-box !important;
+}
+
+#identity-box,
+#tracking-protection-icon-container {
+    color: var(--lwt-toolbarbutton-icon-fill) !important;
+    fill-opacity: var(--urlbar-icon-fill-opacity) !important;
+    height: var(--urlbar-height) !important;
+}
+
+#identity-box {
+    margin-inline-end: 3px !important;
+}
+
+#identity-box:not(.chromeUI),
+#identity-box[pageproxystate="invalid"] {
+    margin-inline-start: 1.5px !important;
+    padding-inline-start: 0px !important;
+}
+
+#identity-icon-box {
+    margin-inline: 0 !important;
+    padding-inline: 0 !important;
+    max-width: unset !important;
+    border-radius: 0 !important;
+    -moz-box-align: center !important;
+    -moz-box-pack: center !important;
+}
+
+#identity-box.chromeUI[pageproxystate="valid"] {
+    height: var(--urlbar-height) !important;
+}
+
+#identity-box[pageproxystate="invalid"] :is(#identity-icon-box, #identity-icon) {
+    pointer-events: none !important;
+}
+
+.identity-box-button {
+    padding-inline: 0 !important;
+}
+
+#tracking-protection-icon-container {
+    margin-inline: 8px 2px !important;
+    padding-inline: 0 !important;
+    border: none !important;
+    background: none !important;
+}
+
 toolbarpaletteitem[removable="false"]
     #tracking-protection-icon-container:is(:hover, [open="true"])
     #tracking-protection-icon-box:not([animate="true"])
@@ -503,31 +556,6 @@ toolbarpaletteitem[removable="false"]
     display: -moz-box !important;
     fill-opacity: var(--urlbar-icon-fill-opacity) !important;
 }
-
-toolbarpaletteitem[removable="false"]
-    #tracking-protection-icon-container:is(:hover, [open="true"])
-    #tracking-protection-icon-box:not([animate="true"])
-    #tracking-protection-icon-animatable-box {
-    display: none !important;
-}
-
-/* #tracking-protection-icon-container:not([open="true"]):not(:hover) #tracking-protection-icon-box:not([animate="true"], [active]) #tracking-protection-icon {
-    display: -moz-box !important;
-}
-
-#tracking-protection-icon-container:not([open="true"]):not(:hover) #tracking-protection-icon-box:not([animate="true"], [active]) #tracking-protection-icon-animatable-box {
-    display: none !important;
-}
-
-#tracking-protection-icon-container[open="true"] #tracking-protection-icon-box:not([animate="true"]) #tracking-protection-icon-animatable-box,
-#tracking-protection-icon-container:hover #tracking-protection-icon-box:not([animate="true"]) #tracking-protection-icon-animatable-box,
-#tracking-protection-icon-container #tracking-protection-icon-box[animate="true"] #tracking-protection-icon-animatable-box {
-    filter: brightness(1.15) saturate(1.5) contrast(1.15) !important;
-} */
-
-/* #tracking-protection-icon-container #tracking-protection-icon-box[active]:not([animate]) #tracking-protection-icon-animatable-box {
-    filter: brightness(1.15) saturate(1.5) contrast(1.15) !important;
-} */
 
 #tracking-protection-icon {
     display: -moz-box !important;
@@ -541,10 +569,6 @@ toolbarpaletteitem[removable="false"]
 
 #tracking-protection-icon-box:not([hasException])[active] > #tracking-protection-icon {
     list-style-image: url(chrome://userchrome/content/material/tracking-attention.svg) !important;
-}
-
-#tracking-protection-icon-animatable-box {
-    display: none !important;
 }
 
 #identity-icon {
@@ -573,7 +597,7 @@ so there must be some issue with the PDF viewer that I don't know about. */
 /* on an extension page e.g. moz-extension://{guid}/options.html */
 #urlbar[actiontype="extension"] > #urlbar-input-container > #identity-box #identity-icon,
 #identity-box.extensionPage[pageproxystate="valid"] #identity-icon {
-    list-style-image: url(chrome://userchrome/content/material/extension-identity.svg) !important;
+    list-style-image: url(chrome://userchrome/content/material/extension.svg) !important;
 }
 
 /* connection is secure. some elements or requests from unencrypted connections may have been blocked according to user preferences, such as scripts. */
@@ -665,10 +689,81 @@ so you can use those classes to set the icon. */
     fill-opacity: 1 !important;
 }
 
+#identity-box.initialPage #identity-icon,
+#identity-box.extensionPage #identity-icon[tooltiptext="Loaded by extension: Tab Notes"],
+#urlbar[pageproxystate="invalid"] #identity-box #identity-icon,
+#tracking-protection-icon-container[hidden]
+    ~ #identity-box[pageproxystate="valid"].notSecure:not(.chromeUI, .localResource)
+    #identity-icon {
+    fill-opacity: var(--urlbar-icon-fill-opacity) !important;
+    list-style-image: var(
+        --default-search-identity-icon,
+        url("chrome://userchrome/content/search-glass.svg")
+    ) !important;
+}
+
+#tracking-protection-icon-container:is([open="true"], :focus-visible) #tracking-protection-icon-box,
+#tracking-protection-icon-container:not([open="true"]) #tracking-protection-icon-box:hover {
+    background-color: transparent !important;
+    fill-opacity: 1 !important;
+}
+
+#tracking-protection-icon-container:is([open="true"], :focus-visible)
+    #tracking-protection-icon-box:not([hasException]),
+#tracking-protection-icon-container:not([open="true"])
+    #tracking-protection-icon-box:hover:not([hasException]) {
+    fill-opacity: 1 !important;
+    fill: var(--protection-idle-color) !important;
+}
+
+#tracking-protection-icon-container:is([open="true"], :focus-visible)
+    #tracking-protection-icon-box[active]:not([hasException]),
+#tracking-protection-icon-container:not([open="true"])
+    #tracking-protection-icon-box[active]:hover:not([hasException]) {
+    fill-opacity: 1 !important;
+    fill: var(--protection-active-color) !important;
+}
+
+#tracking-protection-icon-container:is([open="true"], :focus-visible)
+    #tracking-protection-icon-box:not([hasException])
+    > #tracking-protection-icon,
+#tracking-protection-icon-container:not([open="true"])
+    #tracking-protection-icon-box:hover:not([hasException])
+    > #tracking-protection-icon {
+    list-style-image: url(chrome://userchrome/content/material/tracking-gradient.svg) !important;
+    -moz-context-properties: none !important;
+}
+
+#tracking-protection-icon-container:is([open="true"], :focus-visible)
+    #tracking-protection-icon-box[active]:not([hasException])
+    > #tracking-protection-icon,
+#tracking-protection-icon-container:not([open="true"])
+    #tracking-protection-icon-box[active]:hover:not([hasException])
+    > #tracking-protection-icon {
+    list-style-image: url(chrome://userchrome/content/material/tracking-attention-gradient.svg) !important;
+    -moz-context-properties: none !important;
+}
+
+/* #tracking-protection-icon-container:is([open="true"], :focus-visible)
+    #tracking-protection-icon-box[hasException]
+    > #tracking-protection-icon,
+#tracking-protection-icon-container:not([open="true"])
+    #tracking-protection-icon-box[hasException]:hover
+    > #tracking-protection-icon {
+    list-style-image: url(chrome://userchrome/content/material/tracking-disabled-gradient.svg) !important;
+    -moz-context-properties: none !important;
+} */
+
 :root[hide-tp-icon-on-ntp]:not([customizing])
     #urlbar[pageproxystate="invalid"]
     #tracking-protection-icon-container {
     display: none !important;
+}
+
+:root:not([hide-tp-icon-on-ntp])
+    #urlbar-input-container[pageproxystate="invalid"]
+    > #tracking-protection-icon-container {
+    visibility: visible !important;
 }
 
 :root[hide-tp-icon-on-ntp]:not([customizing])
@@ -782,17 +877,6 @@ so you can use those classes to set the icon. */
     display: none !important;
 }
 
-#tracking-protection-icon-container {
-    margin-inline: 8px 1.5px !important;
-    padding-inline: 0 !important;
-    border: none !important;
-    background: none !important;
-}
-
-#tracking-protection-icon-container::after {
-    display: none !important;
-}
-
 .urlbar-input-box input {
     padding-inline: 4px !important;
     height: var(--urlbar-height) !important;
@@ -813,102 +897,9 @@ so you can use those classes to set the icon. */
     opacity: var(--urlbar-icon-fill-opacity) !important;
 }
 
-#urlbar > #urlbar-input-container {
-    border: none !important;
-}
-
-#urlbar > #urlbar-input-container > #urlbar-search-icon {
-    display: none;
-}
-
-#urlbar > #urlbar-input-container > #identity-box[pageproxystate="invalid"] {
-    display: -moz-box !important;
-}
-
-#urlbar[pageproxystate="valid"] #identity-box.extensionPage {
-    display: -moz-box !important;
-}
-
-#urlbar-input-container[pageproxystate="invalid"] > #tracking-protection-icon-container {
-    visibility: visible !important;
-}
-
-#identity-box:not(.chromeUI),
-#identity-box[pageproxystate="invalid"] {
-    margin-inline-start: 1.5px !important;
-    padding-inline-start: 0px !important;
-}
-
-#identity-box {
-    margin-inline-end: 3px !important;
-}
-
-#identity-icon-box {
-    margin-inline: 0 !important;
-    padding-inline: 0 !important;
-    max-width: unset !important;
-    border-radius: 0 !important;
-    -moz-box-align: center !important;
-    -moz-box-pack: center !important;
-}
-
-.identity-box-button {
-    padding-inline: 0 !important;
-}
-
-#identity-box,
-#tracking-protection-icon-container {
-    color: var(--lwt-toolbarbutton-icon-fill) !important;
-    fill-opacity: var(--urlbar-icon-fill-opacity) !important;
-    height: var(--urlbar-height) !important;
-}
-
 #urlbar-go-button,
 #page-action-buttons {
     color: var(--lwt-toolbarbutton-icon-fill) !important;
-}
-
-#identity-box.chromeUI[pageproxystate="valid"] {
-    height: var(--urlbar-height) !important;
-}
-
-#identity-box[pageproxystate="invalid"] :is(#identity-icon-box, #identity-icon) {
-    pointer-events: none !important;
-}
-
-#tracking-protection-icon-container:is([open="true"], :focus-visible) #tracking-protection-icon-box,
-#tracking-protection-icon-container:not([open="true"]) #tracking-protection-icon-box:hover {
-    background-color: transparent !important;
-    fill-opacity: 1 !important;
-}
-
-#tracking-protection-icon-container:is([open="true"], :focus-visible)
-    #tracking-protection-icon-box:not([hasException]),
-#tracking-protection-icon-container:not([open="true"])
-    #tracking-protection-icon-box:hover:not([hasException]) {
-    fill-opacity: 1 !important;
-    fill: var(--protection-idle-color) !important;
-}
-
-#tracking-protection-icon-container:is([open="true"], :focus-visible)
-    #tracking-protection-icon-box[active]:not([hasException]),
-#tracking-protection-icon-container:not([open="true"])
-    #tracking-protection-icon-box[active]:hover:not([hasException]) {
-    fill-opacity: 1 !important;
-    fill: var(--protection-active-color) !important;
-}
-
-#identity-box.initialPage #identity-icon,
-#identity-box.extensionPage #identity-icon[tooltiptext="Loaded by extension: Tab Notes"],
-#urlbar[pageproxystate="invalid"] #identity-box #identity-icon,
-#tracking-protection-icon-container[hidden]
-    ~ #identity-box[pageproxystate="valid"].notSecure:not(.chromeUI, .localResource)
-    #identity-icon {
-    fill-opacity: var(--urlbar-icon-fill-opacity) !important;
-    list-style-image: var(
-        --default-search-identity-icon,
-        url("chrome://userchrome/content/search-glass.svg")
-    ) !important;
 }
 
 :root[customizing] #wrapper-urlbar-container[removable="false"] {
@@ -942,15 +933,7 @@ so you can use those classes to set the icon. */
     height: 16px;
 }
 
-#permissions-granted-icon {
-    list-style-image: url(chrome://userchrome/content/formfill.svg) !important;
-    margin-top: 1px;
-    margin-inline: 6px 1px !important;
-}
-
 #notification-popup-box {
-    margin: 0 !important;
-    padding: 0 !important;
     background: none !important;
 }
 

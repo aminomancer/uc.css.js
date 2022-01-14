@@ -979,9 +979,7 @@ override chrome://browser/skin/downloads/notification-finish-animation.svg ../re
 With the resources out of the way, add this to userChrome.css:
 
 ```
-#downloads-button
-    > .toolbarbutton-badge-stack
-    > #downloads-indicator-progress-outer {
+#downloads-button > .toolbarbutton-badge-stack > #downloads-indicator-progress-outer {
     top: calc(50% - 10px) !important;
     left: calc(50% - 10px) !important;
     width: 20px !important;

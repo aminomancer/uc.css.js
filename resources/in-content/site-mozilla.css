@@ -34,6 +34,50 @@
         font-family: Fira Code UC, Fira Code, SF Mono, Menlo, Consolas, Monaco, monospace;
         font-weight: 300;
     }
+
+    @media (min-width: 1919px) {
+        .source-line {
+            white-space: pre-wrap !important;
+        }
+    }
+
+    #panel {
+        top: 3.75rem !important;
+        right: 0 !important;
+        background: none !important;
+        border: none !important;
+        text-align: end !important;
+    }
+
+    #panel-toggle {
+        background: none !important;
+        text-align: end !important;
+        padding-right: 1rem !important;
+    }
+
+    /* reverse the show/hide state of the panel so it's hidden by default. */
+    #panel-content[aria-expanded="true"] {
+        visibility: collapse;
+        width: 0 !important;
+        height: 0 !important;
+    }
+
+    #panel-content[aria-expanded="false"] {
+        display: revert !important;
+        background: var(--darkreader-bg--page-background, var(--page-background)) !important;
+        border: 1px solid var(--darkreader-border--page-border-color, var(--page-border-color)) !important;
+        border-right: 0 !important;
+        padding-right: 0.7rem !important;
+        padding-top: 0.7rem !important;
+    }
+
+    .navpanel-icon {
+        transform: rotate(0deg) !important;
+    }
+
+    .navpanel-icon.expanded {
+        transform: rotate(-90deg) !important;
+    }
 }
 
 @-moz-document domain("addons.mozilla.org") {

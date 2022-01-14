@@ -1761,7 +1761,7 @@ link[href="chrome://global/content/printPagination.css"]
     }
 
     #permTab {
-        list-style-image: url(chrome://userchrome/content/skin/permissions.svg) !important;
+        list-style-image: url(chrome://userchrome/content/formfill.svg) !important;
     }
 
     #securityTab {
@@ -1975,8 +1975,7 @@ link[href="chrome://global/content/printPagination.css"]
 
     #perm-install-row .permissionLabel {
         background-image: url(chrome://userchrome/content/material/extension.svg);
-        background-size: 14px;
-        background-position-x: 1px;
+        background-size: 16px;
     }
 
     #perm-popup-row .permissionLabel {

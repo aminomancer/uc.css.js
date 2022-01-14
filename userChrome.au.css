@@ -917,9 +917,7 @@ this way we don't animate tabs that were simply moved rather than created */
         box-shadow: revert;
     }
 
-    #downloads-button
-        > .toolbarbutton-badge-stack
-        > #downloads-indicator-progress-outer {
+    #downloads-button > .toolbarbutton-badge-stack > #downloads-indicator-progress-outer {
         top: calc(50% - 10px);
         left: calc(50% - 10px);
         width: 20px;
@@ -1343,6 +1341,21 @@ animation-duration of 730ms, 71% is the point where we start the fade out. */
         padding: 0;
     }
 
+    #permissions-granted-icon {
+        list-style-image: url(chrome://userchrome/content/formfill.svg);
+        margin-top: 1px;
+        margin-inline: 6px 0;
+    }
+
+    #urlbar #identity-box :is(.sharing-icon, .notification-anchor-icon, .blocked-permission-icon) {
+        margin-inline-start: 6px;
+    }
+
+    #notification-popup-box {
+        margin: 0;
+        padding: 0;
+    }
+
     /* webrtc notifications */
     #webRTC-selectCamera-icon {
         list-style-image: url(chrome://userchrome/content/notifications/camera.svg);
@@ -1365,10 +1378,6 @@ animation-duration of 730ms, 71% is the point where we start the fade out. */
     }
 
     /* INDIVIDUAL NOTIFICATIONS */
-
-    #urlbar #identity-box :is(.sharing-icon, .notification-anchor-icon, .blocked-permission-icon) {
-        margin-inline-start: 5px;
-    }
 
     .notification-anchor-icon#default-notification-icon {
         list-style-image: url(chrome://userchrome/content/material/notification.svg);
