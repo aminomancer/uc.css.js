@@ -493,7 +493,6 @@ class UrlbarMods {
             return result;
         }
         function makeTTSResult(context, engine, satisfiesAutofillThreshold = false) {
-            console.log("engine :>> ", engine);
             let [url] = UrlbarUtils.stripPrefixAndTrim(engine.getResultDomain(), {
                 stripWww: true,
             });
