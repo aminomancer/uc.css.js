@@ -154,12 +154,6 @@ toolbarpaletteitem[place="palette"] > #search-container {
     color: var(--panel-shortcut-color);
 }
 
-.urlbarView-row[has-action][selected] .urlbarView-title strong,
-.urlbarView-row[has-action][selected] .urlbarView-title[isurl],
-.urlbarView-row[has-url][selected] .urlbarView-title {
-    color: var(--panel-shortcut-focus);
-}
-
 #PopupSearchAutoComplete .autocomplete-richlistitem .ac-emphasize-text {
     color: var(--lwt-toolbar-field-color);
 }

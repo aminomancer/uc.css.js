@@ -1561,7 +1561,7 @@ panel .header {
 }
 
 .PanelUI-panic-actionlist {
-    color: var(--panel-shortcut-focus) !important;
+    color: var(--panel-shortcut-color) !important;
     margin-bottom: 4px !important;
     filter: brightness(1.5);
 }

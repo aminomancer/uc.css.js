@@ -485,11 +485,11 @@
     color: hsla(0, 0%, 100%, 0.6);
 }
 
-.urlbarView-row[type="tabtosearch"] .urlbarView-title,
 .urlbarView-row[has-action] .urlbarView-title strong,
 .urlbarView-row[has-action] .urlbarView-title[isurl],
 .urlbarView-row[has-url] .urlbarView-title,
 .urlbarView-row .urlbarView-tag,
+.urlbarView-row:where([type="tabtosearch"], [type="tokenaliasengine"]) .urlbarView-title,
 .urlbarView-row:not([has-url])
     .urlbarView-title[data-l10n-id="urlbar-result-action-search-w-engine"] {
     font-weight: var(--urlbar-result-strong-font-weight, 500) !important;
@@ -502,7 +502,7 @@
     color: var(--panel-shortcut-color);
 }
 
-.urlbarView-row[type="tabtosearch"][selected] .urlbarView-title,
+.urlbarView-row:where([type="tabtosearch"], [type="tokenaliasengine"])[selected] .urlbarView-title,
 .urlbarView-row[has-action][selected] .urlbarView-title strong,
 .urlbarView-row[has-action][selected] .urlbarView-title[isurl],
 .urlbarView-row[has-url][selected] .urlbarView-title,
@@ -592,8 +592,7 @@
     padding-inline-start: 16px;
 }
 
-.urlbarView-row[engine="Google"]
-    .urlbarView-favicon:not([src="chrome://global/skin/icons/search-glass.svg"], [src="chrome://browser/skin/history.svg"], [src="chrome://global/skin/icons/lightbulb.svg"]) {
+.urlbarView-row[engine="Google"]:is([type="tabtosearch"], [type="tokenaliasengine"]) .urlbarView-favicon {
     box-sizing: border-box !important;
     background: url(chrome://userchrome/content/engines/google.svg) no-repeat !important;
     width: 16px !important;
@@ -641,7 +640,7 @@
     padding-inline-start: 16px;
 }
 
-.urlbarView-row[type="tabtosearch"]:not([selected], [show-action-text], :hover)
+.urlbarView-row:where([type="tabtosearch"], [type="tokenaliasengine"]):not([selected], [show-action-text], :hover)
     > .urlbarView-row-inner
     > .urlbarView-no-wrap
     > .urlbarView-action {
