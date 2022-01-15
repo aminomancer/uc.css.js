@@ -37,6 +37,8 @@ user_pref("layout.css.cached-scrollbar-styles.enabled", false);
 user_pref("ui.systemUsesDarkTheme", 1);
 // enable content dark mode
 user_pref("layout.css.prefers-color-scheme.content-override", 0);
+user_pref("browser.theme.content-theme", 0);
+user_pref("browser.theme.toolbar-theme", 0);
 // allow stylesheets to modify trees in system pages viewed in regular tabs
 user_pref("layout.css.xul-tree-pseudos.content.enabled", true);
 // allow the color-mix() CSS function

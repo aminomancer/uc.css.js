@@ -808,7 +808,7 @@ menuitem#menu_openDownloads::before {
 
 menuitem#menu_openAddons::before,
 #addon_darkreader_org-menuitem-_DarkReader-toggle:not(.menuitem-iconic)::before {
-    background-image: url(chrome://browser/content/extension.svg);
+    background-image: url(chrome://mozapps/skin/extensions/extension.svg);
 }
 
 #private-relay_firefox_com-menuitem-_fx-private-relay-generate-alias:not(.menuitem-iconic)::before {
