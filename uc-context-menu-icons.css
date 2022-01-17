@@ -723,11 +723,11 @@ menuitem[command="downloadsCmd_deleteFile"]::before {
 }
 
 #context-video-fullscreen::before {
-    background-image: url(chrome://userchrome/content/fullscreenEnterButton.svg);
+    background-image: url(chrome://userchrome/content/skin/fullscreen.svg);
 }
 
 #context-leave-dom-fullscreen::before {
-    background-image: url(chrome://userchrome/content/fullscreenExitButton.svg);
+    background-image: url(chrome://userchrome/content/skin/fullscreen-exit.svg);
 }
 
 menuitem[data-l10n-id="full-screen-exit"]::before {
@@ -742,8 +742,12 @@ menuitem[data-l10n-id="full-screen-exit"]::before {
     background-image: url(chrome://userchrome/content/skin/tab-play.svg);
 }
 
-:is(#context-media-showcontrols, #context-media-hidecontrols)::before {
-    background-image: url(chrome://userchrome/content/material/tune.svg);
+#context-media-showcontrols::before {
+    background-image: url(chrome://userchrome/content/material/show-controls.svg);
+}
+
+#context-media-hidecontrols::before {
+    background-image: url(chrome://userchrome/content/material/hide-controls.svg);
 }
 
 #context-showonlythisframe::before,
@@ -1489,7 +1493,7 @@ menuitem.customize-context-SidebarAction::before {
 }
 
 menuitem.customize-context-Options::before {
-    background-image: url(chrome://userchrome/content/material/tune.svg);
+    background-image: url(chrome://userchrome/content/settings.svg);
 }
 
 menuitem:is(.customize-context-removeExtension, .pageActionContextMenuItem.removeExtensionItem)::before {

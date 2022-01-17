@@ -105,6 +105,12 @@ td:not(:first-child) {
     content: url(chrome://global/skin/dirListing/folder.png);
 }
 
+@-moz-document unobservable-document() {
+    :root {
+        color-scheme: light dark;
+    }
+}
+
 @media (prefers-color-scheme: dark) {
     :root {
         background-color: var(--in-content-bg-dark);

@@ -18,13 +18,12 @@
 }
 
 *|*:root {
-    font-family: Fira Code UC, Fira Code, SF Mono, -moz-fixed, monospace;
-    font-weight: 300;
-    background-color: white;
-    color: black;
+    color-scheme: light dark;
     direction: ltr;
     -moz-control-character-visibility: visible;
     height: 100%;
+    font-family: Fira Code UC, Fira Code, SF Mono, -moz-fixed, monospace;
+    font-weight: 300;
 }
 #viewsource {
     font-family: Fira Code UC, Fira Code, SF Mono, -moz-fixed, monospace;
@@ -96,7 +95,6 @@ plaintext {
     font-weight: normal;
 }
 .highlight .attribute-name {
-    color: black;
     font-weight: bold;
 }
 .highlight .attribute-value {
@@ -114,11 +112,9 @@ a:not(.error) {
 span[id] {
     unicode-bidi: isolate;
 }
-.highlight .error,
-.highlight
-    .error
-    > :is(.start-tag, .end-tag, .comment, .cdata, .doctype, .pi, .entity, .attribute-name, .attribute-value) {
-    color: red;
+.highlight .error {
+    color: inherit;
+    background-color: rgba(178, 34, 34, 0.5);
     font-weight: bold;
 }
 @media (prefers-color-scheme: dark) {
@@ -133,15 +129,10 @@ span[id] {
     html:root {
         color: var(--plaintext-color);
     }
-    .highlight .attribute-name {
-        color: lightskyblue;
-    }
     .highlight .attribute-value {
         color: lightgreen;
     }
-    .highlight .start-tag {
-        color: tan;
-    }
+    .highlight .start-tag,
     .highlight .end-tag {
         color: indianred;
     }
@@ -149,7 +140,15 @@ span[id] {
         color: white;
         background-color: rgba(178, 34, 34, 0.5);
     }
+    .highlight .comment,
+    .highlight .doctype,
+    .highlight .markupdeclaration {
+      color: gray;
+    }
     .highlight .entity {
+        color: #f18a65;
+    }
+    .highlight .pi {
         color: mediumorchid;
     }
 }

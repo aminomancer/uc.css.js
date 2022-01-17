@@ -1799,6 +1799,37 @@ animation-duration of 730ms, 71% is the point where we start the fade out. */
         padding: 30px 30px 20px 30px;
     }
 
+    #handlersView .actionsMenu[image="chrome://browser/skin/preferences/application.png"]::part(icon) {
+        display: none;
+    }
+
+    #handlersView .actionsMenu[image="chrome://browser/skin/preferences/application.png"]::before {
+        width: 16px;
+        height: 16px;
+        margin-inline: 11px 8px;
+        fill: currentColor;
+        -moz-context-properties: fill, fill-opacity, stroke;
+        content: "";
+        display: -moz-inline-box;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-image: url(chrome://userchrome/content/shortcut.svg);
+    }
+
+    #handlersView .actionIcon[src="chrome://browser/skin/preferences/application.png"] {
+        width: 16px;
+        height: 16px;
+        margin-inline: 11px 8px;
+        fill: currentColor;
+        -moz-context-properties: fill, fill-opacity, stroke;
+        content: "";
+        display: -moz-inline-box;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-image: url(chrome://userchrome/content/shortcut.svg);
+        padding-inline-start: 16px !important;
+    }
+
     @-moz-document url("chrome://mozapps/content/downloads/unknownContentType.xhtml"),
     url("chrome://global/content/appPicker.xhtml")
     {

@@ -30,6 +30,10 @@ menupopup.in-menulist > :where(menucaption, menuitem) {
     -moz-box-align: center !important;
 }
 
+.actionsMenu > menupopup > menuitem {
+    padding-inline-start: 0 !important;
+}
+
 #ContentSelectDropdown > menupopup .menu-text,
 menupopup.in-menulist .menu-text,
 #ContentSelectDropdown
@@ -413,6 +417,38 @@ menulist[indicator="true"]
     > :is(label, .menu-iconic-text, .menu-text, .menu-iconic-highlightable-text) {
     padding-inline: 0 !important;
     margin-inline: 0 !important;
+}
+
+richlistitem[appHandlerIcon="save"],
+menuitem[appHandlerIcon="save"] {
+    list-style-image: url(chrome://userchrome/content/material/places/folder-save.svg) !important;
+    -moz-context-properties: fill, fill-opacity;
+    fill: currentColor;
+}
+
+richlistitem[appHandlerIcon="ask"],
+menuitem[appHandlerIcon="ask"] {
+    list-style-image: url(chrome://userchrome/content/help-solid.svg) !important;
+    -moz-context-properties: fill, fill-opacity;
+    fill: currentColor;
+}
+
+menuitem[image="chrome://browser/skin/preferences/application.png"]
+    .menu-iconic-left::before {
+    width: 16px;
+    height: 16px;
+    margin-inline: var(--context-iconic-margin);
+    fill: currentColor;
+    -moz-context-properties: fill, fill-opacity, stroke;
+    content: "";
+    display: -moz-inline-box;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url(chrome://userchrome/content/shortcut.svg);
+}
+
+menuitem[image="chrome://browser/skin/preferences/application.png"] .menu-iconic-icon {
+    display: none;
 }
 
 @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {

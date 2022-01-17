@@ -63,25 +63,21 @@
             color: darkgreen !important;
         }
 
-        .highlight .start-tag {
-            color: tan !important;
-        }
-
-        .highlight .start-tag::selection {
-            color: darkgoldenrod !important;
-        }
-
-        .highlight .end-tag {
-            color: indianred !important;
+        .highlight :is(.start-tag, .end-tag) {
+            color: #cd5c5c !important;
         }
 
         .highlight .end-tag::selection {
-            color: sienna !important;
+            color: #973737 !important;
         }
 
         .highlight .error {
             color: white !important;
             background-color: rgba(178, 34, 34, 0.5) !important;
+        }
+
+        .highlight .comment {
+            color: gray !important;
         }
 
         .highlight .error::selection,
@@ -91,11 +87,15 @@
         }
 
         .highlight .entity {
-            color: mediumorchid !important;
+            color: #f18a65 !important;
         }
 
         .highlight .entity::selection {
-            color: darkorchid !important;
+            color: #a55437 !important;
+        }
+
+        .highlight .pi::selection {
+            color: #6b228f !important;
         }
     }
 }
