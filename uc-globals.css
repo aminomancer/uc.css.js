@@ -392,10 +392,10 @@ but other than that these variables should be available everywhere. */
     --content-principal-box-background-odd: hsl(260, 3%, 19%);
     --content-principal-box-background-dim: hsl(240, 2%, 12%);
     --content-principal-box-border-color: hsla(240, 7%, 98%, 0.1);
-    --content-principal-button-background: hsla(240, 6%, 70%, 0.1);
-    --content-principal-button-background-hover: hsla(240, 7%, 70%, 0.15);
-    --content-principal-button-background-active: hsla(240, 8%, 70%, 0.19);
-    --content-principal-button-background-solid: hsl(240, 4%, 18%);
+    --content-principal-button-background: hsla(240, 3%, 70%, 0.1);
+    --content-principal-button-background-hover: hsla(240, 4%, 70%, 0.15);
+    --content-principal-button-background-active: hsla(240, 5%, 70%, 0.19);
+    --content-principal-button-background-solid: hsl(240, 3%, 18%);
     --content-principal-border-hover: var(--content-principal-button-background-hover);
 
     --uc-checkbox-border-color: var(--in-parent-box-border-color);

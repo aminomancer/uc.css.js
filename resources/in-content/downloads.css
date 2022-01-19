@@ -1,9 +1,7 @@
 /* just for downloads in the places organizer */
 
 /* downloads panel */
-@-moz-document url("chrome://browser/content/browser.xhtml"),
-    url-prefix("chrome://browser/content/places/places.xhtml"),
-    url-prefix("about:downloads") {
+@-moz-document url("chrome://browser/content/browser.xhtml"), url-prefix("chrome://browser/content/places/places.xhtml"), url-prefix("about:downloads") {
     #downloadsPanel-mainView,
     #downloadsPanel-blockedSubview {
         min-width: revert !important;
@@ -11,14 +9,14 @@
     }
 
     #downloadsListBox {
+        border: none !important;
+        padding: var(--uc-arrowpanel-menuitem-inline-margin) 0 !important;
+    }
+
+    panel #downloadsListBox {
         width: revert !important;
         min-width: 35em !important;
         max-width: 48em !important;
-        margin: var(--arrowpanel-menuitem-inline-margin) 0 !important;
-    }
-
-    #downloadsRichListBox {
-        padding: var(--arrowpanel-menuitem-inline-margin) 0 !important;
     }
 
     #emptyDownloads {
@@ -29,12 +27,10 @@
     #downloadsFooterButtons:not([hidden]) {
         display: flex !important;
         flex-flow: row nowrap;
-        padding-block: var(--arrowpanel-menuitem-inline-margin) !important;
-        margin: 0 var(--arrowpanel-menuitem-inline-margin) !important;
-        border-top: 1px solid var(--panel-separator-color) !important;
-        gap: var(--arrowpanel-menuitem-inline-margin) !important;
-        --button-hover-bgcolor: var(--in-content-button-background);
-        --button-active-bgcolor: var(--in-content-button-background-hover);
+        padding-block: var(--uc-arrowpanel-menuitem-inline-margin) !important;
+        margin: 0 var(--uc-arrowpanel-menuitem-inline-margin) !important;
+        border-top: 1px solid var(--uc-desaturate-dimmed) !important;
+        gap: var(--uc-arrowpanel-menuitem-inline-margin) !important;
     }
 
     #downloadsFooterButtons > toolbarseparator {
@@ -42,7 +38,7 @@
     }
 
     #downloadsFooterButtons > button {
-        border-radius: var(--arrowpanel-menuitem-border-radius) !important;
+        border-radius: var(--context-menuitem-border-radius) !important;
         margin: 0 !important;
         flex-grow: 1;
         padding: 6px 8px !important;
@@ -77,17 +73,17 @@
     richlistitem.download-state,
     #downloadsSummary {
         position: relative !important;
-        border-radius: var(--arrowpanel-menuitem-border-radius) !important;
+        border-radius: var(--context-menuitem-border-radius) !important;
         padding: 0 !important;
-        margin: 0 var(--arrowpanel-menuitem-inline-margin) !important;
+        margin: 0 var(--uc-arrowpanel-menuitem-inline-margin) !important;
         border: 0 !important;
         outline: 0 !important;
         background: none !important;
     }
 
     #downloadsSummary {
-        border-radius: var(--arrowpanel-menuitem-border-radius) !important;
-        margin: 0 var(--arrowpanel-menuitem-inline-margin) !important;
+        border-radius: var(--context-menuitem-border-radius) !important;
+        margin: 0 var(--uc-arrowpanel-menuitem-inline-margin) !important;
         margin-inline-end: 52px !important;
         padding: 8px 4px !important;
         border: 0 !important;
@@ -96,7 +92,7 @@
     }
 
     #downloadsPanel-blockedSubview > vbox {
-        margin: var(--arrowpanel-menuitem-margin) !important;
+        margin: 0px var(--uc-arrowpanel-menuitem-inline-margin) !important;
     }
 
     .downloadsPanel-blockedSubview-title-box {
@@ -135,7 +131,7 @@
     }
 
     .downloadMainArea {
-        border-radius: var(--arrowpanel-menuitem-border-radius) !important;
+        border-radius: var(--context-menuitem-border-radius) !important;
     }
 
     richlistitem.download-state .downloadMainArea {
@@ -198,17 +194,17 @@
     }
 
     richlistitem.download-state > .downloadButton:is(:hover, :focus-visible) .button-box {
-        background: var(--in-content-button-background-hover) !important;
+        background: var(--content-principal-button-background-hover) !important;
     }
 
     richlistitem.download-state > .downloadButton:hover:active .button-box {
-        background: var(--in-content-button-background-active) !important;
+        background: var(--content-principal-button-background-active) !important;
     }
 
     richlistitem.download-state > .downloadButton .button-box {
         width: 32px !important;
         height: 32px !important;
-        border-radius: var(--arrowpanel-menuitem-border-radius) !important;
+        border-radius: var(--context-menuitem-border-radius) !important;
         padding: 0 !important;
     }
 
@@ -339,16 +335,15 @@
     }
 }
 
-@-moz-document url-prefix("chrome://browser/content/places/places.xhtml"),
-    url-prefix("about:downloads") {
-    #downloadsRichListBox {
+@-moz-document url-prefix("chrome://browser/content/places/places.xhtml"), url-prefix("about:downloads") {
+    #downloadsListBox {
         border: none !important;
         outline: none !important;
-        background: var(--in-content-bg-dark) !important;
+        background: transparent !important;
     }
 
     #contentAreaDownloadsView {
-        background: var(--in-content-bg-darker) !important;
+        background: var(--in-content-bg-dark) !important;
     }
 
     richlistitem.download-state:is(:hover, :focus-within),
@@ -356,11 +351,11 @@
     richlistitem.download-state:is([verdict], .openWhenFinished):is(:hover, :focus-within),
     richlistitem.download-state[state="1"][exists]:hover:active,
     richlistitem.download-state:is([verdict], .openWhenFinished):hover:active {
-        background: hsl(230, 6%, 18%) !important;
+        background: var(--content-principal-button-background-hover) !important
     }
 
     richlistitem.download-state[selected]:not(:hover, :focus-within) {
-        background: hsl(230, 5%, 15%) !important;
+        background: var(--content-principal-button-background) !important
     }
 
     richlistitem.download-state[state="1"]:not([exists]) .downloadTarget {
