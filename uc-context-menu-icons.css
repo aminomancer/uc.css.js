@@ -757,7 +757,7 @@ menuitem[data-l10n-id="full-screen-exit"]::before {
 }
 
 :is(#context-printframe, #context-print-selection, #menu_print)::before {
-    background-image: url(chrome://userchrome/content/print.svg);
+    background-image: url(chrome://global/skin/icons/print.svg);
 }
 
 #menu_printPreview::before {

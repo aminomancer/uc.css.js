@@ -929,8 +929,8 @@ this way we don't animate tabs that were simply moved rather than created */
         background-size: 20px;
     }
 
-    :root[pre-proton-downloads-button] #downloads-indicator-anchor {
-        list-style-image: url(chrome://userchrome/content/downloads/download-icons.svg#arrow-with-bar);
+    #downloads-button > .toolbarbutton-badge-stack > .toolbarbutton-animatable-box {
+        z-index: initial;
     }
 
     .customization-target :is(#reload-button, #stop-button) > .toolbarbutton-icon {
@@ -1150,7 +1150,7 @@ that we can select irrespective of target language. */
     }
 
     #print-button {
-        list-style-image: url(chrome://userchrome/content/print.svg);
+        list-style-image: url(chrome://global/skin/icons/print.svg);
     }
 
     #fullscreen-button {

@@ -343,6 +343,12 @@
     url-prefix("about:downloads") {
     #downloadsRichListBox {
         border: none !important;
+        outline: none !important;
+        background: var(--in-content-bg-dark) !important;
+    }
+
+    #contentAreaDownloadsView {
+        background: var(--in-content-bg-darker) !important;
     }
 
     richlistitem.download-state:is(:hover, :focus-within),
@@ -350,7 +356,7 @@
     richlistitem.download-state:is([verdict], .openWhenFinished):is(:hover, :focus-within),
     richlistitem.download-state[state="1"][exists]:hover:active,
     richlistitem.download-state:is([verdict], .openWhenFinished):hover:active {
-        background: hsl(230, 5%, 18%) !important;
+        background: hsl(230, 6%, 18%) !important;
     }
 
     richlistitem.download-state[selected]:not(:hover, :focus-within) {

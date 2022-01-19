@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Undo Recently Closed Tabs in Tab Context Menu
-// @version        2.0.2
+// @version        2.0.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Adds new menus to the context menu that appears when you right-click a tab (in the tab bar or in the TreeStyleTabs sidebar): one lists recently closed tabs so you can restore them, and another lists recently closed windows. These are basically the same functions that exist in the history toolbar button's popup, but I think the tab context menu is a more convenient location for them. Also optionally adds a context menu to the history panel's subview pages for "Recently closed tabs" and "Recently closed windows" with various functions for interacting with the closed tabs and their session history. You can right-click a closed tab item to open the context menu, then click "Remove from List" to get rid of it. You can click "Remove from History" to not only remove the closed tab item, but also forget all of the tab's history — that is, every page it navigated to. The same can be done with recently closed windows. From this menu you can also restore a tab in a new window or private window, bookmark a closed tab/window, and more.
@@ -784,7 +784,7 @@ class RecentlyClosedPanelContext {
         }
     }
     onRemoveFromList(e, button) {
-        let { value } = button;
+        let value = button.getAttribute("value");
         switch (button.getAttribute("restore-type")) {
             case "tab":
                 SessionStore.forgetClosedTab(window, value);

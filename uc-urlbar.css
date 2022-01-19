@@ -1219,6 +1219,10 @@ use 0.6 instead of 1 since 1 will end up being shown as like 1.4px for some wind
     background-color: var(--arrowpanel-dimmed-further) !important;
 }
 
+#urlbar-search-mode-indicator-close:focus-visible {
+    outline: 2px solid var(--attention-color) !important;
+}
+
 #identity-icon-label {
     margin: 0 !important;
     padding-inline-start: 7px !important;

@@ -187,7 +187,7 @@
 }
 
 #appMenu-print-button2 {
-    list-style-image: url(chrome://userchrome/content/print.svg);
+    list-style-image: url(chrome://global/skin/icons/print.svg);
 }
 
 #appMenu-passwords-button {
