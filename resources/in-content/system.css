@@ -115,7 +115,7 @@
     html:not([role="dialog"]) body.activity-stream,
     window:not([chromehidden]),
     window:not([chromehidden]) > dialog,
-    .allDownloadsListBox richlistitem {
+    #downloadsListBox richlistitem {
         --in-content-page-background: var(--content-principal-page-background) !important;
         --in-content-page-color: var(--content-principal-page-color) !important;
         --in-content-box-background: var(--content-principal-box-background) !important;
