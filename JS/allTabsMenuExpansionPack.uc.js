@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           All Tabs Menu Expansion Pack
-// @version        2.0.0
+// @version        2.0.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Next to the "new tab" button in Firefox there's a V-shaped button that opens a
@@ -87,7 +87,7 @@
 
     function reverseTabOrder() {
         let panel = TabsPanel.prototype;
-        if (prefSvc.getBoolPref(reversePref)) {
+        if (prefSvc.getBoolPref(reversePref) && !TabsPanel.prototype.reversed) {
             eval(
                 `panel._populate = function ` +
                     panel._populate
@@ -109,9 +109,11 @@
                         )
                         .replace(/this\.\_addElement/, `this.containerNode.prepend`)
             );
+            TabsPanel.prototype.reversed = true;
         } else {
             delete panel._populate;
             delete panel._addTab;
+            TabsPanel.prototype.reversed = false;
         }
     }
 
@@ -311,7 +313,7 @@
             "onmouseover",
             /* javascript */ `this.tooltipText=(gBrowser.tabs.length>1?PluralForm.get(gBrowser.tabs.length,gNavigatorBundle.getString("ctrlTab.listAllTabs.label")).replace("#1",gBrowser.tabs.length).toLocaleLowerCase().replace(RTL_UI?/.$/i:/^./i,(function(letter){return letter.toLocaleUpperCase()})).trim():this.label)+(Services.prefs.getBoolPref("browser.ctrlTab.sortByRecentlyUsed",false)?" ("+ShortcutUtils.prettifyShortcut(key_showAllTabs)+")":"");`
         );
-        reverseTabOrder();
+        if (!("reversed" in TabsPanel.prototype)) reverseTabOrder();
         setupPIP();
         setupCtrlTab();
 
