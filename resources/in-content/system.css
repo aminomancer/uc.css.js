@@ -116,22 +116,22 @@
     window:not([chromehidden]),
     window:not([chromehidden]) > dialog,
     #downloadsListBox richlistitem {
-        --in-content-page-background: var(--content-principal-page-background) !important;
-        --in-content-page-color: var(--content-principal-page-color) !important;
-        --in-content-box-background: var(--content-principal-box-background) !important;
-        --in-content-box-background-odd: var(--content-principal-box-background-odd) !important;
-        --in-content-box-background-dim: var(--content-principal-box-background-dim) !important;
-        --in-content-box-border-color: var(--content-principal-box-border-color) !important;
-        --in-content-button-background: var(--content-principal-button-background) !important;
+        --in-content-page-background: var(--uc-content-page-background) !important;
+        --in-content-page-color: var(--uc-content-page-color) !important;
+        --in-content-box-background: var(--uc-content-box-background) !important;
+        --in-content-box-background-odd: var(--uc-content-box-background-odd) !important;
+        --in-content-box-background-dim: var(--uc-content-box-background-dim) !important;
+        --in-content-box-border-color: var(--uc-content-box-border-color) !important;
+        --in-content-button-background: var(--uc-content-button-background) !important;
         --in-content-button-background-hover: var(
-            --content-principal-button-background-hover
+            --uc-content-button-background-hover
         ) !important;
         --in-content-button-background-active: var(
-            --content-principal-button-background-active
+            --uc-content-button-background-active
         ) !important;
-        --in-content-button-background-solid: var(--content-principal-button-background-solid);
+        --in-content-button-background-solid: var(--uc-content-button-background-solid);
         --in-content-item-selected: var(--purple-40) !important;
-        --in-content-border-hover: var(--content-principal-border-hover) !important;
+        --in-content-border-hover: var(--uc-content-border-hover) !important;
         --in-content-link-color: var(--purple-30) !important;
         --in-content-link-color-hover: var(--purple-25) !important;
         --in-content-link-color-active: var(--purple-20) !important;
@@ -147,27 +147,27 @@
         --in-content-item-hover: color-mix(in srgb, var(--purple-30) 45%, transparent) !important;
         --in-content-item-hover-text: var(--light-on-dark-button-text-color) !important;
         --in-content-table-background: var(--in-content-box-background) !important;
-        --in-content-table-header-background: var(--purple-40-a30) !important;
+        --in-content-table-header-background: var(--purple-40-a50) !important;
         --in-content-box-info-background: var(--in-content-button-background-solid) !important;
         --focus-outline-offset: 2px !important;
-        --default-focusring: var(--default-focusring-width) solid var(--in-parent-border-focus) !important;
+        --default-focusring: var(--global-focus-outline-width) solid var(--global-focus-outline-color) !important;
         --newtab-background-color: var(--in-content-page-background) !important;
         --newtab-text-primary-color: var(--in-content-page-color) !important;
         --lwt-sidebar-background-color: var(--in-content-box-background) !important;
         --lwt-sidebar-text-color: var(--in-content-page-color) !important;
         --newtab-search-header-background-color: color-mix(
             in srgb,
-            var(--content-principal-page-background) 70%,
+            var(--uc-content-page-background) 70%,
             transparent
         ) !important;
         --newtab-search-header-background-intermediate: color-mix(
             in srgb,
-            var(--content-principal-page-background) 80%,
+            var(--uc-content-page-background) 80%,
             transparent
         ) !important;
         --newtab-seperator-line-color: var(--in-content-button-background-hover) !important;
         --newtab-modal-color: var(--in-content-box-background) !important;
-        --newtab-focus-outline: var(--purple-40-a30) !important;
+        --newtab-focus-outline: var(--purple-40-a50) !important;
         --newtab-focus-border: var(--purple-40) !important;
         --newtab-focus-border-selected: var(--purple-30) !important;
         --newtab-textbox-background-color: var(--in-content-button-background) !important;
@@ -265,13 +265,13 @@
             var(--in-content-page-background) 0%,
             color-mix(
                     in srgb,
-                    var(--content-principal-page-background) 80%,
+                    var(--uc-content-page-background) 80%,
                     var(--in-content-page-background)
                 )
                 50%,
             color-mix(
                     in srgb,
-                    var(--content-principal-page-background) 70%,
+                    var(--uc-content-page-background) 70%,
                     var(--in-content-page-background)
                 )
                 100%
@@ -541,8 +541,8 @@
 @-moz-document url-prefix("about:debugging") {
     @media (prefers-color-scheme: dark) {
         :root {
-            --bg-color: var(--content-principal-page-background) !important;
-            --bg-color-float: var(--content-principal-box-background);
+            --bg-color: var(--uc-content-page-background) !important;
+            --bg-color-float: var(--uc-content-box-background);
             --text-color: var(--ui-text-90) !important;
             --secondary-text-color: var(--ui-text-60) !important;
             --text-color-2nd: var(--ui-text-60) !important;
@@ -552,9 +552,9 @@
             --box-border-color: var(--button-bg-active) !important;
             --shadow-var: 0 0 5px hsla(0, 0%, 0%, 0.08), 0 0 8px hsla(0, 0%, 0%, 0.05);
             --button-color: var(--plaintext-color);
-            --button-bg: var(--content-principal-button-background);
-            --button-bg-hover: var(--content-principal-button-background-hover);
-            --button-bg-active: var(--content-principal-button-background-active);
+            --button-bg: var(--uc-content-button-background);
+            --button-bg-hover: var(--uc-content-button-background-hover);
+            --button-bg-active: var(--uc-content-button-background-active);
             --card-separator-color: var(--button-bg-active) !important;
             --category-background-hover: rgba(12, 12, 13, 0.1);
             --category-text: var(--plaintext-color) !important;
@@ -752,13 +752,13 @@
 @-moz-document url("^moz-extension://.*/blank.html.*")
 {
     :root[uc-extension-id="screenshots@mozilla.org"] .all-buttons-container {
-        background-color: var(--content-principal-box-background) !important;
+        background-color: var(--uc-content-box-background) !important;
         height: 88px !important;
         box-shadow: 0 0 0 1px rgba(12, 12, 13, 0.1), 0 0 8px rgba(12, 12, 13, 0.1) !important;
     }
 
     :root[uc-extension-id="screenshots@mozilla.org"] .all-buttons-container button {
-        color: var(--content-principal-page-color) !important;
+        color: var(--uc-content-page-color) !important;
         background-color: transparent !important;
         border-radius: var(--general-button-border-radius) !important;
         padding: 54px 5px 5px !important;
@@ -769,8 +769,8 @@
     }
 
     :root[uc-extension-id="screenshots@mozilla.org"] .all-buttons-container button:hover {
-        background-color: var(--content-principal-button-background) !important;
-        border: 1px solid var(--content-principal-button-background) !important;
+        background-color: var(--uc-content-button-background) !important;
+        border: 1px solid var(--uc-content-button-background) !important;
     }
 
     :root[uc-extension-id="screenshots@mozilla.org"] .hover-highlight {

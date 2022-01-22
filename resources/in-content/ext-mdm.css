@@ -43,7 +43,7 @@
     :root[uc-extension-id="multithreaded-download-manager@qw.linux-2g64.local"]
         :is(#toolbar, .summary-row)
         > button:not([disabled]):focus-visible {
-        outline: var(--global-focus-ring) !important;
+        outline: var(--global-focus-outline) !important;
         box-shadow: var(--global-focus-shadow) !important;
     }
 

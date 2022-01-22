@@ -107,7 +107,7 @@
             --checkbox-size: calc(var(--font-size) + 2px) !important;
             --checkbox-ink: var(--default-ink) !important;
             --checkbox-checked-ink: var(--in-content-link-color) !important;
-            --checkbox-hover-ink: var(--purple-40-a30) !important;
+            --checkbox-hover-ink: var(--purple-40-a50) !important;
         }
 
         :root[uc-extension-id="uBlock0@raymondhill.net"]:not(#ublock0-epicker) body {

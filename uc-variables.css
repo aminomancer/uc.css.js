@@ -61,15 +61,16 @@ menupopup {
     --panel-description-color: var(--uc-panel-description-color) !important;
     --panel-shortcut-color: var(--uc-panel-shortcut-color) !important;
     --panel-shortcut-focus: var(--uc-panel-shortcut-focus) !important;
-    --panel-disabled-color: var(--context-menu-disabled-color) !important;
+    --panel-disabled-color: var(--uc-menu-disabled-color) !important;
     --panel-separator-color: var(--desaturate-dimmed) !important;
     --toolbarbutton-checked-background: var(--uc-toolbarbutton-checked-background) !important;
     --toolbarbutton-hover-background: var(--uc-toolbarbutton-hover-background) !important;
     --toolbarbutton-active-background: var(--uc-toolbarbutton-active-background) !important;
     --toolbarbutton-checked-active-background: var(--uc-toolbarbutton-checked-active-background);
-    --button-bgcolor: var(--in-parent-button-background) !important;
-    --button-hover-bgcolor: var(--in-parent-button-background-hover) !important;
-    --button-active-bgcolor: var(--in-parent-button-background-active) !important;
+    --default-focusring: auto !important;
+    --button-bgcolor: var(--uc-arrowpanel-faint) !important;
+    --button-hover-bgcolor: var(--uc-arrowpanel-dimmed) !important;
+    --button-active-bgcolor: var(--uc-arrowpanel-dimmed-further) !important;
     --button-primary-bgcolor: var(--purple-45) !important;
     --button-primary-hover-bgcolor: var(--purple-40) !important;
     --button-primary-active-bgcolor: var(--purple-35) !important;
@@ -92,8 +93,9 @@ menupopup {
     --autocomplete-popup-color: var(--lwt-text-color) !important;
     --autocomplete-popup-separator-color: var(--panel-separator-color) !important;
     --autocomplete-popup-highlight-background: var(--arrowpanel-dimmed-further) !important;
-    --focus-outline-color: var(--purple-30) !important;
+    --focus-outline-color: var(--global-focus-outline-color) !important;
     --focus-outline-width: 2px;
+    --focus-outline-offset: 2px;
     --places-cell-focus-bgcolor: var(--uc-places-cell-focus-bgcolor) !important;
     --places-cell-hover-bgcolor: var(--uc-places-cell-hover-bgcolor) !important;
     --download-progress-fill-color: var(--toolbarbutton-icon-fill-attention) !important;
@@ -171,14 +173,14 @@ menupopup {
     --panelui-subview-transition-duration: 150ms;
 
     --error-text-color: var(--warning-color) !important;
-    --buttons-primary-button-bgcolor: var(--in-parent-primary-button-background) !important;
+    --buttons-primary-button-bgcolor: var(--uc-parent-primary-button-background) !important;
     --buttons-primary-button-hover-bgcolor: var(
-        --in-parent-primary-button-background-hover
+        --uc-parent-primary-button-background-hover
     ) !important;
     --buttons-primary-button-active-bgcolor: var(
-        --in-parent-primary-button-background-active
+        --uc-parent-primary-button-background-active
     ) !important;
-    --buttons-primary-button-color: var(--in-parent-primary-button-text-color) !important;
+    --buttons-primary-button-color: var(--uc-parent-primary-button-text-color) !important;
     --buttons-secondary-hover-bgcolor: var(--arrowpanel-dimmed) !important;
     --buttons-secondary-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
 

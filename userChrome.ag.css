@@ -498,7 +498,7 @@ parsererror|sourcetext {
 }
 
 html|*.videocontrols .controlBar {
-    background-color: var(--content-principal-box-background);
+    background-color: var(--uc-content-box-background);
 }
 
 :-moz-native-anonymous .eye-dropper-color-value {
@@ -601,7 +601,7 @@ html|input[type="range"]:is(:hover, :focus-visible)::-moz-range-thumb:hover {
     border: 1px solid transparent;
     border-radius: 100px;
     height: 9px;
-    background-color: var(--content-principal-box-background-odd);
+    background-color: var(--uc-content-box-background-odd);
     overflow: hidden;
 }
 

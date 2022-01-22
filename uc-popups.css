@@ -10,7 +10,7 @@
 tabmodalprompt {
     background: none !important;
     --in-content-page-background: transparent !important;
-    --in-content-page-color: var(--in-parent-page-color) !important;
+    --in-content-page-color: var(--uc-parent-page-color) !important;
     --in-content-box-background: var(--dialog-box-bgcolor) !important;
     --in-content-box-background-dim: var(--dialog-box-bgcolor-dim) !important;
     --in-content-box-border-color: var(--dialog-box-border-color) !important;
@@ -72,7 +72,7 @@ tabmodalprompt {
     background-color: var(--ui-quaternary-bg) !important;
     border-color: var(--uc-menu-border-color) !important;
 
-    color: var(--in-parent-page-color) !important;
+    color: var(--uc-parent-page-color) !important;
     box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.25), 0px 0px 5px -1px rgba(0, 0, 0, 0.125) !important;
 }
 
@@ -97,7 +97,7 @@ tabmodalprompt input {
     user-select: text !important;
     -moz-user-select: text !important;
     background: var(--in-content-box-background) !important;
-    color: var(--in-parent-page-color) !important;
+    color: var(--uc-parent-page-color) !important;
     border-radius: var(--general-button-border-radius) !important;
 }
 
@@ -176,7 +176,7 @@ tabmodalprompt #titleText {
     border-radius: 3px !important;
     background-color: var(--in-content-button-background) !important;
     margin: revert !important;
-    color: var(--in-parent-page-color) !important;
+    color: var(--uc-parent-page-color) !important;
     padding: 2px !important;
     flex-grow: 0.15 !important;
     flex-wrap: nowrap !important;
@@ -185,7 +185,7 @@ tabmodalprompt #titleText {
 
 .tabmodalprompt-buttonContainer button:is(:hover, :focus-visible) {
     background-color: var(--in-content-button-background-hover) !important;
-    color: var(--in-parent-page-color) !important;
+    color: var(--uc-parent-page-color) !important;
 }
 
 .tabmodalprompt-buttonContainer button:hover:active {
@@ -396,7 +396,7 @@ panel[type="autocomplete-richlistbox"]
     #alertSettings:is(:hover, [open], :hover:active),
     #alertBox .close-icon:is(:hover, :hover:active) {
         fill: var(--ui-text-80) !important;
-        background: var(--content-principal-button-background) !important;
+        background: var(--uc-content-button-background) !important;
     }
 
     #alertSettings .button-icon {
@@ -467,7 +467,7 @@ panel[type="autocomplete-richlistbox"]
 
     #alertSettings menupopup :is(menu, menuitem)[_moz-menuactive="true"]:not([disabled="true"]) {
         appearance: none !important;
-        background-color: var(--content-principal-button-background) !important;
+        background-color: var(--uc-content-button-background) !important;
     }
 }
 
@@ -536,7 +536,7 @@ panel[type="autocomplete-richlistbox"]
 
     :root {
         --in-content-page-background: var(--toolbar-bgcolor) !important;
-        --font-color: var(--content-principal-page-color) !important;
+        --font-color: var(--uc-content-page-color) !important;
         --fill-color: var(--arrowpanel-dimmed) !important;
         --border: none !important;
         --border-active-color: var(--in-content-link-color-hover) !important;
@@ -647,13 +647,13 @@ panel[type="autocomplete-richlistbox"]
 }
 
 .pointerlockfswarning button {
-    --content-principal-box-border-color: hsla(270, 7%, 98%, 0.1);
-    --content-principal-button-background: hsla(0, 20%, 90%, 0.08);
-    --content-principal-button-background-hover: hsla(0, 20%, 90%, 0.15);
-    --content-principal-button-background-active: hsla(0, 20%, 90%, 0.19);
+    --uc-content-box-border-color: hsla(270, 7%, 98%, 0.1);
+    --uc-content-button-background: hsla(0, 20%, 90%, 0.08);
+    --uc-content-button-background-hover: hsla(0, 20%, 90%, 0.15);
+    --uc-content-button-background-active: hsla(0, 20%, 90%, 0.19);
     appearance: none !important;
-    background-color: var(--content-principal-button-background) !important;
-    border: 1px solid var(--content-principal-box-border-color) !important;
+    background-color: var(--uc-content-button-background) !important;
+    border: 1px solid var(--uc-content-box-border-color) !important;
     border-radius: var(--general-button-border-radius);
     padding: 4px 8px !important;
     min-height: var(--menuitem-height) !important;
@@ -767,7 +767,7 @@ panel[type="autocomplete-richlistbox"]
     #commonDialogWindow[dialogroot] *,
     .dialog-button-box {
         --in-content-page-background: transparent !important;
-        --in-content-page-color: var(--in-parent-page-color) !important;
+        --in-content-page-color: var(--uc-parent-page-color) !important;
         --in-content-box-background: var(--dialog-box-bgcolor) !important;
         --in-content-box-background-dim: var(--dialog-box-bgcolor-dim) !important;
         --in-content-box-border-color: var(--dialog-box-border-color) !important;
@@ -1060,22 +1060,22 @@ panel[type="autocomplete-richlistbox"]
 {
     :root,
     :root dialog {
-        --in-content-page-background: var(--content-principal-page-background) !important;
-        --in-content-page-color: var(--content-principal-page-color) !important;
-        --in-content-box-background: var(--content-principal-box-background) !important;
-        --in-content-box-background-odd: var(--content-principal-box-background-odd) !important;
-        --in-content-box-background-dim: var(--content-principal-box-background-dim) !important;
-        --in-content-box-border-color: var(--content-principal-box-border-color) !important;
-        --in-content-button-background: var(--content-principal-button-background) !important;
+        --in-content-page-background: var(--uc-content-page-background) !important;
+        --in-content-page-color: var(--uc-content-page-color) !important;
+        --in-content-box-background: var(--uc-content-box-background) !important;
+        --in-content-box-background-odd: var(--uc-content-box-background-odd) !important;
+        --in-content-box-background-dim: var(--uc-content-box-background-dim) !important;
+        --in-content-box-border-color: var(--uc-content-box-border-color) !important;
+        --in-content-button-background: var(--uc-content-button-background) !important;
         --in-content-button-background-hover: var(
-            --content-principal-button-background-hover
+            --uc-content-button-background-hover
         ) !important;
         --in-content-button-background-active: var(
-            --content-principal-button-background-active
+            --uc-content-button-background-active
         ) !important;
-        --in-content-button-background-solid: var(--content-principal-button-background-solid);
+        --in-content-button-background-solid: var(--uc-content-button-background-solid);
         --in-content-item-selected: var(--purple-40) !important;
-        --in-content-border-hover: var(--content-principal-border-hover) !important;
+        --in-content-border-hover: var(--uc-content-border-hover) !important;
         --in-content-link-color: var(--purple-30) !important;
         --in-content-link-color-hover: var(--purple-25) !important;
         --in-content-link-color-active: var(--purple-20) !important;
@@ -1089,7 +1089,7 @@ panel[type="autocomplete-richlistbox"]
         --in-content-button-border-radius: var(--general-button-border-radius) !important;
         --in-content-accent-color: var(--purple-35) !important;
         --in-content-table-background: var(--in-content-box-background) !important;
-        --in-content-table-header-background: var(--purple-40-a30) !important;
+        --in-content-table-header-background: var(--purple-40-a50) !important;
     }
 
     #unknownContentType {
@@ -1154,7 +1154,7 @@ panel[type="autocomplete-richlistbox"]
     :root[dialogroot],
     :root[dialogroot] dialog {
         --in-content-page-background: transparent !important;
-        --in-content-page-color: var(--in-parent-page-color) !important;
+        --in-content-page-color: var(--uc-parent-page-color) !important;
         --in-content-box-background: var(--dialog-box-bgcolor) !important;
         --in-content-box-background-dim: var(--dialog-box-bgcolor-dim) !important;
         --in-content-box-border-color: var(--dialog-box-border-color) !important;
@@ -1477,7 +1477,7 @@ panel[type="autocomplete-richlistbox"]
 @-moz-document url-prefix("chrome://global/content/print.html")
 {
     :root {
-        --in-content-page-background: var(--content-principal-page-background) !important;
+        --in-content-page-background: var(--uc-content-page-background) !important;
         --dropdown-bgcolor: var(--in-content-page-background) !important;
     }
 }
@@ -1629,7 +1629,7 @@ link[href="chrome://global/content/printPagination.css"]
     }
 
     button:focus-visible {
-        outline: var(--global-focus-ring) !important;
+        outline: var(--global-focus-outline) !important;
         box-shadow: var(--global-focus-shadow) !important;
     }
 
@@ -1670,7 +1670,7 @@ link[href="chrome://global/content/printPagination.css"]
 
     #update-available-whats-new,
     .text-link {
-        color: var(--in-parent-link-color) !important;
+        color: var(--uc-parent-link-color) !important;
         text-decoration: none !important;
     }
 
@@ -1680,13 +1680,13 @@ link[href="chrome://global/content/printPagination.css"]
 
     #update-available-whats-new:is(:hover, :focus-visible),
     .text-link:is(:hover, :focus-visible) {
-        color: var(--in-parent-link-color-hover) !important;
+        color: var(--uc-parent-link-color-hover) !important;
         text-decoration: underline !important;
     }
 
     #update-available-whats-new:hover:active,
     .text-link:hover:active {
-        color: var(--in-parent-link-color-active) !important;
+        color: var(--uc-parent-link-color-active) !important;
     }
 }
 
@@ -1926,7 +1926,7 @@ link[href="chrome://global/content/printPagination.css"]
     }
 
     radio[disabled="true"] {
-        color: var(--context-menu-disabled-color) !important;
+        color: var(--uc-menu-disabled-color) !important;
     }
 
     #imagecontainerbox {

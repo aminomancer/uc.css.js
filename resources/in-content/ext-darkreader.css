@@ -59,11 +59,11 @@
     }
 
     :root[uc-extension-id="addon@darkreader.org"] .m-donate-button {
-        background-color: var(--in-parent-primary-button-background) !important;
+        background-color: var(--uc-parent-primary-button-background) !important;
     }
 
     :root[uc-extension-id="addon@darkreader.org"] .m-donate-button:hover {
-        background-color: var(--in-parent-primary-button-background-hover) !important;
+        background-color: var(--uc-parent-primary-button-background-hover) !important;
     }
 
     :root[uc-extension-id="addon@darkreader.org"] input::placeholder,

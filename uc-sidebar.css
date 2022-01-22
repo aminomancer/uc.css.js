@@ -508,7 +508,7 @@ there are normally no twistys in sorted trees so it is relatively safe to collap
     }
 
     .item.empty .item-title-container {
-        color: var(--context-menu-disabled-color) !important;
+        color: var(--uc-menu-disabled-color) !important;
         background: none !important;
     }
 

@@ -65,12 +65,23 @@
     padding: 0 !important;
 }
 
-.panel-banner-item:is([notificationid="update-available"], [notificationid="update-downloading"])
-    > .toolbarbutton-icon,
-#PanelUI-menu-button:is([badge-status="update-available"], [badge-status="update-downloading"])
+.panel-banner-item[notificationid="update-available"] > .toolbarbutton-icon,
+#PanelUI-menu-button[badge-status="update-available"]
     > .toolbarbutton-badge-stack
     > .toolbarbutton-badge {
+    background: var(--update-badge-bg) url(chrome://userchrome/content/update-icon-inverted.svg)
+        no-repeat center/contain !important;
+    fill: var(--update-badge-color) !important;
     transform: scaleY(-1);
+}
+
+.panel-banner-item[notificationid="update-downloading"] > .toolbarbutton-icon,
+#PanelUI-menu-button[badge-status="update-downloading"]
+    > .toolbarbutton-badge-stack
+    > .toolbarbutton-badge {
+    background: var(--update-badge-bg) url(chrome://userchrome/content/more.svg) no-repeat
+        center/75% !important;
+    fill: var(--update-badge-color) !important;
 }
 
 .panel-banner-item[notificationid="update-restart"] > .toolbarbutton-icon,
@@ -80,7 +91,6 @@
     background: var(--update-badge-bg) url(chrome://userchrome/content/check.svg) no-repeat
         center/contain !important;
     fill: var(--update-badge-color) !important;
-    transform: none !important;
 }
 
 .panel-banner-item[notificationid="update-unsupported"] > .toolbarbutton-icon,
@@ -93,7 +103,6 @@
     background: var(--low-warning-icon-background)
         url(chrome://userchrome/content/check-partial.svg) no-repeat center/contain !important;
     fill: var(--low-warning-icon-detail) !important;
-    transform: none !important;
 }
 
 #PanelUI-menu-button[badge-status] > .toolbarbutton-badge-stack > .toolbarbutton-badge {

@@ -17,7 +17,7 @@ and a few elements like checkboxes */
         --menu-color: var(--ui-text-80) !important;
         --menuitem-hover-background-color: var(--uc-arrowpanel-dimmed) !important;
         --menuitem-disabled-hover-background-color: initial !important;
-        --menu-disabled-color: var(--context-menu-disabled-color) !important;
+        --menu-disabled-color: var(--uc-menu-disabled-color) !important;
         --menu-border-color: var(--uc-menu-border-color) !important;
         --arrowpanel-border-color: var(--uc-menu-border-color) !important;
         --menu-icon-opacity: 1 !important;
@@ -57,7 +57,7 @@ and a few elements like checkboxes */
         background-size: contain;
         border: 1px solid var(--checkbox-border-color);
         background-color: var(--checkbox-unchecked-bgcolor);
-        color: var(--in-parent-primary-button-text-color);
+        color: var(--uc-parent-primary-button-text-color);
     }
 
     input[type="checkbox"] {
@@ -233,7 +233,7 @@ and a few elements like checkboxes */
         background-size: contain;
         border: 1px solid var(--checkbox-border-color);
         background-color: var(--checkbox-unchecked-bgcolor);
-        color: var(--in-parent-primary-button-text-color);
+        color: var(--uc-parent-primary-button-text-color);
     }
 
     menupopup menuitem[type="checkbox"]::before {
@@ -447,7 +447,7 @@ and a few elements like checkboxes */
 
     /* make the highlighting on unsaved stylesheets more obvious */
     #style-editor-chrome-window li.unsaved:not(.splitview-active) {
-        background-color: var(--content-principal-box-background) !important;
+        background-color: var(--uc-content-box-background) !important;
     }
 
     #style-editor-chrome-window li.unsaved > hgroup .stylesheet-name label,

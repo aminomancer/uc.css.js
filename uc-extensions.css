@@ -1030,7 +1030,7 @@ so by default we hide the border on extension panels (see userChrome.au.css) */
 
 /* a possible way to make sidebar border more theme responsive */
 /* #sidebar-box:not([sidebarcommand="viewBookmarksSidebar"], [sidebarcommand="viewHistorySidebar"], [sidebarcommand="viewTabsSidebar"], [sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]) {
-    --sidebar-border-color: var(--content-principal-box-background-odd) !important;
+    --sidebar-border-color: var(--uc-content-box-background-odd) !important;
 }
 
 #sidebar-header {

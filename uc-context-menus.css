@@ -182,7 +182,7 @@ menupopup menuitem:is([type="checkbox"], [type="radio"])::before {
     background-size: contain;
     border: 1px solid var(--checkbox-border-color);
     background-color: var(--checkbox-unchecked-bgcolor);
-    color: var(--in-parent-primary-button-text-color);
+    color: var(--uc-parent-primary-button-text-color);
 }
 
 menupopup .unified-nav-current[type="radio"][checked="true"] {

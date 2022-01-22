@@ -2084,7 +2084,7 @@ animation-duration of 730ms, 71% is the point where we start the fade out. */
         }
 
         radio[disabled="true"] {
-            color: var(--context-menu-disabled-color);
+            color: var(--uc-menu-disabled-color);
         }
     }
 }

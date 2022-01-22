@@ -1085,6 +1085,11 @@ popupnotificationcontent label[control]:not([hidden]) + menulist {
     background: var(--protections-popup-switch-on-hover-background-custom) !important;
 }
 
+.protections-popup-tp-switch:focus-visible {
+    outline: var(--focus-outline) !important;
+    outline-offset: var(--focus-outline-offset) !important;
+}
+
 .protections-popup-tp-switch:not([enabled]):hover:active {
     background: var(--protections-popup-switch-off-active-background-custom) !important;
 }
@@ -1628,22 +1633,22 @@ panel .header {
 }
 
 .PanelUI-profiler-button-primary {
-    background-color: var(--in-parent-primary-button-background) !important;
-    color: var(--in-parent-primary-button-text-color) !important;
+    background-color: var(--uc-parent-primary-button-background) !important;
+    color: var(--uc-parent-primary-button-text-color) !important;
     box-shadow: revert !important;
 }
 
 .PanelUI-profiler-button-primary:hover {
-    background-color: var(--in-parent-primary-button-background-hover) !important;
+    background-color: var(--uc-parent-primary-button-background-hover) !important;
 }
 
 .PanelUI-profiler-button-primary:hover:active {
-    background-color: var(--in-parent-primary-button-background-active) !important;
+    background-color: var(--uc-parent-primary-button-background-active) !important;
 }
 
 .PanelUI-profiler-button:focus-visible {
-    box-shadow: 0 0 0 1px var(--in-parent-primary-button-background-hover) inset,
-        0 0 0 1px var(--in-parent-primary-button-background-hover),
+    box-shadow: 0 0 0 1px var(--uc-parent-primary-button-background-hover) inset,
+        0 0 0 1px var(--uc-parent-primary-button-background-hover),
         0 0 0 4px var(--global-focus-shadow-color) !important;
 }
 

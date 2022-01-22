@@ -15,20 +15,21 @@ but other than that these variables should be available everywhere. */
     font-family: "Fira Code UC";
     font-style: normal;
     src: local("Fira Code"), local("Fira Code Light"), url(../fonts/FiraCode-VF.woff);
+    /* This enables some alternate glyphs and ligatures */
     font-feature-settings: "ss01", "ss02", "cv19", "ss05", "ss07", "ss08", "cv14", "cv25", "cv28",
         "cv32";
 }
 
 :root {
-    --ui-text-10: rgba(255, 255, 255, 0.1);
-    --ui-text-20: rgba(255, 255, 255, 0.2);
-    --ui-text-30: rgba(255, 255, 255, 0.3);
-    --ui-text-40: rgba(255, 255, 255, 0.4);
-    --ui-text-50: rgba(255, 255, 255, 0.5);
-    --ui-text-60: rgba(255, 255, 255, 0.6);
-    --ui-text-70: rgba(255, 255, 255, 0.7);
-    --ui-text-80: rgba(255, 255, 255, 0.8);
-    --ui-text-90: rgba(255, 255, 255, 0.9);
+    --ui-text-10: hsla(0, 0%, 100%, 0.1);
+    --ui-text-20: hsla(0, 0%, 100%, 0.2);
+    --ui-text-30: hsla(0, 0%, 100%, 0.3);
+    --ui-text-40: hsla(0, 0%, 100%, 0.4);
+    --ui-text-50: hsla(0, 0%, 100%, 0.5);
+    --ui-text-60: hsla(0, 0%, 100%, 0.6);
+    --ui-text-70: hsla(0, 0%, 100%, 0.7);
+    --ui-text-80: hsla(0, 0%, 100%, 0.8);
+    --ui-text-90: hsla(0, 0%, 100%, 0.9);
     --ui-text-100: #fff;
 
     --uc-accent-color: hsl(233, 59%, 8%);
@@ -126,11 +127,14 @@ but other than that these variables should be available everywhere. */
     --ui-secondary-bg: hsl(234, 39%, 10%);
     --ui-tertiary-bg: hsl(233, 39%, 8.5%);
     --ui-quaternary-bg: hsl(233, 34%, 8.5%);
-    --global-focus-shadow-color: var(--purple-40-a30);
-    --global-focus-outline-color: var(--purple-40);
-    --global-focus-ring: 2px solid var(--global-focus-shadow-color);
-    --global-focus-shadow: 0 0 0 3px var(--global-focus-shadow-color),
-        0 0 0 1px var(--global-focus-outline-color);
+    --global-focus-shadow-color: var(--purple-30-a50);
+    --global-focus-outline-color: var(--purple-30);
+    --global-focus-outline-width: 2px;
+    --global-focus-outline: var(--global-focus-outline-width) solid
+        var(--global-focus-outline-color);
+    --global-focus-shadow: 0 0 0 2px var(--global-focus-shadow-color),
+        0 0 0 2px var(--global-focus-outline-color);
+    --global-focus-outline-offset: -2px;
 
     --transparent-img-background: center/16px repeat hsla(0, 0%, 80%)
         url(chrome://userchrome/content/checker.svg);
@@ -147,24 +151,35 @@ but other than that these variables should be available everywhere. */
     --dialog-box-border-hover: hsla(232, 100%, 85%, 0.3);
     --blurred-dialog-border-color: hsla(240, 7%, 20%, 0.8);
     --alertbox-bgcolor: hsla(0, 0%, 14%, 0.97);
-    --notification-menu-color: var(--in-parent-page-color);
+    --notification-menu-color: var(--uc-parent-page-color);
     --ui-disabled-alpha: 0.5;
-    --context-menu-disabled-color: hsla(213, 43%, 89%, var(--ui-disabled-alpha, 0.5));
+    --uc-menu-disabled-color: hsla(213, 43%, 89%, var(--ui-disabled-alpha, 0.5));
 
-    /* this url is for the icon that displays in the identity box when entering text in the urlbar, and on the new tab page.
-    my script searchModeIndicatorIcons.uc.js detects your default engine and looks for a matching icon in chrome/resources/engines/
-    so for example if your default engine is Google, it'll find google.svg in that folder (it comes with this theme)
-    and dynamically set this variable to the url for google.svg. if you set your default engine to something that
-    doesn't have a matching icon included with the theme, you can add your own icon to this folder.
-    just make sure the file ends in .svg, .png, .jpg, or .jpeg and matches the name of the default engine.
-    the name of the engine is whatever appears in the search shortcuts list in about:preferences#search.
-    so let's say you download an engine for amazon, and the name that appears in the list is "Search with Amazon".
-    technically, the script is capable of reducing "Search with Amazon" to "amazon" and linking it to the included amazon icon.
-    but if you want to add an icon for a search engine that has spaces in its name, write it out in lowercase without spaces.
-    so "Search with Amazon" would become "searchwithamazon" and "Duck Duck Go" would become "duckduckgo" for example.
-    if your search engine is displayed in non-latin characters then use exactly those characters when naming the icon file.
-    if the script still doesn't work, you can override this directly in custom-chrome.css by adding this rule:
-    :root{--default-search-identity-icon:url(chrome://userchrome/content/engines/my-engine-icon.svg)!important;} */
+    /* this url is for the icon that displays in the identity box when entering
+    text in the urlbar, and on the new tab page. my script
+    searchModeIndicatorIcons.uc.js detects your default engine and looks for a
+    matching icon in chrome/resources/engines/ so for example if your default
+    engine is Google, it'll find google.svg in that folder (it comes with this
+    theme) and dynamically set this variable to the url for google.svg. if you
+    set your default engine to something that doesn't have a matching icon
+    included with the theme, you can add your own icon to this folder. just make
+    sure the file ends in .svg, .png, .jpg, or .jpeg and matches the name of the
+    default engine. the name of the engine is whatever appears in the search
+    shortcuts list in about:preferences#search. so let's say you download an
+    engine for amazon, and the name that appears in the list is "Search with
+    Amazon". technically, the script is capable of reducing "Search with Amazon"
+    to "amazon" and linking it to the included amazon icon. but if you want to
+    add an icon for a search engine that has spaces in its name, write it out in
+    lowercase without spaces. so "Search with Amazon" would become
+    "searchwithamazon" and "Duck Duck Go" would become "duckduckgo" for example.
+    if your search engine is displayed in non-latin characters then use exactly
+    those characters when naming the icon file. if the script still doesn't
+    work, you can override this directly in custom-chrome.css by adding this
+    rule:
+    :root{
+        --default-search-identity-icon: url(chrome://userchrome/content/engines/my-engine-icon.svg) !important;
+    }
+    */
     --default-search-identity-icon: url(chrome://userchrome/content/search-glass.svg);
     --identity-box-solid-bg: hsl(233, 34%, 22%);
     --identity-box-focus-bg: hsl(234, 34%, 23%);
@@ -231,11 +246,11 @@ but other than that these variables should be available everywhere. */
     );
     --multiselected-color: hsl(241, 50%, 51%);
 
-    /* width of the spacer between the tabs and the window control buttons.
-    this is basically the only drag space left, so treat it conservatively.
-    I design this theme based on my own use, and I very rarely move browser windows
-    by dragging them. so I can afford to make the spacers very small.
-    you might prefer a larger spacer width. override this in custom-chrome.css. */
+    /* width of the spacer between the tabs and the window control buttons. this
+    is basically the only drag space left, so treat it conservatively. I design
+    this theme based on my own use, and I very rarely move browser windows by
+    dragging them. so I can afford to make the spacers very small. you might
+    prefer a larger spacer width. override this in custom-chrome.css. */
     --titlebar-spacer-width: 32px;
     /* subtle gradient drawn behind the window control buttons. */
     --titlebar-gradient: radial-gradient(
@@ -260,17 +275,23 @@ but other than that these variables should be available everywhere. */
     --confirmation-hint-border-color: hsl(240, 60%, 59%);
     --picture-in-picture-toggle-bgcolor: hsl(244, 100%, 63%);
 
+    --ui-textbox-bgcolor: hsl(233, 24%, 28%);
+    --ui-textbox-focus-bgcolor: hsl(232, 22%, 34%);
+    --ebp-menulist-background-color: hsl(232, 24%, 32%);
+    --ebp-menulist-menuitem-hover-background-color: hsl(232, 21%, 40%);
+    --ebp-menulist-separator-color: hsl(232, 21%, 43%);
+    --ebp-favicon-background-color: var(--dialog-bgcolor);
+    --ui-solid-button-bgcolor: var(--uc-arrowpanel-dimmed);
+    --ui-solid-button-hover-bgcolor: var(--uc-arrowpanel-dimmed-further);
+    --ui-solid-button-active-bgcolor: var(--uc-arrowpanel-dimmed-even-further);
+    --ebmp-hover-bgcolor: hsl(233, 24%, 33%);
+    --ebmp-focus-bgcolor: hsl(233, 24%, 38%);
+
     --urlbar-base-font-weight: 400;
     --urlbar-result-strong-font-weight: 400;
     --urlbar-results-bgcolor: var(--ui-secondary-bg);
     /* the width of a search one-off button in the urlbar */
     --urlbar-one-offs-engine-width: 28px;
-    /* how long the scrolling one-offs slider should be. 8 means it's long enough for 8 buttons to be visible without scrolling. */
-    --urlbar-one-offs-engines-per-scroll: 8;
-    /* don't change this unless you know what you're doing. multiplies the one-off button width by the number per scroll to yield the total width */
-    --urlbar-one-offs-width: calc(
-        var(--urlbar-one-offs-engine-width) * var(--urlbar-one-offs-engines-per-scroll)
-    );
     --loading-throbber-fill: hsl(225, 100%, 75%);
     --busy-throbber-fill: hsl(218, 90%, 85%);
     --sanitize-border-color: hsla(0, 0%, 5%, 0.2);
@@ -286,9 +307,10 @@ but other than that these variables should be available everywhere. */
     --pinned-tab-width: 36px;
     --tabbrowser-arrowscrollbox-display: none;
     /* how round should tab buttons be? e.g. the close button or the sound icon.
-    2px yields a rounded square. 50% yields a circle. this affects actual tab buttons,
-    as well as buttons in tab-like elements like the all-tabs menu and my vertical tabs pane script.
-    personally I've settled on circles for small buttons, rounded squares for big buttons. */
+    2px yields a rounded square. 50% yields a circle. this affects actual tab
+    buttons, as well as buttons in tab-like elements like the all-tabs menu and
+    my vertical tabs pane script. personally I've settled on circles for small
+    buttons, rounded squares for big buttons. */
     --tab-button-border-radius: 50%;
     --tree-row-height: 24px;
     --menuitem-height: 26px;
@@ -299,7 +321,8 @@ but other than that these variables should be available everywhere. */
     --findbar-textbox-bg-transition-duration: 200ms;
     --findbar-textbox-bg-notfound-transition-duration: 300ms;
     --default-identity-icon: url(chrome://userchrome/content/info-filled.svg);
-    /* icon used for screenshot buttons. I prefer the second one, but use the first one it if you prefer the vanilla icon */
+    /* icon used for screenshot buttons. I prefer the second one, but use the
+    first one it if you prefer the vanilla icon */
     /* --screenshot-icon: url(chrome://userchrome/content/skin/screenshot.svg); */
     --screenshot-icon: url(chrome://userchrome/content/devtools/command-screenshot.svg);
     --fxa-ui-img: url(chrome://userchrome/content/fxa/avatar-big.svg);
@@ -338,7 +361,8 @@ but other than that these variables should be available everywhere. */
     --purple-35: hsl(245, 100%, 65%);
     --purple-40: hsl(250, 100%, 60%);
     --purple-40-a10: hsla(250, 100%, 60%, 0.1);
-    --purple-40-a30: hsla(250, 100%, 60%, 0.5);
+    --purple-40-a30: hsla(250, 100%, 60%, 0.3);
+    --purple-40-a50: hsla(250, 100%, 60%, 0.5);
     --purple-45: hsl(250, 87%, 55%);
     --purple-50: hsl(256, 87%, 50%) !important;
     --purple-55: hsl(256, 87%, 45%);
@@ -350,70 +374,44 @@ but other than that these variables should be available everywhere. */
     --pink-35: hsl(340, 73%, 65%);
     --pink-30: hsl(340, 73%, 70%);
 
-    --in-parent-page-background: transparent;
-    --in-parent-page-color: hsl(212, 43%, 90%);
-    --in-parent-box-background: var(--dialog-box-bgcolor);
-    --in-parent-box-background-dim: var(--dialog-box-bgcolor-dim);
-    --in-parent-box-border-color: var(--dialog-box-border-color);
-    --in-parent-button-background: var(--uc-arrowpanel-faint);
-    --in-parent-button-background-hover: var(--uc-arrowpanel-dimmed);
-    --in-parent-button-background-active: var(--uc-arrowpanel-dimmed-further);
-    --in-parent-item-selected: var(--purple-40);
-    --in-parent-item-hover: var(--uc-arrowpanel-dimmed);
-    --in-parent-border-highlight: var(--purple-40);
-    --in-parent-border-hover: var(--dialog-box-border-hover);
-    --in-parent-border-focus: var(--purple-40);
-    --in-parent-border-active: var(--purple-40);
-    --in-parent-border-active-shadow: var(--purple-40-a30);
-    --in-parent-category-outline-focus: 1px solid transparent;
-    --in-parent-link-color: var(--purple-35);
-    --in-parent-link-color-hover: var(--purple-30);
-    --in-parent-link-color-active: var(--purple-30);
-    --in-parent-primary-button-background: var(--purple-40);
-    --in-parent-primary-button-background-hover: var(--purple-35);
-    --in-parent-primary-button-background-active: var(--purple-30);
-    --in-parent-primary-button-text-color: #fff;
-    --ui-textbox-bgcolor: hsl(233, 24%, 28%);
-    --ui-textbox-focus-bgcolor: hsl(232, 22%, 34%);
-    --ebp-menulist-background-color: hsl(232, 24%, 32%);
-    --ebp-menulist-menuitem-hover-background-color: hsl(232, 21%, 40%);
-    --ebp-menulist-separator-color: hsl(232, 21%, 43%);
-    --ebp-favicon-background-color: var(--dialog-bgcolor);
-    --ui-solid-button-bgcolor: var(--uc-arrowpanel-dimmed);
-    --ui-solid-button-hover-bgcolor: var(--uc-arrowpanel-dimmed-further);
-    --ui-solid-button-active-bgcolor: var(--uc-arrowpanel-dimmed-even-further);
-    --ebmp-hover-bgcolor: hsl(233, 24%, 33%);
-    --ebmp-focus-bgcolor: hsl(233, 24%, 38%);
+    --uc-parent-page-color: hsl(212, 43%, 90%);
+    --uc-parent-link-color: var(--purple-35);
+    --uc-parent-link-color-hover: var(--purple-30);
+    --uc-parent-link-color-active: var(--purple-30);
+    --uc-parent-primary-button-background: var(--purple-40);
+    --uc-parent-primary-button-background-hover: var(--purple-35);
+    --uc-parent-primary-button-background-active: var(--purple-30);
+    --uc-parent-primary-button-text-color: #fff;
 
-    --content-principal-page-background: var(--in-content-bg-dark);
-    --content-principal-page-background-light: hsl(240, 3%, 12%);
-    --content-principal-page-color: var(--in-parent-page-color);
-    --content-principal-box-background: hsl(240, 2%, 14%);
-    --content-principal-box-background-odd: hsl(260, 3%, 19%);
-    --content-principal-box-background-dim: hsl(240, 2%, 12%);
-    --content-principal-box-border-color: hsla(240, 7%, 98%, 0.1);
-    --content-principal-button-background: hsla(240, 3%, 70%, 0.1);
-    --content-principal-button-background-hover: hsla(240, 4%, 70%, 0.15);
-    --content-principal-button-background-active: hsla(240, 5%, 70%, 0.19);
-    --content-principal-button-background-solid: hsl(240, 3%, 18%);
-    --content-principal-border-hover: var(--content-principal-button-background-hover);
+    --uc-content-page-background: var(--in-content-bg-dark);
+    --uc-content-page-background-light: hsl(240, 3%, 12%);
+    --uc-content-page-color: var(--uc-parent-page-color);
+    --uc-content-box-background: hsl(240, 2%, 14%);
+    --uc-content-box-background-odd: hsl(260, 3%, 19%);
+    --uc-content-box-background-dim: hsl(240, 2%, 12%);
+    --uc-content-box-border-color: hsla(240, 7%, 98%, 0.1);
+    --uc-content-button-background: hsla(240, 3%, 70%, 0.1);
+    --uc-content-button-background-hover: hsla(240, 4%, 70%, 0.15);
+    --uc-content-button-background-active: hsla(240, 5%, 70%, 0.19);
+    --uc-content-button-background-solid: hsl(240, 3%, 18%);
+    --uc-content-border-hover: var(--uc-content-button-background-hover);
 
-    --uc-checkbox-border-color: var(--in-parent-box-border-color);
+    --uc-checkbox-border-color: var(--dialog-box-border-color);
     --uc-checkbox-checked-border-color: transparent;
-    --uc-checkbox-unchecked-bgcolor: var(--in-parent-button-background);
-    --uc-checkbox-unchecked-hover-bgcolor: var(--in-parent-button-background-hover);
-    --uc-checkbox-unchecked-active-bgcolor: var(--in-parent-button-background-active);
-    --uc-checkbox-checked-bgcolor: var(--in-parent-primary-button-background);
-    --uc-checkbox-checked-color: var(--in-parent-primary-button-text-color);
-    --uc-checkbox-checked-hover-bgcolor: var(--in-parent-primary-button-background-hover);
-    --uc-checkbox-checked-active-bgcolor: var(--in-parent-primary-button-background-active);
+    --uc-checkbox-unchecked-bgcolor: var(--uc-arrowpanel-faint);
+    --uc-checkbox-unchecked-hover-bgcolor: var(--uc-arrowpanel-dimmed);
+    --uc-checkbox-unchecked-active-bgcolor: var(--uc-arrowpanel-dimmed-further);
+    --uc-checkbox-checked-bgcolor: var(--uc-parent-primary-button-background);
+    --uc-checkbox-checked-color: var(--uc-parent-primary-button-text-color);
+    --uc-checkbox-checked-hover-bgcolor: var(--uc-parent-primary-button-background-hover);
+    --uc-checkbox-checked-active-bgcolor: var(--uc-parent-primary-button-background-active);
 
     --uc-switch-off-background: hsl(233, 15%, 32%);
     --uc-switch-off-hover-background: hsl(233, 18%, 27%);
     --uc-switch-off-active-background: hsl(233, 19%, 24.5%);
     --uc-switch-off-hover-border: hsl(233, 15%, 32%);
 
-    accent-color: var(--in-parent-border-focus);
+    accent-color: var(--purple-40);
 }
 
 :root[fxastatus="not_configured"] {
@@ -493,11 +491,14 @@ popupnotification,
     }
 }
 
-/* you can remove the following rule if you want to be able to drag tabs across the whole strip.
-but doing so causes some minor visual bugs with rounded outside tab corners which really bother me for some reason.
-if you need to be able to autoscroll while dragging, and the visual bugs bother you, then instead of deleting this rule,
-you can simply disable rounded outside corners by setting userChrome.tabs.rounded-outer-corners.disabled to false.
-this will mean only the top corners are rounded, but it'll bring back the scroll buttons without any visual bugs. */
+/* you can remove the following rule if you want to be able to drag tabs across
+the whole strip. but doing so causes some minor visual bugs with rounded outside
+tab corners which really bother me for some reason. if you need to be able to
+autoscroll while dragging, and the visual bugs bother you, then instead of
+deleting this rule, you can simply disable rounded outside corners by setting
+userChrome.tabs.rounded-outer-corners.disabled to false. this will mean only the
+top corners are rounded, but it'll bring back the scroll buttons without any
+visual bugs. */
 @supports -moz-bool-pref("userChrome.tabs.rounded-outer-corners.disabled") {
     :root {
         --tabbrowser-arrowscrollbox-display: block;

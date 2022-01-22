@@ -194,11 +194,11 @@
     }
 
     richlistitem.download-state > .downloadButton:is(:hover, :focus-visible) .button-box {
-        background: var(--content-principal-button-background-hover) !important;
+        background: var(--uc-content-button-background-hover) !important;
     }
 
     richlistitem.download-state > .downloadButton:hover:active .button-box {
-        background: var(--content-principal-button-background-active) !important;
+        background: var(--uc-content-button-background-active) !important;
     }
 
     richlistitem.download-state > .downloadButton .button-box {
@@ -351,11 +351,11 @@
     richlistitem.download-state:is([verdict], .openWhenFinished):is(:hover, :focus-within),
     richlistitem.download-state[state="1"][exists]:hover:active,
     richlistitem.download-state:is([verdict], .openWhenFinished):hover:active {
-        background: var(--content-principal-button-background-hover) !important
+        background: var(--uc-content-button-background-hover) !important
     }
 
     richlistitem.download-state[selected]:not(:hover, :focus-within) {
-        background: var(--content-principal-button-background) !important
+        background: var(--uc-content-button-background) !important
     }
 
     richlistitem.download-state[state="1"]:not([exists]) .downloadTarget {

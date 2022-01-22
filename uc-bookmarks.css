@@ -357,7 +357,7 @@
     border: 1px solid var(--checkbox-border-color) !important;
     border-radius: 2px;
     background-color: var(--checkbox-unchecked-bgcolor) !important;
-    color: var(--in-parent-primary-button-text-color) !important;
+    color: var(--uc-parent-primary-button-text-color) !important;
 }
 
 :is(#bookmarkpropertiesdialog, #editBookmarkPanel) richlistbox[id] richlistitem label {

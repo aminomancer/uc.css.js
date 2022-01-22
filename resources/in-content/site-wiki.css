@@ -1918,16 +1918,16 @@ You can use greasemonkey or any other form of monkey that supports the document-
     }
 
     .wikiEditor-ui-toolbar .page-characters div span:hover {
-        background-color: var(--content-principal-button-background-hover) !important;
+        background-color: var(--uc-content-button-background-hover) !important;
         border-color: transparent !important;
     }
 
     .wikiEditor-ui-toolbar .booklet > .index > :hover {
-        background-color: var(--content-principal-button-background-hover) !important;
+        background-color: var(--uc-content-button-background-hover) !important;
     }
 
     .wikiEditor-ui-toolbar .booklet > .index > .current {
-        background-color: var(--content-principal-button-background-active) !important;
+        background-color: var(--uc-content-button-background-active) !important;
         color: var(--attention-color) !important;
     }
 
@@ -1943,7 +1943,7 @@ You can use greasemonkey or any other form of monkey that supports the document-
 
     .wikiEditor-ui-toolbar .page-table td {
         color: var(--uc-wiki-text-90) !important;
-        border-color: var(--content-principal-border-hover) !important;
+        border-color: var(--uc-content-border-hover) !important;
     }
 
     #bodyContent .wikiEditor-ui-toolbar :is(h1, h2, h3, h4, h5) {
@@ -2001,7 +2001,7 @@ You can use greasemonkey or any other form of monkey that supports the document-
     }
 
     .wikiEditor-ui-toolbar .group .tool-select .menu .options .option:hover {
-        background-color: var(--content-principal-button-background-hover) !important;
+        background-color: var(--uc-content-button-background-hover) !important;
     }
 
     :is(.oo-ui-popupToolGroup-active, .oo-ui-popupToolGroup-active-tools)

@@ -100,7 +100,7 @@
         background-size: contain;
         border: 1px solid var(--uc-checkbox-border-color);
         background-color: var(--uc-checkbox-unchecked-bgcolor);
-        color: var(--in-parent-primary-button-text-color);
+        color: var(--uc-parent-primary-button-text-color);
     }
 
     :root[uc-extension-id="sort-bookmarks@heftig"] input[type="checkbox"] {
@@ -203,13 +203,13 @@
 
     :root[uc-extension-id="sort-bookmarks@heftig"]
         button[type="submit"]:is(:hover, :focus-visible, :-moz-focusring):not([disabled]) {
-        background-color: var(--in-parent-primary-button-background) !important;
+        background-color: var(--uc-parent-primary-button-background) !important;
         border-color: transparent !important;
     }
 
     :root[uc-extension-id="sort-bookmarks@heftig"]
         button[type="submit"]:is(:hover, :focus-visible, :-moz-focusring):active:not([disabled]) {
-        background-color: var(--in-parent-primary-button-background-hover) !important;
+        background-color: var(--uc-parent-primary-button-background-hover) !important;
         border-color: transparent !important;
     }
 

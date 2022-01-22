@@ -399,11 +399,11 @@ toolbarbutton.bookmark-item:not(.subviewbutton) {
 }
 
 #PersonalToolbar a {
-    color: var(--in-parent-link-color) !important;
+    color: var(--uc-parent-link-color) !important;
 }
 
 #PersonalToolbar a:is(:active, :focus-visible) {
-    color: var(--in-parent-link-color-active) !important;
+    color: var(--uc-parent-link-color-active) !important;
 }
 
 @supports -moz-bool-pref("userChrome.bookmarks-toolbar.icons-only") {

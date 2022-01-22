@@ -86,7 +86,7 @@ toolbarpaletteitem[place="palette"] > #search-container {
 
 .widget-overflow-list #searchbar[disabled] .searchbar-search-icon {
     fill-opacity: 1 !important;
-    fill: var(--context-menu-disabled-color) !important;
+    fill: var(--uc-menu-disabled-color) !important;
 }
 
 .widget-overflow-list #searchbar .searchbar-search-icon {

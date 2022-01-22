@@ -182,8 +182,8 @@
         border-color: transparent !important;
         outline-style: solid !important;
         outline-width: 1.5px !important;
-        outline-color: var(--in-parent-border-highlight) !important;
-        box-shadow: 0 0 0 3.5px var(--in-parent-border-active-shadow);
+        outline-color: var(--global-focus-outline-color) !important;
+        box-shadow: 0 0 0 3.5px var(--global-focus-shadow-color);
     }
 
     :root[uc-extension-id="@testpilot-containers"] input[type="checkbox"] {
@@ -348,7 +348,7 @@
         margin-bottom: 4px !important;
         padding-inline: 10px !important;
         align-items: center !important;
-        color: var(--context-menu-disabled-color) !important;
+        color: var(--uc-menu-disabled-color) !important;
     }
 
     :root[uc-extension-id="@testpilot-containers"] table[hidden]:empty::before {
@@ -824,13 +824,13 @@
         .primary-cta:is(:hover, :focus-visible, :-moz-focusring),
     :root[uc-extension-id="@testpilot-containers"]
         .advanced-proxy-settings-btn:is(:hover, :focus-visible, :-moz-focusring) {
-        background-color: var(--in-parent-primary-button-background) !important;
+        background-color: var(--uc-parent-primary-button-background) !important;
     }
 
     :root[uc-extension-id="@testpilot-containers"] .panel-footer > .button.primary:hover:active,
     :root[uc-extension-id="@testpilot-containers"] .primary-cta:hover:active,
     :root[uc-extension-id="@testpilot-containers"] .advanced-proxy-settings-btn:hover:active {
-        background-color: var(--in-parent-primary-button-background-hover) !important;
+        background-color: var(--uc-parent-primary-button-background-hover) !important;
     }
 
     :root[uc-extension-id="@testpilot-containers"] .delete-btn {

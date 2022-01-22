@@ -12,7 +12,7 @@ menupopup.in-menulist {
     --menu-color: var(--ui-text-80) !important;
     --menuitem-hover-background-color: var(--uc-arrowpanel-dimmed) !important;
     --menuitem-disabled-hover-background-color: initial !important;
-    --menu-disabled-color: var(--context-menu-disabled-color) !important;
+    --menu-disabled-color: var(--uc-menu-disabled-color) !important;
     --menu-border-color: var(--uc-menu-border-color) !important;
     --menu-icon-opacity: 1 !important;
     user-select: none !important;
@@ -239,7 +239,7 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"])::before {
     background-size: contain;
     border: 1px solid var(--checkbox-border-color);
     background-color: var(--checkbox-unchecked-bgcolor);
-    color: var(--in-parent-primary-button-text-color);
+    color: var(--uc-parent-primary-button-text-color);
 }
 
 #ContentSelectDropdown > menupopup menuitem[type="checkbox"]::before,
