@@ -282,9 +282,19 @@
         color: var(--warning-text-color) !important;
     }
 
+    .downloadContainer:not([hidden="true"]) {
+        display: flex !important;
+        flex-flow: column nowrap !important;
+        row-gap: 4px !important;
+        justify-content: center !important;
+    }
+
+    .downloadContainer > * {
+        margin: 0 !important;
+    }
+
     .downloadProgress {
         appearance: none !important;
-        margin: 3px 0 -2px 0 !important;
         border: 1px solid transparent !important;
         border-radius: 14px !important;
         height: 7px !important;
@@ -298,7 +308,6 @@
 
     .downloadProgress::-moz-progress-bar {
         background-image: none !important;
-        animation: none !important;
     }
 
     .downloadProgress:not([value="0"])::-moz-progress-bar {
@@ -313,6 +322,7 @@
                 right/14px;
         mask-repeat: no-repeat;
         mask-composite: subtract;
+        animation: none !important;
     }
 
     .downloadProgress:indeterminate::-moz-progress-bar {
@@ -330,8 +340,6 @@
     .downloadProgress[paused]:indeterminate::-moz-progress-bar {
         background-color: transparent !important;
         background-image: none !important;
-        animation: none !important;
-        animation-play-state: paused !important;
     }
 }
 

@@ -102,7 +102,7 @@ menupopup {
     --download-progress-paused-color: var(--desaturate-dimmed-further) !important;
     --download-progress-flare-color: var(--purple-40) !important;
     --downloads-item-height: 5.5em;
-    --downloads-item-font-size-factor: 1 !important;
+    --downloads-item-font-size-factor: 0.9;
     --downloads-item-details-opacity: 0.6;
     --downloads-item-disabled-opacity: 0.6;
     --ctrlTab-overlay-color: hsla(240, 3%, 4%, 0.5) !important;

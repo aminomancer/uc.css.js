@@ -636,10 +636,19 @@ menuitem#menu_bookmarkThisPage[data-l10n-id="menu-bookmark-edit"]::before {
 }
 
 #BMB_bookmarksPopup .bookmark-item[container]:not(.menuitem-iconic, .menu-iconic) .menu-text,
-#BMB_bookmarksPopup
-    :is(#bookmarksToolbarFolderMenu, #BMB_bookmarksToolbar, #panelMenu_bookmarksToolbar, #BMB_viewBookmarksToolbar)
-    .menu-text {
+#BMB_bookmarksPopup > menu > menupopup .menu-text {
     padding-inline-start: 0 !important;
+}
+
+/* 0.74em comes from the internal margin for .menu-accel.
+we're hiding that if it's empty, as it will be for the "(Empty)" placeholder.
+so in order to ensure matching padding on this item we're taking that value and turning it into outer padding. */
+#BMB_bookmarksPopup menupopup[emptyplacesresult="true"] menuitem.bookmark-item {
+    padding-inline: calc(var(--arrowpanel-menuitem-padding-inline) + 0.74em) !important;
+}
+
+#BMB_bookmarksPopup menupopup[emptyplacesresult="true"] menuitem.bookmark-item .menu-accel:not([value]):empty {
+    display: none !important;
 }
 
 #BMB_bookmarksPopup

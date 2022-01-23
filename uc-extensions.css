@@ -950,9 +950,14 @@ menupopup menuitem[class^="unified-nav"][uri="moz-extension://e158f52d-b5db-4594
 }
 
 /* invert github's black icon */
-:is(.menu-iconic-icon, .toolbarbutton-icon, .urlbarView-favicon)-brighttext:is([src^="page-icon:https://github.com"], [src^="page-icon:http://github.com"])
+:is(.menu-iconic-icon, .toolbarbutton-icon, .urlbarView-favicon):is([src^="page-icon:https://github.com"], [src^="page-icon:http://github.com"])
 {
-    filter: invert(1) brightness(10);
+    background-image: url(chrome://userchrome/content/engines/github.svg) !important;
+    background-size: 16px !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    padding-inline: 16px 0 !important;
+    box-sizing: border-box !important;
 }
 
 /* if icon-only bookmarks toolbar pref is enabled,
@@ -960,12 +965,7 @@ we need to invert the icon differently since we don't want to invert the backgro
 @supports -moz-bool-pref("userChrome.bookmarks-toolbar.icons-only") {
     #PersonalToolbar toolbarbutton.bookmark-item:not(.subviewbutton, [id]) .toolbarbutton-icon:is([src^="page-icon:https://github.com"], [src^="page-icon:http://github.com"])
     {
-        background-image: url(chrome://userchrome/content/engines/github.svg) !important;
-        background-size: 16px !important;
-        background-repeat: no-repeat !important;
-        background-position: center !important;
         padding-inline: 28px 0 !important;
-        filter: none !important;
     }
 }
 
