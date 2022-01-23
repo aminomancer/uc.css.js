@@ -581,6 +581,7 @@ toolbarseparator.proton-zap {
 #appMenu-fxa-status2:not([fxastatus]) {
     margin-inline-end: 0 !important;
     padding-inline-end: var(--arrowpanel-menuitem-inline-margin) !important;
+	padding-block: 0 !important;
 }
 
 #appMenu-fxa-status2:not([fxastatus]) > #appMenu-fxa-label2 {

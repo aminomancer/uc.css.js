@@ -195,6 +195,13 @@ the last 75% or so of this stylesheet is dedicated to restoring pre-proton conte
         width: calc(var(--panel-width) + 10px);
     }
 
+    #managed-bookmarks > .toolbarbutton-icon,
+    #bookmarks-toolbar-placeholder > .toolbarbutton-icon,
+    #PlacesToolbarItems > .bookmark-item > .toolbarbutton-icon[label]:not([label=""]),
+    #OtherBookmarks.bookmark-item[container] > .toolbarbutton-icon {
+        margin-inline-end: var(--context-iconic-margin-end);
+    }
+
     /* panel width */
     #customizationui-widget-multiview panelview:not([extension]) {
         width: unset;

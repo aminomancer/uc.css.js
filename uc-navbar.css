@@ -290,7 +290,7 @@ toolbar .toolbarbutton-1:not([disabled])[open]:hover > .toolbarbutton-icon {
     background-color: var(--toolbarbutton-active-background) !important;
 }
 
-#PlacesToolbar toolbarbutton.bookmark-item {
+#PersonalToolbar toolbarbutton.bookmark-item {
     padding-inline: var(--toolbarbutton-inner-padding) !important;
 }
 
@@ -355,10 +355,12 @@ toolbar .toolbarbutton-1:not([disabled], [open])[checked]:hover:active > .toolba
     transition: min-height 200ms ease-in-out, max-height 200ms ease-in-out,
         opacity 200ms ease-in-out, transform 200ms ease-in-out !important;
     overflow-y: visible !important;
+    padding-block: 0 var(--bookmark-block-padding) !important;
+    outline: none !important;
 }
 
-#PersonalToolbar:not([customizing]) {
-    padding-block: 0 var(--bookmark-block-padding) !important;
+#PersonalToolbar[customizing][draggingover] {
+    z-index: 4 !important;
 }
 
 #PersonalToolbar #personal-bookmarks {
@@ -492,26 +494,6 @@ toolbarbutton.bookmark-item:not(.subviewbutton) {
     z-index: 2500 !important;
     width: 20px !important;
     height: 20px !important;
-}
-
-#PersonalToolbar[customizing] #personal-toolbar-empty-description,
-#PersonalToolbar[customizing] .toolbarbutton-1,
-#PersonalToolbar[customizing] toolbarbutton.bookmark-item:not(.subviewbutton) {
-    margin-block: 1.75px !important;
-}
-
-#PersonalToolbar[customizing] {
-    outline: none !important;
-    transition: none !important;
-    border-block: 1px dashed var(--arrowpanel-dimmed-even-further) !important;
-}
-
-#PersonalToolbar[customizing] > toolbarpaletteitem {
-    margin-block: -1px !important;
-}
-
-#PersonalToolbar[customizing][draggingover] {
-    z-index: 4 !important;
 }
 
 #customization-header {
