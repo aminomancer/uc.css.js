@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name           Undo Recently Closed Tabs in Tab Context Menu
-// @version        2.0.3
+// @version        2.0.4
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
-// @description    Adds new menus to the context menu that appears when you right-click a tab (in the tab bar or in the TreeStyleTabs sidebar): one lists recently closed tabs so you can restore them, and another lists recently closed windows. These are basically the same functions that exist in the history toolbar button's popup, but I think the tab context menu is a more convenient location for them. Also optionally adds a context menu to the history panel's subview pages for "Recently closed tabs" and "Recently closed windows" with various functions for interacting with the closed tabs and their session history. You can right-click a closed tab item to open the context menu, then click "Remove from List" to get rid of it. You can click "Remove from History" to not only remove the closed tab item, but also forget all of the tab's history — that is, every page it navigated to. The same can be done with recently closed windows. From this menu you can also restore a tab in a new window or private window, bookmark a closed tab/window, and more.
+// @description    Adds new menus to the context menu that appears when you right-click a tab (in the tab bar or in the TreeStyleTabs sidebar): one lists recently closed tabs so you can restore them, and another lists recently closed windows. These are basically the same functions that exist in the history toolbar button's popup, but I think the tab context menu is a more convenient location for them. Also optionally adds a context menu to the history panel's subview pages for "Recently closed tabs" and "Recently closed windows" with various functions for interacting with the closed tabs and their session history. You can right-click a closed tab item to open the context menu, then click "Remove from List" to get rid of it. You can click "Remove from History" to not only remove the closed tab item, but also forget all of the tab's history — that is, every page it navigated to. The same can be done with recently closed windows. From this menu you can also restore a tab in a new window or private window, bookmark a closed tab/window, and more. This script also adds a new preference (userChrome.tabs.recentlyClosedTabs.middle-click-to-remove) which changes the behavior when you click a recently closed tab/window item in the history panel. Middle clicking a tab or window item will remove it from the list (just like one of the context menu items). Ctrl+clicking a tab item it will open it in a new tab (instead of restoring it in its former place), and Ctrl+Shift+clicking it will open it in a new window.
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
@@ -396,11 +396,12 @@ class UndoListInTabmenu {
             let activeIndex = (tabData.index || tabData.entries.length) - 1;
             if (activeIndex >= 0 && tabData.entries[activeIndex])
                 element.setAttribute("targetURI", tabData.entries[activeIndex].url);
-            if (!aIsWindowsFragment && aTagName != "menuitem")
-                element.addEventListener(
-                    "click",
-                    RecentlyClosedTabsAndWindowsMenuUtils._undoCloseMiddleClick
+            if (aTagName != "menuitem") {
+                element.setAttribute(
+                    "onclick",
+                    `undoTabSubmenu.on${aIsWindowsFragment ? "Window" : "Tab"}ItemClick(event)`
                 );
+            }
             if (!forContext && aTagName != "menuitem") {
                 element.setAttribute("tooltip", "bhTooltip");
                 if (UndoListInTabmenu.config["Enable context menus in panels"])
@@ -581,10 +582,18 @@ class RecentlyClosedPanelContext {
     constructor() {
         this.config = UndoListInTabmenu.config;
         let { l10n } = this.config;
-        // override this function because there's some kind of weird old workaround in the built-in version.
-        // I don't know why someone added this, but it goes out of its way to prevent a tab from being
-        // restored properly if you only have 1 tab open and it's blank/new tab page.
-        // I did as much testing as I know how, and couldn't find a problem caused by removing it. so I removed it
+        XPCOMUtils.defineLazyPreferenceGetter(
+            this,
+            "REMOVE_ON_MID_CLICK",
+            "userChrome.tabs.recentlyClosedTabs.middle-click-to-remove",
+            false
+        );
+        // override this function because there's some kind of weird old
+        // workaround in the built-in version. I don't know why someone added
+        // this, but it goes out of its way to prevent a tab from being restored
+        // properly if you only have 1 tab open and it's blank/new tab page. I
+        // did as much testing as I know how, and couldn't find a problem caused
+        // by removing it. so I removed it
         window.undoCloseTab = function (index) {
             let tab = null;
             // index is undefined if the function is called without a specific tab to restore.
@@ -683,7 +692,7 @@ class RecentlyClosedPanelContext {
     handleEvent(e) {
         switch (e.type) {
             case "popupshowing":
-                this.onPopupShowing(e);
+                this.onPopupShowing();
                 break;
             case "command":
                 this.onCommand(e);
@@ -701,7 +710,7 @@ class RecentlyClosedPanelContext {
         );
         delete this.updateTimer;
     }
-    onPopupShowing(e) {
+    onPopupShowing() {
         let button = this.menupopup.triggerNode;
         this.restoreInNewWindow.hidden = this.restoreInNewPrivateWindow.hidden =
             button.getAttribute("restore-type") !== "tab";
@@ -716,19 +725,19 @@ class RecentlyClosedPanelContext {
                 this.onRestore(e, button);
                 break;
             case this.restoreInNewWindow:
-                this.onRestoreInNewWindow(e, button, panelview);
+                this.onRestoreInNewWindow(button, panelview);
                 break;
             case this.restoreInNewPrivateWindow:
-                this.onRestoreInNewWindow(e, button, panelview, { private: true });
+                this.onRestoreInNewWindow(button, panelview, { private: true });
                 break;
             case this.removeFromList:
-                this.onRemoveFromList(e, button);
+                this.onRemoveFromList(button);
                 break;
             case this.removeFromHistory:
-                await this.onRemoveFromHistory(e, button);
+                await this.onRemoveFromHistory(button);
                 break;
             case this.bookmark:
-                this.onBookmark(e, button, panelview);
+                this.onBookmark(button, panelview);
                 break;
             default:
                 return;
@@ -750,14 +759,14 @@ class RecentlyClosedPanelContext {
         undoCloseTab(Number(button.getAttribute("value")));
         if (e.button === 1) gBrowser.moveTabToEnd();
     }
-    onRestoreInNewWindow(e, button, panelview, params = {}) {
+    onRestoreInNewWindow(button, panelview, params = {}) {
         // open a new window
         if (PrivateBrowsingUtils.isWindowPrivate(window)) params.private = true;
         let newWin = OpenBrowserWindow(params);
         let value = button.getAttribute("value");
         let tabData = SessionStore.getClosedTabData(window)[value];
         let { state } = tabData;
-        function init() {
+        let init = () => {
             let tabbrowser = newWin.gBrowser || newWin._gBrowser;
             let tab = tabbrowser.addTrustedTab(null, {
                 pinned: state.pinned,
@@ -770,7 +779,7 @@ class RecentlyClosedPanelContext {
             SessionStore.setTabState(tab, state);
             SessionStore.forgetClosedTab(window, value);
             this.goBackOrHide(panelview, true);
-        }
+        };
         // wait until the new window's tabbrowser is initialized
         if (newWin.gBrowserInit?.delayedStartupFinished) init();
         else {
@@ -783,7 +792,7 @@ class RecentlyClosedPanelContext {
             Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
         }
     }
-    onRemoveFromList(e, button) {
+    onRemoveFromList(button) {
         let value = button.getAttribute("value");
         switch (button.getAttribute("restore-type")) {
             case "tab":
@@ -795,25 +804,25 @@ class RecentlyClosedPanelContext {
         }
         button.remove();
     }
-    async onRemoveFromHistory(e, button) {
+    async onRemoveFromHistory(button) {
         let working;
         switch (button.getAttribute("restore-type")) {
             case "tab":
-                working = await this.forgetClosedTab(e);
+                working = await this.forgetClosedTab();
                 break;
             case "window":
-                working = await this.forgetClosedWindow(e);
+                working = await this.forgetClosedWindow();
                 break;
         }
         if (working) button.remove();
     }
-    onBookmark(e, button, panelview) {
+    onBookmark(button, panelview) {
         switch (button.getAttribute("restore-type")) {
             case "tab":
-                this.bookmarkFromTab(e);
+                this.bookmarkFromTab();
                 break;
             case "window":
-                this.bookmarkFromWindow(e);
+                this.bookmarkFromWindow();
                 break;
         }
         this.goBackOrHide(panelview, true);
@@ -824,7 +833,7 @@ class RecentlyClosedPanelContext {
         entries.forEach((entry) => entry.url && URIs.add(entry.url));
         if (URIs.size) await PlacesUtils.history.remove([...URIs]);
     }
-    async forgetClosedTab(e) {
+    async forgetClosedTab() {
         let button = this.menupopup.triggerNode;
         let value = button.getAttribute("value");
         let tabData = SessionStore.getClosedTabData(window)[value];
@@ -833,7 +842,7 @@ class RecentlyClosedPanelContext {
         SessionStore.forgetClosedTab(window, value);
         return true;
     }
-    async forgetClosedWindow(e) {
+    async forgetClosedWindow() {
         let button = this.menupopup.triggerNode;
         let value = button.getAttribute("value");
         let winData = SessionStore.getClosedWindowData()[value];
@@ -844,7 +853,7 @@ class RecentlyClosedPanelContext {
         SessionStore.forgetClosedWindow(value);
         return true;
     }
-    bookmarkFromTab(e) {
+    bookmarkFromTab() {
         let button = this.menupopup.triggerNode;
         let value = button.getAttribute("value");
         let tabData = SessionStore.getClosedTabData(window)[value];
@@ -856,7 +865,7 @@ class RecentlyClosedPanelContext {
             window.top
         );
     }
-    bookmarkFromWindow(e) {
+    bookmarkFromWindow() {
         let button = this.menupopup.triggerNode;
         let value = button.getAttribute("value");
         let winData = SessionStore.getClosedWindowData()[value];
@@ -869,6 +878,36 @@ class RecentlyClosedPanelContext {
             ["keyword", "location"],
             window.top
         );
+    }
+    onTabItemClick(e) {
+        let target = e.currentTarget;
+        if (this.REMOVE_ON_MID_CLICK) {
+            switch (e.button) {
+                case 0:
+                    let shiftKey = e.shiftKey;
+                    let accelKey = e.getModifierState("Accel");
+                    if (accelKey) {
+                        if (shiftKey) {
+                            let panelview = target.closest("panelview");
+                            this.onRestoreInNewWindow(target, panelview);
+                            e.preventDefault();
+                        } else break;
+                    }
+                    return;
+                case 1:
+                    this.onRemoveFromList(target);
+                // fall through
+                default:
+                    return;
+            }
+        } else if (e.button != 1) return;
+        undoCloseTab(target.getAttribute("value"));
+        gBrowser.moveTabToEnd();
+        let ancestorPanel = target.closest("panel");
+        if (ancestorPanel) ancestorPanel.hidePopup();
+    }
+    onWindowItemClick(e) {
+        if (this.REMOVE_ON_MID_CLICK && e.button === 1) this.onRemoveFromList(e.currentTarget);
     }
 }
 

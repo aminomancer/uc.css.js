@@ -25,6 +25,15 @@
     }
 }
 
+@-moz-document domain("hg.mozilla.org") {
+    xmp,
+    pre,
+    plaintext {
+        font-family: Fira Code UC, Fira Code, SF Mono, Menlo, Consolas, Monaco, monospace;
+        font-weight: 300;
+    }
+}
+
 @-moz-document domain("searchfox.org") {
     tt,
     code,

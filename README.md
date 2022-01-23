@@ -1122,6 +1122,8 @@ Also optionally adds a context menu to the history panel's subview pages for "Re
 
 With another option, the script will add container colors to recently closed tab items. As with container tabs in general, this is meant to work in tandem with [Firefox Multi-Account Containers](https://addons.mozilla.org/firefox/addon/multi-account-containers) but does not require the extension, since a slimmer version of it is built into Firefox. If you open a tab with the "Personal" container and then close it and open the recently closed tabs menu, the tab you closed will show up with a little blue stripe on its edge. This feature (and several others) can be configured from within the script file.
 
+This script also adds a new preference `userChrome.tabs.recentlyClosedTabs.middle-click-to-remove` which changes the behavior when you click a recently closed tab/window item in the history panel. Middle clicking a tab item or a window item will remove it from the list (just like one of the context menu items). Ctrl + clicking a tab item it will open it in a new tab (instead of restoring it in its former place), and Ctrl + Shift + clicking it will open it in a new _window_.
+
 </details>
 
 _This script used to be named `undoListInTabContextMenu.uc.js` so make sure you delete that one if you still have it. This version is a huge update._
