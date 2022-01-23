@@ -30,7 +30,7 @@ this sheet controls their appearance as well. */
     width: calc(var(--titlebar-spacer-width, 32px) / 2) !important;
 }
 
-#toolbar-menubar[autohide="true"]:not([inactive]) + #TabsToolbar > .titlebar-buttonbox-container {
+#toolbar-menubar:not([inactive="true"]) + #TabsToolbar > .titlebar-buttonbox-container {
     visibility: collapse !important;
 }
 

@@ -7,34 +7,7 @@
 /* handles system pages and injects some important global variables into extension pages */
 
 @-moz-document regexp("view-source:.*") {
-    :root {
-        font-family: Fira Code UC, Fira Code, SF Mono, -moz-fixed, monospace;
-        font-weight: 300;
-    }
-
-    xmp,
-    pre,
-    plaintext {
-        font-family: Fira Code UC, Fira Code, SF Mono, -moz-fixed, monospace;
-        font-weight: 300;
-    }
-
     @media (prefers-color-scheme: dark) {
-        :root,
-        body {
-            color: var(--plaintext-color);
-            background-color: var(--in-content-bg-dark);
-        }
-
-        span {
-            color: var(--plaintext-color);
-        }
-
-        html:root {
-            color: var(--plaintext-color);
-            background: none !important;
-        }
-
         ::selection {
             color: var(--content-selection-color) !important;
             background-color: var(--content-selection-bgcolor) !important;
@@ -44,55 +17,36 @@
             background-color: var(--content-selection-bgcolor-disabled) !important;
         }
 
-        .highlight .attribute-name {
-            color: lightskyblue !important;
+        .highlight :is(.start-tag, .end-tag)::selection {
+            color: #801f1f !important;
         }
 
-        .highlight .attribute-name::selection {
-            color: darkcyan !important;
+        .highlight .comment::selection {
+            color: #235c23 !important;
         }
 
-        .highlight .attribute-value {
-            color: lightgreen !important;
+        .highlight .cdata::selection {
+            color: #77254e !important;
         }
 
-        .highlight .attribute-value::selection {
-            color: darkgreen !important;
-        }
-
-        .highlight :is(.start-tag, .end-tag) {
-            color: #cd5c5c !important;
-        }
-
-        .highlight .end-tag::selection {
-            color: #973737 !important;
-        }
-
-        .highlight .error {
-            color: white !important;
-            background-color: rgba(178, 34, 34, 0.5) !important;
-        }
-
-        .highlight .comment {
-            color: gray !important;
-        }
-
-        .highlight .error::selection,
-        .highlight .error > *::selection {
-            color: firebrick !important;
-            background-color: var(--content-selection-bgcolor) !important;
-        }
-
-        .highlight .entity {
-            color: #f18a65 !important;
+        .highlight :is(.doctype, .markupdeclaration)::selection {
+            color: #555 !important;
         }
 
         .highlight .entity::selection {
-            color: #a55437 !important;
+            color: #884026 !important;
+        }
+
+        .highlight .attribute-value::selection {
+            color: #233d6d !important;
         }
 
         .highlight .pi::selection {
             color: #6b228f !important;
+        }
+
+        .highlight .error::selection {
+            text-decoration-color: #801f1f !important;
         }
     }
 }
@@ -123,9 +77,7 @@
         --in-content-box-background-dim: var(--uc-content-box-background-dim) !important;
         --in-content-box-border-color: var(--uc-content-box-border-color) !important;
         --in-content-button-background: var(--uc-content-button-background) !important;
-        --in-content-button-background-hover: var(
-            --uc-content-button-background-hover
-        ) !important;
+        --in-content-button-background-hover: var(--uc-content-button-background-hover) !important;
         --in-content-button-background-active: var(
             --uc-content-button-background-active
         ) !important;
@@ -150,7 +102,8 @@
         --in-content-table-header-background: var(--purple-40-a50) !important;
         --in-content-box-info-background: var(--in-content-button-background-solid) !important;
         --focus-outline-offset: 2px !important;
-        --default-focusring: var(--global-focus-outline-width) solid var(--global-focus-outline-color) !important;
+        --default-focusring: var(--global-focus-outline-width) solid
+            var(--global-focus-outline-color) !important;
         --newtab-background-color: var(--in-content-page-background) !important;
         --newtab-text-primary-color: var(--in-content-page-color) !important;
         --lwt-sidebar-background-color: var(--in-content-box-background) !important;
@@ -749,7 +702,7 @@
 }
 
 /* firefox screenshots addon overlay */
-@-moz-document url("^moz-extension://.*/blank.html.*")
+@-moz-document regexp("^moz-extension://.*/blank.html.*")
 {
     :root[uc-extension-id="screenshots@mozilla.org"] .all-buttons-container {
         background-color: var(--uc-content-box-background) !important;

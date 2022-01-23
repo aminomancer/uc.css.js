@@ -1,8 +1,6 @@
 @charset "utf-8";
 @import url(chrome://userchrome/content/layout/uc-low-globals.css);
 
-/* just like the name suggests, this is the stylesheet for "View Source" pages. */
-
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
@@ -64,27 +62,25 @@ plaintext {
     font-family: Fira Code UC, Fira Code, SF Mono, -moz-fixed, monospace;
     font-weight: 300;
 }
-.highlight .start-tag {
-    color: purple;
-    font-weight: bold;
-}
+.highlight .start-tag,
 .highlight .end-tag {
-    color: purple;
-    font-weight: bold;
+    color: #800080;
+    font-weight: 500;
 }
 .highlight .comment {
-    color: green;
+    color: #008000;
     font-style: italic;
 }
 .highlight .cdata {
     color: #cc0066;
 }
-.highlight .doctype {
-    color: steelblue;
+.highlight .doctype,
+.highlight .markupdeclaration {
+    color: #4682b4;
     font-style: italic;
 }
 .highlight .pi {
-    color: orchid;
+    color: #da70d6;
     font-style: italic;
 }
 .highlight .entity {
@@ -95,15 +91,11 @@ plaintext {
     font-weight: normal;
 }
 .highlight .attribute-name {
-    font-weight: bold;
+    font-weight: 500;
 }
 .highlight .attribute-value {
-    color: blue;
+    color: #0000ff;
     font-weight: normal;
-}
-.highlight .markupdeclaration {
-    color: steelblue;
-    font-style: italic;
 }
 span:not(.error),
 a:not(.error) {
@@ -113,42 +105,35 @@ span[id] {
     unicode-bidi: isolate;
 }
 .highlight .error {
-    color: inherit;
-    background-color: rgba(178, 34, 34, 0.5);
-    font-weight: bold;
+    color: revert;
+    font-weight: 500;
+    text-decoration: underline;
+    text-decoration-color: #ff0000;
+    text-decoration-style: wavy;
+    text-decoration-skip-ink: none;
 }
 @media (prefers-color-scheme: dark) {
-    :root,
-    body {
-        color: var(--plaintext-color);
-        background-color: var(--in-content-bg-dark);
-    }
-    span {
-        color: var(--plaintext-color);
-    }
-    html:root {
-        color: var(--plaintext-color);
-    }
-    .highlight .attribute-value {
-        color: lightgreen;
-    }
     .highlight .start-tag,
     .highlight .end-tag {
-        color: indianred;
+        color: #f55e5e;
     }
-    .highlight .error {
-        color: white;
-        background-color: rgba(178, 34, 34, 0.5);
+    .highlight .comment {
+        color: #90ee90;
     }
-    .highlight .comment,
+    .highlight .cdata {
+        color: #f068ac;
+    }
     .highlight .doctype,
     .highlight .markupdeclaration {
-      color: gray;
+        color: #d3d3d3;
     }
     .highlight .entity {
         color: #f18a65;
     }
-    .highlight .pi {
-        color: mediumorchid;
+    .highlight .attribute-value {
+        color: #97bbff;
+    }
+    .highlight .error {
+        text-decoration-color: #ff3b3b;
     }
 }
