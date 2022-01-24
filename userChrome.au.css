@@ -51,6 +51,7 @@ the last 75% or so of this stylesheet is dedicated to restoring pre-proton conte
         --panel-border-color: var(--arrowpanel-border-color);
         --panel-border-radius: var(--arrowpanel-border-radius);
         --panel-padding: var(--arrowpanel-padding);
+        -moz-window-shadow: none;
     }
 
     panel[type="autocomplete-richlistbox"] {

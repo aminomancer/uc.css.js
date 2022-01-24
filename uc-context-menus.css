@@ -10,6 +10,10 @@ rules in here should match similar rules in userContent.css,
 since devtools and certain system pages contain the same elements,
 but *inside* of content documents rather than in the UI where userChrome.css can style them. */
 
+menupopup {
+    -moz-window-shadow: none !important;
+}
+
 menupopup:not([type="arrow"]) {
     appearance: none !important;
     background: var(--menupopup-background) !important;

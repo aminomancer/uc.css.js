@@ -17,6 +17,7 @@ menupopup.in-menulist {
     --menu-icon-opacity: 1 !important;
     user-select: none !important;
     -moz-user-select: none !important;
+    -moz-window-shadow: none !important;
 }
 
 #ContentSelectDropdown > menupopup > :where(menucaption, menuitem) > .menu-iconic-text,

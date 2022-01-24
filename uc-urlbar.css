@@ -153,6 +153,7 @@ toolbarpaletteitem[place="palette"] > #search-container {
         calc(-5px - var(--searchbar-popup-box-shadow-size, 15px))
         calc(0px - var(--searchbar-popup-box-shadow-size, 15px)) !important;
     background: none;
+    -moz-window-shadow: none !important;
 }
 
 .searchbar-engine-name,

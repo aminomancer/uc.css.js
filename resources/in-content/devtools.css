@@ -115,6 +115,7 @@ and a few elements like checkboxes */
         border-radius: var(--menupopup-border-radius) !important;
         margin: var(--menupopup-margin) !important;
         overflow: hidden !important;
+        -moz-window-shadow: none !important;
     }
 
     menupopup menu > menupopup {
