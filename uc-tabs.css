@@ -688,6 +688,11 @@ so in other words it won't show if audio is playing until you hover the general 
     transform: translateX(25px) scale(0.5) !important;
 }
 
+.tabbrowser-tab .tab-label:not([fadein]),
+.tabbrowser-tab .tab-throbber:not([fadein]) {
+    display: none !important;
+}
+
 .tabbrowser-tab .tab-throbber:not([busy], [progress]) {
     opacity: 0 !important;
     pointer-events: none !important;
@@ -718,7 +723,7 @@ so in other words it won't show if audio is playing until you hover the general 
         }
     }
 
-    .tab-throbber {
+    .tab-throbber[fadein] {
         display: block !important;
         position: relative !important;
     }
