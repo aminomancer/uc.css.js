@@ -317,7 +317,7 @@ but other than that these variables should be available everywhere. */
     --subviewbutton-height: 28px;
     --subview-subheader-padding: 5px 3px;
     --findbar-height: 22px;
-    --findbar-textbox-outline-transition-duration: 100ms;
+    --textbox-outline-transition-duration: 100ms;
     --findbar-textbox-bg-transition-duration: 200ms;
     --findbar-textbox-bg-notfound-transition-duration: 300ms;
     --default-identity-icon: url(chrome://userchrome/content/info-filled.svg);

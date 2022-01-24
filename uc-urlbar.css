@@ -41,7 +41,6 @@ toolbarpaletteitem[place="palette"] > #search-container {
 
 .widget-overflow-list #searchbar {
     box-shadow: none !important;
-    outline: none !important;
     min-height: var(--subviewbutton-height) !important;
     font-size: revert !important;
 }
@@ -63,7 +62,7 @@ toolbarpaletteitem[place="palette"] > #search-container {
 }
 
 .widget-overflow-list #searchbar .searchbar-textbox {
-    min-height: unset !important;
+    min-height: var(--subviewbutton-height) !important;
 }
 
 .widget-overflow-list #searchbar .searchbar-textbox::placeholder {
@@ -71,11 +70,16 @@ toolbarpaletteitem[place="palette"] > #search-container {
     color: var(--lwt-text-color) !important;
 }
 
+.widget-overflow-list #searchbar .search-go-container {
+    -moz-box-pack: center !important;
+    -moz-box-align: center !important;
+}
+
 .widget-overflow-list #searchbar .search-go-button {
     box-sizing: border-box !important;
-    width: calc(var(--subviewbutton-height) - 2px) !important;
-    height: calc(var(--subviewbutton-height) - 2px) !important;
-    padding: calc((var(--subviewbutton-height) - 16px) / 2) !important;
+    width: calc(var(--subviewbutton-height) - 4px) !important;
+    height: calc(var(--subviewbutton-height) - 4px) !important;
+    padding: calc((var(--subviewbutton-height) - 16px - 2px) / 2) !important;
 }
 
 .widget-overflow-list #searchbar:not([disabled]) .searchbar-search-icon,
@@ -103,8 +107,34 @@ toolbarpaletteitem[place="palette"] > #search-container {
     box-shadow: none !important;
     -moz-box-align: center;
     border-radius: var(--toolbarbutton-border-radius) !important;
-    outline: none !important;
     border: none !important;
+}
+
+#searchbar {
+    outline: none !important;
+}
+
+@supports -moz-bool-pref("userChrome.urlbar.focus-ring-enabled") {
+    #urlbar-input-container,
+    #searchbar {
+        outline: 0 solid transparent !important;
+        outline-offset: 0 !important;
+        transition: var(--textbox-outline-transition-duration, 100ms) outline ease-in !important;
+    }
+
+    .widget-overflow-list #searchbar {
+        outline-offset: -2px !important;
+    }
+
+    #urlbar[focused="true"] #urlbar-input-container,
+    #searchbar:focus-within {
+        outline-width: 2px !important;
+        outline-color: var(--search-box-focus-outline-color, -moz-accent-color) !important;
+        transition-duration: calc(
+            var(--textbox-outline-transition-duration, 100ms) * 0.6
+        ) !important;
+        transition-timing-function: ease-out !important;
+    }
 }
 
 #urlbar-search-splitter {

@@ -333,14 +333,14 @@ findbar .matches-indicator {
 
 [anonid="findbar-textbox-wrapper"] {
     outline: 0 solid transparent !important;
-    transition: var(--findbar-textbox-outline-transition-duration, 100ms) outline ease-in !important;
+    transition: var(--textbox-outline-transition-duration, 100ms) outline ease-in !important;
 }
 
 [anonid="findbar-textbox-wrapper"]:focus-within {
     outline-width: 2px !important;
     outline-color: var(--search-box-focus-outline-color, -moz-accent-color) !important;
     transition-duration: calc(
-        var(--findbar-textbox-outline-transition-duration, 100ms) * 0.6
+        var(--textbox-outline-transition-duration, 100ms) * 0.6
     ) !important;
     transition-timing-function: ease-out !important;
 }

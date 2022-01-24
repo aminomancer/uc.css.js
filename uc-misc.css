@@ -601,6 +601,7 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
 
         .dialog-button-box button {
             font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
+            font-weight: var(--uc-font-weight-bold, 600) !important;
         }
 
         #protections-popup-milestones-text {

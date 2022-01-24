@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Bookmarks Menu & Button Shortcuts
-// @version        1.2.2
+// @version        1.2.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Adds some shortcuts for bookmarking pages. First, middle-clicking the bookmarks or library toolbar button will bookmark the current tab, or un-bookmark it if it's already bookmarked. Second, a menu item is added to the bookmarks toolbar button's popup, which bookmarks the current tab, or, if the page is already bookmarked, opens the bookmark editor popup. These are added primarily so that bookmarks can be added or removed with a single click, and can still be quickly added even if the bookmark page action is hidden for whatever reason. Third, another menu item is added to replicate the "Search bookmarks" button in the app menu's bookmarks panel. Clicking it will open the urlbar in bookmarks search mode.
@@ -69,10 +69,7 @@ const ucBookmarksShortcuts = {
         });
         popup.insertBefore(this.bookmarkTab, popup.firstElementChild);
         popup.addEventListener("popupshowing", this.updateMenuItem, false);
-        this.bookmarkTab.ownerDocument.l10n.setAttributes(
-            this.bookmarkTab,
-            "bookmarks-current-tab"
-        );
+        this.bookmarkTab.setAttribute("data-l10n-id", "bookmarks-current-tab");
         this.searchBookmarks = popup.querySelector("#BMB_viewBookmarksSidebar").after(
             this.create(doc, "menuitem", {
                 id: "BMB_searchBookmarks",
@@ -97,10 +94,11 @@ const ucBookmarksShortcuts = {
         if (BookmarkingUI._uri) uri = new URL(BookmarkingUI._uri.spec);
         if (!uri) return;
         let isStarred = await PlacesUtils.bookmarks.fetch({ url: uri });
-        menuitem.ownerDocument.l10n.setAttributes(
-            menuitem,
-            isStarred ? "bookmarks-bookmark-edit-panel" : "bookmarks-current-tab"
-        );
+        if ("l10n" in menuitem.ownerDocument && menuitem.ownerDocument.l10n)
+            menuitem.ownerDocument.l10n.setAttributes(
+                menuitem,
+                isStarred ? "bookmarks-bookmark-edit-panel" : "bookmarks-current-tab"
+            );
         menuitem.setAttribute(
             "image",
             isStarred
@@ -109,6 +107,7 @@ const ucBookmarksShortcuts = {
         );
     },
     init() {
+        let { node } = CustomizableUI.getWidget("bookmarks-menu-button")?.forWindow(window);
         // delete these two lines if you don't want the confirmation hint to show when you bookmark a page.
         Services.prefs.setIntPref("browser.bookmarks.editDialog.confirmationHintShowCount", 0);
         Services.prefs.lockPref("browser.bookmarks.editDialog.confirmationHintShowCount");
@@ -116,7 +115,7 @@ const ucBookmarksShortcuts = {
         CustomizableUI.getWidget("library-button")
             .forWindow(window)
             .node?.setAttribute("onclick", "ucBookmarksShortcuts.bookmarkClick(event)");
-        this.addMenuitems(document.getElementById("BMB_bookmarksPopup"));
+        this.addMenuitems(node.querySelector("#BMB_bookmarksPopup"));
         gBrowser.addTabsProgressListener(this);
         PlacesUtils.bookmarks.addObserver(this);
         PlacesUtils.observers.addListener(
@@ -126,12 +125,14 @@ const ucBookmarksShortcuts = {
         // set the "positionend" attribute on the view bookmarks sidebar menuitem.
         // this way we can swap between the left/right sidebar icons based on which side the sidebar is on,
         // like the sidebar toolbar widget does.
-        document.getElementById("BMB_viewBookmarksSidebar").appendChild(
-            this.create(document, "observes", {
-                "element": "sidebar-box",
-                "attribute": "positionend",
-            })
-        );
+        let sidebarItem = node.querySelector("#BMB_viewBookmarksSidebar");
+        if (sidebarItem)
+            sidebarItem.appendChild(
+                this.create(document, "observes", {
+                    "element": "sidebar-box",
+                    "attribute": "positionend",
+                })
+            );
     },
     QueryInterface: ChromeUtils.generateQI(["nsINavBookmarkObserver"]),
 };
