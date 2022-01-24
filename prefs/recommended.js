@@ -91,7 +91,7 @@ user_pref("widget.non-native-theme.scrollbar.style", 2);
 // set the scrollbar width
 user_pref("widget.non-native-theme.win.scrollbar.use-system-size", false);
 user_pref("widget.non-native-theme.scrollbar.size.override", 11);
-user_pref("widget.non-native-theme.gtk.scrollbar.thumb-size", 0.818);
+user_pref("widget.non-native-theme.gtk.scrollbar.thumb-size", "0.818");
 // set the default background color for color-scheme: dark. see it for example on about:blank
 user_pref("browser.display.background_color.dark", "#19191b");
 // findbar highlight and selection colors
