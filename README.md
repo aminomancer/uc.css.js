@@ -421,6 +421,8 @@ get chromeDir() {return traverseToMainProfile('UChrm')},
 
 11. Save `boot.jsm` and exit.
 12. That's it! The scripts that are in your main profile folder should now run in browser toolbox windows, even though they're not in the `chrome_debugger_profile` folder. Make sure you download the [Browser Toolbox Stylesheet Loader](#browser-toolbox-stylesheet-loader) so stylesheets will be loaded too.
+
+Having done this, make sure your `chrome_debugger_profile` folders do not have `chrome` folders within them, as they will confuse the stylesheet loader. It will think you have special stylesheets for the toolbox and therefore skip loading your main profile stylesheets into the toolbox. If you ever see styles failing to apply in the toolbox, delete your `chrome_debugger_profile` folder.
 </details>
 
 ### **Script conventions:**
