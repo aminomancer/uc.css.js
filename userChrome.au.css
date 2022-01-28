@@ -72,6 +72,10 @@ the last 75% or so of this stylesheet is dedicated to restoring pre-proton conte
         border: none;
     }
 
+    #bookmarkpropertiesdialog::part(content-box) {
+        margin-bottom: 8px;
+    }
+
     :is(panel, menupopup)::part(content) {
         display: -moz-box;
         -moz-box-flex: 1;

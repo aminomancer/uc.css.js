@@ -574,6 +574,11 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
             font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
         }
 
+        .urlbarView-tip-button {
+            font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
+            font-weight: var(--uc-font-weight-bold, 600) !important;
+        }
+
         .popup-notification-body input[type="password"] {
             font-family: SF Pro, SF Arabic, Segoe UI, sans-serif !important;
         }
@@ -599,7 +604,8 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
             font-weight: var(--uc-font-weight-bold, 400) !important;
         }
 
-        .dialog-button-box button {
+        .dialog-button-box button,
+        :root[dialogroot] button {
             font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
             font-weight: var(--uc-font-weight-bold, 600) !important;
         }

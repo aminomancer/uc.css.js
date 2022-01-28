@@ -98,19 +98,24 @@
     --edit-bm-panel-overflow: hidden;
 }
 
-.tree-input[type="text"] {
-    background-color: var(--ebmp-focus-bgcolor) !important;
-    border: none !important;
-    padding: 1px 3px !important;
-    margin-top: -1px !important;
-    margin-inline: -3px 3px !important;
-    width: auto !important;
-    max-width: -moz-available !important;
-}
+@-moz-document url("chrome://browser/content/browser.xhtml") {
+    .tree-input[type="text"] {
+        background-color: var(--ebmp-focus-bgcolor) !important;
+        border: none !important;
+        outline: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        width: auto !important;
+        max-width: -moz-available !important;
+        text-decoration: 1px dotted underline !important;
+        text-decoration-skip-ink: none !important;
+    }
 
-.tree-input[type="text"]::selection {
-    background-color: var(--ui-selection-bgcolor) !important;
-    color: var(--ui-selection-color) !important;
+    .tree-input[type="text"]::selection {
+        background-color: var(--ui-selection-bgcolor) !important;
+        color: var(--ui-selection-color) !important;
+        text-decoration-color: var(--ui-selection-color) !important;
+    }
 }
 
 #editBookmarkPanel richlistbox[id] {
@@ -173,7 +178,15 @@
     outline: none !important;
 }
 
-#editBMPanel_newFolderBox {
+#editBookmarkPanel #editBMPanel_newFolderBox {
+    margin-block: 8px 0 !important;
+}
+
+#bookmarkpropertiesdialog #editBMPanel_newFolderBox {
+    margin-block: 0 !important;
+}
+
+#bookmarkpropertiesdialog #editBMPanel_newFolderButton {
     margin-block: 8px 0 !important;
 }
 

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Search Selection Keyboard Shortcut
-// @version        1.6.3
+// @version        1.6.4
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Adds a new keyboard shortcut (Ctrl+Shift+F) that searches your default search
@@ -20,7 +20,7 @@
 // you can "link" any website to any engine. This pref accepts a JSON formatted object containing
 // zero or more name-value pairs, separated by commas. The object format is {<site>: <engine>}
 // Here's an example:
-// {"about:config": "Searchfox", "bugzilla.mozilla.org": "searchfox.org", "raw.githubusercontent.com", "https://github.com/search?q=%s"}
+// {"about:config": "Searchfox", "bugzilla.mozilla.org": "searchfox.org", "raw.githubusercontent.com": "https://github.com/search?q=%s"}
 // This should basically explain the options. <site> represents a website you might visit, <engine>
 // represents the engine to use when you press the hotkey while on the <site>. So the first one
 // means use Searchfox when the hotkey is activated on about:config. This is JSON, so all <site> and
@@ -112,7 +112,8 @@ class SearchSelectionShortcut {
         // not on regular webpages. very strange, never figured out why. so just make it a dotfile
         // so it won't get in the way. that should hide the folder on linux unless showing hidden
         // files is enabled. not sure about macOS. somebody let me know if it's hidden or not.
-        let tempDir = FileUtils.getFile("UChrm", [".SearchSelectionShortcut"]);
+        let tempDir = Services.dirsvc.get("UChrm", Ci.nsIFile);
+        tempDir.append(".SearchSelectionShortcut");
         let { path } = tempDir;
         await IOUtils.makeDirectory(path, { ignoreExisting: true, createAncestors: false });
         // hide the temp dir on windows so it doesn't get in the way of user activities or prevent its eventual deletion.
@@ -148,12 +149,9 @@ class SearchSelectionShortcut {
         );
 
         // find the manifest in the temp directory and register it with the component registrar.
-        let manifest = FileUtils.getFile("UChrm", [
-            ".SearchSelectionShortcut",
-            this.manifestFile.name,
-        ]);
+        tempDir.append(this.manifestFile.name);
         // registering the manifest gives the temp folder a chrome:// URI that we can reference below
-        if (manifest.exists()) registrar.autoRegister(manifest);
+        if (tempDir.exists()) registrar.autoRegister(tempDir);
         else return;
         // register the JSActor, passing the temporary files' chrome:// URLs. includeChrome,
         // allFrames, and messageManagerGroups are specified to ensure this works in every frame.
@@ -188,7 +186,12 @@ class SearchSelectionShortcut {
             .generateUUID()
             .toString();
         name += "-" + uuid + "." + type;
-        if (!path) path = FileUtils.getFile("UChrm", [".SearchSelectionShortcut", name]).path;
+        if (!path) {
+            let dir = Services.dirsvc.get("UChrm", Ci.nsIFile);
+            dir.append(".SearchSelectionShortcut");
+            dir.append(name);
+            path = dir.path;
+        }
         await IOUtils.writeUTF8(path, contents);
         let url = "chrome://uc-searchselectionshortcut/content/" + name;
         return { name, url };

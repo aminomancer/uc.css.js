@@ -360,7 +360,6 @@
     min-height: unset !important;
     max-height: -moz-fit-content !important;
     height: unset !important;
-    text-transform: lowercase !important;
 }
 
 .urlbarView-tip-button,
@@ -369,20 +368,17 @@
     height: unset !important;
     min-height: 16px !important;
     max-height: -moz-fit-content !important;
+    outline-offset: 0 !important;
 }
 
 .urlbarView-tip-button-spacer {
-    display: none !important;
+    flex-grow: 0 !important;
+    flex-basis: 8px !important;
 }
 
 .urlbarView-tip-button {
     padding-inline: 6px !important;
     padding-block: 3px !important;
-    margin: unset !important;
-    background: none !important;
-    margin-inline: unset !important;
-    color: var(--urlbar-popup-action-color) !important;
-    fill: var(--urlbar-popup-action-color) !important;
 }
 
 .urlbarView-tip-help {
@@ -402,24 +398,8 @@
     fill: var(--urlbar-popup-action-color) !important;
 }
 
-:is(.urlbarView-tip-help, .urlbarView-tip-button):hover {
-    background-color: var(--arrowpanel-dimmed) !important;
-    color: currentColor !important;
-    fill: currentColor !important;
-}
-
-:is(.urlbarView-tip-help, .urlbarView-tip-button):is(:hover, [aria-selected]) {
+:is(.urlbarView-tip-help, .urlbarView-tip-button):is(:hover, [selected]) {
     box-shadow: none !important;
-}
-
-:is(.urlbarView-tip-help, .urlbarView-tip-button)[aria-selected]:not(:hover) {
-    background-color: transparent !important;
-}
-
-:is(.urlbarView-tip-help, .urlbarView-tip-button):hover:active {
-    background-color: var(--arrowpanel-dimmed-further) !important;
-    color: currentColor !important;
-    fill: currentColor !important;
 }
 
 .urlbarView-row[type="tip"] > .urlbarView-row-inner > .urlbarView-favicon {

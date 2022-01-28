@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Extension Stylesheet Loader
-// @version        1.0.0
+// @version        1.0.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Allows users to share stylesheets for webextensions without needing to edit the
@@ -30,7 +30,8 @@ class ExtensionStylesheetLoader {
     async setup() {
         // make a temp directory for our child file
         const registrar = Components.manager.QueryInterface(Ci.nsIComponentRegistrar);
-        let tempDir = FileUtils.getFile("UChrm", [".ExtensionStylesheetLoader"]);
+        let tempDir = Services.dirsvc.get("UChrm", Ci.nsIFile);
+        tempDir.append(".ExtensionStylesheetLoader");
         let { path } = tempDir;
         await IOUtils.makeDirectory(path, { ignoreExisting: true, createAncestors: false });
         // hide the temp dir on windows so it doesn't get in the way of user activities or prevent its eventual deletion.
@@ -50,11 +51,8 @@ class ExtensionStylesheetLoader {
             { name: "ExtensionStylesheetLoaderChild", type: "jsm" }
         );
 
-        let manifest = FileUtils.getFile("UChrm", [
-            ".ExtensionStylesheetLoader",
-            this.manifestFile.name,
-        ]);
-        if (manifest.exists()) registrar.autoRegister(manifest);
+        tempDir.append(this.manifestFile.name);
+        if (tempDir.exists()) registrar.autoRegister(tempDir);
         else return;
         ChromeUtils.registerWindowActor("ExtensionStylesheetLoader", {
             child: {
@@ -81,7 +79,12 @@ class ExtensionStylesheetLoader {
             .generateUUID()
             .toString();
         name += "-" + uuid + "." + type;
-        if (!path) path = FileUtils.getFile("UChrm", [".ExtensionStylesheetLoader", name]).path;
+        if (!path) {
+            let dir = Services.dirsvc.get("UChrm", Ci.nsIFile);
+            dir.append(".ExtensionStylesheetLoader");
+            dir.append(name);
+            path = dir.path;
+        }
         await IOUtils.writeUTF8(path, contents);
         let url = "chrome://uc-extensionstylesheetloader/content/" + name;
         return { name, url };

@@ -1045,7 +1045,7 @@ Optionally, you can also configure the script to use your other (non-default) se
 
 But what if you have a non-default search engine that you want to use for a particular website? Let's say you're on about:config, browsing through preferences. You highlight a pref name and hit the hotkey to search for it and find out what it does. Normally, pressing the second hotkey will launch your default engine, since about:config doesn't correspond to any normal URL. But by setting the pref `userChrome.searchSelectionShortcut.custom-matches`, you can "link" any website to any engine. This pref accepts a JSON formatted object containing zero or more name-value pairs, separated by commas. The object format is `{<site>: <engine>}`
 
-Here's an example: `{"about:config": "Searchfox", "bugzilla.mozilla.org": "searchfox.org", "raw.githubusercontent.com", "https://github.com/search?q=%s"}`
+Here's an example: `{"about:config": "Searchfox", "bugzilla.mozilla.org": "searchfox.org", "raw.githubusercontent.com": "https://github.com/search?q=%s"}`
 
 The example above showcases several different accepted formats. `site` represents a website you might visit, and `engine` represents the engine to use when you press the hotkey while on the `site`. So the first one means _use Searchfox when the hotkey is activated on about:config_. This is JSON, so all `site` and `engine` values must be wrapped in quotes and the pairs must be separated by commas, or the pref won't work at all.
 

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           App Menu about:config Button
-// @version        1.2.1
+// @version        1.2.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Adds an about:config shortcut button to the main app menu panel, under the
@@ -35,30 +35,36 @@
     };
 
     let { interfaces: Ci, manager: Cm } = Components;
-    if (!FileUtils)
-        ChromeUtils.defineModuleGetter(this, "FileUtils", "resource://gre/modules/FileUtils.jsm");
 
     function findAboutConfig() {
-        if (config.urlOverride)
-            // url overridden @line 12
-            return config.urlOverride;
+        if (config.urlOverride) return config.urlOverride;
+
         if (
             Cm.QueryInterface(Ci.nsIComponentRegistrar).isContractIDRegistered(
                 "@mozilla.org/network/protocol/about;1?what=cfg"
             )
         )
-            // registerAboutConf.uc.js
             return "about:cfg";
-        if (FileUtils.getDir("UChrm", ["resources", "aboutconfig", "config.xhtml"]).exists())
-            // fx-autoconfig
-            return "chrome://userchrome/content/aboutconfig/config.xhtml";
-        if (FileUtils.getDir("UChrm", ["utils", "aboutconfig", "config.xhtml"]).exists())
-            // earthlng's loader
-            return "chrome://userchromejs/content/aboutconfig/config.xhtml";
-        if (FileUtils.getDir("UChrm", ["utils", "aboutconfig", "aboutconfig.xhtml"]).exists())
-            // xiaoxiaoflood's loader
-            return "chrome://userchromejs/content/aboutconfig/aboutconfig.xhtml";
-        else return "about:config"; // no about:config replacement found
+
+        let dir = Services.dirsvc.get("UChrm", Ci.nsIFile);
+        let appendFn = (nm) => dir.append(nm);
+
+        // fx-autoconfig
+        ["resources", "aboutconfig", "config.xhtml"].forEach(appendFn);
+        if (dir.exists()) return "chrome://userchrome/content/aboutconfig/config.xhtml";
+
+        // earthlng's loader
+        dir = Services.dirsvc.get("UChrm", Ci.nsIFile);
+        ["utils", "aboutconfig", "config.xhtml"].forEach(appendFn);
+        if (dir.exists()) return "chrome://userchromejs/content/aboutconfig/config.xhtml";
+
+        // xiaoxiaoflood's loader
+        dir = Services.dirsvc.get("UChrm", Ci.nsIFile);
+        ["utils", "aboutconfig", "aboutconfig.xhtml"].forEach(appendFn);
+        if (dir.exists()) return "chrome://userchromejs/content/aboutconfig/aboutconfig.xhtml";
+
+        // no about:config replacement found
+        return "about:config";
     }
 
     async function createButton() {

@@ -165,6 +165,10 @@ panel[type="arrow"][side="top"] {
     margin-top: -12px;
 }
 
+#protections-popup {
+    --popup-width: 33em !important;
+}
+
 /* protect the arrowpanel animations from future updates */
 @supports -moz-bool-pref("xul.panel-animations.enabled") {
     @media (prefers-reduced-motion: no-preference) {
@@ -508,6 +512,10 @@ panel[type="arrow"][side="top"] {
 
 #protections-popup-info-button {
     margin-inline-end: 10px !important;
+}
+
+#protections-popup:not([toast]) #protections-popup-main-header-label {
+    margin-inline-start: 10px !important;
 }
 
 #protections-popup .panel-footer {
@@ -1444,6 +1452,18 @@ panel .header {
     font-weight: var(--uc-font-weight-bold, 600) !important;
 }
 
+#downloadsPanel:not([hasdownloads]) #emptyDownloads {
+	line-height: 1.1em !important;
+    padding-block: 0 !important;
+    color: var(--panel-description-color);
+}
+
+#downloadsPanel:not([hasdownloads]) .panel-view-body-unscrollable {
+    -moz-box-align: center !important;
+    -moz-box-pack: center !important;
+    height: 44px !important;
+}
+
 .popup-notification-description {
     font-size: 1.075em !important;
     line-height: normal !important;
@@ -1473,6 +1493,10 @@ panel .header {
     font-weight: var(--uc-font-weight-bold, 600) !important;
     margin: 0 !important;
     height: auto !important;
+}
+
+#protections-popup:not([toast]) #protections-popup-main-header-label {
+    padding-inline: 4px !important;
 }
 
 #editBookmarkPanel > .panel-header {

@@ -39,21 +39,16 @@ we also need to adjust window controls, the main menu bar, and the bookmarks too
     height: 2px !important;
 }
 
-#main-window:root[fullscreen-autohide][inFullscreen] #navigator-toolbox-background,
-#main-window:root[fullscreen-autohide][inFullscreen] > body > box:not([id]) {
+#main-window:root[fullscreen-autohide][inFullscreen] #navigator-toolbox-background {
     background: var(--toolbar-bgcolor) !important;
     max-height: 0 !important;
 }
 
 /* hides the nav-bar in fullscreen, but reveals it when hovering or focusing the nav-bar, or when nav-bar related popups are opened.
 requires fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-status. */
-:root[fullscreen-autohide][customizing] #navigator-toolbox,
+:root[fullscreen-autohide][inFullscreen][customizing] #navigator-toolbox,
 :root[fullscreen-autohide][inFullscreen]
     #navigator-toolbox-background:is(:focus-within, :hover, [popup-status], [urlbar-status])
-    #navigator-toolbox,
-:root[fullscreen-autohide][inFullscreen]
-    > body
-    > box:is(:focus-within, :hover, [popup-status], [urlbar-status])
     #navigator-toolbox {
     margin-top: 0 !important;
     transition: all 0.25s cubic-bezier(0.26, 1, 0.8, 1) 0s !important;

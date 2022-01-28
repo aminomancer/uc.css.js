@@ -40,7 +40,7 @@ tabmodalprompt {
     --dropdown-bgcolor: var(--arrowpanel-background) !important;
     --in-content-button-border-radius: var(--general-button-border-radius) !important;
     --in-content-button-vertical-padding: 5px !important;
-    --in-content-focus-outline-color: var(--in-content-primary-button-background);
+    --in-content-focus-outline-color: var(--in-content-primary-button-background-hover) !important;
     --tabmodalprompt-padding: var(--arrowpanel-padding) !important;
 }
 
@@ -784,6 +784,7 @@ panel[type="autocomplete-richlistbox"]
         --in-content-primary-button-background-active: var(--purple-30) !important;
         --in-content-primary-button-text-color: var(--light-on-dark-button-text-color) !important;
         --in-content-primary-button-text-color-hover: white !important;
+        --in-content-focus-outline-color: var(--in-content-primary-button-background-hover) !important;
         --checkbox-border-color: var(--in-content-box-border-color) !important;
         --checkbox-checked-border-color: transparent !important;
         --checkbox-unchecked-bgcolor: var(--in-content-button-background) !important;
@@ -1067,9 +1068,7 @@ panel[type="autocomplete-richlistbox"]
         --in-content-box-background-dim: var(--uc-content-box-background-dim) !important;
         --in-content-box-border-color: var(--uc-content-box-border-color) !important;
         --in-content-button-background: var(--uc-content-button-background) !important;
-        --in-content-button-background-hover: var(
-            --uc-content-button-background-hover
-        ) !important;
+        --in-content-button-background-hover: var(--uc-content-button-background-hover) !important;
         --in-content-button-background-active: var(
             --uc-content-button-background-active
         ) !important;
@@ -1086,6 +1085,7 @@ panel[type="autocomplete-richlistbox"]
         --in-content-primary-button-background-hover: var(--purple-35) !important;
         --in-content-primary-button-background-active: var(--purple-30) !important;
         --in-content-primary-button-text-color: var(--light-on-dark-button-text-color) !important;
+        --in-content-focus-outline-color: var(--in-content-primary-button-background-hover) !important;
         --in-content-button-border-radius: var(--general-button-border-radius) !important;
         --in-content-accent-color: var(--purple-35) !important;
         --in-content-table-background: var(--in-content-box-background) !important;
@@ -1171,6 +1171,7 @@ panel[type="autocomplete-richlistbox"]
         --in-content-primary-button-background-hover: var(--purple-35) !important;
         --in-content-primary-button-background-active: var(--purple-30) !important;
         --in-content-primary-button-text-color: var(--light-on-dark-button-text-color) !important;
+        --in-content-focus-outline-color: var(--in-content-primary-button-background-hover) !important;
         --checkbox-border-color: var(--in-content-box-border-color) !important;
         --checkbox-checked-border-color: transparent !important;
         --checkbox-unchecked-bgcolor: var(--in-content-button-background) !important;
@@ -1236,10 +1237,21 @@ panel[type="autocomplete-richlistbox"]
     }
 
     :root[dialogroot]
-        input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):focus,
-    :root[dialogroot] textarea:focus,
+        input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):where(:focus, :focus-visible),
+    :root[dialogroot] textarea:where(:focus, :focus-visible),
     :root[dialogroot] search-textbox[focused] {
-        border-color: var(--in-content-focus-outline-color) !important;
+        border-color: transparent !important;
+        outline-offset: 0 !important;
+    }
+
+    :where(:root[dialogroot], .dialog-button-box) button:focus-visible,
+    :where(:root[dialogroot], .dialog-button-box) select:focus-visible,
+    :where(:root[dialogroot], .dialog-button-box) input:is([type="checkbox"], [type="color"], [type="radio"]):focus-visible,
+    :where(:root[dialogroot], .dialog-button-box) menulist:focus-visible,
+    :where(:root[dialogroot], .dialog-button-box) checkbox:not([native]):focus-visible > .checkbox-check,
+    :where(:root[dialogroot], .dialog-button-box) radio[focused="true"] > .radio-check,
+    :where(:root[dialogroot], .dialog-button-box) tab:focus-visible > .tab-middle > .tab-text {
+        outline-offset: 0 !important;
     }
 
     :root[dialogroot]
@@ -1318,21 +1330,21 @@ panel[type="autocomplete-richlistbox"]
         margin-inline: 4px !important;
     }
 
-    button[dlgtype]:is(:hover, :focus-visible):not(:active, [disabled="true"], [default]),
+    button[dlgtype]:is(:hover, :focus-visible):not(:hover:active, [disabled="true"], [default]),
     :root[dialogroot]
-        :is(.expander-up, .expander-down, .panel-button):is(:hover, :focus-visible):not(:active, [disabled="true"]) {
+        :is(.expander-up, .expander-down, .panel-button):is(:hover, :focus-visible):not(:hover:active, [disabled="true"]) {
         background-color: var(--in-content-button-background-hover) !important;
         color: var(--in-content-button-text-color-hover) !important;
         border-color: transparent;
     }
 
-    :root[dialogroot] menulist:not([disabled="true"]):focus-visible:not(:active) {
+    :root[dialogroot] menulist:not([disabled="true"]):focus-visible:not(:hover:active) {
         background-color: var(--in-content-button-background-hover) !important;
         color: var(--in-content-button-text-color-hover) !important;
     }
 
-    button:is([autofocus], [type="submit"], .primary):enabled:is(:hover, :focus-visible):not(:active, [disabled="true"]),
-    button:is([default], .primary):is(:hover, :focus-visible):not(:active, [disabled="true"]) {
+    button:is([autofocus], [type="submit"], .primary):enabled:is(:hover, :focus-visible):not(:hover:active, [disabled="true"]),
+    button:is([default], .primary):is(:hover, :focus-visible):not(:hover:active, [disabled="true"]) {
         background-color: var(--in-content-primary-button-background-hover) !important;
         color: var(--in-content-primary-button-text-color-hover) !important;
     }
@@ -1441,6 +1453,24 @@ panel[type="autocomplete-richlistbox"]
         -moz-context-properties: fill;
         fill: currentColor;
         color: hsl(44, 95%, 60%);
+    }
+
+    .tree-input[type="text"] {
+        background-color: var(--purple-40) !important;
+        border: none !important;
+        padding: 1px 0px !important;
+        margin-top: -1px !important;
+        margin-inline: -4px 3px !important;
+        width: auto !important;
+        max-width: -moz-available !important;
+        text-decoration: 1px dotted underline !important;
+        text-decoration-skip-ink: none !important;
+    }
+
+    .tree-input[type="text"]::selection {
+        background-color: var(--ui-selection-bgcolor) !important;
+        color: var(--ui-selection-color) !important;
+        text-decoration-color: var(--ui-selection-color) !important;
     }
 
     @-moz-document url("chrome://mozapps/content/handling/permissionDialog.xhtml")
