@@ -9,7 +9,6 @@ user_pref("datareporting.policy.dataSubmissionPolicyBypassNotification", true);
 user_pref("browser.crashReports.unsubmittedCheck.autoSubmit2", false);
 // make the theme work properly
 user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
-user_pref("browser.proton.enabled", true);
 user_pref("browser.proton.places-tooltip.enabled", true);
 user_pref("layout.css.moz-document.content.enabled", true);
 user_pref("layout.css.xul-box-display-values.content.enabled", true);
