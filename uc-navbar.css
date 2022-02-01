@@ -712,7 +712,7 @@ link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infob
     background-color: var(--notification-box-bgcolor) !important;
     background-image: var(--notification-box-bgimage) !important;
     backdrop-filter: var(--notification-box-filter) !important;
-    padding-inline: 4px !important;
+    padding-inline: 4px 0 !important;
     align-items: center !important;
     flex-grow: 1 !important;
     text-overflow: ellipsis !important;
@@ -755,21 +755,25 @@ link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infob
     white-space: nowrap !important;
     text-overflow: ellipsis !important;
     overflow: hidden !important;
-    margin-inline-start: var(--uc-notification-message-content-margin-inline-start, 8px) !important;
+    padding-inline: 0 4px !important;
+    margin-inline: 0 !important;
+    height: 100% !important;
 }
 
 link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-content .notification-message
 {
-    padding-block: 0 !important;
+    padding-block: 6px !important;
     min-height: auto !important;
     text-overflow: ellipsis !important;
     overflow: hidden !important;
-    margin-inline-end: 8px !important;
+    padding-inline: var(--uc-notification-message-content-margin-inline-start, 8px) 8px !important;
+    margin-inline: 0 !important;
 }
 
 link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar > .spacer
 {
     flex-grow: 0.1 !important;
+    display: none !important;
 }
 
 link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-content .notification-button-container
@@ -787,6 +791,7 @@ link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infob
 link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-content .notification-button
 {
     margin: revert !important;
+    outline-offset: 0 !important;
 }
 
 .notificationbox-stack notification :is(button, toolbarbutton),
@@ -795,6 +800,7 @@ link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infob
     border-radius: var(--in-content-button-border-radius) !important;
     font-weight: inherit !important;
     padding-block: 0 !important;
+    outline-offset: 0 !important;
 }
 
 link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-content .notification-button-container > .notification-button.small
@@ -856,17 +862,20 @@ link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infob
     margin: 0 4px !important;
     position: absolute !important;
     opacity: var(--uc-notification-message-close-button-opacity, 0) !important;
-    transform: var(--uc-notification-message-close-button-transform, translateX(-15px) scale(0.5)) !important;
+    transform: var(
+        --uc-notification-message-close-button-transform,
+        translateX(-15px) scale(0.5)
+    ) !important;
 }
 
-notification:hover .messageCloseButton,
-link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar:hover .notification-close
+notification:is(:hover, :focus-within) .messageCloseButton,
+link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar:is(:hover, :focus-within) .notification-close
 {
     transform: none !important;
     opacity: 1 !important;
 }
 
-link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar button.ghost-button:not(.semi-transparent):enabled:hover
+link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar button.ghost-button:not(.semi-transparent):enabled:is(:hover, :focus-visible)
 {
     background-color: var(--in-content-button-background) !important;
 }
@@ -876,8 +885,8 @@ link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infob
     background-color: var(--in-content-button-background-hover) !important;
 }
 
-notification:hover .messageImage,
-link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar:hover .icon
+notification:is(:hover, :focus-within) .messageImage,
+link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar:is(:hover, :focus-within) .icon
 {
     transform: translateX(15px) scale(0.5) !important;
     opacity: 0 !important;

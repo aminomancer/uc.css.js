@@ -21,6 +21,7 @@ tooltip {
     background-color: transparent !important;
     color: var(--tooltip-color) !important;
     border: none !important;
+    max-width: max(30vw, 40em);
     padding: 5px !important;
     margin-inline-start: -5px !important;
     margin-block-start: 16px !important;
@@ -68,7 +69,6 @@ tooltip .uc-tooltip-box {
 .places-tooltip-box > hbox {
     display: flex !important;
     align-items: center !important;
-    max-width: 500px !important;
     color: var(--panel-shortcut-color) !important;
 }
 
@@ -137,7 +137,7 @@ mixed active content still shows the normal lock with red strikethrough. */
 /* extension pages, namely moz-extension:// */
 #places-tooltip-insecure-icon[type="extension-page"],
 #tab-nav-tooltip-insecure-icon[type="extension-page"] {
-    list-style-image: url(chrome://browser/content/extension.svg) !important;
+    list-style-image: url(chrome://mozapps/skin/extensions/extension.svg) !important;
 }
 
 /* new tab or home page */
@@ -158,10 +158,15 @@ mixed active content still shows the normal lock with red strikethrough. */
     -moz-context-properties: fill, stroke !important; */
 }
 
-/* show nothing on unloaded tabs, since determining which icon to show requires accessing the browser in session storage,
-which lazy loads the browser and thereby wastes memory and computation */
-#places-tooltip-insecure-icon[pending],
-#tab-nav-tooltip-insecure-icon[pending] {
+/* blocked pages e.g., about:blocked */
+#places-tooltip-insecure-icon[type="blocked-page"],
+#tab-nav-tooltip-insecure-icon[type="blocked-page"] {
+    list-style-image: url(chrome://userchrome/content/blocked.svg) !important;
+}
+
+/* don't show secure badges on pending tabs */
+#places-tooltip-insecure-icon[type="pending"],
+#tab-nav-tooltip-insecure-icon[type="pending"] {
     display: none !important;
 }
 
@@ -433,10 +438,18 @@ checkbox .checkbox-check {
 }
 
 :focus:not(:focus-visible),
-:focus:not(:focus-visible) > * {
+:focus:not(:focus-visible) > *,
+radiogroup:focus-visible radio[focused="true"] > .radio-label-box,
+checkbox[native]:-moz-focusring > .checkbox-label-box {
     outline: unset !important;
     outline-offset: unset !important;
     -moz-outline-radius: unset !important;
+}
+
+checkbox[native]:focus-visible > .checkbox-check,
+radiogroup:focus-visible radio[focused="true"] > .radio-check,
+radiogroup deck menulist:focus-visible {
+    outline: var(--default-focusring);
 }
 
 toolbarbutton:focus-visible,

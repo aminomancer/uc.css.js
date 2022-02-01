@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Vertical Tabs Pane
-// @version        1.5.5
+// @version        1.5.6
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Create a vertical pane across from the sidebar that functions like the vertical
@@ -119,11 +119,9 @@
             this.registerSheet();
             // ensure E10SUtils are available. required for showing tab's process ID in its tooltip, if the pref for that is enabled.
             if (!window.E10SUtils)
-                XPCOMUtils.defineLazyModuleGetters(
-                    this,
-                    "E10SUtils",
-                    `resource://gre/modules/E10SUtils.jsm`
-                );
+                XPCOMUtils.defineLazyModuleGetters(this, {
+                    E10SUtils: "resource://gre/modules/E10SUtils.jsm",
+                });
             else this.E10SUtils = window.E10SUtils;
             // get some localized strings for the tooltip
             XPCOMUtils.defineLazyGetter(this, "l10n", function () {
@@ -1470,6 +1468,7 @@
             };
             let label;
             let align = true; // should we align to the tab or to the mouse? depends on which element was hovered.
+            let { linkedBrowser } = tab;
             const selectedTabs = gBrowser.selectedTabs;
             const contextTabInSelection = selectedTabs.includes(tab);
             const affectedTabsLength = contextTabInSelection ? selectedTabs.length : 1;
@@ -1488,7 +1487,7 @@
             } else if (row.audioButton.matches(":hover")) {
                 let stringID;
                 if (contextTabInSelection) {
-                    stringID = tab.linkedBrowser.audioMuted
+                    stringID = linkedBrowser.audioMuted
                         ? "tabs.unmuteAudio2.tooltip"
                         : "tabs.muteAudio2.tooltip";
                     label = stringWithShortcut(stringID, "key_toggleMute", affectedTabsLength);
@@ -1496,7 +1495,7 @@
                     if (tab.hasAttribute("activemedia-blocked"))
                         stringID = "tabs.unblockAudio2.tooltip";
                     else
-                        stringID = tab.linkedBrowser.audioMuted
+                        stringID = linkedBrowser.audioMuted
                             ? "tabs.unmuteAudio2.background.tooltip"
                             : "tabs.muteAudio2.background.tooltip";
                     label = PluralForm.get(
@@ -1509,9 +1508,9 @@
                 label = tab._fullLabel || tab.getAttribute("label");
                 // show the tab's process ID in the tooltip?
                 if (prefSvc.getBoolPref("browser.tabs.tooltipsShowPidAndActiveness", false))
-                    if (tab.linkedBrowser) {
+                    if (linkedBrowser) {
                         let [contentPid, ...framePids] = this.E10SUtils.getBrowserPids(
-                            tab.linkedBrowser,
+                            linkedBrowser,
                             gFissionBrowser
                         );
                         if (contentPid) {
@@ -1522,7 +1521,7 @@
                                 label += "]";
                             }
                         }
-                        if (tab.linkedBrowser.docShellIsActive) label += " [A]";
+                        if (linkedBrowser.docShellIsActive) label += " [A]";
                     }
                 // add the container name to the tooltip?
                 if (tab.userContextId)
@@ -1536,7 +1535,7 @@
                     label += ` (${this.fluentStrings[
                         tab.hasAttribute("activemedia-blocked")
                             ? "blockedString"
-                            : tab.linkedBrowser.audioMuted
+                            : linkedBrowser.audioMuted
                             ? "mutedString"
                             : "playingString"
                     ].toLowerCase()})`;
@@ -1553,15 +1552,12 @@
             let url = e.target.querySelector(".places-tooltip-uri");
             let icon = e.target.querySelector("#places-tooltip-insecure-icon");
             title.textContent = label;
-            url.value = tab.linkedBrowser?.currentURI?.spec.replace(/^https:\/\//, "");
+            url.value = linkedBrowser?.currentURI?.spec.replace(/^https:\/\//, "");
             // show a lock icon to show tab security/encryption
-            if (tab.getAttribute("pending")) {
-                icon.hidden = true;
-                icon.removeAttribute("type");
-                icon.setAttribute("pending", true);
-                return;
-            } else icon.removeAttribute("pending");
-            let docURI = tab.linkedBrowser?.documentURI;
+            let pending = tab.hasAttribute("pending") || !linkedBrowser.browsingContext;
+            let docURI = pending
+                ? linkedBrowser?.currentURI
+                : linkedBrowser?.documentURI || linkedBrowser?.currentURI;
             if (docURI) {
                 let homePage = new RegExp(
                     `(${BROWSER_NEW_TAB_URL}|${HomePage.get(window)})`,
@@ -1589,6 +1585,11 @@
                             icon.hidden = false;
                             return;
                         }
+                        if (docURI.filePath == "blocked") {
+                            icon.setAttribute("type", "blocked-page");
+                            icon.hidden = false;
+                            return;
+                        }
                         icon.setAttribute("type", "about-page");
                         icon.hidden = false;
                         return;
@@ -1598,30 +1599,32 @@
                         return;
                 }
             }
-            let prog = Ci.nsIWebProgressListener;
-            let state = tab.linkedBrowser?.securityUI?.state;
-            if (typeof state != "number" || state & prog.STATE_IS_SECURE) {
-                icon.hidden = true;
-                icon.setAttribute("type", "secure");
-                return;
-            }
-            if (state & prog.STATE_IS_INSECURE) {
-                icon.setAttribute("type", "insecure");
-                icon.hidden = false;
-                return;
-            }
-            if (state & prog.STATE_IS_BROKEN) {
-                if (state & prog.STATE_LOADED_MIXED_ACTIVE_CONTENT) {
-                    icon.hidden = false;
-                    icon.setAttribute("type", "insecure");
-                } else {
-                    icon.setAttribute("type", "mixed-passive");
-                    icon.hidden = false;
+            if (linkedBrowser.browsingContext) {
+                let prog = Ci.nsIWebProgressListener;
+                let state = linkedBrowser?.securityUI?.state;
+                if (typeof state != "number" || state & prog.STATE_IS_SECURE) {
+                    icon.hidden = true;
+                    icon.setAttribute("type", "secure");
+                    return;
                 }
-                return;
+                if (state & prog.STATE_IS_INSECURE) {
+                    icon.setAttribute("type", "insecure");
+                    icon.hidden = false;
+                    return;
+                }
+                if (state & prog.STATE_IS_BROKEN) {
+                    if (state & prog.STATE_LOADED_MIXED_ACTIVE_CONTENT) {
+                        icon.hidden = false;
+                        icon.setAttribute("type", "insecure");
+                    } else {
+                        icon.setAttribute("type", "mixed-passive");
+                        icon.hidden = false;
+                    }
+                    return;
+                }
             }
             icon.hidden = true;
-            icon.setAttribute("type", "secure");
+            icon.setAttribute("type", pending ? "pending" : "secure");
         }
         // container tab settings affect what we need to show in the "New Tab" button's tooltip and context menu.
         // so we need to observe this preference and respond accordingly.

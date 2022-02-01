@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Restore pre-Proton Tab Sound Button
-// @version        2.3
+// @version        2.3.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Proton makes really big changes to tabs, in particular removing the tab sound button in favor of the overlay button and a whole row of text. This script keeps the new tab tooltip enabled by the pref "browser.proton.places-tooltip.enabled" but allows it to work with the old .tab-icon-sound. So you get the nice parts of the proton tab changes without the second row of text about the audio playing. Instead it will show the mute/unmute tooltip inside the normal tab tooltip. It also changes the tooltip a bit so that it's always anchored to the tab rather than floating around tethered to the exact mouse position. This makes it easier to modify the tooltip appearance without the tooltip getting in your way. It also lets the insecure tooltip icon show other security states, like mixed passive content or error page. This way the tooltip icon should usually match the identity icon for the tab you're hovering. This script *requires* that you either 1) use my theme, complete with chrome.manifest and the resources folder, or 2) download resources/script-override/tabMods.uc.js and put it in the same location in your chrome folder, then edit your utils/chrome.manifest file to add the following line (without the "//"):
@@ -23,13 +23,11 @@
      * @param {object} tab (the tab's DOM node)
      */
     function configureIcon(icon, tab) {
-        if (tab.getAttribute("pending")) {
-            icon.hidden = true;
-            icon.removeAttribute("type");
-            icon.setAttribute("pending", true);
-            return;
-        } else icon.removeAttribute("pending");
-        let docURI = tab.linkedBrowser?.documentURI;
+        let { linkedBrowser } = tab;
+        let pending = tab.hasAttribute("pending") || !linkedBrowser.browsingContext;
+        let docURI = pending
+            ? linkedBrowser?.currentURI
+            : linkedBrowser?.documentURI || linkedBrowser?.currentURI;
         if (docURI) {
             let homePage = new RegExp(`(${BROWSER_NEW_TAB_URL}|${HomePage.get(window)})`, "i").test(
                 docURI.spec
@@ -56,6 +54,11 @@
                         icon.hidden = false;
                         return;
                     }
+                    if (docURI.filePath === "blocked") {
+                        icon.setAttribute("type", "blocked-page");
+                        icon.hidden = false;
+                        return;
+                    }
                     icon.setAttribute("type", "about-page");
                     icon.hidden = false;
                     return;
@@ -66,45 +69,53 @@
                     return;
             }
         }
-        // web progress listener has some constants representing different states.
-        // using the bitwise AND operator we can get the tab's current state, whether it's selected or not.
-        // we can then compare it against these constants to determine which icon to show.
-        let prog = Ci.nsIWebProgressListener;
-        let state = tab.linkedBrowser?.securityUI?.state;
-        // if state is secure or state doesn't exist, the rest below can't apply, so break out immediately.
-        if (typeof state != "number" || state & prog.STATE_IS_SECURE) {
-            icon.hidden = true;
-            icon.setAttribute("type", "secure");
-            return;
-        }
-        // if state is insecure, that means the actual scheme is insecure.
-        // there are other cases besides remote transfer protocols, but they were covered in the logic above.
-        // by this point the only options are remote, so we use the fully insecure icon here.
-        // if there is mixed content but the scheme is secure then this will evaluate to false...
-        if (state & prog.STATE_IS_INSECURE) {
-            icon.setAttribute("type", "insecure");
-            icon.hidden = false;
-            return;
-        }
-        // broken state means the scheme is secure but something's wrong with the connection
-        if (state & prog.STATE_IS_BROKEN) {
-            // loaded mixed active content means the page is effectively as insecure as if the page itself was loaded by http.
-            // therefore we'll use the fully insecure icon for this case, even though state is not technically insecure.
-            if (state & prog.STATE_LOADED_MIXED_ACTIVE_CONTENT) {
-                icon.hidden = false;
-                icon.setAttribute("type", "insecure");
-            } else {
-                // any other case when state is broken means some kind of state where the warning lock icon is shown.
-                // it doesn't only include mixed passive/display content, e.g. it could also be the weak cipher state,
-                // but the same icon is shown regardless. so we'll use the same attribute that shows the warning lock (rather than the insecure lock)
-                icon.setAttribute("type", "mixed-passive");
-                icon.hidden = false;
+        if (linkedBrowser.browsingContext) {
+            // web progress listener has some bit flags we can use to decide which security icon to show.
+            let prog = Ci.nsIWebProgressListener;
+            let state = linkedBrowser?.securityUI?.state;
+            // if state is secure or state doesn't exist, the rest below can't
+            // apply, so bail out immediately.
+            if (typeof state != "number" || state & prog.STATE_IS_SECURE) {
+                icon.hidden = true;
+                icon.setAttribute("type", "secure");
+                return;
             }
-            return;
+            // if state is insecure, that means the actual scheme is insecure.
+            // there are other cases besides remote transfer protocols, but they
+            // were covered in the logic above. by this point the only options
+            // are remote, so we use the fully insecure icon here. if there is
+            // mixed content but the scheme is secure then this will be false
+            if (state & prog.STATE_IS_INSECURE) {
+                icon.setAttribute("type", "insecure");
+                icon.hidden = false;
+                return;
+            }
+            // broken state means the scheme is secure but something's wrong
+            // with the connection e.g. mixed content
+            if (state & prog.STATE_IS_BROKEN) {
+                // loaded mixed active content means the page is effectively as
+                // insecure as if the page itself was loaded by http. therefore
+                // we'll use the fully insecure icon for this case, even though
+                // state is not technically insecure.
+                if (state & prog.STATE_LOADED_MIXED_ACTIVE_CONTENT) {
+                    icon.hidden = false;
+                    icon.setAttribute("type", "insecure");
+                } else {
+                    // any other case when state is broken means some kind of
+                    // state where the warning lock icon is shown. it doesn't
+                    // only include mixed passive/display content, e.g. it could
+                    // also be the weak cipher state, but the same icon is shown
+                    // regardless. so we'll use the same attribute that shows
+                    // the warning lock (rather than the insecure lock)
+                    icon.setAttribute("type", "mixed-passive");
+                    icon.hidden = false;
+                }
+                return;
+            }
         }
         // we probably should have returned by now, but just in case, set the icon to the default secure state.
         icon.hidden = true;
-        icon.setAttribute("type", "secure");
+        icon.setAttribute("type", pending ? "pending" : "secure");
     }
     gBrowser.createTooltip = function (e) {
         e.stopPropagation();

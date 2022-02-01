@@ -422,6 +422,7 @@ tooltip {
     background-color: transparent;
     color: var(--tooltip-color);
     border: none;
+    max-width: max(30vw, 40em);
     padding: 5px;
     pointer-events: none;
     --uc-tooltip-inner-padding: 4px 7px 6px 7px;

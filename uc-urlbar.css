@@ -1024,10 +1024,15 @@ so you can use those classes to set the icon. */
     margin: 0 0 0 8px !important;
 }
 
-#identity-permission-box:not([open]) #webrtc-sharing-icon,
-.permission-popup-permission-icon.in-use:is(.camera-icon, .microphone-icon, .screen-icon) {
+#identity-permission-box:not([open]) #webrtc-sharing-icon:not([paused="true"]) {
     fill: currentColor !important;
     -moz-context-properties: fill, fill-opacity !important;
+    animation: 3s linear identity-sharing-icon-pulse infinite;
+}
+
+.permission-popup-permission-icon.in-use:is(.camera-icon, .microphone-icon, .screen-icon) {
+    fill: currentColor !important;
+    -moz-context-properties: fill !important;
     animation: 3s linear identity-sharing-icon-pulse infinite;
 }
 

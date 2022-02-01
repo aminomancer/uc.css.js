@@ -14,11 +14,15 @@ override chrome://global/skin/arrowscrollbox.css ../resources/layout/arrowscroll
 # Override the tab element to restore the tab sound button and move the close button, among other things.
 override chrome://browser/content/tabbrowser-tab.js ../resources/script-override/tabMods.uc.js
 
+# Override the notification message bar element to move the close button to the left in tab order.
+override chrome://global/content/elements/message-bar.js ../resources/script-override/message-bar.js
+
 # Override a bunch of icons that appear all over the browser.
 override chrome://global/skin/icons/check.svg ../resources/check.svg
 override chrome://global/skin/icons/success.svg ../resources/check.svg
 override chrome://global/skin/icons/check-partial.svg ../resources/check-partial.svg
 override chrome://global/skin/icons/radio.svg ../resources/radio.svg
+override chrome://global/skin/icons/blocked.svg ../resources/blocked.svg
 override chrome://global/skin/icons/security-broken.svg ../resources/connection-mixed-active-loaded.svg
 override chrome://global/skin/icons/security-warning.svg ../resources/connection-mixed-passive-loaded.svg
 override chrome://global/skin/icons/security.svg ../resources/skin/connection-secure.svg
