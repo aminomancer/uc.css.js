@@ -83,6 +83,7 @@ user_pref("ui.prefersReducedMotion", 0);
 user_pref("ui.submenuDelay", 100);
 user_pref("ui.tooltipDelay", 300);
 user_pref("ui.key.menuAccessKeyFocuses", false);
+user_pref("app.update.suppressPrompts", true);
 
 // style oriented prefs
 // use GTK style for in-content scrollbars

@@ -174,10 +174,11 @@ I also recommend setting the following prefs in `about:config`. There are two pr
 | devtools.inspector.showAllAnonymousContent | Boolean | true | Show native anonymous content (like scrollbars or tooltips) and user agent shadow roots (like the components of an `<input>` element) in the inspector |
 | devtools.inspector.showUserAgentStyles | Boolean | true | Show user agent styles in the inspector |
 | browser.newtabpage.activity-stream.asrouter.devtoolsEnabled | Boolean | true | Enable [ASRouter Devtools](https://firefox-source-docs.mozilla.org/browser/components/newtab/content-src/asrouter/docs/index.html) at about:newtab#devtools (useful if you're making your own CSS theme) |
+| app.update.suppressPrompts | Boolean | true | Disable update restart prompts; delay update available prompts for ~1 week |
 
 </details>
 
-Because most of the scripts and stylesheets here are tethered to the Nightly release channel, I also recommend disabling automatic updates in your Firefox preferences and downloading [my update alert system](#update-notification-slayer) that lets you choose when to update and notifies you unobtrusively when an update is available. Rather than flashing a popup window that requires you to click something to dismiss it, updates will just add a green update badge to the app menu "hamburger" button. To update you can just click the hamburger button, then click the update banner at the top of the app menu.
+Because most of the scripts and stylesheets here are tethered to the Nightly release channel, I also recommend disabling automatic updates in your Firefox preferences and either setting `app.update.suppressPrompts` to true in about:config (or click "Show fewer update notification prompts" in about:preferences). Rather than flashing a popup window that requires you to click something to dismiss it, updates will just add a green update badge to the app menu "hamburger" button. To update you can just click the hamburger button, then click the update banner at the top of the app menu. However, if you wait longer than a week to install the update, it will eventually open a popup. If you don't want any update popups at all, you can download [my update alert script](#update-notification-slayer). It replaces all the popups with badges and banners only.
 
 ## **Theme: (CSS)**
 
