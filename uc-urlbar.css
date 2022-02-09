@@ -1065,6 +1065,7 @@ so you can use those classes to set the icon. */
     -moz-context-properties: fill;
     fill: hsl(3.7, 77.1%, 49.6%);
 }
+
 .tab-icon-image[sharing]:not([selected]),
 .tab-sharing-icon-overlay {
     animation: 3s linear tab-sharing-icon-pulse infinite;

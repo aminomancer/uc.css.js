@@ -255,12 +255,8 @@ I was a beta tester and they never shut the beta off for some reason so this sti
 }
 
 .tabbrowser-tab[label$="Violentmonkey"] .tab-icon-image {
-    animation: none !important;
-    background-image: url(chrome://userchrome/content/devtools/command-console.svg) !important;
-    display: block !important;
+    content: url(chrome://userchrome/content/devtools/command-console.svg) !important;
     fill: currentColor !important;
-    padding-inline-end: 16px !important;
-    box-sizing: border-box !important;
 }
 
 /* stylus, for injecting inline CSS into content windows.

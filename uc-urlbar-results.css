@@ -560,7 +560,10 @@
 }
 
 /* instead, replace the favicon with a ... icon */
-.urlbarView-row[tail-suggestion] > .urlbarView-row-inner > .urlbarView-no-wrap > .urlbarView-favicon {
+.urlbarView-row[tail-suggestion]
+    > .urlbarView-row-inner
+    > .urlbarView-no-wrap
+    > .urlbarView-favicon {
     visibility: visible !important;
     box-sizing: border-box !important;
     background: url(chrome://global/skin/icons/more.svg) no-repeat !important;
@@ -587,7 +590,8 @@
     padding-inline-start: 16px;
 }
 
-.urlbarView-row[engine="Google"]:is([type="tabtosearch"], [type="tokenaliasengine"]) .urlbarView-favicon {
+.urlbarView-row[engine="Google"]:is([type="tabtosearch"], [type="tokenaliasengine"])
+    .urlbarView-favicon {
     box-sizing: border-box !important;
     background: url(chrome://userchrome/content/engines/google.svg) no-repeat !important;
     width: 16px !important;

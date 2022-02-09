@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Urlbar Mods
-// @version        1.6.0
+// @version        1.6.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Make some minor modifications to the urlbar. See the code comments below for more details.
@@ -566,8 +566,8 @@ class UrlbarMods {
                             `$1 if (result.payload.engine) item.setAttribute("engine", result.payload.engine);`
                         )
                         .replace(
-                            /(item\.setAttribute\(\"type\", \"tabtosearch\"\);)\n    } else {/,
-                            `$1 if (result.payload.engine) item.setAttribute("engine", result.payload.engine);\n    } else if (result.providerName == "TokenAliasEngines") {\n      item.setAttribute("type", "tokenaliasengine");\n      if (result.payload.engine) item.setAttribute("engine", result.payload.engine);\n    } else {`
+                            /(item\.setAttribute\(\"type\", \"tabtosearch\"\);)\n    } else/,
+                            `$1 if (result.payload.engine) item.setAttribute("engine", result.payload.engine);\n    } else if (result.providerName == "TokenAliasEngines") {\n      item.setAttribute("type", "tokenaliasengine");\n      if (result.payload.engine) item.setAttribute("engine", result.payload.engine);\n    } else`
                         )
                         .replace(
                             /(item\.setAttribute\(\"type\"\, \"remotetab\"\);)/,
@@ -580,8 +580,8 @@ class UrlbarMods {
                 `TabToSearch.startQuery = async function uc_startQuery` +
                     src3
                         .replace(/async startQuery/, ``)
-                        .replace(/makeResult/, "makeTTSResult")
-                        .replace(/makeOnboardingResult/, "makeTTSOnboardingResult")
+                        .replace(/makeResult/g, "makeTTSResult")
+                        .replace(/makeOnboardingResult/g, "makeTTSOnboardingResult")
             );
         }
         let css = `.urlbarView-row[type="remotetab"] .urlbarView-type-icon{background:var(--device-icon,url("chrome://browser/skin/sync.svg")) center/contain no-repeat;}.urlbarView-row[type="remotetab"][clientType="phone"]{--device-icon:url("chrome://browser/skin/device-phone.svg");}.urlbarView-row[type="remotetab"][clientType="tablet"]{--device-icon:url("chrome://browser/skin/device-tablet.svg");}.urlbarView-row[type="remotetab"][clientType="desktop"]{--device-icon:url("chrome://browser/skin/device-desktop.svg");}.urlbarView-row[type="remotetab"][clientType="tv"]{--device-icon:url("chrome://browser/skin/device-tv.svg");}.urlbarView-row[type="remotetab"][clientType="vr"]{--device-icon:url("chrome://browser/skin/device-vr.svg");}`;

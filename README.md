@@ -160,7 +160,6 @@ I also recommend setting the following prefs in `about:config`. There are two pr
 | userChrome.panels.allow-height-flex | Boolean | false | If true, allow panels to flex down in height. Will cause stutters on weaker hardware |
 | userChrome.panels.vibrant-fxa-banner | Boolean | true | Highlight the profile button in the app menu with a vibrant background |
 | userChrome.tabs.all-tabs-menu.reverse-order | Boolean | true | Display the all tabs menu in reverse order (newer tabs on top, like history) |
-| userChrome.tabs.new-loading-spinner-animation | Boolean | true | Replace the tab loading throbber with a spinning animation |
 | userChrome.tabs.pinned-tabs.close-buttons.disabled | Boolean | true | This controls whether close buttons are shown on pinned tabs |
 | userChrome.tabs.rounded-outer-corners.disabled | Boolean | false | This controls whether tabs have rounded bottom corners<br/><img src="preview/prev-tabcorners.webp" width="100%"/> |
 | userChrome.tabs.tooltip.always-show-lock-icon | Boolean | false | There's an icon in the tab tooltip representing page security. It's expanded by [this script](/JS/restoreTabSoundButton.uc.js) to show many security types. But by default, the icon is hidden on fully secure web pages. Setting this pref to true shows the icon on ALL pages |
@@ -1057,6 +1056,14 @@ If you already use these hotkeys for something else, e.g., an extension, you can
 #### [Show Selected Sidebar in Switcher Panel](/JS/showSelectedSidebarInSwitcherPanel.uc.js):
 
 ✨ For some reason, Proton removes the checkmark shown on the selected sidebar in the sidebar switcher panel. (The one that pops up when you click the button at the top of the sidebar) This script simply restores the previous behavior of adding the [checked] attribute. On its own it won't do anything, since the CSS for adding checkmarks to the menu items has also been removed. You'll need [uc-sidebar.css](/uc-sidebar.css) and the radio icon from the [resources](/resources) folder for the actual styling, or you can just read it starting around [line 120](/uc-sidebar.css#L120) if you want to make your own styles.
+
+#### [Tab Animation Workaround](/JS/tabAnimation.uc.js):
+
+✨ A tiny script to clean up transitions/animations on Firefox tabs' close buttons, favicons, etc. Required for duskFox. See the file description for more details.
+
+#### [Tab Loading Spinner Animation](/JS/tabLoadingSpinner.uc.js):
+
+✨ Required for duskFox's custom loading spinner animation. See the file description for more details.
 
 #### [Tab Context Menu Navigation](/JS/tabContextMenuNavigation.uc.js):
 

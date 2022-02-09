@@ -125,7 +125,6 @@ user_pref("gfx.font_rendering.directwrite.use_gdi_table_loading", false);
 // these are just the ones I'm pretty certain 90% of users will want.
 // see the prefs list at https://github.com/aminomancer/uc.css.js
 
-user_pref("userChrome.tabs.new-loading-spinner-animation", true);
 user_pref("userChrome.tabs.pinned-tabs.close-buttons.disabled", true);
 user_pref("userChrome.urlbar-results.hide-help-button", true);
 

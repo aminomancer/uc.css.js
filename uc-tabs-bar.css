@@ -145,11 +145,13 @@ this sheet controls their appearance as well. */
     margin: 0 !important;
 }
 
-#tabs-newtab-button {
+#tabs-newtab-button,
+#newPrivateTab-button {
     display: none !important;
 }
 
-#new-tab-button {
+#new-tab-button,
+#privateTab-button {
     display: -moz-box !important;
 }
 
