@@ -246,28 +246,6 @@ the last 75% or so of this stylesheet is dedicated to restoring pre-proton conte
         background-color: var(--button-primary-hover-bgcolor);
     }
 
-    #downloadsHistory:focus {
-        background-color: revert;
-    }
-
-    #downloadsListBox > richlistitem[state="1"][exists].hoveringMainArea:hover,
-    #downloadsListBox > richlistitem:is(.openWhenFinished).hoveringMainArea:hover,
-    #downloadsListBox > richlistitem[verdict]:hover,
-    #downloadsListBox > richlistitem:hover:is(.openWhenFinished),
-    .downloadsPanelFooterButton:is(:hover, :focus-visible),
-    #downloadsPanel[keyfocus] #downloadsListBox:focus-visible > richlistitem[selected],
-    #downloadsHistory:is(:hover, :focus-visible) {
-        background-color: var(--panel-item-hover-bgcolor);
-    }
-
-    #downloadsListBox > richlistitem[state="1"][exists].hoveringMainArea:hover:active,
-    #downloadsListBox > richlistitem:is(.openWhenFinished).hoveringMainArea:hover:active,
-    #downloadsListBox > richlistitem[verdict]:hover:active,
-    .downloadsPanelFooterButton:not([disabled]):is([open="true"], :hover:active),
-    #downloadsHistory:not([disabled]):is([open], :hover:active) {
-        background-color: var(--panel-item-active-bgcolor);
-    }
-
     menupopup::part(drop-indicator-bar) {
         margin-block: -14px;
         margin-inline: -5px 5px;

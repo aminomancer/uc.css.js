@@ -93,7 +93,8 @@
     margin: 0 !important;
     border-color: var(--panel-separator-color) !important;
     padding: 2px 7px !important;
-    max-height: 20px !important;
+    line-height: 14px !important;
+    height: 20px !important;
     box-sizing: border-box !important;
     border-radius: 10px !important;
     background-color: var(--arrowpanel-faint) !important;
@@ -261,16 +262,21 @@
     > .urlbarView-row-inner
     > .urlbarView-no-wrap
     > .urlbarView-action {
-    background-color: transparent !important;
-    border-radius: unset !important;
+    /* background-color: transparent !important;
+    border-radius: unset !important; */
+    margin: 0 !important;
+    border: 1px solid var(--panel-separator-color) !important;
+    padding: 2px 7px !important;
+    height: 20px !important;
+    line-height: 14px !important;
+    box-sizing: border-box !important;
+    border-radius: 10px !important;
+    background-color: var(--arrowpanel-faint) !important;
+    color: var(--uc-arrowpanel-color) !important;
 }
 
 .urlbarView-row:not([selected]) .urlbarView-action {
     color: var(--urlbar-popup-action-color) !important;
-}
-
-.urlbarView-row[type="switchtab"]:not([selected], :hover) .urlbarView-action {
-    display: none;
 }
 
 .urlbarView[actionoverride]
@@ -316,7 +322,11 @@
 .urlbarView-url,
 .urlbarView-tags,
 .urlbarView-dynamic-calculator-action,
-.urlbarView-dynamic-unitConversion-action {
+.urlbarView-dynamic-unitConversion-action,
+.urlbarView-row:is([type="switchtab"], [type="remotetab"])
+    > .urlbarView-row-inner
+    > .urlbarView-no-wrap
+    > .urlbarView-action {
     margin-inline: 8px 0 !important;
 }
 
@@ -471,7 +481,8 @@
 .urlbarView-row .urlbarView-tag,
 .urlbarView-row:where([type="tabtosearch"], [type="tokenaliasengine"]) .urlbarView-title,
 .urlbarView-row:not([has-url])
-    .urlbarView-title[data-l10n-id="urlbar-result-action-search-w-engine"] {
+    .urlbarView-title[data-l10n-id="urlbar-result-action-search-w-engine"],
+.urlbarView-tail-prefix {
     font-weight: var(--urlbar-result-strong-font-weight, 500) !important;
     font-style: normal !important;
     color: var(--panel-shortcut-color);
@@ -489,6 +500,7 @@
 .urlbarView-row[selected] .urlbarView-tag,
 .urlbarView-row[selected]:not([has-url])
     .urlbarView-title[data-l10n-id="urlbar-result-action-search-w-engine"],
+.urlbarView-row[selected] .urlbarView-tail-prefix,
 .urlbarView-row-inner[selected] .urlbarView-dynamic-calculator-input,
 .urlbarView-row-inner[selected] .urlbarView-dynamic-unitConversion-output {
     color: var(--panel-shortcut-focus);
@@ -533,25 +545,28 @@
     display: none;
 }
 
-/* I think the slide-in animation looks pretty corny honestly */
-.urlbarView-action[slide-in] {
-    animation: none !important;
+/* tail suggestions */
+.urlbarView-tail-prefix {
+    margin-inline-end: calc(0px - var(--urlbar-icon-padding) - 2px) !important;
 }
 
+/* get rid of the ... and show the original string */
 .urlbarView-tail-prefix > .urlbarView-tail-prefix-string {
     visibility: visible !important;
 }
 
 .urlbarView-tail-prefix > .urlbarView-tail-prefix-char {
-    display: none !important;
+    visibility: collapse !important;
 }
 
-.urlbarView-tail-prefix {
-    margin-top: -1px !important;
-    margin-bottom: -0.3px !important;
-    padding-top: 2px !important;
-    padding-bottom: 2px !important;
-    align-self: center !important;
+/* instead, replace the favicon with a ... icon */
+.urlbarView-row[tail-suggestion] > .urlbarView-row-inner > .urlbarView-no-wrap > .urlbarView-favicon {
+    visibility: visible !important;
+    box-sizing: border-box !important;
+    background: url(chrome://global/skin/icons/more.svg) no-repeat !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-inline-start: 16px;
 }
 
 .urlbarView-url > strong {
@@ -627,6 +642,11 @@
     display: none;
 }
 
+/* I think the slide-in animation looks pretty corny honestly */
+.urlbarView-action[slide-in] {
+    animation: none !important;
+}
+
 #urlbar[breakout][breakout-extend] > #urlbar-input-container,
 #urlbar-input-container {
     height: var(--urlbar-height) !important;
@@ -682,8 +702,6 @@
     animation-timing-function: var(--animation-easing-function) !important;
     animation-duration: 0.1s !important;
     transform-origin: top !important;
-    transform-style: flat !important;
-    backface-visibility: hidden !important;
     margin: calc(0px - (var(--urlbar-container-height) - var(--urlbar-height)) / 2) -5px !important;
     box-shadow: var(--searchbar-popup-box-shadow) !important;
     clip-path: inset(
@@ -697,11 +715,8 @@
 
 #urlbar[breakout][breakout-extend] .urlbarView {
     animation-name: urlbar-grow-results !important;
-    animation-timing-function: var(--animation-easing-function) !important;
-    animation-duration: 0.3s !important;
-    transform-origin: top !important;
-    transform-style: preserve-3d !important;
-    backface-visibility: visible !important;
+    animation-timing-function: ease-out !important;
+    animation-duration: 0.1s !important;
 }
 
 @keyframes urlbar-grow-bg {
@@ -717,11 +732,9 @@
 
 @keyframes urlbar-grow-results {
     0% {
-        transform: scaleY(0.95);
         opacity: 0;
     }
     100% {
-        transform: none;
         opacity: 1;
     }
 }

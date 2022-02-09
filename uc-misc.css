@@ -466,7 +466,8 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-te
 toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-badge-stack,
 .urlbar-page-action:focus-visible,
 #appMenu-zoomReduce-button2:focus-visible > .toolbarbutton-icon,
-#appMenu-zoomEnlarge-button2:focus-visible > .toolbarbutton-icon {
+#appMenu-zoomEnlarge-button2:focus-visible > .toolbarbutton-icon,
+#downloadsFooterButtons button:focus-visible {
     color: inherit;
     outline: unset !important;
     -moz-outline-radius: unset !important;
@@ -579,6 +580,19 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
 
         #appMenu-zoomReset-button2 .toolbarbutton-text {
             font-size: 11.5px !important;
+        }
+
+        .urlbarView-row .urlbarView-tag,
+        .urlbarView-row:is([type="switchtab"], [type="remotetab"])
+            > .urlbarView-row-inner
+            > .urlbarView-no-wrap
+            > .urlbarView-action {
+            line-height: 16px !important;
+            font-weight: var(--uc-font-weight-thin, 400) !important;
+        }
+
+        .urlbarView-row .urlbarView-tag strong {
+            font-weight: inherit !important;
         }
 
         .urlbarView-row[dynamicType="onboardTabToSearch"]

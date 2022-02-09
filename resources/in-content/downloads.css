@@ -201,6 +201,38 @@
         background: var(--uc-content-button-background-active) !important;
     }
 
+    #downloadsHistory:focus {
+        background-color: revert;
+    }
+
+    #downloadsPanel:not([keyfocus]) .downloadsPanelFooterButton:focus-visible {
+        outline: none;
+    }
+
+    #downloadsListBox > richlistitem[state="1"][exists].hoveringMainArea:hover,
+    #downloadsListBox > richlistitem:is(.openWhenFinished).hoveringMainArea:hover,
+    #downloadsListBox > richlistitem[verdict]:hover,
+    #downloadsListBox > richlistitem:hover:is(.openWhenFinished),
+    .downloadsPanelFooterButton:not([disabled]):hover,
+    #downloadsHistory:not([disabled]):hover,
+    #downloadsPanel[keyfocus] .downloadsPanelFooterButton:not([disabled]):focus-visible,
+    #downloadsPanel[keyfocus] #downloadsListBox:focus-visible > richlistitem[selected],
+    #downloadsPanel[keyfocus] #downloadsHistory:not([disabled]):focus-visible {
+        background-color: var(--download-button-hover-bg) !important;
+    }
+
+    #downloadsListBox > richlistitem[state="1"][exists].hoveringMainArea:hover:active,
+    #downloadsListBox > richlistitem:is(.openWhenFinished).hoveringMainArea:hover:active,
+    #downloadsListBox > richlistitem[verdict]:hover:active,
+    .downloadsPanelFooterButton:not([disabled]):is([open="true"], :hover:active),
+    #downloadsHistory:not([disabled]):is([open], :hover:active) {
+        background-color: var(--download-button-active-bg) !important;
+    }
+
+    #downloadsListBox richlistitem {
+        color: inherit !important;
+    }
+
     richlistitem.download-state > .downloadButton .button-box {
         width: 32px !important;
         height: 32px !important;
