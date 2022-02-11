@@ -495,6 +495,10 @@
     height: 12px !important;
 }
 
+#appMenu-zoom-controls2 :where(.toolbarbutton-icon, .toolbarbutton-text) {
+    outline: none !important;
+}
+
 #appMenu-zoom-controls2 #appMenu-zoomReset-button2 {
     border: 1px solid var(--desaturate-dimmed) !important;
     height: 20px !important;
@@ -581,7 +585,7 @@ toolbarseparator.proton-zap {
 #appMenu-fxa-status2:not([fxastatus]) {
     margin-inline-end: 0 !important;
     padding-inline-end: var(--arrowpanel-menuitem-inline-margin) !important;
-	padding-block: 0 !important;
+    padding-block: 0 !important;
 }
 
 #appMenu-fxa-status2:not([fxastatus]) > #appMenu-fxa-label2 {

@@ -24,21 +24,40 @@
         padding-inline: 16px 20px !important;
     }
 
-    #downloadsFooterButtons:not([hidden]) {
+    #downloadsFooter > stack {
+        margin: 0 var(--uc-arrowpanel-menuitem-inline-margin) !important;
+        padding-block: 0 var(--uc-arrowpanel-menuitem-inline-margin) !important;
+    }
+
+    #downloadsFooterButtons[uc-hbox]:not([hidden]) {
         display: flex !important;
         flex-flow: row nowrap;
-        padding-block: var(--uc-arrowpanel-menuitem-inline-margin) !important;
-        margin: 0 var(--uc-arrowpanel-menuitem-inline-margin) !important;
-        border-top: 1px solid var(--uc-desaturate-dimmed) !important;
-        gap: var(--uc-arrowpanel-menuitem-inline-margin) !important;
+        column-gap: var(--uc-arrowpanel-menuitem-inline-margin) !important;
+    }
+
+    #downloadsFooter > toolbarseparator,
+    #downloadsFooterButtons > toolbarseparator {
+        appearance: none !important;
+        min-height: 0 !important;
+        border-top: 1px solid var(--panel-separator-color) !important;
+        border-bottom: none !important;
+        margin: var(--panel-separator-margin) !important;
+        margin-top: 0 !important;
+        padding: 0 !important;
     }
 
     #downloadsFooterButtons > toolbarseparator {
+        margin-inline: 0 !important;
+    }
+
+    #downloadsFooter[showingsummary] > toolbarseparator,
+    #downloadsFooter:not([showingsummary]) #downloadsFooterButtons[uc-hbox] > toolbarseparator {
         display: none !important;
     }
 
     #downloadsFooterButtons > button {
         border-radius: var(--context-menuitem-border-radius) !important;
+        min-height: var(--subviewbutton-height) !important;
         margin: 0 !important;
         flex-grow: 1;
         padding: 6px 8px !important;
@@ -66,6 +85,11 @@
         list-style-image: url(chrome://userchrome/content/skin/close-window.svg);
     }
 
+    #downloadsFooter[showingsummary] #downloadsFooterButtons {
+        flex-direction: column !important;
+        border-top: 0 !important;
+    }
+
     richlistitem.download-state > toolbarseparator {
         visibility: collapse !important;
     }
@@ -82,13 +106,12 @@
     }
 
     #downloadsSummary {
-        border-radius: var(--context-menuitem-border-radius) !important;
-        margin: 0 var(--uc-arrowpanel-menuitem-inline-margin) !important;
-        margin-inline-end: 52px !important;
+        height: auto !important;
+        border-radius: 0 !important;
+        margin: 0 !important;
         padding: 8px 4px !important;
-        border: 0 !important;
-        outline: 0 !important;
-        background: none !important;
+        padding-inline-end: calc(4px + 8px + 8px + 32px) !important;
+        gap: var(--uc-arrowpanel-menuitem-inline-margin) !important;
     }
 
     #downloadsPanel-blockedSubview > vbox {
@@ -277,7 +300,7 @@
     }
 
     #downloadsSummaryDescription {
-        color: var(--attention-color) !important;
+        color: inherit !important;
     }
 
     .downloadBlockedBadge {
@@ -375,7 +398,8 @@
     }
 }
 
-@-moz-document url-prefix("chrome://browser/content/places/places.xhtml"), url-prefix("about:downloads") {
+@-moz-document url-prefix("chrome://browser/content/places/places.xhtml"), url-prefix("about:downloads")
+{
     #downloadsListBox {
         border: none !important;
         outline: none !important;
@@ -391,11 +415,11 @@
     richlistitem.download-state:is([verdict], .openWhenFinished):is(:hover, :focus-within),
     richlistitem.download-state[state="1"][exists]:hover:active,
     richlistitem.download-state:is([verdict], .openWhenFinished):hover:active {
-        background: var(--uc-content-button-background-hover) !important
+        background: var(--uc-content-button-background-hover) !important;
     }
 
     richlistitem.download-state[selected]:not(:hover, :focus-within) {
-        background: var(--uc-content-button-background) !important
+        background: var(--uc-content-button-background) !important;
     }
 
     richlistitem.download-state[state="1"]:not([exists]) .downloadTarget {

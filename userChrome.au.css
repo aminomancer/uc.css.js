@@ -1789,11 +1789,13 @@ animation-duration of 730ms, 71% is the point where we start the fade out. */
         padding: 30px 30px 20px 30px;
     }
 
-    #handlersView .actionsMenu[image="chrome://browser/skin/preferences/application.png"]::part(icon) {
+    #handlersView .actionsMenu[image="chrome://browser/skin/preferences/application.png"]::part(icon)
+    {
         display: none;
     }
 
-    #handlersView .actionsMenu[image="chrome://browser/skin/preferences/application.png"]::before {
+    #handlersView .actionsMenu[image="chrome://browser/skin/preferences/application.png"]::before
+    {
         width: 16px;
         height: 16px;
         margin-inline: 11px 8px;
@@ -1806,7 +1808,8 @@ animation-duration of 730ms, 71% is the point where we start the fade out. */
         background-image: url(chrome://userchrome/content/shortcut.svg);
     }
 
-    #handlersView .actionIcon[src="chrome://browser/skin/preferences/application.png"] {
+    #handlersView .actionIcon[src="chrome://browser/skin/preferences/application.png"]
+    {
         width: 16px;
         height: 16px;
         margin-inline: 11px 8px;
