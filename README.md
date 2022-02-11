@@ -1075,6 +1075,10 @@ So, this gives you some capabilities not already available in Firefox. In partic
 
 </details>
 
+#### [Tab Thumbnail Tooltip](/JS/tabThumbnailTooltip.uc.js):
+
+Show a large thumbnail image to preview tab content when hovering a tab. Made [by request]("/../../issues/29").
+
 #### [Tab Tooltip Navigation Buttons](/JS/tabTooltipNavButtons.uc.js):
 
 This script turns the tab tooltip into a mini navigation popup with back, forward, and reload buttons. It still shows the tab's title and URL, and also shows its favicon. So it's similar to the vanilla tooltip, except it's interactive.<details><summary>💬 <i><b>More details...</b></i></summary>
