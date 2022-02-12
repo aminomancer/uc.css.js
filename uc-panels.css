@@ -869,7 +869,7 @@ popupnotificationcontent label[control]:not([hidden]) + menulist {
     margin-bottom: calc(0px - var(--arrowpanel-menuitem-padding-block)) !important;
 }
 
-#identity-popup-securityView .identity-popup-security-connection :where(description, label) {
+.identity-popup-security-connection :where(description, label) {
     margin-inline-start: calc(16px + var(--arrowpanel-subviewbutton-iconic-gap, 8px)) !important;
 }
 

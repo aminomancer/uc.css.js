@@ -742,8 +742,7 @@
     @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
         :root[uc-extension-id="screenshots@mozilla.org"] .pixel-dimensions {
             font-weight: var(--uc-font-weight-bold) !important;
-            font-family: -apple-system, BlinkMacSystemFont, SF Pro, "segoe ui", "helvetica neue",
-                helvetica, ubuntu, roboto, noto, arial, sans-serif !important;
+            font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
             font-size: normal !important;
         }
     }

@@ -78,3 +78,7 @@
 .controlsContainer {
     --control-focus-outline: 2px solid var(--purple-30) !important;
 }
+
+#texttracks {
+    font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
+}

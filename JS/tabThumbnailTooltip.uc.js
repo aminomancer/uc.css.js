@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Tab Thumbnail Tooltip
-// @version        1.0
+// @version        1.0.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Show a large thumbnail image to preview tab content when hovering a tab.
@@ -9,7 +9,7 @@
 
 class TabThumbnail {
     static config = {
-        "Preview width": 250, // Thumbnail width, in pixels (can override with CSS too)
+        "Preview width": 320, // Thumbnail width, in pixels (can override with CSS too)
         "Preview height": 180, // Thumbnail height
         "Update interval": 30, // How often to refresh the thumbnail, in milliseconds
     };
@@ -35,12 +35,10 @@ class TabThumbnail {
                 onpopuphiding="ucTabThumbnail.onPopupHiding();"
                 hide-thumbnail="true"
                 style="visibility: collapse;">
-                <vbox id ="tabThumbBox" flex="true">
-                    <description id="tabThumbLabel" class="tooltip-label" flex="true"/>
+                <vbox id ="tabThumbBox">
+                    <description id="tabThumbLabel" class="tooltip-label"/>
                     <toolbarseparator />
-                    <hbox id="tabCanvasBox" flex="true">
-                        <html:div id="tabThumbCanvas"></html:div>
-                    </hbox>
+                    <html:div id="tabThumbCanvas"></html:div>
                 </vbox>
             </tooltip>`;
         this.registerSheet();
@@ -138,6 +136,7 @@ class TabThumbnail {
             #tabThumbLabel {
                 text-align: center;
                 margin-inline: 5px;
+                font-weight: 600;
             }
             #tabThumbBox > toolbarseparator {
                 appearance: none;
@@ -148,19 +147,20 @@ class TabThumbnail {
                 margin-inline: 0;
                 padding: 0;
             }
-            #tabThumbTooltip[hide-thumbnail] #tabCanvasBox,
-            #tabThumbTooltip[hide-thumbnail] #tabThumbBox > toolbarseparator {
-                display: none;
-            }
             #tabThumbCanvas {
-                display: block;
                 border-radius: max(3px, var(--thumb-border-radius));
                 border: 1px solid var(--arrowpanel-border-color);
-                height: ${config["Preview height"]}px;
                 width: ${config["Preview width"]}px;
+                height: ${config["Preview height"]}px;
+                max-width: ${config["Preview width"]}px;
+                max-height: ${config["Preview height"]}px;
                 background-image: -moz-element(#tabThumbImageCanvas);
                 background-repeat: no-repeat;
                 background-size: cover;
+            }
+            #tabThumbTooltip[hide-thumbnail] #tabThumbCanvas,
+            #tabThumbTooltip[hide-thumbnail] #tabThumbBox > toolbarseparator {
+                display: none;
             }`;
         let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
             Ci.nsIStyleSheetService

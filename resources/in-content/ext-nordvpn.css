@@ -8,20 +8,74 @@
 
 @-moz-document regexp("^moz-extension://.*/.*")
 {
+    :root[uc-extension-id="nordvpnproxy@nordvpn.com"] {
+        --UNIT-BASE-VALUE: 16px;
+        --UNIT-DOUBLE: 2rem;
+        --UNIT: 1rem;
+        --UNIT-HALF: 0.5rem;
+        --UNIT-QUATER: 0.25rem;
+        --UNIT-HAIR: 0.125rem;
+        --COLOR-BASE: var(--in-content-page-color) !important;
+        --COLOR-BASE-STRONG: var(--ui-text-100) !important;
+        --COLOR-BASE-INVERTED: var(--in-content-bg-darker) !important;
+        --COLOR-ERROR: hsl(352.5, 96%, 68.7%) !important;
+        --COLOR-WARNING: hsl(24.8, 100%, 62.9%) !important;
+        --COLOR-MUTED: var(--ui-text-50) !important;
+        --COLOR-SUCCESS: hsl(138.7, 86%, 54.9%) !important;
+        --COLOR-LOGO: var(--purple-30) !important;
+        --COLOR-ACTION-BUTTONS: hsl(218.9, 100%, 63.7%);
+        --FONT-CAPTION: calc(var(--UNIT)*0.75);
+        --FONT-CAPTION-HEIGHT: --UNIT;
+        --FONT-PRIMARY: calc(var(--UNIT)*0.875);
+        --FONT-PRIMARY-HEIGHT: calc(var(--UNIT)*1.25);
+        --FONT-SUBTITLE: --UNIT;
+        --FONT-SUBTITLE-HEIGHT: calc(var(--UNIT)*1.5);
+        --FONT-TITLE: calc(var(--UNIT)*1.5);
+        --FONT-TITLE-HEIGHT: calc(var(--UNIT)*1.75);
+        --BACKGROUND-APP: var(--in-content-bg-darker) !important;
+        --BACKGROUND-CONTENT: var(--in-content-bg-dark) !important;
+        --BACKGROUND-ELEMENT-HOVER: var(--in-content-button-background-hover) !important;
+        --Z-BACK: 0;
+        --Z-NORMAL: 1;
+        --Z-TOOLTIP: 10;
+        --Z-FRONT: 100;
+    }
+
     @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
-        :root[uc-extension-id="nordvpnproxy@nordvpn.com"] body {
-            font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
+        :root[uc-extension-id="nordvpnproxy@nordvpn.com"] {
+            --FONT-FAMILY-APP: SF Pro Text !important;
         }
 
-        :root[uc-extension-id="nordvpnproxy@nordvpn.com"] .fwm {
-            font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
+        :root[uc-extension-id="nordvpnproxy@nordvpn.com"] .connect-section-details-header h5 {
+            font-weight: var(--uc-font-weight-bold, 700) !important;
         }
     }
 
-    :root[uc-extension-id="nordvpnproxy@nordvpn.com"] body,
-    :root[uc-extension-id="nordvpnproxy@nordvpn.com"] .Container {
-        background-color: var(--in-content-page-background) !important;
-        color: var(--in-content-page-color) !important;
+    :root[uc-extension-id="nordvpnproxy@nordvpn.com"] .locations-link {
+        display: flex !important;
+        align-items: center !important;
+        flex-flow: row nowrap !important;
+        gap: 6px;
+    }
+
+    :root[uc-extension-id="nordvpnproxy@nordvpn.com"] .locations-link-text > svg {
+        display: none !important;
+    }
+
+    :root[uc-extension-id="nordvpnproxy@nordvpn.com"] .locations-link::before {
+        content: "";
+        width: 18px;
+        height: 18px;
+        background: url(chrome://userchrome/content/search-glass.svg) center/contain no-repeat;
+        -moz-context-properties: fill, fill-opacity;
+        fill: currentColor;
+    }
+
+    :root[uc-extension-id="nordvpnproxy@nordvpn.com"] .tooltip-base {
+        left: 0;
+        padding: calc(var(--UNIT)*0.375);
+        background: var(--BACKGROUND-CONTENT);
+        border: 1px solid var(--in-content-box-border-color) !important;
     }
 
     :root[uc-extension-id="nordvpnproxy@nordvpn.com"] .Container {
@@ -111,9 +165,8 @@
         color: var(--in-content-page-color) !important;
     }
 
-    :root[uc-extension-id="nordvpnproxy@nordvpn.com"]
-        :is(.CountryItem--active, .CountryItem:hover) {
-        background: var(--in-content-button-background) !important;
+    :root[uc-extension-id="nordvpnproxy@nordvpn.com"] .country-item:hover {
+        background-color: var(--in-content-button-background-hover) !important;
     }
 
     :root[uc-extension-id="nordvpnproxy@nordvpn.com"] hr {

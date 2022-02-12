@@ -478,9 +478,11 @@ panel[type="autocomplete-richlistbox"]
         /* backdrop-filter: blur(8px) !important;
         background-color: var(--btn-bg-color) !important;
         background-image: var(--acrylic-texture), var(--pip-icon) !important; */
+        background-image: var(--pip-icon) !important;
         background-color: var(--in-content-button-highlight-dark) !important;
         fill: currentColor !important;
-        -moz-context-properties: fill !important;
+        stroke: currentColor !important;
+        -moz-context-properties: fill, stroke !important;
         color: var(--player-control-icon-fill) !important;
         border-radius: 3px !important;
     }
@@ -495,28 +497,30 @@ panel[type="autocomplete-richlistbox"]
     }
 
     #close {
-        background-size: 80% !important;
-        --pip-icon: url(chrome://global/skin/icons/close.svg);
+        background-size: 22px !important;
+        --pip-icon: url(chrome://userchrome/content/close.svg);
     }
 
     #controls.playing #playpause {
-        --pip-icon: url(chrome://global/skin/media/pause-fill.svg);
+        background-size: 19px !important;
+        --pip-icon: url(chrome://userchrome/content/material/pause.svg);
     }
 
     #controls:not(.playing) #playpause {
-        --pip-icon: url(chrome://global/skin/media/play-fill.svg);
+        background-size: 15px !important;
+        --pip-icon: url(chrome://userchrome/content/glyph-play-12.svg);
     }
 
     #controls.muted #audio {
-        --pip-icon: url(chrome://global/skin/media/audio-muted.svg);
+        --pip-icon: url(chrome://userchrome/content/audioMutedButton.svg);
     }
 
     #controls:not(.muted) #audio {
-        --pip-icon: url(chrome://global/skin/media/audio.svg);
+        --pip-icon: url(chrome://userchrome/content/audioUnmutedButton.svg);
     }
 
     #unpip {
-        --pip-icon: url(chrome://global/skin/media/picture-in-picture-closed.svg);
+        --pip-icon: url(chrome://userchrome/content/pictureinpicture-closed.svg);
     }
 }
 
