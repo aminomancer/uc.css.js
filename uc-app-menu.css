@@ -9,7 +9,6 @@
 
 #PanelUI-menu-button {
     padding-inline: var(--toolbarbutton-outer-padding) !important;
-    margin-inline-end: 3px !important;
 }
 
 #PanelUI-menu-button[badge-status=""] > .toolbarbutton-badge-stack > .toolbarbutton-badge {
@@ -479,6 +478,10 @@
 #appMenu-zoom-controls2
     :is(#appMenu-zoomReduce-button2, #appMenu-zoomEnlarge-button2, #appMenu-fullscreen-button2, #appMenu-zoomReset-button2):not([disabled]):is([open], :hover:active) {
     background-color: var(--arrowpanel-dimmed-further) !important;
+}
+
+panel .toolbaritem-combined-buttons {
+    margin-inline-end: 0 !important;
 }
 
 #appMenu-zoom-controls2 toolbarbutton {

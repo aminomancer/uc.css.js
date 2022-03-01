@@ -137,6 +137,10 @@ menuitem#menu_openAddons .menu-text,
 #addon_darkreader_org-menuitem-_DarkReader-toggle:not(.menuitem-iconic) .menu-text,
 #private-relay_firefox_com-menuitem-_fx-private-relay-generate-alias:not(.menuitem-iconic)
     > .menu-text,
+#private-relay_firefox_com-menuitem-_fx-private-relay-use-existing-aliases:not(.menuitem-iconic)
+    > .menu-text,
+#private-relay_firefox_com-menuitem-_fx-private-relay-manage-aliases:not(.menuitem-iconic)
+    > .menu-text,
 #menu_pageInfo .menu-text,
 menuitem:is(#sync-setup, #sync-unverifieditem, #sync-reauthitem) .menu-text,
 menuitem:is(#sync-enable, #sync-syncnowitem) .menu-text,
@@ -151,6 +155,12 @@ menuitem#menu_HelpPopup_reportPhishingtoolmenu > .menu-text,
 menuitem#menu_HelpPopup_reportPhishingErrortoolmenu > .menu-text,
 menuitem#aboutName > .menu-text,
 menuitem#helpPolicySupport > .menu-text,
+:is(#new-tab-button-popup, .new-tab-popup)
+    menuitem[command="Browser:OpenAboutContainers"]
+    > .menu-text,
+:is(#new-tab-button-popup, .new-tab-popup)
+    menuitem[command="Browser:NewUserContextTab"]:not([class*="identity-icon"])
+    > .menu-text,
 #context-frameOsPid .menu-text,
 #context-reloadframe .menu-text,
 #context-reloadimage .menu-text,
@@ -265,7 +275,7 @@ menuitem#enableDeveloperTools .menu-text,
 #recently-closed-remove-from-history > .menu-text,
 #recently-closed-bookmark > .menu-text,
 :is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
-    .sendtab-target:is([clientType="phone"], [clientType="mobile"], [clientType="desktop"])
+    .sendtab-target[clientType]
     .menu-text,
 #userScriptsMenu > .menu-text,
 #toggle_PersonalToolbar > .menu-text,
@@ -377,6 +387,8 @@ menuitem#menu_openDownloads::before,
 menuitem#menu_openAddons::before,
 #addon_darkreader_org-menuitem-_DarkReader-toggle:not(.menuitem-iconic)::before,
 #private-relay_firefox_com-menuitem-_fx-private-relay-generate-alias:not(.menuitem-iconic)::before,
+#private-relay_firefox_com-menuitem-_fx-private-relay-use-existing-aliases:not(.menuitem-iconic)::before,
+#private-relay_firefox_com-menuitem-_fx-private-relay-manage-aliases:not(.menuitem-iconic)::before,
 #menu_pageInfo::before,
 menuitem:is(#sync-setup, #sync-unverifieditem, #sync-reauthitem)::before,
 menuitem:is(#sync-enable, #sync-syncnowitem)::before,
@@ -391,6 +403,10 @@ menuitem#menu_HelpPopup_reportPhishingtoolmenu::before,
 menuitem#menu_HelpPopup_reportPhishingErrortoolmenu::before,
 menuitem#aboutName::before,
 menuitem#helpPolicySupport::before,
+:is(#new-tab-button-popup, .new-tab-popup)
+    menuitem[command="Browser:OpenAboutContainers"]::before,
+:is(#new-tab-button-popup, .new-tab-popup)
+    menuitem[command="Browser:NewUserContextTab"]:not([class*="identity-icon"])::before,
 #context-viewbgimage::before,
 #context-setDesktopBackground::before,
 :is(#context-savepage, menu#pageStyleMenu, #addon_darkreader_org-menuitem-_DarkReader-addSite:not(.menuitem-iconic))::before,
@@ -553,7 +569,7 @@ menuitem#enableDeveloperTools::before,
 #recently-closed-remove-from-history::before,
 #recently-closed-bookmark::before,
 :is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
-    .sendtab-target:is([clientType="phone"], [clientType="mobile"], [clientType="desktop"])::before,
+    .sendtab-target[clientType]::before,
 :is(#spell-add-to-dictionary, #spell-add-dictionaries, #spell-add-dictionaries-main, #spell-dictionaries)::before,
 #context-showonlythisframe::before,
 #contentAreaContextMenu #frame::before,
@@ -819,9 +835,15 @@ menuitem#menu_openAddons::before,
 }
 
 #private-relay_firefox_com-menuitem-_fx-private-relay-generate-alias:not(.menuitem-iconic)::before {
-    /* background-image: url(chrome://userchrome/content/material/address-sign.svg);
-    stroke: currentColor; */
+    background-image: url(chrome://userchrome/content/material/new-address.svg);
+}
+
+#private-relay_firefox_com-menuitem-_fx-private-relay-use-existing-aliases:not(.menuitem-iconic)::before {
     background-image: url(chrome://userchrome/content/material/contact-mail.svg);
+}
+
+#private-relay_firefox_com-menuitem-_fx-private-relay-manage-aliases:not(.menuitem-iconic)::before {
+    background-image: url(chrome://userchrome/content/settings.svg);
 }
 
 menuitem:is(#sync-setup, #sync-unverifieditem)::before {
@@ -844,8 +866,16 @@ menu#browserToolsMenu:not(.menu-iconic)::before {
     background-image: url(chrome://userchrome/content/info-filled.svg);
 }
 
-menuitem#menu_preferences::before {
+menuitem#menu_preferences::before,
+:is(#new-tab-button-popup, .new-tab-popup)
+    menuitem[command="Browser:OpenAboutContainers"]::before {
     background-image: url(chrome://userchrome/content/settings.svg);
+}
+
+:is(#new-tab-button-popup, .new-tab-popup)
+    menuitem[command="Browser:NewUserContextTab"]:not([class*="identity-icon"])::before {
+    background-image: url(chrome://userchrome/content/material/empty-container.svg);
+    color: var(--panel-description-color);
 }
 
 /* menu bar > help menu */
@@ -1215,10 +1245,6 @@ menuitem#repair-text-encoding::before {
     background-image: url(chrome://userchrome/content/skin/move-tab.svg);
 }
 
-:is(#context_sendTabToDevice, #context-sendlinktodevice, #context-sendpagetodevice)::before {
-    background-image: url(chrome://userchrome/content/skin/send-to-device.svg);
-}
-
 menuitem.share-tab-url-item::before {
     background-image: url(chrome://userchrome/content/skin/share.svg);
 }
@@ -1349,14 +1375,33 @@ menuitem#enableDeveloperTools::before {
     background-image: url(chrome://userchrome/content/skin/add-bookmark.svg);
 }
 
+:is(#context_sendTabToDevice, #context-sendlinktodevice, #context-sendpagetodevice)::before {
+    background-image: url(chrome://userchrome/content/skin/send-to-device.svg);
+}
+
 :is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
     .sendtab-target:is([clientType="phone"], [clientType="mobile"])::before {
     background-image: url(chrome://userchrome/content/skin/device-phone.svg);
 }
 
 :is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
+    .sendtab-target[clientType="tablet"]::before {
+    background-image: url(chrome://userchrome/content/skin/device-tablet.svg);
+}
+
+:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
     .sendtab-target[clientType="desktop"]::before {
     background-image: url(chrome://userchrome/content/skin/device-desktop.svg);
+}
+
+:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
+    .sendtab-target[clientType="tv"]::before {
+    background-image: url(chrome://userchrome/content/skin/device-tv.svg);
+}
+
+:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
+    .sendtab-target[clientType="vr"]::before {
+    background-image: url(chrome://userchrome/content/skin/device-vr.svg);
 }
 
 :is(#contentAreaContextMenu, #toolbar-context-menu)

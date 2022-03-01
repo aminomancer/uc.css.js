@@ -321,11 +321,8 @@ menupopup#viewSidebarMenu
 }
 
 /* hide the ad for premium */
-#private-relay_firefox_com-menuitem-_fx-private-relay-get-unlimited-aliases {
-    display: none;
-}
-
-/* hide the separator after it too */
+#private-relay_firefox_com-menuitem-_fx-private-relay-get-unlimited-aliases,
+#private-relay_firefox_com-menuitem-_fx-private-relay-get-unlimited-aliases-separator,
 #private-relay_firefox_com-menuitem-_fx-private-relay-get-unlimited-aliases:first-child
     + menuseparator {
     display: none;
@@ -663,13 +660,13 @@ there's no need for a context menu item except when right-clicking something par
 /* shorten the multi-account containers label */
 #contentAreaContextMenu
     :is(.menu-iconic, .menuitem-iconic)[label="Firefox Multi-Account Containers"]
-    .menu-iconic-left {
+    > .menu-iconic-left {
     -moz-box-flex: 1;
 }
 
 #contentAreaContextMenu
     :is(.menu-iconic, .menuitem-iconic)[label="Firefox Multi-Account Containers"]
-    .menu-iconic-left::after {
+    > .menu-iconic-left::after {
     content: "Multi-Account Containers";
     display: -moz-inline-box;
     -moz-box-flex: 1;
@@ -677,7 +674,7 @@ there's no need for a context menu item except when right-clicking something par
 
 #contentAreaContextMenu
     :is(.menu-iconic, .menuitem-iconic)[label="Firefox Multi-Account Containers"]
-    .menu-iconic-text {
+    > .menu-iconic-text {
     display: none;
 }
 

@@ -69,7 +69,10 @@
     html:not([role="dialog"]) body.activity-stream,
     window:not([chromehidden]),
     window:not([chromehidden]) > dialog,
-    #downloadsListBox richlistitem {
+    #downloadsListBox richlistitem,
+    info-item,
+    info-group,
+    certificate-section {
         --in-content-page-background: var(--uc-content-page-background) !important;
         --in-content-page-color: var(--uc-content-page-color) !important;
         --in-content-box-background: var(--uc-content-box-background) !important;
@@ -319,6 +322,15 @@
 
     #errorPageContainer .button-container button.primary {
         border-color: var(--uc-checkbox-checked-border-color) !important;
+    }
+
+    .certerror #badCertAdvancedPanel {
+        border-radius: var(--menupopup-border-radius, 5px);
+    }
+
+    .long-hex {
+        border-block: 1px solid transparent;
+        padding-block: 0 !important;
     }
 
     message-bar:not([hidden]) {

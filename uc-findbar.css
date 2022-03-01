@@ -127,11 +127,11 @@ findbar[hidden] {
 
 .findbar-textbox {
     background-color: var(--search-box-color) !important;
-    color: var(--ui-text-80) !important;
+    color: var(--lwt-toolbar-field-color) !important;
 }
 
 .findbar-textbox::placeholder {
-    color: var(--ui-text-50) !important;
+    color: var(--panel-description-color) !important;
 }
 
 .findbar-textbox:focus {
@@ -141,9 +141,13 @@ findbar[hidden] {
 
 .findbar-textbox[status="notfound"] {
     background-color: var(--search-box-null) !important;
-    color: var(--ui-text-80) !important;
+    color: var(--panel-description-color) !important;
     transition-duration: var(--findbar-textbox-bg-notfound-transition-duration, 300ms) !important;
     transition-timing-function: ease-out !important;
+}
+
+.findbar-textbox[status="notfound"]:focus {
+    color: var(--ui-text-80) !important;
 }
 
 [anonid="findbar-textbox-wrapper"]:focus-within .findbar-textbox:not([status="notfound"]) {

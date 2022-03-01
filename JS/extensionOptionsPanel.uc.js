@@ -1,22 +1,24 @@
 // ==UserScript==
 // @name           Extension Options Panel
-// @version        1.7.4
+// @version        1.8.0
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
-// @description    This script creates a toolbar button that opens a popup panel where extensions can be configured, disabled, uninstalled, etc. Each extension gets its own button in the panel. Clicking an extension's button leads to a subview where you can jump to the extension's options, disable or enable the extension, uninstall it, configure automatic updates, disable/enable it in private browsing, view its source code in whatever program is associated with .xpi files, open the extension's homepage, or copy the extension's ID. The panel can also be opened from the App Menu, since the built-in "Add-ons and themes" button is replaced with an "Extensions" button that opens the panel, which in turn has an equivalent button inside it. Based on a similar script by xiaoxiaoflood, but will not be compatible with xiaoxiaoflood's loader. This one requires fx-autoconfig or Alice0775's loader. It opens a panel instead of a menupopup, for more consistency with other toolbar widgets. There are configuration options directly below.
+// @description    This script creates a toolbar button that opens a popup panel where extensions can be configured, disabled, uninstalled, etc. Each extension gets its own button in the panel. Clicking an extension's button leads to a subview where you can jump to the extension's options, disable or enable the extension, uninstall it, configure automatic updates, disable/enable it in private browsing, view its source code in whatever program is associated with .xpi files, open the extension's homepage, or copy the extension's ID. The panel can also be opened from the App Menu, using the built-in "Add-ons and themes" button. Since v1.8, themes will also be listed in the panel. Hovering a theme will show a tooltip with a preview/screenshot of the theme, and clicking the theme will toggle it on or off. There are several translation and configuration options directly below.
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
 class ExtensionOptionsWidget {
     // user configuration. change the value to the right of the colon.
     static config = {
-        "Replace addons button": true, // this script replaces the "Addons & Themes" button in the app menu with an "Extensions" button that opens our new panel instead of opening about:addons. set to false if you want to leave this button alone
+        "Replace addons button": true, // this script replaces the "Add-ons & Themes" button in the app menu with an "Extensions" button that opens our new panel instead of opening about:addons. set to false if you want to leave this button alone
 
-        "Show header": true, // set to false if you don't want the "Extension options" title to be displayed at the top of the panel
+        "Show header": true, // set to false if you don't want the "Add-on options" title to be displayed at the top of the panel
 
         "Show version": false, // show the addon version next to its name in the list
 
         "Show addon messages": true, // about:addons shows you when an addon has a warning or error, e.g. it's unsigned or blocked. if this is set to true, we'll show the same information in the panel
+
+        "Show theme preview tooltips": true, // when hovering a theme in the panel, a preview/screenshot of the theme will be displayed in a tooltip, if possible. this depends on the add-on author.
 
         "Show hidden extensions": false, // show system extensions?
 
@@ -30,19 +32,19 @@ class ExtensionOptionsWidget {
 
         // localization strings
         l10n: {
-            "Button label": "Extension Options", // what should the button's label be when it's in the overflow panel or customization palette?
+            "Button label": "Add-ons and themes", // what should the button's label be when it's in the overflow panel or customization palette?
 
-            "Button tooltip": "Extension options", // what should the button's tooltip be? I use sentence case since that's the convention.
+            "Button tooltip": "Add-ons and themes", // what should the button's tooltip be? I use sentence case since that's the convention.
 
-            "Panel title": "Extension Options", // title shown at the top of the panel (when "Show header" is true)
+            "Panel title": "Add-ons and themes", // title shown at the top of the panel (when "Show header" is true)
 
-            "Download addons label": "Download addons", // label for the button that appears when you have no addons installed.
+            "Download addons label": "Download add-ons", // label for the button that appears when you have no addons installed.
 
-            "Addons page label": "Addons page", // label for the Addons Page button at the bottom of the panel
+            "Addons page label": "Add-ons page", // label for the about:addons button at the bottom of the panel
 
-            "Addon options label": "Addon options", // labels for the addon subview buttons
+            "Addon options label": "Extension options", // labels for the addon subview buttons
 
-            "Manage addon label": "Manage addon",
+            "Manage addon label": "Manage add-on",
 
             "Enable addon label": "Enable",
 
@@ -162,17 +164,33 @@ class ExtensionOptionsWidget {
         return signingRequired && !this.isCorrectlySigned(addon);
     }
 
+    /**
+     * find an addon's screenshot url. prefer 680x92.
+     * @param {object} addon (an Addon object)
+     * @returns {string} url
+     */
+    getScreenshotUrlForAddon(addon) {
+        if (addon.id == "default-theme@mozilla.org")
+            return "chrome://mozapps/content/extensions/default-theme/preview.svg";
+        const builtInThemePreview = this.BuiltInThemes.previewForBuiltInThemeId(addon.id);
+        if (builtInThemePreview) return builtInThemePreview;
+        let { screenshots } = addon;
+        if (!screenshots || !screenshots.length) return null;
+        let screenshot = screenshots.find((s) => s.width === 680 && s.height === 92);
+        if (!screenshot) screenshot = screenshots[0];
+        return screenshot.url;
+    }
+
     // where panelviews are hiding when we're not looking
     viewCache(doc) {
         return doc.getElementById("appMenu-viewCache");
     }
 
     constructor() {
-        XPCOMUtils.defineLazyModuleGetter(
-            this,
-            "ExtensionPermissions",
-            "resource://gre/modules/ExtensionPermissions.jsm"
-        );
+        XPCOMUtils.defineLazyModuleGetters(this, {
+            ExtensionPermissions: "resource://gre/modules/ExtensionPermissions.jsm",
+            BuiltInThemes: "resource:///modules/BuiltInThemes.jsm",
+        });
         XPCOMUtils.defineLazyGetter(this, "extBundle", function () {
             return Services.strings.createBundle(
                 "chrome://mozapps/locale/extensions/extensions.properties"
@@ -233,7 +251,7 @@ class ExtensionOptionsWidget {
                             })
                         );
                         label.textContent = l10n["Panel title"];
-                        view.appendChild(document.createXULElement("toolbarseparator"));
+                        view.appendChild(aDoc.createXULElement("toolbarseparator"));
                     }
 
                     view.appendChild(
@@ -241,6 +259,13 @@ class ExtensionOptionsWidget {
                             id: view.id + "-body",
                             class: "panel-subview-body",
                         })
+                    );
+
+                    // create the theme preview tooltip
+                    aDoc.getElementById("mainPopupSet").appendChild(
+                        MozXULElement.parseXULToFragment(
+                            `<tooltip id="eom-theme-preview-tooltip" noautohide="true" orient="vertical" onpopupshowing="extensionOptionsPanel.onTooltipShowing(event);"><vbox id="eom-theme-preview-box"><html:img id="eom-theme-preview-canvas"></html:img></vbox></tooltip>`
+                        )
                     );
 
                     this.fluentSetup().then(() => this.swapAddonsButton(aDoc));
@@ -268,19 +293,21 @@ class ExtensionOptionsWidget {
     // grab localized strings for the extensions button and disabled/enabled extensions headings
     async fluentSetup() {
         this.aboutAddonsL10n = await new Localization(["toolkit/about/aboutAddons.ftl"], true);
-        let [extensions, enabled, disabled, privateHelp] = await this.aboutAddonsL10n.formatValues([
-            "addon-category-extension",
-            "extension-enabled-heading",
-            "extension-disabled-heading",
-            "addon-detail-private-browsing-help",
-        ]);
+        let [extensions, themes, enabled, disabled, privateHelp] =
+            await this.aboutAddonsL10n.formatValues([
+                "addon-category-extension",
+                "addon-category-theme",
+                "extension-enabled-heading",
+                "extension-disabled-heading",
+                "addon-detail-private-browsing-help",
+            ]);
         privateHelp = privateHelp.replace(/\s*\<.*\>$/, "");
-        this.aboutAddonsStrings = { extensions, enabled, disabled, privateHelp };
+        this.aboutAddonsStrings = { extensions, themes, enabled, disabled, privateHelp };
     }
 
     /**
-     * this script replaces the built-in "Addons & Themes" button in the app menu
-     * with a new "Extensions" button that opens our new panel instead of opening about:addons
+     * this script changes the built-in "Add-ons & themes" button in the app menu
+     * to open our new panel instead of opening about:addons
      * @param {object} aDoc (the document our widget has been created within)
      */
     swapAddonsButton(aDoc) {
@@ -291,14 +318,12 @@ class ExtensionOptionsWidget {
             win.PanelUI.mainView.querySelector("#appMenu-extensions-themes-button") ||
                 win.PanelUI.mainView.querySelector("#appMenu-addons-button"),
             {
-                "data-l10n-id": 0,
                 command: 0,
                 key: 0,
                 shortcut: 0,
                 class: "subviewbutton subviewbutton-nav",
                 oncommand: "PanelUI.showSubView('PanelUI-eom', this);",
                 closemenu: "none",
-                label: this.aboutAddonsStrings.extensions,
             }
         );
     }
@@ -307,19 +332,21 @@ class ExtensionOptionsWidget {
      * grab all addons and populate the panel with them.
      * @param {object} e (a ViewShowing event)
      */
-    getAddonsAndPopulate(e) {
-        AddonManager.getAddonsByTypes(["extension"]).then((addons) =>
-            this.populatePanelBody(e, addons)
-        );
+    async getAddonsAndPopulate(e) {
+        let extensions = await AddonManager.getAddonsByTypes(["extension"]);
+        let themes = await AddonManager.getAddonsByTypes(["theme"]);
+        this.populatePanelBody(e, { extensions, themes });
     }
 
     /**
      * create everything inside the panel
      * @param {object} e (a ViewShowing event - its target is the panelview node)
-     * @param {array} addons (an array of addons)
+     * @param {array} addons (an object containing arrays for different addon
+     *                       types e.g. extensions, themes)
      */
     populatePanelBody(e, addons) {
         let prevState;
+        let { extensions, themes } = addons;
         let view = e?.target || this.panelview;
         let win = view.ownerGlobal;
         let doc = win.document;
@@ -341,14 +368,13 @@ class ExtensionOptionsWidget {
                 if (panel.id !== view.id && panel.id.includes("PanelUI-eom-addon-")) panel.remove();
             });
 
-        if (showDisabled && enabledFirst) {
-            let enabledSubheader = body.appendChild(
-                this.create(doc, "h2", { class: "subview-subheader" }, true)
-            );
-            enabledSubheader.textContent = this.aboutAddonsStrings.enabled;
-        }
-        // all addons...
-        addons
+        // extensions...
+        let enabledSubheader = body.appendChild(
+            this.create(doc, "h2", { class: "subview-subheader" }, true)
+        );
+        enabledSubheader.textContent =
+            this.aboutAddonsStrings[showDisabled ? "enabled" : "extensions"];
+        extensions
             .sort((a, b) => {
                 // get sorted by enabled state...
                 let ka = (enabledFirst ? (a.isActive ? "0" : "1") : "") + a.name.toLowerCase();
@@ -378,9 +404,11 @@ class ExtensionOptionsWidget {
                             class: "subviewbutton subviewbutton-iconic subviewbutton-nav eom-addon-button",
                             oncommand: "extensionOptionsPanel.showSubView(event, this)",
                             closemenu: "none",
+                            "addon-type": "extension",
                             "data-extensionid": addon.id,
                         })
                     );
+                    if (!addon.isActive) subviewbutton.classList.add("disabled");
                     // set the icon using CSS variables and list-style-image so that user stylesheets can override the icon URL.
                     subviewbutton.style.setProperty(
                         "--extension-icon",
@@ -388,12 +416,51 @@ class ExtensionOptionsWidget {
                     );
                     subviewbutton._Addon = addon;
 
-                    this.setDisableStyle(subviewbutton, addon);
                     if (this.config["Show addon messages"])
                         this.setAddonMessage(subviewbutton, addon);
-                    this.buildSubView(subviewbutton, addon);
                 }
             });
+
+        // themes...
+        let themesSeparator = body.appendChild(doc.createXULElement("toolbarseparator"));
+        let themesSubheader = body.appendChild(
+            this.create(doc, "h2", { class: "subview-subheader" }, true)
+        );
+        themesSubheader.textContent = this.aboutAddonsStrings.themes;
+        themes.forEach((addon) => {
+            if (
+                !blackListArray.includes(addon.id) &&
+                (!addon.hidden || this.config["Show hidden extensions"]) &&
+                (!addon.userDisabled || showDisabled)
+            ) {
+                let subviewbutton = body.appendChild(
+                    this.create(doc, "toolbarbutton", {
+                        label: addon.name + (showVersion ? " " + addon.version : ""),
+                        class: "subviewbutton subviewbutton-iconic eom-addon-button",
+                        closemenu: "none",
+                        "addon-type": "theme",
+                        "data-extensionid": addon.id,
+                    })
+                );
+                subviewbutton.addEventListener("command", async (e) => {
+                    await addon[addon.userDisabled ? "enable" : "disable"]();
+                    subviewbutton.parentElement
+                        .querySelectorAll(`.eom-addon-button[addon-type="theme"]`)
+                        .forEach((btn) => {
+                            btn.classList[btn._Addon?.isActive ? "remove" : "add"]("disabled");
+                            this.setAddonMessage(btn, btn._Addon);
+                        });
+                });
+                if (!addon.isActive) subviewbutton.classList.add("disabled");
+                subviewbutton.style.setProperty(
+                    "--extension-icon",
+                    `url(${addon.iconURL || this.config["Icon URL"]})`
+                );
+                subviewbutton._Addon = addon;
+
+                this.setAddonMessage(subviewbutton, addon);
+            }
+        });
 
         // if no addons are shown, display a "Download Addons" button that leads to AMO.
         let getAddonsButton = body.appendChild(
@@ -408,7 +475,18 @@ class ExtensionOptionsWidget {
                 });`,
             })
         );
-        getAddonsButton.hidden = body.children.length > 1;
+
+        let hasExtensions = !!body.querySelector(`.eom-addon-button[addon-type="extension"]`);
+        let hasThemes = !!body.querySelector(`.eom-addon-button[addon-type="theme"]`);
+        getAddonsButton.hidden = hasExtensions || hasThemes;
+        if (!hasExtensions) {
+            enabledSubheader.remove();
+            themesSeparator.remove();
+        }
+        if (!hasThemes) {
+            themesSubheader.remove();
+            themesSeparator.remove();
+        }
 
         // make a footer button that leads to about:addons
         if (view.querySelector("#eom-allAddonsButton")) return;
@@ -473,20 +551,35 @@ class ExtensionOptionsWidget {
                 detail: formatString("softblocked", [name]),
                 type: "warning",
             };
+        if (addon.type === "theme" && (!message || message.type !== "error")) {
+            message = message ?? {};
+            message.detail = "";
+            message.tooltip = "eom-theme-preview-tooltip";
+            message.preview = this.getScreenshotUrlForAddon(addon);
+            if (addon.isActive) {
+                message.label = null;
+                message.checked = true;
+            }
+        }
         if (subviewbutton._addonMessage) {
             subviewbutton.removeAttribute("message-type");
             subviewbutton.removeAttribute("tooltiptext");
+            subviewbutton.removeAttribute("tooltip");
+            subviewbutton.removeAttribute("enable-checked");
             subviewbutton.querySelector(".eom-message-label")?.remove();
             delete subviewbutton._addonMessage;
         }
         if (message) {
             subviewbutton.setAttribute("message-type", message?.type);
             subviewbutton.setAttribute("tooltiptext", message?.detail);
-            subviewbutton.appendChild(
-                this.create(document, "h", {
-                    class: "toolbarbutton-text eom-message-label",
-                })
-            ).textContent = `(${message.label})`;
+            if (message.tooltip) subviewbutton.setAttribute("tooltip", message.tooltip);
+            if (message.checked) subviewbutton.setAttribute("enable-checked", true);
+            if (message.label)
+                subviewbutton.appendChild(
+                    this.create(document, "h", {
+                        class: "toolbarbutton-text eom-message-label",
+                    })
+                ).textContent = `(${message.label})`;
         }
         subviewbutton._addonMessage = message;
     }
@@ -498,6 +591,7 @@ class ExtensionOptionsWidget {
      */
     showSubView(event, anchor) {
         if (!("_Addon" in anchor)) return;
+        this.buildSubView(anchor, anchor._Addon);
         event.target.ownerGlobal.PanelUI?.showSubView(
             "PanelUI-eom-addon-" + this.makeWidgetId(anchor._Addon.id),
             anchor,
@@ -552,14 +646,15 @@ class ExtensionOptionsWidget {
                 closemenu: "none",
             })
         );
-        disableButton.addEventListener("command", (e) => {
+        disableButton.addEventListener("command", async (e) => {
             if (addon.userDisabled) {
-                addon.enable();
+                await addon.enable();
                 disableButton.setAttribute("label", l10n["Disable addon label"]);
             } else {
-                addon.disable();
+                await addon.disable();
                 disableButton.setAttribute("label", l10n["Enable addon label"]);
             }
+            this.getAddonsAndPopulate();
         });
 
         // uninstall button, and so on...
@@ -759,21 +854,6 @@ class ExtensionOptionsWidget {
     }
 
     /**
-     * for a given subviewbutton-addon pair, decide whether the button should be styled as a disabled button
-     * @param {object} subviewbutton (an addon button in the list)
-     * @param {object} addon (an addon object from AddonManager)
-     */
-    setDisableStyle(subviewbutton, addon) {
-        let cls = subviewbutton.classList;
-        if (addon.operationsRequiringRestart) {
-            if (addon.userDisabled && addon.isActive) cls.add("disabling");
-            else if (!addon.userDisabled && !addon.isActive) cls.add("enabling");
-        }
-        if (!addon.isActive) cls.add("disabled");
-        if (!addon.optionsURL) cls.add("noOptions");
-    }
-
-    /**
      * open a given addon's options page
      * @param {object} addon (an addon object)
      * @param {object} win (the window from which this was invoked)
@@ -818,6 +898,19 @@ class ExtensionOptionsWidget {
         dir.launch();
     }
 
+    onTooltipShowing(e) {
+        let anchor = e.target.triggerNode
+            ? e.target.triggerNode.closest(".eom-addon-button")
+            : null;
+        let message = anchor._addonMessage;
+        let img = e.target.querySelector("#eom-theme-preview-canvas");
+        img.src = message?.preview || "";
+        if (!anchor || !message?.preview) {
+            e.preventDefault();
+            return;
+        }
+    }
+
     // generate and load a stylesheet
     loadStylesheet() {
         let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
@@ -826,7 +919,113 @@ class ExtensionOptionsWidget {
         let uri = makeURI(
             "data:text/css;charset=UTF=8," +
                 encodeURIComponent(
-                    `#eom-button{list-style-image:url('${this.config["Icon URL"]}');}#eom-mainView-panel-header{padding:8px 4px 4px 4px;min-height:44px;-moz-box-pack:center;-moz-box-align:center;}#eom-mainView-panel-header-span{font-weight:600;display:inline-block;text-align:center;overflow-wrap:break-word;}.panel-header ~ #eom-mainView-panel-header,.panel-header ~ #eom-mainView-panel-header + toolbarseparator{display:none;}.eom-addon-button{list-style-image:var(--extension-icon);}#PanelUI-eom .disabled label{opacity:.6;font-style:italic;}#PanelUI-eom .eom-message-label{opacity:.6;margin-inline-start:8px;font-style:italic;}.eom-addon-button[message-type="warning"]{background-color:var(--eom-warning-bg,hsla(48,100%,66%,.15));}.eom-addon-button[message-type="warning"]:not([disabled],[open],:active):is(:hover){background-color:var(--eom-warning-bg-hover,color-mix(in srgb,currentColor 8%,hsla(48,100%,66%,.18)));}.eom-addon-button[message-type="warning"]:not([disabled]):is([open],:hover:active){background-color:var(--eom-warning-bg-active,color-mix(in srgb,currentColor 15%,hsla(48,100%,66%,.2)));}.eom-addon-button[message-type="error"]{background-color:var(--eom-error-bg,hsla(2,100%,66%,.15));}.eom-addon-button[message-type="error"]:not([disabled],[open],:active):is(:hover){background-color:var(--eom-error-bg-hover,color-mix(in srgb,currentColor 8%,hsla(2,100%,66%,.18)));}.eom-addon-button[message-type="error"]:not([disabled]):is([open],:hover:active){background-color:var(--eom-error-bg-active,color-mix(in srgb,currentColor 15%,hsla(2,100%,66%,.2)));}.eom-radio-hbox{padding-block:4px;}.eom-radio-hbox .radio-check{margin-block:0;}.eom-radio-hbox label{padding-bottom:1px;}.eom-radio-label{margin-inline-end:8px;}.eom-radio-hbox .subviewradio{margin:0;margin-inline:2px;padding:0;background:none!important;}.eom-radio-hbox .radio-label-box{margin:0;padding:0;}.eom-radio-label[tooltiptext]{cursor:help;}`
+                    /*css*/
+                    `#eom-button {
+    list-style-image: url('${this.config["Icon URL"]}');
+}
+#eom-mainView-panel-header {
+    padding: 8px 4px 4px 4px;
+    min-height: 44px;
+    -moz-box-pack: center;
+    -moz-box-align: center;
+}
+#eom-mainView-panel-header-span {
+    font-weight: 600;
+    display: inline-block;
+    text-align: center;
+    overflow-wrap: break-word;
+}
+.panel-header ~ #eom-mainView-panel-header,
+.panel-header ~ #eom-mainView-panel-header + toolbarseparator {
+    display: none;
+}
+.eom-addon-button {
+    list-style-image: var(--extension-icon);
+}
+#${this.viewId} {
+    min-height: 400px;
+    min-width: 27em;
+}
+#${this.viewId} .disabled label {
+    opacity: 0.6;
+    font-style: italic;
+}
+#${this.viewId} .eom-message-label {
+    opacity: 0.6;
+    margin-inline-start: 8px;
+    font-style: italic;
+}
+.eom-addon-button[message-type="warning"] {
+    background-color: var(--eom-warning-bg, hsla(48, 100%, 66%, 0.15));
+}
+.eom-addon-button[message-type="warning"]:not([disabled], [open], :active):is(:hover) {
+    background-color: var(
+        --eom-warning-bg-hover,
+        color-mix(in srgb, currentColor 8%, hsla(48, 100%, 66%, 0.18))
+    );
+}
+.eom-addon-button[message-type="warning"]:not([disabled]):is([open], :hover:active) {
+    background-color: var(
+        --eom-warning-bg-active,
+        color-mix(in srgb, currentColor 15%, hsla(48, 100%, 66%, 0.2))
+    );
+}
+.eom-addon-button[message-type="error"] {
+    background-color: var(--eom-error-bg, hsla(2, 100%, 66%, 0.15));
+}
+.eom-addon-button[message-type="error"]:not([disabled], [open], :active):is(:hover) {
+    background-color: var(
+        --eom-error-bg-hover,
+        color-mix(in srgb, currentColor 8%, hsla(2, 100%, 66%, 0.18))
+    );
+}
+.eom-addon-button[message-type="error"]:not([disabled]):is([open], :hover:active) {
+    background-color: var(
+        --eom-error-bg-active,
+        color-mix(in srgb, currentColor 15%, hsla(2, 100%, 66%, 0.2))
+    );
+}
+.eom-radio-hbox {
+    padding-block: 4px;
+}
+.eom-radio-hbox .radio-check {
+    margin-block: 0;
+}
+.eom-radio-hbox label {
+    padding-bottom: 1px;
+}
+.eom-radio-label {
+    margin-inline-end: 8px;
+}
+.eom-radio-hbox .subviewradio {
+    margin: 0;
+    margin-inline: 2px;
+    padding: 0;
+    background: none !important;
+}
+.eom-radio-hbox .radio-label-box {
+    margin: 0;
+    padding: 0;
+}
+.eom-radio-label[tooltiptext] {
+    cursor: help;
+}
+.eom-addon-button[enable-checked]::after {
+    -moz-context-properties: fill, fill-opacity;
+    content: url(chrome://global/skin/icons/check.svg);
+    fill: currentColor;
+    fill-opacity: 0.6;
+    display: -moz-box;
+    margin-inline-start: 10px;
+}
+#eom-theme-preview-tooltip {
+    appearance: none;
+    padding: 0;
+    border-radius: var(--arrowpanel-border-radius, 8px);
+    overflow: hidden;
+    border: 1px solid var(--arrowpanel-border-color);
+    background: var(--arrowpanel-border-color);
+}`
                 )
         );
         if (sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) return;

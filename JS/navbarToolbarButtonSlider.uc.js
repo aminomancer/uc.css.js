@@ -551,7 +551,7 @@ class NavbarToolbarSlider {
         });
     }
     setupScroll() {
-        let { outer, inner, kids } = this;
+        let { outer, inner } = this;
         // we're listening for changes to the "open" attribute of children of inner (the inner
         // container). when you click a toolbar button that has a popup, it opens the popup and
         // sets the "open" attribute of the button to "true". if you were to scroll the slider
@@ -565,7 +565,7 @@ class NavbarToolbarSlider {
         // enable/disable scrolling.
         this.muObserver = new MutationObserver(() => {
             // if any button has open=true, set outer.open=true, else, outer.open=false.
-            if ([...kids].some((elem) => elem.open)) {
+            if (inner.querySelector(`toolbarbutton[open="true"]`)) {
                 if (!outer.open) outer.open = true;
             } else if (outer.open) outer.open = false;
         });

@@ -95,6 +95,7 @@
     overflow: hidden !important;
     margin: 0 !important;
     font-weight: var(--uc-font-weight-thin, 400);
+    outline: none !important;
     --edit-bm-panel-overflow: hidden;
 }
 
@@ -146,8 +147,8 @@
     outline: none !important;
 }
 
-#editBookmarkPanel tree:focus-visible {
-    outline: 2px solid var(--focus-outline-color, -moz-accent-color) !important;
+#editBookmarkPanel treechildren::-moz-tree-row(selected, focus) {
+    background-color: var(--ebmp-double-focus-bgcolor) !important;
 }
 
 #editBookmarkPanel treechildren::-moz-tree-row(selected):hover {
@@ -157,15 +158,6 @@
     color: var(--toolbar-color) !important;
     border: none !important;
 }
-
-/* #editBookmarkPanel treechildren::-moz-tree-row(hover)(selected),
-#editBookmarkPanel treechildren::-moz-tree-cell(hover)(selected) {
-    appearance: none !important;
-    background-color: var(--ebmp-focus-bgcolor) !important;
-    line-height: normal;
-    color: var(--toolbar-color) !important;
-    border: none !important;
-} */
 
 #editBookmarkPanel treechildren::-moz-tree-cell-text(selected),
 #editBookmarkPanel treechildren::-moz-tree-image(selected),
@@ -237,10 +229,10 @@
     background-color: var(--ebmp-hover-bgcolor) !important;
 }
 
-/* #editBookmarkPanel #editBookmarkPanelContent button:hover:active {
+#editBookmarkPanel #editBookmarkPanelContent button:hover:active {
     appearance: none !important;
     background-color: var(--ebmp-focus-bgcolor) !important;
-} */
+}
 
 #editBookmarkPanelBottomButtons {
     margin: 0 14px 14px 14px !important;
@@ -422,8 +414,16 @@
     opacity: 1 !important;
 }
 
-#editBookmarkPanel richlistbox[id] richlistitem:is(:hover, [selected="true"], [current="true"]) {
-    background-color: var(--arrowpanel-faint) !important;
+#editBookmarkPanel richlistbox[id] richlistitem:hover {
+    background-color: var(--ebmp-hover-bgcolor) !important;
+}
+
+#editBookmarkPanel richlistbox[id] richlistitem:is([selected="true"], [current="true"]) {
+    background-color: var(--ebmp-focus-bgcolor) !important;
+}
+
+#editBookmarkPanel richlistbox[id]:focus-visible richlistitem:is([selected="true"], [current="true"]) {
+    background-color: var(--ebmp-double-focus-bgcolor) !important;
 }
 
 :is(#bookmarkpropertiesdialog, #editBookmarkPanel) checkbox {

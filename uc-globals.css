@@ -150,7 +150,7 @@ but other than that these variables should be available everywhere. */
     --dialog-box-border-color: hsla(232, 100%, 85%, 0.2);
     --dialog-box-border-hover: hsla(232, 100%, 85%, 0.3);
     --blurred-dialog-border-color: hsla(240, 7%, 20%, 0.8);
-    --alertbox-bgcolor: hsla(0, 0%, 14%, 0.97);
+    --alertbox-bgcolor: var(--uc-content-box-background-dim);
     --notification-menu-color: var(--uc-parent-page-color);
     --ui-disabled-alpha: 0.5;
     --uc-menu-disabled-color: hsla(213, 43%, 89%, var(--ui-disabled-alpha, 0.5));
@@ -286,6 +286,7 @@ but other than that these variables should be available everywhere. */
     --ui-solid-button-active-bgcolor: var(--uc-arrowpanel-dimmed-even-further);
     --ebmp-hover-bgcolor: hsl(233, 24%, 33%);
     --ebmp-focus-bgcolor: hsl(233, 24%, 38%);
+    --ebmp-double-focus-bgcolor: hsl(233, 22%, 43%);
 
     --urlbar-base-font-weight: 400;
     --urlbar-result-strong-font-weight: 400;
@@ -311,7 +312,7 @@ but other than that these variables should be available everywhere. */
     buttons, as well as buttons in tab-like elements like the all-tabs menu and
     my vertical tabs pane script. personally I've settled on circles for small
     buttons, rounded squares for big buttons. */
-    --tab-button-border-radius: 50%;
+    --tab-button-border-radius: 2.6px;
     --tree-row-height: 24px;
     --menuitem-height: 26px;
     --subviewbutton-height: 28px;

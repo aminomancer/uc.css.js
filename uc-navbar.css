@@ -264,8 +264,8 @@ i haven't tested this on every scaling factor, if it makes things worse on your 
     fill: var(--warning-color) !important;
 }
 
-#nav-bar-customization-target {
-    padding-inline-start: var(--toolbarbutton-outer-padding) !important;
+#nav-bar {
+    padding-inline: 3px !important;
 }
 
 #TabsToolbar-customization-target > #back-button {
@@ -314,7 +314,6 @@ toolbar
     .toolbarbutton-1:not([disabled], [open])[checked]
     > :is(.toolbarbutton-icon, .toolbarbutton-badge-stack) {
     background-color: var(--toolbarbutton-checked-background) !important;
-    transition: none !important;
 }
 
 toolbar .toolbarbutton-1:not([disabled], [open])[checked]:hover > .toolbarbutton-icon {
@@ -335,6 +334,14 @@ toolbar .toolbarbutton-1:not([disabled], [open])[checked]:hover:active > .toolba
 
 .widget-overflow-list .toolbarbutton-1:not([disabled], [open])[checked]:hover:active {
     background-color: var(--button-active-bgcolor) !important;
+}
+
+toolbar[customizing="true"]
+    toolbarpaletteitem
+    > #sidebar-button:not([disabled], [open])[checked]
+    > :is(.toolbarbutton-icon, .toolbarbutton-badge-stack) {
+    background-color: revert !important;
+    transition: transform var(--drag-drop-transition-duration) cubic-bezier(.6, 2, .75, 1.5) !important;
 }
 
 .widget-overflow-list .toolbarbutton-1:not([disabled], [open])[checked]::after {

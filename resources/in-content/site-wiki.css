@@ -2867,34 +2867,31 @@ You can use greasemonkey or any other form of monkey that supports the document-
         color: hsla(0, 0%, 100%, 0.75) !important;
         font-size: 13px !important;
         line-height: 1.48em !important;
-        background: hsla(0, 0%, 2%, 0.95) !important;
         box-shadow: 0 0 25px 2px hsla(0, 0%, 0%, 0.1), 0 0 5px 1px hsla(0, 0%, 0%, 0.25) !important;
+        border-radius: 3px !important;
         border: none !important;
+        /* backdrop filter has been temporarily disabled by mozilla */
+        /* background-color: hsla(0, 0%, 2%, 0.95) !important; */
+        background-color: hsl(240, 4%, 5%) !important;
         overflow-wrap: break-word !important;
     }
 
     .rt-tooltipTail {
-        border: 9px solid transparent !important;
+        border: 8px solid transparent !important;
         border-bottom: 0 !important;
-        border-top: 9px solid hsla(0, 0%, 2%, 0.95) !important;
+        border-top: 8px solid hsl(240, 4%, 5%) !important;
         background: transparent !important;
         transform: none !important;
-        bottom: -9px !important;
+        bottom: -8px !important;
         height: 0px !important;
         width: 0px !important;
         margin-left: -3px !important;
     }
 
     .rt-tooltip-below .rt-tooltipTail {
-        content: "" !important;
-        border: 9px solid transparent !important;
         border-top: 0 !important;
-        border-bottom: 9px solid hsla(0, 0%, 2%, 0.95) !important;
-        background: transparent !important;
-        transform: none !important;
-        top: -9px !important;
-        height: 0px !important;
-        width: 0px !important;
+        border-bottom: 8px solid hsl(240, 4%, 5%) !important;
+        top: -8px !important;
         margin-left: -16px !important;
     }
 

@@ -369,6 +369,12 @@ toolbarpaletteitem[mousedown] > #urlbar-container > #urlbar > #urlbar-background
 
 #urlbar[usertyping]:is([focused], [open]) > #urlbar-input-container > #urlbar-go-button {
     display: -moz-inline-box !important;
+    -moz-box-ordinal-group: 2 !important;
+    margin-inline-end: calc(var(--urlbar-container-padding) + 1px) !important;
+}
+
+#urlbar[usertyping]:is([focused], [open]) > #urlbar-input-container > #page-action-buttons {
+    margin-inline-end: 0 !important;
 }
 
 #urlbar[textoverflow="both"] > #urlbar-input-container > .urlbar-input-box > #urlbar-input {
@@ -430,7 +436,6 @@ but CSS hides it faster and avoids flickering.
         visibility: hidden;
         width: 0 !important;
         min-width: 0 !important;
-        margin-inline-end: 2px !important;
     }
 }
 
@@ -1266,7 +1271,7 @@ use 0.6 instead of 1 since 1 will end up being shown as like 1.4px for some wind
     right: 7px;
     opacity: 0;
     pointer-events: none;
-    border-radius: 50px !important;
+    border-radius: var(--tab-button-border-radius) !important;
 }
 
 #urlbar[searchmode] #urlbar-search-mode-indicator:is(:hover, :focus-visible, :focus-within) {

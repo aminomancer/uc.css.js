@@ -338,9 +338,9 @@ panel[type="autocomplete-richlistbox"]
 @-moz-document url("chrome://global/content/alerts/alert.xhtml")
 {
     #alertBox {
-        box-shadow: 0 0 9px 3px rgba(0, 0, 0, 0.2) !important;
+        box-shadow: var(--tooltip-box-shadow) !important;
         color: var(--ui-text-100) !important;
-        fill: var(--ui-text-50) !important;
+        fill: currentColor !important;
         border: none !important;
         border-radius: calc(var(--toolbarbutton-border-radius) + 1px) !important;
         background-color: var(--alertbox-bgcolor) !important;
@@ -348,17 +348,26 @@ panel[type="autocomplete-richlistbox"]
     }
 
     #alertBox #alertTitleBox {
-        margin-bottom: 10px !important;
+        margin-bottom: 5px !important;
         font-weight: normal !important;
     }
 
-    #alertTitleBox * {
+    #alertTitleLabel {
         font-weight: normal !important;
-        font-size: 14px !important;
+        font-size: 1.1em !important;
     }
 
     #alertTitleLabel {
         margin-left: 5px !important;
+    }
+
+    #alertFooter {
+        -moz-box-align: center !important;
+    }
+
+    #alertSourceLabel {
+        color: var(--ui-text-50) !important;
+        font-size: 0.9em !important;
     }
 
     button,
@@ -368,20 +377,36 @@ panel[type="autocomplete-richlistbox"]
 
     #alertSettings {
         border-radius: var(--toolbarbutton-border-radius) !important;
-        width: 20px !important;
-        height: 20px !important;
-        margin-right: 3px !important;
+        margin-inline-end: 0 !important;
+        padding: 0 !important;
+        width: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
+        height: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
+        fill: currentColor !important;
     }
 
-    #alertTitleBox > vbox {
-        width: 20px !important;
-        height: 20px !important;
+    #alertSettings .button-box {
+        padding: var(--toolbarbutton-inner-padding) !important;
+        margin: 0 !important;
+        box-sizing: content-box !important;
+    }
+
+    #alertSettings .button-icon {
+        width: 16px !important;
+        height: 16px !important;
+        padding: 1px !important;
     }
 
     #alertTitleBox .close-icon {
         border-radius: var(--toolbarbutton-border-radius) !important;
-        margin: 2px 2px 0 0 !important;
-        padding: 3px !important;
+        margin: 2px 0 0 !important;
+        padding: 0 !important;
+        fill: currentColor !important;
+    }
+
+    #alertTitleBox .close-icon .toolbarbutton-icon {
+        padding: var(--toolbarbutton-inner-padding) !important;
+        width: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
+        height: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
     }
 
     #alertTitleLabel {
@@ -391,83 +416,12 @@ panel[type="autocomplete-richlistbox"]
 
     #alertImage {
         border-radius: var(--toolbarbutton-border-radius);
+        margin: 0 12px 7px 7px !important;
     }
 
     #alertSettings:is(:hover, [open], :hover:active),
     #alertBox .close-icon:is(:hover, :hover:active) {
-        fill: var(--ui-text-80) !important;
         background: var(--uc-content-button-background) !important;
-    }
-
-    #alertSettings .button-icon {
-        width: 12px !important;
-    }
-
-    #alertSettings menupopup {
-        appearance: none !important;
-        background: var(--in-content-bg-dark) !important;
-        border: none !important;
-        border-radius: 3px !important;
-        margin: 0px 0 0 0 !important;
-        overflow: hidden !important;
-    }
-
-    #alertSettings menupopup menuseparator {
-        visibility: hidden !important;
-        display: none !important;
-    }
-
-    #alertSettings menupopup :is(menuitem, menu) {
-        appearance: none !important;
-        color: var(--ui-text-80) !important;
-        padding: 0 0 0 0 !important;
-        min-height: 25px !important;
-    }
-
-    #alertSettings menupopup :is(menuitem, menu)[disabled="true"] {
-        appearance: none !important;
-        color: var(--ui-text-50) !important;
-        background-color: initial !important;
-    }
-
-    #alertSettings menupopup menuseparator:not([hidden="true"]) + :is(menu, menuitem) {
-        border-image: linear-gradient(
-            to right,
-            transparent 1%,
-            hsl(233, 0%, 23%) 50%,
-            transparent 99%
-        ) !important;
-        border-image-slice: 1 !important;
-        border-top-width: 1px !important;
-        border-top-style: solid !important;
-    }
-
-    #alertSettings menupopup :is(menuitem, menu) image {
-        margin-left: 3px;
-        margin-right: -3px;
-    }
-
-    #alertSettings menupopup {
-        padding: 0 !important;
-    }
-
-    #alertSettings menupopup .menu-right {
-        appearance: none !important;
-        padding: 0px !important;
-        margin-right: 2px !important;
-        width: 12px !important;
-        height: 12px !important;
-        fill: currentColor !important;
-        -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity !important;
-        background-size: 10px 10px !important;
-        background-position: center !important;
-        background-repeat: no-repeat !important;
-        background-image: url(chrome://userchrome/content/menu-arrow-thick.svg) !important;
-    }
-
-    #alertSettings menupopup :is(menu, menuitem)[_moz-menuactive="true"]:not([disabled="true"]) {
-        appearance: none !important;
-        background-color: var(--uc-content-button-background) !important;
     }
 }
 
@@ -1290,7 +1244,7 @@ panel[type="autocomplete-richlistbox"]
         padding-block: 0 !important;
         padding-inline: 6px !important;
         margin-block: 0 !important;
-        min-height: 25px !important;
+        min-height: var(--menuitem-height) !important;
         box-sizing: border-box !important;
         border-radius: var(--toolbarbutton-border-radius) !important;
     }
@@ -1329,8 +1283,8 @@ panel[type="autocomplete-richlistbox"]
 
     :root[dialogroot] .expander-up,
     :root[dialogroot] .expander-down {
-        min-height: 25px !important;
-        min-width: 25px !important;
+        min-height: var(--menuitem-height) !important;
+        min-width: var(--menuitem-height) !important;
         margin-inline: 4px !important;
     }
 

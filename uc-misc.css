@@ -500,7 +500,8 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
         /* for stuff that should be thin */
         #urlbar,
         #searchbar,
-        #PopupSearchAutoComplete {
+        #PopupSearchAutoComplete,
+        #alertSourceLabel {
             font-family: SF Pro, SF Arabic, Segoe UI, sans-serif !important;
             font-kerning: normal !important;
         }

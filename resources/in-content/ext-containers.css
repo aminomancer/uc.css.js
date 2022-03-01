@@ -62,6 +62,7 @@
     :root[uc-extension-id="@testpilot-containers"] .identities-list {
         margin: 0 !important;
         padding: 0 !important;
+        block-size: auto !important;
     }
 
     :root[uc-extension-id="@testpilot-containers"] .menu {
@@ -482,6 +483,10 @@
     :root[uc-extension-id="@testpilot-containers"] .menu-icon[src="/img/container-openin-16.svg"] {
         padding-left: 16px !important;
         background-image: url(chrome://userchrome/content/skin/container-go.svg) !important;
+    }
+
+    :root[uc-extension-id="@testpilot-containers"] .mac-icon {
+        background-image: url(chrome://userchrome/content/skin/container-plus.svg) !important;
     }
 
     :root[uc-extension-id="@testpilot-containers"]
