@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Tab Thumbnail Tooltip
-// @version        1.0.3
+// @version        1.0.4
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Show a large thumbnail image to preview tab content when hovering a tab.
@@ -116,6 +116,7 @@ class TabThumbnail {
                     backgroundColor: getComputedStyle(this.thumbBox).getPropertyValue(
                         "background-color"
                     ),
+                    fullScale: true,
                     fullViewport: true,
                 },
                 true
