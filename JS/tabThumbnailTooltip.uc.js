@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Tab Thumbnail Tooltip
-// @version        1.0.2
+// @version        1.0.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Show a large thumbnail image to preview tab content when hovering a tab.
@@ -166,9 +166,11 @@ class TabThumbnail {
                 border-radius: max(3px, var(--thumb-border-radius));
             }
             #tabThumbLabel {
-                text-align: center;
                 margin-inline: 5px;
                 font-weight: 600;
+            }
+            #tabThumbTooltip:not([hide-thumbnail]) #tabThumbLabel {
+                text-align: center;
             }
             #tabThumbBox > toolbarseparator {
                 appearance: none;
