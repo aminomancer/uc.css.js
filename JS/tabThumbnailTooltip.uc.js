@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Tab Thumbnail Tooltip
-// @version        1.0.1
+// @version        1.0.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Show a large thumbnail image to preview tab content when hovering a tab.
@@ -9,9 +9,31 @@
 
 class TabThumbnail {
     static config = {
-        "Preview width": 320, // Thumbnail width, in pixels (can override with CSS too)
-        "Preview height": 180, // Thumbnail height
-        "Update interval": 30, // How often to refresh the thumbnail, in milliseconds
+        // Thumbnail width, in pixels (can override with CSS too)
+        "Preview width": 320,
+
+        // Thumbnail height
+        "Preview height": 180,
+
+        // How often to refresh the thumbnail, in milliseconds
+        "Update interval": 30,
+
+        // Set an upper limit on the number of characters shown in the tooltip's
+        // label when a thumbnail is showing. If a tab has an extremely long
+        // title (say you searched a really long string on Google), it may wind
+        // up wrapping onto many lines in the tooltip. This can be mitigated by
+        // setting a character limit. If the limit is 100, then the first 50
+        // characters and the last 49 characters will be shown, and … will be
+        // shown in between. For example, a limit of 30 will yield:
+        // "Lorem ipsum dol…id est laborum". When a preview thumbnail is not
+        // showing (e.g. for unloaded tabs), this setting will be ignored. If
+        // you set this to 0 or -1, there will be no limit at all.
+        "Max label character limit": 100,
+
+        // The character(s) to be shown in the middle of the label if it
+        // overflows the limit set above. If the character limit above is set to
+        // 0 or -1, this setting will have no effect. Wrap in backticks `
+        "Overflow terminal character": `…`,
     };
     get tooltip() {
         return this._tooltip || (this._tooltip = document.getElementById("tabThumbTooltip"));
@@ -67,7 +89,7 @@ class TabThumbnail {
             this.tooltip.moveToAnchor(tab, "after_start");
         }
         const { config } = this;
-        this.tabLabel.textContent = gBrowser.getTabTooltip(tab);
+        let label = gBrowser.getTabTooltip(tab);
         let canvas = PageThumbs.createCanvas(window);
         let browser = tab.linkedBrowser;
         let pending = tab.hasAttribute("pending") || !browser.browsingContext;
@@ -75,8 +97,18 @@ class TabThumbnail {
         let url = docURI?.spec;
         let isBlank = !url || url === "about:blank";
         if (isBlank || pending) {
+            this.tabLabel.textContent = label;
             this.tooltip.setAttribute("hide-thumbnail", "true");
         } else {
+            let limit = config["Max label character limit"];
+            if (limit > 0 && label.length > limit) {
+                let terminal = config["Overflow terminal character"] || "…";
+                label =
+                    label.substring(0, limit / 2) + // 50
+                    terminal + // 1
+                    label.substring(label.length + terminal.length - limit / 2, label.length); // 49
+            }
+            this.tabLabel.textContent = label;
             await PageThumbs.captureToCanvas(
                 browser,
                 canvas,

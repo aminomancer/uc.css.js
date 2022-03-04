@@ -223,14 +223,6 @@ the last 75% or so of this stylesheet is dedicated to restoring pre-proton conte
         background-color: var(--panel-item-hover-bgcolor);
     }
 
-    panelview
-        :is(.toolbarbutton-1, toolbarbutton.subviewbutton, .navigable.subviewbutton):not([disabled], [open]):focus-visible:active,
-    .widget-overflow-list .toolbarbutton-1:not([disabled], [open]):focus-visible:active,
-    .toolbaritem-combined-buttons:is(:not([cui-areatype="toolbar"]), [overflowedItem="true"])
-        > toolbarbutton:not([disabled], [open]):focus-visible:active {
-        background-color: var(--panel-item-active-bgcolor);
-    }
-
     .panel-footer > button {
         border-radius: var(--general-button-border-radius);
     }

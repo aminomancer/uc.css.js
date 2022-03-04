@@ -292,8 +292,8 @@ panel[type="arrow"][side="top"] {
     fill-opacity: 0.6;
 }
 
-.panel-header > .subviewbutton-back:not([disabled], [open], :active):is(:hover, :focus-visible),
-.messageCloseButton:not([disabled], [open], :active):is(:hover, :focus-visible) {
+.panel-header > .subviewbutton-back:not([disabled], [open], :hover:active):is(:hover, :focus-visible),
+.messageCloseButton:not([disabled], [open], :hover:active):is(:hover, :focus-visible) {
     fill-opacity: 0.8;
 }
 

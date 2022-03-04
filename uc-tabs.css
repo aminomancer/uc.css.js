@@ -467,17 +467,16 @@ does nothing without restoreTabSoundButton.uc.js since sound icon no longer exis
 .tab-close-button,
 .tab-icon-sound:not([pictureinpicture]) {
     opacity: 0 !important;
-    fill: white !important;
-    fill-opacity: 0 !important;
+    fill: currentColor !important;
     border-radius: var(--tab-button-border-radius, 2px) !important;
+}
+
+.tab-close-button {
+    fill-opacity: 0 !important;
 }
 
 .tab-close-button:hover {
     opacity: 1 !important;
-}
-
-.tab-icon-sound:is([soundplaying], [muted]) {
-    padding: 0 !important;
 }
 
 .tab-icon-sound {
@@ -493,6 +492,10 @@ does nothing without restoreTabSoundButton.uc.js since sound icon no longer exis
     -moz-context-properties: fill !important;
     -moz-box-ordinal-group: 2 !important;
     fill: currentColor !important;
+}
+
+.tab-icon-sound:is([soundplaying], [muted]) {
+    padding: 0 !important;
 }
 
 .tab-icon-sound[muted] {

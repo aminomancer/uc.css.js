@@ -41,6 +41,10 @@
         --Z-FRONT: 100;
     }
 
+    :root[uc-extension-id="nordvpnproxy@nordvpn.com"] .bg-white.Container {
+        background-color: transparent !important;
+    }
+
     @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
         :root[uc-extension-id="nordvpnproxy@nordvpn.com"] {
             --FONT-FAMILY-APP: SF Pro Text !important;
