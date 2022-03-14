@@ -56,6 +56,7 @@
 
 .tab-background {
     border: none !important;
+    outline: none !important;
     border-radius: 0 !important;
     box-shadow: none !important;
     opacity: 1 !important;
@@ -465,37 +466,37 @@ does nothing without restoreTabSoundButton.uc.js since sound icon no longer exis
 
 /* tab buttons are generally styled the same */
 .tab-close-button,
-.tab-icon-sound:not([pictureinpicture]) {
+.tab-icon-sound {
+    width: 16px !important;
+    height: 16px !important;
+    padding: 0 !important;
     opacity: 0 !important;
     fill: currentColor !important;
     border-radius: var(--tab-button-border-radius, 2px) !important;
 }
 
 .tab-close-button {
+    -moz-box-ordinal-group: 0;
+    display: block !important;
+    -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity !important;
+    position: relative;
+    margin-inline: 0 -16px !important;
+    list-style-image: url(chrome://userchrome/content/textbox-clear.svg) !important;
     fill-opacity: 0 !important;
-}
-
-.tab-close-button:hover {
-    opacity: 1 !important;
+    stroke-opacity: 0.6 !important;
 }
 
 .tab-icon-sound {
     display: -moz-inline-box !important;
-    width: 16px !important;
-    height: 16px !important;
     list-style-image: none !important;
     background-image: url(chrome://userchrome/content/audioUnmutedButton.svg) !important;
     background-size: 12px !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
     list-style-image: none !important;
-    -moz-context-properties: fill !important;
+    -moz-context-properties: fill, fill-opacity !important;
     -moz-box-ordinal-group: 2 !important;
-    fill: currentColor !important;
-}
-
-.tab-icon-sound:is([soundplaying], [muted]) {
-    padding: 0 !important;
+    fill-opacity: 0.6 !important;
 }
 
 .tab-icon-sound[muted] {
@@ -515,32 +516,37 @@ does nothing without restoreTabSoundButton.uc.js since sound icon no longer exis
     background-repeat: no-repeat !important;
 }
 
-:is(.tab-icon-sound, .tab-close-button):hover {
+.tab-close-button:hover {
     background-color: var(--arrowpanel-dimmed) !important;
-    opacity: 1 !important;
+    stroke-opacity: 1 !important;
+}
+
+.tab-icon-sound:hover {
+    background-color: var(--arrowpanel-dimmed) !important;
+    fill-opacity: 1 !important;
 }
 
 .tabbrowser-tab:is(:hover, .keyboard-focused-tab, [open])
-    :is(.tab-icon-sound, .tab-close-button):not(:hover) {
-    opacity: 0.6 !important;
+    :is(.tab-icon-sound, .tab-close-button) {
+    opacity: 1 !important;
 }
 
 .tabbrowser-tab:is(:hover, .keyboard-focused-tab, [open])
     :is(.tab-icon-sound, .tab-close-button):hover:active {
     background-color: var(--arrowpanel-dimmed-further) !important;
-    opacity: 1 !important;
 }
 
 /* for the picture in picture button to mute/unmute tabs with proton, you need to follow the restore tab sound button instructions on my repo's readme */
-.tabbrowser-tab:not(:hover, .keyboard-focused-tab, [open]) .tab-icon-sound[pictureinpicture] {
+.tabbrowser-tab:not(:hover, .keyboard-focused-tab, [open], [justmoved]) .tab-icon-sound[pictureinpicture] {
     background-image: url(chrome://userchrome/content/tab-picture-in-picture.svg) !important;
     background-size: 12px !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
+    border-radius: revert !important;
 }
 
-.tab-icon-sound:is([soundplaying], [muted], [activemedia-blocked], [pictureinpicture]):not(:hover) {
-    opacity: 0.6 !important;
+.tab-icon-sound:is([soundplaying], [muted], [activemedia-blocked], [pictureinpicture]) {
+    opacity: 1 !important;
 }
 
 .tabbrowser-tab:is(:hover, .keyboard-focused-tab, [open])
@@ -554,19 +560,17 @@ does nothing without restoreTabSoundButton.uc.js since sound icon no longer exis
     border-radius: var(--tab-button-border-radius, 2px) !important;
 }
 
-.tabbrowser-tab .tab-icon-sound[pictureinpicture]:hover {
-    opacity: 1 !important;
-    background-color: var(--arrowpanel-dimmed) !important;
-}
-
 .tabbrowser-tab:is(:hover, .keyboard-focused-tab, [open])
-    .tab-icon-sound[pictureinpicture][soundplaying] {
+    .tab-icon-sound[pictureinpicture][soundplaying],
+.tabbrowser-tab[selected][justmoved]:not([pinned]) .tab-icon-sound[pictureinpicture][soundplaying] {
     background-image: url(chrome://userchrome/content/audioUnmutedButton.svg) !important;
 }
 
 .tabbrowser-tab:is(:hover, .keyboard-focused-tab, [open]) .tab-icon-sound[pictureinpicture][muted],
 .tabbrowser-tab:is(:hover, .keyboard-focused-tab, [open])
-    .tab-icon-sound[pictureinpicture][soundplaying][muted] {
+    .tab-icon-sound[pictureinpicture][soundplaying][muted],
+.tabbrowser-tab[selected][justmoved]:not([pinned]) .tab-icon-sound[pictureinpicture][muted],
+.tabbrowser-tab[selected][justmoved]:not([pinned]) .tab-icon-sound[pictureinpicture][soundplaying][muted] {
     background-image: url(chrome://userchrome/content/audioMutedButton.svg) !important;
 }
 
@@ -613,7 +617,7 @@ so in other words it won't show if audio is playing until you hover the general 
     margin-right: -16px !important;
     z-index: 1 !important;
     visibility: visible !important;
-    opacity: 0.6 !important;
+    opacity: 1 !important;
 }
 
 /* attention indicator */
@@ -643,23 +647,6 @@ so in other words it won't show if audio is playing until you hover the general 
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-}
-
-.tab-close-button {
-    -moz-box-ordinal-group: 0;
-    display: block !important;
-    -moz-context-properties: fill, fill-opacity, stroke !important;
-    position: relative;
-    margin-inline: 0 -16px !important;
-    width: 16px !important;
-    height: 16px !important;
-    padding: 0 !important;
-    list-style-image: url(chrome://userchrome/content/textbox-clear.svg) !important;
-}
-
-.tabbrowser-tab:not([pinned]):is(:hover, .keyboard-focused-tab, [open])
-    .tab-close-button:not(:hover, :active) {
-    opacity: 0.6 !important;
 }
 
 /* tab buttons are animated with opacity and transformation */

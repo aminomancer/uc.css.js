@@ -227,6 +227,24 @@ as the mouse would then be on top of the tooltip popup not the main window. */
     margin-block-start: 26px !important;
 }
 
+#eom-theme-preview-tooltip {
+    padding: 5px !important;
+    max-width: revert !important;
+	border: none !important;
+	background: none !important;
+    border-radius: 0 !important;
+}
+
+#eom-theme-preview-box {
+	border-radius: var(--arrowpanel-border-radius, 8px) !important;
+    overflow: hidden !important;
+    box-shadow: var(--tooltip-box-shadow) !important;
+}
+
+#eom-theme-preview-tooltip description {
+    display: none !important;
+}
+
 /* eliminate --default-focusring */
 treechildren::-moz-tree-row(selected, current, focus) {
     outline: none !important;
@@ -455,8 +473,6 @@ radiogroup deck menulist:focus-visible {
 
 toolbarbutton:focus-visible,
 .popup-notification-button:focus-visible,
-.keyboard-focused-tab > .tab-stack > .tab-background,
-.tabbrowser-tab:focus:not([aria-activedescendant]) > .tab-stack > .tab-background,
 .identity-box-button:not(:active):focus-visible,
 #tracking-protection-icon-container:not(:active):focus-visible,
 #PersonalToolbar .toolbarbutton-1:focus-visible,
@@ -589,7 +605,7 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
             > .urlbarView-row-inner
             > .urlbarView-no-wrap
             > .urlbarView-action {
-            line-height: 16px !important;
+            line-height: 15px !important;
             font-weight: var(--uc-font-weight-thin, 400) !important;
         }
 
