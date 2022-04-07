@@ -634,7 +634,8 @@
     }
 
     .container {
-        margin-inline-start: calc(3% + 65px) !important;
+        /* below: left align the text in about:reader */
+        /* margin-inline-start: calc(3% + 65px) !important; */
         max-width: var(--final-content-width) !important;
     }
 

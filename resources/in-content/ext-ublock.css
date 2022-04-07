@@ -6,7 +6,8 @@
 
 /* uBlock Origin dark theme */
 
-@-moz-document regexp("^moz-extension://.*/.*")
+/* @-moz-document regexp("^moz-extension://.*/.*") */
+@-moz-document url("disabled")
 {
     @media (prefers-color-scheme: dark) {
         :root[uc-extension-id="uBlock0@raymondhill.net"] {

@@ -884,10 +884,6 @@ panel[type="autocomplete-richlistbox"]
         background-color: var(--in-content-primary-button-background-active) !important;
     }
 
-    richlistbox[id] richlistitem[selected="true"] > button[label] {
-        border-color: var(--in-content-box-border-color) !important;
-    }
-
     select:not([size], [multiple]) > option {
         background-color: var(--dropdown-bgcolor) !important;
         color: var(--ui-text-80) !important;
@@ -1018,7 +1014,8 @@ panel[type="autocomplete-richlistbox"]
     url("chrome://global/content/appPicker.xhtml")
 {
     :root,
-    :root dialog {
+    :root dialog,
+    .dialog-button-box {
         --in-content-page-background: var(--uc-content-page-background) !important;
         --in-content-page-color: var(--uc-content-page-color) !important;
         --in-content-box-background: var(--uc-content-box-background) !important;
@@ -1110,7 +1107,8 @@ panel[type="autocomplete-richlistbox"]
     url("chrome://browser/content/spotlight.html")
 {
     :root[dialogroot],
-    :root[dialogroot] dialog {
+    :root[dialogroot] dialog,
+    :root[dialogroot] richlistbox[id]:not(#categories) > richlistitem[selected] {
         --in-content-page-background: transparent !important;
         --in-content-page-color: var(--uc-parent-page-color) !important;
         --in-content-box-background: var(--dialog-box-bgcolor) !important;
