@@ -562,7 +562,7 @@ If you can't get the module to work or if you just prefer Firefox's built-in pag
 
 #### [App Menu Mods](/JS/appMenuMods.uc.js):
 
-Makes some minor modifications to the app menu, aka the hamburger menu. It adds a restart button to the app menu, as long as you're using fx-autoconfig to load the script. Right-clicking the button or holding Shift or Ctrl/Cmd while left-clicking it will also clear the startup cache while restarting. Additionally, it changes the "Add-ons and Themes" button to say "Extensions" (or whatever the equivalent is in your language, since the strings are localized automatically) and it adds a separator under the "Manage Account" button in the profile/account panel. I'll continue adding more mods to this script as I think of them.
+Makes some minor modifications to the app menu, aka the hamburger menu. It adds a restart button to the app menu. Right-clicking the button or holding Shift or Ctrl/Cmd while left-clicking it will also clear the startup cache while restarting. Additionally, it adds a separator under the "Manage Account" button in the profile/account panel. I'll continue adding more mods to this script as I think of them.
 
 #### [All Tabs Menu Expansion Pack](/JS/allTabsMenuExpansionPack.uc.js):
 
