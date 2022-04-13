@@ -3,7 +3,18 @@
 // @version        1.2.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
-// @description    Adds a new menu to context menus prompted by right-clicking bookmarks, history entries, etc. that allows you to open them in a container tab. This does basically the same thing as the similarly-named addon by Rob Wu, just by a different method. By doing this with an autoconfig script, we can make the menu appear in a logical order towards the top of the context menu rather than at the very bottom, where context menu items from addons always go. Since Bug 1754805, the main menu created by this script is obsolete — the "Open in New Container Tab" menu opened on bookmarks and history items. So as of version 1.2, that menu has been removed. However, this still
+// @description    Adds a new menu to context menus prompted by right-clicking
+// bookmarks, history entries, etc. that allows you to open them in a container
+// tab. This does basically the same thing as the similarly-named addon by Rob
+// Wu, just by a different method. By doing this with an autoconfig script, we
+// can make the menu appear in a logical order towards the top of the context
+// menu rather than at the very bottom, where context menu items from addons
+// always go. Since Bug 1754805, the main menu created by this script is
+// obsolete — the "Open in New Container Tab" menu opened on bookmarks and
+// history items. So as of version 1.2, that menu has been removed since it
+// would be redundant. However, this still adds a menu item to open all
+// bookmarks in a container. Bug 1754805 also doesn't add these menu items to
+// the synced tabs sidebar context menu, whereas this script does.
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // @include        main
 // @include        chrome://browser/content/places/bookmarksSidebar.xhtml
