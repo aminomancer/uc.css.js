@@ -80,7 +80,7 @@ menuitem#sanitizeItem > .menu-text,
     .menu-text,
 #placesContext_new\:folder .menu-text,
 #placesContext_new\:separator .menu-text,
-:is(#placesContext_open\:container, #placesContext_openContainer\:container, #placesContext_openLinks\:container)
+:is(#placesContext_open\:container, #placesContext_openContainer\:container, #placesContext_openLinks\:container, #placesContext_open\:newcontainertab)
     > .menu-text,
 :is(#syncedTabsOpenAllInContainer, #syncedTabsOpenInContainer) > .menu-text,
 #bookmark-menu-container_robwu_nl-menuitem-_bookmark-menu-item:not(.menuitem-iconic) > .menu-text,
@@ -524,7 +524,7 @@ menuitem#repair-text-encoding::before,
 :is(#placesContext_new\:bookmark, #placesContext_createBookmark, #syncedTabsBookmarkSelected)::before,
 #placesContext_new\:folder::before,
 #placesContext_new\:separator::before,
-:is(#placesContext_open\:container, #placesContext_openContainer\:container, #placesContext_openLinks\:container)::before,
+:is(#placesContext_open\:container, #placesContext_openContainer\:container, #placesContext_openLinks\:container, #placesContext_open\:newcontainertab)::before,
 :is(#syncedTabsOpenAllInContainer, #syncedTabsOpenInContainer)::before,
 #bookmark-menu-container_robwu_nl-menuitem-_bookmark-menu-item:not(.menuitem-iconic)::before,
 #placesContext
@@ -1112,7 +1112,7 @@ menuitem.customize-context-CopyID::before {
     background-image: url(chrome://userchrome/content/skin/tab.svg);
 }
 
-:is(#placesContext_open\:container, #placesContext_openContainer\:container, #placesContext_openLinks\:container)::before,
+:is(#placesContext_open\:container, #placesContext_openContainer\:container, #placesContext_openLinks\:container, #placesContext_open\:newcontainertab)::before,
 :is(#syncedTabsOpenAllInContainer, #syncedTabsOpenInContainer)::before,
 #bookmark-menu-container_robwu_nl-menuitem-_bookmark-menu-item:not(.menuitem-iconic)::before,
 #placesContext

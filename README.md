@@ -820,11 +820,9 @@ This does basically the same thing as the [similarly-named addon](https://addons
 
 The menu will be present in _all_ context menus where you'd be able to open a bookmark, history entry, or synced tab, including menus, popups, panels, and even the Library/Bookmarks Manager window. However, for synced tabs, it will only be present in the sidebar, not in the profile panel, because the profile panel lacks a context menu in the first place. Right-clicking a synced tab in the profile panel simply opens the synced tab rather than opening a context menu.
 
-Update: The developers of Firefox Multi-Account Containers have implemented an optional setting that creates a similar menu when right-clicking bookmarks. However, this has all the same problems as the addon previously mentioned. It doesn't work on history entries or synced tabs, it puts the menu item at the bottom of the context menu instead of with the other "open x in tab" menu items, and it doesn't apply the correct colors to the container icons.
+Update: Firefox has implemented a similar menu for bookmarks and history items. It doesn't yet support opening all bookmarks in a folder, and it doesn't add a similar menu to the synced tabs sidebar. So for the moment, this script still has some purpose. It's been updated to avoid making a redundant menu, so if you see 2 identical menus, update your script with the version on this repo.
 
-That is, the "Personal" container is set to blue by default. It shows up as blue in all the native interfaces and in the extension pages & popups. But because extensions can't control context menu CSS, it isn't blue in the extension's optional bookmark context menu. All the icons in the extension menu are just black.
-
-So for several reasons, this script is still the best solution. If you use this script, turn off the redundant extension menus in `about:addons` > Firefox Multi-Account Containers > Options > "Enable Bookmark Menus"
+If you use this script and Firefox Multi-Account Containers, turn off the redundant extension menus in `about:addons` > Firefox Multi-Account Containers > Options > "Enable Bookmark Menus"
 
 </details>
 

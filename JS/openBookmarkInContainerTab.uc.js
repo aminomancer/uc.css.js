@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name           Open Bookmark in Container Tab (context menu)
-// @version        1.1
+// @version        1.2.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
-// @description    Adds a new menu to context menus prompted by right-clicking bookmarks, history entries, etc. that allows you to open them in a container tab. This does basically the same thing as the similarly-named addon by Rob Wu, just by a different method. By doing this with an autoconfig script, we can make the menu appear in a logical order towards the top of the context menu rather than at the very bottom, where context menu items from addons always go.
+// @description    Adds a new menu to context menus prompted by right-clicking bookmarks, history entries, etc. that allows you to open them in a container tab. This does basically the same thing as the similarly-named addon by Rob Wu, just by a different method. By doing this with an autoconfig script, we can make the menu appear in a logical order towards the top of the context menu rather than at the very bottom, where context menu items from addons always go. Since Bug 1754805, the main menu created by this script is obsolete — the "Open in New Container Tab" menu opened on bookmarks and history items. So as of version 1.2, that menu has been removed. However, this still
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // @include        main
 // @include        chrome://browser/content/places/bookmarksSidebar.xhtml
@@ -15,7 +15,6 @@ class OpenPlacesInContainerTabMenu {
     static config = {
         l10n: {
             openAll: `Open All in Container Tabs`, // Appears when right-clicking a container/folder in bookmarks or history.
-            openBookmark: `Open in New Container Tab`, // Appears when right-clicking a bookmark, history item, etc.
             openSyncedTab: `Open in a New Container Tab`, // Appears when right-clicking a tab in the synced tabs sidebar.
             accessKey: `c`, // All of the menu items use a predefined access key. Access keys are underlined in the menu item's label, and pressing them on your keyboard automatically selects the menu item. They serve as hotkeys while the context menu is open. The default access key is "c" for the english "Container." This collides with the "Copy" menu item, so if you leave this set to "c" the script will change the Copy access key to "y" so they don't collide. It won't do that if you change this variable though. If the chosen access key is not present in the menu item's label, instead of being underlined in the label, it will be shown after the label in parentheses, e.g. "Open All in Container Tabs (G)"
         },
@@ -26,20 +25,6 @@ class OpenPlacesInContainerTabMenu {
         this.loadSheet();
 
         if (l10n.accessKey === `c`) this.placesMenuCopy.accessKey = `y`;
-
-        this.placesMenuOpenInContainer = this.create(document, "menu", {
-            id: "placesContext_open:container",
-            label: l10n.openBookmark,
-            accesskey: l10n.accessKey,
-            disabled: true,
-            hidden: true,
-        });
-        this.placesMenuOpenNewTab.after(this.placesMenuOpenInContainer);
-        let openPopup = this.placesMenuOpenInContainer.appendChild(
-            document.createXULElement("menupopup")
-        );
-        openPopup.addEventListener("command", (e) => this.openLinkInContainer(e, openPopup));
-        popups.push(openPopup);
 
         this.placesMenuOpenAllInContainer = this.create(document, "menu", {
             id: "placesContext_openContainer:container",
@@ -253,8 +238,6 @@ class OpenPlacesInContainerTabMenu {
             this.placesMenuOpenBookmarkLinks?.hidden;
         this.placesMenuOpenAllLinksInContainer.disabled = this.placesMenuOpenAllLinks?.disabled;
         this.placesMenuOpenAllLinksInContainer.hidden = this.placesMenuOpenAllLinks?.hidden;
-        this.placesMenuOpenInContainer.disabled = this.placesMenuOpenNewTab?.disabled;
-        this.placesMenuOpenInContainer.hidden = this.placesMenuOpenNewTab?.hidden;
     }
     onSyncedContextMenuShowing(_e) {
         this.syncedContextMenuInited = true;
@@ -293,9 +276,21 @@ class OpenPlacesInContainerTabMenu {
         let items = [];
         if (PlacesUtils.nodeIsContainer(folder)) {
             let root = PlacesUtils.getContainerNodeWithOptions(folder, false, true);
+            let result = root.parentResult;
+            let wasOpen = root.containerOpen;
+            let didSuppressNotifications = false;
+            if (!wasOpen) {
+                didSuppressNotifications = result.suppressNotifications;
+                if (!didSuppressNotifications) result.suppressNotifications = true;
+                root.containerOpen = true;
+            }
             for (let i = 0; i < root.childCount; ++i) {
                 let child = root.getChild(i);
                 if (PlacesUtils.nodeIsURI(child)) items.push({ url: child.uri });
+            }
+            if (!wasOpen) {
+                root.containerOpen = false;
+                if (!didSuppressNotifications) result.suppressNotifications = false;
             }
         } else items = folder;
         this.openLinkInContainer(e, popup, items);
