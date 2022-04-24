@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Hit Enter in Urlbar to Refresh
-// @version        1.0
+// @version        1.0.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Due to Firefox's named anchor navigation system, you can't
@@ -65,7 +65,6 @@
             let aAllowInheritPrincipal = !!params.allowInheritPrincipal;
             let aForceAllowDataURI = params.forceAllowDataURI;
             let aIsPrivate = params.private;
-            let aForceNonPrivate = params.forceNonPrivate;
             let aAllowPopups = !!params.allowPopups;
             let aUserContextId = params.userContextId;
             let aIndicateErrorPageLoad = params.indicateErrorPageLoad;
@@ -76,13 +75,7 @@
             let aForceAboutBlankViewerInCurrent = params.forceAboutBlankViewerInCurrent;
             let aResolveOnContentBrowserReady = params.resolveOnContentBrowserCreated;
 
-            let w =
-                params.targetBrowser?.ownerGlobal ||
-                this.window.getTopWin({ forceNonPrivate: aForceNonPrivate });
-
-            if (!w) {
-                return;
-            }
+            let w = this.window;
 
             function useOAForPrincipal(principal) {
                 if (principal && principal.isContentPrincipal) {
