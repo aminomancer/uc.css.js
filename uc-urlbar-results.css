@@ -299,8 +299,8 @@
 .urlbarView-row[has-url]:is([type="remotetab"], [sponsored]):is(:hover, [selected])
     > .urlbarView-row-inner
     > .urlbarView-no-wrap {
-    flex-shrink: 3 !important;
-    max-width: revert !important;
+    flex-shrink: 0 !important;
+    max-width: 75% !important;
 }
 
 .urlbarView-row:is([type="switchtab"], [type="remotetab"])

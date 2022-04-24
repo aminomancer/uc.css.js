@@ -772,6 +772,18 @@ Previously I just disabled pointer events on the icon when it was supposed to be
 
 </details>
 
+#### [Hit Enter in Urlbar to Refresh](/JS/enterInUrlbarToRefresh.uc.js):
+
+Allows you to refresh pages by hitting Enter in the urlbar, even if there's a hash mark `#` in the URL.<details><summary>💬 <i><b>More details...</b></i></summary>
+
+Due to Firefox's named anchor navigation system, you can't always refresh a page by clicking the urlbar and hitting Enter. If there's a hash mark `#` in the URL, Firefox interprets this as a URL fragment and tries to navigate between anchors within the document, by setting the scroll position and not reloading the document. This works great when clicking links on pages that link to other parts of the page, and when typing new fragments after the hash in the URL.
+
+But what if you just want to reload the page? If there is no hash, then hitting Enter will always reload the page. But if there is a hash, hitting Enter will not reload the page, even though the current URL is the same as the typed URL. [Bug 1766145](https://bugzilla.mozilla.org/show_bug.cgi?id=1766145) may resolve that problem, but in the meantime, this script will work.
+
+With this installed, hitting Enter in the urlbar when the typed value is the same as the current browser's URL will cause a page reload. If you change the value in the urlbar at all, this won't have any effect. It only comes into play when the URL values are 100% identical. This just ensures that if you click into the urlbar and hit Enter, without doing anything else, it will always work the same — whether there's a hash in the URL or not.
+
+</details>
+
 #### [Let Ctrl+W Close Pinned Tabs](/JS/letCtrlWClosePinnedTabs.uc.js):
 
 The name should say it all — this just removes the "feature" that prevents you from closing pinned tabs with the Ctrl+W/Cmd+W shortcut.<details><summary>💬 <i><b>More details...</b></i></summary>
