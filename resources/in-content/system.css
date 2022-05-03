@@ -75,35 +75,38 @@
     certificate-section {
         --in-content-page-background: var(--uc-content-page-background) !important;
         --in-content-page-color: var(--uc-content-page-color) !important;
+        --in-content-text-color: var(--in-content-page-color) !important;
+        --in-content-accent-color: var(--purple-35) !important;
+        --in-content-border-hover: var(--uc-content-border-hover) !important;
         --in-content-box-background: var(--uc-content-box-background) !important;
         --in-content-box-background-odd: var(--uc-content-box-background-odd) !important;
         --in-content-box-background-dim: var(--uc-content-box-background-dim) !important;
         --in-content-box-border-color: var(--uc-content-box-border-color) !important;
-        --in-content-button-background: var(--uc-content-button-background) !important;
-        --in-content-button-background-hover: var(--uc-content-button-background-hover) !important;
-        --in-content-button-background-active: var(
-            --uc-content-button-background-active
-        ) !important;
-        --in-content-button-background-solid: var(--uc-content-button-background-solid);
-        --in-content-item-selected: var(--purple-40) !important;
-        --in-content-border-hover: var(--uc-content-border-hover) !important;
+        --in-content-box-info-background: var(--in-content-button-background-solid) !important;
+        --in-content-table-background: var(--in-content-box-background) !important;
+        --in-content-table-header-background: var(--purple-40-a50) !important;
         --in-content-link-color: var(--purple-30) !important;
         --in-content-link-color-hover: var(--purple-25) !important;
         --in-content-link-color-active: var(--purple-20) !important;
         --in-content-link-visited-color: var(--pink-40) !important;
         --in-content-link-visited-color-hover: var(--pink-35) !important;
         --in-content-link-visited-color-active: var(--pink-30) !important;
+        --in-content-button-background: var(--uc-content-button-background) !important;
+        --in-content-button-background-hover: var(--uc-content-button-background-hover) !important;
+        --in-content-button-background-active: var(
+            --uc-content-button-background-active
+        ) !important;
+        --in-content-button-background-solid: var(--uc-content-button-background-solid);
+        --in-content-button-text-color-hover: var(--light-on-dark-button-text-color) !important;
+        --in-content-button-text-color-active: var(--in-content-button-text-color-hover) !important;
         --in-content-primary-button-background: var(--purple-40) !important;
         --in-content-primary-button-background-hover: var(--purple-35) !important;
         --in-content-primary-button-background-active: var(--purple-30) !important;
         --in-content-primary-button-text-color: var(--light-on-dark-button-text-color) !important;
         --in-content-button-border-radius: var(--general-button-border-radius) !important;
-        --in-content-accent-color: var(--purple-35) !important;
+        --in-content-item-selected: var(--purple-40) !important;
         --in-content-item-hover: color-mix(in srgb, var(--purple-30) 45%, transparent) !important;
-        --in-content-item-hover-text: var(--light-on-dark-button-text-color) !important;
-        --in-content-table-background: var(--in-content-box-background) !important;
-        --in-content-table-header-background: var(--purple-40-a50) !important;
-        --in-content-box-info-background: var(--in-content-button-background-solid) !important;
+        --in-content-item-hover-text: var(--in-content-text-color) !important;
         --focus-outline-offset: 2px !important;
         --default-focusring: var(--global-focus-outline-width) solid
             var(--global-focus-outline-color) !important;
@@ -182,13 +185,6 @@
     }
 
     html:not([role="dialog"]) richlistitem[selected] * {
-        --in-content-button-background: inherit !important;
-        --in-content-button-background-hover: inherit !important;
-        --in-content-button-background-active: inherit !important;
-        --in-content-button-text-color: inherit !important;
-        --in-content-button-text-color-hover: inherit !important;
-        --in-content-button-text-color-active: inherit !important;
-        --in-content-focus-outline-color: inherit !important;
         --in-content-button-background: var(--purple-50) !important;
         --in-content-button-background-hover: var(--purple-55) !important;
         --in-content-button-background-active: var(--purple-60) !important;

@@ -54,7 +54,9 @@
     :root[uc-extension-id="addon@darkreader.org"]
         :where(.multi-switch__option:hover:not(.multi-switch__option--selected), .slider__track, .slider__track::after),
     :root[uc-extension-id="addon@darkreader.org"] .collapsible-panel__group__expand-button,
-    :root[uc-extension-id="addon@darkreader.org"] .textbox {
+    :root[uc-extension-id="addon@darkreader.org"] .textbox,
+    :root[uc-extension-id="addon@darkreader.org"] .slider__track::before,
+    :root[uc-extension-id="addon@darkreader.org"] .slider__track::after{
         background-color: var(--uc-arrowpanel-dimmed) !important;
     }
 

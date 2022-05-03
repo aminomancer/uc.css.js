@@ -724,7 +724,8 @@ so you can use those classes to set the icon. */
 #urlbar[pageproxystate="invalid"] #identity-box #identity-icon,
 #tracking-protection-icon-container[hidden]
     ~ #identity-box[pageproxystate="valid"].notSecure:not(.chromeUI, .localResource)
-    #identity-icon {
+    #identity-icon,
+:root[customizing] #urlbar #identity-box #identity-icon {
     fill-opacity: var(--urlbar-icon-fill-opacity) !important;
     list-style-image: var(
         --default-search-identity-icon,
@@ -982,12 +983,19 @@ so you can use those classes to set the icon. */
     fill-opacity: 0.3 !important;
 }
 
-:root[customizing] #urlbar #identity-box #identity-icon {
-    list-style-image: url(chrome://global/skin/icons/security.svg) !important;
+:root[customizing] #urlbar #tracking-protection-icon-container {
+    display: none !important;
 }
 
-:root[customizing] #tracking-protection-icon-container {
-    display: -moz-box !important;
+:root[customizing] #urlbar #identity-box {
+    padding: 0 !important;
+    margin: 0 !important;
+    margin-inline: 0 3px !important;
+    padding-inline: 6px 0 !important;
+}
+
+:root[customizing] #urlbar #identity-box #identity-icon-box {
+    margin-inline: 2px 0 !important;
 }
 
 #urlbar[pageproxystate="valid"] #tracking-protection-icon-container.chromeUI,

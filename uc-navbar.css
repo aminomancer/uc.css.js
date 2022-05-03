@@ -344,6 +344,13 @@ toolbar[customizing="true"]
     transition: transform var(--drag-drop-transition-duration) cubic-bezier(.6, 2, .75, 1.5) !important;
 }
 
+toolbarpaletteitem[place="palette"]:not([mousedown="true"]):focus-visible,
+toolbarpaletteitem[place="menu-panel"]:not([mousedown="true"]):focus-visible,
+toolbarpaletteitem[place="toolbar"]:not([mousedown="true"]):focus-visible {
+	transition: outline-width .01s linear var(--drag-drop-transition-duration);
+	outline: revert !important;
+}
+
 .widget-overflow-list .toolbarbutton-1:not([disabled], [open])[checked]::after {
     content: "";
     display: -moz-inline-box;
