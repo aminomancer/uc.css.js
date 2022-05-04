@@ -168,6 +168,7 @@ I also recommend setting the following prefs in `about:config`. There are two pr
 | userChrome.urlbar.hide-pointless-icons | Boolean | true | Hide urlbar notification icons that don't offer any action (e.g. DRM icon) |
 | userChrome.urlbar-results.disable\_animation | Boolean | false | Toggle to true if you don't want the urlbar results to animate as they pop up |
 | userChrome.urlbar-results.hide-help-button | Boolean | true | New "Firefox Suggest" urlbar results have little help buttons. This will hide them |
+| <i>userChromeJS.gBrowser_hack.enabled</i> | Boolean | true | I don't think it's necessary, but enable just in case if you use a lot of scripts |
 | widget.content.allow-gtk-dark-theme | Boolean | true | May style some in-content elements consistently with Linux themes |
 | <i>widget.macos.native-context-menus</i> | Boolean | false | Required to use some of my scripts on macOS, and for context menu styles on macOS |
 | devtools.inspector.showAllAnonymousContent | Boolean | true | Show native anonymous content (like scrollbars or tooltips) and user agent shadow roots (like the components of an `<input>` element) in the inspector |
@@ -383,7 +384,7 @@ let cmanifest = traverseToMainProfile('UChrm');
 
 5. Now save `config.js` and exit.
 6. Go back to your `chrome` folder, and open `boot.jsm` from the `utils` folder.
-7. Go to the end of line 57 and hit enter twice to make two new lines, so you should now be at line 59.
+7. Go to the end of line 59 (after the end of the function `resolveChromePath`) and hit enter twice to make two new lines, so you should now be at line 61.
 8. Paste this:
 
 ```
@@ -401,20 +402,28 @@ function traverseToMainProfile(str){
 }
 ```
 
-9. Go to what should now be line 79 (used to be line 66 — this line starts with `BASE_FILEURI:`) and replace the entire line with this:
+9. Go to what should now be line 85 (used to be line 72 before we made the above changes). See where it says `Services.dirsvc.get('UChrm',Ci.nsIFile)`? Replace that text with `traverseToMainProfile('UChrm')` so, from line 83 to 85, it should now look like this:
 
 ```
-BASE_FILEURI: Services.io.getProtocolHandler('file').QueryInterface(Ci.nsIFileProtocolHandler).getURLSpecFromDir(traverseToMainProfile('UChrm')),
+const BASE_FILEURI = Services.io.getProtocolHandler('file')
+                    .QueryInterface(Ci.nsIFileProtocolHandler)
+                    .getURLSpecFromDir(traverseToMainProfile('UChrm'));
 ```
 
-10. Go to what should now be line 83 (used to be line 70 — this line starts with `get chromeDir()`) and replace the entire line with this:
+10. Go to what should now be line 186 (used to be line 173). Replace `Services.dirsvc.get('UChrm',Ci.nsIFile)` on this line with `traverseToMainProfile('UChrm')` so line 186 should now look like this:
 
 ```
-get chromeDir() {return traverseToMainProfile('UChrm')},
+  let entry = traverseToMainProfile('UChrm');
 ```
 
-11. Save `boot.jsm` and exit.
-12. That's it! The scripts that are in your main profile folder should now run in browser toolbox windows, even though they're not in the `chrome_debugger_profile` folder. Make sure you download the [Browser Toolbox Stylesheet Loader](#browser-toolbox-stylesheet-loader) so stylesheets will be loaded too.
+11. Now go to line 364 (used to be line 351) and, again, replace `Services.dirsvc.get('UChrm',Ci.nsIFile)` with `traverseToMainProfile('UChrm')` so line 364 should now look like this:
+
+```
+        const dir = traverseToMainProfile('UChrm');
+```
+
+12. Save `boot.jsm` and exit.
+13. That's it! The scripts that are in your main profile folder should now run in browser toolbox windows, even though they're not in the `chrome_debugger_profile` folder. Make sure you download the [Browser Toolbox Stylesheet Loader](#browser-toolbox-stylesheet-loader) so stylesheets will be loaded too.
 
 Having done this, make sure your `chrome_debugger_profile` folders do not have `chrome` folders within them, as they will confuse the stylesheet loader. It will think you have special stylesheets for the toolbox and therefore skip loading your main profile stylesheets into the toolbox. If you ever see styles failing to apply in the toolbox, delete your `chrome_debugger_profile` folder.
 </details>
