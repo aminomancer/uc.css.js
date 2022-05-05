@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Search Selection Keyboard Shortcut
-// @version        1.6.4
+// @version        1.6.5
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Adds a new keyboard shortcut (Ctrl+Shift+F) that searches your default search
@@ -50,6 +50,7 @@
 // its own little network of temp files to work in a more vanilla-style manner.
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // @include        main
+// @startup        searchSelectionShortcut
 // @onlyonce
 // ==/UserScript==
 
@@ -268,5 +269,9 @@ class SearchSelectionShortcut {
         );
     }
 }
+
+_ucUtils.sharedGlobal.searchSelectionShortcut = {
+    _startup: () => {},
+};
 
 if (location.href === AppConstants.BROWSER_CHROME_URL) new SearchSelectionShortcut();
