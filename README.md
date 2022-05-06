@@ -402,28 +402,9 @@ function traverseToMainProfile(str){
 }
 ```
 
-9. Go to what should now be line 85 (used to be line 72 before we made the above changes). See where it says `Services.dirsvc.get('UChrm',Ci.nsIFile)`? Replace that text with `traverseToMainProfile('UChrm')` so, from line 83 to 85, it should now look like this:
-
-```
-const BASE_FILEURI = Services.io.getProtocolHandler('file')
-                    .QueryInterface(Ci.nsIFileProtocolHandler)
-                    .getURLSpecFromDir(traverseToMainProfile('UChrm'));
-```
-
-10. Go to what should now be line 186 (used to be line 173). Replace `Services.dirsvc.get('UChrm',Ci.nsIFile)` on this line with `traverseToMainProfile('UChrm')` so line 186 should now look like this:
-
-```
-  let entry = traverseToMainProfile('UChrm');
-```
-
-11. Now go to line 364 (used to be line 351) and, again, replace `Services.dirsvc.get('UChrm',Ci.nsIFile)` with `traverseToMainProfile('UChrm')` so line 364 should now look like this:
-
-```
-        const dir = traverseToMainProfile('UChrm');
-```
-
-12. Save `boot.jsm` and exit.
-13. That's it! The scripts that are in your main profile folder should now run in browser toolbox windows, even though they're not in the `chrome_debugger_profile` folder. Make sure you download the [Browser Toolbox Stylesheet Loader](#browser-toolbox-stylesheet-loader) so stylesheets will be loaded too.
+9. Use Find & Replace to replace every instance of the string `Services.dirsvc.get('UChrm',Ci.nsIFile)` with this: `traverseToMainProfile('UChrm')`
+10. This should have replaced 3 times. Save `boot.jsm` and exit.
+11. That's it! The scripts that are in your main profile folder should now run in browser toolbox windows, even though they're not in the `chrome_debugger_profile` folder. Make sure you download the [Browser Toolbox Stylesheet Loader](#browser-toolbox-stylesheet-loader) so stylesheets will be loaded too.
 
 Having done this, make sure your `chrome_debugger_profile` folders do not have `chrome` folders within them, as they will confuse the stylesheet loader. It will think you have special stylesheets for the toolbox and therefore skip loading your main profile stylesheets into the toolbox. If you ever see styles failing to apply in the toolbox, delete your `chrome_debugger_profile` folder.
 </details>
