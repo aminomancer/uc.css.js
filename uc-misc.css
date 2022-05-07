@@ -72,6 +72,14 @@ tooltip .uc-tooltip-box {
     color: var(--panel-shortcut-color) !important;
 }
 
+.places-tooltip-title {
+    font-weight: 600;
+    /* Clip after 2 lines, this should ideally use a different method like -webkit-line-clamp or
+    overflow: hidden; to get ellipsis support but XUL tooltip sizing makes that difficult. */
+    max-height: 2.5em;
+    overflow-y: clip;
+}
+
 .places-tooltip-uri {
     color: var(--panel-shortcut-color) !important;
 }
@@ -81,6 +89,12 @@ tooltip .uc-tooltip-box {
 }
 
 #places-tooltip-insecure-icon {
+    -moz-context-properties: fill;
+    fill: currentColor;
+    width: 1em;
+    height: 1em;
+    margin-inline-start: 0;
+    margin-inline-end: .2em;
     min-width: 1em !important;
 }
 
