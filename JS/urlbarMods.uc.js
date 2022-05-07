@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Urlbar Mods
-// @version        1.6.1
+// @version        1.6.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Make some minor modifications to the urlbar. See the code comments below for more details.
@@ -379,8 +379,7 @@ class UrlbarMods {
             let urlString = value + "\n" + gBrowser.contentTitle;
             let htmlString = '<a href="' + value + '">' + value + "</a>";
 
-            let windowUtils = window.windowUtils;
-            let scale = windowUtils.screenPixelsPerCSSPixel / windowUtils.fullZoom;
+            let scale = window.devicePixelRatio;
             let canvas = document.createElementNS("http://www.w3.org/1999/xhtml", "canvas");
             canvas.width = 600 * scale;
             let ctx = canvas.getContext("2d");
