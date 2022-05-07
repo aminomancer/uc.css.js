@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Restore pre-Proton Tab Sound Button
-// @version        2.3.1
+// @version        2.3.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Proton makes really big changes to tabs, in particular removing the tab sound button in favor of the overlay button and a whole row of text. This script keeps the new tab tooltip enabled by the pref "browser.proton.places-tooltip.enabled" but allows it to work with the old .tab-icon-sound. So you get the nice parts of the proton tab changes without the second row of text about the audio playing. Instead it will show the mute/unmute tooltip inside the normal tab tooltip. It also changes the tooltip a bit so that it's always anchored to the tab rather than floating around tethered to the exact mouse position. This makes it easier to modify the tooltip appearance without the tooltip getting in your way. It also lets the insecure tooltip icon show other security states, like mixed passive content or error page. This way the tooltip icon should usually match the identity icon for the tab you're hovering. This script *requires* that you either 1) use my theme, complete with chrome.manifest and the resources folder, or 2) download resources/script-override/tabMods.uc.js and put it in the same location in your chrome folder, then edit your utils/chrome.manifest file to add the following line (without the "//"):
@@ -174,10 +174,6 @@
             }
             align = rect.right - tabRect.left < 250;
         } else label = this.getTabTooltip(tab);
-        if (!gProtonPlacesTooltip) {
-            e.target.setAttribute("label", label);
-            return;
-        }
         if (align) {
             e.target.setAttribute("position", "after_start");
             e.target.moveToAnchor(tab, "after_start");

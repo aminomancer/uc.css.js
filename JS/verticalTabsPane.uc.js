@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Vertical Tabs Pane
-// @version        1.5.6
+// @version        1.5.7
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Create a vertical pane across from the sidebar that functions like the vertical
@@ -1540,9 +1540,6 @@
                             : "playingString"
                     ].toLowerCase()})`;
             }
-            // browser.proton.places-tooltip.enabled should be set to true for best results.
-            // regular tab tooltip is pretty lame.
-            if (!gProtonPlacesTooltip) return e.target.setAttribute("label", label);
             // align to the row
             if (align) {
                 e.target.setAttribute("position", "after_start");

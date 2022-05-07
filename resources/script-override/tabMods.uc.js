@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Tab Mods — tabbrowser-tab class definition mods
-// @version        1.3.3
+// @version        1.3.4
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Restore the tab sound button and other aspects of the tab that (imo) were better before Proton.
@@ -137,6 +137,15 @@
 
     get container() {
       return gBrowser.tabContainer;
+    }
+
+    set attention(val) {
+      if (val == this.hasAttribute("attention")) {
+        return;
+      }
+
+      this.toggleAttribute("attention", val);
+      gBrowser._tabAttrModified(this, ["attention"]);
     }
 
     set _visuallySelected(val) {

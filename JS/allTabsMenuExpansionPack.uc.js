@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           All Tabs Menu Expansion Pack
-// @version        2.0.2
+// @version        2.0.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Next to the "new tab" button in Firefox there's a V-shaped button that opens a
@@ -232,7 +232,6 @@
                     ]);
                 }
             }
-            if (!gProtonPlacesTooltip) return e.target.setAttribute("label", label);
             if (align) {
                 e.target.setAttribute("position", "after_start");
                 e.target.moveToAnchor(row, "after_start");

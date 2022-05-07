@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Misc. Mods
-// @version        1.9.2
+// @version        1.9.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Various tiny mods not worth making separate scripts for. Read the comments inside the script for details.
@@ -210,16 +210,14 @@
                 var url;
                 if (targetURI || PlacesUtils.nodeIsURI(node)) url = targetURI || node.uri;
                 if (!cropped && !url) return false;
-                if (gProtonPlacesTooltip) {
-                    aEvent.target.setAttribute("position", "after_start");
-                    if (tooltipNode) aEvent.target.moveToAnchor(tooltipNode, "after_start");
-                    else if (tree && cellCoords)
-                        // anchor the tooltip to the tree cell
-                        aEvent.target.moveTo(
-                            cellCoords.left + tree.screenX,
-                            cellCoords.bottom + tree.screenY
-                        );
-                }
+                aEvent.target.setAttribute("position", "after_start");
+                if (tooltipNode) aEvent.target.moveToAnchor(tooltipNode, "after_start");
+                else if (tree && cellCoords)
+                    // anchor the tooltip to the tree cell
+                    aEvent.target.moveTo(
+                        cellCoords.left + tree.screenX,
+                        cellCoords.bottom + tree.screenY
+                    );
                 let tooltipTitle = aEvent.target.querySelector(".places-tooltip-title");
                 tooltipTitle.hidden = !title || title == url;
                 if (!tooltipTitle.hidden) tooltipTitle.textContent = title;

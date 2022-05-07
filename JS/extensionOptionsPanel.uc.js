@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Extension Options Panel
-// @version        1.8.0
+// @version        1.8.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    This script creates a toolbar button that opens a popup panel where extensions can be configured, disabled, uninstalled, etc. Each extension gets its own button in the panel. Clicking an extension's button leads to a subview where you can jump to the extension's options, disable or enable the extension, uninstall it, configure automatic updates, disable/enable it in private browsing, view its source code in whatever program is associated with .xpi files, open the extension's homepage, or copy the extension's ID. The panel can also be opened from the App Menu, using the built-in "Add-ons and themes" button. Since v1.8, themes will also be listed in the panel. Hovering a theme will show a tooltip with a preview/screenshot of the theme, and clicking the theme will toggle it on or off. There are several translation and configuration options directly below.
@@ -192,9 +192,7 @@ class ExtensionOptionsWidget {
             BuiltInThemes: "resource:///modules/BuiltInThemes.jsm",
         });
         XPCOMUtils.defineLazyGetter(this, "extBundle", function () {
-            return Services.strings.createBundle(
-                "chrome://mozapps/locale/extensions/extensions.properties"
-            );
+            return Services.strings.createBundle("chrome://global/locale/extensions.properties");
         });
         XPCOMUtils.defineLazyPreferenceGetter(
             this,
@@ -268,7 +266,7 @@ class ExtensionOptionsWidget {
                         )
                     );
 
-                    this.fluentSetup().then(() => this.swapAddonsButton(aDoc));
+                    this.fluentSetup(aDoc).then(() => this.swapAddonsButton(aDoc));
                 },
                 // populate the panel before it's shown
                 onViewShowing: (event) => {
@@ -291,16 +289,15 @@ class ExtensionOptionsWidget {
     }
 
     // grab localized strings for the extensions button and disabled/enabled extensions headings
-    async fluentSetup() {
-        this.aboutAddonsL10n = await new Localization(["toolkit/about/aboutAddons.ftl"], true);
-        let [extensions, themes, enabled, disabled, privateHelp] =
-            await this.aboutAddonsL10n.formatValues([
-                "addon-category-extension",
-                "addon-category-theme",
-                "extension-enabled-heading",
-                "extension-disabled-heading",
-                "addon-detail-private-browsing-help",
-            ]);
+    async fluentSetup(aDoc) {
+        aDoc.ownerGlobal.MozXULElement.insertFTLIfNeeded("toolkit/about/aboutAddons.ftl");
+        let [extensions, themes, enabled, disabled, privateHelp] = await aDoc.l10n.formatValues([
+            "addon-category-extension",
+            "addon-category-theme",
+            "extension-enabled-heading",
+            "extension-disabled-heading",
+            "addon-detail-private-browsing-help",
+        ]);
         privateHelp = privateHelp.replace(/\s*\<.*\>$/, "");
         this.aboutAddonsStrings = { extensions, themes, enabled, disabled, privateHelp };
     }
@@ -417,7 +414,7 @@ class ExtensionOptionsWidget {
                     subviewbutton._Addon = addon;
 
                     if (this.config["Show addon messages"])
-                        this.setAddonMessage(subviewbutton, addon);
+                        this.setAddonMessage(doc, subviewbutton, addon);
                 }
             });
 
@@ -448,7 +445,7 @@ class ExtensionOptionsWidget {
                         .querySelectorAll(`.eom-addon-button[addon-type="theme"]`)
                         .forEach((btn) => {
                             btn.classList[btn._Addon?.isActive ? "remove" : "add"]("disabled");
-                            this.setAddonMessage(btn, btn._Addon);
+                            this.setAddonMessage(doc, btn, btn._Addon);
                         });
                 });
                 if (!addon.isActive) subviewbutton.classList.add("disabled");
@@ -458,7 +455,7 @@ class ExtensionOptionsWidget {
                 );
                 subviewbutton._Addon = addon;
 
-                this.setAddonMessage(subviewbutton, addon);
+                this.setAddonMessage(doc, subviewbutton, addon);
             }
         });
 
@@ -506,28 +503,33 @@ class ExtensionOptionsWidget {
 
     /**
      * for a given button made for an addon, find out if it has a message (blocked, unverified, etc.) and if so, display it
+     * @param {object} doc (the document we're localizing)
      * @param {object} subviewbutton (an addon button in the panel)
      * @param {object} addon (an Addon object)
      */
-    setAddonMessage(subviewbutton, addon) {
+    async setAddonMessage(doc, subviewbutton, addon) {
         const l10n = this.config.l10n;
         const { name } = addon;
-        const appName = gBrandBundle.GetStringFromName("brandShortName");
         const { STATE_BLOCKED, STATE_SOFTBLOCKED } = Ci.nsIBlocklistService;
-        const formatString = (name, args) =>
-            this.extBundle.formatStringFromName(`details.notification.${name}`, args, args.length);
+        const formatString = (type, args) => {
+            return new Promise((resolve) => {
+                doc.l10n
+                    .formatMessages([{ id: `details-notification-${type}`, args }])
+                    .then((msg) => resolve(msg[0].value));
+            });
+        };
 
         let message = null;
         if (addon.blocklistState === STATE_BLOCKED)
             message = {
                 label: l10n.addonMessages["Blocked"],
-                detail: formatString("blocked", [name]),
+                detail: await formatString("blocked", { name }),
                 type: "error",
             };
         else if (this.isDisabledUnsigned(addon))
             message = {
                 label: l10n.addonMessages["Signature Required"],
-                detail: formatString("unsignedAndDisabled", [name, appName]),
+                detail: await formatString("unsigned-and-disabled", { name }),
                 type: "error",
             };
         else if (
@@ -536,19 +538,22 @@ class ExtensionOptionsWidget {
         )
             message = {
                 label: l10n.addonMessages["Incompatible"],
-                detail: formatString("incompatible", [name, appName, Services.appinfo.version]),
+                detail: await formatString("incompatible", {
+                    name,
+                    version: Services.appinfo.version,
+                }),
                 type: "warning",
             };
         else if (!this.isCorrectlySigned(addon))
             message = {
                 label: l10n.addonMessages["Unverified"],
-                detail: formatString("unsigned", [name, appName]),
+                detail: await formatString("unsigned", { name }),
                 type: "warning",
             };
         else if (addon.blocklistState === STATE_SOFTBLOCKED)
             message = {
                 label: l10n.addonMessages["Insecure"],
-                detail: formatString("softblocked", [name]),
+                detail: await formatString("softblocked", { name }),
                 type: "warning",
             };
         if (addon.type === "theme" && (!message || message.type !== "error")) {
