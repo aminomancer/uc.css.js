@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Vertical Tabs Pane
-// @version        1.5.7
+// @version        1.5.8
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Create a vertical pane across from the sidebar that functions like the vertical
@@ -192,7 +192,7 @@
             this.newTabButton.id = "vertical-tabs-new-tab-button";
             this.newTabButton.setAttribute("flex", "1");
             this.newTabButton.setAttribute("class", "subviewbutton subviewbutton-iconic");
-            this.newTabButton.tooltipText = GetDynamicShortcutTooltipText("new-tab-button");
+            nodeToShortcutMap[this.newTabButton.id] = nodeToShortcutMap["new-tab-button"];
             this.pinPaneButton = this.buttonsRow.appendChild(
                 create(document, "toolbarbutton", {
                     id: "vertical-tabs-pin-button",
@@ -680,6 +680,7 @@
                     break;
                 case hoverOutDelayPref:
                     this.hoverOutDelay = value ?? 100;
+                    break;
                 case userContextPref:
                 case containerOnClickPref:
                     this.handlePrivacyChange();
@@ -1641,19 +1642,19 @@
                 popup.setAttribute("position", "after_end");
                 parent.prepend(popup);
                 parent.setAttribute("type", "menu");
-                if (newTabLeftClickOpensContainersMenu) {
-                    gClickAndHoldListenersOnElement.remove(parent);
-                    nodeToTooltipMap["new-tab-button"] = "newTabAlwaysContainer.tooltip";
-                } else {
-                    gClickAndHoldListenersOnElement.add(parent);
-                    nodeToTooltipMap["new-tab-button"] = "newTabContainer.tooltip";
-                }
+                nodeToTooltipMap[parent.id] = newTabLeftClickOpensContainersMenu
+                    ? "newTabAlwaysContainer.tooltip"
+                    : "newTabContainer.tooltip";
             } else {
-                nodeToTooltipMap["new-tab-button"] = "newTabButton.tooltip";
+                nodeToTooltipMap[parent.id] = "newTabButton.tooltip";
                 parent.removeAttribute("context", "new-tab-button-popup");
             }
-            gDynamicTooltipCache.delete("new-tab-button");
-            this.newTabButton.tooltipText = GetDynamicShortcutTooltipText("new-tab-button");
+            gDynamicTooltipCache.delete(parent.id);
+            if (containersEnabled && !newTabLeftClickOpensContainersMenu) {
+                gClickAndHoldListenersOnElement.add(parent);
+            } else {
+                gClickAndHoldListenersOnElement.remove(parent);
+            }
         }
         // load our stylesheet as an author sheet. override it with userChrome.css and !important rules.
         registerSheet() {
