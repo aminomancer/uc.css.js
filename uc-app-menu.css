@@ -288,69 +288,69 @@
     list-style-image: url(chrome://userchrome/content/skin/reload.svg);
 }
 
-#appmenu-developer-tools-view toolbarbutton .toolbarbutton-icon {
+:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view) toolbarbutton .toolbarbutton-icon {
     width: 16px !important;
     height: 16px !important;
 }
 
-#appmenu-developer-tools-view toolbarbutton[checked="true"] .toolbarbutton-icon {
+:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view) toolbarbutton[checked="true"] .toolbarbutton-icon {
     list-style-image: url(chrome://userchrome/content/check.svg) !important;
     background-color: var(--checkbox-checked-bgcolor);
     border: 1px solid var(--checkbox-checked-border-color);
     border-radius: 2px;
 }
 
-#appmenu-developer-tools-view
+:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view)
     toolbarbutton[checked="true"]:is(:hover, :focus-visible):not([open])
     .toolbarbutton-icon {
     background-color: var(--checkbox-checked-hover-bgcolor);
 }
 
-#appmenu-developer-tools-view
+:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view)
     toolbarbutton[checked="true"]:is(:hover:active, [open])
     .toolbarbutton-icon {
     background-color: var(--checkbox-checked-active-bgcolor);
 }
 
-#appmenu-developer-tools-view toolbarbutton[label="Web Developer Tools"i]:not([checked="true"]) {
+:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view) toolbarbutton[label="Web Developer Tools"i]:not([checked="true"]) {
     list-style-image: url(chrome://userchrome/content/devtools/debugging-workers.svg) !important;
 }
 
-#appmenu-developer-tools-view toolbarbutton[label="Task Manager"i] {
+:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view) toolbarbutton[label="Task Manager"i] {
     list-style-image: url(chrome://userchrome/content/devtools/tool-profiler.svg) !important;
 }
 
-#appmenu-developer-tools-view toolbarbutton[label="Remote Debugging"i] {
+:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view) toolbarbutton[label="Remote Debugging"i] {
     list-style-image: url(chrome://userchrome/content/material/remote.svg) !important;
 }
 
-#appmenu-developer-tools-view toolbarbutton[label="Browser Toolbox"i] {
+:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view) toolbarbutton[label="Browser Toolbox"i] {
     list-style-image: url(chrome://userchrome/content/skin/toolbox.svg) !important;
 }
 
-#appmenu-developer-tools-view toolbarbutton[label="Browser Content Toolbox"i] {
+:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view) toolbarbutton[label="Browser Content Toolbox"i] {
     list-style-image: url(chrome://userchrome/content/devtools/command-frames.svg) !important;
     fill-opacity: 0 !important;
 }
 
-#appmenu-developer-tools-view toolbarbutton[label="Browser Console"i] {
+:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view) toolbarbutton[label="Browser Console"i] {
     list-style-image: url(chrome://userchrome/content/devtools/command-console.svg) !important;
 }
 
-#appmenu-developer-tools-view toolbarbutton[label="Responsive Design Mode"i]:not([checked="true"]) {
+:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view) toolbarbutton[label="Responsive Design Mode"i]:not([checked="true"]) {
     list-style-image: url(chrome://userchrome/content/devtools/command-responsivemode.svg) !important;
     fill-opacity: 0 !important;
 }
 
-#appmenu-developer-tools-view toolbarbutton[label="Eyedropper"i] {
+:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view) toolbarbutton[label="Eyedropper"i] {
     list-style-image: url(chrome://userchrome/content/devtools/command-eyedropper.svg) !important;
 }
 
-#appmenu-developer-tools-view toolbarbutton[label="Page Source"i] {
+:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view) toolbarbutton[label="Page Source"i] {
     list-style-image: url(chrome://userchrome/content/devtools/tool-dom.svg) !important;
 }
 
-#appmenu-developer-tools-view toolbarbutton[label="Extensions for Developers"i] {
+:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view) toolbarbutton[label="Extensions for Developers"i] {
     list-style-image: url(chrome://userchrome/content/mozilla-logo.svg) !important;
 }
 
@@ -438,7 +438,7 @@
 #appMenu-restart-button2 > .toolbarbutton-text,
 #appMenu-zoom-controls2 > .toolbarbutton-text,
 #appMenu-fxa-status2 :is(label, div),
-#appmenu-developer-tools-view toolbarbutton .toolbarbutton-text,
+:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view) toolbarbutton .toolbarbutton-text,
 #appMenu_menu_openHelp > .toolbarbutton-text,
 #appMenu_feedbackPage > .toolbarbutton-text,
 #appMenu_helpSafeMode > .toolbarbutton-text,
