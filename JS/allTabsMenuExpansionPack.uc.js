@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           All Tabs Menu Expansion Pack
-// @version        2.0.5
+// @version        2.0.6
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Next to the "new tab" button in Firefox there's a V-shaped button that opens a
@@ -796,8 +796,7 @@
                 (AppConstants.platform == "win" || AppConstants.platform == "macosx")
             ) {
                 delete tab.noCanvas;
-                let windowUtils = window.windowUtils;
-                let scale = windowUtils.screenPixelsPerCSSPixel / windowUtils.fullZoom;
+                let scale = window.devicePixelRatio;
                 let canvas = this._dndCanvas;
                 if (!canvas) {
                     this._dndCanvas = canvas = document.createElementNS(
@@ -938,7 +937,7 @@
     box-shadow: none;
     -moz-box-align: center;
     padding-inline-end: 2px;
-    overflow-x: -moz-hidden-unscrollable;
+    overflow: hidden;
     position: relative;
 }
 .panel-subview-body > .all-tabs-item .all-tabs-button:not([disabled], [open]):focus {
@@ -957,7 +956,7 @@
 .panel-subview-body > .all-tabs-item[selected] {
     font-weight: normal;
     background-color: var(--arrowpanel-dimmed-further) !important;
-    --main-stripe-color: var(--arrowpanel-dimmed-even-further);
+    --main-stripe-color: var(--panel-item-active-bgcolor);
 }
 .panel-subview-body > .all-tabs-item .all-tabs-button {
     min-height: revert;
@@ -1121,8 +1120,8 @@
     border-image: linear-gradient(
         to right,
         transparent,
-        var(--arrowpanel-dimmed-even-further) 1%,
-        var(--arrowpanel-dimmed-even-further) 25%,
+        var(--panel-item-active-bgcolor) 1%,
+        var(--panel-item-active-bgcolor) 25%,
         transparent 90%
     );
     border-image-slice: 1;
@@ -1130,11 +1129,11 @@
 }
 .panel-subview-body > .all-tabs-item[dragpos="before"]::before {
     inset-block-start: 0;
-    border-top: 1px solid var(--arrowpanel-dimmed-even-further);
+    border-top: 1px solid var(--panel-item-active-bgcolor);
 }
 .panel-subview-body > .all-tabs-item[dragpos="after"]::before {
     inset-block-end: 0;
-    border-bottom: 1px solid var(--arrowpanel-dimmed-even-further);
+    border-bottom: 1px solid var(--panel-item-active-bgcolor);
 }
 .panel-subview-body
     > .all-tabs-item[pinned]
@@ -1145,6 +1144,18 @@
     padding-inline-start: 20px;
     -moz-context-properties: fill, fill-opacity;
     fill: currentColor;
+}
+#places-tooltip-insecure-icon {
+    -moz-context-properties: fill;
+    fill: currentColor;
+    width: 1em;
+    height: 1em;
+    margin-inline-start: 0;
+    margin-inline-end: .2em;
+    min-width: 1em !important;
+}
+#places-tooltip-insecure-icon[hidden] {
+    display: none;
 }`;
         let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
             Ci.nsIStyleSheetService

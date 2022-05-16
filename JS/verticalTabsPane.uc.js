@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Vertical Tabs Pane
-// @version        1.6.1
+// @version        1.6.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Create a vertical pane across from the sidebar that functions like the vertical
@@ -68,16 +68,32 @@
         },
     };
     if (location.href !== "chrome://browser/content/browser.xhtml") return;
-    let prefSvc = Services.prefs;
-    let closedPref = "userChrome.tabs.verticalTabsPane.closed";
-    let unpinnedPref = "userChrome.tabs.verticalTabsPane.unpinned";
-    let noExpandPref = "userChrome.tabs.verticalTabsPane.no-expand-on-hover";
-    let widthPref = "userChrome.tabs.verticalTabsPane.width";
-    let reversePref = "userChrome.tabs.verticalTabsPane.reverse-order";
-    let hoverDelayPref = "userChrome.tabs.verticalTabsPane.hover-delay";
-    let hoverOutDelayPref = "userChrome.tabs.verticalTabsPane.hover-out-delay";
-    let userContextPref = "privacy.userContext.enabled";
-    let containerOnClickPref = "privacy.userContext.newTabContainerOnLeftClick.enabled";
+    const prefSvc = Services.prefs;
+    const closedPref = "userChrome.tabs.verticalTabsPane.closed";
+    const unpinnedPref = "userChrome.tabs.verticalTabsPane.unpinned";
+    const noExpandPref = "userChrome.tabs.verticalTabsPane.no-expand-on-hover";
+    const widthPref = "userChrome.tabs.verticalTabsPane.width";
+    const reversePref = "userChrome.tabs.verticalTabsPane.reverse-order";
+    const hoverDelayPref = "userChrome.tabs.verticalTabsPane.hover-delay";
+    const hoverOutDelayPref = "userChrome.tabs.verticalTabsPane.hover-out-delay";
+    const userContextPref = "privacy.userContext.enabled";
+    const containerOnClickPref = "privacy.userContext.newTabContainerOnLeftClick.enabled";
+    // all of these events will be listened for on the pane itself
+    const paneEvents = ["mouseenter", "mouseleave", "focus"];
+    // these events target the arrowscrollbox (the container for tab items)
+    const dragEvents = ["dragstart", "dragleave", "dragover", "drop", "dragend"];
+    // these events target the vanilla tab bar, gBrowser.tabContainer
+    const tabEvents = [
+        "TabAttrModified",
+        "TabClose",
+        "TabMove",
+        "TabHide",
+        "TabShow",
+        "TabPinned",
+        "TabUnpinned",
+        "TabSelect",
+        "TabBrowserDiscarded",
+    ];
     /**
      * create a DOM node with given parameters
      * @param {object} aDoc (which document to create the element in)
@@ -115,8 +131,8 @@
             { name: hoverOutDelayPref, value: 100 },
         ];
         constructor() {
-            this.preferences = VerticalTabsPaneBase.preferences;
-            this.registerSheet();
+            this._preferences = VerticalTabsPaneBase.preferences;
+            this._registerSheet();
             // ensure E10SUtils are available. required for showing tab's process ID in its tooltip, if the pref for that is enabled.
             if (!window.E10SUtils)
                 XPCOMUtils.defineLazyModuleGetters(this, {
@@ -124,35 +140,35 @@
                 });
             else this.E10SUtils = window.E10SUtils;
             // get some localized strings for the tooltip
-            XPCOMUtils.defineLazyGetter(this, "l10n", function () {
+            XPCOMUtils.defineLazyGetter(this, "_l10n", function () {
                 return new Localization(["browser/browser.ftl"], true);
             });
-            this.formatFluentStrings();
+            this._formatFluentStrings();
             Services.obs.addObserver(this, "vertical-tabs-pane-toggle");
             // build the DOM
             this.pane = document.getElementById("vertical-tabs-pane");
-            this.splitter = document.getElementById("vertical-tabs-splitter");
-            this.contextMenu = document.getElementById("mainPopupSet").appendChild(
+            this._splitter = document.getElementById("vertical-tabs-splitter");
+            this._contextMenu = document.getElementById("mainPopupSet").appendChild(
                 create(document, "menupopup", {
                     id: "vertical-tabs-context-menu",
                 })
             );
-            this.innerBox = this.pane.appendChild(
+            this._innerBox = this.pane.appendChild(
                 create(document, "vbox", { id: "vertical-tabs-inner-box" })
             );
-            this.buttonsRow = this.innerBox.appendChild(
+            this._buttonsRow = this._innerBox.appendChild(
                 create(document, "hbox", {
                     id: "vertical-tabs-buttons-row",
                 })
             );
-            this.contextMenu._menuitemPosition = this.contextMenu.appendChild(
+            this._contextMenu.menuitemPosition = this._contextMenu.appendChild(
                 create(document, "menuitem", {
                     id: "vertical-tabs-context-position",
                     label: config.l10n.context["Move Pane to Right"],
                     oncommand: `Services.prefs.setBoolPref(SidebarUI.POSITION_START_PREF, true);`,
                 })
             );
-            this.contextMenu._menuitemExpand = this.contextMenu.appendChild(
+            this._contextMenu.menuitemExpand = this._contextMenu.appendChild(
                 create(document, "menuitem", {
                     id: "vertical-tabs-context-expand",
                     label: config.l10n.context["Expand Pane"],
@@ -160,7 +176,7 @@
                     oncommand: `Services.prefs.setBoolPref("userChrome.tabs.verticalTabsPane.no-expand-on-hover", !this.getAttribute("checked"));`,
                 })
             );
-            this.contextMenu._menuitemReverse = this.contextMenu.appendChild(
+            this._contextMenu.menuitemReverse = this._contextMenu.appendChild(
                 create(document, "menuitem", {
                     id: "vertical-tabs-context-reverse",
                     label: config.l10n.context["Reverse Tab Order"],
@@ -168,14 +184,14 @@
                     oncommand: `Services.prefs.setBoolPref("userChrome.tabs.verticalTabsPane.reverse-order", this.getAttribute("checked"));`,
                 })
             );
-            this.contextMenu._menuitemHoverDelay = this.contextMenu.appendChild(
+            this._contextMenu.menuitemHoverDelay = this._contextMenu.appendChild(
                 create(document, "menuitem", {
                     id: "vertical-tabs-context-hover-delay",
                     label: config.l10n.context["Configure Hover Delay"],
                     oncommand: `verticalTabsPane.promptForIntPref("userChrome.tabs.verticalTabsPane.hover-delay")`,
                 })
             );
-            this.contextMenu._menuitemHoverOutDelay = this.contextMenu.appendChild(
+            this._contextMenu.menuitemHoverOutDelay = this._contextMenu.appendChild(
                 create(document, "menuitem", {
                     id: "vertical-tabs-context-hover-out-delay",
                     label: config.l10n.context["Configure Hover Out Delay"],
@@ -183,46 +199,45 @@
                 })
             );
             // tab stops let us focus elements in the tabs pane by hitting tab to cycle through toolbars, just as in vanilla firefox.
-            this.buttonsTabStop = this.buttonsRow.appendChild(
+            this._buttonsRow.appendChild(
                 create(document, "toolbartabstop", { "aria-hidden": true })
             );
-            this.newTabButton = this.buttonsRow.appendChild(
+            this._newTabButton = this._buttonsRow.appendChild(
                 CustomizableUI.getWidget("new-tab-button").forWindow(window).node.cloneNode(true)
             );
-            this.newTabButton.id = "vertical-tabs-new-tab-button";
-            this.newTabButton.setAttribute("flex", "1");
-            this.newTabButton.setAttribute("class", "subviewbutton subviewbutton-iconic");
-            nodeToShortcutMap[this.newTabButton.id] = nodeToShortcutMap["new-tab-button"];
-            this.pinPaneButton = this.buttonsRow.appendChild(
+            this._newTabButton.id = "vertical-tabs-new-tab-button";
+            this._newTabButton.setAttribute("flex", "1");
+            this._newTabButton.setAttribute("class", "subviewbutton subviewbutton-iconic");
+            nodeToShortcutMap[this._newTabButton.id] = nodeToShortcutMap["new-tab-button"];
+            this._pinButton = this._buttonsRow.appendChild(
                 create(document, "toolbarbutton", {
                     id: "vertical-tabs-pin-button",
                     class: "subviewbutton subviewbutton-iconic no-label",
                     tooltiptext: config.l10n["Collapse button tooltip"],
                 })
             );
-            this.pinPaneButton.addEventListener("command", (e) => {
+            this._pinButton.addEventListener("command", (e) => {
                 this.pane.getAttribute("unpinned")
                     ? this.pane.removeAttribute("unpinned")
                     : this.unpin();
-                this.resetPinnedTooltip();
+                this._resetPinnedTooltip();
             });
-            this.closePaneButton = this.buttonsRow.appendChild(
+            this._closeButton = this._buttonsRow.appendChild(
                 create(document, "toolbarbutton", {
                     id: "vertical-tabs-close-button",
                     class: "subviewbutton subviewbutton-iconic no-label",
                     tooltiptext: config.l10n["Button tooltip"],
                 })
             );
-            if (key_toggleVerticalTabs)
-                this.closePaneButton.tooltipText += ` (${ShortcutUtils.prettifyShortcut(
-                    key_toggleVerticalTabs
+            if ("key_toggleVerticalTabs" in window) {
+                this._closeButton.tooltipText += ` (${ShortcutUtils.prettifyShortcut(
+                    window.key_toggleVerticalTabs
                 )})`;
-            this.closePaneButton.addEventListener("command", (e) => this.toggle());
-            this.innerBox.appendChild(create(document, "toolbarseparator"));
-            this.scrollboxTabStop = this.innerBox.appendChild(
-                create(document, "toolbartabstop", { "aria-hidden": true })
-            );
-            this.containerNode = this.innerBox.appendChild(
+            }
+            this._closeButton.addEventListener("command", (e) => this.toggle());
+            this._innerBox.appendChild(create(document, "toolbarseparator"));
+            this._innerBox.appendChild(create(document, "toolbartabstop", { "aria-hidden": true }));
+            this._arrowscrollbox = this._innerBox.appendChild(
                 create(document, "arrowscrollbox", {
                     id: "vertical-tabs-list",
                     tooltip: "vertical-tabs-tooltip",
@@ -233,18 +248,18 @@
             );
             // build a modified clone of the built-in tabs tooltip for use in the pane.
             let vanillaTooltip = document.getElementById("tabbrowser-tab-tooltip");
-            this.tabTooltip = vanillaTooltip.cloneNode(true);
-            vanillaTooltip.after(this.tabTooltip);
-            this.tabTooltip.id = "vertical-tabs-tooltip";
-            this.tabTooltip.setAttribute(
+            this._tabTooltip = vanillaTooltip.cloneNode(true);
+            vanillaTooltip.after(this._tabTooltip);
+            this._tabTooltip.id = "vertical-tabs-tooltip";
+            this._tabTooltip.setAttribute(
                 "onpopupshowing",
                 `verticalTabsPane.createTabTooltip(event)`
             );
             // this is a map of all the rows, and you can get a specific row from it by passing a tab (like a real <tab> element from the built-in tab bar)
             this.tabToElement = new Map();
-            this.listenersRegistered = false;
+            this._listenersRegistered = false;
             // set up preferences if they don't already exist
-            this.preferences.forEach((pref) => {
+            this._preferences.forEach((pref) => {
                 if (!prefSvc.prefHasUserValue(pref.name))
                     prefSvc[`set${typeof pref.value === "number" ? "Int" : "Bool"}Pref`](
                         pref.name,
@@ -264,9 +279,9 @@
             );
             // destroy the scrollbuttons.
             ["#scrollbutton-up", "#scrollbutton-down"].forEach((id) =>
-                this.containerNode.shadowRoot.querySelector(id).remove()
+                this._arrowscrollbox.shadowRoot.querySelector(id).remove()
             );
-            this.l10nIfNeeded();
+            this._l10nIfNeeded();
             // the pref observer changes stuff in the script when the pref is changed.
             // but when the script initially starts, the prefs haven't been changed so that logic isn't immediately invoked.
             // we have to invoke it manually, as if the prefs had been changed.
@@ -274,8 +289,8 @@
             readPref(noExpandPref);
             readPref(hoverDelayPref);
             readPref(hoverOutDelayPref);
-            if (!this.hoverDelay) this.hoverDelay = 100;
-            if (!this.hoverOutDelay) this.hoverOutDelay = 100;
+            if (!this._hoverDelay) this._hoverDelay = 100;
+            if (!this._hoverOutDelay) this._hoverOutDelay = 100;
             // we don't want to read some of these prefs until we know whether the window was opened by another window with a pane,
             // because instead of reading from prefs we can adopt the pane state from the previous window.
             // normally in my scripts I update prefs like this every time they're changed, which would mean, for example,
@@ -294,103 +309,80 @@
                 let sourceWindow = window.opener;
                 if (sourceWindow)
                     if (!sourceWindow.closed && sourceWindow.location.protocol == "chrome:")
-                        if (this.adoptFromWindow(sourceWindow)) return;
+                        if (this._adoptFromWindow(sourceWindow)) return;
                 readPref(widthPref);
                 readPref(unpinnedPref);
                 readPref(closedPref);
             });
         }
         // get the root element, e.g. what you'd select in CSS with :root
-        get root() {
-            return this._root || (this._root = document.documentElement);
+        get _root() {
+            if (!this.__root) this.__root = document.documentElement;
+            return this.__root;
         }
         // return all the DOM nodes for tab rows in the pane.
-        get rows() {
+        get _rows() {
             return this.tabToElement.values();
         }
         // return the row for the active/selected tab.
-        get selectedRow() {
-            return this.containerNode.querySelector(".all-tabs-item[selected]");
-        }
-        // all of these events will be listened for on the pane itself
-        get paneEvents() {
-            return this._paneEvents || (this._paneEvents = ["mouseenter", "mouseleave", "focus"]);
-        }
-        // these events target the containerNode — the arrowscrollbox
-        get dragEvents() {
-            return (
-                this._dragEvents ||
-                (this._dragEvents = ["dragstart", "dragleave", "dragover", "drop", "dragend"])
-            );
-        }
-        // these events target the vanilla tab bar, gBrowser.tabContainer
-        get tabEvents() {
-            return (
-                this._tabEvents ||
-                (this._tabEvents = [
-                    "TabAttrModified",
-                    "TabClose",
-                    "TabMove",
-                    "TabHide",
-                    "TabShow",
-                    "TabPinned",
-                    "TabUnpinned",
-                    "TabSelect",
-                    "TabBrowserDiscarded",
-                ])
-            );
+        get _selectedRow() {
+            return this._arrowscrollbox.querySelector(".all-tabs-item[selected]");
         }
         // this creates (and caches) a tree walker. tree walkers are basically interfaces for finding nodes in order.
         // we get to specify which direction we're looking in, forward or backward, and we get to specify a filter function that rules out types of elements.
         // this one accepts tabstops, buttons, toolbarbuttons, and checkboxes, but rules out disabled or hidden nodes, and rules out everything else.
         // this is what tells us which element to focus when pressing the right/left arrow keys.
-        get horizontalWalker() {
-            if (this._horizontalWalker) return this._horizontalWalker;
-            return (this._horizontalWalker = document.createTreeWalker(
-                this.pane,
-                NodeFilter.SHOW_ELEMENT,
-                (node) => {
-                    if (node.tagName == "toolbartabstop") return NodeFilter.FILTER_ACCEPT;
-                    if (node.disabled || node.hidden) return NodeFilter.FILTER_REJECT;
-                    if (
-                        node.tagName == "button" ||
-                        node.tagName == "toolbarbutton" ||
-                        node.tagName == "checkbox"
-                    ) {
-                        if (!node.hasAttribute("tabindex")) node.setAttribute("tabindex", "-1");
-                        return NodeFilter.FILTER_ACCEPT;
+        get _horizontalWalker() {
+            if (!this.__horizontalWalker) {
+                this.__horizontalWalker = document.createTreeWalker(
+                    this.pane,
+                    NodeFilter.SHOW_ELEMENT,
+                    (node) => {
+                        if (node.tagName == "toolbartabstop") return NodeFilter.FILTER_ACCEPT;
+                        if (node.disabled || node.hidden) return NodeFilter.FILTER_REJECT;
+                        if (
+                            node.tagName == "button" ||
+                            node.tagName == "toolbarbutton" ||
+                            node.tagName == "checkbox"
+                        ) {
+                            if (!node.hasAttribute("tabindex")) node.setAttribute("tabindex", "-1");
+                            return NodeFilter.FILTER_ACCEPT;
+                        }
+                        return NodeFilter.FILTER_SKIP;
                     }
-                    return NodeFilter.FILTER_SKIP;
-                }
-            ));
+                );
+            }
+            return this.__horizontalWalker;
         }
         // this one tells us which element to focus when pressing the up/down arrow keys.
         // it's just like the other but it skips secondary buttons. (mute and close buttons)
         // this way we can arrow up/down to navigate through tabs very quickly, and arrow left/right to focus the mute and close buttons.
-        get verticalWalker() {
-            if (this._verticalWalker) return this._verticalWalker;
-            return (this._verticalWalker = document.createTreeWalker(
-                this.pane,
-                NodeFilter.SHOW_ELEMENT,
-                (node) => {
-                    if (node.tagName == "toolbartabstop") return NodeFilter.FILTER_ACCEPT;
-                    if (node.disabled || node.hidden) return NodeFilter.FILTER_REJECT;
-                    if (
-                        node.tagName == "button" ||
-                        node.tagName == "toolbarbutton" ||
-                        node.tagName == "checkbox"
-                    ) {
-                        if (node.classList.contains("all-tabs-secondary-button"))
-                            return NodeFilter.FILTER_SKIP;
-                        if (!node.hasAttribute("tabindex")) node.setAttribute("tabindex", "-1");
-                        return NodeFilter.FILTER_ACCEPT;
+        get _verticalWalker() {
+            if (this.__verticalWalker) {
+                this.__verticalWalker = document.createTreeWalker(
+                    this.pane,
+                    NodeFilter.SHOW_ELEMENT,
+                    (node) => {
+                        if (node.tagName == "toolbartabstop") return NodeFilter.FILTER_ACCEPT;
+                        if (node.disabled || node.hidden) return NodeFilter.FILTER_REJECT;
+                        if (
+                            node.tagName == "button" ||
+                            node.tagName == "toolbarbutton" ||
+                            node.tagName == "checkbox"
+                        ) {
+                            if (node.classList.contains("all-tabs-secondary-button"))
+                                return NodeFilter.FILTER_SKIP;
+                            if (!node.hasAttribute("tabindex")) node.setAttribute("tabindex", "-1");
+                            return NodeFilter.FILTER_ACCEPT;
+                        }
+                        return NodeFilter.FILTER_SKIP;
                     }
-                    return NodeFilter.FILTER_SKIP;
-                }
-            ));
+                );
+            }
+            return this.__verticalWalker;
         }
         // make an array containing all the context menus that can be opened by right-clicking something inside the pane.
-        get contextMenus() {
+        get _availContextMenus() {
             let menus = [];
             let contextDefs = [...this.pane.querySelectorAll("[context]")];
             contextDefs.push(this.pane);
@@ -406,8 +398,8 @@
         // we prevent the pane from collapsing and instead add a popuphidden event listener,
         // so it instead collapses once the pane has been closed.
         // imo this is a good reason to bring document.popupNode back, but I don't have any power over that.
-        get openMenu() {
-            let menus = this.contextMenus;
+        get _openMenu() {
+            let menus = this._availContextMenus;
             if (!menus.length) return false;
             let openMenu = false;
             menus.forEach((menu) => {
@@ -417,15 +409,15 @@
         }
         // grab the localized strings for the built-in tab sound pseudo-tooltip, e.g. "PLAYING" or "AUTOPLAY BLOCKED".
         // we lowercase these and append them to the end of the tooltip title if the sound overlay is hovered.
-        async formatFluentStrings() {
+        async _formatFluentStrings() {
             let [playingString, mutedString, blockedString, pipString] =
-                await this.l10n.formatValues([
+                await this._l10n.formatValues([
                     "browser-tab-audio-playing2",
                     "browser-tab-audio-muted2",
                     "browser-tab-audio-blocked",
                     "browser-tab-audio-pip",
                 ]);
-            this.fluentStrings = {
+            this._fluentStrings = {
                 playingString,
                 mutedString,
                 blockedString,
@@ -438,7 +430,7 @@
          * @param {object} tab (a <tab> element from the vanilla tab bar)
          * @returns {boolean} false if the tab should be excluded from the vertical tabs pane
          */
-        filterFn(tab) {
+        _filterFn(tab) {
             return !tab.hidden;
         }
         /**
@@ -446,7 +438,7 @@
          * @param {object} sourceWindow (a window object, the window from which the new window was opened)
          * @returns {boolean} true if state was successfully restored from source window, false if state must be restored from preferences.
          */
-        adoptFromWindow(sourceWindow) {
+        _adoptFromWindow(sourceWindow) {
             let sourceUI = sourceWindow.verticalTabsPane;
             if (!sourceUI || !sourceUI.pane) return false;
             this.pane.setAttribute(
@@ -456,9 +448,9 @@
             let sourcePinned = !!sourceUI.pane.getAttribute("unpinned");
             sourcePinned ? this.unpin() : this.pane.removeAttribute("unpinned");
             sourcePinned
-                ? this.root.setAttribute("vertical-tabs-unpinned", true)
-                : this.root.removeAttribute("vertical-tabs-unpinned");
-            this.resetPinnedTooltip();
+                ? this._root.setAttribute("vertical-tabs-unpinned", true)
+                : this._root.removeAttribute("vertical-tabs-unpinned");
+            this._resetPinnedTooltip();
             sourceUI.pane.hidden ? this.close() : this.open();
             return true;
         }
@@ -467,14 +459,14 @@
          * @param {object} el (a DOM node contained within a tab row)
          * @returns the ancestor tab row
          */
-        findRow(el) {
+        _findRow(el) {
             return el.classList.contains("all-tabs-item") ? el : el.closest(".all-tabs-item");
         }
         // change the pin/unpin button's tooltip so it reflects the current state.
         // if the pane is pinned, the button should say "Collapse pane" and if it's unpinned it should say "Pin pane"
-        resetPinnedTooltip() {
+        _resetPinnedTooltip() {
             let newVal = this.pane.getAttribute("unpinned");
-            this.pinPaneButton.tooltipText =
+            this._pinButton.tooltipText =
                 config.l10n[newVal ? "Pin button tooltip" : "Collapse button tooltip"];
         }
         /**
@@ -488,12 +480,12 @@
             let val, title, text;
             switch (pref) {
                 case hoverDelayPref:
-                    val = this.hoverDelay ?? 100;
+                    val = this._hoverDelay ?? 100;
                     title = config.l10n.prompt["Hover delay title"];
                     text = config.l10n.prompt["Hover delay description"];
                     break;
                 case hoverOutDelayPref:
-                    val = this.hoverOutDelay ?? 100;
+                    val = this._hoverOutDelay ?? 100;
                     title = config.l10n.prompt["Hover out delay title"];
                     text = config.l10n.prompt["Hover out delay description"];
                     break;
@@ -539,7 +531,7 @@
                     this._onCommand(e, tab);
                     break;
                 case "mouseover":
-                    this.warmupRowTab(e, tab);
+                    this._warmupRowTab(e, tab);
                     break;
                 case "mouseenter":
                     this._onMouseEnter(e);
@@ -620,7 +612,7 @@
          * @param {string} pref (a preference string)
          * @returns the preference's value
          */
-        getPref(root, pref) {
+        _getPref(root, pref) {
             switch (root.getPrefType(pref)) {
                 case root.PREF_BOOL:
                     return root.getBoolPref(pref);
@@ -638,7 +630,7 @@
          * @param {string} pref (the preference that changed)
          */
         _onPrefChanged(sub, pref) {
-            let value = this.getPref(sub, pref);
+            let value = this._getPref(sub, pref);
             switch (pref) {
                 case widthPref:
                     if (value === null) value = 350;
@@ -650,43 +642,43 @@
                 case unpinnedPref:
                     value ? this.unpin() : this.pane.removeAttribute("unpinned");
                     value
-                        ? this.root.setAttribute("vertical-tabs-unpinned", true)
-                        : this.root.removeAttribute("vertical-tabs-unpinned");
-                    this.resetPinnedTooltip();
+                        ? this._root.setAttribute("vertical-tabs-unpinned", true)
+                        : this._root.removeAttribute("vertical-tabs-unpinned");
+                    this._resetPinnedTooltip();
                     break;
                 case noExpandPref:
-                    this.noExpand = value;
+                    this._noExpand = value;
                     if (value) {
                         this.pane.setAttribute("no-expand", true);
                         this.pane.removeAttribute("expanded");
-                        this.contextMenu._menuitemExpand.removeAttribute("checked");
+                        this._contextMenu.menuitemExpand.removeAttribute("checked");
                     } else {
                         this.pane.removeAttribute("no-expand");
-                        this.contextMenu._menuitemExpand.setAttribute("checked", true);
+                        this._contextMenu.menuitemExpand.setAttribute("checked", true);
                     }
                     break;
                 case reversePref:
-                    this.reversed = value;
+                    this._reversed = value;
                     if (this.isOpen) {
-                        for (let item of this.rows) item.remove();
+                        for (let item of this._rows) item.remove();
                         this.tabToElement = new Map();
                         this._populate();
                     }
-                    if (value) this.contextMenu._menuitemReverse.setAttribute("checked", true);
-                    else this.contextMenu._menuitemReverse.removeAttribute("checked");
+                    if (value) this._contextMenu.menuitemReverse.setAttribute("checked", true);
+                    else this._contextMenu.menuitemReverse.removeAttribute("checked");
                     break;
                 case hoverDelayPref:
-                    this.hoverDelay = value ?? 100;
+                    this._hoverDelay = value ?? 100;
                     break;
                 case hoverOutDelayPref:
-                    this.hoverOutDelay = value ?? 100;
+                    this._hoverOutDelay = value ?? 100;
                     break;
                 case userContextPref:
                 case containerOnClickPref:
-                    this.handlePrivacyChange();
+                    this._handlePrivacyChange();
                     break;
                 case SidebarUI.POSITION_START_PREF:
-                    let menuitem = this.contextMenu._menuitemPosition;
+                    let menuitem = this._contextMenu.menuitemPosition;
                     if (value) {
                         menuitem.label = config.l10n.context["Move Pane to Left"];
                         menuitem.setAttribute(
@@ -707,18 +699,18 @@
             this.isOpen ? this.close() : this.open();
         }
         open() {
-            this.pane.hidden = this.splitter.hidden = false;
+            this.pane.hidden = this._splitter.hidden = false;
             this.pane.setAttribute("checked", true);
             this.isOpen = true;
-            this.root.setAttribute("vertical-tabs", true);
-            if (!this.listenersRegistered) this._populate();
+            this._root.setAttribute("vertical-tabs", true);
+            if (!this._listenersRegistered) this._populate();
         }
         close() {
             if (this.pane.contains(document.activeElement)) document.activeElement.blur();
-            this.pane.hidden = this.splitter.hidden = true;
+            this.pane.hidden = this._splitter.hidden = true;
             this.pane.removeAttribute("checked");
             this.isOpen = false;
-            this.root.setAttribute("vertical-tabs", false);
+            this._root.setAttribute("vertical-tabs", false);
             this._cleanup();
         }
         // set the active tab
@@ -730,23 +722,23 @@
         _populate() {
             let fragment = document.createDocumentFragment();
             for (let tab of gBrowser.tabs)
-                if (this.filterFn(tab))
-                    fragment[this.reversed ? `prepend` : `appendChild`](this._createRow(tab));
+                if (this._filterFn(tab))
+                    fragment[this._reversed ? `prepend` : `appendChild`](this._createRow(tab));
             this._addElement(fragment);
             this._setupListeners();
-            for (let row of this.rows) this._setImageAttributes(row, row.tab);
-            this.selectedRow.scrollIntoView({ block: "nearest", behavior: "instant" });
+            for (let row of this._rows) this._setImageAttributes(row, row.tab);
+            this._selectedRow.scrollIntoView({ block: "nearest", behavior: "instant" });
         }
         /**
          * add an element to the tab container/arrowscrollbox
          * @param {object} elementOrFragment (a DOM element or document fragment to add to the container)
          */
         _addElement(elementOrFragment) {
-            this.containerNode.insertBefore(elementOrFragment, this.insertBefore);
+            this._arrowscrollbox.insertBefore(elementOrFragment, this.insertBefore);
         }
-        // invoked when closing the pane. set everything back to default.
+        // invoked when closing the pane. destroy all the rows and clear any timeouts and flags.
         _cleanup() {
-            for (let item of this.rows) item.remove();
+            for (let item of this._rows) item.remove();
             this.tabToElement = new Map();
             this._cleanupListeners();
             clearTimeout(this.hoverOutTimer);
@@ -758,11 +750,11 @@
         // invoked when opening the pane. add all the event listeners.
         // this way the script is less wasteful when the pane is closed.
         _setupListeners() {
-            this.listenersRegistered = true;
+            this._listenersRegistered = true;
             window.addEventListener("deactivate", this);
-            this.tabEvents.forEach((ev) => gBrowser.tabContainer.addEventListener(ev, this));
-            this.dragEvents.forEach((ev) => this.containerNode.addEventListener(ev, this));
-            this.paneEvents.forEach((ev) => this.pane.addEventListener(ev, this));
+            tabEvents.forEach((ev) => gBrowser.tabContainer.addEventListener(ev, this));
+            dragEvents.forEach((ev) => this._arrowscrollbox.addEventListener(ev, this));
+            paneEvents.forEach((ev) => this.pane.addEventListener(ev, this));
             if (gToolbarKeyNavEnabled) this.pane.addEventListener("keydown", this);
             this.pane.addEventListener("blur", this, true);
             gBrowser.addEventListener("TabMultiSelect", this, false);
@@ -772,15 +764,15 @@
         // invoked when closing the pane. clear all the aforementioned event listeners.
         _cleanupListeners() {
             window.removeEventListener("deactivate", this);
-            this.tabEvents.forEach((ev) => gBrowser.tabContainer.removeEventListener(ev, this));
-            this.dragEvents.forEach((ev) => this.containerNode.removeEventListener(ev, this));
-            this.paneEvents.forEach((ev) => this.pane.removeEventListener(ev, this));
+            tabEvents.forEach((ev) => gBrowser.tabContainer.removeEventListener(ev, this));
+            dragEvents.forEach((ev) => this._arrowscrollbox.removeEventListener(ev, this));
+            paneEvents.forEach((ev) => this.pane.removeEventListener(ev, this));
             this.pane.removeEventListener("keydown", this);
             this.pane.removeEventListener("blur", this, true);
             gBrowser.removeEventListener("TabMultiSelect", this, false);
             for (let stop of this.pane.getElementsByTagName("toolbartabstop"))
                 stop.removeEventListener("focus", this);
-            this.listenersRegistered = false;
+            this._listenersRegistered = false;
         }
         /**
          * callback when a tab attribute is modified. a response to the TabAttrModified custom event dispatched by gBrowser.
@@ -790,9 +782,9 @@
         _tabAttrModified(tab) {
             let item = this.tabToElement.get(tab);
             if (item) {
-                if (!this.filterFn(tab)) this._removeItem(item, tab);
+                if (!this._filterFn(tab)) this._removeItem(item, tab);
                 else this._setRowAttributes(item, tab);
-            } else if (this.filterFn(tab)) this._addTab(tab);
+            } else if (this._filterFn(tab)) this._addTab(tab);
         }
         /**
          * the key implies that we're moving a tab, but this doesn't tell us where to move the tab to.
@@ -806,7 +798,7 @@
             if (item) {
                 this._removeItem(item, tab);
                 this._addTab(tab);
-                this.selectedRow.scrollIntoView({ block: "nearest", behavior: "instant" });
+                this._selectedRow.scrollIntoView({ block: "nearest", behavior: "instant" });
             }
         }
         /**
@@ -815,14 +807,14 @@
          * @param {object} newTab (a tab element that's not already in the pane)
          */
         _addTab(newTab) {
-            if (!this.filterFn(newTab)) return;
+            if (!this._filterFn(newTab)) return;
             let newRow = this._createRow(newTab);
             let nextTab = newTab.nextElementSibling;
-            while (nextTab && !this.filterFn(nextTab)) nextTab = nextTab.nextElementSibling;
+            while (nextTab && !this._filterFn(nextTab)) nextTab = nextTab.nextElementSibling;
             let nextRow = this.tabToElement.get(nextTab);
-            if (this.reversed) {
+            if (this._reversed) {
                 if (nextRow) nextRow.after(newRow);
-                else this.containerNode.prepend(newRow);
+                else this._arrowscrollbox.prepend(newRow);
             } else {
                 if (nextRow) nextRow.parentNode.insertBefore(newRow, nextRow);
                 else this._addElement(newRow);
@@ -969,14 +961,13 @@
             let image = row.mainButton.icon;
             if (image) {
                 let busy = tab.getAttribute("busy");
-                let progress = tab.getAttribute("progress");
-                setAttributes(image, { busy, progress });
+                setAttributes(image, { busy, progress: tab.getAttribute("progress") });
                 if (busy) image.classList.add("tab-throbber-tabslist");
                 else image.classList.remove("tab-throbber-tabslist");
             }
         }
-        get mouseTargetRect() {
-            return windowUtils.getBoundsWithoutFlushing(this.pane);
+        get _mouseTargetRect() {
+            return window.windowUtils?.getBoundsWithoutFlushing(this.pane);
         }
         /**
          * get the previous or next node for a given TreeWalker
@@ -993,7 +984,7 @@
          * @param {boolean} horizontal (whether we're navigating with left/right or up/down)
          */
         navigateButtons(prev, horizontal) {
-            let walker = horizontal ? this.horizontalWalker : this.verticalWalker;
+            let walker = horizontal ? this._horizontalWalker : this._verticalWalker;
             let oldFocus = document.activeElement;
             walker.currentNode = oldFocus;
             let newFocus = this.getNewFocus(walker, prev);
@@ -1022,7 +1013,7 @@
             clearTimeout(this.hoverTimer);
             this.hoverOutQueued = false;
             this.hoverQueued = false;
-            if (this.pane.getAttribute("unpinned") && !this.noExpand)
+            if (this.pane.getAttribute("unpinned") && !this._noExpand)
                 this.pane.setAttribute("expanded", true);
             if (e.target.tagName === "toolbartabstop") this._onTabStopFocus(e);
         }
@@ -1033,11 +1024,11 @@
             clearTimeout(this.hoverTimer);
             this.hoverOutQueued = false;
             this.hoverQueued = false;
-            if (this.noExpand) return this.pane.removeAttribute("expanded"); // if the pane is set to not expand, forget about all this.
+            if (this._noExpand) return this.pane.removeAttribute("expanded"); // if the pane is set to not expand, forget about all this.
             // if the pane was blurred because a context menu was opened, defer this behavior until the context menu is hidden.
-            let openMenu = this.openMenu;
-            if (openMenu) {
-                openMenu.addEventListener("popuphidden", (e) => this._onPaneBlur(e), {
+            let { _openMenu } = this;
+            if (_openMenu) {
+                _openMenu.addEventListener("popuphidden", (e) => this._onPaneBlur(e), {
                     once: true,
                 });
                 return;
@@ -1056,7 +1047,7 @@
         // and pass focus to the next eligible button outside of the pane (probably a button)
         // see browser-toolbarKeyNav.js for more details on this concept.
         _onTabStopFocus(e) {
-            let walker = this.horizontalWalker;
+            let walker = this._horizontalWalker;
             let oldFocus = e.relatedTarget;
             let isButton = (node) => node.tagName == "button" || node.tagName == "toolbarbutton";
             if (oldFocus) {
@@ -1083,7 +1074,7 @@
                         let stopContainer = this.pane.contains(stop)
                             ? this.pane
                             : stop.closest("toolbar");
-                        if (window.windowUtils.getBoundsWithoutFlushing(stopContainer).height > 0)
+                        if (window.windowUtils?.getBoundsWithoutFlushing(stopContainer).height > 0)
                             break;
                         earlierVisibleStopIndex--;
                     }
@@ -1103,14 +1094,14 @@
                 case "ArrowLeft":
                     this.navigateButtons(
                         !window.RTL_UI,
-                        !(this.noExpand && this.pane.getAttribute("unpinned"))
+                        !(this._noExpand && this.pane.getAttribute("unpinned"))
                     );
                     break;
                 case "ArrowRight":
                     // Previous if UI is RTL, next if UI is LTR.
                     this.navigateButtons(
                         window.RTL_UI,
-                        !(this.noExpand && this.pane.getAttribute("unpinned"))
+                        !(this._noExpand && this.pane.getAttribute("unpinned"))
                     );
                     break;
                 case "ArrowUp":
@@ -1189,14 +1180,14 @@
         _onMouseEnter(e) {
             clearTimeout(this.hoverOutTimer);
             this.hoverOutQueued = false;
-            if (!this.pane.getAttribute("unpinned") || this.noExpand)
+            if (!this.pane.getAttribute("unpinned") || this._noExpand)
                 return this.pane.removeAttribute("expanded");
             if (this.hoverQueued) return;
             this.hoverQueued = true;
             this.hoverTimer = setTimeout(() => {
                 this.hoverQueued = false;
                 this.pane.setAttribute("expanded", true);
-            }, this.hoverDelay);
+            }, this._hoverDelay);
         }
         // when mouse leaves the pane, prepare to collapse the pane...
         _onMouseLeave(e, delay) {
@@ -1208,23 +1199,23 @@
                 this.hoverOutQueued = false;
                 if (this.pane.matches(":hover, :focus-within")) return;
                 if (e.type === "popuphidden" && Services.focus.activeWindow === window) {
-                    let rect = this.mouseTargetRect;
+                    let rect = this._mouseTargetRect;
                     let { _x, _y } = MousePosTracker;
                     if (_x >= rect.left && _x <= rect.right && _y >= rect.top && _y <= rect.bottom)
                         return;
                 }
-                if (this.noExpand) return this.pane.removeAttribute("expanded");
+                if (this._noExpand) return this.pane.removeAttribute("expanded");
                 // again, don't collapse the pane yet if the mouse left because a context menu was opened on the pane.
                 // wait until the context menu is closed before collapsing the pane.
-                let openMenu = this.openMenu;
-                if (openMenu) {
-                    openMenu.addEventListener("popuphidden", (e) => this._onMouseLeave(e, 0), {
+                let { _openMenu } = this;
+                if (_openMenu) {
+                    _openMenu.addEventListener("popuphidden", (e) => this._onMouseLeave(e, 0), {
                         once: true,
                     });
                     return;
                 }
                 this.pane.removeAttribute("expanded");
-            }, delay ?? this.hoverOutDelay);
+            }, delay ?? this._hoverOutDelay);
         }
         _onDeactivate(e) {
             clearTimeout(this.hoverTimer);
@@ -1239,7 +1230,7 @@
                 "--pane-transition-duration",
                 (Math.sqrt(this.pane.width / 350) * 0.25).toFixed(2) + "s"
             );
-            if (this.pane.matches(":hover, :focus-within") && !this.noExpand)
+            if (this.pane.matches(":hover, :focus-within") && !this._noExpand)
                 this.pane.setAttribute("expanded", true);
             this.pane.setAttribute("unpinned", true);
         }
@@ -1309,8 +1300,7 @@
                 (AppConstants.platform == "win" || AppConstants.platform == "macosx")
             ) {
                 delete tab.noCanvas;
-                let windowUtils = window.windowUtils;
-                let scale = windowUtils.screenPixelsPerCSSPixel / windowUtils.fullZoom;
+                let scale = window.devicePixelRatio;
                 let canvas = this._dndCanvas;
                 if (!canvas) {
                     this._dndCanvas = canvas = document.createElementNS(
@@ -1344,7 +1334,7 @@
             }
             tab._dragData = {
                 movingTabs: (tab.multiselected ? gBrowser.selectedTabs : [tab]).filter(
-                    this.filterFn
+                    this._filterFn
                 ),
             };
             e.stopPropagation();
@@ -1352,19 +1342,19 @@
         // invoked when we drag over an element inside the pane.
         // decide whether to show the drag-over styling on a row, and whether to show the drag indicator above or below the row.
         _onDragOver(e) {
-            let row = this.findRow(e.target);
+            let row = this._findRow(e.target);
             let dt = e.dataTransfer;
             // scroll when dragging near the ends of the scrollbox
             let pixelsToScroll = 0;
-            let rect = this.containerNode.getBoundingClientRect();
+            let rect = this._arrowscrollbox.getBoundingClientRect();
             if (row) {
                 let targetRect = row.getBoundingClientRect();
-                let increment = (targetRect.height || this.containerNode.scrollIncrement) * 3;
+                let increment = (targetRect.height || this._arrowscrollbox.scrollIncrement) * 3;
                 if (e.clientY - rect.top < targetRect.height) pixelsToScroll = increment * -1;
                 else if (rect.bottom - e.clientY < targetRect.height) pixelsToScroll = increment;
-                if (pixelsToScroll) this.containerNode.scrollByPixels(pixelsToScroll, false);
+                if (pixelsToScroll) this._arrowscrollbox.scrollByPixels(pixelsToScroll, false);
             }
-            this.containerNode
+            this._arrowscrollbox
                 .querySelectorAll("[dragpos]")
                 .forEach((item) => item.removeAttribute("dragpos"));
             if (!dt.types.includes("all-tabs-item") || !row || row.tab.multiselected) {
@@ -1377,7 +1367,7 @@
             if (row.tab.pinned !== draggedTab.pinned) return;
             // whether a tab will be placed before or after the drop target depends on 1) whether the drop target is above or below the dragged tab, and 2) whether the order of the tab list is reversed.
             let getPosition = () => {
-                return this.reversed
+                return this._reversed
                     ? row.tab._tPos < draggedTab._tPos
                     : row.tab._tPos > draggedTab._tPos;
             };
@@ -1388,17 +1378,17 @@
         // invoked when we drag over an element then leave it. clean up the dragpos attribute.
         // we actually do this for every row (wasteful, I know) since these events are dispatched too slowly. I guess it's a firefox bug, idk.
         _onDragLeave(e) {
-            let row = this.findRow(e.target);
+            let row = this._findRow(e.target);
             let dt = e.dataTransfer;
             dt.mozCursor = "auto";
             if (!dt.types.includes("all-tabs-item") || !row) return;
-            this.containerNode
+            this._arrowscrollbox
                 .querySelectorAll("[dragpos]")
                 .forEach((item) => item.removeAttribute("dragpos"));
         }
         // invoked when we finally release the dragged tab(s). figure out where to move the tab to, move it, do some cleanup.
         _onDrop(e) {
-            let row = this.findRow(e.target);
+            let row = this._findRow(e.target);
             let dt = e.dataTransfer;
             let tabBar = gBrowser.tabContainer;
 
@@ -1438,13 +1428,13 @@
             let draggedTab = e.dataTransfer.mozGetDataAt("all-tabs-item", 0);
             delete draggedTab._dragData;
             delete draggedTab.noCanvas;
-            for (let row of this.rows) row.removeAttribute("dragpos");
+            for (let row of this._rows) row.removeAttribute("dragpos");
         }
         // callback function for the TabMultiSelect custom event. this event doesn't get dispatched to a specific tab,
         // because multiple tabs can be multiselected by the same operation. so we can't use its target to specify which row's attributes to change.
         // we therefore have to update the "multiselected" attribute for every row.
         _onTabMultiSelect() {
-            for (let item of this.rows)
+            for (let item of this._rows)
                 !!item.tab.multiselected
                     ? item.setAttribute("multiselected", true)
                     : item.removeAttribute("multiselected");
@@ -1452,8 +1442,8 @@
         // invoked when mousing over a row. we want to speculatively warm up a tab when the user hovers it since it's possible they will click it.
         // there's a cache for this with a maximum limit, so if the user mouses over 3 tabs without clicking them, then a 4th, it will clear the 1st to make room.
         // this is the same thing the built-in tab bar does so we're just mimicking vanilla behavior here. this can be disabled with browser.tabs.remote.warmup.enabled
-        warmupRowTab(e, tab) {
-            let row = this.findRow(e.target);
+        _warmupRowTab(e, tab) {
+            let row = this._findRow(e.target);
             SessionStore.speculativeConnectOnTabHover(tab);
             if (row.closeButton.matches(":hover")) tab = gBrowser._findTabToBlurTo(tab);
             gBrowser.warmupTab(tab);
@@ -1461,7 +1451,7 @@
         // generate tooltip labels and decide where to anchor the tooltip. invoked when the vertical-tabs-tooltip is about to be shown.
         createTabTooltip(e) {
             e.stopPropagation();
-            let row = e.target.triggerNode ? this.findRow(e.target.triggerNode) : null;
+            let row = e.target.triggerNode ? this._findRow(e.target.triggerNode) : null;
             if (!row) return e.preventDefault();
             let { tab } = row;
             if (!tab) return e.preventDefault();
@@ -1481,7 +1471,7 @@
             const affectedTabsLength = contextTabInSelection ? selectedTabs.length : 1;
             // a bunch of localization
             if (row.closeButton.matches(":hover")) {
-                let shortcut = ShortcutUtils.prettifyShortcut(key_close);
+                let shortcut = ShortcutUtils.prettifyShortcut(window.key_close);
                 label = PluralForm.get(
                     affectedTabsLength,
                     gTabBrowserBundle.GetStringFromName("tabs.closeTabs.tooltip")
@@ -1538,8 +1528,8 @@
                     ]);
                 // if hovering the sound overlay, show the current media state of the tab, after the tab title.
                 // "playing" or "muted" or "media blocked"
-                if (row.soundOverlay.matches(":hover"))
-                    label += ` (${this.fluentStrings[
+                if (row.soundOverlay.matches(":hover") && this._fluentStrings)
+                    label += ` (${this._fluentStrings[
                         tab.hasAttribute("activemedia-blocked")
                             ? "blockedString"
                             : linkedBrowser.audioMuted
@@ -1632,12 +1622,12 @@
         }
         // container tab settings affect what we need to show in the "New Tab" button's tooltip and context menu.
         // so we need to observe this preference and respond accordingly.
-        handlePrivacyChange() {
+        _handlePrivacyChange() {
             let containersEnabled =
                 prefSvc.getBoolPref(userContextPref) &&
                 !PrivateBrowsingUtils.isWindowPrivate(window);
             const newTabLeftClickOpensContainersMenu = prefSvc.getBoolPref(containerOnClickPref);
-            let parent = this.newTabButton;
+            let parent = this._newTabButton;
             parent.removeAttribute("type");
             if (parent.menupopup) parent.menupopup.remove();
             if (containersEnabled) {
@@ -1663,7 +1653,7 @@
             }
         }
         // load our stylesheet as an author sheet. override it with userChrome.css and !important rules.
-        registerSheet() {
+        _registerSheet() {
             let css = /* css */ `
 #vertical-tabs-pane {
     --vertical-tabs-padding: 4px;
@@ -1750,7 +1740,7 @@
     -moz-box-align: center;
     padding-inline-end: 2px;
     margin: 0;
-    overflow-x: -moz-hidden-unscrollable;
+    overflow: hidden;
     position: relative;
 }
 #vertical-tabs-pane[unpinned]:not([expanded]) #vertical-tabs-list .all-tabs-item {
@@ -1772,7 +1762,7 @@
 #vertical-tabs-list .all-tabs-item[selected] {
     font-weight: normal;
     background-color: var(--arrowpanel-dimmed-further) !important;
-    --main-stripe-color: var(--arrowpanel-dimmed-even-further);
+    --main-stripe-color: var(--panel-item-active-bgcolor);
 }
 #vertical-tabs-list .all-tabs-item .all-tabs-button {
     min-height: revert;
@@ -2005,19 +1995,19 @@
     border-image: linear-gradient(
         to right,
         transparent,
-        var(--arrowpanel-dimmed-even-further) 1%,
-        var(--arrowpanel-dimmed-even-further) 25%,
+        var(--panel-item-active-bgcolor) 1%,
+        var(--panel-item-active-bgcolor) 25%,
         transparent 90%
     );
     border-image-slice: 1;
 }
 #vertical-tabs-list .all-tabs-item[dragpos="before"]::before {
     inset-block-start: 0;
-    border-top: 1px solid var(--arrowpanel-dimmed-even-further);
+    border-top: 1px solid var(--panel-item-active-bgcolor);
 }
 #vertical-tabs-list .all-tabs-item[dragpos="after"]::before {
     inset-block-end: 0;
-    border-bottom: 1px solid var(--arrowpanel-dimmed-even-further);
+    border-bottom: 1px solid var(--panel-item-active-bgcolor);
 }
 #vertical-tabs-pane[unpinned]:not([expanded])
     #vertical-tabs-list
@@ -2136,15 +2126,26 @@
     list-style-image: url("chrome://browser/skin/notification-icons/persistent-storage.svg");
 }
 #vertical-tabs-tooltip #places-tooltip-insecure-icon[type="extension-page"] {
-    list-style-image: url("chrome://browser/content/extension.svg");
+    list-style-image: url("chrome://mozapps/skin/extensions/extension.svg");
 }
 #vertical-tabs-tooltip #places-tooltip-insecure-icon[type="home-page"] {
-    list-style-image: url("chrome://browser/skin/tab.svg");
+    display: none;
 }
 #vertical-tabs-tooltip #places-tooltip-insecure-icon[type="error-page"] {
     list-style-image: url("chrome://global/skin/icons/warning.svg");
 }
-            `;
+#places-tooltip-insecure-icon {
+    -moz-context-properties: fill;
+    fill: currentColor;
+    width: 1em;
+    height: 1em;
+    margin-inline-start: 0;
+    margin-inline-end: .2em;
+    min-width: 1em !important;
+}
+#places-tooltip-insecure-icon[hidden] {
+    display: none;
+}`;
             let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
                 Ci.nsIStyleSheetService
             );
@@ -2152,11 +2153,15 @@
             if (sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) return; // avoid loading duplicate sheets on subsequent window launches.
             sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
         }
-        // there's a firefox bug where menuitems in the tab context menu don't have their localized labels initialized until the menu is opened on the *actual* tab bar.
-        // this bug actually affects the all-tabs menu but would affect anything trying to use the tab context menu that isn't the real tab bar.
-        // so we de-lazify the l10n IDs ourselves. lazy IDs are used for things that don't need to be managed at startup,
-        // but since we're increasing the number of elements that use this context menu, it's now pertinent to do this at startup.
-        l10nIfNeeded() {
+        // there's a firefox bug where menuitems in the tab context menu don't
+        // have their localized labels initialized until the menu is opened on
+        // the *actual* tab bar. this bug actually affects the all-tabs menu but
+        // would affect anything trying to use the tab context menu that isn't
+        // the real tab bar. so we de-lazify the l10n IDs ourselves. lazy IDs
+        // are used for things that don't need to be managed at startup, but
+        // since we're increasing the number of elements that use this context
+        // menu, it's now pertinent to do this at startup.
+        _l10nIfNeeded() {
             let lazies = document
                 .getElementById("tabContextMenu")
                 .querySelectorAll("[data-lazy-l10n-id]");
@@ -2168,7 +2173,8 @@
                 });
             }
         }
-        // what to do when a window is closed. if it's the last window, record data about the pane's state to the xulStore and prefs.
+        // what to do when a window is closed. if it's the last window, record
+        // data about the pane's state to the xulStore and prefs.
         uninit() {
             let enumerator = Services.wm.getEnumerator("navigator:browser");
             if (!enumerator.hasMoreElements()) {
@@ -2183,21 +2189,31 @@
         }
     }
 
-    // invoked when delayed window startup has finished, in other words after important components have been fully inited.
+    // invoked when delayed window startup has finished, in other words after
+    // important components have been fully inited.
     function init() {
-        window.verticalTabsPane = new VerticalTabsPaneBase(); // instantiate our tabs pane
-        SidebarUI.setPosition(); // set the sidebar position again since we modified this function, probably after it already set the position
-        // change the onUnload function (invoked when window is closed) so that it calls our uninit function too.
+        // instantiate our tabs pane
+        window.verticalTabsPane = new VerticalTabsPaneBase();
+        // set the sidebar position since we modified this function. change the
+        // onUnload function (invoked when window is closed) so that it calls
+        // our uninit function too.
+        SidebarUI.setPosition();
         eval(
             `gBrowserInit.onUnload = function ` +
                 gBrowserInit.onUnload
                     .toSource()
                     .replace(/(SidebarUI\.uninit\(\))/, `$1; verticalTabsPane.uninit()`)
         );
-        window.onunload = gBrowserInit.onUnload.bind(gBrowserInit); // reset the event handler since it used the bind method, which creates an anonymous version of the function that we can't change. just re-bind our new version.
-        let gNextWindowID = 0; // looks unread but this is required for the following functions
-        // make the PictureInPicture methods dispatch an event to the tab container informing us that a tab's "pictureinpicture" attribute has changed.
-        // this is how we capture all changes to the sound icon in real-time. obviously this behavior isn't built-in, I guess for sake of brevity.
+        // reset the event handler since it used the bind method, which creates
+        // an anonymous version of the function that we can't change. just
+        // re-bind our new version.
+        window.onunload = gBrowserInit.onUnload.bind(gBrowserInit);
+        // looks unread but this is required for the following functions
+        let gNextWindowID = 0;
+        // make the PictureInPicture methods dispatch an event to the tab
+        // container informing us that a tab's "pictureinpicture" attribute has
+        // changed. this is how we capture all changes to the sound icon in
+        // real-time. obviously this behavior isn't built-in.
         let handleRequestSrc = PictureInPicture.handlePictureInPictureRequest.toSource();
         if (!handleRequestSrc.includes("_tabAttrModified"))
             eval(
@@ -2226,13 +2242,16 @@
 
     // create the main button that goes in the tabs toolbar and opens the pane.
     function makeWidget() {
-        // if you create a widget in the first window, it will automatically be created in subsequent videos.
-        // so we stop the script from re-registering it on every subsequent window load.
+        // if you create a widget in the first window, it will automatically be
+        // created in subsequent videos. so we stop the script from
+        // re-registering it on every subsequent window load.
         if (CustomizableUI.getPlacementOfWidget("vertical-tabs-button", true)) return;
         CustomizableUI.createWidget({
             id: "vertical-tabs-button",
             type: "button",
-            defaultArea: CustomizableUI.AREA_TABSTRIP, // it should go in the tabs toolbar by default but can be moved to any customizable toolbar.
+            // it should go in the tabs toolbar by default but can be moved to
+            // any customizable toolbar.
+            defaultArea: CustomizableUI.AREA_TABSTRIP,
             label: config.l10n["Button label"],
             tooltiptext: config.l10n["Button tooltip"],
             localized: false,
@@ -2240,8 +2259,10 @@
                 Services.obs.notifyObservers(e.target.ownerGlobal, "vertical-tabs-pane-toggle");
             },
             onCreated(node) {
-                // an <observes> element is how we get the button to appear "checked" when the tabs pane is checked.
-                // it automatically sets its parent's specified attribute ("checked" and "positionstart") to match that of whatever it's observing.
+                // an <observes> element is how we get the button to appear
+                // "checked" when the tabs pane is checked. it automatically
+                // sets its parent's specified attribute ("checked" and
+                // "positionstart") to match that of whatever it's observing.
                 let doc = node.ownerDocument;
                 node.appendChild(
                     create(doc, "observes", {
@@ -2255,15 +2276,16 @@
                         "attribute": "positionstart",
                     })
                 );
-                if (key_toggleVerticalTabs)
+                if ("key_toggleVerticalTabs" in window) {
                     node.tooltipText += ` (${ShortcutUtils.prettifyShortcut(
-                        key_toggleVerticalTabs
+                        window.key_toggleVerticalTabs
                     )})`;
+                }
             },
         });
     }
 
-    // make the hotkey (ctrl + alt + V)
+    // make the hotkey (Ctrl+Alt+V by default)
     if (config.hotkey.enabled && _ucUtils?.registerHotkey)
         _ucUtils.registerHotkey(
             {
