@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Vertical Tabs Pane
-// @version        1.6.0
+// @version        1.6.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Create a vertical pane across from the sidebar that functions like the vertical
@@ -187,7 +187,7 @@
                 create(document, "toolbartabstop", { "aria-hidden": true })
             );
             this.newTabButton = this.buttonsRow.appendChild(
-                document.getElementById("new-tab-button").cloneNode(true)
+                CustomizableUI.getWidget("new-tab-button").forWindow(window).node.cloneNode(true)
             );
             this.newTabButton.id = "vertical-tabs-new-tab-button";
             this.newTabButton.setAttribute("flex", "1");
