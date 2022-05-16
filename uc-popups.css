@@ -479,16 +479,16 @@ panel[type="autocomplete-richlistbox"]
 }
 
 #DateTimePickerPanel {
-    --arrowpanel-background: var(--in-content-box-background) !important;
-    --arrowpanel-color: var(--lwt-text-color) !important;
-    --arrowpanel-border-color: var(--uc-menu-border-color) !important;
+    --arrowpanel-background: inherit !important;
+    --arrowpanel-color: inherit !important;
+    --arrowpanel-border-color: inherit !important;
 }
 
 @-moz-document url-prefix("chrome://global/content/timepicker.xhtml"),
     url-prefix("chrome://global/content/datepicker.xhtml")
 {
     body {
-        background-color: var(--in-content-box-background) !important;
+        background-color: var(--arrowpanel-background) !important;
         color: var(--font-color) !important;
     }
 
@@ -517,7 +517,7 @@ panel[type="autocomplete-richlistbox"]
     }
 
     .month-year-view {
-        background-color: var(--in-content-box-background) !important;
+        background-color: var(--arrowpanel-background) !important;
         opacity: 1 !important;
     }
 
@@ -1469,14 +1469,56 @@ panel[type="autocomplete-richlistbox"]
 }
 
 link[href="chrome://global/content/printPagination.css"]
-    ~ .container
-    :is(.toolbarButton, .toolbarCenter) {
-    border-color: var(--menu-separator-color) !important;
+    ~ .container {
+    border-radius: 4px !important;
+    overflow: hidden !important;
 }
 
 link[href="chrome://global/content/printPagination.css"]
-    ~ .container {
-    border-radius: 3px !important;
+    ~ .container
+    :is(.toolbarButton, .toolbarCenter) {
+    border-color: var(--menu-separator-color) !important;
+    border-block: none !important;
+}
+
+link[href="chrome://global/content/printPagination.css"]
+    ~ .container
+    .toolbarCenter {
+    min-width: calc(8px + 12ch) !important;
+    padding-inline: 24px !important;
+    box-sizing: border-box !important;
+    margin-block: 1px !important;
+}
+
+link[href="chrome://global/content/printPagination.css"]
+    ~ .container
+    :is(#navigatePrevious, #navigateNext)::after {
+	background-image: url("chrome://userchrome/content/arrow-left.svg") !important;
+}
+
+link[href="chrome://global/content/printPagination.css"]
+    ~ .container
+    #navigatePrevious:-moz-locale-dir(rtl)::after,
+link[href="chrome://global/content/printPagination.css"]
+    ~ .container
+    #navigateNext:-moz-locale-dir(ltr)::after {
+	scale: -1 1 !important;
+}
+
+link[href="chrome://global/content/printPagination.css"]
+    ~ .container
+    .startItem {
+	border-inline-start: none !important;
+	border-start-start-radius: 4px !important;
+	border-end-start-radius: 4px !important;
+}
+
+link[href="chrome://global/content/printPagination.css"]
+    ~ .container
+    .endItem {
+	border-inline-end: none !important;
+	border-start-end-radius: 4px !important;
+	border-end-end-radius: 4px !important;
 }
 
 @-moz-document url("chrome://browser/content/webrtcIndicator.xul")
@@ -1943,6 +1985,20 @@ link[href="chrome://global/content/printPagination.css"]
         background-position-x: 0;
         fill: currentColor;
         -moz-context-properties: fill, fill-opacity;
+    }
+
+    .permission {
+        color: var(--arrowanel-color) !important;
+    }
+
+    #perm-midi-row .permissionLabel {
+        background-image: url(chrome://userchrome/content/notifications/midi.svg);
+        background-size: 14px;
+        background-position-x: 1px;
+    }
+
+    #perm-midi-sysex-row .permissionLabel {
+        background-image: url(chrome://userchrome/content/material/midi-port.svg);
     }
 
     #perm-xr-row .permissionLabel {

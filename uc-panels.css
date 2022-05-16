@@ -631,8 +631,16 @@ popupnotification .popup-notification-body > .popup-notification-checkbox {
 
 .subviewradio {
     padding-inline-start: 0 !important;
-    min-height: var(--menuitem-height) !important;
     border: 0 !important;
+    border-radius: var(--arrowpanel-menuitem-border-radius) !important;
+}
+
+radiogroup:not([orient="horizontal"]) .subviewradio {
+    min-height: var(--subviewbutton-height) !important;
+}
+
+.eom-radio-group .subviewradio {
+    border-radius: 0 !important;
 }
 
 .subviewradio > .radio-check {

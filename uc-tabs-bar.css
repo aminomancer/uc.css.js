@@ -406,10 +406,6 @@ button.private-browsing-indicator:is(:hover:active, [open])::before {
     padding-inline-end: 2px;
 }
 
-panelview .all-tabs-button:not([disabled], [open]):focus {
-    background: none !important;
-}
-
 #allTabsMenu-allTabsViewTabs,
 #allTabsMenu-hiddenTabsView > .panel-subview-body {
     margin: var(--panel-subview-body-padding) !important;

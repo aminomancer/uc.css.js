@@ -1164,10 +1164,6 @@ I still prefer to disable auto install so I can control when I update. With auto
 
 Simply changes the update banners in the hamburger button app menu to make the strings a bit more concise. Instead of "Update available — download now" it will show "Download Nightly update" (or whatever your version is) for example.
 
-#### [Urlbar can Autofill Full Subdirectories](/JS/urlbarAutofillSubdir.uc.js):
-
-Allows the urlbar to autofill full file paths from history instead of just host names. For example, if you type "red" Firefox will normally just autofill "reddit.com" for the first result. With this script, if you visit reddit.com/r/FirefoxCSS more frequently than reddit.com, it will autofill the full URL to the subreddit, so you can navigate to it with just an Enter keypress. However, if you visit the root directory more often than any individual subdirectory, it will choose the root directory. For example, most people probably visit youtube.com way more often than any particular video page. So it will never suggest youtube.com/watch?v=whatever, since youtube.com will always have a higher visit count.
-
 #### [Urlbar Mods](/JS/urlbarMods.uc.js):
 
 ✨ Makes several optional modifications to the urlbar, urlbar results, search engines UI, and other subtle or complicated urlbar-related systems. I'll continue adding more features to this script, so it's worth updating from time to time.

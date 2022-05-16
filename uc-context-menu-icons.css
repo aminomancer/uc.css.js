@@ -30,6 +30,7 @@ menuitem#sanitizeItem > .menu-text,
 #context-sendpagetodevice > .menu-text,
 #context-selectall .menu-text,
 #menu_selectAll .menu-text,
+#menu_selectall .menu-text,
 #context-sendlinktodevice > .menu-text,
 #context-viewimageinfo .menu-text,
 #context-setDesktopBackground .menu-text,
@@ -423,6 +424,7 @@ menuitem#sanitizeItem::before,
 #context-sendlinktodevice::before,
 #context-selectall::before,
 #menu_selectAll::before,
+#menu_selectall::before,
 .textbox-contextmenu menuitem[data-l10n-id="text-action-select-all"]::before,
 .textbox-contextmenu menuitem[data-l10n-id="text-action-copy"]::before,
 .textbox-contextmenu menuitem[data-l10n-id="text-action-cut"]::before,
@@ -1008,7 +1010,7 @@ menuitem#sanitizeItem::before {
     background-image: url(chrome://userchrome/content/hide-password.svg);
 }
 
-:is(#context-selectall, #menu_selectAll)::before,
+:is(#context-selectall, #menu_selectAll, #menu_selectall)::before,
 .textbox-contextmenu menuitem[data-l10n-id="text-action-select-all"]::before {
     background-image: url(chrome://userchrome/content/devtools/tool-styleeditor.svg);
 }

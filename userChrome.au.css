@@ -1517,10 +1517,13 @@ animation-duration of 730ms, 71% is the point where we start the fade out. */
     }
 
     .midi-icon,
-    .midi-sysex-icon,
-    .popup-notification-icon[popupid="midi"],
-    .popup-notification-icon[popupid="midi-sysex"] {
+    .popup-notification-icon[popupid="midi"] {
         list-style-image: url(chrome://userchrome/content/notifications/midi.svg);
+    }
+
+    .midi-sysex-icon,
+    .popup-notification-icon[popupid="midi-sysex"] {
+        list-style-image: url(chrome://userchrome/content/material/midi-port.svg);
     }
 
     #canvas-notification-icon,

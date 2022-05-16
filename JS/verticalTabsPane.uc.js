@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Vertical Tabs Pane
-// @version        1.5.9
+// @version        1.6.0
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Create a vertical pane across from the sidebar that functions like the vertical
@@ -1101,11 +1101,17 @@
             if (e.altKey || e.shiftKey || accelKey) return;
             switch (e.key) {
                 case "ArrowLeft":
-                    this.navigateButtons(!window.RTL_UI, !this.noExpand);
+                    this.navigateButtons(
+                        !window.RTL_UI,
+                        !(this.noExpand && this.pane.getAttribute("unpinned"))
+                    );
                     break;
                 case "ArrowRight":
                     // Previous if UI is RTL, next if UI is LTR.
-                    this.navigateButtons(window.RTL_UI, !this.noExpand);
+                    this.navigateButtons(
+                        window.RTL_UI,
+                        !(this.noExpand && this.pane.getAttribute("unpinned"))
+                    );
                     break;
                 case "ArrowUp":
                     this.navigateButtons(true);
@@ -1755,7 +1761,7 @@
 }
 #vertical-tabs-list
     .all-tabs-item:is([selected], [multiselected], [usercontextid]:is(:hover, [_moz-menuactive]))
-    .all-tabs-button {
+    .all-tabs-button:not([disabled]) {
     background-image: linear-gradient(
         to right,
         var(--main-stripe-color) 0,
