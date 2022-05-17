@@ -1,3 +1,9 @@
+<!-- This Source Code Form is subject to the terms of the Creative Commons
+   - Attribution-NonCommercial-ShareAlike International License, v. 4.0.
+   - If a copy of the CC BY-NC-SA 4.0 was not distributed with this
+   - file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/
+   - or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA. -->
+
 <svg xmlns="http://www.w3.org/2000/svg" fill="context-fill" fill-opacity="context-fill-opacity" viewBox="0 0 16 16">
     <path
         d="M8 12.5c0-.827.673-1.5 1.5-1.5H11V9.5c0-.827.673-1.5 1.5-1.5a1.5 1.5 0 011.406.992l1.701-1.828A1.101 1.101 0 0015 5.331L10.911 4.6 8.985.735a1.1 1.1 0 00-1.969 0L5.089 4.6l-4.081.729a1.1 1.1 0 00-.615 1.834L3.32 10.31l-.609 4.36a1.1 1.1 0 001.6 1.127L8 13.873l3 1.567V14H9.5c-.827 0-1.5-.673-1.5-1.5z" />

@@ -14,6 +14,19 @@
     let uri = makeURI("data:text/css;charset=UTF=8," + encodeURIComponent(css));
     if (!sss.sheetRegistered(uri, sss.AUTHOR_SHEET))
         sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
+    /* necessary DOM:
+       <tooltip id="tabbrowser-tab-tooltip"
+                class="places-tooltip"
+                onpopupshowing="gBrowser.createTooltip(event);"
+                onpopuphiding="this.removeAttribute('position')">
+         <vbox class="places-tooltip-box" flex="1">
+           <description class="tooltip-label places-tooltip-title"/>
+           <hbox>
+             <image id="places-tooltip-insecure-icon"></image>
+             <description crop="center" class="tooltip-label places-tooltip-uri uri-element"/>
+           </hbox>
+         </vbox>
+       </tooltip> */
     /**
      * for a given tab on which the tooltip is anchored, set the tooltip icon accordingly.
      * for a secure tab, use the lock icon. for an insecure tab, use the insecure icon.
@@ -22,7 +35,7 @@
      * @param {object} icon (the tooltip icon's DOM node)
      * @param {object} tab (the tab's DOM node)
      */
-    function configureIcon(icon, tab) {
+    function setIdentityIcon(icon, tab) {
         let { linkedBrowser } = tab;
         let pending = tab.hasAttribute("pending") || !linkedBrowser.browsingContext;
         let docURI = pending
@@ -182,6 +195,6 @@
         title.textContent = label;
         let url = e.target.querySelector(".places-tooltip-uri");
         url.value = tab.linkedBrowser?.currentURI?.spec.replace(/^https:\/\//, "");
-        configureIcon(e.target.querySelector("#places-tooltip-insecure-icon"), tab);
+        setIdentityIcon(e.target.querySelector("#places-tooltip-insecure-icon"), tab);
     };
 })();
