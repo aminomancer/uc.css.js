@@ -5,6 +5,11 @@ from the style editor in the browser toolbox. */
 
 @-moz-document regexp("^((chrome|resource|file)://|about:).*$")
 {
+    #customization-container:-moz-lwtheme {
+        background-color: var(--in-content-bg-dark);
+        background-image: none;
+    }
+
     #back-button,
     .unified-nav-back[_moz-menuactive="true"]:-moz-locale-dir(ltr),
     .unified-nav-forward[_moz-menuactive="true"]:-moz-locale-dir(rtl) {

@@ -160,6 +160,43 @@ menupopup#viewSidebarMenu
     fill: var(--update-badge-bg) !important;
 }
 
+/* private bookmarks */
+:where(.webextension-browser-action, .eom-addon-button)[data-extensionid="private-bookmarks@rharel"i]
+    .toolbarbutton-icon {
+    list-style-image: url(chrome://userchrome/content/skin/secure-bookmark-hollow.svg) !important;
+}
+
+.webextension-browser-action[data-extensionid="private-bookmarks@rharel"i][style*="unlocked-bookmarks.svg"]
+    .toolbarbutton-icon {
+    list-style-image: url(chrome://userchrome/content/skin/secure-bookmark.svg) !important;
+}
+
+:is(.customization-target, .widget-overflow-list)
+    .webextension-browser-action[data-extensionid="private-bookmarks@rharel"i]
+    > .toolbarbutton-badge-stack
+    > .toolbarbutton-badge {
+    background-color: transparent !important;
+    background-size: 12px !important;
+    width: 12px !important;
+    height: 12px !important;
+    margin: -8px -7px 0 -7px !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    box-shadow: none !important;
+    color: transparent !important;
+}
+
+.webextension-browser-action[data-extensionid="private-bookmarks@rharel"i][badge="⌛"]
+    .toolbarbutton-badge {
+    background-image: url(chrome://userchrome/content/loading-spinner.svg) !important;
+    opacity: 0.75 !important;
+    fill: var(--busy-throbber-fill) !important;
+}
+
+.urlbar-addon-page-action[actionid="private-bookmarks_rharel"] {
+    list-style-image: url(chrome://userchrome/content/skin/secure-bookmark-hollow.svg) !important;
+}
+
 /* pushbullet, an extension for controlling, sharing stuff with, and receiving notifications from your phone */
 #sidebarMenu-popup
     #button__6540f1c5-ab3d-4eff-9ad2-79a95aec93d5_-sidebar-action:not([checked="true"]),
@@ -1000,7 +1037,8 @@ so by default we hide the border on extension panels (see userChrome.au.css) */
 #customizationui-widget-panel[viewId="PanelUI-webext-nordvpnproxy_nordvpn_com-browser-action-view"],
 #customizationui-widget-panel[viewId="PanelUI-webext-simple-translate_sienori-browser-action-view"],
 #customizationui-widget-panel[viewId="PanelUI-webext-ublock0_raymondhill_net-browser-action-view"],
-#customizationui-widget-panel[viewId^="PanelUI-webext-multithreaded-download-manager"] {
+#customizationui-widget-panel[viewId^="PanelUI-webext-multithreaded-download-manager"],
+#customizationui-widget-panel[viewId="PanelUI-webext-private-bookmarks_rharel-browser-action-view"] {
     --customized-webextension-panel-border: 1px solid var(--panel-border-color) !important;
     --customized-webextension-panel-stroke: var(--panel-border-color);
     --arrowpanel-border-color: var(--uc-menu-border-color) !important;
@@ -1012,7 +1050,8 @@ so by default we hide the border on extension panels (see userChrome.au.css) */
 #customizationui-widget-panel[viewId="PanelUI-webext-nordvpnproxy_nordvpn_com-browser-action-view"][side="top"],
 #customizationui-widget-panel[viewId="PanelUI-webext-simple-translate_sienori-browser-action-view"][side="top"],
 #customizationui-widget-panel[viewId="PanelUI-webext-ublock0_raymondhill_net-browser-action-view"][side="top"],
-#customizationui-widget-panel[viewId^="PanelUI-webext-multithreaded-download-manager"][side="top"] {
+#customizationui-widget-panel[viewId^="PanelUI-webext-multithreaded-download-manager"][side="top"],
+#customizationui-widget-panel[viewId="PanelUI-webext-private-bookmarks_rharel-browser-action-view"][side="top"] {
     --customized-webextension-panel-margin-bottom: -5px;
 }
 
@@ -1022,7 +1061,8 @@ so by default we hide the border on extension panels (see userChrome.au.css) */
 #customizationui-widget-panel[viewId="PanelUI-webext-nordvpnproxy_nordvpn_com-browser-action-view"][side="bottom"],
 #customizationui-widget-panel[viewId="PanelUI-webext-simple-translate_sienori-browser-action-view"][side="bottom"],
 #customizationui-widget-panel[viewId="PanelUI-webext-ublock0_raymondhill_net-browser-action-view"][side="bottom"],
-#customizationui-widget-panel[viewId^="PanelUI-webext-multithreaded-download-manager"][side="bottom"] {
+#customizationui-widget-panel[viewId^="PanelUI-webext-multithreaded-download-manager"][side="bottom"],
+#customizationui-widget-panel[viewId="PanelUI-webext-private-bookmarks_rharel-browser-action-view"][side="bottom"] {
     --customized-webextension-panel-margin-top: -5px;
 }
 

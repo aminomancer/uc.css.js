@@ -638,11 +638,6 @@ this way we don't animate tabs that were simply moved rather than created */
         margin-inline: calc(-1 * var(--arrowpanel-padding) / 2) !important;
     }
 
-    #customization-container {
-        background-color: var(--in-content-bg-dark);
-        background-image: none;
-    }
-
     #customization-footer {
         border: none;
         background-color: var(--in-content-box-bg-dark);

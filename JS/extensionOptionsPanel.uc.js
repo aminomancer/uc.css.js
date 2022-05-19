@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Extension Options Panel
-// @version        1.8.1
+// @version        1.8.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    This script creates a toolbar button that opens a popup panel where extensions can be configured, disabled, uninstalled, etc. Each extension gets its own button in the panel. Clicking an extension's button leads to a subview where you can jump to the extension's options, disable or enable the extension, uninstall it, configure automatic updates, disable/enable it in private browsing, view its source code in whatever program is associated with .xpi files, open the extension's homepage, or copy the extension's ID. The panel can also be opened from the App Menu, using the built-in "Add-ons and themes" button. Since v1.8, themes will also be listed in the panel. Hovering a theme will show a tooltip with a preview/screenshot of the theme, and clicking the theme will toggle it on or off. There are several translation and configuration options directly below.
@@ -223,12 +223,16 @@ class ExtensionOptionsWidget {
                 tooltiptext: l10n["Button tooltip"],
                 // if the button is middle-clicked, open the addons page instead of the panel
                 onClick: (event) => {
-                    if (event.button == 1) BrowserOpenAddonsMgr("addons://list/extension");
+                    if (event.button == 1) {
+                        event.target.ownerGlobal.BrowserOpenAddonsMgr("addons://list/extension");
+                    }
                 },
                 // create the panelview before the toolbar button
                 onBeforeCreated: (aDoc) => {
-                    let view = this.create(aDoc, "panelview", {
-                        id: this.viewId,
+                    let eop = aDoc.defaultView.extensionOptionsPanel;
+                    if (!eop) return;
+                    let view = eop.create(aDoc, "panelview", {
+                        id: eop.viewId,
                         class: "PanelUI-subView cui-widget-panelview",
                         flex: "1",
                         style: "min-width:30em",
@@ -236,13 +240,13 @@ class ExtensionOptionsWidget {
                     aDoc.getElementById("appMenu-viewCache").appendChild(view);
                     aDoc.defaultView.extensionOptionsPanel.panelview = view;
 
-                    if (this.config["Show header"]) {
+                    if (eop.config["Show header"]) {
                         let header = view.appendChild(
-                            this.create(aDoc, "vbox", { id: "eom-mainView-panel-header" })
+                            eop.create(aDoc, "vbox", { id: "eom-mainView-panel-header" })
                         );
-                        let heading = header.appendChild(this.create(aDoc, "label"));
+                        let heading = header.appendChild(eop.create(aDoc, "label"));
                         let label = heading.appendChild(
-                            this.create(aDoc, "html:span", {
+                            eop.create(aDoc, "html:span", {
                                 id: "eom-mainView-panel-header-span",
                                 role: "heading",
                                 "aria-level": "1",
@@ -253,7 +257,7 @@ class ExtensionOptionsWidget {
                     }
 
                     view.appendChild(
-                        this.create(aDoc, "vbox", {
+                        eop.create(aDoc, "vbox", {
                             id: view.id + "-body",
                             class: "panel-subview-body",
                         })
@@ -261,26 +265,26 @@ class ExtensionOptionsWidget {
 
                     // create the theme preview tooltip
                     aDoc.getElementById("mainPopupSet").appendChild(
-                        MozXULElement.parseXULToFragment(
+                        aDoc.defaultView.MozXULElement.parseXULToFragment(
                             `<tooltip id="eom-theme-preview-tooltip" noautohide="true" orient="vertical" onpopupshowing="extensionOptionsPanel.onTooltipShowing(event);"><vbox id="eom-theme-preview-box"><html:img id="eom-theme-preview-canvas"></html:img></vbox></tooltip>`
                         )
                     );
 
-                    this.fluentSetup(aDoc).then(() => this.swapAddonsButton(aDoc));
+                    eop.fluentSetup(aDoc).then(() => eop.swapAddonsButton(aDoc));
                 },
                 // populate the panel before it's shown
                 onViewShowing: (event) => {
                     if (
                         event.originalTarget ===
-                        event.target.ownerGlobal.extensionOptionsPanel.panelview
+                        event.target.ownerGlobal.extensionOptionsPanel?.panelview
                     )
                         event.target.ownerGlobal.extensionOptionsPanel.getAddonsAndPopulate(event);
                 },
                 // delete the panel if the widget node is destroyed
                 onDestroyed: (aDoc) => {
-                    let view = aDoc.getElementById(this.viewId);
+                    let view = aDoc.getElementById(aDoc.defaultView.extensionOptionsPanel?.viewId);
                     if (view) {
-                        CustomizableUI.hidePanelForNode(view);
+                        aDoc.defaultView.CustomizableUI.hidePanelForNode(view);
                         view.remove();
                     }
                 },
