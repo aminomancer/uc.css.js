@@ -247,20 +247,43 @@
         transition: none !important;
     }
 
+    @keyframes uc-tab-throbber-spinner-sprite {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-100%); }
+    }
+
+    @keyframes uc-tab-throbber-spinner-sprite-rtl {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(100%); }
+    }
+
     :root[uc-extension-id="private-bookmarks@rharel"] #on-hold-progress-bar {
         overflow: hidden !important;
-        width: 175px !important;
-        height: 175px !important;
+        width: 176px !important;
+        height: 176px !important;
         position: absolute !important;
         margin: 0 !important;
         animation: none !important;
-        background-image: url("chrome://userchrome/content/loading-spinner.svg") !important;
-        background-size: contain !important;
-        background-position: center !important;
-        background-repeat: no-repeat !important;
+        background:none !important;
         -moz-context-properties: fill !important;
         fill: var(--purple-30) !important;
         transition: none !important;
+    }
+
+    :root[uc-extension-id="private-bookmarks@rharel"] #on-hold-progress-bar::before {
+        content: "" !important;
+        display: -moz-box !important;
+        background-repeat: no-repeat !important;
+        background-image: url(chrome://userchrome/content/loading-spinner-sprite.svg) !important;
+        background-position: left center !important;
+        background-size: contain !important;
+        width: 2112px !important;
+        height: 176px !important;
+        animation: uc-tab-throbber-spinner-sprite 0.85s steps(12) infinite !important;
+    }
+
+    :root[uc-extension-id="private-bookmarks@rharel"] #on-hold-progress-bar:-moz-locale-dir(rtl)::before {
+        animation-name: uc-tab-throbber-spinner-sprite-rtl !important;
     }
 
     :root[uc-extension-id="private-bookmarks@rharel"] #on-hold-progress-indicator {

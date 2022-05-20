@@ -123,8 +123,7 @@ menupopup#viewSidebarMenu
 #sidebar-box[sidebarcommand="tab-stash_condordes_net-sidebar-action"]
     #sidebar-switcher-target
     > #sidebar-icon,
-#sidebarMenu-popup
-    #button_tab-stash_condordes_net-sidebar-action:not([checked="true"]),
+#sidebarMenu-popup #button_tab-stash_condordes_net-sidebar-action:not([checked="true"]),
 menupopup#viewSidebarMenu
     menuitem.menuitem-iconic.webextension-menuitem#menu_tab-stash_condordes_net-sidebar-action[style]:is([type="checkbox"], [type="radio"]):not([checked="true"]) {
     list-style-image: url(chrome://userchrome/content/material/tabstash-logo.svg) !important;
@@ -380,7 +379,8 @@ menupopup#viewSidebarMenu
     background-image: url(chrome://userchrome/content/material/tabstash-logo.svg);
 }
 
-:is(.menu-iconic, .menuitem-iconic)[id^="tab-stash_condordes_net-menuitem-"][image] .menu-iconic-icon {
+:is(.menu-iconic, .menuitem-iconic)[id^="tab-stash_condordes_net-menuitem-"][image]
+    .menu-iconic-icon {
     display: none;
 }
 
@@ -785,7 +785,8 @@ there's no need for a context menu item except when right-clicking something par
     -moz-box-flex: 1;
 }
 
-#ublock0_raymondhill_net-menuitem-_uBlock0-blockElementInFrame[label="Block element in frame…"] > label {
+#ublock0_raymondhill_net-menuitem-_uBlock0-blockElementInFrame[label="Block element in frame…"]
+    > label {
     display: none !important;
 }
 

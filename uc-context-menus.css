@@ -29,7 +29,8 @@ menupopup:not([type="arrow"]) menu > menupopup {
 }
 
 menupopup:not([height], .in-menulist) {
-    --menupopup-overflowing-inner-box-margin: 0;
+    /* temporarily set to 4px 0, due to a bug. should just be 0 */
+    --menupopup-overflowing-inner-box-margin: 4px 0;
 }
 
 .menupopup-arrowscrollbox {

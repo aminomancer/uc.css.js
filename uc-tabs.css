@@ -705,12 +705,19 @@ so in other words it won't show if audio is playing until you hover the general 
     fill: var(--loading-throbber-fill) !important;
 }
 
-/* this pref enables a special loading throbber animation that spins instead of bouncing horizontally */
+/* tabLoadingSpinner.uc.js enables a special loading throbber animation that spins instead of bouncing horizontally */
+@keyframes uc-tab-throbber-spinner-css {
+    to { rotate: 360deg; }
+}
 
-@keyframes uc-tab-throbber-spinner {
-    to {
-        rotate: 360deg;
-    }
+@keyframes uc-tab-throbber-spinner-sprite {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
+@keyframes uc-tab-throbber-spinner-sprite-rtl {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(100%); }
 }
 
 :root[sessionrestored] .tab-throbber[fadein] {
@@ -719,9 +726,9 @@ so in other words it won't show if audio is playing until you hover the general 
 }
 
 /* I made different versions of this animation to circumvent an SVG issue. if
-   you update Firefox and the throbber animation stops working, uncomment one of
-   the 2 alternate rules below. one of the 3 should work. you can do the same
-   thing with the all-tabs-menu loading icons in the next ruleset below. */
+you update Firefox and the throbber animation stops working, uncomment one of
+the 2 alternate rules below. one of the 3 should work. you can do the same
+thing with the all-tabs-menu loading icons in the next ruleset below. */
 :root[sessionrestored] .tab-throbber[throbber-loaded]::before {
     content: "" !important;
     display: -moz-box !important;
@@ -733,36 +740,53 @@ so in other words it won't show if audio is playing until you hover the general 
     background-repeat: no-repeat !important;
 
     /* ANIMATION METHOD #1:
-       this version of the animation is implemented by an <animateTransform> tag.
-       it's the most efficient method but it has broken once for a couple days due to an erroneous nightly patch. */
+    this version of the animation is implemented by an <animateTransform> tag.
+    it's the most efficient method but it has broken once for a couple days due to an erroneous nightly patch. */
 
-    background-image: url(chrome://userchrome/content/loading-spinner.svg) !important;
+    /* background-image: url(chrome://userchrome/content/loading-spinner.svg) !important; */
 
     /* ---------------------------------- */
 
     /* ANIMATION METHOD #2:
-       the animation is written in a <style> tag embedded inside the SVG code.
-       it's visually identical to method #1, but in terms of performance it is slightly less efficient.
-       the animation is applied to the compound vector path via the inline style attribute,
-       giving the element a CSS property "animation" that references the animation in the style tag.
-       use this if method #1 randomly breaks, *temporarily*. mozilla should patch such a bug quickly. */
+    the animation is written in a <style> tag embedded inside the SVG code.
+    it's visually identical to method #1, but in terms of performance it is slightly less efficient.
+    the animation is applied to the compound vector path via the inline style attribute,
+    giving the element a CSS property "animation" that references the animation in the style tag.
+    use this if method #1 randomly breaks, *temporarily*. mozilla should patch such a bug quickly. */
 
     /* background-image: url(chrome://userchrome/content/loading-spinner-css.svg) !important; */
 
     /* ---------------------------------- */
 
     /* ANIMATION METHOD #3:
-       use this if neither method #1 nor #2 works; or if you want to adjust the speed or other properties of the animation.
-       in this version, the SVG image itself is not animated at all. it's completely static.
-       instead, the entire animation is added post hoc via CSS in this user stylesheet. therefore, it should never break.
-       I believe this method is significantly less efficient than the two aforementioned methods,
-       because you don't get to use optimizations that stop SVG animations playing when they're not active.
-       my understanding is the animation is basically running 24/7 even when the spinner isn't visible,
-       because the spinner technically is always visible in order to support the sliding tab-hover transitions.
-       you can't see it but it's not hidden in the DOM sense. so I think that makes this method a last resort. */
+    use this if neither method #1 nor #2 works; or if you want to adjust the speed or other properties of the animation.
+    in this version, the SVG image itself is not animated at all. it's completely static.
+    instead, the entire animation is added post hoc via CSS in this user stylesheet. therefore, it should never break.
+    I believe this method is significantly less efficient than the two aforementioned methods,
+    because you don't get to use optimizations that stop SVG animations playing when they're not active.
+    my understanding is the animation is basically running 24/7 even when the spinner isn't visible,
+    because the spinner technically is always visible in order to support the sliding tab-hover transitions.
+    you can't see it but it's not hidden in the DOM sense. so I think that makes this method a last resort. */
 
     /* background-image: url(chrome://userchrome/content/loading-spinner-static.svg) !important;
-    animation: 0.85s steps(12, end) uc-tab-throbber-spinner infinite !important; */
+    animation: 0.85s steps(12, end) uc-tab-throbber-spinner-css infinite !important; */
+
+    /* ANIMATION METHOD #4:
+    this version of the animation is implemented in CSS on a sprite sheet.
+    it's like method #3 except it eliminates an issue with the vector illustration that makes the icon look like it wobbles. */
+    background-image: url(chrome://userchrome/content/loading-spinner-sprite.svg) !important;
+    background-position: left center !important;
+    width: 192px !important;
+    height: 100% !important;
+    animation: uc-tab-throbber-spinner-sprite 0.85s steps(12) infinite !important;
+}
+
+/* ANIMATION METHOD #4:
+this version of the animation is implemented in CSS on a sprite sheet.
+it's like method #3 except it eliminates an issue with the vector illustration that makes the icon look like it wobbles.
+comment this whole rule out if you're not using method #4. */
+:root[sessionrestored] .tab-throbber[throbber-loaded]:-moz-locale-dir(rtl)::before {
+    animation-name: uc-tab-throbber-spinner-sprite-rtl !important;
 }
 
 /* all tabs menu & vertical tabs pane (script) */
@@ -774,7 +798,7 @@ so in other words it won't show if audio is playing until you hover the general 
     /* list-style-image: url(chrome://userchrome/content/loading-spinner-css.svg) !important; */
 
     /* ANIMATION METHOD #3: */
-    /* animation: 0.85s steps(12, end) uc-tab-throbber-spinner infinite !important;
+    /* animation: 0.85s steps(12, end) uc-tab-throbber-spinner-css infinite !important;
     list-style-image: url(chrome://userchrome/content/loading-spinner-static.svg) !important; */
 }
 
