@@ -570,7 +570,7 @@
             }
 
             let busy = tab.getAttribute("busy");
-            setAttributes(row.firstElementChild, {
+            setAttributes(row.querySelector(".all-tabs-button"), {
                 busy,
                 label: tab.label,
                 image: !busy && tab.getAttribute("image"),
@@ -579,7 +579,7 @@
 
             this._setImageAttributes(row, tab);
 
-            let secondaryButton = row.querySelector(".all-tabs-secondary-button");
+            let secondaryButton = row.querySelector(".all-tabs-secondary-button[toggle-mute]");
             setAttributes(secondaryButton, {
                 muted: tab.muted,
                 soundplaying: tab.soundPlaying,
