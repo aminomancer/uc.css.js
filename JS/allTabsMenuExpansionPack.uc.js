@@ -1094,7 +1094,7 @@
     fill: currentColor;
     fill-opacity: 0;
     border-radius: var(--tab-button-border-radius, 2px);
-    list-style-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20'><rect fill='context-fill' fill-opacity='context-fill-opacity' width='20' height='20' rx='2' ry='2'/><path fill='context-fill' fill-opacity='context-stroke-opacity' d='M11.06 10l3.47-3.47a.75.75 0 00-1.06-1.06L10 8.94 6.53 5.47a.75.75 0 10-1.06 1.06L8.94 10l-3.47 3.47a.75.75 0 101.06 1.06L10 11.06l3.47 3.47a.75.75 0 001.06-1.06z'/></svg>");
+    list-style-image: url("chrome://devtools/skin/images/close.svg");
 }
 .panel-subview-body
     > .all-tabs-item:is(:hover, :focus-within)
