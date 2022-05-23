@@ -244,6 +244,19 @@ the built-in google engine without changing the engine's name */
     height: 16px;
 }
 
+:is(#urlbar-engine-one-off-item-DuckDuckGo, #searchbar-engine-one-off-item-DuckDuckGo) .button-icon
+{
+    display: none;
+}
+
+:is(#urlbar-engine-one-off-item-DuckDuckGo, #searchbar-engine-one-off-item-DuckDuckGo) .button-box::before
+{
+    content: url(chrome://userchrome/content/engines/duckduckgo.svg);
+    display: block;
+    width: 16px;
+    height: 16px;
+}
+
 .urlbarView .search-one-offs {
     min-height: var(--urlbar-height) !important;
     padding: 2px !important;

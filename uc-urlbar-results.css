@@ -591,9 +591,20 @@
 }
 
 .urlbarView-row[engine="Google"]:is([type="tabtosearch"], [type="tokenaliasengine"])
-    .urlbarView-favicon {
+    .urlbarView-favicon,
+.urlbarView-row[engine="Google"][type="search"] .urlbarView-favicon[src]:not([src^="chrome"]) {
     box-sizing: border-box !important;
     background: url(chrome://userchrome/content/engines/google.svg) no-repeat !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding-inline-start: 16px;
+}
+
+.urlbarView-row[engine="DuckDuckGo"]:is([type="tabtosearch"], [type="tokenaliasengine"])
+    .urlbarView-favicon,
+.urlbarView-row[engine="DuckDuckGo"][type="search"] .urlbarView-favicon[src]:not([src^="chrome"]) {
+    box-sizing: border-box !important;
+    background: url(chrome://userchrome/content/engines/duckduckgo.svg) no-repeat !important;
     width: 16px !important;
     height: 16px !important;
     padding-inline-start: 16px;
