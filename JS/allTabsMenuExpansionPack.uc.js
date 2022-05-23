@@ -1156,7 +1156,11 @@
 }
 #places-tooltip-insecure-icon[hidden] {
     display: none;
-}`;
+}
+panelview#allTabsMenu-allTabsView {
+    max-width: 1000px !important;
+}
+`;
         let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
             Ci.nsIStyleSheetService
         );
