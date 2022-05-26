@@ -13,11 +13,6 @@ if it's visible in the row beneath the tabs then it's probably in here. */
     border: none !important;
 }
 
-/* fix a silly bug */
-#mainPopupSet {
-    height: 0;
-}
-
 toolbarpaletteitem > toolbarspring {
     margin-block: calc((var(--urlbar-container-height) - var(--urlbar-height)) / 2) !important;
     outline: none !important;
@@ -31,6 +26,11 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
     max-height: var(--urlbar-height) !important;
     padding-block: 0 !important;
     margin-block: 5px !important;
+}
+
+#PersonalToolbar > toolbarpaletteitem > toolbarspring {
+    margin-block: revert !important;
+    margin-inline: 2px !important;
 }
 
 #wrapper-urlbar-container + toolbarpaletteitem > #search-container,
@@ -365,12 +365,20 @@ toolbarpaletteitem[place="toolbar"]:not([mousedown="true"]):focus-visible {
     visibility: visible !important;
     padding-inline: 2px !important;
     min-height: var(--urlbar-height) !important;
-    z-index: 3 !important;
     transition: min-height 200ms ease-in-out, max-height 200ms ease-in-out,
         opacity 200ms ease-in-out, transform 200ms ease-in-out !important;
     overflow-y: visible !important;
     padding-block: 0 var(--bookmark-block-padding) !important;
     outline: none !important;
+}
+
+#PersonalToolbar > * {
+    transition: opacity 200ms ease-in-out, transform 200ms ease-in-out !important;
+    overflow-y: visible !important;
+}
+
+#PersonalToolbar > toolbarpaletteitem:not([notransition])[place="toolbar"] {
+  transition: opacity 200ms ease-in-out, transform 200ms ease-in-out, border-width var(--drag-drop-transition-duration) ease-in-out !important;
 }
 
 #PersonalToolbar[customizing][draggingover] {
@@ -387,6 +395,13 @@ toolbarpaletteitem[place="toolbar"]:not([mousedown="true"]):focus-visible {
     overflow-y: clip !important;
     min-height: 0 !important;
     max-height: 0 !important;
+}
+
+:root[inFullscreen]:not([macOSNativeFullscreen], [customizing])
+    #PersonalToolbar:not([fullscreentoolbar="true"])
+    > *,
+#PersonalToolbar[collapsed="true"] > * {
+    overflow-y: clip !important;
     opacity: 0 !important;
     transform: translateY(-16px);
 }

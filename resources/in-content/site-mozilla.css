@@ -4,7 +4,23 @@
  * file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/
  * or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA. */
 
-/* CSS styles fixes for various mozilla sites */
+/* CSS style adjustments for various mozilla sites */
+
+@-moz-document domain("bugzilla.mozilla.org") {
+    :root {
+        --font-family-monospace: Fira Code UC, Fira Code, SF Mono, Menlo, Consolas, Monaco,
+            -moz-fixed, monospace !important;
+        --font-weight-monospace: 300 !important;
+    }
+
+    xmp,
+    pre,
+    code,
+    plaintext,
+    kbd {
+        font-weight: var(--font-weight-monospace, inherit);
+    }
+}
 
 @-moz-document domain("firefox-source-docs.mozilla.org") {
     /* make search highlight color match the selection color */
