@@ -16,7 +16,7 @@ tooltip {
     --uc-menu-border-color: hsl(233, 23%, 20%);
     --tooltip-bgcolor: hsl(233, 36%, 11%);
     --tooltip-color: white;
-    --tooltip-border-radius: 2px;
+    --tooltip-border-radius: 3px;
     --tooltip-border-color: var(--uc-menu-border-color);
     --tooltip-box-shadow: 0 0 5px hsla(0, 0%, 0%, 0.2);
 }

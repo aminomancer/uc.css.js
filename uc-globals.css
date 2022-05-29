@@ -50,8 +50,9 @@ but other than that these variables should be available everywhere. */
     --uc-desaturate-dimmed-further: hsla(234, 60%, 83%, 0.25);
     --uc-desaturate-dimmed-even-further: hsla(232, 60%, 85%, 0.3);
     --uc-content-text-a50: hsla(236, 100%, 85%, 0.5);
-    --uc-content-text-a80: hsla(0, 0%, 100%, 0.8);
+    --uc-content-text-a80: hsla(236, 50%, 85%, 0.8);
     --uc-panel-button-solid: hsl(234, 24%, 35%);
+    --uc-panel-button-faint-solid: hsl(234, 27%, 23%);
     --uc-panel-box-solid: hsl(233, 29%, 18%);
     --button-solid-hover-background: hsl(232, 29%, 26%);
     --button-solid-active-background: hsl(234, 26%, 30%);
@@ -281,9 +282,6 @@ but other than that these variables should be available everywhere. */
     --ebp-menulist-menuitem-hover-background-color: hsl(232, 21%, 40%);
     --ebp-menulist-separator-color: hsl(232, 21%, 43%);
     --ebp-favicon-background-color: var(--dialog-bgcolor);
-    --ui-solid-button-bgcolor: var(--uc-arrowpanel-dimmed);
-    --ui-solid-button-hover-bgcolor: var(--uc-arrowpanel-dimmed-further);
-    --ui-solid-button-active-bgcolor: var(--uc-arrowpanel-dimmed-even-further);
     --ebmp-hover-bgcolor: hsl(233, 24%, 33%);
     --ebmp-focus-bgcolor: hsl(233, 24%, 38%);
     --ebmp-double-focus-bgcolor: hsl(233, 22%, 43%);

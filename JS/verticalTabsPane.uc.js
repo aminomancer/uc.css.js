@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Vertical Tabs Pane
-// @version        1.6.2
+// @version        1.6.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Create a vertical pane across from the sidebar that functions like the vertical
@@ -1598,11 +1598,17 @@
         e.target.moveToAnchor(row, "after_start");
       }
       let title = e.target.querySelector(".places-tooltip-title");
-      let url = e.target.querySelector(".places-tooltip-uri");
-      let icon = e.target.querySelector("#places-tooltip-insecure-icon");
       title.textContent = label;
-      url.value = linkedBrowser?.currentURI?.spec.replace(/^https:\/\//, "");
+      if (tab.getAttribute("customizemode") === "true") {
+        e.target.querySelector(".places-tooltip-box").setAttribute("desc-hidden", "true");
+        return;
+      } else {
+        let url = e.target.querySelector(".places-tooltip-uri");
+        url.value = linkedBrowser?.currentURI?.spec.replace(/^https:\/\//, "");
+        e.target.querySelector(".places-tooltip-box").removeAttribute("desc-hidden");
+      }
       // show a lock icon to show tab security/encryption
+      let icon = e.target.querySelector("#places-tooltip-insecure-icon");
       let pending = tab.hasAttribute("pending") || !linkedBrowser.browsingContext;
       let docURI = pending
         ? linkedBrowser?.currentURI

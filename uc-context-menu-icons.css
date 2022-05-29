@@ -142,6 +142,9 @@ menuitem#menu_openAddons .menu-text,
     > .menu-text,
 #private-relay_firefox_com-menuitem-_fx-private-relay-manage-aliases:not(.menuitem-iconic)
     > .menu-text,
+:is(#contentAreaContextMenu, #toolbar-context-menu)
+    menu:not(.menu-iconic, .menuitem-iconic)[id^="gitzip-firefox-addons_gitzip_org-menuitem-"]
+    > .menu-text,
 #menu_pageInfo .menu-text,
 menuitem:is(#sync-setup, #sync-unverifieditem, #sync-reauthitem) .menu-text,
 menuitem:is(#sync-enable, #sync-syncnowitem) .menu-text,
@@ -390,6 +393,8 @@ menuitem#menu_openAddons::before,
 #private-relay_firefox_com-menuitem-_fx-private-relay-generate-alias:not(.menuitem-iconic)::before,
 #private-relay_firefox_com-menuitem-_fx-private-relay-use-existing-aliases:not(.menuitem-iconic)::before,
 #private-relay_firefox_com-menuitem-_fx-private-relay-manage-aliases:not(.menuitem-iconic)::before,
+:is(#contentAreaContextMenu, #toolbar-context-menu)
+    menu:not(.menu-iconic, .menuitem-iconic)[id^="gitzip-firefox-addons_gitzip_org-menuitem-"]::before,
 #menu_pageInfo::before,
 menuitem:is(#sync-setup, #sync-unverifieditem, #sync-reauthitem)::before,
 menuitem:is(#sync-enable, #sync-syncnowitem)::before,
@@ -846,6 +851,11 @@ menuitem#menu_openAddons::before,
 
 #private-relay_firefox_com-menuitem-_fx-private-relay-manage-aliases:not(.menuitem-iconic)::before {
     background-image: url(chrome://userchrome/content/settings.svg);
+}
+
+:is(#contentAreaContextMenu, #toolbar-context-menu)
+    menu:not(.menu-iconic, .menuitem-iconic)[id^="gitzip-firefox-addons_gitzip_org-menuitem-"]::before {
+    background-image: url(chrome://userchrome/content/material/zipper.svg);
 }
 
 menuitem:is(#sync-setup, #sync-unverifieditem)::before {

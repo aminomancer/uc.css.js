@@ -88,13 +88,21 @@ tooltip .uc-tooltip-box {
     color: inherit !important;
 }
 
+.places-tooltip-box[desc-hidden="true"] > hbox {
+    display: none !important;
+}
+
+.places-tooltip-box[desc-hidden="true"] .places-tooltip-title {
+    margin-bottom: 1px !important;
+}
+
 #places-tooltip-insecure-icon {
     -moz-context-properties: fill;
     fill: currentColor;
     width: 1em;
     height: 1em;
     margin-inline-start: 0;
-    margin-inline-end: .2em;
+    margin-inline-end: 0.25em !important;
     min-width: 1em !important;
 }
 
