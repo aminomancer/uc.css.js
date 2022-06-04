@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Backspace Panel Navigation
-// @version        1.1.0
+// @version        1.1.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Press backspace to navigate back/forward in popup panels.
@@ -8,19 +8,19 @@
 // ==/UserScript==
 
 (function () {
-    function init() {
-        const pc = Object.getPrototypeOf(PanelView.forNode(PanelUI.mainView));
-        eval(
-            `pc.keyNavigation = function ` +
-                pc.keyNavigation
-                    .toSource()
-                    .replace(/^\(/, "")
-                    .replace(/\)$/, "")
-                    .replace(/^keyNavigation\s*/, "")
-                    .replace(/^function\s*/, "")
-                    .replace(
-                        /(case \"ArrowLeft\"\:)/,
-                        `case "Backspace":
+  function init() {
+    const pc = Object.getPrototypeOf(PanelView.forNode(PanelUI.mainView));
+    eval(
+      `pc.keyNavigation = function ` +
+        pc.keyNavigation
+          .toSource()
+          .replace(/^\(/, "")
+          .replace(/\)$/, "")
+          .replace(/^keyNavigation\s*/, "")
+          .replace(/^function\s*/, "")
+          .replace(
+            /(case \"ArrowLeft\"\:)/,
+            `case "Backspace":
         if (tabOnly() || isContextMenuOpen()) {
           break;
         }
@@ -28,23 +28,23 @@
         if (PanelMultiView.forNode(this.node.panelMultiView).openViews.length > 1) {
           this.node.panelMultiView.goBack();
         } else {
-          PanelMultiView.forNode(this.node.panelMultiView)._panel.hidePopup(true);
+          PanelMultiView.forNode(this.node.panelMultiView).hidePopup(true);
         }
         break;
         $1`
-                    )
-        );
-    }
+          )
+    );
+  }
 
-    if (gBrowserInit.delayedStartupFinished) {
+  if (gBrowserInit.delayedStartupFinished) {
+    init();
+  } else {
+    let delayedListener = (subject, topic) => {
+      if (topic == "browser-delayed-startup-finished" && subject == window) {
+        Services.obs.removeObserver(delayedListener, topic);
         init();
-    } else {
-        let delayedListener = (subject, topic) => {
-            if (topic == "browser-delayed-startup-finished" && subject == window) {
-                Services.obs.removeObserver(delayedListener, topic);
-                init();
-            }
-        };
-        Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
-    }
+      }
+    };
+    Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
+  }
 })();
