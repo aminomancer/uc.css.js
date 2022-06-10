@@ -4,30 +4,82 @@
  * file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/
  * or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA. */
 
-/* my personal wikipedia dark mode theme. use this with dark reader for best results.
-enable/disable by setting this pref in about:config:
-userChrome.css.wikipedia.dark-theme-enabled
+/* Rules for Wikipedia. I recommend using the Vector 2022 theme and Dark Reader.
+Also includes an optional Wikipedia dark mode theme. I'm no longer actively developing it so you can consider it deprecated.
+I don't recommend using it anymore because the new Vector 2022 theme is good enough and Dark Reader does a good job of inverting it.
+Maintaining this custom theme has been a lot of work and it's practically impossible to account for everything because Wikipedia doesn't use modern CSS features.
+Everything had to be done essentially "by hand" and I have lost interest in doing that, especially for features most people don't use like Editing interfaces.
 
-I also use violentmonkey to add a clickable logo to the top of the page.
-You can install it at https://github.com/aminomancer/uc.css.js/blob/master/resources/in-content/wikiMods.user.js
-You can use greasemonkey or any other form of monkey that supports the document-body argument for the run-at metadata directive. */
+You can enable/disable the custom dark mode theme by setting this pref in about:config:
+userChrome.css.wikipedia.dark-theme-enabled
+It's designed for use with the Vector Legacy (2010) theme, so make sure you enable that.
+Again, I recommend leaving this disabled and just using the Vector 2022 theme and Dark Reader instead. */
 
 @-moz-document domain("wikipedia.org"), domain("wikimedia.org") {
     :root {
         --wiki-dummy-variable: initial;
+        --overlay-scrollbar-thumb-color: hsla(0, 0%, 45%, 0.75);
     }
 
-    .minerva-header .branding-box {
-        opacity: revert !important;
+    :root:not([data-darkreader-scheme="dark"]) {
+        --overlay-scrollbar-thumb-color: hsla(0, 0%, 52%, 0.6);
     }
 
-    .minerva-header
-        .branding-box
-        img[src="/static/images/mobile/copyright/wikipedia-wordmark-en.svg"] {
-        filter: invert(1);
+    /* Article preview popups. Make them scrollable, remove settings button, etc. */
+    .mwe-popups-extract {
+        overflow-y: scroll !important;
+        margin-block: 16px !important;
+        padding-block: 0 !important;
+        margin-inline-end: 8px !important;
+        padding-inline-end: 8px !important;
+        scrollbar-width: thin !important;
+        scrollbar-color: var(--overlay-scrollbar-thumb-color) transparent !important;
+    }
+
+    .mwe-popups .mwe-popups-extract::after {
+        display: none !important;
+    }
+
+    .mwe-popups .mwe-popups-extract + footer {
+        display: none !important;
+    }
+
+    .mwe-popups.mwe-popups-is-tall .mwe-popups-extract {
+        height: calc(176px + 34px) !important;
+    }
+
+    .mwe-popups.mwe-popups-is-not-tall .mwe-popups-extract {
+        min-height: calc(58px + 34px) !important;
+        max-height: calc(136px + 34px) !important;
+    }
+
+    .mwe-popups .mwe-popups-container.footer-empty .mwe-popups-extract .mwe-popups-scroll {
+        max-height: calc(379px + 34px) !important;
+    }
+
+    .mwe-popups.flipped-y .mwe-popups-container.footer-empty .mwe-popups-extract,
+    .mwe-popups.flipped-x-y .mwe-popups-container.footer-empty .mwe-popups-extract {
+        margin-bottom: 16px !important;
+    }
+
+    .mwe-popups.mwe-popups-is-not-tall:is(.flipped-y, .flipped-x-y):not(.mwe-popups-type-disambiguation) .mwe-popups-extract {
+        margin-bottom: calc(16px + var(--pointer-height)) !important;
+    }
+
+    .mwe-popups:not(.flipped-y, .flipped-x-y, .mwe-popups-image-pointer, .mwe-popups-type-disambiguation) .mwe-popups-extract {
+        margin-top: calc(16px + var(--pointer-height)) !important;
+    }
+
+    .mwe-popups.mwe-popups-is-tall.mwe-popups-image-pointer:is(.flipped-y, .flipped-x-y):not(.mwe-popups-type-disambiguation) .mwe-popups-extract {
+        margin-bottom: calc(16px + var(--pointer-height)) !important;
+    }
+
+    .mwe-popups.mwe-popups-is-tall.mwe-popups-image-pointer:not(.flipped-y, .flipped-x-y, .mwe-popups-type-disambiguation) .mwe-popups-extract {
+        margin-top: calc(16px + var(--pointer-height)) !important;
     }
 }
 
+/* The (deprecated) custom theme */
 @supports -moz-bool-pref("userChrome.css.wikipedia.dark-theme-enabled") {
 @-moz-document /* domain("wikipedia.org"), domain("wikimedia.org"), */
     /* exclude the mobile version since it already looks pretty good w/ dark reader */
@@ -2090,7 +2142,12 @@ You can use greasemonkey or any other form of monkey that supports the document-
         .oo-ui-outlineOptionWidget.oo-ui-flaggedElement-empty
         .oo-ui-labelElement-label {
         color: hsla(0, 0%, 100%, 0.5) !important;
-    }
+        }
+
+        .ext-templatewizard-templatetitlebar {
+            background-color: hsla(240, 1.4%, 18%, 0.4) !important;
+            border-color: transparent !important;
+        }
 
     .ve-ui-mwParameterResultWidget-name {
         padding: 0.1em 0.25em;
@@ -3388,7 +3445,6 @@ You can use greasemonkey or any other form of monkey that supports the document-
     }
 
     .oo-ui-menuSelectWidget {
-        overflow: hidden !important;
         color: var(--uc-wiki-text-60) !important;
         background-color: hsl(4, 2%, 2.5%) !important;
         border: none !important;
@@ -3570,9 +3626,15 @@ You can use greasemonkey or any other form of monkey that supports the document-
         min-height: 20px !important;
         height: min-content !important;
         width: min-content !important;
-    }
+        }
 
-    .oo-ui-fieldLayout-help > .oo-ui-buttonElement-button .oo-ui-icon-info {
+        .oo-ui-processDialog-actions-safe .oo-ui-actionWidget > .oo-ui-buttonElement-button,
+        .oo-ui-processDialog-actions-other .oo-ui-actionWidget > .oo-ui-buttonElement-button {
+            border-right-color: hsl(240, 1.4%, 15%) !important;
+            color: inherit !important;
+        }
+
+        .oo-ui-fieldLayout-help > .oo-ui-buttonElement-button .oo-ui-icon-info {
         position: static !important;
         display: block !important;
     }
@@ -3850,6 +3912,12 @@ You can use greasemonkey or any other form of monkey that supports the document-
         font-family: monospace !important;
         font-size: 13px !important;
     }
+
+        .oo-ui-messageWidget.oo-ui-messageWidget-block.oo-ui-flaggedElement-notice {
+        background-color: hsl(0, 0%, 8%) !important;
+            border-color: transparent !important;
+            border-radius: 4px !important;
+        }
 
     .mw-mmv-reuse-dialog .oo-ui-dropdownWidget.oo-ui-widget-enabled .oo-ui-dropdownWidget-handle {
         background-color: hsl(0, 0%, 8%) !important;
@@ -4839,7 +4907,7 @@ You can use greasemonkey or any other form of monkey that supports the document-
     }
 
     /* unnecessary if you use this with dark reader (which you probably should) */
-    /* .uls-menu .uls-search-label,
+    .uls-menu .uls-search-label,
     .uls-languagefilter-clear,
     :is(.oo-ui-toolbar-bar, .ve-ce-branchNode-slug, .toolbar.section-main, .wikiEditor-ui-toolbar)
         .oo-ui-iconElement-icon,
@@ -4857,6 +4925,8 @@ You can use greasemonkey or any other form of monkey that supports the document-
     .oo-ui-icon-wikiText,
     .mw-ui-icon-wikiText::before,
     .oo-ui-indicator-required,
+        .oo-ui-icon-infoFilled,
+        .mw-ui-icon-infoFilled::before,
     .mw-mmv-share-pane
         .oo-ui-buttonElement-framed.oo-ui-widget-enabled
         > .oo-ui-buttonElement-button
@@ -4879,6 +4949,6 @@ You can use greasemonkey or any other form of monkey that supports the document-
         .oo-ui-indicator-down,
     .mw-ui-icon.mw-ui-icon-preview-generic {
         filter: invert() !important;
-    } */
+    }
 }
 }

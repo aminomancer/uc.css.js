@@ -152,7 +152,7 @@ I also recommend setting the following prefs in `about:config`. There are two pr
 | widget.non-native-theme.gtk.scrollbar.thumb-size | Number | 0.818 | Make the scrollbar thumb 9px wide for GTK |
 | userChrome.css.remove-tooltip-borders | Boolean | false | Remove the thin border on tooltips. Not recommended |
 | userChrome.css.titlebar-buttons-on-left | Boolean | false | If true, move the titlebar buttons (close/min/max) to the left side of the window |
-| userChrome.css.wikipedia.dark-theme-enabled | Boolean | true | Enable the custom dark theme for Wikipedia.org |
+| userChrome.css.wikipedia.dark-theme-enabled | Boolean | false | Enable the custom dark theme for Wikipedia.org (this is deprecated, I recommend skipping it) |
 | userChrome.findbar.hide-on-unfocus | Boolean | false | Automatically hide the findbar when you blur (unfocus) it |
 | userChrome.panels.allow-height-flex | Boolean | false | If true, allow panels to flex down in height. Will cause stutters on weaker hardware |
 | userChrome.panels.vibrant-fxa-banner | Boolean | true | Highlight the profile button in the app menu with a vibrant background |
@@ -227,7 +227,7 @@ For linting/formatting, I use [Prettier](https://prettier.io/), [Stylelint](http
 
 <br/>
 
-The `userContent.css` file handles stuff like the devtools, some UI pages and context menus, plaintext pages, browser background color while pages are loading, and the built-in HTML video player. It also includes some reskins for specific websites and extensions, like my personal dark mode layout for Wikipedia, or [Dark Reader's](https://addons.mozilla.org/firefox/addon/darkreader) popup. The Firefox UI is increasingly integrated with content browsers, so it's not feasible to make a theme so dramatically different from vanilla Firefox without userContent.css. The big content area isn't the only browser, there are tiny ones all over the place. For example, several modal dialogs that appear to be part of the parent process are actually content.
+The `userContent.css` file handles stuff like the devtools, some UI pages and context menus, plaintext pages, browser background color while pages are loading, and the built-in HTML video player. It also includes some reskins for specific websites and extension pages/popups. The Firefox UI is increasingly integrated with content browsers, so it's not feasible to make a theme so dramatically different from vanilla Firefox without userContent.css. The big content area isn't the only browser, there are tiny ones all over the place. For example, several modal dialogs that appear to be part of the parent process are actually content.
 
 So `userContent.css` isn't strictly required for the rest of the theme to work, but without it you'll find some elements look inconsistent with the theme, and it also takes care of some issues that make the fabled global dark mode harder to realize. If you already have a `userContent` file, I'd suggest changing its name to `custom-content.css` and placing it in the [resources/in-content](/resources/in-content) folder. The theme doesn't include this file, since it's purely intended for end-user modifications, but it automatically loads the file if it exists. It loads last and therefore wins any conflicts of equal priority & specificity. You can also delete any of the [content stylesheets](/resources/in-content) you don't want to use, or remove their `@import` rules from userContent.css.
 

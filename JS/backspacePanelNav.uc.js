@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Backspace Panel Navigation
-// @version        1.1.1
+// @version        1.1.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Press backspace to navigate back/forward in popup panels.
@@ -28,7 +28,7 @@
         if (PanelMultiView.forNode(this.node.panelMultiView).openViews.length > 1) {
           this.node.panelMultiView.goBack();
         } else {
-          PanelMultiView.forNode(this.node.panelMultiView).hidePopup(true);
+          PanelMultiView.forNode(this.node.panelMultiView)?._panel.hidePopup(true);
         }
         break;
         $1`

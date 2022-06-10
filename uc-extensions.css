@@ -630,7 +630,7 @@ menuitem[id^="sort-bookmarks_heftig-menuitem"][label="Sort this folder…"]
 
 :is(#simple-translate_sienori-menuitem-_translatePage, #simple-translate_sienori-menuitem-_translatePageOnTab)[label^="Translate this page"]
     > .menu-accel-container::before {
-    content: "Translate this Page";
+    content: "Translate Page";
 }
 
 #simple-translate_sienori-menuitem-_translateLink[label="Translate selected link"]
@@ -643,7 +643,7 @@ menuitem[id^="sort-bookmarks_heftig-menuitem"][label="Sort this folder…"]
     content: "Translate Selected Text";
 }
 
-/* hide translate this page when right-clicking text input */
+/* hide translate this page menuitem when right-clicking text input */
 #contentAreaContextMenu
     #context-cut:not([hidden])
     ~ :is(.menu-iconic, .menuitem-iconic):is([label^="Translate this page"], [label="Simple Translate"]) {
