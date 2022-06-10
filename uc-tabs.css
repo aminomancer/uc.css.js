@@ -128,7 +128,7 @@
 #TabsToolbar .tabbrowser-tab :is(.tab-stack, .tab-background, .tab-content, .tab-loading-burst) {
     border-top-right-radius: 5px !important;
     border-top-left-radius: 5px !important;
-    overflow: hidden;
+    overflow: clip;
 }
 
 /* unround top left/right corner for first/last tab.
@@ -365,11 +365,6 @@ which could represent a security risk if you accidentally use the wrong containe
     .tabbrowser-tab .tab-stack::after {
         display: none !important;
     }
-
-    #TabsToolbar .tabbrowser-tab,
-    #TabsToolbar .tabbrowser-tab .tab-stack {
-        overflow: hidden !important;
-    }
 }
 
 /* style the loading burst that triggers when tab loading finishes */
@@ -380,6 +375,10 @@ which could represent a security risk if you accidentally use the wrong containe
 
 #TabsToolbar .tab-loading-burst::before {
     backface-visibility: hidden;
+}
+
+:root[sessionrestored] .tab-loading-burst[pinned]::before {
+	margin-inline-start: calc((var(--pinned-tab-width, 36px) / 2) - 2.5%) !important;
 }
 
 /* this is all the convoluted z-index stuff I was talking about — how tab depth is controlled. */

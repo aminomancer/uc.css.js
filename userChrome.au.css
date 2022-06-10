@@ -394,6 +394,11 @@ we can continue using opacity as the transition property. */
         opacity: 1;
     }
 
+    .tabbrowser-tab {
+        overflow: revert;
+        -moz-box-pack: center;
+    }
+
     /* make unpinned tabs stretch to fill the whole tab bar */
     .tabbrowser-tab[fadein]:not([style*="max-width"]) {
         max-width: var(--tab-max-width, 225px);
