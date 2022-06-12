@@ -18,11 +18,21 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
 @-moz-document domain("wikipedia.org"), domain("wikimedia.org") {
     :root {
         --wiki-dummy-variable: initial;
-        --overlay-scrollbar-thumb-color: hsla(0, 0%, 45%, 0.75);
-    }
 
-    :root:not([data-darkreader-scheme="dark"]) {
-        --overlay-scrollbar-thumb-color: hsla(0, 0%, 52%, 0.6);
+        /* dynamically adjust overlay scrollbar color for dark mode. we need to do this because the value of
+        the scrollbar thumb color determines whether it will get lighter or darker on :hover or :active.
+        in dark mode, we want it to get lighter so that it will have more contrast with the background.
+        but in light mode, we want it to get darker, again for the same reason. the darker the base color is,
+        past a certain threshold, Firefox will decide to make it lighter on hover/active. so basically,
+        we need to generate a dark value when dark reader is enabled, and a light value when it's not.
+        this isn't easy because wikipedia has no color-scheme rules. our only dark mode option is dark reader.
+        but we can't select for dark reader on the root element. but what dark reader does add are variables.
+        so we can use a variable to derive the scrollbar color, and add a fallback value that's substantially
+        different for the case when dark reader is not installed. basically we mix our dynamic color with
+        black to get our final value. the first color is either 83% lightness when dark reader is enabled, or
+        100% when it's disabled or uninstalled. so our mixed color is darker in dark mode than in light mode.
+        that's how we get on the low end of the threshold in dark mode and still on the high end in light mode. */
+        --overlay-scrollbar-thumb-color: color-mix(in srgb, var(--darkreader-neutral-text, hsl(0, 0%, 100%)), black 52%);
     }
 
     /* Article preview popups. Make them scrollable, remove settings button, etc. */

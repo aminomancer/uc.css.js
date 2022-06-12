@@ -111,6 +111,7 @@
 
 .tab-label-container {
     height: revert !important;
+    pointer-events: none !important;
 }
 
 .tab-label[attention]:not([selected="true"]) {
