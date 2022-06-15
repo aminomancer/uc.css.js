@@ -104,6 +104,8 @@ class EyedropperButton {
     this.mainMenuItem.removeAttribute("type");
   }
   afterLazyStartup() {
+    // Unfortunately this produces a benign console error in the devtools.
+    // No way around it, but it doesn't actually prevent the tool from working.
     Services.obs.notifyObservers(
       PanelMultiView.getViewNode(document, "appmenu-developer-tools-view"),
       "web-developer-tools-view-showing"

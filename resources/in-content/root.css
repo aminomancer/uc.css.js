@@ -50,8 +50,10 @@
         font-weight: 300;
     }
 
-    img.transparent {
-        background: var(--transparent-img-background) !important;
+    @media not print {
+        img.transparent {
+            background: var(--transparent-img-background) !important;
+        }
     }
 
     @media (prefers-color-scheme: dark) {

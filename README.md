@@ -381,7 +381,7 @@ let cmanifest = traverseToMainProfile('UChrm');
 
 5. Now save `config.js` and exit.
 6. Go back to your `chrome` folder, and open `boot.jsm` from the `utils` folder.
-7. Go to the end of line 59 (after the end of the function `resolveChromePath`) and hit enter twice to make two new lines, so you should now be at line 61.
+7. Go to the end of line 60 (after the end of the function `resolveChromePath`) and hit enter twice to make two new lines, so you should now be at line 62.
 8. Paste this:
 
 ```

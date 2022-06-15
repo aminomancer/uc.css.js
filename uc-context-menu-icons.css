@@ -162,9 +162,6 @@ menuitem#helpPolicySupport > .menu-text,
 :is(#new-tab-button-popup, .new-tab-popup)
     menuitem[command="Browser:OpenAboutContainers"]
     > .menu-text,
-:is(#new-tab-button-popup, .new-tab-popup)
-    menuitem[command="Browser:NewUserContextTab"]:not([class*="identity-icon"])
-    > .menu-text,
 #context-frameOsPid .menu-text,
 #context-reloadframe .menu-text,
 #context-reloadimage .menu-text,
@@ -411,8 +408,6 @@ menuitem#aboutName::before,
 menuitem#helpPolicySupport::before,
 :is(#new-tab-button-popup, .new-tab-popup)
     menuitem[command="Browser:OpenAboutContainers"]::before,
-:is(#new-tab-button-popup, .new-tab-popup)
-    menuitem[command="Browser:NewUserContextTab"]:not([class*="identity-icon"])::before,
 #context-viewbgimage::before,
 #context-setDesktopBackground::before,
 :is(#context-savepage, menu#pageStyleMenu, #addon_darkreader_org-menuitem-_DarkReader-addSite:not(.menuitem-iconic))::before,
@@ -882,12 +877,6 @@ menuitem#menu_preferences::before,
 :is(#new-tab-button-popup, .new-tab-popup)
     menuitem[command="Browser:OpenAboutContainers"]::before {
     background-image: url(chrome://userchrome/content/settings.svg);
-}
-
-:is(#new-tab-button-popup, .new-tab-popup)
-    menuitem[command="Browser:NewUserContextTab"]:not([class*="identity-icon"])::before {
-    background-image: url(chrome://userchrome/content/material/empty-container.svg);
-    color: var(--panel-description-color);
 }
 
 /* menu bar > help menu */
