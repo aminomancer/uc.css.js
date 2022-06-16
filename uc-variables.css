@@ -4,263 +4,257 @@
  * file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/
  * or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA. */
 
-/* this is where we override firefox's built-in variables.
-often we'll make our own variable in uc-globals, with a prefix like --uc-
-and override a built-in variable to reference the new custom variable.
-this way we get to share all the variables with content stylesheets.
-otherwise you might want to use --arrowpanel-dimmed in a webextension popup,
-but find that it's missing because docs do not inherit from <browser> elements. */
+/* this is where we override firefox's built-in variables. often we'll make our
+own variable in uc-globals, with a prefix like "--uc-" and override a built-in
+variable to reference the new custom variable. this way we get to share all the
+variables with content stylesheets. otherwise you might want to use
+--arrowpanel-dimmed in a webextension popup, but find that it's missing because
+docs do not inherit from <browser> elements. */
 
 :root,
 menupopup {
-    --lwt-accent-color: var(--uc-accent-color) !important;
-    --lwt-frame: var(--uc-frame-color) !important;
-    --lwt-text-color: var(--uc-arrowpanel-color) !important;
-    --toolbar-field-focus: hsla(233, 25%, 28%, 85%) !important;
-    --toolbar-field-color: var(--uc-toolbar-field-color) !important;
-    --toolbar-field-focus-color: var(--uc-toolbar-field-color) !important;
-    --lwt-toolbar-field-background-color: hsla(233, 25%, 28%, 85%) !important;
-    --lwt-toolbar-field-color: var(--uc-toolbar-field-color) !important;
-    --lwt-toolbar-field-focus: var(--toolbar-field-focus) !important;
-    --lwt-toolbar-field-focus-color: var(--uc-toolbar-color) !important;
-    --lwt-toolbar-field-highlight: var(--ui-selection-bgcolor) !important;
-    --lwt-toolbar-field-highlight-text: var(--ui-selection-color) !important;
-    --lwt-toolbar-field-highlight-disabled: var(--ui-selection-bgcolor-disabled) !important;
-    --identity-box-margin-inline: 3px !important;
-    --urlbar-box-bgcolor: var(--identity-box-solid-bg) !important;
-    --urlbar-box-focus-bgcolor: var(--button-bgcolor) !important;
-    --urlbar-box-hover-bgcolor: var(--button-hover-bgcolor) !important;
-    --urlbar-box-active-bgcolor: var(--button-active-bgcolor) !important;
-    --urlbar-box-text-color: inherit !important;
-    --urlbar-box-hover-text-color: var(--urlbar-box-text-color) !important;
-    --toolbar-bgcolor: var(--uc-toolbar-bgcolor) !important;
-    --toolbar-bgimage: none;
-    --toolbar-color: var(--uc-toolbar-color) !important;
-    --lwt-toolbarbutton-icon-fill: #fff !important;
-    --lwt-toolbarbutton-icon-fill-attention: var(--attention-color) !important;
-    --lwt-toolbar-field-icon-fill-attention: var(--attention-color) !important;
-    --lwt-tab-attention-icon-color: var(--attention-color) !important;
-    --lwt-background-alignment: right top !important;
-    --lwt-background-tiling: no-repeat !important;
-    --lwt-brighttext-url-color: var(--pink-action) !important;
-    --lwt-popup-brighttext-url-color: var(--lwt-brighttext-url-color) !important;
-    --toolbarbutton-border-radius: var(--general-button-border-radius) !important;
-    --toolbarbutton-icon-fill-opacity: 1 !important;
-    --arrowpanel-background: var(--uc-arrowpanel-background) !important;
-    --arrowpanel-color: var(--uc-arrowpanel-color) !important;
-    --arrowpanel-border-color: var(--uc-menu-border-color) !important;
-    --arrowpanel-faint: var(--uc-arrowpanel-faint);
-    --arrowpanel-dimmed: var(--uc-arrowpanel-dimmed) !important;
-    --arrowpanel-dimmed-further: var(--uc-arrowpanel-dimmed-further) !important;
-    --arrowpanel-dimmed-even-further: var(--uc-arrowpanel-dimmed-even-further) !important;
-    --desaturate-faint: var(--uc-desaturate-faint);
-    --desaturate-semi-faint: var(--uc-desaturate-semi-faint);
-    --desaturate-dimmed: var(--uc-desaturate-dimmed);
-    --desaturate-dimmed-further: var(--uc-desaturate-dimmed-further);
-    --desaturate-dimmed-even-further: var(--uc-desaturate-dimmed-even-further);
-    --panel-description-color: var(--uc-panel-description-color) !important;
-    --panel-shortcut-color: var(--uc-panel-shortcut-color) !important;
-    --panel-shortcut-focus: var(--uc-panel-shortcut-focus) !important;
-    --panel-disabled-color: var(--uc-menu-disabled-color) !important;
-    --panel-separator-color: var(--desaturate-dimmed) !important;
-    --toolbarbutton-checked-background: var(--uc-toolbarbutton-checked-background) !important;
-    --toolbarbutton-hover-background: var(--uc-toolbarbutton-hover-background) !important;
-    --toolbarbutton-active-background: var(--uc-toolbarbutton-active-background) !important;
-    --toolbarbutton-checked-active-background: var(--uc-toolbarbutton-checked-active-background);
-    --default-focusring: auto !important;
-    --button-bgcolor: var(--uc-arrowpanel-faint) !important;
-    --button-hover-bgcolor: var(--uc-arrowpanel-dimmed) !important;
-    --button-active-bgcolor: var(--uc-arrowpanel-dimmed-further) !important;
-    --button-primary-bgcolor: var(--purple-45) !important;
-    --button-primary-hover-bgcolor: var(--purple-40) !important;
-    --button-primary-active-bgcolor: var(--purple-35) !important;
-    --button-primary-color: var(--button-color) !important;
-    --urlbar-toolbar-height: var(--uc-urlbar-container-height) !important;
-    --urlbar-container-height: var(--uc-urlbar-container-height) !important;
-    --urlbar-height: calc(var(--urlbar-container-height) - 6px) !important;
-    --urlbar-container-padding: 1px !important;
-    --urlbar-icon-border-radius: var(--general-button-border-radius) !important;
-    --urlbar-icon-fill-opacity: 0.6 !important;
-    --urlbar-popup-url-color: var(--purple-35) !important;
-    --urlbar-popup-action-color: var(--pink-action) !important;
-    --urlbarView-item-inline-padding: 8px !important;
-    --tab-min-height: var(--uc-tab-min-height) !important;
-    --tab-block-margin: 0px !important;
-    --inline-tab-padding: 10px !important;
-    --tab-shadow-max-size: 0px !important;
-    --tabs-navbar-shadow-size: 0px !important;
-    --autocomplete-popup-background: var(--arrowpanel-background) !important;
-    --autocomplete-popup-color: var(--lwt-text-color) !important;
-    --autocomplete-popup-separator-color: var(--panel-separator-color) !important;
-    --autocomplete-popup-highlight-background: var(--arrowpanel-dimmed-further) !important;
-    --focus-outline-color: var(--global-focus-outline-color) !important;
-    --focus-outline-width: 2px;
-    --focus-outline-offset: 2px;
-    --places-cell-focus-bgcolor: var(--uc-places-cell-focus-bgcolor) !important;
-    --places-cell-hover-bgcolor: var(--uc-places-cell-hover-bgcolor) !important;
-    --download-progress-fill-color: var(--toolbarbutton-icon-fill-attention) !important;
-    --download-progress-paused-color: var(--desaturate-dimmed-further) !important;
-    --download-progress-flare-color: var(--purple-40) !important;
-    --downloads-item-height: 5.5em;
-    --downloads-item-font-size-factor: 0.9;
-    --downloads-item-details-opacity: 0.6;
-    --downloads-item-disabled-opacity: 0.6;
-    --ctrlTab-overlay-color: hsla(240, 3%, 4%, 0.5) !important;
-    --ctrlTab-panel-disabled-bgcolor: hsla(240, 2%, 9%, 0.8) !important;
-    --ctrlTab-panel-disabled-focused-bgcolor: hsla(240, 8%, 3%, 0.9) !important;
-    --ctrlTab-panel-bgcolor: hsla(240, 3%, 4%, 0.9) !important;
-    --ctrlTab-panel-focused-bgcolor: hsla(10, 12%, 2%, 0.99) !important;
-    --in-content-box-background: hsl(232, 32%, 14%) !important;
-    --in-content-box-border-color: rgba(249, 249, 250, 0.1) !important;
-    --in-content-button-background: var(--arrowpanel-dimmed) !important;
-    --in-content-button-background-hover: var(--arrowpanel-dimmed-further) !important;
-    --in-content-button-background-active: var(--arrowpanel-dimmed-even-further) !important;
-    --in-content-button-border-radius: var(--general-button-border-radius) !important;
-    --in-content-item-selected: var(--purple-40) !important;
-    --in-content-link-color: var(--purple-35) !important;
-    --in-content-link-color-hover: var(--purple-30) !important;
-    --in-content-link-color-active: var(--purple-30) !important;
-    --in-content-primary-button-background: var(--purple-40) !important;
-    --in-content-primary-button-background-hover: var(--purple-35) !important;
-    --in-content-primary-button-background-active: var(--purple-30) !important;
-    --in-content-primary-button-text-color: var(--light-on-dark-button-text-color) !important;
+  --lwt-accent-color: var(--uc-accent-color) !important;
+  --lwt-frame: var(--uc-frame-color) !important;
+  --lwt-text-color: var(--uc-arrowpanel-color) !important;
+  --toolbar-field-focus: hsla(233, 25%, 28%, 85%) !important;
+  --toolbar-field-color: var(--uc-toolbar-field-color) !important;
+  --toolbar-field-focus-color: var(--uc-toolbar-field-color) !important;
+  --lwt-toolbar-field-background-color: hsla(233, 25%, 28%, 85%) !important;
+  --lwt-toolbar-field-color: var(--uc-toolbar-field-color) !important;
+  --lwt-toolbar-field-focus: var(--toolbar-field-focus) !important;
+  --lwt-toolbar-field-focus-color: var(--uc-toolbar-color) !important;
+  --lwt-toolbar-field-highlight: var(--ui-selection-bgcolor) !important;
+  --lwt-toolbar-field-highlight-text: var(--ui-selection-color) !important;
+  --lwt-toolbar-field-highlight-disabled: var(--ui-selection-bgcolor-disabled) !important;
+  --identity-box-margin-inline: 3px !important;
+  --urlbar-box-bgcolor: var(--identity-box-solid-bg) !important;
+  --urlbar-box-focus-bgcolor: var(--button-bgcolor) !important;
+  --urlbar-box-hover-bgcolor: var(--button-hover-bgcolor) !important;
+  --urlbar-box-active-bgcolor: var(--button-active-bgcolor) !important;
+  --urlbar-box-text-color: inherit !important;
+  --urlbar-box-hover-text-color: var(--urlbar-box-text-color) !important;
+  --toolbar-bgcolor: var(--uc-toolbar-bgcolor) !important;
+  --toolbar-bgimage: none;
+  --toolbar-color: var(--uc-toolbar-color) !important;
+  --lwt-toolbarbutton-icon-fill: #fff !important;
+  --lwt-toolbarbutton-icon-fill-attention: var(--attention-color) !important;
+  --lwt-toolbar-field-icon-fill-attention: var(--attention-color) !important;
+  --lwt-tab-attention-icon-color: var(--attention-color) !important;
+  --lwt-background-alignment: right top !important;
+  --lwt-background-tiling: no-repeat !important;
+  --lwt-brighttext-url-color: var(--pink-action) !important;
+  --lwt-popup-brighttext-url-color: var(--lwt-brighttext-url-color) !important;
+  --toolbarbutton-border-radius: var(--general-button-border-radius) !important;
+  --toolbarbutton-icon-fill-opacity: 1 !important;
+  --arrowpanel-background: var(--uc-arrowpanel-background) !important;
+  --arrowpanel-color: var(--uc-arrowpanel-color) !important;
+  --arrowpanel-border-color: var(--uc-menu-border-color) !important;
+  --arrowpanel-faint: var(--uc-arrowpanel-faint);
+  --arrowpanel-dimmed: var(--uc-arrowpanel-dimmed) !important;
+  --arrowpanel-dimmed-further: var(--uc-arrowpanel-dimmed-further) !important;
+  --arrowpanel-dimmed-even-further: var(--uc-arrowpanel-dimmed-even-further) !important;
+  --desaturate-faint: var(--uc-desaturate-faint);
+  --desaturate-semi-faint: var(--uc-desaturate-semi-faint);
+  --desaturate-dimmed: var(--uc-desaturate-dimmed);
+  --desaturate-dimmed-further: var(--uc-desaturate-dimmed-further);
+  --desaturate-dimmed-even-further: var(--uc-desaturate-dimmed-even-further);
+  --panel-description-color: var(--uc-panel-description-color) !important;
+  --panel-shortcut-color: var(--uc-panel-shortcut-color) !important;
+  --panel-shortcut-focus: var(--uc-panel-shortcut-focus) !important;
+  --panel-disabled-color: var(--uc-menu-disabled-color) !important;
+  --panel-separator-color: var(--desaturate-dimmed) !important;
+  --toolbarbutton-checked-background: var(--uc-toolbarbutton-checked-background) !important;
+  --toolbarbutton-hover-background: var(--uc-toolbarbutton-hover-background) !important;
+  --toolbarbutton-active-background: var(--uc-toolbarbutton-active-background) !important;
+  --toolbarbutton-checked-active-background: var(--uc-toolbarbutton-checked-active-background);
+  --default-focusring: auto !important;
+  --button-bgcolor: var(--uc-arrowpanel-faint) !important;
+  --button-hover-bgcolor: var(--uc-arrowpanel-dimmed) !important;
+  --button-active-bgcolor: var(--uc-arrowpanel-dimmed-further) !important;
+  --button-primary-bgcolor: var(--purple-45) !important;
+  --button-primary-hover-bgcolor: var(--purple-40) !important;
+  --button-primary-active-bgcolor: var(--purple-35) !important;
+  --button-primary-color: var(--button-color) !important;
+  --urlbar-toolbar-height: var(--uc-urlbar-container-height) !important;
+  --urlbar-container-height: var(--uc-urlbar-container-height) !important;
+  --urlbar-height: calc(var(--urlbar-container-height) - 6px) !important;
+  --urlbar-container-padding: 1px !important;
+  --urlbar-icon-border-radius: var(--general-button-border-radius) !important;
+  --urlbar-icon-fill-opacity: 0.6 !important;
+  --urlbar-popup-url-color: var(--purple-35) !important;
+  --urlbar-popup-action-color: var(--pink-action) !important;
+  --urlbarView-item-inline-padding: 8px !important;
+  --tab-min-height: var(--uc-tab-min-height) !important;
+  --tab-block-margin: 0px !important;
+  --inline-tab-padding: 10px !important;
+  --tab-shadow-max-size: 0px !important;
+  --tabs-navbar-shadow-size: 0px !important;
+  --autocomplete-popup-background: var(--arrowpanel-background) !important;
+  --autocomplete-popup-color: var(--lwt-text-color) !important;
+  --autocomplete-popup-separator-color: var(--panel-separator-color) !important;
+  --autocomplete-popup-highlight-background: var(--arrowpanel-dimmed-further) !important;
+  --focus-outline-color: var(--global-focus-outline-color) !important;
+  --focus-outline-width: 2px;
+  --focus-outline-offset: 2px;
+  --places-cell-focus-bgcolor: var(--uc-places-cell-focus-bgcolor) !important;
+  --places-cell-hover-bgcolor: var(--uc-places-cell-hover-bgcolor) !important;
+  --download-progress-fill-color: var(--toolbarbutton-icon-fill-attention) !important;
+  --download-progress-paused-color: var(--desaturate-dimmed-further) !important;
+  --download-progress-flare-color: var(--purple-40) !important;
+  --downloads-item-height: 5.5em;
+  --downloads-item-font-size-factor: 0.9;
+  --downloads-item-details-opacity: 0.6;
+  --downloads-item-disabled-opacity: 0.6;
+  --ctrlTab-overlay-color: hsla(240, 3%, 4%, 0.5) !important;
+  --ctrlTab-panel-disabled-bgcolor: hsla(240, 2%, 9%, 0.8) !important;
+  --ctrlTab-panel-disabled-focused-bgcolor: hsla(240, 8%, 3%, 0.9) !important;
+  --ctrlTab-panel-bgcolor: hsla(240, 3%, 4%, 0.9) !important;
+  --ctrlTab-panel-focused-bgcolor: hsla(10, 12%, 2%, 0.99) !important;
+  --in-content-box-background: hsl(232, 32%, 14%) !important;
+  --in-content-box-border-color: rgba(249, 249, 250, 0.1) !important;
+  --in-content-button-background: var(--arrowpanel-dimmed) !important;
+  --in-content-button-background-hover: var(--arrowpanel-dimmed-further) !important;
+  --in-content-button-background-active: var(--arrowpanel-dimmed-even-further) !important;
+  --in-content-button-border-radius: var(--general-button-border-radius) !important;
+  --in-content-item-selected: var(--purple-40) !important;
+  --in-content-link-color: var(--purple-35) !important;
+  --in-content-link-color-hover: var(--purple-30) !important;
+  --in-content-link-color-active: var(--purple-30) !important;
+  --in-content-primary-button-background: var(--purple-40) !important;
+  --in-content-primary-button-background-hover: var(--purple-35) !important;
+  --in-content-primary-button-background-active: var(--purple-30) !important;
+  --in-content-primary-button-text-color: var(--light-on-dark-button-text-color) !important;
 
-    --menu-background-color: var(--arrowpanel-background) !important;
-    --menu-color: var(--ui-text-80) !important;
-    --menuitem-hover-background-color: var(--arrowpanel-dimmed) !important;
-    --menuitem-disabled-hover-background-color: initial !important;
-    --menu-disabled-color: var(--panel-disabled-color) !important;
-    --menu-border-color: var(--uc-menu-border-color) !important;
-    --menu-icon-opacity: 1 !important;
-    --panel-separator-margin: var(--uc-panel-separator-margin) !important;
+  --menu-background-color: var(--arrowpanel-background) !important;
+  --menu-color: var(--ui-text-80) !important;
+  --menuitem-hover-background-color: var(--arrowpanel-dimmed) !important;
+  --menuitem-disabled-hover-background-color: initial !important;
+  --menu-disabled-color: var(--panel-disabled-color) !important;
+  --menu-border-color: var(--uc-menu-border-color) !important;
+  --menu-icon-opacity: 1 !important;
+  --panel-separator-margin: var(--uc-panel-separator-margin) !important;
 
-    --panel-item-bgcolor: var(--arrowpanel-faint);
-    --panel-item-hover-bgcolor: var(--arrowpanel-dimmed) !important;
-    --panel-item-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
-    --panelview-toolbarbutton-hover-bgcolor: var(--panel-item-hover-bgcolor) !important;
-    --panelview-toolbarbutton-active-bgcolor: var(--panel-item-active-bgcolor) !important;
-    --panelview-toolbarbutton-focus-box-shadow: none !important;
-    --buttons-destructive-bgcolor: var(--uc-destructive-bgcolor) !important;
-    --buttons-destructive-hover-bgcolor: var(--uc-destructive-hover-bgcolor) !important;
-    --buttons-destructive-active-bgcolor: var(--uc-destructive-active-bgcolor) !important;
-    --buttons-destructive-color: var(--uc-destructive-color) !important;
-    --panel-banner-item-color: hsl(240, 9.1%, 97.8%);
-    --panel-banner-item-background-color: hsla(109.9, 90.9%, 47.3%, 0.1);
-    --panel-banner-item-hover-bgcolor: hsla(109.9, 90.9%, 47.3%, 0.15);
-    --panel-banner-item-active-bgcolor: hsla(109.9, 90.9%, 47.3%, 0.2);
-    --panel-banner-item-info-icon-bgcolor: var(--arrowpanel-color) !important;
+  --panel-item-bgcolor: var(--arrowpanel-faint);
+  --panel-item-hover-bgcolor: var(--arrowpanel-dimmed) !important;
+  --panel-item-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
+  --panelview-toolbarbutton-hover-bgcolor: var(--panel-item-hover-bgcolor) !important;
+  --panelview-toolbarbutton-active-bgcolor: var(--panel-item-active-bgcolor) !important;
+  --panelview-toolbarbutton-focus-box-shadow: none !important;
+  --buttons-destructive-bgcolor: var(--uc-destructive-bgcolor) !important;
+  --buttons-destructive-hover-bgcolor: var(--uc-destructive-hover-bgcolor) !important;
+  --buttons-destructive-active-bgcolor: var(--uc-destructive-active-bgcolor) !important;
+  --buttons-destructive-color: var(--uc-destructive-color) !important;
+  --panel-banner-item-color: hsl(240, 9.1%, 97.8%);
+  --panel-banner-item-background-color: hsla(109.9, 90.9%, 47.3%, 0.1);
+  --panel-banner-item-hover-bgcolor: hsla(109.9, 90.9%, 47.3%, 0.15);
+  --panel-banner-item-active-bgcolor: hsla(109.9, 90.9%, 47.3%, 0.2);
+  --panel-banner-item-info-icon-bgcolor: var(--arrowpanel-color) !important;
 
-    --arrowpanel-menuitem-inline-margin: var(
-        --uc-arrowpanel-menuitem-inline-margin,
-        4px
-    ) !important;
-    --arrowpanel-menuitem-margin: 0px var(--arrowpanel-menuitem-inline-margin) !important;
-    --arrowpanel-menuitem-padding-block: var(
-        --uc-arrowpanel-menuitem-padding-block,
-        6px
-    ) !important;
-    --arrowpanel-menuitem-padding-inline: var(
-        --uc-arrowpanel-menuitem-padding-inline,
-        6px
-    ) !important;
-    --arrowpanel-menuitem-padding: var(--arrowpanel-menuitem-padding-block)
-        var(--arrowpanel-menuitem-padding-inline) !important;
-    --arrowpanel-padding: var(--uc-arrowpanel-root-padding, 12px) !important;
-    --panel-subview-body-padding-magnitude: var(--arrowpanel-menuitem-inline-margin);
-    --panel-subview-body-padding: var(--panel-subview-body-padding-magnitude) 0 !important;
-    --arrowpanel-menuitem-border-radius: var(--context-menuitem-border-radius) !important;
-    --arrowpanel-border-radius: var(--menupopup-border-radius) !important;
-    --panelui-subview-transition-duration: 150ms;
+  --arrowpanel-menuitem-inline-margin: var(--uc-arrowpanel-menuitem-inline-margin, 4px) !important;
+  --arrowpanel-menuitem-margin: 0px var(--arrowpanel-menuitem-inline-margin) !important;
+  --arrowpanel-menuitem-padding-block: var(--uc-arrowpanel-menuitem-padding-block, 6px) !important;
+  --arrowpanel-menuitem-padding-inline: var(
+    --uc-arrowpanel-menuitem-padding-inline,
+    6px
+  ) !important;
+  --arrowpanel-menuitem-padding: var(--arrowpanel-menuitem-padding-block)
+    var(--arrowpanel-menuitem-padding-inline) !important;
+  --arrowpanel-padding: var(--uc-arrowpanel-root-padding, 12px) !important;
+  --panel-subview-body-padding-magnitude: var(--arrowpanel-menuitem-inline-margin);
+  --panel-subview-body-padding: var(--panel-subview-body-padding-magnitude) 0 !important;
+  --arrowpanel-menuitem-border-radius: var(--context-menuitem-border-radius) !important;
+  --arrowpanel-border-radius: var(--menupopup-border-radius) !important;
+  --panelui-subview-transition-duration: 150ms;
 
-    --error-text-color: var(--warning-color) !important;
-    --buttons-primary-button-bgcolor: var(--uc-parent-primary-button-background) !important;
-    --buttons-primary-button-hover-bgcolor: var(
-        --uc-parent-primary-button-background-hover
-    ) !important;
-    --buttons-primary-button-active-bgcolor: var(
-        --uc-parent-primary-button-background-active
-    ) !important;
-    --buttons-primary-button-color: var(--uc-parent-primary-button-text-color) !important;
-    --buttons-secondary-hover-bgcolor: var(--arrowpanel-dimmed) !important;
-    --buttons-secondary-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
+  --error-text-color: var(--warning-color) !important;
+  --buttons-primary-button-bgcolor: var(--uc-parent-primary-button-background) !important;
+  --buttons-primary-button-hover-bgcolor: var(
+    --uc-parent-primary-button-background-hover
+  ) !important;
+  --buttons-primary-button-active-bgcolor: var(
+    --uc-parent-primary-button-background-active
+  ) !important;
+  --buttons-primary-button-color: var(--uc-parent-primary-button-text-color) !important;
+  --buttons-secondary-hover-bgcolor: var(--arrowpanel-dimmed) !important;
+  --buttons-secondary-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
 
-    --vertical-tabs-pane-background: var(--ui-secondary-bg) !important;
-    --vpn-on-icon: url(chrome://userchrome/content/skin/vpn-on-light.svg);
+  --vertical-tabs-pane-background: var(--ui-secondary-bg) !important;
+  --vpn-on-icon: url(chrome://userchrome/content/skin/vpn-on-light.svg);
 
-    --cfr-animation-duration: 0.35s;
-    --cfr-button-addons-icon: url(chrome://userchrome/content/material/extension.svg) !important;
-    --cfr-button-features-icon: url(chrome://userchrome/content/skin/tip.svg) !important;
-    --cfr-button-highlights-icon: url(chrome://global/skin/icons/highlights.svg) !important;
+  --cfr-animation-duration: 0.35s;
+  --cfr-button-addons-icon: url(chrome://userchrome/content/material/extension.svg) !important;
+  --cfr-button-features-icon: url(chrome://userchrome/content/skin/tip.svg) !important;
+  --cfr-button-highlights-icon: url(chrome://global/skin/icons/highlights.svg) !important;
 }
 
 :root[lwthemetextcolor="bright"] {
-    --toolbarbutton-icon-fill: var(--lwt-toolbarbutton-icon-fill) !important;
-    --vpn-on-icon: url(chrome://userchrome/content/skin/vpn-on-dark.svg);
+  --toolbarbutton-icon-fill: var(--lwt-toolbarbutton-icon-fill) !important;
+  --vpn-on-icon: url(chrome://userchrome/content/skin/vpn-on-dark.svg);
 }
 
 toolbar {
-    --toolbarbutton-hover-background: hsla(236, 82%, 83%, 0.17) !important;
-    --toolbarbutton-active-background: hsla(236, 82%, 83%, 0.22) !important;
-    --toolbarbutton-checked-background: hsla(236, 82%, 83%, 0.13) !important;
+  --toolbarbutton-hover-background: hsla(236, 82%, 83%, 0.17) !important;
+  --toolbarbutton-active-background: hsla(236, 82%, 83%, 0.22) !important;
+  --toolbarbutton-checked-background: hsla(236, 82%, 83%, 0.13) !important;
 }
 
 panel {
-    --warning-icon-bgcolor: var(--low-warning-icon-background) !important;
+  --warning-icon-bgcolor: var(--low-warning-icon-background) !important;
 }
 
 #urlbar {
-    --urlbar-height: calc(var(--urlbar-container-height) - 6px) !important;
+  --urlbar-height: calc(var(--urlbar-container-height) - 6px) !important;
 }
 
 #confirmation-hint {
-    --arrowpanel-background: var(--confirmation-hint-bgcolor) !important;
-    --arrowpanel-color: var(--confirmation-hint-color) !important;
-    --arrowpanel-border-color: var(--confirmation-hint-border-color) !important;
+  --arrowpanel-background: var(--confirmation-hint-bgcolor) !important;
+  --arrowpanel-color: var(--confirmation-hint-color) !important;
+  --arrowpanel-border-color: var(--confirmation-hint-border-color) !important;
 }
 
 .tab-loading-burst {
-    --tab-loading-fill: var(--lwt-toolbarbutton-icon-fill-attention) !important;
+  --tab-loading-fill: var(--lwt-toolbarbutton-icon-fill-attention) !important;
 }
 
 :root,
 #TabsToolbar {
-    --toolbarbutton-inner-padding: var(--uc-toolbarbutton-inner-padding, 8px) !important;
+  --toolbarbutton-inner-padding: var(--uc-toolbarbutton-inner-padding, 8px) !important;
 }
 
 #urlbar-container,
 #urlbar {
-    --urlbar-toolbar-height: var(--uc-urlbar-container-height) !important;
-    --urlbar-container-height: var(--uc-urlbar-container-height) !important;
+  --urlbar-toolbar-height: var(--uc-urlbar-container-height) !important;
+  --urlbar-container-height: var(--uc-urlbar-container-height) !important;
 }
 
 #urlbar,
 #searchbar {
-    --urlbar-box-bgcolor: var(--urlbar-dim-button-bgcolor) !important;
-    --urlbar-box-focus-bgcolor: var(--desaturate-faint) !important;
-    --urlbar-box-hover-bgcolor: var(--desaturate-semi-faint) !important;
-    --urlbar-box-active-bgcolor: var(--desaturate-dimmed) !important;
-    --urlbar-box-text-color: inherit !important;
-    --urlbar-box-hover-text-color: var(--urlbar-box-text-color) !important;
+  --urlbar-box-bgcolor: var(--urlbar-dim-button-bgcolor) !important;
+  --urlbar-box-focus-bgcolor: var(--desaturate-faint) !important;
+  --urlbar-box-hover-bgcolor: var(--desaturate-semi-faint) !important;
+  --urlbar-box-active-bgcolor: var(--desaturate-dimmed) !important;
+  --urlbar-box-text-color: inherit !important;
+  --urlbar-box-hover-text-color: var(--urlbar-box-text-color) !important;
 }
 
 #appMenu-multiView {
-    --subviewbutton-height: 32px !important;
-    --arrowpanel-menuitem-padding-inline: 8px !important;
-    --arrowpanel-menuitem-padding: var(--arrowpanel-menuitem-padding-block)
-        var(--arrowpanel-menuitem-padding-inline) !important;
+  --subviewbutton-height: 32px !important;
+  --arrowpanel-menuitem-padding-inline: 8px !important;
+  --arrowpanel-menuitem-padding: var(--arrowpanel-menuitem-padding-block)
+    var(--arrowpanel-menuitem-padding-inline) !important;
 }
 
 #identity-popup {
-    --subviewbutton-height: 30px !important;
+  --subviewbutton-height: 30px !important;
 }
 
 printpreview-pagination {
-    --shadow-30: 0 0 15px 0 hsla(0, 0%, 10%, 0.2), 0 0 3px 0 hsla(0, 0%, 5%, 0.2) !important;
-    --border-active-shadow: var(--global-focus-outline-color) !important;
+  --shadow-30: 0 0 15px 0 hsla(0, 0%, 10%, 0.2), 0 0 3px 0 hsla(0, 0%, 5%, 0.2) !important;
+  --border-active-shadow: var(--global-focus-outline-color) !important;
 }
 
 /* fluent reveal toolbar buttons */
 :root[fluent-reveal-hover] #navigator-toolbox :is(.toolbarbutton-1, .bookmark-item) {
-    --toolbarbutton-hover-background: hsla(236, 82%, 83%, 0.05) !important;
-    --toolbarbutton-active-background: hsla(236, 82%, 83%, 0.1) !important;
+  --toolbarbutton-hover-background: hsla(236, 82%, 83%, 0.05) !important;
+  --toolbarbutton-active-background: hsla(236, 82%, 83%, 0.1) !important;
 }

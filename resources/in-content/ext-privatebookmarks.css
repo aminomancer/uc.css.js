@@ -8,316 +8,325 @@
 
 @-moz-document regexp("^moz-extension://.*/popup_ui/.*")
 {
-    :root[uc-extension-id="private-bookmarks@rharel"] {
-        letter-spacing: inherit !important;
-    }
+  :root[uc-extension-id="private-bookmarks@rharel"] {
+    letter-spacing: inherit !important;
+  }
 
-    html:root[uc-extension-id="private-bookmarks@rharel"] {
-        align-items: revert !important;
-        display: revert !important;
-        height: revert !important;
-        justify-content: revert !important;
-    }
+  html:root[uc-extension-id="private-bookmarks@rharel"] {
+    align-items: revert !important;
+    display: revert !important;
+    height: revert !important;
+    justify-content: revert !important;
+  }
 
-    :root[uc-extension-id="private-bookmarks@rharel"] body {
-        background: var(--uc-arrowpanel-background) !important;
-        color: var(--uc-arrowpanel-color) !important;
-        margin: 0 !important;
-        font-size: 12px !important;
-        box-sizing: border-box !important;
-        overflow: hidden !important;
-    }
+  :root[uc-extension-id="private-bookmarks@rharel"] body {
+    background: var(--uc-arrowpanel-background) !important;
+    color: var(--uc-arrowpanel-color) !important;
+    margin: 0 !important;
+    font-size: 12px !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+  }
 
-    :root[uc-extension-id="private-bookmarks@rharel"] a {
-        color: var(--uc-parent-link-color-active) !important;
+  :root[uc-extension-id="private-bookmarks@rharel"] a {
+    color: var(--uc-parent-link-color-active) !important;
+  }
+
+  :root[uc-extension-id="private-bookmarks@rharel"] .section-header {
+    background: none !important;
+    box-sizing: border-box !important;
+    padding-block: 8px !important;
+    block-size: 40px !important;
+    max-block-size: unset !important;
+    min-height: 40px !important;
+    height: revert !important;
+    white-space: nowrap !important;
+    padding-inline: 16px !important;
+    font-family: inherit !important;
+    font-weight: normal !important;
+    font-size: 1.1em !important;
+    line-height: 28px !important;
+    text-align: center !important;
+    color: inherit !important;
+    letter-spacing: inherit !important;
+    box-shadow: none !important;
+    border-color: var(--uc-desaturate-dimmed) !important;
+    margin-inline: 4px !important;
+  }
+
+  :root[uc-extension-id="private-bookmarks@rharel"] .panel {
+    align-items: stretch !important;
+    justify-content: center !important;
+    row-gap: 16px !important;
+  }
+
+  :root[uc-extension-id="private-bookmarks@rharel"] #main-menu-panel {
+    padding: 16px 32px !important;
+  }
+
+  :root[uc-extension-id="private-bookmarks@rharel"] .primary-buttons-container {
+    display: flex !important;
+    flex-flow: column nowrap !important;
+    flex-grow: 1 !important;
+    align-items: stretch !important;
+    justify-content: center !important;
+  }
+
+  :root[uc-extension-id="private-bookmarks@rharel"] .secondary-buttons-container {
+    display: flex !important;
+    flex-flow: column nowrap !important;
+    align-items: stretch !important;
+    justify-content: center !important;
+  }
+
+  :root[uc-extension-id="private-bookmarks@rharel"] button {
+    background-color: var(--uc-arrowpanel-dimmed) !important;
+    border-radius: var(--general-button-border-radius) !important;
+    border: 1px solid transparent !important;
+    margin: 0 !important;
+    transition: none !important;
+  }
+
+  :root[uc-extension-id="private-bookmarks@rharel"] button:hover {
+    background-color: var(--uc-parent-primary-button-background) !important;
+  }
+
+  :root[uc-extension-id="private-bookmarks@rharel"] button:hover:active {
+    background-color: var(--uc-parent-primary-button-background-hover) !important;
+  }
+
+  :root[uc-extension-id="private-bookmarks@rharel"] button.negative,
+  :root[uc-extension-id="private-bookmarks@rharel"] .secondary-buttons-container button {
+    background-color: transparent !important;
+    border-color: var(--uc-arrowpanel-dimmed) !important;
+  }
+
+  :root[uc-extension-id="private-bookmarks@rharel"] button.negative:hover,
+  :root[uc-extension-id="private-bookmarks@rharel"] .secondary-buttons-container button:hover {
+    border-color: transparent !important;
+    background-color: var(--uc-arrowpanel-dimmed-further) !important;
+  }
+
+  :root[uc-extension-id="private-bookmarks@rharel"] button.negative:hover:active,
+  :root[uc-extension-id="private-bookmarks@rharel"]
+    .secondary-buttons-container
+    button:hover:active {
+    background-color: var(--uc-arrowpanel-dimmed-even-further) !important;
+  }
+
+  :root[uc-extension-id="private-bookmarks@rharel"] button.large {
+    align-items: center !important;
+    width: auto !important;
+    border-radius: 4px !important;
+    flex-grow: 1 !important;
+  }
+
+  :root[uc-extension-id="private-bookmarks@rharel"] button.large > label {
+    flex-grow: 0 !important;
+    font-size: 18px !important;
+  }
+
+  :root[uc-extension-id="private-bookmarks@rharel"] .section {
+    display: flex !important;
+    flex-direction: column !important;
+    row-gap: 4px !important;
+  }
+
+  :root[uc-extension-id="private-bookmarks@rharel"] .section-item {
+    margin: 0 !important;
+  }
+
+  :root[uc-extension-id="private-bookmarks@rharel"] #authentication-message {
+    margin-bottom: 4px !important;
+  }
+
+  :root[uc-extension-id="private-bookmarks@rharel"] input {
+    flex-grow: 1 !important;
+    padding: 8px !important;
+    min-width: 0 !important;
+    border-color: transparent !important;
+    border-radius: var(--general-button-border-radius) !important;
+    background-color: var(--uc-arrowpanel-dimmed) !important;
+    appearance: none !important;
+  }
+
+  :root[uc-extension-id="private-bookmarks@rharel"] #authentication-buttons-container {
+    row-gap: 8px !important;
+    margin-block: 16px 0 !important;
+  }
+
+  :root[uc-extension-id="private-bookmarks@rharel"] #footer {
+    background: none !important;
+    border: none !important;
+    border-top: 1px solid var(--uc-desaturate-dimmed) !important;
+    height: 36px !important;
+    padding: 4px 4px 0 8px !important;
+    margin: 0 4px 4px !important;
+    color: inherit !important;
+    column-gap: 2px !important;
+  }
+
+  :root[uc-extension-id="private-bookmarks@rharel"] #footer > #extension-info {
+    flex-grow: 1 !important;
+    font-size: 0.9em !important;
+    color: var(--uc-menu-disabled-color) !important;
+  }
+
+  :root[uc-extension-id="private-bookmarks@rharel"] #footer > .icon-button {
+    cursor: revert !important;
+    height: 28px !important;
+    width: 28px !important;
+    filter: none !important;
+    padding: 0 !important;
+    padding-inline-start: 28px !important;
+    box-sizing: border-box !important;
+    background-repeat: no-repeat !important;
+    background-size: 16px !important;
+    background-position: center !important;
+    -moz-context-properties: fill, fill-opacity !important;
+    fill: currentColor !important;
+    color: inherit !important;
+    border-radius: var(--general-button-border-radius) !important;
+  }
+
+  :root[uc-extension-id="private-bookmarks@rharel"] #footer > .icon-button:hover {
+    background-color: var(--uc-arrowpanel-dimmed) !important;
+  }
+
+  :root[uc-extension-id="private-bookmarks@rharel"] #footer > .icon-button:hover:active {
+    background-color: var(--uc-arrowpanel-dimmed-further) !important;
+  }
+
+  :root[uc-extension-id="private-bookmarks@rharel"] #footer > #theme-button {
+    background-image: url(chrome://browser/skin/customize.svg) !important;
+  }
+
+  :root[uc-extension-id="private-bookmarks@rharel"] #footer > #options-button {
+    background-image: url(chrome://global/skin/icons/settings.svg) !important;
+  }
+
+  :root[uc-extension-id="private-bookmarks@rharel"] button:not(.large) > img {
+    box-sizing: border-box !important;
+    height: 16px !important;
+    margin-inline: 0 6px !important;
+    width: 16px !important;
+    order: 0 !important;
+    padding-inline-start: 16px !important;
+    filter: none !important;
+    background-repeat: no-repeat !important;
+    background-size: 16px !important;
+    background-position: center !important;
+    -moz-context-properties: fill, fill-opacity !important;
+    fill: currentColor !important;
+    color: inherit !important;
+  }
+
+  :root[uc-extension-id="private-bookmarks@rharel"] button:not(.large) > label {
+    order: 1 !important;
+    flex-grow: 0 !important;
+  }
+
+  :root[uc-extension-id="private-bookmarks@rharel"]
+    :is(#change-password-button, #confirm-authentication-button)
+    > img {
+    background-image: url(chrome://browser/skin/login.svg) !important;
+    rotate: -90deg !important;
+  }
+
+  :root[uc-extension-id="private-bookmarks@rharel"] #cancel-authentication-button > img {
+    background-image: url(chrome://userchrome/content/close-big.svg) !important;
+  }
+
+  :root[uc-extension-id="private-bookmarks@rharel"]
+    :is(#on-hold-animation-gear-A, #on-hold-animation-gear-B) {
+    display: none !important;
+  }
+
+  :root[uc-extension-id="private-bookmarks@rharel"] :is(#on-hold-panel, #success-panel) {
+    align-items: center !important;
+    transition: none !important;
+  }
+
+  @keyframes uc-tab-throbber-spinner-sprite {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  @keyframes uc-tab-throbber-spinner-sprite-rtl {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  :root[uc-extension-id="private-bookmarks@rharel"] #on-hold-progress-bar {
+    overflow: hidden !important;
+    width: 176px !important;
+    height: 176px !important;
+    position: absolute !important;
+    margin: 0 !important;
+    animation: none !important;
+    background: none !important;
+    -moz-context-properties: fill !important;
+    fill: var(--purple-30) !important;
+    transition: none !important;
+  }
+
+  :root[uc-extension-id="private-bookmarks@rharel"] #on-hold-progress-bar::before {
+    content: "" !important;
+    display: -moz-box !important;
+    background-repeat: no-repeat !important;
+    background-image: url(chrome://userchrome/content/loading-spinner-sprite.svg) !important;
+    background-position: left center !important;
+    background-size: contain !important;
+    width: 2112px !important;
+    height: 176px !important;
+    animation: uc-tab-throbber-spinner-sprite 0.85s steps(12) infinite !important;
+  }
+
+  :root[uc-extension-id="private-bookmarks@rharel"]
+    #on-hold-progress-bar:-moz-locale-dir(rtl)::before {
+    animation-name: uc-tab-throbber-spinner-sprite-rtl !important;
+  }
+
+  :root[uc-extension-id="private-bookmarks@rharel"] #on-hold-progress-indicator {
+    display: none !important;
+  }
+
+  :root[uc-extension-id="private-bookmarks@rharel"] #success-panel > img {
+    padding-inline-start: 64px !important;
+    box-sizing: border-box !important;
+    background-image: url("chrome://userchrome/content/material/like.svg") !important;
+    background-size: contain !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    -moz-context-properties: fill !important;
+    fill: var(--purple-30) !important;
+  }
+
+  @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
+    :root[uc-extension-id="private-bookmarks@rharel"] * {
+      font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
     }
 
     :root[uc-extension-id="private-bookmarks@rharel"] .section-header {
-        background: none !important;
-        box-sizing: border-box !important;
-        padding-block: 8px !important;
-        block-size: 40px !important;
-        max-block-size: unset !important;
-        min-height: 40px !important;
-        height: revert !important;
-        white-space: nowrap !important;
-        padding-inline: 16px !important;
-        font-family: inherit !important;
-        font-weight: normal !important;
-        font-size: 1.1em !important;
-        line-height: 28px !important;
-        text-align: center !important;
-        color: inherit !important;
-        letter-spacing: inherit !important;
-        box-shadow: none !important;
-        border-color: var(--uc-desaturate-dimmed) !important;
-        margin-inline: 4px !important;
-    }
-
-    :root[uc-extension-id="private-bookmarks@rharel"] .panel {
-        align-items: stretch !important;
-        justify-content: center !important;
-        row-gap: 16px !important;
-    }
-
-    :root[uc-extension-id="private-bookmarks@rharel"] #main-menu-panel {
-        padding: 16px 32px !important;
-    }
-
-    :root[uc-extension-id="private-bookmarks@rharel"] .primary-buttons-container {
-        display: flex !important;
-        flex-flow: column nowrap !important;
-        flex-grow: 1 !important;
-        align-items: stretch !important;
-        justify-content: center !important;
-    }
-
-    :root[uc-extension-id="private-bookmarks@rharel"] .secondary-buttons-container {
-        display: flex !important;
-        flex-flow: column nowrap !important;
-        align-items: stretch !important;
-        justify-content: center !important;
-    }
-
-    :root[uc-extension-id="private-bookmarks@rharel"] button {
-        background-color: var(--uc-arrowpanel-dimmed) !important;
-        border-radius: var(--general-button-border-radius) !important;
-        border: 1px solid transparent !important;
-        margin: 0 !important;
-        transition: none !important;
-    }
-
-    :root[uc-extension-id="private-bookmarks@rharel"] button:hover {
-        background-color: var(--uc-parent-primary-button-background) !important;
-    }
-
-    :root[uc-extension-id="private-bookmarks@rharel"] button:hover:active {
-        background-color: var(--uc-parent-primary-button-background-hover) !important;
-    }
-
-    :root[uc-extension-id="private-bookmarks@rharel"] button.negative,
-    :root[uc-extension-id="private-bookmarks@rharel"] .secondary-buttons-container button {
-        background-color: transparent !important;
-        border-color: var(--uc-arrowpanel-dimmed) !important;
-    }
-
-    :root[uc-extension-id="private-bookmarks@rharel"] button.negative:hover,
-    :root[uc-extension-id="private-bookmarks@rharel"] .secondary-buttons-container button:hover {
-        border-color: transparent !important;
-        background-color: var(--uc-arrowpanel-dimmed-further) !important;
-    }
-
-    :root[uc-extension-id="private-bookmarks@rharel"] button.negative:hover:active,
-    :root[uc-extension-id="private-bookmarks@rharel"]
-        .secondary-buttons-container
-        button:hover:active {
-        background-color: var(--uc-arrowpanel-dimmed-even-further) !important;
-    }
-
-    :root[uc-extension-id="private-bookmarks@rharel"] button.large {
-        align-items: center !important;
-        width: auto !important;
-        border-radius: 4px !important;
-        flex-grow: 1 !important;
+      font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
+      font-kerning: normal !important;
+      font-weight: var(--uc-font-weight-bold, 600) !important;
     }
 
     :root[uc-extension-id="private-bookmarks@rharel"] button.large > label {
-        flex-grow: 0 !important;
-        font-size: 18px !important;
+      flex-grow: 0 !important;
+      font-family: SF Pro Rounded, SF Pro Display !important;
+      font-kerning: none !important;
+      font-size: 18px !important;
+      font-weight: var(--uc-font-weight-bold) !important;
     }
-
-    :root[uc-extension-id="private-bookmarks@rharel"] .section {
-        display: flex !important;
-        flex-direction: column !important;
-        row-gap: 4px !important;
-    }
-
-    :root[uc-extension-id="private-bookmarks@rharel"] .section-item {
-        margin: 0 !important;
-    }
-
-    :root[uc-extension-id="private-bookmarks@rharel"] #authentication-message {
-        margin-bottom: 4px !important;
-    }
-
-    :root[uc-extension-id="private-bookmarks@rharel"] input {
-        flex-grow: 1 !important;
-        padding: 8px !important;
-        min-width: 0 !important;
-        border-color: transparent !important;
-        border-radius: var(--general-button-border-radius) !important;
-        background-color: var(--uc-arrowpanel-dimmed) !important;
-        appearance: none !important;
-    }
-
-    :root[uc-extension-id="private-bookmarks@rharel"] #authentication-buttons-container {
-        row-gap: 8px !important;
-        margin-block: 16px 0 !important;
-    }
-
-    :root[uc-extension-id="private-bookmarks@rharel"] #footer {
-        background: none !important;
-        border: none !important;
-        border-top: 1px solid var(--uc-desaturate-dimmed) !important;
-        height: 36px !important;
-        padding: 4px 4px 0 8px !important;
-        margin: 0 4px 4px !important;
-        color: inherit !important;
-        column-gap: 2px !important;
-    }
-
-    :root[uc-extension-id="private-bookmarks@rharel"] #footer > #extension-info {
-        flex-grow: 1 !important;
-        font-size: 0.9em !important;
-        color: var(--uc-menu-disabled-color) !important;
-    }
-
-    :root[uc-extension-id="private-bookmarks@rharel"] #footer > .icon-button {
-        cursor: revert !important;
-        height: 28px !important;
-        width: 28px !important;
-        filter: none !important;
-        padding: 0 !important;
-        padding-inline-start: 28px !important;
-        box-sizing: border-box !important;
-        background-repeat: no-repeat !important;
-        background-size: 16px !important;
-        background-position: center !important;
-        -moz-context-properties: fill, fill-opacity !important;
-        fill: currentColor !important;
-        color: inherit !important;
-        border-radius: var(--general-button-border-radius) !important;
-    }
-
-    :root[uc-extension-id="private-bookmarks@rharel"] #footer > .icon-button:hover {
-        background-color: var(--uc-arrowpanel-dimmed) !important;
-    }
-
-    :root[uc-extension-id="private-bookmarks@rharel"] #footer > .icon-button:hover:active {
-        background-color: var(--uc-arrowpanel-dimmed-further) !important;
-    }
-
-    :root[uc-extension-id="private-bookmarks@rharel"] #footer > #theme-button {
-        background-image: url(chrome://browser/skin/customize.svg) !important;
-    }
-
-    :root[uc-extension-id="private-bookmarks@rharel"] #footer > #options-button {
-        background-image: url(chrome://global/skin/icons/settings.svg) !important;
-    }
-
-    :root[uc-extension-id="private-bookmarks@rharel"] button:not(.large) > img {
-        box-sizing: border-box !important;
-        height: 16px !important;
-        margin-inline: 0 6px !important;
-        width: 16px !important;
-        order: 0 !important;
-        padding-inline-start: 16px !important;
-        filter: none !important;
-        background-repeat: no-repeat !important;
-        background-size: 16px !important;
-        background-position: center !important;
-        -moz-context-properties: fill, fill-opacity !important;
-        fill: currentColor !important;
-        color: inherit !important;
-    }
-
-    :root[uc-extension-id="private-bookmarks@rharel"] button:not(.large) > label {
-        order: 1 !important;
-        flex-grow: 0 !important;
-    }
-
-    :root[uc-extension-id="private-bookmarks@rharel"]
-        :is(#change-password-button, #confirm-authentication-button)
-        > img {
-        background-image: url(chrome://browser/skin/login.svg) !important;
-        rotate: -90deg !important;
-    }
-
-    :root[uc-extension-id="private-bookmarks@rharel"] #cancel-authentication-button > img {
-        background-image: url(chrome://userchrome/content/close-big.svg) !important;
-    }
-
-    :root[uc-extension-id="private-bookmarks@rharel"]
-        :is(#on-hold-animation-gear-A, #on-hold-animation-gear-B) {
-        display: none !important;
-    }
-
-    :root[uc-extension-id="private-bookmarks@rharel"] :is(#on-hold-panel, #success-panel) {
-        align-items: center !important;
-        transition: none !important;
-    }
-
-    @keyframes uc-tab-throbber-spinner-sprite {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(-100%); }
-    }
-
-    @keyframes uc-tab-throbber-spinner-sprite-rtl {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(100%); }
-    }
-
-    :root[uc-extension-id="private-bookmarks@rharel"] #on-hold-progress-bar {
-        overflow: hidden !important;
-        width: 176px !important;
-        height: 176px !important;
-        position: absolute !important;
-        margin: 0 !important;
-        animation: none !important;
-        background:none !important;
-        -moz-context-properties: fill !important;
-        fill: var(--purple-30) !important;
-        transition: none !important;
-    }
-
-    :root[uc-extension-id="private-bookmarks@rharel"] #on-hold-progress-bar::before {
-        content: "" !important;
-        display: -moz-box !important;
-        background-repeat: no-repeat !important;
-        background-image: url(chrome://userchrome/content/loading-spinner-sprite.svg) !important;
-        background-position: left center !important;
-        background-size: contain !important;
-        width: 2112px !important;
-        height: 176px !important;
-        animation: uc-tab-throbber-spinner-sprite 0.85s steps(12) infinite !important;
-    }
-
-    :root[uc-extension-id="private-bookmarks@rharel"] #on-hold-progress-bar:-moz-locale-dir(rtl)::before {
-        animation-name: uc-tab-throbber-spinner-sprite-rtl !important;
-    }
-
-    :root[uc-extension-id="private-bookmarks@rharel"] #on-hold-progress-indicator {
-        display: none !important;
-    }
-
-    :root[uc-extension-id="private-bookmarks@rharel"] #success-panel > img {
-        padding-inline-start: 64px !important;
-        box-sizing: border-box !important;
-        background-image: url("chrome://userchrome/content/material/like.svg") !important;
-        background-size: contain !important;
-        background-position: center !important;
-        background-repeat: no-repeat !important;
-        -moz-context-properties: fill !important;
-        fill: var(--purple-30) !important;
-    }
-
-    @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
-        :root[uc-extension-id="private-bookmarks@rharel"] * {
-            font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
-        }
-
-        :root[uc-extension-id="private-bookmarks@rharel"] .section-header {
-            font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
-            font-kerning: normal !important;
-            font-weight: var(--uc-font-weight-bold, 600) !important;
-        }
-
-        :root[uc-extension-id="private-bookmarks@rharel"] button.large > label {
-            flex-grow: 0 !important;
-            font-family: SF Pro Rounded, SF Pro Display !important;
-            font-kerning: none !important;
-            font-size: 18px !important;
-            font-weight: var(--uc-font-weight-bold) !important;
-        }
-    }
+  }
 }

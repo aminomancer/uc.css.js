@@ -8,7 +8,731 @@
 
 /* OS-styled javascript modal prompts */
 tabmodalprompt {
-    background: none !important;
+  background: none !important;
+  --in-content-page-background: transparent !important;
+  --in-content-page-color: var(--uc-parent-page-color) !important;
+  --in-content-box-background: var(--dialog-box-bgcolor) !important;
+  --in-content-box-background-dim: var(--dialog-box-bgcolor-dim) !important;
+  --in-content-box-border-color: var(--dialog-box-border-color) !important;
+  --in-content-button-background: var(--arrowpanel-dimmed) !important;
+  --in-content-button-background-hover: var(--arrowpanel-dimmed-further) !important;
+  --in-content-button-background-active: var(--arrowpanel-dimmed-even-further) !important;
+  --in-content-item-selected: var(--purple-40) !important;
+  --in-content-border-hover: var(--dialog-box-border-hover) !important;
+  --in-content-link-color: var(--purple-35) !important;
+  --in-content-link-color-hover: var(--purple-30) !important;
+  --in-content-link-color-active: var(--purple-30) !important;
+  --in-content-primary-button-background: var(--purple-40) !important;
+  --in-content-primary-button-background-hover: var(--purple-35) !important;
+  --in-content-primary-button-background-active: var(--purple-30) !important;
+  --in-content-primary-button-text-color: var(--light-on-dark-button-text-color) !important;
+  --checkbox-border-color: var(--in-content-box-border-color) !important;
+  --checkbox-checked-border-color: transparent !important;
+  --checkbox-unchecked-bgcolor: var(--in-content-button-background) !important;
+  --checkbox-unchecked-hover-bgcolor: var(--in-content-button-background-hover) !important;
+  --checkbox-unchecked-active-bgcolor: var(--in-content-button-background-active) !important;
+  --checkbox-checked-bgcolor: var(--in-content-primary-button-background) !important;
+  --checkbox-checked-color: var(--in-content-primary-button-text-color) !important;
+  --checkbox-checked-hover-bgcolor: var(--in-content-primary-button-background-hover) !important;
+  --checkbox-checked-active-bgcolor: var(--in-content-primary-button-background-active) !important;
+  --dropdown-bgcolor: var(--arrowpanel-background) !important;
+  --in-content-button-border-radius: var(--general-button-border-radius) !important;
+  --in-content-button-vertical-padding: 5px !important;
+  --in-content-focus-outline-color: var(--in-content-primary-button-background-hover) !important;
+  --tabmodalprompt-padding: var(--arrowpanel-padding) !important;
+}
+
+.tabmodalprompt-topContainer {
+  margin-inline: 4px !important;
+}
+
+.tabmodalprompt-buttonContainer {
+  margin-inline: 8px !important;
+}
+
+.tabmodalprompt-mainContainer {
+  border-radius: 5px !important;
+}
+
+.paymentDialogContainerFrame {
+  background-color: var(--toolbar-bgcolor) !important;
+  color: var(--lwt-text-color, -moz-dialogtext) !important;
+}
+
+.tabmodalprompt-mainContainer {
+  /* temporarily disabled due to backdrop-filter being disabled.
+  see https://bugzilla.mozilla.org/show_bug.cgi?id=1741779 */
+
+  /* background-color: var(--dialog-bgcolor) !important;
+  background-image: var(--acrylic-texture) !important;
+  backdrop-filter: var(--acrylic-blur) !important;
+  border-color: var(--blurred-dialog-border-color) !important; */
+
+  background-color: var(--ui-quaternary-bg) !important;
+  border-color: var(--uc-menu-border-color) !important;
+
+  color: var(--uc-parent-page-color) !important;
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.25), 0px 0px 5px -1px rgba(0, 0, 0, 0.125) !important;
+}
+
+.tabmodalprompt-mainContainer textbox {
+  border-radius: var(--general-button-border-radius) !important;
+}
+
+.tabmodalprompt-buttonSpacer {
+  display: none !important;
+}
+
+.tabmodalprompt-infoContainer,
+.tabmodalprompt-loginTextbox,
+.tabmodalprompt-loginLabel {
+  justify-self: revert !important;
+  margin: 2px 4px;
+  margin-block: 4px !important;
+}
+
+tabmodalprompt input {
+  appearance: none !important;
+  user-select: text !important;
+  -moz-user-select: text !important;
+  background: var(--in-content-box-background) !important;
+  color: var(--uc-parent-page-color) !important;
+  border-radius: var(--general-button-border-radius) !important;
+}
+
+tabmodalprompt select:not([size], [multiple]) > option {
+  background-color: var(--dropdown-bgcolor) !important;
+  color: var(--ui-text-80) !important;
+}
+
+tabmodalprompt :is(button, select, input[type="color"], menulist) {
+  min-height: var(--menuitem-height) !important;
+  border-radius: var(--in-content-button-border-radius) !important;
+}
+
+tabmodalprompt :is(input, textarea) {
+  border: 1px solid var(--in-content-box-border-color) !important;
+  padding: 5px !important;
+}
+
+tabmodalprompt input:focus-visible,
+tabmodalprompt textarea:focus-visible,
+tabmodalprompt search-textbox[focused] {
+  border-color: var(--in-content-focus-outline-color) !important;
+}
+
+tabmodalprompt :is(input, textarea)::selection {
+  background-color: var(--ui-selection-bgcolor) !important;
+  color: var(--ui-selection-color) !important;
+}
+
+tabmodalprompt :-moz-window-inactive::selection {
+  background-color: var(
+    --ui-selection-bgcolor-disabled,
+    text-select-disabled-background
+  ) !important;
+}
+
+tabmodalprompt input[type="number"] {
+  overflow: hidden !important;
+  overflow-clip-box: padding-box !important;
+  border-radius: var(--in-content-button-border-radius) !important;
+  background-clip: padding-box !important;
+  border-right: none !important;
+}
+
+tabmodalprompt input[type="number"]::-moz-number-spin-box {
+  border-top-right-radius: var(--in-content-button-border-radius) !important;
+  border-bottom-right-radius: var(--in-content-button-border-radius) !important;
+  border-right: 1px solid var(--in-content-box-border-color) !important;
+  border-left: none !important;
+  width: calc(1em + 0.67px) !important;
+}
+
+tabmodalprompt input[type="number"]:hover,
+tabmodalprompt input[type="number"]:hover::-moz-number-spin-box {
+  border-color: var(--in-content-border-hover) !important;
+}
+
+tabmodalprompt input[type="number"]:focus,
+tabmodalprompt input[type="number"]:focus::-moz-number-spin-box {
+  border-color: var(--in-content-focus-outline-color) !important;
+}
+
+tabmodalprompt #titleText {
+  font-weight: var(--uc-font-weight-bold, 600) !important;
+  font-size: 1.1em !important;
+}
+
+.tabmodalprompt-buttonContainer {
+  display: flex;
+  justify-content: end;
+  gap: var(--tabmodalprompt-padding);
+}
+
+.tabmodalprompt-buttonContainer button {
+  appearance: none !important;
+  border-radius: 3px !important;
+  background-color: var(--in-content-button-background) !important;
+  margin: revert !important;
+  color: var(--uc-parent-page-color) !important;
+  padding: 2px !important;
+  flex-grow: 0.15 !important;
+  flex-wrap: nowrap !important;
+  justify-self: revert !important;
+}
+
+.tabmodalprompt-buttonContainer button:is(:hover, :focus-visible) {
+  background-color: var(--in-content-button-background-hover) !important;
+  color: var(--uc-parent-page-color) !important;
+}
+
+.tabmodalprompt-buttonContainer button:hover:active {
+  background-color: var(--in-content-button-background-active) !important;
+}
+
+tabmodalprompt button:is([autofocus], [type="submit"], .primary):enabled:is(:hover, :focus-visible),
+tabmodalprompt button:is([default], .primary):not([disabled="true"]):is(:hover, :focus-visible) {
+  background-color: var(--in-content-primary-button-background-hover) !important;
+  color: var(--in-content-primary-button-text-color-hover) !important;
+}
+
+.tabmodalprompt-buttonContainer .button-text {
+  margin-top: 0.5px !important;
+}
+
+.tabmodalprompt-buttonContainer spacer {
+  display: none !important;
+}
+
+.tabmodalprompt-buttonContainer {
+  display: flex !important;
+  padding-top: 0 !important;
+  background-color: transparent !important;
+  border-top: none !important;
+}
+
+tabmodalprompt checkbox {
+  margin-inline: 4px !important;
+}
+
+/* in-content autocomplete popup */
+panel[type="autocomplete-richlistbox"] > richlistbox {
+  background: none !important;
+  color: inherit !important;
+  border: none !important;
+}
+
+panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem {
+  appearance: none !important;
+  color: var(--menu-color) !important;
+  padding: 4px 8px !important;
+  border: none !important;
+  min-height: var(--menuitem-height) !important;
+  border-radius: var(--context-menuitem-border-radius) !important;
+}
+
+panel[type="autocomplete-richlistbox"]
+  > richlistbox
+  > richlistitem:is([selected], :hover):not([disabled="true"]) {
+  background-color: var(--arrowpanel-dimmed) !important;
+  color: var(--menu-color) !important;
+}
+
+panel[type="autocomplete-richlistbox"]
+  richlistitem:is([originaltype="generatedPassword"], [originaltype="loginWithOrigin"], [originaltype="login"])
+  .ac-site-icon {
+  fill: currentColor !important;
+  fill-opacity: 0.8;
+  -moz-context-properties: fill, fill-opacity !important;
+  margin-inline-end: 6px !important;
+}
+
+panel[type="autocomplete-richlistbox"]
+  > richlistbox
+  > richlistitem[originaltype="generatedPassword"]
+  > .two-line-wrapper
+  > .labels-wrapper
+  > .generated-password-autosave,
+panel[type="autocomplete-richlistbox"]
+  > richlistbox
+  > richlistitem[originaltype="importableLearnMore"]
+  > .ac-title,
+panel[type="autocomplete-richlistbox"]
+  > richlistbox
+  > richlistitem
+  > .two-line-wrapper
+  > .labels-wrapper
+  > .line2-label {
+  opacity: 1 !important;
+  color: var(--panel-shortcut-color) !important;
+}
+
+#PopupAutoComplete
+  > richlistbox
+  > richlistitem[originaltype="insecureWarning"]
+  > .ac-title
+  > description
+  > .ac-title-text {
+  padding-inline: 0 8px !important;
+}
+
+panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem[originaltype="loginsFooter"] {
+  color: inherit !important;
+  border: none !important;
+  margin-top: 4px;
+  background-color: var(--arrowpanel-dimmed) !important;
+}
+
+panel[type="autocomplete-richlistbox"]
+  > richlistbox
+  > richlistitem[originaltype="loginsFooter"]
+  .ac-title {
+  margin-inline: 0 !important;
+}
+
+panel[type="autocomplete-richlistbox"]
+  > richlistbox
+  > richlistitem[originaltype="loginsFooter"]:is(:hover, [selected]) {
+  background-color: var(--arrowpanel-dimmed-further) !important;
+}
+
+panel[type="autocomplete-richlistbox"]
+  > richlistbox
+  > richlistitem[originaltype="loginsFooter"]:hover[selected] {
+  background-color: var(--arrowpanel-dimmed-even-further) !important;
+}
+
+/* update notifications */
+.popup-notification-icon[popupid^="update"] {
+  background: hsl(125, 81%, 57%) url(chrome://userchrome/content/update-icon-inverted.svg) no-repeat
+    center/contain !important;
+  background-clip: border-box !important;
+  fill: hsl(118, 89%, 24%) !important;
+  border: 1px solid transparent !important;
+  border-radius: 100% !important;
+  -moz-context-properties: fill !important;
+  padding: 0 !important;
+}
+
+.popup-notification-icon:is([popupid="update-available"], [popupid="update-downloading"]) {
+  transform: scaleY(-1);
+}
+
+.popup-notification-icon[popupid="update-restart"] {
+  background: hsl(125, 81%, 57%) url(chrome://userchrome/content/check.svg) no-repeat center/contain !important;
+  fill: hsl(118, 89%, 24%) !important;
+  transform: none !important;
+}
+
+.popup-notification-icon[popupid="update-unsupported"] {
+  background: hsl(44, 95%, 60%) url(chrome://userchrome/content/check-partial.svg) no-repeat
+    center/contain !important;
+  fill: hsl(32, 52%, 35%) !important;
+  transform: none !important;
+}
+
+/* push notification popup (lower right corner) */
+@-moz-document url("chrome://global/content/alerts/alert.xhtml")
+{
+  #alertBox {
+    box-shadow: var(--tooltip-box-shadow) !important;
+    color: var(--ui-text-100) !important;
+    fill: currentColor !important;
+    border: none !important;
+    border-radius: calc(var(--toolbarbutton-border-radius) + 1px) !important;
+    background-color: var(--alertbox-bgcolor) !important;
+    padding: 10px !important;
+  }
+
+  #alertBox #alertTitleBox {
+    margin-bottom: 5px !important;
+    font-weight: normal !important;
+  }
+
+  #alertTitleLabel {
+    font-weight: normal !important;
+    font-size: 1.1em !important;
+  }
+
+  #alertTitleLabel {
+    margin-left: 5px !important;
+  }
+
+  #alertFooter {
+    -moz-box-align: center !important;
+  }
+
+  #alertSourceLabel {
+    color: var(--ui-text-50) !important;
+    font-size: 0.9em !important;
+  }
+
+  button,
+  #alertBox .close-icon {
+    color: var(--ui-text-100) !important;
+  }
+
+  #alertSettings {
+    border-radius: var(--toolbarbutton-border-radius) !important;
+    margin-inline-end: 0 !important;
+    padding: 0 !important;
+    width: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
+    height: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
+    fill: currentColor !important;
+  }
+
+  #alertSettings .button-box {
+    padding: var(--toolbarbutton-inner-padding) !important;
+    margin: 0 !important;
+    box-sizing: content-box !important;
+  }
+
+  #alertSettings .button-icon {
+    width: 16px !important;
+    height: 16px !important;
+    padding: 1px !important;
+  }
+
+  #alertTitleBox .close-icon {
+    border-radius: var(--toolbarbutton-border-radius) !important;
+    margin: 2px 0 0 !important;
+    padding: 0 !important;
+    fill: currentColor !important;
+  }
+
+  #alertTitleBox .close-icon .toolbarbutton-icon {
+    padding: var(--toolbarbutton-inner-padding) !important;
+    width: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
+    height: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
+  }
+
+  #alertTitleLabel {
+    margin: 0 !important;
+    padding-block: 4px 0 !important;
+  }
+
+  #alertImage {
+    border-radius: var(--toolbarbutton-border-radius);
+    margin: 0 12px 7px 7px !important;
+  }
+
+  #alertSettings:is(:hover, [open], :hover:active),
+  #alertBox .close-icon:is(:hover, :hover:active) {
+    background: var(--uc-content-button-background) !important;
+  }
+}
+
+@-moz-document url("chrome://global/content/pictureinpicture/player.xhtml")
+{
+  .control-item {
+    /* backdrop-filter has been temporarily disabled by mozilla */
+    /* backdrop-filter: blur(8px) !important;
+    background-color: var(--btn-bg-color) !important;
+    background-image: var(--acrylic-texture), var(--pip-icon) !important; */
+    background-image: var(--pip-icon) !important;
+    background-color: var(--in-content-button-highlight-dark) !important;
+    fill: currentColor !important;
+    stroke: currentColor !important;
+    -moz-context-properties: fill, stroke !important;
+    color: var(--player-control-icon-fill) !important;
+    border-radius: 3px !important;
+  }
+
+  body:not(:fullscreen) #controls:hover .control-item {
+    opacity: 1 !important;
+  }
+
+  #controls[keying] button:focus-visible {
+    outline-style: auto !important;
+    box-shadow: 1px 2px 5px #000;
+  }
+
+  #close {
+    background-size: 22px !important;
+    --pip-icon: url(chrome://userchrome/content/close.svg);
+  }
+
+  #controls.playing #playpause {
+    background-size: 19px !important;
+    --pip-icon: url(chrome://userchrome/content/material/pause.svg);
+  }
+
+  #controls:not(.playing) #playpause {
+    background-size: 15px !important;
+    --pip-icon: url(chrome://userchrome/content/glyph-play-12.svg);
+  }
+
+  #controls.muted #audio {
+    --pip-icon: url(chrome://userchrome/content/audioMutedButton.svg);
+  }
+
+  #controls:not(.muted) #audio {
+    --pip-icon: url(chrome://userchrome/content/audioUnmutedButton.svg);
+  }
+
+  #unpip {
+    --pip-icon: url(chrome://userchrome/content/pictureinpicture-closed.svg);
+  }
+}
+
+#DateTimePickerPanel {
+  --arrowpanel-background: inherit !important;
+  --arrowpanel-color: inherit !important;
+  --arrowpanel-border-color: inherit !important;
+}
+
+@-moz-document url-prefix("chrome://global/content/timepicker.xhtml"),
+    url-prefix("chrome://global/content/datepicker.xhtml")
+{
+  body {
+    background-color: var(--arrowpanel-background) !important;
+    color: var(--font-color) !important;
+  }
+
+  :root {
+    --in-content-page-background: var(--toolbar-bgcolor) !important;
+    --font-color: var(--uc-content-page-color) !important;
+    --fill-color: var(--arrowpanel-dimmed) !important;
+    --border: none !important;
+    --border-active-color: var(--in-content-link-color-hover) !important;
+    --today-fill-color: var(--lwt-toolbar-field-color) !important;
+    --selected-fill-color: var(--in-content-link-color) !important;
+    --button-fill-color-active: var(--in-content-link-color) !important;
+    --weekend-font-color: var(--urlbar-popup-action-color) !important;
+    --today-fill-color: var(--arrowpanel-dimmed-further) !important;
+    --date-picker-item-height: 28px !important;
+  }
+
+  * {
+    scrollbar-width: none !important;
+  }
+
+  .month-year {
+    color: var(--font-color) !important;
+    height: var(--date-picker-item-height) !important;
+    border-radius: var(--general-button-border-radius) !important;
+  }
+
+  .month-year-view {
+    background-color: var(--arrowpanel-background) !important;
+    opacity: 1 !important;
+  }
+
+  .month-year-view > .spinner-container {
+    margin: 1rem 0 !important;
+  }
+
+  button {
+    fill: currentColor !important;
+    -moz-context-properties: fill, fill-opacity !important;
+    color: var(--font-color) !important;
+  }
+
+  .nav > button:is(.prev, .next) {
+    fill-opacity: 0.6 !important;
+    width: var(--date-picker-item-height) !important;
+    height: var(--date-picker-item-height) !important;
+    border-radius: var(--general-button-border-radius);
+  }
+
+  .nav > button:is(.prev, .next):hover {
+    fill-opacity: 1 !important;
+    background-color: var(--arrowpanel-dimmed) !important;
+  }
+
+  button.month-year::after {
+    position: absolute;
+    content: "";
+    width: 2.6rem;
+    height: 1.6rem;
+    background: url(chrome://global/skin/icons/arrow-down.svg) no-repeat 50% 50%;
+    -moz-context-properties: fill, fill-opacity;
+    fill-opacity: 0.5;
+    fill: currentColor !important;
+  }
+
+  button.month-year.active::after {
+    fill-opacity: 1 !important;
+  }
+
+  .spinner {
+    color: var(--font-color) !important;
+  }
+
+  .month-year-view .spinner > div {
+    align-self: center !important;
+    padding-block: calc(var(--spinner-item-height) / 5) !important;
+    -moz-box-align: center !important;
+    -moz-box-pack: center !important;
+  }
+}
+
+.pointerlockfswarning {
+  align-items: center;
+  background: rgba(45, 62, 72, 0.9);
+  border: 2px solid currentColor;
+  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  color: #fafafa;
+  padding: 24px 16px;
+  font: message-box;
+
+  /* temporarily disabled due to backdrop-filter being disabled.
+  see https://bugzilla.mozilla.org/show_bug.cgi?id=1741779 */
+
+  /* background-color: var(--dialog-bgcolor) !important;
+  background-image: var(--acrylic-texture) !important;
+  backdrop-filter: var(--acrylic-blur) !important;
+  border: 1px solid var(--blurred-dialog-border-color) !important; */
+
+  background-color: var(--ui-tertiary-bg) !important;
+  border: 1px solid var(--uc-menu-border-color) !important;
+
+  color: var(--arrowpanel-color) !important;
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.25), 0px 0px 5px -1px rgba(0, 0, 0, 0.125) !important;
+  transition-property: transform, opacity !important;
+  transition-timing-function: cubic-bezier(0.43, 0, 0.38, 1), cubic-bezier(0.43, 0, 0.38, 1) !important;
+  transition-duration: 0.5s, 0.4s !important;
+  opacity: 0 !important;
+}
+
+.pointerlockfswarning:is([onscreen], [ontop]) {
+  opacity: 1 !important;
+  transition-timing-function: cubic-bezier(0.13, 0.25, 0.25, 0.92), cubic-bezier(0.43, 0, 0.38, 1) !important;
+  transition-duration: 0.4s, 0.35s !important;
+}
+
+.pointerlockfswarning button {
+  --uc-content-box-border-color: hsla(270, 7%, 98%, 0.1);
+  --uc-content-button-background: hsla(0, 20%, 90%, 0.08);
+  --uc-content-button-background-hover: hsla(0, 20%, 90%, 0.15);
+  --uc-content-button-background-active: hsla(0, 20%, 90%, 0.19);
+  appearance: none !important;
+  background-color: var(--uc-content-button-background) !important;
+  border: 1px solid var(--uc-content-box-border-color) !important;
+  border-radius: var(--general-button-border-radius);
+  padding: 4px 8px !important;
+  min-height: var(--menuitem-height) !important;
+}
+
+#pictureInPictureToggleContextMenu {
+  display: none !important;
+}
+
+/* in-content dialogs */
+.tab-prompt-dialog.dialogStack {
+  /* to avoid dimming the sidebar and findbar */
+  z-index: 0 !important;
+}
+
+:is(.tab-prompt-dialog, #window-modal-dialog) .dialogBox {
+  /* tab-prompt-dialogs are anchored to the top of the browser content area.
+  this makes them look like they emerge from under the navbar. */
+  margin-top: 0px !important;
+  border: 1px solid var(--arrowpanel-border-color);
+}
+
+:is(.tab-prompt-dialog, #window-modal-dialog) :is(.dialogBox, .dialogFrame) {
+  border-radius: 0 0 5px 5px !important;
+  border-top-width: 0 !important;
+}
+
+.content-prompt-dialog :is(.dialogBox, .dialogFrame) {
+  border-radius: 5px !important;
+}
+
+:is(.tab-prompt-dialog, #window-modal-dialog) .printDialogBox > .dialogFrame {
+  border-radius: 0 !important;
+}
+
+/* the resizer is on the right side for ltr languages, and on the left side for
+rtl languages. adjust the border radius accordingly */
+:is(.content-prompt-dialog, .tab-prompt-dialog, #window-modal-dialog)
+  .dialogBox[resizable="true"]:is(:dir(ltr), :-moz-locale-dir(ltr)),
+:is(.content-prompt-dialog, .tab-prompt-dialog, #window-modal-dialog)
+  .dialogBox[resizable="true"]
+  .dialogFrame:is(:dir(ltr), :-moz-locale-dir(ltr)) {
+  border-bottom-left-radius: 5px !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+:is(.content-prompt-dialog, .tab-prompt-dialog, #window-modal-dialog)
+  .dialogBox[resizable="true"]:is(:dir(rtl), :-moz-locale-dir(rtl)),
+:is(.content-prompt-dialog, .tab-prompt-dialog, #window-modal-dialog)
+  .dialogBox[resizable="true"]
+  .dialogFrame:is(:dir(rtl), :-moz-locale-dir(rtl)) {
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 5px !important;
+}
+
+/* blur backdrop filter */
+.content-prompt-dialog > .dialogOverlay[style] .dialogFrame {
+  /* temporarily disabled due to backdrop-filter being disabled.
+  see https://bugzilla.mozilla.org/show_bug.cgi?id=1741779 */
+
+  /* background-color: var(--dialog-bgcolor) !important;
+  background-image: var(--acrylic-texture) !important;
+  backdrop-filter: var(--acrylic-blur) !important;
+  border: 1px solid var(--blurred-dialog-border-color); */
+
+  background-color: var(--ui-quaternary-bg) !important;
+  border: 1px solid var(--arrowpanel-border-color);
+}
+
+/* hide the background overlay */
+.dialogOverlay[topmost="true"],
+#window-modal-dialog::backdrop {
+  background-color: transparent !important;
+}
+
+/* make the box shadow even, i hate offset drop shadows */
+:is(.content-prompt-dialog, .tab-prompt-dialog, #window-modal-dialog) .dialogBox {
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1), 0 0 8px 2px rgba(0, 0, 0, 0.1) !important;
+}
+
+#window-modal-dialog,
+.tab-prompt-dialog {
+  --chrome-offset: calc(
+    0.5px + var(--urlbar-container-height, 40px) + var(--tab-min-height, 36px)
+  ) !important;
+  clip-path: inset(0 -100% -100% -100%);
+}
+
+:is(#window-modal-dialog, .tab-prompt-dialog) > .dialogOverlay[style] .dialogFrame {
+  background-color: var(--ui-quaternary-bg) !important;
+}
+
+/* center text in any dialog box */
+.dialog-content-box {
+  -moz-box-pack: center;
+}
+
+@-moz-document url("chrome://global/content/commonDialog.xhtml"),
+    url("chrome://mozapps/content/handling/permissionDialog.xhtml"),
+    url("chrome://mozapps/content/handling/appChooser.xhtml"),
+    url("chrome://global/content/appPicker.xhtml"),
+    url("chrome://mozapps/content/downloads/unknownContentType.xhtml"),
+    url-prefix("chrome://browser/content/sanitize.xhtml")
+{
+  /* use this selector to exclude null-window prompts, which open in their own
+  windows and don't inherit styles from the chrome window. we don't want to
+  apply theme styles to these prompts because no matter what we do, we can't
+  control the titlebar. it'll always be white with a red button on windows,
+  without OS-level intervention. so don't bother with them. we just use scripts
+  to try to make all dialogs open as either modal dialogs which attach to
+  existing chrome windows or browsing contexts, or as windowed dialogs with the
+  titlebars hidden. that can only happen at the programming level, in javascript
+  or C++. we can't do anything about the prompts opened by C++ so we just have
+  to hope mozilla gets rid of them, but fortunately mozilla has caught on and is
+  gradually converting these dialogs to modals which pass the window or browsing
+  context as the  first parameter. e.g. try submitting this in console:
+  Services.prompt.confirmEx(window, "title", "text", 1, "1", "2", "3", "checkbox", {value: false})
+  then try changing the first parameter window to null and you'll see it opens
+  as a regular null-window dialog instead. */
+  #commonDialogWindow[dialogroot],
+  #commonDialogWindow[dialogroot] *,
+  .dialog-button-box {
     --in-content-page-background: transparent !important;
     --in-content-page-color: var(--uc-parent-page-color) !important;
     --in-content-box-background: var(--dialog-box-bgcolor) !important;
@@ -26,6 +750,8 @@ tabmodalprompt {
     --in-content-primary-button-background-hover: var(--purple-35) !important;
     --in-content-primary-button-background-active: var(--purple-30) !important;
     --in-content-primary-button-text-color: var(--light-on-dark-button-text-color) !important;
+    --in-content-primary-button-text-color-hover: white !important;
+    --in-content-focus-outline-color: var(--in-content-primary-button-background-hover) !important;
     --checkbox-border-color: var(--in-content-box-border-color) !important;
     --checkbox-checked-border-color: transparent !important;
     --checkbox-unchecked-bgcolor: var(--in-content-button-background) !important;
@@ -35,1067 +761,346 @@ tabmodalprompt {
     --checkbox-checked-color: var(--in-content-primary-button-text-color) !important;
     --checkbox-checked-hover-bgcolor: var(--in-content-primary-button-background-hover) !important;
     --checkbox-checked-active-bgcolor: var(
-        --in-content-primary-button-background-active
+      --in-content-primary-button-background-active
     ) !important;
     --dropdown-bgcolor: var(--arrowpanel-background) !important;
     --in-content-button-border-radius: var(--general-button-border-radius) !important;
     --in-content-button-vertical-padding: 5px !important;
-    --in-content-focus-outline-color: var(--in-content-primary-button-background-hover) !important;
-    --tabmodalprompt-padding: var(--arrowpanel-padding) !important;
-}
+  }
 
-.tabmodalprompt-topContainer {
-    margin-inline: 4px !important;
-}
+  dialog[subdialog] .dialogRow {
+    margin-block: 0 5px !important;
+  }
 
-.tabmodalprompt-buttonContainer {
-    margin-inline: 8px !important;
-}
+  #commonDialog[subdialog] #loginTextbox {
+    margin-block-start: 2px !important;
+  }
 
-.tabmodalprompt-mainContainer {
-    border-radius: 5px !important;
-}
+  .dialog-content-box:not([hidden]) + .dialog-button-box {
+    margin-top: 5px;
+  }
 
-.paymentDialogContainerFrame {
-    background-color: var(--toolbar-bgcolor) !important;
-    color: var(--lwt-text-color, -moz-dialogtext) !important;
-}
+  .dialog-button-box:not([hidden]) {
+    display: flex;
+    justify-content: end;
+  }
 
-.tabmodalprompt-mainContainer {
-    /* temporarily disabled due to backdrop-filter being disabled. see https://bugzilla.mozilla.org/show_bug.cgi?id=1741779 */
+  .dialog-button-box > button {
+    flex-grow: 0.15;
+    flex-wrap: nowrap;
+  }
 
-    /* background-color: var(--dialog-bgcolor) !important;
-    background-image: var(--acrylic-texture) !important;
-    backdrop-filter: var(--acrylic-blur) !important;
-    border-color: var(--blurred-dialog-border-color) !important; */
-
-    background-color: var(--ui-quaternary-bg) !important;
-    border-color: var(--uc-menu-border-color) !important;
-
-    color: var(--uc-parent-page-color) !important;
-    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.25), 0px 0px 5px -1px rgba(0, 0, 0, 0.125) !important;
-}
-
-.tabmodalprompt-mainContainer textbox {
-    border-radius: var(--general-button-border-radius) !important;
-}
-
-.tabmodalprompt-buttonSpacer {
-    display: none !important;
-}
-
-.tabmodalprompt-infoContainer,
-.tabmodalprompt-loginTextbox,
-.tabmodalprompt-loginLabel {
-    justify-self: revert !important;
-    margin: 2px 4px;
-    margin-block: 4px !important;
-}
-
-tabmodalprompt input {
+  .dialog-button-box > button {
     appearance: none !important;
-    user-select: text !important;
-    -moz-user-select: text !important;
-    background: var(--in-content-box-background) !important;
-    color: var(--uc-parent-page-color) !important;
-    border-radius: var(--general-button-border-radius) !important;
-}
+    min-height: var(--menuitem-height) !important;
+    color: var(--in-content-button-text-color) !important;
+    border: 1px solid var(--in-content-button-border-color) !important;
+    border-radius: var(--in-content-button-border-radius) !important;
+    background-color: var(--in-content-button-background) !important;
+    font-weight: 400 !important;
+    padding: 5px 7px !important;
+    text-decoration: none !important;
+    margin: 4px 8px !important;
+    font-size: 1em !important;
+  }
 
-tabmodalprompt select:not([size], [multiple]) > option {
+  .dialog-button-box > button:not([disabled="true"]):is(:hover, :focus-visible) {
+    background-color: var(--in-content-button-background-hover) !important;
+    color: var(--in-content-button-text-color-hover) !important;
+    border-color: var(--in-content-button-border-color-hover) !important;
+  }
+
+  .dialog-button-box > button:not([disabled="true"]):focus-visible {
+    outline-style: auto !important;
+  }
+
+  .dialog-button-box > button:not([disabled="true"]):hover:active,
+  .dialog-button-box > button[open],
+  .dialog-button-box > button[open]:hover {
+    background-color: var(--in-content-button-background-active) !important;
+    color: var(--in-content-button-text-color-active) !important;
+    border-color: var(--in-content-button-border-color-active) !important;
+  }
+
+  .dialog-button-box > button[disabled="true"] {
+    opacity: 0.4 !important;
+  }
+
+  .dialog-button-box > button:is([autofocus], [type="submit"], [default], .primary) {
+    background-color: var(--in-content-primary-button-background) !important;
+    color: var(--in-content-primary-button-text-color) !important;
+    border-color: var(--in-content-primary-button-border-color) !important;
+  }
+
+  .dialog-button-box
+    > button:is([autofocus], [type="submit"], [default], .primary):not([disabled="true"]):is(:hover, :focus-visible) {
+    background-color: var(--in-content-primary-button-background-hover) !important;
+    color: var(--in-content-primary-button-text-color-hover) !important;
+    border-color: var(--in-content-primary-button-border-hover) !important;
+  }
+
+  .dialog-button-box
+    > button:is([autofocus], [type="submit"], [default], .primary):not([disabled="true"]):hover:active {
+    background-color: var(--in-content-primary-button-background-active) !important;
+  }
+
+  dialog input:-moz-focusring,
+  button:-moz-focusring {
+    box-shadow: none !important;
+  }
+
+  #checkboxContainer checkbox {
+    margin-inline-start: 4px !important;
+    margin-top: 4px !important;
+  }
+
+  richlistbox[id] {
+    background-color: var(--in-content-box-background-dim) !important;
+    border-color: var(--in-content-box-border-color) !important;
+  }
+
+  richlistbox[id] richlistitem {
+    min-height: 32px !important;
+  }
+
+  richlistbox[id] richlistitem[selected="true"] {
+    background-color: var(--in-content-button-background) !important;
+    color: var(--in-content-page-color) !important;
+  }
+
+  richlistbox[id] richlistitem > button {
+    padding-block: 0 !important;
+    min-height: 24px !important;
+  }
+
+  richlistbox[id] richlistitem > button[label] {
+    background-color: var(--in-content-primary-button-background) !important;
+  }
+
+  richlistbox[id]
+    richlistitem:not([disabled="true"])
+    > button[label]:is(:enabled, :not([disabled="true"])):is(:hover, :focus-visible) {
+    background-color: var(--in-content-primary-button-background-hover) !important;
+  }
+
+  richlistbox[id]
+    richlistitem:not([disabled="true"])
+    > button[label]:is(:enabled, :not([disabled="true"])):hover:active,
+  richlistbox[id] richlistitem > button[label][open],
+  richlistbox[id] richlistitem > button[label][open]:hover {
+    background-color: var(--in-content-primary-button-background-active) !important;
+  }
+
+  select:not([size], [multiple]) > option {
     background-color: var(--dropdown-bgcolor) !important;
     color: var(--ui-text-80) !important;
-}
+  }
 
-tabmodalprompt :is(button, select, input[type="color"], menulist) {
+  button,
+  select,
+  input[type="color"],
+  menulist {
     min-height: var(--menuitem-height) !important;
     border-radius: var(--in-content-button-border-radius) !important;
-}
+  }
 
-tabmodalprompt :is(input, textarea) {
-    border: 1px solid var(--in-content-box-border-color) !important;
+  input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]),
+  textarea,
+  search-textbox {
+    border-radius: var(--general-button-border-radius) !important;
+  }
+
+  input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"]),
+  textarea {
     padding: 5px !important;
-}
+  }
 
-tabmodalprompt input:focus-visible,
-tabmodalprompt textarea:focus-visible,
-tabmodalprompt search-textbox[focused] {
+  input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):focus,
+  textarea:focus,
+  search-textbox[focused] {
     border-color: var(--in-content-focus-outline-color) !important;
-}
+  }
 
-tabmodalprompt :is(input, textarea)::selection {
+  input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"])::selection,
+  textarea::selection {
     background-color: var(--ui-selection-bgcolor) !important;
     color: var(--ui-selection-color) !important;
-}
+  }
 
-tabmodalprompt :-moz-window-inactive::selection {
+  input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):-moz-window-inactive::selection,
+  textarea:-moz-window-inactive::selection {
     background-color: var(
-        --ui-selection-bgcolor-disabled,
-        text-select-disabled-background
+      --ui-selection-bgcolor-disabled,
+      text-select-disabled-background
     ) !important;
-}
+  }
 
-tabmodalprompt input[type="number"] {
+  window[role="dialog"] ::selection,
+  window[role="dialog"] textarea::selection {
+    background-color: var(--global-selection-bgcolor) !important;
+    color: var(--global-selection-color) !important;
+  }
+
+  window[role="dialog"] :-moz-window-inactive::selection,
+  window[role="dialog"] textarea:-moz-window-inactive::selection {
+    background-color: var(
+      --global-selection-bgcolor-disabled,
+      text-select-disabled-background
+    ) !important;
+  }
+
+  input[type="number"] {
     overflow: hidden !important;
     overflow-clip-box: padding-box !important;
     border-radius: var(--in-content-button-border-radius) !important;
     background-clip: padding-box !important;
     border-right: none !important;
-}
+  }
 
-tabmodalprompt input[type="number"]::-moz-number-spin-box {
+  input[type="number"]::-moz-number-spin-box {
     border-top-right-radius: var(--in-content-button-border-radius) !important;
     border-bottom-right-radius: var(--in-content-button-border-radius) !important;
     border-right: 1px solid var(--in-content-box-border-color) !important;
     border-left: none !important;
     width: calc(1em + 0.67px) !important;
-}
+  }
 
-tabmodalprompt input[type="number"]:hover,
-tabmodalprompt input[type="number"]:hover::-moz-number-spin-box {
+  input[type="number"]:hover,
+  input[type="number"]:hover::-moz-number-spin-box {
     border-color: var(--in-content-border-hover) !important;
-}
+  }
 
-tabmodalprompt input[type="number"]:focus,
-tabmodalprompt input[type="number"]:focus::-moz-number-spin-box {
+  input[type="number"]:focus,
+  input[type="number"]:focus::-moz-number-spin-box {
     border-color: var(--in-content-focus-outline-color) !important;
-}
-
-tabmodalprompt #titleText {
-    font-weight: var(--uc-font-weight-bold, 600) !important;
-    font-size: 1.1em !important;
-}
-
-.tabmodalprompt-buttonContainer {
-    display: flex;
-    justify-content: end;
-    gap: var(--tabmodalprompt-padding);
-}
-
-.tabmodalprompt-buttonContainer button {
-    appearance: none !important;
-    border-radius: 3px !important;
-    background-color: var(--in-content-button-background) !important;
-    margin: revert !important;
-    color: var(--uc-parent-page-color) !important;
-    padding: 2px !important;
-    flex-grow: 0.15 !important;
-    flex-wrap: nowrap !important;
-    justify-self: revert !important;
-}
-
-.tabmodalprompt-buttonContainer button:is(:hover, :focus-visible) {
-    background-color: var(--in-content-button-background-hover) !important;
-    color: var(--uc-parent-page-color) !important;
-}
-
-.tabmodalprompt-buttonContainer button:hover:active {
-    background-color: var(--in-content-button-background-active) !important;
-}
-
-tabmodalprompt button:is([autofocus], [type="submit"], .primary):enabled:is(:hover, :focus-visible),
-tabmodalprompt button:is([default], .primary):not([disabled="true"]):is(:hover, :focus-visible) {
-    background-color: var(--in-content-primary-button-background-hover) !important;
-    color: var(--in-content-primary-button-text-color-hover) !important;
-}
-
-.tabmodalprompt-buttonContainer .button-text {
-    margin-top: 0.5px !important;
-}
-
-.tabmodalprompt-buttonContainer spacer {
-    display: none !important;
-}
-
-.tabmodalprompt-buttonContainer {
-    display: flex !important;
-    padding-top: 0 !important;
-    background-color: transparent !important;
-    border-top: none !important;
-}
-
-tabmodalprompt checkbox {
-    margin-inline: 4px !important;
-}
-
-/* in-content autocomplete popup */
-panel[type="autocomplete-richlistbox"] > richlistbox {
-    background: none !important;
-    color: inherit !important;
-    border: none !important;
-}
-
-panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem {
-    appearance: none !important;
-    color: var(--menu-color) !important;
-    padding: 4px 8px !important;
-    border: none !important;
-    min-height: var(--menuitem-height) !important;
-    border-radius: var(--context-menuitem-border-radius) !important;
-}
-
-panel[type="autocomplete-richlistbox"]
-    > richlistbox
-    > richlistitem:is([selected], :hover):not([disabled="true"]) {
-    background-color: var(--arrowpanel-dimmed) !important;
-    color: var(--menu-color) !important;
-}
-
-panel[type="autocomplete-richlistbox"]
-    richlistitem:is([originaltype="generatedPassword"], [originaltype="loginWithOrigin"], [originaltype="login"])
-    .ac-site-icon {
-    fill: currentColor !important;
-    fill-opacity: 0.8;
-    -moz-context-properties: fill, fill-opacity !important;
-    margin-inline-end: 6px !important;
-}
-
-panel[type="autocomplete-richlistbox"]
-    > richlistbox
-    > richlistitem[originaltype="generatedPassword"]
-    > .two-line-wrapper
-    > .labels-wrapper
-    > .generated-password-autosave,
-panel[type="autocomplete-richlistbox"]
-    > richlistbox
-    > richlistitem[originaltype="importableLearnMore"]
-    > .ac-title,
-panel[type="autocomplete-richlistbox"]
-    > richlistbox
-    > richlistitem
-    > .two-line-wrapper
-    > .labels-wrapper
-    > .line2-label {
-    opacity: 1 !important;
-    color: var(--panel-shortcut-color) !important;
-}
-
-#PopupAutoComplete
-    > richlistbox
-    > richlistitem[originaltype="insecureWarning"]
-    > .ac-title
-    > description
-    > .ac-title-text {
-    padding-inline: 0 8px !important;
-}
-
-panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem[originaltype="loginsFooter"] {
-    color: inherit !important;
-    border: none !important;
-    margin-top: 4px;
-    background-color: var(--arrowpanel-dimmed) !important;
-}
-
-panel[type="autocomplete-richlistbox"]
-    > richlistbox
-    > richlistitem[originaltype="loginsFooter"]
-    .ac-title {
-    margin-inline: 0 !important;
-}
-
-panel[type="autocomplete-richlistbox"]
-    > richlistbox
-    > richlistitem[originaltype="loginsFooter"]:is(:hover, [selected]) {
-    background-color: var(--arrowpanel-dimmed-further) !important;
-}
-
-panel[type="autocomplete-richlistbox"]
-    > richlistbox
-    > richlistitem[originaltype="loginsFooter"]:hover[selected] {
-    background-color: var(--arrowpanel-dimmed-even-further) !important;
-}
-
-/* update notifications */
-.popup-notification-icon[popupid^="update"] {
-    background: hsl(125, 81%, 57%) url(chrome://userchrome/content/update-icon-inverted.svg)
-        no-repeat center/contain !important;
-    background-clip: border-box !important;
-    fill: hsl(118, 89%, 24%) !important;
-    border: 1px solid transparent !important;
-    border-radius: 100% !important;
-    -moz-context-properties: fill !important;
-    padding: 0 !important;
-}
-
-.popup-notification-icon:is([popupid="update-available"], [popupid="update-downloading"]) {
-    transform: scaleY(-1);
-}
-
-.popup-notification-icon[popupid="update-restart"] {
-    background: hsl(125, 81%, 57%) url(chrome://userchrome/content/check.svg) no-repeat
-        center/contain !important;
-    fill: hsl(118, 89%, 24%) !important;
-    transform: none !important;
-}
-
-.popup-notification-icon[popupid="update-unsupported"] {
-    background: hsl(44, 95%, 60%) url(chrome://userchrome/content/check-partial.svg) no-repeat
-        center/contain !important;
-    fill: hsl(32, 52%, 35%) !important;
-    transform: none !important;
-}
-
-/* push notification popup (lower right corner) */
-@-moz-document url("chrome://global/content/alerts/alert.xhtml")
-{
-    #alertBox {
-        box-shadow: var(--tooltip-box-shadow) !important;
-        color: var(--ui-text-100) !important;
-        fill: currentColor !important;
-        border: none !important;
-        border-radius: calc(var(--toolbarbutton-border-radius) + 1px) !important;
-        background-color: var(--alertbox-bgcolor) !important;
-        padding: 10px !important;
-    }
-
-    #alertBox #alertTitleBox {
-        margin-bottom: 5px !important;
-        font-weight: normal !important;
-    }
-
-    #alertTitleLabel {
-        font-weight: normal !important;
-        font-size: 1.1em !important;
-    }
-
-    #alertTitleLabel {
-        margin-left: 5px !important;
-    }
-
-    #alertFooter {
-        -moz-box-align: center !important;
-    }
-
-    #alertSourceLabel {
-        color: var(--ui-text-50) !important;
-        font-size: 0.9em !important;
-    }
-
-    button,
-    #alertBox .close-icon {
-        color: var(--ui-text-100) !important;
-    }
-
-    #alertSettings {
-        border-radius: var(--toolbarbutton-border-radius) !important;
-        margin-inline-end: 0 !important;
-        padding: 0 !important;
-        width: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
-        height: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
-        fill: currentColor !important;
-    }
-
-    #alertSettings .button-box {
-        padding: var(--toolbarbutton-inner-padding) !important;
-        margin: 0 !important;
-        box-sizing: content-box !important;
-    }
-
-    #alertSettings .button-icon {
-        width: 16px !important;
-        height: 16px !important;
-        padding: 1px !important;
-    }
-
-    #alertTitleBox .close-icon {
-        border-radius: var(--toolbarbutton-border-radius) !important;
-        margin: 2px 0 0 !important;
-        padding: 0 !important;
-        fill: currentColor !important;
-    }
-
-    #alertTitleBox .close-icon .toolbarbutton-icon {
-        padding: var(--toolbarbutton-inner-padding) !important;
-        width: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
-        height: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
-    }
-
-    #alertTitleLabel {
-        margin: 0 !important;
-        padding-block: 4px 0 !important;
-    }
-
-    #alertImage {
-        border-radius: var(--toolbarbutton-border-radius);
-        margin: 0 12px 7px 7px !important;
-    }
-
-    #alertSettings:is(:hover, [open], :hover:active),
-    #alertBox .close-icon:is(:hover, :hover:active) {
-        background: var(--uc-content-button-background) !important;
-    }
-}
-
-@-moz-document url("chrome://global/content/pictureinpicture/player.xhtml")
-{
-    .control-item {
-        /* backdrop-filter has been temporarily disabled by mozilla */
-        /* backdrop-filter: blur(8px) !important;
-        background-color: var(--btn-bg-color) !important;
-        background-image: var(--acrylic-texture), var(--pip-icon) !important; */
-        background-image: var(--pip-icon) !important;
-        background-color: var(--in-content-button-highlight-dark) !important;
-        fill: currentColor !important;
-        stroke: currentColor !important;
-        -moz-context-properties: fill, stroke !important;
-        color: var(--player-control-icon-fill) !important;
-        border-radius: 3px !important;
-    }
-
-    body:not(:fullscreen) #controls:hover .control-item {
-        opacity: 1 !important;
-    }
-
-    #controls[keying] button:focus-visible {
-        outline-style: auto !important;
-        box-shadow: 1px 2px 5px #000;
-    }
-
-    #close {
-        background-size: 22px !important;
-        --pip-icon: url(chrome://userchrome/content/close.svg);
-    }
-
-    #controls.playing #playpause {
-        background-size: 19px !important;
-        --pip-icon: url(chrome://userchrome/content/material/pause.svg);
-    }
-
-    #controls:not(.playing) #playpause {
-        background-size: 15px !important;
-        --pip-icon: url(chrome://userchrome/content/glyph-play-12.svg);
-    }
-
-    #controls.muted #audio {
-        --pip-icon: url(chrome://userchrome/content/audioMutedButton.svg);
-    }
-
-    #controls:not(.muted) #audio {
-        --pip-icon: url(chrome://userchrome/content/audioUnmutedButton.svg);
-    }
-
-    #unpip {
-        --pip-icon: url(chrome://userchrome/content/pictureinpicture-closed.svg);
-    }
-}
-
-#DateTimePickerPanel {
-    --arrowpanel-background: inherit !important;
-    --arrowpanel-color: inherit !important;
-    --arrowpanel-border-color: inherit !important;
-}
-
-@-moz-document url-prefix("chrome://global/content/timepicker.xhtml"),
-    url-prefix("chrome://global/content/datepicker.xhtml")
-{
-    body {
-        background-color: var(--arrowpanel-background) !important;
-        color: var(--font-color) !important;
-    }
-
-    :root {
-        --in-content-page-background: var(--toolbar-bgcolor) !important;
-        --font-color: var(--uc-content-page-color) !important;
-        --fill-color: var(--arrowpanel-dimmed) !important;
-        --border: none !important;
-        --border-active-color: var(--in-content-link-color-hover) !important;
-        --today-fill-color: var(--lwt-toolbar-field-color) !important;
-        --selected-fill-color: var(--in-content-link-color) !important;
-        --button-fill-color-active: var(--in-content-link-color) !important;
-        --weekend-font-color: var(--urlbar-popup-action-color) !important;
-        --today-fill-color: var(--arrowpanel-dimmed-further) !important;
-        --date-picker-item-height: 28px !important;
-    }
-
-    * {
-        scrollbar-width: none !important;
-    }
-
-    .month-year {
-        color: var(--font-color) !important;
-        height: var(--date-picker-item-height) !important;
-        border-radius: var(--general-button-border-radius) !important;
-    }
-
-    .month-year-view {
-        background-color: var(--arrowpanel-background) !important;
-        opacity: 1 !important;
-    }
-
-    .month-year-view > .spinner-container {
-        margin: 1rem 0 !important;
-    }
-
-    button {
-        fill: currentColor !important;
-        -moz-context-properties: fill, fill-opacity !important;
-        color: var(--font-color) !important;
-    }
-
-    .nav > button:is(.prev, .next) {
-        fill-opacity: 0.6 !important;
-        width: var(--date-picker-item-height) !important;
-        height: var(--date-picker-item-height) !important;
-        border-radius: var(--general-button-border-radius);
-    }
-
-    .nav > button:is(.prev, .next):hover {
-        fill-opacity: 1 !important;
-        background-color: var(--arrowpanel-dimmed) !important;
-    }
-
-    button.month-year::after {
-        position: absolute;
-        content: "";
-        width: 2.6rem;
-        height: 1.6rem;
-        background: url(chrome://global/skin/icons/arrow-down.svg) no-repeat 50% 50%;
-        -moz-context-properties: fill, fill-opacity;
-        fill-opacity: 0.5;
-        fill: currentColor !important;
-    }
-
-    button.month-year.active::after {
-        fill-opacity: 1 !important;
-    }
-
-    .spinner {
-        color: var(--font-color) !important;
-    }
-
-    .month-year-view .spinner > div {
-        align-self: center !important;
-        padding-block: calc(var(--spinner-item-height) / 5) !important;
-        -moz-box-align: center !important;
-        -moz-box-pack: center !important;
-    }
-}
-
-.pointerlockfswarning {
-    align-items: center;
-    background: rgba(45, 62, 72, 0.9);
-    border: 2px solid currentColor;
-    box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.5);
-    border-radius: 8px;
-    color: #fafafa;
-    padding: 24px 16px;
-    font: message-box;
-
-    /* temporarily disabled due to backdrop-filter being disabled. see https://bugzilla.mozilla.org/show_bug.cgi?id=1741779 */
-
-    /* background-color: var(--dialog-bgcolor) !important;
-    background-image: var(--acrylic-texture) !important;
-    backdrop-filter: var(--acrylic-blur) !important;
-    border: 1px solid var(--blurred-dialog-border-color) !important; */
-
-    background-color: var(--ui-tertiary-bg) !important;
-    border: 1px solid var(--uc-menu-border-color) !important;
-
-    color: var(--arrowpanel-color) !important;
-    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.25), 0px 0px 5px -1px rgba(0, 0, 0, 0.125) !important;
-    transition-property: transform, opacity !important;
-    transition-timing-function: cubic-bezier(0.43, 0, 0.38, 1), cubic-bezier(0.43, 0, 0.38, 1) !important;
-    transition-duration: 0.5s, 0.4s !important;
-    opacity: 0 !important;
-}
-
-.pointerlockfswarning:is([onscreen], [ontop]) {
-    opacity: 1 !important;
-    transition-timing-function: cubic-bezier(0.13, 0.25, 0.25, 0.92), cubic-bezier(0.43, 0, 0.38, 1) !important;
-    transition-duration: 0.4s, 0.35s !important;
-}
-
-.pointerlockfswarning button {
-    --uc-content-box-border-color: hsla(270, 7%, 98%, 0.1);
-    --uc-content-button-background: hsla(0, 20%, 90%, 0.08);
-    --uc-content-button-background-hover: hsla(0, 20%, 90%, 0.15);
-    --uc-content-button-background-active: hsla(0, 20%, 90%, 0.19);
-    appearance: none !important;
-    background-color: var(--uc-content-button-background) !important;
-    border: 1px solid var(--uc-content-box-border-color) !important;
-    border-radius: var(--general-button-border-radius);
-    padding: 4px 8px !important;
-    min-height: var(--menuitem-height) !important;
-}
-
-#pictureInPictureToggleContextMenu {
-    display: none !important;
-}
-
-/* in-content dialogs */
-.tab-prompt-dialog.dialogStack {
-    z-index: 0 !important; /* to avoid dimming the sidebar and findbar */
-}
-
-:is(.tab-prompt-dialog, #window-modal-dialog) .dialogBox {
-    margin-top: 0px !important; /* tab-prompt-dialogs are anchored to the top of the browser content area.
-    this makes them look like they emerge from under the navbar. */
-    border: 1px solid var(--arrowpanel-border-color);
-}
-
-:is(.tab-prompt-dialog, #window-modal-dialog) :is(.dialogBox, .dialogFrame) {
-    border-radius: 0 0 5px 5px !important;
-    border-top-width: 0 !important;
-}
-
-.content-prompt-dialog :is(.dialogBox, .dialogFrame) {
-    border-radius: 5px !important;
-}
-
-:is(.tab-prompt-dialog, #window-modal-dialog) .printDialogBox > .dialogFrame {
-    border-radius: 0 !important;
-}
-
-/* the resizer is on the right side for ltr languages, and on the left side for rtl languages. adjust the border radius accordingly */
-:is(.content-prompt-dialog, .tab-prompt-dialog, #window-modal-dialog)
-    .dialogBox[resizable="true"]:is(:dir(ltr), :-moz-locale-dir(ltr)),
-:is(.content-prompt-dialog, .tab-prompt-dialog, #window-modal-dialog)
-    .dialogBox[resizable="true"]
-    .dialogFrame:is(:dir(ltr), :-moz-locale-dir(ltr)) {
-    border-bottom-left-radius: 5px !important;
-    border-bottom-right-radius: 0 !important;
-}
-
-:is(.content-prompt-dialog, .tab-prompt-dialog, #window-modal-dialog)
-    .dialogBox[resizable="true"]:is(:dir(rtl), :-moz-locale-dir(rtl)),
-:is(.content-prompt-dialog, .tab-prompt-dialog, #window-modal-dialog)
-    .dialogBox[resizable="true"]
-    .dialogFrame:is(:dir(rtl), :-moz-locale-dir(rtl)) {
-    border-bottom-left-radius: 0 !important;
-    border-bottom-right-radius: 5px !important;
-}
-
-/* blur backdrop filter */
-.content-prompt-dialog > .dialogOverlay[style] .dialogFrame {
-    /* temporarily disabled due to backdrop-filter being disabled. see https://bugzilla.mozilla.org/show_bug.cgi?id=1741779 */
-
-    /* background-color: var(--dialog-bgcolor) !important;
-    background-image: var(--acrylic-texture) !important;
-    backdrop-filter: var(--acrylic-blur) !important;
-    border: 1px solid var(--blurred-dialog-border-color); */
-
-    background-color: var(--ui-quaternary-bg) !important;
-    border: 1px solid var(--arrowpanel-border-color);
-}
-
-/* hide the background overlay */
-.dialogOverlay[topmost="true"],
-#window-modal-dialog::backdrop {
-    background-color: transparent !important;
-}
-
-/* make the box shadow even, i hate offset drop shadows */
-:is(.content-prompt-dialog, .tab-prompt-dialog, #window-modal-dialog) .dialogBox {
-    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1), 0 0 8px 2px rgba(0, 0, 0, 0.1) !important;
-}
-
-#window-modal-dialog,
-.tab-prompt-dialog {
-    --chrome-offset: calc(
-        0.5px + var(--urlbar-container-height, 40px) + var(--tab-min-height, 36px)
-    ) !important;
-    clip-path: inset(0 -100% -100% -100%);
-}
-
-:is(#window-modal-dialog, .tab-prompt-dialog) > .dialogOverlay[style] .dialogFrame {
-    background-color: var(--ui-quaternary-bg) !important;
-}
-
-/* center text in any dialog box */
-.dialog-content-box {
-    -moz-box-pack: center;
-}
-
-@-moz-document url("chrome://global/content/commonDialog.xhtml"),
-    url("chrome://mozapps/content/handling/permissionDialog.xhtml"),
-    url("chrome://mozapps/content/handling/appChooser.xhtml"),
-    url("chrome://global/content/appPicker.xhtml"),
-    url("chrome://mozapps/content/downloads/unknownContentType.xhtml"),
-    url-prefix("chrome://browser/content/sanitize.xhtml")
-{
-    /* use this selector to exclude null-window prompts, which open in their own windows and don't inherit styles from the chrome window.
-    we don't want to apply theme styles to these prompts because no matter what we do, we can't control the titlebar.
-    it'll always be white with a red button on windows, without OS-level intervention. so don't bother with them.
-    we just use scripts to try to make all dialogs open as either modal dialogs which attach to existing chrome windows or browsing contexts,
-    or as windowed dialogs with the titlebars hidden. that can only happen at the programming level, in javascript or C++.
-    we can't do anything about the prompts opened by C++ so we just have to hope mozilla gets rid of them,
-    but fortunately mozilla has caught on and is gradually converting these dialogs to modals which pass the window or browsing context as the first parameter. e.g. try submitting this in console:
-    Services.prompt.confirmEx(window, "title", "text", 1, "1", "2", "3", "checkbox", {value: false})
-    then try changing the first parameter window to null and you'll see it opens as a regular null-window dialog instead. */
-    #commonDialogWindow[dialogroot],
-    #commonDialogWindow[dialogroot] *,
-    .dialog-button-box {
-        --in-content-page-background: transparent !important;
-        --in-content-page-color: var(--uc-parent-page-color) !important;
-        --in-content-box-background: var(--dialog-box-bgcolor) !important;
-        --in-content-box-background-dim: var(--dialog-box-bgcolor-dim) !important;
-        --in-content-box-border-color: var(--dialog-box-border-color) !important;
-        --in-content-button-background: var(--arrowpanel-dimmed) !important;
-        --in-content-button-background-hover: var(--arrowpanel-dimmed-further) !important;
-        --in-content-button-background-active: var(--arrowpanel-dimmed-even-further) !important;
-        --in-content-item-selected: var(--purple-40) !important;
-        --in-content-border-hover: var(--dialog-box-border-hover) !important;
-        --in-content-link-color: var(--purple-35) !important;
-        --in-content-link-color-hover: var(--purple-30) !important;
-        --in-content-link-color-active: var(--purple-30) !important;
-        --in-content-primary-button-background: var(--purple-40) !important;
-        --in-content-primary-button-background-hover: var(--purple-35) !important;
-        --in-content-primary-button-background-active: var(--purple-30) !important;
-        --in-content-primary-button-text-color: var(--light-on-dark-button-text-color) !important;
-        --in-content-primary-button-text-color-hover: white !important;
-        --in-content-focus-outline-color: var(--in-content-primary-button-background-hover) !important;
-        --checkbox-border-color: var(--in-content-box-border-color) !important;
-        --checkbox-checked-border-color: transparent !important;
-        --checkbox-unchecked-bgcolor: var(--in-content-button-background) !important;
-        --checkbox-unchecked-hover-bgcolor: var(--in-content-button-background-hover) !important;
-        --checkbox-unchecked-active-bgcolor: var(--in-content-button-background-active) !important;
-        --checkbox-checked-bgcolor: var(--in-content-primary-button-background) !important;
-        --checkbox-checked-color: var(--in-content-primary-button-text-color) !important;
-        --checkbox-checked-hover-bgcolor: var(
-            --in-content-primary-button-background-hover
-        ) !important;
-        --checkbox-checked-active-bgcolor: var(
-            --in-content-primary-button-background-active
-        ) !important;
-        --dropdown-bgcolor: var(--arrowpanel-background) !important;
-        --in-content-button-border-radius: var(--general-button-border-radius) !important;
-        --in-content-button-vertical-padding: 5px !important;
-    }
-
-    dialog[subdialog] .dialogRow {
-        margin-block: 0 5px !important;
-    }
-
-    #commonDialog[subdialog] #loginTextbox {
-        margin-block-start: 2px !important;
-    }
-
-    .dialog-content-box:not([hidden]) + .dialog-button-box {
-        margin-top: 5px;
-    }
-
-    .dialog-button-box:not([hidden]) {
-        display: flex;
-        justify-content: end;
-    }
-
-    .dialog-button-box > button {
-        flex-grow: 0.15;
-        flex-wrap: nowrap;
-    }
-
-    .dialog-button-box > button {
-        appearance: none !important;
-        min-height: var(--menuitem-height) !important;
-        color: var(--in-content-button-text-color) !important;
-        border: 1px solid var(--in-content-button-border-color) !important;
-        border-radius: var(--in-content-button-border-radius) !important;
-        background-color: var(--in-content-button-background) !important;
-        font-weight: 400 !important;
-        padding: 5px 7px !important;
-        text-decoration: none !important;
-        margin: 4px 8px !important;
-        font-size: 1em !important;
-    }
-
-    .dialog-button-box > button:not([disabled="true"]):is(:hover, :focus-visible) {
-        background-color: var(--in-content-button-background-hover) !important;
-        color: var(--in-content-button-text-color-hover) !important;
-        border-color: var(--in-content-button-border-color-hover) !important;
-    }
-
-    .dialog-button-box > button:not([disabled="true"]):focus-visible {
-        outline-style: auto !important;
-    }
-
-    .dialog-button-box > button:not([disabled="true"]):hover:active,
-    .dialog-button-box > button[open],
-    .dialog-button-box > button[open]:hover {
-        background-color: var(--in-content-button-background-active) !important;
-        color: var(--in-content-button-text-color-active) !important;
-        border-color: var(--in-content-button-border-color-active) !important;
-    }
-
-    .dialog-button-box > button[disabled="true"] {
-        opacity: 0.4 !important;
-    }
-
-    .dialog-button-box > button:is([autofocus], [type="submit"], [default], .primary) {
-        background-color: var(--in-content-primary-button-background) !important;
-        color: var(--in-content-primary-button-text-color) !important;
-        border-color: var(--in-content-primary-button-border-color) !important;
-    }
-
-    .dialog-button-box
-        > button:is([autofocus], [type="submit"], [default], .primary):not([disabled="true"]):is(:hover, :focus-visible) {
-        background-color: var(--in-content-primary-button-background-hover) !important;
-        color: var(--in-content-primary-button-text-color-hover) !important;
-        border-color: var(--in-content-primary-button-border-hover) !important;
-    }
-
-    .dialog-button-box
-        > button:is([autofocus], [type="submit"], [default], .primary):not([disabled="true"]):hover:active {
-        background-color: var(--in-content-primary-button-background-active) !important;
-    }
-
-    dialog input:-moz-focusring,
-    button:-moz-focusring {
-        box-shadow: none !important;
-    }
-
-    #checkboxContainer checkbox {
-        margin-inline-start: 4px !important;
-        margin-top: 4px !important;
-    }
-
-    richlistbox[id] {
-        background-color: var(--in-content-box-background-dim) !important;
-        border-color: var(--in-content-box-border-color) !important;
-    }
-
-    richlistbox[id] richlistitem {
-        min-height: 32px !important;
-    }
-
-    richlistbox[id] richlistitem[selected="true"] {
-        background-color: var(--in-content-button-background) !important;
-        color: var(--in-content-page-color) !important;
-    }
-
-    richlistbox[id] richlistitem > button {
-        padding-block: 0 !important;
-        min-height: 24px !important;
-    }
-
-    richlistbox[id] richlistitem > button[label] {
-        background-color: var(--in-content-primary-button-background) !important;
-    }
-
-    richlistbox[id]
-        richlistitem:not([disabled="true"])
-        > button[label]:is(:enabled, :not([disabled="true"])):is(:hover, :focus-visible) {
-        background-color: var(--in-content-primary-button-background-hover) !important;
-    }
-
-    richlistbox[id]
-        richlistitem:not([disabled="true"])
-        > button[label]:is(:enabled, :not([disabled="true"])):hover:active,
-    richlistbox[id] richlistitem > button[label][open],
-    richlistbox[id] richlistitem > button[label][open]:hover {
-        background-color: var(--in-content-primary-button-background-active) !important;
-    }
-
-    select:not([size], [multiple]) > option {
-        background-color: var(--dropdown-bgcolor) !important;
-        color: var(--ui-text-80) !important;
-    }
-
-    button,
-    select,
-    input[type="color"],
-    menulist {
-        min-height: var(--menuitem-height) !important;
-        border-radius: var(--in-content-button-border-radius) !important;
-    }
-
-    input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]),
-    textarea,
-    search-textbox {
-        border-radius: var(--general-button-border-radius) !important;
-    }
-
-    input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"]),
-    textarea {
-        padding: 5px !important;
-    }
-
-    input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):focus,
-    textarea:focus,
-    search-textbox[focused] {
-        border-color: var(--in-content-focus-outline-color) !important;
-    }
-
-    input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"])::selection,
-    textarea::selection {
-        background-color: var(--ui-selection-bgcolor) !important;
-        color: var(--ui-selection-color) !important;
-    }
-
-    input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):-moz-window-inactive::selection,
-    textarea:-moz-window-inactive::selection {
-        background-color: var(
-            --ui-selection-bgcolor-disabled,
-            text-select-disabled-background
-        ) !important;
-    }
-
-    window[role="dialog"] ::selection,
-    window[role="dialog"] textarea::selection {
-        background-color: var(--global-selection-bgcolor) !important;
-        color: var(--global-selection-color) !important;
-    }
-
-    window[role="dialog"] :-moz-window-inactive::selection,
-    window[role="dialog"] textarea:-moz-window-inactive::selection {
-        background-color: var(
-            --global-selection-bgcolor-disabled,
-            text-select-disabled-background
-        ) !important;
-    }
-
-    input[type="number"] {
-        overflow: hidden !important;
-        overflow-clip-box: padding-box !important;
-        border-radius: var(--in-content-button-border-radius) !important;
-        background-clip: padding-box !important;
-        border-right: none !important;
-    }
-
-    input[type="number"]::-moz-number-spin-box {
-        border-top-right-radius: var(--in-content-button-border-radius) !important;
-        border-bottom-right-radius: var(--in-content-button-border-radius) !important;
-        border-right: 1px solid var(--in-content-box-border-color) !important;
-        border-left: none !important;
-        width: calc(1em + 0.67px) !important;
-    }
-
-    input[type="number"]:hover,
-    input[type="number"]:hover::-moz-number-spin-box {
-        border-color: var(--in-content-border-hover) !important;
-    }
-
-    input[type="number"]:focus,
-    input[type="number"]:focus::-moz-number-spin-box {
-        border-color: var(--in-content-focus-outline-color) !important;
+  }
+
+  #titleText {
+    font-weight: var(--uc-font-weight-semibold, 500) !important;
+    font-size: 13px !important;
+  }
+
+  #chooser #item-choose {
+    padding-inline-start: 32px !important;
+  }
+
+  #chooser richlistitem {
+    padding-block: 3px !important;
+  }
+
+  #chooser richlistitem image[width] {
+    max-width: 16px !important;
+    max-height: 16px !important;
+    margin-inline: 8px !important;
+  }
+
+  @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
+    #commonDialogWindow[dialogroot] {
+      font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
+      font-kerning: normal !important;
+      padding-block: 2px !important;
+    }
+
+    .sizeDetermined {
+      padding-block: 14px !important;
     }
 
     #titleText {
-        font-weight: var(--uc-font-weight-semibold, 500) !important;
-        font-size: 13px !important;
+      font-weight: var(--uc-font-weight-semibold, 400) !important;
+      font-size: 14px !important;
+      font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
     }
 
-    #chooser #item-choose {
-        padding-inline-start: 32px !important;
+    #chooser .name {
+      font-weight: var(--uc-font-weight-bold, 500) !important;
     }
-
-    #chooser richlistitem {
-        padding-block: 3px !important;
-    }
-
-    #chooser richlistitem image[width] {
-        max-width: 16px !important;
-        max-height: 16px !important;
-        margin-inline: 8px !important;
-    }
-
-    @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
-        #commonDialogWindow[dialogroot] {
-            font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
-            font-kerning: normal !important;
-            padding-block: 2px !important;
-        }
-
-        .sizeDetermined {
-            padding-block: 14px !important;
-        }
-
-        #titleText {
-            font-weight: var(--uc-font-weight-semibold, 400) !important;
-            font-size: 14px !important;
-            font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
-        }
-
-        #chooser .name {
-            font-weight: var(--uc-font-weight-bold, 500) !important;
-        }
-    }
+  }
 }
 
 @-moz-document url("chrome://mozapps/content/downloads/unknownContentType.xhtml"),
     url("chrome://global/content/appPicker.xhtml")
 {
-    :root,
-    :root dialog,
-    .dialog-button-box {
-        --in-content-page-background: var(--uc-content-page-background) !important;
-        --in-content-page-color: var(--uc-content-page-color) !important;
-        --in-content-box-background: var(--uc-content-box-background) !important;
-        --in-content-box-background-odd: var(--uc-content-box-background-odd) !important;
-        --in-content-box-background-dim: var(--uc-content-box-background-dim) !important;
-        --in-content-box-border-color: var(--uc-content-box-border-color) !important;
-        --in-content-button-background: var(--uc-content-button-background) !important;
-        --in-content-button-background-hover: var(--uc-content-button-background-hover) !important;
-        --in-content-button-background-active: var(
-            --uc-content-button-background-active
-        ) !important;
-        --in-content-button-background-solid: var(--uc-content-button-background-solid);
-        --in-content-item-selected: var(--purple-40) !important;
-        --in-content-border-hover: var(--uc-content-border-hover) !important;
-        --in-content-link-color: var(--purple-30) !important;
-        --in-content-link-color-hover: var(--purple-25) !important;
-        --in-content-link-color-active: var(--purple-20) !important;
-        --in-content-link-visited-color: var(--pink-40) !important;
-        --in-content-link-visited-color-hover: var(--pink-35) !important;
-        --in-content-link-visited-color-active: var(--pink-30) !important;
-        --in-content-primary-button-background: var(--purple-40) !important;
-        --in-content-primary-button-background-hover: var(--purple-35) !important;
-        --in-content-primary-button-background-active: var(--purple-30) !important;
-        --in-content-primary-button-text-color: var(--light-on-dark-button-text-color) !important;
-        --in-content-focus-outline-color: var(--in-content-primary-button-background-hover) !important;
-        --in-content-button-border-radius: var(--general-button-border-radius) !important;
-        --in-content-accent-color: var(--purple-35) !important;
-        --in-content-table-background: var(--in-content-box-background) !important;
-        --in-content-table-header-background: var(--purple-40-a50) !important;
-    }
+  :root,
+  :root dialog,
+  .dialog-button-box {
+    --in-content-page-background: var(--uc-content-page-background) !important;
+    --in-content-page-color: var(--uc-content-page-color) !important;
+    --in-content-box-background: var(--uc-content-box-background) !important;
+    --in-content-box-background-odd: var(--uc-content-box-background-odd) !important;
+    --in-content-box-background-dim: var(--uc-content-box-background-dim) !important;
+    --in-content-box-border-color: var(--uc-content-box-border-color) !important;
+    --in-content-button-background: var(--uc-content-button-background) !important;
+    --in-content-button-background-hover: var(--uc-content-button-background-hover) !important;
+    --in-content-button-background-active: var(--uc-content-button-background-active) !important;
+    --in-content-button-background-solid: var(--uc-content-button-background-solid);
+    --in-content-item-selected: var(--purple-40) !important;
+    --in-content-border-hover: var(--uc-content-border-hover) !important;
+    --in-content-link-color: var(--purple-30) !important;
+    --in-content-link-color-hover: var(--purple-25) !important;
+    --in-content-link-color-active: var(--purple-20) !important;
+    --in-content-link-visited-color: var(--pink-40) !important;
+    --in-content-link-visited-color-hover: var(--pink-35) !important;
+    --in-content-link-visited-color-active: var(--pink-30) !important;
+    --in-content-primary-button-background: var(--purple-40) !important;
+    --in-content-primary-button-background-hover: var(--purple-35) !important;
+    --in-content-primary-button-background-active: var(--purple-30) !important;
+    --in-content-primary-button-text-color: var(--light-on-dark-button-text-color) !important;
+    --in-content-focus-outline-color: var(--in-content-primary-button-background-hover) !important;
+    --in-content-button-border-radius: var(--general-button-border-radius) !important;
+    --in-content-accent-color: var(--purple-35) !important;
+    --in-content-table-background: var(--in-content-box-background) !important;
+    --in-content-table-header-background: var(--purple-40-a50) !important;
+  }
 
-    #unknownContentType {
-        padding: 10px !important;
-    }
+  #unknownContentType {
+    padding: 10px !important;
+  }
 
-    #intro {
-        margin-top: 5px !important;
-    }
+  #intro {
+    margin-top: 5px !important;
+  }
 
-    .header {
-        margin-bottom: 5px !important;
-    }
+  .header {
+    margin-bottom: 5px !important;
+  }
 
-    radiogroup radio {
-        margin-block: 5px !important;
-    }
+  radiogroup radio {
+    margin-block: 5px !important;
+  }
 
-    menulist {
-        padding: 5px 7px !important;
-    }
+  menulist {
+    padding: 5px 7px !important;
+  }
 
-    radiogroup deck menulist {
-        margin-block: 0 !important;
-    }
+  radiogroup deck menulist {
+    margin-block: 0 !important;
+  }
 
-    separator.thin:not([orient="vertical"]) {
-        height: 5px !important;
-    }
+  separator.thin:not([orient="vertical"]) {
+    height: 5px !important;
+  }
 
-    .dialog-button-box:not([hidden]) {
-        column-gap: 10px !important;
-    }
+  .dialog-button-box:not([hidden]) {
+    column-gap: 10px !important;
+  }
 
-    .dialog-button-box button {
-        margin: 0 !important;
-        min-height: var(--menuitem-height) !important;
-    }
+  .dialog-button-box button {
+    margin: 0 !important;
+    min-height: var(--menuitem-height) !important;
+  }
 
-    richlistbox[id] {
-        background-color: var(--in-content-box-background) !important;
-        border-radius: var(--general-button-border-radius);
-    }
+  richlistbox[id] {
+    background-color: var(--in-content-box-background) !important;
+    border-radius: var(--general-button-border-radius);
+  }
 
-    @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
-        .header,
-        #location {
-            font-weight: var(--uc-font-weight-extrabold, 500) !important;
-            font-family: SF Pro, SF Arabic, Segoe UI, sans-serif !important;
-        }
+  @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
+    .header,
+    #location {
+      font-weight: var(--uc-font-weight-extrabold, 500) !important;
+      font-family: SF Pro, SF Arabic, Segoe UI, sans-serif !important;
     }
+  }
 }
 
 @-moz-document url("chrome://mozapps/content/handling/permissionDialog.xhtml"),
@@ -1106,394 +1111,395 @@ panel[type="autocomplete-richlistbox"]
     url-prefix("chrome://browser/content/sanitize.xhtml"),
     url("chrome://browser/content/spotlight.html")
 {
+  :root[dialogroot],
+  :root[dialogroot] dialog,
+  :root[dialogroot] richlistbox[id]:not(#categories) > richlistitem[selected] {
+    --in-content-page-background: transparent !important;
+    --in-content-page-color: var(--uc-parent-page-color) !important;
+    --in-content-box-background: var(--dialog-box-bgcolor) !important;
+    --in-content-box-background-dim: var(--dialog-box-bgcolor-dim) !important;
+    --in-content-box-border-color: var(--dialog-box-border-color) !important;
+    --in-content-button-background: var(--arrowpanel-dimmed) !important;
+    --in-content-button-background-hover: var(--arrowpanel-dimmed-further) !important;
+    --in-content-button-background-active: var(--arrowpanel-dimmed-even-further) !important;
+    --in-content-item-selected: var(--purple-40) !important;
+    --in-content-item-hover: var(--arrowpanel-dimmed) !important;
+    --in-content-border-hover: var(--dialog-box-border-hover) !important;
+    --in-content-link-color: var(--purple-35) !important;
+    --in-content-link-color-hover: var(--purple-30) !important;
+    --in-content-link-color-active: var(--purple-30) !important;
+    --in-content-primary-button-background: var(--purple-40) !important;
+    --in-content-primary-button-background-hover: var(--purple-35) !important;
+    --in-content-primary-button-background-active: var(--purple-30) !important;
+    --in-content-primary-button-text-color: var(--light-on-dark-button-text-color) !important;
+    --in-content-focus-outline-color: var(--in-content-primary-button-background-hover) !important;
+    --checkbox-border-color: var(--in-content-box-border-color) !important;
+    --checkbox-checked-border-color: transparent !important;
+    --checkbox-unchecked-bgcolor: var(--in-content-button-background) !important;
+    --checkbox-unchecked-hover-bgcolor: var(--in-content-button-background-hover) !important;
+    --checkbox-unchecked-active-bgcolor: var(--in-content-button-background-active) !important;
+    --checkbox-checked-bgcolor: var(--in-content-primary-button-background) !important;
+    --checkbox-checked-color: var(--in-content-primary-button-text-color) !important;
+    --checkbox-checked-hover-bgcolor: var(--in-content-primary-button-background-hover) !important;
+    --checkbox-checked-active-bgcolor: var(
+      --in-content-primary-button-background-active
+    ) !important;
+    --dropdown-bgcolor: var(--arrowpanel-background) !important;
+    --in-content-button-border-radius: var(--general-button-border-radius) !important;
+    --in-content-button-vertical-padding: 5px !important;
+  }
+
+  :root[dialogroot] input[type="checkbox"]:checked {
+    background-image: url(chrome://userchrome/content/check.svg) !important;
+    background-size: contain !important;
+  }
+
+  :root[dialogroot] input[type="radio"],
+  :root[dialogroot] .radio-check {
+    appearance: none;
+    border: 1px solid var(--in-content-box-border-color);
+    border-radius: 100%;
+    margin-block: 3px;
+    margin-inline: 0 10px;
+    background-color: var(--in-content-button-background);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain !important;
+    flex-shrink: 0;
+  }
+
+  :root[dialogroot] select:not([size], [multiple]) > option {
+    background-color: var(--dropdown-bgcolor) !important;
+    color: var(--ui-text-80) !important;
+  }
+
+  :root[dialogroot] #editBMPanel_tagsSelector {
+    margin-inline: 4px !important;
+  }
+
+  :root[dialogroot] #editBookmarkPanelRows {
+    padding-inline: 0 !important;
+    padding-block: 0 8px !important;
+  }
+
+  button,
+  :root[dialogroot] :is(select, input[type="color"], menulist) {
+    min-height: var(--menuitem-height) !important;
+    line-height: var(--menuitem-height) !important;
+    border-radius: var(--in-content-button-border-radius) !important;
+  }
+
+  :root[dialogroot]
+    input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"]),
+  :root[dialogroot] textarea {
+    padding-block: 5px !important;
+  }
+
+  :root[dialogroot]
+    input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):where(:focus, :focus-visible),
+  :root[dialogroot] textarea:where(:focus, :focus-visible),
+  :root[dialogroot] search-textbox[focused] {
+    border-color: transparent !important;
+    outline-offset: 0 !important;
+  }
+
+  :where(:root[dialogroot], .dialog-button-box) button:focus-visible,
+  :where(:root[dialogroot], .dialog-button-box) select:focus-visible,
+  :where(:root[dialogroot], .dialog-button-box)
+    input:is([type="checkbox"], [type="color"], [type="radio"]):focus-visible,
+  :where(:root[dialogroot], .dialog-button-box) menulist:focus-visible,
+  :where(:root[dialogroot], .dialog-button-box)
+    checkbox:not([native]):focus-visible
+    > .checkbox-check,
+  :where(:root[dialogroot], .dialog-button-box) radio[focused="true"] > .radio-check,
+  :where(:root[dialogroot], .dialog-button-box) tab:focus-visible > .tab-middle > .tab-text {
+    outline-offset: 0 !important;
+  }
+
+  :root[dialogroot]
+    input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"])::selection,
+  :root[dialogroot] textarea::selection {
+    background-color: var(--ui-selection-bgcolor) !important;
+    color: var(--ui-selection-color) !important;
+  }
+
+  :root[dialogroot]
+    input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):-moz-window-inactive::selection,
+  :root[dialogroot] textarea:-moz-window-inactive::selection {
+    background-color: var(
+      --ui-selection-bgcolor-disabled,
+      text-select-disabled-background
+    ) !important;
+  }
+
+  :root[dialogroot] details > summary {
+    border-radius: 0.01px;
+  }
+
+  :root[dialogroot] details > summary:focus-visible {
+    box-shadow: none;
+    outline: 2px solid var(--in-content-focus-outline-color);
+    outline-offset: 5px;
+  }
+
+  :root[dialogroot] menulist,
+  :root[dialogroot] input[type="text"] {
+    margin-inline: 4px !important;
+    padding-block: 0 !important;
+    padding-inline: 6px !important;
+    margin-block: 0 !important;
+    min-height: var(--menuitem-height) !important;
+    box-sizing: border-box !important;
+    border-radius: var(--toolbarbutton-border-radius) !important;
+  }
+
+  :root[dialogroot]
+    input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):focus-visible,
+  :root[dialogroot] textarea:focus-visible,
+  :root[dialogroot] search-textbox:focus-visible {
+    background-color: color-mix(
+      in srgb,
+      currentColor 3%,
+      var(--in-content-box-background)
+    ) !important;
+  }
+
+  :root[dialogroot] menulist {
+    padding-inline: 4px 2px !important;
+  }
+
+  :root[dialogroot] richlistbox[id] {
+    border-radius: var(--toolbarbutton-border-radius) !important;
+  }
+
+  :root[dialogroot] tree {
+    margin-inline: 4px !important;
+    border-radius: var(--toolbarbutton-border-radius) !important;
+  }
+
+  :root[dialogroot] treecols {
+    border: none !important;
+  }
+
+  button {
+    border-radius: var(--toolbarbutton-border-radius) !important;
+  }
+
+  :root[dialogroot] .expander-up,
+  :root[dialogroot] .expander-down {
+    min-height: var(--menuitem-height) !important;
+    min-width: var(--menuitem-height) !important;
+    margin-inline: 4px !important;
+  }
+
+  button[dlgtype]:is(:hover, :focus-visible):not(:hover:active, [disabled="true"], [default]),
+  :root[dialogroot]
+    :is(.expander-up, .expander-down, .panel-button):is(:hover, :focus-visible):not(:hover:active, [disabled="true"]) {
+    background-color: var(--in-content-button-background-hover) !important;
+    color: var(--in-content-button-text-color-hover) !important;
+    border-color: transparent;
+  }
+
+  :root[dialogroot] menulist:not([disabled="true"]):focus-visible:not(:hover:active) {
+    background-color: var(--in-content-button-background-hover) !important;
+    color: var(--in-content-button-text-color-hover) !important;
+  }
+
+  button:is([autofocus], [type="submit"], .primary):enabled:is(:hover, :focus-visible):not(:hover:active, [disabled="true"]),
+  button:is([default], .primary):is(:hover, :focus-visible):not(:hover:active, [disabled="true"]) {
+    background-color: var(--in-content-primary-button-background-hover) !important;
+    color: var(--in-content-primary-button-text-color-hover) !important;
+  }
+
+  :root[dialogroot] input[type="number"] {
+    overflow: hidden !important;
+    overflow-clip-box: padding-box !important;
+    border-radius: var(--in-content-button-border-radius) !important;
+    background-clip: padding-box !important;
+    border-right: none !important;
+  }
+
+  :root[dialogroot] input[type="number"]::-moz-number-spin-box {
+    border-top-right-radius: var(--in-content-button-border-radius) !important;
+    border-bottom-right-radius: var(--in-content-button-border-radius) !important;
+    border-right: 1px solid var(--in-content-box-border-color) !important;
+    border-left: none !important;
+    width: calc(1em + 0.67px) !important;
+  }
+
+  :root[dialogroot] input[type="number"]:hover,
+  :root[dialogroot] input[type="number"]:hover::-moz-number-spin-box {
+    border-color: var(--in-content-border-hover) !important;
+  }
+
+  :root[dialogroot] input[type="number"]:hover:active::-moz-number-spin-box {
+    border-color: var(--purple-40) !important;
+  }
+
+  :root[dialogroot] input[type="number"]:focus,
+  :root[dialogroot] input[type="number"]:focus::-moz-number-spin-box {
+    border-color: var(--in-content-focus-outline-color) !important;
+  }
+
+  :root[dialogroot] #titleText {
+    font-size: 16px !important;
+    line-height: 16px !important;
+    font-weight: var(--uc-font-weight-semibold, 500) !important;
+  }
+
+  :root[dialogroot] #titleContainer {
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 !important;
+  }
+
+  :root[dialogroot] #titleContainer:not([noicon]) > #titleCropper {
+    translate: none !important;
+  }
+
+  :root[dialogroot] #handling > #description {
+    font-size: 1.15em !important;
+    font-weight: var(--uc-font-weight-bold, 600) !important;
+  }
+
+  :root[dialogroot] #chooser {
+    margin-bottom: 10px !important;
+  }
+
+  :root[dialogroot] #remember-text {
+    margin-top: 4px !important;
+    color: var(--in-content-deemphasized-text);
+    margin-left: 24px !important;
+  }
+
+  :root[dialogroot] #rememberContainer > .toggle-container-with-text {
+    color: inherit !important;
+  }
+
+  :root[dialogroot] #bookmarkpropertiesdialog #editBookmarkPanelContent label[control] {
+    margin-inline: 0 !important;
+  }
+
+  :root[dialogroot] #bookmarkpropertiesdialog {
+    -moz-box-align: center !important;
+  }
+
+  :root[dialogroot] #bookmarkpropertiesdialog .titleIcon {
+    padding-inline-end: 6px !important;
+  }
+
+  #SanitizeDialog[dialogroot] {
+    padding-bottom: 6px !important;
+  }
+
+  #SanitizeDialog[dialogroot] #SanitizeDurationBox,
+  #SanitizeDialog[dialogroot] #sanitizeEverythingWarningBox {
+    margin-inline: 8px !important;
+    margin-top: 8px !important;
+  }
+
+  #SanitizeDialog[dialogroot] groupbox {
+    margin-inline: 8px !important;
+  }
+
+  #SanitizeDialog[dialogroot] #sanitizeEverythingWarningBox {
+    border-color: transparent !important;
+    background-color: transparent !important;
+    font-size: 1.1em !important;
+  }
+
+  #SanitizeDialog[dialogroot] #sanitizeEverythingWarningIcon {
+    list-style-image: url(chrome://global/skin/icons/warning.svg) !important;
+    width: 48px;
+    height: 48px;
+    -moz-context-properties: fill;
+    fill: currentColor;
+    color: hsl(44, 95%, 60%);
+  }
+
+  .tree-input[type="text"] {
+    background-color: var(--purple-40) !important;
+    border: none !important;
+    padding: 1px 0px !important;
+    margin-top: -1px !important;
+    margin-inline: -4px 3px !important;
+    width: auto !important;
+    max-width: -moz-available !important;
+    text-decoration: 1px dotted underline !important;
+    text-decoration-skip-ink: none !important;
+  }
+
+  .tree-input[type="text"]::selection {
+    background-color: var(--ui-selection-bgcolor) !important;
+    color: var(--ui-selection-color) !important;
+    text-decoration-color: var(--ui-selection-color) !important;
+  }
+
+  @-moz-document url("chrome://mozapps/content/handling/permissionDialog.xhtml")
+  {
+    :root[dialogroot] dialog > #description,
+    :root[dialogroot] dialog > #description-box > #description {
+      font-size: 1.15em !important;
+      font-weight: var(--uc-font-weight-bold, 600) !important;
+    }
+
+    :root[dialogroot] #description-box {
+      margin-bottom: 10px !important;
+    }
+
+    :root[dialogroot] #description:not([hidden], :empty) ~ #description-extra {
+      margin-top: -10px !important;
+    }
+  }
+
+  @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
     :root[dialogroot],
-    :root[dialogroot] dialog,
-    :root[dialogroot] richlistbox[id]:not(#categories) > richlistitem[selected] {
-        --in-content-page-background: transparent !important;
-        --in-content-page-color: var(--uc-parent-page-color) !important;
-        --in-content-box-background: var(--dialog-box-bgcolor) !important;
-        --in-content-box-background-dim: var(--dialog-box-bgcolor-dim) !important;
-        --in-content-box-border-color: var(--dialog-box-border-color) !important;
-        --in-content-button-background: var(--arrowpanel-dimmed) !important;
-        --in-content-button-background-hover: var(--arrowpanel-dimmed-further) !important;
-        --in-content-button-background-active: var(--arrowpanel-dimmed-even-further) !important;
-        --in-content-item-selected: var(--purple-40) !important;
-        --in-content-item-hover: var(--arrowpanel-dimmed) !important;
-        --in-content-border-hover: var(--dialog-box-border-hover) !important;
-        --in-content-link-color: var(--purple-35) !important;
-        --in-content-link-color-hover: var(--purple-30) !important;
-        --in-content-link-color-active: var(--purple-30) !important;
-        --in-content-primary-button-background: var(--purple-40) !important;
-        --in-content-primary-button-background-hover: var(--purple-35) !important;
-        --in-content-primary-button-background-active: var(--purple-30) !important;
-        --in-content-primary-button-text-color: var(--light-on-dark-button-text-color) !important;
-        --in-content-focus-outline-color: var(--in-content-primary-button-background-hover) !important;
-        --checkbox-border-color: var(--in-content-box-border-color) !important;
-        --checkbox-checked-border-color: transparent !important;
-        --checkbox-unchecked-bgcolor: var(--in-content-button-background) !important;
-        --checkbox-unchecked-hover-bgcolor: var(--in-content-button-background-hover) !important;
-        --checkbox-unchecked-active-bgcolor: var(--in-content-button-background-active) !important;
-        --checkbox-checked-bgcolor: var(--in-content-primary-button-background) !important;
-        --checkbox-checked-color: var(--in-content-primary-button-text-color) !important;
-        --checkbox-checked-hover-bgcolor: var(
-            --in-content-primary-button-background-hover
-        ) !important;
-        --checkbox-checked-active-bgcolor: var(
-            --in-content-primary-button-background-active
-        ) !important;
-        --dropdown-bgcolor: var(--arrowpanel-background) !important;
-        --in-content-button-border-radius: var(--general-button-border-radius) !important;
-        --in-content-button-vertical-padding: 5px !important;
+    :root[dialogroot] dialog {
+      font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
+      font-kerning: normal !important;
     }
 
-    :root[dialogroot] input[type="checkbox"]:checked {
-        background-image: url(chrome://userchrome/content/check.svg) !important;
-        background-size: contain !important;
+    :root[dialogroot] :is(h2, h3, #titleText) {
+      font-weight: var(--uc-font-weight-semibold, 400) !important;
+      font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
     }
-
-    :root[dialogroot] input[type="radio"],
-    :root[dialogroot] .radio-check {
-        appearance: none;
-        border: 1px solid var(--in-content-box-border-color);
-        border-radius: 100%;
-        margin-block: 3px;
-        margin-inline: 0 10px;
-        background-color: var(--in-content-button-background);
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: contain !important;
-        flex-shrink: 0;
-    }
-
-    :root[dialogroot] select:not([size], [multiple]) > option {
-        background-color: var(--dropdown-bgcolor) !important;
-        color: var(--ui-text-80) !important;
-    }
-
-    :root[dialogroot] #editBMPanel_tagsSelector {
-        margin-inline: 4px !important;
-    }
-
-    :root[dialogroot] #editBookmarkPanelRows {
-        padding-inline: 0 !important;
-        padding-block: 0 8px !important;
-    }
-
-    button,
-    :root[dialogroot] :is(select, input[type="color"], menulist) {
-        min-height: var(--menuitem-height) !important;
-        line-height: var(--menuitem-height) !important;
-        border-radius: var(--in-content-button-border-radius) !important;
-    }
-
-    :root[dialogroot]
-        input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"]),
-    :root[dialogroot] textarea {
-        padding-block: 5px !important;
-    }
-
-    :root[dialogroot]
-        input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):where(:focus, :focus-visible),
-    :root[dialogroot] textarea:where(:focus, :focus-visible),
-    :root[dialogroot] search-textbox[focused] {
-        border-color: transparent !important;
-        outline-offset: 0 !important;
-    }
-
-    :where(:root[dialogroot], .dialog-button-box) button:focus-visible,
-    :where(:root[dialogroot], .dialog-button-box) select:focus-visible,
-    :where(:root[dialogroot], .dialog-button-box) input:is([type="checkbox"], [type="color"], [type="radio"]):focus-visible,
-    :where(:root[dialogroot], .dialog-button-box) menulist:focus-visible,
-    :where(:root[dialogroot], .dialog-button-box) checkbox:not([native]):focus-visible > .checkbox-check,
-    :where(:root[dialogroot], .dialog-button-box) radio[focused="true"] > .radio-check,
-    :where(:root[dialogroot], .dialog-button-box) tab:focus-visible > .tab-middle > .tab-text {
-        outline-offset: 0 !important;
-    }
-
-    :root[dialogroot]
-        input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"])::selection,
-    :root[dialogroot] textarea::selection {
-        background-color: var(--ui-selection-bgcolor) !important;
-        color: var(--ui-selection-color) !important;
-    }
-
-    :root[dialogroot]
-        input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):-moz-window-inactive::selection,
-    :root[dialogroot] textarea:-moz-window-inactive::selection {
-        background-color: var(
-            --ui-selection-bgcolor-disabled,
-            text-select-disabled-background
-        ) !important;
-    }
-
-    :root[dialogroot] details > summary {
-        border-radius: 0.01px;
-    }
-
-    :root[dialogroot] details > summary:focus-visible {
-        box-shadow: none;
-        outline: 2px solid var(--in-content-focus-outline-color);
-        outline-offset: 5px;
-    }
-
-    :root[dialogroot] menulist,
-    :root[dialogroot] input[type="text"] {
-        margin-inline: 4px !important;
-        padding-block: 0 !important;
-        padding-inline: 6px !important;
-        margin-block: 0 !important;
-        min-height: var(--menuitem-height) !important;
-        box-sizing: border-box !important;
-        border-radius: var(--toolbarbutton-border-radius) !important;
-    }
-
-    :root[dialogroot]
-        input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):focus-visible,
-    :root[dialogroot] textarea:focus-visible,
-    :root[dialogroot] search-textbox:focus-visible {
-        background-color: color-mix(
-            in srgb,
-            currentColor 3%,
-            var(--in-content-box-background)
-        ) !important;
-    }
-
-    :root[dialogroot] menulist {
-        padding-inline: 4px 2px !important;
-    }
-
-    :root[dialogroot] richlistbox[id] {
-        border-radius: var(--toolbarbutton-border-radius) !important;
-    }
-
-    :root[dialogroot] tree {
-        margin-inline: 4px !important;
-        border-radius: var(--toolbarbutton-border-radius) !important;
-    }
-
-    :root[dialogroot] treecols {
-        border: none !important;
-    }
-
-    button {
-        border-radius: var(--toolbarbutton-border-radius) !important;
-    }
-
-    :root[dialogroot] .expander-up,
-    :root[dialogroot] .expander-down {
-        min-height: var(--menuitem-height) !important;
-        min-width: var(--menuitem-height) !important;
-        margin-inline: 4px !important;
-    }
-
-    button[dlgtype]:is(:hover, :focus-visible):not(:hover:active, [disabled="true"], [default]),
-    :root[dialogroot]
-        :is(.expander-up, .expander-down, .panel-button):is(:hover, :focus-visible):not(:hover:active, [disabled="true"]) {
-        background-color: var(--in-content-button-background-hover) !important;
-        color: var(--in-content-button-text-color-hover) !important;
-        border-color: transparent;
-    }
-
-    :root[dialogroot] menulist:not([disabled="true"]):focus-visible:not(:hover:active) {
-        background-color: var(--in-content-button-background-hover) !important;
-        color: var(--in-content-button-text-color-hover) !important;
-    }
-
-    button:is([autofocus], [type="submit"], .primary):enabled:is(:hover, :focus-visible):not(:hover:active, [disabled="true"]),
-    button:is([default], .primary):is(:hover, :focus-visible):not(:hover:active, [disabled="true"]) {
-        background-color: var(--in-content-primary-button-background-hover) !important;
-        color: var(--in-content-primary-button-text-color-hover) !important;
-    }
-
-    :root[dialogroot] input[type="number"] {
-        overflow: hidden !important;
-        overflow-clip-box: padding-box !important;
-        border-radius: var(--in-content-button-border-radius) !important;
-        background-clip: padding-box !important;
-        border-right: none !important;
-    }
-
-    :root[dialogroot] input[type="number"]::-moz-number-spin-box {
-        border-top-right-radius: var(--in-content-button-border-radius) !important;
-        border-bottom-right-radius: var(--in-content-button-border-radius) !important;
-        border-right: 1px solid var(--in-content-box-border-color) !important;
-        border-left: none !important;
-        width: calc(1em + 0.67px) !important;
-    }
-
-    :root[dialogroot] input[type="number"]:hover,
-    :root[dialogroot] input[type="number"]:hover::-moz-number-spin-box {
-        border-color: var(--in-content-border-hover) !important;
-    }
-
-    :root[dialogroot] input[type="number"]:hover:active::-moz-number-spin-box {
-        border-color: var(--purple-40) !important;
-    }
-
-    :root[dialogroot] input[type="number"]:focus,
-    :root[dialogroot] input[type="number"]:focus::-moz-number-spin-box {
-        border-color: var(--in-content-focus-outline-color) !important;
-    }
-
-    :root[dialogroot] #titleText {
-        font-size: 16px !important;
-        line-height: 16px !important;
-        font-weight: var(--uc-font-weight-semibold, 500) !important;
-    }
-
-    :root[dialogroot] #titleContainer {
-        align-items: center !important;
-        justify-content: center !important;
-        margin: 0 !important;
-    }
-
-    :root[dialogroot] #titleContainer:not([noicon]) > #titleCropper {
-        translate: none !important;
-    }
-
-    :root[dialogroot] #handling > #description {
-        font-size: 1.15em !important;
-        font-weight: var(--uc-font-weight-bold, 600) !important;
-    }
-
-    :root[dialogroot] #chooser {
-        margin-bottom: 10px !important;
-    }
-
-    :root[dialogroot] #remember-text {
-        margin-top: 4px !important;
-        color: var(--in-content-deemphasized-text);
-        margin-left: 24px !important;
-    }
-
-    :root[dialogroot] #rememberContainer > .toggle-container-with-text {
-        color: inherit !important;
-    }
-
-    :root[dialogroot] #bookmarkpropertiesdialog #editBookmarkPanelContent label[control] {
-        margin-inline: 0 !important;
-    }
-
-    :root[dialogroot] #bookmarkpropertiesdialog {
-        -moz-box-align: center !important;
-    }
-
-    :root[dialogroot] #bookmarkpropertiesdialog .titleIcon {
-        padding-inline-end: 6px !important;
-    }
-
-    #SanitizeDialog[dialogroot] {
-        padding-bottom: 6px !important;
-    }
-
-    #SanitizeDialog[dialogroot] #SanitizeDurationBox,
-    #SanitizeDialog[dialogroot] #sanitizeEverythingWarningBox {
-        margin-inline: 8px !important;
-        margin-top: 8px !important;
-    }
-
-    #SanitizeDialog[dialogroot] groupbox {
-        margin-inline: 8px !important;
-    }
-
-    #SanitizeDialog[dialogroot] #sanitizeEverythingWarningBox {
-        border-color: transparent !important;
-        background-color: transparent !important;
-        font-size: 1.1em !important;
-    }
-
-    #SanitizeDialog[dialogroot] #sanitizeEverythingWarningIcon {
-        list-style-image: url(chrome://global/skin/icons/warning.svg) !important;
-        width: 48px;
-        height: 48px;
-        -moz-context-properties: fill;
-        fill: currentColor;
-        color: hsl(44, 95%, 60%);
-    }
-
-    .tree-input[type="text"] {
-        background-color: var(--purple-40) !important;
-        border: none !important;
-        padding: 1px 0px !important;
-        margin-top: -1px !important;
-        margin-inline: -4px 3px !important;
-        width: auto !important;
-        max-width: -moz-available !important;
-        text-decoration: 1px dotted underline !important;
-        text-decoration-skip-ink: none !important;
-    }
-
-    .tree-input[type="text"]::selection {
-        background-color: var(--ui-selection-bgcolor) !important;
-        color: var(--ui-selection-color) !important;
-        text-decoration-color: var(--ui-selection-color) !important;
-    }
-
-    @-moz-document url("chrome://mozapps/content/handling/permissionDialog.xhtml")
-    {
-        :root[dialogroot] dialog > #description,
-        :root[dialogroot] dialog > #description-box > #description {
-            font-size: 1.15em !important;
-            font-weight: var(--uc-font-weight-bold, 600) !important;
-        }
-
-        :root[dialogroot] #description-box {
-            margin-bottom: 10px !important;
-        }
-
-        :root[dialogroot] #description:not([hidden], :empty) ~ #description-extra {
-            margin-top: -10px !important;
-        }
-    }
-
-    @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
-        :root[dialogroot],
-        :root[dialogroot] dialog {
-            font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
-            font-kerning: normal !important;
-        }
-
-        :root[dialogroot] :is(h2, h3, #titleText) {
-            font-weight: var(--uc-font-weight-semibold, 400) !important;
-            font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
-        }
-    }
+  }
 }
 
 @-moz-document url-prefix("chrome://global/content/print.html")
 {
-    :root {
-        --in-content-page-background: var(--uc-content-page-background) !important;
-        --dropdown-bgcolor: var(--in-content-page-background) !important;
-    }
+  :root {
+    --in-content-page-background: var(--uc-content-page-background) !important;
+    --dropdown-bgcolor: var(--in-content-page-background) !important;
+  }
 }
 
 link[href="chrome://global/content/printPagination.css"]
     ~ .container {
-    border-radius: 4px !important;
-    overflow: hidden !important;
+  border-radius: 4px !important;
+  overflow: hidden !important;
 }
 
 link[href="chrome://global/content/printPagination.css"]
     ~ .container
     :is(.toolbarButton, .toolbarCenter) {
-    border-color: var(--menu-separator-color) !important;
-    border-block: none !important;
+  border-color: var(--menu-separator-color) !important;
+  border-block: none !important;
 }
 
 link[href="chrome://global/content/printPagination.css"]
     ~ .container
     .toolbarCenter {
-    min-width: calc(8px + 12ch) !important;
-    padding-inline: 24px !important;
-    box-sizing: border-box !important;
-    margin-block: 1px !important;
+  min-width: calc(8px + 12ch) !important;
+  padding-inline: 24px !important;
+  box-sizing: border-box !important;
+  margin-block: 1px !important;
 }
 
 link[href="chrome://global/content/printPagination.css"]
     ~ .container
     :is(#navigatePrevious, #navigateNext)::after {
-	background-image: url("chrome://userchrome/content/arrow-left.svg") !important;
+  background-image: url("chrome://userchrome/content/arrow-left.svg") !important;
 }
 
 link[href="chrome://global/content/printPagination.css"]
@@ -1502,565 +1508,580 @@ link[href="chrome://global/content/printPagination.css"]
 link[href="chrome://global/content/printPagination.css"]
     ~ .container
     #navigateNext:-moz-locale-dir(ltr)::after {
-	scale: -1 1 !important;
+  scale: -1 1 !important;
 }
 
 link[href="chrome://global/content/printPagination.css"]
     ~ .container
     .startItem {
-	border-inline-start: none !important;
-	border-start-start-radius: 4px !important;
-	border-end-start-radius: 4px !important;
+  border-inline-start: none !important;
+  border-start-start-radius: 4px !important;
+  border-end-start-radius: 4px !important;
 }
 
 link[href="chrome://global/content/printPagination.css"]
     ~ .container
     .endItem {
-	border-inline-end: none !important;
-	border-start-end-radius: 4px !important;
-	border-end-end-radius: 4px !important;
-}
-
-@-moz-document url("chrome://browser/content/webrtcIndicator.xul")
-{
-    :root {
-        display: none !important;
-    }
+  border-inline-end: none !important;
+  border-start-end-radius: 4px !important;
+  border-end-end-radius: 4px !important;
 }
 
 @-moz-document url("chrome://browser/content/webrtcLegacyIndicator.xhtml")
 {
-    button {
-        min-width: 28px !important;
-    }
+  button {
+    min-width: 28px !important;
+  }
 
-    #firefoxButton {
-        background-size: 20px !important;
-    }
+  #firefoxButton {
+    background-size: 20px !important;
+  }
 
-    window[sharingaudio][sharingvideo] > #audioVideoButton {
-        min-width: 46px !important;
-    }
+  window[sharingaudio][sharingvideo] > #audioVideoButton {
+    min-width: 46px !important;
+  }
+}
+
+@-moz-document url("chrome://browser/content/webrtcIndicator.xul")
+{
+  :root {
+    display: none !important;
+  }
 }
 
 @-moz-document url("chrome://browser/content/webrtcIndicator.xhtml")
 {
-    :root {
-        --indicator-height: 40px !important;
-    }
+  :root {
+    --indicator-height: 40px !important;
+  }
 
-    body {
-        align-items: center !important;
-    }
+  body {
+    align-items: center !important;
+  }
 
-    .row-item.separator {
-        min-height: 28px;
-        border-color: var(--indicator-border-color) !important;
-    }
+  .row-item.separator {
+    min-height: 28px;
+    border-color: var(--indicator-border-color) !important;
+  }
 
-    .control-icon {
-        width: 28px !important;
-        height: 28px !important;
-        padding: 0 !important;
-        border-radius: var(--toolbarbutton-border-radius) !important;
-    }
+  .control-icon {
+    width: 28px !important;
+    height: 28px !important;
+    padding: 0 !important;
+    border-radius: var(--toolbarbutton-border-radius) !important;
+  }
 
-    #drag-indicator {
-        background-image: url(chrome://browser/skin/notification-icons/drag-indicator.svg);
-        background-size: 14px 26px !important;
-        background-position: center !important;
-        background-repeat: no-repeat !important;
-        -moz-context-properties: fill, fill-opacity;
-        fill: var(--uc-desaturate-dimmed-even-further);
-        height: 28px !important;
-    }
+  #drag-indicator {
+    background-image: url(chrome://browser/skin/notification-icons/drag-indicator.svg);
+    background-size: 14px 26px !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    -moz-context-properties: fill, fill-opacity;
+    fill: var(--uc-desaturate-dimmed-even-further);
+    height: 28px !important;
+  }
 
-    .control-icon:not(:hover, :active, :checked) {
-        background-color: var(--minimize-button-background-color) !important;
-    }
+  .control-icon:not(:hover, :active, :checked) {
+    background-color: var(--minimize-button-background-color) !important;
+  }
 
-    #display-share-icon {
-        background-image: url(chrome://userchrome/content/notifications/screen.svg) !important;
-    }
+  #display-share-icon {
+    background-image: url(chrome://userchrome/content/notifications/screen.svg) !important;
+  }
 
-    #microphone-mute-toggle {
-        background-image: url(chrome://userchrome/content/notifications/microphone.svg) !important;
-    }
+  #microphone-mute-toggle {
+    background-image: url(chrome://userchrome/content/notifications/microphone.svg) !important;
+  }
 
-    #microphone-mute-toggle:checked {
-        background-image: url(chrome://userchrome/content/notifications/microphone-blocked.svg) !important;
-    }
+  #microphone-mute-toggle:checked {
+    background-image: url(chrome://userchrome/content/notifications/microphone-blocked.svg) !important;
+  }
 
-    #camera-mute-toggle {
-        background-image: url(chrome://userchrome/content/notifications/camera.svg) !important;
-    }
+  #camera-mute-toggle {
+    background-image: url(chrome://userchrome/content/notifications/camera.svg) !important;
+  }
 
-    #camera-mute-toggle:checked {
-        background-image: url(chrome://userchrome/content/notifications/camera-blocked.svg) !important;
-    }
+  #camera-mute-toggle:checked {
+    background-image: url(chrome://userchrome/content/notifications/camera-blocked.svg) !important;
+  }
 
+  @media (prefers-color-scheme: dark) {
     #webRTC-sharingCamera-menu {
-        list-style-image: url(chrome://userchrome/content/notifications/camera.svg) !important;
+      list-style-image: url(chrome://userchrome/content/notifications/statusbar/camera.svg) !important;
     }
 
     #webRTC-sharingMicrophone-menu {
-        list-style-image: url(chrome://userchrome/content/notifications/microphone.svg) !important;
+      list-style-image: url(chrome://userchrome/content/notifications/statusbar/microphone.svg) !important;
     }
 
     #webRTC-sharingScreen-menu {
-        list-style-image: url(chrome://userchrome/content/notifications/screen.svg) !important;
+      list-style-image: url(chrome://userchrome/content/notifications/statusbar/screen.svg) !important;
     }
+
+    @media (-moz-platform: windows) {
+      #webRTC-sharingCamera-menu {
+        list-style-image: url(chrome://userchrome/content/notifications/statusbar/camera.png) !important;
+      }
+
+      #webRTC-sharingMicrophone-menu {
+        list-style-image: url(chrome://userchrome/content/notifications/statusbar/microphone.png) !important;
+      }
+
+      #webRTC-sharingScreen-menu {
+        list-style-image: url(chrome://userchrome/content/notifications/statusbar/screen.png) !important;
+      }
+    }
+  }
 }
 
 /* about firefox dialog */
 @-moz-document url("chrome://browser/content/aboutDialog.xhtml")
 {
-    #leftBox {
-        background-image: url(chrome://branding/content/about-logo.svg) !important;
-    }
+  #leftBox {
+    background-image: url(chrome://branding/content/about-logo.svg) !important;
+  }
 
-    #aboutDialog {
-        width: auto !important;
-        max-width: 1000px !important;
-    }
+  #aboutDialog {
+    width: auto !important;
+    max-width: 1000px !important;
+  }
 
-    #aboutDialogContainer {
-        border: 0 !important;
-        background-color: var(--arrowpanel-background) !important;
-        background-image: radial-gradient(
-            circle at calc((210px / 2) + 30px) calc(20% + 20px + 52px),
-            hsla(255, 80%, 90%, 0.3),
-            transparent 35%
-        );
-        background-blend-mode: overlay !important;
-        color: var(--ui-text-100) !important;
-    }
+  #aboutDialogContainer {
+    border: 0 !important;
+    background-color: var(--arrowpanel-background) !important;
+    background-image: radial-gradient(
+      circle at calc((210px / 2) + 30px) calc(20% + 20px + 52px),
+      hsla(255, 80%, 90%, 0.3),
+      transparent 35%
+    );
+    background-blend-mode: overlay !important;
+    color: var(--ui-text-100) !important;
+  }
 
-    #bottomBox {
-        background: hsla(0, 0%, 0%, 0.15) !important;
-    }
+  #bottomBox {
+    background: hsla(0, 0%, 0%, 0.15) !important;
+  }
 
-    #icons > .icon {
-        margin-block: 8px !important;
-    }
+  #icons > .icon {
+    margin-block: 8px !important;
+  }
 
-    button {
-        appearance: none;
-        background: var(--button-bgcolor);
-        color: var(--button-color) !important;
-        padding: 8px 10px;
-        border-radius: var(--general-button-border-radius);
-    }
+  button {
+    appearance: none;
+    background: var(--button-bgcolor);
+    color: var(--button-color) !important;
+    padding: 8px 10px;
+    border-radius: var(--general-button-border-radius);
+  }
 
-    button:is(:hover, :focus-visible) {
-        background: var(--button-hover-bgcolor);
-    }
+  button:is(:hover, :focus-visible) {
+    background: var(--button-hover-bgcolor);
+  }
 
-    button:focus-visible {
-        outline: var(--global-focus-outline) !important;
-        box-shadow: var(--global-focus-shadow) !important;
-    }
+  button:focus-visible {
+    outline: var(--global-focus-outline) !important;
+    box-shadow: var(--global-focus-shadow) !important;
+  }
 
-    button:hover:active {
-        background: var(--button-active-bgcolor);
-    }
+  button:hover:active {
+    background: var(--button-active-bgcolor);
+  }
 
-    /* replace the raster loading animation with a vector animation.
-    we can't replace the image's src attribute without javascript,
-    but we can simply push the image content outside the element's bounding box
-    by setting "box-sizing: border-box" and "padding-left: 16px"
-    since the element is only 16px wide, the padding fills it completely,
-    and image content can't be displayed inside the padding box, but background-image can,
-    due to "background-clip: border-box" */
-    .update-throbber {
-        background-image: url(chrome://userchrome/content/loading-spinner-css.svg) !important;
-        padding-left: 16px !important;
-        box-sizing: border-box !important;
-        -moz-context-properties: fill, fill-opacity !important;
-        fill: currentColor !important;
-        color: var(--loading-throbber-fill) !important;
-    }
+  /* replace the raster loading animation with a vector animation. we can't
+  replace the image's src attribute without javascript, but we can simply push
+  the image content outside the element's bounding box by setting "box-sizing:
+  border-box" and "padding-left: 16px" since the element is only 16px wide, the
+  padding fills it completely, and image content can't be displayed inside the
+  padding box, but background-image can, due to "background-clip: border-box" */
+  .update-throbber {
+    background-image: url(chrome://userchrome/content/loading-spinner-css.svg) !important;
+    padding-left: 16px !important;
+    box-sizing: border-box !important;
+    -moz-context-properties: fill, fill-opacity !important;
+    fill: currentColor !important;
+    color: var(--loading-throbber-fill) !important;
+  }
 
-    #updateDeck button {
-        background: var(--buttons-primary-button-bgcolor) !important;
-        padding: 8px 10px !important;
-        margin-inline-start: 0 !important;
-        border: 0 !important;
-    }
+  #updateDeck button {
+    background: var(--buttons-primary-button-bgcolor) !important;
+    padding: 8px 10px !important;
+    margin-inline-start: 0 !important;
+    border: 0 !important;
+  }
 
-    #updateDeck button:is(:hover, :focus-visible) {
-        background: var(--buttons-primary-button-hover-bgcolor) !important;
-    }
+  #updateDeck button:is(:hover, :focus-visible) {
+    background: var(--buttons-primary-button-hover-bgcolor) !important;
+  }
 
-    #updateDeck button:hover:active {
-        background: var(--buttons-primary-button-active-bgcolor) !important;
-    }
+  #updateDeck button:hover:active {
+    background: var(--buttons-primary-button-active-bgcolor) !important;
+  }
 
-    #update-available-whats-new,
-    .text-link {
-        color: var(--uc-parent-link-color) !important;
-        text-decoration: none !important;
-    }
+  #update-available-whats-new,
+  .text-link {
+    color: var(--uc-parent-link-color) !important;
+    text-decoration: none !important;
+  }
 
-    #version {
-        -moz-user-focus: none !important;
-    }
+  #version {
+    -moz-user-focus: none !important;
+  }
 
-    #update-available-whats-new:is(:hover, :focus-visible),
-    .text-link:is(:hover, :focus-visible) {
-        color: var(--uc-parent-link-color-hover) !important;
-        text-decoration: underline !important;
-    }
+  #update-available-whats-new:is(:hover, :focus-visible),
+  .text-link:is(:hover, :focus-visible) {
+    color: var(--uc-parent-link-color-hover) !important;
+    text-decoration: underline !important;
+  }
 
-    #update-available-whats-new:hover:active,
-    .text-link:hover:active {
-        color: var(--uc-parent-link-color-active) !important;
-    }
+  #update-available-whats-new:hover:active,
+  .text-link:hover:active {
+    color: var(--uc-parent-link-color-active) !important;
+  }
 }
 
 /* page info popup. kinda lame */
 @-moz-document url(chrome://browser/content/pageinfo/pageInfo.xhtml)
 {
-    :root {
-        --focus-outline-color: var(--global-focus-outline-color) !important;
-    }
+  :root {
+    --focus-outline-color: var(--global-focus-outline-color) !important;
+  }
 
-    input:not([type="file"], [type="image"]):focus-visible,
-    select:focus-visible,
-    button:focus-visible,
-    textarea:focus-visible,
-    button:focus-visible {
-        outline: 2px solid var(--focus-outline-color) !important;
-    }
+  input:not([type="file"], [type="image"]):focus-visible,
+  select:focus-visible,
+  button:focus-visible,
+  textarea:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--focus-outline-color) !important;
+  }
 
-    #main-window {
-        background-color: var(--arrowpanel-background) !important;
-        color: var(--arrowpanel-color) !important;
-    }
+  #main-window {
+    background-color: var(--arrowpanel-background) !important;
+    color: var(--arrowpanel-color) !important;
+  }
 
-    #topBar {
-        padding: 0 !important;
-        background-color: var(--ui-secondary-bg) !important;
-        border-color: var(--button-solid-active-background) !important;
-    }
+  #topBar {
+    padding: 0 !important;
+    background-color: var(--ui-secondary-bg) !important;
+    border-color: var(--button-solid-active-background) !important;
+  }
 
-    #viewGroup {
-        padding-inline-start: 4px !important;
-    }
+  #viewGroup {
+    padding-inline-start: 4px !important;
+  }
 
-    #viewGroup > radio {
-        margin: 4px 0 !important;
-        padding: 2px !important;
-        color: var(--arrowanel-color) !important;
-        background: none !important;
-        fill: currentColor;
-        -moz-image-region: initial !important;
-        -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity;
-    }
+  #viewGroup > radio {
+    margin: 4px 0 !important;
+    padding: 2px !important;
+    color: var(--arrowanel-color) !important;
+    background: none !important;
+    fill: currentColor;
+    -moz-image-region: initial !important;
+    -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity;
+  }
 
-    #viewGroup > radio > .radio-label-box {
-        -moz-box-orient: initial !important;
-        -moz-box-pack: center !important;
-        min-height: var(--subviewbutton-height) !important;
-        border-radius: var(--general-button-border-radius);
-    }
+  #viewGroup > radio > .radio-label-box {
+    -moz-box-orient: initial !important;
+    -moz-box-pack: center !important;
+    min-height: var(--subviewbutton-height) !important;
+    border-radius: var(--general-button-border-radius);
+  }
 
-    #viewGroup > radio:hover .radio-label-box {
-        background-color: var(--uc-places-cell-focus-bgcolor) !important;
-    }
+  #viewGroup > radio:hover .radio-label-box {
+    background-color: var(--uc-places-cell-focus-bgcolor) !important;
+  }
 
-    #viewGroup > radio[selected="true"] .radio-label-box,
-    #viewGroup > radio:hover:active .radio-label-box {
-        background-color: var(--uc-places-cell-hover-bgcolor) !important;
-    }
+  #viewGroup > radio[selected="true"] .radio-label-box,
+  #viewGroup > radio:hover:active .radio-label-box {
+    background-color: var(--uc-places-cell-hover-bgcolor) !important;
+  }
 
-    #viewGroup > radio .radio-icon {
-        width: 16px !important;
-        height: 16px !important;
-        margin-inline-end: 6px !important;
-    }
+  #viewGroup > radio .radio-icon {
+    width: 16px !important;
+    height: 16px !important;
+    margin-inline-end: 6px !important;
+  }
 
-    #generalTab {
-        list-style-image: url(chrome://userchrome/content/document.svg) !important;
-    }
+  #generalTab {
+    list-style-image: url(chrome://userchrome/content/document.svg) !important;
+  }
 
-    #mediaTab {
-        list-style-image: url(chrome://userchrome/content/notifications/canvas.svg) !important;
-    }
+  #mediaTab {
+    list-style-image: url(chrome://userchrome/content/notifications/canvas.svg) !important;
+  }
 
-    #permTab {
-        list-style-image: url(chrome://userchrome/content/formfill.svg) !important;
-    }
+  #permTab {
+    list-style-image: url(chrome://userchrome/content/formfill.svg) !important;
+  }
 
-    #securityTab {
-        list-style-image: url(chrome://userchrome/content/privacy-security.svg) !important;
-    }
+  #securityTab {
+    list-style-image: url(chrome://userchrome/content/privacy-security.svg) !important;
+  }
 
-    #securityTab:hover,
-    #securityTab[selected="true"] {
-        -moz-image-region: rect(32px, 160px, 64px, 128px);
-    }
+  #securityTab:hover,
+  #securityTab[selected="true"] {
+    -moz-image-region: rect(32px, 160px, 64px, 128px);
+  }
 
-    input[readonly],
-    textbox {
-        color: var(--lwt-toolbar-field-color) !important;
-    }
+  input[readonly],
+  textbox {
+    color: var(--lwt-toolbar-field-color) !important;
+  }
 
-    richlistbox,
-    treecol,
-    treecolpicker,
-    button {
-        appearance: none !important;
-        background-color: var(--arrowpanel-dimmed) !important;
-        color: var(--arrowpanel-color) !important;
-        border-color: var(--button-solid-active-background) !important;
-    }
+  richlistbox,
+  treecol,
+  treecolpicker,
+  button {
+    appearance: none !important;
+    background-color: var(--arrowpanel-dimmed) !important;
+    color: var(--arrowpanel-color) !important;
+    border-color: var(--button-solid-active-background) !important;
+  }
 
-    tree,
-    richlistbox,
-    #permList {
-        appearance: none !important;
-        background: var(--ui-secondary-bg) !important;
-        color: var(--arrowpanel-color) !important;
-        border-radius: var(--general-button-border-radius) !important;
-        overflow: clip !important;
-        border: 1px solid var(--button-solid-active-background) !important;
-    }
+  tree,
+  richlistbox,
+  #permList {
+    appearance: none !important;
+    background: var(--ui-secondary-bg) !important;
+    color: var(--arrowpanel-color) !important;
+    border-radius: var(--general-button-border-radius) !important;
+    overflow: clip !important;
+    border: 1px solid var(--button-solid-active-background) !important;
+  }
 
-    .permission {
-        border-bottom: 1px solid var(--button-solid-active-background) !important;
-    }
+  .permission {
+    border-bottom: 1px solid var(--button-solid-active-background) !important;
+  }
 
-    treecol,
-    treecolpicker {
-        box-shadow: inset 0 -1px var(--button-solid-active-background) !important;
-    }
+  treecol,
+  treecolpicker {
+    box-shadow: inset 0 -1px var(--button-solid-active-background) !important;
+  }
 
-    :is(treecol, treecolpicker):not([hideheader]) {
-        height: 24px;
-    }
+  :is(treecol, treecolpicker):not([hideheader]) {
+    height: 24px;
+  }
 
-    :is(treecol, treecolpicker):where(:hover) {
-        background-color: var(--arrowpanel-dimmed-further) !important;
-    }
+  :is(treecol, treecolpicker):where(:hover) {
+    background-color: var(--arrowpanel-dimmed-further) !important;
+  }
 
-    treechildren {
-        background-color: transparent !important;
-    }
+  treechildren {
+    background-color: transparent !important;
+  }
 
-    treechildren::-moz-tree-row(multicol, odd) {
-        background-color: var(--uc-arrowpanel-very-faint) !important;
-    }
+  treechildren::-moz-tree-row(multicol, odd) {
+    background-color: var(--uc-arrowpanel-very-faint) !important;
+  }
 
-    treechildren::-moz-tree-row(hover),
-    #permList > .permission:hover {
-        background-color: var(--uc-places-cell-focus-bgcolor) !important;
-    }
+  treechildren::-moz-tree-row(hover),
+  #permList > .permission:hover {
+    background-color: var(--uc-places-cell-focus-bgcolor) !important;
+  }
 
-    treechildren::-moz-tree-row(selected) {
-        background-color: var(--uc-places-cell-hover-bgcolor) !important;
-        color: var(--arrowpanel-color) !important;
-    }
+  treechildren::-moz-tree-row(selected) {
+    background-color: var(--uc-places-cell-hover-bgcolor) !important;
+    color: var(--arrowpanel-color) !important;
+  }
 
-    treechildren::-moz-tree-row(selected),
-    treechildren::-moz-tree-row(focus) {
-        outline: none !important;
-        border: none !important;
-    }
+  treechildren::-moz-tree-row(selected),
+  treechildren::-moz-tree-row(focus) {
+    outline: none !important;
+    border: none !important;
+  }
 
-    treechildren::-moz-tree-cell-text {
-        color: var(--arrowpanel-color) !important;
-    }
+  treechildren::-moz-tree-cell-text {
+    color: var(--arrowpanel-color) !important;
+  }
 
-    button {
-        border-radius: var(--general-button-border-radius);
-        padding: 4px 5px !important;
-        background-color: var(--button-bgcolor) !important;
-        border-color: transparent !important;
-    }
+  button {
+    border-radius: var(--general-button-border-radius);
+    padding: 4px 5px !important;
+    background-color: var(--button-bgcolor) !important;
+    border-color: transparent !important;
+  }
 
-    button:is(:hover, :focus-visible) {
-        background-color: var(--button-hover-bgcolor) !important;
-    }
+  button:is(:hover, :focus-visible) {
+    background-color: var(--button-hover-bgcolor) !important;
+  }
 
-    button:hover:active {
-        background-color: var(--button-active-bgcolor) !important;
-    }
+  button:hover:active {
+    background-color: var(--button-active-bgcolor) !important;
+  }
 
-    .checkbox-check,
-    .radio-check {
-        appearance: none !important;
-        --checkbox-border-color: var(--uc-checkbox-border-color) !important;
-        --checkbox-checked-border-color: var(--uc-checkbox-checked-border-color) !important;
-        --checkbox-unchecked-bgcolor: var(--uc-checkbox-unchecked-bgcolor) !important;
-        --checkbox-unchecked-hover-bgcolor: var(--uc-checkbox-unchecked-hover-bgcolor) !important;
-        --checkbox-unchecked-active-bgcolor: var(--uc-checkbox-unchecked-active-bgcolor) !important;
-        --checkbox-checked-bgcolor: var(--uc-checkbox-checked-bgcolor) !important;
-        --checkbox-checked-color: var(--uc-checkbox-checked-color) !important;
-        --checkbox-checked-hover-bgcolor: var(--uc-checkbox-checked-hover-bgcolor) !important;
-        --checkbox-checked-active-bgcolor: var(--uc-checkbox-checked-active-bgcolor) !important;
-    }
+  .checkbox-check,
+  .radio-check {
+    appearance: none !important;
+    --checkbox-border-color: var(--uc-checkbox-border-color) !important;
+    --checkbox-checked-border-color: var(--uc-checkbox-checked-border-color) !important;
+    --checkbox-unchecked-bgcolor: var(--uc-checkbox-unchecked-bgcolor) !important;
+    --checkbox-unchecked-hover-bgcolor: var(--uc-checkbox-unchecked-hover-bgcolor) !important;
+    --checkbox-unchecked-active-bgcolor: var(--uc-checkbox-unchecked-active-bgcolor) !important;
+    --checkbox-checked-bgcolor: var(--uc-checkbox-checked-bgcolor) !important;
+    --checkbox-checked-color: var(--uc-checkbox-checked-color) !important;
+    --checkbox-checked-hover-bgcolor: var(--uc-checkbox-checked-hover-bgcolor) !important;
+    --checkbox-checked-active-bgcolor: var(--uc-checkbox-checked-active-bgcolor) !important;
+  }
 
-    .radio-check {
-        appearance: none;
-        color: var(--checkbox-border-color, ThreeDDarkShadow);
-        background-color: var(--checkbox-unchecked-bgcolor, Field);
-        border: 1px solid currentColor;
-        border-radius: 50%;
-        -moz-box-align: center;
-        min-width: 13px;
-        min-height: 13px;
-    }
+  .radio-check {
+    appearance: none;
+    color: var(--checkbox-border-color, ThreeDDarkShadow);
+    background-color: var(--checkbox-unchecked-bgcolor, Field);
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    -moz-box-align: center;
+    min-width: 13px;
+    min-height: 13px;
+  }
 
-    .radio-check[selected] {
-        border-color: var(--checkbox-checked-border-color, transparent);
-        background-color: var(--checkbox-checked-bgcolor, -moz-accent-color);
-        background-image: url("chrome://global/skin/icons/radio.svg");
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: contain;
-        -moz-context-properties: fill;
-        fill: currentColor;
-        color: var(--checkbox-checked-color, -moz-accent-color-foreground);
-        color-adjust: exact;
-    }
+  .radio-check[selected] {
+    border-color: var(--checkbox-checked-border-color, transparent);
+    background-color: var(--checkbox-checked-bgcolor, -moz-accent-color);
+    background-image: url("chrome://global/skin/icons/radio.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    -moz-context-properties: fill;
+    fill: currentColor;
+    color: var(--checkbox-checked-color, -moz-accent-color-foreground);
+    color-adjust: exact;
+  }
 
-    radio:not([disabled="true"]):hover:active > .radio-check[selected] {
-        background-color: var(
-            --checkbox-checked-active-bgcolor,
-            color-mix(in srgb, currentColor 25%, -moz-accent-color)
-        );
-    }
+  radio:not([disabled="true"]):hover:active > .radio-check[selected] {
+    background-color: var(
+      --checkbox-checked-active-bgcolor,
+      color-mix(in srgb, currentColor 25%, -moz-accent-color)
+    );
+  }
 
-    radio:not([disabled="true"]):hover > .radio-check[selected] {
-        background-color: var(
-            --checkbox-checked-hover-bgcolor,
-            color-mix(in srgb, currentColor 12.5%, -moz-accent-color)
-        );
-    }
+  radio:not([disabled="true"]):hover > .radio-check[selected] {
+    background-color: var(
+      --checkbox-checked-hover-bgcolor,
+      color-mix(in srgb, currentColor 12.5%, -moz-accent-color)
+    );
+  }
 
-    radio:not([disabled="true"]):hover:active > .radio-check {
-        background-color: var(
-            --checkbox-unchecked-active-bgcolor,
-            color-mix(in srgb, -moz-accent-color 8%, Field)
-        );
-    }
+  radio:not([disabled="true"]):hover:active > .radio-check {
+    background-color: var(
+      --checkbox-unchecked-active-bgcolor,
+      color-mix(in srgb, -moz-accent-color 8%, Field)
+    );
+  }
 
-    radio:not([disabled="true"]):hover > .radio-check {
-        background-color: var(
-            --checkbox-unchecked-hover-bgcolor,
-            color-mix(in srgb, -moz-accent-color 4%, Field)
-        );
-    }
+  radio:not([disabled="true"]):hover > .radio-check {
+    background-color: var(
+      --checkbox-unchecked-hover-bgcolor,
+      color-mix(in srgb, -moz-accent-color 4%, Field)
+    );
+  }
 
-    radio[disabled="true"] {
-        color: var(--uc-menu-disabled-color) !important;
-    }
+  radio[disabled="true"] {
+    color: var(--uc-menu-disabled-color) !important;
+  }
 
-    #imagecontainerbox {
-        background: var(--transparent-img-background-context) !important;
-        background-color: var(--arrowpanel-faint) !important;
-        fill: var(--arrowpanel-dimmed);
-        fill-opacity: 0.5;
-        border: 1px solid var(--button-solid-active-background) !important;
-        border-radius: var(--general-button-border-radius);
-        -moz-context-properties: fill, fill-opacity;
-    }
+  #imagecontainerbox {
+    background: var(--transparent-img-background-context) !important;
+    background-color: var(--arrowpanel-faint) !important;
+    fill: var(--arrowpanel-dimmed);
+    fill-opacity: 0.5;
+    border: 1px solid var(--button-solid-active-background) !important;
+    border-radius: var(--general-button-border-radius);
+    -moz-context-properties: fill, fill-opacity;
+  }
 
-    #imagecontainerbox > * {
-        color: initial;
-        fill: white;
-        stroke: white;
-        -moz-context-properties: fill, stroke;
-    }
+  #imagecontainerbox > * {
+    color: initial;
+    fill: white;
+    stroke: white;
+    -moz-context-properties: fill, stroke;
+  }
 
-    .permissionLabel {
-        margin-inline-start: 7px !important;
-        margin-block: 0 4px !important;
-        padding-block: 2px !important;
-        padding-inline-start: 22px !important;
-        background-repeat: no-repeat;
-        background-size: 16px;
-        background-position-y: center;
-        background-position-x: 0;
-        fill: currentColor;
-        -moz-context-properties: fill, fill-opacity;
-    }
+  .permissionLabel {
+    margin-inline-start: 7px !important;
+    margin-block: 0 4px !important;
+    padding-block: 2px !important;
+    padding-inline-start: 22px !important;
+    background-repeat: no-repeat;
+    background-size: 16px;
+    background-position-y: center;
+    background-position-x: 0;
+    fill: currentColor;
+    -moz-context-properties: fill, fill-opacity;
+  }
 
-    .permission {
-        color: var(--arrowanel-color) !important;
-    }
+  .permission {
+    color: var(--arrowanel-color) !important;
+  }
 
-    #perm-midi-row .permissionLabel {
-        background-image: url(chrome://userchrome/content/notifications/midi.svg);
-        background-size: 14px;
-        background-position-x: 1px;
-    }
+  #perm-midi-row .permissionLabel {
+    background-image: url(chrome://userchrome/content/notifications/midi.svg);
+    background-size: 14px;
+    background-position-x: 1px;
+  }
 
-    #perm-midi-sysex-row .permissionLabel {
-        background-image: url(chrome://userchrome/content/material/midi-port.svg);
-    }
+  #perm-midi-sysex-row .permissionLabel {
+    background-image: url(chrome://userchrome/content/material/midi-port.svg);
+  }
 
-    #perm-xr-row .permissionLabel {
-        background-image: url(chrome://userchrome/content/notifications/xr.svg);
-    }
+  #perm-xr-row .permissionLabel {
+    background-image: url(chrome://userchrome/content/notifications/xr.svg);
+  }
 
-    #perm-geo-row .permissionLabel {
-        background-image: url(chrome://userchrome/content/notifications/geo.svg);
-    }
+  #perm-geo-row .permissionLabel {
+    background-image: url(chrome://userchrome/content/notifications/geo.svg);
+  }
 
-    #perm-autoplay-media-row .permissionLabel {
-        background-image: url(chrome://userchrome/content/notifications/autoplay-media.svg);
-        background-size: 14px;
-        background-position-x: 1px;
-    }
+  #perm-autoplay-media-row .permissionLabel {
+    background-image: url(chrome://userchrome/content/notifications/autoplay-media.svg);
+    background-size: 14px;
+    background-position-x: 1px;
+  }
 
-    #perm-install-row .permissionLabel {
-        background-image: url(chrome://userchrome/content/material/extension.svg);
-        background-size: 16px;
-    }
+  #perm-install-row .permissionLabel {
+    background-image: url(chrome://userchrome/content/material/extension.svg);
+    background-size: 16px;
+  }
 
-    #perm-popup-row .permissionLabel {
-        background-image: url(chrome://userchrome/content/skin/window.svg);
-        background-size: 14px;
-        background-position-x: 1px;
-    }
+  #perm-popup-row .permissionLabel {
+    background-image: url(chrome://userchrome/content/skin/window.svg);
+    background-size: 14px;
+    background-position-x: 1px;
+  }
 
-    #perm-shortcuts-row .permissionLabel {
-        background-image: url(chrome://userchrome/content/material/keyboard-command.svg);
-    }
+  #perm-shortcuts-row .permissionLabel {
+    background-image: url(chrome://userchrome/content/material/keyboard-command.svg);
+  }
 
-    #perm-desktop-notification-row .permissionLabel {
-        background-image: url(chrome://userchrome/content/notifications/desktop-notification.svg);
-        background-size: 14px;
-        background-position-x: 1px;
-    }
+  #perm-desktop-notification-row .permissionLabel {
+    background-image: url(chrome://userchrome/content/notifications/desktop-notification.svg);
+    background-size: 14px;
+    background-position-x: 1px;
+  }
 
-    #perm-cookie-row .permissionLabel {
-        background-image: url(chrome://userchrome/content/skin/controlcenter/3rdpartycookies.svg);
-        background-size: 14px;
-        background-position-x: 1px;
-    }
+  #perm-cookie-row .permissionLabel {
+    background-image: url(chrome://userchrome/content/skin/controlcenter/3rdpartycookies.svg);
+    background-size: 14px;
+    background-position-x: 1px;
+  }
 
-    #perm-screen-row .permissionLabel {
-        background-image: url(chrome://userchrome/content/notifications/screen.svg);
-        background-size: 14px;
-        background-position-x: 1px;
-    }
+  #perm-screen-row .permissionLabel {
+    background-image: url(chrome://userchrome/content/notifications/screen.svg);
+    background-size: 14px;
+    background-position-x: 1px;
+  }
 
-    #perm-persistent-storage-row .permissionLabel {
-        background-image: url(chrome://userchrome/content/notifications/persistent-storage.svg);
-    }
+  #perm-persistent-storage-row .permissionLabel {
+    background-image: url(chrome://userchrome/content/notifications/persistent-storage.svg);
+  }
 
-    #perm-focus-tab-by-prompt-row .permissionLabel {
-        background-image: url(chrome://userchrome/content/skin/tab.svg);
-    }
+  #perm-focus-tab-by-prompt-row .permissionLabel {
+    background-image: url(chrome://userchrome/content/skin/tab.svg);
+  }
 
-    #perm-camera-row .permissionLabel {
-        background-image: url(chrome://userchrome/content/notifications/camera.svg);
-    }
+  #perm-camera-row .permissionLabel {
+    background-image: url(chrome://userchrome/content/notifications/camera.svg);
+  }
 
-    #perm-microphone-row .permissionLabel {
-        background-image: url(chrome://userchrome/content/notifications/microphone.svg);
-    }
+  #perm-microphone-row .permissionLabel {
+    background-image: url(chrome://userchrome/content/notifications/microphone.svg);
+  }
 }

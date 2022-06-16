@@ -10,127 +10,128 @@ so we need to adjust the position of the findbar, sidebar, etc.
 we also need to adjust window controls, the main menu bar, and the bookmarks toolbar. */
 
 #fullscr-toggler {
-    pointer-events: none;
-    display: none !important;
+  pointer-events: none;
+  display: none !important;
 }
 
 :root[inFullscreen]:not([fullscreen-autohide]) #navigator-toolbox {
-    margin-top: revert !important;
+  margin-top: revert !important;
 }
 
 :root[fullscreen-autohide][inFullscreen] #navigator-toolbox {
-    max-height: 0 !important;
-    margin-top: calc(
-        0.5px - var(--urlbar-container-height, 40px) - var(--tab-min-height, 36px)
-    ) !important;
-    transition: all 0.25s ease-in-out 0s !important;
-    transition-delay: 0s !important;
-    opacity: 0 !important;
-    z-index: 2147483647 !important;
-    -webkit-transform-style: preserve-3d !important;
-    -webkit-backface-visibility: hidden !important;
-    -moz-transform-style: preserve-3d !important;
-    -moz-backface-visibility: hidden !important;
-    transform-style: preserve-3d !important;
-    backface-visibility: hidden !important;
+  max-height: 0 !important;
+  margin-top: calc(
+    0.5px - var(--urlbar-container-height, 40px) - var(--tab-min-height, 36px)
+  ) !important;
+  transition: all 0.25s ease-in-out 0s !important;
+  transition-delay: 0s !important;
+  opacity: 0 !important;
+  z-index: 2147483647 !important;
+  -webkit-transform-style: preserve-3d !important;
+  -webkit-backface-visibility: hidden !important;
+  -moz-transform-style: preserve-3d !important;
+  -moz-backface-visibility: hidden !important;
+  transform-style: preserve-3d !important;
+  backface-visibility: hidden !important;
 }
 
 :root[fullscreen-autohide][inFullscreen]:not([customizing]) #navigator-toolbox::after {
-    height: 2px !important;
+  height: 2px !important;
 }
 
 #main-window:root[fullscreen-autohide][inFullscreen] #navigator-toolbox-background {
-    background: var(--toolbar-bgcolor) !important;
-    max-height: 0 !important;
+  background: var(--toolbar-bgcolor) !important;
+  max-height: 0 !important;
 }
 
-/* hides the nav-bar in fullscreen, but reveals it when hovering or focusing the nav-bar, or when nav-bar related popups are opened.
-requires fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-status. */
+/* hides the nav-bar in fullscreen, but reveals it when hovering or focusing the
+nav-bar, or when nav-bar related popups are opened. requires
+fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-status. */
 :root[fullscreen-autohide][inFullscreen][customizing] #navigator-toolbox,
 :root[fullscreen-autohide][inFullscreen]
-    #navigator-toolbox-background:is(:focus-within, :hover, [popup-status], [urlbar-status])
-    #navigator-toolbox {
-    margin-top: 0 !important;
-    transition: all 0.25s cubic-bezier(0.26, 1, 0.8, 1) 0s !important;
-    opacity: 1 !important;
+  #navigator-toolbox-background:is(:focus-within, :hover, [popup-status], [urlbar-status])
+  #navigator-toolbox {
+  margin-top: 0 !important;
+  transition: all 0.25s cubic-bezier(0.26, 1, 0.8, 1) 0s !important;
+  opacity: 1 !important;
 }
 
 /* :root[fullscreen-autohide][inFullscreen] #navigator-toolbox {
-    position: fixed !important;
-    display: block;
+  position: fixed !important;
+  display: block;
 } */
 
 :root[fullscreen-autohide][inFullscreen] #navigator-toolbox {
-    margin-bottom: calc(
-        0px - var(--urlbar-container-height, 40px) - var(--tab-min-height, 36px)
-    ) !important;
+  margin-bottom: calc(
+    0px - var(--urlbar-container-height, 40px) - var(--tab-min-height, 36px)
+  ) !important;
 }
 
 :root[fullscreen-autohide][inFullscreen]:not([customizing]) #sidebar-box {
-    top: 0 !important;
+  top: 0 !important;
 }
 
 /* uncomment out these rules if you want the sidebar to move up and down with the navbar */
 /* :root[fullscreen-autohide][inFullscreen]:not([customizing])
-    #navigator-toolbox-background:not(:focus-within, :hover, [popup-status], [urlbar-status])
-    ~ #browser
-    #sidebar-box,
+  #navigator-toolbox-background:not(:focus-within, :hover, [popup-status], [urlbar-status])
+  ~ #browser
+  #sidebar-box,
 :root[fullscreen-autohide][inFullscreen]:not([customizing])
-    > body
-    > box:not(:focus-within, :hover, [popup-status], [urlbar-status])
-    ~ #browser
-    #sidebar-box {
-    top: 0 !important;
-    transition: all 0.25s ease-in-out 0s !important;
+  > body
+  > box:not(:focus-within, :hover, [popup-status], [urlbar-status])
+  ~ #browser
+  #sidebar-box {
+  top: 0 !important;
+  transition: all 0.25s ease-in-out 0s !important;
 }
 
 :root[fullscreen-autohide][inFullscreen]:not([customizing]) #sidebar-box {
-    top: calc(var(--urlbar-container-height, 40px) + var(--tab-min-height, 36px)) !important;
-    padding-top: calc(var(--urlbar-container-height, 40px) + var(--tab-min-height, 36px)) !important;
-    margin-top: calc(0px - var(--urlbar-container-height, 40px) - var(--tab-min-height, 36px)) !important;
-    transition: all 0.25s cubic-bezier(.26,1,.8,1) 0s !important;
-    transform-style: flat !important;
-    backface-visibility: hidden !important;
+  top: calc(var(--urlbar-container-height, 40px) + var(--tab-min-height, 36px)) !important;
+  padding-top: calc(var(--urlbar-container-height, 40px) + var(--tab-min-height, 36px)) !important;
+  margin-top: calc(
+    0px - var(--urlbar-container-height, 40px) - var(--tab-min-height, 36px)
+  ) !important;
+  transition: all 0.25s cubic-bezier(0.26, 1, 0.8, 1) 0s !important;
+  transform-style: flat !important;
+  backface-visibility: hidden !important;
 } */
 
 :root[fullscreen-autohide][inFullscreen]:not([customizing]) #browser findbar {
-    top: 8px !important;
-    padding-top: calc(
-        var(--urlbar-container-height, 40px) + var(--tab-min-height, 36px)
-    ) !important;
-    margin-top: calc(
-        -1px - var(--urlbar-container-height, 40px) - var(--tab-min-height, 36px)
-    ) !important;
-    transition-property: transform, opacity, width, left, right, padding-top, margin-top !important;
-    transition-duration: 0.2s, 0.3s, 0.2s, 0.2s, 0.2s, 0.25s, 0.25s !important;
-    transition-delay: 0s, 0s, 0s, 0s, 0s, 0s, 0s !important;
-    transition-timing-function: ease-in-out, ease-in-out, ease-in-out, ease-in-out, ease-in-out,
-        ease-in-out, ease-in-out !important;
+  top: 8px !important;
+  padding-top: calc(var(--urlbar-container-height, 40px) + var(--tab-min-height, 36px)) !important;
+  margin-top: calc(
+    -1px - var(--urlbar-container-height, 40px) - var(--tab-min-height, 36px)
+  ) !important;
+  transition-property: transform, opacity, width, left, right, padding-top, margin-top !important;
+  transition-duration: 0.2s, 0.3s, 0.2s, 0.2s, 0.2s, 0.25s, 0.25s !important;
+  transition-delay: 0s, 0s, 0s, 0s, 0s, 0s, 0s !important;
+  transition-timing-function: ease-in-out, ease-in-out, ease-in-out, ease-in-out, ease-in-out,
+    ease-in-out, ease-in-out !important;
 }
 
 :root[fullscreen-autohide][inFullscreen]:not([customizing])
-    #navigator-toolbox-background:is(:focus-within, :hover, [popup-status], [urlbar-status])
-    ~ #browser
-    findbar,
+  #navigator-toolbox-background:is(:focus-within, :hover, [popup-status], [urlbar-status])
+  ~ #browser
+  findbar,
 :root[fullscreen-autohide][inFullscreen]:not([customizing])
-    > body
-    > box:is(:focus-within, :hover, [popup-status], [urlbar-status])
-    ~ #browser
-    findbar {
-    margin-top: 0 !important;
-    transition-duration: 0.2s, 0.3s, 0.2s, 0.2s, 0.2s, 0.25s, 0.25s !important;
-    transition-timing-function: ease-in-out, ease-in-out, ease-in-out, ease-in-out, ease-in-out,
-        cubic-bezier(0.26, 1, 0.8, 1), cubic-bezier(0.26, 1, 0.8, 1) !important;
+  > body
+  > box:is(:focus-within, :hover, [popup-status], [urlbar-status])
+  ~ #browser
+  findbar {
+  margin-top: 0 !important;
+  transition-duration: 0.2s, 0.3s, 0.2s, 0.2s, 0.2s, 0.25s, 0.25s !important;
+  transition-timing-function: ease-in-out, ease-in-out, ease-in-out, ease-in-out, ease-in-out,
+    cubic-bezier(0.26, 1, 0.8, 1), cubic-bezier(0.26, 1, 0.8, 1) !important;
 }
 
 :root[fullscreen-autohide][customizing][inFullscreen]
-    #customization-container
-    > #customization-content-container {
-    margin-top: calc(var(--urlbar-container-height, 40px) + var(--tab-min-height, 36px)) !important;
-    z-index: 2147483647 !important;
+  #customization-container
+  > #customization-content-container {
+  margin-top: calc(var(--urlbar-container-height, 40px) + var(--tab-min-height, 36px)) !important;
+  z-index: 2147483647 !important;
 }
 
 /* DOM fullscreen, e.g. hitting the fullscreen button on youtube */
 :root[inDOMFullscreen] :is(#navigator-toolbox, #fullscr-toggler, #sidebar-box, #sidebar-splitter) {
-    visibility: visible !important;
+  visibility: visible !important;
 }

@@ -7,34 +7,34 @@
 @import url(chrome://userchrome/content/layout/uc-low-globals.css);
 
 pre {
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    -moz-control-character-visibility: visible;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  -moz-control-character-visibility: visible;
 }
 
 .nowrap pre {
-    white-space: pre;
+  white-space: pre;
 }
 
 html:not([dir]) pre {
-    unicode-bidi: plaintext;
+  unicode-bidi: plaintext;
 }
 
 @-moz-document unobservable-document() {
-    :root {
-        color-scheme: light dark;
-    }
+  :root {
+    color-scheme: light dark;
+  }
 
-    @media (prefers-color-scheme: dark) {
-        :root {
-            background-color: var(--in-content-bg-dark);
-            color: var(--plaintext-color);
-        }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      background-color: var(--in-content-bg-dark);
+      color: var(--plaintext-color);
     }
+  }
 }
 
 @media (width: 0) or (height: 0) {
-    :root {
-        display: none;
-    }
+  :root {
+    display: none;
+  }
 }

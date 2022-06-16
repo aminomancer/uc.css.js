@@ -8,125 +8,124 @@
 
 iframe#bit-notification-bar-iframe[src^="moz-extension://"]
 {
-    filter: none !important;
-    box-shadow: 0 3px 8px hsla(0, 0%, 0%, 0.1), 0 0 2px hsla(0, 0%, 0%, 0.3) !important;
+  filter: none !important;
+  box-shadow: 0 3px 8px hsla(0, 0%, 0%, 0.1), 0 0 2px hsla(0, 0%, 0%, 0.3) !important;
 }
 
 @-moz-document regexp("^moz-extension://.*/popup/index.html.*")
 {
-    @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
-        :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"]
-            :where(body, input, button) {
-            font-family: SF Pro, SF Arabic, Segoe UI, sans-serif !important;
-        }
-
-        :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] header .search .fa {
-            top: 14px !important;
-        }
+  @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
+    :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] :where(body, input, button) {
+      font-family: SF Pro, SF Arabic, Segoe UI, sans-serif !important;
     }
+
+    :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] header .search .fa {
+      top: 14px !important;
+    }
+  }
 }
 
 @-moz-document regexp("^moz-extension://.*/notification/bar.html.*")
 {
-    :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] body {
-        background: var(--in-content-box-background) !important;
-        color: var(--plaintext-color) !important;
-    }
+  :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] body {
+    background: var(--in-content-box-background) !important;
+    color: var(--plaintext-color) !important;
+  }
 
-    :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] .outer-wrapper {
-        padding-inline: 8px !important;
-        grid-template-columns: max-content auto max-content !important;
-        grid-column-gap: 8px !important;
-        border-color: var(--in-content-border-color-dim) !important;
-        border: none !important;
-    }
+  :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] .outer-wrapper {
+    padding-inline: 8px !important;
+    grid-template-columns: max-content auto max-content !important;
+    grid-column-gap: 8px !important;
+    border-color: var(--in-content-border-color-dim) !important;
+    border: none !important;
+  }
 
-    :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] .add-text {
-        user-select: none;
-    }
+  :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] .add-text {
+    user-select: none;
+  }
 
-    :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] .add-buttons {
-        display: flex;
-        flex-flow: row nowrap;
-        gap: 8px;
-        margin-inline: 16px !important;
-    }
+  :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] .add-buttons {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 8px;
+    margin-inline: 16px !important;
+  }
 
-    :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] .add-buttons .link {
-        padding: 4px !important;
-    }
+  :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] .add-buttons .link {
+    padding: 4px !important;
+  }
 
-    :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"]
-        :where(button.link, button.neutral) {
-        color: var(--in-content-link-color) !important;
-    }
+  :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"]
+    :where(button.link, button.neutral) {
+    color: var(--in-content-link-color) !important;
+  }
 
-    :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] button:not(.neutral, .link) {
-        background-color: var(--in-content-primary-button-background) !important;
-    }
+  :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] button:not(.neutral, .link) {
+    background-color: var(--in-content-primary-button-background) !important;
+  }
 
-    :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"]
-        button:not(.neutral, .link):hover {
-        background-color: var(--in-content-primary-button-background-hover) !important;
-    }
+  :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"]
+    button:not(.neutral, .link):hover {
+    background-color: var(--in-content-primary-button-background-hover) !important;
+  }
 
-    :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"]
-        button:not(.neutral, .link):hover:active {
-        background-color: var(--in-content-primary-button-background-active) !important;
-    }
+  :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"]
+    button:not(.neutral, .link):hover:active {
+    background-color: var(--in-content-primary-button-background-active) !important;
+  }
 
-    :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] #logo-link::before {
-        content: "";
-        display: block;
-        width: 26px;
-        height: 26px;
-        background: var(--in-content-primary-button-background)
-            url(chrome://userchrome/content/material/bitwarden.svg) center/18px no-repeat;
-        -moz-context-properties: fill, fill-opacity;
-        fill: white;
-        border-radius: var(--general-button-border-radius);
-    }
+  :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] #logo-link::before {
+    content: "";
+    display: block;
+    width: 26px;
+    height: 26px;
+    background: var(--in-content-primary-button-background)
+      url(chrome://userchrome/content/material/bitwarden.svg) center/18px no-repeat;
+    -moz-context-properties: fill, fill-opacity;
+    fill: white;
+    border-radius: var(--general-button-border-radius);
+  }
 
-    :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] #logo-link {
-        display: block !important;
-        margin-inline: 0 2px !important;
-        color: var(--in-content-primary-button-background-active) !important;
-    }
+  :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] #logo-link {
+    display: block !important;
+    margin-inline: 0 2px !important;
+    color: var(--in-content-primary-button-background-active) !important;
+  }
 
-    :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] #logo-link:hover {
-        color: var(--in-content-primary-button-background-hover) !important;
-    }
+  :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] #logo-link:hover {
+    color: var(--in-content-primary-button-background-hover) !important;
+  }
 
-    :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] #logo-link:hover:active {
-        color: var(--in-content-primary-button-background) !important;
-    }
+  :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] #logo-link:hover:active {
+    color: var(--in-content-primary-button-background) !important;
+  }
 
-    :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] #logo-link img#logo {
-        display: none !important;
-    }
+  :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] #logo-link img#logo {
+    display: none !important;
+  }
 
-    :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] #close-button {
-        padding: 5px !important;
-        float: right !important;
-        fill-opacity: 0.6;
-    }
+  :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] #close-button {
+    padding: 5px !important;
+    float: right !important;
+    fill-opacity: 0.6;
+  }
 
-    :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] #close-button #close {
-        display: none !important;
-    }
+  :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] #close-button #close {
+    display: none !important;
+  }
 
-    :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] #close-button::before {
-        content: "";
-        background: url(chrome://userchrome/content/close.svg) center/contain no-repeat !important;
-        width: 20px;
-        height: 20px;
-        display: block;
-        -moz-context-properties: fill, fill-opacity;
-        fill: currentColor;
-        color: var(--plaintext-color);
-    }
+  :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] #close-button::before {
+    content: "";
+    background: url(chrome://userchrome/content/close.svg) center/contain no-repeat !important;
+    width: 20px;
+    height: 20px;
+    display: block;
+    -moz-context-properties: fill, fill-opacity;
+    fill: currentColor;
+    color: var(--plaintext-color);
+  }
 
-    :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] #close-button:hover {
-        fill-opacity: 1;
-    }
+  :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] #close-button:hover {
+    fill-opacity: 1;
+  }
 }

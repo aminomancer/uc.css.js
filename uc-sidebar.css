@@ -4,537 +4,543 @@
  * file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/
  * or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA. */
 
-/* controls the appearance of the sidebar itself,
-as well as the internal appearance of the built-in sidebars, e.g. bookmarks, history, etc. */
+/* controls the appearance of the sidebar itself, as well as the internal
+appearance of the built-in sidebars, e.g. bookmarks, history, etc. */
 
 #browser {
-    position: relative !important;
+  position: relative !important;
 }
 
 #sidebar-box {
-    --lwt-sidebar-background-color: var(--ui-secondary-bg) !important;
-    --sidebar-background-color: var(--lwt-sidebar-background-color) !important;
-    --sidebar-text-color: var(--toolbar-color) !important;
-    display: flex !important;
-    position: absolute !important;
-    top: 0 !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    right: auto !important;
-    z-index: 1 !important;
-    flex-direction: column !important;
-    box-shadow: 0px 0px 8px -4px hsla(240, 4%, 0%, 0.6), 0px 0px 15px 0px hsla(0, 0%, 0%, 0.2) !important;
+  --lwt-sidebar-background-color: var(--ui-secondary-bg) !important;
+  --sidebar-background-color: var(--lwt-sidebar-background-color) !important;
+  --sidebar-text-color: var(--toolbar-color) !important;
+  display: flex !important;
+  position: absolute !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: auto !important;
+  z-index: 1 !important;
+  flex-direction: column !important;
+  box-shadow: 0px 0px 8px -4px hsla(240, 4%, 0%, 0.6), 0px 0px 15px 0px hsla(0, 0%, 0%, 0.2) !important;
 }
 
 #sidebar-box[hidden] {
-    display: none !important;
+  display: none !important;
 }
 
 #sidebar-box[positionend] {
-    left: auto !important;
-    right: 0 !important;
+  left: auto !important;
+  right: 0 !important;
 }
 
 #sidebar-header {
-    top: 0 !important;
+  top: 0 !important;
 }
 
 #sidebar,
 #sidebar-search-container,
 .sidebar-panel {
-    --lwt-sidebar-background-color: inherit !important;
-    --sidebar-background-color: inherit !important;
-    --sidebar-text-color: inherit !important;
-    background-color: var(--sidebar-background-color) !important;
-    color: var(--toolbar-color) !important;
+  --lwt-sidebar-background-color: inherit !important;
+  --sidebar-background-color: inherit !important;
+  --sidebar-text-color: inherit !important;
+  background-color: var(--sidebar-background-color) !important;
+  color: var(--toolbar-color) !important;
 }
 
 #sidebar {
-    min-width: -moz-available !important;
-    flex-grow: 1 !important;
+  min-width: -moz-available !important;
+  flex-grow: 1 !important;
 }
 
 .sidebar-placesTree {
-    background-color: inherit !important;
+  background-color: inherit !important;
 }
 
 #sidebar-header {
-    padding: 6px !important;
-    padding-bottom: 3px !important;
-    border-bottom: 0px solid transparent !important;
-    background-color: var(--ui-secondary-bg) !important;
-    color: inherit !important;
-    font-size: 1.2em !important;
+  padding: 6px !important;
+  padding-bottom: 3px !important;
+  border-bottom: 0px solid transparent !important;
+  background-color: var(--ui-secondary-bg) !important;
+  color: inherit !important;
+  font-size: 1.2em !important;
 }
 
 #sidebar-switcher-target {
-    min-height: 28px !important;
-    min-width: 28px !important;
-    padding-inline: 6px !important;
+  min-height: 28px !important;
+  min-width: 28px !important;
+  padding-inline: 6px !important;
 }
 
 #sidebar-switcher-target #sidebar-title {
-    padding-inline: 6px !important;
+  padding-inline: 6px !important;
 }
 
 #sidebar-search-container {
-    padding: 3px 6px !important;
+  padding: 3px 6px !important;
 }
 
 :where(#sidebar-search-container, .sidebar-search-container) search-textbox {
-    appearance: none !important;
-    padding-inline: 5px 0 !important;
-    background-color: var(--search-box-color) !important;
-    border-radius: var(--general-button-border-radius) !important;
-    padding-block: 0 !important;
-    transition: 300ms background-color !important;
-    color: currentColor !important;
-    min-height: 25px !important;
-    margin: 0 !important;
-    outline: 0 solid transparent !important;
-    transition: var(--textbox-outline-transition-duration, 100ms) outline ease-in,
-        var(--findbar-textbox-bg-transition-duration, 200ms) background-color !important;
+  appearance: none !important;
+  padding-inline: 5px 0 !important;
+  background-color: var(--search-box-color) !important;
+  border-radius: var(--general-button-border-radius) !important;
+  padding-block: 0 !important;
+  transition: 300ms background-color !important;
+  color: currentColor !important;
+  min-height: 25px !important;
+  margin: 0 !important;
+  outline: 0 solid transparent !important;
+  transition: var(--textbox-outline-transition-duration, 100ms) outline ease-in,
+    var(--findbar-textbox-bg-transition-duration, 200ms) background-color !important;
 }
 
 /* animate the purple focus outline & background */
 :is(#sidebar-search-container, .sidebar-search-container) search-textbox:focus {
-    background-color: var(--search-box-focus) !important;
-    outline: 2px solid var(--search-box-focus-outline-color, -moz-accent-color) !important;
-    transition-duration: calc(
-        var(--textbox-outline-transition-duration, 100ms) * 0.6
-    ), var(--findbar-textbox-bg-transition-duration, 200ms) !important;
-    transition-timing-function: ease-out, linear !important;
+  background-color: var(--search-box-focus) !important;
+  outline: 2px solid var(--search-box-focus-outline-color, -moz-accent-color) !important;
+  transition-duration: calc(var(--textbox-outline-transition-duration, 100ms) * 0.6),
+    var(--findbar-textbox-bg-transition-duration, 200ms) !important;
+  transition-timing-function: ease-out, linear !important;
 }
 
 /* search-textbox icons (magnifying glass and clear input button) */
 @-moz-document url("chrome://browser/content/browser.xhtml"), regexp(".*Sidebar.*"), regexp(".*sidebar.*")
 {
-    .textbox-search-icons[selectedIndex="1"] {
-        display: flex !important;
-        flex-flow: row nowrap;
-        align-items: center;
-        padding-inline-end: 4px !important;
-        cursor: default !important;
-    }
+  .textbox-search-icons[selectedIndex="1"] {
+    display: flex !important;
+    flex-flow: row nowrap;
+    align-items: center;
+    padding-inline-end: 4px !important;
+    cursor: default !important;
+  }
 
-    .textbox-search-icons[selectedIndex="1"] .textbox-search-clear {
-        background-image: url(chrome://userchrome/content/textbox-clear.svg) !important;
-        background-size: contain !important;
-        background-position: center !important;
-        background-repeat: no-repeat !important;
-        fill: var(--ui-text-80) !important;
-        -moz-context-properties: fill, fill-opacity !important;
-        fill-opacity: 0 !important;
-        width: 16px !important;
-        height: 16px !important;
-        min-height: 1px !important;
-        border-radius: var(--tab-button-border-radius, 2px) !important;
-        padding: 0 !important;
-        box-sizing: border-box !important;
-    }
+  .textbox-search-icons[selectedIndex="1"] .textbox-search-clear {
+    background-image: url(chrome://userchrome/content/textbox-clear.svg) !important;
+    background-size: contain !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    fill: var(--ui-text-80) !important;
+    -moz-context-properties: fill, fill-opacity !important;
+    fill-opacity: 0 !important;
+    width: 16px !important;
+    height: 16px !important;
+    min-height: 1px !important;
+    border-radius: var(--tab-button-border-radius, 2px) !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+  }
 
-    .textbox-search-icons[selectedIndex="1"] .textbox-search-clear[src]:not([src=""]) {
-        padding-inline-start: 16px !important;
-    }
+  .textbox-search-icons[selectedIndex="1"] .textbox-search-clear[src]:not([src=""]) {
+    padding-inline-start: 16px !important;
+  }
 
-    .textbox-search-icons[selectedIndex="1"] .textbox-search-clear:hover {
-        fill: rgba(255, 255, 255, 1) !important;
-        background-color: var(--button-hover-bgcolor) !important;
-    }
+  .textbox-search-icons[selectedIndex="1"] .textbox-search-clear:hover {
+    fill: rgba(255, 255, 255, 1) !important;
+    background-color: var(--button-hover-bgcolor) !important;
+  }
 
-    .textbox-search-sign {
-        margin: 1px 5px 0 1px !important;
-        -moz-context-properties: fill, fill-opacity;
-        list-style-image: url(chrome://userchrome/content/textbox-search.svg) !important;
-        fill: var(--panel-description-color) !important;
-        fill-opacity: 1;
-    }
+  .textbox-search-sign {
+    margin: 1px 5px 0 1px !important;
+    -moz-context-properties: fill, fill-opacity;
+    list-style-image: url(chrome://userchrome/content/textbox-search.svg) !important;
+    fill: var(--panel-description-color) !important;
+    fill-opacity: 1;
+  }
 
-    .textbox-search-sign[part="search-sign"] ~ input::placeholder
-    {
-        opacity: 1;
-        color: var(--panel-description-color);
-    }
+  .textbox-search-sign[part="search-sign"] ~ input::placeholder {
+    opacity: 1;
+    color: var(--panel-description-color);
+  }
 }
 
 #viewButton {
-    padding-inline: 7px 5px !important;
-    margin-inline-start: 6px !important;
-    border-radius: var(--general-button-border-radius) !important;
-    border: 0 !important;
-    background: transparent !important;
+  padding-inline: 7px 5px !important;
+  margin-inline-start: 6px !important;
+  border-radius: var(--general-button-border-radius) !important;
+  border: 0 !important;
+  background: transparent !important;
 }
 
 #viewButton > .button-box > dropmarker {
-    margin-inline-start: 4px !important;
+  margin-inline-start: 4px !important;
 }
 
 #viewButton:hover {
-    background-color: var(--button-hover-bgcolor) !important;
+  background-color: var(--button-hover-bgcolor) !important;
 }
 
 #viewButton:is(:active, [open]) {
-    background-color: var(--button-active-bgcolor) !important;
+  background-color: var(--button-active-bgcolor) !important;
 }
 
 #sidebarMenu-popup {
-    --arrowpanel-background: var(--popup-on-popup-contrast-bg);
-    margin-top: 0 !important;
+  --arrowpanel-background: var(--popup-on-popup-contrast-bg);
+  margin-top: 0 !important;
 }
 
 #sidebarMenu-popup > .webextension-menuitem > .toolbarbutton-icon {
-    opacity: 0.8 !important;
-    fill: currentColor !important;
+  opacity: 0.8 !important;
+  fill: currentColor !important;
 }
 
 #sidebarMenu-popup > .subviewbutton[checked="true"] > .toolbarbutton-icon {
-    list-style-image: none !important;
-    background-image: url(chrome://userchrome/content/radio.svg);
-    opacity: 1 !important;
-    background-color: var(--uc-checkbox-checked-bgcolor);
-    background-size: contain;
-    border-radius: 100%;
+  list-style-image: none !important;
+  background-image: url(chrome://userchrome/content/radio.svg);
+  opacity: 1 !important;
+  background-color: var(--uc-checkbox-checked-bgcolor);
+  background-size: contain;
+  border-radius: 100%;
 }
 
 #sidebarMenu-popup > .subviewbutton > .toolbarbutton-text {
-    padding-inline-start: 8px !important;
+  padding-inline-start: 8px !important;
 }
 
 #sidebarMenu-popup > .subviewbutton > .toolbarbutton-icon {
-    margin-inline-start: 0 !important;
-    min-width: 16px !important;
-    fill-opacity: 0.8;
-    width: 16px;
-    height: 16px;
+  margin-inline-start: 0 !important;
+  min-width: 16px !important;
+  fill-opacity: 0.8;
+  width: 16px;
+  height: 16px;
 }
 
 #sidebar-switcher-target:-moz-focusring,
 #sidebar-close:-moz-focusring {
-    outline: unset !important;
+  outline: unset !important;
 }
 
 #sidebar-switcher-target:is(:hover, :focus-visible) {
-    background: var(--button-hover-bgcolor) !important;
+  background: var(--button-hover-bgcolor) !important;
 }
 
 #sidebar-switcher-target.active {
-    background: var(--button-active-bgcolor) !important;
+  background: var(--button-active-bgcolor) !important;
 }
 
 #sidebar-close {
-    border-radius: var(--general-button-border-radius) !important;
-    list-style-image: url(chrome://userchrome/content/close.svg) !important;
-    width: 28px !important;
-    height: 28px !important;
+  border-radius: var(--general-button-border-radius) !important;
+  list-style-image: url(chrome://userchrome/content/close.svg) !important;
+  width: 28px !important;
+  height: 28px !important;
 }
 
 #sidebar-close .toolbarbutton-icon {
-    width: 18px !important;
-    height: auto !important;
+  width: 18px !important;
+  height: auto !important;
 }
 
 #sidebar-close:is(:hover, :focus-visible) {
-    background-color: var(--button-hover-bgcolor) !important;
-    fill-opacity: 1 !important;
+  background-color: var(--button-hover-bgcolor) !important;
+  fill-opacity: 1 !important;
 }
 
 #sidebar-close:is(:hover, :focus-visible):active {
-    background-color: var(--button-active-bgcolor) !important;
+  background-color: var(--button-active-bgcolor) !important;
 }
 
 .sidebar-placesTreechildren::-moz-tree-cell {
-    border-radius: var(--general-button-border-radius) !important;
-    margin-inline: 6px !important;
-    cursor: default !important;
+  border-radius: var(--general-button-border-radius) !important;
+  margin-inline: 6px !important;
+  cursor: default !important;
 }
 
 .sidebar-placesTreechildren::-moz-tree-row {
-    min-height: 26px !important;
-    background: none !important;
-    padding-block: 1px !important;
+  min-height: 26px !important;
+  background: none !important;
+  padding-block: 1px !important;
 }
 
 .sidebar-placesTreechildren::-moz-tree-row(empty) {
-    min-height: 0 !important;
+  min-height: 0 !important;
 }
 
 .sidebar-placesTreechildren::-moz-tree-cell(selected) {
-    background-color: var(--places-cell-focus-bgcolor) !important;
-    outline: none !important;
-    border: none !important;
+  background-color: var(--places-cell-focus-bgcolor) !important;
+  outline: none !important;
+  border: none !important;
 }
 
 .sidebar-placesTreechildren::-moz-tree-cell(hover),
 .sidebar-placesTreechildren::-moz-tree-cell(selected, hover) {
-    background-color: var(--places-cell-hover-bgcolor) !important;
-    color: var(--lwt-text-color) !important;
-    outline: none !important;
+  background-color: var(--places-cell-hover-bgcolor) !important;
+  color: var(--lwt-text-color) !important;
+  outline: none !important;
 }
 
 .sidebar-panel:-moz-window-inactive .sidebar-placesTreechildren::-moz-tree-cell(selected) {
-    background-color: transparent !important;
+  background-color: transparent !important;
 }
 
 .sidebar-panel:-moz-window-inactive .sidebar-placesTreechildren::-moz-tree-cell(selected, hover) {
-    background-color: var(--places-cell-hover-bgcolor) !important;
-    color: var(--lwt-text-color) !important;
-    outline: none !important;
+  background-color: var(--places-cell-hover-bgcolor) !important;
+  color: var(--lwt-text-color) !important;
+  outline: none !important;
 }
 
 .sidebar-panel .sidebar-placesTreechildren::-moz-tree-cell(cutting, selected),
 .sidebar-panel .sidebar-placesTreechildren::-moz-tree-cell(cutting, hover) {
-    background-color: color-mix(
-        in srgb,
-        transparent 50%,
-        var(--places-cell-hover-bgcolor)
-    ) !important;
+  background-color: color-mix(
+    in srgb,
+    transparent 50%,
+    var(--places-cell-hover-bgcolor)
+  ) !important;
 }
 
 .sidebar-placesTreechildren::-moz-tree-cell(primary, dropOn) {
-    background-color: var(--places-cell-focus-bgcolor) !important;
+  background-color: var(--places-cell-focus-bgcolor) !important;
 }
 
 .sidebar-placesTreechildren::-moz-tree-row,
 .sidebar-placesTreechildren::-moz-tree-row(current, focus),
 .sidebar-placesTreechildren::-moz-tree-row(selected, current, focus) {
-    border: none !important;
-    outline: none !important;
+  border: none !important;
+  outline: none !important;
 }
 
 .sidebar-placesTreechildren::-moz-tree-row(selected, current, focus) {
-    border: none !important;
-    outline: none !important;
+  border: none !important;
+  outline: none !important;
 }
 
 .sidebar-placesTreechildren::-moz-tree-cell-text(primary, dropOn) {
-    background: none !important;
+  background: none !important;
 }
 
 .sidebar-placesTreechildren::-moz-tree-drop-feedback {
-    background-color: transparent !important;
-    margin-inline-start: -16px !important;
-    pointer-events: none;
-    background-image: url(chrome://userchrome/content/tree/tree-drop-indicator.svg) !important;
-    background-repeat: no-repeat !important;
-    background-size: contain !important;
-    height: 14px !important;
+  background-color: transparent !important;
+  margin-inline-start: -16px !important;
+  pointer-events: none;
+  background-image: url(chrome://userchrome/content/tree/tree-drop-indicator.svg) !important;
+  background-repeat: no-repeat !important;
+  background-size: contain !important;
+  height: 14px !important;
 }
 
 .sidebar-placesTreechildren::-moz-tree-twisty {
-    width: 16px !important;
-    height: auto !important;
-    list-style-image: url(chrome://userchrome/content/tree/tree-twisty-right.svg) !important;
-    -moz-context-properties: fill, fill-opacity;
-    margin-inline: 0 3px !important;
-    padding-inline: 0 !important;
+  width: 16px !important;
+  height: auto !important;
+  list-style-image: url(chrome://userchrome/content/tree/tree-twisty-right.svg) !important;
+  -moz-context-properties: fill, fill-opacity;
+  margin-inline: 0 3px !important;
+  padding-inline: 0 !important;
 }
 
 .sidebar-placesTreechildren::-moz-tree-separator {
-    border-bottom: none !important;
-    border-color: var(--panel-separator-color) !important;
-    height: 1px !important;
-    margin-inline: 0 8px !important;
+  border-bottom: none !important;
+  border-color: var(--panel-separator-color) !important;
+  height: 1px !important;
+  margin-inline: 0 8px !important;
 }
 
 .sidebar-placesTreechildren::-moz-tree-separator(hover),
 .sidebar-placesTreechildren:not(:-moz-window-inactive)::-moz-tree-separator(selected),
 .sidebar-placesTreechildren:not(:-moz-window-inactive)::-moz-tree-separator(hover, selected) {
-    border-color: color-mix(
-        in srgb,
-        var(--panel-shortcut-color) 30%,
-        var(--panel-separator-color)
-    ) !important;
+  border-color: color-mix(
+    in srgb,
+    var(--panel-shortcut-color) 30%,
+    var(--panel-separator-color)
+  ) !important;
 }
 
 .sidebar-placesTreechildren:not(:-moz-window-inactive)::-moz-tree-separator(cutting) {
-    border-top-style: dashed !important;
+  border-top-style: dashed !important;
 }
 
 .sidebar-placesTreechildren::-moz-tree-cell(separator),
 .sidebar-panel:-moz-window-inactive .sidebar-placesTreechildren::-moz-tree-cell(separator) {
-    background: none !important;
-    margin-block: 0 1px !important;
+  background: none !important;
+  margin-block: 0 1px !important;
 }
 
 .sidebar-placesTreechildren::-moz-tree-twisty(separator) {
-    width: 0 !important;
-    margin: 0 !important;
+  width: 0 !important;
+  margin: 0 !important;
 }
 
-/* removes the empty space where the twisty (arrow) would go if the item was a folder.
-when the twisty icon isn't displayed, it still has width, creating an empty space to the left of the item.
-there are normally no twistys in sorted trees so it is relatively safe to collapse them. */
+/* removes the empty space where the twisty (arrow) would go if the item was a
+folder. when the twisty icon isn't displayed, it still has width, creating an
+empty space to the left of the item. there are normally no twistys in sorted
+trees so it is relatively safe to collapse them. */
 /* .sidebar-placesTreechildren::-moz-tree-twisty(sorted) {
-    width: 0 !important;
-    margin-inline: 0 !important;
+  width: 0 !important;
+  margin-inline: 0 !important;
 } */
 
 .sidebar-placesTreechildren::-moz-tree-image {
-    margin-inline: 0 4px !important;
+  margin-inline: 0 4px !important;
 }
 
 .sidebar-placesTreechildren:-moz-locale-dir(rtl)::-moz-tree-twisty(closed) {
-    list-style-image: url(chrome://userchrome/content/tree/tree-twisty-left.svg) !important;
+  list-style-image: url(chrome://userchrome/content/tree/tree-twisty-left.svg) !important;
 }
 
 .sidebar-placesTreechildren::-moz-tree-twisty(open) {
-    list-style-image: url(chrome://userchrome/content/tree/tree-twisty-down.svg) !important;
+  list-style-image: url(chrome://userchrome/content/tree/tree-twisty-down.svg) !important;
 }
 
 .item.client .item-twisty-container {
-    min-width: 16px !important;
-    height: 16px !important;
-    padding: 0 !important;
-    margin-inline: -1px 1px !important;
-    background-image: url(chrome://userchrome/content/tree/tree-twisty-down.svg) !important;
-    background-position: center !important;
-    background-size: 14px !important;
-    -moz-context-properties: fill, fill-opacity;
+  min-width: 16px !important;
+  height: 16px !important;
+  padding: 0 !important;
+  margin-inline: -1px 1px !important;
+  background-image: url(chrome://userchrome/content/tree/tree-twisty-down.svg) !important;
+  background-position: center !important;
+  background-size: 14px !important;
+  -moz-context-properties: fill, fill-opacity;
 }
 
 .item.client.closed .item-twisty-container {
-    background-image: url(chrome://userchrome/content/tree/tree-twisty-right.svg) !important;
+  background-image: url(chrome://userchrome/content/tree/tree-twisty-right.svg) !important;
 }
 
 .item.client.closed .item-twisty-container:dir(rtl) {
-    background-image: url(chrome://userchrome/content/tree/tree-twisty-left.svg) !important;
+  background-image: url(chrome://userchrome/content/tree/tree-twisty-left.svg) !important;
 }
 
 .sidebar-placesTreechildren::-moz-tree-cell-text {
-    padding-right: 7px !important;
-    cursor: default !important;
+  padding-right: 7px !important;
+  cursor: default !important;
 }
 
 .sidebar-placesTreechildren::-moz-tree-cell-text,
 .sidebar-placesTreechildren::-moz-tree-image,
 .sidebar-placesTreechildren::-moz-tree-twisty {
-    color: var(--lwt-text-color) !important;
-    cursor: default !important;
+  color: var(--lwt-text-color) !important;
+  cursor: default !important;
 }
 
 .sidebar-placesTreechildren::-moz-tree-cell-text(cutting) {
-    opacity: 0.5 !important;
+  opacity: 0.5 !important;
 }
 
 .sidebar-placesTreechildren::-moz-tree-indentation {
-    width: 16px;
+  width: 16px;
 }
 
 .sidebar-placesTree {
-    color: var(--lwt-text-color) !important;
+  color: var(--lwt-text-color) !important;
 }
 
 #sidebar-splitter {
-    display: none !important;
+  display: none !important;
 }
 
 #sidebar-box {
-    border-color: var(--sidebar-border-color) !important;
-    border-block-style: none;
-    border-inline-style: solid;
-    border-inline-width: 0 1px;
+  border-color: var(--sidebar-border-color) !important;
+  border-block-style: none;
+  border-inline-style: solid;
+  border-inline-width: 0 1px;
 }
 
 #sidebar-box[positionend] {
-    border-inline-width: 1px 0;
+  border-inline-width: 1px 0;
 }
 
 @-moz-document url("chrome://browser/content/syncedtabs/sidebar.xhtml")
 {
-    body {
-        background-color: var(--ui-secondary-bg) !important;
-        color: var(--lwt-text-color) !important;
-        fill: currentColor !important;
-    }
+  body {
+    background-color: var(--ui-secondary-bg) !important;
+    color: var(--lwt-text-color) !important;
+    fill: currentColor !important;
+  }
 
-    .content-header {
-        border-bottom: 0px solid transparent !important;
-        background-color: var(--ui-secondary-bg) !important;
-        color: inherit !important;
-    }
+  .content-header {
+    border-bottom: 0px solid transparent !important;
+    background-color: var(--ui-secondary-bg) !important;
+    color: inherit !important;
+  }
 
-    .sidebar-search-container {
-        padding: 3px 6px !important;
-    }
+  .sidebar-search-container {
+    padding: 3px 6px !important;
+  }
 
-    .item-icon-container {
-        fill-opacity: 0.7 !important;
-        -moz-context-properties: fill, fill-opacity !important;
-    }
+  .item-icon-container {
+    fill-opacity: 0.7 !important;
+    -moz-context-properties: fill, fill-opacity !important;
+  }
 
-    .item-twisty-container,
-    .item-icon-container {
-        margin-inline: 3px 6px !important;
-    }
+  .item-twisty-container,
+  .item-icon-container {
+    margin-inline: 3px 6px !important;
+  }
 
-    .item-tabs-list .item-icon-container {
-        margin-inline: 13px 6px !important;
-    }
+  .item-tabs-list .item-icon-container {
+    margin-inline: 13px 6px !important;
+  }
 
-    .item-title-container {
-        border-radius: var(--general-button-border-radius) !important;
-        margin-inline: 6px !important;
-        min-height: 24px;
-        box-sizing: border-box !important;
-    }
+  .item-title-container {
+    border-radius: var(--general-button-border-radius) !important;
+    margin-inline: 6px !important;
+    min-height: 24px;
+    box-sizing: border-box !important;
+  }
 
-    .item-title-container:hover {
-        background-color: var(--places-cell-hover-bgcolor) !important;
-        color: var(--lwt-text-color) !important;
-    }
+  .item-title-container:hover {
+    background-color: var(--places-cell-hover-bgcolor) !important;
+    color: var(--lwt-text-color) !important;
+  }
 
-    .item.selected > .item-title-container:not(:hover) {
-        background-color: var(--places-cell-focus-bgcolor) !important;
-        color: var(--lwt-text-color) !important;
-    }
+  .item.selected > .item-title-container:not(:hover) {
+    background-color: var(--places-cell-focus-bgcolor) !important;
+    color: var(--lwt-text-color) !important;
+  }
 
-    .item.selected:-moz-window-inactive > .item-title-container:not(:hover) {
-        background-color: transparent !important;
-    }
+  .item.selected:-moz-window-inactive > .item-title-container:not(:hover) {
+    background-color: transparent !important;
+  }
 
-    .item.empty:not(.client) > .item-title-container {
-        color: var(--uc-menu-disabled-color) !important;
-        background: none !important;
-    }
+  .item.empty:not(.client) > .item-title-container {
+    color: var(--uc-menu-disabled-color) !important;
+    background: none !important;
+  }
 
-    ::selection {
-        background-color: var(--ui-selection-bgcolor) !important;
-        color: var(--ui-selection-color) !important;
-    }
+  ::selection {
+    background-color: var(--ui-selection-bgcolor) !important;
+    color: var(--ui-selection-color) !important;
+  }
 
-    :-moz-window-inactive::selection {
-        background-color: var(
-            --ui-selection-bgcolor-disabled,
-            text-select-disabled-background
-        ) !important;
-    }
+  :-moz-window-inactive::selection {
+    background-color: var(
+      --ui-selection-bgcolor-disabled,
+      text-select-disabled-background
+    ) !important;
+  }
 }
 
 /* vertical tabs pane shadow */
 #vertical-tabs-pane[unpinned] {
-    box-shadow: 0px 0px 8px -4px hsla(240, 4%, 0%, 0.6), 0px 0px 15px 0px hsla(0, 0%, 0%, 0.2) !important;
+  box-shadow: 0px 0px 8px -4px hsla(240, 4%, 0%, 0.6), 0px 0px 15px 0px hsla(0, 0%, 0%, 0.2) !important;
 }
 
 #vertical-tabs-pane:not([unpinned]) ~ #vertical-tabs-splitter {
-    position: absolute !important;
-    z-index: 2; /* draw above the app content */
-    width: 38px !important; /* we have to make it bigger so we can add negative spread to the shadow. so it matches the sidebar shadow */
-    margin-inline-start: -38px !important;
-    box-shadow: 0px 0px 8px -4px hsla(240, 4%, 0%, 0.6), 0px 0px 15px 0px hsla(0, 0%, 0%, 0.2);
-    /* we need to use clip-path for a few reasons...
-       1) stop the shadow from drawing on the pane (the splitter is above the pane in z-dimension)
-       2) we made the splitter bigger for the sake of the shadow. but it's supposed to be 4px wide, that's the resizable area.
-          so we need to clip off 34px from the left side of the pane. this clips the shadow as well as the splitter itself,
-          so it's effectively 4px wide in terms of clickable area but 38px wide for purposes of the shadow.
-       3) we also need to keep the shadow from projecting onto the navbar above it.
-          you'll notice we use clip-path for shadows very frequently,
-          where we want to make the projecting object look like it's below something that it's actually above. */
-    clip-path: inset(0 -250px 0 34px);
+  position: absolute !important;
+  /* draw above the app content */
+  z-index: 2;
+  /* we have to make it bigger so we can add negative spread to the shadow. so it matches the sidebar shadow */
+  width: 38px !important;
+  margin-inline-start: -38px !important;
+  box-shadow: 0px 0px 8px -4px hsla(240, 4%, 0%, 0.6), 0px 0px 15px 0px hsla(0, 0%, 0%, 0.2);
+  /* we need to use clip-path for a few reasons...
+    1) stop the shadow from drawing on the pane
+       (the splitter is above the pane in z-dimension)
+    2) we made the splitter bigger for the sake of the shadow. but it's
+       supposed to be 4px wide, that's the resizable area. so we need to
+       clip off 34px from the left side of the pane. this clips the shadow
+       as well as the splitter itself, so it's effectively 4px wide in
+       terms of clickable area but 38px wide for purposes of the shadow.
+    3) we also need to keep the shadow from projecting onto the navbar
+       above it. you'll notice we use clip-path for shadows very
+       frequently, where we want to make the projecting object look
+       like it's below something that it's actually above. */
+  clip-path: inset(0 -250px 0 34px);
 }
 
-/* since we get rid of the focus ring, we'll highlight focused buttons with background-color, as we do on the toolbar */
+/* since we get rid of the focus ring, we'll highlight focused buttons
+with background-color, as we do on the toolbar */
 #vertical-tabs-buttons-row
-    .subviewbutton:is(:focus-visible, [checked="true"]):not([disabled], [open], :hover, :active) {
-    background-color: var(--toolbarbutton-checked-background) !important;
-    transition: none !important;
+  .subviewbutton:is(:focus-visible, [checked="true"]):not([disabled], [open], :hover, :active) {
+  background-color: var(--toolbarbutton-checked-background) !important;
+  transition: none !important;
 }

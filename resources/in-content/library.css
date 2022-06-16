@@ -7,80 +7,79 @@
 /* for the places organizer, e.g. "Manage Bookmarks" */
 
 @-moz-document url-prefix("chrome://browser/content/places/places.xhtml"),
-    url-prefix("about:downloads")
-{
-    :root {
-        --in-content-button-background-disabled: hsla(0, 20%, 80%, 0.12);
-        --in-content-button-background-hover: hsla(0, 20%, 90%, 0.15) !important;
-        --in-content-button-background-active: hsla(0, 20%, 90%, 0.19) !important;
-        --in-content-border-hover: var(--dialog-box-border-hover) !important;
-        --organizer-color: var(--plaintext-color) !important;
-        --organizer-deemphasized-color: color-mix(
-            in srgb,
-            var(--plaintext-color) 75%,
-            transparent
-        ) !important;
-        --organizer-toolbar-background: var(--in-content-button-highlight-dark) !important;
-        --organizer-pane-background: var(--in-content-box-bg-dark) !important;
-        --organizer-content-background: var(--in-content-bg-dark) !important;
-        --organizer-hover-background: var(--in-content-button-background-hover) !important;
-        --organizer-selected-background: var(--in-content-button-background-active) !important;
-        --organizer-outline-color: var(--purple-40) !important;
-        --organizer-border-color: var(--in-content-border-color-dim) !important;
-        --organizer-toolbar-field-background: var(--in-content-bg-dark) !important;
-        --organizer-toolbar-field-background-focused: var(--in-content-box-bg-dark) !important;
-        --organizer-separator-color: var(--in-content-separator-dim) !important;
-        --organizer-toolbar-field-focus-border-color: var(--organizer-outline-color) !important;
-        --organizer-toolbar-field-focus-box-shadow: 0 0 0 0.5px
-            var(--organizer-toolbar-field-focus-border-color) inset !important;
-        --organizer-pane-field-border-color: var(--in-content-separator-dim) !important;
-        --download-button-hover-bg: hsla(230, 8%, 80%, 0.12);
-    }
+    url-prefix("about:downloads") {
+  :root {
+    --in-content-button-background-disabled: hsla(0, 20%, 80%, 0.12);
+    --in-content-button-background-hover: hsla(0, 20%, 90%, 0.15) !important;
+    --in-content-button-background-active: hsla(0, 20%, 90%, 0.19) !important;
+    --in-content-border-hover: var(--dialog-box-border-hover) !important;
+    --organizer-color: var(--plaintext-color) !important;
+    --organizer-deemphasized-color: color-mix(
+      in srgb,
+      var(--plaintext-color) 75%,
+      transparent
+    ) !important;
+    --organizer-toolbar-background: var(--in-content-button-highlight-dark) !important;
+    --organizer-pane-background: var(--in-content-box-bg-dark) !important;
+    --organizer-content-background: var(--in-content-bg-dark) !important;
+    --organizer-hover-background: var(--in-content-button-background-hover) !important;
+    --organizer-selected-background: var(--in-content-button-background-active) !important;
+    --organizer-outline-color: var(--purple-40) !important;
+    --organizer-border-color: var(--in-content-border-color-dim) !important;
+    --organizer-toolbar-field-background: var(--in-content-bg-dark) !important;
+    --organizer-toolbar-field-background-focused: var(--in-content-box-bg-dark) !important;
+    --organizer-separator-color: var(--in-content-separator-dim) !important;
+    --organizer-toolbar-field-focus-border-color: var(--organizer-outline-color) !important;
+    --organizer-toolbar-field-focus-box-shadow: 0 0 0 0.5px
+      var(--organizer-toolbar-field-focus-border-color) inset !important;
+    --organizer-pane-field-border-color: var(--in-content-separator-dim) !important;
+    --download-button-hover-bg: hsla(230, 8%, 80%, 0.12);
+  }
 
-    #placesToolbar > toolbarbutton,
-    #placesMenu > menu,
-    #searchFilter {
-        border-radius: var(--general-button-border-radius) !important;
-    }
+  #placesToolbar > toolbarbutton,
+  #placesMenu > menu,
+  #searchFilter {
+    border-radius: var(--general-button-border-radius) !important;
+  }
 
-    #placesMenu > menu > .menubar-text {
-        background-size: 12px !important;
-        padding-inline-end: 16px !important;
-    }
+  #placesMenu > menu > .menubar-text {
+    background-size: 12px !important;
+    padding-inline-end: 16px !important;
+  }
 
-    #searchFilter[focused] {
-        outline-color: var(--organizer-toolbar-field-focus-border-color);
-        outline-width: 1px;
-        outline-style: solid;
-        box-shadow: none !important;
-        border-color: var(--organizer-toolbar-field-focus-border-color);
-    }
+  #searchFilter[focused] {
+    outline-color: var(--organizer-toolbar-field-focus-border-color);
+    outline-width: 1px;
+    outline-style: solid;
+    box-shadow: none !important;
+    border-color: var(--organizer-toolbar-field-focus-border-color);
+  }
 
-    #places input[type="text"]:focus {
-        outline: 2px solid var(--organizer-outline-color) !important;
-        outline-offset: -1px !important;
-    }
+  #places input[type="text"]:focus {
+    outline: 2px solid var(--organizer-outline-color) !important;
+    outline-offset: -1px !important;
+  }
 
-    #contentView treecol {
-        box-shadow: inset 0 -1px var(--organizer-border-color);
-    }
+  #contentView treecol {
+    box-shadow: inset 0 -1px var(--organizer-border-color);
+  }
 
-    treecol,
-    treecolpicker {
-        background-color: var(--organizer-pane-background) !important;
-        border-color: var(--organizer-border-color) !important;
-    }
+  treecol,
+  treecolpicker {
+    background-color: var(--organizer-pane-background) !important;
+    border-color: var(--organizer-border-color) !important;
+  }
 
-    :is(treecol, treecolpicker):where(:hover) {
-        background-color: var(--organizer-hover-background) !important;
-    }
+  :is(treecol, treecolpicker):where(:hover) {
+    background-color: var(--organizer-hover-background) !important;
+  }
 
-    :is(treecol, treecolpicker):where(:hover:active) {
-        background-color: var(--organizer-selected-background) !important;
-    }
+  :is(treecol, treecolpicker):where(:hover:active) {
+    background-color: var(--organizer-selected-background) !important;
+  }
 
-    menubar > menu[_moz-menuactive="true"]:not([disabled="true"]) {
-        background-color: var(--organizer-hover-background) !important;
-        color: var(--organizer-hover-color) !important;
-    }
+  menubar > menu[_moz-menuactive="true"]:not([disabled="true"]) {
+    background-color: var(--organizer-hover-background) !important;
+    color: var(--organizer-hover-color) !important;
+  }
 }

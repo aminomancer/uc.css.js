@@ -7,538 +7,539 @@
 /* this stylesheet exclusively deals with the bookmarks toolbar popup panel and the "edit bookmark" panel and dialog. */
 
 #main-window #editBookmarkPanel input:focus {
-    background-color: var(--ui-textbox-focus-bgcolor) !important;
+  background-color: var(--ui-textbox-focus-bgcolor) !important;
 }
 
 #editBookmarkPanel input {
-    appearance: none !important;
-    -moz-user-select: text !important;
-    user-select: text !important;
-    background-color: var(--ui-textbox-bgcolor) !important;
-    color: var(--toolbar-color) !important;
-    border: none !important;
-    padding-block: 2px !important;
-    padding-inline: 6px !important;
-    outline: none !important;
-    border-radius: 2px !important;
-    min-height: 24px !important;
-    box-sizing: border-box !important;
+  appearance: none !important;
+  -moz-user-select: text !important;
+  user-select: text !important;
+  background-color: var(--ui-textbox-bgcolor) !important;
+  color: var(--toolbar-color) !important;
+  border: none !important;
+  padding-block: 2px !important;
+  padding-inline: 6px !important;
+  outline: none !important;
+  border-radius: 2px !important;
+  min-height: 24px !important;
+  box-sizing: border-box !important;
 }
 
 #main-window #editBookmarkPanel input::placeholder {
-    color: var(--panel-description-color) !important;
-    opacity: 1 !important;
+  color: var(--panel-description-color) !important;
+  opacity: 1 !important;
 }
 
 /* 'add bookmark' popup menu formatting */
 #editBookmarkPanel {
-    min-width: 25em !important;
-    --panel-width: 25em !important;
+  min-width: 25em !important;
+  --panel-width: 25em !important;
 }
 
 #editBookmarkPanelRows {
-    padding-inline: 14px !important;
-    padding-block: 8px 0 !important;
+  padding-inline: 14px !important;
+  padding-block: 8px 0 !important;
 }
 
 #editBookmarkPanelBottomContent {
-    padding-inline: 10px !important;
-    padding-block: 8px !important;
+  padding-inline: 10px !important;
+  padding-block: 8px !important;
 }
 
 #editBookmarkPanelRows > vbox {
-    margin-block: 0 !important;
-    padding-block: 8px 0 !important;
+  margin-block: 0 !important;
+  padding-block: 8px 0 !important;
 }
 
 #editBookmarkPanel :focus-visible,
 #editBookmarkPanel checkbox:focus-visible > .checkbox-check {
-    outline: none !important;
+  outline: none !important;
 }
 
 #editBookmarkPanel menulist {
-    appearance: none !important;
-    background-color: var(--ui-textbox-bgcolor) !important;
-    line-height: normal;
-    padding-block: 2px !important;
-    padding-inline: var(--panel-menulist-padding) !important;
-    color: var(--toolbar-color) !important;
-    border: none !important;
-    border-radius: var(--general-button-border-radius) !important;
-    min-height: 24px !important;
-    box-shadow: none !important;
-    margin: 0 !important;
+  appearance: none !important;
+  background-color: var(--ui-textbox-bgcolor) !important;
+  line-height: normal;
+  padding-block: 2px !important;
+  padding-inline: var(--panel-menulist-padding) !important;
+  color: var(--toolbar-color) !important;
+  border: none !important;
+  border-radius: var(--general-button-border-radius) !important;
+  min-height: 24px !important;
+  box-shadow: none !important;
+  margin: 0 !important;
 }
 
 #editBookmarkPanel menulist[open="true"] {
-    border-bottom-right-radius: 0 !important;
-    border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
 }
 
 #editBookmarkPanel menulist[open="true"] menupopup {
-    border-top-right-radius: 0 !important;
-    border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+  border-top-left-radius: 0 !important;
 }
 
 #main-window #editBMPanel_folderTree {
-    min-width: unset !important;
-    max-width: 27em !important;
+  min-width: unset !important;
+  max-width: 27em !important;
 }
 
 #editBookmarkPanel tree {
-    appearance: none !important;
-    background-color: var(--ui-textbox-bgcolor) !important;
-    line-height: normal;
-    color: var(--toolbar-color) !important;
-    border: none !important;
-    border-radius: var(--general-button-border-radius) !important;
-    overflow: hidden !important;
-    margin: 0 !important;
-    font-weight: var(--uc-font-weight-thin, 400);
-    outline: none !important;
-    --edit-bm-panel-overflow: hidden;
+  appearance: none !important;
+  background-color: var(--ui-textbox-bgcolor) !important;
+  line-height: normal;
+  color: var(--toolbar-color) !important;
+  border: none !important;
+  border-radius: var(--general-button-border-radius) !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  font-weight: var(--uc-font-weight-thin, 400);
+  outline: none !important;
+  --edit-bm-panel-overflow: hidden;
 }
 
-@-moz-document url("chrome://browser/content/browser.xhtml") {
-    .tree-input[type="text"] {
-        background-color: var(--ebmp-focus-bgcolor) !important;
-        border: none !important;
-        outline: none !important;
-        padding: 0 !important;
-        margin: 0 !important;
-        width: auto !important;
-        max-width: -moz-available !important;
-        text-decoration: 1px dotted underline !important;
-        text-decoration-skip-ink: none !important;
-    }
+@-moz-document url("chrome://browser/content/browser.xhtml")
+{
+  .tree-input[type="text"] {
+    background-color: var(--ebmp-focus-bgcolor) !important;
+    border: none !important;
+    outline: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: auto !important;
+    max-width: -moz-available !important;
+    text-decoration: 1px dotted underline !important;
+    text-decoration-skip-ink: none !important;
+  }
 
-    .tree-input[type="text"]::selection {
-        background-color: var(--ui-selection-bgcolor) !important;
-        color: var(--ui-selection-color) !important;
-        text-decoration-color: var(--ui-selection-color) !important;
-    }
+  .tree-input[type="text"]::selection {
+    background-color: var(--ui-selection-bgcolor) !important;
+    color: var(--ui-selection-color) !important;
+    text-decoration-color: var(--ui-selection-color) !important;
+  }
 }
 
 #editBookmarkPanel richlistbox[id] {
-    border-radius: var(--general-button-border-radius) !important;
-    margin: 0 !important;
-    border: 0 !important;
+  border-radius: var(--general-button-border-radius) !important;
+  margin: 0 !important;
+  border: 0 !important;
 }
 
 #editBookmarkPanel treechildren::-moz-tree-row,
 #editBookmarkPanel treechildren::-moz-tree-cell {
-    height: var(--tree-row-height, 24px);
+  height: var(--tree-row-height, 24px);
 }
 
 #editBookmarkPanel treechildren::-moz-tree-row(hover) {
-    appearance: none !important;
-    background-color: var(--ebmp-hover-bgcolor) !important;
-    line-height: normal;
-    color: var(--toolbar-color) !important;
-    border: none !important;
+  appearance: none !important;
+  background-color: var(--ebmp-hover-bgcolor) !important;
+  line-height: normal;
+  color: var(--toolbar-color) !important;
+  border: none !important;
 }
 
 #editBookmarkPanel treechildren::-moz-tree-row(selected) {
-    appearance: none !important;
-    background-color: var(--ebmp-focus-bgcolor) !important;
-    line-height: normal;
-    color: var(--toolbar-color) !important;
-    border: none !important;
-    outline: none !important;
+  appearance: none !important;
+  background-color: var(--ebmp-focus-bgcolor) !important;
+  line-height: normal;
+  color: var(--toolbar-color) !important;
+  border: none !important;
+  outline: none !important;
 }
 
 #editBookmarkPanel treechildren::-moz-tree-row(selected, focus) {
-    background-color: var(--ebmp-double-focus-bgcolor) !important;
+  background-color: var(--ebmp-double-focus-bgcolor) !important;
 }
 
 #editBookmarkPanel treechildren::-moz-tree-row(selected):hover {
-    appearance: none !important;
-    background-color: var(--ebmp-focus-bgcolor) !important;
-    line-height: normal;
-    color: var(--toolbar-color) !important;
-    border: none !important;
+  appearance: none !important;
+  background-color: var(--ebmp-focus-bgcolor) !important;
+  line-height: normal;
+  color: var(--toolbar-color) !important;
+  border: none !important;
 }
 
 #editBookmarkPanel treechildren::-moz-tree-cell-text(selected),
 #editBookmarkPanel treechildren::-moz-tree-image(selected),
 #editBookmarkPanel treechildren::-moz-tree-twisty(selected) {
-    appearance: none !important;
-    background-color: transparent !important;
-    line-height: normal;
-    color: var(--toolbar-color) !important;
-    border: none !important;
-    outline: none !important;
+  appearance: none !important;
+  background-color: transparent !important;
+  line-height: normal;
+  color: var(--toolbar-color) !important;
+  border: none !important;
+  outline: none !important;
 }
 
 #editBookmarkPanel #editBMPanel_newFolderBox {
-    margin-block: 8px 0 !important;
+  margin-block: 8px 0 !important;
 }
 
 #bookmarkpropertiesdialog #editBMPanel_newFolderBox {
-    margin-block: 0 !important;
+  margin-block: 0 !important;
 }
 
 #bookmarkpropertiesdialog #editBMPanel_newFolderButton {
-    margin-block: 8px 0 !important;
+  margin-block: 8px 0 !important;
 }
 
 #editBookmarkPanel menuitem,
 #editBookmarkPanel menu {
-    appearance: none !important;
-    line-height: normal !important;
-    padding-block: 2px 3px;
-    padding-inline-start: 0px !important;
-    padding-inline-end: 2px;
-    color: var(--toolbar-color) !important;
-    border: none !important;
+  appearance: none !important;
+  line-height: normal !important;
+  padding-block: 2px 3px;
+  padding-inline-start: 0px !important;
+  padding-inline-end: 2px;
+  color: var(--toolbar-color) !important;
+  border: none !important;
 }
 
 #editBookmarkPanel menulist menupopup {
-    padding: 0px !important;
-    margin: 0 !important;
-    --menupopup-inner-padding: 0 !important;
-    --context-menuitem-border-radius: 0 !important;
-    --menupopup-border-radius: 0 0 var(--general-button-border-radius)
-        var(--general-button-border-radius) !important;
+  padding: 0px !important;
+  margin: 0 !important;
+  --menupopup-inner-padding: 0 !important;
+  --context-menuitem-border-radius: 0 !important;
+  --menupopup-border-radius: 0 0 var(--general-button-border-radius)
+    var(--general-button-border-radius) !important;
 }
 
 /* this goes in userChrome.au.css */
 #editBookmarkPanelDropMarker,
 #editBMPanel_folderMenuList::part(dropmarker) {
-    appearance: none !important;
-    list-style-image: url(chrome://userchrome/content/devtools/select-arrow.svg) !important;
-    margin-block: 0 !important;
+  appearance: none !important;
+  list-style-image: url(chrome://userchrome/content/devtools/select-arrow.svg) !important;
+  margin-block: 0 !important;
 }
 
 #editBookmarkPanel #editBookmarkPanelContent button {
-    appearance: none !important;
-    background-color: var(--ui-textbox-bgcolor) !important;
-    line-height: normal;
-    padding-inline: 10px;
-    min-height: 24px;
-    margin: 0 !important;
-    color: var(--toolbar-color) !important;
-    border: none !important;
-    border-radius: var(--general-button-border-radius) !important;
-    font-size: inherit !important;
-    font-weight: inherit !important;
+  appearance: none !important;
+  background-color: var(--ui-textbox-bgcolor) !important;
+  line-height: normal;
+  padding-inline: 10px;
+  min-height: 24px;
+  margin: 0 !important;
+  color: var(--toolbar-color) !important;
+  border: none !important;
+  border-radius: var(--general-button-border-radius) !important;
+  font-size: inherit !important;
+  font-weight: inherit !important;
 }
 
 #editBookmarkPanel #editBookmarkPanelContent button:is(:hover, :focus-visible) {
-    appearance: none !important;
-    background-color: var(--ebmp-hover-bgcolor) !important;
+  appearance: none !important;
+  background-color: var(--ebmp-hover-bgcolor) !important;
 }
 
 #editBookmarkPanel #editBookmarkPanelContent button:hover:active {
-    appearance: none !important;
-    background-color: var(--ebmp-focus-bgcolor) !important;
+  appearance: none !important;
+  background-color: var(--ebmp-focus-bgcolor) !important;
 }
 
 #editBookmarkPanelBottomButtons {
-    margin: 0 14px 14px 14px !important;
-    gap: 8px !important;
-    min-width: unset !important;
+  margin: 0 14px 14px 14px !important;
+  gap: 8px !important;
+  min-width: unset !important;
 }
 
 #editBookmarkPanel .panel-footer > button {
-    border: 1px solid transparent !important;
-    flex-grow: 5 !important;
-    margin: 0 !important;
-    padding-inline: 0 !important;
-    flex-basis: 25% !important;
-    border-radius: var(--general-button-border-radius) !important;
+  border: 1px solid transparent !important;
+  flex-grow: 5 !important;
+  margin: 0 !important;
+  padding-inline: 0 !important;
+  flex-basis: 25% !important;
+  border-radius: var(--general-button-border-radius) !important;
 }
 
 #editBookmarkPanel .panel-footer > button:not([default]) {
-    background-color: transparent !important;
-    border-color: var(--ui-textbox-bgcolor) !important;
+  background-color: transparent !important;
+  border-color: var(--ui-textbox-bgcolor) !important;
 }
 
 #editBookmarkPanel
-    .panel-footer
-    > button:not([default], [disabled], :active):is(:hover, :focus-visible) {
-    background-color: var(--ebmp-hover-bgcolor) !important;
-    border-color: transparent !important;
+  .panel-footer
+  > button:not([default], [disabled], :active):is(:hover, :focus-visible) {
+  background-color: var(--ebmp-hover-bgcolor) !important;
+  border-color: transparent !important;
 }
 
 #editBookmarkPanel .panel-footer > button:not([default], [disabled]):is(:hover:active, [open]) {
-    background-color: var(--ebmp-focus-bgcolor) !important;
-    border-color: transparent !important;
+  background-color: var(--ebmp-focus-bgcolor) !important;
+  border-color: transparent !important;
 }
 
 #editBookmarkPanel .panel-footer > button[default] {
-    flex-grow: 3 !important;
-    background-color: var(--ui-textbox-bgcolor) !important;
+  flex-grow: 3 !important;
+  background-color: var(--ui-textbox-bgcolor) !important;
 }
 
 #editBookmarkPanel
-    .panel-footer
-    > button[default]:not([disabled], :active):is(:hover, :focus-visible) {
-    background-color: var(--button-primary-hover-bgcolor) !important;
+  .panel-footer
+  > button[default]:not([disabled], :active):is(:hover, :focus-visible) {
+  background-color: var(--button-primary-hover-bgcolor) !important;
 }
 
 #editBookmarkPanel .panel-footer > button[default]:not([disabled]):is(:hover:active, [open]) {
-    background-color: var(--button-primary-active-bgcolor) !important;
+  background-color: var(--button-primary-active-bgcolor) !important;
 }
 
 #editBMPanel_tagsField {
-    display: -moz-inline-box !important;
+  display: -moz-inline-box !important;
 }
 
 #editBookmarkPanel #editBookmarkPanelContent :is(.expander-up, .expander-down) {
-    min-width: 24px !important;
-    min-height: 24px !important;
-    margin-inline-start: 8px !important;
-    padding: 0 !important;
-    color: var(--lwt-toolbarbutton-icon-fill) !important;
-    border-radius: var(--general-button-border-radius) !important;
+  min-width: 24px !important;
+  min-height: 24px !important;
+  margin-inline-start: 8px !important;
+  padding: 0 !important;
+  color: var(--lwt-toolbarbutton-icon-fill) !important;
+  border-radius: var(--general-button-border-radius) !important;
 }
 
 #editBookmarkPanel .expander-down {
-    list-style-image: url(chrome://userchrome/content/menu-arrow-down-big.svg) !important;
+  list-style-image: url(chrome://userchrome/content/menu-arrow-down-big.svg) !important;
 }
 
 #editBookmarkPanel .expander-up {
-    list-style-image: url(chrome://userchrome/content/menu-arrow-up-big.svg) !important;
+  list-style-image: url(chrome://userchrome/content/menu-arrow-up-big.svg) !important;
 }
 
 #editBookmarkPanel .in-menulist {
-    --menu-background-color: var(--ebp-menulist-background-color) !important;
-    --menuitem-hover-background-color: var(
-        --ebp-menulist-menuitem-hover-background-color
-    ) !important;
-    --menu-separator-color: var(--ebp-menulist-separator-color) !important;
+  --menu-background-color: var(--ebp-menulist-background-color) !important;
+  --menuitem-hover-background-color: var(--ebp-menulist-menuitem-hover-background-color) !important;
+  --menu-separator-color: var(--ebp-menulist-separator-color) !important;
 }
 
 #editBookmarkPanel .in-menulist :is(menu, menuitem) {
-    min-height: 24px !important;
-    height: 24px !important;
-    margin: 0 !important;
+  min-height: 24px !important;
+  height: 24px !important;
+  margin: 0 !important;
 }
 
 #editBookmarkPanel .in-menulist .menuitem-iconic .menu-iconic-text {
-    padding-inline: 0 !important;
+  padding-inline: 0 !important;
 }
 
 #editBookmarkPanel menulist:is(:focus-visible, [open="true"]) {
-    appearance: none !important;
-    background-color: var(--ebp-menulist-background-color) !important;
+  appearance: none !important;
+  background-color: var(--ebp-menulist-background-color) !important;
 }
 
 #editBookmarkPanel richlistbox[id],
 #editBookmarkPanel richlistbox[id] richlistitem {
-    appearance: none !important;
-    -moz-user-select: text !important;
-    user-select: text !important;
-    background-color: var(--ui-textbox-bgcolor) !important;
-    color: var(--toolbar-color) !important;
+  appearance: none !important;
+  -moz-user-select: text !important;
+  user-select: text !important;
+  background-color: var(--ui-textbox-bgcolor) !important;
+  color: var(--toolbar-color) !important;
 }
 
 #bookmarkpropertiesdialog #editBMPanel_tagsSelector {
-    padding: revert !important;
-    border-color: var(--in-content-box-border-color) !important;
+  padding: revert !important;
+  border-color: var(--in-content-box-border-color) !important;
 }
 
 :is(#bookmarkpropertiesdialog, #editBookmarkPanel) richlistbox[id] richlistitem {
-    padding-inline-start: 2px !important;
-    -moz-box-align: center !important;
-    min-height: var(--tree-row-height, 24px) !important;
+  padding-inline-start: 2px !important;
+  -moz-box-align: center !important;
+  min-height: var(--tree-row-height, 24px) !important;
 }
 
 #bookmarkpropertiesdialog richlistbox[id] richlistitem {
-    margin-bottom: revert !important;
-    padding-block: 2.5px !important;
+  margin-bottom: revert !important;
+  padding-block: 2.5px !important;
 }
 
 :is(#bookmarkpropertiesdialog, #editBookmarkPanel) richlistbox[id] richlistitem image {
-    appearance: none !important;
-    display: -moz-inline-box;
-    width: 14px;
-    height: 14px;
-    padding: 0 !important;
-    margin-inline: var(--context-iconic-margin) !important;
-    fill: currentColor;
-    -moz-context-properties: fill, fill-opacity, stroke;
-    border: 1px solid var(--checkbox-border-color) !important;
-    border-radius: 2px;
-    background-color: var(--checkbox-unchecked-bgcolor) !important;
-    color: var(--uc-parent-primary-button-text-color) !important;
+  appearance: none !important;
+  display: -moz-inline-box;
+  width: 14px;
+  height: 14px;
+  padding: 0 !important;
+  margin-inline: var(--context-iconic-margin) !important;
+  fill: currentColor;
+  -moz-context-properties: fill, fill-opacity, stroke;
+  border: 1px solid var(--checkbox-border-color) !important;
+  border-radius: 2px;
+  background-color: var(--checkbox-unchecked-bgcolor) !important;
+  color: var(--uc-parent-primary-button-text-color) !important;
 }
 
 :is(#bookmarkpropertiesdialog, #editBookmarkPanel) richlistbox[id] richlistitem label {
-    margin: 0 5px 0 0 !important;
-    display: -moz-box !important;
+  margin: 0 5px 0 0 !important;
+  display: -moz-box !important;
 }
 
 :is(#bookmarkpropertiesdialog, #editBookmarkPanel)
-    richlistbox[id]
-    richlistitem[checked="true"]
-    image {
-    background-color: var(--checkbox-checked-bgcolor) !important;
-    border-color: var(--checkbox-checked-border-color) !important;
-    list-style-image: url(chrome://userchrome/content/check.svg) !important;
+  richlistbox[id]
+  richlistitem[checked="true"]
+  image {
+  background-color: var(--checkbox-checked-bgcolor) !important;
+  border-color: var(--checkbox-checked-border-color) !important;
+  list-style-image: url(chrome://userchrome/content/check.svg) !important;
 }
 
 :is(#bookmarkpropertiesdialog, #editBookmarkPanel)
-    richlistbox[id]
-    richlistitem[checked="true"]
-    image {
-    background-color: var(--checkbox-checked-bgcolor) !important;
-    border-color: var(--checkbox-checked-border-color) !important;
-    list-style-image: url(chrome://userchrome/content/check.svg) !important;
+  richlistbox[id]
+  richlistitem[checked="true"]
+  image {
+  background-color: var(--checkbox-checked-bgcolor) !important;
+  border-color: var(--checkbox-checked-border-color) !important;
+  list-style-image: url(chrome://userchrome/content/check.svg) !important;
 }
 
 #editBookmarkPanel richlistbox[id] richlistitem:hover image {
-    background-color: var(--checkbox-unchecked-hover-bgcolor) !important;
+  background-color: var(--checkbox-unchecked-hover-bgcolor) !important;
 }
 
 #editBookmarkPanel
-    richlistbox[id]
-    richlistitem:is(:hover:active, [selected="true"], [current="true"])
-    image {
-    background-color: var(--checkbox-unchecked-active-bgcolor) !important;
+  richlistbox[id]
+  richlistitem:is(:hover:active, [selected="true"], [current="true"])
+  image {
+  background-color: var(--checkbox-unchecked-active-bgcolor) !important;
 }
 
 #editBookmarkPanel richlistbox[id] richlistitem[checked="true"]:hover image {
-    background-color: var(--checkbox-checked-hover-bgcolor) !important;
+  background-color: var(--checkbox-checked-hover-bgcolor) !important;
 }
 
 #editBookmarkPanel
-    richlistbox[id]
-    richlistitem[checked="true"]:is(:hover:active, [selected="true"], [current="true"])
-    image {
-    background-color: var(--checkbox-checked-active-bgcolor) !important;
+  richlistbox[id]
+  richlistitem[checked="true"]:is(:hover:active, [selected="true"], [current="true"])
+  image {
+  background-color: var(--checkbox-checked-active-bgcolor) !important;
 }
 
 :is(#bookmarkpropertiesdialog, #editBookmarkPanel) richlistbox[id] richlistitem:hover > image {
-    opacity: 1 !important;
+  opacity: 1 !important;
 }
 
 #editBookmarkPanel richlistbox[id] richlistitem:hover {
-    background-color: var(--ebmp-hover-bgcolor) !important;
+  background-color: var(--ebmp-hover-bgcolor) !important;
 }
 
 #editBookmarkPanel richlistbox[id] richlistitem:is([selected="true"], [current="true"]) {
-    background-color: var(--ebmp-focus-bgcolor) !important;
+  background-color: var(--ebmp-focus-bgcolor) !important;
 }
 
-#editBookmarkPanel richlistbox[id]:focus-visible richlistitem:is([selected="true"], [current="true"]) {
-    background-color: var(--ebmp-double-focus-bgcolor) !important;
+#editBookmarkPanel
+  richlistbox[id]:focus-visible
+  richlistitem:is([selected="true"], [current="true"]) {
+  background-color: var(--ebmp-double-focus-bgcolor) !important;
 }
 
 :is(#bookmarkpropertiesdialog, #editBookmarkPanel) checkbox {
-    margin-inline-start: 4px !important;
+  margin-inline-start: 4px !important;
 }
 
 :is(#bookmarkpropertiesdialog, #editBookmarkPanel) checkbox .checkbox-check {
-    margin-inline-end: 6px !important;
+  margin-inline-end: 6px !important;
 }
 
 :is(#bookmarkpropertiesdialog, #editBookmarkPanel)
-    checkbox:focus-visible:not(:active)
-    .checkbox-check {
-    background-color: var(--checkbox-unchecked-hover-bgcolor) !important;
+  checkbox:focus-visible:not(:active)
+  .checkbox-check {
+  background-color: var(--checkbox-unchecked-hover-bgcolor) !important;
 }
 
 :is(#bookmarkpropertiesdialog, #editBookmarkPanel)
-    checkbox:focus-visible:not(:active)
-    .checkbox-check[checked] {
-    background-color: var(--checkbox-checked-hover-bgcolor) !important;
+  checkbox:focus-visible:not(:active)
+  .checkbox-check[checked] {
+  background-color: var(--checkbox-checked-hover-bgcolor) !important;
 }
 
 #editBookmarkPanel .checkbox-label-box > .checkbox-label {
-    opacity: revert !important;
+  opacity: revert !important;
 }
 
 #editBookmarkPanel_persistLastLocation {
-    padding-inline: 4px !important;
+  padding-inline: 4px !important;
 }
 
 richlistbox[id]:not(#categories) > richlistitem[selected] {
-    --in-content-button-background: revert !important;
-    --in-content-button-background-hover: revert !important;
-    --in-content-button-background-active: revert !important;
-    --in-content-button-text-color-hover: revert !important;
+  --in-content-button-background: revert !important;
+  --in-content-button-background-hover: revert !important;
+  --in-content-button-background-active: revert !important;
+  --in-content-button-text-color-hover: revert !important;
 }
 
 #bookmarkpropertiesdialog
-    richlistbox[id]
-    richlistitem:is(:hover, [selected="true"], [current="true"]) {
-    background-color: var(--in-content-button-background) !important;
+  richlistbox[id]
+  richlistitem:is(:hover, [selected="true"], [current="true"]) {
+  background-color: var(--in-content-button-background) !important;
 }
 
 #editBookmarkPanelImage,
 #editBookmarkPanel html {
-    height: 140px !important;
+  height: 140px !important;
 }
 
 #editBookmarkPanelFavicon[src] {
-    box-sizing: content-box;
-    width: 32px;
-    height: 32px;
-    padding: 5px;
-    background-color: var(--ebp-favicon-background-color) !important;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.05) !important;
-    border-radius: 3px !important;
-    margin-top: 10px;
-    margin-inline-start: 10px;
-    margin-bottom: -52px;
-    -moz-context-properties: fill, fill-opacity;
-    fill: currentColor;
+  box-sizing: content-box;
+  width: 32px;
+  height: 32px;
+  padding: 5px;
+  background-color: var(--ebp-favicon-background-color) !important;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.05) !important;
+  border-radius: 3px !important;
+  margin-top: 10px;
+  margin-inline-start: 10px;
+  margin-bottom: -52px;
+  -moz-context-properties: fill, fill-opacity;
+  fill: currentColor;
 }
 
 /* bookmarks toolbar button's popup */
 @-moz-document url(chrome://browser/content/browser.xhtml)
 {
-    .panel-subview-footer.openintabs-menuitem {
-        display: none !important;
-    }
+  .panel-subview-footer.openintabs-menuitem {
+    display: none !important;
+  }
 
-    #BMB_bookmarksPopup menupopup {
-        margin-inline-start: var(--menupopup-child-margin-inline-start) !important;
-        margin-block-start: var(--menupopup-child-margin-block-start) !important;
-    }
+  #BMB_bookmarksPopup menupopup {
+    margin-inline-start: var(--menupopup-child-margin-inline-start) !important;
+    margin-block-start: var(--menupopup-child-margin-block-start) !important;
+  }
 
-    #BMB_bookmarksPopup :is(menu, menuitem) {
-        margin: var(--arrowpanel-menuitem-margin) !important;
-        min-height: var(--subviewbutton-height) !important;
-        padding-inline: var(--arrowpanel-menuitem-padding-inline) !important;
-        padding-block: var(--arrowpanel-menuitem-padding-block) !important;
-        border-radius: var(--arrowpanel-menuitem-border-radius) !important;
-    }
+  #BMB_bookmarksPopup :is(menu, menuitem) {
+    margin: var(--arrowpanel-menuitem-margin) !important;
+    min-height: var(--subviewbutton-height) !important;
+    padding-inline: var(--arrowpanel-menuitem-padding-inline) !important;
+    padding-block: var(--arrowpanel-menuitem-padding-block) !important;
+    border-radius: var(--arrowpanel-menuitem-border-radius) !important;
+  }
 
-    #BMB_bookmarksPopup menuseparator {
-        margin: var(--panel-separator-margin) !important;
-    }
+  #BMB_bookmarksPopup menuseparator {
+    margin: var(--panel-separator-margin) !important;
+  }
 
-    #BMB_bookmarksPopup menupopup :is(menuitem, menu) .menu-iconic-icon {
-        margin-inline: unset;
-    }
+  #BMB_bookmarksPopup menupopup :is(menuitem, menu) .menu-iconic-icon {
+    margin-inline: unset;
+  }
 }
 
 #BMB_bookmarksPopup {
-    --panel-separator-color: var(--desaturate-dimmed) !important;
+  --panel-separator-color: var(--desaturate-dimmed) !important;
 }
 
 #BMB_bookmarksPopup .subviewbutton > .menu-iconic-text {
-    padding-inline-start: 0 !important;
+  padding-inline-start: 0 !important;
 }
 
 #BMB_bookmarksPopup .subviewbutton > .menu-iconic-left {
-    margin-inline-end: var(--arrowpanel-subviewbutton-iconic-gap, 8px) !important;
+  margin-inline-end: var(--arrowpanel-subviewbutton-iconic-gap, 8px) !important;
 }
 
 #BMB_bookmarksPopup :is(.menu-accel, .menu-iconic-accel)[value] {
-    margin-inline-end: 4px !important;
-    padding-block: 0 !important;
+  margin-inline-end: 4px !important;
+  padding-block: 0 !important;
 }
 
 #BMB_viewBookmarksSidebar {
-    list-style-image: url(chrome://userchrome/content/skin/sidebars-right.svg) !important;
+  list-style-image: url(chrome://userchrome/content/skin/sidebars-right.svg) !important;
 }
 
 #BMB_viewBookmarksSidebar[positionend="true"] {
-    list-style-image: url(chrome://userchrome/content/skin/sidebars-right.svg) !important;
+  list-style-image: url(chrome://userchrome/content/skin/sidebars-right.svg) !important;
 }
 
 #BMB_bookmarksPopup .subviewbutton > .menu-iconic-text,
@@ -546,167 +547,170 @@ richlistbox[id]:not(#categories) > richlistitem[selected] {
 #PlacesToolbar menuitem > .menu-iconic-text,
 menuitem.subviewbutton-iconic > .toolbarbutton-text,
 #BMB_bookmarksPopup #BMB_viewBookmarksSidebar:not(.menuitem-iconic, .menu-iconic) .menu-text {
-    padding-inline-start: 0 !important;
+  padding-inline-start: 0 !important;
 }
 
 #BMB_viewBookmarksSidebar:not(.menuitem-iconic, .menu-iconic)::before {
-    content: "" !important;
-    position: relative !important;
-    display: -moz-inline-box !important;
-    width: 16px !important;
-    height: 16px !important;
-    padding-inline: 0 !important;
-    margin-inline: 0 var(--arrowpanel-subviewbutton-iconic-gap, 8px) !important;
-    fill: currentColor !important;
-    background-image: url(chrome://userchrome/content/skin/sidebars.svg) !important;
-    -moz-context-properties: fill, fill-opacity, stroke !important;
+  content: "" !important;
+  position: relative !important;
+  display: -moz-inline-box !important;
+  width: 16px !important;
+  height: 16px !important;
+  padding-inline: 0 !important;
+  margin-inline: 0 var(--arrowpanel-subviewbutton-iconic-gap, 8px) !important;
+  fill: currentColor !important;
+  background-image: url(chrome://userchrome/content/skin/sidebars.svg) !important;
+  -moz-context-properties: fill, fill-opacity, stroke !important;
 }
 
 #BMB_viewBookmarksSidebar:not(.menuitem-iconic, .menu-iconic)[positionend="true"]::before {
-    background-image: url(chrome://userchrome/content/skin/sidebars-right.svg) !important;
+  background-image: url(chrome://userchrome/content/skin/sidebars-right.svg) !important;
 }
 
 #BMB_bookmarkThisPage[data-l10n-id="bookmarks-current-tab"] {
-    list-style-image: url(chrome://userchrome/content/skin/bookmark-hollow.svg) !important;
+  list-style-image: url(chrome://userchrome/content/skin/bookmark-hollow.svg) !important;
 }
 
 #BMB_bookmarkThisPage[data-l10n-id="bookmarks-bookmark-edit-panel"] {
-    list-style-image: url(chrome://userchrome/content/skin/bookmark.svg) !important;
+  list-style-image: url(chrome://userchrome/content/skin/bookmark.svg) !important;
 }
 
 #BMB_bookmarksShowAll {
-    display: none !important;
+  display: none !important;
 }
 
 #BMB_bookmarksPopup #BMB_bookmarksShowAllTop .menu-text {
-    padding-inline-start: 0 !important;
+  padding-inline-start: 0 !important;
 }
 
 #BMB_bookmarksShowAllTop::before,
 menuitem#bookmarksShowAll::before {
-    content: "" !important;
-    position: relative !important;
-    display: -moz-inline-box !important;
-    width: 16px !important;
-    height: 16px !important;
-    padding-inline: 0 !important;
-    margin-inline: 0 6px !important;
-    fill: currentColor !important;
-    background-image: url(chrome://userchrome/content/skin/library.svg) !important;
-    transform: scaleX(-1);
-    -moz-context-properties: fill, fill-opacity, stroke !important;
+  content: "" !important;
+  position: relative !important;
+  display: -moz-inline-box !important;
+  width: 16px !important;
+  height: 16px !important;
+  padding-inline: 0 !important;
+  margin-inline: 0 6px !important;
+  fill: currentColor !important;
+  background-image: url(chrome://userchrome/content/skin/library.svg) !important;
+  transform: scaleX(-1);
+  -moz-context-properties: fill, fill-opacity, stroke !important;
 }
 
 #BMB_bookmarksShowAllTop::before {
-    margin-inline-end: var(--arrowpanel-subviewbutton-iconic-gap, 8px) !important;
+  margin-inline-end: var(--arrowpanel-subviewbutton-iconic-gap, 8px) !important;
 }
 
 menuitem#bookmarksShowAll .menu-text,
 menuitem#menu_bookmarkThisPage .menu-text {
-    padding-inline-start: 0 !important;
+  padding-inline-start: 0 !important;
 }
 
 menuitem#bookmarksShowAll::before {
-    margin-inline: var(--context-iconic-margin) !important;
+  margin-inline: var(--context-iconic-margin) !important;
 }
 
 #panelMenu_showAllBookmarks {
-    list-style-image: url(chrome://userchrome/content/skin/library.svg);
+  list-style-image: url(chrome://userchrome/content/skin/library.svg);
 }
 
 #panelMenu_showAllBookmarks .toolbarbutton-text {
-    padding-inline-start: var(--arrowpanel-subviewbutton-iconic-gap, 8px) !important;
+  padding-inline-start: var(--arrowpanel-subviewbutton-iconic-gap, 8px) !important;
 }
 
 menuitem#menu_bookmarkThisPage::before {
-    content: "" !important;
-    position: relative !important;
-    display: -moz-inline-box !important;
-    width: 16px !important;
-    height: 16px !important;
-    padding-inline: 0 !important;
-    margin-inline: var(--context-iconic-margin) !important;
-    fill: currentColor !important;
-    background-image: url(chrome://userchrome/content/skin/bookmark-hollow.svg) !important;
-    -moz-context-properties: fill, fill-opacity, stroke !important;
+  content: "" !important;
+  position: relative !important;
+  display: -moz-inline-box !important;
+  width: 16px !important;
+  height: 16px !important;
+  padding-inline: 0 !important;
+  margin-inline: var(--context-iconic-margin) !important;
+  fill: currentColor !important;
+  background-image: url(chrome://userchrome/content/skin/bookmark-hollow.svg) !important;
+  -moz-context-properties: fill, fill-opacity, stroke !important;
 }
 
 menuitem#menu_bookmarkThisPage[data-l10n-id="menu-bookmark-edit"]::before {
-    background-image: url(chrome://userchrome/content/skin/bookmark.svg) !important;
+  background-image: url(chrome://userchrome/content/skin/bookmark.svg) !important;
 }
 
 #BMB_bookmarksPopup .bookmark-item[container]:not(.menuitem-iconic, .menu-iconic)::before {
-    content: "" !important;
-    position: relative !important;
-    display: -moz-inline-box !important;
-    width: 16px !important;
-    height: 16px !important;
-    padding-inline: 0 !important;
-    margin-inline: 0 var(--arrowpanel-subviewbutton-iconic-gap, 8px) !important;
-    fill: currentColor !important;
-    background-image: url(chrome://global/skin/icons/folder.svg) !important;
-    -moz-context-properties: fill, fill-opacity, stroke !important;
+  content: "" !important;
+  position: relative !important;
+  display: -moz-inline-box !important;
+  width: 16px !important;
+  height: 16px !important;
+  padding-inline: 0 !important;
+  margin-inline: 0 var(--arrowpanel-subviewbutton-iconic-gap, 8px) !important;
+  fill: currentColor !important;
+  background-image: url(chrome://global/skin/icons/folder.svg) !important;
+  -moz-context-properties: fill, fill-opacity, stroke !important;
 }
 
 #BMB_bookmarksPopup .bookmark-item[container]:not(.menuitem-iconic, .menu-iconic) .menu-text,
 #BMB_bookmarksPopup > menu > menupopup .menu-text {
-    padding-inline-start: 0 !important;
+  padding-inline-start: 0 !important;
 }
 
 /* 0.74em comes from the internal margin for .menu-accel.
 we're hiding that if it's empty, as it will be for the "(Empty)" placeholder.
 so in order to ensure matching padding on this item we're taking that value and turning it into outer padding. */
 #BMB_bookmarksPopup menupopup[emptyplacesresult="true"] menuitem.bookmark-item {
-    padding-inline: calc(var(--arrowpanel-menuitem-padding-inline) + 0.74em) !important;
-}
-
-#BMB_bookmarksPopup menupopup[emptyplacesresult="true"] menuitem.bookmark-item .menu-accel:not([value]):empty {
-    display: none !important;
+  padding-inline: calc(var(--arrowpanel-menuitem-padding-inline) + 0.74em) !important;
 }
 
 #BMB_bookmarksPopup
-    :is(#bookmarksToolbarFolderMenu, #BMB_bookmarksToolbar, #panelMenu_bookmarksToolbar, #BMB_viewBookmarksToolbar):not(.menuitem-iconic, .menu-iconic)::before {
-    content: "" !important;
-    position: relative !important;
-    display: -moz-inline-box !important;
-    width: 16px !important;
-    height: 16px !important;
-    padding-inline: 0 !important;
-    margin-inline: 0 var(--arrowpanel-subviewbutton-iconic-gap, 8px) !important;
-    fill: currentColor !important;
-    background-image: url(chrome://browser/skin/places/bookmarksToolbar.svg) !important;
-    -moz-context-properties: fill, fill-opacity, stroke !important;
+  menupopup[emptyplacesresult="true"]
+  menuitem.bookmark-item
+  .menu-accel:not([value]):empty {
+  display: none !important;
+}
+
+#BMB_bookmarksPopup
+  :is(#bookmarksToolbarFolderMenu, #BMB_bookmarksToolbar, #panelMenu_bookmarksToolbar, #BMB_viewBookmarksToolbar):not(.menuitem-iconic, .menu-iconic)::before {
+  content: "" !important;
+  position: relative !important;
+  display: -moz-inline-box !important;
+  width: 16px !important;
+  height: 16px !important;
+  padding-inline: 0 !important;
+  margin-inline: 0 var(--arrowpanel-subviewbutton-iconic-gap, 8px) !important;
+  fill: currentColor !important;
+  background-image: url(chrome://browser/skin/places/bookmarksToolbar.svg) !important;
+  -moz-context-properties: fill, fill-opacity, stroke !important;
 }
 
 #BMB_viewBookmarksToolbar:not(.menuitem-iconic, .menu-iconic)[data-l10n-args*='{"isVisible":true}']::before {
-    fill-opacity: 0.5;
+  fill-opacity: 0.5;
 }
 
 menupopup[emptyplacesresult="true"] #BMB_viewBookmarksToolbar + menuseparator {
-    display: none;
+  display: none;
 }
 
 menupopup .openintabs-menuitem:not(.menuitem-iconic, .menu-iconic)::before {
-    content: "" !important;
-    position: relative !important;
-    display: -moz-inline-box !important;
-    width: 16px !important;
-    height: 16px !important;
-    padding-inline: 0 !important;
-    margin-inline: var(--context-iconic-margin) !important;
-    fill: currentColor !important;
-    background-image: url(chrome://userchrome/content/skin/duplicate-tab.svg) !important;
-    -moz-context-properties: fill, fill-opacity, stroke !important;
+  content: "" !important;
+  position: relative !important;
+  display: -moz-inline-box !important;
+  width: 16px !important;
+  height: 16px !important;
+  padding-inline: 0 !important;
+  margin-inline: var(--context-iconic-margin) !important;
+  fill: currentColor !important;
+  background-image: url(chrome://userchrome/content/skin/duplicate-tab.svg) !important;
+  -moz-context-properties: fill, fill-opacity, stroke !important;
 }
 
 menupopup .openintabs-menuitem:not(.menuitem-iconic, .menu-iconic) .menu-text {
-    padding-inline-start: 0 !important;
+  padding-inline-start: 0 !important;
 }
 
 #BMB_bookmarksPopup .openintabs-menuitem:not(.menuitem-iconic, .menu-iconic)::before {
-    margin-inline: 0 var(--arrowpanel-subviewbutton-iconic-gap, 8px) !important;
+  margin-inline: 0 var(--arrowpanel-subviewbutton-iconic-gap, 8px) !important;
 }
 
 #BMB_bookmarksPopup .openintabs-menuitem:not(.menuitem-iconic, .menu-iconic) .menu-text {
-    padding-inline-start: 0 !important;
+  padding-inline-start: 0 !important;
 }

@@ -9,232 +9,233 @@ intended for the new theme, go to settings > devtools > apply new theme. */
 
 @-moz-document regexp("^moz-extension://.*/ui/.*")
 {
-    :root[uc-extension-id="addon@darkreader.org"] body,
-    html[uc-extension-id="addon@darkreader.org"],
-    :root[uc-extension-id="addon@darkreader.org"] {
-        border-color: transparent !important;
-        background-color: var(--tooltip-bgcolor) !important;
-        border-radius: 0 !important;
-        border-width: 4px !important;
-        color: var(--uc-content-text-a80) !important;
-    }
+  :root[uc-extension-id="addon@darkreader.org"] body,
+  html[uc-extension-id="addon@darkreader.org"],
+  :root[uc-extension-id="addon@darkreader.org"] {
+    border-color: transparent !important;
+    background-color: var(--tooltip-bgcolor) !important;
+    border-radius: 0 !important;
+    border-width: 4px !important;
+    color: var(--uc-content-text-a80) !important;
+  }
 
-    :root[uc-extension-id="addon@darkreader.org"],
+  :root[uc-extension-id="addon@darkreader.org"],
+  :root[uc-extension-id="addon@darkreader.org"] * {
+    scrollbar-color: var(--uc-panel-button-solid) var(--uc-panel-box-solid) !important;
+  }
+
+  @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
     :root[uc-extension-id="addon@darkreader.org"] * {
-        scrollbar-color: var(--uc-panel-button-solid) var(--uc-panel-box-solid) !important;
+      font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif;
+      font-kerning: normal;
+      font-weight: 300;
     }
+  }
 
-    @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
-        :root[uc-extension-id="addon@darkreader.org"] * {
-            font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif;
-            font-kerning: normal;
-            font-weight: 300;
-        }
-    }
+  :root[uc-extension-id="addon@darkreader.org"] .m-logo {
+    background-image: url(chrome://userchrome/content/in-content/darkreader-logo.svg) !important;
+  }
 
-    :root[uc-extension-id="addon@darkreader.org"] .m-logo {
-        background-image: url(chrome://userchrome/content/in-content/darkreader-logo.svg) !important;
-    }
+  :root[uc-extension-id="addon@darkreader.org"] header img#logo {
+    padding-left: 15rem !important;
+    box-sizing: border-box !important;
+    background-image: url(chrome://userchrome/content/in-content/darkreader-logo.svg) !important;
+  }
 
-    :root[uc-extension-id="addon@darkreader.org"] header img#logo {
-        padding-left: 15rem !important;
-        box-sizing: border-box !important;
-        background-image: url(chrome://userchrome/content/in-content/darkreader-logo.svg) !important;
-    }
+  :root[uc-extension-id="addon@darkreader.org"] .page {
+    background-color: transparent !important;
+  }
 
-    :root[uc-extension-id="addon@darkreader.org"] .page {
-        background-color: transparent !important;
-    }
+  :root[uc-extension-id="addon@darkreader.org"] :where(.textbox) {
+    background-color: var(--uc-arrowpanel-faint) !important;
+    transition: background-color 250ms, color 250ms, box-shadow 150ms !important;
+  }
 
-    :root[uc-extension-id="addon@darkreader.org"] :where(.textbox) {
-        background-color: var(--uc-arrowpanel-faint) !important;
-        transition: background-color 250ms, color 250ms, box-shadow 150ms !important;
-    }
+  :root[uc-extension-id="addon@darkreader.org"] :where(.textbox:hover) {
+    background-color: var(--uc-panel-button-faint-solid) !important;
+  }
 
-    :root[uc-extension-id="addon@darkreader.org"] :where(.textbox:hover) {
-        background-color: var(--uc-panel-button-faint-solid) !important;
-    }
+  :root[uc-extension-id="addon@darkreader.org"]
+    :where(.button, .multi-switch, .checkbox, .m-help-button, #editor) {
+    background-color: var(--uc-arrowpanel-faint) !important;
+    border-color: var(--uc-panel-button-solid) !important;
+  }
 
-    :root[uc-extension-id="addon@darkreader.org"]
-        :where(.button, .multi-switch, .checkbox, .m-help-button, #editor) {
-        background-color: var(--uc-arrowpanel-faint) !important;
-        border-color: var(--uc-panel-button-solid) !important;
-    }
+  :root[uc-extension-id="addon@darkreader.org"]
+    :where(.dropdown__list__item, .button, .m-help-button, .checkbox):hover,
+  :root[uc-extension-id="addon@darkreader.org"]
+    :where(.multi-switch__option:hover:not(.multi-switch__option--selected), .slider__track, .slider__track::after),
+  :root[uc-extension-id="addon@darkreader.org"] .collapsible-panel__group__expand-button,
+  :root[uc-extension-id="addon@darkreader.org"] .slider__track::before,
+  :root[uc-extension-id="addon@darkreader.org"] .slider__track::after {
+    background-color: var(--uc-arrowpanel-dimmed) !important;
+  }
 
-    :root[uc-extension-id="addon@darkreader.org"]
-        :where(.dropdown__list__item, .button, .m-help-button, .checkbox):hover,
-    :root[uc-extension-id="addon@darkreader.org"]
-        :where(.multi-switch__option:hover:not(.multi-switch__option--selected), .slider__track, .slider__track::after),
-    :root[uc-extension-id="addon@darkreader.org"] .collapsible-panel__group__expand-button,
-    :root[uc-extension-id="addon@darkreader.org"] .slider__track::before,
-    :root[uc-extension-id="addon@darkreader.org"] .slider__track::after{
-        background-color: var(--uc-arrowpanel-dimmed) !important;
-    }
+  :root[uc-extension-id="addon@darkreader.org"] .m-donate-button {
+    background-color: var(--uc-parent-primary-button-background) !important;
+  }
 
-    :root[uc-extension-id="addon@darkreader.org"] .m-donate-button {
-        background-color: var(--uc-parent-primary-button-background) !important;
-    }
+  :root[uc-extension-id="addon@darkreader.org"] .m-donate-button:hover {
+    background-color: var(--uc-parent-primary-button-background-hover) !important;
+  }
 
-    :root[uc-extension-id="addon@darkreader.org"] .m-donate-button:hover {
-        background-color: var(--uc-parent-primary-button-background-hover) !important;
-    }
+  :root[uc-extension-id="addon@darkreader.org"] .m-donate-button__icon::after {
+    background-color: hsl(220, 85.1%, 65.6%) !important;
+  }
 
-    :root[uc-extension-id="addon@darkreader.org"] .m-donate-button__icon::after {
-        background-color: hsl(220, 85.1%, 65.6%) !important;
-    }
+  :root[uc-extension-id="addon@darkreader.org"] :where(.site-toggle:not(.site-toggle--active)) {
+    color: var(--uc-content-text-a50) !important;
+  }
 
-    :root[uc-extension-id="addon@darkreader.org"]
-        :where(.site-toggle:not(.site-toggle--active)) {
-        color: var(--uc-content-text-a50) !important;
-    }
+  :root[uc-extension-id="addon@darkreader.org"] #editor,
+  :root[uc-extension-id="addon@darkreader.org"]
+    :where(.textbox, .automation-page__system-dark-mode__button),
+  :root[uc-extension-id="addon@darkreader.org"] input::placeholder {
+    color: var(--uc-content-text-a80) !important;
+  }
 
-    :root[uc-extension-id="addon@darkreader.org"] #editor,
-    :root[uc-extension-id="addon@darkreader.org"]
-        :where(.textbox, .automation-page__system-dark-mode__button),
-    :root[uc-extension-id="addon@darkreader.org"] input::placeholder {
-        color: var(--uc-content-text-a80) !important;
-    }
+  :root[uc-extension-id="addon@darkreader.org"] .button,
+  :root[uc-extension-id="addon@darkreader.org"] :where(.textbox:focus),
+  :root[uc-extension-id="addon@darkreader.org"] .textbox:focus::placeholder {
+    color: var(--uc-arrowpanel-color) !important;
+  }
 
-    :root[uc-extension-id="addon@darkreader.org"] .button,
-    :root[uc-extension-id="addon@darkreader.org"] :where(.textbox:focus),
-    :root[uc-extension-id="addon@darkreader.org"] .textbox:focus::placeholder {
-        color: var(--uc-arrowpanel-color) !important;
-    }
+  :root[uc-extension-id="addon@darkreader.org"]
+    :where(.slider__track, .slider__track__fill)::before,
+  :root[uc-extension-id="addon@darkreader.org"]
+    :where(.slider__track__fill, .multi-switch__highlight, .dropdown__selected, .textbox:focus),
+  :root[uc-extension-id="addon@darkreader.org"] .check-button .checkbox__checkmark {
+    background-color: var(--uc-panel-button-solid) !important;
+  }
 
-    :root[uc-extension-id="addon@darkreader.org"]
-        :where(.slider__track, .slider__track__fill)::before,
-    :root[uc-extension-id="addon@darkreader.org"]
-        :where(.slider__track__fill, .multi-switch__highlight, .dropdown__selected, .textbox:focus),
-    :root[uc-extension-id="addon@darkreader.org"] .check-button .checkbox__checkmark {
-        background-color: var(--uc-panel-button-solid) !important;
-    }
+  :root[uc-extension-id="addon@darkreader.org"] .site-list__textbox:focus {
+    background-color: var(--uc-arrowpanel-dimmed-further) !important;
+    box-shadow: 0 0 0 0.125rem var(--uc-panel-button-solid) !important;
+  }
 
-    :root[uc-extension-id="addon@darkreader.org"] .site-list__textbox:focus {
-        background-color: var(--uc-arrowpanel-dimmed-further) !important;
-        box-shadow: 0 0 0 0.125rem var(--uc-panel-button-solid) !important;
-    }
+  :root[uc-extension-id="addon@darkreader.org"] .theme-group__presets-wrapper {
+    background-color: var(--uc-panel-button-solid) !important;
+    border-color: var(--uc-panel-button-solid) !important;
+  }
 
-    :root[uc-extension-id="addon@darkreader.org"] .theme-group__presets-wrapper {
-        background-color: var(--uc-panel-button-solid) !important;
-        border-color: var(--uc-panel-button-solid) !important;
-    }
+  :root[uc-extension-id="addon@darkreader.org"] .theme-group__presets-wrapper::before,
+  :root[uc-extension-id="addon@darkreader.org"]
+    :where(.theme-group__controls-wrapper, .site-list, .textbox) {
+    border-color: var(--uc-panel-button-solid) !important;
+  }
 
-    :root[uc-extension-id="addon@darkreader.org"] .theme-group__presets-wrapper::before,
-    :root[uc-extension-id="addon@darkreader.org"]
-        :where(.theme-group__controls-wrapper, .site-list, .textbox) {
-        border-color: var(--uc-panel-button-solid) !important;
-    }
+  :root[uc-extension-id="addon@darkreader.org"] .dropdown__list {
+    background-color: var(--uc-panel-box-solid) !important;
+    border-color: var(--uc-panel-button-solid) !important;
+  }
 
-    :root[uc-extension-id="addon@darkreader.org"] .dropdown__list {
-        background-color: var(--uc-panel-box-solid) !important;
-        border-color: var(--uc-panel-button-solid) !important;
-    }
+  :root[uc-extension-id="addon@darkreader.org"] .dropdown__list__item {
+    background-color: var(--uc-panel-box-solid) !important;
+  }
 
-    :root[uc-extension-id="addon@darkreader.org"] .dropdown__list__item {
-        background-color: var(--uc-panel-box-solid) !important;
-    }
+  :root[uc-extension-id="addon@darkreader.org"] .theme-preset-picker .dropdown__list {
+    border: none;
+    box-shadow: 0 0 0 0.125rem var(--uc-panel-button-solid),
+      0 0 0.25rem 0.1875rem hsla(0, 0%, 0%, 0.5) !important;
+  }
 
-    :root[uc-extension-id="addon@darkreader.org"] .theme-preset-picker .dropdown__list {
-        border: none;
-        box-shadow: 0 0 0 0.125rem var(--uc-panel-button-solid),
-            0 0 0.25rem 0.1875rem hsla(0, 0%, 0%, 0.5) !important;
-    }
+  :root[uc-extension-id="addon@darkreader.org"] .color-picker__wrapper {
+    background-color: transparent !important;
+  }
 
-    :root[uc-extension-id="addon@darkreader.org"] .color-picker__wrapper {
-        background-color: transparent !important;
-    }
+  :root[uc-extension-id="addon@darkreader.org"] .color-picker--focused .color-picker__wrapper,
+  :root[uc-extension-id="addon@darkreader.org"] .color-picker--focused .color-picker__input,
+  :root[uc-extension-id="addon@darkreader.org"] .color-picker:hover .color-picker__input {
+    background-color: var(--uc-panel-button-solid) !important;
+  }
 
-    :root[uc-extension-id="addon@darkreader.org"] .color-picker--focused .color-picker__wrapper,
-    :root[uc-extension-id="addon@darkreader.org"] .color-picker--focused .color-picker__input,
-    :root[uc-extension-id="addon@darkreader.org"] .color-picker:hover .color-picker__input {
-        background-color: var(--uc-panel-button-solid) !important;
-    }
+  :root[uc-extension-id="addon@darkreader.org"] .site-list__item__remove {
+    background-image: url(chrome://userchrome/content/in-content/darkreader-close.svg) !important;
+  }
 
-    :root[uc-extension-id="addon@darkreader.org"] .site-list__item__remove {
-        background-image: url(chrome://userchrome/content/in-content/darkreader-close.svg) !important;
-    }
+  :root[uc-extension-id="addon@darkreader.org"] .site-list__item__remove:hover {
+    background-color: var(--uc-arrowpanel-dimmed-even-further) !important;
+  }
 
-    :root[uc-extension-id="addon@darkreader.org"] .site-list__item__remove:hover {
-        background-color: var(--uc-arrowpanel-dimmed-even-further) !important;
-    }
+  :root[uc-extension-id="addon@darkreader.org"] .automation-page__line .checkbox__checkmark {
+    background-image: url(chrome://userchrome/content/in-content/darkreader-check.svg) !important;
+  }
 
-    :root[uc-extension-id="addon@darkreader.org"] .automation-page__line .checkbox__checkmark {
-        background-image: url(chrome://userchrome/content/in-content/darkreader-check.svg) !important;
-    }
+  :root[uc-extension-id="addon@darkreader.org"] .automation-page::after {
+    display: none !important;
+  }
 
-    :root[uc-extension-id="addon@darkreader.org"] .automation-page::after {
-        display: none !important;
-    }
+  :root[uc-extension-id="addon@darkreader.org"] .m-donate-description {
+    display: none !important;
+  }
 
-    :root[uc-extension-id="addon@darkreader.org"] .m-donate-description {
-        display: none !important;
-    }
+  :root[uc-extension-id="addon@darkreader.org"] .m-donate-group {
+    margin-top: -0.15rem !important;
+  }
 
-    :root[uc-extension-id="addon@darkreader.org"] .m-donate-group {
-        margin-top: -0.15rem !important;
-    }
+  :root[uc-extension-id="addon@darkreader.org"] .darkreader-version {
+    opacity: 0.4;
+    margin-bottom: -4px !important;
+  }
 
-    :root[uc-extension-id="addon@darkreader.org"] .darkreader-version {
-        opacity: 0.4;
-        margin-bottom: -4px !important;
-    }
+  :root[uc-extension-id="addon@darkreader.org"] .news-section {
+    background: none !important;
+  }
 
-    :root[uc-extension-id="addon@darkreader.org"] .news-section {
-        background: none !important;
-    }
+  :root[uc-extension-id="addon@darkreader.org"]
+    :where(.news-section__main-link, a.news-section__news, #description a) {
+    font-weight: initial !important;
+    color: var(--in-content-link-color) !important;
+  }
 
-    :root[uc-extension-id="addon@darkreader.org"]
-        :where(.news-section__main-link, a.news-section__news, #description a) {
-        font-weight: initial !important;
-        color: var(--in-content-link-color) !important;
-    }
+  :root[uc-extension-id="addon@darkreader.org"]
+    :where(.news-section__main-link, a.news-section__news, #description
+      a):is(:hover, :focus-visible) {
+    color: var(--in-content-link-color-hover) !important;
+  }
 
-    :root[uc-extension-id="addon@darkreader.org"]
-        :where(.news-section__main-link, a.news-section__news, #description a):is(:hover, :focus-visible) {
-        color: var(--in-content-link-color-hover) !important;
-    }
+  :root[uc-extension-id="addon@darkreader.org"]
+    :where(.news-section__main-link, a.news-section__news, #description a):active {
+    color: var(--in-content-link-color-active) !important;
+  }
 
-    :root[uc-extension-id="addon@darkreader.org"]
-        :where(.news-section__main-link, a.news-section__news, #description a):active {
-        color: var(--in-content-link-color-active) !important;
-    }
+  :root[uc-extension-id="addon@darkreader.org"] .m-donate-button__text {
+    transform: none !important;
+    font-style: italic !important;
+  }
 
-    :root[uc-extension-id="addon@darkreader.org"] .m-donate-button__text {
-        transform: none !important;
-        font-style: italic !important;
-    }
+  :root[uc-extension-id="addon@darkreader.org"] .news-section {
+    border-radius: 0 0 4px 4px !important;
+  }
 
-    :root[uc-extension-id="addon@darkreader.org"] .news-section {
-        border-radius: 0 0 4px 4px !important;
-    }
+  :root[uc-extension-id="addon@darkreader.org"] :where(.news-section__popover, .message-box) {
+    background-color: var(--uc-panel-box-solid) !important;
+    border-color: var(--uc-panel-button-solid) !important;
+  }
 
-    :root[uc-extension-id="addon@darkreader.org"] :where(.news-section__popover, .message-box) {
-        background-color: var(--uc-panel-box-solid) !important;
-        border-color: var(--uc-panel-button-solid) !important;
-    }
+  :root[uc-extension-id="addon@darkreader.org"] .news-section__popover__top {
+    border-color: var(--uc-panel-button-solid) !important;
+    padding: 8px 8px 2px 0 !important;
+  }
 
-    :root[uc-extension-id="addon@darkreader.org"] .news-section__popover__top {
-        border-color: var(--uc-panel-button-solid) !important;
-        padding: 8px 8px 2px 0 !important;
-    }
+  :root[uc-extension-id="addon@darkreader.org"] .news-section__title {
+    color: inherit !important;
+    margin-left: 1rem !important;
+  }
 
-    :root[uc-extension-id="addon@darkreader.org"] .news-section__title {
-        color: inherit !important;
-        margin-left: 1rem !important;
-    }
+  :root[uc-extension-id="addon@darkreader.org"] .news-section__close {
+    color: inherit !important;
+    cursor: default !important;
+    background: url(chrome://userchrome/content/in-content/darkreader-close.svg) center/16px
+      no-repeat !important;
+    color: transparent !important;
+  }
 
-    :root[uc-extension-id="addon@darkreader.org"] .news-section__close {
-        color: inherit !important;
-        cursor: default !important;
-        background: url(chrome://userchrome/content/in-content/darkreader-close.svg) center/16px no-repeat !important;
-        color: transparent !important;
-    }
+  :root[uc-extension-id="addon@darkreader.org"] .news-section__close:hover {
+    background-color: var(--uc-arrowpanel-dimmed) !important;
+  }
 
-    :root[uc-extension-id="addon@darkreader.org"] .news-section__close:hover {
-        background-color: var(--uc-arrowpanel-dimmed) !important;
-    }
-
-    :root[uc-extension-id="addon@darkreader.org"] .overlay {
-        background-color: color-mix(in srgb, var(--uc-arrowpanel-background), transparent) !important;
-    }
+  :root[uc-extension-id="addon@darkreader.org"] .overlay {
+    background-color: color-mix(in srgb, var(--uc-arrowpanel-background), transparent) !important;
+  }
 }

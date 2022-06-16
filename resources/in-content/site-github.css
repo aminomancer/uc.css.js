@@ -8,81 +8,81 @@
 which requires Stylus. don't use this stylesheet if you don't have that theme, it'll just make things ugly. */
 
 @-moz-document domain("github.com"), domain("gist.github.com"), domain("github.community") {
-    .rgh-monospace-textareas #merge_title_field,
-    .rgh-monospace-textareas #commit-summary-input,
-    .rgh-monospace-textareas textarea {
-        font-family: Fira Code UC, Fira Code, SF Mono, ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas,
-            Liberation Mono, monospace !important;
-        font-weight: 300 !important;
-        font-size: 14px !important;
-    }
+  .rgh-monospace-textareas #merge_title_field,
+  .rgh-monospace-textareas #commit-summary-input,
+  .rgh-monospace-textareas textarea {
+    font-family: Fira Code UC, Fira Code, SF Mono, ui-monospace, SFMono-Regular, SF Mono, Menlo,
+      Consolas, Liberation Mono, monospace !important;
+    font-weight: 300 !important;
+    font-size: 14px !important;
+  }
 
-    .blob-code-inner,
-    .markdown-body pre > code,
-    .markdown-body .highlight > pre {
-        white-space: pre-wrap !important;
-        word-break: break-word !important;
-        overflow-wrap: break-word !important;
-    }
+  .blob-code-inner,
+  .markdown-body pre > code,
+  .markdown-body .highlight > pre {
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+  }
 
-    /* GitHub Bug: Enable wrapping of long code lines */
-    body:not(.nowrap) .blob-code-inner,
-    body:not(.nowrap) .markdown-body pre > code,
-    body:not(.nowrap) .markdown-body .highlight > pre {
-        white-space: pre-wrap !important;
-        word-break: break-word !important;
-        overflow-wrap: break-word !important;
-        display: block !important;
-        font-family: Fira Code UC, Fira Code, SF Mono, ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas,
-            Liberation Mono, monospace !important;
-        font-weight: 300 !important;
-        font-size: 14px !important;
-    }
+  /* GitHub Bug: Enable wrapping of long code lines */
+  body:not(.nowrap) .blob-code-inner,
+  body:not(.nowrap) .markdown-body pre > code,
+  body:not(.nowrap) .markdown-body .highlight > pre {
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    display: block !important;
+    font-family: Fira Code UC, Fira Code, SF Mono, ui-monospace, SFMono-Regular, SF Mono, Menlo,
+      Consolas, Liberation Mono, monospace !important;
+    font-weight: 300 !important;
+    font-size: 14px !important;
+  }
 
-    body:not(.nowrap) td.blob-code-inner {
-        display: table-cell !important;
-    }
+  body:not(.nowrap) td.blob-code-inner {
+    display: table-cell !important;
+  }
 
-    a.btn[href*="github1s.com"] {
-        color: transparent !important;
-        width: min-content !important;
-        font-size: 0 !important;
-    }
+  a.btn[href*="github1s.com"] {
+    color: transparent !important;
+    width: min-content !important;
+    font-size: 0 !important;
+  }
 
-    a.btn[href*="github1s.com"]::after {
-        color: var(--color-btn-primary-text) !important;
-        content: "Github1s" !important;
-        display: inline-block !important;
-        position: relative !important;
-        font-size: 14px;
-        font-weight: 500;
-        position: relative;
-        line-height: 20px;
-        white-space: nowrap;
-        vertical-align: middle;
-        cursor: pointer;
-    }
+  a.btn[href*="github1s.com"]::after {
+    color: var(--color-btn-primary-text) !important;
+    content: "Github1s" !important;
+    display: inline-block !important;
+    position: relative !important;
+    font-size: 14px;
+    font-weight: 500;
+    position: relative;
+    line-height: 20px;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+  }
 
-    .container-xl {
-        max-width: 75% !important;
-    }
+  .container-xl {
+    max-width: 75% !important;
+  }
 
-    virtual-list#tree-finder-results {
-        overflow-y: auto !important;
-    }
+  virtual-list#tree-finder-results {
+    overflow-y: auto !important;
+  }
 }
 
 /* fix a bug on github1s.com */
 @-moz-document domain("github1s.com") {
-    body {
-        background-color: hsl(0, 0%, 11.8%);
-    }
+  body {
+    background-color: hsl(0, 0%, 11.8%);
+  }
 
-    .lds-roller div::after {
-        background: hsla(0, 0%, 100%, 0.9) !important;
-    }
+  .lds-roller div::after {
+    background: hsla(0, 0%, 100%, 0.9) !important;
+  }
 }
 
 .gitzip-check-mark {
-    color: white !important;
+  color: white !important;
 }

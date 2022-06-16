@@ -1268,11 +1268,9 @@ Press Ctrl+Alt+P (or Cmd+Alt+P on macOS) to pin/unpin selected tab(s). Configure
 
 #### [OS Detector](/JS/osDetector.uc.js):
 
-✨ Strongly recommended if you want to use duskFox on macOS or Linux. Might also be useful to other people developing CSS themes for Firefox, since it lets you select for operating systems with 100% accuracy.<details><summary>💬 <i><b>More details...</b></i></summary>
+No longer required for duskFox, but I'm leaving it here since it might be useful to other people developing CSS themes for Firefox, since it lets you select for operating systems with 100% accuracy.<details><summary>💬 <i><b>More details...</b></i></summary>
 
-This tiny setup script adds an attribute on the document element representing the operating system, so we can select it with CSS. For example `:root[operatingsystem="macosx"]` would select the root element only on macOS. There are already ways to select different windows versions and a less reliable way to target linux, but the existing CSS options for selecting macOS are very sloppy. This is because Firefox differentiates between operating systems during the build and install processes. A given end user's `browser.css` will contain different rules depending on their operating system, obviating the need for a convenient media query but neglecting the customization angle.
-
-Since media queries aren't available, and I don't want to create and manage 3+ different versions of this theme, the stylesheets can only distinguish between operating systems when this script is running. Since I develop this on Windows 10, the theme expects Windows 10 by default. If you use Windows 10, you don't need this script, since all the default rules will be targeted for your OS. If you use the theme on macOS or linux, however, you will definitely want to download this, as it will enable the special OS-specific rules targeting your OS.
+This tiny setup script adds an attribute on the document element representing the operating system, so we can select it with CSS. For example `:root[operatingsystem="macosx"]` would select the root element only on macOS. You can usually use the new -moz-platform media query instead of this.
 
 </details>
 

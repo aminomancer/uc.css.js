@@ -8,8 +8,8 @@
 and replaces some icons that may already exist. */
 
 menupopup
-    menuitem:is([type="checkbox"], [type="radio"], [checked])
-    :is(.menu-text, .menu-iconic-text),
+  menuitem:is([type="checkbox"], [type="radio"], [checked])
+  :is(.menu-text, .menu-iconic-text),
 #context-inspect-a11y .menu-text,
 #context-inspect .menu-text,
 #context-viewsource .menu-text,
@@ -58,7 +58,7 @@ menuitem#sanitizeItem > .menu-text,
 #context-copylink .menu-text,
 #menu_copy .menu-text,
 :is(#placesContext_show_bookmark\:info, #placesContext_show_folder\:info, #placesContext_show\:info)
-    .menu-text,
+  .menu-text,
 #placesContext_showInFolder .menu-text,
 #menu_openLocation .menu-text,
 #context-copyvideourl .menu-text,
@@ -72,22 +72,22 @@ menuitem#sanitizeItem > .menu-text,
 #context-openlinkintab .menu-text,
 #context-openlinkinunloadedtab .menu-text,
 :is(#placesContext_open\:unloaded, #placesContext_openContainer\:unloaded, #placesContext_openLinks\:unloaded, #syncedTabsOpenUnloaded, #syncedTabsOpenAllUnloaded)
-    .menu-text,
+  .menu-text,
 #placesContext_open\:newwindow .menu-text,
 #syncedTabsOpenSelectedInWindow .menu-text,
 #placesContext_open\:newprivatewindow .menu-text,
 #syncedTabsOpenSelectedInPrivateWindow .menu-text,
 :is(#placesContext_new\:bookmark, #placesContext_createBookmark, #syncedTabsBookmarkSelected)
-    .menu-text,
+  .menu-text,
 #placesContext_new\:folder .menu-text,
 #placesContext_new\:separator .menu-text,
 :is(#placesContext_open\:container, #placesContext_openContainer\:container, #placesContext_openLinks\:container, #placesContext_open\:newcontainertab)
-    > .menu-text,
+  > .menu-text,
 :is(#syncedTabsOpenAllInContainer, #syncedTabsOpenInContainer) > .menu-text,
 #bookmark-menu-container_robwu_nl-menuitem-_bookmark-menu-item:not(.menuitem-iconic) > .menu-text,
 #placesContext
-    > :is(menu, menuitem)[label="Open in a New Container Tab"]:not(.menuitem-iconic)
-    > .menu-text,
+  > :is(menu, menuitem)[label="Open in a New Container Tab"]:not(.menuitem-iconic)
+  > .menu-text,
 #menu_FileQuitItem .menu-text,
 #context_openANewTab .menu-text,
 #toolbar-context-openANewTab .menu-text,
@@ -102,7 +102,7 @@ menuitem#sanitizeItem > .menu-text,
 #menu_find .menu-text,
 #menu_findAgain .menu-text,
 :is(menuitem#textfieldDirection-swap, #context-bidi-text-direction-toggle, #context-bidi-page-direction-toggle, #documentDirection-swap)
-    .menu-text,
+  .menu-text,
 menuitem#repair-text-encoding .menu-text,
 #context-viewpartialsource-selection .menu-text,
 #placesContext_sortBy\:name .menu-text,
@@ -120,9 +120,9 @@ menuitem#repair-text-encoding .menu-text,
 #menu_delete .menu-text,
 #syncedTabsCopySelected .menu-text,
 :is(#placesContext_cut, #placesContext_copy, #placesContext_paste, #placesContext_paste_group)
-    .menu-text,
+  .menu-text,
 :is(#placesContext_deleteBookmark, #placesContext_deleteFolder, #placesContext_delete, #placesContext_delete_history)
-    .menu-text,
+  .menu-text,
 #placesContext_deleteHost .menu-text,
 #context-keywordfield .menu-text,
 #context-printframe .menu-text,
@@ -137,14 +137,14 @@ menuitem#menu_openDownloads .menu-text,
 menuitem#menu_openAddons .menu-text,
 #addon_darkreader_org-menuitem-_DarkReader-toggle:not(.menuitem-iconic) .menu-text,
 #private-relay_firefox_com-menuitem-_fx-private-relay-generate-alias:not(.menuitem-iconic)
-    > .menu-text,
+  > .menu-text,
 #private-relay_firefox_com-menuitem-_fx-private-relay-use-existing-aliases:not(.menuitem-iconic)
-    > .menu-text,
+  > .menu-text,
 #private-relay_firefox_com-menuitem-_fx-private-relay-manage-aliases:not(.menuitem-iconic)
-    > .menu-text,
+  > .menu-text,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
-    menu:not(.menu-iconic, .menuitem-iconic)[id^="gitzip-firefox-addons_gitzip_org-menuitem-"]
-    > .menu-text,
+  menu:not(.menu-iconic, .menuitem-iconic)[id^="gitzip-firefox-addons_gitzip_org-menuitem-"]
+  > .menu-text,
 #menu_pageInfo .menu-text,
 menuitem:is(#sync-setup, #sync-unverifieditem, #sync-reauthitem) .menu-text,
 menuitem:is(#sync-enable, #sync-syncnowitem) .menu-text,
@@ -160,8 +160,8 @@ menuitem#menu_HelpPopup_reportPhishingErrortoolmenu > .menu-text,
 menuitem#aboutName > .menu-text,
 menuitem#helpPolicySupport > .menu-text,
 :is(#new-tab-button-popup, .new-tab-popup)
-    menuitem[command="Browser:OpenAboutContainers"]
-    > .menu-text,
+  menuitem[command="Browser:OpenAboutContainers"]
+  > .menu-text,
 #context-frameOsPid .menu-text,
 #context-reloadframe .menu-text,
 #context-reloadimage .menu-text,
@@ -207,7 +207,7 @@ menuitem[data-l10n-id="full-screen-exit"] .menu-text,
 .searchbar-clear-history .menu-text,
 #spell-check-enabled .menu-iconic-text,
 :is(#spell-add-to-dictionary, #spell-add-dictionaries, #spell-add-dictionaries-main, #spell-dictionaries)
-    .menu-text,
+  .menu-text,
 #context_reopenInContainer > .menu-text,
 #context_reloadTab .menu-text,
 #context_reloadSelectedTabs .menu-text,
@@ -229,7 +229,7 @@ menuitem[data-l10n-id="full-screen-exit"] .menu-text,
 #syncedTabsOpenSelected .menu-text,
 :is(#placesContext_openBookmarkContainer\:tabs, #placesContext_openBookmarkLinks\:tabs) .menu-text,
 :is(#placesContext_openContainer\:tabs, #placesContext_openLinks\:tabs, #syncedTabsOpenAllInTabs)
-    .menu-text,
+  .menu-text,
 #placesContext_showAllBookmarks .menu-text,
 #syncedTabsManageDevices .menu-text,
 #context-markAsRead .menu-text,
@@ -267,8 +267,8 @@ menuitem#enableDeveloperTools .menu-text,
 .recently-closed-windows-menu > .menu-text,
 .recently-closed-tabs-menu > .menu-text,
 :is(.recently-closed-windows-menu, .recently-closed-tabs-menu, #historyUndoMenu, #historyUndoWindowMenu)
-    menuitem.restoreallitem
-    .menu-text,
+  menuitem.restoreallitem
+  .menu-text,
 #recently-closed-restore > .menu-text,
 #recently-closed-restore-in-new-window > .menu-text,
 #recently-closed-restore-in-new-private-window > .menu-text,
@@ -276,63 +276,63 @@ menuitem#enableDeveloperTools .menu-text,
 #recently-closed-remove-from-history > .menu-text,
 #recently-closed-bookmark > .menu-text,
 :is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
-    .sendtab-target[clientType]
-    .menu-text,
+  .sendtab-target[clientType]
+  .menu-text,
 #userScriptsMenu > .menu-text,
 #toggle_PersonalToolbar > .menu-text,
 menu#fill-login > .menu-text,
 menuitem#manage-saved-logins > .menu-text,
 menuitem#fill-login-generated-password > .menu-text,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
-    menu[label="Bitwarden"]
-    :is(menu, menuitem)[id$="-menuitem-_autofill"]
-    > .menu-text,
+  menu[label="Bitwarden"]
+  :is(menu, menuitem)[id$="-menuitem-_autofill"]
+  > .menu-text,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
-    menu[label="Bitwarden"]
-    :is(menu, menuitem)[id$="-menuitem-_copy-username"]
-    > .menu-text,
+  menu[label="Bitwarden"]
+  :is(menu, menuitem)[id$="-menuitem-_copy-username"]
+  > .menu-text,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
-    menu[label="Bitwarden"]
-    :is(menu, menuitem)[id$="-menuitem-_copy-password"]
-    > .menu-text,
+  menu[label="Bitwarden"]
+  :is(menu, menuitem)[id$="-menuitem-_copy-password"]
+  > .menu-text,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
-    menu[label="Bitwarden"]
-    :is(menu, menuitem)[id$="-menuitem-_generate-password"]
-    > .menu-text,
+  menu[label="Bitwarden"]
+  :is(menu, menuitem)[id$="-menuitem-_generate-password"]
+  > .menu-text,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
-    menu[label="Bitwarden"]
-    :is(menu, menuitem)[id$="-menuitem-_copy-identifier"]
-    > .menu-text,
+  menu[label="Bitwarden"]
+  :is(menu, menuitem)[id$="-menuitem-_copy-identifier"]
+  > .menu-text,
 menu[label="Bitwarden"]:not(.menuitem-iconic, .menu-iconic) > .menu-text,
 #_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-manager:not(.menuitem-iconic, .menu-iconic)
-    > .menu-text,
+  > .menu-text,
 #_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-options:not(.menuitem-iconic, .menu-iconic)
-    > .menu-text,
+  > .menu-text,
 #simple-translate_sienori-menuitem-_translatePage:not(.menuitem-iconic, .menu-iconic) > .menu-text,
 #simple-translate_sienori-menuitem-_translateLink:not(.menuitem-iconic, .menu-iconic) > .menu-text,
 #simple-translate_sienori-menuitem-_translateText:not(.menuitem-iconic, .menu-iconic) > .menu-text,
 #toolbar-context-menu
-    :is(menu, menuitem)[id^="jid1-bycqofyfmbmd9a_jetpack-menuitem"]:not(.menuitem-iconic, .menu-iconic)
-    > .menu-text,
+  :is(menu, menuitem)[id^="jid1-bycqofyfmbmd9a_jetpack-menuitem"]:not(.menuitem-iconic, .menu-iconic)
+  > .menu-text,
 #ublock0_raymondhill_net-menuitem-_uBlock0-blockElement:not(.menuitem-iconic, .menu-iconic)
-    > .menu-text,
+  > .menu-text,
 #ublock0_raymondhill_net-menuitem-_uBlock0-blockElementInFrame:not(.menuitem-iconic, .menu-iconic)
-    > .menu-text,
+  > .menu-text,
 :is(menu, menuitem)[id^="multithreaded-download-manager"]:is([label="Open in new tab"], [label="Open in new window"], [label="Open in sidebar"])
-    > .menu-iconic-text,
+  > .menu-iconic-text,
 #_287dcf75-bec6-4eec-b4f6-71948a2eea29_-menuitem-_ViewImage-SearchByImage:not(.menuitem-iconic, .menu-iconic)
-    > .menu-text,
+  > .menu-text,
 #invert-element_aminomancer-menuitem-_menuitem-invert:not(.menuitem-iconic, .menu-iconic)
-    > .menu-text,
+  > .menu-text,
 #menu_customizeToolbars .menu-text,
 menuitem.viewCustomizeToolbar > .menu-text,
 #addon_darkreader_org-menuitem-_DarkReader-switchEngine:not(.menuitem-iconic) .menu-text,
 menupopup:not(#contentAreaContextMenu)
-    > #addon_darkreader_org-menuitem-_DarkReader-top:not(.menuitem-iconic, .menu-iconic)
-    > .menu-text,
+  > #addon_darkreader_org-menuitem-_DarkReader-top:not(.menuitem-iconic, .menu-iconic)
+  > .menu-text,
 #_testpilot-containers-menuitem-_hide-container:not(.menuitem-iconic, .menu-iconic) > .menu-text,
 #_testpilot-containers-menuitem-_move-to-new-window-container:not(.menuitem-iconic, .menu-iconic)
-    > .menu-text,
+  > .menu-text,
 menuitem.customize-context-removeFromToolbar > .menu-text,
 menuitem.customize-context-removeFromPanel > .menu-text,
 menuitem.customize-context-moveToToolbar > .menu-text,
@@ -355,8 +355,8 @@ menuitem.pageActionContextMenuItem.manageExtensionItem > .menu-text,
 menuitem.customize-context-removeExtension > .menu-text,
 menuitem.pageActionContextMenuItem.removeExtensionItem > .menu-text,
 menuitem.customize-context-reportExtension > .menu-text {
-    margin-inline: 0 !important;
-    padding-inline: 0 2px !important;
+  margin-inline: 0 !important;
+  padding-inline: 0 2px !important;
 }
 
 #context_openTabInWindow::before,
@@ -391,7 +391,7 @@ menuitem#menu_openAddons::before,
 #private-relay_firefox_com-menuitem-_fx-private-relay-use-existing-aliases:not(.menuitem-iconic)::before,
 #private-relay_firefox_com-menuitem-_fx-private-relay-manage-aliases:not(.menuitem-iconic)::before,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
-    menu:not(.menu-iconic, .menuitem-iconic)[id^="gitzip-firefox-addons_gitzip_org-menuitem-"]::before,
+  menu:not(.menu-iconic, .menuitem-iconic)[id^="gitzip-firefox-addons_gitzip_org-menuitem-"]::before,
 #menu_pageInfo::before,
 menuitem:is(#sync-setup, #sync-unverifieditem, #sync-reauthitem)::before,
 menuitem:is(#sync-enable, #sync-syncnowitem)::before,
@@ -406,8 +406,7 @@ menuitem#menu_HelpPopup_reportPhishingtoolmenu::before,
 menuitem#menu_HelpPopup_reportPhishingErrortoolmenu::before,
 menuitem#aboutName::before,
 menuitem#helpPolicySupport::before,
-:is(#new-tab-button-popup, .new-tab-popup)
-    menuitem[command="Browser:OpenAboutContainers"]::before,
+:is(#new-tab-button-popup, .new-tab-popup) menuitem[command="Browser:OpenAboutContainers"]::before,
 #context-viewbgimage::before,
 #context-setDesktopBackground::before,
 :is(#context-savepage, menu#pageStyleMenu, #addon_darkreader_org-menuitem-_DarkReader-addSite:not(.menuitem-iconic))::before,
@@ -530,7 +529,7 @@ menuitem#repair-text-encoding::before,
 :is(#syncedTabsOpenAllInContainer, #syncedTabsOpenInContainer)::before,
 #bookmark-menu-container_robwu_nl-menuitem-_bookmark-menu-item:not(.menuitem-iconic)::before,
 #placesContext
-    > :is(menu, menuitem)[label="Open in a New Container Tab"]:not(.menuitem-iconic)::before,
+  > :is(menu, menuitem)[label="Open in a New Container Tab"]:not(.menuitem-iconic)::before,
 #context-markAsRead::before,
 #context-markAsUnread::before,
 :is(#context_bookmarkTab, #context_bookmarkSelectedTabs, #toolbar-context-bookmarkSelectedTab, #toolbar-context-bookmarkSelectedTabs)::before,
@@ -563,7 +562,7 @@ menuitem#enableDeveloperTools::before,
 .recently-closed-windows-menu::before,
 .recently-closed-tabs-menu::before,
 :is(.recently-closed-windows-menu, .recently-closed-tabs-menu, #historyUndoMenu, #historyUndoWindowMenu)
-    menuitem.restoreallitem::before,
+  menuitem.restoreallitem::before,
 #recently-closed-restore::before,
 #recently-closed-restore-in-new-window::before,
 #recently-closed-restore-in-new-private-window::before,
@@ -571,7 +570,7 @@ menuitem#enableDeveloperTools::before,
 #recently-closed-remove-from-history::before,
 #recently-closed-bookmark::before,
 :is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
-    .sendtab-target[clientType]::before,
+  .sendtab-target[clientType]::before,
 :is(#spell-add-to-dictionary, #spell-add-dictionaries, #spell-add-dictionaries-main, #spell-dictionaries)::before,
 #context-showonlythisframe::before,
 #contentAreaContextMenu #frame::before,
@@ -601,20 +600,20 @@ menu#fill-login::before,
 menuitem#manage-saved-logins::before,
 menuitem#fill-login-generated-password::before,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
-    menu[label="Bitwarden"]
-    :is(menu, menuitem)[id$="-menuitem-_autofill"]::before,
+  menu[label="Bitwarden"]
+  :is(menu, menuitem)[id$="-menuitem-_autofill"]::before,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
-    menu[label="Bitwarden"]
-    :is(menu, menuitem)[id$="-menuitem-_copy-username"]::before,
+  menu[label="Bitwarden"]
+  :is(menu, menuitem)[id$="-menuitem-_copy-username"]::before,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
-    menu[label="Bitwarden"]
-    :is(menu, menuitem)[id$="-menuitem-_copy-password"]::before,
+  menu[label="Bitwarden"]
+  :is(menu, menuitem)[id$="-menuitem-_copy-password"]::before,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
-    menu[label="Bitwarden"]
-    :is(menu, menuitem)[id$="-menuitem-_generate-password"]::before,
+  menu[label="Bitwarden"]
+  :is(menu, menuitem)[id$="-menuitem-_generate-password"]::before,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
-    menu[label="Bitwarden"]
-    :is(menu, menuitem)[id$="-menuitem-_copy-identifier"]::before,
+  menu[label="Bitwarden"]
+  :is(menu, menuitem)[id$="-menuitem-_copy-identifier"]::before,
 menu[label="Bitwarden"]:not(.menuitem-iconic, .menu-iconic)::before,
 #_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-manager:not(.menuitem-iconic, .menu-iconic)::before,
 #_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-options:not(.menuitem-iconic, .menu-iconic)::before,
@@ -624,7 +623,7 @@ menu[label="Bitwarden"]:not(.menuitem-iconic, .menu-iconic)::before,
 #simple-translate_sienori-menuitem-_translateLink:not(.menuitem-iconic, .menu-iconic)::before,
 #simple-translate_sienori-menuitem-_translateText:not(.menuitem-iconic, .menu-iconic)::before,
 #toolbar-context-menu
-    :is(menu, menuitem)[id^="jid1-bycqofyfmbmd9a_jetpack-menuitem"]:not(.menuitem-iconic, .menu-iconic)::before,
+  :is(menu, menuitem)[id^="jid1-bycqofyfmbmd9a_jetpack-menuitem"]:not(.menuitem-iconic, .menu-iconic)::before,
 #ublock0_raymondhill_net-menuitem-_uBlock0-blockElement:not(.menuitem-iconic, .menu-iconic)::before,
 #ublock0_raymondhill_net-menuitem-_uBlock0-blockElementInFrame:not(.menuitem-iconic, .menu-iconic)::before,
 :is(menu, menuitem)[id^="multithreaded-download-manager"]:is([label="Open in new tab"], [label="Open in new window"], [label="Open in sidebar"])::before,
@@ -632,7 +631,7 @@ menu[label="Bitwarden"]:not(.menuitem-iconic, .menu-iconic)::before,
 menuitem.viewCustomizeToolbar::before,
 #addon_darkreader_org-menuitem-_DarkReader-switchEngine:not(.menuitem-iconic)::before,
 menupopup:not(#contentAreaContextMenu)
-    > #addon_darkreader_org-menuitem-_DarkReader-top:not(.menuitem-iconic, .menu-iconic)::before,
+  > #addon_darkreader_org-menuitem-_DarkReader-top:not(.menuitem-iconic, .menu-iconic)::before,
 #_testpilot-containers-menuitem-_hide-container:not(.menuitem-iconic, .menu-iconic)::before,
 #_testpilot-containers-menuitem-_move-to-new-window-container:not(.menuitem-iconic, .menu-iconic)::before,
 menuitem.customize-context-removeFromToolbar::before,
@@ -657,900 +656,899 @@ menuitem.pageActionContextMenuItem.manageExtensionItem::before,
 menuitem.customize-context-removeExtension::before,
 menuitem.pageActionContextMenuItem.removeExtensionItem::before,
 menuitem.customize-context-reportExtension::before {
-    content: "";
-    position: relative;
-    display: -moz-inline-box;
-    width: 16px;
-    height: 16px;
-    padding-inline: 0px;
-    margin-inline: var(--context-iconic-margin);
-    fill: currentColor;
-    -moz-context-properties: fill, fill-opacity, stroke;
-    background-position: center;
-    background-size: 16px;
-    background-repeat: no-repeat;
+  content: "";
+  position: relative;
+  display: -moz-inline-box;
+  width: 16px;
+  height: 16px;
+  padding-inline: 0px;
+  margin-inline: var(--context-iconic-margin);
+  fill: currentColor;
+  -moz-context-properties: fill, fill-opacity, stroke;
+  background-position: center;
+  background-size: 16px;
+  background-repeat: no-repeat;
 }
 
 #context_moveToStart::before,
 #context_moveToEnd:-moz-locale-dir(rtl)::before {
-    background-image: url(chrome://userchrome/content/skin/back.svg);
+  background-image: url(chrome://userchrome/content/skin/back.svg);
 }
 
 #context_moveToEnd::before,
 #context_moveToStart:-moz-locale-dir(rtl)::before {
-    background-image: url(chrome://userchrome/content/skin/forward.svg);
+  background-image: url(chrome://userchrome/content/skin/forward.svg);
 }
 
 :is(#context_openTabInWindow, #menu_newNavigator)::before {
-    background-image: url(chrome://userchrome/content/skin/new-window.svg);
+  background-image: url(chrome://userchrome/content/skin/new-window.svg);
 }
 
 #context-video-saveimage::before {
-    background-image: url(chrome://userchrome/content/notifications/canvas.svg);
+  background-image: url(chrome://userchrome/content/notifications/canvas.svg);
 }
 
 .downloadPauseMenuItem::before,
 #context-media-pause::before {
-    background-image: url(chrome://userchrome/content/material/pause.svg);
+  background-image: url(chrome://userchrome/content/material/pause.svg);
 }
 
 .downloadResumeMenuItem::before,
 #context-media-play::before {
-    background-image: url(chrome://userchrome/content/playButton.svg);
+  background-image: url(chrome://userchrome/content/playButton.svg);
 }
 
 .downloadUnblockMenuItem::before {
-    background-image: url(chrome://userchrome/content/downloads/downloads.svg);
+  background-image: url(chrome://userchrome/content/downloads/downloads.svg);
 }
 
 .downloadUseSystemDefaultMenuItem::before {
-    background-image: url(chrome://userchrome/content/skin/device-desktop.svg);
+  background-image: url(chrome://userchrome/content/skin/device-desktop.svg);
 }
 
 .downloadShowMenuItem::before {
-    background-image: url(chrome://userchrome/content/material/places/folder-open.svg);
+  background-image: url(chrome://userchrome/content/material/places/folder-open.svg);
 }
 
 menuitem[data-l10n-id="downloads-cmd-go-to-download-page"]::before {
-    background-image: url(chrome://userchrome/content/skin/new-tab.svg);
+  background-image: url(chrome://userchrome/content/skin/new-tab.svg);
 }
 
 menuitem[data-l10n-id="downloads-cmd-copy-download-link"]::before {
-    background-image: url(chrome://userchrome/content/skin/link.svg);
+  background-image: url(chrome://userchrome/content/skin/link.svg);
 }
 
 .downloadRemoveFromHistoryMenuItem::before {
-    background-image: url(chrome://userchrome/content/skin/forget.svg);
+  background-image: url(chrome://userchrome/content/skin/forget.svg);
 }
 
 menuitem[data-l10n-id="downloads-cmd-clear-list"]::before,
 menuitem[data-l10n-id="downloads-cmd-clear-downloads"]::before {
-    background-image: url(chrome://userchrome/content/skin/close-window.svg);
+  background-image: url(chrome://userchrome/content/skin/close-window.svg);
 }
 
 menuitem[command="downloadsCmd_deleteFile"]::before {
-    background-image: url(chrome://userchrome/content/delete-file.svg);
+  background-image: url(chrome://userchrome/content/delete-file.svg);
 }
 
 #context-media-mute::before {
-    background-image: url(chrome://userchrome/content/audioMutedButton.svg);
+  background-image: url(chrome://userchrome/content/audioMutedButton.svg);
 }
 
 #context-media-unmute::before {
-    background-image: url(chrome://userchrome/content/audioUnmutedButton.svg);
+  background-image: url(chrome://userchrome/content/audioUnmutedButton.svg);
 }
 
 #context-video-fullscreen::before {
-    background-image: url(chrome://userchrome/content/skin/fullscreen.svg);
+  background-image: url(chrome://userchrome/content/skin/fullscreen.svg);
 }
 
 #context-leave-dom-fullscreen::before {
-    background-image: url(chrome://userchrome/content/skin/fullscreen-exit.svg);
+  background-image: url(chrome://userchrome/content/skin/fullscreen-exit.svg);
 }
 
 menuitem[data-l10n-id="full-screen-exit"]::before {
-    background-image: url(chrome://userchrome/content/skin/fullscreen-exit.svg);
+  background-image: url(chrome://userchrome/content/skin/fullscreen-exit.svg);
 }
 
 #context-media-playbackrate::before {
-    background-image: url(chrome://userchrome/content/performance.svg);
+  background-image: url(chrome://userchrome/content/performance.svg);
 }
 
 #context-viewvideo::before {
-    background-image: url(chrome://userchrome/content/skin/tab-play.svg);
+  background-image: url(chrome://userchrome/content/skin/tab-play.svg);
 }
 
 #context-media-showcontrols::before {
-    background-image: url(chrome://userchrome/content/material/show-controls.svg);
+  background-image: url(chrome://userchrome/content/material/show-controls.svg);
 }
 
 #context-media-hidecontrols::before {
-    background-image: url(chrome://userchrome/content/material/hide-controls.svg);
+  background-image: url(chrome://userchrome/content/material/hide-controls.svg);
 }
 
 #context-showonlythisframe::before {
-    background-image: url(chrome://userchrome/content/skin/fullscreen.svg);
+  background-image: url(chrome://userchrome/content/skin/fullscreen.svg);
 }
 
 #contentAreaContextMenu #frame::before {
-    fill-opacity: 0.3;
-    background-image: url(chrome://userchrome/content/devtools/command-frames.svg);
+  fill-opacity: 0.3;
+  background-image: url(chrome://userchrome/content/devtools/command-frames.svg);
 }
 
 :is(#context-printframe, #context-print-selection, #menu_print)::before {
-    background-image: url(chrome://global/skin/icons/print.svg);
+  background-image: url(chrome://global/skin/icons/print.svg);
 }
 
 #menu_printPreview::before {
-    background-image: url(chrome://userchrome/content/show-password.svg);
+  background-image: url(chrome://userchrome/content/show-password.svg);
 }
 
 :is(#menu_printSetup, #menu_readerModeItem)::before {
-    background-image: url(chrome://userchrome/content/skin/readerMode.svg);
-    background-size: 14.8px 16px;
+  background-image: url(chrome://userchrome/content/skin/readerMode.svg);
+  background-size: 14.8px 16px;
 }
 
 #menu_importFromAnotherBrowser::before {
-    background-image: url(chrome://userchrome/content/skin/import.svg);
+  background-image: url(chrome://userchrome/content/skin/import.svg);
 }
 
 #context-frameOsPid::before {
-    background-image: url(chrome://userchrome/content/devtools/tool-memory.svg);
+  background-image: url(chrome://userchrome/content/devtools/tool-memory.svg);
 }
 
 :is(#context-reloadframe, #context-reloadimage, menuitem:not(.menuitem-iconic)[oncommand="_ucUtils.restart(true)"])::before {
-    background-image: url(chrome://userchrome/content/skin/reload.svg);
+  background-image: url(chrome://userchrome/content/skin/reload.svg);
 }
 
 #context-inspect::before {
-    background-image: url(chrome://userchrome/content/devtools/tool-inspector.svg);
+  background-image: url(chrome://userchrome/content/devtools/tool-inspector.svg);
 }
 
 /* hide "Inspect Accessibility Properties" */
 #context-inspect-a11y {
-    display: none !important;
+  display: none !important;
 }
 
 /* or just shorten the label */
 #context-inspect-a11y::before {
-    background-position: left center;
-    content: "Inspect Accessibility";
-    padding-inline-start: 22px;
-    background-image: url(chrome://userchrome/content/devtools/tool-accessibility.svg);
+  background-position: left center;
+  content: "Inspect Accessibility";
+  padding-inline-start: 22px;
+  background-image: url(chrome://userchrome/content/devtools/tool-accessibility.svg);
 }
 
 #context-inspect-a11y .menu-text {
-    visibility: collapse;
+  visibility: collapse;
 }
 
 :is(#context-viewframesource, #context-viewpartialsource-selection, #context-viewsource)::before {
-    background-image: url(chrome://userchrome/content/devtools/tool-dom.svg);
+  background-image: url(chrome://userchrome/content/devtools/tool-dom.svg);
 }
 
 menuitem#menu_openDownloads::before {
-    background-image: url(chrome://userchrome/content/downloads/downloads.svg);
+  background-image: url(chrome://userchrome/content/downloads/downloads.svg);
 }
 
 menuitem#menu_openAddons::before,
 #addon_darkreader_org-menuitem-_DarkReader-toggle:not(.menuitem-iconic)::before {
-    background-image: url(chrome://mozapps/skin/extensions/extension.svg);
+  background-image: url(chrome://mozapps/skin/extensions/extension.svg);
 }
 
 #private-relay_firefox_com-menuitem-_fx-private-relay-generate-alias:not(.menuitem-iconic)::before {
-    background-image: url(chrome://userchrome/content/material/new-address.svg);
+  background-image: url(chrome://userchrome/content/material/new-address.svg);
 }
 
 #private-relay_firefox_com-menuitem-_fx-private-relay-use-existing-aliases:not(.menuitem-iconic)::before {
-    background-image: url(chrome://userchrome/content/material/contact-mail.svg);
+  background-image: url(chrome://userchrome/content/material/contact-mail.svg);
 }
 
 #private-relay_firefox_com-menuitem-_fx-private-relay-manage-aliases:not(.menuitem-iconic)::before {
-    background-image: url(chrome://userchrome/content/settings.svg);
+  background-image: url(chrome://userchrome/content/settings.svg);
 }
 
 :is(#contentAreaContextMenu, #toolbar-context-menu)
-    menu:not(.menu-iconic, .menuitem-iconic)[id^="gitzip-firefox-addons_gitzip_org-menuitem-"]::before {
-    background-image: url(chrome://userchrome/content/material/zipper.svg);
+  menu:not(.menu-iconic, .menuitem-iconic)[id^="gitzip-firefox-addons_gitzip_org-menuitem-"]::before {
+  background-image: url(chrome://userchrome/content/material/zipper.svg);
 }
 
 menuitem:is(#sync-setup, #sync-unverifieditem)::before {
-    background-image: url(chrome://userchrome/content/fxa/avatar.svg);
+  background-image: url(chrome://userchrome/content/fxa/avatar.svg);
 }
 
 menuitem#sync-reauthitem::before {
-    background-image: url(chrome://userchrome/content/fxa/avatar-alert.svg);
+  background-image: url(chrome://userchrome/content/fxa/avatar-alert.svg);
 }
 
 menuitem:is(#sync-enable, #sync-syncnowitem)::before {
-    background-image: url(chrome://userchrome/content/skin/sync.svg);
+  background-image: url(chrome://userchrome/content/skin/sync.svg);
 }
 
 menu#browserToolsMenu:not(.menu-iconic)::before {
-    background-image: url(chrome://userchrome/content/skin/developer.svg);
+  background-image: url(chrome://userchrome/content/skin/developer.svg);
 }
 
 :is(#context-viewframeinfo, #context-viewinfo, #context-viewimageinfo, #menu_pageInfo)::before {
-    background-image: url(chrome://userchrome/content/info-filled.svg);
+  background-image: url(chrome://userchrome/content/info-filled.svg);
 }
 
 menuitem#menu_preferences::before,
-:is(#new-tab-button-popup, .new-tab-popup)
-    menuitem[command="Browser:OpenAboutContainers"]::before {
-    background-image: url(chrome://userchrome/content/settings.svg);
+:is(#new-tab-button-popup, .new-tab-popup) menuitem[command="Browser:OpenAboutContainers"]::before {
+  background-image: url(chrome://userchrome/content/settings.svg);
 }
 
 /* menu bar > help menu */
 menuitem#menu_openHelp::before {
-    background-image: url(chrome://userchrome/content/help-solid.svg);
+  background-image: url(chrome://userchrome/content/help-solid.svg);
 }
 
 menuitem#feedbackPage::before {
-    background-image: url(chrome://userchrome/content/material/rate.svg);
+  background-image: url(chrome://userchrome/content/material/rate.svg);
 }
 
 menuitem#helpSafeMode::before {
-    background-image: url(chrome://userchrome/content/material/diagnostic.svg);
+  background-image: url(chrome://userchrome/content/material/diagnostic.svg);
 }
 
 menuitem#troubleShooting::before {
-    background-image: url(chrome://userchrome/content/material/system-report.svg);
+  background-image: url(chrome://userchrome/content/material/system-report.svg);
 }
 
 menuitem#help_reportSiteIssue::before {
-    background-image: url(chrome://userchrome/content/material/bug.svg);
+  background-image: url(chrome://userchrome/content/material/bug.svg);
 }
 
 menuitem#menu_HelpPopup_reportPhishingtoolmenu::before {
-    background-image: url(chrome://userchrome/content/material/phishing.svg);
-    stroke: currentColor !important;
-    -moz-context-properties: fill, fill-opacity, stroke !important;
+  background-image: url(chrome://userchrome/content/material/phishing.svg);
+  stroke: currentColor !important;
+  -moz-context-properties: fill, fill-opacity, stroke !important;
 }
 
 menuitem#menu_HelpPopup_reportPhishingErrortoolmenu::before {
-    background-image: url(chrome://userchrome/content/material/verified.svg);
+  background-image: url(chrome://userchrome/content/material/verified.svg);
 }
 
 menuitem#aboutName::before {
-    background-image: url(chrome://userchrome/content/identity-icons-brand.svg);
+  background-image: url(chrome://userchrome/content/identity-icons-brand.svg);
 }
 
 menuitem#helpPolicySupport::before {
-    background-image: url(chrome://userchrome/content/help-square.svg);
+  background-image: url(chrome://userchrome/content/help-square.svg);
 }
 
 :is(#context-setDesktopBackground, #context-viewbgimage)::before {
-    background-image: url(chrome://userchrome/content/notifications/canvas.svg);
+  background-image: url(chrome://userchrome/content/notifications/canvas.svg);
 }
 
 :is(#context-savepage, menu#pageStyleMenu, #addon_darkreader_org-menuitem-_DarkReader-addSite:not(.menuitem-iconic))::before {
-    background-image: url(chrome://userchrome/content/document.svg);
+  background-image: url(chrome://userchrome/content/document.svg);
 }
 
 #viewFullZoomMenu::before {
-    background-image: url(chrome://userchrome/content/fxa/add-device.svg);
+  background-image: url(chrome://userchrome/content/fxa/add-device.svg);
 }
 
 #menu_zoomEnlarge::before {
-    background-image: url(chrome://userchrome/content/skin/zoom-in.svg);
+  background-image: url(chrome://userchrome/content/skin/zoom-in.svg);
 }
 
 #menu_zoomReduce::before {
-    background-image: url(chrome://userchrome/content/skin/zoom-out.svg);
+  background-image: url(chrome://userchrome/content/skin/zoom-out.svg);
 }
 
 #menu_zoomReset::before {
-    background-image: url(chrome://userchrome/content/devtools/command-rulers.svg);
+  background-image: url(chrome://userchrome/content/devtools/command-rulers.svg);
 }
 
 #viewToolbarsMenu::before {
-    background-image: url(chrome://userchrome/content/skin/controlcenter/dashboard.svg);
+  background-image: url(chrome://userchrome/content/skin/controlcenter/dashboard.svg);
 }
 
 #viewSidebarMenuMenu::before {
-    background-image: url(chrome://userchrome/content/skin/sidebars-right.svg);
+  background-image: url(chrome://userchrome/content/skin/sidebars-right.svg);
 }
 
 /* view > sidebar menu */
 menupopup#viewSidebarMenu
-    menuitem:is([type="checkbox"], [type="radio"]):not([checked="true"], .webextension-menuitem:not(.menuitem-iconic))
-    .menu-iconic-left {
-    display: revert;
-    fill: currentColor;
-    -moz-context-properties: fill, fill-opacity;
+  menuitem:is([type="checkbox"], [type="radio"]):not([checked="true"], .webextension-menuitem:not(.menuitem-iconic))
+  .menu-iconic-left {
+  display: revert;
+  fill: currentColor;
+  -moz-context-properties: fill, fill-opacity;
 }
 
 menupopup#viewSidebarMenu
-    menuitem:is([type="checkbox"], [type="radio"]):not([checked="true"], .webextension-menuitem:not(.menuitem-iconic))
-    .menu-iconic-icon {
-    display: revert !important;
+  menuitem:is([type="checkbox"], [type="radio"]):not([checked="true"], .webextension-menuitem:not(.menuitem-iconic))
+  .menu-iconic-icon {
+  display: revert !important;
 }
 
 menupopup#viewSidebarMenu
-    menuitem:is([type="checkbox"], [type="radio"]):not([checked="true"], .webextension-menuitem:not(.menuitem-iconic))::before {
-    display: none;
+  menuitem:is([type="checkbox"], [type="radio"]):not([checked="true"], .webextension-menuitem:not(.menuitem-iconic))::before {
+  display: none;
 }
 
 menupopup#viewSidebarMenu
-    #menu_bookmarksSidebar:is([type="checkbox"], [type="radio"]):not([checked="true"]) {
-    list-style-image: url(chrome://userchrome/content/skin/bookmark.svg) !important;
+  #menu_bookmarksSidebar:is([type="checkbox"], [type="radio"]):not([checked="true"]) {
+  list-style-image: url(chrome://userchrome/content/skin/bookmark.svg) !important;
 }
 
 menupopup#viewSidebarMenu
-    #menu_historySidebar:is([type="checkbox"], [type="radio"]):not([checked="true"]) {
-    list-style-image: url(chrome://userchrome/content/skin/history.svg) !important;
+  #menu_historySidebar:is([type="checkbox"], [type="radio"]):not([checked="true"]) {
+  list-style-image: url(chrome://userchrome/content/skin/history.svg) !important;
 }
 
 menupopup#viewSidebarMenu
-    #menu_tabsSidebar:is([type="checkbox"], [type="radio"]):not([checked="true"]) {
-    list-style-image: url(chrome://userchrome/content/skin/tab.svg) !important;
+  #menu_tabsSidebar:is([type="checkbox"], [type="radio"]):not([checked="true"]) {
+  list-style-image: url(chrome://userchrome/content/skin/tab.svg) !important;
 }
 
 #menu_showAllHistory::before {
-    background-image: url(chrome://userchrome/content/skin/history.svg);
+  background-image: url(chrome://userchrome/content/skin/history.svg);
 }
 
 menuitem#sanitizeItem::before {
-    background-image: url(chrome://userchrome/content/skin/forget.svg);
+  background-image: url(chrome://userchrome/content/skin/forget.svg);
 }
 
 :is(#syncedTabsRefresh, #syncedTabsRefreshFilter)::before {
-    background-image: url(chrome://userchrome/content/skin/sync.svg);
+  background-image: url(chrome://userchrome/content/skin/sync.svg);
 }
 
 #sync-tabs-menuitem::before {
-    background-image: url(chrome://userchrome/content/skin/synced-tabs.svg);
+  background-image: url(chrome://userchrome/content/skin/synced-tabs.svg);
 }
 
 #historyRestoreLastSession::before {
-    background-image: url(chrome://userchrome/content/skin/restore-session.svg);
+  background-image: url(chrome://userchrome/content/skin/restore-session.svg);
 }
 
 #hiddenTabsMenu::before {
-    background-image: url(chrome://userchrome/content/hide-password.svg);
+  background-image: url(chrome://userchrome/content/hide-password.svg);
 }
 
 :is(#context-selectall, #menu_selectAll, #menu_selectall)::before,
 .textbox-contextmenu menuitem[data-l10n-id="text-action-select-all"]::before {
-    background-image: url(chrome://userchrome/content/devtools/tool-styleeditor.svg);
+  background-image: url(chrome://userchrome/content/devtools/tool-styleeditor.svg);
 }
 
 :is(#context-sendaudio, #context-sendimage, #context-sendvideo, #menu_sendLink)::before {
-    background-image: url(chrome://userchrome/content/skin/mail.svg);
+  background-image: url(chrome://userchrome/content/skin/mail.svg);
 }
 
 :is(#context-savevideo, #context-saveaudio, #context-saveframe, #context-saveimage, #context-savelink, #menu_savePage)::before {
-    background-image: url(chrome://userchrome/content/material/places/folder-save.svg);
+  background-image: url(chrome://userchrome/content/material/places/folder-save.svg);
 }
 
 #menu_openFile::before {
-    background-image: url(chrome://userchrome/content/material/places/folder-open.svg);
+  background-image: url(chrome://userchrome/content/material/places/folder-open.svg);
 }
 
 #context-savelinktopocket::before {
-    background-image: url(chrome://userchrome/content/skin/pocket-outline.svg);
+  background-image: url(chrome://userchrome/content/skin/pocket-outline.svg);
 }
 
 #context-pocket::before {
-    background-image: url(chrome://userchrome/content/skin/pocket-outline.svg);
+  background-image: url(chrome://userchrome/content/skin/pocket-outline.svg);
 }
 
 #context-take-frame-screenshot::before,
 #context-take-screenshot::before {
-    background-image: var(--screenshot-icon);
+  background-image: var(--screenshot-icon);
 }
 
 #context-viewimage::before {
-    background-image: url(chrome://userchrome/content/notifications/canvas.svg);
+  background-image: url(chrome://userchrome/content/notifications/canvas.svg);
 }
 
 :is(#context-copyimage-contents, #context-copy, #menu_copy, #placesContext_copy, #syncedTabsCopySelected)::before,
 .textbox-contextmenu menuitem[data-l10n-id="text-action-copy"]::before,
 menuitem.customize-context-CopyID::before {
-    background-image: url(chrome://userchrome/content/skin/edit-copy.svg);
+  background-image: url(chrome://userchrome/content/skin/edit-copy.svg);
 }
 
 :is(#placesContext_show_bookmark\:info, #placesContext_show_folder\:info, #placesContext_show\:info)::before {
-    background-image: url(chrome://userchrome/content/edit.svg);
+  background-image: url(chrome://userchrome/content/edit.svg);
 }
 
 #placesContext_showInFolder::before {
-    background-image: url(chrome://userchrome/content/material/places/folder-special.svg);
+  background-image: url(chrome://userchrome/content/material/places/folder-special.svg);
 }
 
 :is(#context-cut, #menu_cut, #placesContext_cut)::before,
 .textbox-contextmenu menuitem[data-l10n-id="text-action-cut"]::before {
-    background-image: url(chrome://userchrome/content/skin/edit-cut.svg);
+  background-image: url(chrome://userchrome/content/skin/edit-cut.svg);
 }
 
 :is(#context-paste, #menu_paste, #placesContext_paste, #placesContext_paste_group)::before,
 .textbox-contextmenu menuitem[data-l10n-id="text-action-paste"]::before {
-    background-image: url(chrome://userchrome/content/skin/edit-paste.svg);
+  background-image: url(chrome://userchrome/content/skin/edit-paste.svg);
 }
 
 .textbox-contextmenu
-    menuitem:is([anonid="paste-and-go"], #paste-and-go, .searchbar-paste-and-search)::before {
-    background-image: url(chrome://userchrome/content/skin/edit-paste-and-go.svg);
+  menuitem:is([anonid="paste-and-go"], #paste-and-go, .searchbar-paste-and-search)::before {
+  background-image: url(chrome://userchrome/content/skin/edit-paste-and-go.svg);
 }
 
 :is(#placesContext_deleteBookmark, #placesContext_deleteFolder, #placesContext_delete, #placesContext_delete_history)::before {
-    background-image: url(chrome://userchrome/content/delete.svg);
+  background-image: url(chrome://userchrome/content/delete.svg);
 }
 
 :is(#context-delete, #menu_delete)::before,
 .textbox-contextmenu menuitem[data-l10n-id="text-action-delete"]::before {
-    background-image: url(chrome://userchrome/content/material/backspace-solid.svg);
+  background-image: url(chrome://userchrome/content/material/backspace-solid.svg);
 }
 
 .searchbar-clear-history::before {
-    background-image: url(chrome://userchrome/content/devtools/clear.svg);
+  background-image: url(chrome://userchrome/content/devtools/clear.svg);
 }
 
 #context-copyemail::before {
-    background-image: url(chrome://userchrome/content/skin/mail.svg);
+  background-image: url(chrome://userchrome/content/skin/mail.svg);
 }
 
 :is(#context-copyvideourl, #context-copyaudiourl, #context-copyimage, #context-copylink, #menu_openLocation, menuitem.customize-context-CopyURL)::before {
-    background-image: url(chrome://userchrome/content/skin/link.svg);
+  background-image: url(chrome://userchrome/content/skin/link.svg);
 }
 
 :is(#context-bookmarkframe, #context-bookmarklink)::before {
-    background-image: url(chrome://userchrome/content/skin/add-bookmark.svg);
+  background-image: url(chrome://userchrome/content/skin/add-bookmark.svg);
 }
 
 :is(#placesContext_openBookmarkContainer\:tabs, #placesContext_openBookmarkLinks\:tabs)::before {
-    background-image: url(chrome://userchrome/content/material/places/folder-special.svg);
+  background-image: url(chrome://userchrome/content/material/places/folder-special.svg);
 }
 
 :is(#context-openframeintab, #context-openlinkintab, #context_openANewTab, #toolbar-context-openANewTab, #menu_newNavigatorTab, #placesContext_open\:newtab, #syncedTabsOpenSelectedInTab)::before {
-    background-image: url(chrome://userchrome/content/skin/new-tab.svg);
+  background-image: url(chrome://userchrome/content/skin/new-tab.svg);
 }
 
 :is(#context-openlinkinunloadedtab, #placesContext_open\:unloaded, #placesContext_openContainer\:unloaded, #placesContext_openLinks\:unloaded, #syncedTabsOpenUnloaded)::before {
-    background-image: url(chrome://userchrome/content/skin/new-unloaded.svg);
+  background-image: url(chrome://userchrome/content/skin/new-unloaded.svg);
 }
 
 :is(#context-openlinkincurrent, #placesContext_open, #syncedTabsOpenSelected)::before {
-    background-image: url(chrome://userchrome/content/skin/tab.svg);
+  background-image: url(chrome://userchrome/content/skin/tab.svg);
 }
 
 :is(#placesContext_open\:container, #placesContext_openContainer\:container, #placesContext_openLinks\:container, #placesContext_open\:newcontainertab)::before,
 :is(#syncedTabsOpenAllInContainer, #syncedTabsOpenInContainer)::before,
 #bookmark-menu-container_robwu_nl-menuitem-_bookmark-menu-item:not(.menuitem-iconic)::before,
 #placesContext
-    > :is(menu, menuitem)[label="Open in a New Container Tab"]:not(.menuitem-iconic)::before,
+  > :is(menu, menuitem)[label="Open in a New Container Tab"]:not(.menuitem-iconic)::before,
 #context-openlinkincontainertab::before {
-    background-image: url(chrome://userchrome/content/skin/container-go.svg);
+  background-image: url(chrome://userchrome/content/skin/container-go.svg);
 }
 
 :is(#context-openlinkinusercontext-menu, #menu_newUserContext)::before {
-    background-image: url(chrome://userchrome/content/skin/container-go.svg);
+  background-image: url(chrome://userchrome/content/skin/container-go.svg);
 }
 
 :is(#context-openframe, #context-openlink, #placesContext_open\:newwindow, #syncedTabsOpenSelectedInWindow)::before {
-    background-image: url(chrome://userchrome/content/skin/new-window.svg);
+  background-image: url(chrome://userchrome/content/skin/new-window.svg);
 }
 
 :is(#context-openlinkprivate, #menu_newPrivateWindow, #placesContext_open\:newprivatewindow, #syncedTabsOpenSelectedInPrivateWindow)::before {
-    background-image: url(chrome://userchrome/content/skin/new-private.svg);
+  background-image: url(chrome://userchrome/content/skin/new-private.svg);
 }
 
 :is(#placesContext_new\:bookmark, #placesContext_createBookmark, #syncedTabsBookmarkSelected)::before {
-    background-image: url(chrome://userchrome/content/skin/add-bookmark.svg);
+  background-image: url(chrome://userchrome/content/skin/add-bookmark.svg);
 }
 
 #placesContext_new\:folder::before {
-    background-image: url(chrome://userchrome/content/material/places/folder-add.svg);
+  background-image: url(chrome://userchrome/content/material/places/folder-add.svg);
 }
 
 #placesContext_new\:separator::before {
-    background-image: url(chrome://userchrome/content/skin/add-separator.svg);
+  background-image: url(chrome://userchrome/content/skin/add-separator.svg);
 }
 
 #syncedTabsManageDevices::before {
-    background-image: url(chrome://userchrome/content/fxa/add-device.svg);
+  background-image: url(chrome://userchrome/content/fxa/add-device.svg);
 }
 
 :is(#context-searchselect, #context-searchselect-private, #menu_find)::before {
-    background-image: url(chrome://userchrome/content/search-glass.svg);
+  background-image: url(chrome://userchrome/content/search-glass.svg);
 }
 
 #menu_findAgain::before {
-    background-image: url(chrome://userchrome/content/skin/forward.svg);
+  background-image: url(chrome://userchrome/content/skin/forward.svg);
 }
 
 :is(menuitem#textfieldDirection-swap, #context-bidi-text-direction-toggle, #context-bidi-page-direction-toggle, #documentDirection-swap)::before {
-    background-image: url(chrome://userchrome/content/material/textdirection.svg);
+  background-image: url(chrome://userchrome/content/material/textdirection.svg);
 }
 
 menuitem#repair-text-encoding::before {
-    background-image: url(chrome://userchrome/content/skin/characterEncoding.svg);
+  background-image: url(chrome://userchrome/content/skin/characterEncoding.svg);
 }
 
 #context-viewsource-goToLine::before,
 #placesContext_sortBy\:name::before {
-    background-image: url(chrome://userchrome/content/skin/sort.svg);
+  background-image: url(chrome://userchrome/content/skin/sort.svg);
 }
 
 :is(#context-undo, #context_undoCloseTab, #toolbar-context-undoCloseTab, #menu_undo, #undobookmarksmenuUndo, #context-redo, #menu_redo, #undobookmarksmenuRedo)::before,
 .textbox-contextmenu
-    menuitem:is([data-l10n-id="text-action-undo"], [data-l10n-id="text-action-redo"])::before {
-    background-image: url(chrome://userchrome/content/undo.svg);
+  menuitem:is([data-l10n-id="text-action-undo"], [data-l10n-id="text-action-redo"])::before {
+  background-image: url(chrome://userchrome/content/undo.svg);
 }
 
 #placesContext_deleteHost::before {
-    background-image: url(chrome://userchrome/content/skin/forget.svg);
+  background-image: url(chrome://userchrome/content/skin/forget.svg);
 }
 
 #context-keywordfield::before {
-    background-image: url(chrome://userchrome/content/material/filter-css.svg);
+  background-image: url(chrome://userchrome/content/material/filter-css.svg);
 }
 
 #context_reopenInContainer::before {
-    background-image: url(chrome://userchrome/content/skin/container-go.svg);
+  background-image: url(chrome://userchrome/content/skin/container-go.svg);
 }
 
 :is(#context_reloadTab, #context_reloadSelectedTabs, #toolbar-context-reloadSelectedTab, #toolbar-context-reloadSelectedTabs)::before {
-    background-image: url(chrome://userchrome/content/skin/reload.svg);
+  background-image: url(chrome://userchrome/content/skin/reload.svg);
 }
 
 :is(#context_toggleMuteTab, #context_toggleMuteSelectedTabs)::before {
-    background-image: url(chrome://userchrome/content/audioMutedButton.svg);
+  background-image: url(chrome://userchrome/content/audioMutedButton.svg);
 }
 
 :is(#context_toggleMuteTab, #context_toggleMuteSelectedTabs)[muted="true"]::before {
-    background-image: url(chrome://userchrome/content/audioUnmutedButton.svg);
+  background-image: url(chrome://userchrome/content/audioUnmutedButton.svg);
 }
 
 :is(#context_playTab, #context_playSelectedTabs)::before {
-    background-image: url(chrome://userchrome/content/playButton.svg);
+  background-image: url(chrome://userchrome/content/playButton.svg);
 }
 
 :is(#context_pinTab, #context_pinSelectedTabs)::before {
-    background-image: url(chrome://userchrome/content/material/pin-315.svg);
+  background-image: url(chrome://userchrome/content/material/pin-315.svg);
 }
 
 :is(#context_unpinTab, #context_unpinSelectedTabs)::before {
-    background-image: url(chrome://userchrome/content/material/unpin-315.svg);
+  background-image: url(chrome://userchrome/content/material/unpin-315.svg);
 }
 
 :is(#placesContext_openContainer\:tabs, #placesContext_openLinks\:tabs, #syncedTabsOpenAllInTabs)::before,
 :is(#context_duplicateTab, #context_duplicateTabs, #menu_showAllTabs)::before {
-    background-image: url(chrome://userchrome/content/skin/duplicate-tab.svg);
+  background-image: url(chrome://userchrome/content/skin/duplicate-tab.svg);
 }
 
 #placesContext_showAllBookmarks::before {
-    background-image: url(chrome://userchrome/content/skin/library.svg);
+  background-image: url(chrome://userchrome/content/skin/library.svg);
 }
 
 #context-markAsUnread::before {
-    background-image: url(chrome://userchrome/content/skin/mark-tab-unread.svg);
+  background-image: url(chrome://userchrome/content/skin/mark-tab-unread.svg);
 }
 
 #context-markAsRead::before {
-    background-image: url(chrome://userchrome/content/skin/mark-tab-read.svg);
+  background-image: url(chrome://userchrome/content/skin/mark-tab-read.svg);
 }
 
 :is(#context_selectAllTabs, #toolbar-context-selectAllTabs)::before {
-    background-image: url(chrome://userchrome/content/devtools/tool-styleeditor.svg);
+  background-image: url(chrome://userchrome/content/devtools/tool-styleeditor.svg);
 }
 
 #menu_bookmarkAllTabs::before {
-    background-image: url(chrome://userchrome/content/glyph-highlights-16.svg);
+  background-image: url(chrome://userchrome/content/glyph-highlights-16.svg);
 }
 
 :is(#context_bookmarkTab, #context_bookmarkSelectedTabs, #toolbar-context-bookmarkSelectedTab, #toolbar-context-bookmarkSelectedTabs)::before {
-    background-image: url(chrome://userchrome/content/skin/add-bookmark.svg);
+  background-image: url(chrome://userchrome/content/skin/add-bookmark.svg);
 }
 
 #context_moveTabOptions::before {
-    background-image: url(chrome://userchrome/content/skin/move-tab.svg);
+  background-image: url(chrome://userchrome/content/skin/move-tab.svg);
 }
 
 menuitem.share-tab-url-item::before {
-    background-image: url(chrome://userchrome/content/skin/share.svg);
+  background-image: url(chrome://userchrome/content/skin/share.svg);
 }
 
 :is(#context_closeTab, #menu_close)::before {
-    background-image: url(chrome://userchrome/content/skin/close-tabs.svg);
+  background-image: url(chrome://userchrome/content/skin/close-tabs.svg);
 }
 
 #context_closeTabOptions::before {
-    background-image: url(chrome://userchrome/content/skin/close-tabs-mult.svg);
+  background-image: url(chrome://userchrome/content/skin/close-tabs-mult.svg);
 }
 
 #context_closeTabsToTheStart::before,
 #context_closeTabsToTheEnd:-moz-locale-dir(rtl)::before {
-    background-image: url(chrome://userchrome/content/skin/select-left.svg);
+  background-image: url(chrome://userchrome/content/skin/select-left.svg);
 }
 
 #context_closeTabsToTheEnd::before,
 #context_closeTabsToTheStart:-moz-locale-dir(rtl)::before {
-    background-image: url(chrome://userchrome/content/skin/select-right.svg);
+  background-image: url(chrome://userchrome/content/skin/select-right.svg);
 }
 
 #context_closeOtherTabs::before {
-    background-image: url(chrome://userchrome/content/skin/select-around.svg);
+  background-image: url(chrome://userchrome/content/skin/select-around.svg);
 }
 
 #menu_closeWindow::before {
-    background-image: url(chrome://userchrome/content/skin/close-window.svg);
+  background-image: url(chrome://userchrome/content/skin/close-window.svg);
 }
 
 menuitem#menu_devToolbox:not([checked="true"])::before {
-    background-image: url(chrome://userchrome/content/devtools/debugging-workers.svg) !important;
-    background-color: transparent !important;
-    border: none !important;
-    border-radius: revert !important;
+  background-image: url(chrome://userchrome/content/devtools/debugging-workers.svg) !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-radius: revert !important;
 }
 
 menuitem#menu_taskManager::before {
-    background-image: url(chrome://userchrome/content/devtools/tool-profiler.svg);
+  background-image: url(chrome://userchrome/content/devtools/tool-profiler.svg);
 }
 
 menuitem#menu_devtools_remotedebugging::before {
-    background-image: url(chrome://userchrome/content/material/remote.svg);
+  background-image: url(chrome://userchrome/content/material/remote.svg);
 }
 
 menuitem#menu_browserToolbox::before {
-    background-image: url(chrome://userchrome/content/skin/toolbox.svg);
+  background-image: url(chrome://userchrome/content/skin/toolbox.svg);
 }
 
 menuitem#menu_browserContentToolbox::before {
-    background-image: url(chrome://userchrome/content/devtools/command-frames.svg);
-    fill-opacity: 0;
+  background-image: url(chrome://userchrome/content/devtools/command-frames.svg);
+  fill-opacity: 0;
 }
 
 menuitem#menu_browserConsole::before {
-    background-image: url(chrome://userchrome/content/devtools/command-console.svg);
+  background-image: url(chrome://userchrome/content/devtools/command-console.svg);
 }
 
 menuitem#menu_responsiveUI:not([checked="true"])::before {
-    background-image: url(chrome://userchrome/content/devtools/command-responsivemode.svg) !important;
-    background-color: transparent !important;
-    fill-opacity: 0 !important;
-    border: none !important;
-    border-radius: revert !important;
+  background-image: url(chrome://userchrome/content/devtools/command-responsivemode.svg) !important;
+  background-color: transparent !important;
+  fill-opacity: 0 !important;
+  border: none !important;
+  border-radius: revert !important;
 }
 
 menuitem#menu_eyedropper::before {
-    background-image: url(chrome://userchrome/content/devtools/command-eyedropper.svg);
+  background-image: url(chrome://userchrome/content/devtools/command-eyedropper.svg);
 }
 
 menuitem#menu_pageSource::before {
-    background-image: url(chrome://userchrome/content/devtools/tool-dom.svg);
+  background-image: url(chrome://userchrome/content/devtools/tool-dom.svg);
 }
 
 menuitem#extensionsForDevelopers::before {
-    background-image: url(chrome://userchrome/content/mozilla-logo.svg);
+  background-image: url(chrome://userchrome/content/mozilla-logo.svg);
 }
 
 menuitem#enableDeveloperTools::before {
-    background-image: url(chrome://userchrome/content/skin/developer.svg);
+  background-image: url(chrome://userchrome/content/skin/developer.svg);
 }
 
 #discardTab::before,
 #menu_FileQuitItem::before,
 #syncedTabsOpenAllUnloaded::before {
-    background-image: url(chrome://userchrome/content/skin/quit.svg);
+  background-image: url(chrome://userchrome/content/skin/quit.svg);
 }
 
 /* menuitems added by recentlyClosedTabsContextMenu.uc.js */
 /* these are for the tab context menu's submenus */
 #historyUndoWindowMenu::before,
 .recently-closed-windows-menu::before {
-    background-image: url(chrome://userchrome/content/skin/window.svg);
+  background-image: url(chrome://userchrome/content/skin/window.svg);
 }
 
 #historyUndoMenu::before,
 .recently-closed-tabs-menu::before {
-    background-image: url(chrome://userchrome/content/skin/tab.svg);
+  background-image: url(chrome://userchrome/content/skin/tab.svg);
 }
 
 :is(.recently-closed-windows-menu, .recently-closed-tabs-menu, #historyUndoMenu, #historyUndoWindowMenu)
-    menuitem.restoreallitem::before {
-    background-image: url(chrome://userchrome/content/skin/restore-session.svg);
+  menuitem.restoreallitem::before {
+  background-image: url(chrome://userchrome/content/skin/restore-session.svg);
 }
 
 #recently-closed-restore::before {
-    background-image: url(chrome://userchrome/content/skin/restore-session.svg);
+  background-image: url(chrome://userchrome/content/skin/restore-session.svg);
 }
 
 /* for the context menu that appears when you right-click a recently closed tab/window item in the history panel */
 #recently-closed-restore-in-new-window::before {
-    background-image: url(chrome://userchrome/content/skin/new-window.svg);
+  background-image: url(chrome://userchrome/content/skin/new-window.svg);
 }
 
 #recently-closed-restore-in-new-private-window::before {
-    background-image: url(chrome://userchrome/content/skin/new-private.svg);
+  background-image: url(chrome://userchrome/content/skin/new-private.svg);
 }
 
 #recently-closed-remove-from-list::before {
-    background-image: url(chrome://userchrome/content/delete.svg);
+  background-image: url(chrome://userchrome/content/delete.svg);
 }
 
 #recently-closed-remove-from-history::before {
-    background-image: url(chrome://userchrome/content/skin/forget.svg);
+  background-image: url(chrome://userchrome/content/skin/forget.svg);
 }
 
 #recently-closed-bookmark::before {
-    background-image: url(chrome://userchrome/content/skin/add-bookmark.svg);
+  background-image: url(chrome://userchrome/content/skin/add-bookmark.svg);
 }
 
 :is(#context_sendTabToDevice, #context-sendlinktodevice, #context-sendpagetodevice)::before {
-    background-image: url(chrome://userchrome/content/skin/send-to-device.svg);
+  background-image: url(chrome://userchrome/content/skin/send-to-device.svg);
 }
 
 :is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
-    .sendtab-target:is([clientType="phone"], [clientType="mobile"])::before {
-    background-image: url(chrome://userchrome/content/skin/device-phone.svg);
+  .sendtab-target:is([clientType="phone"], [clientType="mobile"])::before {
+  background-image: url(chrome://userchrome/content/skin/device-phone.svg);
 }
 
 :is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
-    .sendtab-target[clientType="tablet"]::before {
-    background-image: url(chrome://userchrome/content/skin/device-tablet.svg);
+  .sendtab-target[clientType="tablet"]::before {
+  background-image: url(chrome://userchrome/content/skin/device-tablet.svg);
 }
 
 :is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
-    .sendtab-target[clientType="desktop"]::before {
-    background-image: url(chrome://userchrome/content/skin/device-desktop.svg);
+  .sendtab-target[clientType="desktop"]::before {
+  background-image: url(chrome://userchrome/content/skin/device-desktop.svg);
 }
 
 :is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
-    .sendtab-target[clientType="tv"]::before {
-    background-image: url(chrome://userchrome/content/skin/device-tv.svg);
+  .sendtab-target[clientType="tv"]::before {
+  background-image: url(chrome://userchrome/content/skin/device-tv.svg);
 }
 
 :is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
-    .sendtab-target[clientType="vr"]::before {
-    background-image: url(chrome://userchrome/content/skin/device-vr.svg);
+  .sendtab-target[clientType="vr"]::before {
+  background-image: url(chrome://userchrome/content/skin/device-vr.svg);
 }
 
 :is(#contentAreaContextMenu, #toolbar-context-menu)
-    menu[label="Bitwarden"]
-    :is(menu, menuitem)[id$="-menuitem-_autofill"]::before {
-    background-image: url(chrome://userchrome/content/formfill.svg);
+  menu[label="Bitwarden"]
+  :is(menu, menuitem)[id$="-menuitem-_autofill"]::before {
+  background-image: url(chrome://userchrome/content/formfill.svg);
 }
 
 menuitem#manage-saved-logins::before,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
-    menu[label="Bitwarden"]
-    :is(menu, menuitem)[id$="-menuitem-_copy-username"]::before {
-    background-image: url(chrome://userchrome/content/fxa/avatar-empty.svg);
+  menu[label="Bitwarden"]
+  :is(menu, menuitem)[id$="-menuitem-_copy-username"]::before {
+  background-image: url(chrome://userchrome/content/fxa/avatar-empty.svg);
 }
 
 menu#fill-login::before,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
-    menu[label="Bitwarden"]
-    :is(menu, menuitem)[id$="-menuitem-_copy-password"]::before {
-    background-image: url(chrome://userchrome/content/skin/login.svg);
+  menu[label="Bitwarden"]
+  :is(menu, menuitem)[id$="-menuitem-_copy-password"]::before {
+  background-image: url(chrome://userchrome/content/skin/login.svg);
 }
 
 menuitem#fill-login-generated-password::before,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
-    menu[label="Bitwarden"]
-    :is(menu, menuitem)[id$="-menuitem-_generate-password"]::before {
-    background-image: url(chrome://userchrome/content/generate-password.svg);
+  menu[label="Bitwarden"]
+  :is(menu, menuitem)[id$="-menuitem-_generate-password"]::before {
+  background-image: url(chrome://userchrome/content/generate-password.svg);
 }
 
 :is(#contentAreaContextMenu, #toolbar-context-menu)
-    menu[label="Bitwarden"]
-    :is(menu, menuitem)[id$="-menuitem-_copy-identifier"]::before {
-    background-image: url(chrome://userchrome/content/devtools/tool-dom.svg);
+  menu[label="Bitwarden"]
+  :is(menu, menuitem)[id$="-menuitem-_copy-identifier"]::before {
+  background-image: url(chrome://userchrome/content/devtools/tool-dom.svg);
 }
 
 :is(menu, menuitem)[id^="multithreaded-download-manager"]:is([label="Open in new tab"], [label="Open in new window"], [label="Open in sidebar"])
-    .menu-iconic-left {
-    display: none;
+  .menu-iconic-left {
+  display: none;
 }
 
 :is(menu, menuitem)[id^="multithreaded-download-manager"][label="Open in new tab"]::before {
-    background-image: url(chrome://userchrome/content/skin/tab.svg);
+  background-image: url(chrome://userchrome/content/skin/tab.svg);
 }
 
 :is(menu, menuitem)[id^="multithreaded-download-manager"][label="Open in new window"]::before {
-    background-image: url(chrome://userchrome/content/skin/window.svg);
+  background-image: url(chrome://userchrome/content/skin/window.svg);
 }
 
 :is(menu, menuitem)[id^="multithreaded-download-manager"][label="Open in sidebar"]::before {
-    background-image: url(chrome://userchrome/content/skin/sidebars-right.svg);
+  background-image: url(chrome://userchrome/content/skin/sidebars-right.svg);
 }
 
 #userScriptsMenu::before {
-    background-image: url(chrome://userchrome/content/material/javascript.svg);
+  background-image: url(chrome://userchrome/content/material/javascript.svg);
 }
 
 #toggle_PersonalToolbar::before {
-    background-image: url(chrome://browser/skin/places/bookmarksToolbar.svg);
+  background-image: url(chrome://browser/skin/places/bookmarksToolbar.svg);
 }
 
 :is(#spell-add-to-dictionary, #spell-add-dictionaries, #spell-add-dictionaries-main)::before {
-    background-image: url(chrome://userchrome/content/skin/readerMode.svg);
+  background-image: url(chrome://userchrome/content/skin/readerMode.svg);
 }
 
 #spell-dictionaries::before {
-    background-image: url(chrome://userchrome/content/places/defaultFavicon.svg);
+  background-image: url(chrome://userchrome/content/places/defaultFavicon.svg);
 }
 
 #menu_customizeToolbars::before,
 menuitem.viewCustomizeToolbar::before,
 #addon_darkreader_org-menuitem-_DarkReader-switchEngine:not(.menuitem-iconic)::before {
-    background-image: url(chrome://browser/skin/customize.svg);
+  background-image: url(chrome://browser/skin/customize.svg);
 }
 
 #_testpilot-containers-menuitem-_hide-container:not(.menuitem-iconic, .menu-iconic)::before {
-    background-image: url(chrome://userchrome/content/hide-password.svg);
+  background-image: url(chrome://userchrome/content/hide-password.svg);
 }
 
 #_testpilot-containers-menuitem-_move-to-new-window-container:not(.menuitem-iconic, .menu-iconic)::before {
-    background-image: url(chrome://userchrome/content/skin/new-window.svg);
+  background-image: url(chrome://userchrome/content/skin/new-window.svg);
 }
 
 menuitem:is(.customize-context-removeFromToolbar, .customize-context-removeFromPanel)::before {
-    background-image: url(chrome://userchrome/content/undo.svg);
+  background-image: url(chrome://userchrome/content/undo.svg);
 }
 
 menuitem.customize-context-moveToToolbar::before {
-    background-image: url(chrome://userchrome/content/material/unpin-315.svg);
+  background-image: url(chrome://userchrome/content/material/unpin-315.svg);
 }
 
 menuitem.customize-context-moveToPanel::before {
-    background-image: url(chrome://userchrome/content/material/pin-315.svg);
+  background-image: url(chrome://userchrome/content/material/pin-315.svg);
 }
 
 menuitem.customize-context-addToToolbar::before {
-    background-image: url(chrome://userchrome/content/add.svg);
+  background-image: url(chrome://userchrome/content/add.svg);
 }
 
 menuitem.customize-context-addToPanel::before {
-    background-image: url(chrome://userchrome/content/chevron.svg);
+  background-image: url(chrome://userchrome/content/chevron.svg);
 }
 
 menuitem:is(.customize-context-manageExtension, .pageActionContextMenuItem.manageExtensionItem)::before {
-    background-image: url(chrome://userchrome/content/skin/developer.svg);
+  background-image: url(chrome://userchrome/content/skin/developer.svg);
 }
 
 menu.customize-context-debugExtension::before {
-    background-image: url(chrome://userchrome/content/devtools/debugging-workers.svg);
+  background-image: url(chrome://userchrome/content/devtools/debugging-workers.svg);
 }
 
 menuitem.customize-context-Manifest::before {
-    background-image: url(chrome://userchrome/content/devtools/tool-styleeditor.svg);
+  background-image: url(chrome://userchrome/content/devtools/tool-styleeditor.svg);
 }
 
 menuitem.customize-context-Inspector::before {
-    background-image: url(chrome://userchrome/content/devtools/tool-inspector.svg);
+  background-image: url(chrome://userchrome/content/devtools/tool-inspector.svg);
 }
 
 menuitem.customize-context-ViewSource::before {
-    background-image: url(chrome://userchrome/content/material/places/folder-source.svg);
+  background-image: url(chrome://userchrome/content/material/places/folder-source.svg);
 }
 
 menu.customize-context-ViewDocs-Submenu::before {
-    background-image: url(chrome://userchrome/content/document.svg);
+  background-image: url(chrome://userchrome/content/document.svg);
 }
 
 menuitem.customize-context-BrowserAction::before {
-    background-image: url(chrome://userchrome/content/devtools/command-noautohide.svg);
+  background-image: url(chrome://userchrome/content/devtools/command-noautohide.svg);
 }
 
 menuitem.customize-context-PageAction::before {
-    background-image: url(chrome://userchrome/content/skin/readerMode.svg);
+  background-image: url(chrome://userchrome/content/skin/readerMode.svg);
 }
 
 menuitem.customize-context-SidebarAction::before {
-    background-image: url(chrome://userchrome/content/skin/sidebars.svg);
+  background-image: url(chrome://userchrome/content/skin/sidebars.svg);
 }
 
 menuitem.customize-context-Options::before {
-    background-image: url(chrome://userchrome/content/settings.svg);
+  background-image: url(chrome://userchrome/content/settings.svg);
 }
 
 menuitem:is(.customize-context-removeExtension, .pageActionContextMenuItem.removeExtensionItem)::before {
-    background-image: url(chrome://userchrome/content/material/extension-blocked.svg);
+  background-image: url(chrome://userchrome/content/material/extension-blocked.svg);
 }
 
 menuitem.customize-context-reportExtension::before {
-    background-image: url(chrome://devtools/skin/images/alert.svg);
+  background-image: url(chrome://devtools/skin/images/alert.svg);
 }
 
 /* mirror some of the icons for RTL languages/layouts, e.g. icons with arrows or other directional implications */
@@ -1561,11 +1559,11 @@ menuitem.customize-context-reportExtension::before {
 :is(#context-redo, #menu_redo, #undobookmarksmenuRedo):-moz-locale-dir(ltr)::before,
 menuitem:is(.customize-context-removeFromToolbar, .customize-context-removeFromPanel):-moz-locale-dir(rtl)::before,
 .textbox-contextmenu
-    menuitem:is([anonid="paste-and-go"], #paste-and-go, .searchbar-paste-and-search):-moz-locale-dir(rtl)::before,
+  menuitem:is([anonid="paste-and-go"], #paste-and-go, .searchbar-paste-and-search):-moz-locale-dir(rtl)::before,
 .textbox-contextmenu menuitem[data-l10n-id="text-action-undo"]:-moz-locale-dir(rtl)::before,
 .textbox-contextmenu menuitem[data-l10n-id="text-action-redo"]:-moz-locale-dir(ltr)::before,
 #placesContext_deleteHost:-moz-locale-dir(rtl)::before,
 menuitem#sanitizeItem:-moz-locale-dir(rtl)::before,
 .downloadRemoveFromHistoryMenuItem:-moz-locale-dir(rtl)::before {
-    transform: scaleX(-1);
+  transform: scaleX(-1);
 }

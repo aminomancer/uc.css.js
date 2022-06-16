@@ -3,20 +3,49 @@
 // @version        1.4.0
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
-// @description    Adds a new context menu when right-clicking an add-on's button in the toolbar or urlbar, any time the "Manage Extension" and "Remove Extension" items are available. The new "Debug Extension" menu contains several items: "Extension Manifest" opens the extension's manifest directly in a new tab. Aside from reading the manifest, from there you can also view the whole contents of the extension within Firefox by removing "/manifest.json" from the URL. In the "View Documents" submenu there are 4 options for viewing, debugging and modding an addon's main HTML contents. "Browser Action" opens the extension's toolbar button popup URL (if it has one) in a regular browser window. The popup URL is whatever document it displays in its panel view, the popup that opens when you click the addon's toolbar button. This is the one you're most likely to want to modify with CSS. "Page Action" opens the extension's page action popup URL in the same manner. A page action is an icon on the right side of the urlbar whose behavior is specific to the page in the active tab. "Sidebar Action" opens the extension's sidebar document, so this would let you debug Tree Style Tab for example. "Extension Options" opens the document that the extension uses for configuration, also in a regular browser window. This could be the page that displays in its submenu on about:addons, or a separate page. "Inspect Extension" opens a devtools tab targeting the extension background. This is the same page you'd get if you opened about:debugging and clicked the "Inspect" button next to an extension. "View Source" opens the addon's .xpi archive. And, as you'd expect, "Copy ID" copies the extension's ID to your clipboard, while "Copy URL" copies the extension's base URL, so it can be used in CSS rules like @-moz-document. The menu items' labels are not localized automatically since Firefox doesn't include any similar strings. If you need to change the language or anything, modify the strings below under "static config." As usual, icons for the new menu are included in uc-context-menu-icons.css
+// @description    Adds a new context menu when right-clicking an add-on's
+// button in the toolbar or urlbar, any time the "Manage Extension" and "Remove
+// Extension" items are available. The new "Debug Extension" menu contains
+// several items: "Extension Manifest" opens the extension's manifest directly
+// in a new tab. Aside from reading the manifest, from there you can also view
+// the whole contents of the extension within Firefox by removing
+// "/manifest.json" from the URL. In the "View Documents" submenu there are 4
+// options for viewing, debugging and modding an addon's main HTML contents.
+// "Browser Action" opens the extension's toolbar button popup URL (if it has
+// one) in a regular browser window. The popup URL is whatever document it
+// displays in its panel view, the popup that opens when you click the addon's
+// toolbar button. This is the one you're most likely to want to modify with
+// CSS. "Page Action" opens the extension's page action popup URL in the same
+// manner. A page action is an icon on the right side of the urlbar whose
+// behavior is specific to the page in the active tab. "Sidebar Action" opens
+// the extension's sidebar document, so this would let you debug Tree Style Tab
+// for example. "Extension Options" opens the document that the extension uses
+// for configuration, also in a regular browser window. This could be the page
+// that displays in its submenu on about:addons, or a separate page. "Inspect
+// Extension" opens a devtools tab targeting the extension background. This is
+// the same page you'd get if you opened about:debugging and clicked the
+// "Inspect" button next to an extension. "View Source" opens the addon's .xpi
+// archive. And, as you'd expect, "Copy ID" copies the extension's ID to your
+// clipboard, while "Copy URL" copies the extension's base URL, so it can be
+// used in CSS rules like @-moz-document. The menu items' labels are not
+// localized automatically since Firefox doesn't include any similar strings. If
+// you need to change the language or anything, modify the strings below under
+// "static config." As usual, icons for the new menu are included in
+// uc-context-menu-icons.css
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
 class DebugExtension {
-  // you can modify the menu items' labels and access keys here, e.g. if you prefer another language.
-  // an access key is the letter highlighted in a menuitem's label.
-  // if the letter highlighted is "D" for example, and you press D on your keyboard
-  // while the context menu is open, it will automatically select the menu item with that access key.
-  // if two menu items have the same access key and are both visible,
-  // then instead of selecting one menu item it will just cycle between the two.
-  // however, the access key does not need to be a character in the label.
-  // if the access key isn't in the label, then instead of underlining the letter in the label,
-  // it will add the access key to the end of the label in parentheses.
+  // you can modify the menu items' labels and access keys here, e.g. if you
+  // prefer another language. an access key is the letter highlighted in a
+  // menuitem's label. if the letter highlighted is "D" for example, and you
+  // press D on your keyboard while the context menu is open, it will
+  // automatically select the menu item with that access key. if two menu items
+  // have the same access key and are both visible, then instead of selecting
+  // one menu item it will just cycle between the two. however, the access key
+  // does not need to be a character in the label. if the access key isn't in
+  // the label, then instead of underlining the letter in the label, it will add
+  // the access key to the end of the label in parentheses.
   // e.g. "Debug Extension (Q)" instead of "_D_ebug Extension".
   static config = {
     menuLabel: "Debug Extension", // menu label
@@ -167,7 +196,8 @@ class DebugExtension {
     return menu;
   }
   /**
-   * make a menu item that opens a given type of page, with label & accesskey corresponding to those defined in the "config" static property
+   * make a menu item that opens a given type of page, with label & accesskey
+   * corresponding to those defined in the "config" static property
    * @param {string} type (which menuitem to make)
    * @param {object} popup (where to put the menuitem)
    * @returns a menuitem DOM node
@@ -216,7 +246,8 @@ class DebugExtension {
   // click callback
   onCommand(event, popup, type) {
     let id = this.getExtensionId(popup);
-    let extension = WebExtensionPolicy.getByID(id).extension; // this contains information about an extension with a given ID.
+    // this contains information about an extension with a given ID.
+    let extension = WebExtensionPolicy.getByID(id).extension;
     // use extension's principal if it's available.
     let triggeringPrincipal = extension.principal;
     let url;
@@ -239,7 +270,8 @@ class DebugExtension {
         break;
       case "Inspector":
         url = `about:devtools-toolbox?id=${encodeURIComponent(id)}&type=extension`;
-        triggeringPrincipal = Services.scriptSecurityManager.getSystemPrincipal(); // use the system principal for about:devtools-toolbox
+        // use the system principal for about:devtools-toolbox
+        triggeringPrincipal = Services.scriptSecurityManager.getSystemPrincipal();
         break;
       case "ViewSource":
         this.openArchive(id);
@@ -259,8 +291,8 @@ class DebugExtension {
         Services.io.newURI(url),
         {}
       );
-    // whether to open in the current tab or a new tab.
-    // only opens in the current tab if the current tab is on the new tab page or home page.
+    // whether to open in the current tab or a new tab. only opens in the
+    // current tab if the current tab is on the new tab page or home page.
     let where = new RegExp(`(${BROWSER_NEW_TAB_URL}|${HomePage.get(window)})`, "i").test(
       gBrowser.currentURI.spec
     )
@@ -282,10 +314,10 @@ class DebugExtension {
     dir.append(id + ".xpi");
     dir.launch();
   }
-  // modify the internal functions that updates the visibility
-  // of the built-in "remove extension," "manage extension" items, etc.
-  // that's based on whether the button that was clicked is an extension or not,
-  // so it also updates the visibility of our menu by the same parameter.
+  // modify the internal functions that updates the visibility of the built-in
+  // "remove extension," "manage extension" items, etc. that's based on whether
+  // the button that was clicked is an extension or not, so it also updates the
+  // visibility of our menu by the same parameter.
   setupUpdate() {
     eval(
       `ToolbarContextMenu.updateExtension = async function ` +

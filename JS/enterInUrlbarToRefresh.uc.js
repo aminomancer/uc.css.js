@@ -24,140 +24,138 @@
 // ==/UserScript==
 
 (function () {
-    function init() {
-        let source = gURLBar._loadURL.toSource();
-        if (source.startsWith("(function")) return;
-        eval(
-            `gURLBar._loadURL = function ` +
-                source
-                    .replace(
-                        /(SitePermissions\.clearTemporaryBlockPermissions\(browser\)\;)/,
-                        `$1\n        params.isReload = true;`
-                    )
-                    .replace(
-                        /(this\.window\.openTrustedLinkIn\(url, openUILinkWhere, params\);)/,
-                        `if (params.isReload) {\n        delete params.isReload;\n        this.openLinkWithForceReload(url, params);\n      } else {\n        $1\n      }`
-                    )
-        );
-        /**
-         * Open a url in the current tab and ensure it reloads rather than anchor navigation.
-         *
-         * @param {string} url
-         *   The URL to open.
-         * @param {object} params
-         *   The parameters related to how and where the result will be opened.
-         *   Further supported paramters are listed in utilityOverlay.js#openUILinkIn.
-         */
-        gURLBar.openLinkWithForceReload = function (url, params = {}) {
-            if (!url) {
-                return;
-            }
-            if (!params.triggeringPrincipal) {
-                params.triggeringPrincipal = Services.scriptSecurityManager.getSystemPrincipal();
-            }
-            params.fromChrome = params.fromChrome ?? true;
+  function init() {
+    let source = gURLBar._loadURL.toSource();
+    if (source.startsWith("(function")) return;
+    eval(
+      `gURLBar._loadURL = function ` +
+        source
+          .replace(
+            /(SitePermissions\.clearTemporaryBlockPermissions\(browser\)\;)/,
+            `$1\n        params.isReload = true;`
+          )
+          .replace(
+            /(this\.window\.openTrustedLinkIn\(url, openUILinkWhere, params\);)/,
+            `if (params.isReload) {\n        delete params.isReload;\n        this.openLinkWithForceReload(url, params);\n      } else {\n        $1\n      }`
+          )
+    );
+    /**
+     * Open a url in the current tab and ensure it reloads rather than anchor navigation.
+     *
+     * @param {string} url
+     *   The URL to open.
+     * @param {object} params
+     *   The parameters related to how and where the result will be opened.
+     *   Further supported paramters are listed in utilityOverlay.js#openUILinkIn.
+     */
+    gURLBar.openLinkWithForceReload = function (url, params = {}) {
+      if (!url) {
+        return;
+      }
+      if (!params.triggeringPrincipal) {
+        params.triggeringPrincipal = Services.scriptSecurityManager.getSystemPrincipal();
+      }
+      params.fromChrome = params.fromChrome ?? true;
 
-            let aAllowThirdPartyFixup = params.allowThirdPartyFixup;
-            let aPostData = params.postData;
-            let aReferrerInfo = params.referrerInfo
-                ? params.referrerInfo
-                : new this.window.ReferrerInfo(Ci.nsIReferrerInfo.EMPTY, true, null);
-            let aAllowInheritPrincipal = !!params.allowInheritPrincipal;
-            let aForceAllowDataURI = params.forceAllowDataURI;
-            let aIsPrivate = params.private;
-            let aAllowPopups = !!params.allowPopups;
-            let aUserContextId = params.userContextId;
-            let aIndicateErrorPageLoad = params.indicateErrorPageLoad;
-            let aPrincipal = params.originPrincipal;
-            let aStoragePrincipal = params.originStoragePrincipal;
-            let aTriggeringPrincipal = params.triggeringPrincipal;
-            let aCsp = params.csp;
-            let aForceAboutBlankViewerInCurrent = params.forceAboutBlankViewerInCurrent;
-            let aResolveOnContentBrowserReady = params.resolveOnContentBrowserCreated;
+      let aAllowThirdPartyFixup = params.allowThirdPartyFixup;
+      let aPostData = params.postData;
+      let aReferrerInfo = params.referrerInfo
+        ? params.referrerInfo
+        : new this.window.ReferrerInfo(Ci.nsIReferrerInfo.EMPTY, true, null);
+      let aAllowInheritPrincipal = !!params.allowInheritPrincipal;
+      let aForceAllowDataURI = params.forceAllowDataURI;
+      let aIsPrivate = params.private;
+      let aAllowPopups = !!params.allowPopups;
+      let aUserContextId = params.userContextId;
+      let aIndicateErrorPageLoad = params.indicateErrorPageLoad;
+      let aPrincipal = params.originPrincipal;
+      let aStoragePrincipal = params.originStoragePrincipal;
+      let aTriggeringPrincipal = params.triggeringPrincipal;
+      let aCsp = params.csp;
+      let aForceAboutBlankViewerInCurrent = params.forceAboutBlankViewerInCurrent;
+      let aResolveOnContentBrowserReady = params.resolveOnContentBrowserCreated;
 
-            let w = this.window;
+      let w = this.window;
 
-            function useOAForPrincipal(principal) {
-                if (principal && principal.isContentPrincipal) {
-                    let attrs = {
-                        userContextId: aUserContextId,
-                        privateBrowsingId:
-                            aIsPrivate || (w && PrivateBrowsingUtils.isWindowPrivate(w)),
-                        firstPartyDomain: principal.originAttributes.firstPartyDomain,
-                    };
-                    return Services.scriptSecurityManager.principalWithOA(principal, attrs);
-                }
-                return principal;
-            }
-            aPrincipal = useOAForPrincipal(aPrincipal);
-            aStoragePrincipal = useOAForPrincipal(aStoragePrincipal);
-            aTriggeringPrincipal = useOAForPrincipal(aTriggeringPrincipal);
+      function useOAForPrincipal(principal) {
+        if (principal && principal.isContentPrincipal) {
+          let attrs = {
+            userContextId: aUserContextId,
+            privateBrowsingId: aIsPrivate || (w && PrivateBrowsingUtils.isWindowPrivate(w)),
+            firstPartyDomain: principal.originAttributes.firstPartyDomain,
+          };
+          return Services.scriptSecurityManager.principalWithOA(principal, attrs);
+        }
+        return principal;
+      }
+      aPrincipal = useOAForPrincipal(aPrincipal);
+      aStoragePrincipal = useOAForPrincipal(aStoragePrincipal);
+      aTriggeringPrincipal = useOAForPrincipal(aTriggeringPrincipal);
 
-            w.focus();
+      w.focus();
 
-            let uriObj;
-            let targetBrowser = params.targetBrowser || w.gBrowser.selectedBrowser;
-            try {
-                uriObj = Services.io.newURI(url);
-            } catch (e) {}
+      let uriObj;
+      let targetBrowser = params.targetBrowser || w.gBrowser.selectedBrowser;
+      try {
+        uriObj = Services.io.newURI(url);
+      } catch (e) {}
 
-            let flags = Ci.nsIWebNavigation.LOAD_FLAGS_IS_REFRESH;
-            if (aAllowThirdPartyFixup) {
-                flags |= Ci.nsIWebNavigation.LOAD_FLAGS_ALLOW_THIRD_PARTY_FIXUP;
-                flags |= Ci.nsIWebNavigation.LOAD_FLAGS_FIXUP_SCHEME_TYPOS;
-            }
-            if (!aAllowInheritPrincipal) {
-                flags |= Ci.nsIWebNavigation.LOAD_FLAGS_DISALLOW_INHERIT_PRINCIPAL;
-            }
-            if (aAllowPopups) {
-                flags |= Ci.nsIWebNavigation.LOAD_FLAGS_ALLOW_POPUPS;
-            }
-            if (aIndicateErrorPageLoad) {
-                flags |= Ci.nsIWebNavigation.LOAD_FLAGS_ERROR_LOAD_CHANGES_RV;
-            }
-            if (aForceAllowDataURI) {
-                flags |= Ci.nsIWebNavigation.LOAD_FLAGS_FORCE_ALLOW_DATA_URI;
-            }
-            let { URI_INHERITS_SECURITY_CONTEXT } = Ci.nsIProtocolHandler;
-            if (
-                aForceAboutBlankViewerInCurrent &&
-                (!uriObj || this.window.doGetProtocolFlags(uriObj) & URI_INHERITS_SECURITY_CONTEXT)
-            ) {
-                targetBrowser.createAboutBlankContentViewer(aPrincipal, aStoragePrincipal);
-            }
+      let flags = Ci.nsIWebNavigation.LOAD_FLAGS_IS_REFRESH;
+      if (aAllowThirdPartyFixup) {
+        flags |= Ci.nsIWebNavigation.LOAD_FLAGS_ALLOW_THIRD_PARTY_FIXUP;
+        flags |= Ci.nsIWebNavigation.LOAD_FLAGS_FIXUP_SCHEME_TYPOS;
+      }
+      if (!aAllowInheritPrincipal) {
+        flags |= Ci.nsIWebNavigation.LOAD_FLAGS_DISALLOW_INHERIT_PRINCIPAL;
+      }
+      if (aAllowPopups) {
+        flags |= Ci.nsIWebNavigation.LOAD_FLAGS_ALLOW_POPUPS;
+      }
+      if (aIndicateErrorPageLoad) {
+        flags |= Ci.nsIWebNavigation.LOAD_FLAGS_ERROR_LOAD_CHANGES_RV;
+      }
+      if (aForceAllowDataURI) {
+        flags |= Ci.nsIWebNavigation.LOAD_FLAGS_FORCE_ALLOW_DATA_URI;
+      }
+      let { URI_INHERITS_SECURITY_CONTEXT } = Ci.nsIProtocolHandler;
+      if (
+        aForceAboutBlankViewerInCurrent &&
+        (!uriObj || this.window.doGetProtocolFlags(uriObj) & URI_INHERITS_SECURITY_CONTEXT)
+      ) {
+        targetBrowser.createAboutBlankContentViewer(aPrincipal, aStoragePrincipal);
+      }
 
-            targetBrowser.loadURI(url, {
-                triggeringPrincipal: aTriggeringPrincipal,
-                csp: aCsp,
-                flags,
-                referrerInfo: aReferrerInfo,
-                postData: aPostData,
-                userContextId: aUserContextId,
-            });
-            if (aResolveOnContentBrowserReady) {
-                aResolveOnContentBrowserReady(targetBrowser);
-            }
+      targetBrowser.loadURI(url, {
+        triggeringPrincipal: aTriggeringPrincipal,
+        csp: aCsp,
+        flags,
+        referrerInfo: aReferrerInfo,
+        postData: aPostData,
+        userContextId: aUserContextId,
+      });
+      if (aResolveOnContentBrowserReady) {
+        aResolveOnContentBrowserReady(targetBrowser);
+      }
 
-            let focusUrlBar =
-                w.document.activeElement == w.gURLBar.inputField && w.isBlankPageURL(url);
-            if (
-                !params.avoidBrowserFocus &&
-                !focusUrlBar &&
-                targetBrowser == w.gBrowser.selectedBrowser
-            ) {
-                targetBrowser.focus();
-            }
-        };
-    }
+      let focusUrlBar = w.document.activeElement == w.gURLBar.inputField && w.isBlankPageURL(url);
+      if (
+        !params.avoidBrowserFocus &&
+        !focusUrlBar &&
+        targetBrowser == w.gBrowser.selectedBrowser
+      ) {
+        targetBrowser.focus();
+      }
+    };
+  }
 
-    if (gBrowserInit.delayedStartupFinished) init();
-    else {
-        let delayedListener = (subject, topic) => {
-            if (topic == "browser-delayed-startup-finished" && subject == window) {
-                Services.obs.removeObserver(delayedListener, topic);
-                init();
-            }
-        };
-        Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
-    }
+  if (gBrowserInit.delayedStartupFinished) init();
+  else {
+    let delayedListener = (subject, topic) => {
+      if (topic == "browser-delayed-startup-finished" && subject == window) {
+        Services.obs.removeObserver(delayedListener, topic);
+        init();
+      }
+    };
+    Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
+  }
 })();

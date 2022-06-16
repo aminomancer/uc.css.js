@@ -3,5 +3,5 @@ and when you update you can preserve your modifications by just updating everyth
 
 /* add a dummy rule so this will be loaded by the style editor on any page. */
 :root {
-    --uc-dummy-custom-property: initial;
+  --uc-dummy-custom-property: initial;
 }

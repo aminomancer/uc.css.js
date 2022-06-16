@@ -8,333 +8,326 @@
 
 @-moz-document regexp("^moz-extension://.*/sidebar/index.html.*")
 {
-    :root[uc-extension-id="notes@mozilla.com"] {
-        --main-bg-color: var(--in-content-bg-dark) !important;
-        --main-offset-bg-color: var(--in-content-box-background) !important;
-        --main-bg-hover-color: var(--in-content-button-background-hover) !important;
-        --main-bg-focus-color: var(--in-content-button-background-hover) !important;
-        --main-bg-active-color: var(--in-content-button-background-active) !important;
-        --ck-color-list-item-background-active: var(
-            --in-content-primary-button-background
-        ) !important;
-        --primary-font-color: var(--plaintext-color) !important;
-        --secondary-font-color: var(--ui-text-60) !important;
-        --border-color: var(--in-content-box-border-color) !important;
-        --solid-border-color: color-mix(
-            in srgb,
-            white 25%,
-            var(--in-content-box-background)
-        ) !important;
-        --solid-border-color-bright: color-mix(
-            in srgb,
-            white 40%,
-            var(--in-content-box-background)
-        ) !important;
-        --ck-color-dropdown-panel-border: var(--solid-border-color) !important;
-        --ck-inner-shadow: 2px 2px 3px var(--ck-color-shadow-inner) inset;
-        --ck-drop-shadow: 0 0 2px 1px var(--ck-color-shadow-drop) !important;
-        --ck-border-radius: var(--general-button-border-radius) !important;
-        --ck-ui-component-min-height: var(--subviewbutton-height) !important;
-        --ck-spacing-small: 4px !important;
-        --ck-font-face: sans-serif !important;
+  :root[uc-extension-id="notes@mozilla.com"] {
+    --main-bg-color: var(--in-content-bg-dark) !important;
+    --main-offset-bg-color: var(--in-content-box-background) !important;
+    --main-bg-hover-color: var(--in-content-button-background-hover) !important;
+    --main-bg-focus-color: var(--in-content-button-background-hover) !important;
+    --main-bg-active-color: var(--in-content-button-background-active) !important;
+    --ck-color-list-item-background-active: var(--in-content-primary-button-background) !important;
+    --primary-font-color: var(--plaintext-color) !important;
+    --secondary-font-color: var(--ui-text-60) !important;
+    --border-color: var(--in-content-box-border-color) !important;
+    --solid-border-color: color-mix(
+      in srgb,
+      white 25%,
+      var(--in-content-box-background)
+    ) !important;
+    --solid-border-color-bright: color-mix(
+      in srgb,
+      white 40%,
+      var(--in-content-box-background)
+    ) !important;
+    --ck-color-dropdown-panel-border: var(--solid-border-color) !important;
+    --ck-inner-shadow: 2px 2px 3px var(--ck-color-shadow-inner) inset;
+    --ck-drop-shadow: 0 0 2px 1px var(--ck-color-shadow-drop) !important;
+    --ck-border-radius: var(--general-button-border-radius) !important;
+    --ck-ui-component-min-height: var(--subviewbutton-height) !important;
+    --ck-spacing-small: 4px !important;
+    --ck-font-face: sans-serif !important;
+  }
+
+  :root[uc-extension-id="notes@mozilla.com"] textarea::selection,
+  :root[uc-extension-id="notes@mozilla.com"] ::selection {
+    color: var(--content-selection-color) !important;
+    background-color: var(--content-selection-bgcolor) !important;
+  }
+
+  :root[uc-extension-id="notes@mozilla.com"] textarea:-moz-window-inactive::selection,
+  :root[uc-extension-id="notes@mozilla.com"] :-moz-window-inactive::selection {
+    background-color: var(--content-selection-bgcolor-disabled) !important;
+  }
+
+  :root[uc-extension-id="notes@mozilla.com"]
+    :is(:root, body, .ck.ck-reset_all, .ck.ck-reset_all *, code) {
+    font-family: var(--ck-font-face) !important;
+  }
+
+  :root[uc-extension-id="notes@mozilla.com"] #notes .ck-editor__editable :is(ul, ol) > li {
+    line-height: 2rem !important;
+  }
+
+  :root[uc-extension-id="notes@mozilla.com"] header,
+  :root[uc-extension-id="notes@mozilla.com"] #notes .ck-toolbar .ck-button__label,
+  :root[uc-extension-id="notes@mozilla.com"] button,
+  :root[uc-extension-id="notes@mozilla.com"] ::file-selector-button,
+  :root[uc-extension-id="notes@mozilla.com"]
+    input:is([type="reset"], [type="button"], [type="submit"]) {
+    font-family: Helvetica, Arial, Tahoma, Verdana, Sans-Serif !important;
+  }
+
+  :root[uc-extension-id="notes@mozilla.com"] header {
+    font-size: 16px !important;
+    min-height: 44px !important;
+  }
+
+  @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
+    :root[uc-extension-id="notes@mozilla.com"],
+    :root[uc-extension-id="notes@mozilla.com"] body {
+      --ck-font-face: SF Pro, SF Arabic, Segoe UI, sans-serif !important;
+      font-kerning: normal !important;
     }
 
-    :root[uc-extension-id="notes@mozilla.com"] textarea::selection,
-    :root[uc-extension-id="notes@mozilla.com"] ::selection {
-        color: var(--content-selection-color) !important;
-        background-color: var(--content-selection-bgcolor) !important;
-    }
-
-    :root[uc-extension-id="notes@mozilla.com"] textarea:-moz-window-inactive::selection,
-    :root[uc-extension-id="notes@mozilla.com"] :-moz-window-inactive::selection {
-        background-color: var(--content-selection-bgcolor-disabled) !important;
-    }
-
-    :root[uc-extension-id="notes@mozilla.com"]
-        :is(:root, body, .ck.ck-reset_all, .ck.ck-reset_all *, code) {
-        font-family: var(--ck-font-face) !important;
-    }
-
-    :root[uc-extension-id="notes@mozilla.com"] #notes .ck-editor__editable :is(ul, ol) > li {
-        line-height: 2rem !important;
-    }
-
-    :root[uc-extension-id="notes@mozilla.com"] header,
-    :root[uc-extension-id="notes@mozilla.com"] #notes .ck-toolbar .ck-button__label,
     :root[uc-extension-id="notes@mozilla.com"] button,
     :root[uc-extension-id="notes@mozilla.com"] ::file-selector-button,
     :root[uc-extension-id="notes@mozilla.com"]
-        input:is([type="reset"], [type="button"], [type="submit"]) {
-        font-family: Helvetica, Arial, Tahoma, Verdana, Sans-Serif !important;
+      input:is([type="reset"], [type="button"], [type="submit"]) {
+      font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
     }
 
     :root[uc-extension-id="notes@mozilla.com"] header {
-        font-size: 16px !important;
-        min-height: 44px !important;
+      font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
     }
 
-    @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
-        :root[uc-extension-id="notes@mozilla.com"],
-        :root[uc-extension-id="notes@mozilla.com"] body {
-            --ck-font-face: SF Pro, SF Arabic, Segoe UI, sans-serif !important;
-            font-kerning: normal !important;
-        }
-
-        :root[uc-extension-id="notes@mozilla.com"] button,
-        :root[uc-extension-id="notes@mozilla.com"] ::file-selector-button,
-        :root[uc-extension-id="notes@mozilla.com"]
-            input:is([type="reset"], [type="button"], [type="submit"]) {
-            font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
-        }
-
-        :root[uc-extension-id="notes@mozilla.com"] header {
-            font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
-        }
-
-        :root[uc-extension-id="notes@mozilla.com"] .listView ul li button p {
-            font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
-            font-weight: 300 !important;
-        }
-
-        :root[uc-extension-id="notes@mozilla.com"] .listView ul li button p strong {
-            font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
-            font-weight: 500 !important;
-        }
+    :root[uc-extension-id="notes@mozilla.com"] .listView ul li button p {
+      font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
+      font-weight: 300 !important;
     }
 
-    :root[uc-extension-id="notes@mozilla.com"] #notes .ck-editor__editable {
-        padding: 4px var(--ck-spacing-standard) !important;
-        background-color: var(--in-content-box-background) !important;
+    :root[uc-extension-id="notes@mozilla.com"] .listView ul li button p strong {
+      font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
+      font-weight: 500 !important;
     }
+  }
 
-    :root[uc-extension-id="notes@mozilla.com"] .listView ul {
-        background-color: var(--in-content-box-background) !important;
-    }
+  :root[uc-extension-id="notes@mozilla.com"] #notes .ck-editor__editable {
+    padding: 4px var(--ck-spacing-standard) !important;
+    background-color: var(--in-content-box-background) !important;
+  }
 
-    :root[uc-extension-id="notes@mozilla.com"] #footerButtons {
-        height: auto !important;
-        color: var(--primary-font-color) !important;
-        border-color: var(--border-color) !important;
-        column-gap: 4px !important;
-        padding: 4px !important;
-        background-color: var(--main-bg-color) !important;
-        transition: background var(--sync-animation-duration) cubic-bezier(0.07, 0.95, 0, 1);
-    }
+  :root[uc-extension-id="notes@mozilla.com"] .listView ul {
+    background-color: var(--in-content-box-background) !important;
+  }
 
-    :root[uc-extension-id="notes@mozilla.com"] #footerButtons .photon-menu {
-        padding: 0 !important;
-    }
+  :root[uc-extension-id="notes@mozilla.com"] #footerButtons {
+    height: auto !important;
+    color: var(--primary-font-color) !important;
+    border-color: var(--border-color) !important;
+    column-gap: 4px !important;
+    padding: 4px !important;
+    background-color: var(--main-bg-color) !important;
+    transition: background var(--sync-animation-duration) cubic-bezier(0.07, 0.95, 0, 1);
+  }
 
-    :root[uc-extension-id="notes@mozilla.com"] .photon-menu .wrapper ul {
-        background: var(--in-content-box-background-odd) !important;
-        padding: 6px 0;
-        margin: inherit;
-        border: solid 1px var(--solid-border-color) !important;
-        box-shadow: 0 0 16px rgba(12, 12, 13, 0.1) !important;
-        border-radius: var(--menupopup-border-radius) !important;
-        min-width: 150px;
-        max-width: 280px;
-        max-height: calc(320px * 0.9);
-        overflow: auto;
-    }
+  :root[uc-extension-id="notes@mozilla.com"] #footerButtons .photon-menu {
+    padding: 0 !important;
+  }
 
-    :root[uc-extension-id="notes@mozilla.com"] .photon-menu .wrapper ul::before {
-        border-color: var(--solid-border-color-bright) transparent !important;
-    }
+  :root[uc-extension-id="notes@mozilla.com"] .photon-menu .wrapper ul {
+    background: var(--in-content-box-background-odd) !important;
+    padding: 6px 0;
+    margin: inherit;
+    border: solid 1px var(--solid-border-color) !important;
+    box-shadow: 0 0 16px rgba(12, 12, 13, 0.1) !important;
+    border-radius: var(--menupopup-border-radius) !important;
+    min-width: 150px;
+    max-width: 280px;
+    max-height: calc(320px * 0.9);
+    overflow: auto;
+  }
 
-    :root[uc-extension-id="notes@mozilla.com"] .photon-menu .wrapper ul::after {
-        border-color: var(--in-content-box-background-odd) transparent !important;
-    }
+  :root[uc-extension-id="notes@mozilla.com"] .photon-menu .wrapper ul::before {
+    border-color: var(--solid-border-color-bright) transparent !important;
+  }
 
-    :root[uc-extension-id="notes@mozilla.com"] .photon-menu ul button {
-        color: inherit !important;
-    }
+  :root[uc-extension-id="notes@mozilla.com"] .photon-menu .wrapper ul::after {
+    border-color: var(--in-content-box-background-odd) transparent !important;
+  }
 
-    :root[uc-extension-id="notes@mozilla.com"] .photon-menu .wrapper ul {
-        padding: var(--menupopup-inner-padding-magnitude) !important;
-    }
+  :root[uc-extension-id="notes@mozilla.com"] .photon-menu ul button {
+    color: inherit !important;
+  }
 
-    :root[uc-extension-id="notes@mozilla.com"] .photon-menu .wrapper ul li button {
-        border-radius: var(--general-button-border-radius) !important;
-    }
+  :root[uc-extension-id="notes@mozilla.com"] .photon-menu .wrapper ul {
+    padding: var(--menupopup-inner-padding-magnitude) !important;
+  }
 
-    :root[uc-extension-id="notes@mozilla.com"] .photon-menu .wrapper ul hr {
-        border-color: var(--solid-border-color) transparent !important;
-        margin-block: var(--menu-separator-margin) !important;
-    }
+  :root[uc-extension-id="notes@mozilla.com"] .photon-menu .wrapper ul li button {
+    border-radius: var(--general-button-border-radius) !important;
+  }
 
-    :root[uc-extension-id="notes@mozilla.com"] #notes .ck-heading-dropdown .ck-dropdown__panel {
-        width: auto !important;
-        height: auto !important;
-        color: var(--primary-font-color) !important;
-        background: var(--in-content-box-background-odd) !important;
-        border-radius: var(--menupopup-border-radius) !important;
-    }
+  :root[uc-extension-id="notes@mozilla.com"] .photon-menu .wrapper ul hr {
+    border-color: var(--solid-border-color) transparent !important;
+    margin-block: var(--menu-separator-margin) !important;
+  }
 
-    :root[uc-extension-id="notes@mozilla.com"]
-        #notes
-        .ck-heading-dropdown
-        .ck-dropdown__panel
-        .ck-list {
-        width: auto !important;
-        height: auto !important;
-    }
+  :root[uc-extension-id="notes@mozilla.com"] #notes .ck-heading-dropdown .ck-dropdown__panel {
+    width: auto !important;
+    height: auto !important;
+    color: var(--primary-font-color) !important;
+    background: var(--in-content-box-background-odd) !important;
+    border-radius: var(--menupopup-border-radius) !important;
+  }
 
-    :root[uc-extension-id="notes@mozilla.com"]
-        #notes
-        .ck-heading-dropdown
-        .ck-dropdown__panel
-        :where(ul, li) {
-        background: none !important;
-    }
+  :root[uc-extension-id="notes@mozilla.com"]
+    #notes
+    .ck-heading-dropdown
+    .ck-dropdown__panel
+    .ck-list {
+    width: auto !important;
+    height: auto !important;
+  }
 
-    :root[uc-extension-id="notes@mozilla.com"] .ck.ck-list__item {
-        min-width: 8em !important;
-        background: none !important;
-    }
+  :root[uc-extension-id="notes@mozilla.com"]
+    #notes
+    .ck-heading-dropdown
+    .ck-dropdown__panel
+    :where(ul, li) {
+    background: none !important;
+  }
 
-    :root[uc-extension-id="notes@mozilla.com"]
-        #notes
-        .ck-toolbar
-        .ck-list__item:is(:hover, :focus) {
-        background-color: var(--in-content-button-background-hover) !important;
-    }
+  :root[uc-extension-id="notes@mozilla.com"] .ck.ck-list__item {
+    min-width: 8em !important;
+    background: none !important;
+  }
 
-    :root[uc-extension-id="notes@mozilla.com"] #notes .ck-toolbar .ck-list__item_active {
-        background: var(--in-content-button-background-active) !important;
-        color: var(--attention-color) !important;
-    }
+  :root[uc-extension-id="notes@mozilla.com"] #notes .ck-toolbar .ck-list__item:is(:hover, :focus) {
+    background-color: var(--in-content-button-background-hover) !important;
+  }
 
-    :root[uc-extension-id="notes@mozilla.com"]
-        #notes
-        .ck-toolbar
-        .ck-list__item_active:is(:hover, :focus) {
-        background: var(--in-content-button-background-active) !important;
-    }
+  :root[uc-extension-id="notes@mozilla.com"] #notes .ck-toolbar .ck-list__item_active {
+    background: var(--in-content-button-background-active) !important;
+    color: var(--attention-color) !important;
+  }
 
-    :root[uc-extension-id="notes@mozilla.com"] #notes .ck-editor__top {
-        border-bottom: 1px solid var(--in-content-border-hover) !important;
-        height: auto !important;
-        width: auto !important;
-    }
+  :root[uc-extension-id="notes@mozilla.com"]
+    #notes
+    .ck-toolbar
+    .ck-list__item_active:is(:hover, :focus) {
+    background: var(--in-content-button-background-active) !important;
+  }
 
-    :root[uc-extension-id="notes@mozilla.com"] .ck.ck-toolbar {
-        padding: 4px !important;
-    }
+  :root[uc-extension-id="notes@mozilla.com"] #notes .ck-editor__top {
+    border-bottom: 1px solid var(--in-content-border-hover) !important;
+    height: auto !important;
+    width: auto !important;
+  }
 
-    :root[uc-extension-id="notes@mozilla.com"] :where(button, a.btn).iconBtn {
-        width: var(--ck-ui-component-min-height) !important;
-        height: var(--ck-ui-component-min-height) !important;
-        padding: calc((var(--subviewbutton-height) - 16px) / 2) !important;
-        border-radius: var(--general-button-border-radius) !important;
-    }
+  :root[uc-extension-id="notes@mozilla.com"] .ck.ck-toolbar {
+    padding: 4px !important;
+  }
 
-    :root[uc-extension-id="notes@mozilla.com"] header :is(button, a):hover,
-    :root[uc-extension-id="notes@mozilla.com"] button.iconBtn:hover {
-        background-color: var(--main-bg-hover-color) !important;
-    }
+  :root[uc-extension-id="notes@mozilla.com"] :where(button, a.btn).iconBtn {
+    width: var(--ck-ui-component-min-height) !important;
+    height: var(--ck-ui-component-min-height) !important;
+    padding: calc((var(--subviewbutton-height) - 16px) / 2) !important;
+    border-radius: var(--general-button-border-radius) !important;
+  }
 
-    :root[uc-extension-id="notes@mozilla.com"] header :is(button, a):active,
-    :root[uc-extension-id="notes@mozilla.com"] button.iconBtn:active {
-        background-color: var(--main-bg-active-color) !important;
-    }
+  :root[uc-extension-id="notes@mozilla.com"] header :is(button, a):hover,
+  :root[uc-extension-id="notes@mozilla.com"] button.iconBtn:hover {
+    background-color: var(--main-bg-hover-color) !important;
+  }
 
-    :root[uc-extension-id="notes@mozilla.com"] button {
-        appearance: none !important;
-    }
+  :root[uc-extension-id="notes@mozilla.com"] header :is(button, a):active,
+  :root[uc-extension-id="notes@mozilla.com"] button.iconBtn:active {
+    background-color: var(--main-bg-active-color) !important;
+  }
 
-    :root[uc-extension-id="notes@mozilla.com"] .ck.ck-dropdown {
-        margin: 0 !important;
-    }
+  :root[uc-extension-id="notes@mozilla.com"] button {
+    appearance: none !important;
+  }
 
-    :root[uc-extension-id="notes@mozilla.com"] #notes .ck-heading-dropdown button {
-        padding: 2px 7px !important;
-        width: auto !important;
-        height: auto !important;
-        border: 0 !important;
-        display: flex !important;
-        align-items: center !important;
-        gap: 4px !important;
-    }
+  :root[uc-extension-id="notes@mozilla.com"] .ck.ck-dropdown {
+    margin: 0 !important;
+  }
 
-    :root[uc-extension-id="notes@mozilla.com"]
-        .ck.ck-dropdown
-        .ck-button.ck-dropdown__button.ck-on {
-        border-radius: var(--general-button-border-radius) !important;
-    }
+  :root[uc-extension-id="notes@mozilla.com"] #notes .ck-heading-dropdown button {
+    padding: 2px 7px !important;
+    width: auto !important;
+    height: auto !important;
+    border: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+  }
 
-    :root[uc-extension-id="notes@mozilla.com"]
-        .ck.ck-dropdown.ck-heading-dropdown
-        .ck-dropdown__button
-        .ck-button__label {
-        width: auto !important;
-    }
+  :root[uc-extension-id="notes@mozilla.com"] .ck.ck-dropdown .ck-button.ck-dropdown__button.ck-on {
+    border-radius: var(--general-button-border-radius) !important;
+  }
 
-    :root[uc-extension-id="notes@mozilla.com"]
-        .ck.ck-dropdown.ck-heading-dropdown
-        .ck-dropdown__button.ck-button_with-text
-        .ck-button__label {
-        width: 18px !important;
-    }
+  :root[uc-extension-id="notes@mozilla.com"]
+    .ck.ck-dropdown.ck-heading-dropdown
+    .ck-dropdown__button
+    .ck-button__label {
+    width: auto !important;
+  }
 
-    :root[uc-extension-id="notes@mozilla.com"] #notes .ck-dropdown__arrow {
-        width: 12px !important;
-        position: relative !important;
-        right: revert !important;
-        left: revert !important;
-        top: revert !important;
-        bottom: revert !important;
-        transform: revert !important;
-    }
+  :root[uc-extension-id="notes@mozilla.com"]
+    .ck.ck-dropdown.ck-heading-dropdown
+    .ck-dropdown__button.ck-button_with-text
+    .ck-button__label {
+    width: 18px !important;
+  }
 
-    :root[uc-extension-id="notes@mozilla.com"] #notes .ck-toolbar button:is(.ck-on, :active) * {
-        color: var(--attention-color) !important;
-    }
+  :root[uc-extension-id="notes@mozilla.com"] #notes .ck-dropdown__arrow {
+    width: 12px !important;
+    position: relative !important;
+    right: revert !important;
+    left: revert !important;
+    top: revert !important;
+    bottom: revert !important;
+    transform: revert !important;
+  }
 
-    :root[uc-extension-id="notes@mozilla.com"] #notes .ck-button.ck-on {
-        background: var(--in-content-button-background-hover) !important;
-    }
+  :root[uc-extension-id="notes@mozilla.com"] #notes .ck-toolbar button:is(.ck-on, :active) * {
+    color: var(--attention-color) !important;
+  }
 
-    :root[uc-extension-id="notes@mozilla.com"]
-        #notes
-        .ck-toolbar
-        .ck-button:where(:focus, :hover):not(.ck-disabled),
-    :root[uc-extension-id="notes@mozilla.com"]
-        #notes
-        .ck-toolbar
-        a.ck-button:where(:focus, :hover):not(.ck-disabled) {
-        background: var(--in-content-button-background-hover) !important;
-    }
+  :root[uc-extension-id="notes@mozilla.com"] #notes .ck-button.ck-on {
+    background: var(--in-content-button-background-hover) !important;
+  }
 
-    :root[uc-extension-id="notes@mozilla.com"]
-        #notes
-        .ck-toolbar
-        .ck-dropdown__button:hover:not(.ck-disabled) {
-        background: var(--in-content-button-background-hover) !important;
-    }
+  :root[uc-extension-id="notes@mozilla.com"]
+    #notes
+    .ck-toolbar
+    .ck-button:where(:focus, :hover):not(.ck-disabled),
+  :root[uc-extension-id="notes@mozilla.com"]
+    #notes
+    .ck-toolbar
+    a.ck-button:where(:focus, :hover):not(.ck-disabled) {
+    background: var(--in-content-button-background-hover) !important;
+  }
 
-    :root[uc-extension-id="notes@mozilla.com"] #notes .ck-toolbar button .ck-tooltip__text {
-        border: solid thin var(--in-content-border-hover) !important;
-        color: var(--ui-text-90) !important;
-    }
+  :root[uc-extension-id="notes@mozilla.com"]
+    #notes
+    .ck-toolbar
+    .ck-dropdown__button:hover:not(.ck-disabled) {
+    background: var(--in-content-button-background-hover) !important;
+  }
 
-    :root[uc-extension-id="notes@mozilla.com"]
-        #notes
-        .ck-toolbar
-        .ck-tooltip.ck-tooltip_s
-        .ck-tooltip__text::after {
-        border-color: transparent transparent var(--in-content-border-hover) !important;
-    }
+  :root[uc-extension-id="notes@mozilla.com"] #notes .ck-toolbar button .ck-tooltip__text {
+    border: solid thin var(--in-content-border-hover) !important;
+    color: var(--ui-text-90) !important;
+  }
 
-    :root[uc-extension-id="notes@mozilla.com"] #notes .ck-editor__main a {
-        color: var(--in-content-primary-button-background-active) !important;
-    }
+  :root[uc-extension-id="notes@mozilla.com"]
+    #notes
+    .ck-toolbar
+    .ck-tooltip.ck-tooltip_s
+    .ck-tooltip__text::after {
+    border-color: transparent transparent var(--in-content-border-hover) !important;
+  }
 
-    :root[uc-extension-id="notes@mozilla.com"] #notes .drag-n-drop-focus,
-    :root[uc-extension-id="notes@mozilla.com"] #notes .drag-n-drop-focus .ck-editor__editable {
-        border-color: var(--in-content-box-border-color) !important;
-        box-shadow: inset 0 0 0 1px var(--in-content-box-border-color) !important;
-        border: none !important;
-        background-color: var(--in-content-box-background-odd) !important;
-    }
+  :root[uc-extension-id="notes@mozilla.com"] #notes .ck-editor__main a {
+    color: var(--in-content-primary-button-background-active) !important;
+  }
+
+  :root[uc-extension-id="notes@mozilla.com"] #notes .drag-n-drop-focus,
+  :root[uc-extension-id="notes@mozilla.com"] #notes .drag-n-drop-focus .ck-editor__editable {
+    border-color: var(--in-content-box-border-color) !important;
+    box-shadow: inset 0 0 0 1px var(--in-content-box-border-color) !important;
+    border: none !important;
+    background-color: var(--in-content-box-background-odd) !important;
+  }
 }

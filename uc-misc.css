@@ -14,397 +14,403 @@ focus rings, text highlight colors, and compatibility adjustments for minBrowser
 /* I recommend using tooltipShadowSupport.uc.js if you want the thin border on all tooltips.
 If you don't want the border then set userChrome.css.remove-tooltip-borders to true in about:config */
 tooltip {
-    -moz-default-appearance: none !important;
-    display: -moz-popup;
-    -moz-appearance: none !important;
-    appearance: none !important;
-    background-color: transparent !important;
-    color: var(--tooltip-color) !important;
-    border: none !important;
-    max-width: max(30vw, 40em);
-    padding: 5px !important;
-    margin-inline-start: -5px !important;
-    margin-block-start: 16px !important;
-    pointer-events: none !important;
+  -moz-default-appearance: none !important;
+  display: -moz-popup;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  background-color: transparent !important;
+  color: var(--tooltip-color) !important;
+  border: none !important;
+  max-width: max(30vw, 40em);
+  padding: 5px !important;
+  margin-inline-start: -5px !important;
+  margin-block-start: 16px !important;
+  pointer-events: none !important;
 }
 
 tooltip,
 #statuspanel {
-    --uc-tooltip-inner-padding: 4px 7px 6px 7px;
+  --uc-tooltip-inner-padding: 4px 7px 6px 7px;
 }
 
 tooltip > description,
 .places-tooltip-box,
 tooltip .uc-tooltip-box {
-    background-color: var(--tooltip-bgcolor) !important;
-    color: var(--tooltip-color) !important;
-    border: 1px solid var(--tooltip-border-color) !important;
-    border-radius: var(--tooltip-border-radius) !important;
-    box-shadow: var(--tooltip-box-shadow) !important;
-    padding: var(--uc-tooltip-inner-padding, 4px 7px 6px 7px) !important;
-    margin: 0 !important;
+  background-color: var(--tooltip-bgcolor) !important;
+  color: var(--tooltip-color) !important;
+  border: 1px solid var(--tooltip-border-color) !important;
+  border-radius: var(--tooltip-border-radius) !important;
+  box-shadow: var(--tooltip-box-shadow) !important;
+  padding: var(--uc-tooltip-inner-padding, 4px 7px 6px 7px) !important;
+  margin: 0 !important;
 }
 
-/* set browser.proton.places-tooltip.enabled to true, it's less in the way when it's tethered to the tab */
+/* set browser.proton.places-tooltip.enabled to true, it's less in the way when
+it's tethered to the tab */
 .places-tooltip {
-    background: transparent !important;
-    background-color: transparent !important;
-    border: none !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
 }
 
 #tab-nav-popup {
-    --tooltip-border-radius: 3px !important;
+  --tooltip-border-radius: 3px !important;
 }
 
 .places-tooltip-box,
 tooltip .uc-tooltip-box {
-    --uc-tooltip-inner-padding: 5px 7px 6px 7px !important;
+  --uc-tooltip-inner-padding: 5px 7px 6px 7px !important;
 }
 
 .places-tooltip description:not([value], [id]):empty,
 .places-tooltip description[value=""]:not([id]):empty {
-    display: none !important;
+  display: none !important;
 }
 
 .places-tooltip-box > hbox {
-    display: flex !important;
-    align-items: center !important;
-    color: var(--panel-shortcut-color) !important;
+  display: flex !important;
+  align-items: center !important;
+  color: var(--panel-shortcut-color) !important;
 }
 
 .places-tooltip-title {
-    font-weight: 600;
-    /* Clip after 2 lines, this should ideally use a different method like -webkit-line-clamp or
-    overflow: hidden; to get ellipsis support but XUL tooltip sizing makes that difficult. */
-    max-height: 2.5em;
-    overflow-y: clip;
+  font-weight: 600;
+  /* Clip after 2 lines, this should ideally use a different method like
+  -webkit-line-clamp or overflow: hidden; to get ellipsis support but XUL
+  tooltip sizing makes that difficult. */
+  max-height: 2.5em;
+  overflow-y: clip;
 }
 
 .places-tooltip-uri {
-    color: var(--panel-shortcut-color) !important;
+  color: var(--panel-shortcut-color) !important;
 }
 
 .places-tooltip-title[hidden="true"] ~ .places-tooltip-uri {
-    color: inherit !important;
+  color: inherit !important;
 }
 
 .places-tooltip-box[desc-hidden="true"] > hbox {
-    display: none !important;
+  display: none !important;
 }
 
 .places-tooltip-box[desc-hidden="true"] .places-tooltip-title {
-    margin-bottom: 1px !important;
+  margin-bottom: 1px !important;
 }
 
 #places-tooltip-insecure-icon {
-    -moz-context-properties: fill;
-    fill: currentColor;
-    width: 1em;
-    height: 1em;
-    margin-inline-start: 0;
-    margin-inline-end: 0.25em !important;
-    min-width: 1em !important;
+  -moz-context-properties: fill;
+  fill: currentColor;
+  width: 1em;
+  height: 1em;
+  margin-inline-start: 0;
+  margin-inline-end: 0.25em !important;
+  min-width: 1em !important;
 }
 
 #places-tooltip-insecure-icon[hidden] {
-    display: none;
+  display: none;
 }
 
-/* the following rule can make the lock icon in the tab tooltip visible on all tabs except pending/unloaded tabs.
-by default, it only shows an insecure lock on pages connected by http or with invalid certificates.
-this rule makes it show a secure lock on all other pages.
-but it's a little silly because 1) CSS on the tooltip can't differentiate between secure pages and pages with mixed content...
-and 2) we can't differentiate between secure pages and local pages, system pages, etc. so the lock icon could be misleading.
-for that reason i disabled it but maybe someone else wants it. it does look kinda cool i guess. */
+/* the following rule can make the lock icon in the tab tooltip visible on all
+tabs except pending/unloaded tabs. by default, it only shows an insecure lock on
+pages connected by http or with invalid certificates. this rule makes it show a
+secure lock on all other pages. but it's a little silly because 1) CSS on the
+tooltip can't differentiate between secure pages and pages with mixed content...
+and 2) we can't differentiate between secure pages and local pages, system
+pages, etc. so the lock icon could be misleading. for that reason i disabled it
+but maybe someone else wants it. it does look kinda cool i guess. */
 @supports -moz-bool-pref("userChrome.tabs.tooltip.always-show-lock-icon") {
-    #places-tooltip-insecure-icon {
-        display: -moz-inline-box !important;
-    }
+  #places-tooltip-insecure-icon {
+    display: -moz-inline-box !important;
+  }
 }
 
-/* the next several rulesets require restoreTabSoundButton.uc.js to set the necessary attributes based on tab security state. */
+/* the next several rulesets require restoreTabSoundButton.uc.js to set the
+necessary attributes based on tab security state. */
 
 /* secure pages. just a regular lock. */
 #places-tooltip-insecure-icon[type="secure"],
 #tab-nav-tooltip-insecure-icon[type="secure"] {
-    list-style-image: url(chrome://global/skin/icons/security.svg) !important;
+  list-style-image: url(chrome://global/skin/icons/security.svg) !important;
 }
 
 /* insecure pages. the default, built-in icon, a lock with a red strikethrough. */
 #places-tooltip-insecure-icon[type="insecure"],
 #tab-nav-tooltip-insecure-icon[type="insecure"] {
-    list-style-image: url(chrome://global/skin/icons/security-broken.svg) !important;
+  list-style-image: url(chrome://global/skin/icons/security-broken.svg) !important;
 }
 
-/* tooltip icon for https pages with mixed passive content.
-a lock with a yellow warning icon overlapping it. intended to match the identity icon.
-mixed active content still shows the normal lock with red strikethrough. */
+/* tooltip icon for https pages with mixed passive content. a lock with a yellow
+warning icon overlapping it. intended to match the identity icon. mixed active
+content still shows the normal lock with red strikethrough. */
 #places-tooltip-insecure-icon[type="mixed-passive"],
 #tab-nav-tooltip-insecure-icon[type="mixed-passive"] {
-    list-style-image: url(chrome://global/skin/icons/security-warning.svg) !important;
+  list-style-image: url(chrome://global/skin/icons/security-warning.svg) !important;
 }
 
 /* about:* pages. */
 #places-tooltip-insecure-icon[type="about-page"],
 #tab-nav-tooltip-insecure-icon[type="about-page"] {
-    list-style-image: url(chrome://userchrome/content/identity-icons-brand.svg) !important;
+  list-style-image: url(chrome://userchrome/content/identity-icons-brand.svg) !important;
 }
 
 /* local pages, e.g. file:/// or resource:// or chrome:// */
 #places-tooltip-insecure-icon[type="local-page"],
 #tab-nav-tooltip-insecure-icon[type="local-page"] {
-    list-style-image: url(chrome://userchrome/content/notifications/persistent-storage.svg) !important;
+  list-style-image: url(chrome://userchrome/content/notifications/persistent-storage.svg) !important;
 }
 
 /* extension pages, namely moz-extension:// */
 #places-tooltip-insecure-icon[type="extension-page"],
 #tab-nav-tooltip-insecure-icon[type="extension-page"] {
-    list-style-image: url(chrome://mozapps/skin/extensions/extension.svg) !important;
+  list-style-image: url(chrome://mozapps/skin/extensions/extension.svg) !important;
 }
 
 /* new tab or home page */
 #places-tooltip-insecure-icon[type="home-page"],
 #tab-nav-tooltip-insecure-icon[type="home-page"] {
-    list-style-image: url(chrome://browser/skin/tab.svg) !important;
+  list-style-image: url(chrome://browser/skin/tab.svg) !important;
 }
 
 /* tooltip icon for tabs loading error pages, e.g. network error, certificate error, https-only error. */
 #places-tooltip-insecure-icon[type="error-page"],
 #tab-nav-tooltip-insecure-icon[type="error-page"] {
-    list-style-image: url(chrome://userchrome/content/warning.svg) !important;
+  list-style-image: url(chrome://userchrome/content/warning.svg) !important;
 
-    /* alternate style, with colored icon */
-    /* list-style-image: url(chrome://userchrome/content/skin/controlcenter/warning.svg) !important;
-    stroke: var(--low-warning-icon-detail) !important;
-    fill: var(--low-warning-icon-background) !important;
-    -moz-context-properties: fill, stroke !important; */
+  /* alternate style, with colored icon */
+  /* list-style-image: url(chrome://userchrome/content/skin/controlcenter/warning.svg) !important;
+  stroke: var(--low-warning-icon-detail) !important;
+  fill: var(--low-warning-icon-background) !important;
+  -moz-context-properties: fill, stroke !important; */
 }
 
 /* blocked pages e.g., about:blocked */
 #places-tooltip-insecure-icon[type="blocked-page"],
 #tab-nav-tooltip-insecure-icon[type="blocked-page"] {
-    list-style-image: url(chrome://userchrome/content/blocked.svg) !important;
+  list-style-image: url(chrome://userchrome/content/blocked.svg) !important;
 }
 
 /* don't show secure badges on pending tabs */
 #places-tooltip-insecure-icon[type="pending"],
 #tab-nav-tooltip-insecure-icon[type="pending"] {
-    display: none !important;
+  display: none !important;
 }
 
-/* the shadow on the tab tooltip must be removed since it blocks mouse hover from reaching the tab.
-which would mean when you hover a tab, it'd appear hovered, then the tooltip would show up and it would appear unhovered,
-as the mouse would then be on top of the tooltip popup not the main window. */
+/* the shadow on the tab tooltip must be removed since it blocks mouse hover
+from reaching the tab. which would mean when you hover a tab, it'd appear
+hovered, then the tooltip would show up and it would appear unhovered, as the
+mouse would then be on top of the tooltip popup not the main window. */
 .places-tooltip[position] {
-    padding: 0 !important;
-    margin: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
 .places-tooltip[position] > .places-tooltip-box {
-    box-shadow: none !important;
+  box-shadow: none !important;
 }
 
 :is(#mainPopupSet, .sidebar-panel) > #aHTMLTooltip description {
-    overflow-wrap: anywhere !important;
-    text-overflow: ellipsis !important;
+  overflow-wrap: anywhere !important;
+  text-overflow: ellipsis !important;
 }
 
 :is(#tracking-protection-icon-tooltip, #back-button-tooltip, #forward-button-tooltip)
-    description:not([value], [id]):empty,
+  description:not([value], [id]):empty,
 :is(#tracking-protection-icon-tooltip, #back-button-tooltip, #forward-button-tooltip)
-    description[value=""]:not([id]):empty {
-    display: none !important;
+  description[value=""]:not([id]):empty {
+  display: none !important;
 }
 
 :is(#back-button-tooltip, #forward-button-tooltip) .tooltip-label[id]:not(:last-of-type) {
-    font-weight: var(--uc-font-weight-bold, 600);
+  font-weight: var(--uc-font-weight-bold, 600);
 }
 
 :is(#back-button-tooltip, #forward-button-tooltip) .tooltip-label:last-of-type:not([id]) {
-    color: var(--panel-shortcut-color) !important;
-    box-shadow: none !important;
-    background: none !important;
-    border: none !important;
-    margin-top: 1px !important;
-    /* font-size: 0.9em; */
+  color: var(--panel-shortcut-color) !important;
+  box-shadow: none !important;
+  background: none !important;
+  border: none !important;
+  margin-top: 1px !important;
+  /* font-size: 0.9em; */
 }
 
 :is(#back-button-tooltip, #forward-button-tooltip):not([shadow-support])
-    .tooltip-label[id]:not(:last-of-type) {
-    padding: 5.5px 8px 20px 8px !important;
+  .tooltip-label[id]:not(:last-of-type) {
+  padding: 5.5px 8px 20px 8px !important;
 }
 
 :is(#back-button-tooltip, #forward-button-tooltip):not([shadow-support])
-    .tooltip-label:last-of-type:not([id]) {
-    padding: 0 8px 8px 8px !important;
-    margin-block-start: -19.5px !important;
+  .tooltip-label:last-of-type:not([id]) {
+  padding: 0 8px 8px 8px !important;
+  margin-block-start: -19.5px !important;
 }
 
 #tracking-protection-container tooltip {
-    background-color: var(--ui-secondary-bg) !important;
-    color: var(--tooltip-color) !important;
-    border: 1px solid var(--tooltip-border-color) !important;
-    border-radius: var(--tooltip-border-radius) !important;
-    box-shadow: var(--tooltip-box-shadow) !important;
-    padding: var(--uc-tooltip-inner-padding) !important;
-    margin-block-start: 26px !important;
+  background-color: var(--ui-secondary-bg) !important;
+  color: var(--tooltip-color) !important;
+  border: 1px solid var(--tooltip-border-color) !important;
+  border-radius: var(--tooltip-border-radius) !important;
+  box-shadow: var(--tooltip-box-shadow) !important;
+  padding: var(--uc-tooltip-inner-padding) !important;
+  margin-block-start: 26px !important;
 }
 
 #eom-theme-preview-tooltip {
-    padding: 5px !important;
-    max-width: revert !important;
-	border: none !important;
-	background: none !important;
-    border-radius: 0 !important;
+  padding: 5px !important;
+  max-width: revert !important;
+  border: none !important;
+  background: none !important;
+  border-radius: 0 !important;
 }
 
 #eom-theme-preview-box {
-	border-radius: var(--arrowpanel-border-radius, 8px) !important;
-    overflow: hidden !important;
-    box-shadow: var(--tooltip-box-shadow) !important;
+  border-radius: var(--arrowpanel-border-radius, 8px) !important;
+  overflow: hidden !important;
+  box-shadow: var(--tooltip-box-shadow) !important;
 }
 
 #eom-theme-preview-tooltip description {
-    display: none !important;
+  display: none !important;
 }
 
 /* eliminate --default-focusring */
 treechildren::-moz-tree-row(selected, current, focus) {
-    outline: none !important;
+  outline: none !important;
 }
 
 progress {
-    appearance: none;
-    border: 1px solid transparent;
-    border-radius: 16px;
-    height: 8px;
-    background-color: var(--arrowpanel-dimmed);
-    overflow: hidden;
+  appearance: none;
+  border: 1px solid transparent;
+  border-radius: 16px;
+  height: 8px;
+  background-color: var(--arrowpanel-dimmed);
+  overflow: hidden;
 }
 
 progress[paused] {
-    background-color: var(--desaturate-dimmed);
+  background-color: var(--desaturate-dimmed);
 }
 
 progress:not([value="0"])::-moz-progress-bar {
-    margin: 0;
-    height: 100%;
-    border-radius: 16px;
+  margin: 0;
+  height: 100%;
+  border-radius: 16px;
 }
 
 progress::-moz-progress-bar {
-    background-color: var(--toolbarbutton-icon-fill-attention);
-    background-image: none;
-    animation: none;
+  background-color: var(--toolbarbutton-icon-fill-attention);
+  background-image: none;
+  animation: none;
 }
 
 progress[paused]::-moz-progress-bar {
-    background-color: var(--desaturate-dimmed-further);
+  background-color: var(--desaturate-dimmed-further);
 }
 
 progress:indeterminate::-moz-progress-bar {
-    border-radius: 0;
-    background-image: linear-gradient(
-        90deg,
-        transparent 0%,
-        var(--download-progress-flare-color) 25%,
-        transparent 50%,
-        var(--download-progress-flare-color) 75%,
-        transparent 100%
-    );
+  border-radius: 0;
+  background-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--download-progress-flare-color) 25%,
+    transparent 50%,
+    var(--download-progress-flare-color) 75%,
+    transparent 100%
+  );
 }
 
 progress[paused]:indeterminate::-moz-progress-bar {
-    background-color: transparent;
-    background-image: none;
-    animation: none;
-    animation-play-state: paused;
+  background-color: transparent;
+  background-image: none;
+  animation: none;
+  animation-play-state: paused;
 }
 
 #statuspanel {
-    /* temporarily disabled due to backdrop-filter being disabled. see https://bugzilla.mozilla.org/show_bug.cgi?id=1741779 */
-    /* color: var(--ui-text-80) !important;
-    background-color: var(--acrylic-blue) !important;
-    background-image: var(--acrylic-texture) !important;
-    backdrop-filter: var(--acrylic-blur) !important; */
+  /* temporarily disabled due to backdrop-filter being disabled. see https://bugzilla.mozilla.org/show_bug.cgi?id=1741779 */
+  /* color: var(--ui-text-80) !important;
+  background-color: var(--acrylic-blue) !important;
+  background-image: var(--acrylic-texture) !important;
+  backdrop-filter: var(--acrylic-blur) !important; */
 
-    border: 1px none var(--tooltip-border-color) !important;
-    border-top-style: solid !important;
-    box-shadow: var(--tooltip-box-shadow) !important;
-    margin-top: calc(0px - var(--menuitem-height)) !important;
+  border: 1px none var(--tooltip-border-color) !important;
+  border-top-style: solid !important;
+  box-shadow: var(--tooltip-box-shadow) !important;
+  margin-top: calc(0px - var(--menuitem-height)) !important;
 
-    background-color: var(--tooltip-bgcolor) !important;
-    color: var(--tooltip-color) !important;
+  background-color: var(--tooltip-bgcolor) !important;
+  color: var(--tooltip-color) !important;
 }
 
 :root[inDOMFullscreen] #statuspanel {
-    visibility: collapse !important;
+  visibility: collapse !important;
 }
 
 #statuspanel:not([type="overLink"], [inactive][previoustype="overLink"]) {
-    opacity: 0 !important;
-    transition: none !important;
+  opacity: 0 !important;
+  transition: none !important;
 }
 
 #statuspanel[type="overLink"] {
-    transition: opacity 400ms var(--uc-smooth-timing-function), visibility 400ms !important;
+  transition: opacity 400ms var(--uc-smooth-timing-function), visibility 400ms !important;
 }
 
 #statuspanel-label {
-    background: none !important;
-    color: inherit !important;
-    box-shadow: none !important;
-    opacity: revert !important;
-    padding: var(--uc-tooltip-inner-padding, 4px 7px 6px 7px) !important;
-    margin: 0 !important;
-    border: none !important;
+  background: none !important;
+  color: inherit !important;
+  box-shadow: none !important;
+  opacity: revert !important;
+  padding: var(--uc-tooltip-inner-padding, 4px 7px 6px 7px) !important;
+  margin: 0 !important;
+  border: none !important;
 }
 
 #statuspanel:not([mirror]):-moz-locale-dir(ltr),
 #statuspanel[mirror]:-moz-locale-dir(rtl) {
-    border-top-left-radius: 0 !important;
-    border-top-right-radius: var(--tooltip-border-radius) !important;
-    border-right-style: solid !important;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: var(--tooltip-border-radius) !important;
+  border-right-style: solid !important;
 }
 
 #statuspanel:not([mirror]):-moz-locale-dir(rtl),
 #statuspanel[mirror]:-moz-locale-dir(ltr) {
-    border-top-left-radius: var(--tooltip-border-radius) !important;
-    border-top-right-radius: 0 !important;
-    border-left-style: solid !important;
+  border-top-left-radius: var(--tooltip-border-radius) !important;
+  border-top-right-radius: 0 !important;
+  border-left-style: solid !important;
 }
 
 #statuspanel-inner {
-    height: revert !important;
-    width: auto !important;
-    min-width: unset !important;
-    max-width: unset !important;
-    -moz-box-align: center !important;
+  height: revert !important;
+  width: auto !important;
+  min-width: unset !important;
+  max-width: unset !important;
+  -moz-box-align: center !important;
 }
 
 /* selection */
 link[href="chrome://global/skin/search-textbox.css"] ~ ::selection
 {
-    background-color: var(--ui-selection-bgcolor);
-    color: var(--ui-selection-color);
+  background-color: var(--ui-selection-bgcolor);
+  color: var(--ui-selection-color);
 }
 
 link[href="chrome://global/skin/search-textbox.css"] ~ :-moz-window-inactive::selection
 {
-    background-color: var(--ui-selection-bgcolor-disabled, text-select-disabled-background);
+  background-color: var(--ui-selection-bgcolor-disabled, text-select-disabled-background);
 }
 
 /* hide keyword fixup notification */
 notification[value="keyword-uri-fixup"] {
-    display: none !important;
+  display: none !important;
 }
 
 #confirmation-hint[data-message-id="hideCheckHint"] #confirmation-hint-message {
-    margin-inline: 0 !important;
+  margin-inline: 0 !important;
 }
 
 #confirmation-hint-checkmark-animation-container[animate] > #confirmation-hint-checkmark-image {
-    fill: currentColor !important;
+  fill: currentColor !important;
 }
 
 /* remove white flash and make default unloaded background dark gray */
@@ -412,86 +418,86 @@ notification[value="keyword-uri-fixup"] {
 #webextpanels-window,
 #webext-panels-stack,
 #webext-panels-browser {
-    background: var(--in-content-bg-dark) !important;
+  background: var(--in-content-bg-dark) !important;
 }
 
 /* change default favicon for local files */
 /* :is(.unified-nav-forward, .unified-nav-back):not([_moz-menuactive="true"]):is([uri^="file:///A:/"i], [uri^="file:///B:/"i], [uri^="file:///C:/"i], [uri^="file:///D:/"i], [uri^="file:///E:/"i], [uri^="file:///F:/"i], [uri^="file:///G:/"i], [uri^="file:///H:/"i], [uri^="file:///I:/"i]),
 :is(.tabbrowser-tab, .all-tabs-button):is([label^="/A:/"i], [label^="/B:/"i], [label^="/C:/"i], [label^="/D:/"i], [label^="/E:/"i], [label^="/F:/"i], [label^="/G:/"i], [label^="/H:/"i], [label^="/I:/"i]) :is(.tab-icon-image, .toolbarbutton-icon):not([src]) {
-    list-style-image: url(chrome://userchrome/content/notifications/persistent-storage.svg) !important;
+  list-style-image: url(chrome://userchrome/content/notifications/persistent-storage.svg) !important;
 }
 
 :is(.unified-nav-forward, .unified-nav-back):not([_moz-menuactive="true"]):is([uri^="file:///A:/"i], [uri^="file:///B:/"i], [uri^="file:///C:/"i], [uri^="file:///D:/"i], [uri^="file:///E:/"i], [uri^="file:///F:/"i], [uri^="file:///G:/"i], [uri^="file:///H:/"i], [uri^="file:///I:/"i]):is([uri$=".svg"i], [uri$=".png"i], [uri$=".jpg"i], [uri$=".jpeg"i], [uri$=".gif"i]),
 .tabbrowser-tab[label*="Image, "][label$=" pixels)"] .tab-icon-image:not([src]),
 :is(.tabbrowser-tab, .all-tabs-button):is([label^="/A:/"i], [label^="/B:/"i], [label^="/C:/"i], [label^="/D:/"i], [label^="/E:/"i], [label^="/F:/"i], [label^="/G:/"i], [label^="/H:/"i], [label^="/I:/"i]):is([label$=".svg"i], [label$=".png"i], [label$=".jpg"i], [label$=".jpeg"i], [label$=".gif"i]) :is(.tab-icon-image, .toolbarbutton-icon):not([src]) {
-    list-style-image: url(chrome://userchrome/content/notifications/canvas.svg) !important;
+  list-style-image: url(chrome://userchrome/content/notifications/canvas.svg) !important;
 }
 
 .bookmark-item[scheme="file"] .toolbarbutton-icon {
-    display: none !important;
+  display: none !important;
 }
 
 .bookmark-item[scheme="file"]::before {
-    content: "";
-    position: relative;
-    display: -moz-inline-box;
-    width: 16px;
-    height: 16px;
-    padding-inline: 0px;
-    fill: currentColor;
-    -moz-context-properties: fill, fill-opacity, stroke;
-    background-position: center;
-    background-size: 16px;
-    background-repeat: no-repeat;
-    background-image: url(chrome://userchrome/content/notifications/persistent-storage.svg) !important;
+  content: "";
+  position: relative;
+  display: -moz-inline-box;
+  width: 16px;
+  height: 16px;
+  padding-inline: 0px;
+  fill: currentColor;
+  -moz-context-properties: fill, fill-opacity, stroke;
+  background-position: center;
+  background-size: 16px;
+  background-repeat: no-repeat;
+  background-image: url(chrome://userchrome/content/notifications/persistent-storage.svg) !important;
 }
 
 .bookmark-item[scheme="file"][label*="Image, "][label$=" pixels)"]::before {
-    background-image: url(chrome://userchrome/content/notifications/canvas.svg) !important;
+  background-image: url(chrome://userchrome/content/notifications/canvas.svg) !important;
 } */
 
 :is(.unified-nav-forward, .unified-nav-back)[_moz-menuactive="true"] .menu-iconic-icon {
-    padding: 1px;
+  padding: 1px;
 }
 
 :is(.tabbrowser-tab, .all-tabs-button)[image="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8%2F9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAjFJREFUeNqsU8uOElEQPffR3XQ3ONASdBJCSBxHos5%2B3Bg3rvkCv8PElS78gPkO%2FATjQoUdO2ftrJiRh6aneTb9sOpC4weMN6lcuFV16pxDIfI8x12OYIDhcPiu2Wx%2B%2FHF5CW1Z6Jyegt%2FTNEWSJIjjGFEUIQxDrFYrWFSzXC4%2FdLvd95pRKpXKy%2BpRFZ7nwaWo1%2BsGnQG2260BKJfLKJVKGI1GEEJw7ateryd0v993W63WEwjgxfn5obGYzgCbzcaEbdsIggDj8Riu6z6iUk9SYZMSx8W0LMsM%2FSKK75xnJlIq80anQXdbEp0OhcPJ0eiaJnGRMEyyPDsAKKUM9clkYoDo3SZJzzSdp0VSKYmfV1co%2Bz580kw5KDIM8RbRfEnUf1HzxtQyMAGcaGruTKczMzEIaqhKifV6jd%2BzGQQB5llunF%2FM52BizC2K5sYPYvZcu653tjOM9O93wnYc08gmkgg4VAxixfqFUJT36AYBZGd6PJkFCZnnlBxMp38gqIgLpZB0y4Nph18lyWh5FFbrOSxbl3V4G%2BVB7T4ajYYxTyuLtO%2BCvWGgJE1Mc7JNsJEhvgw%2FQV4fo%2F24nbEsX2u1d5sVyn8sJO0ZAQiIYnFh%2BxrfLz%2Fj29cBS%2FO14zg3i8XigW3ZkErDtmKoeM%2BAJGRMnXeEPGKf0nCD1ydvkDzU9Jbc6OpR7WIw6L8lQ%2B4pQ1%2FlPF0RGM9Ns91Wmptk0GfB4EJkt77vXYj%2F8m%2B8y%2FkrwABHbz2H9V68DQAAAABJRU5ErkJggg%3D%3D"]
-    :is(.tab-icon-image, .toolbarbutton-icon) {
-    padding-right: 16px !important;
-    background: url(chrome://userchrome/content/notifications/persistent-storage.svg) center/contain !important;
-    box-sizing: border-box !important;
+  :is(.tab-icon-image, .toolbarbutton-icon) {
+  padding-right: 16px !important;
+  background: url(chrome://userchrome/content/notifications/persistent-storage.svg) center/contain !important;
+  box-sizing: border-box !important;
 }
 
 :is(#mainPopupSet, #browser, #navigator-toolbox) textbox {
-    appearance: none !important;
-    user-select: text !important;
-    -moz-user-select: text !important;
-    background-color: var(--ui-textbox-bgcolor) !important;
-    color: #fff !important;
+  appearance: none !important;
+  user-select: text !important;
+  -moz-user-select: text !important;
+  background-color: var(--ui-textbox-bgcolor) !important;
+  color: #fff !important;
 }
 
-/* basic checkbox appearance.
-the actual icon is set in utils/chrome.manifest since there are far too many checkboxes to override them all with CSS. */
+/* basic checkbox appearance. the actual icon is set in utils/chrome.manifest
+since there are far too many checkboxes to override them all with CSS. */
 checkbox .checkbox-check {
-    background-size: contain;
+  background-size: contain;
 }
 
 #label-box {
-    outline: unset !important;
+  outline: unset !important;
 }
 
 :focus:not(:focus-visible),
 :focus:not(:focus-visible) > *,
 radiogroup:focus-visible radio[focused="true"] > .radio-label-box,
 checkbox[native]:-moz-focusring > .checkbox-label-box {
-    outline: unset !important;
-    outline-offset: unset !important;
-    -moz-outline-radius: unset !important;
+  outline: unset !important;
+  outline-offset: unset !important;
+  -moz-outline-radius: unset !important;
 }
 
 checkbox[native]:focus-visible > .checkbox-check,
 radiogroup:focus-visible radio[focused="true"] > .radio-check,
 radiogroup deck menulist:focus-visible {
-    outline: var(--default-focusring);
+  outline: var(--default-focusring);
 }
 
 toolbarbutton:focus-visible,
@@ -508,253 +514,254 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
 #appMenu-zoomReduce-button2:focus-visible > .toolbarbutton-icon,
 #appMenu-zoomEnlarge-button2:focus-visible > .toolbarbutton-icon,
 #downloadsFooterButtons button:focus-visible {
-    color: inherit;
-    outline: unset !important;
-    -moz-outline-radius: unset !important;
-    outline-offset: unset !important;
+  color: inherit;
+  outline: unset !important;
+  -moz-outline-radius: unset !important;
+  outline-offset: unset !important;
 }
 
 @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
-    /* @-moz-document regexp("^chrome:(?!\/\/(devtools|mozapps|browser\/content\/(places\/places.xhtml|pageinfo\/pageInfo.xhtml)|global\/content\/commonDialog)).*") { */
-    @-moz-document regexp("^chrome:(?!\/\/devtools).*") {
-        /* for most 12px stuff */
-        html:root,
-        window:root,
-        menupopup,
-        panel,
-        popupnotification,
-        tooltip,
-        treechildren,
-        panelview,
-        #BMB_bookmarksPopup,
-        .sidebar-search-container,
-        .pointerlockfswarning,
-        :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
-            :is(menu, menuitem, menucaption),
-        panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem {
-            font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
-            font-kerning: normal !important;
-        }
-
-        /* for stuff that should be thin */
-        #urlbar,
-        #searchbar,
-        #PopupSearchAutoComplete,
-        #alertSourceLabel {
-            font-family: SF Pro, SF Arabic, Segoe UI, sans-serif !important;
-            font-kerning: normal !important;
-        }
-
-        /* for displaying larger font sizes */
-        .panel-header,
-        .popup-notification-description,
-        #sidebar-header,
-        #PanelUI-whatsNew,
-        #protections-popup-message,
-        #PanelUI-profiler-info,
-        .PanelUI-profiler-button-link,
-        #protections-popup-no-trackers-found-description,
-        #PopupAutoComplete > richlistbox > richlistitem > .ac-title {
-            font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
-            font-kerning: normal !important;
-        }
-
-        #main-menubar {
-            font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
-            font-kerning: normal !important;
-        }
-
-        #toolbar-menubar #main-menubar > menu > label {
-            padding: 5px 8px 6px 8px !important;
-        }
-
-        #main-menubar > menu > menupopup {
-            margin-block: calc(
-                0px - var(--menupopup-inner-box-margin) -
-                    ((var(--tab-min-height) - 14px - 5px - 6px) / 2)
-            ) !important;
-        }
-
-        #fxa-menu-header-description {
-            color: var(--panel-description-color);
-            font-weight: inherit !important;
-        }
-
-        panel .panel-banner-item {
-            font-weight: var(--uc-font-weight-bold, 500) !important;
-        }
-
-        strong {
-            font-weight: var(--uc-font-weight-extrabold, 600);
-        }
-
-        tooltip,
-        #statuspanel {
-            --uc-tooltip-inner-padding: 5px 8px 6px 8px;
-        }
-
-        .places-tooltip-title,
-        :is(#back-button-tooltip, #forward-button-tooltip) .tooltip-label[id] {
-            font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
-            font-kerning: normal !important;
-            font-weight: var(--uc-font-weight-semibold, 500) !important;
-        }
-
-        .places-tooltip-uri,
-        :is(#back-button-tooltip, #forward-button-tooltip) .tooltip-label:not([id]) {
-            font-weight: var(--uc-font-weight-thin, 300) !important;
-        }
-
-        .places-tooltip-title[hidden="true"] ~ .places-tooltip-uri {
-            font-weight: inherit !important;
-        }
-
-        #urlbar-zoom-button .toolbarbutton-text {
-            height: revert !important;
-            font-weight: var(--uc-font-weight-semibold, 400) !important;
-        }
-
-        toolbar:not(#PersonalToolbar) #zoom-controls > #zoom-reset-button > .toolbarbutton-text {
-            padding-block: 2px !important;
-            font-weight: var(--uc-font-weight-semibold, 400) !important;
-        }
-
-        #appMenu-zoomReset-button2 .toolbarbutton-text {
-            font-size: 11.5px !important;
-        }
-
-        .urlbarView-row .urlbarView-tag,
-        .urlbarView-row:is([type="switchtab"], [type="remotetab"])
-            > .urlbarView-row-inner
-            > .urlbarView-no-wrap
-            > .urlbarView-action {
-            line-height: 15px !important;
-            font-weight: var(--uc-font-weight-thin, 400) !important;
-        }
-
-        .urlbarView-row .urlbarView-tag strong {
-            font-weight: inherit !important;
-        }
-
-        .urlbarView-row[dynamicType="onboardTabToSearch"]
-            .urlbarView-title
-            strong.urlbarView-dynamic-onboardTabToSearch-titleStrong {
-            font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
-        }
-
-        .urlbarView-tip-button {
-            font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
-            font-weight: var(--uc-font-weight-bold, 600) !important;
-        }
-
-        .popup-notification-body input[type="password"] {
-            font-family: SF Pro, SF Arabic, Segoe UI, sans-serif !important;
-        }
-
-        .popup-notification-description b {
-            font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
-            font-kerning: auto !important;
-        }
-
-        :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
-            :where(menu, menuitem, menucaption),
-        panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem {
-            font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
-            font-kerning: normal !important;
-        }
-
-        .pointerlockfswarning-domain-text,
-        .pointerlockfswarning-generic-text {
-            font-weight: var(--uc-font-weight-thin, 300) !important;
-        }
-
-        .pointerlockfswarning-domain {
-            font-weight: var(--uc-font-weight-bold, 400) !important;
-        }
-
-        .dialog-button-box button,
-        :root[dialogroot] button {
-            font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
-            font-weight: var(--uc-font-weight-bold, 600) !important;
-        }
-
-        #protections-popup-milestones-text {
-            font-weight: var(--uc-font-weight-bold, 600) !important;
-            font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
-            font-size: 1.1em !important;
-        }
-
-        @-moz-document url-prefix("chrome://browser/content/syncedtabs/sidebar.xhtml")
-        {
-            body {
-                font-family: SF Pro, SF Arabic, Segoe UI, sans-serif !important;
-                font-kerning: normal !important;
-            }
-        }
+  @-moz-document regexp("^chrome:(?!\/\/devtools).*") {
+    /* for most 12px stuff */
+    html:root,
+    window:root,
+    menupopup,
+    panel,
+    popupnotification,
+    tooltip,
+    treechildren,
+    panelview,
+    #BMB_bookmarksPopup,
+    .sidebar-search-container,
+    .pointerlockfswarning,
+    :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
+      :is(menu, menuitem, menucaption),
+    panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem {
+      font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
+      font-kerning: normal !important;
     }
+
+    /* for stuff that should be thin */
+    #urlbar,
+    #searchbar,
+    #PopupSearchAutoComplete,
+    #alertSourceLabel {
+      font-family: SF Pro, SF Arabic, Segoe UI, sans-serif !important;
+      font-kerning: normal !important;
+    }
+
+    /* for displaying larger font sizes */
+    .panel-header,
+    .popup-notification-description,
+    #sidebar-header,
+    #PanelUI-whatsNew,
+    #protections-popup-message,
+    #PanelUI-profiler-info,
+    .PanelUI-profiler-button-link,
+    #protections-popup-no-trackers-found-description,
+    #PopupAutoComplete > richlistbox > richlistitem > .ac-title {
+      font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
+      font-kerning: normal !important;
+    }
+
+    #main-menubar {
+      font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
+      font-kerning: normal !important;
+    }
+
+    #toolbar-menubar #main-menubar > menu > label {
+      padding: 5px 8px 6px 8px !important;
+    }
+
+    #main-menubar > menu > menupopup {
+      margin-block: calc(
+        0px - var(--menupopup-inner-box-margin) - ((var(--tab-min-height) - 14px - 5px - 6px) / 2)
+      ) !important;
+    }
+
+    #fxa-menu-header-description {
+      color: var(--panel-description-color);
+      font-weight: inherit !important;
+    }
+
+    panel .panel-banner-item {
+      font-weight: var(--uc-font-weight-bold, 500) !important;
+    }
+
+    strong {
+      font-weight: var(--uc-font-weight-extrabold, 600);
+    }
+
+    tooltip,
+    #statuspanel {
+      --uc-tooltip-inner-padding: 5px 8px 6px 8px;
+    }
+
+    .places-tooltip-title,
+    :is(#back-button-tooltip, #forward-button-tooltip) .tooltip-label[id] {
+      font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
+      font-kerning: normal !important;
+      font-weight: var(--uc-font-weight-semibold, 500) !important;
+    }
+
+    .places-tooltip-uri,
+    :is(#back-button-tooltip, #forward-button-tooltip) .tooltip-label:not([id]) {
+      font-weight: var(--uc-font-weight-thin, 300) !important;
+    }
+
+    .places-tooltip-title[hidden="true"] ~ .places-tooltip-uri {
+      font-weight: inherit !important;
+    }
+
+    #urlbar-zoom-button .toolbarbutton-text {
+      height: revert !important;
+      font-weight: var(--uc-font-weight-semibold, 400) !important;
+    }
+
+    toolbar:not(#PersonalToolbar) #zoom-controls > #zoom-reset-button > .toolbarbutton-text {
+      padding-block: 2px !important;
+      font-weight: var(--uc-font-weight-semibold, 400) !important;
+    }
+
+    #appMenu-zoomReset-button2 .toolbarbutton-text {
+      font-size: 11.5px !important;
+    }
+
+    .urlbarView-row .urlbarView-tag,
+    .urlbarView-row:is([type="switchtab"], [type="remotetab"])
+      > .urlbarView-row-inner
+      > .urlbarView-no-wrap
+      > .urlbarView-action {
+      line-height: 15px !important;
+      font-weight: var(--uc-font-weight-thin, 400) !important;
+    }
+
+    .urlbarView-row .urlbarView-tag strong {
+      font-weight: inherit !important;
+    }
+
+    .urlbarView-row[dynamicType="onboardTabToSearch"]
+      .urlbarView-title
+      strong.urlbarView-dynamic-onboardTabToSearch-titleStrong {
+      font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
+    }
+
+    .urlbarView-tip-button {
+      font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
+      font-weight: var(--uc-font-weight-bold, 600) !important;
+    }
+
+    .popup-notification-body input[type="password"] {
+      font-family: SF Pro, SF Arabic, Segoe UI, sans-serif !important;
+    }
+
+    .popup-notification-description b {
+      font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
+      font-kerning: auto !important;
+    }
+
+    :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
+      :where(menu, menuitem, menucaption),
+    panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem {
+      font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
+      font-kerning: normal !important;
+    }
+
+    .pointerlockfswarning-domain-text,
+    .pointerlockfswarning-generic-text {
+      font-weight: var(--uc-font-weight-thin, 300) !important;
+    }
+
+    .pointerlockfswarning-domain {
+      font-weight: var(--uc-font-weight-bold, 400) !important;
+    }
+
+    .dialog-button-box button,
+    :root[dialogroot] button {
+      font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
+      font-weight: var(--uc-font-weight-bold, 600) !important;
+    }
+
+    #protections-popup-milestones-text {
+      font-weight: var(--uc-font-weight-bold, 600) !important;
+      font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
+      font-size: 1.1em !important;
+    }
+
+    @-moz-document url-prefix("chrome://browser/content/syncedtabs/sidebar.xhtml")
+    {
+      body {
+        font-family: SF Pro, SF Arabic, Segoe UI, sans-serif !important;
+        font-kerning: normal !important;
+      }
+    }
+  }
 }
 
 /* replace certain favicons */
 /* google */
-.tab-icon-image[src="data:image/x-icon;base64,AAABAAIAEBAAAAEAIABoBAAAJgAAACAgAAABACAAqBAAAI4EAAAoAAAAEAAAACAAAAABACAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP///zD9/f2W/f392P39/fn9/f35/f391/39/ZT+/v4uAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/v7+Cf39/Zn///////////////////////////////////////////39/ZX///8IAAAAAAAAAAAAAAAA/v7+Cf39/cH/////+v35/7TZp/92ul3/WKs6/1iqOv9yuFn/rNWd//j79v///////f39v////wgAAAAAAAAAAP39/Zn/////7PXp/3G3WP9TqDT/U6g0/1OoNP9TqDT/U6g0/1OoNP+Or1j//vDo///////9/f2VAAAAAP///zD/////+vz5/3G3V/9TqDT/WKo6/6LQkf/U6cz/1urO/6rUm/+Zo0r/8IZB//adZ////v7///////7+/i79/f2Y/////4nWzf9Lqkj/Vqo4/9Xqzv///////////////////////ebY//SHRv/0hUL//NjD///////9/f2U/f392v////8sxPH/Ebzt/43RsP/////////////////////////////////4roL/9IVC//i1jf///////f391/39/fr/////Cr37/wW8+/+16/7/////////////////9IVC//SFQv/0hUL/9IVC//SFQv/3pnX///////39/fn9/f36/////wu++/8FvPv/tuz+//////////////////SFQv/0hUL/9IVC//SFQv/0hUL/96p7///////9/f35/f392/////81yfz/CrL5/2uk9v///////////////////////////////////////////////////////f392P39/Zn/////ks/7/zdS7P84Rur/0NT6///////////////////////9/f////////////////////////39/Zb+/v4y//////n5/v9WYu3/NUPq/ztJ6/+VnPT/z9L6/9HU+v+WnfT/Ul7t/+Hj/P////////////////////8wAAAAAP39/Z3/////6Or9/1hj7v81Q+r/NUPq/zVD6v81Q+r/NUPq/zVD6v9sdvD////////////9/f2YAAAAAAAAAAD///8K/f39w//////5+f7/paz2/11p7v88Suv/Okfq/1pm7v+iqfX/+fn+///////9/f3B/v7+CQAAAAAAAAAAAAAAAP///wr9/f2d///////////////////////////////////////////9/f2Z/v7+CQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP7+/jL9/f2Z/f392/39/fr9/f36/f392v39/Zj///8wAAAAAAAAAAAAAAAAAAAAAPAPAADAAwAAgAEAAIABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIABAACAAQAAwAMAAPAPAAAoAAAAIAAAAEAAAAABACAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP7+/g3+/v5X/f39mf39/cj9/f3q/f39+f39/fn9/f3q/f39yP39/Zn+/v5W////DAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP7+/iT9/f2c/f399f/////////////////////////////////////////////////////9/f31/f39mv7+/iMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP7+/gn9/f2K/f39+////////////////////////////////////////////////////////////////////////////f39+v39/Yf///8IAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD+/v4k/f390v////////////////////////////////////////////////////////////////////////////////////////////////39/dD///8iAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA////MP39/er//////////////////////////+r05v+v16H/gsBs/2WxSf9Wqjj/Vqk3/2OwRv99vWX/pdKV/97u2P////////////////////////////39/ej+/v4vAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP7+/iT9/f3q/////////////////////+v15/+Pxnv/VKk2/1OoNP9TqDT/U6g0/1OoNP9TqDT/U6g0/1OoNP9TqDT/U6g0/36+Z//d7tf///////////////////////39/ej///8iAAAAAAAAAAAAAAAAAAAAAAAAAAD///8K/f390//////////////////////E4bn/XKw+/1OoNP9TqDT/U6g0/1OoNP9TqDT/U6g0/1OoNP9TqDT/U6g0/1OoNP9TqDT/U6g0/1apN/+x0pv///////////////////////39/dD///8IAAAAAAAAAAAAAAAAAAAAAP39/Yv/////////////////////sdij/1OoNP9TqDT/U6g0/1OoNP9TqDT/U6g0/1OoNP9TqDT/U6g0/1OoNP9TqDT/U6g0/1OoNP9TqDT/YKU1/8qOPv/5wZ////////////////////////39/YcAAAAAAAAAAAAAAAD+/v4l/f39+////////////////8Lgt/9TqDT/U6g0/1OoNP9TqDT/U6g0/1OoNP9utlT/n86N/7faqv+426v/pdKV/3u8ZP9UqDX/U6g0/3egN//jiUH/9IVC//SFQv/82MP//////////////////f39+v7+/iMAAAAAAAAAAP39/Z3////////////////q9Ob/W6w+/1OoNP9TqDT/U6g0/1OoNP9nskz/zOXC/////////////////////////////////+Dv2v+osWP/8YVC//SFQv/0hUL/9IVC//WQVP/++fb//////////////////f39mgAAAAD+/v4O/f399v///////////////4LHj/9TqDT/U6g0/1OoNP9TqDT/dblc//L58P/////////////////////////////////////////////8+v/3p3f/9IVC//SFQv/0hUL/9IVC//rIqf/////////////////9/f31////DP7+/ln////////////////f9v7/Cbz2/zOwhv9TqDT/U6g0/2KwRv/v9+z///////////////////////////////////////////////////////738//1kFT/9IVC//SFQv/0hUL/9plg///////////////////////+/v5W/f39nP///////////////4jf/f8FvPv/Bbz7/yG1s/9QqDz/vN2w//////////////////////////////////////////////////////////////////rHqP/0hUL/9IVC//SFQv/0hUL//vDn//////////////////39/Zn9/f3L////////////////R878/wW8+/8FvPv/Bbz7/y7C5P/7/fr//////////////////////////////////////////////////////////////////ere//SFQv/0hUL/9IVC//SFQv/718H//////////////////f39yP39/ez///////////////8cwvv/Bbz7/wW8+/8FvPv/WNL8///////////////////////////////////////0hUL/9IVC//SFQv/0hUL/9IVC//SFQv/0hUL/9IVC//SFQv/0hUL/9IVC//rIqv/////////////////9/f3q/f39+v///////////////we9+/8FvPv/Bbz7/wW8+/993P3///////////////////////////////////////SFQv/0hUL/9IVC//SFQv/0hUL/9IVC//SFQv/0hUL/9IVC//SFQv/0hUL/+cGf//////////////////39/fn9/f36////////////////B737/wW8+/8FvPv/Bbz7/33c/f//////////////////////////////////////9IVC//SFQv/0hUL/9IVC//SFQv/0hUL/9IVC//SFQv/0hUL/9IVC//SFQv/6xaX//////////////////f39+f39/e3///////////////8cwvv/Bbz7/wW8+/8FvPv/WdP8///////////////////////////////////////0hUL/9IVC//SFQv/0hUL/9IVC//SFQv/0hUL/9IVC//SFQv/0hUL/9IVC//vVv//////////////////9/f3q/f39y////////////////0bN/P8FvPv/Bbz7/wW8+/8hrvn/+/v///////////////////////////////////////////////////////////////////////////////////////////////////////////////////39/cj9/f2c////////////////ht/9/wW8+/8FvPv/FZP1/zRJ6/+zuPf//////////////////////////////////////////////////////////////////////////////////////////////////////////////////f39mf7+/lr////////////////d9v7/B7n7/yB38f81Q+r/NUPq/0hV7P/u8P3////////////////////////////////////////////////////////////////////////////////////////////////////////////+/v5X////D/39/ff///////////////9tkPT/NUPq/zVD6v81Q+r/NUPq/2Fs7//y8v7////////////////////////////////////////////09f7//////////////////////////////////////////////////f399f7+/g0AAAAA/f39n////////////////+Tm/P89Suv/NUPq/zVD6v81Q+r/NUPq/1Bc7f/IzPn/////////////////////////////////x8v5/0xY7P+MlPP////////////////////////////////////////////9/f2cAAAAAAAAAAD+/v4n/f39/P///////////////7W69/81Q+r/NUPq/zVD6v81Q+r/NUPq/zVD6v9ZZe7/k5v0/6609/+vtff/lJv0/1pm7v81Q+r/NUPq/zVD6v+GjvL//v7//////////////////////////////f39+/7+/iQAAAAAAAAAAAAAAAD9/f2N/////////////////////6Cn9f81Q+r/NUPq/zVD6v81Q+r/NUPq/zVD6v81Q+r/NUPq/zVD6v81Q+r/NUPq/zVD6v81Q+r/NUPq/zVD6v+BivL////////////////////////////9/f2KAAAAAAAAAAAAAAAAAAAAAP7+/gv9/f3V/////////////////////7W69/8+S+v/NUPq/zVD6v81Q+r/NUPq/zVD6v81Q+r/NUPq/zVD6v81Q+r/NUPq/zVD6v81Q+r/P0zr/7q/+P///////////////////////f390v7+/gkAAAAAAAAAAAAAAAAAAAAAAAAAAP7+/ib9/f3r/////////////////////+Xn/P94gfH/NkTq/zVD6v81Q+r/NUPq/zVD6v81Q+r/NUPq/zVD6v81Q+r/NkTq/3Z/8f/l5/z///////////////////////39/er+/v4kAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP7+/jL9/f3r///////////////////////////k5vz/nqX1/2p08P9IVez/OEbq/zdF6v9GU+z/aHLv/5qh9f/i5Pz////////////////////////////9/f3q////MAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP7+/ib9/f3V/////////////////////////////////////////////////////////////////////////////////////////////////f390v7+/iQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP///wr9/f2N/f39/P///////////////////////////////////////////////////////////////////////////f39+/39/Yv+/v4JAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD+/v4n/f39n/39/ff//////////////////////////////////////////////////////f399v39/Z3+/v4lAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/v7+Dv7+/lr9/f2c/f39y/39/e39/f36/f39+v39/ez9/f3L/f39nP7+/ln+/v4OAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/AA///AAD//AAAP/gAAB/wAAAP4AAAB8AAAAPAAAADgAAAAYAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAABgAAAAcAAAAPAAAAD4AAAB/AAAA/4AAAf/AAAP/8AAP//wAP/"] {
-    content: url(chrome://userchrome/content/engines/google-color.svg) !important;
+.tab-icon-image[src="data:image/x-icon;base64,AAABAAIAEBAAAAEAIABoBAAAJgAAACAgAAABACAAqBAAAI4EAAAoAAAAEAAAACAAAAABACAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP///zD9/f2W/f392P39/fn9/f35/f391/39/ZT+/v4uAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/v7+Cf39/Zn///////////////////////////////////////////39/ZX///8IAAAAAAAAAAAAAAAA/v7+Cf39/cH/////+v35/7TZp/92ul3/WKs6/1iqOv9yuFn/rNWd//j79v///////f39v////wgAAAAAAAAAAP39/Zn/////7PXp/3G3WP9TqDT/U6g0/1OoNP9TqDT/U6g0/1OoNP+Or1j//vDo///////9/f2VAAAAAP///zD/////+vz5/3G3V/9TqDT/WKo6/6LQkf/U6cz/1urO/6rUm/+Zo0r/8IZB//adZ////v7///////7+/i79/f2Y/////4nWzf9Lqkj/Vqo4/9Xqzv///////////////////////ebY//SHRv/0hUL//NjD///////9/f2U/f392v////8sxPH/Ebzt/43RsP/////////////////////////////////4roL/9IVC//i1jf///////f391/39/fr/////Cr37/wW8+/+16/7/////////////////9IVC//SFQv/0hUL/9IVC//SFQv/3pnX///////39/fn9/f36/////wu++/8FvPv/tuz+//////////////////SFQv/0hUL/9IVC//SFQv/0hUL/96p7///////9/f35/f392/////81yfz/CrL5/2uk9v///////////////////////////////////////////////////////f392P39/Zn/////ks/7/zdS7P84Rur/0NT6///////////////////////9/f////////////////////////39/Zb+/v4y//////n5/v9WYu3/NUPq/ztJ6/+VnPT/z9L6/9HU+v+WnfT/Ul7t/+Hj/P////////////////////8wAAAAAP39/Z3/////6Or9/1hj7v81Q+r/NUPq/zVD6v81Q+r/NUPq/zVD6v9sdvD////////////9/f2YAAAAAAAAAAD///8K/f39w//////5+f7/paz2/11p7v88Suv/Okfq/1pm7v+iqfX/+fn+///////9/f3B/v7+CQAAAAAAAAAAAAAAAP///wr9/f2d///////////////////////////////////////////9/f2Z/v7+CQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP7+/jL9/f2Z/f392/39/fr9/f36/f392v39/Zj///8wAAAAAAAAAAAAAAAAAAAAAPAPAADAAwAAgAEAAIABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIABAACAAQAAwAMAAPAPAAAoAAAAIAAAAEAAAAABACAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP7+/g3+/v5X/f39mf39/cj9/f3q/f39+f39/fn9/f3q/f39yP39/Zn+/v5W////DAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP7+/iT9/f2c/f399f/////////////////////////////////////////////////////9/f31/f39mv7+/iMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP7+/gn9/f2K/f39+////////////////////////////////////////////////////////////////////////////f39+v39/Yf///8IAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD+/v4k/f390v////////////////////////////////////////////////////////////////////////////////////////////////39/dD///8iAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA////MP39/er//////////////////////////+r05v+v16H/gsBs/2WxSf9Wqjj/Vqk3/2OwRv99vWX/pdKV/97u2P////////////////////////////39/ej+/v4vAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP7+/iT9/f3q/////////////////////+v15/+Pxnv/VKk2/1OoNP9TqDT/U6g0/1OoNP9TqDT/U6g0/1OoNP9TqDT/U6g0/36+Z//d7tf///////////////////////39/ej///8iAAAAAAAAAAAAAAAAAAAAAAAAAAD///8K/f390//////////////////////E4bn/XKw+/1OoNP9TqDT/U6g0/1OoNP9TqDT/U6g0/1OoNP9TqDT/U6g0/1OoNP9TqDT/U6g0/1apN/+x0pv///////////////////////39/dD///8IAAAAAAAAAAAAAAAAAAAAAP39/Yv/////////////////////sdij/1OoNP9TqDT/U6g0/1OoNP9TqDT/U6g0/1OoNP9TqDT/U6g0/1OoNP9TqDT/U6g0/1OoNP9TqDT/YKU1/8qOPv/5wZ////////////////////////39/YcAAAAAAAAAAAAAAAD+/v4l/f39+////////////////8Lgt/9TqDT/U6g0/1OoNP9TqDT/U6g0/1OoNP9utlT/n86N/7faqv+426v/pdKV/3u8ZP9UqDX/U6g0/3egN//jiUH/9IVC//SFQv/82MP//////////////////f39+v7+/iMAAAAAAAAAAP39/Z3////////////////q9Ob/W6w+/1OoNP9TqDT/U6g0/1OoNP9nskz/zOXC/////////////////////////////////+Dv2v+osWP/8YVC//SFQv/0hUL/9IVC//WQVP/++fb//////////////////f39mgAAAAD+/v4O/f399v///////////////4LHj/9TqDT/U6g0/1OoNP9TqDT/dblc//L58P/////////////////////////////////////////////8+v/3p3f/9IVC//SFQv/0hUL/9IVC//rIqf/////////////////9/f31////DP7+/ln////////////////f9v7/Cbz2/zOwhv9TqDT/U6g0/2KwRv/v9+z///////////////////////////////////////////////////////738//1kFT/9IVC//SFQv/0hUL/9plg///////////////////////+/v5W/f39nP///////////////4jf/f8FvPv/Bbz7/yG1s/9QqDz/vN2w//////////////////////////////////////////////////////////////////rHqP/0hUL/9IVC//SFQv/0hUL//vDn//////////////////39/Zn9/f3L////////////////R878/wW8+/8FvPv/Bbz7/y7C5P/7/fr//////////////////////////////////////////////////////////////////ere//SFQv/0hUL/9IVC//SFQv/718H//////////////////f39yP39/ez///////////////8cwvv/Bbz7/wW8+/8FvPv/WNL8///////////////////////////////////////0hUL/9IVC//SFQv/0hUL/9IVC//SFQv/0hUL/9IVC//SFQv/0hUL/9IVC//rIqv/////////////////9/f3q/f39+v///////////////we9+/8FvPv/Bbz7/wW8+/993P3///////////////////////////////////////SFQv/0hUL/9IVC//SFQv/0hUL/9IVC//SFQv/0hUL/9IVC//SFQv/0hUL/+cGf//////////////////39/fn9/f36////////////////B737/wW8+/8FvPv/Bbz7/33c/f//////////////////////////////////////9IVC//SFQv/0hUL/9IVC//SFQv/0hUL/9IVC//SFQv/0hUL/9IVC//SFQv/6xaX//////////////////f39+f39/e3///////////////8cwvv/Bbz7/wW8+/8FvPv/WdP8///////////////////////////////////////0hUL/9IVC//SFQv/0hUL/9IVC//SFQv/0hUL/9IVC//SFQv/0hUL/9IVC//vVv//////////////////9/f3q/f39y////////////////0bN/P8FvPv/Bbz7/wW8+/8hrvn/+/v///////////////////////////////////////////////////////////////////////////////////////////////////////////////////39/cj9/f2c////////////////ht/9/wW8+/8FvPv/FZP1/zRJ6/+zuPf//////////////////////////////////////////////////////////////////////////////////////////////////////////////////f39mf7+/lr////////////////d9v7/B7n7/yB38f81Q+r/NUPq/0hV7P/u8P3////////////////////////////////////////////////////////////////////////////////////////////////////////////+/v5X////D/39/ff///////////////9tkPT/NUPq/zVD6v81Q+r/NUPq/2Fs7//y8v7////////////////////////////////////////////09f7//////////////////////////////////////////////////f399f7+/g0AAAAA/f39n////////////////+Tm/P89Suv/NUPq/zVD6v81Q+r/NUPq/1Bc7f/IzPn/////////////////////////////////x8v5/0xY7P+MlPP////////////////////////////////////////////9/f2cAAAAAAAAAAD+/v4n/f39/P///////////////7W69/81Q+r/NUPq/zVD6v81Q+r/NUPq/zVD6v9ZZe7/k5v0/6609/+vtff/lJv0/1pm7v81Q+r/NUPq/zVD6v+GjvL//v7//////////////////////////////f39+/7+/iQAAAAAAAAAAAAAAAD9/f2N/////////////////////6Cn9f81Q+r/NUPq/zVD6v81Q+r/NUPq/zVD6v81Q+r/NUPq/zVD6v81Q+r/NUPq/zVD6v81Q+r/NUPq/zVD6v+BivL////////////////////////////9/f2KAAAAAAAAAAAAAAAAAAAAAP7+/gv9/f3V/////////////////////7W69/8+S+v/NUPq/zVD6v81Q+r/NUPq/zVD6v81Q+r/NUPq/zVD6v81Q+r/NUPq/zVD6v81Q+r/P0zr/7q/+P///////////////////////f390v7+/gkAAAAAAAAAAAAAAAAAAAAAAAAAAP7+/ib9/f3r/////////////////////+Xn/P94gfH/NkTq/zVD6v81Q+r/NUPq/zVD6v81Q+r/NUPq/zVD6v81Q+r/NkTq/3Z/8f/l5/z///////////////////////39/er+/v4kAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP7+/jL9/f3r///////////////////////////k5vz/nqX1/2p08P9IVez/OEbq/zdF6v9GU+z/aHLv/5qh9f/i5Pz////////////////////////////9/f3q////MAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP7+/ib9/f3V/////////////////////////////////////////////////////////////////////////////////////////////////f390v7+/iQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP///wr9/f2N/f39/P///////////////////////////////////////////////////////////////////////////f39+/39/Yv+/v4JAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD+/v4n/f39n/39/ff//////////////////////////////////////////////////////f399v39/Z3+/v4lAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/v7+Dv7+/lr9/f2c/f39y/39/e39/f36/f39+v39/ez9/f3L/f39nP7+/ln+/v4OAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/AA///AAD//AAAP/gAAB/wAAAP4AAAB8AAAAPAAAADgAAAAYAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAABgAAAAcAAAAPAAAAD4AAAB/AAAA/4AAAf/AAAP/8AAP//wAP/"]
+{
+  content: url(chrome://userchrome/content/engines/google-color.svg) !important;
 }
 
 /* allow scrollbuttons to flow onto the menupopup border */
 .menupopup-arrowscrollbox[overflowing="true"][orient="vertical"] {
-    overflow: visible !important;
+  overflow: visible !important;
 }
 
 /* remove tooltip borders if pref is enabled */
 @supports -moz-bool-pref("userChrome.css.remove-tooltip-borders") {
-    tooltip > description,
-    tooltip .uc-tooltip-box,
-    .places-tooltip-box,
-    #tracking-protection-container tooltip,
-    #statuspanel-label {
-        border: none !important;
-    }
+  tooltip > description,
+  tooltip .uc-tooltip-box,
+  .places-tooltip-box,
+  #tracking-protection-container tooltip,
+  #statuspanel-label {
+    border: none !important;
+  }
 }
 
-/* hide the acceltext for the bookmarks toolbar shortcut when floatingSidebarResizer.uc.js changes the hotkey */
+/* hide the acceltext for the bookmarks toolbar shortcut when
+floatingSidebarResizer.uc.js changes the hotkey */
 menupopup[bmb-command-disabled="true"]
-    menuitem[key="viewBookmarksToolbarKb"]
-    .menu-accel-container
-    label {
-    width: 0 !important;
-    visibility: hidden !important;
+  menuitem[key="viewBookmarksToolbarKb"]
+  .menu-accel-container
+  label {
+  width: 0 !important;
+  visibility: hidden !important;
 }
 
 /* styles for perTabNavButtons.uc.js */
 #tab-nav-popup-mainView .toolbarbutton-1 {
-    background: none !important;
-    outline: none !important;
+  background: none !important;
+  outline: none !important;
 }
 
 #tab-nav-tooltip-textbox {
-    padding: 4px 6px !important;
-    border: 0 !important;
+  padding: 4px 6px !important;
+  border: 0 !important;
 }
 
 #tab-nav-popup-mainView
-    .toolbarbutton-1:focus-visible:not([disabled], [open], :hover, :active)
-    > .toolbarbutton-icon {
-    background-color: var(--toolbarbutton-checked-background) !important;
-    transition: none !important;
+  .toolbarbutton-1:focus-visible:not([disabled], [open], :hover, :active)
+  > .toolbarbutton-icon {
+  background-color: var(--toolbarbutton-checked-background) !important;
+  transition: none !important;
 }
 
-/* highlight container tabs in the recently closed tabs/windows menus. requires recentlyClosedTabsContextMenu.uc.js */
+/* highlight container tabs in the recently closed tabs/windows menus.
+requires recentlyClosedTabsContextMenu.uc.js */
 .recently-closed-item[usercontextid] {
-    background-image: linear-gradient(
-        to right,
-        var(--identity-tab-color, transparent) 0,
-        var(--identity-tab-color, transparent) 3px,
-        transparent 3px
-    ) !important;
+  background-image: linear-gradient(
+    to right,
+    var(--identity-tab-color, transparent) 0,
+    var(--identity-tab-color, transparent) 3px,
+    transparent 3px
+  ) !important;
 }
 
-/* this is for miscMods.uc.js' setting "Anchor permissions popup to granted permission icon"
-adjust the popup and icon dimensions commensurately */
+/* this is for miscMods.uc.js' setting "Anchor permissions popup to granted permission icon" */
+/* adjust the popup and icon dimensions commensurately */
 #permission-popup[anchor-to-icon] {
-    margin-inline: calc(-20px + var(--uc-panel-left-offset, 0px)) !important;
+  margin-inline: calc(-20px + var(--uc-panel-left-offset, 0px)) !important;
 }

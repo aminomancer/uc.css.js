@@ -24,20 +24,20 @@
   // user configuration
   const config = {
     urlOverride: "",
-    /* the script tries to automatically find earthlng's aboutconfig URL,
-        and if it can't be found, uses the built-in about:config URL instead. if
-        it's unable to find the URL for your particular setup, or if you just
-        want to use the vanilla about:config page, replace this empty string
-        with your preferred URL, in quotes. if you want to use my about:cfg
-        script that registers earthlng's aboutconfig page to about:cfg, and you
-        want the about:config button to take you to about:cfg, then leave this
-        empty. it will automatically use about:cfg if the script exists. if
-        about:cfg doesn't work for you then change the pathOverride in *that*
-        script instead of setting urlOverride in this one. if you changed the
-        address (the "cfg" string) in that script, you'll need to use
-        urlOverride here if you want the button to direct to earthlng's
-        aboutconfig page. so if for example you changed the address to "config2"
-        then change urlOverride above to "about:config2" */
+    /* the script tries to automatically find earthlng's aboutconfig URL, and if
+    it can't be found, uses the built-in about:config URL instead. if it's
+    unable to find the URL for your particular setup, or if you just want to
+    use the vanilla about:config page, replace this empty string with your
+    preferred URL, in quotes. if you want to use my about:cfg script that
+    registers earthlng's aboutconfig page to about:cfg, and you want the
+    about:config button to take you to about:cfg, then leave this empty. it
+    will automatically use about:cfg if the script exists. if about:cfg
+    doesn't work for you then change the pathOverride in *that* script
+    instead of setting urlOverride in this one. if you changed the address
+    (the "cfg" string) in that script, you'll need to use urlOverride here
+    if you want the button to direct to earthlng's aboutconfig page. so if
+    for example you changed the address to "config2" then change urlOverride
+    above to "about:config2" */
   };
 
   let { interfaces: Ci, manager: Cm } = Components;

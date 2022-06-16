@@ -8,223 +8,223 @@
 
 @-moz-document regexp("moz-extension://.*/popup.html")
 {
-    :root[uc-extension-id="sort-bookmarks@heftig"] body {
-        background: var(--uc-arrowpanel-background) !important;
-        color: var(--uc-arrowpanel-color) !important;
-        margin: 0 !important;
-        font-size: inherit !important;
-        box-sizing: border-box !important;
-    }
+  :root[uc-extension-id="sort-bookmarks@heftig"] body {
+    background: var(--uc-arrowpanel-background) !important;
+    color: var(--uc-arrowpanel-color) !important;
+    margin: 0 !important;
+    font-size: inherit !important;
+    box-sizing: border-box !important;
+  }
 
-    :root[uc-extension-id="sort-bookmarks@heftig"] {
-        font-family: sans-serif;
-        font-size: 12px !important;
-        user-select: none;
+  :root[uc-extension-id="sort-bookmarks@heftig"] {
+    font-family: sans-serif;
+    font-size: 12px !important;
+    user-select: none;
+  }
+
+  :root[uc-extension-id="sort-bookmarks@heftig"] #context {
+    box-sizing: border-box !important;
+    margin-block: 0 !important;
+    min-width: 200px !important;
+    user-select: none;
+    text-align: center !important;
+    line-height: normal !important;
+    padding-block: calc((44px - 1.1em) / 2) !important;
+    block-size: 44px !important;
+    min-height: 44px !important;
+    white-space: nowrap !important;
+    margin-inline: 16px !important;
+    font-weight: normal !important;
+    font-size: 1.1em !important;
+    color: inherit !important;
+    letter-spacing: inherit !important;
+  }
+
+  :root[uc-extension-id="sort-bookmarks@heftig"] #sort-form {
+    margin: var(--menupopup-inner-padding-magnitude) !important;
+    padding-block: var(--menupopup-inner-padding-magnitude) !important;
+    border-top: 1px solid var(--uc-desaturate-dimmed) !important;
+  }
+
+  :root[uc-extension-id="sort-bookmarks@heftig"] #sort-form p {
+    margin: var(--menupopup-inner-padding-magnitude) 6px !important;
+  }
+
+  :root[uc-extension-id="sort-bookmarks@heftig"] select {
+    appearance: none;
+    border-radius: var(--general-button-border-radius);
+    margin: 0;
+    border: none !important;
+    padding: 4px 20px 4px 3px !important;
+    background: var(--uc-arrowpanel-dimmed) url(chrome://userchrome/content/arrow-dropdown-12.svg)
+      no-repeat center right 5px/12px !important;
+    color: inherit !important;
+    fill: currentColor;
+    -moz-context-properties: fill, fill-opacity;
+    font: inherit;
+  }
+
+  :root[uc-extension-id="sort-bookmarks@heftig"] select:is(:hover, :focus, :active) {
+    appearance: none;
+    border-radius: var(--general-button-border-radius);
+    margin: 0;
+    border: none !important;
+    padding: 4px 20px 4px 3px !important;
+    background-color: var(--uc-arrowpanel-dimmed-further) !important;
+  }
+
+  :root[uc-extension-id="sort-bookmarks@heftig"] fieldset {
+    margin-inline: 6px !important;
+    margin-block: 10px !important;
+    border: none !important;
+    background-color: var(--uc-panel-box-solid) !important;
+    border-radius: 5px;
+    padding: 6px 8px 8px !important;
+  }
+
+  :root[uc-extension-id="sort-bookmarks@heftig"] fieldset > legend {
+    background-color: var(--uc-panel-box-solid) !important;
+    padding: 3px 8px !important;
+    border-radius: 5px;
+  }
+
+  :root[uc-extension-id="sort-bookmarks@heftig"] input:is([type="checkbox"], [type="radio"]) {
+    appearance: none !important;
+    margin: 0 !important;
+    width: 14px;
+    height: 14px;
+    fill: currentColor;
+    -moz-context-properties: fill, fill-opacity, stroke;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border: 1px solid var(--uc-checkbox-border-color);
+    background-color: var(--uc-checkbox-unchecked-bgcolor);
+    color: var(--uc-parent-primary-button-text-color);
+  }
+
+  :root[uc-extension-id="sort-bookmarks@heftig"] input[type="checkbox"] {
+    border-radius: 2px;
+    margin-inline: 4px;
+    margin-block: 3px 2px;
+  }
+
+  :root[uc-extension-id="sort-bookmarks@heftig"] .devtools-checkbox-label:not([hidden]) {
+    display: flex;
+    align-items: center;
+  }
+
+  :root[uc-extension-id="sort-bookmarks@heftig"] .devtools-checkbox-label input[type="checkbox"] {
+    margin-block: 3px;
+  }
+
+  :root[uc-extension-id="sort-bookmarks@heftig"]
+    input:is([type="checkbox"], [type="radio"]):is(:hover, :focus-visible) {
+    background-color: var(--uc-checkbox-unchecked-hover-bgcolor);
+  }
+
+  :root[uc-extension-id="sort-bookmarks@heftig"]
+    input:is([type="checkbox"], [type="radio"]):is(:hover, :focus-visible):active {
+    background-color: var(--uc-checkbox-unchecked-active-bgcolor);
+  }
+
+  :root[uc-extension-id="sort-bookmarks@heftig"]
+    input:is([type="checkbox"], [type="radio"]):is([checked="true"], :checked):is(:hover, :focus-visible) {
+    background-color: var(--uc-checkbox-checked-hover-bgcolor);
+  }
+
+  :root[uc-extension-id="sort-bookmarks@heftig"]
+    input:is([type="checkbox"], [type="radio"]):is([checked="true"], :checked):is(:hover, :focus-visible):active {
+    background-color: var(--uc-checkbox-checked-active-bgcolor);
+  }
+
+  :root[uc-extension-id="sort-bookmarks@heftig"]
+    input[type="checkbox"]:is([checked="true"], :checked) {
+    background-image: url(chrome://userchrome/content/check.svg);
+    border-color: var(--uc-checkbox-checked-border-color);
+    background-color: var(--uc-checkbox-checked-bgcolor);
+  }
+
+  :root[uc-extension-id="sort-bookmarks@heftig"] input[type="radio"] {
+    border-radius: 100%;
+    margin-inline: 4px;
+  }
+
+  :root[uc-extension-id="sort-bookmarks@heftig"]
+    input[type="radio"]:is([checked="true"], :checked) {
+    background-image: url(chrome://userchrome/content/radio.svg);
+    border-color: var(--uc-checkbox-checked-border-color);
+    background-color: var(--uc-checkbox-checked-bgcolor);
+  }
+
+  :root[uc-extension-id="sort-bookmarks@heftig"] #sort-form p,
+  :root[uc-extension-id="sort-bookmarks@heftig"] fieldset div {
+    align-items: center !important;
+    display: flex !important;
+    flex-flow: row nowrap !important;
+  }
+
+  :root[uc-extension-id="sort-bookmarks@heftig"]
+    input:is([type="radio"], [type="checkbox"])
+    ~ label {
+    padding-inline-start: 6px;
+    padding-block: 2px;
+  }
+
+  :root[uc-extension-id="sort-bookmarks@heftig"] #sort-form p select {
+    margin-inline-start: 6px;
+  }
+
+  :root[uc-extension-id="sort-bookmarks@heftig"] #autosort {
+    margin-inline-start: 4px !important;
+  }
+
+  :root[uc-extension-id="sort-bookmarks@heftig"] button[type="submit"] {
+    appearance: none;
+    border-radius: var(--context-menuitem-border-radius) !important;
+    height: revert !important;
+    line-height: 28px !important;
+    min-height: 28px !important;
+    width: 100% !important;
+    inline-size: -moz-available !important;
+    margin-top: var(--menupopup-inner-padding-magnitude);
+    margin-inline: 6px;
+    padding-inline-start: 8px !important;
+    border: 1px solid transparent !important;
+    color: inherit;
+    background-color: var(--uc-arrowpanel-dimmed) !important;
+  }
+
+  :root[uc-extension-id="sort-bookmarks@heftig"] button[type="submit"][disabled] {
+    background-color: transparent !important;
+    border-color: var(--uc-arrowpanel-dimmed) !important;
+    opacity: 0.6 !important;
+  }
+
+  :root[uc-extension-id="sort-bookmarks@heftig"]
+    button[type="submit"]:is(:hover, :focus-visible, :-moz-focusring):not([disabled]) {
+    background-color: var(--uc-parent-primary-button-background) !important;
+    border-color: transparent !important;
+  }
+
+  :root[uc-extension-id="sort-bookmarks@heftig"]
+    button[type="submit"]:is(:hover, :focus-visible, :-moz-focusring):active:not([disabled]) {
+    background-color: var(--uc-parent-primary-button-background-hover) !important;
+    border-color: transparent !important;
+  }
+
+  :root[uc-extension-id="sort-bookmarks@heftig"] :-moz-focusring {
+    outline: none !important;
+  }
+
+  @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
+    :root[uc-extension-id="sort-bookmarks@heftig"] * {
+      font-family: -apple-system, BlinkMacSystemFont, SF Pro Text, "segoe ui", "helvetica neue",
+        helvetica, ubuntu, roboto, noto, arial, sans-serif;
     }
 
     :root[uc-extension-id="sort-bookmarks@heftig"] #context {
-        box-sizing: border-box !important;
-        margin-block: 0 !important;
-        min-width: 200px !important;
-        user-select: none;
-        text-align: center !important;
-        line-height: normal !important;
-        padding-block: calc((44px - 1.1em) / 2) !important;
-        block-size: 44px !important;
-        min-height: 44px !important;
-        white-space: nowrap !important;
-        margin-inline: 16px !important;
-        font-weight: normal !important;
-        font-size: 1.1em !important;
-        color: inherit !important;
-        letter-spacing: inherit !important;
+      font-weight: var(--uc-font-weight-bold) !important;
     }
-
-    :root[uc-extension-id="sort-bookmarks@heftig"] #sort-form {
-        margin: var(--menupopup-inner-padding-magnitude) !important;
-        padding-block: var(--menupopup-inner-padding-magnitude) !important;
-        border-top: 1px solid var(--uc-desaturate-dimmed) !important;
-    }
-
-    :root[uc-extension-id="sort-bookmarks@heftig"] #sort-form p {
-        margin: var(--menupopup-inner-padding-magnitude) 6px !important;
-    }
-
-    :root[uc-extension-id="sort-bookmarks@heftig"] select {
-        appearance: none;
-        border-radius: var(--general-button-border-radius);
-        margin: 0;
-        border: none !important;
-        padding: 4px 20px 4px 3px !important;
-        background: var(--uc-arrowpanel-dimmed)
-            url(chrome://userchrome/content/arrow-dropdown-12.svg) no-repeat center right 5px/12px !important;
-        color: inherit !important;
-        fill: currentColor;
-        -moz-context-properties: fill, fill-opacity;
-        font: inherit;
-    }
-
-    :root[uc-extension-id="sort-bookmarks@heftig"] select:is(:hover, :focus, :active) {
-        appearance: none;
-        border-radius: var(--general-button-border-radius);
-        margin: 0;
-        border: none !important;
-        padding: 4px 20px 4px 3px !important;
-        background-color: var(--uc-arrowpanel-dimmed-further) !important;
-    }
-
-    :root[uc-extension-id="sort-bookmarks@heftig"] fieldset {
-        margin-inline: 6px !important;
-        margin-block: 10px !important;
-        border: none !important;
-        background-color: var(--uc-panel-box-solid) !important;
-        border-radius: 5px;
-        padding: 6px 8px 8px !important;
-    }
-
-    :root[uc-extension-id="sort-bookmarks@heftig"] fieldset > legend {
-        background-color: var(--uc-panel-box-solid) !important;
-        padding: 3px 8px !important;
-        border-radius: 5px;
-    }
-
-    :root[uc-extension-id="sort-bookmarks@heftig"] input:is([type="checkbox"], [type="radio"]) {
-        appearance: none !important;
-        margin: 0 !important;
-        width: 14px;
-        height: 14px;
-        fill: currentColor;
-        -moz-context-properties: fill, fill-opacity, stroke;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: contain;
-        border: 1px solid var(--uc-checkbox-border-color);
-        background-color: var(--uc-checkbox-unchecked-bgcolor);
-        color: var(--uc-parent-primary-button-text-color);
-    }
-
-    :root[uc-extension-id="sort-bookmarks@heftig"] input[type="checkbox"] {
-        border-radius: 2px;
-        margin-inline: 4px;
-        margin-block: 3px 2px;
-    }
-
-    :root[uc-extension-id="sort-bookmarks@heftig"] .devtools-checkbox-label:not([hidden]) {
-        display: flex;
-        align-items: center;
-    }
-
-    :root[uc-extension-id="sort-bookmarks@heftig"] .devtools-checkbox-label input[type="checkbox"] {
-        margin-block: 3px;
-    }
-
-    :root[uc-extension-id="sort-bookmarks@heftig"]
-        input:is([type="checkbox"], [type="radio"]):is(:hover, :focus-visible) {
-        background-color: var(--uc-checkbox-unchecked-hover-bgcolor);
-    }
-
-    :root[uc-extension-id="sort-bookmarks@heftig"]
-        input:is([type="checkbox"], [type="radio"]):is(:hover, :focus-visible):active {
-        background-color: var(--uc-checkbox-unchecked-active-bgcolor);
-    }
-
-    :root[uc-extension-id="sort-bookmarks@heftig"]
-        input:is([type="checkbox"], [type="radio"]):is([checked="true"], :checked):is(:hover, :focus-visible) {
-        background-color: var(--uc-checkbox-checked-hover-bgcolor);
-    }
-
-    :root[uc-extension-id="sort-bookmarks@heftig"]
-        input:is([type="checkbox"], [type="radio"]):is([checked="true"], :checked):is(:hover, :focus-visible):active {
-        background-color: var(--uc-checkbox-checked-active-bgcolor);
-    }
-
-    :root[uc-extension-id="sort-bookmarks@heftig"]
-        input[type="checkbox"]:is([checked="true"], :checked) {
-        background-image: url(chrome://userchrome/content/check.svg);
-        border-color: var(--uc-checkbox-checked-border-color);
-        background-color: var(--uc-checkbox-checked-bgcolor);
-    }
-
-    :root[uc-extension-id="sort-bookmarks@heftig"] input[type="radio"] {
-        border-radius: 100%;
-        margin-inline: 4px;
-    }
-
-    :root[uc-extension-id="sort-bookmarks@heftig"]
-        input[type="radio"]:is([checked="true"], :checked) {
-        background-image: url(chrome://userchrome/content/radio.svg);
-        border-color: var(--uc-checkbox-checked-border-color);
-        background-color: var(--uc-checkbox-checked-bgcolor);
-    }
-
-    :root[uc-extension-id="sort-bookmarks@heftig"] #sort-form p,
-    :root[uc-extension-id="sort-bookmarks@heftig"] fieldset div {
-        align-items: center !important;
-        display: flex !important;
-        flex-flow: row nowrap !important;
-    }
-
-    :root[uc-extension-id="sort-bookmarks@heftig"]
-        input:is([type="radio"], [type="checkbox"])
-        ~ label {
-        padding-inline-start: 6px;
-        padding-block: 2px;
-    }
-
-    :root[uc-extension-id="sort-bookmarks@heftig"] #sort-form p select {
-        margin-inline-start: 6px;
-    }
-
-    :root[uc-extension-id="sort-bookmarks@heftig"] #autosort {
-        margin-inline-start: 4px !important;
-    }
-
-    :root[uc-extension-id="sort-bookmarks@heftig"] button[type="submit"] {
-        appearance: none;
-        border-radius: var(--context-menuitem-border-radius) !important;
-        height: revert !important;
-        line-height: 28px !important;
-        min-height: 28px !important;
-        width: 100% !important;
-        inline-size: -moz-available !important;
-        margin-top: var(--menupopup-inner-padding-magnitude);
-        margin-inline: 6px;
-        padding-inline-start: 8px !important;
-        border: 1px solid transparent !important;
-        color: inherit;
-        background-color: var(--uc-arrowpanel-dimmed) !important;
-    }
-
-    :root[uc-extension-id="sort-bookmarks@heftig"] button[type="submit"][disabled] {
-        background-color: transparent !important;
-        border-color: var(--uc-arrowpanel-dimmed) !important;
-        opacity: 0.6 !important;
-    }
-
-    :root[uc-extension-id="sort-bookmarks@heftig"]
-        button[type="submit"]:is(:hover, :focus-visible, :-moz-focusring):not([disabled]) {
-        background-color: var(--uc-parent-primary-button-background) !important;
-        border-color: transparent !important;
-    }
-
-    :root[uc-extension-id="sort-bookmarks@heftig"]
-        button[type="submit"]:is(:hover, :focus-visible, :-moz-focusring):active:not([disabled]) {
-        background-color: var(--uc-parent-primary-button-background-hover) !important;
-        border-color: transparent !important;
-    }
-
-    :root[uc-extension-id="sort-bookmarks@heftig"] :-moz-focusring {
-        outline: none !important;
-    }
-
-    @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
-        :root[uc-extension-id="sort-bookmarks@heftig"] * {
-            font-family: -apple-system, BlinkMacSystemFont, SF Pro Text, "segoe ui",
-                "helvetica neue", helvetica, ubuntu, roboto, noto, arial, sans-serif;
-        }
-
-        :root[uc-extension-id="sort-bookmarks@heftig"] #context {
-            font-weight: var(--uc-font-weight-bold) !important;
-        }
-    }
+  }
 }

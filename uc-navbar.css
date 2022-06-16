@@ -10,868 +10,876 @@ if it's visible in the row beneath the tabs then it's probably in here. */
 /* remove line under navigation toolbar */
 #navigator-toolbox,
 :root:not([sizemode="normal"]) #navigator-toolbox {
-    border: none !important;
+  border: none !important;
 }
 
 toolbarpaletteitem > toolbarspring {
-    margin-block: calc((var(--urlbar-container-height) - var(--urlbar-height)) / 2) !important;
-    outline: none !important;
-    border: 1px solid var(--arrowpanel-dimmed-even-further) !important;
-    outline-offset: 0 !important;
-    border-radius: var(--toolbarbutton-border-radius) !important;
+  margin-block: calc((var(--urlbar-container-height) - var(--urlbar-height)) / 2) !important;
+  outline: none !important;
+  border: 1px solid var(--arrowpanel-dimmed-even-further) !important;
+  outline-offset: 0 !important;
+  border-radius: var(--toolbarbutton-border-radius) !important;
 }
 
 toolbarpaletteitem[place="palette"] > toolbarspring {
-    min-height: var(--urlbar-height) !important;
-    max-height: var(--urlbar-height) !important;
-    padding-block: 0 !important;
-    margin-block: 5px !important;
+  min-height: var(--urlbar-height) !important;
+  max-height: var(--urlbar-height) !important;
+  padding-block: 0 !important;
+  margin-block: 5px !important;
 }
 
 #PersonalToolbar > toolbarpaletteitem > toolbarspring {
-    margin-block: revert !important;
-    margin-inline: 2px !important;
+  margin-block: revert !important;
+  margin-inline: 2px !important;
 }
 
 #wrapper-urlbar-container + toolbarpaletteitem > #search-container,
 #nav-bar[customizing="true"] #urlbar-container + #search-container,
 #wrapper-search-container + toolbarpaletteitem > #urlbar-container,
 #nav-bar[customizing="true"] #search-container + #urlbar-container {
-    margin-inline-start: 1px !important;
+  margin-inline-start: 1px !important;
 }
 
 /* toolbar button badges */
 :is(.customization-target, .widget-overflow-list)
-    :is(toolbarbutton, toolbaritem):not([attention])
-    > .toolbarbutton-badge-stack
-    > .toolbarbutton-badge {
-    background-color: var(--uc-toolbarbutton-badge-bgcolor, hsl(0, 100%, 42.5%)) !important;
-    color: var(--toolbar-color, white) !important;
-    box-shadow: 0 1px 1px -1px #ffffff4d inset, 0 -1px 1px -1px #00000080 inset, 0 1px 1px #1e1e2026,
-        0 1px 3px #1e1e2033 !important;
-    min-width: 10.5px !important;
-    height: 10.5px !important;
-    -moz-box-align: end !important;
-    font-size: 9px !important;
-    font-weight: var(--uc-font-weight-bold, 600) !important;
-    line-height: 10px !important;
-    filter: none !important;
-    margin: -6px -6px 0 -6px !important;
+  :is(toolbarbutton, toolbaritem):not([attention])
+  > .toolbarbutton-badge-stack
+  > .toolbarbutton-badge {
+  background-color: var(--uc-toolbarbutton-badge-bgcolor, hsl(0, 100%, 42.5%)) !important;
+  color: var(--toolbar-color, white) !important;
+  box-shadow: 0 1px 1px -1px #ffffff4d inset, 0 -1px 1px -1px #00000080 inset, 0 1px 1px #1e1e2026,
+    0 1px 3px #1e1e2033 !important;
+  min-width: 10.5px !important;
+  height: 10.5px !important;
+  -moz-box-align: end !important;
+  font-size: 9px !important;
+  font-weight: var(--uc-font-weight-bold, 600) !important;
+  line-height: 10px !important;
+  filter: none !important;
+  margin: -6px -6px 0 -6px !important;
 }
 
 :is(.customization-target, .widget-overflow-list)
-    #downloads-button[attention]
-    > .toolbarbutton-badge-stack
-    > .toolbarbutton-badge {
-    margin-right: -5.5px !important;
-    margin-top: -5.5px !important;
-    width: 10px !important;
-    height: 10px !important;
-    box-shadow: none !important;
-    background-image: url(chrome://userchrome/content/devtools/error.svg) !important;
-    background-size: contain !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
+  #downloads-button[attention]
+  > .toolbarbutton-badge-stack
+  > .toolbarbutton-badge {
+  margin-right: -5.5px !important;
+  margin-top: -5.5px !important;
+  width: 10px !important;
+  height: 10px !important;
+  box-shadow: none !important;
+  background-image: url(chrome://userchrome/content/devtools/error.svg) !important;
+  background-size: contain !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
 }
 
 :is(.customization-target, .widget-overflow-list)
-    #downloads-button[attention="info"]
-    > .toolbarbutton-badge-stack
-    > .toolbarbutton-badge {
-    background-color: transparent !important;
-    -moz-context-properties: none !important;
-    border-radius: revert !important;
-    background-image: url(chrome://userchrome/content/indicator-tab-attention-purple.svg) !important;
+  #downloads-button[attention="info"]
+  > .toolbarbutton-badge-stack
+  > .toolbarbutton-badge {
+  background-color: transparent !important;
+  -moz-context-properties: none !important;
+  border-radius: revert !important;
+  background-image: url(chrome://userchrome/content/indicator-tab-attention-purple.svg) !important;
 }
 
 :is(.customization-target, .widget-overflow-list)
-    #downloads-button[attention="warning"]
-    > .toolbarbutton-badge-stack
-    > .toolbarbutton-badge {
-    background-color: var(--low-warning-icon-detail) !important;
-    fill: var(--low-warning-icon-background) !important;
-    border-radius: 50% !important;
+  #downloads-button[attention="warning"]
+  > .toolbarbutton-badge-stack
+  > .toolbarbutton-badge {
+  background-color: var(--low-warning-icon-detail) !important;
+  fill: var(--low-warning-icon-background) !important;
+  border-radius: 50% !important;
 }
 
 :is(.customization-target, .widget-overflow-list)
-    #downloads-button[attention="severe"]
-    > .toolbarbutton-badge-stack
-    > .toolbarbutton-badge {
-    background-color: var(--warning-icon-detail) !important;
-    fill: var(--warning-icon-background) !important;
-    border-radius: 50% !important;
+  #downloads-button[attention="severe"]
+  > .toolbarbutton-badge-stack
+  > .toolbarbutton-badge {
+  background-color: var(--warning-icon-detail) !important;
+  fill: var(--warning-icon-background) !important;
+  border-radius: 50% !important;
 }
 
 :is(.customization-target, .widget-overflow-list)
-    #fxa-toolbar-menu-button[badge-status="login_failed"]
-    > .toolbarbutton-badge-stack
-    > .toolbarbutton-badge {
-    background: url(chrome://userchrome/content/skin/controlcenter/warning.svg) no-repeat
-        center/contain !important;
-    stroke: var(--low-warning-icon-detail) !important;
-    fill: var(--low-warning-icon-background) !important;
-    box-shadow: none !important;
-    -moz-context-properties: fill, stroke !important;
-    padding: 0 !important;
-    margin: -7px 0 0 !important;
-    margin-inline-end: -6px !important;
-    filter: none !important;
+  #fxa-toolbar-menu-button[badge-status="login_failed"]
+  > .toolbarbutton-badge-stack
+  > .toolbarbutton-badge {
+  background: url(chrome://userchrome/content/skin/controlcenter/warning.svg) no-repeat
+    center/contain !important;
+  stroke: var(--low-warning-icon-detail) !important;
+  fill: var(--low-warning-icon-background) !important;
+  box-shadow: none !important;
+  -moz-context-properties: fill, stroke !important;
+  padding: 0 !important;
+  margin: -7px 0 0 !important;
+  margin-inline-end: -6px !important;
+  filter: none !important;
 }
 
 .widget-overflow-list .toolbarbutton-1 > .toolbarbutton-text {
-    padding-inline-start: var(--arrowpanel-subviewbutton-iconic-gap, 8px) !important;
+  padding-inline-start: var(--arrowpanel-subviewbutton-iconic-gap, 8px) !important;
 }
 
 .widget-overflow-list .toolbaritem-combined-buttons .toolbarbutton-1 > .toolbarbutton-text {
-    padding-inline-end: 4px !important;
+  padding-inline-end: 4px !important;
 }
 
 .widget-overflow-list
-    #zoom-controls[cui-areatype="toolbar"]
-    > #zoom-reset-button
-    > .toolbarbutton-text {
-    min-width: calc(5ch + 4px) !important;
-    padding-inline: 0 !important;
+  #zoom-controls[cui-areatype="toolbar"]
+  > #zoom-reset-button
+  > .toolbarbutton-text {
+  min-width: calc(5ch + 4px) !important;
+  padding-inline: 0 !important;
 }
 
 toolbar .toolbaritem-combined-buttons.chromeclass-toolbar-additional {
-    margin-inline: 0 !important;
+  margin-inline: 0 !important;
 }
 
 toolbar :not(toolbarpaletteitem) > .toolbaritem-combined-buttons.chromeclass-toolbar-additional {
-    -moz-box-align: stretch !important;
+  -moz-box-align: stretch !important;
 }
 
 toolbar .toolbaritem-combined-buttons.chromeclass-toolbar-additional:not(:hover) > separator {
-    content: "";
-    display: -moz-box;
-    width: 0.67px !important;
-    height: 20px !important;
-    margin-inline-end: -0.67px !important;
-    background-image: linear-gradient(currentColor 0, currentColor 100%);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 1px 20px !important;
-    opacity: 0.2;
+  content: "";
+  display: -moz-box;
+  width: 0.67px !important;
+  height: 20px !important;
+  margin-inline-end: -0.67px !important;
+  background-image: linear-gradient(currentColor 0, currentColor 100%);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 1px 20px !important;
+  opacity: 0.2;
 }
 
 toolbar .toolbarbutton-combined-buttons-dropmarker,
 #PersonalToolbar .toolbaritem-combined-buttons .toolbarbutton-combined-buttons-dropmarker {
-    margin-block: var(--toolbarbutton-inner-padding) !important;
+  margin-block: var(--toolbarbutton-inner-padding) !important;
 }
 
 toolbar .toolbarbutton-combined-buttons-dropmarker > .toolbarbutton-icon {
-    padding-inline: 2px !important;
-    padding-block: 2px !important;
-    height: 20px !important;
-    width: 16px !important;
+  padding-inline: 2px !important;
+  padding-block: 2px !important;
+  height: 20px !important;
+  width: 16px !important;
 }
 
 toolbar:not(#PersonalToolbar) #edit-controls > #cut-button,
 toolbar #profiler-button > #profiler-button-button {
-    padding-left: 2px !important;
+  padding-left: 2px !important;
 }
 
 toolbar:not(#PersonalToolbar) #edit-controls > #paste-button,
 toolbar #profiler-button > #profiler-button-dropmarker {
-    padding-right: 2px !important;
+  padding-right: 2px !important;
 }
 
 toolbar:not(#PersonalToolbar) #zoom-controls > :is(#zoom-out-button, #zoom-in-button) {
-    margin-block: var(--toolbarbutton-inner-padding) !important;
-    width: unset !important;
-    padding: 0 !important;
-    padding-inline: 2px !important;
+  margin-block: var(--toolbarbutton-inner-padding) !important;
+  width: unset !important;
+  padding: 0 !important;
+  padding-inline: 2px !important;
 }
 
 toolbar:not(#PersonalToolbar)
-    #zoom-controls
-    > :is(#zoom-out-button, #zoom-in-button)
-    > .toolbarbutton-icon {
-    height: 20px !important;
-    width: 20px !important;
-    padding: 4px !important;
+  #zoom-controls
+  > :is(#zoom-out-button, #zoom-in-button)
+  > .toolbarbutton-icon {
+  height: 20px !important;
+  width: 20px !important;
+  padding: 4px !important;
 }
 
 #zoom-in-button > .toolbarbutton-icon {
-    padding-inline-start: 0 !important;
+  padding-inline-start: 0 !important;
 }
 
 toolbar:not(#PersonalToolbar) #zoom-controls > #zoom-reset-button {
-    margin-block: var(--toolbarbutton-inner-padding) !important;
+  margin-block: var(--toolbarbutton-inner-padding) !important;
 }
 
 toolbar:not(#PersonalToolbar)
-    #zoom-controls
-    > #zoom-reset-button:not([disabled]):is(:hover, :focus-visible)
-    > .toolbarbutton-text {
-    border-color: transparent;
+  #zoom-controls
+  > #zoom-reset-button:not([disabled]):is(:hover, :focus-visible)
+  > .toolbarbutton-text {
+  border-color: transparent;
 }
 
 toolbar:not(#PersonalToolbar) #zoom-controls > #zoom-reset-button > .toolbarbutton-text {
-    height: 20px !important;
-    min-height: 20px !important;
-    font-size: 0.98em;
-    padding-block: 1px !important;
-    background: hsla(0, 0%, 100%, 0.045);
-    border: 1px solid var(--toolbarbutton-hover-background);
-    border-radius: 10px !important;
+  height: 20px !important;
+  min-height: 20px !important;
+  font-size: 0.98em;
+  padding-block: 1px !important;
+  background: hsla(0, 0%, 100%, 0.045);
+  border: 1px solid var(--toolbarbutton-hover-background);
+  border-radius: 10px !important;
 }
 
 toolbar:not(#PersonalToolbar) #zoom-controls separator {
-    display: none !important;
+  display: none !important;
 }
 
 :root:not([customizing]) #stop-reload-button > .toolbarbutton-1 {
-    opacity: 1 !important;
+  opacity: 1 !important;
 }
 
 :root:not([customizing])
-    #stop-reload-button
-    > .toolbarbutton-1:not([checked], [open], :active):hover
-    > .toolbarbutton-icon {
-    background-color: var(--toolbarbutton-hover-background);
+  #stop-reload-button
+  > .toolbarbutton-1:not([checked], [open], :active):hover
+  > .toolbarbutton-icon {
+  background-color: var(--toolbarbutton-hover-background);
 }
 
 :root:not([customizing])
-    #stop-reload-button
-    > .toolbarbutton-1:is(:focus-visible, [checked="true"]):not([open], :hover, :active)
-    > .toolbarbutton-icon {
-    background-color: var(--toolbarbutton-checked-background);
+  #stop-reload-button
+  > .toolbarbutton-1:is(:focus-visible, [checked="true"]):not([open], :hover, :active)
+  > .toolbarbutton-icon {
+  background-color: var(--toolbarbutton-checked-background);
 }
 
 :root:not([customizing])
-    #stop-reload-button
-    > .toolbarbutton-1:is([open], [checked], :hover:active)
-    > .toolbarbutton-icon {
-    background-color: var(--toolbarbutton-active-background);
+  #stop-reload-button
+  > .toolbarbutton-1:is([open], [checked], :hover:active)
+  > .toolbarbutton-icon {
+  background-color: var(--toolbarbutton-active-background);
 }
 
-/* fix a little visual bug (maybe related to window scaling) where the stop button appears to move half a pixel to the left between animations.
-this is because the reload button is replaced with a step animation for a few moments, and the step animation is then replaced with a static stop icon.
-the stop icon sticks around until the page finishes loading, then it's hidden again and the step animation returns and plays in reverse.
-unfortunately the way the static icon is rendered is not identical to the step animation for every given scaling factor.
-to fix this we can just replace the static icon's path entirely with a path pulled directly from the step animation.
-i haven't tested this on every scaling factor, if it makes things worse on your setup then just delete or override this. */
+/* fix a little visual bug (maybe related to window scaling) where the stop
+button appears to move half a pixel to the left between animations. this is
+because the reload button is replaced with a step animation for a few moments,
+and the step animation is then replaced with a static stop icon. the stop icon
+sticks around until the page finishes loading, then it's hidden again and the
+step animation returns and plays in reverse. unfortunately the way the static
+icon is rendered is not identical to the step animation for every given scaling
+factor. to fix this we can just replace the static icon's path entirely with a
+path pulled directly from the step animation. i haven't tested this on every
+scaling factor, so if it makes things worse on your setup then just delete or
+override this. */
 #stop-button .toolbarbutton-icon {
-    background-image: url(chrome://userchrome/content/skin/stop-button-fix.svg) !important;
-    background-repeat: no-repeat;
-    background-position: left 5px center;
-    list-style-image: none;
+  background-image: url(chrome://userchrome/content/skin/stop-button-fix.svg) !important;
+  background-repeat: no-repeat;
+  background-position: left 5px center;
+  list-style-image: none;
 }
 
 #nav-bar[brighttext] #panic-button[open] {
-    fill: var(--warning-color) !important;
+  fill: var(--warning-color) !important;
 }
 
 #nav-bar {
-    padding-inline: 3px !important;
+  padding-inline: 3px !important;
 }
 
 #TabsToolbar-customization-target > #back-button {
-    margin-inline-start: 2px !important;
+  margin-inline-start: 2px !important;
 }
 
 #stop-reload-button {
-    pointer-events: none !important;
+  pointer-events: none !important;
 }
 
 #stop-reload-button > * {
-    pointer-events: auto !important;
+  pointer-events: auto !important;
 }
 
 /* navbar shadow */
 #navigator-toolbox {
-    position: relative;
-    box-shadow: 0px 0px 8px -5px hsla(240, 4%, 0%, 0.5), 0px 0px 15px 0px hsla(0, 0%, 0%, 0.2) !important;
+  position: relative;
+  box-shadow: 0px 0px 8px -5px hsla(240, 4%, 0%, 0.5), 0px 0px 15px 0px hsla(0, 0%, 0%, 0.2) !important;
 }
 
 toolbar .toolbarbutton-1:not([disabled])[open]:hover > .toolbarbutton-icon {
-    background-color: var(--toolbarbutton-active-background) !important;
+  background-color: var(--toolbarbutton-active-background) !important;
 }
 
 #PersonalToolbar toolbarbutton.bookmark-item {
-    padding-inline: var(--toolbarbutton-inner-padding) !important;
+  padding-inline: var(--toolbarbutton-inner-padding) !important;
 }
 
 #PersonalToolbar
-    .toolbarbutton-1:is(:focus-visible, [checked="true"]):not([disabled], [open], :hover, :active),
+  .toolbarbutton-1:is(:focus-visible, [checked="true"]):not([disabled], [open], :hover, :active),
 toolbarbutton.bookmark-item:not(.subviewbutton):is(:focus-visible, [checked="true"]):not([disabled], [open], :hover, :active),
 toolbar
-    .toolbarbutton-1:is(:focus-visible, [checked="true"]):not([disabled], [open], :hover, :active)
-    > :is(.toolbarbutton-icon, .toolbarbutton-text, .toolbarbutton-badge-stack) {
-    background-color: var(--toolbarbutton-checked-background) !important;
-    transition: none !important;
+  .toolbarbutton-1:is(:focus-visible, [checked="true"]):not([disabled], [open], :hover, :active)
+  > :is(.toolbarbutton-icon, .toolbarbutton-text, .toolbarbutton-badge-stack) {
+  background-color: var(--toolbarbutton-checked-background) !important;
+  transition: none !important;
 }
 
 #PersonalToolbar .toolbarbutton-1 > .toolbarbutton-icon,
 #PersonalToolbar .toolbarbutton-1 > .toolbarbutton-text,
 #PersonalToolbar .toolbarbutton-1 > .toolbarbutton-badge-stack {
-    background: none !important;
+  background: none !important;
 }
 
 toolbar
-    .toolbarbutton-1:not([disabled], [open])[checked]
-    > :is(.toolbarbutton-icon, .toolbarbutton-badge-stack) {
-    background-color: var(--toolbarbutton-checked-background) !important;
+  .toolbarbutton-1:not([disabled], [open])[checked]
+  > :is(.toolbarbutton-icon, .toolbarbutton-badge-stack) {
+  background-color: var(--toolbarbutton-checked-background) !important;
 }
 
 toolbar .toolbarbutton-1:not([disabled], [open])[checked]:hover > .toolbarbutton-icon {
-    background-color: var(--toolbarbutton-hover-background) !important;
+  background-color: var(--toolbarbutton-hover-background) !important;
 }
 
 toolbar .toolbarbutton-1:not([disabled], [open])[checked]:hover:active > .toolbarbutton-icon {
-    background-color: var(--toolbarbutton-active-background) !important;
+  background-color: var(--toolbarbutton-active-background) !important;
 }
 
 .widget-overflow-list .toolbarbutton-1:not([disabled], [open])[checked] {
-    background-color: var(--button-bgcolor) !important;
+  background-color: var(--button-bgcolor) !important;
 }
 
 .widget-overflow-list .toolbarbutton-1:not([disabled], [open])[checked]:is(:hover, :focus-visible) {
-    background-color: var(--button-hover-bgcolor) !important;
+  background-color: var(--button-hover-bgcolor) !important;
 }
 
 .widget-overflow-list .toolbarbutton-1:not([disabled], [open])[checked]:hover:active {
-    background-color: var(--button-active-bgcolor) !important;
+  background-color: var(--button-active-bgcolor) !important;
 }
 
 toolbar[customizing="true"]
-    toolbarpaletteitem
-    > #sidebar-button:not([disabled], [open])[checked]
-    > :is(.toolbarbutton-icon, .toolbarbutton-badge-stack) {
-    background-color: revert !important;
-    transition: transform var(--drag-drop-transition-duration) cubic-bezier(.6, 2, .75, 1.5) !important;
+  toolbarpaletteitem
+  > #sidebar-button:not([disabled], [open])[checked]
+  > :is(.toolbarbutton-icon, .toolbarbutton-badge-stack) {
+  background-color: revert !important;
+  transition: transform var(--drag-drop-transition-duration) cubic-bezier(0.6, 2, 0.75, 1.5) !important;
 }
 
 toolbarpaletteitem[place="palette"]:not([mousedown="true"]):focus-visible,
 toolbarpaletteitem[place="menu-panel"]:not([mousedown="true"]):focus-visible,
 toolbarpaletteitem[place="toolbar"]:not([mousedown="true"]):focus-visible {
-	transition: outline-width .01s linear var(--drag-drop-transition-duration);
-	outline: revert !important;
+  transition: outline-width 0.01s linear var(--drag-drop-transition-duration);
+  outline: revert !important;
 }
 
 .widget-overflow-list .toolbarbutton-1:not([disabled], [open])[checked]::after {
-    content: "";
-    display: -moz-inline-box;
-    background: url(chrome://userchrome/content/check.svg) no-repeat center/contain;
-    fill: currentColor;
-    width: 16px;
-    height: 16px;
-    margin-inline-start: 6px;
+  content: "";
+  display: -moz-inline-box;
+  background: url(chrome://userchrome/content/check.svg) no-repeat center/contain;
+  fill: currentColor;
+  width: 16px;
+  height: 16px;
+  margin-inline-start: 6px;
 }
 
 #PersonalToolbar {
-    visibility: visible !important;
-    padding-inline: 2px !important;
-    min-height: var(--urlbar-height) !important;
-    transition: min-height 200ms ease-in-out, max-height 200ms ease-in-out,
-        opacity 200ms ease-in-out, transform 200ms ease-in-out !important;
-    overflow-y: visible !important;
-    padding-block: 0 var(--bookmark-block-padding) !important;
-    outline: none !important;
+  visibility: visible !important;
+  padding-inline: 2px !important;
+  min-height: var(--urlbar-height) !important;
+  transition: min-height 200ms ease-in-out, max-height 200ms ease-in-out, opacity 200ms ease-in-out,
+    transform 200ms ease-in-out !important;
+  overflow-y: visible !important;
+  padding-block: 0 var(--bookmark-block-padding) !important;
+  outline: none !important;
 }
 
 #PersonalToolbar > * {
-    transition: opacity 200ms ease-in-out, transform 200ms ease-in-out !important;
-    overflow-y: visible !important;
+  transition: opacity 200ms ease-in-out, transform 200ms ease-in-out !important;
+  overflow-y: visible !important;
 }
 
 #PersonalToolbar > toolbarpaletteitem:not([notransition])[place="toolbar"] {
-  transition: opacity 200ms ease-in-out, transform 200ms ease-in-out, border-width var(--drag-drop-transition-duration) ease-in-out !important;
+  transition: opacity 200ms ease-in-out, transform 200ms ease-in-out,
+    border-width var(--drag-drop-transition-duration) ease-in-out !important;
 }
 
 #PersonalToolbar[customizing][draggingover] {
-    z-index: 4 !important;
+  z-index: 4 !important;
 }
 
 #PersonalToolbar #personal-bookmarks {
-    flex-grow: 1;
+  flex-grow: 1;
 }
 
 :root[inFullscreen]:not([macOSNativeFullscreen], [customizing])
-    #PersonalToolbar:not([fullscreentoolbar="true"]),
+  #PersonalToolbar:not([fullscreentoolbar="true"]),
 #PersonalToolbar[collapsed="true"] {
-    overflow-y: clip !important;
-    min-height: 0 !important;
-    max-height: 0 !important;
+  overflow-y: clip !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
 }
 
 :root[inFullscreen]:not([macOSNativeFullscreen], [customizing])
-    #PersonalToolbar:not([fullscreentoolbar="true"])
-    > *,
+  #PersonalToolbar:not([fullscreentoolbar="true"])
+  > *,
 #PersonalToolbar[collapsed="true"] > * {
-    overflow-y: clip !important;
-    opacity: 0 !important;
-    transform: translateY(-16px);
+  overflow-y: clip !important;
+  opacity: 0 !important;
+  transform: translateY(-16px);
 }
 
 #personal-toolbar-empty,
 #PersonalToolbar .toolbarbutton-1,
 toolbarbutton.bookmark-item:not(.subviewbutton) {
-    margin-block: 0 !important;
-    padding: var(--bookmark-block-padding) 4px;
-    min-height: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
-    min-width: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
-    -moz-box-align: center !important;
+  margin-block: 0 !important;
+  padding: var(--bookmark-block-padding) 4px;
+  min-height: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
+  min-width: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
+  -moz-box-align: center !important;
 }
 
 #personal-toolbar-empty-description,
 #PersonalToolbar .toolbarbutton-1,
 toolbarbutton.bookmark-item:not(.subviewbutton) {
-    margin: 2px;
-    padding: var(--bookmark-block-padding) 4px;
+  margin: 2px;
+  padding: var(--bookmark-block-padding) 4px;
 }
 
 #personal-toolbar-empty-description {
-    min-height: 0 !important;
-    margin: 0 var(--bookmark-block-padding) !important;
-    padding: 0 !important;
+  min-height: 0 !important;
+  margin: 0 var(--bookmark-block-padding) !important;
+  padding: 0 !important;
 }
 
 #PersonalToolbar a {
-    color: var(--uc-parent-link-color) !important;
+  color: var(--uc-parent-link-color) !important;
 }
 
 #PersonalToolbar a:is(:active, :focus-visible) {
-    color: var(--uc-parent-link-color-active) !important;
+  color: var(--uc-parent-link-color-active) !important;
 }
 
 @supports -moz-bool-pref("userChrome.bookmarks-toolbar.icons-only") {
-    #PersonalToolbar toolbarbutton.bookmark-item:not(.subviewbutton, [id]) {
-        margin-inline: 2px !important;
-        padding: 0 !important;
-    }
+  #PersonalToolbar toolbarbutton.bookmark-item:not(.subviewbutton, [id]) {
+    margin-inline: 2px !important;
+    padding: 0 !important;
+  }
 
-    #PlacesToolbar toolbarbutton.bookmark-item[id] {
-        padding-inline: var(--toolbarbutton-inner-padding) !important;
-    }
+  #PlacesToolbar toolbarbutton.bookmark-item[id] {
+    padding-inline: var(--toolbarbutton-inner-padding) !important;
+  }
 
-    #PersonalToolbar toolbarbutton.bookmark-item:not(.subviewbutton, [id]) .toolbarbutton-icon {
-        margin: 0 !important;
-        width: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
-        height: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
-        padding: var(--toolbarbutton-inner-padding) !important;
-        border-radius: var(--toolbarbutton-border-radius) !important;
-    }
+  #PersonalToolbar toolbarbutton.bookmark-item:not(.subviewbutton, [id]) .toolbarbutton-icon {
+    margin: 0 !important;
+    width: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
+    height: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
+    padding: var(--toolbarbutton-inner-padding) !important;
+    border-radius: var(--toolbarbutton-border-radius) !important;
+  }
 
-    #PersonalToolbar toolbarbutton.bookmark-item:not(.subviewbutton, [id]) .toolbarbutton-text {
-        display: none !important;
-    }
+  #PersonalToolbar toolbarbutton.bookmark-item:not(.subviewbutton, [id]) .toolbarbutton-text {
+    display: none !important;
+  }
 
-    /* display the background on the icon, not the button, similar to regular toolbar widgets.
-    allows us to use padding to space the buttons instead of margins,
-    so when we drag a bookmark between buttons, it doesn't get dropped at the end of the bookmarks */
-    :root:not([fluent-reveal-hover], [fluent-reveal-click])
-        #PersonalToolbar
-        toolbarbutton.bookmark-item:not(.subviewbutton, [id]) {
-        background: none !important;
-        margin-inline: 0 !important;
-        padding: 0 2px !important;
-    }
+  /* display the background on the icon, not the button, similar to regular
+  toolbar widgets. allows us to use padding to space the buttons instead of
+  margins, so when we drag a bookmark between buttons, it doesn't get dropped
+  at the end of the bookmarks */
+  :root:not([fluent-reveal-hover], [fluent-reveal-click])
+    #PersonalToolbar
+    toolbarbutton.bookmark-item:not(.subviewbutton, [id]) {
+    background: none !important;
+    margin-inline: 0 !important;
+    padding: 0 2px !important;
+  }
 
-    :root:not([fluent-reveal-hover], [fluent-reveal-click]) #PlacesToolbarDropIndicator {
-        margin-inline-start: -18px !important;
-    }
+  :root:not([fluent-reveal-hover], [fluent-reveal-click]) #PlacesToolbarDropIndicator {
+    margin-inline-start: -18px !important;
+  }
 
-    :root:not([fluent-reveal-hover], [fluent-reveal-click])
-        #PersonalToolbar
-        toolbarbutton.bookmark-item:not(.subviewbutton, [id]):is(:hover, :-moz-drag-over, :focus-visible)
-        .toolbarbutton-icon {
-        background-color: var(--button-solid-hover-background) !important;
-    }
+  :root:not([fluent-reveal-hover], [fluent-reveal-click])
+    #PersonalToolbar
+    toolbarbutton.bookmark-item:not(.subviewbutton, [id]):is(:hover, :-moz-drag-over, :focus-visible)
+    .toolbarbutton-icon {
+    background-color: var(--button-solid-hover-background) !important;
+  }
 
-    :root:not([fluent-reveal-hover], [fluent-reveal-click])
-        #PersonalToolbar
-        toolbarbutton.bookmark-item:not(.subviewbutton, [id]):hover:active
-        .toolbarbutton-icon {
-        background-color: var(--button-solid-active-background) !important;
-    }
+  :root:not([fluent-reveal-hover], [fluent-reveal-click])
+    #PersonalToolbar
+    toolbarbutton.bookmark-item:not(.subviewbutton, [id]):hover:active
+    .toolbarbutton-icon {
+    background-color: var(--button-solid-active-background) !important;
+  }
 }
 
 #PersonalToolbar #profiler-button > #profiler-button-dropmarker,
 #PersonalToolbar .toolbaritem-combined-buttons .toolbarbutton-combined-buttons-dropmarker {
-    min-height: 20px !important;
-    min-width: 0 !important;
-    padding: 0 !important;
-    padding-right: 0 !important;
+  min-height: 20px !important;
+  min-width: 0 !important;
+  padding: 0 !important;
+  padding-right: 0 !important;
 }
 
 #PersonalToolbar .toolbaritem-combined-buttons {
-    min-height: 31.5px !important;
+  min-height: 31.5px !important;
 }
 
 #PersonalToolbar #profiler-button > #profiler-button-dropmarker {
-    margin-inline-start: 0 !important;
+  margin-inline-start: 0 !important;
 }
 
 #PersonalToolbar[mode="icons"] #import-button > .toolbarbutton-icon {
-    margin-inline: 0 !important;
+  margin-inline: 0 !important;
 }
 
 #PersonalToolbar[mode="icons"] #import-button > .toolbarbutton-text {
-    display: none !important;
+  display: none !important;
 }
 
 #PlacesToolbarDropIndicator {
-    list-style-image: none !important;
-    list-style-image: url(chrome://userchrome/content/tab-drag-indicator.svg) !important;
-    -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity !important;
-    fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
-    margin-top: 22px !important;
-    translate: -2.5px !important;
-    z-index: 2500 !important;
-    width: 20px !important;
-    height: 20px !important;
+  list-style-image: none !important;
+  list-style-image: url(chrome://userchrome/content/tab-drag-indicator.svg) !important;
+  -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity !important;
+  fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
+  margin-top: 22px !important;
+  translate: -2.5px !important;
+  z-index: 2500 !important;
+  width: 20px !important;
+  height: 20px !important;
 }
 
 #customization-header {
-    margin-top: 40px !important;
+  margin-top: 40px !important;
 }
 
 #customization-panel-container {
-    z-index: 3 !important;
+  z-index: 3 !important;
 }
 
 #navigator-toolbox {
-    z-index: 3 !important;
+  z-index: 3 !important;
 }
 
 #nav-bar {
-    z-index: 11 !important;
-    box-shadow: none !important;
+  z-index: 11 !important;
+  box-shadow: none !important;
 }
 
 /* fullscreen button */
 #fullscreen-button .toolbarbutton-icon {
-    list-style-image: url(chrome://userchrome/content/skin/fullscreen.svg) !important;
+  list-style-image: url(chrome://userchrome/content/skin/fullscreen.svg) !important;
 }
 
 #fullscreen-button[checked="true"] .toolbarbutton-icon {
-    list-style-image: url(chrome://userchrome/content/skin/fullscreen-exit.svg) !important;
+  list-style-image: url(chrome://userchrome/content/skin/fullscreen-exit.svg) !important;
 }
 
 #fullscreen-button[checked="true"]:hover .toolbarbutton-icon {
-    background-color: var(--toolbarbutton-hover-background) !important;
+  background-color: var(--toolbarbutton-hover-background) !important;
 }
 
 #fullscreen-button[checked="true"]:hover:active .toolbarbutton-icon {
-    background-color: var(--toolbarbutton-active-background) !important;
+  background-color: var(--toolbarbutton-active-background) !important;
 }
 
 /* fix a bug that occurs when pre-proton downloads button is installed along with navbar toolbarbutton slider script */
 #nav-bar-toolbarbutton-slider {
-    overflow: -moz-hidden-unscrollable !important;
+  overflow: -moz-hidden-unscrollable !important;
 }
 
-/* proton stuff, primarily notifications. imo this is about as sexy as a "your plugin crashed" notification can get.
-you can test them by pasting this in the browser console and hitting enter:
+/* proton stuff, primarily notifications. imo this is about as sexy as a "your
+plugin crashed" notification can get. you can test them by pasting this in the
+browser console and hitting enter:
 
 {let notificationTest=gBrowser.getNotificationBox(gBrowser.selectedBrowser);notificationTest.appendNotification(null,{label:"This is a demo notification",priority:notificationTest.PRIORITY_INFO_HIGH},[{label:"Button 1"},{label:"Link 1",supportPage:"https://github.com/aminomancer/uc.css.js"}])}
 
-these are the notifications that appear permanently (until closed) under the navbar, shaped like long bars.
-by default they stack vertically and push the browser content down which is quite a waste.
-instead we flex them horizontally and float them over the content area with absolute positioning.
-notification row is scrollable (when overflown) with mousewheel right/left.
-(or mousewheel up/down if mousewheel.autodir.enabled = true. setting that up without the pref is difficult for these elements)
-notification icons/close buttons are animated with a similar slide+zoom motif to tab icons/close buttons.
-notifications are translucent with acrylic effect. enable layout.css.backdrop-filter.enabled */
+these are the notifications that appear permanently (until closed) under the
+navbar, shaped like long bars. by default they stack vertically and push the
+browser content down which is quite a waste. instead we flex them horizontally
+and float them over the content area with absolute positioning. notification row
+is scrollable (when overflown) with mousewheel right/left. (or mousewheel
+up/down if mousewheel.autodir.enabled = true. setting that up without the pref
+is difficult for these elements) notification icons/close buttons are animated
+with a similar slide+zoom motif to tab icons/close buttons. notifications are
+translucent with acrylic effect. enable layout.css.backdrop-filter.enabled */
 #navigator-toolbox > :is(legacy-stack, .notificationbox-stack),
 #navigator-toolbox > named-deck > :is(legacy-stack, .notificationbox-stack),
 #navigator-toolbox .global-notificationbox {
-    display: flex !important;
-    flex-flow: row nowrap !important;
-    position: absolute !important;
-    width: unset !important;
-    background: none !important;
-    width: 100% !important;
-    pointer-events: none !important;
-    overflow: scroll !important;
-    scrollbar-width: none !important;
-    column-gap: 5px !important;
+  display: flex !important;
+  flex-flow: row nowrap !important;
+  position: absolute !important;
+  width: unset !important;
+  background: none !important;
+  width: 100% !important;
+  pointer-events: none !important;
+  overflow: scroll !important;
+  scrollbar-width: none !important;
+  column-gap: 5px !important;
 }
 
 #navigator-toolbox > :is(legacy-stack, .notificationbox-stack) notification-message,
 #navigator-toolbox > named-deck > .notificationbox-stack notification-message,
 #navigator-toolbox .global-notificationbox notification-message,
 .notificationbox-stack notification {
-    margin: 0 !important;
-    display: flex !important;
-    position: relative !important;
-    max-width: 100vh !important;
-    height: 32px !important;
-    transition: margin-top 100ms linear, max-width 100ms ease-in-out !important;
-    flex-basis: min-content !important;
-    pointer-events: auto !important;
-    --in-content-button-background: var(--desaturate-dimmed) !important;
-    --in-content-button-background-hover: var(--desaturate-dimmed-further) !important;
-    --in-content-button-background-active: var(--desaturate-dimmed-even-further) !important;
-    --in-content-button-border-radius: var(--general-button-border-radius) !important;
-    --in-content-link-color: var(--purple-35) !important;
-    --in-content-link-color-hover: var(--purple-30) !important;
-    --in-content-link-color-active: var(--purple-30) !important;
-    --notification-button-background: var(--desaturate-dimmed) !important;
-    --notification-button-background-hover: var(--desaturate-dimmed-further) !important;
-    --notification-button-background-active: var(--desaturate-dimmed-even-further) !important;
-    --in-content-primary-button-background: var(--purple-40) !important;
-    --in-content-primary-button-background-hover: var(--purple-35) !important;
-    --in-content-primary-button-background-active: var(--purple-30) !important;
-    --in-content-primary-button-text-color: var(--light-on-dark-button-text-color) !important;
-    --in-content-item-selected: var(--purple-40) !important;
-    --in-content-border-hover: var(--dialog-box-border-hover) !important;
-    --checkbox-border-color: var(--in-content-box-border-color) !important;
-    --checkbox-checked-border-color: transparent !important;
-    --checkbox-unchecked-bgcolor: var(--in-content-button-background) !important;
-    --checkbox-unchecked-hover-bgcolor: var(--in-content-button-background-hover) !important;
-    --checkbox-unchecked-active-bgcolor: var(--in-content-button-background-active) !important;
-    --checkbox-checked-bgcolor: var(--in-content-primary-button-background) !important;
-    --checkbox-checked-color: var(--in-content-primary-button-text-color) !important;
-    --checkbox-checked-hover-bgcolor: var(--in-content-primary-button-background-hover) !important;
-    --checkbox-checked-active-bgcolor: var(
-        --in-content-primary-button-background-active
-    ) !important;
-    --dropdown-bgcolor: var(--arrowpanel-background) !important;
-    --in-content-button-vertical-padding: 5px !important;
+  margin: 0 !important;
+  display: flex !important;
+  position: relative !important;
+  max-width: 100vh !important;
+  height: 32px !important;
+  transition: margin-top 100ms linear, max-width 100ms ease-in-out !important;
+  flex-basis: min-content !important;
+  pointer-events: auto !important;
+  --in-content-button-background: var(--desaturate-dimmed) !important;
+  --in-content-button-background-hover: var(--desaturate-dimmed-further) !important;
+  --in-content-button-background-active: var(--desaturate-dimmed-even-further) !important;
+  --in-content-button-border-radius: var(--general-button-border-radius) !important;
+  --in-content-link-color: var(--purple-35) !important;
+  --in-content-link-color-hover: var(--purple-30) !important;
+  --in-content-link-color-active: var(--purple-30) !important;
+  --notification-button-background: var(--desaturate-dimmed) !important;
+  --notification-button-background-hover: var(--desaturate-dimmed-further) !important;
+  --notification-button-background-active: var(--desaturate-dimmed-even-further) !important;
+  --in-content-primary-button-background: var(--purple-40) !important;
+  --in-content-primary-button-background-hover: var(--purple-35) !important;
+  --in-content-primary-button-background-active: var(--purple-30) !important;
+  --in-content-primary-button-text-color: var(--light-on-dark-button-text-color) !important;
+  --in-content-item-selected: var(--purple-40) !important;
+  --in-content-border-hover: var(--dialog-box-border-hover) !important;
+  --checkbox-border-color: var(--in-content-box-border-color) !important;
+  --checkbox-checked-border-color: transparent !important;
+  --checkbox-unchecked-bgcolor: var(--in-content-button-background) !important;
+  --checkbox-unchecked-hover-bgcolor: var(--in-content-button-background-hover) !important;
+  --checkbox-unchecked-active-bgcolor: var(--in-content-button-background-active) !important;
+  --checkbox-checked-bgcolor: var(--in-content-primary-button-background) !important;
+  --checkbox-checked-color: var(--in-content-primary-button-text-color) !important;
+  --checkbox-checked-hover-bgcolor: var(--in-content-primary-button-background-hover) !important;
+  --checkbox-checked-active-bgcolor: var(--in-content-primary-button-background-active) !important;
+  --dropdown-bgcolor: var(--arrowpanel-background) !important;
+  --in-content-button-vertical-padding: 5px !important;
 }
 
 /* hide notifications when the bookmarks toolbar is visible */
 :root:not([inFullscreen]) #PersonalToolbar:not([collapsed="true"], [customizing]) + * {
-    display: none !important;
+  display: none !important;
 }
 
 .notificationbox-stack[notificationside="top"] > :is(notification, notification-message) {
-    border-radius: 0 !important;
-    overflow: hidden !important;
-    border-bottom-left-radius: 4px !important;
-    border-bottom-right-radius: 4px !important;
+  border-radius: 0 !important;
+  overflow: hidden !important;
+  border-bottom-left-radius: 4px !important;
+  border-bottom-right-radius: 4px !important;
 }
 
 .notificationbox-stack[notificationside="bottom"] > :is(notification, notification-message) {
-    border-radius: 0 !important;
-    overflow: hidden !important;
-    border-top-left-radius: 4px !important;
-    border-top-right-radius: 4px !important;
+  border-radius: 0 !important;
+  overflow: hidden !important;
+  border-top-left-radius: 4px !important;
+  border-top-right-radius: 4px !important;
 }
 
 .notificationbox-stack :is(notification, notification-message) {
-    min-height: revert !important;
+  min-height: revert !important;
 }
 
 .notificationbox-stack notification-message[type="system"] {
-    --uc-notification-message-close-button-opacity: 1 !important;
-    --uc-notification-message-close-button-transform: none !important;
-    --uc-notification-message-content-margin-inline-start: 30px !important;
+  --uc-notification-message-close-button-opacity: 1 !important;
+  --uc-notification-message-close-button-transform: none !important;
+  --uc-notification-message-content-margin-inline-start: 30px !important;
 }
 
 .notificationbox-stack notification {
-    align-items: center !important;
-    position: relative !important;
-    border-radius: 0 !important;
-    color: inherit !important;
-    overflow: hidden !important;
-    background-color: var(--notification-box-bgcolor) !important;
-    background-image: var(--notification-box-bgimage) !important;
-    backdrop-filter: var(--notification-box-filter) !important;
-    padding-inline: 4px !important;
-    align-items: center !important;
-    font-size: inherit !important;
-    flex-shrink: 0 !important;
-    flex-grow: 0 !important;
-    flex-basis: auto !important;
+  align-items: center !important;
+  position: relative !important;
+  border-radius: 0 !important;
+  color: inherit !important;
+  overflow: hidden !important;
+  background-color: var(--notification-box-bgcolor) !important;
+  background-image: var(--notification-box-bgimage) !important;
+  backdrop-filter: var(--notification-box-filter) !important;
+  padding-inline: 4px !important;
+  align-items: center !important;
+  font-size: inherit !important;
+  flex-shrink: 0 !important;
+  flex-grow: 0 !important;
+  flex-basis: auto !important;
 }
 
 /* temporarily disabled due to backdrop-filter being disabled. see https://bugzilla.mozilla.org/show_bug.cgi?id=1741779 */
 /* :root {
-    --notification-box-bgcolor: var(--acrylic-blue) !important;
-    --notification-box-bgimage: var(--acrylic-texture) !important;
-    --notification-box-filter: var(--acrylic-blur) !important;
+  --notification-box-bgcolor: var(--acrylic-blue) !important;
+  --notification-box-bgimage: var(--acrylic-texture) !important;
+  --notification-box-filter: var(--acrylic-blur) !important;
 }
 
 :root[inFullscreen] {
-    --notification-box-bgcolor: var(--arrowpanel-background) !important;
-    --notification-box-filter: none !important;
+  --notification-box-bgcolor: var(--arrowpanel-background) !important;
+  --notification-box-filter: none !important;
 } */
 
 :root {
-    --notification-box-bgcolor: var(--arrowpanel-background) !important;
-    --notification-box-bgimage: none !important;
-    --notification-box-filter: none !important;
+  --notification-box-bgcolor: var(--arrowpanel-background) !important;
+  --notification-box-bgimage: none !important;
+  --notification-box-filter: none !important;
 }
 
 .notificationbox-stack notification .notification-button {
-    height: 22px !important;
-    padding-inline: 5px !important;
-    margin-inline-end: 1px !important;
-    -moz-box-flex: 1 !important;
+  height: 22px !important;
+  padding-inline: 5px !important;
+  margin-inline-end: 1px !important;
+  -moz-box-flex: 1 !important;
 }
 
 .notificationbox-stack notification > hbox[anonid="details"] {
-    order: 1 !important;
-    margin-left: -28px !important;
+  order: 1 !important;
+  margin-left: -28px !important;
 }
 
 #navigator-toolbox
-    > :is(legacy-stack, .notificationbox-stack, named-deck)
-    notification-message[type="critical"],
+  > :is(legacy-stack, .notificationbox-stack, named-deck)
+  notification-message[type="critical"],
 #navigator-toolbox > named-deck > .notificationbox-stack notification-message[type="critical"],
 #navigator-toolbox .global-notificationbox notification-message[type="critical"] {
-    flex-shrink: 0.25 !important;
+  flex-shrink: 0.25 !important;
 }
 
 #navigator-toolbox
-    > :is(legacy-stack, .notificationbox-stack, named-deck)
-    notification-message[type="warning"],
+  > :is(legacy-stack, .notificationbox-stack, named-deck)
+  notification-message[type="warning"],
 #navigator-toolbox > named-deck > .notificationbox-stack notification-message[type="warning"],
 #navigator-toolbox .global-notificationbox notification-message[type="warning"] {
-    flex-shrink: 0.5 !important;
+  flex-shrink: 0.5 !important;
 }
 
 #navigator-toolbox
-    > :is(legacy-stack, .notificationbox-stack, named-deck)
-    notification-message[type="info"],
+  > :is(legacy-stack, .notificationbox-stack, named-deck)
+  notification-message[type="info"],
 #navigator-toolbox > named-deck > .notificationbox-stack notification-message[type="info"],
 #navigator-toolbox .global-notificationbox notification-message[type="info"] {
-    flex-shrink: 0.75 !important;
+  flex-shrink: 0.75 !important;
 }
 
 link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar
 {
-    border-radius: 0 !important;
-    overflow: hidden !important;
-    background-color: var(--notification-box-bgcolor) !important;
-    background-image: var(--notification-box-bgimage) !important;
-    backdrop-filter: var(--notification-box-filter) !important;
-    padding-inline: 4px 0 !important;
-    align-items: center !important;
-    flex-grow: 1 !important;
-    text-overflow: ellipsis !important;
+  border-radius: 0 !important;
+  overflow: hidden !important;
+  background-color: var(--notification-box-bgcolor) !important;
+  background-image: var(--notification-box-bgimage) !important;
+  backdrop-filter: var(--notification-box-filter) !important;
+  padding-inline: 4px 0 !important;
+  align-items: center !important;
+  flex-grow: 1 !important;
+  text-overflow: ellipsis !important;
 }
 
 .container.infobar::before {
-    border-radius: 0 !important;
+  border-radius: 0 !important;
 }
 
 .notificationbox-stack notification::before {
-    content: "";
-    display: block;
-    width: 2px;
-    position: absolute;
-    background-image: linear-gradient(0, #9059ff 0%, #ff4aa2 52.08%, #ffbd4f 100%);
-    top: 0;
-    inset-inline-start: 0;
-    height: 100%;
+  content: "";
+  display: block;
+  width: 2px;
+  position: absolute;
+  background-image: linear-gradient(0, #9059ff 0%, #ff4aa2 52.08%, #ffbd4f 100%);
+  top: 0;
+  inset-inline-start: 0;
+  height: 100%;
 }
 
 .notificationbox-stack notification[style*="opacity: 0;"],
 #navigator-toolbox
-    > :is(legacy-stack, .notificationbox-stack)
-    > notification-message[style*="opacity: 0;"],
+  > :is(legacy-stack, .notificationbox-stack)
+  > notification-message[style*="opacity: 0;"],
 #navigator-toolbox
-    > named-deck
-    > .notificationbox-stack
-    > notification-message[style*="opacity: 0;"],
+  > named-deck
+  > .notificationbox-stack
+  > notification-message[style*="opacity: 0;"],
 #navigator-toolbox .global-notificationbox notification-message[style*="opacity: 0;"] {
-    margin-top: -32px !important;
-    max-width: 1px !important;
-    transition: margin-top 100ms linear, max-width 100ms ease-in-out, opacity 100ms ease-in-out !important;
+  margin-top: -32px !important;
+  max-width: 1px !important;
+  transition: margin-top 100ms linear, max-width 100ms ease-in-out, opacity 100ms ease-in-out !important;
 }
 
 link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-content
 {
-    flex-flow: row nowrap !important;
-    flex-grow: 2 !important;
-    display: flex !important;
-    white-space: nowrap !important;
-    text-overflow: ellipsis !important;
-    overflow: hidden !important;
-    padding-inline: 0 4px !important;
-    margin-inline: 0 !important;
-    height: 100% !important;
+  flex-flow: row nowrap !important;
+  flex-grow: 2 !important;
+  display: flex !important;
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+  overflow: hidden !important;
+  padding-inline: 0 4px !important;
+  margin-inline: 0 !important;
+  height: 100% !important;
 }
 
 link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-content .notification-message
 {
-    padding-block: 6px !important;
-    min-height: auto !important;
-    text-overflow: ellipsis !important;
-    overflow: hidden !important;
-    padding-inline: var(--uc-notification-message-content-margin-inline-start, 8px) 8px !important;
-    margin-inline: 0 !important;
+  padding-block: 6px !important;
+  min-height: auto !important;
+  text-overflow: ellipsis !important;
+  overflow: hidden !important;
+  padding-inline: var(--uc-notification-message-content-margin-inline-start, 8px) 8px !important;
+  margin-inline: 0 !important;
 }
 
 link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar > .spacer
 {
-    flex-grow: 0.1 !important;
-    display: none !important;
+  flex-grow: 0.1 !important;
+  display: none !important;
 }
 
 link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-content .notification-button-container
 {
-    flex-flow: row nowrap !important;
-    flex-grow: 2 !important;
-    display: flex !important;
-    align-content: end !important;
-    align-items: end !important;
-    justify-content: end !important;
-    justify-items: end !important;
-    gap: 4px !important;
+  flex-flow: row nowrap !important;
+  flex-grow: 2 !important;
+  display: flex !important;
+  align-content: end !important;
+  align-items: end !important;
+  justify-content: end !important;
+  justify-items: end !important;
+  gap: 4px !important;
 }
 
 link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-content .notification-button
 {
-    margin: revert !important;
-    outline-offset: 0 !important;
+  margin: revert !important;
+  outline-offset: 0 !important;
 }
 
 .notificationbox-stack notification :is(button, toolbarbutton),
 link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar button
 {
-    border-radius: var(--in-content-button-border-radius) !important;
-    font-weight: inherit !important;
-    padding-block: 0 !important;
-    outline-offset: 0 !important;
+  border-radius: var(--in-content-button-border-radius) !important;
+  font-weight: inherit !important;
+  padding-block: 0 !important;
+  outline-offset: 0 !important;
 }
 
 link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-content .notification-button-container > .notification-button.small
 {
-    margin: 0 !important;
-    font-weight: var(--uc-font-weight-bold, 600) !important;
+  margin: 0 !important;
+  font-weight: var(--uc-font-weight-bold, 600) !important;
 }
 
 link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar button .button-text
 {
-    margin-block: 2px 1px !important;
+  margin-block: 2px 1px !important;
 }
 
 notification .messageImage {
-    width: 16px !important;
-    height: 16px !important;
-    margin: 8px 0 8px 6px !important;
+  width: 16px !important;
+  height: 16px !important;
+  margin: 8px 0 8px 6px !important;
 }
 
 link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar > .icon
 {
-    margin-inline-start: 6px !important;
+  margin-inline-start: 6px !important;
 }
 
 notification .messageCloseButton:hover {
-    background-color: var(--notification-button-background-hover) !important;
+  background-color: var(--notification-button-background-hover) !important;
 }
 
 notification .messageCloseButton:hover:active {
-    background-color: var(--notification-button-background-active) !important;
+  background-color: var(--notification-button-background-active) !important;
 }
 
 notification .messageCloseButton {
-    left: -4px !important;
-    right: auto !important;
-    position: absolute !important;
-    display: block !important;
+  left: -4px !important;
+  right: auto !important;
+  position: absolute !important;
+  display: block !important;
 }
 
 notification .messageCloseButton > .toolbarbutton-icon {
-    width: 16px !important;
-    padding: 0 !important;
+  width: 16px !important;
+  padding: 0 !important;
 }
 
 notification .messageCloseButton,
@@ -879,52 +887,52 @@ notification .messageImage,
 link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-close,
     link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .icon
 {
-    transition: 0.25s transform var(--animation-easing-function),
-        0.25s opacity var(--animation-easing-function) !important;
+  transition: 0.25s transform var(--animation-easing-function),
+    0.25s opacity var(--animation-easing-function) !important;
 }
 
 notification .messageCloseButton,
 link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-close
 {
-    width: 20px !important;
-    height: 20px !important;
-    margin: 0 4px !important;
-    position: absolute !important;
-    opacity: var(--uc-notification-message-close-button-opacity, 0) !important;
-    transform: var(
-        --uc-notification-message-close-button-transform,
-        translateX(-15px) scale(0.5)
-    ) !important;
+  width: 20px !important;
+  height: 20px !important;
+  margin: 0 4px !important;
+  position: absolute !important;
+  opacity: var(--uc-notification-message-close-button-opacity, 0) !important;
+  transform: var(
+    --uc-notification-message-close-button-transform,
+    translateX(-15px) scale(0.5)
+  ) !important;
 }
 
 notification:is(:hover, :focus-within) .messageCloseButton,
 link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar:is(:hover, :focus-within) .notification-close
 {
-    transform: none !important;
-    opacity: 1 !important;
+  transform: none !important;
+  opacity: 1 !important;
 }
 
 link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar button.ghost-button:not(.semi-transparent):enabled:is(:hover, :focus-visible)
 {
-    background-color: var(--in-content-button-background) !important;
+  background-color: var(--in-content-button-background) !important;
 }
 
 link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar button.ghost-button:not(.semi-transparent):enabled:hover:active
 {
-    background-color: var(--in-content-button-background-hover) !important;
+  background-color: var(--in-content-button-background-hover) !important;
 }
 
 notification:is(:hover, :focus-within) .messageImage,
 link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar:is(:hover, :focus-within) .icon
 {
-    transform: translateX(15px) scale(0.5) !important;
-    opacity: 0 !important;
+  transform: translateX(15px) scale(0.5) !important;
+  opacity: 0 !important;
 }
 
 #fxa-toolbar-menu-button #fxa-avatar-image {
-    display: none;
+  display: none;
 }
 
 #fxa-toolbar-menu-button .toolbarbutton-icon {
-    list-style-image: var(--fxa-ui-img, url(chrome://userchrome/content/fxa/avatar-big.svg));
+  list-style-image: var(--fxa-ui-img, url(chrome://userchrome/content/fxa/avatar-big.svg));
 }

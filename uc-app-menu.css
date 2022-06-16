@@ -8,401 +8,414 @@
 (the menu opened by the PanelUI hamburger button at the far right end of the toolbar) */
 
 #PanelUI-menu-button {
-    padding-inline: var(--toolbarbutton-outer-padding) !important;
+  padding-inline: var(--toolbarbutton-outer-padding) !important;
 }
 
 #PanelUI-menu-button[badge-status=""] > .toolbarbutton-badge-stack > .toolbarbutton-badge {
-    display: none !important;
+  display: none !important;
 }
 
 #PanelUI-menu-button[badge-status^="update"] > .toolbarbutton-badge-stack > .toolbarbutton-badge {
-    background: var(--update-badge-bg) url(chrome://userchrome/content/update-icon-inverted.svg)
-        no-repeat center/contain !important;
-    background-clip: border-box !important;
-    fill: var(--update-badge-color) !important;
-    border: 1px solid transparent !important;
-    border-radius: 100% !important;
-    -moz-context-properties: fill !important;
-    padding: 0 !important;
-    margin-inline: auto -4px !important;
-    margin-block: -7px auto !important;
+  background: var(--update-badge-bg) url(chrome://userchrome/content/update-icon-inverted.svg)
+    no-repeat center/contain !important;
+  background-clip: border-box !important;
+  fill: var(--update-badge-color) !important;
+  border: 1px solid transparent !important;
+  border-radius: 100% !important;
+  -moz-context-properties: fill !important;
+  padding: 0 !important;
+  margin-inline: auto -4px !important;
+  margin-block: -7px auto !important;
 }
 
 :root:not([customizing])
-    #PanelUI-menu-button[badge-status^="update"]
-    > .toolbarbutton-badge-stack
-    > .toolbarbutton-badge:-moz-window-inactive {
-    fill: transparent !important;
-    background-color: var(--update-badge-inactive) !important;
+  #PanelUI-menu-button[badge-status^="update"]
+  > .toolbarbutton-badge-stack
+  > .toolbarbutton-badge:-moz-window-inactive {
+  fill: transparent !important;
+  background-color: var(--update-badge-inactive) !important;
 }
 
 :root:not([customizing])
-    #PanelUI-menu-button[badge-status^="update"]:is(:hover, [open])
-    > .toolbarbutton-badge-stack
-    > .toolbarbutton-badge:-moz-window-inactive {
-    background-color: var(--update-badge-bg) !important;
-    fill: var(--update-badge-color) !important;
+  #PanelUI-menu-button[badge-status^="update"]:is(:hover, [open])
+  > .toolbarbutton-badge-stack
+  > .toolbarbutton-badge:-moz-window-inactive {
+  background-color: var(--update-badge-bg) !important;
+  fill: var(--update-badge-color) !important;
 }
 
 .panel-banner-item[notificationid^="update"]::after {
-    display: none !important;
+  display: none !important;
 }
 
 .panel-banner-item[notificationid^="update"] > .toolbarbutton-icon {
-    background: var(--update-badge-bg) url(chrome://userchrome/content/update-icon-inverted.svg)
-        no-repeat center/contain !important;
-    background-clip: border-box !important;
-    fill: var(--update-badge-color) !important;
-    border: 1px solid transparent;
-    border-radius: 100% !important;
-    -moz-context-properties: fill !important;
-    min-width: 16px !important;
-    min-height: 16px !important;
-    width: unset !important;
-    height: unset !important;
-    box-sizing: content-box !important;
-    padding: 0 !important;
+  background: var(--update-badge-bg) url(chrome://userchrome/content/update-icon-inverted.svg)
+    no-repeat center/contain !important;
+  background-clip: border-box !important;
+  fill: var(--update-badge-color) !important;
+  border: 1px solid transparent;
+  border-radius: 100% !important;
+  -moz-context-properties: fill !important;
+  min-width: 16px !important;
+  min-height: 16px !important;
+  width: unset !important;
+  height: unset !important;
+  box-sizing: content-box !important;
+  padding: 0 !important;
 }
 
 .panel-banner-item[notificationid="update-available"] > .toolbarbutton-icon,
 #PanelUI-menu-button[badge-status="update-available"]
-    > .toolbarbutton-badge-stack
-    > .toolbarbutton-badge {
-    background: var(--update-badge-bg) url(chrome://userchrome/content/update-icon-inverted.svg)
-        no-repeat center/contain !important;
-    fill: var(--update-badge-color) !important;
-    transform: scaleY(-1);
+  > .toolbarbutton-badge-stack
+  > .toolbarbutton-badge {
+  background: var(--update-badge-bg) url(chrome://userchrome/content/update-icon-inverted.svg)
+    no-repeat center/contain !important;
+  fill: var(--update-badge-color) !important;
+  transform: scaleY(-1);
 }
 
 .panel-banner-item[notificationid="update-downloading"] > .toolbarbutton-icon,
 #PanelUI-menu-button[badge-status="update-downloading"]
-    > .toolbarbutton-badge-stack
-    > .toolbarbutton-badge {
-    background: var(--update-badge-bg) url(chrome://userchrome/content/more.svg) no-repeat
-        center/75% !important;
-    fill: var(--update-badge-color) !important;
+  > .toolbarbutton-badge-stack
+  > .toolbarbutton-badge {
+  background: var(--update-badge-bg) url(chrome://userchrome/content/more.svg) no-repeat center/75% !important;
+  fill: var(--update-badge-color) !important;
 }
 
 .panel-banner-item[notificationid="update-restart"] > .toolbarbutton-icon,
 #PanelUI-menu-button[badge-status="update-restart"]
-    > .toolbarbutton-badge-stack
-    > .toolbarbutton-badge {
-    background: var(--update-badge-bg) url(chrome://userchrome/content/check.svg) no-repeat
-        center/contain !important;
-    fill: var(--update-badge-color) !important;
+  > .toolbarbutton-badge-stack
+  > .toolbarbutton-badge {
+  background: var(--update-badge-bg) url(chrome://userchrome/content/check.svg) no-repeat
+    center/contain !important;
+  fill: var(--update-badge-color) !important;
 }
 
 .panel-banner-item[notificationid="update-unsupported"] > .toolbarbutton-icon,
 #PanelUI-menu-button[badge-status="update-unsupported"]
-    > .toolbarbutton-badge-stack
-    > .toolbarbutton-badge,
+  > .toolbarbutton-badge-stack
+  > .toolbarbutton-badge,
 #PanelUI-menu-button[badge-status="update-unsupported"]:is(:hover, [open])
-    > .toolbarbutton-badge-stack
-    > .toolbarbutton-badge:-moz-window-inactive {
-    background: var(--low-warning-icon-background)
-        url(chrome://userchrome/content/check-partial.svg) no-repeat center/contain !important;
-    fill: var(--low-warning-icon-detail) !important;
+  > .toolbarbutton-badge-stack
+  > .toolbarbutton-badge:-moz-window-inactive {
+  background: var(--low-warning-icon-background) url(chrome://userchrome/content/check-partial.svg)
+    no-repeat center/contain !important;
+  fill: var(--low-warning-icon-detail) !important;
 }
 
 #PanelUI-menu-button[badge-status] > .toolbarbutton-badge-stack > .toolbarbutton-badge {
-    filter: none !important;
+  filter: none !important;
 }
 
 #PanelUI-menu-button[badge-status="fxa-needs-authentication"]
-    > .toolbarbutton-badge-stack
-    > .toolbarbutton-badge {
-    background: url(chrome://userchrome/content/skin/controlcenter/warning.svg) no-repeat
-        center/contain !important;
-    stroke: var(--low-warning-icon-detail) !important;
-    fill: var(--low-warning-icon-background) !important;
-    -moz-context-properties: fill, stroke !important;
-    margin: -7px 0 0 !important;
-    margin-inline-end: -6px !important;
+  > .toolbarbutton-badge-stack
+  > .toolbarbutton-badge {
+  background: url(chrome://userchrome/content/skin/controlcenter/warning.svg) no-repeat
+    center/contain !important;
+  stroke: var(--low-warning-icon-detail) !important;
+  fill: var(--low-warning-icon-background) !important;
+  -moz-context-properties: fill, stroke !important;
+  margin: -7px 0 0 !important;
+  margin-inline-end: -6px !important;
 }
 
 #PanelUI-menu-button[badge-status="addon-alert"]
-    > .toolbarbutton-badge-stack
-    > .toolbarbutton-badge {
-    background: url(chrome://userchrome/content/material/extension.svg) no-repeat center/contain !important;
-    stroke: var(--low-warning-icon-detail) !important;
-    fill: var(--low-warning-icon-background) !important;
-    -moz-context-properties: fill, stroke !important;
-    margin: -8px 0 0 !important;
-    margin-inline-end: -6px !important;
+  > .toolbarbutton-badge-stack
+  > .toolbarbutton-badge {
+  background: url(chrome://userchrome/content/material/extension.svg) no-repeat center/contain !important;
+  stroke: var(--low-warning-icon-detail) !important;
+  fill: var(--low-warning-icon-background) !important;
+  -moz-context-properties: fill, stroke !important;
+  margin: -8px 0 0 !important;
+  margin-inline-end: -6px !important;
 }
 
 #PanelUI-menu-button[badge-status="fxa-needs-authentication"] {
-    list-style-image: url(chrome://userchrome/content/skin/menu-triangular-badged.svg) !important;
+  list-style-image: url(chrome://userchrome/content/skin/menu-triangular-badged.svg) !important;
 }
 
 #PanelUI-menu-button[badge-status="addon-alert"],
 #PanelUI-menu-button[badge-status="update-unsupported"] {
-    list-style-image: url(chrome://userchrome/content/skin/menu-badged.svg) !important;
+  list-style-image: url(chrome://userchrome/content/skin/menu-badged.svg) !important;
 }
 
 :root:not([customizing])
-    #PanelUI-menu-button[badge-status="addon-alert"]:not(:hover, [open])
-    > .toolbarbutton-badge-stack
-    > .toolbarbutton-badge:-moz-window-inactive {
-    fill: var(--update-badge-inactive) !important;
+  #PanelUI-menu-button[badge-status="addon-alert"]:not(:hover, [open])
+  > .toolbarbutton-badge-stack
+  > .toolbarbutton-badge:-moz-window-inactive {
+  fill: var(--update-badge-inactive) !important;
 }
 
 :root:not([customizing])
-    #PanelUI-menu-button[badge-status="fxa-needs-authentication"]:not(:hover, [open])
-    > .toolbarbutton-badge-stack
-    > .toolbarbutton-badge:-moz-window-inactive {
-    fill: var(--update-badge-inactive) !important;
-    stroke: transparent !important;
+  #PanelUI-menu-button[badge-status="fxa-needs-authentication"]:not(:hover, [open])
+  > .toolbarbutton-badge-stack
+  > .toolbarbutton-badge:-moz-window-inactive {
+  fill: var(--update-badge-inactive) !important;
+  stroke: transparent !important;
 }
 
 #PanelUI-menu-button[badge-status="extension-new-tab"]
-    > .toolbarbutton-badge-stack
-    > .toolbarbutton-badge,
+  > .toolbarbutton-badge-stack
+  > .toolbarbutton-badge,
 #PanelUI-menu-button[badge-status="download-success"]
-    > .toolbarbutton-badge-stack
-    > .toolbarbutton-badge {
-    display: none;
+  > .toolbarbutton-badge-stack
+  > .toolbarbutton-badge {
+  display: none;
 }
 
 /* add icons to non-iconized appmenu items */
 .subviewbutton:not(.subviewbutton-iconic) > .toolbarbutton-icon {
-    -moz-context-properties: fill, fill-opacity;
-    fill: currentColor;
+  -moz-context-properties: fill, fill-opacity;
+  fill: currentColor;
 }
 
 #appMenu-save-file-button2 {
-    list-style-image: url(chrome://userchrome/content/skin/save.svg);
+  list-style-image: url(chrome://userchrome/content/skin/save.svg);
 }
 
 #appMenu-more-button2 {
-    list-style-image: url(chrome://userchrome/content/skin/developer.svg);
+  list-style-image: url(chrome://userchrome/content/skin/developer.svg);
 }
 
 #appMenu-help-button2 {
-    list-style-image: url(chrome://userchrome/content/skin/tip.svg);
+  list-style-image: url(chrome://userchrome/content/skin/tip.svg);
 }
 
 #appMenu-new-window-button2 {
-    list-style-image: url(chrome://userchrome/content/skin/new-window.svg);
+  list-style-image: url(chrome://userchrome/content/skin/new-window.svg);
 }
 
 #appMenu-new-tab-button2 {
-    list-style-image: url(chrome://userchrome/content/skin/new-tab.svg);
+  list-style-image: url(chrome://userchrome/content/skin/new-tab.svg);
 }
 
 #appMenu-new-private-window-button2 {
-    list-style-image: url(chrome://userchrome/content/skin/new-private.svg);
+  list-style-image: url(chrome://userchrome/content/skin/new-private.svg);
 }
 
 #appMenu-print-button2 {
-    list-style-image: url(chrome://global/skin/icons/print.svg);
+  list-style-image: url(chrome://global/skin/icons/print.svg);
 }
 
 #appMenu-passwords-button {
-    list-style-image: url(chrome://userchrome/content/skin/login.svg);
+  list-style-image: url(chrome://userchrome/content/skin/login.svg);
 }
 
 #appMenu-bookmarks-button {
-    list-style-image: url(chrome://userchrome/content/skin/bookmark.svg);
+  list-style-image: url(chrome://userchrome/content/skin/bookmark.svg);
 }
 
 #appMenu-history-button {
-    list-style-image: url(chrome://userchrome/content/skin/history.svg);
+  list-style-image: url(chrome://userchrome/content/skin/history.svg);
 }
 
 #appMenu-downloads-button {
-    list-style-image: url(chrome://userchrome/content/downloads/download-icons.svg#arrow-with-bar);
+  list-style-image: url(chrome://userchrome/content/downloads/download-icons.svg#arrow-with-bar);
 }
 
 #appMenu-extensions-themes-button {
-    list-style-image: url(chrome://userchrome/content/material/extension.svg);
+  list-style-image: url(chrome://userchrome/content/material/extension.svg);
 }
 
 #appMenu-find-button2,
 #panelMenu_searchBookmarks {
-    list-style-image: url(chrome://userchrome/content/search-glass.svg);
+  list-style-image: url(chrome://userchrome/content/search-glass.svg);
 }
 
 #panelMenu_bookmarkingTools {
-    list-style-image: url(chrome://userchrome/content/skin/developer.svg);
+  list-style-image: url(chrome://userchrome/content/skin/developer.svg);
 }
 
 #panelMenu_viewBookmarksToolbar {
-    list-style-image: url(chrome://userchrome/content/skin/bookmarks-toolbar.svg);
+  list-style-image: url(chrome://userchrome/content/skin/bookmarks-toolbar.svg);
 }
 
 #panelMenuBookmarkThisPage[data-l10n-id="bookmarks-current-tab"] {
-    list-style-image: url(chrome://userchrome/content/skin/bookmark-hollow.svg);
+  list-style-image: url(chrome://userchrome/content/skin/bookmark-hollow.svg);
 }
 
 #panelMenuBookmarkThisPage[data-l10n-id="bookmarks-bookmark-edit-panel"] {
-    list-style-image: url(chrome://userchrome/content/skin/bookmark.svg);
+  list-style-image: url(chrome://userchrome/content/skin/bookmark.svg);
 }
 
 #PanelUI-fxa-menu-remotetabs-button,
 #appMenuRecentlyClosedTabs {
-    list-style-image: url(chrome://userchrome/content/skin/tab.svg);
+  list-style-image: url(chrome://userchrome/content/skin/tab.svg);
 }
 
 #appMenuClearRecentHistory {
-    list-style-image: url(chrome://userchrome/content/skin/forget.svg);
+  list-style-image: url(chrome://userchrome/content/skin/forget.svg);
 }
 
 #appMenuClearRecentHistory:-moz-locale-dir(rtl) .toolbarbutton-icon {
-    transform: scaleX(-1);
+  transform: scaleX(-1);
 }
 
 #appMenu-restoreSession {
-    list-style-image: url(chrome://userchrome/content/skin/restore-session.svg);
+  list-style-image: url(chrome://userchrome/content/skin/restore-session.svg);
 }
 
 #appMenuRecentlyClosedWindows {
-    list-style-image: url(chrome://userchrome/content/skin/window.svg);
+  list-style-image: url(chrome://userchrome/content/skin/window.svg);
 }
 
 :is(#appMenu-library-recentlyClosedTabs, #appMenu-library-recentlyClosedWindows) .restoreallitem {
-    list-style-image: url(chrome://userchrome/content/skin/restore-session.svg);
+  list-style-image: url(chrome://userchrome/content/skin/restore-session.svg);
 }
 
 #PanelUI-historyMore {
-    list-style-image: url(chrome://userchrome/content/skin/sort.svg);
+  list-style-image: url(chrome://userchrome/content/skin/sort.svg);
 }
 
 #appMenu-settings-button {
-    list-style-image: url(chrome://userchrome/content/settings.svg);
+  list-style-image: url(chrome://userchrome/content/settings.svg);
 }
 
 #appMenu-advanced-settings-button {
-    list-style-image: url(chrome://userchrome/content/material/tune.svg);
+  list-style-image: url(chrome://userchrome/content/material/tune.svg);
 }
 
 #appmenu-moreTools-button {
-    list-style-image: url(chrome://browser/skin/customize.svg);
+  list-style-image: url(chrome://browser/skin/customize.svg);
 }
 
 #appMenu-quit-button2 {
-    list-style-image: url(chrome://userchrome/content/skin/quit.svg);
+  list-style-image: url(chrome://userchrome/content/skin/quit.svg);
 }
 
 #appMenu-restart-button2 {
-    list-style-image: url(chrome://userchrome/content/skin/reload.svg);
-}
-
-:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view) toolbarbutton .toolbarbutton-icon {
-    width: 16px !important;
-    height: 16px !important;
-}
-
-:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view) toolbarbutton[checked="true"] .toolbarbutton-icon {
-    list-style-image: url(chrome://userchrome/content/check.svg) !important;
-    background-color: var(--checkbox-checked-bgcolor);
-    border: 1px solid var(--checkbox-checked-border-color);
-    border-radius: 2px;
+  list-style-image: url(chrome://userchrome/content/skin/reload.svg);
 }
 
 :is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view)
-    toolbarbutton[checked="true"]:is(:hover, :focus-visible):not([open])
-    .toolbarbutton-icon {
-    background-color: var(--checkbox-checked-hover-bgcolor);
+  toolbarbutton
+  .toolbarbutton-icon {
+  width: 16px !important;
+  height: 16px !important;
 }
 
 :is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view)
-    toolbarbutton[checked="true"]:is(:hover:active, [open])
-    .toolbarbutton-icon {
-    background-color: var(--checkbox-checked-active-bgcolor);
+  toolbarbutton[checked="true"]
+  .toolbarbutton-icon {
+  list-style-image: url(chrome://userchrome/content/check.svg) !important;
+  background-color: var(--checkbox-checked-bgcolor);
+  border: 1px solid var(--checkbox-checked-border-color);
+  border-radius: 2px;
 }
 
-:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view) toolbarbutton[label="Web Developer Tools"i]:not([checked="true"]) {
-    list-style-image: url(chrome://userchrome/content/devtools/debugging-workers.svg) !important;
+:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view)
+  toolbarbutton[checked="true"]:is(:hover, :focus-visible):not([open])
+  .toolbarbutton-icon {
+  background-color: var(--checkbox-checked-hover-bgcolor);
 }
 
-:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view) toolbarbutton[label="Task Manager"i] {
-    list-style-image: url(chrome://userchrome/content/devtools/tool-profiler.svg) !important;
+:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view)
+  toolbarbutton[checked="true"]:is(:hover:active, [open])
+  .toolbarbutton-icon {
+  background-color: var(--checkbox-checked-active-bgcolor);
 }
 
-:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view) toolbarbutton[label="Remote Debugging"i] {
-    list-style-image: url(chrome://userchrome/content/material/remote.svg) !important;
+:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view)
+  toolbarbutton[label="Web Developer Tools"i]:not([checked="true"]) {
+  list-style-image: url(chrome://userchrome/content/devtools/debugging-workers.svg) !important;
 }
 
-:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view) toolbarbutton[label="Browser Toolbox"i] {
-    list-style-image: url(chrome://userchrome/content/skin/toolbox.svg) !important;
+:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view)
+  toolbarbutton[label="Task Manager"i] {
+  list-style-image: url(chrome://userchrome/content/devtools/tool-profiler.svg) !important;
 }
 
-:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view) toolbarbutton[label="Browser Content Toolbox"i] {
-    list-style-image: url(chrome://userchrome/content/devtools/command-frames.svg) !important;
-    fill-opacity: 0 !important;
+:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view)
+  toolbarbutton[label="Remote Debugging"i] {
+  list-style-image: url(chrome://userchrome/content/material/remote.svg) !important;
 }
 
-:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view) toolbarbutton[label="Browser Console"i] {
-    list-style-image: url(chrome://userchrome/content/devtools/command-console.svg) !important;
+:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view)
+  toolbarbutton[label="Browser Toolbox"i] {
+  list-style-image: url(chrome://userchrome/content/skin/toolbox.svg) !important;
 }
 
-:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view) toolbarbutton[label="Responsive Design Mode"i]:not([checked="true"]) {
-    list-style-image: url(chrome://userchrome/content/devtools/command-responsivemode.svg) !important;
-    fill-opacity: 0 !important;
+:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view)
+  toolbarbutton[label="Browser Content Toolbox"i] {
+  list-style-image: url(chrome://userchrome/content/devtools/command-frames.svg) !important;
+  fill-opacity: 0 !important;
 }
 
-:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view) toolbarbutton[label="Eyedropper"i] {
-    list-style-image: url(chrome://userchrome/content/devtools/command-eyedropper.svg) !important;
+:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view)
+  toolbarbutton[label="Browser Console"i] {
+  list-style-image: url(chrome://userchrome/content/devtools/command-console.svg) !important;
 }
 
-:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view) toolbarbutton[label="Page Source"i] {
-    list-style-image: url(chrome://userchrome/content/devtools/tool-dom.svg) !important;
+:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view)
+  toolbarbutton[label="Responsive Design Mode"i]:not([checked="true"]) {
+  list-style-image: url(chrome://userchrome/content/devtools/command-responsivemode.svg) !important;
+  fill-opacity: 0 !important;
 }
 
-:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view) toolbarbutton[label="Extensions for Developers"i] {
-    list-style-image: url(chrome://userchrome/content/mozilla-logo.svg) !important;
+:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view)
+  toolbarbutton[label="Eyedropper"i] {
+  list-style-image: url(chrome://userchrome/content/devtools/command-eyedropper.svg) !important;
+}
+
+:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view)
+  toolbarbutton[label="Page Source"i] {
+  list-style-image: url(chrome://userchrome/content/devtools/tool-dom.svg) !important;
+}
+
+:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view)
+  toolbarbutton[label="Extensions for Developers"i] {
+  list-style-image: url(chrome://userchrome/content/mozilla-logo.svg) !important;
 }
 
 #appMenu-fxa-label2::before {
-    display: -moz-box;
-    content: "";
-    background-image: var(--fxa-ui-img, url(chrome://userchrome/content/fxa/avatar-big.svg));
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    fill: currentColor;
-    width: 16px;
-    height: 16px;
-    -moz-context-properties: fill, fill-opacity;
+  display: -moz-box;
+  content: "";
+  background-image: var(--fxa-ui-img, url(chrome://userchrome/content/fxa/avatar-big.svg));
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  fill: currentColor;
+  width: 16px;
+  height: 16px;
+  -moz-context-properties: fill, fill-opacity;
 }
 
 #appMenu_menu_openHelp {
-    list-style-image: url(chrome://userchrome/content/help-solid.svg);
+  list-style-image: url(chrome://userchrome/content/help-solid.svg);
 }
 
 #appMenu_feedbackPage {
-    list-style-image: url(chrome://userchrome/content/material/rate.svg);
+  list-style-image: url(chrome://userchrome/content/material/rate.svg);
 }
 
 #appMenu_helpSafeMode {
-    list-style-image: url(chrome://userchrome/content/material/diagnostic.svg);
+  list-style-image: url(chrome://userchrome/content/material/diagnostic.svg);
 }
 
 #appMenu_troubleShooting {
-    list-style-image: url(chrome://userchrome/content/material/system-report.svg);
+  list-style-image: url(chrome://userchrome/content/material/system-report.svg);
 }
 
 #appMenu_help_reportSiteIssue {
-    list-style-image: url(chrome://userchrome/content/material/bug.svg);
+  list-style-image: url(chrome://userchrome/content/material/bug.svg);
 }
 
 #appMenu_menu_HelpPopup_reportPhishingtoolmenu .toolbarbutton-icon {
-    list-style-image: url(chrome://userchrome/content/material/phishing.svg);
-    stroke: currentColor !important;
-    -moz-context-properties: fill, fill-opacity, stroke !important;
+  list-style-image: url(chrome://userchrome/content/material/phishing.svg);
+  stroke: currentColor !important;
+  -moz-context-properties: fill, fill-opacity, stroke !important;
 }
 
 #appMenu_menu_HelpPopup_reportPhishingErrortoolmenu {
-    list-style-image: url(chrome://userchrome/content/material/verified.svg);
+  list-style-image: url(chrome://userchrome/content/material/verified.svg);
 }
 
 #appMenu_aboutName {
-    list-style-image: url(chrome://userchrome/content/identity-icons-brand.svg);
+  list-style-image: url(chrome://userchrome/content/identity-icons-brand.svg);
 }
 
 #appMenu_helpPolicySupport::before {
-    background-image: url(chrome://userchrome/content/help-square.svg);
+  background-image: url(chrome://userchrome/content/help-square.svg);
 }
 
 #appMenu-save-file-button2 > .toolbarbutton-text,
@@ -428,8 +441,8 @@
 #appMenu-restoreSession > .toolbarbutton-text,
 #appMenuRecentlyClosedWindows > .toolbarbutton-text,
 :is(#appMenu-library-recentlyClosedTabs, #appMenu-library-recentlyClosedWindows)
-    .restoreallitem
-    > .toolbarbutton-text,
+  .restoreallitem
+  > .toolbarbutton-text,
 #PanelUI-historyMore > .toolbarbutton-text,
 #appMenu-settings-button > .toolbarbutton-text,
 #appMenu-advanced-settings-button > .toolbarbutton-text,
@@ -448,208 +461,208 @@
 #appMenu_menu_HelpPopup_reportPhishingErrortoolmenu > .toolbarbutton-text,
 #appMenu_aboutName > .toolbarbutton-text,
 #appMenu_helpPolicySupport > .toolbarbutton-text {
-    padding-inline-start: var(--arrowpanel-subviewbutton-iconic-gap, 8px) !important;
+  padding-inline-start: var(--arrowpanel-subviewbutton-iconic-gap, 8px) !important;
 }
 
 #appMenu-zoom-controls2::before {
-    content: "";
-    display: block;
-    width: 16px;
-    height: 16px;
-    -moz-context-properties: fill, fill-opacity;
-    fill: currentColor;
-    background-image: url(chrome://userchrome/content/fxa/add-device.svg);
+  content: "";
+  display: block;
+  width: 16px;
+  height: 16px;
+  -moz-context-properties: fill, fill-opacity;
+  fill: currentColor;
+  background-image: url(chrome://userchrome/content/fxa/add-device.svg);
 }
 
 :is(#appMenu-zoomReduce-button2, #appMenu-zoomEnlarge-button2, #appMenu-fullscreen-button2)
-    > .toolbarbutton-icon {
-    background-color: unset !important;
-    fill: currentColor !important;
-    -moz-context-properties: fill, fill-opacity !important;
-    padding: 0 !important;
+  > .toolbarbutton-icon {
+  background-color: unset !important;
+  fill: currentColor !important;
+  -moz-context-properties: fill, fill-opacity !important;
+  padding: 0 !important;
 }
 
 #appMenu-zoom-controls2
-    :is(#appMenu-zoomReduce-button2, #appMenu-zoomEnlarge-button2, #appMenu-fullscreen-button2, #appMenu-zoomReset-button2):not([disabled], [open]):is(:hover, :focus-visible) {
-    background-color: var(--arrowpanel-dimmed) !important;
-    border-color: transparent !important;
+  :is(#appMenu-zoomReduce-button2, #appMenu-zoomEnlarge-button2, #appMenu-fullscreen-button2, #appMenu-zoomReset-button2):not([disabled], [open]):is(:hover, :focus-visible) {
+  background-color: var(--arrowpanel-dimmed) !important;
+  border-color: transparent !important;
 }
 
 #appMenu-zoom-controls2
-    :is(#appMenu-zoomReduce-button2, #appMenu-zoomEnlarge-button2, #appMenu-fullscreen-button2, #appMenu-zoomReset-button2):not([disabled]):is([open], :hover:active) {
-    background-color: var(--arrowpanel-dimmed-further) !important;
+  :is(#appMenu-zoomReduce-button2, #appMenu-zoomEnlarge-button2, #appMenu-fullscreen-button2, #appMenu-zoomReset-button2):not([disabled]):is([open], :hover:active) {
+  background-color: var(--arrowpanel-dimmed-further) !important;
 }
 
 panel .toolbaritem-combined-buttons {
-    margin-inline-end: 0 !important;
+  margin-inline-end: 0 !important;
 }
 
 #appMenu-zoom-controls2 toolbarbutton {
-    margin-inline: 4px !important;
-    border: 1px solid transparent !important;
-    min-height: 20px !important;
-    min-width: 20px !important;
-    width: unset !important;
-    padding: 4px !important;
+  margin-inline: 4px !important;
+  border: 1px solid transparent !important;
+  min-height: 20px !important;
+  min-width: 20px !important;
+  width: unset !important;
+  padding: 4px !important;
 }
 
 #appMenu-zoom-controls2 .toolbarbutton-icon {
-    width: 12px !important;
-    height: 12px !important;
+  width: 12px !important;
+  height: 12px !important;
 }
 
 #appMenu-zoom-controls2 :where(.toolbarbutton-icon, .toolbarbutton-text) {
-    outline: none !important;
+  outline: none !important;
 }
 
 #appMenu-zoom-controls2 #appMenu-zoomReset-button2 {
-    border: 1px solid var(--desaturate-dimmed) !important;
-    height: 20px !important;
-    border-radius: 10px !important;
-    padding: 0 4px !important;
-    height: 20px !important;
-    min-height: 20px !important;
-    min-width: calc(6ch + 8px) !important;
-    -moz-box-align: center !important;
-    -moz-box-pack: center !important;
+  border: 1px solid var(--desaturate-dimmed) !important;
+  height: 20px !important;
+  border-radius: 10px !important;
+  padding: 0 4px !important;
+  height: 20px !important;
+  min-height: 20px !important;
+  min-width: calc(6ch + 8px) !important;
+  -moz-box-align: center !important;
+  -moz-box-pack: center !important;
 }
 
 #appMenu-zoom-controls2 #appMenu-zoomReset-button2 .toolbarbutton-text {
-    margin-block: 1px !important;
-    margin-inline: 6px !important;
-    background: none !important;
-    text-align: center !important;
+  margin-block: 1px !important;
+  margin-inline: 6px !important;
+  background: none !important;
+  text-align: center !important;
 }
 
 #appMenu-zoomEnlarge-button2 {
-    list-style-image: url(chrome://userchrome/content/skin/zoom-in.svg) !important;
+  list-style-image: url(chrome://userchrome/content/skin/zoom-in.svg) !important;
 }
 
 #appMenu-zoomReduce-button2 {
-    list-style-image: url(chrome://userchrome/content/skin/zoom-out.svg) !important;
+  list-style-image: url(chrome://userchrome/content/skin/zoom-out.svg) !important;
 }
 
 #appMenu-fullscreen-button2 {
-    list-style-image: url(chrome://userchrome/content/skin/fullscreen.svg) !important;
+  list-style-image: url(chrome://userchrome/content/skin/fullscreen.svg) !important;
 }
 
 #appMenu-fullscreen-button2[checked] {
-    list-style-image: url(chrome://userchrome/content/skin/fullscreen-exit.svg) !important;
+  list-style-image: url(chrome://userchrome/content/skin/fullscreen-exit.svg) !important;
 }
 
 #appMenu-fxa-status2 > #appMenu-fxa-label2 {
-    padding-block: 4px !important;
-    min-height: 40px !important;
-    font-weight: inherit !important;
+  padding-block: 4px !important;
+  min-height: 40px !important;
+  font-weight: inherit !important;
 }
 
 toolbarseparator.proton-zap {
-    opacity: 0.7 !important;
+  opacity: 0.7 !important;
 }
 
 @supports -moz-bool-pref("userChrome.panels.vibrant-fxa-banner") {
-    #appMenu-fxa-status2 > #appMenu-fxa-label2,
-    [mainViewId="PanelUI-fxa"] #fxa-manage-account-button {
-        background-image: linear-gradient(
-            -90deg,
-            hsla(259.9, 100%, 67.5%, 0.275) 0%,
-            hsla(330.8, 100%, 64.5%, 0.275) 52.08%,
-            hsla(37.5, 100%, 65.5%, 0.275) 100%
-        );
-    }
+  #appMenu-fxa-status2 > #appMenu-fxa-label2,
+  [mainViewId="PanelUI-fxa"] #fxa-manage-account-button {
+    background-image: linear-gradient(
+      -90deg,
+      hsla(259.9, 100%, 67.5%, 0.275) 0%,
+      hsla(330.8, 100%, 64.5%, 0.275) 52.08%,
+      hsla(37.5, 100%, 65.5%, 0.275) 100%
+    );
+  }
 
-    toolbarseparator.proton-zap {
-        border-image: none !important;
-        opacity: 1 !important;
-    }
+  toolbarseparator.proton-zap {
+    border-image: none !important;
+    opacity: 1 !important;
+  }
 }
 
 #appMenu-fxa-status2 > #appMenu-fxa-label2 label {
-    font-weight: inherit !important;
-    margin-block: 0 !important;
+  font-weight: inherit !important;
+  margin-block: 0 !important;
 }
 
 #appMenu-fxa-status2 > #appMenu-fxa-label2 label[hidden] + label {
-    margin-block: 1px 2px !important;
+  margin-block: 1px 2px !important;
 }
 
 #appMenu-fxa-status2 > #appMenu-fxa-label2 label:not([hidden="true"]) + label {
-    color: var(--panel-shortcut-color);
+  color: var(--panel-shortcut-color);
 }
 
 @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
-    #appMenu-fxa-text,
-    #appMenu-fxa-status2[fxastatus] > #appMenu-fxa-label2 > vbox > #appMenu-header-description,
-    #appMenu-fxa-status2:not([fxastatus]) > #appMenu-fxa-label2 {
-        font-weight: var(--uc-font-weight-bold) !important;
-    }
+  #appMenu-fxa-text,
+  #appMenu-fxa-status2[fxastatus] > #appMenu-fxa-label2 > vbox > #appMenu-header-description,
+  #appMenu-fxa-status2:not([fxastatus]) > #appMenu-fxa-label2 {
+    font-weight: var(--uc-font-weight-bold) !important;
+  }
 }
 
 #appMenu-fxa-status2:not([fxastatus]) {
-    margin-inline-end: 0 !important;
-    padding-inline-end: var(--arrowpanel-menuitem-inline-margin) !important;
-    padding-block: 0 !important;
+  margin-inline-end: 0 !important;
+  padding-inline-end: var(--arrowpanel-menuitem-inline-margin) !important;
+  padding-block: 0 !important;
 }
 
 #appMenu-fxa-status2:not([fxastatus]) > #appMenu-fxa-label2 {
-    padding: 5px 12px !important;
-    min-height: 29px !important;
-    font-size: 1em !important;
+  padding: 5px 12px !important;
+  min-height: 29px !important;
+  font-size: 1em !important;
 }
 
 #appMenu-fxa-status2:not([fxastatus]) > #appMenu-fxa-label2::before {
-    display: none !important;
+  display: none !important;
 }
 
 #appMenu-fxa-status2:not([fxastatus]) > #appMenu-fxa-label2 #appMenu-header-description {
-    padding: 0 !important;
+  padding: 0 !important;
 }
 
 #appMenu-fxa-status2:not([fxastatus])::before {
-    -moz-context-properties: fill, fill-opacity;
-    content: url(chrome://userchrome/content/fxa/avatar-big.svg);
-    fill: currentColor;
-    display: -moz-box;
+  -moz-context-properties: fill, fill-opacity;
+  content: url(chrome://userchrome/content/fxa/avatar-big.svg);
+  fill: currentColor;
+  display: -moz-box;
 }
 
 #fxa-manage-account-button {
-    padding-block: 0 !important;
-    padding-inline: 8px !important;
-    min-height: 43px !important;
-    box-sizing: border-box;
+  padding-block: 0 !important;
+  padding-inline: 8px !important;
+  min-height: 43px !important;
+  box-sizing: border-box;
 }
 
 #fxa-manage-account-button #fxa-menu-avatar {
-    list-style-image: var(--avatar-image-url);
-    display: -moz-inline-box;
-    -moz-box-ordinal-group: 2;
-    margin-inline-start: var(--arrowpanel-subviewbutton-iconic-gap, 8px);
-    height: 28px !important;
-    width: 28px !important;
-    -moz-context-properties: fill, fill-opacity;
-    fill: var(--arrowpanel-color);
+  list-style-image: var(--avatar-image-url);
+  display: -moz-inline-box;
+  -moz-box-ordinal-group: 2;
+  margin-inline-start: var(--arrowpanel-subviewbutton-iconic-gap, 8px);
+  height: 28px !important;
+  width: 28px !important;
+  -moz-context-properties: fill, fill-opacity;
+  fill: var(--arrowpanel-color);
 }
 
 :root[fxastatus="signedin"] #fxa-manage-account-button::after {
-    content: "";
-    display: -moz-inline-box;
-    width: 28px;
-    height: 28px;
-    margin-inline: var(--arrowpanel-subviewbutton-iconic-gap, 8px) 0;
-    background: var(--avatar-image-url) center/contain no-repeat;
-    -moz-context-properties: fill, fill-opacity;
-    fill: var(--arrowpanel-color);
-    border-radius: 100%;
+  content: "";
+  display: -moz-inline-box;
+  width: 28px;
+  height: 28px;
+  margin-inline: var(--arrowpanel-subviewbutton-iconic-gap, 8px) 0;
+  background: var(--avatar-image-url) center/contain no-repeat;
+  -moz-context-properties: fill, fill-opacity;
+  fill: var(--arrowpanel-color);
+  border-radius: 100%;
 }
 
 :root[fxastatus="signedin"] #fxa-menu-avatar,
 :root[fxastatus="signedin"] #fxa-avatar-image {
-    border-radius: 50%;
+  border-radius: 50%;
 }
 
 #fxa-menu-header-description,
 #fxa-menu-header-title {
-    margin-block: 0 !important;
+  margin-block: 0 !important;
 }
 
 #PanelUI-fxa-menu-syncnow-button label,
@@ -658,98 +671,98 @@ toolbarseparator.proton-zap {
 #PanelUI-fxa-menu-sendtab-button .toolbarbutton-text,
 #PanelUI-fxa-menu-sync-prefs-button .toolbarbutton-text,
 #PanelUI-fxa-menu-account-signout-button .toolbarbutton-text {
-    padding-inline-start: var(--arrowpanel-subviewbutton-iconic-gap, 8px) !important;
+  padding-inline-start: var(--arrowpanel-subviewbutton-iconic-gap, 8px) !important;
 }
 
 #PanelUI-fxa-menu-syncnow-button image {
-    list-style-image: url(chrome://userchrome/content/skin/sync.svg) !important;
-    -moz-box-ordinal-group: unset !important;
-    visibility: unset !important;
-    transition: fill 0.8s var(--uc-smooth-timing-function);
-    transform-style: preserve-3d;
+  list-style-image: url(chrome://userchrome/content/skin/sync.svg) !important;
+  -moz-box-ordinal-group: unset !important;
+  visibility: unset !important;
+  transition: fill 0.8s var(--uc-smooth-timing-function);
+  transform-style: preserve-3d;
 }
 
 #PanelUI-fxa-menu-setup-sync-button {
-    list-style-image: url(chrome://userchrome/content/skin/sync.svg);
+  list-style-image: url(chrome://userchrome/content/skin/sync.svg);
 }
 
 #PanelUI-fxa-menu-connect-device-button .toolbarbutton-icon {
-    list-style-image: url(chrome://userchrome/content/fxa/add-device.svg);
-    width: 16px;
-    height: 16px;
+  list-style-image: url(chrome://userchrome/content/fxa/add-device.svg);
+  width: 16px;
+  height: 16px;
 }
 
 #PanelUI-fxa-menu-sendtab-button {
-    list-style-image: url(chrome://userchrome/content/skin/send-to-device.svg);
+  list-style-image: url(chrome://userchrome/content/skin/send-to-device.svg);
 }
 
 #PanelUI-fxa-menu-sendtab-button:-moz-locale-dir(rtl) .toolbarbutton-icon {
-    transform: scaleX(-1);
+  transform: scaleX(-1);
 }
 
 #PanelUI-fxa-menu-sync-prefs-button {
-    list-style-image: url(chrome://userchrome/content/settings.svg);
+  list-style-image: url(chrome://userchrome/content/settings.svg);
 }
 
 #PanelUI-fxa-menu-account-signout-button {
-    list-style-image: url(chrome://userchrome/content/fxa/sign-out.svg);
+  list-style-image: url(chrome://userchrome/content/fxa/sign-out.svg);
 }
 
 .PanelUI-remotetabs-clientcontainer > label[itemtype="client"] {
-    padding: 4px;
-    font-size: 11px;
+  padding: 4px;
+  font-size: 11px;
 }
 
 .panel-banner-item {
-    padding: calc(var(--arrowpanel-menuitem-padding-block) + 2px)
-        var(--arrowpanel-menuitem-padding-inline) !important;
-    margin: var(--arrowpanel-menuitem-margin) !important;
-    font-weight: inherit !important;
-    min-height: 40px !important;
-    border-radius: var(--arrowpanel-menuitem-border-radius) !important;
+  padding: calc(var(--arrowpanel-menuitem-padding-block) + 2px)
+    var(--arrowpanel-menuitem-padding-inline) !important;
+  margin: var(--arrowpanel-menuitem-margin) !important;
+  font-weight: inherit !important;
+  min-height: 40px !important;
+  border-radius: var(--arrowpanel-menuitem-border-radius) !important;
 }
 
 .addon-banner-item {
-    padding: calc(var(--arrowpanel-menuitem-padding-block) + 2px)
-        var(--arrowpanel-menuitem-padding-inline) !important;
-    margin: var(--arrowpanel-menuitem-margin) !important;
-    margin-bottom: 4px !important;
-    -moz-box-align: center !important;
-    font-weight: inherit !important;
-    border-radius: var(--arrowpanel-menuitem-border-radius) !important;
-    min-height: 40px !important;
-    --panel-banner-item-color: #f9f9fa;
-    --panel-banner-item-background-color: var(--eom-warning-bg);
-    --panel-banner-item-hover-bgcolor: var(--eom-warning-bg-hover);
-    --panel-banner-item-active-bgcolor: var(--eom-warning-bg-active);
+  padding: calc(var(--arrowpanel-menuitem-padding-block) + 2px)
+    var(--arrowpanel-menuitem-padding-inline) !important;
+  margin: var(--arrowpanel-menuitem-margin) !important;
+  margin-bottom: 4px !important;
+  -moz-box-align: center !important;
+  font-weight: inherit !important;
+  border-radius: var(--arrowpanel-menuitem-border-radius) !important;
+  min-height: 40px !important;
+  --panel-banner-item-color: #f9f9fa;
+  --panel-banner-item-background-color: var(--eom-warning-bg);
+  --panel-banner-item-hover-bgcolor: var(--eom-warning-bg-hover);
+  --panel-banner-item-active-bgcolor: var(--eom-warning-bg-active);
 }
 
 .addon-banner-item::after {
-    -moz-box-ordinal-group: 0 !important;
-    margin: 0 !important;
+  -moz-box-ordinal-group: 0 !important;
+  margin: 0 !important;
 }
 
 #appMenu-proton-update-banner {
-    margin: var(--arrowpanel-menuitem-margin) !important;
-    margin-bottom: 4px !important;
-    -moz-box-align: center !important;
-    --panel-banner-item-color: black;
-    --panel-banner-item-background-color: hsla(96, 65%, 75%, 0.5);
-    --panel-banner-item-hover-bgcolor: hsla(96, 65%, 75%, 0.8);
-    --panel-banner-item-active-bgcolor: hsl(96, 65%, 75%);
+  margin: var(--arrowpanel-menuitem-margin) !important;
+  margin-bottom: 4px !important;
+  -moz-box-align: center !important;
+  --panel-banner-item-color: black;
+  --panel-banner-item-background-color: hsla(96, 65%, 75%, 0.5);
+  --panel-banner-item-hover-bgcolor: hsla(96, 65%, 75%, 0.8);
+  --panel-banner-item-active-bgcolor: hsl(96, 65%, 75%);
 }
 
 :root[lwt-popup-brighttext] #appMenu-proton-update-banner {
-    --panel-banner-item-color: #f9f9fa;
-    --panel-banner-item-background-color: rgba(48, 230, 11, 0.1);
-    --panel-banner-item-hover-bgcolor: rgba(48, 230, 11, 0.15);
-    --panel-banner-item-active-bgcolor: rgba(48, 230, 11, 0.2);
+  --panel-banner-item-color: #f9f9fa;
+  --panel-banner-item-background-color: rgba(48, 230, 11, 0.1);
+  --panel-banner-item-hover-bgcolor: rgba(48, 230, 11, 0.15);
+  --panel-banner-item-active-bgcolor: rgba(48, 230, 11, 0.2);
 }
 
 #appMenu-popup toolbarseparator {
-    margin-inline: var(--arrowpanel-menuitem-inline-margin) !important;
+  margin-inline: var(--arrowpanel-menuitem-inline-margin) !important;
 }
 
 :is(.addon-banner-item, .panel-banner-item) > .toolbarbutton-icon {
-    -moz-box-ordinal-group: 0 !important;
+  -moz-box-ordinal-group: 0 !important;
 }

@@ -8,132 +8,132 @@
 @namespace url(http://www.w3.org/1999/xhtml); /* set default namespace to HTML */
 
 @font-face {
-    font-family: "Fira Code UC";
-    font-style: normal;
-    src: local("Fira Code"), local("Fira Code Light"), url(../fonts/FiraCode-VF.woff);
-    font-feature-settings: "ss01", "ss02", "cv19", "ss05", "ss07", "ss08", "cv14", "cv25", "cv28",
-        "cv32";
+  font-family: "Fira Code UC";
+  font-style: normal;
+  src: local("Fira Code"), local("Fira Code Light"), url(../fonts/FiraCode-VF.woff);
+  font-feature-settings: "ss01", "ss02", "cv19", "ss05", "ss07", "ss08", "cv14", "cv25", "cv28",
+    "cv32";
 }
 
 *|*:root {
-    color-scheme: light dark;
-    direction: ltr;
-    -moz-control-character-visibility: visible;
-    height: 100%;
-    font-family: Fira Code UC, Fira Code, SF Mono, -moz-fixed, monospace;
-    font-weight: 300;
+  color-scheme: light dark;
+  direction: ltr;
+  -moz-control-character-visibility: visible;
+  height: 100%;
+  font-family: Fira Code UC, Fira Code, SF Mono, -moz-fixed, monospace;
+  font-weight: 300;
 }
 #viewsource {
-    font-family: Fira Code UC, Fira Code, SF Mono, -moz-fixed, monospace;
-    font-weight: 300;
-    white-space: pre;
-    counter-reset: line;
-    height: 100%;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 8px;
+  font-family: Fira Code UC, Fira Code, SF Mono, -moz-fixed, monospace;
+  font-weight: 300;
+  white-space: pre;
+  counter-reset: line;
+  height: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 8px;
 }
 #viewsource.wrap {
-    white-space: pre-wrap;
-    word-wrap: break-word;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 pre {
-    font: inherit;
-    color: inherit;
-    white-space: inherit;
-    margin: 0 0 0 5ch;
+  font: inherit;
+  color: inherit;
+  white-space: inherit;
+  margin: 0 0 0 5ch;
 }
 pre[id]::before,
 span[id]::before {
-    content: counter(line) " ";
-    counter-increment: line;
-    user-select: none;
-    display: inline-block;
-    width: 5ch;
-    margin: 0 0 0 -5ch;
-    text-align: right;
-    color: #ccc;
-    font-weight: 300;
-    font-style: normal;
+  content: counter(line) " ";
+  counter-increment: line;
+  user-select: none;
+  display: inline-block;
+  width: 5ch;
+  margin: 0 0 0 -5ch;
+  text-align: right;
+  color: #ccc;
+  font-weight: 300;
+  font-style: normal;
 }
 xmp,
 pre,
 plaintext {
-    font-family: Fira Code UC, Fira Code, SF Mono, -moz-fixed, monospace;
-    font-weight: 300;
+  font-family: Fira Code UC, Fira Code, SF Mono, -moz-fixed, monospace;
+  font-weight: 300;
 }
 .highlight .start-tag,
 .highlight .end-tag {
-    color: #800080;
-    font-weight: 500;
+  color: #800080;
+  font-weight: 500;
 }
 .highlight .comment {
-    color: #008000;
-    font-style: italic;
+  color: #008000;
+  font-style: italic;
 }
 .highlight .cdata {
-    color: #cc0066;
+  color: #cc0066;
 }
 .highlight .doctype,
 .highlight .markupdeclaration {
-    color: #4682b4;
-    font-style: italic;
+  color: #4682b4;
+  font-style: italic;
 }
 .highlight .pi {
-    color: #da70d6;
-    font-style: italic;
+  color: #da70d6;
+  font-style: italic;
 }
 .highlight .entity {
-    color: #ff4500;
-    font-weight: normal;
+  color: #ff4500;
+  font-weight: normal;
 }
 .highlight .text {
-    font-weight: normal;
+  font-weight: normal;
 }
 .highlight .attribute-name {
-    font-weight: 500;
+  font-weight: 500;
 }
 .highlight .attribute-value {
-    color: #0000ff;
-    font-weight: normal;
+  color: #0000ff;
+  font-weight: normal;
 }
 span:not(.error),
 a:not(.error) {
-    unicode-bidi: embed;
+  unicode-bidi: embed;
 }
 span[id] {
-    unicode-bidi: isolate;
+  unicode-bidi: isolate;
 }
 .highlight .error {
-    color: revert;
-    font-weight: 500;
-    text-decoration: underline;
-    text-decoration-color: #ff0000;
-    text-decoration-style: wavy;
-    text-decoration-skip-ink: none;
+  color: revert;
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: #ff0000;
+  text-decoration-style: wavy;
+  text-decoration-skip-ink: none;
 }
 @media (prefers-color-scheme: dark) {
-    .highlight .start-tag,
-    .highlight .end-tag {
-        color: #f55e5e;
-    }
-    .highlight .comment {
-        color: #90ee90;
-    }
-    .highlight .cdata {
-        color: #f068ac;
-    }
-    .highlight .doctype,
-    .highlight .markupdeclaration {
-        color: #d3d3d3;
-    }
-    .highlight .entity {
-        color: #f18a65;
-    }
-    .highlight .attribute-value {
-        color: #97bbff;
-    }
-    .highlight .error {
-        text-decoration-color: #ff3b3b;
-    }
+  .highlight .start-tag,
+  .highlight .end-tag {
+    color: #f55e5e;
+  }
+  .highlight .comment {
+    color: #90ee90;
+  }
+  .highlight .cdata {
+    color: #f068ac;
+  }
+  .highlight .doctype,
+  .highlight .markupdeclaration {
+    color: #d3d3d3;
+  }
+  .highlight .entity {
+    color: #f18a65;
+  }
+  .highlight .attribute-value {
+    color: #97bbff;
+  }
+  .highlight .error {
+    text-decoration-color: #ff3b3b;
+  }
 }

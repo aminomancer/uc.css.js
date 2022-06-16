@@ -7,134 +7,134 @@
 /* styles the picture-in-picture overlay */
 
 .pip-wrapper {
-    top: calc(50% - 1px) !important;
-    right: 0 !important;
-    margin-inline: 0 !important;
+  top: calc(50% - 1px) !important;
+  right: 0 !important;
+  margin-inline: 0 !important;
 }
 
 .pip-wrapper[position="left"] {
-	left: 0 !important;
+  left: 0 !important;
 }
 
 .pip-wrapper .pip-expanded {
-    display: flex !important;
-    opacity: 1 !important;
-    scale: 1 1 !important;
-    box-shadow: 0 0 4px 0 hsla(240, 4%, 4.9%, 0.25) !important;
-    border: none !important;
-    padding: unset !important;
-    cursor: pointer !important;
-    background-color: var(--picture-in-picture-toggle-bgcolor) !important;
-    max-height: 26px !important;
-    border-radius: 2px 0 0 2px !important;
-    pointer-events: auto !important;
+  display: flex !important;
+  opacity: 1 !important;
+  scale: 1 1 !important;
+  box-shadow: 0 0 4px 0 hsla(240, 4%, 4.9%, 0.25) !important;
+  border: none !important;
+  padding: unset !important;
+  cursor: pointer !important;
+  background-color: var(--picture-in-picture-toggle-bgcolor) !important;
+  max-height: 26px !important;
+  border-radius: 2px 0 0 2px !important;
+  pointer-events: auto !important;
 }
 
 .pip-wrapper[position="left"] .pip-expanded {
-    border-radius: 0 2px 2px 0 !important;
+  border-radius: 0 2px 2px 0 !important;
 }
 
 .pip-wrapper .pip-icon {
-    background-image: url(chrome://userchrome/content/tab-picture-in-picture.svg) !important;
-    background-position: 0 1.6px !important;
-    background-repeat: no-repeat;
-    margin-inline: 0 5.5px !important;
-    width: 18px !important;
-    height: 18px !important;
-    min-width: 18px !important;
-    background-size: contain !important;
+  background-image: url(chrome://userchrome/content/tab-picture-in-picture.svg) !important;
+  background-position: 0 1.6px !important;
+  background-repeat: no-repeat;
+  margin-inline: 0 5.5px !important;
+  width: 18px !important;
+  height: 18px !important;
+  min-width: 18px !important;
+  background-size: contain !important;
 }
 
 .pip-wrapper[position="left"] > .pip-expanded > .pip-icon-label > .pip-icon {
-	position: relative !important;
-	top: 0 !important;
-	left: 0 !important;
-	display: inline-block !important;
-    order: 1 !important;
-    margin-inline: 5.5px 0 !important;
+  position: relative !important;
+  top: 0 !important;
+  left: 0 !important;
+  display: inline-block !important;
+  order: 1 !important;
+  margin-inline: 5.5px 0 !important;
 }
 
 .pip-wrapper .pip-icon-label {
-    padding-block: 4px !important;
-    padding-inline: 5.5px 0;
-    font-size: 13px !important;
-    margin-block: 1px 0;
-    font-weight: 500 !important;
+  padding-block: 4px !important;
+  padding-inline: 5.5px 0;
+  font-size: 13px !important;
+  margin-block: 1px 0;
+  font-weight: 500 !important;
 }
 
 .pip-wrapper[position="left"] .pip-icon-label {
-    padding-inline: 0 5.5px;
-	display: flex !important;
-	flex-direction: row !important;
-	align-content: center !important;
+  padding-inline: 0 5.5px;
+  display: flex !important;
+  flex-direction: row !important;
+  align-content: center !important;
 }
 
 @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
-    .pip-wrapper .pip-icon-label {
-        font-family: SF Pro, SF Arabic, Segoe UI, sans-serif !important;
-        font-kerning: normal !important;
-    }
+  .pip-wrapper .pip-icon-label {
+    font-family: SF Pro, SF Arabic, Segoe UI, sans-serif !important;
+    font-kerning: normal !important;
+  }
 
-    .pictureInPictureOverlay {
-        font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
-        font-kerning: normal !important;
-    }
+  .pictureInPictureOverlay {
+    font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
+    font-kerning: normal !important;
+  }
 }
 
 .pip-wrapper .pip-label {
-    margin-block: 0 !important;
-    margin-inline: 0 5px !important;
-    min-height: 18px !important;
-    max-height: 18px !important;
+  margin-block: 0 !important;
+  margin-inline: 0 5px !important;
+  min-height: 18px !important;
+  max-height: 18px !important;
 }
 
 .pip-wrapper[position="left"] .pip-label {
-    margin-inline: 5px 0 !important;
+  margin-inline: 5px 0 !important;
 }
 
 .pip-wrapper .pip-explainer,
 .pip-wrapper .pip-small,
 .pip-wrapper > .pip-icon {
-    display: none !important;
+  display: none !important;
 }
 
 .pip-wrapper {
-    pointer-events: none !important;
+  pointer-events: none !important;
 }
 
 .controlsOverlay.hovering .pip-wrapper {
-    opacity: 1 !important;
+  opacity: 1 !important;
 }
 
 .pip-wrapper .pip-expanded,
 .controlsOverlay[hidetoggle="true"].hovering > .pip-wrapper > .pip-expanded {
-    opacity: 0 !important;
-    transform-style: flat !important;
-    backface-visibility: hidden !important;
-    transition: opacity 250ms, translate 190ms !important;
-    translate: 8px !important;
+  opacity: 0 !important;
+  transform-style: flat !important;
+  backface-visibility: hidden !important;
+  transition: opacity 250ms, translate 190ms !important;
+  translate: 8px !important;
 }
 
 .pip-wrapper[position="left"] .pip-expanded,
 .controlsOverlay[hidetoggle="true"].hovering > .pip-wrapper[position="left"] > .pip-expanded {
-    translate: calc(-100% - 8px) !important;
+  translate: calc(-100% - 8px) !important;
 }
 
 .controlsOverlay.hovering .pip-wrapper .pip-expanded {
-    opacity: 1 !important;
-    translate: -29px !important;
+  opacity: 1 !important;
+  translate: -29px !important;
 }
 
 .controlsOverlay.hovering .pip-wrapper[position="left"] .pip-expanded {
-    translate: calc(-100% + 29px) !important;
+  translate: calc(-100% + 29px) !important;
 }
 
 .controlsOverlay.hovering .pip-wrapper .pip-expanded:hover {
-    opacity: 1 !important;
-    translate: 0 !important;
-    translate: -100% !important;
+  opacity: 1 !important;
+  translate: 0 !important;
+  translate: -100% !important;
 }
 
 .controlsOverlay.hovering .pip-wrapper[position="left"] .pip-expanded:hover {
-    translate: 0 !important;
+  translate: 0 !important;
 }

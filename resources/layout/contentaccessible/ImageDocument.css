@@ -9,23 +9,23 @@
 */
 
 body {
-    /* To give the image access to our document's full viewport, we need to
+  /* To give the image access to our document's full viewport, we need to
      override the margin that the html.css UA stylesheet would otherwise apply
      to our body. */
-    margin: 0;
+  margin: 0;
 }
 
 @media not print {
-    .shrinkToFit {
-        cursor: zoom-in;
-    }
+  .shrinkToFit {
+    cursor: zoom-in;
+  }
 
-    .overflowingVertical,
-    .overflowingHorizontalOnly {
-        cursor: zoom-out;
-    }
+  .overflowingVertical,
+  .overflowingHorizontalOnly {
+    cursor: zoom-out;
+  }
 }
 
 img {
-    display: block;
+  display: block;
 }

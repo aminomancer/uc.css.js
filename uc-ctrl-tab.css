@@ -7,114 +7,114 @@
 /* this stylesheet only controls the appearance of the ctrl+tab popup */
 
 #ctrlTab-previews {
-    align-items: center;
-    justify-content: space-evenly;
-    display: flex;
-    border-radius: 0% !important;
+  align-items: center;
+  justify-content: space-evenly;
+  display: flex;
+  border-radius: 0% !important;
 }
 
 #ctrlTab-panel {
-    appearance: none !important;
-    border-style: none !important;
-    font-weight: normal !important;
-    text-shadow: 0 0 2px hsl(0, 0%, 8%), 0 0 2px hsl(0, 0%, 8%) !important;
-    box-shadow: none !important;
-    background: none !important;
-    --panel-background: var(--ctrlTab-overlay-color) !important;
-    border-radius: 10px !important;
-    overflow: hidden !important;
+  appearance: none !important;
+  border-style: none !important;
+  font-weight: normal !important;
+  text-shadow: 0 0 2px hsl(0, 0%, 8%), 0 0 2px hsl(0, 0%, 8%) !important;
+  box-shadow: none !important;
+  background: none !important;
+  --panel-background: var(--ctrlTab-overlay-color) !important;
+  border-radius: 10px !important;
+  overflow: hidden !important;
 }
 
 .ctrlTab-preview {
-    background: none !important;
+  background: none !important;
 }
 
 .ctrlTab-preview:not(#ctrlTab-showAll) > * > .ctrlTab-preview-inner {
-    margin: -10px -10px 0 !important;
+  margin: -10px -10px 0 !important;
 }
 
 .ctrlTab-preview-inner img:-moz-broken {
-    visibility: hidden !important;
+  visibility: hidden !important;
 }
 
 .ctrlTab-canvas {
-    box-shadow: none !important;
-    background-color: transparent !important;
-    border: none !important;
-    fill: white !important;
-    fill-opacity: 0.7 !important;
-    -moz-context-properties: fill, fill-opacity !important;
-    background: url(chrome://userchrome/content/skin/restore-session.svg) center no-repeat !important;
-    background-size: 42% !important;
+  box-shadow: none !important;
+  background-color: transparent !important;
+  border: none !important;
+  fill: white !important;
+  fill-opacity: 0.7 !important;
+  -moz-context-properties: fill, fill-opacity !important;
+  background: url(chrome://userchrome/content/skin/restore-session.svg) center no-repeat !important;
+  background-size: 42% !important;
 }
 
 #ctrlTab-showAll-container {
-    margin-top: 8px !important;
+  margin-top: 8px !important;
 }
 
 #ctrlTab-showAll {
-    background-color: var(--ctrlTab-panel-bgcolor) !important;
-    border: 1px solid var(--blurred-dialog-border-color) !important;
+  background-color: var(--ctrlTab-panel-bgcolor) !important;
+  border: 1px solid var(--blurred-dialog-border-color) !important;
 }
 
 #ctrlTab-showAll .button-box {
-    padding: 2px 4px !important;
+  padding: 2px 4px !important;
 }
 
 #ctrlTab-showAll:focus,
 #ctrlTab-showAll:focus-within {
-    background-color: var(--ctrlTab-panel-focused-bgcolor) !important;
-    border-color: var(--attention-color) !important;
+  background-color: var(--ctrlTab-panel-focused-bgcolor) !important;
+  border-color: var(--attention-color) !important;
 }
 
 .ctrlTab-preview-inner {
-    color: var(--ui-text-80) !important;
-    margin: 0 !important;
-    padding: 10px !important;
-    border: 1px solid var(--blurred-dialog-border-color) !important;
-    border-radius: 7px !important;
-    box-shadow: 0 0 4px -1px rgba(0, 0, 0, 0.2), 0 0 25px -2px rgba(0, 0, 0, 0.2) !important;
-    background-color: var(--ctrlTab-panel-bgcolor) !important;
+  color: var(--ui-text-80) !important;
+  margin: 0 !important;
+  padding: 10px !important;
+  border: 1px solid var(--blurred-dialog-border-color) !important;
+  border-radius: 7px !important;
+  box-shadow: 0 0 4px -1px rgba(0, 0, 0, 0.2), 0 0 25px -2px rgba(0, 0, 0, 0.2) !important;
+  background-color: var(--ctrlTab-panel-bgcolor) !important;
 }
 
 .ctrlTab-preview:focus > .ctrlTab-preview-inner {
-    background-color: var(--ctrlTab-panel-focused-bgcolor) !important;
-    border-color: var(--attention-color) !important;
-    box-shadow: 0 0 4px -1px rgba(0, 0, 0, 0.2), 0 0 25px -2px rgba(0, 0, 0, 0.2),
-        inset 0 0 20px 5px hsla(0, 0%, 0%, 0.5) !important;
+  background-color: var(--ctrlTab-panel-focused-bgcolor) !important;
+  border-color: var(--attention-color) !important;
+  box-shadow: 0 0 4px -1px rgba(0, 0, 0, 0.2), 0 0 25px -2px rgba(0, 0, 0, 0.2),
+    inset 0 0 20px 5px hsla(0, 0%, 0%, 0.5) !important;
 }
 
 .ctrlTab-canvas > * {
-    border-radius: 3px !important;
+  border-radius: 3px !important;
 }
 
 .ctrlTab-favicon-container {
-    -moz-box-align: start !important;
-    -moz-box-pack: start !important;
-    box-shadow: none !important;
-    margin-inline-start: 7px !important;
-    margin-top: -47px !important;
-    padding-bottom: 13px !important;
-    height: 45px !important;
-    position: absolute !important;
+  -moz-box-align: start !important;
+  -moz-box-pack: start !important;
+  box-shadow: none !important;
+  margin-inline-start: 7px !important;
+  margin-top: -47px !important;
+  padding-bottom: 13px !important;
+  height: 45px !important;
+  position: absolute !important;
 }
 
 .ctrlTab-favicon {
-    margin: 0 !important;
+  margin: 0 !important;
 }
 
 .ctrlTab-favicon[src] {
-    background: hsla(0, 0%, 49%, 0.3) !important;
-    width: 32px !important;
-    height: 32px !important;
-    padding: 3px !important;
-    box-shadow: none !important;
-    border-radius: 3px !important;
-    -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity !important;
-    fill: currentColor !important;
+  background: hsla(0, 0%, 49%, 0.3) !important;
+  width: 32px !important;
+  height: 32px !important;
+  padding: 3px !important;
+  box-shadow: none !important;
+  border-radius: 3px !important;
+  -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity !important;
+  fill: currentColor !important;
 }
 
 .ctrlTab-label {
-    color: inherit !important;
-    margin-bottom: -1.5px !important;
+  color: inherit !important;
+  margin-bottom: -1.5px !important;
 }

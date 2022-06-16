@@ -8,311 +8,309 @@
 it also changes the appearance of the one-offs in the searchbar. */
 
 #PopupSearchAutoComplete .search-one-offs {
-    -moz-box-orient: horizontal !important;
-    max-width: 100% !important;
-    width: 100% !important;
-    min-width: 0 !important;
-    display: flex !important;
-    flex-flow: row nowrap !important;
-    align-items: center !important;
+  -moz-box-orient: horizontal !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  display: flex !important;
+  flex-flow: row nowrap !important;
+  align-items: center !important;
 }
 
 #PopupSearchAutoComplete .search-one-offs > * {
-    flex-grow: 0 !important;
-    flex-shrink: 1 !important;
-    max-width: -moz-available !important;
-    min-width: 0 !important;
+  flex-grow: 0 !important;
+  flex-shrink: 1 !important;
+  max-width: -moz-available !important;
+  min-width: 0 !important;
 }
 
 #PopupSearchAutoComplete .search-panel-one-offs-container {
-    padding-inline: 4px;
-    clip-path: inset(0 4px 0 4px);
-    display: flex !important;
+  padding-inline: 4px;
+  clip-path: inset(0 4px 0 4px);
+  display: flex !important;
 }
 
 #PopupSearchAutoComplete .search-panel-one-offs {
-    display: flex !important;
-    background: none !important;
-    -moz-context-properties: fill, fill-opacity !important;
-    fill: currentColor !important;
-    height: unset !important;
-    flex-wrap: nowrap !important;
-    scroll-behavior: smooth;
-    scrollbar-width: none !important;
-    min-width: min-content !important;
-    max-width: unset !important;
+  display: flex !important;
+  background: none !important;
+  -moz-context-properties: fill, fill-opacity !important;
+  fill: currentColor !important;
+  height: unset !important;
+  flex-wrap: nowrap !important;
+  scroll-behavior: smooth;
+  scrollbar-width: none !important;
+  min-width: min-content !important;
+  max-width: unset !important;
 }
 
 #PopupSearchAutoComplete .search-panel-one-offs-header {
-    margin-inline: var(--arrowpanel-menuitem-inline-margin) 0 !important;
-    min-width: -moz-fit-content !important;
-    flex-grow: 0 !important;
-    flex-shrink: 0 !important;
+  margin-inline: var(--arrowpanel-menuitem-inline-margin) 0 !important;
+  min-width: -moz-fit-content !important;
+  flex-grow: 0 !important;
+  flex-shrink: 0 !important;
 }
 
 #PopupSearchAutoComplete .search-panel-one-offs-header::before {
-    content: "Search with:";
-    display: inline-block;
-    margin-block: 2px 3px;
-    margin-inline: 10px 4px;
-    color: var(--panel-shortcut-color);
+  content: "Search with:";
+  display: inline-block;
+  margin-block: 2px 3px;
+  margin-inline: 10px 4px;
+  color: var(--panel-shortcut-color);
 }
 
 #PopupSearchAutoComplete .search-one-offs .button-icon {
-    fill-opacity: 1 !important;
+  fill-opacity: 1 !important;
 }
 
 #PopupSearchAutoComplete .searchbar-engine-one-off-item {
-    margin: 0 !important;
-    padding: 2px !important;
-    background: none !important;
+  margin: 0 !important;
+  padding: 2px !important;
+  background: none !important;
 }
 
 #PopupSearchAutoComplete
-    :is(.searchbar-engine-one-off-item, .addengine-item)
-    > :is(stack, .button-box) {
-    border-radius: var(--toolbarbutton-border-radius);
+  :is(.searchbar-engine-one-off-item, .addengine-item)
+  > :is(stack, .button-box) {
+  border-radius: var(--toolbarbutton-border-radius);
 }
 
 #PopupSearchAutoComplete
-    :is(.searchbar-engine-one-off-item, .addengine-item):hover:not([selected])
-    > :is(stack, .button-box) {
-    background-color: var(--autocomplete-popup-hover-background) !important;
+  :is(.searchbar-engine-one-off-item, .addengine-item):hover:not([selected])
+  > :is(stack, .button-box) {
+  background-color: var(--autocomplete-popup-hover-background) !important;
 }
 
 #PopupSearchAutoComplete
-    :is(.searchbar-engine-one-off-item, .addengine-item)[selected]
-    > :is(stack, .button-box) {
-    background-color: var(--autocomplete-popup-highlight-background) !important;
+  :is(.searchbar-engine-one-off-item, .addengine-item)[selected]
+  > :is(stack, .button-box) {
+  background-color: var(--autocomplete-popup-highlight-background) !important;
 }
 
 #PopupSearchAutoComplete #searchbar-one-offs-header-label,
 #PopupSearchAutoComplete .search-one-offs > .searchbar-separator {
-    display: none !important;
+  display: none !important;
 }
 
 #PopupSearchAutoComplete .search-setting-button,
 #PopupSearchAutoComplete .search-add-engines {
-    flex-shrink: 0 !important;
-    flex-grow: 0 !important;
+  flex-shrink: 0 !important;
+  flex-grow: 0 !important;
 }
 
 #PopupSearchAutoComplete .search-add-engines {
-    gap: 4px;
-    display: flex;
+  gap: 4px;
+  display: flex;
 }
 
 #PopupSearchAutoComplete .search-setting-button label,
 #PopupSearchAutoComplete .search-add-engines label {
-    display: none;
+  display: none;
 }
 
 #PopupSearchAutoComplete .addengine-item {
-    padding: 0 !important;
-    width: 28px !important;
-    height: 28px !important;
-    background: none !important;
-    margin: 0 !important;
+  padding: 0 !important;
+  width: 28px !important;
+  height: 28px !important;
+  background: none !important;
+  margin: 0 !important;
 }
 
 #PopupSearchAutoComplete .addengine-item .toolbarbutton-badge-stack {
-    width: 28px !important;
-    height: 28px !important;
-    margin: unset !important;
-    display: flex !important;
-    align-content: center !important;
-    align-items: center !important;
-    justify-content: center !important;
+  width: 28px !important;
+  height: 28px !important;
+  margin: unset !important;
+  display: flex !important;
+  align-content: center !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 #PopupSearchAutoComplete .addengine-item .toolbarbutton-badge {
-    justify-self: start !important;
-    margin: 0px -5.5px !important;
+  justify-self: start !important;
+  margin: 0px -5.5px !important;
 }
 
 #PopupSearchAutoComplete .search-setting-button {
-    width: 28px !important;
-    min-height: 28px !important;
-    margin-inline: 0 !important;
+  width: 28px !important;
+  min-height: 28px !important;
+  margin-inline: 0 !important;
 }
 
 #PopupSearchAutoComplete .search-add-engines:not(:empty) ~ .search-setting-button {
-    margin-left: 4px !important;
+  margin-left: 4px !important;
 }
 
 #PopupSearchAutoComplete .search-one-offs-spacer {
-    display: none !important;
+  display: none !important;
 }
 
 #PopupSearchAutoComplete .search-setting-button > .button-box {
-    padding: 0 !important;
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
 }
 
 #PopupSearchAutoComplete .search-setting-button .button-icon {
-    width: 16px !important;
-    height: 16px !important;
-    list-style-image: url(chrome://global/skin/icons/settings.svg);
-    -moz-context-properties: fill, fill-opacity;
-    fill: currentColor;
-    fill-opacity: var(--urlbar-icon-fill-opacity);
+  width: 16px !important;
+  height: 16px !important;
+  list-style-image: url(chrome://global/skin/icons/settings.svg);
+  -moz-context-properties: fill, fill-opacity;
+  fill: currentColor;
+  fill-opacity: var(--urlbar-icon-fill-opacity);
 }
 
 .searchbar-separator {
-    margin: calc(var(--arrowpanel-menuitem-inline-margin) - 1px)
-        var(--arrowpanel-menuitem-inline-margin) !important;
+  margin: calc(var(--arrowpanel-menuitem-inline-margin) - 1px)
+    var(--arrowpanel-menuitem-inline-margin) !important;
 }
 
 .urlbarView :is(.searchbar-engine-one-off-item, .addengine-item) {
-    min-width: var(--urlbar-one-offs-engine-width) !important;
-    height: var(--urlbar-one-offs-engine-width) !important;
-    padding: 0 !important;
-    margin-inline: 0 !important;
-    background: none !important;
-    border: none !important;
-    position: relative !important;
-    background-color: transparent !important;
-    -moz-context-properties: fill, fill-opacity;
-    fill: currentColor;
-    fill-opacity: 1 !important;
+  min-width: var(--urlbar-one-offs-engine-width) !important;
+  height: var(--urlbar-one-offs-engine-width) !important;
+  padding: 0 !important;
+  margin-inline: 0 !important;
+  background: none !important;
+  border: none !important;
+  position: relative !important;
+  background-color: transparent !important;
+  -moz-context-properties: fill, fill-opacity;
+  fill: currentColor;
+  fill-opacity: 1 !important;
 }
 
 .urlbarView :is(.searchbar-engine-one-off-item, .addengine-item),
 #PopupSearchAutoComplete :is(.searchbar-engine-one-off-item, .addengine-item) {
-    min-width: 32px !important;
-    height: 32px !important;
-    padding: 2px !important;
-    color: var(--panel-description-color) !important;
+  min-width: 32px !important;
+  height: 32px !important;
+  padding: 2px !important;
+  color: var(--panel-description-color) !important;
 }
 
 .search-setting-button > .button-box > .button-icon {
-    fill: currentColor !important;
-    fill-opacity: inherit !important;
+  fill: currentColor !important;
+  fill-opacity: inherit !important;
 }
 
 .urlbarView :is(.searchbar-engine-one-off-item, .addengine-item) > .button-box {
-    min-width: var(--urlbar-one-offs-engine-width) !important;
-    height: var(--urlbar-one-offs-engine-width) !important;
-    padding: 0 !important;
-    border-radius: var(--toolbarbutton-border-radius) !important;
+  min-width: var(--urlbar-one-offs-engine-width) !important;
+  height: var(--urlbar-one-offs-engine-width) !important;
+  padding: 0 !important;
+  border-radius: var(--toolbarbutton-border-radius) !important;
 }
 
 .urlbarView
-    :is(.searchbar-engine-one-off-item, .addengine-item):is([selected], :hover)
-    > .button-box {
-    fill-opacity: 1 !important;
+  :is(.searchbar-engine-one-off-item, .addengine-item):is([selected], :hover)
+  > .button-box {
+  fill-opacity: 1 !important;
 }
 
 .searchbar-engine-one-off-add-engine[image] .button-icon {
-    opacity: 1 !important;
+  opacity: 1 !important;
 }
 
 .searchbar-engine-one-off-add-engine[image]:not(:hover, [selected]) > .button-box {
-    opacity: 0.6 !important;
+  opacity: 0.6 !important;
 }
 
 .searchbar-engine-one-off-add-engine > .button-box::after {
-    background: url(chrome://userchrome/content/skin/search-indicator-badge-add.svg) no-repeat
-        center/contain !important;
-    -moz-context-properties: fill, fill-opacity, stroke !important;
-    fill: var(--update-badge-bg) !important;
-    stroke: var(--update-badge-color) !important;
-    height: 12px !important;
-    width: 12px !important;
-    margin-inline: -6px -6px !important;
-    margin-top: -16px !important;
+  background: url(chrome://userchrome/content/skin/search-indicator-badge-add.svg) no-repeat
+    center/contain !important;
+  -moz-context-properties: fill, fill-opacity, stroke !important;
+  fill: var(--update-badge-bg) !important;
+  stroke: var(--update-badge-color) !important;
+  height: 12px !important;
+  width: 12px !important;
+  margin-inline: -6px -6px !important;
+  margin-top: -16px !important;
 }
 
 #urlbar-engine-one-off-item-bookmarks:not([selected]) {
-    fill: currentColor !important;
+  fill: currentColor !important;
 }
 
-/* replace google search icon with CSS since you can't replace
-the built-in google engine without changing the engine's name */
-:is(#urlbar-engine-one-off-item-Google, #searchbar-engine-one-off-item-Google) .button-icon
-{
-    display: none;
+/* replace google search icon with CSS since you can't replace the built-in
+google engine without changing the engine's name */
+:is(#urlbar-engine-one-off-item-Google, #searchbar-engine-one-off-item-Google) .button-icon {
+  display: none;
 }
 
-:is(#urlbar-engine-one-off-item-Google, #searchbar-engine-one-off-item-Google) .button-box::before
-{
-    content: url(chrome://userchrome/content/engines/google.svg);
-    display: block;
-    width: 16px;
-    height: 16px;
+:is(#urlbar-engine-one-off-item-Google, #searchbar-engine-one-off-item-Google) .button-box::before {
+  content: url(chrome://userchrome/content/engines/google.svg);
+  display: block;
+  width: 16px;
+  height: 16px;
 }
 
-:is(#urlbar-engine-one-off-item-DuckDuckGo, #searchbar-engine-one-off-item-DuckDuckGo) .button-icon
-{
-    display: none;
+:is(#urlbar-engine-one-off-item-DuckDuckGo, #searchbar-engine-one-off-item-DuckDuckGo)
+  .button-icon {
+  display: none;
 }
 
-:is(#urlbar-engine-one-off-item-DuckDuckGo, #searchbar-engine-one-off-item-DuckDuckGo) .button-box::before
-{
-    content: url(chrome://userchrome/content/engines/duckduckgo.svg);
-    display: block;
-    width: 16px;
-    height: 16px;
+:is(#urlbar-engine-one-off-item-DuckDuckGo, #searchbar-engine-one-off-item-DuckDuckGo)
+  .button-box::before {
+  content: url(chrome://userchrome/content/engines/duckduckgo.svg);
+  display: block;
+  width: 16px;
+  height: 16px;
 }
 
 .urlbarView .search-one-offs {
-    min-height: var(--urlbar-height) !important;
-    padding: 2px !important;
-    scroll-behavior: smooth !important;
-    box-sizing: border-box !important;
-    border: none !important;
-    flex-flow: row nowrap !important;
+  min-height: var(--urlbar-height) !important;
+  padding: 2px !important;
+  scroll-behavior: smooth !important;
+  box-sizing: border-box !important;
+  border: none !important;
+  flex-flow: row nowrap !important;
 }
 
 #urlbar .search-panel-one-offs {
-    flex-wrap: nowrap !important;
-    min-height: var(--urlbar-height);
-    align-items: center;
+  flex-wrap: nowrap !important;
+  min-height: var(--urlbar-height);
+  align-items: center;
 }
 
 #urlbar .search-panel-one-offs-container {
-    min-width: unset !important;
-    margin-inline-end: -4px !important;
+  min-width: unset !important;
+  margin-inline-end: -4px !important;
 }
 
 #urlbar-search-one-offs-separator {
-    width: calc(100% - 4px) !important;
-    -moz-box-align: center !important;
-    margin: 2px !important;
+  width: calc(100% - 4px) !important;
+  -moz-box-align: center !important;
+  margin: 2px !important;
 }
 
 #nav-bar:not([overflowing="true"]) #urlbar-search-one-offs-separator {
-    display: none !important;
+  display: none !important;
 }
 
 .urlbarView .search-panel-one-offs-header {
-    min-width: -moz-fit-content !important;
-    flex-grow: 0 !important;
-    flex-shrink: 0 !important;
-    min-height: var(--urlbar-height) !important;
-    align-items: center;
+  min-width: -moz-fit-content !important;
+  flex-grow: 0 !important;
+  flex-shrink: 0 !important;
+  min-height: var(--urlbar-height) !important;
+  align-items: center;
 }
 
 .urlbarView .search-panel-one-offs-header-label {
-    padding-inline: 8px !important;
-    display: none !important;
+  padding-inline: 8px !important;
+  display: none !important;
 }
 
 .urlbarView .search-panel-one-offs-header::before {
-    content: "Search with:";
-    display: inline-block;
-    margin-block: 2px 3px;
-    margin-inline: 8px 4px;
-    color: var(--panel-shortcut-color);
+  content: "Search with:";
+  display: inline-block;
+  margin-block: 2px 3px;
+  margin-inline: 8px 4px;
+  color: var(--panel-shortcut-color);
 }
 
 :is(.searchbar-engine-one-off-item, .addengine-item):hover > .button-box {
-    background-color: var(--toolbarbutton-hover-background) !important;
+  background-color: var(--toolbarbutton-hover-background) !important;
 }
 
 :is(.searchbar-engine-one-off-item, .addengine-item)[selected] > .button-box {
-    background-color: var(--toolbarbutton-active-background) !important;
-    color: var(--lwt-text-color) !important;
+  background-color: var(--toolbarbutton-active-background) !important;
+  color: var(--lwt-text-color) !important;
 }

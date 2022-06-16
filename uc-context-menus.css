@@ -11,549 +11,553 @@ since devtools and certain system pages contain the same elements,
 but *inside* of content documents rather than in the UI where userChrome.css can style them. */
 
 menupopup {
-    -moz-window-shadow: none !important;
+  -moz-window-shadow: none !important;
+  padding: var(--menupopup-padding) !important;
+  background-color: transparent !important;
+  border-color: transparent !important;
 }
 
 menupopup:not([type="arrow"]) {
-    appearance: none !important;
-    background: var(--menupopup-background) !important;
-    border: none !important;
-    border-radius: 0 !important;
-    margin: var(--menupopup-margin) !important;
-    overflow: visible !important;
+  appearance: none !important;
+  background: var(--menupopup-background) !important;
+  border: none !important;
+  border-radius: 0 !important;
+  margin: var(--menupopup-margin) !important;
+  overflow: visible !important;
 }
 
 menupopup:not([type="arrow"]) menu > menupopup {
-    margin-inline-start: var(--menupopup-child-margin-inline-start) !important;
-    margin-block-start: var(--menupopup-child-margin-block-start) !important;
+  margin-inline-start: var(--menupopup-child-margin-inline-start) !important;
+  margin-block-start: var(--menupopup-child-margin-block-start) !important;
 }
 
 menupopup:not([height], .in-menulist) {
-    /* temporarily set to 4px 0, due to a bug. should just be 0 */
-    --menupopup-overflowing-inner-box-margin: 4px 0;
+  /* temporarily set to 4px 0, due to a bug. should just be 0 */
+  --menupopup-overflowing-inner-box-margin: 4px 0;
 }
 
 .menupopup-arrowscrollbox {
-    background-color: var(--menu-background-color) !important;
-    color: var(--menu-color) !important;
-    border-radius: var(--menupopup-border-radius) !important;
-    box-shadow: var(--uc-menupopup-shadow) !important;
+  background-color: var(--menu-background-color) !important;
+  color: var(--menu-color) !important;
+  border-radius: var(--menupopup-border-radius) !important;
+  box-shadow: var(--uc-menupopup-shadow) !important;
 }
 
 .menupopup-arrowscrollbox[orient="vertical"][overflowing="true"] {
-    margin-block: var(
-        --menupopup-overflowing-inner-box-margin,
-        var(--menupopup-inner-box-margin)
-    ) !important;
+  margin-block: var(
+    --menupopup-overflowing-inner-box-margin,
+    var(--menupopup-inner-box-margin)
+  ) !important;
 }
 
 menupopup:not([type="arrow"]) :is(menuitem, menu),
 panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem {
-    appearance: none !important;
-    color: var(--menu-color) !important;
-    padding: 0 !important;
-    min-height: var(--menuitem-height) !important;
-    border-radius: var(--context-menuitem-border-radius);
+  appearance: none !important;
+  color: var(--menu-color) !important;
+  padding: 0 !important;
+  min-height: var(--menuitem-height) !important;
+  border-radius: var(--context-menuitem-border-radius);
 }
 
 #openHandlerPopup :is(menuitem, menu) {
-    padding-inline-start: 5px !important;
+  padding-inline-start: 5px !important;
 }
 
 menupopup:not([type="arrow"]) :is(menuitem, menu)[disabled="true"],
 panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem[disabled="true"] {
-    appearance: none !important;
-    color: var(--menu-disabled-color) !important;
-    background-color: initial !important;
+  appearance: none !important;
+  color: var(--menu-disabled-color) !important;
+  background-color: initial !important;
 }
 
 .menuitem-iconic {
-    -moz-context-properties: fill, fill-opacity;
-    fill: currentColor;
+  -moz-context-properties: fill, fill-opacity;
+  fill: currentColor;
 }
 
 menupopup:not([type="arrow"]) :is(menuitem, menu) .menu-iconic-left {
-    padding: 0 !important;
-    appearance: none !important;
-    margin-inline-end: 0 !important;
+  padding: 0 !important;
+  appearance: none !important;
+  margin-inline-end: 0 !important;
 }
 
 menupopup:not([type="arrow"]) :is(menuitem, menu) .menu-iconic-icon {
-    margin-inline: var(--context-iconic-margin);
+  margin-inline: var(--context-iconic-margin);
 }
 
 panel[type="autocomplete-richlistbox"]
-    > richlistbox
-    > richlistitem
-    :is(.ac-site-icon, .ac-type-icon) {
-    margin-inline: var(--context-iconic-margin) !important;
-    margin-inline-start: 0 !important;
+  > richlistbox
+  > richlistitem
+  :is(.ac-site-icon, .ac-type-icon) {
+  margin-inline: var(--context-iconic-margin) !important;
+  margin-inline-start: 0 !important;
 }
 
 #contentAreaContextMenu > .menuitem-iconic > .menu-iconic-left > .menu-iconic-icon {
-    fill: currentColor;
-    -moz-context-properties: fill, fill-opacity, stroke;
+  fill: currentColor;
+  -moz-context-properties: fill, fill-opacity, stroke;
 }
 
 moz-input-box > menupopup .context-menu-add-engine > .menu-iconic-left::after {
-    background: url(chrome://userchrome/content/skin/search-indicator-badge-add.svg) no-repeat
-        center/contain !important;
-    -moz-context-properties: fill, fill-opacity, stroke !important;
-    fill: var(--update-badge-bg) !important;
-    stroke: var(--update-badge-color) !important;
-    height: 12px !important;
-    width: 12px !important;
-    margin-inline: -12px 0px !important;
-    margin-top: -13px !important;
+  background: url(chrome://userchrome/content/skin/search-indicator-badge-add.svg) no-repeat
+    center/contain !important;
+  -moz-context-properties: fill, fill-opacity, stroke !important;
+  fill: var(--update-badge-bg) !important;
+  stroke: var(--update-badge-color) !important;
+  height: 12px !important;
+  width: 12px !important;
+  margin-inline: -12px 0px !important;
+  margin-top: -13px !important;
 }
 
 moz-input-box > menupopup .context-menu-add-engine:not([image]) .menu-iconic-icon {
-    list-style-image: url(chrome://userchrome/content/search-glass.svg);
+  list-style-image: url(chrome://userchrome/content/search-glass.svg);
+}
+
+.menu-text {
+  padding-inline: var(--context-padding-inline) !important;
 }
 
 menupopup:not([type="arrow"]) menugroup {
-    padding: 0 !important;
-    background-color: transparent !important;
+  padding: 0 !important;
+  background-color: transparent !important;
 }
 
 menupopup:not([type="arrow"]) .menu-right {
-    appearance: none !important;
-    padding: 0px !important;
-    margin-inline-end: var(--menu-right-margin) !important;
-    min-width: 0 !important;
-    width: var(--menu-right-size) !important;
-    height: var(--menu-right-size) !important;
-    fill: currentColor !important;
-    -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity !important;
-    fill-opacity: 0.6 !important;
-    background-size: 10px 10px !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-    background-image: var(--menu-right-bg) !important;
-    list-style-image: var(--menu-right-img) !important;
+  appearance: none !important;
+  padding: 0px !important;
+  margin-inline-end: var(--menu-right-margin) !important;
+  min-width: 0 !important;
+  width: var(--menu-right-size) !important;
+  height: var(--menu-right-size) !important;
+  fill: currentColor !important;
+  -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity !important;
+  fill-opacity: 0.6 !important;
+  background-size: 10px 10px !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-image: var(--menu-right-bg) !important;
+  list-style-image: var(--menu-right-img) !important;
 }
 
 menupopup:not([type="arrow"]) menu[disabled="true"] > .menu-right {
-    visibility: collapse;
+  visibility: collapse;
 }
 
 menupopup:not([type="arrow"]) :is(menu, menuitem)[_moz-menuactive="true"]:not([disabled="true"]) {
-    appearance: none !important;
-    background-color: var(--menuitem-hover-background-color) !important;
+  appearance: none !important;
+  background-color: var(--menuitem-hover-background-color) !important;
 }
 
 menupopup:not([type="arrow"]) :is(menu, menuitem)[_moz-menuactive="true"][disabled="true"] {
-    background: none !important;
-    appearance: none !important;
+  background: none !important;
+  appearance: none !important;
 }
 
 :is(menuitem, menu).subviewbutton[_moz-menuactive="true"][disabled="true"] {
-    color: var(--menu-disabled-color) !important;
+  color: var(--menu-disabled-color) !important;
 }
 
 :where(menuitem, menu).subviewbutton:not([disabled="true"])[_moz-menuactive="true"] {
-    background: var(--panel-item-hover-bgcolor) !important;
+  background: var(--panel-item-hover-bgcolor) !important;
 }
 
 menuitem.subviewbutton:not([disabled="true"])[_moz-menuactive="true"]:active {
-    background: var(--panel-item-active-bgcolor) !important;
-    box-shadow: none !important;
+  background: var(--panel-item-active-bgcolor) !important;
+  box-shadow: none !important;
 }
 
 menupopup:not([type="arrow"]) menuseparator {
-    appearance: none !important;
-    border-color: var(--menu-separator-color) !important;
-    margin: var(--menu-separator-margin) !important;
-    margin-inline: var(--menupopup-inner-padding-magnitude) !important;
-    padding: 0 !important;
+  appearance: none !important;
+  border-color: var(--menu-separator-color) !important;
+  margin: var(--menu-separator-margin) !important;
+  margin-inline: var(--menupopup-inner-padding-magnitude) !important;
+  padding: 0 !important;
+}
+
+menupopup:not([type="arrow"]) menuseparator:last-child {
+  display: none;
 }
 
 :is(.menu-accel, .menu-iconic-accel)[value] {
-    margin-inline: 1.55em calc(var(--menu-right-margin) + 4px) !important;
-    padding-block: 0 !important;
+  margin-inline: 1.55em calc(var(--menu-right-margin) + 4px) !important;
+  padding-block: 0 !important;
+}
+
+menuitem:not([disabled="true"]) :is(.menu-accel, .menu-iconic-accel) {
+  color: var(--panel-shortcut-color);
+}
+
+menuitem[disabled="true"] :is(.menu-accel, .menu-iconic-accel) {
+  opacity: 0.6;
 }
 
 menupopup menuitem:is([type="checkbox"], [type="radio"])::before {
-    position: relative;
-    display: -moz-inline-box;
-    width: 14px;
-    height: 14px;
-    margin-inline: var(--context-checkbox-margin);
-    fill: currentColor;
-    -moz-context-properties: fill, fill-opacity, stroke;
-    content: "";
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-    border: 1px solid var(--checkbox-border-color);
-    background-color: var(--checkbox-unchecked-bgcolor);
-    color: var(--uc-parent-primary-button-text-color);
+  position: relative;
+  display: -moz-inline-box;
+  width: 14px;
+  height: 14px;
+  margin-inline: var(--context-checkbox-margin);
+  fill: currentColor;
+  -moz-context-properties: fill, fill-opacity, stroke;
+  content: "";
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: 1px solid var(--checkbox-border-color);
+  background-color: var(--checkbox-unchecked-bgcolor);
+  color: var(--uc-parent-primary-button-text-color);
 }
 
 menupopup .unified-nav-current[type="radio"][checked="true"] {
-    font-weight: var(--uc-font-weight-bold, 600) !important;
+  font-weight: var(--uc-font-weight-bold, 600) !important;
 }
 
 menupopup .unified-nav-current[type="radio"][checked="true"]::before {
-    width: 16px;
-    height: 16px;
-    margin-inline: var(--context-iconic-margin);
-    background-image: url(chrome://userchrome/content/check.svg);
-    border-radius: 2px;
-    fill-opacity: 1;
+  width: 16px;
+  height: 16px;
+  margin-inline: var(--context-iconic-margin);
+  background-image: url(chrome://userchrome/content/check.svg);
+  border-radius: 2px;
+  fill-opacity: 1;
 }
 
 menupopup menuitem[class^="unified-nav"][type="radio"]:not([checked="true"])::before {
-    display: none;
+  display: none;
 }
 
 menupopup
-    menuitem[class^="unified-nav"][type="radio"]:not([checked="true"])
-    :is(.menu-iconic-left, .menu-iconic-icon) {
-    display: -moz-box !important;
+  menuitem[class^="unified-nav"][type="radio"]:not([checked="true"])
+  :is(.menu-iconic-left, .menu-iconic-icon) {
+  display: -moz-box !important;
 }
 
 menupopup menuitem[class^="unified-nav"] .menu-iconic-accel:not([value]):empty {
-    margin-inline: 4px !important;
+  margin-inline: 4px !important;
 }
 
 menupopup menuitem[class^="unified-nav"][type="radio"][_moz-menuactive="true"]::before {
-    background-image: url(chrome://browser/skin/reload.svg) !important;
-    background-size: 12px !important;
+  background-image: url(chrome://browser/skin/reload.svg) !important;
+  background-size: 12px !important;
 }
 
 menupopup menuitem[type="checkbox"]::before {
-    border-radius: 2px;
+  border-radius: 2px;
 }
 
 menupopup
-    menuitem:is([type="checkbox"], [type="radio"])[_moz-menuactive="true"]:not([disabled="true"])::before {
-    background-color: var(--checkbox-unchecked-hover-bgcolor);
+  menuitem:is([type="checkbox"], [type="radio"])[_moz-menuactive="true"]:not([disabled="true"])::before {
+  background-color: var(--checkbox-unchecked-hover-bgcolor);
 }
 
 menupopup
-    menuitem:is([type="checkbox"], [type="radio"])[_moz-menuactive="true"]:not([disabled="true"]):active::before {
-    background-color: var(--checkbox-unchecked-active-bgcolor);
+  menuitem:is([type="checkbox"], [type="radio"])[_moz-menuactive="true"]:not([disabled="true"]):active::before {
+  background-color: var(--checkbox-unchecked-active-bgcolor);
 }
 
 menupopup
-    menuitem:is([type="checkbox"], [type="radio"])[checked="true"][_moz-menuactive="true"]:not([disabled="true"])::before {
-    background-color: var(--checkbox-checked-hover-bgcolor);
+  menuitem:is([type="checkbox"], [type="radio"])[checked="true"][_moz-menuactive="true"]:not([disabled="true"])::before {
+  background-color: var(--checkbox-checked-hover-bgcolor);
 }
 
 menupopup
-    menuitem:is([type="checkbox"], [type="radio"])[checked="true"][_moz-menuactive="true"]:not([disabled="true"]):active::before {
-    background-color: var(--checkbox-checked-active-bgcolor);
+  menuitem:is([type="checkbox"], [type="radio"])[checked="true"][_moz-menuactive="true"]:not([disabled="true"]):active::before {
+  background-color: var(--checkbox-checked-active-bgcolor);
 }
 
 menupopup menuitem:is([type="checkbox"], [type="radio"])[disabled="true"]::before {
-    opacity: var(--ui-disabled-alpha);
+  opacity: var(--ui-disabled-alpha);
 }
 
 menupopup menuitem[type="checkbox"][checked="true"]::before {
-    background-image: url(chrome://userchrome/content/check.svg);
-    border-color: var(--checkbox-checked-border-color);
-    background-color: var(--checkbox-checked-bgcolor);
+  background-image: url(chrome://userchrome/content/check.svg);
+  border-color: var(--checkbox-checked-border-color);
+  background-color: var(--checkbox-checked-bgcolor);
 }
 
 menupopup menuitem[type="radio"]::before,
 #main-menubar #viewSidebarMenu menuitem[type="checkbox"]::before {
-    border-radius: 100%;
+  border-radius: 100%;
 }
 
 menupopup menuitem[type="radio"][checked="true"]::before,
 #main-menubar #viewSidebarMenu menuitem[checked="true"]::before {
-    background-image: url(chrome://userchrome/content/radio.svg);
-    border-color: var(--checkbox-checked-border-color);
-    background-color: var(--checkbox-checked-bgcolor);
+  background-image: url(chrome://userchrome/content/radio.svg);
+  border-color: var(--checkbox-checked-border-color);
+  background-color: var(--checkbox-checked-bgcolor);
 }
 
 menupopup menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-left {
-    display: none;
+  display: none;
 }
 
 #ContentSelectDropdown > menupopup > :where(menucaption, menuitem) > .menu-iconic-text,
 menupopup.in-menulist > :where(menucaption, menuitem) > .menu-iconic-text {
-    padding-block: unset !important;
+  padding-block: unset !important;
 }
 
 :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
-    :where(menu, menuitem, menucaption),
+  :where(menu, menuitem, menucaption),
 panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem {
-    padding-inline: 8px !important;
-    min-height: var(--menuitem-height) !important;
-    border: none !important;
-    font: menu !important;
+  padding-inline: 8px !important;
+  min-height: var(--menuitem-height) !important;
+  border: none !important;
+  font: menu !important;
 }
 
 #ContentSelectDropdown menucaption {
-	background: none !important;
+  background: none !important;
 }
 
 :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
-    :where(menu, menuitem, menucaption).menuitem-iconic,
+  :where(menu, menuitem, menucaption).menuitem-iconic,
 panel[type="autocomplete-richlistbox"]
-    > richlistbox
-    > richlistitem:is([originaltype="insecureWarning"], [image]:not([image=""], [image="null"])) {
-    padding-inline: 0 8px !important;
+  > richlistbox
+  > richlistitem:is([originaltype="insecureWarning"], [image]:not([image=""], [image="null"])) {
+  padding-inline: 0 8px !important;
 }
 
 panel[type="autocomplete-richlistbox"]
-    > richlistbox
-    > richlistitem:is([originaltype="insecureWarning"], [image]:not([image=""], [image="null"]))
-    :is(.ac-site-icon, .ac-type-icon):not([type="null"]) {
-    margin-inline: var(--context-iconic-margin) !important;
+  > richlistbox
+  > richlistitem:is([originaltype="insecureWarning"], [image]:not([image=""], [image="null"]))
+  :is(.ac-site-icon, .ac-type-icon):not([type="null"]) {
+  margin-inline: var(--context-iconic-margin) !important;
 }
 
 #PopupAutoComplete > richlistbox > richlistitem[originaltype="insecureWarning"] > .ac-site-icon {
-    fill: currentColor !important;
+  fill: currentColor !important;
 }
 
 :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
-    :where(menu, menuitem, menucaption)
-    > :is(label, .menu-iconic-text, .menu-text) {
-    padding-inline: 0 !important;
+  :where(menu, menuitem, menucaption)
+  > :is(label, .menu-iconic-text, .menu-text) {
+  padding-inline: 0 !important;
 }
 
 :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup) menucaption {
-    font-weight: inherit !important;
-    min-height: 26px !important;
-    padding-block: 1px 2px !important;
-    padding-inline: 0 !important;
-    color: var(--panel-description-color) !important;
+  font-weight: inherit !important;
+  min-height: 26px !important;
+  padding-block: 1px 2px !important;
+  padding-inline: 0 !important;
+  color: var(--panel-description-color) !important;
 }
 
 :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
-    menucaption
-    > :is(label, .menu-iconic-text, .menu-text) {
-    padding: 4px 5px !important;
-    border-bottom: 1px solid var(--menu-separator-color) !important;
-    font-weight: var(--uc-font-weight-bold, 600) !important;
+  menucaption
+  > :is(label, .menu-iconic-text, .menu-text) {
+  padding: 4px 5px !important;
+  border-bottom: 1px solid var(--menu-separator-color) !important;
+  font-weight: var(--uc-font-weight-bold, 600) !important;
 }
 
 #ContentSelectDropdown > menupopup {
-    background-color: transparent !important;
-    --content-select-background-image: none !important;
-    /* a gradient background image is added on top of the menupopup based on the appearance of the select element in-content.
-    if you want all select dropdowns to have the same, standard color then leave this alone. if you want the select dropdowns to match the color of the menulist (as defined by the website) then comment out the rule above. however, this can cause problems on sites that have really heavily customized menulists with light backgrounds. the background color is generated correctly but the text color may not be, in which case you get white text on a white background. I like the idea of this background image feature but it needs work, since this issue crops up on major popular websites like amazon.com */
+  background-color: transparent !important;
+  --content-select-background-image: none !important;
+  /* a gradient background image is added on top of the menupopup based on the
+    appearance of the select element in-content. if you want all select
+    dropdowns to have the same, standard color then leave this alone. if you
+    want the select dropdowns to match the color of the menulist (as defined by
+    the website) then comment out the rule above. however, this can cause
+    problems on sites that have really heavily customized menulists with light
+    backgrounds. the background color is generated correctly but the text color
+    may not be, in which case you get white text on a white background. I like
+    the idea of this background image feature but it needs work, since this
+    issue crops up on major popular websites like amazon.com */
 }
 
 #ContentSelectDropdown > menupopup > menuitem:not([_moz-menuactive="true"]),
 menupopup.in-menulist > menuitem:not([_moz-menuactive="true"]) {
-    background-color: transparent !important;
-    color: var(--menu-color) !important;
+  background-color: transparent !important;
+  color: var(--menu-color) !important;
 }
 
 #ContentSelectDropdown > menupopup > menuitem[disabled="true"],
 menupopup.in-menulist > menuitem[disabled="true"] {
-    appearance: none !important;
-    color: var(--menu-disabled-color) !important;
-    background-color: initial !important;
+  appearance: none !important;
+  color: var(--menu-disabled-color) !important;
+  background-color: initial !important;
 }
 
 #ContentSelectDropdown > menupopup {
-    color: var(--menu-color) !important;
-    background-image: unset !important;
+  color: var(--menu-color) !important;
+  background-image: unset !important;
 }
 
 menupopup.in-menulist {
-    background-image: unset !important;
+  background-image: unset !important;
 }
 
 panel menupopup.in-menulist {
-    --menu-background-color: var(--ui-secondary-bg) !important;
+  --menu-background-color: var(--ui-secondary-bg) !important;
 }
 
 .contentSelectDropdown-searchbox {
-    appearance: none !important;
-    font: menu !important;
-    color: inherit !important;
-    border-radius: var(--context-menuitem-border-radius);
-    margin-block: 0 !important;
-    margin-inline: var(--menupopup-inner-padding-magnitude) !important;
-    padding-inline-start: 3px !important;
-    background-color: var(--menuitem-hover-background-color) !important;
-    padding-block: 0 !important;
-    transition: 300ms background-color !important;
-    min-height: var(--menuitem-height) !important;
-    -moz-user-modify: read-write !important;
+  appearance: none !important;
+  font: menu !important;
+  color: inherit !important;
+  border-radius: var(--context-menuitem-border-radius);
+  margin-block: 0 !important;
+  margin-inline: var(--menupopup-inner-padding-magnitude) !important;
+  padding-inline-start: 3px !important;
+  background-color: var(--menuitem-hover-background-color) !important;
+  padding-block: 0 !important;
+  transition: 300ms background-color !important;
+  min-height: var(--menuitem-height) !important;
+  -moz-user-modify: read-write !important;
 }
 
 .contentSelectDropdown-searchbox:focus-within {
-    background-color: var(--search-box-focus) !important;
-    transition: 300ms background-color !important;
+  background-color: var(--search-box-focus) !important;
+  transition: 300ms background-color !important;
 }
 
 .contentSelectDropdown-searchbox + :is(menu, menuitem) {
-    margin-top: 4px;
+  margin-top: 4px;
+}
+
+#ContentSelectDropdown
+  menupopup.in-menulist
+  menuitem:is([label=" "], [label=""], :not([label]))[value="0"]
+  label {
+  display: none !important;
+}
+
+#ContentSelectDropdown
+  menupopup.in-menulist
+  menuitem:is([label=" "], [label=""], :not([label]))[value="0"]::after {
+  content: "(Empty)";
+  display: -moz-box;
+  color: var(--menu-disabled-color);
 }
 
 menulist:-moz-focusring > menupopup.in-menulist > menuitem[_moz-menuactive="true"] {
-    border: none !important;
+  border: none !important;
 }
 
 panel[type="autocomplete-richlistbox"] > richlistbox {
-    background: none !important;
-    color: var(--menu-color) !important;
-}
-
-@-moz-document url(chrome://browser/content/browser.xhtml)
-{
-    panel menulist {
-        appearance: none !important;
-        background-color: var(--button-bgcolor) !important;
-        padding: var(--panel-menulist-padding, 4px 6px) !important;
-        min-height: 24px !important;
-        color: inherit !important;
-        fill: currentColor !important;
-        outline-offset: unset !important;
-        outline: revert !important;
-        border-radius: var(--context-menuitem-border-radius) !important;
-    }
-
-    panel menulist:is(:focus-visible, :hover) {
-        background-color: var(--button-hover-bgcolor) !important;
-    }
-
-    panel menulist[open="true"] {
-        background-color: var(--button-active-bgcolor) !important;
-    }
-}
-
-.spell-suggestion {
-    font-weight: normal !important;
-    font-style: italic;
-}
-
-/* proton */
-menupopup {
-    padding: var(--menupopup-padding) !important;
-    background-color: transparent !important;
-    border-color: transparent !important;
+  background: none !important;
+  color: var(--menu-color) !important;
 }
 
 menupopup > :is(menuitem, menu, menucaption, menugroup, menuseparator, search-textbox),
 panel > richlistbox > richlistitem {
-    margin-inline: var(--menupopup-inner-padding-magnitude);
+  margin-inline: var(--menupopup-inner-padding-magnitude);
 }
 
-.menu-text {
-    padding-inline: var(--context-padding-inline) !important;
+@-moz-document url(chrome://browser/content/browser.xhtml)
+{
+  panel menulist {
+    appearance: none !important;
+    background-color: var(--button-bgcolor) !important;
+    padding: var(--panel-menulist-padding, 4px 6px) !important;
+    min-height: 24px !important;
+    color: inherit !important;
+    fill: currentColor !important;
+    outline-offset: unset !important;
+    outline: revert !important;
+    border-radius: var(--context-menuitem-border-radius) !important;
+  }
+
+  panel menulist:is(:focus-visible, :hover) {
+    background-color: var(--button-hover-bgcolor) !important;
+  }
+
+  panel menulist[open="true"] {
+    background-color: var(--button-active-bgcolor) !important;
+  }
 }
 
-menuitem:not([disabled="true"]) :is(.menu-accel, .menu-iconic-accel) {
-    color: var(--panel-shortcut-color);
-}
-
-menuitem[disabled="true"] :is(.menu-accel, .menu-iconic-accel) {
-    opacity: 0.6;
-}
-
-menupopup:not([type="arrow"]) menuseparator:last-child {
-    display: none;
-}
-
-#ContentSelectDropdown
-    menupopup.in-menulist
-    menuitem:is([label=" "], [label=""], :not([label]))[value="0"]
-    label {
-    display: none !important;
-}
-
-#ContentSelectDropdown
-    menupopup.in-menulist
-    menuitem:is([label=" "], [label=""], :not([label]))[value="0"]::after {
-    content: "(Empty)";
-    display: -moz-box;
-    color: var(--menu-disabled-color);
+.spell-suggestion {
+  font-weight: normal !important;
+  font-style: italic;
 }
 
 /* a way to reduce the number of menuseparators in the context menu, if they feel excessive */
 @supports -moz-bool-pref("userChrome.contextmenu.reduce-menuseparators") {
-    #contentAreaContextMenu
-        > menuseparator[id]:not(#context-sep-open, #context-media-sep-commands, #context-sep-copylink, #spell-suggestions-separator, #context-sep-selectall) {
-        display: none !important;
-    }
+  #contentAreaContextMenu
+    > menuseparator[id]:not(#context-sep-open, #context-media-sep-commands, #context-sep-copylink, #spell-suggestions-separator, #context-sep-selectall) {
+    display: none !important;
+  }
 
-    @-moz-document url(chrome://browser/content/browser.xhtml)
-    {
-        #contentAreaContextMenu menuseparator:not([id]) {
-            display: -moz-box !important;
-        }
+  @-moz-document url(chrome://browser/content/browser.xhtml)
+  {
+    #contentAreaContextMenu menuseparator:not([id]) {
+      display: -moz-box !important;
     }
+  }
 }
 
 :is(#context-navigation, #tab-context-navigation) .menuitem-iconic {
-    flex-grow: 1 !important;
-    width: unset !important;
-    min-width: 36px;
-    height: 38px;
-    padding: 0 !important;
-    padding-bottom: 2px !important;
+  flex-grow: 1 !important;
+  width: unset !important;
+  min-width: 36px;
+  height: 38px;
+  padding: 0 !important;
+  padding-bottom: 2px !important;
 }
 
 :is(#context-navigation, #tab-context-navigation)
-    .menuitem-iconic[_moz-menuactive="true"]:not([disabled="true"]) {
-    background: none !important;
+  .menuitem-iconic[_moz-menuactive="true"]:not([disabled="true"]) {
+  background: none !important;
 }
 
 :is(#context-navigation, #tab-context-navigation) .menu-iconic-left {
-    height: 38px;
-    padding: 0 !important;
-    -moz-box-flex: 1;
-    border-radius: var(--arrowpanel-menuitem-border-radius);
+  height: 38px;
+  padding: 0 !important;
+  -moz-box-flex: 1;
+  border-radius: var(--arrowpanel-menuitem-border-radius);
 }
 
 :is(#context-navigation, #tab-context-navigation)
-    .menuitem-iconic[_moz-menuactive="true"]:not([disabled="true"])
-    .menu-iconic-left {
-    background: var(--menuitem-hover-background-color);
+  .menuitem-iconic[_moz-menuactive="true"]:not([disabled="true"])
+  .menu-iconic-left {
+  background: var(--menuitem-hover-background-color);
 }
 
 :is(#context-navigation, #tab-context-navigation) .menu-iconic-icon {
-    margin: 0 !important;
-    width: 16px !important;
-    height: 16px !important;
-    padding: 0 !important;
-    background: none !important;
+  margin: 0 !important;
+  width: 16px !important;
+  height: 16px !important;
+  padding: 0 !important;
+  background: none !important;
 }
 
 #context-sep-navigation,
 #tab-context-sep-navigation {
-    display: none;
+  display: none;
 }
 
 #context-back,
 #tab-context-back {
-    list-style-image: url(chrome://userchrome/content/skin/back.svg) !important;
+  list-style-image: url(chrome://userchrome/content/skin/back.svg) !important;
 }
 
 #context-forward,
 #tab-context-forward {
-    list-style-image: url(chrome://userchrome/content/skin/forward.svg) !important;
+  list-style-image: url(chrome://userchrome/content/skin/forward.svg) !important;
 }
 
 #context-stop {
-    list-style-image: url(chrome://userchrome/content/skin/stop.svg) !important;
+  list-style-image: url(chrome://userchrome/content/skin/stop.svg) !important;
 }
 
 #context-reload,
 #tab-context-reload {
-    list-style-image: url(chrome://userchrome/content/skin/reload.svg) !important;
+  list-style-image: url(chrome://userchrome/content/skin/reload.svg) !important;
 }
 
 #context-bookmarkpage {
-    list-style-image: url(chrome://userchrome/content/skin/bookmark-hollow.svg) !important;
+  list-style-image: url(chrome://userchrome/content/skin/bookmark-hollow.svg) !important;
 }
 
 #context-bookmarkpage[starred="true"] {
-    list-style-image: url(chrome://userchrome/content/skin/bookmark.svg) !important;
+  list-style-image: url(chrome://userchrome/content/skin/bookmark.svg) !important;
 }
 
 #tab-context-bookmark {
-    list-style-image: url(chrome://userchrome/content/skin/add-bookmark.svg) !important;
+  list-style-image: url(chrome://userchrome/content/skin/add-bookmark.svg) !important;
 }
 
 #placesContext_open {
-    font-weight: normal !important;
+  font-weight: normal !important;
 }

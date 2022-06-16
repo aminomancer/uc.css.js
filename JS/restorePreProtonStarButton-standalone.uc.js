@@ -3,119 +3,116 @@
 // @version        1.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
-// @description    The bookmark page action button used to have a pretty cool starburst animation. That's been removed but it's not too difficult to restore. This standalone version of the script doesn't require any additional CSS or icon downloads. If you use my other stylesheets or icons, you will probably want the non-standalone version instead.
+// @description    The bookmark page action button used to have a pretty cool
+// starburst animation. That's been removed but it's not too difficult to
+// restore. This standalone version of the script doesn't require any additional
+// CSS or icon downloads. If you use my other stylesheets or icons, you will
+// probably want the non-standalone version instead.
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
 (function () {
-    // delete these two lines if you don't want the confirmation hint to show when you bookmark a page.
-    Services.prefs.setIntPref("browser.bookmarks.editDialog.confirmationHintShowCount", 0);
-    Services.prefs.lockPref("browser.bookmarks.editDialog.confirmationHintShowCount");
+  // delete these two lines if you don't want the confirmation hint to show when you bookmark a page.
+  Services.prefs.setIntPref("browser.bookmarks.editDialog.confirmationHintShowCount", 0);
+  Services.prefs.lockPref("browser.bookmarks.editDialog.confirmationHintShowCount");
 
-    function init() {
-        let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
-            Ci.nsIStyleSheetService
+  function init() {
+    let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(Ci.nsIStyleSheetService);
+    const starAnimBox = document.createXULElement("hbox");
+    const starAnimImg = document.createXULElement("image");
+    starAnimBox.id = "star-button-animatable-box";
+    starAnimImg.id = "star-button-animatable-image";
+    starAnimImg.setAttribute("role", "presentation");
+    starAnimBox.appendChild(starAnimImg);
+    BookmarkingUI.star.after(starAnimBox);
+    BookmarkingUI.starAnimBox = starAnimBox;
+    BookmarkingUI.starAnimImg = starAnimImg;
+
+    BookmarkingUI.onStarCommand = function onStarCommand(aEvent) {
+      // Ignore non-left clicks on the star, or if we are updating its state.
+      if (!this._pendingUpdate && (aEvent.type != "click" || aEvent.button == 0)) {
+        if (!(this._itemGuids.size > 0)) {
+          BrowserUIUtils.setToolbarButtonHeightProperty(this.star);
+          document.getElementById("star-button-animatable-box").addEventListener(
+            "animationend",
+            _e => {
+              this.star.removeAttribute("animate");
+            },
+            { once: true }
+          );
+          this.star.setAttribute("animate", "true");
+        }
+        PlacesCommandHook.bookmarkPage();
+      }
+    };
+
+    BookmarkingUI.handleEvent = function BUI_handleEvent(aEvent) {
+      switch (aEvent.type) {
+        case "mouseover":
+          this.star.setAttribute("preloadanimations", "true");
+          break;
+        case "ViewShowing":
+          this.onPanelMenuViewShowing(aEvent);
+          break;
+        case "ViewHiding":
+          this.onPanelMenuViewHiding(aEvent);
+          break;
+      }
+    };
+
+    BookmarkingUI.uninit = function BUI_uninit() {
+      this.updateBookmarkPageMenuItem(true);
+      CustomizableUI.removeListener(this);
+      this.star.removeEventListener("mouseover", this);
+      this._uninitView();
+      if (this._hasBookmarksObserver) {
+        PlacesUtils.observers.removeListener(
+          ["bookmark-added", "bookmark-removed", "bookmark-moved", "bookmark-url-changed"],
+          this.handlePlacesEvents
         );
-        const starAnimBox = document.createXULElement("hbox");
-        const starAnimImg = document.createXULElement("image");
-        starAnimBox.id = "star-button-animatable-box";
-        starAnimImg.id = "star-button-animatable-image";
-        starAnimImg.setAttribute("role", "presentation");
-        starAnimBox.appendChild(starAnimImg);
-        BookmarkingUI.star.after(starAnimBox);
-        BookmarkingUI.starAnimBox = starAnimBox;
-        BookmarkingUI.starAnimImg = starAnimImg;
+      }
+      if (this._pendingUpdate) delete this._pendingUpdate;
+    };
 
-        BookmarkingUI.onStarCommand = function onStarCommand(aEvent) {
-            // Ignore non-left clicks on the star, or if we are updating its state.
-            if (!this._pendingUpdate && (aEvent.type != "click" || aEvent.button == 0)) {
-                if (!(this._itemGuids.size > 0)) {
-                    BrowserUIUtils.setToolbarButtonHeightProperty(this.star);
-                    document.getElementById("star-button-animatable-box").addEventListener(
-                        "animationend",
-                        (_e) => {
-                            this.star.removeAttribute("animate");
-                        },
-                        { once: true }
-                    );
-                    this.star.setAttribute("animate", "true");
-                }
-                PlacesCommandHook.bookmarkPage();
-            }
-        };
+    BookmarkingUI._updateStar = function BUI__updateStar() {
+      let starred = this._itemGuids.size > 0;
+      if (!starred) this.star.removeAttribute("animate");
+      for (let element of [
+        this.star,
+        document.getElementById("context-bookmarkpage"),
+        PanelMultiView.getViewNode(document, "panelMenuBookmarkThisPage"),
+        document.getElementById("pageAction-panel-bookmark"),
+      ]) {
+        if (!element) continue;
+        if (starred) element.setAttribute("starred", "true");
+        else element.removeAttribute("starred");
+      }
+      if (!this.starBox) {
+        this.updateBookmarkPageMenuItem(true);
+        return;
+      }
+      let shortcut = document.getElementById(this.BOOKMARK_BUTTON_SHORTCUT);
+      let l10nArgs = {
+        shortcut: ShortcutUtils.prettifyShortcut(shortcut),
+      };
+      document.l10n.setAttributes(
+        this.starBox,
+        starred ? "urlbar-star-edit-bookmark" : "urlbar-star-add-bookmark",
+        l10nArgs
+      );
+      this.updateBookmarkPageMenuItem();
+      Services.obs.notifyObservers(
+        null,
+        "bookmark-icon-updated",
+        starred ? "starred" : "unstarred"
+      );
+    };
 
-        BookmarkingUI.handleEvent = function BUI_handleEvent(aEvent) {
-            switch (aEvent.type) {
-                case "mouseover":
-                    this.star.setAttribute("preloadanimations", "true");
-                    break;
-                case "ViewShowing":
-                    this.onPanelMenuViewShowing(aEvent);
-                    break;
-                case "ViewHiding":
-                    this.onPanelMenuViewHiding(aEvent);
-                    break;
-            }
-        };
+    BookmarkingUI.starBox.addEventListener("mouseover", BookmarkingUI, {
+      once: true,
+    });
 
-        BookmarkingUI.uninit = function BUI_uninit() {
-            this.updateBookmarkPageMenuItem(true);
-            CustomizableUI.removeListener(this);
-            this.star.removeEventListener("mouseover", this);
-            this._uninitView();
-            if (this._hasBookmarksObserver) {
-                PlacesUtils.observers.removeListener(
-                    [
-                        "bookmark-added",
-                        "bookmark-removed",
-                        "bookmark-moved",
-                        "bookmark-url-changed",
-                    ],
-                    this.handlePlacesEvents
-                );
-            }
-            if (this._pendingUpdate) delete this._pendingUpdate;
-        };
-
-        BookmarkingUI._updateStar = function BUI__updateStar() {
-            let starred = this._itemGuids.size > 0;
-            if (!starred) this.star.removeAttribute("animate");
-            for (let element of [
-                this.star,
-                document.getElementById("context-bookmarkpage"),
-                PanelMultiView.getViewNode(document, "panelMenuBookmarkThisPage"),
-                document.getElementById("pageAction-panel-bookmark"),
-            ]) {
-                if (!element) continue;
-                if (starred) element.setAttribute("starred", "true");
-                else element.removeAttribute("starred");
-            }
-            if (!this.starBox) {
-                this.updateBookmarkPageMenuItem(true);
-                return;
-            }
-            let shortcut = document.getElementById(this.BOOKMARK_BUTTON_SHORTCUT);
-            let l10nArgs = {
-                shortcut: ShortcutUtils.prettifyShortcut(shortcut),
-            };
-            document.l10n.setAttributes(
-                this.starBox,
-                starred ? "urlbar-star-edit-bookmark" : "urlbar-star-add-bookmark",
-                l10nArgs
-            );
-            this.updateBookmarkPageMenuItem();
-            Services.obs.notifyObservers(
-                null,
-                "bookmark-icon-updated",
-                starred ? "starred" : "unstarred"
-            );
-        };
-
-        BookmarkingUI.starBox.addEventListener("mouseover", BookmarkingUI, {
-            once: true,
-        });
-
-        const css = `
+    const css = `
 /*Restore_pre-Proton_Star_Button_Stylesheet*/
 #bookmarks-menu-button {
     list-style-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij48cGF0aCBmaWxsPSJjb250ZXh0LWZpbGwiIGZpbGwtb3BhY2l0eT0iY29udGV4dC1maWxsLW9wYWNpdHkiIGQ9Ik0xNCAxNkgyYTEgMSAwIDAxLTEtMXYtMmExIDEgMCAwMTIgMHYxaDEwdi0xYTEgMSAwIDAxMiAwdjJhMSAxIDAgMDEtMSAxem0tLjAzOS0xMS43MThhLjkuOSAwIDAwLS43MjMtLjYwOWwtMy4wNjMtLjQ0NUw4LjgwNS40NTZhLjkzNC45MzQgMCAwMC0xLjYwNSAwTDUuODMgMy4yMjhsLTMuMDYzLjQ0NUEuODkzLjg5MyAwIDAwMi4yNyA1LjJsMi4yMTcgMi4xNTYtLjUyMyAzLjA0NGEuODk0Ljg5NCAwIDAwMS4zLjk0Mkw4IDkuOTA3bDIuNzQgMS40MzlhLjg4OC44ODggMCAwMC40MTYuMS45LjkgMCAwMC41MjYtLjE3Mi44OTMuODkzIDAgMDAuMzU1LS44NzRsLS41MjItMy4wNDcgMi4yMi0yLjE1M2EuODkzLjg5MyAwIDAwLjIyNi0uOTE4em0tNC4zNjcgMi40NWwuMzc2IDIuMTg5TDggNy44ODggNi4wMzUgOC45MjFsLjM3Ni0yLjE4OS0xLjU5Mi0xLjU1IDIuMi0uMzE5TDggMi44NzJsLjk4MyAxLjk5MSAyLjIuMzE5eiIvPjwvc3ZnPg==");
@@ -191,19 +188,19 @@
     scale: -1 1;
 }
         `;
-        let uri = makeURI("data:text/css;charset=UTF=8," + encodeURIComponent(css));
-        sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
-    }
+    let uri = makeURI("data:text/css;charset=UTF=8," + encodeURIComponent(css));
+    sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
+  }
 
-    if (gBrowserInit.delayedStartupFinished) {
+  if (gBrowserInit.delayedStartupFinished) {
+    init();
+  } else {
+    let delayedListener = (subject, topic) => {
+      if (topic == "browser-delayed-startup-finished" && subject == window) {
+        Services.obs.removeObserver(delayedListener, topic);
         init();
-    } else {
-        let delayedListener = (subject, topic) => {
-            if (topic == "browser-delayed-startup-finished" && subject == window) {
-                Services.obs.removeObserver(delayedListener, topic);
-                init();
-            }
-        };
-        Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
-    }
+      }
+    };
+    Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
+  }
 })();

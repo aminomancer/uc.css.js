@@ -5,32 +5,32 @@
  * or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA. */
 
 @-moz-document domain("reddit.com") {
-    #alert_message {
-        z-index: 2147483647 !important;
+  #alert_message {
+    z-index: 2147483647 !important;
+  }
+
+  #header {
+    z-index: 2147483646 !important;
+  }
+
+  .author-tooltip {
+    display: none !important;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .ListingLayout-backgroundContainer {
+      --pseudo-before-background: rgb(15, 18, 23, 1) !important;
     }
 
-    #header {
-        z-index: 2147483646 !important;
+    #\32 x-container > *,
+    ._1VP69d9lk-Wk9zokOaylL {
+      --background: rgb(15, 18, 23, 1) !important;
+      --canvas: rgb(15, 18, 23, 1) !important;
+      background-color: rgb(15, 18, 23, 1) !important;
     }
 
-    .author-tooltip {
-        display: none !important;
+    #quickMessageDialogBody {
+      color: #4a4a4f !important;
     }
-
-    @media (prefers-color-scheme: dark) {
-        .ListingLayout-backgroundContainer {
-            --pseudo-before-background: rgb(15, 18, 23, 1) !important;
-        }
-
-        #\32 x-container > *,
-        ._1VP69d9lk-Wk9zokOaylL {
-            --background: rgb(15, 18, 23, 1) !important;
-            --canvas: rgb(15, 18, 23, 1) !important;
-            background-color: rgb(15, 18, 23, 1) !important;
-        }
-
-        #quickMessageDialogBody {
-            color: #4a4a4f !important;
-        }
-    }
+  }
 }

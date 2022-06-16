@@ -3,36 +3,118 @@
 // @version        2.0.5
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
-// @description    Adds new menus to the context menu that appears when you right-click a tab (in the tab bar or in the TreeStyleTabs sidebar): one lists recently closed tabs so you can restore them, and another lists recently closed windows. These are basically the same functions that exist in the history toolbar button's popup, but I think the tab context menu is a more convenient location for them. Also optionally adds a context menu to the history panel's subview pages for "Recently closed tabs" and "Recently closed windows" with various functions for interacting with the closed tabs and their session history. You can right-click a closed tab item to open the context menu, then click "Remove from List" to get rid of it. You can click "Remove from History" to not only remove the closed tab item, but also forget all of the tab's history — that is, every page it navigated to. The same can be done with recently closed windows. From this menu you can also restore a tab in a new window or private window, bookmark a closed tab/window, and more. This script also adds a new preference (userChrome.tabs.recentlyClosedTabs.middle-click-to-remove) which changes the behavior when you click a recently closed tab/window item in the history panel. Middle clicking a tab or window item will remove it from the list (just like one of the context menu items). Ctrl+clicking a tab item it will open it in a new tab (instead of restoring it in its former place), and Ctrl+Shift+clicking it will open it in a new window.
+// @description    Adds new menus to the context menu that appears when you
+// right-click a tab (in the tab bar or in the TreeStyleTabs sidebar): one lists
+// recently closed tabs so you can restore them, and another lists recently
+// closed windows. These are basically the same functions that exist in the
+// history toolbar button's popup, but I think the tab context menu is a more
+// convenient location for them. Also optionally adds a context menu to the
+// history panel's subview pages for "Recently closed tabs" and "Recently closed
+// windows" with various functions for interacting with the closed tabs and
+// their session history. You can right-click a closed tab item to open the
+// context menu, then click "Remove from List" to get rid of it. You can click
+// "Remove from History" to not only remove the closed tab item, but also forget
+// all of the tab's history — that is, every page it navigated to. The same can
+// be done with recently closed windows. From this menu you can also restore a
+// tab in a new window or private window, bookmark a closed tab/window, and
+// more. This script also adds a new preference
+// (userChrome.tabs.recentlyClosedTabs.middle-click-to-remove) which changes the
+// behavior when you click a recently closed tab/window item in the history
+// panel. Middle clicking a tab or window item will remove it from the list
+// (just like one of the context menu items). Ctrl+clicking a tab item it will
+// open it in a new tab (instead of restoring it in its former place), and
+// Ctrl+Shift+clicking it will open it in a new window.
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
 class UndoListInTabmenu {
   // user preferences:
   static config = {
-    "Include popup windows": true, // set this to false if you don't want popup windows to be listed in recently closed windows.
+    // set this to false if you don't want popup windows to be listed in
+    // recently closed windows.
+    "Include popup windows": true,
 
-    // in vanilla firefox there isn't any way to tell whether a closed tab was a container tab. you just have to restore it to find out.
-    // with this setting, you can show the container's color as a stripe on the edge of the tab's menuitem/button.
+    /* in vanilla firefox there isn't any way to tell whether a closed tab was a
+    container tab. you just have to restore it to find out. with this setting,
+    you can show the container's color as a stripe on the edge of the tab's
+    menuitem/button. */
     "Show container tab colors": {
-      inPopupPanels: true, // show on items in built-in popup panels like the history toolbar button's popup menu and the hamburger/app menu.
+      // show on items in built-in popup panels like the history toolbar
+      // button's popup menu and the hamburger/app menu.
+      inPopupPanels: true,
 
-      inMenupopups: true, // show on items in the context menus made by this script, and in the built-in history menu in the main titlebar menu bar. if both inMenupopups and inPopupPanels are false, container colors won't show anywhere.
+      // show on items in the context menus made by this script, and in the
+      // built-in history menu in the main titlebar menu bar. if both inMenupopups
+      // and inPopupPanels are false, container colors won't show anywhere.
+      inMenupopups: true,
 
-      showForWindows: true, // restore window items can contain more than one tab with different containers. so some users may want to disable container colors on window items. I prefer showing the color because it will show the color for the window's active tab — that's how it shows all other tab information. it shows the favicon and title for the closed window's active tab, since it's not practical to show info for every tab. so it might as well show the active tab's container too.
+      // restore window items can contain more than one tab with different
+      // containers. so some users may want to disable container colors on
+      // window items. I prefer showing the color because it will show the color
+      // for the window's active tab — that's how it shows all other tab
+      // information. it shows the favicon and title for the closed window's
+      // active tab, since it's not practical to show info for every tab. so it
+      // might as well show the active tab's container too.
+      showForWindows: true,
     },
 
-    "Enable context menus in panels": true, // you can set this to false if you don't want a context menu to open when you right-click an item in one of the "recently closed tab/window" panels. this won't affect the main context menus added by the script, since you can't open a context menu from inside a context menu. this only affects *panels*, e.g., the "recently closed tabs" subview that you can open when you click the history toolbar button or the hamburger button. if you have no idea what I'm talking about, an easy way to tell the difference between a menu and a panel is to look at the background color of the menu. with firefox's default built-in dark theme, menus have a much darker gray background than panels.
+    // you can set this to false if you don't want a context menu to open when
+    // you right-click an item in one of the "recently closed tab/window"
+    // panels. this won't affect the main context menus added by the script,
+    // since you can't open a context menu from inside a context menu. this only
+    // affects *panels*, e.g., the "recently closed tabs" subview that you can
+    // open when you click the history toolbar button or the hamburger button.
+    // if you have no idea what I'm talking about, an easy way to tell the
+    // difference between a menu and a panel is to look at the background color
+    // of the menu. with firefox's default built-in dark theme, menus have a
+    // much darker gray background than panels.
+    "Enable context menus in panels": true,
 
     // the user-facing strings. change these if your firefox language is not english.
     l10n: {
-      "Popup window label": "(popup)", // displayed next to popup windows in the recently closed windows list. intended to help distinguish regular windows from popup windows, which are often more transient and generated by websites' scripts. if you set "Include popup windows" to false, this won't show up in the context menus since they won't show popup windows at all. but it will still show up in the recently closed windows list in the history panel. this can't be localized automatically so for non-english languages you'll have to write the label yourself. if you don't want popup windows to be labeled at all, just change this to ""
+      // displayed next to popup windows in the recently closed windows list.
+      // intended to help distinguish regular windows from popup windows, which
+      // are often more transient and generated by websites' scripts. if you set
+      // "Include popup windows" to false, this won't show up in the context
+      // menus since they won't show popup windows at all. but it will still
+      // show up in the recently closed windows list in the history panel. this
+      // can't be localized automatically so for non-english languages you'll
+      // have to write the label yourself. if you don't want popup windows to be
+      // labeled at all, just change this to ""
+      "Popup window label": "(popup)",
 
-      "Tabs access key": "", // one of the letters in the "Recently Closed Tabs" menu label is underlined. this is the menu's access key. pressing this key while the context menu is open will automatically select the menu. in English this key is "T" and in other languages it will usually be the first letter of the last word. it handles right-to-left languages appropriately. but it has no way of knowing whether the last word of the label means "tabs" or "recently" or "closed"; it just expects a grammatical structure similar to English. that is not a safe assumption, but there's not much I can do about it without implementing special behavior for every language, and I'm not exactly a linguist. it's a lot easier for you to just choose your own access key if you don't like the key it's automatically choosing for you. the key you enter here does not have to actually be a letter that's present in the label. if you put "Q" for example, it would still work. it would just add (Q) to the end of the label instead of underlining a letter. obviously you want to input a letter that actually exists on your keyboard so you'll be able to use it. if you leave this preference empty, the script will fall back to the automatic selection behavior.
+      // one of the letters in the "Recently Closed Tabs" menu label is
+      // underlined. this is the menu's access key. pressing this key while the
+      // context menu is open will automatically select the menu. in English
+      // this key is "T" and in other languages it will usually be the first
+      // letter of the last word. it handles right-to-left languages
+      // appropriately. but it has no way of knowing whether the last word of
+      // the label means "tabs" or "recently" or "closed"; it just expects a
+      // grammatical structure similar to English. that is not a safe
+      // assumption, but there's not much I can do about it without implementing
+      // special behavior for every language, and I'm not exactly a linguist.
+      // it's a lot easier for you to just choose your own access key if you
+      // don't like the key it's automatically choosing for you. the key you
+      // enter here does not have to actually be a letter that's present in the
+      // label. if you put "Q" for example, it would still work. it would just
+      // add (Q) to the end of the label instead of underlining a letter.
+      // obviously you want to input a letter that actually exists on your
+      // keyboard so you'll be able to use it. if you leave this preference
+      // empty, the script will fall back to the automatic selection behavior.
+      "Tabs access key": "",
 
-      "Windows access key": "", // just like the previous preference, but for the "Recently Closed Windows" menu. in English this is "W" by default. if you use this or the "New Tab" item's access key a lot you may want to change it, since they both use "W" as their access key. when two menu items have the same accesskey, pressing it will just cycle between the two without activating either. this item was added after I wrote the script, and I can't really change it because the access key is calculated automatically, based on the first letter of the last word.
+      // just like the previous preference, but for the "Recently Closed
+      // Windows" menu. in English this is "W" by default. if you use this or
+      // the "New Tab" item's access key a lot you may want to change it, since
+      // they both use "W" as their access key. when two menu items have the
+      // same accesskey, pressing it will just cycle between the two without
+      // activating either. this item was added after I wrote the script, and I
+      // can't really change it because the access key is calculated
+      // automatically, based on the first letter of the last word.
+      "Windows access key": "",
 
-      // these are for the context menu that opens when you right-click a recently-closed item in a popup panel
+      // these are for the context menu that opens when you right-click
+      // a recently-closed item in a popup panel
       "Restore": { label: "Restore", accesskey: "R" },
 
       "Restore in New Window": { label: "Restore in New Window", accesskey: "N" },
@@ -53,12 +135,21 @@ class UndoListInTabmenu {
     this.create = _ucUtils.createElement;
     this.config = UndoListInTabmenu.config;
     this.registerSheet();
-    this.attachSidebarListener(); // set up context menu for TST, if it's installed. it'll set up even if TST is disabled, since otherwise we'd have to listen for addon disabling/enabling, and it's too much work to set up an addon manager listener. but that doesn't matter, since if TST is disabled, its sidebar will never be opened, and most of the setup is triggered by the sidebar opening.
-    this.makePopups(document.getElementById("tabContextMenu")); // set up the built-in tabs bar context menu.
-    this.makePopups(document.getElementById("toolbar-context-menu")); // this context menu shows when you right-click an empty area in the tab strip.
+    // set up context menu for TST, if it's installed. it'll set up even if TST
+    // is disabled, since otherwise we'd have to listen for addon
+    // disabling/enabling, and it's too much work to set up an addon manager
+    // listener. but that doesn't matter, since if TST is disabled, its sidebar
+    // will never be opened, and most of the setup is triggered by the sidebar
+    // opening.
+    this.attachSidebarListener();
+    // set up the built-in tabs bar context menu.
+    this.makePopups(document.getElementById("tabContextMenu"));
+    // this context menu shows when you right-click an empty area in the tab strip.
+    this.makePopups(document.getElementById("toolbar-context-menu"));
     this.modMethods();
   }
-  // if the recently closed windows menu is empty, or it's only full of popups and the user set "Include popup windows" to false, we should hide the menu.
+  // if the recently closed windows menu is empty, or it's only full of popups
+  // and the user set "Include popup windows" to false, we should hide the menu.
   get shouldHideWindows() {
     let windowData = SessionStore.getClosedWindowData();
     return (
@@ -66,7 +157,8 @@ class UndoListInTabmenu {
       (!this.config["Include popup windows"] && windowData.every(w => w.isPopup))
     );
   }
-  // get a fluent localization interface. we can't use data-l10n-id since that would automatically remove the menus' accesskeys, and we want them to have accesskeys.
+  // get a fluent localization interface. we can't use data-l10n-id since that would
+  // automatically remove the menus' accesskeys, and we want them to have accesskeys.
   get strings() {
     return (
       this._strings ||
@@ -82,18 +174,27 @@ class UndoListInTabmenu {
     let TST = await AddonManager.getAddonByID("treestyletab@piro.sakura.ne.jp");
     if (TST) SidebarUI._switcherTarget.addEventListener("SidebarShown", this);
   }
-  // when a TST sidebar is created, add context menus. when context menu is opened, hide/show the menus.
+  // when a TST sidebar is created, add context menus.
+  // when context menu is opened, hide/show the menus.
   handleEvent(e) {
     let sidebarContext = sidebar?.document?.getElementById("contentAreaContextMenu");
     switch (e.type) {
       case "SidebarShown":
-        // if there's no content area context menu inside the sidebar document, it means a native sidebar is open. (not an extension sidebar) we don't need to remove the DOM nodes since firefox already deleted the whole document. just delete the references so we don't get confused when rebuilding them later.
+        // if there's no content area context menu inside the sidebar document,
+        // it means a native sidebar is open. (not an extension sidebar) we
+        // don't need to remove the DOM nodes since firefox already deleted the
+        // whole document. just delete the references so we don't get confused
+        // when rebuilding them later.
         if (!sidebarContext) {
           delete this.sidebarContextUndoListPopup;
           delete this.sidebarUndoWindowPopup;
           break;
         }
-        // make the popups and listen for the context menu showing. also set an attribute to avoid duplicating everything if there's a repeat event for whatever reason. the content area context menu actually sticks around if you switch from one extension sidebar to another, but we delete our menu items if the sidebar is switched to anything but TST.
+        // make the popups and listen for the context menu showing. also set an
+        // attribute to avoid duplicating everything if there's a repeat event
+        // for whatever reason. the content area context menu actually sticks
+        // around if you switch from one extension sidebar to another, but we
+        // delete our menu items if the sidebar is switched to anything but TST.
         if (SidebarUI.currentID === "treestyletab_piro_sakura_ne_jp-sidebar-action") {
           if (sidebarContext.hasAttribute("undo-list-init")) break;
           sidebarContext.setAttribute("undo-list-init", true);
@@ -108,8 +209,8 @@ class UndoListInTabmenu {
         }
         break;
       case "popupshowing":
-        // the sidebar context menu is showing, so we should hide/show the menus depending on whether they're empty
-        // closed tab list is empty so should be hidden
+        // the sidebar context menu is showing, so we should hide/show the menus depending
+        // on whether they're empty closed tab list is empty so should be hidden
         if (SessionStore.getClosedTabCount(window) == 0) {
           this.sidebarTabMenu.hidden = true;
           this.sidebarTabMenu.style.removeProperty("display");
@@ -176,15 +277,20 @@ class UndoListInTabmenu {
         onpopupshowing: `undoTabMenu.populateSubmenu(this, "Tab");`,
       })
     );
-    // every time the context menu opens, handle access keys and enabling/disabling of the menus. menus need to be hidden if there aren't any recently closed tabs/windows in sessionstore, or else the menus will be awkwardly empty.
+    // every time the context menu opens, handle access keys and enabling/disabling
+    // of the menus. menus need to be hidden if there aren't any recently closed
+    // tabs/windows in sessionstore, or else the menus will be awkwardly empty.
     context.addEventListener(
       "popupshowing",
       e => {
         if (e.target !== context) return;
-        // if you right-click an empty area in the tab strip, (e.g. if there aren't enough tabs to overflow the strip)
-        // you get a different context menu. this is the same context menu you get when you right-click a toolbar button in the navbar.
-        // so we have to add separate menuitems to this context menu. and since this context menu doesn't only relate to tabs,
-        // we have to hide the new menuitems in other circumstances, like when right-clicking a toolbar button.
+        // if you right-click an empty area in the tab strip, (e.g. if there
+        // aren't enough tabs to overflow the strip) you get a different context
+        // menu. this is the same context menu you get when you right-click a
+        // toolbar button in the navbar. so we have to add separate menuitems to
+        // this context menu. and since this context menu doesn't only relate to
+        // tabs, we have to hide the new menuitems in other circumstances, like
+        // when right-clicking a toolbar button.
         if (e.target.id === "toolbar-context-menu") {
           let toolbarItem = e.target.triggerNode;
           if (toolbarItem && toolbarItem.localName == "toolbarpaletteitem")
@@ -290,7 +396,8 @@ class UndoListInTabmenu {
    * @param {string} type (the type of submenu being updated; "Tab" or "Window")
    */
   populateSubmenu(popup, type) {
-    while (popup.hasChildNodes()) popup.removeChild(popup.firstChild); // remove existing menuitems
+    // remove existing menuitems
+    while (popup.hasChildNodes()) popup.removeChild(popup.firstChild);
     let fragment;
 
     // list is empty so should be hidden
@@ -318,7 +425,8 @@ class UndoListInTabmenu {
    * @param {string} type (the type of submenu being updated; "Tab" or "Window")
    */
   populateSidebarSubmenu(popup, type) {
-    while (popup.hasChildNodes()) popup.removeChild(popup.firstChild); // remove existing menuitems
+    // remove existing menuitems
+    while (popup.hasChildNodes()) popup.removeChild(popup.firstChild);
     let fragment;
 
     // list is empty so should be hidden
@@ -336,7 +444,15 @@ class UndoListInTabmenu {
       true
     );
 
-    // a bit of a sketchy hack... instead of inserting the fragment directly, we need to create the elements *inside* the sidebar document or else they're missing a bunch of class methods, like content optimizations. the only way I could find to get them to render properly is to iterate over the fragment, building a new tree as we go. also, since the "oncommand" callbacks need access to global objects like gBrowser which don't exist in the context menu's scope, we need to use addEventListener instead of setting "oncommand" attributes. so when we get to "oncommand" we just parse its value into an anonymous function and attach it in THIS scope.
+    // a bit of a sketchy hack... instead of inserting the fragment directly, we
+    // need to create the elements *inside* the sidebar document or else they're
+    // missing a bunch of class methods, like content optimizations. the only
+    // way I could find to get them to render properly is to iterate over the
+    // fragment, building a new tree as we go. also, since the "oncommand"
+    // callbacks need access to global objects like gBrowser which don't exist
+    // in the context menu's scope, we need to use addEventListener instead of
+    // setting "oncommand" attributes. so when we get to "oncommand" we just
+    // parse its value into an anonymous function and attach it in THIS scope.
     Object.values(fragment.children).forEach(item => {
       let newItem = popup.ownerDocument.createXULElement(item.tagName);
       Object.values(item.attributes).forEach(attribute => {
@@ -565,12 +681,11 @@ class RecentlyClosedPanelContext {
       "userChrome.tabs.recentlyClosedTabs.middle-click-to-remove",
       false
     );
-    // override this function because there's some kind of weird old
-    // workaround in the built-in version. I don't know why someone added
-    // this, but it goes out of its way to prevent a tab from being restored
-    // properly if you only have 1 tab open and it's blank/new tab page. I
-    // did as much testing as I know how, and couldn't find a problem caused
-    // by removing it. so I removed it
+    // override this function because there's some kind of weird old workaround
+    // in the built-in version. I don't know why someone added this, but it goes
+    // out of its way to prevent a tab from being restored properly if you only
+    // have 1 tab open and it's blank/new tab page. I did as much testing as I
+    // know how, and couldn't find a problem caused by removing it. so I removed it
     window.undoCloseTab = function (index) {
       let tab = null;
       // index is undefined if the function is called without a specific tab to restore.

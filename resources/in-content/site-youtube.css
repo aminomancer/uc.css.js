@@ -5,19 +5,19 @@
  * or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA. */
 
 @-moz-document domain("youtube.com") {
-    #movie_player .ytp-ce-element {
-        display: none !important;
-    }
+  #movie_player .ytp-ce-element {
+    display: none !important;
+  }
 
-    .ytp-probably-keyboard-focus :is(.ytp-button, .ytp-progress-bar):focus {
-        box-shadow: unset !important;
-    }
+  .ytp-probably-keyboard-focus :is(.ytp-button, .ytp-progress-bar):focus {
+    box-shadow: unset !important;
+  }
 
-    .focused-line.paper-input-container {
-        border-color: hsl(0, 0%, 74.3%) !important;
-    }
+  .focused-line.paper-input-container {
+    border-color: hsl(0, 0%, 74.3%) !important;
+  }
 
-    .ytp-chapter-container {
-        max-width: -moz-fit-content;
-    }
+  .ytp-chapter-container {
+    max-width: -moz-fit-content;
+  }
 }

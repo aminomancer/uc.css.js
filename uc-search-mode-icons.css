@@ -5,149 +5,150 @@
  * or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA. */
 
 /* this does nothing on its own — it requires searchModeIndicatorIcons.uc.js.
-when you switch to a one-off search engine in the urlbar, or otherwise enable search mode,
-this changes the identity icon to one matching the search engine.
-I recommend using this addon to add new search engines:
+when you switch to a one-off search engine in the urlbar, or otherwise enable
+search mode, this changes the identity icon to one matching the search engine. I
+recommend using this addon to add new search engines:
 https://addons.mozilla.org/en-US/firefox/addon/add-custom-search-engine */
 
-/* for search engines I haven't added icons for, use a search glass icon.
-if you want to request an icon for a search engine you use,
-send me the engine name (the name that shows up in the identity box label when you enter search mode with it)
-and the URL to the search engine so I can find a suitable icon and set a rule for it. */
+/* for search engines I haven't added icons for, use a search glass icon. if you
+want to request an icon for a search engine you use, send me the engine name
+(the name that shows up in the identity box label when you enter search mode
+with it) and the URL to the search engine so I can find a suitable icon and set
+a rule for it. */
 #urlbar[searchmode=""][pageproxystate="invalid"]
-    #identity-box
-    > #identity-icon-box
-    > #identity-icon,
+  #identity-box
+  > #identity-icon-box
+  > #identity-icon,
 #urlbar[searchmode=""][pageproxystate="valid"] #identity-box > #identity-icon-box > #identity-icon,
 #urlbar[searchmode=""] #identity-icon-box > #identity-icon,
 #urlbar[pageproxystate="invalid"]
-    #identity-box
-    > #identity-icon-box[engine]:not([engine="Other"])
-    > #identity-icon,
+  #identity-box
+  > #identity-icon-box[engine]:not([engine="Other"])
+  > #identity-icon,
 #urlbar[pageproxystate="valid"]
-    #identity-box
-    > #identity-icon-box[engine]:not([engine="Other"])
-    > #identity-icon,
+  #identity-box
+  > #identity-icon-box[engine]:not([engine="Other"])
+  > #identity-icon,
 #urlbar #identity-icon-box[engine]:not([engine="Other"]) > #identity-icon {
-    list-style-image: var(--search-engine-icon, url(chrome://userchrome/content/search-glass.svg)) !important;
+  list-style-image: var(--search-engine-icon, url(chrome://userchrome/content/search-glass.svg)) !important;
 }
 
 /* built-in history, tabs, bookmarks pseudo-engines */
 #identity-icon-box[engine="History"] {
-    --search-engine-icon: url(chrome://userchrome/content/skin/history.svg) !important;
+  --search-engine-icon: url(chrome://userchrome/content/skin/history.svg) !important;
 }
 
 #identity-icon-box[engine="Tabs"] {
-    --search-engine-icon: url(chrome://userchrome/content/skin/tab.svg) !important;
+  --search-engine-icon: url(chrome://userchrome/content/skin/tab.svg) !important;
 }
 
 #identity-icon-box[engine="Bookmarks"] {
-    --search-engine-icon: url(chrome://userchrome/content/skin/bookmark.svg) !important;
+  --search-engine-icon: url(chrome://userchrome/content/skin/bookmark.svg) !important;
 }
 
 /* for google */
 #identity-icon-box[engine="Google"] {
-    --search-engine-icon: url(chrome://userchrome/content/engines/google.svg) !important;
+  --search-engine-icon: url(chrome://userchrome/content/engines/google.svg) !important;
 }
 
 /* duckduckgo */
 #identity-icon-box:is([engine="DuckDuckGo"], [engine="DuckDuckGo Search"]) {
-    --search-engine-icon: url(chrome://userchrome/content/engines/duckduckgo.svg) !important;
+  --search-engine-icon: url(chrome://userchrome/content/engines/duckduckgo.svg) !important;
 }
 
 /* bing */
 #identity-icon-box:is([engine="Bing"], [engine="Bing Search"]) {
-    --search-engine-icon: url(chrome://userchrome/content/engines/bing.svg) !important;
+  --search-engine-icon: url(chrome://userchrome/content/engines/bing.svg) !important;
 }
 
 /* baidu */
 #identity-icon-box:is([engine="Baidu"], [engine="Baidu Search"], [engine="百度"]) {
-    --search-engine-icon: url(chrome://userchrome/content/engines/baidu.svg) !important;
+  --search-engine-icon: url(chrome://userchrome/content/engines/baidu.svg) !important;
 }
 
 /* google images */
 #identity-icon-box[engine="Google Images"] {
-    --search-engine-icon: url(chrome://userchrome/content/notifications/canvas.svg) !important;
+  --search-engine-icon: url(chrome://userchrome/content/notifications/canvas.svg) !important;
 }
 
 /* youtube */
 #identity-icon-box[engine="YouTube"] {
-    --search-engine-icon: url(chrome://userchrome/content/engines/youtube.svg) !important;
+  --search-engine-icon: url(chrome://userchrome/content/engines/youtube.svg) !important;
 }
 
 /* etc... */
 #identity-icon-box[engine="Google Translate"] {
-    --search-engine-icon: url(chrome://userchrome/content/engines/googletranslate.svg) !important;
+  --search-engine-icon: url(chrome://userchrome/content/engines/googletranslate.svg) !important;
 }
 
 #identity-icon-box[engine="GitHub"] {
-    --search-engine-icon: url(chrome://userchrome/content/engines/github.svg) !important;
+  --search-engine-icon: url(chrome://userchrome/content/engines/github.svg) !important;
 }
 
 #identity-icon-box[engine^="Wikipedia"] {
-    --search-engine-icon: url(chrome://userchrome/content/engines/wikipedia.svg) !important;
+  --search-engine-icon: url(chrome://userchrome/content/engines/wikipedia.svg) !important;
 }
 
 #identity-icon-box[engine="Wiktionary"] {
-    --search-engine-icon: url(chrome://userchrome/content/engines/wiktionary.svg) !important;
+  --search-engine-icon: url(chrome://userchrome/content/engines/wiktionary.svg) !important;
 }
 
 #identity-icon-box:is([engine="Amazon"], [engine="Amazon.com"]) {
-    --search-engine-icon: url(chrome://userchrome/content/engines/amazon.svg) !important;
+  --search-engine-icon: url(chrome://userchrome/content/engines/amazon.svg) !important;
 }
 
 #identity-icon-box[engine="DoorDash"] {
-    --search-engine-icon: url(chrome://userchrome/content/engines/doordash.svg) !important;
+  --search-engine-icon: url(chrome://userchrome/content/engines/doordash.svg) !important;
 }
 
 #identity-icon-box[engine="eBay"] {
-    --search-engine-icon: url(chrome://userchrome/content/engines/ebay.svg) !important;
+  --search-engine-icon: url(chrome://userchrome/content/engines/ebay.svg) !important;
 }
 
 #identity-icon-box[engine="Netflix"] {
-    --search-engine-icon: url(chrome://userchrome/content/engines/netflix.svg) !important;
+  --search-engine-icon: url(chrome://userchrome/content/engines/netflix.svg) !important;
 }
 
 #identity-icon-box[engine="Google Maps"] {
-    --search-engine-icon: url(chrome://userchrome/content/engines/googlemaps.svg) !important;
+  --search-engine-icon: url(chrome://userchrome/content/engines/googlemaps.svg) !important;
 }
 
 #identity-icon-box[engine="Google Drive"] {
-    --search-engine-icon: url(chrome://userchrome/content/engines/googledrive.svg) !important;
+  --search-engine-icon: url(chrome://userchrome/content/engines/googledrive.svg) !important;
 }
 
 #identity-icon-box[engine="Gmail"] {
-    --search-engine-icon: url(chrome://userchrome/content/engines/gmail.svg) !important;
+  --search-engine-icon: url(chrome://userchrome/content/engines/gmail.svg) !important;
 }
 
 #identity-icon-box[engine="Gatherer"] {
-    --search-engine-icon: url(chrome://userchrome/content/engines/gatherer.svg) !important;
+  --search-engine-icon: url(chrome://userchrome/content/engines/gatherer.svg) !important;
 }
 
 #identity-icon-box[engine="Scryfall"] {
-    --search-engine-icon: url(chrome://userchrome/content/engines/scryfall.svg) !important;
+  --search-engine-icon: url(chrome://userchrome/content/engines/scryfall.svg) !important;
 }
 
 #identity-icon-box[engine="Goatbots"] {
-    --search-engine-icon: url(chrome://userchrome/content/engines/cards.svg) !important;
+  --search-engine-icon: url(chrome://userchrome/content/engines/cards.svg) !important;
 }
 
 #identity-icon-box[engine="MTGO Traders"] {
-    --search-engine-icon: url(chrome://userchrome/content/engines/swordshield.svg) !important;
+  --search-engine-icon: url(chrome://userchrome/content/engines/swordshield.svg) !important;
 }
 
 #identity-icon-box[engine="Searchfox"] {
-    --search-engine-icon: url(chrome://userchrome/content/engines/searchfox.svg) !important;
+  --search-engine-icon: url(chrome://userchrome/content/engines/searchfox.svg) !important;
 }
 
 #identity-icon-box[engine="Bugzilla"] {
-    --search-engine-icon: url(chrome://userchrome/content/engines/bugzilla.svg) !important;
+  --search-engine-icon: url(chrome://userchrome/content/engines/bugzilla.svg) !important;
 }
 
 #identity-icon-box[engine="MDN Web Docs"] {
-    --search-engine-icon: url(chrome://userchrome/content/engines/mdnwebdocs.svg) !important;
+  --search-engine-icon: url(chrome://userchrome/content/engines/mdnwebdocs.svg) !important;
 }
 
 #identity-icon-box[engine="Reelgood"] {
-    --search-engine-icon: url(chrome://userchrome/content/engines/reelgood.svg) !important;
+  --search-engine-icon: url(chrome://userchrome/content/engines/reelgood.svg) !important;
 }
