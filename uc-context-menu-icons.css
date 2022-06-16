@@ -1027,11 +1027,11 @@ menuitem#sanitizeItem::before {
 }
 
 #context-savelinktopocket::before {
-    background-image: url(chrome://userchrome/content/skin/pocket.svg);
+    background-image: url(chrome://userchrome/content/skin/pocket-outline.svg);
 }
 
 #context-pocket::before {
-    background-image: url(chrome://userchrome/content/skin/pocket.svg);
+    background-image: url(chrome://userchrome/content/skin/pocket-outline.svg);
 }
 
 #context-take-frame-screenshot::before,

@@ -380,7 +380,7 @@ but other than that these variables should be available everywhere. */
     --uc-parent-primary-button-background: var(--purple-40);
     --uc-parent-primary-button-background-hover: var(--purple-35);
     --uc-parent-primary-button-background-active: var(--purple-30);
-    --uc-parent-primary-button-text-color: #fff;
+    --uc-parent-primary-button-text-color: var(--light-on-dark-button-text-color);
 
     --uc-content-page-background: var(--in-content-bg-dark);
     --uc-content-page-background-light: hsl(240, 3%, 12%);
