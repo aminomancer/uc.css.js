@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Browser Chrome Bookmark Keywords
-// @version        1.0
+// @version        1.0.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Allow the creation of special keyword bookmarks with
@@ -255,6 +255,7 @@
         let title;
         let prefix;
         let icon;
+        let inputHighlight;
 
         if (ucjs) {
           let bm = await PlacesUtils.bookmarks.fetch({ url: uri });
@@ -266,31 +267,35 @@
         }
 
         if (prefix && searchString && (hadPlaceholder || !ucjs)) {
-          // If we have a search string, the result has the title
-          // "host: searchString".
-          title = UrlbarUtils.strings.formatStringFromName("bookmarkKeywordSearch", [
-            prefix,
-            queryContext.tokens
-              .slice(1)
-              .map(t => t.value)
-              .join(" "),
-          ]);
+          let format = (val1, val2) =>
+            UrlbarUtils.strings.formatStringFromName("bookmarkKeywordSearch", [val1, val2]);
+          let typedValue = queryContext.tokens
+            .slice(1)
+            .map(t => t.value)
+            .join(" ");
+          title = format(prefix, typedValue);
+          inputHighlight = { title: [[prefix.length + format("", "").length, typedValue.length]] };
         } else {
           title = ucjs && prefix ? prefix : UrlbarUtils.unEscapeURIForUI(url);
         }
 
-        let result = new UrlbarResult(
-          UrlbarUtils.RESULT_TYPE.KEYWORD,
-          UrlbarUtils.RESULT_SOURCE.BOOKMARKS,
+        let [payload, highlights] = [
           ...UrlbarResult.payloadAndSimpleHighlights(queryContext.tokens, {
             title: [title, UrlbarUtils.HIGHLIGHT.TYPED],
             url: [url, UrlbarUtils.HIGHLIGHT.TYPED],
-            keyword: [keyword, UrlbarUtils.HIGHLIGHT.TYPED],
+            keyword,
             input: queryContext.searchString,
             postData,
             icon,
             ucjs,
-          })
+          }),
+        ];
+
+        let result = new UrlbarResult(
+          UrlbarUtils.RESULT_TYPE.KEYWORD,
+          UrlbarUtils.RESULT_SOURCE.BOOKMARKS,
+          payload,
+          inputHighlight ?? highlights
         );
         result.heuristic = true;
         addCallback(this, result);

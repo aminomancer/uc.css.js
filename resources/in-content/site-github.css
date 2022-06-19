@@ -17,6 +17,10 @@ which requires Stylus. don't use this stylesheet if you don't have that theme, i
     font-size: 14px !important;
   }
 
+  .previewable-comment-form textarea {
+    min-height: 350px !important;
+  }
+
   tt, code, samp,
   .input-monospace {
     font-family: Fira Code UC, Fira Code, SF Mono, ui-monospace, SFMono-Regular, SF Mono, Menlo,

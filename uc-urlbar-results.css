@@ -478,6 +478,7 @@ by underlining them (requires urlbarMods.uc.js) */
 
 .urlbarView-row[has-action] .urlbarView-title strong,
 .urlbarView-row[has-action] .urlbarView-title[isurl],
+.urlbarView-row[type="bookmark"]:not([has-url]) .urlbarView-title,
 .urlbarView-row[has-url] .urlbarView-title,
 .urlbarView-row .urlbarView-tag,
 .urlbarView-row:where([type="tabtosearch"], [type="tokenaliasengine"]) .urlbarView-title,
@@ -497,6 +498,7 @@ by underlining them (requires urlbarMods.uc.js) */
 .urlbarView-row:where([type="tabtosearch"], [type="tokenaliasengine"])[selected] .urlbarView-title,
 .urlbarView-row[has-action][selected] .urlbarView-title strong,
 .urlbarView-row[has-action][selected] .urlbarView-title[isurl],
+.urlbarView-row[type="bookmark"][selected]:not([has-url]) .urlbarView-title,
 .urlbarView-row[has-url][selected] .urlbarView-title,
 .urlbarView-row[selected] .urlbarView-tag,
 .urlbarView-row[selected]:not([has-url])
@@ -512,6 +514,7 @@ by underlining them (requires urlbarMods.uc.js) */
 }
 
 .urlbarView-row[has-action] .urlbarView-title[isurl] strong,
+.urlbarView-row[type="bookmark"]:not([has-url]) .urlbarView-title strong,
 .urlbarView-row[has-url] .urlbarView-title strong,
 .urlbarView-row .urlbarView-tag strong {
   font-weight: var(--urlbar-result-strong-font-weight, 500) !important;
@@ -651,7 +654,7 @@ by underlining them (requires urlbarMods.uc.js) */
   padding-inline-start: 16px;
 }
 
-.urlbarView-row:where([type="tabtosearch"], [type="tokenaliasengine"]):not([selected], [show-action-text], :hover)
+.urlbarView-row:where([type="tabtosearch"], [type="tokenaliasengine"], [type="bookmark"]:not([has-url])):not([selected], [show-action-text], :hover)
   > .urlbarView-row-inner
   > .urlbarView-no-wrap
   > .urlbarView-action {
