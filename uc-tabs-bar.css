@@ -679,7 +679,7 @@ button.private-browsing-indicator:is(:hover:active, [open])::before {
 }
 
 /* move titlebar buttons to the left on macOS and linux */
-@media (-moz-platform: macos), (-moz-platform: windows) {
+@media (-moz-platform: macos), (-moz-platform: linux) {
   .titlebar-buttonbox-container,
   #toolbar-menubar > .titlebar-buttonbox-container {
     -moz-box-ordinal-group: 0 !important;

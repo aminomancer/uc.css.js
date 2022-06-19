@@ -189,9 +189,14 @@
     --in-content-focus-outline-color: var(--in-content-item-selected-text) !important;
   }
 
-  richlistitem menulist {
+  html:not([role="dialog"]) richlistitem menulist {
     border-radius: 0 !important;
     outline-offset: var(--focus-outline-offset, 2px) !important;
+    outline: none !important;
+  }
+
+  window:not([chromehidden]) > dialog richlistbox[seltype="multiple"]:focus > richlistitem[current="true"],
+  window:not([chromehidden]) > dialog richlistbox.theme-listbox:focus > richlistitem[current="true"] {
     outline: none !important;
   }
 
