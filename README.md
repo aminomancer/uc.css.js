@@ -1138,6 +1138,10 @@ But if you also want rounded corners and borders, that won't be an option. A goo
 
 </details>
 
+#### [Tooltip Styler](/JS/tooltipStyler.uc.js):
+
+✨ Allows you to style a tooltip in the chrome window based on which node triggered it. duskFox uses this to make certain tooltips gray instead of indigo, since we have gray system pages. So it's configured for duskFox out of the box. If you want to use this script for custom purposes, you'll need to edit the script and add corresponding CSS to your [_agent_ sheet](userChrome.ag.css), such as `tooltip[backdrop-color"red"] { background-color: blue }`
+
 #### [Tracking Protection Middle Click Toggle](/JS/trackingProtectionMiddleClickToggle.uc.js):
 
 Middle click the tracking protection icon in the urlbar to enable/disable tracking protection on the active tab. A minor change, but it's faster than left-clicking to open the panel, then clicking the actual toggle switch.

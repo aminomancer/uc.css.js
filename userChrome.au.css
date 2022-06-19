@@ -168,9 +168,9 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
     margin-bottom: revert;
   }
 
-  #BMB_bookmarksPopup::part(arrowscrollbox),
-  #BMB_bookmarksPopup menupopup::part(arrowscrollbox),
-  #BMB_bookmarksPopup menupopup[placespopup="true"]::part(arrowscrollbox) {
+  #BMB_bookmarksPopup::part(content),
+  #BMB_bookmarksPopup menupopup::part(content),
+  #BMB_bookmarksPopup menupopup[placespopup="true"]::part(content) {
     padding: var(--menupopup-inner-padding);
   }
 
@@ -278,20 +278,20 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
   }
 
   /* padding and margins for context menus */
-  menupopup::part(arrowscrollbox),
-  #ContentSelectDropdown > menupopup::part(arrowscrollbox),
+  menupopup::part(content),
+  #ContentSelectDropdown > menupopup::part(content),
   #PlacesToolbar menupopup::part(content) {
     padding: var(--menupopup-inner-padding);
     margin: var(--menupopup-inner-box-margin);
   }
 
-  #BMB_bookmarksPopup::part(arrowscrollbox),
-  #BMB_bookmarksPopup menupopup[placespopup="true"]::part(arrowscrollbox) {
+  #BMB_bookmarksPopup::part(content),
+  #BMB_bookmarksPopup menupopup[placespopup="true"]::part(content) {
     padding-inline: 0 !important;
   }
 
-  menupopup::part(arrowscrollbox),
-  #ContentSelectDropdown > menupopup::part(arrowscrollbox) {
+  menupopup::part(content),
+  #ContentSelectDropdown > menupopup::part(content) {
     padding: var(--menupopup-inner-padding);
     margin: var(--menupopup-inner-box-margin);
   }
@@ -523,8 +523,12 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
   }
 
   #customization-container,
-  #customization-container :is(menupopup, panel)::part(arrowscrollbox),
-  window#alertNotification #alertSettings :is(menupopup, panel)::part(arrowscrollbox) {
+  #customization-container :is(menupopup, panel)::part(content),
+  #customizationPaletteItemContextMenu,
+  #customizationPaletteItemContextMenu::part(content),
+  #customizationPanelItemContextMenu[backdrop-color="gray"],
+  #customizationPanelItemContextMenu[backdrop-color="gray"]::part(content),
+  window#alertNotification #alertSettings :is(menupopup, panel)::part(content) {
     --arrowpanel-dimmed: color-mix(in srgb, var(--uc-toolbar-color) 7%, transparent);
     --arrowpanel-dimmed-further: color-mix(in srgb, var(--uc-toolbar-color) 12%, transparent);
     --arrowpanel-dimmed-even-further: color-mix(in srgb, var(--uc-toolbar-color) 15%, transparent);

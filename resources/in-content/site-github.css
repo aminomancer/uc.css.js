@@ -13,14 +13,15 @@ which requires Stylus. don't use this stylesheet if you don't have that theme, i
   .rgh-monospace-textareas textarea {
     font-family: Fira Code UC, Fira Code, SF Mono, ui-monospace, SFMono-Regular, SF Mono, Menlo,
       Consolas, Liberation Mono, monospace !important;
-    font-weight: 300 !important;
+/*     font-weight: 300 !important; */
     font-size: 14px !important;
   }
 
+  tt, code, samp,
   .input-monospace {
     font-family: Fira Code UC, Fira Code, SF Mono, ui-monospace, SFMono-Regular, SF Mono, Menlo,
       Consolas, Liberation Mono, monospace !important;
-    font-weight: 300 !important;
+/*     font-weight: 300 !important; */
   }
 
   .blob-code-inner,
@@ -32,7 +33,7 @@ which requires Stylus. don't use this stylesheet if you don't have that theme, i
     display: block !important; */
     font-family: Fira Code UC, Fira Code, SF Mono, ui-monospace, SFMono-Regular, SF Mono, Menlo,
       Consolas, Liberation Mono, monospace !important;
-    font-weight: 300 !important;
+/*     font-weight: 300 !important; */
     font-size: 14px !important;
   }
 
