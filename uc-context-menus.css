@@ -472,6 +472,10 @@ panel > richlistbox > richlistitem {
   font-style: italic;
 }
 
+menuitem[default="true"] {
+	font-weight: normal !important;
+}
+
 /* a way to reduce the number of menuseparators in the context menu, if they feel excessive */
 @supports -moz-bool-pref("userChrome.contextmenu.reduce-menuseparators") {
   #contentAreaContextMenu

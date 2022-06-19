@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Urlbar Mods
-// @version        1.6.3
+// @version        1.6.4
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Make some minor modifications to the urlbar. See the code
@@ -463,22 +463,20 @@ class UrlbarMods {
     );
     const { UrlbarResult } = ChromeUtils.import("resource:///modules/UrlbarResult.jsm");
     const { UrlbarSearchUtils } = ChromeUtils.import("resource:///modules/UrlbarSearchUtils.jsm");
-    const { UrlbarProviderAutofill } = ChromeUtils.import(
-      "resource:///modules/UrlbarProviderAutofill.jsm"
-    );
-    const { UrlbarProvidersManager } = ChromeUtils.import(
-      "resource:///modules/UrlbarProvidersManager.jsm"
-    );
+    const UrlbarProvidersManager = gURLBar.view.controller.manager;
+    const UrlbarProviderAutofill = UrlbarProvidersManager.getProvider("Autofill");
     // these variables look unused but they're for the functions that will be modified
     // dynamically and evaluated later like provider.startQuery.toSource()
     let showRemoteIconsPref = this.showRemoteIconsPref;
-    let gUniqueIdSerial = 1;
+    if (!gURLBar.view.hasOwnProperty("uniqueIdSerial")) {
+      gURLBar.view.uniqueIdSerial = 1;
+    }
+    function getUniqueId(prefix) {
+      return prefix + (gURLBar.view.uniqueIdSerial++ % 9999);
+    }
     const RECENT_REMOTE_TAB_THRESHOLD_MS = 72 * 60 * 60 * 1000;
     function escapeRegExp(string) {
       return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    }
-    function getUniqueId(prefix) {
-      return prefix + (gUniqueIdSerial++ % 9999);
     }
     // modified functions for TabToSearch provider, to add engine icon.
     function makeTTSOnboardingResult(engine, satisfiesAutofillThreshold = false) {
@@ -523,9 +521,9 @@ class UrlbarMods {
       result.suggestedIndex = 1;
       return result;
     }
-    let RemoteTabs = gURLBar.view.controller.manager.getProvider("RemoteTabs");
-    let TabToSearch = gURLBar.view.controller.manager.getProvider("TabToSearch");
-    UrlbarUtils.RESULT_PAYLOAD_SCHEMA[UrlbarUtils.RESULT_TYPE.REMOTE_TAB].properties.clientType = {
+    let RemoteTabs = UrlbarProvidersManager.getProvider("RemoteTabs");
+    let TabToSearch = UrlbarProvidersManager.getProvider("TabToSearch");
+    UrlbarUtils.getPayloadSchema(UrlbarUtils.RESULT_TYPE.REMOTE_TAB).properties.clientType = {
       type: "string",
     };
     let src1 = RemoteTabs.startQuery.toSource();
@@ -543,6 +541,10 @@ class UrlbarMods {
       eval(
         `gURLBar.view._updateRow = function ` +
           src2
+            .replace(/^\(/, "")
+            .replace(/\)$/, "")
+            .replace(/^function\s*/, "")
+            .replace(/^_updateRow\s*/, "")
             .replace(
               /(item\.removeAttribute\(\"stale\"\);)/,
               `$1 item.removeAttribute("clientType"); item.removeAttribute("engine");`
@@ -570,7 +572,24 @@ class UrlbarMods {
             .replace(/makeOnboardingResult/g, "makeTTSOnboardingResult")
       );
     }
-    let css = `.urlbarView-row[type="remotetab"] .urlbarView-type-icon{background:var(--device-icon,url("chrome://browser/skin/sync.svg")) center/contain no-repeat;}.urlbarView-row[type="remotetab"][clientType="phone"]{--device-icon:url("chrome://browser/skin/device-phone.svg");}.urlbarView-row[type="remotetab"][clientType="tablet"]{--device-icon:url("chrome://browser/skin/device-tablet.svg");}.urlbarView-row[type="remotetab"][clientType="desktop"]{--device-icon:url("chrome://browser/skin/device-desktop.svg");}.urlbarView-row[type="remotetab"][clientType="tv"]{--device-icon:url("chrome://browser/skin/device-tv.svg");}.urlbarView-row[type="remotetab"][clientType="vr"]{--device-icon:url("chrome://browser/skin/device-vr.svg");}`;
+    let css = /* css */ `.urlbarView-row[type="remotetab"] .urlbarView-type-icon {
+  background: var(--device-icon, url("chrome://browser/skin/sync.svg")) center/contain no-repeat;
+}
+.urlbarView-row[type="remotetab"][clientType="phone"] {
+  --device-icon: url("chrome://browser/skin/device-phone.svg");
+}
+.urlbarView-row[type="remotetab"][clientType="tablet"] {
+  --device-icon: url("chrome://browser/skin/device-tablet.svg");
+}
+.urlbarView-row[type="remotetab"][clientType="desktop"] {
+  --device-icon: url("chrome://browser/skin/device-desktop.svg");
+}
+.urlbarView-row[type="remotetab"][clientType="tv"] {
+  --device-icon: url("chrome://browser/skin/device-tv.svg");
+}
+.urlbarView-row[type="remotetab"][clientType="vr"] {
+  --device-icon: url("chrome://browser/skin/device-vr.svg");
+}`;
     let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(Ci.nsIStyleSheetService);
     let uri = makeURI("data:text/css;charset=UTF=8," + encodeURIComponent(css));
     if (sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) return;
