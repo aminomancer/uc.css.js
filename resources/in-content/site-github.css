@@ -17,31 +17,28 @@ which requires Stylus. don't use this stylesheet if you don't have that theme, i
     font-size: 14px !important;
   }
 
+  .input-monospace {
+    font-family: Fira Code UC, Fira Code, SF Mono, ui-monospace, SFMono-Regular, SF Mono, Menlo,
+      Consolas, Liberation Mono, monospace !important;
+    font-weight: 300 !important;
+  }
+
   .blob-code-inner,
   .markdown-body pre > code,
   .markdown-body .highlight > pre {
-    white-space: pre-wrap !important;
+/*     white-space: pre-wrap !important;
     word-break: break-word !important;
     overflow-wrap: break-word !important;
-  }
-
-  /* GitHub Bug: Enable wrapping of long code lines */
-  body:not(.nowrap) .blob-code-inner,
-  body:not(.nowrap) .markdown-body pre > code,
-  body:not(.nowrap) .markdown-body .highlight > pre {
-    white-space: pre-wrap !important;
-    word-break: break-word !important;
-    overflow-wrap: break-word !important;
-    display: block !important;
+    display: block !important; */
     font-family: Fira Code UC, Fira Code, SF Mono, ui-monospace, SFMono-Regular, SF Mono, Menlo,
       Consolas, Liberation Mono, monospace !important;
     font-weight: 300 !important;
     font-size: 14px !important;
   }
 
-  body:not(.nowrap) td.blob-code-inner {
+/*   td.blob-code-inner {
     display: table-cell !important;
-  }
+  } */
 
   a.btn[href*="github1s.com"] {
     color: transparent !important;
