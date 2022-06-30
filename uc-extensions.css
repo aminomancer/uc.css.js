@@ -88,6 +88,18 @@ menupopup#viewSidebarMenu
   list-style-image: url(chrome://userchrome/content/search-glass.svg);
 }
 
+.eom-addon-button[data-extensionid="amazondotcom@aminomancer"i] .toolbarbutton-icon {
+  list-style-image: url(chrome://userchrome/content/engines/amazon.svg);
+}
+
+.eom-addon-button[data-extensionid="firefoxadd-ons@aminomancer"i] .toolbarbutton-icon {
+  list-style-image: url(chrome://userchrome/content/engines/firefoxadd-ons.svg);
+}
+
+.eom-addon-button[data-extensionid="searchfox@aminomancer"i] .toolbarbutton-icon {
+  list-style-image: url(chrome://userchrome/content/engines/searchfox.svg);
+}
+
 /* mozlz4-edit, an extension for editing mozlz4 files like your profile's search.json.mozlz4 file that contains all your search engines */
 :is(.webextension-browser-action, .eom-addon-button)[data-extensionid="{0981817c-71b3-4853-a801-481c90af2e8e}"i]
   .toolbarbutton-icon {
@@ -245,6 +257,16 @@ menupopup#viewSidebarMenu
   --arrowpanel-border-color: var(--uc-menu-border-color) !important;
 }
 
+/* devtools inspector sidebar */
+.eom-addon-button[data-extensionid="{50b26d0f-7926-482d-8ef8-cc760ea4d4f0}"i] .toolbarbutton-icon {
+  list-style-image: url(chrome://userchrome/content/devtools/tool-inspector.svg);
+}
+
+/* Don't touch my tabs! (rel=noopener) */
+.eom-addon-button[data-extensionid="{6b938c0c-fc53-4f27-805f-619778631082}"i] .toolbarbutton-icon {
+  list-style-image: url(chrome://userchrome/content/skin/link.svg);
+}
+
 /* uBlock origin */
 :is(.webextension-browser-action, .eom-addon-button)[data-extensionid="uBlock0@raymondhill.net"i]
   .toolbarbutton-icon {
@@ -302,7 +324,7 @@ elaborate/compiled stylesheets */
 :is(.webextension-browser-action, .eom-addon-button)[label="Stylus"] .toolbarbutton-icon,
 :is(.webextension-browser-action, .eom-addon-button)[data-extensionid="{7a7a4a92-a2a0-41d1-9fd7-1e92480d612d}"i]
   .toolbarbutton-icon {
-  list-style-image: url(chrome://userchrome/content/devtools/tool-styleeditor.svg);
+  list-style-image: url(chrome://userchrome/content/material/stylus.svg);
 }
 
 /* Notes by Firefox */
@@ -406,15 +428,21 @@ menupopup#viewSidebarMenu
   display: none;
 }
 
+.eom-addon-button[data-extensionid="gitzip-firefox-addons@gitzip.org"] .toolbarbutton-icon {
+  list-style-image: url(chrome://userchrome/content/material/zipper.svg);
+}
+
 /* invert some icons in the extension options panel */
 .eom-addon-button[data-extensionid="FirefoxColor@mozilla.com"] .toolbarbutton-icon,
 .eom-addon-button[data-extensionid="default-bookmark-folder@gustiaux.com"] .toolbarbutton-icon,
-.eom-addon-button[data-extensionid="{63d150c4-394c-4275-bc32-c464e76a891c}"] .toolbarbutton-icon,
-.eom-addon-button[data-extensionid="bookmark-menu-container@robwu.nl"] .toolbarbutton-icon,
-.eom-addon-button[data-extensionid="octolinker@stefanbuck.com"] .toolbarbutton-icon,
-.eom-addon-button[data-extensionid="gitzip-firefox-addons@gitzip.org"] .toolbarbutton-icon,
 .eom-addon-button[data-extensionid="{30399a05-ba09-4c3c-b828-dbc9bb3ab8b9}"] .toolbarbutton-icon {
   filter: grayscale(1) invert(1) brightness(3) !important;
+}
+
+.eom-addon-button[data-extensionid="{3e0e2f7e-1dde-4fee-ab96-031faa42ec52}"i] .toolbarbutton-icon,
+.eom-addon-button[data-extensionid="{33d43318-bde8-4b88-9658-4b89629dbc4e}"i] .toolbarbutton-icon,
+.eom-addon-button[data-extensionid="bookmark-menu-container@robwu.nl"] .toolbarbutton-icon {
+  list-style-image: url(chrome://userchrome/content/material/extension.svg);
 }
 
 /* sidebery */
@@ -431,8 +459,16 @@ menupopup#viewSidebarMenu
   list-style-image: url(chrome://userchrome/content/engines/bugzilla.svg);
 }
 
+.eom-addon-button[data-extensionid="libgen@aminomancer"] .toolbarbutton-icon {
+  list-style-image: url(chrome://userchrome/content/engines/librarygenesis.svg);
+}
+
 .eom-addon-button[data-extensionid="mdnwebdocs@aminomancer"] .toolbarbutton-icon {
   list-style-image: url(chrome://userchrome/content/engines/mdnwebdocs.svg);
+}
+
+.eom-addon-button[data-extensionid="move_tabs_hotkeys@jmmerz.github"i] .toolbarbutton-icon {
+  list-style-image: url(chrome://userchrome/content/material/keyboard-command.svg);
 }
 
 /* sponsorblock */
@@ -1006,6 +1042,10 @@ since its casing is inconsistent with context menu norms. */
   .menu-iconic-left::before,
 #invert-element_aminomancer-menuitem-_menuitem-invert[label="Uninvert Element"]:not(.menuitem-iconic, .menu-iconic)::before {
   background-image: url(chrome://userchrome/content/material/invert-off.svg);
+}
+
+.eom-addon-button[data-extensionid="invert-element@aminomancer"i] .toolbarbutton-icon {
+  list-style-image: url(chrome://userchrome/content/material/invert.svg);
 }
 
 /* tab notes favicon isn't displayed properly in the back/forward menu */

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Extension Options Panel
-// @version        1.8.2
+// @version        1.8.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    This script creates a toolbar button that opens a popup panel
@@ -842,14 +842,18 @@ class ExtensionOptionsWidget {
       this.create(doc, "toolbarbutton", {
         label: l10n["Copy ID label"],
         class: "subviewbutton panel-subview-footer-button",
-        closemenu: "none",
       })
     );
     copyIdButton.addEventListener("command", () => {
       win.Cc["@mozilla.org/widget/clipboardhelper;1"]
         .getService(win.Ci.nsIClipboardHelper)
         .copyString(addon.id);
-      win.CustomHint?.show(copyIdButton, "Copied");
+      let PMV = view.panelMultiView && win.PanelMultiView.forNode(view.panelMultiView);
+      if (PMV) {
+        let panel = PMV._panel;
+        if (panel && PMV._getBoundsWithoutFlushing(panel.anchorNode)?.width)
+          win.CustomHint?.show(panel.anchorNode, "Copied");
+      }
     });
 
     view.addEventListener("ViewShowing", () => {

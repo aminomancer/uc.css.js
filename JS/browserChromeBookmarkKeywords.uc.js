@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Browser Chrome Bookmark Keywords
-// @version        1.0.1
+// @version        1.0.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Allow the creation of special keyword bookmarks with
@@ -30,11 +30,11 @@
 // That will return a value like "tab" or "window" which can be passed to the
 // utility overlay functions like openWebLinkIn.
 
-// Beware that you shouldn't be escaping anything with URL encoding, because it
-// isn't really parsed like a URL. However, you can use escape sequences to
-// encode special characters that you would ordinarily need to encode in
-// JavaScript strings, such as \n for new line or \\ for backslash. So be aware
-// of this if you're using backslashes, since they need to be doubled up.
+// Beware that you shouldn't be escaping anything in your bookmark code with URL
+// encoding, because it isn't really parsed like a URL. However, you can use
+// escape sequences to encode special characters that you would ordinarily need
+// to encode in JavaScript strings, such as \n for new line or \\ for backslash.
+// Just be aware of this if you use backslashes, as they need to be doubled up.
 // https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String#escape_sequences
 
 // So putting all of this together, you can make a bookmark keyword like this:
@@ -87,21 +87,30 @@
 (function () {
   // User configuration settings
   const config = {
-    // This is the symbol you should put in your bookmark URL as a placeholder
-    // representing the typed search string. It's %{searchString} by default,
-    // but if you want something simpler you can just change it to %s or
-    // whatever you want really. So basically just make sure this value matches
-    // between the script (here) and your ucjs: keyword bookmarks. Keep in mind
-    // this also obeys JavaScript string rules, so I don't recommend putting
-    // backslashes \ or ${ in the placeholder symbol.
-    "Search string placeholder": `%{searchString}`,
-
     // The icon that will show on browser chrome bookmark keyword results.
     "Result icon URL": "chrome://devtools/skin/images/command-console.svg",
 
     // The string that will show next to these results.
     // (e.g. instead of "Visit" or "Search with {engine}")
     "Result action string": "Execute",
+
+    // This pattern matches the symbol you will put in your bookmark URL as a
+    // placeholder representing the search string you'll type in the urlbar.
+    // It's %{searchString} by default, but if you want something simpler you
+    // can just change it to %s or whatever you want really. So basically just
+    // make sure this value matches between the script (here) and your ucjs:
+    // keyword bookmarks. Make sure it's wrapped in forward slashes / like all
+    // RegExp patterns defined by literal notation. And it should have a g at
+    // the end, so it will replace all instances of the placeholder with your
+    // typed string. Your bookmark code can have multiple instances of the
+    // placeholder. It shouldn't ever be necessary, because you can just put in
+    // your bookmark code `let string = %{searchString};` and then refer to
+    // `string` in the rest of your bookmark code instead of `%searchString`.
+    // But it doesn't hurt to add the g (global) flag. Keep in mind this obeys
+    // the usual JavaScript literal notation rules, so I don't recommend putting
+    // backslashes \ in this placeholder symbol. Honestly I would really just
+    // recommend leaving this alone lol.
+    "Search string placeholder": /%{searchString}/g,
   };
 
   function init() {
@@ -314,11 +323,16 @@
         let entry = await PlacesUtils.keywords.fetch(keyword);
         if (!entry) return {};
         if (entry.url.protocol === "ucjs:" && !entry.postData) {
+          let hadPlaceholder = false;
+          let url = entry.url.href.replace(config["Search string placeholder"], () => {
+            hadPlaceholder = true;
+            return searchString;
+          });
           return {
             entry,
             ucjs: true,
-            url: entry.url.href.replace(config["Search string placeholder"], searchString),
-            hadPlaceholder: !!entry.url.href.match(config["Search string placeholder"]),
+            url,
+            hadPlaceholder,
             postData: entry.postData,
           };
         }
