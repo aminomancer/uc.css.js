@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Vertical Tabs Pane
-// @version        1.6.3
+// @version        1.6.4
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Create a vertical pane across from the sidebar that functions
@@ -567,7 +567,10 @@
           this._onCommand(e, tab);
           break;
         case "mouseover":
-          this._warmupRowTab(e, tab);
+          this._onMouseOver(e, tab);
+          break;
+        case "mouseout":
+          this._onMouseOut(e);
           break;
         case "mouseenter":
           this._onMouseEnter(e);
@@ -898,11 +901,13 @@
       });
       if (this.className) row.classList.add(this.className);
       row.tab = tab;
+      row.mOverSecondaryButton = false;
       row.addEventListener("command", this);
       row.addEventListener("mousedown", this);
       row.addEventListener("mouseup", this);
       row.addEventListener("click", this);
       row.addEventListener("mouseover", this);
+      row.addEventListener("mouseout", this);
       this.tabToElement.set(tab, row);
 
       // main button
@@ -1189,14 +1194,12 @@
           gBrowser.clearMultiSelectedTabs();
         }
         gBrowser.addRangeToMultiSelectedTabs(lastSelectedTab, tab);
-        e.preventDefault();
       } else if (accelKey) {
         if (tab.multiselected) gBrowser.removeFromMultiSelectedTabs(tab);
         else if (tab != gBrowser.selectedTab) {
           gBrowser.addToMultiSelectedTabs(tab);
           gBrowser.lastMultiSelectedTab = tab;
         }
-        e.preventDefault();
       } else {
         if (!tab.selected && tab.multiselected) gBrowser.lockClearMultiSelectionOnce();
         if (
@@ -1210,6 +1213,10 @@
           if (gBrowser.selectedTab != tab) gBrowser.selectedTab = tab;
           else gBrowser.tabContainer._handleTabSelect();
         }
+      }
+      if (e.target.closest(".all-tabs-item")?.mOverSecondaryButton) {
+        e.stopPropagation();
+        e.preventDefault();
       }
     }
     // when the mouse is released, clear the multiselection and perform some
@@ -1225,9 +1232,13 @@
         });
         return;
       }
-      let accelKey = AppConstants.platform == "macosx" ? e.metaKey : e.ctrlKey;
-      if (e.shiftKey || accelKey || e.target.classList.contains("all-tabs-secondary-button"))
+      if (
+        e.shiftKey ||
+        (AppConstants.platform == "macosx" ? e.metaKey : e.ctrlKey) ||
+        e.target.classList.contains("all-tabs-secondary-button")
+      ) {
         return;
+      }
       delete tab.noCanvas;
       gBrowser.unlockClearMultiSelection();
       gBrowser.clearMultiSelectedTabs();
@@ -1294,8 +1305,15 @@
     // "click" events work kind of like "mouseup" events, but in this case we're
     // only using this to prevent the click event yielding a command event.
     _onClick(e) {
-      if (e.button !== 0 || e.target.classList.contains("all-tabs-secondary-button")) return;
-      e.preventDefault();
+      if (e.button === 0) {
+        if (
+          e.target.classList.contains("all-tabs-secondary-button") &&
+          !e.shiftKey &&
+          !(AppConstants.platform == "macosx" ? e.metaKey : e.ctrlKey)
+        )
+          return;
+        e.preventDefault();
+      }
     }
     // "command" events happen on click or on spacebar/enter. we want the
     // buttons to be keyboard accessible too. so this is how the mute button and
@@ -1492,18 +1510,31 @@
           ? item.setAttribute("multiselected", true)
           : item.removeAttribute("multiselected");
     }
-    // invoked when mousing over a row. we want to speculatively warm up a tab
-    // when the user hovers it since it's possible they will click it. there's a
-    // cache for this with a maximum limit, so if the user mouses over 3 tabs
-    // without clicking them, then a 4th, it will clear the 1st to make room.
-    // this is the same thing the built-in tab bar does so we're just mimicking
-    // vanilla behavior here. this can be disabled with
-    // browser.tabs.remote.warmup.enabled
-    _warmupRowTab(e, tab) {
+    // invoked when mousing over a row. we use this to set a flag
+    // mOverSecondaryButton on the row, which our drag handlers reference. we
+    // want to speculatively warm up a tab when the user hovers it since it's
+    // possible they will click it. there's a cache for this with a maximum
+    // limit, so if the user mouses over 3 tabs without clicking them, then a
+    // 4th, it will clear the 1st to make room. this is the same thing the
+    // built-in tab bar does so we're just mimicking vanilla behavior here. this
+    // can be disabled with browser.tabs.remote.warmup.enabled
+    _onMouseOver(e, tab) {
       let row = this._findRow(e.target);
       SessionStore.speculativeConnectOnTabHover(tab);
-      if (row.closeButton.matches(":hover")) tab = gBrowser._findTabToBlurTo(tab);
+      if (e.target.classList.contains("all-tabs-secondary-button")) {
+        row.mOverSecondaryButton = true;
+      }
+      if (e.target.hasAttribute("close-button")) {
+        tab = gBrowser._findTabToBlurTo(tab);
+      }
       gBrowser.warmupTab(tab);
+    }
+    // invoked when mousing out of an element.
+    _onMouseOut (e) {
+      let row = e.target.closest(".all-tabs-item");
+      if (e.target.classList.contains("all-tabs-secondary-button")) {
+        row.mOverSecondaryButton = false;
+      }
     }
     // generate tooltip labels and decide where to anchor the tooltip. invoked
     // when the vertical-tabs-tooltip is about to be shown.

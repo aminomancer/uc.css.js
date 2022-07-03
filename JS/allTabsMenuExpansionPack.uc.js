@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           All Tabs Menu Expansion Pack
-// @version        2.0.8
+// @version        2.0.9
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Next to the "new tab" button in Firefox there's a V-shaped button that opens a
@@ -502,11 +502,13 @@
       });
       if (this.className) row.classList.add(this.className);
       row.tab = tab;
+      row.mOverSecondaryButton = false;
       row.addEventListener("command", this);
       row.addEventListener("mousedown", this);
       row.addEventListener("mouseup", this);
       row.addEventListener("click", this);
       row.addEventListener("mouseover", this);
+      row.addEventListener("mouseout", this);
       this.tabToElement.set(tab, row);
 
       let button = row.appendChild(
@@ -607,7 +609,10 @@
           this._onCommand(e, tab);
           break;
         case "mouseover":
-          this._warmupRowTab(e, tab);
+          this._onMouseOver(e, tab);
+          break;
+        case "mouseout":
+          this._onMouseOut(e);
           break;
         case "TabPinned":
         case "TabUnpinned":
@@ -674,14 +679,12 @@
           this.gBrowser.clearMultiSelectedTabs();
         }
         this.gBrowser.addRangeToMultiSelectedTabs(lastSelectedTab, tab);
-        e.preventDefault();
       } else if (accelKey) {
         if (tab.multiselected) this.gBrowser.removeFromMultiSelectedTabs(tab);
         else if (tab != this.gBrowser.selectedTab) {
           this.gBrowser.addToMultiSelectedTabs(tab);
           this.gBrowser.lastMultiSelectedTab = tab;
         }
-        e.preventDefault();
       } else {
         if (!tab.selected && tab.multiselected) this.gBrowser.lockClearMultiSelectionOnce();
         if (
@@ -696,6 +699,10 @@
           else this.gBrowser.tabContainer._handleTabSelect();
         }
       }
+      if (e.target.closest(".all-tabs-item")?.mOverSecondaryButton) {
+        e.stopPropagation();
+        e.preventDefault();
+      }
     };
     tabsPanel._onMouseUp = function (e, tab) {
       if (e.button === 2) return;
@@ -708,16 +715,24 @@
       }
       if (e.target.classList.contains("all-tabs-secondary-button")) return;
       if (tab.hidden) return this._onCommand(e, tab);
-      let accelKey = AppConstants.platform == "macosx" ? e.metaKey : e.ctrlKey;
-      if (e.shiftKey || accelKey) return;
+      if (e.shiftKey || (AppConstants.platform == "macosx" ? e.metaKey : e.ctrlKey)) {
+        return;
+      }
       delete tab.noCanvas;
       this.gBrowser.unlockClearMultiSelection();
       this.gBrowser.clearMultiSelectedTabs();
       PanelMultiView.hidePopup(PanelMultiView.forNode(this.view.panelMultiView)._panel);
     };
     tabsPanel._onClick = function (e, tab) {
-      if (e.button !== 0 || e.target.classList.contains("all-tabs-secondary-button")) return;
-      e.preventDefault();
+      if (e.button === 0) {
+        if (
+          e.target.classList.contains("all-tabs-secondary-button") &&
+          !e.shiftKey &&
+          !(AppConstants.platform == "macosx" ? e.metaKey : e.ctrlKey)
+        )
+          return;
+        e.preventDefault();
+      }
     };
     tabsPanel._onCommand = function (e, tab) {
       if (e.target.hasAttribute("toggle-mute")) {
@@ -885,12 +900,22 @@
     tabsPanel._onTabMultiSelect = function () {
       for (let item of this.rows) item.toggleAttribute("multiselected", !!item.tab.multiselected);
     };
-    tabsPanel._warmupRowTab = function (e, tab) {
+    tabsPanel._onMouseOver = function (e, tab) {
       let row = e.target.closest(".all-tabs-item");
       SessionStore.speculativeConnectOnTabHover(tab);
-      if (row.querySelector("[close-button]").matches(":hover"))
+      if (e.target.classList.contains("all-tabs-secondary-button")) {
+        row.mOverSecondaryButton = true;
+      }
+      if (e.target.hasAttribute("close-button")) {
         tab = gBrowser._findTabToBlurTo(tab);
+      }
       gBrowser.warmupTab(tab);
+    };
+    tabsPanel._onMouseOut = function (e) {
+      let row = e.target.closest(".all-tabs-item");
+      if (e.target.classList.contains("all-tabs-secondary-button")) {
+        row.mOverSecondaryButton = false;
+      }
     };
     tabsPanel.view.addEventListener("ViewShowing", l10nIfNeeded, { once: true });
     ["dragstart", "dragleave", "dragover", "drop", "dragend"].forEach(ev =>
