@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Urlbar Mods
-// @version        1.6.4
+// @version        1.7.0
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Make some minor modifications to the urlbar. See the code
@@ -530,6 +530,14 @@ class UrlbarMods {
     let src2 = gURLBar.view._updateRow.toSource();
     let src3 = TabToSearch.startQuery.toSource();
     if (!src1.includes("client.clientType")) {
+      const lazy = {};
+      XPCOMUtils.defineLazyModuleGetters(lazy, {
+        PlacesUtils: "resource://gre/modules/PlacesUtils.jsm",
+        SyncedTabs: "resource://services-sync/SyncedTabs.jsm",
+        UrlbarPrefs: "resource:///modules/UrlbarPrefs.jsm",
+        UrlbarResult: "resource:///modules/UrlbarResult.jsm",
+        UrlbarTokenizer: "resource:///modules/UrlbarTokenizer.jsm",
+      });
       eval(
         `RemoteTabs.startQuery = async function ` +
           src1
@@ -538,6 +546,34 @@ class UrlbarMods {
       );
     }
     if (!src2.includes("result.payload.clientType")) {
+      const lazy = {};
+      XPCOMUtils.defineLazyModuleGetters(lazy, {
+        BrowserWindowTracker: "resource:///modules/BrowserWindowTracker.jsm",
+        L10nCache: "resource:///modules/UrlbarUtils.jsm",
+        ObjectUtils: "resource://gre/modules/ObjectUtils.jsm",
+        UrlbarPrefs: "resource:///modules/UrlbarPrefs.jsm",
+        UrlbarProvidersManager: "resource:///modules/UrlbarProvidersManager.jsm",
+        UrlbarProviderTopSites: "resource:///modules/UrlbarProviderTopSites.jsm",
+        UrlbarSearchOneOffs: "resource:///modules/UrlbarSearchOneOffs.jsm",
+        UrlbarTokenizer: "resource:///modules/UrlbarTokenizer.jsm",
+        UrlbarUtils: "resource:///modules/UrlbarUtils.jsm",
+        BrowserSearchTelemetry: "resource:///modules/BrowserSearchTelemetry.jsm",
+        BrowserUIUtils: "resource:///modules/BrowserUIUtils.jsm",
+        CONTEXTUAL_SERVICES_PING_TYPES: "resource:///modules/PartnerLinkAttribution.jsm",
+        ExtensionSearchHandler: "resource://gre/modules/ExtensionSearchHandler.jsm",
+        PrivateBrowsingUtils: "resource://gre/modules/PrivateBrowsingUtils.jsm",
+        PromiseUtils: "resource://gre/modules/PromiseUtils.jsm",
+        ReaderMode: "resource://gre/modules/ReaderMode.jsm",
+        PartnerLinkAttribution: "resource:///modules/PartnerLinkAttribution.jsm",
+        SearchUIUtils: "resource:///modules/SearchUIUtils.jsm",
+        SearchUtils: "resource://gre/modules/SearchUtils.jsm",
+        UrlbarController: "resource:///modules/UrlbarController.jsm",
+        UrlbarEventBufferer: "resource:///modules/UrlbarEventBufferer.jsm",
+        UrlbarQueryContext: "resource:///modules/UrlbarUtils.jsm",
+        UrlbarSearchUtils: "resource:///modules/UrlbarSearchUtils.jsm",
+        UrlbarValueFormatter: "resource:///modules/UrlbarValueFormatter.jsm",
+        UrlbarView: "resource:///modules/UrlbarView.jsm",
+      });
       eval(
         `gURLBar.view._updateRow = function ` +
           src2
@@ -564,6 +600,15 @@ class UrlbarMods {
       );
     }
     if (!src3.includes("uc_startQuery")) {
+      const lazy = {};
+      XPCOMUtils.defineLazyModuleGetters(lazy, {
+        UrlbarView: "resource:///modules/UrlbarView.jsm",
+        UrlbarPrefs: "resource:///modules/UrlbarPrefs.jsm",
+        UrlbarProviderAutofill: "resource:///modules/UrlbarProviderAutofill.jsm",
+        UrlbarResult: "resource:///modules/UrlbarResult.jsm",
+        UrlbarSearchUtils: "resource:///modules/UrlbarSearchUtils.jsm",
+        UrlbarTokenizer: "resource:///modules/UrlbarTokenizer.jsm",
+      });
       eval(
         `TabToSearch.startQuery = async function uc_startQuery` +
           src3
@@ -605,17 +650,27 @@ class UrlbarMods {
   urlbarResultsSorting() {
     let UnifiedComplete = gURLBar.view.controller.manager.muxers.get("UnifiedComplete");
     let sortSrc = UnifiedComplete.sort.toSource();
-    if (!sortSrc.includes("getLogger"))
+    if (!sortSrc.includes(`UrlbarPrefs.get("showSearchSuggestionsFirst")`)) {
+      const lazy = {};
+      XPCOMUtils.defineLazyModuleGetters(lazy, {
+        UrlbarPrefs: "resource:///modules/UrlbarPrefs.jsm",
+        UrlbarProviderQuickSuggest: "resource:///modules/UrlbarProviderQuickSuggest.jsm",
+        UrlbarProviderTabToSearch: "resource:///modules/UrlbarProviderTabToSearch.jsm",
+        UrlbarSearchUtils: "resource:///modules/UrlbarSearchUtils.jsm",
+      });
+      XPCOMUtils.defineLazyGetter(lazy, "logger", () =>
+        UrlbarUtils.getLogger({ prefix: "MuxerUnifiedComplete" })
+      );
       eval(
         `UnifiedComplete.sort = function ` +
           sortSrc
             .replace(/sort/, ``)
-            .replace(/logger/, `UrlbarUtils.getLogger({ prefix: "MuxerUnifiedComplete" })`)
             .replace(
               /showSearchSuggestionsFirst\: true/,
-              `showSearchSuggestionsFirst: UrlbarPrefs.get("showSearchSuggestionsFirst")`
+              `showSearchSuggestionsFirst: lazy.UrlbarPrefs.get("showSearchSuggestionsFirst")`
             )
       );
+    }
   }
   underlineSpaceResults() {
     gURLBar.view._addTextContentWithHighlights = function (node, text, highlights) {

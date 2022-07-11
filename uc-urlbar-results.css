@@ -787,6 +787,7 @@ so you might wanna turn the animation off. I might even make it off by default. 
   min-width: 0 !important;
   min-height: 34px !important;
   padding: 1px 0 !important;
+  margin: 0 !important;
 }
 
 .urlbarView-row[label] {

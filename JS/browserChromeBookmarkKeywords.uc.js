@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Browser Chrome Bookmark Keywords
-// @version        1.0.2
+// @version        1.1.0
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Allow the creation of special keyword bookmarks with
@@ -114,6 +114,35 @@
   };
 
   function init() {
+    const lazy = {};
+    XPCOMUtils.defineLazyModuleGetters(lazy, {
+      BrowserWindowTracker: "resource:///modules/BrowserWindowTracker.jsm",
+      L10nCache: "resource:///modules/UrlbarUtils.jsm",
+      ObjectUtils: "resource://gre/modules/ObjectUtils.jsm",
+      UrlbarPrefs: "resource:///modules/UrlbarPrefs.jsm",
+      UrlbarProvidersManager: "resource:///modules/UrlbarProvidersManager.jsm",
+      UrlbarProviderTopSites: "resource:///modules/UrlbarProviderTopSites.jsm",
+      UrlbarSearchOneOffs: "resource:///modules/UrlbarSearchOneOffs.jsm",
+      UrlbarTokenizer: "resource:///modules/UrlbarTokenizer.jsm",
+      UrlbarUtils: "resource:///modules/UrlbarUtils.jsm",
+      BrowserSearchTelemetry: "resource:///modules/BrowserSearchTelemetry.jsm",
+      BrowserUIUtils: "resource:///modules/BrowserUIUtils.jsm",
+      CONTEXTUAL_SERVICES_PING_TYPES: "resource:///modules/PartnerLinkAttribution.jsm",
+      ExtensionSearchHandler: "resource://gre/modules/ExtensionSearchHandler.jsm",
+      PrivateBrowsingUtils: "resource://gre/modules/PrivateBrowsingUtils.jsm",
+      PromiseUtils: "resource://gre/modules/PromiseUtils.jsm",
+      ReaderMode: "resource://gre/modules/ReaderMode.jsm",
+      PartnerLinkAttribution: "resource:///modules/PartnerLinkAttribution.jsm",
+      SearchUIUtils: "resource:///modules/SearchUIUtils.jsm",
+      SearchUtils: "resource://gre/modules/SearchUtils.jsm",
+      UrlbarController: "resource:///modules/UrlbarController.jsm",
+      UrlbarEventBufferer: "resource:///modules/UrlbarEventBufferer.jsm",
+      UrlbarQueryContext: "resource:///modules/UrlbarUtils.jsm",
+      UrlbarSearchUtils: "resource:///modules/UrlbarSearchUtils.jsm",
+      UrlbarValueFormatter: "resource:///modules/UrlbarValueFormatter.jsm",
+      UrlbarView: "resource:///modules/UrlbarView.jsm",
+    });
+
     const UrlbarProvidersManager = gURLBar.view.controller.manager;
 
     let UrlbarProviderBookmarkKeywords = UrlbarProvidersManager.getProvider("BookmarkKeywords");

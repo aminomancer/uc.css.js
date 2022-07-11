@@ -10,3 +10,9 @@
 :root {
   --uc-dummy-custom-property: initial;
 }
+
+@-moz-document domain("goatbots.com") {
+  .card-watcher-dialog input[type="number"] {
+    appearance: none !important;
+  }
+}

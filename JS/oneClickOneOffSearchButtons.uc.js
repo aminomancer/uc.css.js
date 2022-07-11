@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           One-click One-off Search Buttons
-// @version        1.8.0
+// @version        1.8.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Restore old behavior for one-off search engine buttons. It
@@ -109,14 +109,15 @@
       }
     }
     function toggleKeyNavCallback(disable) {
-      disable
-        ? eval(
-            `gURLBar.view.controller.handleKeyNavigation = function ` +
-              gURLBar.view.controller.handleKeyNavigation
-                .toSource()
-                .replace(/(this\.\_lastQueryContextWrapper)/, `$1 && this.allowOneOffKeyNav`)
-          )
-        : delete gURLBar.view.controller.handleKeyNavigation;
+      if (disable) {
+        const lazy = { UrlbarUtils };
+        eval(
+          `gURLBar.view.controller.handleKeyNavigation = function ` +
+            gURLBar.view.controller.handleKeyNavigation
+              .toSource()
+              .replace(/(this\.\_lastQueryContextWrapper)/, `$1 && this.allowOneOffKeyNav`)
+        );
+      } else delete gURLBar.view.controller.handleKeyNavigation;
     }
 
     oneOffs.slider = oneOffs.buttons.parentElement;

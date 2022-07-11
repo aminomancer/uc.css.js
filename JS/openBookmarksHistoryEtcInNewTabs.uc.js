@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Open Bookmarks, History, etc. in New Tabs
-// @version        1.2.0
+// @version        1.2.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    In vanilla Firefox, browser.tabs.loadBookmarksInTabs only
@@ -29,19 +29,7 @@
     if (window.PlacesUIUtils && !PlacesUIUtils._hasBeenModifiedForOBHNT) {
       const lazy = {};
       XPCOMUtils.defineLazyModuleGetters(lazy, {
-        BrowserWindowTracker: "resource:///modules/BrowserWindowTracker.jsm",
-        CustomizableUI: "resource:///modules/CustomizableUI.jsm",
-        MigrationUtils: "resource:///modules/MigrationUtils.jsm",
-        OpenInTabsUtils: "resource:///modules/OpenInTabsUtils.jsm",
-        PlacesTransactions: "resource://gre/modules/PlacesTransactions.jsm",
         PlacesUtils: "resource://gre/modules/PlacesUtils.jsm",
-        PluralForm: "resource://gre/modules/PluralForm.jsm",
-        PrivateBrowsingUtils: "resource://gre/modules/PrivateBrowsingUtils.jsm",
-        PromiseUtils: "resource://gre/modules/PromiseUtils.jsm",
-        Weave: "resource://services-sync/main.js",
-      });
-      XPCOMUtils.defineLazyGetter(lazy, "bundle", function () {
-        return Services.strings.createBundle("chrome://browser/locale/places/places.properties");
       });
       function getBrowserWindow(aWindow) {
         return aWindow &&
