@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Extension Options Panel
-// @version        1.8.3
+// @version        1.8.4
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    This script creates a toolbar button that opens a popup panel
@@ -280,13 +280,15 @@ class ExtensionOptionsWidget {
           );
 
           // create the theme preview tooltip
-          aDoc
-            .getElementById("mainPopupSet")
-            .appendChild(
-              aDoc.defaultView.MozXULElement.parseXULToFragment(
-                `<tooltip id="eom-theme-preview-tooltip" noautohide="true" orient="vertical" onpopupshowing="extensionOptionsPanel.onTooltipShowing(event);"><vbox id="eom-theme-preview-box"><html:img id="eom-theme-preview-canvas"></html:img></vbox></tooltip>`
-              )
-            );
+          if (eop.config["Show theme preview tooltips"]) {
+            aDoc
+              .getElementById("mainPopupSet")
+              .appendChild(
+                aDoc.defaultView.MozXULElement.parseXULToFragment(
+                  `<tooltip id="eom-theme-preview-tooltip" noautohide="true" orient="vertical" onpopupshowing="extensionOptionsPanel.onTooltipShowing(event);"><vbox id="eom-theme-preview-box"><html:img id="eom-theme-preview-canvas"></html:img></vbox></tooltip>`
+                )
+              );
+          }
 
           eop.fluentSetup(aDoc).then(() => eop.swapAddonsButton(aDoc));
         },
@@ -574,7 +576,11 @@ class ExtensionOptionsWidget {
         detail: await formatString("softblocked", { name }),
         type: "warning",
       };
-    if (addon.type === "theme" && (!message || message.type !== "error")) {
+    if (
+      this.config["Show theme preview tooltips"] &&
+      addon.type === "theme" &&
+      (!message || message.type !== "error")
+    ) {
       message = message ?? {};
       message.detail = "";
       message.tooltip = "eom-theme-preview-tooltip";
@@ -932,6 +938,8 @@ class ExtensionOptionsWidget {
       e.preventDefault();
       return;
     }
+    e.target.setAttribute("position", "after_start");
+    e.target.moveToAnchor(anchor, "after_start");
   }
 
   // generate and load a stylesheet
