@@ -503,6 +503,7 @@ radiogroup deck menulist:focus-visible {
 toolbarbutton:focus-visible,
 .popup-notification-button:focus-visible,
 .identity-box-button:not(:active):focus-visible,
+.panel-footer > button:focus-visible,
 #tracking-protection-icon-container:not(:active):focus-visible,
 #PersonalToolbar .toolbarbutton-1:focus-visible,
 findbar toolbarbutton.tabbable:focus-visible,

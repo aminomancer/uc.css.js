@@ -207,14 +207,19 @@
     background-color: unset !important;
   }
 
-  richlistitem.download-state[state="1"][exists]:is(:hover, :focus-within),
-  richlistitem.download-state:is([verdict], .openWhenFinished):is(:hover, :focus-within) {
+  richlistitem.download-state[state="1"][exists]:is(:hover, :focus-visible),
+  richlistitem.download-state:is([verdict], .openWhenFinished):is(:hover, :focus-visible) {
     background: var(--download-button-hover-bg) !important;
   }
 
   richlistitem.download-state[state="1"][exists]:hover:active,
   richlistitem.download-state:is([verdict], .openWhenFinished):hover:active {
     background: var(--download-button-active-bg) !important;
+  }
+
+  richlistitem.download-state[state="1"][exists]:focus-within:not(:focus-visible),
+  richlistitem.download-state:is([verdict], .openWhenFinished):focus-within:not(:focus-visible) {
+    background: var(--download-button-focus-within-bg) !important;
   }
 
   richlistitem.download-state > .downloadButton:is(:hover, :focus-visible) .button-box {
@@ -229,7 +234,7 @@
     background-color: revert;
   }
 
-  #downloadsPanel:not([keyfocus]) .downloadsPanelFooterButton:focus-visible {
+  #downloadsListBox:not([force-focus-visible]) .downloadsPanelFooterButton:focus-visible {
     outline: none;
   }
 
@@ -239,9 +244,11 @@
   #downloadsListBox > richlistitem:hover:is(.openWhenFinished),
   .downloadsPanelFooterButton:not([disabled]):hover,
   #downloadsHistory:not([disabled]):hover,
-  #downloadsPanel[keyfocus] .downloadsPanelFooterButton:not([disabled]):focus-visible,
-  #downloadsPanel[keyfocus] #downloadsListBox:focus-visible > richlistitem[selected],
-  #downloadsPanel[keyfocus] #downloadsHistory:not([disabled]):focus-visible {
+  #downloadsListBox:focus-visible > richlistitem[selected],
+  #downloadsListBox[force-focus-visible]:focus > richlistitem[selected],
+  #downloadsListBox[force-focus-visible] .downloadsPanelFooterButton:not([disabled]):focus-visible,
+  #downloadsListBox[force-focus-visible] #downloadsListBox:focus-visible > richlistitem[selected],
+  #downloadsListBox[force-focus-visible] #downloadsHistory:not([disabled]):focus-visible {
     background-color: var(--download-button-hover-bg) !important;
   }
 
@@ -413,15 +420,17 @@
     background: var(--in-content-bg-dark) !important;
   }
 
-  richlistitem.download-state:is(:hover, :focus-within),
-  richlistitem.download-state[state="1"][exists]:is(:hover, :focus-within),
-  richlistitem.download-state:is([verdict], .openWhenFinished):is(:hover, :focus-within),
+  richlistitem.download-state:is(:hover, :focus-visible),
+  richlistitem.download-state[state="1"][exists]:is(:hover, :focus-visible),
+  richlistitem.download-state:is([verdict], .openWhenFinished):is(:hover, :focus-visible),
   richlistitem.download-state[state="1"][exists]:hover:active,
   richlistitem.download-state:is([verdict], .openWhenFinished):hover:active {
     background: var(--uc-content-button-background-hover) !important;
   }
 
-  richlistitem.download-state[selected]:not(:hover, :focus-within) {
+  richlistitem.download-state[state="1"][exists]:focus-within:not(:focus-visible),
+  richlistitem.download-state:is([verdict], .openWhenFinished):focus-within:not(:focus-visible),
+  richlistitem.download-state[selected]:not(:hover, :focus-visible, :focus-within) {
     background: var(--uc-content-button-background) !important;
   }
 

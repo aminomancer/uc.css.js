@@ -167,10 +167,10 @@ overflowing, the tab strip won't be filled since they don't flex
 to fill the tab strip. so the last tab should have a rounded
 corner since it won't be touching the end of the tab strip. */
 #TabsToolbar
-    #tabbrowser-tabs
-    #tabbrowser-arrowscrollbox:not([overflowing="true"])
-    .tabbrowser-tab[last-visible-tab][pinned]
-    :is(.tab-stack, .tab-background, .tab-content, .tab-loading-burst),
+  #tabbrowser-tabs
+  #tabbrowser-arrowscrollbox:not([overflowing="true"])
+  .tabbrowser-tab[last-visible-tab][pinned]
+  :is(.tab-stack, .tab-background, .tab-content, .tab-loading-burst),
 /* when the last tab has its max-width property set, it means tab sizing has
 been set to some value less than what would fill the tab strip, by
 _lockTabSizing in tabbrowser-tabs.js. this prevents the tabs from snapping to
@@ -186,10 +186,10 @@ opening 5 tabs. select the first tab, then close tab 2 by clicking its close
 button. then close tabs 3 and 4 without moving the mouse. the tabs' width will
 not expand until you move your mouse out of the tab strip. */
 #TabsToolbar
-    #tabbrowser-tabs
-    #tabbrowser-arrowscrollbox:not([overflowing="true"])
-    .tabbrowser-tab[last-visible-tab][style*="max-width"]
-    :is(.tab-stack, .tab-background, .tab-content, .tab-loading-burst) {
+  #tabbrowser-tabs
+  #tabbrowser-arrowscrollbox:not([overflowing="true"])
+  .tabbrowser-tab[last-visible-tab][style*="max-width"]
+  :is(.tab-stack, .tab-background, .tab-content, .tab-loading-burst) {
   border-top-right-radius: 5px !important;
 }
 

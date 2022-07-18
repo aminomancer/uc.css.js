@@ -32,6 +32,7 @@ override chrome://global/skin/icons/chevron.svg ../resources/chevron.svg
 override chrome://global/skin/icons/close.svg ../resources/close.svg
 override chrome://global/skin/icons/delete.svg ../resources/material/delete.svg
 override chrome://global/skin/icons/add.svg ../resources/add.svg
+override chrome://global/skin/icons/plus.svg ../resources/add.svg
 override chrome://global/skin/icons/more.svg ../resources/more.svg
 override chrome://global/skin/icons/edit.svg ../resources/edit.svg
 override chrome://global/skin/icons/reload.svg ../resources/skin/reload.svg

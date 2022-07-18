@@ -6,12 +6,12 @@
 
 /* for the places organizer, e.g. "Manage Bookmarks" */
 
-@-moz-document url-prefix("chrome://browser/content/places/places.xhtml"),
-    url-prefix("about:downloads") {
+@-moz-document url-prefix("chrome://browser/content/places/places.xhtml"), url-prefix("about:downloads") {
   :root {
     --in-content-button-background-disabled: hsla(0, 20%, 80%, 0.12);
     --in-content-button-background-hover: hsla(0, 20%, 90%, 0.15) !important;
     --in-content-button-background-active: hsla(0, 20%, 90%, 0.19) !important;
+    --in-content-button-background-bold: hsla(0, 20%, 90%, 0.23) !important;
     --in-content-border-hover: var(--dialog-box-border-hover) !important;
     --organizer-color: var(--plaintext-color) !important;
     --organizer-deemphasized-color: color-mix(
@@ -24,10 +24,11 @@
     --organizer-content-background: var(--in-content-bg-dark) !important;
     --organizer-hover-background: var(--in-content-button-background-hover) !important;
     --organizer-selected-background: var(--in-content-button-background-active) !important;
+    --organizer-selected-focus-background: var(--in-content-button-background-bold) !important;
     --organizer-outline-color: var(--purple-40) !important;
     --organizer-border-color: var(--in-content-border-color-dim) !important;
     --organizer-toolbar-field-background: var(--in-content-bg-dark) !important;
-    --organizer-toolbar-field-background-focused: var(--in-content-box-bg-dark) !important;
+    --organizer-toolbar-field-background-focused: var(--in-content-bg-dark) !important;
     --organizer-separator-color: var(--in-content-separator-dim) !important;
     --organizer-toolbar-field-focus-border-color: var(--organizer-outline-color) !important;
     --organizer-toolbar-field-focus-box-shadow: 0 0 0 0.5px
@@ -42,17 +43,23 @@
     border-radius: var(--general-button-border-radius) !important;
   }
 
+  #placesToolbar > toolbarbutton:is(:hover, :focus-visible):not([disabled="true"]) {
+    background-color: var(--organizer-hover-background) !important;
+    color: var(--organizer-hover-color) !important;
+  }
+
   #placesMenu > menu > .menubar-text {
     background-size: 12px !important;
     padding-inline-end: 16px !important;
   }
 
   #searchFilter[focused] {
-    outline-color: var(--organizer-toolbar-field-focus-border-color);
-    outline-width: 1px;
-    outline-style: solid;
+    outline-color: var(--organizer-toolbar-field-focus-border-color) !important;
+    outline-width: 2px !important;
+    outline-style: solid !important;
     box-shadow: none !important;
-    border-color: var(--organizer-toolbar-field-focus-border-color);
+    border-color: transparent !important;
+    outline-offset: 0 !important;
   }
 
   #places input[type="text"]:focus {
@@ -81,5 +88,17 @@
   menubar > menu[_moz-menuactive="true"]:not([disabled="true"]) {
     background-color: var(--organizer-hover-background) !important;
     color: var(--organizer-hover-color) !important;
+  }
+
+  treechildren::-moz-tree-row(selected),
+  treechildren::-moz-tree-row(current, focus) {
+    background-color: var(--organizer-selected-background) !important;
+    outline: none !important;
+  }
+
+  treechildren::-moz-tree-row(selected, focus),
+  treechildren::-moz-tree-row(current, selected, focus),
+  treechildren::-moz-tree-row(current, focus, hover) {
+    background-color: var(--organizer-selected-focus-background) !important;
   }
 }

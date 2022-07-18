@@ -328,6 +328,7 @@ but other than that these variables should be available everywhere. */
   --fxa-ui-img: url(chrome://userchrome/content/fxa/avatar-big.svg);
   --uc-smooth-timing-function: cubic-bezier(0.07, 0.78, 0.21, 0.95);
 
+  --download-button-focus-within-bg: var(--button-bgcolor);
   --download-button-hover-bg: var(--button-hover-bgcolor);
   --download-button-active-bg: var(--button-active-bgcolor);
   /* if you prefer the old downloads panel highlight/hover gradient effect, uncomment this: */
