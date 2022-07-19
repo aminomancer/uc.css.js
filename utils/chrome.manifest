@@ -27,7 +27,7 @@ override chrome://global/skin/icons/security-broken.svg ../resources/connection-
 override chrome://global/skin/icons/security-warning.svg ../resources/connection-mixed-passive-loaded.svg
 override chrome://global/skin/icons/security.svg ../resources/skin/connection-secure.svg
 override chrome://global/skin/icons/print.svg ../resources/material/print.svg
-override chrome://global/skin/icons/open-in-new.svg ../resources/open-in-new.svg
+override chrome://global/skin/icons/open-in-new.svg ../resources/material/open-in-new.svg
 override chrome://global/skin/icons/chevron.svg ../resources/chevron.svg
 override chrome://global/skin/icons/close.svg ../resources/close.svg
 override chrome://global/skin/icons/delete.svg ../resources/material/delete.svg

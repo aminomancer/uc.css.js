@@ -1374,12 +1374,18 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
   }
 
   .focus-tab-by-prompt-icon {
-    list-style-image: url(chrome://userchrome/content/notifications/focus-tab-by-prompt.svg);
+    list-style-image: url(chrome://userchrome/content/skin/tab.svg);
   }
 
   .popup-notification-icon[popupid="storage-access"],
-  .storage-access-icon {
+  .storage-access-icon,
+  .cookie-icon {
     list-style-image: url(chrome://userchrome/content/skin/controlcenter/3rdpartycookies.svg);
+  }
+
+  .storage-access-icon.blocked-permission-icon,
+  .cookie-icon.blocked-permission-icon {
+    list-style-image: url(chrome://userchrome/content/skin/controlcenter/3rdpartycookies-disabled.svg);
   }
 
   .popup-notification-icon[popupid="persistent-storage"],
@@ -1410,6 +1416,22 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
 
   .popup-notification-icon[popupid="geolocation"] {
     list-style-image: url(chrome://userchrome/content/notifications/geo-detailed.svg);
+  }
+
+  .open-protocol-handler-icon {
+    list-style-image: url(chrome://userchrome/content/material/open-in-new.svg);
+  }
+
+  .open-protocol-handler-icon.blocked-permission-icon {
+    list-style-image: url(chrome://userchrome/content/material/open-in-new-blocked.svg);
+  }
+
+  .shortcuts-icon {
+    list-style-image: url(chrome://userchrome/content/material/keyboard-command.svg);
+  }
+
+  .shortcuts-icon.blocked-permission-icon {
+    list-style-image: url(chrome://userchrome/content/material/keyboard-command-blocked.svg);
   }
 
   .xr-icon {
@@ -1523,9 +1545,17 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
     list-style-image: url(chrome://userchrome/content/notifications/midi.svg);
   }
 
+  .midi-icon.blocked-permission-icon {
+    list-style-image: url(chrome://userchrome/content/notifications/midi-blocked.svg);
+  }
+
   .midi-sysex-icon,
   .popup-notification-icon[popupid="midi-sysex"] {
     list-style-image: url(chrome://userchrome/content/material/midi-port.svg);
+  }
+
+  .midi-sysex-icon.blocked-permission-icon {
+    list-style-image: url(chrome://userchrome/content/material/midi-port-blocked.svg);
   }
 
   #canvas-notification-icon,
