@@ -310,11 +310,11 @@ so this still works for me. */
 :is(.webextension-browser-action, .eom-addon-button)[label^="Violentmonkey"] .toolbarbutton-icon,
 :is(.webextension-browser-action, .eom-addon-button)[data-extensionid="{aecec67f-0d10-4fa7-b7c7-609a2db280cf}"i]
   .toolbarbutton-icon {
-  list-style-image: url(chrome://userchrome/content/devtools/command-console.svg);
+  list-style-image: url(chrome://userchrome/content/devtools/tool-webconsole.svg);
 }
 
 .tabbrowser-tab[label$="Violentmonkey"] .tab-icon-image {
-  content: url(chrome://userchrome/content/devtools/command-console.svg) !important;
+  content: url(chrome://userchrome/content/devtools/tool-webconsole.svg) !important;
   fill: currentColor !important;
 }
 

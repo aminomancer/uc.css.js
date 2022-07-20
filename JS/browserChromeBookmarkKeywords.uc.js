@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Browser Chrome Bookmark Keywords
-// @version        1.1.0
+// @version        1.1.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Allow the creation of special keyword bookmarks with
@@ -88,7 +88,7 @@
   // User configuration settings
   const config = {
     // The icon that will show on browser chrome bookmark keyword results.
-    "Result icon URL": "chrome://devtools/skin/images/command-console.svg",
+    "Result icon URL": `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="context-fill" fill-opacity="context-fill-opacity"><path d="M0 4a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3H3a3 3 0 0 1-3-3V4zm3-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H3z" /><path d="M4.22 5.2a.62.62 0 0 1 .88.02l2.75 2.85c.23.24.23.62 0 .86L5.1 11.78a.63.63 0 0 1-.9-.86L6.53 8.5 4.2 6.08a.62.62 0 0 1 .02-.88z" /></svg>`,
 
     // The string that will show next to these results.
     // (e.g. instead of "Visit" or "Search with {engine}")
