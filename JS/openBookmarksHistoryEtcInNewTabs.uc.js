@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Open Bookmarks, History, etc. in New Tabs
-// @version        1.2.1
+// @version        1.2.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    In vanilla Firefox, browser.tabs.loadBookmarksInTabs only
@@ -28,8 +28,8 @@
   function init() {
     if (window.PlacesUIUtils && !PlacesUIUtils._hasBeenModifiedForOBHNT) {
       const lazy = {};
-      XPCOMUtils.defineLazyModuleGetters(lazy, {
-        PlacesUtils: "resource://gre/modules/PlacesUtils.jsm",
+      ChromeUtils.defineESModuleGetters(lazy, {
+        PlacesUtils: "resource://gre/modules/PlacesUtils.sys.mjs",
       });
       function getBrowserWindow(aWindow) {
         return aWindow &&
@@ -42,7 +42,7 @@
           PlacesUIUtils.openNodeWithEvent
             .toSource()
             .replace(/\(function PUIU_openNodeWithEvent/, "")
-            .replace(/ && PlacesUtils\.nodeIsBookmark\(aNode\)/, "")
+            .replace(/ && lazy.PlacesUtils\.nodeIsBookmark\(aNode\)/, "")
             .replace(/\)$/, "")
       );
       PlacesUIUtils._hasBeenModifiedForOBHNT = true;

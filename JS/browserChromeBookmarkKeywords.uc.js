@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Browser Chrome Bookmark Keywords
-// @version        1.1.1
+// @version        1.1.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Allow the creation of special keyword bookmarks with
@@ -116,31 +116,12 @@
   function init() {
     const lazy = {};
     XPCOMUtils.defineLazyModuleGetters(lazy, {
-      BrowserWindowTracker: "resource:///modules/BrowserWindowTracker.jsm",
-      L10nCache: "resource:///modules/UrlbarUtils.jsm",
-      ObjectUtils: "resource://gre/modules/ObjectUtils.jsm",
+      UrlbarUtils: "resource:///modules/UrlbarUtils.jsm",
       UrlbarPrefs: "resource:///modules/UrlbarPrefs.jsm",
       UrlbarProvidersManager: "resource:///modules/UrlbarProvidersManager.jsm",
-      UrlbarProviderTopSites: "resource:///modules/UrlbarProviderTopSites.jsm",
-      UrlbarSearchOneOffs: "resource:///modules/UrlbarSearchOneOffs.jsm",
-      UrlbarTokenizer: "resource:///modules/UrlbarTokenizer.jsm",
-      UrlbarUtils: "resource:///modules/UrlbarUtils.jsm",
-      BrowserSearchTelemetry: "resource:///modules/BrowserSearchTelemetry.jsm",
-      BrowserUIUtils: "resource:///modules/BrowserUIUtils.jsm",
-      CONTEXTUAL_SERVICES_PING_TYPES: "resource:///modules/PartnerLinkAttribution.jsm",
       ExtensionSearchHandler: "resource://gre/modules/ExtensionSearchHandler.jsm",
-      PrivateBrowsingUtils: "resource://gre/modules/PrivateBrowsingUtils.jsm",
-      PromiseUtils: "resource://gre/modules/PromiseUtils.jsm",
-      ReaderMode: "resource://gre/modules/ReaderMode.jsm",
       PartnerLinkAttribution: "resource:///modules/PartnerLinkAttribution.jsm",
-      SearchUIUtils: "resource:///modules/SearchUIUtils.jsm",
-      SearchUtils: "resource://gre/modules/SearchUtils.jsm",
-      UrlbarController: "resource:///modules/UrlbarController.jsm",
-      UrlbarEventBufferer: "resource:///modules/UrlbarEventBufferer.jsm",
-      UrlbarQueryContext: "resource:///modules/UrlbarUtils.jsm",
-      UrlbarSearchUtils: "resource:///modules/UrlbarSearchUtils.jsm",
-      UrlbarValueFormatter: "resource:///modules/UrlbarValueFormatter.jsm",
-      UrlbarView: "resource:///modules/UrlbarView.jsm",
+      CONTEXTUAL_SERVICES_PING_TYPES: "resource:///modules/PartnerLinkAttribution.jsm",
     });
 
     const UrlbarProvidersManager = gURLBar.view.controller.manager;
@@ -151,12 +132,6 @@
     schema.properties.ucjs = { type: "boolean" };
 
     if (!gURLBar.pickResult.BCBK_modified) {
-      const { ExtensionSearchHandler } = ChromeUtils.import(
-        "resource://gre/modules/ExtensionSearchHandler.jsm"
-      );
-      const { PartnerLinkAttribution, CONTEXTUAL_SERVICES_PING_TYPES } = ChromeUtils.import(
-        "resource:///modules/PartnerLinkAttribution.jsm"
-      );
       const SCALAR_CATEGORY_TOPSITES = "contextual.services.topsites.click";
       eval(
         `gURLBar.pickResult = function ` +
@@ -204,7 +179,7 @@
     class BrowserChromeBookmarkKeywords extends UrlbarProvider {
       /**
        * Returns the name of this provider.
-       * @returns {string} the name of this provider.
+       * @returns {string} The name of this provider.
        */
       get name() {
         return "BookmarkKeywords";
@@ -220,7 +195,7 @@
 
       /**
        * Returns the type of this provider.
-       * @returns {integer} one of the types from UrlbarUtils.PROVIDER_TYPE.*
+       * @returns {integer} One of the types from UrlbarUtils.PROVIDER_TYPE.*
        */
       get type() {
         return UrlbarUtils.PROVIDER_TYPE.HEURISTIC;
@@ -230,7 +205,7 @@
        * Whether this provider should be invoked for the given context.
        * If this method returns false, the providers manager won't start a query
        * with this provider, to save on resources.
-       * @param {UrlbarQueryContext} queryContext The query context object
+       * @param {UrlbarQueryContext} queryContext The query context object.
        * @returns {boolean} Whether this provider should be invoked for the search.
        */
       isActive(queryContext) {
@@ -256,7 +231,6 @@
        * element parameter, this is pretty much useless because it's not always
        * passed. If you really need to do something with the result element, I
        * suggest using this: gURLBar.view._rows.children[result.rowIndex]
-       *
        * @param {UrlbarResult} result The result that was picked.
        * @param {Event} event The event that picked the result.
        * @param {DOMElement} element The picked view element, if available.
@@ -273,9 +247,8 @@
 
       /**
        * Starts querying.
-       * @param {object} queryContext The query context object
-       * @param {function} addCallback Callback invoked by the provider to add a new
-       *        result.
+       * @param {object} queryContext The query context object.
+       * @param {function} addCallback Callback invoked by the provider to add a new result.
        */
       async startQuery(queryContext, addCallback) {
         let keyword = queryContext.tokens[0]?.value;
@@ -343,7 +316,6 @@
        * Returns a set of parameters if a keyword is registered and the search
        * string can be bound to it. For browser chrome keyword bookmarks, the
        * URL doesn't have to accept a search string.
-       *
        * @param {string} keyword The typed keyword.
        * @param {string} searchString The full search string, including the keyword.
        * @returns { entry, url, postData }

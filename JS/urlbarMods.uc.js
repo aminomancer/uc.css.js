@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Urlbar Mods
-// @version        1.7.0
+// @version        1.7.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Make some minor modifications to the urlbar. See the code
@@ -532,11 +532,13 @@ class UrlbarMods {
     if (!src1.includes("client.clientType")) {
       const lazy = {};
       XPCOMUtils.defineLazyModuleGetters(lazy, {
-        PlacesUtils: "resource://gre/modules/PlacesUtils.jsm",
         SyncedTabs: "resource://services-sync/SyncedTabs.jsm",
         UrlbarPrefs: "resource:///modules/UrlbarPrefs.jsm",
         UrlbarResult: "resource:///modules/UrlbarResult.jsm",
         UrlbarTokenizer: "resource:///modules/UrlbarTokenizer.jsm",
+      });
+      ChromeUtils.defineESModuleGetters(lazy, {
+        PlacesUtils: "resource://gre/modules/PlacesUtils.sys.mjs",
       });
       eval(
         `RemoteTabs.startQuery = async function ` +
