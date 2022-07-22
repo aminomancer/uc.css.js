@@ -425,6 +425,18 @@ panel[type="autocomplete-richlistbox"]
 
 @-moz-document url("chrome://global/content/pictureinpicture/player.xhtml")
 {
+  :root {
+    --panel-bgcolor: var(--in-content-button-highlight-dark) !important;
+  }
+
+  .box {
+    background-color: var(--panel-bgcolor) !important;
+  }
+
+  .arrow {
+    border-top-color: var(--panel-bgcolor) !important;
+  }
+
   .control-item {
     /* backdrop-filter has been temporarily disabled by mozilla */
     /* backdrop-filter: blur(8px) !important;
@@ -439,7 +451,7 @@ panel[type="autocomplete-richlistbox"]
     border-radius: 3px !important;
   }
 
-  body:not(:fullscreen) #controls:hover .control-item {
+  body:not(:fullscreen) #controls:is(:hover, [donthide]) .control-item {
     opacity: 1 !important;
   }
 
@@ -473,6 +485,10 @@ panel[type="autocomplete-richlistbox"]
 
   #unpip {
     --pip-icon: url(chrome://userchrome/content/pictureinpicture-closed.svg);
+  }
+
+  #closed-caption {
+    --pip-icon: url(chrome://userchrome/content/material/closed-caption-settings.svg);
   }
 }
 

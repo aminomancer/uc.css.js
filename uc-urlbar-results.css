@@ -38,14 +38,15 @@ by underlining them (requires urlbarMods.uc.js) */
   color: var(--panel-shortcut-focus);
 }
 
-.urlbarView-row[selected] > .urlbarView-row-inner,
+.urlbarView-row[selected]:not([dynamicType="quickactions"]) > .urlbarView-row-inner,
 .urlbarView-row:is([dynamicType="calculator"], [has-help="true"]) > .urlbarView-row-inner[selected],
 .urlbarView-help[selected] {
   background-color: var(--arrowpanel-dimmed-further) !important;
   fill-opacity: 1;
 }
 
-.urlbarView-row:not([selected]):hover > .urlbarView-row-inner:not([selected]),
+.urlbarView-row:not([selected], [dynamicType="quickactions"]):hover
+  > .urlbarView-row-inner:not([selected]),
 .urlbarView-help:not([selected]):hover {
   background-color: var(--arrowpanel-dimmed) !important;
 }
@@ -99,6 +100,64 @@ by underlining them (requires urlbarMods.uc.js) */
   box-sizing: border-box !important;
   border-radius: 10px !important;
   background-color: var(--arrowpanel-faint) !important;
+}
+
+.urlbarView-row[dynamicType="quickactions"] > .urlbarView-row-inner {
+  gap: 4px calc(var(--urlbar-icon-padding) + 2px) !important;
+  padding-inline: 2px !important;
+}
+
+.urlbarView-row[dynamicType="quickactions"] .urlbarView-quickaction-row {
+  background: var(--arrowpanel-faint) !important;
+  border-radius: 20px !important;
+  padding: 4px 7px !important;
+  align-items: normal !important;
+  line-height: 13px !important;
+  height: 24px !important;
+  box-sizing: border-box !important;
+  border: 1px solid var(--panel-separator-color) !important;
+  outline: none !important;
+  margin: 0 !important;
+  gap: 4px !important;
+  font-size: 0.85em !important;
+  color: var(--panel-description-color) !important;
+}
+
+.urlbarView-row[dynamicType="quickactions"]
+  .urlbarView-quickaction-row:hover {
+  background: var(--uc-arrowpanel-dimmed) !important;
+  color: var(--panel-shortcut-focus) !important;
+  fill-opacity: 1 !important;
+}
+
+.urlbarView-row[dynamicType="quickactions"]
+  .urlbarView-quickaction-row:is(:focus-visible, [selected]) {
+  background: var(--uc-arrowpanel-dimmed-further) !important;
+  border-color: transparent !important;
+  color: var(--panel-shortcut-focus) !important;
+  fill-opacity: 1 !important;
+}
+
+.urlbarView-row[dynamicType="quickactions"] .urlbarView-label {
+  font-size: inherit !important;
+  font-weight: var(--urlbar-result-strong-font-weight, 500) !important;
+  color: inherit !important;
+}
+
+.urlbarView-row[dynamicType="quickactions"]
+  .urlbarView-quickaction-row:is(:hover, :focus-visible, [selected])
+  .urlbarView-label {
+  opacity: 1;
+}
+
+.urlbarView-row[dynamicType="quickactions"] .urlbarView-favicon {
+  -moz-context-properties: fill, fill-opacity !important;
+  fill: currentColor !important;
+}
+
+.urlbarView-row[dynamicType="quickactions"] :where(.urlbarView-favicon, .urlbarView-favicon-img) {
+  width: 14px !important;
+  height: 14px !important;
 }
 
 .urlbarView-favicon {

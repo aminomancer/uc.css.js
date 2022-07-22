@@ -641,6 +641,10 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
       font-weight: var(--uc-font-weight-thin, 400) !important;
     }
 
+    .urlbarView-row[dynamicType="quickactions"] .urlbarView-quickaction-row {
+      line-height: 14px !important;
+    }
+
     .urlbarView-row .urlbarView-tag strong {
       font-weight: inherit !important;
     }

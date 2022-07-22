@@ -117,6 +117,25 @@ override chrome://activity-stream/content/data/content/assets/glyph-highlights-1
 override chrome://activity-stream/content/data/content/assets/glyph-info-16.svg ../resources/glyph-info-16.svg
 override chrome://activity-stream/content/data/content/assets/glyph-webextension-16.svg ../resources/material/extension.svg
 override chrome://devtools/content/debugger/images/sources/extension.svg ../resources/material/extension.svg
+override chrome://devtools/skin/images/command-chevron.svg ../resources/devtools/command-chevron.svg
+override chrome://devtools/skin/images/command-console.svg ../resources/devtools/command-console.svg
+override chrome://devtools/skin/images/command-eyedropper.svg ../resources/devtools/command-eyedropper.svg
+override chrome://devtools/skin/images/command-measure.svg ../resources/devtools/command-measure.svg
+override chrome://devtools/skin/images/command-noautohide.svg ../resources/devtools/command-noautohide.svg
+override chrome://devtools/skin/images/command-paintflashing.svg ../resources/devtools/command-paintflashing.svg
+override chrome://devtools/skin/images/command-pick.svg ../resources/devtools/command-pick.svg
+override chrome://devtools/skin/images/command-pick-accessibility.svg ../resources/devtools/command-pick-accessibility.svg
+override chrome://devtools/skin/images/command-rulers.svg ../resources/devtools/command-rulers.svg
+override chrome://devtools/skin/images/command-screenshot.svg ../resources/devtools/command-screenshot.svg
+override chrome://devtools/skin/images/tool-webconsole.svg ../resources/devtools/tool-webconsole.svg
+override chrome://devtools/skin/images/tool-storage.svg ../resources/devtools/tool-storage.svg
+override chrome://devtools/skin/images/tool-memory.svg ../resources/devtools/tool-memory.svg
+override chrome://devtools/skin/images/tool-inspector.svg ../resources/devtools/tool-inspector.svg
+override chrome://devtools/skin/images/tool-debugger.svg ../resources/devtools/tool-debugger.svg
+override chrome://devtools/skin/images/tool-application.svg ../resources/devtools/tool-application.svg
+override chrome://devtools/skin/images/tool-accessibility.svg ../resources/devtools/tool-accessibility.svg
+override chrome://devtools/skin/images/tool-dom.svg ../resources/devtools/tool-dom.svg
+override chrome://devtools/skin/images/tool-styleeditor.svg ../resources/devtools/tool-styleeditor.svg
 
 # Basic content stylesheets, e.g., for plain text and "view source" documents.
 resource content-accessible chrome://userchrome/content/layout/contentaccessible/ contentaccessible=yes
