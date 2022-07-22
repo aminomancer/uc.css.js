@@ -210,6 +210,10 @@ mouse would then be on top of the tooltip popup not the main window. */
   box-shadow: none !important;
 }
 
+#eom-theme-preview-tooltip[position] {
+  margin: -3px -5px !important;
+}
+
 :is(#mainPopupSet, .sidebar-panel) > #aHTMLTooltip description {
   overflow-wrap: anywhere !important;
   text-overflow: ellipsis !important;

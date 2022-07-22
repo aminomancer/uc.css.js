@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Extension Stylesheet Loader
-// @version        1.0.2
+// @version        1.1.0
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Allows users to share stylesheets for webextensions without
@@ -53,8 +53,8 @@ class ExtensionStylesheetLoader {
       type: "manifest",
     });
     this.childFile = await this.createTempFile(
-      `"use strict";const EXPORTED_SYMBOLS=["ExtensionStylesheetLoaderChild"];const{WebExtensionPolicy}=Cu.getGlobalForObject(Cu);class ExtensionStylesheetLoaderChild extends JSWindowActorChild{handleEvent(e){let policy=WebExtensionPolicy.getByHostname(this.document.location.hostname);if(policy&&policy.id)this.document.documentElement.setAttribute("uc-extension-id",policy.id)}}`,
-      { name: "ExtensionStylesheetLoaderChild", type: "jsm" }
+      `"use strict";const{WebExtensionPolicy}=Cu.getGlobalForObject(Cu);export class ExtensionStylesheetLoaderChild extends JSWindowActorChild{handleEvent(e){let policy=WebExtensionPolicy.getByHostname(this.document.location.hostname);if(policy&&policy.id)this.document.documentElement.setAttribute("uc-extension-id",policy.id)}}`,
+      { name: "ExtensionStylesheetLoaderChild", type: "sys.mjs" }
     );
 
     tempDir.append(this.manifestFile.name);
@@ -62,7 +62,7 @@ class ExtensionStylesheetLoader {
     else return;
     ChromeUtils.registerWindowActor("ExtensionStylesheetLoader", {
       child: {
-        moduleURI: this.childFile.url,
+        esModuleURI: this.childFile.url,
         events: { DOMDocElementInserted: {} },
       },
       allFrames: true,

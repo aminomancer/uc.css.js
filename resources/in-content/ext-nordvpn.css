@@ -62,6 +62,10 @@
     gap: 6px;
   }
 
+  :root[uc-extension-id="nordvpnproxy@nordvpn.com"] :not(.nord-button) > svg:not(.svg-no-color) *:is([fill], [stroke]) {
+    filter: invert(1) !important;
+  }
+
   :root[uc-extension-id="nordvpnproxy@nordvpn.com"] .locations-link-text > svg {
     display: none !important;
   }

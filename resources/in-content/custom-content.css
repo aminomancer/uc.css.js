@@ -4,4 +4,141 @@ and when you update you can preserve your modifications by just updating everyth
 /* add a dummy rule so this will be loaded by the style editor on any page. */
 :root {
   --uc-dummy-custom-property: initial;
+  --transparent-img-background: transparent !important;
+}
+
+@-moz-document regexp("^http.?://.*\.wizards\.com.*$")
+{
+  #content-wrapper {
+    background-image: url(chrome://userchrome/content/texture/lightnoise.png) !important;
+    transition: transform 0.3s linear 0s;
+  }
+}
+
+@-moz-document regexp(".*://.*mail.google.com.*")
+{
+  .dw .no {
+    float: none !important;
+  }
+}
+
+@-moz-document domain("dramacool.bid") {
+  body
+    > div[style*="z-index: 99999"][style*="position: fixed"][style*="bottom: 0"][style*="width: 100%"] {
+    display: none !important;
+  }
+}
+
+@-moz-document domain("youtube.com") {
+  .ytp-doubletap-ui-legacy {
+    display: none !important;
+  }
+
+  #movie_player:not(:hover, .paused-mode, .ytp-embed) :is(.ytp-chrome-bottom, .ytp-gradient-bottom),
+  #movie_player:not(:hover, .paused-mode, .ytp-embed, .ytp-cards-teaser-shown) .ytp-cards-button {
+    opacity: 0 !important;
+  }
+
+  #movie_player:not(:hover, .paused-mode, .ytp-embed, .ytp-ad-overlay-open) .ytp-iv-player-content {
+    bottom: 12px !important;
+  }
+}
+
+@-moz-document domain("play.hbomax.com") {
+  .default[style*='background-image: url("assets/images/player_controls/desktop/player_protection_DT.png");'] {
+    height: 100% !important;
+  }
+}
+
+@-moz-document domain("cardmarket.com") {
+  body {
+    background: none !important;
+  }
+}
+
+@-moz-document domain("vatican.va") {
+  body[background="/img/sfondo.jpg"] {
+    background: none !important;
+  }
+}
+
+@-moz-document domain("reasonablefaith.org") {
+  .main-section-dot-bg::before {
+    background-image: none !important;
+  }
+}
+
+@-moz-document domain("abortiondocs.org") {
+  main {
+    background-image: none !important;
+  }
+}
+
+@-moz-document regexp("^http.*://www.netflix.com/watch/.*$") {
+  :root[foreign-audio] .watch-video .player-timedtext-text-container {
+    bottom: calc(40%) !important;
+  }
+}
+
+@-moz-document domain("stackoverflow.com") {
+  html,
+  body {
+    --ff-mono: Fira Code UC, Fira Code, SF Mono, Menlo, Consolas, Monaco, -moz-fixed,
+      monospace !important;
+  }
+}
+
+@-moz-document regexp("^moz-extension://.*/.*") {
+  :root[uc-extension-id="{aecec67f-0d10-4fa7-b7c7-609a2db280cf}"i] .page-popup .logo {
+    background-image: url(chrome://userchrome/content/devtools/tool-webconsole.svg);
+    background-repeat: no-repeat;
+    background-size: 80%;
+    background-position: center;
+    -moz-context-properties: fill;
+    fill: hsla(0, 0%, 100%, 0.9);
+  }
+
+  :root[uc-extension-id="{aecec67f-0d10-4fa7-b7c7-609a2db280cf}"i] .page-popup .logo > img {
+    visibility: hidden;
+  }
+
+  :root[uc-extension-id="{aecec67f-0d10-4fa7-b7c7-609a2db280cf}"i] .aside-content {
+    background-image: url(chrome://userchrome/content/devtools/tool-webconsole.svg) !important;
+    background-repeat: no-repeat !important;
+    background-size: 70px 70px !important;
+    background-position: top 67px right 14px !important;
+    -moz-context-properties: fill !important;
+    fill: hsla(0, 0%, 100%, 0.9) !important;
+  }
+
+  :root[uc-extension-id="{aecec67f-0d10-4fa7-b7c7-609a2db280cf}"i] .aside-content > img {
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+
+  :root[uc-extension-id="{aecec67f-0d10-4fa7-b7c7-609a2db280cf}"i] .script-icon:not(img) img[src^="/public/images/icon"][src$=".png"]:not([src$="b.png"], [src$="w.png"]) {
+    padding-right: 100% !important;
+    padding-top: 100% !important;
+    box-sizing: border-box !important;
+    background-image: url(chrome://userchrome/content/skin/readerMode.svg) !important;
+    background-repeat: no-repeat !important;
+    background-size: contain !important;
+    background-position: center !important;
+    -moz-context-properties: fill !important;
+    fill: hsla(0, 0%, 100%, 0.4) !important;
+  }
+
+  :root[uc-extension-id="{aecec67f-0d10-4fa7-b7c7-609a2db280cf}"i] .scripts {
+    --num-columns: 2 !important;
+    max-width: 60vw !important;
+  }
+
+  :root[uc-extension-id="{aecec67f-0d10-4fa7-b7c7-609a2db280cf}"i] .edit-settings.edit-body {
+    display: flex;
+    flex-flow: column nowrap !important;
+  }
+
+  :root[uc-extension-id="{aecec67f-0d10-4fa7-b7c7-609a2db280cf}"i] .edit-settings .form-group {
+    max-width: 60vw !important;
+  }
 }
