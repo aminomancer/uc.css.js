@@ -1084,7 +1084,7 @@ If you already use these hotkeys for something else, e.g., an extension, you can
 
 #### [Tab Animation Workaround](/JS/tabAnimation.uc.js):
 
-✨ A tiny script to clean up transitions/animations on Firefox tabs' close buttons, favicons, etc. Required for duskFox. See the file description for more details.
+✨ A tiny script required for duskFox. This doesn't have any visible effects, it's just a background support piece required to make the CSS theme work correctly. It cleans up transitions/animations on Firefox tabs. The first part involves making sure pinned tabs will be placed correctly. Without this script, we couldn't smoothly animate the width transition when pinning/unpinning tabs, because it would interfere with calculating the placement of tabs. The second part involves making sure that certain tab animations don't begin until the paint immediately after tabs are created/moved. Otherwise, they would start and stop within less than 1 frame.
 
 #### [Tab Loading Spinner Animation](/JS/tabLoadingSpinner.uc.js):
 

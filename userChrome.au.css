@@ -421,7 +421,9 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
   :root[sessionrestored]
     #tabbrowser-tabs:not([movingtab])
     .tabbrowser-tab[pinned]:not([justmoved], [tab-grouping], [tabdrop-samewindow]) {
-    transition: min-width 200ms ease-out, max-width 150ms ease-out;
+    -moz-box-flex: 0;
+    transition: min-width 200ms ease-out, max-width 150ms ease-out,
+      -moz-box-flex 300ms var(--uc-smooth-timing-function);
   }
 
   :root[sessionrestored]
