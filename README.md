@@ -127,7 +127,7 @@ I also recommend setting the following prefs in `about:config`. There are two pr
 | <i>ui.systemUsesDarkTheme</i> | Number | 1 | Enable _browser_ dark scheme |
 | <i>layout.css.prefers-color-scheme.content-override</i> | Number | 0 | Enable _content_ dark scheme |
 | <i>ui.selecteditem</i> | String | `#2F3456` | Background for selected `<option>` elements and others |
-| <i>ui.highlight</i> | String | `hsla(245, 100%, 66%, .55)` | Selection background, among others |
+| <i>ui.highlight</i> | String | `hsl(250, 100%, 60%)` | Configure the system color "Highlight" |
 | <i>ui.selecteditemtext</i> | String | `#FFFFFFCC` | Text color for selected `<option>` elements and others |
 | ui.textHighlightBackground | String | `#7755FF` | These prefs control the appearance of text highlighted by the findbar. I choose white text on purple/pink background |
 | ui.textHighlightForeground | String | `#FFFFFF` | |

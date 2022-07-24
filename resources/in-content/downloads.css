@@ -217,6 +217,8 @@
     background: var(--download-button-active-bg) !important;
   }
 
+  #downloadsListBox > richlistitem.download-state.downloadHoveringButton[state="1"][exists]:hover,
+  #downloadsListBox > richlistitem.download-state.downloadHoveringButton:is([verdict], .openWhenFinished):hover,
   richlistitem.download-state[state="1"][exists]:focus-within:not(:focus-visible),
   richlistitem.download-state:is([verdict], .openWhenFinished):focus-within:not(:focus-visible) {
     background: var(--download-button-focus-within-bg) !important;
