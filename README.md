@@ -147,9 +147,10 @@ I also recommend setting the following prefs in `about:config`. There are two pr
 | userChrome.css.menupopup-shadows | Boolean | false | Add a shadow behind context menus and panels |
 | userChrome.css.overlay-scrollbars.in-content | Boolean | false | Overlay scrollbars are already enabled in the chrome UI. This pref enables them in web content |
 | widget.non-native-theme.scrollbar.style | Number | 2 | Enable the GTK scrollbar style in web content, regardless of your OS. Supports: 0 (default), 1 (macOS), 2 (GTK), 3 (android), 4 (win10), 5 (win11) |
-| widget.non-native-theme.win.scrollbar.use-system-size | Boolean | false | Override the scrollbar size (for Windows) |
 | widget.non-native-theme.scrollbar.size.override | Number | 11 | Make the scrollbar track 11px wide for GTK (scrollbar.style = 2) |
 | widget.non-native-theme.gtk.scrollbar.thumb-size | Number | 0.818 | Make the scrollbar thumb 9px wide for GTK |
+| widget.non-native-theme.win.scrollbar.use-system-size | Boolean | false | Override the scrollbar size (for Windows) |
+| <i>widget.non-native-theme.solid-outline-style</i> | Boolean | true | Whether `outline-style: auto` should be one big stroke or two contrasting strokes |
 | userChrome.css.remove-tooltip-borders | Boolean | false | Remove the thin border on tooltips. Not recommended |
 | userChrome.css.titlebar-buttons-on-left | Boolean | false | If true, move the titlebar buttons (close/min/max) to the left side of the window |
 | userChrome.css.wikipedia.dark-theme-enabled | Boolean | false | Enable the custom dark theme for Wikipedia.org (this is deprecated, I recommend skipping it) |
