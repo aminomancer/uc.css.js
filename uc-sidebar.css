@@ -12,9 +12,8 @@ appearance of the built-in sidebars, e.g. bookmarks, history, etc. */
 }
 
 #sidebar-box {
-  --lwt-sidebar-background-color: var(--ui-secondary-bg) !important;
-  --sidebar-background-color: var(--lwt-sidebar-background-color) !important;
-  --sidebar-text-color: var(--toolbar-color) !important;
+  --sidebar-background-color: var(--ui-secondary-bg) !important;
+  --sidebar-border-color: var(--uc-menu-border-color) !important;
   display: flex !important;
   position: absolute !important;
   top: 0 !important;
@@ -26,6 +25,34 @@ appearance of the built-in sidebars, e.g. bookmarks, history, etc. */
   box-shadow: 0px 0px 8px -4px hsla(240, 4%, 0%, 0.6), 0px 0px 15px 0px hsla(0, 0%, 0%, 0.2) !important;
 }
 
+/* for addon sidebars, use gray colors for the header instead of indigo.
+for use with tooltipStyler.uc.js - won't do anything without that script. */
+#sidebar-box[content-style]:not([sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"], [sidebarcommand="viewBookmarksSidebar"], [sidebarcommand="viewHistorySidebar"], [sidebarcommand="viewTabsSidebar"]) {
+  --sidebar-background-color: var(--in-content-bg-dark) !important;
+  --sidebar-text-color: var(--toolbar-color) !important;
+  --sidebar-border-color: var(--in-content-border-color-dim) !important;
+  --arrowpanel-dimmed: color-mix(in srgb, var(--uc-toolbar-color) 7%, transparent);
+  --arrowpanel-dimmed-further: color-mix(in srgb, var(--uc-toolbar-color) 12%, transparent);
+  --arrowpanel-dimmed-even-further: color-mix(in srgb, var(--uc-toolbar-color) 15%, transparent);
+  --button-bgcolor: var(--arrowpanel-dimmed);
+  --button-hover-bgcolor: var(--arrowpanel-dimmed-further);
+  --button-active-bgcolor: var(--arrowpanel-dimmed-even-further);
+}
+
+#sidebar-header {
+  top: 0 !important;
+  padding: 6px !important;
+  border-bottom: 0px solid transparent !important;
+  background-color: var(--sidebar-background-color) !important;
+  color: inherit !important;
+  font-size: 1.2em !important;
+}
+
+#sidebar-box[content-style]:is([sidebarcommand="viewBookmarksSidebar"], [sidebarcommand="viewHistorySidebar"], [sidebarcommand="viewTabsSidebar"])
+  #sidebar-header {
+  padding-bottom: 3px !important;
+}
+
 #sidebar-box[hidden] {
   display: none !important;
 }
@@ -35,18 +62,14 @@ appearance of the built-in sidebars, e.g. bookmarks, history, etc. */
   right: 0 !important;
 }
 
-#sidebar-header {
-  top: 0 !important;
-}
-
 #sidebar,
 #sidebar-search-container,
 .sidebar-panel {
-  --lwt-sidebar-background-color: inherit !important;
   --sidebar-background-color: inherit !important;
   --sidebar-text-color: inherit !important;
+  --sidebar-border-color: inherit !important;
   background-color: var(--sidebar-background-color) !important;
-  color: var(--toolbar-color) !important;
+  color: var(--sidebar-text-color) !important;
 }
 
 #sidebar {
@@ -56,15 +79,6 @@ appearance of the built-in sidebars, e.g. bookmarks, history, etc. */
 
 .sidebar-placesTree {
   background-color: inherit !important;
-}
-
-#sidebar-header {
-  padding: 6px !important;
-  padding-bottom: 3px !important;
-  border-bottom: 0px solid transparent !important;
-  background-color: var(--ui-secondary-bg) !important;
-  color: inherit !important;
-  font-size: 1.2em !important;
 }
 
 #sidebar-switcher-target {

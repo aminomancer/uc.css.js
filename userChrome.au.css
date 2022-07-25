@@ -537,6 +537,8 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
   #customizationPaletteItemContextMenu::part(content),
   #customizationPanelItemContextMenu[backdrop-color="gray"],
   #customizationPanelItemContextMenu[backdrop-color="gray"]::part(content),
+  #sidebarMenu-popup[backdrop-color="gray"],
+  #sidebarMenu-popup[backdrop-color="gray"]::part(content),
   window#alertNotification #alertSettings :is(menupopup, panel)::part(content) {
     --arrowpanel-dimmed: color-mix(in srgb, var(--uc-toolbar-color) 7%, transparent);
     --arrowpanel-dimmed-further: color-mix(in srgb, var(--uc-toolbar-color) 12%, transparent);

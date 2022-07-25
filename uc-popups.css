@@ -827,7 +827,7 @@ rtl languages. adjust the border radius accordingly */
   }
 
   .dialog-button-box > button:not([disabled="true"]):focus-visible {
-    outline-style: auto !important;
+    outline: var(--default-focusring) !important;
   }
 
   .dialog-button-box > button:not([disabled="true"]):hover:active,
@@ -863,6 +863,7 @@ rtl languages. adjust the border radius accordingly */
   dialog input:-moz-focusring,
   button:-moz-focusring {
     box-shadow: none !important;
+    outline: var(--default-focusring);
   }
 
   #checkboxContainer checkbox {
