@@ -1346,7 +1346,7 @@ Various tiny mods not worth making separate scripts for. Read the comments [insi
     <li><a href="https://github.com/henryxrl"><img src="https://avatars.githubusercontent.com/u/7662954?v=4" width="14"/> Henry Xu (henryxrl)</a></li>
 </ul>
 
-I've stopped accepting personal donations for the foreseeable future. But if you still want to offer me some encouragement, I would be immensely gratified if you would support the adoption of orphans with special needs by [contributing to Reece's Rainbow](https://reecesrainbow.org/). Without a major boost in fundraising, many of these children are likely to remain trapped in austere conditions [for their entire lives](https://www.theguardian.com/global-development-professionals-network/2016/sep/26/orphanage-locked-up-disabled-children-lumos-dri-human-rights). If you donate, please save the confirmation and post it [in a new issue]("/../../issues/new/choose"), and I'll add it to the list above.
+I've stopped accepting personal donations for the foreseeable future. But if you still want to offer me some encouragement, I would be immensely gratified if you would support the adoption of orphans with special needs by [contributing to Reece's Rainbow](https://reecesrainbow.org/). Without a major boost in fundraising, many of these children are likely to remain trapped in austere conditions [for their entire lives](https://www.theguardian.com/global-development-professionals-network/2016/sep/26/orphanage-locked-up-disabled-children-lumos-dri-human-rights). If you donate, please save the confirmation and post it [in a new issue](/../../issues/new/choose), and I'll add it to the list above.
 
 ## **Other useful links:**
 
