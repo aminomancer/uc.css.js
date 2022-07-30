@@ -46,7 +46,7 @@ A Firefox theme (duskFox) and a variety of privileged scripts to add new behavio
     - [🧰 Styling browser toolbox windows](#styling-browser-toolbox-windows)
   - [📚 Script conventions](#script-conventions)
   - [🏷 Script descriptions & links](#script-descriptions--links)
-- [💝 Sponsors](#thanks-to-my-sponsors-for-supporting-this-project)
+- [💝 Sponsors](#thanks-to-my-past-sponsors-for-supporting-this-project)
 - [🔗 Other useful links](#other-useful-links)
 - [🎫 License](/LICENSE)
 
