@@ -58,6 +58,7 @@ menupopup#viewSidebarMenu
   --pageAction-image-32px: url(chrome://userchrome/content/skin/container-go.svg) !important;
 }
 
+/* sort bookmarks */
 :is(.webextension-browser-action, .eom-addon-button)[data-extensionid="sort-bookmarks@heftig"]
   .toolbarbutton-icon {
   list-style-image: url(chrome://userchrome/content/skin/sort.svg);

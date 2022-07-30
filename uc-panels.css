@@ -1461,6 +1461,7 @@ toolbar button slider script. but just in case) */
   padding-block: 4px 8px;
 }
 
+.unified-extensions-panel-header > h1,
 .panel-header > h1 {
   font-size: 1.1em !important;
   line-height: normal !important;
