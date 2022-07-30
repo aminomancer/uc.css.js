@@ -501,7 +501,7 @@ checkbox[native]:-moz-focusring > .checkbox-label-box {
 checkbox[native]:focus-visible > .checkbox-check,
 radiogroup:focus-visible radio[focused="true"] > .radio-check,
 radiogroup deck menulist:focus-visible {
-  outline: var(--default-focusring);
+  outline: var(--default-focusring, auto);
 }
 
 toolbarbutton:focus-visible,

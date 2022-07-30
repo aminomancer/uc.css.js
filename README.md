@@ -842,15 +842,13 @@ In vanilla Firefox, `browser.tabs.loadBookmarksInTabs` only affects bookmark ite
 
 #### [Open Bookmark in Container Tab (context menu)](/JS/openBookmarkInContainerTab.uc.js):
 
-Adds a new menu to context menus prompted by right-clicking bookmarks, history entries, etc. that allows you to open them in a container tab.<details><summary>💬 <i><b>More details...</b></i></summary>
+Adds a new menu to context menus prompted by right-clicking bookmarks, history entries, etc. that allows you to open them in a container tab. This menu has now been added to Firefox, but as of v105, it only applies to single bookmarks/tabs. With the script installed, it will also appear when right-clicking a folder or a synced device.<details><summary>💬 <i><b>More details...</b></i></summary>
 
-This does basically the same thing as the [similarly-named addon](https://addons.mozilla.org/firefox/addon/open-bookmark-in-container-tab) by Rob Wu, except it also supports history entries and synced tabs, and of course the method is very different. By doing this with an autoconfig script instead of an addon, we can make the menu appear in a logical order, towards the top of the context menu where all the other "open in x" menu items are, rather than at the very bottom where context menu items from addons always go.
+The menu will be present in _all_ context menus where you'd be able to open a bookmark, history entry, or synced tab, including menus, popups, panels, and even the Library/Bookmarks Manager window. However, for synced tabs, it will only be present in the sidebar, not in the profile panel, because the profile panel lacks a context menu.
 
-The menu will be present in _all_ context menus where you'd be able to open a bookmark, history entry, or synced tab, including menus, popups, panels, and even the Library/Bookmarks Manager window. However, for synced tabs, it will only be present in the sidebar, not in the profile panel, because the profile panel lacks a context menu in the first place. Right-clicking a synced tab in the profile panel simply opens the synced tab rather than opening a context menu.
+Update: Firefox has implemented a similar menu for bookmarks and history items. It doesn't yet support opening all bookmarks or tabs in a folder. So for the moment, this script still has some purpose. It's been updated to avoid making a redundant menu, so if you see 2 identical menus, update your script with the version on this repo.
 
-Update: Firefox has implemented a similar menu for bookmarks and history items. It doesn't yet support opening all bookmarks in a folder, and it doesn't add a similar menu to the synced tabs sidebar. So for the moment, this script still has some purpose. It's been updated to avoid making a redundant menu, so if you see 2 identical menus, update your script with the version on this repo.
-
-If you use this script and Firefox Multi-Account Containers, turn off the redundant extension menus in `about:addons` > Firefox Multi-Account Containers > Options > "Enable Bookmark Menus"
+If you use both this script and Firefox Multi-Account Containers, turn off the redundant extension menus in `about:addons` > Firefox Multi-Account Containers > Options > "Enable Bookmark Menus"
 
 </details>
 

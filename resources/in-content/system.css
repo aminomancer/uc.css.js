@@ -195,8 +195,14 @@
     outline: none !important;
   }
 
-  window:not([chromehidden]) > dialog richlistbox[seltype="multiple"]:focus > richlistitem[current="true"],
-  window:not([chromehidden]) > dialog richlistbox.theme-listbox:focus > richlistitem[current="true"] {
+  window:not([chromehidden])
+    > dialog
+    richlistbox[seltype="multiple"]:focus
+    > richlistitem[current="true"],
+  window:not([chromehidden])
+    > dialog
+    richlistbox.theme-listbox:focus
+    > richlistitem[current="true"] {
     outline: none !important;
   }
 

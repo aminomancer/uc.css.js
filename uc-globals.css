@@ -270,7 +270,7 @@ but other than that these variables should be available everywhere. */
   --search-box-color: hsl(229, 32%, 23%);
   --search-box-focus: hsl(229, 27%, 27%);
   --search-box-null: hsl(230, 30%, 20%);
-  --search-box-focus-outline-color: var(--purple-30);
+  --search-box-focus-outline-color: var(--global-focus-outline-color);
   --textbox-button-hidden: hsla(240, 100%, 89%, 0);
   --confirmation-hint-color: var(--ui-text-100);
   --confirmation-hint-bgcolor: hsl(240, 60%, 59%);
@@ -412,7 +412,7 @@ but other than that these variables should be available everywhere. */
   --uc-switch-off-active-background: hsl(233, 19%, 24.5%);
   --uc-switch-off-hover-border: hsl(233, 15%, 32%);
 
-  accent-color: var(--purple-40);
+  accent-color: var(--global-focus-outline-color);
 }
 
 :root[fxastatus="not_configured"] {

@@ -83,10 +83,10 @@ menuitem#sanitizeItem > .menu-text,
 #placesContext_new\:separator .menu-text,
 :is(#placesContext_open\:container, #placesContext_openContainer\:container, #placesContext_openLinks\:container, #placesContext_open\:newcontainertab)
   > .menu-text,
-:is(#syncedTabsOpenAllInContainer, #syncedTabsOpenInContainer) > .menu-text,
+:is(#syncedTabsOpenAllInContainer, #syncedTabsOpenSelectedInContainerTab) > .menu-text,
 #bookmark-menu-container_robwu_nl-menuitem-_bookmark-menu-item:not(.menuitem-iconic) > .menu-text,
 #placesContext
-  > :is(menu, menuitem)[label="Open in a New Container Tab"]:not(.menuitem-iconic)
+  > :is(menu, menuitem)[label="Open in New Container Tab"]:not(.menuitem-iconic)
   > .menu-text,
 #menu_FileQuitItem .menu-text,
 #context_openANewTab .menu-text,
@@ -526,10 +526,10 @@ menuitem#repair-text-encoding::before,
 #placesContext_new\:folder::before,
 #placesContext_new\:separator::before,
 :is(#placesContext_open\:container, #placesContext_openContainer\:container, #placesContext_openLinks\:container, #placesContext_open\:newcontainertab)::before,
-:is(#syncedTabsOpenAllInContainer, #syncedTabsOpenInContainer)::before,
+:is(#syncedTabsOpenAllInContainer, #syncedTabsOpenSelectedInContainerTab)::before,
 #bookmark-menu-container_robwu_nl-menuitem-_bookmark-menu-item:not(.menuitem-iconic)::before,
 #placesContext
-  > :is(menu, menuitem)[label="Open in a New Container Tab"]:not(.menuitem-iconic)::before,
+  > :is(menu, menuitem)[label="Open in New Container Tab"]:not(.menuitem-iconic)::before,
 #context-markAsRead::before,
 #context-markAsUnread::before,
 :is(#context_bookmarkTab, #context_bookmarkSelectedTabs, #toolbar-context-bookmarkSelectedTab, #toolbar-context-bookmarkSelectedTabs)::before,
@@ -1112,10 +1112,10 @@ menuitem.customize-context-CopyID::before {
 }
 
 :is(#placesContext_open\:container, #placesContext_openContainer\:container, #placesContext_openLinks\:container, #placesContext_open\:newcontainertab)::before,
-:is(#syncedTabsOpenAllInContainer, #syncedTabsOpenInContainer)::before,
+:is(#syncedTabsOpenAllInContainer, #syncedTabsOpenSelectedInContainerTab)::before,
 #bookmark-menu-container_robwu_nl-menuitem-_bookmark-menu-item:not(.menuitem-iconic)::before,
 #placesContext
-  > :is(menu, menuitem)[label="Open in a New Container Tab"]:not(.menuitem-iconic)::before,
+  > :is(menu, menuitem)[label="Open in New Container Tab"]:not(.menuitem-iconic)::before,
 #context-openlinkincontainertab::before {
   background-image: url(chrome://userchrome/content/skin/container-go.svg);
 }
