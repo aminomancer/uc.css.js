@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Extension Stylesheet Loader
-// @version        1.1.0
+// @version        1.1.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Allows users to share stylesheets for webextensions without
@@ -53,7 +53,7 @@ class ExtensionStylesheetLoader {
       type: "manifest",
     });
     this.childFile = await this.createTempFile(
-      `"use strict";const{WebExtensionPolicy}=Cu.getGlobalForObject(Cu);export class ExtensionStylesheetLoaderChild extends JSWindowActorChild{handleEvent(e){let policy=WebExtensionPolicy.getByHostname(this.document.location.hostname);if(policy&&policy.id)this.document.documentElement.setAttribute("uc-extension-id",policy.id)}}`,
+      `"use strict";const{WebExtensionPolicy}=Cu.getGlobalForObject(Services);export class ExtensionStylesheetLoaderChild extends JSWindowActorChild{handleEvent(e){let policy=WebExtensionPolicy.getByHostname(this.document.location.hostname);if(policy&&policy.id)this.document.documentElement.setAttribute("uc-extension-id",policy.id)}}`,
       { name: "ExtensionStylesheetLoaderChild", type: "sys.mjs" }
     );
 

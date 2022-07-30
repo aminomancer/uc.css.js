@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Urlbar Mods
-// @version        1.7.1
+// @version        1.7.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Make some minor modifications to the urlbar. See the code
@@ -461,8 +461,10 @@ class UrlbarMods {
       "services.sync.syncedTabs.showRemoteIcons",
       true
     );
-    const { UrlbarResult } = ChromeUtils.import("resource:///modules/UrlbarResult.jsm");
-    const { UrlbarSearchUtils } = ChromeUtils.import("resource:///modules/UrlbarSearchUtils.jsm");
+    const { UrlbarResult } = ChromeUtils.importESModule("resource:///modules/UrlbarResult.sys.mjs");
+    const { UrlbarSearchUtils } = ChromeUtils.importESModule(
+      "resource:///modules/UrlbarSearchUtils.sys.mjs"
+    );
     const UrlbarProvidersManager = gURLBar.view.controller.manager;
     const UrlbarProviderAutofill = UrlbarProvidersManager.getProvider("Autofill");
     // these variables look unused but they're for the functions that will be modified
@@ -531,15 +533,16 @@ class UrlbarMods {
     let src3 = TabToSearch.startQuery.toSource();
     if (!src1.includes("client.clientType")) {
       const lazy = {};
-      XPCOMUtils.defineLazyModuleGetters(lazy, {
-        SyncedTabs: "resource://services-sync/SyncedTabs.jsm",
-        UrlbarPrefs: "resource:///modules/UrlbarPrefs.jsm",
-        UrlbarResult: "resource:///modules/UrlbarResult.jsm",
-        UrlbarTokenizer: "resource:///modules/UrlbarTokenizer.jsm",
-      });
       ChromeUtils.defineESModuleGetters(lazy, {
         PlacesUtils: "resource://gre/modules/PlacesUtils.sys.mjs",
+        UrlbarPrefs: "resource:///modules/UrlbarPrefs.sys.mjs",
+        UrlbarResult: "resource:///modules/UrlbarResult.sys.mjs",
+        UrlbarTokenizer: "resource:///modules/UrlbarTokenizer.sys.mjs",
       });
+      XPCOMUtils.defineLazyModuleGetters(lazy, {
+        SyncedTabs: "resource://services-sync/SyncedTabs.jsm",
+      });
+      const { UrlbarUtils } = ChromeUtils.importESModule("resource:///modules/UrlbarUtils.sys.mjs");
       eval(
         `RemoteTabs.startQuery = async function ` +
           src1
@@ -549,32 +552,18 @@ class UrlbarMods {
     }
     if (!src2.includes("result.payload.clientType")) {
       const lazy = {};
+      ChromeUtils.defineESModuleGetters(lazy, {
+        L10nCache: "resource:///modules/UrlbarUtils.sys.mjs",
+        UrlbarPrefs: "resource:///modules/UrlbarPrefs.sys.mjs",
+        UrlbarProviderTopSites: "resource:///modules/UrlbarProviderTopSites.sys.mjs",
+        UrlbarProvidersManager: "resource:///modules/UrlbarProvidersManager.sys.mjs",
+        UrlbarSearchOneOffs: "resource:///modules/UrlbarSearchOneOffs.sys.mjs",
+        UrlbarTokenizer: "resource:///modules/UrlbarTokenizer.sys.mjs",
+        UrlbarUtils: "resource:///modules/UrlbarUtils.sys.mjs",
+      });
       XPCOMUtils.defineLazyModuleGetters(lazy, {
         BrowserWindowTracker: "resource:///modules/BrowserWindowTracker.jsm",
-        L10nCache: "resource:///modules/UrlbarUtils.jsm",
         ObjectUtils: "resource://gre/modules/ObjectUtils.jsm",
-        UrlbarPrefs: "resource:///modules/UrlbarPrefs.jsm",
-        UrlbarProvidersManager: "resource:///modules/UrlbarProvidersManager.jsm",
-        UrlbarProviderTopSites: "resource:///modules/UrlbarProviderTopSites.jsm",
-        UrlbarSearchOneOffs: "resource:///modules/UrlbarSearchOneOffs.jsm",
-        UrlbarTokenizer: "resource:///modules/UrlbarTokenizer.jsm",
-        UrlbarUtils: "resource:///modules/UrlbarUtils.jsm",
-        BrowserSearchTelemetry: "resource:///modules/BrowserSearchTelemetry.jsm",
-        BrowserUIUtils: "resource:///modules/BrowserUIUtils.jsm",
-        CONTEXTUAL_SERVICES_PING_TYPES: "resource:///modules/PartnerLinkAttribution.jsm",
-        ExtensionSearchHandler: "resource://gre/modules/ExtensionSearchHandler.jsm",
-        PrivateBrowsingUtils: "resource://gre/modules/PrivateBrowsingUtils.jsm",
-        PromiseUtils: "resource://gre/modules/PromiseUtils.jsm",
-        ReaderMode: "resource://gre/modules/ReaderMode.jsm",
-        PartnerLinkAttribution: "resource:///modules/PartnerLinkAttribution.jsm",
-        SearchUIUtils: "resource:///modules/SearchUIUtils.jsm",
-        SearchUtils: "resource://gre/modules/SearchUtils.jsm",
-        UrlbarController: "resource:///modules/UrlbarController.jsm",
-        UrlbarEventBufferer: "resource:///modules/UrlbarEventBufferer.jsm",
-        UrlbarQueryContext: "resource:///modules/UrlbarUtils.jsm",
-        UrlbarSearchUtils: "resource:///modules/UrlbarSearchUtils.jsm",
-        UrlbarValueFormatter: "resource:///modules/UrlbarValueFormatter.jsm",
-        UrlbarView: "resource:///modules/UrlbarView.jsm",
       });
       eval(
         `gURLBar.view._updateRow = function ` +
@@ -603,14 +592,15 @@ class UrlbarMods {
     }
     if (!src3.includes("uc_startQuery")) {
       const lazy = {};
-      XPCOMUtils.defineLazyModuleGetters(lazy, {
-        UrlbarView: "resource:///modules/UrlbarView.jsm",
-        UrlbarPrefs: "resource:///modules/UrlbarPrefs.jsm",
-        UrlbarProviderAutofill: "resource:///modules/UrlbarProviderAutofill.jsm",
-        UrlbarResult: "resource:///modules/UrlbarResult.jsm",
-        UrlbarSearchUtils: "resource:///modules/UrlbarSearchUtils.jsm",
-        UrlbarTokenizer: "resource:///modules/UrlbarTokenizer.jsm",
+      ChromeUtils.defineESModuleGetters(lazy, {
+        UrlbarView: "resource:///modules/UrlbarView.sys.mjs",
+        UrlbarPrefs: "resource:///modules/UrlbarPrefs.sys.mjs",
+        UrlbarProviderAutofill: "resource:///modules/UrlbarProviderAutofill.sys.mjs",
+        UrlbarResult: "resource:///modules/UrlbarResult.sys.mjs",
+        UrlbarSearchUtils: "resource:///modules/UrlbarSearchUtils.sys.mjs",
+        UrlbarTokenizer: "resource:///modules/UrlbarTokenizer.sys.mjs",
       });
+      const { UrlbarUtils } = ChromeUtils.importESModule("resource:///modules/UrlbarUtils.sys.mjs");
       eval(
         `TabToSearch.startQuery = async function uc_startQuery` +
           src3
@@ -654,12 +644,13 @@ class UrlbarMods {
     let sortSrc = UnifiedComplete.sort.toSource();
     if (!sortSrc.includes(`UrlbarPrefs.get("showSearchSuggestionsFirst")`)) {
       const lazy = {};
-      XPCOMUtils.defineLazyModuleGetters(lazy, {
-        UrlbarPrefs: "resource:///modules/UrlbarPrefs.jsm",
-        UrlbarProviderQuickSuggest: "resource:///modules/UrlbarProviderQuickSuggest.jsm",
-        UrlbarProviderTabToSearch: "resource:///modules/UrlbarProviderTabToSearch.jsm",
-        UrlbarSearchUtils: "resource:///modules/UrlbarSearchUtils.jsm",
+      ChromeUtils.defineESModuleGetters(lazy, {
+        UrlbarPrefs: "resource:///modules/UrlbarPrefs.sys.mjs",
+        UrlbarProviderQuickSuggest: "resource:///modules/UrlbarProviderQuickSuggest.sys.mjs",
+        UrlbarProviderTabToSearch: "resource:///modules/UrlbarProviderTabToSearch.sys.mjs",
+        UrlbarSearchUtils: "resource:///modules/UrlbarSearchUtils.sys.mjs",
       });
+      const { UrlbarUtils } = ChromeUtils.importESModule("resource:///modules/UrlbarUtils.sys.mjs");
       XPCOMUtils.defineLazyGetter(lazy, "logger", () =>
         UrlbarUtils.getLogger({ prefix: "MuxerUnifiedComplete" })
       );

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Browser Chrome Bookmark Keywords
-// @version        1.1.2
+// @version        1.1.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Allow the creation of special keyword bookmarks with
@@ -116,12 +116,14 @@
   function init() {
     const lazy = {};
     XPCOMUtils.defineLazyModuleGetters(lazy, {
-      UrlbarUtils: "resource:///modules/UrlbarUtils.jsm",
-      UrlbarPrefs: "resource:///modules/UrlbarPrefs.jsm",
-      UrlbarProvidersManager: "resource:///modules/UrlbarProvidersManager.jsm",
-      ExtensionSearchHandler: "resource://gre/modules/ExtensionSearchHandler.jsm",
       PartnerLinkAttribution: "resource:///modules/PartnerLinkAttribution.jsm",
       CONTEXTUAL_SERVICES_PING_TYPES: "resource:///modules/PartnerLinkAttribution.jsm",
+    });
+    ChromeUtils.defineESModuleGetters(lazy, {
+      UrlbarUtils: "resource:///modules/UrlbarUtils.sys.mjs",
+      UrlbarPrefs: "resource:///modules/UrlbarPrefs.sys.mjs",
+      UrlbarProvidersManager: "resource:///modules/UrlbarProvidersManager.sys.mjs",
+      ExtensionSearchHandler: "resource://gre/modules/ExtensionSearchHandler.sys.mjs",
     });
 
     const UrlbarProvidersManager = gURLBar.view.controller.manager;
@@ -171,9 +173,13 @@
     if (UrlbarProviderBookmarkKeywords.BCBK_modified) return;
 
     const { KeywordUtils } = ChromeUtils.import("resource://gre/modules/KeywordUtils.jsm");
-    const { UrlbarProvider } = ChromeUtils.import("resource:///modules/UrlbarUtils.jsm");
-    const { UrlbarTokenizer } = ChromeUtils.import("resource:///modules/UrlbarTokenizer.jsm");
-    const { UrlbarResult } = ChromeUtils.import("resource:///modules/UrlbarResult.jsm");
+    const { UrlbarProvider } = ChromeUtils.importESModule(
+      "resource:///modules/UrlbarUtils.sys.mjs"
+    );
+    const { UrlbarTokenizer } = ChromeUtils.importESModule(
+      "resource:///modules/UrlbarTokenizer.sys.mjs"
+    );
+    const { UrlbarResult } = ChromeUtils.importESModule("resource:///modules/UrlbarResult.sys.mjs");
     UrlbarProvidersManager.unregisterProvider(UrlbarProviderBookmarkKeywords);
 
     class BrowserChromeBookmarkKeywords extends UrlbarProvider {

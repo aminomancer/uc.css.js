@@ -66,11 +66,9 @@ const unloadedTabMenuL10n = {
 
 class UnloadedTabMenuBase {
   constructor() {
-    if (!window.E10SUtils)
-      XPCOMUtils.defineLazyModuleGetters(this, {
-        E10SUtils: `resource://gre/modules/E10SUtils.jsm`,
-      });
-    else this.E10SUtils = window.E10SUtils;
+    XPCOMUtils.defineLazyModuleGetters(this, {
+      E10SUtils: `resource://gre/modules/E10SUtils.jsm`,
+    });
 
     this.useLinkPref = `userChrome.openLinkInUnloadedTab.use_link_text_as_tab_title_when_unknown`;
     this.initPref(this.useLinkPref, true);
