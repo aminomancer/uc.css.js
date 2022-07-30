@@ -12,7 +12,7 @@
 <a href="/../../discussions" title="Ask a question or discuss with other users" aria-label="Ask a question or discuss with other users"><img src=".readme/discuss.png" alt="Discuss" height="32"></a>
 <a href="/../../fork" title="Make your own copy of this project" aria-label="Make your own copy of this project"><img src=".readme/fork.png" alt="Fork" height="32"></a>
 <a href="https://github.com/aminomancer" title="Follow my work" aria-label="Follow my work"><img src=".readme/follow.png" alt="Follow" height="32"></a>
-<a href="https://github.com/sponsors/aminomancer" title="Become a sponsor" aria-label="Become a sponsor"><img src=".readme/sponsor.png" alt="Sponsor" height="32"></a><br/>
+<!-- <a href="https://github.com/sponsors/aminomancer" title="Become a sponsor" aria-label="Become a sponsor"><img src=".readme/sponsor.png" alt="Sponsor" height="32"></a> --><br/>
 A Firefox theme (duskFox) and a variety of privileged scripts to add new behaviors and functions.
 </p>
 
@@ -1340,11 +1340,13 @@ This script is entirely optional — some of my scripts take advantage of it, if
 
 Various tiny mods not worth making separate scripts for. Read the comments [inside the script](/JS/miscMods.uc.js) for details.
 
-## **Thanks to my sponsors for [supporting](https://github.com/sponsors/aminomancer) this project:**
+## **Thanks to my past sponsors for supporting this project:**
 <ul>
     <li><a href="https://github.com/KleinByte"><img src="https://avatars.githubusercontent.com/u/57239407?v=4" width="14"/> Jordyn Kleinheksel (KleinByte)</a></li>
     <li><a href="https://github.com/henryxrl"><img src="https://avatars.githubusercontent.com/u/7662954?v=4" width="14"/> Henry Xu (henryxrl)</a></li>
 </ul>
+
+I've stopped accepting personal donations for the foreseeable future. But if you still want to offer me some encouragement, I would be immensely gratified if you would support the adoption of orphans with special needs by [contributing to Reece's Rainbow](https://reecesrainbow.org/). Without a major boost in fundraising, many of these children are likely to remain trapped in austere conditions [for their entire lives](https://www.theguardian.com/global-development-professionals-network/2016/sep/26/orphanage-locked-up-disabled-children-lumos-dri-human-rights). If you donate, please save the confirmation and post it [in a new issue]("/../../issues/new/choose"), and I'll add it to the list above.
 
 ## **Other useful links:**
 
