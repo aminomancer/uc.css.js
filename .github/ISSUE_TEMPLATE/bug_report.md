@@ -2,7 +2,7 @@
 name: Bug report
 about: The theme or a script tries to do something and fails, or doesn't do something
   it obviously should
-title: ''
+title: "[BUG]"
 labels: bug
 assignees: aminomancer
 
