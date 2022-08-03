@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Copy Current URL Hotkey
-// @version        1.1.3
+// @version        1.2.0
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Adds a new hotkey (Ctrl+Alt+C by default) that copies
@@ -9,7 +9,7 @@
 // ==/UserScript==
 
 class CopyCurrentURL {
-  static config = {
+  config = {
     // if you have customHintProvider.uc.js, copying will open a confirmation
     // hint anchored to the urlbar.
     "copy confirmation hint": true,
@@ -44,46 +44,52 @@ class CopyCurrentURL {
     },
   };
   constructor() {
-    this.showHint = !!CopyCurrentURL.config["copy confirmation hint"];
-    this.hotkey = _ucUtils.registerHotkey(CopyCurrentURL.config.shortcut, (win, key) => {
-      if (win === window && gURLBar.value) {
-        this.clipboardHelper.copyString(gURLBar.value);
-        this.showHint &&
-          win.CustomHint?.show(gURLBar.inputField, "Copied", {
+    XPCOMUtils.defineLazyServiceGetter(
+      this,
+      "ClipboardHelper",
+      "@mozilla.org/widget/clipboardhelper;1",
+      "nsIClipboardHelper"
+    );
+    this.hotkey = _ucUtils.registerHotkey(this.config.shortcut, win => {
+      if (win === window) {
+        let val = win.gURLBar._lastValidURLStr || win.gURLBar.value;
+        if (!val) return;
+        this.ClipboardHelper.copyStringToClipboard(val, this.clipboard);
+        if (this.config["copy confirmation hint"]) {
+          win.CustomHint?.show(win.gURLBar.inputField, "Copied", {
             position: "after_start",
             x: 16,
           });
+        }
       }
     });
-    if (CopyCurrentURL.config["context menu shortcut hint"]) this.shortcutHint();
+    if (this.config["context menu shortcut hint"]) this.shortcutHint();
   }
-  get clipboardHelper() {
-    return (
-      this._clipboardHelper ||
-      (this._clipboardHelper = Cc["@mozilla.org/widget/clipboardhelper;1"].getService(
-        Ci.nsIClipboardHelper
-      ))
-    );
+  get clipboard() {
+    return Services.clipboard.supportsSelectionClipboard()
+      ? Services.clipboard.kSelectionClipboard
+      : Services.clipboard.kGlobalClipboard;
   }
-  handleEvent(_e) {
-    const menuitem = gURLBar
-      .querySelector("moz-input-box")
-      ?.menupopup?.querySelector(`[cmd="cmd_copy"]`);
+  handleEvent() {
+    let menuitem = gURLBar.inputField?.parentElement?.menupopup?.querySelector(`[cmd="cmd_copy"]`);
     if (menuitem) {
-      menuitem.setAttribute("key", CopyCurrentURL.config.shortcut.id);
-      gURLBar.removeEventListener("contextmenu", this);
+      if (!this.hintApplied && menuitem.hasAttribute("key")) {
+        gURLBar.removeEventListener("contextmenu", this);
+        return;
+      }
+      if (gURLBar.selectionStart != 0 || gURLBar.selectionEnd != gURLBar.inputField.textLength) {
+        menuitem.setAttribute("key", this.config.shortcut.id);
+      } else menuitem.removeAttribute("key");
+      this.hintApplied = true;
     }
   }
-  setupHint() {
-    gURLBar.addEventListener("contextmenu", this);
-  }
   shortcutHint() {
-    if (gBrowserInit.delayedStartupFinished) this.setupHint();
+    if (gBrowserInit.delayedStartupFinished) gURLBar.addEventListener("contextmenu", this);
     else {
       let delayedListener = (subject, topic) => {
         if (topic == "browser-delayed-startup-finished" && subject == window) {
           Services.obs.removeObserver(delayedListener, topic);
-          this.setupHint();
+          gURLBar.addEventListener("contextmenu", this);
         }
       };
       Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
