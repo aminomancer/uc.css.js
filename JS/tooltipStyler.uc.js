@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Tooltip Styler
-// @version        1.1.0
+// @version        1.1.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Allows you to style a tooltip in the chrome window based on
@@ -46,7 +46,7 @@
             node?.localName === "toolbarpaletteitem"
           ) {
             if (tooltip.id === "customizationPanelItemContextMenu") color = "gray";
-            if (type === "tooltip" && tooltip.hasAttribute("default")) color = "gray";
+            if (tooltip.localName === "tooltip" && tooltip.hasAttribute("default")) color = "gray";
           }
           break;
         default:
