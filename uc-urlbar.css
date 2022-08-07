@@ -535,7 +535,6 @@ the NTP/home page hasn't opened yet. */
 #tracking-protection-icon-container {
   color: var(--lwt-toolbarbutton-icon-fill) !important;
   fill-opacity: var(--urlbar-icon-fill-opacity) !important;
-  height: var(--urlbar-height) !important;
 }
 
 #identity-box {

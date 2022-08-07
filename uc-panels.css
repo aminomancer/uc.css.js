@@ -138,7 +138,7 @@ this connects with .panel-subview-body rules in userChrome.au.css */
 #identity-popup,
 #protections-popup,
 #permission-popup {
-  margin-top: -9px !important;
+  margin-top: -1px !important;
 }
 
 #customizationui-widget-panel.bookmarks-toolbar {

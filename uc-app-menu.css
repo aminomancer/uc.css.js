@@ -670,16 +670,24 @@ toolbarseparator.proton-zap {
   margin-block: 0 !important;
 }
 
+.subviewbutton .syncnow-label {
+  text-align: start;
+  display: -moz-box;
+  margin: 0;
+}
+
 #PanelUI-fxa-menu-syncnow-button label,
 #PanelUI-fxa-menu-setup-sync-button .toolbarbutton-text,
 #PanelUI-fxa-menu-connect-device-button .toolbarbutton-text,
 #PanelUI-fxa-menu-sendtab-button .toolbarbutton-text,
 #PanelUI-fxa-menu-sync-prefs-button .toolbarbutton-text,
-#PanelUI-fxa-menu-account-signout-button .toolbarbutton-text {
+#PanelUI-fxa-menu-account-signout-button .toolbarbutton-text,
+#PanelUI-remotetabs-syncnow .syncnow-label {
   padding-inline-start: var(--arrowpanel-subviewbutton-iconic-gap, 8px) !important;
 }
 
-#PanelUI-fxa-menu-syncnow-button image {
+#PanelUI-fxa-menu-syncnow-button image,
+#PanelUI-remotetabs-syncnow image {
   list-style-image: url(chrome://userchrome/content/skin/sync.svg) !important;
   -moz-box-ordinal-group: unset !important;
   visibility: unset !important;
@@ -711,6 +719,35 @@ toolbarseparator.proton-zap {
 
 #PanelUI-fxa-menu-account-signout-button {
   list-style-image: url(chrome://userchrome/content/fxa/sign-out.svg);
+}
+
+#PanelUI-remotetabs-view-managedevices {
+  padding-inline-start: calc(
+    var(--arrowpanel-menuitem-padding-inline) + 16px +
+      var(--arrowpanel-subviewbutton-iconic-gap, 8px)
+  ) !important;
+  background-image: url(chrome://userchrome/content/fxa/avatar-big.svg);
+  background-repeat: no-repeat;
+  background-size: 16px;
+  background-position: var(--arrowpanel-menuitem-padding-inline) center;
+  fill: currentColor;
+  -moz-context-properties: fill, fill-opacity;
+}
+
+toolbarbutton.subviewbutton.sendToDevice-device[clientType=""][clientId=""] {
+  list-style-image: url(chrome://userchrome/content/chevron.svg);
+}
+
+toolbarbutton.subviewbutton.sendToDevice-device[clientType=""][clientId=""]
+  + toolbarbutton.subviewbutton.sendToDevice-device:not([clientType], [clientId]) {
+  list-style-image: url(chrome://userchrome/content/fxa/add-device.svg);
+}
+
+toolbarbutton.subviewbutton.sendToDevice-device[clientType=""][clientId=""] .toolbarbutton-text,
+toolbarbutton.subviewbutton.sendToDevice-device[clientType=""][clientId=""]
+  + toolbarbutton.subviewbutton.sendToDevice-device:not([clientType], [clientId])
+  .toolbarbutton-text {
+  padding-inline-start: var(--arrowpanel-subviewbutton-iconic-gap, 8px);
 }
 
 .PanelUI-remotetabs-clientcontainer > label[itemtype="client"] {

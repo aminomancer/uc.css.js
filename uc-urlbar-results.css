@@ -123,8 +123,7 @@ by underlining them (requires urlbarMods.uc.js) */
   color: var(--panel-description-color) !important;
 }
 
-.urlbarView-row[dynamicType="quickactions"]
-  .urlbarView-quickaction-row:hover {
+.urlbarView-row[dynamicType="quickactions"] .urlbarView-quickaction-row:hover {
   background: var(--uc-arrowpanel-dimmed) !important;
   color: var(--panel-shortcut-focus) !important;
   fill-opacity: 1 !important;

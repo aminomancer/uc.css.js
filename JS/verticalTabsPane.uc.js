@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Vertical Tabs Pane
-// @version        1.6.4
+// @version        1.6.5
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Create a vertical pane across from the sidebar that functions
@@ -152,13 +152,9 @@
       this._registerSheet();
       // ensure E10SUtils are available. required for showing tab's process ID
       // in its tooltip, if the pref for that is enabled.
-      if (window.E10SUtils) {
-        this.E10SUtils = window.E10SUtils;
-      } else {
-        XPCOMUtils.defineLazyModuleGetters(this, {
-          E10SUtils: "resource://gre/modules/E10SUtils.jsm",
-        });
-      }
+      XPCOMUtils.defineLazyModuleGetters(this, {
+        E10SUtils: "resource://gre/modules/E10SUtils.jsm",
+      });
       // get some localized strings for the tooltip
       XPCOMUtils.defineLazyGetter(this, "_l10n", function () {
         return new Localization(["browser/browser.ftl"], true);
@@ -524,6 +520,8 @@
           title = config.l10n.prompt["Hover out delay title"];
           text = config.l10n.prompt["Hover out delay description"];
           break;
+        default:
+          return;
       }
       let input = { value: val };
       let win = Services.wm.getMostRecentWindow(null);
@@ -1530,7 +1528,7 @@
       gBrowser.warmupTab(tab);
     }
     // invoked when mousing out of an element.
-    _onMouseOut (e) {
+    _onMouseOut(e) {
       let row = e.target.closest(".all-tabs-item");
       if (e.target.classList.contains("all-tabs-secondary-button")) {
         row.mOverSecondaryButton = false;

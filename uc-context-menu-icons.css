@@ -276,7 +276,17 @@ menuitem#enableDeveloperTools .menu-text,
 #recently-closed-remove-from-history > .menu-text,
 #recently-closed-bookmark > .menu-text,
 :is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
-  .sendtab-target[clientType]
+  .sendtab-target[clientType]:not([clientType=""])
+  .menu-text,
+:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
+  .sendtab-target.signintosync
+  .menu-text,
+:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
+  .sendtab-target[clientType=""][clientId=""]
+  .menu-text,
+:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
+  .sendtab-target[clientType=""][clientId=""]
+  + .sendtab-target:not([clientType], [clientId])
   .menu-text,
 #userScriptsMenu > .menu-text,
 #toggle_PersonalToolbar > .menu-text,
@@ -570,7 +580,14 @@ menuitem#enableDeveloperTools::before,
 #recently-closed-remove-from-history::before,
 #recently-closed-bookmark::before,
 :is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
-  .sendtab-target[clientType]::before,
+  .sendtab-target[clientType]:not([clientType=""])::before,
+:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
+  .sendtab-target.signintosync::before,
+:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
+  .sendtab-target[clientType=""][clientId=""]::before,
+:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
+  .sendtab-target[clientType=""][clientId=""]
+  + .sendtab-target:not([clientType], [clientId])::before,
 :is(#spell-add-to-dictionary, #spell-add-dictionaries, #spell-add-dictionaries-main, #spell-dictionaries)::before,
 #context-showonlythisframe::before,
 #contentAreaContextMenu #frame::before,
@@ -1401,6 +1418,22 @@ menuitem#enableDeveloperTools::before {
 :is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
   .sendtab-target[clientType="vr"]::before {
   background-image: url(chrome://userchrome/content/skin/device-vr.svg);
+}
+
+:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
+  .sendtab-target.signintosync::before {
+  background-image: url(chrome://userchrome/content/skin/sync.svg);
+}
+
+:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
+  .sendtab-target[clientType=""][clientId=""]::before {
+  background-image: url(chrome://userchrome/content/chevron.svg);
+}
+
+:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
+  .sendtab-target[clientType=""][clientId=""]
+  + .sendtab-target:not([clientType], [clientId])::before {
+  background-image: url(chrome://userchrome/content/fxa/add-device.svg);
 }
 
 :is(#contentAreaContextMenu, #toolbar-context-menu)

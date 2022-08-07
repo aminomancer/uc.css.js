@@ -473,7 +473,7 @@ panel > richlistbox > richlistitem {
 }
 
 menuitem[default="true"] {
-	font-weight: normal !important;
+  font-weight: normal !important;
 }
 
 /* a way to reduce the number of menuseparators in the context menu, if they feel excessive */
