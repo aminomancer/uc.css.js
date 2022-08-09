@@ -509,4 +509,13 @@ and a few elements like checkboxes */
     background-position: center;
     background-repeat: no-repeat;
   }
+
+  .chrome-debug-toolbar {
+    background-color: var(--theme-sidebar-background) !important;
+  }
+
+  .chrome-debug-toolbar__modes label.selected {
+    border-color: hsla(0, 0%, 50%, 0.5) !important;
+    background-color: hsla(0, 0%, 50%, 0.15);
+  }
 }

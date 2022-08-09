@@ -116,6 +116,7 @@ by underlining them (requires urlbarMods.uc.js) */
   height: 24px !important;
   box-sizing: border-box !important;
   border: 1px solid var(--panel-separator-color) !important;
+  box-shadow: none !important;
   outline: none !important;
   margin: 0 !important;
   gap: 4px !important;

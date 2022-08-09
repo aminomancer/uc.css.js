@@ -33,6 +33,9 @@ we also need to adjust window controls, the main menu bar, and the bookmarks too
   -moz-backface-visibility: hidden !important;
   transform-style: preserve-3d !important;
   backface-visibility: hidden !important;
+  /* navbar shadow in fullscreen */
+  position: relative;
+  box-shadow: 0px 0px 8px -5px hsla(240, 4%, 0%, 0.5), 0px 0px 15px 0px hsla(0, 0%, 0%, 0.2) !important;
 }
 
 :root[fullscreen-autohide][inFullscreen]:not([customizing]) #navigator-toolbox::after {

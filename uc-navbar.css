@@ -118,6 +118,19 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
   filter: none !important;
 }
 
+#tabbrowser-tabs[hiddensoundplaying] ~ #alltabs-button > .toolbarbutton-badge-stack > .toolbarbutton-badge {
+  background: transparent url(chrome://userchrome/content/audioUnmutedButton.svg) center/contain !important;
+  box-shadow: none !important;
+  color: inherit !important;
+  display: block !important;
+  -moz-context-properties: fill, fill-opacity !important;
+  fill: currentColor !important;
+  margin: -7px 0 0 !important;
+  margin-inline-end: -6px !important;
+  min-width: 12px !important;
+  min-height: 12px !important;
+}
+
 .widget-overflow-list .toolbarbutton-1 > .toolbarbutton-text {
   padding-inline-start: var(--arrowpanel-subviewbutton-iconic-gap, 8px) !important;
 }
@@ -283,12 +296,6 @@ override this. */
 
 #stop-reload-button > * {
   pointer-events: auto !important;
-}
-
-/* navbar shadow */
-#navigator-toolbox {
-  position: relative;
-  box-shadow: 0px 0px 8px -5px hsla(240, 4%, 0%, 0.5), 0px 0px 15px 0px hsla(0, 0%, 0%, 0.2) !important;
 }
 
 toolbar .toolbarbutton-1:not([disabled])[open]:hover > .toolbarbutton-icon {

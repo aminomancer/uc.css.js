@@ -131,7 +131,9 @@ this connects with .panel-subview-body rules in userChrome.au.css */
 #downloadsPanel,
 #widget-overflow,
 #appMenu-popup,
-#customizationui-widget-panel {
+#customizationui-widget-panel,
+#appMenu-notification-popup,
+#editBookmarkPanel {
   margin-top: -7px !important;
 }
 
@@ -171,7 +173,7 @@ panel[type="arrow"][side="top"] {
 }
 
 #editBookmarkPanel[on-toolbar-button] {
-  margin-top: -12px;
+  margin-top: -12px !important;
 }
 
 #protections-popup {
