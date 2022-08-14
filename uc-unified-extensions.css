@@ -144,6 +144,8 @@ unified-extensions-item[extension-id="jid1-xUfzOsOFlzSOXg@jetpack"i]
   > .unified-extensions-item-icon,
 unified-extensions-item[extension-id="{287dcf75-bec6-4eec-b4f6-71948a2eea29}"i]
   > .unified-extensions-item-icon,
+unified-extensions-item[extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
+  > .unified-extensions-item-icon,
 unified-extensions-item[extension-id="invert-element@aminomancer"i]
   > .unified-extensions-item-icon {
   display: none !important;
@@ -406,6 +408,11 @@ unified-extensions-item[extension-id="jid1-xUfzOsOFlzSOXg@jetpack"i]::before {
 unified-extensions-item[extension-id="{287dcf75-bec6-4eec-b4f6-71948a2eea29}"i]::before {
   content: "";
   background-image: url(chrome://userchrome/content/material/google-view-image.svg);
+}
+
+unified-extensions-item[extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]::before {
+  content: "";
+  background-image: url(chrome://userchrome/content/material/zoom.svg);
 }
 
 unified-extensions-item[extension-id="invert-element@aminomancer"i]::before {

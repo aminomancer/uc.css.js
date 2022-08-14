@@ -143,7 +143,7 @@
 
   html[uc-extension-id="@testpilot-containers"],
   :root[uc-extension-id="@testpilot-containers"] body {
-    min-block-size: 0 !important;
+    min-block-size: 200px !important;
   }
 
   :root[uc-extension-id="@testpilot-containers"] body {
@@ -759,7 +759,9 @@
     padding: calc(var(--menupopup-inner-padding-magnitude) * 2) !important;
     padding-top: var(--menupopup-inner-padding-magnitude) !important;
     background: none !important;
+    color: inherit !important;
     border: none !important;
+    box-shadow: none !important;
     block-size: revert !important;
     column-gap: 4px;
   }
@@ -930,8 +932,8 @@
     min-height: var(--subviewbutton-height) !important;
     background-color: var(--uc-arrowpanel-dimmed) !important;
     transition: none !important;
-    block-size: var(--subviewbutton-height) !important;
-    min-block-size: revert !important;
+    block-size: revert !important;
+    min-block-size: var(--subviewbutton-height) !important;
     box-shadow: none !important;
     border: 1px solid transparent !important;
     margin-block: var(--menupopup-inner-padding-magnitude) !important;
@@ -939,11 +941,16 @@
     line-height: normal !important;
     text-align: initial !important;
     padding-inline-start: 30px !important;
+    padding-block: 5px !important;
     background-image: url(chrome://userchrome/content/settings.svg), var(--iconArrowRight) !important;
     -moz-context-properties: fill, fill-opacity;
     fill: currentColor !important;
     background-position: 6px center, calc(100% - 10px) center !important;
     background-size: 16px 16px, 9px !important;
+  }
+
+  :root[uc-extension-id="@testpilot-containers"] .advanced-proxy-settings-btn #advanced-proxy-address {
+    color: var(--uc-panel-description-color) !important;
   }
 
   :root[uc-extension-id="@testpilot-containers"] .collapsible-content > .flx-row.flx-space-between {
@@ -956,7 +963,7 @@
   }
 
   :root[uc-extension-id="@testpilot-containers"] .advanced-proxy-panel-content {
-    padding-block: calc(var(--menupopup-inner-padding-magnitude) + 4px) !important;
+    padding-block: calc(var(--menupopup-inner-padding-magnitude)) !important;
     padding-inline: calc(var(--menupopup-inner-padding-magnitude) + 6px) !important;
     margin-block-start: 48.5px !important;
   }

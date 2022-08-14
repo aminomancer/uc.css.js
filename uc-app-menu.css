@@ -230,11 +230,11 @@
   list-style-image: url(chrome://userchrome/content/skin/bookmarks-toolbar.svg);
 }
 
-#panelMenuBookmarkThisPage[data-l10n-id="bookmarks-current-tab"] {
+#panelMenuBookmarkThisPage[data-l10n-id="bookmarks-subview-bookmark-tab"] {
   list-style-image: url(chrome://userchrome/content/skin/bookmark-hollow.svg);
 }
 
-#panelMenuBookmarkThisPage[data-l10n-id="bookmarks-bookmark-edit-panel"] {
+#panelMenuBookmarkThisPage[data-l10n-id="bookmarks-subview-edit-bookmark"] {
   list-style-image: url(chrome://userchrome/content/skin/bookmark.svg);
 }
 

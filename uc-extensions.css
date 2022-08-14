@@ -526,6 +526,11 @@ menupopup#viewSidebarMenu
   list-style-image: url(chrome://userchrome/content/material/google-view-image.svg);
 }
 
+/* Zoom Scheduler */
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] {
+  list-style-image: url(chrome://userchrome/content/material/zoom.svg) !important;
+}
+
 /* context menu stuff */
 
 /* make multithreaded download manager context menu item's English label smaller.
@@ -905,33 +910,33 @@ menupopup:not(#contentAreaContextMenu)
 }
 
 /* fix inconsistent string casing of menuitems in Dark Reader */
-#addon_darkreader_org-menuitem-_DarkReader-toggle[label="Toggle extension"] > label,
-#addon_darkreader_org-menuitem-_DarkReader-addSite[label="Toggle current site"] > label,
-#addon_darkreader_org-menuitem-_DarkReader-switchEngine[label="Theme generation mode"] > label {
+#addon_darkreader_org-menuitem-_toggle[label="Toggle extension"] > label,
+#addon_darkreader_org-menuitem-_addSite[label="Toggle current site"] > label,
+#addon_darkreader_org-menuitem-_switchEngine[label="Theme generation mode"] > label {
   display: none !important;
 }
 
-#addon_darkreader_org-menuitem-_DarkReader-toggle[label="Toggle extension"]
+#addon_darkreader_org-menuitem-_toggle[label="Toggle extension"]
   > .menu-accel-container::before,
-#addon_darkreader_org-menuitem-_DarkReader-addSite[label="Toggle current site"]
+#addon_darkreader_org-menuitem-_addSite[label="Toggle current site"]
   > .menu-accel-container::before,
-#addon_darkreader_org-menuitem-_DarkReader-switchEngine[label="Theme generation mode"]
+#addon_darkreader_org-menuitem-_switchEngine[label="Theme generation mode"]
   > .menu-accel-container::before {
   display: -moz-inline-box;
   -moz-box-flex: 1;
 }
 
-#addon_darkreader_org-menuitem-_DarkReader-toggle[label="Toggle extension"]
+#addon_darkreader_org-menuitem-_toggle[label="Toggle extension"]
   > .menu-accel-container::before {
   content: "Toggle Extension";
 }
 
-#addon_darkreader_org-menuitem-_DarkReader-addSite[label="Toggle current site"]
+#addon_darkreader_org-menuitem-_addSite[label="Toggle current site"]
   > .menu-accel-container::before {
   content: "Toggle Current Site";
 }
 
-#addon_darkreader_org-menuitem-_DarkReader-switchEngine[label="Theme generation mode"]
+#addon_darkreader_org-menuitem-_switchEngine[label="Theme generation mode"]
   > .menu-accel-container::before {
   content: "Theme Generation Mode";
 }

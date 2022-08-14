@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Bookmarks Menu & Button Shortcuts
-// @version        1.3.1
+// @version        1.3.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Adds some shortcuts for bookmarking pages. First,
@@ -76,7 +76,7 @@ const ucBookmarksShortcuts = {
     });
     popup.insertBefore(this.bookmarkTab, popup.firstElementChild);
     popup.addEventListener("popupshowing", this.updateMenuItem, false);
-    this.bookmarkTab.setAttribute("data-l10n-id", "bookmarks-current-tab");
+    this.bookmarkTab.setAttribute("data-l10n-id", "bookmarks-subview-bookmark-tab");
     this.searchBookmarks = popup.querySelector("#BMB_viewBookmarksSidebar").after(
       this.create(doc, "menuitem", {
         id: "BMB_searchBookmarks",
@@ -104,7 +104,7 @@ const ucBookmarksShortcuts = {
     if ("l10n" in menuitem.ownerDocument && menuitem.ownerDocument.l10n)
       menuitem.ownerDocument.l10n.setAttributes(
         menuitem,
-        isStarred ? "bookmarks-bookmark-edit-panel" : "bookmarks-current-tab"
+        isStarred ? "bookmarks-subview-edit-bookmark" : "bookmarks-subview-bookmark-tab"
       );
     menuitem.setAttribute(
       "image",

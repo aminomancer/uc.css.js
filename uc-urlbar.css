@@ -979,6 +979,11 @@ urlbarMods.uc.js assigns them custom classes .aboutBlockedPage and
   opacity: revert !important;
 }
 
+#wrapper-urlbar-container,
+#wrapper-search-container {
+  -moz-box-flex: 1 !important;
+}
+
 :root[customizing]
   #wrapper-urlbar-container[removable="false"]
   #urlbar

@@ -1216,6 +1216,7 @@ rtl languages. adjust the border radius accordingly */
   :root[dialogroot] textarea:where(:focus, :focus-visible),
   :root[dialogroot] search-textbox[focused] {
     border-color: transparent !important;
+    outline: var(--in-content-focus-outline) !important;
     outline-offset: 0 !important;
   }
 

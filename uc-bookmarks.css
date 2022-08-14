@@ -567,11 +567,11 @@ menuitem.subviewbutton-iconic > .toolbarbutton-text,
   background-image: url(chrome://userchrome/content/skin/sidebars-right.svg) !important;
 }
 
-#BMB_bookmarkThisPage[data-l10n-id="bookmarks-current-tab"] {
+#BMB_bookmarkThisPage[data-l10n-id="bookmarks-subview-bookmark-tab"] {
   list-style-image: url(chrome://userchrome/content/skin/bookmark-hollow.svg) !important;
 }
 
-#BMB_bookmarkThisPage[data-l10n-id="bookmarks-bookmark-edit-panel"] {
+#BMB_bookmarkThisPage[data-l10n-id="bookmarks-subview-edit-bookmark"] {
   list-style-image: url(chrome://userchrome/content/skin/bookmark.svg) !important;
 }
 
@@ -632,7 +632,7 @@ menuitem#menu_bookmarkThisPage::before {
   -moz-context-properties: fill, fill-opacity, stroke !important;
 }
 
-menuitem#menu_bookmarkThisPage[data-l10n-id="menu-bookmark-edit"]::before {
+menuitem#menu_bookmarkThisPage[data-l10n-id="menu-edit-bookmark"]::before {
   background-image: url(chrome://userchrome/content/skin/bookmark.svg) !important;
 }
 

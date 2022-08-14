@@ -17,7 +17,7 @@ menupopup
 #context-viewbgimage .menu-text,
 #context-savepage .menu-text,
 menu#pageStyleMenu > .menu-text,
-#addon_darkreader_org-menuitem-_DarkReader-addSite:not(.menuitem-iconic) .menu-text,
+#addon_darkreader_org-menuitem-_addSite:not(.menuitem-iconic) .menu-text,
 #viewFullZoomMenu > .menu-text,
 :is(#menu_zoomEnlarge, #menu_zoomReduce, #menu_zoomReset) .menu-text,
 #viewToolbarsMenu > .menu-text,
@@ -135,7 +135,7 @@ menuitem#repair-text-encoding .menu-text,
 #context-viewframeinfo .menu-text,
 menuitem#menu_openDownloads .menu-text,
 menuitem#menu_openAddons .menu-text,
-#addon_darkreader_org-menuitem-_DarkReader-toggle:not(.menuitem-iconic) .menu-text,
+#addon_darkreader_org-menuitem-_toggle:not(.menuitem-iconic) .menu-text,
 #private-relay_firefox_com-menuitem-_fx-private-relay-generate-alias:not(.menuitem-iconic)
   > .menu-text,
 #private-relay_firefox_com-menuitem-_fx-private-relay-use-existing-aliases:not(.menuitem-iconic)
@@ -336,7 +336,7 @@ menu[label="Bitwarden"]:not(.menuitem-iconic, .menu-iconic) > .menu-text,
   > .menu-text,
 #menu_customizeToolbars .menu-text,
 menuitem.viewCustomizeToolbar > .menu-text,
-#addon_darkreader_org-menuitem-_DarkReader-switchEngine:not(.menuitem-iconic) .menu-text,
+#addon_darkreader_org-menuitem-_switchEngine:not(.menuitem-iconic) .menu-text,
 menupopup:not(#contentAreaContextMenu)
   > #addon_darkreader_org-menuitem-_DarkReader-top:not(.menuitem-iconic, .menu-iconic)
   > .menu-text,
@@ -396,7 +396,7 @@ menuitem:not(.menuitem-iconic)[oncommand="_ucUtils.restart(true)"]::before,
 #context-viewframeinfo::before,
 menuitem#menu_openDownloads::before,
 menuitem#menu_openAddons::before,
-#addon_darkreader_org-menuitem-_DarkReader-toggle:not(.menuitem-iconic)::before,
+#addon_darkreader_org-menuitem-_toggle:not(.menuitem-iconic)::before,
 #private-relay_firefox_com-menuitem-_fx-private-relay-generate-alias:not(.menuitem-iconic)::before,
 #private-relay_firefox_com-menuitem-_fx-private-relay-use-existing-aliases:not(.menuitem-iconic)::before,
 #private-relay_firefox_com-menuitem-_fx-private-relay-manage-aliases:not(.menuitem-iconic)::before,
@@ -419,7 +419,7 @@ menuitem#helpPolicySupport::before,
 :is(#new-tab-button-popup, .new-tab-popup) menuitem[command="Browser:OpenAboutContainers"]::before,
 #context-viewbgimage::before,
 #context-setDesktopBackground::before,
-:is(#context-savepage, menu#pageStyleMenu, #addon_darkreader_org-menuitem-_DarkReader-addSite:not(.menuitem-iconic))::before,
+:is(#context-savepage, menu#pageStyleMenu, #addon_darkreader_org-menuitem-_addSite:not(.menuitem-iconic))::before,
 #viewFullZoomMenu::before,
 :is(#menu_zoomEnlarge, #menu_zoomReduce, #menu_zoomReset)::before,
 #viewToolbarsMenu::before,
@@ -646,7 +646,7 @@ menu[label="Bitwarden"]:not(.menuitem-iconic, .menu-iconic)::before,
 :is(menu, menuitem)[id^="multithreaded-download-manager"]:is([label="Open in new tab"], [label="Open in new window"], [label="Open in sidebar"])::before,
 #menu_customizeToolbars::before,
 menuitem.viewCustomizeToolbar::before,
-#addon_darkreader_org-menuitem-_DarkReader-switchEngine:not(.menuitem-iconic)::before,
+#addon_darkreader_org-menuitem-_switchEngine:not(.menuitem-iconic)::before,
 menupopup:not(#contentAreaContextMenu)
   > #addon_darkreader_org-menuitem-_DarkReader-top:not(.menuitem-iconic, .menu-iconic)::before,
 #_testpilot-containers-menuitem-_hide-container:not(.menuitem-iconic, .menu-iconic)::before,
@@ -848,7 +848,7 @@ menuitem#menu_openDownloads::before {
 }
 
 menuitem#menu_openAddons::before,
-#addon_darkreader_org-menuitem-_DarkReader-toggle:not(.menuitem-iconic)::before {
+#addon_darkreader_org-menuitem-_toggle:not(.menuitem-iconic)::before {
   background-image: url(chrome://mozapps/skin/extensions/extension.svg);
 }
 
@@ -937,7 +937,7 @@ menuitem#helpPolicySupport::before {
   background-image: url(chrome://userchrome/content/notifications/canvas.svg);
 }
 
-:is(#context-savepage, menu#pageStyleMenu, #addon_darkreader_org-menuitem-_DarkReader-addSite:not(.menuitem-iconic))::before {
+:is(#context-savepage, menu#pageStyleMenu, #addon_darkreader_org-menuitem-_addSite:not(.menuitem-iconic))::before {
   background-image: url(chrome://userchrome/content/document.svg);
 }
 
@@ -1504,7 +1504,7 @@ menuitem#fill-login-generated-password::before,
 
 #menu_customizeToolbars::before,
 menuitem.viewCustomizeToolbar::before,
-#addon_darkreader_org-menuitem-_DarkReader-switchEngine:not(.menuitem-iconic)::before {
+#addon_darkreader_org-menuitem-_switchEngine:not(.menuitem-iconic)::before {
   background-image: url(chrome://browser/skin/customize.svg);
 }
 

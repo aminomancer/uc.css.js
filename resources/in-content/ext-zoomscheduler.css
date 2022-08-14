@@ -1,0 +1,332 @@
+/* This Source Code Form is subject to the terms of the Creative Commons
+ * Attribution-NonCommercial-ShareAlike International License, v. 4.0.
+ * If a copy of the CC BY-NC-SA 4.0 was not distributed with this
+ * file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/
+ * or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA. */
+
+/* Zoom Scheduler extension */
+
+@-moz-document regexp("^moz-extension://.*/.*")
+{
+  html[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i],
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] body {
+    background-color: var(--in-content-bg-darker) !important;
+    color: var(--in-content-page-color) !important;
+    color-scheme: dark !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
+    :is(.popup-content, #content_container) {
+    background-color: var(--in-content-bg-dark) !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
+    #content_container
+    .content-body {
+    color: inherit !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] #loading {
+    background-color: inherit !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] #loading span {
+    color: var(--ui-text-50) !important;
+    filter: hue-rotate(32deg) !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] #header_container {
+    background-color: var(--in-content-bg-darker) !important;
+    border-color: var(--in-content-separator-dim) !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] #header_container .setting > a {
+    -moz-context-properties: fill, fill-opacity !important;
+    fill: var(--in-content-page-color) !important;
+    fill-opacity: 0.6 !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
+    #header_container
+    .setting
+    > a:is(:hover, :focus) {
+    fill-opacity: 1 !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
+    #header_container
+    .setting
+    .setting-img {
+    height: 16px !important;
+    width: 16px !important;
+    background: url(chrome://userchrome/content/settings.svg) center/contain no-repeat !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
+    #content_container
+    .content-header,
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] .form-horizontal .form-group {
+    border-color: var(--in-content-separator-dim) !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
+    #content_container
+    .content-header
+    > p {
+    color: inherit !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
+    #content_container
+    .content-footer {
+    border-top: 1px solid var(--in-content-separator-dim) !important;
+    background-color: inherit !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] .sec-sign .split-line {
+    color: var(--ui-text-60) !important;
+    border-color: var(--in-content-separator-dim) !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
+    :where(.btn-default, .btn-cancel) {
+    color: var(--in-content-primary-button-text-color) !important;
+    background-color: var(--in-content-button-background) !important;
+    border-color: var(--in-content-box-border-color) !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] .btn-cancel:is(:hover, :focus) {
+    background-color: var(--in-content-button-background-hover) !important;
+    border-color: var(--in-content-button-background-hover) !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] .btn-cancel:hover:active {
+    background-color: var(--in-content-button-background-active) !important;
+    border-color: var(--in-content-button-background-active) !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
+    .btn-default:is(.active, .focus, :active, :focus, :hover),
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
+    .open
+    > .dropdown-toggle.btn-default {
+    background-color: var(--in-content-button-background-hover) !important;
+    border-color: var(--global-focus-outline-color) !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] .btn:focus {
+    outline: 1px auto !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
+    .btn:is(.disabled, [disabled]):is(:focus, :focus-visible),
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
+    fieldset[disabled]
+    .btn:is(:focus, :focus-visible) {
+    outline: none !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
+    :is(.btn-google-signin, .btn-workemail-signin, .btn-switch, .btn-schedule, .btn-save),
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
+    .dropdown-menu
+    > li
+    a:is(:hover, :focus) {
+    color: var(--in-content-primary-button-text-color) !important;
+    background-color: var(--in-content-primary-button-background) !important;
+    border-color: var(--in-content-primary-button-background) !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
+    :is(.btn-google-signin, .btn-workemail-signin, .btn-switch, .btn-schedule, .btn-save):is(:hover, :focus) {
+    background-color: var(--in-content-primary-button-background-hover) !important;
+    border-color: var(--in-content-primary-button-background-hover) !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
+    :is(.btn-google-signin, .btn-workemail-signin, .btn-switch, .btn-schedule, .btn-save):hover:active {
+    background-color: var(--in-content-primary-button-background-active) !important;
+    border-color: var(--in-content-primary-button-background-active) !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] .form-control {
+    color: inherit !important;
+    background-color: var(--in-content-box-background) !important;
+    border-color: var(--in-content-box-border-color) !important;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075) !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] .form-control::placeholder {
+    color: var(--ui-text-50) !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
+    .form-control:is([disabled], [readonly]),
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
+    fieldset[disabled]
+    .form-control {
+    opacity: 0.8 !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
+    .form-control:is([disabled], [readonly])::placeholder,
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
+    fieldset[disabled]
+    .form-control::placeholder {
+    color: var(--ui-text-40) !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] .form-control:focus {
+    border-color: var(--global-focus-outline-color) !important;
+    box-shadow: var(--global-focus-shadow) !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] .dropdown-menu {
+    background-color: var(--in-content-button-background-solid) !important;
+    border-color: var(--in-content-box-border-color) !important;
+    color: inherit !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] .dropdown-menu > li {
+    color: inherit !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] .dropdown-menu > li a {
+    color: inherit !important;
+    border-color: var(--in-content-border-hover) !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] .captcha-input {
+    height: 36px !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] .captcha-input > input {
+    font-size: 12px !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] .form-group .captcha-section {
+    border-color: transparent !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] :is(.signin, .action) .disabled {
+    background-color: var(--in-content-box-background) !important;
+    color: var(--ui-text-40) !important;
+    border-color: var(--in-content-box-border-color) !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] a:not(.btn, [role="menuitem"]) {
+    color: var(--in-content-link-color) !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
+    a:not(.btn, [role="menuitem"]):is(:hover, :focus-visible) {
+    color: var(--in-content-link-color-hover) !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
+    a:not(.btn, [role="menuitem"]):active {
+    color: var(--in-content-link-color-active) !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] #app_about .btn-container {
+    color: var(--ui-text-60) !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] .alert-danger {
+    margin-bottom: 12px;
+    background-color: var(--uc-warning-background) !important;
+    color: inherit !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] .security-box .warning {
+    background-color: var(--low-warning-background) !important;
+    color: inherit !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] .security-box .warning::before {
+    background: url(chrome://userchrome/content/info-filled.svg) center/contain no-repeat !important;
+    width: 20px !important;
+    -moz-context-properties: fill !important;
+    fill: var(--ui-text-70) !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] .alert-success {
+    color: inherit !important;
+    background-color: hsla(120, 25%, 22%) !important;
+    border-color: hsl(125, 20%, 32%) !important;
+    border-top: none !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] .web-setting-btn {
+    color: inherit !important;
+    text-decoration: underline !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] .busy24 {
+    position: absolute !important;
+    background-image: url(chrome://userchrome/content/loading-spinner.svg) !important;
+    background-size: contain !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    width: 20px !important;
+    height: 20px !important;
+    right: -24px !important;
+    top: 7px !important;
+    -moz-context-properties: fill !important;
+    fill: currentColor !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] .locked_by_admin > i {
+    background: url(chrome://global/skin/icons/security.svg) center/contain no-repeat !important;
+    -moz-context-properties: fill !important;
+    fill: var(--ui-text-50) !important;
+    width: 12px !important;
+    height: 12px !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] #sso-form div > h3 {
+    color: var(--ui-text-80) !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
+    .form-horizontal
+    .form-group
+    > .control-label,
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
+    input:is([type="checkbox"], [type="radio"])
+    + :is(span, optext),
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] :is(.authentication, .jbh) {
+    color: inherit !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] .security-box .usability-desc {
+    color: var(--ui-text-60) !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
+    :is(.radio-inline, .checkbox-inline) {
+    cursor: inherit !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
+    input:is([type="radio"], [type="checkbox"]):is([disabled], .disabled)
+    + :is(span, optext),
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
+    fieldset[disabled]
+    input:is([type="radio"], [type="checkbox"])
+    + :is(span, optext) {
+    opacity: 0.7 !important;
+    text-decoration: line-through !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] #setting_option_jbh {
+    vertical-align: revert !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] #JBH_prior_start {
+    height: 24px !important;
+    border: none !important;
+    margin: -3px 4px !important;
+    padding-inline: 4px !important;
+  }
+}
