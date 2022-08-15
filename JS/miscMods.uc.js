@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Misc. Mods
-// @version        2.0.0
+// @version        2.0.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Various tiny mods not worth making separate scripts for. Read the comments inside the script for details.
@@ -306,8 +306,8 @@
     anchorPermissionsPopup() {
       gPermissionPanel._initializePopup();
       eval(
-        `gPermissionPanel._openPopup = function ` +
-          gPermissionPanel._openPopup
+        `gPermissionPanel.openPopup = function ` +
+          gPermissionPanel.openPopup
             .toSource()
             .replace(/_openPopup/, "")
             .replace(/\"bottomcenter/, `"bottomleft`)
