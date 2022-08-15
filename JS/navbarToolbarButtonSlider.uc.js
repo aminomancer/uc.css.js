@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Navbar Toolbar Button Slider
-// @version        2.8.1
+// @version        2.8.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Wrap all toolbar buttons in a scrollable container. It can
@@ -122,8 +122,17 @@ class NavbarToolbarSlider {
     );
   }
   constructor() {
-    this.outer = document.createElement("toolbaritem");
-    this.inner = this.outer.appendChild(document.createElement("hbox"));
+    this.outer = document.createXULElement("toolbaritem");
+    Object.defineProperty(this.outer, "hidden", {
+      get() {
+        return this.getAttribute("hidden") === "true";
+      },
+      set(val) {
+        if (val) this.setAttribute("hidden", "true");
+        else this.removeAttribute("hidden");
+      },
+    });
+    this.inner = this.outer.appendChild(document.createXULElement("hbox"));
     this.kids = this.inner.children;
     this.navbar = document.getElementById("nav-bar");
     this.cTarget = document.getElementById(this.navbar.getAttribute("customizationtarget"));
@@ -316,7 +325,7 @@ class NavbarToolbarSlider {
     await this.navbar.overflowable._moveItemsBackToTheirOrigin(true);
     this.unwrapAll();
     this.wrapAll([...this.widgets].filter(this.filterFn, this), this.inner);
-    this.outer.style.display = "-moz-box";
+    this.outer.hidden = false;
   }
   onCustomizeStart() {
     let overflown = this.isOverflowing;
@@ -327,7 +336,7 @@ class NavbarToolbarSlider {
     // or else we get a tiny bug where dragging a widget ahead of the empty
     // slider causes the widget to teleport to the end.
     this.bin.appendChild(this.outer);
-    this.outer.style.display = overflown ? "none" : "-moz-box";
+    this.outer.hidden = overflown;
   }
   onCustomizeEnd() {
     let overflown = this.isOverflowing;
@@ -336,14 +345,14 @@ class NavbarToolbarSlider {
       this.wrapAll(array, this.cOverflow);
       this.cOverflow.insertBefore(this.outer, this.cOverflow.firstElementChild);
     } else this.wrapAll(array, this.inner);
-    this.outer.style.display = overflown ? "none" : "-moz-box";
+    this.outer.hidden = overflown;
     this.setMaxWidth();
   }
   onWidgetOverflow(aNode, aContainer) {
     if (aNode.ownerGlobal !== window) return;
     if (aNode === this.outer && aContainer === this.cTarget) {
       NavbarToolbarSlider.appendLoop(this.kids, this.cOverflow);
-      this.outer.style.display = "none";
+      this.outer.hidden = true;
       this.reOrder();
     }
   }
@@ -352,7 +361,7 @@ class NavbarToolbarSlider {
     if (aNode === this.outer && aContainer === this.cTarget) {
       this.unwrapAll();
       this.wrapAll([...this.widgets].filter(this.filterFn, this), this.inner);
-      this.outer.style.display = "-moz-box";
+      this.outer.hidden = false;
       this.reOrder();
     }
   }
@@ -615,7 +624,7 @@ class NavbarToolbarSlider {
       clicktoscroll: true,
       orient: "horizontal",
       style:
-        "display: -moz-box; -moz-box-align: center; -moz-box-orient: vertical; scrollbar-width: none; box-sizing: border-box; scroll-behavior: smooth; overflow: hidden; transition: max-width 0.2s ease-out;",
+        "-moz-box-align: center; -moz-box-orient: vertical; scrollbar-width: none; box-sizing: border-box; scroll-behavior: smooth; overflow: hidden; transition: max-width 0.2s ease-out;",
     })) {
       outer.setAttribute(key, val);
     }
@@ -623,7 +632,7 @@ class NavbarToolbarSlider {
     for (const [key, val] of Object.entries({
       class: "slider-inner-container",
       id: "nav-bar-toolbarbutton-slider",
-      style: "display: -moz-box; -moz-box-flex: 1;",
+      style: "-moz-box-flex: 1;",
     })) {
       inner.setAttribute(key, val);
     }

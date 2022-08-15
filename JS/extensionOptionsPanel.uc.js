@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Extension Options Panel
-// @version        1.8.4
+// @version        1.8.5
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    This script creates a toolbar button that opens a popup panel
@@ -1044,7 +1044,7 @@ class ExtensionOptionsWidget {
     content: url(chrome://global/skin/icons/check.svg);
     fill: currentColor;
     fill-opacity: 0.6;
-    display: -moz-box;
+    display: block;
     margin-inline-start: 10px;
 }
 #eom-theme-preview-tooltip {

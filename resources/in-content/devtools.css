@@ -403,18 +403,6 @@ and a few elements like checkboxes */
     padding: 0 !important;
   }
 
-  menuseparator[id]:not(#context-sep-open, #context-media-sep-commands, #context-sep-copylink, #spell-suggestions-separator, #context-sep-selectall) {
-    display: none !important;
-  }
-
-  menuseparator:not([id]) {
-    display: -moz-box !important;
-  }
-
-  menuseparator:last-child {
-    display: none;
-  }
-
   menupopup[menu-api] menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-left {
     display: none !important;
   }

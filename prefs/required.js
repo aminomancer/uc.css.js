@@ -12,8 +12,6 @@ user_pref("browser.crashReports.unsubmittedCheck.autoSubmit2", false);
 user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
 user_pref("browser.proton.places-tooltip.enabled", true);
 user_pref("layout.css.moz-document.content.enabled", true);
-user_pref("layout.css.xul-box-display-values.content.enabled", true);
-user_pref("layout.css.xul-display-values.content.enabled", true);
 //// eliminate the blank white window during startup
 user_pref("browser.startup.blankWindow", false);
 user_pref("browser.startup.preXulSkeletonUI", false);
@@ -28,8 +26,6 @@ user_pref("layout.css.cached-scrollbar-styles.enabled", false);
 user_pref("ui.systemUsesDarkTheme", 1);
 // enable content dark mode
 user_pref("layout.css.prefers-color-scheme.content-override", 0);
-// allow stylesheets to modify trees in system pages viewed in regular tabs
-user_pref("layout.css.xul-tree-pseudos.content.enabled", true);
 // allow the color-mix() CSS function
 user_pref("layout.css.color-mix.enabled", true);
 // other CSS features

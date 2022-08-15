@@ -244,11 +244,6 @@ toolbarpaletteitem[place="palette"] > #search-container {
   fill-opacity: 1 !important;
 }
 
-#PopupSearchAutoComplete {
-  border-bottom-right-radius: 4px !important;
-  border-bottom-left-radius: 4px !important;
-}
-
 #urlbar-input-container,
 #searchbar {
   background-color: var(--urlbar-input-bgcolor) !important;

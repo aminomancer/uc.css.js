@@ -114,6 +114,16 @@
     border-color: var(--global-focus-outline-color) !important;
   }
 
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] button > .drop-icon {
+    color: var(--ui-text-50) !important;
+  }
+
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
+    .btn-group.open button
+    > .drop-icon {
+    color: inherit !important;
+  }
+
   :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] .btn:focus {
     outline: 1px auto !important;
   }

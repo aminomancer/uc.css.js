@@ -51,7 +51,6 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
     --panel-border-color: var(--arrowpanel-border-color);
     --panel-border-radius: var(--arrowpanel-border-radius);
     --panel-padding: var(--arrowpanel-padding);
-    -moz-window-shadow: none;
   }
 
   panel[type="autocomplete-richlistbox"] {
@@ -77,8 +76,6 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
   }
 
   :is(panel, menupopup)::part(content) {
-    display: -moz-box;
-    -moz-box-flex: 1;
     padding: var(--panel-padding);
     color: var(--panel-color);
     background: var(--panel-background, Menu);
@@ -198,6 +195,7 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
     border-radius: var(--searchbar-popup-border-radius);
     box-shadow: var(--searchbar-popup-box-shadow);
     width: calc(var(--panel-width) + 10px);
+    margin: revert;
   }
 
   #managed-bookmarks > .toolbarbutton-icon,
@@ -690,10 +688,6 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
 
   @-moz-document url(chrome://browser/content/browser.xhtml)
   {
-    :is(panel, menupopup)::part(arrow) {
-      display: -moz-inline-box;
-    }
-
     :is(#customization-lwtheme-menu, #customization-uidensity-menu)::part(arrowbox) {
       -moz-box-ordinal-group: 2;
     }
@@ -842,10 +836,19 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
 
   /* prevent hiding the close button when audio is playing.
   undoes an irritating rule in the proton update */
-  :root[uidensity=compact] .tab-icon-stack[indicator-replaces-favicon] > :not(.tab-icon-overlay),
-  #tabbrowser-tabs[secondarytext-unsupported] .tab-icon-stack[indicator-replaces-favicon] > :not(.tab-icon-overlay),
-  :root:not([uidensity=compact]) #tabbrowser-tabs:not([secondarytext-unsupported]) .tabbrowser-tab:not(:hover) .tab-icon-overlay[indicator-replaces-favicon],
-  :root:not([uidensity=compact]) #tabbrowser-tabs:not([secondarytext-unsupported]) .tabbrowser-tab:hover .tab-icon-stack[indicator-replaces-favicon] > :not(.tab-icon-overlay) {
+  :root[uidensity="compact"] .tab-icon-stack[indicator-replaces-favicon] > :not(.tab-icon-overlay),
+  #tabbrowser-tabs[secondarytext-unsupported]
+    .tab-icon-stack[indicator-replaces-favicon]
+    > :not(.tab-icon-overlay),
+  :root:not([uidensity="compact"])
+    #tabbrowser-tabs:not([secondarytext-unsupported])
+    .tabbrowser-tab:not(:hover)
+    .tab-icon-overlay[indicator-replaces-favicon],
+  :root:not([uidensity="compact"])
+    #tabbrowser-tabs:not([secondarytext-unsupported])
+    .tabbrowser-tab:hover
+    .tab-icon-stack[indicator-replaces-favicon]
+    > :not(.tab-icon-overlay) {
     opacity: revert;
   }
 
@@ -1827,7 +1830,8 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
     fill: currentColor;
     -moz-context-properties: fill, fill-opacity, stroke;
     content: "";
-    display: -moz-inline-box;
+    /* see uc-nsRules.au.css */
+    /* display: -moz-inline-box; */
     background-position: center;
     background-repeat: no-repeat;
     background-image: url(chrome://userchrome/content/shortcut.svg);
@@ -1841,7 +1845,7 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
     fill: currentColor;
     -moz-context-properties: fill, fill-opacity, stroke;
     content: "";
-    display: -moz-inline-box;
+    /* display: -moz-inline-box; */
     background-position: center;
     background-repeat: no-repeat;
     background-image: url(chrome://userchrome/content/shortcut.svg);
@@ -2060,43 +2064,37 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
 
     .radio-check[selected] {
       border-color: var(--checkbox-checked-border-color, transparent);
-      background-color: var(--checkbox-checked-bgcolor, -moz-accent-color);
+      background-color: var(--checkbox-checked-bgcolor);
       background-image: url("chrome://global/skin/icons/radio.svg");
       background-position: center;
       background-repeat: no-repeat;
       background-size: contain;
       -moz-context-properties: fill;
       fill: currentColor;
-      color: var(--checkbox-checked-color, -moz-accent-color-foreground);
+      color: var(--checkbox-checked-color);
       color-adjust: exact;
     }
 
     radio:not([disabled="true"]):hover:active > .radio-check[selected] {
       background-color: var(
         --checkbox-checked-active-bgcolor,
-        color-mix(in srgb, currentColor 25%, -moz-accent-color)
+        color-mix(in srgb, currentColor 25%)
       );
     }
 
     radio:not([disabled="true"]):hover > .radio-check[selected] {
       background-color: var(
         --checkbox-checked-hover-bgcolor,
-        color-mix(in srgb, currentColor 12.5%, -moz-accent-color)
+        color-mix(in srgb, currentColor 12.5%)
       );
     }
 
     radio:not([disabled="true"]):hover:active > .radio-check {
-      background-color: var(
-        --checkbox-unchecked-active-bgcolor,
-        color-mix(in srgb, -moz-accent-color 8%, Field)
-      );
+      background-color: var(--checkbox-unchecked-active-bgcolor, color-mix(in srgb 8%, Field));
     }
 
     radio:not([disabled="true"]):hover > .radio-check {
-      background-color: var(
-        --checkbox-unchecked-hover-bgcolor,
-        color-mix(in srgb, -moz-accent-color 4%, Field)
-      );
+      background-color: var(--checkbox-unchecked-hover-bgcolor, color-mix(in srgb 4%, Field));
     }
 
     radio[disabled="true"] {

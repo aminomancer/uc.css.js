@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Restore pre-Proton Tab Sound Button
-// @version        2.3.3
+// @version        2.3.4
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Proton makes really big changes to tabs, in particular
@@ -28,9 +28,6 @@
   let css = /* css */ `.tab-icon-sound-label,
   .tab-secondary-label {
     display: none;
-  }
-  .tab-icon-sound {
-    display: -moz-box;
   }
   .tab-icon-sound:not([soundplaying], [muted], [activemedia-blocked], [pictureinpicture]),
   .tab-icon-sound[pinned] {

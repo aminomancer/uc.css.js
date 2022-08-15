@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Vertical Tabs Pane
-// @version        1.6.5
+// @version        1.6.6
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Create a vertical pane across from the sidebar that functions
@@ -2197,7 +2197,7 @@
 }
 @supports -moz-bool-pref("userChrome.tabs.tooltip.always-show-lock-icon") {
     #vertical-tabs-tooltip #places-tooltip-insecure-icon {
-        display: -moz-inline-box !important;
+        display: inline-block !important;
     }
 }
 #vertical-tabs-tooltip #places-tooltip-insecure-icon[pending] {
