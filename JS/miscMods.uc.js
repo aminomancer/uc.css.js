@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Misc. Mods
-// @version        2.0.2
+// @version        2.0.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Various tiny mods not worth making separate scripts for. Read the comments inside the script for details.
@@ -123,6 +123,30 @@
     // yourself if you use my CSS theme. If you don't, then make sure you add
     // `:root{--in-content-bg-dark: #000}` to your userChrome.css, or it will fall back to white.
     "Customize tab drag preview background color": true,
+
+    // With duskFox installed, we indicate container tabs by adding a colored
+    // stripe at the bottom of the tab. But we also add a purple stripe at the
+    // bottom of multiselected tabs, which overrides the container tab stripe.
+    // So when you multiselect a container tab, you can't tell it's a container
+    // tab until you deselect it. This mod will additionally add a CSS property
+    // that carries the container's icon in addition to its color. That's the
+    // same icon that shows in the urlbar on container tabs. Firefox's built-in
+    // styles don't use this for tabs, but duskFox does. Here's the style I use
+    // to show these icons in tabs in duskFox:
+    // .tabbrowser-tab.identity-icon-on-multiselect[usercontextid][multiselected="true"]
+    //   .tab-content::after {
+    //   content: "";
+    //   display: -moz-box;
+    //   height: 12px;
+    //   width: 12px;
+    //   margin-inline: 3px;
+    //   background: var(--identity-icon) center/contain no-repeat;
+    //   fill: var(--identity-icon-color);
+    //   -moz-context-properties: fill;
+    // }
+    // This is a pretty opinionated change and it doesn't do anything without
+    // duskFox or the above CSS, so it's disabled by default.
+    "Show container icons on multiselected tabs": false,
   };
   class UCMiscMods {
     constructor() {
@@ -144,6 +168,8 @@
       if (config["Don't exit DOM fullscreen when opening permissions popup"])
         this.permsPopupInFullscreen();
       if (config["Customize tab drag preview background color"]) this.tabDragPreview();
+      if (config["Show container icons on multiselected tabs"])
+        this.containerIconsOnMultiselectedTabs();
       this.randomTinyStuff();
     }
     stopDownloadsPanelFocus() {
@@ -324,6 +350,39 @@
               `getComputedStyle(this).getPropertyValue("--in-content-bg-dark").trim() || "white"`
             )
       );
+    }
+    containerIconsOnMultiselectedTabs() {
+      const lazy = {};
+      XPCOMUtils.defineLazyModuleGetters(lazy, {
+        ContextualIdentityService: "resource://gre/modules/ContextualIdentityService.jsm",
+      });
+      if (lazy.ContextualIdentityService.hasOwnProperty("setTabStyle")) return;
+      lazy.ContextualIdentityService.setTabStyle = function (tab) {
+        if (!tab.hasAttribute("usercontextid")) {
+          return;
+        }
+
+        let userContextId = tab.getAttribute("usercontextid");
+        let identity = this.getPublicIdentityFromId(userContextId);
+
+        let colorPrefix = "identity-color-";
+        let iconPrefix = "identity-icon-";
+        /* Remove the existing container color highlight if it exists */
+        for (let className of tab.classList) {
+          if (className.startsWith(colorPrefix) || className.startsWith(iconPrefix)) {
+            tab.classList.remove(className);
+          }
+        }
+        if (identity) {
+          if (identity.color) {
+            tab.classList.add(colorPrefix + identity.color);
+          }
+          if (identity.icon) {
+            tab.classList.add(iconPrefix + identity.icon);
+            tab.classList.add(iconPrefix + "on-multiselect");
+          }
+        }
+      };
     }
     randomTinyStuff() {
       // give the tracking protection popup's info button a tooltip

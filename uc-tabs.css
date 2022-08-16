@@ -83,19 +83,6 @@
   box-shadow: 0px 0px 25px 3px rgba(0, 0, 0, 0.1), 0px 0px 15px 0px hsla(0, 0%, 0%, 0.35) !important;
 }
 
-/* colored lines on container tabs */
-.tabbrowser-tab[usercontextid] .tab-context-line {
-  background: var(--identity-tab-color) !important;
-  height: 1px !important;
-  margin-bottom: 0 !important;
-}
-
-/* purple line on multiselected tabs */
-#TabsToolbar .tabbrowser-tab[multiselected="true"] .tab-context-line {
-  min-height: 1px !important;
-  background-color: var(--multiselected-color) !important;
-}
-
 .tabbrowser-tab .tab-context-line {
   display: -moz-box !important;
   -moz-box-ordinal-group: 2 !important;
@@ -105,8 +92,30 @@
   transition: none !important;
 }
 
+/* colored lines on container tabs */
+.tabbrowser-tab[usercontextid] .tab-context-line {
+  background-color: var(--identity-tab-color) !important;
+}
+
+/* purple line on multiselected tabs */
+.tabbrowser-tab[multiselected="true"] .tab-context-line {
+  background-color: var(--multiselected-color) !important;
+}
+
 .tabbrowser-tab:not([usercontextid], [multiselected]) .tab-context-line {
   display: none !important;
+}
+
+.tabbrowser-tab.identity-icon-on-multiselect[usercontextid][multiselected="true"]
+  .tab-content::after {
+  content: "";
+  display: -moz-box;
+  height: 12px;
+  width: 12px;
+  margin-inline: 3px;
+  background: var(--identity-icon) center/contain no-repeat;
+  fill: var(--identity-icon-color);
+  -moz-context-properties: fill;
 }
 
 .tab-label-container {
