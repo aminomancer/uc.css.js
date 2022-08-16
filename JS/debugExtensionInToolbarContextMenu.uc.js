@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Debug Extension in Toolbar Context Menu
-// @version        1.4.0
+// @version        1.4.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Adds a new context menu when right-clicking an add-on's
@@ -30,7 +30,7 @@
 // used in CSS rules like @-moz-document. The menu items' labels are not
 // localized automatically since Firefox doesn't include any similar strings. If
 // you need to change the language or anything, modify the strings below under
-// "static config." As usual, icons for the new menu are included in
+// "config." As usual, icons for the new menu are included in
 // uc-context-menu-icons.css
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
@@ -47,7 +47,7 @@ class DebugExtension {
   // the label, then instead of underlining the letter in the label, it will add
   // the access key to the end of the label in parentheses.
   // e.g. "Debug Extension (Q)" instead of "_D_ebug Extension".
-  static config = {
+  config = {
     menuLabel: "Debug Extension", // menu label
     menuAccessKey: "D",
     // individual menu items
@@ -92,8 +92,12 @@ class DebugExtension {
       accesskey: "U",
     },
   };
+  actionTypes = ["BrowserAction", "PageAction", "SidebarAction", "Options"];
   constructor() {
     this.setupUpdate();
+    this.toolbarContext = document.getElementById("toolbar-context-menu");
+    this.overflowContext = document.getElementById("customizationPanelItemContextMenu");
+    this.pageActionContext = document.getElementById("pageActionContextMenu");
     this.toolbarMenu = this.makeMainMenu(this.toolbarContext);
     this.toolbarMenupopup = this.toolbarMenu.appendChild(document.createXULElement("menupopup"));
     this.toolbarMenupopup.addEventListener("popupshowing", this);
@@ -108,10 +112,7 @@ class DebugExtension {
     // make a menu item for each type of page within each context
     [
       "Manifest",
-      {
-        name: "ViewDocs",
-        children: ["BrowserAction", "PageAction", "SidebarAction", "Options"],
-      },
+      { name: "ViewDocs", children: this.actionTypes },
       "Inspector",
       "ViewSource",
       "CopyID",
@@ -133,24 +134,6 @@ class DebugExtension {
       if (value === void 0) element.removeAttribute(name);
       else element.setAttribute(name, value);
   }
-  get toolbarContext() {
-    return (
-      this._toolbarContext ||
-      (this._toolbarContext = document.getElementById("toolbar-context-menu"))
-    );
-  }
-  get overflowContext() {
-    return (
-      this._overflowContext ||
-      (this._overflowContext = document.getElementById("customizationPanelItemContextMenu"))
-    );
-  }
-  get pageActionContext() {
-    return (
-      this._pageActionContext ||
-      (this._pageActionContext = document.getElementById("pageActionContextMenu"))
-    );
-  }
   // enable/disable menu items depending on whether the clicked extension has pages available to open.
   handleEvent(e) {
     if (e.target !== e.currentTarget) return;
@@ -158,20 +141,16 @@ class DebugExtension {
     let id = this.getExtensionId(popup);
     if (!id) return;
     let extension = WebExtensionPolicy.getByID(id).extension;
-    if (e.target.className.includes("Submenu-Popup")) {
-      popup.querySelector(".customize-context-BrowserAction").disabled =
-        !extension.manifest.browser_action?.default_popup;
-      popup.querySelector(".customize-context-PageAction").disabled =
-        !extension.manifest.page_action?.default_popup;
-      popup.querySelector(".customize-context-SidebarAction").disabled =
-        !extension.manifest.sidebar_action?.default_panel;
-      popup.querySelector(".customize-context-Options").disabled =
-        !extension.manifest.options_ui?.page;
+    let actions = new Map();
+    for (let type of this.actionTypes) actions.set(type, this.getActionURL(extension, type));
+    if (popup.className.includes("Submenu-Popup")) {
+      actions.forEach((url, type) => {
+        popup.querySelector(".customize-context-" + type).disabled = !url;
+      });
     } else {
-      popup.querySelector(".customize-context-ViewDocs-Submenu").disabled =
-        !extension.manifest.browser_action?.default_popup &&
-        !extension.manifest.page_action?.default_popup &&
-        !extension.manifest.options_ui?.page;
+      popup.querySelector(".customize-context-ViewDocs-Submenu").disabled = [
+        ...actions.values(),
+      ].every(url => !url);
       popup.querySelector(".customize-context-ViewSource").disabled =
         extension.addonData.isSystem ||
         extension.addonData.builtIn ||
@@ -182,8 +161,8 @@ class DebugExtension {
     let menu = document.createXULElement("menu");
     this.maybeSetAttributes(menu, {
       class: "customize-context-debugExtension",
-      label: DebugExtension.config.menuLabel,
-      accesskey: DebugExtension.config.menuAccessKey,
+      label: this.config.menuLabel,
+      accesskey: this.config.menuAccessKey,
       contexttype: popup === this.pageActionContext ? void 0 : "toolbaritem",
     });
     popup
@@ -197,7 +176,7 @@ class DebugExtension {
   }
   /**
    * make a menu item that opens a given type of page, with label & accesskey
-   * corresponding to those defined in the "config" static property
+   * corresponding to those defined in the "config" property
    * @param {string} type (which menuitem to make)
    * @param {object} popup (where to put the menuitem)
    * @returns a menuitem DOM node
@@ -206,8 +185,8 @@ class DebugExtension {
     let item = document.createXULElement("menuitem");
     this.maybeSetAttributes(item, {
       class: `customize-context-${type}`,
-      label: DebugExtension.config[type].label,
-      accesskey: DebugExtension.config[type].accesskey,
+      label: this.config[type].label,
+      accesskey: this.config[type].accesskey,
       oncommand: `debugExtensionMenu.onCommand(event, this.parentElement, "${type}")`,
       contexttype: popup.closest("#pageActionContextMenu") ? void 0 : "toolbaritem",
     });
@@ -226,8 +205,8 @@ class DebugExtension {
     let menu = document.createXULElement("menu");
     this.maybeSetAttributes(menu, {
       class: `customize-context-${name}-Submenu`,
-      label: DebugExtension.config[name].label,
-      accesskey: DebugExtension.config[name].accesskey,
+      label: this.config[name].label,
+      accesskey: this.config[name].accesskey,
       contexttype: popup.closest("#pageActionContextMenu") ? void 0 : "toolbaritem",
     });
     let menupopup = menu.appendChild(document.createXULElement("menupopup"));
@@ -243,9 +222,40 @@ class DebugExtension {
       return BrowserPageActions.actionForNode(popup.triggerNode).extensionID;
     else return ToolbarContextMenu._getExtensionId(popup);
   }
+  // get the URL for a given type of extension page, e.g. the popup that appears
+  // when you click the addon's toolbar button, or the addon's sidebar panel.
+  getActionURL(extension, type = this.actionTypes[0]) {
+    if (!extension) return;
+    let url;
+    let { global } = extension.apiManager;
+    let { manifest } = extension;
+    switch (type) {
+      case "BrowserAction":
+        url =
+          manifest.browser_action?.default_popup ||
+          global.browserActionFor(extension)?.action.globals.popup;
+        break;
+      case "PageAction":
+        url =
+          manifest.page_action?.default_popup ||
+          global.pageActionFor(extension)?.action.globals.popup;
+        break;
+      case "SidebarAction":
+        url =
+          manifest.sidebar_action?.default_panel ||
+          global.sidebarActionFor(extension)?.globals.panel;
+        break;
+      case "Options":
+        url = manifest.options_ui?.page;
+        break;
+      default:
+    }
+    return url;
+  }
   // click callback
   onCommand(event, popup, type) {
     let id = this.getExtensionId(popup);
+    if (!id) return;
     // this contains information about an extension with a given ID.
     let extension = WebExtensionPolicy.getByID(id).extension;
     // use extension's principal if it's available.
@@ -257,16 +267,10 @@ class DebugExtension {
         url = extension.baseURL + `manifest.json`;
         break;
       case "BrowserAction":
-        url = extension.manifest.browser_action?.default_popup;
-        break;
       case "PageAction":
-        url = extension.manifest.page_action?.default_popup;
-        break;
       case "SidebarAction":
-        url = extension.manifest.sidebar_action?.default_panel;
-        break;
       case "Options":
-        url = extension.manifest.options_ui?.page;
+        url = this.getActionURL(extension, type);
         break;
       case "Inspector":
         url = `about:devtools-toolbox?id=${encodeURIComponent(id)}&type=extension`;
@@ -285,12 +289,14 @@ class DebugExtension {
           window.CustomHint?.show(popup.triggerNode, "Copied");
         return;
     }
+    if (!url) return;
     // if the extension's principal isn't available for some reason, make a content principal.
-    if (!triggeringPrincipal)
+    if (!triggeringPrincipal) {
       triggeringPrincipal = Services.scriptSecurityManager.createContentPrincipal(
         Services.io.newURI(url),
         {}
       );
+    }
     // whether to open in the current tab or a new tab. only opens in the
     // current tab if the current tab is on the new tab page or home page.
     let where = new RegExp(`(${BROWSER_NEW_TAB_URL}|${HomePage.get(window)})`, "i").test(
