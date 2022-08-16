@@ -769,6 +769,64 @@ requires recentlyClosedTabsContextMenu.uc.js */
   ) !important;
 }
 
+/* little dots for container tabs etc.
+they expand into big stripes on hover/focus.
+this overrides the rule above. */
+@media (prefers-reduced-motion: no-preference) {
+  toolbarbutton.recently-closed-item[usercontextid],
+  menuitem.recently-closed-item[usercontextid],
+  .all-tabs-item:is([selected], [multiselected], [usercontextid]) .all-tabs-button {
+    background-image: none !important;
+  }
+
+  toolbarbutton.recently-closed-item[usercontextid]::before,
+  menuitem.recently-closed-item[usercontextid]::before,
+  .all-tabs-item .all-tabs-button::before {
+    content: "";
+    display: block;
+    min-width: 4px;
+    min-height: 4px;
+    border-radius: 100%;
+    margin-inline: calc(0px - var(--arrowpanel-menuitem-padding-inline)) calc(8px - var(--arrowpanel-menuitem-padding-inline));
+    margin-block: calc(0px - var(--arrowpanel-menuitem-padding-block));
+    background-color: var(--identity-tab-color);
+    transition: 0.15s margin var(--uc-smooth-timing-function),
+      0.15s min-width var(--uc-smooth-timing-function),
+      0.15s min-height var(--uc-smooth-timing-function),
+      0.15s border-radius var(--uc-smooth-timing-function);
+  }
+
+  menuitem.recently-closed-item[usercontextid]::before {
+    margin-inline: 0 -4px;
+    margin-block: 0;
+  }
+
+  .all-tabs-item .all-tabs-button::before {
+    background-color: var(--main-stripe-color, transparent);
+    transition: 0.15s margin var(--uc-smooth-timing-function),
+      0.15s min-width var(--uc-smooth-timing-function),
+      0.15s min-height var(--uc-smooth-timing-function),
+      0.15s border-radius var(--uc-smooth-timing-function),
+      0.15s background var(--uc-smooth-timing-function);
+  }
+
+  toolbarbutton.recently-closed-item[usercontextid]:not([disabled]):is(:hover, :focus-visible)::before,
+  .all-tabs-item:is([selected], [multiselected], [usercontextid]:is(:hover, :focus-within))
+    .all-tabs-button::before {
+    min-width: 3px;
+    min-height: var(--subviewbutton-height);
+    margin-inline: calc(0px - var(--arrowpanel-menuitem-padding-inline)) calc(9px - var(--arrowpanel-menuitem-padding-inline));
+    border-radius: var(--arrowpanel-menuitem-border-radius) 0 0 var(--arrowpanel-menuitem-border-radius);
+  }
+
+  menuitem.recently-closed-item[usercontextid]:not([disabled])[_moz-menuactive="true"]::before {
+    min-width: 3px;
+    min-height: var(--menuitem-height);
+    margin-inline: 0 -3px;
+    border-radius: var(--context-menuitem-border-radius) 0 0 var(--context-menuitem-border-radius);
+  }
+}
+
 /* this is for miscMods.uc.js' setting "Anchor permissions popup to granted permission icon" */
 /* adjust the popup and icon dimensions commensurately */
 #permission-popup[anchor-to-icon] {

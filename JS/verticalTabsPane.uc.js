@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Vertical Tabs Pane
-// @version        1.6.6
+// @version        1.6.7
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Create a vertical pane across from the sidebar that functions
@@ -381,7 +381,7 @@
     // close buttons) this way we can arrow up/down to navigate through tabs
     // very quickly, and arrow left/right to focus the mute and close buttons.
     get _verticalWalker() {
-      if (this.__verticalWalker) {
+      if (!this.__verticalWalker) {
         this.__verticalWalker = document.createTreeWalker(
           this.pane,
           NodeFilter.SHOW_ELEMENT,
@@ -1833,7 +1833,7 @@
     -moz-box-align: center;
     padding-inline-end: 2px;
     margin: 0;
-    overflow: hidden;
+    overflow: clip;
     position: relative;
 }
 #vertical-tabs-pane[unpinned]:not([expanded]) #vertical-tabs-list .all-tabs-item {

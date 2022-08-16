@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           All Tabs Menu Expansion Pack
-// @version        2.0.9
+// @version        2.1.0
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Next to the "new tab" button in Firefox there's a V-shaped button that opens a
@@ -930,7 +930,7 @@
     box-shadow: none;
     -moz-box-align: center;
     padding-inline-end: 2px;
-    overflow: hidden;
+    overflow: clip;
     position: relative;
 }
 .panel-subview-body > .all-tabs-item .all-tabs-button:not([disabled], [open]):focus {
