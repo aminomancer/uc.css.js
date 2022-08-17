@@ -307,6 +307,10 @@ menuitem#fill-login-generated-password > .menu-text,
   > .menu-text,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
   menu[label="Bitwarden"]
+  :is(menu, menuitem)[id$="-menuitem-_copy-totp"]
+  > .menu-text,
+:is(#contentAreaContextMenu, #toolbar-context-menu)
+  menu[label="Bitwarden"]
   :is(menu, menuitem)[id$="-menuitem-_generate-password"]
   > .menu-text,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
@@ -625,6 +629,9 @@ menuitem#fill-login-generated-password::before,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
   menu[label="Bitwarden"]
   :is(menu, menuitem)[id$="-menuitem-_copy-password"]::before,
+:is(#contentAreaContextMenu, #toolbar-context-menu)
+  menu[label="Bitwarden"]
+  :is(menu, menuitem)[id$="-menuitem-_copy-totp"]::before,
 :is(#contentAreaContextMenu, #toolbar-context-menu)
   menu[label="Bitwarden"]
   :is(menu, menuitem)[id$="-menuitem-_generate-password"]::before,
@@ -1454,6 +1461,12 @@ menu#fill-login::before,
   menu[label="Bitwarden"]
   :is(menu, menuitem)[id$="-menuitem-_copy-password"]::before {
   background-image: url(chrome://userchrome/content/skin/login.svg);
+}
+
+:is(#contentAreaContextMenu, #toolbar-context-menu)
+  menu[label="Bitwarden"]
+  :is(menu, menuitem)[id$="-menuitem-_copy-totp"]::before {
+  background-image: url(chrome://userchrome/content/material/lock-clock.svg);
 }
 
 menuitem#fill-login-generated-password::before,
