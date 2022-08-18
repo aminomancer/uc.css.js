@@ -346,17 +346,17 @@ by underlining them (requires urlbarMods.uc.js) */
   flex-shrink: 1 !important;
 }
 
-.urlbarView-url,
-.urlbarView[actionoverride]
+.urlbar-results:not([wrap]) .urlbarView-url,
+.urlbar-results:not([wrap]) .urlbarView[actionoverride]
   .urlbarView-row[type="switchtab"]
   > .urlbarView-row-inner
   > .urlbarView-url {
   flex-shrink: 3 !important;
 }
 
-.urlbarView[actionoverride] .urlbarView-row[has-url] > .urlbarView-row-inner > .urlbarView-no-wrap,
-.urlbarView-row[has-url]:not([type$="tab"]) > .urlbarView-row-inner > .urlbarView-no-wrap,
-.urlbarView-row[has-url]:is([type="remotetab"], [sponsored]):is(:hover, [selected])
+.urlbarView[actionoverride] .urlbar-results:not([wrap]) .urlbarView-row[has-url] > .urlbarView-row-inner > .urlbarView-no-wrap,
+.urlbar-results:not([wrap]) .urlbarView-row[has-url]:not([type$="tab"]) > .urlbarView-row-inner > .urlbarView-no-wrap,
+.urlbar-results:not([wrap]) .urlbarView-row[has-url]:is([type="remotetab"], [sponsored]):is(:hover, [selected])
   > .urlbarView-row-inner
   > .urlbarView-no-wrap {
   flex-shrink: 0 !important;
@@ -836,7 +836,7 @@ so you might wanna turn the animation off. I might even make it off by default. 
 }
 
 #nav-bar:not([overflowing="true"]) .urlbarView[noresults="true"],
-#nav-bar:not([overflowing="true"]) .urlbarView[noresults="true"] #urlbar-results {
+#nav-bar:not([overflowing="true"]) .urlbarView[noresults="true"] .urlbar-results {
   padding-block: 0 !important;
   box-shadow: none !important;
 }
@@ -862,7 +862,7 @@ so you might wanna turn the animation off. I might even make it off by default. 
 }
 
 .urlbarView-row-inner {
-  padding-block: 2px !important;
+  padding-block: 4px !important;
   box-sizing: border-box !important;
   min-height: 34px !important;
   border-radius: var(--arrowpanel-menuitem-border-radius) !important;
@@ -943,6 +943,14 @@ so you might wanna turn the animation off. I might even make it off by default. 
   padding: 2px !important;
 }
 
+.urlbarView-results[wrap] > .urlbarView-row > .urlbarView-row-inner {
+	flex-wrap: revert !important;
+}
+
+.urlbarView-results[wrap] > .urlbarView-row[has-url] > .urlbarView-row-inner {
+	flex-wrap: wrap !important;
+}
+
 .urlbarView-results[wrap]
   > .urlbarView-row[has-url]
   > .urlbarView-row-inner
@@ -963,6 +971,11 @@ so you might wanna turn the animation off. I might even make it off by default. 
     var(--urlbarView-item-inline-padding) + 0.5px + 16px + calc(var(--urlbar-icon-padding) + 2px) +
       16px
   ) !important; */
+}
+
+.urlbarView-results[wrap] > .urlbarView-row[has-url] > .urlbarView-row-inner > .urlbarView-url,
+.urlbarView-results[wrap] > .urlbarView-row[type="bestmatch"] > .urlbarView-row-inner > .urlbarView-row-body > .urlbarView-row-body-top > .urlbarView-url {
+	margin-top: revert !important;
 }
 
 .urlbarView-results[wrap]
