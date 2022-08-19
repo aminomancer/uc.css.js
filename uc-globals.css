@@ -396,7 +396,7 @@ but other than that these variables should be available everywhere. */
   --uc-content-button-background-solid: hsl(240, 3%, 18%);
   --uc-content-border-hover: var(--uc-content-button-background-hover);
 
-  --uc-checkbox-border-color: var(--dialog-box-border-color);
+  --uc-checkbox-border-color: hsla(232, 100%, 85%, 0.2);
   --uc-checkbox-checked-border-color: transparent;
   --uc-checkbox-unchecked-bgcolor: var(--uc-arrowpanel-faint);
   --uc-checkbox-unchecked-hover-bgcolor: var(--uc-arrowpanel-dimmed);

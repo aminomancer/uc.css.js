@@ -642,7 +642,7 @@ panel[type="autocomplete-richlistbox"]
   z-index: 0 !important;
 }
 
-:is(.tab-prompt-dialog, #window-modal-dialog) .dialogBox {
+:is(.tab-prompt-dialog, #window-modal-dialog) .dialogBox:not(.fullScreen) {
   /* tab-prompt-dialogs are anchored to the top of the browser content area.
   this makes them look like they emerge from under the navbar. */
   margin-top: 0px !important;
@@ -682,20 +682,6 @@ rtl languages. adjust the border radius accordingly */
   border-bottom-right-radius: 5px !important;
 }
 
-/* blur backdrop filter */
-.content-prompt-dialog > .dialogOverlay[style] .dialogFrame {
-  /* temporarily disabled due to backdrop-filter being disabled.
-  see https://bugzilla.mozilla.org/show_bug.cgi?id=1741779 */
-
-  /* background-color: var(--dialog-bgcolor) !important;
-  background-image: var(--acrylic-texture) !important;
-  backdrop-filter: var(--acrylic-blur) !important;
-  border: 1px solid var(--blurred-dialog-border-color); */
-
-  background-color: var(--ui-quaternary-bg) !important;
-  border: 1px solid var(--arrowpanel-border-color);
-}
-
 /* hide the background overlay */
 .dialogOverlay[topmost="true"],
 #window-modal-dialog::backdrop {
@@ -703,7 +689,7 @@ rtl languages. adjust the border radius accordingly */
 }
 
 /* make the box shadow even, i hate offset drop shadows */
-:is(.content-prompt-dialog, .tab-prompt-dialog, #window-modal-dialog) .dialogBox {
+:is(.content-prompt-dialog, .tab-prompt-dialog, #window-modal-dialog) .dialogBox:not(.fullScreen) {
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1), 0 0 8px 2px rgba(0, 0, 0, 0.1) !important;
 }
 
@@ -713,10 +699,6 @@ rtl languages. adjust the border radius accordingly */
     0.5px + var(--urlbar-container-height, 40px) + var(--tab-min-height, 36px)
   ) !important;
   clip-path: inset(0 -100% -100% -100%);
-}
-
-:is(#window-modal-dialog, .tab-prompt-dialog) > .dialogOverlay[style] .dialogFrame {
-  background-color: var(--ui-quaternary-bg) !important;
 }
 
 /* center text in any dialog box */
@@ -749,7 +731,7 @@ rtl languages. adjust the border radius accordingly */
   #commonDialogWindow[dialogroot],
   #commonDialogWindow[dialogroot] *,
   .dialog-button-box {
-    --in-content-page-background: transparent !important;
+    --in-content-page-background: var(--ui-quaternary-bg) !important;
     --in-content-page-color: var(--uc-parent-page-color) !important;
     --in-content-box-background: var(--dialog-box-bgcolor) !important;
     --in-content-box-background-dim: var(--dialog-box-bgcolor-dim) !important;
@@ -1129,8 +1111,10 @@ rtl languages. adjust the border radius accordingly */
 {
   :root[dialogroot],
   :root[dialogroot] dialog,
-  :root[dialogroot] richlistbox[id]:not(#categories) > richlistitem[selected] {
-    --in-content-page-background: transparent !important;
+  :root[dialogroot] richlistbox[id]:not(#categories) > richlistitem[selected],
+  :root[dialogroot] .onboardingContainer,
+  :root[dialogroot] .onboardingContainer .screen {
+    --in-content-page-background: var(--ui-quaternary-bg) !important;
     --in-content-page-color: var(--uc-parent-page-color) !important;
     --in-content-box-background: var(--dialog-box-bgcolor) !important;
     --in-content-box-background-dim: var(--dialog-box-bgcolor-dim) !important;
@@ -1163,6 +1147,23 @@ rtl languages. adjust the border radius accordingly */
     --dropdown-bgcolor: var(--arrowpanel-background) !important;
     --in-content-button-border-radius: var(--general-button-border-radius) !important;
     --in-content-button-vertical-padding: 5px !important;
+    --mr-welcome-background-color: var(--in-content-page-background) !important;
+  }
+  
+  .onboardingContainer .screen.light-text {
+    --in-content-page-color: var(--ui-text-100) !important;
+    --in-content-primary-button-text-color: var(--ui-text-100) !important;
+    --in-content-primary-button-text-color-hover: var(--ui-text-100) !important;
+  }
+
+  /* remove spotlight backdrop overlay */
+  .onboardingContainer .screen[pos="center"] {
+    background-color: transparent !important;
+  }
+
+  .onboardingContainer .main-content {
+    border: 1px solid var(--arrowpanel-border-color);
+    background-color: var(--in-content-page-background) !important;
   }
 
   :root[dialogroot] input[type="checkbox"]:checked {

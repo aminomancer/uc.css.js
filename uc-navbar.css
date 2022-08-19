@@ -634,8 +634,8 @@ translucent with acrylic effect. enable layout.css.backdrop-filter.enabled */
   --in-content-primary-button-background-hover: var(--purple-35) !important;
   --in-content-primary-button-background-active: var(--purple-30) !important;
   --in-content-primary-button-text-color: var(--light-on-dark-button-text-color) !important;
+  --in-content-primary-button-text-color-hover: var(--light-on-dark-button-text-color) !important;
   --in-content-item-selected: var(--purple-40) !important;
-  --in-content-border-hover: var(--dialog-box-border-hover) !important;
   --checkbox-border-color: var(--in-content-box-border-color) !important;
   --checkbox-checked-border-color: transparent !important;
   --checkbox-unchecked-bgcolor: var(--in-content-button-background) !important;

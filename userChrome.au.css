@@ -314,9 +314,11 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
     fill: var(--warning-color);
   }
 
-  .tab-icon-image[sharing]:not([selected]),
-  .tab-sharing-icon-overlay {
-    animation: 3s linear uc-tab-sharing-icon-pulse infinite;
+  @media (prefers-reduced-motion: no-preference) {
+    .tab-icon-image[sharing]:not([selected]),
+    .tab-sharing-icon-overlay {
+      animation: 3s linear uc-tab-sharing-icon-pulse infinite;
+    }
   }
 
   /* without this, when hovering a tab, the sharing icon and tab icon will just
