@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Auto-hide Navbar Support
-// @version        1.2.0
+// @version        1.2.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    In fullscreen, the navbar hides automatically when you're not
@@ -20,10 +20,13 @@
 // ==/UserScript==
 
 class AutoHideHandler {
+  prefs = {
+    autohide: "browser.fullscreen.autohide",
+  };
   constructor() {
-    let autohidePref = "browser.fullscreen.autohide";
-    this.observe(Services.prefs, "nsPref:read", autohidePref);
-    Services.prefs.addObserver(autohidePref, this);
+    this.popups = new Set();
+    this.observe(Services.prefs, "nsPref:read", this.prefs.autohide);
+    Services.prefs.addObserver(this.prefs.autohide, this);
     for (let ev of ["popupshowing", "popuphiding"]) {
       this.mainPopupSet.addEventListener(ev, this, true);
       gNavToolbox.addEventListener(ev, this, true);
@@ -73,7 +76,7 @@ class AutoHideHandler {
   }
   _onPrefChanged(sub, pref) {
     switch (pref) {
-      case "browser.fullscreen.autohide":
+      case this.prefs.autohide:
         let value = this.getPref(sub, pref, true);
         if (value) document.documentElement.setAttribute("fullscreen-autohide", value);
         else document.documentElement.removeAttribute("fullscreen-autohide");
@@ -111,13 +114,15 @@ class AutoHideHandler {
       return;
     switch (event.type) {
       case "popupshowing":
+        this.popups.add(targ);
         this.navBlock.setAttribute("popup-status", true);
         break;
       case "popuphiding":
         if (popNode?.closest("panel") || popNode?.closest("menupopup")) return;
         let panel = targ.closest("panel");
         if (targ !== panel && panel?.getAttribute("panelopen")) return;
-        this.navBlock.removeAttribute("popup-status");
+        this.popups.delete(targ);
+        if (!this.popups.size) this.navBlock.removeAttribute("popup-status");
         break;
     }
   }

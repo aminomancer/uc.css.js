@@ -529,7 +529,8 @@ panel .toolbaritem-combined-buttons {
 }
 
 #appMenu-zoom-controls #appMenu-zoomReset-button2[disabled] {
-  opacity: 0.6 !important;
+  background-color: transparent !important;
+  border-color: transparent !important;
 }
 
 #appMenu-zoom-controls #appMenu-zoomReset-button2 .toolbarbutton-text {
