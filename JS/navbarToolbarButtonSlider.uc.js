@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Navbar Toolbar Button Slider
-// @version        2.8.2
+// @version        2.8.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Wrap all toolbar buttons in a scrollable container. It can
@@ -342,7 +342,9 @@ class NavbarToolbarSlider {
     let overflown = this.isOverflowing;
     let array = [...this.widgets].filter(this.filterFn, this);
     if (overflown) {
-      this.wrapAll(array, this.cOverflow);
+      array.forEach(button => {
+        if (button.getAttribute("overflows") !== "false") this.cOverflow.appendChild(button);
+      });
       this.cOverflow.insertBefore(this.outer, this.cOverflow.firstElementChild);
     } else this.wrapAll(array, this.inner);
     this.outer.hidden = overflown;
@@ -351,9 +353,12 @@ class NavbarToolbarSlider {
   onWidgetOverflow(aNode, aContainer) {
     if (aNode.ownerGlobal !== window) return;
     if (aNode === this.outer && aContainer === this.cTarget) {
-      NavbarToolbarSlider.appendLoop(this.kids, this.cOverflow);
+      [...this.kids].forEach(button => {
+        if (button.getAttribute("overflows") === "false") {
+          this.cTarget.insertBefore(button, this.outer);
+        } else this.cOverflow.appendChild(button);
+      });
       this.outer.hidden = true;
-      this.reOrder();
     }
   }
   onWidgetUnderflow(aNode, aContainer) {

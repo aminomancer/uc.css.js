@@ -426,7 +426,7 @@ const toolboxButtonL10n = {
           let shortcut = hotkey ? ` (${ShortcutUtils.prettifyShortcut(hotkey)})` : "";
           toolbarbutton.label = labelString;
           label.value = labelString;
-          toolbarbutton.tooltipText = `${labelString}${shortcut}`;
+          toolbarbutton.tooltipText = labelString + shortcut;
         };
 
         // remove this window's observers when the window closes, since observers are global
