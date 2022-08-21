@@ -18,6 +18,7 @@ tabmodalprompt {
   --in-content-button-background-hover: var(--arrowpanel-dimmed-further) !important;
   --in-content-button-background-active: var(--arrowpanel-dimmed-even-further) !important;
   --in-content-item-selected: var(--purple-40) !important;
+  --in-content-border-color: var(--dialog-box-border-color) !important;
   --in-content-border-hover: var(--dialog-box-border-hover) !important;
   --in-content-link-color: var(--purple-35) !important;
   --in-content-link-color-hover: var(--purple-30) !important;
@@ -740,6 +741,7 @@ rtl languages. adjust the border radius accordingly */
     --in-content-button-background-hover: var(--arrowpanel-dimmed-further) !important;
     --in-content-button-background-active: var(--arrowpanel-dimmed-even-further) !important;
     --in-content-item-selected: var(--purple-40) !important;
+    --in-content-border-color: var(--dialog-box-border-color) !important;
     --in-content-border-hover: var(--dialog-box-border-hover) !important;
     --in-content-link-color: var(--purple-35) !important;
     --in-content-link-color-hover: var(--purple-30) !important;
@@ -1032,6 +1034,7 @@ rtl languages. adjust the border radius accordingly */
     --in-content-button-background-active: var(--uc-content-button-background-active) !important;
     --in-content-button-background-solid: var(--uc-content-button-background-solid);
     --in-content-item-selected: var(--purple-40) !important;
+    --in-content-border-color: var(--uc-content-border-color) !important;
     --in-content-border-hover: var(--uc-content-border-hover) !important;
     --in-content-link-color: var(--purple-30) !important;
     --in-content-link-color-hover: var(--purple-25) !important;
@@ -1124,6 +1127,7 @@ rtl languages. adjust the border radius accordingly */
     --in-content-button-background-active: var(--arrowpanel-dimmed-even-further) !important;
     --in-content-item-selected: var(--purple-40) !important;
     --in-content-item-hover: var(--arrowpanel-dimmed) !important;
+    --in-content-border-color: var(--dialog-box-border-color) !important;
     --in-content-border-hover: var(--dialog-box-border-hover) !important;
     --in-content-link-color: var(--purple-35) !important;
     --in-content-link-color-hover: var(--purple-30) !important;

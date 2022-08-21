@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Toolbox Button
-// @version        1.2.6
+// @version        1.2.7
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Adds a new toolbar button that 1) opens the content toolbox on left click;
@@ -32,82 +32,78 @@
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
-// Modify these strings for easy localization. I tried to use built-in strings
-// for this so it would automatically localize itself, but I found that every
-// reference to the "Browser Toolbox" throughout the entire firefox UI is
-// derived from a single message in a single localization file, which doesn't
-// follow the standard format. It can only be parsed by the devtools' own
-// special l10n module, which itself can only be imported by a CJS module.
-// Requiring CJS just for a button seems ridiculous, plus there really aren't
-// any localized strings that work for these confirmation messages anyway, or
-// even the tooltip. So if your UI language isn't English you can modify all the
-// strings created by this script in the following object:
-const toolboxButtonL10n = {
-  // Confirmation hint. You receive this message when you right click the
-  // toolbox button, but a toolbox process for the window is already open. You
-  // can only have one toolbox open per-window. So if I have 3 windows open, and
-  // I right-click the toolbox button in window 1, then it'll launch a browser
-  // toolbox for window 1. If I then right-click the toolbox button in window 2,
-  // it'll launch a browser toolbox for window 2. But if I go back to window 1
-  // and right-click the toolbox button a second time, it will do nothing except
-  // show a brief confirmation hint to explain the lack of action.
-  alreadyOpenMsg: "Browser Toolbox is already open.",
-  // Confirmation hint. This appears when you first middle-click the toolbox
-  // button. It signifies that popups are being kept open. That is, "popup
-  // auto-hide" has been temporarily disabled.
-  holdingOpenMsg: "Holding popups open.",
-  // Confirmation hint. This appears when you middle-click the toolbox button a
-  // second time, toggling "popup auto-hide" back on, thereby allowing popups to
-  // close on their own.
-  lettingCloseMsg: "Letting popups close.",
-  menuBundle: Services.strings.createBundle("chrome://devtools/locale/menus.properties"),
-  toolboxBundle: Services.strings.createBundle("chrome://devtools/locale/toolbox.properties"),
-  getString(name, where) {
-    return this[`${where}Bundle`].GetStringFromName(name);
-  },
-  get contentLabel() {
-    return (
-      this._contentLabel ||
-      (this._contentLabel = this.getString("browserContentToolboxMenu.label", "menu"))
-    );
-  },
-  get browserLabel() {
-    return (
-      this._browserLabel ||
-      (this._browserLabel = this.getString("browserToolboxMenu.label", "menu"))
-    );
-  },
-  get autoHideLabel() {
-    return (
-      this._autoHideLabel ||
-      (this._autoHideLabel = this.getString("toolbox.meatballMenu.noautohide.label", "toolbox"))
-    );
-  },
-  get defaultLabel() {
-    return this.contentLabel;
-  },
-  get defaultTooltip() {
-    return this.defaultLabel;
-  },
-};
-
 (() => {
-  let toolboxLauncher = ChromeUtils.import(
-    "resource://devtools/client/framework/browser-toolbox/Launcher.jsm"
-  ).BrowserToolboxLauncher;
+  // Modify these strings for easy localization. I tried to use built-in strings
+  // for this so it would automatically localize itself, but I found that every
+  // reference to the "Browser Toolbox" throughout the entire firefox UI is
+  // derived from a single message in a single localization file, which doesn't
+  // follow the standard format. It can only be parsed by the devtools' own
+  // special l10n module, which itself can only be imported by a CJS module.
+  // Requiring CJS just for a button seems ridiculous, plus there really aren't
+  // any localized strings that work for these confirmation messages anyway, or
+  // even the tooltip. So if your UI language isn't English you can modify all the
+  // strings created by this script in the following object:
+  const l10n = {
+    // Confirmation hint. You receive this message when you right click the
+    // toolbox button, but a toolbox process for the window is already open. You
+    // can only have one toolbox open per-window. So if I have 3 windows open, and
+    // I right-click the toolbox button in window 1, then it'll launch a browser
+    // toolbox for window 1. If I then right-click the toolbox button in window 2,
+    // it'll launch a browser toolbox for window 2. But if I go back to window 1
+    // and right-click the toolbox button a second time, it will do nothing except
+    // show a brief confirmation hint to explain the lack of action.
+    alreadyOpenMsg: "Browser Toolbox is already open.",
+    // Confirmation hint. This appears when you first middle-click the toolbox
+    // button. It signifies that popups are being kept open. That is, "popup
+    // auto-hide" has been temporarily disabled.
+    holdingOpenMsg: "Holding popups open.",
+    // Confirmation hint. This appears when you middle-click the toolbox button a
+    // second time, toggling "popup auto-hide" back on, thereby allowing popups to
+    // close on their own.
+    lettingCloseMsg: "Letting popups close.",
+
+    bundles: {},
+    strings: new Map(),
+    getString(name, where) {
+      let string = this.strings.get(name);
+      if (string) return string;
+      string = this.bundles[where].GetStringFromName(name);
+      this.strings.set(name, string);
+      return string;
+    },
+    get defaultLabel() {
+      return this.getString("browserContentToolboxMenu.label", "menu");
+    },
+    get defaultTooltip() {
+      return this.defaultLabel;
+    },
+  };
+  XPCOMUtils.defineLazyGetter(l10n.bundles, "menu", () =>
+    Services.strings.createBundle("chrome://devtools/locale/menus.properties")
+  );
+  XPCOMUtils.defineLazyGetter(l10n.bundles, "toolbox", () =>
+    Services.strings.createBundle("chrome://devtools/locale/toolbox.properties")
+  );
 
   if (
     /^chrome:\/\/browser\/content\/browser.(xul||xhtml)$/i.test(location) &&
     !CustomizableUI.getPlacementOfWidget("toolbox-button", true)
-  )
+  ) {
+    const { require } = ChromeUtils.import("resource://devtools/shared/loader/Loader.jsm");
+    const { BrowserToolboxLauncher } = ChromeUtils.import(
+      "resource://devtools/client/framework/browser-toolbox/Launcher.jsm"
+    );
+    const { Actor } = require("devtools/shared/protocol/Actor");
+    const STATES = { DETACHED: "detached", EXITED: "exited", RUNNING: "running", PAUSED: "paused" };
+
     CustomizableUI.createWidget({
       id: "toolbox-button",
       type: "custom",
       defaultArea: CustomizableUI.AREA_NAVBAR,
-      label: toolboxButtonL10n.defaultLabel,
+      label: l10n.defaultLabel,
       removable: true,
       overflows: true,
-      tooltiptext: toolboxButtonL10n.defaultTooltip,
+      tooltiptext: l10n.defaultTooltip,
       onBuild: function (aDoc) {
         let CustomHint = {
           _timerID: null,
@@ -186,14 +182,7 @@ const toolboxButtonL10n = {
               { once: true }
             );
 
-            this._panel.addEventListener(
-              "popuphidden",
-              () => {
-                // reset the timerId in case our timeout wasn't the cause of the popup being hidden
-                this._reset();
-              },
-              { once: true }
-            );
+            this._panel.addEventListener("popuphidden", () => this._reset(), { once: true });
 
             let { position, x, y } = options;
             this._panel.openPopup(null, { position, triggerEvent: options.event });
@@ -258,15 +247,16 @@ const toolboxButtonL10n = {
         for (const [key, val] of Object.entries({
           class: "toolbarbutton-1 chromeclass-toolbar-additional",
           badged: true,
-          label: toolboxButtonL10n.defaultLabel,
+          label: l10n.defaultLabel,
           id: "toolbox-button",
           role: "button",
           icon: "toolbox",
           removable: true,
           overflows: true,
-          tooltiptext: toolboxButtonL10n.defaultTooltip,
-        }))
+          tooltiptext: l10n.defaultTooltip,
+        })) {
           toolbarbutton.setAttribute(key, val);
+        }
 
         toolbarbutton.appendChild(badgeStack);
         badgeStack.after(label);
@@ -279,9 +269,10 @@ const toolboxButtonL10n = {
           class: "toolbarbutton-text",
           crop: "right",
           flex: "1",
-          value: toolboxButtonL10n.defaultLabel,
-        }))
+          value: l10n.defaultLabel,
+        })) {
           label.setAttribute(key, val);
+        }
 
         let prefSvc = Services.prefs;
         let obSvc = Services.obs;
@@ -302,8 +293,8 @@ const toolboxButtonL10n = {
               aDoc.defaultView.key_toggleToolbox.click();
               break;
             case this.mouseConfig.browserToolbox:
-              toolboxLauncher.getBrowserToolboxSessionState() // check if a browser toolbox window is already open
-                ? CustomHint.show(toolbarbutton, toolboxButtonL10n.alreadyOpenMsg, {
+              BrowserToolboxLauncher.getBrowserToolboxSessionState() // check if a browser toolbox window is already open
+                ? CustomHint.show(toolbarbutton, l10n.alreadyOpenMsg, {
                     event: e,
                     hideCheck: true,
                   }) // if so, just show a hint that it's already open
@@ -312,7 +303,7 @@ const toolboxButtonL10n = {
             case this.mouseConfig.popupHide:
               CustomHint.show(
                 toolbarbutton,
-                toolboxButtonL10n[this.popupAutoHide ? "lettingCloseMsg" : "holdingOpenMsg"],
+                l10n[this.popupAutoHide ? "lettingCloseMsg" : "holdingOpenMsg"],
                 { event: e, hideCheck: this.popupAutoHide }
               );
               // toggle the pref
@@ -335,13 +326,9 @@ const toolboxButtonL10n = {
         } else toolbarbutton.onclick = onClick;
 
         toolbarbutton.triggerAnimation = function () {
-          this.addEventListener(
-            "animationend",
-            () => {
-              this.removeAttribute("animate");
-            },
-            { once: true }
-          );
+          this.addEventListener("animationend", () => this.removeAttribute("animate"), {
+            once: true,
+          });
           this.setAttribute("animate", "true");
         };
 
@@ -381,12 +368,13 @@ const toolboxButtonL10n = {
               toolbarbutton.autoTogglePopups = value;
               break;
             case mouseConfig:
-              if (value === null)
+              if (value === null) {
                 value = {
                   "contentToolbox": 0,
                   "browserToolbox": 2,
                   "popupHide": 1,
                 };
+              }
               toolbarbutton.mouseConfig = JSON.parse(value);
               toolbarbutton.setStrings();
               break;
@@ -394,16 +382,66 @@ const toolboxButtonL10n = {
         }
 
         // listen for toolboxes opening and closing
-        function toolboxObserver(sub, _top, _data) {
+        function toolboxObserver(sub, top, _data) {
           // whether a toolbox is open
-          let state = toolboxLauncher.getBrowserToolboxSessionState();
+          let state = BrowserToolboxLauncher.getBrowserToolboxSessionState();
           // set toolbar button's badge content
           badgeLabel.textContent = state ? 1 : "";
           // if toolbox is open and autohide is not already enabled, enable it
-          if (sub === "initial-load" || !toolbarbutton.autoTogglePopups) return;
+          switch (top) {
+            case "initial-load":
+              return;
+            // when a thread is created, set up its destroy method so it will
+            // call the observer when it's destroyed. this ensures that if a
+            // toolbox is closed while a content toolbox is inspecting the
+            // system principal (such as on about:preferences), we will still
+            // get notified that the toolbox has closed. otherwise, we wouldn't
+            // get notified until the content toolbox also closes.
+            case "devtools-thread-ready":
+              let threadActor = sub?.wrappedJSObject;
+              if (threadActor) threadActor.destroy = destroyThreadActor;
+              break;
+            default:
+              break;
+          }
+          if (!toolbarbutton.autoTogglePopups) return;
           if (state && !toolbarbutton.popupAutoHide) prefSvc.setBoolPref(autoHide, true);
           // if toolbox just closed and autohide is not already disabled, disable it
           else if (!state && toolbarbutton.popupAutoHide) prefSvc.setBoolPref(autoHide, false);
+        }
+
+        function destroyThreadActor() {
+          if (this._state == STATES.PAUSED) {
+            this.doResume();
+          }
+
+          this.removeAllWatchpoints();
+          this._xhrBreakpoints = [];
+          this._updateNetworkObserver();
+
+          this._activeEventBreakpoints = new Set();
+          this._debuggerNotificationObserver.removeListener(this._eventBreakpointListener);
+
+          for (const global of this.dbg.getDebuggees()) {
+            try {
+              this._debuggerNotificationObserver.disconnect(global.unsafeDereference());
+            } catch (e) {}
+          }
+
+          this._parent.off("window-ready", this._onWindowReady);
+          this._parent.off("will-navigate", this._onWillNavigate);
+          this._parent.off("navigate", this._onNavigate);
+
+          this.sourcesManager.off("newSource", this.onNewSourceEvent);
+          this.clearDebuggees();
+          this._threadLifetimePool.destroy();
+          this._threadLifetimePool = null;
+          this._dbg = null;
+          this._state = STATES.EXITED;
+
+          Actor.prototype.destroy.call(this);
+          // this leads back to toolboxObserver in 200ms
+          setTimeout(() => Services.obs.notifyObservers(null, "devtools-thread-destroyed"), 200);
         }
 
         toolbarbutton.setStrings = function () {
@@ -412,15 +450,15 @@ const toolboxButtonL10n = {
             if (val === 0)
               switch (key) {
                 case "contentToolbox":
-                  labelString = toolboxButtonL10n.contentLabel;
+                  labelString = l10n.getString("browserContentToolboxMenu.label", "menu");
                   hotkey = aDoc.defaultView.key_toggleToolbox;
                   break;
                 case "browserToolbox":
-                  labelString = toolboxButtonL10n.browserLabel;
+                  labelString = l10n.getString("browserToolboxMenu.label", "menu");
                   hotkey = aDoc.defaultView.key_browserToolbox;
                   break;
                 case "popupHide":
-                  labelString = toolboxButtonL10n.autoHideLabel;
+                  labelString = l10n.getString("toolbox.meatballMenu.noautohide.label", "toolbox");
                   break;
               }
           let shortcut = hotkey ? ` (${ShortcutUtils.prettifyShortcut(hotkey)})` : "";
@@ -433,8 +471,13 @@ const toolboxButtonL10n = {
         function uninit() {
           prefSvc.removeObserver(autoHide, prefObserver);
           prefSvc.removeObserver(toolboxBranch, prefObserver);
-          obSvc.removeObserver(toolboxObserver, "devtools:loader:destroy");
-          obSvc.removeObserver(toolboxObserver, "devtools-thread-ready");
+          for (const topic of [
+            "devtools-thread-ready",
+            "devtools-thread-destroyed",
+            "devtools:loader:destroy",
+          ]) {
+            obSvc.removeObserver(toolboxObserver, topic);
+          }
           window.removeEventListener("unload", uninit, false);
         }
 
@@ -442,21 +485,28 @@ const toolboxButtonL10n = {
           prefObserver(prefSvc, null, autoHide);
           prefObserver(prefSvc, null, autoTogglePopups);
           prefObserver(prefSvc, null, mouseConfig);
-          toolboxObserver("initial-load");
+          toolboxObserver(null, "initial-load");
         }
 
-        if (!prefSvc.prefHasUserValue(autoTogglePopups))
+        if (!prefSvc.prefHasUserValue(autoTogglePopups)) {
           prefSvc.setBoolPref(autoTogglePopups, true);
-        if (!prefSvc.prefHasUserValue(mouseConfig))
+        }
+        if (!prefSvc.prefHasUserValue(mouseConfig)) {
           prefSvc.setStringPref(
             mouseConfig,
             `{"contentToolbox": 0, "browserToolbox": 2, "popupHide": 1}`
           );
+        }
         window.addEventListener("unload", uninit, false);
         prefSvc.addObserver(autoHide, prefObserver);
         prefSvc.addObserver(toolboxBranch, prefObserver);
-        obSvc.addObserver(toolboxObserver, "devtools:loader:destroy");
-        obSvc.addObserver(toolboxObserver, "devtools-thread-ready");
+        for (const topic of [
+          "devtools-thread-ready",
+          "devtools-thread-destroyed",
+          "devtools:loader:destroy",
+        ]) {
+          obSvc.addObserver(toolboxObserver, topic);
+        }
         if (gBrowserInit.delayedStartupFinished) {
           toolboxInit();
         } else {
@@ -471,14 +521,54 @@ const toolboxButtonL10n = {
         return toolbarbutton;
       },
     });
+  }
 
   let styleSvc = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
     Ci.nsIStyleSheetService
   );
-  let toolboxCSS = `.toolbarbutton-1#toolbox-button{-moz-box-align:center;}.toolbarbutton-1#toolbox-button .toolbarbutton-badge-stack{-moz-box-pack:center;}.toolbarbutton-1#toolbox-button .toolbarbutton-icon{height:16px;width:16px;transition:fill 50ms ease-in-out 0s;}.toolbarbutton-1#toolbox-button{list-style-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="context-fill" fill-opacity="context-fill-opacity" width="16" height="16" viewBox="0 0 16 16"><path d="M16,8V6c0-1.105-.895-2-2-2H2C0.895,4,0,4.895,0,6v2h4v1.333H0v5.333c0,.368,.298,.667,.667,.667h14.667 c0.368,0,.667-.298,.667-.667V9.333h-4V8H16z M11.333,10.667H10.6c-.058,.233-.148,.457-.267,.667l0.533,.533L9.933,12.8 L9.4,12.267l-.667,.267v0.8h-1.4V12.6l-.667-.267l-.533,.533l-.933-1l0.533-.533c-.119-.209-.208-.433-.267-.667h-.8 V9.333H5.4C5.458,9.1,5.548,8.876,5.667,8.667L5.133,8.133L6.067,7.2L6.6,7.733l0.667-.267v-.8H8.6V7.4l0.667,.267L9.8,7.133 l0.933,.933L10.2,8.6c0.119,.209,.208,.433,.267,.667h0.867L11.333,10.667L11.333,10.667z"/><circle cx="8" cy="10" r="1.333"/><path d="M6,2h4v1.333h1.333v-2c0-.368-.298-.667-.667-.667H5.333c-.368,0-.667,.298-.667,.667v2H6V2z"/></svg>');}.toolbarbutton-1#toolbox-button[icon="autohide"]{list-style-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="context-fill" fill-opacity="context-fill-opacity" viewBox="0 0 16 16"><path d="M5.293.293a1 1 0 011.414 0L8.414 2H13a3 3 0 013 3v8a3 3 0 01-3 3H3a3 3 0 01-3-3V5a3 3 0 013-3h.586L5.293.293zM6 2.414L4.707 3.707A1 1 0 014 4H3c-.545 0-1 .455-1 1v8c0 .545.455 1 1 1h10c.545 0 1-.455 1-1V5c0-.545-.455-1-1-1H8a1 1 0 01-.707-.293L6 2.414z"/></svg>');}@media (prefers-reduced-motion:no-preference){.toolbarbutton-1#toolbox-button[animate] .toolbarbutton-icon{animation-name:toolboxButtonPulse;animation-duration:200ms;animation-iteration-count:1;animation-timing-function:ease-in-out}}@keyframes toolboxButtonPulse{from{transform:scale(1)}40%{transform:scale(.7)}to{transform:scale(1)}}#confirmation-hint[data-message-id="hideCheckHint"] #confirmation-hint-message{margin-inline:0;}`;
+  let toolboxCSS = /* css */ `.toolbarbutton-1#toolbox-button {
+    -moz-box-align: center;
+  }
+  .toolbarbutton-1#toolbox-button .toolbarbutton-badge-stack {
+    -moz-box-pack: center;
+  }
+  .toolbarbutton-1#toolbox-button .toolbarbutton-icon {
+    height: 16px;
+    width: 16px;
+    transition: fill 50ms ease-in-out 0s;
+  }
+  .toolbarbutton-1#toolbox-button {
+    list-style-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="context-fill" fill-opacity="context-fill-opacity" width="16" height="16" viewBox="0 0 16 16"><path d="M16,8V6c0-1.105-.895-2-2-2H2C0.895,4,0,4.895,0,6v2h4v1.333H0v5.333c0,.368,.298,.667,.667,.667h14.667 c0.368,0,.667-.298,.667-.667V9.333h-4V8H16z M11.333,10.667H10.6c-.058,.233-.148,.457-.267,.667l0.533,.533L9.933,12.8 L9.4,12.267l-.667,.267v0.8h-1.4V12.6l-.667-.267l-.533,.533l-.933-1l0.533-.533c-.119-.209-.208-.433-.267-.667h-.8 V9.333H5.4C5.458,9.1,5.548,8.876,5.667,8.667L5.133,8.133L6.067,7.2L6.6,7.733l0.667-.267v-.8H8.6V7.4l0.667,.267L9.8,7.133 l0.933,.933L10.2,8.6c0.119,.209,.208,.433,.267,.667h0.867L11.333,10.667L11.333,10.667z"/><circle cx="8" cy="10" r="1.333"/><path d="M6,2h4v1.333h1.333v-2c0-.368-.298-.667-.667-.667H5.333c-.368,0-.667,.298-.667,.667v2H6V2z"/></svg>');
+  }
+  .toolbarbutton-1#toolbox-button[icon="autohide"] {
+    list-style-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="context-fill" fill-opacity="context-fill-opacity" viewBox="0 0 16 16"><path d="M5.293.293a1 1 0 011.414 0L8.414 2H13a3 3 0 013 3v8a3 3 0 01-3 3H3a3 3 0 01-3-3V5a3 3 0 013-3h.586L5.293.293zM6 2.414L4.707 3.707A1 1 0 014 4H3c-.545 0-1 .455-1 1v8c0 .545.455 1 1 1h10c.545 0 1-.455 1-1V5c0-.545-.455-1-1-1H8a1 1 0 01-.707-.293L6 2.414z"/></svg>');
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .toolbarbutton-1#toolbox-button[animate] .toolbarbutton-icon {
+      animation-name: toolboxButtonPulse;
+      animation-duration: 200ms;
+      animation-iteration-count: 1;
+      animation-timing-function: ease-in-out;
+    }
+  }
+  @keyframes toolboxButtonPulse {
+    from {
+      transform: scale(1);
+    }
+    40% {
+      transform: scale(0.7);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+  #confirmation-hint[data-message-id="hideCheckHint"] #confirmation-hint-message {
+    margin-inline: 0;
+  }`;
   let styleURI = makeURI("data:text/css;charset=UTF=8," + encodeURIComponent(toolboxCSS));
-  if (!styleSvc.sheetRegistered(styleURI, styleSvc.AUTHOR_SHEET))
+  if (!styleSvc.sheetRegistered(styleURI, styleSvc.AUTHOR_SHEET)) {
     styleSvc.loadAndRegisterSheet(styleURI, styleSvc.AUTHOR_SHEET);
+  }
 
   let observer = new MutationObserver(() => {
     if (document.getElementById("key_toggleToolbox")) {

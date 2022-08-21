@@ -12,6 +12,7 @@
     --in-content-button-background-hover: hsla(0, 20%, 90%, 0.15) !important;
     --in-content-button-background-active: hsla(0, 20%, 90%, 0.19) !important;
     --in-content-button-background-bold: hsla(0, 20%, 90%, 0.23) !important;
+    --in-content-border-color: var(--dialog-box-border-color) !important;
     --in-content-border-hover: var(--dialog-box-border-hover) !important;
     --arrowpanel-dimmed: color-mix(in srgb, currentColor 17%, transparent) !important;
     --arrowpanel-dimmed-further: color-mix(in srgb, currentColor 25%, transparent) !important;
