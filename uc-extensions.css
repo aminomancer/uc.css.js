@@ -52,10 +52,15 @@ menupopup#viewSidebarMenu
   list-style-image: url(chrome://userchrome/content/skin/container-base.svg);
 }
 
-#pageAction-urlbar-_testpilot-containers,
-#pageAction-panel-_testpilot-containers {
+:is(.pageAction-panel-button, .urlbar-page-action)[actionid="_testpilot-containers"] {
   --pageAction-image-16px: url(chrome://userchrome/content/skin/container-go.svg) !important;
   --pageAction-image-32px: url(chrome://userchrome/content/skin/container-go.svg) !important;
+}
+
+/* Want My RSS */
+:is(.pageAction-panel-button, .urlbar-page-action)[actionid="_4d567245-e70d-466a-bb2f-390fc7fb25c2_"] {
+  --pageAction-image-16px: url(chrome://userchrome/content/material/rss.svg) !important;
+  --pageAction-image-32px: url(chrome://userchrome/content/material/rss.svg) !important;
 }
 
 /* sort bookmarks */

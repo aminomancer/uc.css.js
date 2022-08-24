@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Search Mode Indicator Icons
-// @version        1.4.2
+// @version        1.4.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Automatically replace the urlbar's identity icon with the
@@ -232,7 +232,7 @@
           // integer sources. the icons are defined in browser.css so we'll use
           // those icons.
           else if (gURLBar.searchMode?.source) {
-            let { BOOKMARKS, HISTORY, TABS } = UrlbarUtils.RESULT_SOURCE;
+            let { BOOKMARKS, HISTORY, TABS, ACTIONS } = UrlbarUtils.RESULT_SOURCE;
             switch (gURLBar.searchMode.source) {
               case BOOKMARKS:
                 url = `chrome://browser/skin/bookmark.svg`;
@@ -242,6 +242,9 @@
                 break;
               case TABS:
                 url = `chrome://browser/skin/tab.svg`;
+                break;
+              case ACTIONS:
+                url = `chrome://browser/skin/quickactions.svg`;
                 break;
             }
           }

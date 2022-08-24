@@ -46,6 +46,10 @@ a rule for it. */
   --search-engine-icon: url(chrome://userchrome/content/skin/bookmark.svg) !important;
 }
 
+#identity-icon-box[engine="Actions"] {
+  --search-engine-icon: url(chrome://browser/skin/quickactions.svg) !important;
+}
+
 /* for google */
 #identity-icon-box[engine="Google"] {
   --search-engine-icon: url(chrome://userchrome/content/engines/google.svg) !important;
