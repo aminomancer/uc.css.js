@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Search Selection Keyboard Shortcut
-// @version        1.7.1
+// @version        1.7.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Adds a new keyboard shortcut (Ctrl+Shift+F) that searches your default search
@@ -64,6 +64,11 @@ class SearchSelectionShortcut {
     ["userChrome.searchSelectionShortcut.custom-matches", "{}"],
   ]);
   constructor() {
+    ChromeUtils.defineModuleGetter(
+      this,
+      "AppMenuNotifications",
+      "resource://gre/modules/AppMenuNotifications.jsm"
+    );
     this.makePrefs();
     this.setup();
   }
@@ -121,8 +126,7 @@ class SearchSelectionShortcut {
     await IOUtils.makeDirectory(path, { ignoreExisting: true, createAncestors: false });
     // hide the temp dir on windows so it doesn't get in the way of user activities or prevent its eventual deletion.
     if (AppConstants.platform === "win") {
-      if ("setWindowsAttributes" in IOUtils)
-        await IOUtils.setWindowsAttributes(path, { hidden: true });
+      await IOUtils.setWindowsAttributes?.(path, { hidden: true });
     }
     this.tempPath = path;
 
@@ -194,10 +198,7 @@ class SearchSelectionShortcut {
    */
   async createTempFile(contents, options = {}) {
     let { path = null, name = "uc-temp", type = "txt" } = options;
-    const uuid = Cc["@mozilla.org/uuid-generator;1"]
-      .getService(Ci.nsIUUIDGenerator)
-      .generateUUID()
-      .toString();
+    const uuid = Services.uuid.generateUUID().toString();
     name += "-" + uuid + "." + type;
     if (!path) {
       let dir = Services.dirsvc.get("UChrm", Ci.nsIFile);
@@ -263,7 +264,7 @@ class SearchSelectionShortcut {
         "userChrome.searchSelectionShortcut.match-engine-to-current-tab",
         match.checked
       );
-      AppMenuNotifications.removeNotification("sss-installed");
+      this.AppMenuNotifications.removeNotification("sss-installed");
     };
     let options = {
       message: `<> has been installed. It adds a second hotkey that can use all your search engines. While visiting a page whose domain matches of your engines, Ctrl+Alt+F will use that engine instead of your default engine.`,
@@ -280,7 +281,7 @@ class SearchSelectionShortcut {
     };
     setTimeout(
       () =>
-        AppMenuNotifications.showNotification(
+        this.AppMenuNotifications.showNotification(
           "sss-installed",
           { callback: sssResolve },
           { callback: sssResolve },

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Animate Context Menus
-// @version        1.0.1
+// @version        1.0.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Give all context menus the same opening animation that panel
@@ -51,8 +51,9 @@ class AnimateContextMenus {
     const { Services } = ChromeUtils.import("resource://gre/modules/Services.jsm");
     let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(Ci.nsIStyleSheetService);
     let uri = Services.io.newURI("data:text/css;charset=UTF=8," + encodeURIComponent(css));
-    if (!sss.sheetRegistered(uri, sss.AUTHOR_SHEET))
+    if (!sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) {
       sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
+    }
   }
   handleEvent(e) {
     if (e.target.tagName !== "menupopup") return;
@@ -62,8 +63,9 @@ class AnimateContextMenus {
     if (
       e.target.shadowRoot &&
       e.target.shadowRoot.firstElementChild.classList.contains("panel-arrowcontainer")
-    )
+    ) {
       return;
+    }
     this[`on_${e.type}`](e);
   }
   on_popupshowing(e) {

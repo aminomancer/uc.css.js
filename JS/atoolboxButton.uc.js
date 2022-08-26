@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Toolbox Button
-// @version        1.2.7
+// @version        1.2.8
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Adds a new toolbar button that 1) opens the content toolbox on left click;
@@ -104,7 +104,7 @@
       removable: true,
       overflows: true,
       tooltiptext: l10n.defaultTooltip,
-      onBuild: function (aDoc) {
+      onBuild(aDoc) {
         let CustomHint = {
           _timerID: null,
 
@@ -167,7 +167,9 @@
             if (options.hideCheck) {
               this._animationBox.setAttribute("hidden", "true");
               this._panel.setAttribute("data-message-id", "hideCheckHint");
-            } else this._panel.setAttribute("data-message-id", "checkmarkHint");
+            } else {
+              this._panel.setAttribute("data-message-id", "checkmarkHint");
+            }
 
             const DURATION = options.duration || 1500;
             this._panel.addEventListener(
@@ -281,7 +283,7 @@
         let autoTogglePopups = "userChrome.toolboxButton.popupAutohide.toggle-on-toolbox-launch";
         let mouseConfig = "userChrome.toolboxButton.mouseConfig";
 
-        let onClick = function (e) {
+        let onClick = function(e) {
           let { button } = e;
           if (e.getModifierState("Accel")) {
             if (button == 2) return;
@@ -323,9 +325,11 @@
             if (e.getModifierState("Accel")) return;
             e.preventDefault();
           };
-        } else toolbarbutton.onclick = onClick;
+        } else {
+          toolbarbutton.onclick = onClick;
+        }
 
-        toolbarbutton.triggerAnimation = function () {
+        toolbarbutton.triggerAnimation = function() {
           this.addEventListener("animationend", () => this.removeAttribute("animate"), {
             once: true,
           });
@@ -370,9 +374,9 @@
             case mouseConfig:
               if (value === null) {
                 value = {
-                  "contentToolbox": 0,
-                  "browserToolbox": 2,
-                  "popupHide": 1,
+                  contentToolbox: 0,
+                  browserToolbox: 2,
+                  popupHide: 1,
                 };
               }
               toolbarbutton.mouseConfig = JSON.parse(value);
@@ -444,10 +448,10 @@
           setTimeout(() => Services.obs.notifyObservers(null, "devtools-thread-destroyed"), 200);
         }
 
-        toolbarbutton.setStrings = function () {
+        toolbarbutton.setStrings = function() {
           let hotkey, labelString;
-          for (const [key, val] of Object.entries(toolbarbutton.mouseConfig))
-            if (val === 0)
+          for (const [key, val] of Object.entries(toolbarbutton.mouseConfig)) {
+            if (val === 0) {
               switch (key) {
                 case "contentToolbox":
                   labelString = l10n.getString("browserContentToolboxMenu.label", "menu");
@@ -461,6 +465,8 @@
                   labelString = l10n.getString("toolbox.meatballMenu.noautohide.label", "toolbox");
                   break;
               }
+            }
+          }
           let shortcut = hotkey ? ` (${ShortcutUtils.prettifyShortcut(hotkey)})` : "";
           toolbarbutton.label = labelString;
           label.value = labelString;
@@ -478,7 +484,7 @@
           ]) {
             obSvc.removeObserver(toolboxObserver, topic);
           }
-          window.removeEventListener("unload", uninit, false);
+          window.removeEventListener("unload", uninit);
         }
 
         function toolboxInit() {
@@ -497,7 +503,7 @@
             `{"contentToolbox": 0, "browserToolbox": 2, "popupHide": 1}`
           );
         }
-        window.addEventListener("unload", uninit, false);
+        window.addEventListener("unload", uninit);
         prefSvc.addObserver(autoHide, prefObserver);
         prefSvc.addObserver(toolboxBranch, prefObserver);
         for (const topic of [
@@ -572,7 +578,9 @@
 
   let observer = new MutationObserver(() => {
     if (document.getElementById("key_toggleToolbox")) {
-      CustomizableUI.getWidget("toolbox-button").forWindow(window).node.setStrings();
+      CustomizableUI.getWidget("toolbox-button")
+        .forWindow(window)
+        .node.setStrings();
       observer.disconnect();
       observer = null;
     }

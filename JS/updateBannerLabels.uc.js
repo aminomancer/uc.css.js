@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Concise Update Banner Labels
-// @version        1.2
+// @version        1.2.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    This script simply changes the update banners in the hamburger
@@ -9,7 +9,7 @@
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
-(function () {
+(function() {
   // wait for {param} milliseconds in async function
   function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -49,7 +49,7 @@
         this._panelBannerItem = this.mainView.querySelector(".panel-banner-item");
       }
 
-      let label = gUpdateBanners.attributes[notification.id];
+      let label = window.gUpdateBanners.attributes[notification.id];
       if (!label) return; // Ignore items we don't know about.
 
       this._panelBannerItem.setAttribute("notificationid", notification.id);

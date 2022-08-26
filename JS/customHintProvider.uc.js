@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Custom Hint Provider
-// @version        1.1.2
+// @version        1.1.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    A utility script for other scripts to take advantage of. Sets
@@ -75,7 +75,9 @@ window.CustomHint = {
     if (options.hideCheck) {
       this._animationBox.setAttribute("hidden", "true");
       this._panel.setAttribute("data-message-id", "hideCheckHint");
-    } else this._panel.setAttribute("data-message-id", "checkmarkHint");
+    } else {
+      this._panel.setAttribute("data-message-id", "checkmarkHint");
+    }
 
     const DURATION = options.duration || 1500;
     this._panel.addEventListener(
@@ -157,7 +159,7 @@ window.CustomHint = {
   },
 };
 
-(function () {
+(function() {
   function init() {
     // when the confirmation hint was created, openPopup worked differently. it
     // didn't set the "open" attribute on the anchor directly. that was up to
@@ -204,8 +206,9 @@ window.CustomHint = {
       this._panel.moveToAnchor(anchor, position, x, y);
     };
   }
-  if (gBrowserInit.delayedStartupFinished) init();
-  else {
+  if (gBrowserInit.delayedStartupFinished) {
+    init();
+  } else {
     let delayedListener = (subject, topic) => {
       if (topic == "browser-delayed-startup-finished" && subject == window) {
         Services.obs.removeObserver(delayedListener, topic);

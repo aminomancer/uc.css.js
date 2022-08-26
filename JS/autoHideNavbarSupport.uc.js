@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Auto-hide Navbar Support
-// @version        1.2.1
+// @version        1.2.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    In fullscreen, the navbar hides automatically when you're not
@@ -23,31 +23,22 @@ class AutoHideHandler {
   prefs = {
     autohide: "browser.fullscreen.autohide",
   };
+  popups = new Set();
   constructor() {
-    this.popups = new Set();
     this.observe(Services.prefs, "nsPref:read", this.prefs.autohide);
     Services.prefs.addObserver(this.prefs.autohide, this);
+    XPCOMUtils.defineLazyGetter(this, "navBlock", () => gNavToolbox.parentElement);
+    XPCOMUtils.defineLazyGetter(this, "backButton", () => document.getElementById("back-button"));
+    XPCOMUtils.defineLazyGetter(this, "fwdButton", () => document.getElementById("forward-button"));
+    // Main listener for popups
+    let mainPopupSet = document.getElementById("mainPopupSet");
     for (let ev of ["popupshowing", "popuphiding"]) {
-      this.mainPopupSet.addEventListener(ev, this, true);
+      mainPopupSet.addEventListener(ev, this, true);
       gNavToolbox.addEventListener(ev, this, true);
     }
     // onViewOpen and onViewClose
     gURLBar.controller.addQueryListener(this);
-    for (let topic of ["urlbar-focus", "urlbar-blur"]) {
-      Services.obs.addObserver(this, topic);
-    }
-  }
-  get navBlock() {
-    return this._navBlock || (this._navBlock = gNavToolbox.parentElement);
-  }
-  get mainPopupSet() {
-    return this._mainPopupSet || (this._mainPopupSet = document.getElementById("mainPopupSet"));
-  }
-  get backButton() {
-    return this._backButton || (this._backButton = document.getElementById("back-button"));
-  }
-  get fwdButton() {
-    return this._fwdButton || (this._fwdButton = document.getElementById("forward-button"));
+    for (let topic of ["urlbar-focus", "urlbar-blur"]) Services.obs.addObserver(this, topic);
   }
   getPref(root, pref, def) {
     switch (root.getPrefType(pref)) {
@@ -84,44 +75,56 @@ class AutoHideHandler {
       default:
     }
   }
+  // Check if a popup is opening anchored to a popup that's already open and in
+  // our set. For example, a context menu opened from a popup panel. If this is
+  // the case, we want to skip the autohide logic for this popup.
+  _isPopupAnchoredOnExisting(popup) {
+    for (const existing of this.popups) {
+      if (!(existing instanceof Element)) continue;
+      for (const node of [popup, popup.triggerNode, popup.anchorNode]) {
+        if (!(node instanceof Element)) continue;
+        if (node.compareDocumentPosition(existing) & Node.DOCUMENT_POSITION_CONTAINS) return true;
+      }
+    }
+    return false;
+  }
   handleEvent(event) {
-    let targ = event.originalTarget;
-    if (targ.tagName === "tooltip") return;
-    switch (targ.id) {
+    let popup = event.originalTarget;
+    if (!popup || popup.tagName === "tooltip" || popup.getAttribute("nopreventnavboxhide")) return;
+    switch (popup.id) {
       case "contentAreaContextMenu":
       case "sidebarMenu-popup":
       case "ctrlTab-panel":
+      case "ContentSelectDropdownPopup":
+      case "PopupAutoComplete":
+      case "DateTimePickerPanel":
+      case "screenshotsPagePanel":
+      case "invalid-form-popup":
       case "SyncedTabsSidebarContext":
       case "SyncedTabsSidebarTabsFilterContext":
-      case "urlbar-scheme":
-      case "urlbar-input":
-      case "urlbar-label-box":
-      case "urlbar-search-mode-indicator":
-      case "pageActionContextMenu":
       case "confirmation-hint":
         return;
       case "backForwardMenu":
         if (this.backButton.disabled && this.fwdButton.disabled) return;
+        break;
+      case "UITourTooltip":
+      case "UITourHighlightContainer":
+        if (!gNavToolbox.contains(popup.triggerNode)) return;
+        break;
       case "":
-        if (targ.hasAttribute("menu-api")) return;
+        if (popup.hasAttribute("menu-api")) return;
+        break;
+      default:
     }
-    if (targ.getAttribute("nopreventnavboxhide")) return;
-    let popNode = targ.triggerNode;
-    if (
-      targ.className === "urlbarView" ||
-      (event.target.parentElement.tagName === "menu" && !targ.closest("menubar"))
-    )
-      return;
+    if (popup.parentElement?.tagName === "menu" && !popup.closest("menubar")) return;
+    if (this._isPopupAnchoredOnExisting(popup)) return;
     switch (event.type) {
       case "popupshowing":
-        this.popups.add(targ);
-        this.navBlock.setAttribute("popup-status", true);
+        this.popups.add(popup);
+        if (this.popups.size) this.navBlock.setAttribute("popup-status", true);
         break;
       case "popuphiding":
-        if (popNode?.closest("panel") || popNode?.closest("menupopup")) return;
-        let panel = targ.closest("panel");
-        if (targ !== panel && panel?.getAttribute("panelopen")) return;
-        this.popups.delete(targ);
+        this.popups.delete(popup);
         if (!this.popups.size) this.navBlock.removeAttribute("popup-status");
         break;
     }

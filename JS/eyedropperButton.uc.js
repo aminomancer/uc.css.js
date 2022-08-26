@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Eyedropper Button
-// @version        1.0.1
+// @version        1.0.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Adds a toolbar button that implements the color picker
@@ -115,8 +115,9 @@ class EyedropperButton {
       "web-developer-tools-view-showing"
     );
     this.makeWidget();
-    if (this.mainMenuItem) this.setShortcutLabel();
-    else {
+    if (this.mainMenuItem) {
+      this.setShortcutLabel();
+    } else {
       this.observer = new MutationObserver(() => {
         if (this.devToolsMenu.querySelector("#menu_eyedropper")) {
           this.setShortcutLabel();
@@ -128,7 +129,7 @@ class EyedropperButton {
     }
   }
   observe(sub, top) {
-    if (sub === window)
+    if (sub === window) {
       switch (top) {
         case "uc-eyedropper-started":
           this.mainMenuItem.click();
@@ -138,6 +139,7 @@ class EyedropperButton {
           this.afterLazyStartup();
           break;
       }
+    }
   }
 }
 

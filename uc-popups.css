@@ -768,6 +768,10 @@ rtl languages. adjust the border radius accordingly */
     --in-content-button-vertical-padding: 5px !important;
   }
 
+  :root:not(.system-font-size) {
+    font-size: 12px !important;
+  }
+
   dialog[subdialog] .dialogRow {
     margin-block: 0 5px !important;
   }
@@ -1158,6 +1162,10 @@ rtl languages. adjust the border radius accordingly */
     --in-content-page-color: var(--ui-text-100) !important;
     --in-content-primary-button-text-color: var(--ui-text-100) !important;
     --in-content-primary-button-text-color-hover: var(--ui-text-100) !important;
+  }
+
+  :root:not(.system-font-size) {
+    font-size: 12px !important;
   }
 
   /* remove spotlight backdrop overlay */

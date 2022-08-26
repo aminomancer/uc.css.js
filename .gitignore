@@ -1,8 +1,7 @@
 *.psd
 *.prproj
 custom-*.css
+node_modules/
+package-lock.json
 boot.jsm
 resources/in-content/custom-content.css
-node_modules
-package-lock.json
-package.json

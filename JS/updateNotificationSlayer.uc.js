@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Update Notification Slayer
-// @version        1.2
+// @version        1.2.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Prevent "update available" notification popups, instead just
@@ -57,7 +57,7 @@
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
-(async function () {
+(async function() {
   class AppMenuNotification {
     constructor(id, mainAction, secondaryAction, options = {}) {
       this.id = id;
@@ -69,7 +69,13 @@
   }
 
   async function init() {
-    PanelUI.updateNotifications = function (notificationsChanged) {
+    const lazy = {};
+    ChromeUtils.defineModuleGetter(
+      lazy,
+      "AppMenuNotifications",
+      "resource://gre/modules/AppMenuNotifications.jsm"
+    );
+    PanelUI.updateNotifications = function(notificationsChanged) {
       let notifications = this._notifications;
       if (!notifications || !notifications.length) {
         if (notificationsChanged) {
@@ -114,7 +120,7 @@
           this._showBadge(doorhangers[0]);
           this._showBannerItem(doorhangers[0]);
           if (doorhangers[0].id.startsWith("update")) {
-            AppMenuNotifications.dismissNotification(doorhangers[0].id);
+            lazy.AppMenuNotifications.dismissNotification(doorhangers[0].id);
             doorhangers[0].dismissed = true;
           }
         } else {
@@ -128,7 +134,7 @@
       }
     };
 
-    AppMenuNotifications.showNotification = function showNotification(
+    lazy.AppMenuNotifications.showNotification = function showNotification(
       id,
       mainAction,
       secondaryAction,

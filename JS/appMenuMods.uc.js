@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           App Menu Mods
-// @version        1.4.1
+// @version        1.4.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Makes some minor modifications to the app menu (the popup
@@ -11,7 +11,7 @@
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
-(function () {
+(function() {
   class AppMenuMods {
     constructor() {
       PanelUI._initialized || PanelUI.init(shouldSuppressPopupNotifications);
@@ -30,8 +30,9 @@
       return new Promise(resolve => setTimeout(resolve, ms));
     }
     async generateStrings() {
-      if (!this.strings)
+      if (!this.strings) {
         this.strings = await new Localization(["toolkit/about/aboutSupport.ftl"], true);
+      }
       await AppMenuMods.sleep(1);
       return this.strings;
     }
@@ -43,8 +44,9 @@
       this.addRestartButton(strings);
     }
     addSeparatorToAccountPanel() {
-      this.manageAccountSeparator =
-        this.fxaPanelView.ownerDocument.createXULElement("toolbarseparator");
+      this.manageAccountSeparator = this.fxaPanelView.ownerDocument.createXULElement(
+        "toolbarseparator"
+      );
       this.fxaPanelView
         .querySelector("#fxa-manage-account-button")
         .after(this.manageAccountSeparator);
@@ -72,8 +74,9 @@
     }
   }
 
-  if (gBrowserInit.delayedStartupFinished) new AppMenuMods();
-  else {
+  if (gBrowserInit.delayedStartupFinished) {
+    new AppMenuMods();
+  } else {
     let delayedListener = (subject, topic) => {
       if (topic == "browser-delayed-startup-finished" && subject == window) {
         Services.obs.removeObserver(delayedListener, topic);

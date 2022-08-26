@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Fluent Reveal Navbar Buttons
-// @version        1.2
+// @version        1.2.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Adds a visual effect to navbar buttons similar to the
@@ -10,7 +10,7 @@
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
-(function () {
+(function() {
   class FluentRevealEffect {
     // user configuration
     static options = {
@@ -32,17 +32,19 @@
       this._options = FluentRevealEffect.options;
       this.applyEffect(window);
       document.documentElement.setAttribute("fluent-reveal-hover", true);
-      if (this._options.clickEffect)
+      if (this._options.clickEffect) {
         document.documentElement.setAttribute("fluent-reveal-click", true);
+      }
     }
 
     // get all the toolbar buttons in the navbar, in iterable form
     get toolbarButtons() {
       let buttons = Array.from(gNavToolbox.querySelectorAll(".toolbarbutton-1"));
-      if (this._options.includeBookmarks)
+      if (this._options.includeBookmarks) {
         buttons = buttons.concat(
           Array.from(this.placesToolbarItems.querySelectorAll(".bookmark-item"))
         );
+      }
       return buttons;
     }
 
@@ -62,9 +64,11 @@
         switch (e.type) {
           case "scroll":
           case "mousemove":
-            if (this._options.clickEffect && this._options.is_pressed)
+            if (this._options.clickEffect && this._options.is_pressed) {
               this.generateEffectsForAll(e, true);
-            else this.generateEffectsForAll(e);
+            } else {
+              this.generateEffectsForAll(e);
+            }
             break;
 
           case "mousedown":
@@ -134,7 +138,7 @@
         areaStyle.visibility == "collapse"
       ) {
         if (isBookmark) return this.clearEffect(area);
-        else area = el.querySelector(".toolbarbutton-text");
+        area = el.querySelector(".toolbarbutton-text");
       }
 
       if (el.disabled || areaStyle.pointerEvents == "none") return this.clearEffect(area);
@@ -185,9 +189,11 @@
     drawEffect(el, x, y, lightColor, gradientSize, cssLightEffect = null) {
       let lightBg;
 
-      if (cssLightEffect === null)
+      if (cssLightEffect === null) {
         lightBg = `radial-gradient(circle ${gradientSize}px at ${x}px ${y}px, ${lightColor}, rgba(255,255,255,0))`;
-      else lightBg = cssLightEffect;
+      } else {
+        lightBg = cssLightEffect;
+      }
 
       el.style.backgroundImage = lightBg;
     }
@@ -211,8 +217,9 @@
 
   // wait for the chrome window to finish starting up, since we need to
   // reference gNavToolbox as soon as any mouse events are detected
-  if (gBrowserInit.delayedStartupFinished) init();
-  else {
+  if (gBrowserInit.delayedStartupFinished) {
+    init();
+  } else {
     let delayedListener = (subject, topic) => {
       if (topic == "browser-delayed-startup-finished" && subject == window) {
         Services.obs.removeObserver(delayedListener, topic);

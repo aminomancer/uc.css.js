@@ -1,13 +1,13 @@
 // ==UserScript==
 // @name           Misc. Mods
-// @version        2.0.3
+// @version        2.0.4
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Various tiny mods not worth making separate scripts for. Read the comments inside the script for details.
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
-(function () {
+(function() {
   let config = {
     // by default the bookmarks toolbar unhides itself when you use the edit bookmark panel and
     // select the bookmarks toolbar as the bookmark's folder. this is super annoying so I'm
@@ -150,26 +150,33 @@
   };
   class UCMiscMods {
     constructor() {
-      if (config["Disable bookmarks toolbar auto show"])
-        gEditItemOverlay._autoshowBookmarksToolbar = function () {};
+      if (config["Disable bookmarks toolbar auto show"]) {
+        gEditItemOverlay._autoshowBookmarksToolbar = function() {};
+      }
       if (config["Moving tabs with arrow keys can wrap"]) gBrowser.arrowKeysShouldWrap = true;
-      if (config["Stop downloads panel auto-focusing the footer button"])
+      if (config["Stop downloads panel auto-focusing the footer button"]) {
         this.stopDownloadsPanelFocus();
+      }
       if (config["Move all selected tabs with hotkeys"]) this.moveTabKeysMoveSelectedTabs();
       if (config["Anchor bookmarks menu tooltip to bookmark"]) this.anchorBookmarksTooltip();
       this.reduceCtrlTabDelay(config["Reduce ctrl+tab delay"]);
-      if (config["Allow stop/reload button to animate in other toolbars"])
+      if (config["Allow stop/reload button to animate in other toolbars"]) {
         this.stopReloadAnimations();
+      }
       if (config["Give the private browsing indicator a tooltip"]) this.addPrivateBrowsingTooltip();
-      if (config["Preserve your default bookmarks folder"])
+      if (config["Preserve your default bookmarks folder"]) {
         this.makeDefaultBookmarkFolderPermanent();
-      if (config["Turn private browsing indicator into button"])
+      }
+      if (config["Turn private browsing indicator into button"]) {
         this.privateBrowsingIndicatorButton();
-      if (config["Don't exit DOM fullscreen when opening permissions popup"])
+      }
+      if (config["Don't exit DOM fullscreen when opening permissions popup"]) {
         this.permsPopupInFullscreen();
+      }
       if (config["Customize tab drag preview background color"]) this.tabDragPreview();
-      if (config["Show container icons on multiselected tabs"])
+      if (config["Show container icons on multiselected tabs"]) {
         this.containerIconsOnMultiselectedTabs();
+      }
       this.randomTinyStuff();
     }
     stopDownloadsPanelFocus() {
@@ -179,19 +186,21 @@
       );
     }
     moveTabKeysMoveSelectedTabs() {
-      gBrowser.moveTabsBackward = function () {
+      gBrowser.moveTabsBackward = function() {
         let tabs = this.selectedTab.multiselected ? this.selectedTabs : [this.selectedTab];
         let previousTab = this.tabContainer.findNextTab(tabs[0], {
           direction: -1,
           filter: tab => !tab.hidden,
         });
         for (let tab of tabs) {
-          if (previousTab) this.moveTabTo(tab, previousTab._tPos);
-          else if (this.arrowKeysShouldWrap && tab._tPos < this.browsers.length - 1)
+          if (previousTab) {
+            this.moveTabTo(tab, previousTab._tPos);
+          } else if (this.arrowKeysShouldWrap && tab._tPos < this.browsers.length - 1) {
             this.moveTabTo(tab, this.browsers.length - 1);
+          }
         }
       };
-      gBrowser.moveTabsForward = function () {
+      gBrowser.moveTabsForward = function() {
         let tabs = this.selectedTab.multiselected ? this.selectedTabs : [this.selectedTab];
         let nextTab = this.tabContainer.findNextTab(tabs[tabs.length - 1], {
           direction: 1,
@@ -212,7 +221,7 @@
       );
     }
     anchorBookmarksTooltip() {
-      BookmarksEventHandler.fillInBHTooltip = function (aDocument, aEvent) {
+      BookmarksEventHandler.fillInBHTooltip = function(aDocument, aEvent) {
         var node;
         var cropped = false;
         var targetURI;
@@ -236,10 +245,12 @@
         if (targetURI || PlacesUtils.nodeIsURI(node)) url = targetURI || node.uri;
         if (!cropped && !url) return false;
         aEvent.target.setAttribute("position", "after_start");
-        if (tooltipNode) aEvent.target.moveToAnchor(tooltipNode, "after_start");
-        else if (tree && cellCoords)
+        if (tooltipNode) {
+          aEvent.target.moveToAnchor(tooltipNode, "after_start");
+        } else if (tree && cellCoords) {
           // anchor the tooltip to the tree cell
           aEvent.target.moveTo(cellCoords.left + tree.screenX, cellCoords.bottom + tree.screenY);
+        }
         let tooltipTitle = aEvent.target.querySelector(".places-tooltip-title");
         tooltipTitle.hidden = !title || title == url;
         if (!tooltipTitle.hidden) tooltipTitle.textContent = title;
@@ -251,7 +262,7 @@
     }
     reduceCtrlTabDelay(delay) {
       if (delay === 200) return;
-      ctrlTab.open = function () {
+      ctrlTab.open = function() {
         if (this.isOpen) return;
         this.canvasWidth = Math.ceil((screen.availWidth * 0.85) / this.maxTabPreviews);
         this.canvasHeight = Math.round(this.canvasWidth * tabPreviews.aspectRatio);
@@ -285,8 +296,9 @@
       let l10nId = PrivateBrowsingUtils.isWindowPrivate(window)
         ? "about-private-browsing-info-title"
         : "about-private-browsing-not-private";
-      document.querySelector(".private-browsing-indicator").tooltipText =
-        await this.privateL10n.formatValue([l10nId]);
+      document.querySelector(
+        ".private-browsing-indicator"
+      ).tooltipText = await this.privateL10n.formatValue([l10nId]);
     }
     makeDefaultBookmarkFolderPermanent() {
       let { panel } = StarUI;
@@ -357,7 +369,7 @@
         ContextualIdentityService: "resource://gre/modules/ContextualIdentityService.jsm",
       });
       if (lazy.ContextualIdentityService.hasOwnProperty("setTabStyle")) return;
-      lazy.ContextualIdentityService.setTabStyle = function (tab) {
+      lazy.ContextualIdentityService.setTabStyle = function(tab) {
         if (!tab.hasAttribute("usercontextid")) {
           return;
         }
@@ -395,8 +407,9 @@
         if (ariaLabel) {
           infoButton.removeAttribute("data-l10n-id");
           infoButton.setAttribute("tooltiptext", ariaLabel);
-        } else if (infoButton.getAttribute("data-l10n-id"))
+        } else if (infoButton.getAttribute("data-l10n-id")) {
           return document.l10n.translateElements([infoButton]);
+        }
         etpPanel.removeEventListener("popupshowing", setEtpPopupInfoTooltip);
       };
       if (etpPanel) etpPanel.addEventListener("popupshowing", setEtpPopupInfoTooltip);
@@ -409,7 +422,7 @@
       // #sidebar-reverse-position[to-position="right"] {
       //     list-style-image: url(chrome://browser/skin/forward.svg);
       // }
-      SidebarUI.showSwitcherPanel = function () {
+      SidebarUI.showSwitcherPanel = function() {
         this._ensureShortcutsShown();
         this._switcherPanel.addEventListener(
           "popuphiding",
@@ -434,9 +447,10 @@
       // for everyone. my selector wouldn't work for you. but here, we can make it universal:
       // #PopupSearchAutoComplete[engine="Google"] .searchbar-engine-image
       // see uc-urlbar.css for the implementation in duskFox.
+      let searchbarPopup = document.getElementById("PopupSearchAutoComplete");
       eval(
-        `PopupSearchAutoComplete.updateHeader = async function ` +
-          PopupSearchAutoComplete.updateHeader
+        `searchbarPopup.updateHeader = async function ` +
+          searchbarPopup.updateHeader
             .toSource()
             .replace(/async updateHeader/, "")
             .replace(
@@ -447,8 +461,9 @@
     }
   }
 
-  if (gBrowserInit.delayedStartupFinished) new UCMiscMods();
-  else {
+  if (gBrowserInit.delayedStartupFinished) {
+    new UCMiscMods();
+  } else {
     let delayedListener = (subject, topic) => {
       if (topic == "browser-delayed-startup-finished" && subject == window) {
         Services.obs.removeObserver(delayedListener, topic);

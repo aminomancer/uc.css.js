@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Floating Sidebar Resizer
-// @version        1.3.0
+// @version        1.3.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    A floating sidebar that you can still resize. The default
@@ -63,7 +63,7 @@
       startX = e.screenX;
       startWidth = parseInt(document.defaultView.getComputedStyle(box).width, 10);
       document.documentElement.addEventListener("mousemove", doDrag, true);
-      document.documentElement.addEventListener("mouseup", stopDrag, false);
+      document.documentElement.addEventListener("mouseup", stopDrag);
     }
 
     function doDrag(e) {
@@ -85,7 +85,7 @@
       // remove the -100% margin-inline rule we set while dragging.
       resizer.style.removeProperty("margin-inline");
       document.documentElement.removeEventListener("mousemove", doDrag, true);
-      document.documentElement.removeEventListener("mouseup", stopDrag, false);
+      document.documentElement.removeEventListener("mouseup", stopDrag);
       // now that we've stopped moving the mouse, permanently record the
       // sidebar width so we can restore from it later.
       prefsvc.setStringPref(widthPref, box.style.width);
@@ -121,14 +121,14 @@
     }
 
     function attachListeners() {
-      resizer.addEventListener("mousedown", initDrag, false);
-      window.addEventListener("unload", uninit, false);
+      resizer.addEventListener("mousedown", initDrag);
+      window.addEventListener("unload", uninit);
       prefsvc.addObserver(anchor, alignObserve);
       box.addEventListener("keypress", exitSideBar, true);
     }
 
     function uninit() {
-      window.removeEventListener("unload", uninit, false);
+      window.removeEventListener("unload", uninit);
       prefsvc.removeObserver(anchor, alignObserve);
     }
 
@@ -139,8 +139,9 @@
   }
 
   // wait until components are initialized so we can access SidebarUI
-  if (gBrowserInit.delayedStartupFinished) startup();
-  else {
+  if (gBrowserInit.delayedStartupFinished) {
+    startup();
+  } else {
     let delayedListener = (subject, topic) => {
       if (topic == "browser-delayed-startup-finished" && subject == window) {
         Services.obs.removeObserver(delayedListener, topic);

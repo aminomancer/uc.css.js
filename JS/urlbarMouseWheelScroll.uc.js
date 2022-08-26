@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Scroll Urlbar with Mousewheel
-// @version        1.0
+// @version        1.0.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Implements vertical scrolling and smooth scrolling inside the
@@ -13,7 +13,7 @@
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
-(function () {
+(function() {
   function init() {
     gURLBar.inputField.smoothScroll = Services.prefs.getBoolPref(
       "toolkit.scrollbox.smoothScroll",
@@ -27,21 +27,21 @@
     gURLBar.inputField._overflowing =
       gURLBar.inputField.scrollWidth > gURLBar.inputField.clientWidth;
 
-    gURLBar.inputField.lineScrollAmount = function () {
+    gURLBar.inputField.lineScrollAmount = function() {
       return (this.scrollWidth / this.value.length) * 5;
     };
 
-    gURLBar.inputField.on_Overflow = function (event) {
+    gURLBar.inputField.on_Overflow = function(event) {
       if (event.detail === 0) return;
       this._overflowing = true;
     };
 
-    gURLBar.inputField.on_Underflow = function (event) {
+    gURLBar.inputField.on_Underflow = function(event) {
       if (event.detail === 0) return;
       this._overflowing = false;
     };
 
-    gURLBar.inputField.on_Wheel = function (event) {
+    gURLBar.inputField.on_Wheel = function(event) {
       if (!this._overflowing) return;
       let doScroll = false,
         instant,
@@ -78,13 +78,13 @@
           scrollAmount = this._destination - startPos;
         }
         this.scrollBy({
-          behavior: instant ? "instant" : this.smoothScroll ? "smooth" : "auto",
+          behavior: (instant && "instant") || this.smoothScroll ? "smooth" : "auto",
           left: scrollAmount,
         });
 
         this._isScrolling = true;
         window.clearTimeout(this.afterScroll);
-        this.afterScroll = window.setTimeout(function () {
+        this.afterScroll = window.setTimeout(function() {
           this._isScrolling = false;
         }, 66);
       }
@@ -96,9 +96,6 @@
     gURLBar.inputField.addEventListener("wheel", gURLBar.inputField.on_Wheel);
     gURLBar.inputField.addEventListener("overflow", gURLBar.inputField.on_Overflow);
     gURLBar.inputField.addEventListener("underflow", gURLBar.inputField.on_Underflow);
-    // gURLBar.inputField.removeEventListener("wheel", gURLBar.inputField.on_Wheel);
-    // gURLBar.inputField.removeEventListener("overflow", gURLBar.inputField.on_Overflow);
-    // gURLBar.inputField.removeEventListener("underflow", gURLBar.inputField.on_Underflow);
   }
 
   if (gBrowserInit.delayedStartupFinished) {

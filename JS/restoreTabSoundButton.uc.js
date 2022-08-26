@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Restore pre-Proton Tab Sound Button
-// @version        2.3.4
+// @version        2.3.5
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Proton makes really big changes to tabs, in particular
@@ -24,7 +24,7 @@
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
-(async function () {
+(async function() {
   let css = /* css */ `.tab-icon-sound-label,
   .tab-secondary-label {
     display: none;
@@ -171,7 +171,7 @@
     icon.hidden = true;
     icon.setAttribute("type", pending ? "pending" : "secure");
   }
-  gBrowser.createTooltip = function (e) {
+  gBrowser.createTooltip = function(e) {
     e.stopPropagation();
     let tab = e.target.triggerNode ? e.target.triggerNode.closest("tab") : null;
     if (!tab) {
@@ -193,7 +193,7 @@
     const affectedTabsLength = contextTabInSelection ? selectedTabs.length : 1;
     if (tab.mOverCloseButton) {
       let rect = windowUtils.getBoundsWithoutFlushing(tab.closeButton);
-      let shortcut = ShortcutUtils.prettifyShortcut(key_close);
+      let shortcut = ShortcutUtils.prettifyShortcut(document.getelementById("key_close"));
       label = PluralForm.get(
         affectedTabsLength,
         gTabBrowserBundle.GetStringFromName("tabs.closeTabs.tooltip")
@@ -227,7 +227,9 @@
         ).replace("#1", affectedTabsLength);
       }
       align = rect.right - tabRect.left < 250;
-    } else label = this.getTabTooltip(tab);
+    } else {
+      label = this.getTabTooltip(tab);
+    }
     if (align) {
       e.target.setAttribute("position", "after_start");
       e.target.moveToAnchor(tab, "after_start");

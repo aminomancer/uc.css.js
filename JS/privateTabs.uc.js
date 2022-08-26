@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Private Tabs
-// @version        1.2.0
+// @version        1.2.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    An fx-autoconfig port of Private Tab by xiaoxiaoflood. Adds
@@ -48,7 +48,7 @@ class PrivateTabManager {
     // the internal duplicateTab method doesn't pass the skipAnimation parameter
     // to addTrustedTab. so we need to make our own function, which requires us
     // to access some private objects.
-    let { SessionStoreInternal, TAB_CUSTOM_VALUES } = Cu.import(
+    let { SessionStoreInternal, TAB_CUSTOM_VALUES } = ChromeUtils.import(
       "resource:///modules/sessionstore/SessionStore.jsm"
     );
     this.SSI = SessionStoreInternal;
@@ -63,8 +63,9 @@ class PrivateTabManager {
     this.orig_getAttribute = MozElements.MozTab.prototype.getAttribute;
     this.init();
     if (location.href != "chrome://browser/content/browser.xhtml") return this.exec();
-    if (gBrowserInit.delayedStartupFinished) this.exec();
-    else {
+    if (gBrowserInit.delayedStartupFinished) {
+      this.exec();
+    } else {
       let delayedListener = (subject, topic) => {
         if (topic == "browser-delayed-startup-finished" && subject == window) {
           Services.obs.removeObserver(delayedListener, topic);
@@ -195,18 +196,18 @@ class PrivateTabManager {
 
     if (this.observePrivateTabs) gBrowser.tabContainer.addEventListener("TabClose", this);
 
-    MozElements.MozTab.prototype.getAttribute = function (att) {
+    MozElements.MozTab.prototype.getAttribute = function(att) {
       if (att == "usercontextid" && this.isToggling) {
         delete this.isToggling;
-        return privateTab.orig_getAttribute.call(this, att) == privateTab.container.userContextId
+        return window.privateTab.orig_getAttribute.call(this, att) ==
+          window.privateTab.container.userContextId
           ? 0
-          : privateTab.container.userContextId;
-      } else {
-        return privateTab.orig_getAttribute.call(this, att);
+          : window.privateTab.container.userContextId;
       }
+      return window.privateTab.orig_getAttribute.call(this, att);
     };
 
-    customElements.get("tabbrowser-tabs").prototype._updateNewTabVisibility = function () {
+    customElements.get("tabbrowser-tabs").prototype._updateNewTabVisibility = function() {
       let wrap = n => (n.parentNode.localName == "toolbarpaletteitem" ? n.parentNode : n);
       let unwrap = n => (n && n.localName == "toolbarpaletteitem" ? n.firstElementChild : n);
 
@@ -221,7 +222,7 @@ class PrivateTabManager {
       };
 
       const kAttr = "hasadjacentnewtabbutton";
-      let adjacentNewTab = sibling("new-tab-button", privateTab.BTN_ID);
+      let adjacentNewTab = sibling("new-tab-button", window.privateTab.BTN_ID);
       if (adjacentNewTab) {
         this.setAttribute(kAttr, "true");
       } else {
@@ -229,7 +230,7 @@ class PrivateTabManager {
       }
 
       const kAttr2 = "hasadjacentnewprivatetabbutton";
-      let adjacentPrivateTab = sibling(privateTab.BTN_ID, "new-tab-button");
+      let adjacentPrivateTab = sibling(window.privateTab.BTN_ID, "new-tab-button");
       if (adjacentPrivateTab) {
         this.setAttribute(kAttr2, "true");
       } else {
@@ -238,13 +239,19 @@ class PrivateTabManager {
 
       if (adjacentNewTab && adjacentPrivateTab) {
         let doc = adjacentPrivateTab.ownerDocument;
-        if (newTabFirst)
-          doc.getElementById("tabs-newtab-button").after(doc.getElementById(privateTab.BTN2_ID));
-        else doc.getElementById(privateTab.BTN2_ID).after(doc.getElementById("tabs-newtab-button"));
+        if (newTabFirst) {
+          doc
+            .getElementById("tabs-newtab-button")
+            .after(doc.getElementById(window.privateTab.BTN2_ID));
+        } else {
+          doc
+            .getElementById(window.privateTab.BTN2_ID)
+            .after(doc.getElementById("tabs-newtab-button"));
+        }
       }
     };
     gBrowser.tabContainer._updateNewTabVisibility();
-    if (!privateTabGlobal.privateTabsInited)
+    if (!privateTabGlobal.privateTabsInited) {
       CustomizableUI.createWidget({
         id: this.BTN_ID,
         type: "custom",
@@ -264,6 +271,7 @@ class PrivateTabManager {
           return btn;
         },
       });
+    }
     privateTabGlobal.privateTabsInited = true;
   }
 
@@ -314,12 +322,12 @@ class PrivateTabManager {
       );
     }
 
-    let { UUIDMap } = Cu.import("resource://gre/modules/Extension.jsm");
+    let { UUIDMap } = ChromeUtils.import("resource://gre/modules/Extension.jsm");
     let TST_ID = "treestyletab@piro.sakura.ne.jp";
     this.TST_UUID = UUIDMap.get(TST_ID, false);
 
     if (this.TST_UUID) this.setTstStyle(this.TST_UUID);
-    if (AddonManager && location.href === "chrome://browser/content/browser.xhtml")
+    if (AddonManager && location.href === "chrome://browser/content/browser.xhtml") {
       AddonManager.addAddonListener({
         onInstalled: addon => {
           if (addon.id == TST_ID) this.setTstStyle(UUIDMap.get(TST_ID, false));
@@ -328,6 +336,7 @@ class PrivateTabManager {
           if (addon.id == TST_ID) this.sss.unregisterSheet(this.TST_STYLE.url, this.TST_STYLE.type);
         },
       });
+    }
 
     if (!this.config.neverClearData) {
       Services.obs.addObserver(this, "quit-application-granted");
@@ -361,7 +370,7 @@ class PrivateTabManager {
       skipAnimation: true,
       ...(tab == gBrowser.selectedTab ? { relatedToCurrent: true, ownerTab: tab } : {}),
       skipLoad: true,
-      preferredRemoteType: aTab.linkedBrowser.remoteType,
+      preferredRemoteType: tab.linkedBrowser.remoteType,
     };
     let newTab = gBrowser.addTrustedTab(null, tabOptions);
 
@@ -426,16 +435,17 @@ class PrivateTabManager {
 
   toggleMask() {
     let privateMask = document.getElementById("private-mask");
-    if (gBrowser.selectedTab.isToggling)
+    if (gBrowser.selectedTab.isToggling) {
       privateMask.setAttribute(
         "enabled",
         gBrowser.selectedTab.userContextId == this.container.userContextId ? "false" : "true"
       );
-    else
+    } else {
       privateMask.setAttribute(
         "enabled",
         gBrowser.selectedTab.userContextId == this.container.userContextId ? "true" : "false"
       );
+    }
   }
 
   BrowserOpenTabPrivate() {
@@ -511,8 +521,9 @@ class PrivateTabManager {
         if (e.target === document.getElementById("contentAreaContextMenu")) this.hideContext(e);
         break;
       case "click":
-        if (e.button == 0) this.BrowserOpenTabPrivate();
-        else if (e.button == 2) {
+        if (e.button == 0) {
+          this.BrowserOpenTabPrivate();
+        } else if (e.button == 2) {
           document.popupNode = document.getElementById(this.BTN_ID);
           document
             .getElementById("toolbar-context-menu")
@@ -560,12 +571,13 @@ class PrivateTabManager {
   onWidgetAfterCreation(id) {
     if (id == this.BTN_ID) {
       let newTabPlacement = CustomizableUI.getPlacementOfWidget("new-tab-button")?.position;
-      if (newTabPlacement)
+      if (newTabPlacement) {
         CustomizableUI.addWidgetToArea(
           this.BTN_ID,
           CustomizableUI.AREA_TABSTRIP,
           newTabPlacement + 1
         );
+      }
       gBrowser.tabContainer._updateNewTabVisibility();
       CustomizableUI.removeListener(this);
     }

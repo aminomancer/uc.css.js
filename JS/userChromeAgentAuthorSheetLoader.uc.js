@@ -14,7 +14,7 @@
 // ==/UserScript==
 
 let EXPORTED_SYMBOLS = [];
-(function () {
+(function() {
   const { Services } = ChromeUtils.import("resource://gre/modules/Services.jsm");
   let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(Ci.nsIStyleSheetService);
   function traverseToMainProfile(str) {

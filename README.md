@@ -216,7 +216,7 @@ I said before that this is not a "compact theme," but I think my idea of "normal
 
 Proton also removed most of Firefox's UI animations. This should make Firefox more responsive on low-end hardware, so it's a fine decision. But this repo is not intended for low-end hardware, so we can get away with using lots of animations. The theme and some of the scripts restore animations that were built into Firefox prior to Proton. In other cases, they create new animations and transitions to make things feel smoother. I try to avoid what I consider excessive animations, but everyone has different tastes. By my estimate, the theme is in the middle of that spectrum.
 
-For linting/formatting, I use [Prettier](https://prettier.io/), [Stylelint](https://stylelint.io/) and [the Stylelint VS Code extension](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint), with [stylelint-config-airbnb](https://www.npmjs.com/package/stylelint-config-airbnb) for base rules and [stylelint-config-prettier](https://www.npmjs.com/package/stylelint-config-prettier) for compatibility.
+For linting/formatting, I use ESLint, Prettier, and Mozilla's ESLint plugin. All of those can be installed by running `npm install --save-dev` in the repo's root directory.
 
 </details>
 
@@ -425,94 +425,7 @@ Every script is either localized or localizable. That means that some scripts wi
 
 Initially, I tried to make these scripts compatible with as many script loaders as possible. But it dawned on me that I couldn't do that with certain scripts, and maybe shouldn't try at all. So I only design these scripts with fx-autoconfig in mind. That doesn't mean that none of them are compatible with other script loaders, but it does mean I don't know which ones are or are not, since I only test with fx-autoconfig.
 
-For linting/formatting, I use [Prettier](https://prettier.io/), [ESLint](https://eslint.org/) and [the ESLint VS Code extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint), with  [eslint-config-airbnb](https://www.npmjs.com/package/eslint-config-airbnb) for base rules and [eslint-config-prettier](https://www.npmjs.com/package/eslint-config-prettier) for compatibility.<details><summary>📋 <i><b>Here are the contents of the project's ESLint config...</b></i></summary>
-
-```
-{
-    "env": {
-        "browser": true,
-        "es2021": true
-    },
-    "extends": ["airbnb-base", "prettier"],
-    "parserOptions": {
-        "ecmaVersion": "latest",
-        "sourceType": "module"
-    },
-    "rules": {
-        "indent": "off",
-        "max-len": "off",
-        "quotes": [
-            "error",
-            "double",
-            {
-                "avoidEscape": true,
-                "allowTemplateLiterals": true
-            }
-        ],
-        "curly": ["error", "multi-or-nest"],
-        "camelcase": [
-            "error",
-            {
-                "properties": "never",
-                "ignoreDestructuring": false,
-                "ignoreGlobals": true
-            }
-        ],
-        "max-classes-per-file": "off",
-        "no-cond-assign": ["error", "except-parens"],
-        "no-unused-vars": [
-            "error",
-            {
-                "vars": "local",
-                "args": "after-used"
-            }
-        ],
-        "no-use-before-define": [
-            "error",
-            {
-                "functions": false,
-                "classes": false
-            }
-        ],
-        "no-fallthrough": [
-            "error",
-            {
-                "commentPattern": "break[\\s\\w]*omitted"
-            }
-        ],
-        "no-unused-expressions": [
-            "error",
-            {
-                "allowTernary": true,
-                "allowTaggedTemplates": true
-            }
-        ],
-        "default-param-last": "off",
-        "no-promise-executor-return": "off",
-        "no-param-reassign": "off",
-        "no-return-assign": "off",
-        "prefer-destructuring": "off",
-        "no-underscore-dangle": "off",
-        "no-restricted-syntax": [
-            "error",
-            {
-                "selector": "ForInStatement",
-                "message": "for..in loops iterate over the entire prototype chain, which is virtually never what you want. Use Object.{keys,values,entries}, and iterate over the resulting array."
-            },
-            {
-                "selector": "LabeledStatement",
-                "message": "Labels are a form of GOTO; using them makes code confusing and hard to maintain and understand."
-            },
-            {
-                "selector": "WithStatement",
-                "message": "`with` is disallowed in strict mode because it makes code impossible to predict and optimize."
-            }
-        ]
-    }
-}
-```
-
-</details>
+For linting/formatting, I use ESLint, Prettier, and Mozilla's ESLint plugin. All of those can be installed by running `npm install --save-dev` in the repo's root directory.
 
 </details>
 
@@ -671,14 +584,6 @@ _"Page Action"_ opens the extension's page action popup URL in the same manner. 
 _"Inspect Extension"_ opens a devtools tab targeting the extension background. This is the same page you'd get if you opened about:debugging and clicked the "Inspect" button next to an extension. _"View Source"_ opens the addon's .xpi archive. And, as you'd expect, _"Copy ID"_ copies the extension's ID to your clipboard, while _"Copy URL"_ copies the extension's base URL, so it can be used in CSS rules like `@-moz-document`
 
 <img src="preview/prev-debug-ext.webp" width="386"/>
-
-</details>
-
-#### [Downloads Delete File Command](/JS/downloadsDeleteFileCommand.uc.js):
-
-⚠️ _This feature is included in Firefox v98 (as of 12 Jan 2022), so you don't need this script unless you use an old version of Firefox._ Adds a new "Delete" menuitem when right-clicking a download in the downloads panel or the downloads manager. This will delete the downloaded file from disk. <details><summary>💬 <i><b>More details...</b></i></summary>
-
-It's important since the ability to "temporarily" download files with Firefox is being removed as part of [bug 1733587](https://bugzilla.mozilla.org/show_bug.cgi?id=1733587) to reduce the risk of data loss. When you choose to "open" a file instead of "save" it, Firefox will no longer save the file in your _Temp_ folder and schedule the file for deletion when you quit Firefox or exit private browsing mode. Instead it will save the file in your chosen _Downloads_ folder. So, being able to clean up these files from the context menu is a nice feature.
 
 </details>
 

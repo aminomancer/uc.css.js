@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           App Menu about:config Button
-// @version        1.2.2
+// @version        1.2.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Adds an about:config shortcut button to the main app menu panel, under the
@@ -20,7 +20,7 @@
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
-(function () {
+(function() {
   // user configuration
   const config = {
     urlOverride: "",
@@ -40,17 +40,16 @@
     above to "about:config2" */
   };
 
-  let { interfaces: Ci, manager: Cm } = Components;
-
   function findAboutConfig() {
     if (config.urlOverride) return config.urlOverride;
 
     if (
-      Cm.QueryInterface(Ci.nsIComponentRegistrar).isContractIDRegistered(
-        "@mozilla.org/network/protocol/about;1?what=cfg"
-      )
-    )
+      Components.manager
+        .QueryInterface(Ci.nsIComponentRegistrar)
+        .isContractIDRegistered("@mozilla.org/network/protocol/about;1?what=cfg")
+    ) {
       return "about:cfg";
+    }
 
     let dir = Services.dirsvc.get("UChrm", Ci.nsIFile);
     let appendFn = nm => dir.append(nm);
@@ -91,8 +90,9 @@
       class: "subviewbutton",
       label: advancedPrefsLabel,
       oncommand: `openTrustedLinkIn(this.preferredURL, gBrowser.currentURI.spec === AboutNewTab.newTabURL || gBrowser.currentURI.spec === HomePage.get(window) ? "current" : "tab")`,
-    }))
+    })) {
       prefsButton.setAttribute(key, val);
+    }
     // place after the built-in "Settings" button
     settingsButton.after(prefsButton);
   }

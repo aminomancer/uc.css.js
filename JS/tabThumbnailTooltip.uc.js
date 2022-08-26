@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Tab Thumbnail Tooltip
-// @version        1.0.4
+// @version        1.0.5
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Show a large thumbnail image to preview tab content when hovering a tab.
@@ -198,8 +198,9 @@ class TabThumbnail {
   }
 }
 
-if (gBrowserInit.delayedStartupFinished) window.ucTabThumbnail = new TabThumbnail();
-else {
+if (gBrowserInit.delayedStartupFinished) {
+  window.ucTabThumbnail = new TabThumbnail();
+} else {
   let delayedListener = (subject, topic) => {
     if (topic == "browser-delayed-startup-finished" && subject == window) {
       Services.obs.removeObserver(delayedListener, topic);

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Bookmarks Menu & Button Shortcuts
-// @version        1.3.2
+// @version        1.3.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Adds some shortcuts for bookmarking pages. First,
@@ -46,13 +46,16 @@ const ucBookmarksShortcuts = {
       let info = { url, parentGuid };
       let charset = null;
       let isErrorPage = false;
-      if (browser.documentURI)
+      if (browser.documentURI) {
         isErrorPage = /^about:(neterror|certerror|blocked)/.test(browser.documentURI.spec);
+      }
       try {
         if (isErrorPage) {
           let entry = await PlacesUtils.history.fetch(browser.currentURI);
           if (entry) info.title = entry.title;
-        } else info.title = browser.contentTitle;
+        } else {
+          info.title = browser.contentTitle;
+        }
         info.title = info.title || url.href;
         charset = browser.characterSet;
       } catch (e) {}
@@ -75,7 +78,7 @@ const ucBookmarksShortcuts = {
       image: "chrome://browser/skin/bookmark-hollow.svg",
     });
     popup.insertBefore(this.bookmarkTab, popup.firstElementChild);
-    popup.addEventListener("popupshowing", this.updateMenuItem, false);
+    popup.addEventListener("popupshowing", this.updateMenuItem);
     this.bookmarkTab.setAttribute("data-l10n-id", "bookmarks-subview-bookmark-tab");
     this.searchBookmarks = popup.querySelector("#BMB_viewBookmarksSidebar").after(
       this.create(doc, "menuitem", {
@@ -101,18 +104,19 @@ const ucBookmarksShortcuts = {
     if (BookmarkingUI._uri) uri = new URL(BookmarkingUI._uri.spec);
     if (!uri) return;
     let isStarred = await PlacesUtils.bookmarks.fetch({ url: uri });
-    if ("l10n" in menuitem.ownerDocument && menuitem.ownerDocument.l10n)
+    if ("l10n" in menuitem.ownerDocument && menuitem.ownerDocument.l10n) {
       menuitem.ownerDocument.l10n.setAttributes(
         menuitem,
         isStarred ? "bookmarks-subview-edit-bookmark" : "bookmarks-subview-bookmark-tab"
       );
+    }
     menuitem.setAttribute(
       "image",
       isStarred ? "chrome://browser/skin/bookmark.svg" : "chrome://browser/skin/bookmark-hollow.svg"
     );
   },
   init() {
-    let { node } = CustomizableUI.getWidget("bookmarks-menu-button")?.forWindow(window);
+    let node = CustomizableUI.getWidget("bookmarks-menu-button")?.forWindow(window).node;
     // delete these two lines if you don't want the confirmation hint to show
     // when you bookmark a page.
     Services.prefs.setIntPref("browser.bookmarks.editDialog.confirmationHintShowCount", 0);
@@ -132,13 +136,14 @@ const ucBookmarksShortcuts = {
     // this way we can swap between the left/right sidebar icons based on which
     // side the sidebar is on, like the sidebar toolbar widget does.
     let sidebarItem = node.querySelector("#BMB_viewBookmarksSidebar");
-    if (sidebarItem)
+    if (sidebarItem) {
       sidebarItem.appendChild(
         this.create(document, "observes", {
-          "element": "sidebar-box",
-          "attribute": "positionend",
+          element: "sidebar-box",
+          attribute: "positionend",
         })
       );
+    }
     // show the URL and keyword fields in the edit bookmark panel
     eval(
       `StarUI.showEditBookmarkPopup = async function ` +
@@ -154,8 +159,9 @@ const ucBookmarksShortcuts = {
   QueryInterface: ChromeUtils.generateQI(["nsINavBookmarkObserver"]),
 };
 
-if (gBrowserInit.delayedStartupFinished) ucBookmarksShortcuts.init();
-else {
+if (gBrowserInit.delayedStartupFinished) {
+  ucBookmarksShortcuts.init();
+} else {
   let delayedListener = (subject, topic) => {
     if (topic == "browser-delayed-startup-finished" && subject == window) {
       Services.obs.removeObserver(delayedListener, topic);

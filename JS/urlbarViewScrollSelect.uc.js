@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Scroll Urlbar Results with Mousewheel
-// @version        1.0
+// @version        1.0.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Lets you navigate the results/suggestions in the urlbar with the
@@ -9,7 +9,7 @@
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
-(function () {
+(function() {
   let count = 0;
   let timer;
 
@@ -28,11 +28,11 @@
       if (dY > dX) {
         e.stopPropagation();
         e.preventDefault();
-        if (dY % 1 === 0)
+        if (dY % 1 === 0) {
           // actual mousewheel events should be integers, so we can just scroll
           // one row per notch of the mousewheel.
           gURLBar.view.selectBy(1, { reverse: e.deltaY < 0 });
-        else {
+        } else {
           // trackpad events will usually be decimals e.g. 0.333. since we can
           // only scroll by one row at a time, there's no way to make the
           // feedback proportional to the input. trackpads send lots of events
@@ -92,8 +92,8 @@
   }
 
   function init() {
-    gURLBar.view._rows.addEventListener("wheel", wheelSelect, false);
-    gURLBar.view._rows.addEventListener("mouseup", rightClick, false);
+    gURLBar.view._rows.addEventListener("wheel", wheelSelect);
+    gURLBar.view._rows.addEventListener("mouseup", rightClick);
   }
 
   // wait until gURLBar is initialized to attach event listeners

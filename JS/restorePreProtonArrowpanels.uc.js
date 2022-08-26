@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Restore pre-Proton Arrowpanels
-// @version        1.0.3
+// @version        1.0.4
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    The mother of all proton reversals. This script will
@@ -14,7 +14,7 @@
 // you call whenDefined on an element that doesn't have a dash in its name,
 // unless the code is running in some specific namespace that I have no idea how
 // to make my code run in.
-(function () {
+(function() {
   customElements.whenDefined("autocomplete-richlistbox-popup").then(() => {
     let spec = customElements.get("panel");
 
@@ -26,7 +26,7 @@
         };
       },
     });
-    spec.prototype._setSideAttribute = function (event) {
+    spec.prototype._setSideAttribute = function(event) {
       if (!this.isArrowPanel || !this.anchorNode) {
         return;
       }
@@ -99,7 +99,7 @@
         }
       }
     };
-    spec.prototype.on_popupshowing = function (event) {
+    spec.prototype.on_popupshowing = function(event) {
       if (event.target == this) {
         this.panelContent.style.display = "";
       }
@@ -151,7 +151,7 @@
   });
 
   customElements.whenDefined("places-popup-arrow").then(spec => {
-    spec.prototype._setSideAttribute = function (event) {
+    spec.prototype._setSideAttribute = function(event) {
       if (!this.anchorNode) return;
 
       let container = this.shadowRoot.querySelector(".panel-arrowcontainer");
@@ -161,7 +161,8 @@
         if (!this.anchorNode) {
           arrow.hidden = true;
           return;
-        } else arrow.hidden = false;
+        }
+        arrow.hidden = false;
       }
 
       if (!container) {
@@ -374,8 +375,9 @@
   );
   if (!sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
 
-  if (gBrowserInit.delayedStartupFinished) init();
-  else {
+  if (gBrowserInit.delayedStartupFinished) {
+    init();
+  } else {
     let delayedListener = (subject, topic) => {
       if (topic == "browser-delayed-startup-finished" && subject == window) {
         Services.obs.removeObserver(delayedListener, topic);

@@ -1,31 +1,31 @@
 // ==UserScript==
 // @name           Restore pre-Proton Library Button
-// @version        1.2.1
+// @version        1.2.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    The library toolbar button used to have an animation that
-// played when a bookmark was added. It's another casualty of the proton updates.
-// This script restores the library button animation in its entirety, with one
-// small change. The library animation always looked just a tiny bit off for
-// certain window scaling factors — the animation would appear about half a pixel
-// from where the static icon is, causing it to appear to move when the animation
-// finishes. In order to fix this in my version of the animation, I added some
-// constants at the top of the script (allowScalingFix and forceScalingFix) that
-// will adjust the icon if enabled. I don't know exactly which scaling factors or
-// OSes have this problem, but 150% scaling on Windows 10 definitely has it. So
-// by default the script will only enable the scaling fix if the OS is Windows
-// and the scaling factor is 1.5. However, if you notice that you have the
-// scaling bug too, you can toggle "forceScalingFix" to true and it will adjust
-// the icon regardless of your OS or scaling factor. Conversely, if you're using
-// 150% scaling on Windows but for whatever reason the scaling fix is making it
-// look worse somehow, toggling "allowScalingFix" to false will turn the feature
-// off entirely. This standalone version of the script doesn't require any
-// additional CSS or icon downloads. If you use my other stylesheets or icons,
-// you will probably want the non-standalone version instead.
+// played when a bookmark was added. It's another casualty of the proton
+// updates. This script restores the library button animation in its entirety,
+// with one small change. The library animation always looked just a tiny bit
+// off for certain window scaling factors — the animation would appear about
+// half a pixel from where the static icon is, causing it to appear to move when
+// the animation finishes. In order to fix this in my version of the animation,
+// I added some constants at the top of the script (allowScalingFix and
+// forceScalingFix) that will adjust the icon if enabled. I don't know exactly
+// which scaling factors or OSes have this problem, but 150% scaling on Windows
+// 10 definitely has it. So by default the script will only enable the scaling
+// fix if the OS is Windows and the scaling factor is 1.5. However, if you
+// notice that you have the scaling bug too, you can toggle "forceScalingFix" to
+// true and it will adjust the icon regardless of your OS or scaling factor.
+// Conversely, if you're using 150% scaling on Windows but for whatever reason
+// the scaling fix is making it look worse somehow, toggling "allowScalingFix"
+// to false will turn the feature off entirely. This standalone version of the
+// script doesn't require any additional CSS or icon downloads. If you use my
+// other stylesheets or icons, you probably want the non-standalone version.
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
-(function () {
+(function() {
   const allowScalingFix = true;
   const forceScalingFix = false;
   class LibraryUIBase {
@@ -33,8 +33,9 @@
       if (
         allowScalingFix &&
         (forceScalingFix || (window.devicePixelRatio === 1.5 && this.OS === "WINNT"))
-      )
+      ) {
         this.libButtonFragOrNode.setAttribute("scaling", window.devicePixelRatio);
+      }
       this._libraryButtonAnimationEndListeners = {};
       this._windowResizeRunning = false;
       this.animBox = document.createXULElement("box");
@@ -63,8 +64,9 @@
         !libraryButton.closest("#nav-bar") ||
         !window.toolbar.visible ||
         gReduceMotion
-      )
+      ) {
         return false;
+      }
 
       let navBar = document.getElementById("nav-bar");
       let iconBounds = window.windowUtils.getBoundsWithoutFlushing(libraryButton.icon);
@@ -78,10 +80,11 @@
       this.animBox.removeAttribute("fade");
       libraryButton.setAttribute("animate", animation);
       this.animBox.setAttribute("animate", animation);
-      if (!this._libraryButtonAnimationEndListeners[animation])
+      if (!this._libraryButtonAnimationEndListeners[animation]) {
         this._libraryButtonAnimationEndListeners[animation] = event => {
           this._libraryButtonAnimationEndListener(event, animation);
         };
+      }
       this.animBox.addEventListener(
         "animationend",
         this._libraryButtonAnimationEndListeners[animation]
@@ -91,12 +94,12 @@
     }
 
     _libraryButtonAnimationEndListener(aEvent, animation) {
-      if (aEvent.animationName.startsWith(`library-${animation}-animation`))
+      if (aEvent.animationName.startsWith(`library-${animation}-animation`)) {
         this.animBox.setAttribute("fade", "true");
-      else if (aEvent.animationName == `library-${animation}-fade`) {
+      } else if (aEvent.animationName == `library-${animation}-fade`) {
         this.animBox.removeEventListener(
           "animationend",
-          LibraryUI._libraryButtonAnimationEndListeners[animation]
+          window.LibraryUI._libraryButtonAnimationEndListeners[animation]
         );
         this.animBox.removeAttribute("animate");
         this.animBox.removeAttribute("fade");
@@ -116,8 +119,9 @@
           libraryButton.getAttribute("cui-areatype") == "menu-panel" ||
           libraryButton.getAttribute("overflowedItem") == "true" ||
           !libraryButton.closest("#nav-bar")
-        )
+        ) {
           return;
+        }
 
         let iconBounds = window.windowUtils.getBoundsWithoutFlushing(libraryButton.icon);
         this.animBox.style.setProperty("--library-icon-x", iconBounds.x + "px");
@@ -152,14 +156,14 @@
     window.LibraryUI = new LibraryUIBase();
 
     StarUI.showConfirmation = function showConfirmation() {
-      let animationTriggered = LibraryUI.triggerLibraryAnimation("bookmark");
+      let animationTriggered = window.LibraryUI.triggerLibraryAnimation("bookmark");
       const HINT_COUNT_PREF = "browser.bookmarks.editDialog.confirmationHintShowCount";
       const HINT_COUNT = Services.prefs.getIntPref(HINT_COUNT_PREF, 0);
       if (animationTriggered && HINT_COUNT >= 3) return;
       Services.prefs.setIntPref(HINT_COUNT_PREF, HINT_COUNT + 1);
 
       let anchor;
-      if (window.toolbar.visible)
+      if (window.toolbar.visible) {
         for (let id of ["library-button", "bookmarks-menu-button"]) {
           let element = document.getElementById(id);
           if (
@@ -173,6 +177,7 @@
             break;
           }
         }
+      }
 
       if (!anchor) anchor = document.getElementById("PanelUI-menu-button");
       ConfirmationHint.show(anchor, "pageBookmarked2");

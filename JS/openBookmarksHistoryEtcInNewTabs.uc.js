@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Open Bookmarks, History, etc. in New Tabs
-// @version        1.2.2
+// @version        1.2.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    In vanilla Firefox, browser.tabs.loadBookmarksInTabs only
@@ -24,7 +24,7 @@
 // @include        chrome://browser/content/syncedtabs/sidebar.xhtml
 // ==/UserScript==
 
-(function () {
+(function() {
   function init() {
     if (window.PlacesUIUtils && !PlacesUIUtils._hasBeenModifiedForOBHNT) {
       const lazy = {};
@@ -50,12 +50,13 @@
     if (window.HistoryMenu) {
       let proto = HistoryMenu.prototype;
       if (!proto._hasBeenModifiedForOBHNT) {
-        proto._onCommand = function (e) {
+        proto._onCommand = function(e) {
           e = getRootEvent(e);
           let placesNode = e.target._placesNode;
           if (placesNode) {
-            if (!PrivateBrowsingUtils.isWindowPrivate(window))
+            if (!PrivateBrowsingUtils.isWindowPrivate(window)) {
               PlacesUIUtils.markPageAsTyped(placesNode.uri);
+            }
             let where = whereToOpenLink(e, false, true);
             if (PlacesUIUtils.loadBookmarksInTabs) {
               if (where == "current") where = "tab";
@@ -66,17 +67,18 @@
             });
           }
         };
-        proto._onClick = function (e) {
+        proto._onClick = function(e) {
           let modifKey =
             AppConstants.platform == "macosx" ? e.metaKey || e.shiftKey : e.ctrlKey || e.shiftKey;
           if (e.button == 2 || (e.button == 0 && !modifKey)) return;
           let target = e.originalTarget;
           let tag = target.tagName;
-          if (PlacesUIUtils.openInTabClosesMenu && (tag == "menuitem" || tag == "menu"))
+          if (PlacesUIUtils.openInTabClosesMenu && (tag == "menuitem" || tag == "menu")) {
             closeMenus(e.target);
+          }
           if (e.button == 1 && !(tag == "menuitem" || tag == "menu")) this.onCommand(e);
         };
-        proto._onMouseUp = function (e) {
+        proto._onMouseUp = function(e) {
           if (e.button == 2 || PlacesUIUtils.openInTabClosesMenu) return;
           let target = e.originalTarget;
           if (target.tagName != "menuitem") return;
@@ -87,7 +89,9 @@
             menupopup.addEventListener("popuphidden", () => target.removeAttribute("closemenu"), {
               once: true,
             });
-          } else target.removeAttribute("closemenu");
+          } else {
+            target.removeAttribute("closemenu");
+          }
         };
         let popup = document.getElementById("historyMenuPopup");
         popup.setAttribute("onclick", `this.parentNode._placesView._onClick(event);`);
@@ -135,7 +139,7 @@
     if (location.href === `chrome://browser/content/syncedtabs/sidebar.xhtml`) {
       let proto = syncedTabsDeckComponent.tabListComponent._View.prototype;
       if (!proto._hasBeenModifiedForOBHNT) {
-        proto.onOpenSelected = function (url, e) {
+        proto.onOpenSelected = function(url, e) {
           let browserWindow = this._window.browsingContext.topChromeWindow;
           let where = browserWindow.whereToOpenLink(e, false, true);
           if (browserWindow.PlacesUIUtils.loadBookmarksInTabs) {
@@ -151,9 +155,9 @@
   if (
     location.href !== `chrome://browser/content/browser.xhtml` ||
     gBrowserInit.delayedStartupFinished
-  )
+  ) {
     init();
-  else {
+  } else {
     let delayedListener = (subject, topic) => {
       if (topic == "browser-delayed-startup-finished" && subject == window) {
         Services.obs.removeObserver(delayedListener, topic);

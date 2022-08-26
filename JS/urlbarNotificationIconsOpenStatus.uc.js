@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Add [open] Status to Urlbar Notification Icons
-// @version        1.1.0
+// @version        1.1.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    This sets an attribute on the buttons in
@@ -35,8 +35,9 @@ class PopupNotificationHandler {
       if (e.type === "popupshowing") {
         anchorNode.setAttribute("open", true);
         let offset = 0;
-        if (anchorNode.localName === "toolbarbutton")
+        if (anchorNode.localName === "toolbarbutton") {
           offset = (windowUtils.getBoundsWithoutFlushing(anchorNode).height - 16) / 2;
+        }
         this.panel.style.setProperty("--uc-panel-top-offset", offset + "px");
       } else {
         anchorNode.removeAttribute("open");
@@ -46,8 +47,9 @@ class PopupNotificationHandler {
   }
 }
 
-if (gBrowserInit.delayedStartupFinished) new PopupNotificationHandler();
-else {
+if (gBrowserInit.delayedStartupFinished) {
+  new PopupNotificationHandler();
+} else {
   let delayedListener = (subject, topic) => {
     if (topic == "browser-delayed-startup-finished" && subject == window) {
       Services.obs.removeObserver(delayedListener, topic);

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Fix Titlebar Button Tooltips
-// @version        1.1.1
+// @version        1.1.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Since bug 1718629 (https://bugzilla.mozilla.org/show_bug.cgi?id=1718629),
@@ -20,7 +20,7 @@
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
-(function () {
+(function() {
   // This is a setting you can use to disable Windows 11's Snap Layouts popup
   // from appearing when you hover over the Maximize button. It has no effect on
   // other operating systems. By default, if you use this on Windows 11, it will
@@ -33,7 +33,7 @@
   const disableSnapLayouts = false;
 
   const lazy = {};
-  XPCOMUtils.defineLazyModuleGetter(
+  ChromeUtils.defineModuleGetter(
     lazy,
     "WindowsVersionInfo",
     "resource://gre/modules/components-utils/WindowsVersionInfo.jsm"

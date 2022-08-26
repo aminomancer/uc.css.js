@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Tab Context Menu Navigation
-// @version        1.1
+// @version        1.1.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Add some new menuitems to the tab context menu for navigating
@@ -154,20 +154,24 @@ class TabContextMenuNavigation {
     }
   }
   goBack() {
-    if (this.contextTab?.multiselected)
+    if (this.contextTab?.multiselected) {
       gBrowser.selectedTabs.forEach(tab => {
         let browser = gBrowser.getBrowserForTab(tab);
         if (browser.webNavigation.canGoBack) browser.goBack();
       });
-    else gBrowser.getBrowserForTab(this.contextTab).goBack();
+    } else {
+      gBrowser.getBrowserForTab(this.contextTab).goBack();
+    }
   }
   goForward() {
-    if (this.contextTab?.multiselected)
+    if (this.contextTab?.multiselected) {
       gBrowser.selectedTabs.forEach(tab => {
         let browser = gBrowser.getBrowserForTab(tab);
         if (browser.webNavigation.canGoForward) browser.goForward();
       });
-    else gBrowser.getBrowserForTab(this.contextTab).goForward();
+    } else {
+      gBrowser.getBrowserForTab(this.contextTab).goForward();
+    }
   }
   reload() {
     if (this.contextTab?.multiselected) gBrowser.reloadMultiSelectedTabs();
@@ -198,9 +202,9 @@ class TabContextMenuNavigation {
   }
 }
 
-if (gBrowserInit.delayedStartupFinished)
+if (gBrowserInit.delayedStartupFinished) {
   window.tabContextMenuNavigation = new TabContextMenuNavigation();
-else {
+} else {
   let delayedListener = (subject, topic) => {
     if (topic == "browser-delayed-startup-finished" && subject == window) {
       Services.obs.removeObserver(delayedListener, topic);

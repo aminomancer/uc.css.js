@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Urlbar Container Color Indicator
-// @version        1.0
+// @version        1.0.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Change the background color of the urlbar to match the active tab's
@@ -8,13 +8,14 @@
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
-(function () {
-  updateUserContextUIIndicator = function () {
+(function() {
+  updateUserContextUIIndicator = function() {
     function replaceContainerClass(classType, element, value) {
       let prefix = "identity-" + classType + "-";
       if (value && element.classList.contains(prefix + value)) return;
-      for (let className of element.classList)
+      for (let className of element.classList) {
         if (className.startsWith(prefix)) element.classList.remove(className);
+      }
       if (value) element.classList.add(prefix + value);
     }
     let hbox = document.getElementById("userContext-icons");

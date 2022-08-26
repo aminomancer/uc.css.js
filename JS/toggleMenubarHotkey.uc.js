@@ -1,13 +1,13 @@
 // ==UserScript==
 // @name           Toggle Menubar Hotkey
-// @version        1.1.1
+// @version        1.1.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Press alt+M to toggle the menubar.
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
-(function () {
+(function() {
   const options = {
     // one or more of: alt, shift, ctrl, meta, accel. separated by space, enclosed by quotes.
     modifiers: "alt",
@@ -17,7 +17,7 @@
     id: "key_toggleMenubar",
   };
   let hotkeyRegistered = _ucUtils.registerHotkey(options, (win, key) => {
-    if (win === window)
+    if (win === window) {
       Services.obs.notifyObservers(
         null,
         "browser-set-toolbar-visibility",
@@ -26,13 +26,14 @@
           AutoHideMenubar._node.getAttribute("inactive"),
         ])
       );
+    }
   });
 
   function init() {
     if (!hotkeyRegistered) return;
     document.getElementById("toolbar-menubar").setAttribute("key", options.id);
     let src = onViewToolbarsPopupShowing.toSource();
-    if (src.startsWith("function"))
+    if (src.startsWith("function")) {
       eval(
         `window.onViewToolbarsPopupShowing = function uc_onViewToolbarsPopupShowing ` +
           src
@@ -42,6 +43,7 @@
               `if (toolbar.hasAttribute("key"))`
             )
       );
+    }
   }
 
   if (gBrowserInit.delayedStartupFinished) {

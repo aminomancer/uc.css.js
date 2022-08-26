@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Scrolling Search One-offs
-// @version        1.3.0
+// @version        1.3.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    This is for my own personal stylesheet, which moves the
@@ -45,25 +45,25 @@
     container._direction = 0;
     container._prevMouseScrolls = [null, null];
 
-    container.scrollByPixels = function (aPixels, aInstant) {
+    container.scrollByPixels = function(aPixels, aInstant) {
       let scrollOptions = { behavior: aInstant ? "instant" : "auto" };
-      scrollOptions["left"] = aPixels;
+      scrollOptions.left = aPixels;
       this.scrollBy(scrollOptions);
     };
-    container.lineScrollAmount = function () {
+    container.lineScrollAmount = function() {
       return buttonsList.length
         ? Math.round(buttons.scrollWidth * 0.1) / 0.1 / buttonsList.length
         : 30;
     };
-    container.on_Scroll = function (_e) {
+    container.on_Scroll = function(_e) {
       this._isScrolling = true;
     };
-    container.on_Scrollend = function (_e) {
+    container.on_Scrollend = function(_e) {
       this._isScrolling = false;
       this._destination = 0;
       this._direction = 0;
     };
-    container.on_Wheel = function (e) {
+    container.on_Wheel = function(e) {
       let doScroll = false;
       let instant;
       let scrollAmount = 0;
@@ -71,11 +71,17 @@
       let delta = isVertical ? e.deltaY : e.deltaX;
       if (this._prevMouseScrolls.every(prev => prev == isVertical)) {
         doScroll = true;
-        if (e.deltaMode == e.DOM_DELTA_PIXEL) {
-          scrollAmount = delta;
-          instant = true;
-        } else if (e.deltaMode == e.DOM_DELTA_PAGE) scrollAmount = delta * buttons.clientWidth;
-        else scrollAmount = delta * this.lineScrollAmount();
+        switch (e.deltaMode) {
+          case e.DOM_DELTA_PIXEL:
+            scrollAmount = delta;
+            instant = true;
+            break;
+          case e.DOM_DELTA_PAGE:
+            scrollAmount = delta * buttons.clientWidth;
+            break;
+          default:
+            scrollAmount = delta * this.lineScrollAmount();
+        }
       }
       if (this._prevMouseScrolls.length > 1) this._prevMouseScrolls.shift();
       this._prevMouseScrolls.push(isVertical);
@@ -99,7 +105,7 @@
     container.addEventListener("scrollend", container.on_Scrollend);
     container.style.paddingInline = `4px`;
     container.style.clipPath = `inset(0 4px 0 4px)`;
-    oneOffs.scrollToButton = function (el) {
+    oneOffs.scrollToButton = function(el) {
       if (!el) el = buttons.firstElementChild;
       let slider = container;
       if (!slider) return;
@@ -111,14 +117,10 @@
         behavior: "auto",
       });
     };
-    oneOffs.on_SelectedOneOffButtonChanged = function (_e) {
+    oneOffs.on_SelectedOneOffButtonChanged = function() {
       oneOffs.scrollToButton(oneOffs.selectedButton);
     };
-    oneOffs.addEventListener(
-      "SelectedOneOffButtonChanged",
-      oneOffs.on_SelectedOneOffButtonChanged,
-      false
-    );
+    oneOffs.addEventListener("SelectedOneOffButtonChanged", oneOffs.on_SelectedOneOffButtonChanged);
   }
 
   function init() {
@@ -134,8 +136,9 @@
       );
   }
 
-  if (gBrowserInit.delayedStartupFinished) init();
-  else {
+  if (gBrowserInit.delayedStartupFinished) {
+    init();
+  } else {
     let delayedListener = (subject, topic) => {
       if (topic == "browser-delayed-startup-finished" && subject == window) {
         Services.obs.removeObserver(delayedListener, topic);

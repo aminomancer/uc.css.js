@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Unread Tab Mods
-// @version        1.2
+// @version        1.2.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Modifies some javascript methods so that unread tabs can be
@@ -31,7 +31,7 @@
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
-(function () {
+(function() {
   /**
    * set the "notselectedsinceload" attribute and the _notselectedsinceload property on a tab.
    * @param {object} tab (a tab whose attribute to change)
@@ -68,28 +68,31 @@
       "Mark Multiple Tabs as Unread Label": "Mark #1 Tabs as Unread",
     };
     constructor() {
-      gBrowser.tabContainer._handleTabSelect = function (aInstant) {
+      gBrowser.tabContainer._handleTabSelect = function(aInstant) {
         let selectedTab = this.selectedItem;
-        if (this.getAttribute("overflow") == "true")
+        if (this.getAttribute("overflow") == "true") {
           this.arrowScrollbox.ensureElementIsVisible(selectedTab, aInstant);
+        }
         modulateAttr(selectedTab);
       };
 
-      gBrowser.tabContainer._handleNewTab = function (tab) {
+      gBrowser.tabContainer._handleNewTab = function(tab) {
         if (tab.container != this) return;
         tab._fullyOpen = true;
         gBrowser.tabAnimationsInProgress--;
         this._updateCloseButtons();
-        if (tab.getAttribute("selected") == "true") this._handleTabSelect();
-        else {
+        if (tab.getAttribute("selected") == "true") {
+          this._handleTabSelect();
+        } else {
           modulateAttr(tab, true);
           if (!tab.hasAttribute("skipbackgroundnotify")) this._notifyBackgroundTab(tab);
         }
         this.arrowScrollbox._updateScrollButtonsDisabledState();
         if (tab.linkedPanel) NewTabPagePreloading.maybeCreatePreloadedBrowser(window);
 
-        if (UserInteraction.running("browser.tabs.opening", window))
+        if (UserInteraction.running("browser.tabs.opening", window)) {
           UserInteraction.finish("browser.tabs.opening", window);
+        }
       };
 
       if (UnreadTabsBase.config["Add Context Menu Items"]) this.makeMenuItems(this.tabContext);
@@ -151,12 +154,12 @@
 
     _onCommand(mode = false) {
       let tab = TabContextMenu.contextTab;
-      if (tab.multiselected)
+      if (tab.multiselected) {
         gBrowser.selectedTabs.forEach(aTab => {
           if (aTab.getAttribute("pending") || aTab.selected) return;
           modulateAttr(aTab, mode);
         });
-      else {
+      } else {
         if (tab.getAttribute("pending") || tab.selected) return;
         modulateAttr(tab, mode);
       }
@@ -181,7 +184,7 @@
       this.markAsUnreadMenuitem.setAttribute("oncommand", `unreadTabMods._onCommand(true)`);
       this.markAsReadMenuitem.after(this.markAsUnreadMenuitem);
 
-      context.addEventListener("popupshowing", this, false);
+      context.addEventListener("popupshowing", this);
     }
   }
 
@@ -191,8 +194,9 @@
 
   document.documentElement.setAttribute("italic-unread-tabs", true);
 
-  if (gBrowserInit.delayedStartupFinished) init();
-  else {
+  if (gBrowserInit.delayedStartupFinished) {
+    init();
+  } else {
     let delayedListener = (subject, topic) => {
       if (topic == "browser-delayed-startup-finished" && subject == window) {
         Services.obs.removeObserver(delayedListener, topic);

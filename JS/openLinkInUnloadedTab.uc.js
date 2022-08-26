@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Open Link in Unloaded Tab (context menu item)
-// @version        1.5.2
+// @version        1.5.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Add a new menu item to context menus prompted by
@@ -141,7 +141,7 @@ class UnloadedTabMenuBase {
     });
     this.contentMenuOpenLink.after(this.contentMenuOpenLinkUnloaded);
     this.contentContextMenu.addEventListener("popupshowing", this);
-    this.contentContextMenu.addEventListener("popuphidden", this, false);
+    this.contentContextMenu.addEventListener("popuphidden", this);
   }
   create(doc, tag, props, isHTML = false) {
     let el = isHTML ? doc.createElement(tag) : doc.createXULElement(tag);
@@ -153,8 +153,9 @@ class UnloadedTabMenuBase {
   handleEvent(e) {
     switch (e.type) {
       case "popuphidden":
-        if (e.originalTarget === this.contentContextMenu)
+        if (e.originalTarget === this.contentContextMenu) {
           this.contentMenuOpenLinkUnloaded.hidden = true;
+        }
         break;
       case "popupshowing":
         switch (e.target) {
@@ -220,7 +221,7 @@ class UnloadedTabMenuBase {
     );
   }
   get syncedTabsStore() {
-    return sidebar.syncedTabsDeckComponent._syncedTabsListStore;
+    return document.getElementById("sidebar")?.syncedTabsDeckComponent._syncedTabsListStore;
   }
   get selectedSyncedRow() {
     return this.syncedTabsStore.data[this.syncedTabsStore._selectedRow[0]];
@@ -314,20 +315,24 @@ class UnloadedTabMenuBase {
         root.containerOpen = false;
         if (!didSuppressNotifications) result.suppressNotifications = false;
       }
-    } else items = folder;
+    } else {
+      items = folder;
+    }
     items.forEach(item => this.openTab(item, { bulkOpen: true }));
   }
   openSyncedTabUnloaded(popup) {
     if (!this.syncedContextMenuInited) return;
-    if (popup.triggerNode?.closest(".tabs-container"))
+    if (popup.triggerNode?.closest(".tabs-container")) {
       this.openTab(this.selectedSyncedTab, { syncedTabs: true });
+    }
   }
   openAllSyncedFromDevice(popup) {
     if (!this.syncedContextMenuInited) return;
-    if (popup.triggerNode?.closest(".tabs-container"))
+    if (popup.triggerNode?.closest(".tabs-container")) {
       this.selectedSyncedRow.tabs.forEach(item =>
         this.openTab(item, { bulkOpen: true, syncedTabs: true })
       );
+    }
   }
   async openTab(item, params = {}) {
     let url = typeof item === "object" ? item.url || item.uri : item;
@@ -335,16 +340,17 @@ class UnloadedTabMenuBase {
     let { gBrowser } = win;
 
     let tabParams = {};
-    if (params.fromContent && gContextMenu)
+    if (params.fromContent && gContextMenu) {
       tabParams = gContextMenu._openLinkInParameters({
         userContextId: gBrowser.selectedTab.userContextId,
       });
-    else {
-      if (params.bulkOpen)
+    } else {
+      if (params.bulkOpen) {
         tabParams = {
           skipAnimation: true,
           bulkOrderedOpen: true,
         };
+      }
       tabParams.triggeringPrincipal =
         location.href === `chrome://browser/content/browser.xhtml` && !params.syncedTabs
           ? gBrowser.selectedBrowser.contentPrincipal
@@ -362,7 +368,7 @@ class UnloadedTabMenuBase {
     win.SessionStore.setTabState(tab, {
       entries: [
         {
-          url: url,
+          url,
           title: item?.title || info?.title || (this.useLinkAsTabTitle && params.linkText),
           triggeringPrincipal_base64: this.E10SUtils.serializePrincipal(
             tabParams.triggeringPrincipal
@@ -376,7 +382,7 @@ class UnloadedTabMenuBase {
     let isReady = false;
     tab.addEventListener(
       "SSTabRestoring",
-      function () {
+      function() {
         isReady = true;
         win.unloadedTabMenu.maybeSetIcon(tab, iconURL, isReady, tabParams.triggeringPrincipal);
       },
@@ -388,18 +394,17 @@ class UnloadedTabMenuBase {
     if (tempURL) {
       let blob = await fetch(tempURL)
         .then(r => r.blob())
-        .catch(e => {
+        .catch(() => {
           if (
             params.fromContent &&
             gContextMenu.linkURI.host === gContextMenu.contentData.principal.host
           ) {
             iconURL = gBrowser.getTabForBrowser(gContextMenu.browser).image;
             win.unloadedTabMenu.maybeSetIcon(tab, iconURL, isReady, tabParams.triggeringPrincipal);
-            return;
           }
         });
       let reader = new FileReader();
-      reader.onloadend = function () {
+      reader.onloadend = function() {
         iconURL = reader.result;
         win.unloadedTabMenu.maybeSetIcon(tab, iconURL, isReady, tabParams.triggeringPrincipal);
       };
@@ -438,9 +443,9 @@ class UnloadedTabMenuBase {
 if (
   location.href !== `chrome://browser/content/browser.xhtml` ||
   gBrowserInit.delayedStartupFinished
-)
+) {
   window.unloadedTabMenu = new UnloadedTabMenuBase();
-else {
+} else {
   let delayedListener = (subject, topic) => {
     if (topic == "browser-delayed-startup-finished" && subject == window) {
       Services.obs.removeObserver(delayedListener, topic);

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Vertical Tabs Pane
-// @version        1.6.7
+// @version        1.6.8
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Create a vertical pane across from the sidebar that functions
@@ -37,7 +37,7 @@
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
-(function () {
+(function() {
   let config = {
     // localization strings. change these if your UI is not in english.
     l10n: {
@@ -134,9 +134,10 @@
    * @returns the DOM node
    */
   function setAttributes(el, attrs) {
-    for (let [name, value] of Object.entries(attrs))
+    for (let [name, value] of Object.entries(attrs)) {
       if (value) el.setAttribute(name, value);
       else el.removeAttribute(name);
+    }
   }
   class VerticalTabsPaneBase {
     preferences = [
@@ -156,7 +157,7 @@
         E10SUtils: "resource://gre/modules/E10SUtils.jsm",
       });
       // get some localized strings for the tooltip
-      XPCOMUtils.defineLazyGetter(this, "_l10n", function () {
+      XPCOMUtils.defineLazyGetter(this, "_l10n", function() {
         return new Localization(["browser/browser.ftl"], true);
       });
       this._formatFluentStrings();
@@ -218,7 +219,9 @@
       // cycle through toolbars, just as in vanilla firefox.
       this._buttonsRow.appendChild(create(document, "toolbartabstop", { "aria-hidden": true }));
       this._newTabButton = this._buttonsRow.appendChild(
-        CustomizableUI.getWidget("new-tab-button").forWindow(window).node.cloneNode(true)
+        CustomizableUI.getWidget("new-tab-button")
+          .forWindow(window)
+          .node.cloneNode(true)
       );
       this._newTabButton.id = "vertical-tabs-new-tab-button";
       this._newTabButton.setAttribute("flex", "1");
@@ -271,11 +274,12 @@
       this._listenersRegistered = false;
       // set up preferences if they don't already exist
       this.preferences.forEach(pref => {
-        if (!prefSvc.prefHasUserValue(pref.name))
+        if (!prefSvc.prefHasUserValue(pref.name)) {
           prefSvc[`set${typeof pref.value === "number" ? "Int" : "Bool"}Pref`](
             pref.name,
             pref.value
           );
+        }
       });
       prefSvc.addObserver("userChrome.tabs.verticalTabsPane", this);
       prefSvc.addObserver("privacy.userContext", this);
@@ -326,9 +330,14 @@
         readPref(SidebarUI.POSITION_START_PREF);
         // try to adopt from previous window, otherwise restore from prefs.
         let sourceWindow = window.opener;
-        if (sourceWindow)
-          if (!sourceWindow.closed && sourceWindow.location.protocol == "chrome:")
-            if (this._adoptFromWindow(sourceWindow)) return;
+        if (
+          sourceWindow &&
+          !sourceWindow.closed &&
+          sourceWindow.location.protocol == "chrome:" &&
+          this._adoptFromWindow(sourceWindow)
+        ) {
+          return;
+        }
         readPref(widthPref);
         readPref(unpinnedPref);
         readPref(closedPref);
@@ -393,8 +402,9 @@
               node.tagName == "toolbarbutton" ||
               node.tagName == "checkbox"
             ) {
-              if (node.classList.contains("all-tabs-secondary-button"))
+              if (node.classList.contains("all-tabs-secondary-button")) {
                 return NodeFilter.FILTER_SKIP;
+              }
               if (!node.hasAttribute("tabindex")) node.setAttribute("tabindex", "-1");
               return NodeFilter.FILTER_ACCEPT;
             }
@@ -412,7 +422,7 @@
       contextDefs.push(this.pane);
       contextDefs.forEach(node => {
         let menu = document.getElementById(node.getAttribute("context"));
-        if (menus.indexOf(menu) === -1) menus.push(menu);
+        if (!menus.includes(menu)) menus.push(menu);
       });
       return menus;
     }
@@ -536,13 +546,14 @@
         );
         this.promptForIntPref(pref);
       };
-      if (!(int >= 0)) return onFail();
-      else
-        try {
-          prefSvc.setIntPref(pref, int);
-        } catch (e) {
-          return onFail();
-        }
+      if (!(int >= 0)) {
+        return onFail();
+      }
+      try {
+        prefSvc.setIntPref(pref, int);
+      } catch (e) {
+        return onFail();
+      }
     }
     /**
      * universal event handler — we generally pass the whole class to
@@ -763,9 +774,11 @@
     // fill the pane with tab rows
     _populate() {
       let fragment = document.createDocumentFragment();
-      for (let tab of gBrowser.tabs)
-        if (this._filterFn(tab))
+      for (let tab of gBrowser.tabs) {
+        if (this._filterFn(tab)) {
           fragment[this._reversed ? `prepend` : `appendChild`](this._createRow(tab));
+        }
+      }
       this._addElement(fragment);
       this._setupListeners();
       for (let row of this._rows) this._setImageAttributes(row, row.tab);
@@ -801,9 +814,10 @@
       paneEvents.forEach(ev => this.pane.addEventListener(ev, this));
       if (gToolbarKeyNavEnabled) this.pane.addEventListener("keydown", this);
       this.pane.addEventListener("blur", this, true);
-      gBrowser.addEventListener("TabMultiSelect", this, false);
-      for (let stop of this.pane.getElementsByTagName("toolbartabstop"))
+      gBrowser.addEventListener("TabMultiSelect", this);
+      for (let stop of this.pane.getElementsByTagName("toolbartabstop")) {
         stop.addEventListener("focus", this);
+      }
     }
     // invoked when closing the pane. clear all the aforementioned event listeners.
     _cleanupListeners() {
@@ -813,9 +827,10 @@
       paneEvents.forEach(ev => this.pane.removeEventListener(ev, this));
       this.pane.removeEventListener("keydown", this);
       this.pane.removeEventListener("blur", this, true);
-      gBrowser.removeEventListener("TabMultiSelect", this, false);
-      for (let stop of this.pane.getElementsByTagName("toolbartabstop"))
+      gBrowser.removeEventListener("TabMultiSelect", this);
+      for (let stop of this.pane.getElementsByTagName("toolbartabstop")) {
         stop.removeEventListener("focus", this);
+      }
       this._listenersRegistered = false;
     }
     /**
@@ -829,7 +844,9 @@
       if (item) {
         if (!this._filterFn(tab)) this._removeItem(item, tab);
         else this._setRowAttributes(item, tab);
-      } else if (this._filterFn(tab)) this._addTab(tab);
+      } else if (this._filterFn(tab)) {
+        this._addTab(tab);
+      }
     }
     /**
      * the key implies that we're moving a tab, but this doesn't tell us where
@@ -863,9 +880,10 @@
       if (this._reversed) {
         if (nextRow) nextRow.after(newRow);
         else this._arrowscrollbox.prepend(newRow);
+      } else if (nextRow) {
+        nextRow.parentNode.insertBefore(newRow, nextRow);
       } else {
-        if (nextRow) nextRow.parentNode.insertBefore(newRow, nextRow);
-        else this._addElement(newRow);
+        this._addElement(newRow);
       }
     }
     /**
@@ -1036,8 +1054,9 @@
       let oldFocus = document.activeElement;
       walker.currentNode = oldFocus;
       let newFocus = this.getNewFocus(walker, prev);
-      while (newFocus && newFocus.tagName == "toolbartabstop")
+      while (newFocus && newFocus.tagName == "toolbartabstop") {
         newFocus = this.getNewFocus(walker, prev);
+      }
       if (newFocus) this._focusButton(newFocus);
     }
     /**
@@ -1067,8 +1086,9 @@
       clearTimeout(this.hoverTimer);
       this.hoverOutQueued = false;
       this.hoverQueued = false;
-      if (this.pane.getAttribute("unpinned") && !this._noExpand)
+      if (this.pane.getAttribute("unpinned") && !this._noExpand) {
         this.pane.setAttribute("expanded", true);
+      }
       if (e.target.tagName === "toolbartabstop") this._onTabStopFocus(e);
     }
     // invoked on a blur event. if the pane is no longer focused or hovered, and
@@ -1193,8 +1213,9 @@
         }
         gBrowser.addRangeToMultiSelectedTabs(lastSelectedTab, tab);
       } else if (accelKey) {
-        if (tab.multiselected) gBrowser.removeFromMultiSelectedTabs(tab);
-        else if (tab != gBrowser.selectedTab) {
+        if (tab.multiselected) {
+          gBrowser.removeFromMultiSelectedTabs(tab);
+        } else if (tab != gBrowser.selectedTab) {
           gBrowser.addToMultiSelectedTabs(tab);
           gBrowser.lastMultiSelectedTab = tab;
         }
@@ -1246,8 +1267,9 @@
     _onMouseEnter(e) {
       clearTimeout(this.hoverOutTimer);
       this.hoverOutQueued = false;
-      if (!this.pane.getAttribute("unpinned") || this._noExpand)
+      if (!this.pane.getAttribute("unpinned") || this._noExpand) {
         return this.pane.removeAttribute("expanded");
+      }
       if (this.hoverQueued) return;
       this.hoverQueued = true;
       this.hoverTimer = setTimeout(() => {
@@ -1296,8 +1318,9 @@
         "--pane-transition-duration",
         (Math.sqrt(this.pane.width / 350) * 0.25).toFixed(2) + "s"
       );
-      if (this.pane.matches(":hover, :focus-within") && !this._noExpand)
+      if (this.pane.matches(":hover, :focus-within") && !this._noExpand) {
         this.pane.setAttribute("expanded", true);
+      }
       this.pane.setAttribute("unpinned", true);
     }
     // "click" events work kind of like "mouseup" events, but in this case we're
@@ -1308,8 +1331,9 @@
           e.target.classList.contains("all-tabs-secondary-button") &&
           !e.shiftKey &&
           !(AppConstants.platform == "macosx" ? e.metaKey : e.ctrlKey)
-        )
+        ) {
           return;
+        }
         e.preventDefault();
       }
     }
@@ -1328,8 +1352,9 @@
         else gBrowser.removeTab(tab, { animate: true });
         return;
       }
-      if (!gSharedTabWarning.willShowSharedTabWarning(tab))
+      if (!gSharedTabWarning.willShowSharedTabWarning(tab)) {
         if (tab !== gBrowser.selectedTab) this._selectTab(tab);
+      }
       delete tab.noCanvas;
     }
     // invoked on "dragstart" event. first figure out what we're dragging and
@@ -1359,15 +1384,17 @@
         let insertAtPos = draggedTabPos - 1;
         for (let i = tabIndex - 1; i > -1; i--) {
           insertAtPos = newIndex(selectedTabs[i], insertAtPos);
-          if (insertAtPos && !selectedTabs[i].nextElementSibling.multiselected)
+          if (insertAtPos && !selectedTabs[i].nextElementSibling.multiselected) {
             gBrowser.moveTabTo(selectedTabs[i], insertAtPos);
+          }
         }
         // tabs to the right
         insertAtPos = draggedTabPos + 1;
         for (let i = tabIndex + 1; i < selectedTabs.length; i++) {
           insertAtPos = newIndex(selectedTabs[i], insertAtPos);
-          if (insertAtPos && !selectedTabs[i].previousElementSibling.multiselected)
+          if (insertAtPos && !selectedTabs[i].previousElementSibling.multiselected) {
             gBrowser.moveTabTo(selectedTabs[i], insertAtPos);
+          }
         }
       }
       // tab preview
@@ -1503,10 +1530,11 @@
     // specify which row's attributes to change. we therefore have to update the
     // "multiselected" attribute for every row.
     _onTabMultiSelect() {
-      for (let item of this._rows)
-        !!item.tab.multiselected
+      for (let item of this._rows) {
+        item.tab.multiselected
           ? item.setAttribute("multiselected", true)
           : item.removeAttribute("multiselected");
+      }
     }
     // invoked when mousing over a row. we use this to set a flag
     // mOverSecondaryButton on the row, which our drag handlers reference. we
@@ -1580,11 +1608,13 @@
             : "tabs.muteAudio2.tooltip";
           label = stringWithShortcut(stringID, "key_toggleMute", affectedTabsLength);
         } else {
-          if (tab.hasAttribute("activemedia-blocked")) stringID = "tabs.unblockAudio2.tooltip";
-          else
+          if (tab.hasAttribute("activemedia-blocked")) {
+            stringID = "tabs.unblockAudio2.tooltip";
+          } else {
             stringID = linkedBrowser.audioMuted
               ? "tabs.unmuteAudio2.background.tooltip"
               : "tabs.muteAudio2.background.tooltip";
+          }
           label = PluralForm.get(
             affectedTabsLength,
             gTabBrowserBundle.GetStringFromName(stringID)
@@ -1594,7 +1624,7 @@
       } else {
         label = tab._fullLabel || tab.getAttribute("label");
         // show the tab's process ID in the tooltip?
-        if (prefSvc.getBoolPref("browser.tabs.tooltipsShowPidAndActiveness", false))
+        if (prefSvc.getBoolPref("browser.tabs.tooltipsShowPidAndActiveness", false)) {
           if (linkedBrowser) {
             let [contentPid, ...framePids] = this.E10SUtils.getBrowserPids(
               linkedBrowser,
@@ -1610,22 +1640,23 @@
             }
             if (linkedBrowser.docShellIsActive) label += " [A]";
           }
+        }
         // add the container name to the tooltip?
-        if (tab.userContextId)
+        if (tab.userContextId) {
           label = gTabBrowserBundle.formatStringFromName("tabs.containers.tooltip", [
             label,
             ContextualIdentityService.getUserContextLabel(tab.userContextId),
           ]);
+        }
         // if hovering the sound overlay, show the current media state of the
         // tab, after the tab title. "playing" or "muted" or "media blocked"
-        if (row.soundOverlay.matches(":hover") && this._fluentStrings)
-          label += ` (${this._fluentStrings[
-            tab.hasAttribute("activemedia-blocked")
-              ? "blockedString"
-              : linkedBrowser.audioMuted
-              ? "mutedString"
-              : "playingString"
-          ].toLowerCase()})`;
+        if (row.soundOverlay.matches(":hover") && this._fluentStrings) {
+          let stateString;
+          if (tab.hasAttribute("activemedia-blocked")) stateString = "blockedString";
+          else if (linkedBrowser.audioMuted) stateString = "mutedString";
+          else stateString = "playingString";
+          label += ` (${this._fluentStrings[stateString].toLowerCase()})`;
+        }
       }
       // align to the row
       if (align) {
@@ -1637,11 +1668,10 @@
       if (tab.getAttribute("customizemode") === "true") {
         e.target.querySelector(".places-tooltip-box").setAttribute("desc-hidden", "true");
         return;
-      } else {
-        let url = e.target.querySelector(".places-tooltip-uri");
-        url.value = linkedBrowser?.currentURI?.spec.replace(/^https:\/\//, "");
-        e.target.querySelector(".places-tooltip-box").removeAttribute("desc-hidden");
       }
+      let url = e.target.querySelector(".places-tooltip-uri");
+      url.value = linkedBrowser?.currentURI?.spec.replace(/^https:\/\//, "");
+      e.target.querySelector(".places-tooltip-box").removeAttribute("desc-hidden");
       // show a lock icon to show tab security/encryption
       let icon = e.target.querySelector("#places-tooltip-insecure-icon");
       let pending = tab.hasAttribute("pending") || !linkedBrowser.browsingContext;
@@ -2308,7 +2338,7 @@
     // is how we capture all changes to the sound icon in real-time. obviously
     // this behavior isn't built-in.
     let handleRequestSrc = PictureInPicture.handlePictureInPictureRequest.toSource();
-    if (!handleRequestSrc.includes("_tabAttrModified"))
+    if (!handleRequestSrc.includes("_tabAttrModified")) {
       eval(
         `PictureInPicture.handlePictureInPictureRequest = async function ` +
           handleRequestSrc
@@ -2320,8 +2350,9 @@
               `$1 parentWin.gBrowser._tabAttrModified(tab, ["pictureinpicture"]);`
             )
       );
+    }
     let clearIconSrc = PictureInPicture.clearPipTabIcon.toSource();
-    if (!clearIconSrc.includes("_tabAttrModified"))
+    if (!clearIconSrc.includes("_tabAttrModified")) {
       eval(
         `PictureInPicture.clearPipTabIcon = function ` +
           clearIconSrc
@@ -2331,6 +2362,7 @@
               `$1 gBrowser._tabAttrModified(tab, ["pictureinpicture"]);`
             )
       );
+    }
   }
 
   // create the main button that goes in the tabs toolbar and opens the pane.
@@ -2377,7 +2409,7 @@
   }
 
   // make the hotkey (Ctrl+Alt+V by default)
-  if (config.hotkey.enabled && _ucUtils?.registerHotkey)
+  if (config.hotkey.enabled && _ucUtils?.registerHotkey) {
     _ucUtils.registerHotkey(
       {
         id: "key_toggleVerticalTabs",
@@ -2386,6 +2418,7 @@
       },
       (win, key) => Services.obs.notifyObservers(win, "vertical-tabs-pane-toggle")
     );
+  }
 
   // make the main elements
   document.getElementById("sidebar-splitter").after(
@@ -2408,7 +2441,7 @@
 
   // tab pane's horizontal alignment should mirror that of the sidebar, which
   // can be moved from left to right.
-  SidebarUI.setPosition = function () {
+  SidebarUI.setPosition = function() {
     let appcontent = document.getElementById("appcontent");
     let verticalSplitter = document.getElementById("vertical-tabs-splitter");
     let verticalPane = document.getElementById("vertical-tabs-pane");
@@ -2434,8 +2467,9 @@
   };
 
   // wait for delayed startup for some parts of the script to execute.
-  if (gBrowserInit.delayedStartupFinished) init();
-  else {
+  if (gBrowserInit.delayedStartupFinished) {
+    init();
+  } else {
     let delayedListener = (subject, topic) => {
       if (topic == "browser-delayed-startup-finished" && subject == window) {
         Services.obs.removeObserver(delayedListener, topic);

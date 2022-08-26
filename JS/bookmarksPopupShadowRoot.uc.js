@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Bookmarks Popup Mods
-// @version        1.2
+// @version        1.2.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Implement smooth scrolling for all bookmarks popups that are
@@ -18,20 +18,21 @@
 // @include        main
 // ==/UserScript==
 
-(function () {
+(function() {
   const bookmarksPopupShadowRoot = {
     handleEvent(e) {
       if (!e.target.getAttribute("placespopup") || !e.target.scrollBox) return;
-      if (!e.target.getAttribute("uc-init"))
+      if (!e.target.getAttribute("uc-init")) {
         setTimeout(() => {
           this.checkPopups(e.target);
         }, 0);
+      }
       let scrollbox = e.target.scrollBox.scrollbox;
       let height = window.screen.availHeight;
-      let cls = e.target.scrollBox.parentElement?.classList;
-      if (scrollbox.scrollTopMax < height && scrollbox.clientHeight < height)
-        cls.add("BMBsmallContentBox");
-      else cls.remove("BMBsmallContentBox");
+      e.target.scrollBox.parentElement?.classList.toggle(
+        "BMBsmallContentBox",
+        scrollbox.scrollTopMax < height && scrollbox.clientHeight < height
+      );
     },
 
     checkPopups(popup) {
@@ -46,14 +47,16 @@
       popup.scrollBox._scrollButtonUp.classList.add("BMB-special-scrollbutton-up");
       popup.scrollBox._scrollButtonDown.classList.add("BMB-special-scrollbutton-down");
       popup.scrollBox._onButtonMouseOver = function _onButtonMouseOver(index) {
-        if (this._ensureElementIsVisibleAnimationFrame || this._arrowScrollAnim.requestHandle)
+        if (this._ensureElementIsVisibleAnimationFrame || this._arrowScrollAnim.requestHandle) {
           return;
+        }
         if (this._clickToScroll) this._continueScroll(index);
         else this._startScroll(index);
       };
       popup.scrollBox._onButtonMouseOut = function _onButtonMouseOut() {
-        if (this._ensureElementIsVisibleAnimationFrame || this._arrowScrollAnim.requestHandle)
+        if (this._ensureElementIsVisibleAnimationFrame || this._arrowScrollAnim.requestHandle) {
           return;
+        }
         if (this._clickToScroll) this._pauseScroll();
         else this._stopScroll();
       };

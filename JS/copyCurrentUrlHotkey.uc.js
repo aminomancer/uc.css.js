@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Copy Current URL Hotkey
-// @version        1.2.0
+// @version        1.2.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Adds a new hotkey (Ctrl+Alt+C by default) that copies
@@ -79,13 +79,16 @@ class CopyCurrentURL {
       }
       if (gURLBar.selectionStart != 0 || gURLBar.selectionEnd != gURLBar.inputField.textLength) {
         menuitem.setAttribute("key", this.config.shortcut.id);
-      } else menuitem.removeAttribute("key");
+      } else {
+        menuitem.removeAttribute("key");
+      }
       this.hintApplied = true;
     }
   }
   shortcutHint() {
-    if (gBrowserInit.delayedStartupFinished) gURLBar.addEventListener("contextmenu", this);
-    else {
+    if (gBrowserInit.delayedStartupFinished) {
+      gURLBar.addEventListener("contextmenu", this);
+    } else {
       let delayedListener = (subject, topic) => {
         if (topic == "browser-delayed-startup-finished" && subject == window) {
           Services.obs.removeObserver(delayedListener, topic);

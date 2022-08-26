@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           about:cfg
-// @version        1.2.2
+// @version        1.2.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Registers the old-school about:config page to the URL about:cfg. Intended for use with earthlng's aboutconfig module. That module restores the old about:config page, but gives it a long-winded URL like "chrome://userchromejs/content/aboutconfig/config.xhtml" which takes a lot longer to type in and doesn't look very elegant. This script finds the URL for that module and registers it to an about: URL so it counts as a chrome UI page. We're not just faking it, this makes it a bona-fide about: page. That means you can navigate to it by just typing about:cfg in the urlbar, and also means the identity icon will show it as a secure system page rather than a local file. It even means about:cfg will show up on the about:about page! This technically also makes using the aboutconfig module safer, because it denies the document access to some privileged stuff that it would have with a chrome:// URI. For instructions on installing earthlng's aboutconfig module for fx-autoconfig, please see the script description for App Menu about:config Button. This has only been tested with fx-autoconfig, but it may work with xiaoxiaoflood's loader. I don't think it will work with Alice0775's loader but I haven't tested it. Compatible with my appMenuAboutConfigButton.uc.js script. That button will automatically navigate to about:cfg if this script is installed. I recommend editing earthlng's config.xhtml file to remove line 13: title="about:config" This sets the tab title to about:config, which isn't necessary or desirable since we're changing the URL to about:cfg. Without the title attribute, firefox will automatically set the title to the tab's URL, which (with this script) is about:cfg.
@@ -28,7 +28,7 @@ const config = {
 };
 
 let { Services } = ChromeUtils.import("resource://gre/modules/Services.jsm");
-let { classes: Cc, interfaces: Ci, manager: Cm, utils: Cu, results: Cr } = Components;
+let { manager: Cm } = Components;
 let registrar = Cm.QueryInterface(Ci.nsIComponentRegistrar);
 
 function findAboutConfig() {
@@ -58,17 +58,13 @@ function findAboutConfig() {
 // unlikely possibility that a future update adds a component with the same
 // class ID, which would break the script.
 function generateFreeCID() {
-  let uuid = Components.ID(
-    Cc["@mozilla.org/uuid-generator;1"].getService(Ci.nsIUUIDGenerator).generateUUID().toString()
-  );
+  let uuid = Components.ID(Services.uuid.generateUUID().toString());
   // I can't tell whether generateUUID is guaranteed to produce a unique ID, or
   // just a random ID. so I add this loop to regenerate it in the extremely
   // unlikely (or potentially impossible) event that the UUID is already
   // registered as a CID.
   while (registrar.isCIDRegistered(uuid)) {
-    uuid = Components.ID(
-      Cc["@mozilla.org/uuid-generator;1"].getService(Ci.nsIUUIDGenerator).generateUUID().toString()
-    );
+    uuid = Components.ID(Services.uuid.generateUUID().toString());
   }
   return uuid;
 }
@@ -82,15 +78,15 @@ VintageAboutConfig.prototype = {
     if (!urlString) return null;
     return this._uri || (this._uri = Services.io.newURI(urlString));
   },
-  newChannel: function (_uri, loadInfo) {
+  newChannel(_uri, loadInfo) {
     const ch = Services.io.newChannelFromURIWithLoadInfo(this.uri, loadInfo);
     ch.owner = Services.scriptSecurityManager.getSystemPrincipal();
     return ch;
   },
-  getURIFlags: function (_uri) {
+  getURIFlags(_uri) {
     return Ci.nsIAboutModule.ALLOW_SCRIPT | Ci.nsIAboutModule.IS_SECURE_CHROME_UI;
   },
-  getChromeURI: function (_uri) {
+  getChromeURI(_uri) {
     return this.uri;
   },
   QueryInterface: ChromeUtils.generateQI(["nsIAboutModule"]),
@@ -98,20 +94,19 @@ VintageAboutConfig.prototype = {
 
 var AboutModuleFactory = {
   createInstance(aOuter, aIID) {
-    if (aOuter) {
-      throw Components.Exception("", Cr.NS_ERROR_NO_AGGREGATION);
-    }
+    if (aOuter) throw Components.Exception("", Cr.NS_ERROR_NO_AGGREGATION);
     return new VintageAboutConfig().QueryInterface(aIID);
   },
   QueryInterface: ChromeUtils.generateQI(["nsIFactory"]),
 };
 
-if (urlString)
+if (urlString) {
   registrar.registerFactory(
     generateFreeCID(),
     `about:${config.address}`,
     `@mozilla.org/network/protocol/about;1?what=${config.address}`,
     AboutModuleFactory
   );
+}
 
 let EXPORTED_SYMBOLS = [];

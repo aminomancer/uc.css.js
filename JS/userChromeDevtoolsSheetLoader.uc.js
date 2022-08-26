@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Browser Toolbox Stylesheet Loader
-// @version        2.1
+// @version        2.1.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Load userChrome and userContent stylesheets into Browser Toolbox windows
@@ -9,13 +9,13 @@
 // ==/UserScript==
 
 let EXPORTED_SYMBOLS = [];
-(function () {
+(function() {
   const { Services } = ChromeUtils.import("resource://gre/modules/Services.jsm");
   class ToolboxProcessSheetLoader {
+    regex = /^chrome:(\/\/devtools\/.*.html.*)/i;
+    lastSubject = null;
     constructor() {
-      Services.obs.addObserver(this, "domwindowopened", false);
-      this.regex = /^chrome:(\/\/devtools\/.*.html.*)/i;
-      this.lastSubject = null;
+      Services.obs.addObserver(this, "domwindowopened");
     }
     traverseToMainProfile(win, str) {
       let dir = Services.dirsvc.get(str, win.Ci.nsIFile);
@@ -34,6 +34,12 @@ let EXPORTED_SYMBOLS = [];
         .getProtocolHandler("file")
         .QueryInterface(win.Ci.nsIFileProtocolHandler)
         .getURLSpecFromDir(this.traverseToMainProfile(win, "UChrm"));
+    }
+    isDevtools(win) {
+      return (
+        Services.dirsvc.get("UChrm", Ci.nsIFile).target.includes("chrome_debugger_profile") &&
+        this.regex.test(win.location.href)
+      );
     }
     loadSheet(win, path, name, type) {
       let sss = win.Cc["@mozilla.org/content/style-sheet-service;1"].getService(
@@ -70,11 +76,7 @@ let EXPORTED_SYMBOLS = [];
       let document = e.originalTarget;
       let win = document.defaultView;
       this.lastSubject.removeEventListener("DomContentLoaded", this, true);
-      if (
-        !Services.dirsvc.get("UChrm", Ci.nsIFile).target.includes("chrome_debugger_profile") ||
-        !this.regex.test(win.location.href)
-      )
-        return;
+      if (!this.isDevtools(win)) return;
       const path = this.getChromePath(win);
       this.loadSheet(win, path, "userChrome.css", "AUTHOR_SHEET");
       this.loadSheet(win, path, "userContent.css", "USER_SHEET");
@@ -82,11 +84,7 @@ let EXPORTED_SYMBOLS = [];
     }
     _onWindowUninit(e) {
       let win = e.target;
-      if (
-        !Services.dirsvc.get("UChrm", Ci.nsIFile).target.includes("chrome_debugger_profile") ||
-        !this.regex.test(win.location.href)
-      )
-        return;
+      if (!this.isDevtools(win)) return;
       const path = this.getChromePath(win);
       this.unloadSheet(win, path, "userChrome.css", "AUTHOR_SHEET");
       this.unloadSheet(win, path, "userContent.css", "USER_SHEET");

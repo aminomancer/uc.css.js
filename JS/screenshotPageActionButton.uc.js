@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Screenshot Page Action Button
-// @version        1.3.1
+// @version        1.3.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Creates a screenshot button in the page actions area (the right side
@@ -8,7 +8,7 @@
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
-(function () {
+(function() {
   const config = {
     // if set to true, the screenshot action will not appear in private windows.
     // this seems like a logical choice, but that's not how the built-in screenshot
@@ -37,17 +37,19 @@
       // default if you have my theme installed. without the theme, it just uses
       // the default built-in icon.
       this.css = `#pageAction-urlbar-screenshot,#pageAction-panel-screenshot{list-style-image:var(--screenshot-icon,url("chrome://browser/skin/screenshot.svg"));}`;
-      this.muObserver = new MutationObserver(async function (mus) {
+      this.muObserver = new MutationObserver(async function() {
         let { screenshot } = BrowserPageActions;
         if (screenshot.stringIsDone) return;
         const titleString = await screenshot.getString();
-        const shortcut = !!key_screenshot
-          ? ` (${ShortcutUtils.prettifyShortcut(key_screenshot)})`
-          : "";
+        let keyScreenshot = document.getElementById("key_screenshot");
+        const shortcut = keyScreenshot ? ` (${ShortcutUtils.prettifyShortcut(keyScreenshot)})` : "";
         if (!screenshot.action) return;
         screenshot.action.setTooltip(titleString + shortcut, window);
         screenshot.stringIsDone = !!shortcut;
-        if (shortcut) this.disconnect(), delete screenshot.muObserver;
+        if (shortcut) {
+          this.disconnect();
+          delete screenshot.muObserver;
+        }
       });
       // the action itself only needs to be registered once per app launch, not
       // once per window. firefox internally handles replicating it across all
@@ -78,9 +80,8 @@
     }
     async addAction() {
       let title = await this.getString();
-      const shortcut = !!key_screenshot
-        ? ` (${ShortcutUtils.prettifyShortcut(key_screenshot)})`
-        : "";
+      let keyScreenshot = document.getElementById("key_screenshot");
+      const shortcut = keyScreenshot ? ` (${ShortcutUtils.prettifyShortcut(keyScreenshot)})` : "";
       let tooltip = title + shortcut;
       PageActions.addAction(
         new PageActions.Action({
@@ -125,9 +126,11 @@
     onCommand(_e, buttonNode) {
       if (buttonNode === this.node) {
         let { obs } = buttonNode.ownerGlobal.Services;
-        if (this.SCREENSHOT_BROWSER_COMPONENT)
+        if (this.SCREENSHOT_BROWSER_COMPONENT) {
           obs.notifyObservers(buttonNode.ownerGlobal, "menuitem-screenshot");
-        else obs.notifyObservers(null, "menuitem-screenshot-extension", "toolbar");
+        } else {
+          obs.notifyObservers(null, "menuitem-screenshot-extension", "toolbar");
+        }
       }
     }
     /**
@@ -138,9 +141,8 @@
       if (win !== window || this.isSetup) return;
       win.Services.obs.addObserver(this, "toggle-screenshot-disable");
       const titleString = await this.getString();
-      const shortcut = !!key_screenshot
-        ? ` (${ShortcutUtils.prettifyShortcut(key_screenshot)})`
-        : "";
+      let keyScreenshot = document.getElementById("key_screenshot");
+      const shortcut = keyScreenshot ? ` (${ShortcutUtils.prettifyShortcut(keyScreenshot)})` : "";
       this.action.setTooltip(titleString + shortcut, win);
       this.isSetup = true;
       this.stringIsDone = !!shortcut;

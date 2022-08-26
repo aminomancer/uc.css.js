@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Findbar Mods
-// @version        1.3.1
+// @version        1.3.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    1) Make a custom context menu for the findbar that lets you
@@ -24,25 +24,27 @@
 // switches to regular find mode. 3) (Optional) Miniaturize the findbar matches
 // label and the "Match case" and "Whole words" buttons. Instead of "1 of 500
 // matches" this one says "1/500" and floats inside the input box. This is
-// enabled by default by the "usingDuskfox" setting below. It's mainly intended
-// for people who use CSS themes that make the findbar much more compact, like
-// my theme duskFox. If you don't use one of these themes already, you can grab
-// the relevant code from uc-findbar.css on my repo, or if you like having a big
-// findbar, you can just set "usingDuskfox" to false below. For those interested
-// in customizing this with CSS, the mini matches indicator can be styled with
-// the selector .matches-indicator. It's the next sibling of the findbar input
-// box. See uc-findbar.css in this repo for how I styled it. Specific methods
-// used are documented in more detail in the code comments below.
+// enabled automatically if my theme duskFox is detected in your chrome folder
+// (it looks for chrome/resources/material/), but you can turn it on manually by
+// setting `forceMiniFindbar` below to true. It's mainly intended for people who use
+// CSS themes that make the findbar much more compact, like my theme. If you
+// don't use one of these themes already, you can grab the relevant code from
+// uc-findbar.css on my repo. For those interested in customizing this with CSS,
+// the mini matches indicator can be styled with the selector .matches-indicator
+// It's the next sibling of the findbar input box. See uc-findbar.css in this
+// repo for how I styled it. Specific methods used are documented in more detail
+// in the code comments below.
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
 class FindbarMods {
-  // set this to false if you're not using my theme or something similar to make
-  // the findbar much smaller. the miniaturized findbar isn't necessary with the
-  // default firefox layout, and requires a lot of CSS to implement. so setting
-  // this to false will disable the miniaturization features of the script, and
+  // set this to true if you're using a theme other than mine to make the
+  // findbar much smaller. if you're using my theme, it will detect that
+  // automatically. the miniaturized findbar isn't necessary with the default
+  // firefox layout, and requires a lot of CSS to implement. so leaving this set
+  // to false will disable the miniaturization features of the script, and
   // solely implement the context menu and hotkey features.
-  static usingDuskfox = true;
+  forceMiniFindbar = false;
 
   // firefox has no localization strings for these phrases, since they can only
   // be configured in about:config. change the label and accesskey values for
@@ -98,6 +100,14 @@ class FindbarMods {
     return el;
   }
   constructor() {
+    XPCOMUtils.defineLazyGetter(this, "isMini", () => {
+      if (this.forceMiniFindbar) return true;
+      let file = Cc["@mozilla.org/chrome/chrome-registry;1"]
+        .getService(Ci.nsIChromeRegistry)
+        .convertChromeURL(Services.io.newURI("chrome://userchrome/content/material/"))
+        ?.QueryInterface(Ci.nsIFileURL)?.file;
+      return file?.exists() && file?.isDirectory();
+    });
     this.buildContextMenu();
     // callback to execute for every new findbar created
     // (each loaded tab has its own findbar)
@@ -289,7 +299,7 @@ class FindbarMods {
     );
     // override the native method that sets some findbar UI properties,
     // e.g. switching between normal and find-as-you-type mode.
-    findbarClass._updateFindUI = function () {
+    findbarClass._updateFindUI = function() {
       let showMinimalUI = this.findMode != this.FIND_NORMAL;
       let nodes = this.getElement("findbar-container").children;
       let wrapper = this.getElement("findbar-textbox-wrapper");
@@ -308,13 +318,19 @@ class FindbarMods {
       this._updateDiacriticMatching();
       this._setEntireWord();
       this._setHighlightAll();
-      if (this.findMode == this.FIND_TYPEAHEAD) this._findField.placeholder = this._fastFindStr;
-      else if (this.findMode == this.FIND_LINKS)
-        this._findField.placeholder = this._fastFindLinksStr;
-      else this._findField.placeholder = this._normalFindStr;
+      switch (this.findMode) {
+        case this.FIND_TYPEAHEAD:
+          this._findField.placeholder = this._fastFindStr;
+          break;
+        case this.FIND_LINKS:
+          this._findField.placeholder = this._fastFindLinksStr;
+          break;
+        default:
+          this._findField.placeholder = this._normalFindStr;
+      }
     };
     // override the native on-results function so it updates both labels.
-    findbarClass.onMatchesCountResult = function (result) {
+    findbarClass.onMatchesCountResult = function(result) {
       if (result.total !== 0) {
         if (result.total == -1) {
           this._foundMatches.value = PluralForm.get(
@@ -388,35 +404,33 @@ class FindbarMods {
     // ensure that our new context menu is opened on right-click.
     findbar.setAttribute("context", "findbar-context-menu");
     // begin moving elements and making the mini matches label.
-    if (FindbarMods.usingDuskfox) this.miniaturize(findbar);
+    if (this.isMini) this.miniaturize(findbar);
   }
   miniaturize(findbar) {
     function onKey(e) {
       if (this.hasMenu() && this.open) return;
       // handle arrow key focus navigation
-      else {
-        if (
-          e.keyCode == KeyEvent.DOM_VK_UP ||
-          (e.keyCode == KeyEvent.DOM_VK_LEFT &&
-            document.defaultView.getComputedStyle(this.parentNode).direction == "ltr") ||
-          (e.keyCode == KeyEvent.DOM_VK_RIGHT &&
-            document.defaultView.getComputedStyle(this.parentNode).direction == "rtl")
-        ) {
-          e.preventDefault();
-          window.document.commandDispatcher.rewindFocus();
-          return;
-        }
-        if (
-          e.keyCode == KeyEvent.DOM_VK_DOWN ||
-          (e.keyCode == KeyEvent.DOM_VK_RIGHT &&
-            document.defaultView.getComputedStyle(this.parentNode).direction == "ltr") ||
-          (e.keyCode == KeyEvent.DOM_VK_LEFT &&
-            document.defaultView.getComputedStyle(this.parentNode).direction == "rtl")
-        ) {
-          e.preventDefault();
-          window.document.commandDispatcher.advanceFocus();
-          return;
-        }
+      if (
+        e.keyCode == KeyEvent.DOM_VK_UP ||
+        (e.keyCode == KeyEvent.DOM_VK_LEFT &&
+          document.defaultView.getComputedStyle(this.parentNode).direction == "ltr") ||
+        (e.keyCode == KeyEvent.DOM_VK_RIGHT &&
+          document.defaultView.getComputedStyle(this.parentNode).direction == "rtl")
+      ) {
+        e.preventDefault();
+        window.document.commandDispatcher.rewindFocus();
+        return;
+      }
+      if (
+        e.keyCode == KeyEvent.DOM_VK_DOWN ||
+        (e.keyCode == KeyEvent.DOM_VK_RIGHT &&
+          document.defaultView.getComputedStyle(this.parentNode).direction == "ltr") ||
+        (e.keyCode == KeyEvent.DOM_VK_LEFT &&
+          document.defaultView.getComputedStyle(this.parentNode).direction == "rtl")
+      ) {
+        e.preventDefault();
+        window.document.commandDispatcher.advanceFocus();
+        return;
       }
       // handle access keys
       if (!e.charCode || e.charCode <= 32 || e.altKey || e.ctrlKey || e.metaKey) return;
@@ -426,12 +440,13 @@ class FindbarMods {
         return;
       }
       // check against accesskeys of siblings and activate them if matched
-      for (const el of Object.values(this.parentElement.children))
+      for (const el of Object.values(this.parentElement.children)) {
         if (el.accessKey.toLowerCase() === charLower) {
           el.focus();
           el.click();
           return;
         }
+      }
     }
     // the new mini indicator that will read something like 1/27 instead of 1 of 27 matches.
     findbar._tinyIndicator = this.create(document, "label", {
@@ -452,9 +467,9 @@ class FindbarMods {
     // really silly, why have such a giant findbar if the text field can't
     // stretch to fill that space? there's also some CSS in my stylesheets that
     // gives the findbar a smooth transition and starting animation and
-    // compresses the buttons and stuff. the effects of this might look really
-    // weird without those rules so I'd definitely either 1) look at uc-findbar.css,
-    // or 2) set usingDuskfox to false at the top of this script.
+    // compresses the buttons and stuff. the effects of this will look really
+    // weird without those rules, so only set `forceMiniFindbar` to true if you have
+    // rules similar to those in uc-findbar.css.
     findbar._findField.style.width = "20em";
     // we want the close button to be on the far right end of the findbar.
     findbar._findField.parentNode.after(findbar.querySelector(".findbar-closebutton"));
@@ -483,7 +498,7 @@ class FindbarMods {
     if (e.target.ownerGlobal !== window) return;
     if (!this.initialized) {
       this.initialized = true;
-      if (FindbarMods.usingDuskfox) this.modClassMethods();
+      if (this.isMini) this.modClassMethods();
     }
     let findbar = e.target._findBar;
 
@@ -498,19 +513,18 @@ class FindbarMods {
           if (this.findMode > 0) {
             // switch to normal find mode.
             this.open(0);
+          }
+          // if the findbar text field isn't focused and fully selected, then
+          // focus and select it. if it's already focused and selected, then
+          // close the findbar.
+          else if (
+            field.contains(document.activeElement) &&
+            field.selectionEnd - field.selectionStart === field.textLength
+          ) {
+            this.close();
           } else {
-            // if the findbar text field isn't focused and fully selected, then
-            // focus and select it. if it's already focused and selected, then
-            // close the findbar.
-            if (
-              field.contains(document.activeElement) &&
-              field.selectionEnd - field.selectionStart === field.textLength
-            ) {
-              this.close();
-            } else {
-              field.select();
-              field.focus();
-            }
+            field.select();
+            field.focus();
           }
         } catch (e) {
           // I haven't seen an error here but if any of these references don't
@@ -529,14 +543,16 @@ class FindbarMods {
     findbar.addEventListener("keypress", exitFindBar, true);
   }
   onFindbarOpen(e) {
-    if (e.target.findMode == e.target.FIND_NORMAL)
+    if (e.target.findMode == e.target.FIND_NORMAL) {
       setTimeout(() => e.target.ucFindbarMods.setLabelPosition(e.target), 1);
+    }
   }
 }
 
 // check that startup has finished and gBrowser is initialized before we add an event listener
-if (gBrowserInit.delayedStartupFinished) new FindbarMods();
-else {
+if (gBrowserInit.delayedStartupFinished) {
+  new FindbarMods();
+} else {
   let delayedListener = (subject, topic) => {
     if (topic == "browser-delayed-startup-finished" && subject == window) {
       Services.obs.removeObserver(delayedListener, topic);

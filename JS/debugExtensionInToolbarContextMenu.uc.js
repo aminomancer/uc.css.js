@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Debug Extension in Toolbar Context Menu
-// @version        1.4.1
+// @version        1.4.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Adds a new context menu when right-clicking an add-on's
@@ -130,9 +130,10 @@ class DebugExtension {
    * @param {object} attrs (an object containing properties — keys are turned into attributes on the DOM node)
    */
   maybeSetAttributes(element, attrs) {
-    for (let [name, value] of Object.entries(attrs))
+    for (let [name, value] of Object.entries(attrs)) {
       if (value === void 0) element.removeAttribute(name);
       else element.setAttribute(name, value);
+    }
   }
   // enable/disable menu items depending on whether the clicked extension has pages available to open.
   handleEvent(e) {
@@ -218,9 +219,9 @@ class DebugExtension {
   }
   // get the ID for the button the context menu was opened on
   getExtensionId(popup) {
-    if (popup.closest("#pageActionContextMenu"))
-      return BrowserPageActions.actionForNode(popup.triggerNode).extensionID;
-    else return ToolbarContextMenu._getExtensionId(popup);
+    return popup.closest("#pageActionContextMenu")
+      ? BrowserPageActions.actionForNode(popup.triggerNode).extensionID
+      : ToolbarContextMenu._getExtensionId(popup);
   }
   // get the URL for a given type of extension page, e.g. the popup that appears
   // when you click the addon's toolbar button, or the addon's sidebar panel.
@@ -285,8 +286,9 @@ class DebugExtension {
         Cc["@mozilla.org/widget/clipboardhelper;1"]
           .getService(Ci.nsIClipboardHelper)
           .copyString(type === "CopyID" ? id : extension.baseURL);
-        if (windowUtils.getBoundsWithoutFlushing(popup.triggerNode).width)
+        if (windowUtils.getBoundsWithoutFlushing(popup.triggerNode).width) {
           window.CustomHint?.show(popup.triggerNode, "Copied");
+        }
         return;
     }
     if (!url) return;
@@ -353,8 +355,9 @@ class DebugExtension {
   }
 }
 
-if (gBrowserInit.delayedStartupFinished) window.debugExtensionMenu = new DebugExtension();
-else {
+if (gBrowserInit.delayedStartupFinished) {
+  window.debugExtensionMenu = new DebugExtension();
+} else {
   let delayedListener = (subject, topic) => {
     if (topic == "browser-delayed-startup-finished" && subject == window) {
       Services.obs.removeObserver(delayedListener, topic);

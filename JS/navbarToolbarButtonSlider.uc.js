@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Navbar Toolbar Button Slider
-// @version        2.8.3
+// @version        2.8.4
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Wrap all toolbar buttons in a scrollable container. It can
@@ -202,7 +202,7 @@ class NavbarToolbarSlider {
   attachListeners() {
     addEventListener("unload", this, false);
     Services.prefs.addObserver("userChrome.toolbarSlider", this);
-    this.contextMenu.addEventListener("popupshowing", this, false);
+    this.contextMenu.addEventListener("popupshowing", this);
   }
   setupPrefs() {
     const { prefs } = Services;
@@ -244,14 +244,17 @@ class NavbarToolbarSlider {
     // and placwidgets where they belong. if we leave an item in the array that
     // has no DOM node, then insertBefore will put the widget before undefined,
     // which means put it athe very end, which isn't always what we want.
-    return CustomizableUI.getWidgetsInArea("nav-bar").filter(Boolean).filter(this.filterFn, this);
+    return CustomizableUI.getWidgetsInArea("nav-bar")
+      .filter(Boolean)
+      .filter(this.filterFn, this);
   }
   // primary filter function for including/excluding widgets in the slider
   filterFn(item, index, array) {
     // check if window is private and widget is disallowed in private browsing.
     // if so, filter it out.
-    if (item.showInPrivateBrowsing === false && PrivateBrowsingUtils.isWindowPrivate(window))
+    if (item.showInPrivateBrowsing === false && PrivateBrowsingUtils.isWindowPrivate(window)) {
       return false;
+    }
     // exclude urlbar, searchbar, system buttons, and the slider itself.
     switch (item.id) {
       case "wrapper-back-button":
@@ -274,15 +277,17 @@ class NavbarToolbarSlider {
     if (
       item.id.includes("customizableui-special-spring") &&
       Services.prefs.getBoolPref(NavbarToolbarSlider.prefNames.springs, true)
-    )
+    ) {
       return false;
+    }
     // exclude buttons defined by user preference
     if (
       JSON.parse(
         Services.prefs.getStringPref(NavbarToolbarSlider.prefNames.exclude, "[]")
       ).includes(item.id)
-    )
+    ) {
       return false;
+    }
     return this.getRelToUrlbar(index, array);
   }
   getRelToUrlbar(index, array) {
@@ -308,17 +313,20 @@ class NavbarToolbarSlider {
     if (this.kids.length) {
       let arr = array || [...this.kids];
       let widgetList = this.cuiArray;
-      if (arr.length < widgetList.length && arr.length < length)
+      if (arr.length < widgetList.length && arr.length < length) {
         // return setTimeout(() => this.setMaxWidth(), 1);
         return requestAnimationFrame(() => this.setMaxWidth());
-      if (arr) arr.slice(0, length).forEach(el => (maxWidth += NavbarToolbarSlider.parseWidth(el)));
-      else {
+      }
+      if (arr) {
+        arr.slice(0, length).forEach(el => (maxWidth += NavbarToolbarSlider.parseWidth(el)));
+      } else {
         widgetList
           .slice(0, length)
           .forEach(w => (maxWidth += NavbarToolbarSlider.parseWidth(w.forWindow(window).node)));
       }
-    } else
+    } else {
       maxWidth = length * NavbarToolbarSlider.parseWidth(document.getElementById("forward-button"));
+    }
     this.outer.style.maxWidth = `${maxWidth}px`;
   }
   async unCollapse() {
@@ -346,7 +354,9 @@ class NavbarToolbarSlider {
         if (button.getAttribute("overflows") !== "false") this.cOverflow.appendChild(button);
       });
       this.cOverflow.insertBefore(this.outer, this.cOverflow.firstElementChild);
-    } else this.wrapAll(array, this.inner);
+    } else {
+      this.wrapAll(array, this.inner);
+    }
     this.outer.hidden = overflown;
     this.setMaxWidth();
   }
@@ -356,7 +366,9 @@ class NavbarToolbarSlider {
       [...this.kids].forEach(button => {
         if (button.getAttribute("overflows") === "false") {
           this.cTarget.insertBefore(button, this.outer);
-        } else this.cOverflow.appendChild(button);
+        } else {
+          this.cOverflow.appendChild(button);
+        }
       });
       this.outer.hidden = true;
     }
@@ -392,8 +404,9 @@ class NavbarToolbarSlider {
       aNode.ownerGlobal === window &&
       aContainer === this.cTarget &&
       !CustomizationHandler.isCustomizing()
-    )
+    ) {
       this.pickUpOrphans(aNode);
+    }
   }
   onWidgetAfterCreation() {
     this.setMaxWidth();
@@ -405,9 +418,11 @@ class NavbarToolbarSlider {
     // when a window closes, we need to check if the window that sent the closed
     // event is in customization. if it is, then we need to call wrapAll in the
     // windows that weren't closed. that's what the 3rd argument here is for.
-    if (aWindow === window) CustomizableUI.removeListener(this);
-    else if (aWindow.CustomizationHandler.isCustomizing())
+    if (aWindow === window) {
+      CustomizableUI.removeListener(this);
+    } else if (aWindow.CustomizationHandler.isCustomizing()) {
       this.wrapAll([...this.widgets].filter(this.filterFn, this), this.inner);
+    }
   }
   /**
    * when the context menu is showing, we need to do things differently if it
@@ -517,10 +532,14 @@ class NavbarToolbarSlider {
     // consecutive, obviously. they don't need to be, but if they aren't, the
     // slider may change the actual widget order, which persists through sessions.
     if (previousElementSibling) {
-      if (previousElementSibling?.nextElementSibling)
+      if (previousElementSibling?.nextElementSibling) {
         parent.insertBefore(this.outer, previousElementSibling.nextElementSibling);
-      else parent.appendChild(this.outer);
-    } else parent.insertBefore(this.outer, parent.firstElementChild);
+      } else {
+        parent.appendChild(this.outer);
+      }
+    } else {
+      parent.insertBefore(this.outer, parent.firstElementChild);
+    }
   }
   unwrapAll() {
     let orderedWidgets = CustomizableUI.getWidgetsInArea("nav-bar")
@@ -555,11 +574,13 @@ class NavbarToolbarSlider {
         // method to put it after the node corresponding to the previous widget.
         // for all the other widgets we just insert their nodes before the node
         // corresponding to the next widget.
-        if (i + 1 === array?.length) array[i - 1]?.forWindow(window).node.after(aNode);
-        else {
+        if (i + 1 === array?.length) {
+          array[i - 1]?.forWindow(window).node.after(aNode);
+        } else {
           let next = array[i + 1]?.forWindow(window).node;
-          if (next?.parentElement === container) container.insertBefore(aNode, next);
-          else {
+          if (next?.parentElement === container) {
+            container.insertBefore(aNode, next);
+          } else {
             let prev = array[i - 1]?.forWindow(window).node;
             if (prev?.parentElement === container) prev.after(aNode);
           }
@@ -587,7 +608,7 @@ class NavbarToolbarSlider {
       // to the array. so we check each widget's node's next sibling, and if
       // it's not equal to the node of the next widget in the array, we insert
       // the node before the next widget's node.
-      if (item.forWindow(window).node.nextElementSibling != array[i + 1]?.forWindow(window).node)
+      if (item.forWindow(window).node.nextElementSibling != array[i + 1]?.forWindow(window).node) {
         // if nextElementSibling returns null, then it's the last child of the
         // slider. if that widget is the last in the array, then array[i+1] will
         // return undefined. since null == undefined the if statement will still
@@ -598,6 +619,7 @@ class NavbarToolbarSlider {
         // where it should be anyway. and this is faster than actually checking
         // if it's the last node for every iteration of the loop.
         container.insertBefore(item.forWindow(window)?.node, array[i + 1]?.forWindow(window).node);
+      }
     });
   }
   setupScroll() {
@@ -616,9 +638,7 @@ class NavbarToolbarSlider {
     // accordingly. then we can use that prop to enable/disable scrolling.
     this.muObserver = new MutationObserver(() => {
       // if any button has open=true, set outer.open=true, else, outer.open=false.
-      if (inner.querySelector(`toolbarbutton[open="true"]`)) {
-        if (!outer.open) outer.open = true;
-      } else if (outer.open) outer.open = false;
+      outer.open = !!inner.querySelector(`toolbarbutton[open="true"]`);
     });
     // begin observing for changes to the "open" attribute of the slider's toolbar buttons.
     this.muObserver.observe(inner, { attributeFilter: ["open"], subtree: true });
@@ -650,21 +670,21 @@ class NavbarToolbarSlider {
     outer._direction = 0;
     outer._prevMouseScrolls = [null, null];
     // these are patterned after the arrowscrollbox functions.
-    outer.scrollByPixels = function (left, instant) {
+    outer.scrollByPixels = function(left, instant) {
       this.scrollBy({ left, behavior: instant ? "instant" : "auto" });
     };
     // these 2 are just here for future extension
-    outer.on_Scroll = function () {
+    outer.on_Scroll = function() {
       if (this.open) return;
       this._isScrolling = true;
     };
-    outer.on_Scrollend = function () {
+    outer.on_Scrollend = function() {
       this._isScrolling = false;
       this._destination = 0;
       this._direction = 0;
     };
     // main wheel event callback
-    outer.on_Wheel = function (e) {
+    outer.on_Wheel = function(e) {
       // this is what the mutation observer was for. when a toolbar button in
       // the slider has its popup open, we set outer.open = true. so if
       // outer.open = true we don't want to scroll at all. in other words, if a
@@ -699,16 +719,20 @@ class NavbarToolbarSlider {
       // with the values previously returned.
       if (doScroll) {
         let direction = scrollAmount < 0 ? -1 : 1;
-        if (e.deltaMode == e.DOM_DELTA_PAGE) scrollAmount *= this.clientWidth;
-        else if (e.deltaMode == e.DOM_DELTA_LINE) {
+        if (e.deltaMode == e.DOM_DELTA_PAGE) {
+          scrollAmount *= this.clientWidth;
+        } else if (e.deltaMode == e.DOM_DELTA_LINE) {
           let buttons = this.firstElementChild.children.length;
           if (buttons) {
             let lineAmount = this.scrollWidth / buttons;
             let clientSize = this.clientWidth;
-            if (Math.abs(scrollAmount * lineAmount) > clientSize)
+            if (Math.abs(scrollAmount * lineAmount) > clientSize) {
               scrollAmount = Math.max(1, Math.floor(clientSize / lineAmount)) * direction;
+            }
             scrollAmount *= lineAmount;
-          } else scrollAmount = 0;
+          } else {
+            scrollAmount = 0;
+          }
         }
         let startPos = this.scrollLeft;
         /* since we're using smooth scrolling, we check if the event is being
@@ -739,13 +763,15 @@ class NavbarToolbarSlider {
      * that focuses without the native automatic instant scroll behavior.
      * @param {object} aButton (a button's DOM node)
      */
-    ToolbarKeyboardNavigator._focusButton = function (aButton) {
+    ToolbarKeyboardNavigator._focusButton = function(aButton) {
       aButton.setAttribute("tabindex", "-1");
       let slider = aButton.closest(".slider-inner-container");
       if (slider) {
         NavbarToolbarSlider.smoothCenterScrollTo(aButton, slider);
         Services.focus.setFocus(aButton, Ci.nsIFocusManager.FLAG_NOSCROLL);
-      } else aButton.focus();
+      } else {
+        aButton.focus();
+      }
       aButton.addEventListener("blur", this);
     };
     outer.addEventListener("wheel", outer.on_Wheel);
@@ -758,13 +784,13 @@ class NavbarToolbarSlider {
     // don't change this method if we're using restorePreProtonLibraryButton.uc.js,
     // since that script also changes it
     if ("LibraryUI" in window) return;
-    StarUI.showConfirmation = function () {
+    StarUI.showConfirmation = function() {
       const HINT_COUNT_PREF = "browser.bookmarks.editDialog.confirmationHintShowCount";
       const HINT_COUNT = Services.prefs.getIntPref(HINT_COUNT_PREF, 0);
       if (HINT_COUNT >= 3) return;
       Services.prefs.setIntPref(HINT_COUNT_PREF, HINT_COUNT + 1);
       let anchor;
-      if (window.toolbar.visible)
+      if (window.toolbar.visible) {
         for (let id of ["library-button", "bookmarks-menu-button"]) {
           let element = document.getElementById(id);
           if (
@@ -778,6 +804,7 @@ class NavbarToolbarSlider {
             break;
           }
         }
+      }
       if (!anchor) anchor = document.getElementById("PanelUI-menu-button");
       ConfirmationHint.show(anchor, "pageBookmarked2");
     };
@@ -790,8 +817,9 @@ class NavbarToolbarSlider {
     sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
   }
 }
-if (gBrowserInit.delayedStartupFinished) window.navbarToolbarSlider = new NavbarToolbarSlider();
-else {
+if (gBrowserInit.delayedStartupFinished) {
+  window.navbarToolbarSlider = new NavbarToolbarSlider();
+} else {
   let delayedListener = (subject, topic) => {
     if (topic == "browser-delayed-startup-finished" && subject == window) {
       Services.obs.removeObserver(delayedListener, topic);

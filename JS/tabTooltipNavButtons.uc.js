@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Tab Tooltip Navigation Buttons
-// @version        1.2.1
+// @version        1.2.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    This script turns the tab tooltip into a mini navigation popup
@@ -100,9 +100,10 @@ class TabTooltipNav {
    *                       attribute name and the value is the attribute value)
    */
   setAttributes(element, attrs) {
-    for (let [name, value] of Object.entries(attrs))
+    for (let [name, value] of Object.entries(attrs)) {
       if (value) element.setAttribute(name, value);
       else element.removeAttribute(name);
+    }
   }
   // if there are multiple tabs selected and the trigger tab (the hovered one)
   // is one of them, return the full array of selected tabs. if the trigger tab
@@ -111,7 +112,7 @@ class TabTooltipNav {
   get tabs() {
     if (!this.triggerTab) return [];
     if (this.triggerTab.multiselected) return gBrowser.selectedTabs;
-    else return [this.triggerTab];
+    return [this.triggerTab];
   }
   get navPopup() {
     return this._navPopup || (this._navPopup = document.querySelector("#tab-nav-popup"));
@@ -234,9 +235,11 @@ class TabTooltipNav {
     if (
       this.config["Show vanilla tooltip if modifier is not pressed"] &&
       /ctrl|alt|shift|meta|accel/.test(this.config["Modifier key"])
-    )
+    ) {
       document.querySelector("#tabbrowser-tab-tooltip").addEventListener("popupshowing", this);
-    else gBrowser.tabContainer.removeAttribute("tooltip");
+    } else {
+      gBrowser.tabContainer.removeAttribute("tooltip");
+    }
     [
       "TabClose",
       "TabMove",
@@ -322,7 +325,7 @@ class TabTooltipNav {
     if (this.isOpen || this.openTimer || this.closeTimer) {
       if (this.triggerTab === tab) return this.handleTooltip();
       else if (tab) return this.movePopup(e, tab) || this.onMouseleave();
-      else return this.onMouseleave();
+      return this.onMouseleave();
     }
     this.triggerTab = tab;
     if (tab) this.openTimer = setTimeout(() => this.openPopup(e), this.popupDelay);
@@ -366,11 +369,12 @@ class TabTooltipNav {
       this.clearTimers();
       return this.closePopup();
     }
-    if (this.triggerTab.matches(":hover"))
+    if (this.triggerTab.matches(":hover")) {
       this.navPopup.openPopup(this.triggerTab, {
         position: "after_start",
         triggerEvent: e,
       });
+    }
   }
   movePopup(e, tab) {
     if (!this.modifierPressed(e)) return this.onMouseleave();
@@ -422,23 +426,27 @@ class TabTooltipNav {
     if (!this.triggerTab) return;
     let { tabs } = this;
     let where = whereToOpenLink(e, false, true);
-    if (where == "current")
+    if (where == "current") {
       tabs.forEach(tab => {
         let browser = gBrowser.getBrowserForTab(tab);
         if (browser.webNavigation?.canGoBack) browser.goBack();
       });
-    else this.duplicateTabsIn(tabs, where, -1);
+    } else {
+      this.duplicateTabsIn(tabs, where, -1);
+    }
   }
   goForward(e) {
     if (!this.triggerTab) return;
     let { tabs } = this;
     let where = whereToOpenLink(e, false, true);
-    if (where == "current")
+    if (where == "current") {
       tabs.forEach(tab => {
         let browser = gBrowser.getBrowserForTab(tab);
         if (browser.webNavigation?.canGoForward) browser.goForward();
       });
-    else this.duplicateTabsIn(tabs, where, 1);
+    } else {
+      this.duplicateTabsIn(tabs, where, 1);
+    }
   }
   // used by the back/forward context menu items. navigates a given browser's history
   gotoHistoryIndex(e) {
@@ -491,14 +499,17 @@ class TabTooltipNav {
       let url = browser.currentURI.spec;
       let principal = tab.linkedBrowser.contentPrincipal;
       if (gBrowser.updateBrowserRemotenessByURL(browser, url)) {
-        if (tab.linkedPanel) loadBrowserURI(browser, url, principal);
-        else {
+        if (tab.linkedPanel) {
+          loadBrowserURI(browser, url, principal);
+        } else {
           tab.addEventListener("SSTabRestoring", () => loadBrowserURI(browser, url, principal), {
             once: true,
           });
           gBrowser._insertBrowser(tab);
         }
-      } else unchangedRemoteness.push(tab);
+      } else {
+        unchangedRemoteness.push(tab);
+      }
     });
     if (!unchangedRemoteness.length) return;
     for (let tab of unchangedRemoteness) {
@@ -509,8 +520,9 @@ class TabTooltipNav {
     gPermissionPanel.hidePopup();
     let handlingUserInput = document.hasValidTransientUserGestureActivation;
     for (let tab of unchangedRemoteness) {
-      if (tab.linkedPanel) sendReloadMessage(tab);
-      else {
+      if (tab.linkedPanel) {
+        sendReloadMessage(tab);
+      } else {
         tab.addEventListener("SSTabRestoring", () => sendReloadMessage(tab), {
           once: true,
         });
@@ -558,7 +570,7 @@ class TabTooltipNav {
     const affectedTabsLength = contextTabInSelection ? selectedTabs.length : 1;
     this.setFavicon(tab);
     if (tab.mOverCloseButton) {
-      let shortcut = ShortcutUtils.prettifyShortcut(key_close);
+      let shortcut = ShortcutUtils.prettifyShortcut(document.getElementById("key_close"));
       label = PluralForm.get(
         affectedTabsLength,
         gTabBrowserBundle.GetStringFromName("tabs.closeTabs.tooltip")
@@ -587,7 +599,9 @@ class TabTooltipNav {
           gTabBrowserBundle.GetStringFromName(stringID)
         ).replace("#1", affectedTabsLength);
       }
-    } else label = gBrowser.getTabTooltip(tab);
+    } else {
+      label = gBrowser.getTabTooltip(tab);
+    }
     let title = this.navPopup.querySelector(".places-tooltip-title");
     title.value = label;
     let url = this.navPopup.querySelector(".places-tooltip-uri");
@@ -640,8 +654,9 @@ class TabTooltipNav {
       this.config["Update tooltip when hovering in the history menu"]
     ) {
       menupopup.addEventListener("DOMMenuItemActive", e => {
-        if (e.target.hasAttribute("checked")) this.handleTooltip();
-        else {
+        if (e.target.hasAttribute("checked")) {
+          this.handleTooltip();
+        } else {
           let uri = e.target.getAttribute("uri");
           let title = this.navPopup.querySelector(".places-tooltip-title");
           let urlLabel = this.navPopup.querySelector(".places-tooltip-uri");
@@ -662,8 +677,9 @@ class TabTooltipNav {
     }
 
     let children = menupopup.children;
-    for (let i = children.length - 1; i >= 0; --i)
+    for (let i = children.length - 1; i >= 0; --i) {
       if (children[i].hasAttribute("index")) menupopup.removeChild(children[i]);
+    }
 
     const MAX_HISTORY_MENU_ITEMS = 15;
     const tooltipBack = gNavigatorBundle.getString("tabHistory.goBack");
@@ -695,8 +711,9 @@ class TabTooltipNav {
           entry.hasUserInteraction === false &&
           j != end - 1 &&
           j != start
-        )
+        ) {
           continue;
+        }
         let uri = ssInParent ? entry.URI.spec : entry.url;
         let item =
           existingIndex < children.length
@@ -839,8 +856,9 @@ class TabTooltipNav {
   }
 }
 
-if (gBrowserInit.delayedStartupFinished) window.tabNavButtons = new TabTooltipNav();
-else {
+if (gBrowserInit.delayedStartupFinished) {
+  window.tabNavButtons = new TabTooltipNav();
+} else {
   let delayedListener = (subject, topic) => {
     if (topic == "browser-delayed-startup-finished" && subject == window) {
       Services.obs.removeObserver(delayedListener, topic);

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Tab Animation Workaround
-// @version        1.1.0
+// @version        1.1.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    A tiny script required for duskFox. This doesn't have any
@@ -15,22 +15,21 @@
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
-(function () {
-  let $tabs = gBrowser.tabContainer;
-  new MutationObserver(function (rec) {
+(function() {
+  new MutationObserver(function(rec) {
     for (let mu of rec) {
-      if (mu.target.getAttribute("movingtab"))
+      if (mu.target.getAttribute("movingtab")) {
         gBrowser.selectedTab.setAttribute("justmoved", "true");
-      else {
+      } else {
         setTimeout(() => gBrowser.selectedTab.removeAttribute("justmoved"), 1);
       }
     }
   }).observe(document.getElementById("tabbrowser-tabs"), { attributeFilter: ["movingtab"] });
 
-  if ($tabs._positionPinnedTabs.name === "_positionPinnedTabs") {
+  if (gBrowser.tabContainer._positionPinnedTabs.name === "_positionPinnedTabs") {
     eval(
-      `$tabs._positionPinnedTabs = function ` +
-        $tabs._positionPinnedTabs
+      `gBrowser.tabContainer._positionPinnedTabs = function ` +
+        gBrowser.tabContainer._positionPinnedTabs
           .toSource()
           .replace(/^\(/, "")
           .replace(/\)$/, "")

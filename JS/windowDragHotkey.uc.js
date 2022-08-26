@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Window Drag Hotkey
-// @version        1.1
+// @version        1.1.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Hold down the Alt and Shift keys and click & drag any part of
@@ -65,8 +65,9 @@ class WindowDragHotkey {
   }
 }
 
-if (gBrowserInit.delayedStartupFinished) new WindowDragHotkey();
-else {
+if (gBrowserInit.delayedStartupFinished) {
+  new WindowDragHotkey();
+} else {
   let delayedListener = (subject, topic) => {
     if (topic == "browser-delayed-startup-finished" && subject == window) {
       Services.obs.removeObserver(delayedListener, topic);

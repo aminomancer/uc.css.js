@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           One-click One-off Search Buttons
-// @version        1.8.1
+// @version        1.8.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Restore old behavior for one-off search engine buttons. It
@@ -53,16 +53,16 @@
     let handler = {
       handleEvent(e) {
         if (e.type === "unload") {
-          window.removeEventListener("unload", this, false);
+          window.removeEventListener("unload", this);
           prefsvc.removeObserver(branch, this);
-          return;
         }
       },
       observe(sub, _top, pref) {
         switch (pref) {
           case keyNavPref:
-            searchbarOneOffs.disableOneOffsHorizontalKeyNavigation =
-              oneOffs.disableOneOffsHorizontalKeyNavigation = !sub.getBoolPref(pref);
+            searchbarOneOffs.disableOneOffsHorizontalKeyNavigation = oneOffs.disableOneOffsHorizontalKeyNavigation = !sub.getBoolPref(
+              pref
+            );
             break;
           case hideSettingsPref:
             toggleSettingsButton(sub.getBoolPref(pref));
@@ -73,7 +73,7 @@
         }
       },
       attachListeners() {
-        window.addEventListener("unload", this, false);
+        window.addEventListener("unload", this);
         prefsvc.addObserver(branch, this);
         this.observe(prefsvc, null, keyNavPref);
         this.observe(prefsvc, null, hideSettingsPref);
@@ -93,19 +93,21 @@
     }
     function toggleSettingsButton(hide) {
       if (hide) {
-        SearchOneOffs.prototype.getSelectableButtons = function () {
+        SearchOneOffs.prototype.getSelectableButtons = function() {
           return [...this.buttons.querySelectorAll(".searchbar-engine-one-off-item")];
         };
-        for (let instance of [oneOffs, searchbarOneOffs])
+        for (let instance of [oneOffs, searchbarOneOffs]) {
           instance.settingsButton.style.display = "none";
+        }
       } else {
-        SearchOneOffs.prototype.getSelectableButtons = function (aIncludeNonEngineButtons) {
+        SearchOneOffs.prototype.getSelectableButtons = function(aIncludeNonEngineButtons) {
           const buttons = [...this.buttons.querySelectorAll(".searchbar-engine-one-off-item")];
           if (aIncludeNonEngineButtons) buttons.push(this.settingsButton);
           return buttons;
         };
-        for (let instance of [oneOffs, searchbarOneOffs])
+        for (let instance of [oneOffs, searchbarOneOffs]) {
           instance.settingsButton.style.removeProperty("display");
+        }
       }
     }
     function toggleKeyNavCallback(disable) {
@@ -117,12 +119,14 @@
               .toSource()
               .replace(/(this\.\_lastQueryContextWrapper)/, `$1 && this.allowOneOffKeyNav`)
         );
-      } else delete gURLBar.view.controller.handleKeyNavigation;
+      } else {
+        delete gURLBar.view.controller.handleKeyNavigation;
+      }
     }
 
     oneOffs.slider = oneOffs.buttons.parentElement;
     searchbarOneOffs.slider = searchbarOneOffs.buttons.parentElement;
-    oneOffs.handleSearchCommand = function (event, searchMode) {
+    oneOffs.handleSearchCommand = function(event, searchMode) {
       if (
         this.selectedButton == this.view.oneOffSearchButtons.settingsButton ||
         this.selectedButton.classList.contains("searchbar-engine-one-off-add-engine")
@@ -155,8 +159,9 @@
           },
         });
         this.selectedButton = null;
-        if (this.canScroll && !gURLBar.searchMode && !this.window.gBrowser.userTypedValue)
+        if (this.canScroll && !gURLBar.searchMode && !this.window.gBrowser.userTypedValue) {
           this.slider.scrollTo(0, 0);
+        }
         return;
       }
 
@@ -187,10 +192,11 @@
         }
       }
       this.selectedButton = null;
-      if (this.canScroll && !gURLBar.searchMode && !this.window.gBrowser.userTypedValue)
+      if (this.canScroll && !gURLBar.searchMode && !this.window.gBrowser.userTypedValue) {
         this.slider.scrollTo(0, 0);
+      }
     };
-    oneOffs.scrollToButton = function (el) {
+    oneOffs.scrollToButton = function(el) {
       if (!el) el = oneOffs.buttons.firstElementChild;
       let { slider } = this;
       if (!slider) return;
@@ -202,32 +208,37 @@
         behavior: "auto",
       });
     };
-    oneOffs.advanceSelection = function (aForward, aIncludeNonEngineButtons, aWrapAround) {
+    oneOffs.advanceSelection = function(aForward, aIncludeNonEngineButtons, aWrapAround) {
       let buttons = this.getSelectableButtons(aIncludeNonEngineButtons);
       let index;
       if (this.selectedButton) {
         let inc = aForward ? 1 : -1;
         let oldIndex = buttons.indexOf(this.selectedButton);
         index = (oldIndex + inc + buttons.length) % buttons.length;
-        if (!aWrapAround && ((aForward && index <= oldIndex) || (!aForward && oldIndex <= index)))
+        if (!aWrapAround && ((aForward && index <= oldIndex) || (!aForward && oldIndex <= index))) {
           index = -1;
-      } else index = aForward ? 0 : buttons.length - 1;
+        }
+      } else {
+        index = aForward ? 0 : buttons.length - 1;
+      }
       this.selectedButton = index < 0 ? null : buttons[index];
-      if (this.canScroll)
+      if (this.canScroll) {
         if (this.selectedButton) this.scrollToButton(this.selectedButton);
         else this.slider.scrollTo(0, 0);
+      }
     };
     oneOffs.onViewOpen = function onViewOpen() {
       this._on_popupshowing();
-      if (this.canScroll && !gURLBar.searchMode && !this.window.gBrowser.userTypedValue)
+      if (this.canScroll && !gURLBar.searchMode && !this.window.gBrowser.userTypedValue) {
         this.slider.scrollTo(0, 0);
+      }
     };
     oneOffs.onViewClose = function onViewClose() {
       this._on_popuphidden();
       if (this.canScroll && !gURLBar.searchMode) this.slider.scrollTo(0, 0);
     };
     Object.defineProperty(oneOffs, "query", {
-      set: function (val) {
+      set(val) {
         this._query = val;
         if (this.isViewOpen) {
           let isOneOffSelected =
@@ -238,11 +249,11 @@
           if (this.canScroll && !gURLBar.searchMode) this.slider.scrollTo(0, 0);
         }
       },
-      get: function () {
+      get() {
         return this._query;
       },
     });
-    if (SearchOneOffs.prototype._handleKeyDown.name)
+    if (SearchOneOffs.prototype._handleKeyDown.name) {
       eval(
         `SearchOneOffs.prototype._handleKeyDown = function ` +
           SearchOneOffs.prototype._handleKeyDown
@@ -250,6 +261,7 @@
             .replace(/_handleKeyDown/, "")
             .replace(/this\.selectedButton &&\n\s*this\.selectedButton\.engine &&\n\s*/g, "")
       );
+    }
     handler.attachListeners();
   }
 
@@ -263,8 +275,9 @@
   });
 
   // Delayed startup
-  if (gBrowserInit.delayedStartupFinished) init();
-  else {
+  if (gBrowserInit.delayedStartupFinished) {
+    init();
+  } else {
     let delayedListener = (subject, topic) => {
       if (topic == "browser-delayed-startup-finished" && subject == window) {
         Services.obs.removeObserver(delayedListener, topic);

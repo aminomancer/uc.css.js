@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           OS Detector
-// @version        1.3.0
+// @version        1.3.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Set an attribute "operatingsystem" on the root element of the
@@ -13,9 +13,7 @@
 // @include        *
 // ==/UserScript==
 
-(function () {
-  const AppConstants =
-    window.AppConstants ??
-    window.ChromeUtils?.import("resource://gre/modules/AppConstants.jsm")?.AppConstants;
+(function() {
+  const { AppConstants } = ChromeUtils.import("resource://gre/modules/AppConstants.jsm");
   if (AppConstants) document.documentElement.setAttribute("operatingsystem", AppConstants.platform);
 })();

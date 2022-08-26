@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Hide Tracking Protection Icon on Custom New Tab Page
-// @version        1.3.1
+// @version        1.3.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    By default, Firefox hides the tracking protection while 1)
@@ -32,7 +32,7 @@
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
-(function () {
+(function() {
   class HideOnNTP {
     // duskFox has a preference,
     // userChrome.urlbar.hide-bookmarks-button-on-system-pages
@@ -48,7 +48,7 @@
     // bookmarks menu button or the library button, if they exist on the user's
     // toolbar.
     _getAnchor(panel) {
-      if (this.hideBookmarks)
+      if (this.hideBookmarks) {
         for (let id of ["star-button-box", "bookmarks-menu-button", "libary-button"]) {
           let node = document.getElementById(id);
           if (node && !node.hidden) {
@@ -67,10 +67,17 @@
             }
           }
         }
+      }
       panel.removeAttribute("on-toolbar-button");
       return BookmarkingUI.anchor;
     }
     constructor() {
+      const lazy = {};
+      ChromeUtils.defineModuleGetter(
+        lazy,
+        "ContentBlockingAllowList",
+        "resource://gre/modules/ContentBlockingAllowList.jsm"
+      );
       XPCOMUtils.defineLazyPreferenceGetter(
         this,
         "hideBookmarks",
@@ -99,24 +106,30 @@
           if (
             this._previousURI == currentURL &&
             this._previousOuterWindowID == gBrowser.selectedBrowser.outerWindowID
-          )
+          ) {
             this.showProtectionsPopup({ toast: true });
+          }
         }
         this.hadShieldState = false;
-        if (currentURL.startsWith("view-source:"))
+        if (currentURL.startsWith("view-source:")) {
           this._trackingProtectionIconContainer.setAttribute("view-source", true);
-        else this._trackingProtectionIconContainer.removeAttribute("view-source");
+        } else {
+          this._trackingProtectionIconContainer.removeAttribute("view-source");
+        }
         // make the identity box unfocusable on new tab page
-        if (gIdentityHandler._identityIconBox)
+        if (gIdentityHandler._identityIconBox) {
           gIdentityHandler._identityIconBox.disabled = isInitial;
+        }
         // hide the TP icon on new tab page
-        if (!ContentBlockingAllowList.canHandle(gBrowser.selectedBrowser) || isInitial) {
+        if (!lazy.ContentBlockingAllowList.canHandle(gBrowser.selectedBrowser) || isInitial) {
           this._trackingProtectionIconContainer.hidden = true;
           return;
-        } else this._trackingProtectionIconContainer.hidden = false;
-        this.hasException = ContentBlockingAllowList.includes(gBrowser.selectedBrowser);
-        if (this._protectionsPopup)
+        }
+        this._trackingProtectionIconContainer.hidden = false;
+        this.hasException = lazy.ContentBlockingAllowList.includes(gBrowser.selectedBrowser);
+        if (this._protectionsPopup) {
           this._protectionsPopup.toggleAttribute("hasException", this.hasException);
+        }
         this.iconBox.toggleAttribute("hasException", this.hasException);
         this.fingerprintersHistogramAdd("pageLoad");
         this.cryptominersHistogramAdd("pageLoad");
@@ -128,8 +141,9 @@
     window.hideOnNTP = new HideOnNTP();
   }
   document.documentElement.setAttribute("hide-tp-icon-on-ntp", true);
-  if (gBrowserInit.delayedStartupFinished) init();
-  else {
+  if (gBrowserInit.delayedStartupFinished) {
+    init();
+  } else {
     let delayedListener = (subject, topic) => {
       if (topic == "browser-delayed-startup-finished" && subject == window) {
         Services.obs.removeObserver(delayedListener, topic);
