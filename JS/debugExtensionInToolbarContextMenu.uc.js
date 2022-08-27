@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Debug Extension in Toolbar Context Menu
-// @version        1.4.2
+// @version        1.4.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Adds a new context menu when right-clicking an add-on's
@@ -223,6 +223,21 @@ class DebugExtension {
       ? BrowserPageActions.actionForNode(popup.triggerNode).extensionID
       : ToolbarContextMenu._getExtensionId(popup);
   }
+  matchesActionNode(elt) {
+    return (
+      elt.localName === "toolbarbutton" ||
+      elt.localName === "toolbaritem" ||
+      elt.localName === "toolbarpaletteitem" ||
+      elt.classList?.contains("urlbar-page-action")
+    );
+  }
+  getActionNode(elt) {
+    while (elt && !this.matchesActionNode(elt)) {
+      if (elt.parentNode.localName === "toolbar") return null;
+      elt = elt.parentNode;
+    }
+    return elt;
+  }
   // get the URL for a given type of extension page, e.g. the popup that appears
   // when you click the addon's toolbar button, or the addon's sidebar panel.
   getActionURL(extension, type = this.actionTypes[0]) {
@@ -286,8 +301,9 @@ class DebugExtension {
         Cc["@mozilla.org/widget/clipboardhelper;1"]
           .getService(Ci.nsIClipboardHelper)
           .copyString(type === "CopyID" ? id : extension.baseURL);
-        if (windowUtils.getBoundsWithoutFlushing(popup.triggerNode).width) {
-          window.CustomHint?.show(popup.triggerNode, "Copied");
+        let actionNode = this.getActionNode(popup.triggerNode);
+        if (actionNode && windowUtils.getBoundsWithoutFlushing(actionNode)?.width) {
+          window.CustomHint?.show(actionNode, "Copied");
         }
         return;
     }

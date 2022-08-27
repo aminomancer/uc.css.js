@@ -955,3 +955,7 @@ link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infob
 #fxa-toolbar-menu-button .toolbarbutton-icon {
   list-style-image: var(--fxa-ui-img, url(chrome://userchrome/content/fxa/avatar-big.svg));
 }
+
+#firefox-view-button {
+	list-style-image: url(chrome://userchrome/content/engines/searchfox.svg) !important;
+}
