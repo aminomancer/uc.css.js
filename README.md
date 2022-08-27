@@ -5,6 +5,7 @@
    - or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA. -->
 
 # **uc.css.js**
+
 <p align="center">
 <a href="/../../archive/HEAD.zip" title="Download the latest release package" aria-label="Download the latest release package"><img src=".readme/download.png" alt="Download" height="32"></a>
 <a href="/../../subscription" title="Get update notifications" aria-label="Get update notifications"><img src=".readme/watch.png" alt="Watch" height="32"></a>
@@ -58,13 +59,13 @@ A Firefox theme (duskFox) and a variety of privileged scripts to add new behavio
 
 Installing this theme is a bit more involved and requires more decisions than pure CSS themes. So, I'm going to explain what this is, introduce the major moving parts, and define some jargon to ensure that anyone can follow the instructions, regardless of prior experience or knowledge. More advanced users can just skip ahead to [Recommended settings](#recommended-settings).
 
-Because [theme addons](https://developer.mozilla.org/docs/Mozilla/Add-ons/WebExtensions/manifest.json/theme) are restricted to changing colors and other variables, many Firefox users continue to use other, unsupported approaches to customizing the browser. By far the most common is [userChrome customization](https://www.userchrome.org/what-is-userchrome-css.html), wherein you use [CSS files](https://developer.mozilla.org/docs/Web/CSS) to customize the browser visually. To be clear, a CSS file is called a _stylesheet_, not a script. ***For the purposes of this theme, a stylesheet is a file ending in `.css`***. However, just like theme addons are restricted by the theme API, userChrome customization is restricted by the CSS language, which only allows us to _style_ existing elements.
+Because [theme addons](https://developer.mozilla.org/docs/Mozilla/Add-ons/WebExtensions/manifest.json/theme) are restricted to changing colors and other variables, many Firefox users continue to use other, unsupported approaches to customizing the browser. By far the most common is [userChrome customization](https://www.userchrome.org/what-is-userchrome-css.html), wherein you use [CSS files](https://developer.mozilla.org/docs/Web/CSS) to customize the browser visually. To be clear, a CSS file is called a _stylesheet_, not a script. **_For the purposes of this theme, a stylesheet is a file ending in `.css`_**. However, just like theme addons are restricted by the theme API, userChrome customization is restricted by the CSS language, which only allows us to _style_ existing elements.
 
-Firefox's frontend uses JavaScript (a human-readable, interpreted scripting language) for a huge variety of dynamic/interactive features. ***A JavaScript file is typically called a script. For the purposes of this theme, a script is a file ending in `.js` or `.jsm`***. As it happens, Firefox exposes a mechanism for loading _custom_ scripts. That mechanism involves giving Firefox an [autoconfig file](https://www.userchrome.org/what-is-userchrome-js.html), which Firefox reads like a JavaScript file. At runtime, the autoconfig file has access to the same powers as some of Firefox's internal scripts. We can use it to run JavaScript code or even load additional script files. So, whereas most other themes are purely visual, this theme can and does create new elements, shortcuts, and dynamic behavior.
+Firefox's frontend uses JavaScript (a human-readable, interpreted scripting language) for a huge variety of dynamic/interactive features. **_A JavaScript file is typically called a script. For the purposes of this theme, a script is a file ending in `.js` or `.jsm`_**. As it happens, Firefox exposes a mechanism for loading _custom_ scripts. That mechanism involves giving Firefox an [autoconfig file](https://www.userchrome.org/what-is-userchrome-js.html), which Firefox reads like a JavaScript file. At runtime, the autoconfig file has access to the same powers as some of Firefox's internal scripts. We can use it to run JavaScript code or even load additional script files. So, whereas most other themes are purely visual, this theme can and does create new elements, shortcuts, and dynamic behavior.
 
-A third, lesser known avenue for customization is Firefox's [component registrar](https://searchfox.org/mozilla-central/source/xpcom/components/nsIComponentRegistrar.idl). This is a pretty arcane object called an XPCOM interface, so don't worry about the details — Firefox uses this system to organize itself. Instead of using absolute paths, the Firefox frontend usually uses special URLs to reference its internal files. For example, the "new tab" icon is located at `chrome://browser/skin/new-tab.svg`. This corresponds to a local path that's been registered to this URL. We can use the registrar to do the same thing: to register `chrome://` URLs or _override_ existing ones. If I don't like Firefox's "new tab" icon, I can just replace it by loading a [manifest file](#resources--manifest). That means we don't need to use CSS to modify every element that uses the icon and update that CSS every time one of them is changed. ***For the purposes of this theme, a manifest file is a file ending in `.manifest`***.
+A third, lesser known avenue for customization is Firefox's [component registrar](https://searchfox.org/mozilla-central/source/xpcom/components/nsIComponentRegistrar.idl). This is a pretty arcane object called an XPCOM interface, so don't worry about the details — Firefox uses this system to organize itself. Instead of using absolute paths, the Firefox frontend usually uses special URLs to reference its internal files. For example, the "new tab" icon is located at `chrome://browser/skin/new-tab.svg`. This corresponds to a local path that's been registered to this URL. We can use the registrar to do the same thing: to register `chrome://` URLs or _override_ existing ones. If I don't like Firefox's "new tab" icon, I can just replace it by loading a [manifest file](#resources--manifest). That means we don't need to use CSS to modify every element that uses the icon and update that CSS every time one of them is changed. **_For the purposes of this theme, a manifest file is a file ending in `.manifest`_**.
 
-Firefox also has a _preferences_ system, which can be managed by navigating to `about:config`. A preference (or pref) is simply a key-value pair. Pref keys are always [strings](https://wikipedia.org/wiki/String_(computer_science)), and their values can be strings, integers, or [Boolean](https://wikipedia.org/wiki/Boolean_data_type) (they can also be floating-point numbers, but these are encoded like strings). Firefox has several thousands of prefs, which are used for all sorts of things from major configurations to obscure mods and even simply counting events. Firefox's UI can be visually customized to some extent using prefs. Since we can make our own prefs, I also use them to make customizing this theme easier. The most important prefs are listed below in the [settings section](#recommended-settings). Some individual scripts have prefs as well, which will be listed in their [descriptions](#script-descriptions--links).
+Firefox also has a _preferences_ system, which can be managed by navigating to `about:config`. A preference (or pref) is simply a key-value pair. Pref keys are always [strings](<https://wikipedia.org/wiki/String_(computer_science)>), and their values can be strings, integers, or [Boolean](https://wikipedia.org/wiki/Boolean_data_type) (they can also be floating-point numbers, but these are encoded like strings). Firefox has several thousands of prefs, which are used for all sorts of things from major configurations to obscure mods and even simply counting events. Firefox's UI can be visually customized to some extent using prefs. Since we can make our own prefs, I also use them to make customizing this theme easier. The most important prefs are listed below in the [settings section](#recommended-settings). Some individual scripts have prefs as well, which will be listed in their [descriptions](#script-descriptions--links).
 
 So, for the purposes of this theme, a "stylesheet" is a `.css` file used to visually customize the browser UI or content; a "script" is a `.js` or `.jsm` file used to functionally customize the browser, and in this theme, usually a `.uc.js` file placed in the [JS](/JS) folder; a "manifest" is a `.manifest` file used to register or override the browser's internal URLs. When I use the term "resources" I'm usually referring to the [resources](/resources) folder, where the theme stores its icons and content stylesheets (among other things). These terms may have other meanings outside of this context, but within this readme, that's what they mean.
 
@@ -77,9 +78,9 @@ For best results, set density mode to `Normal` and theme to `Dark` in the custom
 I also recommend setting the following prefs in `about:config`. There are two preset user.js files in the [prefs directory](/prefs) that can automatically set the prefs for you and prevent Firefox from changing them on update. Just choose one, rename it to user.js, and move it to your _profile_ folder, not your `chrome` folder. The first of these files, [required.js](/prefs/required.js) contains just the bare minimum prefs to ensure functionality, omitting most of the prefs that represent aesthetic choices. The second, [recommended.js](/prefs/recommended.js), includes the required prefs and some other more subjective prefs that compliment the theme — this is the preset I would personally recommend. There are also OS-specific prefs that are not in either file, so you should still check the list below. The following are in alphabetical order, not in order of importance. Most are optional, but the few that are required are in italics and are marked in the Notes column.<details><summary>⚙ **_Click for a full list._**</summary>
 | Pref&nbsp;name | Type | Value | Notes&nbsp;(optional&nbsp;unless&nbsp;otherwise&nbsp;noted) |
 |- |- |- |- |
-| accessibility.mouse\_focuses\_formcontrol | Number | 0 | Don't focus elements on click, only on tab. Helps to eliminate ugly 1px dotted outline |
-| browser.display.background\_color.dark | String | `#19191b` | Default background color for `color-scheme: dark` pages like about:blank. Great new prefs from [bug 1525107](https://phabricator.services.mozilla.com/D129746)! |
-| browser.display.use\_system\_colors | Boolean | false | |
+| accessibility.mouse_focuses_formcontrol | Number | 0 | Don't focus elements on click, only on tab. Helps to eliminate ugly 1px dotted outline |
+| browser.display.background_color.dark | String | `#19191b` | Default background color for `color-scheme: dark` pages like about:blank. Great new prefs from [bug 1525107](https://phabricator.services.mozilla.com/D129746)! |
+| browser.display.use_system_colors | Boolean | false | |
 | <i>browser.display.windows.non_native_menus</i> | Number | 1 | |
 | <i>browser.startup.blankWindow</i> | Boolean | false | These two settings eliminate the blank white window during startup |
 | <i>browser.startup.preXulSkeletonUI</i> | Boolean | false | |
@@ -97,19 +98,19 @@ I also recommend setting the following prefs in `about:config`. There are two pr
 | full-screen-api.transition-duration.leave | String | `0 0` | |
 | full-screen-api.warning.delay | Number | -1 | Remove the warning when switching to/from fullscreen |
 | full-screen-api.warning.timeout | Number | 0 | |
-| gfx.color\_management.mode | Number | 0 | Disable [color management](https://developer.mozilla.org/docs/Mozilla/Add-ons/WebExtensions/API/browserSettings/colorManagement). Use a [color calibrator](https://spyderx.datacolor.com/shop-products/display-calibration) for best results. |
-| gfx.font\_rendering.cleartype\_params.cleartype\_level | Number | 100 | These settings are a major improvement to text rendering on Windows imo. They shouldn't do anything on Mac/Linux |
-| gfx.font\_rendering.cleartype\_params.force\_gdi\_classic\_for\_families | String | `<empty>` | Leave the value completely empty |
-| gfx.font\_rendering.cleartype\_params.force\_gdi\_classic\_max\_size | Number | 6 | |
-| gfx.font\_rendering.cleartype\_params.pixel\_structure | Number | 1 | |
-| gfx.font\_rendering.cleartype\_params.rendering\_mode | Number | 5 | |
-| gfx.font\_rendering.directwrite.use\_gdi\_table\_loading | Boolean | false | |
+| gfx.color_management.mode | Number | 0 | Disable [color management](https://developer.mozilla.org/docs/Mozilla/Add-ons/WebExtensions/API/browserSettings/colorManagement). Use a [color calibrator](https://spyderx.datacolor.com/shop-products/display-calibration) for best results. |
+| gfx.font_rendering.cleartype_params.cleartype_level | Number | 100 | These settings are a major improvement to text rendering on Windows imo. They shouldn't do anything on Mac/Linux |
+| gfx.font_rendering.cleartype_params.force_gdi_classic_for_families | String | `<empty>` | Leave the value completely empty |
+| gfx.font_rendering.cleartype_params.force_gdi_classic_max_size | Number | 6 | |
+| gfx.font_rendering.cleartype_params.pixel_structure | Number | 1 | |
+| gfx.font_rendering.cleartype_params.rendering_mode | Number | 5 | |
+| gfx.font_rendering.directwrite.use_gdi_table_loading | Boolean | false | |
 | <i>layout.css.backdrop-filter.enabled</i> | Boolean | true | Required for the acrylic/glass gaussian blur effect |
 | <i>layout.css.cached-scrollbar-styles.enabled</i> | Boolean | false | Recommended for the scrollbar styles in userChrome.ag.css |
 | <i>layout.css.moz-document.content.enabled</i> | Boolean | true | Required |
 | mousewheel.autodir.enabled | Boolean | false | Allow mousewheel ⇅ to scroll ⇄-only scrollboxes |
 | prompts.contentPromptSubDialog | Boolean | true | Use the modern content dialog instead of modal prompts |
-| reader.color\_scheme | String | `dark` | |
+| reader.color_scheme | String | `dark` | |
 | slider.snapMultiplier | Number | 0 | When dragging a scrollbar, if the mouse moves too far from the scrollbar, the scrollbar will snap back to the top. Disable this. |
 | <i>svg.context-properties.content.enabled</i> | Boolean | true | Required for making some icons white |
 | <i>toolkit.legacyUserProfileCustomizations.stylesheets</i> | Boolean | true | Required, of course |
@@ -122,8 +123,8 @@ I also recommend setting the following prefs in `about:config`. There are two pr
 | ui.skipNavigatingDisabledMenuItem | Number | 1 | When focusing menuitems with arrow keys, skip past disabled items |
 | ui.SpellCheckerUnderline | String | `#E2467A` | |
 | ui.SpellCheckerUnderlineStyle | Number | 1 | Use dotted underline for spell checker. The default groove can get cut off for some fonts |
-| <i>ui.systemUsesDarkTheme</i> | Number | 1 | Enable _browser_ dark scheme |
-| <i>layout.css.prefers-color-scheme.content-override</i> | Number | 0 | Enable _content_ dark scheme |
+| <i>ui.systemUsesDarkTheme</i> | Number | 1 | Enable <i>browser</i> dark scheme |
+| <i>layout.css.prefers-color-scheme.content-override</i> | Number | 0 | Enable <i>content</i> dark scheme |
 | <i>ui.selecteditem</i> | String | `#2F3456` | Background for selected `<option>` elements and others |
 | <i>ui.highlight</i> | String | `hsl(250, 100%, 60%)` | Configure the system color "Highlight" |
 | <i>ui.selecteditemtext</i> | String | `#FFFFFFCC` | Text color for selected `<option>` elements and others |
@@ -162,7 +163,7 @@ I also recommend setting the following prefs in `about:config`. There are two pr
 | userChrome.urlbar.focus-ring-enabled | Boolean | true | Outline the urlbar/searchbar when focused |
 | userChrome.urlbar.hide-bookmarks-button-on-system-pages | Boolean | true | Hides the urlbar's bookmark button on about:blank & new tab page |
 | userChrome.urlbar.hide-pointless-icons | Boolean | true | Hide urlbar notification icons that don't offer any action (e.g. DRM icon) |
-| userChrome.urlbar-results.disable\_animation | Boolean | false | Toggle to true if you don't want the urlbar results to animate as they pop up |
+| userChrome.urlbar-results.disable_animation | Boolean | false | Toggle to true if you don't want the urlbar results to animate as they pop up |
 | userChrome.urlbar-results.hide-help-button | Boolean | true | New "Firefox Suggest" urlbar results have little help buttons. This will hide them |
 | <i>userChromeJS.gBrowser_hack.enabled</i> | Boolean | true | I don't think it's necessary, but enable just in case if you use a lot of scripts |
 | widget.content.allow-gtk-dark-theme | Boolean | true | May style some in-content elements consistently with Linux themes |
@@ -355,27 +356,27 @@ The problem with copying everything to `chrome_debugger_profile` is that you may
 2. Open `config.js` from your Firefox installation folder, in a text editor.
 3. After line 8, (after it says `Components;`) add some new lines and paste this:
 
-```
+```js
 function traverseToMainProfile(str) {
-    let dir = Cc["@mozilla.org/file/directory_service;1"]
-        .getService(Ci.nsIProperties)
-        .get(str, Ci.nsIFile);
-    if (!dir.exists()) {
-        let toAddChrome = false;
-        while (dir.target.includes("chrome_debugger_profile")) {
-            dir = dir.parent;
-            toAddChrome = true;
-        }
-        if (toAddChrome) dir.append("chrome");
+  let dir = Cc["@mozilla.org/file/directory_service;1"]
+    .getService(Ci.nsIProperties)
+    .get(str, Ci.nsIFile);
+  if (!dir.exists()) {
+    let toAddChrome = false;
+    while (dir.target.includes("chrome_debugger_profile")) {
+      dir = dir.parent;
+      toAddChrome = true;
     }
-    return dir;
+    if (toAddChrome) dir.append("chrome");
+  }
+  return dir;
 }
 ```
 
 4. Then replace the entire next line of code (the one that starts with `let cmanifest`) with this:
 
-```
-let cmanifest = traverseToMainProfile('UChrm');
+```js
+let cmanifest = traverseToMainProfile("UChrm");
 ```
 
 5. Now save `config.js` and exit.
@@ -383,16 +384,16 @@ let cmanifest = traverseToMainProfile('UChrm');
 7. Go to the end of line 60 (after the end of the function `resolveChromePath`) and hit enter twice to make two new lines, so you should now be at line 62.
 8. Paste this:
 
-```
-function traverseToMainProfile(str){
-  let dir = Services.dirsvc.get(str,Ci.nsIFile);
+```js
+function traverseToMainProfile(str) {
+  let dir = Services.dirsvc.get(str, Ci.nsIFile);
   if (!dir.exists()) {
     let toAddChrome = false;
-    while (dir.target.includes('chrome_debugger_profile')) {
+    while (dir.target.includes("chrome_debugger_profile")) {
       dir = dir.parent;
       toAddChrome = true;
     }
-    if (toAddChrome) dir.append('chrome');
+    if (toAddChrome) dir.append("chrome");
   }
   return dir;
 }
@@ -403,6 +404,7 @@ function traverseToMainProfile(str){
 11. That's it! The scripts that are in your main profile folder should now run in browser toolbox windows, even though they're not in the `chrome_debugger_profile` folder. Make sure you download the [Browser Toolbox Stylesheet Loader](#browser-toolbox-stylesheet-loader) so stylesheets will be loaded too.
 
 Having done this, make sure your `chrome_debugger_profile` folders do not have `chrome` folders within them, as they will confuse the stylesheet loader. It will think you have special stylesheets for the toolbox and therefore skip loading your main profile stylesheets into the toolbox. If you ever see styles failing to apply in the toolbox, delete your `chrome_debugger_profile` folder.
+
 </details>
 
 ### **Script conventions:**
@@ -467,12 +469,12 @@ This script adds several new features to the "all tabs menu" to help it catch up
 2. Adds an animated close button for every tab in this menu.
 3. Allows you to multiselect tabs in the all tabs menu and close an unlimited number of tabs at once without closing/blurring the popup.
 4. Significantly improves the mute/unmute button by making it work like the mute button in the tabs bar used to work.
-    - If you only have one tab selected, it mutes/unmutes that tab.
-    - If you have multiple tabs selected, it mutes/unmutes all of them.
-    - This also adds a tooltip to the mute button.
+   - If you only have one tab selected, it mutes/unmutes that tab.
+   - If you have multiple tabs selected, it mutes/unmutes all of them.
+   - This also adds a tooltip to the mute button.
 5. By default, Firefox doesn't do anything to differentiate loaded tabs from unloaded tabs. But for the regular tab bar, unloaded tabs gain an attribute `pending="true"` which you can use to dim them. This way you know which tabs are already initialized and which will actually start up when you click them. Pretty useful if you frequently have 100+ tabs like me.
-    - This script adds the same functionality to the all tabs menu, but does not add "pending" styling to regular tabs since it's outside the scope of this project. To do it yourself just add a rule like `.tabbrowser-tab .tab-content{opacity:.6;}`
-    - If you use [Unread Tab Mods](/JS/unreadTabMods.uc.js), this integrates with it to make unread tabs display with italic text.
+   - This script adds the same functionality to the all tabs menu, but does not add "pending" styling to regular tabs since it's outside the scope of this project. To do it yourself just add a rule like `.tabbrowser-tab .tab-content{opacity:.6;}`
+   - If you use [Unread Tab Mods](/JS/unreadTabMods.uc.js), this integrates with it to make unread tabs display with italic text.
 6. Adds color stripes to multiselected tabs and container tabs in the "all tabs menu" so you can differentiate them from normal tabs.
 7. Includes a preference `userChrome.tabs.all-tabs-menu.reverse-order` that lets you reverse the order of the tabs so that newer tabs are displayed on top rather than on bottom.
 8. Modifies the all tabs button's tooltip to display the number of tabs as well as the shortcut to open the all tabs menu, Ctrl+Shift+Tab.
@@ -544,7 +546,7 @@ Beware that you shouldn't be escaping anything with URL encoding, because it isn
 
 So putting all of this together, you can make a bookmark keyword like this:
 
-```
+```js
 ucjs:let where = gURLBar._whereToOpen(event);
 openWebLinkIn(
   "https://www.google.com/search?q=site:" + gBrowser.currentURI.host + " %{searchString}",
@@ -573,6 +575,7 @@ Place a "Clear Downloads" button in the downloads panel, right next to the "Show
 Adds a new hotkey (Ctrl+Alt+C by default) that copies whatever is in the urlbar, even when it's not in focus. Key and modifiers are configurable in the script file.
 
 #### [Debug Extension in Toolbar Context Menu](/JS/debugExtensionInToolbarContextMenu.uc.js):
+
 Adds a new context menu for debugging, modding, or styling Firefox extensions. Very handy for Firefox CSS themers and extension designers.<details><summary>💬 <i><b>More details...</b></i></summary>
 
 The menu appears any time the "Manage Extension" and "Remove Extension" items are available. The new "Debug Extension" menu contains several items: _"Extension Manifest"_ opens the extension's manifest directly in a new tab. Aside from reading the manifest, from there you can also view the whole contents of the extension within Firefox by removing "/manifest.json" from the URL.
@@ -626,12 +629,14 @@ Adds a toolbar button that implements the color picker without launching the dev
    The built-in checkboxes for these settings only let you choose between states 1 and 0, true and false. There's actually a third state that enables a more useful and intuitive mode. Read the notes in the `l10n` section inside the script for more info on how this setting works.
 
    Additionally, most of Firefox's built-in findbar checkboxes are only temporary. They only apply to the current browser/tab. This can be useful, but since a context menu requires more intention to reach, its actions should be more permanent. Instead of just setting the browser state, the context menu sets the user preferences just like you could in `about:config`.
+
 2. Set up a hotkey system that allows you to close the findbar by pressing Escape or Ctrl+F while the findbar is focused. Normally, Ctrl+F only opens the findbar. With this script, Ctrl+F acts more like a toggle.
 
    As normal, when the findbar is closed, Ctrl+F will open it. When the findbar is open but not focused, Ctrl+F will focus it and select all text in the input box. From there, pressing Ctrl+F once more will close it. If you're in 'find as you type' mode, Ctrl+F switches to regular find mode.
+
 3. _(Optional)_ Miniaturize the findbar matches label and the `Match Case` and `Whole Words` buttons. Instead of "1 of 500 matches" this one says "1/500" and floats inside the input box. Remove the checkbox labels and replace the checkboxes with recognizable icons. Together this makes the findbar drastically more compact.
 
-   This feature is enabled by default by the `usingDuskfox` setting in the script. It's mainly intended for people who use CSS themes that make the findbar much more compact, like my theme [duskFox](#theme-css).  If you don't use one of these themes already, you can grab the relevant code from [uc-findbar.css](/uc-findbar.css) on my repo, or if you like having a big findbar, you can just set `usingDuskfox` to false in the script.
+   This feature is enabled by default by the `usingDuskfox` setting in the script. It's mainly intended for people who use CSS themes that make the findbar much more compact, like my theme [duskFox](#theme-css). If you don't use one of these themes already, you can grab the relevant code from [uc-findbar.css](/uc-findbar.css) on my repo, or if you like having a big findbar, you can just set `usingDuskfox` to false in the script.
 
    For those interested in customizing this with CSS, the mini matches indicator can be styled with the selector `.matches-indicator`. It's the next sibling of the findbar input box. See [uc-findbar.css](/uc-findbar.css) in this repo for how I styled it. Specific methods used are documented in more detail in the script's code comments.
 
@@ -790,87 +795,89 @@ If you want to use my sound icon styles, see [uc-tabs.css](/uc-tabs.css#L503). T
 1. use my theme, complete with [chrome.manifest](/utils/chrome.manifest) and the [resources](/resources) folder, (in which case you'll already have all of the following files and CSS, and only need to download [restoreTabSoundButton.uc.js](/JS/restoreTabSoundButton.uc.js); or...
 2. download [tabMods.uc.js](/resources/script-override/tabMods.uc.js) and put it in `<your profile>/chrome/resources/script-override/` and edit the [utils/chrome.manifest](/utils/chrome.manifest) file that comes with fx-autoconfig to add the following line (at the bottom):
 
-```override chrome://browser/content/tabbrowser-tab.js ../resources/tabMods.uc.js```
+```
+override chrome://browser/content/tabbrowser-tab.js ../resources/tabMods.uc.js
+```
 
 For those who are curious, this will override the tab markup template and some methods relevant to the sound & overlay icons. We can't use a normal script to do this because, by the time a script can change anything, browser.xhtml has already loaded tabbrowser-tab.js, the tab custom element has already been defined, and tabs have already been created with the wrong markup. This wasn't required in the past because `.tab-icon-sound` wasn't fully removed, just hidden. But as of June 06, 2021, the sound button is entirely gone in vanilla Firefox 91. So [tabMods.uc.js](/resources/script-override/tabMods.uc.js) restores the markup and class methods; [restoreTabSoundButton.uc.js](/JS/restoreTabSoundButton.uc.js) restores and improves the tooltip; and [uc-tabs.css](/uc-tabs.css#L503) rebuilds the visual appearance.<details><summary>If you don't use my theme, restoring the sound button will also require some CSS.<br/>📋 <i><b>Click to expand...</b></i></summary>
 
-```
+```css
 .tab-icon-sound {
-    margin-inline-start: -16px;
-    width: 16px;
-    height: 16px;
-    padding: 0;
-    -moz-context-properties: fill;
-    fill: currentColor;
-    border-radius: var(--tab-button-border-radius, 2px);
-    list-style-image: none;
-    background-repeat: no-repeat;
+  margin-inline-start: -16px;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  -moz-context-properties: fill;
+  fill: currentColor;
+  border-radius: var(--tab-button-border-radius, 2px);
+  list-style-image: none;
+  background-repeat: no-repeat;
 }
 .tab-icon-sound[soundplaying],
 .tab-icon-sound[pictureinpicture][soundplaying]:hover {
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 18 18"><path fill="context-fill" d="M3.52,5.367c-1.332,0-2.422,1.09-2.422,2.422v2.422c0,1.332,1.09,2.422,2.422,2.422h1.516l4.102,3.633 V1.735L5.035,5.367H3.52z M12.059,9c0-0.727-0.484-1.211-1.211-1.211v2.422C11.574,10.211,12.059,9.727,12.059,9z M14.48,9 c0-1.695-1.211-3.148-2.785-3.512l-0.363,1.09C12.422,6.82,13.27,7.789,13.27,9c0,1.211-0.848,2.18-1.938,2.422l0.484,1.09 C13.27,12.148,14.48,10.695,14.48,9z M12.543,3.188l-0.484,1.09C14.238,4.883,15.691,6.82,15.691,9c0,2.18-1.453,4.117-3.512,4.601 l0.484,1.09c2.422-0.605,4.238-2.906,4.238-5.691C16.902,6.215,15.086,3.914,12.543,3.188z"/></svg>');
-    background-size: 12px;
-    background-position: center;
-    margin-inline-start: 1px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 18 18"><path fill="context-fill" d="M3.52,5.367c-1.332,0-2.422,1.09-2.422,2.422v2.422c0,1.332,1.09,2.422,2.422,2.422h1.516l4.102,3.633 V1.735L5.035,5.367H3.52z M12.059,9c0-0.727-0.484-1.211-1.211-1.211v2.422C11.574,10.211,12.059,9.727,12.059,9z M14.48,9 c0-1.695-1.211-3.148-2.785-3.512l-0.363,1.09C12.422,6.82,13.27,7.789,13.27,9c0,1.211-0.848,2.18-1.938,2.422l0.484,1.09 C13.27,12.148,14.48,10.695,14.48,9z M12.543,3.188l-0.484,1.09C14.238,4.883,15.691,6.82,15.691,9c0,2.18-1.453,4.117-3.512,4.601 l0.484,1.09c2.422-0.605,4.238-2.906,4.238-5.691C16.902,6.215,15.086,3.914,12.543,3.188z"/></svg>');
+  background-size: 12px;
+  background-position: center;
+  margin-inline-start: 1px;
 }
 .tab-icon-sound[muted],
 .tab-icon-sound[pictureinpicture][muted]:hover {
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 18 18"><path fill="context-fill" d="M3.52,5.367c-1.332,0-2.422,1.09-2.422,2.422v2.422c0,1.332,1.09,2.422,2.422,2.422h1.516l4.102,3.633V1.735L5.035,5.367H3.52z"/><path fill="context-fill" fill-rule="evenodd" d="M12.155,12.066l-1.138-1.138l4.872-4.872l1.138,1.138 L12.155,12.066z"/><path fill="context-fill" fill-rule="evenodd" d="M10.998,7.204l1.138-1.138l4.872,4.872l-1.138,1.138L10.998,7.204z"/></svg>');
-    background-size: 12px;
-    background-position: center;
-    margin-inline-start: 1px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 18 18"><path fill="context-fill" d="M3.52,5.367c-1.332,0-2.422,1.09-2.422,2.422v2.422c0,1.332,1.09,2.422,2.422,2.422h1.516l4.102,3.633V1.735L5.035,5.367H3.52z"/><path fill="context-fill" fill-rule="evenodd" d="M12.155,12.066l-1.138-1.138l4.872-4.872l1.138,1.138 L12.155,12.066z"/><path fill="context-fill" fill-rule="evenodd" d="M10.998,7.204l1.138-1.138l4.872,4.872l-1.138,1.138L10.998,7.204z"/></svg>');
+  background-size: 12px;
+  background-position: center;
+  margin-inline-start: 1px;
 }
 .tab-icon-sound[activemedia-blocked] {
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12"><path fill="context-fill" d="M2.128.13A.968.968 0 00.676.964v10.068a.968.968 0 001.452.838l8.712-5.034a.968.968 0 000-1.676L2.128.13z"/></svg>');
-    background-size: 8px;
-    background-position: 4.5px center;
-    margin-inline-start: 1px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12"><path fill="context-fill" d="M2.128.13A.968.968 0 00.676.964v10.068a.968.968 0 001.452.838l8.712-5.034a.968.968 0 000-1.676L2.128.13z"/></svg>');
+  background-size: 8px;
+  background-position: 4.5px center;
+  margin-inline-start: 1px;
 }
 .tab-icon-sound[pictureinpicture] {
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 625.8 512"><path fill="context-fill" fill-opacity="context-fill-opacity" d="M568.9 0h-512C25.6 0 0 25 0 56.3v398.8C0 486.4 25.6 512 56.9 512h512c31.3 0 56.9-25.6 56.9-56.9V56.3C625.8 25 600.2 0 568.9 0zm-512 425.7V86c0-16.5 13.5-30 30-30h452c16.5 0 30 13.5 30 30v339.6c0 16.5-13.5 30-30 30h-452c-16.5.1-30-13.4-30-29.9zM482 227.6H314.4c-16.5 0-30 13.5-30 30v110.7c0 16.5 13.5 30 30 30H482c16.5 0 30-13.5 30-30V257.6c0-16.5-13.5-30-30-30z"/></svg>');
-    background-size: 12px;
-    background-position: center;
-    border-radius: revert;
-    margin-inline-start: 1px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 625.8 512"><path fill="context-fill" fill-opacity="context-fill-opacity" d="M568.9 0h-512C25.6 0 0 25 0 56.3v398.8C0 486.4 25.6 512 56.9 512h512c31.3 0 56.9-25.6 56.9-56.9V56.3C625.8 25 600.2 0 568.9 0zm-512 425.7V86c0-16.5 13.5-30 30-30h452c16.5 0 30 13.5 30 30v339.6c0 16.5-13.5 30-30 30h-452c-16.5.1-30-13.4-30-29.9zM482 227.6H314.4c-16.5 0-30 13.5-30 30v110.7c0 16.5 13.5 30 30 30H482c16.5 0 30-13.5 30-30V257.6c0-16.5-13.5-30-30-30z"/></svg>');
+  background-size: 12px;
+  background-position: center;
+  border-radius: revert;
+  margin-inline-start: 1px;
 }
 .tab-icon-sound[pictureinpicture]:-moz-locale-dir(rtl) {
-    transform: scaleX(-1);
+  transform: scaleX(-1);
 }
 .tab-icon-sound[soundplaying]:not(:hover),
 .tab-icon-sound[muted]:not(:hover),
 .tab-icon-sound[activemedia-blocked]:not(:hover) {
-    opacity: 0.8;
+  opacity: 0.8;
 }
 .tab-icon-sound[soundplaying-scheduledremoval]:not([muted], :hover),
 .tab-icon-overlay[soundplaying-scheduledremoval]:not([muted], :hover) {
-    transition: opacity 0.3s linear var(--soundplaying-removal-delay);
-    opacity: 0;
+  transition: opacity 0.3s linear var(--soundplaying-removal-delay);
+  opacity: 0;
 }
 .tab-icon-sound-label,
 .tab-secondary-label {
-    display: none !important;
+  display: none !important;
 }
 .tab-icon-sound {
-    display: -moz-box !important;
+  display: -moz-box !important;
 }
 .tab-icon-sound:not([soundplaying], [muted], [activemedia-blocked], [pictureinpicture]),
 .tab-icon-sound[pinned] {
-    display: none;
+  display: none;
 }
 .tab-icon-overlay {
-    display: none !important;
+  display: none !important;
 }
 .tab-close-button {
-    padding: 2px !important;
-    width: 16px !important;
-    height: 16px !important;
+  padding: 2px !important;
+  width: 16px !important;
+  height: 16px !important;
 }
 .tabbrowser-tab:hover .tab-icon-stack > :not(.tab-close-button),
 .tabbrowser-tab:not(:hover) .tab-close-button {
-    visibility: collapse;
+  visibility: collapse;
 }
 .tabbrowser-tab {
-    --tab-label-mask-size: 2em !important;
+  --tab-label-mask-size: 2em !important;
 }
 ```
 
@@ -902,17 +909,17 @@ override chrome://browser/skin/downloads/notification-finish-animation.svg ../re
 
 With the resources out of the way, add this to userChrome.css:
 
-```
+```css
 #downloads-button > .toolbarbutton-badge-stack > #downloads-indicator-progress-outer {
-    top: calc(50% - 10px) !important;
-    left: calc(50% - 10px) !important;
-    width: 20px !important;
-    height: 20px !important;
-    border-radius: 0 !important;
-    border: none !important;
-    background-image: url(chrome://userchrome/content/downloads/progress-circle.svg) !important;
-    background-position: center !important;
-    background-size: 20px !important;
+  top: calc(50% - 10px) !important;
+  left: calc(50% - 10px) !important;
+  width: 20px !important;
+  height: 20px !important;
+  border-radius: 0 !important;
+  border: none !important;
+  background-image: url(chrome://userchrome/content/downloads/progress-circle.svg) !important;
+  background-position: center !important;
+  background-size: 20px !important;
 }
 ```
 
@@ -1074,10 +1081,10 @@ Modifies some tab functions so that unread tabs can be styled differently from o
 
 When opening a new tab without selecting it, the tab will gain an attribute `notselectedsinceload`. It will lose this attribute when the tab becomes selected or becomes discarded/unloaded. The CSS for styling unread tabs is already included in duskFox. (the CSS theme on this repo) If you don't use my theme, you can style unread tabs yourself with CSS like this:
 
-```
+```css
 .tabbrowser-tab[notselectedsinceload]:not([pending]),
 .tabbrowser-tab[notselectedsinceload][pending][busy] {
-    font-style:italic!important;
+  font-style:italic!important;
 }
 ```
 
@@ -1117,6 +1124,7 @@ Simply changes the update banners in the hamburger button app menu to make the s
    If you don't change the pref this shouldn't matter, since they both show suggestions at the top of the list. But if you set the pref to false, (e.g. if you want top or recent site URLs to appear at the top of the list so you don't have to hit Tab so many times to reach them) you'll get URLs at the top of the list in regular mode, and URLs at the bottom of the list in search mode.
 
    This setting changes the way sorting is calculated in search mode. Instead of automatically and invariably showing suggestions first, it will simply respect the `showSearchSuggestionsFirst` preference, just like it does in regular mode.
+
 3. Optionally disable urlbar intervention tips. These are the urlbar results that prompt you to reset your profile or clear your cache when you type something similar. They're intended to make it easier for new users to find these functions, but they take up result slots and selecting them by mistake can have serious repercussions, even including a nearly complete profile wipe. So I disable them entirely.
 4. Replace the search glass icon in "tab to search" and search engine alias urlbar results with the specific engine's icon. This doesn't apply to normal search results for your default engine, it only applies to results that appear when you type `@` or the name of an engine in the urlbar. These are search engine alias results and tab to search results, respectively. Using the engine's icon makes them easier to recognize.
 5. When you have syncing enabled, typing `%` in the urlbar will show tabs that were synced from your other devices. Normally, the only indication that a result is a synced tab is the "action text" that shows the name of the device from which the tab was synced. duskFox (the CSS theme) adds a little type indicator icon to urlbar results like bookmarks, open tabs, pinned results, and synced tabs. duskFox's indicator for synced tabs is normally a little sync icon.
@@ -1124,14 +1132,17 @@ Simply changes the update banners in the hamburger button app menu to make the s
    But with this script, it will show a device icon instead, such as a phone or a laptop, to match the device from which the tab came. So if the tab was synced from an iPhone, you'll see a phone icon next to the row's favicon. If it came from an iPad, you'll see a tablet icon, and so on. This is meant to match how the "send tab to device" buttons look in the app menu.
 
    It doesn't require duskFox, but duskFox makes urlbar results' type icons look a lot better in my opinion, and it adds type icons for several types of results that don't normally have them.
+
 6. Add missing tooltips to the identity icon on pages where it has no tooltip in vanilla Firefox. When the connection is secure it says "Verified by: Some CA." When the connection is insecure it says "Connection is not secure." It has tooltips for extension pages and pages that were blocked due to certificate errors until the user overrode the block. But for everything else, there is simply no tooltip. It doesn't just revert to a default tooltip, it simply has no tooltip. This seems like a mistake since the other urlbar icons always have a tooltip.
 
    So this setting adds tooltips for every security state. This includes tooltips like "This is a secure Firefox page" for system pages like `about:preferences`, "This page is stored on your computer" for local files, "Parts of this page are not secure (such as images)" for mixed security pages, "Firefox has blocked parts of this page that are not secure" for pages made secure by blocking content, and so on.
 
    This way, any time you hover over the identity icon, it will definitely show a tooltip. The tooltip will usually contain the same basic description as the identity popup. But the identity popup can only be opened with a click, so a tooltip is often preferred, at least in cases like this where the information can always easily fit into a small tooltip.
+
 7. Give the identity icon unique classes and therefore icons on `about:neterror` and `about:blocked` pages. It already has unique classes for `about:certerror` and `about:httpsonlyerror`, which are used in vanilla Firefox to give them different icons. One gets the insecure lock icon, the other gets the mixed security lock icon. duskFox instead gives all the error pages a unique error icon so they can be distinguished from ordinary insecure/mixed pages.
 
    To style _all_ of the error pages is _only_ possible with this script, since in vanilla Firefox `about:neterror` and `about:blocked` are only marked as `.unknownIdentity` which is the default class. So the script gives them special classes, `.aboutNetErrorPage` and `.aboutBlockedPage` which can be selected in CSS.
+
 8. Optionally restore the context menu that used to appear when right-clicking a search engine one-off button in the urlbar results panel. This feature is disabled by default, since the context menu has very few options in it. But as with the other script features, you can enable it by toggling a config value at the top of the script.
 9. When you type nothing but Space or Tab characters in the urlbar, the first result will have an empty title. It will just say "Search with Google" or something like that, with no indication that any search terms exist at all. Consecutive whitespace characters don't add to the displayed node width, so it ends up looking basically empty. We can change this by setting it to use non-breaking spaces instead of regular space characters, and adding an attribute "all-whitespace" to the title element. Then we can underline it with CSS. This is already done in [uc-urlbar-results.css](uc-urlbar-results.css) but if you wanna do it yourself: `.urlbarView-title[all-whitespace] {text-decoration: underline}`
 
@@ -1146,22 +1157,23 @@ Simply changes the update banners in the hamburger button app menu to make the s
 A lightweight aesthetic script that changes the background color of the urlbar to match the active tab's contextual identity (aka multi-account container).<details><summary>💬 <i><b>More details...</b></i></summary>
 
 Made by request. Will conflict with any custom themes/stylesheets that set the background color of `#urlbar-input-container` with `!important` rules, so be sure to check your stylesheet if it's not working. You can add the following code to the bottom of your custom stylesheet to make sure the color rules win out:
-```
+
+```css
 #urlbar-input-container[contextid] {
-    background-color: color-mix(in srgb, transparent 75%, var(--identity-tab-color)) !important;
+  background-color: color-mix(in srgb, transparent 75%, var(--identity-tab-color)) !important;
 }
 
 #urlbar[open] #urlbar-input-container[contextid] {
-    border-bottom-left-radius: 0 !important;
-    border-bottom-right-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
 }
 
 #urlbar[open]
-    > #urlbar-input-container[contextid]
-    ~ .urlbarView
-    > .urlbarView-body-outer
-    > .urlbarView-body-inner {
-    border-color: transparent !important;
+  > #urlbar-input-container[contextid]
+  ~ .urlbarView
+  > .urlbarView-body-outer
+  > .urlbarView-body-inner {
+  border-color: transparent !important;
 }
 ```
 
@@ -1190,9 +1202,10 @@ Press backspace to navigate back/forward in popup panels. (e.g. the main hamburg
 This mini-script adds an attribute to `#PopupAutoComplete` when it's opened on a panel in the chrome UI, rather than opened on an input field in the content area: `[anchored-on-panel="true"]`. The reason for this is that the duskFox stylesheets give panels and menupopups the same background color, as is typical, but remove the borders.
 
 So without this, if the autocomplete popup opened on a panel, (for example the notification popup you get when Firefox asks to save a password) it would end up blending in with the panel, which doesn't look great. When it opens inside the content area, we want it to keep its normal background color, `var(--arrowpanel-background)`. But when it opens in a panel, we want to give it a brighter background color, `var(--autocomplete-background)`. This is implemented in [userChrome.au.css](/userChrome.au.css) by this rule:
-```
+
+```css
 panel[type="autocomplete-richlistbox"][anchored-on-panel] {
-    --panel-background: var(--autocomplete-background);
+  --panel-background: var(--autocomplete-background);
 }
 ```
 
@@ -1219,14 +1232,16 @@ This tiny setup script adds an attribute on the document element representing th
 A confirmation hint library that works and looks just like the confirmation hint built into Firefox, but allows custom messages to be sent.<details><summary>💬 <i><b>More details...</b></i></summary>
 
 This is a utility script for other scripts to take advantage of. It sets up a global object (on the chrome window) for showing confirmation hints with custom messages. The built-in confirmation hint component can only show a few messages built into the browser's localization system. This script works just like the built-in confirmation hint, and uses the built-in confirmation hint element, but it accepts any arbitrary string as a parameter. So you can open a confirmation hint with _any_ message, e.g.
-```
+
+```js
 CustomHint.show(anchorNode, "This is my custom message", {
-    hideArrow: true,
-    hideCheck: true,
-    description: "Awesome.",
-    duration: 3000
+  hideArrow: true,
+  hideCheck: true,
+  description: "Awesome.",
+  duration: 3000,
 });
 ```
+
 This script is entirely optional — some of my scripts take advantage of it, if it's present, but will not break if it's not present. My scripts that _require_ it come with their own independent version of it built-in. It doesn't do anything on its own, it's sort of a micro-library. You may as well download it if you use any of my scripts, since it can't hurt anything and will provide useful feedback for some of my scripts. I'm uploading it as a separate component so other developers can use it, and to avoid adding too much redundant code in my other scripts.
 
 </details>
@@ -1244,6 +1259,7 @@ This script is entirely optional — some of my scripts take advantage of it, if
 Various tiny mods not worth making separate scripts for. Read the comments [inside the script](/JS/miscMods.uc.js) for details.
 
 ## **Thanks to my past sponsors for supporting this project:**
+
 <ul>
     <li><a href="https://github.com/KleinByte"><img src="https://avatars.githubusercontent.com/u/57239407?v=4" width="14"/> Jordyn Kleinheksel (KleinByte)</a></li>
     <li><a href="https://github.com/henryxrl"><img src="https://avatars.githubusercontent.com/u/7662954?v=4" width="14"/> Henry Xu (henryxrl)</a></li>
