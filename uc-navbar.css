@@ -328,6 +328,18 @@ toolbar
   background-color: var(--toolbarbutton-checked-background) !important;
 }
 
+#firefox-view-button:is(:focus-visible, [checked="true"]):not([open], :hover, :active) > .toolbarbutton-icon {
+	background: var(--toolbarbutton-checked-background) !important;
+}
+
+#firefox-view-button:hover > .toolbarbutton-icon {
+	background: var(--toolbarbutton-hover-background) !important;
+}
+
+#firefox-view-button:is(:hover:active, [open]) > .toolbarbutton-icon {
+	background: var(--toolbarbutton-active-background) !important;
+}
+
 toolbar .toolbarbutton-1:not([disabled], [open])[checked]:hover > .toolbarbutton-icon {
   background-color: var(--toolbarbutton-hover-background) !important;
 }

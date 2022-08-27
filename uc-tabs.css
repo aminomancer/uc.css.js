@@ -202,6 +202,18 @@ not expand until you move your mouse out of the tab strip. */
   border-top-right-radius: 5px !important;
 }
 
+#TabsToolbar
+  :is(toolbarbutton, toolbaritem, toolbarpaletteitem):not([hidden])
+  + #tabbrowser-tabs:not([using-closing-tabs-spacer])
+  .tabbrowser-tab[first-visible-tab]:not([justmoved], [style*="transform"]),
+#TabsToolbar
+  :is(toolbarbutton, toolbaritem, toolbarpaletteitem):not([hidden])
+  + #tabbrowser-tabs:not([using-closing-tabs-spacer])
+  .tabbrowser-tab[first-visible-tab]:not([justmoved], [style*="transform"])
+  :is(.tab-stack, .tab-background, .tab-content, .tab-loading-burst) {
+  border-top-left-radius: 5px !important;
+}
+
 /* set rounded outside corners on tabs so they look like folder labels.
 you can disable this by making a new pref in about:config
 and setting it to true: "userChrome.tabs.rounded-outer-corners.disabled"

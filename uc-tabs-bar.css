@@ -197,7 +197,7 @@ titlebar, this sheet controls their appearance as well. */
   margin-inline-end: 2px !important;
 }
 
-:is(toolbarbutton, toolbaritem) + #tabbrowser-tabs {
+:is(toolbarbutton, toolbaritem, toolbarpaletteitem) + #tabbrowser-tabs {
   margin-inline-start: 2px !important;
 }
 
@@ -363,6 +363,19 @@ overflowing tabs don't draw shadows on the special new tab button */
   background: none !important;
 }
 
+:root[privatebrowsingmode="temporary"] .private-browsing-indicator {
+  display: revert !important;
+}
+
+#private-browsing-indicator-with-label {
+  -moz-context-properties: fill, fill-opacity !important;
+  fill: currentColor !important;
+}
+
+.private-browsing-indicator + #private-browsing-indicator-with-label {
+	display: none !important;
+}
+
 .private-browsing-indicator::before {
   content: "";
   display: -moz-box;
@@ -397,6 +410,15 @@ button.private-browsing-indicator:is(:hover, :focus-visible)::before {
 .accessibility-indicator:is(:hover:active, [open]) > .button-box,
 button.private-browsing-indicator:is(:hover:active, [open])::before {
   background-color: var(--arrowpanel-dimmed-further) !important;
+}
+
+:root:not([privatebrowsingmode="temporary"]) :is(#firefox-view-button, #wrapper-firefox-view-button) + #tabbrowser-tabs {
+	border-inline-start: revert !important;
+	padding-inline-start: revert !important;
+}
+
+#TabsToolbar-customization-target > :is(toolbarbutton, toolbaritem, toolbarpaletteitem):first-child {
+  margin-inline-start: 2px !important;
 }
 
 /* all tabs button popup */

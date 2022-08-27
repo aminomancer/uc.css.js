@@ -895,36 +895,6 @@ It's not like there aren't other ways to see where the panel is anchored, but wh
 
 </details>
 
-#### Restore pre-Proton Downloads Button:
-
-⚠️ _This script has been made obsolete by new animations I made for v3.1.1 (13 Jan 2022). If you had `restorePreProtonDownloadsButton.uc.js` or `restorePreProtonDownloadsButton-standalone.uc.js` installed, delete it._ Restores the pre-Proton downloads button icon and animations. <details><summary>💬 <i><b>If you don't use duskFox...</b></i></summary>
-
-You're going to need the [resources/downloads](/resources/downloads) folder, so download that. Then, (with fx-autoconfig installed) add these three lines to utils/chrome.manifest:
-
-```
-override chrome://browser/skin/downloads/downloads.svg ../resources/downloads/downloads.svg
-override chrome://browser/skin/downloads/notification-start-animation.svg ../resources/downloads/notification-start-animation.svg
-override chrome://browser/skin/downloads/notification-finish-animation.svg ../resources/downloads/notification-finish-animation.svg
-```
-
-With the resources out of the way, add this to userChrome.css:
-
-```css
-#downloads-button > .toolbarbutton-badge-stack > #downloads-indicator-progress-outer {
-  top: calc(50% - 10px) !important;
-  left: calc(50% - 10px) !important;
-  width: 20px !important;
-  height: 20px !important;
-  border-radius: 0 !important;
-  border: none !important;
-  background-image: url(chrome://userchrome/content/downloads/progress-circle.svg) !important;
-  background-position: center !important;
-  background-size: 20px !important;
-}
-```
-
-</details>
-
 #### [Restore pre-Proton Library Button](/JS/restorePreProtonLibraryButton.uc.js):
 
 ✨ The library toolbar button used to have an animation that played when a bookmark was added. It's another casualty of the Proton updates. This script restores the library button animation in its entirety, with one minor improvement.<details><summary>💬 <i><b>More details...</b></i></summary>
@@ -1084,7 +1054,7 @@ When opening a new tab without selecting it, the tab will gain an attribute `not
 ```css
 .tabbrowser-tab[notselectedsinceload]:not([pending]),
 .tabbrowser-tab[notselectedsinceload][pending][busy] {
-  font-style:italic!important;
+  font-style: italic !important;
 }
 ```
 
