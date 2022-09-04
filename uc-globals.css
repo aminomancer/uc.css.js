@@ -325,6 +325,7 @@ but other than that these variables should be available everywhere. */
   /* --screenshot-icon: url(chrome://userchrome/content/skin/screenshot.svg); */
   --screenshot-icon: url(chrome://userchrome/content/devtools/command-screenshot.svg);
   --fxa-ui-img: url(chrome://userchrome/content/fxa/avatar-big.svg);
+  --uc-firefox-view-icon: url(chrome://userchrome/content/engines/searchfox.svg);
   --uc-smooth-timing-function: cubic-bezier(0.07, 0.78, 0.21, 0.95);
 
   --download-button-focus-within-bg: var(--button-bgcolor);

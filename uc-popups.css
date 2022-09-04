@@ -334,8 +334,7 @@ panel[type="autocomplete-richlistbox"]
 }
 
 /* push notification popup (lower right corner) */
-@-moz-document url("chrome://global/content/alerts/alert.xhtml")
-{
+@-moz-document url("chrome://global/content/alerts/alert.xhtml") {
   #alertBox {
     box-shadow: var(--tooltip-box-shadow) !important;
     color: var(--ui-text-100) !important;
@@ -424,8 +423,7 @@ panel[type="autocomplete-richlistbox"]
   }
 }
 
-@-moz-document url("chrome://global/content/pictureinpicture/player.xhtml")
-{
+@-moz-document url("chrome://global/content/pictureinpicture/player.xhtml") {
   :root {
     --panel-bgcolor: var(--in-content-button-highlight-dark) !important;
   }
@@ -500,8 +498,7 @@ panel[type="autocomplete-richlistbox"]
 }
 
 @-moz-document url-prefix("chrome://global/content/timepicker.xhtml"),
-    url-prefix("chrome://global/content/datepicker.xhtml")
-{
+    url-prefix("chrome://global/content/datepicker.xhtml") {
   body {
     background-color: var(--arrowpanel-background) !important;
     color: var(--font-color) !important;
@@ -712,8 +709,7 @@ rtl languages. adjust the border radius accordingly */
     url("chrome://mozapps/content/handling/appChooser.xhtml"),
     url("chrome://global/content/appPicker.xhtml"),
     url("chrome://mozapps/content/downloads/unknownContentType.xhtml"),
-    url-prefix("chrome://browser/content/sanitize.xhtml")
-{
+    url-prefix("chrome://browser/content/sanitize.xhtml") {
   /* use this selector to exclude null-window prompts, which open in their own
   windows and don't inherit styles from the chrome window. we don't want to
   apply theme styles to these prompts because no matter what we do, we can't
@@ -741,6 +737,7 @@ rtl languages. adjust the border radius accordingly */
     --in-content-button-background-hover: var(--arrowpanel-dimmed-further) !important;
     --in-content-button-background-active: var(--arrowpanel-dimmed-even-further) !important;
     --in-content-item-selected: var(--purple-40) !important;
+    --in-content-deemphasized-text: var(--uc-panel-description-color) !important;
     --in-content-border-color: var(--dialog-box-border-color) !important;
     --in-content-border-hover: var(--dialog-box-border-hover) !important;
     --in-content-link-color: var(--purple-35) !important;
@@ -815,7 +812,7 @@ rtl languages. adjust the border radius accordingly */
   }
 
   .dialog-button-box > button:not([disabled="true"]):focus-visible {
-    outline: var(--default-focusring, auto) !important;
+    outline: var(--global-focus-outline, var(--default-focusring, auto)) !important;
   }
 
   .dialog-button-box > button:not([disabled="true"]):hover:active,
@@ -1022,8 +1019,7 @@ rtl languages. adjust the border radius accordingly */
 }
 
 @-moz-document url("chrome://mozapps/content/downloads/unknownContentType.xhtml"),
-    url("chrome://global/content/appPicker.xhtml")
-{
+    url("chrome://global/content/appPicker.xhtml") {
   :root,
   :root dialog,
   .dialog-button-box {
@@ -1114,8 +1110,7 @@ rtl languages. adjust the border radius accordingly */
     url("chrome://browser/content/places/bookmarkProperties.xhtml"),
     url("chrome://browser/content/places/bookmarkProperties2.xhtml"),
     url-prefix("chrome://browser/content/sanitize.xhtml"),
-    url("chrome://browser/content/spotlight.html")
-{
+    url("chrome://browser/content/spotlight.html") {
   :root[dialogroot],
   :root[dialogroot] dialog,
   :root[dialogroot] richlistbox[id]:not(#categories) > richlistitem[selected],
@@ -1131,6 +1126,7 @@ rtl languages. adjust the border radius accordingly */
     --in-content-button-background-active: var(--arrowpanel-dimmed-even-further) !important;
     --in-content-item-selected: var(--purple-40) !important;
     --in-content-item-hover: var(--arrowpanel-dimmed) !important;
+    --in-content-deemphasized-text: var(--uc-panel-description-color) !important;
     --in-content-border-color: var(--dialog-box-border-color) !important;
     --in-content-border-hover: var(--dialog-box-border-hover) !important;
     --in-content-link-color: var(--purple-35) !important;
@@ -1157,7 +1153,7 @@ rtl languages. adjust the border radius accordingly */
     --in-content-button-vertical-padding: 5px !important;
     --mr-welcome-background-color: var(--in-content-page-background) !important;
   }
-  
+
   .onboardingContainer .screen.light-text {
     --in-content-page-color: var(--ui-text-100) !important;
     --in-content-primary-button-text-color: var(--ui-text-100) !important;
@@ -1465,8 +1461,7 @@ rtl languages. adjust the border radius accordingly */
     text-decoration-color: var(--ui-selection-color) !important;
   }
 
-  @-moz-document url("chrome://mozapps/content/handling/permissionDialog.xhtml")
-  {
+  @-moz-document url("chrome://mozapps/content/handling/permissionDialog.xhtml") {
     :root[dialogroot] dialog > #description,
     :root[dialogroot] dialog > #description-box > #description {
       font-size: 1.15em !important;
@@ -1479,6 +1474,24 @@ rtl languages. adjust the border radius accordingly */
 
     :root[dialogroot] #description:not([hidden], :empty) ~ #description-extra {
       margin-top: -10px !important;
+    }
+  }
+
+  @-moz-document url("chrome://browser/content/spotlight.html") {
+    .onboardingContainer :is(.primary, .secondary) {
+      line-height: revert !important;
+      min-height: revert !important;
+    }
+
+    .onboardingContainer
+      .screen[pos="split"]
+      .section-main
+      .main-content
+      .action-buttons
+      .secondary-cta
+      .arrow-icon {
+      padding-inline-end: 28px !important;
+      background-position-x: right 10px !important;
     }
   }
 
@@ -1496,8 +1509,7 @@ rtl languages. adjust the border radius accordingly */
   }
 }
 
-@-moz-document url-prefix("chrome://global/content/print.html")
-{
+@-moz-document url-prefix("chrome://global/content/print.html") {
   :root {
     --in-content-page-background: var(--uc-content-page-background) !important;
     --dropdown-bgcolor: var(--in-content-page-background) !important;
@@ -1557,8 +1569,7 @@ link[href="chrome://global/content/printPagination.css"]
   border-end-end-radius: 4px !important;
 }
 
-@-moz-document url("chrome://browser/content/webrtcLegacyIndicator.xhtml")
-{
+@-moz-document url("chrome://browser/content/webrtcLegacyIndicator.xhtml") {
   button {
     min-width: 28px !important;
   }
@@ -1572,15 +1583,13 @@ link[href="chrome://global/content/printPagination.css"]
   }
 }
 
-@-moz-document url("chrome://browser/content/webrtcIndicator.xul")
-{
+@-moz-document url("chrome://browser/content/webrtcIndicator.xul") {
   :root {
     display: none !important;
   }
 }
 
-@-moz-document url("chrome://browser/content/webrtcIndicator.xhtml")
-{
+@-moz-document url("chrome://browser/content/webrtcIndicator.xhtml") {
   :root {
     --indicator-height: 40px !important;
   }
@@ -1665,8 +1674,7 @@ link[href="chrome://global/content/printPagination.css"]
 }
 
 /* about firefox dialog */
-@-moz-document url("chrome://browser/content/aboutDialog.xhtml")
-{
+@-moz-document url("chrome://browser/content/aboutDialog.xhtml") {
   #leftBox {
     background-image: url(chrome://branding/content/about-logo.svg) !important;
   }
@@ -1769,9 +1777,8 @@ link[href="chrome://global/content/printPagination.css"]
   }
 }
 
-/* page info popup. kinda lame */
-@-moz-document url(chrome://browser/content/pageinfo/pageInfo.xhtml)
-{
+/* page info popup */
+@-moz-document url(chrome://browser/content/pageinfo/pageInfo.xhtml) {
   :root {
     --focus-outline-color: var(--global-focus-outline-color) !important;
   }
@@ -1785,8 +1792,8 @@ link[href="chrome://global/content/printPagination.css"]
   }
 
   #main-window {
-    background-color: var(--arrowpanel-background) !important;
-    color: var(--arrowpanel-color) !important;
+    background-color: var(--uc-arrowpanel-background) !important;
+    color: var(--uc-arrowpanel-color) !important;
   }
 
   #topBar {
@@ -1802,7 +1809,7 @@ link[href="chrome://global/content/printPagination.css"]
   #viewGroup > radio {
     margin: 4px 0 !important;
     padding: 2px !important;
-    color: var(--arrowanel-color) !important;
+    color: var(--uc-arrowanel-color) !important;
     background: none !important;
     fill: currentColor;
     -moz-image-region: initial !important;
@@ -1823,6 +1830,10 @@ link[href="chrome://global/content/printPagination.css"]
   #viewGroup > radio[selected="true"] .radio-label-box,
   #viewGroup > radio:hover:active .radio-label-box {
     background-color: var(--uc-places-cell-hover-bgcolor) !important;
+  }
+
+  #viewGroup > radio[focused="true"] .radio-label-box {
+    outline: var(--global-focus-outline, auto) !important;
   }
 
   #viewGroup > radio .radio-icon {
@@ -1862,8 +1873,8 @@ link[href="chrome://global/content/printPagination.css"]
   treecolpicker,
   button {
     appearance: none !important;
-    background-color: var(--arrowpanel-dimmed) !important;
-    color: var(--arrowpanel-color) !important;
+    background-color: var(--uc-arrowpanel-dimmed) !important;
+    color: var(--uc-arrowpanel-color) !important;
     border-color: var(--button-solid-active-background) !important;
   }
 
@@ -1872,10 +1883,14 @@ link[href="chrome://global/content/printPagination.css"]
   #permList {
     appearance: none !important;
     background: var(--ui-secondary-bg) !important;
-    color: var(--arrowpanel-color) !important;
+    color: var(--uc-arrowpanel-color) !important;
     border-radius: var(--general-button-border-radius) !important;
     overflow: clip !important;
     border: 1px solid var(--button-solid-active-background) !important;
+  }
+
+  :is(tree, richlistbox, #permList):focus-visible {
+    outline: var(--global-focus-outline, auto) !important;
   }
 
   .permission {
@@ -1896,7 +1911,7 @@ link[href="chrome://global/content/printPagination.css"]
   }
 
   :is(treecol, treecolpicker):where(:hover) {
-    background-color: var(--arrowpanel-dimmed-further) !important;
+    background-color: var(--uc-arrowpanel-dimmed-further) !important;
   }
 
   treechildren {
@@ -1914,7 +1929,7 @@ link[href="chrome://global/content/printPagination.css"]
 
   treechildren::-moz-tree-row(selected) {
     background-color: var(--uc-places-cell-hover-bgcolor) !important;
-    color: var(--arrowpanel-color) !important;
+    color: var(--uc-arrowpanel-color) !important;
   }
 
   treechildren::-moz-tree-row(selected),
@@ -1924,7 +1939,7 @@ link[href="chrome://global/content/printPagination.css"]
   }
 
   treechildren::-moz-tree-cell-text {
-    color: var(--arrowpanel-color) !important;
+    color: var(--uc-arrowpanel-color) !important;
   }
 
   button {
@@ -2014,8 +2029,8 @@ link[href="chrome://global/content/printPagination.css"]
 
   #imagecontainerbox {
     background: var(--transparent-img-background-context) !important;
-    background-color: var(--arrowpanel-faint) !important;
-    fill: var(--arrowpanel-dimmed);
+    background-color: var(--uc-arrowpanel-faint) !important;
+    fill: var(--uc-arrowpanel-dimmed);
     fill-opacity: 0.5;
     border: 1px solid var(--button-solid-active-background) !important;
     border-radius: var(--general-button-border-radius);

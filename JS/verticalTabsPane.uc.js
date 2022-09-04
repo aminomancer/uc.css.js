@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Vertical Tabs Pane
-// @version        1.6.8
+// @version        1.6.9
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Create a vertical pane across from the sidebar that functions
@@ -1631,11 +1631,10 @@
               gFissionBrowser
             );
             if (contentPid) {
-              label += " (pid " + contentPid + ")";
-              if (gFissionBrowser) {
-                label += " [F";
-                if (framePids.length) label += " " + framePids.join(", ");
-                label += "]";
+              if (framePids && framePids.length) {
+                label += ` (pids ${contentPid}, ${framePids.sort().join(", ")})`;
+              } else {
+                label += ` (pid ${contentPid})`;
               }
             }
             if (linkedBrowser.docShellIsActive) label += " [A]";

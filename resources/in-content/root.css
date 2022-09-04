@@ -29,6 +29,12 @@
     background-color: var(--pdf-selection-bgcolor) !important;
     color: revert !important;
   }
+
+  /* optional dark mode for PDFs. to use, open the inspector
+  and change class="pdfViewer" to class="pdfViewer invert" */
+  .pdfViewer.invert {
+    filter: invert(1) brightness(1.15) contrast(0.85);
+  }
 }
 
 :read-only:focus:not(:focus-visible),

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           All Tabs Menu Expansion Pack
-// @version        2.1.1
+// @version        2.1.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Next to the "new tab" button in Firefox there's a V-shaped button that opens a
@@ -312,11 +312,10 @@
               gFissionBrowser
             );
             if (contentPid) {
-              label += " (pid " + contentPid + ")";
-              if (gFissionBrowser) {
-                label += " [F";
-                if (framePids.length) label += " " + framePids.join(", ");
-                label += "]";
+              if (framePids && framePids.length) {
+                label += ` (pids ${contentPid}, ${framePids.sort().join(", ")})`;
+              } else {
+                label += ` (pid ${contentPid})`;
               }
             }
             if (linkedBrowser.docShellIsActive) label += " [A]";
@@ -747,10 +746,14 @@
       }
     };
     tabsPanel._onCommand = function(e, tab) {
+      if (e.target.hasAttribute("activemedia-blocked")) {
+        if (tab.multiselected) this.gBrowser.resumeDelayedMediaOnMultiSelectedTabs(tab);
+        else tab.resumeDelayedMedia();
+        return;
+      }
       if (e.target.hasAttribute("toggle-mute")) {
-        tab.multiselected
-          ? this.gBrowser.toggleMuteAudioOnMultiSelectedTabs(tab)
-          : tab.toggleMuteAudio();
+        if (tab.multiselected) this.gBrowser.toggleMuteAudioOnMultiSelectedTabs(tab);
+        else tab.toggleMuteAudio();
         return;
       }
       if (e.target.hasAttribute("close-button")) {

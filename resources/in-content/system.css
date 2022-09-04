@@ -335,14 +335,12 @@
     margin-inline: -15.5px !important;
   }
 
-  link[rel="stylesheet"][href="chrome://global/content/elements/message-bar.css"] ~ .container
-  {
+  link[rel="stylesheet"][href="chrome://global/content/elements/message-bar.css"] ~ .container {
     padding: 8px !important;
     border-radius: 0 !important;
   }
 
-  link[rel="stylesheet"][href="chrome://global/content/elements/message-bar.css"] ~ .container .content
-  {
+  link[rel="stylesheet"][href="chrome://global/content/elements/message-bar.css"] ~ .container .content {
     display: flex !important;
     flex-flow: row nowrap;
     justify-content: space-between !important;
@@ -392,6 +390,31 @@
       var(--uc-warning-background)
     ) !important;
     --message-bar-text-color: var(--text-color) !important;
+  }
+
+  @-moz-document url-prefix("about:addons") {
+    .addon-badge {
+      border: 1px solid transparent !important;
+      width: 22px !important;
+      height: 22px !important;
+      border-radius: 11px !important;
+    }
+
+    .addon-badge-private-browsing-allowed {
+      background-color: var(--purple-40) !important;
+      border-color: var(--purple-30) !important;
+      background-position: center !important;
+      background-size: 15px !important;
+    }
+
+    .addon-badge-recommended {
+      background-color: hsl(40, 100%, 43%) !important;
+      border-color: hsl(40, 70%, 70%) !important;
+    }
+
+    .addon-badge-line {
+      background-size: 17px !important;
+    }
   }
 
   .home-section .section .selector {
@@ -959,8 +982,7 @@
 }
 
 /* firefox screenshots addon overlay */
-@-moz-document regexp("^moz-extension://.*/blank.html.*")
-{
+@-moz-document regexp("^moz-extension://.*/blank.html.*") {
   :root[uc-extension-id="screenshots@mozilla.org"] .all-buttons-container {
     background-color: var(--uc-content-box-background) !important;
     height: 88px !important;

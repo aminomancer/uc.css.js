@@ -118,7 +118,10 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
   filter: none !important;
 }
 
-#tabbrowser-tabs[hiddensoundplaying] ~ #alltabs-button > .toolbarbutton-badge-stack > .toolbarbutton-badge {
+#tabbrowser-tabs[hiddensoundplaying]
+  ~ #alltabs-button
+  > .toolbarbutton-badge-stack
+  > .toolbarbutton-badge {
   background: transparent url(chrome://userchrome/content/audioUnmutedButton.svg) center/contain !important;
   box-shadow: none !important;
   color: inherit !important;
@@ -328,16 +331,17 @@ toolbar
   background-color: var(--toolbarbutton-checked-background) !important;
 }
 
-#firefox-view-button:is(:focus-visible, [checked="true"]):not([open], :hover, :active) > .toolbarbutton-icon {
-	background: var(--toolbarbutton-checked-background) !important;
+#firefox-view-button:is(:focus-visible, [checked="true"]):not([open], :hover, :active)
+  > .toolbarbutton-icon {
+  background: var(--toolbarbutton-checked-background) !important;
 }
 
 #firefox-view-button:hover > .toolbarbutton-icon {
-	background: var(--toolbarbutton-hover-background) !important;
+  background: var(--toolbarbutton-hover-background) !important;
 }
 
 #firefox-view-button:is(:hover:active, [open]) > .toolbarbutton-icon {
-	background: var(--toolbarbutton-active-background) !important;
+  background: var(--toolbarbutton-active-background) !important;
 }
 
 toolbar .toolbarbutton-1:not([disabled], [open])[checked]:hover > .toolbarbutton-icon {
@@ -761,8 +765,7 @@ translucent with acrylic effect. enable layout.css.backdrop-filter.enabled */
   flex-shrink: 0.75 !important;
 }
 
-link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar
-{
+link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar {
   border-radius: 0 !important;
   overflow: hidden !important;
   background-color: var(--notification-box-bgcolor) !important;
@@ -803,8 +806,7 @@ link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infob
   transition: margin-top 100ms linear, max-width 100ms ease-in-out, opacity 100ms ease-in-out !important;
 }
 
-link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-content
-{
+link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-content {
   flex-flow: row nowrap !important;
   flex-grow: 2 !important;
   display: flex !important;
@@ -816,8 +818,7 @@ link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infob
   height: 100% !important;
 }
 
-link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-content .notification-message
-{
+link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-content .notification-message {
   padding-block: 6px !important;
   min-height: auto !important;
   text-overflow: ellipsis !important;
@@ -826,14 +827,12 @@ link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infob
   margin-inline: 0 !important;
 }
 
-link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar > .spacer
-{
+link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar > .spacer {
   flex-grow: 0.1 !important;
   display: none !important;
 }
 
-link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-content .notification-button-container
-{
+link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-content .notification-button-container {
   flex-flow: row nowrap !important;
   flex-grow: 2 !important;
   display: flex !important;
@@ -844,29 +843,25 @@ link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infob
   gap: 4px !important;
 }
 
-link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-content .notification-button
-{
+link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-content .notification-button {
   margin: revert !important;
   outline-offset: 0 !important;
 }
 
 .notificationbox-stack notification :is(button, toolbarbutton),
-link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar button
-{
+link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar button {
   border-radius: var(--in-content-button-border-radius) !important;
   font-weight: inherit !important;
   padding-block: 0 !important;
   outline-offset: 0 !important;
 }
 
-link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-content .notification-button-container > .notification-button.small
-{
+link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-content .notification-button-container > .notification-button.small {
   margin: 0 !important;
   font-weight: var(--uc-font-weight-bold, 600) !important;
 }
 
-link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar button .button-text
-{
+link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar button .button-text {
   margin-block: 2px 1px !important;
 }
 
@@ -876,8 +871,7 @@ notification .messageImage {
   margin: 8px 0 8px 6px !important;
 }
 
-link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar > .icon
-{
+link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar > .icon {
   margin-inline-start: 6px !important;
 }
 
@@ -904,15 +898,13 @@ notification .messageCloseButton > .toolbarbutton-icon {
 notification .messageCloseButton,
 notification .messageImage,
 link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-close,
-    link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .icon
-{
+link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .icon {
   transition: 0.25s transform var(--animation-easing-function),
     0.25s opacity var(--animation-easing-function) !important;
 }
 
 notification .messageCloseButton,
-link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-close
-{
+link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-close {
   width: 20px !important;
   height: 20px !important;
   margin: 0 4px !important;
@@ -925,25 +917,21 @@ link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infob
 }
 
 notification:is(:hover, :focus-within) .messageCloseButton,
-link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar:is(:hover, :focus-within) .notification-close
-{
+link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar:is(:hover, :focus-within) .notification-close {
   transform: none !important;
   opacity: 1 !important;
 }
 
-link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar button.ghost-button:not(.semi-transparent):enabled:is(:hover, :focus-visible)
-{
+link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar button.ghost-button:not(.semi-transparent):enabled:is(:hover, :focus-visible) {
   background-color: var(--in-content-button-background) !important;
 }
 
-link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar button.ghost-button:not(.semi-transparent):enabled:hover:active
-{
+link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar button.ghost-button:not(.semi-transparent):enabled:hover:active {
   background-color: var(--in-content-button-background-hover) !important;
 }
 
 notification:is(:hover, :focus-within) .messageImage,
-link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar:is(:hover, :focus-within) .icon
-{
+link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar:is(:hover, :focus-within) .icon {
   transform: translateX(15px) scale(0.5) !important;
   opacity: 0 !important;
 }
@@ -957,5 +945,11 @@ link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infob
 }
 
 #firefox-view-button {
-	list-style-image: url(chrome://userchrome/content/engines/searchfox.svg) !important;
+  list-style-image: var(--uc-firefox-view-icon) !important;
+}
+
+#firefox-view-button[attention] {
+  background-image: url(chrome://userchrome/content/indicator-tab-attention-purple.svg) !important;
+  background-size: 10px !important;
+  background-position: top 0 right 2px !important;
 }

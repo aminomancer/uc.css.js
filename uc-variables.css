@@ -40,6 +40,7 @@ menupopup {
   --lwt-toolbarbutton-icon-fill-attention: var(--attention-color) !important;
   --lwt-toolbar-field-icon-fill-attention: var(--attention-color) !important;
   --lwt-tab-attention-icon-color: var(--attention-color) !important;
+  --tab-attention-icon-color: var(--lwt-tab-attention-icon-color) !important;
   --lwt-background-alignment: right top !important;
   --lwt-background-tiling: no-repeat !important;
   --lwt-brighttext-url-color: var(--pink-action) !important;

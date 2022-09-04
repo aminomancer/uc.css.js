@@ -148,6 +148,7 @@ menuitem#menu_openAddons .menu-text,
 #menu_pageInfo .menu-text,
 menuitem:is(#sync-setup, #sync-unverifieditem, #sync-reauthitem) .menu-text,
 menuitem:is(#sync-enable, #sync-syncnowitem) .menu-text,
+menuitem#menu_openFirefoxView > .menu-text,
 menu#browserToolsMenu:not(.menu-iconic) > .menu-text,
 menuitem#menu_preferences > .menu-text,
 menuitem#menu_openHelp > .menu-text,
@@ -409,6 +410,7 @@ menuitem#menu_openAddons::before,
 #menu_pageInfo::before,
 menuitem:is(#sync-setup, #sync-unverifieditem, #sync-reauthitem)::before,
 menuitem:is(#sync-enable, #sync-syncnowitem)::before,
+menuitem#menu_openFirefoxView::before,
 menu#browserToolsMenu:not(.menu-iconic)::before,
 menuitem#menu_preferences::before,
 menuitem#menu_openHelp::before,
@@ -886,6 +888,10 @@ menuitem#sync-reauthitem::before {
 
 menuitem:is(#sync-enable, #sync-syncnowitem)::before {
   background-image: url(chrome://userchrome/content/skin/sync.svg);
+}
+
+menuitem#menu_openFirefoxView::before {
+  background-image: var(--uc-firefox-view-icon);
 }
 
 menu#browserToolsMenu:not(.menu-iconic)::before {
