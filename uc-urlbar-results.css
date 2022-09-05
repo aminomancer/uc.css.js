@@ -39,7 +39,7 @@ by underlining them (requires urlbarMods.uc.js) */
 }
 
 .urlbarView-row[selected]:not([dynamicType="quickactions"]) > .urlbarView-row-inner,
-.urlbarView-row:is([dynamicType="calculator"], [has-help="true"]) > .urlbarView-row-inner[selected],
+.urlbarView-row > .urlbarView-row-inner[selected],
 .urlbarView-help[selected] {
   background-color: var(--arrowpanel-dimmed-further) !important;
   fill-opacity: 1;
@@ -168,13 +168,11 @@ by underlining them (requires urlbarMods.uc.js) */
   height: 14px !important;
 }
 
-.urlbarView-tip-button,
-.urlbarView-row:is([type="tip"], [dynamicType="quickactions"])
-  > .urlbarView-row-inner
-  > .urlbarView-button-help {
+.urlbarView-button-help {
   min-width: var(--urlbar-one-offs-engine-width) !important;
   height: var(--urlbar-one-offs-engine-width) !important;
   padding: 0 !important;
+  margin-inline-end: 0 !important;
   border-radius: var(--toolbarbutton-border-radius) !important;
 }
 
@@ -187,11 +185,15 @@ by underlining them (requires urlbarMods.uc.js) */
   margin: revert !important;
 }
 
-.urlbarView-row:is([type="tip"], [dynamicType="quickactions"])
-  > .urlbarView-row-inner
-  > .urlbarView-button-help:is([selected], :focus-visible):not([disabled]) {
-  background-color: var(--button-hover-bgcolor) !important;
+.urlbarView-button-help:is([selected], :focus-visible):not([disabled]) {
+  background-color: var(--arrowpanel-dimmed-further) !important;
   outline: revert !important;
+}
+
+.urlbarView-row[has-buttons] > .urlbarView-row-inner {
+	display: inline-flex;
+	vertical-align: middle;
+	width: calc(100% - (var(--button-count, 0) * var(--urlbar-one-offs-engine-width, 28px)) - 4px) !important;
 }
 
 .urlbarView-favicon {
@@ -537,7 +539,7 @@ by underlining them (requires urlbarMods.uc.js) */
   flex-shrink: 0 !important;
 }
 
-.urlbarView-title-separator,
+.urlbarView-row .urlbarView-row-inner > .urlbarView-no-wrap > .urlbarView-title-separator,
 .urlbarView-dynamic-calculator-action::before,
 .urlbarView-dynamic-unitConversion-action::before {
   -moz-box-align: center;
@@ -575,13 +577,14 @@ by underlining them (requires urlbarMods.uc.js) */
 .urlbarView-row[selected] .urlbarView-title-separator::before,
 .urlbarView-row-inner[selected] .urlbarView-dynamic-calculator-action::before,
 .urlbarView-dynamic-unitConversion-action::before {
-  color: hsla(0, 0%, 100%, 0.6);
+  color: var(--panel-shortcut-focus);
 }
 
 .urlbarView-row[has-action] .urlbarView-title strong,
 .urlbarView-row[has-action] .urlbarView-title[isurl],
 .urlbarView-row[type="bookmark"]:not([has-url]) .urlbarView-title,
 .urlbarView-row[has-url] .urlbarView-title,
+.urlbarView-row:not([has-action]) .urlbarView-title:has(strong),
 .urlbarView-row .urlbarView-tag,
 .urlbarView-row:where([type="tabtosearch"], [type="tokenaliasengine"]) .urlbarView-title,
 .urlbarView-row:not([has-url])
@@ -602,6 +605,8 @@ by underlining them (requires urlbarMods.uc.js) */
 .urlbarView-row[has-action][selected] .urlbarView-title[isurl],
 .urlbarView-row[type="bookmark"][selected]:not([has-url]) .urlbarView-title,
 .urlbarView-row[has-url][selected] .urlbarView-title,
+.urlbarView-row[selected]:not([has-action]) .urlbarView-title:has(strong),
+.urlbarView-row:not([has-action]) .urlbarView-row-inner[selected] .urlbarView-title:has(strong),
 .urlbarView-row[selected] .urlbarView-tag,
 .urlbarView-row[selected]:not([has-url])
   .urlbarView-title[data-l10n-id="urlbar-result-action-search-w-engine"],
@@ -618,6 +623,7 @@ by underlining them (requires urlbarMods.uc.js) */
 .urlbarView-row[has-action] .urlbarView-title[isurl] strong,
 .urlbarView-row[type="bookmark"]:not([has-url]) .urlbarView-title strong,
 .urlbarView-row[has-url] .urlbarView-title strong,
+.urlbarView-row:not([has-action]) .urlbarView-title:has(strong) strong,
 .urlbarView-row .urlbarView-tag strong {
   font-weight: var(--urlbar-result-strong-font-weight, 500) !important;
   font-style: normal !important;
@@ -902,6 +908,10 @@ so you might wanna turn the animation off. I might even make it off by default. 
   top: -1.3em !important;
   opacity: 1 !important;
   color: var(--panel-description-color) !important;
+}
+
+.urlbarView-group-aria-label:empty {
+  display: none !important;
 }
 
 .urlbarView-row-inner {
