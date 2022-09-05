@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Restore pre-Proton Arrowpanels
-// @version        1.0.4
+// @version        1.1.0
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    The mother of all proton reversals. This script will
@@ -26,6 +26,31 @@
         };
       },
     });
+    spec.prototype.connectedCallback = function() {
+      // Create shadow DOM lazily if a panel is hidden. It helps to reduce
+      // cycles on startup.
+      if (!this.hidden) {
+        this.ensureInitialized();
+      }
+
+      if (this.isArrowPanel) {
+        if (!this.hasAttribute("flip")) {
+          this.setAttribute("flip", "both");
+        }
+        if (!this.hasAttribute("side")) {
+          this.setAttribute("side", "top");
+        }
+        this.setAttribute(
+          "position",
+          this.getAttribute("position")
+            ?.replace(/^bottom(right|left)/, "bottomcenter")
+            .replace(/^top(left|right)/, "$1center") || "bottomcenter topleft"
+        );
+        if (!this.hasAttribute("consumeoutsideclicks")) {
+          this.setAttribute("consumeoutsideclicks", "false");
+        }
+      }
+    };
     spec.prototype._setSideAttribute = function(event) {
       if (!this.isArrowPanel || !this.anchorNode) {
         return;
@@ -148,9 +173,24 @@
         this._prevFocus = Cu.getWeakReference(document.activeElement);
       }
     };
+    for (let popup of document.querySelectorAll(`panel:not([is])`)) {
+      popup.connectedCallback?.();
+    }
   });
 
   customElements.whenDefined("places-popup-arrow").then(spec => {
+    spec.prototype.connectedCallback = function() {
+      if (this.delayConnectedCallback()) {
+        return;
+      }
+
+      Object.getPrototypeOf(Object.getPrototypeOf(this)).connectedCallback.call(this);
+      this.initializeAttributeInheritance();
+
+      this.setAttribute("flip", "both");
+      this.setAttribute("side", "top");
+      this.setAttribute("position", "bottomcenter topright");
+    };
     spec.prototype._setSideAttribute = function(event) {
       if (!this.anchorNode) return;
 
@@ -238,7 +278,333 @@
 
       arrow.hidden = false;
     };
+    for (let popup of document.querySelectorAll(`[is="places-popup-arrow"]`)) {
+      popup.connectedCallback?.();
+    }
   });
+
+  let { PopupNotifications } = ChromeUtils.import("resource://gre/modules/PopupNotifications.jsm");
+  if (PopupNotifications.prototype._showPanel.name === "PopupNotifications_showPanel") {
+    const NOTIFICATION_EVENT_SHOWING = "showing";
+    const NOTIFICATION_EVENT_SHOWN = "shown";
+    const TELEMETRY_STAT_OFFERED = 0;
+    eval(
+      `PopupNotifications.prototype._showPanel = function ` +
+        PopupNotifications.prototype._showPanel
+          .toSource()
+          .replace(/^\(/, "")
+          .replace(/\)$/, "")
+          .replace(/^function\s*/, "")
+          .replace(/^PopupNotifications_showPanel\s*/, "")
+          .replace(/^(.)/, `uc_PopupNotifications_showPanel$1`)
+          .replace(/bottomleft/, "bottomcenter")
+    );
+  }
+
+  let { ExtensionsUI } = ChromeUtils.import("resource:///modules/ExtensionsUI.jsm");
+  if (ExtensionsUI.showPermissionsPrompt.name === "showPermissionsPrompt") {
+    const DEFAULT_EXTENSION_ICON = "chrome://mozapps/skin/extensions/extensionGeneric.svg";
+    function getTabBrowser(browser) {
+      while (browser.ownerGlobal.docShell.itemType !== Ci.nsIDocShell.typeChrome) {
+        browser = browser.ownerGlobal.docShell.chromeEventHandler;
+      }
+      let window = browser.ownerGlobal;
+      let viewType = browser.getAttribute("webextension-view-type");
+      if (viewType == "sidebar") {
+        window = window.browsingContext.topChromeWindow;
+      }
+      if (viewType == "popup" || viewType == "sidebar") {
+        browser = window.gBrowser.selectedBrowser;
+      }
+      return { browser, window };
+    }
+    eval(
+      `ExtensionsUI.showPermissionsPrompt = async function ` +
+        ExtensionsUI.showPermissionsPrompt
+          .toSource()
+          .replace(/^\(/, "")
+          .replace(/\)$/, "")
+          .replace(/^async\s*/, "")
+          .replace(/^function\s*/, "")
+          .replace(/^showPermissionsPrompt\s*/, "")
+          .replace(/^(.)/, `uc_showPermissionsPrompt$1`)
+          .replace(/bottomright/, "bottomcenter")
+    );
+    if (ExtensionsUI.showDefaultSearchPrompt.name === "showDefaultSearchPrompt") {
+      eval(
+        `ExtensionsUI.showDefaultSearchPrompt = async function ` +
+          ExtensionsUI.showDefaultSearchPrompt
+            .toSource()
+            .replace(/^\(/, "")
+            .replace(/\)$/, "")
+            .replace(/^function\s*/, "")
+            .replace(/^showDefaultSearchPrompt\s*/, "")
+            .replace(/^(.)/, `uc_showDefaultSearchPrompt$1`)
+            .replace(/bottomright/, "bottomcenter")
+      );
+    }
+  }
+
+  let { UITour } = ChromeUtils.import("resource:///modules/UITour.jsm");
+  if (UITour.showInfo.name === "showInfo") {
+    const lazy = {
+      log: { warn() {} },
+    };
+    eval(
+      `UITour.showInfo = async function ` +
+        UITour.showInfo
+          .toSource()
+          .replace(/^\(/, "")
+          .replace(/\)$/, "")
+          .replace(/^async\s*/, "")
+          .replace(/^function\s*/, "")
+          .replace(/^showInfo\s*/, "")
+          .replace(/^(.)/, `uc_showInfo$1`)
+          .replace(/bottomright/, "bottomcenter")
+    );
+  }
+
+  let { CustomizeMode } = ChromeUtils.import("resource:///modules/CustomizeMode.jsm");
+  if (CustomizeMode.prototype._showDownloadsAutoHidePanel.name === "_showDownloadsAutoHidePanel") {
+    eval(
+      `CustomizeMode.prototype._showDownloadsAutoHidePanel = async function ` +
+        CustomizeMode.prototype._showDownloadsAutoHidePanel
+          .toSource()
+          .replace(/^\(/, "")
+          .replace(/\)$/, "")
+          .replace(/^async\s*/, "")
+          .replace(/^function\s*/, "")
+          .replace(/^_showDownloadsAutoHidePanel\s*/, "")
+          .replace(/^(.)/, `uc_showDownloadsAutoHidePanel$1`)
+          .replace(/topleft topright/, "leftcenter topright")
+          .replace(/topright topleft/, "rightcenter topleft")
+    );
+  }
+
+  customElements.whenDefined("translation-notification").then(spec => {
+    if (spec.prototype.init.name === "init") {
+      eval(
+        `spec.prototype.init = function ` +
+          spec.prototype.init
+            .toSource()
+            .replace(/^\(/, "")
+            .replace(/\)$/, "")
+            .replace(/^function\s*/, "")
+            .replace(/^init\s*/, "")
+            .replace(/^(.)/, `uc_init$1`)
+            .replace(/bottomleft/, "bottomcenter")
+      );
+    }
+  });
+
+  let dummyNotification = document.createXULElement("notification", {
+    is: "translation-notification",
+  });
+  dummyNotification.remove();
+
+  if (DownloadsPanel && DownloadsPanel._openPopupIfDataReady.name === "_openPopupIfDataReady") {
+    eval(
+      `DownloadsPanel._openPopupIfDataReady = function ` +
+        DownloadsPanel._openPopupIfDataReady
+          .toSource()
+          .replace(/^\(/, "")
+          .replace(/\)$/, "")
+          .replace(/^function\s*/, "")
+          .replace(/^_openPopupIfDataReady\s*/, "")
+          .replace(/^(.)/, `uc_openPopupIfDataReady$1`)
+          .replace(/bottomright/, "bottomcenter")
+    );
+  }
+
+  if (PanelUI && PanelUI.showSubView.name === "showSubView") {
+    eval(
+      `PanelUI.showSubView = async function ` +
+        PanelUI.showSubView
+          .toSource()
+          .replace(/^\(/, "")
+          .replace(/\)$/, "")
+          .replace(/^async\s*/, "")
+          .replace(/^function\s*/, "")
+          .replace(/^showSubView\s*/, "")
+          .replace(/^(.)/, `uc_showSubView$1`)
+          .replace(/bottomright/, "bottomcenter")
+    );
+  }
+
+  if (PanelUI && PanelUI._showNotificationPanel.name === "_showNotificationPanel") {
+    eval(
+      `PanelUI._showNotificationPanel = function ` +
+        PanelUI._showNotificationPanel
+          .toSource()
+          .replace(/^\(/, "")
+          .replace(/\)$/, "")
+          .replace(/^function\s*/, "")
+          .replace(/^_showNotificationPanel\s*/, "")
+          .replace(/^(.)/, `uc_showNotificationPanel$1`)
+          .replace(/bottomright/, "bottomcenter")
+    );
+  }
+
+  if (gSharedTabWarning.willShowSharedTabWarning.name === "willShowSharedTabWarning") {
+    eval(
+      `gSharedTabWarning.willShowSharedTabWarning = function ` +
+        gSharedTabWarning.willShowSharedTabWarning
+          .toSource()
+          .replace(/^\(/, "")
+          .replace(/\)$/, "")
+          .replace(/^function\s*/, "")
+          .replace(/^willShowSharedTabWarning\s*/, "")
+          .replace(/^(.)/, `uc_willShowSharedTabWarning$1`)
+          .replace(/bottomleft/, "bottomcenter")
+    );
+  }
+
+  if (gProtectionsHandler.showProtectionsPopup.name === "showProtectionsPopup") {
+    eval(
+      `gProtectionsHandler.showProtectionsPopup = function ` +
+        gProtectionsHandler.showProtectionsPopup
+          .toSource()
+          .replace(/^\(/, "")
+          .replace(/\)$/, "")
+          .replace(/^function\s*/, "")
+          .replace(/^showProtectionsPopup\s*/, "")
+          .replace(/^(.)/, `uc_showProtectionsPopup$1`)
+          .replace(/bottomleft/, "bottomcenter")
+    );
+  }
+
+  if (gIdentityHandler._openPopup.name === "_openPopup") {
+    eval(
+      `gIdentityHandler._openPopup = function ` +
+        gIdentityHandler._openPopup
+          .toSource()
+          .replace(/^\(/, "")
+          .replace(/\)$/, "")
+          .replace(/^function\s*/, "")
+          .replace(/^_openPopup\s*/, "")
+          .replace(/^(.)/, `uc_openPopup$1`)
+          .replace(/bottomleft/, "bottomcenter")
+    );
+  }
+
+  if (BrowserPageActions.togglePanelForAction.name === "togglePanelForAction") {
+    eval(
+      `BrowserPageActions.togglePanelForAction = function ` +
+        BrowserPageActions.togglePanelForAction
+          .toSource()
+          .replace(/^\(/, "")
+          .replace(/\)$/, "")
+          .replace(/^function\s*/, "")
+          .replace(/^togglePanelForAction\s*/, "")
+          .replace(/^(.)/, `uc_togglePanelForAction$1`)
+          .replace(/bottomright/, "bottomcenter")
+    );
+  }
+
+  if (BrowserPageActions.showPanel.name === "showPanel") {
+    eval(
+      `BrowserPageActions.showPanel = function ` +
+        BrowserPageActions.showPanel
+          .toSource()
+          .replace(/^\(/, "")
+          .replace(/\)$/, "")
+          .replace(/^function\s*/, "")
+          .replace(/^showPanel\s*/, "")
+          .replace(/^(.)/, `uc_showPanel$1`)
+          .replace(/bottomright/, "bottomcenter")
+    );
+  }
+
+  function removeNotificationOnEnd(notification, installs) {
+    let count = installs.length;
+
+    function maybeRemove(install) {
+      install.removeListener(this);
+
+      if (--count == 0) {
+        // Check that the notification is still showing
+        let current = PopupNotifications.getNotification(notification.id, notification.browser);
+        if (current === notification) {
+          notification.remove();
+        }
+      }
+    }
+
+    for (let install of installs) {
+      install.addListener({
+        onDownloadCancelled: maybeRemove,
+        onDownloadFailed: maybeRemove,
+        onInstallFailed: maybeRemove,
+        onInstallEnded: maybeRemove,
+      });
+    }
+  }
+
+  if (gXPInstallObserver.showInstallConfirmation.name === "showInstallConfirmation") {
+    eval(
+      `gXPInstallObserver.showInstallConfirmation = function ` +
+        gXPInstallObserver.showInstallConfirmation
+          .toSource()
+          .replace(/^\(/, "")
+          .replace(/\)$/, "")
+          .replace(/^function\s*/, "")
+          .replace(/^showInstallConfirmation\s*/, "")
+          .replace(/^(.)/, `uc_showInstallConfirmation$1`)
+          .replace(/bottomright/, "bottomcenter")
+    );
+  }
+
+  if (gXPInstallObserver.observe.name === "observe") {
+    eval(
+      `gXPInstallObserver.observe = function ` +
+        gXPInstallObserver.observe
+          .toSource()
+          .replace(/^\(/, "")
+          .replace(/\)$/, "")
+          .replace(/^function\s*/, "")
+          .replace(/^observe\s*/, "")
+          .replace(/^(.)/, `uc_observe$1`)
+          .replace(/bottomright/, "bottomcenter")
+    );
+  }
+
+  eval(
+    `StarUI.showEditBookmarkPopup = async function ` +
+      StarUI.showEditBookmarkPopup
+        .toSource()
+        .replace(/^\(/, "")
+        .replace(/\)$/, "")
+        .replace(/async showEditBookmarkPopup/, "")
+        .replace(/async function\s*/, "")
+        .replace(/bottomright/, "bottomcenter")
+  );
+
+  gPermissionPanel._popupPosition = "bottomcenter topleft";
+
+  try {
+    document
+      .getElementById("panicButtonNotificationTemplate")
+      .content.getElementById("panic-button-success-notification").position =
+      "bottomcenter topright";
+  } catch (error) {}
+  try {
+    document
+      .getElementById("extensionNotificationTemplate")
+      .content.getElementById("extension-notification-panel").position = "bottomcenter topright";
+  } catch (error) {}
+  try {
+    document
+      .getElementById("confirmation-hint-wrapper")
+      .content.getElementById("confirmation-hint").position = "bottomcenter topright";
+  } catch (error) {}
+  try {
+    document
+      .getElementById("pageActionPanelTemplate")
+      .content.getElementById("pageActionPanel").position = "bottomcenter topright";
+  } catch (error) {}
+  document.getElementById("appMenu-popup").position = "bottomcenter topright";
+  document.getElementById("widget-overflow").position = "bottomcenter topright";
+  document.getElementById("sidebarMenu-popup").position = "bottomcenter topright";
 
   function init() {
     ConfirmationHint = {
@@ -367,12 +733,67 @@
   }
 
   let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(Ci.nsIStyleSheetService);
-  let uri = Services.io.newURI(
-    "data:text/css;charset=UTF=8," +
-      encodeURIComponent(
-        `panel[type="arrow"][side="top"],panel[type="arrow"][side="bottom"]{margin-inline:-20px;}panel[type="arrow"][side="left"],panel[type="arrow"][side="right"]{margin-block:-20px;}:is(panel,menupopup)::part(arrow){-moz-context-properties:fill,stroke;fill:var(--arrowpanel-background);stroke:var(--arrowpanel-border-color);}:is(panel,menupopup)[side="top"]::part(arrow),:is(panel,menupopup)[side="bottom"]::part(arrow){list-style-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="10"><path d="M 0,10 L 10,0 20,10 z" fill="context-stroke"/><path d="M 1,10 L 10,1 19,10 z" fill="context-fill"/></svg>');position:relative;margin-inline:10px;}:is(panel,menupopup)[side="top"]::part(arrow){margin-bottom:-5px;}:is(panel,menupopup)[side="bottom"]::part(arrow){transform:scaleY(-1);margin-top:-5px;}:is(panel,menupopup)[side="left"]::part(arrow),:is(panel,menupopup)[side="right"]::part(arrow){list-style-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="20"><path d="M 10,0 L 0,10 10,20 z" fill="context-stroke"/><path d="M 10,1 L 1,10 10,19 z" fill="context-fill"/></svg>');position:relative;margin-block:10px;}:is(panel,menupopup)[side="left"]::part(arrow){margin-right:-5px;}:is(panel,menupopup)[side="right"]::part(arrow){transform:scaleX(-1);margin-left:-5px;}#confirmation-hint[hidearrow]::part(arrowbox){visibility:hidden;}`
-      )
-  );
+  let css = /* css */ `panel[type="arrow"][side="top"],
+  panel[type="arrow"][side="bottom"] {
+    margin-inline: -20px;
+  }
+  panel[type="arrow"][side="left"],
+  panel[type="arrow"][side="right"] {
+    margin-block: -20px;
+  }
+  #BMB_bookmarksPopup[side="top"],
+  #BMB_bookmarksPopup[side="bottom"] {
+    margin-inline: -20px;
+  }
+  #BMB_bookmarksPopup[side="left"],
+  #BMB_bookmarksPopup[side="right"] {
+    margin-block: -20px;
+  }
+  @media (-moz-platform: macos) {
+    #BMB_bookmarksPopup[side="top"],
+    #BMB_bookmarksPopup[side="bottom"] {
+      margin-inline: -17px;
+    }
+    #BMB_bookmarksPopup[side="left"],
+    #BMB_bookmarksPopup[side="right"] {
+      margin-block: -17px;
+    }
+  }
+  :is(panel, menupopup)::part(arrow) {
+    -moz-context-properties: fill, stroke;
+    fill: var(--arrowpanel-background);
+    stroke: var(--arrowpanel-border-color);
+  }
+  :is(panel, menupopup)[side="top"]::part(arrow),
+  :is(panel, menupopup)[side="bottom"]::part(arrow) {
+    list-style-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="10"><path d="M 0,10 L 10,0 20,10 z" fill="context-stroke"/><path d="M 1,10 L 10,1 19,10 z" fill="context-fill"/></svg>');
+    position: relative;
+    margin-inline: 10px;
+  }
+  :is(panel, menupopup)[side="top"]::part(arrow) {
+    margin-bottom: -5px;
+  }
+  :is(panel, menupopup)[side="bottom"]::part(arrow) {
+    transform: scaleY(-1);
+    margin-top: -5px;
+  }
+  :is(panel, menupopup)[side="left"]::part(arrow),
+  :is(panel, menupopup)[side="right"]::part(arrow) {
+    list-style-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="20"><path d="M 10,0 L 0,10 10,20 z" fill="context-stroke"/><path d="M 10,1 L 1,10 10,19 z" fill="context-fill"/></svg>');
+    position: relative;
+    margin-block: 10px;
+  }
+  :is(panel, menupopup)[side="left"]::part(arrow) {
+    margin-right: -5px;
+  }
+  :is(panel, menupopup)[side="right"]::part(arrow) {
+    transform: scaleX(-1);
+    margin-left: -5px;
+  }
+  #confirmation-hint[hidearrow]::part(arrowbox) {
+    visibility: hidden;
+  }`;
+  let uri = Services.io.newURI("data:text/css;charset=UTF=8," + encodeURIComponent(css));
   if (!sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
 
   if (gBrowserInit.delayedStartupFinished) {

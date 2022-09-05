@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Hide Tracking Protection Icon on Custom New Tab Page
-// @version        1.3.2
+// @version        1.3.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    By default, Firefox hides the tracking protection while 1)
@@ -93,8 +93,8 @@
             .replace(/async showEditBookmarkPopup/, "")
             .replace(/async function\s*/, "")
             .replace(
-              /this\.panel\.openPopup\(BookmarkingUI\.anchor, \"bottomcenter topright\"\)\;/,
-              `this.panel.openPopup(hideOnNTP?._getAnchor(this.panel) || BookmarkingUI.anchor, \"bottomcenter topright\");`
+              /BookmarkingUI\.anchor/,
+              `hideOnNTP?._getAnchor(this.panel) || BookmarkingUI.anchor`
             )
       );
       // the main part of this script. hide the tracking protection icon on new tab page.

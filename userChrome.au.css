@@ -89,16 +89,6 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
     margin-top: 4px;
   }
 
-  panel[type="arrow"][side="top"],
-  panel[type="arrow"][side="bottom"] {
-    margin-inline: -20px;
-  }
-
-  panel[type="arrow"][side="left"],
-  panel[type="arrow"][side="right"] {
-    margin-block: -20px;
-  }
-
   :is(panel, menupopup)::part(arrow) {
     -moz-context-properties: fill, stroke;
     fill: var(--arrowpanel-background);
