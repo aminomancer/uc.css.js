@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Extension Options Panel
-// @version        1.8.6
+// @version        1.8.7
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    This script creates a toolbar button that opens a popup panel
@@ -399,8 +399,8 @@ class ExtensionOptionsWidget {
     extensions
       .sort((a, b) => {
         // get sorted by enabled state...
-        let ka = (enabledFirst ? Number(a.isActive) : "") + a.name.toLowerCase();
-        let kb = (enabledFirst ? Number(b.isActive) : "") + b.name.toLowerCase();
+        let ka = (enabledFirst ? Number(!a.isActive) : "") + a.name.toLowerCase();
+        let kb = (enabledFirst ? Number(!b.isActive) : "") + b.name.toLowerCase();
         return ka < kb ? -1 : 1;
       })
       .forEach(addon => {
