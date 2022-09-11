@@ -53,6 +53,10 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
     --panel-padding: var(--arrowpanel-padding);
   }
 
+  panel[type="arrow"] {
+    margin: -7px;
+  }
+
   panel[type="autocomplete-richlistbox"] {
     --panel-padding: var(--menupopup-inner-padding);
     --panel-background: var(--arrowpanel-background);

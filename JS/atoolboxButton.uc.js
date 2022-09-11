@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Toolbox Button
-// @version        1.2.8
+// @version        1.2.9
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Adds a new toolbar button that 1) opens the content toolbox on left click;
@@ -89,12 +89,19 @@
     /^chrome:\/\/browser\/content\/browser.(xul||xhtml)$/i.test(location) &&
     !CustomizableUI.getPlacementOfWidget("toolbox-button", true)
   ) {
-    const { require } = ChromeUtils.import("resource://devtools/shared/loader/Loader.jsm");
-    const { BrowserToolboxLauncher } = ChromeUtils.import(
-      "resource://devtools/client/framework/browser-toolbox/Launcher.jsm"
+    const lazy = {};
+    ChromeUtils.defineESModuleGetters(lazy, {
+      BrowserToolboxLauncher:
+        "resource://devtools/client/framework/browser-toolbox/Launcher.sys.mjs",
+    });
+    XPCOMUtils.defineLazyModuleGetters(lazy, {
+      require: "resource://devtools/shared/loader/Loader.jsm",
+    });
+    XPCOMUtils.defineLazyGetter(
+      lazy,
+      "Actor",
+      () => lazy.require("devtools/shared/protocol/Actor").Actor
     );
-    const { Actor } = require("devtools/shared/protocol/Actor");
-    const STATES = { DETACHED: "detached", EXITED: "exited", RUNNING: "running", PAUSED: "paused" };
 
     CustomizableUI.createWidget({
       id: "toolbox-button",
@@ -295,7 +302,7 @@
               aDoc.defaultView.key_toggleToolbox.click();
               break;
             case this.mouseConfig.browserToolbox:
-              BrowserToolboxLauncher.getBrowserToolboxSessionState() // check if a browser toolbox window is already open
+              lazy.BrowserToolboxLauncher.getBrowserToolboxSessionState() // check if a browser toolbox window is already open
                 ? CustomHint.show(toolbarbutton, l10n.alreadyOpenMsg, {
                     event: e,
                     hideCheck: true,
@@ -388,7 +395,7 @@
         // listen for toolboxes opening and closing
         function toolboxObserver(sub, top, _data) {
           // whether a toolbox is open
-          let state = BrowserToolboxLauncher.getBrowserToolboxSessionState();
+          let state = lazy.BrowserToolboxLauncher.getBrowserToolboxSessionState();
           // set toolbar button's badge content
           badgeLabel.textContent = state ? 1 : "";
           // if toolbox is open and autohide is not already enabled, enable it
@@ -415,7 +422,7 @@
         }
 
         function destroyThreadActor() {
-          if (this._state == STATES.PAUSED) {
+          if (this._state == "paused") {
             this.doResume();
           }
 
@@ -441,9 +448,9 @@
           this._threadLifetimePool.destroy();
           this._threadLifetimePool = null;
           this._dbg = null;
-          this._state = STATES.EXITED;
+          this._state = "exited";
 
-          Actor.prototype.destroy.call(this);
+          lazy.Actor.prototype.destroy.call(this);
           // this leads back to toolboxObserver in 200ms
           setTimeout(() => Services.obs.notifyObservers(null, "devtools-thread-destroyed"), 200);
         }

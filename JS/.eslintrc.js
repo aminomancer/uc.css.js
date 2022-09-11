@@ -1,17 +1,4 @@
 module.exports = {
-  env: {
-    node: false,
-    browser: true,
-    es2021: true,
-    "mozilla/browser-window": true,
-    "mozilla/jsm": true,
-    // "mozilla/chrome-worker": true,
-    // "mozilla/frame-script": true,
-    // "mozilla/privileged": true,
-    // "mozilla/simpletest": true,
-    // "mozilla/sjs": true,
-    // "mozilla/xpcshell": true,
-  },
   parserOptions: {
     sourceType: "script",
     ecmaVersion: "latest",
@@ -38,10 +25,5 @@ module.exports = {
     SyncedTabsPanelList: "writable",
     SyncedTabsDeckComponent: "writable",
     syncedTabsDeckComponent: "writable",
-  },
-  rules: {
-    "no-eval": "off",
-    "mozilla/valid-lazy": "off",
-    "no-unused-vars": "off",
   },
 };

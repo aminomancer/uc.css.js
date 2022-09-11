@@ -425,15 +425,16 @@ panel[type="autocomplete-richlistbox"]
 
 @-moz-document url("chrome://global/content/pictureinpicture/player.xhtml") {
   :root {
-    --panel-bgcolor: var(--in-content-button-highlight-dark) !important;
-  }
-
-  .box {
-    background-color: var(--panel-bgcolor) !important;
-  }
-
-  .arrow {
-    border-top-color: var(--panel-bgcolor) !important;
+    --panel-bgcolor: var(--in-content-box-bg-dark) !important;
+    --checkbox-border-color: var(--in-content-box-border-color) !important;
+    --checkbox-checked-border-color: transparent !important;
+    --checkbox-unchecked-bgcolor: var(--in-content-button-background) !important;
+    --checkbox-unchecked-hover-bgcolor: var(--in-content-button-background-hover) !important;
+    --checkbox-unchecked-active-bgcolor: var(--in-content-button-background-active) !important;
+    --checkbox-checked-bgcolor: var(--in-content-primary-button-background) !important;
+    --checkbox-checked-color: var(--in-content-primary-button-text-color) !important;
+    --checkbox-checked-hover-bgcolor: var(--in-content-primary-button-background-hover) !important;
+    --checkbox-checked-active-bgcolor: var(--in-content-primary-button-background-active) !important;
   }
 
   .control-item {
@@ -442,7 +443,7 @@ panel[type="autocomplete-richlistbox"]
     background-color: var(--btn-bg-color) !important;
     background-image: var(--acrylic-texture), var(--pip-icon) !important; */
     background-image: var(--pip-icon) !important;
-    background-color: var(--in-content-button-highlight-dark) !important;
+    background-color: hsla(0, 0%, 12%, 0.8) !important;
     fill: currentColor !important;
     stroke: currentColor !important;
     -moz-context-properties: fill, stroke !important;
@@ -456,7 +457,12 @@ panel[type="autocomplete-richlistbox"]
 
   #controls[keying] button:focus-visible {
     outline-style: auto !important;
-    box-shadow: 1px 2px 5px #000;
+    box-shadow: 0 0 5px #111 !important;
+  }
+
+  .control-item:hover,
+  #controls[keying] button:focus-visible {
+    background-color: hsla(0, 0%, 18%, 0.95) !important;
   }
 
   #close {
@@ -474,6 +480,11 @@ panel[type="autocomplete-richlistbox"]
     --pip-icon: url(chrome://userchrome/content/glyph-play-12.svg);
   }
 
+  #seekBackward,
+  #seekForward {
+    --pip-icon: url(chrome://userchrome/content/skin/reload.svg);
+  }
+
   #controls.muted #audio {
     --pip-icon: url(chrome://userchrome/content/audioMutedButton.svg);
   }
@@ -488,6 +499,88 @@ panel[type="autocomplete-richlistbox"]
 
   #closed-caption {
     --pip-icon: url(chrome://userchrome/content/material/closed-caption-settings.svg);
+  }
+
+  body:fullscreen #fullscreen {
+    --pip-icon: url(chrome://userchrome/content/skin/fullscreen-exit.svg);
+  }
+
+  body:not(:fullscreen) #fullscreen {
+    --pip-icon: url(chrome://userchrome/content/skin/fullscreen.svg);
+  }
+
+  #seekForward:-moz-locale-dir(rtl),
+  #seekBackward:-moz-locale-dir(ltr),
+  #unpip:-moz-locale-dir(rtl),
+  #closed-caption:dir(rtl) {
+    transform: scaleX(-1);
+  }
+
+  .box {
+    background-color: var(--panel-bgcolor) !important;
+  }
+
+  .arrow {
+    border-top-color: var(--panel-bgcolor) !important;
+  }
+
+  .slider {
+    background-color: var(--in-content-button-background) !important;
+  }
+
+  .slider::before {
+    background-color: var(--in-content-primary-button-text-color) !important;
+  }
+
+  .slider:hover {
+    background-color: var(--in-content-button-background-hover) !important;
+  }
+
+  .slider:hover:active {
+    background-color: var(--in-content-button-background-active) !important;
+  }
+
+  input:checked + .slider {
+    background-color: var(--purple-40) !important;
+  }
+
+  input:checked + .slider:hover {
+    background-color: var(--purple-35) !important;
+  }
+
+  input:checked + .slider:hover:active {
+    background-color: var(--purple-30) !important;
+  }
+
+  .box label:not(.switch) {
+    display: flex !important;
+    align-items: center !important;
+    align-content: center !important;
+    flex-flow: row nowrap !important;
+    gap: 8px !important;
+  }
+
+  .font-size-selection > label > input[type="radio"] {
+    appearance: radio !important;
+    margin: 0 !important;
+  }
+
+  @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
+    .box {
+      font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
+      font-kerning: normal !important;
+      font-weight: var(--uc-font-weight-semibold, 400) !important;
+      font-size: 14px !important;
+      line-height: 14px !important;
+    }
+
+    .box label:not(.switch) {
+      font-family: inherit !important;
+    }
+
+    .bold {
+      font-weight: var(--uc-font-weight-bold, 500) !important;
+    }
   }
 }
 
@@ -680,10 +773,11 @@ rtl languages. adjust the border radius accordingly */
   border-bottom-right-radius: 5px !important;
 }
 
-/* hide the background overlay */
+/* modal dialog background overlay */
 .dialogOverlay[topmost="true"],
 #window-modal-dialog::backdrop {
-  background-color: transparent !important;
+  /* background-color: transparent !important; */
+  background-color: hsla(240, 4%, 12%, 0.45) !important;
 }
 
 /* make the box shadow even, i hate offset drop shadows */

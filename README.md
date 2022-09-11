@@ -887,11 +887,15 @@ For those who are curious, this will override the tab markup template and some m
 
 #### [Restore pre-Proton Arrowpanels](/JS/restorePreProtonArrowpanels.uc.js):
 
-✨ The mother of all Proton reversals. Bring back the arrows at the top corner of <i>arrow</i>panels (like the app menu or the history button's popup panel).<details><summary>💬 <i><b>More details...</b></i></summary>
+✨ Bring back the arrows at the top corner of panels (like the app menu or the history button's popup panel).<details><summary>💬 <i><b>Requires some additional files...</b></i></summary>
 
-Probably my least favorite "feature" of the UI refresh has been the removal of arrows from arrowpanels. I'd call it misguided, except I can't figure out what guided it in the first place. I mean — they're called <i>arrow</i>panels, and that should really say it all. The point of arrows is to point at something. In this case, to point at the node to which the panel is anchored. Some might think it's enough that the popup simply be anchored to the node. That might be true for small elements like tooltips. But panels are big enough that they can be lined up with many nodes, especially when they're opened on a toolbar that's full of other buttons.
+This script will basically restore the arrows at the corner of panels that point at the element to which the panel is anchored. But in order to do that, you also need to install these files from the [resources/script-override](/resources/script-override/) folder: [panel.js](/resources/script-override/panel.js), [places-menupopup.js](/resources/script-override/places-menupopup.js), and [translation-notification.js](/resources/script-override/translation-notification.js). After downloading them and placing them in your own `resources/script-override` folder, add the following lines to your [utils/chrome.manifest](/utils/chrome.manifest) file:
 
-It's not like there aren't other ways to see where the panel is anchored, but why give the user less information? Moreover, don't the arrows look good? This change, more than any of the other ones, feels like change for change's sake. Stripping things down merely for the sake of simplifying them. Anyway, this script will basically restore a bunch of stuff that was removed in Nightly 96.0a1 — the CSS, JS, and markup. So in this sense it's a complete package and does not require duskFox, but you will probably want it if you use my theme. Arrowpanels' glory days are not behind them, not if I have anything to say about it...
+```
+override chrome://global/content/elements/panel.js ../resources/script-override/panel.js
+override chrome://browser/content/places/places-menupopup.js ../resources/script-override/places-menupopup.js
+override chrome://browser/content/translation-notification.js ../resources/script-override/translation-notification.js
+```
 
 </details>
 

@@ -676,6 +676,8 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
       font-kerning: normal !important;
     }
 
+    .PanelUI-fxa-service-description-label,
+    .PanelUI-remotetabs-instruction-label,
     .pointerlockfswarning-domain-text,
     .pointerlockfswarning-generic-text {
       font-weight: var(--uc-font-weight-thin, 300) !important;

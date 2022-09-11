@@ -14,6 +14,14 @@ override chrome://global/skin/arrowscrollbox.css ../resources/layout/arrowscroll
 # Override the tab element to restore the tab sound button and move the close button, among other things.
 override chrome://browser/content/tabbrowser-tab.js ../resources/script-override/tabMods.uc.js
 
+# These 3 are necessary for restorePreProtonArrowpanels.uc.js
+# Restore the arrow for panels.
+override chrome://global/content/elements/panel.js ../resources/script-override/panel.js
+# Restore the arrow for places menupopups (like the bookmarks toolbar button popup).
+override chrome://browser/content/places/places-menupopup.js ../resources/script-override/places-menupopup.js
+# Restore the arrow for translation notification panel.
+override chrome://browser/content/translation-notification.js ../resources/script-override/translation-notification.js
+
 # Override the notification message bar element to move the close button to the left in tab order.
 override chrome://global/content/elements/message-bar.js ../resources/script-override/message-bar.js
 

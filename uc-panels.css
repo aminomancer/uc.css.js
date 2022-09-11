@@ -155,10 +155,6 @@ this connects with .panel-subview-body rules in userChrome.au.css */
   margin-top: calc(-1px - var(--uc-panel-top-offset, 0px)) !important;
 }
 
-panel[type="arrow"][side="top"] {
-  margin-top: -7px;
-}
-
 #confirmation-hint {
   margin-top: -9px;
 }

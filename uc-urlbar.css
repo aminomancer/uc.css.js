@@ -1015,6 +1015,8 @@ urlbarMods.uc.js assigns them custom classes .aboutBlockedPage and
 
 #notification-popup-box {
   background: none !important;
+  height: revert !important;
+  border-radius: revert !important;
 }
 
 #identity-box[pageproxystate="invalid"] :is(#identity-permission-box, #notification-popup-box) {
