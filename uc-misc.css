@@ -338,6 +338,7 @@ progress[paused]:indeterminate::-moz-progress-bar {
   background-image: var(--acrylic-texture) !important;
   backdrop-filter: var(--acrylic-blur) !important; */
 
+  padding: revert !important;
   border: 1px none var(--tooltip-border-color) !important;
   border-top-style: solid !important;
   box-shadow: var(--tooltip-box-shadow) !important;
