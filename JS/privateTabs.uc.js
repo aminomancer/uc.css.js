@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Private Tabs
-// @version        1.2.1
+// @version        1.2.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    An fx-autoconfig port of Private Tab by xiaoxiaoflood. Adds
@@ -48,12 +48,14 @@ class PrivateTabManager {
     // the internal duplicateTab method doesn't pass the skipAnimation parameter
     // to addTrustedTab. so we need to make our own function, which requires us
     // to access some private objects.
-    let { SessionStoreInternal, TAB_CUSTOM_VALUES } = ChromeUtils.import(
+    // eslint-disable-next-line mozilla/use-chromeutils-import
+    let { SessionStoreInternal, TAB_CUSTOM_VALUES } = Cu.import(
       "resource:///modules/sessionstore/SessionStore.jsm"
     );
     this.SSI = SessionStoreInternal;
     this.TAB_CUSTOM_VALUES = TAB_CUSTOM_VALUES;
     XPCOMUtils.defineLazyModuleGetters(this, {
+      Management: "resource://gre/modules/Extension.jsm",
       TabState: "resource:///modules/sessionstore/TabState.jsm",
       TabStateFlusher: "resource:///modules/sessionstore/TabStateFlusher.jsm",
       ContextualIdentityService: "resource://gre/modules/ContextualIdentityService.jsm",
@@ -322,19 +324,17 @@ class PrivateTabManager {
       );
     }
 
-    let { UUIDMap } = ChromeUtils.import("resource://gre/modules/Extension.jsm");
+    const { WebExtensionPolicy } = Cu.getGlobalForObject(Services);
     let TST_ID = "treestyletab@piro.sakura.ne.jp";
-    this.TST_UUID = UUIDMap.get(TST_ID, false);
-
-    if (this.TST_UUID) this.setTstStyle(this.TST_UUID);
-    if (AddonManager && location.href === "chrome://browser/content/browser.xhtml") {
-      AddonManager.addAddonListener({
-        onInstalled: addon => {
-          if (addon.id == TST_ID) this.setTstStyle(UUIDMap.get(TST_ID, false));
-        },
-        onUninstalled: addon => {
-          if (addon.id == TST_ID) this.sss.unregisterSheet(this.TST_STYLE.url, this.TST_STYLE.type);
-        },
+    this.setTstStyle(WebExtensionPolicy.getByID(TST_ID)?.getURL());
+    if (location.href === "chrome://browser/content/browser.xhtml") {
+      this.Management.on("ready", (_ev, extension) => {
+        if (extension.id === TST_ID) this.setTstStyle(extension.getURL());
+      });
+      this.Management.on("uninstall", (_ev, extension) => {
+        if (extension.id === TST_ID && this.TST_STYLE) {
+          this.sss.unregisterSheet(this.TST_STYLE.uri, this.TST_STYLE.type);
+        }
       });
     }
 
@@ -603,17 +603,20 @@ class PrivateTabManager {
     };
   }
 
-  setTstStyle(uuid) {
+  setTstStyle(baseURL) {
+    if (!baseURL) return;
     this.TST_STYLE = {
-      url: Services.io.newURI(
+      uri: Services.io.newURI(
         "data:text/css;charset=UTF-8," +
           encodeURIComponent(
-            `@-moz-document url-prefix(moz-extension://${uuid}/sidebar/sidebar.html) { .tab.contextual-identity-firefox-container-${this.container.userContextId} .label-content { text-decoration: underline !important; text-decoration-color: -moz-nativehyperlinktext !important; text-decoration-style: dashed !important; } .tab.contextual-identity-firefox-container-${this.container.userContextId} tab-favicon { border-bottom: 1px dashed -moz-nativehyperlinktext !important;}}`
+            `@-moz-document url-prefix(${baseURL}sidebar/sidebar.html) { .tab.contextual-identity-firefox-container-${this.container.userContextId} .label-content { text-decoration: underline !important; text-decoration-color: -moz-nativehyperlinktext !important; text-decoration-style: dashed !important; } .tab.contextual-identity-firefox-container-${this.container.userContextId} tab-favicon { border-bottom: 1px dashed -moz-nativehyperlinktext !important;}}`
           )
       ),
       type: this.sss.USER_SHEET,
     };
-    this.sss.loadAndRegisterSheet(this.TST_STYLE.url, this.TST_STYLE.type);
+    if (!this.sss.sheetRegistered(this.TST_STYLE.uri, this.TST_STYLE.type)) {
+      this.sss.loadAndRegisterSheet(this.TST_STYLE.uri, this.TST_STYLE.type);
+    }
   }
 }
 

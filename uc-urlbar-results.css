@@ -468,15 +468,6 @@ by underlining them (requires urlbarMods.uc.js) */
   margin: 0 !important;
 }
 
-.urlbarView .urlbarView-row[type="tip"] > .urlbarView-row-inner {
-  border: none !important;
-  padding-block: 6px !important;
-  margin: 0 !important;
-  min-height: unset !important;
-  max-height: -moz-fit-content !important;
-  height: unset !important;
-}
-
 .urlbarView-tip-button,
 .urlbarView-tip-help {
   margin-block: unset !important;
@@ -492,8 +483,12 @@ by underlining them (requires urlbarMods.uc.js) */
 }
 
 .urlbarView-tip-button {
-  padding-inline: 6px !important;
-  padding-block: 3px !important;
+  padding-inline: 10px !important;
+  padding-block: 4px !important;
+  margin-inline-end: -3px !important;
+  font-size: 0.9em !important;
+	background-clip: revert !important;
+	min-width: revert !important;
 }
 
 .urlbarView-tip-help {
@@ -523,20 +518,6 @@ by underlining them (requires urlbarMods.uc.js) */
   width: 16px !important;
   height: 16px !important;
   margin: 0 !important;
-}
-
-.urlbarView-row[type="tip"] > .urlbarView-row-inner > .urlbarView-favicon,
-.urlbarView-row[type="tip"] > .urlbarView-row-inner > .urlbarView-title,
-.urlbarView-row[type="tip"] > .urlbarView-row-inner > .urlbarView-help,
-.urlbarView-tip-button {
-  margin-block-end: revert !important;
-}
-
-.urlbarView-row[type="tip"] > .urlbarView-row-inner > .urlbarView-title {
-  white-space: normal;
-  flex-basis: revert !important;
-  flex-grow: 0 !important;
-  flex-shrink: 0 !important;
 }
 
 .urlbarView-row .urlbarView-row-inner > .urlbarView-no-wrap > .urlbarView-title-separator,
@@ -586,7 +567,7 @@ by underlining them (requires urlbarMods.uc.js) */
 .urlbarView-row[has-url] .urlbarView-title,
 .urlbarView-row:not([has-action]) .urlbarView-title:has(strong),
 .urlbarView-row .urlbarView-tag,
-.urlbarView-row:where([type="tabtosearch"], [type="tokenaliasengine"]) .urlbarView-title,
+.urlbarView-row:where([type="tabtosearch"], [type="tokenaliasengine"], [type="tip"]) .urlbarView-title,
 .urlbarView-row:not([has-url])
   .urlbarView-title[data-l10n-id="urlbar-result-action-search-w-engine"],
 .urlbarView-tail-prefix {
@@ -600,7 +581,7 @@ by underlining them (requires urlbarMods.uc.js) */
   color: var(--panel-shortcut-color);
 }
 
-.urlbarView-row:where([type="tabtosearch"], [type="tokenaliasengine"])[selected] .urlbarView-title,
+.urlbarView-row:where([type="tabtosearch"], [type="tokenaliasengine"], [type="tip"])[selected] .urlbarView-title,
 .urlbarView-row[has-action][selected] .urlbarView-title strong,
 .urlbarView-row[has-action][selected] .urlbarView-title[isurl],
 .urlbarView-row[type="bookmark"][selected]:not([has-url]) .urlbarView-title,
@@ -704,7 +685,8 @@ by underlining them (requires urlbarMods.uc.js) */
 
 .urlbarView-row[engine="Google"]:is([type="tabtosearch"], [type="tokenaliasengine"])
   .urlbarView-favicon,
-.urlbarView-row[engine="Google"][type="search"] .urlbarView-favicon[src]:not([src^="chrome"]) {
+.urlbarView-row[engine="Google"][type="search"] .urlbarView-favicon[src]:not([src^="chrome"]),
+.urlbarView-row[type="tip"] .urlbarView-favicon[src="moz-extension://cd4aad93-9726-49dd-a5cd-9e5f5c4d76f4/favicon.ico"] {
   box-sizing: border-box !important;
   background: url(chrome://userchrome/content/engines/google.svg) no-repeat !important;
   width: 16px !important;

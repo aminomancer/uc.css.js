@@ -1926,7 +1926,7 @@ link[href="chrome://global/content/printPagination.css"]
     background-color: var(--uc-places-cell-hover-bgcolor) !important;
   }
 
-  #viewGroup > radio[focused="true"] .radio-label-box {
+  #viewGroup:focus-visible > radio[focused="true"] .radio-label-box {
     outline: var(--global-focus-outline, auto) !important;
   }
 
@@ -2226,5 +2226,13 @@ link[href="chrome://global/content/printPagination.css"]
 
   #perm-microphone-row .permissionLabel {
     background-image: url(chrome://userchrome/content/notifications/microphone.svg);
+  }
+
+  @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
+    strong,
+    .header,
+    .permissionLabel {
+      font-weight: var(--uc-font-weight-extrabold, 600) !important;
+    }
   }
 }

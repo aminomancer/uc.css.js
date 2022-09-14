@@ -58,9 +58,14 @@ menupopup#viewSidebarMenu
 }
 
 /* Want My RSS */
-:is(.pageAction-panel-button, .urlbar-page-action)[actionid="_4d567245-e70d-466a-bb2f-390fc7fb25c2_"] {
+:is(.pageAction-panel-button, .urlbar-page-action)[actionid="_4d567245-e70d-466a-bb2f-390fc7fb25c2_"i] {
   --pageAction-image-16px: url(chrome://userchrome/content/material/rss.svg) !important;
   --pageAction-image-32px: url(chrome://userchrome/content/material/rss.svg) !important;
+}
+
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="{4d567245-e70d-466a-bb2f-390fc7fb25c2}"i]
+  .toolbarbutton-icon {
+  list-style-image: url(chrome://userchrome/content/material/rss.svg);
 }
 
 /* sort bookmarks */

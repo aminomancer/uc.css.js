@@ -467,6 +467,12 @@
     word-wrap: anywhere;
   }
 
+  .onboardingContainer.featureCallout .screen[pos="callout"] .section-main .main-content,
+  .onboardingContainer.featureCallout.arrow-inline-end::before {
+    background-color: var(--newtab-background-color-secondary) !important;
+    border-color: var(--fxview-contrast-border) !important;
+  }
+
   @-moz-document regexp("^about:blocked.*") {
     html:root,
     html:root * {
