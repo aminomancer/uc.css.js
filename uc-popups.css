@@ -1591,13 +1591,19 @@ rtl languages. adjust the border radius accordingly */
 
   @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
     :root[dialogroot],
-    :root[dialogroot] dialog {
+    :root[dialogroot] dialog,
+    :root[dialogroot] body {
       font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
       font-kerning: normal !important;
     }
 
     :root[dialogroot] :is(h2, h3, #titleText) {
       font-weight: var(--uc-font-weight-semibold, 400) !important;
+      font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
+    }
+
+    :root[dialogroot] .onboardingContainer h1 {
+      font-weight: var(--uc-font-weight-bold, 600) !important;
       font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
     }
   }

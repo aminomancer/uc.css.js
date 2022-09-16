@@ -82,6 +82,7 @@ I also recommend setting the following prefs in `about:config`. There are two pr
 | browser.display.background_color.dark | String | `#19191b` | Default background color for `color-scheme: dark` pages like about:blank. Great new prefs from [bug 1525107](https://phabricator.services.mozilla.com/D129746)! |
 | browser.display.use_system_colors | Boolean | false | |
 | <i>browser.display.windows.non_native_menus</i> | Number | 1 | |
+| browser.privatebrowsing.enable-new-indicator | Boolean | false | Remove the "Private browsing" window label |
 | <i>browser.startup.blankWindow</i> | Boolean | false | These two settings eliminate the blank white window during startup |
 | <i>browser.startup.preXulSkeletonUI</i> | Boolean | false | |
 | browser.tabs.tabMinWidth | Number | 90 | User preference, but mine is 90 |

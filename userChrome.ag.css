@@ -212,6 +212,23 @@ scrollbar[disabled="true"] {
   margin: 0 !important;
 }
 
+:is(scrollcorner, resizer, scrollbar, scrollbarbutton, slider):where(:-moz-native-anonymous) {
+  /* cribbed from minimal-xul.css to avoid crashes */
+  -moz-box-layout: initial;
+  direction: ltr;
+  font: 16px sans-serif;
+  justify-items: start;
+  vertical-align: initial !important;
+  -moz-user-focus: ignore;
+  user-select: none;
+  display: -moz-box;
+  box-sizing: border-box;
+}
+
+:is(scrollbarbutton, slider, thumb):where(:-moz-native-anonymous) {
+  cursor: inherit;
+}
+
 /* overlay scrollbars in content, if the pref is enabled. I don't recommend
 using this pref because overlay scrollbars can cause problems on certain
 websites where multiple scrollable divs are nested inside each other or

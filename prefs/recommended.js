@@ -65,6 +65,7 @@ user_pref("extensions.autoDisableScopes", 0);
 user_pref("browser.shell.checkDefaultBrowser", false);
 user_pref("browser.startup.homepage_override.mstone", "ignore");
 user_pref("browser.display.use_system_colors", false);
+user_pref("browser.privatebrowsing.enable-new-indicator", false);
 user_pref("accessibility.mouse_focuses_formcontrol", 0);
 user_pref("browser.tabs.tabMinWidth", 90);
 user_pref("browser.urlbar.accessibility.tabToSearch.announceResults", false);
