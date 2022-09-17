@@ -96,7 +96,7 @@ menupopup.in-menulist {
   background-color: transparent !important;
   border-radius: var(--menupopup-border-radius) !important;
   margin: var(--menupopup-margin) !important;
-  overflow: hidden !important;
+  /* overflow: hidden !important; */
   color: var(--menu-color) !important;
   background-image: unset !important;
   padding: var(--menupopup-padding) !important;

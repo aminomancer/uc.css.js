@@ -41,6 +41,14 @@ panelview {
   }
 }
 
+.panel-subview-body {
+  overflow-clip-box: content-box !important;
+}
+
+.panel-subview-body:not(:last-child) {
+  padding-bottom: 0 !important;
+}
+
 /* without this, the last button in the panel will typically be touching the
 edge of the panel, instead of 4px from the edge as it should be.
 this connects with .panel-subview-body rules in userChrome.au.css */
@@ -59,10 +67,6 @@ this connects with .panel-subview-body rules in userChrome.au.css */
   margin-block: var(--panel-separator-margin);
   margin-block-end: 0;
   /* revert the extra padding from the previous rule on certain panels that don't need it */
-  padding-bottom: 0 !important;
-}
-
-.panel-subview-body:not(:last-child) {
   padding-bottom: 0 !important;
 }
 

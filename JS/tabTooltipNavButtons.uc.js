@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Tab Tooltip Navigation Buttons
-// @version        1.2.2
+// @version        1.2.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    This script turns the tab tooltip into a mini navigation popup
@@ -683,7 +683,7 @@ class TabTooltipNav {
 
     const MAX_HISTORY_MENU_ITEMS = 15;
     const tooltipBack = gNavigatorBundle.getString("tabHistory.goBack");
-    const tooltipCurrent = gNavigatorBundle.getString("tabHistory.current");
+    const tooltipCurrent = gNavigatorBundle.getString("tabHistory.reloadCurrent");
     const tooltipForward = gNavigatorBundle.getString("tabHistory.goForward");
 
     let updateSessionHistory = (sessionHistory, initial, ssInParent) => {
