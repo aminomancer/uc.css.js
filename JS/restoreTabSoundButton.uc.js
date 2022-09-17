@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Restore pre-Proton Tab Sound Button
-// @version        2.3.5
+// @version        2.3.6
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Proton makes really big changes to tabs, in particular
@@ -193,7 +193,7 @@
     const affectedTabsLength = contextTabInSelection ? selectedTabs.length : 1;
     if (tab.mOverCloseButton) {
       let rect = windowUtils.getBoundsWithoutFlushing(tab.closeButton);
-      let shortcut = ShortcutUtils.prettifyShortcut(document.getelementById("key_close"));
+      let shortcut = ShortcutUtils.prettifyShortcut(document.getElementById("key_close"));
       label = PluralForm.get(
         affectedTabsLength,
         gTabBrowserBundle.GetStringFromName("tabs.closeTabs.tooltip")
