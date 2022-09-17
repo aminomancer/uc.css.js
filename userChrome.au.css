@@ -10,8 +10,7 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
 
 @import url(chrome://userchrome/content/layout/uc-nsRules.au.css);
 
-@-moz-document regexp("^((chrome|resource|file)://|about:).*$")
-{
+@-moz-document regexp("^((chrome|resource|file)://|about:).*$") {
   :root {
     --avatar-image-url: url(chrome://userchrome/content/fxa/avatar-big.svg);
   }
@@ -89,8 +88,8 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
 
   :is(panel, menupopup)[type="arrow"]::part(content) {
     box-shadow: var(--uc-panel-shadow);
+    margin: var(--panel-inner-box-margin, 4px);
     overflow: hidden;
-    margin-top: 4px;
   }
 
   :is(panel, menupopup)::part(arrow) {
@@ -103,32 +102,32 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
   :is(panel, menupopup)[side="bottom"]::part(arrow) {
     list-style-image: url("chrome://userchrome/content/panelarrow-vertical.svg");
     position: relative;
-    margin-inline: 10px;
+    margin-inline: calc(6px + var(--panel-inner-box-margin, 4px)) !important;
   }
 
   :is(panel, menupopup)[side="top"]::part(arrow) {
-    margin-bottom: -5px;
+    margin-bottom: calc(-1px - var(--panel-inner-box-margin, 4px)) !important;
   }
 
   :is(panel, menupopup)[side="bottom"]::part(arrow) {
     transform: scaleY(-1);
-    margin-top: -5px;
+    margin-top: calc(-1px - var(--panel-inner-box-margin, 4px)) !important;
   }
 
   :is(panel, menupopup)[side="left"]::part(arrow),
   :is(panel, menupopup)[side="right"]::part(arrow) {
     list-style-image: url("chrome://userchrome/content/panelarrow-horizontal.svg");
     position: relative;
-    margin-block: 10px;
+    margin-block: calc(6px + var(--panel-inner-box-margin, 4px)) !important;
   }
 
   :is(panel, menupopup)[side="left"]::part(arrow) {
-    margin-right: -5px;
+    margin-right: calc(-1px - var(--panel-inner-box-margin, 4px)) !important;
   }
 
   :is(panel, menupopup)[side="right"]::part(arrow) {
     transform: scaleX(-1);
-    margin-left: -5px;
+    margin-left: calc(-1px - var(--panel-inner-box-margin, 4px)) !important;
   }
 
   #confirmation-hint[hidearrow]::part(arrowbox) {
@@ -280,12 +279,6 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
   #BMB_bookmarksPopup::part(content),
   #BMB_bookmarksPopup menupopup[placespopup="true"]::part(content) {
     padding-inline: 0 !important;
-  }
-
-  menupopup::part(content),
-  #ContentSelectDropdown > menupopup::part(content) {
-    padding: var(--menupopup-inner-padding);
-    margin: var(--menupopup-inner-box-margin);
   }
 
   #tabbrowser-tabs:not([secondarytext-unsupported]) .tab-label-container {
@@ -472,12 +465,6 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
 
   /* protections popup panel's arrow style */
   #protections-popup[mainviewshowing][side="top"]::part(arrow) {
-    fill: var(--arrowpanel-background);
-    stroke: var(--panel-border-color);
-  }
-
-  /* other panel arrows */
-  :is(panel, menupopup)::part(arrow) {
     fill: var(--arrowpanel-background);
     stroke: var(--panel-border-color);
   }
@@ -682,8 +669,7 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
     font-weight: 500;
   }
 
-  @-moz-document url(chrome://browser/content/browser.xhtml)
-  {
+  @-moz-document url(chrome://browser/content/browser.xhtml) {
     :is(#customization-lwtheme-menu, #customization-uidensity-menu)::part(arrowbox) {
       -moz-box-ordinal-group: 2;
     }
@@ -709,14 +695,6 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
     }
   }
 
-  :is(panel, menupopup)[side="top"]::part(arrow) {
-    margin-bottom: -5px;
-  }
-
-  :is(panel, menupopup)[side="bottom"]::part(arrow) {
-    margin-top: -5px;
-  }
-
   #identity-icon {
     list-style-image: var(--default-identity-icon);
   }
@@ -732,8 +710,7 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
     url(chrome://mozapps/content/handling/appChooser.xhtml),
     url-prefix(chrome://global/content/print.html),
     url(chrome://browser/content/places/bookmarkProperties.xhtml),
-    url(chrome://browser/content/places/bookmarkProperties2.xhtml)
-  {
+    url(chrome://browser/content/places/bookmarkProperties2.xhtml) {
     menulist:not([native]) {
       padding-inline: 6px;
     }
@@ -1813,13 +1790,11 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
     padding: 30px 30px 20px 30px;
   }
 
-  #handlersView .actionsMenu[image="chrome://browser/skin/preferences/application.png"]::part(icon)
-  {
+  #handlersView .actionsMenu[image="chrome://browser/skin/preferences/application.png"]::part(icon) {
     display: none;
   }
 
-  #handlersView .actionsMenu[image="chrome://browser/skin/preferences/application.png"]::before
-  {
+  #handlersView .actionsMenu[image="chrome://browser/skin/preferences/application.png"]::before {
     width: 16px;
     height: 16px;
     margin-inline: 11px 8px;
@@ -1833,8 +1808,7 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
     background-image: url(chrome://userchrome/content/shortcut.svg);
   }
 
-  #handlersView .actionIcon[src="chrome://browser/skin/preferences/application.png"]
-  {
+  #handlersView .actionIcon[src="chrome://browser/skin/preferences/application.png"] {
     width: 16px;
     height: 16px;
     margin-inline: 11px 8px;
@@ -1849,8 +1823,7 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
   }
 
   @-moz-document url("chrome://mozapps/content/downloads/unknownContentType.xhtml"),
-    url("chrome://global/content/appPicker.xhtml")
-  {
+    url("chrome://global/content/appPicker.xhtml") {
     :root {
       --in-content-page-color: rgb(21, 20, 26);
       --in-content-page-background: #fff;

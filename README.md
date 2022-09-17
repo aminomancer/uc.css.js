@@ -144,7 +144,7 @@ I also recommend setting the following prefs in `about:config`. There are two pr
 | userChrome.contextmenu.reduce-menuseparators | Boolean | false | If true, hide some of the separators in the main context menu to reduce clutter |
 | userChrome.css.hide-promotion | Boolean | false | If true, hide official ads on system pages, e.g. for Mozilla VPN |
 | userChrome.css.mac-ui-fonts | Boolean | true | Replace UI font with SF Pro, the system font for macOS. [Click here for details](#fonts) |
-| userChrome.css.menupopup-shadows | Boolean | false | Add a shadow behind context menus and panels |
+| userChrome.css.menupopup-shadows | Boolean | true | Add a shadow behind context menus and panels |
 | userChrome.css.overlay-scrollbars.in-content | Boolean | false | Overlay scrollbars are already enabled in the chrome UI. This pref enables them in web content |
 | widget.non-native-theme.scrollbar.style | Number | 2 | Enable the GTK scrollbar style in web content, regardless of your OS. Supports: 0 (default), 1 (macOS), 2 (GTK), 3 (android), 4 (win10), 5 (win11) |
 | widget.non-native-theme.scrollbar.size.override | Number | 11 | Make the scrollbar track 11px wide for GTK (scrollbar.style = 2) |

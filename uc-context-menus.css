@@ -28,7 +28,7 @@ menupopup:not([type="arrow"]) {
 
 menupopup:not([type="arrow"]) menu > menupopup {
   margin-inline-start: var(--menupopup-child-margin-inline-start) !important;
-  margin-block-start: var(--menupopup-child-margin-block-start) !important;
+  margin-top: var(--menupopup-child-margin-block-start) !important;
 }
 
 menupopup:not([height], .in-menulist) {
@@ -41,13 +41,6 @@ menupopup:not([height], .in-menulist) {
   color: var(--menu-color) !important;
   border-radius: var(--menupopup-border-radius) !important;
   box-shadow: var(--uc-menupopup-shadow) !important;
-}
-
-.menupopup-arrowscrollbox[orient="vertical"][overflowing="true"] {
-  margin-block: var(
-    --menupopup-overflowing-inner-box-margin,
-    var(--menupopup-inner-box-margin)
-  ) !important;
 }
 
 menupopup:not([type="arrow"]) :is(menuitem, menu),
@@ -444,8 +437,7 @@ panel > richlistbox > richlistitem {
   margin-inline: var(--menupopup-inner-padding-magnitude);
 }
 
-@-moz-document url(chrome://browser/content/browser.xhtml)
-{
+@-moz-document url(chrome://browser/content/browser.xhtml) {
   panel menulist {
     appearance: none !important;
     background-color: var(--button-bgcolor) !important;
@@ -483,8 +475,7 @@ menuitem[default="true"] {
     display: none !important;
   }
 
-  @-moz-document url(chrome://browser/content/browser.xhtml)
-  {
+  @-moz-document url(chrome://browser/content/browser.xhtml) {
     #contentAreaContextMenu menuseparator:not([id]) {
       display: -moz-box !important;
     }

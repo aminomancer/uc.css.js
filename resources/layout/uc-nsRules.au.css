@@ -3,8 +3,15 @@ I don't register userChrome.au.css that way because
 it would mean I can't live-edit and save the stylesheet
 from the style editor in the browser toolbox. */
 
-@-moz-document regexp("^((chrome|resource|file)://|about:).*$")
-{
+@-moz-document regexp("^((chrome|resource|file)://|about:).*$") {
+  menupopup:not([is="places-popup-arrow"]) {
+    -moz-window-input-region-margin: var(--menupopup-inner-box-margin, 4px) !important;
+  }
+
+  :is(panel, menupopup)[type="arrow"] {
+    -moz-window-input-region-margin: var(--panel-inner-box-margin, 4px) !important;
+  }
+
   panel,
   menupopup,
   :is(menupopup, panel)[type="arrow"] {
@@ -16,8 +23,7 @@ from the style editor in the browser toolbox. */
     -moz-box-flex: 1;
   }
 
-  @-moz-document url(chrome://browser/content/browser.xhtml)
-  {
+  @-moz-document url(chrome://browser/content/browser.xhtml) {
     :is(panel, menupopup)::part(arrow) {
       display: -moz-inline-box;
     }
@@ -332,8 +338,7 @@ from the style editor in the browser toolbox. */
   }
 
   #handlersView .actionIcon[src="chrome://browser/skin/preferences/application.png"],
-  #handlersView .actionsMenu[image="chrome://browser/skin/preferences/application.png"]::before
-  {
+  #handlersView .actionsMenu[image="chrome://browser/skin/preferences/application.png"]::before {
     display: -moz-inline-box;
   }
 }

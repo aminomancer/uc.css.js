@@ -125,6 +125,7 @@ this connects with .panel-subview-body rules in userChrome.au.css */
 
 #identity-popup[type="arrow"][side="top"][connection="chrome"] {
   margin-inline: -46px !important;
+  margin-top: -9px !important;
 }
 
 #customizationui-widget-panel[viewId="PanelUI-profiler"][type="arrow"][side="top"] {

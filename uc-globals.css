@@ -70,6 +70,7 @@ but other than that these variables should be available everywhere. */
   --light-on-dark-button-text-color: #fff;
 
   --menupopup-inner-box-margin: 0px;
+  --panel-inner-box-margin: 4px;
   --uc-menupopup-shadow: none;
   --uc-panel-shadow: none;
   --searchbar-popup-border: 1px solid var(--uc-menu-border-color);
@@ -82,7 +83,8 @@ but other than that these variables should be available everywhere. */
   --webextension-panel-border-radius: 5px;
   --menupopup-margin: calc(0px - var(--menupopup-inner-box-margin));
   --menupopup-background: transparent;
-  --menupopup-child-margin-block-start: calc(-4px - var(--menupopup-inner-box-margin));
+  /* the "- 1px" below is to account for 1px menu borders */
+  --menupopup-child-margin-block-start: calc(-4px - 1px - var(--menupopup-inner-box-margin));
   --menupopup-child-margin-inline-start: calc(2px - var(--menupopup-inner-box-margin));
   --menupopup-padding: 0px;
   --menupopup-inner-padding-magnitude: 4px;
@@ -487,7 +489,8 @@ popupnotification,
 
 @supports -moz-bool-pref("userChrome.css.menupopup-shadows") {
   :root {
-    --menupopup-inner-box-margin: 8px !important;
+    --menupopup-inner-box-margin: 4px !important;
+    --panel-inner-box-margin: 4px;
     --uc-menupopup-shadow: var(--tooltip-box-shadow) !important;
     --uc-panel-shadow: var(--tooltip-box-shadow) !important;
   }
