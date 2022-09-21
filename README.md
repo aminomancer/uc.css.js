@@ -985,7 +985,7 @@ A `<regexp>` value must be a valid regular expression, wrapped in double quotes 
 
 A `<site>` value must be some kind of valid URL. Ideally a host (domain) is best, but it doesn't have to be a host, because some types of URLs lack hosts. If you're unsure what the host is for a website you're trying to link to an engine, open the website in a browser tab, open the content toolbox, and type `location.host`. For pages that lack hosts or have very important protocols (like `"moz-extension://"` URLs) you can specify the full page URL, like `"moz-extension://blahblah/index.html"` — or better yet, use a regular expression instead.
 
-An <engine> value can be either:
+An `<engine>` value can be either:
 1. an engine's name — the label that appears next to the search engine in the UI, e.g. `"Google"`
 2. the domain on which the search engine is hosted, e.g. `"www.google.com"`
 3. the engine's full search URL, or something close to it, e.g. `"www.google.com/search?q=%s"`
