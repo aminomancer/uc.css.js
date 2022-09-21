@@ -1,53 +1,86 @@
 // ==UserScript==
 // @name           Search Selection Keyboard Shortcut
-// @version        1.7.2
+// @version        1.7.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Adds a new keyboard shortcut (Ctrl+Shift+F) that searches your default search
 // engine for whatever text you currently have highlighted. This does basically the same thing as
 // the context menu option "Search {Engine} for {Selection}" except that if you highlight a URL,
 // instead of searching for the selection it will navigate directly to the URL. Optionally, you can
-// also configure the script to use your other (non-default) search engines as well. The preference
-// "userChrome.searchSelectionShortcut.match-engine-to-current-tab" will add a second hotkey
-// (Ctrl+Alt+F) that will look for an installed engine that matches the current webpage. So if your
-// default search engine is Google but you use the hotkey on Wikipedia, and you have a search engine
-// for Wikipedia installed, it will search Wikipedia for the selected text instead. This preference
-// is disabled by default. But what if you have a non-default search engine that you want to use for
-// a particular website? Let's say you're on about:config, browsing through preferences. You
-// highlight a pref name and hit the hotkey to search for it and find out what it does. Normally,
-// pressing the second hotkey will launch your default engine, since about:config doesn't correspond
-// to any normal URL. But by setting the pref "userChrome.searchSelectionShortcut.custom-matches",
-// you can "link" any website to any engine. This pref accepts a JSON formatted object containing
-// zero or more name-value pairs, separated by commas. The object format is {<site>: <engine>}
+// also configure the script to use your other (non-default) search engines as well.
+
+// The preference `userChrome.searchSelectionShortcut.match-engine-to-current-tab` will add a second
+// hotkey (Ctrl+Alt+F) that will look for an installed engine that matches the current webpage. So
+// if your default search engine is Google but you use the hotkey on Wikipedia, and you have a
+// search engine for Wikipedia installed, it will search Wikipedia for the selected text instead.
+// This preference is disabled by default, since some extensions may use that key combination. You
+// can toggle it in a popup that appears the first time you install the script, or in about:config.
+
+// But what if you have a non-default search engine that you want to use for a particular website?
+// Let's say you're on about:config, browsing through preferences. You highlight a pref name and hit
+// the hotkey to search for it and find out what it does. Normally, pressing the second hotkey will
+// launch your default engine, since about:config doesn't correspond to any normal URL. But by
+// setting the pref `userChrome.searchSelectionShortcut.custom-matches`, you can "link" any website
+// to any engine you have installed.
+
+// This pref accepts a JSON-formatted object containing zero or more name-value pairs, separated by
+// commas. This object can also include one reserved property called REG_EXPS, which uses regular
+// expressions instead of URL strings. The object format is:
+// {
+//   "REG_EXPS": {
+//     <regexp1>: <engine>,
+//     <regexp2>: <engine>
+//   },
+//   <site1>: <engine>,
+//   <site2>: <engine>
+// }
+
 // Here's an example:
-// {"about:config": "Searchfox", "bugzilla.mozilla.org": "searchfox.org", "raw.githubusercontent.com": "https://github.com/search?q=%s"}
-// This should basically explain the options. <site> represents a website you might visit, <engine>
-// represents the engine to use when you press the hotkey while on the <site>. So the first one
-// means use Searchfox when the hotkey is activated on about:config. This is JSON, so all <site> and
-// <engine> values must be wrapped in quotes and the pairs must be separated by commas, or the pref
-// won't work at all. A <site> value must be some kind of valid URL. Ideally a host (domain) is
-// best, but it doesn't have to be a host, because some types of URLs lack hosts. If you're unsure
-// what the host is for a website you're trying to link to an engine, open the website in a browser
-// tab, open the content toolbox, and type location.host. For pages that lack hosts or have very
-// specific protocols (like moz-extension:// URLs) you can specify the full page URL, like
-// moz-extension://blahblah/index.html An <engine> value can be either 1) an engine's name — that's
-// the label that appears next to the search engine in the UI, e.g. "Google"; 2) the domain on which
-// the search engine is hosted, e.g. "www.google.com"; or 3) the engine's full search template URL,
-// or something close to it, e.g. "www.google.com/search?q=%s". Any of these values will work, but
-// using the engine's name is most efficient. You can change the hotkey itself (though not the
-// modifiers) by setting "userChrome.searchSelectionShortcut.keycode" to a valid KeyboardEvent code.
-// The default value "KeyF" corresponds to the F key. The correct notation is different for numbers
-// and special characters, so visit https://keycode.info and press the desired key to find its
-// event.code. Then input that string into the pref editor in about:config. Since v1.3 this script
-// supports Fission by using JSActors instead of Message Managers. Normally JSActors require
-// multiple files — a parent script and a child script, to communicate between the content frame and
-// the parent process. And to instantiate them would require a third file, the autoconfig script. An
-// autoconfig script requiring multiple additional files doesn't make for a very user-friendly
-// experience. So this script automatically generates its own subscript files in your chrome folder
-// and cleans them up when you quit Firefox. I had a lot of fun figuring this out. If you're trying
-// to learn how to make these kinds of mods, this is a good subject to research since JSActors are
-// really powerful. It's also cool to see how a standalone autoconfig script can be made to create
-// its own little network of temp files to work in a more vanilla-style manner.
+// {
+//   "REG_EXPS": {
+//     "^https?://bugzilla\\.mozilla\\.org(/.*)?$": "https://bugzilla.mozilla.org/buglist.cgi?quicksearch=%s",
+//     "^https?://(.*\\.)?(github|githubusercontent)\\.com(/.*)?$": "https://github.com/search?q=%s"
+//   },
+//   "about:config": "Searchfox",
+//   "mozilla.org": "searchfox.org",
+//   "google.com": "https://www.google.com/search?client=firefox-b-1-d&q=%s"
+// }
+// The example above showcases several different accepted formats. <site> or <regexp> represents a
+// website you might visit, and <engine> represents the engine to use when you press the hotkey
+// while on the <site>. So, the "about:config" one tells the script to use Searchfox when the hotkey
+// is activated on about:config. This is JSON, so all values must be wrapped in quotes and the pairs
+// must be separated by commas, or the pref won't work at all. All forward slashes must be escaped,
+// so when escaping characters in your regular expressions, use two forward slashes instead of one.
+
+// The current URL will be tested against each <regexp> in the REG_EXPS object. If a match is found,
+// the corresponding <engine> will be used. If no match is found (or if the REG_EXPS object does not
+// exist), the URL will be tested against each <site> in the pref. If a match is found, the
+// corresponding <engine> will be used. If no match is found, the default engine will be used.
+
+// A <regexp> value must be a valid regular expression, wrapped in double quotes and escaped.
+
+// A <site> value must be some kind of valid URL. Ideally a host (domain) is best, but it
+// doesn't have to be a host, because some types of URLs lack hosts. If you're unsure what the host
+// is for a website you're trying to link to an engine, open the website in a browser tab, open the
+// content toolbox, and type location.host. For pages that lack hosts or have very important
+// protocols (like `moz-extension://` URLs) you can specify the full page URL, like
+// `moz-extension://blahblah/index.html` — or better yet, use a regular expression instead.
+
+// An <engine> value can be either:
+// 1) an engine's name — the label that appears next to the search engine in the UI, e.g. "Google"
+// 2) the domain on which the search engine is hosted, e.g. "www.google.com"
+// 3) the engine's full search URL, or something close to it, e.g. "www.google.com/search?q=%s".
+// Any of these values will work, but using the engine's name is most efficient
+
+// If you already use these hotkeys for something else, e.g., an extension, you can change the
+// hotkey (though not the modifiers) by setting `userChrome.searchSelectionShortcut.keycode` to a
+// valid KeyboardEvent code. The default value "KeyF" corresponds to the F key. The correct notation
+// is different for numbers and special characters, so visit https://keycode.info and press the
+// desired key to find the event.code you need to input for the preference.
+
+// This script automatically generates its own subscript files in your chrome folder and cleans them
+// up when you quit Firefox. This is unfortunately necessary to avoid requiring users to download
+// multiple files just to make a single script work.
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // @include        main
 // @startup        searchSelectionShortcut
@@ -147,7 +180,7 @@ class SearchSelectionShortcut {
     // it assumes you don't want to keep an empty tab around, so it'll open the
     // search/link in the current tab.
     this.parentFile = await this.createTempFile(
-      `"use strict";import{XPCOMUtils}from"resource://gre/modules/XPCOMUtils.sys.mjs";const lazy={};XPCOMUtils.defineLazyModuleGetters(lazy,{BrowserWindowTracker:"resource:///modules/BrowserWindowTracker.jsm",PrivateBrowsingUtils:"resource://gre/modules/PrivateBrowsingUtils.jsm",E10SUtils:"resource://gre/modules/E10SUtils.jsm"});XPCOMUtils.defineLazyPreferenceGetter(lazy,"CUSTOM_MATCHES","userChrome.searchSelectionShortcut.custom-matches","{}",null,(val=>JSON.parse(val)));const{WebExtensionPolicy}=Cu.getGlobalForObject(Services);const schemes=/^http|https|ftp$/;const base=host=>{let domain;try{domain=Services.eTLD.getBaseDomainFromHost(host)}catch(e){}return domain};export class SearchSelectionShortcutParent extends JSWindowActorParent{get browser(){return this.browsingContext.top.embedderElement}getEngineTemplate(e){const engineURL=e._getURLOfType("text/html");return engineURL.params.length>0?e._searchForm:engineURL.template}async getMatchingEngine(match,url,host,check=true){if(!match)return null;let preferred;let uri=Services.io.newURI(url);if(check){if(url in lazy.CUSTOM_MATCHES)preferred=lazy.CUSTOM_MATCHES[url];if(!preferred&&host in lazy.CUSTOM_MATCHES)preferred=lazy.CUSTOM_MATCHES[host];if(!preferred&&!host){try{preferred=lazy.CUSTOM_MATCHES[uri.prePath+uri.filePath]}catch(e){}}if(preferred){const engine=Services.search.getEngineByName(preferred);if(engine&&!engine.hidden)return engine}}const visibleEngines=await Services.search.getVisibleEngines();let originalHost;if(preferred&&/.+\\..+/.test(preferred)){originalHost=host;host=preferred}let engines=visibleEngines.filter((engine=>engine.getResultDomain()==host));if(!engines.length){const baseHost=base(host);if(baseHost||!preferred)engines=visibleEngines.filter((engine=>base(engine.getResultDomain())==baseHost))}if(originalHost&&!engines.length){try{const fixup=Services.uriFixup.getFixupURIInfo(preferred,Ci.nsIURIFixup.FIXUP_FLAG_FIX_SCHEME_TYPOS);uri=fixup.fixedURI;engines=visibleEngines.filter((engine=>engine.getResultDomain()==uri.host))}catch(e){}if(!engines.length)return this.getMatchingEngine(match,url,originalHost,false)}if(engines.length>1){engines.sort(((a,b)=>{const uriA=Services.io.newURI(this.getEngineTemplate(a)),uriB=Services.io.newURI(this.getEngineTemplate(b)),cmnA=this.commonLength(uri,uriA),cmnB=this.commonLength(uri,uriB);return cmnB.host-cmnA.host||cmnB.path-cmnA.path||cmnB.query-cmnA.query}))}return engines[0]}commonLength(x,y){if(!(x?.spec&&y?.spec))return 0;let xh="",yh="";try{xh=x.host}catch(e){}try{yh=y.host}catch(e){}let xf=x.filePath,yf=y.filePath,xs=x.scheme,ys=y.scheme||"https",xq=x.query,yq=y.query,i=0,k=0,len=xh.length,sq="";if(xs!=ys&&!(schemes.test(xs)&&schemes.test(ys)))return 0;while(k<len&&xh.charAt(len-k)===yh.charAt(yh.length-k))k++;while(i<xf.length&&xf.charAt(i)===yf.charAt(i))i++;if(xq&&yq){let xa=xq.split("&"),ya=yq.split("&"),qp;ya=ya.filter((p=>{if(p.endsWith("{searchTerms}")){qp=p.replace(/{searchTerms}/,"");return}return true}));xa=xa.filter((p=>!(qp&&p.startsWith(qp))));sq=xa.filter((p=>ya.includes(p)))}return{host:xh.substring(len-k,len).length,path:xf.substring(0,i).length,query:sq.length}}stripURLPrefix(str){const match=/^[a-z]+:(?:\\/){0,2}/i.exec(str);if(!match)return["",str];let prefix=match[0];if(prefix.length<str.length&&str[prefix.length]==" ")return["",str];return[prefix,str.substr(prefix.length)]}getFixupInfo(text){let fixupInfo,fixupError;try{let flags=Ci.nsIURIFixup.FIXUP_FLAG_FIX_SCHEME_TYPOS|Ci.nsIURIFixup.FIXUP_FLAG_ALLOW_KEYWORD_LOOKUP;const info=Services.uriFixup.getFixupURIInfo(text,flags);if(lazy.PrivateBrowsingUtils.isWindowPrivate(this.browser.ownerGlobal))flags|=Ci.nsIURIFixup.FIXUP_FLAG_PRIVATE_CONTEXT;fixupInfo={uri:info.fixedURI,href:info.fixedURI.spec,isSearch:!!info.keywordAsSent}}catch(e){fixupError=e.result}return{info:fixupInfo,error:fixupError}}parseURL(text){try{const str=Services.textToSubURI.unEscapeURIForUI(text);const[prefix,suffix]=this.stripURLPrefix(str);if(!suffix&&prefix)return null;const fixup=this.getFixupInfo(text);if(fixup.error)return null;if(!fixup.info?.href||fixup.info?.isSearch)return null;const{uri}=fixup.info;const url=new URL(fixup.info.href);const hostExpected=["http:","https:","ftp:","chrome:"].includes(url.protocol);if(hostExpected&&!url.host)return null;return{uri,url,href:url.toString()}}catch(e){return null}}async receiveMessage(msg){const browser=this.manager.rootFrameLoader.ownerElement,win=browser.ownerGlobal,{data,target}=msg,{windowContext,browsingContext}=target;if(browsingContext.topChromeWindow!==lazy.BrowserWindowTracker.getTopWindow())return;const{text,locationURL,locationHost,match,frameID}=data;const csp=lazy.E10SUtils.deserializeCSP(data.csp),principal=windowContext.documentPrincipal||Services.scriptSecurityManager.createNullPrincipal({userContextId:win.gBrowser.selectedBrowser.getAttribute("userContextId")});let options={inBackground:Services.prefs.getBoolPref("browser.search.context.loadInBackground",true),triggeringPrincipal:principal,relatedToCurrent:true,allowThirdPartyFixup:true,frameID};const where=locationURL.startsWith(win.BROWSER_NEW_TAB_URL)?"current":"tab";if(!match){const parsed=this.parseURL(text);if(parsed){const{uri}=parsed;let canon=true;let host="";try{host=uri.host}catch(e){}switch(uri.scheme){case"moz-extension":const policy=WebExtensionPolicy.getByHostname(host);if(policy){const extPrincipal=policy&&policy.extension.principal;if(extPrincipal)options.triggeringPrincipal=extPrincipal}else canon=false;break;case"about":canon=lazy.E10SUtils.getAboutModule(uri);options.triggeringPrincipal=Services.scriptSecurityManager.getSystemPrincipal();break;case"chrome":case"resource":if(!host){canon=false;break}case"file":options.triggeringPrincipal=Services.scriptSecurityManager.getSystemPrincipal();break;case"data":if(!uri.filePath.includes(",")){canon=false;break}options.forceAllowDataURI=true;options.triggeringPrincipal=Services.scriptSecurityManager.createNullPrincipal({userContextId:win.gBrowser.selectedBrowser.getAttribute("userContextId")});break;case"javascript":canon=false;break;default:options.referrerInfo=lazy.E10SUtils.deserializeReferrerInfo(data.referrerInfo);break}if(!!canon)return win.openLinkIn(parsed.href,where,options)}}const engine=await this.getMatchingEngine(match,locationURL,locationHost);win.BrowserSearch._loadSearch(text,where,false,null,principal,csp,options.inBackground,engine)}}`,
+      `"use strict";import{XPCOMUtils}from"resource://gre/modules/XPCOMUtils.sys.mjs";const lazy={};XPCOMUtils.defineLazyModuleGetters(lazy,{BrowserWindowTracker:"resource:///modules/BrowserWindowTracker.jsm",PrivateBrowsingUtils:"resource://gre/modules/PrivateBrowsingUtils.jsm",E10SUtils:"resource://gre/modules/E10SUtils.jsm"});XPCOMUtils.defineLazyPreferenceGetter(lazy,"CUSTOM_MATCHES","userChrome.searchSelectionShortcut.custom-matches","{}");const{WebExtensionPolicy}=Cu.getGlobalForObject(Services);const schemes=/^http|https|ftp$/;const base=host=>{let domain;try{domain=Services.eTLD.getBaseDomainFromHost(host)}catch(e){}return domain};export class SearchSelectionShortcutParent extends JSWindowActorParent{get browser(){return this.browsingContext.top.embedderElement}getEngineTemplate(e){const engineURL=e._getURLOfType("text/html");return engineURL.params.length>0?e._searchForm:engineURL.template}async getMatchingEngine(match,url,host,check=true){if(!match)return null;let preferred;let uri=Services.io.newURI(url);if(check){let MATCHES=JSON.parse(lazy.CUSTOM_MATCHES);if(MATCHES.REG_EXPS){for(let[regExp,engineStr]of Object.entries(MATCHES.REG_EXPS)){if(new RegExp(regExp)?.test(url)){preferred=engineStr;break}}delete MATCHES.REG_EXPS}if(!preferred&&url in MATCHES)preferred=MATCHES[url];if(!preferred&&host in MATCHES)preferred=MATCHES[host];if(!preferred&&!host){try{preferred=MATCHES[uri.prePath+uri.filePath]}catch(e){}}if(preferred){const engine=Services.search.getEngineByName(preferred);if(engine&&!engine.hidden)return engine}}const visibleEngines=await Services.search.getVisibleEngines();let originalHost;if(preferred&&/.+\\..+/.test(preferred)){originalHost=host;host=preferred}let engines=visibleEngines.filter((engine=>engine.getResultDomain()==host));if(!engines.length){const baseHost=base(host);if(baseHost||!preferred)engines=visibleEngines.filter((engine=>base(engine.getResultDomain())==baseHost))}if(originalHost&&!engines.length){try{const fixup=Services.uriFixup.getFixupURIInfo(preferred,Ci.nsIURIFixup.FIXUP_FLAG_FIX_SCHEME_TYPOS);uri=fixup.fixedURI;engines=visibleEngines.filter((engine=>engine.getResultDomain()==uri.host))}catch(e){}if(!engines.length)return this.getMatchingEngine(match,url,originalHost,false)}if(engines.length>1){engines.sort(((a,b)=>{const uriA=Services.io.newURI(this.getEngineTemplate(a)),uriB=Services.io.newURI(this.getEngineTemplate(b)),cmnA=this.commonLength(uri,uriA),cmnB=this.commonLength(uri,uriB);return cmnB.host-cmnA.host||cmnB.path-cmnA.path||cmnB.query-cmnA.query}))}return engines[0]}commonLength(x,y){if(!(x?.spec&&y?.spec))return 0;let xh="",yh="";try{xh=x.host}catch(e){}try{yh=y.host}catch(e){}let xf=x.filePath,yf=y.filePath,xs=x.scheme,ys=y.scheme||"https",xq=x.query,yq=y.query,i=0,k=0,len=xh.length,sq="";if(xs!=ys&&!(schemes.test(xs)&&schemes.test(ys)))return 0;while(k<len&&xh.charAt(len-k)===yh.charAt(yh.length-k))k++;while(i<xf.length&&xf.charAt(i)===yf.charAt(i))i++;if(xq&&yq){let xa=xq.split("&"),ya=yq.split("&"),qp;ya=ya.filter((p=>{if(p.endsWith("{searchTerms}")){qp=p.replace(/{searchTerms}/,"");return}return true}));xa=xa.filter((p=>!(qp&&p.startsWith(qp))));sq=xa.filter((p=>ya.includes(p)))}return{host:xh.substring(len-k,len).length,path:xf.substring(0,i).length,query:sq.length}}stripURLPrefix(str){const match=/^[a-z]+:(?:\\/){0,2}/i.exec(str);if(!match)return["",str];let prefix=match[0];if(prefix.length<str.length&&str[prefix.length]==" ")return["",str];return[prefix,str.substr(prefix.length)]}getFixupInfo(text){let fixupInfo,fixupError;try{let flags=Ci.nsIURIFixup.FIXUP_FLAG_FIX_SCHEME_TYPOS|Ci.nsIURIFixup.FIXUP_FLAG_ALLOW_KEYWORD_LOOKUP;const info=Services.uriFixup.getFixupURIInfo(text,flags);if(lazy.PrivateBrowsingUtils.isWindowPrivate(this.browser.ownerGlobal))flags|=Ci.nsIURIFixup.FIXUP_FLAG_PRIVATE_CONTEXT;fixupInfo={uri:info.fixedURI,href:info.fixedURI.spec,isSearch:!!info.keywordAsSent}}catch(e){fixupError=e.result}return{info:fixupInfo,error:fixupError}}parseURL(text){try{const str=Services.textToSubURI.unEscapeURIForUI(text);const[prefix,suffix]=this.stripURLPrefix(str);if(!suffix&&prefix)return null;const fixup=this.getFixupInfo(text);if(fixup.error)return null;if(!fixup.info?.href||fixup.info?.isSearch)return null;const{uri}=fixup.info;const url=new URL(fixup.info.href);const hostExpected=["http:","https:","ftp:","chrome:"].includes(url.protocol);if(hostExpected&&!url.host)return null;return{uri,url,href:url.toString()}}catch(e){return null}}async receiveMessage(msg){const browser=this.manager.rootFrameLoader.ownerElement,win=browser.ownerGlobal,{data,target}=msg,{windowContext,browsingContext}=target;if(browsingContext.topChromeWindow!==lazy.BrowserWindowTracker.getTopWindow())return;const{text,locationURL,locationHost,match,frameID}=data;const csp=lazy.E10SUtils.deserializeCSP(data.csp),principal=windowContext.documentPrincipal||Services.scriptSecurityManager.createNullPrincipal({userContextId:win.gBrowser.selectedBrowser.getAttribute("userContextId")});let options={inBackground:Services.prefs.getBoolPref("browser.search.context.loadInBackground",true),triggeringPrincipal:principal,relatedToCurrent:true,allowThirdPartyFixup:true,frameID};const where=locationURL.startsWith(win.BROWSER_NEW_TAB_URL)?"current":"tab";if(!match){const parsed=this.parseURL(text);if(parsed){const{uri}=parsed;let canon=true;let host="";try{host=uri.host}catch(e){}switch(uri.scheme){case"moz-extension":const policy=WebExtensionPolicy.getByHostname(host);if(policy){const extPrincipal=policy&&policy.extension.principal;if(extPrincipal)options.triggeringPrincipal=extPrincipal}else canon=false;break;case"about":canon=lazy.E10SUtils.getAboutModule(uri);options.triggeringPrincipal=Services.scriptSecurityManager.getSystemPrincipal();break;case"chrome":case"resource":if(!host){canon=false;break}case"file":options.triggeringPrincipal=Services.scriptSecurityManager.getSystemPrincipal();break;case"data":if(!uri.filePath.includes(",")){canon=false;break}options.forceAllowDataURI=true;options.triggeringPrincipal=Services.scriptSecurityManager.createNullPrincipal({userContextId:win.gBrowser.selectedBrowser.getAttribute("userContextId")});break;case"javascript":canon=false;break;default:options.referrerInfo=lazy.E10SUtils.deserializeReferrerInfo(data.referrerInfo);break}if(!!canon)return win.openLinkIn(parsed.href,where,options)}}const engine=await this.getMatchingEngine(match,locationURL,locationHost);win.BrowserSearch._loadSearch(text,where,false,null,principal,csp,options.inBackground,engine)}}`,
       { name: "SearchSelectionShortcutParent", type: "sys.mjs" }
     );
     // the child actor is where the hotkey itself is set up. it listens for the

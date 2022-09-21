@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Extension Stylesheet Loader
-// @version        1.1.2
+// @version        1.1.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Allows users to share stylesheets for webextensions without
@@ -48,7 +48,7 @@ class ExtensionStylesheetLoader {
     // create a manifest file that registers a URI for
     // chrome://uc-extensionstylesheetloader/content/
     this.manifestFile = await this.createTempFile(`content uc-extensionstylesheetloader ./`, {
-      name: "ucsss",
+      name: "ucess",
       type: "manifest",
     });
     this.childFile = await this.createTempFile(
