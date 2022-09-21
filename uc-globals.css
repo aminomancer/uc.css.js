@@ -139,11 +139,6 @@ but other than that these variables should be available everywhere. */
   --global-focus-shadow: 0 0 0 2px var(--global-focus-shadow-color);
   --global-focus-outline-offset: -2px;
 
-  --transparent-img-background: center/16px repeat hsla(0, 0%, 80%)
-    url(chrome://userchrome/content/checker.svg);
-  --transparent-img-background-context: center/16px repeat
-    url(chrome://userchrome/content/checker-context.svg);
-
   --acrylic-blur: blur(15px);
   --acrylic-texture: url(chrome://userchrome/content/texture/lightnoise.png);
   --acrylic-blue: hsla(233.3, 39.1%, 9%, 0.58);
