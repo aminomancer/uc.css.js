@@ -343,6 +343,7 @@ progress[paused]:indeterminate::-moz-progress-bar {
   border-top-style: solid !important;
   box-shadow: var(--tooltip-box-shadow) !important;
   margin-top: calc(0px - var(--menuitem-height)) !important;
+  min-width: revert !important;
 
   background-color: var(--tooltip-bgcolor) !important;
   color: var(--tooltip-color) !important;
@@ -352,12 +353,16 @@ progress[paused]:indeterminate::-moz-progress-bar {
   visibility: collapse !important;
 }
 
-#statuspanel:not([type="overLink"], [inactive][previoustype="overLink"]) {
+#statuspanel[hidden] {
   opacity: 0 !important;
   transition: none !important;
 }
 
-#statuspanel[type="overLink"] {
+#statuspanel {
+  transition: opacity 300ms var(--uc-smooth-timing-function), visibility 300ms !important;
+}
+
+#statuspanel[inactive][previoustype=overLink] {
   transition: opacity 400ms var(--uc-smooth-timing-function), visibility 400ms !important;
 }
 
@@ -369,6 +374,7 @@ progress[paused]:indeterminate::-moz-progress-bar {
   padding: var(--uc-tooltip-inner-padding, 4px 7px 6px 7px) !important;
   margin: 0 !important;
   border: none !important;
+  min-width: revert !important;
 }
 
 #statuspanel:not([mirror]):-moz-locale-dir(ltr),

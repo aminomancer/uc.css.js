@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Misc. Mods
-// @version        2.0.4
+// @version        2.0.5
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Various tiny mods not worth making separate scripts for. Read the comments inside the script for details.
@@ -124,6 +124,14 @@
     // `:root{--in-content-bg-dark: #000}` to your userChrome.css, or it will fall back to white.
     "Customize tab drag preview background color": true,
 
+    // Normally when a page is loading, Firefox will display network information
+    // in the bottom left of the browser content area. When the mouse cursor is
+    // hovering over a link, this is also where the link URL is shown. This
+    // setting disables the page network status but keeps the mouseover link
+    // URL. duskFox used to do this with CSS, but it doesn't behave well with
+    // the fade transitions to do it that way. So now it's done with JavaScript.
+    "Disable loading status for status panel": true,
+
     // With duskFox installed, we indicate container tabs by adding a colored
     // stripe at the bottom of the tab. But we also add a purple stripe at the
     // bottom of multiselected tabs, which overrides the container tab stripe.
@@ -177,6 +185,7 @@
       if (config["Show container icons on multiselected tabs"]) {
         this.containerIconsOnMultiselectedTabs();
       }
+      if (config["Disable loading status for status panel"]) this.disableLoadingStatus();
       this.randomTinyStuff();
     }
     stopDownloadsPanelFocus() {
@@ -395,6 +404,20 @@
           }
         }
       };
+    }
+    disableLoadingStatus() {
+      if (StatusPanel.update.name !== "uc_update") {
+        eval(
+          `StatusPanel.update = function ` +
+            StatusPanel.update
+              .toSource()
+              .replace(/^update/, "uc_update")
+              .replace(
+                /\s*if \(XULBrowserWindow\.busyUI\) {\n\s*types\.push\(\"status\"\);\n\s*}\n\s*types\.push\(\"defaultStatus\"\);/,
+                ""
+              )
+        );
+      }
     }
     randomTinyStuff() {
       // give the tracking protection popup's info button a tooltip
