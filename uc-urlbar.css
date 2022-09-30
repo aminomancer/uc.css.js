@@ -16,7 +16,7 @@ that includes all the icons, page actions, etc. */
 }
 
 #urlbar-container {
-  margin-inline: 3px !important;
+  margin-inline: var(--urlbar-margin-inline, 3px) !important;
   padding-block: calc((var(--urlbar-container-height) - var(--urlbar-height)) / 2) !important;
 }
 
@@ -24,12 +24,12 @@ toolbarpaletteitem[place="palette"] > #search-container {
   min-height: 32px !important;
   max-height: 32px !important;
   padding-block: 0 !important;
-  margin-block: 5px !important;
+  margin: 5px 0 !important;
 }
 
 #nav-bar-customization-target #search-container {
   padding-block: 0 !important;
-  margin-inline: 3px !important;
+  margin-inline: var(--urlbar-margin-inline, 3px) !important;
   height: var(--urlbar-container-height) !important;
   min-height: var(--urlbar-container-height) !important;
 }
@@ -136,8 +136,9 @@ toolbarpaletteitem[place="palette"] > #search-container {
 }
 
 #urlbar-search-splitter {
-  min-width: 12px !important;
-  margin-inline: -7px !important;
+  min-width: 6px !important;
+  margin-inline: -3px !important;
+  z-index: 1 !important;
 }
 
 #PopupSearchAutoComplete {
@@ -438,7 +439,6 @@ the NTP/home page hasn't opened yet. */
 /* iffy modification to center urlbar buttons not contained in page action button box */
 #urlbar-input-container {
   -moz-box-align: center;
-  z-index: 11;
 }
 
 #plugins-notification-icon {
@@ -972,11 +972,6 @@ urlbarMods.uc.js assigns them custom classes .aboutBlockedPage and
 
 :root[customizing] #wrapper-urlbar-container[removable="false"] {
   opacity: revert !important;
-}
-
-#wrapper-urlbar-container,
-#wrapper-search-container {
-  -moz-box-flex: 1 !important;
 }
 
 :root[customizing]

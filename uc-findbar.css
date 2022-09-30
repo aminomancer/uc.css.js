@@ -137,6 +137,7 @@ findbar[hidden] {
   border-radius: 0 !important;
   outline: none !important;
   height: var(--findbar-height, 22px) !important;
+  box-sizing: border-box !important;
   padding-inline: 6px !important;
   -moz-box-flex: 1 !important;
 }

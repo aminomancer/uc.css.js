@@ -80,6 +80,7 @@ menupopup {
   --urlbar-container-height: var(--uc-urlbar-container-height) !important;
   --urlbar-height: calc(var(--urlbar-container-height) - 6px) !important;
   --urlbar-container-padding: 1px !important;
+  --urlbar-margin-inline: 2px !important;
   --urlbar-icon-border-radius: var(--general-button-border-radius) !important;
   --urlbar-icon-fill-opacity: 0.6 !important;
   --urlbar-popup-url-color: var(--purple-35) !important;

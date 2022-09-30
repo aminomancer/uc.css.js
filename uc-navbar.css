@@ -13,6 +13,10 @@ if it's visible in the row beneath the tabs then it's probably in here. */
   border: none !important;
 }
 
+#customization-palette toolbarpaletteitem {
+  transform-style: preserve-3d !important;
+}
+
 toolbarpaletteitem > toolbarspring {
   margin-block: calc((var(--urlbar-container-height) - var(--urlbar-height)) / 2) !important;
   outline: none !important;
@@ -31,13 +35,6 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
 #PersonalToolbar > toolbarpaletteitem > toolbarspring {
   margin-block: revert !important;
   margin-inline: 2px !important;
-}
-
-#wrapper-urlbar-container + toolbarpaletteitem > #search-container,
-#nav-bar[customizing="true"] #urlbar-container + #search-container,
-#wrapper-search-container + toolbarpaletteitem > #urlbar-container,
-#nav-bar[customizing="true"] #search-container + #urlbar-container {
-  margin-inline-start: 1px !important;
 }
 
 /* toolbar button badges */

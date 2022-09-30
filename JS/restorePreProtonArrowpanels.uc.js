@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Restore pre-Proton Arrowpanels
-// @version        1.2.0
+// @version        1.2.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    This script will basically restore the arrows at the corner
@@ -17,103 +17,115 @@
 // ==/UserScript==
 
 (function() {
-  let { PopupNotifications } = ChromeUtils.import("resource://gre/modules/PopupNotifications.jsm");
-  if (PopupNotifications.prototype._showPanel.name === "PopupNotifications_showPanel") {
-    const NOTIFICATION_EVENT_SHOWING = "showing";
-    const NOTIFICATION_EVENT_SHOWN = "shown";
-    const TELEMETRY_STAT_OFFERED = 0;
-    eval(
-      `PopupNotifications.prototype._showPanel = function ` +
-        PopupNotifications.prototype._showPanel
-          .toSource()
-          .replace(/^\(/, "")
-          .replace(/\)$/, "")
-          .replace(/^function\s*/, "")
-          .replace(/^PopupNotifications_showPanel\s*/, "")
-          .replace(/^(.)/, `uc_PopupNotifications_showPanel$1`)
-          .replace(/bottomleft/, "bottomcenter")
+  (function() {
+    let { PopupNotifications } = ChromeUtils.importESModule(
+      "resource://gre/modules/PopupNotifications.sys.mjs"
     );
-  }
-
-  let { ExtensionsUI } = ChromeUtils.import("resource:///modules/ExtensionsUI.jsm");
-  if (ExtensionsUI.showPermissionsPrompt.name === "showPermissionsPrompt") {
-    const DEFAULT_EXTENSION_ICON = "chrome://mozapps/skin/extensions/extensionGeneric.svg";
-    function getTabBrowser(browser) {
-      while (browser.ownerGlobal.docShell.itemType !== Ci.nsIDocShell.typeChrome) {
-        browser = browser.ownerGlobal.docShell.chromeEventHandler;
-      }
-      let window = browser.ownerGlobal;
-      let viewType = browser.getAttribute("webextension-view-type");
-      if (viewType == "sidebar") {
-        window = window.browsingContext.topChromeWindow;
-      }
-      if (viewType == "popup" || viewType == "sidebar") {
-        browser = window.gBrowser.selectedBrowser;
-      }
-      return { browser, window };
-    }
-    eval(
-      `ExtensionsUI.showPermissionsPrompt = async function ` +
-        ExtensionsUI.showPermissionsPrompt
-          .toSource()
-          .replace(/^\(/, "")
-          .replace(/\)$/, "")
-          .replace(/^async\s*/, "")
-          .replace(/^function\s*/, "")
-          .replace(/^showPermissionsPrompt\s*/, "")
-          .replace(/^(.)/, `uc_showPermissionsPrompt$1`)
-          .replace(/bottomright/, "bottomcenter")
-    );
-    if (ExtensionsUI.showDefaultSearchPrompt.name === "showDefaultSearchPrompt") {
+    if (PopupNotifications.prototype._showPanel.name === "PopupNotifications_showPanel") {
+      const NOTIFICATION_EVENT_SHOWING = "showing";
+      const NOTIFICATION_EVENT_SHOWN = "shown";
+      const TELEMETRY_STAT_OFFERED = 0;
       eval(
-        `ExtensionsUI.showDefaultSearchPrompt = async function ` +
-          ExtensionsUI.showDefaultSearchPrompt
+        `PopupNotifications.prototype._showPanel = function ` +
+          PopupNotifications.prototype._showPanel
             .toSource()
             .replace(/^\(/, "")
             .replace(/\)$/, "")
             .replace(/^function\s*/, "")
-            .replace(/^showDefaultSearchPrompt\s*/, "")
-            .replace(/^(.)/, `uc_showDefaultSearchPrompt$1`)
+            .replace(/^PopupNotifications_showPanel\s*/, "")
+            .replace(/^(.)/, `uc_PopupNotifications_showPanel$1`)
+            .replace(/bottomleft/, "bottomcenter")
+      );
+    }
+  })();
+
+  (function() {
+    let { ExtensionsUI } = ChromeUtils.import("resource:///modules/ExtensionsUI.jsm");
+    if (ExtensionsUI.showPermissionsPrompt.name === "showPermissionsPrompt") {
+      const DEFAULT_EXTENSION_ICON = "chrome://mozapps/skin/extensions/extensionGeneric.svg";
+      function getTabBrowser(browser) {
+        while (browser.ownerGlobal.docShell.itemType !== Ci.nsIDocShell.typeChrome) {
+          browser = browser.ownerGlobal.docShell.chromeEventHandler;
+        }
+        let window = browser.ownerGlobal;
+        let viewType = browser.getAttribute("webextension-view-type");
+        if (viewType == "sidebar") {
+          window = window.browsingContext.topChromeWindow;
+        }
+        if (viewType == "popup" || viewType == "sidebar") {
+          browser = window.gBrowser.selectedBrowser;
+        }
+        return { browser, window };
+      }
+      eval(
+        `ExtensionsUI.showPermissionsPrompt = async function ` +
+          ExtensionsUI.showPermissionsPrompt
+            .toSource()
+            .replace(/^\(/, "")
+            .replace(/\)$/, "")
+            .replace(/^async\s*/, "")
+            .replace(/^function\s*/, "")
+            .replace(/^showPermissionsPrompt\s*/, "")
+            .replace(/^(.)/, `uc_showPermissionsPrompt$1`)
+            .replace(/bottomright/, "bottomcenter")
+      );
+      if (ExtensionsUI.showDefaultSearchPrompt.name === "showDefaultSearchPrompt") {
+        eval(
+          `ExtensionsUI.showDefaultSearchPrompt = async function ` +
+            ExtensionsUI.showDefaultSearchPrompt
+              .toSource()
+              .replace(/^\(/, "")
+              .replace(/\)$/, "")
+              .replace(/^function\s*/, "")
+              .replace(/^showDefaultSearchPrompt\s*/, "")
+              .replace(/^(.)/, `uc_showDefaultSearchPrompt$1`)
+              .replace(/bottomright/, "bottomcenter")
+        );
+      }
+    }
+  })();
+
+  (function() {
+    let { UITour } = ChromeUtils.import("resource:///modules/UITour.jsm");
+    if (UITour.showInfo.name === "showInfo") {
+      const lazy = {
+        log: { warn() {} },
+      };
+      eval(
+        `UITour.showInfo = async function ` +
+          UITour.showInfo
+            .toSource()
+            .replace(/^\(/, "")
+            .replace(/\)$/, "")
+            .replace(/^async\s*/, "")
+            .replace(/^function\s*/, "")
+            .replace(/^showInfo\s*/, "")
+            .replace(/^(.)/, `uc_showInfo$1`)
             .replace(/bottomright/, "bottomcenter")
       );
     }
-  }
+  })();
 
-  let { UITour } = ChromeUtils.import("resource:///modules/UITour.jsm");
-  if (UITour.showInfo.name === "showInfo") {
-    const lazy = {
-      log: { warn() {} },
-    };
-    eval(
-      `UITour.showInfo = async function ` +
-        UITour.showInfo
-          .toSource()
-          .replace(/^\(/, "")
-          .replace(/\)$/, "")
-          .replace(/^async\s*/, "")
-          .replace(/^function\s*/, "")
-          .replace(/^showInfo\s*/, "")
-          .replace(/^(.)/, `uc_showInfo$1`)
-          .replace(/bottomright/, "bottomcenter")
-    );
-  }
-
-  let { CustomizeMode } = ChromeUtils.import("resource:///modules/CustomizeMode.jsm");
-  if (CustomizeMode.prototype._showDownloadsAutoHidePanel.name === "_showDownloadsAutoHidePanel") {
-    eval(
-      `CustomizeMode.prototype._showDownloadsAutoHidePanel = async function ` +
-        CustomizeMode.prototype._showDownloadsAutoHidePanel
-          .toSource()
-          .replace(/^\(/, "")
-          .replace(/\)$/, "")
-          .replace(/^async\s*/, "")
-          .replace(/^function\s*/, "")
-          .replace(/^_showDownloadsAutoHidePanel\s*/, "")
-          .replace(/^(.)/, `uc_showDownloadsAutoHidePanel$1`)
-          .replace(/topleft topright/, "leftcenter topright")
-          .replace(/topright topleft/, "rightcenter topleft")
-    );
-  }
+  (function() {
+    let { CustomizeMode } = ChromeUtils.import("resource:///modules/CustomizeMode.jsm");
+    if (
+      CustomizeMode.prototype._showDownloadsAutoHidePanel.name === "_showDownloadsAutoHidePanel"
+    ) {
+      eval(
+        `CustomizeMode.prototype._showDownloadsAutoHidePanel = async function ` +
+          CustomizeMode.prototype._showDownloadsAutoHidePanel
+            .toSource()
+            .replace(/^\(/, "")
+            .replace(/\)$/, "")
+            .replace(/^async\s*/, "")
+            .replace(/^function\s*/, "")
+            .replace(/^_showDownloadsAutoHidePanel\s*/, "")
+            .replace(/^(.)/, `uc_showDownloadsAutoHidePanel$1`)
+            .replace(/topleft topright/, "leftcenter topright")
+            .replace(/topright topleft/, "rightcenter topleft")
+      );
+    }
+  })();
 
   let dummyNotification = document.createXULElement("notification", {
     is: "translation-notification",

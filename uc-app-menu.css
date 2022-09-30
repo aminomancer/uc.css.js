@@ -418,6 +418,8 @@
   background-image: url(chrome://userchrome/content/help-square.svg);
 }
 
+.panel-banner-item > .toolbarbutton-text,
+.addon-banner-item > .toolbarbutton-text,
 #appMenu-save-file-button2 > .toolbarbutton-text,
 #appMenu-more-button2 > .toolbarbutton-text,
 #appMenu-help-button2 > .toolbarbutton-text,
