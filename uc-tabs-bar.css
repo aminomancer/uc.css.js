@@ -616,6 +616,11 @@ button.private-browsing-indicator:is(:hover:active, [open])::before {
   margin-inline-start: -2px !important;
 }
 
+/* temporarily revert flexbox emulation to make vertical tabs pane work. */
+#browser {
+  -moz-box-layout: revert !important;
+}
+
 #vertical-tabs-pane
   .all-tabs-item[pinned]:not([muted], [soundplaying], [activemedia-blocked])
   .all-tabs-button
