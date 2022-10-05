@@ -1,6 +1,8 @@
-/* This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+/* This Source Code Form is subject to the terms of the Creative Commons
+ * Attribution-NonCommercial-ShareAlike International License, v. 4.0.
+ * If a copy of the CC BY-NC-SA 4.0 was not distributed with this
+ * file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/
+ * or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA. */
 
 "use strict";
 
@@ -107,6 +109,12 @@ module.exports = {
         // however these files aren't auto-fixable at the moment.
         curly: "off",
       },
+    },
+    {
+      // Rules of Hooks broadly checks for camelCase "use" identifiers, so
+      // enable only for paths actually using React to avoid false positives.
+      extends: ["plugin:react-hooks/recommended"],
+      files: ["*.jsx"],
     },
   ],
 };

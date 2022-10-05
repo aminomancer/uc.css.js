@@ -1,0 +1,68 @@
+/* This Source Code Form is subject to the terms of the Creative Commons
+ * Attribution-NonCommercial-ShareAlike International License, v. 4.0.
+ * If a copy of the CC BY-NC-SA 4.0 was not distributed with this
+ * file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/
+ * or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA. */
+
+/* Want My RSS extension */
+
+@-moz-document regexp("^moz-extension://.*/popup.html.*") {
+  :root[uc-extension-id="{4d567245-e70d-466a-bb2f-390fc7fb25c2}"i],
+  :root[uc-extension-id="{4d567245-e70d-466a-bb2f-390fc7fb25c2}"i] body {
+    color-scheme: dark;
+    background-color: var(--uc-arrowpanel-background) !important;
+  }
+
+  :root[uc-extension-id="{4d567245-e70d-466a-bb2f-390fc7fb25c2}"i] body {
+    margin: var(--menupopup-inner-padding-magnitude) !important;
+    max-width: 42em;
+  }
+
+  :root[uc-extension-id="{4d567245-e70d-466a-bb2f-390fc7fb25c2}"i] .items {
+    padding: 0 !important;
+  }
+
+  :root[uc-extension-id="{4d567245-e70d-466a-bb2f-390fc7fb25c2}"i] .items__item {
+    border-radius: var(--context-menuitem-border-radius) !important;
+    display: flex !important;
+    flex-flow: row nowrap !important;
+    align-items: center !important;
+    box-sizing: border-box !important;
+    border: none !important;
+    min-height: var(--subviewbutton-height) !important;
+    user-select: none !important;
+    white-space: nowrap;
+    line-height: 1 !important;
+  }
+
+  :root[uc-extension-id="{4d567245-e70d-466a-bb2f-390fc7fb25c2}"i]
+    .items__item:is(:hover, :focus-visible) {
+    background: var(--uc-arrowpanel-dimmed) !important;
+  }
+
+  :root[uc-extension-id="{4d567245-e70d-466a-bb2f-390fc7fb25c2}"i] .items__item:hover:active {
+    background: var(--uc-arrowpanel-dimmed-further) !important;
+  }
+
+  :root[uc-extension-id="{4d567245-e70d-466a-bb2f-390fc7fb25c2}"i] .items__item-link {
+    cursor: default !important;
+    color: var(--uc-arrowpanel-color) !important;
+    padding: var(--uc-arrowpanel-menuitem-padding-block)
+      var(--uc-arrowpanel-menuitem-padding-inline) !important;
+    flex-grow: 1 !important;
+    flex-shrink: 1 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  :root[uc-extension-id="{4d567245-e70d-466a-bb2f-390fc7fb25c2}"i] .items__item-link span {
+    opacity: revert !important;
+  }
+
+  @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
+    :root[uc-extension-id="{4d567245-e70d-466a-bb2f-390fc7fb25c2}"i] body {
+      font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
+      font-kerning: normal !important;
+    }
+  }
+}
