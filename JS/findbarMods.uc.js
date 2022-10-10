@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Findbar Mods
-// @version        1.3.2
+// @version        1.3.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    1) Make a custom context menu for the findbar that lets you
@@ -318,45 +318,44 @@ class FindbarMods {
       this._updateDiacriticMatching();
       this._setEntireWord();
       this._setHighlightAll();
+      let l10nId;
       switch (this.findMode) {
         case this.FIND_TYPEAHEAD:
-          this._findField.placeholder = this._fastFindStr;
+          l10nId = "findbar-fast-find";
           break;
         case this.FIND_LINKS:
-          this._findField.placeholder = this._fastFindLinksStr;
+          l10nId = "findbar-fast-find-links";
           break;
         default:
-          this._findField.placeholder = this._normalFindStr;
+          l10nId = "findbar-normal-find";
       }
+      document.l10n.setAttributes(this._findField, l10nId);
     };
     // override the native on-results function so it updates both labels.
     findbarClass.onMatchesCountResult = function(result) {
-      if (result.total !== 0) {
-        if (result.total == -1) {
-          this._foundMatches.value = PluralForm.get(
-            result.limit,
-            this.strBundle.GetStringFromName("FoundMatchesCountLimit")
-          ).replace("#1", result.limit);
+      let l10nId;
+      switch (result.total) {
+        case 0:
+          l10nId = "";
+          this._foundMatches.hidden = true;
+          this._tinyIndicator.textContent = "   ";
+          // hide the indicator background with CSS if it's blank.
+          this._tinyIndicator.setAttribute("empty", "true");
+          break;
+        case -1:
+          l10nId = "findbar-found-matches-count-limit";
+          this._foundMatches.hidden = false;
           this._tinyIndicator.textContent = `${result.limit}+`;
-        } else {
-          this._foundMatches.value = PluralForm.get(
-            result.total,
-            this.strBundle.GetStringFromName("FoundMatches")
-          )
-            .replace("#1", result.current)
-            .replace("#2", result.total);
+          // bring it back if it's not blank.
+          this._tinyIndicator.removeAttribute("empty");
+          break;
+        default:
+          l10nId = "findbar-found-matches";
+          this._foundMatches.hidden = false;
           this._tinyIndicator.textContent = `${result.current}/${result.total}`;
-        }
-        this._foundMatches.hidden = false;
-        // bring it back if it's not blank.
-        this._tinyIndicator.removeAttribute("empty");
-      } else {
-        this._foundMatches.hidden = true;
-        this._foundMatches.value = "";
-        this._tinyIndicator.textContent = "   ";
-        // hide the indicator background with CSS if it's blank.
-        this._tinyIndicator.setAttribute("empty", "true");
+          this._tinyIndicator.removeAttribute("empty");
       }
+      document.l10n.setAttributes(this._foundMatches, l10nId, result);
     };
   }
   // when the context menu opens, ensure the menuitems are checked/unchecked appropriately.

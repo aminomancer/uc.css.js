@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Restore pre-Proton Star Button
-// @version        1.3
+// @version        1.3.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    The bookmark page action button used to have a pretty cool

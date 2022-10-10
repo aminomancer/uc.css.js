@@ -234,7 +234,9 @@ from the style editor in the browser toolbox. */
     animation-duration: 317ms;
     width: 660px;
     -moz-context-properties: fill, stroke;
+    fill: currentColor;
     stroke: var(--toolbarbutton-icon-fill-attention);
+    color: inherit;
   }
 
   #star-button[starred][animate]:-moz-locale-dir(rtl)

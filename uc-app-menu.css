@@ -811,3 +811,8 @@ toolbarbutton.subviewbutton.sendToDevice-device[clientType=""][clientId=""]
 :is(.addon-banner-item, .panel-banner-item) > .toolbarbutton-icon {
   -moz-box-ordinal-group: 0 !important;
 }
+
+#appMenu-popup .panel-banner-item:not([disabled]):focus-visible,
+#appMenu-popup .addon-banner-item:not([disabled]):focus-visible {
+	background-color: var(--panel-banner-item-hover-bgcolor) !important;
+}
