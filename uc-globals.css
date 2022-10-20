@@ -14,10 +14,11 @@ but other than that these variables should be available everywhere. */
 @font-face {
   font-family: "Fira Code UC";
   font-style: normal;
-  src: local("Fira Code"), local("Fira Code Light"), url(../fonts/FiraCode-VF.woff);
+  src: local("Fira Code"), local("Fira Code Light"),
+    url(../fonts/FiraCode-VF.woff);
   /* This enables some alternate glyphs and ligatures */
-  font-feature-settings: "ss01", "ss02", "cv19", "ss05", "ss07", "ss08", "cv14", "cv25", "cv28",
-    "cv32";
+  font-feature-settings: "cv14", "cv19", "cv30", "ss01", "ss02", "ss05", "ss07",
+    "ss09";
 }
 
 :root {
@@ -313,6 +314,8 @@ but other than that these variables should be available everywhere. */
   --subviewbutton-height: 28px;
   --subview-subheader-padding: 5px 3px;
   --findbar-height: 22px;
+  --findbar-min-width: 225px;
+  --findbar-max-width: 500px;
   --textbox-outline-transition-duration: 100ms;
   --findbar-textbox-bg-transition-duration: 200ms;
   --findbar-textbox-bg-notfound-transition-duration: 300ms;

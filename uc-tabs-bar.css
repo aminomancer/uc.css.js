@@ -508,6 +508,7 @@ button.private-browsing-indicator:is(:hover:active, [open])::before {
   min-height: revert !important;
   min-width: revert !important;
   padding: 0 !important;
+  display: flex !important;
 }
 
 .all-tabs-secondary-button > .toolbarbutton-icon {
@@ -547,7 +548,6 @@ button.private-browsing-indicator:is(:hover:active, [open])::before {
   margin-inline-start: -27px !important;
   transition: 0.25s cubic-bezier(0.07, 0.78, 0.21, 0.95) transform,
     0.2s cubic-bezier(0.07, 0.74, 0.24, 0.95) margin, 0.075s linear opacity !important;
-  display: block !important;
 }
 
 .all-tabs-item .all-tabs-secondary-button[toggle-mute][hidden] {
@@ -602,7 +602,6 @@ button.private-browsing-indicator:is(:hover:active, [open])::before {
   margin-inline-start: -27px !important;
   transition: 0.25s cubic-bezier(0.07, 0.78, 0.21, 0.95) transform,
     0.2s cubic-bezier(0.07, 0.74, 0.24, 0.95) margin, 0.075s linear opacity;
-  display: block !important;
   -moz-context-properties: fill, fill-opacity, stroke !important;
   fill: currentColor !important;
   fill-opacity: 0 !important;

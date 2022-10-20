@@ -774,10 +774,10 @@ rtl languages. adjust the border radius accordingly */
 }
 
 /* modal dialog background overlay */
-.dialogOverlay[topmost="true"],
+:not(#window-modal-dialog) > .dialogOverlay[topmost="true"],
 #window-modal-dialog::backdrop {
   /* background-color: transparent !important; */
-  background-color: hsla(240, 4%, 12%, 0.45) !important;
+  background-color: hsla(240, 4%, 4%, 0.5) !important;
 }
 
 /* make the box shadow even, i hate offset drop shadows */

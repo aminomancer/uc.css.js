@@ -36,8 +36,8 @@
   min-height: unset !important;
   padding-block: 8px !important;
   width: calc(40% - 100px) !important;
-  min-width: 225px !important;
-  max-width: 400px !important;
+  min-width: var(--findbar-min-width, 225px) !important;
+  max-width: var(--findbar-max-width, 400px) !important;
   background-color: var(--ui-tertiary-bg) !important;
   border: 0px solid transparent !important;
   border-bottom-left-radius: 5px !important;
@@ -133,7 +133,7 @@ findbar[hidden] {
 .findbar-textbox {
   border: none !important;
   transition: var(--findbar-textbox-bg-transition-duration, 200ms) background-color !important;
-  width: -moz-available !important;
+  width: revert !important;
   border-radius: 0 !important;
   outline: none !important;
   height: var(--findbar-height, 22px) !important;

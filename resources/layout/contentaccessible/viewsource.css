@@ -11,8 +11,7 @@
   font-family: "Fira Code UC";
   font-style: normal;
   src: local("Fira Code"), local("Fira Code Light"), url(../fonts/FiraCode-VF.woff);
-  font-feature-settings: "ss01", "ss02", "cv19", "ss05", "ss07", "ss08", "cv14", "cv25", "cv28",
-    "cv32";
+  font-feature-settings: "cv14", "cv19", "cv30", "ss01", "ss02", "ss05", "ss07", "ss09";
 }
 
 *|*:root {

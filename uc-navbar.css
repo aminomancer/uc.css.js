@@ -39,7 +39,7 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
 
 /* toolbar button badges */
 :is(.customization-target, .widget-overflow-list)
-  :is(toolbarbutton, toolbaritem):not([attention])
+  :is(toolbarbutton, toolbaritem):is(:not([attention]), [attention=false])
   > .toolbarbutton-badge-stack
   > .toolbarbutton-badge {
   background-color: var(--uc-toolbarbutton-badge-bgcolor, hsl(0, 100%, 42.5%)) !important;
@@ -390,20 +390,19 @@ toolbarpaletteitem[place="toolbar"]:not([mousedown="true"]):focus-visible {
   visibility: visible !important;
   padding-inline: 2px !important;
   min-height: var(--urlbar-height) !important;
-  transition: min-height 200ms ease-in-out, max-height 200ms ease-in-out, opacity 200ms ease-in-out,
-    transform 200ms ease-in-out !important;
+  transition: min-height 200ms ease-in-out, max-height 200ms ease-in-out, opacity 200ms ease-in-out !important;
   overflow-y: visible !important;
-  padding-block: 0 var(--bookmark-block-padding) !important;
   outline: none !important;
 }
 
 #PersonalToolbar > * {
-  transition: opacity 200ms ease-in-out, transform 200ms ease-in-out !important;
+  transition: opacity 200ms ease-in-out, transform 150ms ease-in-out !important;
   overflow-y: visible !important;
+  margin-block: 0 var(--bookmark-block-padding) !important;
 }
 
 #PersonalToolbar > toolbarpaletteitem:not([notransition])[place="toolbar"] {
-  transition: opacity 200ms ease-in-out, transform 200ms ease-in-out,
+  transition: opacity 200ms ease-in-out, transform 150ms ease-in-out,
     border-width var(--drag-drop-transition-duration) ease-in-out !important;
 }
 
@@ -429,17 +428,23 @@ toolbarpaletteitem[place="toolbar"]:not([mousedown="true"]):focus-visible {
 #PersonalToolbar[collapsed="true"] > * {
   overflow-y: clip !important;
   opacity: 0 !important;
-  transform: translateY(-16px);
+  transform: translateY(-12px);
+  transform-origin: top;
+  transition: opacity 150ms ease-in-out, transform 150ms ease-in-out !important;
 }
 
 #personal-toolbar-empty,
 #PersonalToolbar .toolbarbutton-1,
 toolbarbutton.bookmark-item:not(.subviewbutton) {
-  margin-block: 0 !important;
   padding: var(--bookmark-block-padding) 4px;
   min-height: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
   min-width: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
   -moz-box-align: center !important;
+}
+
+#PersonalToolbar .toolbarbutton-1,
+toolbarbutton.bookmark-item:not(.subviewbutton) {
+  margin-block: 0 !important;
 }
 
 #personal-toolbar-empty-description,

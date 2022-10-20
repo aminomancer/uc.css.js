@@ -26,6 +26,11 @@ panelview {
 
 /* allow panel height to flex and animate */
 @supports -moz-bool-pref("userChrome.panels.allow-height-flex") {
+  panelview {
+    min-height: revert !important;
+    max-height: revert !important;
+  }
+
   .panel-viewstack,
   .panel-viewcontainer {
     min-height: revert !important;
@@ -92,6 +97,10 @@ this connects with .panel-subview-body rules in userChrome.au.css */
 
 .protections-popup-list.empty {
   padding: 16px !important;
+}
+
+.protections-popup-list.empty > vbox {
+  -moz-box-align: center !important;
 }
 
 .protections-popup-list.empty image {
@@ -365,7 +374,7 @@ this connects with .panel-subview-body rules in userChrome.au.css */
 #protections-popup-not-blocking-section-header {
   padding-inline: 2px !important;
   padding-block: 10px 2px !important;
-  margin-inline: auto !important;
+  margin-inline: 0 !important;
   height: 34px !important;
 }
 
@@ -373,7 +382,7 @@ this connects with .panel-subview-body rules in userChrome.au.css */
 #protections-popup-not-found-section-header {
   padding-block: 14px 6px !important;
   height: 34px !important;
-  margin-inline: auto !important;
+  margin-inline: 0 !important;
 }
 
 #protections-popup-not-blocking-section-description,

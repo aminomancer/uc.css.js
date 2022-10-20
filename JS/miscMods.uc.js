@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Misc. Mods
-// @version        2.0.5
+// @version        2.0.6
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Various tiny mods not worth making separate scripts for. Read the comments inside the script for details.
@@ -49,6 +49,12 @@
     // by default, when you hit ctrl+tab it waits 200ms before opening the panel. if you replace
     // the 200 with another number, it will wait that long in milliseconds instead.
     "Reduce ctrl+tab delay": 200,
+
+    // By default, Shift+Ctrl+Tab will open the all-tabs panel. But if you hit
+    // Ctrl+Tab to open the ctrlTab panel, then Shift+Ctrl+Tab will cycle
+    // backwards through recently used tabs. To make this more consistent with
+    // OS-level Alt/Cmd+Tab, this setting disables the all-tabs panel shortcut.
+    "Use Shift+Ctrl+Tab to switch": true,
 
     // normally, firefox only animates the stop/reload button when it's in the main customizable
     // navbar. if you enter customize mode and move the button to the tabs toolbar, menu bar, or
@@ -161,17 +167,25 @@
       if (config["Disable bookmarks toolbar auto show"]) {
         gEditItemOverlay._autoshowBookmarksToolbar = function() {};
       }
-      if (config["Moving tabs with arrow keys can wrap"]) gBrowser.arrowKeysShouldWrap = true;
+      if (config["Moving tabs with arrow keys can wrap"]) {
+        gBrowser.arrowKeysShouldWrap = true;
+      }
       if (config["Stop downloads panel auto-focusing the footer button"]) {
         this.stopDownloadsPanelFocus();
       }
-      if (config["Move all selected tabs with hotkeys"]) this.moveTabKeysMoveSelectedTabs();
-      if (config["Anchor bookmarks menu tooltip to bookmark"]) this.anchorBookmarksTooltip();
-      this.reduceCtrlTabDelay(config["Reduce ctrl+tab delay"]);
+      if (config["Move all selected tabs with hotkeys"]) {
+        this.moveTabKeysMoveSelectedTabs();
+      }
+      if (config["Anchor bookmarks menu tooltip to bookmark"]) {
+        this.anchorBookmarksTooltip();
+      }
+      this.modCtrlTabMethods();
       if (config["Allow stop/reload button to animate in other toolbars"]) {
         this.stopReloadAnimations();
       }
-      if (config["Give the private browsing indicator a tooltip"]) this.addPrivateBrowsingTooltip();
+      if (config["Give the private browsing indicator a tooltip"]) {
+        this.addPrivateBrowsingTooltip();
+      }
       if (config["Preserve your default bookmarks folder"]) {
         this.makeDefaultBookmarkFolderPermanent();
       }
@@ -181,22 +195,30 @@
       if (config["Don't exit DOM fullscreen when opening permissions popup"]) {
         this.permsPopupInFullscreen();
       }
-      if (config["Customize tab drag preview background color"]) this.tabDragPreview();
+      if (config["Customize tab drag preview background color"]) {
+        this.tabDragPreview();
+      }
       if (config["Show container icons on multiselected tabs"]) {
         this.containerIconsOnMultiselectedTabs();
       }
-      if (config["Disable loading status for status panel"]) this.disableLoadingStatus();
+      if (config["Disable loading status for status panel"]) {
+        this.disableLoadingStatus();
+      }
       this.randomTinyStuff();
     }
     stopDownloadsPanelFocus() {
       eval(
         `DownloadsPanel._focusPanel = function ` +
-          DownloadsPanel._focusPanel.toSource().replace(/DownloadsFooter\.focus\(\)\;/, ``)
+          DownloadsPanel._focusPanel
+            .toSource()
+            .replace(/DownloadsFooter\.focus\(\)\;/, ``)
       );
     }
     moveTabKeysMoveSelectedTabs() {
       gBrowser.moveTabsBackward = function() {
-        let tabs = this.selectedTab.multiselected ? this.selectedTabs : [this.selectedTab];
+        let tabs = this.selectedTab.multiselected
+          ? this.selectedTabs
+          : [this.selectedTab];
         let previousTab = this.tabContainer.findNextTab(tabs[0], {
           direction: -1,
           filter: tab => !tab.hidden,
@@ -204,21 +226,29 @@
         for (let tab of tabs) {
           if (previousTab) {
             this.moveTabTo(tab, previousTab._tPos);
-          } else if (this.arrowKeysShouldWrap && tab._tPos < this.browsers.length - 1) {
+          } else if (
+            this.arrowKeysShouldWrap &&
+            tab._tPos < this.browsers.length - 1
+          ) {
             this.moveTabTo(tab, this.browsers.length - 1);
           }
         }
       };
       gBrowser.moveTabsForward = function() {
-        let tabs = this.selectedTab.multiselected ? this.selectedTabs : [this.selectedTab];
+        let tabs = this.selectedTab.multiselected
+          ? this.selectedTabs
+          : [this.selectedTab];
         let nextTab = this.tabContainer.findNextTab(tabs[tabs.length - 1], {
           direction: 1,
           filter: tab => !tab.hidden,
         });
         for (let i = tabs.length - 1; i >= 0; i--) {
           let tab = tabs[i];
-          if (nextTab) this.moveTabTo(tab, nextTab._tPos);
-          else if (this.arrowKeysShouldWrap && tab._tPos > 0) this.moveTabTo(tab, 0);
+          if (nextTab) {
+            this.moveTabTo(tab, nextTab._tPos);
+          } else if (this.arrowKeysShouldWrap && tab._tPos > 0) {
+            this.moveTabTo(tab, 0);
+          }
         }
       };
       eval(
@@ -242,7 +272,11 @@
           node = tree.view.nodeForTreeIndex(cell.row);
           cropped = tree.isCellCropped(cell.row, cell.col);
           // get coordinates for the cell in a tree.
-          var cellCoords = tree.getCoordsForCellItem(cell.row, cell.col, "cell");
+          var cellCoords = tree.getCoordsForCellItem(
+            cell.row,
+            cell.col,
+            "cell"
+          );
         } else {
           var tooltipNode = tooltip.triggerNode;
           if (tooltipNode._placesNode) node = tooltipNode._placesNode;
@@ -251,14 +285,19 @@
         if (!node && !targetURI) return false;
         var title = node ? node.title : tooltipNode.label;
         var url;
-        if (targetURI || PlacesUtils.nodeIsURI(node)) url = targetURI || node.uri;
+        if (targetURI || PlacesUtils.nodeIsURI(node)) {
+          url = targetURI || node.uri;
+        }
         if (!cropped && !url) return false;
         aEvent.target.setAttribute("position", "after_start");
         if (tooltipNode) {
           aEvent.target.moveToAnchor(tooltipNode, "after_start");
         } else if (tree && cellCoords) {
           // anchor the tooltip to the tree cell
-          aEvent.target.moveTo(cellCoords.left + tree.screenX, cellCoords.bottom + tree.screenY);
+          aEvent.target.moveTo(
+            cellCoords.left + tree.screenX,
+            cellCoords.bottom + tree.screenY
+          );
         }
         let tooltipTitle = aEvent.target.querySelector(".places-tooltip-title");
         tooltipTitle.hidden = !title || title == url;
@@ -269,15 +308,58 @@
         return true;
       };
     }
-    reduceCtrlTabDelay(delay) {
-      if (delay === 200) return;
-      ctrlTab.open = function() {
+    modCtrlTabMethods() {
+      const delay = config["Reduce ctrl+tab delay"];
+      const shiftCtrlTabBehavior = config["Use Shift+Ctrl+Tab to switch"];
+      ctrlTab.onKeyDown = function(event) {
+        let action = ShortcutUtils.getSystemActionForEvent(event);
+        if (action != ShortcutUtils.CYCLE_TABS) {
+          return;
+        }
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        if (this.isOpen) {
+          this.advanceFocus(!event.shiftKey);
+          return;
+        }
+
+        Services.els.addSystemEventListener(document, "keyup", this, false);
+
+        let tabs = gBrowser.visibleTabs;
+        if (tabs.length > 2) {
+          let reverse = event.shiftKey && shiftCtrlTabBehavior;
+          this.open(!reverse);
+        } else if (tabs.length == 2) {
+          let index = tabs[0].selected ? 1 : 0;
+          gBrowser.selectedTab = tabs[index];
+        }
+      };
+      ctrlTab.open = function(forward = true) {
         if (this.isOpen) return;
-        this.canvasWidth = Math.ceil((screen.availWidth * 0.85) / this.maxTabPreviews);
-        this.canvasHeight = Math.round(this.canvasWidth * tabPreviews.aspectRatio);
+        this.canvasWidth = Math.ceil(
+          (screen.availWidth * 0.85) / this.maxTabPreviews
+        );
+        this.canvasHeight = Math.round(
+          this.canvasWidth * tabPreviews.aspectRatio
+        );
         this.updatePreviews();
-        this._selectedIndex = 1;
-        gBrowser.warmupTab(this.selected._tab);
+
+        let selectedIndex = 0;
+        do {
+          selectedIndex += forward ? 1 : -1;
+          if (selectedIndex < 0) {
+            selectedIndex = this.previews.length - 1;
+          } else if (selectedIndex >= this.previews.length) {
+            selectedIndex = 0;
+          }
+        } while (this.previews[selectedIndex].hidden);
+        this._selectedIndex = selectedIndex;
+
+        if (this.selected._tab) {
+          gBrowser.warmupTab(this.selected._tab);
+        }
         this._timer = setTimeout(() => {
           this._timer = null;
           this._openPanel();
@@ -301,7 +383,10 @@
       );
     }
     async addPrivateBrowsingTooltip() {
-      this.privateL10n = await new Localization(["browser/aboutPrivateBrowsing.ftl"], true);
+      this.privateL10n = await new Localization(
+        ["browser/aboutPrivateBrowsing.ftl"],
+        true
+      );
       let l10nId = PrivateBrowsingUtils.isWindowPrivate(window)
         ? "about-private-browsing-info-title"
         : "about-private-browsing-not-private";
@@ -311,16 +396,18 @@
     }
     makeDefaultBookmarkFolderPermanent() {
       let { panel } = StarUI;
-      let checkbox = panel.querySelector("#editBMPanel_newFolderBox").appendChild(
-        _ucUtils.createElement(document, "checkbox", {
-          id: "editBookmarkPanel_persistLastLocation",
-          label: "Remember last location",
-          accesskey: "R",
-          tooltiptext:
-            "Update the default bookmark folder when you change it. If unchecked, the folder chosen when this was checked will remain the default folder indefinitely.",
-          oncommand: `Services.prefs.setBoolPref("userChrome.bookmarks.editDialog.persistLastLocation", this.checked)`,
-        })
-      );
+      let checkbox = panel
+        .querySelector("#editBMPanel_newFolderBox")
+        .appendChild(
+          _ucUtils.createElement(document, "checkbox", {
+            id: "editBookmarkPanel_persistLastLocation",
+            label: "Remember last location",
+            accesskey: "R",
+            tooltiptext:
+              "Update the default bookmark folder when you change it. If unchecked, the folder chosen when this was checked will remain the default folder indefinitely.",
+            oncommand: `Services.prefs.setBoolPref("userChrome.bookmarks.editDialog.persistLastLocation", this.checked)`,
+          })
+        );
       panel.addEventListener("popupshowing", e => {
         if (e.target !== panel) return;
         let pref = Services.prefs.getBoolPref(
@@ -375,7 +462,8 @@
     containerIconsOnMultiselectedTabs() {
       const lazy = {};
       XPCOMUtils.defineLazyModuleGetters(lazy, {
-        ContextualIdentityService: "resource://gre/modules/ContextualIdentityService.jsm",
+        ContextualIdentityService:
+          "resource://gre/modules/ContextualIdentityService.jsm",
       });
       if (lazy.ContextualIdentityService.hasOwnProperty("setTabStyle")) return;
       lazy.ContextualIdentityService.setTabStyle = function(tab) {
@@ -390,7 +478,10 @@
         let iconPrefix = "identity-icon-";
         /* Remove the existing container color highlight if it exists */
         for (let className of tab.classList) {
-          if (className.startsWith(colorPrefix) || className.startsWith(iconPrefix)) {
+          if (
+            className.startsWith(colorPrefix) ||
+            className.startsWith(iconPrefix)
+          ) {
             tab.classList.remove(className);
           }
         }
@@ -425,7 +516,9 @@
         .getElementById("template-protections-popup")
         ?.content.querySelector("#protections-popup");
       let setEtpPopupInfoTooltip = e => {
-        let infoButton = e.target.querySelector("#protections-popup-info-button");
+        let infoButton = e.target.querySelector(
+          "#protections-popup-info-button"
+        );
         let ariaLabel = infoButton.getAttribute("aria-label");
         if (ariaLabel) {
           infoButton.removeAttribute("data-l10n-id");
@@ -435,7 +528,9 @@
         }
         etpPanel.removeEventListener("popupshowing", setEtpPopupInfoTooltip);
       };
-      if (etpPanel) etpPanel.addEventListener("popupshowing", setEtpPopupInfoTooltip);
+      if (etpPanel) {
+        etpPanel.addEventListener("popupshowing", setEtpPopupInfoTooltip);
+      }
 
       // support icons for the "move sidebar to left" and "move sidebar to right" buttons in
       // the sidebar switcher dropdown menu that appear when you click the sidebar switcher:
@@ -457,7 +552,10 @@
           ? gNavigatorBundle.getString("sidebar.moveToLeft")
           : gNavigatorBundle.getString("sidebar.moveToRight");
         this._reversePositionButton.setAttribute("label", label);
-        this._reversePositionButton.setAttribute("to-position", onRight ? "left" : "right");
+        this._reversePositionButton.setAttribute(
+          "to-position",
+          onRight ? "left" : "right"
+        );
         this._switcherPanel.hidden = false;
         this._switcherPanel.openPopup(this._icon);
         this._switcherTarget.classList.add("active");
@@ -493,6 +591,9 @@
         new UCMiscMods();
       }
     };
-    Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
+    Services.obs.addObserver(
+      delayedListener,
+      "browser-delayed-startup-finished"
+    );
   }
 })();

@@ -6,13 +6,6 @@
 
 /* this stylesheet only controls the appearance of the ctrl+tab popup */
 
-#ctrlTab-previews {
-  align-items: center;
-  justify-content: space-evenly;
-  display: flex;
-  border-radius: 0% !important;
-}
-
 #ctrlTab-panel {
   appearance: none !important;
   border-style: none !important;
@@ -21,12 +14,25 @@
   box-shadow: none !important;
   background: none !important;
   --panel-background: var(--ctrlTab-overlay-color) !important;
-  border-radius: 10px !important;
+  border-radius: 15px !important;
   overflow: hidden !important;
+}
+
+#ctrlTab-previews {
+  align-items: center;
+  justify-content: space-between;
+  display: flex !important;
+  border-radius: 0% !important;
 }
 
 .ctrlTab-preview {
   background: none !important;
+  flex: 0 !important;
+  min-width: min-content !important;
+}
+
+.ctrlTab-preview:not([hidden]) {
+  display: flex !important;
 }
 
 .ctrlTab-preview:not(#ctrlTab-showAll) > * > .ctrlTab-preview-inner {
@@ -68,11 +74,12 @@
 }
 
 .ctrlTab-preview-inner {
+  flex: 0 !important;
   color: var(--ui-text-80) !important;
   margin: 0 !important;
   padding: 10px !important;
   border: 1px solid var(--blurred-dialog-border-color) !important;
-  border-radius: 7px !important;
+  border-radius: 9px !important;
   box-shadow: 0 0 4px -1px rgba(0, 0, 0, 0.2), 0 0 25px -2px rgba(0, 0, 0, 0.2) !important;
   background-color: var(--ctrlTab-panel-bgcolor) !important;
 }
@@ -88,12 +95,16 @@
   border-radius: 3px !important;
 }
 
+.ctrlTab-preview-inner {
+  position: relative;
+}
+
 .ctrlTab-favicon-container {
   -moz-box-align: start !important;
   -moz-box-pack: start !important;
   box-shadow: none !important;
   margin-inline-start: 7px !important;
-  margin-top: -47px !important;
+  margin-top: 7px !important;
   padding-bottom: 13px !important;
   height: 45px !important;
   position: absolute !important;

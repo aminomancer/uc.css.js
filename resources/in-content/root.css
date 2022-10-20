@@ -6,6 +6,23 @@
 
 /* fundamental content styles, e.g. plaintext pages. */
 
+@namespace html url("http://www.w3.org/1999/xhtml");
+@namespace xul url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+html|tt,
+html|code,
+html|kbd,
+html|samp,
+html|xmp,
+html|pre,
+html|plaintext,
+html|listing,
+html|textarea,
+html|input:is([type=date], [type=time], [type=datetime-local]) {
+  font-family: Fira Code UC, Fira Code, SF Mono, -moz-fixed, monospace;
+  font-weight: 300;
+}
+
 @media (prefers-color-scheme: dark) {
   ::selection {
     background-color: var(--global-selection-bgcolor) !important;

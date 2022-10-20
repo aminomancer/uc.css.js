@@ -1266,6 +1266,11 @@ for some window scaling factors. */
   border-inline-end: 1px solid var(--desaturate-dimmed) !important;
   pointer-events: auto !important;
   fill: currentColor !important;
+  z-index: 0;
+}
+
+#identity-box {
+  z-index: 1;
 }
 
 #urlbar-search-mode-indicator-close {

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Findbar Mods
-// @version        1.3.3
+// @version        1.3.4
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    1) Make a custom context menu for the findbar that lets you
@@ -104,7 +104,9 @@ class FindbarMods {
       if (this.forceMiniFindbar) return true;
       let file = Cc["@mozilla.org/chrome/chrome-registry;1"]
         .getService(Ci.nsIChromeRegistry)
-        .convertChromeURL(Services.io.newURI("chrome://userchrome/content/material/"))
+        .convertChromeURL(
+          Services.io.newURI("chrome://userchrome/content/material/")
+        )
         ?.QueryInterface(Ci.nsIFileURL)?.file;
       return file?.exists() && file?.isDirectory();
     });
@@ -309,7 +311,9 @@ class FindbarMods {
         if (node == wrapper || node == foundMatches) continue;
         node.hidden = showMinimalUI;
       }
-      this.getElement("find-next").hidden = this.getElement("find-previous").hidden = showMinimalUI;
+      this.getElement("find-next").hidden = this.getElement(
+        "find-previous"
+      ).hidden = showMinimalUI;
       foundMatches.hidden = showMinimalUI || !foundMatches.value;
       tinyIndicator.style.display = showMinimalUI ? "none" : "inline-block";
       if (showMinimalUI) this._findField.classList.add("minimal");
@@ -364,9 +368,17 @@ class FindbarMods {
     if (!node) return;
     let findbar = node.tagName === "findbar" ? node : node.closest("findbar");
     if (!findbar) return;
-    if (e.currentTarget !== this.contextMenu) return this.onSubmenuShowing(e, findbar);
-    this.contextMenu._menuitemHighlightAll.setAttribute("checked", !!findbar._highlightAll);
-    this.contextMenu._menuitemEntireWord.setAttribute("checked", !!findbar._entireWord);
+    if (e.currentTarget !== this.contextMenu) {
+      return this.onSubmenuShowing(e, findbar);
+    }
+    this.contextMenu._menuitemHighlightAll.setAttribute(
+      "checked",
+      !!findbar._highlightAll
+    );
+    this.contextMenu._menuitemEntireWord.setAttribute(
+      "checked",
+      !!findbar._entireWord
+    );
     if (findbar._quickFindTimeout) {
       clearTimeout(findbar._quickFindTimeout);
       findbar._quickFindTimeout = null;
@@ -387,15 +399,22 @@ class FindbarMods {
   onSubmenuShowing(e, findbar) {
     if (e.target === this.contextMenu._menuMatchDiacriticsPopup) {
       let diacriticsStatus =
-        Services.prefs.getIntPref("findbar.matchdiacritics", 0) || findbar._matchDiacritics;
-      let activeItem = this.contextMenu._menuMatchDiacriticsPopup.children[diacriticsStatus];
+        Services.prefs.getIntPref("findbar.matchdiacritics", 0) ||
+        findbar._matchDiacritics;
+      let activeItem = this.contextMenu._menuMatchDiacriticsPopup.children[
+        diacriticsStatus
+      ];
       activeItem.setAttribute("checked", true);
     }
     if (e.target === this.contextMenu._menuMatchCasePopup) {
       let caseStatus =
-        Services.prefs.getIntPref("accessibility.typeaheadfind.casesensitive", 0) ||
-        findbar._typeAheadCaseSensitive;
-      let activeItem = this.contextMenu._menuMatchCasePopup.children[caseStatus];
+        Services.prefs.getIntPref(
+          "accessibility.typeaheadfind.casesensitive",
+          0
+        ) || findbar._typeAheadCaseSensitive;
+      let activeItem = this.contextMenu._menuMatchCasePopup.children[
+        caseStatus
+      ];
       activeItem.setAttribute("checked", true);
     }
   }
@@ -412,9 +431,11 @@ class FindbarMods {
       if (
         e.keyCode == KeyEvent.DOM_VK_UP ||
         (e.keyCode == KeyEvent.DOM_VK_LEFT &&
-          document.defaultView.getComputedStyle(this.parentNode).direction == "ltr") ||
+          document.defaultView.getComputedStyle(this.parentNode).direction ==
+            "ltr") ||
         (e.keyCode == KeyEvent.DOM_VK_RIGHT &&
-          document.defaultView.getComputedStyle(this.parentNode).direction == "rtl")
+          document.defaultView.getComputedStyle(this.parentNode).direction ==
+            "rtl")
       ) {
         e.preventDefault();
         window.document.commandDispatcher.rewindFocus();
@@ -423,16 +444,26 @@ class FindbarMods {
       if (
         e.keyCode == KeyEvent.DOM_VK_DOWN ||
         (e.keyCode == KeyEvent.DOM_VK_RIGHT &&
-          document.defaultView.getComputedStyle(this.parentNode).direction == "ltr") ||
+          document.defaultView.getComputedStyle(this.parentNode).direction ==
+            "ltr") ||
         (e.keyCode == KeyEvent.DOM_VK_LEFT &&
-          document.defaultView.getComputedStyle(this.parentNode).direction == "rtl")
+          document.defaultView.getComputedStyle(this.parentNode).direction ==
+            "rtl")
       ) {
         e.preventDefault();
         window.document.commandDispatcher.advanceFocus();
         return;
       }
       // handle access keys
-      if (!e.charCode || e.charCode <= 32 || e.altKey || e.ctrlKey || e.metaKey) return;
+      if (
+        !e.charCode ||
+        e.charCode <= 32 ||
+        e.altKey ||
+        e.ctrlKey ||
+        e.metaKey
+      ) {
+        return;
+      }
       const charLower = String.fromCharCode(e.charCode).toLowerCase();
       if (this.accessKey.toLowerCase() == charLower) {
         this.click();
@@ -471,7 +502,9 @@ class FindbarMods {
     // rules similar to those in uc-findbar.css.
     findbar._findField.style.width = "20em";
     // we want the close button to be on the far right end of the findbar.
-    findbar._findField.parentNode.after(findbar.querySelector(".findbar-closebutton"));
+    findbar._findField.parentNode.after(
+      findbar.querySelector(".findbar-closebutton")
+    );
     // put it after the input box so we can use the ~ squiggly combinator
     findbar._findField.after(findbar._tinyIndicator);
     // move the match-case and entire-word buttons into the text field.
@@ -485,10 +518,10 @@ class FindbarMods {
     entireWordButton.addEventListener("keypress", onKey);
   }
   // for a given findbar, move its label into the proper position.
-  setLabelPosition(findbar) {
-    let getBounds = window.windowUtils.getBoundsWithoutFlushing;
+  updateLabelPosition(findbar) {
     let distanceFromEdge =
-      getBounds(findbar).right - getBounds(findbar.querySelector(".findbar-textbox")).right;
+      findbar.getBoundingClientRect().right -
+      findbar.querySelector(".findbar-textbox").getBoundingClientRect().right;
     findbar._tinyIndicator.style.right = `${distanceFromEdge + 1}px`;
   }
   // when a new tab is opened and the findbar somehow activated, a new findbar
@@ -543,7 +576,7 @@ class FindbarMods {
   }
   onFindbarOpen(e) {
     if (e.target.findMode == e.target.FIND_NORMAL) {
-      setTimeout(() => e.target.ucFindbarMods.setLabelPosition(e.target), 1);
+      requestAnimationFrame(() => this.updateLabelPosition(e.target));
     }
   }
 }
