@@ -952,7 +952,7 @@ But what if you have a non-default search engine that you want to use for a part
 
 This pref accepts a JSON-formatted object containing zero or more name-value pairs, separated by commas. This object can also include one reserved property called `REG_EXPS`, which uses regular expressions instead of URL strings. The object format is:
 
-```XQuery
+```YAML
 {
   "REG_EXPS": {
     <regexp1>: <engine>,
