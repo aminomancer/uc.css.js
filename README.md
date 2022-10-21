@@ -796,7 +796,7 @@ If you want to use my sound icon styles, see [uc-tabs.css](/uc-tabs.css#L503). T
 1. use my theme, complete with [chrome.manifest](/utils/chrome.manifest) and the [resources](/resources) folder, (in which case you'll already have all of the following files and CSS, and only need to download [restoreTabSoundButton.uc.js](/JS/restoreTabSoundButton.uc.js); or...
 2. download [tabMods.uc.js](/resources/script-override/tabMods.uc.js) and put it in `<your profile>/chrome/resources/script-override/` and edit the [manifest](/utils/chrome.manifest) file that comes with fx-autoconfig to add the following line (at the bottom):
 
-```
+```JAR Manifest
 override chrome://browser/content/tabbrowser-tab.js ../resources/tabMods.uc.js
 ```
 
@@ -892,7 +892,7 @@ For those who are curious, this will override the tab markup template and some m
 
 This script will basically restore the arrows at the corner of panels that point at the element to which the panel is anchored. But in order to do that, you also need to install these files from the [resources/script-override](/resources/script-override/) folder: [panel.js](/resources/script-override/panel.js), [places-menupopup.js](/resources/script-override/places-menupopup.js), and [translation-notification.js](/resources/script-override/translation-notification.js). After downloading them and placing them in your own `resources/script-override` folder, add the following lines to your [chrome.manifest](/utils/chrome.manifest) file:
 
-```
+```JAR Manifest
 override chrome://global/content/elements/panel.js ../resources/script-override/panel.js
 override chrome://browser/content/places/places-menupopup.js ../resources/script-override/places-menupopup.js
 override chrome://browser/content/translation-notification.js ../resources/script-override/translation-notification.js
