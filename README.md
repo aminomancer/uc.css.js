@@ -954,7 +954,7 @@ This pref accepts a JSON-formatted object containing zero or more name-value pai
 
 ```YAML
 {
-  "REG_EXPS": {
+  REG_EXPS: {
     <regexp1>: <engine>,
     <regexp2>: <engine>
   },
