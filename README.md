@@ -892,7 +892,7 @@ For those who are curious, this will override the tab markup template and some m
 
 This script will basically restore the arrows at the corner of panels that point at the element to which the panel is anchored. But in order to do that, you also need to install these files from the [resources/script-override](/resources/script-override/) folder: [panel.js](/resources/script-override/panel.js), [places-menupopup.js](/resources/script-override/places-menupopup.js), and [translation-notification.js](/resources/script-override/translation-notification.js). After downloading them and placing them in your own `resources/script-override` folder, add the following lines to your [chrome.manifest](/utils/chrome.manifest) file:
 
-```JAR Manifest
+```
 override chrome://global/content/elements/panel.js ../resources/script-override/panel.js
 override chrome://browser/content/places/places-menupopup.js ../resources/script-override/places-menupopup.js
 override chrome://browser/content/translation-notification.js ../resources/script-override/translation-notification.js
@@ -952,7 +952,7 @@ But what if you have a non-default search engine that you want to use for a part
 
 This pref accepts a JSON-formatted object containing zero or more name-value pairs, separated by commas. This object can also include one reserved property called `REG_EXPS`, which uses regular expressions instead of URL strings. The object format is:
 
-```SQL
+```C
 {
   REG_EXPS: {
     <regexp1>: <engine>,
