@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Search Selection Keyboard Shortcut
-// @version        1.7.3
+// @version        1.7.4
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Adds a new keyboard shortcut (Ctrl+Shift+F) that searches your default search
@@ -145,7 +145,9 @@ class SearchSelectionShortcut {
   async setup() {
     // the component registrar — this is the interface that lets us make
     // custom URIs with chrome:// protocols.
-    const registrar = Components.manager.QueryInterface(Ci.nsIComponentRegistrar);
+    const registrar = Components.manager.QueryInterface(
+      Ci.nsIComponentRegistrar
+    );
     // a temp directory we're making in the chrome folder. I tried making this
     // folder in the *actual* Temp directory, but I guess it has a permissions
     // issue or something. when we try that, the hotkey works on system pages,
@@ -156,7 +158,10 @@ class SearchSelectionShortcut {
     let tempDir = Services.dirsvc.get("UChrm", Ci.nsIFile);
     tempDir.append(".SearchSelectionShortcut");
     let { path } = tempDir;
-    await IOUtils.makeDirectory(path, { ignoreExisting: true, createAncestors: false });
+    await IOUtils.makeDirectory(path, {
+      ignoreExisting: true,
+      createAncestors: false,
+    });
     // hide the temp dir on windows so it doesn't get in the way of user activities or prevent its eventual deletion.
     if (AppConstants.platform === "win") {
       await IOUtils.setWindowsAttributes?.(path, { hidden: true });
@@ -164,10 +169,13 @@ class SearchSelectionShortcut {
     this.tempPath = path;
 
     // create a manifest file that registers a URI for chrome://uc-searchselectionshortcut/content/
-    this.manifestFile = await this.createTempFile(`content uc-searchselectionshortcut ./`, {
-      name: "ucsss",
-      type: "manifest",
-    });
+    this.manifestFile = await this.createTempFile(
+      `content uc-searchselectionshortcut ./`,
+      {
+        name: "ucsss",
+        type: "manifest",
+      }
+    );
     // JSActors require parent files and child files.
     // see https://firefox-source-docs.mozilla.org/dom/ipc/jsactors.html
     // this parent file listens for messages from the child file. when it gets a
@@ -218,6 +226,10 @@ class SearchSelectionShortcut {
     // listen for application quit so we can clean up the temp files.
     Services.obs.addObserver(this, "quit-application");
   }
+  get uuid() {
+    if (!this._uuid) this._uuid = Services.uuid.generateUUID().toString();
+    return this._uuid;
+  }
   /**
    * create a file in the temp folder
    * @param {string} contents (the actual file contents in UTF-8)
@@ -231,8 +243,7 @@ class SearchSelectionShortcut {
    */
   async createTempFile(contents, options = {}) {
     let { path = null, name = "uc-temp", type = "txt" } = options;
-    const uuid = Services.uuid.generateUUID().toString();
-    name += "-" + uuid + "." + type;
+    name += "-" + this.uuid + "." + type;
     if (!path) {
       let dir = Services.dirsvc.get("UChrm", Ci.nsIFile);
       dir.append(".SearchSelectionShortcut");
@@ -329,4 +340,6 @@ _ucUtils.sharedGlobal.searchSelectionShortcut = {
   _startup: () => {},
 };
 
-if (location.href === AppConstants.BROWSER_CHROME_URL) new SearchSelectionShortcut();
+if (location.href === AppConstants.BROWSER_CHROME_URL) {
+  new SearchSelectionShortcut();
+}

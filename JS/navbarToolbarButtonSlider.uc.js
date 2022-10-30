@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Navbar Toolbar Button Slider
-// @version        2.8.4
+// @version        2.8.5
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Wrap all toolbar buttons in a scrollable container. It can
@@ -93,7 +93,8 @@ class NavbarToolbarSlider {
    */
   static smoothCenterScrollTo(el, slider) {
     let container = slider.parentElement;
-    let buttonX = NavbarToolbarSlider.rectX(el) - NavbarToolbarSlider.rectX(slider);
+    let buttonX =
+      NavbarToolbarSlider.rectX(el) - NavbarToolbarSlider.rectX(slider);
     let widgetWidth = NavbarToolbarSlider.parseWidth(el);
     let midpoint = container.clientWidth / 2;
     container.scrollTo({
@@ -117,8 +118,10 @@ class NavbarToolbarSlider {
     let nodeRect = node.getBoundingClientRect();
     let scrollRect = scrollBox.getBoundingClientRect();
     return (
-      scrollRect[ordinals[0]] > nodeRect[ordinals[0]] + nodeRect[ordinals[2]] / 2 ||
-      scrollRect[ordinals[1]] + nodeRect[ordinals[2]] / 2 < nodeRect[ordinals[1]]
+      scrollRect[ordinals[0]] >
+        nodeRect[ordinals[0]] + nodeRect[ordinals[2]] / 2 ||
+      scrollRect[ordinals[1]] + nodeRect[ordinals[2]] / 2 <
+        nodeRect[ordinals[1]]
     );
   }
   constructor() {
@@ -135,8 +138,12 @@ class NavbarToolbarSlider {
     this.inner = this.outer.appendChild(document.createXULElement("hbox"));
     this.kids = this.inner.children;
     this.navbar = document.getElementById("nav-bar");
-    this.cTarget = document.getElementById(this.navbar.getAttribute("customizationtarget"));
-    this.cOverflow = document.getElementById(this.navbar.getAttribute("overflowtarget"));
+    this.cTarget = document.getElementById(
+      this.navbar.getAttribute("customizationtarget")
+    );
+    this.cOverflow = document.getElementById(
+      this.navbar.getAttribute("overflowtarget")
+    );
     this.contextMenu = document.getElementById("toolbar-context-menu");
     this.urlbar = document.getElementById("urlbar-container");
     this.bin = document.getElementById("mainPopupSet");
@@ -168,7 +175,13 @@ class NavbarToolbarSlider {
   }
   observe(sub, _top, pref) {
     let value = NavbarToolbarSlider.getPref(sub, pref);
-    const { width, exclude, springs, collapse, direction } = NavbarToolbarSlider.prefNames;
+    const {
+      width,
+      exclude,
+      springs,
+      collapse,
+      direction,
+    } = NavbarToolbarSlider.prefNames;
     switch (pref) {
       case width:
         if (value === null || value <= 0) value = 11;
@@ -183,7 +196,9 @@ class NavbarToolbarSlider {
         if (this.outer.ready) {
           if (!value) this.outer.setAttribute("overflows", false);
           else this.outer.removeAttribute("overflows");
-          if (this.navbar.getAttribute("overflowing") && !value) this.unCollapse();
+          if (this.navbar.getAttribute("overflowing") && !value) {
+            this.unCollapse();
+          }
         }
         break;
       case direction:
@@ -206,12 +221,20 @@ class NavbarToolbarSlider {
   }
   setupPrefs() {
     const { prefs } = Services;
-    const { width, exclude, springs, collapse, direction } = NavbarToolbarSlider.prefNames;
+    const {
+      width,
+      exclude,
+      springs,
+      collapse,
+      direction,
+    } = NavbarToolbarSlider.prefNames;
     if (!prefs.prefHasUserValue(width)) prefs.setIntPref(width, 11);
     if (!prefs.prefHasUserValue(collapse)) prefs.setBoolPref(collapse, true);
     if (!prefs.prefHasUserValue(exclude)) prefs.setStringPref(exclude, "[]");
     if (!prefs.prefHasUserValue(springs)) prefs.setBoolPref(springs, true);
-    if (!prefs.prefHasUserValue(direction)) prefs.setStringPref(direction, "after");
+    if (!prefs.prefHasUserValue(direction)) {
+      prefs.setStringPref(direction, "after");
+    }
     // migrate direction pref to before/after/all syntax, as it used to support left/right values.
     switch (prefs.getStringPref(direction, "after")) {
       case "left":
@@ -252,7 +275,10 @@ class NavbarToolbarSlider {
   filterFn(item, index, array) {
     // check if window is private and widget is disallowed in private browsing.
     // if so, filter it out.
-    if (item.showInPrivateBrowsing === false && PrivateBrowsingUtils.isWindowPrivate(window)) {
+    if (
+      item.showInPrivateBrowsing === false &&
+      PrivateBrowsingUtils.isWindowPrivate(window)
+    ) {
       return false;
     }
     // exclude urlbar, searchbar, system buttons, and the slider itself.
@@ -283,7 +309,10 @@ class NavbarToolbarSlider {
     // exclude buttons defined by user preference
     if (
       JSON.parse(
-        Services.prefs.getStringPref(NavbarToolbarSlider.prefNames.exclude, "[]")
+        Services.prefs.getStringPref(
+          NavbarToolbarSlider.prefNames.exclude,
+          "[]"
+        )
       ).includes(item.id)
     ) {
       return false;
@@ -318,14 +347,25 @@ class NavbarToolbarSlider {
         return requestAnimationFrame(() => this.setMaxWidth());
       }
       if (arr) {
-        arr.slice(0, length).forEach(el => (maxWidth += NavbarToolbarSlider.parseWidth(el)));
+        arr
+          .slice(0, length)
+          .forEach(el => (maxWidth += NavbarToolbarSlider.parseWidth(el)));
       } else {
         widgetList
           .slice(0, length)
-          .forEach(w => (maxWidth += NavbarToolbarSlider.parseWidth(w.forWindow(window).node)));
+          .forEach(
+            w =>
+              (maxWidth += NavbarToolbarSlider.parseWidth(
+                w.forWindow(window).node
+              ))
+          );
       }
     } else {
-      maxWidth = length * NavbarToolbarSlider.parseWidth(document.getElementById("forward-button"));
+      maxWidth =
+        length *
+        NavbarToolbarSlider.parseWidth(
+          document.getElementById("forward-button")
+        );
     }
     this.outer.style.maxWidth = `${maxWidth}px`;
   }
@@ -351,7 +391,9 @@ class NavbarToolbarSlider {
     let array = [...this.widgets].filter(this.filterFn, this);
     if (overflown) {
       array.forEach(button => {
-        if (button.getAttribute("overflows") !== "false") this.cOverflow.appendChild(button);
+        if (button.getAttribute("overflows") !== "false") {
+          this.cOverflow.appendChild(button);
+        }
       });
       this.cOverflow.insertBefore(this.outer, this.cOverflow.firstElementChild);
     } else {
@@ -434,7 +476,9 @@ class NavbarToolbarSlider {
     let popup = e.target;
     let button = this.validWidget(popup);
     let moveToPanel = popup.querySelector(".customize-context-moveToPanel");
-    let removeFromToolbar = popup.querySelector(".customize-context-removeFromToolbar");
+    let removeFromToolbar = popup.querySelector(
+      ".customize-context-removeFromToolbar"
+    );
     if (!(moveToPanel && removeFromToolbar)) return;
     // if the parent element is not the slider, then make the context menu work as normal and bail.
     if (!button || button.parentElement !== this.inner) {
@@ -449,10 +493,14 @@ class NavbarToolbarSlider {
       return;
     }
     // if a non-removable system button got into the slider somehow, then disable these commands
-    let movable = button && button.id && CustomizableUI.isWidgetRemovable(button);
+    let movable =
+      button && button.id && CustomizableUI.isWidgetRemovable(button);
     if (movable) {
-      if (CustomizableUI.isSpecialWidget(button.id)) moveToPanel.setAttribute("disabled", true);
-      else moveToPanel.removeAttribute("disabled");
+      if (CustomizableUI.isSpecialWidget(button.id)) {
+        moveToPanel.setAttribute("disabled", true);
+      } else {
+        moveToPanel.removeAttribute("disabled");
+      }
       removeFromToolbar.removeAttribute("disabled");
     } else {
       moveToPanel.setAttribute("disabled", true);
@@ -533,7 +581,10 @@ class NavbarToolbarSlider {
     // slider may change the actual widget order, which persists through sessions.
     if (previousElementSibling) {
       if (previousElementSibling?.nextElementSibling) {
-        parent.insertBefore(this.outer, previousElementSibling.nextElementSibling);
+        parent.insertBefore(
+          this.outer,
+          previousElementSibling.nextElementSibling
+        );
       } else {
         parent.appendChild(this.outer);
       }
@@ -608,7 +659,10 @@ class NavbarToolbarSlider {
       // to the array. so we check each widget's node's next sibling, and if
       // it's not equal to the node of the next widget in the array, we insert
       // the node before the next widget's node.
-      if (item.forWindow(window).node.nextElementSibling != array[i + 1]?.forWindow(window).node) {
+      if (
+        item.forWindow(window).node.nextElementSibling !=
+        array[i + 1]?.forWindow(window).node
+      ) {
         // if nextElementSibling returns null, then it's the last child of the
         // slider. if that widget is the last in the array, then array[i+1] will
         // return undefined. since null == undefined the if statement will still
@@ -618,7 +672,10 @@ class NavbarToolbarSlider {
         // which always results in inserting the node at the end. so it ends up
         // where it should be anyway. and this is faster than actually checking
         // if it's the last node for every iteration of the loop.
-        container.insertBefore(item.forWindow(window)?.node, array[i + 1]?.forWindow(window).node);
+        container.insertBefore(
+          item.forWindow(window)?.node,
+          array[i + 1]?.forWindow(window).node
+        );
       }
     });
   }
@@ -641,7 +698,10 @@ class NavbarToolbarSlider {
       outer.open = !!inner.querySelector(`toolbarbutton[open="true"]`);
     });
     // begin observing for changes to the "open" attribute of the slider's toolbar buttons.
-    this.muObserver.observe(inner, { attributeFilter: ["open"], subtree: true });
+    this.muObserver.observe(inner, {
+      attributeFilter: ["open"],
+      subtree: true,
+    });
     for (const [key, val] of Object.entries({
       class: "chromeclass-location slider-container",
       id: "nav-bar-toolbarbutton-slider-container",
@@ -649,10 +709,11 @@ class NavbarToolbarSlider {
       clicktoscroll: true,
       orient: "horizontal",
       style:
-        "-moz-box-align: center; -moz-box-orient: vertical; scrollbar-width: none; box-sizing: border-box; scroll-behavior: smooth; overflow: hidden; transition: max-width 0.2s ease-out;",
+        "-moz-box-align: stretch; -moz-box-orient: vertical; scrollbar-width: none; box-sizing: border-box; scroll-behavior: smooth; overflow: hidden; transition: max-width 0.2s ease-out;",
     })) {
       outer.setAttribute(key, val);
     }
+
     if (!this.collapse) outer.setAttribute("overflows", false);
     for (const [key, val] of Object.entries({
       class: "slider-inner-container",
@@ -727,7 +788,8 @@ class NavbarToolbarSlider {
             let lineAmount = this.scrollWidth / buttons;
             let clientSize = this.clientWidth;
             if (Math.abs(scrollAmount * lineAmount) > clientSize) {
-              scrollAmount = Math.max(1, Math.floor(clientSize / lineAmount)) * direction;
+              scrollAmount =
+                Math.max(1, Math.floor(clientSize / lineAmount)) * direction;
             }
             scrollAmount *= lineAmount;
           } else {
@@ -785,7 +847,8 @@ class NavbarToolbarSlider {
     // since that script also changes it
     if ("LibraryUI" in window) return;
     StarUI.showConfirmation = function() {
-      const HINT_COUNT_PREF = "browser.bookmarks.editDialog.confirmationHintShowCount";
+      const HINT_COUNT_PREF =
+        "browser.bookmarks.editDialog.confirmationHintShowCount";
       const HINT_COUNT = Services.prefs.getIntPref(HINT_COUNT_PREF, 0);
       if (HINT_COUNT >= 3) return;
       Services.prefs.setIntPref(HINT_COUNT_PREF, HINT_COUNT + 1);
@@ -811,7 +874,9 @@ class NavbarToolbarSlider {
   }
   registerSheet() {
     const css = /* css */ `#nav-bar-customization-target>#nav-bar-toolbarbutton-slider-container:first-child,#nav-bar-customization-target>toolbarpaletteitem#nav-bar-toolbarbutton-slider-container:first-child>:is(toolbarbutton,toolbaritem){padding-inline-start:unset;margin-inline-start:calc(var(--toolbar-start-end-padding) - var(--toolbarbutton-outer-padding));}`;
-    let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(Ci.nsIStyleSheetService);
+    let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
+      Ci.nsIStyleSheetService
+    );
     let uri = makeURI("data:text/css;charset=UTF=8," + encodeURIComponent(css));
     if (sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) return;
     sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);

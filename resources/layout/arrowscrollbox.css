@@ -4,9 +4,9 @@
 
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 
-:host([scrolledtostart="true"])::part(overflow-start-indicator),
-:host([scrolledtoend="true"])::part(overflow-end-indicator),
-:host(:not([overflowing="true"])) > toolbarbutton {
+:host([scrolledtostart=true])::part(overflow-start-indicator),
+:host([scrolledtoend=true])::part(overflow-end-indicator),
+:host(:not([overflowing=true])) > toolbarbutton {
   visibility: collapse;
 }
 
@@ -40,8 +40,16 @@ toolbarbutton > .toolbarbutton-text {
   display: none;
 }
 
-:host(:not([clicktoscroll="true"])) > toolbarbutton {
-  appearance: none;
+@media not (-moz-platform: macos) {
+  :host(:not([clicktoscroll="true"])) > toolbarbutton {
+    appearance: none;
+  }
+}
+
+scrollbox,
+.scrollbox-clip {
+  min-width: 0;
+  min-height: 0;
 }
 
 /* replace scrollbuttons with scrollbars for vertical scrollboxes.

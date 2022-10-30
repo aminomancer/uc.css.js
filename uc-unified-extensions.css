@@ -1,5 +1,5 @@
 #unified-extensions-button {
-  display: none !important;
+  /*! display: none !important; */
 }
 
 #unified-extensions-view > .panel-subview-body {
@@ -121,6 +121,7 @@ unified-extensions-item[extension-id="{7a7a4a92-a2a0-41d1-9fd7-1e92480d612d}"i]
   > .unified-extensions-item-action .unified-extensions-item-icon,
 unified-extensions-item[extension-id="notes@mozilla.com"i] > .unified-extensions-item-action .unified-extensions-item-icon,
 unified-extensions-item[extension-id="private-relay@firefox.com"i] > .unified-extensions-item-action .unified-extensions-item-icon,
+unified-extensions-item[data-extensionid="remote-settings-devtools@mozilla.com"i] > .unified-extensions-item-action .unified-extensions-item-icon,
 unified-extensions-item[extension-id="gitzip-firefox-addons@gitzip.org"i]
   > .unified-extensions-item-action .unified-extensions-item-icon,
 unified-extensions-item[extension-id="{3e0e2f7e-1dde-4fee-ab96-031faa42ec52}"i]
@@ -322,6 +323,11 @@ unified-extensions-item[extension-id="notes@mozilla.com"i] .unified-extensions-i
 unified-extensions-item[extension-id="private-relay@firefox.com"i] .unified-extensions-item-action::before {
   content: "";
   background-image: url(chrome://userchrome/content/material/firefox-relay.svg);
+}
+
+unified-extensions-item[data-extensionid="remote-settings-devtools@mozilla.com"i] .unified-extensions-item-action::before {
+  content: "";
+  background-image: url(chrome://userchrome/content/material/kinto.svg);
 }
 
 unified-extensions-item[extension-id="gitzip-firefox-addons@gitzip.org"i] .unified-extensions-item-action::before {

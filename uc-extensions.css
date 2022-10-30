@@ -399,6 +399,11 @@ menupopup#viewSidebarMenu
   display: none;
 }
 
+/* remote-settings-devtools */
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="remote-settings-devtools@mozilla.com"i] {
+  list-style-image: url(chrome://userchrome/content/material/kinto.svg) !important;
+}
+
 /* Tab Stash menuitem icon */
 :is(.menu-iconic, .menuitem-iconic)[id^="tab-stash_condordes_net-menuitem-"][image]
   .menu-iconic-left::before {

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Extension Stylesheet Loader
-// @version        1.1.3
+// @version        1.1.4
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Allows users to share stylesheets for webextensions without
@@ -33,11 +33,16 @@ class ExtensionStylesheetLoader {
   }
   async setup() {
     // make a temp directory for our child file
-    const registrar = Components.manager.QueryInterface(Ci.nsIComponentRegistrar);
+    const registrar = Components.manager.QueryInterface(
+      Ci.nsIComponentRegistrar
+    );
     let tempDir = Services.dirsvc.get("UChrm", Ci.nsIFile);
     tempDir.append(".ExtensionStylesheetLoader");
     let { path } = tempDir;
-    await IOUtils.makeDirectory(path, { ignoreExisting: true, createAncestors: false });
+    await IOUtils.makeDirectory(path, {
+      ignoreExisting: true,
+      createAncestors: false,
+    });
     // hide the temp dir on windows so it doesn't get in the way of user
     // activities or prevent its eventual deletion.
     if (AppConstants.platform === "win") {
@@ -47,10 +52,13 @@ class ExtensionStylesheetLoader {
 
     // create a manifest file that registers a URI for
     // chrome://uc-extensionstylesheetloader/content/
-    this.manifestFile = await this.createTempFile(`content uc-extensionstylesheetloader ./`, {
-      name: "ucess",
-      type: "manifest",
-    });
+    this.manifestFile = await this.createTempFile(
+      `content uc-extensionstylesheetloader ./`,
+      {
+        name: "ucess",
+        type: "manifest",
+      }
+    );
     this.childFile = await this.createTempFile(
       `"use strict";const{WebExtensionPolicy}=Cu.getGlobalForObject(Services);export class ExtensionStylesheetLoaderChild extends JSWindowActorChild{handleEvent(e){let policy=WebExtensionPolicy.getByHostname(this.document.location.hostname);if(policy&&policy.id)this.document.documentElement.setAttribute("uc-extension-id",policy.id)}}`,
       { name: "ExtensionStylesheetLoaderChild", type: "sys.mjs" }
@@ -71,6 +79,10 @@ class ExtensionStylesheetLoader {
     // listen for application quit so we can clean up the temp files.
     Services.obs.addObserver(this, "quit-application");
   }
+  get uuid() {
+    if (!this._uuid) this._uuid = Services.uuid.generateUUID().toString();
+    return this._uuid;
+  }
   /**
    * create a file in the temp folder
    * @param {string} contents (the actual file contents in UTF-8)
@@ -85,8 +97,7 @@ class ExtensionStylesheetLoader {
    */
   async createTempFile(contents, options = {}) {
     let { path = null, name = "uc-temp", type = "txt" } = options;
-    const uuid = Services.uuid.generateUUID().toString();
-    name += "-" + uuid + "." + type;
+    name += "-" + this.uuid + "." + type;
     if (!path) {
       let dir = Services.dirsvc.get("UChrm", Ci.nsIFile);
       dir.append(".ExtensionStylesheetLoader");
@@ -120,4 +131,6 @@ _ucUtils.sharedGlobal.extensionStylesheetLoader = {
   _startup: () => {},
 };
 
-if (location.href === AppConstants.BROWSER_CHROME_URL) new ExtensionStylesheetLoader();
+if (location.href === AppConstants.BROWSER_CHROME_URL) {
+  new ExtensionStylesheetLoader();
+}

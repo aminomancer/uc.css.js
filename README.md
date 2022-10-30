@@ -382,7 +382,7 @@ let cmanifest = traverseToMainProfile("UChrm");
 
 5. Now save `config.js` and exit.
 6. Go back to your `chrome` folder, and open `boot.jsm` from the `utils` folder.
-7. Go to the end of line 60 (after the end of the function `resolveChromePath`) and hit enter twice to make two new lines, so you should now be at line 62.
+7. Go to the end of line 1 (the line that says `let EXPORTED_SYMBOLS = [];`) and hit enter twice to make two new lines, so you should now be at line 3.
 8. Paste this:
 
 ```js

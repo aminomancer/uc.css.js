@@ -1,0 +1,26 @@
+{
+  "name": "npm OpenSearch Engine",
+  "description": "Search engine for npm packages",
+  "manifest_version": 2,
+  "version": "1.0",
+  "applications": {
+    "gecko": {
+      "id": "search-npm@aminomancer"
+    }
+  },
+  "hidden": true,
+  "icons": {
+    "16": "favicon.svg"
+  },
+  "web_accessible_resources": ["favicon.svg"],
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "name": "npm",
+      "search_url": "https://www.npmjs.com/search",
+      "search_form": "https://www.npmjs.com/search?q={searchTerms}",
+      "search_url_get_params": "q={searchTerms}",
+      "suggest_url": "https://api.npms.io/v2/search/suggestions",
+      "suggest_url_get_params": "q={searchTerms}&size=10"
+    }
+  }
+}

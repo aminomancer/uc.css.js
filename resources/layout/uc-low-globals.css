@@ -24,3 +24,10 @@ tooltip {
   --transparent-img-background-context: center/16px repeat
     url(chrome://userchrome/content/checker-context.svg);
 }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --transparent-img-background: center/16px repeat hsla(0, 0%, 20%)
+      url(chrome://userchrome/content/checker-dark.svg);
+  }
+}

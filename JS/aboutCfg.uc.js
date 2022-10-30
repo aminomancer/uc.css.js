@@ -38,17 +38,23 @@ function findAboutConfig() {
 
   // fx-autoconfig
   ["resources", "aboutconfig", "config.xhtml"].forEach(appendFn);
-  if (dir.exists()) return "chrome://userchrome/content/aboutconfig/config.xhtml";
+  if (dir.exists()) {
+    return "chrome://userchrome/content/aboutconfig/config.xhtml";
+  }
 
   // earthlng's loader
   dir = Services.dirsvc.get("UChrm", Ci.nsIFile);
   ["utils", "aboutconfig", "config.xhtml"].forEach(appendFn);
-  if (dir.exists()) return "chrome://userchromejs/content/aboutconfig/config.xhtml";
+  if (dir.exists()) {
+    return "chrome://userchromejs/content/aboutconfig/config.xhtml";
+  }
 
   // xiaoxiaoflood's loader
   dir = Services.dirsvc.get("UChrm", Ci.nsIFile);
   ["utils", "aboutconfig", "aboutconfig.xhtml"].forEach(appendFn);
-  if (dir.exists()) return "chrome://userchromejs/content/aboutconfig/aboutconfig.xhtml";
+  if (dir.exists()) {
+    return "chrome://userchromejs/content/aboutconfig/aboutconfig.xhtml";
+  }
 
   // no about:config replacement found
   return false;
@@ -84,7 +90,9 @@ VintageAboutConfig.prototype = {
     return ch;
   },
   getURIFlags(_uri) {
-    return Ci.nsIAboutModule.ALLOW_SCRIPT | Ci.nsIAboutModule.IS_SECURE_CHROME_UI;
+    return (
+      Ci.nsIAboutModule.ALLOW_SCRIPT | Ci.nsIAboutModule.IS_SECURE_CHROME_UI
+    );
   },
   getChromeURI(_uri) {
     return this.uri;
