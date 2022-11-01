@@ -45,12 +45,12 @@ module.exports = {
     "prettier/prettier": [
       "error",
       {
-        "endOfLine": "auto",
-        "arrowParens": "avoid",
-        "printWidth": 80,
-        "tabWidth": 2,
-        "trailingComma": "es5",
-        "quoteProps": "preserve",
+        endOfLine: "auto",
+        arrowParens: "avoid",
+        printWidth: 80,
+        tabWidth: 2,
+        trailingComma: "es5",
+        quoteProps: "preserve",
       },
     ],
   },
@@ -64,6 +64,8 @@ module.exports = {
     {
       files: ["*@aminomancer/**", "extensions/**"],
       env: { webextensions: true },
+      globals: { XPCNativeWrapper: true },
+      rules: { complexity: "off", "no-console": "off" },
     },
     {
       // All .eslintrc.js files are in the node environment, so turn that
