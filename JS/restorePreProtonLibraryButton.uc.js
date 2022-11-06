@@ -32,9 +32,13 @@
     constructor() {
       if (
         allowScalingFix &&
-        (forceScalingFix || (window.devicePixelRatio === 1.5 && this.OS === "WINNT"))
+        (forceScalingFix ||
+          (window.devicePixelRatio === 1.5 && this.OS === "WINNT"))
       ) {
-        this.libButtonFragOrNode.setAttribute("scaling", window.devicePixelRatio);
+        this.libButtonFragOrNode.setAttribute(
+          "scaling",
+          window.devicePixelRatio
+        );
       }
       this._libraryButtonAnimationEndListeners = {};
       this._windowResizeRunning = false;
@@ -69,13 +73,23 @@
       }
 
       let navBar = document.getElementById("nav-bar");
-      let iconBounds = window.windowUtils.getBoundsWithoutFlushing(libraryButton.icon);
-      let libraryBounds = window.windowUtils.getBoundsWithoutFlushing(libraryButton);
+      let iconBounds = window.windowUtils.getBoundsWithoutFlushing(
+        libraryButton.icon
+      );
+      let libraryBounds = window.windowUtils.getBoundsWithoutFlushing(
+        libraryButton
+      );
 
-      this.animBox.style.setProperty("--library-button-height", libraryBounds.height + "px");
+      this.animBox.style.setProperty(
+        "--library-button-height",
+        libraryBounds.height + "px"
+      );
       this.animBox.style.setProperty("--library-icon-x", iconBounds.x + "px");
-      if (navBar.hasAttribute("brighttext")) this.animBox.setAttribute("brighttext", "true");
-      else this.animBox.removeAttribute("brighttext");
+      if (navBar.hasAttribute("brighttext")) {
+        this.animBox.setAttribute("brighttext", "true");
+      } else {
+        this.animBox.removeAttribute("brighttext");
+      }
 
       this.animBox.removeAttribute("fade");
       libraryButton.setAttribute("animate", animation);
@@ -123,7 +137,9 @@
           return;
         }
 
-        let iconBounds = window.windowUtils.getBoundsWithoutFlushing(libraryButton.icon);
+        let iconBounds = window.windowUtils.getBoundsWithoutFlushing(
+          libraryButton.icon
+        );
         this.animBox.style.setProperty("--library-icon-x", iconBounds.x + "px");
         this._windowResizeRunning = false;
       });
@@ -145,8 +161,10 @@
     let nodeRect = node.getBoundingClientRect();
     let scrollRect = scrollBox.getBoundingClientRect();
     return (
-      scrollRect[ordinals[0]] > nodeRect[ordinals[0]] + nodeRect[ordinals[2]] / 2 ||
-      scrollRect[ordinals[1]] + nodeRect[ordinals[2]] / 2 < nodeRect[ordinals[1]]
+      scrollRect[ordinals[0]] >
+        nodeRect[ordinals[0]] + nodeRect[ordinals[2]] / 2 ||
+      scrollRect[ordinals[1]] + nodeRect[ordinals[2]] / 2 <
+        nodeRect[ordinals[1]]
     );
   }
 
@@ -154,8 +172,11 @@
     window.LibraryUI = new LibraryUIBase();
 
     StarUI.showConfirmation = function showConfirmation() {
-      let animationTriggered = window.LibraryUI.triggerLibraryAnimation("bookmark");
-      const HINT_COUNT_PREF = "browser.bookmarks.editDialog.confirmationHintShowCount";
+      let animationTriggered = window.LibraryUI.triggerLibraryAnimation(
+        "bookmark"
+      );
+      const HINT_COUNT_PREF =
+        "browser.bookmarks.editDialog.confirmationHintShowCount";
       const HINT_COUNT = Services.prefs.getIntPref(HINT_COUNT_PREF, 0);
       if (animationTriggered && HINT_COUNT >= 3) return;
       Services.prefs.setIntPref(HINT_COUNT_PREF, HINT_COUNT + 1);
@@ -191,6 +212,9 @@
         init();
       }
     };
-    Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
+    Services.obs.addObserver(
+      delayedListener,
+      "browser-delayed-startup-finished"
+    );
   }
 })();

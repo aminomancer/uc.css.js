@@ -113,16 +113,8 @@
     --newtab-text-primary-color: var(--in-content-page-color) !important;
     --lwt-sidebar-background-color: var(--in-content-box-background) !important;
     --lwt-sidebar-text-color: var(--in-content-page-color) !important;
-    --newtab-search-header-background-color: color-mix(
-      in srgb,
-      var(--uc-content-page-background) 70%,
-      transparent
-    ) !important;
-    --newtab-search-header-background-intermediate: color-mix(
-      in srgb,
-      var(--uc-content-page-background) 80%,
-      transparent
-    ) !important;
+    --newtab-search-header-background-color: color-mix(in srgb, var(--uc-content-page-background) 70%, transparent) !important;
+    --newtab-search-header-background-intermediate: color-mix(in srgb, var(--uc-content-page-background) 80%, transparent) !important;
     --newtab-seperator-line-color: var(--in-content-button-background-hover) !important;
     --newtab-modal-color: var(--in-content-box-background) !important;
     --newtab-focus-outline: var(--purple-40-a50) !important;
@@ -130,31 +122,13 @@
     --newtab-focus-border-selected: var(--purple-30) !important;
     --newtab-textbox-background-color: var(--in-content-button-background) !important;
     --newtab-textbox-focus-color: var(--purple-40) !important;
-    --newtab-primary-action-background: var(
-      --in-content-primary-button-background-hover
-    ) !important;
-    --newtab-primary-action-background-hover: color-mix(
-      in srgb,
-      var(--purple-30) 60%,
-      var(--newtab-primary-action-background)
-    ) !important;
-    --newtab-primary-action-background-active: color-mix(
-      in srgb,
-      var(--purple-25) 60%,
-      var(--newtab-primary-action-background)
-    ) !important;
+    --newtab-primary-action-background: var(--in-content-primary-button-background-hover) !important;
+    --newtab-primary-action-background-hover: color-mix(in srgb, var(--purple-30) 60%, var(--newtab-primary-action-background)) !important;
+    --newtab-primary-action-background-active: color-mix(in srgb, var(--purple-25) 60%, var(--newtab-primary-action-background)) !important;
     --newtab-primary-element-text-color: var(--ui-text-80) !important;
     --newtab-element-secondary-color: var(--in-content-button-background-hover) !important;
-    --newtab-element-secondary-color-hover: color-mix(
-      in srgb,
-      var(--ui-text-40) 50%,
-      var(--in-content-button-background-solid)
-    ) !important;
-    --newtab-element-secondary-color-active: color-mix(
-      in srgb,
-      var(--ui-text-50) 50%,
-      var(--in-content-button-background-solid)
-    ) !important;
+    --newtab-element-secondary-color-hover: color-mix(in srgb, var(--ui-text-40) 50%, var(--in-content-button-background-solid)) !important;
+    --newtab-element-secondary-color-active: color-mix(in srgb, var(--ui-text-50) 50%, var(--in-content-button-background-solid)) !important;
     --newtab-button-primary-color: var(--in-content-primary-button-background-hover) !important;
     --newtab-border-primary-color: var(--in-content-button-background-active) !important;
     --newtab-background-color-secondary: var(--in-content-button-background-solid) !important;
@@ -164,12 +138,8 @@
     --newtab-topsites-background-color: var(--in-content-button-background) !important;
     --customize-menu-background: var(--in-content-box-background) !important;
     --customize-menu-secondary-action-background: var(--in-content-button-background) !important;
-    --customize-menu-secondary-action-background-hover: var(
-      --in-content-button-background-hover
-    ) !important;
-    --customize-menu-secondary-action-background-active: var(
-      --in-content-button-background-active
-    ) !important;
+    --customize-menu-secondary-action-background-hover: var(--in-content-button-background-hover) !important;
+    --customize-menu-secondary-action-background-active: var(--in-content-button-background-active) !important;
     --customize-menu-first-shadow: hsla(250, 3%, 2%, 0.2) !important;
     --customize-menu-second-shadow: hsla(250, 3%, 2%, 0.4) !important;
     --newtab-contextmenu-background-color: var(--in-content-table-background) !important;
@@ -197,14 +167,8 @@
     outline: none !important;
   }
 
-  window:not([chromehidden])
-    > dialog
-    richlistbox[seltype="multiple"]:focus
-    > richlistitem[current="true"],
-  window:not([chromehidden])
-    > dialog
-    richlistbox.theme-listbox:focus
-    > richlistitem[current="true"] {
+  window:not([chromehidden]) > dialog richlistbox[seltype="multiple"]:focus > richlistitem[current="true"],
+  window:not([chromehidden]) > dialog richlistbox.theme-listbox:focus > richlistitem[current="true"] {
     outline: none !important;
   }
 
@@ -220,14 +184,7 @@
     background-color: transparent !important;
     backdrop-filter: blur(12px); */
 
-    background-image: linear-gradient(
-      180deg,
-      var(--in-content-page-background) 0%,
-      color-mix(in srgb, var(--uc-content-page-background) 80%, var(--in-content-page-background))
-        50%,
-      color-mix(in srgb, var(--uc-content-page-background) 70%, var(--in-content-page-background))
-        100%
-    ) !important;
+    background-image: linear-gradient(180deg, var(--in-content-page-background) 0%, color-mix(in srgb, var(--uc-content-page-background) 80%, var(--in-content-page-background)) 50%, color-mix(in srgb, var(--uc-content-page-background) 70%, var(--in-content-page-background)) 100%) !important;
     background-color: transparent !important;
   }
 
@@ -271,8 +228,7 @@
 
   .showPrivate .search-handoff-button {
     background-color: var(--newtab-textbox-background-color) !important;
-    box-shadow: 0 3px 8px var(--newtab-search-first-shadow),
-      0 0 2px var(--newtab-search-second-shadow) !important;
+    box-shadow: 0 3px 8px var(--newtab-search-first-shadow), 0 0 2px var(--newtab-search-second-shadow) !important;
     border: 1px solid transparent !important;
     color: var(--newtab-search-text-color) !important;
   }
@@ -375,20 +331,12 @@
   }
 
   message-bar[type="error"]:not([message-bar-type="infobar"]) {
-    --message-bar-background-color: color-mix(
-      in srgb,
-      transparent 15%,
-      var(--uc-warning-background)
-    ) !important;
+    --message-bar-background-color: color-mix(in srgb, transparent 15%, var(--uc-warning-background)) !important;
     --message-bar-text-color: var(--text-color) !important;
   }
 
   message-bar[type="critical"]:not([message-bar-type="infobar"]) {
-    --message-bar-background-color: color-mix(
-      in srgb,
-      hsla(-2, 100%, 60%, 0.5) 45%,
-      var(--uc-warning-background)
-    ) !important;
+    --message-bar-background-color: color-mix(in srgb, hsla(-2, 100%, 60%, 0.5) 45%, var(--uc-warning-background)) !important;
     --message-bar-text-color: var(--text-color) !important;
   }
 
@@ -875,16 +823,8 @@
     }
 
     .message--level-error {
-      --message-background-color: color-mix(
-        in srgb,
-        transparent 15%,
-        var(--uc-warning-background)
-      ) !important;
-      --message-border-color: color-mix(
-        in srgb,
-        transparent 30%,
-        var(--uc-warning-background)
-      ) !important;
+      --message-background-color: color-mix(in srgb, transparent 15%, var(--uc-warning-background)) !important;
+      --message-border-color: color-mix(in srgb, transparent 30%, var(--uc-warning-background)) !important;
       --message-color: var(--text-color) !important;
       --message-icon-color: var(--warning-color) !important;
     }
@@ -900,10 +840,7 @@
     --link-foreground: var(--in-content-link-color) !important;
     --visited-link-foreground: #823afc !important;
     --proportional-width: calc(100% - (122.5em - (var(--content-width, 60em) * 2)));
-    --final-content-width: max(
-      var(--content-width, 60em),
-      var(--proportional-width, var(--content-width, 60em))
-    );
+    --final-content-width: max(var(--content-width, 60em), var(--proportional-width, var(--content-width, 60em)));
   }
 
   .container {

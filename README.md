@@ -232,7 +232,7 @@ The `userContent.css` file handles stuff like the devtools, some UI pages and co
 
 So `userContent.css` isn't strictly required for the rest of the theme to work, but without it you'll find some elements look inconsistent with the theme, and it also takes care of some issues that make the fabled global dark mode harder to realize. If you already have a `userContent` file, I'd suggest changing its name to `custom-content.css` and placing it in the [resources/in-content](/resources/in-content) folder. The theme doesn't include this file, since it's purely intended for end-user modifications, but it automatically loads the file if it exists. It loads last and therefore wins any conflicts of equal priority & specificity. You can also delete any of the [content stylesheets](/resources/in-content) you don't want to use, or remove their `@import` rules from userContent.css.
 
-I've bundled some of my addons in this repo as well. They are in the [extensions](extensions) folder. My custom new tab page is signed (it's a modded fork of [Tab Notes][] by wildsky) but you will still need to "install addon from file" in `about:addons` since you're not downloading the extension package from a Mozilla domain. There are several search engine addons in the [extensions/search-extensions](extensions/search-extensions) folder. These simply add one-off search engines for websites like Google Images or YouTube, and some include search suggestions/autocomplete. Firefox already comes with Amazon and Wikipedia addons, but they have ugly icons and unnecessarily long labels. Mine are simply called Amazon and Wikipedia, and have icons that match the theme. Some of Firefox's built-in search engines also lack search suggestions even though the websites can provide suggestions. Some are signed and hosted on AMO, but others remain unsigned due to [an AMO bug][]. You can download the following search engines from AMO: [YouTube][]; [Google Translate][]; [Firefox Add-ons][]; [Searchfox][Searchfox Engine]; [Bugzilla][]; [MDN Web Docs][]; [Library Genesis][].
+I've bundled some of my addons in this repo as well. They are in the [extensions](extensions) folder. My custom new tab page is signed (it's a modded fork of [Tab Notes][] by wildsky) but you will still need to "install addon from file" in `about:addons` since you're not downloading the extension package from a Mozilla domain. There are several search engine addons in the [extensions/search-extensions](extensions/search-extensions) folder. These simply add one-off search engines for websites like Google Images or YouTube, and some include search suggestions/autocomplete. Firefox already comes with Amazon and Wikipedia addons, but they have ugly icons and unnecessarily long labels. Mine are simply called Amazon and Wikipedia, and have icons that match the theme. Some of Firefox's built-in search engines also lack search suggestions even though the websites can provide suggestions. Some are signed and hosted on AMO, but others remain unsigned due to [an AMO bug][]. You can download the following search engines from AMO: [YouTube][]; [Google Translate][]; [Firefox Add-ons][]; [Searchfox][searchfox engine]; [Bugzilla][]; [MDN Web Docs][]; [Library Genesis][].
 
 </details>
 
@@ -242,9 +242,9 @@ I've bundled some of my addons in this repo as well. They are in the [extensions
 
 <br/>
 
-`userChrome.css` doesn't require any fonts, but there's an optional preference in about:config which lets you replace fonts in the UI (not in-content) with [SF Pro][Apple Fonts], macOS's system font, on Windows or Linux. You can enable this by [downloading the font][SF-Pro.dmg] and opening it in 7-Zip. From here, double click the `.pkg` file, then `Payload~`, then `.`, `Library`, and `Fonts`. From here you can drag all the files to a working folder, select all of them, then right click and click "Install for all users."
+`userChrome.css` doesn't require any fonts, but there's an optional preference in about:config which lets you replace fonts in the UI (not in-content) with [SF Pro][apple fonts], macOS's system font, on Windows or Linux. You can enable this by [downloading the font][sf-pro.dmg] and opening it in 7-Zip. From here, double click the `.pkg` file, then `Payload~`, then `.`, `Library`, and `Fonts`. From here you can drag all the files to a working folder, select all of them, then right click and click "Install for all users."
 
-After that, you just need to toggle `userChrome.css.mac-ui-fonts` to `true` in about:config. Currently, this setting requires a local copy of three variants of the font: SF Pro, SF Pro Display, and SF Pro Text (all from [SF-Pro.dmg][]). If you use the Arabic abjad, download SF Arabic too since the theme now uses it too. Additionally, `userContent.css` can use [Fira Code][] or [SF Mono][Apple Fonts] for plaintext files. This repo includes a copy of Fira Code that the stylesheets can load, so you technically don't need to install it yourself, but I recommend installing it anyway. It's one of the best monospace typefaces in my opinion, and it's completely free. Install FiraCode-VF.ttf from the variable_ttf folder, but do not install the other font files since they can conflict.
+After that, you just need to toggle `userChrome.css.mac-ui-fonts` to `true` in about:config. Currently, this setting requires a local copy of three variants of the font: SF Pro, SF Pro Display, and SF Pro Text (all from [SF-Pro.dmg][]). If you use the Arabic abjad, download SF Arabic too since the theme now uses it too. Additionally, `userContent.css` can use [Fira Code][] or [SF Mono][apple fonts] for plaintext files. This repo includes a copy of Fira Code that the stylesheets can load, so you technically don't need to install it yourself, but I recommend installing it anyway. It's one of the best monospace typefaces in my opinion, and it's completely free. Install FiraCode-VF.ttf from the variable_ttf folder, but do not install the other font files since they can conflict.
 
 </details>
 
@@ -268,7 +268,7 @@ Normally in Firefox, the default search icon in the urlbar is a magnifying glass
 
 <details><summary>🌏 <b><i>How to use language packs in Nightly... (click to expand)</i></b></summary>
 
-If you want to use a UI language pack other than English for Firefox Nightly, you need to follow some additional steps. Mozilla only releases language packs for Release and Beta builds, but these can still be made compatible with Nightly builds. Find the latest Firefox [release directory][Firefox releases], click it, then click the subdirectory for your OS, e.g. win64. From there, scroll down to the folder labeled xpi. In here, locate the file with your language code, e.g. `zh-TW.xpi` for traditional Chinese.
+If you want to use a UI language pack other than English for Firefox Nightly, you need to follow some additional steps. Mozilla only releases language packs for Release and Beta builds, but these can still be made compatible with Nightly builds. Find the latest Firefox [release directory][firefox releases], click it, then click the subdirectory for your OS, e.g. win64. From there, scroll down to the folder labeled xpi. In here, locate the file with your language code, e.g. `zh-TW.xpi` for traditional Chinese.
 
 If you simply click the language pack link, Firefox will try to install it directly and tell you it's incompatible. Instead you need to download it and unpack it with 7-zip. You can try downloading it with another browser, but I prefer to use [Multithreaded Download Manager][], which lets you download the file by opening a context menu on the link.
 
@@ -276,7 +276,7 @@ Once you've downloaded the xpi file, unpack it with 7-zip. Delete the folder lab
 
 Now you need to open about:config and change some prefs. `intl.multilingual.downloadEnabled` and `intl.multilingual.enabled` both need to be set to `true`, while `extensions.langpacks.signatures.required` and `xpinstall.signatures.required` need to be set to `false`. Once you've done this, you can go to about:addons, click the gear icon, hit "Install Add-on From File..." and select the zip file you just created. Now that you have the language pack installed, go to about:preferences, scroll down to the Language and Appearance section, and under Language choose the new language pack. Then click the "Apply and Restart" button.
 
-Language packs installed this way will need to be updated manually, following the same steps outlined above, so I encourage you to bookmark [the directory][Firefox releases] so you can check back periodically for updates. Unfortunately, there isn't an automatic update method, but maybe it's possible to hook up push notifications for this site so you'll at least be alerted when a new version directory is added.
+Language packs installed this way will need to be updated manually, following the same steps outlined above, so I encourage you to bookmark [the directory][firefox releases] so you can check back periodically for updates. Unfortunately, there isn't an automatic update method, but maybe it's possible to hook up push notifications for this site so you'll at least be alerted when a new version directory is added.
 
 ⚠️ _I designed most of these code products to be compatible with other languages, but I can't read right-to-left scripts such as Arabic or Hebrew. I read left-to-right, so it's difficult for me to debug in RTL scripts, and I am alone on this project. So although I am pretty confident that left-to-right language packs work well with the theme and scripts, there are still likely to be some display issues with right-to-left language packs. If anyone wants to help with this, I'll welcome PRs and gists that follow the [conventions](#design-conventions)._
 
@@ -288,7 +288,7 @@ Language packs installed this way will need to be updated manually, following th
 
 <br/>
 
-[Release packages](/../../releases/) are available as a courtesy, but since the theme and scripts are updated on a daily basis to keep up with Nightly, the latest release package may not be completely up to date. If you want the very latest stylesheets/scripts, you should either [download the source code](/../../archive/HEAD.zip) and drag its contents to your profile's `chrome` folder, [clone the repo][Cloning a repo] directly to your `chrome` folder, (use [GitHub Desktop][] if all of this sounds like gibberish to you) or download individual folders with [GitZip][] or [Refined GitHub][].
+[Release packages](/../../releases/) are available as a courtesy, but since the theme and scripts are updated on a daily basis to keep up with Nightly, the latest release package may not be completely up to date. If you want the very latest stylesheets/scripts, you should either [download the source code](/../../archive/HEAD.zip) and drag its contents to your profile's `chrome` folder, [clone the repo][cloning a repo] directly to your `chrome` folder, (use [GitHub Desktop][] if all of this sounds like gibberish to you) or download individual folders with [GitZip][] or [Refined GitHub][].
 
 </details>
 
@@ -357,6 +357,7 @@ The problem with copying everything to `chrome_debugger_profile` is that you may
 2. Open `config.js` from your Firefox installation folder, in a text editor.
 3. After line 8, (after it says `Components;`) add some new lines and paste this:
 
+<!-- prettier-ignore -->
 ```js
 function traverseToMainProfile(str) {
   let dir = Cc["@mozilla.org/file/directory_service;1"]
@@ -647,7 +648,7 @@ Adds a toolbar button that implements the color picker without launching the dev
 
 ✨ This script is important if you use my theme or if you customize Firefox's tooltips on your own. Without it, the titlebar buttons' tooltips can't be styled.<details><summary>💬 <i><b>More details...</b></i></summary>
 
-Since [bug 1730309][], Firefox has tried to make the titlebar buttons (window controls) function more like native controls. In doing so, it allows the OS to draw tooltips for these buttons. So it prevents itself from showing redundant tooltips. That means we can't style the titlebar buttons' tooltips, they don't obey preferences, they disappear after 5 seconds on Windows, and they don't appear at all in fullscreen mode. Personally I would not be a fan of this change even if I didn't heavily customize Firefox's tooltips, because no matter what, OS tooltips are not going to be consistent with Firefox's tooltips, for reasons I mentioned. But in any case, we can fix this issue with JavaScript. If you were curious, it's caused by the *[titlebar-btn][]* attribute.
+Since [bug 1730309][], Firefox has tried to make the titlebar buttons (window controls) function more like native controls. In doing so, it allows the OS to draw tooltips for these buttons. So it prevents itself from showing redundant tooltips. That means we can't style the titlebar buttons' tooltips, they don't obey preferences, they disappear after 5 seconds on Windows, and they don't appear at all in fullscreen mode. Personally I would not be a fan of this change even if I didn't heavily customize Firefox's tooltips, because no matter what, OS tooltips are not going to be consistent with Firefox's tooltips, for reasons I mentioned. But in any case, we can fix this issue with JavaScript. If you were curious, it's caused by the _[titlebar-btn][]_ attribute.
 
 </details>
 
@@ -661,7 +662,7 @@ It also optionally improves the hotkeys a little bit so that Ctrl+B (or Cmd+B) t
 
 #### [Fluent Reveal Tabs](/JS/fluentRevealTabs.uc.js):
 
-Adds a pretty visual effect to tabs similar to the spotlight gradient effect on Windows 10's start menu tiles. When hovering a tab, a subtle radial gradient is applied under the mouse. Also applies to tabs in the "All tabs menu," and is fully compatible with my All Tabs Menu Expansion Pack. User configuration is towards the top of the script. Inspired by this [proof of concept][Fluent Reveal concept], and built on a modified version of [this library][Fluent Reveal library].
+Adds a pretty visual effect to tabs similar to the spotlight gradient effect on Windows 10's start menu tiles. When hovering a tab, a subtle radial gradient is applied under the mouse. Also applies to tabs in the "All tabs menu," and is fully compatible with my All Tabs Menu Expansion Pack. User configuration is towards the top of the script. Inspired by this [proof of concept][fluent reveal concept], and built on a modified version of [this library][fluent reveal library].
 
 #### [Fluent Reveal Navbar Buttons](/JS/fluentRevealNavbar.uc.js):
 
@@ -986,6 +987,7 @@ A `<regexp>` value must be a valid regular expression, wrapped in double quotes 
 A `<site>` value must be some kind of valid URL. Ideally a host (domain) is best, but it doesn't have to be a host, because some types of URLs lack hosts. If you're unsure what the host is for a website you're trying to link to an engine, open the website in a browser tab, open the content toolbox, and type `location.host`. For pages that lack hosts or have very important protocols (like `"moz-extension://"` URLs) you can specify the full page URL, like `"moz-extension://blahblah/index.html"` — or better yet, use a regular expression instead.
 
 An `<engine>` value can be either:
+
 1. an engine's name — the label that appears next to the search engine in the UI, e.g. `"Google"`
 2. the domain on which the search engine is hosted, e.g. `"www.google.com"`
 3. the engine's full search URL, or something close to it, e.g. `"www.google.com/search?q=%s"`
@@ -1169,6 +1171,7 @@ A lightweight aesthetic script that changes the background color of the urlbar t
 
 Made by request. Will conflict with any custom themes/stylesheets that set the background color of `#urlbar-input-container` with `!important` rules, so be sure to check your stylesheet if it's not working. You can add the following code to the bottom of your custom stylesheet to make sure the color rules win out:
 
+<!-- prettier-ignore -->
 ```css
 #urlbar-input-container[contextid] {
   background-color: color-mix(in srgb, transparent 75%, var(--identity-tab-color)) !important;
@@ -1276,7 +1279,7 @@ Various tiny mods not worth making separate scripts for. Read the comments [insi
     <li><a href="https://github.com/henryxrl"><img src="https://avatars.githubusercontent.com/u/7662954?v=4" width="14"/> Henry Xu (henryxrl)</a></li>
 </ul>
 
-I've stopped accepting personal donations for the foreseeable future. But if you still want to offer me some encouragement, I would be immensely gratified if you would support the adoption of orphans with special needs by [contributing to Reece's Rainbow][Reece's Rainbow]. Without a major boost in fundraising, many of these children are likely to remain trapped in austere conditions [for their entire lives][Guardian orphanages article]. If you donate, please save the confirmation and post it [in a new issue](/../../issues/new/choose), and I'll add it to the list above.
+I've stopped accepting personal donations for the foreseeable future. But if you still want to offer me some encouragement, I would be immensely gratified if you would support the adoption of orphans with special needs by [contributing to Reece's Rainbow][reece's rainbow]. Without a major boost in fundraising, many of these children are likely to remain trapped in austere conditions [for their entire lives][guardian orphanages article]. If you donate, please save the confirmation and post it [in a new issue](/../../issues/new/choose), and I'll add it to the list above.
 
 ## **Other useful links:**
 
@@ -1284,13 +1287,13 @@ I've stopped accepting personal donations for the foreseeable future. But if you
 
 <br/>
 
-[Searchfox](https://searchfox.org "Searchfox - Search Firefox's source code"): A search engine for Firefox's source code. This is what I use to write most of my scripts. For example, if you wanted to make a button that adds a bookmark, you could find something in the UI that already does that, copy its ID, and search for it on Searchfox. From there you could track down its callback function, copy something from that and search for it, and ultimately find what you need. It indexes several repositories, including multiple versions of Firefox. You can permanently add this search engine to Firefox by installing [this addon][Searchfox Engine] and navigating to `about:preferences#search` to give the engine a keyword. I use `fox`, which makes writing code for Firefox immensely faster.
+[Searchfox](https://searchfox.org "Searchfox - Search Firefox's source code"): A search engine for Firefox's source code. This is what I use to write most of my scripts. For example, if you wanted to make a button that adds a bookmark, you could find something in the UI that already does that, copy its ID, and search for it on Searchfox. From there you could track down its callback function, copy something from that and search for it, and ultimately find what you need. It indexes several repositories, including multiple versions of Firefox. You can permanently add this search engine to Firefox by installing [this addon][searchfox engine] and navigating to `about:preferences#search` to give the engine a keyword. I use `fox`, which makes writing code for Firefox immensely faster.
 
 [FirefoxCSS Subreddit](https://www.reddit.com/r/FirefoxCSS "Firefox CSS on Reddit"): Where to bring questions about modding Firefox.
 
 [FirefoxCSS Store](https://firefoxcss-store.github.io): A collection of Firefox CSS themes. If my theme is too complicated or labor-intensive for you, there are some really nice themes there that don't require autoconfig.
 
-[userChrome.org](https://www.userchrome.org "userChrome.css for Customizing Firefox"): A site hosted by Jefferson Scher with a lot of [information][userChrome customization], [guides][userChrome.css guide], [tools][Styling Proton], and other [resources][userChrome.css help] for modding Firefox, [setting up autoconfig][autoconfig], etc.
+[userChrome.org](https://www.userchrome.org "userChrome.css for Customizing Firefox"): A site hosted by Jefferson Scher with a lot of [information][userchrome customization], [guides][userchrome.css guide], [tools][styling proton], and other [resources][userchrome.css help] for modding Firefox, [setting up autoconfig][autoconfig], etc.
 
 [firefox-csshacks](https://github.com/MrOtherGuy/firefox-csshacks "MrOtherGuy/firefox-csshacks: Collection of userstyles affecting the browser"): A huge collection of CSS snippets (big and small) and information about CSS theming, by the author of fx-autoconfig. If there's something you're trying but struggling to do with CSS, this is a good place to start.
 
@@ -1322,57 +1325,60 @@ I've stopped accepting personal donations for the foreseeable future. But if you
 
 </details>
 
-<!-- Links -->
-[Dark Reader]: <https://addons.mozilla.org/firefox/addon/darkreader> "Dark Reader – Get this Extension for 🦊 Firefox"
-[Tab Notes]: <https://addons.mozilla.org/firefox/addon/tab-notes> "Tab Notes – Get this Extension for 🦊 Firefox"
-[YouTube]: <https://addons.mozilla.org/firefox/addon/youtube-opensearch-engine> "YouTube OpenSearch Engine – Get this Extension for 🦊 Firefox"
-[Google Translate]: <https://addons.mozilla.org/firefox/addon/google-translate-engine> "Google Translate Engine – Get this Extension for 🦊 Firefox"
-[Firefox Add-ons]: <https://addons.mozilla.org/firefox/addon/amo-opensearch-engine> "AMO OpenSearch Engine – Get this Extension for 🦊 Firefox"
-[Searchfox Engine]: <https://addons.mozilla.org/firefox/addon/searchfox-engine> "Searchfox OpenSearch Engine – Get this Extension for 🦊 Firefox"
-[Bugzilla]: <https://addons.mozilla.org/firefox/addon/bugzilla-engine> "Bugzilla OpenSearch Engine – Get this Extension for 🦊 Firefox"
-[MDN Web Docs]: <https://addons.mozilla.org/firefox/addon/mdn-engine> "MDN Web Docs OpenSearch Engine – Get this Extension for 🦊 Firefox"
-[Library Genesis]: <https://addons.mozilla.org/firefox/addon/libgen-engine> "Library Genesis OpenSearch Engine – Get this Extension for 🦊 Firefox"
-[Multithreaded Download Manager]: <https://addons.mozilla.org/firefox/addon/multithreaded-download-manager> "Multithreaded Download Manager – Get this Extension for 🦊 Firefox"
-[GitZip]: <https://addons.mozilla.org/firefox/addon/gitzip> "GitZip – Get this Extension for 🦊 Firefox"
-[Refined GitHub]: <https://addons.mozilla.org/firefox/addon/refined-github-> "Refined GitHub – Get this Extension for 🦊 Firefox"
-[Firefox Multi-Account Containers]: <https://addons.mozilla.org/firefox/addon/multi-account-containers> "Firefox Multi-Account Containers – Get this Extension for 🦊 Firefox"
+<!-- Addon Links -->
 
-[theme addons]: <https://developer.mozilla.org/docs/Mozilla/Add-ons/WebExtensions/manifest.json/theme> "theme - Mozilla | MDN"
-[userChrome customization]: <https://www.userchrome.org/what-is-userchrome-css.html> "What is userChrome.css? What can it do?"
-[userChrome.css guide]: <https://www.userchrome.org/how-create-userchrome-css.html> "How to Create a userChrome.css File"
-[Styling Proton]: <https://www.userchrome.org/firefox-89-styling-proton-ui.html> "Firefox 89+ – Styling the New Proton UI"
-[userChrome.css help]: <https://www.userchrome.org/help-with-userchrome-css.html> "Resources for Style Recipes and Tools"
-[autoconfig]: <https://www.userchrome.org/what-is-userchrome-js.html> "What is Autoconfig Startup Scripting (AKA userChrome.js)?"
-[CSS files]: <https://developer.mozilla.org/docs/Web/CSS> "CSS: Cascading Style Sheets"
-[component registrar]: <https://searchfox.org/mozilla-central/source/xpcom/components/nsIComponentRegistrar.idl> "nsIComponentRegistrar"
-[strings]: <https://wikipedia.org/wiki/String_(computer_science)> "String (computer science)"
-[Boolean]: <https://wikipedia.org/wiki/Boolean_data_type> "Boolean data type"
-[Firefox Nightly]: <https://www.mozilla.org/firefox/channel/desktop/#nightly>
-[ICC color management]: <https://developer.mozilla.org/en-US/docs/Mozilla/Firefox/Releases/3.5/ICC_color_correction_in_Firefox> "ICC color correction in Firefox"
-[color calibrator]: <https://spyderx.datacolor.com/shop-products/display-calibration> "SpyderX Screen Color Calibration Tool"
-[ASRouter Devtools]: <https://firefox-source-docs.mozilla.org/browser/components/newtab/content-src/asrouter/docs/index.html>
-[fx-autoconfig]: <https://github.com/MrOtherGuy/fx-autoconfig>
-[photon]: <https://design.firefox.com/photon/> "Firefox Photon UI"
-[Apple Fonts]: <https://developer.apple.com/fonts> "Fonts - Apple Developer"
-[SF-Pro.dmg]: <https://devimages-cdn.apple.com/design/resources/download/SF-Pro.dmg> "Download SF-Pro.dmg"
-[Fira Code]: <https://github.com/tonsky/FiraCode>
-[an AMO bug]: <https://github.com/mozilla/addons-linter/issues/3911> "Search extensions fail validation if search parameter values are localized messages · Issue #3911 · mozilla/addons-linter"
-[Firefox releases]: <https://archive.mozilla.org/pub/firefox/releases/> "Firefox release downloads"
-[Cloning a repo]: <https://docs.github.com/repositories/creating-and-managing-repositories/cloning-a-repository> "Cloning a repository - GitHub Docs"
-[GitHub Desktop]: <https://desktop.github.com>
-[mozilla-central]: <https://hg.mozilla.org/mozilla-central>
-[environment variable]: <https://www.schrodinger.com/kb/1842> "How do I set an environment variable?"
-[JSActors]: <https://firefox-source-docs.mozilla.org/dom/ipc/jsactors.html> "JSActors — Firefox Source Docs documentation"
-[aboutconfig]: <https://github.com/earthlng/aboutconfig> "earthlng/aboutconfig"
-[keyword shortcuts for bookmarks]: <https://kb.mozillazine.org/Using_keyword_searches> "Using keyword searches - MozillaZine Knowledge Base"
-[escape sequences]: <https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String#escape_sequences> "String - JavaScript | MDN"
-[bug 1730309]: <https://bugzilla.mozilla.org/show_bug.cgi?id=1730309> "1730309 - Tooltip is shown doubly on hover over the maximize button"
-[Bug 1766145]: <https://bugzilla.mozilla.org/show_bug.cgi?id=1766145> "1766145 - Can't refresh page by hitting Enter in urlbar if there's a URL fragment, because docshell assumes we want same-document navigation"
-[titlebar-btn]: <https://searchfox.org/mozilla-central/rev/d416a7b827c2d76b12848e355a4e03dde49ece25/browser/base/content/titlebar-items.inc.xhtml#8> "titlebar-items.inc.xhtml"
-[Fluent Reveal concept]: <https://www.reddit.com/r/FirefoxCSS/comments/ng5lnt/proof_of_concept_legacy_edge_like_interaction> "Proof of concept) Legacy Edge like interaction : FirefoxCSS"
-[Fluent Reveal library]: <https://github.com/d2phap/fluent-reveal-effect> "d2phap/fluent-reveal-effect: Fluent Reveal Effect JavaScript library for web"
-[Private Tab]: <https://github.com/xiaoxiaoflood/firefox-scripts/blob/master/chrome/privateTab.uc.js> "firefox-scripts/privateTab.uc.js at master · xiaoxiaoflood/firefox-scripts"
-[KeyboardEvent code]: <https://developer.mozilla.org/docs/Web/API/KeyboardEvent/code> "KeyboardEvent.code - Web APIs | MDN"
-[keycode.info]: <https://keycode.info> "JavaScript Event KeyCodes"
-[Reece's Rainbow]: <https://reecesrainbow.org/> "Reece's Rainbow – Special Needs Adoption Support"
-[Guardian orphanages article]: <https://www.theguardian.com/global-development-professionals-network/2016/sep/26/orphanage-locked-up-disabled-children-lumos-dri-human-rights> "Out of sight: the orphanages where disabled children are abandoned | Working in development | The Guardian"
+[dark reader]: https://addons.mozilla.org/firefox/addon/darkreader "Dark Reader – Get this Extension for 🦊 Firefox"
+[tab notes]: https://addons.mozilla.org/firefox/addon/tab-notes "Tab Notes – Get this Extension for 🦊 Firefox"
+[youtube]: https://addons.mozilla.org/firefox/addon/youtube-opensearch-engine "YouTube OpenSearch Engine – Get this Extension for 🦊 Firefox"
+[google translate]: https://addons.mozilla.org/firefox/addon/google-translate-engine "Google Translate Engine – Get this Extension for 🦊 Firefox"
+[firefox add-ons]: https://addons.mozilla.org/firefox/addon/amo-opensearch-engine "AMO OpenSearch Engine – Get this Extension for 🦊 Firefox"
+[searchfox engine]: https://addons.mozilla.org/firefox/addon/searchfox-engine "Searchfox OpenSearch Engine – Get this Extension for 🦊 Firefox"
+[bugzilla]: https://addons.mozilla.org/firefox/addon/bugzilla-engine "Bugzilla OpenSearch Engine – Get this Extension for 🦊 Firefox"
+[mdn web docs]: https://addons.mozilla.org/firefox/addon/mdn-engine "MDN Web Docs OpenSearch Engine – Get this Extension for 🦊 Firefox"
+[library genesis]: https://addons.mozilla.org/firefox/addon/libgen-engine "Library Genesis OpenSearch Engine – Get this Extension for 🦊 Firefox"
+[multithreaded download manager]: https://addons.mozilla.org/firefox/addon/multithreaded-download-manager "Multithreaded Download Manager – Get this Extension for 🦊 Firefox"
+[gitzip]: https://addons.mozilla.org/firefox/addon/gitzip "GitZip – Get this Extension for 🦊 Firefox"
+[refined github]: https://addons.mozilla.org/firefox/addon/refined-github- "Refined GitHub – Get this Extension for 🦊 Firefox"
+[firefox multi-account containers]: https://addons.mozilla.org/firefox/addon/multi-account-containers "Firefox Multi-Account Containers – Get this Extension for 🦊 Firefox"
+
+<!-- Development Links -->
+
+[theme addons]: https://developer.mozilla.org/docs/Mozilla/Add-ons/WebExtensions/manifest.json/theme "theme - Mozilla | MDN"
+[userchrome customization]: https://www.userchrome.org/what-is-userchrome-css.html "What is userChrome.css? What can it do?"
+[userchrome.css guide]: https://www.userchrome.org/how-create-userchrome-css.html "How to Create a userChrome.css File"
+[styling proton]: https://www.userchrome.org/firefox-89-styling-proton-ui.html "Firefox 89+ – Styling the New Proton UI"
+[userchrome.css help]: https://www.userchrome.org/help-with-userchrome-css.html "Resources for Style Recipes and Tools"
+[autoconfig]: https://www.userchrome.org/what-is-userchrome-js.html "What is Autoconfig Startup Scripting (AKA userChrome.js)?"
+[css files]: https://developer.mozilla.org/docs/Web/CSS "CSS: Cascading Style Sheets"
+[component registrar]: https://searchfox.org/mozilla-central/source/xpcom/components/nsIComponentRegistrar.idl "nsIComponentRegistrar"
+[strings]: https://wikipedia.org/wiki/String_(computer_science) "String (computer science)"
+[boolean]: https://wikipedia.org/wiki/Boolean_data_type "Boolean data type"
+[firefox nightly]: https://www.mozilla.org/firefox/channel/desktop/#nightly
+[icc color management]: https://developer.mozilla.org/en-US/docs/Mozilla/Firefox/Releases/3.5/ICC_color_correction_in_Firefox "ICC color correction in Firefox"
+[color calibrator]: https://spyderx.datacolor.com/shop-products/display-calibration "SpyderX Screen Color Calibration Tool"
+[asrouter devtools]: https://firefox-source-docs.mozilla.org/browser/components/newtab/content-src/asrouter/docs/index.html
+[fx-autoconfig]: https://github.com/MrOtherGuy/fx-autoconfig
+[photon]: https://design.firefox.com/photon/ "Firefox Photon UI"
+[apple fonts]: https://developer.apple.com/fonts "Fonts - Apple Developer"
+[sf-pro.dmg]: https://devimages-cdn.apple.com/design/resources/download/SF-Pro.dmg "Download SF-Pro.dmg"
+[fira code]: https://github.com/tonsky/FiraCode
+[an amo bug]: https://github.com/mozilla/addons-linter/issues/3911 "Search extensions fail validation if search parameter values are localized messages · Issue #3911 · mozilla/addons-linter"
+[firefox releases]: https://archive.mozilla.org/pub/firefox/releases/ "Firefox release downloads"
+[cloning a repo]: https://docs.github.com/repositories/creating-and-managing-repositories/cloning-a-repository "Cloning a repository - GitHub Docs"
+[github desktop]: https://desktop.github.com
+[mozilla-central]: https://hg.mozilla.org/mozilla-central
+[environment variable]: https://www.schrodinger.com/kb/1842 "How do I set an environment variable?"
+[jsactors]: https://firefox-source-docs.mozilla.org/dom/ipc/jsactors.html "JSActors — Firefox Source Docs documentation"
+[aboutconfig]: https://github.com/earthlng/aboutconfig "earthlng/aboutconfig"
+[keyword shortcuts for bookmarks]: https://kb.mozillazine.org/Using_keyword_searches "Using keyword searches - MozillaZine Knowledge Base"
+[escape sequences]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String#escape_sequences "String - JavaScript | MDN"
+[bug 1730309]: https://bugzilla.mozilla.org/show_bug.cgi?id=1730309 "1730309 - Tooltip is shown doubly on hover over the maximize button"
+[bug 1766145]: https://bugzilla.mozilla.org/show_bug.cgi?id=1766145 "1766145 - Can't refresh page by hitting Enter in urlbar if there's a URL fragment, because docshell assumes we want same-document navigation"
+[titlebar-btn]: https://searchfox.org/mozilla-central/rev/d416a7b827c2d76b12848e355a4e03dde49ece25/browser/base/content/titlebar-items.inc.xhtml#8 "titlebar-items.inc.xhtml"
+[fluent reveal concept]: https://www.reddit.com/r/FirefoxCSS/comments/ng5lnt/proof_of_concept_legacy_edge_like_interaction "Proof of concept) Legacy Edge like interaction : FirefoxCSS"
+[fluent reveal library]: https://github.com/d2phap/fluent-reveal-effect "d2phap/fluent-reveal-effect: Fluent Reveal Effect JavaScript library for web"
+[private tab]: https://github.com/xiaoxiaoflood/firefox-scripts/blob/master/chrome/privateTab.uc.js "firefox-scripts/privateTab.uc.js at master · xiaoxiaoflood/firefox-scripts"
+[keyboardevent code]: https://developer.mozilla.org/docs/Web/API/KeyboardEvent/code "KeyboardEvent.code - Web APIs | MDN"
+[keycode.info]: https://keycode.info "JavaScript Event KeyCodes"
+[reece's rainbow]: https://reecesrainbow.org/ "Reece's Rainbow – Special Needs Adoption Support"
+[guardian orphanages article]: https://www.theguardian.com/global-development-professionals-network/2016/sep/26/orphanage-locked-up-disabled-children-lumos-dri-human-rights "Out of sight: the orphanages where disabled children are abandoned | Working in development | The Guardian"

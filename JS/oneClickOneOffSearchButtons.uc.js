@@ -87,21 +87,30 @@
       let style = window.getComputedStyle(el),
         width = el.clientWidth,
         margin = parseFloat(style.marginLeft) + parseFloat(style.marginRight),
-        padding = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight),
-        border = parseFloat(style.borderLeftWidth) + parseFloat(style.borderRightWidth);
+        padding =
+          parseFloat(style.paddingLeft) + parseFloat(style.paddingRight),
+        border =
+          parseFloat(style.borderLeftWidth) +
+          parseFloat(style.borderRightWidth);
       return width + margin + padding + border;
     }
     function toggleSettingsButton(hide) {
       if (hide) {
         SearchOneOffs.prototype.getSelectableButtons = function() {
-          return [...this.buttons.querySelectorAll(".searchbar-engine-one-off-item")];
+          return [
+            ...this.buttons.querySelectorAll(".searchbar-engine-one-off-item"),
+          ];
         };
         for (let instance of [oneOffs, searchbarOneOffs]) {
           instance.settingsButton.style.display = "none";
         }
       } else {
-        SearchOneOffs.prototype.getSelectableButtons = function(aIncludeNonEngineButtons) {
-          const buttons = [...this.buttons.querySelectorAll(".searchbar-engine-one-off-item")];
+        SearchOneOffs.prototype.getSelectableButtons = function(
+          aIncludeNonEngineButtons
+        ) {
+          const buttons = [
+            ...this.buttons.querySelectorAll(".searchbar-engine-one-off-item"),
+          ];
           if (aIncludeNonEngineButtons) buttons.push(this.settingsButton);
           return buttons;
         };
@@ -117,7 +126,10 @@
           `gURLBar.view.controller.handleKeyNavigation = function ` +
             gURLBar.view.controller.handleKeyNavigation
               .toSource()
-              .replace(/(this\.\_lastQueryContextWrapper)/, `$1 && this.allowOneOffKeyNav`)
+              .replace(
+                /(this\.\_lastQueryContextWrapper)/,
+                `$1 && this.allowOneOffKeyNav`
+              )
         );
       } else {
         delete gURLBar.view.controller.handleKeyNavigation;
@@ -129,7 +141,9 @@
     oneOffs.handleSearchCommand = function(event, searchMode) {
       if (
         this.selectedButton == this.view.oneOffSearchButtons.settingsButton ||
-        this.selectedButton.classList.contains("searchbar-engine-one-off-add-engine")
+        this.selectedButton.classList.contains(
+          "searchbar-engine-one-off-add-engine"
+        )
       ) {
         this.input.controller.engagementEvent.discard();
         this.selectedButton.doCommand();
@@ -139,12 +153,14 @@
 
       let startQueryParams = {
         allowAutofill:
-          !searchMode.engineName && searchMode.source != UrlbarUtils.RESULT_SOURCE.SEARCH,
+          !searchMode.engineName &&
+          searchMode.source != UrlbarUtils.RESULT_SOURCE.SEARCH,
         event,
       };
 
       let userTypedSearchString =
-        this.input.value && this.input.getAttribute("pageproxystate") != "valid";
+        this.input.value &&
+        this.input.getAttribute("pageproxystate") != "valid";
       let engine = Services.search.getEngineByName(searchMode.engineName);
 
       let { where, params } = this._whereToOpen(event);
@@ -159,7 +175,11 @@
           },
         });
         this.selectedButton = null;
-        if (this.canScroll && !gURLBar.searchMode && !this.window.gBrowser.userTypedValue) {
+        if (
+          this.canScroll &&
+          !gURLBar.searchMode &&
+          !this.window.gBrowser.userTypedValue
+        ) {
           this.slider.scrollTo(0, 0);
         }
         return;
@@ -192,7 +212,11 @@
         }
       }
       this.selectedButton = null;
-      if (this.canScroll && !gURLBar.searchMode && !this.window.gBrowser.userTypedValue) {
+      if (
+        this.canScroll &&
+        !gURLBar.searchMode &&
+        !this.window.gBrowser.userTypedValue
+      ) {
         this.slider.scrollTo(0, 0);
       }
     };
@@ -208,14 +232,21 @@
         behavior: "auto",
       });
     };
-    oneOffs.advanceSelection = function(aForward, aIncludeNonEngineButtons, aWrapAround) {
+    oneOffs.advanceSelection = function(
+      aForward,
+      aIncludeNonEngineButtons,
+      aWrapAround
+    ) {
       let buttons = this.getSelectableButtons(aIncludeNonEngineButtons);
       let index;
       if (this.selectedButton) {
         let inc = aForward ? 1 : -1;
         let oldIndex = buttons.indexOf(this.selectedButton);
         index = (oldIndex + inc + buttons.length) % buttons.length;
-        if (!aWrapAround && ((aForward && index <= oldIndex) || (!aForward && oldIndex <= index))) {
+        if (
+          !aWrapAround &&
+          ((aForward && index <= oldIndex) || (!aForward && oldIndex <= index))
+        ) {
           index = -1;
         }
       } else {
@@ -229,7 +260,11 @@
     };
     oneOffs.onViewOpen = function onViewOpen() {
       this._on_popupshowing();
-      if (this.canScroll && !gURLBar.searchMode && !this.window.gBrowser.userTypedValue) {
+      if (
+        this.canScroll &&
+        !gURLBar.searchMode &&
+        !this.window.gBrowser.userTypedValue
+      ) {
         this.slider.scrollTo(0, 0);
       }
     };
@@ -243,9 +278,16 @@
         if (this.isViewOpen) {
           let isOneOffSelected =
             this.selectedButton &&
-            this.selectedButton.classList.contains("searchbar-engine-one-off-item") &&
-            !(this.selectedButton == this.settingsButton && this.hasAttribute("is_searchbar"));
-          if (this.selectedButton && !isOneOffSelected) this.selectedButton = null;
+            this.selectedButton.classList.contains(
+              "searchbar-engine-one-off-item"
+            ) &&
+            !(
+              this.selectedButton == this.settingsButton &&
+              this.hasAttribute("is_searchbar")
+            );
+          if (this.selectedButton && !isOneOffSelected) {
+            this.selectedButton = null;
+          }
           if (this.canScroll && !gURLBar.searchMode) this.slider.scrollTo(0, 0);
         }
       },
@@ -259,7 +301,10 @@
           SearchOneOffs.prototype._handleKeyDown
             .toSource()
             .replace(/_handleKeyDown/, "")
-            .replace(/this\.selectedButton &&\n\s*this\.selectedButton\.engine &&\n\s*/g, "")
+            .replace(
+              /this\.selectedButton &&\n\s*this\.selectedButton\.engine &&\n\s*/g,
+              ""
+            )
       );
     }
     handler.attachListeners();
@@ -271,7 +316,9 @@
     { token: skipOneOffsPref, default: false },
   ].forEach(pref => {
     // create prefs early if they don't exist
-    if (!prefsvc.prefHasUserValue(pref.token)) prefsvc.setBoolPref(pref.token, pref.default);
+    if (!prefsvc.prefHasUserValue(pref.token)) {
+      prefsvc.setBoolPref(pref.token, pref.default);
+    }
   });
 
   // Delayed startup
@@ -284,6 +331,9 @@
         init();
       }
     };
-    Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
+    Services.obs.addObserver(
+      delayedListener,
+      "browser-delayed-startup-finished"
+    );
   }
 })();

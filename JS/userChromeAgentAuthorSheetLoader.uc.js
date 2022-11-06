@@ -15,8 +15,12 @@
 
 let EXPORTED_SYMBOLS = [];
 (function() {
-  const { Services } = ChromeUtils.import("resource://gre/modules/Services.jsm");
-  let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(Ci.nsIStyleSheetService);
+  const { Services } = ChromeUtils.import(
+    "resource://gre/modules/Services.jsm"
+  );
+  let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
+    Ci.nsIStyleSheetService
+  );
   function traverseToMainProfile(str) {
     let dir = Services.dirsvc.get(str, Ci.nsIFile);
     if (!dir.exists()) {

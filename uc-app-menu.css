@@ -16,8 +16,7 @@
 }
 
 #PanelUI-menu-button[badge-status^="update"] > .toolbarbutton-badge-stack > .toolbarbutton-badge {
-  background: var(--update-badge-bg) url(chrome://userchrome/content/update-icon-inverted.svg)
-    no-repeat center/contain !important;
+  background: var(--update-badge-bg) url(chrome://userchrome/content/update-icon-inverted.svg) no-repeat center/contain !important;
   background-clip: border-box !important;
   fill: var(--update-badge-color) !important;
   border: 1px solid transparent !important;
@@ -28,18 +27,12 @@
   margin-block: -7px auto !important;
 }
 
-:root:not([customizing])
-  #PanelUI-menu-button[badge-status^="update"]
-  > .toolbarbutton-badge-stack
-  > .toolbarbutton-badge:-moz-window-inactive {
+:root:not([customizing]) #PanelUI-menu-button[badge-status^="update"] > .toolbarbutton-badge-stack > .toolbarbutton-badge:-moz-window-inactive {
   fill: transparent !important;
   background-color: var(--update-badge-inactive) !important;
 }
 
-:root:not([customizing])
-  #PanelUI-menu-button[badge-status^="update"]:is(:hover, [open])
-  > .toolbarbutton-badge-stack
-  > .toolbarbutton-badge:-moz-window-inactive {
+:root:not([customizing]) #PanelUI-menu-button[badge-status^="update"]:is(:hover, [open]) > .toolbarbutton-badge-stack > .toolbarbutton-badge:-moz-window-inactive {
   background-color: var(--update-badge-bg) !important;
   fill: var(--update-badge-color) !important;
 }
@@ -49,8 +42,7 @@
 }
 
 .panel-banner-item[notificationid^="update"] > .toolbarbutton-icon {
-  background: var(--update-badge-bg) url(chrome://userchrome/content/update-icon-inverted.svg)
-    no-repeat center/contain !important;
+  background: var(--update-badge-bg) url(chrome://userchrome/content/update-icon-inverted.svg) no-repeat center/contain !important;
   background-clip: border-box !important;
   fill: var(--update-badge-color) !important;
   border: 1px solid transparent;
@@ -65,41 +57,28 @@
 }
 
 .panel-banner-item[notificationid="update-available"] > .toolbarbutton-icon,
-#PanelUI-menu-button[badge-status="update-available"]
-  > .toolbarbutton-badge-stack
-  > .toolbarbutton-badge {
-  background: var(--update-badge-bg) url(chrome://userchrome/content/update-icon-inverted.svg)
-    no-repeat center/contain !important;
+#PanelUI-menu-button[badge-status="update-available"] > .toolbarbutton-badge-stack > .toolbarbutton-badge {
+  background: var(--update-badge-bg) url(chrome://userchrome/content/update-icon-inverted.svg) no-repeat center/contain !important;
   fill: var(--update-badge-color) !important;
   transform: scaleY(-1);
 }
 
 .panel-banner-item[notificationid="update-downloading"] > .toolbarbutton-icon,
-#PanelUI-menu-button[badge-status="update-downloading"]
-  > .toolbarbutton-badge-stack
-  > .toolbarbutton-badge {
+#PanelUI-menu-button[badge-status="update-downloading"] > .toolbarbutton-badge-stack > .toolbarbutton-badge {
   background: var(--update-badge-bg) url(chrome://userchrome/content/more.svg) no-repeat center/75% !important;
   fill: var(--update-badge-color) !important;
 }
 
 .panel-banner-item[notificationid="update-restart"] > .toolbarbutton-icon,
-#PanelUI-menu-button[badge-status="update-restart"]
-  > .toolbarbutton-badge-stack
-  > .toolbarbutton-badge {
-  background: var(--update-badge-bg) url(chrome://userchrome/content/check.svg) no-repeat
-    center/contain !important;
+#PanelUI-menu-button[badge-status="update-restart"] > .toolbarbutton-badge-stack > .toolbarbutton-badge {
+  background: var(--update-badge-bg) url(chrome://userchrome/content/check.svg) no-repeat center/contain !important;
   fill: var(--update-badge-color) !important;
 }
 
 .panel-banner-item[notificationid="update-unsupported"] > .toolbarbutton-icon,
-#PanelUI-menu-button[badge-status="update-unsupported"]
-  > .toolbarbutton-badge-stack
-  > .toolbarbutton-badge,
-#PanelUI-menu-button[badge-status="update-unsupported"]:is(:hover, [open])
-  > .toolbarbutton-badge-stack
-  > .toolbarbutton-badge:-moz-window-inactive {
-  background: var(--low-warning-icon-background) url(chrome://userchrome/content/check-partial.svg)
-    no-repeat center/contain !important;
+#PanelUI-menu-button[badge-status="update-unsupported"] > .toolbarbutton-badge-stack > .toolbarbutton-badge,
+#PanelUI-menu-button[badge-status="update-unsupported"]:is(:hover, [open]) > .toolbarbutton-badge-stack > .toolbarbutton-badge:-moz-window-inactive {
+  background: var(--low-warning-icon-background) url(chrome://userchrome/content/check-partial.svg) no-repeat center/contain !important;
   fill: var(--low-warning-icon-detail) !important;
 }
 
@@ -107,11 +86,8 @@
   filter: none !important;
 }
 
-#PanelUI-menu-button[badge-status="fxa-needs-authentication"]
-  > .toolbarbutton-badge-stack
-  > .toolbarbutton-badge {
-  background: url(chrome://userchrome/content/skin/controlcenter/warning.svg) no-repeat
-    center/contain !important;
+#PanelUI-menu-button[badge-status="fxa-needs-authentication"] > .toolbarbutton-badge-stack > .toolbarbutton-badge {
+  background: url(chrome://userchrome/content/skin/controlcenter/warning.svg) no-repeat center/contain !important;
   stroke: var(--low-warning-icon-detail) !important;
   fill: var(--low-warning-icon-background) !important;
   -moz-context-properties: fill, stroke !important;
@@ -119,9 +95,7 @@
   margin-inline-end: -6px !important;
 }
 
-#PanelUI-menu-button[badge-status="addon-alert"]
-  > .toolbarbutton-badge-stack
-  > .toolbarbutton-badge {
+#PanelUI-menu-button[badge-status="addon-alert"] > .toolbarbutton-badge-stack > .toolbarbutton-badge {
   background: url(chrome://userchrome/content/material/extension.svg) no-repeat center/contain !important;
   stroke: var(--low-warning-icon-detail) !important;
   fill: var(--low-warning-icon-background) !important;
@@ -139,27 +113,17 @@
   list-style-image: url(chrome://userchrome/content/skin/menu-badged.svg) !important;
 }
 
-:root:not([customizing])
-  #PanelUI-menu-button[badge-status="addon-alert"]:not(:hover, [open])
-  > .toolbarbutton-badge-stack
-  > .toolbarbutton-badge:-moz-window-inactive {
+:root:not([customizing]) #PanelUI-menu-button[badge-status="addon-alert"]:not(:hover, [open]) > .toolbarbutton-badge-stack > .toolbarbutton-badge:-moz-window-inactive {
   fill: var(--update-badge-inactive) !important;
 }
 
-:root:not([customizing])
-  #PanelUI-menu-button[badge-status="fxa-needs-authentication"]:not(:hover, [open])
-  > .toolbarbutton-badge-stack
-  > .toolbarbutton-badge:-moz-window-inactive {
+:root:not([customizing]) #PanelUI-menu-button[badge-status="fxa-needs-authentication"]:not(:hover, [open]) > .toolbarbutton-badge-stack > .toolbarbutton-badge:-moz-window-inactive {
   fill: var(--update-badge-inactive) !important;
   stroke: transparent !important;
 }
 
-#PanelUI-menu-button[badge-status="extension-new-tab"]
-  > .toolbarbutton-badge-stack
-  > .toolbarbutton-badge,
-#PanelUI-menu-button[badge-status="download-success"]
-  > .toolbarbutton-badge-stack
-  > .toolbarbutton-badge {
+#PanelUI-menu-button[badge-status="extension-new-tab"] > .toolbarbutton-badge-stack > .toolbarbutton-badge,
+#PanelUI-menu-button[badge-status="download-success"] > .toolbarbutton-badge-stack > .toolbarbutton-badge {
   display: none;
 }
 
@@ -287,83 +251,65 @@
   list-style-image: url(chrome://userchrome/content/skin/reload.svg);
 }
 
-:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view)
-  toolbarbutton
-  .toolbarbutton-icon {
+:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view) toolbarbutton .toolbarbutton-icon {
   width: 16px !important;
   height: 16px !important;
 }
 
-:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view)
-  toolbarbutton[checked="true"]
-  .toolbarbutton-icon {
+:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view) toolbarbutton[checked="true"] .toolbarbutton-icon {
   list-style-image: url(chrome://userchrome/content/check.svg) !important;
   background-color: var(--checkbox-checked-bgcolor);
   border: 1px solid var(--checkbox-checked-border-color);
   border-radius: 2px;
 }
 
-:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view)
-  toolbarbutton[checked="true"]:is(:hover, :focus-visible):not([open])
-  .toolbarbutton-icon {
+:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view) toolbarbutton[checked="true"]:is(:hover, :focus-visible):not([open]) .toolbarbutton-icon {
   background-color: var(--checkbox-checked-hover-bgcolor);
 }
 
-:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view)
-  toolbarbutton[checked="true"]:is(:hover:active, [open])
-  .toolbarbutton-icon {
+:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view) toolbarbutton[checked="true"]:is(:hover:active, [open]) .toolbarbutton-icon {
   background-color: var(--checkbox-checked-active-bgcolor);
 }
 
-:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view)
-  toolbarbutton[label="Web Developer Tools"i]:not([checked="true"]) {
+:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view) toolbarbutton[label="Web Developer Tools"i]:not([checked="true"]) {
   list-style-image: url(chrome://userchrome/content/devtools/debugging-workers.svg) !important;
 }
 
-:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view)
-  toolbarbutton[label="Task Manager"i] {
+:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view) toolbarbutton[label="Task Manager"i] {
   list-style-image: url(chrome://userchrome/content/devtools/tool-profiler.svg) !important;
 }
 
-:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view)
-  toolbarbutton[label="Remote Debugging"i] {
+:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view) toolbarbutton[label="Remote Debugging"i] {
   list-style-image: url(chrome://userchrome/content/material/remote.svg) !important;
 }
 
-:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view)
-  toolbarbutton[label="Browser Toolbox"i] {
+:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view) toolbarbutton[label="Browser Toolbox"i] {
   list-style-image: url(chrome://userchrome/content/skin/toolbox.svg) !important;
 }
 
-:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view)
-  toolbarbutton[label="Browser Content Toolbox"i] {
+:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view) toolbarbutton[label="Browser Content Toolbox"i] {
   list-style-image: url(chrome://userchrome/content/devtools/command-frames.svg) !important;
   fill-opacity: 0 !important;
 }
 
-:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view)
-  toolbarbutton[label="Browser Console"i] {
+:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view) toolbarbutton[label="Browser Console"i] {
   list-style-image: url(chrome://userchrome/content/devtools/command-console.svg) !important;
 }
 
-:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view)
-  toolbarbutton[label="Responsive Design Mode"i]:not([checked="true"]) {
+:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view) toolbarbutton[label="Responsive Design Mode"i]:not([checked="true"]) {
   list-style-image: url(chrome://userchrome/content/devtools/command-responsivemode.svg) !important;
   fill-opacity: 0 !important;
 }
 
-:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view)
-  toolbarbutton[label="Eyedropper"i] {
+:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view) toolbarbutton[label="Eyedropper"i] {
   list-style-image: url(chrome://userchrome/content/devtools/command-eyedropper.svg) !important;
 }
 
-:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view)
-  toolbarbutton[label="Page Source"i] {
+:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view) toolbarbutton[label="Page Source"i] {
   list-style-image: url(chrome://userchrome/content/devtools/tool-dom.svg) !important;
 }
 
-:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view)
-  toolbarbutton[label="Extensions for Developers"i] {
+:is(#appmenu-developer-tools-view, #PanelUI-developer-tools-view) toolbarbutton[label="Extensions for Developers"i] {
   list-style-image: url(chrome://userchrome/content/mozilla-logo.svg) !important;
 }
 
@@ -442,9 +388,7 @@
 #appMenuClearRecentHistory > .toolbarbutton-text,
 #appMenu-restoreSession > .toolbarbutton-text,
 #appMenuRecentlyClosedWindows > .toolbarbutton-text,
-:is(#appMenu-library-recentlyClosedTabs, #appMenu-library-recentlyClosedWindows)
-  .restoreallitem
-  > .toolbarbutton-text,
+:is(#appMenu-library-recentlyClosedTabs, #appMenu-library-recentlyClosedWindows) .restoreallitem > .toolbarbutton-text,
 #PanelUI-historyMore > .toolbarbutton-text,
 #appMenu-settings-button > .toolbarbutton-text,
 #appMenu-advanced-settings-button > .toolbarbutton-text,
@@ -476,22 +420,19 @@
   background-image: url(chrome://userchrome/content/fxa/add-device.svg);
 }
 
-:is(#appMenu-zoomReduce-button2, #appMenu-zoomEnlarge-button2, #appMenu-fullscreen-button2)
-  > .toolbarbutton-icon {
+:is(#appMenu-zoomReduce-button2, #appMenu-zoomEnlarge-button2, #appMenu-fullscreen-button2) > .toolbarbutton-icon {
   background-color: unset !important;
   fill: currentColor !important;
   -moz-context-properties: fill, fill-opacity !important;
   padding: 0 !important;
 }
 
-#appMenu-zoom-controls
-  :is(#appMenu-zoomReduce-button2, #appMenu-zoomEnlarge-button2, #appMenu-fullscreen-button2, #appMenu-zoomReset-button2):not([disabled], [open]):is(:hover, :focus-visible) {
+#appMenu-zoom-controls :is(#appMenu-zoomReduce-button2, #appMenu-zoomEnlarge-button2, #appMenu-fullscreen-button2, #appMenu-zoomReset-button2):not([disabled], [open]):is(:hover, :focus-visible) {
   background-color: var(--arrowpanel-dimmed) !important;
   border-color: transparent !important;
 }
 
-#appMenu-zoom-controls
-  :is(#appMenu-zoomReduce-button2, #appMenu-zoomEnlarge-button2, #appMenu-fullscreen-button2, #appMenu-zoomReset-button2):not([disabled]):is([open], :hover:active) {
+#appMenu-zoom-controls :is(#appMenu-zoomReduce-button2, #appMenu-zoomEnlarge-button2, #appMenu-fullscreen-button2, #appMenu-zoomReset-button2):not([disabled]):is([open], :hover:active) {
   background-color: var(--arrowpanel-dimmed-further) !important;
 }
 
@@ -571,12 +512,7 @@ toolbarseparator.proton-zap {
 @supports -moz-bool-pref("userChrome.panels.vibrant-fxa-banner") {
   #appMenu-fxa-status2 > #appMenu-fxa-label2,
   [mainViewId="PanelUI-fxa"] #fxa-manage-account-button {
-    background-image: linear-gradient(
-      -90deg,
-      hsla(259.9, 100%, 67.5%, 0.275) 0%,
-      hsla(330.8, 100%, 64.5%, 0.275) 52.08%,
-      hsla(37.5, 100%, 65.5%, 0.275) 100%
-    );
+    background-image: linear-gradient(-90deg, hsla(259.9, 100%, 67.5%, 0.275) 0%, hsla(330.8, 100%, 64.5%, 0.275) 52.08%, hsla(37.5, 100%, 65.5%, 0.275) 100%);
   }
 
   toolbarseparator.proton-zap {
@@ -604,7 +540,7 @@ toolbarseparator.proton-zap {
 
 #appMenu-fxa-status2:not([fxastatus]) {
   margin-inline-end: 0 !important;
-  padding-inline-end: var(--arrowpanel-menuitem-inline-margin) !important;
+  padding-inline-end: var(--arrowpanel-menuitem-margin-inline) !important;
   padding-block: 0 !important;
 }
 
@@ -721,10 +657,7 @@ toolbarseparator.proton-zap {
 }
 
 #PanelUI-remotetabs-view-managedevices {
-  padding-inline-start: calc(
-    var(--arrowpanel-menuitem-padding-inline) + 16px +
-      var(--arrowpanel-subviewbutton-iconic-gap, 8px)
-  ) !important;
+  padding-inline-start: calc(var(--arrowpanel-menuitem-padding-inline) + 16px + var(--arrowpanel-subviewbutton-iconic-gap, 8px)) !important;
   background-image: url(chrome://userchrome/content/fxa/avatar-big.svg);
   background-repeat: no-repeat;
   background-size: 16px;
@@ -737,15 +670,12 @@ toolbarbutton.subviewbutton.sendToDevice-device[clientType=""][clientId=""] {
   list-style-image: url(chrome://userchrome/content/chevron.svg);
 }
 
-toolbarbutton.subviewbutton.sendToDevice-device[clientType=""][clientId=""]
-  + toolbarbutton.subviewbutton.sendToDevice-device:not([clientType], [clientId]) {
+toolbarbutton.subviewbutton.sendToDevice-device[clientType=""][clientId=""] + toolbarbutton.subviewbutton.sendToDevice-device:not([clientType], [clientId]) {
   list-style-image: url(chrome://userchrome/content/fxa/add-device.svg);
 }
 
 toolbarbutton.subviewbutton.sendToDevice-device[clientType=""][clientId=""] .toolbarbutton-text,
-toolbarbutton.subviewbutton.sendToDevice-device[clientType=""][clientId=""]
-  + toolbarbutton.subviewbutton.sendToDevice-device:not([clientType], [clientId])
-  .toolbarbutton-text {
+toolbarbutton.subviewbutton.sendToDevice-device[clientType=""][clientId=""] + toolbarbutton.subviewbutton.sendToDevice-device:not([clientType], [clientId]) .toolbarbutton-text {
   padding-inline-start: var(--arrowpanel-subviewbutton-iconic-gap, 8px);
 }
 
@@ -755,8 +685,7 @@ toolbarbutton.subviewbutton.sendToDevice-device[clientType=""][clientId=""]
 }
 
 .panel-banner-item {
-  padding: calc(var(--arrowpanel-menuitem-padding-block) + 2px)
-    var(--arrowpanel-menuitem-padding-inline) !important;
+  padding: calc(var(--arrowpanel-menuitem-padding-block) + 2px) var(--arrowpanel-menuitem-padding-inline) !important;
   margin: var(--arrowpanel-menuitem-margin) !important;
   font-weight: inherit !important;
   min-height: 40px !important;
@@ -764,8 +693,7 @@ toolbarbutton.subviewbutton.sendToDevice-device[clientType=""][clientId=""]
 }
 
 .addon-banner-item {
-  padding: calc(var(--arrowpanel-menuitem-padding-block) + 2px)
-    var(--arrowpanel-menuitem-padding-inline) !important;
+  padding: calc(var(--arrowpanel-menuitem-padding-block) + 2px) var(--arrowpanel-menuitem-padding-inline) !important;
   margin: var(--arrowpanel-menuitem-margin) !important;
   margin-bottom: 4px !important;
   -moz-box-align: center !important;
@@ -801,7 +729,7 @@ toolbarbutton.subviewbutton.sendToDevice-device[clientType=""][clientId=""]
 }
 
 #appMenu-popup toolbarseparator {
-  margin-inline: var(--arrowpanel-menuitem-inline-margin) !important;
+  margin-inline: var(--arrowpanel-menuitem-margin-inline) !important;
 }
 
 :is(.addon-banner-item, .panel-banner-item) > .toolbarbutton-icon {
@@ -810,5 +738,5 @@ toolbarbutton.subviewbutton.sendToDevice-device[clientType=""][clientId=""]
 
 #appMenu-popup .panel-banner-item:not([disabled]):focus-visible,
 #appMenu-popup .addon-banner-item:not([disabled]):focus-visible {
-	background-color: var(--panel-banner-item-hover-bgcolor) !important;
+  background-color: var(--panel-banner-item-hover-bgcolor) !important;
 }

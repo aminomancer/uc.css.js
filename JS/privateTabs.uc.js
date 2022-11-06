@@ -44,7 +44,9 @@ class PrivateTabManager {
   BTN_ID = "privateTab-button";
   BTN2_ID = "newPrivateTab-button";
   constructor() {
-    if (!_ucUtils.sharedGlobal.privateTabGlobal) _ucUtils.sharedGlobal.privateTabGlobal = {};
+    if (!_ucUtils.sharedGlobal.privateTabGlobal) {
+      _ucUtils.sharedGlobal.privateTabGlobal = {};
+    }
     // the internal duplicateTab method doesn't pass the skipAnimation parameter
     // to addTrustedTab. so we need to make our own function, which requires us
     // to access some private objects.
@@ -58,13 +60,21 @@ class PrivateTabManager {
       Management: "resource://gre/modules/Extension.jsm",
       TabState: "resource:///modules/sessionstore/TabState.jsm",
       TabStateFlusher: "resource:///modules/sessionstore/TabStateFlusher.jsm",
-      ContextualIdentityService: "resource://gre/modules/ContextualIdentityService.jsm",
+      ContextualIdentityService:
+        "resource://gre/modules/ContextualIdentityService.jsm",
     });
-    this.sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(Ci.nsIStyleSheetService);
-    this.menuClass = typeof window.gProton != "undefined" ? `` : `menuitem-iconic privatetab-icon`;
+    this.sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
+      Ci.nsIStyleSheetService
+    );
+    this.menuClass =
+      typeof window.gProton != "undefined"
+        ? ``
+        : `menuitem-iconic privatetab-icon`;
     this.orig_getAttribute = MozElements.MozTab.prototype.getAttribute;
     this.init();
-    if (location.href != "chrome://browser/content/browser.xhtml") return this.exec();
+    if (location.href != "chrome://browser/content/browser.xhtml") {
+      return this.exec();
+    }
     if (gBrowserInit.delayedStartupFinished) {
       this.exec();
     } else {
@@ -74,25 +84,30 @@ class PrivateTabManager {
           this.exec();
         }
       };
-      Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
+      Services.obs.addObserver(
+        delayedListener,
+        "browser-delayed-startup-finished"
+      );
     }
   }
 
   exec() {
     let { privateTabGlobal } = _ucUtils.sharedGlobal;
     if (PrivateBrowsingUtils.isWindowPrivate(window)) return;
-    let openAll = document.getElementById("placesContext_openBookmarkContainer:tabs");
+    let openAll = document.getElementById(
+      "placesContext_openBookmarkContainer:tabs"
+    );
     let openAllPrivate = _ucUtils.createElement(document, "menuitem", {
       id: "openAllPrivate",
       label: "Open All in Private Tabs",
       accesskey: "v",
       class: this.menuClass,
-      oncommand: `event.userContextId = ${this.container.userContextId}; ${openAll.getAttribute(
-        "oncommand"
-      )}`,
-      onclick: `event.userContextId = ${this.container.userContextId}; ${openAll.getAttribute(
-        "onclick"
-      )}`,
+      oncommand: `event.userContextId = ${
+        this.container.userContextId
+      }; ${openAll.getAttribute("oncommand")}`,
+      onclick: `event.userContextId = ${
+        this.container.userContextId
+      }; ${openAll.getAttribute("onclick")}`,
     });
     openAll.after(openAllPrivate);
 
@@ -105,9 +120,9 @@ class PrivateTabManager {
       oncommand: `event.userContextId = ${
         this.container.userContextId
       }; ${openAllLinks.getAttribute("oncommand")}`,
-      onclick: `event.userContextId = ${this.container.userContextId}; ${openAllLinks.getAttribute(
-        "onclick"
-      )}`,
+      onclick: `event.userContextId = ${
+        this.container.userContextId
+      }; ${openAllLinks.getAttribute("onclick")}`,
     });
     openAllLinks.after(openAllLinksPrivate);
 
@@ -121,11 +136,15 @@ class PrivateTabManager {
     });
     openTab.after(openPrivate);
 
-    document.getElementById("placesContext").addEventListener("popupshowing", this);
+    document
+      .getElementById("placesContext")
+      .addEventListener("popupshowing", this);
 
     if (location.href != "chrome://browser/content/browser.xhtml") return;
 
-    let keyset = _ucUtils.createElement(document, "keyset", { id: "privateTab-keyset" });
+    let keyset = _ucUtils.createElement(document, "keyset", {
+      id: "privateTab-keyset",
+    });
     document.getElementById("mainKeyset").after(keyset);
 
     let toggleKey = _ucUtils.createElement(document, "key", {
@@ -163,8 +182,12 @@ class PrivateTabManager {
       oncommand: `openLinkIn(gContextMenu.linkURL, "tab", gContextMenu._openLinkInParameters({ userContextId: privateTab.container.userContextId, triggeringPrincipal: document.nodePrincipal, }));`,
     });
 
-    document.getElementById("contentAreaContextMenu").addEventListener("popupshowing", this);
-    document.getElementById("contentAreaContextMenu").addEventListener("popuphidden", this);
+    document
+      .getElementById("contentAreaContextMenu")
+      .addEventListener("popupshowing", this);
+    document
+      .getElementById("contentAreaContextMenu")
+      .addEventListener("popuphidden", this);
     document.getElementById("context-openlinkintab").after(openLink);
 
     let toggleTab = _ucUtils.createElement(document, "menuitem", {
@@ -176,15 +199,21 @@ class PrivateTabManager {
       oncommand: "privateTab.togglePrivate(TabContextMenu.contextTab)",
     });
     document.getElementById("context_pinTab").after(toggleTab);
-    document.getElementById("tabContextMenu").addEventListener("popupshowing", this);
+    document
+      .getElementById("tabContextMenu")
+      .addEventListener("popupshowing", this);
 
-    let privateMask = document.getElementsByClassName("private-browsing-indicator")[0];
+    let privateMask = document.getElementsByClassName(
+      "private-browsing-indicator"
+    )[0];
     privateMask.id = "private-mask";
 
     let btn2 = _ucUtils.createElement(document, "toolbarbutton", {
       id: this.BTN2_ID,
       label: "New Private Tab",
-      tooltiptext: `Open a new private tab (${ShortcutUtils.prettifyShortcut(newPrivateTabKey)})`,
+      tooltiptext: `Open a new private tab (${ShortcutUtils.prettifyShortcut(
+        newPrivateTabKey
+      )})`,
       class: "toolbarbutton-1 chromeclass-toolbar-additional",
     });
 
@@ -196,7 +225,9 @@ class PrivateTabManager {
 
     addEventListener("XULFrameLoaderCreated", this);
 
-    if (this.observePrivateTabs) gBrowser.tabContainer.addEventListener("TabClose", this);
+    if (this.observePrivateTabs) {
+      gBrowser.tabContainer.addEventListener("TabClose", this);
+    }
 
     MozElements.MozTab.prototype.getAttribute = function(att) {
       if (att == "usercontextid" && this.isToggling) {
@@ -209,9 +240,13 @@ class PrivateTabManager {
       return window.privateTab.orig_getAttribute.call(this, att);
     };
 
-    customElements.get("tabbrowser-tabs").prototype._updateNewTabVisibility = function() {
-      let wrap = n => (n.parentNode.localName == "toolbarpaletteitem" ? n.parentNode : n);
-      let unwrap = n => (n && n.localName == "toolbarpaletteitem" ? n.firstElementChild : n);
+    customElements.get(
+      "tabbrowser-tabs"
+    ).prototype._updateNewTabVisibility = function() {
+      let wrap = n =>
+        n.parentNode.localName == "toolbarpaletteitem" ? n.parentNode : n;
+      let unwrap = n =>
+        n && n.localName == "toolbarpaletteitem" ? n.firstElementChild : n;
 
       let newTabFirst = false;
       let sibling = (id, otherId) => {
@@ -219,7 +254,10 @@ class PrivateTabManager {
         do {
           if (sib.id == "new-tab-button") newTabFirst = true;
           sib = unwrap(wrap(sib).nextElementSibling);
-        } while (sib && (sib.hidden || sib.id == "alltabs-button" || sib.id == otherId));
+        } while (
+          sib &&
+          (sib.hidden || sib.id == "alltabs-button" || sib.id == otherId)
+        );
         return sib?.id == id && sib;
       };
 
@@ -232,7 +270,10 @@ class PrivateTabManager {
       }
 
       const kAttr2 = "hasadjacentnewprivatetabbutton";
-      let adjacentPrivateTab = sibling(window.privateTab.BTN_ID, "new-tab-button");
+      let adjacentPrivateTab = sibling(
+        window.privateTab.BTN_ID,
+        "new-tab-button"
+      );
       if (adjacentPrivateTab) {
         this.setAttribute(kAttr2, "true");
       } else {
@@ -310,13 +351,16 @@ class PrivateTabManager {
         // Prefer the caller window if it's a browser window, otherwise use
         // the top browser window.
         return aWindow &&
-          aWindow.document.documentElement.getAttribute("windowtype") == "navigator:browser"
+          aWindow.document.documentElement.getAttribute("windowtype") ==
+            "navigator:browser"
           ? aWindow
           : lazy.BrowserWindowTracker.getTopWindow();
       }
       let openTabsetString = PlacesUIUtils.openTabset.toString();
       eval(
-        `PlacesUIUtils.openTabset = ${openTabsetString.startsWith("function") ? "" : "function "}` +
+        `PlacesUIUtils.openTabset = ${
+          openTabsetString.startsWith("function") ? "" : "function "
+        }` +
           openTabsetString.replace(
             /(\s+)(inBackground: loadInBackground,)/,
             "$1$2$1userContextId: aEvent.userContextId || 0,"
@@ -356,7 +400,9 @@ class PrivateTabManager {
 
   closeTabs() {
     this.ContextualIdentityService._forEachContainerTab((tab, tabbrowser) => {
-      if (tab.userContextId == this.container.userContextId) tabbrowser.removeTab(tab);
+      if (tab.userContextId == this.container.userContextId) {
+        tabbrowser.removeTab(tab);
+      }
     });
   }
 
@@ -368,7 +414,9 @@ class PrivateTabManager {
       userContextId,
       index,
       skipAnimation: true,
-      ...(tab == gBrowser.selectedTab ? { relatedToCurrent: true, ownerTab: tab } : {}),
+      ...(tab == gBrowser.selectedTab
+        ? { relatedToCurrent: true, ownerTab: tab }
+        : {}),
       skipLoad: true,
       preferredRemoteType: tab.linkedBrowser.remoteType,
     };
@@ -408,7 +456,10 @@ class PrivateTabManager {
       this.TabState.copyFromCache(browser.permanentKey, tabState, options);
 
       tabState.index += 0;
-      tabState.index = Math.max(1, Math.min(tabState.index, tabState.entries.length));
+      tabState.index = Math.max(
+        1,
+        Math.min(tabState.index, tabState.entries.length)
+      );
       tabState.pinned = false;
 
       if (!inBackground) gBrowser.selectedTab = newTab;
@@ -438,12 +489,16 @@ class PrivateTabManager {
     if (gBrowser.selectedTab.isToggling) {
       privateMask.setAttribute(
         "enabled",
-        gBrowser.selectedTab.userContextId == this.container.userContextId ? "false" : "true"
+        gBrowser.selectedTab.userContextId == this.container.userContextId
+          ? "false"
+          : "true"
       );
     } else {
       privateMask.setAttribute(
         "enabled",
-        gBrowser.selectedTab.userContextId == this.container.userContextId ? "true" : "false"
+        gBrowser.selectedTab.userContextId == this.container.userContextId
+          ? "true"
+          : "false"
       );
     }
   }
@@ -464,7 +519,9 @@ class PrivateTabManager {
       "openLinkInPrivateTab",
       gContextMenu.onSaveableLink || gContextMenu.onPlainTextLink
     );
-    if (this.isPrivate(tab)) gContextMenu.showItem("context-openlinkincontainertab", false);
+    if (this.isPrivate(tab)) {
+      gContextMenu.showItem("context-openlinkincontainertab", false);
+    }
   }
 
   hideContext(_e) {
@@ -487,18 +544,22 @@ class PrivateTabManager {
     document.getElementById("openPrivate").hidden = document.getElementById(
       "placesContext_open:newtab"
     ).hidden;
-    document.getElementById("openAllPrivate").disabled = document.getElementById(
+    document.getElementById(
+      "openAllPrivate"
+    ).disabled = document.getElementById(
       "placesContext_openBookmarkContainer:tabs"
     ).disabled;
     document.getElementById("openAllPrivate").hidden = document.getElementById(
       "placesContext_openBookmarkContainer:tabs"
     ).hidden;
-    document.getElementById("openAllLinksPrivate").disabled = document.getElementById(
+    document.getElementById(
+      "openAllLinksPrivate"
+    ).disabled = document.getElementById(
       "placesContext_openLinks:tabs"
     ).disabled;
-    document.getElementById("openAllLinksPrivate").hidden = document.getElementById(
-      "placesContext_openLinks:tabs"
-    ).hidden;
+    document.getElementById(
+      "openAllLinksPrivate"
+    ).hidden = document.getElementById("placesContext_openLinks:tabs").hidden;
   }
 
   handleEvent(e) {
@@ -513,12 +574,20 @@ class PrivateTabManager {
         this.privateListener(e);
         break;
       case "popupshowing":
-        if (e.target === document.getElementById("placesContext")) this.placesContext(e);
-        if (e.target === document.getElementById("contentAreaContextMenu")) this.contentContext(e);
-        if (e.target === document.getElementById("tabContextMenu")) this.tabContext(e);
+        if (e.target === document.getElementById("placesContext")) {
+          this.placesContext(e);
+        }
+        if (e.target === document.getElementById("contentAreaContextMenu")) {
+          this.contentContext(e);
+        }
+        if (e.target === document.getElementById("tabContextMenu")) {
+          this.tabContext(e);
+        }
         break;
       case "popuphidden":
-        if (e.target === document.getElementById("contentAreaContextMenu")) this.hideContext(e);
+        if (e.target === document.getElementById("contentAreaContextMenu")) {
+          this.hideContext(e);
+        }
         break;
       case "click":
         if (e.button == 0) {
@@ -531,7 +600,9 @@ class PrivateTabManager {
           document.getElementsByClassName(
             "customize-context-removeFromToolbar"
           )[0].disabled = false;
-          document.getElementsByClassName("customize-context-moveToPanel")[0].disabled = false;
+          document.getElementsByClassName(
+            "customize-context-moveToPanel"
+          )[0].disabled = false;
           e.preventDefault();
         }
         break;
@@ -558,7 +629,9 @@ class PrivateTabManager {
   }
 
   onTabSelect(e) {
-    if (e.target.userContextId != e.detail.previousTab.userContextId) this.toggleMask();
+    if (e.target.userContextId != e.detail.previousTab.userContextId) {
+      this.toggleMask();
+    }
   }
 
   onTabClose(e) {
@@ -570,7 +643,9 @@ class PrivateTabManager {
 
   onWidgetAfterCreation(id) {
     if (id == this.BTN_ID) {
-      let newTabPlacement = CustomizableUI.getPlacementOfWidget("new-tab-button")?.position;
+      let newTabPlacement = CustomizableUI.getPlacementOfWidget(
+        "new-tab-button"
+      )?.position;
       if (newTabPlacement) {
         CustomizableUI.addWidgetToArea(
           this.BTN_ID,
@@ -587,7 +662,8 @@ class PrivateTabManager {
     return (
       this._observePrivateTabs ||
       (this._observePrivateTabs =
-        !this.config.neverClearData && !this.config.doNotClearDataUntilFxIsClosed)
+        !this.config.neverClearData &&
+        !this.config.doNotClearDataUntilFxIsClosed)
     );
   }
 

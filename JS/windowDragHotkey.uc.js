@@ -16,7 +16,9 @@
 class WindowDragHotkey {
   constructor() {
     this.registerSheet();
-    ["keydown", "keyup"].forEach(ev => document.addEventListener(ev, this, true));
+    ["keydown", "keyup"].forEach(ev =>
+      document.addEventListener(ev, this, true)
+    );
   }
   handleEvent(e) {
     if (e.repeat) return;
@@ -58,7 +60,9 @@ class WindowDragHotkey {
   }
   registerSheet() {
     let css = `:root[force-drag] toolbar *{-moz-window-dragging:drag!important;}`;
-    let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(Ci.nsIStyleSheetService);
+    let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
+      Ci.nsIStyleSheetService
+    );
     let uri = makeURI("data:text/css;charset=UTF=8," + encodeURIComponent(css));
     if (sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) return;
     sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);

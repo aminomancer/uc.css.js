@@ -106,6 +106,9 @@
         setTimeout(init, 1000);
       }
     };
-    Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
+    Services.obs.addObserver(
+      delayedListener,
+      "browser-delayed-startup-finished"
+    );
   }
 })();

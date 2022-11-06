@@ -6,8 +6,7 @@
 
 /* private bookmarks extension */
 
-@-moz-document regexp("^moz-extension://.*/popup_ui/.*")
-{
+@-moz-document regexp("^moz-extension://.*/popup_ui/.*") {
   :root[uc-extension-id="private-bookmarks@rharel"] {
     letter-spacing: inherit !important;
   }
@@ -108,9 +107,7 @@
   }
 
   :root[uc-extension-id="private-bookmarks@rharel"] button.negative:hover:active,
-  :root[uc-extension-id="private-bookmarks@rharel"]
-    .secondary-buttons-container
-    button:hover:active {
+  :root[uc-extension-id="private-bookmarks@rharel"] .secondary-buttons-container button:hover:active {
     background-color: var(--uc-arrowpanel-dimmed-even-further) !important;
   }
 
@@ -226,9 +223,7 @@
     flex-grow: 0 !important;
   }
 
-  :root[uc-extension-id="private-bookmarks@rharel"]
-    :is(#change-password-button, #confirm-authentication-button)
-    > img {
+  :root[uc-extension-id="private-bookmarks@rharel"] :is(#change-password-button, #confirm-authentication-button) > img {
     background-image: url(chrome://browser/skin/login.svg) !important;
     rotate: -90deg !important;
   }
@@ -237,8 +232,7 @@
     background-image: url(chrome://userchrome/content/close-big.svg) !important;
   }
 
-  :root[uc-extension-id="private-bookmarks@rharel"]
-    :is(#on-hold-animation-gear-A, #on-hold-animation-gear-B) {
+  :root[uc-extension-id="private-bookmarks@rharel"] :is(#on-hold-animation-gear-A, #on-hold-animation-gear-B) {
     display: none !important;
   }
 
@@ -290,8 +284,7 @@
     animation: uc-tab-throbber-spinner-sprite 0.85s steps(12) infinite !important;
   }
 
-  :root[uc-extension-id="private-bookmarks@rharel"]
-    #on-hold-progress-bar:-moz-locale-dir(rtl)::before {
+  :root[uc-extension-id="private-bookmarks@rharel"] #on-hold-progress-bar:-moz-locale-dir(rtl)::before {
     animation-name: uc-tab-throbber-spinner-sprite-rtl !important;
   }
 

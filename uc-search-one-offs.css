@@ -44,7 +44,7 @@ it also changes the appearance of the one-offs in the searchbar. */
 }
 
 #PopupSearchAutoComplete .search-panel-one-offs-header {
-  margin-inline: var(--arrowpanel-menuitem-inline-margin) 0 !important;
+  margin-inline: var(--arrowpanel-menuitem-margin-inline) 0 !important;
   min-width: -moz-fit-content !important;
   flex-grow: 0 !important;
   flex-shrink: 0 !important;
@@ -68,21 +68,15 @@ it also changes the appearance of the one-offs in the searchbar. */
   background: none !important;
 }
 
-#PopupSearchAutoComplete
-  :is(.searchbar-engine-one-off-item, .addengine-item)
-  > :is(stack, .button-box) {
+#PopupSearchAutoComplete :is(.searchbar-engine-one-off-item, .addengine-item) > :is(stack, .button-box) {
   border-radius: var(--toolbarbutton-border-radius);
 }
 
-#PopupSearchAutoComplete
-  :is(.searchbar-engine-one-off-item, .addengine-item):hover:not([selected])
-  > :is(stack, .button-box) {
+#PopupSearchAutoComplete :is(.searchbar-engine-one-off-item, .addengine-item):hover:not([selected]) > :is(stack, .button-box) {
   background-color: var(--autocomplete-popup-hover-background) !important;
 }
 
-#PopupSearchAutoComplete
-  :is(.searchbar-engine-one-off-item, .addengine-item)[selected]
-  > :is(stack, .button-box) {
+#PopupSearchAutoComplete :is(.searchbar-engine-one-off-item, .addengine-item)[selected] > :is(stack, .button-box) {
   background-color: var(--autocomplete-popup-highlight-background) !important;
 }
 
@@ -161,8 +155,7 @@ it also changes the appearance of the one-offs in the searchbar. */
 }
 
 .searchbar-separator {
-  margin: calc(var(--arrowpanel-menuitem-inline-margin) - 1px)
-    var(--arrowpanel-menuitem-inline-margin) !important;
+  margin: calc(var(--arrowpanel-menuitem-margin-inline) - 1px) var(--arrowpanel-menuitem-margin-inline) !important;
 }
 
 .urlbarView :is(.searchbar-engine-one-off-item, .addengine-item) {
@@ -199,9 +192,7 @@ it also changes the appearance of the one-offs in the searchbar. */
   border-radius: var(--toolbarbutton-border-radius) !important;
 }
 
-.urlbarView
-  :is(.searchbar-engine-one-off-item, .addengine-item):is([selected], :hover)
-  > .button-box {
+.urlbarView :is(.searchbar-engine-one-off-item, .addengine-item):is([selected], :hover) > .button-box {
   fill-opacity: 1 !important;
 }
 
@@ -214,8 +205,7 @@ it also changes the appearance of the one-offs in the searchbar. */
 }
 
 .searchbar-engine-one-off-add-engine > .button-box::after {
-  background: url(chrome://userchrome/content/skin/search-indicator-badge-add.svg) no-repeat
-    center/contain !important;
+  background: url(chrome://userchrome/content/skin/search-indicator-badge-add.svg) no-repeat center/contain !important;
   -moz-context-properties: fill, fill-opacity, stroke !important;
   fill: var(--update-badge-bg) !important;
   stroke: var(--update-badge-color) !important;
@@ -242,13 +232,11 @@ google engine without changing the engine's name */
   height: 16px;
 }
 
-:is(#urlbar-engine-one-off-item-DuckDuckGo, #searchbar-engine-one-off-item-DuckDuckGo)
-  .button-icon {
+:is(#urlbar-engine-one-off-item-DuckDuckGo, #searchbar-engine-one-off-item-DuckDuckGo) .button-icon {
   display: none;
 }
 
-:is(#urlbar-engine-one-off-item-DuckDuckGo, #searchbar-engine-one-off-item-DuckDuckGo)
-  .button-box::before {
+:is(#urlbar-engine-one-off-item-DuckDuckGo, #searchbar-engine-one-off-item-DuckDuckGo) .button-box::before {
   content: url(chrome://userchrome/content/engines/duckduckgo.svg);
   display: block;
   width: 16px;

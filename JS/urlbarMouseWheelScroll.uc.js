@@ -78,7 +78,8 @@
           scrollAmount = this._destination - startPos;
         }
         this.scrollBy({
-          behavior: (instant && "instant") || this.smoothScroll ? "smooth" : "auto",
+          behavior:
+            (instant && "instant") || this.smoothScroll ? "smooth" : "auto",
           left: scrollAmount,
         });
 
@@ -94,8 +95,14 @@
     };
 
     gURLBar.inputField.addEventListener("wheel", gURLBar.inputField.on_Wheel);
-    gURLBar.inputField.addEventListener("overflow", gURLBar.inputField.on_Overflow);
-    gURLBar.inputField.addEventListener("underflow", gURLBar.inputField.on_Underflow);
+    gURLBar.inputField.addEventListener(
+      "overflow",
+      gURLBar.inputField.on_Overflow
+    );
+    gURLBar.inputField.addEventListener(
+      "underflow",
+      gURLBar.inputField.on_Underflow
+    );
   }
 
   if (gBrowserInit.delayedStartupFinished) {
@@ -107,6 +114,9 @@
         init();
       }
     };
-    Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
+    Services.obs.addObserver(
+      delayedListener,
+      "browser-delayed-startup-finished"
+    );
   }
 })();

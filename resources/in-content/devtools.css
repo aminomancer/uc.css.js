@@ -7,8 +7,7 @@
 /* handles context menus opened in devtools processes,
 and a few elements like checkboxes */
 
-@-moz-document url-prefix("chrome://devtools/content/")
-{
+@-moz-document url-prefix("chrome://devtools/content/") {
   :root,
   menupopup {
     --focus-outline-color: var(--purple-30) !important;
@@ -135,10 +134,7 @@ and a few elements like checkboxes */
   }
 
   .menupopup-arrowscrollbox[orient="vertical"][overflowing="true"] {
-    margin-block: var(
-      --menupopup-overflowing-inner-box-margin,
-      var(--menupopup-inner-box-margin)
-    ) !important;
+    margin-block: var(--menupopup-overflowing-inner-box-margin, var(--menupopup-inner-box-margin)) !important;
   }
 
   :is(menuitem, menu),
@@ -167,10 +163,7 @@ and a few elements like checkboxes */
     margin-inline: var(--context-iconic-margin);
   }
 
-  panel[type="autocomplete-richlistbox"]
-    > richlistbox
-    > richlistitem
-    :is(.ac-site-icon, .ac-type-icon) {
+  panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem :is(.ac-site-icon, .ac-type-icon) {
     margin-inline: var(--context-iconic-margin) !important;
     margin-inline-start: 0 !important;
   }
@@ -249,13 +242,11 @@ and a few elements like checkboxes */
     background-color: var(--checkbox-unchecked-active-bgcolor);
   }
 
-  menupopup
-    menuitem:is([type="checkbox"], [type="radio"])[checked="true"][_moz-menuactive="true"]::before {
+  menupopup menuitem:is([type="checkbox"], [type="radio"])[checked="true"][_moz-menuactive="true"]::before {
     background-color: var(--checkbox-checked-hover-bgcolor);
   }
 
-  menupopup
-    menuitem:is([type="checkbox"], [type="radio"])[checked="true"][_moz-menuactive="true"]:active::before {
+  menupopup menuitem:is([type="checkbox"], [type="radio"])[checked="true"][_moz-menuactive="true"]:active::before {
     background-color: var(--checkbox-checked-active-bgcolor);
   }
 
@@ -284,17 +275,14 @@ and a few elements like checkboxes */
     padding-block: unset !important;
   }
 
-  :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
-    :is(menu, menuitem, menucaption),
+  :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup) :is(menu, menuitem, menucaption),
   panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem {
     padding-inline: 8px !important;
     min-height: var(--menuitem-height) !important;
     border: none !important;
   }
 
-  :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
-    :is(menu, menuitem, menucaption)
-    > :is(label, .menu-iconic-text, .menu-text) {
+  :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup) :is(menu, menuitem, menucaption) > :is(label, .menu-iconic-text, .menu-text) {
     padding-inline: 0 !important;
     font: menu !important;
   }
@@ -307,9 +295,7 @@ and a few elements like checkboxes */
     color: var(--panel-description-color) !important;
   }
 
-  :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
-    menucaption
-    > :is(label, .menu-iconic-text, .menu-text) {
+  :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup) menucaption > :is(label, .menu-iconic-text, .menu-text) {
     padding: 4px 5px !important;
     border-bottom: 1px solid var(--menu-separator-color) !important;
     font-weight: var(--uc-font-weight-bold, 600) !important;
@@ -427,8 +413,7 @@ and a few elements like checkboxes */
   /* highlight stylesheets owned by the user so they're easier to find */
   #style-editor-chrome-window
         .stylesheet-name
-        label:is([value^="uc-"], [value^="userChrome"], [value^="userContent"], [value="custom-chrome.css"], [value="custom-content.css"], [tooltiptext^="chrome://userchrome/"], [tooltiptext^="file://"])
-  {
+        label:is([value^="uc-"], [value^="userChrome"], [value^="userContent"], [value="custom-chrome.css"], [value="custom-content.css"], [tooltiptext^="chrome://userchrome/"], [tooltiptext^="file://"]) {
     text-decoration: underline !important;
     color: var(--attention-color) !important;
   }
@@ -450,9 +435,7 @@ and a few elements like checkboxes */
       font-kerning: normal !important;
     }
 
-    :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
-      :is(menu, menuitem, menucaption)
-      > :is(label, .menu-iconic-text, .menu-text) {
+    :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup) :is(menu, menuitem, menucaption) > :is(label, .menu-iconic-text, .menu-text) {
       font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
       font-kerning: normal !important;
     }

@@ -6,14 +6,12 @@
 
 /* bitwarden. requires extensionStylesheetLoader.uc.js */
 
-iframe#bit-notification-bar-iframe[src^="moz-extension://"]
-{
+iframe#bit-notification-bar-iframe[src^="moz-extension://"] {
   filter: none !important;
   box-shadow: 0 3px 8px hsla(0, 0%, 0%, 0.1), 0 0 2px hsla(0, 0%, 0%, 0.3) !important;
 }
 
-@-moz-document regexp("^moz-extension://.*/popup/index.html.*")
-{
+@-moz-document regexp("^moz-extension://.*/popup/index.html.*") {
   @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
     :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] :where(body, input, button) {
       font-family: SF Pro, SF Arabic, Segoe UI, sans-serif !important;
@@ -25,8 +23,7 @@ iframe#bit-notification-bar-iframe[src^="moz-extension://"]
   }
 }
 
-@-moz-document regexp("^moz-extension://.*/notification/bar.html.*")
-{
+@-moz-document regexp("^moz-extension://.*/notification/bar.html.*") {
   :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] body {
     background: var(--in-content-box-background) !important;
     color: var(--plaintext-color) !important;
@@ -55,8 +52,7 @@ iframe#bit-notification-bar-iframe[src^="moz-extension://"]
     padding: 4px !important;
   }
 
-  :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"]
-    :where(button.link, button.neutral) {
+  :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] :where(button.link, button.neutral) {
     color: var(--in-content-link-color) !important;
   }
 
@@ -64,13 +60,11 @@ iframe#bit-notification-bar-iframe[src^="moz-extension://"]
     background-color: var(--in-content-primary-button-background) !important;
   }
 
-  :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"]
-    button:not(.neutral, .link):hover {
+  :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] button:not(.neutral, .link):hover {
     background-color: var(--in-content-primary-button-background-hover) !important;
   }
 
-  :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"]
-    button:not(.neutral, .link):hover:active {
+  :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] button:not(.neutral, .link):hover:active {
     background-color: var(--in-content-primary-button-background-active) !important;
   }
 
@@ -79,8 +73,7 @@ iframe#bit-notification-bar-iframe[src^="moz-extension://"]
     display: block;
     width: 26px;
     height: 26px;
-    background: var(--in-content-primary-button-background)
-      url(chrome://userchrome/content/material/bitwarden.svg) center/18px no-repeat;
+    background: var(--in-content-primary-button-background) url(chrome://userchrome/content/material/bitwarden.svg) center/18px no-repeat;
     -moz-context-properties: fill, fill-opacity;
     fill: white;
     border-radius: var(--general-button-border-radius);

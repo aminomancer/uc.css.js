@@ -44,27 +44,43 @@
       popup.scrollBox.parentElement.classList.add("BMB-special-innerbox");
       popup.scrollBox.smoothScroll = true;
       popup.scrollBox._scrollIncrement = 150;
-      popup.scrollBox._scrollButtonUp.classList.add("BMB-special-scrollbutton-up");
-      popup.scrollBox._scrollButtonDown.classList.add("BMB-special-scrollbutton-down");
+      popup.scrollBox._scrollButtonUp.classList.add(
+        "BMB-special-scrollbutton-up"
+      );
+      popup.scrollBox._scrollButtonDown.classList.add(
+        "BMB-special-scrollbutton-down"
+      );
       popup.scrollBox._onButtonMouseOver = function _onButtonMouseOver(index) {
-        if (this._ensureElementIsVisibleAnimationFrame || this._arrowScrollAnim.requestHandle) {
+        if (
+          this._ensureElementIsVisibleAnimationFrame ||
+          this._arrowScrollAnim.requestHandle
+        ) {
           return;
         }
         if (this._clickToScroll) this._continueScroll(index);
         else this._startScroll(index);
       };
       popup.scrollBox._onButtonMouseOut = function _onButtonMouseOut() {
-        if (this._ensureElementIsVisibleAnimationFrame || this._arrowScrollAnim.requestHandle) {
+        if (
+          this._ensureElementIsVisibleAnimationFrame ||
+          this._arrowScrollAnim.requestHandle
+        ) {
           return;
         }
         if (this._clickToScroll) this._pauseScroll();
         else this._stopScroll();
       };
       popup.scrollBox._scrollButtonDown.onclick = function scrollToBottom() {
-        bookmarksPopupShadowRoot.scrollByIndex(popup.scrollBox, popup.children.length);
+        bookmarksPopupShadowRoot.scrollByIndex(
+          popup.scrollBox,
+          popup.children.length
+        );
       };
       popup.scrollBox._scrollButtonUp.onclick = function scrollToTop() {
-        bookmarksPopupShadowRoot.scrollByIndex(popup.scrollBox, -popup.children.length);
+        bookmarksPopupShadowRoot.scrollByIndex(
+          popup.scrollBox,
+          -popup.children.length
+        );
       };
     },
 
@@ -115,6 +131,9 @@
         bookmarksPopupShadowRoot.init();
       }
     };
-    Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
+    Services.obs.addObserver(
+      delayedListener,
+      "browser-delayed-startup-finished"
+    );
   }
 })();

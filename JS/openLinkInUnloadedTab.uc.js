@@ -73,7 +73,8 @@ class UnloadedTabMenuBase {
     this.useLinkPref = `userChrome.openLinkInUnloadedTab.use_link_text_as_tab_title_when_unknown`;
     this.initPref(this.useLinkPref, true);
 
-    this.QUERY_TYPE_BOOKMARKS = Ci.nsINavHistoryQueryOptions.QUERY_TYPE_BOOKMARKS;
+    this.QUERY_TYPE_BOOKMARKS =
+      Ci.nsINavHistoryQueryOptions.QUERY_TYPE_BOOKMARKS;
     this.QUERY_TYPE_HISTORY = Ci.nsINavHistoryQueryOptions.QUERY_TYPE_HISTORY;
 
     this.placesMenuOpenUnloaded = this.create(document, "menuitem", {
@@ -197,7 +198,9 @@ class UnloadedTabMenuBase {
     this.syncedMenuOpenUnloaded.hidden = this.syncedMenuOpenTab?.hidden;
   }
   initPref(pref, bool) {
-    if (!Services.prefs.prefHasUserValue(pref)) Services.prefs.setBoolPref(pref, bool);
+    if (!Services.prefs.prefHasUserValue(pref)) {
+      Services.prefs.setBoolPref(pref, bool);
+    }
   }
   get useLinkAsTabTitle() {
     return Services.prefs.getBoolPref(this.useLinkPref, true);
@@ -211,17 +214,22 @@ class UnloadedTabMenuBase {
   get contentContextMenu() {
     return (
       this._contentContextMenu ||
-      (this._contentContextMenu = document.getElementById("contentAreaContextMenu"))
+      (this._contentContextMenu = document.getElementById(
+        "contentAreaContextMenu"
+      ))
     );
   }
   get syncedContextMenu() {
     return (
       this._syncedContextMenu ||
-      (this._syncedContextMenu = document.getElementById("SyncedTabsSidebarContext"))
+      (this._syncedContextMenu = document.getElementById(
+        "SyncedTabsSidebarContext"
+      ))
     );
   }
   get syncedTabsStore() {
-    return document.getElementById("sidebar")?.syncedTabsDeckComponent._syncedTabsListStore;
+    return document.getElementById("sidebar")?.syncedTabsDeckComponent
+      ._syncedTabsListStore;
   }
   get selectedSyncedRow() {
     return this.syncedTabsStore.data[this.syncedTabsStore._selectedRow[0]];
@@ -232,7 +240,9 @@ class UnloadedTabMenuBase {
   get placesMenuOpenContainer() {
     return (
       this._placesMenuOpenContainer ||
-      (this._placesMenuOpenContainer = document.getElementById("placesContext_openContainer:tabs"))
+      (this._placesMenuOpenContainer = document.getElementById(
+        "placesContext_openContainer:tabs"
+      ))
     );
   }
   get placesMenuOpenBookmarkContainer() {
@@ -254,19 +264,25 @@ class UnloadedTabMenuBase {
   get placesMenuOpenAllLinks() {
     return (
       this._placesMenuOpenAllLinks ||
-      (this._placesMenuOpenAllLinks = document.getElementById("placesContext_openLinks:tabs"))
+      (this._placesMenuOpenAllLinks = document.getElementById(
+        "placesContext_openLinks:tabs"
+      ))
     );
   }
   get placesMenuOpenNewTab() {
     return (
       this._placesMenuOpenNewTab ||
-      (this._placesMenuOpenNewTab = document.getElementById("placesContext_open:newtab"))
+      (this._placesMenuOpenNewTab = document.getElementById(
+        "placesContext_open:newtab"
+      ))
     );
   }
   get syncedMenuOpenAll() {
     return (
       this._syncedMenuOpenAll ||
-      (this._syncedMenuOpenAll = this.syncedContextMenu.querySelector("#syncedTabsOpenAllInTabs"))
+      (this._syncedMenuOpenAll = this.syncedContextMenu.querySelector(
+        "#syncedTabsOpenAllInTabs"
+      ))
     );
   }
   get syncedMenuOpenTab() {
@@ -280,7 +296,9 @@ class UnloadedTabMenuBase {
   get contentMenuOpenLink() {
     return (
       this._contentMenuOpenLink ||
-      (this._contentMenuOpenLink = document.getElementById("context-openlinkintab"))
+      (this._contentMenuOpenLink = document.getElementById(
+        "context-openlinkintab"
+      ))
     );
   }
   getActivePlacesView(popup) {
@@ -352,7 +370,8 @@ class UnloadedTabMenuBase {
         };
       }
       tabParams.triggeringPrincipal =
-        location.href === `chrome://browser/content/browser.xhtml` && !params.syncedTabs
+        location.href === `chrome://browser/content/browser.xhtml` &&
+        !params.syncedTabs
           ? gBrowser.selectedBrowser.contentPrincipal
           : Services.scriptSecurityManager.getSystemPrincipal();
     }
@@ -369,7 +388,10 @@ class UnloadedTabMenuBase {
       entries: [
         {
           url,
-          title: item?.title || info?.title || (this.useLinkAsTabTitle && params.linkText),
+          title:
+            item?.title ||
+            info?.title ||
+            (this.useLinkAsTabTitle && params.linkText),
           triggeringPrincipal_base64: this.E10SUtils.serializePrincipal(
             tabParams.triggeringPrincipal
           ),
@@ -384,35 +406,54 @@ class UnloadedTabMenuBase {
       "SSTabRestoring",
       function() {
         isReady = true;
-        win.unloadedTabMenu.maybeSetIcon(tab, iconURL, isReady, tabParams.triggeringPrincipal);
+        win.unloadedTabMenu.maybeSetIcon(
+          tab,
+          iconURL,
+          isReady,
+          tabParams.triggeringPrincipal
+        );
       },
       { once: true }
     );
     let tempURL =
-      (await PlacesUtils.promiseFaviconData(uri.spec, 256).then(data => data?.uri?.spec)) ||
-      tentativeIcon;
+      (await PlacesUtils.promiseFaviconData(uri.spec, 256).then(
+        data => data?.uri?.spec
+      )) || tentativeIcon;
     if (tempURL) {
       let blob = await fetch(tempURL)
         .then(r => r.blob())
         .catch(() => {
           if (
             params.fromContent &&
-            gContextMenu.linkURI.host === gContextMenu.contentData.principal.host
+            gContextMenu.linkURI.host ===
+              gContextMenu.contentData.principal.host
           ) {
             iconURL = gBrowser.getTabForBrowser(gContextMenu.browser).image;
-            win.unloadedTabMenu.maybeSetIcon(tab, iconURL, isReady, tabParams.triggeringPrincipal);
+            win.unloadedTabMenu.maybeSetIcon(
+              tab,
+              iconURL,
+              isReady,
+              tabParams.triggeringPrincipal
+            );
           }
         });
       let reader = new FileReader();
       reader.onloadend = function() {
         iconURL = reader.result;
-        win.unloadedTabMenu.maybeSetIcon(tab, iconURL, isReady, tabParams.triggeringPrincipal);
+        win.unloadedTabMenu.maybeSetIcon(
+          tab,
+          iconURL,
+          isReady,
+          tabParams.triggeringPrincipal
+        );
       };
       reader.readAsDataURL(blob);
     }
   }
   maybeSetIcon(tab, iconURL, isReady, principal) {
-    if (iconURL && isReady) tab.ownerGlobal.gBrowser.setIcon(tab, iconURL, null, principal);
+    if (iconURL && isReady) {
+      tab.ownerGlobal.gBrowser.setIcon(tab, iconURL, null, principal);
+    }
   }
   getInfoFromHistory(aURI, aQueryType) {
     let options = PlacesUtils.history.getNewQueryOptions();

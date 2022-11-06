@@ -99,8 +99,7 @@
   --edit-bm-panel-overflow: hidden;
 }
 
-@-moz-document url("chrome://browser/content/browser.xhtml")
-{
+@-moz-document url("chrome://browser/content/browser.xhtml") {
   .tree-input[type="text"] {
     background-color: var(--ebmp-focus-bgcolor) !important;
     border: none !important;
@@ -199,8 +198,7 @@
   margin: 0 !important;
   --menupopup-inner-padding: 0 !important;
   --context-menuitem-border-radius: 0 !important;
-  --menupopup-border-radius: 0 0 var(--general-button-border-radius)
-    var(--general-button-border-radius) !important;
+  --menupopup-border-radius: 0 0 var(--general-button-border-radius) var(--general-button-border-radius) !important;
 }
 
 /* this goes in userChrome.au.css */
@@ -255,9 +253,7 @@
   border-color: var(--ui-textbox-bgcolor) !important;
 }
 
-#editBookmarkPanel
-  .panel-footer
-  > button:not([default], [disabled], :active):is(:hover, :focus-visible) {
+#editBookmarkPanel .panel-footer > button:not([default], [disabled], :active):is(:hover, :focus-visible) {
   background-color: var(--ebmp-hover-bgcolor) !important;
   border-color: transparent !important;
 }
@@ -272,9 +268,7 @@
   background-color: var(--ui-textbox-bgcolor) !important;
 }
 
-#editBookmarkPanel
-  .panel-footer
-  > button[default]:not([disabled], :active):is(:hover, :focus-visible) {
+#editBookmarkPanel .panel-footer > button[default]:not([disabled], :active):is(:hover, :focus-visible) {
   background-color: var(--button-primary-hover-bgcolor) !important;
 }
 
@@ -369,19 +363,13 @@
   display: -moz-box !important;
 }
 
-:is(#bookmarkpropertiesdialog, #editBookmarkPanel)
-  richlistbox[id]
-  richlistitem[checked="true"]
-  image {
+:is(#bookmarkpropertiesdialog, #editBookmarkPanel) richlistbox[id] richlistitem[checked="true"] image {
   background-color: var(--checkbox-checked-bgcolor) !important;
   border-color: var(--checkbox-checked-border-color) !important;
   list-style-image: url(chrome://userchrome/content/check.svg) !important;
 }
 
-:is(#bookmarkpropertiesdialog, #editBookmarkPanel)
-  richlistbox[id]
-  richlistitem[checked="true"]
-  image {
+:is(#bookmarkpropertiesdialog, #editBookmarkPanel) richlistbox[id] richlistitem[checked="true"] image {
   background-color: var(--checkbox-checked-bgcolor) !important;
   border-color: var(--checkbox-checked-border-color) !important;
   list-style-image: url(chrome://userchrome/content/check.svg) !important;
@@ -391,10 +379,7 @@
   background-color: var(--checkbox-unchecked-hover-bgcolor) !important;
 }
 
-#editBookmarkPanel
-  richlistbox[id]
-  richlistitem:is(:hover:active, [selected="true"], [current="true"])
-  image {
+#editBookmarkPanel richlistbox[id] richlistitem:is(:hover:active, [selected="true"], [current="true"]) image {
   background-color: var(--checkbox-unchecked-active-bgcolor) !important;
 }
 
@@ -402,10 +387,7 @@
   background-color: var(--checkbox-checked-hover-bgcolor) !important;
 }
 
-#editBookmarkPanel
-  richlistbox[id]
-  richlistitem[checked="true"]:is(:hover:active, [selected="true"], [current="true"])
-  image {
+#editBookmarkPanel richlistbox[id] richlistitem[checked="true"]:is(:hover:active, [selected="true"], [current="true"]) image {
   background-color: var(--checkbox-checked-active-bgcolor) !important;
 }
 
@@ -421,9 +403,7 @@
   background-color: var(--ebmp-focus-bgcolor) !important;
 }
 
-#editBookmarkPanel
-  richlistbox[id]:focus-visible
-  richlistitem:is([selected="true"], [current="true"]) {
+#editBookmarkPanel richlistbox[id]:focus-visible richlistitem:is([selected="true"], [current="true"]) {
   background-color: var(--ebmp-double-focus-bgcolor) !important;
 }
 
@@ -435,15 +415,11 @@
   margin-inline-end: 6px !important;
 }
 
-:is(#bookmarkpropertiesdialog, #editBookmarkPanel)
-  checkbox:focus-visible:not(:active)
-  .checkbox-check {
+:is(#bookmarkpropertiesdialog, #editBookmarkPanel) checkbox:focus-visible:not(:active) .checkbox-check {
   background-color: var(--checkbox-unchecked-hover-bgcolor) !important;
 }
 
-:is(#bookmarkpropertiesdialog, #editBookmarkPanel)
-  checkbox:focus-visible:not(:active)
-  .checkbox-check[checked] {
+:is(#bookmarkpropertiesdialog, #editBookmarkPanel) checkbox:focus-visible:not(:active) .checkbox-check[checked] {
   background-color: var(--checkbox-checked-hover-bgcolor) !important;
 }
 
@@ -462,9 +438,7 @@ richlistbox[id]:not(#categories) > richlistitem[selected] {
   --in-content-button-text-color-hover: revert !important;
 }
 
-#bookmarkpropertiesdialog
-  richlistbox[id]
-  richlistitem:is(:hover, [selected="true"], [current="true"]) {
+#bookmarkpropertiesdialog richlistbox[id] richlistitem:is(:hover, [selected="true"], [current="true"]) {
   background-color: var(--in-content-button-background) !important;
 }
 
@@ -489,8 +463,7 @@ richlistbox[id]:not(#categories) > richlistitem[selected] {
 }
 
 /* bookmarks toolbar button's popup */
-@-moz-document url(chrome://browser/content/browser.xhtml)
-{
+@-moz-document url(chrome://browser/content/browser.xhtml) {
   .panel-subview-footer.openintabs-menuitem {
     display: none !important;
   }
@@ -661,15 +634,11 @@ so in order to ensure matching padding on this item we're taking that value and 
   padding-inline: calc(var(--arrowpanel-menuitem-padding-inline) + 0.74em) !important;
 }
 
-#BMB_bookmarksPopup
-  menupopup[emptyplacesresult="true"]
-  menuitem.bookmark-item
-  .menu-accel:not([value]):empty {
+#BMB_bookmarksPopup menupopup[emptyplacesresult="true"] menuitem.bookmark-item .menu-accel:not([value]):empty {
   display: none !important;
 }
 
-#BMB_bookmarksPopup
-  :is(#bookmarksToolbarFolderMenu, #BMB_bookmarksToolbar, #panelMenu_bookmarksToolbar, #BMB_viewBookmarksToolbar):not(.menuitem-iconic, .menu-iconic)::before {
+#BMB_bookmarksPopup :is(#bookmarksToolbarFolderMenu, #BMB_bookmarksToolbar, #panelMenu_bookmarksToolbar, #BMB_viewBookmarksToolbar):not(.menuitem-iconic, .menu-iconic)::before {
   content: "" !important;
   position: relative !important;
   display: -moz-inline-box !important;

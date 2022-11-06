@@ -21,7 +21,10 @@
     let { PopupNotifications } = ChromeUtils.importESModule(
       "resource://gre/modules/PopupNotifications.sys.mjs"
     );
-    if (PopupNotifications.prototype._showPanel.name === "PopupNotifications_showPanel") {
+    if (
+      PopupNotifications.prototype._showPanel.name ===
+      "PopupNotifications_showPanel"
+    ) {
       const NOTIFICATION_EVENT_SHOWING = "showing";
       const NOTIFICATION_EVENT_SHOWN = "shown";
       const TELEMETRY_STAT_OFFERED = 0;
@@ -40,11 +43,16 @@
   })();
 
   (function() {
-    let { ExtensionsUI } = ChromeUtils.import("resource:///modules/ExtensionsUI.jsm");
+    let { ExtensionsUI } = ChromeUtils.import(
+      "resource:///modules/ExtensionsUI.jsm"
+    );
     if (ExtensionsUI.showPermissionsPrompt.name === "showPermissionsPrompt") {
-      const DEFAULT_EXTENSION_ICON = "chrome://mozapps/skin/extensions/extensionGeneric.svg";
+      const DEFAULT_EXTENSION_ICON =
+        "chrome://mozapps/skin/extensions/extensionGeneric.svg";
       function getTabBrowser(browser) {
-        while (browser.ownerGlobal.docShell.itemType !== Ci.nsIDocShell.typeChrome) {
+        while (
+          browser.ownerGlobal.docShell.itemType !== Ci.nsIDocShell.typeChrome
+        ) {
           browser = browser.ownerGlobal.docShell.chromeEventHandler;
         }
         let window = browser.ownerGlobal;
@@ -69,7 +77,9 @@
             .replace(/^(.)/, `uc_showPermissionsPrompt$1`)
             .replace(/bottomright/, "bottomcenter")
       );
-      if (ExtensionsUI.showDefaultSearchPrompt.name === "showDefaultSearchPrompt") {
+      if (
+        ExtensionsUI.showDefaultSearchPrompt.name === "showDefaultSearchPrompt"
+      ) {
         eval(
           `ExtensionsUI.showDefaultSearchPrompt = async function ` +
             ExtensionsUI.showDefaultSearchPrompt
@@ -107,9 +117,12 @@
   })();
 
   (function() {
-    let { CustomizeMode } = ChromeUtils.import("resource:///modules/CustomizeMode.jsm");
+    let { CustomizeMode } = ChromeUtils.import(
+      "resource:///modules/CustomizeMode.jsm"
+    );
     if (
-      CustomizeMode.prototype._showDownloadsAutoHidePanel.name === "_showDownloadsAutoHidePanel"
+      CustomizeMode.prototype._showDownloadsAutoHidePanel.name ===
+      "_showDownloadsAutoHidePanel"
     ) {
       eval(
         `CustomizeMode.prototype._showDownloadsAutoHidePanel = async function ` +
@@ -132,7 +145,10 @@
   });
   dummyNotification.remove();
 
-  if (DownloadsPanel && DownloadsPanel._openPopupIfDataReady.name === "_openPopupIfDataReady") {
+  if (
+    DownloadsPanel &&
+    DownloadsPanel._openPopupIfDataReady.name === "_openPopupIfDataReady"
+  ) {
     eval(
       `DownloadsPanel._openPopupIfDataReady = function ` +
         DownloadsPanel._openPopupIfDataReady
@@ -161,7 +177,10 @@
     );
   }
 
-  if (PanelUI && PanelUI._showNotificationPanel.name === "_showNotificationPanel") {
+  if (
+    PanelUI &&
+    PanelUI._showNotificationPanel.name === "_showNotificationPanel"
+  ) {
     eval(
       `PanelUI._showNotificationPanel = function ` +
         PanelUI._showNotificationPanel
@@ -175,7 +194,10 @@
     );
   }
 
-  if (gSharedTabWarning.willShowSharedTabWarning.name === "willShowSharedTabWarning") {
+  if (
+    gSharedTabWarning.willShowSharedTabWarning.name ===
+    "willShowSharedTabWarning"
+  ) {
     eval(
       `gSharedTabWarning.willShowSharedTabWarning = function ` +
         gSharedTabWarning.willShowSharedTabWarning
@@ -189,7 +211,9 @@
     );
   }
 
-  if (gProtectionsHandler.showProtectionsPopup.name === "showProtectionsPopup") {
+  if (
+    gProtectionsHandler.showProtectionsPopup.name === "showProtectionsPopup"
+  ) {
     eval(
       `gProtectionsHandler.showProtectionsPopup = function ` +
         gProtectionsHandler.showProtectionsPopup
@@ -253,7 +277,10 @@
 
       if (--count == 0) {
         // Check that the notification is still showing
-        let current = PopupNotifications.getNotification(notification.id, notification.browser);
+        let current = PopupNotifications.getNotification(
+          notification.id,
+          notification.browser
+        );
         if (current === notification) {
           notification.remove();
         }
@@ -270,7 +297,10 @@
     }
   }
 
-  if (gXPInstallObserver.showInstallConfirmation.name === "showInstallConfirmation") {
+  if (
+    gXPInstallObserver.showInstallConfirmation.name ===
+    "showInstallConfirmation"
+  ) {
     eval(
       `gXPInstallObserver.showInstallConfirmation = function ` +
         gXPInstallObserver.showInstallConfirmation
@@ -320,21 +350,25 @@
   try {
     document
       .getElementById("extensionNotificationTemplate")
-      .content.getElementById("extension-notification-panel").position = "bottomcenter topright";
+      .content.getElementById("extension-notification-panel").position =
+      "bottomcenter topright";
   } catch (error) {}
   try {
     document
       .getElementById("confirmation-hint-wrapper")
-      .content.getElementById("confirmation-hint").position = "bottomcenter topright";
+      .content.getElementById("confirmation-hint").position =
+      "bottomcenter topright";
   } catch (error) {}
   try {
     document
       .getElementById("pageActionPanelTemplate")
-      .content.getElementById("pageActionPanel").position = "bottomcenter topright";
+      .content.getElementById("pageActionPanel").position =
+      "bottomcenter topright";
   } catch (error) {}
   document.getElementById("appMenu-popup").position = "bottomcenter topright";
   document.getElementById("widget-overflow").position = "bottomcenter topright";
-  document.getElementById("sidebarMenu-popup").position = "bottomcenter topright";
+  document.getElementById("sidebarMenu-popup").position =
+    "bottomcenter topright";
 
   function init() {
     ConfirmationHint = {
@@ -443,13 +477,17 @@
       get _message() {
         this._ensurePanel();
         delete this._message;
-        return (this._message = document.getElementById("confirmation-hint-message"));
+        return (this._message = document.getElementById(
+          "confirmation-hint-message"
+        ));
       },
 
       get _description() {
         this._ensurePanel();
         delete this._description;
-        return (this._description = document.getElementById("confirmation-hint-description"));
+        return (this._description = document.getElementById(
+          "confirmation-hint-description"
+        ));
       },
 
       _ensurePanel() {
@@ -462,7 +500,9 @@
     };
   }
 
-  let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(Ci.nsIStyleSheetService);
+  let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
+    Ci.nsIStyleSheetService
+  );
   let css = /* css */ `panel[type="arrow"][side="top"],
   panel[type="arrow"][side="bottom"] {
     margin-inline: -20px;
@@ -523,8 +563,12 @@
   #confirmation-hint[hidearrow]::part(arrowbox) {
     visibility: hidden;
   }`;
-  let uri = Services.io.newURI("data:text/css;charset=UTF=8," + encodeURIComponent(css));
-  if (!sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
+  let uri = Services.io.newURI(
+    "data:text/css;charset=UTF=8," + encodeURIComponent(css)
+  );
+  if (!sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) {
+    sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
+  }
 
   if (gBrowserInit.delayedStartupFinished) {
     init();
@@ -535,6 +579,9 @@
         init();
       }
     };
-    Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
+    Services.obs.addObserver(
+      delayedListener,
+      "browser-delayed-startup-finished"
+    );
   }
 })();

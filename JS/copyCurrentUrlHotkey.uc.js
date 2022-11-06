@@ -71,13 +71,18 @@ class CopyCurrentURL {
       : Services.clipboard.kGlobalClipboard;
   }
   handleEvent() {
-    let menuitem = gURLBar.inputField?.parentElement?.menupopup?.querySelector(`[cmd="cmd_copy"]`);
+    let menuitem = gURLBar.inputField?.parentElement?.menupopup?.querySelector(
+      `[cmd="cmd_copy"]`
+    );
     if (menuitem) {
       if (!this.hintApplied && menuitem.hasAttribute("key")) {
         gURLBar.removeEventListener("contextmenu", this);
         return;
       }
-      if (gURLBar.selectionStart != 0 || gURLBar.selectionEnd != gURLBar.inputField.textLength) {
+      if (
+        gURLBar.selectionStart != 0 ||
+        gURLBar.selectionEnd != gURLBar.inputField.textLength
+      ) {
         menuitem.setAttribute("key", this.config.shortcut.id);
       } else {
         menuitem.removeAttribute("key");
@@ -95,7 +100,10 @@ class CopyCurrentURL {
           gURLBar.addEventListener("contextmenu", this);
         }
       };
-      Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
+      Services.obs.addObserver(
+        delayedListener,
+        "browser-delayed-startup-finished"
+      );
     }
   }
 }

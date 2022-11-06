@@ -96,13 +96,19 @@ class DebugExtension {
   constructor() {
     this.setupUpdate();
     this.toolbarContext = document.getElementById("toolbar-context-menu");
-    this.overflowContext = document.getElementById("customizationPanelItemContextMenu");
+    this.overflowContext = document.getElementById(
+      "customizationPanelItemContextMenu"
+    );
     this.pageActionContext = document.getElementById("pageActionContextMenu");
     this.toolbarMenu = this.makeMainMenu(this.toolbarContext);
-    this.toolbarMenupopup = this.toolbarMenu.appendChild(document.createXULElement("menupopup"));
+    this.toolbarMenupopup = this.toolbarMenu.appendChild(
+      document.createXULElement("menupopup")
+    );
     this.toolbarMenupopup.addEventListener("popupshowing", this);
     this.overflowMenu = this.makeMainMenu(this.overflowContext);
-    this.overflowMenupopup = this.overflowMenu.appendChild(document.createXULElement("menupopup"));
+    this.overflowMenupopup = this.overflowMenu.appendChild(
+      document.createXULElement("menupopup")
+    );
     this.overflowMenupopup.addEventListener("popupshowing", this);
     this.pageActionMenu = this.makeMainMenu(this.pageActionContext);
     this.pageActionMenupopup = this.pageActionMenu.appendChild(
@@ -119,8 +125,11 @@ class DebugExtension {
       "CopyURL",
     ].forEach(type =>
       ["toolbar", "overflow", "pageAction"].forEach(context => {
-        if (typeof type === "string") this.makeMenuitem(type, this[`${context}Menupopup`]);
-        else if (typeof type === "object") this.makeMenu(type, this[`${context}Menupopup`]);
+        if (typeof type === "string") {
+          this.makeMenuitem(type, this[`${context}Menupopup`]);
+        } else if (typeof type === "object") {
+          this.makeMenu(type, this[`${context}Menupopup`]);
+        }
       })
     );
   }
@@ -143,7 +152,9 @@ class DebugExtension {
     if (!id) return;
     let extension = WebExtensionPolicy.getByID(id).extension;
     let actions = new Map();
-    for (let type of this.actionTypes) actions.set(type, this.getActionURL(extension, type));
+    for (let type of this.actionTypes) {
+      actions.set(type, this.getActionURL(extension, type));
+    }
     if (popup.className.includes("Submenu-Popup")) {
       actions.forEach((url, type) => {
         popup.querySelector(".customize-context-" + type).disabled = !url;
@@ -189,7 +200,9 @@ class DebugExtension {
       label: this.config[type].label,
       accesskey: this.config[type].accesskey,
       oncommand: `debugExtensionMenu.onCommand(event, this.parentElement, "${type}")`,
-      contexttype: popup.closest("#pageActionContextMenu") ? void 0 : "toolbaritem",
+      contexttype: popup.closest("#pageActionContextMenu")
+        ? void 0
+        : "toolbaritem",
     });
     popup.appendChild(item);
     return item;
@@ -208,7 +221,9 @@ class DebugExtension {
       class: `customize-context-${name}-Submenu`,
       label: this.config[name].label,
       accesskey: this.config[name].accesskey,
-      contexttype: popup.closest("#pageActionContextMenu") ? void 0 : "toolbaritem",
+      contexttype: popup.closest("#pageActionContextMenu")
+        ? void 0
+        : "toolbaritem",
     });
     let menupopup = menu.appendChild(document.createXULElement("menupopup"));
     menupopup.className = `customize-context-${name}-Submenu-Popup`;
@@ -289,7 +304,9 @@ class DebugExtension {
         url = this.getActionURL(extension, type);
         break;
       case "Inspector":
-        url = `about:devtools-toolbox?id=${encodeURIComponent(id)}&type=extension`;
+        url = `about:devtools-toolbox?id=${encodeURIComponent(
+          id
+        )}&type=extension`;
         // use the system principal for about:devtools-toolbox
         triggeringPrincipal = Services.scriptSecurityManager.getSystemPrincipal();
         break;
@@ -302,7 +319,10 @@ class DebugExtension {
           .getService(Ci.nsIClipboardHelper)
           .copyString(type === "CopyID" ? id : extension.baseURL);
         let actionNode = this.getActionNode(popup.triggerNode);
-        if (actionNode && windowUtils.getBoundsWithoutFlushing(actionNode)?.width) {
+        if (
+          actionNode &&
+          windowUtils.getBoundsWithoutFlushing(actionNode)?.width
+        ) {
           window.CustomHint?.show(actionNode, "Copied");
         }
         return;
@@ -317,9 +337,10 @@ class DebugExtension {
     }
     // whether to open in the current tab or a new tab. only opens in the
     // current tab if the current tab is on the new tab page or home page.
-    let where = new RegExp(`(${BROWSER_NEW_TAB_URL}|${HomePage.get(window)})`, "i").test(
-      gBrowser.currentURI.spec
-    )
+    let where = new RegExp(
+      `(${BROWSER_NEW_TAB_URL}|${HomePage.get(window)})`,
+      "i"
+    ).test(gBrowser.currentURI.spec)
       ? "current"
       : "tab";
     openLinkIn(url, where, {

@@ -31,7 +31,10 @@
     }
     async generateStrings() {
       if (!this.strings) {
-        this.strings = await new Localization(["toolkit/about/aboutSupport.ftl"], true);
+        this.strings = await new Localization(
+          ["toolkit/about/aboutSupport.ftl"],
+          true
+        );
       }
       await AppMenuMods.sleep(1);
       return this.strings;
@@ -60,8 +63,13 @@
         onclick: `if (event.button === 0) return; Services.appinfo.invalidateCachesOnRestart(); setTimeout(() => Services.startup.quit(Ci.nsIAppStartup.eRestart | Ci.nsIAppStartup.eAttemptQuit), 300); PanelMultiView.forNode(this.closest("panelmultiview")).hidePopup(); event.preventDefault();`,
       });
       let exitButton = document.getElementById("appMenu-quit-button2");
-      if (exitButton) exitButton.before(restartButton);
-      else PanelUI.mainView.querySelector(".panel-subview-body").appendChild(restartButton);
+      if (exitButton) {
+        exitButton.before(restartButton);
+      } else {
+        PanelUI.mainView
+          .querySelector(".panel-subview-body")
+          .appendChild(restartButton);
+      }
     }
     fixSyncSubviewButtonAlignment() {
       eval(
@@ -83,6 +91,9 @@
         new AppMenuMods();
       }
     };
-    Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
+    Services.obs.addObserver(
+      delayedListener,
+      "browser-delayed-startup-finished"
+    );
   }
 })();

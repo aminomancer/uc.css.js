@@ -36,7 +36,8 @@
     }
     get autocomplete() {
       return (
-        this._autocomplete || (this._autocomplete = document.getElementById("PopupAutoComplete"))
+        this._autocomplete ||
+        (this._autocomplete = document.getElementById("PopupAutoComplete"))
       );
     }
     get panelShadowContent() {
@@ -55,6 +56,9 @@
         new AutocompletePopupStyler();
       }
     };
-    Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
+    Services.obs.addObserver(
+      delayedListener,
+      "browser-delayed-startup-finished"
+    );
   }
 })();

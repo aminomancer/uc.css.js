@@ -6,8 +6,7 @@
 
 /* multithreaded download manager */
 
-@-moz-document regexp("^moz-extension://.*/.*")
-{
+@-moz-document regexp("^moz-extension://.*/.*") {
   :root[uc-extension-id="multithreaded-download-manager@qw.linux-2g64.local"] {
     --selected-bg: color-mix(in srgb, hsla(200, 40%, 70%, 0.25) 60%, var(--purple-35));
   }
@@ -25,31 +24,23 @@
     padding: 3px !important;
   }
 
-  :root[uc-extension-id="multithreaded-download-manager@qw.linux-2g64.local"]
-    :is(#toolbar, .summary-row)
-    > button {
+  :root[uc-extension-id="multithreaded-download-manager@qw.linux-2g64.local"] :is(#toolbar, .summary-row) > button {
     background-color: transparent !important;
     margin: 0 !important;
     border-radius: var(--general-button-border-radius) !important;
     outline: 0 !important;
   }
 
-  :root[uc-extension-id="multithreaded-download-manager@qw.linux-2g64.local"]
-    :is(#toolbar, .summary-row)
-    > button:not([disabled]):hover {
+  :root[uc-extension-id="multithreaded-download-manager@qw.linux-2g64.local"] :is(#toolbar, .summary-row) > button:not([disabled]):hover {
     background-color: var(--in-content-button-background-hover) !important;
   }
 
-  :root[uc-extension-id="multithreaded-download-manager@qw.linux-2g64.local"]
-    :is(#toolbar, .summary-row)
-    > button:not([disabled]):focus-visible {
+  :root[uc-extension-id="multithreaded-download-manager@qw.linux-2g64.local"] :is(#toolbar, .summary-row) > button:not([disabled]):focus-visible {
     outline: var(--global-focus-outline) !important;
     box-shadow: var(--global-focus-shadow) !important;
   }
 
-  :root[uc-extension-id="multithreaded-download-manager@qw.linux-2g64.local"]
-    :is(#toolbar, .summary-row)
-    > button:not([disabled]):hover:active {
+  :root[uc-extension-id="multithreaded-download-manager@qw.linux-2g64.local"] :is(#toolbar, .summary-row) > button:not([disabled]):hover:active {
     background-color: var(--in-content-button-background-active) !important;
   }
 
@@ -57,9 +48,7 @@
     min-height: 100px !important;
   }
 
-  :root[uc-extension-id="multithreaded-download-manager@qw.linux-2g64.local"]
-    #tasks:empty
-    + #empty-tasks {
+  :root[uc-extension-id="multithreaded-download-manager@qw.linux-2g64.local"] #tasks:empty + #empty-tasks {
     height: 100px !important;
     display: flex !important;
     flex-flow: column nowrap !important;
@@ -71,9 +60,7 @@
     border-color: var(--in-content-box-border-color) !important;
   }
 
-  :root[uc-extension-id="multithreaded-download-manager@qw.linux-2g64.local"]
-    :root[data-path="panel/panel"]
-    .task.selected {
+  :root[uc-extension-id="multithreaded-download-manager@qw.linux-2g64.local"] :root[data-path="panel/panel"] .task.selected {
     background-color: var(--selected-bg) !important;
   }
 
@@ -81,8 +68,7 @@
     border-radius: 100px !important;
   }
 
-  :root[uc-extension-id="multithreaded-download-manager@qw.linux-2g64.local"]
-    :is(.warning-bar, .error-bar) {
+  :root[uc-extension-id="multithreaded-download-manager@qw.linux-2g64.local"] :is(.warning-bar, .error-bar) {
     background-color: rgb(22, 21, 22) !important;
   }
 }

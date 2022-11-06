@@ -35,13 +35,22 @@ class TabThumbnail {
     "Overflow terminal character": `…`,
   };
   get tooltip() {
-    return this._tooltip || (this._tooltip = document.getElementById("tabThumbTooltip"));
+    return (
+      this._tooltip ||
+      (this._tooltip = document.getElementById("tabThumbTooltip"))
+    );
   }
   get tabLabel() {
-    return this._tabLabel || (this._tabLabel = this.tooltip.querySelector("#tabThumbLabel"));
+    return (
+      this._tabLabel ||
+      (this._tabLabel = this.tooltip.querySelector("#tabThumbLabel"))
+    );
   }
   get thumbBox() {
-    return this._thumbBox || (this._thumbBox = this.tooltip.querySelector("#tabThumbBox"));
+    return (
+      this._thumbBox ||
+      (this._thumbBox = this.tooltip.querySelector("#tabThumbBox"))
+    );
   }
   constructor() {
     this._updateTimer = null;
@@ -63,7 +72,9 @@ class TabThumbnail {
   </vbox>
 </tooltip>`;
     this.registerSheet();
-    document.getElementById("mainPopupSet").appendChild(MozXULElement.parseXULToFragment(markup));
+    document
+      .getElementById("mainPopupSet")
+      .appendChild(MozXULElement.parseXULToFragment(markup));
     gBrowser.tabContainer.tooltip = "tabThumbTooltip";
     addEventListener("unload", () => this.cancelTimer(), false);
   }
@@ -90,7 +101,9 @@ class TabThumbnail {
     let canvas = PageThumbs.createCanvas(window);
     let browser = tab.linkedBrowser;
     let pending = tab.hasAttribute("pending") || !browser.browsingContext;
-    let docURI = pending ? browser?.currentURI : browser?.documentURI || browser?.currentURI;
+    let docURI = pending
+      ? browser?.currentURI
+      : browser?.documentURI || browser?.currentURI;
     let url = docURI?.spec;
     let isBlank = !url || url === "about:blank";
     if (isBlank || pending) {
@@ -103,14 +116,19 @@ class TabThumbnail {
         label =
           label.substring(0, limit / 2) + // 50
           terminal + // 1
-          label.substring(label.length + terminal.length - limit / 2, label.length); // 49
+          label.substring(
+            label.length + terminal.length - limit / 2,
+            label.length
+          ); // 49
       }
       this.tabLabel.textContent = label;
       await PageThumbs.captureToCanvas(
         browser,
         canvas,
         {
-          backgroundColor: getComputedStyle(this.thumbBox).getPropertyValue("background-color"),
+          backgroundColor: getComputedStyle(this.thumbBox).getPropertyValue(
+            "background-color"
+          ),
           fullScale: true,
           fullViewport: true,
         },
@@ -121,7 +139,10 @@ class TabThumbnail {
     }
     if (config["Update interval"] > 0) {
       this._updateTimer = setTimeout(
-        () => requestIdleCallback(() => requestAnimationFrame(() => this.showPreview(true))),
+        () =>
+          requestIdleCallback(() =>
+            requestAnimationFrame(() => this.showPreview(true))
+          ),
         config["Update interval"]
       );
     }
@@ -191,7 +212,9 @@ class TabThumbnail {
 #tabThumbTooltip[hide-thumbnail] #tabThumbBox > toolbarseparator {
   display: none;
 }`;
-    let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(Ci.nsIStyleSheetService);
+    let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
+      Ci.nsIStyleSheetService
+    );
     let uri = makeURI("data:text/css;charset=UTF=8," + encodeURIComponent(css));
     if (sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) return;
     sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);

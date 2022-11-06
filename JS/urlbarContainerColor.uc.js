@@ -28,7 +28,9 @@
       hbox.hidden = true;
       return;
     }
-    let identity = ContextualIdentityService.getPublicIdentityFromId(userContextId);
+    let identity = ContextualIdentityService.getPublicIdentityFromId(
+      userContextId
+    );
     if (!identity) {
       replaceContainerClass("color", hbox, "");
       replaceContainerClass("color", urlbar, "");
@@ -46,7 +48,9 @@
     replaceContainerClass("icon", indicator, identity.icon);
     hbox.hidden = false;
   };
-  let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(Ci.nsIStyleSheetService);
+  let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
+    Ci.nsIStyleSheetService
+  );
   let uri = Services.io.newURI(
     "data:text/css;charset=UTF=8," +
       encodeURIComponent(

@@ -128,10 +128,7 @@ tabmodalprompt :is(input, textarea)::selection {
 }
 
 tabmodalprompt :-moz-window-inactive::selection {
-  background-color: var(
-    --ui-selection-bgcolor-disabled,
-    text-select-disabled-background
-  ) !important;
+  background-color: var(--ui-selection-bgcolor-disabled, text-select-disabled-background) !important;
 }
 
 tabmodalprompt input[type="number"] {
@@ -233,48 +230,26 @@ panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem {
   border-radius: var(--context-menuitem-border-radius) !important;
 }
 
-panel[type="autocomplete-richlistbox"]
-  > richlistbox
-  > richlistitem:is([selected], :hover):not([disabled="true"]) {
+panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem:is([selected], :hover):not([disabled="true"]) {
   background-color: var(--arrowpanel-dimmed) !important;
   color: var(--menu-color) !important;
 }
 
-panel[type="autocomplete-richlistbox"]
-  richlistitem:is([originaltype="generatedPassword"], [originaltype="loginWithOrigin"], [originaltype="login"])
-  .ac-site-icon {
+panel[type="autocomplete-richlistbox"] richlistitem:is([originaltype="generatedPassword"], [originaltype="loginWithOrigin"], [originaltype="login"]) .ac-site-icon {
   fill: currentColor !important;
   fill-opacity: 0.8;
   -moz-context-properties: fill, fill-opacity !important;
   margin-inline-end: 6px !important;
 }
 
-panel[type="autocomplete-richlistbox"]
-  > richlistbox
-  > richlistitem[originaltype="generatedPassword"]
-  > .two-line-wrapper
-  > .labels-wrapper
-  > .generated-password-autosave,
-panel[type="autocomplete-richlistbox"]
-  > richlistbox
-  > richlistitem[originaltype="importableLearnMore"]
-  > .ac-title,
-panel[type="autocomplete-richlistbox"]
-  > richlistbox
-  > richlistitem
-  > .two-line-wrapper
-  > .labels-wrapper
-  > .line2-label {
+panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem[originaltype="generatedPassword"] > .two-line-wrapper > .labels-wrapper > .generated-password-autosave,
+panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem[originaltype="importableLearnMore"] > .ac-title,
+panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem > .two-line-wrapper > .labels-wrapper > .line2-label {
   opacity: 1 !important;
   color: var(--panel-shortcut-color) !important;
 }
 
-#PopupAutoComplete
-  > richlistbox
-  > richlistitem[originaltype="insecureWarning"]
-  > .ac-title
-  > description
-  > .ac-title-text {
+#PopupAutoComplete > richlistbox > richlistitem[originaltype="insecureWarning"] > .ac-title > description > .ac-title-text {
   padding-inline: 0 8px !important;
 }
 
@@ -285,29 +260,21 @@ panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem[originaltype
   background-color: var(--arrowpanel-dimmed) !important;
 }
 
-panel[type="autocomplete-richlistbox"]
-  > richlistbox
-  > richlistitem[originaltype="loginsFooter"]
-  .ac-title {
+panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem[originaltype="loginsFooter"] .ac-title {
   margin-inline: 0 !important;
 }
 
-panel[type="autocomplete-richlistbox"]
-  > richlistbox
-  > richlistitem[originaltype="loginsFooter"]:is(:hover, [selected]) {
+panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem[originaltype="loginsFooter"]:is(:hover, [selected]) {
   background-color: var(--arrowpanel-dimmed-further) !important;
 }
 
-panel[type="autocomplete-richlistbox"]
-  > richlistbox
-  > richlistitem[originaltype="loginsFooter"]:hover[selected] {
+panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem[originaltype="loginsFooter"]:hover[selected] {
   background-color: var(--arrowpanel-dimmed-even-further) !important;
 }
 
 /* update notifications */
 .popup-notification-icon[popupid^="update"] {
-  background: hsl(125, 81%, 57%) url(chrome://userchrome/content/update-icon-inverted.svg) no-repeat
-    center/contain !important;
+  background: hsl(125, 81%, 57%) url(chrome://userchrome/content/update-icon-inverted.svg) no-repeat center/contain !important;
   background-clip: border-box !important;
   fill: hsl(118, 89%, 24%) !important;
   border: 1px solid transparent !important;
@@ -327,8 +294,7 @@ panel[type="autocomplete-richlistbox"]
 }
 
 .popup-notification-icon[popupid="update-unsupported"] {
-  background: hsl(44, 95%, 60%) url(chrome://userchrome/content/check-partial.svg) no-repeat
-    center/contain !important;
+  background: hsl(44, 95%, 60%) url(chrome://userchrome/content/check-partial.svg) no-repeat center/contain !important;
   fill: hsl(32, 52%, 35%) !important;
   transform: none !important;
 }
@@ -771,20 +737,14 @@ panel[type="autocomplete-richlistbox"]
 
 /* the resizer is on the right side for ltr languages, and on the left side for
 rtl languages. adjust the border radius accordingly */
-:is(.content-prompt-dialog, .tab-prompt-dialog, #window-modal-dialog)
-  .dialogBox[resizable="true"]:is(:dir(ltr), :-moz-locale-dir(ltr)),
-:is(.content-prompt-dialog, .tab-prompt-dialog, #window-modal-dialog)
-  .dialogBox[resizable="true"]
-  .dialogFrame:is(:dir(ltr), :-moz-locale-dir(ltr)) {
+:is(.content-prompt-dialog, .tab-prompt-dialog, #window-modal-dialog) .dialogBox[resizable="true"]:is(:dir(ltr), :-moz-locale-dir(ltr)),
+:is(.content-prompt-dialog, .tab-prompt-dialog, #window-modal-dialog) .dialogBox[resizable="true"] .dialogFrame:is(:dir(ltr), :-moz-locale-dir(ltr)) {
   border-bottom-left-radius: 5px !important;
   border-bottom-right-radius: 0 !important;
 }
 
-:is(.content-prompt-dialog, .tab-prompt-dialog, #window-modal-dialog)
-  .dialogBox[resizable="true"]:is(:dir(rtl), :-moz-locale-dir(rtl)),
-:is(.content-prompt-dialog, .tab-prompt-dialog, #window-modal-dialog)
-  .dialogBox[resizable="true"]
-  .dialogFrame:is(:dir(rtl), :-moz-locale-dir(rtl)) {
+:is(.content-prompt-dialog, .tab-prompt-dialog, #window-modal-dialog) .dialogBox[resizable="true"]:is(:dir(rtl), :-moz-locale-dir(rtl)),
+:is(.content-prompt-dialog, .tab-prompt-dialog, #window-modal-dialog) .dialogBox[resizable="true"] .dialogFrame:is(:dir(rtl), :-moz-locale-dir(rtl)) {
   border-bottom-left-radius: 0 !important;
   border-bottom-right-radius: 5px !important;
 }
@@ -803,9 +763,7 @@ rtl languages. adjust the border radius accordingly */
 
 #window-modal-dialog,
 .tab-prompt-dialog {
-  --chrome-offset: calc(
-    0.5px + var(--urlbar-container-height, 40px) + var(--tab-min-height, 36px)
-  ) !important;
+  --chrome-offset: calc(0.5px + var(--urlbar-container-height, 40px) + var(--tab-min-height, 36px)) !important;
   clip-path: inset(0 -100% -100% -100%);
 }
 
@@ -867,9 +825,7 @@ rtl languages. adjust the border radius accordingly */
     --checkbox-checked-bgcolor: var(--in-content-primary-button-background) !important;
     --checkbox-checked-color: var(--in-content-primary-button-text-color) !important;
     --checkbox-checked-hover-bgcolor: var(--in-content-primary-button-background-hover) !important;
-    --checkbox-checked-active-bgcolor: var(
-      --in-content-primary-button-background-active
-    ) !important;
+    --checkbox-checked-active-bgcolor: var(--in-content-primary-button-background-active) !important;
     --dropdown-bgcolor: var(--arrowpanel-background) !important;
     --in-content-button-border-radius: var(--general-button-border-radius) !important;
     --in-content-button-vertical-padding: 5px !important;
@@ -943,15 +899,13 @@ rtl languages. adjust the border radius accordingly */
     border-color: var(--in-content-primary-button-border-color) !important;
   }
 
-  .dialog-button-box
-    > button:is([autofocus], [type="submit"], [default], .primary):not([disabled="true"]):is(:hover, :focus-visible) {
+  .dialog-button-box > button:is([autofocus], [type="submit"], [default], .primary):not([disabled="true"]):is(:hover, :focus-visible) {
     background-color: var(--in-content-primary-button-background-hover) !important;
     color: var(--in-content-primary-button-text-color-hover) !important;
     border-color: var(--in-content-primary-button-border-hover) !important;
   }
 
-  .dialog-button-box
-    > button:is([autofocus], [type="submit"], [default], .primary):not([disabled="true"]):hover:active {
+  .dialog-button-box > button:is([autofocus], [type="submit"], [default], .primary):not([disabled="true"]):hover:active {
     background-color: var(--in-content-primary-button-background-active) !important;
   }
 
@@ -988,15 +942,11 @@ rtl languages. adjust the border radius accordingly */
     background-color: var(--in-content-primary-button-background) !important;
   }
 
-  richlistbox[id]
-    richlistitem:not([disabled="true"])
-    > button[label]:is(:enabled, :not([disabled="true"])):is(:hover, :focus-visible) {
+  richlistbox[id] richlistitem:not([disabled="true"]) > button[label]:is(:enabled, :not([disabled="true"])):is(:hover, :focus-visible) {
     background-color: var(--in-content-primary-button-background-hover) !important;
   }
 
-  richlistbox[id]
-    richlistitem:not([disabled="true"])
-    > button[label]:is(:enabled, :not([disabled="true"])):hover:active,
+  richlistbox[id] richlistitem:not([disabled="true"]) > button[label]:is(:enabled, :not([disabled="true"])):hover:active,
   richlistbox[id] richlistitem > button[label][open],
   richlistbox[id] richlistitem > button[label][open]:hover {
     background-color: var(--in-content-primary-button-background-active) !important;
@@ -1040,10 +990,7 @@ rtl languages. adjust the border radius accordingly */
 
   input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):-moz-window-inactive::selection,
   textarea:-moz-window-inactive::selection {
-    background-color: var(
-      --ui-selection-bgcolor-disabled,
-      text-select-disabled-background
-    ) !important;
+    background-color: var(--ui-selection-bgcolor-disabled, text-select-disabled-background) !important;
   }
 
   window[role="dialog"] ::selection,
@@ -1054,10 +1001,7 @@ rtl languages. adjust the border radius accordingly */
 
   window[role="dialog"] :-moz-window-inactive::selection,
   window[role="dialog"] textarea:-moz-window-inactive::selection {
-    background-color: var(
-      --global-selection-bgcolor-disabled,
-      text-select-disabled-background
-    ) !important;
+    background-color: var(--global-selection-bgcolor-disabled, text-select-disabled-background) !important;
   }
 
   input[type="number"] {
@@ -1255,9 +1199,7 @@ rtl languages. adjust the border radius accordingly */
     --checkbox-checked-bgcolor: var(--in-content-primary-button-background) !important;
     --checkbox-checked-color: var(--in-content-primary-button-text-color) !important;
     --checkbox-checked-hover-bgcolor: var(--in-content-primary-button-background-hover) !important;
-    --checkbox-checked-active-bgcolor: var(
-      --in-content-primary-button-background-active
-    ) !important;
+    --checkbox-checked-active-bgcolor: var(--in-content-primary-button-background-active) !important;
     --dropdown-bgcolor: var(--arrowpanel-background) !important;
     --in-content-button-border-radius: var(--general-button-border-radius) !important;
     --in-content-button-vertical-padding: 5px !important;
@@ -1324,14 +1266,12 @@ rtl languages. adjust the border radius accordingly */
     border-radius: var(--in-content-button-border-radius) !important;
   }
 
-  :root[dialogroot]
-    input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"]),
+  :root[dialogroot] input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"]),
   :root[dialogroot] textarea {
     padding-block: 5px !important;
   }
 
-  :root[dialogroot]
-    input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):where(:focus, :focus-visible),
+  :root[dialogroot] input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):where(:focus, :focus-visible),
   :root[dialogroot] textarea:where(:focus, :focus-visible),
   :root[dialogroot] search-textbox[focused] {
     border-color: transparent !important;
@@ -1341,31 +1281,23 @@ rtl languages. adjust the border radius accordingly */
 
   :where(:root[dialogroot], .dialog-button-box) button:focus-visible,
   :where(:root[dialogroot], .dialog-button-box) select:focus-visible,
-  :where(:root[dialogroot], .dialog-button-box)
-    input:is([type="checkbox"], [type="color"], [type="radio"]):focus-visible,
+  :where(:root[dialogroot], .dialog-button-box) input:is([type="checkbox"], [type="color"], [type="radio"]):focus-visible,
   :where(:root[dialogroot], .dialog-button-box) menulist:focus-visible,
-  :where(:root[dialogroot], .dialog-button-box)
-    checkbox:not([native]):focus-visible
-    > .checkbox-check,
+  :where(:root[dialogroot], .dialog-button-box) checkbox:not([native]):focus-visible > .checkbox-check,
   :where(:root[dialogroot], .dialog-button-box) radio[focused="true"] > .radio-check,
   :where(:root[dialogroot], .dialog-button-box) tab:focus-visible > .tab-middle > .tab-text {
     outline-offset: 0 !important;
   }
 
-  :root[dialogroot]
-    input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"])::selection,
+  :root[dialogroot] input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"])::selection,
   :root[dialogroot] textarea::selection {
     background-color: var(--ui-selection-bgcolor) !important;
     color: var(--ui-selection-color) !important;
   }
 
-  :root[dialogroot]
-    input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):-moz-window-inactive::selection,
+  :root[dialogroot] input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):-moz-window-inactive::selection,
   :root[dialogroot] textarea:-moz-window-inactive::selection {
-    background-color: var(
-      --ui-selection-bgcolor-disabled,
-      text-select-disabled-background
-    ) !important;
+    background-color: var(--ui-selection-bgcolor-disabled, text-select-disabled-background) !important;
   }
 
   :root[dialogroot] details > summary {
@@ -1389,15 +1321,10 @@ rtl languages. adjust the border radius accordingly */
     border-radius: var(--toolbarbutton-border-radius) !important;
   }
 
-  :root[dialogroot]
-    input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):focus-visible,
+  :root[dialogroot] input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):focus-visible,
   :root[dialogroot] textarea:focus-visible,
   :root[dialogroot] search-textbox:focus-visible {
-    background-color: color-mix(
-      in srgb,
-      currentColor 3%,
-      var(--in-content-box-background)
-    ) !important;
+    background-color: color-mix(in srgb, currentColor 3%, var(--in-content-box-background)) !important;
   }
 
   :root[dialogroot] menulist {
@@ -1429,8 +1356,7 @@ rtl languages. adjust the border radius accordingly */
   }
 
   button[dlgtype]:is(:hover, :focus-visible):not(:hover:active, [disabled="true"], [default]),
-  :root[dialogroot]
-    :is(.expander-up, .expander-down, .panel-button):is(:hover, :focus-visible):not(:hover:active, [disabled="true"]) {
+  :root[dialogroot] :is(.expander-up, .expander-down, .panel-button):is(:hover, :focus-visible):not(:hover:active, [disabled="true"]) {
     background-color: var(--in-content-button-background-hover) !important;
     color: var(--in-content-button-text-color-hover) !important;
     border-color: transparent;
@@ -1593,13 +1519,7 @@ rtl languages. adjust the border radius accordingly */
       min-height: revert !important;
     }
 
-    .onboardingContainer
-      .screen[pos="split"]
-      .section-main
-      .main-content
-      .action-buttons
-      .secondary-cta
-      .arrow-icon {
+    .onboardingContainer .screen[pos="split"] .section-main .main-content .action-buttons .secondary-cta .arrow-icon {
       padding-inline-end: 28px !important;
       background-position-x: right 10px !important;
     }
@@ -1803,12 +1723,6 @@ link[href="chrome://global/content/printPagination.css"]
   #aboutDialogContainer {
     border: 0 !important;
     background-color: var(--arrowpanel-background) !important;
-    background-image: radial-gradient(
-      circle at calc((210px / 2) + 30px) calc(20% + 20px + 52px),
-      hsla(255, 80%, 90%, 0.3),
-      transparent 35%
-    );
-    background-blend-mode: overlay !important;
     color: var(--ui-text-100) !important;
   }
 
@@ -2112,31 +2026,19 @@ link[href="chrome://global/content/printPagination.css"]
   }
 
   radio:not([disabled="true"]):hover:active > .radio-check[selected] {
-    background-color: var(
-      --checkbox-checked-active-bgcolor,
-      color-mix(in srgb, currentColor 25%, -moz-accent-color)
-    );
+    background-color: var(--checkbox-checked-active-bgcolor, color-mix(in srgb, currentColor 25%, -moz-accent-color));
   }
 
   radio:not([disabled="true"]):hover > .radio-check[selected] {
-    background-color: var(
-      --checkbox-checked-hover-bgcolor,
-      color-mix(in srgb, currentColor 12.5%, -moz-accent-color)
-    );
+    background-color: var(--checkbox-checked-hover-bgcolor, color-mix(in srgb, currentColor 12.5%, -moz-accent-color));
   }
 
   radio:not([disabled="true"]):hover:active > .radio-check {
-    background-color: var(
-      --checkbox-unchecked-active-bgcolor,
-      color-mix(in srgb, -moz-accent-color 8%, Field)
-    );
+    background-color: var(--checkbox-unchecked-active-bgcolor, color-mix(in srgb, -moz-accent-color 8%, Field));
   }
 
   radio:not([disabled="true"]):hover > .radio-check {
-    background-color: var(
-      --checkbox-unchecked-hover-bgcolor,
-      color-mix(in srgb, -moz-accent-color 4%, Field)
-    );
+    background-color: var(--checkbox-unchecked-hover-bgcolor, color-mix(in srgb, -moz-accent-color 4%, Field));
   }
 
   radio[disabled="true"] {

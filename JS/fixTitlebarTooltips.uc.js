@@ -39,7 +39,10 @@
     "resource://gre/modules/components-utils/WindowsVersionInfo.jsm"
   );
   const { buildNumber } = lazy.WindowsVersionInfo.get();
-  const isWin11 = !disableSnapLayouts && AppConstants.platform === "win" && buildNumber >= 22000;
+  const isWin11 =
+    !disableSnapLayouts &&
+    AppConstants.platform === "win" &&
+    buildNumber >= 22000;
   let markup = `<hbox class="titlebar-buttonbox-container" skipintoolbarset="true">
   <hbox class="titlebar-buttonbox titlebar-color">
     <toolbarbutton class="titlebar-button titlebar-min"
@@ -63,5 +66,7 @@
   </hbox>
 </hbox>`;
   let boxes = document.querySelectorAll(".titlebar-buttonbox-container");
-  boxes.forEach(box => box.replaceWith(MozXULElement.parseXULToFragment(markup)));
+  boxes.forEach(box =>
+    box.replaceWith(MozXULElement.parseXULToFragment(markup))
+  );
 })();

@@ -10,7 +10,8 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
 
 @import url(chrome://userchrome/content/layout/uc-nsRules.au.css);
 
-@-moz-document regexp("^((chrome|resource|file)://|about:).*$") {
+@-moz-document regexp("^((chrome|resource|file)://|about:).*$")
+{
   :root {
     --avatar-image-url: url(chrome://userchrome/content/fxa/avatar-big.svg);
   }
@@ -24,8 +25,7 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
     color: var(--ui-selection-color);
   }
 
-  :is(#mainPopupSet, #browser, #navigator-toolbox, .sidebar-panel)
-    :-moz-window-inactive::selection {
+  :is(#mainPopupSet, #browser, #navigator-toolbox, .sidebar-panel) :-moz-window-inactive::selection {
     background-color: var(--ui-selection-bgcolor-disabled, text-select-disabled-background);
   }
 
@@ -206,11 +206,9 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
   }
 
   /* focused buttons to look like hovered buttons */
-  panelview
-    :is(.toolbarbutton-1, toolbarbutton.subviewbutton, .navigable.subviewbutton):not([disabled], [open]):focus-visible,
+  panelview :is(.toolbarbutton-1, toolbarbutton.subviewbutton, .navigable.subviewbutton):not([disabled], [open]):focus-visible,
   .widget-overflow-list .toolbarbutton-1:not([disabled], [open]):focus-visible,
-  .toolbaritem-combined-buttons:is(:not([cui-areatype="toolbar"]), [overflowedItem="true"])
-    > toolbarbutton:not([disabled], [open]):focus-visible {
+  .toolbaritem-combined-buttons:is(:not([cui-areatype="toolbar"]), [overflowedItem="true"]) > toolbarbutton:not([disabled], [open]):focus-visible {
     background-color: var(--panel-item-hover-bgcolor);
   }
 
@@ -219,10 +217,7 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
   }
 
   .panel-footer > button:not([disabled], :active):is(:hover, :focus-visible) {
-    background-color: var(
-      --button-hover-bgcolor,
-      color-mix(in srgb, currentColor 17%, transparent)
-    );
+    background-color: var(--button-hover-bgcolor, color-mix(in srgb, currentColor 17%, transparent));
   }
 
   .panel-footer > button[default]:not([disabled], :active):is(:hover, :focus-visible) {
@@ -396,26 +391,18 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
   we can make the instantaneous change happen more slowly, causing the tab to
   grow over 300ms from the time it's born. this way we don't animate tabs that
   were simply moved rather than created */
-  :root[sessionrestored]
-    #tabbrowser-tabs:not([movingtab])
-    .tabbrowser-tab:not([pinned], [justmoved], [tab-grouping], [tabdrop-samewindow]) {
+  :root[sessionrestored] #tabbrowser-tabs:not([movingtab]) .tabbrowser-tab:not([pinned], [justmoved], [tab-grouping], [tabdrop-samewindow]) {
     -moz-box-flex: 0;
-    transition: min-width 200ms ease-out, max-width 150ms ease-out,
-      -moz-box-flex 300ms var(--uc-smooth-timing-function);
+    transition: min-width 200ms ease-out, max-width 150ms ease-out, -moz-box-flex 300ms var(--uc-smooth-timing-function);
   }
 
   /* animate tab pinning/unpinning. experimental. */
-  :root[sessionrestored]
-    #tabbrowser-tabs:not([movingtab])
-    .tabbrowser-tab[pinned]:not([justmoved], [tab-grouping], [tabdrop-samewindow]) {
+  :root[sessionrestored] #tabbrowser-tabs:not([movingtab]) .tabbrowser-tab[pinned]:not([justmoved], [tab-grouping], [tabdrop-samewindow]) {
     -moz-box-flex: 0;
-    transition: min-width 200ms ease-out, max-width 150ms ease-out,
-      -moz-box-flex 300ms var(--uc-smooth-timing-function);
+    transition: min-width 200ms ease-out, max-width 150ms ease-out, -moz-box-flex 300ms var(--uc-smooth-timing-function);
   }
 
-  :root[sessionrestored]
-    #tabbrowser-tabs:not([movingtab])
-    .tabbrowser-tab[fadein]:not([pinned], [justmoved]) {
+  :root[sessionrestored] #tabbrowser-tabs:not([movingtab]) .tabbrowser-tab[fadein]:not([pinned], [justmoved]) {
     -moz-box-flex: 100;
   }
 
@@ -425,9 +412,7 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
     max-width: var(--pinned-tab-width, 36px);
   }
 
-  #tabbrowser-tabs[haspinnedtabs]:not([positionpinnedtabs])
-    > #tabbrowser-arrowscrollbox
-    > .tabbrowser-tab[first-visible-unpinned-tab] {
+  #tabbrowser-tabs[haspinnedtabs]:not([positionpinnedtabs]) > #tabbrowser-arrowscrollbox > .tabbrowser-tab[first-visible-unpinned-tab] {
     margin-inline-start: revert !important;
   }
 
@@ -437,10 +422,7 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
   }
 
   /* when drag mode is enabled. this enables the tab shadows to draw onto the drag space. */
-  :root[sizemode="normal"]
-    #TabsToolbar
-    > .toolbar-items
-    #tabbrowser-arrowscrollbox::part(scrollbox) {
+  :root[sizemode="normal"] #TabsToolbar > .toolbar-items #tabbrowser-arrowscrollbox::part(scrollbox) {
     min-height: calc(var(--min-tab-height) + var(--space-above-tabbar));
     padding-block-start: var(--space-above-tabbar);
   }
@@ -451,15 +433,11 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
   }
 
   /* dim unloaded/discarded tabs */
-  .tabbrowser-tab[pending]
-    .tab-content
-    :is(.tab-icon-image, .tab-label, .tab-sharing-icon-overlay) {
+  .tabbrowser-tab[pending] .tab-content :is(.tab-icon-image, .tab-label, .tab-sharing-icon-overlay) {
     opacity: 0.7;
   }
 
-  .tabbrowser-tab[pending]:is(:hover, .keyboard-focused-tab, [open])
-    .tab-content
-    :is(.tab-icon-image, .tab-label, .tab-sharing-icon-overlay) {
+  .tabbrowser-tab[pending]:is(:hover, .keyboard-focused-tab, [open]) .tab-content :is(.tab-icon-image, .tab-label, .tab-sharing-icon-overlay) {
     opacity: 0.8;
   }
 
@@ -477,15 +455,10 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
 
   #PanelUI-whatsNew .whatsNew-message-title,
   #protections-popup-message .whatsNew-message-title,
-  #contextual-feature-recommendation-notification[data-notification-category="icon_and_message"]
-    .popup-notification-description,
+  #contextual-feature-recommendation-notification[data-notification-category="icon_and_message"] .popup-notification-description,
   menulist:not([native])::part(label-box),
   #cfr-notification-header-label,
-  panel:is([type="autocomplete-richlistbox"], #PopupAutoComplete)
-    > richlistbox
-    > richlistitem[originaltype="insecureWarning"]
-    > .ac-title
-    .ac-emphasize-text-title {
+  panel:is([type="autocomplete-richlistbox"], #PopupAutoComplete) > richlistbox > richlistitem[originaltype="insecureWarning"] > .ac-title .ac-emphasize-text-title {
     font-weight: var(--uc-font-weight-bold, 600);
   }
 
@@ -537,29 +510,13 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
     --panel-shortcut-color: var(--ui-text-40);
     --panel-description-color: var(--ui-text-40);
     --uc-panel-description-color: var(--ui-text-40);
-    --arrowpanel-border-color: color-mix(
-      in srgb,
-      currentColor 12%,
-      var(--in-content-bg-darker, rgb(21, 21, 23))
-    ) !important;
+    --arrowpanel-border-color: color-mix(in srgb, currentColor 12%, var(--in-content-bg-darker, rgb(21, 21, 23))) !important;
     --panel-border-color: var(--arrowpanel-border-color) !important;
     --menu-separator-color: var(--arrowpanel-border-color) !important;
     --uc-checkbox-unchecked-bgcolor: color-mix(in srgb, var(--toolbar-color) 7%, transparent);
-    --uc-checkbox-unchecked-hover-bgcolor: color-mix(
-      in srgb,
-      var(--toolbar-color) 12%,
-      transparent
-    );
-    --uc-checkbox-unchecked-active-bgcolor: color-mix(
-      in srgb,
-      var(--toolbar-color) 15%,
-      transparent
-    );
-    --urlbar-input-bgcolor: color-mix(
-      in srgb,
-      currentColor 4%,
-      var(--in-content-button-highlight-dark)
-    );
+    --uc-checkbox-unchecked-hover-bgcolor: color-mix(in srgb, var(--toolbar-color) 12%, transparent);
+    --uc-checkbox-unchecked-active-bgcolor: color-mix(in srgb, var(--toolbar-color) 15%, transparent);
+    --urlbar-input-bgcolor: color-mix(in srgb, currentColor 4%, var(--in-content-button-highlight-dark));
   }
 
   /* dark gray context menus/menulists in system pages with gray theme */
@@ -569,11 +526,7 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
     :is(menupopup)::part(content) {
       --arrowpanel-dimmed: color-mix(in srgb, var(--uc-toolbar-color) 7%, transparent);
       --arrowpanel-dimmed-further: color-mix(in srgb, var(--uc-toolbar-color) 12%, transparent);
-      --arrowpanel-dimmed-even-further: color-mix(
-        in srgb,
-        var(--uc-toolbar-color) 15%,
-        transparent
-      );
+      --arrowpanel-dimmed-even-further: color-mix(in srgb, var(--uc-toolbar-color) 15%, transparent);
       --arrowpanel-background: var(--in-content-bg-darker, rgb(21, 21, 23));
       --button-bgcolor: var(--arrowpanel-dimmed);
       --button-hover-bgcolor: var(--arrowpanel-dimmed-further);
@@ -588,24 +541,12 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
       --uc-panel-shortcut-color: var(--ui-text-40);
       --panel-description-color: var(--ui-text-40);
       --uc-panel-description-color: var(--ui-text-40);
-      --arrowpanel-border-color: color-mix(
-        in srgb,
-        currentColor 12%,
-        var(--in-content-bg-darker, rgb(21, 21, 23))
-      ) !important;
+      --arrowpanel-border-color: color-mix(in srgb, currentColor 12%, var(--in-content-bg-darker, rgb(21, 21, 23))) !important;
       --panel-border-color: var(--arrowpanel-border-color) !important;
       --menu-separator-color: var(--arrowpanel-border-color) !important;
       --uc-checkbox-unchecked-bgcolor: color-mix(in srgb, var(--toolbar-color) 7%, transparent);
-      --uc-checkbox-unchecked-hover-bgcolor: color-mix(
-        in srgb,
-        var(--toolbar-color) 12%,
-        transparent
-      );
-      --uc-checkbox-unchecked-active-bgcolor: color-mix(
-        in srgb,
-        var(--toolbar-color) 15%,
-        transparent
-      );
+      --uc-checkbox-unchecked-hover-bgcolor: color-mix(in srgb, var(--toolbar-color) 12%, transparent);
+      --uc-checkbox-unchecked-active-bgcolor: color-mix(in srgb, var(--toolbar-color) 15%, transparent);
     }
   }
 
@@ -669,7 +610,8 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
     font-weight: 500;
   }
 
-  @-moz-document url(chrome://browser/content/browser.xhtml) {
+  @-moz-document url(chrome://browser/content/browser.xhtml)
+  {
     :is(#customization-lwtheme-menu, #customization-uidensity-menu)::part(arrowbox) {
       -moz-box-ordinal-group: 2;
     }
@@ -710,7 +652,8 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
     url(chrome://mozapps/content/handling/appChooser.xhtml),
     url-prefix(chrome://global/content/print.html),
     url(chrome://browser/content/places/bookmarkProperties.xhtml),
-    url(chrome://browser/content/places/bookmarkProperties2.xhtml) {
+    url(chrome://browser/content/places/bookmarkProperties2.xhtml)
+  {
     menulist:not([native]) {
       padding-inline: 6px;
     }
@@ -810,18 +753,9 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
   /* prevent hiding the close button when audio is playing.
   undoes an irritating rule in the proton update */
   :root[uidensity="compact"] .tab-icon-stack[indicator-replaces-favicon] > :not(.tab-icon-overlay),
-  #tabbrowser-tabs[secondarytext-unsupported]
-    .tab-icon-stack[indicator-replaces-favicon]
-    > :not(.tab-icon-overlay),
-  :root:not([uidensity="compact"])
-    #tabbrowser-tabs:not([secondarytext-unsupported])
-    .tabbrowser-tab:not(:hover)
-    .tab-icon-overlay[indicator-replaces-favicon],
-  :root:not([uidensity="compact"])
-    #tabbrowser-tabs:not([secondarytext-unsupported])
-    .tabbrowser-tab:hover
-    .tab-icon-stack[indicator-replaces-favicon]
-    > :not(.tab-icon-overlay) {
+  #tabbrowser-tabs[secondarytext-unsupported] .tab-icon-stack[indicator-replaces-favicon] > :not(.tab-icon-overlay),
+  :root:not([uidensity="compact"]) #tabbrowser-tabs:not([secondarytext-unsupported]) .tabbrowser-tab:not(:hover) .tab-icon-overlay[indicator-replaces-favicon],
+  :root:not([uidensity="compact"]) #tabbrowser-tabs:not([secondarytext-unsupported]) .tabbrowser-tab:hover .tab-icon-stack[indicator-replaces-favicon] > :not(.tab-icon-overlay) {
     opacity: revert;
   }
 
@@ -868,8 +802,7 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
   #PlacesToolbar menu:not([disabled])[_moz-menuactive]:active,
   menuitem.subviewbutton:not([disabled])[_moz-menuactive]:active,
   .widget-overflow-list .toolbarbutton-1:not([disabled]):is([open], :hover:active),
-  .toolbaritem-combined-buttons:is(:not([cui-areatype="toolbar"]), [overflowedItem="true"])
-    > toolbarbutton:not([disabled]):is([open], :hover:active) {
+  .toolbaritem-combined-buttons:is(:not([cui-areatype="toolbar"]), [overflowedItem="true"]) > toolbarbutton:not([disabled]):is([open], :hover:active) {
     box-shadow: revert;
   }
 
@@ -941,58 +874,36 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
     height: 20px;
   }
 
-  #stop-reload-button[animate]
-    > #reload-button
-    > .toolbarbutton-animatable-box
-    > .toolbarbutton-animatable-image {
+  #stop-reload-button[animate] > #reload-button > .toolbarbutton-animatable-box > .toolbarbutton-animatable-image {
     background-image: url(chrome://userchrome/content/skin/reload-to-stop.svg);
     width: 468px;
   }
 
-  #stop-reload-button[animate]
-    > #reload-button:not([displaystop])
-    > .toolbarbutton-animatable-box
-    > .toolbarbutton-animatable-image {
+  #stop-reload-button[animate] > #reload-button:not([displaystop]) > .toolbarbutton-animatable-box > .toolbarbutton-animatable-image {
     animation-name: reload-to-stop;
   }
 
-  #reload-button:not([displaystop])
-    > .toolbarbutton-animatable-box
-    > .toolbarbutton-animatable-image {
+  #reload-button:not([displaystop]) > .toolbarbutton-animatable-box > .toolbarbutton-animatable-image {
     animation-timing-function: steps(25);
     animation-duration: 200ms;
   }
 
-  #stop-reload-button[animate]
-    > #reload-button[displaystop]
-    + #stop-button
-    > .toolbarbutton-animatable-box
-    > .toolbarbutton-animatable-image {
+  #stop-reload-button[animate] > #reload-button[displaystop] + #stop-button > .toolbarbutton-animatable-box > .toolbarbutton-animatable-image {
     background-image: url(chrome://userchrome/content/skin/stop-to-reload.svg);
     width: 468px;
   }
 
-  #stop-reload-button[animate]
-    > #reload-button[displaystop]
-    + #stop-button
-    > .toolbarbutton-animatable-box
-    > .toolbarbutton-animatable-image {
+  #stop-reload-button[animate] > #reload-button[displaystop] + #stop-button > .toolbarbutton-animatable-box > .toolbarbutton-animatable-image {
     animation-name: stop-to-reload;
   }
 
-  #reload-button[displaystop]
-    + #stop-button
-    > .toolbarbutton-animatable-box
-    > .toolbarbutton-animatable-image {
+  #reload-button[displaystop] + #stop-button > .toolbarbutton-animatable-box > .toolbarbutton-animatable-image {
     animation-timing-function: steps(25);
     animation-duration: 200ms;
   }
 
   #reload-button > .toolbarbutton-animatable-box > .toolbarbutton-animatable-image,
-  #reload-button[displaystop]
-    + #stop-button
-    > .toolbarbutton-animatable-box
-    > .toolbarbutton-animatable-image {
+  #reload-button[displaystop] + #stop-button > .toolbarbutton-animatable-box > .toolbarbutton-animatable-image {
     transform: translateX(-450px);
   }
 
@@ -1019,10 +930,7 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
 
   #history-panelmenu,
   #sidebar-switcher-history > .toolbarbutton-icon,
-  #sidebar-box[sidebarcommand="viewHistorySidebar"]
-    > #sidebar-header
-    > #sidebar-switcher-target
-    > #sidebar-icon {
+  #sidebar-box[sidebarcommand="viewHistorySidebar"] > #sidebar-header > #sidebar-switcher-target > #sidebar-icon {
     list-style-image: url(chrome://userchrome/content/skin/history.svg);
   }
 
@@ -1048,10 +956,7 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
 
   #sync-button,
   #sidebar-switcher-tabs > .toolbarbutton-icon,
-  #sidebar-box[sidebarcommand="viewTabsSidebar"]
-    > #sidebar-header
-    > #sidebar-switcher-target
-    > #sidebar-icon {
+  #sidebar-box[sidebarcommand="viewTabsSidebar"] > #sidebar-header > #sidebar-switcher-target > #sidebar-icon {
     list-style-image: url(chrome://userchrome/content/skin/synced-tabs.svg);
   }
 
@@ -1059,20 +964,17 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
   obviously that will only work for english firefox, so if you use another
   language, you should download miscMods.uc.js since it will dynamically set a
   universal attribute that we can select irrespective of target language. */
-  #sidebar-reverse-position:is([label="Move Sidebar to Left"], [to-position="left"])
-    .toolbarbutton-icon {
+  #sidebar-reverse-position:is([label="Move Sidebar to Left"], [to-position="left"]) .toolbarbutton-icon {
     list-style-image: url(chrome://userchrome/content/skin/back.svg);
     padding: 1px !important;
   }
 
-  #sidebar-reverse-position:is([label="Move Sidebar to Right"], [to-position="right"])
-    .toolbarbutton-icon {
+  #sidebar-reverse-position:is([label="Move Sidebar to Right"], [to-position="right"]) .toolbarbutton-icon {
     list-style-image: url(chrome://userchrome/content/skin/forward.svg);
     padding: 1px !important;
   }
 
-  #sidebarMenu-popup
-    .subviewbutton[oncommand="SidebarUI.hide()"][data-l10n-id="sidebar-menu-close"] {
+  #sidebarMenu-popup .subviewbutton[oncommand="SidebarUI.hide()"][data-l10n-id="sidebar-menu-close"] {
     list-style-image: url(chrome://userchrome/content/close-big.svg);
   }
 
@@ -1233,9 +1135,7 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
     min-height: 36px;
   }
 
-  #nav-bar-overflow-button[animate]
-    > .toolbarbutton-animatable-box
-    > .toolbarbutton-animatable-image {
+  #nav-bar-overflow-button[animate] > .toolbarbutton-animatable-box > .toolbarbutton-animatable-image {
     animation-name: overflow-animation;
     animation-timing-function: steps(70);
     animation-duration: 1167ms;
@@ -1243,9 +1143,7 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
     width: 1278px;
   }
 
-  #nav-bar-overflow-button[animate][fade]
-    > .toolbarbutton-animatable-box
-    > .toolbarbutton-animatable-image {
+  #nav-bar-overflow-button[animate][fade] > .toolbarbutton-animatable-box > .toolbarbutton-animatable-image {
     animation-name: overflow-fade;
     animation-timing-function: ease-out;
     animation-duration: 730ms;
@@ -1595,8 +1493,7 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
     list-style-image: url(chrome://userchrome/content/material/extension.svg);
   }
 
-  #addon-install-confirmation-notification[warning]
-    .popup-notification-icon[popupid="addon-install-confirmation"] {
+  #addon-install-confirmation-notification[warning] .popup-notification-icon[popupid="addon-install-confirmation"] {
     list-style-image: url(chrome://userchrome/content/skin/addons/addon-install-warning.svg);
   }
 
@@ -1790,11 +1687,13 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
     padding: 30px 30px 20px 30px;
   }
 
-  #handlersView .actionsMenu[image="chrome://browser/skin/preferences/application.png"]::part(icon) {
+  #handlersView .actionsMenu[image="chrome://browser/skin/preferences/application.png"]::part(icon)
+  {
     display: none;
   }
 
-  #handlersView .actionsMenu[image="chrome://browser/skin/preferences/application.png"]::before {
+  #handlersView .actionsMenu[image="chrome://browser/skin/preferences/application.png"]::before
+  {
     width: 16px;
     height: 16px;
     margin-inline: 11px 8px;
@@ -1808,7 +1707,8 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
     background-image: url(chrome://userchrome/content/shortcut.svg);
   }
 
-  #handlersView .actionIcon[src="chrome://browser/skin/preferences/application.png"] {
+  #handlersView .actionIcon[src="chrome://browser/skin/preferences/application.png"]
+  {
     width: 16px;
     height: 16px;
     margin-inline: 11px 8px;
@@ -1823,7 +1723,8 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
   }
 
   @-moz-document url("chrome://mozapps/content/downloads/unknownContentType.xhtml"),
-    url("chrome://global/content/appPicker.xhtml") {
+    url("chrome://global/content/appPicker.xhtml")
+  {
     :root {
       --in-content-page-color: rgb(21, 20, 26);
       --in-content-page-background: #fff;
@@ -1832,11 +1733,7 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
       --in-content-box-background-odd: rgba(12, 12, 13, 0.05);
       --in-content-box-border-color: color-mix(in srgb, currentColor 41%, transparent);
       --in-content-box-info-background: #f0f0f4;
-      --in-content-item-hover: color-mix(
-        in srgb,
-        var(--in-content-primary-button-background) 20%,
-        transparent
-      );
+      --in-content-item-hover: color-mix(in srgb, var(--in-content-primary-button-background) 20%, transparent);
       --in-content-item-hover-text: var(--in-content-page-color);
       --in-content-item-selected: var(--in-content-primary-button-background);
       --in-content-item-selected-text: var(--in-content-primary-button-text-color);
@@ -2045,17 +1942,11 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
     }
 
     radio:not([disabled="true"]):hover:active > .radio-check[selected] {
-      background-color: var(
-        --checkbox-checked-active-bgcolor,
-        color-mix(in srgb, currentColor 25%)
-      );
+      background-color: var(--checkbox-checked-active-bgcolor, color-mix(in srgb, currentColor 25%));
     }
 
     radio:not([disabled="true"]):hover > .radio-check[selected] {
-      background-color: var(
-        --checkbox-checked-hover-bgcolor,
-        color-mix(in srgb, currentColor 12.5%)
-      );
+      background-color: var(--checkbox-checked-hover-bgcolor, color-mix(in srgb, currentColor 12.5%));
     }
 
     radio:not([disabled="true"]):hover:active > .radio-check {

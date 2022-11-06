@@ -52,6 +52,8 @@ override chrome://global/skin/icons/info-filled.svg ../resources/info-filled.svg
 override chrome://global/skin/icons/search-glass.svg ../resources/search-glass.svg
 override chrome://global/skin/icons/settings.svg ../resources/settings.svg
 override chrome://global/skin/icons/folder.svg ../resources/material/places/folder.svg
+override chrome://global/skin/icons/page-portrait.svg ../resources/page-portrait.svg
+override chrome://global/skin/icons/page-landscape.svg ../resources/page-landscape.svg
 override chrome://global/skin/icons/plugin.svg ../resources/plugin.svg
 override chrome://global/skin/icons/highlights.svg ../resources/glyph-highlights-16.svg
 override chrome://global/skin/icons/pocket.svg ../resources/skin/pocket.svg

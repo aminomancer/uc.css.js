@@ -35,10 +35,7 @@ titlebar, this sheet controls their appearance as well. */
 }
 
 @media (-moz-platform: windows) {
-  :root:not([chromehidden~="menubar"])
-    #toolbar-menubar:not([inactive])
-    + #TabsToolbar
-    .titlebar-spacer {
+  :root:not([chromehidden~="menubar"]) #toolbar-menubar:not([inactive]) + #TabsToolbar .titlebar-spacer {
     display: none;
   }
 }
@@ -91,9 +88,7 @@ titlebar, this sheet controls their appearance as well. */
 }
 
 #main-menubar > menu > menupopup {
-  margin-block: calc(
-    0px - var(--menupopup-inner-box-margin) - ((var(--tab-min-height) - 16px - 4px - 5px) / 2)
-  ) !important;
+  margin-block: calc(0px - var(--menupopup-inner-box-margin) - ((var(--tab-min-height) - 16px - 4px - 5px) / 2)) !important;
   margin-inline: calc(0px - var(--menupopup-inner-box-margin) + 2px) !important;
 }
 
@@ -213,9 +208,7 @@ overflowing tabs don't draw shadows on the special new tab button */
 }
 
 :root:not([sizemode="normal"]) .arrowscrollbox-overflow-end-indicator,
-:root:not([sizemode="normal"])
-  .tabbrowser-arrowscrollbox
-  > .arrowscrollbox-overflow-start-indicator {
+:root:not([sizemode="normal"]) .tabbrowser-arrowscrollbox > .arrowscrollbox-overflow-start-indicator {
   visibility: collapse !important;
 }
 
@@ -237,9 +230,7 @@ overflowing tabs don't draw shadows on the special new tab button */
   border-left: none !important;
 }
 
-#TabsToolbar
-  .toolbarbutton-1
-  > :is(.toolbarbutton-icon, .toolbarbutton-text, .toolbarbutton-badge-stack) {
+#TabsToolbar .toolbarbutton-1 > :is(.toolbarbutton-icon, .toolbarbutton-text, .toolbarbutton-badge-stack) {
   border-radius: var(--toolbarbutton-border-radius) !important;
 }
 
@@ -348,6 +339,7 @@ overflowing tabs don't draw shadows on the special new tab button */
 .private-browsing-indicator {
   height: auto !important;
   width: auto !important;
+  box-sizing: border-box !important;
   padding: 0 var(--toolbarbutton-outer-padding) !important;
   margin: 0 !important;
   background: none !important;
@@ -371,6 +363,7 @@ overflowing tabs don't draw shadows on the special new tab button */
 .private-browsing-indicator::before {
   content: "";
   display: -moz-box;
+  box-sizing: border-box !important;
   width: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
   height: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
   background-image: url(chrome://userchrome/content/skin/privateBrowsing.svg) !important;
@@ -405,8 +398,8 @@ button.private-browsing-indicator:is(:hover:active, [open])::before {
 }
 
 :root:not([privatebrowsingmode="temporary"]) :is(#firefox-view-button, #wrapper-firefox-view-button) + #tabbrowser-tabs {
-	border-inline-start: revert !important;
-	padding-inline-start: revert !important;
+  border-inline-start: revert !important;
+  padding-inline-start: revert !important;
 }
 
 #TabsToolbar-customization-target > :is(toolbarbutton, toolbaritem, toolbarpaletteitem):first-child {
@@ -442,18 +435,12 @@ button.private-browsing-indicator:is(:hover:active, [open])::before {
   list-style-image: url(chrome://userchrome/content/hide-password.svg);
 }
 
-:is(#allTabsMenu-containerTabsButton, #allTabsMenu-searchTabs, #allTabsMenu-hiddenTabsButton)
-  .toolbarbutton-text {
+:is(#allTabsMenu-containerTabsButton, #allTabsMenu-searchTabs, #allTabsMenu-hiddenTabsButton) .toolbarbutton-text {
   padding-inline-start: var(--arrowpanel-subviewbutton-iconic-gap, 8px);
 }
 
 .all-tabs-item:is([selected], [multiselected], [usercontextid]) .all-tabs-button {
-  background-image: linear-gradient(
-    to right,
-    var(--main-stripe-color) 0,
-    var(--main-stripe-color) 4px,
-    transparent 4px
-  ) !important;
+  background-image: linear-gradient(to right, var(--main-stripe-color) 0, var(--main-stripe-color) 4px, transparent 4px) !important;
 }
 
 .all-tabs-item[selected] {
@@ -483,10 +470,7 @@ button.private-browsing-indicator:is(:hover:active, [open])::before {
 }
 
 .all-tabs-item[pending]:not([selected]):is(:hover, :focus-within, [multiselected]) {
-  background-color: var(
-    --arrowpanel-faint,
-    color-mix(in srgb, var(--arrowpanel-dimmed) 60%, transparent)
-  ) !important;
+  background-color: var(--arrowpanel-faint, color-mix(in srgb, var(--arrowpanel-dimmed) 60%, transparent)) !important;
 }
 
 .all-tabs-item[pending] > .all-tabs-button {
@@ -524,16 +508,14 @@ button.private-browsing-indicator:is(:hover:active, [open])::before {
 }
 
 .all-tabs-item .all-tabs-secondary-button:is(:hover, :focus):not([disabled]),
-.all-tabs-item:is(:hover, :focus-within)
-  .all-tabs-secondary-button[close-button]:is(:hover, :focus):not([disabled]) {
+.all-tabs-item:is(:hover, :focus-within) .all-tabs-secondary-button[close-button]:is(:hover, :focus):not([disabled]) {
   background-color: var(--arrowpanel-dimmed) !important;
   opacity: 1 !important;
   color: white !important;
 }
 
 .all-tabs-item .all-tabs-secondary-button:hover:active:not([disabled]),
-.all-tabs-item:is(:hover, :focus-within)
-  .all-tabs-secondary-button[close-button]:hover:active:not([disabled]) {
+.all-tabs-item:is(:hover, :focus-within) .all-tabs-secondary-button[close-button]:hover:active:not([disabled]) {
   background-color: var(--arrowpanel-dimmed-further) !important;
 }
 
@@ -546,8 +528,7 @@ button.private-browsing-indicator:is(:hover:active, [open])::before {
   padding: 0 !important;
   margin-inline-end: 8.5px !important;
   margin-inline-start: -27px !important;
-  transition: 0.25s cubic-bezier(0.07, 0.78, 0.21, 0.95) transform,
-    0.2s cubic-bezier(0.07, 0.74, 0.24, 0.95) margin, 0.075s linear opacity !important;
+  transition: 0.25s cubic-bezier(0.07, 0.78, 0.21, 0.95) transform, 0.2s cubic-bezier(0.07, 0.74, 0.24, 0.95) margin, 0.075s linear opacity !important;
 }
 
 .all-tabs-item .all-tabs-secondary-button[toggle-mute][hidden] {
@@ -600,8 +581,7 @@ button.private-browsing-indicator:is(:hover:active, [open])::before {
   transform: translateX(14px);
   opacity: 0 !important;
   margin-inline-start: -27px !important;
-  transition: 0.25s cubic-bezier(0.07, 0.78, 0.21, 0.95) transform,
-    0.2s cubic-bezier(0.07, 0.74, 0.24, 0.95) margin, 0.075s linear opacity;
+  transition: 0.25s cubic-bezier(0.07, 0.78, 0.21, 0.95) transform, 0.2s cubic-bezier(0.07, 0.74, 0.24, 0.95) margin, 0.075s linear opacity;
   -moz-context-properties: fill, fill-opacity, stroke !important;
   fill: currentColor !important;
   fill-opacity: 0 !important;
@@ -620,31 +600,19 @@ button.private-browsing-indicator:is(:hover:active, [open])::before {
   -moz-box-layout: revert !important;
 }
 
-#vertical-tabs-pane
-  .all-tabs-item[pinned]:not([muted], [soundplaying], [activemedia-blocked])
-  .all-tabs-button
-  .toolbarbutton-icon {
-  mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><circle cx="100%" cy="100%" r="9"/></svg>')
-      exclude 0/100% 100% no-repeat,
-    linear-gradient(#fff, #fff);
+#vertical-tabs-pane .all-tabs-item[pinned]:not([muted], [soundplaying], [activemedia-blocked]) .all-tabs-button .toolbarbutton-icon {
+  mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><circle cx="100%" cy="100%" r="9"/></svg>') exclude 0/100% 100% no-repeat, linear-gradient(#fff, #fff);
   mask-position: 8px 8px;
   transition-property: mask;
   transition-timing-function: ease-in-out;
   transition-duration: calc(var(--pane-transition-duration) / 2);
 }
 
-#vertical-tabs-pane[unpinned]:not([expanded])
-  .all-tabs-item[pinned]
-  .all-tabs-button
-  .toolbarbutton-icon {
-  mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><circle cx="100%" cy="100%" r="9"/></svg>')
-      exclude 0/100% 100% no-repeat,
-    linear-gradient(#fff, #fff);
+#vertical-tabs-pane[unpinned]:not([expanded]) .all-tabs-item[pinned] .all-tabs-button .toolbarbutton-icon {
+  mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><circle cx="100%" cy="100%" r="9"/></svg>') exclude 0/100% 100% no-repeat, linear-gradient(#fff, #fff);
 }
 
-#vertical-tabs-pane[unpinned]
-  .all-tabs-item[pinned]:not([muted], [soundplaying], [activemedia-blocked])
-  .sound-overlay {
+#vertical-tabs-pane[unpinned] .all-tabs-item[pinned]:not([muted], [soundplaying], [activemedia-blocked]) .sound-overlay {
   display: block !important;
   position: absolute;
   left: calc(var(--arrowpanel-menuitem-padding-inline) + 7px) !important;
@@ -662,16 +630,12 @@ button.private-browsing-indicator:is(:hover:active, [open])::before {
   background: url(chrome://userchrome/content/material/pin-45.svg) center/11px no-repeat !important;
 }
 
-#vertical-tabs-pane[unpinned]:not([expanded])
-  .all-tabs-item[pinned]:not([muted], [soundplaying], [activemedia-blocked])
-  .sound-overlay {
+#vertical-tabs-pane[unpinned]:not([expanded]) .all-tabs-item[pinned]:not([muted], [soundplaying], [activemedia-blocked]) .sound-overlay {
   opacity: 1;
   pointer-events: auto;
 }
 
-#vertical-tabs-pane[unpinned]
-  .all-tabs-item[selected][pinned]:not([muted], [soundplaying], [activemedia-blocked])
-  .sound-overlay {
+#vertical-tabs-pane[unpinned] .all-tabs-item[selected][pinned]:not([muted], [soundplaying], [activemedia-blocked]) .sound-overlay {
   fill-opacity: inherit !important;
 }
 
@@ -691,8 +655,7 @@ button.private-browsing-indicator:is(:hover:active, [open])::before {
   list-style-image: url(chrome://userchrome/content/settings.svg) !important;
 }
 
-.subviewbutton[command="Browser:OpenAboutContainers"]:not(.subviewbutton-iconic, [image])
-  > .toolbarbutton-text {
+.subviewbutton[command="Browser:OpenAboutContainers"]:not(.subviewbutton-iconic, [image]) > .toolbarbutton-text {
   padding-inline-start: var(--arrowpanel-subviewbutton-iconic-gap, 8px) !important;
 }
 

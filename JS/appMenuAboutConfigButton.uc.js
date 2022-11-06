@@ -46,7 +46,9 @@
     if (
       Components.manager
         .QueryInterface(Ci.nsIComponentRegistrar)
-        .isContractIDRegistered("@mozilla.org/network/protocol/about;1?what=cfg")
+        .isContractIDRegistered(
+          "@mozilla.org/network/protocol/about;1?what=cfg"
+        )
     ) {
       return "about:cfg";
     }
@@ -56,17 +58,23 @@
 
     // fx-autoconfig
     ["resources", "aboutconfig", "config.xhtml"].forEach(appendFn);
-    if (dir.exists()) return "chrome://userchrome/content/aboutconfig/config.xhtml";
+    if (dir.exists()) {
+      return "chrome://userchrome/content/aboutconfig/config.xhtml";
+    }
 
     // earthlng's loader
     dir = Services.dirsvc.get("UChrm", Ci.nsIFile);
     ["utils", "aboutconfig", "config.xhtml"].forEach(appendFn);
-    if (dir.exists()) return "chrome://userchromejs/content/aboutconfig/config.xhtml";
+    if (dir.exists()) {
+      return "chrome://userchromejs/content/aboutconfig/config.xhtml";
+    }
 
     // xiaoxiaoflood's loader
     dir = Services.dirsvc.get("UChrm", Ci.nsIFile);
     ["utils", "aboutconfig", "aboutconfig.xhtml"].forEach(appendFn);
-    if (dir.exists()) return "chrome://userchromejs/content/aboutconfig/aboutconfig.xhtml";
+    if (dir.exists()) {
+      return "chrome://userchromejs/content/aboutconfig/aboutconfig.xhtml";
+    }
 
     // no about:config replacement found
     return "about:config";
@@ -74,9 +82,14 @@
 
   async function createButton() {
     // get fluent file for AboutConfig page
-    const configStrings = await new Localization(["toolkit/about/config.ftl"], true);
+    const configStrings = await new Localization(
+      ["toolkit/about/config.ftl"],
+      true
+    );
     // localize the "Advanced Preferences" string
-    const advancedPrefsLabel = await configStrings.formatValue(["about-config-page-title"]);
+    const advancedPrefsLabel = await configStrings.formatValue([
+      "about-config-page-title",
+    ]);
     const { mainView } = PanelUI;
     const doc = mainView.ownerDocument;
     const settingsButton =
@@ -98,11 +111,10 @@
   }
 
   function init() {
-    PanelMultiView.getViewNode(document, "appMenu-multiView").addEventListener(
-      "ViewShowing",
-      createButton,
-      { once: true }
-    );
+    PanelMultiView.getViewNode(
+      document,
+      "appMenu-multiView"
+    ).addEventListener("ViewShowing", createButton, { once: true });
   }
 
   if (gBrowserInit.delayedStartupFinished) {
@@ -114,6 +126,9 @@
         init();
       }
     };
-    Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
+    Services.obs.addObserver(
+      delayedListener,
+      "browser-delayed-startup-finished"
+    );
   }
 })();

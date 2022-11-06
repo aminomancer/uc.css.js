@@ -7,9 +7,7 @@
 /* this stylesheet adds icons to context menu items that don't already have them,
 and replaces some icons that may already exist. */
 
-menupopup
-  menuitem:is([type="checkbox"], [type="radio"], [checked])
-  :is(.menu-text, .menu-iconic-text),
+menupopup menuitem:is([type="checkbox"], [type="radio"], [checked]) :is(.menu-text, .menu-iconic-text),
 #context-inspect-a11y .menu-text,
 #context-inspect .menu-text,
 #context-viewsource .menu-text,
@@ -57,8 +55,7 @@ menuitem#sanitizeItem > .menu-text,
 #context-copyimage-contents .menu-text,
 #context-copylink .menu-text,
 #menu_copy .menu-text,
-:is(#placesContext_show_bookmark\:info, #placesContext_show_folder\:info, #placesContext_show\:info)
-  .menu-text,
+:is(#placesContext_show_bookmark\:info, #placesContext_show_folder\:info, #placesContext_show\:info) .menu-text,
 #placesContext_showInFolder .menu-text,
 #menu_openLocation .menu-text,
 #context-copyvideourl .menu-text,
@@ -71,23 +68,18 @@ menuitem#sanitizeItem > .menu-text,
 #context-openlinkincurrent .menu-text,
 #context-openlinkintab .menu-text,
 #context-openlinkinunloadedtab .menu-text,
-:is(#placesContext_open\:unloaded, #placesContext_openContainer\:unloaded, #placesContext_openLinks\:unloaded, #syncedTabsOpenUnloaded, #syncedTabsOpenAllUnloaded)
-  .menu-text,
+:is(#placesContext_open\:unloaded, #placesContext_openContainer\:unloaded, #placesContext_openLinks\:unloaded, #syncedTabsOpenUnloaded, #syncedTabsOpenAllUnloaded) .menu-text,
 #placesContext_open\:newwindow .menu-text,
 #syncedTabsOpenSelectedInWindow .menu-text,
 #placesContext_open\:newprivatewindow .menu-text,
 #syncedTabsOpenSelectedInPrivateWindow .menu-text,
-:is(#placesContext_new\:bookmark, #placesContext_createBookmark, #syncedTabsBookmarkSelected)
-  .menu-text,
+:is(#placesContext_new\:bookmark, #placesContext_createBookmark, #syncedTabsBookmarkSelected) .menu-text,
 #placesContext_new\:folder .menu-text,
 #placesContext_new\:separator .menu-text,
-:is(#placesContext_open\:container, #placesContext_openContainer\:container, #placesContext_openLinks\:container, #placesContext_open\:newcontainertab)
-  > .menu-text,
+:is(#placesContext_open\:container, #placesContext_openContainer\:container, #placesContext_openLinks\:container, #placesContext_open\:newcontainertab) > .menu-text,
 :is(#syncedTabsOpenAllInContainer, #syncedTabsOpenSelectedInContainerTab) > .menu-text,
 #bookmark-menu-container_robwu_nl-menuitem-_bookmark-menu-item:not(.menuitem-iconic) > .menu-text,
-#placesContext
-  > :is(menu, menuitem)[label="Open in New Container Tab"]:not(.menuitem-iconic)
-  > .menu-text,
+#placesContext > :is(menu, menuitem)[label="Open in New Container Tab"]:not(.menuitem-iconic) > .menu-text,
 #menu_FileQuitItem .menu-text,
 #context_openANewTab .menu-text,
 #toolbar-context-openANewTab .menu-text,
@@ -101,8 +93,7 @@ menuitem#sanitizeItem > .menu-text,
 #context-searchselect-private .menu-text,
 #menu_find .menu-text,
 #menu_findAgain .menu-text,
-:is(menuitem#textfieldDirection-swap, #context-bidi-text-direction-toggle, #context-bidi-page-direction-toggle, #documentDirection-swap)
-  .menu-text,
+:is(menuitem#textfieldDirection-swap, #context-bidi-text-direction-toggle, #context-bidi-page-direction-toggle, #documentDirection-swap) .menu-text,
 menuitem#repair-text-encoding .menu-text,
 #context-viewpartialsource-selection .menu-text,
 #placesContext_sortBy\:name .menu-text,
@@ -119,10 +110,8 @@ menuitem#repair-text-encoding .menu-text,
 #context-delete .menu-text,
 #menu_delete .menu-text,
 #syncedTabsCopySelected .menu-text,
-:is(#placesContext_cut, #placesContext_copy, #placesContext_paste, #placesContext_paste_group)
-  .menu-text,
-:is(#placesContext_deleteBookmark, #placesContext_deleteFolder, #placesContext_delete, #placesContext_delete_history)
-  .menu-text,
+:is(#placesContext_cut, #placesContext_copy, #placesContext_paste, #placesContext_paste_group) .menu-text,
+:is(#placesContext_deleteBookmark, #placesContext_deleteFolder, #placesContext_delete, #placesContext_delete_history) .menu-text,
 #placesContext_deleteHost .menu-text,
 #context-keywordfield .menu-text,
 #context-printframe .menu-text,
@@ -136,15 +125,10 @@ menuitem#repair-text-encoding .menu-text,
 menuitem#menu_openDownloads .menu-text,
 menuitem#menu_openAddons .menu-text,
 #addon_darkreader_org-menuitem-_toggle:not(.menuitem-iconic) .menu-text,
-#private-relay_firefox_com-menuitem-_fx-private-relay-generate-alias:not(.menuitem-iconic)
-  > .menu-text,
-#private-relay_firefox_com-menuitem-_fx-private-relay-use-existing-aliases:not(.menuitem-iconic)
-  > .menu-text,
-#private-relay_firefox_com-menuitem-_fx-private-relay-manage-aliases:not(.menuitem-iconic)
-  > .menu-text,
-:is(#contentAreaContextMenu, #toolbar-context-menu)
-  menu:not(.menu-iconic, .menuitem-iconic)[id^="gitzip-firefox-addons_gitzip_org-menuitem-"]
-  > .menu-text,
+#private-relay_firefox_com-menuitem-_fx-private-relay-generate-alias:not(.menuitem-iconic) > .menu-text,
+#private-relay_firefox_com-menuitem-_fx-private-relay-use-existing-aliases:not(.menuitem-iconic) > .menu-text,
+#private-relay_firefox_com-menuitem-_fx-private-relay-manage-aliases:not(.menuitem-iconic) > .menu-text,
+:is(#contentAreaContextMenu, #toolbar-context-menu) menu:not(.menu-iconic, .menuitem-iconic)[id^="gitzip-firefox-addons_gitzip_org-menuitem-"] > .menu-text,
 #menu_pageInfo .menu-text,
 menuitem:is(#sync-setup, #sync-unverifieditem, #sync-reauthitem) .menu-text,
 menuitem:is(#sync-enable, #sync-syncnowitem) .menu-text,
@@ -160,9 +144,7 @@ menuitem#menu_HelpPopup_reportPhishingtoolmenu > .menu-text,
 menuitem#menu_HelpPopup_reportPhishingErrortoolmenu > .menu-text,
 menuitem#aboutName > .menu-text,
 menuitem#helpPolicySupport > .menu-text,
-:is(#new-tab-button-popup, .new-tab-popup)
-  menuitem[command="Browser:OpenAboutContainers"]
-  > .menu-text,
+:is(#new-tab-button-popup, .new-tab-popup) menuitem[command="Browser:OpenAboutContainers"] > .menu-text,
 #context-frameOsPid .menu-text,
 #context-reloadframe .menu-text,
 #context-reloadimage .menu-text,
@@ -207,8 +189,7 @@ menuitem[data-l10n-id="full-screen-exit"] .menu-text,
 .textbox-contextmenu menuitem[data-l10n-id="text-action-select-all"] .menu-text,
 .searchbar-clear-history .menu-text,
 #spell-check-enabled .menu-iconic-text,
-:is(#spell-add-to-dictionary, #spell-add-dictionaries, #spell-add-dictionaries-main, #spell-dictionaries)
-  .menu-text,
+:is(#spell-add-to-dictionary, #spell-add-dictionaries, #spell-add-dictionaries-main, #spell-dictionaries) .menu-text,
 #context_reopenInContainer > .menu-text,
 #context_reloadTab .menu-text,
 #context_reloadSelectedTabs .menu-text,
@@ -229,8 +210,7 @@ menuitem[data-l10n-id="full-screen-exit"] .menu-text,
 #placesContext_open\:newtab .menu-text,
 #syncedTabsOpenSelected .menu-text,
 :is(#placesContext_openBookmarkContainer\:tabs, #placesContext_openBookmarkLinks\:tabs) .menu-text,
-:is(#placesContext_openContainer\:tabs, #placesContext_openLinks\:tabs, #syncedTabsOpenAllInTabs)
-  .menu-text,
+:is(#placesContext_openContainer\:tabs, #placesContext_openLinks\:tabs, #syncedTabsOpenAllInTabs) .menu-text,
 #placesContext_showAllBookmarks .menu-text,
 #syncedTabsManageDevices .menu-text,
 #context-markAsRead .menu-text,
@@ -267,87 +247,46 @@ menuitem#enableDeveloperTools .menu-text,
 #historyUndoMenu > .menu-text,
 .recently-closed-windows-menu > .menu-text,
 .recently-closed-tabs-menu > .menu-text,
-:is(.recently-closed-windows-menu, .recently-closed-tabs-menu, #historyUndoMenu, #historyUndoWindowMenu)
-  menuitem.restoreallitem
-  .menu-text,
+:is(.recently-closed-windows-menu, .recently-closed-tabs-menu, #historyUndoMenu, #historyUndoWindowMenu) menuitem.restoreallitem .menu-text,
 #recently-closed-restore > .menu-text,
 #recently-closed-restore-in-new-window > .menu-text,
 #recently-closed-restore-in-new-private-window > .menu-text,
 #recently-closed-remove-from-list > .menu-text,
 #recently-closed-remove-from-history > .menu-text,
 #recently-closed-bookmark > .menu-text,
-:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
-  .sendtab-target[clientType]:not([clientType=""])
-  .menu-text,
-:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
-  .sendtab-target.signintosync
-  .menu-text,
-:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
-  .sendtab-target[clientType=""][clientId=""]
-  .menu-text,
-:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
-  .sendtab-target[clientType=""][clientId=""]
-  + .sendtab-target:not([clientType], [clientId])
-  .menu-text,
+:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice) .sendtab-target[clientType]:not([clientType=""]) .menu-text,
+:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice) .sendtab-target.signintosync .menu-text,
+:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice) .sendtab-target[clientType=""][clientId=""] .menu-text,
+:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice) .sendtab-target[clientType=""][clientId=""] + .sendtab-target:not([clientType], [clientId]) .menu-text,
 #userScriptsMenu > .menu-text,
 #toggle_PersonalToolbar > .menu-text,
 menu#fill-login > .menu-text,
 menuitem#manage-saved-logins > .menu-text,
 menuitem#fill-login-generated-password > .menu-text,
-:is(#contentAreaContextMenu, #toolbar-context-menu)
-  menu[label="Bitwarden"]
-  :is(menu, menuitem)[id$="-menuitem-_autofill"]
-  > .menu-text,
-:is(#contentAreaContextMenu, #toolbar-context-menu)
-  menu[label="Bitwarden"]
-  :is(menu, menuitem)[id$="-menuitem-_copy-username"]
-  > .menu-text,
-:is(#contentAreaContextMenu, #toolbar-context-menu)
-  menu[label="Bitwarden"]
-  :is(menu, menuitem)[id$="-menuitem-_copy-password"]
-  > .menu-text,
-:is(#contentAreaContextMenu, #toolbar-context-menu)
-  menu[label="Bitwarden"]
-  :is(menu, menuitem)[id$="-menuitem-_copy-totp"]
-  > .menu-text,
-:is(#contentAreaContextMenu, #toolbar-context-menu)
-  menu[label="Bitwarden"]
-  :is(menu, menuitem)[id$="-menuitem-_generate-password"]
-  > .menu-text,
-:is(#contentAreaContextMenu, #toolbar-context-menu)
-  menu[label="Bitwarden"]
-  :is(menu, menuitem)[id$="-menuitem-_copy-identifier"]
-  > .menu-text,
+:is(#contentAreaContextMenu, #toolbar-context-menu) menu[label="Bitwarden"] :is(menu, menuitem)[id$="-menuitem-_autofill"] > .menu-text,
+:is(#contentAreaContextMenu, #toolbar-context-menu) menu[label="Bitwarden"] :is(menu, menuitem)[id$="-menuitem-_copy-username"] > .menu-text,
+:is(#contentAreaContextMenu, #toolbar-context-menu) menu[label="Bitwarden"] :is(menu, menuitem)[id$="-menuitem-_copy-password"] > .menu-text,
+:is(#contentAreaContextMenu, #toolbar-context-menu) menu[label="Bitwarden"] :is(menu, menuitem)[id$="-menuitem-_copy-totp"] > .menu-text,
+:is(#contentAreaContextMenu, #toolbar-context-menu) menu[label="Bitwarden"] :is(menu, menuitem)[id$="-menuitem-_generate-password"] > .menu-text,
+:is(#contentAreaContextMenu, #toolbar-context-menu) menu[label="Bitwarden"] :is(menu, menuitem)[id$="-menuitem-_copy-identifier"] > .menu-text,
 menu[label="Bitwarden"]:not(.menuitem-iconic, .menu-iconic) > .menu-text,
-#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-manager:not(.menuitem-iconic, .menu-iconic)
-  > .menu-text,
-#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-options:not(.menuitem-iconic, .menu-iconic)
-  > .menu-text,
+#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-manager:not(.menuitem-iconic, .menu-iconic) > .menu-text,
+#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-options:not(.menuitem-iconic, .menu-iconic) > .menu-text,
 #simple-translate_sienori-menuitem-_translatePage:not(.menuitem-iconic, .menu-iconic) > .menu-text,
 #simple-translate_sienori-menuitem-_translateLink:not(.menuitem-iconic, .menu-iconic) > .menu-text,
 #simple-translate_sienori-menuitem-_translateText:not(.menuitem-iconic, .menu-iconic) > .menu-text,
-#toolbar-context-menu
-  :is(menu, menuitem)[id^="jid1-bycqofyfmbmd9a_jetpack-menuitem"]:not(.menuitem-iconic, .menu-iconic)
-  > .menu-text,
-#ublock0_raymondhill_net-menuitem-_uBlock0-blockElement:not(.menuitem-iconic, .menu-iconic)
-  > .menu-text,
-#ublock0_raymondhill_net-menuitem-_uBlock0-blockElementInFrame:not(.menuitem-iconic, .menu-iconic)
-  > .menu-text,
-:is(menu, menuitem)[id^="multithreaded-download-manager"]:is([label="Open in new tab"], [label="Open in new window"], [label="Open in sidebar"])
-  > .menu-iconic-text,
-#_287dcf75-bec6-4eec-b4f6-71948a2eea29_-menuitem-_ViewImage-SearchByImage:not(.menuitem-iconic, .menu-iconic)
-  > .menu-text,
-#invert-element_aminomancer-menuitem-_menuitem-invert:not(.menuitem-iconic, .menu-iconic)
-  > .menu-text,
+#toolbar-context-menu :is(menu, menuitem)[id^="jid1-bycqofyfmbmd9a_jetpack-menuitem"]:not(.menuitem-iconic, .menu-iconic) > .menu-text,
+#ublock0_raymondhill_net-menuitem-_uBlock0-blockElement:not(.menuitem-iconic, .menu-iconic) > .menu-text,
+#ublock0_raymondhill_net-menuitem-_uBlock0-blockElementInFrame:not(.menuitem-iconic, .menu-iconic) > .menu-text,
+:is(menu, menuitem)[id^="multithreaded-download-manager"]:is([label="Open in new tab"], [label="Open in new window"], [label="Open in sidebar"]) > .menu-iconic-text,
+#_287dcf75-bec6-4eec-b4f6-71948a2eea29_-menuitem-_ViewImage-SearchByImage:not(.menuitem-iconic, .menu-iconic) > .menu-text,
+#invert-element_aminomancer-menuitem-_menuitem-invert:not(.menuitem-iconic, .menu-iconic) > .menu-text,
 #menu_customizeToolbars .menu-text,
 menuitem.viewCustomizeToolbar > .menu-text,
 #addon_darkreader_org-menuitem-_switchEngine:not(.menuitem-iconic) .menu-text,
-menupopup:not(#contentAreaContextMenu)
-  > #addon_darkreader_org-menuitem-_DarkReader-top:not(.menuitem-iconic, .menu-iconic)
-  > .menu-text,
+menupopup:not(#contentAreaContextMenu) > #addon_darkreader_org-menuitem-_DarkReader-top:not(.menuitem-iconic, .menu-iconic) > .menu-text,
 #_testpilot-containers-menuitem-_hide-container:not(.menuitem-iconic, .menu-iconic) > .menu-text,
-#_testpilot-containers-menuitem-_move-to-new-window-container:not(.menuitem-iconic, .menu-iconic)
-  > .menu-text,
+#_testpilot-containers-menuitem-_move-to-new-window-container:not(.menuitem-iconic, .menu-iconic) > .menu-text,
 menuitem.customize-context-removeFromToolbar > .menu-text,
 menuitem.customize-context-removeFromPanel > .menu-text,
 menuitem.customize-context-moveToToolbar > .menu-text,
@@ -405,8 +344,7 @@ menuitem#menu_openAddons::before,
 #private-relay_firefox_com-menuitem-_fx-private-relay-generate-alias:not(.menuitem-iconic)::before,
 #private-relay_firefox_com-menuitem-_fx-private-relay-use-existing-aliases:not(.menuitem-iconic)::before,
 #private-relay_firefox_com-menuitem-_fx-private-relay-manage-aliases:not(.menuitem-iconic)::before,
-:is(#contentAreaContextMenu, #toolbar-context-menu)
-  menu:not(.menu-iconic, .menuitem-iconic)[id^="gitzip-firefox-addons_gitzip_org-menuitem-"]::before,
+:is(#contentAreaContextMenu, #toolbar-context-menu) menu:not(.menu-iconic, .menuitem-iconic)[id^="gitzip-firefox-addons_gitzip_org-menuitem-"]::before,
 #menu_pageInfo::before,
 menuitem:is(#sync-setup, #sync-unverifieditem, #sync-reauthitem)::before,
 menuitem:is(#sync-enable, #sync-syncnowitem)::before,
@@ -544,8 +482,7 @@ menuitem#repair-text-encoding::before,
 :is(#placesContext_open\:container, #placesContext_openContainer\:container, #placesContext_openLinks\:container, #placesContext_open\:newcontainertab)::before,
 :is(#syncedTabsOpenAllInContainer, #syncedTabsOpenSelectedInContainerTab)::before,
 #bookmark-menu-container_robwu_nl-menuitem-_bookmark-menu-item:not(.menuitem-iconic)::before,
-#placesContext
-  > :is(menu, menuitem)[label="Open in New Container Tab"]:not(.menuitem-iconic)::before,
+#placesContext > :is(menu, menuitem)[label="Open in New Container Tab"]:not(.menuitem-iconic)::before,
 #context-markAsRead::before,
 #context-markAsUnread::before,
 :is(#context_bookmarkTab, #context_bookmarkSelectedTabs, #toolbar-context-bookmarkSelectedTab, #toolbar-context-bookmarkSelectedTabs)::before,
@@ -577,23 +514,17 @@ menuitem#enableDeveloperTools::before,
 #historyUndoMenu::before,
 .recently-closed-windows-menu::before,
 .recently-closed-tabs-menu::before,
-:is(.recently-closed-windows-menu, .recently-closed-tabs-menu, #historyUndoMenu, #historyUndoWindowMenu)
-  menuitem.restoreallitem::before,
+:is(.recently-closed-windows-menu, .recently-closed-tabs-menu, #historyUndoMenu, #historyUndoWindowMenu) menuitem.restoreallitem::before,
 #recently-closed-restore::before,
 #recently-closed-restore-in-new-window::before,
 #recently-closed-restore-in-new-private-window::before,
 #recently-closed-remove-from-list::before,
 #recently-closed-remove-from-history::before,
 #recently-closed-bookmark::before,
-:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
-  .sendtab-target[clientType]:not([clientType=""])::before,
-:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
-  .sendtab-target.signintosync::before,
-:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
-  .sendtab-target[clientType=""][clientId=""]::before,
-:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
-  .sendtab-target[clientType=""][clientId=""]
-  + .sendtab-target:not([clientType], [clientId])::before,
+:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice) .sendtab-target[clientType]:not([clientType=""])::before,
+:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice) .sendtab-target.signintosync::before,
+:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice) .sendtab-target[clientType=""][clientId=""]::before,
+:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice) .sendtab-target[clientType=""][clientId=""] + .sendtab-target:not([clientType], [clientId])::before,
 :is(#spell-add-to-dictionary, #spell-add-dictionaries, #spell-add-dictionaries-main, #spell-dictionaries)::before,
 #context-showonlythisframe::before,
 #contentAreaContextMenu #frame::before,
@@ -622,24 +553,12 @@ menuitem[data-l10n-id="full-screen-exit"]::before,
 menu#fill-login::before,
 menuitem#manage-saved-logins::before,
 menuitem#fill-login-generated-password::before,
-:is(#contentAreaContextMenu, #toolbar-context-menu)
-  menu[label="Bitwarden"]
-  :is(menu, menuitem)[id$="-menuitem-_autofill"]::before,
-:is(#contentAreaContextMenu, #toolbar-context-menu)
-  menu[label="Bitwarden"]
-  :is(menu, menuitem)[id$="-menuitem-_copy-username"]::before,
-:is(#contentAreaContextMenu, #toolbar-context-menu)
-  menu[label="Bitwarden"]
-  :is(menu, menuitem)[id$="-menuitem-_copy-password"]::before,
-:is(#contentAreaContextMenu, #toolbar-context-menu)
-  menu[label="Bitwarden"]
-  :is(menu, menuitem)[id$="-menuitem-_copy-totp"]::before,
-:is(#contentAreaContextMenu, #toolbar-context-menu)
-  menu[label="Bitwarden"]
-  :is(menu, menuitem)[id$="-menuitem-_generate-password"]::before,
-:is(#contentAreaContextMenu, #toolbar-context-menu)
-  menu[label="Bitwarden"]
-  :is(menu, menuitem)[id$="-menuitem-_copy-identifier"]::before,
+:is(#contentAreaContextMenu, #toolbar-context-menu) menu[label="Bitwarden"] :is(menu, menuitem)[id$="-menuitem-_autofill"]::before,
+:is(#contentAreaContextMenu, #toolbar-context-menu) menu[label="Bitwarden"] :is(menu, menuitem)[id$="-menuitem-_copy-username"]::before,
+:is(#contentAreaContextMenu, #toolbar-context-menu) menu[label="Bitwarden"] :is(menu, menuitem)[id$="-menuitem-_copy-password"]::before,
+:is(#contentAreaContextMenu, #toolbar-context-menu) menu[label="Bitwarden"] :is(menu, menuitem)[id$="-menuitem-_copy-totp"]::before,
+:is(#contentAreaContextMenu, #toolbar-context-menu) menu[label="Bitwarden"] :is(menu, menuitem)[id$="-menuitem-_generate-password"]::before,
+:is(#contentAreaContextMenu, #toolbar-context-menu) menu[label="Bitwarden"] :is(menu, menuitem)[id$="-menuitem-_copy-identifier"]::before,
 menu[label="Bitwarden"]:not(.menuitem-iconic, .menu-iconic)::before,
 #_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-manager:not(.menuitem-iconic, .menu-iconic)::before,
 #_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-options:not(.menuitem-iconic, .menu-iconic)::before,
@@ -648,16 +567,14 @@ menu[label="Bitwarden"]:not(.menuitem-iconic, .menu-iconic)::before,
 #invert-element_aminomancer-menuitem-_menuitem-invert:not(.menuitem-iconic, .menu-iconic)::before,
 #simple-translate_sienori-menuitem-_translateLink:not(.menuitem-iconic, .menu-iconic)::before,
 #simple-translate_sienori-menuitem-_translateText:not(.menuitem-iconic, .menu-iconic)::before,
-#toolbar-context-menu
-  :is(menu, menuitem)[id^="jid1-bycqofyfmbmd9a_jetpack-menuitem"]:not(.menuitem-iconic, .menu-iconic)::before,
+#toolbar-context-menu :is(menu, menuitem)[id^="jid1-bycqofyfmbmd9a_jetpack-menuitem"]:not(.menuitem-iconic, .menu-iconic)::before,
 #ublock0_raymondhill_net-menuitem-_uBlock0-blockElement:not(.menuitem-iconic, .menu-iconic)::before,
 #ublock0_raymondhill_net-menuitem-_uBlock0-blockElementInFrame:not(.menuitem-iconic, .menu-iconic)::before,
 :is(menu, menuitem)[id^="multithreaded-download-manager"]:is([label="Open in new tab"], [label="Open in new window"], [label="Open in sidebar"])::before,
 #menu_customizeToolbars::before,
 menuitem.viewCustomizeToolbar::before,
 #addon_darkreader_org-menuitem-_switchEngine:not(.menuitem-iconic)::before,
-menupopup:not(#contentAreaContextMenu)
-  > #addon_darkreader_org-menuitem-_DarkReader-top:not(.menuitem-iconic, .menu-iconic)::before,
+menupopup:not(#contentAreaContextMenu) > #addon_darkreader_org-menuitem-_DarkReader-top:not(.menuitem-iconic, .menu-iconic)::before,
 #_testpilot-containers-menuitem-_hide-container:not(.menuitem-iconic, .menu-iconic)::before,
 #_testpilot-containers-menuitem-_move-to-new-window-container:not(.menuitem-iconic, .menu-iconic)::before,
 menuitem.customize-context-removeFromToolbar::before,
@@ -873,8 +790,7 @@ menuitem#menu_openAddons::before,
   background-image: url(chrome://userchrome/content/settings.svg);
 }
 
-:is(#contentAreaContextMenu, #toolbar-context-menu)
-  menu:not(.menu-iconic, .menuitem-iconic)[id^="gitzip-firefox-addons_gitzip_org-menuitem-"]::before {
+:is(#contentAreaContextMenu, #toolbar-context-menu) menu:not(.menu-iconic, .menuitem-iconic)[id^="gitzip-firefox-addons_gitzip_org-menuitem-"]::before {
   background-image: url(chrome://userchrome/content/material/zipper.svg);
 }
 
@@ -979,37 +895,29 @@ menuitem#helpPolicySupport::before {
 }
 
 /* view > sidebar menu */
-menupopup#viewSidebarMenu
-  menuitem:is([type="checkbox"], [type="radio"]):not([checked="true"], .webextension-menuitem:not(.menuitem-iconic))
-  .menu-iconic-left {
+menupopup#viewSidebarMenu menuitem:is([type="checkbox"], [type="radio"]):not([checked="true"], .webextension-menuitem:not(.menuitem-iconic)) .menu-iconic-left {
   display: revert;
   fill: currentColor;
   -moz-context-properties: fill, fill-opacity;
 }
 
-menupopup#viewSidebarMenu
-  menuitem:is([type="checkbox"], [type="radio"]):not([checked="true"], .webextension-menuitem:not(.menuitem-iconic))
-  .menu-iconic-icon {
+menupopup#viewSidebarMenu menuitem:is([type="checkbox"], [type="radio"]):not([checked="true"], .webextension-menuitem:not(.menuitem-iconic)) .menu-iconic-icon {
   display: revert !important;
 }
 
-menupopup#viewSidebarMenu
-  menuitem:is([type="checkbox"], [type="radio"]):not([checked="true"], .webextension-menuitem:not(.menuitem-iconic))::before {
+menupopup#viewSidebarMenu menuitem:is([type="checkbox"], [type="radio"]):not([checked="true"], .webextension-menuitem:not(.menuitem-iconic))::before {
   display: none;
 }
 
-menupopup#viewSidebarMenu
-  #menu_bookmarksSidebar:is([type="checkbox"], [type="radio"]):not([checked="true"]) {
+menupopup#viewSidebarMenu #menu_bookmarksSidebar:is([type="checkbox"], [type="radio"]):not([checked="true"]) {
   list-style-image: url(chrome://userchrome/content/skin/bookmark.svg) !important;
 }
 
-menupopup#viewSidebarMenu
-  #menu_historySidebar:is([type="checkbox"], [type="radio"]):not([checked="true"]) {
+menupopup#viewSidebarMenu #menu_historySidebar:is([type="checkbox"], [type="radio"]):not([checked="true"]) {
   list-style-image: url(chrome://userchrome/content/skin/history.svg) !important;
 }
 
-menupopup#viewSidebarMenu
-  #menu_tabsSidebar:is([type="checkbox"], [type="radio"]):not([checked="true"]) {
+menupopup#viewSidebarMenu #menu_tabsSidebar:is([type="checkbox"], [type="radio"]):not([checked="true"]) {
   list-style-image: url(chrome://userchrome/content/skin/tab.svg) !important;
 }
 
@@ -1095,8 +1003,7 @@ menuitem.customize-context-CopyID::before {
   background-image: url(chrome://userchrome/content/skin/edit-paste.svg);
 }
 
-.textbox-contextmenu
-  menuitem:is([anonid="paste-and-go"], #paste-and-go, .searchbar-paste-and-search)::before {
+.textbox-contextmenu menuitem:is([anonid="paste-and-go"], #paste-and-go, .searchbar-paste-and-search)::before {
   background-image: url(chrome://userchrome/content/skin/edit-paste-and-go.svg);
 }
 
@@ -1144,8 +1051,7 @@ menuitem.customize-context-CopyID::before {
 :is(#placesContext_open\:container, #placesContext_openContainer\:container, #placesContext_openLinks\:container, #placesContext_open\:newcontainertab)::before,
 :is(#syncedTabsOpenAllInContainer, #syncedTabsOpenSelectedInContainerTab)::before,
 #bookmark-menu-container_robwu_nl-menuitem-_bookmark-menu-item:not(.menuitem-iconic)::before,
-#placesContext
-  > :is(menu, menuitem)[label="Open in New Container Tab"]:not(.menuitem-iconic)::before,
+#placesContext > :is(menu, menuitem)[label="Open in New Container Tab"]:not(.menuitem-iconic)::before,
 #context-openlinkincontainertab::before {
   background-image: url(chrome://userchrome/content/skin/container-go.svg);
 }
@@ -1200,8 +1106,7 @@ menuitem#repair-text-encoding::before {
 }
 
 :is(#context-undo, #context_undoCloseTab, #toolbar-context-undoCloseTab, #menu_undo, #undobookmarksmenuUndo, #context-redo, #menu_redo, #undobookmarksmenuRedo)::before,
-.textbox-contextmenu
-  menuitem:is([data-l10n-id="text-action-undo"], [data-l10n-id="text-action-redo"])::before {
+.textbox-contextmenu menuitem:is([data-l10n-id="text-action-undo"], [data-l10n-id="text-action-redo"])::before {
   background-image: url(chrome://userchrome/content/undo.svg);
 }
 
@@ -1374,8 +1279,7 @@ menuitem#enableDeveloperTools::before {
   background-image: url(chrome://userchrome/content/skin/tab.svg);
 }
 
-:is(.recently-closed-windows-menu, .recently-closed-tabs-menu, #historyUndoMenu, #historyUndoWindowMenu)
-  menuitem.restoreallitem::before {
+:is(.recently-closed-windows-menu, .recently-closed-tabs-menu, #historyUndoMenu, #historyUndoWindowMenu) menuitem.restoreallitem::before {
   background-image: url(chrome://userchrome/content/skin/restore-session.svg);
 }
 
@@ -1408,88 +1312,66 @@ menuitem#enableDeveloperTools::before {
   background-image: url(chrome://userchrome/content/skin/send-to-device.svg);
 }
 
-:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
-  .sendtab-target:is([clientType="phone"], [clientType="mobile"])::before {
+:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice) .sendtab-target:is([clientType="phone"], [clientType="mobile"])::before {
   background-image: url(chrome://userchrome/content/skin/device-phone.svg);
 }
 
-:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
-  .sendtab-target[clientType="tablet"]::before {
+:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice) .sendtab-target[clientType="tablet"]::before {
   background-image: url(chrome://userchrome/content/skin/device-tablet.svg);
 }
 
-:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
-  .sendtab-target[clientType="desktop"]::before {
+:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice) .sendtab-target[clientType="desktop"]::before {
   background-image: url(chrome://userchrome/content/skin/device-desktop.svg);
 }
 
-:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
-  .sendtab-target[clientType="tv"]::before {
+:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice) .sendtab-target[clientType="tv"]::before {
   background-image: url(chrome://userchrome/content/skin/device-tv.svg);
 }
 
-:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
-  .sendtab-target[clientType="vr"]::before {
+:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice) .sendtab-target[clientType="vr"]::before {
   background-image: url(chrome://userchrome/content/skin/device-vr.svg);
 }
 
-:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
-  .sendtab-target.signintosync::before {
+:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice) .sendtab-target.signintosync::before {
   background-image: url(chrome://userchrome/content/skin/sync.svg);
 }
 
-:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
-  .sendtab-target[clientType=""][clientId=""]::before {
+:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice) .sendtab-target[clientType=""][clientId=""]::before {
   background-image: url(chrome://userchrome/content/chevron.svg);
 }
 
-:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice)
-  .sendtab-target[clientType=""][clientId=""]
-  + .sendtab-target:not([clientType], [clientId])::before {
+:is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice) .sendtab-target[clientType=""][clientId=""] + .sendtab-target:not([clientType], [clientId])::before {
   background-image: url(chrome://userchrome/content/fxa/add-device.svg);
 }
 
-:is(#contentAreaContextMenu, #toolbar-context-menu)
-  menu[label="Bitwarden"]
-  :is(menu, menuitem)[id$="-menuitem-_autofill"]::before {
+:is(#contentAreaContextMenu, #toolbar-context-menu) menu[label="Bitwarden"] :is(menu, menuitem)[id$="-menuitem-_autofill"]::before {
   background-image: url(chrome://userchrome/content/formfill.svg);
 }
 
 menuitem#manage-saved-logins::before,
-:is(#contentAreaContextMenu, #toolbar-context-menu)
-  menu[label="Bitwarden"]
-  :is(menu, menuitem)[id$="-menuitem-_copy-username"]::before {
+:is(#contentAreaContextMenu, #toolbar-context-menu) menu[label="Bitwarden"] :is(menu, menuitem)[id$="-menuitem-_copy-username"]::before {
   background-image: url(chrome://userchrome/content/fxa/avatar-empty.svg);
 }
 
 menu#fill-login::before,
-:is(#contentAreaContextMenu, #toolbar-context-menu)
-  menu[label="Bitwarden"]
-  :is(menu, menuitem)[id$="-menuitem-_copy-password"]::before {
+:is(#contentAreaContextMenu, #toolbar-context-menu) menu[label="Bitwarden"] :is(menu, menuitem)[id$="-menuitem-_copy-password"]::before {
   background-image: url(chrome://userchrome/content/skin/login.svg);
 }
 
-:is(#contentAreaContextMenu, #toolbar-context-menu)
-  menu[label="Bitwarden"]
-  :is(menu, menuitem)[id$="-menuitem-_copy-totp"]::before {
+:is(#contentAreaContextMenu, #toolbar-context-menu) menu[label="Bitwarden"] :is(menu, menuitem)[id$="-menuitem-_copy-totp"]::before {
   background-image: url(chrome://userchrome/content/material/lock-clock.svg);
 }
 
 menuitem#fill-login-generated-password::before,
-:is(#contentAreaContextMenu, #toolbar-context-menu)
-  menu[label="Bitwarden"]
-  :is(menu, menuitem)[id$="-menuitem-_generate-password"]::before {
+:is(#contentAreaContextMenu, #toolbar-context-menu) menu[label="Bitwarden"] :is(menu, menuitem)[id$="-menuitem-_generate-password"]::before {
   background-image: url(chrome://userchrome/content/generate-password.svg);
 }
 
-:is(#contentAreaContextMenu, #toolbar-context-menu)
-  menu[label="Bitwarden"]
-  :is(menu, menuitem)[id$="-menuitem-_copy-identifier"]::before {
+:is(#contentAreaContextMenu, #toolbar-context-menu) menu[label="Bitwarden"] :is(menu, menuitem)[id$="-menuitem-_copy-identifier"]::before {
   background-image: url(chrome://userchrome/content/devtools/tool-dom.svg);
 }
 
-:is(menu, menuitem)[id^="multithreaded-download-manager"]:is([label="Open in new tab"], [label="Open in new window"], [label="Open in sidebar"])
-  .menu-iconic-left {
+:is(menu, menuitem)[id^="multithreaded-download-manager"]:is([label="Open in new tab"], [label="Open in new window"], [label="Open in sidebar"]) .menu-iconic-left {
   display: none;
 }
 
@@ -1610,8 +1492,7 @@ menuitem.customize-context-reportExtension::before {
 :is(#context_reloadTab, #context_reloadSelectedTabs, #toolbar-context-reloadSelectedTab, #toolbar-context-reloadSelectedTabs):-moz-locale-dir(rtl)::before,
 :is(#context-redo, #menu_redo, #undobookmarksmenuRedo):-moz-locale-dir(ltr)::before,
 menuitem:is(.customize-context-removeFromToolbar, .customize-context-removeFromPanel):-moz-locale-dir(rtl)::before,
-.textbox-contextmenu
-  menuitem:is([anonid="paste-and-go"], #paste-and-go, .searchbar-paste-and-search):-moz-locale-dir(rtl)::before,
+.textbox-contextmenu menuitem:is([anonid="paste-and-go"], #paste-and-go, .searchbar-paste-and-search):-moz-locale-dir(rtl)::before,
 .textbox-contextmenu menuitem[data-l10n-id="text-action-undo"]:-moz-locale-dir(rtl)::before,
 .textbox-contextmenu menuitem[data-l10n-id="text-action-redo"]:-moz-locale-dir(ltr)::before,
 #placesContext_deleteHost:-moz-locale-dir(rtl)::before,

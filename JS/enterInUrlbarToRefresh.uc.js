@@ -72,7 +72,8 @@
       let aStoragePrincipal = params.originStoragePrincipal;
       let aTriggeringPrincipal = params.triggeringPrincipal;
       let aCsp = params.csp;
-      let aForceAboutBlankViewerInCurrent = params.forceAboutBlankViewerInCurrent;
+      let aForceAboutBlankViewerInCurrent =
+        params.forceAboutBlankViewerInCurrent;
       let aResolveOnContentBrowserReady = params.resolveOnContentBrowserCreated;
 
       let w = this.window;
@@ -81,10 +82,14 @@
         if (principal && principal.isContentPrincipal) {
           let attrs = {
             userContextId: aUserContextId,
-            privateBrowsingId: aIsPrivate || (w && PrivateBrowsingUtils.isWindowPrivate(w)),
+            privateBrowsingId:
+              aIsPrivate || (w && PrivateBrowsingUtils.isWindowPrivate(w)),
             firstPartyDomain: principal.originAttributes.firstPartyDomain,
           };
-          return Services.scriptSecurityManager.principalWithOA(principal, attrs);
+          return Services.scriptSecurityManager.principalWithOA(
+            principal,
+            attrs
+          );
         }
         return principal;
       }
@@ -120,9 +125,14 @@
       let { URI_INHERITS_SECURITY_CONTEXT } = Ci.nsIProtocolHandler;
       if (
         aForceAboutBlankViewerInCurrent &&
-        (!uriObj || this.window.doGetProtocolFlags(uriObj) & URI_INHERITS_SECURITY_CONTEXT)
+        (!uriObj ||
+          this.window.doGetProtocolFlags(uriObj) &
+            URI_INHERITS_SECURITY_CONTEXT)
       ) {
-        targetBrowser.createAboutBlankContentViewer(aPrincipal, aStoragePrincipal);
+        targetBrowser.createAboutBlankContentViewer(
+          aPrincipal,
+          aStoragePrincipal
+        );
       }
 
       targetBrowser.loadURI(url, {
@@ -137,7 +147,9 @@
         aResolveOnContentBrowserReady(targetBrowser);
       }
 
-      let focusUrlBar = w.document.activeElement == w.gURLBar.inputField && w.isBlankPageURL(url);
+      let focusUrlBar =
+        w.document.activeElement == w.gURLBar.inputField &&
+        w.isBlankPageURL(url);
       if (
         !params.avoidBrowserFocus &&
         !focusUrlBar &&
@@ -157,6 +169,9 @@
         init();
       }
     };
-    Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
+    Services.obs.addObserver(
+      delayedListener,
+      "browser-delayed-startup-finished"
+    );
   }
 })();

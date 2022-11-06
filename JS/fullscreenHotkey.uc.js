@@ -9,9 +9,13 @@
 // ==/UserScript==
 
 SessionStore.promiseInitialized.then(() => {
-  let fullScreenKey = document.getElementById(nodeToShortcutMap["fullscreen-button"]);
+  let fullScreenKey = document.getElementById(
+    nodeToShortcutMap["fullscreen-button"]
+  );
   fullScreenKey.removeAttribute("keycode");
   fullScreenKey.setAttribute("key", "E");
   fullScreenKey.setAttribute("modifiers", "accel");
-  document.getElementById("key_search2").setAttribute("modifiers", "accel,shift");
+  document
+    .getElementById("key_search2")
+    .setAttribute("modifiers", "accel,shift");
 });

@@ -6,8 +6,7 @@
 
 /* Firefox Notes */
 
-@-moz-document regexp("^moz-extension://.*/sidebar/index.html.*")
-{
+@-moz-document regexp("^moz-extension://.*/sidebar/index.html.*") {
   :root[uc-extension-id="notes@mozilla.com"] {
     --main-bg-color: var(--in-content-bg-dark) !important;
     --main-offset-bg-color: var(--in-content-box-background) !important;
@@ -18,16 +17,8 @@
     --primary-font-color: var(--plaintext-color) !important;
     --secondary-font-color: var(--ui-text-60) !important;
     --border-color: var(--in-content-box-border-color) !important;
-    --solid-border-color: color-mix(
-      in srgb,
-      white 25%,
-      var(--in-content-box-background)
-    ) !important;
-    --solid-border-color-bright: color-mix(
-      in srgb,
-      white 40%,
-      var(--in-content-box-background)
-    ) !important;
+    --solid-border-color: color-mix(in srgb, white 25%, var(--in-content-box-background)) !important;
+    --solid-border-color-bright: color-mix(in srgb, white 40%, var(--in-content-box-background)) !important;
     --ck-color-dropdown-panel-border: var(--solid-border-color) !important;
     --ck-inner-shadow: 2px 2px 3px var(--ck-color-shadow-inner) inset;
     --ck-drop-shadow: 0 0 2px 1px var(--ck-color-shadow-drop) !important;
@@ -48,8 +39,7 @@
     background-color: var(--content-selection-bgcolor-disabled) !important;
   }
 
-  :root[uc-extension-id="notes@mozilla.com"]
-    :is(:root, body, .ck.ck-reset_all, .ck.ck-reset_all *, code) {
+  :root[uc-extension-id="notes@mozilla.com"] :is(:root, body, .ck.ck-reset_all, .ck.ck-reset_all *, code) {
     font-family: var(--ck-font-face) !important;
   }
 
@@ -61,8 +51,7 @@
   :root[uc-extension-id="notes@mozilla.com"] #notes .ck-toolbar .ck-button__label,
   :root[uc-extension-id="notes@mozilla.com"] button,
   :root[uc-extension-id="notes@mozilla.com"] ::file-selector-button,
-  :root[uc-extension-id="notes@mozilla.com"]
-    input:is([type="reset"], [type="button"], [type="submit"]) {
+  :root[uc-extension-id="notes@mozilla.com"] input:is([type="reset"], [type="button"], [type="submit"]) {
     font-family: Helvetica, Arial, Tahoma, Verdana, Sans-Serif !important;
   }
 
@@ -80,8 +69,7 @@
 
     :root[uc-extension-id="notes@mozilla.com"] button,
     :root[uc-extension-id="notes@mozilla.com"] ::file-selector-button,
-    :root[uc-extension-id="notes@mozilla.com"]
-      input:is([type="reset"], [type="button"], [type="submit"]) {
+    :root[uc-extension-id="notes@mozilla.com"] input:is([type="reset"], [type="button"], [type="submit"]) {
       font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
     }
 
@@ -169,20 +157,12 @@
     border-radius: var(--menupopup-border-radius) !important;
   }
 
-  :root[uc-extension-id="notes@mozilla.com"]
-    #notes
-    .ck-heading-dropdown
-    .ck-dropdown__panel
-    .ck-list {
+  :root[uc-extension-id="notes@mozilla.com"] #notes .ck-heading-dropdown .ck-dropdown__panel .ck-list {
     width: auto !important;
     height: auto !important;
   }
 
-  :root[uc-extension-id="notes@mozilla.com"]
-    #notes
-    .ck-heading-dropdown
-    .ck-dropdown__panel
-    :where(ul, li) {
+  :root[uc-extension-id="notes@mozilla.com"] #notes .ck-heading-dropdown .ck-dropdown__panel :where(ul, li) {
     background: none !important;
   }
 
@@ -200,10 +180,7 @@
     color: var(--attention-color) !important;
   }
 
-  :root[uc-extension-id="notes@mozilla.com"]
-    #notes
-    .ck-toolbar
-    .ck-list__item_active:is(:hover, :focus) {
+  :root[uc-extension-id="notes@mozilla.com"] #notes .ck-toolbar .ck-list__item_active:is(:hover, :focus) {
     background: var(--in-content-button-background-active) !important;
   }
 
@@ -256,17 +233,11 @@
     border-radius: var(--general-button-border-radius) !important;
   }
 
-  :root[uc-extension-id="notes@mozilla.com"]
-    .ck.ck-dropdown.ck-heading-dropdown
-    .ck-dropdown__button
-    .ck-button__label {
+  :root[uc-extension-id="notes@mozilla.com"] .ck.ck-dropdown.ck-heading-dropdown .ck-dropdown__button .ck-button__label {
     width: auto !important;
   }
 
-  :root[uc-extension-id="notes@mozilla.com"]
-    .ck.ck-dropdown.ck-heading-dropdown
-    .ck-dropdown__button.ck-button_with-text
-    .ck-button__label {
+  :root[uc-extension-id="notes@mozilla.com"] .ck.ck-dropdown.ck-heading-dropdown .ck-dropdown__button.ck-button_with-text .ck-button__label {
     width: 18px !important;
   }
 
@@ -288,21 +259,12 @@
     background: var(--in-content-button-background-hover) !important;
   }
 
-  :root[uc-extension-id="notes@mozilla.com"]
-    #notes
-    .ck-toolbar
-    .ck-button:where(:focus, :hover):not(.ck-disabled),
-  :root[uc-extension-id="notes@mozilla.com"]
-    #notes
-    .ck-toolbar
-    a.ck-button:where(:focus, :hover):not(.ck-disabled) {
+  :root[uc-extension-id="notes@mozilla.com"] #notes .ck-toolbar .ck-button:where(:focus, :hover):not(.ck-disabled),
+  :root[uc-extension-id="notes@mozilla.com"] #notes .ck-toolbar a.ck-button:where(:focus, :hover):not(.ck-disabled) {
     background: var(--in-content-button-background-hover) !important;
   }
 
-  :root[uc-extension-id="notes@mozilla.com"]
-    #notes
-    .ck-toolbar
-    .ck-dropdown__button:hover:not(.ck-disabled) {
+  :root[uc-extension-id="notes@mozilla.com"] #notes .ck-toolbar .ck-dropdown__button:hover:not(.ck-disabled) {
     background: var(--in-content-button-background-hover) !important;
   }
 
@@ -311,11 +273,7 @@
     color: var(--ui-text-90) !important;
   }
 
-  :root[uc-extension-id="notes@mozilla.com"]
-    #notes
-    .ck-toolbar
-    .ck-tooltip.ck-tooltip_s
-    .ck-tooltip__text::after {
+  :root[uc-extension-id="notes@mozilla.com"] #notes .ck-toolbar .ck-tooltip.ck-tooltip_s .ck-tooltip__text::after {
     border-color: transparent transparent var(--in-content-border-hover) !important;
   }
 

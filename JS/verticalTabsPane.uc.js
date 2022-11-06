@@ -59,10 +59,12 @@
       // strings for the hover delay config prompt
       prompt: {
         "Hover delay title": "Hover delay (in milliseconds)",
-        "Hover delay description": "How long should the collapsed pane wait before expanding?",
+        "Hover delay description":
+          "How long should the collapsed pane wait before expanding?",
         "Hover out delay title": "Hover out delay (in milliseconds)",
-        "Hover out delay description": "How long should the expanded pane wait before collapsing?",
-        "Invalid": "Invalid input!",
+        "Hover out delay description":
+          "How long should the expanded pane wait before collapsing?",
+        Invalid: "Invalid input!",
         "Invalid description": "This preference must be a positive integer.",
       },
     },
@@ -91,7 +93,8 @@
   const hoverDelayPref = "userChrome.tabs.verticalTabsPane.hover-delay";
   const hoverOutDelayPref = "userChrome.tabs.verticalTabsPane.hover-out-delay";
   const userContextPref = "privacy.userContext.enabled";
-  const containerOnClickPref = "privacy.userContext.newTabContainerOnLeftClick.enabled";
+  const containerOnClickPref =
+    "privacy.userContext.newTabContainerOnLeftClick.enabled";
   // all of these events will be listened for on the pane itself
   const paneEvents = ["mouseenter", "mouseleave", "focus"];
   // these events target the arrowscrollbox (the container for tab items)
@@ -217,7 +220,9 @@
       );
       // tab stops let us focus elements in the tabs pane by hitting tab to
       // cycle through toolbars, just as in vanilla firefox.
-      this._buttonsRow.appendChild(create(document, "toolbartabstop", { "aria-hidden": true }));
+      this._buttonsRow.appendChild(
+        create(document, "toolbartabstop", { "aria-hidden": true })
+      );
       this._newTabButton = this._buttonsRow.appendChild(
         CustomizableUI.getWidget("new-tab-button")
           .forWindow(window)
@@ -225,8 +230,12 @@
       );
       this._newTabButton.id = "vertical-tabs-new-tab-button";
       this._newTabButton.setAttribute("flex", "1");
-      this._newTabButton.setAttribute("class", "subviewbutton subviewbutton-iconic");
-      nodeToShortcutMap[this._newTabButton.id] = nodeToShortcutMap["new-tab-button"];
+      this._newTabButton.setAttribute(
+        "class",
+        "subviewbutton subviewbutton-iconic"
+      );
+      nodeToShortcutMap[this._newTabButton.id] =
+        nodeToShortcutMap["new-tab-button"];
       this._pinButton = this._buttonsRow.appendChild(
         create(document, "toolbarbutton", {
           id: "vertical-tabs-pin-button",
@@ -235,7 +244,9 @@
         })
       );
       this._pinButton.addEventListener("command", e => {
-        this.pane.getAttribute("unpinned") ? this.pane.removeAttribute("unpinned") : this.unpin();
+        this.pane.getAttribute("unpinned")
+          ? this.pane.removeAttribute("unpinned")
+          : this.unpin();
         this._resetPinnedTooltip();
       });
       this._closeButton = this._buttonsRow.appendChild(
@@ -252,7 +263,9 @@
       }
       this._closeButton.addEventListener("command", e => this.toggle());
       this._innerBox.appendChild(create(document, "toolbarseparator"));
-      this._innerBox.appendChild(create(document, "toolbartabstop", { "aria-hidden": true }));
+      this._innerBox.appendChild(
+        create(document, "toolbartabstop", { "aria-hidden": true })
+      );
       this._arrowscrollbox = this._innerBox.appendChild(
         create(document, "arrowscrollbox", {
           id: "vertical-tabs-list",
@@ -267,7 +280,10 @@
       this._tabTooltip = vanillaTooltip.cloneNode(true);
       vanillaTooltip.after(this._tabTooltip);
       this._tabTooltip.id = "vertical-tabs-tooltip";
-      this._tabTooltip.setAttribute("onpopupshowing", `verticalTabsPane.createTabTooltip(event)`);
+      this._tabTooltip.setAttribute(
+        "onpopupshowing",
+        `verticalTabsPane.createTabTooltip(event)`
+      );
       // this is a map of all the rows, and you can get a specific row from it
       // by passing a tab (like a real <tab> element from the built-in tab bar)
       this.tabToElement = new Map();
@@ -369,14 +385,18 @@
           this.pane,
           NodeFilter.SHOW_ELEMENT,
           node => {
-            if (node.tagName == "toolbartabstop") return NodeFilter.FILTER_ACCEPT;
+            if (node.tagName == "toolbartabstop") {
+              return NodeFilter.FILTER_ACCEPT;
+            }
             if (node.disabled || node.hidden) return NodeFilter.FILTER_REJECT;
             if (
               node.tagName == "button" ||
               node.tagName == "toolbarbutton" ||
               node.tagName == "checkbox"
             ) {
-              if (!node.hasAttribute("tabindex")) node.setAttribute("tabindex", "-1");
+              if (!node.hasAttribute("tabindex")) {
+                node.setAttribute("tabindex", "-1");
+              }
               return NodeFilter.FILTER_ACCEPT;
             }
             return NodeFilter.FILTER_SKIP;
@@ -395,7 +415,9 @@
           this.pane,
           NodeFilter.SHOW_ELEMENT,
           node => {
-            if (node.tagName == "toolbartabstop") return NodeFilter.FILTER_ACCEPT;
+            if (node.tagName == "toolbartabstop") {
+              return NodeFilter.FILTER_ACCEPT;
+            }
             if (node.disabled || node.hidden) return NodeFilter.FILTER_REJECT;
             if (
               node.tagName == "button" ||
@@ -405,7 +427,9 @@
               if (node.classList.contains("all-tabs-secondary-button")) {
                 return NodeFilter.FILTER_SKIP;
               }
-              if (!node.hasAttribute("tabindex")) node.setAttribute("tabindex", "-1");
+              if (!node.hasAttribute("tabindex")) {
+                node.setAttribute("tabindex", "-1");
+              }
               return NodeFilter.FILTER_ACCEPT;
             }
             return NodeFilter.FILTER_SKIP;
@@ -437,7 +461,9 @@
       if (!menus.length) return false;
       let openMenu = false;
       menus.forEach(menu => {
-        if (menu.triggerNode && this.pane.contains(menu.triggerNode)) openMenu = menu;
+        if (menu.triggerNode && this.pane.contains(menu.triggerNode)) {
+          openMenu = menu;
+        }
       });
       return openMenu;
     }
@@ -445,7 +471,12 @@
     // e.g. "PLAYING" or "AUTOPLAY BLOCKED". we lowercase these and append them
     // to the end of the tooltip title if the sound overlay is hovered.
     async _formatFluentStrings() {
-      let [playingString, mutedString, blockedString, pipString] = await this._l10n.formatValues([
+      let [
+        playingString,
+        mutedString,
+        blockedString,
+        pipString,
+      ] = await this._l10n.formatValues([
         "browser-tab-audio-playing2",
         "browser-tab-audio-muted2",
         "browser-tab-audio-blocked",
@@ -498,7 +529,9 @@
      * @returns the ancestor tab row
      */
     _findRow(el) {
-      return el.classList.contains("all-tabs-item") ? el : el.closest(".all-tabs-item");
+      return el.classList.contains("all-tabs-item")
+        ? el
+        : el.closest(".all-tabs-item");
     }
     // change the pin/unpin button's tooltip so it reflects the current state.
     // if the pane is pinned, the button should say "Collapse pane" and if it's
@@ -535,7 +568,9 @@
       }
       let input = { value: val };
       let win = Services.wm.getMostRecentWindow(null);
-      let ok = Services.prompt.prompt(win, title, text, input, null, { value: 0 });
+      let ok = Services.prompt.prompt(win, title, text, input, null, {
+        value: 0,
+      });
       if (!ok) return;
       let int = parseInt(input.value, 10);
       let onFail = () => {
@@ -626,13 +661,19 @@
           this._onFocus(e);
           break;
         case "blur":
-          e.currentTarget === this.pane ? this._onPaneBlur(e) : this._onButtonBlur(e);
+          e.currentTarget === this.pane
+            ? this._onPaneBlur(e)
+            : this._onButtonBlur(e);
           break;
         case "TabMultiSelect":
           this._onTabMultiSelect();
           break;
         case "TabSelect":
-          if (this.isOpen) this.tabToElement.get(e.target).scrollIntoView({ block: "nearest" });
+          if (this.isOpen) {
+            this.tabToElement
+              .get(e.target)
+              .scrollIntoView({ block: "nearest" });
+          }
           break;
       }
     }
@@ -717,8 +758,11 @@
             this.tabToElement = new Map();
             this._populate();
           }
-          if (value) this._contextMenu.menuitemReverse.setAttribute("checked", true);
-          else this._contextMenu.menuitemReverse.removeAttribute("checked");
+          if (value) {
+            this._contextMenu.menuitemReverse.setAttribute("checked", true);
+          } else {
+            this._contextMenu.menuitemReverse.removeAttribute("checked");
+          }
           break;
         case hoverDelayPref:
           this._hoverDelay = value ?? 100;
@@ -759,7 +803,9 @@
       if (!this._listenersRegistered) this._populate();
     }
     close() {
-      if (this.pane.contains(document.activeElement)) document.activeElement.blur();
+      if (this.pane.contains(document.activeElement)) {
+        document.activeElement.blur();
+      }
       this.pane.hidden = this._splitter.hidden = true;
       this.pane.removeAttribute("checked");
       this.isOpen = false;
@@ -776,13 +822,18 @@
       let fragment = document.createDocumentFragment();
       for (let tab of gBrowser.tabs) {
         if (this._filterFn(tab)) {
-          fragment[this._reversed ? `prepend` : `appendChild`](this._createRow(tab));
+          fragment[this._reversed ? `prepend` : `appendChild`](
+            this._createRow(tab)
+          );
         }
       }
       this._addElement(fragment);
       this._setupListeners();
       for (let row of this._rows) this._setImageAttributes(row, row.tab);
-      this._selectedRow.scrollIntoView({ block: "nearest", behavior: "instant" });
+      this._selectedRow.scrollIntoView({
+        block: "nearest",
+        behavior: "instant",
+      });
     }
     /**
      * add an element to the tab container/arrowscrollbox
@@ -822,8 +873,12 @@
     // invoked when closing the pane. clear all the aforementioned event listeners.
     _cleanupListeners() {
       window.removeEventListener("deactivate", this);
-      tabEvents.forEach(ev => gBrowser.tabContainer.removeEventListener(ev, this));
-      dragEvents.forEach(ev => this._arrowscrollbox.removeEventListener(ev, this));
+      tabEvents.forEach(ev =>
+        gBrowser.tabContainer.removeEventListener(ev, this)
+      );
+      dragEvents.forEach(ev =>
+        this._arrowscrollbox.removeEventListener(ev, this)
+      );
       paneEvents.forEach(ev => this.pane.removeEventListener(ev, this));
       this.pane.removeEventListener("keydown", this);
       this.pane.removeEventListener("blur", this, true);
@@ -862,7 +917,10 @@
       if (item) {
         this._removeItem(item, tab);
         this._addTab(tab);
-        this._selectedRow.scrollIntoView({ block: "nearest", behavior: "instant" });
+        this._selectedRow.scrollIntoView({
+          block: "nearest",
+          behavior: "instant",
+        });
       }
     }
     /**
@@ -875,7 +933,9 @@
       if (!this._filterFn(newTab)) return;
       let newRow = this._createRow(newTab);
       let nextTab = newTab.nextElementSibling;
-      while (nextTab && !this._filterFn(nextTab)) nextTab = nextTab.nextElementSibling;
+      while (nextTab && !this._filterFn(nextTab)) {
+        nextTab = nextTab.nextElementSibling;
+      }
       let nextRow = this.tabToElement.get(nextTab);
       if (this._reversed) {
         if (nextRow) nextRow.after(newRow);
@@ -987,8 +1047,12 @@
       // built-in CSS that sets the identity color & icon uses classes, not
       // attributes.
       if (tab.userContextId) {
-        let idColor = ContextualIdentityService.getPublicIdentityFromId(tab.userContextId)?.color;
-        row.className = idColor ? `all-tabs-item identity-color-${idColor}` : "all-tabs-item";
+        let idColor = ContextualIdentityService.getPublicIdentityFromId(
+          tab.userContextId
+        )?.color;
+        row.className = idColor
+          ? `all-tabs-item identity-color-${idColor}`
+          : "all-tabs-item";
         row.setAttribute("usercontextid", tab.userContextId);
       } else {
         row.className = "all-tabs-item";
@@ -1013,7 +1077,12 @@
         soundplaying: tab.soundPlaying,
         "activemedia-blocked": tab.activeMediaBlocked,
         pictureinpicture: tab.pictureinpicture,
-        hidden: !(tab.muted || tab.soundPlaying || tab.activeMediaBlocked || tab.pictureinpicture),
+        hidden: !(
+          tab.muted ||
+          tab.soundPlaying ||
+          tab.activeMediaBlocked ||
+          tab.pictureinpicture
+        ),
       });
     }
     /**
@@ -1129,10 +1198,12 @@
     _onTabStopFocus(e) {
       let walker = this._horizontalWalker;
       let oldFocus = e.relatedTarget;
-      let isButton = node => node.tagName == "button" || node.tagName == "toolbarbutton";
+      let isButton = node =>
+        node.tagName == "button" || node.tagName == "toolbarbutton";
       if (oldFocus) {
         this._isFocusMovingBackward =
-          oldFocus.compareDocumentPosition(e.target) & Node.DOCUMENT_POSITION_PRECEDING;
+          oldFocus.compareDocumentPosition(e.target) &
+          Node.DOCUMENT_POSITION_PRECEDING;
         if (this._isFocusMovingBackward && oldFocus && isButton(oldFocus)) {
           document.commandDispatcher.rewindFocus();
           return;
@@ -1151,14 +1222,26 @@
           let earlierVisibleStopIndex = allStops.indexOf(e.target) - 1;
           while (earlierVisibleStopIndex >= 0) {
             let stop = allStops[earlierVisibleStopIndex];
-            let stopContainer = this.pane.contains(stop) ? this.pane : stop.closest("toolbar");
-            if (window.windowUtils?.getBoundsWithoutFlushing(stopContainer).height > 0) break;
+            let stopContainer = this.pane.contains(stop)
+              ? this.pane
+              : stop.closest("toolbar");
+            if (
+              window.windowUtils?.getBoundsWithoutFlushing(stopContainer)
+                .height > 0
+            ) {
+              break;
+            }
             earlierVisibleStopIndex--;
           }
-          if (earlierVisibleStopIndex == -1) this._isFocusMovingBackward = false;
+          if (earlierVisibleStopIndex == -1) {
+            this._isFocusMovingBackward = false;
+          }
         }
-        if (this._isFocusMovingBackward) document.commandDispatcher.rewindFocus();
-        else document.commandDispatcher.advanceFocus();
+        if (this._isFocusMovingBackward) {
+          document.commandDispatcher.rewindFocus();
+        } else {
+          document.commandDispatcher.advanceFocus();
+        }
         return;
       }
       this._focusButton(button);
@@ -1220,15 +1303,20 @@
           gBrowser.lastMultiSelectedTab = tab;
         }
       } else {
-        if (!tab.selected && tab.multiselected) gBrowser.lockClearMultiSelectionOnce();
+        if (!tab.selected && tab.multiselected) {
+          gBrowser.lockClearMultiSelectionOnce();
+        }
         if (
           !e.shiftKey &&
           !accelKey &&
           !e.target.classList.contains("all-tabs-secondary-button") &&
           tab !== gBrowser.selectedTab
         ) {
-          if (tab.getAttribute("pending") || tab.getAttribute("busy")) tab.noCanvas = true;
-          else delete tab.noCanvas;
+          if (tab.getAttribute("pending") || tab.getAttribute("busy")) {
+            tab.noCanvas = true;
+          } else {
+            delete tab.noCanvas;
+          }
           if (gBrowser.selectedTab != tab) gBrowser.selectedTab = tab;
           else gBrowser.tabContainer._handleTabSelect();
         }
@@ -1286,10 +1374,20 @@
       this.hoverOutTimer = setTimeout(() => {
         this.hoverOutQueued = false;
         if (this.pane.matches(":hover, :focus-within")) return;
-        if (e.type === "popuphidden" && Services.focus.activeWindow === window) {
+        if (
+          e.type === "popuphidden" &&
+          Services.focus.activeWindow === window
+        ) {
           let rect = this._mouseTargetRect;
           let { _x, _y } = MousePosTracker;
-          if (_x >= rect.left && _x <= rect.right && _y >= rect.top && _y <= rect.bottom) return;
+          if (
+            _x >= rect.left &&
+            _x <= rect.right &&
+            _y >= rect.top &&
+            _y <= rect.bottom
+          ) {
+            return;
+          }
         }
         if (this._noExpand) return this.pane.removeAttribute("expanded");
         // again, don't collapse the pane yet if the mouse left because a
@@ -1297,9 +1395,13 @@
         // closed before collapsing the pane.
         let { _openMenu } = this;
         if (_openMenu) {
-          _openMenu.addEventListener("popuphidden", e => this._onMouseLeave(e, 0), {
-            once: true,
-          });
+          _openMenu.addEventListener(
+            "popuphidden",
+            e => this._onMouseLeave(e, 0),
+            {
+              once: true,
+            }
+          );
           return;
         }
         this.pane.removeAttribute("expanded");
@@ -1363,7 +1465,9 @@
       let row = e.target;
       if (!tab || gBrowser.tabContainer._isCustomizing) return;
       let selectedTabs = gBrowser.selectedTabs;
-      let otherSelectedTabs = selectedTabs.filter(selectedTab => selectedTab != tab);
+      let otherSelectedTabs = selectedTabs.filter(
+        selectedTab => selectedTab != tab
+      );
       let dataTransferOrderedTabs = [tab].concat(otherSelectedTabs);
       let dt = e.dataTransfer;
       for (let i = 0; i < dataTransferOrderedTabs.length; i++) {
@@ -1384,7 +1488,10 @@
         let insertAtPos = draggedTabPos - 1;
         for (let i = tabIndex - 1; i > -1; i--) {
           insertAtPos = newIndex(selectedTabs[i], insertAtPos);
-          if (insertAtPos && !selectedTabs[i].nextElementSibling.multiselected) {
+          if (
+            insertAtPos &&
+            !selectedTabs[i].nextElementSibling.multiselected
+          ) {
             gBrowser.moveTabTo(selectedTabs[i], insertAtPos);
           }
         }
@@ -1392,13 +1499,19 @@
         insertAtPos = draggedTabPos + 1;
         for (let i = tabIndex + 1; i < selectedTabs.length; i++) {
           insertAtPos = newIndex(selectedTabs[i], insertAtPos);
-          if (insertAtPos && !selectedTabs[i].previousElementSibling.multiselected) {
+          if (
+            insertAtPos &&
+            !selectedTabs[i].previousElementSibling.multiselected
+          ) {
             gBrowser.moveTabTo(selectedTabs[i], insertAtPos);
           }
         }
       }
       // tab preview
-      if (!tab.noCanvas && (AppConstants.platform == "win" || AppConstants.platform == "macosx")) {
+      if (
+        !tab.noCanvas &&
+        (AppConstants.platform == "win" || AppConstants.platform == "macosx")
+      ) {
         delete tab.noCanvas;
         let scale = window.devicePixelRatio;
         let canvas = this._dndCanvas;
@@ -1418,10 +1531,13 @@
         let browser = tab.linkedBrowser;
         if (gMultiProcessBrowser) {
           let context = canvas.getContext("2d");
-          context.fillStyle = getComputedStyle(this.pane).getPropertyValue("background-color");
+          context.fillStyle = getComputedStyle(this.pane).getPropertyValue(
+            "background-color"
+          );
           context.fillRect(0, 0, canvas.width, canvas.height);
 
-          let captureListener = () => dt.updateDragImage(canvas, dragImageOffset, dragImageOffset);
+          let captureListener = () =>
+            dt.updateDragImage(canvas, dragImageOffset, dragImageOffset);
           PageThumbs.captureToCanvas(browser, canvas).then(captureListener);
         } else {
           PageThumbs.captureToCanvas(browser, canvas);
@@ -1430,7 +1546,9 @@
         dt.setDragImage(toDrag, dragImageOffset, dragImageOffset);
       }
       tab._dragData = {
-        movingTabs: (tab.multiselected ? gBrowser.selectedTabs : [tab]).filter(this._filterFn),
+        movingTabs: (tab.multiselected ? gBrowser.selectedTabs : [tab]).filter(
+          this._filterFn
+        ),
       };
       e.stopPropagation();
     }
@@ -1445,15 +1563,25 @@
       let rect = this._arrowscrollbox.getBoundingClientRect();
       if (row) {
         let targetRect = row.getBoundingClientRect();
-        let increment = (targetRect.height || this._arrowscrollbox.scrollIncrement) * 3;
-        if (e.clientY - rect.top < targetRect.height) pixelsToScroll = increment * -1;
-        else if (rect.bottom - e.clientY < targetRect.height) pixelsToScroll = increment;
-        if (pixelsToScroll) this._arrowscrollbox.scrollByPixels(pixelsToScroll, false);
+        let increment =
+          (targetRect.height || this._arrowscrollbox.scrollIncrement) * 3;
+        if (e.clientY - rect.top < targetRect.height) {
+          pixelsToScroll = increment * -1;
+        } else if (rect.bottom - e.clientY < targetRect.height) {
+          pixelsToScroll = increment;
+        }
+        if (pixelsToScroll) {
+          this._arrowscrollbox.scrollByPixels(pixelsToScroll, false);
+        }
       }
       this._arrowscrollbox
         .querySelectorAll("[dragpos]")
         .forEach(item => item.removeAttribute("dragpos"));
-      if (!dt.types.includes("all-tabs-item") || !row || row.tab.multiselected) {
+      if (
+        !dt.types.includes("all-tabs-item") ||
+        !row ||
+        row.tab.multiselected
+      ) {
         dt.mozCursor = "auto";
         return;
       }
@@ -1465,7 +1593,9 @@
       // 1) whether the drop target is above or below the dragged tab, and 2)
       // whether the order of the tab list is reversed.
       let getPosition = () => {
-        return this._reversed ? row.tab._tPos < draggedTab._tPos : row.tab._tPos > draggedTab._tPos;
+        return this._reversed
+          ? row.tab._tPos < draggedTab._tPos
+          : row.tab._tPos > draggedTab._tPos;
       };
       let position = getPosition() ? "after" : "before";
       row.setAttribute("dragpos", position);
@@ -1495,7 +1625,12 @@
       let draggedTab = dt.mozGetDataAt("all-tabs-item", 0);
       let movingTabs = draggedTab._dragData.movingTabs;
 
-      if (!movingTabs || dt.mozUserCancelled || dt.dropEffect === "none" || tabBar._isCustomizing) {
+      if (
+        !movingTabs ||
+        dt.mozUserCancelled ||
+        dt.dropEffect === "none" ||
+        tabBar._isCustomizing
+      ) {
         delete draggedTab._dragData;
         return;
       }
@@ -1566,7 +1701,9 @@
     // when the vertical-tabs-tooltip is about to be shown.
     createTabTooltip(e) {
       e.stopPropagation();
-      let row = e.target.triggerNode ? this._findRow(e.target.triggerNode) : null;
+      let row = e.target.triggerNode
+        ? this._findRow(e.target.triggerNode)
+        : null;
       if (!row) return e.preventDefault();
       let { tab } = row;
       if (!tab) return e.preventDefault();
@@ -1576,7 +1713,10 @@
       let stringWithShortcut = (stringId, keyElemId, pluralCount) => {
         let keyElem = document.getElementById(keyElemId);
         let shortcut = ShortcutUtils.prettifyShortcut(keyElem);
-        return PluralForm.get(pluralCount, gTabBrowserBundle.GetStringFromName(stringId))
+        return PluralForm.get(
+          pluralCount,
+          gTabBrowserBundle.GetStringFromName(stringId)
+        )
           .replace("%S", shortcut)
           .replace("#1", pluralCount);
       };
@@ -1587,7 +1727,9 @@
       let { linkedBrowser } = tab;
       const selectedTabs = gBrowser.selectedTabs;
       const contextTabInSelection = selectedTabs.includes(tab);
-      const affectedTabsLength = contextTabInSelection ? selectedTabs.length : 1;
+      const affectedTabsLength = contextTabInSelection
+        ? selectedTabs.length
+        : 1;
       // a bunch of localization
       if (row.closeButton.matches(":hover")) {
         let shortcut = ShortcutUtils.prettifyShortcut(window.key_close);
@@ -1606,7 +1748,11 @@
           stringID = linkedBrowser.audioMuted
             ? "tabs.unmuteAudio2.tooltip"
             : "tabs.muteAudio2.tooltip";
-          label = stringWithShortcut(stringID, "key_toggleMute", affectedTabsLength);
+          label = stringWithShortcut(
+            stringID,
+            "key_toggleMute",
+            affectedTabsLength
+          );
         } else {
           if (tab.hasAttribute("activemedia-blocked")) {
             stringID = "tabs.unblockAudio2.tooltip";
@@ -1624,7 +1770,12 @@
       } else {
         label = tab._fullLabel || tab.getAttribute("label");
         // show the tab's process ID in the tooltip?
-        if (prefSvc.getBoolPref("browser.tabs.tooltipsShowPidAndActiveness", false)) {
+        if (
+          prefSvc.getBoolPref(
+            "browser.tabs.tooltipsShowPidAndActiveness",
+            false
+          )
+        ) {
           if (linkedBrowser) {
             let [contentPid, ...framePids] = this.E10SUtils.getBrowserPids(
               linkedBrowser,
@@ -1632,7 +1783,9 @@
             );
             if (contentPid) {
               if (framePids && framePids.length) {
-                label += ` (pids ${contentPid}, ${framePids.sort().join(", ")})`;
+                label += ` (pids ${contentPid}, ${framePids
+                  .sort()
+                  .join(", ")})`;
               } else {
                 label += ` (pid ${contentPid})`;
               }
@@ -1642,18 +1795,25 @@
         }
         // add the container name to the tooltip?
         if (tab.userContextId) {
-          label = gTabBrowserBundle.formatStringFromName("tabs.containers.tooltip", [
-            label,
-            ContextualIdentityService.getUserContextLabel(tab.userContextId),
-          ]);
+          label = gTabBrowserBundle.formatStringFromName(
+            "tabs.containers.tooltip",
+            [
+              label,
+              ContextualIdentityService.getUserContextLabel(tab.userContextId),
+            ]
+          );
         }
         // if hovering the sound overlay, show the current media state of the
         // tab, after the tab title. "playing" or "muted" or "media blocked"
         if (row.soundOverlay.matches(":hover") && this._fluentStrings) {
           let stateString;
-          if (tab.hasAttribute("activemedia-blocked")) stateString = "blockedString";
-          else if (linkedBrowser.audioMuted) stateString = "mutedString";
-          else stateString = "playingString";
+          if (tab.hasAttribute("activemedia-blocked")) {
+            stateString = "blockedString";
+          } else if (linkedBrowser.audioMuted) {
+            stateString = "mutedString";
+          } else {
+            stateString = "playingString";
+          }
           label += ` (${this._fluentStrings[stateString].toLowerCase()})`;
         }
       }
@@ -1665,22 +1825,28 @@
       let title = e.target.querySelector(".places-tooltip-title");
       title.textContent = label;
       if (tab.getAttribute("customizemode") === "true") {
-        e.target.querySelector(".places-tooltip-box").setAttribute("desc-hidden", "true");
+        e.target
+          .querySelector(".places-tooltip-box")
+          .setAttribute("desc-hidden", "true");
         return;
       }
       let url = e.target.querySelector(".places-tooltip-uri");
       url.value = linkedBrowser?.currentURI?.spec.replace(/^https:\/\//, "");
-      e.target.querySelector(".places-tooltip-box").removeAttribute("desc-hidden");
+      e.target
+        .querySelector(".places-tooltip-box")
+        .removeAttribute("desc-hidden");
       // show a lock icon to show tab security/encryption
       let icon = e.target.querySelector("#places-tooltip-insecure-icon");
-      let pending = tab.hasAttribute("pending") || !linkedBrowser.browsingContext;
+      let pending =
+        tab.hasAttribute("pending") || !linkedBrowser.browsingContext;
       let docURI = pending
         ? linkedBrowser?.currentURI
         : linkedBrowser?.documentURI || linkedBrowser?.currentURI;
       if (docURI) {
-        let homePage = new RegExp(`(${BROWSER_NEW_TAB_URL}|${HomePage.get(window)})`, "i").test(
-          docURI.spec
-        );
+        let homePage = new RegExp(
+          `(${BROWSER_NEW_TAB_URL}|${HomePage.get(window)})`,
+          "i"
+        ).test(docURI.spec);
         if (homePage) {
           icon.setAttribute("type", "home-page");
           icon.hidden = false;
@@ -1695,7 +1861,10 @@
             return;
           case "about":
             let pathQueryRef = docURI?.pathQueryRef;
-            if (pathQueryRef && /^(neterror|certerror|httpsonlyerror)/.test(pathQueryRef)) {
+            if (
+              pathQueryRef &&
+              /^(neterror|certerror|httpsonlyerror)/.test(pathQueryRef)
+            ) {
               icon.setAttribute("type", "error-page");
               icon.hidden = false;
               return;
@@ -1746,14 +1915,19 @@
     // and respond accordingly.
     _handlePrivacyChange() {
       let containersEnabled =
-        prefSvc.getBoolPref(userContextPref) && !PrivateBrowsingUtils.isWindowPrivate(window);
-      const newTabLeftClickOpensContainersMenu = prefSvc.getBoolPref(containerOnClickPref);
+        prefSvc.getBoolPref(userContextPref) &&
+        !PrivateBrowsingUtils.isWindowPrivate(window);
+      const newTabLeftClickOpensContainersMenu = prefSvc.getBoolPref(
+        containerOnClickPref
+      );
       let parent = this._newTabButton;
       parent.removeAttribute("type");
       if (parent.menupopup) parent.menupopup.remove();
       if (containersEnabled) {
         parent.setAttribute("context", "new-tab-button-popup");
-        let popup = document.getElementById("new-tab-button-popup").cloneNode(true);
+        let popup = document
+          .getElementById("new-tab-button-popup")
+          .cloneNode(true);
         popup.removeAttribute("id");
         popup.className = "new-tab-popup";
         popup.setAttribute("position", "after_end");
@@ -2271,7 +2445,9 @@
       let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
         Ci.nsIStyleSheetService
       );
-      let uri = makeURI("data:text/css;charset=UTF=8," + encodeURIComponent(css));
+      let uri = makeURI(
+        "data:text/css;charset=UTF=8," + encodeURIComponent(css)
+      );
       if (sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) return; // avoid loading duplicate sheets on subsequent window launches.
       sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
     }
@@ -2301,11 +2477,21 @@
       let enumerator = Services.wm.getEnumerator("navigator:browser");
       if (!enumerator.hasMoreElements()) {
         let xulStore = Services.xulStore;
-        if (this.pane.hasAttribute("checked")) xulStore.persist(this.pane, "checked");
-        else xulStore.removeValue(document.documentURI, "vertical-tabs-pane", "checked");
+        if (this.pane.hasAttribute("checked")) {
+          xulStore.persist(this.pane, "checked");
+        } else {
+          xulStore.removeValue(
+            document.documentURI,
+            "vertical-tabs-pane",
+            "checked"
+          );
+        }
         xulStore.persist(this.pane, "width");
         prefSvc.setBoolPref(closedPref, this.pane.hidden || false);
-        prefSvc.setBoolPref(unpinnedPref, this.pane.getAttribute("unpinned") || false);
+        prefSvc.setBoolPref(
+          unpinnedPref,
+          this.pane.getAttribute("unpinned") || false
+        );
         prefSvc.setIntPref(widthPref, this.pane.width || 350);
       }
     }
@@ -2369,7 +2555,9 @@
     // if you create a widget in the first window, it will automatically be
     // created in subsequent videos. so we stop the script from re-registering
     // it on every subsequent window load.
-    if (CustomizableUI.getPlacementOfWidget("vertical-tabs-button", true)) return;
+    if (CustomizableUI.getPlacementOfWidget("vertical-tabs-button", true)) {
+      return;
+    }
     CustomizableUI.createWidget({
       id: "vertical-tabs-button",
       type: "button",
@@ -2380,7 +2568,10 @@
       tooltiptext: config.l10n["Button tooltip"],
       localized: false,
       onCommand(e) {
-        Services.obs.notifyObservers(e.target.ownerGlobal, "vertical-tabs-pane-toggle");
+        Services.obs.notifyObservers(
+          e.target.ownerGlobal,
+          "vertical-tabs-pane-toggle"
+        );
       },
       onCreated(node) {
         // an <observes> element is how we get the button to appear "checked"
@@ -2390,18 +2581,20 @@
         let doc = node.ownerDocument;
         node.appendChild(
           create(doc, "observes", {
-            "element": "vertical-tabs-pane",
-            "attribute": "checked",
+            element: "vertical-tabs-pane",
+            attribute: "checked",
           })
         );
         node.appendChild(
           create(doc, "observes", {
-            "element": "vertical-tabs-pane",
-            "attribute": "positionstart",
+            element: "vertical-tabs-pane",
+            attribute: "positionstart",
           })
         );
         if ("key_toggleVerticalTabs" in window) {
-          node.tooltipText += ` (${ShortcutUtils.prettifyShortcut(window.key_toggleVerticalTabs)})`;
+          node.tooltipText += ` (${ShortcutUtils.prettifyShortcut(
+            window.key_toggleVerticalTabs
+          )})`;
         }
       },
     });
@@ -2415,7 +2608,8 @@
         modifiers: config.hotkey.modifiers,
         key: config.hotkey.key,
       },
-      (win, key) => Services.obs.notifyObservers(win, "vertical-tabs-pane-toggle")
+      (win, key) =>
+        Services.obs.notifyObservers(win, "vertical-tabs-pane-toggle")
     );
   }
 
@@ -2475,6 +2669,9 @@
         init();
       }
     };
-    Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
+    Services.obs.addObserver(
+      delayedListener,
+      "browser-delayed-startup-finished"
+    );
   }
 })();

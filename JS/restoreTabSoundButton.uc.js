@@ -48,9 +48,13 @@
   #places-tooltip-insecure-icon[hidden] {
     display: none;
   }`;
-  let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(Ci.nsIStyleSheetService);
+  let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
+    Ci.nsIStyleSheetService
+  );
   let uri = makeURI("data:text/css;charset=UTF=8," + encodeURIComponent(css));
-  if (!sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
+  if (!sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) {
+    sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
+  }
   /* necessary DOM:
     <tooltip id="tabbrowser-tab-tooltip"
             class="places-tooltip"
@@ -82,9 +86,10 @@
       ? linkedBrowser?.currentURI
       : linkedBrowser?.documentURI || linkedBrowser?.currentURI;
     if (docURI) {
-      let homePage = new RegExp(`(${BROWSER_NEW_TAB_URL}|${HomePage.get(window)})`, "i").test(
-        docURI.spec
-      );
+      let homePage = new RegExp(
+        `(${BROWSER_NEW_TAB_URL}|${HomePage.get(window)})`,
+        "i"
+      ).test(docURI.spec);
       // if the page is the user's homepage or new tab page, reflect that in the icon.
       if (homePage) {
         icon.setAttribute("type", "home-page");
@@ -102,7 +107,10 @@
         // about: pages
         case "about":
           let pathQueryRef = docURI?.pathQueryRef;
-          if (pathQueryRef && /^(neterror|certerror|httpsonlyerror)/.test(pathQueryRef)) {
+          if (
+            pathQueryRef &&
+            /^(neterror|certerror|httpsonlyerror)/.test(pathQueryRef)
+          ) {
             icon.setAttribute("type", "error-page");
             icon.hidden = false;
             return;
@@ -181,7 +189,10 @@
     let stringWithShortcut = (stringId, keyElemId, pluralCount) => {
       let keyElem = document.getElementById(keyElemId);
       let shortcut = ShortcutUtils.prettifyShortcut(keyElem);
-      return PluralForm.get(pluralCount, gTabBrowserBundle.GetStringFromName(stringId))
+      return PluralForm.get(
+        pluralCount,
+        gTabBrowserBundle.GetStringFromName(stringId)
+      )
         .replace("%S", shortcut)
         .replace("#1", pluralCount);
     };
@@ -193,7 +204,9 @@
     const affectedTabsLength = contextTabInSelection ? selectedTabs.length : 1;
     if (tab.mOverCloseButton) {
       let rect = windowUtils.getBoundsWithoutFlushing(tab.closeButton);
-      let shortcut = ShortcutUtils.prettifyShortcut(document.getElementById("key_close"));
+      let shortcut = ShortcutUtils.prettifyShortcut(
+        document.getElementById("key_close")
+      );
       label = PluralForm.get(
         affectedTabsLength,
         gTabBrowserBundle.GetStringFromName("tabs.closeTabs.tooltip")
@@ -211,7 +224,11 @@
         stringID = tab.linkedBrowser.audioMuted
           ? "tabs.unmuteAudio2.tooltip"
           : "tabs.muteAudio2.tooltip";
-        label = stringWithShortcut(stringID, "key_toggleMute", affectedTabsLength);
+        label = stringWithShortcut(
+          stringID,
+          "key_toggleMute",
+          affectedTabsLength
+        );
       } else {
         if (tab.hasAttribute("activemedia-blocked")) {
           stringID = "tabs.unblockAudio2.tooltip";
@@ -237,12 +254,22 @@
     let title = e.target.querySelector(".places-tooltip-title");
     title.textContent = label;
     if (tab.getAttribute("customizemode") === "true") {
-      e.target.querySelector(".places-tooltip-box").setAttribute("desc-hidden", "true");
+      e.target
+        .querySelector(".places-tooltip-box")
+        .setAttribute("desc-hidden", "true");
     } else {
       let url = e.target.querySelector(".places-tooltip-uri");
-      url.value = tab.linkedBrowser?.currentURI?.spec.replace(/^https:\/\//, "");
-      setIdentityIcon(e.target.querySelector("#places-tooltip-insecure-icon"), tab);
-      e.target.querySelector(".places-tooltip-box").removeAttribute("desc-hidden");
+      url.value = tab.linkedBrowser?.currentURI?.spec.replace(
+        /^https:\/\//,
+        ""
+      );
+      setIdentityIcon(
+        e.target.querySelector("#places-tooltip-insecure-icon"),
+        tab
+      );
+      e.target
+        .querySelector(".places-tooltip-box")
+        .removeAttribute("desc-hidden");
     }
   };
 })();

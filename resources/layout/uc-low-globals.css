@@ -19,15 +19,12 @@ tooltip {
   --tooltip-border-radius: 3px;
   --tooltip-border-color: var(--uc-menu-border-color);
   --tooltip-box-shadow: 0 0 5px hsla(0, 0%, 0%, 0.2);
-  --transparent-img-background: center/16px repeat hsla(0, 0%, 80%)
-    url(chrome://userchrome/content/checker.svg);
-  --transparent-img-background-context: center/16px repeat
-    url(chrome://userchrome/content/checker-context.svg);
+  --transparent-img-background: center/16px repeat hsla(0, 0%, 80%) url(chrome://userchrome/content/checker.svg);
+  --transparent-img-background-context: center/16px repeat url(chrome://userchrome/content/checker-context.svg);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --transparent-img-background: center/16px repeat hsla(0, 0%, 20%)
-      url(chrome://userchrome/content/checker-dark.svg);
+    --transparent-img-background: center/16px repeat hsla(0, 0%, 20%) url(chrome://userchrome/content/checker-dark.svg);
   }
 }

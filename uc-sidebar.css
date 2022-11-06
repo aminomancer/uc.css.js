@@ -48,8 +48,7 @@ for use with tooltipStyler.uc.js - won't do anything without that script. */
   font-size: 1.2em !important;
 }
 
-#sidebar-box[content-style]:is([sidebarcommand="viewBookmarksSidebar"], [sidebarcommand="viewHistorySidebar"], [sidebarcommand="viewTabsSidebar"])
-  #sidebar-header {
+#sidebar-box[content-style]:is([sidebarcommand="viewBookmarksSidebar"], [sidebarcommand="viewHistorySidebar"], [sidebarcommand="viewTabsSidebar"]) #sidebar-header {
   padding-bottom: 3px !important;
 }
 
@@ -106,16 +105,14 @@ for use with tooltipStyler.uc.js - won't do anything without that script. */
   min-height: 25px !important;
   margin: 0 !important;
   outline: 0 solid transparent !important;
-  transition: var(--textbox-outline-transition-duration, 100ms) outline ease-in,
-    var(--findbar-textbox-bg-transition-duration, 200ms) background-color !important;
+  transition: var(--textbox-outline-transition-duration, 100ms) outline ease-in, var(--findbar-textbox-bg-transition-duration, 200ms) background-color !important;
 }
 
 /* animate the purple focus outline & background */
 :is(#sidebar-search-container, .sidebar-search-container) search-textbox:focus {
   background-color: var(--search-box-focus) !important;
   outline: var(--global-focus-outline) !important;
-  transition-duration: calc(var(--textbox-outline-transition-duration, 100ms) * 0.6),
-    var(--findbar-textbox-bg-transition-duration, 200ms) !important;
+  transition-duration: calc(var(--textbox-outline-transition-duration, 100ms) * 0.6), var(--findbar-textbox-bg-transition-duration, 200ms) !important;
   transition-timing-function: ease-out, linear !important;
 }
 
@@ -295,11 +292,7 @@ for use with tooltipStyler.uc.js - won't do anything without that script. */
 
 .sidebar-panel .sidebar-placesTreechildren::-moz-tree-cell(cutting, selected),
 .sidebar-panel .sidebar-placesTreechildren::-moz-tree-cell(cutting, hover) {
-  background-color: color-mix(
-    in srgb,
-    transparent 50%,
-    var(--places-cell-hover-bgcolor)
-  ) !important;
+  background-color: color-mix(in srgb, transparent 50%, var(--places-cell-hover-bgcolor)) !important;
 }
 
 .sidebar-placesTreechildren::-moz-tree-cell(primary, dropOn) {
@@ -351,11 +344,7 @@ for use with tooltipStyler.uc.js - won't do anything without that script. */
 .sidebar-placesTreechildren::-moz-tree-separator(hover),
 .sidebar-placesTreechildren:not(:-moz-window-inactive)::-moz-tree-separator(selected),
 .sidebar-placesTreechildren:not(:-moz-window-inactive)::-moz-tree-separator(hover, selected) {
-  border-color: color-mix(
-    in srgb,
-    var(--panel-shortcut-color) 30%,
-    var(--panel-separator-color)
-  ) !important;
+  border-color: color-mix(in srgb, var(--panel-shortcut-color) 30%, var(--panel-separator-color)) !important;
 }
 
 .sidebar-placesTreechildren:not(:-moz-window-inactive)::-moz-tree-separator(cutting) {
@@ -530,10 +519,7 @@ trees so it is relatively safe to collapse them. */
   }
 
   :-moz-window-inactive::selection {
-    background-color: var(
-      --ui-selection-bgcolor-disabled,
-      text-select-disabled-background
-    ) !important;
+    background-color: var(--ui-selection-bgcolor-disabled, text-select-disabled-background) !important;
   }
 }
 
@@ -567,8 +553,7 @@ trees so it is relatively safe to collapse them. */
 
 /* since we get rid of the focus ring, we'll highlight focused buttons
 with background-color, as we do on the toolbar */
-#vertical-tabs-buttons-row
-  .subviewbutton:is(:focus-visible, [checked="true"]):not([disabled], [open], :hover, :active) {
+#vertical-tabs-buttons-row .subviewbutton:is(:focus-visible, [checked="true"]):not([disabled], [open], :hover, :active) {
   background-color: var(--toolbarbutton-checked-background) !important;
   transition: none !important;
 }

@@ -18,11 +18,7 @@
     --arrowpanel-dimmed-further: color-mix(in srgb, currentColor 25%, transparent) !important;
     --arrowpanel-dimmed-even-further: color-mix(in srgb, currentColor 30%, transparent) !important;
     --organizer-color: var(--plaintext-color) !important;
-    --organizer-deemphasized-color: color-mix(
-      in srgb,
-      var(--plaintext-color) 75%,
-      transparent
-    ) !important;
+    --organizer-deemphasized-color: color-mix(in srgb, var(--plaintext-color) 75%, transparent) !important;
     --organizer-toolbar-background: var(--in-content-button-highlight-dark) !important;
     --organizer-pane-background: var(--in-content-box-bg-dark) !important;
     --organizer-content-background: var(--in-content-bg-dark) !important;
@@ -35,8 +31,7 @@
     --organizer-toolbar-field-background-focused: var(--in-content-bg-dark) !important;
     --organizer-separator-color: var(--in-content-separator-dim) !important;
     --organizer-toolbar-field-focus-border-color: var(--organizer-outline-color) !important;
-    --organizer-toolbar-field-focus-box-shadow: 0 0 0 0.5px
-      var(--organizer-toolbar-field-focus-border-color) inset !important;
+    --organizer-toolbar-field-focus-box-shadow: 0 0 0 0.5px var(--organizer-toolbar-field-focus-border-color) inset !important;
     --organizer-pane-field-border-color: var(--in-content-separator-dim) !important;
     --download-button-hover-bg: hsla(230, 8%, 80%, 0.12);
   }

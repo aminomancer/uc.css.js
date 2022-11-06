@@ -23,7 +23,8 @@
       width = el.clientWidth,
       margin = parseFloat(style.marginLeft) + parseFloat(style.marginRight),
       padding = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight),
-      border = parseFloat(style.borderLeftWidth) + parseFloat(style.borderRightWidth);
+      border =
+        parseFloat(style.borderLeftWidth) + parseFloat(style.borderRightWidth);
     return width + margin + padding + border;
   }
   function setUpScroll(oneOffs, mask = false) {
@@ -120,7 +121,10 @@
     oneOffs.on_SelectedOneOffButtonChanged = function() {
       oneOffs.scrollToButton(oneOffs.selectedButton);
     };
-    oneOffs.addEventListener("SelectedOneOffButtonChanged", oneOffs.on_SelectedOneOffButtonChanged);
+    oneOffs.addEventListener(
+      "SelectedOneOffButtonChanged",
+      oneOffs.on_SelectedOneOffButtonChanged
+    );
   }
 
   function init() {
@@ -131,7 +135,10 @@
       .getElementById("PopupSearchAutoComplete")
       .addEventListener(
         "popupshowing",
-        e => setUpScroll(document.getElementById("PopupSearchAutoComplete").oneOffButtons),
+        e =>
+          setUpScroll(
+            document.getElementById("PopupSearchAutoComplete").oneOffButtons
+          ),
         { once: true }
       );
   }
@@ -145,6 +152,9 @@
         init();
       }
     };
-    Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
+    Services.obs.addObserver(
+      delayedListener,
+      "browser-delayed-startup-finished"
+    );
   }
 })();

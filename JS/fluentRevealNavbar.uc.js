@@ -39,7 +39,9 @@
 
     // get all the toolbar buttons in the navbar, in iterable form
     get toolbarButtons() {
-      let buttons = Array.from(gNavToolbox.querySelectorAll(".toolbarbutton-1"));
+      let buttons = Array.from(
+        gNavToolbox.querySelectorAll(".toolbarbutton-1")
+      );
       if (this._options.includeBookmarks) {
         buttons = buttons.concat(
           Array.from(this.placesToolbarItems.querySelectorAll(".bookmark-item"))
@@ -51,7 +53,9 @@
     get placesToolbarItems() {
       return (
         this._placesToolbarItems ||
-        (this._placesToolbarItems = document.getElementById("PlacesToolbarItems"))
+        (this._placesToolbarItems = document.getElementById(
+          "PlacesToolbarItems"
+        ))
       );
     }
 
@@ -91,9 +95,12 @@
      *                         static options at the top of the script)
      */
     applyEffect(el, options = this._options) {
-      let { clickEffect } = options.clickEffect === undefined ? this._options : options;
-      let { gradientSize } = options.gradientSize === undefined ? this._options : options;
-      let { lightColor } = options.lightColor === undefined ? this._options : options;
+      let { clickEffect } =
+        options.clickEffect === undefined ? this._options : options;
+      let { gradientSize } =
+        options.gradientSize === undefined ? this._options : options;
+      let { lightColor } =
+        options.lightColor === undefined ? this._options : options;
 
       Object.assign(this._options, {
         clickEffect,
@@ -127,10 +134,12 @@
      */
     generateToolbarButtonEffect(el, e, click = false) {
       let { gradientSize, lightColor } = this._options;
-      let isBookmark = el.id === "PlacesChevron" || el.classList.contains("bookmark-item");
+      let isBookmark =
+        el.id === "PlacesChevron" || el.classList.contains("bookmark-item");
       let area = isBookmark
         ? el
-        : el.querySelector(".toolbarbutton-badge-stack") || el.querySelector(".toolbarbutton-icon");
+        : el.querySelector(".toolbarbutton-badge-stack") ||
+          el.querySelector(".toolbarbutton-icon");
       let areaStyle = getComputedStyle(area);
       if (
         areaStyle.display == "none" ||
@@ -141,14 +150,29 @@
         area = el.querySelector(".toolbarbutton-text");
       }
 
-      if (el.disabled || areaStyle.pointerEvents == "none") return this.clearEffect(area);
+      if (el.disabled || areaStyle.pointerEvents == "none") {
+        return this.clearEffect(area);
+      }
 
-      let x = (e.pageX || MousePosTracker._x) - this.getOffset(area).left - window.scrollX;
-      let y = (e.pageY || MousePosTracker._y) - this.getOffset(area).top - window.scrollY;
+      let x =
+        (e.pageX || MousePosTracker._x) -
+        this.getOffset(area).left -
+        window.scrollX;
+      let y =
+        (e.pageY || MousePosTracker._y) -
+        this.getOffset(area).top -
+        window.scrollY;
 
       let cssLightEffect = `radial-gradient(circle ${gradientSize}px at ${x}px ${y}px, ${lightColor}, rgba(255,255,255,0)), radial-gradient(circle ${70}px at ${x}px ${y}px, rgba(255,255,255,0), ${lightColor}, rgba(255,255,255,0), rgba(255,255,255,0))`;
 
-      this.drawEffect(area, x, y, lightColor, gradientSize, click ? cssLightEffect : null);
+      this.drawEffect(
+        area,
+        x,
+        y,
+        lightColor,
+        gradientSize,
+        click ? cssLightEffect : null
+      );
     }
 
     /**
@@ -157,7 +181,9 @@
      * @param {boolean} click (whether the left mouse button is down)
      */
     generateEffectsForAll(e, click = false) {
-      this.toolbarButtons.forEach(button => this.generateToolbarButtonEffect(button, e, click));
+      this.toolbarButtons.forEach(button =>
+        this.generateToolbarButtonEffect(button, e, click)
+      );
     }
 
     /**
@@ -226,6 +252,9 @@
         init();
       }
     };
-    Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
+    Services.obs.addObserver(
+      delayedListener,
+      "browser-delayed-startup-finished"
+    );
   }
 })();

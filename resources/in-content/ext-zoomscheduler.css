@@ -6,8 +6,7 @@
 
 /* Zoom Scheduler extension */
 
-@-moz-document regexp("^moz-extension://.*/.*")
-{
+@-moz-document regexp("^moz-extension://.*/.*") {
   html[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i],
   :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] body {
     background-color: var(--in-content-bg-darker) !important;
@@ -15,14 +14,11 @@
     color-scheme: dark !important;
   }
 
-  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
-    :is(.popup-content, #content_container) {
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] :is(.popup-content, #content_container) {
     background-color: var(--in-content-bg-dark) !important;
   }
 
-  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
-    #content_container
-    .content-body {
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] #content_container .content-body {
     color: inherit !important;
   }
 
@@ -46,39 +42,26 @@
     fill-opacity: 0.6 !important;
   }
 
-  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
-    #header_container
-    .setting
-    > a:is(:hover, :focus) {
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] #header_container .setting > a:is(:hover, :focus) {
     fill-opacity: 1 !important;
   }
 
-  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
-    #header_container
-    .setting
-    .setting-img {
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] #header_container .setting .setting-img {
     height: 16px !important;
     width: 16px !important;
     background: url(chrome://userchrome/content/settings.svg) center/contain no-repeat !important;
   }
 
-  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
-    #content_container
-    .content-header,
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] #content_container .content-header,
   :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] .form-horizontal .form-group {
     border-color: var(--in-content-separator-dim) !important;
   }
 
-  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
-    #content_container
-    .content-header
-    > p {
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] #content_container .content-header > p {
     color: inherit !important;
   }
 
-  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
-    #content_container
-    .content-footer {
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] #content_container .content-footer {
     border-top: 1px solid var(--in-content-separator-dim) !important;
     background-color: inherit !important;
   }
@@ -88,8 +71,7 @@
     border-color: var(--in-content-separator-dim) !important;
   }
 
-  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
-    :where(.btn-default, .btn-cancel) {
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] :where(.btn-default, .btn-cancel) {
     color: var(--in-content-primary-button-text-color) !important;
     background-color: var(--in-content-button-background) !important;
     border-color: var(--in-content-box-border-color) !important;
@@ -105,11 +87,8 @@
     border-color: var(--in-content-button-background-active) !important;
   }
 
-  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
-    .btn-default:is(.active, .focus, :active, :focus, :hover),
-  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
-    .open
-    > .dropdown-toggle.btn-default {
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] .btn-default:is(.active, .focus, :active, :focus, :hover),
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] .open > .dropdown-toggle.btn-default {
     background-color: var(--in-content-button-background-hover) !important;
     border-color: var(--global-focus-outline-color) !important;
   }
@@ -118,9 +97,7 @@
     color: var(--ui-text-50) !important;
   }
 
-  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
-    .btn-group.open button
-    > .drop-icon {
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] .btn-group.open button > .drop-icon {
     color: inherit !important;
   }
 
@@ -128,33 +105,24 @@
     outline: 1px auto !important;
   }
 
-  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
-    .btn:is(.disabled, [disabled]):is(:focus, :focus-visible),
-  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
-    fieldset[disabled]
-    .btn:is(:focus, :focus-visible) {
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] .btn:is(.disabled, [disabled]):is(:focus, :focus-visible),
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] fieldset[disabled] .btn:is(:focus, :focus-visible) {
     outline: none !important;
   }
 
-  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
-    :is(.btn-google-signin, .btn-workemail-signin, .btn-switch, .btn-schedule, .btn-save),
-  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
-    .dropdown-menu
-    > li
-    a:is(:hover, :focus) {
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] :is(.btn-google-signin, .btn-workemail-signin, .btn-switch, .btn-schedule, .btn-save),
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] .dropdown-menu > li a:is(:hover, :focus) {
     color: var(--in-content-primary-button-text-color) !important;
     background-color: var(--in-content-primary-button-background) !important;
     border-color: var(--in-content-primary-button-background) !important;
   }
 
-  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
-    :is(.btn-google-signin, .btn-workemail-signin, .btn-switch, .btn-schedule, .btn-save):is(:hover, :focus) {
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] :is(.btn-google-signin, .btn-workemail-signin, .btn-switch, .btn-schedule, .btn-save):is(:hover, :focus) {
     background-color: var(--in-content-primary-button-background-hover) !important;
     border-color: var(--in-content-primary-button-background-hover) !important;
   }
 
-  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
-    :is(.btn-google-signin, .btn-workemail-signin, .btn-switch, .btn-schedule, .btn-save):hover:active {
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] :is(.btn-google-signin, .btn-workemail-signin, .btn-switch, .btn-schedule, .btn-save):hover:active {
     background-color: var(--in-content-primary-button-background-active) !important;
     border-color: var(--in-content-primary-button-background-active) !important;
   }
@@ -170,19 +138,13 @@
     color: var(--ui-text-50) !important;
   }
 
-  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
-    .form-control:is([disabled], [readonly]),
-  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
-    fieldset[disabled]
-    .form-control {
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] .form-control:is([disabled], [readonly]),
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] fieldset[disabled] .form-control {
     opacity: 0.8 !important;
   }
 
-  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
-    .form-control:is([disabled], [readonly])::placeholder,
-  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
-    fieldset[disabled]
-    .form-control::placeholder {
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] .form-control:is([disabled], [readonly])::placeholder,
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] fieldset[disabled] .form-control::placeholder {
     color: var(--ui-text-40) !important;
   }
 
@@ -228,13 +190,11 @@
     color: var(--in-content-link-color) !important;
   }
 
-  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
-    a:not(.btn, [role="menuitem"]):is(:hover, :focus-visible) {
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] a:not(.btn, [role="menuitem"]):is(:hover, :focus-visible) {
     color: var(--in-content-link-color-hover) !important;
   }
 
-  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
-    a:not(.btn, [role="menuitem"]):active {
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] a:not(.btn, [role="menuitem"]):active {
     color: var(--in-content-link-color-active) !important;
   }
 
@@ -298,13 +258,8 @@
     color: var(--ui-text-80) !important;
   }
 
-  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
-    .form-horizontal
-    .form-group
-    > .control-label,
-  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
-    input:is([type="checkbox"], [type="radio"])
-    + :is(span, optext),
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] .form-horizontal .form-group > .control-label,
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] input:is([type="checkbox"], [type="radio"]) + :is(span, optext),
   :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] :is(.authentication, .jbh) {
     color: inherit !important;
   }
@@ -313,18 +268,12 @@
     color: var(--ui-text-60) !important;
   }
 
-  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
-    :is(.radio-inline, .checkbox-inline) {
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] :is(.radio-inline, .checkbox-inline) {
     cursor: inherit !important;
   }
 
-  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
-    input:is([type="radio"], [type="checkbox"]):is([disabled], .disabled)
-    + :is(span, optext),
-  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i]
-    fieldset[disabled]
-    input:is([type="radio"], [type="checkbox"])
-    + :is(span, optext) {
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] input:is([type="radio"], [type="checkbox"]):is([disabled], .disabled) + :is(span, optext),
+  :root[uc-extension-id="{bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf}"i] fieldset[disabled] input:is([type="radio"], [type="checkbox"]) + :is(span, optext) {
     opacity: 0.7 !important;
     text-decoration: line-through !important;
   }

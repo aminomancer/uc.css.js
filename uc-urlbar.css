@@ -146,11 +146,8 @@ toolbarpaletteitem[place="palette"] > #search-container {
   --panel-background: var(--urlbar-results-bgcolor) !important;
   box-shadow: none;
   font-size: 1.196em !important;
-  padding: 0 var(--searchbar-popup-box-shadow-size, 15px)
-    var(--searchbar-popup-box-shadow-size, 15px);
-  margin: calc((var(--urlbar-container-height) - var(--urlbar-height)) / 2)
-    calc(-5px - var(--searchbar-popup-box-shadow-size, 15px))
-    calc(0px - var(--searchbar-popup-box-shadow-size, 15px)) !important;
+  padding: 0 var(--searchbar-popup-box-shadow-size, 15px) var(--searchbar-popup-box-shadow-size, 15px);
+  margin: calc((var(--urlbar-container-height) - var(--urlbar-height)) / 2) calc(-5px - var(--searchbar-popup-box-shadow-size, 15px)) calc(0px - var(--searchbar-popup-box-shadow-size, 15px)) !important;
   background: none;
   -moz-window-shadow: none !important;
 }
@@ -161,7 +158,7 @@ toolbarpaletteitem[place="palette"] > #search-container {
 }
 
 #PopupSearchAutoComplete .search-panel-tree {
-  margin-inline: var(--arrowpanel-menuitem-inline-margin) !important;
+  margin-inline: var(--arrowpanel-menuitem-margin-inline) !important;
 }
 
 #PopupSearchAutoComplete .autocomplete-richlistitem {
@@ -193,10 +190,7 @@ toolbarpaletteitem[place="palette"] > #search-container {
   fill: var(--panel-description-color) !important;
 }
 
-#PopupSearchAutoComplete
-  .search-panel-tree
-  > .autocomplete-richlistitem:is([originaltype="datalist-first"], [originaltype="null"])
-  > .ac-type-icon {
+#PopupSearchAutoComplete .search-panel-tree > .autocomplete-richlistitem:is([originaltype="datalist-first"], [originaltype="null"]) > .ac-type-icon {
   list-style-image: url(chrome://userchrome/content/search-glass.svg);
   fill-opacity: 0.6;
 }
@@ -265,8 +259,7 @@ toolbar toolbarpaletteitem > #search-container #searchbar {
 toolbarpaletteitem > #search-container #searchbar,
 toolbarpaletteitem > #urlbar-container #urlbar-input-container,
 toolbarpaletteitem > #stop-reload-button .toolbarbutton-icon {
-  transition: transform var(--drag-drop-transition-duration) cubic-bezier(0.6, 2, 0.75, 1.5),
-    background-color var(--drag-drop-transition-duration) var(--uc-smooth-timing-function) !important;
+  transition: transform var(--drag-drop-transition-duration) cubic-bezier(0.6, 2, 0.75, 1.5), background-color var(--drag-drop-transition-duration) var(--uc-smooth-timing-function) !important;
 }
 
 toolbarpaletteitem[mousedown] > #search-container {
@@ -308,14 +301,12 @@ toolbarpaletteitem[mousedown] > #urlbar-container > #urlbar > #urlbar-background
   fill-opacity: 1 !important;
 }
 
-.urlbar-addon-page-action:not(#pageAction-urlbar-_testpilot-containers, #pageAction-urlbar-jid1-xufzosoflzsoxg_jetpack)
-  .urlbar-icon {
+.urlbar-addon-page-action:not(#pageAction-urlbar-_testpilot-containers, #pageAction-urlbar-jid1-xufzosoflzsoxg_jetpack) .urlbar-icon {
   opacity: var(--urlbar-icon-fill-opacity);
   fill-opacity: 1 !important;
 }
 
-.urlbar-addon-page-action:not(#pageAction-urlbar-_testpilot-containers, #pageAction-urlbar-jid1-xufzosoflzsoxg_jetpack):not([disabled]):is(:hover, :focus-visible, [open])
-  .urlbar-icon {
+.urlbar-addon-page-action:not(#pageAction-urlbar-_testpilot-containers, #pageAction-urlbar-jid1-xufzosoflzsoxg_jetpack):not([disabled]):is(:hover, :focus-visible, [open]) .urlbar-icon {
   opacity: 1;
 }
 
@@ -372,13 +363,7 @@ toolbarpaletteitem[mousedown] > #urlbar-container > #urlbar > #urlbar-background
 }
 
 #urlbar[textoverflow="both"] > #urlbar-input-container > .urlbar-input-box > #urlbar-input {
-  mask-image: linear-gradient(
-    to right,
-    transparent,
-    black 3ch,
-    black calc(100% - 3ch),
-    transparent
-  );
+  mask-image: linear-gradient(to right, transparent, black 3ch, black calc(100% - 3ch), transparent);
 }
 
 #urlbar[textoverflow="right"] > #urlbar-input-container > .urlbar-input-box > #urlbar-input {
@@ -390,13 +375,7 @@ toolbarpaletteitem[mousedown] > #urlbar-container > #urlbar > #urlbar-background
 }
 
 #urlbar[textoverflow="both"][usertyping="true"] #urlbar-input {
-  mask-image: linear-gradient(
-    to right,
-    transparent,
-    black 3ch,
-    black calc(100% - 55px),
-    transparent calc(100% - 5px)
-  ) !important;
+  mask-image: linear-gradient(to right, transparent, black 3ch, black calc(100% - 55px), transparent calc(100% - 5px)) !important;
 }
 
 #urlbar[textoverflow="right"][usertyping="true"] #urlbar-input {
@@ -411,21 +390,11 @@ extension pages, but CSS hides it faster and avoids flickering.
 :not([aria-label]) handles the few milliseconds when a new window is opened and
 the NTP/home page hasn't opened yet. */
 @supports -moz-bool-pref("userChrome.urlbar.hide-bookmarks-button-on-system-pages") {
-  #tracking-protection-icon-container:is([hidden], :not([aria-label]))
-    ~ #identity-box:not(.chromeUI, .localResource)
-    ~ #page-action-buttons
-    > #reader-mode-button[hidden]
-    ~ :is(#star-button-box, #pageAction-urlbar-screenshot) {
+  #tracking-protection-icon-container:is([hidden], :not([aria-label])) ~ #identity-box:not(.chromeUI, .localResource) ~ #page-action-buttons > #reader-mode-button[hidden] ~ :is(#star-button-box, #pageAction-urlbar-screenshot) {
     visibility: collapse;
   }
 
-  :root[hide-tp-icon-on-ntp]
-    #tracking-protection-icon-container:is([hidden], :not([aria-label]))
-    ~ #identity-box:not(.chromeUI, .localResource)
-    ~ #page-action-buttons
-    > #userContext-icons:not([hidden])
-    ~ #reader-mode-button[hidden]
-    ~ #star-button-box {
+  :root[hide-tp-icon-on-ntp] #tracking-protection-icon-container:is([hidden], :not([aria-label])) ~ #identity-box:not(.chromeUI, .localResource) ~ #page-action-buttons > #userContext-icons:not([hidden]) ~ #reader-mode-button[hidden] ~ #star-button-box {
     visibility: hidden;
     width: 0 !important;
     min-width: 0 !important;
@@ -512,10 +481,7 @@ the NTP/home page hasn't opened yet. */
 
 .urlbar-input-box input:not(:focus)::selection,
 .searchbar-textbox:not(:focus-within)::selection {
-  background-color: var(
-    --lwt-toolbar-field-highlight-disabled,
-    text-select-disabled-background
-  ) !important;
+  background-color: var(--lwt-toolbar-field-highlight-disabled, text-select-disabled-background) !important;
 }
 
 #urlbar > #urlbar-input-container {
@@ -570,10 +536,7 @@ the NTP/home page hasn't opened yet. */
   background: none !important;
 }
 
-toolbarpaletteitem[removable="false"]
-  #tracking-protection-icon-container:is(:hover, [open="true"])
-  #tracking-protection-icon-box:not([animate="true"])
-  #tracking-protection-icon {
+toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:hover, [open="true"]) #tracking-protection-icon-box:not([animate="true"]) #tracking-protection-icon {
   display: -moz-box !important;
   fill-opacity: var(--urlbar-icon-fill-opacity) !important;
 }
@@ -634,8 +597,7 @@ issuer or is not recognized by the CA, or the SSL certificate is from a known
 issuer but the cipher used to encrypt the connection is deprecated or has a
 security flaw. additionally this also shows if the site was originally blocked
 for lacking a valid certificate and you chose to connect anyway. */
-#identity-box[pageproxystate="valid"]:is(.mixedDisplayContent, .mixedDisplayContentLoadedActiveBlocked, .certUserOverridden, .weakCipher)
-  #identity-icon {
+#identity-box[pageproxystate="valid"]:is(.mixedDisplayContent, .mixedDisplayContentLoadedActiveBlocked, .certUserOverridden, .weakCipher) #identity-icon {
   list-style-image: url(chrome://global/skin/icons/security-warning.svg) !important;
   -moz-context-properties: fill, stroke, fill-opacity, stroke-opacity !important;
   fill: unset !important;
@@ -662,8 +624,7 @@ default i for info symbol. a custom icon for these states can't be added with
 pure CSS since they just get marked as unknownIdentity. my script,
 urlbarMods.uc.js assigns them custom classes .aboutBlockedPage and
 .aboutNetErrorPage so you can use those classes to set the icon. */
-#identity-box[pageproxystate="valid"]:is(.certErrorPage, .httpsOnlyErrorPage, .aboutBlockedPage, .aboutNetErrorPage)
-  #identity-icon {
+#identity-box[pageproxystate="valid"]:is(.certErrorPage, .httpsOnlyErrorPage, .aboutBlockedPage, .aboutNetErrorPage) #identity-icon {
   list-style-image: url(chrome://userchrome/content/warning-big.svg) !important;
 }
 
@@ -673,47 +634,25 @@ urlbarMods.uc.js assigns them custom classes .aboutBlockedPage and
   background-color: transparent !important;
 }
 
-#identity-box[pageproxystate="valid"]
-  #identity-icon-box:is([open="true"], :focus-visible)
-  #identity-icon,
-#identity-box[pageproxystate="valid"]
-  #identity-icon-box:is(:hover:active, :hover:not([open="true"]))
-  #identity-icon:hover {
+#identity-box[pageproxystate="valid"] #identity-icon-box:is([open="true"], :focus-visible) #identity-icon,
+#identity-box[pageproxystate="valid"] #identity-icon-box:is(:hover:active, :hover:not([open="true"])) #identity-icon:hover {
   fill: var(--lwt-toolbarbutton-icon-fill, currentColor) !important;
   fill-opacity: 1 !important;
 }
 
-#urlbar[pageproxystate="valid"]
-  #identity-box:is(.verifiedDomain, .verifiedIdentity, .mixedActiveBlocked)
-  #identity-icon-box:is([open="true"], :focus-visible)
-  #identity-icon,
-#urlbar[pageproxystate="valid"]
-  #identity-box:is(.verifiedDomain, .verifiedIdentity, .mixedActiveBlocked)
-  #identity-icon-box:is(:hover:active, :hover:not([open="true"]))
-  #identity-icon:hover {
+#urlbar[pageproxystate="valid"] #identity-box:is(.verifiedDomain, .verifiedIdentity, .mixedActiveBlocked) #identity-icon-box:is([open="true"], :focus-visible) #identity-icon,
+#urlbar[pageproxystate="valid"] #identity-box:is(.verifiedDomain, .verifiedIdentity, .mixedActiveBlocked) #identity-icon-box:is(:hover:active, :hover:not([open="true"])) #identity-icon:hover {
   fill: var(--secure-color) !important;
   fill-opacity: 1 !important;
 }
 
-#urlbar[pageproxystate="valid"]
-  #identity-box:is(.weakCipher, .mixedDisplayContent, .mixedDisplayContentLoadedActiveBlocked, .certUserOverridden, .certErrorPage)
-  #identity-icon-box:is([open="true"], :focus-visible)
-  #identity-icon,
-#urlbar[pageproxystate="valid"]
-  #identity-box:is(.weakCipher, .mixedDisplayContent, .mixedDisplayContentLoadedActiveBlocked, .certUserOverridden, .certErrorPage)
-  #identity-icon-box:is(:hover:active, :hover:not([open="true"]))
-  #identity-icon:hover {
+#urlbar[pageproxystate="valid"] #identity-box:is(.weakCipher, .mixedDisplayContent, .mixedDisplayContentLoadedActiveBlocked, .certUserOverridden, .certErrorPage) #identity-icon-box:is([open="true"], :focus-visible) #identity-icon,
+#urlbar[pageproxystate="valid"] #identity-box:is(.weakCipher, .mixedDisplayContent, .mixedDisplayContentLoadedActiveBlocked, .certUserOverridden, .certErrorPage) #identity-icon-box:is(:hover:active, :hover:not([open="true"])) #identity-icon:hover {
   fill: unset !important;
 }
 
-#urlbar[pageproxystate="valid"]
-  #identity-box:is(.httpsOnlyErrorPage, .certErrorPage)
-  #identity-icon-box:is([open="true"], :focus-visible)
-  #identity-icon,
-#urlbar[pageproxystate="valid"]
-  #identity-box:is(.httpsOnlyErrorPage, .certErrorPage)
-  #identity-icon-box:is(:hover:active, :hover:not([open="true"]))
-  #identity-icon:hover {
+#urlbar[pageproxystate="valid"] #identity-box:is(.httpsOnlyErrorPage, .certErrorPage) #identity-icon-box:is([open="true"], :focus-visible) #identity-icon,
+#urlbar[pageproxystate="valid"] #identity-box:is(.httpsOnlyErrorPage, .certErrorPage) #identity-icon-box:is(:hover:active, :hover:not([open="true"])) #identity-icon:hover {
   fill: var(--low-warning-color) !important;
   fill-opacity: 1 !important;
 }
@@ -721,15 +660,10 @@ urlbarMods.uc.js assigns them custom classes .aboutBlockedPage and
 #identity-box.initialPage #identity-icon,
 #identity-box.extensionPage #identity-icon[tooltiptext="Loaded by extension: Tab Notes"],
 #urlbar[pageproxystate="invalid"] #identity-box #identity-icon,
-#tracking-protection-icon-container[hidden]
-  ~ #identity-box[pageproxystate="valid"].notSecure:not(.chromeUI, .localResource)
-  #identity-icon,
+#tracking-protection-icon-container[hidden] ~ #identity-box[pageproxystate="valid"].notSecure:not(.chromeUI, .localResource) #identity-icon,
 :root[customizing] #urlbar #identity-box #identity-icon {
   fill-opacity: var(--urlbar-icon-fill-opacity) !important;
-  list-style-image: var(
-    --default-search-identity-icon,
-    url("chrome://userchrome/content/search-glass.svg")
-  ) !important;
+  list-style-image: var(--default-search-identity-icon, url("chrome://userchrome/content/search-glass.svg")) !important;
 }
 
 #tracking-protection-icon-container:is([open="true"], :focus-visible) #tracking-protection-icon-box,
@@ -738,38 +672,26 @@ urlbarMods.uc.js assigns them custom classes .aboutBlockedPage and
   fill-opacity: 1 !important;
 }
 
-#tracking-protection-icon-container:is([open="true"], :focus-visible)
-  #tracking-protection-icon-box:not([hasException]),
-#tracking-protection-icon-container:not([open="true"])
-  #tracking-protection-icon-box:hover:not([hasException]) {
+#tracking-protection-icon-container:is([open="true"], :focus-visible) #tracking-protection-icon-box:not([hasException]),
+#tracking-protection-icon-container:not([open="true"]) #tracking-protection-icon-box:hover:not([hasException]) {
   fill-opacity: 1 !important;
   fill: var(--protection-idle-color) !important;
 }
 
-#tracking-protection-icon-container:is([open="true"], :focus-visible)
-  #tracking-protection-icon-box[active]:not([hasException]),
-#tracking-protection-icon-container:not([open="true"])
-  #tracking-protection-icon-box[active]:hover:not([hasException]) {
+#tracking-protection-icon-container:is([open="true"], :focus-visible) #tracking-protection-icon-box[active]:not([hasException]),
+#tracking-protection-icon-container:not([open="true"]) #tracking-protection-icon-box[active]:hover:not([hasException]) {
   fill-opacity: 1 !important;
   fill: var(--protection-active-color) !important;
 }
 
-#tracking-protection-icon-container:is([open="true"], :focus-visible)
-  #tracking-protection-icon-box:not([hasException])
-  > #tracking-protection-icon,
-#tracking-protection-icon-container:not([open="true"])
-  #tracking-protection-icon-box:hover:not([hasException])
-  > #tracking-protection-icon {
+#tracking-protection-icon-container:is([open="true"], :focus-visible) #tracking-protection-icon-box:not([hasException]) > #tracking-protection-icon,
+#tracking-protection-icon-container:not([open="true"]) #tracking-protection-icon-box:hover:not([hasException]) > #tracking-protection-icon {
   list-style-image: url(chrome://userchrome/content/material/tracking-gradient.svg) !important;
   -moz-context-properties: none !important;
 }
 
-#tracking-protection-icon-container:is([open="true"], :focus-visible)
-  #tracking-protection-icon-box[active]:not([hasException])
-  > #tracking-protection-icon,
-#tracking-protection-icon-container:not([open="true"])
-  #tracking-protection-icon-box[active]:hover:not([hasException])
-  > #tracking-protection-icon {
+#tracking-protection-icon-container:is([open="true"], :focus-visible) #tracking-protection-icon-box[active]:not([hasException]) > #tracking-protection-icon,
+#tracking-protection-icon-container:not([open="true"]) #tracking-protection-icon-box[active]:hover:not([hasException]) > #tracking-protection-icon {
   list-style-image: url(chrome://userchrome/content/material/tracking-attention-gradient.svg) !important;
   -moz-context-properties: none !important;
 }
@@ -784,139 +706,56 @@ urlbarMods.uc.js assigns them custom classes .aboutBlockedPage and
   -moz-context-properties: none !important;
 } */
 
-:root[hide-tp-icon-on-ntp]:not([customizing])
-  #urlbar[pageproxystate="invalid"]
-  #tracking-protection-icon-container {
+:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar[pageproxystate="invalid"] #tracking-protection-icon-container {
   display: none !important;
 }
 
-:root:not([hide-tp-icon-on-ntp])
-  #urlbar-input-container[pageproxystate="invalid"]
-  > #tracking-protection-icon-container {
+:root:not([hide-tp-icon-on-ntp]) #urlbar-input-container[pageproxystate="invalid"] > #tracking-protection-icon-container {
   visibility: visible !important;
 }
 
-:root[hide-tp-icon-on-ntp]:not([customizing])
-  #urlbar:not([searchmode], [actiontype="switchtab"])
-  #tracking-protection-icon-container[hidden]
-  ~ #identity-box:not(.chromeUI),
-:root[hide-tp-icon-on-ntp]:not([customizing])
-  #urlbar:not([searchmode])[actiontype="switchtab"][actionoverride="true"]
-  #tracking-protection-icon-container[hidden]
-  ~ #identity-box:not(.chromeUI),
-:root[hide-tp-icon-on-ntp]:not([customizing])
-  #urlbar[pageproxystate="invalid"]:not([searchmode], [actiontype="switchtab"])
-  #identity-box,
-:root[hide-tp-icon-on-ntp]:not([customizing])
-  #urlbar[pageproxystate="invalid"]:not([searchmode])[actiontype="switchtab"][actionoverride="true"]
-  #identity-box {
+:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar:not([searchmode], [actiontype="switchtab"]) #tracking-protection-icon-container[hidden] ~ #identity-box:not(.chromeUI),
+:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar:not([searchmode])[actiontype="switchtab"][actionoverride="true"] #tracking-protection-icon-container[hidden] ~ #identity-box:not(.chromeUI),
+:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar[pageproxystate="invalid"]:not([searchmode], [actiontype="switchtab"]) #identity-box,
+:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar[pageproxystate="invalid"]:not([searchmode])[actiontype="switchtab"][actionoverride="true"] #identity-box {
   padding: 0 !important;
   margin: 0 !important;
   margin-inline: 0 3px !important;
   padding-inline: 6px 0 !important;
 }
 
-:root[hide-tp-icon-on-ntp]:not([customizing])
-  #urlbar:not([searchmode], [actiontype="switchtab"])
-  #tracking-protection-icon-container[hidden]
-  ~ #identity-box:not(.chromeUI)
-  #identity-icon-box,
-:root[hide-tp-icon-on-ntp]:not([customizing])
-  #urlbar:not([searchmode])[actiontype="switchtab"][actionoverride="true"]
-  #tracking-protection-icon-container[hidden]
-  ~ #identity-box:not(.chromeUI)
-  #identity-icon-box,
-:root[hide-tp-icon-on-ntp]:not([customizing])
-  #urlbar[pageproxystate="invalid"]:not([searchmode], [actiontype="switchtab"])
-  #identity-box
-  #identity-icon-box,
-:root[hide-tp-icon-on-ntp]:not([customizing])
-  #urlbar[pageproxystate="invalid"]:not([searchmode])[actiontype="switchtab"][actionoverride="true"]
-  #identity-box
-  #identity-icon-box {
+:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar:not([searchmode], [actiontype="switchtab"]) #tracking-protection-icon-container[hidden] ~ #identity-box:not(.chromeUI) #identity-icon-box,
+:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar:not([searchmode])[actiontype="switchtab"][actionoverride="true"] #tracking-protection-icon-container[hidden] ~ #identity-box:not(.chromeUI) #identity-icon-box,
+:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar[pageproxystate="invalid"]:not([searchmode], [actiontype="switchtab"]) #identity-box #identity-icon-box,
+:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar[pageproxystate="invalid"]:not([searchmode])[actiontype="switchtab"][actionoverride="true"] #identity-box #identity-icon-box {
   margin-inline: 2px 0 !important;
 }
 
-:root[hide-tp-icon-on-ntp]:not([customizing])
-  #urlbar:not([searchmode], [actiontype="switchtab"])
-  #tracking-protection-icon-container[hidden]:not([view-source])
-  ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage, .certErrorPage, .unknownIdentity)[pageproxystate="valid"]
-  #identity-icon-box,
-:root[hide-tp-icon-on-ntp]:not([customizing])
-  #urlbar:not([searchmode])[actiontype="switchtab"][actionoverride="true"]
-  #tracking-protection-icon-container[hidden]:not([view-source])
-  ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage, .certErrorPage, .unknownIdentity)[pageproxystate="valid"]
-  #identity-icon-box,
-:root[hide-tp-icon-on-ntp]:not([customizing])
-  #urlbar[pageproxystate="invalid"]:not([searchmode], [actiontype="switchtab"])
-  #identity-box:not(.httpsOnlyErrorPage, .certErrorPage, .unknownIdentity)
-  #identity-icon-box,
-:root[hide-tp-icon-on-ntp]:not([customizing])
-  #urlbar[pageproxystate="invalid"]:not([searchmode])[actiontype="switchtab"][actionoverride="true"]
-  #identity-box:not(.httpsOnlyErrorPage, .certErrorPage, .unknownIdentity)
-  #identity-icon-box {
+:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar:not([searchmode], [actiontype="switchtab"]) #tracking-protection-icon-container[hidden]:not([view-source]) ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage, .certErrorPage, .unknownIdentity)[pageproxystate="valid"] #identity-icon-box,
+:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar:not([searchmode])[actiontype="switchtab"][actionoverride="true"] #tracking-protection-icon-container[hidden]:not([view-source]) ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage, .certErrorPage, .unknownIdentity)[pageproxystate="valid"] #identity-icon-box,
+:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar[pageproxystate="invalid"]:not([searchmode], [actiontype="switchtab"]) #identity-box:not(.httpsOnlyErrorPage, .certErrorPage, .unknownIdentity) #identity-icon-box,
+:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar[pageproxystate="invalid"]:not([searchmode])[actiontype="switchtab"][actionoverride="true"] #identity-box:not(.httpsOnlyErrorPage, .certErrorPage, .unknownIdentity) #identity-icon-box {
   pointer-events: none !important;
   -moz-user-focus: ignore !important;
 }
 
-:root[hide-tp-icon-on-ntp]:not([customizing])
-  #urlbar:not([searchmode], [actiontype="switchtab"])
-  #tracking-protection-icon-container[hidden]:not([view-source])
-  ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage, .certErrorPage, .unknownIdentity)[pageproxystate="valid"],
-:root[hide-tp-icon-on-ntp]:not([customizing])
-  #urlbar:not([searchmode])[actiontype="switchtab"][actionoverride="true"]
-  #tracking-protection-icon-container[hidden]:not([view-source])
-  ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage, .certErrorPage, .unknownIdentity)[pageproxystate="valid"],
-:root[hide-tp-icon-on-ntp]:not([customizing])
-  #urlbar[pageproxystate="invalid"]:not([searchmode], [actiontype="switchtab"])
-  #identity-box:not(.httpsOnlyErrorPage, .certErrorPage, .unknownIdentity),
-:root[hide-tp-icon-on-ntp]:not([customizing])
-  #urlbar[pageproxystate="invalid"]:not([searchmode])[actiontype="switchtab"][actionoverride="true"]
-  #identity-box:not(.httpsOnlyErrorPage, .certErrorPage, .unknownIdentity) {
+:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar:not([searchmode], [actiontype="switchtab"]) #tracking-protection-icon-container[hidden]:not([view-source]) ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage, .certErrorPage, .unknownIdentity)[pageproxystate="valid"],
+:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar:not([searchmode])[actiontype="switchtab"][actionoverride="true"] #tracking-protection-icon-container[hidden]:not([view-source]) ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage, .certErrorPage, .unknownIdentity)[pageproxystate="valid"],
+:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar[pageproxystate="invalid"]:not([searchmode], [actiontype="switchtab"]) #identity-box:not(.httpsOnlyErrorPage, .certErrorPage, .unknownIdentity),
+:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar[pageproxystate="invalid"]:not([searchmode])[actiontype="switchtab"][actionoverride="true"] #identity-box:not(.httpsOnlyErrorPage, .certErrorPage, .unknownIdentity) {
   pointer-events: none !important;
 }
 
-:root[hide-tp-icon-on-ntp]:not([customizing])
-  #urlbar:not([searchmode], [actiontype="switchtab"])
-  #tracking-protection-icon-container[hidden]:not([view-source])
-  ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage, .certErrorPage, .unknownIdentity)[pageproxystate="valid"]
-  > :not(#identity-icon-box),
-:root[hide-tp-icon-on-ntp]:not([customizing])
-  #urlbar:not([searchmode])[actiontype="switchtab"][actionoverride="true"]
-  #tracking-protection-icon-container[hidden]:not([view-source])
-  ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage, .certErrorPage, .unknownIdentity)[pageproxystate="valid"]
-  > :not(#identity-icon-box),
-:root[hide-tp-icon-on-ntp]:not([customizing])
-  #urlbar[pageproxystate="invalid"]:not([searchmode], [actiontype="switchtab"])
-  #identity-box:not(.httpsOnlyErrorPage, .certErrorPage, .unknownIdentity)
-  > :not(#identity-icon-box),
-:root[hide-tp-icon-on-ntp]:not([customizing])
-  #urlbar[pageproxystate="invalid"]:not([searchmode])[actiontype="switchtab"][actionoverride="true"]
-  #identity-box:not(.httpsOnlyErrorPage, .certErrorPage, .unknownIdentity)
-  > :not(#identity-icon-box) {
+:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar:not([searchmode], [actiontype="switchtab"]) #tracking-protection-icon-container[hidden]:not([view-source]) ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage, .certErrorPage, .unknownIdentity)[pageproxystate="valid"] > :not(#identity-icon-box),
+:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar:not([searchmode])[actiontype="switchtab"][actionoverride="true"] #tracking-protection-icon-container[hidden]:not([view-source]) ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage, .certErrorPage, .unknownIdentity)[pageproxystate="valid"] > :not(#identity-icon-box),
+:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar[pageproxystate="invalid"]:not([searchmode], [actiontype="switchtab"]) #identity-box:not(.httpsOnlyErrorPage, .certErrorPage, .unknownIdentity) > :not(#identity-icon-box),
+:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar[pageproxystate="invalid"]:not([searchmode])[actiontype="switchtab"][actionoverride="true"] #identity-box:not(.httpsOnlyErrorPage, .certErrorPage, .unknownIdentity) > :not(#identity-icon-box) {
   pointer-events: auto !important;
 }
 
-:root[hide-tp-icon-on-ntp]:not([customizing])
-  #urlbar:not([searchmode], [usertyping="true"], [focused="true"], [open="true"], :focus-within)
-  #tracking-protection-icon-container[hidden]:not([view-source])
-  ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage, .certErrorPage, .unknownIdentity)
-  > #identity-icon-box:not(:focus-visible)
-  :is(#identity-icon, #remote-control-icon:not(:hover, :focus-visible)),
-:root[hide-tp-icon-on-ntp]:not([customizing])
-  #urlbar:not([searchmode], [usertyping="true"], [focused="true"], [open="true"], :focus-within)
-  #tracking-protection-icon-container[hidden]:not([view-source])
-  ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage, .certErrorPage, .unknownIdentity)
-  > #identity-icon-box
-  ~ #identity-permission-box:not(:focus-visible, [open="true"])
-  image:not(:hover, :focus-visible),
-:root[hide-tp-icon-on-ntp]:not([customizing])
-  #urlbar:not([searchmode], [usertyping="true"], [focused="true"], [open="true"], :focus-within)
-  #tracking-protection-icon-container[hidden]:not([view-source])
-  ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage, .certErrorPage, .unknownIdentity)
-  > #identity-icon-box
-  ~ #notification-popup-box:not([open="true"])
-  > :is(image, stack):not(:hover, :focus-visible) {
+:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar:not([searchmode], [usertyping="true"], [focused="true"], [open="true"], :focus-within) #tracking-protection-icon-container[hidden]:not([view-source]) ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage, .certErrorPage, .unknownIdentity) > #identity-icon-box:not(:focus-visible) :is(#identity-icon, #remote-control-icon:not(:hover, :focus-visible)),
+:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar:not([searchmode], [usertyping="true"], [focused="true"], [open="true"], :focus-within) #tracking-protection-icon-container[hidden]:not([view-source]) ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage, .certErrorPage, .unknownIdentity) > #identity-icon-box ~ #identity-permission-box:not(:focus-visible, [open="true"]) image:not(:hover, :focus-visible),
+:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar:not([searchmode], [usertyping="true"], [focused="true"], [open="true"], :focus-within) #tracking-protection-icon-container[hidden]:not([view-source]) ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage, .certErrorPage, .unknownIdentity) > #identity-icon-box ~ #notification-popup-box:not([open="true"]) > :is(image, stack):not(:hover, :focus-visible) {
   fill-opacity: 0.4 !important;
 }
 
@@ -927,9 +766,7 @@ urlbarMods.uc.js assigns them custom classes .aboutBlockedPage and
   fill-opacity: 0.3 !important;
 }
 
-:root:not([hide-tp-icon-on-ntp])
-  #tracking-protection-icon-container[hidden]
-  #tracking-protection-icon {
+:root:not([hide-tp-icon-on-ntp]) #tracking-protection-icon-container[hidden] #tracking-protection-icon {
   list-style-image: url(chrome://userchrome/content/material/tracking-disabled.svg) !important;
 }
 
@@ -974,11 +811,7 @@ urlbarMods.uc.js assigns them custom classes .aboutBlockedPage and
   opacity: revert !important;
 }
 
-:root[customizing]
-  #wrapper-urlbar-container[removable="false"]
-  #urlbar
-  > #urlbar-input-container
-  image {
+:root[customizing] #wrapper-urlbar-container[removable="false"] #urlbar > #urlbar-input-container image {
   fill-opacity: 0.3 !important;
 }
 
@@ -1149,8 +982,7 @@ of 16px and are drawn to 16px. so they have at least 1px of virtual "padding" on
 every side. we could replace all the svg icons and maybe I will, but this is a
 lot easier. use 0.6 instead of 1 since 1 will end up being shown as like 1.4px
 for some window scaling factors. */
-#identity-box
-  :is(.desktop-notification-icon, .screen-icon, .popup-icon, .autoplay-media-icon, .canvas-icon, .install-icon, .drm-icon, .autoplay-media-icon, .install-icon, #canvas-notification-icon, .canvas-icon, .indexedDB-icon, .screen-icon, .translation-icon, .storage-access-icon, .midi-icon),
+#identity-box :is(.desktop-notification-icon, .screen-icon, .popup-icon, .autoplay-media-icon, .canvas-icon, .install-icon, .drm-icon, .autoplay-media-icon, .install-icon, #canvas-notification-icon, .canvas-icon, .indexedDB-icon, .screen-icon, .translation-icon, .storage-access-icon, .midi-icon),
 #webrtc-sharing-icon[sharing="screen"] {
   padding: 0.6px !important;
 }
@@ -1176,9 +1008,7 @@ for some window scaling factors. */
 }
 
 #urlbar[searchmode] > #urlbar-input-container > #identity-box,
-#urlbar[actiontype="switchtab"]:not([actionoverride="true"])
-  > #urlbar-input-container
-  > #identity-box {
+#urlbar[actiontype="switchtab"]:not([actionoverride="true"]) > #urlbar-input-container > #identity-box {
   background: none !important;
   padding-inline-start: 8px !important;
   margin-inline-start: 0 !important;
@@ -1189,21 +1019,13 @@ for some window scaling factors. */
 }
 
 #urlbar[searchmode] > #urlbar-input-container > #identity-box #identity-icon,
-#urlbar[actiontype="switchtab"]:not([actionoverride="true"])
-  > #urlbar-input-container
-  > #identity-box
-  #identity-icon {
+#urlbar[actiontype="switchtab"]:not([actionoverride="true"]) > #urlbar-input-container > #identity-box #identity-icon {
   margin-inline-start: 0 !important;
   margin-inline-end: 0 !important;
 }
 
 #urlbar[actiontype] #identity-box #identity-icon-box,
-#urlbar[pageproxystate="invalid"][actiontype]
-  #identity-box
-  #identity-icon-box
-  #urlbar[searchmode]
-  #identity-box
-  #identity-icon-box,
+#urlbar[pageproxystate="invalid"][actiontype] #identity-box #identity-icon-box #urlbar[searchmode] #identity-box #identity-icon-box,
 #urlbar[pageproxystate="invalid"][searchmode] #identity-box #identity-icon-box {
   margin-inline: 0 !important;
 }
@@ -1213,18 +1035,9 @@ for some window scaling factors. */
   --identity-box-solid-bg: var(--identity-box-focus-bg);
 }
 
-#urlbar[pageproxystate="valid"]
-  #identity-box.chromeUI:hover
-  #identity-icon-box:not([open="true"])
-  > #identity-icon,
-#urlbar[pageproxystate="valid"]
-  #identity-box.chromeUI:hover:active
-  #identity-icon-box
-  > #identity-icon,
-#urlbar[pageproxystate="valid"]
-  #identity-box.chromeUI
-  #identity-icon-box:is([open="true"], :focus-visible)
-  > #identity-icon {
+#urlbar[pageproxystate="valid"] #identity-box.chromeUI:hover #identity-icon-box:not([open="true"]) > #identity-icon,
+#urlbar[pageproxystate="valid"] #identity-box.chromeUI:hover:active #identity-icon-box > #identity-icon,
+#urlbar[pageproxystate="valid"] #identity-box.chromeUI #identity-icon-box:is([open="true"], :focus-visible) > #identity-icon {
   /* list-style-image: url(chrome://userchrome/content/about-logo.png) !important; */
   -moz-context-properties: fill !important;
   list-style-image: url(chrome://userchrome/content/nightly-logo-gradient.svg) !important;
@@ -1237,18 +1050,9 @@ for some window scaling factors. */
   border-inline-end: 1px solid var(--desaturate-dimmed) !important;
 }
 
-#urlbar[pageproxystate="valid"]
-  #identity-box.chromeUI:hover
-  #identity-icon-box:not([open="true"])
-  > #identity-icon-label,
-#urlbar[pageproxystate="valid"]
-  #identity-box.chromeUI:hover:active
-  #identity-icon-box
-  > #identity-icon-label,
-#urlbar[pageproxystate="valid"]
-  #identity-box.chromeUI
-  #identity-icon-box:is([open="true"], :focus-visible)
-  > #identity-icon-label {
+#urlbar[pageproxystate="valid"] #identity-box.chromeUI:hover #identity-icon-box:not([open="true"]) > #identity-icon-label,
+#urlbar[pageproxystate="valid"] #identity-box.chromeUI:hover:active #identity-icon-box > #identity-icon-label,
+#urlbar[pageproxystate="valid"] #identity-box.chromeUI #identity-icon-box:is([open="true"], :focus-visible) > #identity-icon-label {
   opacity: 0.8 !important;
 }
 
@@ -1296,23 +1100,17 @@ for some window scaling factors. */
   position: relative;
 }
 
-#urlbar[searchmode]
-  #urlbar-search-mode-indicator:is(:hover, :focus-visible, :focus-within)
-  #urlbar-search-mode-indicator-close {
+#urlbar[searchmode] #urlbar-search-mode-indicator:is(:hover, :focus-visible, :focus-within) #urlbar-search-mode-indicator-close {
   pointer-events: auto;
   opacity: 1;
 }
 
-#urlbar[searchmode]
-  #urlbar-search-mode-indicator:is(:hover, :focus-visible, :focus-within)
-  #urlbar-search-mode-indicator-close:is(:hover, :focus-visible) {
+#urlbar[searchmode] #urlbar-search-mode-indicator:is(:hover, :focus-visible, :focus-within) #urlbar-search-mode-indicator-close:is(:hover, :focus-visible) {
   stroke-opacity: 1 !important;
   background-color: var(--arrowpanel-dimmed) !important;
 }
 
-#urlbar[searchmode]
-  #urlbar-search-mode-indicator:is(:hover, :focus-visible, :focus-within)
-  #urlbar-search-mode-indicator-close:hover:active {
+#urlbar[searchmode] #urlbar-search-mode-indicator:is(:hover, :focus-visible, :focus-within) #urlbar-search-mode-indicator-close:hover:active {
   background-color: var(--arrowpanel-dimmed-further) !important;
 }
 

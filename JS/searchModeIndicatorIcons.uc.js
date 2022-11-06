@@ -125,7 +125,9 @@
       let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
         Ci.nsIStyleSheetService
       );
-      let uri = makeURI("data:text/css;charset=UTF=8," + encodeURIComponent(css));
+      let uri = makeURI(
+        "data:text/css;charset=UTF=8," + encodeURIComponent(css)
+      );
       if (sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) return;
       sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
     }
@@ -149,7 +151,10 @@
         if (file.isFile() && fileParts && fileParts[1]) {
           if (joinedName === fileParts[1]) {
             identical = leafName;
-          } else if (joinedName.includes(fileParts[1]) || fileParts[1].includes(joinedName)) {
+          } else if (
+            joinedName.includes(fileParts[1]) ||
+            fileParts[1].includes(joinedName)
+          ) {
             if (!included) included = leafName;
           } else if (fileParts[1].includes(nameParts[0])) {
             if (!partIncluded) partIncluded = leafName;
@@ -157,10 +162,16 @@
         }
       }
       let filename = identical || included || partIncluded;
-      return filename ? `url(chrome://userchrome/content/engines/${filename})` : false;
+      return filename
+        ? `url(chrome://userchrome/content/engines/${filename})`
+        : false;
     };
     function handleDefaultEngine() {
-      if (config["Try to replace searchglass icon with engine icon in normal mode"]) {
+      if (
+        config[
+          "Try to replace searchglass icon with engine icon in normal mode"
+        ]
+      ) {
         eval(
           "BrowserSearch._setURLBarPlaceholder = function " +
             BrowserSearch._setURLBarPlaceholder
@@ -237,7 +248,12 @@
           // integer sources. the icons are defined in browser.css so we'll use
           // those icons.
           else if (gURLBar.searchMode?.source) {
-            let { BOOKMARKS, HISTORY, TABS, ACTIONS } = UrlbarUtils.RESULT_SOURCE;
+            let {
+              BOOKMARKS,
+              HISTORY,
+              TABS,
+              ACTIONS,
+            } = UrlbarUtils.RESULT_SOURCE;
             switch (gURLBar.searchMode.source) {
               case BOOKMARKS:
                 url = `chrome://browser/skin/bookmark.svg`;
@@ -264,7 +280,8 @@
             // don't have a rule for the engine.
             let filterFn = gURLBar.searchMode?.engineName
               ? engine => engine._name === gURLBar.searchMode?.engineName
-              : engine => engine._name === searchModeIndicatorFocused.textContent;
+              : engine =>
+                  engine._name === searchModeIndicatorFocused.textContent;
             let engine = engines.find(filterFn);
             // use the default icon if there is still no engine.
             url = (engine && engine._iconURI?.spec) || defaultIcon;
@@ -294,6 +311,9 @@
         init();
       }
     };
-    Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
+    Services.obs.addObserver(
+      delayedListener,
+      "browser-delayed-startup-finished"
+    );
   }
 })();

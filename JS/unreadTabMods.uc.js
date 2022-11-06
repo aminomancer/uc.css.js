@@ -39,7 +39,9 @@
    */
   function modulateAttr(tab, on = false) {
     tab._notselectedsinceload = on;
-    on ? tab.setAttribute("notselectedsinceload", on) : tab.removeAttribute("notselectedsinceload");
+    on
+      ? tab.setAttribute("notselectedsinceload", on)
+      : tab.removeAttribute("notselectedsinceload");
     gBrowser._tabAttrModified(tab, ["notselectedsinceload"]);
   }
   class UnreadTabsBase {
@@ -85,21 +87,30 @@
           this._handleTabSelect();
         } else {
           modulateAttr(tab, true);
-          if (!tab.hasAttribute("skipbackgroundnotify")) this._notifyBackgroundTab(tab);
+          if (!tab.hasAttribute("skipbackgroundnotify")) {
+            this._notifyBackgroundTab(tab);
+          }
         }
         this.arrowScrollbox._updateScrollButtonsDisabledState();
-        if (tab.linkedPanel) NewTabPagePreloading.maybeCreatePreloadedBrowser(window);
+        if (tab.linkedPanel) {
+          NewTabPagePreloading.maybeCreatePreloadedBrowser(window);
+        }
 
         if (UserInteraction.running("browser.tabs.opening", window)) {
           UserInteraction.finish("browser.tabs.opening", window);
         }
       };
 
-      if (UnreadTabsBase.config["Add Context Menu Items"]) this.makeMenuItems(this.tabContext);
+      if (UnreadTabsBase.config["Add Context Menu Items"]) {
+        this.makeMenuItems(this.tabContext);
+      }
     }
 
     get tabContext() {
-      return this._tabContext || (this._tabContext = document.getElementById("tabContextMenu"));
+      return (
+        this._tabContext ||
+        (this._tabContext = document.getElementById("tabContextMenu"))
+      );
     }
 
     handleEvent(e) {
@@ -172,8 +183,13 @@
         UnreadTabsBase.config["Mark Tab as Read Label"]
       );
       this.markAsReadMenuitem.setAttribute("id", "context-markAsRead");
-      this.markAsReadMenuitem.setAttribute("oncommand", `unreadTabMods._onCommand()`);
-      context.querySelector("#context_duplicateTabs").after(this.markAsReadMenuitem);
+      this.markAsReadMenuitem.setAttribute(
+        "oncommand",
+        `unreadTabMods._onCommand()`
+      );
+      context
+        .querySelector("#context_duplicateTabs")
+        .after(this.markAsReadMenuitem);
 
       this.markAsUnreadMenuitem = document.createXULElement("menuitem");
       this.markAsUnreadMenuitem.setAttribute(
@@ -181,7 +197,10 @@
         UnreadTabsBase.config["Mark Tab as Unread Label"]
       );
       this.markAsUnreadMenuitem.setAttribute("id", "context-markAsUnread");
-      this.markAsUnreadMenuitem.setAttribute("oncommand", `unreadTabMods._onCommand(true)`);
+      this.markAsUnreadMenuitem.setAttribute(
+        "oncommand",
+        `unreadTabMods._onCommand(true)`
+      );
       this.markAsReadMenuitem.after(this.markAsUnreadMenuitem);
 
       context.addEventListener("popupshowing", this);
@@ -203,6 +222,9 @@
         init();
       }
     };
-    Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
+    Services.obs.addObserver(
+      delayedListener,
+      "browser-delayed-startup-finished"
+    );
   }
 })();

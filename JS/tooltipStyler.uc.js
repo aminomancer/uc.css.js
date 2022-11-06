@@ -17,7 +17,9 @@
     if (sidebarBox) {
       sidebarBox.setAttribute("content-style", "true");
     } else {
-      SidebarUI.promiseInitialized.then(() => SidebarUI._box.setAttribute("content-style", "true"));
+      SidebarUI.promiseInitialized.then(() =>
+        SidebarUI._box.setAttribute("content-style", "true")
+      );
     }
     function colorForSidebar(id) {
       switch (id) {
@@ -35,8 +37,11 @@
       let color;
       switch (tooltip.localName) {
         case "panel":
-          if (tooltip.id === "sidebarMenu-popup") color = colorForSidebar(SidebarUI.currentID);
-          else return;
+          if (tooltip.id === "sidebarMenu-popup") {
+            color = colorForSidebar(SidebarUI.currentID);
+          } else {
+            return;
+          }
           break;
         case "tooltip":
         case "menupopup":
@@ -47,8 +52,15 @@
             node?.closest("#customization-container") &&
             node?.localName === "toolbarpaletteitem"
           ) {
-            if (tooltip.id === "customizationPanelItemContextMenu") color = "gray";
-            if (tooltip.localName === "tooltip" && tooltip.hasAttribute("default")) color = "gray";
+            if (tooltip.id === "customizationPanelItemContextMenu") {
+              color = "gray";
+            }
+            if (
+              tooltip.localName === "tooltip" &&
+              tooltip.hasAttribute("default")
+            ) {
+              color = "gray";
+            }
           }
           break;
         default:

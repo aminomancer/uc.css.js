@@ -340,7 +340,10 @@
       if (event.target.classList.contains("tab-close-button")) {
         this.mOverCloseButton = false;
       }
-      if (event.target == this.overlayIcon || event.target == this.soundPlayingIcon) {
+      if (
+        event.target == this.overlayIcon ||
+        event.target == this.soundPlayingIcon
+      ) {
         this.setSecondaryTabTooltipLabel(null);
       }
       this._mouseleave();
@@ -440,7 +443,12 @@
       let onSound = event.target.classList.contains("tab-icon-sound");
       let onOverlay = event.target.classList.contains("tab-icon-overlay");
 
-      if (gBrowser.multiSelectedTabsCount > 0 && !onClose && !onSound && !onOverlay) {
+      if (
+        gBrowser.multiSelectedTabsCount > 0 &&
+        !onClose &&
+        !onSound &&
+        !onOverlay
+      ) {
         // Tabs were previously multi-selected and user clicks on a tab
         // without holding Ctrl/Cmd Key
         gBrowser.clearMultiSelectedTabs();
@@ -646,7 +654,7 @@
         TelemetryStopwatch.finish("HOVER_UNTIL_UNSELECTED_TAB_OPENED", this);
       }
     }
- 
+
     resumeDelayedMedia() {
       if (this.activeMediaBlocked) {
         Services.telemetry
@@ -664,24 +672,24 @@
         "TAB_AUDIO_INDICATOR_USED"
       );
 
-        if (browser.audioMuted) {
-          if (this.linkedPanel) {
-            // "Lazy Browser" should not invoke its unmute method
-            browser.unmute();
-          }
-          this.removeAttribute("muted");
-          hist.add(1 /* unmute */);
-        } else {
-          if (this.linkedPanel) {
-            // "Lazy Browser" should not invoke its mute method
-            browser.mute();
-          }
-          this.setAttribute("muted", "true");
-          hist.add(0 /* mute */);
+      if (browser.audioMuted) {
+        if (this.linkedPanel) {
+          // "Lazy Browser" should not invoke its unmute method
+          browser.unmute();
         }
-        this.muteReason = aMuteReason || null;
- 
-        gBrowser._tabAttrModified(this, ["muted"]);
+        this.removeAttribute("muted");
+        hist.add(1 /* unmute */);
+      } else {
+        if (this.linkedPanel) {
+          // "Lazy Browser" should not invoke its mute method
+          browser.mute();
+        }
+        this.setAttribute("muted", "true");
+        hist.add(0 /* mute */);
+      }
+      this.muteReason = aMuteReason || null;
+
+      gBrowser._tabAttrModified(this, ["muted"]);
     }
 
     setUserContextId(aUserContextId) {

@@ -58,7 +58,9 @@ class OpenPlacesInContainerTabMenu {
     let openAllPopup = this.placesMenuOpenAllInContainer.appendChild(
       document.createXULElement("menupopup")
     );
-    openAllPopup.addEventListener("command", e => this.openSelectedInContainer(e, openAllPopup));
+    openAllPopup.addEventListener("command", e =>
+      this.openSelectedInContainer(e, openAllPopup)
+    );
     popups.push(openAllPopup);
 
     this.placesMenuOpenAllLinksInContainer = this.create(document, "menu", {
@@ -99,7 +101,9 @@ class OpenPlacesInContainerTabMenu {
       popups.push(syncedOpenAllPopup);
 
       this.syncedContextMenu.addEventListener("popupshowing", this);
-      this.syncedFilterContextMenu.addEventListener("popupshowing", this, { once: true });
+      this.syncedFilterContextMenu.addEventListener("popupshowing", this, {
+        once: true,
+      });
     }
     popups.forEach(popup =>
       popup.addEventListener("popupshowing", e =>
@@ -119,7 +123,9 @@ class OpenPlacesInContainerTabMenu {
   get syncedContextMenu() {
     return (
       this._syncedContextMenu ||
-      (this._syncedContextMenu = document.getElementById("SyncedTabsSidebarContext"))
+      (this._syncedContextMenu = document.getElementById(
+        "SyncedTabsSidebarContext"
+      ))
     );
   }
   get syncedFilterContextMenu() {
@@ -131,7 +137,8 @@ class OpenPlacesInContainerTabMenu {
     );
   }
   get syncedTabsStore() {
-    return document.getElementById("sidebar")?.syncedTabsDeckComponent._syncedTabsListStore;
+    return document.getElementById("sidebar")?.syncedTabsDeckComponent
+      ._syncedTabsListStore;
   }
   get selectedSyncedRow() {
     return this.syncedTabsStore.data[this.syncedTabsStore._selectedRow[0]];
@@ -142,7 +149,9 @@ class OpenPlacesInContainerTabMenu {
   get placesMenuOpenContainer() {
     return (
       this._placesMenuOpenContainer ||
-      (this._placesMenuOpenContainer = document.getElementById("placesContext_openContainer:tabs"))
+      (this._placesMenuOpenContainer = document.getElementById(
+        "placesContext_openContainer:tabs"
+      ))
     );
   }
   get placesMenuOpenBookmarkContainer() {
@@ -164,30 +173,39 @@ class OpenPlacesInContainerTabMenu {
   get placesMenuOpenAllLinks() {
     return (
       this._placesMenuOpenAllLinks ||
-      (this._placesMenuOpenAllLinks = document.getElementById("placesContext_openLinks:tabs"))
+      (this._placesMenuOpenAllLinks = document.getElementById(
+        "placesContext_openLinks:tabs"
+      ))
     );
   }
   get placesMenuOpenNewTab() {
     return (
       this._placesMenuOpenNewTab ||
-      (this._placesMenuOpenNewTab = document.getElementById("placesContext_open:newtab"))
+      (this._placesMenuOpenNewTab = document.getElementById(
+        "placesContext_open:newtab"
+      ))
     );
   }
   get placesMenuCopy() {
     return (
-      this._placesMenuCopy || (this._placesMenuCopy = document.getElementById("placesContext_copy"))
+      this._placesMenuCopy ||
+      (this._placesMenuCopy = document.getElementById("placesContext_copy"))
     );
   }
   get syncedMenuOpenAll() {
     return (
       this._syncedMenuOpenAll ||
-      (this._syncedMenuOpenAll = this.syncedContextMenu.querySelector("#syncedTabsOpenAllInTabs"))
+      (this._syncedMenuOpenAll = this.syncedContextMenu.querySelector(
+        "#syncedTabsOpenAllInTabs"
+      ))
     );
   }
   get syncedMenuCopy() {
     return (
       this._syncedMenuCopy ||
-      (this._syncedMenuCopy = this.syncedContextMenu.querySelector("#syncedTabsCopySelected"))
+      (this._syncedMenuCopy = this.syncedContextMenu.querySelector(
+        "#syncedTabsCopySelected"
+      ))
     );
   }
   create(doc, tag, props, isHTML = false) {
@@ -254,7 +272,9 @@ class OpenPlacesInContainerTabMenu {
     }
     gBrowser.loadTabs(urls, {
       userContextId: parseInt(e.target.getAttribute("data-usercontextid")),
-      inBackground: Services.prefs.getBoolPref("browser.tabs.loadBookmarksInBackground"),
+      inBackground: Services.prefs.getBoolPref(
+        "browser.tabs.loadBookmarksInBackground"
+      ),
       replace: false,
       triggeringPrincipal: Services.scriptSecurityManager.getSystemPrincipal(),
     });
@@ -295,8 +315,12 @@ class OpenPlacesInContainerTabMenu {
   }
   loadSheet() {
     const css = `.identity-color-blue{--identity-tab-color:#37adff;--identity-icon-color:#37adff;}.identity-color-turquoise{--identity-tab-color:#00c79a;--identity-icon-color:#00c79a;}.identity-color-green{--identity-tab-color:#51cd00;--identity-icon-color:#51cd00;}.identity-color-yellow{--identity-tab-color:#ffcb00;--identity-icon-color:#ffcb00;}.identity-color-orange{--identity-tab-color:#ff9f00;--identity-icon-color:#ff9f00;}.identity-color-red{--identity-tab-color:#ff613d;--identity-icon-color:#ff613d;}.identity-color-pink{--identity-tab-color:#ff4bda;--identity-icon-color:#ff4bda;}.identity-color-purple{--identity-tab-color:#af51f5;--identity-icon-color:#af51f5;}.identity-color-toolbar{--identity-tab-color:var(--lwt-toolbar-field-color,FieldText);--identity-icon-color:var(--lwt-toolbar-field-color,FieldText);}.identity-icon-fence{--identity-icon:url("resource://usercontext-content/fence.svg");}.identity-icon-fingerprint{--identity-icon:url("resource://usercontext-content/fingerprint.svg");}.identity-icon-briefcase{--identity-icon:url("resource://usercontext-content/briefcase.svg");}.identity-icon-dollar{--identity-icon:url("resource://usercontext-content/dollar.svg");}.identity-icon-cart{--identity-icon:url("resource://usercontext-content/cart.svg");}.identity-icon-circle{--identity-icon:url("resource://usercontext-content/circle.svg");}.identity-icon-vacation{--identity-icon:url("resource://usercontext-content/vacation.svg");}.identity-icon-gift{--identity-icon:url("resource://usercontext-content/gift.svg");}.identity-icon-food{--identity-icon:url("resource://usercontext-content/food.svg");}.identity-icon-fruit{--identity-icon:url("resource://usercontext-content/fruit.svg");}.identity-icon-pet{--identity-icon:url("resource://usercontext-content/pet.svg");}.identity-icon-tree{--identity-icon:url("resource://usercontext-content/tree.svg");}.identity-icon-chill{--identity-icon:url("resource://usercontext-content/chill.svg");}.menuitem-iconic[data-usercontextid]{list-style-image:var(--identity-icon);-moz-context-properties:fill;fill:var(--identity-icon-color);}`;
-    let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(Ci.nsIStyleSheetService);
-    let uri = Services.io.newURI("data:text/css;charset=UTF=8," + encodeURIComponent(css));
+    let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
+      Ci.nsIStyleSheetService
+    );
+    let uri = Services.io.newURI(
+      "data:text/css;charset=UTF=8," + encodeURIComponent(css)
+    );
     if (sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) return;
     sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
   }

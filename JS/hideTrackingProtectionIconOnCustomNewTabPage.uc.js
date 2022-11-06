@@ -49,7 +49,11 @@
     // toolbar.
     _getAnchor(panel) {
       if (this.hideBookmarks) {
-        for (let id of ["star-button-box", "bookmarks-menu-button", "libary-button"]) {
+        for (let id of [
+          "star-button-box",
+          "bookmarks-menu-button",
+          "libary-button",
+        ]) {
           let node = document.getElementById(id);
           if (node && !node.hidden) {
             let bounds = window.windowUtils.getBoundsWithoutFlushing(node);
@@ -105,14 +109,18 @@
           this._showToastAfterRefresh = false;
           if (
             this._previousURI == currentURL &&
-            this._previousOuterWindowID == gBrowser.selectedBrowser.outerWindowID
+            this._previousOuterWindowID ==
+              gBrowser.selectedBrowser.outerWindowID
           ) {
             this.showProtectionsPopup({ toast: true });
           }
         }
         this.hadShieldState = false;
         if (currentURL.startsWith("view-source:")) {
-          this._trackingProtectionIconContainer.setAttribute("view-source", true);
+          this._trackingProtectionIconContainer.setAttribute(
+            "view-source",
+            true
+          );
         } else {
           this._trackingProtectionIconContainer.removeAttribute("view-source");
         }
@@ -121,14 +129,22 @@
           gIdentityHandler._identityIconBox.disabled = isInitial;
         }
         // hide the TP icon on new tab page
-        if (!lazy.ContentBlockingAllowList.canHandle(gBrowser.selectedBrowser) || isInitial) {
+        if (
+          !lazy.ContentBlockingAllowList.canHandle(gBrowser.selectedBrowser) ||
+          isInitial
+        ) {
           this._trackingProtectionIconContainer.hidden = true;
           return;
         }
         this._trackingProtectionIconContainer.hidden = false;
-        this.hasException = lazy.ContentBlockingAllowList.includes(gBrowser.selectedBrowser);
+        this.hasException = lazy.ContentBlockingAllowList.includes(
+          gBrowser.selectedBrowser
+        );
         if (this._protectionsPopup) {
-          this._protectionsPopup.toggleAttribute("hasException", this.hasException);
+          this._protectionsPopup.toggleAttribute(
+            "hasException",
+            this.hasException
+          );
         }
         this.iconBox.toggleAttribute("hasException", this.hasException);
         this.fingerprintersHistogramAdd("pageLoad");
@@ -150,6 +166,9 @@
         init();
       }
     };
-    Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
+    Services.obs.addObserver(
+      delayedListener,
+      "browser-delayed-startup-finished"
+    );
   }
 })();

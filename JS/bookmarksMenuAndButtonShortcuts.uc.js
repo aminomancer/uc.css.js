@@ -24,7 +24,9 @@ const ucBookmarksShortcuts = {
   },
   async bookmarkClick(e) {
     if (e.button !== 1 || e.target.tagName !== "toolbarbutton") return;
-    let bm = await PlacesUtils.bookmarks.fetch({ url: new URL(BookmarkingUI._uri.spec) });
+    let bm = await PlacesUtils.bookmarks.fetch({
+      url: new URL(BookmarkingUI._uri.spec),
+    });
     bm ? PlacesTransactions.Remove(bm.guid).transact() : this.starCmd();
     e.preventDefault();
     e.stopPropagation();
@@ -35,9 +37,13 @@ const ucBookmarksShortcuts = {
         BrowserUIUtils.setToolbarButtonHeightProperty(BookmarkingUI.star);
         document
           .getElementById("star-button-animatable-box")
-          .addEventListener("animationend", () => BookmarkingUI.star.removeAttribute("animate"), {
-            once: true,
-          });
+          .addEventListener(
+            "animationend",
+            () => BookmarkingUI.star.removeAttribute("animate"),
+            {
+              once: true,
+            }
+          );
         BookmarkingUI.star.setAttribute("animate", "true");
       }
       let browser = gBrowser.selectedBrowser;
@@ -47,7 +53,9 @@ const ucBookmarksShortcuts = {
       let charset = null;
       let isErrorPage = false;
       if (browser.documentURI) {
-        isErrorPage = /^about:(neterror|certerror|blocked)/.test(browser.documentURI.spec);
+        isErrorPage = /^about:(neterror|certerror|blocked)/.test(
+          browser.documentURI.spec
+        );
       }
       try {
         if (isErrorPage) {
@@ -79,23 +87,30 @@ const ucBookmarksShortcuts = {
     });
     popup.insertBefore(this.bookmarkTab, popup.firstElementChild);
     popup.addEventListener("popupshowing", this.updateMenuItem);
-    this.bookmarkTab.setAttribute("data-l10n-id", "bookmarks-subview-bookmark-tab");
-    this.searchBookmarks = popup.querySelector("#BMB_viewBookmarksSidebar").after(
-      this.create(doc, "menuitem", {
-        id: "BMB_searchBookmarks",
-        class: "menuitem-iconic subviewbutton",
-        "data-l10n-id": "bookmarks-search",
-        oncommand: "PlacesCommandHook.searchBookmarks();",
-        image: "chrome://global/skin/icons/search-glass.svg",
-      })
+    this.bookmarkTab.setAttribute(
+      "data-l10n-id",
+      "bookmarks-subview-bookmark-tab"
     );
+    this.searchBookmarks = popup
+      .querySelector("#BMB_viewBookmarksSidebar")
+      .after(
+        this.create(doc, "menuitem", {
+          id: "BMB_searchBookmarks",
+          class: "menuitem-iconic subviewbutton",
+          "data-l10n-id": "bookmarks-search",
+          oncommand: "PlacesCommandHook.searchBookmarks();",
+          image: "chrome://global/skin/icons/search-glass.svg",
+        })
+      );
   },
   onLocationChange(browser, _prog, _req, location, _flags) {
     if (browser !== gBrowser.selectedBrowser) return;
     this.updateMenuItem(null, location);
   },
   handlePlacesEvents(events) {
-    for (let e of events) if (e.url && e.url == BookmarkingUI._uri?.spec) this.updateMenuItem();
+    for (let e of events) {
+      if (e.url && e.url == BookmarkingUI._uri?.spec) this.updateMenuItem();
+    }
   },
   async updateMenuItem(_e, location) {
     let uri;
@@ -107,24 +122,41 @@ const ucBookmarksShortcuts = {
     if ("l10n" in menuitem.ownerDocument && menuitem.ownerDocument.l10n) {
       menuitem.ownerDocument.l10n.setAttributes(
         menuitem,
-        isStarred ? "bookmarks-subview-edit-bookmark" : "bookmarks-subview-bookmark-tab"
+        isStarred
+          ? "bookmarks-subview-edit-bookmark"
+          : "bookmarks-subview-bookmark-tab"
       );
     }
     menuitem.setAttribute(
       "image",
-      isStarred ? "chrome://browser/skin/bookmark.svg" : "chrome://browser/skin/bookmark-hollow.svg"
+      isStarred
+        ? "chrome://browser/skin/bookmark.svg"
+        : "chrome://browser/skin/bookmark-hollow.svg"
     );
   },
   init() {
-    let node = CustomizableUI.getWidget("bookmarks-menu-button")?.forWindow(window).node;
+    let node = CustomizableUI.getWidget("bookmarks-menu-button")?.forWindow(
+      window
+    ).node;
     // delete these two lines if you don't want the confirmation hint to show
     // when you bookmark a page.
-    Services.prefs.setIntPref("browser.bookmarks.editDialog.confirmationHintShowCount", 0);
-    Services.prefs.lockPref("browser.bookmarks.editDialog.confirmationHintShowCount");
-    BookmarkingUI.button.setAttribute("onclick", "ucBookmarksShortcuts.bookmarkClick(event)");
+    Services.prefs.setIntPref(
+      "browser.bookmarks.editDialog.confirmationHintShowCount",
+      0
+    );
+    Services.prefs.lockPref(
+      "browser.bookmarks.editDialog.confirmationHintShowCount"
+    );
+    BookmarkingUI.button.setAttribute(
+      "onclick",
+      "ucBookmarksShortcuts.bookmarkClick(event)"
+    );
     CustomizableUI.getWidget("library-button")
       .forWindow(window)
-      .node?.setAttribute("onclick", "ucBookmarksShortcuts.bookmarkClick(event)");
+      .node?.setAttribute(
+        "onclick",
+        "ucBookmarksShortcuts.bookmarkClick(event)"
+      );
     this.addMenuitems(node.querySelector("#BMB_bookmarksPopup"));
     gBrowser.addTabsProgressListener(this);
     PlacesUtils.bookmarks.addObserver(this);

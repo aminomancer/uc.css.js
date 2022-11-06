@@ -27,9 +27,17 @@ class AutoHideHandler {
   constructor() {
     this.observe(Services.prefs, "nsPref:read", this.prefs.autohide);
     Services.prefs.addObserver(this.prefs.autohide, this);
-    XPCOMUtils.defineLazyGetter(this, "navBlock", () => gNavToolbox.parentElement);
-    XPCOMUtils.defineLazyGetter(this, "backButton", () => document.getElementById("back-button"));
-    XPCOMUtils.defineLazyGetter(this, "fwdButton", () => document.getElementById("forward-button"));
+    XPCOMUtils.defineLazyGetter(
+      this,
+      "navBlock",
+      () => gNavToolbox.parentElement
+    );
+    XPCOMUtils.defineLazyGetter(this, "backButton", () =>
+      document.getElementById("back-button")
+    );
+    XPCOMUtils.defineLazyGetter(this, "fwdButton", () =>
+      document.getElementById("forward-button")
+    );
     // Main listener for popups
     let mainPopupSet = document.getElementById("mainPopupSet");
     for (let ev of ["popupshowing", "popuphiding"]) {
@@ -38,7 +46,9 @@ class AutoHideHandler {
     }
     // onViewOpen and onViewClose
     gURLBar.controller.addQueryListener(this);
-    for (let topic of ["urlbar-focus", "urlbar-blur"]) Services.obs.addObserver(this, topic);
+    for (let topic of ["urlbar-focus", "urlbar-blur"]) {
+      Services.obs.addObserver(this, topic);
+    }
   }
   getPref(root, pref, def) {
     switch (root.getPrefType(pref)) {
@@ -69,8 +79,11 @@ class AutoHideHandler {
     switch (pref) {
       case this.prefs.autohide:
         let value = this.getPref(sub, pref, true);
-        if (value) document.documentElement.setAttribute("fullscreen-autohide", value);
-        else document.documentElement.removeAttribute("fullscreen-autohide");
+        if (value) {
+          document.documentElement.setAttribute("fullscreen-autohide", value);
+        } else {
+          document.documentElement.removeAttribute("fullscreen-autohide");
+        }
         break;
       default:
     }
@@ -80,17 +93,28 @@ class AutoHideHandler {
   // the case, we want to skip the autohide logic for this popup.
   _isPopupAnchoredOnExisting(popup) {
     for (const existing of this.popups) {
-      if (!(existing instanceof Element)) continue;
+      if (!Element.isInstance(existing)) continue;
       for (const node of [popup, popup.triggerNode, popup.anchorNode]) {
-        if (!(node instanceof Element)) continue;
-        if (node.compareDocumentPosition(existing) & Node.DOCUMENT_POSITION_CONTAINS) return true;
+        if (!Element.isInstance(node)) continue;
+        if (
+          node.compareDocumentPosition(existing) &
+          Node.DOCUMENT_POSITION_CONTAINS
+        ) {
+          return true;
+        }
       }
     }
     return false;
   }
   handleEvent(event) {
     let popup = event.originalTarget;
-    if (!popup || popup.tagName === "tooltip" || popup.getAttribute("nopreventnavboxhide")) return;
+    if (
+      !popup ||
+      popup.tagName === "tooltip" ||
+      popup.getAttribute("nopreventnavboxhide")
+    ) {
+      return;
+    }
     switch (popup.id) {
       case "contentAreaContextMenu":
       case "sidebarMenu-popup":
@@ -116,7 +140,9 @@ class AutoHideHandler {
         break;
       default:
     }
-    if (popup.parentElement?.tagName === "menu" && !popup.closest("menubar")) return;
+    if (popup.parentElement?.tagName === "menu" && !popup.closest("menubar")) {
+      return;
+    }
     if (this._isPopupAnchoredOnExisting(popup)) return;
     switch (event.type) {
       case "popupshowing":
@@ -136,8 +162,11 @@ class AutoHideHandler {
     this._onUrlbarViewEvent();
   }
   _onUrlbarViewEvent() {
-    if (gURLBar.view.isOpen || gURLBar.focused) this.navBlock.setAttribute("urlbar-status", true);
-    else this.navBlock.removeAttribute("urlbar-status");
+    if (gURLBar.view.isOpen || gURLBar.focused) {
+      this.navBlock.setAttribute("urlbar-status", true);
+    } else {
+      this.navBlock.removeAttribute("urlbar-status");
+    }
   }
 }
 

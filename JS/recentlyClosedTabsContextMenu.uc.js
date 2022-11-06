@@ -115,9 +115,12 @@ class UndoListInTabmenu {
 
       // these are for the context menu that opens when you right-click
       // a recently-closed item in a popup panel
-      "Restore": { label: "Restore", accesskey: "R" },
+      Restore: { label: "Restore", accesskey: "R" },
 
-      "Restore in New Window": { label: "Restore in New Window", accesskey: "N" },
+      "Restore in New Window": {
+        label: "Restore in New Window",
+        accesskey: "N",
+      },
 
       "Restore in New Private Window": {
         label: "Restore in New Private Window",
@@ -154,7 +157,8 @@ class UndoListInTabmenu {
     let windowData = SessionStore.getClosedWindowData();
     return (
       !windowData.length ||
-      (!this.config["Include popup windows"] && windowData.every(w => w.isPopup))
+      (!this.config["Include popup windows"] &&
+        windowData.every(w => w.isPopup))
     );
   }
   // get a fluent localization interface. we can't use data-l10n-id since that would
@@ -162,7 +166,8 @@ class UndoListInTabmenu {
   get strings() {
     return (
       this._strings ||
-      (this._strings = RecentlyClosedTabsAndWindowsMenuUtils.strings || this.generateStrings())
+      (this._strings =
+        RecentlyClosedTabsAndWindowsMenuUtils.strings || this.generateStrings())
     );
   }
   async generateStrings() {
@@ -197,7 +202,10 @@ class UndoListInTabmenu {
         // for whatever reason. the content area context menu actually sticks
         // around if you switch from one extension sidebar to another, but we
         // delete our menu items if the sidebar is switched to anything but TST.
-        if (SidebarUI.currentID === "treestyletab_piro_sakura_ne_jp-sidebar-action") {
+        if (
+          SidebarUI.currentID ===
+          "treestyletab_piro_sakura_ne_jp-sidebar-action"
+        ) {
           if (sidebarContext.hasAttribute("undo-list-init")) break;
           sidebarContext.setAttribute("undo-list-init", true);
           sidebarContext.addEventListener("popupshowing", this);
@@ -299,7 +307,8 @@ class UndoListInTabmenu {
           while (toolbarItem && toolbarItem.parentElement) {
             let parent = toolbarItem.parentElement;
             if (
-              (parent.classList && parent.classList.contains("customization-target")) ||
+              (parent.classList &&
+                parent.classList.contains("customization-target")) ||
               parent.getAttribute("overflowfortoolbar") || // Needs to work in the overflow list as well.
               parent.localName == "toolbarpaletteitem" ||
               parent.localName == "toolbar"
@@ -327,7 +336,9 @@ class UndoListInTabmenu {
       let tabWords = tabMenu.label.split(" ");
       tabMenu.accessKey =
         this.config.l10n["Tabs access key"] ||
-        (RTL_UI ? tabMenu.label.substr(0, 1) : tabWords[tabWords.length - 1]?.substr(0, 1) || "T");
+        (RTL_UI
+          ? tabMenu.label.substr(0, 1)
+          : tabWords[tabWords.length - 1]?.substr(0, 1) || "T");
 
       // closed tab list is empty so should be hidden
       tabMenu.hidden = !!(SessionStore.getClosedTabCount(window) == 0);
@@ -459,7 +470,10 @@ class UndoListInTabmenu {
       Object.values(item.attributes).forEach(attribute => {
         if (attribute.name === "key") return;
         if (attribute.name === "oncommand") {
-          return newItem.addEventListener("command", new Function("event", attribute.value));
+          return newItem.addEventListener(
+            "command",
+            new Function("event", attribute.value)
+          );
         }
         newItem.setAttribute(attribute.name, attribute.value);
       });
@@ -489,11 +503,19 @@ class UndoListInTabmenu {
     ) {
       let element = aDocument.createXULElement(aTagName);
       element.setAttribute("label", aMenuLabel);
-      if (aClosedTab.image) RecentlyClosedTabsAndWindowsMenuUtils.setImage(aClosedTab, element);
+      if (aClosedTab.image) {
+        RecentlyClosedTabsAndWindowsMenuUtils.setImage(aClosedTab, element);
+      }
       element.setAttribute("value", aIndex);
-      element.setAttribute("restore-type", aIsWindowsFragment ? "window" : "tab");
+      element.setAttribute(
+        "restore-type",
+        aIsWindowsFragment ? "window" : "tab"
+      );
       if (aTagName == "menuitem") {
-        element.setAttribute("class", "menuitem-iconic bookmark-item menuitem-with-favicon");
+        element.setAttribute(
+          "class",
+          "menuitem-iconic bookmark-item menuitem-with-favicon"
+        );
       }
       element.classList.add("recently-closed-item");
       let cmdCallback =
@@ -510,7 +532,9 @@ class UndoListInTabmenu {
       if (aTagName != "menuitem") {
         element.setAttribute(
           "onclick",
-          `undoTabSubmenu.on${aIsWindowsFragment ? "Window" : "Tab"}ItemClick(event)`
+          `undoTabSubmenu.on${
+            aIsWindowsFragment ? "Window" : "Tab"
+          }ItemClick(event)`
         );
       }
       if (!forContext && aTagName != "menuitem") {
@@ -519,10 +543,15 @@ class UndoListInTabmenu {
           element.setAttribute("context", "recently-closed-menu");
         }
         if (aIndex == 0) {
-          element.setAttribute("key", "key_undoClose" + (aIsWindowsFragment ? "Window" : "Tab"));
+          element.setAttribute(
+            "key",
+            "key_undoClose" + (aIsWindowsFragment ? "Window" : "Tab")
+          );
         }
       }
-      let identity = ContextualIdentityService?.getPublicIdentityFromId(tabData.userContextId);
+      let identity = ContextualIdentityService?.getPublicIdentityFromId(
+        tabData.userContextId
+      );
       if (identity && identity.color) {
         element.setAttribute("usercontextid", identity.userContextId);
         element.classList.add("identity-color-" + identity.color);
@@ -542,7 +571,9 @@ class UndoListInTabmenu {
       restoreAllElements.classList.add("restoreallitem");
       restoreAllElements.setAttribute(
         "label",
-        RecentlyClosedTabsAndWindowsMenuUtils.strings.formatValueSync(aRestoreAllLabel)
+        RecentlyClosedTabsAndWindowsMenuUtils.strings.formatValueSync(
+          aRestoreAllLabel
+        )
       );
       restoreAllElements.setAttribute(
         "oncommand",
@@ -584,8 +615,13 @@ class UndoListInTabmenu {
             otherTabsCount == 0
               ? menuLabelStringSingleTab
               : PluralForm.get(otherTabsCount, menuLabelString);
-          let menuLabel = label.replace("#1", undoItem.title).replace("#2", otherTabsCount);
-          if (UndoListInTabmenu.config.l10n["Popup window label"] && undoItem.isPopup) {
+          let menuLabel = label
+            .replace("#1", undoItem.title)
+            .replace("#2", otherTabsCount);
+          if (
+            UndoListInTabmenu.config.l10n["Popup window label"] &&
+            undoItem.isPopup
+          ) {
             menuLabel = `${menuLabel} ${UndoListInTabmenu.config.l10n["Popup window label"]}`;
           }
           let selectedTab = undoItem.tabs[undoItem.selected - 1];
@@ -658,7 +694,9 @@ class UndoListInTabmenu {
   }
   registerSheet() {
     let tag;
-    let { inPopupPanels, inMenupopups, showForWindows } = this.config["Show container tab colors"];
+    let { inPopupPanels, inMenupopups, showForWindows } = this.config[
+      "Show container tab colors"
+    ];
     if (inPopupPanels && inMenupopups) tag = "";
     else if (inPopupPanels) tag = "toolbarbutton";
     else if (inMenupopups) tag = "menuitem";
@@ -672,7 +710,9 @@ class UndoListInTabmenu {
                 transparent 3px
             );
         }`;
-    let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(Ci.nsIStyleSheetService);
+    let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
+      Ci.nsIStyleSheetService
+    );
     let uri = makeURI("data:text/css;charset=UTF=8," + encodeURIComponent(css));
     if (sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) return;
     sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
@@ -705,7 +745,9 @@ class RecentlyClosedPanelContext {
           ? [index]
           : new Array(SessionStore.getLastClosedTabCount(window)).fill(0);
       for (let i of tabsToRemove) {
-        if (SessionStore.getClosedTabCount(window) > i) tab = SessionStore.undoCloseTab(window, i);
+        if (SessionStore.getClosedTabCount(window) > i) {
+          tab = SessionStore.undoCloseTab(window, i);
+        }
       }
       return tab;
     };
@@ -785,14 +827,19 @@ class RecentlyClosedPanelContext {
   updatePanel(panelview) {
     if (!panelview) return;
     if (panelview.id !== "PanelUI-history") {
-      let text = panelview.querySelector(".panel-header > h1 > span").textContent;
-      panelview.dispatchEvent(new CustomEvent("ViewShowing", { bubbles: true }));
+      let text = panelview.querySelector(".panel-header > h1 > span")
+        .textContent;
+      panelview.dispatchEvent(
+        new CustomEvent("ViewShowing", { bubbles: true })
+      );
       PanelView.forNode(panelview).headerText = text;
     }
     PanelMultiView.getViewNode(document, "appMenuRecentlyClosedTabs").disabled =
       SessionStore.getClosedTabCount(window) == 0;
-    PanelMultiView.getViewNode(document, "appMenuRecentlyClosedWindows").disabled =
-      SessionStore.getClosedWindowCount() == 0;
+    PanelMultiView.getViewNode(
+      document,
+      "appMenuRecentlyClosedWindows"
+    ).disabled = SessionStore.getClosedWindowCount() == 0;
   }
   handleEvent(e) {
     switch (e.type) {
@@ -806,7 +853,9 @@ class RecentlyClosedPanelContext {
     }
   }
   async observe(subject, topic, data) {
-    if (this.updateTimer || topic !== "sessionstore-closed-objects-changed") return;
+    if (this.updateTimer || topic !== "sessionstore-closed-objects-changed") {
+      return;
+    }
     this.updateTimer = await this.sleep(15);
     this.updatePanel(
       document.querySelector(
@@ -819,7 +868,9 @@ class RecentlyClosedPanelContext {
     let button = this.menupopup.triggerNode;
     this.restoreInNewWindow.hidden = this.restoreInNewPrivateWindow.hidden =
       button.getAttribute("restore-type") !== "tab";
-    if (PrivateBrowsingUtils.isWindowPrivate(window)) this.restoreInNewPrivateWindow.hidden = true;
+    if (PrivateBrowsingUtils.isWindowPrivate(window)) {
+      this.restoreInNewPrivateWindow.hidden = true;
+    }
   }
   async onCommand(e) {
     let button = this.menupopup.triggerNode;
@@ -894,7 +945,10 @@ class RecentlyClosedPanelContext {
           init();
         }
       };
-      Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
+      Services.obs.addObserver(
+        delayedListener,
+        "browser-delayed-startup-finished"
+      );
     }
   }
   onRemoveFromList(button) {
@@ -1016,7 +1070,9 @@ class RecentlyClosedPanelContext {
     if (ancestorPanel) ancestorPanel.hidePopup();
   }
   onWindowItemClick(e) {
-    if (this.REMOVE_ON_MID_CLICK && e.button === 1) this.onRemoveFromList(e.currentTarget);
+    if (this.REMOVE_ON_MID_CLICK && e.button === 1) {
+      this.onRemoveFromList(e.currentTarget);
+    }
   }
 }
 

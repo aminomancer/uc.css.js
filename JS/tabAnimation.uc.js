@@ -24,9 +24,13 @@
         setTimeout(() => gBrowser.selectedTab.removeAttribute("justmoved"), 1);
       }
     }
-  }).observe(document.getElementById("tabbrowser-tabs"), { attributeFilter: ["movingtab"] });
+  }).observe(document.getElementById("tabbrowser-tabs"), {
+    attributeFilter: ["movingtab"],
+  });
 
-  if (gBrowser.tabContainer._positionPinnedTabs.name === "_positionPinnedTabs") {
+  if (
+    gBrowser.tabContainer._positionPinnedTabs.name === "_positionPinnedTabs"
+  ) {
     eval(
       `gBrowser.tabContainer._positionPinnedTabs = function ` +
         gBrowser.tabContainer._positionPinnedTabs

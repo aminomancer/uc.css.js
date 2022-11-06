@@ -52,7 +52,9 @@
       gBrowser.tabContainer.addEventListener("TabOpen", e =>
         this.applyEffect(e.target.querySelector(".tab-content"), true)
       );
-      gBrowser.tabs.forEach(tab => this.applyEffect(tab.querySelector(".tab-content"), true));
+      gBrowser.tabs.forEach(tab =>
+        this.applyEffect(tab.querySelector(".tab-content"), true)
+      );
     }
 
     /**
@@ -63,7 +65,11 @@
       // grab the colors and behavior from the event. this allows us to apply
       // different colors/behavior to different elements and makes the script
       // more adaptable for future expansion or user extension.
-      let { gradientSize, lightColor, clickEffect } = e.currentTarget.fluentRevealState;
+      let {
+        gradientSize,
+        lightColor,
+        clickEffect,
+      } = e.currentTarget.fluentRevealState;
       // calculate gradient display coordinates based on mouse and element coords.
       let x = e.pageX - this.getOffset(e.currentTarget).left - window.scrollX;
       let y = e.pageY - this.getOffset(e.currentTarget).top - window.scrollY;
@@ -77,7 +83,9 @@
           // if the user options hide the effect on selected or pinned tabs.
           // determines if we should avoid showing the effect on the element at
           // the current time.
-          if (this.shouldClear(e.currentTarget)) return this.clearEffect(e.currentTarget);
+          if (this.shouldClear(e.currentTarget)) {
+            return this.clearEffect(e.currentTarget);
+          }
           // mousemove events still trigger while the element is clicked. so if
           // the click effect is enabled and the element is pressed, we want to
           // apply a different effect than we normally would.
@@ -87,7 +95,9 @@
             y,
             lightColor,
             gradientSize,
-            clickEffect && e.currentTarget.fluentRevealState.is_pressed ? cssLightEffect : null
+            clickEffect && e.currentTarget.fluentRevealState.is_pressed
+              ? cssLightEffect
+              : null
           );
           break;
 
@@ -98,13 +108,24 @@
 
         case "mousedown":
           // again, check if it's selected or pinned
-          if (this.shouldClear(e.currentTarget)) return this.clearEffect(e.currentTarget);
+          if (this.shouldClear(e.currentTarget)) {
+            return this.clearEffect(e.currentTarget);
+          }
           e.currentTarget.fluentRevealState.is_pressed = true;
-          this.drawEffect(e.currentTarget, x, y, lightColor, gradientSize, cssLightEffect);
+          this.drawEffect(
+            e.currentTarget,
+            x,
+            y,
+            lightColor,
+            gradientSize,
+            cssLightEffect
+          );
           break;
 
         case "mouseup":
-          if (this.shouldClear(e.currentTarget)) return this.clearEffect(e.currentTarget);
+          if (this.shouldClear(e.currentTarget)) {
+            return this.clearEffect(e.currentTarget);
+          }
           e.currentTarget.fluentRevealState.is_pressed = false;
           this.drawEffect(e.currentTarget, x, y, lightColor, gradientSize);
           break;
@@ -159,9 +180,12 @@
       // would default to false. instead we're gonna set each one individually.
       // I haven't run into this issue before so please let me know if there's a
       // faster/shorter way of doing this.
-      let { clickEffect } = options.clickEffect === undefined ? this._options : options;
-      let { gradientSize } = options.gradientSize === undefined ? this._options : options;
-      let { lightColor } = options.lightColor === undefined ? this._options : options;
+      let { clickEffect } =
+        options.clickEffect === undefined ? this._options : options;
+      let { gradientSize } =
+        options.gradientSize === undefined ? this._options : options;
+      let { lightColor } =
+        options.lightColor === undefined ? this._options : options;
 
       // cache the values on the element itself. this is how we can support different
       // options for different elements, something the library doesn't support.
@@ -315,6 +339,9 @@
         init();
       }
     };
-    Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
+    Services.obs.addObserver(
+      delayedListener,
+      "browser-delayed-startup-finished"
+    );
   }
 })();

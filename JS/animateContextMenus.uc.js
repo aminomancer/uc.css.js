@@ -48,9 +48,15 @@ class AnimateContextMenus {
 :root[animate-menupopups] :not(menulist) > menupopup:not([position], [type="arrow"])[animating] {
   pointer-events: none;
 }`;
-    const { Services } = ChromeUtils.import("resource://gre/modules/Services.jsm");
-    let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(Ci.nsIStyleSheetService);
-    let uri = Services.io.newURI("data:text/css;charset=UTF=8," + encodeURIComponent(css));
+    const { Services } = ChromeUtils.import(
+      "resource://gre/modules/Services.jsm"
+    );
+    let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
+      Ci.nsIStyleSheetService
+    );
+    let uri = Services.io.newURI(
+      "data:text/css;charset=UTF=8," + encodeURIComponent(css)
+    );
     if (!sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) {
       sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
     }
@@ -59,10 +65,14 @@ class AnimateContextMenus {
     if (e.target.tagName !== "menupopup") return;
     if (e.target.hasAttribute("position")) return;
     if (e.target.getAttribute("type") == "arrow") return;
-    if (e.target.parentElement) if (e.target.parentElement.tagName == "menulist") return;
+    if (e.target.parentElement) {
+      if (e.target.parentElement.tagName == "menulist") return;
+    }
     if (
       e.target.shadowRoot &&
-      e.target.shadowRoot.firstElementChild.classList.contains("panel-arrowcontainer")
+      e.target.shadowRoot.firstElementChild.classList.contains(
+        "panel-arrowcontainer"
+      )
     ) {
       return;
     }
@@ -78,7 +88,9 @@ class AnimateContextMenus {
     e.target.removeAttribute("animating");
   }
   on_popuphidden(e) {
-    if (e.target.getAttribute("animate") != "false") e.target.removeAttribute("animate");
+    if (e.target.getAttribute("animate") != "false") {
+      e.target.removeAttribute("animate");
+    }
   }
 }
 

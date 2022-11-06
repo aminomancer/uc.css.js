@@ -18,7 +18,7 @@ html|pre,
 html|plaintext,
 html|listing,
 html|textarea,
-html|input:is([type=date], [type=time], [type=datetime-local]) {
+html|input:is([type="date"], [type="time"], [type="datetime-local"]) {
   font-family: Fira Code UC, Fira Code, SF Mono, -moz-fixed, monospace;
   font-weight: 300;
 }

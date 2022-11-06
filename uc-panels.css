@@ -61,13 +61,7 @@ this connects with .panel-subview-body rules in userChrome.au.css */
   /* for some reason, the "recently closed tabs" subview doesn't have a
   separator under the header. simulate one. */
   border-top: 1px solid transparent;
-  border-image: linear-gradient(
-    to right,
-    transparent 4px,
-    var(--panel-separator-color) 4px,
-    var(--panel-separator-color) calc(100% - 4px),
-    transparent calc(100% - 4px)
-  );
+  border-image: linear-gradient(to right, transparent 4px, var(--panel-separator-color) 4px, var(--panel-separator-color) calc(100% - 4px), transparent calc(100% - 4px));
   border-image-slice: 1;
   margin-block: var(--panel-separator-margin);
   margin-block-end: 0;
@@ -301,8 +295,7 @@ no longer necessary after modern flexbox emulation. */
   fill-opacity: 0.6;
 }
 
-.panel-header
-  > .subviewbutton-back:not([disabled], [open], :hover:active):is(:hover, :focus-visible),
+.panel-header > .subviewbutton-back:not([disabled], [open], :hover:active):is(:hover, :focus-visible),
 .messageCloseButton:not([disabled], [open], :hover:active):is(:hover, :focus-visible) {
   fill-opacity: 0.8;
 }
@@ -417,8 +410,7 @@ no longer necessary after modern flexbox emulation. */
   position: relative;
 }
 
-#protections-popup-tp-switch-section:not([short])
-  > :is(.protections-popup-tp-switch-label-box, .protections-popup-tp-switch-box) {
+#protections-popup-tp-switch-section:not([short]) > :is(.protections-popup-tp-switch-label-box, .protections-popup-tp-switch-box) {
   min-height: 30px !important;
 }
 
@@ -477,31 +469,26 @@ no longer necessary after modern flexbox emulation. */
   color: white;
 }
 
-.popup-notification-button-container
-  > :is(.popup-notification-secondary-button, .popup-notification-dropmarker):not([disabled]) {
+.popup-notification-button-container > :is(.popup-notification-secondary-button, .popup-notification-dropmarker):not([disabled]) {
   background-color: transparent !important;
   border-color: var(--button-hover-bgcolor) !important;
 }
 
-.popup-notification-button-container
-  > :is(.popup-notification-secondary-button, .popup-notification-dropmarker):not([disabled], :active):is(:hover, :focus-visible) {
+.popup-notification-button-container > :is(.popup-notification-secondary-button, .popup-notification-dropmarker):not([disabled], :active):is(:hover, :focus-visible) {
   background-color: var(--button-hover-bgcolor) !important;
   border-color: transparent !important;
 }
 
-.popup-notification-button-container
-  > :is(.popup-notification-secondary-button, .popup-notification-dropmarker):not([disabled]):is(:hover:active, [open]) {
+.popup-notification-button-container > :is(.popup-notification-secondary-button, .popup-notification-dropmarker):not([disabled]):is(:hover:active, [open]) {
   background-color: var(--button-active-bgcolor) !important;
   border-color: transparent !important;
 }
 
-.popup-notification-button-container
-  > .popup-notification-primary-button:not([disabled], :active):is(:hover, :focus-visible) {
+.popup-notification-button-container > .popup-notification-primary-button:not([disabled], :active):is(:hover, :focus-visible) {
   background-color: var(--button-primary-hover-bgcolor) !important;
 }
 
-.popup-notification-button-container
-  > .popup-notification-primary-button:not([disabled]):hover:active {
+.popup-notification-button-container > .popup-notification-primary-button:not([disabled]):hover:active {
   background-color: var(--button-primary-active-bgcolor) !important;
 }
 
@@ -543,17 +530,14 @@ no longer necessary after modern flexbox emulation. */
   margin: revert !important;
 }
 
-.panel-footer.popup-notification-button-container
-  > .popup-notification-secondary-button:not([dropmarkerhidden="true"]) {
+.panel-footer.popup-notification-button-container > .popup-notification-secondary-button:not([dropmarkerhidden="true"]) {
   margin-inline-end: calc(0px - var(--menupopup-inner-padding-magnitude)) !important;
   border-start-end-radius: 0 !important;
   border-end-end-radius: 0 !important;
   border-inline-end: 0 !important;
 }
 
-.panel-footer.popup-notification-button-container
-  > .popup-notification-secondary-button:not([dropmarkerhidden="true"])
-  + toolbarseparator {
+.panel-footer.popup-notification-button-container > .popup-notification-secondary-button:not([dropmarkerhidden="true"]) + toolbarseparator {
   border-color: var(--button-hover-bgcolor) !important;
   margin-inline: calc(0px - var(--menupopup-inner-padding-magnitude)) !important;
 }
@@ -857,9 +841,7 @@ popupnotificationcontent label[control]:not([hidden]) + menulist {
   margin-top: 4px !important;
 }
 
-.permission-popup-permission-list-anchor[anchorfor="3rdPartyStorage"]
-  > vbox
-  + .permission-popup-permission-item {
+.permission-popup-permission-list-anchor[anchorfor="3rdPartyStorage"] > vbox + .permission-popup-permission-item {
   margin-top: 0 !important;
 }
 
@@ -875,35 +857,10 @@ popupnotificationcontent label[control]:not([hidden]) + menulist {
   fill-opacity: 1;
 }
 
-.identity-popup-security-connection {
-  background-size: 16px auto !important;
-}
-
-#identity-popup-securityView .identity-popup-connection-secure.security-view,
-#identity-popup-securityView .identity-popup-connection-not-secure.security-view {
-  margin-inline-start: calc(16px + var(--arrowpanel-subviewbutton-iconic-gap, 8px)) !important;
-}
-
 #identity-popup-securityView .identity-popup-security-connection {
-  background-position: left center !important;
-  padding: var(--arrowpanel-menuitem-padding-block) 0 !important;
-  margin: 0 var(--arrowpanel-menuitem-padding-inline) !important;
+  padding: var(--arrowpanel-menuitem-padding) !important;
+  margin: var(--arrowpanel-menuitem-margin) !important;
   margin-bottom: calc(0px - var(--arrowpanel-menuitem-padding-block)) !important;
-}
-
-.identity-popup-security-connection :where(description, label) {
-  margin-inline-start: calc(16px + var(--arrowpanel-subviewbutton-iconic-gap, 8px)) !important;
-}
-
-#identity-popup-mainView .identity-popup-security-connection {
-  background-position: 0 center !important;
-  -moz-box-pack: center !important;
-}
-
-#identity-popup-mainView
-  #identity-popup-security-button[disabled]
-  .identity-popup-security-connection {
-  min-height: 16px !important;
 }
 
 #identity-popup-security-button {
@@ -920,19 +877,6 @@ popupnotificationcontent label[control]:not([hidden]) + menulist {
   color: var(--panel-description-color) !important;
 }
 
-.identity-popup-security-connection.identity-button {
-  width: auto !important;
-  -moz-box-flex: 1 !important;
-}
-
-#identity-popup-mainView .identity-popup-security-connection > hbox {
-  /* display: flex !important;
-  flex-flow: column nowrap !important;
-  justify-content: center !important; */
-  -moz-box-align: center !important;
-  margin-inline: 0 !important;
-}
-
 #identity-popup-mainView .identity-popup-security-connection description {
   margin-inline-start: calc(16px + var(--arrowpanel-subviewbutton-iconic-gap, 8px)) !important;
 }
@@ -942,22 +886,20 @@ popupnotificationcontent label[control]:not([hidden]) + menulist {
   margin-inline-start: 0 !important;
 }
 
-#identity-popup[httpsonlystatus="upgraded"]
-  .identity-popup-security-connection
-  description:not(.upgraded) {
+#identity-popup[httpsonlystatus="upgraded"] .identity-popup-security-connection description:not(.upgraded) {
   font-size: 0.91em !important;
 }
 
 #identity-popup[connection="chrome"] .identity-popup-security-connection {
-  background-image: url(chrome://userchrome/content/identity-icons-brand.svg) !important;
+  list-style-image: url(chrome://userchrome/content/identity-icons-brand.svg) !important;
 }
 
 #identity-popup[connection="file"] .identity-popup-security-connection {
-  background-image: url(chrome://userchrome/content/notifications/persistent-storage.svg) !important;
+  list-style-image: url(chrome://userchrome/content/notifications/persistent-storage.svg) !important;
 }
 
 #identity-popup[connection^="secure"] .identity-popup-security-connection {
-  background-image: url(chrome://userchrome/content/skin/connection-secure.svg) !important;
+  list-style-image: url(chrome://userchrome/content/skin/connection-secure.svg) !important;
   -moz-context-properties: fill;
   fill: var(--secure-color) !important;
 }
@@ -967,7 +909,7 @@ popupnotificationcontent label[control]:not([hidden]) + menulist {
 #identity-popup[connection="secure-cert-user-overridden"] .identity-popup-security-connection,
 #identity-popup[connection="cert-error-page"] .identity-popup-security-connection,
 #identity-popup[connection="secure-cert-user-overridden"] .identity-popup-security-connection {
-  background-image: url(chrome://global/skin/icons/security-warning.svg);
+  list-style-image: url(chrome://global/skin/icons/security-warning.svg);
   -moz-context-properties: fill, stroke !important;
   fill: unset !important;
   stroke: var(--low-warning-icon-stroke) !important;
@@ -976,32 +918,26 @@ popupnotificationcontent label[control]:not([hidden]) + menulist {
 #identity-popup[connection="https-only-error-page"] .identity-popup-security-connection,
 #identity-popup[connection="cert-error-page"] .identity-popup-security-connection,
 #identity-popup[connection="net-error-page"] .identity-popup-security-connection {
-  background-image: url(chrome://userchrome/content/warning-big.svg) !important;
+  list-style-image: url(chrome://userchrome/content/warning-big.svg) !important;
 }
 
 #identity-popup[connection="extension"] .identity-popup-security-connection {
-  background-image: url(chrome://userchrome/content/material/extension.svg) !important;
-  background-size: 16px auto !important;
+  list-style-image: url(chrome://userchrome/content/material/extension.svg) !important;
   fill: currentColor !important;
 }
 
-#identity-popup:where([connection="secure"])
-  .identity-popup-connection-secure.security-view[when-connection~="secure"] {
+#identity-popup[connection="secure"] .identity-popup-security-connection .identity-popup-security-connection-icon,
+#identity-popup:where([connection="secure"]) .identity-popup-connection-secure.security-view[when-connection~="secure"] {
   color: var(--secure-text-color) !important;
+  fill: currentColor !important;
 }
 
-#identity-popup:where([connection="not-secure"])
-  .identity-popup-security-connection
-  .identity-popup-connection-not-secure.security-view[when-connection~="not-secure"] {
+#identity-popup:where([connection="not-secure"]) .identity-popup-security-connection .identity-popup-connection-not-secure.security-view[when-connection~="not-secure"] {
   color: var(--warning-color) !important;
 }
 
-#identity-popup:where([ciphers="weak"])
-  .identity-popup-security-connection
-  .identity-popup-connection-not-secure.security-view[when-connection~="not-secure"],
-#identity-popup:where([mixedcontent~="passive-loaded"][isbroken])
-  .identity-popup-security-connection
-  .identity-popup-connection-not-secure.security-view[when-connection~="not-secure"] {
+#identity-popup:where([ciphers="weak"]) .identity-popup-security-connection .identity-popup-connection-not-secure.security-view[when-connection~="not-secure"],
+#identity-popup:where([mixedcontent~="passive-loaded"][isbroken]) .identity-popup-security-connection .identity-popup-connection-not-secure.security-view[when-connection~="not-secure"] {
   color: var(--low-warning-text-color) !important;
 }
 
@@ -1023,9 +959,7 @@ popupnotificationcontent label[control]:not([hidden]) + menulist {
   padding-inline: 15px !important;
 }
 
-#protections-popup[toast]
-  #protections-popup-mainView
-  > :not(#protections-popup-mainView-panel-header-section),
+#protections-popup[toast] #protections-popup-mainView > :not(#protections-popup-mainView-panel-header-section),
 #protections-popup[toast] #protections-popup-main-header-label {
   display: none;
 }
@@ -1064,9 +998,7 @@ popupnotificationcontent label[control]:not([hidden]) + menulist {
   transition: border-color 0.35s !important;
 }
 
-#protections-popup:not([infoMessageShowing])
-  #protections-popup-mainView-panel-header-section
-  + toolbarseparator {
+#protections-popup:not([infoMessageShowing]) #protections-popup-mainView-panel-header-section + toolbarseparator {
   border-color: transparent !important;
 }
 
@@ -1135,10 +1067,6 @@ popupnotificationcontent label[control]:not([hidden]) + menulist {
   border: none !important;
 }
 
-.identity-popup-section {
-  -moz-box-align: center;
-}
-
 .identity-popup-expander {
   width: min-content !important;
   padding: 10px !important;
@@ -1178,7 +1106,6 @@ popupnotificationcontent label[control]:not([hidden]) + menulist {
   background-color: transparent !important;
   border-radius: 3px !important;
   padding: 0.15em 0.4em !important;
-  margin-inline: 24px 1px !important;
   min-height: var(--subviewbutton-height) !important;
   align-self: center !important;
 }
@@ -1202,13 +1129,6 @@ popupnotificationcontent label[control]:not([hidden]) + menulist {
 
 #identity-popup-mainView #identity-popup-security-description > :is(description, label, button) {
   margin-block: 4px 8px !important;
-  margin-inline-start: calc(16px + var(--arrowpanel-subviewbutton-iconic-gap, 8px)) !important;
-  padding-inline: 0 !important;
-}
-
-#identity-popup-mainView #identity-popup-security {
-  margin-inline: 10px !important;
-  padding-inline-end: 1em !important;
 }
 
 #identity-popup-securityView .identity-popup-security-connection,
@@ -1216,6 +1136,7 @@ popupnotificationcontent label[control]:not([hidden]) + menulist {
   font-weight: var(--uc-font-weight-bold, 600) !important;
 }
 
+#identity-popup-securityView-extended-info > .identity-popup-warning-box,
 #identity-popup-security-description > .identity-popup-warning-box {
   font-weight: var(--uc-font-weight-semibold, 500) !important;
 }
@@ -1226,6 +1147,11 @@ popupnotificationcontent label[control]:not([hidden]) + menulist {
 
 :root[lwt-popup-brighttext] panel .identity-popup-warning-yellow .text-link {
   color: var(--low-warning-text-color) !important;
+}
+
+.identity-popup-section.indented,
+#identity-popup-securityView-extended-info[connection="secure"] {
+  padding-inline: calc(var(--arrowpanel-menuitem-padding-inline) + 16px + var(--arrowpanel-subviewbutton-iconic-gap, 8px)) !important;
 }
 
 #identity-popup-securityView-body {
@@ -1515,8 +1441,7 @@ toolbar button slider script. but just in case) */
   height: 40px !important;
 }
 
-:is(#identity-popup-mainView-panel-header, #eom-mainView-panel-header, #permission-popup-mainView-panel-header, #protections-popup-mainView-panel-header)
-  :is(label, description) {
+:is(#identity-popup-mainView-panel-header, #eom-mainView-panel-header, #permission-popup-mainView-panel-header, #protections-popup-mainView-panel-header) :is(label, description) {
   font-size: 1.1em !important;
   line-height: normal !important;
   font-weight: var(--uc-font-weight-bold, 600) !important;
@@ -1553,8 +1478,7 @@ toolbar button slider script. but just in case) */
   margin-block-start: 6px !important;
 }
 
-:is(#identity-popup-mainView-panel-header, #permission-popup-mainView-panel-header, #protections-popup-mainView-panel-header)
-  span,
+:is(#identity-popup-mainView-panel-header, #permission-popup-mainView-panel-header, #protections-popup-mainView-panel-header) span,
 .protections-popup-tp-switch-on-header,
 .protections-popup-tp-switch-off-header {
   font-weight: inherit !important;
@@ -1568,14 +1492,13 @@ toolbar button slider script. but just in case) */
 .identity-popup-section,
 .permission-popup-section,
 .protections-popup-section {
-  margin-inline: var(--arrowpanel-menuitem-inline-margin);
+  margin-inline: var(--arrowpanel-menuitem-margin-inline);
 }
 
 #geo-access-indicator-item,
 #blocked-popup-indicator-item {
   min-height: 20px !important;
-  background: url(chrome://userchrome/content/notifications/popup-subitem.svg) left center/16px
-    no-repeat;
+  background: url(chrome://userchrome/content/notifications/popup-subitem.svg) left center/16px no-repeat;
   margin-block: -2px 0.4em !important;
   margin-inline-start: 22px !important;
   padding-inline-start: 13px !important;
@@ -1585,8 +1508,7 @@ toolbar button slider script. but just in case) */
   font-size: revert !important;
 }
 
-:is(#geo-access-indicator-item, #blocked-popup-indicator-item)
-  > .permission-popup-permission-label {
+:is(#geo-access-indicator-item, #blocked-popup-indicator-item) > .permission-popup-permission-label {
   margin-block: 0 !important;
 }
 
@@ -1700,8 +1622,7 @@ toolbar button slider script. but just in case) */
 }
 
 .PanelUI-profiler-button:focus-visible {
-  box-shadow: 0 0 0 1px var(--global-focus-outline-color) inset,
-    0 0 0 1px var(--global-focus-outline-color), 0 0 0 4px var(--global-focus-shadow-color) !important;
+  box-shadow: 0 0 0 1px var(--global-focus-outline-color) inset, 0 0 0 1px var(--global-focus-outline-color), 0 0 0 4px var(--global-focus-shadow-color) !important;
 }
 
 .eom-addon-button[message-type="warning"]:not([disabled], [open]):is(:hover, :focus-visible) {
@@ -1748,23 +1669,20 @@ toolbar button slider script. but just in case) */
   list-style-image: url(chrome://userchrome/content/skin/controlcenter/dashboard.svg);
 }
 
-.subviewbutton[data-l10n-id="protections-panel-content-blocking-manage-settings"]
-  .toolbarbutton-icon {
+.subviewbutton[data-l10n-id="protections-panel-content-blocking-manage-settings"] .toolbarbutton-icon {
   list-style-image: url(chrome://userchrome/content/settings.svg);
 }
 
 #protections-popup-settings-button .protections-popup-footer-icon,
 #protections-popup-show-report-button .protections-popup-footer-icon,
-.subviewbutton[data-l10n-id="protections-panel-content-blocking-manage-settings"]
-  .toolbarbutton-icon {
+.subviewbutton[data-l10n-id="protections-panel-content-blocking-manage-settings"] .toolbarbutton-icon {
   width: 16px;
   height: 16px;
 }
 
 #protections-popup-settings-button .protections-popup-footer-button-label,
 #protections-popup-show-report-button .protections-popup-footer-button-label,
-.subviewbutton[data-l10n-id="protections-panel-content-blocking-manage-settings"]
-  .toolbarbutton-text {
+.subviewbutton[data-l10n-id="protections-panel-content-blocking-manage-settings"] .toolbarbutton-text {
   padding-inline-start: var(--arrowpanel-subviewbutton-iconic-gap, 8px) !important;
 }
 
@@ -1782,36 +1700,30 @@ toolbar button slider script. but just in case) */
   background: none !important;
 }
 
-#contextual-feature-recommendation-notification[data-notification-bucket="CFR_MILESTONE_MESSAGE"]
-  description {
+#contextual-feature-recommendation-notification[data-notification-bucket="CFR_MILESTONE_MESSAGE"] description {
   transform: none !important;
 }
 
-#contextual-feature-recommendation-notification[data-notification-bucket="CFR_MILESTONE_MESSAGE"]
-  .popup-notification-button-container {
+#contextual-feature-recommendation-notification[data-notification-bucket="CFR_MILESTONE_MESSAGE"] .popup-notification-button-container {
   margin: 4px !important;
   gap: 4px !important;
 }
 
-#contextual-feature-recommendation-notification[data-notification-bucket="CFR_MILESTONE_MESSAGE"]
-  .popup-notification-secondary-button {
+#contextual-feature-recommendation-notification[data-notification-bucket="CFR_MILESTONE_MESSAGE"] .popup-notification-secondary-button {
   margin: 0 !important;
   background-size: 16px !important;
   padding: 6px !important;
 }
 
-#contextual-feature-recommendation-notification[data-notification-bucket="CFR_MILESTONE_MESSAGE"]
-  .popup-notification-primary-button {
+#contextual-feature-recommendation-notification[data-notification-bucket="CFR_MILESTONE_MESSAGE"] .popup-notification-primary-button {
   margin: 0 !important;
 }
 
-#contextual-feature-recommendation-notification[data-notification-bucket="CFR_MILESTONE_MESSAGE"]
-  .popup-notification-primary-button::after {
+#contextual-feature-recommendation-notification[data-notification-bucket="CFR_MILESTONE_MESSAGE"] .popup-notification-primary-button::after {
   margin-inline-start: 4px !important;
 }
 
-#contextual-feature-recommendation-notification[data-notification-category="icon_and_message"]
-  .popup-notification-body-container {
+#contextual-feature-recommendation-notification[data-notification-category="icon_and_message"] .popup-notification-body-container {
   padding-bottom: calc(var(--arrowpanel-padding) / 2) !important;
 }
 
@@ -1820,7 +1732,7 @@ toolbar button slider script. but just in case) */
 }
 
 #protections-popup-milestones {
-  margin: var(--arrowpanel-menuitem-inline-margin) !important;
+  margin: var(--arrowpanel-menuitem-margin-inline) !important;
   margin-top: 0 !important;
   padding: 0 !important;
   background: none !important;

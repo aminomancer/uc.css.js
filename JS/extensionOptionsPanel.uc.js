@@ -94,15 +94,15 @@ class ExtensionOptionsWidget {
       // labels for addon buttons that have a warning or error,
       // e.g. addon automatically disabled because it's on a blocklist or unsigned
       addonMessages: {
-        "Blocked": "Blocked",
+        Blocked: "Blocked",
 
         "Signature required": "Signature required",
 
-        "Incompatible": "Incompatible",
+        Incompatible: "Incompatible",
 
-        "Unverified": "Unverified",
+        Unverified: "Unverified",
 
-        "Insecure": "Insecure",
+        Insecure: "Insecure",
       },
     },
   };
@@ -177,7 +177,9 @@ class ExtensionOptionsWidget {
    */
   isDisabledUnsigned(addon) {
     let signingRequired =
-      addon.type == "locale" ? this.LANGPACKS_REQUIRE_SIGNING : this.REQUIRE_SIGNING;
+      addon.type == "locale"
+        ? this.LANGPACKS_REQUIRE_SIGNING
+        : this.REQUIRE_SIGNING;
     return signingRequired && !this.isCorrectlySigned(addon);
   }
 
@@ -190,7 +192,9 @@ class ExtensionOptionsWidget {
     if (addon.id == "default-theme@mozilla.org") {
       return "chrome://mozapps/content/extensions/default-theme/preview.svg";
     }
-    const builtInThemePreview = this.BuiltInThemes.previewForBuiltInThemeId(addon.id);
+    const builtInThemePreview = this.BuiltInThemes.previewForBuiltInThemeId(
+      addon.id
+    );
     if (builtInThemePreview) return builtInThemePreview;
     let { screenshots } = addon;
     if (!screenshots || !screenshots.length) return null;
@@ -210,7 +214,9 @@ class ExtensionOptionsWidget {
       BuiltInThemes: "resource:///modules/BuiltInThemes.jsm",
     });
     XPCOMUtils.defineLazyGetter(this, "extBundle", function() {
-      return Services.strings.createBundle("chrome://global/locale/extensions.properties");
+      return Services.strings.createBundle(
+        "chrome://global/locale/extensions.properties"
+      );
     });
     XPCOMUtils.defineLazyPreferenceGetter(
       this,
@@ -242,7 +248,9 @@ class ExtensionOptionsWidget {
         // if the button is middle-clicked, open the addons page instead of the panel
         onClick: event => {
           if (event.button == 1) {
-            event.target.ownerGlobal.BrowserOpenAddonsMgr("addons://list/extension");
+            event.target.ownerGlobal.BrowserOpenAddonsMgr(
+              "addons://list/extension"
+            );
           }
         },
         // create the panelview before the toolbar button
@@ -296,13 +304,20 @@ class ExtensionOptionsWidget {
         },
         // populate the panel before it's shown
         onViewShowing: event => {
-          if (event.originalTarget === event.target.ownerGlobal.extensionOptionsPanel?.panelview) {
-            event.target.ownerGlobal.extensionOptionsPanel.getAddonsAndPopulate(event);
+          if (
+            event.originalTarget ===
+            event.target.ownerGlobal.extensionOptionsPanel?.panelview
+          ) {
+            event.target.ownerGlobal.extensionOptionsPanel.getAddonsAndPopulate(
+              event
+            );
           }
         },
         // delete the panel if the widget node is destroyed
         onDestroyed: aDoc => {
-          let view = aDoc.getElementById(aDoc.defaultView.extensionOptionsPanel?.viewId);
+          let view = aDoc.getElementById(
+            aDoc.defaultView.extensionOptionsPanel?.viewId
+          );
           if (view) {
             aDoc.defaultView.CustomizableUI.hidePanelForNode(view);
             view.remove();
@@ -315,8 +330,16 @@ class ExtensionOptionsWidget {
 
   // grab localized strings for the extensions button and disabled/enabled extensions headings
   async fluentSetup(aDoc) {
-    aDoc.ownerGlobal.MozXULElement.insertFTLIfNeeded("toolkit/about/aboutAddons.ftl");
-    let [extensions, themes, enabled, disabled, privateHelp] = await aDoc.l10n.formatValues([
+    aDoc.ownerGlobal.MozXULElement.insertFTLIfNeeded(
+      "toolkit/about/aboutAddons.ftl"
+    );
+    let [
+      extensions,
+      themes,
+      enabled,
+      disabled,
+      privateHelp,
+    ] = await aDoc.l10n.formatValues([
       "addon-category-extension",
       "addon-category-theme",
       "extension-enabled-heading",
@@ -324,7 +347,13 @@ class ExtensionOptionsWidget {
       "addon-detail-private-browsing-help",
     ]);
     privateHelp = privateHelp.replace(/\s*\<.*\>$/, "");
-    this.aboutAddonsStrings = { extensions, themes, enabled, disabled, privateHelp };
+    this.aboutAddonsStrings = {
+      extensions,
+      themes,
+      enabled,
+      disabled,
+      privateHelp,
+    };
   }
 
   /**
@@ -335,7 +364,8 @@ class ExtensionOptionsWidget {
   swapAddonsButton(aDoc) {
     if (!this.config["Replace addons button"]) return;
     let win = aDoc.defaultView;
-    win.PanelUI._initialized || win.PanelUI.init(shouldSuppressPopupNotifications);
+    win.PanelUI._initialized ||
+      win.PanelUI.init(shouldSuppressPopupNotifications);
     this.setAttributes(
       win.PanelUI.mainView.querySelector("#appMenu-extensions-themes-button") ||
         win.PanelUI.mainView.querySelector("#appMenu-addons-button"),
@@ -385,9 +415,14 @@ class ExtensionOptionsWidget {
       if (panel.id.includes("PanelUI-eom-addon-")) panel.remove();
     });
     let appMenuMultiView = win.PanelMultiView.forNode(PanelUI.multiView);
-    if (win.PanelMultiView.forNode(view.closest("panelmultiview")) === appMenuMultiView) {
+    if (
+      win.PanelMultiView.forNode(view.closest("panelmultiview")) ===
+      appMenuMultiView
+    ) {
       [...appMenuMultiView._viewStack.children].forEach(panel => {
-        if (panel.id !== view.id && panel.id.includes("PanelUI-eom-addon-")) panel.remove();
+        if (panel.id !== view.id && panel.id.includes("PanelUI-eom-addon-")) {
+          panel.remove();
+        }
       });
     }
 
@@ -395,12 +430,16 @@ class ExtensionOptionsWidget {
     let enabledSubheader = body.appendChild(
       this.create(doc, "h2", { class: "subview-subheader" }, true)
     );
-    enabledSubheader.textContent = this.aboutAddonsStrings[showDisabled ? "enabled" : "extensions"];
+    enabledSubheader.textContent = this.aboutAddonsStrings[
+      showDisabled ? "enabled" : "extensions"
+    ];
     extensions
       .sort((a, b) => {
         // get sorted by enabled state...
-        let ka = (enabledFirst ? Number(!a.isActive) : "") + a.name.toLowerCase();
-        let kb = (enabledFirst ? Number(!b.isActive) : "") + b.name.toLowerCase();
+        let ka =
+          (enabledFirst ? Number(!a.isActive) : "") + a.name.toLowerCase();
+        let kb =
+          (enabledFirst ? Number(!b.isActive) : "") + b.name.toLowerCase();
         return ka < kb ? -1 : 1;
       })
       .forEach(addon => {
@@ -411,7 +450,12 @@ class ExtensionOptionsWidget {
           (!addon.userDisabled || showDisabled)
         ) {
           // then get built into subviewbuttons and corresponding subviews...
-          if (showDisabled && enabledFirst && prevState && addon.isActive != prevState) {
+          if (
+            showDisabled &&
+            enabledFirst &&
+            prevState &&
+            addon.isActive != prevState
+          ) {
             body.appendChild(doc.createXULElement("toolbarseparator"));
             let disabledSubheader = body.appendChild(
               this.create(doc, "h2", { class: "subview-subheader" }, true)
@@ -423,7 +467,8 @@ class ExtensionOptionsWidget {
           let subviewbutton = body.appendChild(
             this.create(doc, "toolbarbutton", {
               label: addon.name + (showVersion ? " " + addon.version : ""),
-              class: "subviewbutton subviewbutton-iconic subviewbutton-nav eom-addon-button",
+              class:
+                "subviewbutton subviewbutton-iconic subviewbutton-nav eom-addon-button",
               oncommand: "extensionOptionsPanel.showSubView(event, this)",
               closemenu: "none",
               "addon-type": "extension",
@@ -438,12 +483,16 @@ class ExtensionOptionsWidget {
           );
           subviewbutton._Addon = addon;
 
-          if (this.config["Show addon messages"]) this.setAddonMessage(doc, subviewbutton, addon);
+          if (this.config["Show addon messages"]) {
+            this.setAddonMessage(doc, subviewbutton, addon);
+          }
         }
       });
 
     // themes...
-    let themesSeparator = body.appendChild(doc.createXULElement("toolbarseparator"));
+    let themesSeparator = body.appendChild(
+      doc.createXULElement("toolbarseparator")
+    );
     let themesSubheader = body.appendChild(
       this.create(doc, "h2", { class: "subview-subheader" }, true)
     );
@@ -468,7 +517,9 @@ class ExtensionOptionsWidget {
           subviewbutton.parentElement
             .querySelectorAll(`.eom-addon-button[addon-type="theme"]`)
             .forEach(btn => {
-              btn.classList[btn._Addon?.isActive ? "remove" : "add"]("disabled");
+              btn.classList[btn._Addon?.isActive ? "remove" : "add"](
+                "disabled"
+              );
               this.setAddonMessage(doc, btn, btn._Addon);
             });
         });
@@ -497,8 +548,12 @@ class ExtensionOptionsWidget {
       })
     );
 
-    let hasExtensions = !!body.querySelector(`.eom-addon-button[addon-type="extension"]`);
-    let hasThemes = !!body.querySelector(`.eom-addon-button[addon-type="theme"]`);
+    let hasExtensions = !!body.querySelector(
+      `.eom-addon-button[addon-type="extension"]`
+    );
+    let hasThemes = !!body.querySelector(
+      `.eom-addon-button[addon-type="theme"]`
+    );
     getAddonsButton.hidden = hasExtensions || hasThemes;
     if (!hasExtensions) {
       enabledSubheader.remove();
@@ -559,7 +614,8 @@ class ExtensionOptionsWidget {
       };
     } else if (
       !addon.isCompatible &&
-      (AddonManager.checkCompatibility || addon.blocklistState !== STATE_SOFTBLOCKED)
+      (AddonManager.checkCompatibility ||
+        addon.blocklistState !== STATE_SOFTBLOCKED)
     ) {
       message = {
         label: l10n.addonMessages.Incompatible,
@@ -607,7 +663,9 @@ class ExtensionOptionsWidget {
     if (message) {
       subviewbutton.setAttribute("message-type", message?.type);
       subviewbutton.setAttribute("tooltiptext", message?.detail);
-      if (message.tooltip) subviewbutton.setAttribute("tooltip", message.tooltip);
+      if (message.tooltip) {
+        subviewbutton.setAttribute("tooltip", message.tooltip);
+      }
       if (message.checked) subviewbutton.setAttribute("enable-checked", true);
       if (message.label) {
         subviewbutton.appendChild(
@@ -662,7 +720,9 @@ class ExtensionOptionsWidget {
         class: "subviewbutton",
       })
     );
-    optionsButton.addEventListener("command", e => this.openAddonOptions(addon, win));
+    optionsButton.addEventListener("command", e =>
+      this.openAddonOptions(addon, win)
+    );
 
     // manage button, when no options page exists
     let manageButton = view.appendChild(
@@ -672,13 +732,17 @@ class ExtensionOptionsWidget {
       })
     );
     manageButton.addEventListener("command", e =>
-      win.BrowserOpenAddonsMgr("addons://detail/" + encodeURIComponent(addon.id))
+      win.BrowserOpenAddonsMgr(
+        "addons://detail/" + encodeURIComponent(addon.id)
+      )
     );
 
     // disable button
     let disableButton = view.appendChild(
       this.create(doc, "toolbarbutton", {
-        label: addon.userDisabled ? l10n["Enable addon label"] : l10n["Disable addon label"],
+        label: addon.userDisabled
+          ? l10n["Enable addon label"]
+          : l10n["Disable addon label"],
         class: "subviewbutton",
         closemenu: "none",
       })
@@ -702,7 +766,13 @@ class ExtensionOptionsWidget {
       })
     );
     uninstallButton.addEventListener("command", e => {
-      if (win.Services.prompt.confirm(null, null, `Delete ${addon.name} permanently?`)) {
+      if (
+        win.Services.prompt.confirm(
+          null,
+          null,
+          `Delete ${addon.name} permanently?`
+        )
+      ) {
         addon.pendingOperations & win.AddonManager.PENDING_UNINSTALL
           ? addon.cancelUninstall()
           : addon.uninstall();
@@ -736,7 +806,10 @@ class ExtensionOptionsWidget {
         "aria-labelledby": "eom-allow-auto-updates-label",
       })
     );
-    updatesGroup.addEventListener("command", e => (addon.applyBackgroundUpdates = e.target.value));
+    updatesGroup.addEventListener(
+      "command",
+      e => (addon.applyBackgroundUpdates = e.target.value)
+    );
     updatesGroup.appendChild(
       this.create(doc, "radio", {
         label: l10n.autoUpdate["Default label"],
@@ -762,7 +835,9 @@ class ExtensionOptionsWidget {
     // run in private windows radio group
     let setPrivateState = async (addon, node) => {
       let perms = await this.ExtensionPermissions.get(addon.id);
-      let isAllowed = perms.permissions.includes("internal:privateBrowsingAllowed");
+      let isAllowed = perms.permissions.includes(
+        "internal:privateBrowsingAllowed"
+      );
       node.permState = isAllowed;
       node.value = isAllowed ? 1 : 0;
     };
@@ -794,7 +869,9 @@ class ExtensionOptionsWidget {
     );
     privateGroup.addEventListener("command", async () => {
       let extension = this.extensionForAddonId(addon.id);
-      await this.ExtensionPermissions[privateGroup.permState ? "remove" : "add"](
+      await this.ExtensionPermissions[
+        privateGroup.permState ? "remove" : "add"
+      ](
         addon.id,
         {
           permissions: ["internal:privateBrowsingAllowed"],
@@ -862,7 +939,8 @@ class ExtensionOptionsWidget {
       win.Cc["@mozilla.org/widget/clipboardhelper;1"]
         .getService(win.Ci.nsIClipboardHelper)
         .copyString(addon.id);
-      let PMV = view.panelMultiView && win.PanelMultiView.forNode(view.panelMultiView);
+      let PMV =
+        view.panelMultiView && win.PanelMultiView.forNode(view.panelMultiView);
       if (PMV) {
         let panel = PMV._panel;
         if (panel && PMV._getBoundsWithoutFlushing(panel.anchorNode)?.width) {
@@ -878,14 +956,19 @@ class ExtensionOptionsWidget {
       updatesGroup.setAttribute("value", addon.applyBackgroundUpdates);
       privateWindows.hidden = !(
         addon.incognito != "not_allowed" &&
-        !!(addon.permissions & win.AddonManager.PERM_CAN_CHANGE_PRIVATEBROWSING_ACCESS)
+        !!(
+          addon.permissions &
+          win.AddonManager.PERM_CAN_CHANGE_PRIVATEBROWSING_ACCESS
+        )
       );
       setPrivateState(addon, privateGroup);
-      shortcutsButton.hidden = !this.extensionForAddonId(addon.id)?.shortcuts?.manifestCommands
-        ?.size;
+      shortcutsButton.hidden = !this.extensionForAddonId(addon.id)?.shortcuts
+        ?.manifestCommands?.size;
       disableButton.setAttribute(
         "label",
-        addon.userDisabled ? l10n["Enable addon label"] : l10n["Disable addon label"]
+        addon.userDisabled
+          ? l10n["Enable addon label"]
+          : l10n["Disable addon label"]
       );
       uninstallButton.hidden = viewSrcButton.hidden =
         addon.isSystem || addon.isBuiltin || addon.temporarilyInstalled;
@@ -921,7 +1004,9 @@ class ExtensionOptionsWidget {
           }
         }
         let features = "chrome,titlebar,toolbar,centerscreen";
-        if (win.Services.prefs.getBoolPref("browser.preferences.instantApply")) {
+        if (
+          win.Services.prefs.getBoolPref("browser.preferences.instantApply")
+        ) {
           features += ",dialog=no";
         }
         win.openDialog(addon.optionsURL, addon.id, features);
@@ -940,7 +1025,9 @@ class ExtensionOptionsWidget {
   }
 
   onTooltipShowing(e) {
-    let anchor = e.target.triggerNode ? e.target.triggerNode.closest(".eom-addon-button") : null;
+    let anchor = e.target.triggerNode
+      ? e.target.triggerNode.closest(".eom-addon-button")
+      : null;
     let message = anchor._addonMessage;
     let img = e.target.querySelector("#eom-theme-preview-canvas");
     img.src = message?.preview || "";
@@ -954,7 +1041,9 @@ class ExtensionOptionsWidget {
 
   // generate and load a stylesheet
   loadStylesheet() {
-    let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(Ci.nsIStyleSheetService);
+    let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
+      Ci.nsIStyleSheetService
+    );
     let uri = makeURI(
       "data:text/css;charset=UTF=8," +
         encodeURIComponent(

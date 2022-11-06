@@ -38,11 +38,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
     uninstalled. so our mixed color is darker in dark mode than in light
     mode. that's how we get on the low end of the threshold in dark mode and
     still on the high end in light mode. */
-    --overlay-scrollbar-thumb-color: color-mix(
-      in srgb,
-      var(--darkreader-neutral-text, hsl(0, 0%, 100%)),
-      black 52%
-    );
+    --overlay-scrollbar-thumb-color: color-mix(in srgb, var(--darkreader-neutral-text, hsl(0, 0%, 100%)), black 52%);
   }
 
   /* Article preview popups. Make them scrollable, remove settings button, etc. */
@@ -83,23 +79,19 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
     margin-bottom: 16px !important;
   }
 
-  .mwe-popups.mwe-popups-is-not-tall:is(.flipped-y, .flipped-x-y):not(.mwe-popups-type-disambiguation)
-    .mwe-popups-extract {
+  .mwe-popups.mwe-popups-is-not-tall:is(.flipped-y, .flipped-x-y):not(.mwe-popups-type-disambiguation) .mwe-popups-extract {
     margin-bottom: calc(16px + var(--pointer-height)) !important;
   }
 
-  .mwe-popups:not(.flipped-y, .flipped-x-y, .mwe-popups-image-pointer, .mwe-popups-type-disambiguation)
-    .mwe-popups-extract {
+  .mwe-popups:not(.flipped-y, .flipped-x-y, .mwe-popups-image-pointer, .mwe-popups-type-disambiguation) .mwe-popups-extract {
     margin-top: calc(16px + var(--pointer-height)) !important;
   }
 
-  .mwe-popups.mwe-popups-is-tall.mwe-popups-image-pointer:is(.flipped-y, .flipped-x-y):not(.mwe-popups-type-disambiguation)
-    .mwe-popups-extract {
+  .mwe-popups.mwe-popups-is-tall.mwe-popups-image-pointer:is(.flipped-y, .flipped-x-y):not(.mwe-popups-type-disambiguation) .mwe-popups-extract {
     margin-bottom: calc(16px + var(--pointer-height)) !important;
   }
 
-  .mwe-popups.mwe-popups-is-tall.mwe-popups-image-pointer:not(.flipped-y, .flipped-x-y, .mwe-popups-type-disambiguation)
-    .mwe-popups-extract {
+  .mwe-popups.mwe-popups-is-tall.mwe-popups-image-pointer:not(.flipped-y, .flipped-x-y, .mwe-popups-type-disambiguation) .mwe-popups-extract {
     margin-top: calc(16px + var(--pointer-height)) !important;
   }
 }
@@ -112,9 +104,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       font-family: "Source Code Pro";
       font-style: normal;
       font-weight: 400;
-      src: local("Source Code Pro"), local("SourceCodePro-Regular"),
-        url(https://fonts.gstatic.com/s/sourcecodepro/v7/mrl8jkM18OlOQN8JLgasDy2Q8seG17bfDXYR_jUsrzg.woff2)
-          format("woff2");
+      src: local("Source Code Pro"), local("SourceCodePro-Regular"), url(https://fonts.gstatic.com/s/sourcecodepro/v7/mrl8jkM18OlOQN8JLgasDy2Q8seG17bfDXYR_jUsrzg.woff2) format("woff2");
     }
 
     /* latin */
@@ -122,9 +112,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       font-family: "Source Code Pro";
       font-style: normal;
       font-weight: 400;
-      src: local("Source Code Pro"), local("SourceCodePro-Regular"),
-        url(https://fonts.gstatic.com/s/sourcecodepro/v7/mrl8jkM18OlOQN8JLgasD9V_2ngZ8dMf8fLgjYEouxg.woff2)
-          format("woff2");
+      src: local("Source Code Pro"), local("SourceCodePro-Regular"), url(https://fonts.gstatic.com/s/sourcecodepro/v7/mrl8jkM18OlOQN8JLgasD9V_2ngZ8dMf8fLgjYEouxg.woff2) format("woff2");
     }
 
     /* latin */
@@ -132,9 +120,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       font-family: "Source Code Pro";
       font-style: normal;
       font-weight: 700;
-      src: local("Source Code Pro Bold"), local("SourceCodePro-Bold"),
-        url(https://fonts.gstatic.com/s/sourcecodepro/v7/leqv3v-yTsJNC7nFznSMqUo0As1BFRXtCDhS66znb_k.woff2)
-          format("woff2");
+      src: local("Source Code Pro Bold"), local("SourceCodePro-Bold"), url(https://fonts.gstatic.com/s/sourcecodepro/v7/leqv3v-yTsJNC7nFznSMqUo0As1BFRXtCDhS66znb_k.woff2) format("woff2");
     }
 
     /* cyrillic */
@@ -142,9 +128,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       font-family: "Source Sans Pro";
       font-style: italic;
       font-weight: 400;
-      src: local("Source Sans Pro Italic"), local("SourceSansPro-Italic"),
-        url(https://fonts.gstatic.com/s/sourcesanspro/v11/M2Jd71oPJhLKp0zdtTvoMywVDUTj8DgJRSuHEKdySfs.woff2)
-          format("woff2");
+      src: local("Source Sans Pro Italic"), local("SourceSansPro-Italic"), url(https://fonts.gstatic.com/s/sourcesanspro/v11/M2Jd71oPJhLKp0zdtTvoMywVDUTj8DgJRSuHEKdySfs.woff2) format("woff2");
     }
 
     /* greek */
@@ -152,9 +136,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       font-family: "Source Sans Pro";
       font-style: italic;
       font-weight: 400;
-      src: local("Source Sans Pro Italic"), local("SourceSansPro-Italic"),
-        url(https://fonts.gstatic.com/s/sourcesanspro/v11/M2Jd71oPJhLKp0zdtTvoM2qPyaMejTZ925Ro5CnyJwc.woff2)
-          format("woff2");
+      src: local("Source Sans Pro Italic"), local("SourceSansPro-Italic"), url(https://fonts.gstatic.com/s/sourcesanspro/v11/M2Jd71oPJhLKp0zdtTvoM2qPyaMejTZ925Ro5CnyJwc.woff2) format("woff2");
     }
 
     /* latin-ext */
@@ -162,9 +144,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       font-family: "Source Sans Pro";
       font-style: italic;
       font-weight: 400;
-      src: local("Source Sans Pro Italic"), local("SourceSansPro-Italic"),
-        url(https://fonts.gstatic.com/s/sourcesanspro/v11/M2Jd71oPJhLKp0zdtTvoM40tgx99jmYGv_xzYuwd1rU.woff2)
-          format("woff2");
+      src: local("Source Sans Pro Italic"), local("SourceSansPro-Italic"), url(https://fonts.gstatic.com/s/sourcesanspro/v11/M2Jd71oPJhLKp0zdtTvoM40tgx99jmYGv_xzYuwd1rU.woff2) format("woff2");
     }
 
     /* latin */
@@ -172,9 +152,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       font-family: "Source Sans Pro";
       font-style: italic;
       font-weight: 400;
-      src: local("Source Sans Pro Italic"), local("SourceSansPro-Italic"),
-        url(https://fonts.gstatic.com/s/sourcesanspro/v11/M2Jd71oPJhLKp0zdtTvoMxgy2Fsj5sj3EzlXpqVXRKo.woff2)
-          format("woff2");
+      src: local("Source Sans Pro Italic"), local("SourceSansPro-Italic"), url(https://fonts.gstatic.com/s/sourcesanspro/v11/M2Jd71oPJhLKp0zdtTvoMxgy2Fsj5sj3EzlXpqVXRKo.woff2) format("woff2");
     }
 
     /* cyrillic */
@@ -182,9 +160,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       font-family: "Source Sans Pro";
       font-style: normal;
       font-weight: 400;
-      src: local("Source Sans Pro Regular"), local("SourceSansPro-Regular"),
-        url(https://fonts.gstatic.com/s/sourcesanspro/v11/ODelI1aHBYDBqgeIAH2zlMgmx_L9kV4w6g8dYQOLFUI.woff2)
-          format("woff2");
+      src: local("Source Sans Pro Regular"), local("SourceSansPro-Regular"), url(https://fonts.gstatic.com/s/sourcesanspro/v11/ODelI1aHBYDBqgeIAH2zlMgmx_L9kV4w6g8dYQOLFUI.woff2) format("woff2");
     }
 
     /* greek */
@@ -192,9 +168,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       font-family: "Source Sans Pro";
       font-style: normal;
       font-weight: 400;
-      src: local("Source Sans Pro Regular"), local("SourceSansPro-Regular"),
-        url(https://fonts.gstatic.com/s/sourcesanspro/v11/ODelI1aHBYDBqgeIAH2zlFjqPhnWKseBf12Mt9_m7kc.woff2)
-          format("woff2");
+      src: local("Source Sans Pro Regular"), local("SourceSansPro-Regular"), url(https://fonts.gstatic.com/s/sourcesanspro/v11/ODelI1aHBYDBqgeIAH2zlFjqPhnWKseBf12Mt9_m7kc.woff2) format("woff2");
     }
 
     /* vietnamese */
@@ -202,9 +176,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       font-family: "Source Sans Pro";
       font-style: normal;
       font-weight: 400;
-      src: local("Source Sans Pro Regular"), local("SourceSansPro-Regular"),
-        url(https://fonts.gstatic.com/s/sourcesanspro/v11/ODelI1aHBYDBqgeIAH2zlNOAHFN6BivSraYkjhveRHY.woff2)
-          format("woff2");
+      src: local("Source Sans Pro Regular"), local("SourceSansPro-Regular"), url(https://fonts.gstatic.com/s/sourcesanspro/v11/ODelI1aHBYDBqgeIAH2zlNOAHFN6BivSraYkjhveRHY.woff2) format("woff2");
     }
 
     /* latin-ext */
@@ -212,9 +184,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       font-family: "Source Sans Pro";
       font-style: normal;
       font-weight: 400;
-      src: local("Source Sans Pro Regular"), local("SourceSansPro-Regular"),
-        url(https://fonts.gstatic.com/s/sourcesanspro/v11/ODelI1aHBYDBqgeIAH2zlC2Q8seG17bfDXYR_jUsrzg.woff2)
-          format("woff2");
+      src: local("Source Sans Pro Regular"), local("SourceSansPro-Regular"), url(https://fonts.gstatic.com/s/sourcesanspro/v11/ODelI1aHBYDBqgeIAH2zlC2Q8seG17bfDXYR_jUsrzg.woff2) format("woff2");
     }
 
     /* latin */
@@ -222,9 +192,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       font-family: "Source Sans Pro";
       font-style: normal;
       font-weight: 400;
-      src: local("Source Sans Pro Regular"), local("SourceSansPro-Regular"),
-        url(https://fonts.gstatic.com/s/sourcesanspro/v11/ODelI1aHBYDBqgeIAH2zlNV_2ngZ8dMf8fLgjYEouxg.woff2)
-          format("woff2");
+      src: local("Source Sans Pro Regular"), local("SourceSansPro-Regular"), url(https://fonts.gstatic.com/s/sourcesanspro/v11/ODelI1aHBYDBqgeIAH2zlNV_2ngZ8dMf8fLgjYEouxg.woff2) format("woff2");
     }
 
     /* cyrillic-ext */
@@ -232,9 +200,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       font-family: "Source Sans Pro";
       font-style: normal;
       font-weight: 700;
-      src: local("Source Sans Pro Bold"), local("SourceSansPro-Bold"),
-        url(https://fonts.gstatic.com/s/sourcesanspro/v11/toadOcfmlt9b38dHJxOBGH2tx1iQUBYLA4fTJZSoO3U.woff2)
-          format("woff2");
+      src: local("Source Sans Pro Bold"), local("SourceSansPro-Bold"), url(https://fonts.gstatic.com/s/sourcesanspro/v11/toadOcfmlt9b38dHJxOBGH2tx1iQUBYLA4fTJZSoO3U.woff2) format("woff2");
     }
 
     /* cyrillic */
@@ -242,9 +208,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       font-family: "Source Sans Pro";
       font-style: normal;
       font-weight: 700;
-      src: local("Source Sans Pro Bold"), local("SourceSansPro-Bold"),
-        url(https://fonts.gstatic.com/s/sourcesanspro/v11/toadOcfmlt9b38dHJxOBGJaoTU19aO7Bfv-FLfOt5YM.woff2)
-          format("woff2");
+      src: local("Source Sans Pro Bold"), local("SourceSansPro-Bold"), url(https://fonts.gstatic.com/s/sourcesanspro/v11/toadOcfmlt9b38dHJxOBGJaoTU19aO7Bfv-FLfOt5YM.woff2) format("woff2");
     }
 
     /* greek */
@@ -252,9 +216,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       font-family: "Source Sans Pro";
       font-style: normal;
       font-weight: 700;
-      src: local("Source Sans Pro Bold"), local("SourceSansPro-Bold"),
-        url(https://fonts.gstatic.com/s/sourcesanspro/v11/toadOcfmlt9b38dHJxOBGO4f2SQTi4oYi3kh3bYmG2Y.woff2)
-          format("woff2");
+      src: local("Source Sans Pro Bold"), local("SourceSansPro-Bold"), url(https://fonts.gstatic.com/s/sourcesanspro/v11/toadOcfmlt9b38dHJxOBGO4f2SQTi4oYi3kh3bYmG2Y.woff2) format("woff2");
     }
 
     /* vietnamese */
@@ -262,9 +224,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       font-family: "Source Sans Pro";
       font-style: normal;
       font-weight: 700;
-      src: local("Source Sans Pro Bold"), local("SourceSansPro-Bold"),
-        url(https://fonts.gstatic.com/s/sourcesanspro/v11/toadOcfmlt9b38dHJxOBGDovqjS_dXPZszO_XltPdNg.woff2)
-          format("woff2");
+      src: local("Source Sans Pro Bold"), local("SourceSansPro-Bold"), url(https://fonts.gstatic.com/s/sourcesanspro/v11/toadOcfmlt9b38dHJxOBGDovqjS_dXPZszO_XltPdNg.woff2) format("woff2");
     }
 
     /* latin-ext */
@@ -272,9 +232,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       font-family: "Source Sans Pro";
       font-style: normal;
       font-weight: 700;
-      src: local("Source Sans Pro Bold"), local("SourceSansPro-Bold"),
-        url(https://fonts.gstatic.com/s/sourcesanspro/v11/toadOcfmlt9b38dHJxOBGFxe-GPfKKFmiXaJ_Q0GFr8.woff2)
-          format("woff2");
+      src: local("Source Sans Pro Bold"), local("SourceSansPro-Bold"), url(https://fonts.gstatic.com/s/sourcesanspro/v11/toadOcfmlt9b38dHJxOBGFxe-GPfKKFmiXaJ_Q0GFr8.woff2) format("woff2");
     }
 
     /* latin */
@@ -282,9 +240,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       font-family: "Source Sans Pro";
       font-style: normal;
       font-weight: 700;
-      src: local("Source Sans Pro Bold"), local("SourceSansPro-Bold"),
-        url(https://fonts.gstatic.com/s/sourcesanspro/v11/toadOcfmlt9b38dHJxOBGEo0As1BFRXtCDhS66znb_k.woff2)
-          format("woff2");
+      src: local("Source Sans Pro Bold"), local("SourceSansPro-Bold"), url(https://fonts.gstatic.com/s/sourcesanspro/v11/toadOcfmlt9b38dHJxOBGEo0As1BFRXtCDhS66znb_k.woff2) format("woff2");
     }
 
     /* latin-ext */
@@ -292,9 +248,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       font-family: "Source Serif Pro";
       font-style: normal;
       font-weight: 400;
-      src: local("Source Serif Pro"), local("SourceSerifPro-Regular"),
-        url(https://fonts.gstatic.com/s/sourceserifpro/v5/CeUM4np2c42DV49nanp55Q_BUM40eMa9-jBVStC9wY0.woff2)
-          format("woff2");
+      src: local("Source Serif Pro"), local("SourceSerifPro-Regular"), url(https://fonts.gstatic.com/s/sourceserifpro/v5/CeUM4np2c42DV49nanp55Q_BUM40eMa9-jBVStC9wY0.woff2) format("woff2");
     }
 
     /* latin */
@@ -302,9 +256,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       font-family: "Source Serif Pro";
       font-style: normal;
       font-weight: 400;
-      src: local("Source Serif Pro"), local("SourceSerifPro-Regular"),
-        url(https://fonts.gstatic.com/s/sourceserifpro/v5/CeUM4np2c42DV49nanp55fETq2ZMMnErnN6OL83eMrU.woff2)
-          format("woff2");
+      src: local("Source Serif Pro"), local("SourceSerifPro-Regular"), url(https://fonts.gstatic.com/s/sourceserifpro/v5/CeUM4np2c42DV49nanp55fETq2ZMMnErnN6OL83eMrU.woff2) format("woff2");
     }
 
     /* latin-ext */
@@ -312,9 +264,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       font-family: "Source Serif Pro";
       font-style: normal;
       font-weight: 700;
-      src: local("Source Serif Pro Bold"), local("SourceSerifPro-Bold"),
-        url(https://fonts.gstatic.com/s/sourceserifpro/v5/yd5lDMt8Sva2PE17yiLarKwVIEQt96q_HGoOJQzfwxw.woff2)
-          format("woff2");
+      src: local("Source Serif Pro Bold"), local("SourceSerifPro-Bold"), url(https://fonts.gstatic.com/s/sourceserifpro/v5/yd5lDMt8Sva2PE17yiLarKwVIEQt96q_HGoOJQzfwxw.woff2) format("woff2");
     }
 
     /* latin */
@@ -322,9 +272,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       font-family: "Source Serif Pro";
       font-style: normal;
       font-weight: 700;
-      src: local("Source Serif Pro Bold"), local("SourceSerifPro-Bold"),
-        url(https://fonts.gstatic.com/s/sourceserifpro/v5/yd5lDMt8Sva2PE17yiLarPgHLTi6vdOOFgNDwEC6JgI.woff2)
-          format("woff2");
+      src: local("Source Serif Pro Bold"), local("SourceSerifPro-Bold"), url(https://fonts.gstatic.com/s/sourceserifpro/v5/yd5lDMt8Sva2PE17yiLarPgHLTi6vdOOFgNDwEC6JgI.woff2) format("woff2");
     }
 
     /* root variables */
@@ -711,8 +659,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       background-position: center !important;
       -moz-context-properties: fill, fill-opacity;
       fill: currentColor;
-      background-image: linear-gradient(transparent, transparent),
-        url(chrome://userchrome/content/hide-password.svg) !important;
+      background-image: linear-gradient(transparent, transparent), url(chrome://userchrome/content/hide-password.svg) !important;
     }
 
     .ve-activated .vector-menu-tabs .selected {
@@ -814,12 +761,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       padding-bottom: 1px !important;
       background: none !important;
       border-bottom: 1px solid transparent !important;
-      border-image: linear-gradient(
-        to right,
-        hsla(0, 0%, 100%, 0.05) 0,
-        hsla(0, 0%, 100%, 0.2) 10%,
-        transparent 100%
-      ) !important;
+      border-image: linear-gradient(to right, hsla(0, 0%, 100%, 0.05) 0, hsla(0, 0%, 100%, 0.2) 10%, transparent 100%) !important;
       border-image-slice: 1 !important;
     }
 
@@ -1075,8 +1017,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
 
     #bodyContent h5::before {
       counter-increment: headingFour !important;
-      content: counter(headingOne) "." counter(headingTwo) "." counter(headingThree) "."
-        counter(headingFour) !important;
+      content: counter(headingOne) "." counter(headingTwo) "." counter(headingThree) "." counter(headingFour) !important;
       font-size: 13px !important;
     }
 
@@ -1086,8 +1027,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
 
     #bodyContent h6::before {
       counter-increment: headingFive !important;
-      content: counter(headingOne) "." counter(headingTwo) "." counter(headingThree) "."
-        counter(headingFour) "." counter(headingFive) !important;
+      content: counter(headingOne) "." counter(headingTwo) "." counter(headingThree) "." counter(headingFour) "." counter(headingFive) !important;
       font-size: 12px !important;
     }
 
@@ -1241,11 +1181,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       a .nowrap::selection,
       bdi::selection,
       abbr::selection {
-        --uc-wiki-computed-color: color-mix(
-          in xyz,
-          var(--content-selection-color) 80%,
-          var(--uc-wiki-current-color)
-        ) !important;
+        --uc-wiki-computed-color: color-mix(in xyz, var(--content-selection-color) 80%, var(--uc-wiki-current-color)) !important;
       }
     }
 
@@ -1611,12 +1547,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
     #bodyContent #toc > ul > li > a:not(:only-child, :hover) {
       border-radius: 0 !important;
       border-bottom: 1px solid transparent !important;
-      border-image: linear-gradient(
-        to right,
-        hsla(0, 0%, 100%, 0.05) 0,
-        hsla(0, 0%, 100%, 0.2) 10%,
-        transparent 100%
-      ) !important;
+      border-image: linear-gradient(to right, hsla(0, 0%, 100%, 0.05) 0, hsla(0, 0%, 100%, 0.2) 10%, transparent 100%) !important;
       border-image-slice: 100%;
       border-image-slice: 0 0 1 0 !important;
     }
@@ -1783,9 +1714,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       width: -moz-available !important;
     }
 
-    .mw-parser-output
-      .sidebar-collapse
-      :where(.sidebar-above, .sidebar-below)[style*="background"] {
+    .mw-parser-output .sidebar-collapse :where(.sidebar-above, .sidebar-below)[style*="background"] {
       background: var(--uc-wiki-popup-bg) !important;
       color: inherit !important;
     }
@@ -1974,8 +1903,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       filter: none !important;
     }
 
-    :is(.oo-ui-popupToolGroup-active, .oo-ui-popupToolGroup-active-tools)
-      > .oo-ui-popupToolGroup-handle {
+    :is(.oo-ui-popupToolGroup-active, .oo-ui-popupToolGroup-active-tools) > .oo-ui-popupToolGroup-handle {
       background-color: var(--uc-wiki-popup-bg) !important;
       color: var(--uc-wiki-text-90) !important;
     }
@@ -2078,17 +2006,12 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       background-color: var(--uc-content-button-background-hover) !important;
     }
 
-    :is(.oo-ui-popupToolGroup-active, .oo-ui-popupToolGroup-active-tools)
-      .oo-ui-tool-active.oo-ui-widget-enabled
-      .oo-ui-tool-link
-      .oo-ui-tool-title,
+    :is(.oo-ui-popupToolGroup-active, .oo-ui-popupToolGroup-active-tools) .oo-ui-tool-active.oo-ui-widget-enabled .oo-ui-tool-link .oo-ui-tool-title,
     .oo-ui-tool.oo-ui-widget-enabled.oo-ui-tool-active > .oo-ui-tool-link {
       color: hsl(228.9, 100%, 75.7%) !important;
     }
 
-    .oo-ui-toolbar-actions
-      .oo-ui-popupToolGroup.oo-ui-widget-enabled
-      > .oo-ui-popupToolGroup-handle:hover {
+    .oo-ui-toolbar-actions .oo-ui-popupToolGroup.oo-ui-widget-enabled > .oo-ui-popupToolGroup-handle:hover {
       border-right: 1px solid transparent !important;
     }
 
@@ -2100,9 +2023,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
     }
 
     .oo-ui-menuToolGroup-tools .oo-ui-tool.oo-ui-tool-active,
-    .oo-ui-toolGroup-tools
-      .oo-ui-tool.oo-ui-widget-enabled.oo-ui-tool-active
-      > .oo-ui-tool-link:hover,
+    .oo-ui-toolGroup-tools .oo-ui-tool.oo-ui-widget-enabled.oo-ui-tool-active > .oo-ui-tool-link:hover,
     .oo-ui-tool.oo-ui-widget-enabled.oo-ui-tool-active > .oo-ui-tool-link {
       background-color: hsl(240, 1.4%, 28%) !important;
     }
@@ -2119,16 +2040,14 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       opacity: 0.5 !important;
     }
 
-    .oo-ui-widget.oo-ui-tool:is(.oo-ui-widget-enabled, .oo-ui-tool-active)
-      > .oo-ui-tool-link.ve-ui-toolbar-saveButton {
+    .oo-ui-widget.oo-ui-tool:is(.oo-ui-widget-enabled, .oo-ui-tool-active) > .oo-ui-tool-link.ve-ui-toolbar-saveButton {
       background-color: hsl(228.9, 100%, 68%) !important;
       color: white !important;
       opacity: 1 !important;
       border: none !important;
     }
 
-    .oo-ui-widget.oo-ui-tool:is(.oo-ui-widget-enabled, .oo-ui-tool-active)
-      > .oo-ui-tool-link.ve-ui-toolbar-saveButton:hover {
+    .oo-ui-widget.oo-ui-tool:is(.oo-ui-widget-enabled, .oo-ui-tool-active) > .oo-ui-tool-link.ve-ui-toolbar-saveButton:hover {
       background-color: hsl(228.9, 93%, 62%) !important;
       color: white !important;
     }
@@ -2137,9 +2056,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       max-height: 300px !important;
     }
 
-    .oo-ui-toolbar-position-top
-      .ve-ui-toolbarDialog-position-above.oo-ui-window-ready
-      .oo-ui-window-frame,
+    .oo-ui-toolbar-position-top .ve-ui-toolbarDialog-position-above.oo-ui-window-ready .oo-ui-window-frame,
     .ve-ui-specialCharacterDialog .oo-ui-bookletLayout {
       height: 300px !important;
     }
@@ -2160,9 +2077,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
 
     .ve-ui-mwParameterResultWidget-description,
     .ve-ui-mwTemplatePage-description,
-    .ve-ui-mwTemplateDialog
-      .oo-ui-outlineOptionWidget.oo-ui-flaggedElement-empty
-      .oo-ui-labelElement-label {
+    .ve-ui-mwTemplateDialog .oo-ui-outlineOptionWidget.oo-ui-flaggedElement-empty .oo-ui-labelElement-label {
       color: hsla(0, 0%, 100%, 0.5) !important;
     }
 
@@ -2283,9 +2198,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       border-color: transparent !important;
     }
 
-    .oo-ui-processDialog-actions-safe
-      .oo-ui-widget-enabled.oo-ui-iconElement:not(.oo-ui-labelElement)
-      > .oo-ui-buttonElement-button:not(:hover, :active) {
+    .oo-ui-processDialog-actions-safe .oo-ui-widget-enabled.oo-ui-iconElement:not(.oo-ui-labelElement) > .oo-ui-buttonElement-button:not(:hover, :active) {
       background-color: transparent !important;
       border-right-color: transparent !important;
     }
@@ -2299,9 +2212,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       background-color: hsl(240, 1.4%, 28%) !important;
     }
 
-    .oo-ui-processDialog-actions-primary
-      > .oo-ui-buttonElement:not(.oo-ui-widget-disabled)
-      > .oo-ui-buttonElement-button:hover {
+    .oo-ui-processDialog-actions-primary > .oo-ui-buttonElement:not(.oo-ui-widget-disabled) > .oo-ui-buttonElement-button:hover {
       background-color: hsl(228.9, 93%, 62%) !important;
       border: none !important;
     }
@@ -2316,17 +2227,13 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       outline: 1px solid hsl(240, 1.4%, 15%) !important;
     }
 
-    .oo-ui-processDialog-actions-other
-      .oo-ui-buttonElement-framed.oo-ui-widget-enabled
-      > .oo-ui-buttonElement-button {
+    .oo-ui-processDialog-actions-other .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button {
       background-color: hsl(240, 1.4%, 30%) !important;
       color: var(--uc-wiki-text-90) !important;
       border-color: transparent !important;
     }
 
-    .oo-ui-processDialog-actions-other
-      .oo-ui-buttonElement-framed.oo-ui-widget-enabled
-      > .oo-ui-buttonElement-button:hover {
+    .oo-ui-processDialog-actions-other .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button:hover {
       background-color: hsl(240, 1.4%, 35%) !important;
     }
 
@@ -2414,9 +2321,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
 
     select {
       appearance: none;
-      background: hsl(240, 4.3%, 8.5%)
-        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="context-fill" viewBox="0 0 16 16"><path d="M12.085 4.943L8.05 8.803l-3.947-3.86L3.05 5.996l5 5 5-5z"/></svg>')
-        right 4px center no-repeat;
+      background: hsl(240, 4.3%, 8.5%) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="context-fill" viewBox="0 0 16 16"><path d="M12.085 4.943L8.05 8.803l-3.947-3.86L3.05 5.996l5 5 5-5z"/></svg>') right 4px center no-repeat;
       -moz-context-properties: fill;
       color: var(--uc-wiki-text-80);
       fill: currentColor;
@@ -2860,9 +2765,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       margin: 0 !important;
     }
 
-    .mwe-popups.mwe-popups-type-reference
-      .mwe-popups-title
-      .mw-ui-icon.mw-ui-icon-reference-generic {
+    .mwe-popups.mwe-popups-type-reference .mwe-popups-title .mw-ui-icon.mw-ui-icon-reference-generic {
       margin-left: -2px !important;
     }
 
@@ -3140,8 +3043,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
     .infobox.bordered th,
     .mw-parser-output .ib-country td,
     .mw-parser-output .ib-country th,
-    table:is(.infobox, .sidebar)
-      :is(td, th):not([class], [id], [style*="border"][style*="transparent"]),
+    table:is(.infobox, .sidebar) :is(td, th):not([class], [id], [style*="border"][style*="transparent"]),
     table:is(.infobox, .sidebar) .sidebar-content:not([style*="border"][style*="transparent"]),
     .mw-parser-output .ib-chembox :is(td, th):not([style*="border"][style*="transparent"]) {
       border-color: var(--uc-wiki-table-border-bold) !important;
@@ -3540,9 +3442,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       cursor: pointer !important;
     }
 
-    #bodyContent
-      .oo-ui-tagItemWidget.oo-ui-labelElement:not(.oo-ui-tagItemWidget-fixed)
-      .oo-ui-labelElement-label {
+    #bodyContent .oo-ui-tagItemWidget.oo-ui-labelElement:not(.oo-ui-tagItemWidget-fixed) .oo-ui-labelElement-label {
       text-decoration: none !important;
       margin-inline: 2px !important;
     }
@@ -3558,8 +3458,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       fill: currentColor !important;
       filter: none !important;
       -moz-context-properties: fill, fill-opacity !important;
-      background-image: linear-gradient(transparent, transparent),
-        url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 fill=%22context-fill%22 fill-opacity=%22context-fill-opacity%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E%3Ctitle%3Eclose%3C/title%3E%3Cpath d=%22M4.34 2.93l12.73 12.73-1.41 1.41L2.93 4.35z%22/%3E%3Cpath d=%22M17.07 4.34L4.34 17.07l-1.41-1.41L15.66 2.93z%22/%3E%3C/svg%3E") !important;
+      background-image: linear-gradient(transparent, transparent), url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 fill=%22context-fill%22 fill-opacity=%22context-fill-opacity%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E%3Ctitle%3Eclose%3C/title%3E%3Cpath d=%22M4.34 2.93l12.73 12.73-1.41 1.41L2.93 4.35z%22/%3E%3Cpath d=%22M17.07 4.34L4.34 17.07l-1.41-1.41L15.66 2.93z%22/%3E%3C/svg%3E") !important;
     }
 
     .oo-ui-indicator-down {
@@ -3567,8 +3466,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       fill: currentColor !important;
       filter: none !important;
       -moz-context-properties: fill, fill-opacity !important;
-      background-image: linear-gradient(transparent, transparent),
-        url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 fill=%22context-fill%22 fill-opacity=%22context-fill-opacity%22 width=%2212%22 height=%2212%22 viewBox=%220 0 12 12%22%3E%3Ctitle%3Edown%3C/title%3E%3Cpath d=%22M10.085 2.943L6.05 6.803l-3.947-3.86L1.05 3.996l5 5 5-5z%22/%3E%3C/svg%3E") !important;
+      background-image: linear-gradient(transparent, transparent), url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 fill=%22context-fill%22 fill-opacity=%22context-fill-opacity%22 width=%2212%22 height=%2212%22 viewBox=%220 0 12 12%22%3E%3Ctitle%3Edown%3C/title%3E%3Cpath d=%22M10.085 2.943L6.05 6.803l-3.947-3.86L1.05 3.996l5 5 5-5z%22/%3E%3C/svg%3E") !important;
     }
 
     .oo-ui-icon-menu,
@@ -3580,8 +3478,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       background-size: 16px !important;
       width: 16px !important;
       min-width: 16px !important;
-      background-image: linear-gradient(transparent, transparent),
-        url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 fill=%22context-fill%22 fill-opacity=%22context-fill-opacity%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E%3Ctitle%3Emenu%3C/title%3E%3Cpath d=%22M1 3v2h18V3zm0 8h18V9H1zm0 6h18v-2H1z%22/%3E%3C/svg%3E") !important;
+      background-image: linear-gradient(transparent, transparent), url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 fill=%22context-fill%22 fill-opacity=%22context-fill-opacity%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E%3Ctitle%3Emenu%3C/title%3E%3Cpath d=%22M1 3v2h18V3zm0 8h18V9H1zm0 6h18v-2H1z%22/%3E%3C/svg%3E") !important;
     }
 
     .mw-advancedSearch-namespace-border {
@@ -3607,10 +3504,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       border-color: hsl(240, 1.4%, 25%) !important;
     }
 
-    .mw-advancedSearch-fieldContainer
-      .oo-ui-labelElement
-      > .oo-ui-fieldsetLayout-header
-      > .oo-ui-labelElement-label {
+    .mw-advancedSearch-fieldContainer .oo-ui-labelElement > .oo-ui-fieldsetLayout-header > .oo-ui-labelElement-label {
       background: var(--uc-wiki-box-bg) !important;
       color: hsl(240, 1.4%, 75%) !important;
       height: 1em !important;
@@ -3699,9 +3593,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       text-shadow: 0 1px 1px #000 !important;
     }
 
-    .oo-ui-dropdownWidget.oo-ui-widget-disabled
-      .oo-ui-dropdownWidget-handle
-      :is(.oo-ui-indicatorElement-indicator, .oo-ui-iconElement-icon, .oo-ui-labelElement-label) {
+    .oo-ui-dropdownWidget.oo-ui-widget-disabled .oo-ui-dropdownWidget-handle :is(.oo-ui-indicatorElement-indicator, .oo-ui-iconElement-icon, .oo-ui-labelElement-label) {
       opacity: 0.5 !important;
     }
 
@@ -3736,9 +3628,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
     }
 
     .mw-mmv-reuse-dialog .mw-mmv-reuse-tabs .oo-ui-optionWidget.oo-ui-optionWidget-selected,
-    .mw-mmv-reuse-dialog
-      .mw-mmv-reuse-tabs
-      .oo-ui-optionWidget.oo-ui-optionWidget-highlighted.oo-ui-optionWidget-selected {
+    .mw-mmv-reuse-dialog .mw-mmv-reuse-tabs .oo-ui-optionWidget.oo-ui-optionWidget-highlighted.oo-ui-optionWidget-selected {
       border-bottom: 3px solid var(--uc-wiki-text-90) !important;
     }
 
@@ -3761,66 +3651,35 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
     }
 
     .oo-ui-pendingElement-pending {
-      background-image: linear-gradient(
-        135deg,
-        var(--uc-wiki-stripe-color) 25%,
-        var(--uc-wiki-stripe-bg-color) 25%,
-        var(--uc-wiki-stripe-bg-color) 50%,
-        var(--uc-wiki-stripe-color) 50%,
-        var(--uc-wiki-stripe-color) 75%,
-        var(--uc-wiki-stripe-bg-color) 75%,
-        var(--uc-wiki-stripe-bg-color)
-      ) !important;
+      background-image: linear-gradient(135deg, var(--uc-wiki-stripe-color) 25%, var(--uc-wiki-stripe-bg-color) 25%, var(--uc-wiki-stripe-bg-color) 50%, var(--uc-wiki-stripe-color) 50%, var(--uc-wiki-stripe-color) 75%, var(--uc-wiki-stripe-bg-color) 75%, var(--uc-wiki-stripe-bg-color)) !important;
     }
 
-    .mw-mmv-share-pane
-      .oo-ui-buttonElement-framed.oo-ui-widget-enabled
-      > .oo-ui-buttonElement-button {
+    .mw-mmv-share-pane .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button {
       background-color: var(--uc-wiki-popup-input-bg-color) !important;
       color: var(--uc-wiki-text-60) !important;
       border: none !important;
       cursor: default !important;
     }
 
-    .mw-mmv-share-pane
-      .oo-ui-buttonElement-framed.oo-ui-widget-enabled
-      > .oo-ui-buttonElement-button:hover {
+    .mw-mmv-share-pane .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button:hover {
       background-color: var(--uc-wiki-popup-input-bg-color) !important;
       color: var(--uc-wiki-text-60) !important;
       border: none !important;
     }
 
-    .mw-mmv-share-pane
-      .oo-ui-buttonElement-framed.oo-ui-widget-enabled
-      > .oo-ui-buttonElement-button
-      > .oo-ui-iconElement-icon:not(.oo-ui-image-invert),
-    .mw-mmv-share-pane
-      .oo-ui-buttonElement-framed.oo-ui-widget-enabled
-      > .oo-ui-buttonElement-button
-      > .oo-ui-indicatorElement-indicator:not(.oo-ui-image-invert) {
+    .mw-mmv-share-pane .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button > .oo-ui-iconElement-icon:not(.oo-ui-image-invert),
+    .mw-mmv-share-pane .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button > .oo-ui-indicatorElement-indicator:not(.oo-ui-image-invert) {
       opacity: 0.2 !important;
       cursor: pointer !important;
     }
 
-    .mw-mmv-share-pane
-      .oo-ui-buttonElement-framed.oo-ui-widget-enabled
-      > .oo-ui-buttonElement-button:hover
-      > .oo-ui-iconElement-icon:not(.oo-ui-image-invert):hover,
-    .mw-mmv-share-pane
-      .oo-ui-buttonElement-framed.oo-ui-widget-enabled
-      > .oo-ui-buttonElement-button:hover
-      > .oo-ui-indicatorElement-indicator:not(.oo-ui-image-invert):hover {
+    .mw-mmv-share-pane .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button:hover > .oo-ui-iconElement-icon:not(.oo-ui-image-invert):hover,
+    .mw-mmv-share-pane .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button:hover > .oo-ui-indicatorElement-indicator:not(.oo-ui-image-invert):hover {
       opacity: 0.3 !important;
     }
 
-    .mw-mmv-share-pane
-      .oo-ui-buttonElement-framed.oo-ui-widget-enabled
-      > .oo-ui-buttonElement-button:hover
-      > .oo-ui-iconElement-icon:not(.oo-ui-image-invert),
-    .mw-mmv-share-pane
-      .oo-ui-buttonElement-framed.oo-ui-widget-enabled
-      > .oo-ui-buttonElement-button:hover
-      > .oo-ui-indicatorElement-indicator:not(.oo-ui-image-invert) {
+    .mw-mmv-share-pane .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button:hover > .oo-ui-iconElement-icon:not(.oo-ui-image-invert),
+    .mw-mmv-share-pane .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button:hover > .oo-ui-indicatorElement-indicator:not(.oo-ui-image-invert) {
       opacity: 0.2 !important;
     }
 
@@ -3831,10 +3690,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
     }
 
     .mw-mmv-embed-select .oo-ui-buttonElement.oo-ui-labelElement > input.oo-ui-buttonElement-button,
-    .mw-mmv-embed-select
-      .oo-ui-buttonElement.oo-ui-labelElement
-      > .oo-ui-buttonElement-button
-      > .oo-ui-labelElement-label {
+    .mw-mmv-embed-select .oo-ui-buttonElement.oo-ui-labelElement > .oo-ui-buttonElement-button > .oo-ui-labelElement-label {
       line-height: 1.6em !important;
     }
 
@@ -3844,20 +3700,14 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       font-weight: normal !important;
     }
 
-    .mw-mmv-embed-select
-      .oo-ui-buttonElement-framed.oo-ui-widget-enabled.oo-ui-buttonElement-active
-      > .oo-ui-buttonElement-button,
-    .mw-mmv-embed-select
-      .oo-ui-buttonElement-framed.oo-ui-widget-enabled
-      > .oo-ui-buttonElement-button:hover {
+    .mw-mmv-embed-select .oo-ui-buttonElement-framed.oo-ui-widget-enabled.oo-ui-buttonElement-active > .oo-ui-buttonElement-button,
+    .mw-mmv-embed-select .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button:hover {
       background-color: hsl(215, 8%, 9%) !important;
       color: var(--uc-wiki-text-90) !important;
       border: none !important;
     }
 
-    .mw-mmv-embed-select
-      .oo-ui-buttonElement-framed.oo-ui-widget-enabled
-      > .oo-ui-buttonElement-button {
+    .mw-mmv-embed-select .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button {
       background-color: hsl(215, 8%, 7%) !important;
       color: var(--uc-wiki-text-60) !important;
       border: none !important;
@@ -3871,17 +3721,11 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       border: none !important;
     }
 
-    .mw-mmv-embed-pane
-      .mw-widget-copyTextLayout-multiline-button
-      .oo-ui-buttonElement
-      .oo-ui-iconElement-icon {
+    .mw-mmv-embed-pane .mw-widget-copyTextLayout-multiline-button .oo-ui-buttonElement .oo-ui-iconElement-icon {
       left: 5px !important;
     }
 
-    .mw-mmv-embed-pane
-      .mw-widget-copyTextLayout-multiline-button
-      .oo-ui-buttonElement
-      .oo-ui-labelElement-label {
+    .mw-mmv-embed-pane .mw-widget-copyTextLayout-multiline-button .oo-ui-buttonElement .oo-ui-labelElement-label {
       font-family: Abel !important;
       font-size: 24px !important;
       font-weight: 400 !important;
@@ -3891,42 +3735,23 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       opacity: 0.6 !important;
     }
 
-    .mw-mmv-embed-pane
-      .mw-widget-copyTextLayout-multiline-button
-      .oo-ui-buttonElement:hover
-      .oo-ui-labelElement-label {
+    .mw-mmv-embed-pane .mw-widget-copyTextLayout-multiline-button .oo-ui-buttonElement:hover .oo-ui-labelElement-label {
       opacity: 0.9 !important;
     }
 
-    .mw-mmv-embed-pane
-      .oo-ui-buttonElement-framed.oo-ui-widget-enabled
-      > .oo-ui-buttonElement-button
-      > .oo-ui-iconElement-icon:not(.oo-ui-image-invert),
-    .mw-mmv-embed-pane
-      .oo-ui-buttonElement-framed.oo-ui-widget-enabled
-      > .oo-ui-buttonElement-button
-      > .oo-ui-indicatorElement-indicator:not(.oo-ui-image-invert) {
+    .mw-mmv-embed-pane .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button > .oo-ui-iconElement-icon:not(.oo-ui-image-invert),
+    .mw-mmv-embed-pane .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button > .oo-ui-indicatorElement-indicator:not(.oo-ui-image-invert) {
       opacity: 0.3 !important;
       cursor: pointer !important;
     }
 
-    .mw-mmv-embed-pane
-      .oo-ui-buttonElement-framed.oo-ui-widget-enabled
-      > .oo-ui-buttonElement-button:hover
-      > .oo-ui-iconElement-icon:not(.oo-ui-image-invert),
-    .mw-mmv-embed-pane
-      .oo-ui-buttonElement-framed.oo-ui-widget-enabled
-      > .oo-ui-buttonElement-button:hover
-      > .oo-ui-indicatorElement-indicator:not(.oo-ui-image-invert) {
+    .mw-mmv-embed-pane .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button:hover > .oo-ui-iconElement-icon:not(.oo-ui-image-invert),
+    .mw-mmv-embed-pane .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button:hover > .oo-ui-indicatorElement-indicator:not(.oo-ui-image-invert) {
       opacity: 0.45 !important;
     }
 
-    .oo-ui-buttonElement.oo-ui-widget-enabled
-      > .oo-ui-buttonElement-button
-      > .oo-ui-iconElement-icon,
-    .oo-ui-buttonElement.oo-ui-widget-enabled
-      > .oo-ui-buttonElement-button
-      > .oo-ui-indicatorElement-indicator {
+    .oo-ui-buttonElement.oo-ui-widget-enabled > .oo-ui-buttonElement-button > .oo-ui-iconElement-icon,
+    .oo-ui-buttonElement.oo-ui-widget-enabled > .oo-ui-buttonElement-button > .oo-ui-indicatorElement-indicator {
       transition: none !important;
     }
 
@@ -3949,18 +3774,12 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       transition: none !important;
     }
 
-    .mw-mmv-reuse-dialog
-      .oo-ui-dropdownWidget.oo-ui-widget-enabled
-      .oo-ui-dropdownWidget-handle
-      .oo-ui-indicator-down {
+    .mw-mmv-reuse-dialog .oo-ui-dropdownWidget.oo-ui-widget-enabled .oo-ui-dropdownWidget-handle .oo-ui-indicator-down {
       opacity: 0.4 !important;
       transform: scaleY(-1) !important;
     }
 
-    .mw-mmv-reuse-dialog
-      .oo-ui-dropdownWidget.oo-ui-widget-enabled.oo-ui-dropdownWidget-open
-      .oo-ui-dropdownWidget-handle
-      .oo-ui-indicator-down {
+    .mw-mmv-reuse-dialog .oo-ui-dropdownWidget.oo-ui-widget-enabled.oo-ui-dropdownWidget-open .oo-ui-dropdownWidget-handle .oo-ui-indicator-down {
       opacity: 0.7 !important;
     }
 
@@ -4513,8 +4332,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
 
     /* translate page arrow */
     img[src*="Translation_to_english_arrow"] {
-      filter: invert(1) hue-rotate(190deg) brightness(0.8) brightness(0.8) contrast(2) saturate(2)
-        brightness(1.6);
+      filter: invert(1) hue-rotate(190deg) brightness(0.8) brightness(0.8) contrast(2) saturate(2) brightness(1.6);
     }
 
     /* pdf external link */
@@ -4931,10 +4749,8 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
     /* unnecessary if you use this with dark reader (which you probably should) */
     .uls-menu .uls-search-label,
     .uls-languagefilter-clear,
-    :is(.oo-ui-toolbar-bar, .ve-ce-branchNode-slug, .toolbar.section-main, .wikiEditor-ui-toolbar)
-      .oo-ui-iconElement-icon,
-    :is(.oo-ui-toolbar-bar, .ve-ce-branchNode-slug, .toolbar.section-main, .wikiEditor-ui-toolbar)
-      .oo-ui-indicatorElement-indicator,
+    :is(.oo-ui-toolbar-bar, .ve-ce-branchNode-slug, .toolbar.section-main, .wikiEditor-ui-toolbar) .oo-ui-iconElement-icon,
+    :is(.oo-ui-toolbar-bar, .ve-ce-branchNode-slug, .toolbar.section-main, .wikiEditor-ui-toolbar) .oo-ui-indicatorElement-indicator,
     .wikiEditor-ui-toolbar .tabs span.tab a::before,
     :is(.oo-ui-popupToolGroup-active, .oo-ui-popupToolGroup-active-tools) .oo-ui-iconElement-icon,
     .oo-ui-outlineControlsWidget .oo-ui-iconElement .oo-ui-iconElement-icon,
@@ -4946,26 +4762,11 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
     .oo-ui-indicator-required,
     .oo-ui-icon-infoFilled,
     .mw-ui-icon-infoFilled::before,
-    .mw-mmv-share-pane
-      .oo-ui-buttonElement-framed.oo-ui-widget-enabled
-      > .oo-ui-buttonElement-button
-      > .oo-ui-iconElement-icon:not(.oo-ui-image-invert),
-    .mw-mmv-share-pane
-      .oo-ui-buttonElement-framed.oo-ui-widget-enabled
-      > .oo-ui-buttonElement-button
-      > .oo-ui-indicatorElement-indicator:not(.oo-ui-image-invert),
-    .mw-mmv-embed-pane
-      .oo-ui-buttonElement-framed.oo-ui-widget-enabled
-      > .oo-ui-buttonElement-button
-      > .oo-ui-iconElement-icon:not(.oo-ui-image-invert),
-    .mw-mmv-embed-pane
-      .oo-ui-buttonElement-framed.oo-ui-widget-enabled
-      > .oo-ui-buttonElement-button
-      > .oo-ui-indicatorElement-indicator:not(.oo-ui-image-invert),
-    .mw-mmv-reuse-dialog
-      .oo-ui-dropdownWidget.oo-ui-widget-enabled
-      .oo-ui-dropdownWidget-handle
-      .oo-ui-indicator-down,
+    .mw-mmv-share-pane .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button > .oo-ui-iconElement-icon:not(.oo-ui-image-invert),
+    .mw-mmv-share-pane .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button > .oo-ui-indicatorElement-indicator:not(.oo-ui-image-invert),
+    .mw-mmv-embed-pane .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button > .oo-ui-iconElement-icon:not(.oo-ui-image-invert),
+    .mw-mmv-embed-pane .oo-ui-buttonElement-framed.oo-ui-widget-enabled > .oo-ui-buttonElement-button > .oo-ui-indicatorElement-indicator:not(.oo-ui-image-invert),
+    .mw-mmv-reuse-dialog .oo-ui-dropdownWidget.oo-ui-widget-enabled .oo-ui-dropdownWidget-handle .oo-ui-indicator-down,
     .mw-ui-icon.mw-ui-icon-preview-generic {
       filter: invert() !important;
     }

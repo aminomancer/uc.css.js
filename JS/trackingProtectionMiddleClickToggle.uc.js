@@ -26,9 +26,13 @@
             case 1:
               gProtectionsHandler.onTPSwitchCommand();
               if (config["enable icon animation"]) {
-                box.addEventListener("animationend", () => box.removeAttribute("animate"), {
-                  once: true,
-                });
+                box.addEventListener(
+                  "animationend",
+                  () => box.removeAttribute("animate"),
+                  {
+                    once: true,
+                  }
+                );
                 box.setAttribute("animate", "true");
               }
             // fall through
@@ -37,7 +41,10 @@
           }
           break;
         case "keypress":
-          if (event.charCode != KeyEvent.DOM_VK_SPACE && event.keyCode != KeyEvent.DOM_VK_RETURN) {
+          if (
+            event.charCode != KeyEvent.DOM_VK_SPACE &&
+            event.keyCode != KeyEvent.DOM_VK_RETURN
+          ) {
             return;
           }
           break;
@@ -73,7 +80,9 @@
     transform: scale(1);
   }
 }`;
-    let styleURI = makeURI("data:text/css;charset=UTF=8," + encodeURIComponent(css));
+    let styleURI = makeURI(
+      "data:text/css;charset=UTF=8," + encodeURIComponent(css)
+    );
     if (!styleSvc.sheetRegistered(styleURI, styleSvc.AUTHOR_SHEET)) {
       styleSvc.loadAndRegisterSheet(styleURI, styleSvc.AUTHOR_SHEET);
     }
@@ -87,6 +96,9 @@
         init();
       }
     };
-    Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
+    Services.obs.addObserver(
+      delayedListener,
+      "browser-delayed-startup-finished"
+    );
   }
 })();

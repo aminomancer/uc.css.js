@@ -61,7 +61,10 @@
       // we want the resizer to expand massively in both directions.
       resizer.style.marginInline = "-100%";
       startX = e.screenX;
-      startWidth = parseInt(document.defaultView.getComputedStyle(box).width, 10);
+      startWidth = parseInt(
+        document.defaultView.getComputedStyle(box).width,
+        10
+      );
       document.documentElement.addEventListener("mousemove", doDrag, true);
       document.documentElement.addEventListener("mouseup", stopDrag);
     }
@@ -72,8 +75,11 @@
       if (frame) return;
       frame = true;
       requestAnimationFrame(() => {
-        if (SidebarUI._positionStart) box.style.width = startWidth + e.screenX - startX + "px";
-        else box.style.width = startWidth - e.screenX + startX + "px";
+        if (SidebarUI._positionStart) {
+          box.style.width = startWidth + e.screenX - startX + "px";
+        } else {
+          box.style.width = startWidth - e.screenX + startX + "px";
+        }
         frame = false;
       });
     }
@@ -100,7 +106,9 @@
 
     function exitSideBar(e) {
       if (e.code === "Escape") {
-        if (e.repeat || e.shiftKey || e.altKey || e.ctrlKey || this.hidden) return;
+        if (e.repeat || e.shiftKey || e.altKey || e.ctrlKey || this.hidden) {
+          return;
+        }
         SidebarUI.toggle();
         e.preventDefault();
       }
@@ -148,6 +156,9 @@
         startup();
       }
     };
-    Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
+    Services.obs.addObserver(
+      delayedListener,
+      "browser-delayed-startup-finished"
+    );
   }
 })();

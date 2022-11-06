@@ -15,20 +15,11 @@ want to request an icon for a search engine you use, send me the engine name
 (the name that shows up in the identity box label when you enter search mode
 with it) and the URL to the search engine so I can find a suitable icon and set
 a rule for it. */
-#urlbar[searchmode=""][pageproxystate="invalid"]
-  #identity-box
-  > #identity-icon-box
-  > #identity-icon,
+#urlbar[searchmode=""][pageproxystate="invalid"] #identity-box > #identity-icon-box > #identity-icon,
 #urlbar[searchmode=""][pageproxystate="valid"] #identity-box > #identity-icon-box > #identity-icon,
 #urlbar[searchmode=""] #identity-icon-box > #identity-icon,
-#urlbar[pageproxystate="invalid"]
-  #identity-box
-  > #identity-icon-box[engine]:not([engine="Other"])
-  > #identity-icon,
-#urlbar[pageproxystate="valid"]
-  #identity-box
-  > #identity-icon-box[engine]:not([engine="Other"])
-  > #identity-icon,
+#urlbar[pageproxystate="invalid"] #identity-box > #identity-icon-box[engine]:not([engine="Other"]) > #identity-icon,
+#urlbar[pageproxystate="valid"] #identity-box > #identity-icon-box[engine]:not([engine="Other"]) > #identity-icon,
 #urlbar #identity-icon-box[engine]:not([engine="Other"]) > #identity-icon {
   list-style-image: var(--search-engine-icon, url(chrome://userchrome/content/search-glass.svg)) !important;
 }

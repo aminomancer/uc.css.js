@@ -10,7 +10,9 @@
 
 let EXPORTED_SYMBOLS = [];
 (function() {
-  const { Services } = ChromeUtils.import("resource://gre/modules/Services.jsm");
+  const { Services } = ChromeUtils.import(
+    "resource://gre/modules/Services.jsm"
+  );
   class ToolboxProcessSheetLoader {
     regex = /^chrome:(\/\/devtools\/.*.html.*)/i;
     lastSubject = null;
@@ -37,7 +39,9 @@ let EXPORTED_SYMBOLS = [];
     }
     isDevtools(win) {
       return (
-        Services.dirsvc.get("UChrm", Ci.nsIFile).target.includes("chrome_debugger_profile") &&
+        Services.dirsvc
+          .get("UChrm", Ci.nsIFile)
+          .target.includes("chrome_debugger_profile") &&
         this.regex.test(win.location.href)
       );
     }
@@ -46,7 +50,10 @@ let EXPORTED_SYMBOLS = [];
         win.Ci.nsIStyleSheetService
       );
       try {
-        sss.loadAndRegisterSheet(win.Services.io.newURI(path + name), sss[type]);
+        sss.loadAndRegisterSheet(
+          win.Services.io.newURI(path + name),
+          sss[type]
+        );
       } catch (e) {}
     }
     unloadSheet(win, path, name, type) {

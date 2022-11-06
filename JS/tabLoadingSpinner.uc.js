@@ -19,11 +19,21 @@
   function init() {
     gBrowser.tabContainer.addEventListener("TabAttrModified", e => {
       let changed = e.detail.changed;
-      if (!(changed && (changed.includes("busy") || changed.includes("progress")))) return;
+      if (
+        !(changed && (changed.includes("busy") || changed.includes("progress")))
+      ) {
+        return;
+      }
       let tab = e.target;
       let throbber = tab.querySelector(".tab-throbber");
-      if (tab.getAttribute("busy") == "true") throbber.setAttribute("throbber-loaded", "true");
-      else setTimeout(tab.querySelector(".tab-throbber").removeAttribute("throbber-loaded"), 850);
+      if (tab.getAttribute("busy") == "true") {
+        throbber.setAttribute("throbber-loaded", "true");
+      } else {
+        setTimeout(
+          tab.querySelector(".tab-throbber").removeAttribute("throbber-loaded"),
+          850
+        );
+      }
     });
   }
   if (gBrowserInit.delayedStartupFinished) {
@@ -35,6 +45,9 @@
         init();
       }
     };
-    Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
+    Services.obs.addObserver(
+      delayedListener,
+      "browser-delayed-startup-finished"
+    );
   }
 })();

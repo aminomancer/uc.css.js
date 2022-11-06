@@ -14,11 +14,9 @@ but other than that these variables should be available everywhere. */
 @font-face {
   font-family: "Fira Code UC";
   font-style: normal;
-  src: local("Fira Code"), local("Fira Code Light"),
-    url(../fonts/FiraCode-VF.woff);
+  src: local("Fira Code"), local("Fira Code Light"), url(../fonts/FiraCode-VF.woff);
   /* This enables some alternate glyphs and ligatures */
-  font-feature-settings: "cv14", "cv19", "cv30", "ss01", "ss02", "ss05", "ss07",
-    "ss09";
+  font-feature-settings: "cv14", "cv19", "cv30", "ss01", "ss02", "ss05", "ss07", "ss09";
 }
 
 :root {
@@ -92,24 +90,20 @@ but other than that these variables should be available everywhere. */
   --menupopup-inner-padding: var(--menupopup-inner-padding-magnitude) 0;
   --uc-panel-separator-margin-vertical: 4px;
   --uc-panel-separator-margin-horizontal: 4px;
-  --uc-panel-separator-margin: var(--uc-panel-separator-margin-vertical)
-    var(--uc-panel-separator-margin-horizontal);
-  --uc-arrowpanel-menuitem-inline-margin: 4px;
+  --uc-panel-separator-margin: var(--uc-panel-separator-margin-vertical) var(--uc-panel-separator-margin-horizontal);
+  --uc-arrowpanel-menuitem-margin-block: 0;
+  --uc-arrowpanel-menuitem-margin-inline: 4px;
   --uc-arrowpanel-menuitem-padding-block: 6px;
   --uc-arrowpanel-menuitem-padding-inline: 6px;
   --uc-arrowpanel-root-padding: 12px;
   --arrowpanel-subviewbutton-iconic-gap: 8px;
   --context-iconic-margin-start: 5px;
   --context-iconic-margin-end: 6px;
-  --context-iconic-margin: var(--context-iconic-margin-start, 5px)
-    var(--context-iconic-margin-end, 6px);
+  --context-iconic-margin: var(--context-iconic-margin-start, 5px) var(--context-iconic-margin-end, 6px);
   --context-checkbox-margin-start: calc(1px + var(--context-iconic-margin-start, 5px));
   --context-checkbox-margin-end: calc(1px + var(--context-iconic-margin-end, 6px));
-  --context-checkbox-margin: var(--context-checkbox-margin-start, 6px)
-    var(--context-checkbox-margin-end, 7px);
-  --context-iconic-composite-width: calc(
-    16px + var(--context-iconic-margin-start) + var(--context-iconic-margin-end)
-  );
+  --context-checkbox-margin: var(--context-checkbox-margin-start, 6px) var(--context-checkbox-margin-end, 7px);
+  --context-iconic-composite-width: calc(16px + var(--context-iconic-margin-start) + var(--context-iconic-margin-end));
   --context-padding-inline: var(--context-iconic-composite-width) 0px;
   --panel-menulist-padding: 4px 6px;
   --menulist-dropmarker-margin: 8px 0;
@@ -239,10 +233,7 @@ but other than that these variables should be available everywhere. */
   --uc-tab-multi-hover: linear-gradient(hsl(231, 47%, 13%), hsl(233, 51%, 10%));
   --uc-tab-pinned-hover: var(--uc-toolbar-bgcolor);
   --uc-tab-focused-highlight: hsl(231, 36%, 22%);
-  --uc-tab-focused-hover: linear-gradient(
-    color-mix(in srgb, var(--uc-tab-focused-highlight) 50%, var(--uc-toolbar-bgcolor)),
-    var(--uc-toolbar-bgcolor)
-  );
+  --uc-tab-focused-hover: linear-gradient(color-mix(in srgb, var(--uc-tab-focused-highlight) 50%, var(--uc-toolbar-bgcolor)), var(--uc-toolbar-bgcolor));
   --multiselected-color: hsl(241, 50%, 51%);
 
   /* width of the spacer between the tabs and the window control buttons. this
@@ -252,16 +243,8 @@ but other than that these variables should be available everywhere. */
   prefer a larger spacer width. override this in custom-chrome.css. */
   --titlebar-spacer-width: 32px;
   /* subtle gradient drawn behind the window control buttons. */
-  --titlebar-gradient: radial-gradient(
-    circle at 100% 0%,
-    hsl(231, 45%, 13%),
-    var(--uc-accent-color) 140px
-  );
-  --titlebar-gradient-left: radial-gradient(
-    circle at 0% 0%,
-    hsl(231, 45%, 13%),
-    var(--uc-accent-color) 140px
-  );
+  --titlebar-gradient: radial-gradient(circle at 100% 0%, hsl(231, 45%, 13%), var(--uc-accent-color) 140px);
+  --titlebar-gradient-left: radial-gradient(circle at 0% 0%, hsl(231, 45%, 13%), var(--uc-accent-color) 140px);
   --titlebar-background: var(--lwt-accent-color) var(--titlebar-gradient);
 
   --search-box-color: hsl(229, 32%, 23%);
@@ -447,21 +430,9 @@ popupnotification,
   --button-primary-hover-bgcolor: var(--purple-35) !important;
   --button-primary-active-bgcolor: var(--purple-30) !important;
   --protections-popup-switch-off-background: color-mix(in srgb, currentColor 15%, transparent);
-  --protections-popup-switch-off-hover-background-custom: color-mix(
-    in srgb,
-    currentColor 20%,
-    transparent
-  );
-  --protections-popup-switch-off-active-background-custom: color-mix(
-    in srgb,
-    currentColor 23%,
-    transparent
-  );
-  --protections-popup-switch-off-hover-border-custom: color-mix(
-    in srgb,
-    currentColor 5%,
-    transparent
-  );
+  --protections-popup-switch-off-hover-background-custom: color-mix(in srgb, currentColor 20%, transparent);
+  --protections-popup-switch-off-active-background-custom: color-mix(in srgb, currentColor 23%, transparent);
+  --protections-popup-switch-off-hover-border-custom: color-mix(in srgb, currentColor 5%, transparent);
   --protections-popup-switch-on-background: var(--purple-40);
   --protections-popup-switch-on-hover-background-custom: var(--purple-50);
   --protections-popup-switch-on-active-background-custom: var(--purple-55);

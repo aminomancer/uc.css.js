@@ -78,10 +78,7 @@ menupopup:not([type="arrow"]) :is(menuitem, menu) .menu-iconic-icon {
   margin-inline: var(--context-iconic-margin);
 }
 
-panel[type="autocomplete-richlistbox"]
-  > richlistbox
-  > richlistitem
-  :is(.ac-site-icon, .ac-type-icon) {
+panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem :is(.ac-site-icon, .ac-type-icon) {
   margin-inline: var(--context-iconic-margin) !important;
   margin-inline-start: 0 !important;
 }
@@ -92,8 +89,7 @@ panel[type="autocomplete-richlistbox"]
 }
 
 moz-input-box > menupopup .context-menu-add-engine > .menu-iconic-left::after {
-  background: url(chrome://userchrome/content/skin/search-indicator-badge-add.svg) no-repeat
-    center/contain !important;
+  background: url(chrome://userchrome/content/skin/search-indicator-badge-add.svg) no-repeat center/contain !important;
   -moz-context-properties: fill, fill-opacity, stroke !important;
   fill: var(--update-badge-bg) !important;
   stroke: var(--update-badge-color) !important;
@@ -219,9 +215,7 @@ menupopup menuitem[class^="unified-nav"][type="radio"]:not([checked="true"])::be
   display: none;
 }
 
-menupopup
-  menuitem[class^="unified-nav"][type="radio"]:not([checked="true"])
-  :is(.menu-iconic-left, .menu-iconic-icon) {
+menupopup menuitem[class^="unified-nav"][type="radio"]:not([checked="true"]) :is(.menu-iconic-left, .menu-iconic-icon) {
   display: -moz-box !important;
 }
 
@@ -238,23 +232,19 @@ menupopup menuitem[type="checkbox"]::before {
   border-radius: 2px;
 }
 
-menupopup
-  menuitem:is([type="checkbox"], [type="radio"])[_moz-menuactive="true"]:not([disabled="true"])::before {
+menupopup menuitem:is([type="checkbox"], [type="radio"])[_moz-menuactive="true"]:not([disabled="true"])::before {
   background-color: var(--checkbox-unchecked-hover-bgcolor);
 }
 
-menupopup
-  menuitem:is([type="checkbox"], [type="radio"])[_moz-menuactive="true"]:not([disabled="true"]):active::before {
+menupopup menuitem:is([type="checkbox"], [type="radio"])[_moz-menuactive="true"]:not([disabled="true"]):active::before {
   background-color: var(--checkbox-unchecked-active-bgcolor);
 }
 
-menupopup
-  menuitem:is([type="checkbox"], [type="radio"])[checked="true"][_moz-menuactive="true"]:not([disabled="true"])::before {
+menupopup menuitem:is([type="checkbox"], [type="radio"])[checked="true"][_moz-menuactive="true"]:not([disabled="true"])::before {
   background-color: var(--checkbox-checked-hover-bgcolor);
 }
 
-menupopup
-  menuitem:is([type="checkbox"], [type="radio"])[checked="true"][_moz-menuactive="true"]:not([disabled="true"]):active::before {
+menupopup menuitem:is([type="checkbox"], [type="radio"])[checked="true"][_moz-menuactive="true"]:not([disabled="true"]):active::before {
   background-color: var(--checkbox-checked-active-bgcolor);
 }
 
@@ -289,8 +279,7 @@ menupopup.in-menulist > :where(menucaption, menuitem) > .menu-iconic-text {
   padding-block: unset !important;
 }
 
-:is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
-  :where(menu, menuitem, menucaption),
+:is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup) :where(menu, menuitem, menucaption),
 panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem {
   padding-inline: 8px !important;
   min-height: var(--menuitem-height) !important;
@@ -302,18 +291,12 @@ panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem {
   background: none !important;
 }
 
-:is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
-  :where(menu, menuitem, menucaption).menuitem-iconic,
-panel[type="autocomplete-richlistbox"]
-  > richlistbox
-  > richlistitem:is([originaltype="insecureWarning"], [image]:not([image=""], [image="null"])) {
+:is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup) :where(menu, menuitem, menucaption).menuitem-iconic,
+panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem:is([originaltype="insecureWarning"], [image]:not([image=""], [image="null"])) {
   padding-inline: 0 8px !important;
 }
 
-panel[type="autocomplete-richlistbox"]
-  > richlistbox
-  > richlistitem:is([originaltype="insecureWarning"], [image]:not([image=""], [image="null"]))
-  :is(.ac-site-icon, .ac-type-icon):not([type="null"]) {
+panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem:is([originaltype="insecureWarning"], [image]:not([image=""], [image="null"])) :is(.ac-site-icon, .ac-type-icon):not([type="null"]) {
   margin-inline: var(--context-iconic-margin) !important;
 }
 
@@ -321,9 +304,7 @@ panel[type="autocomplete-richlistbox"]
   fill: currentColor !important;
 }
 
-:is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
-  :where(menu, menuitem, menucaption)
-  > :is(label, .menu-iconic-text, .menu-text) {
+:is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup) :where(menu, menuitem, menucaption) > :is(label, .menu-iconic-text, .menu-text) {
   padding-inline: 0 !important;
 }
 
@@ -335,9 +316,7 @@ panel[type="autocomplete-richlistbox"]
   color: var(--panel-description-color) !important;
 }
 
-:is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup)
-  menucaption
-  > :is(label, .menu-iconic-text, .menu-text) {
+:is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup) menucaption > :is(label, .menu-iconic-text, .menu-text) {
   padding: 4px 5px !important;
   border-bottom: 1px solid var(--menu-separator-color) !important;
   font-weight: var(--uc-font-weight-bold, 600) !important;
@@ -408,16 +387,11 @@ panel menupopup.in-menulist {
   margin-top: 4px;
 }
 
-#ContentSelectDropdown
-  menupopup.in-menulist
-  menuitem:is([label=" "], [label=""], :not([label]))[value="0"]
-  label {
+#ContentSelectDropdown menupopup.in-menulist menuitem:is([label=" "], [label=""], :not([label]))[value="0"] label {
   display: none !important;
 }
 
-#ContentSelectDropdown
-  menupopup.in-menulist
-  menuitem:is([label=" "], [label=""], :not([label]))[value="0"]::after {
+#ContentSelectDropdown menupopup.in-menulist menuitem:is([label=" "], [label=""], :not([label]))[value="0"]::after {
   content: "(Empty)";
   display: -moz-box;
   color: var(--menu-disabled-color);
@@ -470,8 +444,7 @@ menuitem[default="true"] {
 
 /* a way to reduce the number of menuseparators in the context menu, if they feel excessive */
 @supports -moz-bool-pref("userChrome.contextmenu.reduce-menuseparators") {
-  #contentAreaContextMenu
-    > menuseparator[id]:not(#context-sep-open, #context-media-sep-commands, #context-sep-copylink, #spell-suggestions-separator, #context-sep-selectall) {
+  #contentAreaContextMenu > menuseparator[id]:not(#context-sep-open, #context-media-sep-commands, #context-sep-copylink, #spell-suggestions-separator, #context-sep-selectall) {
     display: none !important;
   }
 
@@ -491,8 +464,7 @@ menuitem[default="true"] {
   padding-bottom: 2px !important;
 }
 
-:is(#context-navigation, #tab-context-navigation)
-  .menuitem-iconic[_moz-menuactive="true"]:not([disabled="true"]) {
+:is(#context-navigation, #tab-context-navigation) .menuitem-iconic[_moz-menuactive="true"]:not([disabled="true"]) {
   background: none !important;
 }
 
@@ -503,9 +475,7 @@ menuitem[default="true"] {
   border-radius: var(--arrowpanel-menuitem-border-radius);
 }
 
-:is(#context-navigation, #tab-context-navigation)
-  .menuitem-iconic[_moz-menuactive="true"]:not([disabled="true"])
-  .menu-iconic-left {
+:is(#context-navigation, #tab-context-navigation) .menuitem-iconic[_moz-menuactive="true"]:not([disabled="true"]) .menu-iconic-left {
   background: var(--menuitem-hover-background-color);
 }
 

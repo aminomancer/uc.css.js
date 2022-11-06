@@ -115,7 +115,10 @@ class TabTooltipNav {
     return [this.triggerTab];
   }
   get navPopup() {
-    return this._navPopup || (this._navPopup = document.querySelector("#tab-nav-popup"));
+    return (
+      this._navPopup ||
+      (this._navPopup = document.querySelector("#tab-nav-popup"))
+    );
   }
   get tabBackForwardMenu() {
     return (
@@ -125,25 +128,32 @@ class TabTooltipNav {
   }
   get tooltipBox() {
     return (
-      this._tooltipBox || (this._tooltipBox = this.navPopup.querySelector("#tab-nav-tooltip-box"))
+      this._tooltipBox ||
+      (this._tooltipBox = this.navPopup.querySelector("#tab-nav-tooltip-box"))
     );
   }
   get backButton() {
-    return this._backButton || (this._backButton = this.navPopup.querySelector("#tab-nav-back"));
+    return (
+      this._backButton ||
+      (this._backButton = this.navPopup.querySelector("#tab-nav-back"))
+    );
   }
   get forwardButton() {
     return (
-      this._forwardButton || (this._forwardButton = this.navPopup.querySelector("#tab-nav-forward"))
+      this._forwardButton ||
+      (this._forwardButton = this.navPopup.querySelector("#tab-nav-forward"))
     );
   }
   get reloadButton() {
     return (
-      this._reloadButton || (this._reloadButton = this.navPopup.querySelector("#tab-nav-reload"))
+      this._reloadButton ||
+      (this._reloadButton = this.navPopup.querySelector("#tab-nav-reload"))
     );
   }
   get favicon() {
     return (
-      this._favicon || (this._favicon = this.navPopup.querySelector("#tab-nav-tooltip-favicon"))
+      this._favicon ||
+      (this._favicon = this.navPopup.querySelector("#tab-nav-tooltip-favicon"))
     );
   }
   set knownWidth(val) {
@@ -161,8 +171,13 @@ class TabTooltipNav {
   constructor() {
     this.config = TabTooltipNav.config;
     let l10n = this.config.l10n;
-    XPCOMUtils.defineLazyPreferenceGetter(this, "popupDelay", "ui.tooltipDelay", 500, null, val =>
-      Math.max(val - 180, 0)
+    XPCOMUtils.defineLazyPreferenceGetter(
+      this,
+      "popupDelay",
+      "ui.tooltipDelay",
+      500,
+      null,
+      val => Math.max(val - 180, 0)
     );
     XPCOMUtils.defineLazyPreferenceGetter(
       this,
@@ -228,7 +243,9 @@ class TabTooltipNav {
   onpopupshowing="return tabNavButtons.fillHistoryMenu(event.target);"
   onpopuphidden="tabNavButtons.onContextHidden();"
   oncommand="tabNavButtons.gotoHistoryIndex(event); event.stopPropagation();"/>`;
-    window.mainPopupSet.appendChild(MozXULElement.parseXULToFragment(this.markup));
+    window.mainPopupSet.appendChild(
+      MozXULElement.parseXULToFragment(this.markup)
+    );
     this.navPopup.removeAttribute("position");
     this.navPopup.removeAttribute("side");
     this.navPopup.removeAttribute("flip");
@@ -236,7 +253,9 @@ class TabTooltipNav {
       this.config["Show vanilla tooltip if modifier is not pressed"] &&
       /ctrl|alt|shift|meta|accel/.test(this.config["Modifier key"])
     ) {
-      document.querySelector("#tabbrowser-tab-tooltip").addEventListener("popupshowing", this);
+      document
+        .querySelector("#tabbrowser-tab-tooltip")
+        .addEventListener("popupshowing", this);
     } else {
       gBrowser.tabContainer.removeAttribute("tooltip");
     }
@@ -255,10 +274,14 @@ class TabTooltipNav {
   handleEvent(e) {
     switch (e.type) {
       case "mousemove":
-        requestAnimationFrame(() => requestAnimationFrame(() => this.onMousemove(e)));
+        requestAnimationFrame(() =>
+          requestAnimationFrame(() => this.onMousemove(e))
+        );
         break;
       case "mouseleave":
-        requestAnimationFrame(() => requestAnimationFrame(() => this.onMouseleave(e)));
+        requestAnimationFrame(() =>
+          requestAnimationFrame(() => this.onMouseleave(e))
+        );
         break;
       case "TabClose":
       case "TabMove":
@@ -328,20 +351,30 @@ class TabTooltipNav {
       return this.onMouseleave();
     }
     this.triggerTab = tab;
-    if (tab) this.openTimer = setTimeout(() => this.openPopup(e), this.popupDelay);
+    if (tab) {
+      this.openTimer = setTimeout(() => this.openPopup(e), this.popupDelay);
+    }
   }
   // main trigger for closing it
   onMouseleave() {
     this.clearTimers();
     if (this.menuOpen) return;
-    if (this.navPopup.matches(":hover") || this.triggerTab?.matches(":hover")) return;
+    if (this.navPopup.matches(":hover") || this.triggerTab?.matches(":hover")) {
+      return;
+    }
     this.closeTimer = setTimeout(() => this.closePopup(), this.popupDelay);
   }
   // on navigation, update back/forward buttons and update the tooltip if the
   // navigation involved the trigger tab or multiselected tabs (provided the
   // trigger tab is also multiselected)
   onLocationChange(browser, progress) {
-    if (!progress.isTopLevel || !(this.isOpen || this.openTimer) || !this.triggerTab) return;
+    if (
+      !progress.isTopLevel ||
+      !(this.isOpen || this.openTimer) ||
+      !this.triggerTab
+    ) {
+      return;
+    }
     let tab = gBrowser.getTabForBrowser(browser);
     let { tabs } = this;
     if (tabs.indexOf(tab) > -1) this.updateButtonsState(tabs);
@@ -354,7 +387,9 @@ class TabTooltipNav {
   // if the native tab tooltip is about to show, either suppress it
   // or allow it and prevent the nav popup from opening.
   onTooltipShowing(e) {
-    if ((this.isOpen || this.openTimer) && !this.closeTimer) return e.preventDefault();
+    if ((this.isOpen || this.openTimer) && !this.closeTimer) {
+      return e.preventDefault();
+    }
     this.interrupt();
   }
   // close all popups and bail out of any scheduled popup actions.
@@ -471,18 +506,23 @@ class TabTooltipNav {
   reloadOrDuplicate(e) {
     e = getRootEvent(e);
     let { tabs } = this;
-    let accelKeyPressed = AppConstants.platform == "macosx" ? e.metaKey : e.ctrlKey;
+    let accelKeyPressed =
+      AppConstants.platform == "macosx" ? e.metaKey : e.ctrlKey;
     let backgroundTabModifier = e.button == 1 || accelKeyPressed;
     if (e.shiftKey && !backgroundTabModifier) {
       this.browserReloadWithFlags(
         tabs,
-        Ci.nsIWebNavigation.LOAD_FLAGS_BYPASS_PROXY | Ci.nsIWebNavigation.LOAD_FLAGS_BYPASS_CACHE
+        Ci.nsIWebNavigation.LOAD_FLAGS_BYPASS_PROXY |
+          Ci.nsIWebNavigation.LOAD_FLAGS_BYPASS_CACHE
       );
       return;
     }
     let where = whereToOpenLink(e, false, true);
-    if (where == "current") this.browserReloadWithFlags(tabs, Ci.nsIWebNavigation.LOAD_FLAGS_NONE);
-    else this.duplicateTabsIn(tabs, where);
+    if (where == "current") {
+      this.browserReloadWithFlags(tabs, Ci.nsIWebNavigation.LOAD_FLAGS_NONE);
+    } else {
+      this.duplicateTabsIn(tabs, where);
+    }
   }
   // this performs the same functions as above but does so after duplicating
   // the tab as a new tab or in a new window
@@ -502,9 +542,13 @@ class TabTooltipNav {
         if (tab.linkedPanel) {
           loadBrowserURI(browser, url, principal);
         } else {
-          tab.addEventListener("SSTabRestoring", () => loadBrowserURI(browser, url, principal), {
-            once: true,
-          });
+          tab.addEventListener(
+            "SSTabRestoring",
+            () => loadBrowserURI(browser, url, principal),
+            {
+              once: true,
+            }
+          );
           gBrowser._insertBrowser(tab);
         }
       } else {
@@ -560,7 +604,10 @@ class TabTooltipNav {
     let stringWithShortcut = (stringId, keyElemId, pluralCount) => {
       let keyElem = document.getElementById(keyElemId);
       let shortcut = ShortcutUtils.prettifyShortcut(keyElem);
-      return PluralForm.get(pluralCount, gTabBrowserBundle.GetStringFromName(stringId))
+      return PluralForm.get(
+        pluralCount,
+        gTabBrowserBundle.GetStringFromName(stringId)
+      )
         .replace("%S", shortcut)
         .replace("#1", pluralCount);
     };
@@ -570,7 +617,9 @@ class TabTooltipNav {
     const affectedTabsLength = contextTabInSelection ? selectedTabs.length : 1;
     this.setFavicon(tab);
     if (tab.mOverCloseButton) {
-      let shortcut = ShortcutUtils.prettifyShortcut(document.getElementById("key_close"));
+      let shortcut = ShortcutUtils.prettifyShortcut(
+        document.getElementById("key_close")
+      );
       label = PluralForm.get(
         affectedTabsLength,
         gTabBrowserBundle.GetStringFromName("tabs.closeTabs.tooltip")
@@ -585,7 +634,11 @@ class TabTooltipNav {
         stringID = tab.linkedBrowser.audioMuted
           ? "tabs.unmuteAudio2.tooltip"
           : "tabs.muteAudio2.tooltip";
-        label = stringWithShortcut(stringID, "key_toggleMute", affectedTabsLength);
+        label = stringWithShortcut(
+          stringID,
+          "key_toggleMute",
+          affectedTabsLength
+        );
       } else {
         if (tab.hasAttribute("activemedia-blocked")) {
           stringID = "tabs.unblockAudio2.tooltip";
@@ -672,7 +725,9 @@ class TabTooltipNav {
           if (this.knownWidth) this.captureKnownWidth();
         }
       });
-      menupopup.addEventListener("DOMMenuItemInactive", () => this.handleTooltip());
+      menupopup.addEventListener("DOMMenuItemInactive", () =>
+        this.handleTooltip()
+      );
       menupopup.hasStatusListener = true;
     }
 
@@ -683,16 +738,23 @@ class TabTooltipNav {
 
     const MAX_HISTORY_MENU_ITEMS = 15;
     const tooltipBack = gNavigatorBundle.getString("tabHistory.goBack");
-    const tooltipCurrent = gNavigatorBundle.getString("tabHistory.reloadCurrent");
+    const tooltipCurrent = gNavigatorBundle.getString(
+      "tabHistory.reloadCurrent"
+    );
     const tooltipForward = gNavigatorBundle.getString("tabHistory.goForward");
 
     let updateSessionHistory = (sessionHistory, initial, ssInParent) => {
-      let count = ssInParent ? sessionHistory.count : sessionHistory.entries.length;
+      let count = ssInParent
+        ? sessionHistory.count
+        : sessionHistory.entries.length;
       if (!initial) {
         if (count <= 1) {
           menupopup.hidePopup();
           return;
-        } else if (menupopup.id != "tabBackForwardMenu" && !menupopup.parentNode.open) {
+        } else if (
+          menupopup.id != "tabBackForwardMenu" &&
+          !menupopup.parentNode.open
+        ) {
           menupopup.parentNode.open = true;
           this.menuOpen = true;
           return;
@@ -701,11 +763,16 @@ class TabTooltipNav {
       let { index } = sessionHistory;
       let half_length = Math.floor(MAX_HISTORY_MENU_ITEMS / 2);
       let start = Math.max(index - half_length, 0);
-      let end = Math.min(start == 0 ? MAX_HISTORY_MENU_ITEMS : index + half_length + 1, count);
+      let end = Math.min(
+        start == 0 ? MAX_HISTORY_MENU_ITEMS : index + half_length + 1,
+        count
+      );
       if (end == count) start = Math.max(count - MAX_HISTORY_MENU_ITEMS, 0);
       let existingIndex = 0;
       for (let j = end - 1; j >= start; j--) {
-        let entry = ssInParent ? sessionHistory.getEntryAtIndex(j) : sessionHistory.entries[j];
+        let entry = ssInParent
+          ? sessionHistory.getEntryAtIndex(j)
+          : sessionHistory.entries[j];
         if (
           BrowserUtils.navigationRequireUserInteraction &&
           entry.hasUserInteraction === false &&
@@ -725,7 +792,8 @@ class TabTooltipNav {
         item.setAttribute("historyindex", j - index);
         if (j != index) item.style.listStyleImage = `url(page-icon:${uri})`;
         if (j < index) {
-          item.className = "unified-nav-back menuitem-iconic menuitem-with-favicon";
+          item.className =
+            "unified-nav-back menuitem-iconic menuitem-with-favicon";
           item.setAttribute("tooltiptext", tooltipBack);
         } else if (j == index) {
           item.setAttribute("type", "radio");
@@ -733,7 +801,8 @@ class TabTooltipNav {
           item.className = "unified-nav-current";
           item.setAttribute("tooltiptext", tooltipCurrent);
         } else {
-          item.className = "unified-nav-forward menuitem-iconic menuitem-with-favicon";
+          item.className =
+            "unified-nav-forward menuitem-iconic menuitem-with-favicon";
           item.setAttribute("tooltiptext", tooltipForward);
         }
         if (!item.parentNode) menupopup.appendChild(item);
@@ -755,7 +824,10 @@ class TabTooltipNav {
       if (sessionHistory.count <= 1) return false;
       updateSessionHistory(sessionHistory, true, true);
     } else {
-      sessionHistory = SessionStore.getSessionHistory(this.triggerTab, updateSessionHistory);
+      sessionHistory = SessionStore.getSessionHistory(
+        this.triggerTab,
+        updateSessionHistory
+      );
       updateSessionHistory(sessionHistory, true, false);
     }
     this.menuOpen = true;
@@ -848,7 +920,9 @@ class TabTooltipNav {
 #tab-nav-popup[type="arrow"]::part(content) {
   margin: 0;
 }`;
-    let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(Ci.nsIStyleSheetService);
+    let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
+      Ci.nsIStyleSheetService
+    );
     let uri = makeURI("data:text/css;charset=UTF=8," + encodeURIComponent(css));
     // avoid loading duplicate sheets on subsequent window launches.
     if (sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) return;

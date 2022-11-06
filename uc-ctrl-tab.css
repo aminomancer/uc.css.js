@@ -47,8 +47,8 @@
   box-shadow: none !important;
   background-color: transparent !important;
   border: none !important;
-  fill: white !important;
-  fill-opacity: 0.7 !important;
+  fill: currentColor !important;
+  fill-opacity: 0.8 !important;
   -moz-context-properties: fill, fill-opacity !important;
   background: url(chrome://userchrome/content/skin/restore-session.svg) center no-repeat !important;
   background-size: 42% !important;
@@ -87,8 +87,7 @@
 .ctrlTab-preview:focus > .ctrlTab-preview-inner {
   background-color: var(--ctrlTab-panel-focused-bgcolor) !important;
   border-color: var(--attention-color) !important;
-  box-shadow: 0 0 4px -1px rgba(0, 0, 0, 0.2), 0 0 25px -2px rgba(0, 0, 0, 0.2),
-    inset 0 0 20px 5px hsla(0, 0%, 0%, 0.5) !important;
+  box-shadow: 0 0 4px -1px rgba(0, 0, 0, 0.2), 0 0 25px -2px rgba(0, 0, 0, 0.2), inset 0 0 20px 5px hsla(0, 0%, 0%, 0.5) !important;
 }
 
 .ctrlTab-canvas > * {

@@ -6,8 +6,7 @@
 
 /* simple translate extension by sienori */
 
-@-moz-document regexp("^moz-extension://.*/popup/index.html")
-{
+@-moz-document regexp("^moz-extension://.*/popup/index.html") {
   :root[uc-extension-id="simple-translate@sienori"] {
     border-radius: 3px !important;
     background: none !important;
@@ -77,10 +76,7 @@
     color: var(--ui-text-100) !important;
   }
 
-  :root[uc-extension-id="simple-translate@sienori"]
-    #footer
-    .selectWrap
-    select:is(:focus-within, :hover) {
+  :root[uc-extension-id="simple-translate@sienori"] #footer .selectWrap select:is(:focus-within, :hover) {
     background-color: var(--search-box-focus) !important;
   }
 
@@ -122,9 +118,7 @@
     background-color: var(--sub-text) !important;
   }
 
-  :root[uc-extension-id="simple-translate@sienori"]
-    .react-toggle:is(:hover, :focus-within):not(.react-toggle--disabled)
-    .react-toggle-track {
+  :root[uc-extension-id="simple-translate@sienori"] .react-toggle:is(:hover, :focus-within):not(.react-toggle--disabled) .react-toggle-track {
     background-color: color-mix(in srgb, black 20%, var(--sub-text)) !important;
   }
 
@@ -132,9 +126,7 @@
     background-color: var(--uc-parent-link-color) !important;
   }
 
-  :root[uc-extension-id="simple-translate@sienori"]
-    .react-toggle--checked:is(:hover, :focus-within):not(.react-toggle--disabled)
-    .react-toggle-track {
+  :root[uc-extension-id="simple-translate@sienori"] .react-toggle--checked:is(:hover, :focus-within):not(.react-toggle--disabled) .react-toggle-track {
     background-color: var(--uc-parent-link-color-hover) !important;
   }
 
@@ -146,20 +138,12 @@
     border-color: transparent !important;
   }
 
-  :root[uc-extension-id="simple-translate@sienori"]
-    #header
-    .rightButtons
-    .settingsButton:is(:hover, :focus-visible)
-    svg {
+  :root[uc-extension-id="simple-translate@sienori"] #header .rightButtons .settingsButton:is(:hover, :focus-visible) svg {
     fill: var(--highlight) !important;
     transform: rotate(90deg) !important;
   }
 
-  :root[uc-extension-id="simple-translate@sienori"]
-    #header
-    .rightButtons
-    .heartButton:is(:hover, :focus-visible)
-    svg {
+  :root[uc-extension-id="simple-translate@sienori"] #header .rightButtons .heartButton:is(:hover, :focus-visible) svg {
     fill: var(--confirm) !important;
   }
 }

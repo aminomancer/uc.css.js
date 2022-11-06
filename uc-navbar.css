@@ -38,14 +38,10 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
 }
 
 /* toolbar button badges */
-:is(.customization-target, .widget-overflow-list)
-  :is(toolbarbutton, toolbaritem):is(:not([attention]), [attention=false])
-  > .toolbarbutton-badge-stack
-  > .toolbarbutton-badge {
+:is(.customization-target, .widget-overflow-list) :is(toolbarbutton, toolbaritem):is(:not([attention]), [attention="false"]) > .toolbarbutton-badge-stack > .toolbarbutton-badge {
   background-color: var(--uc-toolbarbutton-badge-bgcolor, hsl(0, 100%, 42.5%)) !important;
   color: var(--toolbar-color, white) !important;
-  box-shadow: 0 1px 1px -1px #ffffff4d inset, 0 -1px 1px -1px #00000080 inset, 0 1px 1px #1e1e2026,
-    0 1px 3px #1e1e2033 !important;
+  box-shadow: 0 1px 1px -1px #ffffff4d inset, 0 -1px 1px -1px #00000080 inset, 0 1px 1px #1e1e2026, 0 1px 3px #1e1e2033 !important;
   min-width: 10.5px !important;
   height: 10.5px !important;
   -moz-box-align: end !important;
@@ -56,10 +52,7 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
   margin: -6px -6px 0 -6px !important;
 }
 
-:is(.customization-target, .widget-overflow-list)
-  #downloads-button[attention]
-  > .toolbarbutton-badge-stack
-  > .toolbarbutton-badge {
+:is(.customization-target, .widget-overflow-list) #downloads-button[attention] > .toolbarbutton-badge-stack > .toolbarbutton-badge {
   margin-right: -5.5px !important;
   margin-top: -5.5px !important;
   width: 10px !important;
@@ -71,40 +64,27 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
   background-repeat: no-repeat !important;
 }
 
-:is(.customization-target, .widget-overflow-list)
-  #downloads-button[attention="info"]
-  > .toolbarbutton-badge-stack
-  > .toolbarbutton-badge {
+:is(.customization-target, .widget-overflow-list) #downloads-button[attention="info"] > .toolbarbutton-badge-stack > .toolbarbutton-badge {
   background-color: transparent !important;
   -moz-context-properties: none !important;
   border-radius: revert !important;
   background-image: url(chrome://userchrome/content/indicator-tab-attention-purple.svg) !important;
 }
 
-:is(.customization-target, .widget-overflow-list)
-  #downloads-button[attention="warning"]
-  > .toolbarbutton-badge-stack
-  > .toolbarbutton-badge {
+:is(.customization-target, .widget-overflow-list) #downloads-button[attention="warning"] > .toolbarbutton-badge-stack > .toolbarbutton-badge {
   background-color: var(--low-warning-icon-detail) !important;
   fill: var(--low-warning-icon-background) !important;
   border-radius: 50% !important;
 }
 
-:is(.customization-target, .widget-overflow-list)
-  #downloads-button[attention="severe"]
-  > .toolbarbutton-badge-stack
-  > .toolbarbutton-badge {
+:is(.customization-target, .widget-overflow-list) #downloads-button[attention="severe"] > .toolbarbutton-badge-stack > .toolbarbutton-badge {
   background-color: var(--warning-icon-detail) !important;
   fill: var(--warning-icon-background) !important;
   border-radius: 50% !important;
 }
 
-:is(.customization-target, .widget-overflow-list)
-  #fxa-toolbar-menu-button[badge-status="login_failed"]
-  > .toolbarbutton-badge-stack
-  > .toolbarbutton-badge {
-  background: url(chrome://userchrome/content/skin/controlcenter/warning.svg) no-repeat
-    center/contain !important;
+:is(.customization-target, .widget-overflow-list) #fxa-toolbar-menu-button[badge-status="login_failed"] > .toolbarbutton-badge-stack > .toolbarbutton-badge {
+  background: url(chrome://userchrome/content/skin/controlcenter/warning.svg) no-repeat center/contain !important;
   stroke: var(--low-warning-icon-detail) !important;
   fill: var(--low-warning-icon-background) !important;
   box-shadow: none !important;
@@ -115,10 +95,7 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
   filter: none !important;
 }
 
-#tabbrowser-tabs[hiddensoundplaying]
-  ~ #alltabs-button
-  > .toolbarbutton-badge-stack
-  > .toolbarbutton-badge {
+#tabbrowser-tabs[hiddensoundplaying] ~ #alltabs-button > .toolbarbutton-badge-stack > .toolbarbutton-badge {
   background: transparent url(chrome://userchrome/content/audioUnmutedButton.svg) center/contain !important;
   box-shadow: none !important;
   color: inherit !important;
@@ -139,10 +116,7 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
   padding-inline-end: 4px !important;
 }
 
-.widget-overflow-list
-  #zoom-controls[cui-areatype="toolbar"]
-  > #zoom-reset-button
-  > .toolbarbutton-text {
+.widget-overflow-list #zoom-controls[cui-areatype="toolbar"] > #zoom-reset-button > .toolbarbutton-text {
   min-width: calc(5ch + 4px) !important;
   padding-inline: 0 !important;
 }
@@ -180,6 +154,10 @@ toolbar .toolbarbutton-combined-buttons-dropmarker > .toolbarbutton-icon {
   width: 16px !important;
 }
 
+toolbar .toolbaritem-combined-buttons.unified-extensions-item {
+  padding: 0 var(--toolbarbutton-outer-padding);
+}
+
 toolbar:not(#PersonalToolbar) #edit-controls > #cut-button,
 toolbar #profiler-button > #profiler-button-button {
   padding-left: 2px !important;
@@ -197,10 +175,7 @@ toolbar:not(#PersonalToolbar) #zoom-controls > :is(#zoom-out-button, #zoom-in-bu
   padding-inline: 2px !important;
 }
 
-toolbar:not(#PersonalToolbar)
-  #zoom-controls
-  > :is(#zoom-out-button, #zoom-in-button)
-  > .toolbarbutton-icon {
+toolbar:not(#PersonalToolbar) #zoom-controls > :is(#zoom-out-button, #zoom-in-button) > .toolbarbutton-icon {
   height: 20px !important;
   width: 20px !important;
   padding: 4px !important;
@@ -214,10 +189,7 @@ toolbar:not(#PersonalToolbar) #zoom-controls > #zoom-reset-button {
   margin-block: var(--toolbarbutton-inner-padding) !important;
 }
 
-toolbar:not(#PersonalToolbar)
-  #zoom-controls
-  > #zoom-reset-button:not([disabled]):is(:hover, :focus-visible)
-  > .toolbarbutton-text {
+toolbar:not(#PersonalToolbar) #zoom-controls > #zoom-reset-button:not([disabled]):is(:hover, :focus-visible) > .toolbarbutton-text {
   border-color: transparent;
 }
 
@@ -239,24 +211,15 @@ toolbar:not(#PersonalToolbar) #zoom-controls separator {
   opacity: 1 !important;
 }
 
-:root:not([customizing])
-  #stop-reload-button
-  > .toolbarbutton-1:not([checked], [open], :active):hover
-  > .toolbarbutton-icon {
+:root:not([customizing]) #stop-reload-button > .toolbarbutton-1:not([checked], [open], :active):hover > .toolbarbutton-icon {
   background-color: var(--toolbarbutton-hover-background);
 }
 
-:root:not([customizing])
-  #stop-reload-button
-  > .toolbarbutton-1:is(:focus-visible, [checked="true"]):not([open], :hover, :active)
-  > .toolbarbutton-icon {
+:root:not([customizing]) #stop-reload-button > .toolbarbutton-1:is(:focus-visible, [checked="true"]):not([open], :hover, :active) > .toolbarbutton-icon {
   background-color: var(--toolbarbutton-checked-background);
 }
 
-:root:not([customizing])
-  #stop-reload-button
-  > .toolbarbutton-1:is([open], [checked], :hover:active)
-  > .toolbarbutton-icon {
+:root:not([customizing]) #stop-reload-button > .toolbarbutton-1:is([open], [checked], :hover:active) > .toolbarbutton-icon {
   background-color: var(--toolbarbutton-active-background);
 }
 
@@ -306,12 +269,9 @@ toolbar .toolbarbutton-1:not([disabled])[open]:hover > .toolbarbutton-icon {
   padding-inline: var(--toolbarbutton-inner-padding) !important;
 }
 
-#PersonalToolbar
-  .toolbarbutton-1:is(:focus-visible, [checked="true"]):not([disabled], [open], :hover, :active),
+#PersonalToolbar .toolbarbutton-1:is(:focus-visible, [checked="true"]):not([disabled], [open], :hover, :active),
 toolbarbutton.bookmark-item:not(.subviewbutton):is(:focus-visible, [checked="true"]):not([disabled], [open], :hover, :active),
-toolbar
-  .toolbarbutton-1:is(:focus-visible, [checked="true"]):not([disabled], [open], :hover, :active)
-  > :is(.toolbarbutton-icon, .toolbarbutton-text, .toolbarbutton-badge-stack) {
+toolbar .toolbarbutton-1:is(:focus-visible, [checked="true"]):not([disabled], [open], :hover, :active) > :is(.toolbarbutton-icon, .toolbarbutton-text, .toolbarbutton-badge-stack) {
   background-color: var(--toolbarbutton-checked-background) !important;
   transition: none !important;
 }
@@ -322,14 +282,11 @@ toolbar
   background: none !important;
 }
 
-toolbar
-  .toolbarbutton-1:not([disabled], [open])[checked]
-  > :is(.toolbarbutton-icon, .toolbarbutton-badge-stack) {
+toolbar .toolbarbutton-1:not([disabled], [open])[checked] > :is(.toolbarbutton-icon, .toolbarbutton-badge-stack) {
   background-color: var(--toolbarbutton-checked-background) !important;
 }
 
-#firefox-view-button:is(:focus-visible, [checked="true"]):not([open], :hover, :active)
-  > .toolbarbutton-icon {
+#firefox-view-button:is(:focus-visible, [checked="true"]):not([open], :hover, :active) > .toolbarbutton-icon {
   background: var(--toolbarbutton-checked-background) !important;
 }
 
@@ -361,10 +318,7 @@ toolbar .toolbarbutton-1:not([disabled], [open])[checked]:hover:active > .toolba
   background-color: var(--button-active-bgcolor) !important;
 }
 
-toolbar[customizing="true"]
-  toolbarpaletteitem
-  > #sidebar-button:not([disabled], [open])[checked]
-  > :is(.toolbarbutton-icon, .toolbarbutton-badge-stack) {
+toolbar[customizing="true"] toolbarpaletteitem > #sidebar-button:not([disabled], [open])[checked] > :is(.toolbarbutton-icon, .toolbarbutton-badge-stack) {
   background-color: revert !important;
   transition: transform var(--drag-drop-transition-duration) cubic-bezier(0.6, 2, 0.75, 1.5) !important;
 }
@@ -402,8 +356,7 @@ toolbarpaletteitem[place="toolbar"]:not([mousedown="true"]):focus-visible {
 }
 
 #PersonalToolbar > toolbarpaletteitem:not([notransition])[place="toolbar"] {
-  transition: opacity 200ms ease-in-out, transform 150ms ease-in-out,
-    border-width var(--drag-drop-transition-duration) ease-in-out !important;
+  transition: opacity 200ms ease-in-out, transform 150ms ease-in-out, border-width var(--drag-drop-transition-duration) ease-in-out !important;
 }
 
 #PersonalToolbar[customizing][draggingover] {
@@ -414,17 +367,14 @@ toolbarpaletteitem[place="toolbar"]:not([mousedown="true"]):focus-visible {
   flex-grow: 1;
 }
 
-:root[inFullscreen]:not([macOSNativeFullscreen], [customizing])
-  #PersonalToolbar:not([fullscreentoolbar="true"]),
+:root[inFullscreen]:not([macOSNativeFullscreen], [customizing]) #PersonalToolbar:not([fullscreentoolbar="true"]),
 #PersonalToolbar[collapsed="true"] {
   overflow-y: clip !important;
   min-height: 0 !important;
   max-height: 0 !important;
 }
 
-:root[inFullscreen]:not([macOSNativeFullscreen], [customizing])
-  #PersonalToolbar:not([fullscreentoolbar="true"])
-  > *,
+:root[inFullscreen]:not([macOSNativeFullscreen], [customizing]) #PersonalToolbar:not([fullscreentoolbar="true"]) > *,
 #PersonalToolbar[collapsed="true"] > * {
   overflow-y: clip !important;
   opacity: 0 !important;
@@ -494,9 +444,7 @@ toolbarbutton.bookmark-item:not(.subviewbutton) {
   toolbar widgets. allows us to use padding to space the buttons instead of
   margins, so when we drag a bookmark between buttons, it doesn't get dropped
   at the end of the bookmarks */
-  :root:not([fluent-reveal-hover], [fluent-reveal-click])
-    #PersonalToolbar
-    toolbarbutton.bookmark-item:not(.subviewbutton, [id]) {
+  :root:not([fluent-reveal-hover], [fluent-reveal-click]) #PersonalToolbar toolbarbutton.bookmark-item:not(.subviewbutton, [id]) {
     background: none !important;
     margin-inline: 0 !important;
     padding: 0 2px !important;
@@ -506,17 +454,11 @@ toolbarbutton.bookmark-item:not(.subviewbutton) {
     margin-inline-start: -18px !important;
   }
 
-  :root:not([fluent-reveal-hover], [fluent-reveal-click])
-    #PersonalToolbar
-    toolbarbutton.bookmark-item:not(.subviewbutton, [id]):is(:hover, :-moz-drag-over, :focus-visible)
-    .toolbarbutton-icon {
+  :root:not([fluent-reveal-hover], [fluent-reveal-click]) #PersonalToolbar toolbarbutton.bookmark-item:not(.subviewbutton, [id]):is(:hover, :-moz-drag-over, :focus-visible) .toolbarbutton-icon {
     background-color: var(--button-solid-hover-background) !important;
   }
 
-  :root:not([fluent-reveal-hover], [fluent-reveal-click])
-    #PersonalToolbar
-    toolbarbutton.bookmark-item:not(.subviewbutton, [id]):hover:active
-    .toolbarbutton-icon {
+  :root:not([fluent-reveal-hover], [fluent-reveal-click]) #PersonalToolbar toolbarbutton.bookmark-item:not(.subviewbutton, [id]):hover:active .toolbarbutton-icon {
     background-color: var(--button-solid-active-background) !important;
   }
 }
@@ -738,25 +680,19 @@ translucent with acrylic effect. enable layout.css.backdrop-filter.enabled */
   margin-left: -28px !important;
 }
 
-#navigator-toolbox
-  > :is(legacy-stack, .notificationbox-stack, named-deck)
-  notification-message[type="critical"],
+#navigator-toolbox > :is(legacy-stack, .notificationbox-stack, named-deck) notification-message[type="critical"],
 #navigator-toolbox > named-deck > .notificationbox-stack notification-message[type="critical"],
 #navigator-toolbox .global-notificationbox notification-message[type="critical"] {
   flex-shrink: 0.25 !important;
 }
 
-#navigator-toolbox
-  > :is(legacy-stack, .notificationbox-stack, named-deck)
-  notification-message[type="warning"],
+#navigator-toolbox > :is(legacy-stack, .notificationbox-stack, named-deck) notification-message[type="warning"],
 #navigator-toolbox > named-deck > .notificationbox-stack notification-message[type="warning"],
 #navigator-toolbox .global-notificationbox notification-message[type="warning"] {
   flex-shrink: 0.5 !important;
 }
 
-#navigator-toolbox
-  > :is(legacy-stack, .notificationbox-stack, named-deck)
-  notification-message[type="info"],
+#navigator-toolbox > :is(legacy-stack, .notificationbox-stack, named-deck) notification-message[type="info"],
 #navigator-toolbox > named-deck > .notificationbox-stack notification-message[type="info"],
 #navigator-toolbox .global-notificationbox notification-message[type="info"] {
   flex-shrink: 0.75 !important;
@@ -790,13 +726,8 @@ link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infob
 }
 
 .notificationbox-stack notification[style*="opacity: 0;"],
-#navigator-toolbox
-  > :is(legacy-stack, .notificationbox-stack)
-  > notification-message[style*="opacity: 0;"],
-#navigator-toolbox
-  > named-deck
-  > .notificationbox-stack
-  > notification-message[style*="opacity: 0;"],
+#navigator-toolbox > :is(legacy-stack, .notificationbox-stack) > notification-message[style*="opacity: 0;"],
+#navigator-toolbox > named-deck > .notificationbox-stack > notification-message[style*="opacity: 0;"],
 #navigator-toolbox .global-notificationbox notification-message[style*="opacity: 0;"] {
   margin-top: -32px !important;
   max-width: 1px !important;
@@ -896,8 +827,7 @@ notification .messageCloseButton,
 notification .messageImage,
 link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-close,
 link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .icon {
-  transition: 0.25s transform var(--animation-easing-function),
-    0.25s opacity var(--animation-easing-function) !important;
+  transition: 0.25s transform var(--animation-easing-function), 0.25s opacity var(--animation-easing-function) !important;
 }
 
 notification .messageCloseButton,
@@ -907,10 +837,7 @@ link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infob
   margin: 0 4px !important;
   position: absolute !important;
   opacity: var(--uc-notification-message-close-button-opacity, 0) !important;
-  transform: var(
-    --uc-notification-message-close-button-transform,
-    translateX(-15px) scale(0.5)
-  ) !important;
+  transform: var(--uc-notification-message-close-button-transform, translateX(-15px) scale(0.5)) !important;
 }
 
 notification:is(:hover, :focus-within) .messageCloseButton,

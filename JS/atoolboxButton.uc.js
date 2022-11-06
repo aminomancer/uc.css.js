@@ -191,10 +191,15 @@
               { once: true }
             );
 
-            this._panel.addEventListener("popuphidden", () => this._reset(), { once: true });
+            this._panel.addEventListener("popuphidden", () => this._reset(), {
+              once: true,
+            });
 
             let { position, x, y } = options;
-            this._panel.openPopup(null, { position, triggerEvent: options.event });
+            this._panel.openPopup(null, {
+              position,
+              triggerEvent: options.event,
+            });
             this._panel.moveToAnchor(anchor, position, x, y);
           },
 
@@ -228,13 +233,17 @@
           get _message() {
             this._ensurePanel();
             delete this._message;
-            return (this._message = aDoc.getElementById("confirmation-hint-message"));
+            return (this._message = aDoc.getElementById(
+              "confirmation-hint-message"
+            ));
           },
 
           get _description() {
             this._ensurePanel();
             delete this._description;
-            return (this._description = aDoc.getElementById("confirmation-hint-description"));
+            return (this._description = aDoc.getElementById(
+              "confirmation-hint-description"
+            ));
           },
 
           _ensurePanel() {
@@ -243,7 +252,9 @@
               let wrapper = aDoc.getElementById("confirmation-hint-wrapper");
               wrapper?.replaceWith(wrapper.content);
               this.__panel = aDoc.getElementById("confirmation-hint");
-              ConfirmationHint.__panel = aDoc.getElementById("confirmation-hint");
+              ConfirmationHint.__panel = aDoc.getElementById(
+                "confirmation-hint"
+              );
             }
           },
         };
@@ -287,7 +298,8 @@
         let obSvc = Services.obs;
         let toolboxBranch = "userChrome.toolboxButton";
         let autoHide = "ui.popup.disable_autohide";
-        let autoTogglePopups = "userChrome.toolboxButton.popupAutohide.toggle-on-toolbox-launch";
+        let autoTogglePopups =
+          "userChrome.toolboxButton.popupAutohide.toggle-on-toolbox-launch";
         let mouseConfig = "userChrome.toolboxButton.mouseConfig";
 
         let onClick = function(e) {
@@ -337,9 +349,13 @@
         }
 
         toolbarbutton.triggerAnimation = function() {
-          this.addEventListener("animationend", () => this.removeAttribute("animate"), {
-            once: true,
-          });
+          this.addEventListener(
+            "animationend",
+            () => this.removeAttribute("animate"),
+            {
+              once: true,
+            }
+          );
           this.setAttribute("animate", "true");
         };
 
@@ -416,9 +432,13 @@
               break;
           }
           if (!toolbarbutton.autoTogglePopups) return;
-          if (state && !toolbarbutton.popupAutoHide) prefSvc.setBoolPref(autoHide, true);
+          if (state && !toolbarbutton.popupAutoHide) {
+            prefSvc.setBoolPref(autoHide, true);
+          }
           // if toolbox just closed and autohide is not already disabled, disable it
-          else if (!state && toolbarbutton.popupAutoHide) prefSvc.setBoolPref(autoHide, false);
+          else if (!state && toolbarbutton.popupAutoHide) {
+            prefSvc.setBoolPref(autoHide, false);
+          }
         }
 
         function destroyThreadActor() {
@@ -431,11 +451,15 @@
           this._updateNetworkObserver();
 
           this._activeEventBreakpoints = new Set();
-          this._debuggerNotificationObserver.removeListener(this._eventBreakpointListener);
+          this._debuggerNotificationObserver.removeListener(
+            this._eventBreakpointListener
+          );
 
           for (const global of this.dbg.getDebuggees()) {
             try {
-              this._debuggerNotificationObserver.disconnect(global.unsafeDereference());
+              this._debuggerNotificationObserver.disconnect(
+                global.unsafeDereference()
+              );
             } catch (e) {}
           }
 
@@ -452,7 +476,11 @@
 
           lazy.Actor.prototype.destroy.call(this);
           // this leads back to toolboxObserver in 200ms
-          setTimeout(() => Services.obs.notifyObservers(null, "devtools-thread-destroyed"), 200);
+          setTimeout(
+            () =>
+              Services.obs.notifyObservers(null, "devtools-thread-destroyed"),
+            200
+          );
         }
 
         toolbarbutton.setStrings = function() {
@@ -461,20 +489,31 @@
             if (val === 0) {
               switch (key) {
                 case "contentToolbox":
-                  labelString = l10n.getString("browserContentToolboxMenu.label", "menu");
+                  labelString = l10n.getString(
+                    "browserContentToolboxMenu.label",
+                    "menu"
+                  );
                   hotkey = aDoc.defaultView.key_toggleToolbox;
                   break;
                 case "browserToolbox":
-                  labelString = l10n.getString("browserToolboxMenu.label", "menu");
+                  labelString = l10n.getString(
+                    "browserToolboxMenu.label",
+                    "menu"
+                  );
                   hotkey = aDoc.defaultView.key_browserToolbox;
                   break;
                 case "popupHide":
-                  labelString = l10n.getString("toolbox.meatballMenu.noautohide.label", "toolbox");
+                  labelString = l10n.getString(
+                    "toolbox.meatballMenu.noautohide.label",
+                    "toolbox"
+                  );
                   break;
               }
             }
           }
-          let shortcut = hotkey ? ` (${ShortcutUtils.prettifyShortcut(hotkey)})` : "";
+          let shortcut = hotkey
+            ? ` (${ShortcutUtils.prettifyShortcut(hotkey)})`
+            : "";
           toolbarbutton.label = labelString;
           label.value = labelString;
           toolbarbutton.tooltipText = labelString + shortcut;
@@ -524,12 +563,18 @@
           toolboxInit();
         } else {
           let delayedListener2 = (subject, topic) => {
-            if (topic == "browser-delayed-startup-finished" && subject == window) {
+            if (
+              topic == "browser-delayed-startup-finished" &&
+              subject == window
+            ) {
               obSvc.removeObserver(delayedListener2, topic);
               toolboxInit();
             }
           };
-          obSvc.addObserver(delayedListener2, "browser-delayed-startup-finished");
+          obSvc.addObserver(
+            delayedListener2,
+            "browser-delayed-startup-finished"
+          );
         }
         return toolbarbutton;
       },
@@ -581,7 +626,9 @@
   #confirmation-hint[data-message-id="hideCheckHint"] #confirmation-hint-message {
     margin-inline: 0;
   }`;
-  let styleURI = makeURI("data:text/css;charset=UTF=8," + encodeURIComponent(toolboxCSS));
+  let styleURI = makeURI(
+    "data:text/css;charset=UTF=8," + encodeURIComponent(toolboxCSS)
+  );
   if (!styleSvc.sheetRegistered(styleURI, styleSvc.AUTHOR_SHEET)) {
     styleSvc.loadAndRegisterSheet(styleURI, styleSvc.AUTHOR_SHEET);
   }

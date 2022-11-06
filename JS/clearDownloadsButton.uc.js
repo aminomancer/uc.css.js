@@ -24,7 +24,9 @@ class ClearDLPanel {
   }
   async genStrings() {
     this.strings = await new Localization(["browser/downloads.ftl"], true);
-    const messages = await this.strings.formatMessages(["downloads-cmd-clear-downloads"]);
+    const messages = await this.strings.formatMessages([
+      "downloads-cmd-clear-downloads",
+    ]);
     this.label = messages[0].attributes[0].value;
     this.accessKey = messages[0].attributes[1].value;
     return [this.label, this.accessKey];

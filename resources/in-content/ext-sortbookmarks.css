@@ -6,8 +6,7 @@
 
 /* popup content styles for the addon Sort Bookmarks */
 
-@-moz-document regexp("moz-extension://.*/popup.html")
-{
+@-moz-document regexp("moz-extension://.*/popup.html") {
   :root[uc-extension-id="sort-bookmarks@heftig"] body {
     background: var(--uc-arrowpanel-background) !important;
     color: var(--uc-arrowpanel-color) !important;
@@ -56,8 +55,7 @@
     margin: 0;
     border: none !important;
     padding: 4px 20px 4px 3px !important;
-    background: var(--uc-arrowpanel-dimmed) url(chrome://userchrome/content/arrow-dropdown-12.svg)
-      no-repeat center right 5px/12px !important;
+    background: var(--uc-arrowpanel-dimmed) url(chrome://userchrome/content/arrow-dropdown-12.svg) no-repeat center right 5px/12px !important;
     color: inherit !important;
     fill: currentColor;
     -moz-context-properties: fill, fill-opacity;
@@ -118,28 +116,23 @@
     margin-block: 3px;
   }
 
-  :root[uc-extension-id="sort-bookmarks@heftig"]
-    input:is([type="checkbox"], [type="radio"]):is(:hover, :focus-visible) {
+  :root[uc-extension-id="sort-bookmarks@heftig"] input:is([type="checkbox"], [type="radio"]):is(:hover, :focus-visible) {
     background-color: var(--uc-checkbox-unchecked-hover-bgcolor);
   }
 
-  :root[uc-extension-id="sort-bookmarks@heftig"]
-    input:is([type="checkbox"], [type="radio"]):is(:hover, :focus-visible):active {
+  :root[uc-extension-id="sort-bookmarks@heftig"] input:is([type="checkbox"], [type="radio"]):is(:hover, :focus-visible):active {
     background-color: var(--uc-checkbox-unchecked-active-bgcolor);
   }
 
-  :root[uc-extension-id="sort-bookmarks@heftig"]
-    input:is([type="checkbox"], [type="radio"]):is([checked="true"], :checked):is(:hover, :focus-visible) {
+  :root[uc-extension-id="sort-bookmarks@heftig"] input:is([type="checkbox"], [type="radio"]):is([checked="true"], :checked):is(:hover, :focus-visible) {
     background-color: var(--uc-checkbox-checked-hover-bgcolor);
   }
 
-  :root[uc-extension-id="sort-bookmarks@heftig"]
-    input:is([type="checkbox"], [type="radio"]):is([checked="true"], :checked):is(:hover, :focus-visible):active {
+  :root[uc-extension-id="sort-bookmarks@heftig"] input:is([type="checkbox"], [type="radio"]):is([checked="true"], :checked):is(:hover, :focus-visible):active {
     background-color: var(--uc-checkbox-checked-active-bgcolor);
   }
 
-  :root[uc-extension-id="sort-bookmarks@heftig"]
-    input[type="checkbox"]:is([checked="true"], :checked) {
+  :root[uc-extension-id="sort-bookmarks@heftig"] input[type="checkbox"]:is([checked="true"], :checked) {
     background-image: url(chrome://userchrome/content/check.svg);
     border-color: var(--uc-checkbox-checked-border-color);
     background-color: var(--uc-checkbox-checked-bgcolor);
@@ -150,8 +143,7 @@
     margin-inline: 4px;
   }
 
-  :root[uc-extension-id="sort-bookmarks@heftig"]
-    input[type="radio"]:is([checked="true"], :checked) {
+  :root[uc-extension-id="sort-bookmarks@heftig"] input[type="radio"]:is([checked="true"], :checked) {
     background-image: url(chrome://userchrome/content/radio.svg);
     border-color: var(--uc-checkbox-checked-border-color);
     background-color: var(--uc-checkbox-checked-bgcolor);
@@ -164,9 +156,7 @@
     flex-flow: row nowrap !important;
   }
 
-  :root[uc-extension-id="sort-bookmarks@heftig"]
-    input:is([type="radio"], [type="checkbox"])
-    ~ label {
+  :root[uc-extension-id="sort-bookmarks@heftig"] input:is([type="radio"], [type="checkbox"]) ~ label {
     padding-inline-start: 6px;
     padding-block: 2px;
   }
@@ -201,14 +191,12 @@
     opacity: 0.6 !important;
   }
 
-  :root[uc-extension-id="sort-bookmarks@heftig"]
-    button[type="submit"]:is(:hover, :focus-visible, :-moz-focusring):not([disabled]) {
+  :root[uc-extension-id="sort-bookmarks@heftig"] button[type="submit"]:is(:hover, :focus-visible, :-moz-focusring):not([disabled]) {
     background-color: var(--uc-parent-primary-button-background) !important;
     border-color: transparent !important;
   }
 
-  :root[uc-extension-id="sort-bookmarks@heftig"]
-    button[type="submit"]:is(:hover, :focus-visible, :-moz-focusring):active:not([disabled]) {
+  :root[uc-extension-id="sort-bookmarks@heftig"] button[type="submit"]:is(:hover, :focus-visible, :-moz-focusring):active:not([disabled]) {
     background-color: var(--uc-parent-primary-button-background-hover) !important;
     border-color: transparent !important;
   }
@@ -219,8 +207,7 @@
 
   @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
     :root[uc-extension-id="sort-bookmarks@heftig"] * {
-      font-family: -apple-system, BlinkMacSystemFont, SF Pro Text, "segoe ui", "helvetica neue",
-        helvetica, ubuntu, roboto, noto, arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, SF Pro Text, "segoe ui", "helvetica neue", helvetica, ubuntu, roboto, noto, arial, sans-serif;
     }
 
     :root[uc-extension-id="sort-bookmarks@heftig"] #context {

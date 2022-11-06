@@ -139,13 +139,17 @@ window.CustomHint = {
   get _message() {
     this._ensurePanel();
     delete this._message;
-    return (this._message = document.getElementById("confirmation-hint-message"));
+    return (this._message = document.getElementById(
+      "confirmation-hint-message"
+    ));
   },
 
   get _description() {
     this._ensurePanel();
     delete this._description;
-    return (this._description = document.getElementById("confirmation-hint-description"));
+    return (this._description = document.getElementById(
+      "confirmation-hint-description"
+    ));
   },
 
   _ensurePanel() {
@@ -195,11 +199,16 @@ window.CustomHint = {
         "popupshown",
         () => {
           this._animationBox.setAttribute("animate", "true");
-          this._timerID = setTimeout(() => this._panel.hidePopup(true), DURATION + 120);
+          this._timerID = setTimeout(
+            () => this._panel.hidePopup(true),
+            DURATION + 120
+          );
         },
         { once: true }
       );
-      this._panel.addEventListener("popuphidden", () => this._reset(), { once: true });
+      this._panel.addEventListener("popuphidden", () => this._reset(), {
+        once: true,
+      });
 
       let { position, x, y } = options;
       this._panel.openPopup(null, { position, triggerEvent: options.event });
@@ -215,6 +224,9 @@ window.CustomHint = {
         init();
       }
     };
-    Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
+    Services.obs.addObserver(
+      delayedListener,
+      "browser-delayed-startup-finished"
+    );
   }
 })();

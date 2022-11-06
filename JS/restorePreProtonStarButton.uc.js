@@ -15,8 +15,13 @@
 
 (function() {
   // delete these two lines if you don't want the confirmation hint to show when you bookmark a page.
-  Services.prefs.setIntPref("browser.bookmarks.editDialog.confirmationHintShowCount", 0);
-  Services.prefs.lockPref("browser.bookmarks.editDialog.confirmationHintShowCount");
+  Services.prefs.setIntPref(
+    "browser.bookmarks.editDialog.confirmationHintShowCount",
+    0
+  );
+  Services.prefs.lockPref(
+    "browser.bookmarks.editDialog.confirmationHintShowCount"
+  );
 
   function init() {
     const starAnimBox = document.createXULElement("hbox");
@@ -31,16 +36,21 @@
 
     BookmarkingUI.onStarCommand = function onStarCommand(aEvent) {
       // Ignore non-left clicks on the star, or if we are updating its state.
-      if (!this._pendingUpdate && (aEvent.type != "click" || aEvent.button == 0)) {
+      if (
+        !this._pendingUpdate &&
+        (aEvent.type != "click" || aEvent.button == 0)
+      ) {
         if (!(this._itemGuids.size > 0)) {
           BrowserUIUtils.setToolbarButtonHeightProperty(this.star);
-          document.getElementById("star-button-animatable-box").addEventListener(
-            "animationend",
-            _e => {
-              this.star.removeAttribute("animate");
-            },
-            { once: true }
-          );
+          document
+            .getElementById("star-button-animatable-box")
+            .addEventListener(
+              "animationend",
+              _e => {
+                this.star.removeAttribute("animate");
+              },
+              { once: true }
+            );
           this.star.setAttribute("animate", "true");
         }
         PlacesCommandHook.bookmarkPage();
@@ -68,7 +78,12 @@
       this._uninitView();
       if (this._hasBookmarksObserver) {
         PlacesUtils.observers.removeListener(
-          ["bookmark-added", "bookmark-removed", "bookmark-moved", "bookmark-url-changed"],
+          [
+            "bookmark-added",
+            "bookmark-removed",
+            "bookmark-moved",
+            "bookmark-url-changed",
+          ],
           this.handlePlacesEvents
         );
       }
@@ -123,6 +138,9 @@
         init();
       }
     };
-    Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
+    Services.obs.addObserver(
+      delayedListener,
+      "browser-delayed-startup-finished"
+    );
   }
 })();

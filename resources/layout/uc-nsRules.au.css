@@ -157,8 +157,7 @@ from the style editor in the browser toolbox. */
     stroke: var(--toolbarbutton-icon-fill-attention);
   }
 
-  #library-animatable-box[animate="bookmark"]:-moz-locale-dir(rtl)
-    > .toolbarbutton-animatable-image {
+  #library-animatable-box[animate="bookmark"]:-moz-locale-dir(rtl) > .toolbarbutton-animatable-image {
     animation-name: library-bookmark-animation-rtl;
   }
 
@@ -189,8 +188,7 @@ from the style editor in the browser toolbox. */
   /* Preload the bookmark animations to prevent a flicker during the first
   playing of the animations. */
   #star-button[preloadanimations] + #star-button-animatable-box > #star-button-animatable-image {
-    background-image: url(chrome://userchrome/content/skin/bookmark-animation.svg),
-      url(chrome://userchrome/content/skin/library-bookmark-animation.svg);
+    background-image: url(chrome://userchrome/content/skin/bookmark-animation.svg), url(chrome://userchrome/content/skin/library-bookmark-animation.svg);
     background-size: 0, 0;
   }
 
@@ -239,9 +237,7 @@ from the style editor in the browser toolbox. */
     color: inherit;
   }
 
-  #star-button[starred][animate]:-moz-locale-dir(rtl)
-    + #star-button-animatable-box
-    > #star-button-animatable-image {
+  #star-button[starred][animate]:-moz-locale-dir(rtl) + #star-button-animatable-box > #star-button-animatable-image {
     scale: -1 1;
   }
 
@@ -305,8 +301,7 @@ from the style editor in the browser toolbox. */
     animation-timing-function: steps(18);
   }
 
-  #confirmation-hint-checkmark-animation-container[animate]
-    > #confirmation-hint-checkmark-image:-moz-locale-dir(rtl) {
+  #confirmation-hint-checkmark-animation-container[animate] > #confirmation-hint-checkmark-image:-moz-locale-dir(rtl) {
     animation-name: confirmation-hint-checkmark-animation-rtl;
     transform: translateX(252px);
   }
@@ -332,8 +327,7 @@ from the style editor in the browser toolbox. */
       transition: transform 120ms cubic-bezier(0.25, 1.27, 0.35, 1.18), opacity 60ms linear;
     }
 
-    #confirmation-hint-checkmark-animation-container[animate]
-      + #confirmation-hint-message-container {
+    #confirmation-hint-checkmark-animation-container[animate] + #confirmation-hint-message-container {
       transform: scale(1);
       opacity: 1;
     }

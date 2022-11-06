@@ -34,7 +34,9 @@ class EyedropperButton {
     else Services.obs.addObserver(this, "browser-delayed-startup-finished");
   }
   makeBundles() {
-    this.menuBundle = Services.strings.createBundle("chrome://devtools/locale/menus.properties");
+    this.menuBundle = Services.strings.createBundle(
+      "chrome://devtools/locale/menus.properties"
+    );
     this.inspectorBundle = Services.strings.createBundle(
       "chrome://devtools/locale/inspector.properties"
     );
@@ -44,20 +46,28 @@ class EyedropperButton {
   }
   // "Eyedropper"
   get labelString() {
-    return this._labelString || (this._labelString = this.getString("eyedropper.label", "menu"));
+    return (
+      this._labelString ||
+      (this._labelString = this.getString("eyedropper.label", "menu"))
+    );
   }
   // "Grab a color from the page"
   get tooltipString() {
     return (
       this._tooltipString ||
-      (this._tooltipString = this.getString("inspector.eyedropper.label", "inspector"))
+      (this._tooltipString = this.getString(
+        "inspector.eyedropper.label",
+        "inspector"
+      ))
     );
   }
   // "Ctrl+Shift+Y"
   get shortcutString() {
     return (
       this._shortcutString ||
-      (this._shortcutString = this.hotkey ? ` (${ShortcutUtils.prettifyShortcut(this.keyEl)})` : "")
+      (this._shortcutString = this.hotkey
+        ? ` (${ShortcutUtils.prettifyShortcut(this.keyEl)})`
+        : "")
     );
   }
   // "Grab a color from the page (%S)"
@@ -69,7 +79,8 @@ class EyedropperButton {
   }
   get devToolsMenu() {
     return (
-      this._devToolsMenu || (this._devToolsMenu = document.getElementById("menuWebDeveloperPopup"))
+      this._devToolsMenu ||
+      (this._devToolsMenu = document.getElementById("menuWebDeveloperPopup"))
     );
   }
   get mainMenuItem() {
@@ -143,4 +154,6 @@ class EyedropperButton {
   }
 }
 
-if (/^chrome:\/\/browser\/content\/browser.(xul||xhtml)$/i.test(location)) new EyedropperButton();
+if (/^chrome:\/\/browser\/content\/browser.(xul||xhtml)$/i.test(location)) {
+  new EyedropperButton();
+}

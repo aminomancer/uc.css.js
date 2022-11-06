@@ -46,7 +46,11 @@
   let reversePref = "userChrome.tabs.all-tabs-menu.reverse-order";
   let skipShowAllPref = "userChrome.ctrlTab.skip-show-all-button";
   const lazy = {};
-  ChromeUtils.defineModuleGetter(lazy, "TabsPanel", "resource:///modules/TabsList.jsm");
+  ChromeUtils.defineModuleGetter(
+    lazy,
+    "TabsPanel",
+    "resource:///modules/TabsList.jsm"
+  );
 
   /**
    * create a DOM node with given parameters
@@ -70,11 +74,15 @@
   }
 
   function findRow(el) {
-    return el.classList.contains("all-tabs-item") ? el : el.closest(".all-tabs-item");
+    return el.classList.contains("all-tabs-item")
+      ? el
+      : el.closest(".all-tabs-item");
   }
 
   function l10nIfNeeded() {
-    let lazies = document.getElementById("tabContextMenu").querySelectorAll("[data-lazy-l10n-id]");
+    let lazies = document
+      .getElementById("tabContextMenu")
+      .querySelectorAll("[data-lazy-l10n-id]");
     if (lazies) {
       MozXULElement.insertFTLIfNeeded("browser/tabContextMenu.ftl");
       lazies.forEach(el => {
@@ -86,7 +94,10 @@
 
   function reverseTabOrder() {
     let panel = lazy.TabsPanel.prototype;
-    if (prefSvc.getBoolPref(reversePref) && !lazy.TabsPanel.prototype.reversed) {
+    if (
+      prefSvc.getBoolPref(reversePref) &&
+      !lazy.TabsPanel.prototype.reversed
+    ) {
       eval(
         `panel._populate = function ` +
           panel._populate
@@ -120,9 +131,16 @@
   // key navigation and prevent focusing hidden elements.
   function modifyWalkers(tabsPanel) {
     let panelViewClass = PanelView.forNode(tabsPanel.view);
-    if (!panelViewClass.moveSelection.toSource().startsWith("(function uc_ATMEP_")) {
-      panelViewClass.moveSelection = function uc_ATMEP_moveSelection(isDown, arrowKey = false) {
-        let walker = arrowKey ? this._arrowNavigableWalker : this._tabNavigableWalker;
+    if (
+      !panelViewClass.moveSelection.toSource().startsWith("(function uc_ATMEP_")
+    ) {
+      panelViewClass.moveSelection = function uc_ATMEP_moveSelection(
+        isDown,
+        arrowKey = false
+      ) {
+        let walker = arrowKey
+          ? this._arrowNavigableWalker
+          : this._tabNavigableWalker;
         let oldSel = this.selectedElement;
         let newSel;
         if (oldSel) {
@@ -145,7 +163,9 @@
       };
     }
     if (!panelViewClass.hasOwnProperty("moveSelectionHorizontal")) {
-      panelViewClass.moveSelectionHorizontal = function uc_ATMEP_moveSelectionHorizontal(isNext) {
+      panelViewClass.moveSelectionHorizontal = function uc_ATMEP_moveSelectionHorizontal(
+        isNext
+      ) {
         let walker = this._horizontalNavigableWalker;
         let oldSel = this.selectedElement;
         let newSel;
@@ -166,13 +186,20 @@
       Object.defineProperty(panelViewClass, "_horizontalNavigableWalker", {
         get() {
           if (!this.__horizontalNavigableWalker) {
-            this.__horizontalNavigableWalker = this._makeNavigableTreeWalker(true, false);
+            this.__horizontalNavigableWalker = this._makeNavigableTreeWalker(
+              true,
+              false
+            );
           }
           return this.__horizontalNavigableWalker;
         },
       });
     }
-    if (!panelViewClass._makeNavigableTreeWalker.toSource().startsWith("(function uc_ATMEP_")) {
+    if (
+      !panelViewClass._makeNavigableTreeWalker
+        .toSource()
+        .startsWith("(function uc_ATMEP_")
+    ) {
       eval(
         `panelViewClass._makeNavigableTreeWalker = function ` +
           panelViewClass._makeNavigableTreeWalker
@@ -195,7 +222,9 @@
             )
       );
     }
-    if (!panelViewClass.keyNavigation.toSource().startsWith("(function uc_ATMEP_")) {
+    if (
+      !panelViewClass.keyNavigation.toSource().startsWith("(function uc_ATMEP_")
+    ) {
       eval(
         `panelViewClass.keyNavigation = function ` +
           panelViewClass.keyNavigation
@@ -251,17 +280,25 @@
     let tooltip = vanillaTooltip.cloneNode(true);
     vanillaTooltip.after(tooltip);
     tooltip.id = "all-tabs-tooltip";
-    tooltip.setAttribute("onpopupshowing", `gTabsPanel.createTabTooltip(event)`);
+    tooltip.setAttribute(
+      "onpopupshowing",
+      `gTabsPanel.createTabTooltip(event)`
+    );
     tooltip.setAttribute("position", "after_end");
     gTabsPanel.createTabTooltip = function(e) {
       e.stopPropagation();
-      let row = e.target.triggerNode ? e.target.triggerNode.closest(".all-tabs-item") : null;
+      let row = e.target.triggerNode
+        ? e.target.triggerNode.closest(".all-tabs-item")
+        : null;
       let { tab } = row;
       if (!row || !tab) return e.preventDefault();
       let stringWithShortcut = (stringId, keyElemId, pluralCount) => {
         let keyElem = document.getElementById(keyElemId);
         let shortcut = ShortcutUtils.prettifyShortcut(keyElem);
-        return PluralForm.get(pluralCount, gTabBrowserBundle.GetStringFromName(stringId))
+        return PluralForm.get(
+          pluralCount,
+          gTabBrowserBundle.GetStringFromName(stringId)
+        )
           .replace("%S", shortcut)
           .replace("#1", pluralCount);
       };
@@ -270,9 +307,13 @@
       let { linkedBrowser } = tab;
       const selectedTabs = gBrowser.selectedTabs;
       const contextTabInSelection = selectedTabs.includes(tab);
-      const affectedTabsLength = contextTabInSelection ? selectedTabs.length : 1;
+      const affectedTabsLength = contextTabInSelection
+        ? selectedTabs.length
+        : 1;
       if (row.querySelector("[close-button]").matches(":hover")) {
-        let shortcut = ShortcutUtils.prettifyShortcut(document.getElementById("key_close"));
+        let shortcut = ShortcutUtils.prettifyShortcut(
+          document.getElementById("key_close")
+        );
         label = PluralForm.get(
           affectedTabsLength,
           gTabBrowserBundle.GetStringFromName("tabs.closeTabs.tooltip")
@@ -288,7 +329,11 @@
           stringID = linkedBrowser.audioMuted
             ? "tabs.unmuteAudio2.tooltip"
             : "tabs.muteAudio2.tooltip";
-          label = stringWithShortcut(stringID, "key_toggleMute", affectedTabsLength);
+          label = stringWithShortcut(
+            stringID,
+            "key_toggleMute",
+            affectedTabsLength
+          );
         } else {
           if (tab.hasAttribute("activemedia-blocked")) {
             stringID = "tabs.unblockAudio2.tooltip";
@@ -305,15 +350,25 @@
         align = false;
       } else {
         label = tab._fullLabel || tab.getAttribute("label");
-        if (Services.prefs.getBoolPref("browser.tabs.tooltipsShowPidAndActiveness", false)) {
+        if (
+          Services.prefs.getBoolPref(
+            "browser.tabs.tooltipsShowPidAndActiveness",
+            false
+          )
+        ) {
           if (linkedBrowser) {
-            let [contentPid, ...framePids] = gTabsPanel.E10SUtils.getBrowserPids(
+            let [
+              contentPid,
+              ...framePids
+            ] = gTabsPanel.E10SUtils.getBrowserPids(
               linkedBrowser,
               gFissionBrowser
             );
             if (contentPid) {
               if (framePids && framePids.length) {
-                label += ` (pids ${contentPid}, ${framePids.sort().join(", ")})`;
+                label += ` (pids ${contentPid}, ${framePids
+                  .sort()
+                  .join(", ")})`;
               } else {
                 label += ` (pid ${contentPid})`;
               }
@@ -322,10 +377,13 @@
           }
         }
         if (tab.userContextId) {
-          label = gTabBrowserBundle.formatStringFromName("tabs.containers.tooltip", [
-            label,
-            ContextualIdentityService.getUserContextLabel(tab.userContextId),
-          ]);
+          label = gTabBrowserBundle.formatStringFromName(
+            "tabs.containers.tooltip",
+            [
+              label,
+              ContextualIdentityService.getUserContextLabel(tab.userContextId),
+            ]
+          );
         }
       }
       if (align) {
@@ -335,22 +393,28 @@
       let title = e.target.querySelector(".places-tooltip-title");
       title.textContent = label;
       if (tab.getAttribute("customizemode") === "true") {
-        e.target.querySelector(".places-tooltip-box").setAttribute("desc-hidden", "true");
+        e.target
+          .querySelector(".places-tooltip-box")
+          .setAttribute("desc-hidden", "true");
         return;
       }
       let url = e.target.querySelector(".places-tooltip-uri");
       url.value = linkedBrowser?.currentURI?.spec.replace(/^https:\/\//, "");
-      e.target.querySelector(".places-tooltip-box").removeAttribute("desc-hidden");
+      e.target
+        .querySelector(".places-tooltip-box")
+        .removeAttribute("desc-hidden");
       // show a lock icon to show tab security/encryption
       let icon = e.target.querySelector("#places-tooltip-insecure-icon");
-      let pending = tab.hasAttribute("pending") || !linkedBrowser.browsingContext;
+      let pending =
+        tab.hasAttribute("pending") || !linkedBrowser.browsingContext;
       let docURI = pending
         ? linkedBrowser?.currentURI
         : linkedBrowser?.documentURI || linkedBrowser?.currentURI;
       if (docURI) {
-        let homePage = new RegExp(`(${BROWSER_NEW_TAB_URL}|${HomePage.get(window)})`, "i").test(
-          docURI.spec
-        );
+        let homePage = new RegExp(
+          `(${BROWSER_NEW_TAB_URL}|${HomePage.get(window)})`,
+          "i"
+        ).test(docURI.spec);
         if (homePage) {
           icon.setAttribute("type", "home-page");
           icon.hidden = false;
@@ -365,7 +429,10 @@
             return;
           case "about":
             let pathQueryRef = docURI?.pathQueryRef;
-            if (pathQueryRef && /^(neterror|certerror|httpsonlyerror)/.test(pathQueryRef)) {
+            if (
+              pathQueryRef &&
+              /^(neterror|certerror|httpsonlyerror)/.test(pathQueryRef)
+            ) {
               icon.setAttribute("type", "error-page");
               icon.hidden = false;
               return;
@@ -456,7 +523,9 @@
   function setupCtrlTab() {
     function excludeShowAll() {
       ctrlTab.showAllButton.setAttribute("tabindex", "-1");
-      ctrlTab.previews = ctrlTab.previews.filter(b => b.id !== "ctrlTab-showAll");
+      ctrlTab.previews = ctrlTab.previews.filter(
+        b => b.id !== "ctrlTab-showAll"
+      );
     }
     if (prefSvc.getBoolPref(skipShowAllPref, false)) excludeShowAll();
     prefSvc.addObserver(skipShowAllPref, (sub, top, pref) => {
@@ -491,12 +560,16 @@
     ];
     tabsPanel._setupListeners = function() {
       this.listenersRegistered = true;
-      this.tabEvents.forEach(ev => gBrowser.tabContainer.addEventListener(ev, this));
+      this.tabEvents.forEach(ev =>
+        gBrowser.tabContainer.addEventListener(ev, this)
+      );
       this.gBrowser.addEventListener("TabMultiSelect", this);
       this.panelMultiView.addEventListener("PanelMultiViewHidden", this);
     };
     tabsPanel._cleanupListeners = function() {
-      this.tabEvents.forEach(ev => gBrowser.tabContainer.removeEventListener(ev, this));
+      this.tabEvents.forEach(ev =>
+        gBrowser.tabContainer.removeEventListener(ev, this)
+      );
       this.gBrowser.removeEventListener("TabMultiSelect", this);
       this.panelMultiView.removeEventListener("PanelMultiViewHidden", this);
       this.listenersRegistered = false;
@@ -559,8 +632,12 @@
         "tab-hidden": tab.hidden,
       });
       if (tab.userContextId) {
-        let idColor = ContextualIdentityService.getPublicIdentityFromId(tab.userContextId)?.color;
-        row.className = idColor ? `all-tabs-item identity-color-${idColor}` : "all-tabs-item";
+        let idColor = ContextualIdentityService.getPublicIdentityFromId(
+          tab.userContextId
+        )?.color;
+        row.className = idColor
+          ? `all-tabs-item identity-color-${idColor}`
+          : "all-tabs-item";
         row.setAttribute("usercontextid", tab.userContextId);
       } else {
         row.className = "all-tabs-item";
@@ -577,13 +654,20 @@
 
       this._setImageAttributes(row, tab);
 
-      let secondaryButton = row.querySelector(".all-tabs-secondary-button[toggle-mute]");
+      let secondaryButton = row.querySelector(
+        ".all-tabs-secondary-button[toggle-mute]"
+      );
       setAttributes(secondaryButton, {
         muted: tab.muted,
         soundplaying: tab.soundPlaying,
         "activemedia-blocked": tab.activeMediaBlocked,
         pictureinpicture: tab.pictureinpicture,
-        hidden: !(tab.muted || tab.soundPlaying || tab.activeMediaBlocked || tab.pictureinpicture),
+        hidden: !(
+          tab.muted ||
+          tab.soundPlaying ||
+          tab.activeMediaBlocked ||
+          tab.pictureinpicture
+        ),
       });
     };
     tabsPanel._moveTab = function(tab) {
@@ -633,7 +717,9 @@
         case "TabShow":
           this._tabAttrModified(e.target);
           let item = this.tabToElement.get(e.target);
-          if (item) item.scrollIntoView({ block: "nearest", behavior: "smooth" });
+          if (item) {
+            item.scrollIntoView({ block: "nearest", behavior: "smooth" });
+          }
           break;
         case "TabClose":
           this._tabClose(e.target);
@@ -662,7 +748,9 @@
         case "TabSelect":
           if (this.listenersRegistered) {
             let item = this.tabToElement.get(e.target);
-            if (item) item.scrollIntoView({ block: "nearest", behavior: "smooth" });
+            if (item) {
+              item.scrollIntoView({ block: "nearest", behavior: "smooth" });
+            }
           }
           break;
         case "PanelMultiViewHidden":
@@ -676,8 +764,11 @@
     tabsPanel._onMouseDown = function(e, tab) {
       if (e.button !== 0) return;
       if (tab.hidden) {
-        if (tab.getAttribute("pending") || tab.getAttribute("busy")) tab.noCanvas = true;
-        else delete tab.noCanvas;
+        if (tab.getAttribute("pending") || tab.getAttribute("busy")) {
+          tab.noCanvas = true;
+        } else {
+          delete tab.noCanvas;
+        }
         return;
       }
       let accelKey = AppConstants.platform == "macosx" ? e.metaKey : e.ctrlKey;
@@ -696,15 +787,20 @@
           this.gBrowser.lastMultiSelectedTab = tab;
         }
       } else {
-        if (!tab.selected && tab.multiselected) this.gBrowser.lockClearMultiSelectionOnce();
+        if (!tab.selected && tab.multiselected) {
+          this.gBrowser.lockClearMultiSelectionOnce();
+        }
         if (
           !e.shiftKey &&
           !accelKey &&
           !e.target.classList.contains("all-tabs-secondary-button") &&
           tab !== this.gBrowser.selectedTab
         ) {
-          if (tab.getAttribute("pending") || tab.getAttribute("busy")) tab.noCanvas = true;
-          else delete tab.noCanvas;
+          if (tab.getAttribute("pending") || tab.getAttribute("busy")) {
+            tab.noCanvas = true;
+          } else {
+            delete tab.noCanvas;
+          }
           if (this.gBrowser.selectedTab != tab) this.gBrowser.selectedTab = tab;
           else this.gBrowser.tabContainer._handleTabSelect();
         }
@@ -725,13 +821,18 @@
       }
       if (e.target.classList.contains("all-tabs-secondary-button")) return;
       if (tab.hidden) return this._onCommand(e, tab);
-      if (e.shiftKey || (AppConstants.platform == "macosx" ? e.metaKey : e.ctrlKey)) {
+      if (
+        e.shiftKey ||
+        (AppConstants.platform == "macosx" ? e.metaKey : e.ctrlKey)
+      ) {
         return;
       }
       delete tab.noCanvas;
       this.gBrowser.unlockClearMultiSelection();
       this.gBrowser.clearMultiSelectedTabs();
-      PanelMultiView.hidePopup(PanelMultiView.forNode(this.view.panelMultiView)._panel);
+      PanelMultiView.hidePopup(
+        PanelMultiView.forNode(this.view.panelMultiView)._panel
+      );
     };
     tabsPanel._onClick = function(e, tab) {
       if (e.button === 0) {
@@ -747,13 +848,19 @@
     };
     tabsPanel._onCommand = function(e, tab) {
       if (e.target.hasAttribute("activemedia-blocked")) {
-        if (tab.multiselected) this.gBrowser.resumeDelayedMediaOnMultiSelectedTabs(tab);
-        else tab.resumeDelayedMedia();
+        if (tab.multiselected) {
+          this.gBrowser.resumeDelayedMediaOnMultiSelectedTabs(tab);
+        } else {
+          tab.resumeDelayedMedia();
+        }
         return;
       }
       if (e.target.hasAttribute("toggle-mute")) {
-        if (tab.multiselected) this.gBrowser.toggleMuteAudioOnMultiSelectedTabs(tab);
-        else tab.toggleMuteAudio();
+        if (tab.multiselected) {
+          this.gBrowser.toggleMuteAudioOnMultiSelectedTabs(tab);
+        } else {
+          tab.toggleMuteAudio();
+        }
         return;
       }
       if (e.target.hasAttribute("close-button")) {
@@ -770,7 +877,9 @@
       let row = e.target;
       if (!tab || this.gBrowser.tabContainer._isCustomizing) return;
       let selectedTabs = this.gBrowser.selectedTabs;
-      let otherSelectedTabs = selectedTabs.filter(selectedTab => selectedTab != tab);
+      let otherSelectedTabs = selectedTabs.filter(
+        selectedTab => selectedTab != tab
+      );
       let dataTransferOrderedTabs = [tab].concat(otherSelectedTabs);
       let dt = e.dataTransfer;
       for (let i = 0; i < dataTransferOrderedTabs.length; i++) {
@@ -782,7 +891,9 @@
       // if multiselected tabs aren't adjacent, make them adjacent
       if (tab.multiselected) {
         function newIndex(aTab, index) {
-          if (aTab.pinned) return Math.min(index, this.gBrowser._numPinnedTabs - 1);
+          if (aTab.pinned) {
+            return Math.min(index, this.gBrowser._numPinnedTabs - 1);
+          }
           return Math.max(index, this.gBrowser._numPinnedTabs);
         }
         let tabIndex = selectedTabs.indexOf(tab);
@@ -791,7 +902,10 @@
         let insertAtPos = draggedTabPos - 1;
         for (let i = tabIndex - 1; i > -1; i--) {
           insertAtPos = newIndex(selectedTabs[i], insertAtPos);
-          if (insertAtPos && !selectedTabs[i].nextElementSibling.multiselected) {
+          if (
+            insertAtPos &&
+            !selectedTabs[i].nextElementSibling.multiselected
+          ) {
             this.gBrowser.moveTabTo(selectedTabs[i], insertAtPos);
           }
         }
@@ -799,13 +913,19 @@
         insertAtPos = draggedTabPos + 1;
         for (let i = tabIndex + 1; i < selectedTabs.length; i++) {
           insertAtPos = newIndex(selectedTabs[i], insertAtPos);
-          if (insertAtPos && !selectedTabs[i].previousElementSibling.multiselected) {
+          if (
+            insertAtPos &&
+            !selectedTabs[i].previousElementSibling.multiselected
+          ) {
             this.gBrowser.moveTabTo(selectedTabs[i], insertAtPos);
           }
         }
       }
       // tab preview
-      if (!tab.noCanvas && (AppConstants.platform == "win" || AppConstants.platform == "macosx")) {
+      if (
+        !tab.noCanvas &&
+        (AppConstants.platform == "win" || AppConstants.platform == "macosx")
+      ) {
         delete tab.noCanvas;
         let scale = window.devicePixelRatio;
         let canvas = this._dndCanvas;
@@ -825,10 +945,13 @@
         let browser = tab.linkedBrowser;
         if (gMultiProcessBrowser) {
           let context = canvas.getContext("2d");
-          context.fillStyle = getComputedStyle(this.view).getPropertyValue("background-color");
+          context.fillStyle = getComputedStyle(this.view).getPropertyValue(
+            "background-color"
+          );
           context.fillRect(0, 0, canvas.width, canvas.height);
 
-          let captureListener = () => dt.updateDragImage(canvas, dragImageOffset, dragImageOffset);
+          let captureListener = () =>
+            dt.updateDragImage(canvas, dragImageOffset, dragImageOffset);
           PageThumbs.captureToCanvas(browser, canvas).then(captureListener);
         } else {
           PageThumbs.captureToCanvas(browser, canvas);
@@ -837,7 +960,10 @@
         dt.setDragImage(toDrag, dragImageOffset, dragImageOffset);
       }
       tab._dragData = {
-        movingTabs: (tab.multiselected ? this.gBrowser.selectedTabs : [tab]).filter(this.filterFn),
+        movingTabs: (tab.multiselected
+          ? this.gBrowser.selectedTabs
+          : [tab]
+        ).filter(this.filterFn),
       };
       e.stopPropagation();
     };
@@ -846,7 +972,11 @@
     tabsPanel._onDragOver = function(e) {
       let row = findRow(e.target);
       let dt = e.dataTransfer;
-      if (!dt.types.includes("all-tabs-item") || !row || row.tab.multiselected) {
+      if (
+        !dt.types.includes("all-tabs-item") ||
+        !row ||
+        row.tab.multiselected
+      ) {
         dt.mozCursor = "auto";
         return;
       }
@@ -887,7 +1017,12 @@
       let draggedTab = dt.mozGetDataAt("all-tabs-item", 0);
       let movingTabs = draggedTab._dragData.movingTabs;
 
-      if (!movingTabs || dt.mozUserCancelled || dt.dropEffect === "none" || tabBar._isCustomizing) {
+      if (
+        !movingTabs ||
+        dt.mozUserCancelled ||
+        dt.dropEffect === "none" ||
+        tabBar._isCustomizing
+      ) {
         delete draggedTab._dragData;
         return;
       }
@@ -916,7 +1051,9 @@
       for (let row of this.rows) row.removeAttribute("dragpos");
     };
     tabsPanel._onTabMultiSelect = function() {
-      for (let item of this.rows) item.toggleAttribute("multiselected", !!item.tab.multiselected);
+      for (let item of this.rows) {
+        item.toggleAttribute("multiselected", !!item.tab.multiselected);
+      }
     };
     tabsPanel._onMouseOver = function(e, tab) {
       let row = e.target.closest(".all-tabs-item");
@@ -935,7 +1072,9 @@
         row.mOverSecondaryButton = false;
       }
     };
-    tabsPanel.view.addEventListener("ViewShowing", l10nIfNeeded, { once: true });
+    tabsPanel.view.addEventListener("ViewShowing", l10nIfNeeded, {
+      once: true,
+    });
     ["dragstart", "dragleave", "dragover", "drop", "dragend"].forEach(ev =>
       tabsPanel.containerNode.addEventListener(ev, tabsPanel)
     );
@@ -1168,13 +1307,17 @@
 #places-tooltip-insecure-icon[hidden] {
     display: none;
 }`;
-    let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(Ci.nsIStyleSheetService);
+    let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
+      Ci.nsIStyleSheetService
+    );
     let uri = makeURI("data:text/css;charset=UTF=8," + encodeURIComponent(css));
     if (sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) return;
     sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
   }
 
-  if (!prefSvc.prefHasUserValue(reversePref)) prefSvc.setBoolPref(reversePref, false);
+  if (!prefSvc.prefHasUserValue(reversePref)) {
+    prefSvc.setBoolPref(reversePref, false);
+  }
   prefSvc.addObserver(reversePref, prefHandler);
 
   if (gBrowserInit.delayedStartupFinished) {
@@ -1186,6 +1329,9 @@
         init();
       }
     };
-    Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
+    Services.obs.addObserver(
+      delayedListener,
+      "browser-delayed-startup-finished"
+    );
   }
 })();

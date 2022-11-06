@@ -26,7 +26,8 @@
       for (let [id, { menuId, buttonId, triggerButtonId }] of this.sidebars) {
         let menu = document.getElementById(menuId);
         let button = document.getElementById(buttonId);
-        let triggerbutton = triggerButtonId && document.getElementById(triggerButtonId);
+        let triggerbutton =
+          triggerButtonId && document.getElementById(triggerButtonId);
         if (id == commandID) {
           menu.setAttribute("checked", "true");
           button.setAttribute("checked", "true");
@@ -55,6 +56,9 @@
         init();
       }
     };
-    Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
+    Services.obs.addObserver(
+      delayedListener,
+      "browser-delayed-startup-finished"
+    );
   }
 })();

@@ -36,7 +36,8 @@ class PopupNotificationHandler {
         anchorNode.setAttribute("open", true);
         let offset = 0;
         if (anchorNode.localName === "toolbarbutton") {
-          offset = (windowUtils.getBoundsWithoutFlushing(anchorNode).height - 16) / 2;
+          offset =
+            (windowUtils.getBoundsWithoutFlushing(anchorNode).height - 16) / 2;
         }
         this.panel.style.setProperty("--uc-panel-top-offset", offset + "px");
       } else {

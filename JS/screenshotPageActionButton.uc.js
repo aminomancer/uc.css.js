@@ -42,7 +42,9 @@
         if (screenshot.stringIsDone) return;
         const titleString = await screenshot.getString();
         let keyScreenshot = document.getElementById("key_screenshot");
-        const shortcut = keyScreenshot ? ` (${ShortcutUtils.prettifyShortcut(keyScreenshot)})` : "";
+        const shortcut = keyScreenshot
+          ? ` (${ShortcutUtils.prettifyShortcut(keyScreenshot)})`
+          : "";
         if (!screenshot.action) return;
         screenshot.action.setTooltip(titleString + shortcut, window);
         screenshot.stringIsDone = !!shortcut;
@@ -74,14 +76,18 @@
     async getString() {
       if (this.titleString) return this.titleString;
       this.strings = await new Localization(["browser/screenshots.ftl"], true);
-      const formatted = await this.strings.formatMessages(["screenshot-toolbarbutton"]);
+      const formatted = await this.strings.formatMessages([
+        "screenshot-toolbarbutton",
+      ]);
       this.titleString = formatted[0].attributes[1].value;
       return this.titleString;
     }
     async addAction() {
       let title = await this.getString();
       let keyScreenshot = document.getElementById("key_screenshot");
-      const shortcut = keyScreenshot ? ` (${ShortcutUtils.prettifyShortcut(keyScreenshot)})` : "";
+      const shortcut = keyScreenshot
+        ? ` (${ShortcutUtils.prettifyShortcut(keyScreenshot)})`
+        : "";
       let tooltip = title + shortcut;
       PageActions.addAction(
         new PageActions.Action({
@@ -91,7 +97,10 @@
           pinnedToUrlbar: true,
           disablePrivateBrowsing: config[`Disable in private browsing`],
           onCommand(event, buttonNode) {
-            browserPageActions(buttonNode).screenshot.onCommand(event, buttonNode);
+            browserPageActions(buttonNode).screenshot.onCommand(
+              event,
+              buttonNode
+            );
           },
           onBeforePlacedInWindow(win) {
             browserPageActions(win).screenshot.onBeforePlacedInWindow(win);
@@ -104,7 +113,9 @@
       let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
         Ci.nsIStyleSheetService
       );
-      let uri = makeURI("data:text/css;charset=UTF=8," + encodeURIComponent(this.css));
+      let uri = makeURI(
+        "data:text/css;charset=UTF=8," + encodeURIComponent(this.css)
+      );
       if (sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) return;
       sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
     }
@@ -142,7 +153,9 @@
       win.Services.obs.addObserver(this, "toggle-screenshot-disable");
       const titleString = await this.getString();
       let keyScreenshot = document.getElementById("key_screenshot");
-      const shortcut = keyScreenshot ? ` (${ShortcutUtils.prettifyShortcut(keyScreenshot)})` : "";
+      const shortcut = keyScreenshot
+        ? ` (${ShortcutUtils.prettifyShortcut(keyScreenshot)})`
+        : "";
       this.action.setTooltip(titleString + shortcut, win);
       this.isSetup = true;
       this.stringIsDone = !!shortcut;

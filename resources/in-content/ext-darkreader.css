@@ -7,8 +7,7 @@
 /* dark reader styles.
 intended for the new theme, go to settings > devtools > apply new theme. */
 
-@-moz-document regexp("^moz-extension://.*/ui/.*")
-{
+@-moz-document regexp("^moz-extension://.*/ui/.*") {
   :root[uc-extension-id="addon@darkreader.org"] body,
   html[uc-extension-id="addon@darkreader.org"],
   :root[uc-extension-id="addon@darkreader.org"] {
@@ -55,16 +54,13 @@ intended for the new theme, go to settings > devtools > apply new theme. */
     background-color: var(--uc-panel-button-faint-solid) !important;
   }
 
-  :root[uc-extension-id="addon@darkreader.org"]
-    :where(.button, .multi-switch, .checkbox, .m-help-button, #editor) {
+  :root[uc-extension-id="addon@darkreader.org"] :where(.button, .multi-switch, .checkbox, .m-help-button, #editor) {
     background-color: var(--uc-arrowpanel-faint) !important;
     border-color: var(--uc-panel-button-solid) !important;
   }
 
-  :root[uc-extension-id="addon@darkreader.org"]
-    :where(.dropdown__list__item, .button, .m-help-button, .checkbox):hover,
-  :root[uc-extension-id="addon@darkreader.org"]
-    :where(.multi-switch__option:hover:not(.multi-switch__option--selected), .slider__track, .slider__track::after),
+  :root[uc-extension-id="addon@darkreader.org"] :where(.dropdown__list__item, .button, .m-help-button, .checkbox):hover,
+  :root[uc-extension-id="addon@darkreader.org"] :where(.multi-switch__option:hover:not(.multi-switch__option--selected), .slider__track, .slider__track::after),
   :root[uc-extension-id="addon@darkreader.org"] .collapsible-panel__group__expand-button,
   :root[uc-extension-id="addon@darkreader.org"] .slider__track::before,
   :root[uc-extension-id="addon@darkreader.org"] .slider__track::after {
@@ -88,8 +84,7 @@ intended for the new theme, go to settings > devtools > apply new theme. */
   }
 
   :root[uc-extension-id="addon@darkreader.org"] #editor,
-  :root[uc-extension-id="addon@darkreader.org"]
-    :where(.textbox, .automation-page__system-dark-mode__button),
+  :root[uc-extension-id="addon@darkreader.org"] :where(.textbox, .automation-page__system-dark-mode__button),
   :root[uc-extension-id="addon@darkreader.org"] input::placeholder {
     color: var(--uc-content-text-a80) !important;
   }
@@ -100,10 +95,8 @@ intended for the new theme, go to settings > devtools > apply new theme. */
     color: var(--uc-arrowpanel-color) !important;
   }
 
-  :root[uc-extension-id="addon@darkreader.org"]
-    :where(.slider__track, .slider__track__fill)::before,
-  :root[uc-extension-id="addon@darkreader.org"]
-    :where(.slider__track__fill, .multi-switch__highlight, .dropdown__selected, .textbox:focus),
+  :root[uc-extension-id="addon@darkreader.org"] :where(.slider__track, .slider__track__fill)::before,
+  :root[uc-extension-id="addon@darkreader.org"] :where(.slider__track__fill, .multi-switch__highlight, .dropdown__selected, .textbox:focus),
   :root[uc-extension-id="addon@darkreader.org"] .check-button .checkbox__checkmark {
     background-color: var(--uc-panel-button-solid) !important;
   }
@@ -119,9 +112,38 @@ intended for the new theme, go to settings > devtools > apply new theme. */
   }
 
   :root[uc-extension-id="addon@darkreader.org"] .theme-group__presets-wrapper::before,
-  :root[uc-extension-id="addon@darkreader.org"]
-    :where(.theme-group__controls-wrapper, .site-list, .textbox) {
+  :root[uc-extension-id="addon@darkreader.org"] :where(.theme-group__controls-wrapper, .site-list, .textbox) {
     border-color: var(--uc-panel-button-solid) !important;
+  }
+
+  :root[uc-extension-id="addon@darkreader.org"] .delete-all-icon-group {
+    display: none !important;
+    left: auto !important;
+    right: -3px !important;
+    top: -1px !important;
+  }
+
+  :root[uc-extension-id="addon@darkreader.org"] .delete-all-icon-group .control-group__control {
+    height: revert !important;
+  }
+
+  :root[uc-extension-id="addon@darkreader.org"] .delete-all-button {
+    float: right !important;
+    width: 16px !important;
+    height: 16px !important;
+    min-width: 0 !important;
+  }
+
+  :root[uc-extension-id="addon@darkreader.org"] .delete-all-button:not(:hover, :focus-visible) {
+    opacity: 0.3 !important;
+  }
+
+  :root[uc-extension-id="addon@darkreader.org"] .delete-all-button-icon {
+    background: url(chrome://userchrome/content/close.svg) center/13px no-repeat !important;
+    -moz-context-properties: fill, fill-opacity !important;
+    fill: currentColor !important;
+    width: 100% !important;
+    height: 100% !important;
   }
 
   :root[uc-extension-id="addon@darkreader.org"] .dropdown__list {
@@ -135,8 +157,7 @@ intended for the new theme, go to settings > devtools > apply new theme. */
 
   :root[uc-extension-id="addon@darkreader.org"] .theme-preset-picker .dropdown__list {
     border: none;
-    box-shadow: 0 0 0 0.125rem var(--uc-panel-button-solid),
-      0 0 0.25rem 0.1875rem hsla(0, 0%, 0%, 0.5) !important;
+    box-shadow: 0 0 0 0.125rem var(--uc-panel-button-solid), 0 0 0.25rem 0.1875rem hsla(0, 0%, 0%, 0.5) !important;
   }
 
   :root[uc-extension-id="addon@darkreader.org"] .color-picker__wrapper {
@@ -182,20 +203,16 @@ intended for the new theme, go to settings > devtools > apply new theme. */
     background: none !important;
   }
 
-  :root[uc-extension-id="addon@darkreader.org"]
-    :where(.news-section__main-link, a.news-section__news, #description a) {
+  :root[uc-extension-id="addon@darkreader.org"] :where(.news-section__main-link, a.news-section__news, #description a) {
     font-weight: initial !important;
     color: var(--in-content-link-color) !important;
   }
 
-  :root[uc-extension-id="addon@darkreader.org"]
-    :where(.news-section__main-link, a.news-section__news, #description
-      a):is(:hover, :focus-visible) {
+  :root[uc-extension-id="addon@darkreader.org"] :where(.news-section__main-link, a.news-section__news, #description a):is(:hover, :focus-visible) {
     color: var(--in-content-link-color-hover) !important;
   }
 
-  :root[uc-extension-id="addon@darkreader.org"]
-    :where(.news-section__main-link, a.news-section__news, #description a):active {
+  :root[uc-extension-id="addon@darkreader.org"] :where(.news-section__main-link, a.news-section__news, #description a):active {
     color: var(--in-content-link-color-active) !important;
   }
 
@@ -226,8 +243,7 @@ intended for the new theme, go to settings > devtools > apply new theme. */
   :root[uc-extension-id="addon@darkreader.org"] .news-section__close {
     color: inherit !important;
     cursor: default !important;
-    background: url(chrome://userchrome/content/in-content/darkreader-close.svg) center/16px
-      no-repeat !important;
+    background: url(chrome://userchrome/content/in-content/darkreader-close.svg) center/16px no-repeat !important;
     color: transparent !important;
   }
 

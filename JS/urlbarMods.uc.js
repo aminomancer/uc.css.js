@@ -135,17 +135,30 @@ class UrlbarMods {
     if (UrlbarMods.config["add new tooltips and classes for identity icon"]) {
       this.extendIdentityIcons();
     }
-    if (UrlbarMods.config["style identity icon drag box"]) this.styleIdentityIconDragBox();
-    if (UrlbarMods.config["restore one-offs context menu"]) this.restoreOneOffsContextMenu();
+    if (UrlbarMods.config["style identity icon drag box"]) {
+      this.styleIdentityIconDragBox();
+    }
+    if (UrlbarMods.config["restore one-offs context menu"]) {
+      this.restoreOneOffsContextMenu();
+    }
     if (UrlbarMods.config["show detailed icons in urlbar results"]) {
       this.urlbarResultsDetailedIcons();
     }
-    if (UrlbarMods.config["disable urlbar intervention tips"]) this.disableUrlbarInterventions();
-    if (UrlbarMods.config["sort urlbar results consistently"]) this.urlbarResultsSorting();
-    if (UrlbarMods.config["underline whitespace results"]) this.underlineSpaceResults();
+    if (UrlbarMods.config["disable urlbar intervention tips"]) {
+      this.disableUrlbarInterventions();
+    }
+    if (UrlbarMods.config["sort urlbar results consistently"]) {
+      this.urlbarResultsSorting();
+    }
+    if (UrlbarMods.config["underline whitespace results"]) {
+      this.underlineSpaceResults();
+    }
   }
   get urlbarOneOffs() {
-    return this._urlbarOneOffs || (this._urlbarOneOffs = gURLBar.view.oneOffSearchButtons);
+    return (
+      this._urlbarOneOffs ||
+      (this._urlbarOneOffs = gURLBar.view.oneOffSearchButtons)
+    );
   }
   async extendIdentityIcons() {
     // Retrieve strings from Firefox's built-in localization files.
@@ -180,7 +193,12 @@ class UrlbarMods {
       // include periods and every equivalent unicode character for sentence
       // terminating punctuation.
       .then(arr =>
-        arr.map(str => str.replace(/(^\p{Sentence_Terminal}+)|(\p{Sentence_Terminal}+$)/gu, ""))
+        arr.map(str =>
+          str.replace(
+            /(^\p{Sentence_Terminal}+)|(\p{Sentence_Terminal}+$)/gu,
+            ""
+          )
+        )
       );
     gIdentityHandler._fluentStrings = {
       chromeUI,
@@ -209,25 +227,31 @@ class UrlbarMods {
       let icon_label = "";
       let tooltip = "";
       if (this._isSecureInternalUI) {
-        this._identityBox.className = isInitialPage(this._uri) ? "initialPage" : "chromeUI";
+        this._identityBox.className = isInitialPage(this._uri)
+          ? "initialPage"
+          : "chromeUI";
         let brandBundle = document.getElementById("bundle_brand");
         icon_label = brandBundle.getString("brandShorterName");
         tooltip = this._fluentStrings.chromeUI;
       } else if (this._pageExtensionPolicy) {
-        this._identityBox.className = isInitialPage(this._uri) ? "initialPage" : "extensionPage";
+        this._identityBox.className = isInitialPage(this._uri)
+          ? "initialPage"
+          : "extensionPage";
         let extensionName = this._pageExtensionPolicy.name;
-        icon_label = gNavigatorBundle.getFormattedString("identity.extension.label", [
-          extensionName,
-        ]);
+        icon_label = gNavigatorBundle.getFormattedString(
+          "identity.extension.label",
+          [extensionName]
+        );
       } else if (this._uriHasHost && this._isSecureConnection) {
         this._identityBox.className = "verifiedDomain";
         if (this._isMixedActiveContentBlocked) {
           this._identityBox.classList.add("mixedActiveBlocked");
           tooltip = this._fluentStrings.mixedDisplayContentLoadedActiveBlocked;
         } else if (!this._isCertUserOverridden) {
-          tooltip = gNavigatorBundle.getFormattedString("identity.identified.verifier", [
-            this.getIdentityData().caOrg,
-          ]);
+          tooltip = gNavigatorBundle.getFormattedString(
+            "identity.identified.verifier",
+            [this.getIdentityData().caOrg]
+          );
         }
       } else if (this._isBrokenConnection) {
         this._identityBox.className = "unknownIdentity";
@@ -235,7 +259,9 @@ class UrlbarMods {
           this._identityBox.classList.add("mixedActiveContent");
           tooltip = this._fluentStrings.mixedActiveContent;
         } else if (this._isMixedActiveContentBlocked) {
-          this._identityBox.classList.add("mixedDisplayContentLoadedActiveBlocked");
+          this._identityBox.classList.add(
+            "mixedDisplayContentLoadedActiveBlocked"
+          );
           tooltip = this._fluentStrings.mixedDisplayContentLoadedActiveBlocked;
         } else if (this._isMixedPassiveContentLoaded) {
           this._identityBox.classList.add("mixedDisplayContent");
@@ -263,7 +289,9 @@ class UrlbarMods {
         this._identityBox.className = "aboutBlockedPage unknownIdentity";
         tooltip = gNavigatorBundle.getString("identity.notSecure.tooltip");
       } else if (this._isPotentiallyTrustworthy || this._localPDF()) {
-        this._identityBox.className = isInitialPage(this._uri) ? "initialPage" : "localResource";
+        this._identityBox.className = isInitialPage(this._uri)
+          ? "initialPage"
+          : "localResource";
         tooltip = this._fluentStrings.localResource;
         if (this._uri.spec.startsWith("about:reader?")) {
           this._identityBox.classList.add("readerMode");
@@ -275,7 +303,9 @@ class UrlbarMods {
             PrivateBrowsingUtils.isWindowPrivate(window));
         let className = warnOnInsecure ? "notSecure" : "unknownIdentity";
         this._identityBox.className = className;
-        tooltip = warnOnInsecure ? gNavigatorBundle.getString("identity.notSecure.tooltip") : "";
+        tooltip = warnOnInsecure
+          ? gNavigatorBundle.getString("identity.notSecure.tooltip")
+          : "";
         let warnTextOnInsecure =
           this._insecureConnectionTextEnabled ||
           (this._insecureConnectionTextPBModeEnabled &&
@@ -287,15 +317,23 @@ class UrlbarMods {
       }
       if (this._isCertUserOverridden) {
         this._identityBox.classList.add("certUserOverridden");
-        tooltip = gNavigatorBundle.getString("identity.identified.verified_by_you");
+        tooltip = gNavigatorBundle.getString(
+          "identity.identified.verified_by_you"
+        );
       }
-      this._updateAttribute(this._identityIcon, "lock-icon-gray", this._useGrayLockIcon);
+      this._updateAttribute(
+        this._identityIcon,
+        "lock-icon-gray",
+        this._useGrayLockIcon
+      );
       this._identityIcon.setAttribute("tooltiptext", tooltip);
       if (this._pageExtensionPolicy) {
         let extensionName = this._pageExtensionPolicy.name;
         this._identityIcon.setAttribute(
           "tooltiptext",
-          gNavigatorBundle.getFormattedString("identity.extension.tooltip", [extensionName])
+          gNavigatorBundle.getFormattedString("identity.extension.tooltip", [
+            extensionName,
+          ])
         );
       }
       this._identityIconLabel.setAttribute("tooltiptext", tooltip);
@@ -331,14 +369,21 @@ class UrlbarMods {
         radius = { tl: radius, tr: radius, br: radius, bl: radius };
       } else {
         let defaultRadius = { tl: 0, tr: 0, br: 0, bl: 0 };
-        for (let side in defaultRadius) radius[side] = radius[side] || defaultRadius[side];
+        for (let side in defaultRadius) {
+          radius[side] = radius[side] || defaultRadius[side];
+        }
       }
       ctx.beginPath();
       ctx.moveTo(x + radius.tl, y);
       ctx.lineTo(x + width - radius.tr, y);
       ctx.quadraticCurveTo(x + width, y, x + width, y + radius.tr);
       ctx.lineTo(x + width, y + height - radius.br);
-      ctx.quadraticCurveTo(x + width, y + height, x + width - radius.br, y + height);
+      ctx.quadraticCurveTo(
+        x + width,
+        y + height,
+        x + width - radius.br,
+        y + height
+      );
       ctx.lineTo(x + radius.bl, y + height);
       ctx.quadraticCurveTo(x, y + height, x, y + height - radius.bl);
       ctx.lineTo(x, y + radius.tl);
@@ -362,7 +407,9 @@ class UrlbarMods {
     gIdentityHandler.onDragStart = function(event) {
       const inputStyle = getComputedStyle(gURLBar.inputField);
       const identityStyle = getComputedStyle(gURLBar._identityBox);
-      const iconStyle = getComputedStyle(document.getElementById("identity-icon"));
+      const iconStyle = getComputedStyle(
+        document.getElementById("identity-icon")
+      );
       const IMAGE_SIZE = parseFloat(iconStyle.width);
       const INPUT_HEIGHT = parseFloat(inputStyle.height);
       const SPACING = (INPUT_HEIGHT - IMAGE_SIZE) / 2;
@@ -374,7 +421,10 @@ class UrlbarMods {
       let htmlString = '<a href="' + value + '">' + value + "</a>";
 
       let scale = window.devicePixelRatio;
-      let canvas = document.createElementNS("http://www.w3.org/1999/xhtml", "canvas");
+      let canvas = document.createElementNS(
+        "http://www.w3.org/1999/xhtml",
+        "canvas"
+      );
       canvas.width = 600 * scale;
       let ctx = canvas.getContext("2d");
       ctx.font = fontString(inputStyle, scale);
@@ -390,10 +440,15 @@ class UrlbarMods {
           parseFloat(identityStyle.marginInlineEnd) +
           parseFloat(inputStyle.paddingInlineStart)
         : SPACING;
-      let textVerticalOffset = (INPUT_HEIGHT - parseInt(inputStyle.fontSize) + 1) / 2;
-      let backgroundColor = varToHex("var(--tooltip-bgcolor, var(--arrowpanel-background))");
+      let textVerticalOffset =
+        (INPUT_HEIGHT - parseInt(inputStyle.fontSize) + 1) / 2;
+      let backgroundColor = varToHex(
+        "var(--tooltip-bgcolor, var(--arrowpanel-background))"
+      );
       let textColor = varToHex("var(--tooltip-color, var(--arrowpanel-color))");
-      let totalWidth = image.width ? textWidth + IMAGE_SIZE + 3 * SPACING : textWidth + 2 * SPACING;
+      let totalWidth = image.width
+        ? textWidth + IMAGE_SIZE + 3 * SPACING
+        : textWidth + 2 * SPACING;
       let totalHeight = INPUT_HEIGHT;
       roundRect(
         ctx,
@@ -407,7 +462,11 @@ class UrlbarMods {
       );
       ctx.fillStyle = textColor;
       ctx.textBaseline = "top";
-      ctx.fillText(`${value}`, textHorizontalOffset * scale, textVerticalOffset * scale);
+      ctx.fillText(
+        `${value}`,
+        textHorizontalOffset * scale,
+        textVerticalOffset * scale
+      );
       try {
         ctx.drawImage(
           image,
@@ -466,12 +525,16 @@ class UrlbarMods {
       "services.sync.syncedTabs.showRemoteIcons",
       true
     );
-    const { UrlbarResult } = ChromeUtils.importESModule("resource:///modules/UrlbarResult.sys.mjs");
+    const { UrlbarResult } = ChromeUtils.importESModule(
+      "resource:///modules/UrlbarResult.sys.mjs"
+    );
     const { UrlbarSearchUtils } = ChromeUtils.importESModule(
       "resource:///modules/UrlbarSearchUtils.sys.mjs"
     );
     const UrlbarProvidersManager = gURLBar.view.controller.manager;
-    const UrlbarProviderAutofill = UrlbarProvidersManager.getProvider("Autofill");
+    const UrlbarProviderAutofill = UrlbarProvidersManager.getProvider(
+      "Autofill"
+    );
     // these variables look unused but they're for the functions that will be modified
     // dynamically and evaluated later like provider.startQuery.toSource()
     let showRemoteIconsPref = this.showRemoteIconsPref;
@@ -486,7 +549,10 @@ class UrlbarMods {
       return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     }
     // modified functions for TabToSearch provider, to add engine icon.
-    function makeTTSOnboardingResult(engine, satisfiesAutofillThreshold = false) {
+    function makeTTSOnboardingResult(
+      engine,
+      satisfiesAutofillThreshold = false
+    ) {
       let [url] = UrlbarUtils.stripPrefixAndTrim(engine.getResultDomain(), {
         stripWww: true,
       });
@@ -507,7 +573,11 @@ class UrlbarMods {
       result.suggestedIndex = 1;
       return result;
     }
-    function makeTTSResult(context, engine, satisfiesAutofillThreshold = false) {
+    function makeTTSResult(
+      context,
+      engine,
+      satisfiesAutofillThreshold = false
+    ) {
       let [url] = UrlbarUtils.stripPrefixAndTrim(engine.getResultDomain(), {
         stripWww: true,
       });
@@ -530,7 +600,9 @@ class UrlbarMods {
     }
     let RemoteTabs = UrlbarProvidersManager.getProvider("RemoteTabs");
     let TabToSearch = UrlbarProvidersManager.getProvider("TabToSearch");
-    UrlbarUtils.getPayloadSchema(UrlbarUtils.RESULT_TYPE.REMOTE_TAB).properties.clientType = {
+    UrlbarUtils.getPayloadSchema(
+      UrlbarUtils.RESULT_TYPE.REMOTE_TAB
+    ).properties.clientType = {
       type: "string",
     };
     let src1 = RemoteTabs.startQuery.toSource();
@@ -547,12 +619,17 @@ class UrlbarMods {
       XPCOMUtils.defineLazyModuleGetters(lazy, {
         SyncedTabs: "resource://services-sync/SyncedTabs.jsm",
       });
-      const { UrlbarUtils } = ChromeUtils.importESModule("resource:///modules/UrlbarUtils.sys.mjs");
+      const { UrlbarUtils } = ChromeUtils.importESModule(
+        "resource:///modules/UrlbarUtils.sys.mjs"
+      );
       eval(
         `RemoteTabs.startQuery = async function ` +
           src1
             .replace(/async startQuery/, ``)
-            .replace(/(device\: client\.name\,)/, `$1 clientType: client.clientType,`)
+            .replace(
+              /(device\: client\.name\,)/,
+              `$1 clientType: client.clientType,`
+            )
       );
     }
     if (!src2.includes("result.payload.clientType")) {
@@ -560,8 +637,10 @@ class UrlbarMods {
       ChromeUtils.defineESModuleGetters(lazy, {
         L10nCache: "resource:///modules/UrlbarUtils.sys.mjs",
         UrlbarPrefs: "resource:///modules/UrlbarPrefs.sys.mjs",
-        UrlbarProviderTopSites: "resource:///modules/UrlbarProviderTopSites.sys.mjs",
-        UrlbarProvidersManager: "resource:///modules/UrlbarProvidersManager.sys.mjs",
+        UrlbarProviderTopSites:
+          "resource:///modules/UrlbarProviderTopSites.sys.mjs",
+        UrlbarProvidersManager:
+          "resource:///modules/UrlbarProvidersManager.sys.mjs",
         UrlbarSearchOneOffs: "resource:///modules/UrlbarSearchOneOffs.sys.mjs",
         UrlbarTokenizer: "resource:///modules/UrlbarTokenizer.sys.mjs",
         UrlbarUtils: "resource:///modules/UrlbarUtils.sys.mjs",
@@ -600,12 +679,15 @@ class UrlbarMods {
       ChromeUtils.defineESModuleGetters(lazy, {
         UrlbarView: "resource:///modules/UrlbarView.sys.mjs",
         UrlbarPrefs: "resource:///modules/UrlbarPrefs.sys.mjs",
-        UrlbarProviderAutofill: "resource:///modules/UrlbarProviderAutofill.sys.mjs",
+        UrlbarProviderAutofill:
+          "resource:///modules/UrlbarProviderAutofill.sys.mjs",
         UrlbarResult: "resource:///modules/UrlbarResult.sys.mjs",
         UrlbarSearchUtils: "resource:///modules/UrlbarSearchUtils.sys.mjs",
         UrlbarTokenizer: "resource:///modules/UrlbarTokenizer.sys.mjs",
       });
-      const { UrlbarUtils } = ChromeUtils.importESModule("resource:///modules/UrlbarUtils.sys.mjs");
+      const { UrlbarUtils } = ChromeUtils.importESModule(
+        "resource:///modules/UrlbarUtils.sys.mjs"
+      );
       eval(
         `TabToSearch.startQuery = async function uc_startQuery` +
           src3
@@ -632,7 +714,9 @@ class UrlbarMods {
 .urlbarView-row[type="remotetab"][clientType="vr"] {
   --device-icon: url("chrome://browser/skin/device-vr.svg");
 }`;
-    let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(Ci.nsIStyleSheetService);
+    let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
+      Ci.nsIStyleSheetService
+    );
     let uri = makeURI("data:text/css;charset=UTF=8," + encodeURIComponent(css));
     if (sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) return;
     sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
@@ -645,17 +729,23 @@ class UrlbarMods {
     if (interventions) manager.unregisterProvider(interventions);
   }
   urlbarResultsSorting() {
-    let UnifiedComplete = gURLBar.view.controller.manager.muxers.get("UnifiedComplete");
+    let UnifiedComplete = gURLBar.view.controller.manager.muxers.get(
+      "UnifiedComplete"
+    );
     let sortSrc = UnifiedComplete.sort.toSource();
     if (!sortSrc.includes(`UrlbarPrefs.get("showSearchSuggestionsFirst")`)) {
       const lazy = {};
       ChromeUtils.defineESModuleGetters(lazy, {
         UrlbarPrefs: "resource:///modules/UrlbarPrefs.sys.mjs",
-        UrlbarProviderQuickSuggest: "resource:///modules/UrlbarProviderQuickSuggest.sys.mjs",
-        UrlbarProviderTabToSearch: "resource:///modules/UrlbarProviderTabToSearch.sys.mjs",
+        UrlbarProviderQuickSuggest:
+          "resource:///modules/UrlbarProviderQuickSuggest.sys.mjs",
+        UrlbarProviderTabToSearch:
+          "resource:///modules/UrlbarProviderTabToSearch.sys.mjs",
         UrlbarSearchUtils: "resource:///modules/UrlbarSearchUtils.sys.mjs",
       });
-      const { UrlbarUtils } = ChromeUtils.importESModule("resource:///modules/UrlbarUtils.sys.mjs");
+      const { UrlbarUtils } = ChromeUtils.importESModule(
+        "resource:///modules/UrlbarUtils.sys.mjs"
+      );
       XPCOMUtils.defineLazyGetter(lazy, "logger", () =>
         UrlbarUtils.getLogger({ prefix: "MuxerUnifiedComplete" })
       );
@@ -671,7 +761,11 @@ class UrlbarMods {
     }
   }
   underlineSpaceResults() {
-    gURLBar.view._addTextContentWithHighlights = function(node, text, highlights) {
+    gURLBar.view._addTextContentWithHighlights = function(
+      node,
+      text,
+      highlights
+    ) {
       node.textContent = "";
       node.removeAttribute("no-highlights");
       if (!text) return;
@@ -688,7 +782,9 @@ class UrlbarMods {
       // titles just because they're otherwise empty could mess that up, and it
       // runs the risk of confusing users. so I didn't use it but I left the
       // option open in this script for user customization.
-      if (!highlights.length && text.length < 30) node.setAttribute("no-highlights", true);
+      if (!highlights.length && text.length < 30) {
+        node.setAttribute("no-highlights", true);
+      }
       // if the string contains nothing but 2 or more whitespace characters,
       // replace them all with a non-breaking space character and set an attribute.
       // CSS can then use .urlbarView-title[all-whitespace] to underline these
@@ -703,11 +799,16 @@ class UrlbarMods {
       let index = 0;
       for (let [highlightIndex, highlightLength] of highlights) {
         if (highlightIndex - index > 0) {
-          node.appendChild(this.document.createTextNode(text.substring(index, highlightIndex)));
+          node.appendChild(
+            this.document.createTextNode(text.substring(index, highlightIndex))
+          );
         }
         if (highlightLength > 0) {
           let strong = this._createElement("strong");
-          strong.textContent = text.substring(highlightIndex, highlightIndex + highlightLength);
+          strong.textContent = text.substring(
+            highlightIndex,
+            highlightIndex + highlightLength
+          );
           node.appendChild(strong);
         }
         index = highlightIndex + highlightLength;

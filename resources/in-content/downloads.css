@@ -1,8 +1,7 @@
 /* just for downloads in the places organizer */
 
 /* downloads panel */
-@-moz-document url("chrome://browser/content/browser.xhtml"), url-prefix("chrome://browser/content/places/places.xhtml"), url-prefix("about:downloads")
-{
+@-moz-document url("chrome://browser/content/browser.xhtml"), url-prefix("chrome://browser/content/places/places.xhtml"), url-prefix("about:downloads") {
   #downloadsPanel-mainView,
   #downloadsPanel-blockedSubview {
     min-width: revert !important;
@@ -11,7 +10,7 @@
 
   #downloadsListBox {
     border: none !important;
-    padding: var(--uc-arrowpanel-menuitem-inline-margin) 0 !important;
+    padding: var(--uc-arrowpanel-menuitem-margin-inline) 0 !important;
   }
 
   panel #downloadsListBox {
@@ -26,14 +25,14 @@
   }
 
   #downloadsFooter > stack {
-    margin: 0 var(--uc-arrowpanel-menuitem-inline-margin) !important;
-    padding-block: 0 var(--uc-arrowpanel-menuitem-inline-margin) !important;
+    margin: 0 var(--uc-arrowpanel-menuitem-margin-inline) !important;
+    padding-block: 0 var(--uc-arrowpanel-menuitem-margin-inline) !important;
   }
 
   #downloadsFooterButtons[uc-hbox]:not([hidden]) {
     display: flex !important;
     flex-flow: row nowrap;
-    column-gap: var(--uc-arrowpanel-menuitem-inline-margin) !important;
+    column-gap: var(--uc-arrowpanel-menuitem-margin-inline) !important;
   }
 
   #downloadsFooter > toolbarseparator,
@@ -100,7 +99,7 @@
     position: relative !important;
     border-radius: var(--context-menuitem-border-radius) !important;
     padding: 0 !important;
-    margin: 0 var(--uc-arrowpanel-menuitem-inline-margin) !important;
+    margin: 0 var(--uc-arrowpanel-menuitem-margin-inline) !important;
     border: 0 !important;
     outline: 0 !important;
     background: none !important;
@@ -112,11 +111,11 @@
     margin: 0 !important;
     padding: 8px 4px !important;
     padding-inline-end: calc(4px + 8px + 8px + 32px) !important;
-    gap: var(--uc-arrowpanel-menuitem-inline-margin) !important;
+    gap: var(--uc-arrowpanel-menuitem-margin-inline) !important;
   }
 
   #downloadsPanel-blockedSubview > vbox {
-    margin: 0px var(--uc-arrowpanel-menuitem-inline-margin) !important;
+    margin: 0px var(--uc-arrowpanel-menuitem-margin-inline) !important;
   }
 
   .downloadsPanel-blockedSubview-title-box {
@@ -166,9 +165,7 @@
     outline: none !important;
   }
 
-  panel
-    richlistitem.download-state[state="1"]:not([exists])
-    :is(.downloadTarget, .downloadDetails) {
+  panel richlistitem.download-state[state="1"]:not([exists]) :is(.downloadTarget, .downloadDetails) {
     color: var(--panel-disabled-color);
   }
 
@@ -304,10 +301,7 @@
     transform: scaleX(-1);
   }
 
-  richlistitem.download-state
-    > .downloadButton:is(.downloadIconCancel, .downloadIconSubviewArrow)
-    .button-box
-    .button-icon {
+  richlistitem.download-state > .downloadButton:is(.downloadIconCancel, .downloadIconSubviewArrow) .button-box .button-icon {
     width: 21px !important;
   }
 
@@ -335,8 +329,7 @@
     fill: var(--purple-25) !important;
   }
 
-  #downloadsPanel-blockedSubview[verdict="PotentiallyUnwanted"]
-    .downloadsPanel-blockedSubview-image,
+  #downloadsPanel-blockedSubview[verdict="PotentiallyUnwanted"] .downloadsPanel-blockedSubview-image,
   #downloadsPanel-blockedSubview[verdict="DownloadSpam"] .downloadsPanel-blockedSubview-image,
   #downloadsListBox > richlistitem[verdict="PotentiallyUnwanted"] .downloadBlockedBadge,
   #downloadsListBox > richlistitem[verdict="DownloadSpam"] .downloadBlockedBadge {
@@ -384,9 +377,7 @@
   }
 
   .downloadProgress:not(:indeterminate)::-moz-progress-bar {
-    mask: linear-gradient(#fff, #fff),
-      url(chrome://userchrome/content/layout/contentaccessible/progress-bar-mask.svg) center
-        right/14px;
+    mask: linear-gradient(#fff, #fff), url(chrome://userchrome/content/layout/contentaccessible/progress-bar-mask.svg) center right/14px;
     mask-repeat: no-repeat;
     mask-composite: subtract;
     animation: none !important;
@@ -394,14 +385,7 @@
 
   .downloadProgress:indeterminate::-moz-progress-bar {
     border-radius: 0 !important;
-    background-image: linear-gradient(
-      90deg,
-      transparent 0%,
-      var(--download-progress-flare-color) 25%,
-      transparent 50%,
-      var(--download-progress-flare-color) 75%,
-      transparent 100%
-    ) !important;
+    background-image: linear-gradient(90deg, transparent 0%, var(--download-progress-flare-color) 25%, transparent 50%, var(--download-progress-flare-color) 75%, transparent 100%) !important;
   }
 
   .downloadProgress[paused]:indeterminate::-moz-progress-bar {
@@ -410,8 +394,7 @@
   }
 }
 
-@-moz-document url-prefix("chrome://browser/content/places/places.xhtml"), url-prefix("about:downloads")
-{
+@-moz-document url-prefix("chrome://browser/content/places/places.xhtml"), url-prefix("about:downloads") {
   #downloadsListBox {
     border: none !important;
     outline: none !important;

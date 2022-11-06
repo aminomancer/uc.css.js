@@ -20,9 +20,7 @@ we also need to adjust window controls, the main menu bar, and the bookmarks too
 
 :root[fullscreen-autohide][inFullscreen] #navigator-toolbox {
   max-height: 0 !important;
-  margin-top: calc(
-    0.5px - var(--urlbar-container-height, 40px) - var(--tab-min-height, 36px)
-  ) !important;
+  margin-top: calc(0.5px - var(--urlbar-container-height, 40px) - var(--tab-min-height, 36px)) !important;
   transition: all 0.25s ease-in-out 0s !important;
   transition-delay: 0s !important;
   opacity: 0 !important;
@@ -51,9 +49,7 @@ we also need to adjust window controls, the main menu bar, and the bookmarks too
 nav-bar, or when nav-bar related popups are opened. requires
 fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-status. */
 :root[fullscreen-autohide][inFullscreen][customizing] #navigator-toolbox,
-:root[fullscreen-autohide][inFullscreen]
-  #navigator-toolbox-background:is(:focus-within, :hover, [popup-status], [urlbar-status])
-  #navigator-toolbox {
+:root[fullscreen-autohide][inFullscreen] #navigator-toolbox-background:is(:focus-within, :hover, [popup-status], [urlbar-status]) #navigator-toolbox {
   margin-top: 0 !important;
   transition: all 0.25s cubic-bezier(0.26, 1, 0.8, 1) 0s !important;
   opacity: 1 !important;
@@ -65,9 +61,7 @@ fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-status. */
 } */
 
 :root[fullscreen-autohide][inFullscreen] #navigator-toolbox {
-  margin-bottom: calc(
-    0px - var(--urlbar-container-height, 40px) - var(--tab-min-height, 36px)
-  ) !important;
+  margin-bottom: calc(0px - var(--urlbar-container-height, 40px) - var(--tab-min-height, 36px)) !important;
 }
 
 :root[fullscreen-autohide][inFullscreen]:not([customizing]) #sidebar-box {
@@ -102,34 +96,21 @@ fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-status. */
 :root[fullscreen-autohide][inFullscreen]:not([customizing]) #browser findbar {
   top: 8px !important;
   padding-top: calc(var(--urlbar-container-height, 40px) + var(--tab-min-height, 36px)) !important;
-  margin-top: calc(
-    -1px - var(--urlbar-container-height, 40px) - var(--tab-min-height, 36px)
-  ) !important;
+  margin-top: calc(-1px - var(--urlbar-container-height, 40px) - var(--tab-min-height, 36px)) !important;
   transition-property: transform, opacity, width, left, right, padding-top, margin-top !important;
   transition-duration: 0.2s, 0.3s, 0.2s, 0.2s, 0.2s, 0.25s, 0.25s !important;
   transition-delay: 0s, 0s, 0s, 0s, 0s, 0s, 0s !important;
-  transition-timing-function: ease-in-out, ease-in-out, ease-in-out, ease-in-out, ease-in-out,
-    ease-in-out, ease-in-out !important;
+  transition-timing-function: ease-in-out, ease-in-out, ease-in-out, ease-in-out, ease-in-out, ease-in-out, ease-in-out !important;
 }
 
-:root[fullscreen-autohide][inFullscreen]:not([customizing])
-  #navigator-toolbox-background:is(:focus-within, :hover, [popup-status], [urlbar-status])
-  ~ #browser
-  findbar,
-:root[fullscreen-autohide][inFullscreen]:not([customizing])
-  > body
-  > box:is(:focus-within, :hover, [popup-status], [urlbar-status])
-  ~ #browser
-  findbar {
+:root[fullscreen-autohide][inFullscreen]:not([customizing]) #navigator-toolbox-background:is(:focus-within, :hover, [popup-status], [urlbar-status]) ~ #browser findbar,
+:root[fullscreen-autohide][inFullscreen]:not([customizing]) > body > box:is(:focus-within, :hover, [popup-status], [urlbar-status]) ~ #browser findbar {
   margin-top: 0 !important;
   transition-duration: 0.2s, 0.3s, 0.2s, 0.2s, 0.2s, 0.25s, 0.25s !important;
-  transition-timing-function: ease-in-out, ease-in-out, ease-in-out, ease-in-out, ease-in-out,
-    cubic-bezier(0.26, 1, 0.8, 1), cubic-bezier(0.26, 1, 0.8, 1) !important;
+  transition-timing-function: ease-in-out, ease-in-out, ease-in-out, ease-in-out, ease-in-out, cubic-bezier(0.26, 1, 0.8, 1), cubic-bezier(0.26, 1, 0.8, 1) !important;
 }
 
-:root[fullscreen-autohide][customizing][inFullscreen]
-  #customization-container
-  > #customization-content-container {
+:root[fullscreen-autohide][customizing][inFullscreen] #customization-container > #customization-content-container {
   margin-top: calc(var(--urlbar-container-height, 40px) + var(--tab-min-height, 36px)) !important;
   z-index: 2147483647 !important;
 }

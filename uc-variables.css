@@ -153,17 +153,14 @@ menupopup {
   --panel-banner-item-active-bgcolor: hsla(109.9, 90.9%, 47.3%, 0.2);
   --panel-banner-item-info-icon-bgcolor: var(--arrowpanel-color) !important;
 
-  --arrowpanel-menuitem-inline-margin: var(--uc-arrowpanel-menuitem-inline-margin, 4px) !important;
-  --arrowpanel-menuitem-margin: 0px var(--arrowpanel-menuitem-inline-margin) !important;
+  --arrowpanel-menuitem-margin-inline: var(--uc-arrowpanel-menuitem-margin-inline, 4px) !important;
+  --arrowpanel-menuitem-margin-block: var(--uc-arrowpanel-menuitem-margin-block, 0px) !important;
+  --arrowpanel-menuitem-margin: var(--arrowpanel-menuitem-margin-block) var(--arrowpanel-menuitem-margin-inline) !important;
   --arrowpanel-menuitem-padding-block: var(--uc-arrowpanel-menuitem-padding-block, 6px) !important;
-  --arrowpanel-menuitem-padding-inline: var(
-    --uc-arrowpanel-menuitem-padding-inline,
-    6px
-  ) !important;
-  --arrowpanel-menuitem-padding: var(--arrowpanel-menuitem-padding-block)
-    var(--arrowpanel-menuitem-padding-inline) !important;
+  --arrowpanel-menuitem-padding-inline: var(--uc-arrowpanel-menuitem-padding-inline, 6px) !important;
+  --arrowpanel-menuitem-padding: var(--arrowpanel-menuitem-padding-block) var(--arrowpanel-menuitem-padding-inline) !important;
   --arrowpanel-padding: var(--uc-arrowpanel-root-padding, 12px) !important;
-  --panel-subview-body-padding-magnitude: var(--arrowpanel-menuitem-inline-margin);
+  --panel-subview-body-padding-magnitude: var(--arrowpanel-menuitem-margin-inline);
   --panel-subview-body-padding: var(--panel-subview-body-padding-magnitude) 0 !important;
   --arrowpanel-menuitem-border-radius: var(--context-menuitem-border-radius) !important;
   --arrowpanel-border-radius: var(--menupopup-border-radius) !important;
@@ -171,12 +168,8 @@ menupopup {
 
   --error-text-color: var(--warning-color) !important;
   --buttons-primary-button-bgcolor: var(--uc-parent-primary-button-background) !important;
-  --buttons-primary-button-hover-bgcolor: var(
-    --uc-parent-primary-button-background-hover
-  ) !important;
-  --buttons-primary-button-active-bgcolor: var(
-    --uc-parent-primary-button-background-active
-  ) !important;
+  --buttons-primary-button-hover-bgcolor: var(--uc-parent-primary-button-background-hover) !important;
+  --buttons-primary-button-active-bgcolor: var(--uc-parent-primary-button-background-active) !important;
   --buttons-primary-button-color: var(--uc-parent-primary-button-text-color) !important;
   --buttons-secondary-hover-bgcolor: var(--arrowpanel-dimmed) !important;
   --buttons-secondary-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
@@ -243,8 +236,7 @@ panel {
 #appMenu-multiView {
   --subviewbutton-height: 32px !important;
   --arrowpanel-menuitem-padding-inline: 8px !important;
-  --arrowpanel-menuitem-padding: var(--arrowpanel-menuitem-padding-block)
-    var(--arrowpanel-menuitem-padding-inline) !important;
+  --arrowpanel-menuitem-padding: var(--arrowpanel-menuitem-padding-block) var(--arrowpanel-menuitem-padding-inline) !important;
 }
 
 #identity-popup {

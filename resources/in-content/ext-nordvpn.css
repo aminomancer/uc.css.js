@@ -6,8 +6,7 @@
 
 /* nord VPN extension */
 
-@-moz-document regexp("^moz-extension://.*/.*")
-{
+@-moz-document regexp("^moz-extension://.*/.*") {
   :root[uc-extension-id="nordvpnproxy@nordvpn.com"] {
     --UNIT-BASE-VALUE: 16px;
     --UNIT-DOUBLE: 2rem;
@@ -121,11 +120,7 @@
     fill: var(--ui-text-60) !important;
   }
 
-  :root[uc-extension-id="nordvpnproxy@nordvpn.com"]
-    .TopBar
-    .Link:hover
-    .SVG--inline:not(.SVG--no-hover)
-    * {
+  :root[uc-extension-id="nordvpnproxy@nordvpn.com"] .TopBar .Link:hover .SVG--inline:not(.SVG--no-hover) * {
     fill: var(--in-content-primary-button-background-hover) !important;
   }
 
@@ -140,8 +135,7 @@
   }
 
   :root[uc-extension-id="nordvpnproxy@nordvpn.com"] .Button--blue:hover,
-  :root[uc-extension-id="nordvpnproxy@nordvpn.com"]
-    .nord-button--v-contained.nord-button--c-blue:is(:hover, :focus-visible):not([disabled]) {
+  :root[uc-extension-id="nordvpnproxy@nordvpn.com"] .nord-button--v-contained.nord-button--c-blue:is(:hover, :focus-visible):not([disabled]) {
     background-color: var(--in-content-primary-button-background-active) !important;
     border-color: transparent !important;
   }
@@ -161,10 +155,7 @@
     fill: var(--purple-35) !important;
   }
 
-  :root[uc-extension-id="nordvpnproxy@nordvpn.com"]
-    .Link--alt:is(:active, :focus, :hover)
-    .SVG--inline:not(.SVG--no-hover)
-    * {
+  :root[uc-extension-id="nordvpnproxy@nordvpn.com"] .Link--alt:is(:active, :focus, :hover) .SVG--inline:not(.SVG--no-hover) * {
     fill: color-mix(in srgb, var(--attention-color) 50%, var(--purple-30)) !important;
   }
 
@@ -186,9 +177,7 @@
     background-color: var(--in-content-button-background-hover) !important;
   }
 
-  :root[uc-extension-id="nordvpnproxy@nordvpn.com"]
-    .Toggle:hover:not(.Toggle--disabled)
-    .Toggle__track {
+  :root[uc-extension-id="nordvpnproxy@nordvpn.com"] .Toggle:hover:not(.Toggle--disabled) .Toggle__track {
     background-color: var(--in-content-button-background-active) !important;
   }
 
@@ -198,9 +187,7 @@
     background-clip: content-box !important;
   }
 
-  :root[uc-extension-id="nordvpnproxy@nordvpn.com"]
-    .Toggle:hover:not(.Toggle--disabled)
-    .Toggle__thumb {
+  :root[uc-extension-id="nordvpnproxy@nordvpn.com"] .Toggle:hover:not(.Toggle--disabled) .Toggle__thumb {
     background-color: var(--ui-text-100) !important;
   }
 
@@ -208,9 +195,7 @@
     background-color: var(--in-content-primary-button-background) !important;
   }
 
-  :root[uc-extension-id="nordvpnproxy@nordvpn.com"]
-    .Toggle--checked:hover:not(.Toggle--disabled)
-    .Toggle__track {
+  :root[uc-extension-id="nordvpnproxy@nordvpn.com"] .Toggle--checked:hover:not(.Toggle--disabled) .Toggle__track {
     background-color: var(--in-content-primary-button-background-hover) !important;
   }
 
@@ -223,8 +208,7 @@
     border-color: transparent !important;
   }
 
-  :root[uc-extension-id="nordvpnproxy@nordvpn.com"]
-    .Button--destructive.Button--outline:not(:hover) {
+  :root[uc-extension-id="nordvpnproxy@nordvpn.com"] .Button--destructive.Button--outline:not(:hover) {
     background-color: var(--in-content-button-background) !important;
   }
 
@@ -246,8 +230,7 @@
     border-color: var(--in-content-box-border-color) !important;
   }
 
-  :root[uc-extension-id="nordvpnproxy@nordvpn.com"]
-    :is(.form-control, .TextField__element, .nord-input):focus {
+  :root[uc-extension-id="nordvpnproxy@nordvpn.com"] :is(.form-control, .TextField__element, .nord-input):focus {
     border-color: var(--purple-40) !important;
   }
 }

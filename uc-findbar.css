@@ -195,9 +195,7 @@ findbar .matches-indicator {
   transition-timing-function: ease-out;
 }
 
-[anonid="findbar-textbox-wrapper"]:focus-within
-  .findbar-textbox:not([status="notfound"])
-  ~ .matches-indicator {
+[anonid="findbar-textbox-wrapper"]:focus-within .findbar-textbox:not([status="notfound"]) ~ .matches-indicator {
   background-color: var(--search-box-focus);
 }
 
@@ -235,14 +233,12 @@ findbar .matches-indicator {
   list-style-image: url(chrome://userchrome/content/menu-arrow-tiny.svg) !important;
 }
 
-:is(.findbar-find-previous, .findbar-find-next):not([disabled], [hidden]):is(:hover, :focus-visible)
-  > .toolbarbutton-icon {
+:is(.findbar-find-previous, .findbar-find-next):not([disabled], [hidden]):is(:hover, :focus-visible) > .toolbarbutton-icon {
   background: none !important;
   opacity: 1 !important;
 }
 
-:is(.findbar-entire-word, .findbar-case-sensitive):not([disabled], [hidden]):is(:hover, :focus-visible, [checked])
-  :is(.toolbarbutton-icon, .checkbox-icon) {
+:is(.findbar-entire-word, .findbar-case-sensitive):not([disabled], [hidden]):is(:hover, :focus-visible, [checked]) :is(.toolbarbutton-icon, .checkbox-icon) {
   background: none !important;
   opacity: 0.8 !important;
 }
@@ -251,31 +247,23 @@ findbar .matches-indicator {
   box-shadow: none !important;
 }
 
-:is(.findbar-find-previous, .findbar-find-next, .findbar-entire-word, .findbar-case-sensitive):not([disabled], [hidden]):where([checked]:hover, [checked]:focus-visible, :hover:active, :focus-visible:hover)
-  :is(.toolbarbutton-icon, .checkbox-icon) {
+:is(.findbar-find-previous, .findbar-find-next, .findbar-entire-word, .findbar-case-sensitive):not([disabled], [hidden]):where([checked]:hover, [checked]:focus-visible, :hover:active, :focus-visible:hover) :is(.toolbarbutton-icon, .checkbox-icon) {
   background: none !important;
   opacity: 1 !important;
 }
 
-.findbar-textbox[status="notfound"]
-  ~ :is(.findbar-find-previous, .findbar-find-next)
-  > .toolbarbutton-icon,
-.findbar-textbox[status="notfound"]
-  ~ :is(.findbar-find-previous, .findbar-find-next)
-  > .toolbarbutton-icon,
-:is(.findbar-find-previous, .findbar-find-next, .findbar-entire-word, .findbar-case-sensitive):is([disabled="true"], [hidden])
-  :is(.toolbarbutton-icon, .checkbox-icon) {
+.findbar-textbox[status="notfound"] ~ :is(.findbar-find-previous, .findbar-find-next) > .toolbarbutton-icon,
+.findbar-textbox[status="notfound"] ~ :is(.findbar-find-previous, .findbar-find-next) > .toolbarbutton-icon,
+:is(.findbar-find-previous, .findbar-find-next, .findbar-entire-word, .findbar-case-sensitive):is([disabled="true"], [hidden]) :is(.toolbarbutton-icon, .checkbox-icon) {
   fill: rgba(255, 255, 255, 1) !important;
   opacity: 0.25 !important;
 }
 
-.findbar-textbox:focus
-  ~ :is(.findbar-find-previous, .findbar-find-next, .findbar-entire-word, .findbar-case-sensitive) {
+.findbar-textbox:focus ~ :is(.findbar-find-previous, .findbar-find-next, .findbar-entire-word, .findbar-case-sensitive) {
   background-color: var(--search-box-focus) !important;
 }
 
-.findbar-textbox[status="notfound"]
-  ~ :is(.findbar-find-previous, .findbar-find-next, .findbar-entire-word, .findbar-case-sensitive) {
+.findbar-textbox[status="notfound"] ~ :is(.findbar-find-previous, .findbar-find-next, .findbar-entire-word, .findbar-case-sensitive) {
   background-color: var(--search-box-null) !important;
   transition: var(--findbar-textbox-bg-notfound-transition-duration, 300ms) !important;
   transition-timing-function: ease-out !important;
@@ -331,8 +319,7 @@ findbar .matches-indicator {
   display: -moz-inline-box !important;
 }
 
-.findbar-textbox.minimal
-  ~ :is(.findbar-case-sensitive, .findbar-entire-word, .findbar-find-previous, .findbar-find-next) {
+.findbar-textbox.minimal ~ :is(.findbar-case-sensitive, .findbar-entire-word, .findbar-find-previous, .findbar-find-next) {
   display: none !important;
 }
 
@@ -344,9 +331,7 @@ findbar .matches-indicator {
   display: none !important;
 }
 
-[anonid="findbar-textbox-wrapper"]:focus-within
-  .findbar-textbox:not([status="notfound"])
-  ~ :is(.findbar-find-previous, .findbar-find-next, .findbar-entire-word, .findbar-case-sensitive) {
+[anonid="findbar-textbox-wrapper"]:focus-within .findbar-textbox:not([status="notfound"]) ~ :is(.findbar-find-previous, .findbar-find-next, .findbar-entire-word, .findbar-case-sensitive) {
   background-color: var(--search-box-focus) !important;
   transition: var(--findbar-textbox-bg-transition-duration, 200ms) background-color !important;
 }

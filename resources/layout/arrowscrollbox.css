@@ -4,9 +4,9 @@
 
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 
-:host([scrolledtostart=true])::part(overflow-start-indicator),
-:host([scrolledtoend=true])::part(overflow-end-indicator),
-:host(:not([overflowing=true])) > toolbarbutton {
+:host([scrolledtostart="true"])::part(overflow-start-indicator),
+:host([scrolledtoend="true"])::part(overflow-end-indicator),
+:host(:not([overflowing="true"])) > toolbarbutton {
   visibility: collapse;
 }
 

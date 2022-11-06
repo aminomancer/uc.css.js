@@ -118,18 +118,23 @@
     const lazy = {};
     XPCOMUtils.defineLazyModuleGetters(lazy, {
       PartnerLinkAttribution: "resource:///modules/PartnerLinkAttribution.jsm",
-      CONTEXTUAL_SERVICES_PING_TYPES: "resource:///modules/PartnerLinkAttribution.jsm",
+      CONTEXTUAL_SERVICES_PING_TYPES:
+        "resource:///modules/PartnerLinkAttribution.jsm",
     });
     ChromeUtils.defineESModuleGetters(lazy, {
       UrlbarUtils: "resource:///modules/UrlbarUtils.sys.mjs",
       UrlbarPrefs: "resource:///modules/UrlbarPrefs.sys.mjs",
-      UrlbarProvidersManager: "resource:///modules/UrlbarProvidersManager.sys.mjs",
-      ExtensionSearchHandler: "resource://gre/modules/ExtensionSearchHandler.sys.mjs",
+      UrlbarProvidersManager:
+        "resource:///modules/UrlbarProvidersManager.sys.mjs",
+      ExtensionSearchHandler:
+        "resource://gre/modules/ExtensionSearchHandler.sys.mjs",
     });
 
     const UrlbarProvidersManager = gURLBar.view.controller.manager;
 
-    let UrlbarProviderBookmarkKeywords = UrlbarProvidersManager.getProvider("BookmarkKeywords");
+    let UrlbarProviderBookmarkKeywords = UrlbarProvidersManager.getProvider(
+      "BookmarkKeywords"
+    );
 
     let schema = UrlbarUtils.getPayloadSchema(UrlbarUtils.RESULT_TYPE.KEYWORD);
     schema.properties.ucjs = { type: "boolean" };
@@ -173,14 +178,18 @@
 
     if (UrlbarProviderBookmarkKeywords.BCBK_modified) return;
 
-    const { KeywordUtils } = ChromeUtils.import("resource://gre/modules/KeywordUtils.jsm");
+    const { KeywordUtils } = ChromeUtils.import(
+      "resource://gre/modules/KeywordUtils.jsm"
+    );
     const { UrlbarProvider } = ChromeUtils.importESModule(
       "resource:///modules/UrlbarUtils.sys.mjs"
     );
     const { UrlbarTokenizer } = ChromeUtils.importESModule(
       "resource:///modules/UrlbarTokenizer.sys.mjs"
     );
-    const { UrlbarResult } = ChromeUtils.importESModule("resource:///modules/UrlbarResult.sys.mjs");
+    const { UrlbarResult } = ChromeUtils.importESModule(
+      "resource:///modules/UrlbarResult.sys.mjs"
+    );
     UrlbarProvidersManager.unregisterProvider(UrlbarProviderBookmarkKeywords);
 
     class BrowserChromeBookmarkKeywords extends UrlbarProvider {
@@ -248,7 +257,9 @@
           eval(result.payload.url.replace(/^ucjs:/, ""));
         } catch (e) {
           Cu.reportError("Error in bookmark keyword :>> " + e);
-          console.warn("Bookmark keyword parsed source :>> " + result.payload.url);
+          console.warn(
+            "Bookmark keyword parsed source :>> " + result.payload.url
+          );
         }
       }
 
@@ -260,11 +271,17 @@
       async startQuery(queryContext, addCallback) {
         let keyword = queryContext.tokens[0]?.value;
 
-        let searchString = UrlbarUtils.substringAfter(queryContext.searchString, keyword).trim();
-        let { entry, url, postData, ucjs, hadPlaceholder } = await this.getBindableKeyword(
-          keyword,
-          searchString
-        );
+        let searchString = UrlbarUtils.substringAfter(
+          queryContext.searchString,
+          keyword
+        ).trim();
+        let {
+          entry,
+          url,
+          postData,
+          ucjs,
+          hadPlaceholder,
+        } = await this.getBindableKeyword(keyword, searchString);
         if (!entry || !url) {
           return;
         }
@@ -286,13 +303,18 @@
 
         if (prefix && searchString && (hadPlaceholder || !ucjs)) {
           let format = (val1, val2) =>
-            UrlbarUtils.strings.formatStringFromName("bookmarkKeywordSearch", [val1, val2]);
+            UrlbarUtils.strings.formatStringFromName("bookmarkKeywordSearch", [
+              val1,
+              val2,
+            ]);
           let typedValue = queryContext.tokens
             .slice(1)
             .map(t => t.value)
             .join(" ");
           title = format(prefix, typedValue);
-          inputHighlight = { title: [[prefix.length + format("", "").length, typedValue.length]] };
+          inputHighlight = {
+            title: [[prefix.length + format("", "").length, typedValue.length]],
+          };
         } else {
           title = ucjs && prefix ? prefix : UrlbarUtils.unEscapeURIForUI(url);
         }
@@ -332,10 +354,13 @@
         if (!entry) return {};
         if (entry.url.protocol === "ucjs:" && !entry.postData) {
           let hadPlaceholder = false;
-          let url = entry.url.href.replace(config["Search string placeholder"], () => {
-            hadPlaceholder = true;
-            return searchString;
-          });
+          let url = entry.url.href.replace(
+            config["Search string placeholder"],
+            () => {
+              hadPlaceholder = true;
+              return searchString;
+            }
+          );
           return {
             entry,
             ucjs: true,
@@ -370,6 +395,9 @@
         init();
       }
     };
-    Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
+    Services.obs.addObserver(
+      delayedListener,
+      "browser-delayed-startup-finished"
+    );
   }
 })();
