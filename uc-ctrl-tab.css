@@ -10,7 +10,6 @@
   appearance: none !important;
   border-style: none !important;
   font-weight: normal !important;
-  text-shadow: 0 0 2px hsl(0, 0%, 8%), 0 0 2px hsl(0, 0%, 8%) !important;
   box-shadow: none !important;
   background: none !important;
   --panel-background: var(--ctrlTab-overlay-color) !important;
@@ -67,12 +66,6 @@
   padding: 2px 4px !important;
 }
 
-#ctrlTab-showAll:focus,
-#ctrlTab-showAll:focus-within {
-  background-color: var(--ctrlTab-panel-focused-bgcolor) !important;
-  border-color: var(--attention-color) !important;
-}
-
 .ctrlTab-preview-inner {
   flex: 0 !important;
   color: var(--ui-text-80) !important;
@@ -84,10 +77,18 @@
   background-color: var(--ctrlTab-panel-bgcolor) !important;
 }
 
+#ctrlTab-showAll:focus,
+#ctrlTab-showAll:focus-within,
 .ctrlTab-preview:focus > .ctrlTab-preview-inner {
   background-color: var(--ctrlTab-panel-focused-bgcolor) !important;
-  border-color: var(--attention-color) !important;
-  box-shadow: 0 0 4px -1px rgba(0, 0, 0, 0.2), 0 0 25px -2px rgba(0, 0, 0, 0.2), inset 0 0 20px 5px hsla(0, 0%, 0%, 0.5) !important;
+  border-color: transparent !important;
+  outline: 4px solid var(--ctrlTab-panel-focused-bgcolor) !important;
+  outline-offset: -2px !important;
+  text-shadow: 0 0 1px hsla(0, 0%, 0%, 1), 0 0 2px hsla(0, 0%, 0%, 0.75), 0 0 4px hsla(0, 0%, 0%, 0.5) !important;
+}
+
+.ctrlTab-preview:focus > .ctrlTab-preview-inner > .ctrlTab-canvas {
+  box-shadow: 0 0 4px hsla(0, 0%, 0%, 0.25), 0 0 6px hsla(0, 0%, 0%, 0.125), 0 0 8px hsla(0, 0%, 0%, 0.125) !important;
 }
 
 .ctrlTab-canvas > * {

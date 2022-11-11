@@ -337,7 +337,17 @@ but other than that these variables should be available everywhere. */
     hsla(var(--download-button-hue), 90%, 76.94%, 0.01) 96.3%
   ); */
 
-  --pink-action: hsl(340, 73%, 58%);
+  --ctrlTab-overlay-color: hsla(240, 3%, 4%, 0.5);
+  --ctrlTab-panel-disabled-bgcolor: hsla(240, 2%, 9%, 0.8);
+  --ctrlTab-panel-disabled-focused-bgcolor: hsla(240, 8%, 3%, 0.9);
+  --ctrlTab-panel-bgcolor: hsla(240, 3%, 4%, 0.9);
+  --ctrlTab-panel-focused-bgcolor: var(--indigo-45);
+
+  --indigo-30: hsl(230, 87%, 70%);
+  --indigo-40: hsl(232, 82%, 60%);
+  --indigo-45: hsl(233, 72%, 55%);
+  --indigo-50: hsl(234, 62%, 50%);
+
   --purple-20: hsl(240, 100%, 80%);
   --purple-25: hsl(240, 100%, 75%);
   --purple-30: hsl(239, 100%, 70%);
@@ -354,9 +364,11 @@ but other than that these variables should be available everywhere. */
   --purple-60: hsl(258, 95%, 40%) !important;
   --purple-70: hsl(256, 97%, 30%);
   --purple-80: hsl(254, 100%, 20%);
+
   --pink-40: hsl(340, 73%, 60%);
   --pink-35: hsl(340, 73%, 65%);
   --pink-30: hsl(340, 73%, 70%);
+  --pink-action: hsl(340, 73%, 58%);
 
   --uc-parent-page-color: hsl(212, 43%, 90%);
   --uc-parent-link-color: var(--purple-35);

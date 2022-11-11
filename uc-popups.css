@@ -772,27 +772,7 @@ rtl languages. adjust the border radius accordingly */
   -moz-box-pack: center;
 }
 
-@-moz-document url("chrome://global/content/commonDialog.xhtml"),
-    url("chrome://mozapps/content/handling/permissionDialog.xhtml"),
-    url("chrome://mozapps/content/handling/appChooser.xhtml"),
-    url("chrome://global/content/appPicker.xhtml"),
-    url("chrome://mozapps/content/downloads/unknownContentType.xhtml"),
-    url-prefix("chrome://browser/content/sanitize.xhtml") {
-  /* use this selector to exclude null-window prompts, which open in their own
-  windows and don't inherit styles from the chrome window. we don't want to
-  apply theme styles to these prompts because no matter what we do, we can't
-  control the titlebar. it'll always be white with a red button on windows,
-  without OS-level intervention. so don't bother with them. we just use scripts
-  to try to make all dialogs open as either modal dialogs which attach to
-  existing chrome windows or browsing contexts, or as windowed dialogs with the
-  titlebars hidden. that can only happen at the programming level, in javascript
-  or C++. we can't do anything about the prompts opened by C++ so we just have
-  to hope mozilla gets rid of them, but fortunately mozilla has caught on and is
-  gradually converting these dialogs to modals which pass the window or browsing
-  context as the  first parameter. e.g. try submitting this in console:
-  Services.prompt.confirmEx(window, "title", "text", 1, "1", "2", "3", "checkbox", {value: false})
-  then try changing the first parameter window to null and you'll see it opens
-  as a regular null-window dialog instead. */
+@-moz-document url("chrome://global/content/commonDialog.xhtml"), url("chrome://mozapps/content/handling/permissionDialog.xhtml"), url("chrome://mozapps/content/handling/appChooser.xhtml"), url("chrome://global/content/appPicker.xhtml"), url("chrome://mozapps/content/downloads/unknownContentType.xhtml"), url-prefix("chrome://browser/content/sanitize.xhtml") {
   #commonDialogWindow[dialogroot],
   #commonDialogWindow[dialogroot] *,
   .dialog-button-box {
@@ -843,18 +823,18 @@ rtl languages. adjust the border radius accordingly */
     margin-block-start: 2px !important;
   }
 
-  .dialog-content-box:not([hidden]) + .dialog-button-box {
+  :is(.dialog-content-box, [part="content-box"]):not([hidden]) + .dialog-button-box {
     margin-top: 5px;
   }
 
   .dialog-button-box:not([hidden]) {
-    display: flex;
-    justify-content: end;
+    -moz-box-layout: flex;
+    -moz-box-pack: end;
+    margin-inline: 4px;
   }
 
   .dialog-button-box > button {
-    flex-grow: 0.15;
-    flex-wrap: nowrap;
+    -moz-box-flex: 0.15;
   }
 
   .dialog-button-box > button {
@@ -1072,8 +1052,7 @@ rtl languages. adjust the border radius accordingly */
   }
 }
 
-@-moz-document url("chrome://mozapps/content/downloads/unknownContentType.xhtml"),
-    url("chrome://global/content/appPicker.xhtml") {
+@-moz-document url("chrome://mozapps/content/downloads/unknownContentType.xhtml"), url("chrome://global/content/appPicker.xhtml") {
   :root,
   :root dialog,
   .dialog-button-box {
@@ -1105,6 +1084,10 @@ rtl languages. adjust the border radius accordingly */
     --in-content-accent-color: var(--purple-35) !important;
     --in-content-table-background: var(--in-content-box-background) !important;
     --in-content-table-header-background: var(--purple-40-a50) !important;
+  }
+
+  :root {
+    max-width: 36em;
   }
 
   #unknownContentType {
