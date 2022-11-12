@@ -286,6 +286,8 @@
   }
 
   message-bar:not([hidden]) {
+    display: flex !important;
+    flex-flow: row nowrap !important;
     margin-block-start: 15px !important;
     overflow: hidden;
     margin-inline: -15.5px !important;
@@ -294,14 +296,20 @@
   link[rel="stylesheet"][href="chrome://global/content/elements/message-bar.css"] ~ .container {
     padding: 8px !important;
     border-radius: 0 !important;
+    flex-grow: 1;
   }
 
   link[rel="stylesheet"][href="chrome://global/content/elements/message-bar.css"] ~ .container .content {
     display: flex !important;
     flex-flow: row nowrap;
+    flex-grow: 1;
     justify-content: space-between !important;
     white-space: nowrap !important;
     margin-inline: 8px 0 !important;
+  }
+
+  link[rel="stylesheet"][href="chrome://global/content/elements/message-bar.css"] ~ .container .content + .spacer:last-child {
+    display: none;
   }
 
   message-bar > span {
