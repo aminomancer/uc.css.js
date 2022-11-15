@@ -33,6 +33,10 @@ unified-extensions-item.no-hover:hover {
   display: -moz-box !important;
 }
 
+toolbaritem.unified-extensions-item:not([overflowedItem="true"]) .unified-extensions-item-contents {
+	display: none !important;
+}
+
 .unified-extensions-item-contents > label {
   margin: 0 !important;
   display: -moz-box !important;

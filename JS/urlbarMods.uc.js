@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Urlbar Mods
-// @version        1.7.3
+// @version        1.7.4
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Make some minor modifications to the urlbar. See the code
@@ -605,8 +605,9 @@ class UrlbarMods {
     ).properties.clientType = {
       type: "string",
     };
+    var limbo = ChromeUtils.import("resource:///modules/UrlbarView.sys.mjs");
     let src1 = RemoteTabs.startQuery.toSource();
-    let src2 = gURLBar.view._updateRow.toSource();
+    let src2 = gURLBar.view._updateRow?.toSource();
     let src3 = TabToSearch.startQuery.toSource();
     if (!src1.includes("client.clientType")) {
       const lazy = {};
@@ -632,7 +633,7 @@ class UrlbarMods {
             )
       );
     }
-    if (!src2.includes("result.payload.clientType")) {
+    if (src2 && !src2.includes("result.payload.clientType")) {
       const lazy = {};
       ChromeUtils.defineESModuleGetters(lazy, {
         L10nCache: "resource:///modules/UrlbarUtils.sys.mjs",

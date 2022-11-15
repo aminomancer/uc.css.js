@@ -121,61 +121,89 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
   padding-inline: 0 !important;
 }
 
-toolbar .toolbaritem-combined-buttons.chromeclass-toolbar-additional {
+:is(toolbar, .customization-palette) .toolbaritem-combined-buttons.chromeclass-toolbar-additional {
   margin-inline: 0 !important;
 }
 
-toolbar :not(toolbarpaletteitem) > .toolbaritem-combined-buttons.chromeclass-toolbar-additional {
+:is(toolbar, .customization-palette) :not(toolbarpaletteitem) > .toolbaritem-combined-buttons.chromeclass-toolbar-additional {
   -moz-box-align: stretch !important;
 }
 
-toolbar .toolbaritem-combined-buttons.chromeclass-toolbar-additional:not(:hover) > separator {
-  content: "";
-  display: -moz-box;
+:is(toolbar, .customization-palette) .toolbaritem-combined-buttons.chromeclass-toolbar-additional:not(:hover) > separator {
   width: 0.67px !important;
   height: 20px !important;
   margin-inline-end: -0.67px !important;
-  background-image: linear-gradient(currentColor 0, currentColor 100%);
-  background-position: center;
-  background-repeat: no-repeat;
+  background-image: linear-gradient(currentColor 0, currentColor 100%) !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
   background-size: 1px 20px !important;
-  opacity: 0.2;
+  opacity: 0.2 !important;
 }
 
-toolbar .toolbarbutton-combined-buttons-dropmarker,
+:is(toolbar, .customization-palette) .toolbarbutton-combined-buttons-dropmarker,
 #PersonalToolbar .toolbaritem-combined-buttons .toolbarbutton-combined-buttons-dropmarker {
   margin-block: var(--toolbarbutton-inner-padding) !important;
 }
 
-toolbar .toolbarbutton-combined-buttons-dropmarker > .toolbarbutton-icon {
+.customization-palette .toolbarbutton-1 {
+  appearance: none !important;
+  margin: 0 !important;
+  padding: 0 var(--toolbarbutton-outer-padding) !important;
+  -moz-box-pack: center !important;
+}
+
+.customization-palette .toolbarbutton-1 > .toolbarbutton-icon {
+  width: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
+  height: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
+}
+
+.customization-palette .toolbarbutton-1 > .toolbarbutton-icon,
+toolbar .toolbarbutton-1 > .toolbarbutton-text,
+toolbar .toolbarbutton-1 > .toolbarbutton-badge-stack {
+  padding: var(--toolbarbutton-inner-padding) !important;
+  border-radius: var(--toolbarbutton-border-radius) !important;
+}
+
+:is(toolbar, .customization-palette) .toolbarbutton-combined-buttons-dropmarker > .toolbarbutton-icon {
   padding-inline: 2px !important;
   padding-block: 2px !important;
   height: 20px !important;
   width: 16px !important;
 }
 
-toolbar .toolbaritem-combined-buttons.unified-extensions-item {
-  padding: 0 var(--toolbarbutton-outer-padding);
+:is(toolbar, .customization-palette) .toolbaritem-combined-buttons.unified-extensions-item toolbarbutton {
+  background-color: transparent !important;
+  padding: 0 var(--toolbarbutton-outer-padding) !important;
 }
 
-toolbar:not(#PersonalToolbar) #edit-controls > #cut-button,
-toolbar #profiler-button > #profiler-button-button {
+:is(toolbar, .customization-palette):not(#PersonalToolbar) #edit-controls > #cut-button,
+:is(toolbar, .customization-palette) #profiler-button > #profiler-button-button {
   padding-left: 2px !important;
 }
 
-toolbar:not(#PersonalToolbar) #edit-controls > #paste-button,
-toolbar #profiler-button > #profiler-button-dropmarker {
+:is(toolbar, .customization-palette):not(#PersonalToolbar) #edit-controls > #paste-button,
+:is(toolbar, .customization-palette) #profiler-button > #profiler-button-dropmarker {
   padding-right: 2px !important;
 }
 
-toolbar:not(#PersonalToolbar) #zoom-controls > :is(#zoom-out-button, #zoom-in-button) {
+#wrapper-zoom-controls[place="palette"] > #zoom-controls > #zoom-out-button,
+#wrapper-edit-controls[place="palette"] > #edit-controls > #cut-button,
+#wrapper-profiler-button[place="palette"] > #profiler-button > #profiler-button-button,
+#wrapper-zoom-controls[place="palette"] > #zoom-controls > #zoom-in-button,
+#wrapper-edit-controls[place="palette"] > #edit-controls > #paste-button,
+#wrapper-profiler-button[place="palette"] > #profiler-button > #profiler-button-dropmarker {
+	-moz-box-align: center !important;
+  -moz-box-flex: 0 !important;
+}
+
+:is(toolbar, .customization-palette):not(#PersonalToolbar) #zoom-controls > :is(#zoom-out-button, #zoom-in-button) {
   margin-block: var(--toolbarbutton-inner-padding) !important;
   width: unset !important;
   padding: 0 !important;
   padding-inline: 2px !important;
 }
 
-toolbar:not(#PersonalToolbar) #zoom-controls > :is(#zoom-out-button, #zoom-in-button) > .toolbarbutton-icon {
+:is(toolbar, .customization-palette):not(#PersonalToolbar) #zoom-controls > :is(#zoom-out-button, #zoom-in-button) > .toolbarbutton-icon {
   height: 20px !important;
   width: 20px !important;
   padding: 4px !important;
@@ -185,25 +213,42 @@ toolbar:not(#PersonalToolbar) #zoom-controls > :is(#zoom-out-button, #zoom-in-bu
   padding-inline-start: 0 !important;
 }
 
-toolbar:not(#PersonalToolbar) #zoom-controls > #zoom-reset-button {
+:is(toolbar, .customization-palette):not(#PersonalToolbar) #zoom-controls > #zoom-reset-button {
   margin-block: var(--toolbarbutton-inner-padding) !important;
 }
 
-toolbar:not(#PersonalToolbar) #zoom-controls > #zoom-reset-button:not([disabled]):is(:hover, :focus-visible) > .toolbarbutton-text {
+#wrapper-zoom-controls[place="palette"] > #zoom-controls > #zoom-reset-button {
+  display: revert !important;
+}
+
+#wrapper-zoom-controls[place="palette"] > #zoom-controls > #zoom-reset-button::before {
+  content: "100%" !important;
+  line-height: 1.5em !important;
+  height: 20px !important;
+  min-height: 20px !important;
+  box-sizing: border-box !important;
+  font-size: 0.98em;
+  padding-inline: 5px !important;
+  background: hsla(0, 0%, 100%, 0.045);
+  border: 1px solid var(--toolbarbutton-hover-background);
+  border-radius: 10px !important;
+  opacity: 0.4 !important;
+}
+
+:is(toolbar, .customization-palette):not(#PersonalToolbar) #zoom-controls > #zoom-reset-button:not([disabled]):is(:hover, :focus-visible) > .toolbarbutton-text {
   border-color: transparent;
 }
 
-toolbar:not(#PersonalToolbar) #zoom-controls > #zoom-reset-button > .toolbarbutton-text {
+:is(toolbar, .customization-palette):not(#PersonalToolbar) #zoom-controls > #zoom-reset-button > .toolbarbutton-text {
   height: 20px !important;
   min-height: 20px !important;
   font-size: 0.98em;
-  padding-block: 1px !important;
   background: hsla(0, 0%, 100%, 0.045);
   border: 1px solid var(--toolbarbutton-hover-background);
   border-radius: 10px !important;
 }
 
-toolbar:not(#PersonalToolbar) #zoom-controls separator {
+:is(toolbar, .customization-palette):not(#PersonalToolbar) #zoom-controls separator {
   display: none !important;
 }
 

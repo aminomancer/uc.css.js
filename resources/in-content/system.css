@@ -932,6 +932,144 @@
   }
 }
 
+@-moz-document url("about:sync") {
+  :root {
+    --horizon-red: hsl(346.1, 77%, 62.5%);
+    --horizon-orange: hsl(9.4, 78.4%, 72.7%);
+    --horizon-yellow: hsl(20.2, 91%, 78.2%);
+    --horizon-green: hsl(159, 69.4%, 55.4%);
+    --horizon-cyan: hsl(184.8, 67.1%, 44.1%);
+    --horizon-purple: hsl(279, 58.1%, 66.3%);
+  }
+
+  .collections,
+  .topHeader {
+    background: var(--in-content-box-background-dim) !important;
+    color: var(--in-content-page-color) !important;
+  }
+
+  .topHeader > * {
+    flex-shrink: 0 !important;
+  }
+
+  .topHeader > :first-child {
+    flex-grow: 1 !important;
+    flex-basis: min-content !important;
+  }
+
+  .panelhead {
+    background-color: var(--in-content-button-background) !important;
+  }
+
+  .panel > button::before, .panel > button::after {
+    background: var(--in-content-page-color) !important;
+  }
+
+  .collection {
+    border-color: var(--in-content-border-color) !important;
+  }
+
+  fieldset {
+    position: relative !important;
+    margin: 10px !important;
+    padding-inline: 10px !important;
+    padding-top: 2em !important;
+    border-radius: 10px !important;
+    border: none !important;
+    background: var(--in-content-box-background-dim) !important;
+  }
+
+  fieldset > legend {
+    position: absolute !important;
+    top: 0.7em !important;
+    font-size: 1.3em !important;
+    font-weight: 600 !important;
+  }
+
+  .tabs-navigation {
+    border-color: var(--in-content-border-hover) !important;
+  }
+
+  .tabs-menu-item a {
+    border: 1px solid transparent !important;
+    border-bottom: 0 !important;
+  }
+
+  .tabs-menu-item.is-active a {
+    background: var(--in-content-button-background-hover) !important;
+    border-color: var(--in-content-border-hover) !important;
+    color: inherit !important;
+  }
+
+  .tabs-menu-item:not(.is-active) a:hover {
+    background: var(--in-content-button-background) !important;
+    border-color: var(--in-content-border-color) !important;
+    color: var(--in-content-page-color) !important;
+  }
+
+  .table-inspector,
+  .table-inspector th,
+  .table-inspector td {
+    border-color: var(--in-content-border-hover) !important;
+  }
+
+  .table-inspector tr:nth-of-type(2n+1) {
+    background-color: var(--in-content-box-background-odd) !important;
+  }
+
+  .table-inspector th .resizer {
+    background-color: var(--horizon-cyan) !important;
+  }
+
+  .table-inspector th .resizer:not(:hover) {
+    opacity: 0.25 !important;
+  }
+
+  .table-inspector-string-cell {
+    color: var(--horizon-red) !important;
+  }
+
+  .table-inspector-number-cell {
+    color: var(--horizon-green) !important;
+  }
+
+  /*
+  | theme properties defined here:
+  | https://github.com/storybookjs/react-inspector/blob/master/src/styles/themes/chromeLight.tsx
+  */
+  [style*="monospace"i] {
+    font-family: Fira Code UC, Fira Code, SF Mono, -moz-fixed, monospace !important;
+    font-weight: 400 !important;
+    font-size: revert !important;
+  }
+
+  /* base */
+  [style*="color: black"i] {
+    color: var(--in-content-page-color) !important;
+  }
+
+  /* object/property name */
+  span[style*="color: rgb(136, 19, 145)"] {
+    color: var(--horizon-red) !important;
+  }
+
+  /* regexp/string/symbol */
+  span[style*="color: rgb(196, 26, 22)"] {
+    color: var(--horizon-yellow) !important;
+  }
+
+  /* primitives like boolean, number, null */
+  span[style*="color: rgb(128, 128, 128)"],
+  span[style*="color: rgb(28, 0, 207)"] {
+    color: var(--horizon-orange) !important;
+  }
+
+  /* function names */
+  span[style*="color: rgb(85, 106, 242)"] {
+    color: var(--horizon-cyan) !important;
+  }
+}
+
 /* firefox screenshots addon overlay */
 @-moz-document regexp("^moz-extension://.*/blank.html.*") {
   :root[uc-extension-id="screenshots@mozilla.org"] .all-buttons-container {

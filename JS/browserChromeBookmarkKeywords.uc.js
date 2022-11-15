@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Browser Chrome Bookmark Keywords
-// @version        1.1.4
+// @version        1.1.5
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Allow the creation of special keyword bookmarks with
@@ -153,7 +153,7 @@
       gURLBar.pickResult.BCBK_modified = true;
     }
 
-    if (!gURLBar.view._updateRow.BCBK_modified) {
+    if (gURLBar.view._updateRow && !gURLBar.view._updateRow.BCBK_modified) {
       function getUniqueId(prefix) {
         return prefix + (gURLBar.view.uniqueIdSerial++ % 9999);
       }

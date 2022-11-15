@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Navbar Toolbar Button Slider
-// @version        2.8.5
+// @version        2.8.6
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Wrap all toolbar buttons in a scrollable container. It can
@@ -142,7 +142,7 @@ class NavbarToolbarSlider {
       this.navbar.getAttribute("customizationtarget")
     );
     this.cOverflow = document.getElementById(
-      this.navbar.getAttribute("overflowtarget")
+      this.navbar.getAttribute("default-overflowtarget")
     );
     this.contextMenu = document.getElementById("toolbar-context-menu");
     this.urlbar = document.getElementById("urlbar-container");
