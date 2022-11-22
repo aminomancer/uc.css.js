@@ -7,11 +7,11 @@
 # **uc.css.js**
 
 <p align="center">
-<a href="/../../archive/HEAD.zip" title="Download the latest release package" aria-label="Download the latest release package"><img src=".readme/download.png" alt="Download" height="32"></a>
-<a href="/../../subscription" title="Get update notifications" aria-label="Get update notifications"><img src=".readme/watch.png" alt="Watch" height="32"></a>
-<a href="/../../issues/new/choose" title="Report a bug or request a new feature" aria-label="Report a bug or request a new feature"><img src=".readme/issue.png" alt="Issue" height="32"></a>
-<a href="/../../discussions" title="Ask a question or discuss with other users" aria-label="Ask a question or discuss with other users"><img src=".readme/discuss.png" alt="Discuss" height="32"></a>
-<a href="/../../fork" title="Make your own copy of this project" aria-label="Make your own copy of this project"><img src=".readme/fork.png" alt="Fork" height="32"></a>
+<a href="https://github.com/aminomancer/uc.css.js/archive/HEAD.zip" title="Download the latest release package" aria-label="Download the latest release package"><img src=".readme/download.png" alt="Download" height="32"></a>
+<a href="https://github.com/aminomancer/uc.css.js/subscription" title="Get update notifications" aria-label="Get update notifications"><img src=".readme/watch.png" alt="Watch" height="32"></a>
+<a href="https://github.com/aminomancer/uc.css.js/issues/new/choose" title="Report a bug or request a new feature" aria-label="Report a bug or request a new feature"><img src=".readme/issue.png" alt="Issue" height="32"></a>
+<a href="https://github.com/aminomancer/uc.css.js/discussions" title="Ask a question or discuss with other users" aria-label="Ask a question or discuss with other users"><img src=".readme/discuss.png" alt="Discuss" height="32"></a>
+<a href="https://github.com/aminomancer/uc.css.js/fork" title="Make your own copy of this project" aria-label="Make your own copy of this project"><img src=".readme/fork.png" alt="Fork" height="32"></a>
 <a href="https://github.com/aminomancer" title="Follow my work" aria-label="Follow my work"><img src=".readme/follow.png" alt="Follow" height="32"></a>
 <!-- <a href="https://github.com/sponsors/aminomancer" title="Become a sponsor" aria-label="Become a sponsor"><img src=".readme/sponsor.png" alt="Sponsor" height="32"></a> --><br/>
 A Firefox theme (duskFox) and a variety of privileged scripts to add new behaviors and functions.
@@ -288,7 +288,7 @@ Language packs installed this way will need to be updated manually, following th
 
 <br/>
 
-[Release packages](/../../releases/) are available as a courtesy, but since the theme and scripts are updated on a daily basis to keep up with Nightly, the latest release package may not be completely up to date. If you want the very latest stylesheets/scripts, you should either [download the source code](/../../archive/HEAD.zip) and drag its contents to your profile's `chrome` folder, [clone the repo][cloning a repo] directly to your `chrome` folder, (use [GitHub Desktop][] if all of this sounds like gibberish to you) or download individual folders with [GitZip][] or [Refined GitHub][].
+[Release packages](https://github.com/aminomancer/uc.css.js/releases/) are available as a courtesy, but since the theme and scripts are updated on a daily basis to keep up with Nightly, the latest release package may not be completely up to date. If you want the very latest stylesheets/scripts, you should either [download the source code](https://github.com/aminomancer/uc.css.js/archive/HEAD.zip) and drag its contents to your profile's `chrome` folder, [clone the repo][cloning a repo] directly to your `chrome` folder, (use [GitHub Desktop][] if all of this sounds like gibberish to you) or download individual folders with [GitZip][] or [Refined GitHub][].
 
 </details>
 
@@ -327,7 +327,7 @@ The sheet loader that comes with fx-autoconfig will work just fine, and has one 
 
 After you've installed the files, the script loader will locate any scripts you place in the proper folder that end in `.uc.js`. Once you have this set up you can download scripts, put them in the correct folder for your script loader, restart, and you should see the changes immediately. When updating scripts, be sure to clear your startup cache. With fx-autoconfig, you can click "Tools" in the menubar, then "userScripts," then "Restart now!" and it will clear the startup cache as it restarts. If you install [App Menu Mods](#app-menu-mods), there will also be a restart button in the app menu (the hamburger button at the end of the navbar). Right-clicking or Ctrl+clicking this button will clear the cache and restart. To manually clear the startup cache, you can navigate to `about:profiles` and click the "Open Folder" button in your profile's local directory row. Then quit Firefox, and in the local directory delete the folder labeled `startupCache` before restarting the browser.
 
-Firefox is updated every night, so my theme and scripts are updated on a regular basis to ensure compatibility with the latest build from [mozilla-central][], which is distributed through the [Firefox Nightly][] branch. This means that files on this repo are not expected to be compatible with every Stable, ESR, Beta, or Developer Edition release of Firefox — only _Nightly_. If you update Firefox and a script stops working, or your UI suddenly looks ugly, check the repo to make sure your scripts are up to date. Compare the `@version` number at the top of a given file to the version of your copy. If your problem is still present, feel free to post in the [Issues](/../../issues/) section.
+Firefox is updated every night, so my theme and scripts are updated on a regular basis to ensure compatibility with the latest build from [mozilla-central][], which is distributed through the [Firefox Nightly][] branch. This means that files on this repo are not expected to be compatible with every Stable, ESR, Beta, or Developer Edition release of Firefox — only _Nightly_. If you update Firefox and a script stops working, or your UI suddenly looks ugly, check the repo to make sure your scripts are up to date. Compare the `@version` number at the top of a given file to the version of your copy. If your problem is still present, feel free to post in the [Issues][] section.
 
 If you use any of my scripts, please disable telemetry. If you use one of my [user.js files](/prefs), it will handle this for you. Otherwise, you can disable telemetry by navigating to `about:preferences#privacy` and unticking the boxes towards the bottom that say "Allow Nightly to send technical and interaction data to Mozilla" and "Allow Nightly to install and run studies." Because we're modifying the way the browser's internal systems work, sending Mozilla data about your browser environment is useless and may actually confound their studies. Any interaction data emitted by functions that we modify with these scripts has the potential to confuse and mislead Firefox developers and waste valuable time.
 
@@ -748,7 +748,7 @@ This script also has some conditional functions to work together with [Scrolling
 
 #### [Open Bookmarks, History, etc. in New Tabs](/JS/openBookmarksHistoryEtcInNewTabs.uc.js):
 
-In vanilla Firefox, `browser.tabs.loadBookmarksInTabs` only affects bookmark items. When you enable this pref and left-click a bookmark (e.g., in the bookmarks toolbar or menu) it opens in a new tab instead of in the current tab. But if you left-click a history entry or a synced tab, it will still open in the current tab. So you'd have to middle click or ctrl+click to avoid losing your current tab's navigation state. This script just makes that preference apply to history and synced tabs too. It works in every place in the UI (that I'm aware of) from which bookmarks, history or synced tabs can be opened. If you find something this doesn't apply to, please post an [issue](/../../issues/). This script only changes the behavior of `browser.tabs.loadBookmarksInTabs` — you still need to set this pref to true if you want to see any effect.
+In vanilla Firefox, `browser.tabs.loadBookmarksInTabs` only affects bookmark items. When you enable this pref and left-click a bookmark (e.g., in the bookmarks toolbar or menu) it opens in a new tab instead of in the current tab. But if you left-click a history entry or a synced tab, it will still open in the current tab. So you'd have to middle click or ctrl+click to avoid losing your current tab's navigation state. This script just makes that preference apply to history and synced tabs too. It works in every place in the UI (that I'm aware of) from which bookmarks, history or synced tabs can be opened. If you find something this doesn't apply to, please post an [issue][issues]. This script only changes the behavior of `browser.tabs.loadBookmarksInTabs` — you still need to set this pref to true if you want to see any effect.
 
 #### [Open Bookmark in Container Tab (context menu)](/JS/openBookmarkInContainerTab.uc.js):
 
@@ -1024,7 +1024,7 @@ So, this gives you some capabilities not already available in Firefox. In partic
 
 #### [Tab Thumbnail Tooltip](/JS/tabThumbnailTooltip.uc.js):
 
-Show a large thumbnail image to preview tab content when hovering a tab. Made [by request]("/../../issues/29").
+Show a large thumbnail image to preview tab content when hovering a tab. Made [by request](https://github.com/aminomancer/uc.css.js/issues/29).
 
 #### [Tab Tooltip Navigation Buttons](/JS/tabTooltipNavButtons.uc.js):
 
@@ -1279,7 +1279,7 @@ Various tiny mods not worth making separate scripts for. Read the comments [insi
     <li><a href="https://github.com/henryxrl"><img src="https://avatars.githubusercontent.com/u/7662954?v=4" width="14"/> Henry Xu (henryxrl)</a></li>
 </ul>
 
-I've stopped accepting personal donations for the foreseeable future. But if you still want to offer me some encouragement, I would be immensely gratified if you would support the adoption of orphans with special needs by [contributing to Reece's Rainbow][reece's rainbow]. Without a major boost in fundraising, many of these children are likely to remain trapped in austere conditions [for their entire lives][guardian orphanages article]. If you donate, please save the confirmation and post it [in a new issue](/../../issues/new/choose), and I'll add it to the list above.
+I've stopped accepting personal donations for the foreseeable future. But if you still want to offer me some encouragement, I would be immensely gratified if you would support the adoption of orphans with special needs by [contributing to Reece's Rainbow][reece's rainbow]. Without a major boost in fundraising, many of these children are likely to remain trapped in austere conditions [for their entire lives][guardian orphanages article]. If you donate, please save the confirmation and post it [in a new issue](https://github.com/aminomancer/uc.css.js/issues/new/choose), and I'll add it to the list above.
 
 ## **Other useful links:**
 
@@ -1324,6 +1324,10 @@ I've stopped accepting personal donations for the foreseeable future. But if you
 [JavaScript: Understanding the Weird Parts](https://www.udemy.com/course/understand-javascript): A really good course if you're trying to learn JavaScript from scratch. It doesn't concern the many internal APIs/components that you'd use in Firefox scripts, like XPCOM, but you definitely want to know most of this stuff beforehand to avoid wasting a lot of time.
 
 </details>
+
+<!-- Internal Links -->
+
+[issues]: https://github.com/aminomancer/uc.css.js/issues/ "Issues"
 
 <!-- Addon Links -->
 
