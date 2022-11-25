@@ -64,6 +64,12 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
     background: none;
   }
 
+  panel[type="autocomplete-richlistbox"]::part(content) {
+    padding: var(--panel-padding);
+    box-shadow: var(--uc-panel-shadow);
+    margin: var(--menupopup-inner-box-margin);
+  }
+
   panel[type="autocomplete-richlistbox"][anchored-on-panel],
   panel popupset panel[type="autocomplete-richlistbox"] {
     --panel-background: var(--autocomplete-background);

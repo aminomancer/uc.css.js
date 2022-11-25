@@ -192,7 +192,7 @@ The theme is tightly integrated with some (though not all) of the scripts on thi
 
 #### **Resources & manifest:**
 
-If you haven't already, download the [resources](/resources) folder and place it in your `chrome` folder, along with the CSS files. fx-autoconfig will automatically register this folder to the path `chrome://userchrome/content/`. This theme also requires downloading [utils/chrome.manifest](/utils/chrome.manifest). Most of the theme will work without it, but it's crucial for certain things.<details><summary>📦 <b><i>Here's why... (click to expand)</i></b></summary>
+If you haven't already, download the [resources](/resources) folder and place it in your `chrome` folder, along with the CSS files. fx-autoconfig will automatically register this folder to the path `chrome://userchrome/content/`. This theme also requires downloading [utils/chrome.manifest](/utils/chrome.manifest). Most of the theme will work without it, but it's crucial for certain things.<details><summary>📦 **_Click for more info..._**</summary>
 
 In particular, it replaces some icons and modifies some internal scripts and stylesheets that would be very hard to override with either CSS or javascript. Simply replace the chrome.manifest file from fx-autoconfig with my version. This will strictly redirect some `chrome://` URIs from the vanilla files to files from this theme, so the changes will apply globally. Without this, it would be very difficult to do certain things. We use this to restore the pre-Proton tab sound icons, to change the appearance of plaintext files and other lower-level internal pages, and to change the styling for very hard-to-reach elements.
 
@@ -351,7 +351,7 @@ There's another script called [Browser Toolbox Stylesheet Loader](#browser-toolb
 
 But by itself it doesn't do anything. It only works in conjunction with modifications I made to fx-autoconfig. I won't upload the modified script loader since it's not my original work, but you can either 1) follow the instructions below to modify it yourself; or 2) just copy all the contents of your `chrome` folder into `{your profile folder}/chrome_debugger_profile/chrome/`.
 
-The problem with copying everything to `chrome_debugger_profile` is that you may need to reset the debugger profile from time to time. That's why I worked out a method for dynamically loading the main profile's scripts and stylesheets into toolbox processes without modifying the debugger profile.<details><summary>🧰 <i><b>Click here for instructions... (it's pretty fast)</b></i></summary>
+The problem with copying everything to `chrome_debugger_profile` is that you may need to reset the debugger profile from time to time. That's why I worked out a method for dynamically loading the main profile's scripts and stylesheets into toolbox processes without modifying the debugger profile.<details><summary>🧰 **_Click here for instructions... (it's pretty fast)_**</summary>
 
 1. Download and install [fx-autoconfig][] as normal.
 2. Open `config.js` from your Firefox installation folder, in a text editor.
@@ -439,7 +439,7 @@ For linting/formatting, I use ESLint, Prettier, and Mozilla's ESLint plugin. All
 
 #### [about:cfg](/JS/aboutCfg.uc.js):
 
-Registers the old-school about:config page to the URL `about:cfg`. Intended for use with earthlng's [aboutconfig][] module.<details><summary>💬 <b><i>More details...</i></b></summary>
+Registers the old-school about:config page to the URL `about:cfg`. Intended for use with earthlng's [aboutconfig][] module.<details><summary>💬 **_More details..._**</summary>
 
 That module restores the old pre-87 about:config page, but gives it a long-winded URL like `chrome://userchromejs/content/aboutconfig/config.xhtml` which takes a lot longer to type in and doesn't look very elegant. This script finds the URL for that module and registers it to an about: URL so it counts as a chrome UI page. We're not just faking it, this makes it a bona-fide about: page. That means you can navigate to it by just typing about:cfg in the urlbar, and also means the identity icon will show it as a secure system page rather than a local file. It even means about:cfg will show up on the about:about page! For instructions on installing earthlng's aboutconfig module for fx-autoconfig, please see the next script description below.
 
@@ -449,7 +449,7 @@ There's a config setting in the script if you want to change the "cfg" in about:
 
 #### [App Menu about:config Button](/JS/appMenuAboutConfigButton.uc.js):
 
-Adds an about:config shortcut button to the main app menu panel, under the built-in Settings button. It can open the built-in about:config page, or it can open the old-school about:config page with earthlng's [aboutconfig][] module. <details><summary>💬 <i><b>To use earthlng's about:config page with fx-autoconfig...</b></i></summary>
+Adds an about:config shortcut button to the main app menu panel, under the built-in Settings button. It can open the built-in about:config page, or it can open the old-school about:config page with earthlng's [aboutconfig][] module. <details><summary>💬 **_To use earthlng's about:config page with fx-autoconfig..._**</summary>
 
 download ONLY the profile/chrome/utils/aboutconfig folder and place it inside your profile/chrome/resources folder. Then open `config.xhtml` and find & replace "userchromejs" with "userchrome" and save. Now `chrome://userchrome/content/aboutconfig/config.xhtml` should be the correct URL, and the script will find it there. If it's not present there or at `chrome://userchromejs/content/aboutconfig/config.xhtml` (the default if you only use earthlng's module without fx-autoconfig) or `chrome://userchromejs/content/aboutconfig/aboutconfig.xhtml`, (the default for xiaoxiaoflood's version) then the script will use the vanilla "about:config" URL instead.
 
@@ -463,7 +463,7 @@ Makes some minor modifications to the app menu, aka the hamburger menu. It adds 
 
 #### [All Tabs Menu Expansion Pack](/JS/allTabsMenuExpansionPack.uc.js):
 
-This script adds several new features to the "all tabs menu" to help it catch up to the functionality of the regular tabs bar.<details><summary>💬 <i><b>More details...</b></i></summary>
+This script adds several new features to the "all tabs menu" to help it catch up to the functionality of the regular tabs bar.<details><summary>💬 **_More details..._**</summary>
 
 <img src="preview/prev-alltabs-xpac.webp"/>
 
@@ -491,7 +491,7 @@ All the relevant CSS for this script is already included in and loaded by the sc
 
 #### [Vertical Tabs Pane](/JS/verticalTabsPane.uc.js):
 
-This script create a vertical pane across from the sidebar that functions like the vertical tabs pane in Microsoft Edge.<details><summary>💬 <i><b>More details...</b></i></summary>
+This script create a vertical pane across from the sidebar that functions like the vertical tabs pane in Microsoft Edge.<details><summary>💬 **_More details..._**</summary>
 
 <img src="preview/prev-vertical-tabs-pane.webp"/>
 
@@ -520,7 +520,7 @@ In order to make the scrolling feel just like the built-in tabs bar, I used an `
 
 Adds a new toolbar button for devtools features. Probably the single most valuable file on this repo, in my opinion. 1) opens the content toolbox on left click; 2) opens the browser toolbox on right click; 3) toggles "Popup Auto-Hide" on middle click. Mouse buttons can be configured by preference. On macOS, Ctrl+left click is equivalent to right click. By default, it also disables popup auto-hide when you open a toolbox window, and re-enables it when you close the toolbox. (there's a pref to disable this feature)
 
-The icon changes to show whether popup auto-hide is enabled or disabled, and a badge on the button shows whether any toolbox windows are open. Middle-clicking to toggle popup auto-hide also shows a brief confirmation hint, to make it easier to keep track of the state of the preference. See the description at the top of the file for details about usage, configuration, and localization.<details><summary>📽 <i><b>Click here for a preview of the toolbox button's middle click function...</b></i></summary>
+The icon changes to show whether popup auto-hide is enabled or disabled, and a badge on the button shows whether any toolbox windows are open. Middle-clicking to toggle popup auto-hide also shows a brief confirmation hint, to make it easier to keep track of the state of the preference. See the description at the top of the file for details about usage, configuration, and localization.<details><summary>📽 **_Click here for a preview of the toolbox button's middle click function..._**</summary>
 
 <img src="preview/prev-popup-autohide.webp"/>
 
@@ -536,7 +536,7 @@ Adds some shortcuts for bookmarking pages. First, middle-clicking the bookmarks 
 
 #### [Browser Chrome Bookmark Keywords](/JS/browserChromeBookmarkKeywords.uc.js):
 
-Allow the creation of special keyword bookmarks with JavaScript to be executed in the browser chrome (i.e., the main window).<details><summary>💬 <i><b>More details...</b></i></summary>
+Allow the creation of special keyword bookmarks with JavaScript to be executed in the browser chrome (i.e., the main window).<details><summary>💬 **_More details..._**</summary>
 
 In case you weren't aware, Firefox has an old feature, somewhat obscure now, that lets you define [keyword shortcuts for bookmarks][]. Once a bookmark is given a keyword, you can type the keyword into the urlbar and Firefox will offer the corresponding bookmark as a result. If the bookmark URL includes the placeholder `%s`, it will be replaced by whatever you typed after the keyword. You can use this to search specific webpages, but you can also use the `javascript:` URL protocol to run JavaScript in the current tab. That is all built into Firefox.
 
@@ -572,13 +572,21 @@ There are some configuration settings in the script if you want to format things
 
 Place a "Clear Downloads" button in the downloads panel, right next to the "Show all downloads" button.
 
+#### [Context Menu Mods](/JS/contextMenuMods.uc.js):
+
+Adds new, optional items to the main context menu.<details><summary>📋 **_See the current list..._**</summary>
+
+- **Replace search menuitem with submenu** — Replaces the `Search Google for <selected text>` menu item with a submenu that includes all of the search engines you have installed. This is significantly faster than copying the selection, opening the urlbar, picking a search mode, pasting the selection, and hitting Enter.
+
+</details>
+
 #### [Copy Current URL Hotkey](/JS/copyCurrentUrlHotkey.uc.js):
 
 Adds a new hotkey (Ctrl+Alt+C by default) that copies whatever is in the urlbar, even when it's not in focus. Key and modifiers are configurable in the script file.
 
 #### [Debug Extension in Toolbar Context Menu](/JS/debugExtensionInToolbarContextMenu.uc.js):
 
-Adds a new context menu for debugging, modding, or styling Firefox extensions. Very handy for Firefox CSS themers and extension designers.<details><summary>💬 <i><b>More details...</b></i></summary>
+Adds a new context menu for debugging, modding, or styling Firefox extensions. Very handy for Firefox CSS themers and extension designers.<details><summary>💬 **_More details..._**</summary>
 
 The menu appears any time the "Manage Extension" and "Remove Extension" items are available. The new "Debug Extension" menu contains several items: _"Extension Manifest"_ opens the extension's manifest directly in a new tab. Aside from reading the manifest, from there you can also view the whole contents of the extension within Firefox by removing "/manifest.json" from the URL.
 
@@ -594,7 +602,7 @@ _"Inspect Extension"_ opens a devtools tab targeting the extension background. T
 
 #### [Extension Options Panel](/JS/extensionOptionsPanel.uc.js):
 
-This script creates a toolbar button that opens a popup panel where extensions can be configured, disabled, uninstalled, etc.<details><summary>💬 <i><b>More details...</b></i></summary>
+This script creates a toolbar button that opens a popup panel where extensions can be configured, disabled, uninstalled, etc.<details><summary>💬 **_More details..._**</summary>
 
 Each extension gets its own button in the panel. Clicking an extension's button leads to a subview where you can jump to the extension's options, disable or enable the extension, uninstall it, configure automatic updates, disable/enable it in private browsing, view its source code in whatever program is associated with .xpi files, open the extension's homepage, or copy the extension's ID. The panel can also be opened from the App Menu, since the built-in "Add-ons and themes" button is (optionally) modified to open the panel instead of about:addons. Since v1.8, themes will also be listed in the panel. Hovering a theme will show a tooltip with a preview/screenshot of the theme, and clicking the theme will toggle it on or off. The script can be extensively configured by editing the values in `static config` on line 11.<details><summary>📽 <i><b>Click here for a preview...</b></i></summary>
 
@@ -606,7 +614,7 @@ Each extension gets its own button in the panel. Clicking an extension's button 
 
 #### [Extension Stylesheet Loader](/JS/extensionStylesheetLoader.uc.js):
 
-✨ This script is required if you want my "dark mode" themes for various addons like uBlock Origin, Dark Reader, etc. It allows loading CSS rules in addon documents based on ID (which is static), rather than by addon URL (which is random).<details><summary>💬 <i><b>More details...</b></i></summary>
+✨ This script is required if you want my "dark mode" themes for various addons like uBlock Origin, Dark Reader, etc. It allows loading CSS rules in addon documents based on ID (which is static), rather than by addon URL (which is random).<details><summary>💬 **_More details..._**</summary>
 
 Normally if you want to style an addon's docs with userContent.css, you need to use `@-moz-document url("moz-extension://c1ea5f85-7682-4d41-86cf-4946657a712e/popup.html")` to avoid styling unintended documents. But this isn't ideal since that URL is generated randomly when you install the addon. It's unique for every installation for every user. So if you have been using duskFox, you've been downloading my extension stylesheets even though they don't work on your installation. Well, no longer!
 
@@ -622,7 +630,7 @@ Adds a toolbar button that implements the color picker without launching the dev
 
 #### [Findbar Mods](/JS/findbarMods.uc.js):
 
-✨ This script adds several improvements and modifications for the findbar, and (optionally) makes it much more horizontally compact and concise by removing wasted space and unnecessary words.<details><summary>💬 <i><b>More details...</b></i></summary>
+✨ This script adds several improvements and modifications for the findbar, and (optionally) makes it much more horizontally compact and concise by removing wasted space and unnecessary words.<details><summary>💬 **_More details..._**</summary>
 
 <img src="preview/findbar.webp"/>
 
@@ -646,7 +654,7 @@ Adds a toolbar button that implements the color picker without launching the dev
 
 #### [Fix Titlebar Button Tooltips](/JS/fixTitlebarTooltips.uc.js):
 
-✨ This script is important if you use my theme or if you customize Firefox's tooltips on your own. Without it, the titlebar buttons' tooltips can't be styled.<details><summary>💬 <i><b>More details...</b></i></summary>
+✨ This script is important if you use my theme or if you customize Firefox's tooltips on your own. Without it, the titlebar buttons' tooltips can't be styled.<details><summary>💬 **_More details..._**</summary>
 
 Since [bug 1730309][], Firefox has tried to make the titlebar buttons (window controls) function more like native controls. In doing so, it allows the OS to draw tooltips for these buttons. So it prevents itself from showing redundant tooltips. That means we can't style the titlebar buttons' tooltips, they don't obey preferences, they disappear after 5 seconds on Windows, and they don't appear at all in fullscreen mode. Personally I would not be a fan of this change even if I didn't heavily customize Firefox's tooltips, because no matter what, OS tooltips are not going to be consistent with Firefox's tooltips, for reasons I mentioned. But in any case, we can fix this issue with JavaScript. If you were curious, it's caused by the _[titlebar-btn][]_ attribute.
 
@@ -654,7 +662,7 @@ Since [bug 1730309][], Firefox has tried to make the titlebar buttons (window co
 
 #### [Floating Sidebar Resizer](/JS/floatingSidebarResizer.uc.js):
 
-✨ [uc-sidebar.css](/uc-sidebar.css) makes the sidebar float over the content without flexing it, but that changes the way sidebar resizing works. This script is required to make the floating sidebar resizable.<details><summary>💬 <i><b>More details...</b></i></summary>
+✨ [uc-sidebar.css](/uc-sidebar.css) makes the sidebar float over the content without flexing it, but that changes the way sidebar resizing works. This script is required to make the floating sidebar resizable.<details><summary>💬 **_More details..._**</summary>
 
 It also optionally improves the hotkeys a little bit so that Ctrl+B (or Cmd+B) toggles the sidebar on/off instead of exclusively opening the bookmarks sidebar. Instead the hotkey to jump to the bookmarks sidebar has been remapped to Ctrl+Shift+B. This key combination normally toggles the bookmarks toolbar on and off, but I figured it was worth replacing, since you probably either never use the bookmarks toolbar, or keep it open it all the time. Whereas the sidebar is something you're going to want to turn off when you're done using it, since it takes up a lot of space.
 
@@ -678,7 +686,7 @@ All this does is remap the fullscreen shortcut key from F11 to Ctrl+E, since I u
 
 #### [Auto-hide Navbar Support](/JS/autoHideNavbarSupport.uc.js):
 
-✨ Hides the navbar in fullscreen with a smooth animation, and reveals it when the navbar is hovered or focused _or_ when context menus, panels, etc. are opened from the navbar.<details><summary>💬 <i><b>More details...</b></i></summary>
+✨ Hides the navbar in fullscreen with a smooth animation, and reveals it when the navbar is hovered or focused _or_ when context menus, panels, etc. are opened from the navbar.<details><summary>💬 **_More details..._**</summary>
 
 In Firefox, the navbar hides automatically in fullscreen. But it doesn't have a very smooth animation, and it doesn't handle all possible cases where you'd want the navbar to stay open. This script sets up its own logic to allow CSS transitions to cover the animation. You can use this for any toolbar, whether in fullscreen or not. duskFox just uses it for the navbar while in fullscreen, but your CSS can use it under any circumstances with `popup-status="true"`. That is, you can use this to hide an element and reveal it when menus or panels are opened from the navbar. The CSS transitions are in [uc-fullscreen.css](/uc-fullscreen.css) but you can also do your own thing with this script by using selectors like `box[popup-status="true"] > #navigator-toolbox > whatever`
 
@@ -700,7 +708,7 @@ Previously I just disabled pointer events on the icon when it was supposed to be
 
 #### [Hit Enter in Urlbar to Refresh](/JS/enterInUrlbarToRefresh.uc.js):
 
-Allows you to refresh pages by hitting Enter in the urlbar, even if there's a hash mark `#` in the URL.<details><summary>💬 <i><b>More details...</b></i></summary>
+Allows you to refresh pages by hitting Enter in the urlbar, even if there's a hash mark `#` in the URL.<details><summary>💬 **_More details..._**</summary>
 
 Due to Firefox's named anchor navigation system, you can't always refresh a page by clicking the urlbar and hitting Enter. If there's a hash mark `#` in the URL, Firefox interprets this as a URL fragment and tries to navigate between anchors within the document, by setting the scroll position and not reloading the document. This works great when clicking links on pages that link to other parts of the page, and when typing new fragments after the hash in the URL.
 
@@ -712,7 +720,7 @@ With this installed, hitting Enter in the urlbar when the typed value is the sam
 
 #### [Let Ctrl+W Close Pinned Tabs](/JS/letCtrlWClosePinnedTabs.uc.js):
 
-The name should say it all — this just removes the "feature" that prevents you from closing pinned tabs with the Ctrl+W/Cmd+W shortcut.<details><summary>💬 <i><b>More details...</b></i></summary>
+The name should say it all — this just removes the "feature" that prevents you from closing pinned tabs with the Ctrl+W/Cmd+W shortcut.<details><summary>💬 **_More details..._**</summary>
 
 I can't think of any good reason for this, it's not like your hand is likely to slip and hit Ctrl+W by accident. And freeing up the key combination isn't helpful, since every web and extension developer knows the key combination is already taken by every major browser. Blocking the hotkey on pinned tabs just wastes a prime key combination, as well as the user's time.
 
@@ -720,7 +728,7 @@ I can't think of any good reason for this, it's not like your hand is likely to 
 
 #### [Navbar Toolbar Button Slider](/JS/navbarToolbarButtonSlider.uc.js):
 
-✨ My masterpiece, wrap all toolbar buttons after `#urlbar-container` in a scrollable div. It can scroll horizontally through the buttons by scrolling up/down with a mousewheel, like the tab bar. This is meant to replace the widget overflow button that appears to the right of your other toolbar buttons when you have too many to display all at once. Instead of clicking to open a dropdown that has the rest of your toolbar buttons, you can just place all of them in a little horizontal scrollbox. Better yet, you can scroll through them with mousewheel up/down, just like the tab bar. This and the toolbox button have been the most valuable for me personally.<details><summary>⚙ <i><b>For user configuration...</b></i></summary>
+✨ My masterpiece, wrap all toolbar buttons after `#urlbar-container` in a scrollable div. It can scroll horizontally through the buttons by scrolling up/down with a mousewheel, like the tab bar. This is meant to replace the widget overflow button that appears to the right of your other toolbar buttons when you have too many to display all at once. Instead of clicking to open a dropdown that has the rest of your toolbar buttons, you can just place all of them in a little horizontal scrollbox. Better yet, you can scroll through them with mousewheel up/down, just like the tab bar. This and the toolbox button have been the most valuable for me personally.<details><summary>⚙ **_For user configuration..._**</summary>
 
 This script has several options which can be modified in about:config. By default, it wraps all toolbar buttons that come _after_ the urlbar. (to the right of the urlbar, normally) You can edit `userChrome.toolbarSlider.wrapButtonsRelativeToUrlbar` in about:config to change this: the default value is `after`; a value of `before` will wrap all buttons to the left of the urlbar; and a value of `all` will wrap all buttons.
 
@@ -752,7 +760,7 @@ In vanilla Firefox, `browser.tabs.loadBookmarksInTabs` only affects bookmark ite
 
 #### [Open Bookmark in Container Tab (context menu)](/JS/openBookmarkInContainerTab.uc.js):
 
-Adds a new menu to context menus prompted by right-clicking bookmarks, history entries, etc. that allows you to open them in a container tab. This menu has now been added to Firefox, but as of v105, it only applies to single bookmarks/tabs. With the script installed, it will also appear when right-clicking a folder or a synced device.<details><summary>💬 <i><b>More details...</b></i></summary>
+Adds a new menu to context menus prompted by right-clicking bookmarks, history entries, etc. that allows you to open them in a container tab. This menu has now been added to Firefox, but as of v105, it only applies to single bookmarks/tabs. With the script installed, it will also appear when right-clicking a folder or a synced device.<details><summary>💬 **_More details..._**</summary>
 
 The menu will be present in _all_ context menus where you'd be able to open a bookmark, history entry, or synced tab, including menus, popups, panels, and even the Library/Bookmarks Manager window. However, for synced tabs, it will only be present in the sidebar, not in the profile panel, because the profile panel lacks a context menu.
 
@@ -764,7 +772,7 @@ If you use both this script and Firefox Multi-Account Containers, turn off the r
 
 #### [Open Link in Unloaded Tab (context menu item)](/JS/openLinkInUnloadedTab.uc.js):
 
-Add a new context menu item that can open links in tabs without loading them.<details><summary>💬 <i><b>More details...</b></i></summary>
+Add a new context menu item that can open links in tabs without loading them.<details><summary>💬 **_More details..._**</summary>
 
 The item will appear in all context menus that are prompted by right-clicking on links or other link-like affordances. The menu item will open the link in a new background tab, which will start unloaded or "discarded." Specifically, the context menu entry appears in the content area context menu when right-clicking a link; and in every context menu where bookmarks, history, or synced tabs can be interacted with — sidebar, menubar, toolbar, toolbar button popup, and library window.
 
@@ -774,7 +782,7 @@ This has one user configuration preference: `userChrome.openLinkInUnloadedTab.us
 
 #### [Private Tabs](/JS/privateTabs.uc.js):
 
-Adds buttons and menu items allowing you to open a "private tab" in nearly any circumstance in which you'd be able to open a normal tab. Instead of opening a link in a private window, you can open it in a private _tab_.<details><summary>💬 <i><b>More details...</b></i></summary>
+Adds buttons and menu items allowing you to open a "private tab" in nearly any circumstance in which you'd be able to open a normal tab. Instead of opening a link in a private window, you can open it in a private _tab_.<details><summary>💬 **_More details..._**</summary>
 
 This started as an fx-autoconfig port of [Private Tab][] by xiaoxiaoflood. This will use a special container and prevent history storage, depending on user configuration. You can also toggle tabs back and forth between private and normal mode. This script adds two hotkeys: Ctrl+Alt+P to open a new private tab, and Ctrl+Alt+T to toggle private mode for the active tab. These hotkeys can be configured along with several other options at the top of the script file.
 
@@ -790,7 +798,7 @@ By default, private windows are opened to about:privatebrowsing, regardless of y
 
 #### [Restore pre-Proton Tab Sound Button](/JS/restoreTabSoundButton.uc.js):
 
-✨ Proton removes the tab sound button and (imo) makes the tab sound tooltip look silly. This restores both, but requires some extra steps and CSS.<details><summary>💬 <i><b>More details...</b></i></summary>
+✨ Proton removes the tab sound button and (imo) makes the tab sound tooltip look silly. This restores both, but requires some extra steps and CSS.<details><summary>💬 **_More details..._**</summary>
 
 If you want to use my sound icon styles, see [uc-tabs.css](/uc-tabs.css#L503). This script _requires_ that you either:
 
@@ -801,7 +809,7 @@ If you want to use my sound icon styles, see [uc-tabs.css](/uc-tabs.css#L503). T
 override chrome://browser/content/tabbrowser-tab.js ../resources/tabMods.uc.js
 ```
 
-For those who are curious, this will override the tab markup template and some methods relevant to the sound & overlay icons. We can't use a normal script to do this because, by the time a script can change anything, browser.xhtml has already loaded tabbrowser-tab.js, the tab custom element has already been defined, and tabs have already been created with the wrong markup. This wasn't required in the past because `.tab-icon-sound` wasn't fully removed, just hidden. But as of June 06, 2021, the sound button is entirely gone in vanilla Firefox 91. So [tabMods.uc.js](/resources/script-override/tabMods.uc.js) restores the markup and class methods; [restoreTabSoundButton.uc.js](/JS/restoreTabSoundButton.uc.js) restores and improves the tooltip; and [uc-tabs.css](/uc-tabs.css#L503) rebuilds the visual appearance.<details><summary>If you don't use my theme, restoring the sound button will also require some CSS.<br/>📋 <i><b>Click to expand...</b></i></summary>
+For those who are curious, this will override the tab markup template and some methods relevant to the sound & overlay icons. We can't use a normal script to do this because, by the time a script can change anything, browser.xhtml has already loaded tabbrowser-tab.js, the tab custom element has already been defined, and tabs have already been created with the wrong markup. This wasn't required in the past because `.tab-icon-sound` wasn't fully removed, just hidden. But as of June 06, 2021, the sound button is entirely gone in vanilla Firefox 91. So [tabMods.uc.js](/resources/script-override/tabMods.uc.js) restores the markup and class methods; [restoreTabSoundButton.uc.js](/JS/restoreTabSoundButton.uc.js) restores and improves the tooltip; and [uc-tabs.css](/uc-tabs.css#L503) rebuilds the visual appearance.<details><summary>If you don't use my theme, restoring the sound button will also require some CSS.<br/>📋 **_Click to expand..._**</summary>
 
 ```css
 .tab-icon-sound {
@@ -889,7 +897,7 @@ For those who are curious, this will override the tab markup template and some m
 
 #### [Restore pre-Proton Arrowpanels](/JS/restorePreProtonArrowpanels.uc.js):
 
-✨ Bring back the arrows at the top corner of panels (like the app menu or the history button's popup panel).<details><summary>💬 <i><b>Requires some additional files...</b></i></summary>
+✨ Bring back the arrows at the top corner of panels (like the app menu or the history button's popup panel).<details><summary>💬 **_Requires some additional files..._**</summary>
 
 This script will basically restore the arrows at the corner of panels that point at the element to which the panel is anchored. But in order to do that, you also need to install these files from the [resources/script-override](/resources/script-override/) folder: [panel.js](/resources/script-override/panel.js), [places-menupopup.js](/resources/script-override/places-menupopup.js), and [translation-notification.js](/resources/script-override/translation-notification.js). After downloading them and placing them in your own `resources/script-override` folder, add the following lines to your [chrome.manifest](/utils/chrome.manifest) file:
 
@@ -903,7 +911,7 @@ override chrome://browser/content/translation-notification.js ../resources/scrip
 
 #### [Restore pre-Proton Library Button](/JS/restorePreProtonLibraryButton.uc.js):
 
-✨ The library toolbar button used to have an animation that played when a bookmark was added. It's another casualty of the Proton updates. This script restores the library button animation in its entirety, with one minor improvement.<details><summary>💬 <i><b>More details...</b></i></summary>
+✨ The library toolbar button used to have an animation that played when a bookmark was added. It's another casualty of the Proton updates. This script restores the library button animation in its entirety, with one minor improvement.<details><summary>💬 **_More details..._**</summary>
 
 The library animation always looked just a tiny bit off for certain window scaling factors — the animation would appear about half a pixel from where the static icon is, causing it to appear to move when the animation finishes. The script can fix this, so see the description at the top of the file for details on enabling the scaling fix. This version of the script requires fx-autoconfig, [userChrome.au.css](/userChrome.au.css) and the [resources/skin](/resources/skin) folder. If you don't want to download those files, grab the [_standalone_](/JS/restorePreProtonLibraryButton-standalone.uc.js) version instead.
 
@@ -911,7 +919,7 @@ The library animation always looked just a tiny bit off for certain window scali
 
 #### [Restore pre-Proton Star Button](/JS/restorePreProtonStarButton.uc.js):
 
-✨ The bookmark page action button used to have a pretty cool starburst animation that played when you added a bookmark. This script restores it.<details><summary>💬 <i><b>More details...</b></i></summary>
+✨ The bookmark page action button used to have a pretty cool starburst animation that played when you added a bookmark. This script restores it.<details><summary>💬 **_More details..._**</summary>
 
 The main version of this script requires fx-autoconfig, [userChrome.au.css](/userChrome.au.css), and the [resources](/resources) folder from my repo. If you don't want to use all that stuff, grab the [_standalone_](/JS/restorePreProtonStarButton-standalone.uc.js) version instead. If you use the standalone version, you won't need any additional CSS or icon downloads, and you can use other script loaders instead of fx-autoconfig. FYI not to state the obvious but this script will have no effect if your browser/OS has `prefers-reduced-motion` enabled.
 
@@ -927,7 +935,7 @@ Creates a screenshot button in the page actions area (the right side of the urlb
 
 #### [Search Mode Indicator Icons](/JS/searchModeIndicatorIcons.uc.js):
 
-✨ _v1.4+ is strongly recommended for duskFox users._ Automatically replace the urlbar's identity icon with the current search engine's icon. [(📽 Click for a preview)](preview/prev-search.gif) Optionally replace the searchglass icon in regular search mode by dynamically retrieving icons from your [resources/engines](/resources/engines) folder.<details><summary>💬 <i><b>More details...</b></i></summary>
+✨ _v1.4+ is strongly recommended for duskFox users._ Automatically replace the urlbar's identity icon with the current search engine's icon. [(📽 Click for a preview)](preview/prev-search.gif) Optionally replace the searchglass icon in regular search mode by dynamically retrieving icons from your [resources/engines](/resources/engines) folder.<details><summary>💬 **_More details..._**</summary>
 
 That means on the new tab page or when typing in the urlbar, instead of showing a searchglass icon it will show a Google icon if your default engine is Google; a Bing icon if your default engine is Bing; etc.
 
@@ -1014,7 +1022,7 @@ This script automatically generates its own subscript files in your chrome folde
 
 #### [Tab Context Menu Navigation](/JS/tabContextMenuNavigation.uc.js):
 
-Add some new menuitems to the tab context menu for navigating tabs back/forward, reloading, or bookmarking them, without needing to open them.<details><summary>💬 <i><b>More details...</b></i></summary>
+Add some new menuitems to the tab context menu for navigating tabs back/forward, reloading, or bookmarking them, without needing to open them.<details><summary>💬 **_More details..._**</summary>
 
 Includes Back, Forward, Reload, and Bookmark. The new menuitems look just like the navigation group at the top of the content area context menu. So they're oriented horizontally and have icons instead of labels. But functionally, they're a bit different. If you click the "Reload" button, for example, instead of reloading the current tab it will reload the tab you right-clicked to open the context menu. If you had multiple tabs selected and you right-clicked one of them, it will reload all of them. If you click the "Back" button, it will navigate the context tab(s) back by one.
 
@@ -1028,7 +1036,7 @@ Show a large thumbnail image to preview tab content when hovering a tab. Made [b
 
 #### [Tab Tooltip Navigation Buttons](/JS/tabTooltipNavButtons.uc.js):
 
-This script turns the tab tooltip into a mini navigation popup with back, forward, and reload buttons. It still shows the tab's title and URL, and also shows its favicon. So it's similar to the vanilla tooltip, except it's interactive.<details><summary>💬 <i><b>More details...</b></i></summary>
+This script turns the tab tooltip into a mini navigation popup with back, forward, and reload buttons. It still shows the tab's title and URL, and also shows its favicon. So it's similar to the vanilla tooltip, except it's interactive.<details><summary>💬 **_More details..._**</summary>
 
 When you hover a tab for 500 milliseconds (the actual delay depends on `ui.tooltipDelay` when opening, and `userChrome.tabs.tabTooltipNavButtons.hover-out-delay` when closing, both of which you can set as number prefs in about:config) the navigation popup will open attached to that tab. Clicking the back button will navigate _that tab_ back one step, rather than only navigating the currently active tab. So this means you can navigate background tabs.
 
@@ -1036,7 +1044,7 @@ The buttons work very much like the back, forward, and reload buttons on your to
 
 The key difference (aside from navigating the hovered tab rather than the active tab) is that the buttons can navigate multiple tabs at once. If you multiselect tabs, e.g., by shift or ctrl+clicking them, and then hover one of the multiselected tabs, all the buttons in the popup will navigate all the multiselected tabs at once. So if you right-click a tab and click "Select all Tabs" in the context menu, then hover a tab and click the reload button in the popup, it will reload every tab you have open. If you have tabs multiselected but you hover one of the non-selected tabs, then the popup will only affect the hovered tab, not the multiselected tabs.
 
-There are some additional configuration options inside the script. You can make the popup dependent on a modifier key being pressed, and continue using the vanilla Firefox tab tooltip when the modifier key is not pressed. You can also change the button tooltips to match your Firefox language pack.</p><details><summary>🖼 <i><b>Click here for a preview...</b></i></summary>
+There are some additional configuration options inside the script. You can make the popup dependent on a modifier key being pressed, and continue using the vanilla Firefox tab tooltip when the modifier key is not pressed. You can also change the button tooltips to match your Firefox language pack.</p><details><summary>🖼 **_Click here for a preview..._**</summary>
 
 <img src="preview/prev-tabtooltipnav.webp"/>
 
@@ -1050,7 +1058,7 @@ Adds a hotkey (Alt+M by default) that toggles the menubar on and off. Unlike jus
 
 #### [Tooltip Shadow Support](/JS/tooltipShadowSupport.uc.js):
 
-✨ This script makes it easier to add box shadows and borders to tooltips without messing up some specific tooltips. <details><summary>💬 <i><b>More details...</b></i></summary>
+✨ This script makes it easier to add box shadows and borders to tooltips without messing up some specific tooltips. <details><summary>💬 **_More details..._**</summary>
 
 Some tooltips have an awkward structure, where multiple descriptions exist within a single container, with `display: -moz-popup`. This means the tooltip is displayed within a restricted popup area with dimensions equal to the container, and overflow completely hidden. Box shadows on the container therefore won't be visible, since they'll fall outside of the popup frame — you'd have to use a window shadow instead, but those can't be styled in a precise way.
 
@@ -1074,7 +1082,7 @@ Gives all context menus the same opening animation that panel popups like the ap
 
 #### [Undo Recently Closed Tabs in Tab Context Menu](/JS/recentlyClosedTabsContextMenu.uc.js):
 
-Adds new menus for restoring recently closed tabs/windows to the tab context menu. Also adds a context menu for right-clicking recently closed tab/window items in the history menu.<details><summary>💬 <i><b>More details...</b></i></summary>
+Adds new menus for restoring recently closed tabs/windows to the tab context menu. Also adds a context menu for right-clicking recently closed tab/window items in the history menu.<details><summary>💬 **_More details..._**</summary>
 
 Adds new menus to the context menu that appears when you right-click a tab (in the tab bar or in the Tree Style Tab sidebar): one lists recently closed tabs so you can restore them, and another lists recently closed windows. These are basically the same functions that exist in the history toolbar button's popup, but I think the tab context menu is a more convenient location for them.
 
@@ -1090,7 +1098,7 @@ _This script used to be named `undoListInTabContextMenu.uc.js` so make sure you 
 
 #### [Unread Tab Mods](/JS/unreadTabMods.uc.js):
 
-Modifies some tab functions so that unread tabs can be styled differently from other tabs, and (optionally) adds new items to the tab context menu so you can manually mark tabs as read or unread.<details><summary>💬 <i><b>More details...</b></i></summary>
+Modifies some tab functions so that unread tabs can be styled differently from other tabs, and (optionally) adds new items to the tab context menu so you can manually mark tabs as read or unread.<details><summary>💬 **_More details..._**</summary>
 
 When opening a new tab without selecting it, the tab will gain an attribute `notselectedsinceload`. It will lose this attribute when the tab becomes selected or becomes discarded/unloaded. The CSS for styling unread tabs is already included in duskFox. (the CSS theme on this repo) If you don't use my theme, you can style unread tabs yourself with CSS like this:
 
@@ -1167,7 +1175,7 @@ Simply changes the update banners in the hamburger button app menu to make the s
 
 #### [Urlbar Container Color Indicator](/JS/urlbarContainerColor.uc.js):
 
-A lightweight aesthetic script that changes the background color of the urlbar to match the active tab's contextual identity (aka multi-account container).<details><summary>💬 <i><b>More details...</b></i></summary>
+A lightweight aesthetic script that changes the background color of the urlbar to match the active tab's contextual identity (aka multi-account container).<details><summary>💬 **_More details..._**</summary>
 
 Made by request. Will conflict with any custom themes/stylesheets that set the background color of `#urlbar-input-container` with `!important` rules, so be sure to check your stylesheet if it's not working. You can add the following code to the bottom of your custom stylesheet to make sure the color rules win out:
 
@@ -1195,7 +1203,7 @@ Made by request. Will conflict with any custom themes/stylesheets that set the b
 
 #### [Scroll Urlbar with Mousewheel](/JS/urlbarMouseWheelScroll.uc.js):
 
-Implements vertical scrolling and smooth scrolling inside the urlbar's input field.<details><summary>💬 <i><b>More details...</b></i></summary>
+Implements vertical scrolling and smooth scrolling inside the urlbar's input field.<details><summary>💬 **_More details..._**</summary>
 
 That might sound weird, but the urlbar doesn't naturally have any special scrolling logic, so when it's overflowing due to a long URL, scrolling it with a mouse wheel can be a real bitch, and scrolling it horizontally with a trackpad would feel really janky. This makes all scrolling in the urlbar smooth, and lets you scroll it horizontally with mousewheel up/down, since it can't be scrolled vertically anyway.
 
@@ -1211,7 +1219,7 @@ Press backspace to navigate back/forward in popup panels. (e.g. the main hamburg
 
 #### [Autocomplete Popup Styler](/JS/autocompletePopupStyler.uc.js):
 
-✨ Gives autocomplete popups a different background color when they're opened on elements with a background color that would otherwise blend in with the autocomplete popup.<details><summary>💬 <i><b>More details...</b></i></summary>
+✨ Gives autocomplete popups a different background color when they're opened on elements with a background color that would otherwise blend in with the autocomplete popup.<details><summary>💬 **_More details..._**</summary>
 
 This mini-script adds an attribute to `#PopupAutoComplete` when it's opened on a panel in the chrome UI, rather than opened on an input field in the content area: `[anchored-on-panel="true"]`. The reason for this is that the duskFox stylesheets give panels and menupopups the same background color, as is typical, but remove the borders.
 
@@ -1235,7 +1243,7 @@ Press Ctrl+Alt+P (or Cmd+Alt+P on macOS) to pin/unpin selected tab(s). Configure
 
 #### [OS Detector](/JS/osDetector.uc.js):
 
-No longer required for duskFox, but I'm leaving it here since it might be useful to other people developing CSS themes for Firefox, since it lets you select for operating systems with 100% accuracy.<details><summary>💬 <i><b>More details...</b></i></summary>
+No longer required for duskFox, but I'm leaving it here since it might be useful to other people developing CSS themes for Firefox, since it lets you select for operating systems with 100% accuracy.<details><summary>💬 **_More details..._**</summary>
 
 This tiny setup script adds an attribute on the document element representing the operating system, so we can select it with CSS. For example `:root[operatingsystem="macosx"]` would select the root element only on macOS. You can usually use the new -moz-platform media query instead of this.
 
@@ -1243,7 +1251,7 @@ This tiny setup script adds an attribute on the document element representing th
 
 #### [Custom Hint Provider](/JS/customHintProvider.uc.js):
 
-A confirmation hint library that works and looks just like the confirmation hint built into Firefox, but allows custom messages to be sent.<details><summary>💬 <i><b>More details...</b></i></summary>
+A confirmation hint library that works and looks just like the confirmation hint built into Firefox, but allows custom messages to be sent.<details><summary>💬 **_More details..._**</summary>
 
 This is a utility script for other scripts to take advantage of. It sets up a global object (on the chrome window) for showing confirmation hints with custom messages. The built-in confirmation hint component can only show a few messages built into the browser's localization system. This script works just like the built-in confirmation hint, and uses the built-in confirmation hint element, but it accepts any arbitrary string as a parameter. So you can open a confirmation hint with _any_ message, e.g.
 
