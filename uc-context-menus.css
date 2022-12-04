@@ -26,7 +26,7 @@ menupopup:not([type="arrow"]) {
   overflow: visible !important;
 }
 
-menupopup:not([type="arrow"]) menu > menupopup {
+menupopup:is(:not([type="arrow"]), [placespopup]) menu > menupopup {
   margin-inline-start: var(--menupopup-child-margin-inline-start) !important;
   margin-top: var(--menupopup-child-margin-block-start) !important;
 }
@@ -36,14 +36,7 @@ menupopup:not([height], .in-menulist) {
   --menupopup-overflowing-inner-box-margin: 4px 0;
 }
 
-.menupopup-arrowscrollbox {
-  background-color: var(--menu-background-color) !important;
-  color: var(--menu-color) !important;
-  border-radius: var(--menupopup-border-radius) !important;
-  box-shadow: var(--uc-menupopup-shadow) !important;
-}
-
-menupopup:not([type="arrow"]) :is(menuitem, menu),
+menupopup:is(:not([type="arrow"]), [placespopup]) :is(menuitem, menu),
 panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem {
   appearance: none !important;
   color: var(--menu-color) !important;
@@ -56,7 +49,7 @@ panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem {
   padding-inline-start: 5px !important;
 }
 
-menupopup:not([type="arrow"]) :is(menuitem, menu)[disabled="true"],
+menupopup:is(:not([type="arrow"]), [placespopup]) :is(menuitem, menu)[disabled="true"],
 panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem[disabled="true"] {
   appearance: none !important;
   color: var(--menu-disabled-color) !important;
@@ -68,14 +61,18 @@ panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem[disabled="tr
   fill: currentColor;
 }
 
-menupopup:not([type="arrow"]) :is(menuitem, menu) .menu-iconic-left {
+menupopup:is(:not([type="arrow"]), [placespopup]) :is(menuitem, menu) .menu-iconic-left {
   padding: 0 !important;
   appearance: none !important;
   margin-inline-end: 0 !important;
 }
 
-menupopup:not([type="arrow"]) :is(menuitem, menu) .menu-iconic-icon {
+menupopup:is(:not([type="arrow"]), [placespopup]) :is(menuitem, menu) .menu-iconic-icon {
   margin-inline: var(--context-iconic-margin);
+}
+
+toolbarbutton menupopup[placespopup] > :is(menu, menuitem) .menu-iconic-icon {
+  margin-inline: var(--context-iconic-margin) !important;
 }
 
 panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem :is(.ac-site-icon, .ac-type-icon) {
@@ -107,12 +104,12 @@ moz-input-box > menupopup .context-menu-add-engine:not([image]) .menu-iconic-ico
   padding-inline: var(--context-padding-inline) !important;
 }
 
-menupopup:not([type="arrow"]) menugroup {
+menupopup:is(:not([type="arrow"]), [placespopup]) menugroup {
   padding: 0 !important;
   background-color: transparent !important;
 }
 
-menupopup:not([type="arrow"]) .menu-right {
+menupopup:is(:not([type="arrow"]), [placespopup]) .menu-right {
   appearance: none !important;
   padding: 0px !important;
   margin-inline-end: var(--menu-right-margin) !important;
@@ -129,16 +126,16 @@ menupopup:not([type="arrow"]) .menu-right {
   list-style-image: var(--menu-right-img) !important;
 }
 
-menupopup:not([type="arrow"]) menu[disabled="true"] > .menu-right {
+menupopup:is(:not([type="arrow"]), [placespopup]) menu[disabled="true"] > .menu-right {
   visibility: collapse;
 }
 
-menupopup:not([type="arrow"]) :is(menu, menuitem)[_moz-menuactive="true"]:not([disabled="true"]) {
+menupopup:is(:not([type="arrow"]), [placespopup]) :is(menu, menuitem)[_moz-menuactive="true"]:not([disabled="true"]) {
   appearance: none !important;
   background-color: var(--menuitem-hover-background-color) !important;
 }
 
-menupopup:not([type="arrow"]) :is(menu, menuitem)[_moz-menuactive="true"][disabled="true"] {
+menupopup:is(:not([type="arrow"]), [placespopup]) :is(menu, menuitem)[_moz-menuactive="true"][disabled="true"] {
   background: none !important;
   appearance: none !important;
 }
@@ -156,7 +153,7 @@ menuitem.subviewbutton:not([disabled="true"])[_moz-menuactive="true"]:active {
   box-shadow: none !important;
 }
 
-menupopup:not([type="arrow"]) menuseparator {
+menupopup:is(:not([type="arrow"]), [placespopup]) menuseparator {
   appearance: none !important;
   border-color: var(--menu-separator-color) !important;
   margin: var(--menu-separator-margin) !important;
@@ -164,7 +161,7 @@ menupopup:not([type="arrow"]) menuseparator {
   padding: 0 !important;
 }
 
-menupopup:not([type="arrow"]) menuseparator:last-child {
+menupopup:is(:not([type="arrow"]), [placespopup]) menuseparator:last-child {
   display: none;
 }
 
@@ -285,6 +282,7 @@ panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem {
   min-height: var(--menuitem-height) !important;
   border: none !important;
   font: menu !important;
+  text-shadow: none !important;
 }
 
 #ContentSelectDropdown menucaption {
@@ -323,6 +321,9 @@ panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem:is([original
 }
 
 #ContentSelectDropdown > menupopup {
+  color-scheme: dark !important;
+  --panel-color: var(--arrowpanel-color) !important;
+  font: -moz-list !important;
   background-color: transparent !important;
   --content-select-background-image: none !important;
   /* a gradient background image is added on top of the menupopup based on the

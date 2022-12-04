@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Urlbar Mods
-// @version        1.7.4
+// @version        1.7.5
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Make some minor modifications to the urlbar. See the code
@@ -605,7 +605,6 @@ class UrlbarMods {
     ).properties.clientType = {
       type: "string",
     };
-    var limbo = ChromeUtils.import("resource:///modules/UrlbarView.sys.mjs");
     let src1 = RemoteTabs.startQuery.toSource();
     let src2 = gURLBar.view._updateRow?.toSource();
     let src3 = TabToSearch.startQuery.toSource();
@@ -737,6 +736,7 @@ class UrlbarMods {
     if (!sortSrc.includes(`UrlbarPrefs.get("showSearchSuggestionsFirst")`)) {
       const lazy = {};
       ChromeUtils.defineESModuleGetters(lazy, {
+        QuickSuggest: "resource:///modules/QuickSuggest.sys.mjs",
         UrlbarPrefs: "resource:///modules/UrlbarPrefs.sys.mjs",
         UrlbarProviderQuickSuggest:
           "resource:///modules/UrlbarProviderQuickSuggest.sys.mjs",

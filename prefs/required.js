@@ -34,6 +34,8 @@ user_pref("layout.css.moz-outline-radius.enabled", true);
 user_pref("browser.display.windows.non_native_menus", 1);
 user_pref("widget.content.allow-gtk-dark-theme", true);
 ////
+// avoid custom menulist/select styling
+user_pref("dom.forms.select.customstyling", false);
 // keep "all tabs" menu available at all times, useful for all tabs menu expansion pack
 user_pref("browser.tabs.tabmanager.enabled", true);
 // disable urlbar result group labels since we don't use them

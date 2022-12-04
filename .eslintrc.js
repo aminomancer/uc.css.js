@@ -12,9 +12,7 @@ module.exports = {
   parser: "@babel/eslint-parser",
   parserOptions: {
     sourceType: "script",
-    babelOptions: {
-      configFile: path.join(__dirname, ".babel-eslint.rc.js"),
-    },
+    babelOptions: { configFile: path.join(__dirname, ".babel-eslint.rc.js") },
   },
   env: {
     node: false,
@@ -29,9 +27,7 @@ module.exports = {
     // "mozilla/sjs": true,
     // "mozilla/xpcshell": true,
   },
-  settings: {
-    "import/extensions": [".mjs"],
-  },
+  settings: { "import/extensions": [".mjs"] },
   rules: {
     "arrow-body-style": "off",
     complexity: ["warn", { max: 50 }],
@@ -66,14 +62,24 @@ module.exports = {
       rules: { complexity: "off", "no-console": "off" },
     },
     {
+      files: ["resources/aboutconfig/**"],
+      rules: { "prettier/prettier": "off" },
+    },
+    {
+      files: ["prefs/**"],
+      rules: { "prettier/prettier": "off" },
+      globals: { user_pref: "readonly" },
+    },
+    {
+      files: ["resources/script-override/**"],
+      rules: { "prettier/prettier": ["error", { quoteProps: "preserve" }] },
+    },
+    {
       // All .eslintrc.js files are in the node environment, so turn that
       // on here.
       // https://github.com/eslint/eslint/issues/13008
       files: [".eslintrc.js"],
-      env: {
-        node: true,
-        browser: false,
-      },
+      env: { node: true, browser: false },
     },
     {
       files: ["*.mjs"],

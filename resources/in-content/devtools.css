@@ -49,6 +49,8 @@ and a few elements like checkboxes */
     appearance: none !important;
     width: 14px;
     height: 14px;
+    min-width: 14px;
+    min-height: 14px;
     fill: currentColor;
     -moz-context-properties: fill, fill-opacity, stroke;
     background-position: center;

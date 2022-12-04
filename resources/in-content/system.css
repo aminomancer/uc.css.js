@@ -79,6 +79,7 @@
     --in-content-accent-color: var(--purple-35) !important;
     --in-content-border-color: var(--uc-content-border-color) !important;
     --in-content-border-hover: var(--uc-content-border-hover) !important;
+    --in-content-border-active: var(--uc-content-border-active) !important;
     --in-content-box-background: var(--uc-content-box-background) !important;
     --in-content-box-background-odd: var(--uc-content-box-background-odd) !important;
     --in-content-box-background-dim: var(--uc-content-box-background-dim) !important;

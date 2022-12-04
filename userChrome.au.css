@@ -96,6 +96,13 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
     margin: var(--panel-inner-box-margin, 4px);
     overflow: hidden;
   }
+  
+  menupopup::part(content) {
+    background-color: var(--menu-background-color) !important;
+    color: var(--menu-color) !important;
+    border-radius: var(--menupopup-border-radius) !important;
+    box-shadow: var(--uc-menupopup-shadow) !important;
+  }
 
   :is(panel, menupopup)::part(arrow) {
     -moz-context-properties: fill, stroke;
@@ -498,7 +505,8 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
   #customizationPanelItemContextMenu[backdrop-color="gray"]::part(content),
   #sidebarMenu-popup[backdrop-color="gray"],
   #sidebarMenu-popup[backdrop-color="gray"]::part(content),
-  window#alertNotification #alertSettings :is(menupopup, panel)::part(content) {
+  window#alertNotification #alertSettings :is(menupopup, panel)::part(content),
+  :is(menupopup[menu-api])::part(content) {
     --arrowpanel-dimmed: color-mix(in srgb, var(--uc-toolbar-color) 7%, transparent);
     --arrowpanel-dimmed-further: color-mix(in srgb, var(--uc-toolbar-color) 12%, transparent);
     --arrowpanel-dimmed-even-further: color-mix(in srgb, var(--uc-toolbar-color) 15%, transparent);
@@ -527,7 +535,8 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
   /* dark gray context menus/menulists in system pages with gray theme */
   @-moz-document url-prefix("chrome://browser/content/places/places.xhtml"),
     url("chrome://mozapps/content/downloads/unknownContentType.xhtml"),
-    regexp("^about:.*$") {
+    regexp("^about:.*$"),
+    url-prefix("chrome://devtools/content/") {
     :is(menupopup)::part(content) {
       --arrowpanel-dimmed: color-mix(in srgb, var(--uc-toolbar-color) 7%, transparent);
       --arrowpanel-dimmed-further: color-mix(in srgb, var(--uc-toolbar-color) 12%, transparent);

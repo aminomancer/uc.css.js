@@ -510,11 +510,11 @@ no longer necessary after modern flexbox emulation. */
 }
 
 #protections-popup-info-button {
-  margin-inline-end: 10px !important;
+  margin-inline-end: 5px !important;
 }
 
 #protections-popup:not([toast]) #protections-popup-main-header-label {
-  margin-inline-start: 10px !important;
+  margin-inline-start: 5px !important;
 }
 
 #protections-popup .panel-footer {
@@ -951,7 +951,6 @@ popupnotificationcontent label[control]:not([hidden]) + menulist {
 
 #protections-popup-mainView-panel-header {
   min-height: 40px !important;
-  padding-block: 8px 4px !important;
 }
 
 #protections-popup-main-header-label {
@@ -1400,6 +1399,11 @@ toolbar button slider script. but just in case) */
   padding-block: 4px 8px;
 }
 
+.unified-extensions-panel-header,
+.panel-header {
+	box-sizing: border-box !important;
+}
+
 .unified-extensions-panel-header > h1,
 .panel-header > h1 {
   font-size: 1.1em !important;
@@ -1433,7 +1437,7 @@ toolbar button slider script. but just in case) */
 #identity-popup-mainView-panel-header,
 #protections-popup-mainView-panel-header,
 #eom-mainView-panel-header {
-  min-height: 40px !important;
+  min-height: 44px !important;
   word-break: break-word !important;
 }
 

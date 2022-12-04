@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Browser Toolbox Stylesheet Loader
-// @version        2.1.1
+// @version        2.1.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Load userChrome and userContent stylesheets into Browser Toolbox windows
@@ -49,20 +49,10 @@ let EXPORTED_SYMBOLS = [];
       let sss = win.Cc["@mozilla.org/content/style-sheet-service;1"].getService(
         win.Ci.nsIStyleSheetService
       );
-      try {
-        sss.loadAndRegisterSheet(
-          win.Services.io.newURI(path + name),
-          sss[type]
-        );
-      } catch (e) {}
-    }
-    unloadSheet(win, path, name, type) {
-      let sss = win.Cc["@mozilla.org/content/style-sheet-service;1"].getService(
-        win.Ci.nsIStyleSheetService
-      );
-      try {
-        sss.unegisterSheet(win.Services.io.newURI(path + name), sss[type]);
-      } catch (e) {}
+      let uri = win.Services.io.newURI(path + name);
+      if (!sss.sheetRegistered(uri, sss[type])) {
+        sss.loadAndRegisterSheet(uri, sss[type]);
+      }
     }
     observe(sub) {
       if (this.lastSubject === sub) return;
@@ -74,9 +64,6 @@ let EXPORTED_SYMBOLS = [];
         case "DOMContentLoaded":
           this._onContentLoaded(e);
           break;
-        case "uninit":
-          this._onWindowUninit(e);
-          break;
       }
     }
     _onContentLoaded(e) {
@@ -87,15 +74,6 @@ let EXPORTED_SYMBOLS = [];
       const path = this.getChromePath(win);
       this.loadSheet(win, path, "userChrome.css", "AUTHOR_SHEET");
       this.loadSheet(win, path, "userContent.css", "USER_SHEET");
-      win.addEventListener("uninit", this);
-    }
-    _onWindowUninit(e) {
-      let win = e.target;
-      if (!this.isDevtools(win)) return;
-      const path = this.getChromePath(win);
-      this.unloadSheet(win, path, "userChrome.css", "AUTHOR_SHEET");
-      this.unloadSheet(win, path, "userContent.css", "USER_SHEET");
-      win.removeEventListener("uninit", this);
     }
   }
 

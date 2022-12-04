@@ -13,6 +13,7 @@
   "trailingComma": "es5",
   "useTabs": false,
   "overrides": [
+    { "files": [".prettierrc"], "options": { "parser": "json" } },
     { "files": ["*.css", "*.scss", "*.md"], "options": { "printWidth": 1000 } }
   ]
 }

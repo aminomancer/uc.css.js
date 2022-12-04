@@ -114,6 +114,27 @@ menupopup#viewSidebarMenu menuitem.menuitem-iconic.webextension-menuitem#menu_tr
   fill: var(--toolbarbutton-icon-fill-attention) !important;
 }
 
+#contentAreaContextMenu #nordvpnproxy_nordvpn_com-menuitem-_nordvpn_extension_context_menu_group .menu-iconic-left::before {
+  width: 16px;
+  height: 16px;
+  margin-inline: var(--context-iconic-margin);
+  fill: currentColor;
+  -moz-context-properties: fill, fill-opacity, stroke;
+  content: "";
+  display: -moz-inline-box;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url(chrome://userchrome/content/material/nord.svg);
+}
+
+#contentAreaContextMenu #nordvpnproxy_nordvpn_com-menuitem-_nordvpn_extension_context_menu_group .menu-iconic-icon {
+  display: none !important;
+}
+
+menupopup:not(#contentAreaContextMenu) > #nordvpnproxy_nordvpn_com-menuitem-_nordvpn_extension_context_menu_group:not(.menuitem-iconic, .menu-iconic)::before {
+  background-image: url(chrome://userchrome/content/material/nord.svg);
+}
+
 /* cookie remover */
 :is(.webextension-browser-action, .eom-addon-button)[data-extensionid="{3507f56d-2ef5-45c1-b6d7-5297a0ba7642}"i] .toolbarbutton-icon {
   list-style-image: url(chrome://userchrome/content/skin/controlcenter/3rdpartycookies-disabled.svg);

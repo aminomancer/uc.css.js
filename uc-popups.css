@@ -1141,13 +1141,7 @@ rtl languages. adjust the border radius accordingly */
   }
 }
 
-@-moz-document url("chrome://mozapps/content/handling/permissionDialog.xhtml"),
-    url("chrome://mozapps/content/handling/appChooser.xhtml"),
-    url-prefix("chrome://global/content/print.html"),
-    url("chrome://browser/content/places/bookmarkProperties.xhtml"),
-    url("chrome://browser/content/places/bookmarkProperties2.xhtml"),
-    url-prefix("chrome://browser/content/sanitize.xhtml"),
-    url("chrome://browser/content/spotlight.html") {
+@-moz-document url("chrome://mozapps/content/handling/permissionDialog.xhtml"), url("chrome://mozapps/content/handling/appChooser.xhtml"), url-prefix("chrome://global/content/print.html"), url("chrome://browser/content/places/bookmarkProperties.xhtml"), url("chrome://browser/content/places/bookmarkProperties2.xhtml"), url-prefix("chrome://browser/content/sanitize.xhtml"), url("chrome://browser/content/spotlight.html") {
   :root[dialogroot],
   :root[dialogroot] dialog,
   :root[dialogroot] richlistbox[id]:not(#categories) > richlistitem[selected],
@@ -1245,7 +1239,6 @@ rtl languages. adjust the border radius accordingly */
   button,
   :root[dialogroot] :is(select, input[type="color"], menulist) {
     min-height: var(--menuitem-height) !important;
-    line-height: var(--menuitem-height) !important;
     border-radius: var(--in-content-button-border-radius) !important;
   }
 
@@ -1423,10 +1416,6 @@ rtl languages. adjust the border radius accordingly */
 
   :root[dialogroot] #bookmarkpropertiesdialog #editBookmarkPanelContent label[control] {
     margin-inline: 0 !important;
-  }
-
-  :root[dialogroot] #bookmarkpropertiesdialog {
-    -moz-box-align: center !important;
   }
 
   :root[dialogroot] #bookmarkpropertiesdialog .titleIcon {

@@ -202,6 +202,14 @@
   list-style-image: url(chrome://userchrome/content/skin/bookmark.svg);
 }
 
+#panelMenu_showAllBookmarks {
+  list-style-image: url(chrome://userchrome/content/skin/library.svg);
+}
+
+#panelMenu_showAllBookmarks .toolbarbutton-text {
+  padding-inline-start: var(--arrowpanel-subviewbutton-iconic-gap, 8px) !important;
+}
+
 #PanelUI-fxa-menu-remotetabs-button,
 #appMenuRecentlyClosedTabs {
   list-style-image: url(chrome://userchrome/content/skin/tab.svg);

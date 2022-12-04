@@ -468,43 +468,25 @@ richlistbox[id]:not(#categories) > richlistitem[selected] {
     display: none !important;
   }
 
+  #BMB_bookmarksPopup {
+    --context-iconic-margin-start: var(--arrowpanel-menuitem-padding-inline) !important;
+    --context-iconic-margin-end: var(--arrowpanel-subviewbutton-iconic-gap, 8px) !important;
+    --context-iconic-margin: var(--context-iconic-margin-start, 6px) var(--context-iconic-margin-end, 8px) !important;
+    --context-checkbox-margin-start: calc(1px + var(--context-iconic-margin-start, 6px)) !important;
+    --context-checkbox-margin-end: calc(1px + var(--context-iconic-margin-end, 8px)) !important;
+    --context-checkbox-margin: var(--context-checkbox-margin-start, 7px) var(--context-checkbox-margin-end, 9px) !important;
+    --context-iconic-composite-width: calc(16px + var(--context-iconic-margin-start) + var(--context-iconic-margin-end)) !important;
+    --context-padding-inline: var(--context-iconic-composite-width) 0px !important;
+  }
+
   #BMB_bookmarksPopup menupopup {
     margin-inline-start: var(--menupopup-child-margin-inline-start) !important;
     margin-block-start: var(--menupopup-child-margin-block-start) !important;
   }
 
   #BMB_bookmarksPopup :is(menu, menuitem) {
-    margin: var(--arrowpanel-menuitem-margin) !important;
     min-height: var(--subviewbutton-height) !important;
-    padding-inline: var(--arrowpanel-menuitem-padding-inline) !important;
-    padding-block: var(--arrowpanel-menuitem-padding-block) !important;
-    border-radius: var(--arrowpanel-menuitem-border-radius) !important;
   }
-
-  #BMB_bookmarksPopup menuseparator {
-    margin: var(--panel-separator-margin) !important;
-  }
-
-  #BMB_bookmarksPopup menupopup :is(menuitem, menu) .menu-iconic-icon {
-    margin-inline: unset;
-  }
-}
-
-#BMB_bookmarksPopup {
-  --panel-separator-color: var(--desaturate-dimmed) !important;
-}
-
-#BMB_bookmarksPopup .subviewbutton > .menu-iconic-text {
-  padding-inline-start: 0 !important;
-}
-
-#BMB_bookmarksPopup .subviewbutton > .menu-iconic-left {
-  margin-inline-end: var(--arrowpanel-subviewbutton-iconic-gap, 8px) !important;
-}
-
-#BMB_bookmarksPopup :is(.menu-accel, .menu-iconic-accel)[value] {
-  margin-inline-end: 4px !important;
-  padding-block: 0 !important;
 }
 
 #BMB_viewBookmarksSidebar {
@@ -530,7 +512,7 @@ menuitem.subviewbutton-iconic > .toolbarbutton-text,
   width: 16px !important;
   height: 16px !important;
   padding-inline: 0 !important;
-  margin-inline: 0 var(--arrowpanel-subviewbutton-iconic-gap, 8px) !important;
+  margin-inline: var(--context-iconic-margin) !important;
   fill: currentColor !important;
   background-image: url(chrome://userchrome/content/skin/sidebars.svg) !important;
   -moz-context-properties: fill, fill-opacity, stroke !important;
@@ -572,7 +554,7 @@ menuitem#bookmarksShowAll::before {
 }
 
 #BMB_bookmarksShowAllTop::before {
-  margin-inline-end: var(--arrowpanel-subviewbutton-iconic-gap, 8px) !important;
+  margin-inline: var(--context-iconic-margin) !important;
 }
 
 menuitem#bookmarksShowAll .menu-text,
@@ -582,14 +564,6 @@ menuitem#menu_bookmarkThisPage .menu-text {
 
 menuitem#bookmarksShowAll::before {
   margin-inline: var(--context-iconic-margin) !important;
-}
-
-#panelMenu_showAllBookmarks {
-  list-style-image: url(chrome://userchrome/content/skin/library.svg);
-}
-
-#panelMenu_showAllBookmarks .toolbarbutton-text {
-  padding-inline-start: var(--arrowpanel-subviewbutton-iconic-gap, 8px) !important;
 }
 
 menuitem#menu_bookmarkThisPage::before {
@@ -616,7 +590,7 @@ menuitem#menu_bookmarkThisPage[data-l10n-id="menu-edit-bookmark"]::before {
   width: 16px !important;
   height: 16px !important;
   padding-inline: 0 !important;
-  margin-inline: 0 var(--arrowpanel-subviewbutton-iconic-gap, 8px) !important;
+  margin-inline: var(--context-iconic-margin) !important;
   fill: currentColor !important;
   background-image: url(chrome://global/skin/icons/folder.svg) !important;
   -moz-context-properties: fill, fill-opacity, stroke !important;
@@ -630,12 +604,24 @@ menuitem#menu_bookmarkThisPage[data-l10n-id="menu-edit-bookmark"]::before {
 /* 0.74em comes from the internal margin for .menu-accel.
 we're hiding that if it's empty, as it will be for the "(Empty)" placeholder.
 so in order to ensure matching padding on this item we're taking that value and turning it into outer padding. */
-#BMB_bookmarksPopup menupopup[emptyplacesresult="true"] menuitem.bookmark-item {
+#BMB_bookmarksPopup menupopup[emptyplacesresult] > menuitem.bookmark-item .menu-text {
   padding-inline: calc(var(--arrowpanel-menuitem-padding-inline) + 0.74em) !important;
 }
 
-#BMB_bookmarksPopup menupopup[emptyplacesresult="true"] menuitem.bookmark-item .menu-accel:not([value]):empty {
-  display: none !important;
+toolbarbutton menupopup[placespopup][emptyplacesresult] > menuitem.bookmark-item .menu-text {
+  padding-inline: calc(var(--context-iconic-margin-start) + 0.74em) !important;
+}
+
+toolbarbutton menupopup[placespopup] > :is(menu, menuitem) > .menu-accel-container > :is(.menu-accel, .menu-iconic-accel):not([value]) {
+  margin-inline: 0.74em 1.35em !important;
+}
+
+toolbarbutton menupopup[placespopup][emptyplacesresult] > menuitem.bookmark-item > .menu-accel-container > :is(.menu-accel, .menu-iconic-accel) {
+	margin: 0 !important;
+}
+
+menupopup[emptyplacesresult="true"] #BMB_viewBookmarksToolbar + menuseparator {
+  display: none;
 }
 
 #BMB_bookmarksPopup :is(#bookmarksToolbarFolderMenu, #BMB_bookmarksToolbar, #panelMenu_bookmarksToolbar, #BMB_viewBookmarksToolbar):not(.menuitem-iconic, .menu-iconic)::before {
@@ -645,7 +631,7 @@ so in order to ensure matching padding on this item we're taking that value and 
   width: 16px !important;
   height: 16px !important;
   padding-inline: 0 !important;
-  margin-inline: 0 var(--arrowpanel-subviewbutton-iconic-gap, 8px) !important;
+  margin-inline: var(--context-iconic-margin) !important;
   fill: currentColor !important;
   background-image: url(chrome://browser/skin/places/bookmarksToolbar.svg) !important;
   -moz-context-properties: fill, fill-opacity, stroke !important;
@@ -653,10 +639,6 @@ so in order to ensure matching padding on this item we're taking that value and 
 
 #BMB_viewBookmarksToolbar:not(.menuitem-iconic, .menu-iconic)[data-l10n-args*='{"isVisible":true}']::before {
   fill-opacity: 0.5;
-}
-
-menupopup[emptyplacesresult="true"] #BMB_viewBookmarksToolbar + menuseparator {
-  display: none;
 }
 
 menupopup .openintabs-menuitem:not(.menuitem-iconic, .menu-iconic)::before {
@@ -677,7 +659,7 @@ menupopup .openintabs-menuitem:not(.menuitem-iconic, .menu-iconic) .menu-text {
 }
 
 #BMB_bookmarksPopup .openintabs-menuitem:not(.menuitem-iconic, .menu-iconic)::before {
-  margin-inline: 0 var(--arrowpanel-subviewbutton-iconic-gap, 8px) !important;
+  margin-inline: var(--context-iconic-margin) !important;
 }
 
 #BMB_bookmarksPopup .openintabs-menuitem:not(.menuitem-iconic, .menu-iconic) .menu-text {
