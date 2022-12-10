@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Vertical Tabs Pane
-// @version        1.6.9
+// @version        1.7.0
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Create a vertical pane across from the sidebar that functions
@@ -529,7 +529,7 @@
      * @returns the ancestor tab row
      */
     _findRow(el) {
-      return el.classList.contains("all-tabs-item")
+      return el?.classList.contains("all-tabs-item")
         ? el
         : el.closest(".all-tabs-item");
     }
@@ -591,7 +591,7 @@
       }
     }
     /**
-     * universal event handler — we generally pass the whole class to
+     * universal event handler - we generally pass the whole class to
      * addEventListener and let this function decide which callback to invoke.
      * @param {object} e (an event object)
      */
@@ -958,7 +958,7 @@
     /**
      * remove a tab/item pair from the map, and remove the item from the DOM.
      * @param {object} item (a row element, e.g. with class all-tabs-item)
-     * @param {object} tab (a corresponding tab element — every all-tabs-item
+     * @param {object} tab (a corresponding tab element - every all-tabs-item
      *                     has a reference to its corresponding tab at item.tab)
      */
     _removeItem(item, tab) {
@@ -1015,7 +1015,7 @@
       );
       row.closeButton.tab = tab;
 
-      // sound overlay — it only shows when the pane is collapsed
+      // sound overlay - it only shows when the pane is collapsed
       row.soundOverlay = row.appendChild(
         create(document, "image", { class: "sound-overlay" }, true)
       );
@@ -1701,108 +1701,43 @@
     // when the vertical-tabs-tooltip is about to be shown.
     createTabTooltip(e) {
       e.stopPropagation();
-      let row = e.target.triggerNode
-        ? this._findRow(e.target.triggerNode)
-        : null;
-      if (!row) return e.preventDefault();
-      let { tab } = row;
-      if (!tab) return e.preventDefault();
-      // get a localized string, replace any plural variables with the passed
-      // number, and add a shortcut string (e.g. Ctrl+M) matching the passed key
-      // element ID.
-      let stringWithShortcut = (stringId, keyElemId, pluralCount) => {
-        let keyElem = document.getElementById(keyElemId);
-        let shortcut = ShortcutUtils.prettifyShortcut(keyElem);
-        return PluralForm.get(
-          pluralCount,
-          gTabBrowserBundle.GetStringFromName(stringId)
-        )
-          .replace("%S", shortcut)
-          .replace("#1", pluralCount);
-      };
-      let label;
+      let row = this._findRow(e.target.triggerNode);
+      let tab = row?.tab;
+      if (!tab) {
+        e.preventDefault();
+        return;
+      }
+      let l10nId, l10nArgs;
       // should we align to the tab or to the mouse? depends on which element
       // was hovered.
       let align = true;
       let { linkedBrowser } = tab;
       const selectedTabs = gBrowser.selectedTabs;
       const contextTabInSelection = selectedTabs.includes(tab);
-      const affectedTabsLength = contextTabInSelection
-        ? selectedTabs.length
-        : 1;
+      const tabCount = contextTabInSelection ? selectedTabs.length : 1;
       // a bunch of localization
       if (row.closeButton.matches(":hover")) {
-        let shortcut = ShortcutUtils.prettifyShortcut(window.key_close);
-        label = PluralForm.get(
-          affectedTabsLength,
-          gTabBrowserBundle.GetStringFromName("tabs.closeTabs.tooltip")
-        ).replace("#1", affectedTabsLength);
-        if (contextTabInSelection && shortcut) {
-          if (label.includes("%S")) label = label.replace("%S", shortcut);
-          else label = label + " (" + shortcut + ")";
-        }
+        l10nId = "tabbrowser-close-tabs-tooltip";
+        l10nArgs = { tabCount };
         align = false;
       } else if (row.audioButton.matches(":hover")) {
-        let stringID;
+        l10nArgs = { tabCount };
         if (contextTabInSelection) {
-          stringID = linkedBrowser.audioMuted
-            ? "tabs.unmuteAudio2.tooltip"
-            : "tabs.muteAudio2.tooltip";
-          label = stringWithShortcut(
-            stringID,
-            "key_toggleMute",
-            affectedTabsLength
-          );
+          l10nId = linkedBrowser.audioMuted
+            ? "tabbrowser-unmute-tab-audio-tooltip"
+            : "tabbrowser-mute-tab-audio-tooltip";
+          const keyElem = document.getElementById("key_toggleMute");
+          l10nArgs.shortcut = ShortcutUtils.prettifyShortcut(keyElem);
+        } else if (tab.hasAttribute("activemedia-blocked")) {
+          l10nId = "tabbrowser-unblock-tab-audio-tooltip";
         } else {
-          if (tab.hasAttribute("activemedia-blocked")) {
-            stringID = "tabs.unblockAudio2.tooltip";
-          } else {
-            stringID = linkedBrowser.audioMuted
-              ? "tabs.unmuteAudio2.background.tooltip"
-              : "tabs.muteAudio2.background.tooltip";
-          }
-          label = PluralForm.get(
-            affectedTabsLength,
-            gTabBrowserBundle.GetStringFromName(stringID)
-          ).replace("#1", affectedTabsLength);
+          l10nId = linkedBrowser.audioMuted
+            ? "tabbrowser-unmute-tab-audio-background-tooltip"
+            : "tabbrowser-mute-tab-audio-background-tooltip";
         }
         align = false;
       } else {
-        label = tab._fullLabel || tab.getAttribute("label");
-        // show the tab's process ID in the tooltip?
-        if (
-          prefSvc.getBoolPref(
-            "browser.tabs.tooltipsShowPidAndActiveness",
-            false
-          )
-        ) {
-          if (linkedBrowser) {
-            let [contentPid, ...framePids] = this.E10SUtils.getBrowserPids(
-              linkedBrowser,
-              gFissionBrowser
-            );
-            if (contentPid) {
-              if (framePids && framePids.length) {
-                label += ` (pids ${contentPid}, ${framePids
-                  .sort()
-                  .join(", ")})`;
-              } else {
-                label += ` (pid ${contentPid})`;
-              }
-            }
-            if (linkedBrowser.docShellIsActive) label += " [A]";
-          }
-        }
-        // add the container name to the tooltip?
-        if (tab.userContextId) {
-          label = gTabBrowserBundle.formatStringFromName(
-            "tabs.containers.tooltip",
-            [
-              label,
-              ContextualIdentityService.getUserContextLabel(tab.userContextId),
-            ]
-          );
-        }
+        let title = gBrowser.getTabTooltip(tab, true);
         // if hovering the sound overlay, show the current media state of the
         // tab, after the tab title. "playing" or "muted" or "media blocked"
         if (row.soundOverlay.matches(":hover") && this._fluentStrings) {
@@ -1814,8 +1749,10 @@
           } else {
             stateString = "playingString";
           }
-          label += ` (${this._fluentStrings[stateString].toLowerCase()})`;
+          title += ` (${this._fluentStrings[stateString].toLowerCase()})`;
         }
+        l10nId = "tabbrowser-tab-tooltip";
+        l10nArgs = { title };
       }
       // align to the row
       if (align) {
@@ -1823,7 +1760,17 @@
         e.target.moveToAnchor(row, "after_start");
       }
       let title = e.target.querySelector(".places-tooltip-title");
-      title.textContent = label;
+      let localized = {};
+      if (l10nId) {
+        let [msg] = gBrowser.tabLocalization.formatMessagesSync([
+          { l10nId, l10nArgs },
+        ]);
+        localized.value = msg.value;
+        if (msg.attributes) {
+          for (let attr of msg.attributes) localized[attr.name] = attr.value;
+        }
+      }
+      title.textContent = localized.label ?? "";
       if (tab.getAttribute("customizemode") === "true") {
         e.target
           .querySelector(".places-tooltip-box")

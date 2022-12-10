@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           All Tabs Menu Expansion Pack
-// @version        2.1.2
+// @version        2.1.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Next to the "new tab" button in Firefox there's a V-shaped button that opens a
@@ -269,13 +269,6 @@
       gTabsPanel.hiddenAudioTabsPopup,
       gTabsPanel.hiddenTabsPopup,
     ];
-    if (!window.E10SUtils) {
-      XPCOMUtils.defineLazyModuleGetters(gTabsPanel, {
-        E10SUtils: "resource://gre/modules/E10SUtils.jsm",
-      });
-    } else {
-      gTabsPanel.E10SUtils = window.E10SUtils;
-    }
     let vanillaTooltip = document.getElementById("tabbrowser-tab-tooltip");
     let tooltip = vanillaTooltip.cloneNode(true);
     vanillaTooltip.after(tooltip);
@@ -287,111 +280,58 @@
     tooltip.setAttribute("position", "after_end");
     gTabsPanel.createTabTooltip = function(e) {
       e.stopPropagation();
-      let row = e.target.triggerNode
-        ? e.target.triggerNode.closest(".all-tabs-item")
-        : null;
-      let { tab } = row;
-      if (!row || !tab) return e.preventDefault();
-      let stringWithShortcut = (stringId, keyElemId, pluralCount) => {
-        let keyElem = document.getElementById(keyElemId);
-        let shortcut = ShortcutUtils.prettifyShortcut(keyElem);
-        return PluralForm.get(
-          pluralCount,
-          gTabBrowserBundle.GetStringFromName(stringId)
-        )
-          .replace("%S", shortcut)
-          .replace("#1", pluralCount);
-      };
-      let label;
+      let row = e.target.triggerNode?.closest(".all-tabs-item");
+      let tab = row?.tab;
+      if (!tab) {
+        e.preventDefault();
+        return;
+      }
+      let l10nId, l10nArgs;
       let align = true;
       let { linkedBrowser } = tab;
       const selectedTabs = gBrowser.selectedTabs;
       const contextTabInSelection = selectedTabs.includes(tab);
-      const affectedTabsLength = contextTabInSelection
-        ? selectedTabs.length
-        : 1;
+      const tabCount = contextTabInSelection ? selectedTabs.length : 1;
       if (row.querySelector("[close-button]").matches(":hover")) {
-        let shortcut = ShortcutUtils.prettifyShortcut(
-          document.getElementById("key_close")
-        );
-        label = PluralForm.get(
-          affectedTabsLength,
-          gTabBrowserBundle.GetStringFromName("tabs.closeTabs.tooltip")
-        ).replace("#1", affectedTabsLength);
-        if (contextTabInSelection && shortcut) {
-          if (label.includes("%S")) label = label.replace("%S", shortcut);
-          else label = label + " (" + shortcut + ")";
-        }
+        l10nId = "tabbrowser-close-tabs-tooltip";
+        l10nArgs = { tabCount };
         align = false;
       } else if (row.querySelector("[toggle-mute]").matches(":hover")) {
-        let stringID;
+        l10nArgs = { tabCount };
         if (contextTabInSelection) {
-          stringID = linkedBrowser.audioMuted
-            ? "tabs.unmuteAudio2.tooltip"
-            : "tabs.muteAudio2.tooltip";
-          label = stringWithShortcut(
-            stringID,
-            "key_toggleMute",
-            affectedTabsLength
-          );
+          l10nId = linkedBrowser.audioMuted
+            ? "tabbrowser-unmute-tab-audio-tooltip"
+            : "tabbrowser-mute-tab-audio-tooltip";
+          const keyElem = document.getElementById("key_toggleMute");
+          l10nArgs.shortcut = ShortcutUtils.prettifyShortcut(keyElem);
+        } else if (tab.hasAttribute("activemedia-blocked")) {
+          l10nId = "tabbrowser-unblock-tab-audio-tooltip";
         } else {
-          if (tab.hasAttribute("activemedia-blocked")) {
-            stringID = "tabs.unblockAudio2.tooltip";
-          } else {
-            stringID = linkedBrowser.audioMuted
-              ? "tabs.unmuteAudio2.background.tooltip"
-              : "tabs.muteAudio2.background.tooltip";
-          }
-          label = PluralForm.get(
-            affectedTabsLength,
-            gTabBrowserBundle.GetStringFromName(stringID)
-          ).replace("#1", affectedTabsLength);
+          l10nId = linkedBrowser.audioMuted
+            ? "tabbrowser-unmute-tab-audio-background-tooltip"
+            : "tabbrowser-mute-tab-audio-background-tooltip";
         }
         align = false;
       } else {
-        label = tab._fullLabel || tab.getAttribute("label");
-        if (
-          Services.prefs.getBoolPref(
-            "browser.tabs.tooltipsShowPidAndActiveness",
-            false
-          )
-        ) {
-          if (linkedBrowser) {
-            let [
-              contentPid,
-              ...framePids
-            ] = gTabsPanel.E10SUtils.getBrowserPids(
-              linkedBrowser,
-              gFissionBrowser
-            );
-            if (contentPid) {
-              if (framePids && framePids.length) {
-                label += ` (pids ${contentPid}, ${framePids
-                  .sort()
-                  .join(", ")})`;
-              } else {
-                label += ` (pid ${contentPid})`;
-              }
-            }
-            if (linkedBrowser.docShellIsActive) label += " [A]";
-          }
-        }
-        if (tab.userContextId) {
-          label = gTabBrowserBundle.formatStringFromName(
-            "tabs.containers.tooltip",
-            [
-              label,
-              ContextualIdentityService.getUserContextLabel(tab.userContextId),
-            ]
-          );
-        }
+        l10nId = "tabbrowser-tab-tooltip";
+        l10nArgs = { title: gBrowser.getTabTooltip(tab, true) };
       }
       if (align) {
         e.target.setAttribute("position", "after_start");
         e.target.moveToAnchor(row, "after_start");
       }
       let title = e.target.querySelector(".places-tooltip-title");
-      title.textContent = label;
+      let localized = {};
+      if (l10nId) {
+        let [msg] = gBrowser.tabLocalization.formatMessagesSync([
+          { l10nId, l10nArgs },
+        ]);
+        localized.value = msg.value;
+        if (msg.attributes) {
+          for (let attr of msg.attributes) localized[attr.name] = attr.value;
+        }
+      }
+      title.textContent = localized.label ?? "";
       if (tab.getAttribute("customizemode") === "true") {
         e.target
           .querySelector(".places-tooltip-box")

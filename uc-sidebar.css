@@ -128,10 +128,11 @@ for use with tooltipStyler.uc.js - won't do anything without that script. */
   }
 
   .textbox-search-icons[selectedIndex="1"] .textbox-search-clear {
-    background-image: url(chrome://userchrome/content/textbox-clear.svg) !important;
+    list-style-image: url(chrome://userchrome/content/textbox-clear.svg) !important;
+    /* background-image: url(chrome://userchrome/content/textbox-clear.svg) !important;
     background-size: contain !important;
     background-position: center !important;
-    background-repeat: no-repeat !important;
+    background-repeat: no-repeat !important; */
     fill: var(--ui-text-80) !important;
     -moz-context-properties: fill, fill-opacity !important;
     fill-opacity: 0 !important;
