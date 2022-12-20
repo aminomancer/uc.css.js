@@ -1461,22 +1461,6 @@ toolbar button slider script. but just in case) */
   padding: 0 !important;
 }
 
-#editBookmarkPanelTitle {
-  margin-block: 4px 0 !important;
-}
-
-#editBookmarkPanel toolbarseparator {
-  margin: var(--menu-separator-margin) !important;
-}
-
-#editBookmarkSeparator {
-  display: none !important;
-}
-
-#editBookmarkPanelInfoArea {
-  padding-block: 0 !important;
-}
-
 #addon-webext-perm-list,
 #addon-webext-perm-single-entry {
   margin-block-start: 6px !important;

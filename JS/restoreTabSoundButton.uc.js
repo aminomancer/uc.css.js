@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Restore pre-Proton Tab Sound Button
-// @version        2.3.7
+// @version        2.3.8
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Proton makes really big changes to tabs, in particular
@@ -187,7 +187,7 @@
       return;
     }
     let tabRect = windowUtils.getBoundsWithoutFlushing(tab);
-    let l10nId, l10nArgs;
+    let id, args;
     let align = true;
     let { linkedBrowser } = tab;
     const selectedTabs = this.selectedTabs;
@@ -195,30 +195,30 @@
     const tabCount = contextTabInSelection ? selectedTabs.length : 1;
     if (tab.mOverCloseButton) {
       let rect = windowUtils.getBoundsWithoutFlushing(tab.closeButton);
-      l10nId = "tabbrowser-close-tabs-tooltip";
-      l10nArgs = { tabCount };
+      id = "tabbrowser-close-tabs-tooltip";
+      args = { tabCount };
       align = rect.right - tabRect.left < 250;
     } else if (tab._overPlayingIcon) {
       let icon = tab.soundPlayingIcon || tab.overlayIcon;
       let rect = windowUtils.getBoundsWithoutFlushing(icon);
-      l10nArgs = { tabCount };
+      args = { tabCount };
       if (contextTabInSelection) {
-        l10nId = linkedBrowser.audioMuted
+        id = linkedBrowser.audioMuted
           ? "tabbrowser-unmute-tab-audio-tooltip"
           : "tabbrowser-mute-tab-audio-tooltip";
         const keyElem = document.getElementById("key_toggleMute");
-        l10nArgs.shortcut = ShortcutUtils.prettifyShortcut(keyElem);
+        args.shortcut = ShortcutUtils.prettifyShortcut(keyElem);
       } else if (tab.hasAttribute("activemedia-blocked")) {
-        l10nId = "tabbrowser-unblock-tab-audio-tooltip";
+        id = "tabbrowser-unblock-tab-audio-tooltip";
       } else {
-        l10nId = linkedBrowser.audioMuted
+        id = linkedBrowser.audioMuted
           ? "tabbrowser-unmute-tab-audio-background-tooltip"
           : "tabbrowser-mute-tab-audio-background-tooltip";
       }
       align = rect.right - tabRect.left < 250;
     } else {
-      l10nId = "tabbrowser-tab-tooltip";
-      l10nArgs = { title: this.getTabTooltip(tab, true) };
+      id = "tabbrowser-tab-tooltip";
+      args = { title: this.getTabTooltip(tab, true) };
     }
     if (align) {
       e.target.setAttribute("position", "after_start");
@@ -226,10 +226,8 @@
     }
     let title = e.target.querySelector(".places-tooltip-title");
     let localized = {};
-    if (l10nId) {
-      let [msg] = this.tabLocalization.formatMessagesSync([
-        { l10nId, l10nArgs },
-      ]);
+    if (id) {
+      let [msg] = this.tabLocalization.formatMessagesSync([{ id, args }]);
       localized.value = msg.value;
       if (msg.attributes) {
         for (let attr of msg.attributes) localized[attr.name] = attr.value;

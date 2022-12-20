@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Custom Hint Provider
-// @version        1.1.3
+// @version        1.1.4
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    A utility script for other scripts to take advantage of. Sets
@@ -16,7 +16,7 @@
 // ==/UserScript==
 
 window.CustomHint = {
-  _timerID: null,
+  ...window.ConfirmationHint,
 
   /**
    * Shows a transient, non-interactive confirmation hint anchored to an
@@ -57,9 +57,11 @@ window.CustomHint = {
   show(anchor, message, options = {}) {
     this._reset();
 
+    this._message.removeAttribute("data-l10n-id");
     this._message.textContent = message;
 
     if (options.description) {
+      this._description.removeAttribute("data-l10n-id");
       this._description.textContent = options.description;
       this._description.hidden = false;
       this._panel.classList.add("with-description");
@@ -123,77 +125,42 @@ window.CustomHint = {
     }
   },
 
-  get _panel() {
-    this._ensurePanel();
-    return this.__panel;
-  },
-
-  get _animationBox() {
-    this._ensurePanel();
-    delete this._animationBox;
-    return (this._animationBox = document.getElementById(
-      "confirmation-hint-checkmark-animation-container"
-    ));
-  },
-
-  get _message() {
-    this._ensurePanel();
-    delete this._message;
-    return (this._message = document.getElementById(
-      "confirmation-hint-message"
-    ));
-  },
-
-  get _description() {
-    this._ensurePanel();
-    delete this._description;
-    return (this._description = document.getElementById(
-      "confirmation-hint-description"
-    ));
-  },
-
   _ensurePanel() {
     if (!this.__panel) {
       // hook into the built-in confirmation hint element
       let wrapper = document.getElementById("confirmation-hint-wrapper");
       wrapper?.replaceWith(wrapper.content);
-      this.__panel = document.getElementById("confirmation-hint");
-      ConfirmationHint.__panel = document.getElementById("confirmation-hint");
+      this.__panel = ConfirmationHint.__panel = document.getElementById(
+        "confirmation-hint"
+      );
     }
   },
 };
 
 (function() {
   function init() {
-    // when the confirmation hint was created, openPopup worked differently. it
-    // didn't set the "open" attribute on the anchor directly. that was up to
-    // the function calling openPopup to handle. which worked well for the
-    // confirmation hint, since it shouldn't set the "open" attribute at all.
-    // the confirmation hint isn't a popup or a panel in terms of function, it's
-    // more like a tooltip. so it shouldn't show the [open] style on buttons
-    // it's anchored to, nor should it stifle scrolling while it's open. since
-    // setting the attribute is now built into the binary code, we can only stop
-    // it by using openPopupAtScreen instead of openPopup. this is why I tried
-    // to get mozilla to revert this change to openPopup but nobody has ever
-    // responded. so for now I'm just gonna fix it with a script. it will get
-    // the coordinates via javascript instead of C++
     ConfirmationHint.show = function show(anchor, messageId, options = {}) {
       this._reset();
-      this._message.textContent = gBrowserBundle.GetStringFromName(
-        `confirmationHint.${messageId}.label`
-      );
-      if (options.showDescription) {
-        this._description.textContent = gBrowserBundle.GetStringFromName(
-          `confirmationHint.${messageId}.description`
-        );
+
+      MozXULElement.insertFTLIfNeeded("browser/branding/brandings.ftl");
+      MozXULElement.insertFTLIfNeeded("browser/confirmationHints.ftl");
+      document.l10n.setAttributes(this._message, messageId);
+
+      if (options.descriptionId) {
+        document.l10n.setAttributes(this._description, options.descriptionId);
         this._description.hidden = false;
         this._panel.classList.add("with-description");
       } else {
         this._description.hidden = true;
         this._panel.classList.remove("with-description");
       }
-      if (options.hideArrow) this._panel.setAttribute("hidearrow", "true");
+
+      if (options.hideArrow) {
+        this._panel.setAttribute("hidearrow", "true");
+      }
+
       this._panel.setAttribute("data-message-id", messageId);
+
       const DURATION = options.showDescription ? 4000 : 1500;
       this._panel.addEventListener(
         "popupshown",
@@ -206,6 +173,7 @@ window.CustomHint = {
         },
         { once: true }
       );
+
       this._panel.addEventListener("popuphidden", () => this._reset(), {
         once: true,
       });
@@ -213,6 +181,18 @@ window.CustomHint = {
       let { position, x, y } = options;
       this._panel.openPopup(null, { position, triggerEvent: options.event });
       this._panel.moveToAnchor(anchor, position, x, y);
+    };
+
+    ConfirmationHint._reset = function _reset() {
+      if (this._timerID) {
+        clearTimeout(this._timerID);
+        this._timerID = null;
+      }
+      if (this.__panel) {
+        this._panel.removeAttribute("hidearrow");
+        this._animationBox.removeAttribute("animate");
+        this._panel.removeAttribute("data-message-id");
+      }
     };
   }
   if (gBrowserInit.delayedStartupFinished) {

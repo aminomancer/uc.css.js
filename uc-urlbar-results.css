@@ -330,6 +330,7 @@ by underlining them (requires urlbarMods.uc.js) */
   background: url(chrome://userchrome/content/skin/back.svg) no-repeat !important;
 }
 
+.urlbarView-row[dynamicType="contextualSearch"] .urlbarView-dynamic-contextualSearch-description,
 .urlbarView-row:is([type="switchtab"], [type="remotetab"]) > .urlbarView-row-inner > .urlbarView-no-wrap > .urlbarView-action {
   /* background-color: transparent !important;
   border-radius: unset !important; */
@@ -381,6 +382,7 @@ by underlining them (requires urlbarMods.uc.js) */
 .urlbarView-tags,
 .urlbarView-dynamic-calculator-action,
 .urlbarView-dynamic-unitConversion-action,
+.urlbarView-row[dynamicType="contextualSearch"] .urlbarView-dynamic-contextualSearch-description,
 .urlbarView-row:is([type="switchtab"], [type="remotetab"]) > .urlbarView-row-inner > .urlbarView-no-wrap > .urlbarView-action {
   margin-inline: 8px 0 !important;
 }

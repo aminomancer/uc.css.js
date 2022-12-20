@@ -625,8 +625,9 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
     }
 
     .urlbarView-row .urlbarView-tag,
-    .urlbarView-row:is([type="switchtab"], [type="remotetab"]) > .urlbarView-row-inner > .urlbarView-no-wrap > .urlbarView-action {
-      line-height: 15px !important;
+    .urlbarView-row:is([type="switchtab"], [type="remotetab"]) > .urlbarView-row-inner > .urlbarView-no-wrap > .urlbarView-action,
+    .urlbarView-row[dynamicType="contextualSearch"] .urlbarView-dynamic-contextualSearch-description {
+      line-height: 14px !important;
       font-weight: var(--uc-font-weight-thin, 400) !important;
     }
 

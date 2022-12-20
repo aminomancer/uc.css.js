@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           All Tabs Menu Expansion Pack
-// @version        2.1.3
+// @version        2.1.4
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Next to the "new tab" button in Firefox there's a V-shaped button that opens a
@@ -99,25 +99,25 @@
       !lazy.TabsPanel.prototype.reversed
     ) {
       eval(
-        `panel._populate = function ` +
-          panel._populate
-            .toSource()
-            .replace(
-              /super\.\_populate\(event\)\;/,
-              Object.getPrototypeOf(panel)
-                ._populate.toSource()
-                .replace(/^.*\n\s*/, "")
-                .replace(/\n.*$/, "")
-            )
-            .replace(/appendChild/, `prepend`) +
-          `\n panel._addTab = function ` +
-          panel._addTab
-            .toSource()
-            .replace(
-              /nextRow\.parentNode\.insertBefore\(newRow\, nextRow\)\;/,
-              `nextRow.after(newRow)`
-            )
-            .replace(/this\.\_addElement/, `this.containerNode.prepend`)
+        `panel._populate = function ${panel._populate
+          .toSource()
+          .replace(
+            /super\.\_populate\(event\)\;/,
+            Object.getPrototypeOf(panel)
+              ._populate.toSource()
+              .replace(/^.*\n\s*/, "")
+              .replace(/\n.*$/, "")
+          )
+          .replace(
+            /appendChild/,
+            `prepend`
+          )}\n panel._addTab = function ${panel._addTab
+          .toSource()
+          .replace(
+            /nextRow\.parentNode\.insertBefore\(newRow\, nextRow\)\;/,
+            `nextRow.after(newRow)`
+          )
+          .replace(/this\.\_addElement/, `this.containerNode.prepend`)}`
       );
       lazy.TabsPanel.prototype.reversed = true;
     } else {
@@ -201,49 +201,47 @@
         .startsWith("(function uc_ATMEP_")
     ) {
       eval(
-        `panelViewClass._makeNavigableTreeWalker = function ` +
-          panelViewClass._makeNavigableTreeWalker
-            .toSource()
-            .replace(/^\(/, "")
-            .replace(/\)$/, "")
-            .replace(/^_makeNavigableTreeWalker\s*/, "")
-            .replace(/^function\s*/, "")
-            .replace(/^(.)/, `uc_ATMEP_makeNavigableTreeWalker $1`)
-            .replace(/\(arrowKey\)/, `(arrowKey, vertical = true)`)
-            // .replace(/(node\.disabled)/, `$1 || node.hidden`)
-            .replace(
-              /(let bounds = this)/,
-              `if (node.hidden) {\n        return NodeFilter.FILTER_SKIP;\n      }\n      $1`
-            )
-            .replace(
-              /(\(!arrowKey && this\._isNavigableWithTabOnly\(node\)\)\n\s*\) \{)/,
-              /* javascript */ `$1
+        `panelViewClass._makeNavigableTreeWalker = function ${panelViewClass._makeNavigableTreeWalker
+          .toSource()
+          .replace(/^\(/, "")
+          .replace(/\)$/, "")
+          .replace(/^_makeNavigableTreeWalker\s*/, "")
+          .replace(/^function\s*/, "")
+          .replace(/^(.)/, `uc_ATMEP_makeNavigableTreeWalker $1`)
+          .replace(/\(arrowKey\)/, `(arrowKey, vertical = true)`)
+          // .replace(/(node\.disabled)/, `$1 || node.hidden`)
+          .replace(
+            /(let bounds = this)/,
+            `if (node.hidden) {\n        return NodeFilter.FILTER_SKIP;\n      }\n      $1`
+          )
+          .replace(
+            /(\(!arrowKey && this\._isNavigableWithTabOnly\(node\)\)\n\s*\) \{)/,
+            /* javascript */ `$1
         if (vertical && node.classList.contains("all-tabs-secondary-button")) return NodeFilter.FILTER_SKIP;`
-            )
+          )}`
       );
     }
     if (
       !panelViewClass.keyNavigation.toSource().startsWith("(function uc_ATMEP_")
     ) {
       eval(
-        `panelViewClass.keyNavigation = function ` +
-          panelViewClass.keyNavigation
-            .toSource()
-            .replace(/^\(/, "")
-            .replace(/\)$/, "")
-            .replace(/^keyNavigation\s*/, "")
-            .replace(/^function\s*/, "")
-            .replace(/^(.)/, `uc_ATMEP_keyNavigation $1`)
-            .replace(
-              /(if \(\n\s*\(!this\.window\.RTL_UI && keyCode == \"ArrowLeft\"\) \|\|)/,
-              /* javascript */ `if (this.selectedElement && this.selectedElement.matches(".all-tabs-button, .all-tabs-secondary-button")) {
+        `panelViewClass.keyNavigation = function ${panelViewClass.keyNavigation
+          .toSource()
+          .replace(/^\(/, "")
+          .replace(/\)$/, "")
+          .replace(/^keyNavigation\s*/, "")
+          .replace(/^function\s*/, "")
+          .replace(/^(.)/, `uc_ATMEP_keyNavigation $1`)
+          .replace(
+            /(if \(\n\s*\(!this\.window\.RTL_UI && keyCode == \"ArrowLeft\"\) \|\|)/,
+            /* javascript */ `if (this.selectedElement && this.selectedElement.matches(".all-tabs-button, .all-tabs-secondary-button")) {
           let isNext = (this.window.RTL_UI && keyCode == "ArrowLeft") || (!this.window.RTL_UI && keyCode == "ArrowRight");
           let nextButton = this.moveSelectionHorizontal(isNext);
           Services.focus.setFocus(nextButton, Services.focus.FLAG_BYKEY);
           break;
         }
         $1`
-            )
+          )}`
       );
       delete panelViewClass.__arrowNavigableWalker;
       delete panelViewClass.__tabNavigableWalker;
@@ -286,35 +284,35 @@
         e.preventDefault();
         return;
       }
-      let l10nId, l10nArgs;
+      let id, args;
       let align = true;
       let { linkedBrowser } = tab;
       const selectedTabs = gBrowser.selectedTabs;
       const contextTabInSelection = selectedTabs.includes(tab);
       const tabCount = contextTabInSelection ? selectedTabs.length : 1;
       if (row.querySelector("[close-button]").matches(":hover")) {
-        l10nId = "tabbrowser-close-tabs-tooltip";
-        l10nArgs = { tabCount };
+        id = "tabbrowser-close-tabs-tooltip";
+        args = { tabCount };
         align = false;
       } else if (row.querySelector("[toggle-mute]").matches(":hover")) {
-        l10nArgs = { tabCount };
+        args = { tabCount };
         if (contextTabInSelection) {
-          l10nId = linkedBrowser.audioMuted
+          id = linkedBrowser.audioMuted
             ? "tabbrowser-unmute-tab-audio-tooltip"
             : "tabbrowser-mute-tab-audio-tooltip";
           const keyElem = document.getElementById("key_toggleMute");
-          l10nArgs.shortcut = ShortcutUtils.prettifyShortcut(keyElem);
+          args.shortcut = ShortcutUtils.prettifyShortcut(keyElem);
         } else if (tab.hasAttribute("activemedia-blocked")) {
-          l10nId = "tabbrowser-unblock-tab-audio-tooltip";
+          id = "tabbrowser-unblock-tab-audio-tooltip";
         } else {
-          l10nId = linkedBrowser.audioMuted
+          id = linkedBrowser.audioMuted
             ? "tabbrowser-unmute-tab-audio-background-tooltip"
             : "tabbrowser-mute-tab-audio-background-tooltip";
         }
         align = false;
       } else {
-        l10nId = "tabbrowser-tab-tooltip";
-        l10nArgs = { title: gBrowser.getTabTooltip(tab, true) };
+        id = "tabbrowser-tab-tooltip";
+        args = { title: gBrowser.getTabTooltip(tab, true) };
       }
       if (align) {
         e.target.setAttribute("position", "after_start");
@@ -322,10 +320,8 @@
       }
       let title = e.target.querySelector(".places-tooltip-title");
       let localized = {};
-      if (l10nId) {
-        let [msg] = gBrowser.tabLocalization.formatMessagesSync([
-          { l10nId, l10nArgs },
-        ]);
+      if (id) {
+        let [msg] = gBrowser.tabLocalization.formatMessagesSync([{ id, args }]);
         localized.value = msg.value;
         if (msg.attributes) {
           for (let attr of msg.attributes) localized[attr.name] = attr.value;
@@ -435,27 +431,25 @@
     let handleRequestSrc = PictureInPicture.handlePictureInPictureRequest.toSource();
     if (!handleRequestSrc.includes("_tabAttrModified")) {
       eval(
-        `PictureInPicture.handlePictureInPictureRequest = async function ` +
-          handleRequestSrc
-            .replace(/async handlePictureInPictureRequest/, "")
-            .replace(/\sServices\.telemetry.*\s*.*\s*.*\s*.*/, "")
-            .replace(/gCurrentPlayerCount.*/g, "")
-            .replace(
-              /(tab\.setAttribute\(\"pictureinpicture\".*)/,
-              `$1 parentWin.gBrowser._tabAttrModified(tab, ["pictureinpicture"]);`
-            )
+        `PictureInPicture.handlePictureInPictureRequest = async function ${handleRequestSrc
+          .replace(/async handlePictureInPictureRequest/, "")
+          .replace(/\sServices\.telemetry.*\s*.*\s*.*\s*.*/, "")
+          .replace(/gCurrentPlayerCount.*/g, "")
+          .replace(
+            /(tab\.setAttribute\(\"pictureinpicture\".*)/,
+            `$1 parentWin.gBrowser._tabAttrModified(tab, ["pictureinpicture"]);`
+          )}`
       );
     }
     let clearIconSrc = PictureInPicture.clearPipTabIcon.toSource();
     if (!clearIconSrc.includes("_tabAttrModified")) {
       eval(
-        `PictureInPicture.clearPipTabIcon = function ` +
-          clearIconSrc
-            .replace(/WINDOW\_TYPE/, `"Toolkit:PictureInPicture"`)
-            .replace(
-              /(tab\.removeAttribute\(\"pictureinpicture\".*)/,
-              `$1 gBrowser._tabAttrModified(tab, ["pictureinpicture"]);`
-            )
+        `PictureInPicture.clearPipTabIcon = function ${clearIconSrc
+          .replace(/WINDOW\_TYPE/, `"Toolkit:PictureInPicture"`)
+          .replace(
+            /(tab\.removeAttribute\(\"pictureinpicture\".*)/,
+            `$1 gBrowser._tabAttrModified(tab, ["pictureinpicture"]);`
+          )}`
       );
     }
   }
@@ -1250,7 +1244,7 @@
     let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
       Ci.nsIStyleSheetService
     );
-    let uri = makeURI("data:text/css;charset=UTF=8," + encodeURIComponent(css));
+    let uri = makeURI(`data:text/css;charset=UTF=8,${encodeURIComponent(css)}`);
     if (sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) return;
     sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
   }

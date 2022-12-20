@@ -606,6 +606,12 @@ translucent with acrylic effect. enable layout.css.backdrop-filter.enabled */
   overflow: scroll !important;
   scrollbar-width: none !important;
   column-gap: 5px !important;
+  z-index: 20 !important;
+}
+
+#navigator-toolbox .global-notificationbox {
+  position: fixed !important;
+  bottom: 0 !important;
 }
 
 #navigator-toolbox > :is(legacy-stack, .notificationbox-stack) notification-message,
@@ -649,11 +655,6 @@ translucent with acrylic effect. enable layout.css.backdrop-filter.enabled */
   --in-content-button-vertical-padding: 5px !important;
 }
 
-/* hide notifications when the bookmarks toolbar is visible */
-:root:not([inFullscreen]) #PersonalToolbar:not([collapsed="true"], [customizing]) + * {
-  display: none !important;
-}
-
 .notificationbox-stack[notificationside="top"] > :is(notification, notification-message) {
   border-radius: 0 !important;
   overflow: hidden !important;
@@ -661,7 +662,8 @@ translucent with acrylic effect. enable layout.css.backdrop-filter.enabled */
   border-bottom-right-radius: 4px !important;
 }
 
-.notificationbox-stack[notificationside="bottom"] > :is(notification, notification-message) {
+.notificationbox-stack[notificationside="bottom"] > :is(notification, notification-message),
+#navigator-toolbox .global-notificationbox > :is(notification, notification-message) {
   border-radius: 0 !important;
   overflow: hidden !important;
   border-top-left-radius: 4px !important;
@@ -772,11 +774,21 @@ link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infob
 
 .notificationbox-stack notification[style*="opacity: 0;"],
 #navigator-toolbox > :is(legacy-stack, .notificationbox-stack) > notification-message[style*="opacity: 0;"],
-#navigator-toolbox > named-deck > .notificationbox-stack > notification-message[style*="opacity: 0;"],
-#navigator-toolbox .global-notificationbox notification-message[style*="opacity: 0;"] {
+#navigator-toolbox > named-deck > .notificationbox-stack > notification-message[style*="opacity: 0;"] {
   margin-top: -32px !important;
   max-width: 1px !important;
   transition: margin-top 100ms linear, max-width 100ms ease-in-out, opacity 100ms ease-in-out !important;
+}
+
+#navigator-toolbox .global-notificationbox notification-message.animated {
+  transition: margin-top 100ms linear, transform 100ms linear, max-width 100ms ease-in-out, opacity 100ms ease-in-out !important;
+}
+
+#navigator-toolbox .global-notificationbox notification-message[style*="opacity: 0;"] {
+  margin-top: 0.001px !important;
+  transform: translateY(32px) !important;
+  max-width: 1px !important;
+  transition: margin-top 100ms linear, transform 100ms linear, max-width 100ms ease-in-out, opacity 100ms ease-in-out !important;
 }
 
 link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-content {

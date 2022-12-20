@@ -36,19 +36,58 @@
   --panel-width: 25em !important;
 }
 
+#editBookmarkPanel > .panel-subview-body {
+  padding: var(--arrowpanel-padding) !important;
+}
+
+#editBookmarkPanel > #editBookmarkHeaderSeparator,
+#editBookmarkPanel > .panel-subview-body > #editBookmarkSeparator {
+	margin-bottom: 0 !important;
+	margin-inline: var(--panel-separator-margin) !important;
+}
+
 #editBookmarkPanelRows {
   padding-inline: 14px !important;
   padding-block: 8px 0 !important;
 }
 
+#editBookmarkPanelInfoArea {
+  padding: 0 !important;
+  padding-bottom: var(--arrowpanel-padding) !important;
+}
+
+#editBookmarkPanelContent {
+  padding: 0 !important;
+  grid-template-columns: 100% !important;
+}
+
 #editBookmarkPanelBottomContent {
-  padding-inline: 10px !important;
+  padding: var(--panel-subview-body-padding-magnitude) 0 !important;
   padding-block: 8px !important;
 }
 
-#editBookmarkPanelRows > vbox {
-  margin-block: 0 !important;
-  padding-block: 8px 0 !important;
+#editBookmarkPanel #editBookmarkPanelBottomContent > checkbox {
+  margin-inline-start: 0 !important;
+}
+
+#editBookmarkPanelBottomButtons {
+  margin: 0 !important;
+  gap: 8px !important;
+  min-width: unset !important;
+}
+
+#editBookmarkPanelContent > label:not(.editBMPanel_nameRow),
+#editBookmarkPanelContent > #editBMPanel_folderTreeRow,
+#editBookmarkPanelContent > #editBMPanel_tagsSelectorRow {
+	padding-block: 8px 0 !important;
+}
+
+#editBookmarkPanelTitle {
+  margin-block: 4px 0 !important;
+}
+
+#editBookmarkSeparator {
+  display: none !important;
 }
 
 #editBookmarkPanel :focus-visible,
@@ -233,12 +272,6 @@
   background-color: var(--ebmp-focus-bgcolor) !important;
 }
 
-#editBookmarkPanelBottomButtons {
-  margin: 0 14px 14px 14px !important;
-  gap: 8px !important;
-  min-width: unset !important;
-}
-
 #editBookmarkPanel .panel-footer > button {
   border: 1px solid transparent !important;
   flex-grow: 5 !important;
@@ -407,19 +440,19 @@
   background-color: var(--ebmp-double-focus-bgcolor) !important;
 }
 
-:is(#bookmarkpropertiesdialog, #editBookmarkPanel) checkbox {
+:where(#bookmarkpropertiesdialog, #editBookmarkPanel) checkbox {
   margin-inline-start: 4px !important;
 }
 
-:is(#bookmarkpropertiesdialog, #editBookmarkPanel) checkbox .checkbox-check {
+:where(#bookmarkpropertiesdialog, #editBookmarkPanel) checkbox .checkbox-check {
   margin-inline-end: 6px !important;
 }
 
-:is(#bookmarkpropertiesdialog, #editBookmarkPanel) checkbox:focus-visible:not(:active) .checkbox-check {
+:where(#bookmarkpropertiesdialog, #editBookmarkPanel) checkbox:focus-visible:not(:active) .checkbox-check {
   background-color: var(--checkbox-unchecked-hover-bgcolor) !important;
 }
 
-:is(#bookmarkpropertiesdialog, #editBookmarkPanel) checkbox:focus-visible:not(:active) .checkbox-check[checked] {
+:where(#bookmarkpropertiesdialog, #editBookmarkPanel) checkbox:focus-visible:not(:active) .checkbox-check[checked] {
   background-color: var(--checkbox-checked-hover-bgcolor) !important;
 }
 

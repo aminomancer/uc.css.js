@@ -1,7 +1,5 @@
-*.psd
-*.prproj
-custom-*.css
+*lz4
+.*/
 node_modules/
 package-lock.json
-boot.jsm
-resources/in-content/custom-content.css
+.parcel-cache/

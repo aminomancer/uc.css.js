@@ -403,7 +403,7 @@ panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem[originaltype
     --checkbox-checked-active-bgcolor: var(--in-content-primary-button-background-active) !important;
   }
 
-  .control-item {
+  button.control-item {
     /* backdrop-filter has been temporarily disabled by mozilla */
     /* backdrop-filter: blur(8px) !important;
     background-color: var(--btn-bg-color) !important;
@@ -417,7 +417,9 @@ panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem[originaltype
     border-radius: 3px !important;
   }
 
-  body:not(:fullscreen) #controls:is(:hover, [donthide]) .control-item {
+  body:not(:fullscreen) #controls:hover .control-item:not(:hover),
+  body:fullscreen #controls[showing]:hover .control-item:not(:hover),
+  #controls[donthide] .control-item {
     opacity: 1 !important;
   }
 
@@ -426,7 +428,7 @@ panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem[originaltype
     box-shadow: 0 0 5px #111 !important;
   }
 
-  .control-item:hover,
+  button.control-item:hover,
   #controls[keying] button:focus-visible {
     background-color: hsla(0, 0%, 18%, 0.95) !important;
   }
@@ -481,6 +483,11 @@ panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem[originaltype
   #closed-caption:dir(rtl) {
     transform: scaleX(-1);
   }
+  
+  :is(#seekForward:-moz-locale-dir(rtl), #seekBackward:-moz-locale-dir(ltr), #unpip:-moz-locale-dir(rtl), #closed-caption:dir(rtl))::before,
+  :is(#seekForward:-moz-locale-dir(rtl), #seekBackward:-moz-locale-dir(ltr), #unpip:-moz-locale-dir(rtl), #closed-caption:dir(rtl))::after {
+    scale: -1 1;
+  }
 
   .box {
     background-color: var(--panel-bgcolor) !important;
@@ -529,6 +536,31 @@ panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem[originaltype
   .font-size-selection > label > input[type="radio"] {
     appearance: radio !important;
     margin: 0 !important;
+  }
+
+  #scrubber {
+    --track-color: var(--ui-text-40);
+    --progress-color: var(--ui-text-100);
+  }
+
+  #scrubber::-moz-range-thumb {
+    background-color: var(--progress-color) !important;
+    border-color: var(--progress-color) !important;
+  }
+
+  #scrubber::-moz-range-track {
+    background-color: var(--track-color) !important;
+  }
+
+  #scrubber::-moz-range-progress {
+    background-color: var(--progress-color) !important;
+  }
+
+  #controls[keying] .control-item:focus::after,
+  .control-item:hover::after {
+    background-color: hsl(0, 0%, 18%) !important;
+    box-shadow: 0 0 4px hsla(0, 0%, 0%, 0.2) !important;
+    color: inherit !important;
   }
 
   @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {

@@ -276,9 +276,12 @@ but other than that these variables should be available everywhere. */
   --busy-throbber-fill: hsl(218, 90%, 85%);
   --sanitize-border-color: hsla(0, 0%, 5%, 0.2);
   --menu-separator-color: hsl(233, 25%, 23%);
-  --urlbar-input-bgcolor: hsl(233, 28%, 25%);
-  --urlbar-input-bgcolor-brighter: hsl(233, 26%, 27%);
-  --urlbar-input-bgcolor-disabled: hsl(233, 30%, 21%);
+  --uc-toolbar-field-bgcolor: hsl(233, 28%, 25%);
+  --uc-toolbar-field-bgcolor-brighter: hsl(233, 26%, 27%);
+  --uc-toolbar-field-bgcolor-disabled: hsl(233, 30%, 21%);
+  --urlbar-input-bgcolor: var(--uc-toolbar-field-bgcolor);
+  --urlbar-input-bgcolor-brighter: var(--uc-toolbar-field-bgcolor-brighter);
+  --urlbar-input-bgcolor-disabled: var(--uc-toolbar-field-bgcolor-disabled);
   --urlbar-dim-button-bgcolor: hsla(0, 0%, 0%, 0.09);
   --uc-urlbar-container-height: 38px;
   --uc-menubar-searchbar-width: 256px;

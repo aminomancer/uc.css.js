@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Vertical Tabs Pane
-// @version        1.7.0
+// @version        1.7.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Create a vertical pane across from the sidebar that functions
@@ -1707,7 +1707,7 @@
         e.preventDefault();
         return;
       }
-      let l10nId, l10nArgs;
+      let id, args;
       // should we align to the tab or to the mouse? depends on which element
       // was hovered.
       let align = true;
@@ -1717,21 +1717,21 @@
       const tabCount = contextTabInSelection ? selectedTabs.length : 1;
       // a bunch of localization
       if (row.closeButton.matches(":hover")) {
-        l10nId = "tabbrowser-close-tabs-tooltip";
-        l10nArgs = { tabCount };
+        id = "tabbrowser-close-tabs-tooltip";
+        args = { tabCount };
         align = false;
       } else if (row.audioButton.matches(":hover")) {
-        l10nArgs = { tabCount };
+        args = { tabCount };
         if (contextTabInSelection) {
-          l10nId = linkedBrowser.audioMuted
+          id = linkedBrowser.audioMuted
             ? "tabbrowser-unmute-tab-audio-tooltip"
             : "tabbrowser-mute-tab-audio-tooltip";
           const keyElem = document.getElementById("key_toggleMute");
-          l10nArgs.shortcut = ShortcutUtils.prettifyShortcut(keyElem);
+          args.shortcut = ShortcutUtils.prettifyShortcut(keyElem);
         } else if (tab.hasAttribute("activemedia-blocked")) {
-          l10nId = "tabbrowser-unblock-tab-audio-tooltip";
+          id = "tabbrowser-unblock-tab-audio-tooltip";
         } else {
-          l10nId = linkedBrowser.audioMuted
+          id = linkedBrowser.audioMuted
             ? "tabbrowser-unmute-tab-audio-background-tooltip"
             : "tabbrowser-mute-tab-audio-background-tooltip";
         }
@@ -1751,8 +1751,8 @@
           }
           title += ` (${this._fluentStrings[stateString].toLowerCase()})`;
         }
-        l10nId = "tabbrowser-tab-tooltip";
-        l10nArgs = { title };
+        id = "tabbrowser-tab-tooltip";
+        args = { title };
       }
       // align to the row
       if (align) {
@@ -1761,10 +1761,8 @@
       }
       let title = e.target.querySelector(".places-tooltip-title");
       let localized = {};
-      if (l10nId) {
-        let [msg] = gBrowser.tabLocalization.formatMessagesSync([
-          { l10nId, l10nArgs },
-        ]);
+      if (id) {
+        let [msg] = gBrowser.tabLocalization.formatMessagesSync([{ id, args }]);
         localized.value = msg.value;
         if (msg.attributes) {
           for (let attr of msg.attributes) localized[attr.name] = attr.value;

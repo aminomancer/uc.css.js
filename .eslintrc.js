@@ -41,11 +41,15 @@ module.exports = {
     "no-implied-eval": "error",
     "no-unused-vars": "off",
     "prefer-arrow-callback": "off",
+    "prefer-numeric-literals": 2,
+    "prefer-promise-reject-errors": 2,
+    "prefer-reflect": 0,
+    "prefer-rest-params": 2,
+    "prefer-spread": 2,
+    "prefer-template": 2,
     "prettier/prettier": ["error", {}, { usePrettierrc: true }],
   },
-  ignorePatterns: ["node_modules", "utils/boot.jsm"],
-  // Ignore eslint configurations in parent directories.
-  root: true,
+  ignorePatterns: ["node_modules", "utils/**"],
   // allow external repositories that use the plugin to pick them up as well.
   extends: [
     "eslint:recommended",
@@ -62,7 +66,7 @@ module.exports = {
       rules: { complexity: "off", "no-console": "off" },
     },
     {
-      files: ["resources/aboutconfig/**"],
+      files: ["utils/**", "resources/aboutconfig/**"],
       rules: { "prettier/prettier": "off" },
     },
     {
@@ -73,6 +77,10 @@ module.exports = {
     {
       files: ["resources/script-override/**"],
       rules: { "prettier/prettier": ["error", { quoteProps: "preserve" }] },
+    },
+    {
+      files: ["resources/aboutuserchrome/**"],
+      parserOptions: { sourceType: "module" },
     },
     {
       // All .eslintrc.js files are in the node environment, so turn that

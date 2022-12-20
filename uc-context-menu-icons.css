@@ -606,6 +606,8 @@ menuitem.customize-context-reportExtension::before {
   display: -moz-inline-box;
   width: 16px;
   height: 16px;
+  min-width: 16px;
+  min-height: 16px;
   padding-inline: 0px;
   margin-inline: var(--context-iconic-margin);
   fill: currentColor;

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Toolbox Button
-// @version        1.3.0
+// @version        1.3.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Adds a new toolbar button that 1) opens the content toolbox on left click;
@@ -93,9 +93,7 @@
     ChromeUtils.defineESModuleGetters(lazy, {
       BrowserToolboxLauncher:
         "resource://devtools/client/framework/browser-toolbox/Launcher.sys.mjs",
-    });
-    XPCOMUtils.defineLazyModuleGetters(lazy, {
-      require: "resource://devtools/shared/loader/Loader.jsm",
+      require: "resource://devtools/shared/loader/Loader.sys.mjs",
     });
     XPCOMUtils.defineLazyGetter(
       lazy,
@@ -113,7 +111,7 @@
       tooltiptext: l10n.defaultTooltip,
       onBuild(aDoc) {
         let CustomHint = {
-          _timerID: null,
+          ...aDoc.ownerGlobal.ConfirmationHint,
 
           /**
            * Shows a transient, non-interactive confirmation hint anchored to an
@@ -156,9 +154,11 @@
           show(anchor, message, options = {}) {
             this._reset();
 
+            this._message.removeAttribute("data-l10n-id");
             this._message.textContent = message;
 
             if (options.description) {
+              this._description.removeAttribute("data-l10n-id");
               this._description.textContent = options.description;
               this._description.hidden = false;
               this._panel.classList.add("with-description");
@@ -217,42 +217,14 @@
             }
           },
 
-          get _panel() {
-            this._ensurePanel();
-            return this.__panel;
-          },
-
-          get _animationBox() {
-            this._ensurePanel();
-            delete this._animationBox;
-            return (this._animationBox = aDoc.getElementById(
-              "confirmation-hint-checkmark-animation-container"
-            ));
-          },
-
-          get _message() {
-            this._ensurePanel();
-            delete this._message;
-            return (this._message = aDoc.getElementById(
-              "confirmation-hint-message"
-            ));
-          },
-
-          get _description() {
-            this._ensurePanel();
-            delete this._description;
-            return (this._description = aDoc.getElementById(
-              "confirmation-hint-description"
-            ));
-          },
-
           _ensurePanel() {
             if (!this.__panel) {
               // hook into the built-in confirmation hint element
-              let wrapper = aDoc.getElementById("confirmation-hint-wrapper");
+              let wrapper = document.getElementById(
+                "confirmation-hint-wrapper"
+              );
               wrapper?.replaceWith(wrapper.content);
-              this.__panel = aDoc.getElementById("confirmation-hint");
-              ConfirmationHint.__panel = aDoc.getElementById(
+              this.__panel = ConfirmationHint.__panel = document.getElementById(
                 "confirmation-hint"
               );
             }
@@ -311,7 +283,7 @@
           switch (button) {
             case this.mouseConfig.contentToolbox:
               // toggle the content toolbox
-              aDoc.defaultView.key_toggleToolbox.click();
+              aDoc.ownerGlobal.key_toggleToolbox.click();
               break;
             case this.mouseConfig.browserToolbox:
               lazy.BrowserToolboxLauncher.getBrowserToolboxSessionState() // check if a browser toolbox window is already open
@@ -319,7 +291,7 @@
                     event: e,
                     hideCheck: true,
                   }) // if so, just show a hint that it's already open
-                : aDoc.defaultView.key_browserToolbox.click(); // if not, launch a new one
+                : aDoc.ownerGlobal.key_browserToolbox.click(); // if not, launch a new one
               break;
             case this.mouseConfig.popupHide:
               CustomHint.show(
@@ -493,14 +465,14 @@
                     "browserContentToolboxMenu.label",
                     "menu"
                   );
-                  hotkey = aDoc.defaultView.key_toggleToolbox;
+                  hotkey = aDoc.ownerGlobal.key_toggleToolbox;
                   break;
                 case "browserToolbox":
                   labelString = l10n.getString(
                     "browserToolboxMenu.label",
                     "menu"
                   );
-                  hotkey = aDoc.defaultView.key_browserToolbox;
+                  hotkey = aDoc.ownerGlobal.key_browserToolbox;
                   break;
                 case "popupHide":
                   labelString = l10n.getString(
@@ -627,7 +599,7 @@
     margin-inline: 0;
   }`;
   let styleURI = makeURI(
-    "data:text/css;charset=UTF=8," + encodeURIComponent(toolboxCSS)
+    `data:text/css;charset=UTF=8,${encodeURIComponent(toolboxCSS)}`
   );
   if (!styleSvc.sheetRegistered(styleURI, styleSvc.AUTHOR_SHEET)) {
     styleSvc.loadAndRegisterSheet(styleURI, styleSvc.AUTHOR_SHEET);

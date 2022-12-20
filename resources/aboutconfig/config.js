@@ -477,7 +477,10 @@ function ShowPrefs() {
   configTree.view = view;
   configTree.controllers.insertControllerAt(0, configController);
 
-  document.getElementById("configDeck").setAttribute("selectedIndex", 1);
+  //document.getElementById("configDeck").setAttribute("selectedIndex", 1); // FF106-
+  //document.getElementById("configDeck").updateSelectedIndex(1); // FF107+
+  document.getElementById("configDeck").selectedIndex = 1; // FF107+ Release & ESR102.x
+
   document.getElementById("configTreeKeyset").removeAttribute("disabled");
   if (!document.getElementById("showWarningNextTime").checked) {
     gPrefBranch.setBoolPref("general.warnOnAboutConfig", false);

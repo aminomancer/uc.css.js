@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Restore pre-Proton Library Button
-// @version        1.2.2
+// @version        1.2.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    The library toolbar button used to have an animation that
@@ -63,7 +63,7 @@
       let libraryButton = document.getElementById("library-button");
       if (
         !libraryButton ||
-        libraryButton.getAttribute("cui-areatype") == "menu-panel" ||
+        libraryButton.getAttribute("cui-areatype") == "panel" ||
         libraryButton.getAttribute("overflowedItem") == "true" ||
         !libraryButton.closest("#nav-bar") ||
         !window.toolbar.visible ||
@@ -82,9 +82,9 @@
 
       this.animBox.style.setProperty(
         "--library-button-height",
-        libraryBounds.height + "px"
+        `${libraryBounds.height}px`
       );
-      this.animBox.style.setProperty("--library-icon-x", iconBounds.x + "px");
+      this.animBox.style.setProperty("--library-icon-x", `${iconBounds.x}px`);
       if (navBar.hasAttribute("brighttext")) {
         this.animBox.setAttribute("brighttext", "true");
       } else {
@@ -130,7 +130,7 @@
         let libraryButton = document.getElementById("library-button");
         if (
           !libraryButton ||
-          libraryButton.getAttribute("cui-areatype") == "menu-panel" ||
+          libraryButton.getAttribute("cui-areatype") == "panel" ||
           libraryButton.getAttribute("overflowedItem") == "true" ||
           !libraryButton.closest("#nav-bar")
         ) {
@@ -140,7 +140,7 @@
         let iconBounds = window.windowUtils.getBoundsWithoutFlushing(
           libraryButton.icon
         );
-        this.animBox.style.setProperty("--library-icon-x", iconBounds.x + "px");
+        this.animBox.style.setProperty("--library-icon-x", `${iconBounds.x}px`);
         this._windowResizeRunning = false;
       });
     }
@@ -187,7 +187,7 @@
           let element = document.getElementById(id);
           if (
             element &&
-            element.getAttribute("cui-areatype") != "menu-panel" &&
+            element.getAttribute("cui-areatype") != "panel" &&
             element.getAttribute("overflowedItem") != "true" &&
             isElementVisible(element) &&
             !scrolledOutOfView(element)
@@ -199,7 +199,7 @@
       }
 
       if (!anchor) anchor = document.getElementById("PanelUI-menu-button");
-      ConfirmationHint.show(anchor, "pageBookmarked2");
+      ConfirmationHint.show(anchor, "confirmation-hint-page-bookmarked");
     };
   }
 

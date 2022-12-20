@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Navbar Toolbar Button Slider
-// @version        2.8.6
+// @version        2.8.7
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    Wrap all toolbar buttons in a scrollable container. It can
@@ -858,7 +858,7 @@ class NavbarToolbarSlider {
           let element = document.getElementById(id);
           if (
             element &&
-            element.getAttribute("cui-areatype") != "menu-panel" &&
+            element.getAttribute("cui-areatype") != "panel" &&
             element.getAttribute("overflowedItem") != "true" &&
             isElementVisible(element) &&
             !NavbarToolbarSlider.scrolledOutOfView(element, ".slider-container")
@@ -869,7 +869,7 @@ class NavbarToolbarSlider {
         }
       }
       if (!anchor) anchor = document.getElementById("PanelUI-menu-button");
-      ConfirmationHint.show(anchor, "pageBookmarked2");
+      ConfirmationHint.show(anchor, "confirmation-hint-page-bookmarked");
     };
   }
   registerSheet() {
@@ -877,7 +877,7 @@ class NavbarToolbarSlider {
     let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
       Ci.nsIStyleSheetService
     );
-    let uri = makeURI("data:text/css;charset=UTF=8," + encodeURIComponent(css));
+    let uri = makeURI(`data:text/css;charset=UTF=8,${encodeURIComponent(css)}`);
     if (sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) return;
     sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
   }
