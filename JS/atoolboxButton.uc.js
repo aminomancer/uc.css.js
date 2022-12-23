@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Toolbox Button
-// @version        1.3.1
+// @version        1.3.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Adds a new toolbar button that 1) opens the content toolbox on left click;
@@ -71,8 +71,11 @@
       this.strings.set(name, string);
       return string;
     },
+    getFluentValue(id, args) {
+      return this.fluentStrings.formatValueSync(id, args);
+    },
     get defaultLabel() {
-      return this.getString("browserContentToolboxMenu.label", "menu");
+      return this.getString("toolbox.label", "toolbox");
     },
     get defaultTooltip() {
       return this.defaultLabel;
@@ -83,6 +86,11 @@
   );
   XPCOMUtils.defineLazyGetter(l10n.bundles, "toolbox", () =>
     Services.strings.createBundle("chrome://devtools/locale/toolbox.properties")
+  );
+  XPCOMUtils.defineLazyGetter(
+    l10n,
+    "fluentStrings",
+    () => new Localization(["devtools/client/toolbox.ftl"], true)
   );
 
   if (
@@ -461,10 +469,7 @@
             if (val === 0) {
               switch (key) {
                 case "contentToolbox":
-                  labelString = l10n.getString(
-                    "browserContentToolboxMenu.label",
-                    "menu"
-                  );
+                  labelString = l10n.getString("toolbox.label", "toolbox");
                   hotkey = aDoc.ownerGlobal.key_toggleToolbox;
                   break;
                 case "browserToolbox":
@@ -475,9 +480,8 @@
                   hotkey = aDoc.ownerGlobal.key_browserToolbox;
                   break;
                 case "popupHide":
-                  labelString = l10n.getString(
-                    "toolbox.meatballMenu.noautohide.label",
-                    "toolbox"
+                  labelString = l10n.getFluentValue(
+                    "toolbox-meatball-menu-noautohide-label"
                   );
                   break;
               }

@@ -118,8 +118,8 @@
   pointer-events: none !important;
 }
 
-.tab-label[attention]:not([selected="true"]) {
-  font-weight: unset !important;
+.tab-label {
+  font-weight: revert !important;
 }
 
 /* highlight unread tabs; requires italicizeUnreadTabs.uc.js */

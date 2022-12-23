@@ -1554,6 +1554,12 @@ rtl languages. adjust the border radius accordingly */
     --in-content-page-background: var(--uc-content-page-background) !important;
     --dropdown-bgcolor: var(--in-content-page-background) !important;
   }
+
+  #print-progress {
+    background-image: url(chrome://userchrome/content/loading-spinner-css.svg) !important;
+    -moz-context-properties: fill !important;
+    fill: var(--loading-throbber-fill) !important;
+  }
 }
 
 link[href="chrome://global/content/printPagination.css"]
