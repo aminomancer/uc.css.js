@@ -1,0 +1,25 @@
+<!-- This Source Code Form is subject to the terms of the Creative Commons
+   - Attribution-NonCommercial-ShareAlike International License, v. 4.0.
+   - If a copy of the CC BY-NC-SA 4.0 was not distributed with this file,
+   - You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>UserChrome Manager</title>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src resource: chrome:; style-src resource: chrome: 'unsafe-inline'; img-src resource: chrome: file: data: https: http:; connect-src resource: chrome: data: https: http:; object-src 'none'"
+    />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" type="image/svg" id="favicon" href="favicon.svg" />
+    <link rel="stylesheet" href="chrome://global/skin/in-content/common.css" />
+    <link rel="stylesheet" href="chrome://mozapps/content/extensions/aboutaddons.css" />
+    <link rel="stylesheet" href="chrome://global/skin/in-content/toggle-button.css" />
+    <link rel="stylesheet" href="aboutuserchrome.scss" />
+    <link rel="localization" href="toolkit/about/aboutAddons.ftl">
+    <script type="module" src="aboutuserchrome.jsx"></script>
+  </head>
+  <body id="root"></body>
+</html>

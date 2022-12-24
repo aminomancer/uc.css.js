@@ -13,7 +13,7 @@
   "trailingComma": "es5",
   "useTabs": false,
   "overrides": [
-    { "files": [".prettierrc"], "options": { "parser": "json" } },
+    { "files": [".prettierrc", ".parcelrc"], "options": { "parser": "json" } },
     { "files": ["*.css", "*.scss", "*.md"], "options": { "printWidth": 1000 } },
     { "files": ["*.html", "*.xhtml"], "options": { "printWidth": 180 } }
   ]

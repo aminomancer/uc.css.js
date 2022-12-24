@@ -437,6 +437,10 @@ For linting/formatting, I use ESLint, Prettier, and Mozilla's ESLint plugin. All
 
 <p><small><super>(<i>Click a script's name to download it</i>)<br/>✨&nbsp;<i>means you definitely want to download the script if you use my theme</i></super></small></p>
 
+#### [about:userchrome](/JS/aboutUserChrome.sys.mjs):
+
+A manager for your userscripts. This allows you to automatically update scripts that include an `updateURL` or `downloadURL` field in their script metadata. Requires the content in [resources/aboutuserchrome](/resources/aboutuserchrome) to function. Visit `about:userchrome` to get started.
+
 #### [about:cfg](/JS/aboutCfg.uc.js):
 
 Registers the old-school about:config page to the URL `about:cfg`. Intended for use with earthlng's [aboutconfig][] module.<details><summary>💬 **_More details..._**</summary>
