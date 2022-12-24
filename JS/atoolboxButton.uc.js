@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Toolbox Button
-// @version        1.3.2
+// @version        1.3.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Adds a new toolbar button that 1) opens the content toolbox on left click;
@@ -183,6 +183,7 @@
               this._animationBox.setAttribute("hidden", "true");
               this._panel.setAttribute("data-message-id", "hideCheckHint");
             } else {
+              this._animationBox.removeAttribute("hidden");
               this._panel.setAttribute("data-message-id", "checkmarkHint");
             }
 
@@ -191,10 +192,10 @@
               "popupshown",
               () => {
                 this._animationBox.setAttribute("animate", "true");
-                this._timerID = setTimeout(() => {
-                  this._panel.hidePopup(true);
-                  this._animationBox.removeAttribute("hidden");
-                }, DURATION + 120);
+                this._timerID = setTimeout(
+                  () => this._panel.hidePopup(true),
+                  DURATION + 120
+                );
               },
               { once: true }
             );
@@ -275,6 +276,7 @@
         }
 
         let prefSvc = Services.prefs;
+        let defaultPrefs = prefSvc.getDefaultBranch("");
         let obSvc = Services.obs;
         let toolboxBranch = "userChrome.toolboxButton";
         let autoHide = "ui.popup.disable_autohide";
@@ -516,15 +518,11 @@
           toolboxObserver(null, "initial-load");
         }
 
-        if (!prefSvc.prefHasUserValue(autoTogglePopups)) {
-          prefSvc.setBoolPref(autoTogglePopups, true);
-        }
-        if (!prefSvc.prefHasUserValue(mouseConfig)) {
-          prefSvc.setStringPref(
-            mouseConfig,
-            `{"contentToolbox": 0, "browserToolbox": 2, "popupHide": 1}`
-          );
-        }
+        defaultPrefs.setBoolPref(autoTogglePopups, true);
+        defaultPrefs.setStringPref(
+          mouseConfig,
+          `{"contentToolbox": 0, "browserToolbox": 2, "popupHide": 1}`
+        );
         window.addEventListener("unload", uninit);
         prefSvc.addObserver(autoHide, prefObserver);
         prefSvc.addObserver(toolboxBranch, prefObserver);

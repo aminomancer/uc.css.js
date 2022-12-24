@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Custom Hint Provider
-// @version        1.1.4
+// @version        1.1.5
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    A utility script for other scripts to take advantage of. Sets
@@ -78,6 +78,7 @@ window.CustomHint = {
       this._animationBox.setAttribute("hidden", "true");
       this._panel.setAttribute("data-message-id", "hideCheckHint");
     } else {
+      this._animationBox.removeAttribute("hidden");
       this._panel.setAttribute("data-message-id", "checkmarkHint");
     }
 
@@ -88,10 +89,7 @@ window.CustomHint = {
         this._animationBox.setAttribute("animate", "true");
         this._timerID =
           DURATION > 0
-            ? setTimeout(() => {
-                this._panel.hidePopup(true);
-                this._animationBox.removeAttribute("hidden");
-              }, DURATION + 120)
+            ? setTimeout(() => this._panel.hidePopup(true), DURATION + 120)
             : 1;
       },
       { once: true }
