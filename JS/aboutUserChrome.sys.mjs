@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           about:userchrome
-// @version        1.0.0
+// @version        1.1.0
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    A manager for your userscripts. This allows you to automatically update scripts that include an updateURL or downloadURL field in their script metadata. Requires the content in `/resources/aboutuserchrome/` to function. Visit about:userchrome to get started.
@@ -9,38 +9,42 @@
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
-// user configuration
-const config = {
-  // The value to put after "about:" - if this is "userchrome" then the final
-  // URL will be "about:userchrome"
-  address: "userchrome",
+import { XPCOMUtils } from "resource://gre/modules/XPCOMUtils.sys.mjs";
 
-  // The script tries to locate the page content in `resources/aboutuserchrome/`,
-  // resulting in a URL like `chrome://userchrome/content/aboutuserchrome/aboutuserchrome.html`
-  // If you need to use a different URL, you can specify it here.
-  urlOverride: "",
-};
+const lazy = {};
+try {
+  ChromeUtils.defineESModuleGetters(lazy, {
+    AppMenuNotifications: "resource://gre/modules/AppMenuNotifications.sys.mjs",
+    gScriptUpdater:
+      "chrome://userchrome/content/aboutuserchrome/modules/UCMSingletonData.sys.mjs",
+    PREF_NOTIFICATIONS_ENABLED:
+      "chrome://userchrome/content/aboutuserchrome/modules/UCMSingletonData.sys.mjs",
+    UPDATE_CHANGED_TOPIC:
+      "chrome://userchrome/content/aboutuserchrome/modules/UCMSingletonData.sys.mjs",
+  });
+  XPCOMUtils.defineLazyModuleGetters(lazy, {
+    EveryWindow: "resource:///modules/EveryWindow.jsm",
+  });
+} catch (error) {
+  console.error(error); // eslint-disable-line no-console
+}
 
-let { Services } = ChromeUtils.import("resource://gre/modules/Services.jsm");
-let { manager: Cm } = Components;
-let registrar = Cm.QueryInterface(Ci.nsIComponentRegistrar);
-let chromeRegistry = Cc["@mozilla.org/chrome/chrome-registry;1"].getService(
+const registrar = Components.manager.QueryInterface(Ci.nsIComponentRegistrar);
+const chromeRegistry = Cc["@mozilla.org/chrome/chrome-registry;1"].getService(
   Ci.nsIChromeRegistry
 );
-let fphs = Cc["@mozilla.org/network/protocol;1?name=file"].getService(
+const fphs = Cc["@mozilla.org/network/protocol;1?name=file"].getService(
   Ci.nsIFileProtocolHandler
 );
 
 function findResources() {
-  if (config.urlOverride) return config.urlOverride;
-  let url =
-    config.urlOverride ||
-    "chrome://userchrome/content/aboutuserchrome/aboutuserchrome.html";
+  let url = "chrome://userchrome/content/aboutuserchrome/aboutuserchrome.html";
   let uri = Services.io.newURI(url);
   let fileUri = chromeRegistry.convertChromeURL(uri);
   let file = fphs.getFileFromURLSpec(fileUri.spec).QueryInterface(Ci.nsIFile);
   if (file.exists()) return url;
-  Cu.reportError(
+  // eslint-disable-next-line no-console
+  console.error(
     `about:userchrome source files not found.
 Please download them from https://github.com/aminomancer/uc.css.js/tree/master/resources/aboutuserchrome`
   );
@@ -90,8 +94,193 @@ var AboutModuleFactory = {
 if (urlString) {
   registrar.registerFactory(
     generateFreeCID(),
-    `about:${config.address}`,
-    `@mozilla.org/network/protocol/about;1?what=${config.address}`,
+    "about:userchrome",
+    "@mozilla.org/network/protocol/about;1?what=userchrome",
     AboutModuleFactory
   );
+}
+
+function initUserChromeNotifications() {
+  let gUserChromeNotifications;
+  let gStylesheet;
+  try {
+    let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
+      Ci.nsIStyleSheetService
+    );
+    gStylesheet = sss.preloadSheet(
+      Services.io.newURI(
+        "chrome://userchrome/content/aboutuserchrome/chrome/userchrome-notifications.css"
+      ),
+      sss.AUTHOR_SHEET
+    );
+  } catch (error) {
+    console.error(`Failed to load aboutUserChrome stylesheet: ${error.name}`); // eslint-disable-line no-console
+  }
+
+  /**
+   * Per-window class to handle app menu banners.
+   */
+  class UserChromeWindowNotifications {
+    /**
+     * @param {Window} win chrome window
+     */
+    constructor(win) {
+      this.win = win;
+      if (!win._ucUtils) return;
+      this.utils = win._ucUtils;
+      if (!gUserChromeNotifications) {
+        gUserChromeNotifications = new UserChromeNotifications(this.utils);
+      }
+      Services.obs.addObserver(this, lazy.UPDATE_CHANGED_TOPIC);
+      try {
+        win.windowUtils.addSheet(
+          gStylesheet,
+          Ci.nsIDOMWindowUtils.AUTHOR_SHEET
+        );
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error(
+          `Failed to load aboutUserChrome stylesheet: ${error.name}`
+        );
+      }
+      this.#updateBanner();
+    }
+
+    uninit() {
+      Services.obs.removeObserver(this, lazy.UPDATE_CHANGED_TOPIC);
+    }
+
+    observe(subject, topic, data) {
+      if (topic === lazy.UPDATE_CHANGED_TOPIC) this.#updateBanner();
+    }
+
+    #updateBanner() {
+      let notificationId = gUserChromeNotifications.getNotificationId();
+      if (notificationId) {
+        if (!this.#banner) {
+          let sibling = this.win.PanelMultiView.getViewNode(
+            this.win.document,
+            "appMenu-proton-addon-banners"
+          );
+          let banner = sibling.ownerDocument.createXULElement("toolbarbutton");
+          banner.className = "panel-banner-item subviewbutton";
+          banner.id = "userChromeManager-notification";
+          banner.setAttribute("wrap", "true");
+          banner.setAttribute(
+            "oncommand",
+            `if (this.getAttribute("notificationid") === "script-updates-restart") {
+            setTimeout(() => _ucUtils.restart(true), 300);
+            PanelMultiView.forNode(this.closest("panelmultiview")).hidePopup();
+          } else {
+            switchToTabHavingURI("about:userchrome", true);
+          }
+          event.preventDefault();`
+          );
+          this.#setBannerAttributes(banner, notificationId);
+          sibling.after(banner);
+          this.#banner = banner;
+        } else {
+          this.#setBannerAttributes(this.#banner, notificationId);
+        }
+      } else if (this.#banner) {
+        this.#banner.remove();
+        this.#banner = null;
+      }
+    }
+
+    #setBannerAttributes(banner, notification) {
+      if (banner.getAttribute("notificationid") === notification) return;
+      let text =
+        notification === "script-updates-available"
+          ? "Script updates available"
+          : "Restart to update scripts";
+      banner.setAttribute("label", text);
+      banner.setAttribute("notificationid", notification);
+    }
+
+    #banner;
+  }
+
+  /**
+   * Singleton class to handle badge notifications.
+   */
+  class UserChromeNotifications {
+    /**
+     * @param {Object} utils The _ucUtils object fx-autoconfig defines on each
+     *   chrome window. This is used to get the script data and header parsing
+     *   behavior. fx-autoconfig only exposes this to windows, so to use it from
+     *   this module context we have to pass it in.
+     */
+    constructor(utils) {
+      this.utils = utils;
+      Services.obs.addObserver(this, lazy.UPDATE_CHANGED_TOPIC);
+      utils.getScriptData().forEach(script => {
+        lazy.gScriptUpdater.getHandle(script).checkRemoteFile();
+      });
+      this.#updateBadge();
+    }
+
+    observe(subject, topic, data) {
+      if (topic === lazy.UPDATE_CHANGED_TOPIC) this.#updateBadge();
+    }
+
+    #updateBadge() {
+      let notificationId = this.getNotificationId();
+      if (!notificationId) {
+        lazy.AppMenuNotifications.removeNotification(
+          "script-updates-available"
+        );
+        lazy.AppMenuNotifications.removeNotification("script-updates-restart");
+      } else if (notificationId === "script-updates-restart") {
+        lazy.AppMenuNotifications.removeNotification(
+          "script-updates-available"
+        );
+        lazy.AppMenuNotifications.showBadgeOnlyNotification(notificationId);
+      } else {
+        lazy.AppMenuNotifications.removeNotification("script-updates-restart");
+        lazy.AppMenuNotifications.showBadgeOnlyNotification(notificationId);
+      }
+    }
+
+    getNotificationId() {
+      let { handles } = lazy.gScriptUpdater;
+      let updates = handles.filter(handle => {
+        if (!handle.remoteFile || handle.writing || handle.updateError) {
+          return false;
+        }
+        let remoteScriptData = this.utils.parseStringAsScriptInfo(
+          handle.filename,
+          handle.remoteFile
+        );
+        let newVersion = remoteScriptData.version;
+        return Services.vc.compare(newVersion, handle.currentVersion) > 0;
+      });
+      if (!updates.length) {
+        return null;
+      }
+      if (updates.every(handle => handle.pendingRestart)) {
+        return "script-updates-restart";
+      }
+      return "script-updates-available";
+    }
+  }
+
+  lazy.EveryWindow.registerCallback(
+    "userChromeNotifications",
+    win => {
+      win.userChromeWindowNotifications = new UserChromeWindowNotifications(
+        win
+      );
+    },
+    win => {
+      win.userChromeWindowNotifications.uninit();
+    }
+  );
+}
+
+const defaultPrefs = Services.prefs.getDefaultBranch("");
+defaultPrefs.setBoolPref(lazy.PREF_NOTIFICATIONS_ENABLED, true);
+
+if (Services.prefs.getBoolPref(lazy.PREF_NOTIFICATIONS_ENABLED, true)) {
+  initUserChromeNotifications();
 }
