@@ -56,12 +56,12 @@
   padding-bottom: var(--arrowpanel-padding) !important;
 }
 
-#editBookmarkPanelContent {
+#editBookmarkPanel #editBookmarkPanelContent {
   padding: 0 !important;
   grid-template-columns: 100% !important;
 }
 
-#editBookmarkPanelBottomContent {
+#editBookmarkPanel #editBookmarkPanelBottomContent {
   padding: var(--panel-subview-body-padding-magnitude) 0 !important;
   padding-block: 8px !important;
 }
@@ -76,9 +76,9 @@
   min-width: unset !important;
 }
 
-#editBookmarkPanelContent > label:not(.editBMPanel_nameRow),
-#editBookmarkPanelContent > #editBMPanel_folderTreeRow,
-#editBookmarkPanelContent > #editBMPanel_tagsSelectorRow {
+#editBookmarkPanel #editBookmarkPanelContent > label:not(.editBMPanel_nameRow),
+#editBookmarkPanel #editBookmarkPanelContent > #editBMPanel_folderTreeRow,
+#editBookmarkPanel #editBookmarkPanelContent > #editBMPanel_tagsSelectorRow {
 	padding-block: 8px 0 !important;
 }
 

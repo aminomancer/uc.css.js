@@ -51,6 +51,7 @@ menuitem#sanitizeItem > .menu-text,
 #context-copy .menu-text,
 #context-copyaudiourl .menu-text,
 #context-copyemail .menu-text,
+#context-copyphone .menu-text,
 #context-copyimage .menu-text,
 #context-copyimage-contents .menu-text,
 #context-copylink .menu-text,
@@ -421,6 +422,7 @@ menuitem#sanitizeItem::before,
 :is(#placesContext_deleteBookmark, #placesContext_deleteFolder, #placesContext_delete, #placesContext_delete_history)::before,
 #placesContext_deleteHost::before,
 #context-copyemail::before,
+#context-copyphone::before,
 #context-copyaudiourl::before,
 #context-copyimage::before,
 #context-copylink::before,
@@ -1316,6 +1318,7 @@ menuitem#enableDeveloperTools::before {
   background-image: url(chrome://userchrome/content/skin/send-to-device.svg);
 }
 
+#context-copyphone::before,
 :is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice) .sendtab-target:is([clientType="phone"], [clientType="mobile"])::before {
   background-image: url(chrome://userchrome/content/skin/device-phone.svg);
 }

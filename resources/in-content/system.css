@@ -289,7 +289,7 @@
   message-bar:not([hidden]) {
     display: flex !important;
     flex-flow: row nowrap !important;
-    margin-block-start: 15px !important;
+    margin-top: 15px !important;
     overflow: hidden;
     margin-inline: -15.5px !important;
   }
@@ -346,6 +346,11 @@
 
   message-bar[type="critical"]:not([message-bar-type="infobar"]) {
     --message-bar-background-color: color-mix(in srgb, hsla(-2, 100%, 60%, 0.5) 45%, var(--uc-warning-background)) !important;
+    --message-bar-text-color: var(--text-color) !important;
+  }
+
+  message-bar[type="success"]:not([message-bar-type="infobar"]) {
+    --message-bar-background-color: color-mix(in srgb, transparent 75%, var(--secure-color)) !important;
     --message-bar-text-color: var(--text-color) !important;
   }
 
