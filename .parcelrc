@@ -1,5 +1,4 @@
 {
   "extends": "@parcel/config-default",
-  "namers": ["parcel-namer-hashless", "..."],
-  "resolvers": ["parcel-resolver-ignore", "..."]
+  "namers": ["parcel-namer-hashless", "..."]
 }

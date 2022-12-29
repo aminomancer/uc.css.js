@@ -4,16 +4,39 @@
  * You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ */
 
 import { XPCOMUtils } from "resource://gre/modules/XPCOMUtils.sys.mjs";
+import { AppConstants } from "resource://gre/modules/AppConstants.sys.mjs";
 
 const lazy = {};
+ChromeUtils.defineESModuleGetters(lazy, {
+  FileUtils: "resource://gre/modules/FileUtils.sys.mjs",
+});
+XPCOMUtils.defineLazyModuleGetters(lazy, {
+  NetUtil: "resource://gre/modules/NetUtil.jsm",
+});
+XPCOMUtils.defineLazyServiceGetters(lazy, {
+  gUpdateTimerManager: [
+    "@mozilla.org/updates/timer-manager;1",
+    "nsIUpdateTimerManager",
+  ],
+  gExternalProtocolService: [
+    "@mozilla.org/uriloader/external-protocol-service;1",
+    "nsIExternalProtocolService",
+  ],
+  gMIMEService: ["@mozilla.org/mime;1", "nsIMIMEService"],
+});
+
 const defaultPrefs = Services.prefs.getDefaultBranch("");
-defaultPrefs.setIntPref("userChromeManager.updateInterval", 86400000);
+export const PREF_NOTIFICATIONS_ENABLED = "userChromeJS.manager.notifications";
+export const PREF_UPDATE_INTERVAL = "userChromeJS.manager.updateInterval";
+defaultPrefs.setIntPref(PREF_UPDATE_INTERVAL, 86400000);
 XPCOMUtils.defineLazyPreferenceGetter(
   lazy,
   "UPDATE_INTERVAL",
-  "userChromeManager.updateInterval",
+  PREF_UPDATE_INTERVAL,
   86400000 // 24 hours
 );
+
+export const UPDATE_CHANGED_TOPIC = "userChromeManager:script-updater-changed";
 
 /**
  * A data structure for a single script, with methods to check for a remote
@@ -27,26 +50,50 @@ class ScriptHandle {
   downloadError = null;
   updateError = null;
   #subscriptions = new Set();
+  #finishedWritingPromise = null;
+  #finishedWritingResolve = null;
+
   constructor(script) {
-    this.remoteURL = script.remoteURL;
+    this.remoteURL = script.updateURL || script.downloadURL;
     this.filename = script.filename;
-    this.path = script.path;
+    this.path = script.path || script.asFile().path;
+    this.currentVersion = script.version;
+    this.topic = `userChromeManager_update_check_${this.filename}`;
+    for (let method of [
+      "checkRemoteFile",
+      "updateScript",
+      "subscribe",
+      "unsubscribe",
+      "launchLocalFile",
+    ]) {
+      this[method] = this[method].bind(this);
+    }
+    lazy.gUpdateTimerManager.registerTimer(
+      this.topic,
+      () => this.checkRemoteFile(),
+      lazy.UPDATE_INTERVAL / 1000 // in seconds
+    );
   }
+
   subscribe(callback) {
     this.#subscriptions.add(callback);
     return () => this.unsubscribe(callback);
   }
+
   unsubscribe(callback) {
     this.#subscriptions.delete(callback);
   }
+
   #notify() {
     for (let callback of this.#subscriptions) {
       callback(this);
     }
   }
+
   get recentlyChecked() {
     return this.lastUpdateCheck > Date.now() - lazy.UPDATE_INTERVAL;
   }
+
   async checkRemoteFile() {
     if (
       !this.remoteURL ||
@@ -69,6 +116,7 @@ class ScriptHandle {
     }
     this.#notify();
   }
+
   async updateScript() {
     if (
       !this.remoteFile ||
@@ -79,6 +127,9 @@ class ScriptHandle {
       return;
     }
     Services.console.logStringMessage(`Updating ${this.filename}`);
+    this.#finishedWritingPromise = new Promise(resolve => {
+      this.#finishedWritingResolve = resolve;
+    });
     this.writing = true;
     this.#notify();
     try {
@@ -92,8 +143,77 @@ class ScriptHandle {
       this.remoteFile = null;
     } finally {
       this.writing = false;
+      this.#finishedWritingResolve();
       this.#notify();
+      lazy.gUpdateTimerManager.unregisterTimer(this.topic);
     }
+  }
+
+  async launchLocalFile() {
+    if (this.writing) {
+      await this.#finishedWritingPromise;
+    }
+    let file = new lazy.FileUtils.File(this.path);
+    let fileExtension = null;
+    let mimeInfo = null;
+    let match = file.leafName.match(/\.([^.]+)$/);
+    if (match) fileExtension = match[1];
+    let isWindows = AppConstants.platform == "win";
+    let isWindowsExe = isWindows && fileExtension?.toLowerCase() == "exe";
+    let isScript = ["js", "mjs", "jsm", "sjs"].includes(
+      fileExtension?.toLowerCase()
+    );
+    if (
+      file.isExecutable() &&
+      !isWindowsExe &&
+      !isScript &&
+      !(await this.confirmLaunchExecutable(file.path))
+    ) {
+      return;
+    }
+    try {
+      mimeInfo = lazy.gMIMEService.getFromTypeAndExtension(
+        lazy.gMIMEService.getTypeFromFile(file),
+        fileExtension
+      );
+    } catch (e) {}
+    if (!fileExtension && isWindows) {
+      // Open the file's containing folder in Explorer.
+      try {
+        file.reveal();
+        return;
+      } catch (ex) {}
+      let parent = file.parent;
+      if (!parent) {
+        throw new Error(
+          "Unexpected reference to a top-level directory instead of a file"
+        );
+      }
+      try {
+        parent.launch();
+        return;
+      } catch (ex) {}
+      lazy.gExternalProtocolService.loadURI(
+        lazy.NetUtil.newURI(parent),
+        Services.scriptSecurityManager.getSystemPrincipal()
+      );
+      return;
+    }
+    if (mimeInfo) {
+      mimeInfo.preferredAction = Ci.nsIMIMEInfo.useSystemDefault;
+      try {
+        mimeInfo.launchWithFile(file);
+        return;
+      } catch (ex) {}
+    }
+    try {
+      file.launch();
+      return;
+    } catch (ex) {}
+    lazy.gExternalProtocolService.loadURI(
+      lazy.NetUtil.newURI(file),
+      Services.scriptSecurityManager.getSystemPrincipal()
+    );
   }
 }
 
@@ -102,11 +222,20 @@ class ScriptHandle {
  */
 class ScriptUpdater {
   #handles = new Map();
+
   getHandle(script) {
     if (!this.#handles.has(script.filename)) {
-      this.#handles.set(script.filename, new ScriptHandle(script));
+      let handle = new ScriptHandle(script);
+      handle.subscribe(() =>
+        Services.obs.notifyObservers(null, UPDATE_CHANGED_TOPIC)
+      );
+      this.#handles.set(script.filename, handle);
     }
     return this.#handles.get(script.filename);
+  }
+
+  get handles() {
+    return [...this.#handles.values()];
   }
 }
 

@@ -1,0 +1,26 @@
+#PanelUI-menu-button[badge-status="script-updates-available"],
+#PanelUI-menu-button[badge-status="script-updates-restart"] {
+  list-style-image: url("chrome://browser/skin/menu-badged.svg");
+}
+
+#PanelUI-menu-button[badge-status="script-updates-available"] > .toolbarbutton-badge-stack > .toolbarbutton-badge,
+#PanelUI-menu-button[badge-status="script-updates-restart"] > .toolbarbutton-badge-stack > .toolbarbutton-badge {
+  box-shadow: none;
+  margin: -5px 0 0 !important;
+  margin-inline-end: -3px !important;
+  min-width: 12px;
+  min-height: 12px;
+  -moz-context-properties: fill;
+  background: url(chrome://browser/skin/notification-fill-12.svg) no-repeat center;
+  background-size: 12px;
+  fill: var(--panel-banner-item-update-supported-bgcolor);
+}
+
+.panel-banner-item[notificationid="script-updates-available"] > .toolbarbutton-icon,
+.panel-banner-item[notificationid="script-updates-restart"] > .toolbarbutton-icon {
+  background-image: url(chrome://browser/skin/trending.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  -moz-context-properties: fill;
+  fill: var(--panel-banner-item-update-supported-bgcolor);
+}
