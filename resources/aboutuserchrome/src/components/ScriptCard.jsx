@@ -254,7 +254,12 @@ export const ScriptDetails = ({ script, launchLocalFile }) => {
         const remSize = parseFloat(
           window.getComputedStyle(document.documentElement).fontSize
         );
-        if (current.getBoundingClientRect().height > 20 * remSize) {
+        let { paddingTop, paddingBottom } = window.getComputedStyle(current);
+        let { height } = current.getBoundingClientRect();
+        paddingTop = parseFloat(paddingTop);
+        paddingBottom = parseFloat(paddingBottom);
+        height -= paddingTop + paddingBottom;
+        if (height > 20 * remSize + 8) {
           toggleDescriptionCollapsed();
         }
       });
