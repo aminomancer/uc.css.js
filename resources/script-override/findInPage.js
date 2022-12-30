@@ -2,7 +2,7 @@
 // @name           about:preferences Find in Page Highlight Mod
 // @version        1.1
 // @author         aminomancer
-// @homepage       https://github.com/aminomancer/uc.css.js
+// @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Make the searchbar result highlighting in about:preferences adapt to user's CSS variables. Allows us to change the highlight color of search results to be more consistent with the theme.
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==

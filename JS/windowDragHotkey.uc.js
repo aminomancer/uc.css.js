@@ -1,15 +1,11 @@
 // ==UserScript==
 // @name           Window Drag Hotkey
-// @version        1.1.1
+// @version        1.1.2
 // @author         aminomancer
-// @homepage       https://github.com/aminomancer/uc.css.js
-// @description    Hold down the Alt and Shift keys and click & drag any part of
-// a toolbar to drag the entire window. Normally you can only drag the window in
-// empty spaces. Clicking and dragging a button, a tab, an input field, etc.
-// will not drag the window. With this script, while you hold down the Alt and
-// Shift keys, ANY element in a toolbar basically becomes a drag space. Alt and
-// Shift were chosen because there aren't any Alt+Shift+Click functions, as far
-// as I know. Upon releasing the keys, everything will go back to normal.
+// @homepageURL    https://github.com/aminomancer/uc.css.js
+// @description    Hold down the Alt and Shift keys and click & drag any part of a toolbar to drag the entire window. Normally you can only drag the window in empty spaces. Clicking and dragging a button, a tab, an input field, etc. will not drag the window. With this script, while you hold down the Alt and Shift keys, ANY element in a toolbar basically becomes a drag space. Alt and Shift were chosen because there aren't any Alt+Shift+Click functions, as far as I know. Upon releasing the keys, everything will go back to normal.
+// @downloadURL    https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/windowDragHotkey.uc.js
+// @updateURL      https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/windowDragHotkey.uc.js
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
@@ -63,7 +59,7 @@ class WindowDragHotkey {
     let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
       Ci.nsIStyleSheetService
     );
-    let uri = makeURI("data:text/css;charset=UTF=8," + encodeURIComponent(css));
+    let uri = makeURI(`data:text/css;charset=UTF=8,${encodeURIComponent(css)}`);
     if (sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) return;
     sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
   }

@@ -1,16 +1,11 @@
 // ==UserScript==
 // @name           Tab Loading Spinner Animation
-// @version        1.0
+// @version        1.0.1
 // @author         aminomancer
-// @homepage       https://github.com/aminomancer/uc.css.js
-// @description    Required for duskFox's custom loading spinner animation. This
-// isn't strictly necessary, since the spinner is implemented in CSS, but
-// duskFox restricts the use of the spinner to conditions laid out by this
-// script. This is done in order to allow the loading throbber icon to smoothly
-// fade in and out without harming performance. Without this, the spinner would
-// potentially reduce framerate and, for at least one user, would cause problems
-// during startup. So if you don't install this script, you'll end up with
-// Firefox's vanilla loading throbber icon rather than duskFox's spinner icon.
+// @homepageURL    https://github.com/aminomancer/uc.css.js
+// @description    Required for duskFox's custom loading spinner animation. This isn't strictly necessary, since the spinner is implemented in CSS, but duskFox restricts the use of the spinner to conditions laid out by this script. This is done in order to allow the loading throbber icon to smoothly fade in and out without harming performance. Without this, the spinner would potentially reduce framerate and, for at least one user, would cause problems during startup. So if you don't install this script, you'll end up with Firefox's vanilla loading throbber icon rather than duskFox's spinner icon.
+// @downloadURL    https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/tabLoadingSpinner.uc.js
+// @updateURL      https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/tabLoadingSpinner.uc.js
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 

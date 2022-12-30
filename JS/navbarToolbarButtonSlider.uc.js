@@ -1,28 +1,15 @@
 // ==UserScript==
 // @name           Navbar Toolbar Button Slider
-// @version        2.8.7
+// @version        2.8.8
 // @author         aminomancer
-// @homepage       https://github.com/aminomancer
-// @description    Wrap all toolbar buttons in a scrollable container. It can
-// scroll horizontally through the buttons by scrolling up/down with a
-// mousewheel, like the tab bar. By default, it wraps all toolbar buttons that
-// come after the urlbar (to the right of the urlbar for left-to-right
-// languages). You can edit userChrome.toolbarSlider.wrapButtonsRelativeToUrlbar
-// in about:config to change this: a value of "before" will wrap all buttons
-// that come before the urlbar, and "all" will wrap all buttons. You can change
-// userChrome.toolbarSlider.width to make the container wider or smaller. If you
-// choose 8, the slider will be 8 buttons long. When the window gets *really*
-// small, the slider disappears and the toolbar buttons are placed into the
-// normal widget overflow panel. (this can be disabled with
-// userChrome.toolbarSlider.collapseSliderOnOverflow) You can specify more
-// buttons to exclude from the slider by adding their IDs (in quotes, separated
-// by commas) to userChrome.toolbarSlider.excludeButtons. For example you might
-// type ["bookmarks-menu-button", "downloads-button"] if you want those to stay
-// outside of the slider. You can also decide whether to exclude flexible space
-// springs from the slider by toggling userChrome.toolbarSlider.excludeFlexibleSpace.
-// By default, springs are excluded. To scroll faster you can add a multiplier
-// right before scrollByPixels is called, like scrollAmount = scrollAmount * 1.5
-// or something like that.
+// @homepageURL    https://github.com/aminomancer
+// @description    Wrap all toolbar buttons in a scrollable container. It can scroll horizontally through the buttons by scrolling up/down with a mousewheel, like the tab bar. By default, it wraps all toolbar buttons that come after the urlbar (to the right of the urlbar for left-to-right languages). You can edit `userChrome.toolbarSlider.wrapButtonsRelativeToUrlbar` in [about:config][] to change this: a value of `before` will wrap all buttons that come before the urlbar, and `all` will wrap all buttons. You can change `userChrome.toolbarSlider.width` to make the container wider or smaller. If you choose 8, the slider will be 8 buttons long. When the window gets *really* small, the slider disappears and the toolbar buttons are placed into the normal widget overflow panel. (this can be disabled with `userChrome.toolbarSlider.collapseSliderOnOverflow`)
+//
+// You can specify more buttons to exclude from the slider by adding their IDs (in quotes, separated by commas) to `userChrome.toolbarSlider.excludeButtons`. For example you might type `["bookmarks-menu-button", "downloads-button"]` if you want those to stay outside of the slider. You can also decide whether to exclude flexible space springs from the slider by toggling `userChrome.toolbarSlider.excludeFlexibleSpace`. By default, springs are excluded. To scroll faster you can add a multiplier right before `scrollByPixels` is called, like `scrollAmount = scrollAmount * 1.5` or something like that.
+//
+// [about:config]: about:config
+// @downloadURL    https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/navbarToolbarButtonSlider.uc.js
+// @updateURL      https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/navbarToolbarButtonSlider.uc.js
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 

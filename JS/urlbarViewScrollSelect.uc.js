@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name           Scroll Urlbar Results with Mousewheel
-// @version        1.0.1
+// @version        1.0.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
-// @description    Lets you navigate the results/suggestions in the urlbar with the
-// mousewheel, (or trackpad scroll) and execute the active/selected result by right
-// clicking anywhere in the urlbar panel. Makes one-hand operation easier.
+// @description    Lets you navigate the results/suggestions in the urlbar with the mousewheel, (or trackpad scroll) and execute the active/selected result by right clicking anywhere in the urlbar panel. Makes one-hand operation easier.
+// @downloadURL    https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/urlbarViewScrollSelect.uc.js
+// @updateURL      https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/urlbarViewScrollSelect.uc.js
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 

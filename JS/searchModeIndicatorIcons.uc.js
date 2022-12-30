@@ -1,42 +1,29 @@
 // ==UserScript==
 // @name           Search Mode Indicator Icons
-// @version        1.4.4
+// @version        1.4.5
 // @author         aminomancer
-// @homepage       https://github.com/aminomancer
-// @description    Automatically replace the urlbar's identity icon with the
-// current search engine's icon. Optionally replace the searchglass icon in
-// regular search mode by dynamically retrieving icons from your
-// chrome/resources/engines/ folder. That means on the new tab page or when
-// typing in the urlbar, instead of showing a searchglass icon it will show a
-// Google icon if your default engine is Google; a Bing icon if your default
-// engine is Bing; etc. Read the comments in the config section below for more
-// details on adding your own engine icons. Also optionally show any engine name
-// in the urlbar placeholder, even if the engine was installed by an addon. By
-// default, Firefox only shows your default engine's name in the placeholder if
-// the engine was built into Firefox. With this script, the placeholder will
-// include the name of your engine. This can be disabled and
-// configured/restricted in the config section below. The main feature (setting
-// the identity icon to match the current engine in one-off search mode) also
-// adds an [engine] attribute to the identity icon so you can customize the
-// icons yourself if you don't like a search engine's icon, or want to adjust
-// its dimensions. If you have google set to "goo" and type in goo then hit
-// spacebar, the identity icon will change to a google icon. And it'll also gain
-// an attribute reflecting that, so you can change its icon further with a CSS
-// rule like:
+// @homepageURL    https://github.com/aminomancer
+// @description    Automatically replace the urlbar's identity icon with the current search engine's icon. Optionally replace the searchglass icon in regular search mode by dynamically retrieving icons from your [resources/engines][] folder. That means on the new tab page or when typing in the urlbar, instead of showing a searchglass icon it will show a Google icon if your default engine is Google; a Bing icon if your default engine is Bing; etc. Read the comments in the config section below for more details on adding your own engine icons.
+//
+// Also optionally show any engine name in the urlbar placeholder, even if the engine was installed by an addon. By default, Firefox only shows your default engine's name in the placeholder if the engine was built into Firefox. With this script, the placeholder will include the name of your engine. This can be disabled and configured/restricted in the config section below.
+//
+// The main feature (setting the identity icon to match the current engine in one-off search mode) also adds an `[engine]` attribute to the identity icon so you can customize the icons yourself if you don't like a search engine's icon, or want to adjust its dimensions. If you have google set to "goo" and type in goo then hit spacebar, the identity icon will change to a google icon. And it'll also gain an attribute reflecting that, so you can change its icon further with a CSS rule like:
+//
 // #identity-icon[engine="Tabs"] {
 //     list-style-image: url("chrome://browser/skin/tab.svg") !important;
 // }
-// This doesn't change anything about the layout so you may want to tweak some
-// things in your stylesheet. For example I have mine set up so the tracking
-// protection icon disappears while the user is typing in the urlbar, and so a
-// little box appears behind the identity icon while in one-off search mode.
-// This way the icon appears to the left of the label, like it does on
-// about:preferences and other UI pages.
+//
+// This doesn't change anything about the layout so you may want to tweak some things in your stylesheet. For example I have mine set up so the tracking protection icon disappears while the user is typing in the urlbar, and so a little box appears behind the identity icon while in one-off search mode. This way the icon appears to the left of the label, like it does on about:preferences and other UI pages.
+//
+// [resources/engines]: https://github.com/aminomancer/uc.css.js/tree/master/resources/engines
+// @downloadURL    https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/searchModeIndicatorIcons.uc.js
+// @updateURL      https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/searchModeIndicatorIcons.uc.js
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
 (() => {
-  // customize the script by adjusting these values:
+  // user preferences. add these in about:config if you want them to persist
+  // between script updates without having to reapply them.
   const config = {
     // when you type into the urlbar or open a new tab, the identity icon
     // (lock icon) is set to resemble a magnifying glass. historically my
@@ -79,7 +66,10 @@
     //     list-style-image: var(--default-search-identity-icon,
     //                           url("chrome://userchrome/content/search-glass.svg")) !important;
     // }
-    "Try to replace searchglass icon with engine icon in normal mode": true,
+    "Try to replace searchglass icon with engine icon in normal mode": Services.prefs.getBoolPref(
+      "searchModeIndicatorIcons.replaceSearchGlass",
+      true
+    ),
 
     // by default, firefox ONLY shows your default search engine's name in the
     // urlbar placeholder text IF the engine is built into firefox, for example,
@@ -89,7 +79,10 @@
     // that. it will show the name in the placeholder even if the engine was
     // installed by the user. the extra settings below can add some restrictions
     // if you want.
-    "Show engine name in placeholder": true,
+    "Show engine name in placeholder": Services.prefs.getBoolPref(
+      "searchModeIndicatorIcons.showEngineNameInPlaceholder",
+      true
+    ),
 
     // it's possible for an extension to add an engine with any arbitrary name.
     // so if the developer is stupid, they could name an engine "Awesome Amazon
@@ -101,7 +94,10 @@
     // generic placeholder instead. I think 25 is a good default limit. if you
     // don't want this limit at all, i.e., you're okay with arbitrarily long
     // engine names, set the value to -1 or 0
-    "Engine name character limit": 25,
+    "Engine name character limit": Services.prefs.getIntPref(
+      "searchModeIndicatorIcons.engineNameCharLimit",
+      25
+    ),
 
     // an engine name might also have an unreasonable number of words (too many
     // spaces). again, if the engine name is "Awesome Amazon Search Extension
@@ -109,7 +105,10 @@
     // generic placeholder "Search or enter address". increase the word limit by
     // changing the value 3 below. a value of -1 or 0 disables the limit
     // entirely.
-    "Engine name word limit": 3,
+    "Engine name word limit": Services.prefs.getIntPref(
+      "searchModeIndicatorIcons.engineNameWordLimit",
+      3
+    ),
   };
   function init() {
     const defaultIcon = `chrome://global/skin/icons/search-glass.svg`;
@@ -126,7 +125,7 @@
         Ci.nsIStyleSheetService
       );
       let uri = makeURI(
-        "data:text/css;charset=UTF=8," + encodeURIComponent(css)
+        `data:text/css;charset=UTF=8,${encodeURIComponent(css)}`
       );
       if (sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) return;
       sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
@@ -173,14 +172,13 @@
         ]
       ) {
         eval(
-          "BrowserSearch._setURLBarPlaceholder = function " +
-            BrowserSearch._setURLBarPlaceholder
-              .toSource()
-              .replace(/^_setURLBarPlaceholder/, "")
-              .replace(
-                /\}$/,
-                `  let icon = findEngineIcon(name);\n    if (icon) document.documentElement.style.setProperty("--default-search-identity-icon", icon);\n    else document.documentElement.style.removeProperty("--default-search-identity-icon");\n}`
-              )
+          `BrowserSearch._setURLBarPlaceholder = function ${BrowserSearch._setURLBarPlaceholder
+            .toSource()
+            .replace(/^_setURLBarPlaceholder/, "")
+            .replace(
+              /\}$/,
+              `  let icon = findEngineIcon(name);\n    if (icon) document.documentElement.style.setProperty("--default-search-identity-icon", icon);\n    else document.documentElement.style.removeProperty("--default-search-identity-icon");\n}`
+            )}`
         );
       }
       if (config["Show engine name in placeholder"]) {
@@ -192,11 +190,10 @@
           placeholderString += ` && engineName.split(" ").length <= config["Engine name word limit"]`;
         }
         eval(
-          "BrowserSearch._updateURLBarPlaceholder = function " +
-            BrowserSearch._updateURLBarPlaceholder
-              .toSource()
-              .replace(/^_updateURLBarPlaceholder/, "")
-              .replace(/engine\.isAppProvided/, placeholderString)
+          `BrowserSearch._updateURLBarPlaceholder = function ${BrowserSearch._updateURLBarPlaceholder
+            .toSource()
+            .replace(/^_updateURLBarPlaceholder/, "")
+            .replace(/engine\.isAppProvided/, placeholderString)}`
         );
       }
       BrowserSearch.initPlaceHolder();

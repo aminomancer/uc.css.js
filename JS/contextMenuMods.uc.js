@@ -1,9 +1,11 @@
 // ==UserScript==
 // @name           Context Menu Mods
-// @version        1.0
+// @version        1.0.1
 // @author         aminomancer
-// @homepage       https://github.com/aminomancer/uc.css.js
+// @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Add some new items to the main content area context menu.
+// @downloadURL    https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/contextMenuMods.uc.js
+// @updateURL      https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/contextMenuMods.uc.js
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // @include        main
 // @include        chrome://browser/content/webext-panels.xhtml
@@ -14,7 +16,10 @@ class ContextMenuMods {
     // Set to true to replace the "Search Google for <selection>" context menu
     // item with a submenu that allows you to search for the selection with any
     // of your installed search engines.
-    "Replace search menuitem with submenu": true,
+    "Replace search menuitem with submenu": Services.prefs.getBoolPref(
+      "contextMenuMods.searchSubMenu",
+      true
+    ),
 
     l10n: {
       // These are used for the main search menu label.
@@ -69,7 +74,7 @@ class ContextMenuMods {
       Ci.nsIStyleSheetService
     );
     let uri = makeURI(
-      "data:text/css;charset=UTF=8," + encodeURIComponent(sheet)
+      `data:text/css;charset=UTF=8,${encodeURIComponent(sheet)}`
     );
     if (sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) return;
     sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);

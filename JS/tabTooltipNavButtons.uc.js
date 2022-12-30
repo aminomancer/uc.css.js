@@ -1,35 +1,23 @@
 // ==UserScript==
 // @name           Tab Tooltip Navigation Buttons
-// @version        1.2.3
+// @version        1.2.4
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
-// @description    This script turns the tab tooltip into a mini navigation popup
-// with back, forward, and reload buttons. It still shows the tab's title and URL,
-// and also shows its favicon. So it's similar to the vanilla tooltip, except it's
-// interactive. When you hover a tab for 500 milliseconds (the actual delay depends
-// on ui.tooltipDelay when opening, and
-// userChrome.tabs.tabTooltipNavButtons.hover-out-delay when closing, both of which
-// you can set in about:config) the navigation popup will open attached to that
-// tab. Clicking the back button will navigate *that tab* back one step, rather
-// than only navigating the currently active tab. So this means you can navigate
-// background tabs. The buttons work very much like the back, forward, and reload
-// buttons on your toolbar. So a regular left click will go back or forward or
-// reload, while a middle click or ctrl+click will duplicate the tab while going
-// back or forward or reloading. A shift click will duplicate the tab in a new
-// window instead. Basically all the same features that are present in the built-in
-// toolbar buttons. The key difference (aside from navigating the hovered tab
-// rather than the active tab) is that the buttons can navigate multiple tabs at
-// once. If you multiselect tabs, e.g., by shift or ctrl+clicking them, and then
-// hover one of the multiselected tabs, all the buttons in the popup will navigate
-// all the multiselected tabs at once. So if you right-click a tab and click
-// "Select all Tabs" in the context menu, then hover a tab and click the reload
-// button in the popup, it will reload every tab you have open. If you have tabs
-// multiselected but you hover one of the non-selected tabs, then the popup will
-// only affect the hovered tab, not the multiselected tabs.
+// @description    This script turns the tab tooltip into a mini navigation popup with back, forward, and reload buttons. It still shows the tab's title and URL, and also shows its favicon. So it's similar to the vanilla tooltip, except it's interactive. When you hover a tab for 500 milliseconds the navigation popup will open attached to that tab (the actual delay depends on `ui.tooltipDelay` when opening, and `userChrome.tabs.tabTooltipNavButtons.hover-out-delay` when closing, both of which you can set in [about:config][]). Clicking the back button will navigate _that tab_ back one step, rather than only navigating the currently active tab. So this means you can navigate background tabs.
+//
+// The buttons work very much like the back, forward, and reload buttons on your toolbar. So a regular left click will go back or forward or reload, while a middle click or ctrl+click will duplicate the tab while going back or forward or reloading. A shift click will duplicate the tab in a new window instead. Basically all the same features that are present in the built-in toolbar buttons.
+//
+// The key difference (aside from navigating the hovered tab rather than the active tab) is that the buttons can navigate multiple tabs at once. If you multiselect tabs, e.g., by shift or ctrl+clicking them, and then hover one of the multiselected tabs, all the buttons in the popup will navigate all the multiselected tabs at once. So if you right-click a tab and click "Select all Tabs" in the context menu, then hover a tab and click the reload button in the popup, it will reload every tab you have open. If you have tabs multiselected but you hover one of the non-selected tabs, then the popup will only affect the hovered tab, not the multiselected tabs.
+//
+// [about:config]: about:config
+// @downloadURL    https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/tabTooltipNavButtons.uc.js
+// @updateURL      https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/tabTooltipNavButtons.uc.js
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
 class TabTooltipNav {
+  // user preferences. add these in about:config if you want them to persist
+  // between script updates without having to reapply them.
   static config = {
     // if you only want the popup to open while you have a modifier key pressed,
     // type it here. accepted values are "ctrl", "shift", "alt", "meta", and
@@ -37,14 +25,20 @@ class TabTooltipNav {
     // value must be surrounded by quotes. don't delete the comma after the
     // value. if you don't want a modifier key, change this to false — with no
     // quotes. but don't delete the comma.
-    "Modifier key": false,
+    "Modifier key": Services.prefs.getBoolPref(
+      "tabTooltipNavButtons.modifierKey",
+      false
+    ),
 
     // if you want the normal tooltip to show when hovering a tab without the
     // modifier key, set this to true. if you want no tooltip to show at all
     // unless the modifier key is pressed, set this to false. it will have no
     // effect if "Modifier key" is not set to one of the valid string values
     // listed above.
-    "Show vanilla tooltip if modifier is not pressed": true,
+    "Show vanilla tooltip if modifier is not pressed": Services.prefs.getBoolPref(
+      "tabTooltipNavButtons.showVanillaTooltip",
+      true
+    ),
 
     // When you right click one of the back or forward buttons, it opens a
     // little context menu that shows up to 15 items in that tab's history. when
@@ -54,7 +48,10 @@ class TabTooltipNav {
     // causes the URL to display in the status bar at the bottom of the screen.
     // if you don't need this behavior or find it annoying, set this pref to
     // false.
-    "Update tooltip when hovering in the history menu": true,
+    "Update tooltip when hovering in the history menu": Services.prefs.getBoolPref(
+      "tabTooltipNavButtons.updateTooltipWhenHoveringHistoryMenu",
+      true
+    ),
 
     l10n: {
       "Go Back (Single Tab)": "Navigate tab back one page",
@@ -158,7 +155,7 @@ class TabTooltipNav {
   }
   set knownWidth(val) {
     if (val) {
-      this.navPopup.style.setProperty("--tab-nav-known-width", val + "px");
+      this.navPopup.style.setProperty("--tab-nav-known-width", `${val}px`);
       this._knownWidth = val;
     } else {
       this.navPopup.style.removeProperty("--tab-nav-known-width");
@@ -626,7 +623,7 @@ class TabTooltipNav {
       ).replace("#1", affectedTabsLength);
       if (contextTabInSelection && shortcut) {
         if (label.includes("%S")) label = label.replace("%S", shortcut);
-        else label = label + " (" + shortcut + ")";
+        else label = `${label} (${shortcut})`;
       }
     } else if (tab._overPlayingIcon) {
       let stringID;
@@ -923,7 +920,7 @@ class TabTooltipNav {
     let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
       Ci.nsIStyleSheetService
     );
-    let uri = makeURI("data:text/css;charset=UTF=8," + encodeURIComponent(css));
+    let uri = makeURI(`data:text/css;charset=UTF=8,${encodeURIComponent(css)}`);
     // avoid loading duplicate sheets on subsequent window launches.
     if (sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) return;
     sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);

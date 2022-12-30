@@ -1,12 +1,11 @@
 // ==UserScript==
 // @name           Fluent Reveal Navbar Buttons
-// @version        1.2.1
+// @version        1.2.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
-// @description    Adds a visual effect to navbar buttons similar to the
-// spotlight gradient effect on Windows 10's start menu tiles. When hovering
-// over or near a button, a subtle radial gradient is applied to every button in
-// the vicinity the mouse. This is compatible with Fluent Reveal Tabs.
+// @description    Adds a visual effect to navbar buttons similar to the spotlight gradient effect on Windows 10's start menu tiles. When hovering over or near a button, a subtle radial gradient is applied to every button in the vicinity the mouse. This is compatible with Fluent Reveal Tabs.
+// @downloadURL    https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/fluentRevealNavbar.uc.js
+// @updateURL      https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/fluentRevealNavbar.uc.js
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 

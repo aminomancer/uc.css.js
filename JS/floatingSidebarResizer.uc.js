@@ -1,39 +1,11 @@
 // ==UserScript==
 // @name           Floating Sidebar Resizer
-// @version        1.3.1
+// @version        1.3.2
 // @author         aminomancer
-// @homepage       https://github.com/aminomancer
-// @description    A floating sidebar that you can still resize. The default
-// sidebar in firefox is nice, it can move from the left side to the right side
-// and you can resize it. But it squeezes the browser content area out of the
-// way. That might be desirable for some people. That way the entire contents of
-// the page are still visible when the sidebar is open. That works well with
-// responsive page layouts but doesn't work well with elements that try to
-// preserve some explicit aspect ratio. It also doesn't look very aesthetic when
-// you open the sidebar and the entire page makes this jarring transformation as
-// everything shifts left or right to make way for the sidebar. So say your
-// browser window is sized precisely to 16:9 dimensions. Maybe you have ocd like
-// me and don't want to see any letterbox when you watch netflix. By default
-// when you open the sidebar, it pushes the whole content area to the side,
-// which changes the content area width:height ratio. So the player setup needs
-// to resize the video element, resulting in a letterbox effect. It's easy
-// enough to make the sidebar "float" over the content though. You can do it
-// with pure css. The major downside is that you lose the ability to resize the
-// sidebar. You'd have to set the width manually. That's because the native
-// implementation of resizing relies on the old-school proprietary -moz-box
-// spec. The space within #browser is finite and the -moz-boxes within fill that
-// space based on some css rules. The resizing is actually handled by the
-// separator, which is a totally independent element. So within #browser you
-// have: content | separator | sidebar. And moving the separator defines how big
-// the sidebar and content area are, but this only works *because* they can't
-// occupy the same space. To make the sidebar float over the content area you
-// need to change its display and position rules, which means the separator no
-// longer packs right next to the sidebar. It's sort of like plucking the
-// sidebar out of the flexbox. The separator moves all the way to the end of the
-// screen and the content area expands to fill that space. So the separator
-// becomes useless and we lose the ability to resize the sidebar. So the main
-// thing this does is add a resizer to the sidebar. It doesn't make the sidebar
-// float by itself. That's what the css files in this repo are for.
+// @homepageURL    https://github.com/aminomancer
+// @description    A floating sidebar that you can still resize. The default sidebar in firefox is nice, it can move from the left side to the right side and you can resize it. But it squeezes the browser content area out of the way. That might be desirable for some people. That way the entire contents of the page are still visible when the sidebar is open. That works well with responsive page layouts but doesn't work well with elements that try to preserve some explicit aspect ratio. It also doesn't look very aesthetic when you open the sidebar and the entire page makes this jarring transformation as everything shifts left or right to make way for the sidebar. By default when you open the sidebar, it pushes the whole content area to the side, which changes the content area width:height ratio. So the player setup needs to resize the video element, resulting in a letterbox effect. It's easy enough to make the sidebar "float" over the content though. You can do it with pure css. The major downside is that you lose the ability to resize the sidebar. You'd have to set the width manually. That's because the native implementation of resizing relies on the old-school proprietary `-moz-box` spec. The space within `#browser` is finite and the -moz-boxes inside it fill that space based on some CSS rules. The resizing is actually handled by the separator, which is a totally independent element. So within `#browser` you have `content | separator | sidebar`. And moving the separator defines how big the sidebar and content area are, but this only works _because_ they can't occupy the same space. To make the sidebar float over the content area you need to change its display and position rules, which means the separator no longer packs right next to the sidebar. It's sort of like plucking the sidebar out of the flexbox. The separator moves all the way to the end of the screen and the content area expands to fill that space. So the separator becomes useless and we lose the ability to resize the sidebar. So the main thing this does is add a resizer to the sidebar. It doesn't make the sidebar float by itself. That's what the CSS files in this repo are for.
+// @downloadURL    https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/floatingSidebarResizer.uc.js
+// @updateURL      https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/floatingSidebarResizer.uc.js
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
@@ -76,9 +48,9 @@
       frame = true;
       requestAnimationFrame(() => {
         if (SidebarUI._positionStart) {
-          box.style.width = startWidth + e.screenX - startX + "px";
+          box.style.width = `${startWidth + e.screenX - startX}px`;
         } else {
-          box.style.width = startWidth - e.screenX + startX + "px";
+          box.style.width = `${startWidth - e.screenX + startX}px`;
         }
         frame = false;
       });

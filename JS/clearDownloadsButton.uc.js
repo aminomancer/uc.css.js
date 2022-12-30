@@ -1,22 +1,15 @@
 // ==UserScript==
 // @name           Clear Downloads Panel Button
-// @version        1.4.1
+// @version        1.4.2
 // @author         aminomancer
-// @homepage       https://github.com/aminomancer/uc.css.js
-// @description    Place a "Clear Downloads" button in the downloads panel,
-//                 right next to the "Show all downloads" button.
+// @homepageURL    https://github.com/aminomancer/uc.css.js
+// @description    Place a "Clear Downloads" button in the downloads panel, right next to the "Show all downloads" button.
+// @downloadURL    https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/clearDownloadsButton.uc.js
+// @updateURL      https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/clearDownloadsButton.uc.js
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
 class ClearDLPanel {
-  config = {
-    // the "Show all downloads" button is in sentence case, but the
-    // localized "Clear Downloads" button string is from a context menu, so
-    // it's in "Title Case". if you want both in sentence case use this.
-    // I've tried to account for other alphabets or RTL languages but user
-    // will be the judge
-    "Label in sentence case": true,
-  };
   constructor() {
     this.makeButton();
     this.setCountHandler();
@@ -34,9 +27,7 @@ class ClearDLPanel {
   async makeButton() {
     this.clearPanelButton = document.createXULElement("button");
     let strings = await this.genStrings();
-    let labelString = this.config["Label in sentence case"]
-      ? this.sentenceCase(strings[0])
-      : strings[0];
+    let labelString = this.sentenceCase(strings[0]);
     for (const [key, val] of Object.entries({
       id: "clearDownloadsPanel",
       class:

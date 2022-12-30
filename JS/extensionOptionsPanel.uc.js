@@ -1,59 +1,106 @@
 // ==UserScript==
 // @name           Extension Options Panel
-// @version        1.8.7
+// @version        1.8.8
 // @author         aminomancer
-// @homepage       https://github.com/aminomancer/uc.css.js
-// @description    This script creates a toolbar button that opens a popup panel
-// where extensions can be configured, disabled, uninstalled, etc. Each
-// extension gets its own button in the panel. Clicking an extension's button
-// leads to a subview where you can jump to the extension's options, disable or
-// enable the extension, uninstall it, configure automatic updates,
-// disable/enable it in private browsing, view its source code in whatever
-// program is associated with .xpi files, open the extension's homepage, or copy
-// the extension's ID. The panel can also be opened from the App Menu, using the
-// built-in "Add-ons and themes" button. Since v1.8, themes will also be listed
-// in the panel. Hovering a theme will show a tooltip with a preview/screenshot
-// of the theme, and clicking the theme will toggle it on or off. There are
-// several translation and configuration options directly below.
+// @homepageURL    https://github.com/aminomancer/uc.css.js
+// @description    This script creates a toolbar button that opens a popup panel where extensions can be configured, disabled, uninstalled, etc. Each extension gets its own button in the panel. Clicking an extension's button leads to a subview where you can jump to the extension's options, disable or enable the extension, uninstall it, configure automatic updates, disable/enable it in private browsing, view its source code in whatever program is associated with `.xpi` files, open the extension's homepage, or copy the extension's ID. The panel can also be opened from the App Menu, using the built-in "Add-ons and themes" button. Since v1.8, themes will also be listed in the panel. Hovering a theme will show a tooltip with a preview/screenshot of the theme, and clicking the theme will toggle it on or off. There are several translation and configuration options directly below.
+// @downloadURL    https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/extensionOptionsPanel.uc.js
+// @updateURL      https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/extensionOptionsPanel.uc.js
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
 class ExtensionOptionsWidget {
-  // user configuration. change the value to the right of the colon.
+  // user configuration. some of these are prefs that can be changed in
+  // about:config or user.js. as for the others, you can directly edit this file
+  // and change the value to the right of the colon.
   static config = {
-    "Replace addons button": true, // this script replaces the "Add-ons & Themes" button in the app menu with an "Extensions" button that opens our new panel instead of opening about:addons. set to false if you want to leave this button alone
+    // this script replaces the "Add-ons & Themes" button in the app menu with
+    // an "Extensions" button that opens our new panel instead of opening
+    // about:addons. set to false if you want to leave this button alone
+    "Replace addons button": Services.prefs.getBoolPref(
+      "extensionOptionsPanel.replaceAddonsButton",
+      true
+    ),
 
-    "Show header": true, // set to false if you don't want the "Add-on options" title to be displayed at the top of the panel
+    // set to false if you don't want the "Add-on options" title to be displayed
+    // at the top of the panel
+    "Show header": Services.prefs.getBoolPref(
+      "extensionOptionsPanel.showHeader",
+      true
+    ),
 
-    "Show version": false, // show the addon version next to its name in the list
+    // show the addon version next to its name in the list
+    "Show version": Services.prefs.getBoolPref(
+      "extensionOptionsPanel.showVersion",
+      false
+    ),
 
-    "Show addon messages": true, // about:addons shows you when an addon has a warning or error, e.g. it's unsigned or blocked. if this is set to true, we'll show the same information in the panel
+    // about:addons shows you when an addon has a warning or error, e.g. it's
+    // unsigned or blocked. if this is set to true, we'll show the same
+    // information in the panel
+    "Show addon messages": Services.prefs.getBoolPref(
+      "extensionOptionsPanel.showAddonMessages",
+      true
+    ),
 
-    "Show theme preview tooltips": true, // when hovering a theme in the panel, a preview/screenshot of the theme will be displayed in a tooltip, if possible. this depends on the add-on author.
+    // when hovering a theme in the panel, a preview/screenshot of the theme
+    // will be displayed in a tooltip, if possible. this depends on the add-on
+    // author.
+    "Show theme preview tooltips": Services.prefs.getBoolPref(
+      "extensionOptionsPanel.showThemePreviewTooltips",
+      true
+    ),
 
-    "Show hidden extensions": false, // show system extensions?
+    // show system extensions?
+    "Show hidden extensions": Services.prefs.getBoolPref(
+      "extensionOptionsPanel.showHiddenExtensions",
+      false
+    ),
 
-    "Show disabled extensions": true, // show extensions that you've disabled?
+    // show extensions that you've disabled?
+    "Show disabled extensions": Services.prefs.getBoolPref(
+      "extensionOptionsPanel.showDisabledExtensions",
+      true
+    ),
 
-    "Show enabled extensions first": true, // show enabled extensions at the top of the list and disabled extensions at the bottom?
+    // show enabled extensions at the top of the list and disabled extensions at
+    // the bottom?
+    "Show enabled extensions first": Services.prefs.getBoolPref(
+      "extensionOptionsPanel.showEnabledExtensionsFirst",
+      true
+    ),
 
-    "Addon ID blacklist": [], // put addon IDs in this list, separated by commas, to exclude them from the list, e.g. ["screenshots@mozilla.org", "dark-theme@mozilla.org"]
+    // put addon IDs in this list, separated by commas, to exclude them from the
+    // list, e.g. ["screenshots@mozilla.org", "dark-theme@mozilla.org"]
+    "Addon ID blacklist": JSON.parse(
+      Services.prefs.getCharPref("extensionOptionsPanel.addonIDBlacklist", "[]")
+    ),
 
-    "Icon URL": `chrome://mozapps/skin/extensions/extension.svg`, // if you want to change the button's icon for some reason, you can replace this string with any URL or data URL that leads to an image.
+    // if you want to change the button's icon for some reason, you can replace
+    // this string with any URL or data URL that leads to an image.
+    "Icon URL": `chrome://mozapps/skin/extensions/extension.svg`,
 
     // localization strings
     l10n: {
-      "Button label": "Add-ons and themes", // what should the button's label be when it's in the overflow panel or customization palette?
+      // what should the button's label be when it's in the overflow panel or
+      // customization palette?
+      "Button label": "Add-ons and themes",
 
-      "Button tooltip": "Add-ons and themes", // what should the button's tooltip be? I use sentence case since that's the convention.
+      // what should the button's tooltip be? I use sentence case since that's
+      // the convention.
+      "Button tooltip": "Add-ons and themes",
 
-      "Panel title": "Add-ons and themes", // title shown at the top of the panel (when "Show header" is true)
+      // title shown at the top of the panel (when "Show header" is true)
+      "Panel title": "Add-ons and themes",
 
-      "Download addons label": "Download add-ons", // label for the button that appears when you have no addons installed.
+      // label for the button that appears when you have no addons installed.
+      "Download addons label": "Download add-ons",
 
-      "Addons page label": "Add-ons page", // label for the about:addons button at the bottom of the panel
+      // label for the about:addons button at the bottom of the panel
+      "Addons page label": "Add-ons page",
 
-      "Addon options label": "Extension options", // labels for the addon subview buttons
+      // labels for the addon subview buttons
+      "Addon options label": "Extension options",
 
       "Manage addon label": "Manage add-on",
 
@@ -91,8 +138,8 @@ class ExtensionOptionsWidget {
         "Don't allow label": "Don't allow",
       },
 
-      // labels for addon buttons that have a warning or error,
-      // e.g. addon automatically disabled because it's on a blocklist or unsigned
+      // labels for addon buttons that have a warning or error, e.g. addon
+      // automatically disabled because it's on a blocklist or unsigned
       addonMessages: {
         Blocked: "Blocked",
 
@@ -284,7 +331,7 @@ class ExtensionOptionsWidget {
 
           view.appendChild(
             eop.create(aDoc, "vbox", {
-              id: view.id + "-body",
+              id: `${view.id}-body`,
               class: "panel-subview-body",
             })
           );
@@ -466,7 +513,7 @@ class ExtensionOptionsWidget {
 
           let subviewbutton = body.appendChild(
             this.create(doc, "toolbarbutton", {
-              label: addon.name + (showVersion ? " " + addon.version : ""),
+              label: addon.name + (showVersion ? ` ${addon.version}` : ""),
               class:
                 "subviewbutton subviewbutton-iconic subviewbutton-nav eom-addon-button",
               oncommand: "extensionOptionsPanel.showSubView(event, this)",
@@ -505,7 +552,7 @@ class ExtensionOptionsWidget {
       ) {
         let subviewbutton = body.appendChild(
           this.create(doc, "toolbarbutton", {
-            label: addon.name + (showVersion ? " " + addon.version : ""),
+            label: addon.name + (showVersion ? ` ${addon.version}` : ""),
             class: "subviewbutton subviewbutton-iconic eom-addon-button",
             closemenu: "none",
             "addon-type": "theme",
@@ -688,7 +735,7 @@ class ExtensionOptionsWidget {
     if (!("_Addon" in anchor)) return;
     this.buildSubView(anchor, anchor._Addon);
     event.target.ownerGlobal.PanelUI?.showSubView(
-      "PanelUI-eom-addon-" + this.makeWidgetId(anchor._Addon.id),
+      `PanelUI-eom-addon-${this.makeWidgetId(anchor._Addon.id)}`,
       anchor,
       event
     );
@@ -707,7 +754,7 @@ class ExtensionOptionsWidget {
     let doc = win.document;
     let view = this.viewCache(doc).appendChild(
       this.create(doc, "panelview", {
-        id: "PanelUI-eom-addon-" + this.makeWidgetId(addon.id), // turn the extension ID into a DOM node ID
+        id: `PanelUI-eom-addon-${this.makeWidgetId(addon.id)}`, // turn the extension ID into a DOM node ID
         flex: "1",
         class: "PanelUI-subView cui-widget-panelview",
       })
@@ -733,7 +780,7 @@ class ExtensionOptionsWidget {
     );
     manageButton.addEventListener("command", e =>
       win.BrowserOpenAddonsMgr(
-        "addons://detail/" + encodeURIComponent(addon.id)
+        `addons://detail/${encodeURIComponent(addon.id)}`
       )
     );
 
@@ -987,7 +1034,7 @@ class ExtensionOptionsWidget {
     switch (Number(addon.optionsType)) {
       case 5:
         win.BrowserOpenAddonsMgr(
-          "addons://detail/" + win.encodeURIComponent(addon.id) + "/preferences"
+          `addons://detail/${win.encodeURIComponent(addon.id)}/preferences`
         );
         break;
       case 3:
@@ -1020,7 +1067,7 @@ class ExtensionOptionsWidget {
   openArchive(addon) {
     let dir = Services.dirsvc.get("ProfD", Ci.nsIFile);
     dir.append("extensions");
-    dir.append(addon.id + ".xpi");
+    dir.append(`${addon.id}.xpi`);
     dir.launch();
   }
 
@@ -1044,118 +1091,124 @@ class ExtensionOptionsWidget {
     let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
       Ci.nsIStyleSheetService
     );
-    let uri = makeURI(
-      "data:text/css;charset=UTF=8," +
-        encodeURIComponent(
-          /*css*/
-          `#eom-button {
-    list-style-image: url('${this.config["Icon URL"]}');
+    let css = /*css*/ `#eom-button {
+  list-style-image: url('${this.config["Icon URL"]}');
 }
 #eom-mainView-panel-header {
-    padding: 8px 4px 4px 4px;
-    min-height: 44px;
-    -moz-box-pack: center;
-    -moz-box-align: center;
+  padding: 8px 4px 4px 4px;
+  min-height: 44px;
+  -moz-box-pack: center;
+  -moz-box-align: center;
 }
 #eom-mainView-panel-header-span {
-    font-weight: 600;
-    display: inline-block;
-    text-align: center;
-    overflow-wrap: break-word;
+  font-weight: 600;
+  display: inline-block;
+  text-align: center;
+  overflow-wrap: break-word;
 }
 .panel-header ~ #eom-mainView-panel-header,
 .panel-header ~ #eom-mainView-panel-header + toolbarseparator {
-    display: none;
+  display: none;
 }
 .eom-addon-button {
-    list-style-image: var(--extension-icon);
+  list-style-image: var(--extension-icon);
 }
 #${this.viewId} {
-    min-height: 400px;
-    min-width: 27em;
+  min-height: 400px;
+  min-width: 27em;
 }
 #${this.viewId} .disabled label {
-    opacity: 0.6;
-    font-style: italic;
+  opacity: 0.6;
+  font-style: italic;
 }
 #${this.viewId} .eom-message-label {
-    opacity: 0.6;
-    margin-inline-start: 8px;
-    font-style: italic;
+  opacity: 0.6;
+  margin-inline-start: 8px;
+  font-style: italic;
 }
 .eom-addon-button[message-type="warning"] {
-    background-color: var(--eom-warning-bg, hsla(48, 100%, 66%, 0.15));
+  background-color: var(--eom-warning-bg, hsla(48, 100%, 66%, 0.15));
 }
-.eom-addon-button[message-type="warning"]:not([disabled], [open], :active):is(:hover) {
-    background-color: var(
-        --eom-warning-bg-hover,
-        color-mix(in srgb, currentColor 8%, hsla(48, 100%, 66%, 0.18))
-    );
+.eom-addon-button[message-type="warning"]:not([disabled], [open], :active):is(
+    :hover
+  ) {
+  background-color: var(
+    --eom-warning-bg-hover,
+    color-mix(in srgb, currentColor 8%, hsla(48, 100%, 66%, 0.18))
+  );
 }
-.eom-addon-button[message-type="warning"]:not([disabled]):is([open], :hover:active) {
-    background-color: var(
-        --eom-warning-bg-active,
-        color-mix(in srgb, currentColor 15%, hsla(48, 100%, 66%, 0.2))
-    );
+.eom-addon-button[message-type="warning"]:not([disabled]):is(
+    [open],
+    :hover:active
+  ) {
+  background-color: var(
+    --eom-warning-bg-active,
+    color-mix(in srgb, currentColor 15%, hsla(48, 100%, 66%, 0.2))
+  );
 }
 .eom-addon-button[message-type="error"] {
-    background-color: var(--eom-error-bg, hsla(2, 100%, 66%, 0.15));
+  background-color: var(--eom-error-bg, hsla(2, 100%, 66%, 0.15));
 }
-.eom-addon-button[message-type="error"]:not([disabled], [open], :active):is(:hover) {
-    background-color: var(
-        --eom-error-bg-hover,
-        color-mix(in srgb, currentColor 8%, hsla(2, 100%, 66%, 0.18))
-    );
+.eom-addon-button[message-type="error"]:not([disabled], [open], :active):is(
+    :hover
+  ) {
+  background-color: var(
+    --eom-error-bg-hover,
+    color-mix(in srgb, currentColor 8%, hsla(2, 100%, 66%, 0.18))
+  );
 }
-.eom-addon-button[message-type="error"]:not([disabled]):is([open], :hover:active) {
-    background-color: var(
-        --eom-error-bg-active,
-        color-mix(in srgb, currentColor 15%, hsla(2, 100%, 66%, 0.2))
-    );
+.eom-addon-button[message-type="error"]:not([disabled]):is(
+    [open],
+    :hover:active
+  ) {
+  background-color: var(
+    --eom-error-bg-active,
+    color-mix(in srgb, currentColor 15%, hsla(2, 100%, 66%, 0.2))
+  );
 }
 .eom-radio-hbox {
-    padding-block: 4px;
+  padding-block: 4px;
 }
 .eom-radio-hbox .radio-check {
-    margin-block: 0;
+  margin-block: 0;
 }
 .eom-radio-hbox label {
-    padding-bottom: 1px;
+  padding-bottom: 1px;
 }
 .eom-radio-label {
-    margin-inline-end: 8px;
+  margin-inline-end: 8px;
 }
 .eom-radio-hbox .subviewradio {
-    margin: 0;
-    margin-inline: 2px;
-    padding: 0;
-    background: none !important;
+  margin: 0;
+  margin-inline: 2px;
+  padding: 0;
+  background: none !important;
 }
 .eom-radio-hbox .radio-label-box {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 .eom-radio-label[tooltiptext] {
-    cursor: help;
+  cursor: help;
 }
 .eom-addon-button[enable-checked]::after {
-    -moz-context-properties: fill, fill-opacity;
-    content: url(chrome://global/skin/icons/check.svg);
-    fill: currentColor;
-    fill-opacity: 0.6;
-    display: block;
-    margin-inline-start: 10px;
+  -moz-context-properties: fill, fill-opacity;
+  content: url(chrome://global/skin/icons/check.svg);
+  fill: currentColor;
+  fill-opacity: 0.6;
+  display: block;
+  margin-inline-start: 10px;
 }
 #eom-theme-preview-tooltip {
-    appearance: none;
-    padding: 0;
-    border-radius: var(--arrowpanel-border-radius, 8px);
-    overflow: hidden;
-    border: 1px solid var(--arrowpanel-border-color);
-    background: var(--arrowpanel-border-color);
-}`
-        )
-    );
+  appearance: none;
+  padding: 0;
+  border-radius: var(--arrowpanel-border-radius, 8px);
+  overflow: hidden;
+  border: 1px solid var(--arrowpanel-border-color);
+  background: var(--arrowpanel-border-color);
+}
+`;
+    let uri = makeURI(`data:text/css;charset=UTF=8,${encodeURIComponent(css)}`);
     if (sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) return;
     sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
   }

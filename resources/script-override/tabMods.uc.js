@@ -2,7 +2,7 @@
 // @name           Tab Mods — tabbrowser-tab class definition mods
 // @version        1.3.5
 // @author         aminomancer
-// @homepage       https://github.com/aminomancer/uc.css.js
+// @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Restore the tab sound button and other aspects of the tab that (imo) were better before Proton.
 // by adding a line to chrome.manifest this can be used to completely override the tab element template, markup and class methods:
 // override chrome://browser/content/tabbrowser-tab.js ../resources/script-override/tabMods.uc.js

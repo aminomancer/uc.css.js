@@ -1,17 +1,13 @@
 // ==UserScript==
 // @name           Private Tabs
-// @version        1.2.2
+// @version        1.2.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
-// @description    An fx-autoconfig port of Private Tab by xiaoxiaoflood. Adds
-// buttons and menu items allowing you to open a "private tab" in nearly any
-// circumstance in which you'd be able to open a normal tab. Instead of opening a
-// link in a private window, you can open it in a private tab instead. This will
-// use a special container and prevent history storage, depending on user
-// configuration. You can also toggle tabs back and forth between private and
-// normal mode. This script adds two hotkeys: Ctrl+alt+P to open a new private tab,
-// and ctrl+alt+T to toggle private mode for the active tab. These hotkeys can be
-// configured along with several other options at the top of the script file.
+// @description    An fx-autoconfig port of [Private Tab][] by xiaoxiaoflood. Adds buttons and menu items allowing you to open a "private tab" in nearly any circumstance in which you'd be able to open a normal tab. Instead of opening a link in a private window, you can open it in a private tab instead. This will use a special container and prevent history storage, depending on user configuration. You can also toggle tabs back and forth between private and normal mode. This script adds two hotkeys: Ctrl+Alt+P to open a new private tab, and Ctrl+Alt+T to toggle private mode for the active tab. These hotkeys can be configured along with several other options at the top of the script file.
+//
+// [Private Tab]: https://github.com/xiaoxiaoflood/firefox-scripts/blob/master/chrome/privateTab.uc.js
+// @downloadURL    https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/privateTabs.uc.js
+// @updateURL      https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/privateTabs.uc.js
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // @include        main
 // @include        chrome://browser/content/places/bookmarksSidebar.xhtml
@@ -20,25 +16,48 @@
 // ==/UserScript==
 
 class PrivateTabManager {
+  // user preferences. add these in about:config if you want them to persist
+  // between script updates without having to reapply them.
   config = {
     // if you want to not record history but don't care about other data, maybe even want to keep private logins
-    neverClearData: false,
-    restoreTabsOnRestart: true,
-    doNotClearDataUntilFxIsClosed: true,
-    deleteContainerOnDisable: false,
-    clearDataOnDisable: false,
+    neverClearData: Services.prefs.getBoolPref(
+      "privateTabs.neverClearData",
+      false
+    ),
+    restoreTabsOnRestart: Services.prefs.getBoolPref(
+      "privateTabs.restoreTabsOnRestart",
+      true
+    ),
+    doNotClearDataUntilFxIsClosed: Services.prefs.getBoolPref(
+      "privateTabs.doNotClearDataUntilFxIsClosed",
+      true
+    ),
+    deleteContainerOnDisable: Services.prefs.getBoolPref(
+      "privateTabs.deleteContainerOnDisable",
+      false
+    ),
+    clearDataOnDisable: Services.prefs.getBoolPref(
+      "privateTabs.clearDataOnDisable",
+      false
+    ),
 
     // key for toggling private mode for the active tab. ctrl + alt + T by default.
-    toggleHotkey: "T",
+    toggleHotkey: Services.prefs.getCharPref("privateTabs.toggleHotkey", "T"),
 
     // key for opening a new private tab. ctrl + alt + P by default.
-    newTabHotkey: "P",
+    newTabHotkey: Services.prefs.getCharPref("privateTabs.newTabHotkey", "P"),
 
     // modifiers for toggle hotkey. this means alt+ctrl on windows or alt+cmd on mac
-    toggleModifiers: "alt accel",
+    toggleModifiers: Services.prefs.getCharPref(
+      "privateTabs.toggleModifiers",
+      "alt accel"
+    ),
 
     // modifiers for new tab hotkey.
-    newTabModifiers: "alt accel",
+    newTabModifiers: Services.prefs.getCharPref(
+      "privateTabs.newTabModifiers",
+      "alt accel"
+    ),
   };
   openTabs = new Set();
   BTN_ID = "privateTab-button";
@@ -360,11 +379,10 @@ class PrivateTabManager {
       eval(
         `PlacesUIUtils.openTabset = ${
           openTabsetString.startsWith("function") ? "" : "function "
-        }` +
-          openTabsetString.replace(
-            /(\s+)(inBackground: loadInBackground,)/,
-            "$1$2$1userContextId: aEvent.userContextId || 0,"
-          )
+        }${openTabsetString.replace(
+          /(\s+)(inBackground: loadInBackground,)/,
+          "$1$2$1userContextId: aEvent.userContextId || 0,"
+        )}`
       );
     }
 
@@ -670,10 +688,9 @@ class PrivateTabManager {
   setStyle() {
     this.STYLE = {
       url: Services.io.newURI(
-        "data:text/css;charset=UTF-8," +
-          encodeURIComponent(
-            `.privatetab-icon, #${this.BTN_ID}, #${this.BTN2_ID} { list-style-image: url(chrome://browser/skin/privateBrowsing.svg) !important; fill: currentColor; -moz-context-properties: fill; } @-moz-document url('chrome://browser/content/browser.xhtml') { #private-mask[enabled="true"] { display: block !important; } #tabbrowser-tabs[hasadjacentnewprivatetabbutton]:not([overflow="true"]) ~ #${this.BTN_ID}, #tabbrowser-tabs[overflow="true"] > #tabbrowser-arrowscrollbox > #tabbrowser-arrowscrollbox-periphery > #${this.BTN2_ID}, #tabbrowser-tabs:not([hasadjacentnewprivatetabbutton]) > #tabbrowser-arrowscrollbox > #tabbrowser-arrowscrollbox-periphery > #${this.BTN2_ID}, #TabsToolbar[customizing="true"] #${this.BTN2_ID} { display: none; } .tabbrowser-tab[usercontextid="${this.container.userContextId}"] .tab-label { text-decoration: underline !important; text-decoration-color: -moz-nativehyperlinktext !important; text-decoration-style: dashed !important; } .tabbrowser-tab[usercontextid="${this.container.userContextId}"][pinned] .tab-icon-image, .tabbrowser-tab[usercontextid="${this.container.userContextId}"][pinned] .tab-throbber { border-bottom: 1px dashed -moz-nativehyperlinktext !important; }}`
-          )
+        `data:text/css;charset=UTF-8,${encodeURIComponent(
+          `.privatetab-icon, #${this.BTN_ID}, #${this.BTN2_ID} { list-style-image: url(chrome://browser/skin/privateBrowsing.svg) !important; fill: currentColor; -moz-context-properties: fill; } @-moz-document url('chrome://browser/content/browser.xhtml') { #private-mask[enabled="true"] { display: block !important; } #tabbrowser-tabs[hasadjacentnewprivatetabbutton]:not([overflow="true"]) ~ #${this.BTN_ID}, #tabbrowser-tabs[overflow="true"] > #tabbrowser-arrowscrollbox > #tabbrowser-arrowscrollbox-periphery > #${this.BTN2_ID}, #tabbrowser-tabs:not([hasadjacentnewprivatetabbutton]) > #tabbrowser-arrowscrollbox > #tabbrowser-arrowscrollbox-periphery > #${this.BTN2_ID}, #TabsToolbar[customizing="true"] #${this.BTN2_ID} { display: none; } .tabbrowser-tab[usercontextid="${this.container.userContextId}"] .tab-label { text-decoration: underline !important; text-decoration-color: -moz-nativehyperlinktext !important; text-decoration-style: dashed !important; } .tabbrowser-tab[usercontextid="${this.container.userContextId}"][pinned] .tab-icon-image, .tabbrowser-tab[usercontextid="${this.container.userContextId}"][pinned] .tab-throbber { border-bottom: 1px dashed -moz-nativehyperlinktext !important; }}`
+        )}`
       ),
       type: this.sss.USER_SHEET,
     };
@@ -683,10 +700,9 @@ class PrivateTabManager {
     if (!baseURL) return;
     this.TST_STYLE = {
       uri: Services.io.newURI(
-        "data:text/css;charset=UTF-8," +
-          encodeURIComponent(
-            `@-moz-document url-prefix(${baseURL}sidebar/sidebar.html) { .tab.contextual-identity-firefox-container-${this.container.userContextId} .label-content { text-decoration: underline !important; text-decoration-color: -moz-nativehyperlinktext !important; text-decoration-style: dashed !important; } .tab.contextual-identity-firefox-container-${this.container.userContextId} tab-favicon { border-bottom: 1px dashed -moz-nativehyperlinktext !important;}}`
-          )
+        `data:text/css;charset=UTF-8,${encodeURIComponent(
+          `@-moz-document url-prefix(${baseURL}sidebar/sidebar.html) { .tab.contextual-identity-firefox-container-${this.container.userContextId} .label-content { text-decoration: underline !important; text-decoration-color: -moz-nativehyperlinktext !important; text-decoration-style: dashed !important; } .tab.contextual-identity-firefox-container-${this.container.userContextId} tab-favicon { border-bottom: 1px dashed -moz-nativehyperlinktext !important;}}`
+        )}`
       ),
       type: this.sss.USER_SHEET,
     };

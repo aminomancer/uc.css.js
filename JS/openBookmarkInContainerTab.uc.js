@@ -1,20 +1,13 @@
 // ==UserScript==
 // @name           Open Bookmark in Container Tab (context menu)
-// @version        1.2.3
+// @version        1.2.4
 // @author         aminomancer
-// @homepage       https://github.com/aminomancer/uc.css.js
-// @description    Adds a new menu to context menus prompted by right-clicking
-// bookmarks, history entries, etc. that allows you to open them in a container
-// tab. This does basically the same thing as the similarly-named addon by Rob
-// Wu, just by a different method. By doing this with an autoconfig script, we
-// can make the menu appear in a logical order towards the top of the context
-// menu rather than at the very bottom, where context menu items from addons
-// always go. Since Bug 1754805, the main menu created by this script is
-// obsolete — the "Open in New Container Tab" menu opened on bookmarks and
-// history items. So as of version 1.2, that menu has been removed since it
-// would be redundant. However, this still adds a menu item to open all
-// bookmarks in a container. Bug 1754805 also doesn't add these menu items to
-// the synced tabs sidebar context menu, whereas this script does.
+// @homepageURL    https://github.com/aminomancer/uc.css.js
+// @description    Adds a new menu to context menus prompted by right-clicking bookmarks, history entries, etc. that allows you to open them in a container tab. This does basically the same thing as the similarly-named addon by Rob Wu, just by a different method. By doing this with an autoconfig script, we can make the menu appear in a logical order towards the top of the context menu rather than at the very bottom, where context menu items from addons always go. Since [Bug 1754805][], the main menu created by this script is obsolete — the "Open in New Container Tab" menu opened on bookmarks and history items. So as of version 1.2, that menu has been removed since it would be redundant. However, this still adds a menu item to open all bookmarks in a container. [Bug 1754805][] also doesn't add these menu items to the synced tabs sidebar context menu, whereas this script does.
+//
+// [Bug 1754805]: https://bugzilla.mozilla.org/show_bug.cgi?id=1754805
+// @downloadURL    https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/openBookmarkInContainerTab.uc.js
+// @updateURL      https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/openBookmarkInContainerTab.uc.js
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // @include        main
 // @include        chrome://browser/content/places/bookmarksSidebar.xhtml
@@ -314,12 +307,12 @@ class OpenPlacesInContainerTabMenu {
     }
   }
   loadSheet() {
-    const css = `.identity-color-blue{--identity-tab-color:#37adff;--identity-icon-color:#37adff;}.identity-color-turquoise{--identity-tab-color:#00c79a;--identity-icon-color:#00c79a;}.identity-color-green{--identity-tab-color:#51cd00;--identity-icon-color:#51cd00;}.identity-color-yellow{--identity-tab-color:#ffcb00;--identity-icon-color:#ffcb00;}.identity-color-orange{--identity-tab-color:#ff9f00;--identity-icon-color:#ff9f00;}.identity-color-red{--identity-tab-color:#ff613d;--identity-icon-color:#ff613d;}.identity-color-pink{--identity-tab-color:#ff4bda;--identity-icon-color:#ff4bda;}.identity-color-purple{--identity-tab-color:#af51f5;--identity-icon-color:#af51f5;}.identity-color-toolbar{--identity-tab-color:var(--lwt-toolbar-field-color,FieldText);--identity-icon-color:var(--lwt-toolbar-field-color,FieldText);}.identity-icon-fence{--identity-icon:url("resource://usercontext-content/fence.svg");}.identity-icon-fingerprint{--identity-icon:url("resource://usercontext-content/fingerprint.svg");}.identity-icon-briefcase{--identity-icon:url("resource://usercontext-content/briefcase.svg");}.identity-icon-dollar{--identity-icon:url("resource://usercontext-content/dollar.svg");}.identity-icon-cart{--identity-icon:url("resource://usercontext-content/cart.svg");}.identity-icon-circle{--identity-icon:url("resource://usercontext-content/circle.svg");}.identity-icon-vacation{--identity-icon:url("resource://usercontext-content/vacation.svg");}.identity-icon-gift{--identity-icon:url("resource://usercontext-content/gift.svg");}.identity-icon-food{--identity-icon:url("resource://usercontext-content/food.svg");}.identity-icon-fruit{--identity-icon:url("resource://usercontext-content/fruit.svg");}.identity-icon-pet{--identity-icon:url("resource://usercontext-content/pet.svg");}.identity-icon-tree{--identity-icon:url("resource://usercontext-content/tree.svg");}.identity-icon-chill{--identity-icon:url("resource://usercontext-content/chill.svg");}.menuitem-iconic[data-usercontextid]{list-style-image:var(--identity-icon);-moz-context-properties:fill;fill:var(--identity-icon-color);}`;
+    const css = /* css */ `.identity-color-blue{--identity-tab-color:#37adff;--identity-icon-color:#37adff;}.identity-color-turquoise{--identity-tab-color:#00c79a;--identity-icon-color:#00c79a;}.identity-color-green{--identity-tab-color:#51cd00;--identity-icon-color:#51cd00;}.identity-color-yellow{--identity-tab-color:#ffcb00;--identity-icon-color:#ffcb00;}.identity-color-orange{--identity-tab-color:#ff9f00;--identity-icon-color:#ff9f00;}.identity-color-red{--identity-tab-color:#ff613d;--identity-icon-color:#ff613d;}.identity-color-pink{--identity-tab-color:#ff4bda;--identity-icon-color:#ff4bda;}.identity-color-purple{--identity-tab-color:#af51f5;--identity-icon-color:#af51f5;}.identity-color-toolbar{--identity-tab-color:var(--lwt-toolbar-field-color,FieldText);--identity-icon-color:var(--lwt-toolbar-field-color,FieldText);}.identity-icon-fence{--identity-icon:url("resource://usercontext-content/fence.svg");}.identity-icon-fingerprint{--identity-icon:url("resource://usercontext-content/fingerprint.svg");}.identity-icon-briefcase{--identity-icon:url("resource://usercontext-content/briefcase.svg");}.identity-icon-dollar{--identity-icon:url("resource://usercontext-content/dollar.svg");}.identity-icon-cart{--identity-icon:url("resource://usercontext-content/cart.svg");}.identity-icon-circle{--identity-icon:url("resource://usercontext-content/circle.svg");}.identity-icon-vacation{--identity-icon:url("resource://usercontext-content/vacation.svg");}.identity-icon-gift{--identity-icon:url("resource://usercontext-content/gift.svg");}.identity-icon-food{--identity-icon:url("resource://usercontext-content/food.svg");}.identity-icon-fruit{--identity-icon:url("resource://usercontext-content/fruit.svg");}.identity-icon-pet{--identity-icon:url("resource://usercontext-content/pet.svg");}.identity-icon-tree{--identity-icon:url("resource://usercontext-content/tree.svg");}.identity-icon-chill{--identity-icon:url("resource://usercontext-content/chill.svg");}.menuitem-iconic[data-usercontextid]{list-style-image:var(--identity-icon);-moz-context-properties:fill;fill:var(--identity-icon-color);}`;
     let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
       Ci.nsIStyleSheetService
     );
     let uri = Services.io.newURI(
-      "data:text/css;charset=UTF=8," + encodeURIComponent(css)
+      `data:text/css;charset=UTF=8,${encodeURIComponent(css)}`
     );
     if (sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) return;
     sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);

@@ -1,38 +1,30 @@
 // ==UserScript==
 // @name           Undo Recently Closed Tabs in Tab Context Menu
-// @version        2.0.6
+// @version        2.0.7
 // @author         aminomancer
-// @homepage       https://github.com/aminomancer/uc.css.js
-// @description    Adds new menus to the context menu that appears when you
-// right-click a tab (in the tab bar or in the TreeStyleTabs sidebar): one lists
-// recently closed tabs so you can restore them, and another lists recently
-// closed windows. These are basically the same functions that exist in the
-// history toolbar button's popup, but I think the tab context menu is a more
-// convenient location for them. Also optionally adds a context menu to the
-// history panel's subview pages for "Recently closed tabs" and "Recently closed
-// windows" with various functions for interacting with the closed tabs and
-// their session history. You can right-click a closed tab item to open the
-// context menu, then click "Remove from List" to get rid of it. You can click
-// "Remove from History" to not only remove the closed tab item, but also forget
-// all of the tab's history — that is, every page it navigated to. The same can
-// be done with recently closed windows. From this menu you can also restore a
-// tab in a new window or private window, bookmark a closed tab/window, and
-// more. This script also adds a new preference
-// (userChrome.tabs.recentlyClosedTabs.middle-click-to-remove) which changes the
-// behavior when you click a recently closed tab/window item in the history
-// panel. Middle clicking a tab or window item will remove it from the list
-// (just like one of the context menu items). Ctrl+clicking a tab item it will
-// open it in a new tab (instead of restoring it in its former place), and
-// Ctrl+Shift+clicking it will open it in a new window.
+// @homepageURL    https://github.com/aminomancer/uc.css.js
+// @description    Adds new menus to the context menu that appears when you right-click a tab (in the tab bar or in the TreeStyleTabs sidebar): one lists recently closed tabs so you can restore them, and another lists recently closed windows. These are basically the same functions that exist in the history toolbar button's popup, but I think the tab context menu is a more convenient location for them.
+//
+// Also optionally adds a context menu to the history panel's subview pages for "Recently closed tabs" and "Recently closed windows" with various functions for interacting with the closed tabs and their session history. You can right-click a closed tab item to open the context menu, then click "Remove from List" to get rid of it.
+//
+// You can click "Remove from History" to not only remove the closed tab item, but also forget all of the tab's history — that is, every page it navigated to. The same can be done with recently closed windows. From this menu you can also restore a tab in a new window or private window, bookmark a closed tab/window, and more.
+//
+// This script also adds a new preference `userChrome.tabs.recentlyClosedTabs.middle-click-to-remove` which changes the behavior when you click a recently closed tab/window item in the history panel. Middle clicking a tab or window item will remove it from the list (just like one of the context menu items). Ctrl+clicking a tab item it will open it in a new tab (instead of restoring it in its former place), and Ctrl+Shift+clicking it will open it in a new window.
+// @downloadURL    https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/recentlyClosedTabsContextMenu.uc.js
+// @updateURL      https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/recentlyClosedTabsContextMenu.uc.js
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
 class UndoListInTabmenu {
-  // user preferences:
+  // user preferences. add these in about:config if you want them to persist
+  // between script updates without having to reapply them.
   static config = {
     // set this to false if you don't want popup windows to be listed in
     // recently closed windows.
-    "Include popup windows": true,
+    "Include popup windows": Services.prefs.getBoolPref(
+      "recentlyClosedTabsContextMenu.includePopupWindows",
+      true
+    ),
 
     /* in vanilla firefox there isn't any way to tell whether a closed tab was a
     container tab. you just have to restore it to find out. with this setting,
@@ -41,12 +33,18 @@ class UndoListInTabmenu {
     "Show container tab colors": {
       // show on items in built-in popup panels like the history toolbar
       // button's popup menu and the hamburger/app menu.
-      inPopupPanels: true,
+      inPopupPanels: Services.prefs.getBoolPref(
+        "recentlyClosedTabsContextMenu.showContainerTabColors.inPopupPanels",
+        true
+      ),
 
       // show on items in the context menus made by this script, and in the
       // built-in history menu in the main titlebar menu bar. if both inMenupopups
       // and inPopupPanels are false, container colors won't show anywhere.
-      inMenupopups: true,
+      inMenupopups: Services.prefs.getBoolPref(
+        "recentlyClosedTabsContextMenu.showContainerTabColors.inMenupopups",
+        true
+      ),
 
       // restore window items can contain more than one tab with different
       // containers. so some users may want to disable container colors on
@@ -55,7 +53,10 @@ class UndoListInTabmenu {
       // information. it shows the favicon and title for the closed window's
       // active tab, since it's not practical to show info for every tab. so it
       // might as well show the active tab's container too.
-      showForWindows: true,
+      showForWindows: Services.prefs.getBoolPref(
+        "recentlyClosedTabsContextMenu.showContainerTabColors.showForWindows",
+        true
+      ),
     },
 
     // you can set this to false if you don't want a context menu to open when
@@ -265,7 +266,7 @@ class UndoListInTabmenu {
     let undoItem = context.querySelector(`[id*="undoCloseTab"]`);
     // Recently Closed Windows
     let windowMenu = this.create(document, "menu", {
-      id: context.id + "-historyUndoWindowMenu3",
+      id: `${context.id}-historyUndoWindowMenu3`,
       class: "recently-closed-windows-menu",
       "data-l10n-id": "menu-history-undo-window-menu",
     });
@@ -277,7 +278,7 @@ class UndoListInTabmenu {
     );
     // Recently Closed Tabs
     let tabMenu = this.create(document, "menu", {
-      id: context.id + "-tabContextUndoList",
+      id: `${context.id}-tabContextUndoList`,
       class: "recently-closed-tabs-menu",
       "data-l10n-id": "menu-history-undo-menu",
     });
@@ -488,7 +489,7 @@ class UndoListInTabmenu {
     );
     RecentlyClosedTabsAndWindowsMenuUtils.setImage = function(aItem, aElement) {
       let iconURL = aItem.image;
-      if (/^https?:/.test(iconURL)) iconURL = "moz-anno:favicon:" + iconURL;
+      if (/^https?:/.test(iconURL)) iconURL = `moz-anno:favicon:${iconURL}`;
       aElement.setAttribute("image", iconURL);
     };
     RecentlyClosedTabsAndWindowsMenuUtils.createEntry = function(
@@ -545,7 +546,7 @@ class UndoListInTabmenu {
         if (aIndex == 0) {
           element.setAttribute(
             "key",
-            "key_undoClose" + (aIsWindowsFragment ? "Window" : "Tab")
+            `key_undoClose${aIsWindowsFragment ? "Window" : "Tab"}`
           );
         }
       }
@@ -554,7 +555,7 @@ class UndoListInTabmenu {
       );
       if (identity && identity.color) {
         element.setAttribute("usercontextid", identity.userContextId);
-        element.classList.add("identity-color-" + identity.color);
+        element.classList.add(`identity-color-${identity.color}`);
       }
       aFragment.appendChild(element);
     };
@@ -577,11 +578,9 @@ class UndoListInTabmenu {
       );
       restoreAllElements.setAttribute(
         "oncommand",
-        "for (var i = 0; i < " +
-          aEntryCount +
-          "; i++) undoClose" +
-          (aIsWindowsFragment ? "Window" : "Tab") +
-          "();"
+        `for (var i = 0; i < ${aEntryCount}; i++) undoClose${
+          aIsWindowsFragment ? "Window" : "Tab"
+        }();`
       );
       if (aPrefixRestoreAll) {
         aFragment.insertBefore(restoreAllElements, aFragment.firstChild);
@@ -713,7 +712,7 @@ class UndoListInTabmenu {
     let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
       Ci.nsIStyleSheetService
     );
-    let uri = makeURI("data:text/css;charset=UTF=8," + encodeURIComponent(css));
+    let uri = makeURI(`data:text/css;charset=UTF=8,${encodeURIComponent(css)}`);
     if (sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) return;
     sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
   }

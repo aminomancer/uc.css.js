@@ -1,21 +1,15 @@
 // ==UserScript==
 // @name           Tracking Protection Middle Click Toggle
-// @version        1.0.1
+// @version        1.0.2
 // @author         aminomancer
-// @homepage       https://github.com/aminomancer/uc.css.js
-// @description    Middle click the tracking protection icon in the urlbar to
-// enable/disable tracking protection on the active tab. A minor change, but it's
-// faster than left-clicking to open the panel, then clicking the actual toggle switch.
+// @homepageURL    https://github.com/aminomancer/uc.css.js
+// @description    Middle click the tracking protection icon in the urlbar to enable/disable tracking protection on the active tab. A minor change, but it's faster than left-clicking to open the panel, then clicking the actual toggle switch.
+// @downloadURL    https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/trackingProtectionMiddleClickToggle.uc.js
+// @updateURL      https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/trackingProtectionMiddleClickToggle.uc.js
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
 (function() {
-  const config = {
-    // if true, play a scale burst animation on the tracking icon when
-    // middle-clicking it. prefers-reduced-motion must not be enabled. set to
-    // false to disable animation.
-    "enable icon animation": true,
-  };
   function init() {
     gProtectionsHandler.handleProtectionsButtonEvent = function(event) {
       event.stopPropagation();
@@ -25,7 +19,10 @@
           switch (event.button) {
             case 1:
               gProtectionsHandler.onTPSwitchCommand();
-              if (config["enable icon animation"]) {
+              if (
+                window.matchMedia("(prefers-reduced-motion: no-preference)")
+                  .matches
+              ) {
                 box.addEventListener(
                   "animationend",
                   () => box.removeAttribute("animate"),
@@ -52,7 +49,7 @@
       this.showProtectionsPopup({ event });
     };
   }
-  if (config["enable icon animation"]) {
+  if (window.matchMedia("(prefers-reduced-motion: no-preference)").matches) {
     let styleSvc = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
       Ci.nsIStyleSheetService
     );
@@ -81,7 +78,7 @@
   }
 }`;
     let styleURI = makeURI(
-      "data:text/css;charset=UTF=8," + encodeURIComponent(css)
+      `data:text/css;charset=UTF=8,${encodeURIComponent(css)}`
     );
     if (!styleSvc.sheetRegistered(styleURI, styleSvc.AUTHOR_SHEET)) {
       styleSvc.loadAndRegisterSheet(styleURI, styleSvc.AUTHOR_SHEET);

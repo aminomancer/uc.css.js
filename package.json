@@ -1,6 +1,6 @@
 {
   "name": "uc.css.js",
-  "description": "This package file is for node modules used in uc.css.js and is based on https://searchfox.org/mozilla-central/source/package.json",
+  "description": "This package file is for node modules used in uc.css.js",
   "repository": {},
   "license": "CC BY-NC-SA 4.0",
   "scripts": {

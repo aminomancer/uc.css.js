@@ -1,23 +1,33 @@
 // ==UserScript==
 // @name           Misc. Mods
-// @version        2.0.6
+// @version        2.0.7
 // @author         aminomancer
-// @homepage       https://github.com/aminomancer/uc.css.js
+// @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Various tiny mods not worth making separate scripts for. Read the comments inside the script for details.
+// @downloadURL    https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/miscMods.uc.js
+// @updateURL      https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/miscMods.uc.js
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
 (function() {
+  // Add these prefs in about:config if you want your settings to persist
+  // between script updates without having to manually reapply them.
   let config = {
     // by default the bookmarks toolbar unhides itself when you use the edit bookmark panel and
     // select the bookmarks toolbar as the bookmark's folder. this is super annoying so I'm
     // completely turning it off.
-    "Disable bookmarks toolbar auto show": true,
+    "Disable bookmarks toolbar auto show": Services.prefs.getBoolPref(
+      "miscMods.disableBookmarksToolbarAutoShow",
+      true
+    ),
 
     // on macOS the arrow keyboard shortcuts (cmd+shift+pgup) "wrap" relative to the tab bar, so
     // moving the final tab right will move it to the beginning of the tab bar. for some reason
     // this is turned off on linux and windows. I'm turning it on.
-    "Moving tabs with arrow keys can wrap": true,
+    "Moving tabs with arrow keys can wrap": Services.prefs.getBoolPref(
+      "miscMods.movingTabsWithArrowKeysCanWrap",
+      true
+    ),
 
     // for some reason, when you open the downloads panel it automatically focuses the first
     // element, which is the footer if you don't have any downloads. this is inconsistent with
@@ -25,13 +35,19 @@
     // problems compared to other browsers is a general lack of consistency. so I think removing
     // this whole behavior would probably be wise, but for now I'll just stop it from focusing
     // the *footer*, but still allow it to focus the first download item if there are any.
-    "Stop downloads panel auto-focusing the footer button": true,
+    "Stop downloads panel auto-focusing the footer button": Services.prefs.getBoolPref(
+      "miscMods.stopDownloadsPanelAutoFocusingTheFooterButton",
+      true
+    ),
 
     // when you use the "move tab" hotkeys, e.g. Ctrl + Shift + PageUp, it only moves the active
     // tab, even if you have multiple tabs selected. this is inconsistent with the keyboard
     // shortcuts "move tab to end" or "move tab to start" and of course, inconsistent with the
     // drag & drop behavior. this will change the hotkeys so they move all selected tabs.
-    "Move all selected tabs with hotkeys": true,
+    "Move all selected tabs with hotkeys": Services.prefs.getBoolPref(
+      "miscMods.moveAllSelectedTabsWithHotkeys",
+      true
+    ),
 
     // with browser.proton.places-tooltip.enabled, the bookmarks/history/tabs tooltip is
     // improved and normally it gets anchored to the element that popped up the tooltip, i.e.
@@ -44,17 +60,26 @@
     // normal way since they're not elements, but we can get their screen coordinates and
     // constrain the tooltip popup within those coordinates. so this will implement the proton
     // places tooltip behavior everywhere, rather than it being restricted to panels and the tab bar.
-    "Anchor bookmarks menu tooltip to bookmark": true,
+    "Anchor bookmarks menu tooltip to bookmark": Services.prefs.getBoolPref(
+      "miscMods.anchorBookmarksMenuTooltipToBookmark",
+      true
+    ),
 
     // by default, when you hit ctrl+tab it waits 200ms before opening the panel. if you replace
     // the 200 with another number, it will wait that long in milliseconds instead.
-    "Reduce ctrl+tab delay": 200,
+    "Reduce ctrl+tab delay": Services.prefs.getIntPref(
+      "miscMods.reduceCtrlTabDelay",
+      200
+    ),
 
     // By default, Shift+Ctrl+Tab will open the all-tabs panel. But if you hit
     // Ctrl+Tab to open the ctrlTab panel, then Shift+Ctrl+Tab will cycle
     // backwards through recently used tabs. To make this more consistent with
     // OS-level Alt/Cmd+Tab, this setting disables the all-tabs panel shortcut.
-    "Use Shift+Ctrl+Tab to switch": true,
+    "Use Shift+Ctrl+Tab to switch": Services.prefs.getBoolPref(
+      "miscMods.useShiftCtrlTabToSwitch",
+      true
+    ),
 
     // normally, firefox only animates the stop/reload button when it's in the main customizable
     // navbar. if you enter customize mode and move the button to the tabs toolbar, menu bar, or
@@ -65,14 +90,20 @@
     // #stop-reload-button {position: relative;}
     // #stop-reload-button > :is(#reload-button, #stop-button) > .toolbarbutton-animatable-box {display: block;}
     // :is(#reload-button, #stop-button) > .toolbarbutton-icon {padding: var(--toolbarbutton-inner-padding) !important;}
-    "Allow stop/reload button to animate in other toolbars": true,
+    "Allow stop/reload button to animate in other toolbars": Services.prefs.getBoolPref(
+      "miscMods.allowStopReloadButtonToAnimateInOtherToolbars",
+      true
+    ),
 
     // When you open a private window, it shows a little private browsing icon in the top of the
     // navbar, next to the window control buttons. It doesn't have a tooltip for some reason, so
     // if you don't already recognize the private browsing icon, you won't know what it means.
     // This simply gives it a localized tooltip like "You're in a Private Window" in English.
     // The exact string is drawn from Firefox's fluent files, so it depends on your language.
-    "Give the private browsing indicator a tooltip": true,
+    "Give the private browsing indicator a tooltip": Services.prefs.getBoolPref(
+      "miscMods.giveThePrivateBrowsingIndicatorATooltip",
+      true
+    ),
 
     // The location where your bookmarks are saved by default is defined in the preference
     // browser.bookmarks.defaultLocation. This pref is updated every time you manually change a
@@ -90,7 +121,10 @@
     // will permanently remain your default location. You can still change the default location
     // by modifying the preference directly or by temporarily checking that checkbox. It just
     // means the default location will only automatically change when the checkbox is checked.
-    "Preserve your default bookmarks folder": true,
+    "Preserve your default bookmarks folder": Services.prefs.getBoolPref(
+      "miscMods.preserveYourDefaultBookmarksFolder",
+      true
+    ),
 
     // By default, the private browsing indicator is just an inert <hbox> that sits next to the
     // window control buttons. Hovering it reveals a tooltip, but that's it. Without any hover
@@ -98,7 +132,10 @@
     // actual function seems like a bad idea. So instead of doing nothing, clicking the
     // indicator will open a support page with info about private browsing. Better than nothing,
     // and I didn't want to make it a redundant "new private window" button.
-    "Turn private browsing indicator into button": true,
+    "Turn private browsing indicator into button": Services.prefs.getBoolPref(
+      "miscMods.turnPrivateBrowsingIndicatorIntoButton",
+      true
+    ),
 
     // By default, the permissions popup anchors to the center of the permissions box. But this
     // box can have anywhere from 1 to 20 icons visible at one time. So the permission winds up
@@ -106,7 +143,10 @@
     // particular. This mod will change the method so that it anchors to the permission granted
     // icon instead. That's the first icon in the box. So it will appear left-aligned rather
     // than center aligned.
-    "Anchor permissions popup to granted permission icon": true,
+    "Anchor permissions popup to granted permission icon": Services.prefs.getBoolPref(
+      "miscMods.anchorPermissionsPopupToGrantedPermissionIcon",
+      true
+    ),
 
     // By default, when you're in DOM fullscreen (e.g. you clicked the
     // fullscreen button in a web video player like YouTube's) and you open
@@ -115,7 +155,10 @@
     // But in my testing it doesn't seem to be necessary, at least when
     // duskFox is installed. So this tiny mod just removes that behavior so
     // that it opens as normal in fullscreen.
-    "Don't exit DOM fullscreen when opening permissions popup": true,
+    "Don't exit DOM fullscreen when opening permissions popup": Services.prefs.getBoolPref(
+      "miscMods.dontExitDOMFullscreenWhenOpeningPermissionsPopup",
+      true
+    ),
 
     // When you click and drag a tab, Firefox displays a small thumbnail preview of the tab's
     // content next to your mouse cursor (provided you have `nglayout.enable_drag_images` set to
@@ -128,7 +171,10 @@
     // --in-content-bg-dark. This variable is already set by duskFox so you don't need to set it
     // yourself if you use my CSS theme. If you don't, then make sure you add
     // `:root{--in-content-bg-dark: #000}` to your userChrome.css, or it will fall back to white.
-    "Customize tab drag preview background color": true,
+    "Customize tab drag preview background color": Services.prefs.getBoolPref(
+      "miscMods.customizeTabDragPreviewBackgroundColor",
+      true
+    ),
 
     // Normally when a page is loading, Firefox will display network information
     // in the bottom left of the browser content area. When the mouse cursor is
@@ -136,7 +182,10 @@
     // setting disables the page network status but keeps the mouseover link
     // URL. duskFox used to do this with CSS, but it doesn't behave well with
     // the fade transitions to do it that way. So now it's done with JavaScript.
-    "Disable loading status for status panel": true,
+    "Disable loading status for status panel": Services.prefs.getBoolPref(
+      "miscMods.disableLoadingStatusForStatusPanel",
+      true
+    ),
 
     // With duskFox installed, we indicate container tabs by adding a colored
     // stripe at the bottom of the tab. But we also add a purple stripe at the
@@ -160,7 +209,10 @@
     // }
     // This is a pretty opinionated change and it doesn't do anything without
     // duskFox or the above CSS, so it's disabled by default.
-    "Show container icons on multiselected tabs": false,
+    "Show container icons on multiselected tabs": Services.prefs.getBoolPref(
+      "miscMods.showContainerIconsOnMultiselectedTabs",
+      false
+    ),
   };
   class UCMiscMods {
     constructor() {
@@ -208,10 +260,9 @@
     }
     stopDownloadsPanelFocus() {
       eval(
-        `DownloadsPanel._focusPanel = function ` +
-          DownloadsPanel._focusPanel
-            .toSource()
-            .replace(/DownloadsFooter\.focus\(\)\;/, ``)
+        `DownloadsPanel._focusPanel = function ${DownloadsPanel._focusPanel
+          .toSource()
+          .replace(/DownloadsFooter\.focus\(\)\;/, ``)}`
       );
     }
     moveTabKeysMoveSelectedTabs() {
@@ -252,11 +303,10 @@
         }
       };
       eval(
-        `gBrowser._handleKeyDownEvent = function ` +
-          gBrowser._handleKeyDownEvent
-            .toSource()
-            .replace(/moveTabBackward/, `moveTabsBackward`)
-            .replace(/moveTabForward/, `moveTabsForward`)
+        `gBrowser._handleKeyDownEvent = function ${gBrowser._handleKeyDownEvent
+          .toSource()
+          .replace(/moveTabBackward/, `moveTabsBackward`)
+          .replace(/moveTabForward/, `moveTabsForward`)}`
       );
     }
     anchorBookmarksTooltip() {
@@ -368,18 +418,16 @@
     }
     stopReloadAnimations() {
       eval(
-        `CombinedStopReload.switchToStop = function ` +
-          CombinedStopReload.switchToStop
-            .toSource()
-            .replace(/switchToStop/, "")
-            .replace(/#nav-bar-customization-target/, `.customization-target`)
+        `CombinedStopReload.switchToStop = function ${CombinedStopReload.switchToStop
+          .toSource()
+          .replace(/switchToStop/, "")
+          .replace(/#nav-bar-customization-target/, `.customization-target`)}`
       );
       eval(
-        `CombinedStopReload.switchToReload = function ` +
-          CombinedStopReload.switchToReload
-            .toSource()
-            .replace(/switchToReload/, "")
-            .replace(/#nav-bar-customization-target/, `.customization-target`)
+        `CombinedStopReload.switchToReload = function ${CombinedStopReload.switchToReload
+          .toSource()
+          .replace(/switchToReload/, "")
+          .replace(/#nav-bar-customization-target/, `.customization-target`)}`
       );
     }
     async addPrivateBrowsingTooltip() {
@@ -417,14 +465,13 @@
         checkbox.checked = pref;
       });
       eval(
-        `StarUI._storeRecentlyUsedFolder = async function ` +
-          StarUI._storeRecentlyUsedFolder
-            .toSource()
-            .replace(/^async \_storeRecentlyUsedFolder/, "")
-            .replace(
-              /if \(didChangeFolder\)/,
-              `if (didChangeFolder && Services.prefs.getBoolPref("userChrome.bookmarks.editDialog.persistLastLocation", true))`
-            )
+        `StarUI._storeRecentlyUsedFolder = async function ${StarUI._storeRecentlyUsedFolder
+          .toSource()
+          .replace(/^async \_storeRecentlyUsedFolder/, "")
+          .replace(
+            /if \(didChangeFolder\)/,
+            `if (didChangeFolder && Services.prefs.getBoolPref("userChrome.bookmarks.editDialog.persistLastLocation", true))`
+          )}`
       );
     }
     privateBrowsingIndicatorButton() {
@@ -438,25 +485,23 @@
     permsPopupInFullscreen() {
       gPermissionPanel._initializePopup();
       eval(
-        `gPermissionPanel.handleIdentityButtonEvent = function ` +
-          gPermissionPanel.handleIdentityButtonEvent
-            .toSource()
-            .replace(/handleIdentityButtonEvent/, "")
-            .replace(/document\.fullscreen/, `false`)
+        `gPermissionPanel.handleIdentityButtonEvent = function ${gPermissionPanel.handleIdentityButtonEvent
+          .toSource()
+          .replace(/handleIdentityButtonEvent/, "")
+          .replace(/document\.fullscreen/, `false`)}`
       );
     }
     tabDragPreview() {
       let { tabContainer } = gBrowser;
       if (tabContainer.hasOwnProperty("on_dragstart")) return;
       eval(
-        `tabContainer.on_dragstart = function ` +
-          tabContainer.on_dragstart
-            .toSource()
-            .replace(/on_dragstart/, "")
-            .replace(
-              /\"white\"/,
-              `getComputedStyle(this).getPropertyValue("--in-content-bg-dark").trim() || "white"`
-            )
+        `tabContainer.on_dragstart = function ${tabContainer.on_dragstart
+          .toSource()
+          .replace(/on_dragstart/, "")
+          .replace(
+            /\"white\"/,
+            `getComputedStyle(this).getPropertyValue("--in-content-bg-dark").trim() || "white"`
+          )}`
       );
     }
     containerIconsOnMultiselectedTabs() {
@@ -491,7 +536,7 @@
           }
           if (identity.icon) {
             tab.classList.add(iconPrefix + identity.icon);
-            tab.classList.add(iconPrefix + "on-multiselect");
+            tab.classList.add(`${iconPrefix}on-multiselect`);
           }
         }
       };
@@ -499,14 +544,13 @@
     disableLoadingStatus() {
       if (StatusPanel.update.name !== "uc_update") {
         eval(
-          `StatusPanel.update = function ` +
-            StatusPanel.update
-              .toSource()
-              .replace(/^update/, "uc_update")
-              .replace(
-                /\s*if \(XULBrowserWindow\.busyUI\) {\n\s*types\.push\(\"status\"\);\n\s*}\n\s*types\.push\(\"defaultStatus\"\);/,
-                ""
-              )
+          `StatusPanel.update = function ${StatusPanel.update
+            .toSource()
+            .replace(/^update/, "uc_update")
+            .replace(
+              /\s*if \(XULBrowserWindow\.busyUI\) {\n\s*types\.push\(\"status\"\);\n\s*}\n\s*types\.push\(\"defaultStatus\"\);/,
+              ""
+            )}`
         );
       }
     }
@@ -570,14 +614,13 @@
       // see uc-urlbar.css for the implementation in duskFox.
       let searchbarPopup = document.getElementById("PopupSearchAutoComplete");
       eval(
-        `searchbarPopup.updateHeader = async function ` +
-          searchbarPopup.updateHeader
-            .toSource()
-            .replace(/async updateHeader/, "")
-            .replace(
-              /(let uri = engine.iconURI;)/,
-              `engine.name ? this.setAttribute("engine", engine.name) : this.removeAttribute("engine");\n      $1`
-            )
+        `searchbarPopup.updateHeader = async function ${searchbarPopup.updateHeader
+          .toSource()
+          .replace(/async updateHeader/, "")
+          .replace(
+            /(let uri = engine.iconURI;)/,
+            `engine.name ? this.setAttribute("engine", engine.name) : this.removeAttribute("engine");\n      $1`
+          )}`
       );
     }
   }

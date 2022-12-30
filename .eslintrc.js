@@ -34,6 +34,7 @@ module.exports = {
   rules: {
     curly: ["error", "multi-line", "consistent"],
     "linebreak-style": ["error", "unix"],
+    "no-console": ["warn", { allow: ["error"] }],
     "no-implied-eval": "error",
     "prefer-numeric-literals": "error",
     "prefer-promise-reject-errors": "error",
@@ -79,7 +80,6 @@ module.exports = {
         complexity: ["warn", { max: 50 }],
         "consistent-return": "off",
         "mozilla/valid-lazy": "off",
-        "no-console": "warn",
         "no-empty": "off",
         "no-eval": "off",
         "no-unused-vars": "off",

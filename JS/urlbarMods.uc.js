@@ -1,14 +1,17 @@
 // ==UserScript==
 // @name           Urlbar Mods
-// @version        1.7.5
+// @version        1.7.6
 // @author         aminomancer
-// @homepage       https://github.com/aminomancer/uc.css.js
-// @description    Make some minor modifications to the urlbar. See the code
-//                 comments below for more details.
+// @homepageURL    https://github.com/aminomancer/uc.css.js
+// @description    Make some minor modifications to the urlbar. See the code comments in the script for more details.
+// @downloadURL    https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/urlbarMods.uc.js
+// @updateURL      https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/urlbarMods.uc.js
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
 class UrlbarMods {
+  // user preferences. add these in about:config if you want them to persist
+  // between script updates without having to reapply them.
   static config = {
     // recently the context menu for the search engine one-off buttons in the
     // urlbar results panel has been disabled. but the context menu for the
@@ -16,7 +19,10 @@ class UrlbarMods {
     // did this, and it's a really minor thing, but it's not like right-clicking
     // the buttons does anything else, (at least on windows) so you may want to
     // restore the context menu.
-    "restore one-offs context menu": false,
+    "restore one-offs context menu": Services.prefs.getBoolPref(
+      "urlbarMods.restoreOneOffsContextMenu",
+      false
+    ),
 
     // when you click & drag the identity box in the urlbar, it lets you drag
     // and drop the URL into text fields, the tab bar, desktop, etc. while
@@ -29,7 +35,10 @@ class UrlbarMods {
     // and --arrowpanel-border-color. so if you use my theme duskFox it'll look
     // similar to a tooltip. if you don't use my theme it'll look similar to a
     // popup panel.
-    "style identity icon drag box": true,
+    "style identity icon drag box": Services.prefs.getBoolPref(
+      "urlbarMods.styleIdentityIconDragBox",
+      true
+    ),
 
     // the identity icon is missing tooltips and/or identifying icons for
     // several states. in particular, there is no tooltip on pages with mixed
@@ -68,7 +77,10 @@ class UrlbarMods {
     // an extra class. so you can style these yourself if you want but duskFox
     // already styles them just like the other error pages — with the triangular
     // warning sign.
-    "add new tooltips and classes for identity icon": true,
+    "add new tooltips and classes for identity icon": Services.prefs.getBoolPref(
+      "urlbarMods.addNewTooltipsAndClassesForIdentityIcon",
+      true
+    ),
 
     // this sets attributes on each urlbar result according to 1) its
     // corresponding search engine; and 2) its source device, if it's a remote
@@ -88,7 +100,10 @@ class UrlbarMods {
     // changes the icon, so it'll fit with however you have type icons styled.
     // if you don't use my theme but you want type icons to look more prominent,
     // see urlbar-results.css and search "type-icon"
-    "show detailed icons in urlbar results": true,
+    "show detailed icons in urlbar results": Services.prefs.getBoolPref(
+      "urlbarMods.showDetailedIconsInUrlbarResults",
+      true
+    ),
 
     // normally, when you type something like "firefox install" or "clear
     // cookies" in the urlbar, it suggests an "intervention" or "tip" which acts
@@ -102,7 +117,10 @@ class UrlbarMods {
     // point of view, these results just waste space while presenting a hazard
     // to the user, which makes them more of a liability than an asset. so they
     // will be removed by this setting.
-    "disable urlbar intervention tips": true,
+    "disable urlbar intervention tips": Services.prefs.getBoolPref(
+      "urlbarMods.disableUrlbarInterventionTips",
+      true
+    ),
 
     // by default, urlbar results are not sorted consistently between regular
     // mode and search mode. when you use the urlbar normally, the order of
@@ -119,7 +137,10 @@ class UrlbarMods {
     // don't have to hit Tab so many times to reach them) you'll get URLs at the
     // top of the list in regular mode, and URLs at the bottom of the list in
     // search mode.
-    "sort urlbar results consistently": true,
+    "sort urlbar results consistently": Services.prefs.getBoolPref(
+      "urlbarMods.sortUrlbarResultsConsistently",
+      true
+    ),
 
     // when you type nothing but space or tab characters in the urlbar, the
     // first result will have an empty title. consecutive whitespace characters
@@ -129,7 +150,10 @@ class UrlbarMods {
     // the title element. then your CSS can underline it. this is already done
     // in uc-urlbar-results.css but if you wanna do it yourself:
     // .urlbarView-title[all-whitespace] {text-decoration: underline}
-    "underline whitespace results": true,
+    "underline whitespace results": Services.prefs.getBoolPref(
+      "urlbarMods.underlineWhitespaceResults",
+      true
+    ),
   };
   constructor() {
     if (UrlbarMods.config["add new tooltips and classes for identity icon"]) {
@@ -359,9 +383,9 @@ class UrlbarMods {
       rgb.length = 3;
       rgb.forEach((c, i) => {
         c = (+c).toString(16);
-        rgb[i] = c.length === 1 ? "0" + c : c.slice(0, 2);
+        rgb[i] = c.length === 1 ? `0${c}` : c.slice(0, 2);
       });
-      return "#" + rgb.join("");
+      return `#${rgb.join("")}`;
     }
     // draw a rectangle with rounded corners
     function roundRect(ctx, x, y, width, height, radius = 5, fill, stroke) {
@@ -417,8 +441,8 @@ class UrlbarMods {
       if (gURLBar.getAttribute("pageproxystate") != "valid") return;
 
       let value = gBrowser.currentURI.displaySpec;
-      let urlString = value + "\n" + gBrowser.contentTitle;
-      let htmlString = '<a href="' + value + '">' + value + "</a>";
+      let urlString = `${value}\n${gBrowser.contentTitle}`;
+      let htmlString = `<a href="${value}">${value}</a>`;
 
       let scale = window.devicePixelRatio;
       let canvas = document.createElementNS(
@@ -623,13 +647,12 @@ class UrlbarMods {
         "resource:///modules/UrlbarUtils.sys.mjs"
       );
       eval(
-        `RemoteTabs.startQuery = async function ` +
-          src1
-            .replace(/async startQuery/, ``)
-            .replace(
-              /(device\: client\.name\,)/,
-              `$1 clientType: client.clientType,`
-            )
+        `RemoteTabs.startQuery = async function ${src1
+          .replace(/async startQuery/, ``)
+          .replace(
+            /(device\: client\.name\,)/,
+            `$1 clientType: client.clientType,`
+          )}`
       );
     }
     if (src2 && !src2.includes("result.payload.clientType")) {
@@ -650,28 +673,27 @@ class UrlbarMods {
         ObjectUtils: "resource://gre/modules/ObjectUtils.jsm",
       });
       eval(
-        `gURLBar.view._updateRow = function ` +
-          src2
-            .replace(/^\(/, "")
-            .replace(/\)$/, "")
-            .replace(/^function\s*/, "")
-            .replace(/^_updateRow\s*/, "")
-            .replace(
-              /(item\.removeAttribute\(\"stale\"\);)/,
-              `$1 item.removeAttribute("clientType"); item.removeAttribute("engine");`
-            )
-            .replace(
-              /(item\.setAttribute\(\"type\", \"search\"\);)/,
-              `$1 if (result.payload.engine) item.setAttribute("engine", result.payload.engine);`
-            )
-            .replace(
-              /(item\.setAttribute\(\"type\", \"tabtosearch\"\);)\n {4}} else/,
-              `$1 if (result.payload.engine) item.setAttribute("engine", result.payload.engine);\n    } else if (result.providerName == "TokenAliasEngines") {\n      item.setAttribute("type", "tokenaliasengine");\n      if (result.payload.engine) item.setAttribute("engine", result.payload.engine);\n    } else`
-            )
-            .replace(
-              /(item\.setAttribute\(\"type\"\, \"remotetab\"\);)/,
-              `$1 if (result.payload.clientType) item.setAttribute("clientType", result.payload.clientType);`
-            )
+        `gURLBar.view._updateRow = function ${src2
+          .replace(/^\(/, "")
+          .replace(/\)$/, "")
+          .replace(/^function\s*/, "")
+          .replace(/^_updateRow\s*/, "")
+          .replace(
+            /(item\.removeAttribute\(\"stale\"\);)/,
+            `$1 item.removeAttribute("clientType"); item.removeAttribute("engine");`
+          )
+          .replace(
+            /(item\.setAttribute\(\"type\", \"search\"\);)/,
+            `$1 if (result.payload.engine) item.setAttribute("engine", result.payload.engine);`
+          )
+          .replace(
+            /(item\.setAttribute\(\"type\", \"tabtosearch\"\);)\n {4}} else/,
+            `$1 if (result.payload.engine) item.setAttribute("engine", result.payload.engine);\n    } else if (result.providerName == "TokenAliasEngines") {\n      item.setAttribute("type", "tokenaliasengine");\n      if (result.payload.engine) item.setAttribute("engine", result.payload.engine);\n    } else`
+          )
+          .replace(
+            /(item\.setAttribute\(\"type\"\, \"remotetab\"\);)/,
+            `$1 if (result.payload.clientType) item.setAttribute("clientType", result.payload.clientType);`
+          )}`
       );
     }
     if (!src3.includes("uc_startQuery")) {
@@ -689,11 +711,10 @@ class UrlbarMods {
         "resource:///modules/UrlbarUtils.sys.mjs"
       );
       eval(
-        `TabToSearch.startQuery = async function uc_startQuery` +
-          src3
-            .replace(/async startQuery/, ``)
-            .replace(/makeResult/g, "makeTTSResult")
-            .replace(/makeOnboardingResult/g, "makeTTSOnboardingResult")
+        `TabToSearch.startQuery = async function uc_startQuery${src3
+          .replace(/async startQuery/, ``)
+          .replace(/makeResult/g, "makeTTSResult")
+          .replace(/makeOnboardingResult/g, "makeTTSOnboardingResult")}`
       );
     }
     let css = /* css */ `.urlbarView-row[type="remotetab"] .urlbarView-type-icon {
@@ -717,7 +738,7 @@ class UrlbarMods {
     let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
       Ci.nsIStyleSheetService
     );
-    let uri = makeURI("data:text/css;charset=UTF=8," + encodeURIComponent(css));
+    let uri = makeURI(`data:text/css;charset=UTF=8,${encodeURIComponent(css)}`);
     if (sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) return;
     sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
   }
@@ -751,13 +772,12 @@ class UrlbarMods {
         UrlbarUtils.getLogger({ prefix: "MuxerUnifiedComplete" })
       );
       eval(
-        `UnifiedComplete.sort = function ` +
-          sortSrc
-            .replace(/sort/, ``)
-            .replace(
-              /showSearchSuggestionsFirst\: true/,
-              `showSearchSuggestionsFirst: lazy.UrlbarPrefs.get("showSearchSuggestionsFirst")`
-            )
+        `UnifiedComplete.sort = function ${sortSrc
+          .replace(/sort/, ``)
+          .replace(
+            /showSearchSuggestionsFirst\: true/,
+            `showSearchSuggestionsFirst: lazy.UrlbarPrefs.get("showSearchSuggestionsFirst")`
+          )}`
       );
     }
   }

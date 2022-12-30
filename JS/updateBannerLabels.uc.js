@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name           Concise Update Banner Labels
-// @version        1.2.1
+// @version        1.2.2
 // @author         aminomancer
-// @homepage       https://github.com/aminomancer
-// @description    This script simply changes the update banners in the hamburger
-// button app menu to make the strings a bit more concise. Instead of "Update available
-// — download now" it will show "Download Nightly update" for example.
+// @homepageURL    https://github.com/aminomancer
+// @description    This script simply changes the update banners in the hamburger button app menu to make the strings a bit more concise. Instead of "Update available — download now" it will show "Download Nightly update" for example.
+// @downloadURL    https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/updateBannerLabels.uc.js
+// @updateURL      https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/updateBannerLabels.uc.js
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 

@@ -1,39 +1,16 @@
 // ==UserScript==
 // @name           Findbar Mods
-// @version        1.3.4
+// @version        1.3.5
 // @author         aminomancer
-// @homepage       https://github.com/aminomancer
-// @description    1) Make a custom context menu for the findbar that lets you
-// permanently configure findbar-related settings. You can set "Highlight All"
-// and "Whole Words" just like you can with the built-in checkboxes, but this
-// also lets you choose any setting for "Match Case" and "Match Diacritics." The
-// built-in checkboxes for these settings only let you choose between states 1
-// and 0, true and false. There's actually a 2 state which enables a more useful
-// and intuitive mode. Read the notes in the "l10n" section below for more info.
-// Additionally, most of the built-in checkboxes are only temporary. They only
-// apply to the current browser. This can be useful, but since a context menu
-// requires more intention to reach, its actions should be more permanent.
-// Instead of just setting the browser state, the context menu sets the user
-// preferences just like you could in about:config. 2) Set up a hotkey system
-// that allows you to close the findbar by pressing Escape or Ctrl+F while the
-// findbar is focused. Normally, Ctrl+F only opens the findbar. With this
-// script, Ctrl+F acts more like a toggle. As normal, when the findbar is
-// closed, Ctrl+F will open it. When the findbar is open but not focused, Ctrl+F
-// will focus it and select all text in the input box. From there, pressing
-// Ctrl+F once more will close it. If you're in 'find as you type' mode, ctrl+f
-// switches to regular find mode. 3) (Optional) Miniaturize the findbar matches
-// label and the "Match case" and "Whole words" buttons. Instead of "1 of 500
-// matches" this one says "1/500" and floats inside the input box. This is
-// enabled automatically if my theme duskFox is detected in your chrome folder
-// (it looks for chrome/resources/material/), but you can turn it on manually by
-// setting `forceMiniFindbar` below to true. It's mainly intended for people who use
-// CSS themes that make the findbar much more compact, like my theme. If you
-// don't use one of these themes already, you can grab the relevant code from
-// uc-findbar.css on my repo. For those interested in customizing this with CSS,
-// the mini matches indicator can be styled with the selector .matches-indicator
-// It's the next sibling of the findbar input box. See uc-findbar.css in this
-// repo for how I styled it. Specific methods used are documented in more detail
-// in the code comments below.
+// @homepageURL    https://github.com/aminomancer
+// @description    1. Make a custom context menu for the findbar that lets you permanently configure findbar-related settings. You can set "Highlight All" and "Whole Words" just like you can with the built-in checkboxes, but this also lets you choose any setting for "Match Case" and "Match Diacritics." The built-in checkboxes for these settings only let you choose between states 1 and 0, true and false. There's actually a 2 state which enables a more useful and intuitive mode. Read the notes in the script's `l10n` section for more info. Additionally, most of the built-in checkboxes are only temporary. They only apply to the current browser. This can be useful, but since a context menu requires more intention to reach, its actions should be more permanent. Instead of just setting the browser state, the context menu sets the user preferences just like you could in [about:config](about:config).
+// 2. Set up a hotkey system that allows you to close the findbar by pressing Escape or Ctrl+F while the findbar is focused. Normally, Ctrl+F only opens the findbar. With this script, Ctrl+F acts more like a toggle. As normal, when the findbar is closed, Ctrl+F will open it. When the findbar is open but not focused, Ctrl+F will focus it and select all text in the input box. From there, pressing Ctrl+F once more will close it. If you're in 'find as you type' mode, ctrl+f switches to regular find mode.
+// 3. (Optional) Miniaturize the findbar matches label and the "Match case" and "Whole words" buttons. Instead of "1 of 500 matches" this one says "1/500" and floats inside the input box. This is enabled automatically if my theme [duskFox][] is detected in your chrome folder (it looks for `chrome/resources/material/`), but you can turn it on manually by setting `forceMiniFindbar` below to true. It's mainly intended for people who use CSS themes that make the findbar much more compact, like my theme. If you don't use one of these themes already, you can grab the relevant code from [uc-findbar.css][] on my repo. For those interested in customizing this with CSS, the mini matches indicator can be styled with the selector `.matches-indicator`. It's the next sibling of the findbar input box. See [uc-findbar.css][] in this repo for how I styled it. Specific methods used are documented in more detail in the code comments below.
+//
+// [uc-findbar.css]: https://github.com/aminomancer/uc.css.js/blob/master/uc-findbar.css
+// [duskFox]: https://github.com/aminomancer/uc.css.js
+// @downloadURL    https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/findbarMods.uc.js
+// @updateURL      https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/findbarMods.uc.js
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
@@ -286,18 +263,16 @@ class FindbarMods {
     // of hiding them while state 2 is applied via pref, just disable them so
     // they're grayed out and unclickable.
     eval(
-      `findbarClass._updateCaseSensitivity = function ` +
-        findbarClass._updateCaseSensitivity
-          .toSource()
-          .replace(/_updateCaseSensitivity/, ``)
-          .replace(/checkbox\.hidden/, `checkbox.disabled`)
+      `findbarClass._updateCaseSensitivity = function ${findbarClass._updateCaseSensitivity
+        .toSource()
+        .replace(/_updateCaseSensitivity/, ``)
+        .replace(/checkbox\.hidden/, `checkbox.disabled`)}`
     );
     eval(
-      `findbarClass._setEntireWord = function ` +
-        findbarClass._setEntireWord
-          .toSource()
-          .replace(/_setEntireWord/, ``)
-          .replace(/checkbox\.hidden/, `checkbox.disabled`)
+      `findbarClass._setEntireWord = function ${findbarClass._setEntireWord
+        .toSource()
+        .replace(/_setEntireWord/, ``)
+        .replace(/checkbox\.hidden/, `checkbox.disabled`)}`
     );
     // override the native method that sets some findbar UI properties,
     // e.g. switching between normal and find-as-you-type mode.

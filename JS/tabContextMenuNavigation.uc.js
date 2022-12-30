@@ -1,24 +1,11 @@
 // ==UserScript==
 // @name           Tab Context Menu Navigation
-// @version        1.1.1
+// @version        1.1.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
-// @description    Add some new menuitems to the tab context menu for navigating
-// tabs. Includes Back, Forward, Reload, and Bookmark. The new menuitems look
-// just like the navigation group at the top of the content area context menu.
-// So they're oriented horizontally and have icons instead of labels. But
-// functionally, they're a bit different. If you click the "Reload" button, for
-// example, instead of reloading the current tab it will reload the tab you
-// right-clicked to open the context menu. If you had multiple tabs selected and
-// you right-clicked one of them, it will reload all of them. If you click the
-// "Back" button, it will navigate the context tab(s) back by one. So this gives
-// you some capabilities not already available in Firefox. In particular, you
-// can navigate back/forward in tabs without opening them, since it operates on
-// the context tab rather than the active tab. You can also navigate
-// back/forward in multiple tabs at once. This script was made by request. It's
-// not recommended on macOS, since the context menu items and functions are
-// significantly different. It should be technically compatible but it might
-// look weird depending on your settings.
+// @description    Add some new menuitems to the tab context menu for navigating tabs. Includes Back, Forward, Reload, and Bookmark. The new menuitems look just like the navigation group at the top of the content area context menu. So they're oriented horizontally and have icons instead of labels. But functionally, they're a bit different. If you click the "Reload" button, for example, instead of reloading the current tab it will reload the tab you right-clicked to open the context menu. If you had multiple tabs selected and you right-clicked one of them, it will reload all of them. If you click the "Back" button, it will navigate the context tab(s) back by one. So this gives you some capabilities not already available in Firefox. In particular, you can navigate back/forward in tabs without opening them, since it operates on the context tab rather than the active tab. You can also navigate back/forward in multiple tabs at once. This script was made by request. It's not recommended on macOS, since the context menu items and functions are significantly different. It should be technically compatible but it might look weird depending on your settings.
+// @downloadURL    https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/tabContextMenuNavigation.uc.js
+// @updateURL      https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/tabContextMenuNavigation.uc.js
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 

@@ -1,39 +1,21 @@
 // ==UserScript==
 // @name           Vertical Tabs Pane
-// @version        1.7.1
+// @version        1.7.2
 // @author         aminomancer
-// @homepage       https://github.com/aminomancer/uc.css.js
-// @description    Create a vertical pane across from the sidebar that functions
-// like the vertical tab pane in Microsoft Edge. It doesn't hide the tab bar
-// since people have different preferences on how to do that, but it sets an
-// attribute on the root element that you can use to hide the regular tab bar
-// while the vertical pane is open, for example :root[vertical-tabs]
-// #TabsToolbar... By default, the pane is resizable just like the sidebar is.
-// And like the pane in Edge, you can press a button to collapse it, and it will
-// hide the tab labels and become a thin strip that just shows the tabs'
-// favicons. Hovering the collapsed pane will expand it without moving the
-// browser content. As with the [vertical-tabs] attribute, this "unpinned" state
-// is reflected on the root element, so you can select it like
-// :root[vertical-tabs-unpinned]... Like the sidebar, the state of the pane is
-// stored between windows and recorded in preferences. There's no need to edit
-// these preferences directly. There are a few other preferences that can be
-// edited in about:config, but they can all be changed on the fly by opening the
-// context menu within the pane. The new tab button and the individual tabs all
-// have their own context menus, but right-clicking anything else will open the
-// pane's context menu, which has options for changing these preferences. "Move
-// Pane to Right/Left" will change which side the pane (and by extension, the
-// sidebar) is displayed on, relative to the browser content. Since the pane
-// always mirrors the position of the sidebar, moving the pane to the right will
-// move the sidebar to the left, and vice versa. "Reverse Tab Order" changes the
-// direction of the pane so that newer tabs are displayed on top rather than on
-// bottom. "Expand Pane on Hover/Focus" causes the pane to expand on hover when
-// it's collapsed. When you collapse the pane with the unpin button, it
-// collapses to a small width and then temporarily expands if you hover it,
-// after a delay of 100ms. Then when your mouse leaves the pane, it collapses
-// again, after a delay of 100ms. Both of these delays can be changed with the
-// "Configure Hover Delay" and "Configure Hover Out Delay" options in the
-// context menu, or in about:config. For languages other than English, the
-// labels and tooltips can be modified directly in the l10n object below.
+// @homepageURL    https://github.com/aminomancer/uc.css.js
+// @description    Create a vertical pane across from the sidebar that functions like the vertical tab pane in Microsoft Edge. It doesn't hide the tab bar since people have different preferences on how to do that, but it sets an attribute on the root element that you can use to hide the regular tab bar while the vertical pane is open, for example `:root[vertical-tabs] #TabsToolbar...`.
+//
+// By default, the pane is resizable just like the sidebar is. And like the pane in Edge, you can press a button to collapse it, and it will hide the tab labels and become a thin strip that just shows the tabs' favicons. Hovering the collapsed pane will expand it without moving the browser content. As with the `[vertical-tabs]` attribute, this "unpinned" state is reflected on the root element, so you can select it like `:root[vertical-tabs-unpinned]...`
+//
+// Like the sidebar, the state of the pane is stored between windows and recorded in preferences. There's no need to edit these preferences directly. There are a few other preferences that can be edited in [about:config][], but they can all be changed on the fly by opening the context menu within the pane. The new tab button and the individual tabs all have their own context menus, but right-clicking anything else will open the pane's context menu, which has options for changing these preferences.
+//
+// "Move Pane to Right/Left" will change which side the pane (and by extension, the sidebar) is displayed on, relative to the browser content. Since the pane always mirrors the position of the sidebar, moving the pane to the right will move the sidebar to the left, and vice versa. "Reverse Tab Order" changes the direction of the pane so that newer tabs are displayed on top rather than on bottom. "Expand Pane on Hover/Focus" causes the pane to expand on hover when it's collapsed.
+//
+// When you collapse the pane with the unpin button, it collapses to a small width and then temporarily expands if you hover it, after a delay of 100ms. Then when your mouse leaves the pane, it collapses again, after a delay of 100ms. Both of these delays can be changed with the "Configure Hover Delay" and "Configure Hover Out Delay" options in the context menu, or in about:config. For languages other than English, the labels and tooltips can be modified directly in the l10n object below.
+//
+// [about:config]: about:config
+// @downloadURL    https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/verticalTabsPane.uc.js
+// @updateURL      https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/verticalTabsPane.uc.js
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
@@ -68,19 +50,26 @@
         "Invalid description": "This preference must be a positive integer.",
       },
     },
-    // settings for the hotkey
+    // settings for the hotkey. add these settings in about:config if you want
+    // them to persist between script updates without having to reapply them.
     hotkey: {
       // set to false if you don't want any hotkey
-      enabled: true,
+      enabled: Services.prefs.getBoolPref(
+        "verticalTabsPane.hotkey.enabled",
+        true
+      ),
 
       // valid modifiers are "alt", "shift", "ctrl", "meta" and "accel". accel
       // is equal to ctrl on windows and linux, but meta (cmd ⌘) on macOS. meta
       // is the windows key on windows. it's variable on linux.
-      modifiers: "accel alt",
+      modifiers: Services.prefs.getCharPref(
+        "verticalTabsPane.hotkey.modifiers",
+        "accel alt"
+      ),
 
       // the actual key. valid keys are letters, the hyphen key - and F1-F12.
       // digits and F13-F24 are not supported by firefox.F
-      key: "V",
+      key: Services.prefs.getCharPref("verticalTabsPane.hotkey.key", "V"),
     },
   };
   if (location.href !== "chrome://browser/content/browser.xhtml") return;
@@ -1415,10 +1404,10 @@
       this.pane.removeAttribute("expanded");
     }
     unpin() {
-      this.pane.style.setProperty("--pane-width", this.pane.width + "px");
+      this.pane.style.setProperty("--pane-width", `${this.pane.width}px`);
       this.pane.style.setProperty(
         "--pane-transition-duration",
-        (Math.sqrt(this.pane.width / 350) * 0.25).toFixed(2) + "s"
+        `${(Math.sqrt(this.pane.width / 350) * 0.25).toFixed(2)}s`
       );
       if (this.pane.matches(":hover, :focus-within") && !this._noExpand) {
         this.pane.setAttribute("expanded", true);
@@ -2391,7 +2380,7 @@
         Ci.nsIStyleSheetService
       );
       let uri = makeURI(
-        "data:text/css;charset=UTF=8," + encodeURIComponent(css)
+        `data:text/css;charset=UTF=8,${encodeURIComponent(css)}`
       );
       if (sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) return; // avoid loading duplicate sheets on subsequent window launches.
       sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
@@ -2452,10 +2441,9 @@
     // uninit function too.
     SidebarUI.setPosition();
     eval(
-      `gBrowserInit.onUnload = function ` +
-        gBrowserInit.onUnload
-          .toSource()
-          .replace(/(SidebarUI\.uninit\(\))/, `$1; verticalTabsPane.uninit()`)
+      `gBrowserInit.onUnload = function ${gBrowserInit.onUnload
+        .toSource()
+        .replace(/(SidebarUI\.uninit\(\))/, `$1; verticalTabsPane.uninit()`)}`
     );
     // reset the event handler since it used the bind method, which creates an
     // anonymous version of the function that we can't change. just re-bind our
@@ -2470,27 +2458,25 @@
     let handleRequestSrc = PictureInPicture.handlePictureInPictureRequest.toSource();
     if (!handleRequestSrc.includes("_tabAttrModified")) {
       eval(
-        `PictureInPicture.handlePictureInPictureRequest = async function ` +
-          handleRequestSrc
-            .replace(/async handlePictureInPictureRequest/, "")
-            .replace(/\sServices\.telemetry.*\s*.*\s*.*\s*.*/, "")
-            .replace(/gCurrentPlayerCount.*/g, "")
-            .replace(
-              /(tab\.setAttribute\(\"pictureinpicture\".*)/,
-              `$1 parentWin.gBrowser._tabAttrModified(tab, ["pictureinpicture"]);`
-            )
+        `PictureInPicture.handlePictureInPictureRequest = async function ${handleRequestSrc
+          .replace(/async handlePictureInPictureRequest/, "")
+          .replace(/\sServices\.telemetry.*\s*.*\s*.*\s*.*/, "")
+          .replace(/gCurrentPlayerCount.*/g, "")
+          .replace(
+            /(tab\.setAttribute\(\"pictureinpicture\".*)/,
+            `$1 parentWin.gBrowser._tabAttrModified(tab, ["pictureinpicture"]);`
+          )}`
       );
     }
     let clearIconSrc = PictureInPicture.clearPipTabIcon.toSource();
     if (!clearIconSrc.includes("_tabAttrModified")) {
       eval(
-        `PictureInPicture.clearPipTabIcon = function ` +
-          clearIconSrc
-            .replace(/WINDOW\_TYPE/, `"Toolkit:PictureInPicture"`)
-            .replace(
-              /(tab\.removeAttribute\(\"pictureinpicture\".*)/,
-              `$1 gBrowser._tabAttrModified(tab, ["pictureinpicture"]);`
-            )
+        `PictureInPicture.clearPipTabIcon = function ${clearIconSrc
+          .replace(/WINDOW\_TYPE/, `"Toolkit:PictureInPicture"`)
+          .replace(
+            /(tab\.removeAttribute\(\"pictureinpicture\".*)/,
+            `$1 gBrowser._tabAttrModified(tab, ["pictureinpicture"]);`
+          )}`
       );
     }
   }

@@ -1,9 +1,13 @@
 // ==UserScript==
 // @name           Toggle Menubar Hotkey
-// @version        1.1.2
+// @version        1.1.3
 // @author         aminomancer
-// @homepage       https://github.com/aminomancer
-// @description    Press alt+M to toggle the menubar.
+// @homepageURL    https://github.com/aminomancer
+// @description    Adds a hotkey (Alt+M by default) that toggles the menubar on and off. Unlike just pressing the Alt key, this keeps it open permanently until closed again by the hotkey, toolbar context menu, or customize menu. Requires [fx-autoconfig][] — other script loaders will not work with this script.
+//
+// [fx-autoconfig]: https://github.com/MrOtherGuy/fx-autoconfig
+// @downloadURL    https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/toggleMenubarHotkey.uc.js
+// @updateURL      https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/toggleMenubarHotkey.uc.js
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
@@ -35,13 +39,12 @@
     let src = onViewToolbarsPopupShowing.toSource();
     if (src.startsWith("function")) {
       eval(
-        `window.onViewToolbarsPopupShowing = function uc_onViewToolbarsPopupShowing ` +
-          src
-            .replace(/^function onViewToolbarsPopupShowing/, "")
-            .replace(
-              /if \(popup\.id != \"toolbar-context-menu\"\)/,
-              `if (toolbar.hasAttribute("key"))`
-            )
+        `window.onViewToolbarsPopupShowing = function uc_onViewToolbarsPopupShowing ${src
+          .replace(/^function onViewToolbarsPopupShowing/, "")
+          .replace(
+            /if \(popup\.id != \"toolbar-context-menu\"\)/,
+            `if (toolbar.hasAttribute("key"))`
+          )}`
       );
     }
   }

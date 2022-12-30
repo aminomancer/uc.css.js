@@ -1,19 +1,25 @@
 // ==UserScript==
 // @name           Screenshot Page Action Button
-// @version        1.3.2
+// @version        1.3.3
 // @author         aminomancer
-// @homepage       https://github.com/aminomancer/uc.css.js
-// @description    Creates a screenshot button in the page actions area (the right side
-//                 of the urlbar) that works just like the screenshot toolbar button.
+// @homepageURL    https://github.com/aminomancer/uc.css.js
+// @description    Creates a screenshot button in the page actions area (the right side of the urlbar) that works just like the screenshot toolbar button.
+// @downloadURL    https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/screenshotPageActionButton.uc.js
+// @updateURL      https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/screenshotPageActionButton.uc.js
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
 (function() {
+  // user preferences. add these in about:config if you want them to persist
+  // between script updates without having to reapply them.
   const config = {
     // if set to true, the screenshot action will not appear in private windows.
     // this seems like a logical choice, but that's not how the built-in screenshot
     // button or context menu item work, so this option is false by default.
-    "Disable in private browsing": false,
+    "Disable in private browsing": Services.prefs.getBoolPref(
+      "screenshotPageActionButton.disableInPrivateBrowsing",
+      false
+    ),
   };
   // get BrowserPageActions object from the top context for a given action/node (usually the window)
   function browserPageActions(obj) {
@@ -114,7 +120,7 @@
         Ci.nsIStyleSheetService
       );
       let uri = makeURI(
-        "data:text/css;charset=UTF=8," + encodeURIComponent(this.css)
+        `data:text/css;charset=UTF=8,${encodeURIComponent(this.css)}`
       );
       if (sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) return;
       sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);

@@ -1,13 +1,13 @@
 // ==UserScript==
 // @name           Tooltip Styler
-// @version        1.1.2
+// @version        1.1.3
 // @author         aminomancer
-// @homepage       https://github.com/aminomancer/uc.css.js
-// @description    Allows you to style a tooltip in the chrome window based on
-// which node triggered it. duskFox uses this to make certain tooltips and
-// popups gray instead of indigo, since we have gray system pages. If you want
-// to use this for custom purposes, you'll need to edit the script and add CSS
-// to your AGENT sheet like tooltip[backdrop-color"red"] {...}
+// @homepageURL    https://github.com/aminomancer/uc.css.js
+// @description    Allows you to style a tooltip in the chrome window based on which node triggered it. [duskFox][] uses this to make certain tooltips and popups gray instead of indigo, since we have gray system pages. If you want to use this for custom purposes, you'll need to edit the script and add CSS to your AGENT sheet like `tooltip[backdrop-color"red"] {...}`
+//
+// [duskFox]: https://github.com/aminomancer/uc.css.js
+// @downloadURL    https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/tooltipStyler.uc.js
+// @updateURL      https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/tooltipStyler.uc.js
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
