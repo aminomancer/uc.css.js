@@ -9,9 +9,11 @@
 //
 // The main feature (setting the identity icon to match the current engine in one-off search mode) also adds an `[engine]` attribute to the identity icon so you can customize the icons yourself if you don't like a search engine's icon, or want to adjust its dimensions. If you have google set to "goo" and type in goo then hit spacebar, the identity icon will change to a google icon. And it'll also gain an attribute reflecting that, so you can change its icon further with a CSS rule like:
 //
+// ```css
 // #identity-icon[engine="Tabs"] {
-//     list-style-image: url("chrome://browser/skin/tab.svg") !important;
+//   list-style-image: url("chrome://browser/skin/tab.svg") !important;
 // }
+// ```
 //
 // This doesn't change anything about the layout so you may want to tweak some things in your stylesheet. For example I have mine set up so the tracking protection icon disappears while the user is typing in the urlbar, and so a little box appears behind the identity icon while in one-off search mode. This way the icon appears to the left of the label, like it does on about:preferences and other UI pages.
 //
