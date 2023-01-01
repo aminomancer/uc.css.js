@@ -3,10 +3,9 @@
  * If a copy of the CC BY-NC-SA 4.0 was not distributed with this file,
  * You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ */
 
-import { useRef, useEffect, useState, useCallback, useContext } from "react";
-import ReactMarkdown from "react-markdown";
-import remarkBreaks from "remark-breaks";
+import { useEffect, useState, useCallback, useContext } from "react";
 import { GlobalContext, ucUtils } from "./GlobalContext";
+import { RichDescription } from "./RichDescription";
 const { gScriptUpdater } = ChromeUtils.importESModule(
   "chrome://userchrome/content/aboutuserchrome/modules/UCMSingletonData.sys.mjs"
 );
@@ -209,91 +208,15 @@ export const ScriptCard = ({ script, enabled, expanded, setUpdater }) => {
   );
 };
 
-/**
- * @param {string} uri
- * @returns {string}
- */
-function markdownUriTransformer(uri) {
-  const url = (uri || "").trim();
-  const first = url.charAt(0);
-  if (first === "#" || first === "/") return url;
-  const colon = url.indexOf(":");
-  if (colon === -1) return url;
-  let index = -1;
-  const protocols = ["http", "https", "mailto", "tel", "about", "chrome"];
-  while (++index < protocols.length) {
-    const protocol = protocols[index];
-    if (
-      colon === protocol.length &&
-      url.slice(0, protocol.length).toLowerCase() === protocol
-    ) {
-      return url;
-    }
-  }
-  index = url.indexOf("?");
-  if (index !== -1 && colon > index) return url;
-  index = url.indexOf("#");
-  if (index !== -1 && colon > index) return url;
-  return "";
-}
-
 export const ScriptDetails = ({ script, launchLocalFile }) => {
-  const descriptionWrapper = useRef();
-  const [descriptionCollapsed, setDescriptionCollapsed] = useState(false);
-  const [descriptionToggleHidden, setDescriptionToggleHidden] = useState(true);
-
-  const toggleDescriptionCollapsed = useCallback(() => {
-    setDescriptionCollapsed(previous => !previous);
-    setDescriptionToggleHidden(false);
-  }, []);
-
-  useEffect(() => {
-    const { current } = descriptionWrapper;
-    if (current) {
-      requestAnimationFrame(() => {
-        const remSize = parseFloat(
-          window.getComputedStyle(document.documentElement).fontSize
-        );
-        let { paddingTop, paddingBottom } = window.getComputedStyle(current);
-        let { height } = current.getBoundingClientRect();
-        paddingTop = parseFloat(paddingTop);
-        paddingBottom = parseFloat(paddingBottom);
-        height -= paddingTop + paddingBottom;
-        if (height > 20 * remSize + 8) {
-          toggleDescriptionCollapsed();
-        }
-      });
-    }
-  }, [toggleDescriptionCollapsed]);
-
   return (
     <div className="script-card-expanded">
       <div className="script-detail-rows">
         {script.description?.length > 200 ? (
-          <div
-            className={`script-detail-description-wrapper ${
-              descriptionCollapsed ? "script-detail-description-collapse" : ""
-            }`}
-            ref={descriptionWrapper}
-          >
-            <div className="script-detail-description">
-              <ReactMarkdown
-                className="line-break"
-                linkTarget="_blank"
-                transformLinkUri={markdownUriTransformer}
-                remarkPlugins={[remarkBreaks]}
-              >
-                {script.description.replace(/␠/g, " ")}
-              </ReactMarkdown>
-            </div>
-            <button
-              className="button-link script-detail-description-toggle"
-              hidden={descriptionToggleHidden}
-              onClick={toggleDescriptionCollapsed}
-            >
-              {descriptionCollapsed ? "Show more" : "Show less"}
-            </button>
-          </div>
+          <RichDescription
+            description={script.description.replace(/␠/g, "")}
+            prefix="script-detail-"
+          />
         ) : null}
         <div className="script-detail-row script-detail-source">
           <label className="script-detail-label">Source file</label>

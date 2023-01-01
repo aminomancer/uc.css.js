@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           about:userchrome
-// @version        1.1.1
+// @version        1.1.2
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    A manager for your userscripts. This allows you to automatically update scripts that include an updateURL or downloadURL field in their script metadata. Requires the content in [resources/aboutuserchrome][] to function. Visit about:userchrome to get started.

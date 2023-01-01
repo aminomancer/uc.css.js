@@ -13,8 +13,6 @@ import {
 import { ScriptsView } from "./components/ScriptsView";
 import { SettingsView } from "./components/SettingsView";
 
-// TODO - Convert to typescript
-
 const UserChromeManager = () => {
   const { path, navigate, updateCount } = useContext(GlobalContext);
 

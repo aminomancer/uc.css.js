@@ -55,6 +55,7 @@
     overflow: hidden;
     border: 0;
     padding: var(--card-padding);
+    cursor: pointer;
 
     .script-card-collapsed {
       display: flex;
@@ -237,26 +238,6 @@
               margin: 0;
             }
 
-            code,
-            pre {
-              background: var(--grey-60);
-              border-radius: 4px;
-              padding: 1px 4px;
-              cursor: text;
-            }
-
-            pre {
-              overflow: auto;
-              scrollbar-width: thin;
-              padding: 0;
-              border: 7px solid transparent;
-
-              > code {
-                padding: 0;
-                border-radius: 0;
-              }
-            }
-
             > .line-break {
               white-space: pre-wrap;
 
@@ -267,6 +248,25 @@
               > * {
                 margin-block: 0;
               }
+            }
+
+            code {
+              font-size: 85%;
+              cursor: text;
+            }
+
+            .syntax-highlighted-code {
+              code {
+                background: none !important;
+              }
+            }
+
+            :not(.syntax-highlighted-code) > code {
+              background: var(--in-content-box-background-odd);
+              padding: 0.15em 0.4em;
+              border-radius: 4px;
+              font-family: "Fira Code", "Fira Mono", SFMono-Regular, SF Mono, Menlo, Consolas, "DejaVu Sans Mono", Liberation Mono, ui-monospace, monospace;
+              white-space: break-spaces;
             }
           }
 
@@ -296,6 +296,10 @@
           color: var(--in-content-text-color);
           cursor: default;
 
+          .script-detail-label {
+            white-space: nowrap;
+          }
+
           > :last-child {
             text-align: end;
           }
@@ -305,7 +309,6 @@
 
     &:hover {
       box-shadow: var(--card-shadow);
-      cursor: pointer;
     }
 
     &[active="false"]:not([expanded], :hover) {
