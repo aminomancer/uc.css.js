@@ -84,6 +84,7 @@
 
 #PanelUI-menu-button[badge-status] > .toolbarbutton-badge-stack > .toolbarbutton-badge {
   filter: none !important;
+  -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity !important;
 }
 
 #PanelUI-menu-button[badge-status="fxa-needs-authentication"] > .toolbarbutton-badge-stack > .toolbarbutton-badge {
@@ -113,6 +114,11 @@
   list-style-image: url(chrome://userchrome/content/skin/menu-badged.svg) !important;
 }
 
+#PanelUI-menu-button:where([badge-status="script-updates-available"], [badge-status="script-updates-restart"]) > .toolbarbutton-badge-stack > .toolbarbutton-badge {
+  fill: var(--update-badge-bg) !important;
+  stroke: var(--update-badge-bg) !important;
+}
+
 :root:not([customizing]) #PanelUI-menu-button[badge-status="addon-alert"]:not(:hover, [open]) > .toolbarbutton-badge-stack > .toolbarbutton-badge:-moz-window-inactive {
   fill: var(--update-badge-inactive) !important;
 }
@@ -120,6 +126,11 @@
 :root:not([customizing]) #PanelUI-menu-button[badge-status="fxa-needs-authentication"]:not(:hover, [open]) > .toolbarbutton-badge-stack > .toolbarbutton-badge:-moz-window-inactive {
   fill: var(--update-badge-inactive) !important;
   stroke: transparent !important;
+}
+
+:root:not([customizing]) #PanelUI-menu-button:where([badge-status="script-updates-available"], [badge-status="script-updates-restart"]):not(:hover, [open]) > .toolbarbutton-badge-stack > .toolbarbutton-badge:-moz-window-inactive {
+  fill: var(--update-badge-inactive) !important;
+  stroke: var(--update-badge-inactive) !important;
 }
 
 #PanelUI-menu-button[badge-status="extension-new-tab"] > .toolbarbutton-badge-stack > .toolbarbutton-badge,
@@ -179,6 +190,10 @@
 
 #appMenu-extensions-themes-button {
   list-style-image: url(chrome://userchrome/content/material/extension.svg);
+}
+
+#appMenu-userChrome-button {
+  list-style-image: url(chrome://browser/skin/trending.svg);
 }
 
 #appMenu-find-button2,
@@ -386,6 +401,7 @@
 #appMenu-history-button > .toolbarbutton-text,
 #appMenu-downloads-button > .toolbarbutton-text,
 #appMenu-extensions-themes-button > .toolbarbutton-text,
+#appMenu-userChrome-button > .toolbarbutton-text,
 #appMenu-find-button2 > .toolbarbutton-text,
 #panelMenu_searchBookmarks > .toolbarbutton-text,
 #panelMenuBookmarkThisPage > .toolbarbutton-text,
@@ -442,10 +458,6 @@
 
 #appMenu-zoom-controls :is(#appMenu-zoomReduce-button2, #appMenu-zoomEnlarge-button2, #appMenu-fullscreen-button2, #appMenu-zoomReset-button2):not([disabled]):is([open], :hover:active) {
   background-color: var(--arrowpanel-dimmed-further) !important;
-}
-
-panel .toolbaritem-combined-buttons {
-  margin-inline-end: 0 !important;
 }
 
 #appMenu-zoom-controls toolbarbutton {
@@ -719,7 +731,7 @@ toolbarbutton.subviewbutton.sendToDevice-device[clientType=""][clientId=""] + to
   margin: 0 !important;
 }
 
-#appMenu-proton-update-banner {
+.panel-banner-item:not(.addon-banner-item) {
   margin: var(--arrowpanel-menuitem-margin) !important;
   margin-bottom: 4px !important;
   -moz-box-align: center !important;
@@ -729,7 +741,7 @@ toolbarbutton.subviewbutton.sendToDevice-device[clientType=""][clientId=""] + to
   --panel-banner-item-active-bgcolor: hsl(96, 65%, 75%);
 }
 
-:root[lwt-popup-brighttext] #appMenu-proton-update-banner {
+:root[lwt-popup-brighttext] .panel-banner-item:not(.addon-banner-item) {
   --panel-banner-item-color: #f9f9fa;
   --panel-banner-item-background-color: rgba(48, 230, 11, 0.1);
   --panel-banner-item-hover-bgcolor: rgba(48, 230, 11, 0.15);

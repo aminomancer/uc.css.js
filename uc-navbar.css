@@ -112,6 +112,11 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
   padding-inline-start: var(--arrowpanel-subviewbutton-iconic-gap, 8px) !important;
 }
 
+.widget-overflow-list .toolbaritem-combined-buttons .toolbarbutton-1:not([hidden]) {
+  justify-content: center !important;
+  display: flex !important;
+}
+
 .widget-overflow-list .toolbaritem-combined-buttons .toolbarbutton-1 > .toolbarbutton-text {
   padding-inline-end: 4px !important;
 }
@@ -123,10 +128,6 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
 
 :is(toolbar, .customization-palette) .toolbaritem-combined-buttons.chromeclass-toolbar-additional {
   margin-inline: 0 !important;
-}
-
-:is(toolbar, .customization-palette) :not(toolbarpaletteitem) > .toolbaritem-combined-buttons.chromeclass-toolbar-additional {
-  -moz-box-align: stretch !important;
 }
 
 :is(toolbar, .customization-palette) .toolbaritem-combined-buttons.chromeclass-toolbar-additional:not(:hover) > separator {
@@ -196,14 +197,14 @@ toolbar .toolbarbutton-1 > .toolbarbutton-badge-stack {
   -moz-box-flex: 0 !important;
 }
 
-:is(toolbar, .customization-palette):not(#PersonalToolbar) #zoom-controls > :is(#zoom-out-button, #zoom-in-button) {
+:where(toolbar:not(#PersonalToolbar), .customization-palette) #zoom-controls > :is(#zoom-out-button, #zoom-in-button) {
   margin-block: var(--toolbarbutton-inner-padding) !important;
   width: unset !important;
   padding: 0 !important;
   padding-inline: 2px !important;
 }
 
-:is(toolbar, .customization-palette):not(#PersonalToolbar) #zoom-controls > :is(#zoom-out-button, #zoom-in-button) > .toolbarbutton-icon {
+:where(toolbar:not(#PersonalToolbar), .customization-palette) #zoom-controls > :is(#zoom-out-button, #zoom-in-button) > .toolbarbutton-icon {
   height: 20px !important;
   width: 20px !important;
   padding: 4px !important;
@@ -213,8 +214,8 @@ toolbar .toolbarbutton-1 > .toolbarbutton-badge-stack {
   padding-inline-start: 0 !important;
 }
 
-:is(toolbar, .customization-palette):not(#PersonalToolbar) #zoom-controls > #zoom-reset-button {
-  margin-block: var(--toolbarbutton-inner-padding) !important;
+#zoom-controls > #zoom-reset-button > .toolbarbutton-text {
+	min-width: revert !important;
 }
 
 #wrapper-zoom-controls[place="palette"] > #zoom-controls > #zoom-reset-button {
@@ -235,17 +236,41 @@ toolbar .toolbarbutton-1 > .toolbarbutton-badge-stack {
   opacity: 0.4 !important;
 }
 
-:is(toolbar, .customization-palette):not(#PersonalToolbar) #zoom-controls > #zoom-reset-button:not([disabled]):is(:hover, :focus-visible) > .toolbarbutton-text {
-  border-color: transparent;
+:where(toolbar:not(#PersonalToolbar), .customization-palette) #zoom-controls > #zoom-reset-button {
+  margin-block: var(--toolbarbutton-inner-padding) !important;
 }
 
-:is(toolbar, .customization-palette):not(#PersonalToolbar) #zoom-controls > #zoom-reset-button > .toolbarbutton-text {
+:where(toolbar:not(#PersonalToolbar), .customization-palette, panel) #zoom-controls > #zoom-reset-button > .toolbarbutton-text {
   height: 20px !important;
   min-height: 20px !important;
   font-size: 0.98em;
   background: hsla(0, 0%, 100%, 0.045);
   border: 1px solid var(--toolbarbutton-hover-background);
   border-radius: 10px !important;
+}
+
+:where(toolbar:not(#PersonalToolbar), .customization-palette, panel) #zoom-controls > #zoom-reset-button:not([disabled]):is(:hover, :focus-visible) > .toolbarbutton-text {
+  border-color: transparent;
+  background-color: var(--toolbarbutton-hover-background) !important;
+}
+
+:where(toolbar:not(#PersonalToolbar), .customization-palette, panel) #zoom-controls > #zoom-reset-button:not([disabled]):hover:active > .toolbarbutton-text {
+  background-color: var(--toolbarbutton-active-background) !important;
+}
+
+#zoom-controls[cui-areatype="panel"] > #zoom-reset-button {
+  padding-block: 0 !important;
+  margin: 0 !important;
+  min-height: revert !important;
+  background: none !important;
+}
+
+#zoom-controls[cui-areatype="panel"] > #zoom-reset-button > .toolbarbutton-text {
+	padding: var(--toolbarbutton-inner-padding) !important;
+  flex: 1 !important;
+  padding-block: 4px !important;
+  height: auto !important;
+  border-radius: 50px !important;
 }
 
 :is(toolbar, .customization-palette):not(#PersonalToolbar) #zoom-controls separator {
@@ -831,6 +856,7 @@ link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infob
 link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-content .notification-button {
   margin: revert !important;
   outline-offset: 0 !important;
+  -moz-box-align: center !important;
 }
 
 .notificationbox-stack notification :is(button, toolbarbutton),

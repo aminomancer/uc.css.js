@@ -331,7 +331,7 @@ no longer necessary after modern flexbox emulation. */
 .protections-popup-category,
 .protections-popup-footer-button {
   border-radius: var(--arrowpanel-menuitem-border-radius) !important;
-  margin: 0 !important;
+  margin: var(--arrowpanel-menuitem-margin) !important;
   padding-inline: 6px !important;
   min-height: var(--subviewbutton-height) !important;
 }
@@ -362,20 +362,18 @@ no longer necessary after modern flexbox emulation. */
 }
 
 #protections-popup-category-list {
-  margin-top: -10px !important;
+  margin-top: 0px !important;
 }
 
 #protections-popup-not-blocking-section-header {
   padding-inline: 2px !important;
-  padding-block: 10px 2px !important;
+  padding-block: 0 !important;
   margin-inline: 0 !important;
-  height: 34px !important;
 }
 
 #protections-popup-blocking-section-header,
 #protections-popup-not-found-section-header {
-  padding-block: 14px 6px !important;
-  height: 34px !important;
+  padding-block: 6px !important;
   margin-inline: 0 !important;
 }
 
@@ -989,7 +987,7 @@ popupnotificationcontent label[control]:not([hidden]) + menulist {
 }
 
 #protections-popup #messaging-system-message-container[disabled] {
-  margin-bottom: -259px !important;
+  margin-bottom: -264px !important;
 }
 
 #protections-popup-mainView-panel-header-section + toolbarseparator {
@@ -1478,8 +1476,7 @@ toolbar button slider script. but just in case) */
 
 #identity-popup-securityView .identity-popup-security-content,
 .identity-popup-section,
-.permission-popup-section,
-.protections-popup-section {
+.permission-popup-section {
   margin-inline: var(--arrowpanel-menuitem-margin-inline);
 }
 

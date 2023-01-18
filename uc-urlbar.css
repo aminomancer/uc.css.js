@@ -41,8 +41,14 @@ toolbarpaletteitem[place="palette"] > #search-container {
 
 .widget-overflow-list #searchbar {
   box-shadow: none !important;
+  border-color: transparent !important;
   min-height: var(--subviewbutton-height) !important;
   font-size: revert !important;
+}
+
+#customization-panel-container toolbarpaletteitem > #search-container > #searchbar > .searchbar-textbox {
+	visibility: revert !important;
+  pointer-events: none !important;
 }
 
 .widget-overflow-list #searchbar:not(:focus-within) {

@@ -615,8 +615,13 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
       font-weight: var(--uc-font-weight-semibold, 400) !important;
     }
 
-    toolbar:not(#PersonalToolbar) #zoom-controls > #zoom-reset-button > .toolbarbutton-text {
+    :is(toolbar):not(#PersonalToolbar) #zoom-controls > #zoom-reset-button > .toolbarbutton-text {
       padding-block: 2px !important;
+      font-weight: var(--uc-font-weight-semibold, 400) !important;
+    }
+
+    :is(panel):not(#PersonalToolbar) #zoom-controls > #zoom-reset-button > .toolbarbutton-text {
+      padding-block: 4px !important;
       font-weight: var(--uc-font-weight-semibold, 400) !important;
     }
 

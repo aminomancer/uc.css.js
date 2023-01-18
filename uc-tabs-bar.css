@@ -519,6 +519,10 @@ button.private-browsing-indicator:is(:hover:active, [open])::before {
   background-color: var(--arrowpanel-dimmed-further) !important;
 }
 
+.all-tabs-secondary-button {
+  position: relative !important;
+}
+
 .all-tabs-item .all-tabs-secondary-button[toggle-mute] {
   list-style-image: none !important;
   background-image: url(chrome://userchrome/content/audioUnmutedButton.svg) !important;
@@ -526,8 +530,8 @@ button.private-browsing-indicator:is(:hover:active, [open])::before {
   background-repeat: no-repeat !important;
   background-position: center !important;
   padding: 0 !important;
-  margin-inline-end: 8.5px !important;
-  margin-inline-start: -27px !important;
+  margin-inline-start: -23px !important;
+  margin-inline-end: 4px !important;
   transition: 0.25s cubic-bezier(0.07, 0.78, 0.21, 0.95) transform, 0.2s cubic-bezier(0.07, 0.74, 0.24, 0.95) margin, 0.075s linear opacity !important;
 }
 
@@ -543,7 +547,7 @@ button.private-browsing-indicator:is(:hover:active, [open])::before {
 .all-tabs-item .all-tabs-secondary-button[soundplaying] {
   transform: none !important;
   opacity: 0.7 !important;
-  margin-inline-start: -2px !important;
+  margin-inline-start: 0 !important;
 }
 
 .all-tabs-item .all-tabs-secondary-button[muted] {
@@ -551,7 +555,7 @@ button.private-browsing-indicator:is(:hover:active, [open])::before {
   background-image: url(chrome://userchrome/content/audioMutedButton.svg) !important;
   transform: none !important;
   opacity: 0.7 !important;
-  margin-inline-start: -2px !important;
+  margin-inline-start: 0 !important;
 }
 
 .all-tabs-item .all-tabs-secondary-button[activemedia-blocked] {
@@ -561,7 +565,7 @@ button.private-browsing-indicator:is(:hover:active, [open])::before {
   background-position: 4.5px center !important;
   transform: none !important;
   opacity: 0.7 !important;
-  margin-inline-start: -2px !important;
+  margin-inline-start: 0 !important;
 }
 
 .all-tabs-item:not(:hover, :focus-within) .all-tabs-secondary-button[pictureinpicture] {
@@ -573,14 +577,15 @@ button.private-browsing-indicator:is(:hover:active, [open])::before {
 .all-tabs-item .all-tabs-secondary-button[pictureinpicture] {
   transform: none !important;
   opacity: 0.7 !important;
-  margin-inline-start: -2px !important;
+  margin-inline-start: 0 !important;
 }
 
 .all-tabs-secondary-button[close-button] {
   fill-opacity: 0 !important;
   transform: translateX(14px);
   opacity: 0 !important;
-  margin-inline-start: -27px !important;
+  margin-inline-start: -23px !important;
+  margin-inline-end: 3px !important;
   transition: 0.25s cubic-bezier(0.07, 0.78, 0.21, 0.95) transform, 0.2s cubic-bezier(0.07, 0.74, 0.24, 0.95) margin, 0.075s linear opacity;
   -moz-context-properties: fill, fill-opacity, stroke !important;
   fill: currentColor !important;
@@ -592,7 +597,7 @@ button.private-browsing-indicator:is(:hover:active, [open])::before {
 .all-tabs-item:is(:hover, :focus-within) .all-tabs-secondary-button[close-button] {
   transform: none !important;
   opacity: 0.7 !important;
-  margin-inline-start: -2px !important;
+  margin-inline-start: 0 !important;
 }
 
 /* temporarily revert flexbox emulation to make vertical tabs pane work. */

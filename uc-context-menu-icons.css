@@ -125,8 +125,10 @@ menuitem#repair-text-encoding .menu-text,
 #context-viewframeinfo .menu-text,
 menuitem#menu_openDownloads .menu-text,
 menuitem#menu_openAddons .menu-text,
+menuitem#menu_openUserChrome .menu-text,
 #addon_darkreader_org-menuitem-_toggle:not(.menuitem-iconic) .menu-text,
 #private-relay_firefox_com-menuitem-_fx-private-relay-generate-alias:not(.menuitem-iconic) > .menu-text,
+#private-relay_firefox_com-menuitem-_fx-private-relay-use-existing-aliases-from-this-site:not(.menuitem-iconic) > .menu-text,
 #private-relay_firefox_com-menuitem-_fx-private-relay-use-existing-aliases:not(.menuitem-iconic) > .menu-text,
 #private-relay_firefox_com-menuitem-_fx-private-relay-manage-aliases:not(.menuitem-iconic) > .menu-text,
 :is(#contentAreaContextMenu, #toolbar-context-menu) menu:not(.menu-iconic, .menuitem-iconic)[id^="gitzip-firefox-addons_gitzip_org-menuitem-"] > .menu-text,
@@ -342,8 +344,10 @@ menuitem:not(.menuitem-iconic)[oncommand="_ucUtils.restart(true)"]::before,
 #context-viewframeinfo::before,
 menuitem#menu_openDownloads::before,
 menuitem#menu_openAddons::before,
+menuitem#menu_openUserChrome::before,
 #addon_darkreader_org-menuitem-_toggle:not(.menuitem-iconic)::before,
 #private-relay_firefox_com-menuitem-_fx-private-relay-generate-alias:not(.menuitem-iconic)::before,
+#private-relay_firefox_com-menuitem-_fx-private-relay-use-existing-aliases-from-this-site:not(.menuitem-iconic)::before,
 #private-relay_firefox_com-menuitem-_fx-private-relay-use-existing-aliases:not(.menuitem-iconic)::before,
 #private-relay_firefox_com-menuitem-_fx-private-relay-manage-aliases:not(.menuitem-iconic)::before,
 :is(#contentAreaContextMenu, #toolbar-context-menu) menu:not(.menu-iconic, .menuitem-iconic)[id^="gitzip-firefox-addons_gitzip_org-menuitem-"]::before,
@@ -784,8 +788,16 @@ menuitem#menu_openAddons::before,
   background-image: url(chrome://mozapps/skin/extensions/extension.svg);
 }
 
+menuitem#menu_openUserChrome::before {
+  background-image: url(chrome://browser/skin/trending.svg);
+}
+
 #private-relay_firefox_com-menuitem-_fx-private-relay-generate-alias:not(.menuitem-iconic)::before {
   background-image: url(chrome://userchrome/content/material/new-address.svg);
+}
+
+#private-relay_firefox_com-menuitem-_fx-private-relay-use-existing-aliases-from-this-site:not(.menuitem-iconic)::before {
+  background-image: url(chrome://userchrome/content/skin/reload.svg);
 }
 
 #private-relay_firefox_com-menuitem-_fx-private-relay-use-existing-aliases:not(.menuitem-iconic)::before {
