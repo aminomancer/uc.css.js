@@ -1,62 +1,65 @@
 // ==UserScript==
 // @name           Search Selection Keyboard Shortcut
-// @version        1.7.5
+// @version        1.7.6
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
-// @description    Adds a new keyboard shortcut (Ctrl+Shift+F) that searches your default search engine for whatever text you currently have highlighted. This does basically the same thing as the context menu option `Search {Engine} for {Selection}` except that if you highlight a URL, instead of searching for the selection it will navigate directly to the URL. Optionally, you can also configure the script to use your other (non-default) search engines as well.
-//
-// The preference `userChrome.searchSelectionShortcut.match-engine-to-current-tab` will add a second hotkey (Ctrl+Alt+F) that will look for an installed engine that matches the current webpage. So if your default search engine is Google but you use the hotkey on Wikipedia, and you have a search engine for Wikipedia installed, it will search Wikipedia for the selected text instead. This preference is disabled by default, since some extensions may use that key combination. You can toggle it in a popup that appears the first time you install the script, or in [about:config][].
-//
-// But what if you have a non-default search engine that you want to use for a particular website? Let's say you're on [about:config][], browsing through preferences. You highlight a pref name and hit the hotkey to search for it and find out what it does. Normally, pressing the second hotkey will launch your default engine, since about:config doesn't correspond to any normal URL. But by setting the pref `userChrome.searchSelectionShortcut.custom-matches`, you can "link" any website to any engine you have installed.
-//
-// This pref accepts a JSON-formatted object containing zero or more name-value pairs, separated by commas. This object can also include one reserved property called REG_EXPS, which uses regular expressions instead of URL strings. The object format is:
-// ```YAML
-// {
-//   REG_EXPS: {
-//     <regexp1>: <engine>,
-//     <regexp2>: <engine>
-//   },
-//   <site1>: <engine>,
-//   <site2>: <engine>
-// }
-// ```
-//
-// Here's an example:
-// ```json
-// {
-//   "REG_EXPS": {
-//     "^https?://bugzilla\\.mozilla\\.org(/.*)?$": "https://bugzilla.mozilla.org/buglist.cgi?quicksearch=%s",
-//     "^https?://(.*\\.)?(github|githubusercontent)\\.com(/.*)?$": "https://github.com/search?q=%s"
-//   },
-//   "about:config": "Searchfox",
-//   "mozilla.org": "searchfox.org",
-//   "google.com": "https://www.google.com/search?client=firefox-b-1-d&q=%s"
-// }
-// ```
-//
-// The example above showcases several different accepted formats. `<site>` or `<regexp>` represents a website you might visit, and `<engine>` represents the engine to use when you press the hotkey while on the `<site>`. So, the "about:config" one tells the script to _use Searchfox when the hotkey is activated on about:config_. This is JSON, so all values must be wrapped in quotes and the pairs must be separated by commas, or the pref won't work at all. All forward slashes must be escaped, so when escaping characters in your regular expressions, use two forward slashes instead of one.
-//
-// The current URL will be tested against each `<regexp>` in the `REG_EXPS` object. If a match is found, the corresponding `<engine>` will be used. If no match is found (or if the `REG_EXPS` object does not exist), the URL will be tested against each `<site>` in the pref. If a match is found, the corresponding `<engine>` will be used. If no match is found, the default engine will be used.
-//
-// A `<regexp>` value must be a valid regular expression, wrapped in double quotes and escaped.
-//
-// A `<site>` value must be some kind of valid URL. Ideally a host (domain) is best, but it doesn't have to be a host, because some types of URLs lack hosts. If you're unsure what the host is for a website you're trying to link to an engine, open the website in a browser tab, open the content toolbox, and type `location.host`. For pages that lack hosts or have very important protocols (like `"moz-extension://"` URLs) you can specify the full page URL, like `"moz-extension://blahblah/index.html"` — or better yet, use a regular expression instead.
-//
-// An `<engine>` value can be either:
-//
-// 1. an engine's name — the label that appears next to the search engine in the UI, e.g. `"Google"`
-// 2. the domain on which the search engine is hosted, e.g. `"www.google.com"`
-// 3. the engine's full search URL, or something close to it, e.g. `"www.google.com/search?q=%s"`
-//
-// Any of these values will work, but using the engine's name is most efficient.
-//
-// If you already use these hotkeys for something else, e.g., an extension, you can change the hotkey (though not the modifiers) by setting `userChrome.searchSelectionShortcut.keycode` to a valid [KeyboardEvent code][]. The default value `KeyF` corresponds to the F key. The correct notation is different for numbers and special characters, so visit [keycode.info][] and press your desired key to find the `event.code` you need to input for the preference.
-//
-// This script automatically generates its own subscript files in your chrome folder and cleans them up when you quit Firefox. This is unfortunately necessary to avoid requiring users to download multiple files just to make a single script work.
-//
-// [about:config]: about:config
-// [KeyboardEvent code]: https://developer.mozilla.org/docs/Web/API/KeyboardEvent/code
-// [keycode.info]: https://keycode.info
+// @long-description
+// @description
+/*
+Adds a new keyboard shortcut (Ctrl+Shift+F) that searches your default search engine for whatever text you currently have highlighted. This does basically the same thing as the context menu option `Search {Engine} for {Selection}` except that if you highlight a URL, instead of searching for the selection it will navigate directly to the URL. Optionally, you can also configure the script to use your other (non-default) search engines as well.
+
+The preference `userChrome.searchSelectionShortcut.match-engine-to-current-tab` will add a second hotkey (Ctrl+Alt+F) that will look for an installed engine that matches the current webpage. So if your default search engine is Google but you use the hotkey on Wikipedia, and you have a search engine for Wikipedia installed, it will search Wikipedia for the selected text instead. This preference is disabled by default, since some extensions may use that key combination. You can toggle it in a popup that appears the first time you install the script, or in <about:config>.
+
+But what if you have a non-default search engine that you want to use for a particular website? Let's say you're on <about:config>, browsing through preferences. You highlight a pref name and hit the hotkey to search for it and find out what it does. Normally, pressing the second hotkey will launch your default engine, since about:config doesn't correspond to any normal URL. But by setting the pref `userChrome.searchSelectionShortcut.custom-matches`, you can "link" any website to any engine you have installed.
+
+This pref accepts a JSON-formatted object containing zero or more name-value pairs, separated by commas. This object can also include one reserved property called REG_EXPS, which uses regular expressions instead of URL strings. The object format is:
+```yaml
+{
+  REG_EXPS: {
+    <regexp1>: <engine>,
+    <regexp2>: <engine>
+  },
+  <site1>: <engine>,
+  <site2>: <engine>
+}
+```
+
+Here's an example:
+```json
+{
+  "REG_EXPS": {
+    "^https?://bugzilla\\.mozilla\\.org(/.*)?$": "https://bugzilla.mozilla.org/buglist.cgi?quicksearch=%s",
+    "^https?://(.*\\.)?(github|githubusercontent)\\.com(/.*)?$": "https://github.com/search?q=%s"
+  },
+  "about:config": "Searchfox",
+  "mozilla.org": "searchfox.org",
+  "google.com": "https://www.google.com/search?client=firefox-b-1-d&q=%s"
+}
+```
+
+The example above showcases several different accepted formats. `<site>` or `<regexp>` represents a website you might visit, and `<engine>` represents the engine to use when you press the hotkey while on the `<site>`. So, the "about:config" one tells the script to _use Searchfox when the hotkey is activated on about:config_. This is JSON, so all values must be wrapped in quotes and the pairs must be separated by commas, or the pref won't work at all. All forward slashes must be escaped, so when escaping characters in your regular expressions, use two forward slashes instead of one.
+
+The current URL will be tested against each `<regexp>` in the `REG_EXPS` object. If a match is found, the corresponding `<engine>` will be used. If no match is found (or if the `REG_EXPS` object does not exist), the URL will be tested against each `<site>` in the pref. If a match is found, the corresponding `<engine>` will be used. If no match is found, the default engine will be used.
+
+A `<regexp>` value must be a valid regular expression, wrapped in double quotes and escaped.
+
+A `<site>` value must be some kind of valid URL. Ideally a host (domain) is best, but it doesn't have to be a host, because some types of URLs lack hosts. If you're unsure what the host is for a website you're trying to link to an engine, open the website in a browser tab, open the content toolbox, and type `location.host`. For pages that lack hosts or have very important protocols (like `"moz-extension://"` URLs) you can specify the full page URL, like `"moz-extension://blahblah/index.html"` — or better yet, use a regular expression instead.
+
+An `<engine>` value can be either:
+
+1. an engine's name — the label that appears next to the search engine in the UI, e.g. `"Google"`
+2. the domain on which the search engine is hosted, e.g. `"www.google.com"`
+3. the engine's full search URL, or something close to it, e.g. `"www.google.com/search?q=%s"`
+
+Any of these values will work, but using the engine's name is most efficient.
+
+If you already use these hotkeys for something else, e.g., an extension, you can change the hotkey (though not the modifiers) by setting `userChrome.searchSelectionShortcut.keycode` to a valid [KeyboardEvent code][]. The default value `KeyF` corresponds to the F key. The correct notation is different for numbers and special characters, so visit [keycode.info][] and press your desired key to find the `event.code` you need to input for the preference.
+
+This script automatically generates its own subscript files in your chrome folder and cleans them up when you quit Firefox. This is unfortunately necessary to avoid requiring users to download multiple files just to make a single script work.
+
+[KeyboardEvent code]: https://developer.mozilla.org/docs/Web/API/KeyboardEvent/code
+[keycode.info]: https://keycode.info
+*/
 // @downloadURL    https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/searchSelectionShortcut.uc.js
 // @updateURL      https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/searchSelectionShortcut.uc.js
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.

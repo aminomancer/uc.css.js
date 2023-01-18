@@ -1,24 +1,28 @@
 // ==UserScript==
 // @name           Debug Extension in Toolbar Context Menu
-// @version        1.4.4
+// @version        1.4.5
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
-// @description    Adds a new context menu when right-clicking an add-on's button in the toolbar or urlbar, any time the "Manage Extension" and "Remove Extension" items are available. The new "Debug Extension" menu contains several items: "Extension Manifest" opens the extension's manifest directly in a new tab. Aside from reading the manifest, from there you can also view the whole contents of the extension within Firefox by removing `/manifest.json` from the URL.
-//
-// In the "View Documents" submenu there are several options for viewing, debugging and modding an addon's main HTML contents.
-//
-// * "Browser Action" opens the extension's toolbar button popup URL (if it has one) in a regular browser window. The popup URL is whatever document it displays in its panel view, the popup that opens when you click the addon's toolbar button. This is the one you're most likely to want to modify with CSS.
-// * "Page Action" opens the extension's page action popup URL in the same manner. A page action is an icon on the right side of the urlbar whose behavior is specific to the page in the active tab.
-// * "Sidebar Action" opens the extension's sidebar document, so this would let you debug Tree Style Tab for example.
-// * "Extension Options" opens the document that the extension uses for configuration, also in a regular browser window. This could be the page that displays in its submenu on about:addons, or a separate page.
-// * "Inspect Extension" opens a devtools tab targeting the extension background. This is the same page you'd get if you opened about:debugging and clicked the "Inspect" button next to an extension.
-// * "View Source" opens the addon's .xpi archive.
-// * As you'd expect, "Copy ID" copies the extension's ID to your clipboard.
-// * "Copy URL" copies the extension's base URL, so it can be used in CSS rules like `@-moz-document`.
-//
-// The menu items' labels are not localized automatically since Firefox doesn't include any similar strings. If you need to change the language or anything, modify the strings in the script under `config`. As usual, icons for the new menu are included in [uc-context-menu-icons.css][]
-//
-// [uc-context-menu-icons.css]: https://github.com/aminomancer/uc.css.js/blob/master/uc-context-menu-icons.css
+// @long-description
+// @description
+/*
+Adds a new context menu when right-clicking an add-on's button in the toolbar or urlbar, any time the "Manage Extension" and "Remove Extension" items are available. The new "Debug Extension" menu contains several items: "Extension Manifest" opens the extension's manifest directly in a new tab. Aside from reading the manifest, from there you can also view the whole contents of the extension within Firefox by removing `/manifest.json` from the URL.
+
+In the "View Documents" submenu there are several options for viewing, debugging and modding an addon's main HTML contents.
+
+* "Browser Action" opens the extension's toolbar button popup URL (if it has one) in a regular browser window. The popup URL is whatever document it displays in its panel view, the popup that opens when you click the addon's toolbar button. This is the one you're most likely to want to modify with CSS.
+* "Page Action" opens the extension's page action popup URL in the same manner. A page action is an icon on the right side of the urlbar whose behavior is specific to the page in the active tab.
+* "Sidebar Action" opens the extension's sidebar document, so this would let you debug Tree Style Tab for example.
+* "Extension Options" opens the document that the extension uses for configuration, also in a regular browser window. This could be the page that displays in its submenu on about:addons, or a separate page.
+* "Inspect Extension" opens a devtools tab targeting the extension background. This is the same page you'd get if you opened about:debugging and clicked the "Inspect" button next to an extension.
+* "View Source" opens the addon's .xpi archive.
+* As you'd expect, "Copy ID" copies the extension's ID to your clipboard.
+* "Copy URL" copies the extension's base URL, so it can be used in CSS rules like `@-moz-document`.
+
+The menu items' labels are not localized automatically since Firefox doesn't include any similar strings. If you need to change the language or anything, modify the strings in the script under `config`. As usual, icons for the new menu are included in [uc-context-menu-icons.css][]
+
+[uc-context-menu-icons.css]: https://github.com/aminomancer/uc.css.js/blob/master/uc-context-menu-icons.css
+*/
 // @downloadURL    https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/debugExtensionInToolbarContextMenu.uc.js
 // @updateURL      https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/debugExtensionInToolbarContextMenu.uc.js
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.

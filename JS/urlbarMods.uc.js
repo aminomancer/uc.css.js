@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Urlbar Mods
-// @version        1.7.6
+// @version        1.7.7
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Make some minor modifications to the urlbar. See the code comments in the script for more details.
@@ -177,6 +177,7 @@ class UrlbarMods {
     if (UrlbarMods.config["underline whitespace results"]) {
       this.underlineSpaceResults();
     }
+    this.oneOffEngineAttributes();
   }
   get urlbarOneOffs() {
     return (
@@ -834,6 +835,35 @@ class UrlbarMods {
         }
         index = highlightIndex + highlightLength;
       }
+    };
+  }
+  oneOffEngineAttributes() {
+    const lazy = {};
+    ChromeUtils.defineESModuleGetters(lazy, {
+      SearchOneOffs: "resource:///modules/SearchOneOffs.sys.mjs",
+      UrlbarSearchOneOffs: "resource:///modules/UrlbarSearchOneOffs.sys.mjs",
+    });
+    lazy.SearchOneOffs.prototype.setTooltipForEngineButton = function(button) {
+      button.setAttribute("engine", button.engine.name || button.engine.title);
+      button.setAttribute("tooltiptext", button.engine.name);
+    };
+    lazy.UrlbarSearchOneOffs.prototype.setTooltipForEngineButton = function(
+      button
+    ) {
+      button.setAttribute("engine", button.engine.name || button.engine.title);
+      let aliases = button.engine.aliases;
+      if (!aliases.length) {
+        button.setAttribute("tooltiptext", button.engine.name);
+        return;
+      }
+      this.document.l10n.setAttributes(
+        button,
+        "search-one-offs-engine-with-alias",
+        {
+          engineName: button.engine.name,
+          alias: aliases[0],
+        }
+      );
     };
   }
 }

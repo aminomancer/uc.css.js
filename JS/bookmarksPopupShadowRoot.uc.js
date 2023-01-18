@@ -1,12 +1,18 @@
 // ==UserScript==
 // @name           Bookmarks Popup Mods
-// @version        1.2.2
+// @version        1.2.3
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
-// @description    Implement smooth scrolling for all bookmarks popups that are tall enough to scroll. Add special click functions to their scroll buttons — hovering a scroll button will scroll at a constant rate, as normal. (though faster than vanilla) But clicking a scroll button will immediately jump to the top/bottom of the list. This no longer styles the scroll buttons, since I now style all arrowscrollbox scrollbuttons equally with [arrowscrollbox.css][]. To do that requires [chrome.manifest][]. This replaces the built-in arrowscrollbox.css with my version that makes the scrollbuttons look a lot prettier. If you want to customize them, just edit arrowscrollbox.css. This script still adds the custom classes though, in case you want to use them to style the elements in userChrome.css.
-//
-// [arrowscrollbox.css]: https://github.com/aminomancer/uc.css.js/blob/master/resources/layout/arrowscrollbox.css
-// [chrome.manifest]: https://github.com/aminomancer/uc.css.js/blob/master/utils/chrome.manifest
+// @long-description
+// @description
+/*
+Implement smooth scrolling for all bookmarks popups that are tall enough to scroll. Add special click functions to their scroll buttons — hovering a scroll button will scroll at a constant rate, as normal. (though faster than vanilla) But clicking a scroll button will immediately jump to the top/bottom of the list.
+
+This script no longer styles the scroll buttons, since I now style all arrowscrollbox scrollbuttons equally with [arrowscrollbox.css][]. To do that requires [chrome.manifest][]. That file replaces the built-in arrowscrollbox.css with my version that makes the scrollbuttons look a lot prettier. If you want to customize them, just edit arrowscrollbox.css. This script still adds custom classes though, in case you want to use them to style the elements in userChrome.css.
+
+[arrowscrollbox.css]: https://github.com/aminomancer/uc.css.js/blob/master/resources/layout/arrowscrollbox.css
+[chrome.manifest]: https://github.com/aminomancer/uc.css.js/blob/master/utils/chrome.manifest
+*/
 // @downloadURL    https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/bookmarksPopupShadowRoot.uc.js
 // @updateURL      https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/bookmarksPopupShadowRoot.uc.js
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.

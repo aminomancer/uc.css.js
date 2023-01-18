@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           App Menu Mods
-// @version        1.4.3
+// @version        1.4.4
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Makes some minor modifications to the app menu (the popup opened by clicking the hamburger button on the far right of the navbar). It adds a restart button to the app menu and it adds a separator under the "Manage Account" button in the profile/account panel. I'll continue adding more mods to this script as I think of them.
@@ -57,8 +57,35 @@
         id: "appMenu-restart-button2",
         class: "subviewbutton",
         label: await strings.formatValue(["restart-button-label"]),
-        oncommand: `if (event.shiftKey || (AppConstants.platform == "macosx" ? event.metaKey : event.ctrlKey)) Services.appinfo.invalidateCachesOnRestart(); setTimeout(() => Services.startup.quit(Ci.nsIAppStartup.eRestart | Ci.nsIAppStartup.eAttemptQuit), 300); PanelMultiView.forNode(this.closest("panelmultiview")).hidePopup(); event.preventDefault();`,
-        onclick: `if (event.button === 0) return; Services.appinfo.invalidateCachesOnRestart(); setTimeout(() => Services.startup.quit(Ci.nsIAppStartup.eRestart | Ci.nsIAppStartup.eAttemptQuit), 300); PanelMultiView.forNode(this.closest("panelmultiview")).hidePopup(); event.preventDefault();`,
+        oncommand: /* javascript */ `
+          if (
+            event.shiftKey ||
+            (AppConstants.platform == "macosx" ? event.metaKey : event.ctrlKey)
+          )
+            Services.appinfo.invalidateCachesOnRestart();
+          setTimeout(
+            () =>
+              Services.startup.quit(
+                Ci.nsIAppStartup.eRestart | Ci.nsIAppStartup.eAttemptQuit
+              ),
+            300
+          );
+          PanelMultiView.forNode(this.closest("panelmultiview")).hidePopup();
+          event.preventDefault();
+        `,
+        onclick: /* javascript */ `
+          if (event.button === 0) return;
+          Services.appinfo.invalidateCachesOnRestart();
+          setTimeout(
+            () =>
+              Services.startup.quit(
+                Ci.nsIAppStartup.eRestart | Ci.nsIAppStartup.eAttemptQuit
+              ),
+            300
+          );
+          PanelMultiView.forNode(this.closest("panelmultiview")).hidePopup();
+          event.preventDefault();
+        `,
       });
       let exitButton = document.getElementById("appMenu-quit-button2");
       if (exitButton) {

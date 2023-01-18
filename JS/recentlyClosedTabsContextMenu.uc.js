@@ -1,15 +1,21 @@
 // ==UserScript==
 // @name           Undo Recently Closed Tabs in Tab Context Menu
-// @version        2.0.7
+// @version        2.0.8
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
-// @description    Adds new menus to the context menu that appears when you right-click a tab (in the tab bar or in the TreeStyleTabs sidebar): one lists recently closed tabs so you can restore them, and another lists recently closed windows. These are basically the same functions that exist in the history toolbar button's popup, but I think the tab context menu is a more convenient location for them.
-//
-// Also optionally adds a context menu to the history panel's subview pages for "Recently closed tabs" and "Recently closed windows" with various functions for interacting with the closed tabs and their session history. You can right-click a closed tab item to open the context menu, then click "Remove from List" to get rid of it.
-//
-// You can click "Remove from History" to not only remove the closed tab item, but also forget all of the tab's history — that is, every page it navigated to. The same can be done with recently closed windows. From this menu you can also restore a tab in a new window or private window, bookmark a closed tab/window, and more.
-//
-// This script also adds a new preference `userChrome.tabs.recentlyClosedTabs.middle-click-to-remove` which changes the behavior when you click a recently closed tab/window item in the history panel. Middle clicking a tab or window item will remove it from the list (just like one of the context menu items). Ctrl+clicking a tab item it will open it in a new tab (instead of restoring it in its former place), and Ctrl+Shift+clicking it will open it in a new window.
+// @long-description
+// @description
+/*
+Adds new menus to the context menu that appears when you right-click a tab (in the tab bar or in the [TreeStyleTab][] sidebar): one lists recently closed tabs so you can restore them, and another lists recently closed windows. These are basically the same functions that exist in the history toolbar button's popup, but I think the tab context menu is a more convenient location for them.
+
+Also optionally adds a context menu to the history panel's subview pages for "Recently closed tabs" and "Recently closed windows" with various functions for interacting with the closed tabs and their session history. You can right-click a closed tab item to open the context menu, then click "Remove from List" to get rid of it.
+
+You can click "Remove from History" to not only remove the closed tab item, but also forget all of the tab's history — that is, every page it navigated to. The same can be done with recently closed windows. From this menu you can also restore a tab in a new window or private window, bookmark a closed tab/window, and more.
+
+This script also adds a new preference `userChrome.tabs.recentlyClosedTabs.middle-click-to-remove` which changes the behavior when you click a recently closed tab/window item in the history panel. Middle clicking a tab or window item will remove it from the list (just like one of the context menu items). Ctrl+clicking a tab item it will open it in a new tab (instead of restoring it in its former place), and Ctrl+Shift+clicking it will open it in a new window.
+
+[TreeStyleTab]: https://addons.mozilla.org/firefox/addon/tree-style-tab/
+*/
 // @downloadURL    https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/recentlyClosedTabsContextMenu.uc.js
 // @updateURL      https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/recentlyClosedTabsContextMenu.uc.js
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.

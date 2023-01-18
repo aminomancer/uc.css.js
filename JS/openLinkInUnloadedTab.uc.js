@@ -1,16 +1,23 @@
 // ==UserScript==
 // @name           Open Link in Unloaded Tab (context menu item)
-// @version        1.5.4
+// @version        1.5.5
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
-// @description    Add a new menu item to context menus prompted by right/accel-clicking on links or other link-like affordances. The menu item will open the link in a new background tab without loading the page. So the tab will start unloaded or "discarded." The context menu entry appears in the content area context menu when right-clicking a link; and in every menu where bookmarks, history, and synced tabs can be interacted with — sidebar, menubar, toolbar, toolbar button popup, and library window. Script is a remake of "Open in Unloaded Tab" by xiaoxiaoflood, but intended for use with fx-autoconfig by MrOtherGuy. It should still work with other loaders that load user scripts per-window, such as alice0775's loader, but is not compatible with older loaders or those like xiaoxiaoflood's loader.
-//
-// The difference is that those loaders run scripts in the global execution context, and simply call a global function when a window is launched, (the global function takes the window as a parameter) whereas fx-autoconfig loads normal scripts entirely within the window context, unless explicitly told to do otherwise. When you open a bookmark or history item in an unloaded tab, the tab draws its title from the entry in the places database. But when you open a link in an unloaded tab, there is no preexisting title. Normally when opening a link in a tab, the title is updated as the tab loads, but since we're opening the tab unloaded from the beginning, Firefox is less likely to know what the document's final title is.
-//
-// By default, the script works around this by generating a temporary title for the tab based on the text of the link that was opened. So if you click a hyperlink [Mozilla][] whose label text says "Mozilla" the title will be set to Mozilla until the tab is loaded. But if you click a hyperlink whose label text is the same as the URL itself, the title will simply be the URL. There's a user preference for this, however. If you just want to use the URL for the title no matter what, toggle this pref to false in [about:config][] — `userChrome.openLinkInUnloadedTab.use_link_text_as_tab_title_when_unknown`
-//
-// [Mozilla]: https://mozilla.org
-// [about:config]: about:config
+// @long-description
+// @description
+/*
+Add a new menu item to context menus prompted by right/accel-clicking on links or other link-like affordances. The menu item will open the link in a new background tab without loading the page. So the tab will start unloaded or "discarded." The context menu entry appears in the content area context menu when right-clicking a link; and in every menu where bookmarks, history, and synced tabs can be interacted with — sidebar, menubar, toolbar, toolbar button popup, and library window.
+
+The script is basically a remake of [openInUnloadedTab.uc.js][] by xiaoxiaoflood, but intended for use with [fx-autoconfig][] by MrOtherGuy. It should still work with other loaders that load user scripts per-window, such as alice0775's loader, but is not compatible with older loaders or those like xiaoxiaoflood's loader.
+
+The difference is that those loaders run scripts in the global execution context, and simply call a global function when a window is launched, (the global function takes the window as a parameter) whereas [fx-autoconfig][] loads normal scripts entirely within the window context, unless explicitly told to do otherwise. When you open a bookmark or history item in an unloaded tab, the tab draws its title from the entry in the places database. But when you open a link in an unloaded tab, there is no preexisting title. Normally when opening a link in a tab, the title is updated as the tab loads, but since we're opening the tab unloaded from the beginning, Firefox is less likely to know what the document's final title is.
+
+By default, the script works around this by generating a temporary title for the tab based on the text of the link that was opened. So if you click a hyperlink [Mozilla][] whose label text says "Mozilla" the title will be set to Mozilla until the tab is loaded. But if you click a hyperlink whose label text is the same as the URL itself, like <https://mozilla.org>, the title will simply be the URL. There's a user preference for this, however. If you just want to use the URL for the title no matter what, toggle this pref to false in <about:config>: `userChrome.openLinkInUnloadedTab.use_link_text_as_tab_title_when_unknown`
+
+[openInUnloadedTab.uc.js]: https://github.com/xiaoxiaoflood/firefox-scripts/blob/master/chrome/openInUnloadedTab.uc.js
+[fx-autoconfig]: https://github.com/MrOtherGuy/fx-autoconfig
+[Mozilla]: https://mozilla.org
+*/
 // @downloadURL    https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/openLinkInUnloadedTab.uc.js
 // @updateURL      https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/openLinkInUnloadedTab.uc.js
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.

@@ -1,27 +1,33 @@
 // ==UserScript==
 // @name           All Tabs Menu Expansion Pack
-// @version        2.1.5
+// @version        2.1.6
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
-// @description    Next to the "new tab" button in Firefox there's a V-shaped button that opens a big scrolling menu containing all the tabs. This script adds several new features to the "all tabs menu" to help it catch up to the functionality of the regular tabs bar.
-//
-// 1. Allows you to drag and drop tabs in the all tabs menu.
-// 2. Adds an animated close button for every tab in this menu.
-// 3. Allows you to multiselect tabs in the all tabs menu and close an unlimited number of tabs at once without closing/blurring the popup.
-// 4. Significantly improves the mute/unmute button by making it work like the mute button in the tabs bar used to work.
-// ␠   - If you only have one tab selected, it mutes/unmutes that tab.
-// ␠   - If you have multiple tabs selected, it mutes/unmutes all of them.
-// ␠   - This also adds a tooltip to the mute button.
-// 5. By default, Firefox doesn't do anything to differentiate loaded tabs from unloaded tabs. But for the regular tab bar, unloaded tabs gain an attribute `pending="true"` which you can use to dim them. This way you know which tabs are already initialized and which will actually start up when you click them. Pretty useful if you frequently have 100+ tabs like me.
-// ␠   - This script adds the same functionality to the all tabs menu, but does not add "pending" styling to regular tabs since it's outside the scope of this project. To do it yourself just add a rule like `.tabbrowser-tab .tab-content{opacity:.6;}`
-// ␠   - If you use [Unread Tab Mods](https://github.com/aminomancer/uc.css.js/blob/master/JS/unreadTabMods.uc.js), this integrates with it to make unread tabs display with italic text.
-// 6. Adds color stripes to multiselected tabs and container tabs in the "all tabs menu" so you can differentiate them from normal tabs.
-// 7. Includes a preference `userChrome.tabs.all-tabs-menu.reverse-order` that lets you reverse the order of the tabs so that newer tabs are displayed on top rather than on bottom.
-// 8. Modifies the all tabs button's tooltip to display the number of tabs as well as the shortcut to open the all tabs menu, Ctrl+Shift+Tab.
-// 9. Allows the panel to display pinned tabs, and displays a pin icon on them.
-// 10. Makes the sound icon show if the tab has blocked media or media in picture-in-picture, just like regular tabs.
-// 11. Adds an optional preference `userChrome.ctrlTab.skip-show-all-button` that lets you skip past the "List All x Tabs" button when hitting Ctrl+Tab.
-// 12. And a few other subtle improvements. All the relevant CSS for this is already included in and loaded by the script. It's designed to look consistent with my theme as well as with the latest vanilla (proton) Firefox. If you need to change anything, see the "const css" line in here, or the end of uc-tabs-bar.css on my repo.
+// @long-description
+// @description
+/*
+Next to the "new tab" button in Firefox there's a V-shaped button that opens a big scrolling menu containing all the tabs. This script adds several new features to the "all tabs menu" to help it catch up to the functionality of the regular tabs bar.
+
+1. Allows you to drag and drop tabs in the all tabs menu.
+2. Adds an animated close button for every tab in this menu.
+3. Allows you to multiselect tabs in the all tabs menu and close an unlimited number of tabs at once without closing/blurring the popup.
+4. Significantly improves the mute/unmute button by making it work like the mute button in the tabs bar used to work.
+   - If you only have one tab selected, it mutes/unmutes that tab.
+   - If you have multiple tabs selected, it mutes/unmutes all of them.
+   - This also adds a tooltip to the mute button.
+5. By default, Firefox doesn't do anything to differentiate loaded tabs from unloaded tabs. But for the regular tab bar, unloaded tabs gain an attribute `pending="true"` which you can use to dim them. This way you know which tabs are already initialized and which will actually start up when you click them. Pretty useful if you frequently have 100+ tabs like me.
+   - This script adds the same functionality to the all tabs menu, but does not add "pending" styling to regular tabs since it's outside the scope of this project. To do it yourself just add a rule like `.tabbrowser-tab .tab-content{opacity:.6;}`
+   - If you use [Unread Tab Mods][], this integrates with it to make unread tabs display with italic text.
+6. Adds color stripes to multiselected tabs and container tabs in the "all tabs menu" so you can differentiate them from normal tabs.
+7. Includes a preference `userChrome.tabs.all-tabs-menu.reverse-order` that lets you reverse the order of the tabs so that newer tabs are displayed on top rather than on bottom.
+8. Modifies the all tabs button's tooltip to display the number of tabs as well as the shortcut to open the all tabs menu, Ctrl+Shift+Tab.
+9. Allows the panel to display pinned tabs, and displays a pin icon on them.
+10. Makes the sound icon show if the tab has blocked media or media in picture-in-picture, just like regular tabs.
+11. Adds an optional preference `userChrome.ctrlTab.skip-show-all-button` that lets you skip past the "List All x Tabs" button when hitting Ctrl+Tab.
+12. And a few other subtle improvements. All the relevant CSS for this is already included in and loaded by the script. It's designed to look consistent with my theme as well as with the latest vanilla (proton) Firefox. If you need to change anything, see the "const css" line in here, or the end of uc-tabs-bar.css on my repo.
+
+[Unread Tab Mods]: https://github.com/aminomancer/uc.css.js/blob/master/JS/unreadTabMods.uc.js
+*/
 // @downloadURL    https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/allTabsMenuExpansionPack.uc.js
 // @updateURL      https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/allTabsMenuExpansionPack.uc.js
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
@@ -1234,9 +1240,10 @@
     sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
   }
 
-  if (!prefSvc.prefHasUserValue(reversePref)) {
-    prefSvc.setBoolPref(reversePref, false);
-  }
+  const defaultPrefs = prefSvc.getDefaultBranch("");
+  defaultPrefs.setBoolPref(reversePref, false);
+  // Necessary for the tab close button to render correctly
+  defaultPrefs.setBoolPref("svg.context-properties.content.enabled", true);
   prefSvc.addObserver(reversePref, prefHandler);
 
   if (gBrowserInit.delayedStartupFinished) {

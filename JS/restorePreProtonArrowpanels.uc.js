@@ -1,21 +1,25 @@
 // ==UserScript==
 // @name           Restore pre-Proton Arrowpanels
-// @version        1.2.3
+// @version        1.2.4
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
-// @description    This script will basically restore the arrows at the corner of panels that point at the element to which the panel is anchored. But in order to do that, you also need to install these files from the [resources/script-override] folder: [panel.js][], [places-menupopup.js][], and [translation-notification.js][]. After downloading them and placing them in your own `resources/script-override/` folder, add the following lines to your [chrome.manifest][] file:
-//
-// ```
-// override chrome://global/content/elements/panel.js ../resources/script-override/panel.js
-// override chrome://browser/content/places/places-menupopup.js ../resources/script-override/places-menupopup.js
-// override chrome://browser/content/translation-notification.js ../resources/script-override/translation-notification.js
-// ```
-//
-// [resources/script-override]: https://github.com/aminomancer/uc.css.js/tree/master/resources/script-override
-// [panel.js]: https://github.com/aminomancer/uc.css.js/blob/master/resources/script-override/panel.js
-// [places-menupopup.js]: https://github.com/aminomancer/uc.css.js/blob/master/resources/script-override/places-menupopup.js
-// [translation-notification.js]: https://github.com/aminomancer/uc.css.js/blob/master/resources/script-override/translation-notification.js
-// [chrome.manifest]: https://github.com/aminomancer/uc.css.js/blob/master/utils/chrome.manifest
+// @long-description
+// @description
+/*
+This script will basically restore the arrows at the corner of panels that point at the element to which the panel is anchored. But in order to do that, you also need to install these files from the [resources/script-override][] folder: [panel.js][], [places-menupopup.js][], and [translation-notification.js][]. After downloading them and placing them in your own `resources/script-override/` folder, add the following lines to your [chrome.manifest][] file:
+
+```
+override chrome://global/content/elements/panel.js ../resources/script-override/panel.js
+override chrome://browser/content/places/places-menupopup.js ../resources/script-override/places-menupopup.js
+override chrome://browser/content/translation-notification.js ../resources/script-override/translation-notification.js
+```
+
+[resources/script-override]: https://github.com/aminomancer/uc.css.js/tree/master/resources/script-override
+[panel.js]: https://github.com/aminomancer/uc.css.js/blob/master/resources/script-override/panel.js
+[places-menupopup.js]: https://github.com/aminomancer/uc.css.js/blob/master/resources/script-override/places-menupopup.js
+[translation-notification.js]: https://github.com/aminomancer/uc.css.js/blob/master/resources/script-override/translation-notification.js
+[chrome.manifest]: https://github.com/aminomancer/uc.css.js/blob/master/utils/chrome.manifest
+*/
 // @downloadURL    https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/restorePreProtonArrowpanels.uc.js
 // @updateURL      https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/restorePreProtonArrowpanels.uc.js
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.

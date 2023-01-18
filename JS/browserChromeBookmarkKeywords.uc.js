@@ -1,38 +1,43 @@
 // ==UserScript==
 // @name           Browser Chrome Bookmark Keywords
-// @version        1.1.6
+// @version        1.1.7
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
-// @description    Allow the creation of special keyword bookmarks with JavaScript to be executed in the browser chrome (i.e., the main window). Normally when you [add a JavaScript bookmark][keyword searches] like `javascript:location.href="https://example.com/search?q=%s"` the script will run in the browser window. With this script, you can make a bookmark like `ucjs:console.log("%{searchString}")` and basically execute any arbitrary code from the urlbar, with the same level of access as this script itself has.
-//
-// As you can see, the placeholder `%{searchString}` represents the value you typed in the urlbar, just like `%s` does for normal bookmark keywords. I used a longer, more complex symbol for the placeholder because it's possible you might want to use the string `%s` in your script for other reasons.
-//
-// Your bookmark code will have access to four parameters, plus the search string: result, event, element, and browser. You probably won't need any of them except event and maybe browser. If you're going to use `gBrowser.selectedBrowser` in your bookmark code, always replace it with browser instead. As for event, it just represents the event that triggered the result activation. So if you held down the Alt or Ctrl key as you activated the result, `event.ctrlKey` or `event.altKey` will be true, and you can use that in your bookmark to simulate behavior of normal urlbar results (e.g., opening in a new tab when Ctrl or Alt is pressed, opening in a new window when Shift is pressed, etc.). Firefox uses a couple methods to do that, but the one normally used in the urlbar is `gURLBar._whereToOpen(event)` That will return a value like "tab" or "window" which can be passed to the utility overlay functions like `openWebLinkIn`.
-//
-// Beware that you shouldn't be escaping anything in your bookmark code with URL encoding, because it isn't really parsed like a URL. However, you can use escape sequences to encode special characters that you would ordinarily need to encode in JavaScript strings, such as \n for new line or \\ for backslash. Just be aware of this if you use backslashes, as [they need to be doubled up][escape sequences].
-//
-// So putting all of this together, you can make a bookmark keyword like this:
-// ```
-// ucjs:let where = gURLBar._whereToOpen(event);
-// openWebLinkIn(
-//   "https://www.google.com/search?q=site:" + gBrowser.currentURI.host + " %{searchString}",
-//   where
-// );
-// ```
-//
-// That will allow you to search Google's results for whatever website you're currently on. This is already possible with normal bookmark keywords, but when you use modifier keys to run the search in a new tab/window, it will fail, because it needs information about 1) the current tab, and 2) the new tab. Traditional bookmark keywords don't have that level of access. But that was the inspiration for this script — by executing the bookmark keyword code in the browser chrome, we can access nearly everything the average autoconfig script can access. So this will let you do it with modifier keys.
-//
-// That's just a really simple example, but in theory you could paste an entire autoconfig script into a bookmark URL and run it from the urlbar. Also, keep in mind that you don't need to use search strings in your keywords. With traditional keywords, they just didn't show up in the list at all if you typed a search string but your keyword URL didn't have `%s` in it somewhere. With ucjs: keyword bookmarks, if you want to run some code that doesn't care about what you type, you can just omit the search string placeholder from your code altogether, and it will be ignored.
-//
-// If you make a bookmark whose URL is just `%{searchString}` and nothing else, then this module will execute whatever you type in the urlbar as JavaScript. So, if your bookmark's keyword is just `keyword`, then if you were to type `keyword console.log("Hello, world!")` in the urlbar and hit enter, it would do exactly that. So you can use this kind of like a mini console if you want. But the normal use (and definitely the safer) is to define the JavaScript in advance in the URL, and just use the search string for actual strings.
-//
-// There are some configuration settings below if you want to format things a bit differently. By the way, I recommend using my [Bookmarks Menu & Button Shortcuts][] if you're using bookmark keywords, since it adds the URL and keyword fields directly to the "Add/edit bookmark" panel (the one you access by clicking the star button in the urlbar). Otherwise, you need to go out of your way to add a keyword.
-//
-// Be careful when using this, of course. You always need to take care when using JavaScript bookmarks, and since this new type has access to the browser chrome, it has significantly more powers.
-//
-// [escape sequences]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String#escape_sequences "String - JavaScript | MDN"
-// [keyword searches]: https://kb.mozillazine.org/Using_keyword_searches "Using keyword searches - MozillaZine Knowledge Base"
-// [Bookmarks Menu & Button Shortcuts]: https://github.com/aminomancer/uc.css.js#bookmarks-menu--button-shortcuts
+// @long-description
+// @description
+/*
+Allow the creation of special keyword bookmarks with JavaScript to be executed in the browser chrome (i.e., the main window). Normally when you [add a JavaScript bookmark][keyword searches] like `javascript:location.href="https://example.com/search?q=%s"` the script will run in the browser window. With this script, you can make a bookmark like `ucjs:console.log("%{searchString}")` and basically execute any arbitrary code from the urlbar, with the same level of access as this script itself has.
+
+As you can see, the placeholder `%{searchString}` represents the value you typed in the urlbar, just like `%s` does for normal bookmark keywords. I used a longer, more complex symbol for the placeholder because it's possible you might want to use the string `%s` in your script for other reasons.
+
+Your bookmark code will have access to four parameters, plus the search string: result, event, element, and browser. You probably won't need any of them except event and maybe browser. If you're going to use `gBrowser.selectedBrowser` in your bookmark code, always replace it with browser instead. As for event, it just represents the event that triggered the result activation. So if you held down the Alt or Ctrl key as you activated the result, `event.ctrlKey` or `event.altKey` will be true, and you can use that in your bookmark to simulate behavior of normal urlbar results (e.g., opening in a new tab when Ctrl or Alt is pressed, opening in a new window when Shift is pressed, etc.). Firefox uses a couple methods to do that, but the one normally used in the urlbar is `gURLBar._whereToOpen(event)` That will return a value like "tab" or "window" which can be passed to the utility overlay functions like `openWebLinkIn`.
+
+Beware that you shouldn't be escaping anything in your bookmark code with URL encoding, because it isn't really parsed like a URL. However, you can use escape sequences to encode special characters that you would ordinarily need to encode in JavaScript strings, such as \n for new line or \\ for backslash. Just be aware of this if you use backslashes, as [they need to be doubled up][escape sequences].
+
+So putting all of this together, you can make a bookmark keyword like this:
+```js
+ucjs:openWebLinkIn(
+  "https://www.google.com/search?q=site:" +
+    gBrowser.currentURI.host +
+    " %{searchString}",
+  gURLBar._whereToOpen(event)
+);
+```
+
+That will allow you to search Google's results for whatever website you're currently on. This is already possible with normal bookmark keywords, but when you use modifier keys to run the search in a new tab/window, it will fail, because it needs information about 1) the current tab, and 2) the new tab. Traditional bookmark keywords don't have that level of access. But that was the inspiration for this script — by executing the bookmark keyword code in the browser chrome, we can access nearly everything the average autoconfig script can access. So this will let you do it with modifier keys.
+
+That's just a really simple example, but in theory you could paste an entire autoconfig script into a bookmark URL and run it from the urlbar. Also, keep in mind that you don't need to use search strings in your keywords. With traditional keywords, they just didn't show up in the list at all if you typed a search string but your keyword URL didn't have `%s` in it somewhere. With ucjs: keyword bookmarks, if you want to run some code that doesn't care about what you type, you can just omit the search string placeholder from your code altogether, and it will be ignored.
+
+If you make a bookmark whose URL is just `%{searchString}` and nothing else, then this module will execute whatever you type in the urlbar as JavaScript. So, if your bookmark's keyword is just `keyword`, then if you were to type `keyword console.log("Hello, world!")` in the urlbar and hit enter, it would do exactly that. So you can use this kind of like a mini console if you want. But the normal use (and definitely the safer) is to define the JavaScript in advance in the URL, and just use the search string for actual strings.
+
+There are some configuration settings below if you want to format things a bit differently. By the way, I recommend using my [Bookmarks Menu & Button Shortcuts][] if you're using bookmark keywords, since it adds the URL and keyword fields directly to the "Add/edit bookmark" panel (the one you access by clicking the star button in the urlbar). Otherwise, you need to go out of your way to add a keyword.
+
+Be careful when using this, of course. You always need to take care when using JavaScript bookmarks, and since this new type has access to the browser chrome, it has significantly more powers.
+
+[escape sequences]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String#escape_sequences "String - JavaScript | MDN"
+[keyword searches]: https://kb.mozillazine.org/Using_keyword_searches "Using keyword searches - MozillaZine Knowledge Base"
+[Bookmarks Menu & Button Shortcuts]: https://github.com/aminomancer/uc.css.js#bookmarks-menu--button-shortcuts
+*/
 // @downloadURL    https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/browserChromeBookmarkKeywords.uc.js
 // @updateURL      https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/browserChromeBookmarkKeywords.uc.js
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.

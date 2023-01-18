@@ -1,11 +1,17 @@
 // ==UserScript==
 // @name           Scrolling Search One-offs
-// @version        1.3.2
+// @version        1.3.3
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
-// @description    This is for my own personal stylesheet, which moves the one-off search engine buttons to the right side of the url bar when the user is typing into the url bar. The script allows the search one-offs box to be scrolled with mousewheel up/down. It also adds a minor improvement to the one-offs in the searchbar results popup: if the one-offs are overflowing and you switch to a search engine that is overflown off the popup, it will automatically scroll to the selected one-off button, just like the urlbar one-offs does with [oneClickOneOffSearchButtons.uc.js][].
-//
-// [oneClickOneOffSearchButtons.uc.js]: https://github.com/aminomancer/uc.css.js/blob/master/JS/oneClickOneOffSearchButtons.uc.js
+// @long-description
+// @description
+/*
+This is for my own personal stylesheet, which moves the one-off search engine buttons to the right side of the url bar when the user is typing into the url bar. The script allows the search one-offs box to be scrolled with mousewheel up/down.
+
+It also adds a minor improvement to the one-offs in the searchbar results popup: if the one-offs are overflowing and you switch to a search engine that is overflown off the popup, it will automatically scroll to the selected one-off button, just like the urlbar one-offs does with [oneClickOneOffSearchButtons.uc.js][].
+
+[oneClickOneOffSearchButtons.uc.js]: https://github.com/aminomancer/uc.css.js/blob/master/JS/oneClickOneOffSearchButtons.uc.js
+*/
 // @downloadURL    https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/scrollingOneOffs.uc.js
 // @updateURL      https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/scrollingOneOffs.uc.js
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.

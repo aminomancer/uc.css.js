@@ -3,7 +3,7 @@
 // @version        1.0.1
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
-// @description    The filename should say it all, this just removes the behavior that prevents you from closing pinned tabs with the Ctrl+W/Cmd+W shortcut. Since my theme makes pinned tabs really small, I also added a preference to hide the close button on pinned tabs.
+// @description    The filename should say it all, this just removes the behavior that prevents you from closing pinned tabs with the Ctrl+W/⌘+W shortcut. Since my theme makes pinned tabs really small, I also added a preference to hide the close button on pinned tabs.
 // @downloadURL    https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/letCtrlWClosePinnedTabs.uc.js
 // @updateURL      https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/letCtrlWClosePinnedTabs.uc.js
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.

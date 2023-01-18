@@ -1,11 +1,17 @@
 // ==UserScript==
 // @name           Hit Enter in Urlbar to Refresh
-// @version        1.0.3
+// @version        1.0.4
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
-// @description    Due to Firefox's named anchor navigation system, you can't always refresh a page by clicking the urlbar and hitting Enter. If there's a hash mark `#` in the URL, Firefox interprets this as a URL fragment and tries to navigate between anchors within the document, by setting the scroll position and not reloading the document. This works great when clicking links on pages that link to other parts of the page, and when typing new fragments after the hash in the URL. But what if you just want to reload the page? If there is no hash, then hitting Enter will always reload the page. But if there is a hash, hitting Enter will not reload the page, even though the current URL is the same as the typed URL. [Bug 1766145][] may resolve that problem, but in the meantime, this script will work. With this installed, hitting Enter in the urlbar when the typed value is the same as the current browser's URL will cause a page reload. If you change the value in the urlbar at all, this won't have any effect. It only comes into play when the URL values are 100% identical. This just ensures that if you click into the urlbar and hit Enter, without doing anything else, it will always work the same — whether there's a hash in the URL or not.
-//
-// [Bug 1766145]: https://bugzilla.mozilla.org/show_bug.cgi?id=1766145
+// @long-description
+// @description
+/*
+Due to Firefox's named anchor navigation system, you can't always refresh a page by clicking the urlbar and hitting Enter. If there's a hash mark `#` in the URL, Firefox interprets this as a URL fragment and tries to navigate between anchors within the document, by setting the scroll position and not reloading the document. This works great when clicking links on pages that link to other parts of the page, and when typing new fragments after the hash in the URL. But what if you just want to reload the page? If there is no hash, then hitting Enter will always reload the page. But if there is a hash, hitting Enter will not reload the page, even though the current URL is the same as the typed URL.
+
+[Bug 1766145][] may resolve that problem, but in the meantime, this script will work. With this installed, hitting Enter in the urlbar when the typed value is the same as the current browser's URL will cause a page reload. If you change the value in the urlbar at all, this won't have any effect. It only comes into play when the URL values are 100% identical. This just ensures that if you click into the urlbar and hit Enter, without doing anything else, it will always work the same — whether there's a hash in the URL or not.
+
+[Bug 1766145]: https://bugzilla.mozilla.org/show_bug.cgi?id=1766145
+*/
 // @downloadURL    https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/enterInUrlbarToRefresh.uc.js
 // @updateURL      https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/enterInUrlbarToRefresh.uc.js
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.

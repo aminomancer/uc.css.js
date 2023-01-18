@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name           Eyedropper Button
-// @version        1.0.3
+// @version        1.0.4
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
-// @description    Adds a toolbar button that implements the color picker without launching the devtools. Similar to the menu item in the "More Tools" and "Tools > Browser Tools" menus, only this one can be placed directly on your toolbar. Also adds a customizable hotkey to do the same — by default, it's Ctrl+Shift+Y (or Cmd+Shift+Y on macOS)
+// @description    Adds a toolbar button that implements the color picker without launching the devtools. Similar to the menu item in the "More Tools" and "Tools > Browser Tools" menus, only this one can be placed directly on your toolbar. Also adds a customizable hotkey to do the same — by default, it's Ctrl+Shift+Y (or ⌘+⇧+Y on macOS)
 // @downloadURL    https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/eyedropperButton.uc.js
 // @updateURL      https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/eyedropperButton.uc.js
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
@@ -14,12 +14,13 @@ class EyedropperButton {
     // shortcut key, combined with modifiers.
     key: "Y",
 
-    // ctrl + shift or cmd + shift (use accel instead of ctrl, it's
-    // cross-platform. it can be changed in about:config with ui.key.accelKey.
-    // if you leave the "" quotes empty, no modifier will be used. that means
-    // the hotkey will just be "Y" which may be a bad idea — only do that if
-    // your "key" value is something obscure like a function key, since this key
-    // will be active at all times and in almost all contexts.
+    // Ctrl+Shift or ⌘+⇧ (use accel instead of ctrl, it's cross-platform - ctrl
+    // on win/linux, ⌘ on mac. it can also be changed manually in about:config
+    // with ui.key.accelKey). if you leave the "" quotes empty, no modifier will
+    // be used. that means the hotkey will just be "Y" which may be a bad idea —
+    // only do that if your "key" value is something obscure like a function
+    // key, since this key will be active at all times and in almost all
+    // contexts, preventing the key from reaching other consumers.
     modifiers: "accel shift",
 
     id: "key_eyedropper",

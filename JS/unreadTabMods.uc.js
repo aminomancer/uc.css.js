@@ -1,23 +1,30 @@
 // ==UserScript==
 // @name           Unread Tab Mods
-// @version        1.2.3
+// @version        1.2.4
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
-// @description    Modifies some javascript methods so that unread tabs can be styled in CSS, and (optionally) adds new items to the tab context menu so you can manually mark tabs as read or unread. Normally when you open a new tab without it being selected, it gains the attribute `notselectedsinceload` which could be used to style it. But this attribute doesn't go away when you select the tab, so it doesn't actually mean "unread." It doesn't go away until you navigate to a new page in the tab. But we can change this so it will go away immediately as soon as you click it or otherwise select it. Also, normally the attribute isn't added until web progress has finished, so unread tab styling won't be applied until after it's finished loading a bit. This doesn't look as good so we're also changing it to add the attribute as soon as the tab is created. So now all you need to do to style unread tabs is add something like this to your userchrome.css file:
-//
-// ```css
-// .tabbrowser-tab[notselectedsinceload]:not([pending]),
-// .tabbrowser-tab[notselectedsinceload][pending][busy] {
-//   font-style: italic !important;
-// }
-// ```
-//
-// If you use [duskFox][] (the theme on my repo) you will already have this CSS so there's no need to add it. It also includes icons for the context menu items. If you don't use duskFox but you want to add context menu icons, the selectors are `#context-markAsRead` and `#context-markAsUnread`. Search for them in [uc-context-menu-icons.css][] to see how I do it.
-//
-// Alternatively you could modify `makeMenuItems()` in this script to add "menuitem-iconic" to the classList of the menuitems. Then you could add the icon by setting the "image" attribute of the menuitem. I prefer not to do it this way because, since the proton context menu update, most built-in context menu items do not have icons. So adding icons through the script would make the menuitems stick out like a sore thumb for any proton users who don't use my theme.
-//
-// [duskFox]: https://github.com/aminomancer/uc.css.js
-// [uc-context-menu-icons.css]: https://github.com/aminomancer/uc.css.js/blob/master/uc-context-menu-icons.css
+// @long-description
+// @description
+/*
+Modifies some javascript methods so that unread tabs can be styled in CSS, and (optionally) adds new items to the tab context menu so you can manually mark tabs as read or unread.
+
+Normally when you open a new tab without it being selected, it gains the attribute `notselectedsinceload` which could be used to style it. But this attribute doesn't go away when you select the tab, so it doesn't actually mean "unread." It doesn't go away until you navigate to a new page in the tab. But we can change this so it will go away immediately as soon as you click it or otherwise select it.
+
+Also, normally the attribute isn't added until web progress has finished, so unread tab styling won't be applied until after it's finished loading a bit. This doesn't look as good so we're also changing it to add the attribute as soon as the tab is created.
+
+So now all you need to do to style unread tabs is add something like this to your userchrome.css file:
+
+```css
+.tabbrowser-tab[notselectedsinceload]:not([pending]),
+.tabbrowser-tab[notselectedsinceload][pending][busy] {
+  font-style: italic !important;
+}
+```
+
+If you use [duskFox][] (the theme on my repo) you will already have this CSS so there's no need to add it.
+
+[duskFox]: https://github.com/aminomancer/uc.css.js
+*/
 // @downloadURL    https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/unreadTabMods.uc.js
 // @updateURL      https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/unreadTabMods.uc.js
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
