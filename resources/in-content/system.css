@@ -354,6 +354,13 @@
     --message-bar-text-color: var(--text-color) !important;
   }
 
+  @-moz-document regexp("^(about:|chrome:|moz-extension:).*") {
+    mark {
+      background-color: var(--solid-selection-bgcolor, hsl(340, 73%, 58%)) !important;
+      color: white !important;
+    }
+  }
+
   @-moz-document url-prefix("about:addons") {
     .addon-badge {
       border: 1px solid transparent !important;
