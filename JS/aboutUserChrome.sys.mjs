@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           about:userchrome
-// @version        1.1.3
+// @version        1.1.4
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description

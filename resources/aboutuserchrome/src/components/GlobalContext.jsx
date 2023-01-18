@@ -54,11 +54,11 @@ export class GlobalContextProvider extends React.Component {
   constructor(props) {
     super(props);
 
-    this.navigate = newPath => {
+    this.navigate = (newPath, pushState = true) => {
       let path = newPath.replace(/^\/+|\/+$/g, "");
       if (path !== this.state.path) {
         this.setState({ path, initialFocus: false });
-        window.history.pushState(
+        window.history[pushState ? "pushState" : "replaceState"](
           { ...window.history.state, path, initialFocus: false },
           ""
         );

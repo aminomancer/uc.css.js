@@ -115,6 +115,15 @@ export const ScriptsView = () => {
     );
   }, [setUpdateCount, updaters]);
 
+  useEffect(() => {
+    let expandedCardScript = scripts.find(
+      script => script.filename === expandedCard
+    );
+    if (expandedCard && !expandedCardScript) {
+      navigate("scripts", false);
+    }
+  }, [expandedCard, navigate, scripts]);
+
   return (
     <div id="scripts">
       <div id="scripts-header" className="view-header">
