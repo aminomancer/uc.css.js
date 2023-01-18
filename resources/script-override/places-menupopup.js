@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Restore Places Menupopup Arrows
-// @version        1.1.0
+// @version        1.1.1
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Necessary for use with restorePreProtonArrowpanels.uc.js.
@@ -312,7 +312,6 @@ function closingPopupEndsDrag(popup) {
       if (!elt._placesNode) {
         // If we are dragging over a non places node drop at the end.
         dropPoint.ip = new PlacesInsertionPoint({
-          parentId: PlacesUtils.getConcreteItemId(resultNode),
           parentGuid: PlacesUtils.getConcreteItemGuid(resultNode),
         });
         // We can set folderElt if we are dropping over a static menu that
@@ -343,7 +342,6 @@ function closingPopupEndsDrag(popup) {
         if (eventY - eltY < eltHeight * 0.2) {
           // If mouse is in the top part of the element, drop above folder.
           dropPoint.ip = new PlacesInsertionPoint({
-            parentId: PlacesUtils.getConcreteItemId(resultNode),
             parentGuid: PlacesUtils.getConcreteItemGuid(resultNode),
             orientation: Ci.nsITreeView.DROP_BEFORE,
             tagName,
@@ -353,7 +351,6 @@ function closingPopupEndsDrag(popup) {
         } else if (eventY - eltY < eltHeight * 0.8) {
           // If mouse is in the middle of the element, drop inside folder.
           dropPoint.ip = new PlacesInsertionPoint({
-            parentId: PlacesUtils.getConcreteItemId(elt._placesNode),
             parentGuid: PlacesUtils.getConcreteItemGuid(elt._placesNode),
             tagName,
           });
@@ -364,7 +361,6 @@ function closingPopupEndsDrag(popup) {
         // This is a non-folder node or a readonly folder.
         // If the mouse is above the middle, drop above this item.
         dropPoint.ip = new PlacesInsertionPoint({
-          parentId: PlacesUtils.getConcreteItemId(resultNode),
           parentGuid: PlacesUtils.getConcreteItemGuid(resultNode),
           orientation: Ci.nsITreeView.DROP_BEFORE,
           tagName,
@@ -375,7 +371,6 @@ function closingPopupEndsDrag(popup) {
 
       // Drop below the item.
       dropPoint.ip = new PlacesInsertionPoint({
-        parentId: PlacesUtils.getConcreteItemId(resultNode),
         parentGuid: PlacesUtils.getConcreteItemGuid(resultNode),
         orientation: Ci.nsITreeView.DROP_AFTER,
         tagName,
@@ -459,7 +454,7 @@ function closingPopupEndsDrag(popup) {
         PlacesControllerDragHelper.onDrop(
           dropPoint.ip,
           event.dataTransfer
-        ).catch(Cu.reportError);
+        ).catch(() => {});
         event.preventDefault();
       }
 
@@ -553,8 +548,7 @@ function closingPopupEndsDrag(popup) {
       // Set the new marginTop based on arrowscrollbox.
       newMarginTop +=
         scrollRect.y - this._indicatorBar.parentNode.getBoundingClientRect().y;
-      this._indicatorBar.firstElementChild.style.marginTop =
-        newMarginTop + "px";
+      this._indicatorBar.firstElementChild.style.marginTop = `${newMarginTop}px`;
       this._indicatorBar.hidden = false;
 
       event.preventDefault();
@@ -688,7 +682,7 @@ function closingPopupEndsDrag(popup) {
         } else {
           arrowbox.setAttribute("pack", "start");
         }
-        arrowbox.style.transform = "translate(0, " + -offset + "px)";
+        arrowbox.style.transform = `translate(0, ${-offset}px)`;
 
         // The assigned side stays the same regardless of direction.
         let isRTL = this.matches(":-moz-locale-dir(rtl)");
@@ -711,7 +705,7 @@ function closingPopupEndsDrag(popup) {
         } else {
           arrowbox.setAttribute("pack", "start");
         }
-        arrowbox.style.transform = "translate(" + -offset + "px, 0)";
+        arrowbox.style.transform = `translate(${-offset}px, 0)`;
 
         if (position.indexOf("before_") == 0) {
           container.style.MozBoxDirection = "reverse";
