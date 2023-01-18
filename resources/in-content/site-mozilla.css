@@ -50,12 +50,21 @@
 }
 
 @-moz-document domain("searchfox.org") {
+  :root {
+    --dummy-property: initial;
+  }
+
   tt,
   code,
   kbd,
   samp,
   .results td > a {
     font-family: Fira Code UC, Fira Code, SF Mono, Menlo, Consolas, Monaco, monospace;
+    font-weight: 300;
+  }
+
+  .graph text {
+    font-family: Fira Code UC, Fira Code, SF Mono, Menlo, Consolas, Monaco, monospace !important;
     font-weight: 300;
   }
 
@@ -75,8 +84,12 @@
 
   #panel-toggle {
     background: none !important;
-    text-align: end !important;
+    display: flex !important;
+    align-items: stretch !important;
+    align-content: stretch !important;
+    justify-content: end !important;
     padding-right: 1rem !important;
+    gap: 6px !important;
   }
 
   /* reverse the show/hide state of the panel so it's hidden by default. */
@@ -96,11 +109,36 @@
   }
 
   .navpanel-icon {
-    transform: rotate(0deg) !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+  
+  .navpanel-icon.icon-down-dir {
+    transform: none !important;
   }
 
-  .navpanel-icon.expanded {
+  .navpanel-icon.icon-down-dir.expanded {
     transform: rotate(-90deg) !important;
+  }
+
+  .navpanel-icon::before {
+    margin: 0 !important;
+    width: min-content !important;
+    height: min-content !important;
+  }
+
+  #show-settings {
+    display: flex !important;
+    margin-inline-start: 10px !important;
+  }
+
+  #show-settings > .navpanel-icon {
+    display: flex !important;
+  }
+
+  .graph {
+    fill: currentColor !important;
   }
 }
 
