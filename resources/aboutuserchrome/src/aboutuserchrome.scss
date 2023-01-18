@@ -25,29 +25,113 @@
 .view-header {
   display: inline;
 
-  .main-heading {
-    min-height: 45px;
-    padding-top: 30px;
-    align-items: center;
+  .sticky-container {
+    padding-bottom: 16px;
 
-    .back-button {
-      height: 32px;
-      width: 32px;
+    .main-search {
+      padding-bottom: 30px;
+
+      .search-textbox {
+        display: flex;
+        cursor: text;
+        width: 20em;
+        min-height: 32px;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 2px 8px 3px;
+        appearance: none;
+        border: 1px solid var(--in-content-box-border-color);
+        border-radius: 4px;
+        color: inherit;
+        background-color: var(--in-content-box-background);
+
+        &:focus-within {
+          border-color: transparent;
+          outline: var(--in-content-focus-outline);
+          outline-offset: -1px;
+        }
+
+        input {
+          border: none;
+          padding: 0 1px;
+          background-color: transparent;
+          outline: none;
+          color: inherit;
+          font: inherit;
+          text-shadow: inherit;
+          box-sizing: border-box;
+          flex: 1;
+          min-width: 0;
+          text-align: inherit;
+        }
+
+        .textbox-search-sign {
+          width: 12px;
+          background: url("chrome://global/skin/icons/search-textbox.svg") no-repeat center/contain;
+          margin-inline-end: 5px;
+          pointer-events: none;
+
+          &:-moz-locale-dir(rtl) {
+            transform: scaleX(-1);
+          }
+        }
+
+        .textbox-search-clear {
+          margin: revert;
+          padding: revert;
+          min-height: revert;
+          min-width: revert;
+          width: 14px;
+          background-size: 14px;
+          background: url("resource://content-accessible/searchfield-cancel.svg") no-repeat center/14px;
+          margin-inline-start: 5px;
+
+          &:not([disabled]) {
+            cursor: default;
+          }
+        }
+      }
+
+      .search-spacer {
+        min-height: 32px;
+      }
     }
 
-    .header-button-description {
-      margin-inline: 8px;
-    }
-  }
+    .main-heading {
+      min-height: 32px;
+      padding: 0;
 
-  .message-box {
-    margin-inline-start: var(--main-margin-start);
-    max-width: var(--section-width);
+      .back-button {
+        height: 32px;
+        width: 32px;
+      }
+
+      .header-button-description:not(:empty) {
+        margin-inline: 8px;
+      }
+
+      .header-button-box button {
+        min-height: 32px;
+        padding-block: 0;
+        margin: 0;
+      }
+    }
+
+    .message-box {
+      margin-top: 4px;
+      margin-inline-start: var(--main-margin-start);
+      max-width: var(--section-width);
+
+      p {
+        margin: 0;
+        line-height: 1.8em;
+      }
+    }
   }
 }
 
 #main {
-  margin-block: 15px 30px;
+  margin-block: 16px 30px;
 
   .script.card {
     margin-bottom: var(--card-padding);
@@ -55,7 +139,6 @@
     overflow: hidden;
     border: 0;
     padding: var(--card-padding);
-    cursor: pointer;
 
     .script-card-collapsed {
       display: flex;
@@ -81,19 +164,43 @@
           display: flex;
           align-items: center;
 
+          .script-name,
+          .script-version {
+            white-space: nowrap;
+            overflow: clip;
+            text-overflow: ellipsis;
+            min-width: 0;
+          }
+
+          .script-name-button {
+            appearance: none;
+            min-width: 0;
+            font-weight: revert;
+            background: none;
+            padding: 0;
+            margin: 0;
+            border: 0;
+            color: inherit;
+            cursor: inherit;
+            min-height: 0;
+            margin-inline-end: 8px;
+            opacity: 1;
+            user-select: auto;
+            outline: none;
+            box-shadow: none;
+          }
+
           .script-name {
             font-size: 16px;
             font-weight: 600;
             line-height: 22px;
             margin: 0;
-            margin-inline-end: 8px;
           }
 
           .script-version {
             font-size: 14px;
             color: var(--in-content-deemphasized-text);
             font-weight: 400;
-            white-space: nowrap;
           }
 
           .spacer {
@@ -107,7 +214,7 @@
           color: var(--in-content-deemphasized-text);
           font-weight: 400;
           text-overflow: ellipsis;
-          overflow-x: hidden;
+          overflow: hidden;
         }
       }
     }
@@ -272,6 +379,7 @@
 
           button.script-detail-description-toggle {
             display: flex;
+            min-width: 0;
             align-items: center;
             margin-top: 8px;
             font-weight: normal;
@@ -289,6 +397,7 @@
         .script-detail-row {
           display: flex;
           justify-content: space-between;
+          gap: var(--card-padding);
           align-items: center;
           border-top: 1px solid var(--in-content-border-color);
           margin: 0 calc(var(--card-padding) * -1);
@@ -316,10 +425,17 @@
     }
 
     &:not([expanded]) {
+      cursor: pointer;
       user-select: none;
 
       &:hover {
         box-shadow: var(--card-shadow-hover);
+      }
+
+      &[focused] {
+        outline: none;
+        --card-outline-color: color-mix(in srgb, var(--in-content-accent-color) 70%, transparent);
+        box-shadow: var(--card-shadow), 0 0 0 5px var(--card-outline-color);
       }
 
       .card-contents {
@@ -334,6 +450,7 @@
     }
 
     &[expanded] {
+      cursor: default;
       padding-bottom: 0;
 
       .script-card-collapsed {

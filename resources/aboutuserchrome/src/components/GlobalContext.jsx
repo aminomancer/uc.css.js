@@ -34,7 +34,7 @@ export const gPrefs = {
     } catch (ex) {}
     return def;
   },
-  set: (pref, value) => {
+  set(pref, value) {
     const { prefs } = Services;
     switch (typeof value) {
       case "string":
@@ -55,17 +55,50 @@ export class GlobalContextProvider extends React.Component {
     super(props);
 
     this.navigate = newPath => {
-      if (newPath !== this.state.path) {
-        this.setState({ path: newPath });
-        window.history.pushState({ path: newPath }, "");
+      let path = newPath.replace(/^\/+|\/+$/g, "");
+      if (path !== this.state.path) {
+        this.setState({ path, initialFocus: false });
+        window.history.pushState(
+          { ...window.history.state, path, initialFocus: false },
+          ""
+        );
       }
+    };
+    this.setSearch = terms => {
+      if (!this.state.search && terms) {
+        window.history.pushState(
+          { ...window.history.state, search: terms },
+          ""
+        );
+      } else {
+        window.history.replaceState(
+          { ...window.history.state, search: terms },
+          ""
+        );
+      }
+      this.setState({ search: terms });
+    };
+    this.setUpdateCount = count => {
+      this.setState({ updateCount: count });
+    };
+    this.setInitialFocus = focus => {
+      this.setState({ initialFocus: focus });
+      window.history.replaceState(
+        { ...window.history.state, initialFocus: focus },
+        ""
+      );
     };
 
     this.state = {
-      path: DEFAULT_PATH,
+      path: window.history?.state?.path || DEFAULT_PATH,
       navigate: this.navigate,
+      restart: () => ucUtils?.restart(true),
+      search: window.history?.state?.search || "",
+      setSearch: this.setSearch,
       missingFxAutoconfig: !ucUtils,
-      outdatedFxAutoconfig: !ucUtils?.parseStringAsScriptInfo,
+      outdatedFxAutoconfig:
+        !ucUtils?.parseStringAsScriptInfo ||
+        ucUtils?.getScriptData.toString().startsWith("()"),
       scripts: ucUtils?.getScriptData().map(script => ({
         ...script,
         path: script.asFile().path,
@@ -77,12 +110,19 @@ export class GlobalContextProvider extends React.Component {
       updateInterval: gPrefs.get(PREF_UPDATE_INTERVAL, 86400000), // 24 hours
       notificationsEnabled: gPrefs.get(PREF_NOTIFICATIONS_ENABLED, true),
       updateCount: 0,
-      setUpdateCount: count => {
-        this.setState({ updateCount: count });
-      },
+      setUpdateCount: this.setUpdateCount,
+      initialFocus: window.history?.state?.initialFocus ?? true,
+      setInitialFocus: this.setInitialFocus,
     };
 
-    window.history.replaceState({ path: this.state.path }, "");
+    window.history.replaceState(
+      {
+        path: this.state.path,
+        initialFocus: this.state.initialFocus,
+        search: this.state.search,
+      },
+      ""
+    );
 
     window.addEventListener("popstate", this);
     Services.prefs.addObserver(PREF_BRANCH, this);
@@ -91,7 +131,10 @@ export class GlobalContextProvider extends React.Component {
   handleEvent(event) {
     switch (event.type) {
       case "popstate":
-        this.setState({ path: event.state?.path || DEFAULT_PATH });
+        this.setState({
+          ...event.state,
+          path: event.state?.path || DEFAULT_PATH,
+        });
         break;
     }
   }

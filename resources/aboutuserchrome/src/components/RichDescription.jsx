@@ -3,7 +3,7 @@
  * If a copy of the CC BY-NC-SA 4.0 was not distributed with this file,
  * You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ */
 
-import { useRef, useEffect, useState, useCallback } from "react";
+import { useRef, useLayoutEffect, useState, useCallback } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkBreaks from "remark-breaks";
 import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -62,7 +62,7 @@ export const RichDescription = ({ description, prefix = "" }) => {
     setDescriptionCollapsed(previous => !previous);
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const { current } = descriptionRef;
     if (current) {
       const remSize = parseFloat(
@@ -80,7 +80,7 @@ export const RichDescription = ({ description, prefix = "" }) => {
     }
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     let query = window.matchMedia("(prefers-color-scheme: dark)");
     const listener = event => {
       setDarkTheme(event.matches);

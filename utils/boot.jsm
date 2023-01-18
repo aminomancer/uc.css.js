@@ -103,12 +103,13 @@ const BASE_FILEURI = Services.io.getProtocolHandler('file')
 
 class ScriptData {
   constructor(leafName, headerText){
+    const hasLongDescription = (/^\/\/\ @long-description/im).test(headerText);
     this.filename = leafName;
     this.name = headerText.match(/\/\/ @name\s+(.+)\s*$/im)?.[1];
     this.charset = headerText.match(/\/\/ @charset\s+(.+)\s*$/im)?.[1];
-    this.description = headerText
-      .match(/\/\/ @description\s+(.+?)[\r\n]+\/\/ [@=]+/is)
-      ?.[1].replace(/^\/\/ */gm,"");
+    this.description = hasLongDescription
+      ? headerText.match(/\/\/ @description\s+.*?\/\*\s*(.+?)\s*\*\//is)?.[1]
+      : headerText.match(/\/\/ @description\s+(.+)\s*$/im)?.[1];
     this.version = headerText.match(/\/\/ @version\s+(.+)\s*$/im)?.[1];
     this.author = headerText.match(/\/\/ @author\s+(.+)\s*$/im)?.[1];
     this.icon = headerText.match(/\/\/ @icon\s+(.+)\s*$/im)?.[1];
@@ -180,7 +181,7 @@ class ScriptData {
       this.startup && SHARED_GLOBAL[this.startup]._startup(win)
       
     } catch (ex) {
-      console.error(new Error(`@ ${this.filename}`,{cause:ex}));
+      console.error(new Error(`@ ${this.filename}:${ex.lineNumber}`,{cause:ex}));
     }
     return
   }
@@ -489,8 +490,21 @@ const utils = {
   
   getFSEntry: (fileName) => ( getDirEntry(fileName) ),
   
-  getScriptData: () => {
+  getScriptData: (aFilter) => {
+    const filterType = typeof aFilter;
+    if(aFilter && !(filterType === "string" || filterType === "function")){
+      throw "getScriptData() called with invalid filter type: "+filterType
+    }
+    if(filterType === "string"){
+      let script = _ucjs.scripts.find(s => s.filename === aFilter);
+      return script ? ScriptInfo.fromScript(script, script.isEnabled) : null;
+    }
     const disabledScripts = (yPref.get(PREF_SCRIPTSDISABLED) || '').split(",");
+    if(filterType === "function"){
+      return _ucjs.scripts.filter(aFilter).map(
+        (script) => ScriptInfo.fromScript(script,!disabledScripts.includes(script.filename))
+      );
+    }
     return _ucjs.scripts.map(
       (script) => ScriptInfo.fromScript(script,!disabledScripts.includes(script.filename))
     );
@@ -831,7 +845,7 @@ class UserChrome_js {
     let files = getDirEntry('',true);
     while(files.hasMoreElements()){
       let file = files.getNext().QueryInterface(Ci.nsIFile);
-      if (/(.+\.uc\.js)|(.+\.sys\.mjs)$/i.test(file.leafName)) {
+      if (/(.+\.uc\.js|.+\.sys\.mjs)$/i.test(file.leafName)) {
         let script = ScriptData.fromFile(file);
         this.scripts.push(script);
         if(script.inbackground && script.isEnabled){

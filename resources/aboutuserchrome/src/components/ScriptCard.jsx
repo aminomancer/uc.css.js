@@ -3,34 +3,97 @@
  * If a copy of the CC BY-NC-SA 4.0 was not distributed with this file,
  * You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ */
 
-import { useEffect, useState, useCallback, useContext } from "react";
+import {
+  useEffect,
+  useState,
+  useCallback,
+  useMemo,
+  useContext,
+  useRef,
+} from "react";
 import { GlobalContext, ucUtils } from "./GlobalContext";
-import { RichDescription } from "./RichDescription";
+import { ScriptDetails } from "./ScriptDetails";
 const { gScriptUpdater } = ChromeUtils.importESModule(
   "chrome://userchrome/content/aboutuserchrome/modules/UCMSingletonData.sys.mjs"
 );
 
-export const ScriptCard = ({ script, enabled, expanded, setUpdater }) => {
+export const ScriptCard = ({
+  script,
+  enabled,
+  expanded,
+  highlights,
+  setUpdater,
+  ...props
+}) => {
   const { navigate } = useContext(GlobalContext);
-  let handle = gScriptUpdater.getHandle(script);
-  let nameId = `${script.filename
-    .toLowerCase()
-    .replace(/[^a-z0-9_-]/g, "_")}_name`;
-  let truncatedDescription =
-    script.description.length > 200
-      ? `${String(script.description ?? "")?.slice(0, 200)}…`
-      : script.description;
 
-  const [writing, setWriting] = useState(false);
-  const [pendingRestart, setPendingRestart] = useState(false);
   const [updateBarHidden, setUpdateBarHidden] = useState(true);
   const [updateBarType, setUpdateBarType] = useState("info");
   const [updateBarLabel, setUpdateBarLabel] = useState("");
   const [updateButtonDisabled, setUpdateButtonDisabled] = useState(false);
   const [updateButtonLabel, setUpdateButtonLabel] = useState("");
   const [iconHidden, setIconHidden] = useState(!script.icon);
+  const [focused, setFocused] = useState(false);
+
+  const nameButtonRef = useRef(null);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  let handle = useMemo(() => gScriptUpdater.getHandle(script), []);
+  let normalizedScriptId = useMemo(
+    () => script.id.toLowerCase().replace(/[^a-z0-9_-]/g, "_"),
+    [script.id]
+  );
+  let cardId = useMemo(() => `script-card-${normalizedScriptId}`, [
+    normalizedScriptId,
+  ]);
+  let nameId = useMemo(() => `script-name-${normalizedScriptId}`, [
+    normalizedScriptId,
+  ]);
+  let truncatedDescription = useMemo(() => {
+    return script.description.length > 200
+      ? `${String(script.description ?? "")?.slice(0, 200)}…`
+      : script.description;
+  }, [script.description]);
+
+  const highlightToNode = useCallback(
+    (part, index) => {
+      if (!part) return null;
+      return index % 2 ? (
+        // Odd parts are highlighted
+        <mark key={`script-name-highlight-${normalizedScriptId}-${index}`}>
+          {part}
+        </mark>
+      ) : (
+        // Even parts are just text
+        <span key={`script-name-highlight-${normalizedScriptId}-${index}`}>
+          {part}
+        </span>
+      );
+    },
+    [normalizedScriptId]
+  );
+  const nameWithHighlights = useMemo(() => {
+    if (!highlights) return null;
+    let nameNodes = highlights.name?.map(highlightToNode).filter(Boolean);
+    if (nameNodes?.length) return nameNodes;
+    let filenameNodes = highlights.filename
+      ?.map(highlightToNode)
+      .filter(Boolean);
+    if (filenameNodes?.length) return filenameNodes;
+    return null;
+  }, [highlightToNode, highlights]);
 
   const onCardActivate = useCallback(
+    event => {
+      if (expanded) return;
+      navigate(`scripts/${script.filename}`);
+      window.scrollTo(0, 0);
+      event.preventDefault();
+      event.stopPropagation();
+    },
+    [expanded, navigate, script.filename]
+  );
+  const onCardClick = useCallback(
     event => {
       switch (event.target.localName) {
         case "button":
@@ -38,17 +101,47 @@ export const ScriptCard = ({ script, enabled, expanded, setUpdater }) => {
         case "a":
           return;
       }
-      if (event.target.closest(".script-card-expanded")) return;
-      if (expanded) {
-        window.history.back();
-      } else {
-        navigate(`scripts/${script.filename}`);
-        window.scrollTo(0, 0);
-      }
-      event.preventDefault();
+      onCardActivate(event);
     },
-    [expanded, navigate, script.filename]
+    [onCardActivate]
   );
+  const onCardKeyDown = useCallback(
+    event => {
+      if (event.repeat) return;
+      switch (event.key) {
+        case "Enter":
+        case " ":
+          switch (event.target.localName) {
+            case "button":
+            case "input":
+            case "a":
+              return;
+          }
+          onCardActivate(event);
+          break;
+      }
+    },
+    [onCardActivate]
+  );
+  const onNameButtonClick = useCallback(onCardActivate, [onCardActivate]);
+  const onNameButtonKeyDown = useCallback(
+    event => {
+      if (event.repeat) return;
+      switch (event.key) {
+        case "Enter":
+        case " ":
+          onCardActivate(event);
+          break;
+      }
+    },
+    [onCardActivate]
+  );
+  const onNameButtonFocus = useCallback(event => {
+    setFocused(true);
+  }, []);
+  const onNameButtonBlur = useCallback(event => {
+    setFocused(false);
+  }, []);
   const onIconError = useCallback(() => {
     setIconHidden(true);
   }, []);
@@ -60,91 +153,105 @@ export const ScriptCard = ({ script, enabled, expanded, setUpdater }) => {
     [handle]
   );
   const toggleScript = useCallback(
-    event => {
-      ucUtils.toggleScript(script.filename);
-    },
+    () => ucUtils.toggleScript(script.filename),
     [script.filename]
   );
-
-  useEffect(() => {
-    let unsubscribe = handle.subscribe(() => {
-      let remoteScriptData = handle.remoteFile
-        ? ucUtils.parseStringAsScriptInfo(script.filename, handle.remoteFile)
+  const onNotification = useCallback(
+    scriptHandle => {
+      let remoteScriptData = scriptHandle.remoteFile
+        ? ucUtils.parseStringAsScriptInfo(
+            scriptHandle.filename,
+            scriptHandle.remoteFile
+          )
         : {};
       let newVersion = remoteScriptData.version;
-      if (handle.writing) {
+      let updater = {};
+      if (scriptHandle.writing) {
         setUpdateButtonLabel("Updating…");
         setUpdateButtonDisabled(true);
         setUpdateBarHidden(false);
-      } else if (handle.updateError) {
+        updater.disabled = true;
+        updater.update = null;
+      } else if (scriptHandle.updateError) {
         setUpdateButtonLabel("Update failed");
         setUpdateBarType("warning");
         setUpdateBarLabel(`Update to ${newVersion} manually`);
         setUpdateButtonDisabled(true);
         setUpdateBarHidden(false);
+        updater.disabled = true;
+        updater.update = null;
         console.error(
-          `Error overwriting ${script.filename} :>> `,
-          handle.updateError
+          `Error overwriting ${scriptHandle.filename} :>> `,
+          scriptHandle.updateError
         );
-      } else if (handle.pendingRestart) {
+      } else if (scriptHandle.pendingRestart) {
         setUpdateButtonLabel("Updated");
         setUpdateBarType("success");
         setUpdateBarLabel(`Restart to update to ${newVersion}`);
         setUpdateButtonDisabled(true);
         setUpdateBarHidden(false);
-      } else if (handle.downloadError) {
+        updater.disabled = true;
+        updater.update = null;
+      } else if (scriptHandle.downloadError) {
         setUpdateBarHidden(true);
+        updater = null;
         console.error(
-          `Error downloading ${script.filename} :>> `,
-          handle.downloadError
+          `Error downloading ${scriptHandle.filename} :>> `,
+          scriptHandle.downloadError
         );
-      } else if (Services.vc.compare(newVersion, script.version) > 0) {
+      } else if (
+        Services.vc.compare(newVersion, scriptHandle.currentVersion) > 0
+      ) {
         setUpdateButtonLabel("Update now");
-        setUpdateBarLabel(`Update to ${remoteScriptData.version} available`);
+        setUpdateBarLabel(`Update to ${newVersion} available`);
         setUpdateButtonDisabled(false);
         setUpdateBarHidden(false);
+        updater.disabled = false;
+        updater.update = scriptHandle.updateScript;
       } else {
         setUpdateBarHidden(true);
+        updater = null;
       }
-      setWriting(handle.writing);
-      setPendingRestart(handle.pendingRestart);
-    });
+      if (updater) {
+        updater.writing = scriptHandle.writing;
+        updater.pendingRestart = scriptHandle.pendingRestart;
+      }
+      setUpdater(scriptHandle.filename, updater);
+    },
+    [setUpdater]
+  );
+
+  useEffect(() => {
+    let unsubscribe = handle.subscribe(onNotification);
     handle.checkRemoteFile();
     return () => {
       unsubscribe();
     };
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [handle, onNotification]);
 
   useEffect(() => {
-    setUpdater(
-      script.filename,
-      updateBarHidden
-        ? null
-        : {
-            disabled: updateButtonDisabled,
-            writing,
-            pendingRestart,
-            update: updateButtonDisabled ? null : handle.updateScript,
-          }
-    );
-  }, [
-    updateButtonDisabled,
-    updateBarHidden,
-    writing,
-    pendingRestart,
-    setUpdater,
-    script.filename,
-    handle.updateScript,
-  ]);
+    if (expanded && focused) {
+      nameButtonRef.current?.blur();
+      document.querySelector(".back-button").focus();
+    }
+  }, [expanded, focused]);
+
+  useEffect(() => {
+    setFocused(document.activeElement === nameButtonRef.current);
+  }, [expanded]);
 
   return (
     <div
+      id={cardId}
       className="script card"
       active={enabled ? "true" : "false"}
       expanded={expanded ? "" : undefined}
       aria-labelledby={nameId}
-      onClick={onCardActivate}
+      focused={focused ? "" : undefined}
+      onClick={onCardClick}
+      onKeyDown={onCardKeyDown}
       role="presentation"
+      {...props}
     >
       <div className="script-card-collapsed">
         <img
@@ -156,15 +263,30 @@ export const ScriptCard = ({ script, enabled, expanded, setUpdater }) => {
         />
         <div className="card-contents">
           <div className="script-name-container">
-            <h3
-              id={nameId}
-              className="script-name"
-              title={`${script.filename}${
-                script.version ? ` ${script.version}` : ""
-              }`}
+            <button
+              className="script-name-button"
+              onClick={onNameButtonClick}
+              onKeyDown={onNameButtonKeyDown}
+              onFocus={onNameButtonFocus}
+              onBlur={onNameButtonBlur}
+              disabled={expanded}
+              aria-expanded={expanded ? "true" : "false"}
+              aria-controls={cardId}
+              ref={nameButtonRef}
             >
-              {script.name || script.filename}
-            </h3>
+              <h3
+                id={nameId}
+                className="script-name"
+                title={`${script.filename}${
+                  script.version ? ` ${script.version}` : ""
+                }`}
+                aria-label={`${script.name || script.filename}${
+                  enabled ? "" : " (disabled)"
+                }`}
+              >
+                {nameWithHighlights || script.name || script.filename}
+              </h3>
+            </button>
             <div className="script-version" hidden={!script.version}>
               {script.version}
             </div>
@@ -176,7 +298,7 @@ export const ScriptCard = ({ script, enabled, expanded, setUpdater }) => {
               onInput={toggleScript}
             />
           </div>
-          <div className="script-description">{truncatedDescription}</div>
+          <span className="script-description">{truncatedDescription}</span>
         </div>
       </div>
       <div
@@ -204,147 +326,6 @@ export const ScriptCard = ({ script, enabled, expanded, setUpdater }) => {
       {expanded ? (
         <ScriptDetails script={script} launchLocalFile={launchLocalFile} />
       ) : null}
-    </div>
-  );
-};
-
-export const ScriptDetails = ({ script, launchLocalFile }) => {
-  return (
-    <div className="script-card-expanded">
-      <div className="script-detail-rows">
-        {script.description?.length > 200 ? (
-          <RichDescription
-            description={script.description.replace(/␠/g, "")}
-            prefix="script-detail-"
-          />
-        ) : null}
-        <div className="script-detail-row script-detail-source">
-          <label className="script-detail-label">Source file</label>
-          <a href={script.path} onClick={launchLocalFile}>
-            {script.filename}
-          </a>
-        </div>
-        <div className="script-detail-row script-detail-running">
-          <label className="script-detail-label">Running</label>
-          {script.isRunning ? "true" : "false"}
-        </div>
-        <div
-          className="script-detail-row script-detail-version"
-          hidden={!script.version}
-        >
-          <label className="script-detail-label">Version</label>
-          {script.version}
-        </div>
-        <div
-          className="script-detail-row script-detail-author"
-          hidden={!script.author}
-        >
-          <label className="script-detail-label">Author</label>
-          {script.author}
-        </div>
-        <div
-          className="script-detail-row script-detail-homepageURL"
-          hidden={!script.homepageURL}
-        >
-          <label className="script-detail-label">Homepage</label>
-          <a
-            target="_blank"
-            href={
-              script.homepageURL &&
-              (script.homepageURL.startsWith("http")
-                ? script.homepageURL
-                : `file:///${script.homepageURL}`)
-            }
-          >
-            {script.homepageURL}
-          </a>
-        </div>
-        <div
-          className="script-detail-row script-detail-downloadURL"
-          hidden={!script.downloadURL}
-        >
-          <label className="script-detail-label">Download URL</label>
-          <a
-            target="_blank"
-            href={
-              script.downloadURL &&
-              (script.downloadURL.startsWith("http")
-                ? script.downloadURL
-                : `file:///${script.downloadURL}`)
-            }
-          >
-            {script.downloadURL}
-          </a>
-        </div>
-        <div
-          className="script-detail-row script-detail-updateURL"
-          hidden={!script.updateURL || script.updateURL === script.downloadURL}
-        >
-          <label className="script-detail-label">Update URL</label>
-          <a
-            target="_blank"
-            href={
-              script.updateURL &&
-              (script.updateURL.startsWith("http")
-                ? script.updateURL
-                : `file:///${script.updateURL}`)
-            }
-          >
-            {script.updateURL}
-          </a>
-        </div>
-        <div
-          className="script-detail-row script-detail-optionsURL"
-          hidden={!script.optionsURL}
-        >
-          <label className="script-detail-label">Options URL</label>
-          <a
-            target="_blank"
-            href={
-              script.optionsURL &&
-              (script.optionsURL.startsWith("http")
-                ? script.optionsURL
-                : `file:///${script.optionsURL}`)
-            }
-          >
-            {script.optionsURL}
-          </a>
-        </div>
-        <div className="script-detail-row script-detail-type">
-          <label className="script-detail-label">Type</label>
-          {script.isESM
-            ? "ES module"
-            : (script.inbackground && "Background script") || "Chrome script"}
-        </div>
-        <div
-          className="script-detail-row script-detail-onlyonce"
-          hidden={!script.onlyonce}
-        >
-          <label className="script-detail-label">Only once</label>
-          {"true"}
-        </div>
-        <div
-          className="script-detail-row script-detail-ignoreCache"
-          hidden={!script.ignoreCache}
-        >
-          <label className="script-detail-label">Ignore cache</label>
-          {"true"}
-        </div>
-        <div
-          className="script-detail-row script-detail-loadOrder"
-          hidden={script.inbackground}
-        >
-          <label className="script-detail-label">Load order</label>
-          {String(script.loadOrder)}
-        </div>
-        <div
-          className="script-detail-row script-detail-charset"
-          hidden={!script.charset}
-        >
-          <label className="script-detail-label">Character set</label>
-          {script.charset}
-        </div>
-      </div>
     </div>
   );
 };

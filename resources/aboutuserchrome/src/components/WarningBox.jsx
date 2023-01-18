@@ -8,9 +8,7 @@ const MessageBox = ({ description, linkText, linkURL }) => {
   return (
     <div className="message-box">
       <div className="message">
-        <p>
-          <strong>{description}</strong>
-        </p>
+        <p>{description}</p>
         {linkText && linkURL ? (
           <p>
             <a href={linkURL} target="_blank">
@@ -23,7 +21,12 @@ const MessageBox = ({ description, linkText, linkURL }) => {
   );
 };
 
-export const WarningBox = ({ missingFxAutoconfig, outdatedFxAutoconfig }) => {
+export const WarningBox = ({
+  missingFxAutoconfig,
+  outdatedFxAutoconfig,
+  noResultsForSearch,
+  searchUnit,
+}) => {
   let message = {};
   if (missingFxAutoconfig || outdatedFxAutoconfig) {
     message.description = `fx-autoconfig is ${
@@ -31,6 +34,8 @@ export const WarningBox = ({ missingFxAutoconfig, outdatedFxAutoconfig }) => {
     }.`;
     message.linkText = "Download fx-autoconfig";
     message.linkURL = "https://github.com/MrOtherGuy/fx-autoconfig";
+  } else if (noResultsForSearch) {
+    message.description = `Sorry! There are no ${searchUnit} matching “${noResultsForSearch}”.`;
   }
   return <MessageBox {...message} />;
 };

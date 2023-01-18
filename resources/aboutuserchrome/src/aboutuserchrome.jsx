@@ -32,12 +32,14 @@ const UserChromeManager = () => {
           orientation="vertical"
           role="tablist"
           tabIndex="0"
+          aria-controls="content"
         >
           <button
             className={`category ${
               path.split("/")[0] === DEFAULT_PATH ? "selected" : ""
             }`}
             role="tab"
+            aria-selected={path.split("/")[0] === DEFAULT_PATH}
             title="Manage your scripts"
             onClick={onCategoryClick}
             path={DEFAULT_PATH}
@@ -51,6 +53,7 @@ const UserChromeManager = () => {
               path.split("/")[0] === "settings" ? "selected" : ""
             }`}
             role="tab"
+            aria-selected={path.split("/")[0] === "settings"}
             title="Settings"
             onClick={onCategoryClick}
             path="settings"
