@@ -238,6 +238,10 @@
   --menupopup-inner-padding: 0 !important;
   --context-menuitem-border-radius: 0 !important;
   --menupopup-border-radius: 0 0 var(--general-button-border-radius) var(--general-button-border-radius) !important;
+  --menu-background-color: var(--ebp-menulist-background-color) !important;
+  --menuitem-hover-background-color: var(--ebp-menulist-menuitem-hover-background-color) !important;
+  --menu-separator-color: var(--ebp-menulist-separator-color) !important;
+  --menupopup-inner-box-margin: 0 !important;
 }
 
 /* this goes in userChrome.au.css */
@@ -328,12 +332,6 @@
 
 #editBookmarkPanel .expander-up {
   list-style-image: url(chrome://userchrome/content/menu-arrow-up-big.svg) !important;
-}
-
-#editBookmarkPanel .in-menulist {
-  --menu-background-color: var(--ebp-menulist-background-color) !important;
-  --menuitem-hover-background-color: var(--ebp-menulist-menuitem-hover-background-color) !important;
-  --menu-separator-color: var(--ebp-menulist-separator-color) !important;
 }
 
 #editBookmarkPanel .in-menulist :is(menu, menuitem) {
