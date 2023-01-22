@@ -35,6 +35,10 @@ by underlining them (requires urlbarMods.uc.js) */
   color: var(--panel-shortcut-focus);
 }
 
+.urlbarView-row {
+  background: none !important;
+}
+
 .urlbarView-row[selected]:not([dynamicType="quickactions"]) > .urlbarView-row-inner,
 .urlbarView-row > .urlbarView-row-inner[selected],
 .urlbarView-help[selected] {
