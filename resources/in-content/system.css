@@ -1107,15 +1107,9 @@
     border: 1px solid var(--uc-content-button-background) !important;
   }
 
-  :root[uc-extension-id="screenshots@mozilla.org"] .hover-highlight {
-    background: rgba(255, 255, 255, 0.1) !important;
-    z-index: 2147483646 !important;
-  }
-
   :root[uc-extension-id="screenshots@mozilla.org"] .pixel-dimensions {
     margin-block-start: -5px;
     margin-inline-start: -5px;
-    z-index: 2147483647 !important;
     color: #fff !important;
     text-shadow: 0.5px 0.5px 0.5px black, 0 0 1px black, 0 0 1px black !important;
   }

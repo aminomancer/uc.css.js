@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Findbar Mods
-// @version        1.3.6
+// @version        1.3.7
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @long-description
@@ -327,12 +327,13 @@ class FindbarMods {
       let l10nId;
       switch (result.total) {
         case 0:
-          l10nId = "";
+          delete this._foundMatches.dataset.l10nId;
           this._foundMatches.hidden = true;
+          this._foundMatches.setAttribute("value", "");
           this._tinyIndicator.textContent = "   ";
           // hide the indicator background with CSS if it's blank.
           this._tinyIndicator.setAttribute("empty", "true");
-          break;
+          return;
         case -1:
           l10nId = "findbar-found-matches-count-limit";
           this._foundMatches.hidden = false;
