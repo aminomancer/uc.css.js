@@ -747,7 +747,7 @@ panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem[originaltype
   z-index: 0 !important;
 }
 
-:is(.tab-prompt-dialog, #window-modal-dialog) .dialogBox:not(.fullScreen) {
+:is(.tab-prompt-dialog, #window-modal-dialog) .dialogBox:not(.fullScreen, .spotlightBox) {
   /* tab-prompt-dialogs are anchored to the top of the browser content area.
   this makes them look like they emerge from under the navbar. */
   margin-top: 0px !important;
@@ -1521,11 +1521,6 @@ rtl languages. adjust the border radius accordingly */
     .onboardingContainer :is(.primary, .secondary) {
       line-height: revert !important;
       min-height: revert !important;
-    }
-
-    .onboardingContainer .screen[pos="split"] .section-main .main-content .action-buttons .secondary-cta .arrow-icon {
-      padding-inline-end: 28px !important;
-      background-position-x: right 10px !important;
     }
   }
 

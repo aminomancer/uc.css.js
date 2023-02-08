@@ -50,7 +50,7 @@ export const ScriptCard = ({
     normalizedScriptId,
   ]);
   let truncatedDescription = useMemo(() => {
-    return script.description.length > 200
+    return script.description && script.description.length > 200
       ? `${String(script.description ?? "")?.slice(0, 200)}…`
       : script.description;
   }, [script.description]);

@@ -442,6 +442,15 @@
     border-color: var(--fxview-contrast-border) !important;
   }
 
+  .toggle-button:not([aria-pressed="true"])::before {
+    background-color: currentColor !important;
+  }
+
+  .toggle-button[aria-pressed="true"]::before {
+    background-color: var(--in-content-primary-button-text-color) !important;
+    outline-color: var(--in-content-primary-button-text-color) !important;
+  }
+
   @-moz-document regexp("^about:blocked.*") {
     html:root,
     html:root * {

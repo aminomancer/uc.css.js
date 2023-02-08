@@ -320,6 +320,11 @@ toolbarpaletteitem[mousedown] > #urlbar-container > #urlbar > #urlbar-background
   --cfr-active-color: var(--button-hover-bgcolor) !important;
 }
 
+#urlbar[cfr-recommendation-state="expanded"] #contextual-feature-recommendation {
+	margin-inline-start: calc((var(--cfr-label-width) * -1) - 29px) !important;
+	transition: margin-inline-start step-start var(--cfr-animation-duration);
+}
+
 #cfr-label-container {
   border-radius: var(--toolbarbutton-border-radius) !important;
   font-size: 0.85em !important;

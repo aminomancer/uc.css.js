@@ -27,6 +27,7 @@ iframe#bit-notification-bar-iframe[src^="moz-extension://"] {
   :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] body {
     background: var(--in-content-box-background) !important;
     color: var(--plaintext-color) !important;
+    color-scheme: dark !important;
   }
 
   :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] .outer-wrapper {
@@ -58,6 +59,8 @@ iframe#bit-notification-bar-iframe[src^="moz-extension://"] {
 
   :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] button:not(.neutral, .link) {
     background-color: var(--in-content-primary-button-background) !important;
+    border-color: transparent !important;
+    color: var(--in-content-primary-button-text-color) !important;
   }
 
   :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] button:not(.neutral, .link):hover {
@@ -66,6 +69,16 @@ iframe#bit-notification-bar-iframe[src^="moz-extension://"] {
 
   :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] button:not(.neutral, .link):hover:active {
     background-color: var(--in-content-primary-button-background-active) !important;
+  }
+
+  :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] #close-button:hover {
+    border-color: var(--in-content-border-hover) !important;
+    background-color: var(--in-content-button-background-hover) !important;
+  }
+
+  :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] select {
+    border-color: var(--in-content-border-color) !important;
+    background-color: var(--in-content-button-background) !important;
   }
 
   :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] #logo-link::before {

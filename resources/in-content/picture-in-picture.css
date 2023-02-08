@@ -28,6 +28,7 @@
   max-height: 26px !important;
   border-radius: 2px 0 0 2px !important;
   pointer-events: auto !important;
+  min-width: auto !important;
 }
 
 .pip-wrapper[position="left"] .pip-expanded {

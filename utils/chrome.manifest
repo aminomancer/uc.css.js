@@ -78,6 +78,7 @@ override chrome://browser/skin/privatebrowsing/favicon.svg ../resources/skin/pri
 override chrome://global/skin/icons/indicator-private-browsing.svg ../resources/skin/privateBrowsing.svg
 override chrome://browser/skin/quickactions.svg ../resources/material/quickactions.svg
 override chrome://browser/skin/trending.svg ../resources/material/flash.svg
+override chrome://browser/content/cfr-lightning-dark.svg ../resources/material/flash.svg
 override chrome://browser/skin/sidebars.svg ../resources/skin/sidebars.svg
 override chrome://browser/skin/sidebars-right.svg ../resources/skin/sidebars-right.svg
 override chrome://browser/skin/library.svg ../resources/skin/library.svg
