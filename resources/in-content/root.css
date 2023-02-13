@@ -60,7 +60,7 @@ html|input:is([type="date"], [type="time"], [type="datetime-local"]) {
   outline-offset: unset;
 }
 
-@-moz-document plain-text-document(), media-document(all) {
+@-moz-document plain-text-document() {
   :root {
     font-family: Fira Code UC, Fira Code, SF Mono, -moz-fixed, monospace;
     font-weight: 300;
@@ -72,7 +72,9 @@ html|input:is([type="date"], [type="time"], [type="datetime-local"]) {
     font-family: Fira Code UC, Fira Code, SF Mono, -moz-fixed, monospace;
     font-weight: 300;
   }
+}
 
+@-moz-document plain-text-document(), media-document(all) {
   @media (prefers-color-scheme: dark) {
     :root {
       color: var(--plaintext-color) !important;

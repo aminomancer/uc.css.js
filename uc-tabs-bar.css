@@ -644,6 +644,12 @@ button.private-browsing-indicator:is(:hover:active, [open])::before {
   fill-opacity: inherit !important;
 }
 
+#vertical-tabs-pane[unpinned]:not([expanded]) #vertical-tabs-list .all-tabs-item .all-tabs-secondary-button {
+	transform: translateX(23px) !important;
+	margin-inline: revert !important;
+  opacity: 0 !important;
+}
+
 .all-tabs-item[pinned] > .all-tabs-button.subviewbutton > .toolbarbutton-text {
   background: url(chrome://userchrome/content/material/pin-45.svg) no-repeat 5px/12px !important;
 }

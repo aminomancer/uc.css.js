@@ -443,6 +443,7 @@ tooltip {
   background-color: transparent;
   color: var(--tooltip-color);
   border: none;
+  border-radius: 0;
   max-width: max(30vw, 40em);
   padding: 5px;
   pointer-events: none;
