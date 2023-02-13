@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Findbar Mods
-// @version        1.3.7
+// @version        1.3.8
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @long-description
@@ -278,13 +278,13 @@ class FindbarMods {
       `findbarClass._updateCaseSensitivity = function ${findbarClass._updateCaseSensitivity
         .toSource()
         .replace(/_updateCaseSensitivity/, ``)
-        .replace(/checkbox\.hidden/, `checkbox.disabled`)}`
+        .replace(/checkbox\.hidden/g, `checkbox.disabled`)}`
     );
     eval(
       `findbarClass._setEntireWord = function ${findbarClass._setEntireWord
         .toSource()
         .replace(/_setEntireWord/, ``)
-        .replace(/checkbox\.hidden/, `checkbox.disabled`)}`
+        .replace(/checkbox\.hidden/g, `checkbox.disabled`)}`
     );
     // override the native method that sets some findbar UI properties,
     // e.g. switching between normal and find-as-you-type mode.

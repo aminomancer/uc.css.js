@@ -233,12 +233,17 @@ findbar .matches-indicator {
   list-style-image: url(chrome://userchrome/content/menu-arrow-tiny.svg) !important;
 }
 
-:is(.findbar-find-previous, .findbar-find-next):not([disabled], [hidden]):is(:hover, :focus-visible) > .toolbarbutton-icon {
+:is(.findbar-find-previous, .findbar-find-next):not([disabled], [hidden]):hover > .toolbarbutton-icon {
   background: none !important;
   opacity: 1 !important;
 }
 
-:is(.findbar-entire-word, .findbar-case-sensitive):not([disabled], [hidden]):is(:hover, :focus-visible, [checked]) :is(.toolbarbutton-icon, .checkbox-icon) {
+:is(.findbar-find-previous, .findbar-find-next, .findbar-entire-word, .findbar-case-sensitive):not([disabled], [hidden]):focus-visible :is(.toolbarbutton-icon, .checkbox-icon) {
+  fill: var(--pink-action) !important;
+  opacity: 1 !important;
+}
+
+:is(.findbar-entire-word, .findbar-case-sensitive):not([disabled], [hidden]):is(:hover, [checked]) :is(.toolbarbutton-icon, .checkbox-icon) {
   background: none !important;
   opacity: 0.8 !important;
 }
