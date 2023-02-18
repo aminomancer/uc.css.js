@@ -40,6 +40,8 @@ user_pref("dom.forms.select.customstyling", false);
 user_pref("browser.tabs.tabmanager.enabled", true);
 // disable urlbar result group labels since we don't use them
 user_pref("browser.urlbar.groupLabels.enabled", false);
+// disable urlbar result menu buttons since they slow down tabbing through results
+user_pref("browser.urlbar.resultMenu", false);
 // corresponds to the system color Highlight
 user_pref("ui.highlight", "hsl(250, 100%, 60%)");
 // Background for selected <option> elements and others

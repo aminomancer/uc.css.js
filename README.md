@@ -95,6 +95,7 @@ I also recommend setting the following prefs in `about:config`. There are two pr
 | browser.urlbar.tabToSearch.onboard.interactionsLeft | Number | 0 | |
 | browser.urlbar.trimURLs | Boolean | false | Don't hide `http://` in the urlbar |
 | <i>browser.urlbar.groupLabels.enabled</i> | Boolean | false | Don't show urlbar result group labels like "Firefox Suggest" |
+| <i>browser.urlbar.resultMenu</i> | Boolean | false | Don't show meatball menu buttons on urlbar results |
 | full-screen-api.transition-duration.enter | String | `0 0` | Remove the fade in/out transition when switching to/from fullscreen |
 | full-screen-api.transition-duration.leave | String | `0 0` | |
 | full-screen-api.warning.delay | Number | -1 | Remove the warning when switching to/from fullscreen |

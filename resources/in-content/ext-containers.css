@@ -65,7 +65,7 @@
   }
 
   :root[uc-extension-id="@testpilot-containers"] .menu {
-    padding-block: revert !important;
+    padding: 0 !important;
   }
 
   :root[uc-extension-id="@testpilot-containers"] .menu-item {
@@ -76,6 +76,7 @@
     flex-flow: row nowrap;
     padding-inline: 0 8px !important;
     min-height: var(--subviewbutton-height) !important;
+    block-size: revert !important;
     user-select: none !important;
   }
 
@@ -101,6 +102,7 @@
   :root[uc-extension-id="@testpilot-containers"] .menu-item td {
     align-items: center !important;
     overflow: clip !important;
+    padding-inline-start: 0 !important;
   }
 
   :root[uc-extension-id="@testpilot-containers"] .menu-icon {
@@ -257,6 +259,7 @@
   :root[uc-extension-id="@testpilot-containers"] .sub-header-wrapper {
     margin: revert !important;
     color: inherit !important;
+    padding: 0 !important;
   }
 
   :root[uc-extension-id="@testpilot-containers"] .sub-header {
@@ -271,7 +274,7 @@
     cursor: default !important;
     width: 24px !important;
     height: 24px !important;
-    border-radius: var(--general-button-border-radius);
+    border-radius: var(--general-button-border-radius) !important;
     display: flex !important;
     align-items: center;
     justify-content: center;
@@ -281,11 +284,11 @@
 
   :root[uc-extension-id="@testpilot-containers"] .info-icon:is(:hover, :focus-visible) {
     fill-opacity: 1;
-    background-color: var(--uc-arrowpanel-dimmed);
+    background-color: var(--uc-arrowpanel-dimmed) !important;
   }
 
   :root[uc-extension-id="@testpilot-containers"] .info-icon:hover:active {
-    background-color: var(--uc-arrowpanel-dimmed-further);
+    background-color: var(--uc-arrowpanel-dimmed-further) !important;
   }
 
   :root[uc-extension-id="@testpilot-containers"] .info-icon img {
@@ -306,6 +309,7 @@
   :root[uc-extension-id="@testpilot-containers"] hr {
     margin: var(--menupopup-inner-padding-magnitude) !important;
     padding-block: 0 !important;
+    border-color: var(--menu-separator-color) !important;
   }
 
   :root[uc-extension-id="@testpilot-containers"] .panel {
@@ -350,6 +354,16 @@
 
   :root[uc-extension-id="@testpilot-containers"] #container-panel .identities-list {
     border-bottom: 1px solid var(--uc-desaturate-dimmed) !important;
+  }
+
+  :root[uc-extension-id="@testpilot-containers"] .menu {
+    padding-inline: revert !important;
+  }
+
+  :root[uc-extension-id="@testpilot-containers"] .searchbar {
+    margin-block: 4px !important;
+    padding-inline: 4px !important;
+    display: none !important;
   }
 
   :root[uc-extension-id="@testpilot-containers"] v-padding-hack-footer {
@@ -529,7 +543,6 @@
 
   :root[uc-extension-id="@testpilot-containers"] .menu-arrow {
     padding: 0px !important;
-    margin-right: var(--menu-right-margin) !important;
     min-width: 0 !important;
     width: var(--menu-right-size) !important;
     height: var(--menu-right-size) !important;
@@ -597,6 +610,7 @@
   :root[uc-extension-id="@testpilot-containers"] .menu-item td {
     border: none !important;
     flex-grow: 1;
+    padding-inline: 0 !important;
   }
 
   :root[uc-extension-id="@testpilot-containers"] .menu-item.drag-over td {
@@ -725,7 +739,7 @@
     border: none !important;
     box-shadow: none !important;
     block-size: revert !important;
-    column-gap: 4px;
+    column-gap: 8px;
   }
 
   :root[uc-extension-id="@testpilot-containers"] .alert-text {
@@ -743,10 +757,11 @@
     min-height: var(--subviewbutton-height) !important;
     width: 100% !important;
     inline-size: -moz-available !important;
-    margin-block-start: var(--menupopup-inner-padding-magnitude) !important;
-    padding-inline-start: 8px !important;
+    margin-inline: 0 !important;
+    padding-inline: 8px !important;
     cursor: default !important;
     background-color: var(--uc-arrowpanel-dimmed) !important;
+    color: var(--uc-parent-primary-button-text-color) !important;
     border: 1px solid transparent !important;
     transition: none !important;
     box-shadow: none !important;
@@ -839,9 +854,20 @@
   :root[uc-extension-id="@testpilot-containers"] :is(.moz-vpn-content, .moz-vpn-controller-content) {
     min-block-size: 0 !important;
     box-shadow: none !important;
-    border-top: 1px solid var(--hr-grey) !important;
+    border-top: none !important;
     margin: var(--menupopup-inner-padding-magnitude) 0 !important;
-    padding-block: 8px 0 !important;
+    padding-block: 0 !important;
+    transition: none !important;
+  }
+
+  :root[uc-extension-id="@testpilot-containers"] :is(.moz-vpn-content, .moz-vpn-controller-content)::before {
+    display: block;
+    content: "";
+    width: 100%;
+    height: 0;
+    border-top: 1px solid var(--hr-grey);
+    margin: var(--menupopup-inner-padding-magnitude) 0;
+    margin-block: 0 8px;
     transition: none !important;
   }
 

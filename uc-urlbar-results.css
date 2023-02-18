@@ -37,6 +37,7 @@ by underlining them (requires urlbarMods.uc.js) */
 
 .urlbarView-row {
   background: none !important;
+  border: none !important;
 }
 
 .urlbarView-row[selected]:not([dynamicType="quickactions"]) > .urlbarView-row-inner,
@@ -59,6 +60,8 @@ by underlining them (requires urlbarMods.uc.js) */
 
 .urlbarView .urlbarView-body-inner {
   border-top: none !important;
+  margin: revert !important;
+  width: revert !important;
 }
 
 #urlbarView-results,
