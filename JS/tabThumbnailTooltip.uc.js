@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Tab Thumbnail Tooltip
-// @version        1.0.6
+// @version        1.0.7
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Show a large thumbnail image to preview tab content when hovering a tab.
@@ -48,7 +48,7 @@ class TabThumbnail {
     // The character(s) to be shown in the middle of the label if it overflows
     // the limit set above. If the character limit above is set to 0 or -1, this
     // setting will have no effect. Wrap in backticks `
-    "Overflow terminal character": Services.prefs.getCharPref(
+    "Overflow terminal character": Services.prefs.getStringPref(
       "tabThumbnailTooltip.overflowTerminalCharacter",
       `…`
     ),
@@ -85,7 +85,9 @@ class TabThumbnail {
   hide-thumbnail="true"
   style="visibility: collapse">
   <vbox id="tabThumbBox">
-    <description id="tabThumbLabel" class="tooltip-label"/>
+    <vbox id="tabThumbLabelBox">
+      <description id="tabThumbLabel" class="tooltip-label"/>
+    </vbox>
     <toolbarseparator/>
     <html:div id="tabThumbCanvas"></html:div>
   </vbox>
@@ -132,13 +134,10 @@ class TabThumbnail {
       let limit = config["Max label character limit"];
       if (limit > 0 && label.length > limit) {
         let terminal = config["Overflow terminal character"] || "…";
-        label =
-          label.substring(0, limit / 2) + // 50
-          terminal + // 1
-          label.substring(
-            label.length + terminal.length - limit / 2,
-            label.length
-          ); // 49
+        label = `${label.substring(0, limit / 2)}${terminal}${label.substring(
+          label.length + terminal.length - limit / 2,
+          label.length
+        )}`;
       }
       this.tabLabel.textContent = label;
       await PageThumbs.captureToCanvas(
@@ -184,6 +183,7 @@ class TabThumbnail {
   background: transparent;
   border: none;
   padding: var(--tab-thumb-shadow-size);
+  -moz-box-layout: initial;
 }
 #tabThumbTooltip[position] {
   margin-inline-start: calc(-1 * var(--tab-thumb-shadow-size));
@@ -199,6 +199,11 @@ class TabThumbnail {
 }
 #tabThumbTooltip[hide-thumbnail] #tabThumbBox {
   border-radius: max(3px, var(--thumb-border-radius));
+}
+#tabThumbLabelBox {
+  max-width: ${config["Preview width"]}px;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 #tabThumbLabel {
   margin-inline: 5px;
@@ -221,6 +226,8 @@ class TabThumbnail {
   border: 1px solid var(--arrowpanel-border-color);
   width: ${config["Preview width"]}px;
   height: ${config["Preview height"]}px;
+  min-width: ${config["Preview width"]}px;
+  min-height: ${config["Preview height"]}px;
   max-width: ${config["Preview width"]}px;
   max-height: ${config["Preview height"]}px;
   background-image: -moz-element(#tabThumbImageCanvas);
