@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Bookmarks Menu & Button Shortcuts
-// @version        1.3.4
+// @version        1.3.5
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Adds some shortcuts for bookmarking pages. First, middle-clicking the bookmarks or library toolbar button will bookmark the current tab, or un-bookmark it if it's already bookmarked. Second, a menu item is added to the bookmarks toolbar button's popup, which bookmarks the current tab, or, if the page is already bookmarked, opens the bookmark editor popup. These are added primarily so that bookmarks can be added or removed with a single click, and can still be quickly added even if the bookmark page action is hidden for whatever reason. Third, another menu item is added to replicate the "Search bookmarks" button in the app menu's bookmarks panel. Clicking it will open the urlbar in bookmarks search mode.
@@ -100,11 +100,6 @@ const ucBookmarksShortcuts = {
     if (browser !== gBrowser.selectedBrowser) return;
     this.updateMenuItem(null, location);
   },
-  handlePlacesEvents(events) {
-    for (let e of events) {
-      if (e.url && e.url == BookmarkingUI._uri?.spec) this.updateMenuItem();
-    }
-  },
   async updateMenuItem(_e, location) {
     let uri;
     let menuitem = ucBookmarksShortcuts.bookmarkTab;
@@ -152,10 +147,13 @@ const ucBookmarksShortcuts = {
       );
     this.addMenuitems(node.querySelector("#BMB_bookmarksPopup"));
     gBrowser.addTabsProgressListener(this);
-    PlacesUtils.bookmarks.addObserver(this);
     PlacesUtils.observers.addListener(
-      ["bookmark-added", "bookmark-removed"],
-      this.handlePlacesEvents.bind(this)
+      ["bookmark-added", "bookmark-removed", "bookmark-url-changed"],
+      events => {
+        for (let e of events) {
+          if (e.url && e.url == BookmarkingUI._uri?.spec) this.updateMenuItem();
+        }
+      }
     );
     // set the "positionend" attribute on the view bookmarks sidebar menuitem.
     // this way we can swap between the left/right sidebar icons based on which

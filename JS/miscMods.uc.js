@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Misc. Mods
-// @version        2.0.7
+// @version        2.0.8
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Various tiny mods not worth making separate scripts for. Read the comments inside the script for details.
@@ -601,7 +601,7 @@
           onRight ? "left" : "right"
         );
         this._switcherPanel.hidden = false;
-        this._switcherPanel.openPopup(this._icon);
+        this._switcherPanel.openPopup(this._title.previousElementSibling);
         this._switcherTarget.classList.add("active");
       };
 
