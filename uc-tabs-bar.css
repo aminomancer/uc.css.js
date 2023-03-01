@@ -600,11 +600,6 @@ button.private-browsing-indicator:is(:hover:active, [open])::before {
   margin-inline-start: 0 !important;
 }
 
-/* temporarily revert flexbox emulation to make vertical tabs pane work. */
-#browser {
-  -moz-box-layout: revert !important;
-}
-
 #vertical-tabs-pane .all-tabs-item[pinned]:not([muted], [soundplaying], [activemedia-blocked]) .all-tabs-button .toolbarbutton-icon {
   mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><circle cx="100%" cy="100%" r="9"/></svg>') exclude 0/100% 100% no-repeat, linear-gradient(#fff, #fff);
   mask-position: 8px 8px;

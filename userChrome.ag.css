@@ -214,7 +214,7 @@ scrollbar[disabled="true"] {
 
 :is(scrollcorner, resizer, scrollbar, scrollbarbutton, slider):where(:-moz-native-anonymous) {
   /* cribbed from minimal-xul.css to avoid crashes */
-  -moz-box-layout: initial;
+  -moz-box-layout: legacy;
   direction: ltr;
   font: 16px sans-serif;
   justify-items: start;
