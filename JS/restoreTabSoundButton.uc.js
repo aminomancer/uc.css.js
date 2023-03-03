@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Restore pre-Proton Tab Sound Button
-// @version        2.4.0
+// @version        2.4.1
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -179,20 +179,23 @@ override chrome://browser/content/tabbrowser-tab.js ../resources/tabMods.uc.js
     icon.hidden = true;
     icon.setAttribute("type", pending ? "pending" : "secure");
   }
-  gBrowser.createTooltip = function(e) {
-    e.stopPropagation();
-    let tab = e.target.triggerNode ? e.target.triggerNode.closest("tab") : null;
+  gBrowser.createTooltip = function(event) {
+    event.stopPropagation();
+    let tab = event.target.triggerNode?.closest("tab");
     if (!tab) {
-      e.preventDefault();
+      event.preventDefault();
       return;
     }
+
+    const tooltip = event.target;
+    tooltip.removeAttribute("data-l10n-id");
+
     let tabRect = windowUtils.getBoundsWithoutFlushing(tab);
-    let id, args;
+    let id, args, raw;
     let align = true;
     let { linkedBrowser } = tab;
-    const selectedTabs = this.selectedTabs;
-    const contextTabInSelection = selectedTabs.includes(tab);
-    const tabCount = contextTabInSelection ? selectedTabs.length : 1;
+    const contextTabInSelection = this.selectedTabs.includes(tab);
+    const tabCount = contextTabInSelection ? this.selectedTabs.length : 1;
     if (tab.mOverCloseButton) {
       let rect = windowUtils.getBoundsWithoutFlushing(tab.closeButton);
       id = "tabbrowser-close-tabs-tooltip";
@@ -217,16 +220,17 @@ override chrome://browser/content/tabbrowser-tab.js ../resources/tabMods.uc.js
       }
       align = rect.right - tabRect.left < 250;
     } else {
-      id = "tabbrowser-tab-tooltip";
-      args = { title: this.getTabTooltip(tab, true) };
+      raw = this.getTabTooltip(tab, true);
     }
     if (align) {
-      e.target.setAttribute("position", "after_start");
-      e.target.moveToAnchor(tab, "after_start");
+      tooltip.setAttribute("position", "after_start");
+      tooltip.moveToAnchor(tab, "after_start");
     }
-    let title = e.target.querySelector(".places-tooltip-title");
+    let title = tooltip.querySelector(".places-tooltip-title");
     let localized = {};
-    if (id) {
+    if (raw) {
+      localized.label = raw;
+    } else if (id) {
       let [msg] = this.tabLocalization.formatMessagesSync([{ id, args }]);
       localized.value = msg.value;
       if (msg.attributes) {
@@ -235,19 +239,17 @@ override chrome://browser/content/tabbrowser-tab.js ../resources/tabMods.uc.js
     }
     title.textContent = localized.label ?? "";
     if (tab.getAttribute("customizemode") === "true") {
-      e.target
+      tooltip
         .querySelector(".places-tooltip-box")
         .setAttribute("desc-hidden", "true");
       return;
     }
-    let url = e.target.querySelector(".places-tooltip-uri");
+    let url = tooltip.querySelector(".places-tooltip-uri");
     url.value = linkedBrowser?.currentURI?.spec.replace(/^https:\/\//, "");
     setIdentityIcon(
-      e.target.querySelector("#places-tooltip-insecure-icon"),
+      tooltip.querySelector("#places-tooltip-insecure-icon"),
       tab
     );
-    e.target
-      .querySelector(".places-tooltip-box")
-      .removeAttribute("desc-hidden");
+    tooltip.querySelector(".places-tooltip-box").removeAttribute("desc-hidden");
   };
 })();
