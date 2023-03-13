@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           All Tabs Menu Expansion Pack
-// @version        2.1.6
+// @version        2.1.7
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @long-description
@@ -1010,7 +1010,7 @@ Next to the "new tab" button in Firefox there's a V-shaped button that opens a b
 .panel-subview-body > .all-tabs-item {
     border-radius: var(--arrowpanel-menuitem-border-radius);
     box-shadow: none;
-    -moz-box-align: center;
+    align-items: center;
     padding-inline-end: 2px;
     overflow: clip;
     position: relative;

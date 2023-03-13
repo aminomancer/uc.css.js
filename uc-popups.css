@@ -326,7 +326,7 @@ panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem[originaltype
   }
 
   #alertFooter {
-    -moz-box-align: center !important;
+    align-items: center !important;
   }
 
   #alertSourceLabel {
@@ -684,8 +684,8 @@ panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem[originaltype
   .month-year-view .spinner > div {
     align-self: center !important;
     padding-block: calc(var(--spinner-item-height) / 5) !important;
-    -moz-box-align: center !important;
-    -moz-box-pack: center !important;
+    align-items: center !important;
+    justify-items: center !important;
   }
 }
 
@@ -801,7 +801,7 @@ rtl languages. adjust the border radius accordingly */
 
 /* center text in any dialog box */
 .dialog-content-box {
-  -moz-box-pack: center;
+  justify-items: center;
 }
 
 @-moz-document url("chrome://global/content/commonDialog.xhtml"), url("chrome://mozapps/content/handling/permissionDialog.xhtml"), url("chrome://mozapps/content/handling/appChooser.xhtml"), url("chrome://global/content/appPicker.xhtml"), url("chrome://mozapps/content/downloads/unknownContentType.xhtml"), url-prefix("chrome://browser/content/sanitize.xhtml") {
@@ -860,12 +860,12 @@ rtl languages. adjust the border radius accordingly */
   }
 
   .dialog-button-box:not([hidden]) {
-    -moz-box-pack: end;
+    justify-items: end;
     margin-inline: 4px;
   }
 
   .dialog-button-box > button {
-    -moz-box-flex: 0.15;
+    flex: 0.15;
   }
 
   .dialog-button-box > button {
@@ -1851,8 +1851,8 @@ link[href="chrome://global/content/printPagination.css"]
   }
 
   #viewGroup > radio > .radio-label-box {
-    -moz-box-orient: initial !important;
-    -moz-box-pack: center !important;
+    flex-flow: row nowrap !important;
+    justify-items: center !important;
     min-height: var(--subviewbutton-height) !important;
     border-radius: var(--general-button-border-radius);
   }
@@ -1876,20 +1876,20 @@ link[href="chrome://global/content/printPagination.css"]
     margin-inline-end: 6px !important;
   }
 
-  #generalTab {
-    list-style-image: url(chrome://userchrome/content/document.svg) !important;
+  #generalTab .radio-icon {
+    background-image: url(chrome://userchrome/content/document.svg) !important;
   }
 
-  #mediaTab {
-    list-style-image: url(chrome://userchrome/content/notifications/canvas.svg) !important;
+  #mediaTab .radio-icon {
+    background-image: url(chrome://userchrome/content/notifications/canvas.svg) !important;
   }
 
-  #permTab {
-    list-style-image: url(chrome://userchrome/content/formfill.svg) !important;
+  #permTab .radio-icon {
+    background-image: url(chrome://userchrome/content/formfill.svg) !important;
   }
 
-  #securityTab {
-    list-style-image: url(chrome://userchrome/content/privacy-security.svg) !important;
+  #securityTab .radio-icon {
+    background-image: url(chrome://userchrome/content/privacy-security.svg) !important;
   }
 
   #securityTab:hover,
@@ -1904,12 +1904,33 @@ link[href="chrome://global/content/printPagination.css"]
 
   richlistbox,
   treecol,
-  treecolpicker,
+  .tree-columnpicker-button,
   button {
     appearance: none !important;
     background-color: var(--uc-arrowpanel-dimmed) !important;
     color: var(--uc-arrowpanel-color) !important;
     border-color: var(--button-solid-active-background) !important;
+  }
+
+  tree splitter {
+    appearance: none !important;
+    background-color: transparent !important;
+  }
+
+  tree splitter::before {
+    content: "";
+    flex: 1;
+    width: 1px;
+    border-right: 1px solid var(--button-solid-active-background);
+  }
+
+  tree splitter:hover::before {
+    border-color: var(--uc-arrowpanel-dimmed);
+  }
+
+  .tree-columnpicker-button {
+    border-radius: 0 !important;
+    border: 0 !important;
   }
 
   tree,
@@ -1919,7 +1940,7 @@ link[href="chrome://global/content/printPagination.css"]
     background: var(--ui-secondary-bg) !important;
     color: var(--uc-arrowpanel-color) !important;
     border-radius: var(--general-button-border-radius) !important;
-    overflow: clip !important;
+    overflow: auto !important;
     border: 1px solid var(--button-solid-active-background) !important;
   }
 
@@ -1936,16 +1957,20 @@ link[href="chrome://global/content/printPagination.css"]
   }
 
   treecol,
-  treecolpicker {
+  .tree-columnpicker-button {
     box-shadow: inset 0 -1px var(--button-solid-active-background) !important;
   }
 
-  :is(treecol, treecolpicker):not([hideheader]) {
+  :is(treecol, .tree-columnpicker-button):not([hideheader]) {
     height: 24px;
   }
 
-  :is(treecol, treecolpicker):where(:hover) {
+  :is(treecol, .tree-columnpicker-button):hover {
     background-color: var(--uc-arrowpanel-dimmed-further) !important;
+  }
+
+  :is(treecol, .tree-columnpicker-button):hover:active {
+    background-color: var(--uc-arrowpanel-dimmed-even-further) !important;
   }
 
   treechildren {
@@ -1994,6 +2019,8 @@ link[href="chrome://global/content/printPagination.css"]
   .checkbox-check,
   .radio-check {
     appearance: none !important;
+    min-width: 14px !important;
+    min-height: 14px !important;
     --checkbox-border-color: var(--uc-checkbox-border-color) !important;
     --checkbox-checked-border-color: var(--uc-checkbox-checked-border-color) !important;
     --checkbox-unchecked-bgcolor: var(--uc-checkbox-unchecked-bgcolor) !important;
@@ -2011,7 +2038,7 @@ link[href="chrome://global/content/printPagination.css"]
     background-color: var(--checkbox-unchecked-bgcolor, Field);
     border: 1px solid currentColor;
     border-radius: 50%;
-    -moz-box-align: center;
+    align-items: center;
     min-width: 13px;
     min-height: 13px;
   }
@@ -2047,6 +2074,10 @@ link[href="chrome://global/content/printPagination.css"]
 
   radio[disabled="true"] {
     color: var(--uc-menu-disabled-color) !important;
+  }
+
+  radio[disabled="true"] > .radio-check {
+    opacity: var(--ui-disabled-alpha) !important;
   }
 
   #imagecontainerbox {

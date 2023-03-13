@@ -217,7 +217,7 @@ menupopup menuitem[class^="unified-nav"][type="radio"]:not([checked="true"])::be
 }
 
 menupopup menuitem[class^="unified-nav"][type="radio"]:not([checked="true"]) :is(.menu-iconic-left, .menu-iconic-icon) {
-  display: -moz-box !important;
+  display: flex !important;
 }
 
 menupopup menuitem[class^="unified-nav"] .menu-iconic-accel:not([value]):empty {
@@ -398,7 +398,7 @@ panel menupopup.in-menulist {
 
 #ContentSelectDropdown menupopup.in-menulist menuitem:is([label=" "], [label=""], :not([label]))[value="0"]::after {
   content: "(Empty)";
-  display: -moz-box;
+  display: flex;
   color: var(--menu-disabled-color);
 }
 
@@ -455,7 +455,7 @@ menuitem[default="true"] {
 
   @-moz-document url(chrome://browser/content/browser.xhtml) {
     #contentAreaContextMenu menuseparator:not([id]) {
-      display: -moz-box !important;
+      display: flex !important;
     }
   }
 }
@@ -476,7 +476,7 @@ menuitem[default="true"] {
 :is(#context-navigation, #tab-context-navigation) .menu-iconic-left {
   height: 38px;
   padding: 0 !important;
-  -moz-box-flex: 1;
+  flex: 1;
   border-radius: var(--arrowpanel-menuitem-border-radius);
 }
 

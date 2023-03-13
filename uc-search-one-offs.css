@@ -8,7 +8,7 @@
 it also changes the appearance of the one-offs in the searchbar. */
 
 #PopupSearchAutoComplete .search-one-offs {
-  -moz-box-orient: horizontal !important;
+  flex-flow: row nowrap !important;
   max-width: 100% !important;
   width: 100% !important;
   min-width: 0 !important;
@@ -265,7 +265,7 @@ google engine without changing the engine's name */
 
 #urlbar-search-one-offs-separator {
   width: calc(100% - 4px) !important;
-  -moz-box-align: center !important;
+  align-items: center !important;
   margin: 2px !important;
 }
 

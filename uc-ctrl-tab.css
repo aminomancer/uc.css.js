@@ -96,8 +96,8 @@
 }
 
 .ctrlTab-favicon-container {
-  -moz-box-align: start !important;
-  -moz-box-pack: start !important;
+  align-items: start !important;
+  justify-items: start !important;
   box-shadow: none !important;
   margin-inline-start: 7px !important;
   margin-top: 7px !important;

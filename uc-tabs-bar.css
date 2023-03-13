@@ -21,7 +21,7 @@ titlebar, this sheet controls their appearance as well. */
 .titlebar-spacer[type="post-tabs"],
 #toolbar-menubar > spacer {
   width: var(--titlebar-spacer-width, 32px) !important;
-  display: -moz-box !important;
+  display: flex !important;
 }
 
 /* split the width in half to center the menubar between the tabs and the titlebar buttons */
@@ -41,7 +41,7 @@ titlebar, this sheet controls their appearance as well. */
 }
 
 #titlebar {
-  -moz-box-orient: horizontal !important;
+  flex-flow: row nowrap !important;
 }
 
 #tabbrowser-tabs {
@@ -50,7 +50,7 @@ titlebar, this sheet controls their appearance as well. */
 
 /* menubar next to tabs (merge tabs bar with titlebar menubar and flow them horizontally) */
 #toolbar-menubar {
-  -moz-box-ordinal-group: 2;
+  order: 2;
 }
 
 #toolbar-menubar[autohide="true"][inactive="true"]:not([customizing="true"]) {
@@ -80,11 +80,7 @@ titlebar, this sheet controls their appearance as well. */
 
 /* menubar buttons */
 #main-menubar {
-  -moz-box-flex: 1 !important;
-}
-
-#toolbar-menubar #menubar-items {
-  -moz-box-pack: center !important;
+  flex-grow: 1 !important;
 }
 
 #main-menubar > menu > menupopup {
@@ -99,7 +95,6 @@ titlebar, this sheet controls their appearance as well. */
 }
 
 #toolbar-menubar #main-menubar > menu > label {
-  -moz-box-flex: 1000 !important;
   margin: 0 !important;
   padding: 4px 8px 5px 8px !important;
   border-radius: var(--toolbarbutton-border-radius) !important;
@@ -145,11 +140,6 @@ titlebar, this sheet controls their appearance as well. */
 #tabs-newtab-button,
 #newPrivateTab-button {
   display: none !important;
-}
-
-#new-tab-button,
-#privateTab-button {
-  display: -moz-box !important;
 }
 
 /* get rid of drop shadow drawn on leftmost visible tab */
@@ -236,7 +226,6 @@ overflowing tabs don't draw shadows on the special new tab button */
 
 /* macOS style window controls */
 .titlebar-button {
-  display: -moz-box !important;
   border: none;
   margin: 0 !important;
   padding: 8px 17px;
@@ -285,7 +274,6 @@ overflowing tabs don't draw shadows on the special new tab button */
   list-style-image: url(chrome://userchrome/content/window/maximize.svg) !important;
   grid-column: 1 !important;
   order: 1 !important;
-  -moz-box-ordinal-group: 1 !important;
 }
 
 :is(.titlebar-max, .uc-titlebar-max):hover {
@@ -308,7 +296,6 @@ overflowing tabs don't draw shadows on the special new tab button */
   margin-bottom: 0px !important;
   background-color: transparent !important;
   list-style-image: url(chrome://userchrome/content/window/minimize.svg) !important;
-  -moz-box-ordinal-group: 2 !important;
 }
 
 :is(.titlebar-min, .uc-titlebar-min):hover {
@@ -327,7 +314,6 @@ overflowing tabs don't draw shadows on the special new tab button */
   margin-bottom: 0px !important;
   background-color: transparent !important;
   list-style-image: url(chrome://userchrome/content/window/close.svg) !important;
-  -moz-box-ordinal-group: 3 !important;
 }
 
 :is(.titlebar-close, .uc-titlebar-close):hover {
@@ -347,8 +333,7 @@ overflowing tabs don't draw shadows on the special new tab button */
   outline: 0;
   fill: currentColor !important;
   -moz-context-properties: fill, fill-opacity !important;
-  -moz-box-align: center !important;
-  -moz-box-pack: center !important;
+  align-items: center !important;
 }
 
 .private-browsing-indicator {
@@ -362,7 +347,6 @@ overflowing tabs don't draw shadows on the special new tab button */
 
 .private-browsing-indicator::before {
   content: "";
-  display: -moz-box;
   box-sizing: border-box !important;
   width: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
   height: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
@@ -412,7 +396,7 @@ button.private-browsing-indicator:is(:hover:active, [open])::before {
   box-shadow: none !important;
   margin-inline: 4px !important;
   min-height: 28px !important;
-  -moz-box-align: center;
+  align-items: center;
   padding-inline-end: 2px;
 }
 
@@ -669,37 +653,37 @@ button.private-browsing-indicator:is(:hover:active, [open])::before {
 @media (-moz-platform: macos), (-moz-platform: linux) {
   .titlebar-buttonbox-container,
   #toolbar-menubar > .titlebar-buttonbox-container {
-    -moz-box-ordinal-group: 0 !important;
+    order: 0 !important;
   }
 
   #toolbar-menubar > spacer,
   .titlebar-spacer[type="pre-tabs"] {
-    -moz-box-ordinal-group: 1 !important;
+    order: 1 !important;
   }
 
   #toolbar-menubar > * {
-    -moz-box-ordinal-group: 2 !important;
+    order: 2 !important;
   }
 
   #toolbar-menubar {
-    -moz-box-ordinal-group: 0 !important;
+    order: 0 !important;
   }
 
   .titlebar-min,
   .uc-titlebar-min {
-    -moz-box-ordinal-group: 2 !important;
+    order: 2 !important;
   }
 
   .titlebar-max,
   .uc-titlebar-max,
   .titlebar-restore,
   .uc-titlebar-restore {
-    -moz-box-ordinal-group: 3 !important;
+    order: 3 !important;
   }
 
   .titlebar-close,
   .uc-titlebar-close {
-    -moz-box-ordinal-group: 1 !important;
+    order: 1 !important;
   }
 
   #TabsToolbar,
@@ -714,7 +698,7 @@ button.private-browsing-indicator:is(:hover:active, [open])::before {
   #toolbar-menubar > spacer,
   .titlebar-spacer[type="pre-tabs"] {
     width: 8px !important;
-    display: -moz-box !important;
+    display: flex !important;
   }
 
   .titlebar-spacer[type="post-tabs"] {
@@ -746,37 +730,37 @@ button.private-browsing-indicator:is(:hover:active, [open])::before {
 @supports -moz-bool-pref("userChrome.css.titlebar-buttons-on-left") {
   .titlebar-buttonbox-container,
   #toolbar-menubar > .titlebar-buttonbox-container {
-    -moz-box-ordinal-group: 0 !important;
+    order: 0 !important;
   }
 
   .titlebar-min,
   .uc-titlebar-min {
-    -moz-box-ordinal-group: 2 !important;
+    order: 2 !important;
   }
 
   .titlebar-max,
   .uc-titlebar-max,
   .titlebar-restore,
   .uc-titlebar-restore {
-    -moz-box-ordinal-group: 3 !important;
+    order: 3 !important;
   }
 
   .titlebar-close,
   .uc-titlebar-close {
-    -moz-box-ordinal-group: 1 !important;
+    order: 1 !important;
   }
 
   #toolbar-menubar > spacer,
   .titlebar-spacer[type="pre-tabs"] {
-    -moz-box-ordinal-group: 1 !important;
+    order: 1 !important;
   }
 
   #toolbar-menubar > * {
-    -moz-box-ordinal-group: 2 !important;
+    order: 2 !important;
   }
 
   #toolbar-menubar {
-    -moz-box-ordinal-group: 0 !important;
+    order: 0 !important;
   }
 
   #TabsToolbar,
@@ -791,7 +775,7 @@ button.private-browsing-indicator:is(:hover:active, [open])::before {
   #toolbar-menubar > spacer,
   .titlebar-spacer[type="pre-tabs"] {
     width: 8px !important;
-    display: -moz-box !important;
+    display: flex !important;
   }
 
   .titlebar-spacer[type="post-tabs"] {

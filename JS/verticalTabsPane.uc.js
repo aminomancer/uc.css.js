@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Vertical Tabs Pane
-// @version        1.7.4
+// @version        1.7.5
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -1956,7 +1956,7 @@ When you collapse the pane with the unpin button, it collapses to a small width 
   margin-inline-end: var(--vertical-tabs-padding);
 }
 #vertical-tabs-pane[no-expand][unpinned] #vertical-tabs-buttons-row {
-  -moz-box-orient: vertical;
+  flex-flow: column nowrap;
 }
 #vertical-tabs-buttons-row > toolbarbutton {
   margin: 0 !important;
@@ -1981,7 +1981,7 @@ When you collapse the pane with the unpin button, it collapses to a small width 
 #vertical-tabs-list .all-tabs-item {
   border-radius: var(--arrowpanel-menuitem-border-radius);
   box-shadow: none;
-  -moz-box-align: center;
+  align-items: center;
   padding-inline-end: 2px;
   margin: 0;
   overflow: clip;
@@ -2321,7 +2321,7 @@ When you collapse the pane with the unpin button, it collapses to a small width 
 #vertical-tabs-pane[unpinned]:not([expanded])
   :is(.all-tabs-item, .subviewbutton) {
   margin: 0 !important;
-  -moz-box-pack: start !important;
+  justify-items: start !important;
 }
 #vertical-tabs-pane[unpinned]:not([no-expand])
   #vertical-tabs-buttons-row
@@ -2398,7 +2398,7 @@ When you collapse the pane with the unpin button, it collapses to a small width 
   list-style-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="context-fill" fill-opacity="context-fill-opacity" d="M14.707 13.293L11.414 10l2.293-2.293a1 1 0 0 0 0-1.414A4.384 4.384 0 0 0 10.586 5h-.172A2.415 2.415 0 0 1 8 2.586V2a1 1 0 0 0-1.707-.707l-5 5A1 1 0 0 0 2 8h.586A2.415 2.415 0 0 1 5 10.414v.169a4.036 4.036 0 0 0 1.337 3.166 1 1 0 0 0 1.37-.042L10 11.414l3.293 3.293a1 1 0 0 0 1.414-1.414zm-7.578-1.837A2.684 2.684 0 0 1 7 10.583v-.169a4.386 4.386 0 0 0-1.292-3.121 4.414 4.414 0 0 0-1.572-1.015l2.143-2.142a4.4 4.4 0 0 0 1.013 1.571A4.384 4.384 0 0 0 10.414 7h.172a2.4 2.4 0 0 1 .848.152z"/></svg>');
 }
 #vertical-tabs-tooltip > .places-tooltip-box > hbox {
-  -moz-box-align: center;
+  align-items: center;
 }
 #vertical-tabs-tooltip #places-tooltip-insecure-icon {
   min-width: 1em;

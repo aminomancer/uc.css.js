@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Navbar Toolbar Button Slider
-// @version        2.9.0
+// @version        2.9.1
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @long-description
@@ -708,7 +708,7 @@ class NavbarToolbarSlider {
       clicktoscroll: true,
       orient: "horizontal",
       style:
-        "-moz-box-align: stretch; -moz-box-orient: vertical; scrollbar-width: none; box-sizing: border-box; scroll-behavior: smooth; overflow: hidden; transition: max-width 0.2s ease-out;",
+        "align-items: stretch; flex-flow: column nowrap; scrollbar-width: none; box-sizing: border-box; scroll-behavior: smooth; overflow: hidden; transition: max-width 0.2s ease-out;",
     })) {
       outer.setAttribute(key, val);
     }
@@ -717,7 +717,7 @@ class NavbarToolbarSlider {
     for (const [key, val] of Object.entries({
       class: "slider-inner-container",
       id: "nav-bar-toolbarbutton-slider",
-      style: "-moz-box-flex: 1;",
+      style: "flex: 1;",
     })) {
       inner.setAttribute(key, val);
     }

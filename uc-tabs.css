@@ -80,8 +80,8 @@
 }
 
 .tabbrowser-tab .tab-context-line {
-  display: -moz-box !important;
-  -moz-box-ordinal-group: 2 !important;
+  display: flex !important;
+  order: 2 !important;
   height: 1px !important;
   margin: 0 !important;
   opacity: 1 !important;
@@ -104,7 +104,7 @@
 
 .tabbrowser-tab.identity-icon-on-multiselect[usercontextid][multiselected="true"] .tab-content::after {
   content: "";
-  display: -moz-box;
+  display: flex;
   height: 12px;
   width: 12px;
   margin-inline: 3px;
@@ -463,7 +463,7 @@ restoreTabSoundButton.uc.js since sound icon no longer exists in vanilla firefox
 }
 
 .tab-close-button {
-  -moz-box-ordinal-group: 0;
+  order: 0;
   display: block !important;
   -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity !important;
   position: relative;
@@ -482,7 +482,7 @@ restoreTabSoundButton.uc.js since sound icon no longer exists in vanilla firefox
   background-repeat: no-repeat !important;
   list-style-image: none !important;
   -moz-context-properties: fill, fill-opacity !important;
-  -moz-box-ordinal-group: 2 !important;
+  order: 2 !important;
   fill-opacity: 0.6 !important;
 }
 
@@ -591,8 +591,8 @@ hover the general area of the tabs, but will show if audio is muted. */
 }
 
 #tabbrowser-tabs[movingtab] .tabbrowser-tab[selected]:not([pinned]) .tab-close-button {
-  -moz-box-ordinal-group: 0 !important;
-  display: -moz-box !important;
+  order: 0 !important;
+  display: flex !important;
   position: relative !important;
   margin-right: -16px !important;
   z-index: 1 !important;
@@ -739,7 +739,7 @@ the 2 alternate rules below. one of the 3 should work. you can do the same
 thing with the all-tabs-menu loading icons in the next ruleset below. */
   :root[sessionrestored] .tab-throbber[throbber-loaded]::before {
     content: "" !important;
-    display: -moz-box !important;
+    display: flex !important;
     -moz-context-properties: fill, fill-opacity !important;
     width: 16px !important;
     height: 16px !important;

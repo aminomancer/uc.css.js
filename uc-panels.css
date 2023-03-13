@@ -95,7 +95,7 @@ no longer necessary after modern flexbox emulation. */
 }
 
 .protections-popup-list.empty > vbox {
-  -moz-box-align: center !important;
+  align-items: center !important;
 }
 
 .protections-popup-list.empty image {
@@ -149,7 +149,7 @@ no longer necessary after modern flexbox emulation. */
 #identity-popup,
 #protections-popup,
 #permission-popup {
-  margin-top: -1px !important;
+  margin-top: -9px !important;
 }
 
 #customizationui-widget-panel.bookmarks-toolbar {
@@ -404,7 +404,7 @@ no longer necessary after modern flexbox emulation. */
 .protections-popup-tp-switch-label-box,
 .protections-popup-tp-switch-box {
   min-height: 40px !important;
-  -moz-box-pack: center;
+  justify-content: center;
   position: relative;
 }
 
@@ -454,8 +454,8 @@ no longer necessary after modern flexbox emulation. */
   padding: 6px 16px !important;
   min-height: var(--subviewbutton-height, 28px) !important;
   min-width: var(--subviewbutton-height, 28px) !important;
-  -moz-box-align: center !important;
-  -moz-box-pack: center !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 .popup-notification-button-container > button[disabled] {
@@ -599,7 +599,7 @@ popupnotificationcontent {
   margin: 0 !important;
   width: var(--subviewbutton-height) !important;
   opacity: 0.6 !important;
-  -moz-box-pack: center !important;
+  justify-content: center !important;
 }
 
 #password-notification-username-dropmarker:is(:hover, :focus-visible) {
@@ -752,8 +752,8 @@ popupnotificationcontent label[control]:not([hidden]) + menulist {
   outline: none !important;
   box-shadow: none !important;
   border-radius: var(--context-menuitem-border-radius) !important;
-  -moz-box-pack: center !important;
-  -moz-box-align: center !important;
+  justify-content: center !important;
+  align-items: center !important;
 }
 
 .permission-popup-permission-remove-button[disabled="true"] {
@@ -1275,8 +1275,8 @@ toolbar button slider script. but just in case) */
   appearance: none !important;
   margin: 2px !important;
   padding: 0 !important;
-  -moz-box-pack: center !important;
-  display: -moz-box !important;
+  justify-content: center !important;
+  display: flex !important;
   border-radius: var(--toolbarbutton-border-radius) !important;
   width: 28px !important;
   height: 28px !important;
@@ -1416,9 +1416,9 @@ toolbar button slider script. but just in case) */
 }
 
 #downloadsPanel:not([hasdownloads]) .panel-view-body-unscrollable {
-  -moz-box-align: center !important;
-  -moz-box-pack: center !important;
-  height: 44px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 44px !important;
 }
 
 .popup-notification-description {
@@ -1539,7 +1539,7 @@ toolbar button slider script. but just in case) */
 /* profiler panel */
 #PanelUI-profiler-header-bar {
   min-height: 40px !important;
-  -moz-box-align: center !important;
+  align-items: center !important;
   border-bottom: 1px solid var(--panel-separator-color) !important;
   margin: 0 var(--panel-separator-margin) !important;
 }

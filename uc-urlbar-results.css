@@ -219,7 +219,7 @@ by underlining them (requires urlbarMods.uc.js) */
 .urlbarView-row:is([type="switchtab"], [type="bookmark"], [type="remotetab"], [type="dynamic"], [pinned]) .urlbarView-type-icon {
   fill-opacity: inherit !important;
   margin-block: 0 !important;
-  display: -moz-box !important;
+  display: flex !important;
 }
 
 .urlbarView-row[pinned] .urlbarView-type-icon {
@@ -414,8 +414,8 @@ by underlining them (requires urlbarMods.uc.js) */
   padding-block: 0px 0px !important;
   padding-inline: 0px 0px !important;
   padding: 0 !important;
-  -moz-box-pack: center !important;
-  -moz-box-align: center !important;
+  justify-items: center !important;
+  align-items: center !important;
   margin: 0 !important;
 }
 
@@ -474,8 +474,7 @@ by underlining them (requires urlbarMods.uc.js) */
 .urlbarView-row .urlbarView-row-inner > .urlbarView-no-wrap > .urlbarView-title-separator,
 .urlbarView-dynamic-calculator-action::before,
 .urlbarView-dynamic-unitConversion-action::before {
-  -moz-box-align: center;
-  display: -moz-box;
+  align-items: center;
   display: none !important;
 }
 
@@ -485,7 +484,7 @@ by underlining them (requires urlbarMods.uc.js) */
   content: "" !important;
   width: 15px;
   height: 2px;
-  display: -moz-box;
+  display: flex;
   color: var(--panel-shortcut-color);
   border-bottom: 1px solid currentColor;
   opacity: 1 !important;
@@ -943,7 +942,7 @@ so you might wanna turn the animation off. I might even make it off by default. 
 }
 
 .urlbarView-results[wrap] .urlbarView-row[has-url]:is([type="remotetab"], [sponsored]) > .urlbarView-row-inner > .urlbarView-no-wrap > .urlbarView-action {
-  display: -moz-box !important;
+  display: flex !important;
 }
 
 .urlbarView:not([actionoverride]) .urlbarView-results[wrap] .urlbarView-row[has-url]:is([type="remotetab"], [sponsored]) > .urlbarView-row-inner > .urlbarView-url {

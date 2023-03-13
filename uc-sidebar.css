@@ -82,7 +82,6 @@ for use with tooltipStyler.uc.js - won't do anything without that script. */
 
 #sidebar-switcher-target {
   min-height: 28px !important;
-  min-width: 28px !important;
   padding-inline: 6px !important;
 }
 

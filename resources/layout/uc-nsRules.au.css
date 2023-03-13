@@ -18,11 +18,6 @@ from the style editor in the browser toolbox. */
     -moz-window-shadow: none;
   }
 
-  :is(panel, menupopup)::part(content) {
-    display: -moz-box;
-    -moz-box-flex: 1;
-  }
-
   @-moz-document url(chrome://browser/content/browser.xhtml) {
     :is(panel, menupopup)::part(arrow) {
       display: -moz-inline-box;

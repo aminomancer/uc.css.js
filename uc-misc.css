@@ -385,7 +385,7 @@ progress[paused]:indeterminate::-moz-progress-bar {
   width: auto !important;
   min-width: unset !important;
   max-width: unset !important;
-  -moz-box-align: center !important;
+  align-items: center !important;
 }
 
 /* selection */

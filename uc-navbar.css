@@ -44,7 +44,7 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
   box-shadow: 0 1px 1px -1px #ffffff4d inset, 0 -1px 1px -1px #00000080 inset, 0 1px 1px #1e1e2026, 0 1px 3px #1e1e2033 !important;
   min-width: 10.5px !important;
   height: 10.5px !important;
-  -moz-box-align: end !important;
+  align-items: end !important;
   font-size: 9px !important;
   font-weight: var(--uc-font-weight-bold, 600) !important;
   line-height: 10px !important;
@@ -113,7 +113,7 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
 }
 
 .widget-overflow-list .toolbaritem-combined-buttons .toolbarbutton-1:not([hidden]) {
-  justify-content: center !important;
+  justify-items: center !important;
   display: flex !important;
 }
 
@@ -150,7 +150,7 @@ toolbarpaletteitem[place="palette"] > toolbarspring {
   appearance: none !important;
   margin: 0 !important;
   padding: 0 var(--toolbarbutton-outer-padding) !important;
-  -moz-box-pack: center !important;
+  justify-items: center !important;
 }
 
 .customization-palette .toolbarbutton-1 > .toolbarbutton-icon {
@@ -193,8 +193,8 @@ toolbar .toolbarbutton-1 > .toolbarbutton-badge-stack {
 #wrapper-zoom-controls[place="palette"] > #zoom-controls > #zoom-in-button,
 #wrapper-edit-controls[place="palette"] > #edit-controls > #paste-button,
 #wrapper-profiler-button[place="palette"] > #profiler-button > #profiler-button-dropmarker {
-	-moz-box-align: center !important;
-  -moz-box-flex: 0 !important;
+	align-items: center !important;
+  flex: 0 !important;
 }
 
 :where(toolbar:not(#PersonalToolbar), .customization-palette) #zoom-controls > :is(#zoom-out-button, #zoom-in-button) {
@@ -459,7 +459,7 @@ toolbarbutton.bookmark-item:not(.subviewbutton) {
   padding: var(--bookmark-block-padding) 4px;
   min-height: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
   min-width: calc(2 * var(--toolbarbutton-inner-padding) + 16px) !important;
-  -moz-box-align: center !important;
+  align-items: center !important;
 }
 
 #PersonalToolbar .toolbarbutton-1,
@@ -744,7 +744,7 @@ translucent with acrylic effect. enable layout.css.backdrop-filter.enabled */
   height: 22px !important;
   padding-inline: 5px !important;
   margin-inline-end: 1px !important;
-  -moz-box-flex: 1 !important;
+  flex: 1 !important;
 }
 
 .notificationbox-stack notification > hbox[anonid="details"] {
@@ -856,7 +856,7 @@ link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infob
 link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infobar .notification-content .notification-button {
   margin: revert !important;
   outline-offset: 0 !important;
-  -moz-box-align: center !important;
+  align-items: center !important;
 }
 
 .notificationbox-stack notification :is(button, toolbarbutton),

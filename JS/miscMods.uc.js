@@ -199,7 +199,7 @@
     // .tabbrowser-tab.identity-icon-on-multiselect[usercontextid][multiselected="true"]
     //   .tab-content::after {
     //   content: "";
-    //   display: -moz-box;
+    //   display: flex;
     //   height: 12px;
     //   width: 12px;
     //   margin-inline: 3px;

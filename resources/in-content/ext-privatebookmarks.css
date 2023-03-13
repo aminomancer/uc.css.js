@@ -274,7 +274,7 @@
 
   :root[uc-extension-id="private-bookmarks@rharel"] #on-hold-progress-bar::before {
     content: "" !important;
-    display: -moz-box !important;
+    display: flex !important;
     background-repeat: no-repeat !important;
     background-image: url(chrome://userchrome/content/loading-spinner-sprite.svg) !important;
     background-position: left center !important;

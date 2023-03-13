@@ -124,7 +124,7 @@
 
   #downloadsPanel-blockedSubview-title {
     margin-bottom: 10px !important;
-    -moz-box-ordinal-group: 2 !important;
+    order: 2 !important;
     margin-inline: 0 !important;
   }
 
@@ -190,8 +190,8 @@
     border: 0 !important;
     outline: none !important;
     border-radius: 0 !important;
-    -moz-box-align: center !important;
-    -moz-box-pack: center !important;
+    align-items: center !important;
+    justify-items: center !important;
   }
 
   #downloadsListBox richlistitem.download-state > .downloadButton {

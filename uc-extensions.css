@@ -502,7 +502,7 @@ menupopup#viewSidebarMenu menuitem.menuitem-iconic.webextension-menuitem#menu_no
 /* make multithreaded download manager context menu item's English label smaller.
 do nothing for other languages since idk if the item is too long in other languages. */
 #multithreaded-download-manager_qw_linux-2g64_local-menuitem-_link-context-menu[label="Download with Multithreaded Download Manager"] .menu-iconic-left {
-  -moz-box-flex: 1;
+  flex: 1;
 }
 
 #multithreaded-download-manager_qw_linux-2g64_local-menuitem-_link-context-menu[label="Download with Multithreaded Download Manager"] .menu-iconic-text {
@@ -512,7 +512,7 @@ do nothing for other languages since idk if the item is too long in other langua
 #multithreaded-download-manager_qw_linux-2g64_local-menuitem-_link-context-menu[label="Download with Multithreaded Download Manager"] .menu-iconic-left::after {
   content: "Download (Multithreaded)";
   display: -moz-inline-box;
-  -moz-box-flex: 1;
+  flex: 1;
 }
 
 /* fix inconsistent string casing of menuitems in Multithreaded Download Manager */
@@ -522,7 +522,7 @@ do nothing for other languages since idk if the item is too long in other langua
 
 :is(menu, menuitem)[id^="multithreaded-download-manager"]:is([label="Open in new tab"], [label="Open in new window"], [label="Open in sidebar"]) > .menu-accel-container::before {
   display: -moz-inline-box;
-  -moz-box-flex: 1;
+  flex: 1;
 }
 
 :is(menu, menuitem)[id^="multithreaded-download-manager"][label="Open in new tab"] > .menu-accel-container::before {
@@ -562,7 +562,7 @@ menuitem[id^="sort-bookmarks_heftig-menuitem"][label="Sort this folder…"] > la
 
 menuitem[id^="sort-bookmarks_heftig-menuitem"][label="Sort this folder…"] > .menu-accel-container::before {
   display: -moz-inline-box;
-  -moz-box-flex: 1;
+  flex: 1;
 }
 
 menuitem[id^="sort-bookmarks_heftig-menuitem"][label="Sort this folder…"] > .menu-accel-container::before {
@@ -617,7 +617,7 @@ menuitem[id^="sort-bookmarks_heftig-menuitem"][label="Sort this folder…"] > .m
 #simple-translate_sienori-menuitem-_translateLink[label="Translate selected link"] > .menu-accel-container::before,
 #simple-translate_sienori-menuitem-_translateText[label="Translate selected text"] > .menu-accel-container::before {
   display: -moz-inline-box;
-  -moz-box-flex: 1;
+  flex: 1;
 }
 
 :is(#simple-translate_sienori-menuitem-_translatePage, #simple-translate_sienori-menuitem-_translatePageOnTab)[label^="Translate this page"] > .menu-accel-container::before {
@@ -693,13 +693,13 @@ right-clicking something particular *on* the page. */
 
 /* shorten the multi-account containers label */
 #contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Firefox Multi-Account Containers"] > .menu-iconic-left {
-  -moz-box-flex: 1;
+  flex: 1;
 }
 
 #contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Firefox Multi-Account Containers"] > .menu-iconic-left::after {
   content: "Multi-Account Containers";
   display: -moz-inline-box;
-  -moz-box-flex: 1;
+  flex: 1;
 }
 
 #contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Firefox Multi-Account Containers"] > .menu-iconic-text {
@@ -764,7 +764,7 @@ right-clicking something particular *on* the page. */
 #ublock0_raymondhill_net-menuitem-_uBlock0-blockElement[label="Block element…"] > .menu-accel-container::before {
   content: "Block Element…";
   display: -moz-inline-box;
-  -moz-box-flex: 1;
+  flex: 1;
 }
 
 #ublock0_raymondhill_net-menuitem-_uBlock0-blockElementInFrame[label="Block element in frame…"] > label {
@@ -774,7 +774,7 @@ right-clicking something particular *on* the page. */
 #ublock0_raymondhill_net-menuitem-_uBlock0-blockElementInFrame[label="Block element in frame…"] > .menu-accel-container::before {
   content: "Block Element in Frame…";
   display: -moz-inline-box;
-  -moz-box-flex: 1;
+  flex: 1;
 }
 
 /* bitwarden context menu icon */
@@ -832,7 +832,7 @@ menupopup:not(#contentAreaContextMenu) > #addon_darkreader_org-menuitem-_DarkRea
 #addon_darkreader_org-menuitem-_addSite[label="Toggle current site"] > .menu-accel-container::before,
 #addon_darkreader_org-menuitem-_switchEngine[label="Theme generation mode"] > .menu-accel-container::before {
   display: -moz-inline-box;
-  -moz-box-flex: 1;
+  flex: 1;
 }
 
 #addon_darkreader_org-menuitem-_toggle[label="Toggle extension"] > .menu-accel-container::before {
@@ -866,7 +866,7 @@ menupopup:not(#contentAreaContextMenu) > #addon_darkreader_org-menuitem-_DarkRea
 #_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_disableAll[label="Turn all styles off"] > .menu-accel-container::before,
 #_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-manager[label="Open styles manager"] > .menu-accel-container::before {
   display: -moz-inline-box;
-  -moz-box-flex: 1;
+  flex: 1;
 }
 
 #_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_show-badge[label="Show active style count"] > .menu-accel-container::before {
@@ -889,7 +889,7 @@ menupopup:not(#contentAreaContextMenu) > #addon_darkreader_org-menuitem-_DarkRea
 #_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-options[label="Options"]:not(.menuitem-iconic, .menu-iconic) > .menu-accel-container::before {
   content: "Stylus Options";
   display: -moz-inline-box;
-  -moz-box-flex: 1;
+  flex: 1;
 }
 
 /* View Image extension's context menu item "Search by image"

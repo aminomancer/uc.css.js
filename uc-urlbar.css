@@ -77,8 +77,8 @@ toolbarpaletteitem[place="palette"] > #search-container {
 }
 
 .widget-overflow-list #searchbar .search-go-container {
-  -moz-box-pack: center !important;
-  -moz-box-align: center !important;
+  justify-items: center !important;
+  align-items: center !important;
 }
 
 .widget-overflow-list #searchbar .search-go-button {
@@ -111,7 +111,7 @@ toolbarpaletteitem[place="palette"] > #search-container {
 #nav-bar-customization-target #searchbar {
   position: relative !important;
   box-shadow: none !important;
-  -moz-box-align: center;
+  align-items: center;
   border-radius: var(--toolbarbutton-border-radius) !important;
   border: none !important;
 }
@@ -295,7 +295,7 @@ toolbarpaletteitem[mousedown] > #urlbar-container > #urlbar > #urlbar-background
 }
 
 .urlbar-page-action {
-  -moz-box-pack: center !important;
+  justify-items: center !important;
 }
 
 :is(.urlbar-page-action:not([disabled]), #urlbar-go-button, .search-go-button):not([disabled], :hover, [open]):focus-visible {
@@ -365,7 +365,7 @@ toolbarpaletteitem[mousedown] > #urlbar-container > #urlbar > #urlbar-background
 
 #urlbar[usertyping]:is([focused], [open]) > #urlbar-input-container > #urlbar-go-button {
   display: -moz-inline-box !important;
-  -moz-box-ordinal-group: 2 !important;
+  order: 2 !important;
   margin-inline-end: calc(var(--urlbar-container-padding) + 1px) !important;
 }
 
@@ -418,7 +418,7 @@ the NTP/home page hasn't opened yet. */
 
 /* iffy modification to center urlbar buttons not contained in page action button box */
 #urlbar-input-container {
-  -moz-box-align: center;
+  align-items: center;
 }
 
 #plugins-notification-icon {
@@ -500,7 +500,7 @@ the NTP/home page hasn't opened yet. */
 }
 
 #urlbar > #urlbar-input-container > #identity-box[pageproxystate="invalid"] {
-  display: -moz-box !important;
+  display: flex !important;
 }
 
 #identity-box,
@@ -524,8 +524,8 @@ the NTP/home page hasn't opened yet. */
   padding-inline: 0 !important;
   max-width: unset !important;
   border-radius: 0 !important;
-  -moz-box-align: center !important;
-  -moz-box-pack: center !important;
+  align-items: center !important;
+  justify-items: center !important;
 }
 
 #identity-box.chromeUI[pageproxystate="valid"] {
@@ -548,12 +548,12 @@ the NTP/home page hasn't opened yet. */
 }
 
 toolbarpaletteitem[removable="false"] #tracking-protection-icon-container:is(:hover, [open="true"]) #tracking-protection-icon-box:not([animate="true"]) #tracking-protection-icon {
-  display: -moz-box !important;
+  display: flex !important;
   fill-opacity: var(--urlbar-icon-fill-opacity) !important;
 }
 
 #tracking-protection-icon {
-  display: -moz-box !important;
+  display: flex !important;
   margin: 0 !important;
   list-style-image: url(chrome://userchrome/content/material/tracking.svg) !important;
 }
@@ -771,7 +771,7 @@ urlbarMods.uc.js assigns them custom classes .aboutBlockedPage and
 }
 
 :root:not([hide-tp-icon-on-ntp]) #tracking-protection-icon-container[hidden] {
-  display: -moz-box !important;
+  display: flex !important;
   pointer-events: none !important;
   -moz-user-focus: ignore !important;
   fill-opacity: 0.3 !important;

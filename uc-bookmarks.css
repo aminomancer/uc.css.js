@@ -365,7 +365,7 @@
 
 :is(#bookmarkpropertiesdialog, #editBookmarkPanel) richlistbox[id] richlistitem {
   padding-inline-start: 2px !important;
-  -moz-box-align: center !important;
+  align-items: center !important;
   min-height: var(--tree-row-height, 24px) !important;
 }
 
@@ -391,7 +391,7 @@
 
 :is(#bookmarkpropertiesdialog, #editBookmarkPanel) richlistbox[id] richlistitem label {
   margin: 0 5px 0 0 !important;
-  display: -moz-box !important;
+  display: flex !important;
 }
 
 :is(#bookmarkpropertiesdialog, #editBookmarkPanel) richlistbox[id] richlistitem[checked="true"] image {

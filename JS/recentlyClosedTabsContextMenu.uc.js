@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Undo Recently Closed Tabs in Tab Context Menu
-// @version        2.0.8
+// @version        2.0.9
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -233,7 +233,7 @@ class UndoListInTabmenu {
           this.sidebarTabMenu.style.removeProperty("display");
         } else {
           this.sidebarTabMenu.hidden = false;
-          this.sidebarTabMenu.style.display = "-moz-box";
+          this.sidebarTabMenu.style.display = "flex";
         }
         // closed window list is empty so should be hidden
         if (this.shouldHideWindows) {
@@ -241,7 +241,7 @@ class UndoListInTabmenu {
           this.sidebarWindowMenu.style.removeProperty("display");
         } else {
           this.sidebarWindowMenu.hidden = false;
-          this.sidebarWindowMenu.style.display = "-moz-box";
+          this.sidebarWindowMenu.style.display = "flex";
         }
         break;
     }

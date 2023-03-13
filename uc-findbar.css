@@ -25,7 +25,7 @@
 }
 
 .browserContainer > findbar {
-  -moz-box-ordinal-group: 0;
+  order: 0;
   position: absolute !important;
   display: flex !important;
   visibility: visible !important;
@@ -56,24 +56,8 @@
   backface-visibility: hidden !important;
 }
 
-@media screen and not (min-width: 500px) {
-  .browserContainer > findbar {
-    width: 100% !important;
-    right: 0 !important;
-    max-width: unset !important;
-    left: 0 !important;
-    right: 0 !important;
-    border-radius: 0 !important;
-  }
-
-  #sidebar-box[hidden="true"] ~ #appcontent findbar,
-  #sidebar-box:not([positionend="true"]) ~ #appcontent findbar {
-    right: 0 !important;
-  }
-}
-
 .findbar-container {
-  -moz-box-orient: horizontal !important;
+  flex-flow: row nowrap !important;
   height: var(--findbar-height, 22px) !important;
   min-width: revert !important;
   width: 100% !important;
@@ -93,6 +77,22 @@ findbar[hidden] {
   right: 1.5em !important;
 }
 
+@media screen and not (min-width: 500px) {
+  .browserContainer > findbar {
+    width: 100% !important;
+    right: 0 !important;
+    max-width: unset !important;
+    left: 0 !important;
+    right: 0 !important;
+    border-radius: 0 !important;
+  }
+
+  #sidebar-box[hidden="true"] ~ #appcontent findbar,
+  #sidebar-box:not([positionend="true"]) ~ #appcontent findbar {
+    right: 0 !important;
+  }
+}
+
 .findbar-closebutton {
   padding: 0 !important;
   margin-inline: 7px 0 !important;
@@ -100,9 +100,9 @@ findbar[hidden] {
   height: var(--findbar-height, 22px) !important;
   width: var(--findbar-height, 22px) !important;
   border-radius: var(--toolbarbutton-border-radius) !important;
-  -moz-box-ordinal-group: 2 !important;
+  order: 2 !important;
   /* I use findbarMods.uc.js to actually move the icon to the right side, so the
-    tab index will be correct. But -moz-box-ordinal-group is a decent, (purely
+    tab index will be correct. But order is a decent, (purely
     visual) alternative if you don't use scripts. */
 }
 
@@ -127,7 +127,7 @@ findbar[hidden] {
 [anonid="findbar-textbox-wrapper"] {
   border-radius: var(--toolbarbutton-border-radius) !important;
   overflow: hidden !important;
-  -moz-box-flex: 1 !important;
+  flex: 1 !important;
 }
 
 .findbar-textbox {
@@ -139,7 +139,7 @@ findbar[hidden] {
   height: var(--findbar-height, 22px) !important;
   box-sizing: border-box !important;
   padding-inline: 6px !important;
-  -moz-box-flex: 1 !important;
+  flex: 1 !important;
 }
 
 .findbar-textbox input > .anonymous-div {
@@ -295,7 +295,7 @@ findbar .matches-indicator {
   background: var(--search-box-color) !important;
   fill: hsl(0, 0%, 100%) !important;
   border-radius: 0 !important;
-  display: -moz-box !important;
+  display: flex !important;
 }
 
 [anonid="findbar-textbox-wrapper"] checkbox {

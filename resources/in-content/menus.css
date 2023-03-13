@@ -28,7 +28,7 @@ menupopup.in-menulist > :where(menucaption, menuitem) > .menu-iconic-text {
 #ContentSelectDropdown > menupopup :where(menucaption, menuitem),
 menupopup.in-menulist > :where(menucaption, menuitem) {
   padding-inline: 8px !important;
-  -moz-box-align: center !important;
+  align-items: center !important;
 }
 
 .actionsMenu > menupopup > menuitem {
@@ -323,7 +323,7 @@ menupopup.in-menulist menuseparator {
 
 #ContentSelectDropdown > menupopup menuseparator:not([id]),
 menupopup.in-menulist menuseparator:not([id]) {
-  display: -moz-box !important;
+  display: flex !important;
 }
 
 #ContentSelectDropdown > menupopup menuseparator:last-child,
@@ -346,7 +346,7 @@ menulist > menupopup > :where(menuitem, menucaption, menu) > .menu-iconic-left {
 }
 
 menulist[indicator="true"] > menupopup.in-menulist menuitem:not([image]) > .menu-iconic-left {
-  display: -moz-box;
+  display: flex;
   min-width: unset !important;
   margin-inline-end: unset !important;
 }

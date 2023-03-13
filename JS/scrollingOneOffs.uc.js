@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Scrolling Search One-offs
-// @version        1.3.3
+// @version        1.3.4
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @long-description
@@ -37,7 +37,7 @@ It also adds a minor improvement to the one-offs in the searchbar results popup:
     container.maskDisabled = !mask;
     oneOffs.canScroll = true;
     container.style.cssText =
-      "display: -moz-box !important; -moz-box-align: center !important; scrollbar-width: none; box-sizing: border-box; scroll-behavior: smooth !important; overflow: hidden !important";
+      "display: flex !important; align-items: center !important; scrollbar-width: none; box-sizing: border-box; scroll-behavior: smooth !important; overflow: hidden !important";
     container.setAttribute("smoothscroll", "true");
     container.setAttribute("clicktoscroll", "true");
     container.setAttribute("overflowing", "true");

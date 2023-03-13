@@ -147,6 +147,8 @@ but other than that these variables should be available everywhere. */
   --notification-menu-color: var(--uc-parent-page-color);
   --ui-disabled-alpha: 0.5;
   --uc-menu-disabled-color: hsla(213, 43%, 89%, var(--ui-disabled-alpha, 0.5));
+  --primary-button-disabled-background: hsla(240, 83%, 79%, var(--ui-disabled-alpha, 0.5));
+  --primary-button-disabled-color: hsla(240, 0%, 100%, var(--ui-disabled-alpha, 0.5));
 
   /* this url is for the icon that displays in the identity box when entering
   text in the urlbar, and on the new tab page. my script

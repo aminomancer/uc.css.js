@@ -337,7 +337,7 @@
 }
 
 #appMenu-fxa-label2::before {
-  display: -moz-box;
+  display: flex;
   content: "";
   background-image: var(--fxa-ui-img, url(chrome://userchrome/content/fxa/avatar-big.svg));
   background-size: contain;
@@ -487,8 +487,6 @@
   height: 20px !important;
   min-height: 20px !important;
   min-width: calc(6ch + 8px) !important;
-  -moz-box-align: center !important;
-  -moz-box-pack: center !important;
 }
 
 #appMenu-zoom-controls #appMenu-zoomReset-button2[disabled] {
@@ -582,7 +580,7 @@ toolbarseparator.proton-zap {
   -moz-context-properties: fill, fill-opacity;
   content: url(chrome://userchrome/content/fxa/avatar-big.svg);
   fill: currentColor;
-  display: -moz-box;
+  display: flex;
 }
 
 #fxa-manage-account-button {
@@ -595,7 +593,7 @@ toolbarseparator.proton-zap {
 #fxa-manage-account-button #fxa-menu-avatar {
   list-style-image: var(--avatar-image-url);
   display: -moz-inline-box;
-  -moz-box-ordinal-group: 2;
+  order: 2;
   margin-inline-start: var(--arrowpanel-subviewbutton-iconic-gap, 8px);
   height: 28px !important;
   width: 28px !important;
@@ -627,7 +625,7 @@ toolbarseparator.proton-zap {
 
 .subviewbutton .syncnow-label {
   text-align: start;
-  display: -moz-box;
+  display: flex;
   margin: 0;
 }
 
@@ -644,7 +642,7 @@ toolbarseparator.proton-zap {
 #PanelUI-fxa-menu-syncnow-button image,
 #PanelUI-remotetabs-syncnow image {
   list-style-image: url(chrome://userchrome/content/skin/sync.svg) !important;
-  -moz-box-ordinal-group: unset !important;
+  order: unset !important;
   visibility: unset !important;
   transition: fill 0.8s var(--uc-smooth-timing-function);
   transform-style: preserve-3d;
@@ -716,7 +714,7 @@ toolbarbutton.subviewbutton.sendToDevice-device[clientType=""][clientId=""] + to
   padding: calc(var(--arrowpanel-menuitem-padding-block) + 2px) var(--arrowpanel-menuitem-padding-inline) !important;
   margin: var(--arrowpanel-menuitem-margin) !important;
   margin-bottom: 4px !important;
-  -moz-box-align: center !important;
+  align-items: center !important;
   font-weight: inherit !important;
   border-radius: var(--arrowpanel-menuitem-border-radius) !important;
   min-height: 40px !important;
@@ -727,14 +725,14 @@ toolbarbutton.subviewbutton.sendToDevice-device[clientType=""][clientId=""] + to
 }
 
 .addon-banner-item::after {
-  -moz-box-ordinal-group: 0 !important;
+  order: 0 !important;
   margin: 0 !important;
 }
 
 .panel-banner-item:not(.addon-banner-item) {
   margin: var(--arrowpanel-menuitem-margin) !important;
   margin-bottom: 4px !important;
-  -moz-box-align: center !important;
+  align-items: center !important;
   --panel-banner-item-color: black;
   --panel-banner-item-background-color: hsla(96, 65%, 75%, 0.5);
   --panel-banner-item-hover-bgcolor: hsla(96, 65%, 75%, 0.8);
@@ -753,7 +751,7 @@ toolbarbutton.subviewbutton.sendToDevice-device[clientType=""][clientId=""] + to
 }
 
 :is(.addon-banner-item, .panel-banner-item) > .toolbarbutton-icon {
-  -moz-box-ordinal-group: 0 !important;
+  order: 0 !important;
 }
 
 #appMenu-popup .panel-banner-item:not([disabled]):focus-visible,

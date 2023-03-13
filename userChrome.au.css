@@ -391,7 +391,7 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
 
   .tabbrowser-tab {
     overflow: revert;
-    -moz-box-pack: center;
+    justify-items: center;
   }
 
   /* make unpinned tabs stretch to fill the whole tab bar */
@@ -405,18 +405,18 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
   grow over 300ms from the time it's born. this way we don't animate tabs that
   were simply moved rather than created */
   :root[sessionrestored] #tabbrowser-tabs:not([movingtab]) .tabbrowser-tab:not([pinned], [justmoved], [tab-grouping], [tabdrop-samewindow]) {
-    -moz-box-flex: 0;
-    transition: min-width 200ms ease-out, max-width 150ms ease-out, -moz-box-flex 300ms var(--uc-smooth-timing-function);
+    flex: 0;
+    transition: min-width 200ms ease-out, max-width 150ms ease-out, flex 300ms var(--uc-smooth-timing-function);
   }
 
   /* animate tab pinning/unpinning. experimental. */
   :root[sessionrestored] #tabbrowser-tabs:not([movingtab]) .tabbrowser-tab[pinned]:not([justmoved], [tab-grouping], [tabdrop-samewindow]) {
-    -moz-box-flex: 0;
-    transition: min-width 200ms ease-out, max-width 150ms ease-out, -moz-box-flex 300ms var(--uc-smooth-timing-function);
+    flex: 0;
+    transition: min-width 200ms ease-out, max-width 150ms ease-out, flex 300ms var(--uc-smooth-timing-function);
   }
 
   :root[sessionrestored] #tabbrowser-tabs:not([movingtab]) .tabbrowser-tab[fadein]:not([pinned], [justmoved]) {
-    -moz-box-flex: 100;
+    flex: 100 100;
   }
 
   /* shrink pinned tabs */
@@ -569,9 +569,12 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
   #customization-panelWrapper > .panel-arrowcontent {
     border-radius: var(--arrowpanel-border-radius, 0);
     box-shadow: var(--uc-panel-shadow);
+  }
+
+  #customization-panelWrapper > .panel-arrowcontent {
+    position: absolute;
     margin-top: 12px;
     z-index: 250;
-    position: absolute;
   }
 
   #customization-panelWrapper > .panel-arrowbox {
@@ -626,8 +629,8 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
   }
 
   @-moz-document url(chrome://browser/content/browser.xhtml) {
-    :is(#customization-lwtheme-menu, #customization-uidensity-menu)::part(arrowbox) {
-      -moz-box-ordinal-group: 2;
+    :is(#customization-lwtheme-menu, #customization-uidensity-menu):is([side="bottom"], [side="right"])::part(arrowbox) {
+      order: 2;
     }
 
     :is(#customization-lwtheme-menu, #customization-uidensity-menu)::part(arrow) {
@@ -635,15 +638,10 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
       margin-bottom: revert;
       position: relative;
       margin-inline: 10px;
-      z-index: 250;
     }
 
     :is(#customization-lwtheme-menu, #customization-uidensity-menu)[side="top"]::part(arrow) {
       margin-top: -5px;
-    }
-
-    :is(#customization-lwtheme-menu, #customization-uidensity-menu)[side="bottom"]::part(arrow) {
-      margin-bottom: -5px;
     }
 
     #customization-panelWrapper > .panel-arrowbox > .panel-arrow[side="top"] {
@@ -718,8 +716,8 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
 
     :is(panel, dialog) menulist::part(dropmarker) {
       margin-inline: var(--menulist-dropmarker-margin, 8px 0);
-      -moz-box-align: center;
-      -moz-box-pack: center;
+      align-items: center;
+      justify-items: center;
       -moz-context-properties: fill, fill-opacity;
     }
 
@@ -1694,8 +1692,8 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
 
   /* ctrl tab */
   #ctrlTab-panel::part(content) {
-    -moz-box-orient: vertical;
-    -moz-box-pack: center;
+    flex-flow: column nowrap;
+    justify-content: center;
     color: inherit;
     padding: 30px 30px 20px 30px;
   }
@@ -1934,7 +1932,7 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
       background-color: var(--checkbox-unchecked-bgcolor, Field);
       border: 1px solid currentColor;
       border-radius: 50%;
-      -moz-box-align: center;
+      align-items: center;
     }
 
     .radio-check[selected] {

@@ -58,12 +58,9 @@
         if (!this.hasAttribute("side")) {
           this.setAttribute("side", "top");
         }
-        this.setAttribute(
-          "position",
-          this.getAttribute("position")
-            ?.replace(/^bottom(right|left)/, "bottomcenter")
-            .replace(/^top(left|right)/, "$1center") || "bottomcenter topleft"
-        );
+        if (!this.hasAttribute("position")) {
+          this.setAttribute("position", "bottomcenter topleft");
+        }
         if (!this.hasAttribute("consumeoutsideclicks")) {
           this.setAttribute("consumeoutsideclicks", "false");
         }
