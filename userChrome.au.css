@@ -876,9 +876,6 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
   #stop-button > .toolbarbutton-animatable-box {
     /* Vertically center the 20px tall animatable image */
     top: calc(50% - 10px);
-    /* Since .toolbarbutton-icon uses a different width than the animatable-box,
-    we need to set a padding relative to the difference in widths. */
-    margin-inline-start: calc((16px + 2 * var(--toolbarbutton-inner-padding) - 18px) / 2);
     /* Width of each frame within the SVG sprite */
     width: 18px;
     /* Height of each frame within the SVG sprite */
