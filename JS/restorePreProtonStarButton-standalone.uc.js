@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Restore pre-Proton Star Button
-// @version        1.3.3
+// @version        1.3.4
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -46,7 +46,6 @@ The bookmark page action button used to have a pretty cool starburst animation. 
         (aEvent.type != "click" || aEvent.button == 0)
       ) {
         if (!(this._itemGuids.size > 0)) {
-          BrowserUIUtils.setToolbarButtonHeightProperty(this.star);
           document
             .getElementById("star-button-animatable-box")
             .addEventListener(

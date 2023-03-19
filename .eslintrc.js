@@ -51,7 +51,7 @@ module.exports = {
   plugins: ["mozilla", "import"],
   overrides: [
     {
-      files: ["JS/**"],
+      files: ["JS/**", "experimental/**"],
       parserOptions: {
         sourceType: "script",
         ecmaVersion: "latest",
@@ -59,7 +59,8 @@ module.exports = {
       env: { browser: true, "mozilla/browser-window": true },
       globals: {
         _ucUtils: "writable",
-        windowUtils: "writable",
+        windowUtils: "readonly",
+        promiseDocumentFlushed: "readonly",
         tabPreviews: "writable",
         gUnifiedExtensions: "writable",
         UIState: "writable",
@@ -70,6 +71,7 @@ module.exports = {
         SyncedTabsPanelList: "writable",
         SyncedTabsDeckComponent: "writable",
         syncedTabsDeckComponent: "writable",
+        isInitialPage: "writable",
       },
       rules: {
         "arrow-body-style": "off",

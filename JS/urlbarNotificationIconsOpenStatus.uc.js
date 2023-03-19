@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Add [open] Status to Urlbar Notification Icons
-// @version        1.1.3
+// @version        1.1.4
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @long-description
@@ -33,7 +33,11 @@ class PopupNotificationHandler {
       if (e.type === "popupshowing") {
         anchorNode.setAttribute("open", true);
         let offset = 0;
-        if (anchorNode.localName === "toolbarbutton") {
+        if (
+          anchorNode.localName === "toolbarbutton" ||
+          anchorNode.classList.contains("toolbarbutton-icon") ||
+          anchorNode.classList.contains("toolbarbutton-badge-stack")
+        ) {
           offset =
             (windowUtils.getBoundsWithoutFlushing(anchorNode).height - 16) / 2;
         }

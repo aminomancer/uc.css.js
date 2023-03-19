@@ -149,7 +149,7 @@ no longer necessary after modern flexbox emulation. */
 #identity-popup,
 #protections-popup,
 #permission-popup {
-  margin-top: -9px !important;
+  margin-top: -1px !important;
 }
 
 #customizationui-widget-panel.bookmarks-toolbar {

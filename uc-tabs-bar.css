@@ -272,8 +272,8 @@ overflowing tabs don't draw shadows on the special new tab button */
   margin-bottom: 0px !important;
   background-color: transparent !important;
   list-style-image: url(chrome://userchrome/content/window/maximize.svg) !important;
-  grid-column: 1 !important;
-  order: 1 !important;
+  grid-column: 0 !important;
+  order: 0 !important;
 }
 
 :is(.titlebar-max, .uc-titlebar-max):hover {
@@ -296,6 +296,8 @@ overflowing tabs don't draw shadows on the special new tab button */
   margin-bottom: 0px !important;
   background-color: transparent !important;
   list-style-image: url(chrome://userchrome/content/window/minimize.svg) !important;
+  grid-column: 1 !important;
+  order: 1 !important;
 }
 
 :is(.titlebar-min, .uc-titlebar-min):hover {
@@ -314,6 +316,8 @@ overflowing tabs don't draw shadows on the special new tab button */
   margin-bottom: 0px !important;
   background-color: transparent !important;
   list-style-image: url(chrome://userchrome/content/window/close.svg) !important;
+  grid-column: 2 !important;
+  order: 2 !important;
 }
 
 :is(.titlebar-close, .uc-titlebar-close):hover {

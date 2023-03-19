@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Bookmarks Menu & Button Shortcuts
-// @version        1.3.5
+// @version        1.3.6
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Adds some shortcuts for bookmarking pages. First, middle-clicking the bookmarks or library toolbar button will bookmark the current tab, or un-bookmark it if it's already bookmarked. Second, a menu item is added to the bookmarks toolbar button's popup, which bookmarks the current tab, or, if the page is already bookmarked, opens the bookmark editor popup. These are added primarily so that bookmarks can be added or removed with a single click, and can still be quickly added even if the bookmark page action is hidden for whatever reason. Third, another menu item is added to replicate the "Search bookmarks" button in the app menu's bookmarks panel. Clicking it will open the urlbar in bookmarks search mode.
@@ -27,7 +27,6 @@ const ucBookmarksShortcuts = {
   async starCmd() {
     if (!BookmarkingUI._pendingUpdate) {
       if (!!BookmarkingUI.starAnimBox && !(BookmarkingUI._itemGuids.size > 0)) {
-        BrowserUIUtils.setToolbarButtonHeightProperty(BookmarkingUI.star);
         document
           .getElementById("star-button-animatable-box")
           .addEventListener(

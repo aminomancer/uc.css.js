@@ -456,6 +456,8 @@ restoreTabSoundButton.uc.js since sound icon no longer exists in vanilla firefox
 .tab-icon-sound {
   width: 16px !important;
   height: 16px !important;
+  min-width: 16px !important;
+  min-height: 16px !important;
   padding: 0 !important;
   opacity: 0 !important;
   fill: currentColor !important;
