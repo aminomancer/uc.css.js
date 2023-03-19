@@ -62,6 +62,10 @@ tooltip .uc-tooltip-box {
   --uc-tooltip-inner-padding: 5px 7px 6px 7px !important;
 }
 
+.places-tooltip-box {
+  display: block;
+}
+
 .places-tooltip description:not([value], [id]):empty,
 .places-tooltip description[value=""]:not([id]):empty {
   display: none !important;
