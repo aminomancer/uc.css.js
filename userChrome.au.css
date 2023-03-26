@@ -715,6 +715,7 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
     }
 
     :is(panel, dialog) menulist::part(dropmarker) {
+      width: 12px;
       margin-inline: var(--menulist-dropmarker-margin, 8px 0);
       align-items: center;
       justify-items: center;
@@ -722,8 +723,9 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
     }
 
     :is(panel, dialog) menulist::part(dropmarker-icon) {
-      appearance: none;
       list-style-image: url(chrome://userchrome/content/arrow-dropdown-16.svg);
+      width: 14px;
+      height: 14px;
       margin-block: 0 !important;
       fill-opacity: var(--menulist-dropmarker-opacity, 0.6);
       -moz-context-properties: revert;

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Restore pre-Proton Arrowpanels
-// @version        1.2.5
+// @version        1.2.6
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -311,10 +311,11 @@ override chrome://browser/content/translation-notification.js ../resources/scrip
 
   if (gXPInstallObserver.observe.name === "observe") {
     eval(
-      `gXPInstallObserver.observe = function ${gXPInstallObserver.observe
+      `gXPInstallObserver.observe = async function ${gXPInstallObserver.observe
         .toSource()
         .replace(/^\(/, "")
         .replace(/\)$/, "")
+        .replace(/^async\s*/, "")
         .replace(/^function\s*/, "")
         .replace(/^observe\s*/, "")
         .replace(/^(.)/, `uc_observe$1`)

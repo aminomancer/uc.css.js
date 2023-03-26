@@ -64,6 +64,10 @@ fullscreenNavBar.uc.js to set attributes: popup-status and urlbar-status. */
   margin-bottom: calc(0px - var(--urlbar-container-height, 40px) - var(--tab-min-height, 36px)) !important;
 }
 
+:root[fullscreen-autohide][inFullscreen] #nav-bar {
+  min-height: unset !important;
+}
+
 :root[fullscreen-autohide][inFullscreen]:not([customizing]) #sidebar-box {
   top: 0 !important;
 }

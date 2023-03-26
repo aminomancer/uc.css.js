@@ -105,7 +105,11 @@ module.exports = {
     },
     {
       files: ["resources/script-override/**"],
-      rules: { "prettier/prettier": ["error", { quoteProps: "preserve" }] },
+      rules: {
+        "prefer-template": "off",
+        "prettier/prettier": ["error", { quoteProps: "preserve" }],
+      },
+      env: { browser: true, "mozilla/browser-window": true },
     },
     {
       // All .eslintrc.js files are in the node environment, so turn that
@@ -266,9 +270,7 @@ module.exports = {
     },
     {
       files: ["resources/aboutuserchrome/**"],
-      parserOptions: {
-        sourceType: "module",
-      },
+      parserOptions: { sourceType: "module" },
     },
   ],
 };
