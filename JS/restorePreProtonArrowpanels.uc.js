@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Restore pre-Proton Arrowpanels
-// @version        1.2.6
+// @version        1.2.7
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -150,8 +150,8 @@ override chrome://browser/content/translation-notification.js ../resources/scrip
   dummyNotification.remove();
 
   if (
-    DownloadsPanel &&
-    DownloadsPanel._openPopupIfDataReady.name === "_openPopupIfDataReady"
+    window.DownloadsPanel?._openPopupIfDataReady.name ===
+    "_openPopupIfDataReady"
   ) {
     eval(
       `DownloadsPanel._openPopupIfDataReady = function ${DownloadsPanel._openPopupIfDataReady
@@ -165,7 +165,7 @@ override chrome://browser/content/translation-notification.js ../resources/scrip
     );
   }
 
-  if (PanelUI && PanelUI.showSubView.name === "showSubView") {
+  if (window.PanelUI?.showSubView.name === "showSubView") {
     eval(
       `PanelUI.showSubView = async function ${PanelUI.showSubView
         .toSource()
@@ -180,8 +180,7 @@ override chrome://browser/content/translation-notification.js ../resources/scrip
   }
 
   if (
-    PanelUI &&
-    PanelUI._showNotificationPanel.name === "_showNotificationPanel"
+    window.PanelUI?._showNotificationPanel.name === "_showNotificationPanel"
   ) {
     eval(
       `PanelUI._showNotificationPanel = function ${PanelUI._showNotificationPanel
@@ -191,6 +190,20 @@ override chrome://browser/content/translation-notification.js ../resources/scrip
         .replace(/^function\s*/, "")
         .replace(/^_showNotificationPanel\s*/, "")
         .replace(/^(.)/, `uc_showNotificationPanel$1`)
+        .replace(/bottomright/, "bottomcenter")}`
+    );
+  }
+
+  if (window.gUnifiedExtensions?.togglePanel.name === "togglePanel") {
+    eval(
+      `gUnifiedExtensions.togglePanel = async function ${gUnifiedExtensions.togglePanel
+        .toSource()
+        .replace(/^\(/, "")
+        .replace(/\)$/, "")
+        .replace(/^async\s*/, "")
+        .replace(/^function\s*/, "")
+        .replace(/^togglePanel\s*/, "")
+        .replace(/^(.)/, `uc_togglePanel$1`)
         .replace(/bottomright/, "bottomcenter")}`
     );
   }
@@ -212,7 +225,8 @@ override chrome://browser/content/translation-notification.js ../resources/scrip
   }
 
   if (
-    gProtectionsHandler.showProtectionsPopup.name === "showProtectionsPopup"
+    window.gProtectionsHandler?.showProtectionsPopup.name ===
+    "showProtectionsPopup"
   ) {
     eval(
       `gProtectionsHandler.showProtectionsPopup = function ${gProtectionsHandler.showProtectionsPopup
@@ -226,7 +240,7 @@ override chrome://browser/content/translation-notification.js ../resources/scrip
     );
   }
 
-  if (gIdentityHandler._openPopup.name === "_openPopup") {
+  if (window.gIdentityHandler?._openPopup.name === "_openPopup") {
     eval(
       `gIdentityHandler._openPopup = function ${gIdentityHandler._openPopup
         .toSource()
@@ -239,7 +253,10 @@ override chrome://browser/content/translation-notification.js ../resources/scrip
     );
   }
 
-  if (BrowserPageActions.togglePanelForAction.name === "togglePanelForAction") {
+  if (
+    window.BrowserPageActions?.togglePanelForAction.name ===
+    "togglePanelForAction"
+  ) {
     eval(
       `BrowserPageActions.togglePanelForAction = function ${BrowserPageActions.togglePanelForAction
         .toSource()
@@ -252,7 +269,7 @@ override chrome://browser/content/translation-notification.js ../resources/scrip
     );
   }
 
-  if (BrowserPageActions.showPanel.name === "showPanel") {
+  if (window.BrowserPageActions?.showPanel.name === "showPanel") {
     eval(
       `BrowserPageActions.showPanel = function ${BrowserPageActions.showPanel
         .toSource()
@@ -294,7 +311,7 @@ override chrome://browser/content/translation-notification.js ../resources/scrip
   }
 
   if (
-    gXPInstallObserver.showInstallConfirmation.name ===
+    window.gXPInstallObserver?.showInstallConfirmation.name ===
     "showInstallConfirmation"
   ) {
     eval(
@@ -309,7 +326,7 @@ override chrome://browser/content/translation-notification.js ../resources/scrip
     );
   }
 
-  if (gXPInstallObserver.observe.name === "observe") {
+  if (window.gXPInstallObserver?.observe.name === "observe") {
     eval(
       `gXPInstallObserver.observe = async function ${gXPInstallObserver.observe
         .toSource()
@@ -361,6 +378,8 @@ override chrome://browser/content/translation-notification.js ../resources/scrip
   } catch (error) {}
   document.getElementById("appMenu-popup").position = "bottomcenter topright";
   document.getElementById("widget-overflow").position = "bottomcenter topright";
+  document.getElementById("unified-extensions-panel").position =
+    "bottomcenter topright";
   document.getElementById("sidebarMenu-popup").position =
     "bottomcenter topleft";
 

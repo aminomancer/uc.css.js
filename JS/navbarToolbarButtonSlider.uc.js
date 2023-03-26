@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Navbar Toolbar Button Slider
-// @version        2.9.1
+// @version        2.9.2
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @long-description
@@ -282,6 +282,7 @@ class NavbarToolbarSlider {
     }
     // exclude urlbar, searchbar, system buttons, and the slider itself.
     switch (item.id) {
+      case "unified-extensions-button":
       case "wrapper-back-button":
       case "back-button":
       case "wrapper-forward-button":

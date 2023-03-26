@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           App Menu Mods
-// @version        1.4.4
+// @version        1.4.5
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Makes some minor modifications to the app menu (the popup opened by clicking the hamburger button on the far right of the navbar). It adds a restart button to the app menu and it adds a separator under the "Manage Account" button in the profile/account panel. I'll continue adding more mods to this script as I think of them.
@@ -98,9 +98,9 @@
     }
     fixSyncSubviewButtonAlignment() {
       eval(
-        `gSync.populateSendTabToDevicesView = function ${gSync.populateSendTabToDevicesView
+        `gSync._populateSendTabToDevicesView = function ${gSync._populateSendTabToDevicesView
           .toSource()
-          .replace(/^populateSendTabToDevicesView/, ``)
+          .replace(/^_populateSendTabToDevicesView/, ``)
           .replace(/item.setAttribute\(\"align\", \"start\"\);/, ``)}`
       );
     }
