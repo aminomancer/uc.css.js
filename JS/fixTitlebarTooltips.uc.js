@@ -1,14 +1,12 @@
 // ==UserScript==
 // @name           Fix Titlebar Button Tooltips
-// @version        1.1.4
+// @version        1.2.0
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
 // @description
 /*
-Since [bug 1718629][], Firefox has tried to make the titlebar buttons (window controls) function more like native controls. In doing so, it allows the OS to draw tooltips for these buttons. So it prevents itself from showing redundant tooltips. That means we can't style the titlebar buttons' tooltips, they don't obey preferences, they disappear after 5 seconds on Windows, and they don't appear at all in fullscreen mode.
-
-We can fix this issue with JavaScript. It's caused by the `titlebar-btn` attribute. But removing that programmatically won't work because it's parsed by a C++ component when the buttons are connected. It's already too late by the time the script is running. So we need to recreate the DOM nodes without this attribute from the beginning.
+Since [bug 1718629][], Firefox has tried to make the titlebar buttons (window controls) function more like native controls. In doing so, it allows the OS to draw tooltips for these buttons. So it prevents itself from showing redundant tooltips. That means we can't style the titlebar buttons' tooltips, they don't obey preferences, they disappear after 5 seconds on Windows, and they don't appear in fullscreen mode. This is mainly for Windows users, and particularly Windows 10 users, which have less useful native tooltips. But if you use Windows 11 and still want to disable native tooltips, you can change disableSnapLayouts to true in the setting below.
 
 [bug 1718629]: https://bugzilla.mozilla.org/show_bug.cgi?id=1718629
 */
@@ -29,41 +27,17 @@ We can fix this issue with JavaScript. It's caused by the `titlebar-btn` attribu
   // `false` to `true`.
   const disableSnapLayouts = false;
 
-  const lazy = {};
-  ChromeUtils.defineModuleGetter(
-    lazy,
-    "WindowsVersionInfo",
-    "resource://gre/modules/components-utils/WindowsVersionInfo.jsm"
-  );
-  const { buildNumber } = lazy.WindowsVersionInfo.get();
-  const isWin11 =
-    !disableSnapLayouts &&
-    AppConstants.platform === "win" &&
-    buildNumber >= 22000;
-  let markup = `<hbox class="titlebar-buttonbox-container" skipintoolbarset="true">
-  <hbox class="titlebar-buttonbox titlebar-color">
-    <toolbarbutton class="titlebar-button titlebar-min"
-                oncommand="window.minimize();"
-                data-l10n-id="browser-window-minimize-button"
-                />
-    <toolbarbutton class="titlebar-button titlebar-max"
-                oncommand="window.maximize();"
-                ${isWin11 ? 'titlebar-btn="max"' : ""}
-                data-l10n-id="browser-window-maximize-button"
-                />
-    <toolbarbutton class="titlebar-button titlebar-restore"
-                oncommand="window.fullScreen ? BrowserFullScreen() : window.restore();"
-                ${isWin11 ? 'titlebar-btn="max"' : ""}
-                data-l10n-id="browser-window-restore-down-button"
-                />
-    <toolbarbutton class="titlebar-button titlebar-close"
-                command="cmd_closeWindow"
-                data-l10n-id="browser-window-close-button"
-                />
-  </hbox>
-</hbox>`;
-  let boxes = document.querySelectorAll(".titlebar-buttonbox-container");
-  boxes.forEach(box =>
-    box.replaceWith(MozXULElement.parseXULToFragment(markup))
-  );
+  if (
+    disableSnapLayouts ||
+    (AppConstants.platform === "win" &&
+      ChromeUtils.importESModule(
+        "resource://gre/modules/components-utils/WindowsVersionInfo.sys.mjs"
+      ).WindowsVersionInfo.get()?.buildNumber < 22000)
+  ) {
+    document
+      .querySelectorAll(".titlebar-buttonbox-container .titlebar-button")
+      ?.forEach(button => {
+        button.style.cssText += "-moz-default-appearance: none !important;";
+      });
+  }
 })();

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Restore pre-Proton Arrowpanels
-// @version        1.2.7
+// @version        1.2.8
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -378,10 +378,18 @@ override chrome://browser/content/translation-notification.js ../resources/scrip
   } catch (error) {}
   document.getElementById("appMenu-popup").position = "bottomcenter topright";
   document.getElementById("widget-overflow").position = "bottomcenter topright";
-  document.getElementById("unified-extensions-panel").position =
-    "bottomcenter topright";
+  let uePanel =
+    document
+      .getElementById("unified-extensions-panel-template")
+      ?.content.querySelector("panel") ||
+    document.getElementById("unified-extensions-panel");
+  if (uePanel) {
+    uePanel.position = "bottomcenter topright";
+  }
   document.getElementById("sidebarMenu-popup").position =
     "bottomcenter topleft";
+  document.getElementById("confirmation-hint").position =
+    "bottomcenter topright";
 
   function init() {
     window.ConfirmationHint = {
