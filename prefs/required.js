@@ -20,8 +20,6 @@ user_pref("browser.startup.preXulSkeletonUI", false);
 user_pref("svg.context-properties.content.enabled", true);
 // required for acrylic gaussian blur
 user_pref("layout.css.backdrop-filter.enabled", true);
-// prevent bugs that would otherwise be caused by the custom scrollbars in the user-agent sheet
-user_pref("layout.css.cached-scrollbar-styles.enabled", false);
 // enable browser dark mode
 user_pref("ui.systemUsesDarkTheme", 1);
 // enable content dark mode

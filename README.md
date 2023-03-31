@@ -108,7 +108,6 @@ I also recommend setting the following prefs in `about:config`. There are two pr
 | gfx.font_rendering.cleartype_params.rendering_mode | Number | 5 | |
 | gfx.font_rendering.directwrite.use_gdi_table_loading | Boolean | false | |
 | <i>layout.css.backdrop-filter.enabled</i> | Boolean | true | Required for the acrylic/glass gaussian blur effect |
-| <i>layout.css.cached-scrollbar-styles.enabled</i> | Boolean | false | Recommended for the scrollbar styles in userChrome.ag.css |
 | <i>layout.css.moz-document.content.enabled</i> | Boolean | true | Required |
 | mousewheel.autodir.enabled | Boolean | false | Allow mousewheel ⇅ to scroll ⇄-only scrollboxes |
 | prompts.contentPromptSubDialog | Boolean | true | Use the modern content dialog instead of modal prompts |
@@ -146,7 +145,6 @@ I also recommend setting the following prefs in `about:config`. There are two pr
 | userChrome.css.hide-promotion | Boolean | false | If true, hide official ads on system pages, e.g. for Mozilla VPN |
 | userChrome.css.mac-ui-fonts | Boolean | true | Replace UI font with SF Pro, the system font for macOS. [Click here for details](#fonts) |
 | userChrome.css.menupopup-shadows | Boolean | true | Add a shadow behind context menus and panels |
-| userChrome.css.overlay-scrollbars.in-content | Boolean | false | Overlay scrollbars are already enabled in the chrome UI. This pref enables them in web content |
 | widget.non-native-theme.scrollbar.style | Number | 2 | Enable the GTK scrollbar style in web content, regardless of your OS. Supports: 0 (default), 1 (macOS), 2 (GTK), 3 (android), 4 (win10), 5 (win11) |
 | widget.non-native-theme.scrollbar.size.override | Number | 11 | Make the scrollbar track 11px wide for GTK (scrollbar.style = 2) |
 | widget.non-native-theme.gtk.scrollbar.thumb-size | Number | 0.818 | Make the scrollbar thumb 9px wide for GTK |
