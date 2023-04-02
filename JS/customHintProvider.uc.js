@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Custom Hint Provider
-// @version        1.1.7
+// @version        1.1.8
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -147,7 +147,7 @@ window.CustomHint = {
     ConfirmationHint.show = function show(anchor, messageId, options = {}) {
       this._reset();
 
-      MozXULElement.insertFTLIfNeeded("browser/branding/brandings.ftl");
+      MozXULElement.insertFTLIfNeeded("toolkit/branding/brandings.ftl");
       MozXULElement.insertFTLIfNeeded("browser/confirmationHints.ftl");
       document.l10n.setAttributes(this._message, messageId);
 
@@ -171,17 +171,20 @@ window.CustomHint = {
         "popupshown",
         () => {
           this._animationBox.setAttribute("animate", "true");
-          this._timerID = setTimeout(
-            () => this._panel.hidePopup(true),
-            DURATION + 120
-          );
+          this._timerID = setTimeout(() => {
+            this._panel.hidePopup(true);
+          }, DURATION + 120);
         },
         { once: true }
       );
 
-      this._panel.addEventListener("popuphidden", () => this._reset(), {
-        once: true,
-      });
+      this._panel.addEventListener(
+        "popuphidden",
+        () => {
+          this._reset();
+        },
+        { once: true }
+      );
 
       let { position, x, y } = options;
       this._panel.openPopup(null, { position, triggerEvent: options.event });

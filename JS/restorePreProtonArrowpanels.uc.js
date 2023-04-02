@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Restore pre-Proton Arrowpanels
-// @version        1.2.8
+// @version        1.2.9
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -417,7 +417,7 @@ override chrome://browser/content/translation-notification.js ../resources/scrip
       show(anchor, messageId, options = {}) {
         this._reset();
 
-        MozXULElement.insertFTLIfNeeded("browser/branding/brandings.ftl");
+        MozXULElement.insertFTLIfNeeded("toolkit/branding/brandings.ftl");
         MozXULElement.insertFTLIfNeeded("browser/confirmationHints.ftl");
         document.l10n.setAttributes(this._message, messageId);
 
