@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           about:userchrome
-// @version        1.1.6
+// @version        1.1.7
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -131,8 +131,12 @@ function initUserChromeNotifications() {
       this.win = win;
       if (!win._ucUtils) return;
       this.utils = win._ucUtils;
-      if (win.gBrowserInit.delayedStartupFinished) this.#init();
-      else Services.obs.addObserver(this, "browser-delayed-startup-finished");
+      if (win.gBrowserInit.delayedStartupFinished) {
+        this.#init();
+      } else {
+        Services.obs.addObserver(this, "browser-delayed-startup-finished");
+        this.#waitingForStartup = true;
+      }
     }
 
     #init() {
@@ -153,12 +157,17 @@ function initUserChromeNotifications() {
         );
       }
       this.#updateBanner();
+      this.#addEntryPoints();
       this.#initialized = true;
     }
 
     uninit() {
-      Services.obs.removeObserver(this, "browser-delayed-startup-finished");
-      Services.obs.removeObserver(this, lazy.UPDATE_CHANGED_TOPIC);
+      if (this.#waitingForStartup) {
+        Services.obs.removeObserver(this, "browser-delayed-startup-finished");
+      }
+      if (this.#initialized) {
+        Services.obs.removeObserver(this, lazy.UPDATE_CHANGED_TOPIC);
+      }
     }
 
     observe(subject, topic, data) {
@@ -168,6 +177,7 @@ function initUserChromeNotifications() {
           break;
         case "browser-delayed-startup-finished":
           Services.obs.removeObserver(this, topic);
+          this.#waitingForStartup = false;
           this.#init();
           break;
       }
@@ -222,8 +232,50 @@ function initUserChromeNotifications() {
       banner.setAttribute("notificationid", notification);
     }
 
+    #addEntryPoints() {
+      // Add menu item to the Tools menu
+      let addonsItem = this.win.document.getElementById("menu_openAddons");
+      let item = this.utils.createElement(this.win.document, "menuitem", {
+        id: "menu_openUserChrome",
+        label: "UserChrome Manager",
+        accesskey: "U",
+        key: "key_openAboutUserchrome",
+        oncommand: `switchToTabHavingURI("about:userchrome", true)`,
+      });
+      addonsItem.after(item);
+
+      // Add button to the app menu
+      let addonsButton = this.win.PanelMultiView.getViewNode(
+        this.win.document,
+        "appMenu-extensions-themes-button"
+      );
+      let button = this.utils.createElement(
+        addonsButton.ownerDocument,
+        "toolbarbutton",
+        {
+          id: "appMenu-userChrome-button",
+          class: "subviewbutton",
+          label: "UserChrome Manager",
+          key: "key_openAboutUserchrome",
+          oncommand: `switchToTabHavingURI("about:userchrome", true)`,
+        }
+      );
+      addonsButton.after(button);
+
+      // Add a hotkey to open the manager
+      this.utils.registerHotkey(
+        { modifiers: "accel shift", key: "U", id: "key_openAboutUserchrome" },
+        win => {
+          if (win === this.win) {
+            this.win.switchToTabHavingURI("about:userchrome", true);
+          }
+        }
+      );
+    }
+
     #banner;
     #initialized = false;
+    #waitingForStartup = false;
   }
 
   /** Singleton class to handle badge notifications. */
@@ -241,6 +293,7 @@ function initUserChromeNotifications() {
         lazy.gScriptUpdater.getHandle(script).checkRemoteFile();
       });
       this.#updateBadge();
+      this.#warnOnMismatchedVersions();
     }
 
     observe(subject, topic, data) {
@@ -286,83 +339,64 @@ function initUserChromeNotifications() {
       }
       return "script-updates-available";
     }
-  }
 
-  class UserChromeManagerEntryPoints {
-    constructor(win) {
-      this.win = win;
-      if (!win._ucUtils) return;
-      this.utils = win._ucUtils;
-      if (win.gBrowserInit.delayedStartupFinished) {
-        this.#init();
+    async #warnOnMismatchedVersions() {
+      if (!this.utils) return;
+      let chromeUri = Services.io.newURI(
+        "chrome://userchrome/content/aboutuserchrome/src/aboutuserchrome.json"
+      );
+      let fileUri = chromeRegistry.convertChromeURL(chromeUri);
+      let file = fphs
+        .getFileFromURLSpec(fileUri.spec)
+        .QueryInterface(Ci.nsIFile);
+
+      let resourceVersion = "unknown";
+      if (file.exists()) {
+        try {
+          let data = await IOUtils.readUTF8(file.path);
+          let json = JSON.parse(data);
+          resourceVersion = json.version;
+        } catch (error) {}
       } else {
-        let delayedListener = (subject, topic) => {
-          if (
-            topic == "browser-delayed-startup-finished" &&
-            subject == this.win
-          ) {
-            Services.obs.removeObserver(delayedListener, topic);
-            this.#init();
-          }
-        };
-        Services.obs.addObserver(
-          delayedListener,
-          "browser-delayed-startup-finished"
-        );
+        // Check for version file in pre-1.1.7 location
+        let oldFile = file.parent.clone();
+        oldFile.append("VERSION");
+        if (oldFile.exists()) {
+          try {
+            let data = await IOUtils.readUTF8(oldFile.path);
+            resourceVersion = data.trim();
+          } catch (error) {}
+        }
       }
-    }
 
-    #init() {
-      if (this.#initialized) return;
-      this.#initialized = true;
-      this.#addHotkey();
-      this.#addMenuitem();
-      this.#addToolbarbutton();
-    }
+      let scriptVersion = "unknown";
+      let script = this.utils
+        .getScriptData()
+        .find(script => script.name === "about:userchrome");
+      if (script) scriptVersion = script.version;
 
-    #addMenuitem() {
-      let addonsItem = this.win.document.getElementById("menu_openAddons");
-      let item = this.utils.createElement(this.win.document, "menuitem", {
-        id: "menu_openUserChrome",
-        label: "UserChrome Manager",
-        accesskey: "U",
-        key: "key_openAboutUserchrome",
-        oncommand: `switchToTabHavingURI("about:userchrome", true)`,
-      });
-      addonsItem.after(item);
-    }
-
-    #addToolbarbutton() {
-      let addonsButton = this.win.PanelMultiView.getViewNode(
-        this.win.document,
-        "appMenu-extensions-themes-button"
-      );
-      let button = this.utils.createElement(
-        addonsButton.ownerDocument,
-        "toolbarbutton",
-        {
-          id: "appMenu-userChrome-button",
-          class: "subviewbutton",
-          label: "UserChrome Manager",
-          key: "key_openAboutUserchrome",
-          oncommand: `switchToTabHavingURI("about:userchrome", true)`,
-        }
-      );
-      addonsButton.after(button);
-    }
-
-    #addHotkey() {
-      this.utils.registerHotkey(
-        { modifiers: "accel shift", key: "U", id: "key_openAboutUserchrome" },
-        win => {
-          if (win === this.win) {
-            this.win.switchToTabHavingURI("about:userchrome", true);
+      let warning;
+      let repoURL = "https://github.com/aminomancer/uc.css.js";
+      switch (Services.vc.compare(resourceVersion, scriptVersion)) {
+        case 1:
+          warning = `The version of aboutUserChrome.sys.mjs is ${scriptVersion}, but the version of the resource files is ${resourceVersion}. Update the script to the latest version from ${repoURL}/blob/master/JS/aboutUserChrome.sys.mjs`;
+          break;
+        case -1:
+          warning = `The version of aboutUserChrome.sys.mjs is ${scriptVersion}, but the version of the resource files is ${resourceVersion}. Update the resource files to the latest version from ${repoURL}/tree/master/resources/aboutuserchrome`;
+          break;
+        case 0:
+          if (resourceVersion === "unknown" && scriptVersion === "unknown") {
+            warning = `Could not determine the version of aboutUserChrome.sys.mjs or the resource files. Make sure you have the latest version of both from ${repoURL}`;
+            break;
           }
-        }
-      );
-    }
+        // Fall through
+        default:
+          return;
+      }
 
-    #initialized;
+      // eslint-disable-next-line no-console
+      console.warn(warning);
+    }
   }
 
   // Setup for each window.
@@ -372,7 +406,6 @@ function initUserChromeNotifications() {
       win.userChromeWindowNotifications = new UserChromeWindowNotifications(
         win
       );
-      new UserChromeManagerEntryPoints(win);
     },
     win => {
       win.userChromeWindowNotifications.uninit();

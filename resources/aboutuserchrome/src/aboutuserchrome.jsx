@@ -12,6 +12,7 @@ import {
 } from "./components/GlobalContext";
 import { ScriptsView } from "./components/ScriptsView";
 import { SettingsView } from "./components/SettingsView";
+import { version } from "./aboutuserchrome.json";
 
 const UserChromeManager = () => {
   const { path, navigate, updateCount } = useContext(GlobalContext);
@@ -114,6 +115,9 @@ const UserChromeManager = () => {
 };
 
 history.scrollRestoration = "manual";
+
+// eslint-disable-next-line no-console
+console.log(`UserChrome Manager v${version}`);
 
 createRoot(document.getElementById("root")).render(
   <GlobalContextProvider>
