@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Urlbar Mods
-// @version        1.7.7
+// @version        1.7.8
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Make some minor modifications to the urlbar. See the code comments in the script for more details.
@@ -578,7 +578,7 @@ class UrlbarMods {
       engine,
       satisfiesAutofillThreshold = false
     ) {
-      let [url] = UrlbarUtils.stripPrefixAndTrim(engine.getResultDomain(), {
+      let [url] = UrlbarUtils.stripPrefixAndTrim(engine.searchUrlDomain, {
         stripWww: true,
       });
       url = url.substr(0, url.length - engine.searchUrlPublicSuffix.length);
@@ -603,7 +603,7 @@ class UrlbarMods {
       engine,
       satisfiesAutofillThreshold = false
     ) {
-      let [url] = UrlbarUtils.stripPrefixAndTrim(engine.getResultDomain(), {
+      let [url] = UrlbarUtils.stripPrefixAndTrim(engine.searchUrlDomain, {
         stripWww: true,
       });
       url = url.substr(0, url.length - engine.searchUrlPublicSuffix.length);
