@@ -117,6 +117,10 @@ but other than that these variables should be available everywhere. */
   --menu-right-size: 14px;
   --menu-separator-margin: 4px;
 
+  --chrome-scrollbar-width: thin;
+  --chrome-scrollbar-track-color: transparent;
+  --chrome-scrollbar-thumb-color: rgba(110, 110, 110, 0.3);
+
   --uc-font-weight-extrabold: 700;
   --uc-font-weight-bold: 600;
   --uc-font-weight-semibold: 500;

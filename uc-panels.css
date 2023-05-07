@@ -14,6 +14,11 @@ panel {
   --uc-content-button-background-active: var(--uc-arrowpanel-dimmed-further);
 }
 
+:where(panel, menupopup) * {
+  scrollbar-width: var(--chrome-scrollbar-width, thin) !important;
+  scrollbar-color: var(--chrome-scrollbar-thumb-color, inherit) var(--chrome-scrollbar-track-color, transparent) !important;
+}
+
 /* hide the outline shown on panels when transitioning from subview to subview */
 /* see here: https://searchfox.org/mozilla-central/rev/ec3889f74d6b5695833280f4370ca0e9ba59a3e4/browser/components/customizableui/PanelMultiView.jsm#1047 */
 panelview {
@@ -401,11 +406,8 @@ no longer necessary after modern flexbox emulation. */
 }
 
 #protections-popup-siteNotWorkingView-body,
-.protections-popup-tp-switch-label-box,
-.protections-popup-tp-switch-box {
+#protections-popup-tp-switch-section {
   min-height: 40px !important;
-  justify-content: center;
-  position: relative;
 }
 
 #protections-popup-tp-switch-section:not([short]) > :is(.protections-popup-tp-switch-label-box, .protections-popup-tp-switch-box) {
@@ -722,13 +724,6 @@ popupnotificationcontent label[control]:not([hidden]) + menulist {
 
 #protections-popup-message .text-link,
 .popup-notification-learnmore-link {
-  text-decoration: none !important;
-}
-
-#protections-popup-sendReportView .text-link,
-#protections-popup-tp-switch-breakage-link,
-#protections-popup-tp-switch-breakage-fixed-link {
-  margin-block: 2px 0 !important;
   text-decoration: none !important;
 }
 

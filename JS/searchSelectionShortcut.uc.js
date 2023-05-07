@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Search Selection Keyboard Shortcut
-// @version        1.7.8
+// @version        1.7.9
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @long-description
@@ -72,11 +72,11 @@ class SearchSelectionShortcut {
   // these are all the prefs the script uses for configuration, with their default values.
   // this particular property is only used for setting the prefs on first install.
   // the window actor has its own way of retrieving these prefs.
-  static prefs = new Map([
+  static prefs = [
     ["userChrome.searchSelectionShortcut.keycode", "KeyF"],
     ["userChrome.searchSelectionShortcut.match-engine-to-current-tab", false],
     ["userChrome.searchSelectionShortcut.custom-matches", "{}"],
-  ]);
+  ];
   constructor() {
     ChromeUtils.defineModuleGetter(
       this,
@@ -93,11 +93,12 @@ class SearchSelectionShortcut {
       Services.prefs.clearUserPref(oldPref);
       firstRun = true;
     }
-    SearchSelectionShortcut.prefs.forEach((def, name) => {
+    const defaultPrefs = Services.prefs.getDefaultBranch("");
+    for (let [name, val] of SearchSelectionShortcut.prefs) {
       let type;
       // determine the pref type (boolean, number, string). there are a couple
       // more but we won't ever use them.
-      switch (typeof def) {
+      switch (typeof val) {
         case "boolean":
           type = "Bool";
           break;
@@ -110,12 +111,9 @@ class SearchSelectionShortcut {
         default:
           return;
       }
-      // if the pref hasn't already been set, set it now.
-      if (!Services.prefs.prefHasUserValue(name)) {
-        Services.prefs[`set${type}Pref`](name, def);
-        firstRun = name !== "userChrome.searchSelectionShortcut.custom-matches";
-      }
-    });
+      defaultPrefs[`set${type}Pref`](name, val);
+      firstRun = name !== "userChrome.searchSelectionShortcut.custom-matches";
+    }
     // if it's the first time installing v1.6, make a splash menu to reveal the
     // new prefs and offer an affordance to change them.
     if (firstRun) {

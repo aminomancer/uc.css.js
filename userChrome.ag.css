@@ -92,6 +92,28 @@ parsererror|sourcetext {
   background-image: linear-gradient(hsl(240, 4%, 12%), hsl(240, 4%, 20%));
 }
 
+*|*::-moz-page-sequence,
+*|*::-moz-printed-sheet,
+*|*::-moz-page-content,
+*|*::-moz-page-break {
+  scrollbar-width: thin !important;
+  scrollbar-color: gray transparent !important;
+}
+
+@media (monochrome) and (-moz-print-preview) {
+  *|*::-moz-page {
+    scrollbar-width: thin !important;
+    scrollbar-color: gray transparent !important;
+  }
+}
+
+@media print {
+  * {
+    scrollbar-width: thin !important;
+    scrollbar-color: gray transparent !important;
+  }
+}
+
 html|*.videocontrols .controlBar {
   background-color: var(--uc-content-box-background);
 }
@@ -116,6 +138,7 @@ html|input[type="number"]::-moz-number-spin-down {
   background-image: url(chrome://userchrome/content/arrow-dropdown-16.svg);
   background-size: 8px;
   background-position: center top;
+  background-repeat: no-repeat;
   -moz-context-properties: fill;
   fill: currentColor;
   fill-opacity: 0.6;

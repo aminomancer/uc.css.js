@@ -43,6 +43,11 @@ tabmodalprompt {
   --tabmodalprompt-padding: var(--arrowpanel-padding) !important;
 }
 
+tabmodalprompt * {
+  scrollbar-width: var(--chrome-scrollbar-width, thin) !important;
+  scrollbar-color: var(--chrome-scrollbar-thumb-color, inherit) var(--chrome-scrollbar-track-color, transparent) !important;
+}
+
 .tabmodalprompt-topContainer {
   margin-inline: 4px !important;
 }
@@ -841,6 +846,9 @@ rtl languages. adjust the border radius accordingly */
     --dropdown-bgcolor: var(--arrowpanel-background) !important;
     --in-content-button-border-radius: var(--general-button-border-radius) !important;
     --in-content-button-vertical-padding: 5px !important;
+
+    scrollbar-width: var(--chrome-scrollbar-width, thin) !important;
+    scrollbar-color: var(--chrome-scrollbar-thumb-color, inherit) var(--chrome-scrollbar-track-color, transparent) !important;
   }
 
   :root:not(.system-font-size) {
@@ -1161,6 +1169,11 @@ rtl languages. adjust the border radius accordingly */
   richlistbox[id] {
     background-color: var(--in-content-box-background) !important;
     border-radius: var(--general-button-border-radius);
+  }
+
+  * {
+    scrollbar-width: var(--chrome-scrollbar-width, thin) !important;
+    scrollbar-color: var(--chrome-scrollbar-thumb-color, inherit) var(--chrome-scrollbar-track-color, transparent) !important;
   }
 
   @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
@@ -1500,6 +1513,11 @@ rtl languages. adjust the border radius accordingly */
     text-decoration-color: var(--ui-selection-color) !important;
   }
 
+  :root[dialogroot] * {
+    scrollbar-width: var(--chrome-scrollbar-width, thin) !important;
+    scrollbar-color: var(--chrome-scrollbar-thumb-color, inherit) var(--chrome-scrollbar-track-color, transparent) !important;
+  }
+
   @-moz-document url("chrome://mozapps/content/handling/permissionDialog.xhtml") {
     :root[dialogroot] dialog > #description,
     :root[dialogroot] dialog > #description-box > #description {
@@ -1547,6 +1565,25 @@ rtl languages. adjust the border radius accordingly */
   :root {
     --in-content-page-background: var(--uc-content-page-background) !important;
     --dropdown-bgcolor: var(--in-content-page-background) !important;
+  }
+
+  * {
+    scrollbar-width: var(--chrome-scrollbar-width, thin) !important;
+    scrollbar-color: var(--chrome-scrollbar-thumb-color, inherit) var(--chrome-scrollbar-track-color, transparent) !important;
+  }
+
+  .toggle-group-label {
+    padding: 6px 8px !important;
+  }
+
+  .toggle-group-label:first-of-type {
+    border-start-start-radius: var(--in-content-button-border-radius) !important;
+    border-end-start-radius: var(--in-content-button-border-radius) !important;
+  }
+
+  .toggle-group-label:last-of-type {
+    border-start-end-radius: var(--in-content-button-border-radius) !important;
+    border-end-end-radius: var(--in-content-button-border-radius) !important;
   }
 
   #print-progress {
@@ -1715,6 +1752,11 @@ link[href="chrome://global/content/printPagination.css"]
 
 /* about firefox dialog */
 @-moz-document url("chrome://browser/content/aboutDialog.xhtml") {
+  * {
+    scrollbar-width: var(--chrome-scrollbar-width, thin) !important;
+    scrollbar-color: var(--chrome-scrollbar-thumb-color, inherit) var(--chrome-scrollbar-track-color, transparent) !important;
+  }
+
   #leftBox {
     background-image: url(chrome://branding/content/about-logo.svg) !important;
   }
@@ -1815,6 +1857,11 @@ link[href="chrome://global/content/printPagination.css"]
 @-moz-document url(chrome://browser/content/pageinfo/pageInfo.xhtml) {
   :root {
     --focus-outline-color: var(--global-focus-outline-color) !important;
+  }
+
+  * {
+    scrollbar-width: var(--chrome-scrollbar-width, thin) !important;
+    scrollbar-color: var(--chrome-scrollbar-thumb-color, inherit) var(--chrome-scrollbar-track-color, transparent) !important;
   }
 
   input:not([type="file"], [type="image"]):focus-visible,

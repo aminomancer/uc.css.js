@@ -18,13 +18,17 @@
     --arrowpanel-dimmed-further: color-mix(in srgb, currentColor 25%, transparent) !important;
     --arrowpanel-dimmed-even-further: color-mix(in srgb, currentColor 30%, transparent) !important;
     --organizer-color: var(--plaintext-color) !important;
+    --organizer-hover-color: var(--plaintext-color) !important;
+    --organizer-selected-color: var(--in-content-primary-button-text-color) !important;
+    --organizer-focus-selected-color: var(--in-content-primary-button-text-color) !important;
     --organizer-deemphasized-color: color-mix(in srgb, var(--plaintext-color) 75%, transparent) !important;
     --organizer-toolbar-background: var(--in-content-button-highlight-dark) !important;
     --organizer-pane-background: var(--in-content-box-bg-dark) !important;
     --organizer-content-background: var(--in-content-bg-dark) !important;
     --organizer-hover-background: var(--in-content-button-background-hover) !important;
     --organizer-selected-background: var(--in-content-button-background-active) !important;
-    --organizer-selected-focus-background: var(--in-content-button-background-bold) !important;
+    --organizer-selected-active-background: var(--in-content-button-background-bold) !important;
+    --organizer-selected-focus-background: var(--in-content-primary-button-background-hover) !important;
     --organizer-outline-color: var(--purple-40) !important;
     --organizer-border-color: var(--in-content-border-color-dim) !important;
     --organizer-toolbar-field-background: var(--in-content-bg-dark) !important;
@@ -95,9 +99,22 @@
     outline: none !important;
   }
 
-  treechildren::-moz-tree-row(selected, focus),
-  treechildren::-moz-tree-row(current, selected, focus),
+  treechildren::-moz-tree-row(selected, hover),
   treechildren::-moz-tree-row(current, focus, hover) {
+    background-color: var(--organizer-selected-active-background) !important;
+  }
+
+  treechildren::-moz-tree-row(selected, focus),
+  treechildren::-moz-tree-row(current, selected, focus) {
     background-color: var(--organizer-selected-focus-background) !important;
+  }
+
+  treechildren::-moz-tree-cell(cutting, selected),
+  treechildren::-moz-tree-cell(cutting, hover) {
+    background-color: color-mix(in srgb, transparent 50%, var(--organizer-selected-background)) !important;
+  }
+
+  treechildren::-moz-tree-cell-text(primary, dropOn) {
+    background-color: var(--organizer-selected-background) !important;
   }
 }

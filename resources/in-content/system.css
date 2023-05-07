@@ -108,6 +108,7 @@
     --in-content-item-selected: var(--purple-40) !important;
     --in-content-item-hover: color-mix(in srgb, var(--purple-30) 45%, transparent) !important;
     --in-content-item-hover-text: var(--in-content-text-color) !important;
+    --focus-outline-color: var(--global-focus-outline-color) !important;
     --focus-outline-offset: 2px !important;
     --default-focusring: var(--global-focus-outline-width) solid var(--global-focus-outline-color) !important;
     --newtab-background-color: var(--in-content-page-background) !important;

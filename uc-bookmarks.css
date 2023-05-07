@@ -561,6 +561,27 @@ menuitem.subviewbutton-iconic > .toolbarbutton-text,
   list-style-image: url(chrome://userchrome/content/skin/bookmark.svg) !important;
 }
 
+#BMB_bookmarksPopup #BMB_searchBookmarks:not(.menuitem-iconic) .menu-text {
+  padding-inline-start: 0 !important;
+}
+
+#BMB_searchBookmarks:not(.menuitem-iconic)::before {
+  content: "" !important;
+  position: relative !important;
+  display: -moz-inline-box !important;
+  width: 16px !important;
+  height: 16px !important;
+  padding-inline: 0 !important;
+  margin-inline: 0 6px !important;
+  fill: currentColor !important;
+  background-image: url(chrome://userchrome/content/search-glass.svg) !important;
+  -moz-context-properties: fill, fill-opacity, stroke !important;
+}
+
+#BMB_searchBookmarks:not(.menuitem-iconic)::before {
+  margin-inline: var(--context-iconic-margin) !important;
+}
+
 #BMB_bookmarksShowAll {
   display: none !important;
 }

@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name           Bookmarks Menu & Button Shortcuts
-// @version        1.3.6
+// @version        1.4.0
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
-// @description    Adds some shortcuts for bookmarking pages. First, middle-clicking the bookmarks or library toolbar button will bookmark the current tab, or un-bookmark it if it's already bookmarked. Second, a menu item is added to the bookmarks toolbar button's popup, which bookmarks the current tab, or, if the page is already bookmarked, opens the bookmark editor popup. These are added primarily so that bookmarks can be added or removed with a single click, and can still be quickly added even if the bookmark page action is hidden for whatever reason. Third, another menu item is added to replicate the "Search bookmarks" button in the app menu's bookmarks panel. Clicking it will open the urlbar in bookmarks search mode.
+// @description    Adds some shortcuts for bookmarking pages. First, middle-clicking the bookmarks or library toolbar button will bookmark the current tab, or un-bookmark it if it's already bookmarked. Second, a menu item is added to the bookmarks toolbar button's popup, which bookmarks the current tab, or, if the page is already bookmarked, opens the bookmark editor popup. These are added primarily so that bookmarks can be added or removed with a single click, and can still be quickly added even if the bookmark page action is hidden for whatever reason.
 // @downloadURL    https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/bookmarksMenuAndButtonShortcuts.uc.js
 // @updateURL      https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/bookmarksMenuAndButtonShortcuts.uc.js
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
@@ -83,17 +83,6 @@ const ucBookmarksShortcuts = {
       "data-l10n-id",
       "bookmarks-subview-bookmark-tab"
     );
-    this.searchBookmarks = popup
-      .querySelector("#BMB_viewBookmarksSidebar")
-      .after(
-        this.create(doc, "menuitem", {
-          id: "BMB_searchBookmarks",
-          class: "menuitem-iconic subviewbutton",
-          "data-l10n-id": "bookmarks-search",
-          oncommand: "PlacesCommandHook.searchBookmarks();",
-          image: "chrome://global/skin/icons/search-glass.svg",
-        })
-      );
   },
   onLocationChange(browser, _prog, _req, location, _flags) {
     if (browser !== gBrowser.selectedBrowser) return;

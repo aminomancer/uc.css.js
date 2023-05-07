@@ -19,6 +19,10 @@
   kbd {
     font-weight: var(--font-weight-monospace, inherit);
   }
+
+  #bottom-actions {
+    margin-bottom: 200px !important;
+  }
 }
 
 @-moz-document domain("firefox-source-docs.mozilla.org") {

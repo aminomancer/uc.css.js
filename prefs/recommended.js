@@ -128,6 +128,11 @@ user_pref("ui.IMESelectedRawTextBackground", "#7755FF");
 // about:reader dark mode
 user_pref("reader.color_scheme", "dark");
 
+//// font settings
+user_pref("layout.css.font-visibility.private", 3);
+user_pref("layout.css.font-visibility.resistFingerprinting", 3);
+////
+
 //// windows font settings - does nothing on macOS or linux
 user_pref("gfx.font_rendering.cleartype_params.cleartype_level", 100);
 user_pref("gfx.font_rendering.cleartype_params.force_gdi_classic_for_families", "");

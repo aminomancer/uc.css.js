@@ -441,8 +441,14 @@ trees so it is relatively safe to collapse them. */
   border-inline-width: 1px 0;
 }
 
-@-moz-document url("chrome://browser/content/syncedtabs/sidebar.xhtml")
-{
+@-moz-document url("chrome://browser/content/places/bookmarksSidebar.xhtml"), url("chrome://browser/content/places/historySidebar.xhtml") {
+  * {
+    scrollbar-width: var(--chrome-scrollbar-width, thin) !important;
+    scrollbar-color: var(--chrome-scrollbar-thumb-color, inherit) var(--chrome-scrollbar-track-color, transparent) !important;
+  }
+}
+
+@-moz-document url("chrome://browser/content/syncedtabs/sidebar.xhtml") {
   body {
     background-color: var(--ui-secondary-bg) !important;
     color: var(--lwt-text-color) !important;
@@ -520,6 +526,11 @@ trees so it is relatively safe to collapse them. */
 
   :-moz-window-inactive::selection {
     background-color: var(--ui-selection-bgcolor-disabled, text-select-disabled-background) !important;
+  }
+
+  * {
+    scrollbar-width: var(--chrome-scrollbar-width, thin) !important;
+    scrollbar-color: var(--chrome-scrollbar-thumb-color, inherit) var(--chrome-scrollbar-track-color, transparent) !important;
   }
 }
 
