@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           One-click One-off Search Buttons
-// @version        1.8.4
+// @version        1.8.5
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @long-description
@@ -114,15 +114,46 @@ It's hard to explain in words exactly what's going on so I'll just say to try th
     function toggleKeyNavCallback(disable) {
       if (disable) {
         const lazy = { UrlbarUtils };
+        gURLBar.view.controller._dismissSelectedResult = function(event) {
+          if (!this._lastQueryContextWrapper) {
+            console.error(
+              "Cannot dismiss selected result, last query not present"
+            );
+            return false;
+          }
+          let { queryContext } = this._lastQueryContextWrapper;
+
+          let { selectedElement } = this.input.view;
+          if (selectedElement?.classList.contains("urlbarView-button")) {
+            // For results with buttons, delete them only when the main part of the
+            // row is selected, not a button.
+            return false;
+          }
+
+          let result = this.input.view.selectedResult;
+          if (!result || result.heuristic) {
+            return false;
+          }
+
+          this.engagementEvent.record(event, {
+            result,
+            selType: "dismiss",
+            searchString: queryContext.searchString,
+          });
+
+          return true;
+        };
         eval(
           `gURLBar.view.controller.handleKeyNavigation = function ${gURLBar.view.controller.handleKeyNavigation
             .toSource()
+            .replace(/#dismissSelectedResult/, "_dismissSelectedResult")
             .replace(
               /(this\.\_lastQueryContextWrapper)/,
               `$1 && this.allowOneOffKeyNav`
             )}`
         );
       } else {
+        delete gURLBar.view.controller._dismissSelectedResult;
         delete gURLBar.view.controller.handleKeyNavigation;
       }
     }
@@ -300,16 +331,13 @@ It's hard to explain in words exactly what's going on so I'll just say to try th
     handler.attachListeners();
   }
 
-  [
+  for (const pref of [
     { token: keyNavPref, default: true },
     { token: hideSettingsPref, default: true },
     { token: skipOneOffsPref, default: false },
-  ].forEach(pref => {
-    // create prefs early if they don't exist
-    if (!prefsvc.prefHasUserValue(pref.token)) {
-      prefsvc.setBoolPref(pref.token, pref.default);
-    }
-  });
+  ]) {
+    prefsvc.getDefaultBranch("").setBoolPref(pref.token, pref.default);
+  }
 
   // Delayed startup
   if (gBrowserInit.delayedStartupFinished) {
