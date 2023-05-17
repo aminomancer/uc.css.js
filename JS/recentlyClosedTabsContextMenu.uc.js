@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Undo Recently Closed Tabs in Tab Context Menu
-// @version        2.0.9
+// @version        2.1.0
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -170,16 +170,10 @@ class UndoListInTabmenu {
   }
   // get a fluent localization interface. we can't use data-l10n-id since that would
   // automatically remove the menus' accesskeys, and we want them to have accesskeys.
-  get strings() {
-    return (
-      this._strings ||
-      (this._strings =
-        RecentlyClosedTabsAndWindowsMenuUtils.strings || this.generateStrings())
-    );
-  }
-  async generateStrings() {
-    let strings = await new Localization(["browser/menubar.ftl"], true);
-    return strings;
+  get l10n() {
+    delete this.l10n;
+    let l10n = new Localization(["browser/menubar.ftl"], true);
+    return (this.l10n = l10n);
   }
   // if TST is installed, listen for its sidebar opening
   async attachSidebarListener() {
@@ -250,7 +244,7 @@ class UndoListInTabmenu {
   get closedTabsLabel() {
     return (
       this._closedTabsLabel ||
-      (this._closedTabsLabel = this.strings.formatMessagesSync([
+      (this._closedTabsLabel = this.l10n.formatMessagesSync([
         "menu-history-undo-menu",
       ])[0].attributes[0].value)
     );
@@ -259,7 +253,7 @@ class UndoListInTabmenu {
   get closedWindowsLabel() {
     return (
       this._closedWindowsLabel ||
-      (this._closedWindowsLabel = this.strings.formatMessagesSync([
+      (this._closedWindowsLabel = this.l10n.formatMessagesSync([
         "menu-history-undo-window-menu",
       ])[0].attributes[0].value)
     );
@@ -429,7 +423,6 @@ class UndoListInTabmenu {
       window,
       "menuitem",
       false,
-      `appmenu-reopen-all-${type.toLowerCase()}s`,
       true
     );
 
@@ -459,7 +452,6 @@ class UndoListInTabmenu {
       window,
       "menuitem",
       false,
-      `appmenu-reopen-all-${type.toLowerCase()}s`,
       true
     );
 
@@ -490,9 +482,6 @@ class UndoListInTabmenu {
     popup.lastChild.accessKey = popup.lastChild.label.substr(0, 1) || "R";
   }
   modMethods() {
-    RecentlyClosedTabsAndWindowsMenuUtils.navigatorBundle = Services.strings.createBundle(
-      "chrome://browser/locale/browser.properties"
-    );
     RecentlyClosedTabsAndWindowsMenuUtils.setImage = function(aItem, aElement) {
       let iconURL = aItem.image;
       if (/^https?:/.test(iconURL)) iconURL = `moz-anno:favicon:${iconURL}`;
@@ -578,7 +567,7 @@ class UndoListInTabmenu {
       restoreAllElements.classList.add("restoreallitem");
       restoreAllElements.setAttribute(
         "label",
-        RecentlyClosedTabsAndWindowsMenuUtils.strings.formatValueSync(
+        RecentlyClosedTabsAndWindowsMenuUtils.l10n.formatValueSync(
           aRestoreAllLabel
         )
       );
@@ -599,40 +588,25 @@ class UndoListInTabmenu {
       aWindow,
       aTagName,
       aPrefixRestoreAll = false,
-      aRestoreAllLabel = "appmenu-reopen-all-windows",
       forContext
     ) {
       let closedWindowData = SessionStore.getClosedWindowData();
       let doc = aWindow.document;
       let fragment = doc.createDocumentFragment();
       if (closedWindowData.length) {
-        let menuLabelString = RecentlyClosedTabsAndWindowsMenuUtils.navigatorBundle.GetStringFromName(
-          "menuUndoCloseWindowLabel"
-        );
-        let menuLabelStringSingleTab = RecentlyClosedTabsAndWindowsMenuUtils.navigatorBundle.GetStringFromName(
-          "menuUndoCloseWindowSingleTabLabel"
-        );
-
         for (let i = 0; i < closedWindowData.length; i++) {
-          let undoItem = closedWindowData[i];
-          let otherTabsCount = undoItem.tabs.length - 1;
-          let label =
-            otherTabsCount == 0
-              ? menuLabelStringSingleTab
-              : PluralForm.get(otherTabsCount, menuLabelString);
-          let menuLabel = label
-            .replace("#1", undoItem.title)
-            .replace("#2", otherTabsCount);
-          if (
-            UndoListInTabmenu.config.l10n["Popup window label"] &&
-            undoItem.isPopup
-          ) {
+          const { selected, tabs, title, isPopup } = closedWindowData[i];
+          const selectedTab = tabs[selected - 1];
+          let menuLabel = RecentlyClosedTabsAndWindowsMenuUtils.l10n.formatValueSync(
+            "recently-closed-undo-close-window-label",
+            { tabCount: tabs.length - 1, winTitle: title }
+          );
+          if (UndoListInTabmenu.config.l10n["Popup window label"] && isPopup) {
             menuLabel = `${menuLabel} ${UndoListInTabmenu.config.l10n["Popup window label"]}`;
           }
-          let selectedTab = undoItem.tabs[undoItem.selected - 1];
 
           if (
-            !undoItem.isPopup ||
+            !isPopup ||
             UndoListInTabmenu.config["Include popup windows"] ||
             !forContext
           ) {
@@ -654,7 +628,9 @@ class UndoListInTabmenu {
           fragment,
           aPrefixRestoreAll,
           true,
-          aRestoreAllLabel,
+          aTagName == "menuitem"
+            ? "recently-closed-menu-reopen-all-windows"
+            : "recently-closed-panel-reopen-all-windows",
           closedWindowData.length,
           aTagName
         );
@@ -665,7 +641,6 @@ class UndoListInTabmenu {
       aWindow,
       aTagName,
       aPrefixRestoreAll = false,
-      aRestoreAllLabel = "appmenu-reopen-all-tabs",
       forContext
     ) {
       let doc = aWindow.document;
@@ -689,7 +664,9 @@ class UndoListInTabmenu {
           fragment,
           aPrefixRestoreAll,
           false,
-          aRestoreAllLabel,
+          aTagName == "menuitem"
+            ? "recently-closed-menu-reopen-all-tabs"
+            : "recently-closed-panel-reopen-all-tabs",
           closedTabs.length,
           aTagName
         );
