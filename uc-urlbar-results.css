@@ -64,7 +64,7 @@ by underlining them (requires urlbarMods.uc.js) */
   width: revert !important;
 }
 
-#urlbarView-results,
+.urlbarView-results,
 #urlbar-results {
   border-bottom-left-radius: 4px !important;
   border-bottom-right-radius: 4px !important;
@@ -72,6 +72,10 @@ by underlining them (requires urlbarMods.uc.js) */
 
 #urlbar-results {
   border: none !important;
+}
+
+.urlbarView #urlbar-results:empty {
+  padding-block: 0 !important;
 }
 
 #urlbar-container {

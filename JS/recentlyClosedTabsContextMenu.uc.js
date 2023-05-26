@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Undo Recently Closed Tabs in Tab Context Menu
-// @version        2.1.0
+// @version        2.1.1
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -171,9 +171,13 @@ class UndoListInTabmenu {
   // get a fluent localization interface. we can't use data-l10n-id since that would
   // automatically remove the menus' accesskeys, and we want them to have accesskeys.
   get l10n() {
-    delete this.l10n;
-    let l10n = new Localization(["browser/menubar.ftl"], true);
-    return (this.l10n = l10n);
+    if (!this._l10n) {
+      this._l10n = new Localization(
+        ["browser/menubar.ftl", "browser/recentlyClosed.ftl"],
+        true
+      );
+    }
+    return this._l10n;
   }
   // if TST is installed, listen for its sidebar opening
   async attachSidebarListener() {
@@ -482,6 +486,11 @@ class UndoListInTabmenu {
     popup.lastChild.accessKey = popup.lastChild.label.substr(0, 1) || "R";
   }
   modMethods() {
+    Object.defineProperty(RecentlyClosedTabsAndWindowsMenuUtils, "l10n", {
+      configurable: true,
+      enumerable: true,
+      get: () => this.l10n,
+    });
     RecentlyClosedTabsAndWindowsMenuUtils.setImage = function(aItem, aElement) {
       let iconURL = aItem.image;
       if (/^https?:/.test(iconURL)) iconURL = `moz-anno:favicon:${iconURL}`;
