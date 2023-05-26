@@ -873,10 +873,6 @@ rtl languages. adjust the border radius accordingly */
   }
 
   .dialog-button-box > button {
-    flex: 0.15;
-  }
-
-  .dialog-button-box > button {
     appearance: none !important;
     min-height: var(--menuitem-height) !important;
     color: var(--in-content-button-text-color) !important;
