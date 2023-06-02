@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Undo Recently Closed Tabs in Tab Context Menu
-// @version        2.1.1
+// @version        2.1.2
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -226,7 +226,7 @@ class UndoListInTabmenu {
       case "popupshowing":
         // the sidebar context menu is showing, so we should hide/show the menus depending
         // on whether they're empty closed tab list is empty so should be hidden
-        if (SessionStore.getClosedTabCount(window) == 0) {
+        if (SessionStore.getClosedTabCountForWindow(window) == 0) {
           this.sidebarTabMenu.hidden = true;
           this.sidebarTabMenu.style.removeProperty("display");
         } else {
@@ -346,7 +346,7 @@ class UndoListInTabmenu {
           : tabWords[tabWords.length - 1]?.substr(0, 1) || "T");
 
       // closed tab list is empty so should be hidden
-      tabMenu.hidden = !!(SessionStore.getClosedTabCount(window) == 0);
+      tabMenu.hidden = !!(SessionStore.getClosedTabCountForWindow(window) == 0);
       // closed window list is empty so should be hidden
       windowMenu.hidden = !!window.undoTabMenu.shouldHideWindows;
     });
@@ -416,7 +416,10 @@ class UndoListInTabmenu {
     let fragment;
 
     // list is empty so should be hidden
-    if (SessionStore[`getClosed${type}Count`](window) == 0) {
+    const itemsCount = SessionStore[
+      `getClosed${type}Count${type === "Tab" ? "ForWindow" : ""}`
+    ](window);
+    if (itemsCount === 0) {
       popup.parentNode.hidden = true;
       return;
     }
@@ -445,7 +448,10 @@ class UndoListInTabmenu {
     let fragment;
 
     // list is empty so should be hidden
-    if (SessionStore[`getClosed${type}Count`](window) == 0) {
+    const itemsCount = SessionStore[
+      `getClosed${type}Count${type === "Tab" ? "ForWindow" : ""}`
+    ](window);
+    if (itemsCount === 0) {
       popup.parentNode.hidden = true;
       return;
     }
@@ -654,8 +660,8 @@ class UndoListInTabmenu {
     ) {
       let doc = aWindow.document;
       let fragment = doc.createDocumentFragment();
-      if (SessionStore.getClosedTabCount(aWindow) != 0) {
-        let closedTabs = SessionStore.getClosedTabData(aWindow);
+      if (SessionStore.getClosedTabCountForWindow(aWindow) != 0) {
+        let closedTabs = SessionStore.getClosedTabDataForWindow(aWindow);
         for (let i = 0; i < closedTabs.length; i++) {
           RecentlyClosedTabsAndWindowsMenuUtils.createEntry(
             aTagName,
@@ -723,25 +729,6 @@ class RecentlyClosedPanelContext {
       "userChrome.tabs.recentlyClosedTabs.middle-click-to-remove",
       false
     );
-    // override this function because there's some kind of weird old workaround
-    // in the built-in version. I don't know why someone added this, but it goes
-    // out of its way to prevent a tab from being restored properly if you only
-    // have 1 tab open and it's blank/new tab page. I did as much testing as I
-    // know how, and couldn't find a problem caused by removing it. so I removed it
-    window.undoCloseTab = function(index) {
-      let tab = null;
-      // index is undefined if the function is called without a specific tab to restore.
-      let tabsToRemove =
-        index !== undefined
-          ? [index]
-          : new Array(SessionStore.getLastClosedTabCount(window)).fill(0);
-      for (let i of tabsToRemove) {
-        if (SessionStore.getClosedTabCount(window) > i) {
-          tab = SessionStore.undoCloseTab(window, i);
-        }
-      }
-      return tab;
-    };
     this.menupopup = document.querySelector("#mainPopupSet").appendChild(
       _ucUtils.createElement(document, "menupopup", {
         id: "recently-closed-menu",
@@ -826,7 +813,7 @@ class RecentlyClosedPanelContext {
       PanelView.forNode(panelview).headerText = text;
     }
     PanelMultiView.getViewNode(document, "appMenuRecentlyClosedTabs").disabled =
-      SessionStore.getClosedTabCount(window) == 0;
+      SessionStore.getClosedTabCountForWindow(window) == 0;
     PanelMultiView.getViewNode(
       document,
       "appMenuRecentlyClosedWindows"
@@ -910,7 +897,7 @@ class RecentlyClosedPanelContext {
     if (PrivateBrowsingUtils.isWindowPrivate(window)) params.private = true;
     let newWin = OpenBrowserWindow(params);
     let value = button.getAttribute("value");
-    let tabData = SessionStore.getClosedTabData(window)[value];
+    let tabData = SessionStore.getClosedTabDataForWindow(window)[value];
     let { state } = tabData;
     let init = () => {
       let tabbrowser = newWin.gBrowser || newWin._gBrowser;
@@ -986,7 +973,7 @@ class RecentlyClosedPanelContext {
   async forgetClosedTab() {
     let button = this.menupopup.triggerNode;
     let value = button.getAttribute("value");
-    let tabData = SessionStore.getClosedTabData(window)[value];
+    let tabData = SessionStore.getClosedTabDataForWindow(window)[value];
     if (!tabData) return false;
     await this.forgetEntries(tabData?.state.entries);
     SessionStore.forgetClosedTab(window, value);
@@ -1006,7 +993,7 @@ class RecentlyClosedPanelContext {
   bookmarkFromTab() {
     let button = this.menupopup.triggerNode;
     let value = button.getAttribute("value");
-    let tabData = SessionStore.getClosedTabData(window)[value];
+    let tabData = SessionStore.getClosedTabDataForWindow(window)[value];
     let { state } = tabData;
     let activeEntry = state.entries[state.index - 1];
     PlacesUIUtils.showBookmarkPagesDialog(

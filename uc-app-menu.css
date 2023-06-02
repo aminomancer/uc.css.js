@@ -201,6 +201,10 @@
   list-style-image: url(chrome://userchrome/content/search-glass.svg);
 }
 
+#appMenu-translate-button {
+  list-style-image: url(chrome://userchrome/content/material/translate.svg);
+}
+
 #panelMenu_bookmarkingTools {
   list-style-image: url(chrome://userchrome/content/skin/developer.svg);
 }
@@ -244,6 +248,10 @@
 
 #appMenuRecentlyClosedWindows {
   list-style-image: url(chrome://userchrome/content/skin/window.svg);
+}
+
+#appMenuSearchHistory {
+  list-style-image: url(chrome://userchrome/content/search-glass.svg);
 }
 
 :is(#appMenu-library-recentlyClosedTabs, #appMenu-library-recentlyClosedWindows) .restoreallitem {
@@ -383,6 +391,10 @@
   list-style-image: url(chrome://userchrome/content/identity-icons-brand.svg);
 }
 
+#appMenu_helpSwitchDevice {
+  list-style-image: url(chrome://userchrome/content/skin/import.svg);
+}
+
 #appMenu_helpPolicySupport::before {
   background-image: url(chrome://userchrome/content/help-square.svg);
 }
@@ -404,6 +416,7 @@
 #appMenu-userChrome-button > .toolbarbutton-text,
 #appMenu-find-button2 > .toolbarbutton-text,
 #panelMenu_searchBookmarks > .toolbarbutton-text,
+#appMenu-translate-button > .toolbarbutton-text,
 #panelMenuBookmarkThisPage > .toolbarbutton-text,
 #panelMenu_viewBookmarksToolbar > .toolbarbutton-text,
 #panelMenu_bookmarkingTools > .toolbarbutton-text,
@@ -412,6 +425,7 @@
 #appMenuClearRecentHistory > .toolbarbutton-text,
 #appMenu-restoreSession > .toolbarbutton-text,
 #appMenuRecentlyClosedWindows > .toolbarbutton-text,
+#appMenuSearchHistory > .toolbarbutton-text,
 :is(#appMenu-library-recentlyClosedTabs, #appMenu-library-recentlyClosedWindows) .restoreallitem > .toolbarbutton-text,
 #PanelUI-historyMore > .toolbarbutton-text,
 #appMenu-settings-button > .toolbarbutton-text,
@@ -430,6 +444,7 @@
 #appMenu_menu_HelpPopup_reportPhishingtoolmenu > .toolbarbutton-text,
 #appMenu_menu_HelpPopup_reportPhishingErrortoolmenu > .toolbarbutton-text,
 #appMenu_aboutName > .toolbarbutton-text,
+#appMenu_helpSwitchDevice > .toolbarbutton-text,
 #appMenu_helpPolicySupport > .toolbarbutton-text {
   padding-inline-start: var(--arrowpanel-subviewbutton-iconic-gap, 8px) !important;
 }

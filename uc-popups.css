@@ -180,8 +180,7 @@ tabmodalprompt #titleText {
   margin: revert !important;
   color: var(--uc-parent-page-color) !important;
   padding: 2px !important;
-  flex-grow: 0.15 !important;
-  flex-wrap: nowrap !important;
+  flex-grow: 0.1 !important;
   justify-self: revert !important;
 }
 
@@ -870,6 +869,10 @@ rtl languages. adjust the border radius accordingly */
   .dialog-button-box:not([hidden]) {
     justify-items: end;
     margin-inline: 4px;
+  }
+
+  .dialog-button-box > button {
+    flex-grow: 0.1;
   }
 
   .dialog-button-box > button {
