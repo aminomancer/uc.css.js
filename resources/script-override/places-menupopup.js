@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Restore Places Menupopup Arrows
-// @version        1.1.1
+// @version        1.1.2
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Necessary for use with restorePreProtonArrowpanels.uc.js.
@@ -646,6 +646,7 @@ function closingPopupEndsDrag(popup) {
       super.connectedCallback();
       this.initializeAttributeInheritance();
 
+      this.setAttribute("type", "arrow");
       this.setAttribute("flip", "both");
       this.setAttribute("side", "top");
       this.setAttribute("position", "bottomcenter topright");
