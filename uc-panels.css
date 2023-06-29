@@ -395,6 +395,7 @@ no longer necessary after modern flexbox emulation. */
 
 #protections-popup-not-blocking-section-why {
   border-radius: var(--arrowpanel-menuitem-border-radius) !important;
+  margin-inline-end: calc(var(--arrowpanel-menuitem-margin-inline) - 2px) !important;
 }
 
 #protections-popup-not-blocking-section-why:hover {
@@ -611,6 +612,7 @@ popupnotificationcontent {
 popupnotification checkbox .checkbox-check {
   margin-inline-end: var(--context-checkbox-margin-end) !important;
   border-radius: 2px !important;
+  box-sizing: border-box !important;
 }
 
 .addon-installed-notification-content > checkbox,

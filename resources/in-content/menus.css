@@ -214,6 +214,7 @@ menupopup.in-menulist menuitem:is([type="checkbox"], [type="radio"])::before {
   width: 14px;
   height: 14px;
   margin-inline: var(--context-checkbox-margin);
+  box-sizing: border-box;
   fill: currentColor;
   -moz-context-properties: fill, fill-opacity, stroke;
   content: "";

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Vertical Tabs Pane
-// @version        1.7.5
+// @version        1.7.6
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -2643,16 +2643,16 @@ When you collapse the pane with the unpin button, it collapses to a small width 
     let appcontent = document.getElementById("appcontent");
     let verticalSplitter = document.getElementById("vertical-tabs-splitter");
     let verticalPane = document.getElementById("vertical-tabs-pane");
-    this._box.style.MozBoxOrdinalGroup = 1;
-    this._splitter.style.MozBoxOrdinalGroup = 2;
-    appcontent.style.MozBoxOrdinalGroup = 3;
-    verticalSplitter.style.MozBoxOrdinalGroup = 4;
-    verticalPane.style.MozBoxOrdinalGroup = 5;
+    this._box.style.order = 1;
+    this._splitter.style.order = 2;
+    appcontent.style.order = 3;
+    verticalSplitter.style.order = 4;
+    verticalPane.style.order = 5;
     if (!this._positionStart) {
-      this._box.style.MozBoxOrdinalGroup = 5;
-      this._splitter.style.MozBoxOrdinalGroup = 4;
-      verticalSplitter.style.MozBoxOrdinalGroup = 2;
-      verticalPane.style.MozBoxOrdinalGroup = 1;
+      this._box.style.order = 5;
+      this._splitter.style.order = 4;
+      verticalSplitter.style.order = 2;
+      verticalPane.style.order = 1;
       this._box.setAttribute("positionend", true);
       verticalPane.setAttribute("positionstart", true);
     } else {

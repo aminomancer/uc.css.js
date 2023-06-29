@@ -20,6 +20,8 @@ menu#pageStyleMenu > .menu-text,
 :is(#menu_zoomEnlarge, #menu_zoomReduce, #menu_zoomReset) .menu-text,
 #viewToolbarsMenu > .menu-text,
 #viewSidebarMenuMenu > .menu-text,
+#sidebar-reverse-position > .menu-text,
+#sidebarMenu-popup > menuitem[oncommand="SidebarUI.hide()"][data-l10n-id="sidebar-menu-close"] > .menu-text,
 #menu_showAllHistory > .menu-text,
 menuitem#sanitizeItem > .menu-text,
 :is(#sync-tabs-menuitem, #syncedTabsRefresh, #syncedTabsRefreshFilter) > .menu-text,
@@ -374,6 +376,8 @@ menuitem#helpPolicySupport::before,
 :is(#menu_zoomEnlarge, #menu_zoomReduce, #menu_zoomReset)::before,
 #viewToolbarsMenu::before,
 #viewSidebarMenuMenu::before,
+#sidebar-reverse-position::before,
+#sidebarMenu-popup > menuitem[oncommand="SidebarUI.hide()"][data-l10n-id="sidebar-menu-close"]::before,
 #menu_showAllHistory::before,
 menuitem#sanitizeItem::before,
 :is(#sync-tabs-menuitem, #syncedTabsRefresh, #syncedTabsRefreshFilter)::before,
@@ -927,16 +931,58 @@ menupopup#viewSidebarMenu menuitem:is([type="checkbox"], [type="radio"]):not([ch
   display: none;
 }
 
+/* check for the english label in case user doesn't have my script miscMods
+obviously that will only work for english firefox, so if you use another
+language, you should download miscMods.uc.js since it will dynamically set a
+universal attribute that we can select irrespective of target language. */
+#sidebar-reverse-position:is([label="Move Sidebar to Left"], [to-position="left"])::before {
+  background-image: url(chrome://userchrome/content/skin/back.svg);
+  background-size: 15px;
+}
+
+#sidebar-reverse-position:is([label="Move Sidebar to Right"], [to-position="right"])::before {
+  background-image: url(chrome://userchrome/content/skin/forward.svg);
+  background-size: 15px;
+}
+
+#sidebarMenu-popup > menuitem:is([type="checkbox"], [type="radio"]):is(:not(.webextension-menuitem), [style]):not([checked="true"])::before {
+  width: 16px;
+  min-width: 16px;
+  height: 16px;
+  min-height: 16px;
+  margin-inline: var(--context-iconic-margin);
+  border-radius: 0;
+  border: 0;
+  background-color: transparent;
+  color: inherit;
+}
+
 menupopup#viewSidebarMenu #menu_bookmarksSidebar:is([type="checkbox"], [type="radio"]):not([checked="true"]) {
   list-style-image: url(chrome://userchrome/content/skin/bookmark.svg) !important;
+}
+
+#sidebarMenu-popup > menuitem#sidebar-switcher-bookmarks:is([type="checkbox"], [type="radio"]):not([checked="true"])::before {
+  background-image: url(chrome://userchrome/content/skin/bookmark.svg);
 }
 
 menupopup#viewSidebarMenu #menu_historySidebar:is([type="checkbox"], [type="radio"]):not([checked="true"]) {
   list-style-image: url(chrome://userchrome/content/skin/history.svg) !important;
 }
 
+#sidebarMenu-popup > menuitem#sidebar-switcher-history:is([type="checkbox"], [type="radio"]):not([checked="true"])::before {
+  background-image: url(chrome://userchrome/content/skin/history.svg);
+}
+
 menupopup#viewSidebarMenu #menu_tabsSidebar:is([type="checkbox"], [type="radio"]):not([checked="true"]) {
-  list-style-image: url(chrome://userchrome/content/skin/tab.svg) !important;
+  list-style-image: url(chrome://userchrome/content/skin/synced-tabs.svg) !important;
+}
+
+#sidebarMenu-popup > menuitem#sidebar-switcher-tabs:is([type="checkbox"], [type="radio"]):not([checked="true"])::before {
+  background-image: url(chrome://userchrome/content/skin/synced-tabs.svg);
+}
+
+#sidebarMenu-popup > menuitem[oncommand="SidebarUI.hide()"][data-l10n-id="sidebar-menu-close"]::before {
+  background-image: url(chrome://userchrome/content/close-big.svg);
 }
 
 #menu_showAllHistory::before {

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Restore pre-Proton Arrowpanels
-// @version        1.2.9
+// @version        1.3.0
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -386,8 +386,7 @@ override chrome://browser/content/translation-notification.js ../resources/scrip
   if (uePanel) {
     uePanel.position = "bottomcenter topright";
   }
-  document.getElementById("sidebarMenu-popup").position =
-    "bottomcenter topleft";
+  document.getElementById("sidebarMenu-popup").position = "bottomleft topleft";
   document.getElementById("confirmation-hint").position =
     "bottomcenter topright";
 

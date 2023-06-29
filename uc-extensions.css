@@ -15,14 +15,17 @@ individual extensions' popups and other content documents are styled in userCont
 /* extension icon appearance */
 
 /* tree-style-tabs */
-.webextension-browser-action[data-extensionid="treestyletab@piro.sakura.ne.jp"i] .toolbarbutton-icon,
-#sidebarMenu-popup #button_treestyletab_piro_sakura_ne_jp-sidebar-action:not([checked="true"]) {
+.webextension-browser-action[data-extensionid="treestyletab@piro.sakura.ne.jp"i] .toolbarbutton-icon {
   list-style-image: url(chrome://userchrome/content/material/tree-style-tabs-32.svg) !important;
 }
 
 .eom-addon-button[data-extensionid="treestyletab@piro.sakura.ne.jp"i] .toolbarbutton-icon,
-menupopup#viewSidebarMenu menuitem.menuitem-iconic.webextension-menuitem#menu_treestyletab_piro_sakura_ne_jp-sidebar-action[style]:is([type="checkbox"], [type="radio"]):not([checked="true"]) {
+menupopup#viewSidebarMenu menuitem.menuitem-iconic.webextension-menuitem#menubar_menu_treestyletab_piro_sakura_ne_jp-sidebar-action[style]:not([checked="true"]) {
   list-style-image: url(chrome://userchrome/content/material/tree-style-tabs.svg) !important;
+}
+
+#sidebarMenu-popup > menuitem#sidebarswitcher_menu_treestyletab_piro_sakura_ne_jp-sidebar-action:is([type="checkbox"], [type="radio"]):not([checked="true"])::before {
+  background-image: url(chrome://userchrome/content/material/tree-style-tabs.svg);
 }
 
 /* SVG gobbler */
@@ -148,9 +151,12 @@ menupopup:not(#contentAreaContextMenu) > #nordvpnproxy_nordvpn_com-menuitem-_nor
 /* Tab Stash */
 :is(.webextension-browser-action, .eom-addon-button)[data-extensionid="tab-stash@condordes.net"i] .toolbarbutton-icon,
 #sidebar-box[sidebarcommand="tab-stash_condordes_net-sidebar-action"] #sidebar-switcher-target > #sidebar-icon,
-#sidebarMenu-popup #button_tab-stash_condordes_net-sidebar-action:not([checked="true"]),
-menupopup#viewSidebarMenu menuitem.menuitem-iconic.webextension-menuitem#menu_tab-stash_condordes_net-sidebar-action[style]:is([type="checkbox"], [type="radio"]):not([checked="true"]) {
+menupopup#viewSidebarMenu menuitem.menuitem-iconic.webextension-menuitem#menubar_menu_tab-stash_condordes_net-sidebar-action[style]:not([checked="true"]) {
   list-style-image: url(chrome://userchrome/content/material/tabstash-logo.svg) !important;
+}
+
+#sidebarMenu-popup > menuitem#sidebarswitcher_menu_tab-stash_condordes_net-sidebar-action:is([type="checkbox"], [type="radio"]):not([checked="true"])::before {
+  background-image: url(chrome://userchrome/content/material/tabstash-logo.svg);
 }
 
 #pageAction-urlbar-tab-stash_condordes_net {
@@ -210,10 +216,13 @@ menupopup#viewSidebarMenu menuitem.menuitem-iconic.webextension-menuitem#menu_ta
 }
 
 /* pushbullet, an extension for controlling, sharing stuff with, and receiving notifications from your phone */
-#sidebarMenu-popup #button__6540f1c5-ab3d-4eff-9ad2-79a95aec93d5_-sidebar-action:not([checked="true"]),
 :is(.webextension-browser-action, .eom-addon-button)[data-extensionid="jid1-BYcQOfYfmBMd9A@jetpack"i],
-menupopup#viewSidebarMenu menuitem.menuitem-iconic.webextension-menuitem#menu__6540f1c5-ab3d-4eff-9ad2-79a95aec93d5_-sidebar-action[style]:is([type="checkbox"], [type="radio"]):not([checked="true"]) {
+menupopup#viewSidebarMenu menuitem.menuitem-iconic.webextension-menuitem#menubar_menu__6540f1c5-ab3d-4eff-9ad2-79a95aec93d5_-sidebar-action[style]:not([checked="true"]) {
   list-style-image: url(chrome://userchrome/content/material/pushbullet-solid.svg) !important;
+}
+
+#sidebarMenu-popup > menuitem#sidebarswitcher_menu__6540f1c5-ab3d-4eff-9ad2-79a95aec93d5_-sidebar-action:is([type="checkbox"], [type="radio"]):not([checked="true"])::before {
+  background-image: url(chrome://userchrome/content/material/pushbullet-solid.svg);
 }
 
 :is(.webextension-browser-action, .eom-addon-button)[data-extensionid="{6540f1c5-ab3d-4eff-9ad2-79a95aec93d5}"],
@@ -223,10 +232,13 @@ menupopup#viewSidebarMenu menuitem.menuitem-iconic.webextension-menuitem#menu__6
 
 /* bitwarden, the password manager */
 #sidebar-box[sidebarcommand="_446900e4-71c2-419f-a6a7-df9c091e268b_-sidebar-action"] #sidebar-switcher-target > #sidebar-icon,
-#sidebarMenu-popup #button__446900e4-71c2-419f-a6a7-df9c091e268b_-sidebar-action:not([checked="true"]),
 :is(.webextension-browser-action, .eom-addon-button)[data-extensionid="{446900e4-71c2-419f-a6a7-df9c091e268b}"] .toolbarbutton-icon,
-menupopup#viewSidebarMenu menuitem.menuitem-iconic.webextension-menuitem#menu__446900e4-71c2-419f-a6a7-df9c091e268b_-sidebar-action[style]:is([type="checkbox"], [type="radio"]):not([checked="true"]) {
+menupopup#viewSidebarMenu menuitem.menuitem-iconic.webextension-menuitem#menubar_menu__446900e4-71c2-419f-a6a7-df9c091e268b_-sidebar-action[style]:not([checked="true"]) {
   list-style-image: url(chrome://userchrome/content/material/bitwarden.svg) !important;
+}
+
+#sidebarMenu-popup > menuitem#sidebarswitcher_menu__446900e4-71c2-419f-a6a7-df9c091e268b_-sidebar-action:is([type="checkbox"], [type="radio"]):not([checked="true"])::before {
+  background-image: url(chrome://userchrome/content/material/bitwarden.svg);
 }
 
 /* simple translate and "to google translate" */
@@ -268,8 +280,12 @@ menupopup#viewSidebarMenu menuitem.menuitem-iconic.webextension-menuitem#menu__4
 
 /* multithreaded download manager, an extension for downloading files more quickly or with fewer restrictions */
 :is(.webextension-browser-action, .eom-addon-button)[data-extensionid="multithreaded-download-manager@qw.linux-2g64.local"i] .toolbarbutton-icon,
-menupopup#viewSidebarMenu menuitem.menuitem-iconic.webextension-menuitem#menu_multithreaded-download-manager_qw_linux-2g64_local-sidebar-action[style]:is([type="checkbox"], [type="radio"]):not([checked="true"]) .menu-iconic-left {
+menupopup#viewSidebarMenu menuitem.menuitem-iconic.webextension-menuitem#menubar_menu_multithreaded-download-manager_qw_linux-2g64_local-sidebar-action[style]:not([checked="true"]) .menu-iconic-left {
   list-style-image: url(chrome://userchrome/content/downloads/double-download.svg);
+}
+
+#sidebarMenu-popup > menuitem#sidebarswitcher_menu_multithreaded-download-manager_qw_linux-2g64_local-sidebar-action:is([type="checkbox"], [type="radio"]):not([checked="true"])::before {
+  background-image: url(chrome://userchrome/content/downloads/double-download.svg);
 }
 
 /* firefox private network beta. not available anymore to my knowledge. replaced
@@ -312,9 +328,12 @@ elaborate/compiled stylesheets */
 /* Notes by Firefox */
 :is(.webextension-browser-action, .eom-addon-button)[data-extensionid="notes@mozilla.com"i],
 #sidebar-box[sidebarcommand="notes_mozilla_com-sidebar-action"] #sidebar-switcher-target > #sidebar-icon,
-#sidebarMenu-popup #button_notes_mozilla_com-sidebar-action:not([checked="true"]),
-menupopup#viewSidebarMenu menuitem.menuitem-iconic.webextension-menuitem#menu_notes_mozilla_com-sidebar-action[style]:is([type="checkbox"], [type="radio"]):not([checked="true"]) .menu-iconic-left {
+menupopup#viewSidebarMenu menuitem.menuitem-iconic.webextension-menuitem#menubar_menu_notes_mozilla_com-sidebar-action[style]:not([checked="true"]) .menu-iconic-left {
   list-style-image: url(chrome://userchrome/content/material/notepad-large.svg) !important;
+}
+
+#sidebarMenu-popup > menuitem#sidebarswitcher_menu_notes_mozilla_com-sidebar-action:is([type="checkbox"], [type="radio"]):not([checked="true"])::before {
+  background-image: url(chrome://userchrome/content/material/notepad-large.svg);
 }
 
 :is(.menu-iconic, .menuitem-iconic)#notes_mozilla_com-menuitem-_send-to-notes .menu-iconic-left::before {
@@ -424,6 +443,10 @@ menupopup#viewSidebarMenu menuitem.menuitem-iconic.webextension-menuitem#menu_no
 /* sidebery */
 .eom-addon-button[data-extensionid="{3c078156-979c-498b-8990-85f7987dd929}"] .toolbarbutton-icon {
   list-style-image: url(chrome://userchrome/content/material/sidebery.svg);
+}
+
+#sidebarMenu-popup > menuitem#sidebarswitcher_menu__3c078156-979c-498b-8990-85f7987dd929_-sidebar-action:is([type="checkbox"], [type="radio"]):not([checked="true"])::before {
+  background-image: url(chrome://userchrome/content/material/sidebery.svg);
 }
 
 /* my youtube search engine addon */
@@ -837,14 +860,17 @@ menupopup:not(#contentAreaContextMenu) > #addon_darkreader_org-menuitem-_DarkRea
 
 #addon_darkreader_org-menuitem-_toggle[label="Toggle extension"] > .menu-accel-container::before {
   content: "Toggle Extension";
+  white-space: nowrap !important;
 }
 
 #addon_darkreader_org-menuitem-_addSite[label="Toggle current site"] > .menu-accel-container::before {
   content: "Toggle Current Site";
+  white-space: nowrap !important;
 }
 
 #addon_darkreader_org-menuitem-_switchEngine[label="Theme generation mode"] > .menu-accel-container::before {
   content: "Theme Generation Mode";
+  white-space: nowrap !important;
 }
 
 /* stylus context menu items */

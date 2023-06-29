@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Show Selected Sidebar in Switcher Panel
-// @version        1.0.2
+// @version        1.0.3
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -23,25 +23,26 @@ Proton removes the checkmark shown on the selected sidebar in the sidebar switch
     for (let type of builtInSidebars) {
       SidebarUI.sidebars.get(
         `view${type}Sidebar`
-      ).buttonId = `sidebar-switcher-${type.toLowerCase()}`;
+      ).switcherMenuId = `sidebar-switcher-${type.toLowerCase()}`;
     }
 
     SidebarUI.selectMenuItem = function selectMenuItem(commandID) {
-      for (let [id, { menuId, buttonId, triggerButtonId }] of this.sidebars) {
+      for (let [id, { menuId, switcherMenuId, triggerButtonId }] of this
+        .sidebars) {
         let menu = document.getElementById(menuId);
-        let button = document.getElementById(buttonId);
+        let menuitem = document.getElementById(switcherMenuId);
         let triggerbutton =
           triggerButtonId && document.getElementById(triggerButtonId);
         if (id == commandID) {
           menu.setAttribute("checked", "true");
-          button.setAttribute("checked", "true");
+          menuitem.setAttribute("checked", "true");
           if (triggerbutton) {
             triggerbutton.setAttribute("checked", "true");
             updateToggleControlLabel(triggerbutton);
           }
         } else {
           menu.removeAttribute("checked");
-          button.removeAttribute("checked");
+          menuitem.removeAttribute("checked");
           if (triggerbutton) {
             triggerbutton.removeAttribute("checked");
             updateToggleControlLabel(triggerbutton);
@@ -49,6 +50,48 @@ Proton removes the checkmark shown on the selected sidebar in the sidebar switch
         }
       }
     };
+
+    // support icons for the "move sidebar to left" and "move sidebar to right" buttons in
+    // the sidebar switcher dropdown menu that appear when you click the sidebar switcher:
+    // #sidebar-reverse-position[to-position="left"] {
+    //     list-style-image: url(chrome://browser/skin/back.svg);
+    // }
+    // #sidebar-reverse-position[to-position="right"] {
+    //     list-style-image: url(chrome://browser/skin/forward.svg);
+    // }
+    SidebarUI.showSwitcherPanel = function() {
+      this._switcherPanel.addEventListener(
+        "popuphiding",
+        () => this._switcherTarget.classList.remove("active"),
+        { once: true }
+      );
+      let onRight = this._positionStart == RTL_UI;
+      let label = onRight
+        ? gNavigatorBundle.getString("sidebar.moveToLeft")
+        : gNavigatorBundle.getString("sidebar.moveToRight");
+      this._reversePositionButton.setAttribute("label", label);
+      this._reversePositionButton.setAttribute(
+        "to-position",
+        onRight ? "left" : "right"
+      );
+      this._switcherPanel.hidden = false;
+      this._switcherPanel.openPopup(this._switcherTarget);
+      this._switcherTarget.classList.add("active");
+      this._switcherTarget.setAttribute("aria-expanded", true);
+      for (let sidebar of this.sidebars.values()) {
+        let menuitem = document.getElementById(sidebar.switcherMenuId);
+        menuitem.setAttribute("type", "radio");
+      }
+    };
+
+    document
+      .getElementById("viewSidebarMenu")
+      .addEventListener("popupshowing", () => {
+        for (let sidebar of SidebarUI.sidebars.values()) {
+          let menuitem = document.getElementById(sidebar.menuId);
+          menuitem.setAttribute("type", "radio");
+        }
+      });
   }
 
   if (gBrowserInit.delayedStartupFinished) {

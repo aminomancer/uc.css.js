@@ -695,6 +695,11 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
       font-size: 1.1em !important;
     }
 
+    #identity-popup[mixedcontent~="active-loaded"] .identity-popup-connection-not-secure,
+    #identity-popup:not([mixedcontent]) .identity-popup-connection-not-secure {
+      font-weight: var(--uc-font-weight-bold, 600) !important;
+    }
+
     @-moz-document url-prefix("chrome://browser/content/syncedtabs/sidebar.xhtml") {
       body {
         font-family: SF Pro, SF Arabic, Segoe UI, sans-serif !important;

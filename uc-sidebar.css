@@ -191,12 +191,12 @@ for use with tooltipStyler.uc.js - won't do anything without that script. */
   margin-top: 0 !important;
 }
 
-#sidebarMenu-popup > .webextension-menuitem > .toolbarbutton-icon {
+#sidebarMenu-popup > .webextension-menuitem .menu-iconic-icon {
   opacity: 0.8 !important;
   fill: currentColor !important;
 }
 
-#sidebarMenu-popup > .subviewbutton[checked="true"] > .toolbarbutton-icon {
+#sidebarMenu-popup > menuitem[checked="true"] .menu-iconic-icon {
   list-style-image: none !important;
   background-image: url(chrome://userchrome/content/radio.svg);
   opacity: 1 !important;
@@ -205,16 +205,9 @@ for use with tooltipStyler.uc.js - won't do anything without that script. */
   border-radius: 100%;
 }
 
-#sidebarMenu-popup > .subviewbutton > .toolbarbutton-text {
-  padding-inline-start: 8px !important;
-}
-
-#sidebarMenu-popup > .subviewbutton > .toolbarbutton-icon {
-  margin-inline-start: 0 !important;
-  min-width: 16px !important;
+#sidebarMenu-popup > menuitem .menu-iconic-icon {
+  margin-inline: var(--context-iconic-margin) !important;
   fill-opacity: 0.8;
-  width: 16px;
-  height: 16px;
 }
 
 #sidebar-switcher-target:-moz-focusring,

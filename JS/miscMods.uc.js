@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Misc. Mods
-// @version        2.0.8
+// @version        2.0.9
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Various tiny mods not worth making separate scripts for. Read the comments inside the script for details.
@@ -575,35 +575,6 @@
       if (etpPanel) {
         etpPanel.addEventListener("popupshowing", setEtpPopupInfoTooltip);
       }
-
-      // support icons for the "move sidebar to left" and "move sidebar to right" buttons in
-      // the sidebar switcher dropdown menu that appear when you click the sidebar switcher:
-      // #sidebar-reverse-position[to-position="left"] {
-      //     list-style-image: url(chrome://browser/skin/back.svg);
-      // }
-      // #sidebar-reverse-position[to-position="right"] {
-      //     list-style-image: url(chrome://browser/skin/forward.svg);
-      // }
-      SidebarUI.showSwitcherPanel = function() {
-        this._ensureShortcutsShown();
-        this._switcherPanel.addEventListener(
-          "popuphiding",
-          () => this._switcherTarget.classList.remove("active"),
-          { once: true }
-        );
-        let onRight = this._positionStart == RTL_UI;
-        let label = onRight
-          ? gNavigatorBundle.getString("sidebar.moveToLeft")
-          : gNavigatorBundle.getString("sidebar.moveToRight");
-        this._reversePositionButton.setAttribute("label", label);
-        this._reversePositionButton.setAttribute(
-          "to-position",
-          onRight ? "left" : "right"
-        );
-        this._switcherPanel.hidden = false;
-        this._switcherPanel.openPopup(this._title.previousElementSibling);
-        this._switcherTarget.classList.add("active");
-      };
 
       // add an "engine" attribute to the searchbar autocomplete popup, so we can replace the
       // engine icon with CSS without needing to use the (random) icon URL as a selector. this
