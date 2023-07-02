@@ -38,8 +38,8 @@ user_pref("dom.forms.select.customstyling", false);
 user_pref("browser.tabs.tabmanager.enabled", true);
 // disable urlbar result group labels since we don't use them
 user_pref("browser.urlbar.groupLabels.enabled", false);
-// disable urlbar result menu buttons since they slow down tabbing through results
-user_pref("browser.urlbar.resultMenu", false);
+// allow urlbar result menu buttons without slowing down tabbing through results
+user_pref("browser.urlbar.resultMenu.keyboardAccessible", false);
 // corresponds to the system color Highlight
 user_pref("ui.highlight", "hsl(250, 100%, 60%)");
 // Background for selected <option> elements and others
@@ -71,8 +71,10 @@ user_pref("browser.privatebrowsing.enable-new-indicator", false);
 user_pref("accessibility.mouse_focuses_formcontrol", 0);
 user_pref("browser.tabs.tabMinWidth", 90);
 user_pref("browser.urlbar.accessibility.tabToSearch.announceResults", false);
+// disable urlbar suggestions that don't look good with the theme
 user_pref("browser.urlbar.richSuggestions.tail", false);
-user_pref("browser.urlbar.searchTips", false);
+user_pref("browser.urlbar.suggest.quicksuggest.nonsponsored", false);
+user_pref("browser.urlbar.suggest.quicksuggest.sponsored", false);
 user_pref("browser.urlbar.trimURLs", false);
 // hide fullscreen enter/exit warning
 user_pref("full-screen-api.transition-duration.enter", "0 0");

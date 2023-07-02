@@ -7,7 +7,7 @@
 /* controls the appearance of the urlbar results popup .urlbarView and #urlbar-results, etc. */
 
 .urlbarView-row {
-  border-radius: 3px !important;
+  border-radius: 4px !important;
 }
 
 .urlbarView-no-wrap {
@@ -35,21 +35,10 @@ by underlining them (requires urlbarMods.uc.js) */
   color: var(--panel-shortcut-focus);
 }
 
-.urlbarView-row {
-  background: none !important;
-  border: none !important;
-}
-
 .urlbarView-row[selected]:not([dynamicType="quickactions"]) > .urlbarView-row-inner,
 .urlbarView-row > .urlbarView-row-inner[selected],
 .urlbarView-help[selected] {
-  background-color: var(--arrowpanel-dimmed-further) !important;
   fill-opacity: 1;
-}
-
-.urlbarView-row:not([selected], [dynamicType="quickactions"]):hover > .urlbarView-row-inner:not([selected]),
-.urlbarView-help:not([selected]):hover {
-  background-color: var(--arrowpanel-dimmed) !important;
 }
 
 .urlbarView {
@@ -87,10 +76,6 @@ by underlining them (requires urlbarMods.uc.js) */
 .urlbarView-url,
 .urlbarView-title:not(:empty) ~ .urlbarView-action {
   font-size: 0.85em;
-}
-
-.urlbarView-row {
-  padding: 6px 6.5px !important;
 }
 
 .urlbarView-tags {
@@ -172,12 +157,56 @@ by underlining them (requires urlbarMods.uc.js) */
   height: 14px !important;
 }
 
-.urlbarView-button-help {
-  min-width: var(--urlbar-one-offs-engine-width) !important;
-  height: var(--urlbar-one-offs-engine-width) !important;
-  padding: 0 !important;
-  margin-inline-end: 0 !important;
-  border-radius: var(--toolbarbutton-border-radius) !important;
+.urlbarView-button {
+  /* border-radius: var(--toolbarbutton-border-radius) !important; */
+  border: 1px solid var(--panel-separator-color) !important;
+}
+
+.urlbarView-results:not([wrap]) > .urlbarView-row > .urlbarView-button-menu:not(:empty) {
+	display: inline-flex;
+	align-items: center;
+	border-radius: var(--urlbarView-result-button-size);
+	padding-inline: 8px 28px !important;
+	background-position-x: right 6px !important;
+}
+
+.urlbarView-row[dynamicType="weather"] {
+  padding-inline-end: 6px !important;
+}
+
+.urlbarView-row[dynamicType="weather"] .urlbarView-row-inner {
+  padding: 5px !important;
+  column-gap: 0 !important;
+}
+
+.urlbarView-dynamic-weather-summary > div {
+	margin-block: 1px !important;
+}
+
+.urlbarView-dynamic-weather-bottom {
+	margin-top: revert !important;
+	opacity: revert !important;
+}
+
+.urlbarView-dynamic-weather-title {
+  line-height: revert !important;
+}
+
+.urlbarView-dynamic-weather-currentConditions {
+	color: inherit !important;
+	background-color: var(--arrowpanel-faint) !important;
+	padding: 0.61em 0.61em !important;
+	margin-inline-end: 0.7em !important;
+	border-radius: 3px !important;
+	text-align: start !important;
+}
+
+.urlbarView-dynamic-weather-currently {
+	margin-bottom: 0 !important;
+}
+
+.urlbarView-dynamic-weather-temperature {
+	margin-inline-end: 3px !important;
 }
 
 .urlbarView-row[type="tip"] > .urlbarView-row-inner > .urlbarView-favicon,
@@ -187,9 +216,18 @@ by underlining them (requires urlbarMods.uc.js) */
   margin: revert !important;
 }
 
-.urlbarView-button-help:is([selected], :focus-visible):not([disabled]) {
-  background-color: var(--arrowpanel-dimmed-further) !important;
-  outline: revert !important;
+.urlbarView-button[selected] {
+  background-color: var(--urlbarView-result-button-hover-background-color) !important;
+  outline: none !important;
+}
+
+.urlbarView-button:is(:hover, [open]),
+.urlbarView-button[selected] {
+  fill-opacity: 1 !important;
+}
+
+.urlbarView-button-help {
+	background-image: url(chrome://userchrome/content/help-solid.svg) !important;
 }
 
 .urlbarView-row[has-buttons] > .urlbarView-row-inner {
@@ -207,6 +245,10 @@ by underlining them (requires urlbarMods.uc.js) */
 .urlbarView-row:not([type], [has-url]) .urlbarView-favicon {
   max-width: 16px !important;
   max-height: 16px !important;
+}
+
+.urlbarView-row[rich-suggestion="no-icon"]:not([firefox-suggest-sponsored]) .urlbarView-favicon {
+  /* margin-inline: 4px 16px; */
 }
 
 .urlbarView-type-icon {
@@ -476,6 +518,7 @@ by underlining them (requires urlbarMods.uc.js) */
 }
 
 .urlbarView-row .urlbarView-row-inner > .urlbarView-no-wrap > .urlbarView-title-separator,
+.urlbarView-dynamic-weather-titleSeparator,
 .urlbarView-dynamic-calculator-action::before,
 .urlbarView-dynamic-unitConversion-action::before {
   align-items: center;
@@ -523,7 +566,8 @@ by underlining them (requires urlbarMods.uc.js) */
 .urlbarView-row .urlbarView-tag,
 .urlbarView-row:where([type="tabtosearch"], [type="tokenaliasengine"], [type="tip"]) .urlbarView-title,
 .urlbarView-row:not([has-url]) .urlbarView-title[data-l10n-id="urlbar-result-action-search-w-engine"],
-.urlbarView-tail-prefix {
+.urlbarView-tail-prefix,
+.urlbarView-dynamic-weather-bottom {
   font-weight: var(--urlbar-result-strong-font-weight, 500) !important;
   font-style: normal !important;
   color: var(--panel-shortcut-color);
@@ -545,7 +589,8 @@ by underlining them (requires urlbarMods.uc.js) */
 .urlbarView-row[selected]:not([has-url]) .urlbarView-title[data-l10n-id="urlbar-result-action-search-w-engine"],
 .urlbarView-row[selected] .urlbarView-tail-prefix,
 .urlbarView-row-inner[selected] .urlbarView-dynamic-calculator-input,
-.urlbarView-row-inner[selected] .urlbarView-dynamic-unitConversion-output {
+.urlbarView-row-inner[selected] .urlbarView-dynamic-unitConversion-output,
+.urlbarView-row[selected] .urlbarView-dynamic-weather-bottom {
   color: var(--panel-shortcut-focus);
 }
 
@@ -723,7 +768,6 @@ by underlining them (requires urlbarMods.uc.js) */
   border: 1px solid transparent !important;
   border-top-width: 0 !important;
   padding: 2px !important;
-  padding-top: 1px !important;
   width: calc(100% + 10px) !important;
   left: -5px !important;
   right: -5px !important;
@@ -819,8 +863,7 @@ so you might wanna turn the animation off. I might even make it off by default. 
   overflow: hidden !important;
   min-width: 0 !important;
   min-height: 34px !important;
-  padding: 1px 0 !important;
-  margin: 0 !important;
+  border: 1px solid transparent !important;
 }
 
 .urlbarView-row[label] {
@@ -900,6 +943,15 @@ so you might wanna turn the animation off. I might even make it off by default. 
   margin-inline: 8px 6px !important;
   font-size: 0.85em !important;
   color: var(--urlbar-popup-action-color) !important;
+}
+
+.urlbarView-row[rich-suggestion="with-icon"] > .urlbarView-row-inner > .urlbarView-no-wrap > .urlbarView-title {
+  line-height: revert !important;
+}
+
+.urlbarView-row[rich-suggestion="with-icon"] > .urlbarView-row-inner > .urlbarView-favicon {
+	margin-block: 6px !important;
+  border-radius: 2px !important;
 }
 
 .urlbarView #urlbar-results {

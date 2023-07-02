@@ -164,6 +164,8 @@ toolbarpaletteitem[place="palette"] > #search-container {
 }
 
 #PopupSearchAutoComplete .search-panel-tree {
+  visibility: visible !important;
+  height: auto !important;
   margin-inline: var(--arrowpanel-menuitem-margin-inline) !important;
 }
 

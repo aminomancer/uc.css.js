@@ -9,25 +9,16 @@ it also changes the appearance of the one-offs in the searchbar. */
 
 #PopupSearchAutoComplete .search-one-offs {
   flex-flow: row nowrap !important;
-  max-width: 100% !important;
-  width: 100% !important;
-  min-width: 0 !important;
   display: flex !important;
-  flex-flow: row nowrap !important;
   align-items: center !important;
-}
-
-#PopupSearchAutoComplete .search-one-offs > * {
-  flex-grow: 0 !important;
-  flex-shrink: 1 !important;
-  max-width: -moz-available !important;
-  min-width: 0 !important;
 }
 
 #PopupSearchAutoComplete .search-panel-one-offs-container {
   padding-inline: 4px;
   clip-path: inset(0 4px 0 4px);
   display: flex !important;
+  flex-grow: 1 !important;
+  flex-shrink: 1 !important;
 }
 
 #PopupSearchAutoComplete .search-panel-one-offs {

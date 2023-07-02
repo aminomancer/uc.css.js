@@ -202,6 +202,8 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
     box-shadow: var(--searchbar-popup-box-shadow);
     width: calc(var(--panel-width) + 10px);
     margin: revert;
+    max-height: revert !important;
+    max-width: revert !important;
   }
 
   #managed-bookmarks > .toolbarbutton-icon,

@@ -90,6 +90,10 @@ menupopup {
   --urlbar-popup-url-color: var(--purple-35) !important;
   --urlbar-popup-action-color: var(--pink-action) !important;
   --urlbarView-item-inline-padding: 8px !important;
+  --urlbarView-result-button-hover-color: var(--toolbar-field-focus-color) !important;
+  --urlbarView-result-button-hover-background-color: var(--arrowpanel-dimmed) !important;
+  --urlbarView-result-button-selected-color: var(--toolbar-field-focus-color) !important;
+  --urlbarView-result-button-selected-background-color: var(--arrowpanel-faint) !important;
   --tab-min-height: var(--uc-tab-min-height) !important;
   --tab-block-margin: 0px !important;
   --inline-tab-padding: 10px !important;
