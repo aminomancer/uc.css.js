@@ -179,17 +179,16 @@ menuitem[disabled="true"] :is(.menu-accel, .menu-iconic-accel) {
 }
 
 menupopup menuitem:is([type="checkbox"], [type="radio"])::before {
-  position: relative;
-  display: -moz-inline-box;
+  content: "";
+  display: inline-block;
   width: 14px;
   min-width: 14px;
   height: 14px;
   min-height: 14px;
-  margin-inline: var(--context-checkbox-margin);
   box-sizing: border-box;
+  margin-inline: var(--context-checkbox-margin);
   fill: currentColor;
   -moz-context-properties: fill, fill-opacity, stroke;
-  content: "";
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;

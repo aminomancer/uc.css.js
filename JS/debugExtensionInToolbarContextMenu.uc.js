@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Debug Extension in Toolbar Context Menu
-// @version        1.4.5
+// @version        1.5.0
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -87,27 +87,42 @@ class DebugExtension {
   };
   actionTypes = ["BrowserAction", "PageAction", "SidebarAction", "Options"];
   constructor() {
-    this.setupUpdate();
+    this.modifyBuiltinMethods();
     this.toolbarContext = document.getElementById("toolbar-context-menu");
     this.overflowContext = document.getElementById(
       "customizationPanelItemContextMenu"
     );
     this.pageActionContext = document.getElementById("pageActionContextMenu");
+    this.unifiedExtensionsContext = document.getElementById(
+      "unified-extensions-context-menu"
+    );
+
     this.toolbarMenu = this.makeMainMenu(this.toolbarContext);
     this.toolbarMenupopup = this.toolbarMenu.appendChild(
       document.createXULElement("menupopup")
     );
     this.toolbarMenupopup.addEventListener("popupshowing", this);
+
     this.overflowMenu = this.makeMainMenu(this.overflowContext);
     this.overflowMenupopup = this.overflowMenu.appendChild(
       document.createXULElement("menupopup")
     );
     this.overflowMenupopup.addEventListener("popupshowing", this);
+
     this.pageActionMenu = this.makeMainMenu(this.pageActionContext);
     this.pageActionMenupopup = this.pageActionMenu.appendChild(
       document.createXULElement("menupopup")
     );
     this.pageActionMenupopup.addEventListener("popupshowing", this);
+
+    this.unifiedExtensionsMenu = this.makeMainMenu(
+      this.unifiedExtensionsContext
+    );
+    this.unifiedExtensionsMenupopup = this.unifiedExtensionsMenu.appendChild(
+      document.createXULElement("menupopup")
+    );
+    this.unifiedExtensionsMenupopup.addEventListener("popupshowing", this);
+
     // make a menu item for each type of page within each context
     [
       "Manifest",
@@ -117,27 +132,31 @@ class DebugExtension {
       "CopyID",
       "CopyURL",
     ].forEach(type =>
-      ["toolbar", "overflow", "pageAction"].forEach(context => {
-        if (typeof type === "string") {
-          this.makeMenuitem(type, this[`${context}Menupopup`]);
-        } else if (typeof type === "object") {
-          this.makeMenu(type, this[`${context}Menupopup`]);
+      ["toolbar", "overflow", "pageAction", "unifiedExtensions"].forEach(
+        context => {
+          if (typeof type === "string") {
+            this.makeMenuitem(type, this[`${context}Menupopup`]);
+          } else if (typeof type === "object") {
+            this.makeMenu(type, this[`${context}Menupopup`]);
+          }
         }
-      })
+      )
     );
   }
   /**
    * set a bunch of attributes on a node
-   * @param {object} element (a DOM node)
-   * @param {object} attrs (an object containing properties — keys are turned into attributes on the DOM node)
+   * @param {object} element a DOM node
+   * @param {object} attrs an object containing properties. keys are turned
+   *   into attributes on the DOM node, with values as the attribute values.
    */
   maybeSetAttributes(element, attrs) {
     for (let [name, value] of Object.entries(attrs)) {
-      if (value === void 0) element.removeAttribute(name);
+      if (value == null) element.removeAttribute(name);
       else element.setAttribute(name, value);
     }
   }
-  // enable/disable menu items depending on whether the clicked extension has pages available to open.
+  // enable/disable menu items depending on whether the clicked extension has
+  // pages available to open.
   handleEvent(e) {
     if (e.target !== e.currentTarget) return;
     let popup = e.target;
@@ -148,35 +167,68 @@ class DebugExtension {
     for (let type of this.actionTypes) {
       actions.set(type, this.getActionURL(extension, type));
     }
+    let { classPrefix } = this.getMenuDetails(popup);
     if (popup.className.includes("Submenu-Popup")) {
       actions.forEach((url, type) => {
-        popup.querySelector(`.customize-context-${type}`).disabled = !url;
+        popup.querySelector(`.${classPrefix}-${type}`).disabled = !url;
       });
     } else {
-      popup.querySelector(".customize-context-ViewDocs-Submenu").disabled = [
+      popup.querySelector(`.${classPrefix}-ViewDocs-Submenu`).disabled = [
         ...actions.values(),
       ].every(url => !url);
-      popup.querySelector(".customize-context-ViewSource").disabled =
+      popup.querySelector(`.${classPrefix}-ViewSource`).disabled =
         extension.addonData.isSystem ||
         extension.addonData.builtIn ||
         extension.addonData.temporarilyInstalled;
     }
   }
+  getMenuDetails(popup) {
+    let contexttype;
+    let classPrefix;
+    let previousSiblingSelector;
+    let getExtensionId;
+    if (this.pageActionContext.contains(popup)) {
+      classPrefix = "customize-context";
+      previousSiblingSelector = ".manageExtensionItem";
+      getExtensionId = () => {
+        return BrowserPageActions.actionForNode(popup.triggerNode).extensionID;
+      };
+    } else if (this.unifiedExtensionsContext.contains(popup)) {
+      classPrefix = "unified-extensions-context-menu";
+      previousSiblingSelector =
+        ".unified-extensions-context-menu-manage-extension";
+      getExtensionId = () => {
+        return gUnifiedExtensions._getExtensionId(popup);
+      };
+    } else {
+      contexttype = "toolbaritem";
+      classPrefix = "customize-context";
+      previousSiblingSelector = ".customize-context-manageExtension";
+      getExtensionId = () => {
+        return ToolbarContextMenu._getExtensionId(popup);
+      };
+    }
+    return {
+      contexttype,
+      classPrefix,
+      previousSiblingSelector,
+      getExtensionId,
+    };
+  }
   makeMainMenu(popup) {
+    let {
+      contexttype,
+      classPrefix,
+      previousSiblingSelector,
+    } = this.getMenuDetails(popup);
     let menu = document.createXULElement("menu");
     this.maybeSetAttributes(menu, {
-      class: "customize-context-debugExtension",
+      class: `${classPrefix}-debugExtension`,
       label: this.config.menuLabel,
       accesskey: this.config.menuAccessKey,
-      contexttype: popup === this.pageActionContext ? void 0 : "toolbaritem",
+      contexttype,
     });
-    popup
-      .querySelector(
-        popup === this.pageActionContext
-          ? ".manageExtensionItem"
-          : ".customize-context-manageExtension"
-      )
-      .after(menu);
+    popup.querySelector(previousSiblingSelector).after(menu);
     return menu;
   }
   /**
@@ -187,15 +239,14 @@ class DebugExtension {
    * @returns a menuitem DOM node
    */
   makeMenuitem(type, popup) {
+    let { contexttype, classPrefix } = this.getMenuDetails(popup);
     let item = document.createXULElement("menuitem");
     this.maybeSetAttributes(item, {
-      class: `customize-context-${type}`,
+      class: `${classPrefix}-${type}`,
       label: this.config[type].label,
       accesskey: this.config[type].accesskey,
       oncommand: `debugExtensionMenu.onCommand(event, this.parentElement, "${type}")`,
-      contexttype: popup.closest("#pageActionContextMenu")
-        ? void 0
-        : "toolbaritem",
+      contexttype,
     });
     popup.appendChild(item);
     return item;
@@ -209,27 +260,25 @@ class DebugExtension {
   makeMenu(type, popup) {
     let { name, children } = type;
     if (!name || !children) return;
+    let { contexttype, classPrefix } = this.getMenuDetails(popup);
     let menu = document.createXULElement("menu");
     this.maybeSetAttributes(menu, {
-      class: `customize-context-${name}-Submenu`,
+      class: `${classPrefix}-${name}-Submenu`,
       label: this.config[name].label,
       accesskey: this.config[name].accesskey,
-      contexttype: popup.closest("#pageActionContextMenu")
-        ? void 0
-        : "toolbaritem",
+      contexttype,
     });
     let menupopup = menu.appendChild(document.createXULElement("menupopup"));
-    menupopup.className = `customize-context-${name}-Submenu-Popup`;
+    menupopup.className = `${classPrefix}-${name}-Submenu-Popup`;
     menupopup.addEventListener("popupshowing", this);
-    children.forEach(item => this.makeMenuitem(item, menupopup));
     popup.appendChild(menu);
+    children.forEach(item => this.makeMenuitem(item, menupopup));
     return menu;
   }
   // get the ID for the button the context menu was opened on
   getExtensionId(popup) {
-    return popup.closest("#pageActionContextMenu")
-      ? BrowserPageActions.actionForNode(popup.triggerNode).extensionID
-      : ToolbarContextMenu._getExtensionId(popup);
+    let { getExtensionId } = this.getMenuDetails(popup);
+    return getExtensionId();
   }
   matchesActionNode(elt) {
     return (
@@ -316,6 +365,11 @@ class DebugExtension {
           actionNode &&
           windowUtils.getBoundsWithoutFlushing(actionNode)?.width
         ) {
+          if (actionNode.className.includes("unified-extensions-item")) {
+            event.stopPropagation();
+            event.preventDefault();
+            return null;
+          }
           window.CustomHint?.show(actionNode, "Copied");
         }
         return;
@@ -356,7 +410,7 @@ class DebugExtension {
   // "remove extension," "manage extension" items, etc. that's based on whether
   // the button that was clicked is an extension or not, so it also updates the
   // visibility of our menu by the same parameter.
-  setupUpdate() {
+  modifyBuiltinMethods() {
     eval(
       `ToolbarContextMenu.updateExtension = async function ${ToolbarContextMenu.updateExtension
         .toSource()
@@ -379,6 +433,15 @@ class DebugExtension {
           `$1, debugExtension = popup.querySelector(".customize-context-debugExtension");`
         )
         .replace(/(removeExtension.hidden =)/, `$1 debugExtension.hidden =`)}`
+    );
+    eval(
+      `gUnifiedExtensions.onContextMenuCommand = function ${gUnifiedExtensions.onContextMenuCommand
+        .toSource()
+        .replace(/onContextMenuCommand/, "")
+        .replace(
+          /(classList\.contains\(\"unified-extensions-context-menu-move-widget-down\"\))/,
+          `$1 || \n classList.contains("unified-extensions-context-menu-CopyID") || \n classList.contains("unified-extensions-context-menu-CopyURL")`
+        )}`
     );
   }
 }

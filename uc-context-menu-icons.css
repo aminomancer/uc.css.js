@@ -314,7 +314,24 @@ menuitem.customize-context-Options > .menu-text,
 menuitem.pageActionContextMenuItem.manageExtensionItem > .menu-text,
 menuitem.customize-context-removeExtension > .menu-text,
 menuitem.pageActionContextMenuItem.removeExtensionItem > .menu-text,
-menuitem.customize-context-reportExtension > .menu-text {
+menuitem.customize-context-reportExtension > .menu-text,
+menuitem.unified-extensions-context-menu-move-widget-up > .menu-text,
+menuitem.unified-extensions-context-menu-move-widget-down > .menu-text,
+menu.unified-extensions-context-menu-debugExtension > .menu-text,
+menuitem.unified-extensions-context-menu-manage-extension > .menu-text,
+menuitem.unified-extensions-context-menu-remove-extension > .menu-text,
+menuitem.unified-extensions-context-menu-report-extension > .menu-text,
+menu.unified-extensions-context-menu-debugExtension > .menu-text,
+menuitem.unified-extensions-context-menu-CopyID > .menu-text,
+menuitem.unified-extensions-context-menu-CopyURL > .menu-text,
+menuitem.unified-extensions-context-menu-Inspector > .menu-text,
+menuitem.unified-extensions-context-menu-ViewSource > .menu-text,
+menuitem.unified-extensions-context-menu-Manifest > .menu-text,
+menu.unified-extensions-context-menu-ViewDocs-Submenu > .menu-text,
+menuitem.unified-extensions-context-menu-BrowserAction > .menu-text,
+menuitem.unified-extensions-context-menu-PageAction > .menu-text,
+menuitem.unified-extensions-context-menu-SidebarAction > .menu-text,
+menuitem.unified-extensions-context-menu-Options > .menu-text {
   margin-inline: 0 !important;
   padding-inline: 0 2px !important;
 }
@@ -610,7 +627,24 @@ menuitem.customize-context-Options::before,
 menuitem.pageActionContextMenuItem.manageExtensionItem::before,
 menuitem.customize-context-removeExtension::before,
 menuitem.pageActionContextMenuItem.removeExtensionItem::before,
-menuitem.customize-context-reportExtension::before {
+menuitem.customize-context-reportExtension::before,
+menuitem.unified-extensions-context-menu-move-widget-up::before,
+menuitem.unified-extensions-context-menu-move-widget-down::before,
+menuitem.unified-extensions-context-menu-manage-extension::before,
+menu.unified-extensions-context-menu-debugExtension::before,
+menuitem.unified-extensions-context-menu-remove-extension::before,
+menuitem.unified-extensions-context-menu-report-extension::before,
+menu.unified-extensions-context-menu-debugExtension::before,
+menuitem.unified-extensions-context-menu-CopyID::before,
+menuitem.unified-extensions-context-menu-CopyURL::before,
+menuitem.unified-extensions-context-menu-Inspector::before,
+menuitem.unified-extensions-context-menu-ViewSource::before,
+menuitem.unified-extensions-context-menu-Manifest::before,
+menu.unified-extensions-context-menu-ViewDocs-Submenu::before,
+menuitem.unified-extensions-context-menu-BrowserAction::before,
+menuitem.unified-extensions-context-menu-PageAction::before,
+menuitem.unified-extensions-context-menu-SidebarAction::before,
+menuitem.unified-extensions-context-menu-Options::before {
   content: "";
   position: relative;
   display: -moz-inline-box;
@@ -1045,8 +1079,17 @@ menuitem#sanitizeItem::before {
 
 :is(#context-copyimage-contents, #context-copy, #menu_copy, #placesContext_copy, #syncedTabsCopySelected)::before,
 .textbox-contextmenu menuitem[data-l10n-id="text-action-copy"]::before,
-menuitem.customize-context-CopyID::before {
+menuitem.customize-context-CopyID::before,
+menuitem.unified-extensions-context-menu-CopyID::before {
   background-image: url(chrome://userchrome/content/skin/edit-copy.svg);
+}
+
+menuitem.unified-extensions-context-menu-move-widget-up::before {
+  background-image: url(chrome://userchrome/content/find-previous-arrow.svg);
+}
+
+menuitem.unified-extensions-context-menu-move-widget-down::before {
+  background-image: url(chrome://userchrome/content/find-next-arrow.svg);
 }
 
 :is(#placesContext_show_bookmark\:info, #placesContext_show_folder\:info, #placesContext_show\:info)::before {
@@ -1088,7 +1131,7 @@ menuitem.customize-context-CopyID::before {
   background-image: url(chrome://userchrome/content/skin/mail.svg);
 }
 
-:is(#context-copyvideourl, #context-copyaudiourl, #context-copyimage, #context-copylink, #menu_openLocation, menuitem.customize-context-CopyURL)::before {
+:is(#context-copyvideourl, #context-copyaudiourl, #context-copyimage, #context-copylink, #menu_openLocation, menuitem.customize-context-CopyURL, menuitem.unified-extensions-context-menu-CopyURL)::before {
   background-image: url(chrome://userchrome/content/skin/link.svg);
 }
 
@@ -1502,51 +1545,60 @@ menuitem.customize-context-addToPanel::before {
   background-image: url(chrome://userchrome/content/chevron.svg);
 }
 
-menuitem:is(.customize-context-manageExtension, .pageActionContextMenuItem.manageExtensionItem)::before {
+menuitem:is(.customize-context-manageExtension, .pageActionContextMenuItem.manageExtensionItem, .unified-extensions-context-menu-manage-extension)::before {
   background-image: url(chrome://userchrome/content/skin/developer.svg);
 }
 
-menu.customize-context-debugExtension::before {
+menu.customize-context-debugExtension::before,
+menu.unified-extensions-context-menu-debugExtension::before {
   background-image: url(chrome://userchrome/content/devtools/debugging-workers.svg);
 }
 
-menuitem.customize-context-Manifest::before {
+menuitem.customize-context-Manifest::before,
+menuitem.unified-extensions-context-menu-Manifest::before {
   background-image: url(chrome://userchrome/content/devtools/tool-styleeditor.svg);
 }
 
-menuitem.customize-context-Inspector::before {
+menuitem.customize-context-Inspector::before,
+menuitem.unified-extensions-context-menu-Inspector::before {
   background-image: url(chrome://userchrome/content/devtools/tool-inspector.svg);
 }
 
-menuitem.customize-context-ViewSource::before {
+menuitem.customize-context-ViewSource::before,
+menuitem.unified-extensions-context-menu-ViewSource::before {
   background-image: url(chrome://userchrome/content/material/places/folder-source.svg);
 }
 
-menu.customize-context-ViewDocs-Submenu::before {
+menu.customize-context-ViewDocs-Submenu::before,
+menu.unified-extensions-context-menu-ViewDocs-Submenu::before {
   background-image: url(chrome://userchrome/content/document.svg);
 }
 
-menuitem.customize-context-BrowserAction::before {
+menuitem.customize-context-BrowserAction::before,
+menuitem.unified-extensions-context-menu-BrowserAction::before {
   background-image: url(chrome://userchrome/content/devtools/command-noautohide.svg);
 }
 
-menuitem.customize-context-PageAction::before {
+menuitem.customize-context-PageAction::before,
+menuitem.unified-extensions-context-menu-PageAction::before {
   background-image: url(chrome://userchrome/content/skin/readerMode.svg);
 }
 
-menuitem.customize-context-SidebarAction::before {
+menuitem.customize-context-SidebarAction::before,
+menuitem.unified-extensions-context-menu-SidebarAction::before {
   background-image: url(chrome://userchrome/content/skin/sidebars.svg);
 }
 
-menuitem.customize-context-Options::before {
+menuitem.customize-context-Options::before,
+menuitem.unified-extensions-context-menu-Options::before {
   background-image: url(chrome://userchrome/content/settings.svg);
 }
 
-menuitem:is(.customize-context-removeExtension, .pageActionContextMenuItem.removeExtensionItem)::before {
+menuitem:is(.customize-context-removeExtension, .pageActionContextMenuItem.removeExtensionItem, .unified-extensions-context-menu-remove-extension)::before {
   background-image: url(chrome://userchrome/content/material/extension-blocked.svg);
 }
 
-menuitem.customize-context-reportExtension::before {
+menuitem:is(.customize-context-reportExtension, .unified-extensions-context-menu-report-extension)::before {
   background-image: url(chrome://devtools/skin/images/alert.svg);
 }
 
