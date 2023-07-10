@@ -251,6 +251,38 @@ by underlining them (requires urlbarMods.uc.js) */
   /* margin-inline: 4px 16px; */
 }
 
+.urlbarView-row[rich-suggestion] > .urlbarView-row-inner > .urlbarView-row-body > .urlbarView-row-body-top .urlbarView-title-separator {
+  display: none !important;
+}
+
+.urlbarView-row[rich-suggestion][icon-size="16"]:not([has-action]) .urlbarView-row-body {
+  display: inline-flex !important;
+  flex-flow: row nowrap !important;
+  align-items: center !important;
+  column-gap: calc(var(--urlbar-icon-padding) + 2px);
+}
+
+.urlbarView-row[rich-suggestion][icon-size="16"]:not([has-action]) .urlbarView-row-body > * {
+  display: inline-block !important;
+  min-width: min-content !important;
+}
+
+.urlbarView-row[rich-suggestion][icon-size="16"]:not([has-action]) .urlbarView-row-body > *:empty {
+  display: none !important;
+}
+
+.urlbarView-row[rich-suggestion][icon-size="16"]:not([has-action]) .urlbarView-row-body > .urlbarView-row-body-top .urlbarView-action {
+  display: none !important;
+}
+
+.urlbarView-row[rich-suggestion][icon-size="16"]:not([has-action]) .urlbarView-row-body > .urlbarView-row-body-top > .urlbarView-row-body-top-no-wrap {
+  display: inline-block !important;
+}
+
+.urlbarView-row[rich-suggestion][icon-size="16"]:not([has-action]) .urlbarView-row-body > .urlbarView-row-body-description {
+  margin-inline: 8px 6px !important;
+}
+
 .urlbarView-type-icon {
   margin-inline: 0px !important;
   position: relative !important;
@@ -608,11 +640,24 @@ by underlining them (requires urlbarMods.uc.js) */
   color: var(--lwt-toolbar-field-color);
 }
 
+.urlbarView-row[rich-suggestion] > .urlbarView-row-inner > .urlbarView-row-body > .urlbarView-row-body-description,
+.urlbarView-row[rich-suggestion] > .urlbarView-row-inner > .urlbarView-row-body > .urlbarView-row-body-bottom {
+	color: var(--panel-shortcut-color) !important;
+  opacity: 0.7;
+}
+
+.urlbarView-row[rich-suggestion][selected] > .urlbarView-row-inner > .urlbarView-row-body > .urlbarView-row-body-description,
+.urlbarView-row[rich-suggestion][selected] > .urlbarView-row-inner > .urlbarView-row-body > .urlbarView-row-body-bottom {
+	color: var(--panel-shortcut-color) !important;
+  opacity: 1;
+}
+
 .urlbarView-row[sponsored] > .urlbarView-row-inner > .urlbarView-no-wrap > .urlbarView-action {
   color: var(--panel-shortcut-color) !important;
   opacity: 1 !important;
 }
 
+.urlbarView-row[rich-suggestion][selected] > .urlbarView-row-inner > .urlbarView-row-body .urlbarView-action,
 .urlbarView-row[sponsored] > .urlbarView-row-inner[selected] > .urlbarView-no-wrap > .urlbarView-action {
   color: var(--lwt-toolbar-field-color) !important;
   opacity: 1 !important;
