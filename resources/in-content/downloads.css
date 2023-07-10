@@ -119,13 +119,14 @@
   }
 
   .downloadsPanel-blockedSubview-title-box {
-    margin-block: 10px 0 !important;
+    margin-block: 8px !important;
+    min-height: 18px !important;
+    align-items: center !important;
   }
 
   #downloadsPanel-blockedSubview-title {
-    margin-bottom: 10px !important;
+    margin: 0 !important;
     order: 2 !important;
-    margin-inline: 0 !important;
   }
 
   #downloadsPanel-blockedSubview[verdict="Insecure"] #downloadsPanel-blockedSubview-title,
@@ -148,6 +149,7 @@
 
   .downloadsPanel-blockedSubview-image {
     width: 18px !important;
+    height: 18px !important;
     background-size: contain !important;
     background-repeat: no-repeat;
     margin-inline: 6px 5px !important;
@@ -313,6 +315,7 @@
     background-size: contain !important;
     width: 18px !important;
     height: 18px !important;
+    margin-inline-end: 0 !important;
   }
 
   #downloadsPanel-blockedSubview[verdict="Insecure"] .downloadsPanel-blockedSubview-image,
