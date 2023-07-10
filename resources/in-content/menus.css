@@ -31,6 +31,10 @@ menupopup.in-menulist > :where(menucaption, menuitem) {
   align-items: center !important;
 }
 
+.actionsMenu {
+  align-items: center;
+}
+
 .actionsMenu > menupopup > menuitem {
   padding-inline-start: 0 !important;
 }
