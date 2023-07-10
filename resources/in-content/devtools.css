@@ -415,8 +415,19 @@ and a few elements like checkboxes */
 
   /* highlight stylesheets owned by the user so they're easier to find */
   #style-editor-chrome-window
-        .stylesheet-name
-        label:is([value^="uc-"], [value^="userChrome"], [value^="userContent"], [value="custom-chrome.css"], [value="custom-content.css"], [tooltiptext^="chrome://userchrome/"], [tooltiptext^="file://"]) {
+    .stylesheet-name
+    label:is([value^="uc-"], [value^="userChrome"], [value^="userContent"], [value="custom-chrome.css"], [value="custom-content.css"], [tooltiptext^="chrome://userchrome/"], [tooltiptext^="file://"]),
+  .ruleview-rule-source-label:is(
+    [title^="file://"][title*="/chrome/"]:is(
+        [title*="uc-"],
+        [title*="userChrome"],
+        [title*="userContent"],
+        [title*="custom-chrome.css"],
+        [title*="custom-content.css"],
+        [title*="chrome/resources/"]
+      ),
+      [title^="chrome://userchrome/"]
+    ) {
     text-decoration: underline !important;
     color: var(--attention-color) !important;
   }
