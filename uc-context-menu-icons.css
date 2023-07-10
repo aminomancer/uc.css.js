@@ -331,7 +331,13 @@ menu.unified-extensions-context-menu-ViewDocs-Submenu > .menu-text,
 menuitem.unified-extensions-context-menu-BrowserAction > .menu-text,
 menuitem.unified-extensions-context-menu-PageAction > .menu-text,
 menuitem.unified-extensions-context-menu-SidebarAction > .menu-text,
-menuitem.unified-extensions-context-menu-Options > .menu-text {
+menuitem.unified-extensions-context-menu-Options > .menu-text,
+.urlbarView-result-menu > menuitem[data-command="inaccurate_location"] > .menu-text,
+.urlbarView-result-menu > menuitem[data-command="show_less_frequently"] > .menu-text,
+.urlbarView-result-menu > menu[data-l10n-id="firefox-suggest-command-dont-show-this"] > .menu-text,
+.urlbarView-result-menu > menuitem[data-command="help"] > .menu-text,
+.urlbarView-result-menuitem[data-command="not_relevant"] > .menu-text,
+.urlbarView-result-menuitem[data-command="not_interested"] > .menu-text {
   margin-inline: 0 !important;
   padding-inline: 0 2px !important;
 }
@@ -644,7 +650,13 @@ menu.unified-extensions-context-menu-ViewDocs-Submenu::before,
 menuitem.unified-extensions-context-menu-BrowserAction::before,
 menuitem.unified-extensions-context-menu-PageAction::before,
 menuitem.unified-extensions-context-menu-SidebarAction::before,
-menuitem.unified-extensions-context-menu-Options::before {
+menuitem.unified-extensions-context-menu-Options::before,
+.urlbarView-result-menu > menuitem[data-command="inaccurate_location"]::before,
+.urlbarView-result-menu > menuitem[data-command="show_less_frequently"]::before,
+.urlbarView-result-menu > menu[data-l10n-id="firefox-suggest-command-dont-show-this"]::before,
+.urlbarView-result-menu > menuitem[data-command="help"]::before,
+.urlbarView-result-menuitem[data-command="not_relevant"]::before,
+.urlbarView-result-menuitem[data-command="not_interested"]::before {
   content: "";
   position: relative;
   display: -moz-inline-box;
@@ -1602,6 +1614,31 @@ menuitem:is(.customize-context-reportExtension, .unified-extensions-context-menu
   background-image: url(chrome://devtools/skin/images/alert.svg);
 }
 
+.urlbarView-result-menu > menuitem[data-command="inaccurate_location"]::before {
+  background-image: url(chrome://userchrome/content/material/bug.svg);
+}
+
+.urlbarView-result-menu > menuitem[data-command="show_less_frequently"]::before {
+  background-image: url(chrome://global/skin/icons/trending.svg);
+  transform: scaleY(-1);
+}
+
+.urlbarView-result-menu > menu[data-l10n-id="firefox-suggest-command-dont-show-this"]::before {
+  background-image: url(chrome://userchrome/content/blocked.svg);
+}
+
+.urlbarView-result-menuitem[data-command="not_relevant"]::before {
+  background-image: url(chrome://userchrome/content/close-big.svg);
+}
+
+.urlbarView-result-menuitem[data-command="not_interested"]::before {
+  background-image: url(chrome://userchrome/content/material/dislike.svg);
+}
+
+.urlbarView-result-menu > menuitem[data-command="help"]::before {
+  background-image: url(chrome://userchrome/content/info-filled.svg);
+}
+
 /* mirror some of the icons for RTL languages/layouts, e.g. icons with arrows or other directional implications */
 :is(#context-reloadframe, #context-reloadimage, menuitem:not(.menuitem-iconic)[oncommand="_ucUtils.restart(true)"]):-moz-locale-dir(rtl)::before,
 :is(#context_sendTabToDevice, #context-sendlinktodevice, #context-sendpagetodevice):-moz-locale-dir(rtl)::before,
@@ -1616,4 +1653,9 @@ menuitem:is(.customize-context-removeFromToolbar, .customize-context-removeFromP
 menuitem#sanitizeItem:-moz-locale-dir(rtl)::before,
 .downloadRemoveFromHistoryMenuItem:-moz-locale-dir(rtl)::before {
   transform: scaleX(-1);
+}
+
+.urlbarView-result-menu > menuitem[data-command="show_less_frequently"]:-moz-locale-dir(rtl)::before {
+  /* this already has scaleY(-1) so it needs both axes inverted */
+  transform: scale(-1);
 }
