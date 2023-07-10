@@ -90,6 +90,8 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
     background: var(--panel-background, Menu);
     border-radius: var(--panel-border-radius);
     width: var(--panel-width);
+    max-height: unset;
+    max-width: unset;
   }
 
   :is(panel, menupopup)[type="arrow"]::part(content) {
