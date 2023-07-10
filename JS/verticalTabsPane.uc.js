@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Vertical Tabs Pane
-// @version        1.7.6
+// @version        1.7.7
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -1689,14 +1689,17 @@ When you collapse the pane with the unpin button, it collapses to a small width 
         e.preventDefault();
         return;
       }
-      let id, args;
+
+      const tooltip = e.target;
+      tooltip.removeAttribute("data-l10n-id");
+
+      let id, args, raw;
       // should we align to the tab or to the mouse? depends on which element
       // was hovered.
       let align = true;
       let { linkedBrowser } = tab;
-      const selectedTabs = gBrowser.selectedTabs;
-      const contextTabInSelection = selectedTabs.includes(tab);
-      const tabCount = contextTabInSelection ? selectedTabs.length : 1;
+      const contextTabInSelection = gBrowser.selectedTabs.includes(tab);
+      const tabCount = contextTabInSelection ? gBrowser.selectedTabs.length : 1;
       // a bunch of localization
       if (row.closeButton.matches(":hover")) {
         id = "tabbrowser-close-tabs-tooltip";
@@ -1719,22 +1722,20 @@ When you collapse the pane with the unpin button, it collapses to a small width 
         }
         align = false;
       } else {
-        let title = gBrowser.getTabTooltip(tab, true);
+        raw = gBrowser.getTabTooltip(tab, true);
         // if hovering the sound overlay, show the current media state of the
         // tab, after the tab title. "playing" or "muted" or "media blocked"
         if (row.soundOverlay.matches(":hover") && this._fluentStrings) {
-          let stateString;
+          let stateKey;
           if (tab.hasAttribute("activemedia-blocked")) {
-            stateString = "blockedString";
+            stateKey = "blockedString";
           } else if (linkedBrowser.audioMuted) {
-            stateString = "mutedString";
+            stateKey = "mutedString";
           } else {
-            stateString = "playingString";
+            stateKey = "playingString";
           }
-          title += ` (${this._fluentStrings[stateString].toLowerCase()})`;
+          raw += ` (${this._fluentStrings[stateKey].toLowerCase()})`;
         }
-        id = "tabbrowser-tab-tooltip";
-        args = { title };
       }
       // align to the row
       if (align) {
@@ -1743,7 +1744,9 @@ When you collapse the pane with the unpin button, it collapses to a small width 
       }
       let title = e.target.querySelector(".places-tooltip-title");
       let localized = {};
-      if (id) {
+      if (raw) {
+        localized.label = raw;
+      } else if (id) {
         let [msg] = gBrowser.tabLocalization.formatMessagesSync([{ id, args }]);
         localized.value = msg.value;
         if (msg.attributes) {

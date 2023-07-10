@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           All Tabs Menu Expansion Pack
-// @version        2.1.7
+// @version        2.1.8
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @long-description
@@ -275,12 +275,15 @@ Next to the "new tab" button in Firefox there's a V-shaped button that opens a b
         e.preventDefault();
         return;
       }
-      let id, args;
+
+      const tooltip = e.target;
+      tooltip.removeAttribute("data-l10n-id");
+
+      let id, args, raw;
       let align = true;
       let { linkedBrowser } = tab;
-      const selectedTabs = gBrowser.selectedTabs;
-      const contextTabInSelection = selectedTabs.includes(tab);
-      const tabCount = contextTabInSelection ? selectedTabs.length : 1;
+      const contextTabInSelection = gBrowser.selectedTabs.includes(tab);
+      const tabCount = contextTabInSelection ? gBrowser.selectedTabs.length : 1;
       if (row.querySelector("[close-button]").matches(":hover")) {
         id = "tabbrowser-close-tabs-tooltip";
         args = { tabCount };
@@ -302,8 +305,7 @@ Next to the "new tab" button in Firefox there's a V-shaped button that opens a b
         }
         align = false;
       } else {
-        id = "tabbrowser-tab-tooltip";
-        args = { title: gBrowser.getTabTooltip(tab, true) };
+        raw = gBrowser.getTabTooltip(tab, true);
       }
       if (align) {
         e.target.setAttribute("position", "after_start");
@@ -311,7 +313,9 @@ Next to the "new tab" button in Firefox there's a V-shaped button that opens a b
       }
       let title = e.target.querySelector(".places-tooltip-title");
       let localized = {};
-      if (id) {
+      if (raw) {
+        localized.label = raw;
+      } else if (id) {
         let [msg] = gBrowser.tabLocalization.formatMessagesSync([{ id, args }]);
         localized.value = msg.value;
         if (msg.attributes) {
