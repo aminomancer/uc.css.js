@@ -34,7 +34,8 @@ user_pref("widget.content.allow-gtk-dark-theme", true);
 ////
 // avoid custom menulist/select styling
 user_pref("dom.forms.select.customstyling", false);
-// keep "all tabs" menu available at all times, useful for all tabs menu expansion pack
+// keep "all tabs" menu available at all times, useful for all tabs menu
+// expansion pack
 user_pref("browser.tabs.tabmanager.enabled", true);
 // disable urlbar result group labels since we don't use them
 user_pref("browser.urlbar.groupLabels.enabled", false);
@@ -46,7 +47,8 @@ user_pref("ui.highlight", "hsl(250, 100%, 60%)");
 user_pref("ui.selecteditem", "#2F3456");
 // Text color for selected <option> elements and others
 user_pref("ui.selecteditemtext", "#FFFFFFCC");
-//// Tooltip colors (only relevant if userChrome.ag.css somehow fails to apply, but doesn't hurt)
+//// Tooltip colors (only relevant if userChrome.ag.css somehow fails to apply,
+//// but doesn't hurt)
 user_pref("ui.infotext", "#FFFFFF");
 user_pref("ui.infobackground", "#hsl(233, 36%, 11%)");
 ////
@@ -56,10 +58,10 @@ user_pref("widget.macos.native-context-menus", false);
 
 ////// ✨ RECOMMENDED PREFS
 
-//// allow installing the unsigned search extensions.
-//// the localized search extensions currently can't be signed because of
-//// https://github.com/mozilla/addons-linter/issues/3911 so to use them, we must
-//// disable the signature requirement and go to about:addons > gear icon >
+//// allow installing the unsigned search extensions. the localized search
+//// extensions currently can't be signed because of
+//// https://github.com/mozilla/addons-linter/issues/3911 so to use them, we
+//// must disable the signature requirement and go to about:addons > gear icon >
 //// install addon from file > find the .zip file
 user_pref("xpinstall.signatures.required", false);
 user_pref("extensions.autoDisableScopes", 0);
@@ -71,7 +73,12 @@ user_pref("browser.privatebrowsing.enable-new-indicator", false);
 user_pref("accessibility.mouse_focuses_formcontrol", 0);
 user_pref("browser.tabs.tabMinWidth", 90);
 user_pref("browser.urlbar.accessibility.tabToSearch.announceResults", false);
-// disable urlbar suggestions that don't look good with the theme
+// disable large urlbar suggestions for now. they are styled so this is not
+// required, but I don't find them useful since they only seem to appear when
+// the urlbar is empty and search engine is set to google.
+user_pref("browser.urlbar.richSuggestions.featureGate", false);
+// but enable the rich one-line suggestions that appear when typing long search
+// terms and guess an end to the sentence
 user_pref("browser.urlbar.richSuggestions.tail", false);
 user_pref("browser.urlbar.suggest.quicksuggest.nonsponsored", false);
 user_pref("browser.urlbar.suggest.quicksuggest.sponsored", false);
@@ -86,7 +93,7 @@ user_pref("prompts.contentPromptSubDialog", true);
 // when using the keyboard to navigate menus, skip past disabled items
 user_pref("ui.skipNavigatingDisabledMenuItem", 1);
 user_pref("ui.prefersReducedMotion", 0);
-// reduce the delay before showing submenus (e.g. History > Recently Closed Tabs)
+// reduce the delay before showing submenus (e.g. View > Toolbars)
 user_pref("ui.submenuDelay", 100);
 // the delay before a tooltip appears when hovering an element (default 300ms)
 user_pref("ui.tooltipDelay", 300);
@@ -106,10 +113,12 @@ user_pref("widget.non-native-theme.gtk.scrollbar.thumb-size", "0.818");
 //// base color scheme prefs
 user_pref("browser.theme.content-theme", 0);
 user_pref("browser.theme.toolbar-theme", 0);
-// set the default background color for color-scheme: dark. see it for example on about:blank
+// set the default background color for color-scheme: dark. see it for example
+// on about:blank
 user_pref("browser.display.background_color.dark", "#19191b");
 ////
-// make `outline-style: auto` result in one big stroke instead of two contrasting strokes
+// make `outline-style: auto` result in one big stroke instead of two
+// contrasting strokes
 user_pref("widget.non-native-theme.solid-outline-style", true);
 //// findbar highlight and selection colors
 user_pref("ui.textHighlightBackground", "#7755FF");
@@ -150,12 +159,12 @@ user_pref("gfx.font_rendering.directwrite.use_gdi_table_loading", false);
 //// at https://github.com/aminomancer/uc.css.js
 user_pref("userChrome.tabs.pinned-tabs.close-buttons.disabled", true);
 user_pref("userChrome.urlbar-results.hide-help-button", true);
-// add a drop shadow on menupopup and panel elements (context menus, addons' popup panels, etc.)
+// add a drop shadow on menupopup and panel elements (e.g. context menus)
 user_pref("userChrome.css.menupopup-shadows", true);
 //// these are more subjective prefs, but they're important ones
 //// display the all tabs menu in reverse order (newer tabs on top, like history)
 // user_pref("userChrome.tabs.all-tabs-menu.reverse-order", true);
-// turn bookmarks on the toolbar into small square buttons with only icons, no text
+// turn bookmarks on the toolbar into small square buttons with no text labels
 // user_pref("userChrome.bookmarks-toolbar.icons-only", false);
 // replace UI font with SF Pro, the system font for macOS.
 // recommended for all operating systems, but not required.
