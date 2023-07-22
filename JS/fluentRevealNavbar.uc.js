@@ -33,6 +33,9 @@
       cacheButtons: true,
     };
 
+    // store cached navbar buttons
+    static buttons;
+
     // instantiate the handler for a given window
     constructor() {
       this._options = FluentRevealEffect.options;
