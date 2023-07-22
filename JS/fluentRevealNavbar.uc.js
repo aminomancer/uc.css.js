@@ -173,6 +173,7 @@
         area = el.querySelector(".toolbarbutton-text");
       }
 
+      // previous pointerEvents check may break the effect in FF 115
       //if (el.disabled || areaStyle.pointerEvents == "none") {
       if (el.disabled) {
         return this.clearEffect(area);
