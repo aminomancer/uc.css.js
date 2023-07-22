@@ -149,7 +149,8 @@
         area = el.querySelector(".toolbarbutton-text");
       }
 
-      if (el.disabled || areaStyle.pointerEvents == "none") {
+      //if (el.disabled || areaStyle.pointerEvents == "none") {
+      if (el.disabled) {
         return this.clearEffect(area);
       }
 
