@@ -24,6 +24,9 @@
 
       // whether to show an additional light burst when clicking an element. (not recommended)
       clickEffect: false,
+
+      // looks for all toolbar buttons only once on script startup — reduces system load, but requires browser restart if toolbar buttons were changed
+      cacheButtons: true,
     };
 
     // instantiate the handler for a given window
@@ -38,13 +41,15 @@
 
     // get all the toolbar buttons in the navbar, in iterable form
     get toolbarButtons() {
-      let buttons = Array.from(
-        gNavToolbox.querySelectorAll(".toolbarbutton-1")
-      );
-      if (this._options.includeBookmarks) {
-        buttons = buttons.concat(
-          Array.from(this.placesToolbarItems.querySelectorAll(".bookmark-item"))
+      if (!this.buttons || this._options.cacheButtons == false) {
+        let buttons = Array.from(
+          gNavToolbox.querySelectorAll(".toolbarbutton-1")
         );
+        if (this._options.includeBookmarks) {
+          buttons = buttons.concat(
+            Array.from(this.placesToolbarItems.querySelectorAll(".bookmark-item"))
+          );
+        }
       }
       return buttons;
     }
