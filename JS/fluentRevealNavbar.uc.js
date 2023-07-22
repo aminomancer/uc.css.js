@@ -163,6 +163,11 @@
           el.querySelector(".toolbarbutton-icon");
       if (!area) area = el;
 
+      // don't apply effect to focused url bar
+      if (this._options.includeUrlBar && el.id == 'urlbar-background' && window.gURLBar.focused) {
+        return this.clearEffect(area);
+      }
+
       let areaStyle = getComputedStyle(area);
       if (
         areaStyle.display == "none" ||
