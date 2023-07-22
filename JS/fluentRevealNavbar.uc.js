@@ -84,7 +84,9 @@
      * @param {object} e (event)
      */
     handleEvent(e) {
-      if (this._options.filterDy && e.clientY > this._options.gradientSize) return;
+      /// filter out mouse events which are too far from toolbar to cause any actual redraw
+      /// value is {gradientSize} + some additional padding to make sure effect clears out properly
+      if (this._options.filterDy && e.clientY > this._options.gradientSize + 20) return;
       
       requestAnimationFrame(time => {
         switch (e.type) {
