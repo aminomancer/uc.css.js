@@ -16,6 +16,9 @@
       // if true, show the effect on bookmarks on the toolbar
       includeBookmarks: true,
 
+      // if ture, show the effect on the urlbar as well
+      includeUrlBar: true,
+
       // the color of the gradient. default is sort of a faint baby blue. you may prefer just white, e.g. hsla(0, 0%, 100%, 0.05)
       // lightColor: "hsla(224, 100%, 80%, 0.15)",
 
@@ -52,16 +55,19 @@
     // get all the toolbar buttons in the navbar, in iterable form
     get toolbarButtons() {
       if (!this.buttons || this._options.cacheButtons == false) {
-        let buttons = Array.from(
+        this.buttons = Array.from(
           gNavToolbox.querySelectorAll(".toolbarbutton-1")
         );
+        if (this._options.includeUrlBar) {
+          this.buttons.push(gNavToolbox.querySelector("#urlbar-background"));
+        }
         if (this._options.includeBookmarks) {
-          buttons = buttons.concat(
+          this.buttons = this.buttons.concat(
             Array.from(this.placesToolbarItems.querySelectorAll(".bookmark-item"))
           );
         }
       }
-      return buttons;
+      return this.buttons;
     }
 
     get placesToolbarItems() {
@@ -156,6 +162,8 @@
         ? el
         : el.querySelector(".toolbarbutton-badge-stack") ||
           el.querySelector(".toolbarbutton-icon");
+      if (!area) area = el;
+
       let areaStyle = getComputedStyle(area);
       if (
         areaStyle.display == "none" ||
