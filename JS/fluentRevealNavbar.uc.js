@@ -85,8 +85,11 @@
      */
     handleEvent(e) {
       /// filter out mouse events which are too far from toolbar to cause any actual redraw
-      /// value is {gradientSize} + some additional padding to make sure effect clears out properly
-      if (this._options.filterDy && e.clientY > this._options.gradientSize + 20) return;
+      /// value is {gradientSize} + some additional padding to make sure effect fully clears out
+      if (this._options.filterDy && e.clientY > this._options.gradientSize + 25) {
+        if (this.someEffectsApplied) this.clearEffectsForAll();
+        return;
+      }
       
       requestAnimationFrame(time => {
         switch (e.type) {
@@ -264,6 +267,17 @@
     clearEffect(el) {
       this._options.is_pressed = false;
       el.style.removeProperty("background-image");
+    }
+
+    /**
+    * invoked once when {filterDy} option enabled, and cursor leaves the interactive area
+    */
+    clearEffectsForAll() {
+      console.log('clear all effects');
+      this.someEffectsApplied = false;
+      this.toolbarButtons.forEach(button =>
+        this.clearEffect(button)
+      );
     }
   }
 
