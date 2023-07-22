@@ -31,12 +31,12 @@
       // whether to show an additional light burst when clicking an element. (not recommended)
       clickEffect: false,
 
-      // don't process mouse movements greater than {gradientSize}px from top of the screen, in order to reduce system load
+      // don't process mouse movements greater than {gradientSize}px from top of the screen, in order to reduce system load.
       // disable if you modified the ui to have toolbar buttons on different side of the screen (left, right or bottom)
       filterDy: true,
 
       // looks for all toolbar buttons only once on script startup — reduces system load, but requires browser restart if toolbar buttons were changed
-      cacheButtons: true,
+      cacheButtons: false,
     };
 
     // store cached navbar buttons
