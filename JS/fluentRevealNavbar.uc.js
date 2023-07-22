@@ -88,7 +88,6 @@
       
       requestAnimationFrame(time => {
         switch (e.type) {
-          case "scroll":
           case "mousemove":
             if (this._options.clickEffect && this._options.is_pressed) {
               this.generateEffectsForAll(e, true);
