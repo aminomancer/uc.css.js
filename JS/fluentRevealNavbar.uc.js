@@ -164,10 +164,11 @@
       let { gradientSize, lightColor } = this._options;
       let isBookmark =
         el.id === "PlacesChevron" || el.classList.contains("bookmark-item");
-      let area = isBookmark || el.id == "urlbar-background" 
+      let area = isBookmark 
         ? el
          : el.querySelector(".toolbarbutton-badge-stack") ||
            el.querySelector(".toolbarbutton-icon");
+      if (!area && el.id == "urlbar-background") area = el;
 
       // don't apply effect to focused url bar
       if (this._options.includeUrlBar && el.id == 'urlbar-background' && window.gURLBar.focused) {
