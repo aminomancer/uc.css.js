@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Agent/Author Sheet Loader
-// @version        2.6.2
+// @version        2.6.3
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @description    Load `*.ag.css` files as agent sheets and `*.au.css` files as author sheets. Will also load `*.us.css` files as user sheets, in case you ever need that for some reason. This loader is capable of loading stylesheets into browser toolbox windows, but it will not try to load [userChrome.css](https://github.com/aminomancer/uc.css.js/blob/master/userChrome.css) or [userContent.css](https://github.com/aminomancer/uc.css.js/blob/master/userContent.css) in the browser toolbox. For that you will need [userChromeDevtoolsSheetLoader.uc.js](https://github.com/aminomancer/uc.css.js#browser-toolbox-stylesheet-loader) instead.
@@ -12,9 +12,6 @@
 
 let EXPORTED_SYMBOLS = [];
 (function() {
-  const { Services } = ChromeUtils.import(
-    "resource://gre/modules/Services.jsm"
-  );
   let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
     Ci.nsIStyleSheetService
   );

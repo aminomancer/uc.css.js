@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Browser Toolbox Stylesheet Loader
-// @version        2.1.3
+// @version        2.1.4
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @description    Load userChrome and userContent stylesheets into Browser Toolbox windows.
@@ -12,9 +12,6 @@
 
 let EXPORTED_SYMBOLS = [];
 (function() {
-  const { Services } = ChromeUtils.import(
-    "resource://gre/modules/Services.jsm"
-  );
   class ToolboxProcessSheetLoader {
     regex = /^chrome:(\/\/devtools\/.*.html.*)/i;
     lastSubject = null;
