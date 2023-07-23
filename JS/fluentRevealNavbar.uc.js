@@ -62,7 +62,7 @@
         if (this._options.includeBookmarks) {
           this._toolbarButtons = this._toolbarButtons.concat(
             Array.from(
-              personalToolbar().querySelectorAll(
+              this.personalToolbar.querySelectorAll(
                 ".toolbarbutton-1, .bookmark-item"
               )
             )
