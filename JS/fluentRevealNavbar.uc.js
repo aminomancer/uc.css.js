@@ -10,6 +10,9 @@
 // ==/UserScript==
 
 (function() {
+  // store cached navbar buttons
+  let cachedButtons;
+
   class FluentRevealEffect {
     // user configuration
     static options = {
@@ -39,9 +42,6 @@
       cacheButtons: false,
     };
 
-    // store cached navbar buttons
-    static buttons;
-
     // instantiate the handler for a given window
     constructor() {
       this._options = FluentRevealEffect.options;
@@ -54,20 +54,20 @@
 
     // get all the toolbar buttons in the navbar, in iterable form
     get toolbarButtons() {
-      if (!this.buttons || this._options.cacheButtons == false) {
-        this.buttons = Array.from(
+      if (!cachedButtons || this._options.cacheButtons == false) {
+        cachedButtons = Array.from(
           gNavToolbox.querySelectorAll(".toolbarbutton-1")
         );
         if (this._options.includeUrlBar) {
-          this.buttons.push(gNavToolbox.querySelector("#urlbar-background"));
+          cachedButtons.push(gNavToolbox.querySelector("#urlbar-background"));
         }
         if (this._options.includeBookmarks) {
-          this.buttons = this.buttons.concat(
+          cachedButtons = cachedButtons.concat(
             Array.from(this.placesToolbarItems.querySelectorAll(".bookmark-item"))
           );
         }
       }
-      return this.buttons;
+      return cachedButtons;
     }
 
     get placesToolbarItems() {
