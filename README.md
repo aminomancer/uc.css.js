@@ -381,12 +381,12 @@ let cmanifest = traverseToMainProfile("UChrm");
 ```
 
 5. Now save `config.js` and exit.
-6. Go back to your `chrome` folder, and open `boot.jsm` from the `utils` folder.
-7. Go to the end of line 1 (the line that says `let EXPORTED_SYMBOLS = [];`) and hit enter twice to make two new lines, so you should now be at line 3.
+6. Go back to your `chrome` folder, and open `fs.jsm` from the `utils` folder.
+7. Go to the end of line 5 (the line that says `class FileSystem{`) and hit enter to make a new line, so you should now be at line 6.
 8. Paste this:
 
 ```js
-function traverseToMainProfile(str) {
+static traverseToMainProfile(str) {
   let dir = Services.dirsvc.get(str, Ci.nsIFile);
   if (!dir.exists()) {
     let toAddChrome = false;
@@ -400,8 +400,9 @@ function traverseToMainProfile(str) {
 }
 ```
 
-9. Use Find & Replace to replace every instance of the string `Services.dirsvc.get('UChrm',Ci.nsIFile)` with this: `traverseToMainProfile('UChrm')`
-10. This should have replaced 3 times. Save `boot.jsm` and exit.
+9. Use Find & Replace to replace every instance of the string `Services.dirsvc.get('UChrm',Ci.nsIFile)` with this: `FS.traverseToMainProfile('UChrm')`
+10. This should have replaced 3 times. Save `fs.jsm` and exit.
+11. Open `boot.jsm` and repeat step 9 on `boot.jsm` as well. This should only replace once.
 11. That's it! The scripts that are in your main profile folder should now run in browser toolbox windows, even though they're not in the `chrome_debugger_profile` folder. Make sure you download the [Browser Toolbox Stylesheet Loader](#browser-toolbox-stylesheet-loader) so stylesheets will be loaded too.
 
 Having done this, make sure your `chrome_debugger_profile` folders do not have `chrome` folders within them, as they will confuse the stylesheet loader. It will think you have special stylesheets for the toolbox and therefore skip loading your main profile stylesheets into the toolbox. If you ever see styles failing to apply in the toolbox, delete your `chrome_debugger_profile` folder.
