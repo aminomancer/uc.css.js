@@ -64,7 +64,11 @@
         }
         if (this._options.includeBookmarks) {
           cachedButtons = cachedButtons.concat(
-            Array.from(this.placesToolbarItems.querySelectorAll(".bookmark-item"))
+            Array.from(
+              personalToolbar().querySelectorAll(
+                ".toolbarbutton-1, .bookmark-item"
+              )
+            )
           );
         }
       }
@@ -77,6 +81,13 @@
         (this._placesToolbarItems = document.getElementById(
           "PlacesToolbarItems"
         ))
+      );
+    }
+
+    get personalToolbar() {
+      return (
+        this._personalToolbar ||
+        (this._personalToolbar = document.getElementById("PersonalToolbar"))
       );
     }
 
