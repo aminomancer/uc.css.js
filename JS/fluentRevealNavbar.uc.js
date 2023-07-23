@@ -19,7 +19,7 @@
       // if true, show the effect on bookmarks on the toolbar
       includeBookmarks: true,
 
-      // if ture, show the effect on the urlbar as well
+      // if true, show the effect on the urlbar
       includeUrlBar: true,
 
       // the color of the gradient. default is sort of a faint baby blue. you may prefer just white, e.g. hsla(0, 0%, 100%, 0.05)
