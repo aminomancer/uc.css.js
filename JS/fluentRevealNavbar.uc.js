@@ -197,7 +197,7 @@
       }
 
       // previous pointerEvents check may break the effect in FF 115
-      if (el.disabled) {
+      if (el.disabled || getComputedStyle(el).pointerEvents == "none") {
         return this.clearEffect(area);
       }
 
