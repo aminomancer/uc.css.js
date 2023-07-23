@@ -88,6 +88,13 @@
       );
     }
 
+    get browser() {
+      return (
+        this._browser ||
+        (this._browser = document.getElementById("browser"))
+      );
+    }
+
     /**
      * main event handler. handles all the mouse behavior.
      * @param {object} e (event)
@@ -95,8 +102,13 @@
     handleEvent(e) {
       /// filter out mouse events which are too far from toolbar to cause any actual redraw
       /// value is {gradientSize} + some additional padding to make sure effect fully clears out
-      if (this._options.filterDy && e.clientY > this._options.gradientSize + 25) {
-        if (this.someEffectsApplied) this.clearEffectsForAll();
+      if (
+        this._options.filterDy &&
+        e.clientY >
+          this.browser.getBoundingClientRect().y +
+            this._options.gradientSize
+      ) {
+        if (this._someEffectsApplied) this.clearEffectsForAll();
         return;
       }
       
@@ -225,6 +237,7 @@
      * @param {boolean} click (whether the left mouse button is down)
      */
     generateEffectsForAll(e, click = false) {
+      this._someEffectsApplied = true;
       this.toolbarButtons.forEach(button =>
         this.generateToolbarButtonEffect(button, e, click)
       );
@@ -282,7 +295,7 @@
     * invoked once when {filterDy} option enabled, and cursor leaves the interactive area
     */
     clearEffectsForAll() {
-      this.someEffectsApplied = false;
+      this._someEffectsApplied = false;
       this.toolbarButtons.forEach(button =>
         this.clearEffect(button)
       );
