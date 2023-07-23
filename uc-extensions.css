@@ -253,7 +253,7 @@ menupopup#viewSidebarMenu menuitem.menuitem-iconic.webextension-menuitem#menubar
 }
 
 /* dark reader's popup, corresponds to colors set in userContent.css */
-#customizationui-widget-panel[viewId="PanelUI-webext-addon_darkreader_org-browser-action-view"] {
+#customizationui-widget-panel[viewId="PanelUI-webext-addon_darkreader_org-BAV"] {
   --arrowpanel-background: var(--tooltip-bgcolor) !important;
   --arrowpanel-border-color: var(--uc-menu-border-color) !important;
 }
@@ -1018,45 +1018,49 @@ with the theme's colors, we can afford to show a border around the popup panel.
 for other extensions that haven't been customized, the border color would
 probably be inconsistent with the popup doc's colors. so by default we hide the
 border on extension panels (see userChrome.au.css) */
-#customizationui-widget-panel[viewId="PanelUI-webext-sort-bookmarks_heftig-browser-action-view"],
-#customizationui-widget-panel[viewId="PanelUI-webext-_testpilot-containers-browser-action-view"],
-#customizationui-widget-panel[viewId="PanelUI-webext-addon_darkreader_org-browser-action-view"],
-#customizationui-widget-panel[viewId="PanelUI-webext-nordvpnproxy_nordvpn_com-browser-action-view"],
-#customizationui-widget-panel[viewId="PanelUI-webext-simple-translate_sienori-browser-action-view"],
-#customizationui-widget-panel[viewId="PanelUI-webext-ublock0_raymondhill_net-browser-action-view"],
+#customizationui-widget-panel[viewId="PanelUI-webext-sort-bookmarks_heftig-BAV"],
+#customizationui-widget-panel[viewId="PanelUI-webext-_testpilot-containers-BAV"],
+#customizationui-widget-panel[viewId="PanelUI-webext-addon_darkreader_org-BAV"],
+#customizationui-widget-panel[viewId="PanelUI-webext-nordvpnproxy_nordvpn_com-BAV"],
+#customizationui-widget-panel[viewId="PanelUI-webext-simple-translate_sienori-BAV"],
+#customizationui-widget-panel[viewId="PanelUI-webext-ublock0_raymondhill_net-BAV"],
 #customizationui-widget-panel[viewId^="PanelUI-webext-multithreaded-download-manager"],
-#customizationui-widget-panel[viewId="PanelUI-webext-private-bookmarks_rharel-browser-action-view"] {
+#customizationui-widget-panel[viewId="PanelUI-webext-private-bookmarks_rharel-BAV"] {
   --customized-webextension-panel-border: 1px solid var(--panel-border-color) !important;
   --customized-webextension-panel-stroke: var(--panel-border-color);
   --arrowpanel-border-color: var(--uc-menu-border-color) !important;
 }
 
-#customizationui-widget-panel[viewId="PanelUI-webext-sort-bookmarks_heftig-browser-action-view"][side="top"],
-#customizationui-widget-panel[viewId="PanelUI-webext-_testpilot-containers-browser-action-view"][side="top"],
-#customizationui-widget-panel[viewId="PanelUI-webext-addon_darkreader_org-browser-action-view"][side="top"],
-#customizationui-widget-panel[viewId="PanelUI-webext-nordvpnproxy_nordvpn_com-browser-action-view"][side="top"],
-#customizationui-widget-panel[viewId="PanelUI-webext-simple-translate_sienori-browser-action-view"][side="top"],
-#customizationui-widget-panel[viewId="PanelUI-webext-ublock0_raymondhill_net-browser-action-view"][side="top"],
+#customizationui-widget-panel[viewId="PanelUI-webext-sort-bookmarks_heftig-BAV"][side="top"],
+#customizationui-widget-panel[viewId="PanelUI-webext-_testpilot-containers-BAV"][side="top"],
+#customizationui-widget-panel[viewId="PanelUI-webext-addon_darkreader_org-BAV"][side="top"],
+#customizationui-widget-panel[viewId="PanelUI-webext-nordvpnproxy_nordvpn_com-BAV"][side="top"],
+#customizationui-widget-panel[viewId="PanelUI-webext-simple-translate_sienori-BAV"][side="top"],
+#customizationui-widget-panel[viewId="PanelUI-webext-ublock0_raymondhill_net-BAV"][side="top"],
 #customizationui-widget-panel[viewId^="PanelUI-webext-multithreaded-download-manager"][side="top"],
-#customizationui-widget-panel[viewId="PanelUI-webext-private-bookmarks_rharel-browser-action-view"][side="top"] {
+#customizationui-widget-panel[viewId="PanelUI-webext-private-bookmarks_rharel-BAV"][side="top"] {
   --customized-webextension-panel-margin-bottom: -5px;
 }
 
-#customizationui-widget-panel[viewId="PanelUI-webext-sort-bookmarks_heftig-browser-action-view"][side="bottom"],
-#customizationui-widget-panel[viewId="PanelUI-webext-_testpilot-containers-browser-action-view"][side="bottom"],
-#customizationui-widget-panel[viewId="PanelUI-webext-addon_darkreader_org-browser-action-view"][side="bottom"],
-#customizationui-widget-panel[viewId="PanelUI-webext-nordvpnproxy_nordvpn_com-browser-action-view"][side="bottom"],
-#customizationui-widget-panel[viewId="PanelUI-webext-simple-translate_sienori-browser-action-view"][side="bottom"],
-#customizationui-widget-panel[viewId="PanelUI-webext-ublock0_raymondhill_net-browser-action-view"][side="bottom"],
+#customizationui-widget-panel[viewId="PanelUI-webext-sort-bookmarks_heftig-BAV"][side="bottom"],
+#customizationui-widget-panel[viewId="PanelUI-webext-_testpilot-containers-BAV"][side="bottom"],
+#customizationui-widget-panel[viewId="PanelUI-webext-addon_darkreader_org-BAV"][side="bottom"],
+#customizationui-widget-panel[viewId="PanelUI-webext-nordvpnproxy_nordvpn_com-BAV"][side="bottom"],
+#customizationui-widget-panel[viewId="PanelUI-webext-simple-translate_sienori-BAV"][side="bottom"],
+#customizationui-widget-panel[viewId="PanelUI-webext-ublock0_raymondhill_net-BAV"][side="bottom"],
 #customizationui-widget-panel[viewId^="PanelUI-webext-multithreaded-download-manager"][side="bottom"],
-#customizationui-widget-panel[viewId="PanelUI-webext-private-bookmarks_rharel-browser-action-view"][side="bottom"] {
+#customizationui-widget-panel[viewId="PanelUI-webext-private-bookmarks_rharel-BAV"][side="bottom"] {
   --customized-webextension-panel-margin-top: -5px;
 }
 
-#customizationui-widget-panel[viewId="PanelUI-webext-nordvpnproxy_nordvpn_com-browser-action-view"],
-#customizationui-widget-panel[viewId="PanelUI-webext-ublock0_raymondhill_net-browser-action-view"],
+#customizationui-widget-panel[viewId="PanelUI-webext-ublock0_raymondhill_net-BAV"],
 #customizationui-widget-panel[viewId^="PanelUI-webext-multithreaded-download-manager"] {
   --panel-border-color: var(--in-content-border-color-dim) !important;
+}
+
+#customizationui-widget-panel[viewId="PanelUI-webext-nordvpnproxy_nordvpn_com-BAV"] {
+  --panel-border-color:  transparent !important;
+  --arrowpanel-background: hsl(0, 0%, 25%) !important;
 }
 
 /* a possible way to make sidebar border more theme responsive */

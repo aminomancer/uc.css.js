@@ -90,8 +90,8 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
     background: var(--panel-background, Menu);
     border-radius: var(--panel-border-radius);
     width: var(--panel-width);
-    max-height: unset;
-    max-width: unset;
+    max-height: calc(100% - 2 * var(--menupopup-inner-box-margin));
+    max-width: calc(100% - 2 * var(--menupopup-inner-box-margin));
   }
 
   :is(panel, menupopup)[type="arrow"]::part(content) {
@@ -99,7 +99,7 @@ so of this stylesheet is dedicated to restoring pre-proton content. */
     margin: var(--panel-inner-box-margin, 4px);
     overflow: hidden;
   }
-  
+
   menupopup::part(content) {
     background-color: var(--menu-background-color) !important;
     color: var(--menu-color) !important;

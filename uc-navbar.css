@@ -643,12 +643,13 @@ translucent with acrylic effect. enable layout.css.backdrop-filter.enabled */
 #navigator-toolbox > named-deck > .notificationbox-stack notification-message,
 #navigator-toolbox .global-notificationbox notification-message,
 .notificationbox-stack notification {
-  margin: 0 !important;
   display: flex !important;
   position: relative !important;
   max-width: 100vh !important;
   height: 32px !important;
   transition: margin-top 100ms linear, max-width 100ms ease-in-out !important;
+  margin: 0 !important;
+  border: 0 !important;
   flex-basis: min-content !important;
   pointer-events: auto !important;
   --in-content-button-background: var(--desaturate-dimmed) !important;
@@ -955,8 +956,17 @@ link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infob
   list-style-image: var(--uc-firefox-view-icon) !important;
 }
 
-#firefox-view-button[attention] {
+#firefox-view-button[attention],
+#unified-extensions-button[attention] .toolbarbutton-icon {
   background-image: url(chrome://userchrome/content/indicator-tab-attention-purple.svg) !important;
   background-size: 10px !important;
   background-position: top 0 right 2px !important;
+  background-repeat: no-repeat !important;
+}
+
+.unified-extensions-item[attention] > .unified-extensions-item-action-button.toolbarbutton-1 > .toolbarbutton-badge-stack,
+.unified-extensions-item[attention] > .unified-extensions-item-action-button.subviewbutton {
+  background-image: url(chrome://userchrome/content/indicator-tab-attention-purple.svg) !important;
+  background-size: 10px !important;
+  background-repeat: no-repeat !important;
 }
