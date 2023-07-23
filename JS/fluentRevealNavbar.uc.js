@@ -10,9 +10,6 @@
 // ==/UserScript==
 
 (function() {
-  // store cached navbar buttons
-  let cachedButtons;
-
   class FluentRevealEffect {
     // user configuration
     static options = {
@@ -55,15 +52,15 @@
 
     // get all the toolbar buttons in the navbar, in iterable form
     get toolbarButtons() {
-      if (!cachedButtons || this._options.cacheButtons == false) {
-        cachedButtons = Array.from(
+      if (!this._toolbarButtons || this._options.cacheButtons == false) {
+        this._toolbarButtons = Array.from(
           gNavToolbox.querySelectorAll(".toolbarbutton-1")
         );
         if (this._options.includeUrlBar) {
-          cachedButtons.push(gNavToolbox.querySelector("#urlbar-background"));
+          this._toolbarButtons.push(gNavToolbox.querySelector("#urlbar-background"));
         }
         if (this._options.includeBookmarks) {
-          cachedButtons = cachedButtons.concat(
+          this._toolbarButtons = this._toolbarButtons.concat(
             Array.from(
               personalToolbar().querySelectorAll(
                 ".toolbarbutton-1, .bookmark-item"
@@ -72,7 +69,7 @@
           );
         }
       }
-      return cachedButtons;
+      return this._toolbarButtons;
     }
 
     get placesToolbarItems() {
