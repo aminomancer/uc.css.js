@@ -25,7 +25,8 @@
       // the color of the gradient. default is sort of a faint baby blue. you may prefer just white, e.g. hsla(0, 0%, 100%, 0.05)
       // lightColor: "hsla(224, 100%, 80%, 0.15)",
 
-      // the color of the gradient. default is the browser's color of navbar button's hover 
+      // the color of the gradient. default is the browser's color on navbar button hover, or a faint baby blue if it's not available. 
+      // you may prefer just white, e.g. hsla(0, 0%, 100%, 0.05)
       lightColor: "var(--button-hover-bgcolor)",
 
       // how wide the radial gradient is.
@@ -185,7 +186,6 @@
       }
 
       // previous pointerEvents check may break the effect in FF 115
-      //if (el.disabled || areaStyle.pointerEvents == "none") {
       if (el.disabled) {
         return this.clearEffect(area);
       }
@@ -274,7 +274,6 @@
     * invoked once when {filterDy} option enabled, and cursor leaves the interactive area
     */
     clearEffectsForAll() {
-      console.log('clear all effects');
       this.someEffectsApplied = false;
       this.toolbarButtons.forEach(button =>
         this.clearEffect(button)
