@@ -27,7 +27,7 @@
 
       // the color of the gradient. default is the browser's color on navbar button hover, or a faint baby blue if it's not available. 
       // you may prefer just white, e.g. hsla(0, 0%, 100%, 0.05)
-      lightColor: "var(--button-hover-bgcolor)",
+      lightColor: "var(--button-hover-bgcolor, hsla(224, 100%, 80%, 0.15))",
 
       // how wide the radial gradient is.
       gradientSize: 50,
