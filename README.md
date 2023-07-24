@@ -400,7 +400,7 @@ static traverseToMainProfile(str) {
 }
 ```
 
-9. Use Find & Replace to replace every instance of the string `Services.dirsvc.get('UChrm',Ci.nsIFile)` with this: `FS.traverseToMainProfile('UChrm')`
+9. Use Find & Replace to replace every instance of the string `Services.dirsvc.get('UChrm',Ci.nsIFile)` with this: `this.traverseToMainProfile('UChrm')`
 10. This should have replaced 3 times. Save `fs.jsm` and exit.
 11. Open `boot.jsm` and repeat step 9 on `boot.jsm` as well. This should only replace once.
 11. That's it! The scripts that are in your main profile folder should now run in browser toolbox windows, even though they're not in the `chrome_debugger_profile` folder. Make sure you download the [Browser Toolbox Stylesheet Loader](#browser-toolbox-stylesheet-loader) so stylesheets will be loaded too.
