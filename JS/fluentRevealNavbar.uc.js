@@ -31,7 +31,7 @@
 
       // don't process mouse movements greater than {gradientSize}px from top of the screen, in order to reduce system load.
       // disable if you modified the ui to have toolbar buttons on different side of the screen (left, right or bottom)
-      filterDy: true,
+      filterDy: false,
 
       // looks for all toolbar buttons only once on script startup — reduces system load, but requires browser restart if toolbar buttons were changed
       cacheButtons: false,
