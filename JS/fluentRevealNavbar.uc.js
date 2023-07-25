@@ -69,15 +69,6 @@
       return this._toolbarButtons;
     }
 
-    get placesToolbarItems() {
-      return (
-        this._placesToolbarItems ||
-        (this._placesToolbarItems = document.getElementById(
-          "PlacesToolbarItems"
-        ))
-      );
-    }
-
     get personalToolbar() {
       return (
         this._personalToolbar ||
