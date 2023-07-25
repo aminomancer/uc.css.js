@@ -19,9 +19,6 @@
       // if true, show the effect on the urlbar
       includeUrlBar: true,
 
-      // the color of the gradient. default is sort of a faint baby blue. you may prefer just white, e.g. hsla(0, 0%, 100%, 0.05)
-      // lightColor: "hsla(224, 100%, 80%, 0.15)",
-
       // the color of the gradient. default is the browser's color on navbar button hover, or a faint baby blue if it's not available. 
       // you may prefer just white, e.g. hsla(0, 0%, 100%, 0.05)
       lightColor: "var(--button-hover-bgcolor, hsla(224, 100%, 80%, 0.15))",
