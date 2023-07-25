@@ -233,10 +233,10 @@
      * @param {boolean} click (whether the left mouse button is down)
      */
     generateEffectsForAll(e, click = false) {
-      this._someEffectsApplied = true;
       this.toolbarButtons.forEach(button =>
         this.generateToolbarButtonEffect(button, e, click)
       );
+      this._someEffectsApplied = true;
     }
 
     /**
@@ -291,10 +291,10 @@
     * invoked once when {filterDy} option enabled, and cursor leaves the interactive area
     */
     clearEffectsForAll() {
-      this._someEffectsApplied = false;
       this.toolbarButtons.forEach(button =>
         this.clearEffect(button)
       );
+      this._someEffectsApplied = false;
     }
   }
 
