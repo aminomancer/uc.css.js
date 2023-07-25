@@ -49,7 +49,7 @@
 
     // get all the toolbar buttons in the navbar, in iterable form
     get toolbarButtons() {
-      if (!this._toolbarButtons || this._options.cacheButtons == false) {
+      if (!this._toolbarButtons || !this._options.cacheButtons) {
         this._toolbarButtons = Array.from(
           gNavToolbox.querySelectorAll(".toolbarbutton-1")
         );
@@ -181,7 +181,7 @@
       let { gradientSize, lightColor } = this._options;
       let isBookmark =
         el.id === "PlacesChevron" || el.classList.contains("bookmark-item");
-      let area = isBookmark 
+      let area = isBookmark
         ? el
          : el.querySelector(".toolbarbutton-badge-stack") ||
            el.querySelector(".toolbarbutton-icon");
