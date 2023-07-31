@@ -231,7 +231,7 @@ The `userContent.css` file handles stuff like the devtools, some UI pages and co
 
 So `userContent.css` isn't strictly required for the rest of the theme to work, but without it you'll find some elements look inconsistent with the theme, and it also takes care of some issues that make the fabled global dark mode harder to realize. If you already have a `userContent` file, I'd suggest changing its name to `custom-content.css` and placing it in the [resources/in-content](/resources/in-content) folder. The theme doesn't include this file, since it's purely intended for end-user modifications, but it automatically loads the file if it exists. It loads last and therefore wins any conflicts of equal priority & specificity. You can also delete any of the [content stylesheets](/resources/in-content) you don't want to use, or remove their `@import` rules from userContent.css.
 
-I've bundled some of my addons in this repo as well. They are in the [extensions](extensions) folder. My custom new tab page is signed (it's a modded fork of [Tab Notes][] by wildsky) but you will still need to "install addon from file" in `about:addons` since you're not downloading the extension package from a Mozilla domain. There are several search engine addons in the [extensions/search-extensions](extensions/search-extensions) folder. These simply add one-off search engines for websites like Google Images or YouTube, and some include search suggestions/autocomplete. Firefox already comes with Amazon and Wikipedia addons, but they have ugly icons and unnecessarily long labels. Mine are simply called Amazon and Wikipedia, and have icons that match the theme. Some of Firefox's built-in search engines also lack search suggestions even though the websites can provide suggestions. Some are signed and hosted on AMO, but others remain unsigned due to [an AMO bug][]. You can download the following search engines from AMO: [YouTube][]; [Google Translate][]; [Firefox Add-ons][]; [Searchfox][searchfox engine]; [Bugzilla][]; [MDN Web Docs][]; [Library Genesis][]; [Etsy][].
+I've bundled some of my addons in this repo as well. They are in the [extensions](extensions) folder. My custom new tab page is signed (it's a modded fork of [Tab Notes][] by wildsky) but you will still need to "install addon from file" in `about:addons` since you're not downloading the extension package from a Mozilla domain. There are several search engine addons in the [extensions/search-extensions](extensions/search-extensions) folder. These simply add one-off search engines for websites like Google Images or YouTube, and some include search suggestions/autocomplete. Firefox already comes with Amazon and Wikipedia addons, but they have ugly icons and unnecessarily long labels. Mine are simply called Amazon and Wikipedia, and have icons that match the theme. Some of Firefox's built-in search engines also lack search suggestions even though the websites can provide suggestions. Some are signed and hosted on AMO, but others remain unsigned due to [an AMO bug][]. You can download the following search engines from AMO: [YouTube][]; [Google Translate][]; [Brave][]; [Firefox Add-ons][]; [Searchfox][searchfox engine]; [Bugzilla][]; [MDN Web Docs][]; [Library Genesis][]; [Etsy][].
 
 </details>
 
@@ -403,7 +403,7 @@ static traverseToMainProfile(str) {
 9. Use Find & Replace to replace every instance of the string `Services.dirsvc.get('UChrm',Ci.nsIFile)` with this: `this.traverseToMainProfile('UChrm')`
 10. This should have replaced 3 times. Save `fs.jsm` and exit.
 11. Open `boot.jsm` and repeat step 9 on `boot.jsm` as well. This should only replace once.
-11. That's it! The scripts that are in your main profile folder should now run in browser toolbox windows, even though they're not in the `chrome_debugger_profile` folder. Make sure you download the [Browser Toolbox Stylesheet Loader](#browser-toolbox-stylesheet-loader) so stylesheets will be loaded too.
+12. That's it! The scripts that are in your main profile folder should now run in browser toolbox windows, even though they're not in the `chrome_debugger_profile` folder. Make sure you download the [Browser Toolbox Stylesheet Loader](#browser-toolbox-stylesheet-loader) so stylesheets will be loaded too.
 
 Having done this, make sure your `chrome_debugger_profile` folders do not have `chrome` folders within them, as they will confuse the stylesheet loader. It will think you have special stylesheets for the toolbox and therefore skip loading your main profile stylesheets into the toolbox. If you ever see styles failing to apply in the toolbox, delete your `chrome_debugger_profile` folder.
 
@@ -809,7 +809,7 @@ If you want to use my sound icon styles, see [uc-tabs.css](/uc-tabs.css#L503). T
 1. use my theme, complete with [chrome.manifest](/utils/chrome.manifest) and the [resources](/resources) folder, (in which case you'll already have all of the following files and CSS, and only need to download [restoreTabSoundButton.uc.js](/JS/restoreTabSoundButton.uc.js); or...
 2. download [tabMods.uc.js](/resources/script-override/tabMods.uc.js) and put it in `<your profile>/chrome/resources/script-override/` and edit the [manifest](/utils/chrome.manifest) file that comes with fx-autoconfig to add the following line (at the bottom):
 
-```JAR Manifest
+```JAR
 override chrome://browser/content/tabbrowser-tab.js ../resources/tabMods.uc.js
 ```
 
@@ -905,7 +905,7 @@ For those who are curious, this will override the tab markup template and some m
 
 This script will basically restore the arrows at the corner of panels that point at the element to which the panel is anchored. But in order to do that, you also need to install these files from the [resources/script-override](/resources/script-override/) folder: [panel.js](/resources/script-override/panel.js), [places-menupopup.js](/resources/script-override/places-menupopup.js), and [translation-notification.js](/resources/script-override/translation-notification.js). After downloading them and placing them in your own `resources/script-override` folder, add the following lines to your [chrome.manifest](/utils/chrome.manifest) file:
 
-```JAR Manifest
+```JAR
 override chrome://global/content/elements/panel.js ../resources/script-override/panel.js
 override chrome://browser/content/places/places-menupopup.js ../resources/script-override/places-menupopup.js
 override chrome://browser/content/translation-notification.js ../resources/script-override/translation-notification.js
@@ -1347,6 +1347,7 @@ I've stopped accepting personal donations for the foreseeable future. But if you
 [tab notes]: https://addons.mozilla.org/firefox/addon/tab-notes "Tab Notes – Get this Extension for 🦊 Firefox"
 [youtube]: https://addons.mozilla.org/firefox/addon/youtube-opensearch-engine "YouTube OpenSearch Engine – Get this Extension for 🦊 Firefox"
 [google translate]: https://addons.mozilla.org/firefox/addon/google-translate-engine "Google Translate Engine – Get this Extension for 🦊 Firefox"
+[brave]: https://addons.mozilla.org/firefox/addon/brave-opensearch-engine "Brave OpenSearch Engine – Get this Extension for 🦊 Firefox"
 [firefox add-ons]: https://addons.mozilla.org/firefox/addon/amo-opensearch-engine "AMO OpenSearch Engine – Get this Extension for 🦊 Firefox"
 [searchfox engine]: https://addons.mozilla.org/firefox/addon/searchfox-engine "Searchfox OpenSearch Engine – Get this Extension for 🦊 Firefox"
 [bugzilla]: https://addons.mozilla.org/firefox/addon/bugzilla-engine "Bugzilla OpenSearch Engine – Get this Extension for 🦊 Firefox"
