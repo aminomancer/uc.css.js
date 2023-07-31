@@ -963,10 +963,3 @@ link[href="chrome://global/content/elements/message-bar.css"] ~ .container.infob
   background-position: top 0 right 2px !important;
   background-repeat: no-repeat !important;
 }
-
-.unified-extensions-item[attention] > .unified-extensions-item-action-button.toolbarbutton-1 > .toolbarbutton-badge-stack,
-.unified-extensions-item[attention] > .unified-extensions-item-action-button.subviewbutton {
-  background-image: url(chrome://userchrome/content/indicator-tab-attention-purple.svg) !important;
-  background-size: 10px !important;
-  background-repeat: no-repeat !important;
-}

@@ -539,7 +539,11 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
     .pointerlockfswarning,
     #ContentSelectDropdown > menupopup,
     :is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup) :is(menu, menuitem, menucaption),
-    panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem {
+    panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem,
+    html[windowtype="Toolkit:PictureInPicture"] #timestamp,
+    html[windowtype="Toolkit:PictureInPicture"] #texttracks,
+    html[windowtype="Toolkit:PictureInPicture"] .box label:not(.switch),
+    html[windowtype="Toolkit:PictureInPicture"] .panel-legend {
       font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
       font-kerning: normal !important;
     }
@@ -556,18 +560,15 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
     /* for displaying larger font sizes */
     .panel-header,
     .popup-notification-description,
+    #main-menubar,
     #sidebar-header,
     #PanelUI-whatsNew,
     #protections-popup-message,
     #PanelUI-profiler-info,
     .PanelUI-profiler-button-link,
     #protections-popup-no-trackers-found-description,
-    #PopupAutoComplete > richlistbox > richlistitem > .ac-title {
-      font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
-      font-kerning: normal !important;
-    }
-
-    #main-menubar {
+    #PopupAutoComplete > richlistbox > richlistitem > .ac-title,
+    html[windowtype="Toolkit:PictureInPicture"] button {
       font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
       font-kerning: normal !important;
     }

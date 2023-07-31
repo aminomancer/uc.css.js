@@ -466,7 +466,6 @@ menuitem[default="true"] {
   min-width: 36px;
   height: 38px;
   padding: 0 !important;
-  padding-bottom: 2px !important;
 }
 
 :is(#context-navigation, #tab-context-navigation) .menuitem-iconic[_moz-menuactive="true"]:not([disabled="true"]) {

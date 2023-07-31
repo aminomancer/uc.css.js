@@ -1,0 +1,19 @@
+#unified-extensions-view {
+  width: 31em !important;
+}
+
+#unified-extensions-panel .unified-extensions-item {
+  margin-block: 0 !important;
+}
+
+.unified-extensions-item-menu-button.subviewbutton {
+  min-height: 100% !important;
+  padding-block: 0 !important;
+}
+
+.unified-extensions-item[attention] > .unified-extensions-item-action-button.subviewbutton {
+  background-image: url(chrome://userchrome/content/indicator-tab-attention-purple.svg) !important;
+  background-size: 11px !important;
+  background-repeat: no-repeat !important;
+  background-position: center left calc(var(--uei-icon-size) + 6px) !important;
+}
