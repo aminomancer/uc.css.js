@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Animate Context Menus
-// @version        1.0.3
+// @version        1.0.4
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Give all context menus the same opening animation that panel popups like the app menu have — the menu slides down 70px and fades in opacity at the same time. It's a cool effect that doesn't trigger a reflow since it uses transform, but it does repaint the menu, so I wouldn't recommend using this on weak hardware.
@@ -46,9 +46,6 @@ class AnimateContextMenus {
 :root[animate-menupopups] :not(menulist) > menupopup:not([position], [type="arrow"])[animating] {
   pointer-events: none;
 }`;
-    const { Services } = ChromeUtils.import(
-      "resource://gre/modules/Services.jsm"
-    );
     let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
       Ci.nsIStyleSheetService
     );
