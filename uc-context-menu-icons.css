@@ -337,7 +337,8 @@ menuitem.unified-extensions-context-menu-Options > .menu-text,
 .urlbarView-result-menu > menu[data-l10n-id="firefox-suggest-command-dont-show-this"] > .menu-text,
 .urlbarView-result-menu > menuitem[data-command="help"] > .menu-text,
 .urlbarView-result-menuitem[data-command="not_relevant"] > .menu-text,
-.urlbarView-result-menuitem[data-command="not_interested"] > .menu-text {
+.urlbarView-result-menuitem[data-command="not_interested"] > .menu-text,
+.urlbarView-result-menu > menuitem[data-command="dismiss"] > .menu-text {
   margin-inline: 0 !important;
   padding-inline: 0 2px !important;
 }
@@ -656,7 +657,8 @@ menuitem.unified-extensions-context-menu-Options::before,
 .urlbarView-result-menu > menu[data-l10n-id="firefox-suggest-command-dont-show-this"]::before,
 .urlbarView-result-menu > menuitem[data-command="help"]::before,
 .urlbarView-result-menuitem[data-command="not_relevant"]::before,
-.urlbarView-result-menuitem[data-command="not_interested"]::before {
+.urlbarView-result-menuitem[data-command="not_interested"]::before,
+.urlbarView-result-menu > menuitem[data-command="dismiss"]::before {
   content: "";
   position: relative;
   display: -moz-inline-box;
@@ -1637,6 +1639,10 @@ menuitem:is(.customize-context-reportExtension, .unified-extensions-context-menu
 
 .urlbarView-result-menu > menuitem[data-command="help"]::before {
   background-image: url(chrome://userchrome/content/info-filled.svg);
+}
+
+.urlbarView-result-menu > menuitem[data-command="dismiss"]::before {
+  background-image: url(chrome://userchrome/content/delete.svg);
 }
 
 /* mirror some of the icons for RTL languages/layouts, e.g. icons with arrows or other directional implications */
