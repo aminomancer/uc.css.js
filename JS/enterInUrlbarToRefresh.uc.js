@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Hit Enter in Urlbar to Refresh
-// @version        1.0.4
+// @version        1.0.5
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @long-description
