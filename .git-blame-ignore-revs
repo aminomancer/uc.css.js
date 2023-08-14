@@ -11,3 +11,6 @@
 
 # Add update URLs to every script!
 cc9f1c508b37c03ec31d04d7cb195d8f05d41f44
+
+# style: update eslint and prettier config, format
+4b88c640699608e999cb48f0629202100972558f
