@@ -243,12 +243,15 @@ class OpenPlacesInContainerTabMenu {
       this.placesMenuOpenContainer?.hidden &&
       this.placesMenuOpenBookmarkContainer?.hidden &&
       this.placesMenuOpenBookmarkLinks?.hidden;
-    this.placesMenuOpenAllLinksInContainer.disabled = this.placesMenuOpenAllLinks?.disabled;
-    this.placesMenuOpenAllLinksInContainer.hidden = this.placesMenuOpenAllLinks?.hidden;
+    this.placesMenuOpenAllLinksInContainer.disabled =
+      this.placesMenuOpenAllLinks?.disabled;
+    this.placesMenuOpenAllLinksInContainer.hidden =
+      this.placesMenuOpenAllLinks?.hidden;
   }
   onSyncedContextMenuShowing(_e) {
     this.syncedContextMenuInited = true;
-    this.syncedMenuOpenAllInContainer.disabled = this.syncedMenuOpenAll?.disabled;
+    this.syncedMenuOpenAllInContainer.disabled =
+      this.syncedMenuOpenAll?.disabled;
     this.syncedMenuOpenAllInContainer.hidden = this.syncedMenuOpenAll?.hidden;
   }
   openLinkInContainer(e, popup, item) {

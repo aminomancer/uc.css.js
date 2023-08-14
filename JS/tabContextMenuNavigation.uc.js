@@ -49,7 +49,7 @@ class TabContextMenuNavigation {
   }
   constructor() {
     this.config = TabContextMenuNavigation.config;
-    let l10n = this.config.l10n;
+    let { l10n } = this.config;
     document.documentElement.setAttribute(
       "operatingsystem",
       AppConstants.platform
@@ -122,7 +122,7 @@ class TabContextMenuNavigation {
   // all 4 menuitems based on whether more than 1 tab is selected.
   onPopupShowing(e) {
     if (e.target !== this.tabContext) return;
-    let l10n = this.config.l10n;
+    let { l10n } = this.config;
     if (this.contextTab?.multiselected) {
       this.contextBack.disabled = !gBrowser.selectedTabs.some(
         tab => gBrowser.getBrowserForTab(tab).webNavigation.canGoBack

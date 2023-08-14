@@ -135,14 +135,13 @@ window.CustomHint = {
       // hook into the built-in confirmation hint element
       let wrapper = document.getElementById("confirmation-hint-wrapper");
       wrapper?.replaceWith(wrapper.content);
-      this.__panel = ConfirmationHint.__panel = document.getElementById(
-        "confirmation-hint"
-      );
+      this.__panel = ConfirmationHint.__panel =
+        document.getElementById("confirmation-hint");
     }
   },
 };
 
-(function() {
+(function () {
   function init() {
     ConfirmationHint.show = function show(anchor, messageId, options = {}) {
       this._reset();

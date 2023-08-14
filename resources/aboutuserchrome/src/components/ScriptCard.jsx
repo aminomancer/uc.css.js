@@ -43,12 +43,14 @@ export const ScriptCard = ({
     () => script.id.toLowerCase().replace(/[^a-z0-9_-]/g, "_"),
     [script.id]
   );
-  let cardId = useMemo(() => `script-card-${normalizedScriptId}`, [
-    normalizedScriptId,
-  ]);
-  let nameId = useMemo(() => `script-name-${normalizedScriptId}`, [
-    normalizedScriptId,
-  ]);
+  let cardId = useMemo(
+    () => `script-card-${normalizedScriptId}`,
+    [normalizedScriptId]
+  );
+  let nameId = useMemo(
+    () => `script-name-${normalizedScriptId}`,
+    [normalizedScriptId]
+  );
   let truncatedDescription = useMemo(() => {
     return script.description && script.description.length > 200
       ? `${String(script.description ?? "")?.slice(0, 200)}…`
@@ -251,8 +253,7 @@ export const ScriptCard = ({
       onClick={onCardClick}
       onKeyDown={onCardKeyDown}
       role="presentation"
-      {...props}
-    >
+      {...props}>
       <div className="script-card-collapsed">
         <img
           className="script-icon"
@@ -272,8 +273,7 @@ export const ScriptCard = ({
               disabled={expanded}
               aria-expanded={expanded ? "true" : "false"}
               aria-controls={cardId}
-              ref={nameButtonRef}
-            >
+              ref={nameButtonRef}>
               <h3
                 id={nameId}
                 className="script-name"
@@ -282,8 +282,7 @@ export const ScriptCard = ({
                 }`}
                 aria-label={`${script.name || script.filename}${
                   enabled ? "" : " (disabled)"
-                }`}
-              >
+                }`}>
                 {nameWithHighlights || script.name || script.filename}
               </h3>
             </button>
@@ -305,8 +304,7 @@ export const ScriptCard = ({
         className="script-card-message"
         align="center"
         type={updateBarType}
-        hidden={updateBarHidden}
-      >
+        hidden={updateBarHidden}>
         <div className="message-inner">
           <span className="message-icon" />
           <span className="message-content">
@@ -316,8 +314,7 @@ export const ScriptCard = ({
                 updateButtonDisabled ? "" : "primary"
               }`}
               disabled={updateButtonDisabled}
-              onClick={handle.updateScript}
-            >
+              onClick={handle.updateScript}>
               {updateButtonLabel}
             </button>
           </span>

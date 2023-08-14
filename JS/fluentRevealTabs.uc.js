@@ -9,7 +9,7 @@
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
-(function() {
+(function () {
   class FluentRevealEffect {
     // user configuration
     static options = {
@@ -64,11 +64,8 @@
       // grab the colors and behavior from the event. this allows us to apply
       // different colors/behavior to different elements and makes the script
       // more adaptable for future expansion or user extension.
-      let {
-        gradientSize,
-        lightColor,
-        clickEffect,
-      } = e.currentTarget.fluentRevealState;
+      let { gradientSize, lightColor, clickEffect } =
+        e.currentTarget.fluentRevealState;
       // calculate gradient display coordinates based on mouse and element coords.
       let x = e.pageX - this.getOffset(e.currentTarget).left - window.scrollX;
       let y = e.pageY - this.getOffset(e.currentTarget).top - window.scrollY;

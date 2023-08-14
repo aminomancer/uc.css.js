@@ -25,8 +25,7 @@ export const PeriodInputField = ({ id, value, suffix, ...props }) => {
       htmlFor={id}
       className="period-input-field"
       onFocus={focusInput}
-      onMouseUp={focusInput}
-    >
+      onMouseUp={focusInput}>
       <input type="text" id={id} value={value} size="1" {...props} />
       <span className="period-input-sizer">{value || "0"}</span>
       {suffix && <span>{suffix}</span>}
@@ -124,8 +123,7 @@ export const PeriodInput = ({
         role="form"
         onMouseDown={selectNearestInput}
         onBlurCapture={handleBlur}
-        {...props}
-      >
+        {...props}>
         <PeriodInputField
           name="days"
           id={id ? `${id}-days` : null}

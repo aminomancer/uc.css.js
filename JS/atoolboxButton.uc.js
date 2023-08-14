@@ -218,9 +218,8 @@ When you middle click, the button will show a notification telling you the curre
                 "confirmation-hint-wrapper"
               );
               wrapper?.replaceWith(wrapper.content);
-              this.__panel = ConfirmationHint.__panel = document.getElementById(
-                "confirmation-hint"
-              );
+              this.__panel = ConfirmationHint.__panel =
+                document.getElementById("confirmation-hint");
             }
           },
         };
@@ -269,7 +268,7 @@ When you middle click, the button will show a notification telling you the curre
           "userChrome.toolboxButton.popupAutohide.toggle-on-toolbox-launch";
         let mouseConfig = "userChrome.toolboxButton.mouseConfig";
 
-        let onClick = function(e) {
+        let onClick = function (e) {
           let { button } = e;
           if (e.getModifierState("Accel")) {
             if (button == 2) return;
@@ -315,7 +314,7 @@ When you middle click, the button will show a notification telling you the curre
           toolbarbutton.onclick = onClick;
         }
 
-        toolbarbutton.triggerAnimation = function() {
+        toolbarbutton.triggerAnimation = function () {
           this.addEventListener(
             "animationend",
             () => this.removeAttribute("animate"),
@@ -378,7 +377,8 @@ When you middle click, the button will show a notification telling you the curre
         // listen for toolboxes opening and closing
         function toolboxObserver(sub, top, _data) {
           // whether a toolbox is open
-          let state = lazy.BrowserToolboxLauncher.getBrowserToolboxSessionState();
+          let state =
+            lazy.BrowserToolboxLauncher.getBrowserToolboxSessionState();
           // set toolbar button's badge content
           badgeLabel.textContent = state ? 1 : "";
           // if toolbox is open and autohide is not already enabled, enable it
@@ -450,7 +450,7 @@ When you middle click, the button will show a notification telling you the curre
           );
         }
 
-        toolbarbutton.setStrings = function() {
+        toolbarbutton.setStrings = function () {
           let hotkey, labelString;
           for (const [key, val] of Object.entries(toolbarbutton.mouseConfig)) {
             if (val === 0) {

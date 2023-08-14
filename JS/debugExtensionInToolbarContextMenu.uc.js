@@ -162,7 +162,7 @@ class DebugExtension {
     let popup = e.target;
     let id = this.getExtensionId(popup);
     if (!id) return;
-    let extension = WebExtensionPolicy.getByID(id).extension;
+    let { extension } = WebExtensionPolicy.getByID(id);
     let actions = new Map();
     for (let type of this.actionTypes) {
       actions.set(type, this.getActionURL(extension, type));
@@ -216,11 +216,8 @@ class DebugExtension {
     };
   }
   makeMainMenu(popup) {
-    let {
-      contexttype,
-      classPrefix,
-      previousSiblingSelector,
-    } = this.getMenuDetails(popup);
+    let { contexttype, classPrefix, previousSiblingSelector } =
+      this.getMenuDetails(popup);
     let menu = document.createXULElement("menu");
     this.maybeSetAttributes(menu, {
       class: `${classPrefix}-debugExtension`,
@@ -330,7 +327,7 @@ class DebugExtension {
     let id = this.getExtensionId(popup);
     if (!id) return;
     // this contains information about an extension with a given ID.
-    let extension = WebExtensionPolicy.getByID(id).extension;
+    let { extension } = WebExtensionPolicy.getByID(id);
     // use extension's principal if it's available.
     let triggeringPrincipal = extension.principal;
     let url;
@@ -350,7 +347,8 @@ class DebugExtension {
           id
         )}&type=extension`;
         // use the system principal for about:devtools-toolbox
-        triggeringPrincipal = Services.scriptSecurityManager.getSystemPrincipal();
+        triggeringPrincipal =
+          Services.scriptSecurityManager.getSystemPrincipal();
         break;
       case "ViewSource":
         this.openArchive(id);
@@ -377,10 +375,11 @@ class DebugExtension {
     if (!url) return;
     // if the extension's principal isn't available for some reason, make a content principal.
     if (!triggeringPrincipal) {
-      triggeringPrincipal = Services.scriptSecurityManager.createContentPrincipal(
-        Services.io.newURI(url),
-        {}
-      );
+      triggeringPrincipal =
+        Services.scriptSecurityManager.createContentPrincipal(
+          Services.io.newURI(url),
+          {}
+        );
     }
     // whether to open in the current tab or a new tab. only opens in the
     // current tab if the current tab is on the new tab page or home page.

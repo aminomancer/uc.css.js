@@ -122,7 +122,7 @@ class ContextMenuMods {
       Services.search.getVisibleEngines(); // Update the engines once.
     }
 
-    nsContextMenu.prototype.createSearchMenu = function(event) {
+    nsContextMenu.prototype.createSearchMenu = function (event) {
       while (event.target.hasChildNodes()) {
         event.target.firstChild.remove();
       }
@@ -142,7 +142,7 @@ class ContextMenuMods {
       event.target.appendChild(docfrag);
     };
 
-    nsContextMenu.prototype.showAndFormatSearchContextItem = function() {
+    nsContextMenu.prototype.showAndFormatSearchContextItem = function () {
       let menuItem = document.getElementById("context-searchselect");
       let menuItemPrivate = document.getElementById(
         "context-searchselect-private"

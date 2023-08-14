@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Open Bookmarks, History, etc. in New Tabs
-// @version        1.2.4
+// @version        1.2.5
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    In vanilla Firefox, `browser.tabs.loadBookmarksInTabs` only affects bookmark items. When you enable this pref and left-click a bookmark (e.g., in the bookmarks toolbar or menu) it opens in a new tab instead of in the current tab. But if you left-click a history entry or a synced tab, it will still open in the current tab. So you'd have to middle click or ctrl+click to avoid losing your current tab's navigation state. This script just makes that preference apply to history and synced tabs too.
@@ -11,7 +11,7 @@
 // @include        chrome://browser/content/syncedtabs/sidebar.xhtml
 // ==/UserScript==
 
-(function() {
+(function () {
   function init() {
     if (window.PlacesUIUtils && !PlacesUIUtils._hasBeenModifiedForOBHNT) {
       const lazy = {};
@@ -37,7 +37,7 @@
     if (window.HistoryMenu) {
       let proto = HistoryMenu.prototype;
       if (!proto._hasBeenModifiedForOBHNT) {
-        proto._onCommand = function(e) {
+        proto._onCommand = function (e) {
           e = getRootEvent(e);
           let placesNode = e.target._placesNode;
           if (placesNode) {
@@ -51,12 +51,10 @@
                 where = "current";
               }
             }
-            openUILinkIn(placesNode.uri, where, {
-              triggeringPrincipal: Services.scriptSecurityManager.getSystemPrincipal(),
-            });
+            openTrustedLinkIn(placesNode.uri, where);
           }
         };
-        proto._onClick = function(e) {
+        proto._onClick = function (e) {
           let modifKey =
             AppConstants.platform == "macosx"
               ? e.metaKey || e.shiftKey
@@ -74,7 +72,7 @@
             this.onCommand(e);
           }
         };
-        proto._onMouseUp = function(e) {
+        proto._onMouseUp = function (e) {
           if (e.button == 2 || PlacesUIUtils.openInTabClosesMenu) return;
           let target = e.originalTarget;
           if (target.tagName != "menuitem") return;
@@ -134,8 +132,8 @@
             .replace(/_createSyncedTabElement/, "")
             .replace(/document\.defaultView\.whereToOpenLink\(e\)/, "preWhere")
             .replace(
-              /document\.defaultView\.openUILink\(tabInfo\.url, e,/,
-              `let where = document.defaultView.whereToOpenLink(e, false, true);\n      let preWhere = where;\n      if (document.defaultView.PlacesUIUtils.loadBookmarksInTabs) {\n        if (where == "current") where = "tab";\n        if (where == "tab" && document.defaultView.gBrowser.selectedTab.isEmpty) where = "current";\n      }\n      document.defaultView.openUILinkIn(tabInfo.url, where,`
+              /document\.defaultView\.openUILink\(tabInfo\.url, e, {\n[^\S\r\n]*triggeringPrincipal.*\n[^\S\r\n]*{}\n[^\S\r\n]*\),\n[^\S\r\n]*}\);/,
+              `let where = document.defaultView.whereToOpenLink(e, false, true);\n      let preWhere = where;\n      if (document.defaultView.PlacesUIUtils.loadBookmarksInTabs) {\n        if (where == "current") where = "tab";\n        if (where == "tab" && document.defaultView.gBrowser.selectedTab.isEmpty) where = "current";\n      }\n      document.defaultView.openTrustedLinkIn(tabInfo.url, where);`
             )}`
         );
         proto._hasBeenModifiedForOBHNT = true;
@@ -144,7 +142,7 @@
     if (location.href === `chrome://browser/content/syncedtabs/sidebar.xhtml`) {
       let proto = syncedTabsDeckComponent.tabListComponent._View.prototype;
       if (!proto._hasBeenModifiedForOBHNT) {
-        proto.onOpenSelected = function(url, e) {
+        proto.onOpenSelected = function (url, e) {
           let browserWindow = this._window.browsingContext.topChromeWindow;
           let where = browserWindow.whereToOpenLink(e, false, true);
           if (browserWindow.PlacesUIUtils.loadBookmarksInTabs) {

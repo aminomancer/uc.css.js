@@ -74,9 +74,10 @@ export const ScriptsView = () => {
       navigate("scripts");
     }
   }, [filteredScripts, navigate]);
-  const onSearchFocus = useCallback(() => setInitialFocus(false), [
-    setInitialFocus,
-  ]);
+  const onSearchFocus = useCallback(
+    () => setInitialFocus(false),
+    [setInitialFocus]
+  );
 
   useEffect(() => {
     let values = Object.values(updaters).filter(updater => updater);
@@ -158,8 +159,7 @@ export const ScriptsView = () => {
                 id="update-all-button"
                 className={updateAllButtonDisabled ? undefined : "primary"}
                 disabled={updateAllButtonDisabled}
-                onClick={updateAll}
-              >
+                onClick={updateAll}>
                 Update all
               </button>
             </div>
@@ -170,8 +170,7 @@ export const ScriptsView = () => {
               <button
                 id="restart-button"
                 className={"primary"}
-                onClick={restart}
-              >
+                onClick={restart}>
                 Restart
               </button>
             </div>

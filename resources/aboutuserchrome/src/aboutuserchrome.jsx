@@ -33,8 +33,7 @@ const UserChromeManager = () => {
           orientation="vertical"
           role="tablist"
           tabIndex="0"
-          aria-controls="content"
-        >
+          aria-controls="content">
           <button
             className={`category ${
               path.split("/")[0] === DEFAULT_PATH ? "selected" : ""
@@ -45,8 +44,7 @@ const UserChromeManager = () => {
             onClick={onCategoryClick}
             path={DEFAULT_PATH}
             name="scripts"
-            badge-count={updateCount || undefined}
-          >
+            badge-count={updateCount || undefined}>
             <span className="category-name">Scripts</span>
           </button>
           <button
@@ -58,8 +56,7 @@ const UserChromeManager = () => {
             title="Settings"
             onClick={onCategoryClick}
             path="settings"
-            name="settings"
-          >
+            name="settings">
             <span className="category-name">Settings</span>
           </button>
         </button-group>
@@ -72,13 +69,11 @@ const UserChromeManager = () => {
                 id="get-more-button"
                 className="sidebar-footer-link"
                 target="_blank"
-                title="Get more scripts"
-              >
+                title="Get more scripts">
                 <img
                   src="chrome://global/skin/icons/search-glass.svg"
                   alt=""
-                  className="sidebar-footer-icon"
-                ></img>
+                  className="sidebar-footer-icon"></img>
                 <span className="sidebar-footer-label">Get more scripts</span>
               </a>
             </li>
@@ -88,13 +83,11 @@ const UserChromeManager = () => {
                 id="help-button"
                 className="sidebar-footer-link"
                 target="_blank"
-                title="Help/Documentation"
-              >
+                title="Help/Documentation">
                 <img
                   src="chrome://global/skin/icons/help.svg"
                   alt=""
-                  className="sidebar-footer-icon"
-                ></img>
+                  className="sidebar-footer-icon"></img>
                 <span className="sidebar-footer-label">Help/Documentation</span>
               </a>
             </li>

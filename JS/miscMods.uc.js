@@ -9,7 +9,7 @@
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
-(function() {
+(function () {
   // Add these prefs in about:config if you want your settings to persist
   // between script updates without having to manually reapply them.
   let config = {
@@ -35,10 +35,11 @@
     // problems compared to other browsers is a general lack of consistency. so I think removing
     // this whole behavior would probably be wise, but for now I'll just stop it from focusing
     // the *footer*, but still allow it to focus the first download item if there are any.
-    "Stop downloads panel auto-focusing the footer button": Services.prefs.getBoolPref(
-      "miscMods.stopDownloadsPanelAutoFocusingTheFooterButton",
-      true
-    ),
+    "Stop downloads panel auto-focusing the footer button":
+      Services.prefs.getBoolPref(
+        "miscMods.stopDownloadsPanelAutoFocusingTheFooterButton",
+        true
+      ),
 
     // when you use the "move tab" hotkeys, e.g. Ctrl + Shift + PageUp, it only moves the active
     // tab, even if you have multiple tabs selected. this is inconsistent with the keyboard
@@ -90,10 +91,11 @@
     // #stop-reload-button {position: relative;}
     // #stop-reload-button > :is(#reload-button, #stop-button) > .toolbarbutton-animatable-box {display: block;}
     // :is(#reload-button, #stop-button) > .toolbarbutton-icon {padding: var(--toolbarbutton-inner-padding) !important;}
-    "Allow stop/reload button to animate in other toolbars": Services.prefs.getBoolPref(
-      "miscMods.allowStopReloadButtonToAnimateInOtherToolbars",
-      true
-    ),
+    "Allow stop/reload button to animate in other toolbars":
+      Services.prefs.getBoolPref(
+        "miscMods.allowStopReloadButtonToAnimateInOtherToolbars",
+        true
+      ),
 
     // When you open a private window, it shows a little private browsing icon in the top of the
     // navbar, next to the window control buttons. It doesn't have a tooltip for some reason, so
@@ -143,10 +145,11 @@
     // particular. This mod will change the method so that it anchors to the permission granted
     // icon instead. That's the first icon in the box. So it will appear left-aligned rather
     // than center aligned.
-    "Anchor permissions popup to granted permission icon": Services.prefs.getBoolPref(
-      "miscMods.anchorPermissionsPopupToGrantedPermissionIcon",
-      true
-    ),
+    "Anchor permissions popup to granted permission icon":
+      Services.prefs.getBoolPref(
+        "miscMods.anchorPermissionsPopupToGrantedPermissionIcon",
+        true
+      ),
 
     // By default, when you're in DOM fullscreen (e.g. you clicked the
     // fullscreen button in a web video player like YouTube's) and you open
@@ -155,10 +158,11 @@
     // But in my testing it doesn't seem to be necessary, at least when
     // duskFox is installed. So this tiny mod just removes that behavior so
     // that it opens as normal in fullscreen.
-    "Don't exit DOM fullscreen when opening permissions popup": Services.prefs.getBoolPref(
-      "miscMods.dontExitDOMFullscreenWhenOpeningPermissionsPopup",
-      true
-    ),
+    "Don't exit DOM fullscreen when opening permissions popup":
+      Services.prefs.getBoolPref(
+        "miscMods.dontExitDOMFullscreenWhenOpeningPermissionsPopup",
+        true
+      ),
 
     // When you click and drag a tab, Firefox displays a small thumbnail preview of the tab's
     // content next to your mouse cursor (provided you have `nglayout.enable_drag_images` set to
@@ -217,7 +221,7 @@
   class UCMiscMods {
     constructor() {
       if (config["Disable bookmarks toolbar auto show"]) {
-        gEditItemOverlay._autoshowBookmarksToolbar = function() {};
+        gEditItemOverlay._autoshowBookmarksToolbar = function () {};
       }
       if (config["Moving tabs with arrow keys can wrap"]) {
         gBrowser.arrowKeysShouldWrap = true;
@@ -266,7 +270,7 @@
       );
     }
     moveTabKeysMoveSelectedTabs() {
-      gBrowser.moveTabsBackward = function() {
+      gBrowser.moveTabsBackward = function () {
         let tabs = this.selectedTab.multiselected
           ? this.selectedTabs
           : [this.selectedTab];
@@ -285,7 +289,7 @@
           }
         }
       };
-      gBrowser.moveTabsForward = function() {
+      gBrowser.moveTabsForward = function () {
         let tabs = this.selectedTab.multiselected
           ? this.selectedTabs
           : [this.selectedTab];
@@ -310,7 +314,7 @@
       );
     }
     anchorBookmarksTooltip() {
-      BookmarksEventHandler.fillInBHTooltip = function(aDocument, aEvent) {
+      BookmarksEventHandler.fillInBHTooltip = function (aDocument, aEvent) {
         var node;
         var cropped = false;
         var targetURI;
@@ -361,7 +365,7 @@
     modCtrlTabMethods() {
       const delay = config["Reduce ctrl+tab delay"];
       const shiftCtrlTabBehavior = config["Use Shift+Ctrl+Tab to switch"];
-      ctrlTab.onKeyDown = function(event) {
+      ctrlTab.onKeyDown = function (event) {
         let action = ShortcutUtils.getSystemActionForEvent(event);
         if (action != ShortcutUtils.CYCLE_TABS) {
           return;
@@ -386,7 +390,7 @@
           gBrowser.selectedTab = tabs[index];
         }
       };
-      ctrlTab.open = function(forward = true) {
+      ctrlTab.open = function (forward = true) {
         if (this.isOpen) return;
         this.canvasWidth = Math.ceil(
           (screen.availWidth * 0.85) / this.maxTabPreviews
@@ -438,9 +442,8 @@
       let l10nId = PrivateBrowsingUtils.isWindowPrivate(window)
         ? "about-private-browsing-info-title"
         : "about-private-browsing-not-private";
-      document.querySelector(
-        ".private-browsing-indicator"
-      ).tooltipText = await this.privateL10n.formatValue([l10nId]);
+      document.querySelector(".private-browsing-indicator").tooltipText =
+        await this.privateL10n.formatValue([l10nId]);
     }
     makeDefaultBookmarkFolderPermanent() {
       let { panel } = StarUI;
@@ -511,7 +514,7 @@
           "resource://gre/modules/ContextualIdentityService.jsm",
       });
       if (lazy.ContextualIdentityService.hasOwnProperty("setTabStyle")) return;
-      lazy.ContextualIdentityService.setTabStyle = function(tab) {
+      lazy.ContextualIdentityService.setTabStyle = function (tab) {
         if (!tab.hasAttribute("usercontextid")) {
           return;
         }

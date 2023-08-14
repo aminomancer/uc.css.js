@@ -260,7 +260,7 @@ class ExtensionOptionsWidget {
       ExtensionPermissions: "resource://gre/modules/ExtensionPermissions.jsm",
       BuiltInThemes: "resource:///modules/BuiltInThemes.jsm",
     });
-    XPCOMUtils.defineLazyGetter(this, "extBundle", function() {
+    XPCOMUtils.defineLazyGetter(this, "extBundle", function () {
       return Services.strings.createBundle(
         "chrome://global/locale/extensions.properties"
       );
@@ -279,7 +279,7 @@ class ExtensionOptionsWidget {
     );
     this.viewId = "PanelUI-eom";
     this.config = ExtensionOptionsWidget.config;
-    let l10n = this.config.l10n;
+    let { l10n } = this.config;
     if (
       /^chrome:\/\/browser\/content\/browser.(xul||xhtml)$/i.test(location) &&
       !CustomizableUI.getPlacementOfWidget("eom-button", true)
@@ -380,19 +380,14 @@ class ExtensionOptionsWidget {
     aDoc.ownerGlobal.MozXULElement.insertFTLIfNeeded(
       "toolkit/about/aboutAddons.ftl"
     );
-    let [
-      extensions,
-      themes,
-      enabled,
-      disabled,
-      privateHelp,
-    ] = await aDoc.l10n.formatValues([
-      "addon-category-extension",
-      "addon-category-theme",
-      "extension-enabled-heading",
-      "extension-disabled-heading",
-      "addon-detail-private-browsing-help",
-    ]);
+    let [extensions, themes, enabled, disabled, privateHelp] =
+      await aDoc.l10n.formatValues([
+        "addon-category-extension",
+        "addon-category-theme",
+        "extension-enabled-heading",
+        "extension-disabled-heading",
+        "addon-detail-private-browsing-help",
+      ]);
     privateHelp = privateHelp.replace(/\s*\<.*\>$/, "");
     this.aboutAddonsStrings = {
       extensions,
@@ -450,7 +445,7 @@ class ExtensionOptionsWidget {
     let win = view.ownerGlobal;
     let doc = win.document;
     let body = view.querySelector(".panel-subview-body");
-    let l10n = this.config.l10n;
+    let { l10n } = this.config;
     let enabledFirst = this.config["Show enabled extensions first"];
     let showVersion = this.config["Show version"];
     let showDisabled = this.config["Show disabled extensions"];
@@ -477,9 +472,8 @@ class ExtensionOptionsWidget {
     let enabledSubheader = body.appendChild(
       this.create(doc, "h2", { class: "subview-subheader" }, true)
     );
-    enabledSubheader.textContent = this.aboutAddonsStrings[
-      showDisabled ? "enabled" : "extensions"
-    ];
+    enabledSubheader.textContent =
+      this.aboutAddonsStrings[showDisabled ? "enabled" : "extensions"];
     extensions
       .sort((a, b) => {
         // get sorted by enabled state...
@@ -635,7 +629,7 @@ class ExtensionOptionsWidget {
    * @param {object} addon (an Addon object)
    */
   async setAddonMessage(doc, subviewbutton, addon) {
-    const l10n = this.config.l10n;
+    const { l10n } = this.config;
     const { name } = addon;
     const { STATE_BLOCKED, STATE_SOFTBLOCKED } = Ci.nsIBlocklistService;
     const formatString = (type, args) => {
@@ -749,7 +743,7 @@ class ExtensionOptionsWidget {
    *                       with all the data we need)
    */
   buildSubView(subviewbutton, addon) {
-    let l10n = this.config.l10n;
+    let { l10n } = this.config;
     let win = subviewbutton.ownerGlobal;
     let doc = win.document;
     let view = this.viewCache(doc).appendChild(
@@ -972,7 +966,8 @@ class ExtensionOptionsWidget {
     homePageButton.addEventListener("command", () => {
       win.switchToTabHavingURI(addon.homepageURL || addon.supportURL, true, {
         inBackground: false,
-        triggeringPrincipal: win.Services.scriptSecurityManager.getSystemPrincipal(),
+        triggeringPrincipal:
+          win.Services.scriptSecurityManager.getSystemPrincipal(),
       });
     });
 

@@ -246,7 +246,7 @@ class PrivateTabManager {
       gBrowser.tabContainer.addEventListener("TabClose", this);
     }
 
-    MozElements.MozTab.prototype.getAttribute = function(att) {
+    MozElements.MozTab.prototype.getAttribute = function (att) {
       if (att == "usercontextid" && this.isToggling) {
         delete this.isToggling;
         return window.privateTab.orig_getAttribute.call(this, att) ==
@@ -257,59 +257,61 @@ class PrivateTabManager {
       return window.privateTab.orig_getAttribute.call(this, att);
     };
 
-    customElements.get(
-      "tabbrowser-tabs"
-    ).prototype._updateNewTabVisibility = function() {
-      let wrap = n =>
-        n.parentNode.localName == "toolbarpaletteitem" ? n.parentNode : n;
-      let unwrap = n =>
-        n && n.localName == "toolbarpaletteitem" ? n.firstElementChild : n;
+    customElements.get("tabbrowser-tabs").prototype._updateNewTabVisibility =
+      function () {
+        let wrap = n =>
+          n.parentNode.localName == "toolbarpaletteitem" ? n.parentNode : n;
+        let unwrap = n =>
+          n && n.localName == "toolbarpaletteitem" ? n.firstElementChild : n;
 
-      let newTabFirst = false;
-      let sibling = (id, otherId) => {
-        let sib = this;
-        do {
-          if (sib.id == "new-tab-button") newTabFirst = true;
-          sib = unwrap(wrap(sib).nextElementSibling);
-        } while (
-          sib &&
-          (sib.hidden || sib.id == "alltabs-button" || sib.id == otherId)
+        let newTabFirst = false;
+        let sibling = (id, otherId) => {
+          let sib = this;
+          do {
+            if (sib.id == "new-tab-button") newTabFirst = true;
+            sib = unwrap(wrap(sib).nextElementSibling);
+          } while (
+            sib &&
+            (sib.hidden || sib.id == "alltabs-button" || sib.id == otherId)
+          );
+          return sib?.id == id && sib;
+        };
+
+        const kAttr = "hasadjacentnewtabbutton";
+        let adjacentNewTab = sibling(
+          "new-tab-button",
+          window.privateTab.BTN_ID
         );
-        return sib?.id == id && sib;
-      };
-
-      const kAttr = "hasadjacentnewtabbutton";
-      let adjacentNewTab = sibling("new-tab-button", window.privateTab.BTN_ID);
-      if (adjacentNewTab) {
-        this.setAttribute(kAttr, "true");
-      } else {
-        this.removeAttribute(kAttr);
-      }
-
-      const kAttr2 = "hasadjacentnewprivatetabbutton";
-      let adjacentPrivateTab = sibling(
-        window.privateTab.BTN_ID,
-        "new-tab-button"
-      );
-      if (adjacentPrivateTab) {
-        this.setAttribute(kAttr2, "true");
-      } else {
-        this.removeAttribute(kAttr2);
-      }
-
-      if (adjacentNewTab && adjacentPrivateTab) {
-        let doc = adjacentPrivateTab.ownerDocument;
-        if (newTabFirst) {
-          doc
-            .getElementById("tabs-newtab-button")
-            .after(doc.getElementById(window.privateTab.BTN2_ID));
+        if (adjacentNewTab) {
+          this.setAttribute(kAttr, "true");
         } else {
-          doc
-            .getElementById(window.privateTab.BTN2_ID)
-            .after(doc.getElementById("tabs-newtab-button"));
+          this.removeAttribute(kAttr);
         }
-      }
-    };
+
+        const kAttr2 = "hasadjacentnewprivatetabbutton";
+        let adjacentPrivateTab = sibling(
+          window.privateTab.BTN_ID,
+          "new-tab-button"
+        );
+        if (adjacentPrivateTab) {
+          this.setAttribute(kAttr2, "true");
+        } else {
+          this.removeAttribute(kAttr2);
+        }
+
+        if (adjacentNewTab && adjacentPrivateTab) {
+          let doc = adjacentPrivateTab.ownerDocument;
+          if (newTabFirst) {
+            doc
+              .getElementById("tabs-newtab-button")
+              .after(doc.getElementById(window.privateTab.BTN2_ID));
+          } else {
+            doc
+              .getElementById(window.privateTab.BTN2_ID)
+              .after(doc.getElementById("tabs-newtab-button"));
+          }
+        }
+      };
     gBrowser.tabContainer._updateNewTabVisibility();
     if (!privateTabGlobal.privateTabsInited) {
       CustomizableUI.createWidget({
@@ -560,22 +562,17 @@ class PrivateTabManager {
     document.getElementById("openPrivate").hidden = document.getElementById(
       "placesContext_open:newtab"
     ).hidden;
-    document.getElementById(
-      "openAllPrivate"
-    ).disabled = document.getElementById(
-      "placesContext_openBookmarkContainer:tabs"
-    ).disabled;
+    document.getElementById("openAllPrivate").disabled =
+      document.getElementById(
+        "placesContext_openBookmarkContainer:tabs"
+      ).disabled;
     document.getElementById("openAllPrivate").hidden = document.getElementById(
       "placesContext_openBookmarkContainer:tabs"
     ).hidden;
-    document.getElementById(
-      "openAllLinksPrivate"
-    ).disabled = document.getElementById(
-      "placesContext_openLinks:tabs"
-    ).disabled;
-    document.getElementById(
-      "openAllLinksPrivate"
-    ).hidden = document.getElementById("placesContext_openLinks:tabs").hidden;
+    document.getElementById("openAllLinksPrivate").disabled =
+      document.getElementById("placesContext_openLinks:tabs").disabled;
+    document.getElementById("openAllLinksPrivate").hidden =
+      document.getElementById("placesContext_openLinks:tabs").hidden;
   }
 
   handleEvent(e) {
@@ -659,9 +656,8 @@ class PrivateTabManager {
 
   onWidgetAfterCreation(id) {
     if (id == this.BTN_ID) {
-      let newTabPlacement = CustomizableUI.getPlacementOfWidget(
-        "new-tab-button"
-      )?.position;
+      let newTabPlacement =
+        CustomizableUI.getPlacementOfWidget("new-tab-button")?.position;
       if (newTabPlacement) {
         CustomizableUI.addWidgetToArea(
           this.BTN_ID,

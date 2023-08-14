@@ -416,9 +416,10 @@ class UndoListInTabmenu {
     let fragment;
 
     // list is empty so should be hidden
-    const itemsCount = SessionStore[
-      `getClosed${type}Count${type === "Tab" ? "ForWindow" : ""}`
-    ](window);
+    const itemsCount =
+      SessionStore[`getClosed${type}Count${type === "Tab" ? "ForWindow" : ""}`](
+        window
+      );
     if (itemsCount === 0) {
       popup.parentNode.hidden = true;
       return;
@@ -448,9 +449,10 @@ class UndoListInTabmenu {
     let fragment;
 
     // list is empty so should be hidden
-    const itemsCount = SessionStore[
-      `getClosed${type}Count${type === "Tab" ? "ForWindow" : ""}`
-    ](window);
+    const itemsCount =
+      SessionStore[`getClosed${type}Count${type === "Tab" ? "ForWindow" : ""}`](
+        window
+      );
     if (itemsCount === 0) {
       popup.parentNode.hidden = true;
       return;
@@ -497,12 +499,15 @@ class UndoListInTabmenu {
       enumerable: true,
       get: () => this.l10n,
     });
-    RecentlyClosedTabsAndWindowsMenuUtils.setImage = function(aItem, aElement) {
+    RecentlyClosedTabsAndWindowsMenuUtils.setImage = function (
+      aItem,
+      aElement
+    ) {
       let iconURL = aItem.image;
       if (/^https?:/.test(iconURL)) iconURL = `moz-anno:favicon:${iconURL}`;
       aElement.setAttribute("image", iconURL);
     };
-    RecentlyClosedTabsAndWindowsMenuUtils.createEntry = function(
+    RecentlyClosedTabsAndWindowsMenuUtils.createEntry = function (
       aTagName,
       aIsWindowsFragment,
       aIndex,
@@ -569,7 +574,7 @@ class UndoListInTabmenu {
       }
       aFragment.appendChild(element);
     };
-    RecentlyClosedTabsAndWindowsMenuUtils.createRestoreAllEntry = function(
+    RecentlyClosedTabsAndWindowsMenuUtils.createRestoreAllEntry = function (
       aDocument,
       aFragment,
       aPrefixRestoreAll,
@@ -599,7 +604,7 @@ class UndoListInTabmenu {
         aFragment.appendChild(restoreAllElements);
       }
     };
-    RecentlyClosedTabsAndWindowsMenuUtils.getWindowsFragment = function(
+    RecentlyClosedTabsAndWindowsMenuUtils.getWindowsFragment = function (
       aWindow,
       aTagName,
       aPrefixRestoreAll = false,
@@ -612,10 +617,11 @@ class UndoListInTabmenu {
         for (let i = 0; i < closedWindowData.length; i++) {
           const { selected, tabs, title, isPopup } = closedWindowData[i];
           const selectedTab = tabs[selected - 1];
-          let menuLabel = RecentlyClosedTabsAndWindowsMenuUtils.l10n.formatValueSync(
-            "recently-closed-undo-close-window-label",
-            { tabCount: tabs.length - 1, winTitle: title }
-          );
+          let menuLabel =
+            RecentlyClosedTabsAndWindowsMenuUtils.l10n.formatValueSync(
+              "recently-closed-undo-close-window-label",
+              { tabCount: tabs.length - 1, winTitle: title }
+            );
           if (UndoListInTabmenu.config.l10n["Popup window label"] && isPopup) {
             menuLabel = `${menuLabel} ${UndoListInTabmenu.config.l10n["Popup window label"]}`;
           }
@@ -652,7 +658,7 @@ class UndoListInTabmenu {
       }
       return fragment;
     };
-    RecentlyClosedTabsAndWindowsMenuUtils.getTabsFragment = function(
+    RecentlyClosedTabsAndWindowsMenuUtils.getTabsFragment = function (
       aWindow,
       aTagName,
       aPrefixRestoreAll = false,
@@ -691,9 +697,8 @@ class UndoListInTabmenu {
   }
   registerSheet() {
     let tag;
-    let { inPopupPanels, inMenupopups, showForWindows } = this.config[
-      "Show container tab colors"
-    ];
+    let { inPopupPanels, inMenupopups, showForWindows } =
+      this.config["Show container tab colors"];
     if (inPopupPanels && inMenupopups) tag = "";
     else if (inPopupPanels) tag = "toolbarbutton";
     else if (inMenupopups) tag = "menuitem";
@@ -805,8 +810,9 @@ class RecentlyClosedPanelContext {
   updatePanel(panelview) {
     if (!panelview) return;
     if (panelview.id !== "PanelUI-history") {
-      let text = panelview.querySelector(".panel-header > h1 > span")
-        .textContent;
+      let text = panelview.querySelector(
+        ".panel-header > h1 > span"
+      ).textContent;
       panelview.dispatchEvent(
         new CustomEvent("ViewShowing", { bubbles: true })
       );
@@ -1021,7 +1027,7 @@ class RecentlyClosedPanelContext {
     if (this.REMOVE_ON_MID_CLICK) {
       switch (e.button) {
         case 0:
-          let shiftKey = e.shiftKey;
+          let { shiftKey } = e;
           let accelKey = e.getModifierState("Accel");
           if (accelKey) {
             if (shiftKey) {

@@ -89,15 +89,13 @@ export const ScriptDetails = ({ script, launchLocalFile }) => {
         </div>
         <div
           className="script-detail-row script-detail-version"
-          hidden={!script.version}
-        >
+          hidden={!script.version}>
           <label className="script-detail-label">Version</label>
           <span>{script.version}</span>
         </div>
         <div
           className="script-detail-row script-detail-author"
-          hidden={!author}
-        >
+          hidden={!author}>
           <label className="script-detail-label">Author</label>
           {authorURL ? (
             <a target="_blank" href={authorURL}>
@@ -109,8 +107,7 @@ export const ScriptDetails = ({ script, launchLocalFile }) => {
         </div>
         <div
           className="script-detail-row script-detail-homepageURL"
-          hidden={!homepageURL}
-        >
+          hidden={!homepageURL}>
           <label className="script-detail-label">Homepage</label>
           <a target="_blank" href={homepageURL}>
             {script.homepageURL}
@@ -118,8 +115,7 @@ export const ScriptDetails = ({ script, launchLocalFile }) => {
         </div>
         <div
           className="script-detail-row script-detail-downloadURL"
-          hidden={!script.downloadURL}
-        >
+          hidden={!script.downloadURL}>
           <label className="script-detail-label">Download URL</label>
           <a
             target="_blank"
@@ -128,15 +124,13 @@ export const ScriptDetails = ({ script, launchLocalFile }) => {
               (isValidURL(script.downloadURL)
                 ? script.downloadURL
                 : `file:///${script.downloadURL}`)
-            }
-          >
+            }>
             {script.downloadURL}
           </a>
         </div>
         <div
           className="script-detail-row script-detail-updateURL"
-          hidden={!script.updateURL || script.updateURL === script.downloadURL}
-        >
+          hidden={!script.updateURL || script.updateURL === script.downloadURL}>
           <label className="script-detail-label">Update URL</label>
           <a
             target="_blank"
@@ -145,15 +139,13 @@ export const ScriptDetails = ({ script, launchLocalFile }) => {
               (isValidURL(script.updateURL)
                 ? script.updateURL
                 : `file:///${script.updateURL}`)
-            }
-          >
+            }>
             {script.updateURL}
           </a>
         </div>
         <div
           className="script-detail-row script-detail-optionsURL"
-          hidden={!script.optionsURL}
-        >
+          hidden={!script.optionsURL}>
           <label className="script-detail-label">Options URL</label>
           <a
             target="_blank"
@@ -162,8 +154,7 @@ export const ScriptDetails = ({ script, launchLocalFile }) => {
               (isValidURL(script.optionsURL)
                 ? script.optionsURL
                 : `file:///${script.optionsURL}`)
-            }
-          >
+            }>
             {script.optionsURL}
           </a>
         </div>
@@ -177,29 +168,25 @@ export const ScriptDetails = ({ script, launchLocalFile }) => {
         </div>
         <div
           className="script-detail-row script-detail-onlyonce"
-          hidden={!script.onlyonce}
-        >
+          hidden={!script.onlyonce}>
           <label className="script-detail-label">Only once</label>
           <code>{"true"}</code>
         </div>
         <div
           className="script-detail-row script-detail-ignoreCache"
-          hidden={!script.ignoreCache}
-        >
+          hidden={!script.ignoreCache}>
           <label className="script-detail-label">Ignore cache</label>
           <code>{"true"}</code>
         </div>
         <div
           className="script-detail-row script-detail-loadOrder"
-          hidden={script.inbackground}
-        >
+          hidden={script.inbackground}>
           <label className="script-detail-label">Load order</label>
           <span>{String(script.loadOrder)}</span>
         </div>
         <div
           className="script-detail-row script-detail-charset"
-          hidden={!script.charset}
-        >
+          hidden={!script.charset}>
           <label className="script-detail-label">Character set</label>
           <span>{script.charset}</span>
         </div>

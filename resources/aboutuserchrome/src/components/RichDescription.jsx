@@ -95,8 +95,7 @@ export const RichDescription = ({ description, prefix = "" }) => {
     <div
       className={`${prefix}description-wrapper ${
         descriptionCollapsed ? `${prefix}description-collapse` : ""
-      }`}
-    >
+      }`}>
       <div className={`${prefix}description`} ref={descriptionRef}>
         <ReactMarkdown
           children={description}
@@ -133,8 +132,7 @@ export const RichDescription = ({ description, prefix = "" }) => {
       <button
         className={`button-link ${prefix}description-toggle`}
         hidden={descriptionToggleHidden}
-        onClick={toggleDescriptionCollapsed}
-      >
+        onClick={toggleDescriptionCollapsed}>
         {descriptionCollapsed ? "Show more" : "Show less"}
       </button>
     </div>

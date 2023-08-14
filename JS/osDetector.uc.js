@@ -10,7 +10,7 @@
 // @include        *
 // ==/UserScript==
 
-(function() {
+(function () {
   try {
     const { AppConstants } = ChromeUtils.importESModule(
       "resource://gre/modules/AppConstants.sys.mjs"

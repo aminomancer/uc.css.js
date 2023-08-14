@@ -72,10 +72,11 @@ This doesn't change anything about the layout so you may want to tweak some thin
     //     list-style-image: var(--default-search-identity-icon,
     //                           url("chrome://userchrome/content/search-glass.svg")) !important;
     // }
-    "Try to replace searchglass icon with engine icon in normal mode": Services.prefs.getBoolPref(
-      "searchModeIndicatorIcons.replaceSearchGlass",
-      true
-    ),
+    "Try to replace searchglass icon with engine icon in normal mode":
+      Services.prefs.getBoolPref(
+        "searchModeIndicatorIcons.replaceSearchGlass",
+        true
+      ),
 
     // by default, firefox ONLY shows your default search engine's name in the
     // urlbar placeholder text IF the engine is built into firefox, for example,
@@ -122,7 +123,7 @@ This doesn't change anything about the layout so you may want to tweak some thin
     const urlbar = gURLBar.textbox;
     const identityIcon = gURLBar._identityBox.firstElementChild;
     const oneOffs = gURLBar.view.oneOffSearchButtons;
-    const buttons = oneOffs.buttons;
+    const { buttons } = oneOffs;
     // use an author sheet to set the identity icon equal to the search engine
     // icon when in search mode
     function registerSheet() {
@@ -136,7 +137,7 @@ This doesn't change anything about the layout so you may want to tweak some thin
       if (sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) return;
       sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
     }
-    window.findEngineIcon = function(name) {
+    window.findEngineIcon = function (name) {
       let files = _ucUtils.getFSEntry("engines");
       if (!files) return false;
       let nameParts = name
@@ -251,12 +252,8 @@ This doesn't change anything about the layout so you may want to tweak some thin
           // integer sources. the icons are defined in browser.css so we'll use
           // those icons.
           else if (gURLBar.searchMode?.source) {
-            let {
-              BOOKMARKS,
-              HISTORY,
-              TABS,
-              ACTIONS,
-            } = UrlbarUtils.RESULT_SOURCE;
+            let { BOOKMARKS, HISTORY, TABS, ACTIONS } =
+              UrlbarUtils.RESULT_SOURCE;
             switch (gURLBar.searchMode.source) {
               case BOOKMARKS:
                 url = `chrome://browser/skin/bookmark.svg`;

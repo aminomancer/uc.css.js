@@ -19,7 +19,7 @@ Conversely, if you're using 150% scaling on Windows but for whatever reason the 
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
-(function() {
+(function () {
   const allowScalingFix = true;
   const forceScalingFix = false;
   class LibraryUIBase {
@@ -70,9 +70,8 @@ Conversely, if you're using 150% scaling on Windows but for whatever reason the 
       let iconBounds = window.windowUtils.getBoundsWithoutFlushing(
         libraryButton.icon
       );
-      let libraryBounds = window.windowUtils.getBoundsWithoutFlushing(
-        libraryButton
-      );
+      let libraryBounds =
+        window.windowUtils.getBoundsWithoutFlushing(libraryButton);
 
       this.animBox.style.setProperty(
         "--library-button-height",
@@ -170,9 +169,8 @@ Conversely, if you're using 150% scaling on Windows but for whatever reason the 
     window.LibraryUI = new LibraryUIBase();
 
     StarUI.showConfirmation = function showConfirmation() {
-      let animationTriggered = window.LibraryUI.triggerLibraryAnimation(
-        "bookmark"
-      );
+      let animationTriggered =
+        window.LibraryUI.triggerLibraryAnimation("bookmark");
       const HINT_COUNT_PREF =
         "browser.bookmarks.editDialog.confirmationHintShowCount";
       const HINT_COUNT = Services.prefs.getIntPref(HINT_COUNT_PREF, 0);

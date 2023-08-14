@@ -11,7 +11,7 @@
 // ==/UserScript==
 
 let EXPORTED_SYMBOLS = [];
-(function() {
+(function () {
   let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
     Ci.nsIStyleSheetService
   );

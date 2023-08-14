@@ -30,13 +30,17 @@ module.exports = {
     // "mozilla/specific": true,
     // "mozilla/xpcshell": true,
   },
-  settings: { "import/extensions": [".mjs"] },
+  settings: {
+    "import/extensions": [".mjs"],
+    react: { version: "detect" },
+  },
   root: true,
   rules: {
     curly: ["error", "multi-line", "consistent"],
     "linebreak-style": ["error", "unix"],
     "no-console": ["warn", { allow: ["error"] }],
     "no-implied-eval": "error",
+    "prefer-destructuring": ["error", { VariableDeclarator: { object: true } }],
     "prefer-numeric-literals": "error",
     "prefer-promise-reject-errors": "error",
     "prefer-reflect": "off",

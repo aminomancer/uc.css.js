@@ -24,7 +24,7 @@ override chrome://browser/content/tabbrowser-tab.js ../resources/tabMods.uc.js
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
-(async function() {
+(async function () {
   let css = /* css */ `.tab-icon-sound-label,
   .tab-secondary-label {
     display: none;
@@ -179,7 +179,7 @@ override chrome://browser/content/tabbrowser-tab.js ../resources/tabMods.uc.js
     icon.hidden = true;
     icon.setAttribute("type", pending ? "pending" : "secure");
   }
-  gBrowser.createTooltip = function(event) {
+  gBrowser.createTooltip = function (event) {
     event.stopPropagation();
     let tab = event.target.triggerNode?.closest("tab");
     if (!tab) {

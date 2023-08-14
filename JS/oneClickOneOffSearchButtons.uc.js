@@ -52,9 +52,9 @@ It's hard to explain in words exactly what's going on so I'll just say to try th
       observe(sub, _top, pref) {
         switch (pref) {
           case keyNavPref:
-            searchbarOneOffs.disableOneOffsHorizontalKeyNavigation = oneOffs.disableOneOffsHorizontalKeyNavigation = !sub.getBoolPref(
-              pref
-            );
+            searchbarOneOffs.disableOneOffsHorizontalKeyNavigation =
+              oneOffs.disableOneOffsHorizontalKeyNavigation =
+                !sub.getBoolPref(pref);
             break;
           case hideSettingsPref:
             toggleSettingsButton(sub.getBoolPref(pref));
@@ -88,7 +88,7 @@ It's hard to explain in words exactly what's going on so I'll just say to try th
     }
     function toggleSettingsButton(hide) {
       if (hide) {
-        SearchOneOffs.prototype.getSelectableButtons = function() {
+        SearchOneOffs.prototype.getSelectableButtons = function () {
           return [
             ...this.buttons.querySelectorAll(".searchbar-engine-one-off-item"),
           ];
@@ -97,7 +97,7 @@ It's hard to explain in words exactly what's going on so I'll just say to try th
           instance.settingsButton.style.display = "none";
         }
       } else {
-        SearchOneOffs.prototype.getSelectableButtons = function(
+        SearchOneOffs.prototype.getSelectableButtons = function (
           aIncludeNonEngineButtons
         ) {
           const buttons = [
@@ -114,7 +114,7 @@ It's hard to explain in words exactly what's going on so I'll just say to try th
     function toggleKeyNavCallback(disable) {
       if (disable) {
         const lazy = { UrlbarUtils };
-        gURLBar.view.controller._dismissSelectedResult = function(event) {
+        gURLBar.view.controller._dismissSelectedResult = function (event) {
           if (!this._lastQueryContextWrapper) {
             console.error(
               "Cannot dismiss selected result, last query not present"
@@ -160,7 +160,7 @@ It's hard to explain in words exactly what's going on so I'll just say to try th
 
     oneOffs.slider = oneOffs.buttons.parentElement;
     searchbarOneOffs.slider = searchbarOneOffs.buttons.parentElement;
-    oneOffs.handleSearchCommand = function(event, searchMode) {
+    oneOffs.handleSearchCommand = function (event, searchMode) {
       if (
         this.selectedButton == this.view.oneOffSearchButtons.settingsButton ||
         this.selectedButton.classList.contains(
@@ -242,7 +242,7 @@ It's hard to explain in words exactly what's going on so I'll just say to try th
         this.slider.scrollTo(0, 0);
       }
     };
-    oneOffs.scrollToButton = function(el) {
+    oneOffs.scrollToButton = function (el) {
       if (!el) el = oneOffs.buttons.firstElementChild;
       let { slider } = this;
       if (!slider) return;
@@ -254,7 +254,7 @@ It's hard to explain in words exactly what's going on so I'll just say to try th
         behavior: "auto",
       });
     };
-    oneOffs.advanceSelection = function(
+    oneOffs.advanceSelection = function (
       aForward,
       aIncludeNonEngineButtons,
       aWrapAround

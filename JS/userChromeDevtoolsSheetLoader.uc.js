@@ -11,7 +11,7 @@
 // ==/UserScript==
 
 let EXPORTED_SYMBOLS = [];
-(function() {
+(function () {
   class ToolboxProcessSheetLoader {
     regex = /^chrome:(\/\/devtools\/.*.html.*)/i;
     lastSubject = null;

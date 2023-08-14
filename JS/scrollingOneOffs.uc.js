@@ -32,7 +32,7 @@ It also adds a minor improvement to the one-offs in the searchbar results popup:
   }
   function setUpScroll(oneOffs, mask = false) {
     let container = oneOffs.buttons.parentElement;
-    let buttons = oneOffs.buttons;
+    let { buttons } = oneOffs;
     let buttonsList = buttons.children;
     container.maskDisabled = !mask;
     oneOffs.canScroll = true;
@@ -49,25 +49,25 @@ It also adds a minor improvement to the one-offs in the searchbar results popup:
     container._direction = 0;
     container._prevMouseScrolls = [null, null];
 
-    container.scrollByPixels = function(aPixels, aInstant) {
+    container.scrollByPixels = function (aPixels, aInstant) {
       let scrollOptions = { behavior: aInstant ? "instant" : "auto" };
       scrollOptions.left = aPixels;
       this.scrollBy(scrollOptions);
     };
-    container.lineScrollAmount = function() {
+    container.lineScrollAmount = function () {
       return buttonsList.length
         ? Math.round(buttons.scrollWidth * 0.1) / 0.1 / buttonsList.length
         : 30;
     };
-    container.on_Scroll = function(_e) {
+    container.on_Scroll = function (_e) {
       this._isScrolling = true;
     };
-    container.on_Scrollend = function(_e) {
+    container.on_Scrollend = function (_e) {
       this._isScrolling = false;
       this._destination = 0;
       this._direction = 0;
     };
-    container.on_Wheel = function(e) {
+    container.on_Wheel = function (e) {
       let doScroll = false;
       let instant;
       let scrollAmount = 0;
@@ -109,7 +109,7 @@ It also adds a minor improvement to the one-offs in the searchbar results popup:
     container.addEventListener("scrollend", container.on_Scrollend);
     container.style.paddingInline = `4px`;
     container.style.clipPath = `inset(0 4px 0 4px)`;
-    oneOffs.scrollToButton = function(el) {
+    oneOffs.scrollToButton = function (el) {
       if (!el) el = buttons.firstElementChild;
       let slider = container;
       if (!slider) return;
@@ -121,7 +121,7 @@ It also adds a minor improvement to the one-offs in the searchbar results popup:
         behavior: "auto",
       });
     };
-    oneOffs.on_SelectedOneOffButtonChanged = function() {
+    oneOffs.on_SelectedOneOffButtonChanged = function () {
       oneOffs.scrollToButton(oneOffs.selectedButton);
     };
     oneOffs.addEventListener(

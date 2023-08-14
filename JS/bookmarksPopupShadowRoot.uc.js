@@ -19,7 +19,7 @@ This script no longer styles the scroll buttons, since I now style all arrowscro
 // @include        main
 // ==/UserScript==
 
-(function() {
+(function () {
   const bookmarksPopupShadowRoot = {
     handleEvent(e) {
       if (!e.target.getAttribute("placespopup") || !e.target.scrollBox) return;
@@ -28,7 +28,7 @@ This script no longer styles the scroll buttons, since I now style all arrowscro
           this.checkPopups(e.target);
         }, 0);
       }
-      let scrollbox = e.target.scrollBox.scrollbox;
+      let { scrollbox } = e.target.scrollBox;
       let height = window.screen.availHeight;
       e.target.scrollBox.parentElement?.classList.toggle(
         "BMBsmallContentBox",

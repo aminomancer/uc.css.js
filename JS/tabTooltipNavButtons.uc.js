@@ -37,10 +37,11 @@ class TabTooltipNav {
     // unless the modifier key is pressed, set this to false. it will have no
     // effect if "Modifier key" is not set to one of the valid string values
     // listed above.
-    "Show vanilla tooltip if modifier is not pressed": Services.prefs.getBoolPref(
-      "tabTooltipNavButtons.showVanillaTooltip",
-      true
-    ),
+    "Show vanilla tooltip if modifier is not pressed":
+      Services.prefs.getBoolPref(
+        "tabTooltipNavButtons.showVanillaTooltip",
+        true
+      ),
 
     // When you right click one of the back or forward buttons, it opens a
     // little context menu that shows up to 15 items in that tab's history. when
@@ -50,10 +51,11 @@ class TabTooltipNav {
     // causes the URL to display in the status bar at the bottom of the screen.
     // if you don't need this behavior or find it annoying, set this pref to
     // false.
-    "Update tooltip when hovering in the history menu": Services.prefs.getBoolPref(
-      "tabTooltipNavButtons.updateTooltipWhenHoveringHistoryMenu",
-      true
-    ),
+    "Update tooltip when hovering in the history menu":
+      Services.prefs.getBoolPref(
+        "tabTooltipNavButtons.updateTooltipWhenHoveringHistoryMenu",
+        true
+      ),
 
     l10n: {
       "Go Back (Single Tab)": "Navigate tab back one page",
@@ -169,7 +171,7 @@ class TabTooltipNav {
   }
   constructor() {
     this.config = TabTooltipNav.config;
-    let l10n = this.config.l10n;
+    let { l10n } = this.config;
     XPCOMUtils.defineLazyPreferenceGetter(
       this,
       "popupDelay",
@@ -301,9 +303,9 @@ class TabTooltipNav {
   // when the popup initially shows, set the labels, tooltips, and button states
   onPopupShowing() {
     this.isOpen = true;
-    let l10n = this.config.l10n;
+    let { l10n } = this.config;
     let { multiselected } = this.triggerTab;
-    let tabs = this.tabs;
+    let { tabs } = this;
     this.updateButtonsState(tabs);
     this.handleTooltip();
     this.backButton.tooltipText = multiselected
@@ -602,7 +604,7 @@ class TabTooltipNav {
     if (!tab) return;
     let id, args;
     let { linkedBrowser } = tab;
-    const selectedTabs = gBrowser.selectedTabs;
+    const { selectedTabs } = gBrowser;
     const contextTabInSelection = selectedTabs.includes(tab);
     const tabCount = contextTabInSelection ? selectedTabs.length : 1;
     this.setFavicon(tab);
@@ -718,7 +720,7 @@ class TabTooltipNav {
       menupopup.hasStatusListener = true;
     }
 
-    let children = menupopup.children;
+    let { children } = menupopup;
     for (let i = children.length - 1; i >= 0; --i) {
       if (children[i].hasAttribute("index")) menupopup.removeChild(children[i]);
     }

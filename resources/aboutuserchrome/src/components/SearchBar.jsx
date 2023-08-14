@@ -61,8 +61,7 @@ export const SearchBar = ({
       id={id}
       className="search-textbox"
       onClick={onSearchboxClick}
-      role="search"
-    >
+      role="search">
       <div className="textbox-search-sign" hidden={!searchIcon} />
       <input
         type="search"

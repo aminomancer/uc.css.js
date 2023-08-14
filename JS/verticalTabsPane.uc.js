@@ -21,7 +21,7 @@ When you collapse the pane with the unpin button, it collapses to a small width 
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
-(function() {
+(function () {
   let config = {
     // localization strings. change these if your UI is not in english.
     l10n: {
@@ -151,7 +151,7 @@ When you collapse the pane with the unpin button, it collapses to a small width 
         E10SUtils: "resource://gre/modules/E10SUtils.jsm",
       });
       // get some localized strings for the tooltip
-      XPCOMUtils.defineLazyGetter(this, "_l10n", function() {
+      XPCOMUtils.defineLazyGetter(this, "_l10n", function () {
         return new Localization(["browser/browser.ftl"], true);
       });
       this._formatFluentStrings();
@@ -472,17 +472,13 @@ When you collapse the pane with the unpin button, it collapses to a small width 
     // e.g. "PLAYING" or "AUTOPLAY BLOCKED". we lowercase these and append them
     // to the end of the tooltip title if the sound overlay is hovered.
     async _formatFluentStrings() {
-      let [
-        playingString,
-        mutedString,
-        blockedString,
-        pipString,
-      ] = await this._l10n.formatValues([
-        "browser-tab-audio-playing2",
-        "browser-tab-audio-muted2",
-        "browser-tab-audio-blocked",
-        "browser-tab-audio-pip",
-      ]);
+      let [playingString, mutedString, blockedString, pipString] =
+        await this._l10n.formatValues([
+          "browser-tab-audio-playing2",
+          "browser-tab-audio-muted2",
+          "browser-tab-audio-blocked",
+          "browser-tab-audio-pip",
+        ]);
       this._fluentStrings = {
         playingString,
         mutedString,
@@ -1462,7 +1458,7 @@ When you collapse the pane with the unpin button, it collapses to a small width 
     _onDragStart(e, tab) {
       let row = e.target;
       if (!tab || gBrowser.tabContainer._isCustomizing) return;
-      let selectedTabs = gBrowser.selectedTabs;
+      let { selectedTabs } = gBrowser;
       let otherSelectedTabs = selectedTabs.filter(
         selectedTab => selectedTab != tab
       );
@@ -1605,7 +1601,7 @@ When you collapse the pane with the unpin button, it collapses to a small width 
       if (!dt.types.includes("all-tabs-item") || !row) return;
 
       let draggedTab = dt.mozGetDataAt("all-tabs-item", 0);
-      let movingTabs = draggedTab._dragData.movingTabs;
+      let { movingTabs } = draggedTab._dragData;
 
       if (
         !movingTabs ||
@@ -1847,9 +1843,8 @@ When you collapse the pane with the unpin button, it collapses to a small width 
       let containersEnabled =
         prefSvc.getBoolPref(userContextPref) &&
         !PrivateBrowsingUtils.isWindowPrivate(window);
-      const newTabLeftClickOpensContainersMenu = prefSvc.getBoolPref(
-        containerOnClickPref
-      );
+      const newTabLeftClickOpensContainersMenu =
+        prefSvc.getBoolPref(containerOnClickPref);
       let parent = this._newTabButton;
       parent.removeAttribute("type");
       if (parent.menupopup) parent.menupopup.remove();
@@ -2488,7 +2483,7 @@ When you collapse the pane with the unpin button, it collapses to a small width 
     uninit() {
       let enumerator = Services.wm.getEnumerator("navigator:browser");
       if (!enumerator.hasMoreElements()) {
-        let xulStore = Services.xulStore;
+        let { xulStore } = Services;
         if (this.pane.hasAttribute("checked")) {
           xulStore.persist(this.pane, "checked");
         } else {
@@ -2532,7 +2527,8 @@ When you collapse the pane with the unpin button, it collapses to a small width 
     // informing us that a tab's "pictureinpicture" attribute has changed. this
     // is how we capture all changes to the sound icon in real-time. obviously
     // this behavior isn't built-in.
-    let handleRequestSrc = PictureInPicture.handlePictureInPictureRequest.toSource();
+    let handleRequestSrc =
+      PictureInPicture.handlePictureInPictureRequest.toSource();
     if (!handleRequestSrc.includes("_tabAttrModified")) {
       eval(
         `PictureInPicture.handlePictureInPictureRequest = async function ${handleRequestSrc
@@ -2642,7 +2638,7 @@ When you collapse the pane with the unpin button, it collapses to a small width 
 
   // tab pane's horizontal alignment should mirror that of the sidebar, which
   // can be moved from left to right.
-  SidebarUI.setPosition = function() {
+  SidebarUI.setPosition = function () {
     let appcontent = document.getElementById("appcontent");
     let verticalSplitter = document.getElementById("vertical-tabs-splitter");
     let verticalPane = document.getElementById("vertical-tabs-pane");

@@ -145,7 +145,7 @@ class FindbarMods {
     };
   }
   async buildContextMenu() {
-    let l10n = FindbarMods.l10n;
+    let { l10n } = FindbarMods;
     // ensure the .ftl file is loaded; this will almost always execute
     // before firefox's own findbar code does.
     MozXULElement.insertFTLIfNeeded("toolkit/main-window/findbar.ftl");
@@ -288,7 +288,7 @@ class FindbarMods {
     );
     // override the native method that sets some findbar UI properties,
     // e.g. switching between normal and find-as-you-type mode.
-    findbarClass._updateFindUI = function() {
+    findbarClass._updateFindUI = function () {
       let showMinimalUI = this.findMode != this.FIND_NORMAL;
       let nodes = this.getElement("findbar-container").children;
       let wrapper = this.getElement("findbar-textbox-wrapper");
@@ -323,7 +323,7 @@ class FindbarMods {
       document.l10n.setAttributes(this._findField, l10nId);
     };
     // override the native on-results function so it updates both labels.
-    findbarClass.onMatchesCountResult = function(result) {
+    findbarClass.onMatchesCountResult = function (result) {
       let l10nId;
       switch (result.total) {
         case 0:
@@ -389,9 +389,8 @@ class FindbarMods {
       let diacriticsStatus =
         Services.prefs.getIntPref("findbar.matchdiacritics", 0) ||
         findbar._matchDiacritics;
-      let activeItem = this.contextMenu._menuMatchDiacriticsPopup.children[
-        diacriticsStatus
-      ];
+      let activeItem =
+        this.contextMenu._menuMatchDiacriticsPopup.children[diacriticsStatus];
       activeItem.setAttribute("checked", true);
     }
     if (e.target === this.contextMenu._menuMatchCasePopup) {
@@ -400,9 +399,8 @@ class FindbarMods {
           "accessibility.typeaheadfind.casesensitive",
           0
         ) || findbar._typeAheadCaseSensitive;
-      let activeItem = this.contextMenu._menuMatchCasePopup.children[
-        caseStatus
-      ];
+      let activeItem =
+        this.contextMenu._menuMatchCasePopup.children[caseStatus];
       activeItem.setAttribute("checked", true);
     }
   }

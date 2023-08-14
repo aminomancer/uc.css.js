@@ -51,7 +51,7 @@ class ClearDLPanel {
   sentenceCase(str) {
     return str
       .toLocaleLowerCase()
-      .replace(RTL_UI ? /.$/i : /^./i, function(letter) {
+      .replace(RTL_UI ? /.$/i : /^./i, function (letter) {
         return letter.toLocaleUpperCase();
       })
       .trim();

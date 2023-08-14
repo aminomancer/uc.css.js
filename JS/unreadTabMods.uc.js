@@ -30,7 +30,7 @@ If you use [duskFox][] (the theme on my repo) you will already have this CSS so 
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
-(function() {
+(function () {
   /**
    * set the "notselectedsinceload" attribute and the _notselectedsinceload property on a tab.
    * @param {object} tab (a tab whose attribute to change)
@@ -69,7 +69,7 @@ If you use [duskFox][] (the theme on my repo) you will already have this CSS so 
       "Mark Multiple Tabs as Unread Label": "Mark #1 Tabs as Unread",
     };
     constructor() {
-      gBrowser.tabContainer._handleTabSelect = function(aInstant) {
+      gBrowser.tabContainer._handleTabSelect = function (aInstant) {
         let selectedTab = this.selectedItem;
         if (this.getAttribute("overflow") == "true") {
           this.arrowScrollbox.ensureElementIsVisible(selectedTab, aInstant);
@@ -77,7 +77,7 @@ If you use [duskFox][] (the theme on my repo) you will already have this CSS so 
         modulateAttr(selectedTab);
       };
 
-      gBrowser.tabContainer._handleNewTab = function(tab) {
+      gBrowser.tabContainer._handleNewTab = function (tab) {
         if (tab.container != this) return;
         tab._fullyOpen = true;
         gBrowser.tabAnimationsInProgress--;

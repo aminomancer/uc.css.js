@@ -17,7 +17,7 @@ Due to Firefox's named anchor navigation system, you can't always refresh a page
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // ==/UserScript==
 
-(function() {
+(function () {
   function init() {
     let source = gURLBar._loadURL.toSource();
     if (source.startsWith("(function")) return;
@@ -39,14 +39,15 @@ Due to Firefox's named anchor navigation system, you can't always refresh a page
      *   The URL to open.
      * @param {object} params
      *   The parameters related to how and where the result will be opened.
-     *   Further supported paramters are listed in utilityOverlay.js#openUILinkIn.
+     *   Further supported parameters are listed in utilityOverlay.js.
      */
-    gURLBar.openLinkWithForceReload = function(url, params = {}) {
+    gURLBar.openLinkWithForceReload = function (url, params = {}) {
       if (!url) {
         return;
       }
       if (!params.triggeringPrincipal) {
-        params.triggeringPrincipal = Services.scriptSecurityManager.getSystemPrincipal();
+        params.triggeringPrincipal =
+          Services.scriptSecurityManager.getSystemPrincipal();
       }
       params.fromChrome = params.fromChrome ?? true;
 

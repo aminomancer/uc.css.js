@@ -174,13 +174,8 @@ class NavbarToolbarSlider {
   }
   observe(sub, _top, pref) {
     let value = NavbarToolbarSlider.getPref(sub, pref);
-    const {
-      width,
-      exclude,
-      springs,
-      collapse,
-      direction,
-    } = NavbarToolbarSlider.prefNames;
+    const { width, exclude, springs, collapse, direction } =
+      NavbarToolbarSlider.prefNames;
     switch (pref) {
       case width:
         if (value === null || value <= 0) value = 11;
@@ -220,13 +215,8 @@ class NavbarToolbarSlider {
   }
   setupPrefs() {
     const { prefs } = Services;
-    const {
-      width,
-      exclude,
-      springs,
-      collapse,
-      direction,
-    } = NavbarToolbarSlider.prefNames;
+    const { width, exclude, springs, collapse, direction } =
+      NavbarToolbarSlider.prefNames;
     if (!prefs.prefHasUserValue(width)) prefs.setIntPref(width, 11);
     if (!prefs.prefHasUserValue(collapse)) prefs.setBoolPref(collapse, true);
     if (!prefs.prefHasUserValue(exclude)) prefs.setStringPref(exclude, "[]");
@@ -731,21 +721,21 @@ class NavbarToolbarSlider {
     outer._direction = 0;
     outer._prevMouseScrolls = [null, null];
     // these are patterned after the arrowscrollbox functions.
-    outer.scrollByPixels = function(left, instant) {
+    outer.scrollByPixels = function (left, instant) {
       this.scrollBy({ left, behavior: instant ? "instant" : "auto" });
     };
     // these 2 are just here for future extension
-    outer.on_Scroll = function() {
+    outer.on_Scroll = function () {
       if (this.open) return;
       this._isScrolling = true;
     };
-    outer.on_Scrollend = function() {
+    outer.on_Scrollend = function () {
       this._isScrolling = false;
       this._destination = 0;
       this._direction = 0;
     };
     // main wheel event callback
-    outer.on_Wheel = function(e) {
+    outer.on_Wheel = function (e) {
       // this is what the mutation observer was for. when a toolbar button in
       // the slider has its popup open, we set outer.open = true. so if
       // outer.open = true we don't want to scroll at all. in other words, if a
@@ -825,7 +815,7 @@ class NavbarToolbarSlider {
      * that focuses without the native automatic instant scroll behavior.
      * @param {object} aButton (a button's DOM node)
      */
-    ToolbarKeyboardNavigator._focusButton = function(aButton) {
+    ToolbarKeyboardNavigator._focusButton = function (aButton) {
       aButton.setAttribute("tabindex", "-1");
       let slider = aButton.closest(".slider-inner-container");
       if (slider) {

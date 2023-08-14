@@ -1,10 +1,8 @@
 import React, { createContext } from "react";
-const {
-  PREF_UPDATE_INTERVAL,
-  PREF_NOTIFICATIONS_ENABLED,
-} = ChromeUtils.importESModule(
-  "chrome://userchrome/content/aboutuserchrome/modules/UCMSingletonData.sys.mjs"
-);
+const { PREF_UPDATE_INTERVAL, PREF_NOTIFICATIONS_ENABLED } =
+  ChromeUtils.importESModule(
+    "chrome://userchrome/content/aboutuserchrome/modules/UCMSingletonData.sys.mjs"
+  );
 
 export const ucUtils =
   window._ucUtils || window.docShell.chromeEventHandler.ownerGlobal._ucUtils;

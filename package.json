@@ -4,7 +4,8 @@
   "repository": {},
   "license": "CC BY-NC-SA 4.0",
   "scripts": {
-    "build": "parcel build --no-content-hash"
+    "build": "parcel build --no-content-hash",
+    "lint:fix": "eslint --fix ./JS/ ./resources/aboutuserchrome/src/"
   },
   "targets": {
     "aboutuserchrome": {

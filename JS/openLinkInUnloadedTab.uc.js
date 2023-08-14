@@ -173,8 +173,10 @@ class UnloadedTabMenuBase {
       this.placesMenuOpenContainer?.hidden &&
       this.placesMenuOpenBookmarkContainer?.hidden &&
       this.placesMenuOpenBookmarkLinks?.hidden;
-    this.placesMenuOpenAllLinksUnloaded.disabled = this.placesMenuOpenAllLinks?.disabled;
-    this.placesMenuOpenAllLinksUnloaded.hidden = this.placesMenuOpenAllLinks?.hidden;
+    this.placesMenuOpenAllLinksUnloaded.disabled =
+      this.placesMenuOpenAllLinks?.disabled;
+    this.placesMenuOpenAllLinksUnloaded.hidden =
+      this.placesMenuOpenAllLinks?.hidden;
     this.placesMenuOpenUnloaded.disabled = this.placesMenuOpenNewTab?.disabled;
     this.placesMenuOpenUnloaded.hidden = this.placesMenuOpenNewTab?.hidden;
   }
@@ -392,7 +394,7 @@ class UnloadedTabMenuBase {
     let isReady = false;
     tab.addEventListener(
       "SSTabRestoring",
-      function() {
+      function () {
         isReady = true;
         win.unloadedTabMenu.maybeSetIcon(
           tab,
@@ -426,7 +428,7 @@ class UnloadedTabMenuBase {
           }
         });
       let reader = new FileReader();
-      reader.onloadend = function() {
+      reader.onloadend = function () {
         iconURL = reader.result;
         win.unloadedTabMenu.maybeSetIcon(
           tab,
@@ -451,7 +453,7 @@ class UnloadedTabMenuBase {
     let query = PlacesUtils.history.getNewQuery();
     query.uri = aURI;
 
-    let root = PlacesUtils.history.executeQuery(query, options).root;
+    let { root } = PlacesUtils.history.executeQuery(query, options);
     root.containerOpen = true;
 
     if (!root.childCount) {
