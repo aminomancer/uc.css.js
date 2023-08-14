@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Navbar Toolbar Button Slider
-// @version        2.9.2
+// @version        2.9.3
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @long-description
@@ -850,163 +850,39 @@ class NavbarToolbarSlider {
     // don't change this method if we're using restorePreProtonLibraryButton.uc.js,
     // since that script also changes it
     if ("LibraryUI" in window) return;
-    StarUI.showConfirmation = function() {
-      const HINT_COUNT_PREF =
-        "browser.bookmarks.editDialog.confirmationHintShowCount";
-      const HINT_COUNT = Services.prefs.getIntPref(HINT_COUNT_PREF, 0);
-      if (HINT_COUNT >= 3) return;
-      Services.prefs.setIntPref(HINT_COUNT_PREF, HINT_COUNT + 1);
-      let anchor;
-      if (window.toolbar.visible) {
-        for (let id of ["library-button", "bookmarks-menu-button"]) {
-          let element = document.getElementById(id);
-          if (
-            element &&
-            element.getAttribute("cui-areatype") != "panel" &&
-            element.getAttribute("overflowedItem") != "true" &&
-            isElementVisible(element) &&
-            !NavbarToolbarSlider.scrolledOutOfView(element, ".slider-container")
-          ) {
-            anchor = element;
-            break;
-          }
-        }
-      }
-      if (!anchor) anchor = document.getElementById("PanelUI-menu-button");
-      ConfirmationHint.show(anchor, "confirmation-hint-page-bookmarked");
-    };
+    eval(
+      `window.StarUI.showConfirmation = function ${window.StarUI.showConfirmation
+        .toSource()
+        .replace(/^\(/, "")
+        .replace(/\)$/, "")
+        .replace(/^function[^\S\r\n]*/, "")
+        .replace(/^showConfirmation[^\S\r\n]*/, "")
+        .replace(/^(.)/, `uc_showConfirmation$1`)
+        .replace(
+          /([^\S\r\n]*)(element\.getAttribute\("overflowedItem"\) != "true")/,
+          `$1$2 &&\n$1isElementVisible(element) &&\n$1!NavbarToolbarSlider.scrolledOutOfView(element, ".slider-container")`
+        )}`
+    );
   }
   handleGSyncHint() {
     if (!window.gSync?._appendSendTabDeviceList) return;
-    window.gSync._appendSendTabDeviceList = function(
-      targets,
-      fragment,
-      createDeviceNodeFn,
-      url,
-      title,
-      multiselected,
-      isFxaMenu = false
-    ) {
-      let tabsToSend = multiselected
-        ? gBrowser.selectedTabs.map(t => {
-            return {
-              url: t.linkedBrowser.currentURI.spec,
-              title: t.linkedBrowser.contentTitle,
-            };
-          })
-        : [{ url, title }];
-
-      const send = to => {
-        Promise.all(
-          tabsToSend.map(t =>
-            // sendTabToDevice does not reject.
-            this.sendTabToDevice(t.url, to, t.title)
-          )
-        ).then(results => {
-          // Show the Sent! confirmation if any of the sends succeeded.
-          if (results.includes(true)) {
-            // FxA button could be hidden with CSS since the user is logged out,
-            // although it seems likely this would only happen in testing...
-            let fxastatus = document.documentElement.getAttribute("fxastatus");
-            let fxaButton = document.getElementById("fxa-toolbar-menu-button");
-            let anchorNode =
-              (fxastatus &&
-                fxastatus != "not_configured" &&
-                fxaButton?.parentNode?.id != "widget-overflow-list" &&
-                isElementVisible(fxaButton) &&
-                !NavbarToolbarSlider.scrolledOutOfView(
-                  fxaButton,
-                  ".slider-container"
-                ) &&
-                fxaButton) ||
-              document.getElementById("PanelUI-menu-button");
-            ConfirmationHint.show(
-              anchorNode,
-              "confirmation-hint-send-to-device"
-            );
-          }
-          fxAccounts.flushLogFile();
-        });
-      };
-      const onSendAllCommand = event => {
-        send(targets);
-      };
-      const onTargetDeviceCommand = event => {
-        const targetId = event.target.getAttribute("clientId");
-        const target = targets.find(t => t.id == targetId);
-        send([target]);
-      };
-
-      function addTargetDevice(targetId, name, targetType, lastModified) {
-        const targetDevice = createDeviceNodeFn(
-          targetId,
-          name,
-          targetType,
-          lastModified
-        );
-        targetDevice.addEventListener(
-          "command",
-          targetId ? onTargetDeviceCommand : onSendAllCommand,
-          true
-        );
-        targetDevice.classList.add("sync-menuitem", "sendtab-target");
-        targetDevice.setAttribute("clientId", targetId);
-        targetDevice.setAttribute("clientType", targetType);
-        targetDevice.setAttribute("label", name);
-        fragment.appendChild(targetDevice);
-      }
-
-      for (let target of targets) {
-        let type, lastModified;
-        if (target.clientRecord) {
-          type = Weave.Service.clientsEngine.getClientType(
-            target.clientRecord.id
-          );
-          lastModified = new Date(
-            target.clientRecord.serverLastModified * 1000
-          );
-        } else {
-          // For phones, FxA uses "mobile" and Sync clients uses "phone".
-          type = target.type == "mobile" ? "phone" : target.type;
-          lastModified = target.lastAccessTime
-            ? new Date(target.lastAccessTime)
-            : null;
-        }
-        addTargetDevice(target.id, target.name, type, lastModified);
-      }
-
-      if (targets.length > 1) {
-        // "Send to All Devices" menu item
-        const separator = createDeviceNodeFn();
-        separator.classList.add("sync-menuitem");
-        fragment.appendChild(separator);
-        const allDevicesLabel = isFxaMenu
-          ? this.fluentStrings.formatValueSync("account-send-to-all-devices")
-          : this.fxaStrings.GetStringFromName("sendToAllDevices.menuitem");
-        addTargetDevice("", allDevicesLabel, "");
-
-        // "Manage devices" menu item
-        const manageDevicesLabel = isFxaMenu
-          ? this.fluentStrings.formatValueSync("account-manage-devices")
-          : this.fxaStrings.GetStringFromName("manageDevices.menuitem");
-        // We piggyback on the createDeviceNodeFn implementation,
-        // it's a big disgusting.
-        const targetDevice = createDeviceNodeFn(
-          null,
-          manageDevicesLabel,
-          null,
-          null
-        );
-        targetDevice.addEventListener(
-          "command",
-          () => gSync.openDevicesManagementPage("sendtab"),
-          true
-        );
-        targetDevice.classList.add("sync-menuitem", "sendtab-target");
-        targetDevice.setAttribute("label", manageDevicesLabel);
-        fragment.appendChild(targetDevice);
-      }
-    };
+    eval(
+      `window.gSync._appendSendTabDeviceList = function ${window.gSync._appendSendTabDeviceList
+        .toSource()
+        .replace(/^\(/, "")
+        .replace(/\)$/, "")
+        .replace(/^function[^\S\r\n]*/, "")
+        .replace(/^_appendSendTabDeviceList[^\S\r\n]*/, "")
+        .replace(/^(.)/, `uc_appendSendTabDeviceList$1`)
+        .replace(
+          /([^\S\r\n]*)(let fxastatus =.*)/,
+          `$1$2\n$1let fxaButton = document.getElementById("fxa-toolbar-menu-button");`
+        )
+        .replace(
+          /([^\S\r\n]*)document\.getElementById\("fxa-toolbar-menu-button"\)\?\.parentNode\n[^\S\r\n]*\?\.id != "widget-overflow-list" &&\n[^\S\r\n]*document\.getElementById\("fxa-toolbar-menu-button"\)/,
+          `$1fxaButton?.parentNode?.id != "widget-overflow-list" &&\n$1isElementVisible(fxaButton) &&\n$1!NavbarToolbarSlider.scrolledOutOfView(\n$1  fxaButton,\n$1  ".slider-container"\n$1) &&\n$1fxaButton`
+        )}`
+    );
   }
   registerSheet() {
     const css = /* css */ `#nav-bar-customization-target>#nav-bar-toolbarbutton-slider-container:first-child,#nav-bar-customization-target>toolbarpaletteitem#nav-bar-toolbarbutton-slider-container:first-child>:is(toolbarbutton,toolbaritem){padding-inline-start:unset;margin-inline-start:calc(var(--toolbar-start-end-padding) - var(--toolbarbutton-outer-padding));}`;
