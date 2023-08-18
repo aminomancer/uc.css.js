@@ -659,6 +659,9 @@ translucent with acrylic effect. enable layout.css.backdrop-filter.enabled */
   --in-content-link-color: var(--purple-35) !important;
   --in-content-link-color-hover: var(--purple-30) !important;
   --in-content-link-color-active: var(--purple-30) !important;
+  --link-color: var(--purple-35) !important;
+  --link-color-hover: var(--purple-30) !important;
+  --link-color-active: var(--purple-30) !important;
   --notification-button-background: var(--desaturate-dimmed) !important;
   --notification-button-background-hover: var(--desaturate-dimmed-further) !important;
   --notification-button-background-active: var(--desaturate-dimmed-even-further) !important;

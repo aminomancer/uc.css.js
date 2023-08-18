@@ -125,6 +125,9 @@ menupopup {
   --in-content-link-color: var(--purple-35) !important;
   --in-content-link-color-hover: var(--purple-30) !important;
   --in-content-link-color-active: var(--purple-30) !important;
+  --link-color: var(--purple-35) !important;
+  --link-color-hover: var(--purple-30) !important;
+  --link-color-active: var(--purple-30) !important;
   --in-content-primary-button-background: var(--purple-40) !important;
   --in-content-primary-button-background-hover: var(--purple-35) !important;
   --in-content-primary-button-background-active: var(--purple-30) !important;

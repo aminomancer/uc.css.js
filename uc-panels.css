@@ -190,6 +190,10 @@ no longer necessary after modern flexbox emulation. */
   --popup-width: 33em !important;
 }
 
+#protections-popup[toast] {
+	--popup-width: 27.12em !important;
+}
+
 /* protect the arrowpanel animations from future updates */
 @supports -moz-bool-pref("xul.panel-animations.enabled") {
   @media (prefers-reduced-motion: no-preference) {
@@ -370,45 +374,36 @@ no longer necessary after modern flexbox emulation. */
   margin-top: 0px !important;
 }
 
-#protections-popup-not-blocking-section-header {
-  padding-inline: 2px !important;
-  padding-block: 0 !important;
-  margin-inline: 0 !important;
-}
-
 #protections-popup-blocking-section-header,
-#protections-popup-not-found-section-header {
-  padding-block: 6px !important;
-  margin-inline: 0 !important;
+#protections-popup-not-found-section-header,
+#protections-popup-not-blocking-section-header {
+  padding-block: 0 !important;
+  min-height: 22px !important;
+  box-sizing: border-box !important;
+  align-items: center !important;
+  margin-inline: var(--arrowpanel-menuitem-margin-inline) !important;
+  padding-inline: 4px !important;
 }
 
-#protections-popup-not-blocking-section-description,
-#protections-popup-not-blocking-section-why {
-  outline: none !important;
-  padding: 3.75px 4px !important;
-  height: revert !important;
-}
-
-:is(#protections-popup-not-blocking-section-description, #protections-popup-not-blocking-section-why, #protections-popup-blocking-section-header, #protections-popup-not-found-section-header):not([hidden="true"]) {
+:is(#protections-popup-blocking-section-header, #protections-popup-not-found-section-header, #protections-popup-not-blocking-section-header):not([hidden="true"]) {
   display: flex !important;
 }
 
 #protections-popup-not-blocking-section-why {
   border-radius: var(--arrowpanel-menuitem-border-radius) !important;
-  margin-inline-end: calc(var(--arrowpanel-menuitem-margin-inline) - 2px) !important;
+  outline: none !important;
+  padding: 4px !important;
+  margin-inline: calc(0px - var(--arrowpanel-menuitem-margin-inline)) !important;
+  height: revert !important;
 }
 
 #protections-popup-not-blocking-section-why:hover {
   color: var(--panel-color);
 }
 
-#protections-popup-not-blocking-section-why:hover:active {
-  background-color: var(--panel-item-hover-bgcolor) !important;
-}
-
-#protections-popup-siteNotWorkingView-body,
-#protections-popup-tp-switch-section {
-  min-height: 40px !important;
+.protections-popup-switch-section-header,
+#protections-popup-siteNotWorkingView-header {
+	min-height: var(--subviewbutton-height, 28px) !important;
 }
 
 #protections-popup-tp-switch-section:not([short]) > :is(.protections-popup-tp-switch-label-box, .protections-popup-tp-switch-box) {

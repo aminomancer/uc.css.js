@@ -23,6 +23,9 @@ tabmodalprompt {
   --in-content-link-color: var(--purple-35) !important;
   --in-content-link-color-hover: var(--purple-30) !important;
   --in-content-link-color-active: var(--purple-30) !important;
+  --link-color: var(--purple-35) !important;
+  --link-color-hover: var(--purple-30) !important;
+  --link-color-active: var(--purple-30) !important;
   --in-content-primary-button-background: var(--purple-40) !important;
   --in-content-primary-button-background-hover: var(--purple-35) !important;
   --in-content-primary-button-background-active: var(--purple-30) !important;
@@ -827,6 +830,9 @@ rtl languages. adjust the border radius accordingly */
     --in-content-link-color: var(--purple-35) !important;
     --in-content-link-color-hover: var(--purple-30) !important;
     --in-content-link-color-active: var(--purple-30) !important;
+    --link-color: var(--purple-35) !important;
+    --link-color-hover: var(--purple-30) !important;
+    --link-color-active: var(--purple-30) !important;
     --in-content-primary-button-background: var(--purple-40) !important;
     --in-content-primary-button-background-hover: var(--purple-35) !important;
     --in-content-primary-button-background-active: var(--purple-30) !important;
@@ -1113,6 +1119,12 @@ rtl languages. adjust the border radius accordingly */
     --in-content-link-visited-color: var(--pink-40) !important;
     --in-content-link-visited-color-hover: var(--pink-35) !important;
     --in-content-link-visited-color-active: var(--pink-30) !important;
+    --link-color: var(--purple-30) !important;
+    --link-color-hover: var(--purple-25) !important;
+    --link-color-active: var(--purple-20) !important;
+    --link-visited-color: var(--pink-40) !important;
+    --link-visited-color-hover: var(--pink-35) !important;
+    --link-visited-color-active: var(--pink-30) !important;
     --in-content-primary-button-background: var(--purple-40) !important;
     --in-content-primary-button-background-hover: var(--purple-35) !important;
     --in-content-primary-button-background-active: var(--purple-30) !important;
@@ -1206,6 +1218,9 @@ rtl languages. adjust the border radius accordingly */
     --in-content-link-color: var(--purple-35) !important;
     --in-content-link-color-hover: var(--purple-30) !important;
     --in-content-link-color-active: var(--purple-30) !important;
+    --link-color: var(--purple-30) !important;
+    --link-color-hover: var(--purple-25) !important;
+    --link-color-active: var(--purple-20) !important;
     --in-content-primary-button-background: var(--purple-40) !important;
     --in-content-primary-button-background-hover: var(--purple-35) !important;
     --in-content-primary-button-background-active: var(--purple-30) !important;

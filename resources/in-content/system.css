@@ -93,6 +93,12 @@
     --in-content-link-visited-color: var(--pink-40) !important;
     --in-content-link-visited-color-hover: var(--pink-35) !important;
     --in-content-link-visited-color-active: var(--pink-30) !important;
+    --link-color: var(--purple-30) !important;
+    --link-color-hover: var(--purple-25) !important;
+    --link-color-active: var(--purple-20) !important;
+    --link-visited-color: var(--pink-40) !important;
+    --link-visited-color-hover: var(--pink-35) !important;
+    --link-visited-color-active: var(--pink-30) !important;
     --in-content-button-background: var(--uc-content-button-background) !important;
     --in-content-button-background-hover: var(--uc-content-button-background-hover) !important;
     --in-content-button-background-active: var(--uc-content-button-background-active) !important;
@@ -472,6 +478,12 @@
       --in-content-link-visited-color: var(--ui-text-70) !important;
       --in-content-link-visited-color-hover: var(--ui-text-60) !important;
       --in-content-link-visited-color-active: var(--ui-text-50) !important;
+      --link-color: var(--in-content-primary-button-background) !important;
+      --link-color-hover: var(--in-content-primary-button-background-hover) !important;
+      --link-color-active: var(--in-content-primary-button-background-active) !important;
+      --link-visited-color: var(--ui-text-70) !important;
+      --link-visited-color-hover: var(--ui-text-60) !important;
+      --link-visited-color-active: var(--ui-text-50) !important;
     }
 
     body {
