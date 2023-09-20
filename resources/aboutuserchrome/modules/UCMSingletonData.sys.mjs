@@ -208,7 +208,7 @@ class ScriptHandle {
         file.reveal();
         return;
       } catch (ex) {}
-      let parent = file.parent;
+      let { parent } = file;
       if (!parent) {
         throw new Error(
           "Unexpected reference to a top-level directory instead of a file"

@@ -3,9 +3,10 @@ const { PREF_UPDATE_INTERVAL, PREF_NOTIFICATIONS_ENABLED } =
   ChromeUtils.importESModule(
     "chrome://userchrome/content/aboutuserchrome/modules/UCMSingletonData.sys.mjs"
   );
+const { _ucUtils: ucUtils } = ChromeUtils.importESModule(
+  "chrome://userchromejs/content/utils.sys.mjs"
+);
 
-export const ucUtils =
-  window._ucUtils || window.docShell.chromeEventHandler.ownerGlobal._ucUtils;
 export const PREF_BRANCH = "userChromeJS.";
 export const PREF_ENABLED = "userChromeJS.enabled";
 export const PREF_SCRIPTSDISABLED = "userChromeJS.scriptsDisabled";

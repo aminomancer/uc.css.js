@@ -1,0 +1,86 @@
+/* ==UserScript==
+// @name           Restore pre-Proton Arrowpanels
+// @version        1.3.1
+// @author         aminomancer
+// @homepageURL    https://github.com/aminomancer/uc.css.js
+// @long-description
+// @description
+<!--
+This stylesheet will restore the arrows at the corner of panels that point at the element to which the panel is anchored. But in order to do that, you also need to install these files from the [resources/script-override][] folder: [panel.js][] and [places-menupopup.js][]. After downloading them and placing them in your own `resources/script-override/` folder, add the following lines to your [chrome.manifest][] file:
+
+```
+override chrome://global/content/elements/panel.js ../resources/script-override/panel.js
+override chrome://browser/content/places/places-menupopup.js ../resources/script-override/places-menupopup.js
+```
+
+[resources/script-override]: https://github.com/aminomancer/uc.css.js/tree/master/resources/script-override
+[panel.js]: https://github.com/aminomancer/uc.css.js/blob/master/resources/script-override/panel.js
+[places-menupopup.js]: https://github.com/aminomancer/uc.css.js/blob/master/resources/script-override/places-menupopup.js
+[chrome.manifest]: https://github.com/aminomancer/uc.css.js/blob/master/utils/chrome.manifest
+-->
+// @downloadURL    https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/CSS/restorePreProtonArrowpanels.uc.css
+// @updateURL      https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/CSS/restorePreProtonArrowpanels.uc.css
+// @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
+// ==/UserScript==
+*/
+
+panel[type="arrow"][side="top"],
+panel[type="arrow"][side="bottom"] {
+  margin-inline: -20px;
+}
+panel[type="arrow"][side="left"],
+panel[type="arrow"][side="right"] {
+  margin-block: -20px;
+}
+#BMB_bookmarksPopup[side="top"],
+#BMB_bookmarksPopup[side="bottom"] {
+  margin-inline: -20px;
+}
+#BMB_bookmarksPopup[side="left"],
+#BMB_bookmarksPopup[side="right"] {
+  margin-block: -20px;
+}
+@media (-moz-platform: macos) {
+  #BMB_bookmarksPopup[side="top"],
+  #BMB_bookmarksPopup[side="bottom"] {
+    margin-inline: -17px;
+  }
+  #BMB_bookmarksPopup[side="left"],
+  #BMB_bookmarksPopup[side="right"] {
+    margin-block: -17px;
+  }
+}
+:is(panel, menupopup)::part(arrow) {
+  -moz-context-properties: fill, stroke;
+  fill: var(--arrowpanel-background);
+  stroke: var(--arrowpanel-border-color);
+}
+:is(panel, menupopup)[side="top"]::part(arrow),
+:is(panel, menupopup)[side="bottom"]::part(arrow) {
+  list-style-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="10"><path d="M 0,10 L 10,0 20,10 z" fill="context-stroke"/><path d="M 1,10 L 10,1 19,10 z" fill="context-fill"/></svg>');
+  position: relative;
+  margin-inline: 10px;
+}
+:is(panel, menupopup)[side="top"]::part(arrow) {
+  margin-bottom: -5px;
+}
+:is(panel, menupopup)[side="bottom"]::part(arrow) {
+  transform: scaleY(-1);
+  margin-top: -5px;
+}
+:is(panel, menupopup)[side="left"]::part(arrow),
+:is(panel, menupopup)[side="right"]::part(arrow) {
+  list-style-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="20"><path d="M 10,0 L 0,10 10,20 z" fill="context-stroke"/><path d="M 10,1 L 1,10 10,19 z" fill="context-fill"/></svg>');
+  position: relative;
+  margin-block: 10px;
+}
+:is(panel, menupopup)[side="left"]::part(arrow) {
+  margin-right: -5px;
+}
+:is(panel, menupopup)[side="right"]::part(arrow) {
+  transform: scaleX(-1);
+  margin-left: -5px;
+}
+#confirmation-hint[hidearrow]::part(arrowbox) {
+  visibility: hidden;
+}

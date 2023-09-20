@@ -53,10 +53,10 @@ panelview {
 
 .panel-subview-body {
   overflow-clip-box: content-box !important;
-}
 
-.panel-subview-body:not(:last-child) {
-  padding-bottom: 0 !important;
+  &:not(:last-child) {
+    padding-bottom: 0 !important;
+  }
 }
 
 /* without this, the last button in the panel will typically be touching the
@@ -97,35 +97,39 @@ no longer necessary after modern flexbox emulation. */
 
 .protections-popup-list.empty {
   padding: 16px !important;
-}
 
-.protections-popup-list.empty > vbox {
-  align-items: center !important;
-}
+  > vbox {
+    align-items: center !important;
+  }
 
-.protections-popup-list.empty image {
-  color: var(--panel-description-color);
+  image {
+    color: var(--panel-description-color);
+  }
 }
 
 /* .panel-subview-body + toolbarseparator {
   margin-top: 0 !important;
 } */
 
-#widget-overflow panelview[extension] {
-  max-width: revert !important;
+#widget-overflow {
+  panelview[extension] {
+    max-width: revert !important;
+  }
+
+  .webextension-popup-browser {
+    background: none !important;
+  }
 }
 
-#widget-overflow .webextension-popup-browser {
-  background: none !important;
-}
-
-#identity-popup[type="arrow"][side="top"],
-#identity-popup[type="arrow"][side="bottom"],
-#protections-popup[type="arrow"][side="top"],
-#protections-popup[type="arrow"][side="bottom"],
-#notification-popup[type="arrow"][side="top"],
-#notification-popup[type="arrow"][side="bottom"] {
-  margin-inline: -20.4px !important;
+#identity-popup,
+#protections-popup,
+#notification-popup {
+  &[type="arrow"] {
+    &[side="top"],
+    &[side="bottom"] {
+      margin-inline: -20.4px !important;
+    }
+  }
 }
 
 #permission-popup {
@@ -188,77 +192,87 @@ no longer necessary after modern flexbox emulation. */
 
 #protections-popup {
   --popup-width: 33em !important;
-}
 
-#protections-popup[toast] {
-	--popup-width: 27.12em !important;
+  &[toast] {
+    --popup-width: 27.12em !important;
+  }
 }
 
 /* protect the arrowpanel animations from future updates */
 @supports -moz-bool-pref("xul.panel-animations.enabled") {
   @media (prefers-reduced-motion: no-preference) {
     @media (-moz-platform: macos) {
-      panel[type="arrow"]:not([animate="false"]),
-      #BMB_bookmarksPopup:not([animate="false"]) {
-        transition-property: -moz-window-transform, -moz-window-opacity !important;
-        transition-duration: 0.18s, 0.18s !important;
-        transition-timing-function: var(--animation-easing-function), ease-out !important;
+      panel[type="arrow"],
+      #BMB_bookmarksPopup {
+        &:not([animate="false"]) {
+          transition-property: -moz-window-transform, -moz-window-opacity !important;
+          transition-duration: 0.18s, 0.18s !important;
+          transition-timing-function: var(--animation-easing-function), ease-out !important;
+        }
       }
 
       @media (-moz-mac-big-sur-theme: 0) {
-        panel[type="arrow"]:not([animate="false"]),
-        #BMB_bookmarksPopup:not([animate="false"]) {
-          -moz-window-opacity: 0 !important;
-          -moz-window-transform: translateY(-70px) !important;
-        }
+        panel[type="arrow"],
+        #BMB_bookmarksPopup {
+          &:not([animate="false"]) {
+            -moz-window-opacity: 0 !important;
+            -moz-window-transform: translateY(-70px) !important;
 
-        panel[type="arrow"][side="bottom"]:not([animate="false"]),
-        #BMB_bookmarksPopup[side="bottom"]:not([animate="false"]) {
-          -moz-window-transform: translateY(70px) !important;
+            &[side="bottom"] {
+              -moz-window-transform: translateY(70px) !important;
+            }
+          }
         }
       }
 
-      panel[type="arrow"][animate][animate="open"],
-      #BMB_bookmarksPopup[animate][animate="open"] {
-        -moz-window-opacity: 1 !important;
-        transition-duration: 0.18s, 0.18s !important;
-        -moz-window-transform: none !important;
-        transition-timing-function: var(--animation-easing-function), ease-in-out !important;
-      }
+      panel[type="arrow"],
+      #BMB_bookmarksPopup {
+        &[animate] {
+          &[animate="open"] {
+            -moz-window-opacity: 1 !important;
+            transition-duration: 0.18s, 0.18s !important;
+            -moz-window-transform: none !important;
+            transition-timing-function: var(--animation-easing-function), ease-in-out !important;
+          }
 
-      panel[type="arrow"][animate][animate="cancel"],
-      #BMB_bookmarksPopup[animate][animate="cancel"] {
-        -moz-window-opacity: 0 !important;
-        -moz-window-transform: none !important;
+          &[animate="cancel"] {
+            -moz-window-opacity: 0 !important;
+            -moz-window-transform: none !important;
+          }
+        }
       }
     }
 
     @media not (-moz-platform: macos) {
-      panel[type="arrow"]:not([animate="false"]),
-      #BMB_bookmarksPopup:not([animate="false"]) {
-        opacity: 0 !important;
-        transform: translateY(-70px) !important;
-        transition-property: transform, opacity !important;
-        transition-duration: 0.18s, 0.18s !important;
-        transition-timing-function: var(--animation-easing-function), ease-out !important;
+      panel[type="arrow"],
+      #BMB_bookmarksPopup {
+        &:not([animate="false"]) {
+          opacity: 0 !important;
+          transform: translateY(-70px) !important;
+          transition-property: transform, opacity !important;
+          transition-duration: 0.18s, 0.18s !important;
+          transition-timing-function: var(--animation-easing-function), ease-out !important;
+
+          &[side="bottom"] {
+            transform: translateY(70px) !important;
+          }
+        }
       }
 
-      panel[type="arrow"][side="bottom"]:not([animate="false"]),
-      #BMB_bookmarksPopup[side="bottom"]:not([animate="false"]) {
-        transform: translateY(70px) !important;
-      }
+      panel[type="arrow"],
+      #BMB_bookmarksPopup {
+        &[animate] {
+          &[animate="open"] {
+            opacity: 1 !important;
+            transition-duration: 0.18s, 0.18s !important;
+            transform: none !important;
+            transition-timing-function: var(--animation-easing-function), ease-in-out !important;
+          }
 
-      panel[type="arrow"][animate][animate="open"],
-      #BMB_bookmarksPopup[animate][animate="open"] {
-        opacity: 1 !important;
-        transition-duration: 0.18s, 0.18s !important;
-        transform: none !important;
-        transition-timing-function: var(--animation-easing-function), ease-in-out !important;
-      }
-
-      panel[type="arrow"][animate][animate="cancel"],
-      #BMB_bookmarksPopup[animate][animate="cancel"] {
-        transform: none !important;
+          &[animate="cancel"] {
+            transform: none !important;
+          }
+        }
       }
     }
   }
@@ -765,7 +779,8 @@ popupnotificationcontent label[control]:not([hidden]) + menulist {
 }
 
 .permission-popup-permission-remove-button > label {
-  margin: 1px 0 !important;
+  margin-block: 1px !important;
+  margin-inline: 2px 0 !important;
   text-align: revert !important;
 }
 
@@ -916,8 +931,8 @@ popupnotificationcontent label[control]:not([hidden]) + menulist {
   fill: currentColor !important;
 }
 
-#identity-popup[connection="secure"] .identity-popup-security-connection .identity-popup-security-connection-icon,
-#identity-popup:where([connection="secure"]) .identity-popup-connection-secure.security-view[when-connection~="secure"] {
+#identity-popup[connection^="secure"] .identity-popup-security-connection .identity-popup-security-connection-icon,
+#identity-popup:where([connection^="secure"]) .identity-popup-connection-secure.security-view[when-connection~="secure"] {
   color: var(--secure-text-color) !important;
   fill: currentColor !important;
 }
@@ -1139,7 +1154,7 @@ popupnotificationcontent label[control]:not([hidden]) + menulist {
 }
 
 .identity-popup-section.indented,
-#identity-popup-securityView-extended-info[connection="secure"] {
+#identity-popup-securityView-extended-info[connection^="secure"] {
   padding-inline: calc(var(--arrowpanel-menuitem-padding-inline) + 16px + var(--arrowpanel-subviewbutton-iconic-gap, 8px)) !important;
 }
 
@@ -1734,4 +1749,14 @@ toolbar button slider script. but just in case) */
   fill: var(--purple-30) !important;
   stroke: var(--purple-50-a30) !important;
   padding: 2px !important;
+}
+
+.translations-panel-header {
+  min-height: revert !important;
+}
+
+.translations-panel-beta-icon {
+  border: 1px solid transparent !important;
+  box-sizing: border-box !important;
+  color: var(--purple-30) !important;
 }

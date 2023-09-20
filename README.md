@@ -310,7 +310,7 @@ You first need to find your Firefox installation folder. On Windows that's `C:/P
 3. &nbsp; a folder called `pref` inside that `defaults` folder;
 4. &nbsp; a file called `config-prefs.js` inside that `pref` folder;
 5. &nbsp; a `JS` folder in your profile's `chrome` folder;
-6. &nbsp; a `utils` folder in your `chrome` folder, containing `chrome.manifest` and `boot.jsm`;
+6. &nbsp; a `utils` folder in your `chrome` folder, containing `chrome.manifest` and `boot.sys.mjs`;
 
 ⚠️ _If you're using my **theme**, (the CSS files) you should also have a `resources` folder in your `chrome` folder, containing all the icons and content stylesheets._
 
@@ -354,7 +354,7 @@ The problem with copying everything to `chrome_debugger_profile` is that you may
 
 1. Download and install [fx-autoconfig][] as normal.
 2. Open `config.js` from your Firefox installation folder, in a text editor.
-3. After line 8, (after it says `Components;`) add some new lines and paste this:
+3. After line 3, (before where it says `let cmanifest`) add some new lines and paste this:
 
 <!-- prettier-ignore -->
 ```js
@@ -381,8 +381,8 @@ let cmanifest = traverseToMainProfile("UChrm");
 ```
 
 5. Now save `config.js` and exit.
-6. Go back to your `chrome` folder, and open `fs.jsm` from the `utils` folder.
-7. Go to the end of line 5 (the line that says `class FileSystem{`) and hit enter to make a new line, so you should now be at line 6.
+6. Go back to your `chrome` folder, and open `fs.sys.mjs` from the `utils` folder.
+7. Go to the end of line 1 (the line that says `class FileSystem{`) and hit enter to make a new line, so you should now be at line 2.
 8. Paste this:
 
 ```js
@@ -401,9 +401,8 @@ static traverseToMainProfile(str) {
 ```
 
 9. Use Find & Replace to replace every instance of the string `Services.dirsvc.get('UChrm',Ci.nsIFile)` with this: `this.traverseToMainProfile('UChrm')`
-10. This should have replaced 3 times. Save `fs.jsm` and exit.
-11. Open `boot.jsm` and repeat step 9 on `boot.jsm` as well. This should only replace once.
-12. That's it! The scripts that are in your main profile folder should now run in browser toolbox windows, even though they're not in the `chrome_debugger_profile` folder. Make sure you download the [Browser Toolbox Stylesheet Loader](#browser-toolbox-stylesheet-loader) so stylesheets will be loaded too.
+10. This should have replaced 3 times. Save `fs.sys.mjs` and exit.
+11. That's it! The scripts that are in your main profile folder should now run in browser toolbox windows, even though they're not in the `chrome_debugger_profile` folder. Make sure you download the [Browser Toolbox Stylesheet Loader](#browser-toolbox-stylesheet-loader) so stylesheets will be loaded too.
 
 Having done this, make sure your `chrome_debugger_profile` folders do not have `chrome` folders within them, as they will confuse the stylesheet loader. It will think you have special stylesheets for the toolbox and therefore skip loading your main profile stylesheets into the toolbox. If you ever see styles failing to apply in the toolbox, delete your `chrome_debugger_profile` folder.
 
@@ -483,11 +482,10 @@ This script adds several new features to the "all tabs menu" to help it catch up
    - If you use [Unread Tab Mods](/JS/unreadTabMods.uc.js), this integrates with it to make unread tabs display with italic text.
 6. Adds color stripes to multiselected tabs and container tabs in the "all tabs menu" so you can differentiate them from normal tabs.
 7. Includes a preference `userChrome.tabs.all-tabs-menu.reverse-order` that lets you reverse the order of the tabs so that newer tabs are displayed on top rather than on bottom.
-8. Modifies the all tabs button's tooltip to display the number of tabs as well as the shortcut to open the all tabs menu, Ctrl+Shift+Tab.
-9. Allows the panel to display pinned tabs, and displays a pin icon on them.
-10. Makes the sound icon show if the tab has blocked media or media in picture-in-picture, just like regular tabs.
-11. Adds an optional preference `userChrome.ctrlTab.skip-show-all-button` that lets you skip past the "List All x Tabs" button when hitting Ctrl+Tab.
-12. And a few other subtle improvements.
+8. Allows the panel to display pinned tabs, and displays a pin icon on them.
+9. Makes the sound icon show if the tab has blocked media or media in picture-in-picture, just like regular tabs.
+10. Adds an optional preference `userChrome.ctrlTab.skip-show-all-button` that lets you skip past the "List All x Tabs" button when hitting Ctrl+Tab.
+11. And a few other subtle improvements.
 
 All the relevant CSS for this script is already included in and loaded by the script. It's designed to look consistent with my theme as well as with the latest vanilla (Proton) Firefox. If you need to change anything, see the "const css" line in here, or the end of uc-tabs-bar.css on my repo.
 
@@ -899,16 +897,15 @@ For those who are curious, this will override the tab markup template and some m
 
 </details>
 
-#### [Restore pre-Proton Arrowpanels](/JS/restorePreProtonArrowpanels.uc.js):
+#### [Restore pre-Proton Arrowpanels](/CSS/restorePreProtonArrowpanels.uc.css):
 
 ✨ Bring back the arrows at the top corner of panels (like the app menu or the history button's popup panel).<details><summary>💬 **_Requires some additional files..._**</summary>
 
-This script will basically restore the arrows at the corner of panels that point at the element to which the panel is anchored. But in order to do that, you also need to install these files from the [resources/script-override](/resources/script-override/) folder: [panel.js](/resources/script-override/panel.js), [places-menupopup.js](/resources/script-override/places-menupopup.js), and [translation-notification.js](/resources/script-override/translation-notification.js). After downloading them and placing them in your own `resources/script-override` folder, add the following lines to your [chrome.manifest](/utils/chrome.manifest) file:
+This stylesheet will basically restore the arrows at the corner of panels that point at the element to which the panel is anchored. But in order to do that, you also need to install these files from the [resources/script-override](/resources/script-override/) folder: [panel.js](/resources/script-override/panel.js) and [places-menupopup.js](/resources/script-override/places-menupopup.js). After downloading them and placing them in your own `resources/script-override` folder, add the following lines to your [chrome.manifest](/utils/chrome.manifest) file:
 
 ```JAR
 override chrome://global/content/elements/panel.js ../resources/script-override/panel.js
 override chrome://browser/content/places/places-menupopup.js ../resources/script-override/places-menupopup.js
-override chrome://browser/content/translation-notification.js ../resources/script-override/translation-notification.js
 ```
 
 </details>

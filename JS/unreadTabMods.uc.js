@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Unread Tab Mods
-// @version        1.2.4
+// @version        1.2.5
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -69,36 +69,39 @@ If you use [duskFox][] (the theme on my repo) you will already have this CSS so 
       "Mark Multiple Tabs as Unread Label": "Mark #1 Tabs as Unread",
     };
     constructor() {
-      gBrowser.tabContainer._handleTabSelect = function (aInstant) {
-        let selectedTab = this.selectedItem;
-        if (this.getAttribute("overflow") == "true") {
-          this.arrowScrollbox.ensureElementIsVisible(selectedTab, aInstant);
-        }
-        modulateAttr(selectedTab);
-      };
+      if (
+        gBrowser.tabContainer._handleTabSelect.name !== "uc_handleTabSelect"
+      ) {
+        eval(
+          `gBrowser.tabContainer._handleTabSelect = function ${gBrowser.tabContainer._handleTabSelect
+            .toSource()
+            .replace(/^\(/, "")
+            .replace(/\)$/, "")
+            .replace(/^_handleTabSelect\s*/, "")
+            .replace(/^function\s*/, "")
+            .replace(/^(.)/, `uc_handleTabSelect $1`)
+            .replace(
+              /selectedTab\._notselectedsinceload = false;/,
+              "modulateAttr(selectedTab);"
+            )}`
+        );
+      }
 
-      gBrowser.tabContainer._handleNewTab = function (tab) {
-        if (tab.container != this) return;
-        tab._fullyOpen = true;
-        gBrowser.tabAnimationsInProgress--;
-        this._updateCloseButtons();
-        if (tab.getAttribute("selected") == "true") {
-          this._handleTabSelect();
-        } else {
-          modulateAttr(tab, true);
-          if (!tab.hasAttribute("skipbackgroundnotify")) {
-            this._notifyBackgroundTab(tab);
-          }
-        }
-        this.arrowScrollbox._updateScrollButtonsDisabledState();
-        if (tab.linkedPanel) {
-          NewTabPagePreloading.maybeCreatePreloadedBrowser(window);
-        }
-
-        if (UserInteraction.running("browser.tabs.opening", window)) {
-          UserInteraction.finish("browser.tabs.opening", window);
-        }
-      };
+      if (gBrowser.tabContainer._handleNewTab.name !== "uc_handleNewTab") {
+        eval(
+          `gBrowser.tabContainer._handleNewTab = function ${gBrowser.tabContainer._handleNewTab
+            .toSource()
+            .replace(/^\(/, "")
+            .replace(/\)$/, "")
+            .replace(/^_handleNewTab\s*/, "")
+            .replace(/^function\s*/, "")
+            .replace(/^(.)/, `uc_handleNewTab $1`)
+            .replace(
+              /\n(\s*)(this\._notifyBackgroundTab\(tab\);)/,
+              "\n$1modulateAttr(tab, true);\n$1$2"
+            )}`
+        );
+      }
 
       if (UnreadTabsBase.config["Add Context Menu Items"]) {
         this.makeMenuItems(this.tabContext);

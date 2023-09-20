@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Restore Arrowpanel Arrows
-// @version        1.1.0
+// @version        1.3.1
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Necessary for use with restorePreProtonArrowpanels.uc.js.
@@ -34,6 +34,23 @@
 
       this._prevFocus = 0;
       this._fadeTimer = null;
+
+      this._originalOpenPopup = this.openPopup;
+      this.openPopup = function (aAnchorElement, aOptions, ...args) {
+        let options = aOptions;
+        if (options && this.isArrowPanel) {
+          if (typeof options === "string") {
+            options = { position: options };
+          }
+          if (typeof options === "object" && options.position) {
+            options.position = options.position?.replace(
+              /^(bottom|top)(right|left)/,
+              "$1center"
+            );
+          }
+        }
+        this._originalOpenPopup(aAnchorElement, options, ...args);
+      };
 
       this.attachShadow({ mode: "open" });
 

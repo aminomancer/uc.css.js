@@ -45,12 +45,30 @@ tooltip .uc-tooltip-box {
   margin: 0 !important;
 }
 
-/* set browser.proton.places-tooltip.enabled to true, it's less in the way when
-it's tethered to the tab */
 .places-tooltip {
   background: transparent !important;
   background-color: transparent !important;
   border: none !important;
+
+  description:empty {
+    &:not([value], [id]),
+    &[value=""]:not([id]) {
+      display: none !important;
+    }
+  }
+
+  /* the shadow on the tab tooltip must be removed since it blocks mouse hover
+  from reaching the tab. which would mean when you hover a tab, it'd appear
+  hovered, then the tooltip would show up and it would appear unhovered, as the
+  mouse would then be on top of the tooltip popup not the main window. */
+  &[position] {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  &[position] > .places-tooltip-box {
+    box-shadow: none !important;
+  }
 }
 
 #tab-nav-popup {
@@ -64,11 +82,6 @@ tooltip .uc-tooltip-box {
 
 .places-tooltip-box {
   display: block;
-}
-
-.places-tooltip description:not([value], [id]):empty,
-.places-tooltip description[value=""]:not([id]):empty {
-  display: none !important;
 }
 
 .places-tooltip-box > hbox {
@@ -94,12 +107,14 @@ tooltip .uc-tooltip-box {
   color: inherit !important;
 }
 
-.places-tooltip-box[desc-hidden="true"] > hbox {
-  display: none !important;
-}
+.places-tooltip-box[desc-hidden="true"] {
+  > hbox {
+    display: none !important;
+  }
 
-.places-tooltip-box[desc-hidden="true"] .places-tooltip-title {
-  margin-bottom: 1px !important;
+  .places-tooltip-title {
+    margin-bottom: 1px !important;
+  }
 }
 
 #places-tooltip-insecure-icon {
@@ -110,144 +125,136 @@ tooltip .uc-tooltip-box {
   margin-inline-start: 0;
   margin-inline-end: 0.25em !important;
   min-width: 1em !important;
-}
 
-#places-tooltip-insecure-icon[hidden] {
-  display: none;
-}
+  &[hidden] {
+    display: none;
+  }
 
-/* the following rule can make the lock icon in the tab tooltip visible on all
-tabs except pending/unloaded tabs. by default, it only shows an insecure lock on
-pages connected by http or with invalid certificates. this rule makes it show a
-secure lock on all other pages. but it's a little silly because 1) CSS on the
-tooltip can't differentiate between secure pages and pages with mixed content...
-and 2) we can't differentiate between secure pages and local pages, system
-pages, etc. so the lock icon could be misleading. for that reason i disabled it
-but maybe someone else wants it. it does look kinda cool i guess. */
-@supports -moz-bool-pref("userChrome.tabs.tooltip.always-show-lock-icon") {
-  #places-tooltip-insecure-icon {
-    display: -moz-inline-box !important;
+  /* the following rule can make the lock icon in the tab tooltip visible on all
+  tabs except pending/unloaded tabs. by default, it only shows an insecure lock on
+  pages connected by http or with invalid certificates. this rule makes it show a
+  secure lock on all other pages. but it's a little silly because 1) CSS on the
+  tooltip can't differentiate between secure pages and pages with mixed content...
+  and 2) we can't differentiate between secure pages and local pages, system
+  pages, etc. so the lock icon could be misleading. for that reason i disabled it
+  but maybe someone else wants it. it does look kinda cool i guess. */
+  @supports -moz-bool-pref("userChrome.tabs.tooltip.always-show-lock-icon") {
+    display: flex !important;
   }
 }
 
-/* the next several rulesets require restoreTabSoundButton.uc.js to set the
+/* these rules require restoreTabSoundButton.uc.js to set the
 necessary attributes based on tab security state. */
+#places-tooltip-insecure-icon,
+#tab-nav-tooltip-insecure-icon {
+  &[type="secure"] {
+    /* secure pages. just a regular lock. */
+    list-style-image: url(chrome://global/skin/icons/security.svg) !important;
+  }
 
-/* secure pages. just a regular lock. */
-#places-tooltip-insecure-icon[type="secure"],
-#tab-nav-tooltip-insecure-icon[type="secure"] {
-  list-style-image: url(chrome://global/skin/icons/security.svg) !important;
-}
+  /* insecure pages. the default, built-in icon, a lock with a red strikethrough. */
+  &[type="insecure"] {
+    list-style-image: url(chrome://global/skin/icons/security-broken.svg) !important;
+  }
 
-/* insecure pages. the default, built-in icon, a lock with a red strikethrough. */
-#places-tooltip-insecure-icon[type="insecure"],
-#tab-nav-tooltip-insecure-icon[type="insecure"] {
-  list-style-image: url(chrome://global/skin/icons/security-broken.svg) !important;
-}
+  /* tooltip icon for https pages with mixed passive content. a lock with a yellow
+  warning icon overlapping it. intended to match the identity icon. mixed active
+  content still shows the normal lock with red strikethrough. */
+  &[type="mixed-passive"] {
+    list-style-image: url(chrome://global/skin/icons/security-warning.svg) !important;
+  }
 
-/* tooltip icon for https pages with mixed passive content. a lock with a yellow
-warning icon overlapping it. intended to match the identity icon. mixed active
-content still shows the normal lock with red strikethrough. */
-#places-tooltip-insecure-icon[type="mixed-passive"],
-#tab-nav-tooltip-insecure-icon[type="mixed-passive"] {
-  list-style-image: url(chrome://global/skin/icons/security-warning.svg) !important;
-}
+  /* about:* pages. */
+  &[type="about-page"] {
+    list-style-image: url(chrome://userchrome/content/identity-icons-brand.svg) !important;
+  }
 
-/* about:* pages. */
-#places-tooltip-insecure-icon[type="about-page"],
-#tab-nav-tooltip-insecure-icon[type="about-page"] {
-  list-style-image: url(chrome://userchrome/content/identity-icons-brand.svg) !important;
-}
+  /* local pages, e.g. file:/// or resource:// or chrome:// */
+  &[type="local-page"] {
+    list-style-image: url(chrome://userchrome/content/notifications/persistent-storage.svg) !important;
+  }
 
-/* local pages, e.g. file:/// or resource:// or chrome:// */
-#places-tooltip-insecure-icon[type="local-page"],
-#tab-nav-tooltip-insecure-icon[type="local-page"] {
-  list-style-image: url(chrome://userchrome/content/notifications/persistent-storage.svg) !important;
-}
+  /* extension pages, namely moz-extension:// */
+  &[type="extension-page"] {
+    list-style-image: url(chrome://mozapps/skin/extensions/extension.svg) !important;
+  }
 
-/* extension pages, namely moz-extension:// */
-#places-tooltip-insecure-icon[type="extension-page"],
-#tab-nav-tooltip-insecure-icon[type="extension-page"] {
-  list-style-image: url(chrome://mozapps/skin/extensions/extension.svg) !important;
-}
+  /* new tab or home page */
+  &[type="home-page"] {
+    list-style-image: url(chrome://browser/skin/tab.svg) !important;
+  }
 
-/* new tab or home page */
-#places-tooltip-insecure-icon[type="home-page"],
-#tab-nav-tooltip-insecure-icon[type="home-page"] {
-  list-style-image: url(chrome://browser/skin/tab.svg) !important;
-}
+  /* tooltip icon for tabs loading error pages, e.g. network error, certificate error, https-only error. */
+  &[type="error-page"] {
+    list-style-image: url(chrome://userchrome/content/warning.svg) !important;
 
-/* tooltip icon for tabs loading error pages, e.g. network error, certificate error, https-only error. */
-#places-tooltip-insecure-icon[type="error-page"],
-#tab-nav-tooltip-insecure-icon[type="error-page"] {
-  list-style-image: url(chrome://userchrome/content/warning.svg) !important;
+    /* alternate style, with colored icon */
+    /* list-style-image: url(chrome://userchrome/content/skin/controlcenter/warning.svg) !important;
+    stroke: var(--low-warning-icon-detail) !important;
+    fill: var(--low-warning-icon-background) !important;
+    -moz-context-properties: fill, stroke !important; */
+  }
 
-  /* alternate style, with colored icon */
-  /* list-style-image: url(chrome://userchrome/content/skin/controlcenter/warning.svg) !important;
-  stroke: var(--low-warning-icon-detail) !important;
-  fill: var(--low-warning-icon-background) !important;
-  -moz-context-properties: fill, stroke !important; */
-}
+  /* blocked pages e.g., about:blocked */
+  &[type="blocked-page"] {
+    list-style-image: url(chrome://userchrome/content/blocked.svg) !important;
+  }
 
-/* blocked pages e.g., about:blocked */
-#places-tooltip-insecure-icon[type="blocked-page"],
-#tab-nav-tooltip-insecure-icon[type="blocked-page"] {
-  list-style-image: url(chrome://userchrome/content/blocked.svg) !important;
-}
-
-/* don't show secure badges on pending tabs */
-#places-tooltip-insecure-icon[type="pending"],
-#tab-nav-tooltip-insecure-icon[type="pending"] {
-  display: none !important;
-}
-
-/* the shadow on the tab tooltip must be removed since it blocks mouse hover
-from reaching the tab. which would mean when you hover a tab, it'd appear
-hovered, then the tooltip would show up and it would appear unhovered, as the
-mouse would then be on top of the tooltip popup not the main window. */
-.places-tooltip[position] {
-  padding: 0 !important;
-  margin: 0 !important;
-}
-
-.places-tooltip[position] > .places-tooltip-box {
-  box-shadow: none !important;
+  /* don't show secure badges on pending tabs */
+  &[type="pending"] {
+    display: none !important;
+  }
 }
 
 #eom-theme-preview-tooltip[position] {
   margin: -3px -5px !important;
 }
 
-:is(#mainPopupSet, .sidebar-panel) > #aHTMLTooltip description {
-  overflow-wrap: anywhere !important;
-  text-overflow: ellipsis !important;
+#mainPopupSet,
+.sidebar-panel {
+  > #aHTMLTooltip description {
+    overflow-wrap: anywhere !important;
+    text-overflow: ellipsis !important;
+  }
 }
 
-:is(#tracking-protection-icon-tooltip, #back-button-tooltip, #forward-button-tooltip) description:not([value], [id]):empty,
-:is(#tracking-protection-icon-tooltip, #back-button-tooltip, #forward-button-tooltip) description[value=""]:not([id]):empty {
-  display: none !important;
+#tracking-protection-icon-tooltip, #back-button-tooltip, #forward-button-tooltip {
+  description:empty {
+    &:not([value], [id]),
+    &[value=""]:not([id]) {
+      display: none !important;
+    }
+  }
 }
 
-:is(#back-button-tooltip, #forward-button-tooltip) .tooltip-label[id]:not(:last-of-type) {
-  font-weight: var(--uc-font-weight-bold, 600);
-}
+#back-button-tooltip, #forward-button-tooltip {
+  .tooltip-label {
+    &[id]:not(:last-of-type) {
+      font-weight: var(--uc-font-weight-bold, 600);
+    }
 
-:is(#back-button-tooltip, #forward-button-tooltip) .tooltip-label:last-of-type:not([id]) {
-  color: var(--panel-shortcut-color) !important;
-  box-shadow: none !important;
-  background: none !important;
-  border: none !important;
-  margin-top: 1px !important;
-  /* font-size: 0.9em; */
-}
+    &:last-of-type:not([id]) {
+      color: var(--panel-shortcut-color) !important;
+      box-shadow: none !important;
+      background: none !important;
+      border: none !important;
+      margin-top: 1px !important;
+      /* font-size: 0.9em; */
+    }
+  }
 
-:is(#back-button-tooltip, #forward-button-tooltip):not([shadow-support]) .tooltip-label[id]:not(:last-of-type) {
-  padding: 5.5px 8px 20px 8px !important;
-}
+  &:not([shadow-support]) {
+    .tooltip-label {
+      &[id]:not(:last-of-type) {
+        padding: 5.5px 8px 20px 8px !important;
+      }
 
-:is(#back-button-tooltip, #forward-button-tooltip):not([shadow-support]) .tooltip-label:last-of-type:not([id]) {
-  padding: 0 8px 8px 8px !important;
-  margin-block-start: -19.5px !important;
+      &:last-of-type:not([id]) {
+        padding: 0 8px 8px 8px !important;
+        margin-block-start: -19.5px !important;
+      }
+    }
+  }
 }
 
 #tracking-protection-container tooltip {
@@ -290,38 +297,38 @@ progress {
   height: 8px;
   background-color: var(--arrowpanel-dimmed);
   overflow: hidden;
-}
 
-progress[paused] {
-  background-color: var(--desaturate-dimmed);
-}
+  &::-moz-progress-bar {
+    background-color: var(--toolbarbutton-icon-fill-attention);
+    background-image: none;
+    animation: none;
+  }
 
-progress:not([value="0"])::-moz-progress-bar {
-  margin: 0;
-  height: 100%;
-  border-radius: 16px;
-}
+  &[paused] {
+    background-color: var(--desaturate-dimmed);
 
-progress::-moz-progress-bar {
-  background-color: var(--toolbarbutton-icon-fill-attention);
-  background-image: none;
-  animation: none;
-}
+    &::-moz-progress-bar {
+      background-color: var(--desaturate-dimmed-further);
+    }
 
-progress[paused]::-moz-progress-bar {
-  background-color: var(--desaturate-dimmed-further);
-}
+    &:indeterminate::-moz-progress-bar {
+      background-color: transparent;
+      background-image: none;
+      animation: none;
+      animation-play-state: paused;
+    }
+  }
 
-progress:indeterminate::-moz-progress-bar {
-  border-radius: 0;
-  background-image: linear-gradient(90deg, transparent 0%, var(--download-progress-flare-color) 25%, transparent 50%, var(--download-progress-flare-color) 75%, transparent 100%);
-}
+  &:not([value="0"])::-moz-progress-bar {
+    margin: 0;
+    height: 100%;
+    border-radius: 16px;
+  }
 
-progress[paused]:indeterminate::-moz-progress-bar {
-  background-color: transparent;
-  background-image: none;
-  animation: none;
-  animation-play-state: paused;
+  &:indeterminate::-moz-progress-bar {
+    border-radius: 0;
+    background-image: linear-gradient(90deg, transparent 0%, var(--download-progress-flare-color) 25%, transparent 50%, var(--download-progress-flare-color) 75%, transparent 100%);
+  }
 }
 
 #statuspanel {
@@ -340,23 +347,35 @@ progress[paused]:indeterminate::-moz-progress-bar {
 
   background-color: var(--tooltip-bgcolor) !important;
   color: var(--tooltip-color) !important;
+
+  transition: opacity 300ms var(--uc-smooth-timing-function), visibility 300ms !important;
+
+  &[hidden] {
+    opacity: 0 !important;
+    transition: none !important;
+  }
+
+  &[inactive][previoustype="overLink"] {
+    transition: opacity 400ms var(--uc-smooth-timing-function), visibility 400ms !important;
+  }
+
+  &:not([mirror]):-moz-locale-dir(ltr),
+  &[mirror]:-moz-locale-dir(rtl) {
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: var(--tooltip-border-radius) !important;
+    border-right-style: solid !important;
+  }
+
+  &:not([mirror]):-moz-locale-dir(rtl),
+  &[mirror]:-moz-locale-dir(ltr) {
+    border-top-left-radius: var(--tooltip-border-radius) !important;
+    border-top-right-radius: 0 !important;
+    border-left-style: solid !important;
+  }
 }
 
 :root[inDOMFullscreen] #statuspanel {
   visibility: collapse !important;
-}
-
-#statuspanel[hidden] {
-  opacity: 0 !important;
-  transition: none !important;
-}
-
-#statuspanel {
-  transition: opacity 300ms var(--uc-smooth-timing-function), visibility 300ms !important;
-}
-
-#statuspanel[inactive][previoustype="overLink"] {
-  transition: opacity 400ms var(--uc-smooth-timing-function), visibility 400ms !important;
 }
 
 #statuspanel-label {
@@ -370,20 +389,6 @@ progress[paused]:indeterminate::-moz-progress-bar {
   min-width: revert !important;
 }
 
-#statuspanel:not([mirror]):-moz-locale-dir(ltr),
-#statuspanel[mirror]:-moz-locale-dir(rtl) {
-  border-top-left-radius: 0 !important;
-  border-top-right-radius: var(--tooltip-border-radius) !important;
-  border-right-style: solid !important;
-}
-
-#statuspanel:not([mirror]):-moz-locale-dir(rtl),
-#statuspanel[mirror]:-moz-locale-dir(ltr) {
-  border-top-left-radius: var(--tooltip-border-radius) !important;
-  border-top-right-radius: 0 !important;
-  border-left-style: solid !important;
-}
-
 #statuspanel-inner {
   height: revert !important;
   width: auto !important;
@@ -393,13 +398,15 @@ progress[paused]:indeterminate::-moz-progress-bar {
 }
 
 /* selection */
-link[href="chrome://global/skin/search-textbox.css"] ~ ::selection {
-  background-color: var(--ui-selection-bgcolor);
-  color: var(--ui-selection-color);
-}
+link[href="chrome://global/skin/search-textbox.css"] {
+  ~ ::selection {
+    background-color: var(--ui-selection-bgcolor);
+    color: var(--ui-selection-color);
+  }
 
-link[href="chrome://global/skin/search-textbox.css"] ~ :-moz-window-inactive::selection {
-  background-color: var(--ui-selection-bgcolor-disabled, text-select-disabled-background);
+  ~ :-moz-window-inactive::selection {
+    background-color: var(--ui-selection-bgcolor-disabled, text-select-disabled-background);
+  }
 }
 
 /* hide keyword fixup notification */
@@ -442,7 +449,7 @@ notification[value="keyword-uri-fixup"] {
 .bookmark-item[scheme="file"]::before {
   content: "";
   position: relative;
-  display: -moz-inline-box;
+  display: flex;
   width: 16px;
   height: 16px;
   padding-inline: 0px;
@@ -458,23 +465,37 @@ notification[value="keyword-uri-fixup"] {
   background-image: url(chrome://userchrome/content/notifications/canvas.svg) !important;
 } */
 
-:is(.unified-nav-forward, .unified-nav-back)[_moz-menuactive="true"] .menu-iconic-icon {
-  padding: 1px;
+.unified-nav-forward,
+.unified-nav-back {
+  [_moz-menuactive="true"] {
+    .menu-iconic-icon {
+      padding: 1px;
+    }
+  }
 }
 
-:is(.tabbrowser-tab, .all-tabs-button)[image="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8%2F9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAjFJREFUeNqsU8uOElEQPffR3XQ3ONASdBJCSBxHos5%2B3Bg3rvkCv8PElS78gPkO%2FATjQoUdO2ftrJiRh6aneTb9sOpC4weMN6lcuFV16pxDIfI8x12OYIDhcPiu2Wx%2B%2FHF5CW1Z6Jyegt%2FTNEWSJIjjGFEUIQxDrFYrWFSzXC4%2FdLvd95pRKpXKy%2BpRFZ7nwaWo1%2BsGnQG2260BKJfLKJVKGI1GEEJw7ateryd0v993W63WEwjgxfn5obGYzgCbzcaEbdsIggDj8Riu6z6iUk9SYZMSx8W0LMsM%2FSKK75xnJlIq80anQXdbEp0OhcPJ0eiaJnGRMEyyPDsAKKUM9clkYoDo3SZJzzSdp0VSKYmfV1co%2Bz580kw5KDIM8RbRfEnUf1HzxtQyMAGcaGruTKczMzEIaqhKifV6jd%2BzGQQB5llunF%2FM52BizC2K5sYPYvZcu653tjOM9O93wnYc08gmkgg4VAxixfqFUJT36AYBZGd6PJkFCZnnlBxMp38gqIgLpZB0y4Nph18lyWh5FFbrOSxbl3V4G%2BVB7T4ajYYxTyuLtO%2BCvWGgJE1Mc7JNsJEhvgw%2FQV4fo%2F24nbEsX2u1d5sVyn8sJO0ZAQiIYnFh%2BxrfLz%2Fj29cBS%2FO14zg3i8XigW3ZkErDtmKoeM%2BAJGRMnXeEPGKf0nCD1ydvkDzU9Jbc6OpR7WIw6L8lQ%2B4pQ1%2FlPF0RGM9Ns91Wmptk0GfB4EJkt77vXYj%2F8m%2B8y%2FkrwABHbz2H9V68DQAAAABJRU5ErkJggg%3D%3D"]
-  :is(.tab-icon-image, .toolbarbutton-icon) {
-  padding-right: 16px !important;
-  background: url(chrome://userchrome/content/notifications/persistent-storage.svg) center/contain !important;
-  box-sizing: border-box !important;
+.tabbrowser-tab,
+.all-tabs-button {
+  &[image="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8%2F9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAjFJREFUeNqsU8uOElEQPffR3XQ3ONASdBJCSBxHos5%2B3Bg3rvkCv8PElS78gPkO%2FATjQoUdO2ftrJiRh6aneTb9sOpC4weMN6lcuFV16pxDIfI8x12OYIDhcPiu2Wx%2B%2FHF5CW1Z6Jyegt%2FTNEWSJIjjGFEUIQxDrFYrWFSzXC4%2FdLvd95pRKpXKy%2BpRFZ7nwaWo1%2BsGnQG2260BKJfLKJVKGI1GEEJw7ateryd0v993W63WEwjgxfn5obGYzgCbzcaEbdsIggDj8Riu6z6iUk9SYZMSx8W0LMsM%2FSKK75xnJlIq80anQXdbEp0OhcPJ0eiaJnGRMEyyPDsAKKUM9clkYoDo3SZJzzSdp0VSKYmfV1co%2Bz580kw5KDIM8RbRfEnUf1HzxtQyMAGcaGruTKczMzEIaqhKifV6jd%2BzGQQB5llunF%2FM52BizC2K5sYPYvZcu653tjOM9O93wnYc08gmkgg4VAxixfqFUJT36AYBZGd6PJkFCZnnlBxMp38gqIgLpZB0y4Nph18lyWh5FFbrOSxbl3V4G%2BVB7T4ajYYxTyuLtO%2BCvWGgJE1Mc7JNsJEhvgw%2FQV4fo%2F24nbEsX2u1d5sVyn8sJO0ZAQiIYnFh%2BxrfLz%2Fj29cBS%2FO14zg3i8XigW3ZkErDtmKoeM%2BAJGRMnXeEPGKf0nCD1ydvkDzU9Jbc6OpR7WIw6L8lQ%2B4pQ1%2FlPF0RGM9Ns91Wmptk0GfB4EJkt77vXYj%2F8m%2B8y%2FkrwABHbz2H9V68DQAAAABJRU5ErkJggg%3D%3D"]
+  {
+    :is(.tab-icon-image, .toolbarbutton-icon) {
+      padding-right: 16px !important;
+      background: url(chrome://userchrome/content/notifications/persistent-storage.svg) center/contain !important;
+      box-sizing: border-box !important;
+    }
+  }
 }
 
-:is(#mainPopupSet, #browser, #navigator-toolbox) textbox {
-  appearance: none !important;
-  user-select: text !important;
-  -moz-user-select: text !important;
-  background-color: var(--ui-textbox-bgcolor) !important;
-  color: #fff !important;
+#mainPopupSet,
+#browser,
+#navigator-toolbox {
+  textbox {
+    appearance: none !important;
+    user-select: text !important;
+    -moz-user-select: text !important;
+    background-color: var(--ui-textbox-bgcolor) !important;
+    color: #fff !important;
+  }
 }
 
 /* basic checkbox appearance. the actual icon is set in utils/chrome.manifest
@@ -634,23 +655,25 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
       font-size: 11.5px !important;
     }
 
-    .urlbarView-row .urlbarView-tag,
-    .urlbarView-row:is([type="switchtab"], [type="remotetab"]) > .urlbarView-row-inner > .urlbarView-no-wrap > .urlbarView-action,
-    .urlbarView-row[dynamicType="contextualSearch"] .urlbarView-dynamic-contextualSearch-description {
-      line-height: 14px !important;
-      font-weight: var(--uc-font-weight-thin, 400) !important;
-    }
+    .urlbarView-row {
+      .urlbarView-tag,
+      &:is([type="switchtab"], [type="remotetab"]) > .urlbarView-row-inner > .urlbarView-no-wrap > .urlbarView-action,
+      &[dynamicType="contextualSearch"] .urlbarView-dynamic-contextualSearch-description {
+        line-height: 14px !important;
+        font-weight: var(--uc-font-weight-thin, 400) !important;
+      }
 
-    .urlbarView-row[dynamicType="quickactions"] .urlbarView-quickaction-row {
-      line-height: 14px !important;
-    }
+      &[dynamicType="quickactions"] .urlbarView-quickaction-row {
+        line-height: 14px !important;
+      }
 
-    .urlbarView-row .urlbarView-tag strong {
-      font-weight: inherit !important;
-    }
+      .urlbarView-tag strong {
+        font-weight: inherit !important;
+      }
 
-    .urlbarView-row[dynamicType="onboardTabToSearch"] .urlbarView-title strong.urlbarView-dynamic-onboardTabToSearch-titleStrong {
-      font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
+      &[dynamicType="onboardTabToSearch"] .urlbarView-title strong.urlbarView-dynamic-onboardTabToSearch-titleStrong {
+        font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
+      }
     }
 
     .urlbarView-button,
@@ -689,10 +712,12 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
       font-weight: var(--uc-font-weight-bold, 400) !important;
     }
 
-    .dialog-button-box button,
-    :root[dialogroot] button {
-      font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
-      font-weight: var(--uc-font-weight-bold, 600) !important;
+    .dialog-button-box,
+    :root[dialogroot] {
+      button {
+        font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
+        font-weight: var(--uc-font-weight-bold, 600) !important;
+      }
     }
 
     #protections-popup-milestones-text {
@@ -701,9 +726,11 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
       font-size: 1.1em !important;
     }
 
-    #identity-popup[mixedcontent~="active-loaded"] .identity-popup-connection-not-secure,
-    #identity-popup:not([mixedcontent]) .identity-popup-connection-not-secure {
-      font-weight: var(--uc-font-weight-bold, 600) !important;
+    #identity-popup {
+      &[mixedcontent~="active-loaded"] .identity-popup-connection-not-secure,
+      &:not([mixedcontent]) .identity-popup-connection-not-secure {
+        font-weight: var(--uc-font-weight-bold, 600) !important;
+      }
     }
 
     @-moz-document url-prefix("chrome://browser/content/syncedtabs/sidebar.xhtml") {
@@ -740,19 +767,19 @@ menupopup[bmb-command-disabled="true"] menuitem[key="viewBookmarksToolbarKb"] .m
 }
 
 /* styles for perTabNavButtons.uc.js */
-#tab-nav-popup-mainView .toolbarbutton-1 {
-  background: none !important;
-  outline: none !important;
-}
-
 #tab-nav-tooltip-textbox {
   padding: 4px 6px !important;
   border: 0 !important;
 }
 
-#tab-nav-popup-mainView .toolbarbutton-1:focus-visible:not([disabled], [open], :hover, :active) > .toolbarbutton-icon {
-  background-color: var(--toolbarbutton-checked-background) !important;
-  transition: none !important;
+#tab-nav-popup-mainView .toolbarbutton-1 {
+  background: none !important;
+  outline: none !important;
+
+  &:focus-visible:not([disabled], [open], :hover, :active) > .toolbarbutton-icon {
+    background-color: var(--toolbarbutton-checked-background) !important;
+    transition: none !important;
+  }
 }
 
 /* highlight container tabs in the recently closed tabs/windows menus.

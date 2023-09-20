@@ -143,6 +143,7 @@ menupopup {
   --menu-icon-opacity: 1 !important;
   --panel-separator-margin: var(--uc-panel-separator-margin) !important;
 
+  --border-interactive-color: color-mix(in srgb, currentColor 25%, var(--uc-menu-border-color)) !important;
   --panel-item-bgcolor: var(--arrowpanel-faint);
   --panel-item-hover-bgcolor: var(--arrowpanel-dimmed) !important;
   --panel-item-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
@@ -260,4 +261,9 @@ printpreview-pagination {
 :root[fluent-reveal-hover] #navigator-toolbox :is(.toolbarbutton-1, .bookmark-item) {
   --toolbarbutton-hover-background: hsla(236, 82%, 83%, 0.05) !important;
   --toolbarbutton-active-background: hsla(236, 82%, 83%, 0.1) !important;
+}
+
+.toggle-button#moz-toggle-button[part="button"] {
+	--toggle-dot-background-color: color-mix(in srgb, currentColor 40%, var(--button-background-color-active)) !important;
+	--toggle-dot-background-color-on-pressed: var(--arrowpanel-color) !important;
 }

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Search Mode Indicator Icons
-// @version        1.4.6
+// @version        1.4.7
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @long-description
@@ -137,47 +137,47 @@ This doesn't change anything about the layout so you may want to tweak some thin
       if (sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) return;
       sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
     }
-    window.findEngineIcon = function (name) {
-      let files = _ucUtils.getFSEntry("engines");
-      if (!files) return false;
-      let nameParts = name
-        .toLowerCase()
-        .split(" ")
-        .filter(word => word !== "search");
-      let joinedName = nameParts.join("");
-      if (!joinedName) return false;
-      let typeRegex = /(.*)(\.svg|\.png|\.jpg|\.jpeg)$/i;
-      let identical;
-      let included;
-      let partIncluded;
-      while (!identical && files.hasMoreElements()) {
-        let file = files.getNext().QueryInterface(Ci.nsIFile);
-        let { leafName } = file;
-        let fileParts = leafName.toLowerCase().match(typeRegex);
-        if (file.isFile() && fileParts && fileParts[1]) {
-          if (joinedName === fileParts[1]) {
-            identical = leafName;
-          } else if (
-            joinedName.includes(fileParts[1]) ||
-            fileParts[1].includes(joinedName)
-          ) {
-            if (!included) included = leafName;
-          } else if (fileParts[1].includes(nameParts[0])) {
-            if (!partIncluded) partIncluded = leafName;
-          }
-        }
-      }
-      let filename = identical || included || partIncluded;
-      return filename
-        ? `url(chrome://userchrome/content/engines/${filename})`
-        : false;
-    };
     function handleDefaultEngine() {
       if (
         config[
           "Try to replace searchglass icon with engine icon in normal mode"
         ]
       ) {
+        function findEngineIcon(name) {
+          const files = _ucUtils.fs.getEntry("engines");
+          if (!files?.isDirectory()) return false;
+          let nameParts = name
+            .toLowerCase()
+            .split(" ")
+            .filter(word => word !== "search");
+          let joinedName = nameParts.join("");
+          if (!joinedName) return false;
+          let typeRegex = /(.*)(\.svg|\.png|\.jpg|\.jpeg)$/i;
+          let identical;
+          let included;
+          let partIncluded;
+          for (let file of files) {
+            let { leafName } = file;
+            let fileParts = leafName.toLowerCase().match(typeRegex);
+            if (file.isFile() && fileParts?.[1]) {
+              if (joinedName === fileParts[1]) {
+                identical = leafName;
+                break;
+              } else if (
+                joinedName.includes(fileParts[1]) ||
+                fileParts[1].includes(joinedName)
+              ) {
+                if (!included) included = leafName;
+              } else if (fileParts[1].includes(nameParts[0])) {
+                if (!partIncluded) partIncluded = leafName;
+              }
+            }
+          }
+          let filename = identical || included || partIncluded;
+          return filename
+            ? `url(chrome://userchrome/content/engines/${filename})`
+            : false;
+        }
         eval(
           `BrowserSearch._setURLBarPlaceholder = function ${BrowserSearch._setURLBarPlaceholder
             .toSource()

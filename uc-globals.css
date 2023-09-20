@@ -447,27 +447,6 @@ popupnotification,
   --checkbox-checked-active-bgcolor: var(--uc-checkbox-checked-active-bgcolor) !important;
 }
 
-#protections-popup {
-  --button-primary-bgcolor: var(--purple-45) !important;
-  --button-primary-hover-bgcolor: var(--purple-35) !important;
-  --button-primary-active-bgcolor: var(--purple-30) !important;
-  --protections-popup-switch-off-background: color-mix(in srgb, currentColor 15%, transparent);
-  --protections-popup-switch-off-hover-background-custom: color-mix(in srgb, currentColor 20%, transparent);
-  --protections-popup-switch-off-active-background-custom: color-mix(in srgb, currentColor 23%, transparent);
-  --protections-popup-switch-off-hover-border-custom: color-mix(in srgb, currentColor 5%, transparent);
-  --protections-popup-switch-on-background: var(--purple-40);
-  --protections-popup-switch-on-hover-background-custom: var(--purple-50);
-  --protections-popup-switch-on-active-background-custom: var(--purple-55);
-  --protections-popup-switch-on-hover-border-custom: var(--purple-40);
-}
-
-:root[lwt-popup-brighttext] #protections-popup {
-  --protections-popup-switch-off-background: var(--uc-switch-off-background);
-  --protections-popup-switch-off-hover-background-custom: var(--uc-switch-off-hover-background);
-  --protections-popup-switch-off-active-background-custom: var(--uc-switch-off-active-background);
-  --protections-popup-switch-off-hover-border-custom: var(--uc-switch-off-hover-border);
-}
-
 /* SF Pro is a bit heavier than Segoe UI so adjust font weights on certain elements */
 @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
   :root {

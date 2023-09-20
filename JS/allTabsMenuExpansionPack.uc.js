@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           All Tabs Menu Expansion Pack
-// @version        2.1.8
+// @version        2.1.9
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @long-description
@@ -20,11 +20,12 @@ Next to the "new tab" button in Firefox there's a V-shaped button that opens a b
    - If you use [Unread Tab Mods][], this integrates with it to make unread tabs display with italic text.
 6. Adds color stripes to multiselected tabs and container tabs in the "all tabs menu" so you can differentiate them from normal tabs.
 7. Includes a preference `userChrome.tabs.all-tabs-menu.reverse-order` that lets you reverse the order of the tabs so that newer tabs are displayed on top rather than on bottom.
-8. Modifies the all tabs button's tooltip to display the number of tabs as well as the shortcut to open the all tabs menu, Ctrl+Shift+Tab.
-9. Allows the panel to display pinned tabs, and displays a pin icon on them.
-10. Makes the sound icon show if the tab has blocked media or media in picture-in-picture, just like regular tabs.
-11. Adds an optional preference `userChrome.ctrlTab.skip-show-all-button` that lets you skip past the "List All x Tabs" button when hitting Ctrl+Tab.
-12. And a few other subtle improvements. All the relevant CSS for this is already included in and loaded by the script. It's designed to look consistent with my theme as well as with the latest vanilla (proton) Firefox. If you need to change anything, see the "const css" line in here, or the end of uc-tabs-bar.css on my repo.
+8. Allows the panel to display pinned tabs, and displays a pin icon on them.
+9. Makes the sound icon show if the tab has blocked media or media in picture-in-picture, just like regular tabs.
+10. Adds an optional preference `userChrome.ctrlTab.skip-show-all-button` that lets you skip past the "List All x Tabs" button when hitting Ctrl+Tab.
+11. And a few other subtle improvements.
+
+All the relevant CSS for this is already included in and loaded by the script. It's designed to look consistent with my theme as well as with the latest vanilla (proton) Firefox. If you need to change anything, see the "const css" line in here, or the end of uc-tabs-bar.css on my repo.
 
 [Unread Tab Mods]: https://github.com/aminomancer/uc.css.js/blob/master/JS/unreadTabMods.uc.js
 */
@@ -408,10 +409,6 @@ Next to the "new tab" button in Firefox there's a V-shaped button that opens a b
       icon.hidden = true;
       icon.setAttribute("type", pending ? "pending" : "secure");
     };
-    gTabsPanel.allTabsButton.setAttribute(
-      "onmouseover",
-      /* javascript */ `this.tooltipText=(gBrowser.tabs.length>1?PluralForm.get(gBrowser.tabs.length,gNavigatorBundle.getString("ctrlTab.listAllTabs.label")).replace("#1",gBrowser.tabs.length).toLocaleLowerCase().replace(RTL_UI?/.$/i:/^./i,(function(letter){return letter.toLocaleUpperCase()})).trim():this.label)+(Services.prefs.getBoolPref("browser.ctrlTab.sortByRecentlyUsed",false)?" ("+ShortcutUtils.prettifyShortcut(key_showAllTabs)+")":"");`
-    );
     if (!("reversed" in lazy.TabsPanel.prototype)) reverseTabOrder();
     setupPIP();
     setupCtrlTab();

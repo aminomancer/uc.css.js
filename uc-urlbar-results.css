@@ -592,6 +592,7 @@ by underlining them (requires urlbarMods.uc.js) */
 
 .urlbarView-row[has-action] .urlbarView-title strong,
 .urlbarView-row[has-action] .urlbarView-title[isurl],
+.urlbarView-row[has-action][type="history"] .urlbarView-title:not(:has(strong)),
 .urlbarView-row[type="bookmark"]:not([has-url]) .urlbarView-title,
 .urlbarView-row[has-url] .urlbarView-title,
 .urlbarView-row:not([has-action]) .urlbarView-title:has(strong),
@@ -613,6 +614,7 @@ by underlining them (requires urlbarMods.uc.js) */
 .urlbarView-row:where([type="tabtosearch"], [type="tokenaliasengine"], [type="tip"])[selected] .urlbarView-title,
 .urlbarView-row[has-action][selected] .urlbarView-title strong,
 .urlbarView-row[has-action][selected] .urlbarView-title[isurl],
+.urlbarView-row[has-action][type="history"][selected] .urlbarView-title:not(:has(strong)),
 .urlbarView-row[type="bookmark"][selected]:not([has-url]) .urlbarView-title,
 .urlbarView-row[has-url][selected] .urlbarView-title,
 .urlbarView-row[selected]:not([has-action]) .urlbarView-title:has(strong),

@@ -11,10 +11,13 @@ import {
   useContext,
   useRef,
 } from "react";
-import { GlobalContext, ucUtils } from "./GlobalContext";
+import { GlobalContext } from "./GlobalContext";
 import { ScriptDetails } from "./ScriptDetails";
 const { gScriptUpdater } = ChromeUtils.importESModule(
   "chrome://userchrome/content/aboutuserchrome/modules/UCMSingletonData.sys.mjs"
+);
+const { _ucUtils: ucUtils } = ChromeUtils.importESModule(
+  "chrome://userchromejs/content/utils.sys.mjs"
 );
 
 export const ScriptCard = ({

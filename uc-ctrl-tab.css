@@ -28,14 +28,14 @@
   background: none !important;
   flex: 0 !important;
   min-width: min-content !important;
-}
 
-.ctrlTab-preview:not([hidden]) {
-  display: flex !important;
-}
+  &:not([hidden]) {
+    display: flex !important;
+  }
 
-.ctrlTab-preview:not(#ctrlTab-showAll) > * > .ctrlTab-preview-inner {
-  margin: -10px -10px 0 !important;
+  &:not(#ctrlTab-showAll) > * > .ctrlTab-preview-inner {
+    margin: -10px -10px 0 !important;
+  }
 }
 
 .ctrlTab-preview-inner img:-moz-broken {
@@ -59,10 +59,10 @@
 #ctrlTab-showAll {
   background-color: var(--ctrlTab-panel-bgcolor) !important;
   border: 1px solid var(--blurred-dialog-border-color) !important;
-}
 
-#ctrlTab-showAll .button-box {
-  padding: 2px 4px !important;
+  .button-box {
+    padding: 2px 4px !important;
+  }
 }
 
 .ctrlTab-preview-inner {
@@ -108,17 +108,17 @@
 
 .ctrlTab-favicon {
   margin: 0 !important;
-}
 
-.ctrlTab-favicon[src] {
-  background: hsla(0, 0%, 49%, 0.3) !important;
-  width: 32px !important;
-  height: 32px !important;
-  padding: 3px !important;
-  box-shadow: none !important;
-  border-radius: 3px !important;
-  -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity !important;
-  fill: currentColor !important;
+  &[src] {
+    background: hsla(0, 0%, 49%, 0.3) !important;
+    width: 32px !important;
+    height: 32px !important;
+    padding: 3px !important;
+    box-shadow: none !important;
+    border-radius: 3px !important;
+    -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity !important;
+    fill: currentColor !important;
+  }
 }
 
 .ctrlTab-label {

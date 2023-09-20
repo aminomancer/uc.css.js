@@ -110,6 +110,7 @@ module.exports = {
     {
       files: ["resources/script-override/**"],
       rules: {
+        "prefer-destructuring": "off",
         "prefer-template": "off",
         "prettier/prettier": ["error", { quoteProps: "preserve" }],
       },

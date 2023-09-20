@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Urlbar Mods
-// @version        1.7.8
+// @version        1.7.9
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Make some minor modifications to the urlbar. See the code comments in the script for more details.
@@ -323,15 +323,9 @@ class UrlbarMods {
           this._identityBox.classList.add("readerMode");
         }
       } else {
-        let warnOnInsecure =
-          this._insecureConnectionIconEnabled ||
-          (this._insecureConnectionIconPBModeEnabled &&
-            PrivateBrowsingUtils.isWindowPrivate(window));
-        let className = warnOnInsecure ? "notSecure" : "unknownIdentity";
+        let className = "notSecure";
         this._identityBox.className = className;
-        tooltip = warnOnInsecure
-          ? gNavigatorBundle.getString("identity.notSecure.tooltip")
-          : "";
+        tooltip = gNavigatorBundle.getString("identity.notSecure.tooltip");
         let warnTextOnInsecure =
           this._insecureConnectionTextEnabled ||
           (this._insecureConnectionTextPBModeEnabled &&

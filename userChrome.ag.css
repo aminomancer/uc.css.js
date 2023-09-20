@@ -66,7 +66,7 @@ window#unknownContentTypeWindow tooltip {
   --tooltip-border-color: color-mix(in srgb, currentColor 8%, var(--in-content-bg-darker, rgb(21, 21, 23))) !important;
 }
 
-@-moz-document regexp("^about:(?!devtools-toolbox).*") {
+@-moz-document regexp("^about:(?!devtools-toolbox).*"), url-prefix("chrome://devtools/content/") {
   tooltip:-moz-native-anonymous {
     --tooltip-bgcolor: var(--in-content-bg-darker, rgb(21, 21, 23)) !important;
     --tooltip-border-color: color-mix(in srgb, currentColor 8%, var(--in-content-bg-darker, rgb(21, 21, 23))) !important;

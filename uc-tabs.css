@@ -94,7 +94,7 @@
 }
 
 /* purple line on multiselected tabs */
-.tabbrowser-tab[multiselected="true"] .tab-context-line {
+.tabbrowser-tab[multiselected] .tab-context-line {
   background-color: var(--multiselected-color) !important;
 }
 
@@ -102,7 +102,7 @@
   display: none !important;
 }
 
-.tabbrowser-tab.identity-icon-on-multiselect[usercontextid][multiselected="true"] .tab-content::after {
+.tabbrowser-tab.identity-icon-on-multiselect[usercontextid][multiselected] .tab-content::after {
   content: "";
   display: flex;
   height: 12px;
@@ -162,7 +162,7 @@ to fill the tab strip. so the last tab should have a rounded
 corner since it won't be touching the end of the tab strip. */
 #TabsToolbar
   #tabbrowser-tabs
-  #tabbrowser-arrowscrollbox:not([overflowing="true"])
+  #tabbrowser-arrowscrollbox:not([overflowing])
   .tabbrowser-tab:last-of-type[pinned]
   :is(.tab-stack, .tab-background, .tab-content, .tab-loading-burst),
 /* when the last tab has its max-width property set, it means tab sizing has
@@ -181,7 +181,7 @@ button. then close tabs 3 and 4 without moving the mouse. the tabs' width will
 not expand until you move your mouse out of the tab strip. */
 #TabsToolbar
   #tabbrowser-tabs
-  #tabbrowser-arrowscrollbox:not([overflowing="true"])
+  #tabbrowser-arrowscrollbox:not([overflowing])
   .tabbrowser-tab:last-of-type[style*="max-width"]
   :is(.tab-stack, .tab-background, .tab-content, .tab-loading-burst) {
   border-top-right-radius: 5px !important;
@@ -284,7 +284,7 @@ the tab closes. which would look very ugly so it's not worth it. this means
 there'll be rounded inside corners on the last tab when it's not stretching to
 the right edge of the tab strip, but unfortunately it won't have rounded outside
 corners unless the tab strip is overflowing. */
-#TabsToolbar #tabbrowser-tabs #tabbrowser-arrowscrollbox:not([overflowing="true"]) .tabbrowser-tab:last-of-type[pinned] .tab-stack::after {
+#TabsToolbar #tabbrowser-tabs #tabbrowser-arrowscrollbox:not([overflowing]) .tabbrowser-tab:last-of-type[pinned] .tab-stack::after {
   display: block;
 }
 
@@ -385,12 +385,12 @@ so shadows are cast to the left but not to the right. */
 
 /* hovered tabs stack on top of normal tabs in either direction. so shadows are
 cast in both directions, unless the neighboring tab is selected or something. */
-.tabbrowser-tab:not([visuallyselected="true"], [pinned], [multiselected]):is(:hover, .keyboard-focused-tab, [open]) {
+.tabbrowser-tab:not([visuallyselected], [pinned], [multiselected]):is(:hover, .keyboard-focused-tab, [open]) {
   z-index: 3 !important;
 }
 
 /* selected tabs stack over hovered tabs */
-.tabbrowser-tab[visuallyselected="true"] {
+.tabbrowser-tab[visuallyselected] {
   z-index: 6 !important;
 }
 
@@ -400,11 +400,11 @@ cast in both directions, unless the neighboring tab is selected or something. */
 }
 
 /* multiselected gets 1 extra point for being hovered */
-.tabbrowser-tab[multiselected]:not([visuallyselected="true"], [pinned]):is(:hover, .keyboard-focused-tab, [open]) {
+.tabbrowser-tab[multiselected]:not([visuallyselected], [pinned]):is(:hover, .keyboard-focused-tab, [open]) {
   z-index: 5 !important;
 }
 
-.tabbrowser-tab[multiselected][visuallyselected="true"] {
+.tabbrowser-tab[multiselected][visuallyselected] {
   z-index: 6 !important;
 }
 
@@ -414,7 +414,7 @@ cast in both directions, unless the neighboring tab is selected or something. */
 }
 
 /* and the same formula applies to them too */
-.tabbrowser-tab[pinned]:not([visuallyselected="true"], [multiselected]):is(:hover, .keyboard-focused-tab, [open]) {
+.tabbrowser-tab[pinned]:not([visuallyselected], [multiselected]):is(:hover, .keyboard-focused-tab, [open]) {
   z-index: 8 !important;
 }
 
@@ -422,12 +422,12 @@ cast in both directions, unless the neighboring tab is selected or something. */
   z-index: 9 !important;
 }
 
-.tabbrowser-tab[pinned][multiselected]:not([visuallyselected="true"]):is(:hover, .keyboard-focused-tab, [open]) {
+.tabbrowser-tab[pinned][multiselected]:not([visuallyselected]):is(:hover, .keyboard-focused-tab, [open]) {
   z-index: 10 !important;
 }
 
-.tabbrowser-tab[pinned][visuallyselected="true"],
-.tabbrowser-tab[pinned][multiselected][visuallyselected="true"] {
+.tabbrowser-tab[pinned][visuallyselected],
+.tabbrowser-tab[pinned][multiselected][visuallyselected] {
   z-index: 11 !important;
 }
 
@@ -603,8 +603,8 @@ hover the general area of the tabs, but will show if audio is muted. */
 }
 
 /* attention indicator */
-.tabbrowser-tab:is([image], [pinned]) > .tab-stack > .tab-content[attention]:not([selected="true"]),
-.tabbrowser-tab > .tab-stack > .tab-content[pinned][titlechanged]:not([selected="true"]) {
+.tabbrowser-tab:is([image], [pinned]) > .tab-stack > .tab-content[attention]:not([selected]),
+.tabbrowser-tab > .tab-stack > .tab-content[pinned][titlechanged]:not([selected]) {
   background-image: url(chrome://userchrome/content/indicator-tab-attention-purple.svg) !important;
   background-position: right 4px top 4px !important;
   background-size: 10px !important;

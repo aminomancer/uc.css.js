@@ -7,6 +7,9 @@
     "build": "parcel build --no-content-hash",
     "lint:fix": "eslint --fix ./JS/ ./resources/aboutuserchrome/src/"
   },
+  "engines": {
+    "node": "19.x"
+  },
   "targets": {
     "aboutuserchrome": {
       "source": "./resources/aboutuserchrome/src/aboutuserchrome.html",

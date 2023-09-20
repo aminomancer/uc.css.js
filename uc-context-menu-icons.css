@@ -153,7 +153,7 @@ menuitem#helpPolicySupport > .menu-text,
 #context-frameOsPid .menu-text,
 #context-reloadframe .menu-text,
 #context-reloadimage .menu-text,
-menuitem:not(.menuitem-iconic)[oncommand="_ucUtils.restart(true)"] .menu-text,
+#userScriptsMenu-Restart .menu-text,
 #context-showonlythisframe .menu-text,
 #contentAreaContextMenu #frame > .menu-text,
 #context-video-saveimage .menu-text,
@@ -221,6 +221,7 @@ menuitem[data-l10n-id="full-screen-exit"] .menu-text,
 #context-markAsRead .menu-text,
 #context-markAsUnread .menu-text,
 :is(#context_selectAllTabs, #toolbar-context-selectAllTabs) .menu-text,
+#menu_searchBookmarks .menu-text,
 #menu_bookmarkAllTabs .menu-text,
 #context_bookmarkTab .menu-text,
 #context_bookmarkSelectedTabs .menu-text,
@@ -248,6 +249,7 @@ menuitem#menu_pageSource .menu-text,
 menuitem#extensionsForDevelopers .menu-text,
 menuitem#enableDeveloperTools .menu-text,
 #discardTab .menu-text,
+#menu_searchHistory > .menu-text,
 #historyUndoWindowMenu > .menu-text,
 #historyUndoMenu > .menu-text,
 .recently-closed-windows-menu > .menu-text,
@@ -358,7 +360,7 @@ menuitem.unified-extensions-context-menu-Options > .menu-text,
 #menu_importFromAnotherBrowser::before,
 #context-frameOsPid::before,
 #context-reloadimage::before,
-menuitem:not(.menuitem-iconic)[oncommand="_ucUtils.restart(true)"]::before,
+#userScriptsMenu-Restart::before,
 #context-reloadframe::before,
 #context-inspect::before,
 #context-inspect-a11y::before,
@@ -522,6 +524,7 @@ menuitem#repair-text-encoding::before,
 #context-markAsUnread::before,
 :is(#context_bookmarkTab, #context_bookmarkSelectedTabs, #toolbar-context-bookmarkSelectedTab, #toolbar-context-bookmarkSelectedTabs)::before,
 :is(#context_selectAllTabs, #toolbar-context-selectAllTabs)::before,
+#menu_searchBookmarks::before,
 #menu_bookmarkAllTabs::before,
 #context_moveTabOptions::before,
 #context_sendTabToDevice::before,
@@ -545,6 +548,7 @@ menuitem#menu_pageSource::before,
 menuitem#extensionsForDevelopers::before,
 menuitem#enableDeveloperTools::before,
 #discardTab::before,
+#menu_searchHistory::before,
 #historyUndoWindowMenu::before,
 #historyUndoMenu::before,
 .recently-closed-windows-menu::before,
@@ -678,11 +682,13 @@ menuitem.unified-extensions-context-menu-Options::before,
 #context_moveToStart::before,
 #context_moveToEnd:-moz-locale-dir(rtl)::before {
   background-image: url(chrome://userchrome/content/skin/back.svg);
+  background-size: 15px;
 }
 
 #context_moveToEnd::before,
 #context_moveToStart:-moz-locale-dir(rtl)::before {
   background-image: url(chrome://userchrome/content/skin/forward.svg);
+  background-size: 15px;
 }
 
 :is(#context_openTabInWindow, #menu_newNavigator)::before {
@@ -802,7 +808,7 @@ menuitem[data-l10n-id="full-screen-exit"]::before {
   background-image: url(chrome://userchrome/content/devtools/tool-memory.svg);
 }
 
-:is(#context-reloadframe, #context-reloadimage, menuitem:not(.menuitem-iconic)[oncommand="_ucUtils.restart(true)"])::before {
+:is(#context-reloadframe, #context-reloadimage, #userScriptsMenu-Restart)::before {
   background-image: url(chrome://userchrome/content/skin/reload.svg);
 }
 
@@ -1205,12 +1211,13 @@ menuitem.unified-extensions-context-menu-move-widget-down::before {
   background-image: url(chrome://userchrome/content/fxa/add-device.svg);
 }
 
-:is(#context-searchselect, #context-searchselect-private, #menu_find)::before {
+:is(#context-searchselect, #context-searchselect-private, #menu_find, #menu_searchBookmarks, #menu_searchHistory)::before {
   background-image: url(chrome://userchrome/content/search-glass.svg);
 }
 
 #menu_findAgain::before {
   background-image: url(chrome://userchrome/content/skin/forward.svg);
+  background-size: 15px;
 }
 
 :is(menuitem#textfieldDirection-swap, #context-bidi-text-direction-toggle, #context-bidi-page-direction-toggle, #documentDirection-swap)::before {
@@ -1646,7 +1653,7 @@ menuitem:is(.customize-context-reportExtension, .unified-extensions-context-menu
 }
 
 /* mirror some of the icons for RTL languages/layouts, e.g. icons with arrows or other directional implications */
-:is(#context-reloadframe, #context-reloadimage, menuitem:not(.menuitem-iconic)[oncommand="_ucUtils.restart(true)"]):-moz-locale-dir(rtl)::before,
+:is(#context-reloadframe, #context-reloadimage, #userScriptsMenu-Restart):-moz-locale-dir(rtl)::before,
 :is(#context_sendTabToDevice, #context-sendlinktodevice, #context-sendpagetodevice):-moz-locale-dir(rtl)::before,
 :is(#context-undo, #context_undoCloseTab, #toolbar-context-undoCloseTab, #menu_undo, #undobookmarksmenuUndo):-moz-locale-dir(rtl)::before,
 :is(#context_reloadTab, #context_reloadSelectedTabs, #toolbar-context-reloadSelectedTab, #toolbar-context-reloadSelectedTabs):-moz-locale-dir(rtl)::before,

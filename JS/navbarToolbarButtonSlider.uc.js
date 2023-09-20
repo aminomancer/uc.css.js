@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Navbar Toolbar Button Slider
-// @version        2.9.3
+// @version        2.9.4
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @long-description
@@ -884,14 +884,5 @@ class NavbarToolbarSlider {
     sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
   }
 }
-if (gBrowserInit.delayedStartupFinished) {
-  window.navbarToolbarSlider = new NavbarToolbarSlider();
-} else {
-  let delayedListener = (subject, topic) => {
-    if (topic == "browser-delayed-startup-finished" && subject == window) {
-      Services.obs.removeObserver(delayedListener, topic);
-      window.navbarToolbarSlider = new NavbarToolbarSlider();
-    }
-  };
-  Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
-}
+
+window.navbarToolbarSlider = new NavbarToolbarSlider();

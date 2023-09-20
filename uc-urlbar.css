@@ -1163,6 +1163,10 @@ for some window scaling factors. */
   display: none;
 }
 
+#shopping-sidebar-button > .urlbar-icon {
+  list-style-image: url(chrome://userchrome/content/skin/whatsnew.svg) !important;
+}
+
 @supports -moz-bool-pref("userChrome.urlbar.hide-pointless-icons") {
   #eme-notification-icon {
     display: none;

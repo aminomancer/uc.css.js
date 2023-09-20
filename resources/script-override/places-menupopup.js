@@ -146,9 +146,10 @@ function closingPopupEndsDrag(popup) {
             // Timer to close a submenu that's been dragged off of.
             // Only close the submenu if the mouse isn't being dragged over any
             // of its child menus.
-            let draggingOverChild = PlacesControllerDragHelper.draggingOverChildNode(
-              this._folder.elt
-            );
+            let draggingOverChild =
+              PlacesControllerDragHelper.draggingOverChildNode(
+                this._folder.elt
+              );
             if (draggingOverChild) {
               this._folder.elt = null;
             }
@@ -625,6 +626,23 @@ function closingPopupEndsDrag(popup) {
 
     constructor() {
       super();
+
+      this._originalOpenPopup = this.openPopup;
+      this.openPopup = function (aAnchorElement, aOptions, ...args) {
+        let options = aOptions;
+        if (options && this.getAttribute("type") == "arrow") {
+          if (typeof options === "string") {
+            options = { position: options };
+          }
+          if (typeof options === "object" && options.position) {
+            options.position = options.position?.replace(
+              /^(bottom|top)(right|left)/,
+              "$1center"
+            );
+          }
+        }
+        this._originalOpenPopup(aAnchorElement, options, ...args);
+      };
 
       const event_names = [
         "popupshowing",

@@ -5,6 +5,8 @@
 content userchromejs ./
 # Where your scripts exist and are loaded from.
 content userscripts ../JS/
+# Optional folder used by fx-autoconfig to load author/agent sheets.
+skin userstyles classic/1.0 ../CSS/
 # Where icons and content stylesheets and other stuff exist.
 content userchrome ../resources/
 
@@ -19,8 +21,6 @@ override chrome://browser/content/tabbrowser-tab.js ../resources/script-override
 override chrome://global/content/elements/panel.js ../resources/script-override/panel.js
 # Restore the arrow for places menupopups (like the bookmarks toolbar button popup).
 override chrome://browser/content/places/places-menupopup.js ../resources/script-override/places-menupopup.js
-# Restore the arrow for translation notification panel.
-override chrome://browser/content/translation-notification.js ../resources/script-override/translation-notification.js
 
 # Override the notification message bar element to move the close button to the left in tab order.
 override chrome://global/content/elements/message-bar.js ../resources/script-override/message-bar.js
@@ -96,6 +96,7 @@ override chrome://browser/skin/downloads/notification-start-animation.svg ../res
 override chrome://browser/skin/downloads/notification-finish-animation.svg ../resources/downloads/notification-finish-animation.svg
 override chrome://browser/skin/fullscreen.svg ../resources/skin/fullscreen.svg
 override chrome://browser/skin/fullscreen-exit.svg ../resources/skin/fullscreen-exit.svg
+override chrome://browser/skin/translations.svg ../resources/material/translate.svg
 override chrome://browser/skin/controlcenter/socialblock.svg ../resources/material/dislike.svg
 override chrome://browser/skin/controlcenter/3rdpartycookies.svg ../resources/skin/controlcenter/3rdpartycookies.svg
 override chrome://browser/skin/notification-icons/autoplay-media.svg ../resources/notifications/autoplay-media.svg

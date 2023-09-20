@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Browser Chrome Bookmark Keywords
-// @version        1.1.7
+// @version        1.1.8
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -75,11 +75,6 @@ Be careful when using this, of course. You always need to take care when using J
 
   function init() {
     const lazy = {};
-    XPCOMUtils.defineLazyModuleGetters(lazy, {
-      PartnerLinkAttribution: "resource:///modules/PartnerLinkAttribution.jsm",
-      CONTEXTUAL_SERVICES_PING_TYPES:
-        "resource:///modules/PartnerLinkAttribution.jsm",
-    });
     ChromeUtils.defineESModuleGetters(lazy, {
       UrlbarUtils: "resource:///modules/UrlbarUtils.sys.mjs",
       UrlbarPrefs: "resource:///modules/UrlbarPrefs.sys.mjs",
@@ -87,6 +82,10 @@ Be careful when using this, of course. You always need to take care when using J
         "resource:///modules/UrlbarProvidersManager.sys.mjs",
       ExtensionSearchHandler:
         "resource://gre/modules/ExtensionSearchHandler.sys.mjs",
+      PartnerLinkAttribution:
+        "resource:///modules/PartnerLinkAttribution.sys.mjs",
+      CONTEXTUAL_SERVICES_PING_TYPES:
+        "resource:///modules/PartnerLinkAttribution.sys.mjs",
     });
 
     const UrlbarProvidersManager = gURLBar.view.controller.manager;

@@ -24,9 +24,9 @@
         <hbox class="tab-content" align="center">
           <stack class="tab-icon-stack">
             <image class="tab-close-button close-icon" role="presentation"/>
-            <hbox class="tab-throbber" layer="true"/>
+            <hbox class="tab-throbber"/>
             <hbox class="tab-icon-pending"/>
-            <html:img class="tab-icon-image" role="presentation" decoding="sync"/>
+            <html:img class="tab-icon-image" role="presentation" decoding="sync" />
             <image class="tab-sharing-icon-overlay" role="presentation"/>
             <image class="tab-icon-overlay" role="presentation"/>
           </stack>
@@ -87,8 +87,7 @@
     static get inheritedAttributes() {
       return {
         ".tab-background": "selected=visuallyselected,fadein,multiselected",
-        ".tab-line":
-          "selected=visuallyselected,multiselected,before-multiselected",
+        ".tab-line": "selected=visuallyselected,multiselected",
         ".tab-loading-burst": "pinned,bursting,notselectedsinceload",
         ".tab-content":
           "pinned,selected=visuallyselected,titlechanged,attention",
@@ -135,6 +134,22 @@
       }
     }
 
+    get owner() {
+      let owner = this._owner?.deref();
+      if (owner && !owner.closing) {
+        return owner;
+      }
+      return null;
+    }
+
+    set owner(owner) {
+      if (owner) {
+        this._owner = new WeakRef(owner);
+      } else {
+        this._owner = null;
+      }
+    }
+
     get container() {
       return gBrowser.tabContainer;
     }
@@ -148,16 +163,21 @@
       gBrowser._tabAttrModified(this, ["attention"]);
     }
 
-    set _visuallySelected(val) {
-      if (val == (this.getAttribute("visuallyselected") == "true")) {
+    set undiscardable(val) {
+      if (val == this.hasAttribute("undiscardable")) {
         return;
       }
 
-      if (val) {
-        this.setAttribute("visuallyselected", "true");
-      } else {
-        this.removeAttribute("visuallyselected");
+      this.toggleAttribute("undiscardable", val);
+      gBrowser._tabAttrModified(this, ["undiscardable"]);
+    }
+
+    set _visuallySelected(val) {
+      if (val == this.hasAttribute("visuallyselected")) {
+        return;
       }
+
+      this.toggleAttribute("visuallyselected", val);
       gBrowser._tabAttrModified(this, ["visuallyselected"]);
     }
 
@@ -171,20 +191,15 @@
         this.removeAttribute("selected");
       }
 
-      // If we're non-e10s we should update the visual selection as well at the same time,
-      // *or* if we're e10s and the visually selected tab isn't changing, in which case the
-      // tab switcher code won't run and update anything else (like the before- and after-
-      // selected attributes).
-      if (
-        !gMultiProcessBrowser ||
-        (val && this.hasAttribute("visuallyselected"))
-      ) {
+      // If we're non-e10s we need to update the visual selection at the same
+      // time, otherwise AsyncTabSwitcher will take care of this.
+      if (!gMultiProcessBrowser) {
         this._visuallySelected = val;
       }
     }
 
     get pinned() {
-      return this.getAttribute("pinned") == "true";
+      return this.hasAttribute("pinned");
     }
 
     get hidden() {
@@ -193,15 +208,11 @@
     }
 
     get muted() {
-      return this.getAttribute("muted") == "true";
+      return this.hasAttribute("muted");
     }
 
     get multiselected() {
-      return this.getAttribute("multiselected") == "true";
-    }
-
-    get beforeMultiselected() {
-      return this.getAttribute("before-multiselected") == "true";
+      return this.hasAttribute("multiselected");
     }
 
     get userContextId() {
@@ -211,15 +222,19 @@
     }
 
     get soundPlaying() {
-      return this.getAttribute("soundplaying") == "true";
+      return this.hasAttribute("soundplaying");
     }
 
     get pictureinpicture() {
-      return this.getAttribute("pictureinpicture") == "true";
+      return this.hasAttribute("pictureinpicture");
     }
 
     get activeMediaBlocked() {
-      return this.getAttribute("activemedia-blocked") == "true";
+      return this.hasAttribute("activemedia-blocked");
+    }
+
+    get undiscardable() {
+      return this.hasAttribute("undiscardable");
     }
 
     get isEmpty() {
@@ -350,6 +365,11 @@
     }
 
     on_dragstart(event) {
+      // We use "failed" drag end events that weren't cancelled by the user
+      // to detach tabs. Ensure that we do not show the drag image returning
+      // to its point of origin when this happens, as it makes the drag
+      // finishing feel very slow.
+      event.dataTransfer.mozShowFailAnimation = false;
       if (event.eventPhase == Event.CAPTURING_PHASE) {
         this.style.MozUserFocus = "";
       } else if (
@@ -477,7 +497,7 @@
         } else {
           gBrowser.removeTab(this, {
             animate: true,
-            byMouse: event.mozInputSource == MouseEvent.MOZ_SOURCE_MOUSE,
+            triggeringEvent: event,
           });
         }
         // This enables double-click protection for the tab container
@@ -508,7 +528,7 @@
       ) {
         gBrowser.removeTab(this, {
           animate: true,
-          byMouse: event.mozInputSource == MouseEvent.MOZ_SOURCE_MOUSE,
+          triggeringEvent: event,
         });
       }
     }
@@ -523,41 +543,11 @@
       if (this.hidden || this.closing) {
         return;
       }
-
-      let tabContainer = this.container;
-      let visibleTabs = tabContainer._getVisibleTabs();
-      let tabIndex = visibleTabs.indexOf(this);
+      this._hover = true;
 
       if (this.selected) {
-        tabContainer._handleTabSelect();
-      }
-
-      if (tabIndex == 0) {
-        tabContainer._beforeHoveredTab = null;
-      } else {
-        let candidate = visibleTabs[tabIndex - 1];
-        let separatedByScrollButton =
-          tabContainer.getAttribute("overflow") == "true" &&
-          candidate.pinned &&
-          !this.pinned;
-        if (!candidate.selected && !separatedByScrollButton) {
-          tabContainer._beforeHoveredTab = candidate;
-          candidate.setAttribute("beforehovered", "true");
-        }
-      }
-
-      if (tabIndex == visibleTabs.length - 1) {
-        tabContainer._afterHoveredTab = null;
-      } else {
-        let candidate = visibleTabs[tabIndex + 1];
-        if (!candidate.selected) {
-          tabContainer._afterHoveredTab = candidate;
-          candidate.setAttribute("afterhovered", "true");
-        }
-      }
-
-      tabContainer._hoveredTab = this;
-      if (this.linkedPanel && !this.selected) {
+        this.container._handleTabSelect();
+      } else if (this.linkedPanel) {
         this.linkedBrowser.unselectedTabHover(true);
         this.startUnselectedTabHoverTimer();
       }
@@ -573,17 +563,10 @@
     }
 
     _mouseleave() {
-      let tabContainer = this.container;
-      if (tabContainer._beforeHoveredTab) {
-        tabContainer._beforeHoveredTab.removeAttribute("beforehovered");
-        tabContainer._beforeHoveredTab = null;
+      if (!this._hover) {
+        return;
       }
-      if (tabContainer._afterHoveredTab) {
-        tabContainer._afterHoveredTab.removeAttribute("afterhovered");
-        tabContainer._afterHoveredTab = null;
-      }
-
-      tabContainer._hoveredTab = null;
+      this._hover = false;
       if (this.linkedPanel && !this.selected) {
         this.linkedBrowser.unselectedTabHover(false);
         this.cancelUnselectedTabHoverTimer();
@@ -608,6 +591,7 @@
       } else {
         tooltipEl.removeAttribute("data-l10n-id");
       }
+      // TODO(Itiel): Maybe simplify this when bug 1830989 lands
     }
 
     startUnselectedTabHoverTimer() {
@@ -684,7 +668,7 @@
           // "Lazy Browser" should not invoke its mute method
           browser.mute();
         }
-        this.setAttribute("muted", "true");
+        this.toggleAttribute("muted", true);
         hist.add(0 /* mute */);
       }
       this.muteReason = aMuteReason || null;

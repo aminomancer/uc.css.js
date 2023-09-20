@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Misc. Mods
-// @version        2.1.0
+// @version        2.1.1
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Various tiny mods not worth making separate scripts for. Read the comments inside the script for details.
@@ -96,16 +96,6 @@
         "miscMods.allowStopReloadButtonToAnimateInOtherToolbars",
         true
       ),
-
-    // When you open a private window, it shows a little private browsing icon in the top of the
-    // navbar, next to the window control buttons. It doesn't have a tooltip for some reason, so
-    // if you don't already recognize the private browsing icon, you won't know what it means.
-    // This simply gives it a localized tooltip like "You're in a Private Window" in English.
-    // The exact string is drawn from Firefox's fluent files, so it depends on your language.
-    "Give the private browsing indicator a tooltip": Services.prefs.getBoolPref(
-      "miscMods.giveThePrivateBrowsingIndicatorATooltip",
-      true
-    ),
 
     // The location where your bookmarks are saved by default is defined in the preference
     // browser.bookmarks.defaultLocation. This pref is updated every time you manually change a
@@ -238,9 +228,6 @@
       this.modCtrlTabMethods();
       if (config["Allow stop/reload button to animate in other toolbars"]) {
         this.stopReloadAnimations();
-      }
-      if (config["Give the private browsing indicator a tooltip"]) {
-        this.addPrivateBrowsingTooltip();
       }
       if (config["Preserve your default bookmarks folder"]) {
         this.makeDefaultBookmarkFolderPermanent();
@@ -434,17 +421,6 @@
           .replace(/#nav-bar-customization-target/, `.customization-target`)}`
       );
     }
-    async addPrivateBrowsingTooltip() {
-      this.privateL10n = await new Localization(
-        ["browser/aboutPrivateBrowsing.ftl"],
-        true
-      );
-      let l10nId = PrivateBrowsingUtils.isWindowPrivate(window)
-        ? "about-private-browsing-info-title"
-        : "about-private-browsing-not-private";
-      document.querySelector(".private-browsing-indicator").tooltipText =
-        await this.privateL10n.formatValue([l10nId]);
-    }
     makeDefaultBookmarkFolderPermanent() {
       let { panel } = StarUI;
       let checkbox = panel
@@ -478,11 +454,13 @@
       );
     }
     privateBrowsingIndicatorButton() {
-      let indicator = document.querySelector(".private-browsing-indicator");
-      let tooltiptext = indicator.getAttribute("tooltiptext");
-      let markup = `<button class="private-browsing-indicator" aria-live="polite"
-                tooltiptext="${tooltiptext}" style="appearance:none;min-width:revert"
-                oncommand="openHelpLink('private-browsing-myths')" />`;
+      let indicator = document.getElementById(
+        "private-browsing-indicator-with-label"
+      );
+      let tooltiptext = indicator.textContent;
+      let markup = /* html */ `<toolbarbutton id="private-browsing-indicator-with-label"
+                                tooltiptext="${tooltiptext}"
+                                oncommand="openHelpLink('private-browsing-myths')" />`;
       indicator.replaceWith(MozXULElement.parseXULToFragment(markup));
     }
     permsPopupInFullscreen() {
