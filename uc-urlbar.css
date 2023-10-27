@@ -120,7 +120,7 @@ toolbarpaletteitem[place="palette"] > #search-container {
   outline: none !important;
 }
 
-@supports -moz-bool-pref("userChrome.urlbar.focus-ring-enabled") {
+@media (-moz-bool-pref: "userChrome.urlbar.focus-ring-enabled") {
   #urlbar-input-container,
   #searchbar {
     outline: 0 solid transparent !important;
@@ -402,7 +402,7 @@ installed. the screenshot action already hides itself on system pages and
 extension pages, but CSS hides it faster and avoids flickering.
 :not([aria-label]) handles the few milliseconds when a new window is opened and
 the NTP/home page hasn't opened yet. */
-@supports -moz-bool-pref("userChrome.urlbar.hide-bookmarks-button-on-system-pages") {
+@media (-moz-bool-pref: "userChrome.urlbar.hide-bookmarks-button-on-system-pages") {
   #tracking-protection-icon-container:is([hidden], :not([aria-label])) ~ #identity-box:not(.chromeUI, .localResource) ~ #page-action-buttons > #reader-mode-button[hidden] ~ :is(#star-button-box, #pageAction-urlbar-screenshot) {
     visibility: collapse;
   }
@@ -1167,7 +1167,12 @@ for some window scaling factors. */
   list-style-image: url(chrome://userchrome/content/skin/whatsnew.svg) !important;
 }
 
-@supports -moz-bool-pref("userChrome.urlbar.hide-pointless-icons") {
+#translations-button-locale {
+	margin-inline-start: 3px !important;
+  margin-inline-end: revert !important;
+}
+
+@media (-moz-bool-pref: "userChrome.urlbar.hide-pointless-icons") {
   #eme-notification-icon {
     display: none;
   }

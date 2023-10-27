@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Tab Mods — tabbrowser-tab class definition mods
-// @version        1.3.5
+// @version        1.3.6
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Restore the tab sound button and other aspects of the tab that (imo) were better before Proton.
@@ -65,6 +65,7 @@
       this.addEventListener("focus", this);
       this.addEventListener("AriaFocus", this);
 
+      this._hover = false;
       this._selectedOnFirstMouseDown = false;
 
       /**
@@ -268,6 +269,21 @@
       return this._lastAccessed == Infinity ? Date.now() : this._lastAccessed;
     }
 
+    get lastSeenActive() {
+      const isForegroundWindow =
+        this.ownerGlobal ==
+        BrowserWindowTracker.getTopWindow({ allowPopups: true });
+      // the timestamp for the selected tab in the active window is always now
+      if (isForegroundWindow && this.selected) {
+        return Date.now();
+      }
+      if (this._lastSeenActive) {
+        return this._lastSeenActive;
+      }
+      // Use the application start time as the fallback value
+      return Services.startup.getStartupInfo().start.getTime();
+    }
+
     get _overPlayingIcon() {
       return (
         this.soundPlayingIcon?.matches(":hover") ||
@@ -306,6 +322,10 @@
 
     updateLastAccessed(aDate) {
       this._lastAccessed = this.selected ? Infinity : aDate || Date.now();
+    }
+
+    updateLastSeenActive() {
+      this._lastSeenActive = Date.now();
     }
 
     updateLastUnloadedByTabUnloader() {

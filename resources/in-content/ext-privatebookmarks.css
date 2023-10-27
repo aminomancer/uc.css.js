@@ -303,7 +303,7 @@
     fill: var(--purple-30) !important;
   }
 
-  @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
+  @media (-moz-bool-pref: "userChrome.css.mac-ui-fonts") {
     :root[uc-extension-id="private-bookmarks@rharel"] * {
       font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
     }

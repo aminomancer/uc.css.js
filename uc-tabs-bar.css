@@ -430,7 +430,7 @@ toolbarbutton#private-browsing-indicator-with-label:is(:hover:active, [open]) > 
 #allTabsMenu-searchTabs,
 #allTabsMenu-hiddenTabsButton {
   .toolbarbutton-text {
-    padding-inline-start: var(--arrowpanel-subviewbutton-iconic-gap, 8px);
+    padding-inline-start: var(--arrowpanel-subviewbutton-iconic-gap, 8px) !important;
   }
 }
 
@@ -760,7 +760,7 @@ toolbarbutton#private-browsing-indicator-with-label:is(:hover:active, [open]) > 
 }
 
 /* move titlebar buttons to the left if user sets the preference for it */
-@supports -moz-bool-pref("userChrome.css.titlebar-buttons-on-left") {
+@media (-moz-bool-pref: "userChrome.css.titlebar-buttons-on-left") {
   .titlebar-buttonbox-container,
   #toolbar-menubar > .titlebar-buttonbox-container {
     order: 0 !important;

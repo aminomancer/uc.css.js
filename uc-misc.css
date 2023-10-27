@@ -138,7 +138,7 @@ tooltip .uc-tooltip-box {
   and 2) we can't differentiate between secure pages and local pages, system
   pages, etc. so the lock icon could be misleading. for that reason i disabled it
   but maybe someone else wants it. it does look kinda cool i guess. */
-  @supports -moz-bool-pref("userChrome.tabs.tooltip.always-show-lock-icon") {
+  @media (-moz-bool-pref: "userChrome.tabs.tooltip.always-show-lock-icon") {
     display: flex !important;
   }
 }
@@ -544,7 +544,7 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
   outline-offset: unset !important;
 }
 
-@supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
+@media (-moz-bool-pref: "userChrome.css.mac-ui-fonts") {
   @-moz-document regexp("^chrome:(?!\/\/devtools).*") {
     /* for most 12px stuff */
     html:root,
@@ -733,6 +733,13 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
       }
     }
 
+    #translations-button-locale {
+      font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
+      font-weight: var(--uc-font-weight-semibold, 500) !important;
+      line-height: 18px !important;
+      padding: 0 2px !important;
+    }
+
     @-moz-document url-prefix("chrome://browser/content/syncedtabs/sidebar.xhtml") {
       body {
         font-family: SF Pro, SF Arabic, Segoe UI, sans-serif !important;
@@ -749,7 +756,7 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
 }
 
 /* remove tooltip borders if pref is enabled */
-@supports -moz-bool-pref("userChrome.css.remove-tooltip-borders") {
+@media (-moz-bool-pref: "userChrome.css.remove-tooltip-borders") {
   tooltip > description,
   tooltip .uc-tooltip-box,
   .places-tooltip-box,

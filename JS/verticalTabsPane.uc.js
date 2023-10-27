@@ -2405,7 +2405,7 @@ When you collapse the pane with the unpin button, it collapses to a small width 
 #vertical-tabs-tooltip #places-tooltip-insecure-icon[hidden] {
   display: none;
 }
-@supports -moz-bool-pref("userChrome.tabs.tooltip.always-show-lock-icon") {
+@media (-moz-bool-pref: "userChrome.tabs.tooltip.always-show-lock-icon") {
   #vertical-tabs-tooltip #places-tooltip-insecure-icon {
     display: inline-block !important;
   }

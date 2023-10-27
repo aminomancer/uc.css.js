@@ -50,14 +50,12 @@ menupopup#viewSidebarMenu menuitem.menuitem-iconic.webextension-menuitem#menubar
 }
 
 :is(.pageAction-panel-button, .urlbar-page-action)[actionid="_testpilot-containers"] {
-  --pageAction-image-16px: url(chrome://userchrome/content/skin/container-go.svg) !important;
-  --pageAction-image-32px: url(chrome://userchrome/content/skin/container-go.svg) !important;
+  --pageAction-image: url(chrome://userchrome/content/skin/container-go.svg) !important;
 }
 
 /* Want My RSS */
 :is(.pageAction-panel-button, .urlbar-page-action)[actionid="_4d567245-e70d-466a-bb2f-390fc7fb25c2_"i] {
-  --pageAction-image-16px: url(chrome://userchrome/content/material/rss.svg) !important;
-  --pageAction-image-32px: url(chrome://userchrome/content/material/rss.svg) !important;
+  --pageAction-image: url(chrome://userchrome/content/material/rss.svg) !important;
 }
 
 :is(.webextension-browser-action, .eom-addon-button)[data-extensionid="{4d567245-e70d-466a-bb2f-390fc7fb25c2}"i] .toolbarbutton-icon {
@@ -990,7 +988,7 @@ menupopup menuitem[class^="unified-nav"][uri="moz-extension://e158f52d-b5db-4594
 
 /* if icon-only bookmarks toolbar pref is enabled, we need to invert the icon
 differently since we don't want to invert the background on hovering the icon */
-@supports -moz-bool-pref("userChrome.bookmarks-toolbar.icons-only") {
+@media (-moz-bool-pref: "userChrome.bookmarks-toolbar.icons-only") {
   #PersonalToolbar toolbarbutton.bookmark-item:not(.subviewbutton, [id]) .toolbarbutton-icon:is([src^="page-icon:https://github.com"], [src^="page-icon:http://github.com"]) {
     padding-inline: 28px 0 !important;
   }

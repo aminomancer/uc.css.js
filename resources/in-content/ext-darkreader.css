@@ -23,7 +23,7 @@ intended for the new theme, go to settings > devtools > apply new theme. */
     scrollbar-color: var(--uc-panel-button-solid) var(--uc-panel-box-solid) !important;
   }
 
-  @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
+  @media (-moz-bool-pref: "userChrome.css.mac-ui-fonts") {
     :root[uc-extension-id="addon@darkreader.org"] * {
       font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif;
       font-kerning: normal;

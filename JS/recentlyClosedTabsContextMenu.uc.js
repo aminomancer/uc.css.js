@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Undo Recently Closed Tabs in Tab Context Menu
-// @version        2.1.2
+// @version        2.1.3
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -144,6 +144,16 @@ class UndoListInTabmenu {
   constructor() {
     this.create = _ucUtils.createElement;
     this.config = UndoListInTabmenu.config;
+    XPCOMUtils.defineLazyPreferenceGetter(
+      this,
+      "closedTabsFromClosedWindowsEnabled",
+      "browser.sessionstore.closedTabsFromClosedWindows"
+    );
+    XPCOMUtils.defineLazyPreferenceGetter(
+      this,
+      "closedTabsFromAllWindowsEnabled",
+      "browser.sessionstore.closedTabsFromAllWindows"
+    );
     this.registerSheet();
     // set up context menu for TST, if it's installed. it'll set up even if TST
     // is disabled, since otherwise we'd have to listen for addon
@@ -520,7 +530,8 @@ class UndoListInTabmenu {
       let element = aDocument.createXULElement(aTagName);
       element.setAttribute("label", aMenuLabel);
       if (aClosedTab.image) {
-        RecentlyClosedTabsAndWindowsMenuUtils.setImage(aClosedTab, element);
+        const iconURL = PlacesUIUtils.getImageURL(aClosedTab.image);
+        element.setAttribute("image", iconURL);
       }
       element.setAttribute("value", aIndex);
       element.setAttribute(
@@ -534,11 +545,39 @@ class UndoListInTabmenu {
         );
       }
       element.classList.add("recently-closed-item");
-      let cmdCallback =
-        !aIsWindowsFragment && aTagName == "menuitem"
-          ? `undoCloseTab(${aIndex});if(event.button === 1){gBrowser.moveTabToEnd()};`
-          : `undoClose${aIsWindowsFragment ? "Window" : "Tab"}(${aIndex});`;
-      element.setAttribute("oncommand", cmdCallback);
+
+      if (aIsWindowsFragment) {
+        element.setAttribute("oncommand", `undoCloseWindow("${aIndex}");`);
+      } else if (typeof aClosedTab.sourceClosedId == "number") {
+        // sourceClosedId is used to look up the closed window to remove it when the tab is restored
+        let { sourceClosedId } = aClosedTab;
+        element.setAttribute("source-closed-id", sourceClosedId);
+        element.setAttribute("value", aClosedTab.closedId);
+        element.removeAttribute("oncommand");
+        element.addEventListener(
+          "command",
+          event => {
+            SessionStore.undoClosedTabFromClosedWindow(
+              { sourceClosedId },
+              aClosedTab.closedId
+            );
+            if (event.button === 1) {
+              gBrowser.moveTabToEnd();
+            }
+          },
+          { once: true }
+        );
+      } else {
+        // sourceWindowId is used to look up the closed tab entry to remove it when it is restored
+        let { sourceWindowId } = aClosedTab;
+        element.setAttribute("value", aIndex);
+        element.setAttribute("source-window-id", sourceWindowId);
+        element.setAttribute(
+          "oncommand",
+          `undoCloseTab(${aIndex}, "${sourceWindowId}");if(event.button === 1){gBrowser.moveTabToEnd()};`
+        );
+      }
+
       let tabData;
       tabData = aIsWindowsFragment ? aClosedTab : aClosedTab.state;
       let activeIndex = (tabData.index || tabData.entries.length) - 1;
@@ -580,7 +619,6 @@ class UndoListInTabmenu {
       aPrefixRestoreAll,
       aIsWindowsFragment,
       aRestoreAllLabel,
-      aEntryCount,
       aTagName
     ) {
       let restoreAllElements = aDocument.createXULElement(aTagName);
@@ -591,11 +629,11 @@ class UndoListInTabmenu {
           aRestoreAllLabel
         )
       );
-      restoreAllElements.setAttribute(
-        "oncommand",
-        `for (var i = 0; i < ${aEntryCount}; i++) undoClose${
-          aIsWindowsFragment ? "Window" : "Tab"
-        }();`
+      restoreAllElements.addEventListener(
+        "command",
+        aIsWindowsFragment
+          ? RecentlyClosedTabsAndWindowsMenuUtils.onRestoreAllWindowsCommand
+          : RecentlyClosedTabsAndWindowsMenuUtils.onRestoreAllTabsCommand
       );
       if (aPrefixRestoreAll) {
         aFragment.insertBefore(restoreAllElements, aFragment.firstChild);
@@ -652,7 +690,6 @@ class UndoListInTabmenu {
           aTagName == "menuitem"
             ? "recently-closed-menu-reopen-all-windows"
             : "recently-closed-panel-reopen-all-windows",
-          closedWindowData.length,
           aTagName
         );
       }
@@ -665,32 +702,68 @@ class UndoListInTabmenu {
       forContext
     ) {
       let doc = aWindow.document;
+      const isPrivate = PrivateBrowsingUtils.isWindowPrivate(aWindow);
       let fragment = doc.createDocumentFragment();
-      if (SessionStore.getClosedTabCountForWindow(aWindow) != 0) {
-        let closedTabs = SessionStore.getClosedTabDataForWindow(aWindow);
-        for (let i = 0; i < closedTabs.length; i++) {
-          RecentlyClosedTabsAndWindowsMenuUtils.createEntry(
-            aTagName,
-            false,
-            i,
-            closedTabs[i],
+      let isEmpty = true;
+      if (
+        SessionStore.getClosedTabCount({
+          sourceWindow: aWindow,
+          closedTabsFromClosedWindows: false,
+        })
+      ) {
+        isEmpty = false;
+        const browserWindows = this.closedTabsFromAllWindowsEnabled
+          ? SessionStore.getWindows(aWindow)
+          : [aWindow];
+        for (const win of browserWindows) {
+          let closedTabs = SessionStore.getClosedTabDataForWindow(win);
+          for (let i = 0; i < closedTabs.length; i++) {
+            RecentlyClosedTabsAndWindowsMenuUtils.createEntry(
+              aTagName,
+              false,
+              i,
+              closedTabs[i],
+              doc,
+              closedTabs[i].title,
+              fragment,
+              forContext
+            );
+          }
+        }
+
+        if (
+          !isPrivate &&
+          this.closedTabsFromClosedWindowsEnabled &&
+          SessionStore.getClosedTabCountFromClosedWindows()
+        ) {
+          isEmpty = false;
+          const closedTabs = SessionStore.getClosedTabDataFromClosedWindows();
+          for (let i = 0; i < closedTabs.length; i++) {
+            RecentlyClosedTabsAndWindowsMenuUtils.createEntry(
+              aTagName,
+              false,
+              i,
+              closedTabs[i],
+              doc,
+              closedTabs[i].title,
+              fragment,
+              forContext
+            );
+          }
+        }
+
+        if (!isEmpty) {
+          RecentlyClosedTabsAndWindowsMenuUtils.createRestoreAllEntry(
             doc,
-            closedTabs[i].title,
             fragment,
-            forContext
+            aPrefixRestoreAll,
+            false,
+            aTagName == "menuitem"
+              ? "recently-closed-menu-reopen-all-tabs"
+              : "recently-closed-panel-reopen-all-tabs",
+            aTagName
           );
         }
-        RecentlyClosedTabsAndWindowsMenuUtils.createRestoreAllEntry(
-          doc,
-          fragment,
-          aPrefixRestoreAll,
-          false,
-          aTagName == "menuitem"
-            ? "recently-closed-menu-reopen-all-tabs"
-            : "recently-closed-panel-reopen-all-tabs",
-          closedTabs.length,
-          aTagName
-        );
       }
       return fragment;
     };

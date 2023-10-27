@@ -97,7 +97,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
 }
 
 /* The (deprecated) custom theme */
-@supports -moz-bool-pref("userChrome.css.wikipedia.dark-theme-enabled") {
+@media (-moz-bool-pref: "userChrome.css.wikipedia.dark-theme-enabled") {
   @-moz-document regexp("^https?:\/\/(?!m\.)(?:[a-zA-Z]{1,3}\-)?(?:[a-zA-Z]{1,3}\.)?(?:wikipedia|wikimedia)\.org.*$") {
     /* latin-ext */
     @font-face {

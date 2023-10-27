@@ -296,72 +296,83 @@
     padding-block: 0 !important;
   }
 
-  message-bar:not([hidden]) {
-    display: flex !important;
-    flex-flow: row nowrap !important;
-    margin-top: 15px !important;
-    overflow: hidden;
-    margin-inline: -15.5px !important;
+  link[rel="stylesheet"] {
+    &[href="chrome://global/content/elements/message-bar.css"],
+    &[href="chrome://global/content/elements/moz-message-bar.css"] {
+      ~ .container {
+        padding: 8px !important;
+        border-radius: 0 !important;
+        flex-grow: 1;
+
+        .content {
+          display: flex !important;
+          margin-inline: 8px 0 !important;
+          gap: 4px 12px !important;
+          justify-content: space-between !important;
+
+          + .spacer:last-child {
+            display: none;
+          }
+
+          .icon-container {
+            margin-inline-start: 0 !important;
+          }
+        }
+      }
+    }
   }
 
-  link[rel="stylesheet"][href="chrome://global/content/elements/message-bar.css"] ~ .container {
-    padding: 8px !important;
-    border-radius: 0 !important;
-    flex-grow: 1;
-  }
+  message-bar,
+  moz-message-bar {
+    &:not([hidden]) {
+      display: flex !important;
+      flex-flow: row nowrap !important;
+      margin-top: 15px !important;
+      overflow: hidden;
+      margin-inline: -15.5px !important;
+      border: 0 !important;
+    }
 
-  link[rel="stylesheet"][href="chrome://global/content/elements/message-bar.css"] ~ .container .content {
-    display: flex !important;
-    flex-flow: row nowrap;
-    flex-grow: 1;
-    justify-content: space-between !important;
-    white-space: nowrap !important;
-    margin-inline: 8px 0 !important;
-  }
+    > span {
+      white-space: break-spaces !important;
+      flex-shrink: 1;
+      flex-grow: 1;
+      overflow: hidden;
+      overflow-wrap: break-word !important;
+      text-overflow: ellipsis !important;
+    }
 
-  link[rel="stylesheet"][href="chrome://global/content/elements/message-bar.css"] ~ .container .content + .spacer:last-child {
-    display: none;
-  }
+    > button {
+      display: inline-block !important;
+      flex-shrink: 0;
+      margin: 0 !important;
+      cursor: pointer;
+    }
 
-  message-bar > span {
-    white-space: break-spaces !important;
-    flex-shrink: 1;
-    flex-grow: 1;
-    overflow: hidden;
-    overflow-wrap: break-word !important;
-    text-overflow: ellipsis !important;
-  }
+    &[type="warning"]:not([message-bar-type="infobar"]) {
+      --message-bar-background-color: var(--low-warning-background) !important;
+      --message-bar-text-color: var(--text-color) !important;
+    }
 
-  message-bar > button {
-    display: inline-block !important;
-    flex-shrink: 0;
-    margin: 0 !important;
-    cursor: pointer;
-  }
+    &:is([type="system"], [type="info"], [type="generic"]) {
+      --message-bar-background-color: var(--grey-60) !important;
+      --message-bar-text-color: var(--text-color) !important;
+    }
 
-  message-bar[type="warning"]:not([message-bar-type="infobar"]) {
-    --message-bar-background-color: var(--low-warning-background) !important;
-    --message-bar-text-color: var(--text-color) !important;
-  }
+    &[type="error"]:not([message-bar-type="infobar"]) {
+      --message-bar-background-color: color-mix(in srgb, transparent 15%, var(--uc-warning-background)) !important;
+      --message-bar-text-color: var(--text-color) !important;
+    }
 
-  message-bar:is([type="system"], [type="info"], [type="generic"]) {
-    --message-bar-background-color: var(--grey-60) !important;
-    --message-bar-text-color: var(--text-color) !important;
-  }
+    &[type="critical"]:not([message-bar-type="infobar"]) {
+      --message-bar-background-color: color-mix(in srgb, hsla(-2, 100%, 60%, 0.5) 45%, var(--uc-warning-background)) !important;
+      --message-bar-text-color: var(--text-color) !important;
+    }
 
-  message-bar[type="error"]:not([message-bar-type="infobar"]) {
-    --message-bar-background-color: color-mix(in srgb, transparent 15%, var(--uc-warning-background)) !important;
-    --message-bar-text-color: var(--text-color) !important;
-  }
-
-  message-bar[type="critical"]:not([message-bar-type="infobar"]) {
-    --message-bar-background-color: color-mix(in srgb, hsla(-2, 100%, 60%, 0.5) 45%, var(--uc-warning-background)) !important;
-    --message-bar-text-color: var(--text-color) !important;
-  }
-
-  message-bar[type="success"]:not([message-bar-type="infobar"]) {
-    --message-bar-background-color: color-mix(in srgb, transparent 75%, var(--secure-color)) !important;
-    --message-bar-text-color: var(--text-color) !important;
+    &[type="success"]:not([message-bar-type="infobar"]) {
+      --message-bar-background-color: color-mix(in srgb, transparent 75%, var(--secure-color)) !important;
+      --message-bar-text-color: var(--text-color) !important;
+    }
   }
 
   @-moz-document regexp("^(about:|chrome:|moz-extension:).*") {
@@ -733,7 +744,7 @@
       outline: 1px solid var(--global-focus-outline-color) !important;
     }
 
-    @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
+    @media (-moz-bool-pref: "userChrome.css.mac-ui-fonts") {
       body {
         font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
         font-kerning: normal !important;
@@ -1139,7 +1150,7 @@
     text-shadow: 0.5px 0.5px 0.5px black, 0 0 1px black, 0 0 1px black !important;
   }
 
-  @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
+  @media (-moz-bool-pref: "userChrome.css.mac-ui-fonts") {
     :root[uc-extension-id="screenshots@mozilla.org"] .pixel-dimensions {
       font-weight: var(--uc-font-weight-bold) !important;
       font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
@@ -1149,7 +1160,7 @@
 }
 
 @-moz-document regexp("^(about:|chrome:\/\/).*") {
-  @supports -moz-bool-pref("userChrome.css.hide-promotion") {
+  @media (-moz-bool-pref: "userChrome.css.hide-promotion") {
     .promo,
     .vpn-banner {
       display: none !important;

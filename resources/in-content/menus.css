@@ -405,7 +405,7 @@ menuitem[image="chrome://browser/skin/preferences/application.png"] .menu-iconic
   display: none;
 }
 
-@supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
+@media (-moz-bool-pref: "userChrome.css.mac-ui-fonts") {
   #ContentSelectDropdown,
   menupopup.in-menulist {
     font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
@@ -419,7 +419,7 @@ menuitem[image="chrome://browser/skin/preferences/application.png"] .menu-iconic
   }
 }
 
-@supports -moz-bool-pref("userChrome.css.remove-menu-borders") {
+@media (-moz-bool-pref: "userChrome.css.remove-menu-borders") {
   link[href="chrome://global/skin/global.css"] ~ .menupopup-arrowscrollbox {
     border: none !important;
   }

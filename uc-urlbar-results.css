@@ -107,13 +107,11 @@ by underlining them (requires urlbarMods.uc.js) */
   align-items: center !important;
 }
 
-.urlbarView-row[dynamicType="quickactions"] .urlbarView-quickaction-row {
+.urlbarView-row[dynamicType="quickactions"] .urlbarView-quickaction-button {
   background: var(--arrowpanel-faint) !important;
   border-radius: 20px !important;
   padding: 4px 7px !important;
   align-items: normal !important;
-  line-height: 13px !important;
-  height: 24px !important;
   box-sizing: border-box !important;
   border: 1px solid var(--panel-separator-color) !important;
   box-shadow: none !important;
@@ -124,13 +122,13 @@ by underlining them (requires urlbarMods.uc.js) */
   color: var(--panel-description-color) !important;
 }
 
-.urlbarView-row[dynamicType="quickactions"] .urlbarView-quickaction-row:hover:not([disabled]) {
+.urlbarView-row[dynamicType="quickactions"] .urlbarView-quickaction-button:hover:not([disabled]) {
   background: var(--uc-arrowpanel-dimmed) !important;
   color: var(--panel-shortcut-focus) !important;
   fill-opacity: 1 !important;
 }
 
-.urlbarView-row[dynamicType="quickactions"] .urlbarView-quickaction-row:is(:focus-visible, [selected]):not([disabled]) {
+.urlbarView-row[dynamicType="quickactions"] .urlbarView-quickaction-button:is(:focus-visible, [selected]):not([disabled]) {
   background: var(--uc-arrowpanel-dimmed-further) !important;
   border-color: transparent !important;
   color: var(--panel-shortcut-focus) !important;
@@ -143,7 +141,7 @@ by underlining them (requires urlbarMods.uc.js) */
   color: inherit !important;
 }
 
-.urlbarView-row[dynamicType="quickactions"] .urlbarView-quickaction-row:is(:hover, :focus-visible, [selected]):not([disabled]) .urlbarView-label {
+.urlbarView-row[dynamicType="quickactions"] .urlbarView-quickaction-button:is(:hover, :focus-visible, [selected]):not([disabled]) .urlbarView-label {
   opacity: 1;
 }
 
@@ -665,6 +663,14 @@ by underlining them (requires urlbarMods.uc.js) */
   opacity: 1 !important;
 }
 
+.urlbarView-button-menu:not(:empty) {
+  color: var(--panel-shortcut-focus) !important;
+}
+
+.urlbarView-row[selected] > .urlbarView-button-menu:not(:empty) {
+  color: inherit !important;
+}
+
 .urlbarView-row[has-action] .urlbarView-title[isurl] strong {
   text-decoration: underline !important;
 }
@@ -884,7 +890,7 @@ by underlining them (requires urlbarMods.uc.js) */
 
 /* the animation's framerate can stall when loading really heavy pages.
 so you might wanna turn the animation off. I might even make it off by default. */
-@supports -moz-bool-pref("userChrome.urlbar-results.disable_animation") {
+@media (-moz-bool-pref: "userChrome.urlbar-results.disable_animation") {
   #urlbar[breakout][breakout-extend] .urlbarView,
   #urlbar[breakout][breakout-extend] #urlbar-background {
     animation: none !important;
@@ -960,7 +966,7 @@ so you might wanna turn the animation off. I might even make it off by default. 
   box-sizing: border-box !important;
 }
 
-@supports -moz-bool-pref("userChrome.urlbar-results.hide-help-button") {
+@media (-moz-bool-pref: "userChrome.urlbar-results.hide-help-button") {
   .urlbarView-help {
     display: none !important;
   }

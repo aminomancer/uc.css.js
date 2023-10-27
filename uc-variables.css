@@ -94,6 +94,7 @@ menupopup {
   --urlbarView-result-button-hover-background-color: var(--arrowpanel-dimmed) !important;
   --urlbarView-result-button-selected-color: var(--toolbar-field-focus-color) !important;
   --urlbarView-result-button-selected-background-color: var(--arrowpanel-faint) !important;
+  --urlbarView-highlight-background: var(--arrowpanel-dimmed-further) !important;
   --tab-min-height: var(--uc-tab-min-height) !important;
   --tab-block-margin: 0px !important;
   --inline-tab-padding: 10px !important;
@@ -182,6 +183,10 @@ menupopup {
   --buttons-primary-button-color: var(--uc-parent-primary-button-text-color) !important;
   --buttons-secondary-hover-bgcolor: var(--arrowpanel-dimmed) !important;
   --buttons-secondary-active-bgcolor: var(--arrowpanel-dimmed-further) !important;
+
+  --brand-color-accent: var(--purple-40) !important;
+  --brand-color-accent-hover: var(--purple-35) !important;
+  --brand-color-accent-active: var(--purple-30) !important;
 
   --vertical-tabs-pane-background: var(--ui-secondary-bg) !important;
   --vpn-on-icon: url(chrome://userchrome/content/skin/vpn-on-light.svg);

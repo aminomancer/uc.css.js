@@ -538,6 +538,8 @@ Adds some shortcuts for bookmarking pages. First, middle-clicking the bookmarks 
 
 #### [Browser Chrome Bookmark Keywords](/JS/browserChromeBookmarkKeywords.uc.js):
 
+⚠️ **_Currently broken._**
+
 Allow the creation of special keyword bookmarks with JavaScript to be executed in the browser chrome (i.e., the main window).<details><summary>💬 **_More details..._**</summary>
 
 In case you weren't aware, Firefox has an old feature, somewhat obscure now, that lets you define [keyword shortcuts for bookmarks][]. Once a bookmark is given a keyword, you can type the keyword into the urlbar and Firefox will offer the corresponding bookmark as a result. If the bookmark URL includes the placeholder `%s`, it will be replaced by whatever you typed after the keyword. You can use this to search specific webpages, but you can also use the `javascript:` URL protocol to run JavaScript in the current tab. That is all built into Firefox.

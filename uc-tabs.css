@@ -122,7 +122,7 @@
   font-weight: revert !important;
 }
 
-/* highlight unread tabs; requires italicizeUnreadTabs.uc.js */
+/* highlight unread tabs; requires unreadTabMods.uc.js */
 :root[italic-unread-tabs] .tabbrowser-tab[notselectedsinceload]:not([pending]),
 :root[italic-unread-tabs] .tabbrowser-tab[notselectedsinceload][pending][busy] {
   font-style: italic !important;
@@ -353,7 +353,7 @@ just like they do with --identity-tab-color */
 }
 
 /* disable the corners if the pref is enabled */
-@supports -moz-bool-pref("userChrome.tabs.rounded-outer-corners.disabled") {
+@media (-moz-bool-pref: "userChrome.tabs.rounded-outer-corners.disabled") {
   .tabbrowser-tab .tab-stack::before,
   .tabbrowser-tab .tab-stack::after {
     display: none !important;
@@ -829,7 +829,7 @@ thing with the all-tabs-menu loading icons in the next ruleset below. */
 doesn't hide the close button since the tab doesn't get shrunk in that case.
 this requires you to make a pref in about:config and set it to true:
 "userChrome.tabs.pinned-tabs.close-buttons.disabled" */
-@supports -moz-bool-pref("userChrome.tabs.pinned-tabs.close-buttons.disabled") {
+@media (-moz-bool-pref: "userChrome.tabs.pinned-tabs.close-buttons.disabled") {
   .tabbrowser-tab[pinned] .tab-close-button {
     display: none !important;
   }

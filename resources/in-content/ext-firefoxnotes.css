@@ -60,7 +60,7 @@
     min-height: 44px !important;
   }
 
-  @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
+  @media (-moz-bool-pref: "userChrome.css.mac-ui-fonts") {
     :root[uc-extension-id="notes@mozilla.com"],
     :root[uc-extension-id="notes@mozilla.com"] body {
       --ck-font-face: SF Pro, SF Arabic, Segoe UI, sans-serif !important;

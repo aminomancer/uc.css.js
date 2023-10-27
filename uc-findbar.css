@@ -366,7 +366,7 @@ findbar .matches-indicator {
   display: none !important;
 }
 
-@supports -moz-bool-pref("userChrome.findbar.hide-on-unfocus") {
+@media (-moz-bool-pref: "userChrome.findbar.hide-on-unfocus") {
   findbar:not(:focus-within) {
     transform: translateY(calc(0px - var(--findbar-height) - 16px));
     pointer-events: none;
@@ -375,7 +375,7 @@ findbar .matches-indicator {
   }
 }
 
-@supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
+@media (-moz-bool-pref: "userChrome.css.mac-ui-fonts") {
   findbar .matches-indicator {
     font-weight: var(--uc-font-weight-thin, 300) !important;
   }

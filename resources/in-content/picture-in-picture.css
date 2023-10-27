@@ -70,7 +70,7 @@
   align-content: center !important;
 }
 
-@supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
+@media (-moz-bool-pref: "userChrome.css.mac-ui-fonts") {
   .pip-wrapper .pip-icon-label {
     font-family: SF Pro, SF Arabic, Segoe UI, sans-serif !important;
     font-kerning: normal !important;

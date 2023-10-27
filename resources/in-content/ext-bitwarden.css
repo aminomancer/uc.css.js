@@ -12,7 +12,7 @@ iframe#bit-notification-bar-iframe[src^="moz-extension://"] {
 }
 
 @-moz-document regexp("^moz-extension://.*/popup/index.html.*") {
-  @supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
+  @media (-moz-bool-pref: "userChrome.css.mac-ui-fonts") {
     :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] :where(body, input, button) {
       font-family: SF Pro, SF Arabic, Segoe UI, sans-serif !important;
     }

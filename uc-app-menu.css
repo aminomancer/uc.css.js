@@ -542,7 +542,7 @@ toolbarseparator.proton-zap {
   opacity: 0.7 !important;
 }
 
-@supports -moz-bool-pref("userChrome.panels.vibrant-fxa-banner") {
+@media (-moz-bool-pref: "userChrome.panels.vibrant-fxa-banner") {
   #appMenu-fxa-status2 > #appMenu-fxa-label2,
   [mainViewId="PanelUI-fxa"] #fxa-manage-account-button {
     background-image: linear-gradient(-90deg, hsla(259.9, 100%, 67.5%, 0.275) 0%, hsla(330.8, 100%, 64.5%, 0.275) 52.08%, hsla(37.5, 100%, 65.5%, 0.275) 100%);
@@ -563,7 +563,7 @@ toolbarseparator.proton-zap {
   color: var(--panel-shortcut-color);
 }
 
-@supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
+@media (-moz-bool-pref: "userChrome.css.mac-ui-fonts") {
   #appMenu-fxa-text,
   #appMenu-fxa-status2[fxastatus] > #appMenu-fxa-label2 > vbox > #appMenu-header-description,
   #appMenu-fxa-status2:not([fxastatus]) > #appMenu-fxa-label2 {
@@ -744,6 +744,10 @@ toolbarbutton.subviewbutton.sendToDevice-device[clientType=""][clientId=""] + to
   margin: 0 !important;
 }
 
+.addon-banner-item > .toolbarbutton-text {
+  order: 2 !important;
+}
+
 .panel-banner-item:not(.addon-banner-item) {
   margin: var(--arrowpanel-menuitem-margin) !important;
   margin-bottom: 4px !important;
@@ -754,7 +758,7 @@ toolbarbutton.subviewbutton.sendToDevice-device[clientType=""][clientId=""] + to
   --panel-banner-item-active-bgcolor: hsl(96, 65%, 75%);
 }
 
-:root[lwt-popup-brighttext] .panel-banner-item:not(.addon-banner-item) {
+:root[lwt-popup="dark"] .panel-banner-item:not(.addon-banner-item) {
   --panel-banner-item-color: #f9f9fa;
   --panel-banner-item-background-color: rgba(48, 230, 11, 0.1);
   --panel-banner-item-hover-bgcolor: rgba(48, 230, 11, 0.15);

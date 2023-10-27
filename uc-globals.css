@@ -448,7 +448,7 @@ popupnotification,
 }
 
 /* SF Pro is a bit heavier than Segoe UI so adjust font weights on certain elements */
-@supports -moz-bool-pref("userChrome.css.mac-ui-fonts") {
+@media (-moz-bool-pref: "userChrome.css.mac-ui-fonts") {
   :root {
     --uc-font-weight-extrabold: 600;
     --uc-font-weight-bold: 500;
@@ -457,7 +457,7 @@ popupnotification,
   }
 }
 
-@supports -moz-bool-pref("userChrome.css.menupopup-shadows") {
+@media (-moz-bool-pref: "userChrome.css.menupopup-shadows") {
   :root {
     --menupopup-inner-box-margin: 4px !important;
     --panel-inner-box-margin: 4px;
@@ -474,7 +474,7 @@ deleting this rule, you can simply disable rounded outside corners by setting
 userChrome.tabs.rounded-outer-corners.disabled to false. this will mean only the
 top corners are rounded, but it'll bring back the scroll buttons without any
 visual bugs. */
-@supports -moz-bool-pref("userChrome.tabs.rounded-outer-corners.disabled") {
+@media (-moz-bool-pref: "userChrome.tabs.rounded-outer-corners.disabled") {
   :root {
     --tabbrowser-arrowscrollbox-display: block;
   }

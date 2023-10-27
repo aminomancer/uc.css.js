@@ -30,7 +30,7 @@ panelview {
 }
 
 /* allow panel height to flex and animate */
-@supports -moz-bool-pref("userChrome.panels.allow-height-flex") {
+@media (-moz-bool-pref: "userChrome.panels.allow-height-flex") {
   panelview {
     min-height: revert !important;
     max-height: revert !important;
@@ -199,7 +199,7 @@ no longer necessary after modern flexbox emulation. */
 }
 
 /* protect the arrowpanel animations from future updates */
-@supports -moz-bool-pref("xul.panel-animations.enabled") {
+@media (-moz-bool-pref: "xul.panel-animations.enabled") {
   @media (prefers-reduced-motion: no-preference) {
     @media (-moz-platform: macos) {
       panel[type="arrow"],
@@ -1149,7 +1149,7 @@ popupnotificationcontent label[control]:not([hidden]) + menulist {
   font-size: 1em !important;
 }
 
-:root[lwt-popup-brighttext] panel .identity-popup-warning-yellow .text-link {
+:root[lwt-popup="dark"] panel .identity-popup-warning-yellow .text-link {
   color: var(--low-warning-text-color) !important;
 }
 
