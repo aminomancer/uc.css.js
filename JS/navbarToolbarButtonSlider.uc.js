@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Navbar Toolbar Button Slider
-// @version        2.9.5
+// @version        2.9.6
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @long-description
@@ -768,7 +768,7 @@ class NavbarToolbarSlider {
           scrollAmount *= this.clientWidth;
         } else if (e.deltaMode == e.DOM_DELTA_LINE) {
           let buttons = [...this.firstElementChild.children].filter(el => {
-            const style = this.win.getComputedStyle(el);
+            const style = this.ownerGlobal.getComputedStyle(el);
             return style?.visibility === "visible" && style?.display !== "none";
           }).length;
           if (buttons) {
