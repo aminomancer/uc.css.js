@@ -21,7 +21,7 @@ tooltip {
   background-color: transparent !important;
   color: var(--tooltip-color) !important;
   border: none !important;
-  max-width: max(30vw, 40em);
+  max-width: max(20vw, 30em);
   padding: 5px !important;
   margin-inline-start: -5px !important;
   margin-block-start: 16px !important;

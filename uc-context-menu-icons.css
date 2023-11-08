@@ -57,6 +57,7 @@ menuitem#sanitizeItem > .menu-text,
 #context-copyimage .menu-text,
 #context-copyimage-contents .menu-text,
 #context-copylink .menu-text,
+#context-stripOnShareLink .menu-text,
 #menu_copy .menu-text,
 :is(#placesContext_show_bookmark\:info, #placesContext_show_folder\:info, #placesContext_show\:info) .menu-text,
 #placesContext_showInFolder .menu-text,
@@ -460,6 +461,7 @@ menuitem#sanitizeItem::before,
 #context-copyaudiourl::before,
 #context-copyimage::before,
 #context-copylink::before,
+#context-stripOnShareLink::before,
 #menu_openLocation::before,
 #context-copyvideourl::before,
 #context-bookmarkframe::before,
@@ -665,7 +667,6 @@ menuitem.unified-extensions-context-menu-Options::before,
 .urlbarView-result-menu > menuitem[data-command="dismiss"]::before {
   content: "";
   position: relative;
-  display: -moz-inline-box;
   width: 16px;
   height: 16px;
   min-width: 16px;
@@ -1153,6 +1154,10 @@ menuitem.unified-extensions-context-menu-move-widget-down::before {
 
 :is(#context-copyvideourl, #context-copyaudiourl, #context-copyimage, #context-copylink, #menu_openLocation, menuitem.customize-context-CopyURL, menuitem.unified-extensions-context-menu-CopyURL)::before {
   background-image: url(chrome://userchrome/content/skin/link.svg);
+}
+
+#context-stripOnShareLink::before {
+  background-image: url(chrome://userchrome/content/glyph-highlights-16.svg) !important;
 }
 
 :is(#context-bookmarkframe, #context-bookmarklink)::before {

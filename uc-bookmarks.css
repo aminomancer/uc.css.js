@@ -70,12 +70,6 @@
   margin-inline-start: 0 !important;
 }
 
-#editBookmarkPanelBottomButtons {
-  margin: 0 !important;
-  gap: 8px !important;
-  min-width: unset !important;
-}
-
 #editBookmarkPanel #editBookmarkPanelContent > label:not(.editBMPanel_nameRow),
 #editBookmarkPanel #editBookmarkPanelContent > #editBMPanel_folderTreeRow,
 #editBookmarkPanel #editBookmarkPanelContent > #editBMPanel_tagsSelectorRow {
@@ -244,14 +238,6 @@
   --menupopup-inner-box-margin: 0 !important;
 }
 
-/* this goes in userChrome.au.css */
-#editBookmarkPanelDropMarker,
-#editBMPanel_folderMenuList::part(dropmarker) {
-  appearance: none !important;
-  list-style-image: url(chrome://userchrome/content/devtools/select-arrow.svg) !important;
-  margin-block: 0 !important;
-}
-
 #editBookmarkPanel #editBookmarkPanelContent button {
   appearance: none !important;
   background-color: var(--ui-textbox-bgcolor) !important;
@@ -274,6 +260,12 @@
 #editBookmarkPanel #editBookmarkPanelContent button:hover:active {
   appearance: none !important;
   background-color: var(--ebmp-focus-bgcolor) !important;
+}
+
+#editBookmarkPanel .panel-footer {
+  margin: 0 !important;
+  gap: 8px !important;
+  min-width: unset !important;
 }
 
 #editBookmarkPanel .panel-footer > button {

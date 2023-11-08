@@ -738,10 +738,14 @@ popupnotificationcontent label[control]:not([hidden]) + menulist {
   text-decoration: none !important;
 }
 
-:is(.popup-notification-learnmore-link, panel .text-link):is(:hover, :focus-visible),
-#protections-popup .text-link:is(:hover, :focus-visible) {
-  text-decoration: underline !important;
-  outline: revert !important;
+.popup-notification-learnmore-link,
+panel :is(a, .text-link) {
+  text-decoration: none !important;
+
+  &:is(:hover, :focus-visible) {
+    text-decoration: underline !important;
+    outline: none !important;
+  }
 }
 
 .popup-subitem {

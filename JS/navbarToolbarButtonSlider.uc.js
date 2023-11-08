@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Navbar Toolbar Button Slider
-// @version        2.9.4
+// @version        2.9.5
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @long-description
@@ -336,19 +336,13 @@ class NavbarToolbarSlider {
         // return setTimeout(() => this.setMaxWidth(), 1);
         return requestAnimationFrame(() => this.setMaxWidth());
       }
-      if (arr) {
-        arr
-          .slice(0, length)
-          .forEach(el => (maxWidth += NavbarToolbarSlider.parseWidth(el)));
-      } else {
-        widgetList
-          .slice(0, length)
-          .forEach(
-            w =>
-              (maxWidth += NavbarToolbarSlider.parseWidth(
-                w.forWindow(window).node
-              ))
-          );
+      let nodes = arr ?? widgetList.map(w => w.forWindow(window).node);
+      for (let i = 0; i < length; i++) {
+        let el = nodes[i];
+        const style = window.getComputedStyle(el);
+        if (style?.visibility === "visible" && style?.display !== "none") {
+          maxWidth += NavbarToolbarSlider.parseWidth(el);
+        }
       }
     } else {
       maxWidth =
@@ -725,17 +719,17 @@ class NavbarToolbarSlider {
       this.scrollBy({ left, behavior: instant ? "instant" : "auto" });
     };
     // these 2 are just here for future extension
-    outer.on_Scroll = function () {
+    outer.on_scroll = function () {
       if (this.open) return;
       this._isScrolling = true;
     };
-    outer.on_Scrollend = function () {
+    outer.on_scrollend = function () {
       this._isScrolling = false;
       this._destination = 0;
       this._direction = 0;
     };
     // main wheel event callback
-    outer.on_Wheel = function (e) {
+    outer.on_wheel = function (e) {
       // this is what the mutation observer was for. when a toolbar button in
       // the slider has its popup open, we set outer.open = true. so if
       // outer.open = true we don't want to scroll at all. in other words, if a
@@ -773,7 +767,10 @@ class NavbarToolbarSlider {
         if (e.deltaMode == e.DOM_DELTA_PAGE) {
           scrollAmount *= this.clientWidth;
         } else if (e.deltaMode == e.DOM_DELTA_LINE) {
-          let buttons = this.firstElementChild.children.length;
+          let buttons = [...this.firstElementChild.children].filter(el => {
+            const style = this.win.getComputedStyle(el);
+            return style?.visibility === "visible" && style?.display !== "none";
+          }).length;
           if (buttons) {
             let lineAmount = this.scrollWidth / buttons;
             let clientSize = this.clientWidth;
@@ -826,9 +823,23 @@ class NavbarToolbarSlider {
       }
       aButton.addEventListener("blur", this);
     };
-    outer.addEventListener("wheel", outer.on_Wheel);
-    outer.addEventListener("scroll", outer.on_Scroll);
-    outer.addEventListener("scrollend", outer.on_Scrollend);
+    outer.handleEvent = function (e) {
+      switch (e.type) {
+        case "wheel":
+          this.on_wheel(e);
+          break;
+        case "scroll":
+          this.on_scroll(e);
+          break;
+        case "scrollend":
+          this.on_scrollend(e);
+          break;
+        default:
+      }
+    };
+    for (const type of ["wheel", "scroll", "scrollend"]) {
+      outer.addEventListener(type, outer);
+    }
   }
   // don't show the confirmation hint on the bookmarks menu
   // or library button if they're scrolled out of view

@@ -23,7 +23,7 @@ tooltip {
   color: var(--tooltip-color);
   border: none;
   border-radius: 0;
-  max-width: max(30vw, 40em);
+  max-width: max(20vw, 30em);
   padding: 5px;
   pointer-events: none;
   --uc-tooltip-inner-padding: 4px 7px 6px 7px;

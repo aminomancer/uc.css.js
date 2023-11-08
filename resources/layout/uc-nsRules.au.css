@@ -996,7 +996,7 @@ of moz-document in stylesheets with file:// urls */
   }
 
   /* dropmarkers and other select/menulist stuff */
-  @-moz-document url(chrome://browser/content/browser.xhtml), url(chrome://mozapps/content/handling/permissionDialog.xhtml), url(chrome://mozapps/content/handling/appChooser.xhtml), url-prefix(chrome://global/content/print.html), url(chrome://browser/content/places/bookmarkProperties.xhtml), url(chrome://browser/content/places/bookmarkProperties2.xhtml) {
+  @-moz-document url(chrome://browser/content/browser.xhtml), url(chrome://mozapps/content/downloads/unknownContentType.xhtml), url(chrome://mozapps/content/handling/permissionDialog.xhtml), url(chrome://mozapps/content/handling/appChooser.xhtml), url-prefix(chrome://global/content/print.html), url(chrome://browser/content/places/bookmarkProperties.xhtml), url(chrome://browser/content/places/bookmarkProperties2.xhtml) {
     menulist:not([native]) {
       padding-inline: 6px;
     }
@@ -1054,29 +1054,28 @@ of moz-document in stylesheets with file:// urls */
       margin: 1px 0;
     }
 
-    :is(panel, dialog) menulist::part(dropmarker) {
-      width: 12px;
-      margin-inline: var(--menulist-dropmarker-margin, 8px 0);
-      align-items: center;
-      justify-items: center;
-      -moz-context-properties: fill, fill-opacity;
-    }
-
-    :is(panel, dialog) menulist::part(dropmarker-icon) {
-      list-style-image: url(chrome://userchrome/content/arrow-dropdown-16.svg);
+    menulist::part(dropmarker) {
+      display: flex;
+      appearance: none;
       width: 14px;
-      height: 14px;
-      margin-block: 0 !important;
-      fill-opacity: var(--menulist-dropmarker-opacity, 0.6);
-      -moz-context-properties: revert;
+      flex: revert;
+      margin-inline: var(--menulist-dropmarker-margin, 8px 0);
+      margin-block: 0;
+      padding: 0;
+      border: 0;
+      content: url(chrome://userchrome/content/arrow-dropdown-16.svg);
+      fill: currentColor;
+      fill-opacity: var(--menulist-dropmarker-opacity, 1);
+      -moz-context-properties: fill, fill-opacity;
     }
 
     #editBMPanel_folderMenuList::part(icon) {
       margin-inline: 1px 6px;
     }
 
-    #editBookmarkPanel menulist::part(dropmarker-icon) {
-      list-style-image: url(chrome://userchrome/content/menu-arrow-down-big.svg);
+    #editBookmarkPanel menulist::part(dropmarker) {
+      content: url(chrome://userchrome/content/menu-arrow-down-big.svg);
+      width: 12px;
     }
   }
 
@@ -2222,21 +2221,6 @@ of moz-document in stylesheets with file:// urls */
 
     menulist[image]::part(icon) {
       margin-inline-end: 5px;
-    }
-
-    menulist::part(dropmarker) {
-      appearance: none;
-      padding: 0;
-      border: none;
-      background-color: transparent;
-      list-style-image: url("chrome://global/skin/icons/arrow-down-12.svg");
-      -moz-context-properties: fill;
-      fill: currentColor;
-    }
-
-    menulist::part(dropmarker-icon) {
-      width: 12px;
-      height: 12px;
     }
 
     .checkbox-check,
